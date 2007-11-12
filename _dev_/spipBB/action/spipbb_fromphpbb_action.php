@@ -1,11 +1,12 @@
 <?php
-#---------------------------------------------------------#
-#  Plugin  : spipbb - Licence : GPL                       #
-#  File    : action/spipbb_fromphpbb - import de phpbb    #
-#  Authors : chryjs, 2007                                 #
-#            2004+ Jean-Luc Bechennec certaines fonctions #
-#  Contact : chryjs�@!free�.!fr                           #
-#---------------------------------------------------------#
+#----------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                        #
+#  File    : action/spipbb_fromphpbb - import de phpbb     #
+#  Authors : chryjs, 2007                                  #
+#            2004+ Jean-Luc Bechennec certaines fonctions  #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  Contact : chryjs!@!free!.!fr                            #
+#----------------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -94,35 +95,12 @@ function action_spipbb_fromphpbb_action()
 		$corps .= "<strong>"._T('avis_non_acces_page')."</strong>";
 	}
 	$time = array_sum(explode(' ', microtime())) - $time_start;
-	$corps .= "\n<br>Duree : $time secondes";
+	$corps .= "\n<!-- Elapsed: $time secondes -->";
 
 	echo minipres(_T("spipbb:fromphpbb_titre_etape")." $step",$corps);
 
 	exit;
 } // action_spipbb_fromphpbb_action
-
-// ------------------------------------------------------------------------------
-// [fr] Presentation de la migration des forums phpbb
-// ------------------------------------------------------------------------------
-function migre_forum_old($id_rubrique)
-{
-	global $migre_meta, $dir_lang;
-
-	// Si id_rubrique vaut 0 ou n'est pas definie, selectionner
-	// la premiere rubrique racine disponible
-	if (!$id_rubrique = intval($id_rubrique)) {
-		// spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
-		$row = sql_fetsel('id_rubrique','spip_rubriques',"id_parent=0",'',array('0+titre','titre'),'1');
-
-		$id_rubrique = $row['id_rubrique'];
-	}
-
-	// [fr] import des donnees
-	// [en] data migration
-	//$res .= migre_tout($id_rubrique);
-	$res .= "<br style='clear: both;' />\n</div>\n";
-	return $res;
-} // migre_forum_old
 
 // ------------------------------------------------------------------------------
 // [fr] connecte a la base contenant les forums phpbb
@@ -131,7 +109,7 @@ function select_phpbb_db()
 {
 	global $spipbb_fromphpbb;
 	mysql_select_db($spipbb_fromphpbb['phpdb'],$spipbb_fromphpbb['phpbb_connect'])
-		or die("Impossible de selectionner la base phpBB");
+		or die(_T('spipbb:fromphpbb_erreur_db_phpbb'));
 } // select_phpbb_db
 
 // ------------------------------------------------------------------------------
@@ -142,7 +120,7 @@ function select_spip_db() {
 //	global $connexions;
 	$f = _FILE_CONNECT ;
 	if ($f AND is_readable($f)) include($f);
-	else die("Impossible de se connecter a la base SPIP");
+	else die(_T('spipbb:fromphpbb_erreur_db_spip'));
 	// mysql_select_db($connexions[0]['db'],$connexions[0]['link']) ;
 } // select_spip_db
 
@@ -196,7 +174,7 @@ function bbcode_to_raccourcis_spip($texte) {
 	$result = str_replace('<','&lt;',$texte);
 	$result = str_replace('>','&gt;',$result);
 
-	// on continue en virant les num�ros de s�rie dans le bbcode
+	// on continue en virant les numeros de serie dans le bbcode
 	$result = preg_replace('/\[(\/?[^:]+):[a-f0-9]+/','[\\1',$result);
 	// quote
 	$result = preg_replace('/\[quote="?([^"\]]*)"?\]/','<quote>',$result);
@@ -224,7 +202,8 @@ function bbcode_to_raccourcis_spip($texte) {
 } // bbcode_to_raccourcis_spip
 
 // ------------------------------------------------------------------------------
-// transcodages divers
+// [fr] transcodages divers
+// [en] Transcode conversions
 // ------------------------------------------------------------------------------
 function fromphpbb_convert($texte) {
 	if (is_ascii($texte)) {
@@ -256,50 +235,57 @@ function fromphpbb_init_metas($spiprubid)
 	$spipbb_fromphpbb['spip_post_from_post_id'] = array();
 	$spipbb_fromphpbb['spip_lang'] = $GLOBALS['meta']['langue_site'];
 	$spipbb_fromphpbb['connexion'] = $GLOBALS['connexions'][0];
-	$spipbb_fromphpbb['prefixe'] = $spipbb_fromphpbb['connexion']['prefixe'];
-	$spipbb_fromphpbb['link'] = $spipbb_fromphpbb['connexion']['link'];
-	$spipbb_fromphpbb['db'] = $spipbb_fromphpbb['connexion']['db'];
+	$spipbb_fromphpbb['prefixe'] = $GLOBALS['connexions'][0]['prefixe'];
+	$spipbb_fromphpbb['link'] = $GLOBALS['connexions'][0]['link'];
+	$spipbb_fromphpbb['db'] = $GLOBALS['connexions'][0]['db'];
 	$spipbb_fromphpbb['statut_abonne'] = '6forum';
 	$spipbb_fromphpbb['mc_annonce_id'] = $GLOBALS['spipbb']['spipbb_id_mot_annonce'];
 	$spipbb_fromphpbb['mc_postit_id'] = $GLOBALS['spipbb']['spipbb_id_mot_postit'];
 	$spipbb_fromphpbb['mc_ferme_id'] = $GLOBALS['spipbb']['spipbb_id_mot_ferme'];
 
-	// recup�re les param�tres de connexion
-	$spipbb_fromphpbb['phpbb_login'] = _request('phpbb_login');
-	$spipbb_fromphpbb['phpbb_pass'] = _request('phpbb_pass');
-	$spipbb_fromphpbb['phpdb'] = _request('phpbb_base');
-	$spipbb_fromphpbb['phpbbroot'] = _request('phpbb_root');
-	$spipbb_fromphpbb['PR'] = _request('phpbb_prefix');
-	$spipbb_fromphpbb['spiproot'] = _DIR_RACINE;
+	// [fr] recupere les parametres de connexion
+	// [en] Grab the connection parameters
 
+	$source_nr = intval(_request('fromphpbb_source'));
+	$filename = _request('fromphpbb_filename_'.$source_nr);
+	if ($filename) {
+		global $dbhost,$dbuser,$dbpasswd,$dbname,$table_prefix;
+		require($filename);
+		$spipbb_fromphpbb['phpbb_host'] = $dbhost;
+		$spipbb_fromphpbb['phpbb_login'] = $dbuser;
+		$spipbb_fromphpbb['phpbb_pass'] = $dbpasswd;
+		$spipbb_fromphpbb['phpdb'] = $dbname;
+		$spipbb_fromphpbb['phpbbroot'] = dirname($filename); // remove config.php
+		$spipbb_fromphpbb['PR'] = $table_prefix;
+	} else {
+		$spipbb_fromphpbb['phpbb_host'] = _request('phpbb_host');
+		$spipbb_fromphpbb['phpbb_login'] = _request('phpbb_login');
+		$spipbb_fromphpbb['phpbb_pass'] = _request('phpbb_pass');
+		$spipbb_fromphpbb['phpdb'] = _request('phpbb_base');
+		$spipbb_fromphpbb['phpbbroot'] = _request('phpbb_root');
+		$spipbb_fromphpbb['PR'] = _request('phpbb_prefix');
+	}
+	if (empty($spipbb_fromphpbb['phpbb_host'])) $spipbb_fromphpbb['phpbb_host']="localhost";
+	$spipbb_fromphpbb['spiproot'] = _DIR_RACINE;
 	$spipbb_fromphpbb['phpbb_connect'] =
-		@mysql_connect("localhost",$spipbb_fromphpbb['phpbb_login'],$spipbb_fromphpbb['phpbb_pass']) or
-			die("<p>Impossible de se connecter a la base phpBB</p>");
+		@mysql_connect($spipbb_fromphpbb['phpbb_host'],$spipbb_fromphpbb['phpbb_login'],$spipbb_fromphpbb['phpbb_pass']) or
+			die(_T('spipbb:fromphpbb_erreur_db_phpbb'));
 	select_phpbb_db();
 	$result = @mysql_query("SELECT config_value FROM ".$spipbb_fromphpbb['PR'].
 			"config WHERE config_name='default_lang'") or
-			die("Impossible de recuperer la configuration");
+			die(_T('spipbb:fromphpbb_erreur_db_phpbb_config'));
 	$row = @mysql_fetch_assoc($result);
 	$spipbb_fromphpbb['phpbb_lang'] = substr($row['config_value'],0,2);
 	$spipbb_fromphpbb['phpbb_lang'] = $spipbb_fromphpbb['phpbb_lang'] ? $spipbb_fromphpbb['phpbb_lang'] :
 						$spipbb_fromphpbb['spip_lang'];
 
-	//
 	// recuperation du secteur ou seront implantes les forums
-	//
 	select_spip_db();
-	$query = "SELECT id_secteur FROM spip_rubriques WHERE id_rubrique='".$spipbb_fromphpbb['spiprubid']."'";
-	//$result = mysql_query($query) or die(mysql_error($spip_connect));
-	$result = sql_query($query) or die ("Erreur SQL($query)") ;
-	if ($row = sql_fetch($result)) {
-		$spipbb_fromphpbb['spip_id_secteur'] = $row['id_secteur'];
-	}
-	else {
-		
-		die ("Impossible de determiner le secteur dans lequel est la rubrique");
-	}
+	$result = $sql_select('id_secteur','spip_rubriques', "id_rubrique='".$spipbb_fromphpbb['spiprubid']."'");
+	$row = sql_fetch($result) or die(_T('spipbb:fromphpbb_erreur_db_spip'));
+	$spipbb_fromphpbb['spip_id_secteur'] = $row['id_secteur'];
 
-	$spipbb_fromphpbb['go'] = _request('phpbb_test') != "on";
+	$spipbb_fromphpbb['go'] = ( _request('phpbb_test') != 'oui' );
 //die ("go : "._request('phpbb_test')." : ".$spipbb_fromphpbb['go']);
 	$spipbb_fromphpbb['etape'] = 1;
 }
@@ -317,8 +303,8 @@ function fromppbb_load_metas($spiprubid)
 		$spipbb_fromphpbb = unserialize($GLOBALS['meta']['spipbb_fromphpbb']);
 		// rappel de connexion
 		$spipbb_fromphpbb['phpbb_connect'] =
-		@mysql_connect("localhost",$spipbb_fromphpbb['phpbb_login'],$spipbb_fromphpbb['phpbb_pass']) or
-			die("<p>Impossible de se connecter a la base phpBB</p>");
+		@mysql_connect($spipbb_fromphpbb['phpbb_host'],$spipbb_fromphpbb['phpbb_login'],$spipbb_fromphpbb['phpbb_pass']) or
+			die(_T('spipbb:fromphpbb_erreur_db_phpbb'));
 	}
 	else
 	{
@@ -367,7 +353,6 @@ function migre_categories_forums() {
 
 	$res = "<p>Traduction en cours...</p>";
 
-//$go=false;
 	$res .= "<p>Implantation des forums dans la rubrique ".$spipbb_fromphpbb['spiprubid']."</p>\n";
 	$res .= "<p>Les annonces recevront le mot clef ".$spipbb_fromphpbb['mc_annonce_id']."</p>\n";
 	$res .= "<p>Les post its recevront le mot clef ".$spipbb_fromphpbb['mc_postit_id']."</p>\n";
@@ -377,9 +362,8 @@ function migre_categories_forums() {
 
 	select_phpbb_db();
 
-	//
-	// transfert des cat�gories
-	// 1 cat�gorie = 1 sous rubrique de la rubrique affect�e aux forums
+	// transfert des categories
+	// 1 categorie = 1 sous rubrique de la rubrique affectee aux forums
 	//
 	select_phpbb_db();
 
@@ -392,7 +376,6 @@ function migre_categories_forums() {
 	while ($row = mysql_fetch_assoc($result)) {
 		$rub_name = $row['cat_order'] . ". " . fromphpbb_convert($row['cat_title']);
 		// [fr] Verifier si une sous-rubrique de ce nom n'existe pas deja dans cette rubrique
-		// $query = "SELECT id_rubrique FROM spip_rubriques WHERE titre='$rub_name' AND id_parent='$spiprubid'";
 		$verif = sql_getfetsel("id_rubrique","spip_rubriques",
 				"titre='$rub_name' AND id_parent=".$spipbb_fromphpbb['spiprubid']);
 		if (empty($verif)) {
@@ -432,13 +415,7 @@ function migre_categories_forums() {
 	//
 	select_phpbb_db();
 	$result = mysql_query("SELECT * FROM ".$spipbb_fromphpbb['PR']."forums",$spipbb_fromphpbb['phpbb_connect']) or
-		die("impossible de r�cup�rer les forums");
-	// forum_id   	  cat_id   	  forum_name   	  forum_desc   	  forum_status
-	// forum_order   	  forum_posts   	  forum_topics
-	// forum_last_post_id   	  prune_next   	  prune_enable
-	// auth_view   	  auth_read   	  auth_post   	  auth_reply   	  auth_edit
-	// auth_delete   	  auth_sticky   	  auth_announce   	  auth_vote
-	// auth_pollcreate   	  auth_attachments   	  allow_spam_words
+		die(_T('spipbb:fromphpbb_erreur_forums'));
 
 	$spipart=0;
 	select_spip_db();
@@ -461,7 +438,6 @@ function migre_categories_forums() {
 								'date'=>$date,
 								'lang'=>$spipbb_fromphpbb['phpbb_lang'] )
 							);
-				//$spip_id = mysql_insert_id($spip_connect);
 				$spipbb_fromphpbb['spip_art_from_forumid'][$row['forum_id']] = $spip_id;
 				$res .= "<p>Forum $titre [ $spip_id ]</p>";
 			}
@@ -502,21 +478,6 @@ function migre_utilisateurs() {
 	select_phpbb_db();
 	$result = mysql_query("select * FROM ".$spipbb_fromphpbb['PR']."users",$spipbb_fromphpbb['phpbb_connect']) or
 		die("Impossible de recuperer les utilisateurs");
-	//  user_id   	  user_active   	  username   	  user_password   
-	//  user_session_time   	  user_session_page   	  user_lastvisit  
-	//  user_regdate   	  user_level   	  user_posts   	  user_timezone   
-	//  user_style   	  user_lang   	  user_dateformat   	  user_new_privmsg  
-	//  user_unread_privmsg   	  user_last_privmsg   	  user_emailtime 
-	//  user_viewemail   	  user_attachsig   	  user_allowhtml   	
-	//  user_allowbbcode   	  user_allowsmile   	  user_allowavatar   	
-	//  user_allow_pm   	  user_allow_viewonline   	  user_notify   
-	//  user_notify_pm   	  user_popup_pm   	  user_rank   	  user_avatar  
-	//  user_avatar_type   	  user_email   	  user_icq   	  user_website   	
-	//  user_from   	  user_from_flag   	  user_sig   	  user_sig_bbcode_uid   
-	//  user_aim   	  user_yim   	  user_msnm   	  user_occ   	  user_interests   
-	//  user_actkey   	  user_newpasswd   	  user_regip   	  user_view_log   	
-	//  user_login_tries   	  user_last_login_try   	  user_inactive_last_eml  
-	//  user_inactive_emls   	  user_spam_warnings
 
 	$compte_user = 0;
 	$spipaut = 0;
@@ -649,7 +610,7 @@ function migre_utilisateurs() {
 				//$logodata = file_get_contents($logo_url);
 			}
 
-			// si c'est un nouvel admin, on le restreint � la rubrique du forum
+			// si c'est un nouvel admin, on le restreint a la rubrique du forum
 			// verifier que cette restriction n existe pas deja
 			$verif = sql_getfetsel("id_auteur","spip_auteurs_rubriques",
 					"id_auteur=$spip_id AND id_rubrique=".$spipbb_fromphpbb['spiprubid']);

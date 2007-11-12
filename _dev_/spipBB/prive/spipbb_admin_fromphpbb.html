@@ -1,0 +1,100 @@
+#CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
+[(#REM) SpipBB admin - Page de gestion des forums]
+
+<form method="post" action="#ENV{lien_action}">
+<input type='hidden' id="exec" value="#ENV{exec_script}">
+
+[(#ENV{lien_action}|form_hidden)]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:fromphpbb_titre:>})]
+[(#REM) ------------------------ Configuration generale ------------------------ ]
+
+<fieldset>
+<legend><:spipbb:fromphpbb_parametres_rubrique:></legend>
+#ENV*{choix_rubrique}
+</fieldset>
+
+<fieldset>
+<legend><:spipbb:fromphpbb_parametres_titre:></legend>
+<:spipbb:fromphpbb_parametres_base:>
+<div><table border='1' cellspacing='1' cellpadding='3' width="100%">
+#ENV*{phpbb_liste_fichiers}
+<tr style='border:none'>
+	<td style='text-align:right'>
+		<label for='phpbb_host'><:spipbb:fromphpbb_host:></label>
+	</td>
+	<td>
+		<input type='text' id='phpbb_host' name='phpbb_host' value='localhost' />
+	</td>
+	<td rowspan='6'>
+		<input type='radio' name='fromphpbb_source' value='#ENV{radio_checked}' 
+		id='fromphpbb_source_#ENV{radio_checked}'
+		[checked='(#ENV{radio_checked}|=={0}|?{checked})'] />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='phpbb_login'><:spipbb:fromphpbb_login:></label>
+	</td>
+	<td>
+		<input type='text' id='phpbb_login' name='phpbb_login' value='' />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='phpbb_pass'><:spipbb:fromphpbb_password:></label>
+	</td>
+	<td>
+		<input type='password' id='phpbb_pass' name='phpbb_pass' value='' /><br />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='phpbb_base'><:spipbb:fromphpbb_base:></label>
+	</td>
+	<td>
+		<input type='text' id='phpbb_base' name='phpbb_base' value='' /><br />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='phpbb_prefix'><:spipbb:fromphpbb_prefix:></label>
+	</td>
+	<td>
+		<input type='text' id='phpbb_prefix' name='phpbb_prefix' value='phpbb_' /><br />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='phpbb_root'><:spipbb:fromphpbb_racine:></label>
+	</td>
+	<td>
+		<input type='text' id='phpbb_root' name='phpbb_root' value='' />
+	</td>
+</tr>
+</table>
+</fieldset>
+
+<fieldset>
+<legend><:spipbb:fromphpbb_choix_test_titre:></legend>
+<div><table border='0' cellspacing='1' cellpadding='3' width="100%">
+<tr>
+	<td align='left' class='verdana2'><:spipbb:fromphpbb_choix_test:></td>
+	<td align='left' class='verdana2'>
+		<input type='radio' name='phpbb_test' value='oui' id='phpbb_test_1' [ checked="(#ENV{phpbb_test}|=={'oui'}|?{checked})"] /> <label for='phpbb_test_1'><:oui:></label>
+		&nbsp;
+		<input type='radio' name='phpbb_test' value='non' id='phpbb_test_0' [ checked="(#ENV{phpbb_test}|=={'non'}|?{checked})"] /> <label for='phpbb_test_0'><:non:></label>
+	</td>
+</tr>
+</table></div>
+</fieldset>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:OK:>" class="fondo" />
+</div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+</form>

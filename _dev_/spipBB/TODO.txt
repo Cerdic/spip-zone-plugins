@@ -7,6 +7,9 @@ Todo-list pour spipbb
 -* lien entre auteur et la liste des messages qu'il a publie
 
 -* Bugs et autres elements non finis :
+-** Installation par etapes
+-** Ne pas initialiser la config si pas install terminee
+-** Chaque fonction est soumise a config
 -** Utiliser les descriptions des mots clés (ajoutees dans lang/... mot_...)
 -** Installation : "not configured" => Bouton/ case d'alerte + lien vers admin_config
 -** Gestion des annonces / postits / Fermés à tester /controler

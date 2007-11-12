@@ -2,7 +2,9 @@
 #------------------------------------------------------------#
 #  Plugin  : spipbb - Licence : GPL                          #
 #  File    : inc/spipbb_192 - compatibilite ancienne version #
-#  Adaptation : Chryjs, 2007 et als                          #
+#  Adaptation : Chryjs, 2007                                 #
+#  Authors :                                                 #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs   #
 #  Contact : chryjs!@!free!.!fr                              #
 #------------------------------------------------------------#
 

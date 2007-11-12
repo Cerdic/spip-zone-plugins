@@ -1,10 +1,10 @@
 <?php
-
 #---------------------------------------------------------------#
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : exec/spipbb_admin_fromphpbb - first step form      #
-#  Authors : 2004+ Jean-Luc B�chennec - Chryjs, 2007            #
-#  Contact : chryjs�@!free�.!fr                                 #
+#  Authors : 2004+ Jean-Luc Bechennec - Chryjs, 2007            #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  Contact : chryjs!@!free!.!fr                                 #
 # [fr] Menu d'accueil pour la migration d'un forum phpBB        #
 # [en] Home page base of phpBB forum migration                  #
 #---------------------------------------------------------------#
@@ -71,14 +71,16 @@ function exec_spipbb_admin_fromphpbb() {
 		if ($connect_id_rubrique)
 			$row['id_rubrique'] = $id_rubrique = $connect_id_rubrique[0];
 		else {
-			$r = sql_query("SELECT id_rubrique FROM spip_rubriques ORDER BY id_rubrique DESC LIMIT 1");
-			$row_rub = sql_fetch($r);
+			//$r = sql_query("SELECT id_rubrique FROM spip_rubriques ORDER BY id_rubrique DESC LIMIT 1");
+			//$row_rub = sql_fetch($r);
+			$row_rub = sql_fetsel('id_rubrique','spip_rubriques','','',array('id_rubriques DESC'),'0,1');
 			$row['id_rubrique'] = $id_rubrique = $row_rub['id_rubrique'];
 		}
 		if (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] )){
 			// [fr] manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
 			// [en] too bad , this rubrique is not allowed, we look for the first allowed sector
-			$res = sql_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0");
+			//$res = sql_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0");
+			$res = sql_select('id_rubrique','spip_rubriques',array('id_parent=0'));
 			while (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] ) && $row_rub = sql_fetch($res)){
 				$row['id_rubrique'] = $row_rub['id_rubrique'];
 			}
@@ -86,8 +88,9 @@ function exec_spipbb_admin_fromphpbb() {
 	}
 	// [fr] recuperer les donnees du secteur
 	// [en] load the sector datas
-	$r = sql_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
-	$row_rub = sql_fetch($r);
+	//$r = sql_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
+	//$row_rub = sql_fetch($r);
+	$row_rub = sql_fetsel('id_secteur','spip_rubriques',array("id_rubrique=$id_rubrique"));
 	$row['id_secteur'] = $row_rub['id_secteur'];
 	$id_rubrique = $row['id_rubrique'];
 
@@ -116,10 +119,7 @@ function exec_spipbb_admin_fromphpbb() {
 	echo creer_colonne_droite($id_rubrique,true);
 	echo debut_droite($id_rubrique,true);
 
-	echo debut_cadre_formulaire('',true);
-	echo gros_titre(_T('spipbb:fromphpbb_titre'),'',false)."<hr />\n";
 	echo spipbb_fromphpbb_formulaire($row);
-	echo fin_cadre_formulaire(true);
 	echo fin_gauche(), fin_page();
 } // exec_spipbb_admin_fromphpbb
 
@@ -128,31 +128,61 @@ function exec_spipbb_admin_fromphpbb() {
 // [en] Generates the form to fill with migration parameters
 // ------------------------------------------------------------------------------
 function spipbb_fromphpbb_formulaire($row=array()) {
+	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
+
+	// [fr] On va essayer de "deviner" ou on peut trouver un fichier de conf phpbb
+	// [en] We try to "guess" where is the phpbb config file
+	$phpbb_subdirs = array('.', 'forum','phpBB','phpBB2','phpBB3','FORUM','PHPBB','PHPBB2','PHPBB3');
+	$phpbb_roots = array( realpath(_DIR_RACINE), $GLOBALS['_SERVER']['DOCUMENT_ROOT'] );
+	$phpbb_conf = array();
+	$liste_fichiers = "";
+	$radio=0;
+
+	while ( list($k,$rootdir) = each($phpbb_roots) ) {
+		while ( list($key, $subdir) = each($phpbb_subdirs) ) {
+			$filename = $rootdir."/".$subdir."/config.php" ;
+			if ( file_exists($filename) AND is_readable($filename) ) {
+				@include_once($filename);
+				if (defined('PHPBB_INSTALLED') and (substr($dbms,0,5)=="mysql") ) {
+					$conf['filename'] = $filename;
+					// est-ce necessaire ?
+					$conf['dbms'] = $dbms;
+					$conf['dbname'] = $dbname;
+					$conf['dbuser'] = $dbuser;
+					$conf['dppasswd'] = $dbpasswd ;
+					$conf['table_prefix'] = $table_prefix;
+					$phpbb_conf[]=$conf;
+					$contexte = array( 
+						'filename'=>$conf['filename'],
+						'key'=>$radio,
+						);
+					$liste_fichiers .= recuperer_fond("prive/spipbb_admin_fromphpbb_fichiers", $contexte) ;
+					$radio++;
+				} // defined and mysql only
+			} // file_exists
+		} // while subdirs
+	} // while rootdirs
+
+
 	$aider = charger_fonction('aider', 'inc');
 	$config = "";
 	$id_rubrique = $row['id_rubrique'];
 	$id_secteur = $row['id_secteur'];
-	$form= "\n".
-		editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider) .
-		"\n<p><b>" . _T('spipbb:fromphpbb_parametres_titre') . "</b><br />" .
-		"\n<label for='phpbb_login'>" . _T('spipbb:fromphpbb_login') . "</label>" .
-		"\n<input type='text' id='phpbb_login' name='phpbb_login' value='' /><br />" .
-		"\n<label for='phpbb_pass'>" . _T('spipbb:fromphpbb_password') . "</label>" .
-		"\n<input type='password' id='phpbb_pass' name='phpbb_pass' value='' /><br />" .
-		"\n<label for='phpbb_base'>" . _T('spipbb:fromphpbb_base') . "</label>" .
-		"\n<input type='text' id='phpbb_base' name='phpbb_base' value='' /><br />" .
-		"\n<label for='phpbb_prefix'>" . _T('spipbb:fromphpbb_prefix') . "</label>" .
-		"\n<input type='text' id='phpbb_prefix' name='phpbb_prefix' value='phpbb_' /><br />" .
-		"\n<label for='phpbb_root'>" . _T('spipbb:fromphpbb_racine') . "</label>" .
-		"\n<input type='text' id='phpbb_root' name='phpbb_root' value='' /><br />" .
-		"\n<p><b>" .  _T('spipbb:fromphpbb_choix_test') .  "</b>" .
-		"\n<br />" .  _T('spipbb:fromphpbb_sous_choix_test') .
-		"\n<input type='checkbox' name='phpbb_test' id='phpbb_test' checked='on' class='check' /></p>" .
-		"\n<div align='right'>" .
-		"\n<input class='fondo' type='submit' value='" . _T('bouton_valider') ."' />" .
-		"\n</div>" ;
+	$retour ="exec=spipbb_admin_fromphpbb";
 
-	return generer_action_auteur("spipbb_fromphpbb_action", $id_rubrique, $retour, $form, " method='post' name='formulaire'");
+	$choix_rubrique = editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider);
+
+	$contexte = array( 
+			'lien_action' => generer_action_auteur('spipbb_fromphpbb_action',$id_rubrique,$retour) ,
+			'exec_script' => 'spipbb_fromphpbb_action',
+			'phpbb_liste_fichiers' => $liste_fichiers,
+			'choix_rubrique' => $choix_rubrique,
+			'radio_checked' => $radio,
+			'phpbb_test' => 'oui',
+			);
+	$res = recuperer_fond("prive/spipbb_admin_fromphpbb",$contexte) ;
+
+	return $res;
 } // spipbb_fromphpbb_formulaire
 
 ?>

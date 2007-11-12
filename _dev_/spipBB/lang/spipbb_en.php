@@ -1,10 +1,11 @@
 <?php
-#---------------------------------------------------------#
-#  Plugin  : spipbb - Licence : GPL                       #
-#  File    : spipbb_en : language file                    #
-#  Authors : Chryjs, 2007 and als (please read the notes) #
-#  Contact : chryjs�@!free�.!fr                           #
-#---------------------------------------------------------#
+#----------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                        #
+#  File    : spipbb_en : language file                     #
+#  Authors : Chryjs, 2007 et als                           #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  Contact : chryjs!@!free!.!fr                            #
+#----------------------------------------------------------#
 
 // This is a SPIP-forum module file  --  Ceci est un fichier module de SPIP-forum
 
@@ -172,13 +173,20 @@ The e-mail address will be used only to confirm the details of your registration
 'fromphpbb_titre_etape' => 'Import from a PhpBB forum - step',
 'fromphpbb_sous_titre' => 'Start a migration from a PhpBB forum to SpipBB',
 'fromphpbb_parametres_titre' => 'Config access to phpBB database',
-'fromphpbb_login' => 'Login',
-'fromphpbb_password' => 'Password',
-'fromphpbb_base' => 'Database name',
-'fromphpbb_prefix' => 'Tables prefix',
-'fromphpbb_racine' => 'Path to phpBB',
-'fromphpbb_choix_test' => 'Blank import',
-'fromphpbb_sous_choix_test' => '(required)',
+'fromphpbb_parametres_rubrique' => 'Choose the sector where the phpBB forums will be imported',
+'fromphpbb_parametres_base' => 'Choose either the path to phpBB config file or to fill the phpBB database access parameters:',
+'fromphpbb_fichier' => 'PhpBB config file found:',
+'fromphpbb_login' => 'Login:',
+'fromphpbb_password' => 'Password:',
+'fromphpbb_base' => 'Database name:',
+'fromphpbb_prefix' => 'Tables prefix:',
+'fromphpbb_racine' => 'Path to phpBB (avatars):',
+'fromphpbb_choix_test_titre' => 'Launch real or test import',
+'fromphpbb_choix_test' => 'Run a blank test import (default choice):',
+'fromphpbb_erreur_db_phpbb' => 'Impossible to connect to phpBB database',
+'fromphpbb_erreur_db_phpbb_config' => 'Impossible to read config value in phpBB database',
+'fromphpbb_erreur_db_spip' => 'Impossible to connect to SPIP database',
+'fromphpbb_erreur_forums' => 'Impossible to transfer the forums',
 
 //G
 'gaf_titre' => 'GAFoSPIP<br>Alternative management of Forums',
@@ -317,7 +325,7 @@ Words less than three letters long will be ignored.',
 'sw_warning_pm_titre' => 'Private message subject',
 'sw_warning_pm_message' => 'Private message text',
 'sw_pm_spam_warning_titre' => 'Warning.',
-'sw_pm_spam_warning_message' => 'This is a warning. You have tried to post a word that is defined as spam on this website. Please refrain from doing so again.',
+'sw_pm_spam_warning_message' => 'This is a warning. You have tried to post a word that is defined as spam on this website. Please stop.',
 'sw_spam_forum_titre' => 'Manage flagged posts',
 'sw_admin_no_spam' => 'No spam',
 'sw_spam_words_titre' => 'Spam words filtering',

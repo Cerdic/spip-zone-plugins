@@ -2,8 +2,9 @@
 #----------------------------------------------------------#
 #  Plugin  : spipbb - Licence : GPL                        #
 #  File    : spipbb_fr : fichier de langue                 #
-#  Authors : Chryjs, 2007 et als (merci de lire les notes) #
-#  Contact : chryjs�@!free�.!fr                            #
+#  Authors : Chryjs, 2007 et als                           #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  Contact : chryjs!@!free!.!fr                            #
 #----------------------------------------------------------#
 
 // This is a SPIP-forum module file  --  Ceci est un fichier module de SPIP-forum
@@ -175,13 +176,20 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'fromphpbb_titre_etape' => 'Import d\'un forum PhpBB - &eacute;tape',
 'fromphpbb_sous_titre' => 'D&eacute;marrage d\'une migration d\'un forum PhpBB vers SpipBB',
 'fromphpbb_parametres_titre' => 'Informations sur la base phpBB',
-'fromphpbb_login' => 'Identifiant',
-'fromphpbb_password' => 'Mot de passe',
-'fromphpbb_base' => 'Nom de la base',
-'fromphpbb_prefix' => 'Pr&eacute;fixe des tables',
-'fromphpbb_racine' => 'Chemin vers phpBB',
-'fromphpbb_choix_test' => 'Import &agrave; blanc',
-'fromphpbb_sous_choix_test' => '(param&egrave;tre obligatoire)',
+'fromphpbb_parametres_rubrique' => 'Choisissez la rubrique dans laquelle seront import&eacute;s les forums de phpBB',
+'fromphpbb_parametres_base' => 'Choisissez soit le chemin vers le fichier de configuration de phpBB, soit de renseigner les param&egrave;tres d\'acc&egrave;s &agrave; la base contenant les forums de phpBB&nbsp;:',
+'fromphpbb_fichier' => 'Fichier de configuration PhpBB trouv&eacute;&nbsp;:',
+'fromphpbb_login' => 'Identifiant&nbsp;:',
+'fromphpbb_password' => 'Mot de passe&nbsp;:',
+'fromphpbb_base' => 'Nom de la base&nbsp;:',
+'fromphpbb_prefix' => 'Pr&eacute;fixe des tables&nbsp;:',
+'fromphpbb_racine' => 'Chemin vers phpBB (avatars)&nbsp;:',
+'fromphpbb_choix_test_titre' => 'Import &agrave; blanc ou r&eacute;el',
+'fromphpbb_choix_test' => 'R&eacute;aliser un import de test (choix par d&eacute;faut)&nbsp;:',
+'fromphpbb_erreur_db_phpbb' => 'Impossible de se connecter &agrave; la base phpBB',
+'fromphpbb_erreur_db_phpbb_config' => 'Impossible de lire la configuration dans la base phpBB',
+'fromphpbb_erreur_db_spip' => 'Impossible de se connecter &agrave; la base SPIP',
+'fromphpbb_erreur_forums' => 'Impossible de recuperer les forums',
 
 //G
 'gaf_titre' => 'GAFoSPIP<br />Gestion Alternative des Forums',

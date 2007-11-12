@@ -1,6 +1,8 @@
 2007-11-12  chryjs  <chryjs!@!free!.!fr>
 
  * spipbb_pipelines : appel a inc/spipbb pour la compatibilite necessaire 192 a cause de sql_fetsel bug report X. Burot (email)
+ * fromphpbb : ajout de la recherche en local de la config + controles + un peu de traduction + utlisation d'un fond
+ * passage en 0.2.7
 
 2007-11-11  chryjs  <chryjs!@!free!.!fr>
 
