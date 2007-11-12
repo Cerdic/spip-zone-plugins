@@ -61,11 +61,25 @@ function chess_insert_head($flux)
 	}
 	
 	$(document).ready(function(){
+		$("#mainContainer").dblclick(function(){
+		return false;
+		});
+	});
+	
+	document.onkeyup = KeyCheck;
+	function KeyCheck(e){
+		var keyID = (window.event) ? event.keyCode : e.keyCode;
+		
+		switch(keyID){
+			case 37:
+				chessObj.move(-1);
+				break;
+			case 39:
+				chessObj.move(1);
+				break;
+			}
+		};
 
-$("#mainContainer").dblclick(function(){
-return false;
-});
-});
 </script >
 EOH;
 
