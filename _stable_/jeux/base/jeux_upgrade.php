@@ -24,6 +24,11 @@ function jeux_vider_tables() {
 	if(!defined('_SPIP19300')) ecrire_metas();
 }
 
+// compatibilite <= SPIP 1.92
+function spip_abstract_showtable_jeux($table, $table_spip = false, $serveur='') {
+	return spip_abstract_showtable($table, $serveur, $table_spip);
+}
+
 function jeux_verifier_base(){
 	// version de la base de donnee
 	$version_base = $GLOBALS['jeux_base_version'];
@@ -33,14 +38,14 @@ function jeux_verifier_base(){
 		include_spip('base/create');
 		include_spip('base/abstract_sql');
 		// compatibilite SPIP 1.92
-		$showtable = function_exists('sql_showtable')?'sql_showtable':'spip_abstract_showtable';
+		$showtable = function_exists('sql_showtable')?'sql_showtable':'spip_abstract_showtable_jeux';
 		$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
 		
 		include_spip('base/jeux_tables');
 		if ($current_version==0.0){
 			creer_base();
 			// ajout du champ 'nom' a la table spip_jeux, si pas deja existant
-			$desc = $showtable("spip_jeux", '', true);
+			$desc = $showtable("spip_jeux", true);
 			if (!isset($desc['field']['nom'])){
 				spip_query("ALTER TABLE spip_jeux ADD `nom` text NOT NULL AFTER `date`");
 				// ajout d'un nom par defaut aux jeux existants
@@ -53,7 +58,7 @@ function jeux_verifier_base(){
 		}
 		if ($current_version<($test_version=0.11)){
 			// ajout du champ 'titre' a la table spip_jeux, si pas deja existant
-			$desc = $showtable("spip_jeux", '', true);
+			$desc = $showtable("spip_jeux", true);
 			if (!isset($desc['field']['titre'])){
 				spip_query("ALTER TABLE spip_jeux ADD `titre` text NOT NULL AFTER `nom`");
 				// ajout d'un titre par defaut aux jeux existants
@@ -66,7 +71,7 @@ function jeux_verifier_base(){
 		}
 		if ($current_version<($test_version=0.12)){
 			// changement de noms 'titre' => 'titre_prive' et 'nom' => 'type_jeu'
-			$desc = $showtable("spip_jeux", '', true);
+			$desc = $showtable("spip_jeux", true);
 			if (isset($desc['field']['titre']))
 				spip_query('ALTER TABLE `spip_jeux` CHANGE `titre` `titre_prive` TEXT');
 			if (isset($desc['field']['nom']))
