@@ -83,7 +83,6 @@ function inc_editer_mot($objet, $id_objet, $cherche_mot, $select_groupe, $flag,$
 			marquer_indexer("spip_$table", $id_objet);
 		}
 	}
-spip_log('simplife 3' .$simplifie.'*');
 	$form = afficher_mots_cles($flag, $objet, $id_objet, $table, $table_id, $url_base, $visible,$simplifie);
 
 	if($simplifie!='oui'){
@@ -192,7 +191,11 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	if (spip_num_rows($result) > 0) {
 	
 		$tableau= array();
-		$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
+		
+		//Dans le cas du form simplifie on ne mets pas l'icone
+		if($simplifie!='oui')
+			$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
+			
 		$ret = generer_url_retour($url_base, $table_id."=".$id_objet."&simplifie=".$simplifie."#mots-".$id_objet);
 		while ($row = spip_fetch_array($result)) {
 
@@ -203,7 +206,10 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 
 			$id_groupes_vus[] = $id_groupe;
 			$url = generer_url_ecrire('mots_edit', "id_mot=$id_mot&amp;redirect=$ret");
-			$vals= array("<a href='$url'>$cle</a>");
+			
+			//Dans le cas du form simplifie on ne mets pas l'icone
+			if($simplifie!='oui')
+				$vals= array("<a href='$url'>$cle</a>");
 			
 
 			$row_groupe = spip_fetch_array(spip_query("SELECT titre, unseul, obligatoire, minirezo, comite FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
@@ -213,24 +219,33 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 			$flag_groupe = ($flag_editable AND
 					((($connect_statut === '1comite') AND $row_groupe['comite'] === 'oui') OR (($connect_statut === '0minirezo') AND $row_groupe['minirezo'] === 'oui')));
 
-			// Changer
+			
+			//TODO : il faut gérer a ce ce niveau le formulaire de mot remplace dans le cas du formulaire simplifie
 			if (($row_groupe['unseul'] == "oui") AND $flag_groupe) {
 				$vals[]= formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
 			} else {
 				$vals[]= "<a href='$url'>".typo($titre_mot)."</a>";
 			}
 
-			
-			if ($connect_toutes_rubriques)
-				$vals[]= "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$type_mot</a>";
-
-			else	$vals[] = $type_mot;
+			//Dans le cas du form simplifie on ne mets pas le lien vers le groupe de mots
+			if ($simplifie!='oui') {
+				if ($connect_toutes_rubriques )
+					$vals[]= "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$type_mot</a>";
+	
+				else	$vals[] = $type_mot;
+			}
 	
 			if ($flag_editable){
 				if ($flag_groupe) {
-					$s =  _T('info_retirer_mot')
-					. "&nbsp;"
-					. http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
+					
+					//formulaire simplifie : 
+					//on ne mets pas la chaine de traduction de l'action supprimer ( on aura donc juste la croix rouge et le lien)
+					$s="";
+					if ($simplifie!='oui') {
+						$s .=  _T('info_retirer_mot'). "&nbsp;";
+					}
+					
+					$s.= http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
 					$s = ajax_action_auteur('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base."&simplifie=".$simplifie, "$table_id=$id_objet", array($s,''),"&id_objet=$id_objet&objet=$objet");
 				} else $s = "&nbsp;";
 				$vals[] = $s;
@@ -241,16 +256,24 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 			$les_mots[] = $id_mot;
 		}
 	
-		$largeurs = array('25', '', '', '');
+		if($simplifie!='oui'){
+				$largeurs = array('25', '', '', '');
+		}else{
+			$largeurs = array();
+		}
 		$styles = array('arial11', 'arial2', 'arial2', 'arial1');
 
 		$res = "\n<div class='liste'>"
-		. "\n<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
-		. afficher_liste($largeurs, $tableau, $styles)
+		. "\n<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
+		
+		if($simplifie=='oui'){
+			$res.="<tr><td colspan='2'>"._T('motspartout:liste_mots_clefs')."</td></tr>";
+		}
+		//TODO : a passer avec recuperer_fond
+		$res.= afficher_liste($largeurs, $tableau, $styles)
 		. "</table></div>";
 	} else $res ='';
 
-	spip_log('simplife 2' .$simplifie.'*');
 	if ($flag_editable)
 	  $res .= formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet,$simplifie);
 
@@ -321,9 +344,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	$nb_groupes = spip_num_rows(spip_query("SELECT * FROM spip_groupes_mots WHERE ".$table." = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus)"));
 
 	
-		spip_log('simplife 4' .$simplifie.'*');
 	if($simplifie!='oui'){
-		spip_log('simplife 1' .$simplifie.'*');
 		if ($visible)
 			$res = debut_block_visible("lesmots".$id_objet);
 		else if ($nb_groupes > 0) {
@@ -367,13 +388,14 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 		}
 		
 		if ($ajouter) {
-			$message = "<span class='verdana1'><b>"._T('titre_ajouter_mot_cle')."</b></span>\n";
+			if( $simplifie!='oui')
+				$message = "<span class='verdana1'><b>"._T('titre_ajouter_mot_cle')."</b></span>\n";
+				
 			$res .= "<div style='float:$spip_lang_right; width:280px;position:relative;display:inline;'>"
 				. $ajouter
 				."</div>\n" ;
 		}
 		
-				spip_log('simplife 5' .$simplifie.'*');
 		if($simplifie!='oui'){
 			if (autoriser('modifier','groupemots')) {
 				$titre = _request('cherche_mot')
@@ -403,7 +425,6 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 // http://doc.spip.org/@menu_mots
 function menu_mots($row, $id_groupes_vus, $les_mots, $cle_objet='',$table="articles")
 {
-	spip_log('dans menu mot '.$table);
 	$rand = rand(0,10000); # pour antifocus & ajax
 
 	$id_groupe = $row['id_groupe'];
@@ -412,7 +433,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots, $cle_objet='',$table="artic
 	
 	$result = spip_query($query);
 
-	//YOANN MODIFICATION
+	// MODIFICATION
 	//dans le cas ou on a pas de mots clefs associes au groupe (principe de l'arborescence)
 	//on va prendre les sous-groupe comme etant signe d'affichage
 	$n = spip_num_rows($result);
@@ -420,7 +441,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots, $cle_objet='',$table="artic
 		$cpt =spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_groupes_mots WHERE id_parent=$id_groupe"));
 		if(!$cpt['n'])	return '';
 	}
-	//FIN YOANN
+	//FIN 
 
 	$titre = textebrut(typo($row['titre']));
 	$titre_groupe = entites_html($titre);
@@ -466,25 +487,25 @@ function menu_mots($row, $id_groupes_vus, $les_mots, $cle_objet='',$table="artic
 				"'>&nbsp;&nbsp;&nbsp;" .
 				textebrut(typo($row['titre'])) .
 				"</option>";
-				
-			
 		}
 
 	}
 
 
-	//YOANN : on va rajouter dans le select les sous-groupes ainsi que leurs mots clefs
-	$res.=select_sous_menu_groupe($id_groupe,$table);  //gestion de la hiérarchie des mots clefs
+	//ARBORESCENCE : on va rajouter dans le select les sous-groupes ainsi que leurs mots clefs
+	$res.=select_sous_menu_groupe_mots($id_groupe,$table);  //gestion de la hiérarchie des mots clefs
 	$res .= "</select>&nbsp;";
 	
 	return array($res, _T('bouton_choisir'));
 }
 
 
-//fonction recursive qui permet de recuperer larborescence des groupes de mots et les mots
-function select_sous_menu_groupe($id_groupe,$table='articles',$niveau=0){
 
- global $menu,$spip_lang,$connect_statut,$cond_id_groupes_vus,$id_objet,$table_id,$url_base,$objet;
+// http://doc.spip.org/@select_sous_menu_groupe_mots
+function select_sous_menu_groupe_mots_mots($id_groupe,$table='articles',$niveau=0){
+//fonction recursive qui permet de recuperer larborescence des groupes de mots et les mots
+
+ global $spip_lang,$connect_statut,$cond_id_groupes_vus;
  
 
 $query="SELECT id_groupe,titre, ".creer_objet_multi ("titre", $spip_lang)." FROM spip_groupes_mots WHERE `".$table."` = 'oui' AND ".substr($connect_statut,1)." = 'oui' ".($cond_id_groupes_vus?" AND (unseul != 'oui'   OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus)) )":"")." AND id_parent=".$id_groupe." ORDER BY multi";
@@ -501,7 +522,7 @@ $query="SELECT id_groupe,titre, ".creer_objet_multi ("titre", $spip_lang)." FROM
 				textebrut(typo($row['titre'])) .
 				"</option>";
 				//BOUCLES sur les mots de chaque sous groupe
-				$result = spip_query("SELECT id_mot, type, titre FROM spip_mots WHERE id_groupe =".$row['id_groupe']." ORDER BY type, titre");
+				$result = spip_query("SELECT id_mot, type, titre,".creer_objet_multi ("titre", $spip_lang)." FROM spip_mots WHERE id_groupe =".$row['id_groupe']." ORDER BY type, titre");
 
 				while($row2 = spip_fetch_array($result)) {
     			     $res .= "\n<option value='" .$row2['id_mot'] .
@@ -510,11 +531,11 @@ $query="SELECT id_groupe,titre, ".creer_objet_multi ("titre", $spip_lang)." FROM
     				"</option>";
                 }
 
-				$res.=select_sous_menu_groupe($row['id_groupe'],$table,$niveau+1);
+				$res.=select_sous_menu_groupe_mots($row['id_groupe'],$table,$niveau+1);
 		 }
         return $res;
 }
-//FIN YOANN
+
 
 
 

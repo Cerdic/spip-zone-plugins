@@ -89,8 +89,8 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	  "<textarea name='descriptif_document' rows='4' class='formo' cols='*' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
 	    entites_html($descriptif) .
 	  "</textarea>\n" .
-	  $taille ;//.	  liste_mots_legender($id_document); //YOANN
-
+	  $taille ;
+	  
 	$att_bouton = " class='fondo spip_xx-small'";
 	$att_span = " id='valider_doc$id_document' "
 	. ($flag == 'ajax' ? '' : "class='display_au_chargement'")
@@ -149,88 +149,6 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	return ajax_action_greffe("legender-$id_document", $corps);
 }
 
-//YOANN
-function liste_mots_legender($id_document)
-{
-
-
-	//on vas aller chercher la liste des mots clefs
-	$query_grp_mots=spip_query("select * from spip_groupes_mots where documents='oui' and id_parent=0");
-	if(!spip_num_rows($query_grp_mots)) return ''; //si pa de groupe a la racine de l'arbo on sort
-
-	$retour="<div>";
-	//liste des mots clefs déjà associés
-	$query_mots=spip_query("select spip_mots.id_mot,titre from spip_mots_documents,spip_mots where spip_mots_documents.id_mot=spip_mots.id_mot AND id_document=$id_document");
-	if(spip_num_rows($query_mots)){
-		$retour.=_T('motspartout:liste_mots_clefs')."<br/>";
-		while ($mot=spip_fetch_array($query_mots)){
-			$retour.="<div class='tr-liste'><input type='checkbox' name='id_mots_off[]' value='".$mot['id_mot'].
-				"' title ='"._T('supprimer_mot_clef')."' alt='"._T('supprimer_mot_clef')."'/>".
-				$mot['titre']."</div>";
-		}
-	}
-	
-	$retour.=_T('motspartout:choix_mots_clefs')."<br/>";
-
-	while($grp_mot=spip_fetch_array($query_grp_mots)){
-		$retour.="<select name='id_mots_on[]' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" size='1' class='fondl spip_xx-small' style='width:169px;'>"; //le onfocus permet d'avoir le bouton enregistrer qui apparait
-		$retour.="<option value=''>".textebrut(typo($grp_mot['titre']))."</option>";
-		$retour.=legender_select_sous_menu_groupe($grp_mot['id_groupe'],"documents",1);
-		$retour.="</select>";
-	}
-
-
-	$retour.="</div>";
-	return $retour;
-
-}
-//YOANN
-
-
-//YOANN
-// http://doc.spip.org/@legender_select_sous_menu_groupe
-function legender_select_sous_menu_groupe($id_groupe,$table="documents",$niveau=1){
-//cette fonction est trés analogue  select_sous_menu_groupe dans editer_mot
- global $menu,$spip_lang,$connect_statut,$cond_id_groupes_vus,$id_objet,$table_id,$url_base,$objet;
-
-
-
-		//affichage des mots de ce niveau
-		$result = spip_query("SELECT id_mot, type, titre FROM spip_mots WHERE id_groupe =".$id_groupe." ORDER BY type, titre");
-
-				while($row2 = spip_fetch_array($result)) {
-    			     $res .= "\n<option value='" .$row2['id_mot'] .
-    				"'>".str_repeat("&nbsp;&nbsp;",$niveau)."&nbsp;-&gt;" .
-    				textebrut(typo($row2['titre'])) .
-    				"</option>";
-                }
-
-//boucle sur les sous groupes
-		$result_sous_groupes = spip_query("SELECT id_groupe,titre, ".creer_objet_multi ("titre", $spip_lang)." FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui'   ".($cond_id_groupes_vus?"AND (unseul != 'oui' OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus)))":"")." AND id_parent=".$id_groupe." ORDER BY multi");
-		//print ("*****  SELECT id_groupe,titre, ".creer_objet_multi ("titre", $spip_lang)." FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND (unseul != 'oui'  ".($cond_id_groupes_vus?" OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))":"").") AND id_parent=".$id_groupe." ORDER BY multi   ********");
-         //on va aller chercher les sous niveaux
-		 while ($row = spip_fetch_array($result_sous_groupes)) {
-		     $res .= "\n<option value='" .$row['id_groupe'] .
-				"'>".str_repeat("&nbsp;&nbsp;",$niveau) .
-				textebrut(typo($row['titre'])) .
-				"</option>";
-				//BOUCLES sur les mots de chaque sous groupe
-				$result = spip_query("SELECT id_mot, type, titre FROM spip_mots WHERE id_groupe =".$row['id_groupe']." ORDER BY type, titre");
-
-				while($row2 = spip_fetch_array($result)) {
-    			     $res .= "\n<option value='" .$row2['id_mot'] .
-    				"'>".str_repeat("&nbsp;&nbsp;",$niveau)."&nbsp;-&gt;" .
-    				textebrut(typo($row2['titre'])) .
-    				"</option>";
-                }
-
-				$res.=select_sous_menu_groupe($row['id_groupe'],$table,$niveau+1);
-		 }
-        return $res;
-}
-//FIN YOANN
-
-
 // http://doc.spip.org/@vignette_formulaire_legender
 function vignette_formulaire_legender($id_document, $document, $script, $type, $id, $ancre)
 {
@@ -251,10 +169,10 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 	$supprimer = icone_horizontale($texte, $action, "vignette-24.png", "supprimer.gif", false);
 	if ($id<0) $supprimer = ''; // cf. ci-dessus, article pas encore cree
 
-	
-	$editer_mot = charger_fonction('editer_mot', 'inc');
-	$s = $editer_mot('document', $id_document, "", "", true,'oui'); 
-	
+	//seul ajout de mots partout
+		$editer_mot = charger_fonction('editer_mot', 'inc');
+		$s = $editer_mot('document', $id_document, "", "", true,'oui'); 
+	//
 	
 
 	

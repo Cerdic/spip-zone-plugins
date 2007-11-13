@@ -1,30 +1,13 @@
-- ajouter des localisations, et les améliorer
-- faire une page pour creer les tables et ajouter une colonne dans spip_groupes_mots:
-   * rendre l'installation actuelle plus interactive (choix des tables dont on a besoin)
-   * rendre l'installation actuelle générique
-   * avoir une interface pour mettre des oui/non dans les nouvelles tables spip_groupes_mots
-- traduire l'article sur spip-contrib
-- faire des interfaces pour au moins tous les éléments SPIP (rubriques, breves, mots, ...)
-
-- trouver une meilleure méthode pour l'authentification
-- revoir la logique du stricte, utiliser HAVING de mysql
-
-Pour l'arborescence : 
-- arborescence dans le choix (select simple) du groupe de mots sur l'édition d'un mot clef : a ameliorer
-- amélioration de l'interface graphique de exec/mots_tous
- 
-
-
 
 Les BUGS :
 1-
-Cependant un bug apparaît à l’utilisation lorsque l’on définit un groupe de mots clés
- et que l’on demande à l’associer aux articles ainsi qu’aux documents : 
+Cependant un bug apparaît à l'utilisation lorsque l'on définit un groupe de mots clés
+ et que l'on demande à l'associer aux articles ainsi qu'aux documents : 
  les articles ne sont plus accessibles en édition côté administration 
  mais le redeviennent si on autorise ce groupe de mots clés uniquement 
- sur les documents ou uniquement sur les articles mais la combinaison des deux n’est pas possible.
+ sur les documents ou uniquement sur les articles mais la combinaison des deux n'est pas possible.
 
-C’est un bug non bloquant mais bon si ça peut faire avancer le smilblick ;-) : testé avec SPIP 1.9.2b et 1.9.2c
+C'est un bug non bloquant mais bon si ça peut faire avancer le smilblick ;-) : testé avec SPIP 1.9.2b et 1.9.2c
 
 
 

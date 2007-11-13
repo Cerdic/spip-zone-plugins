@@ -11,11 +11,13 @@
  */
 function MotsPartout_ajouterBoutons($boutons_admin) {
   
-  // on voit les bouton dans la barre "accueil"
-  $boutons_admin['naviguer']->sousmenu["mots_partout"]= new Bouton(
+	//if (autoriser('mottous','MotsPartout')) {
+	  // on voit les bouton dans la barre "edition"
+	  $boutons_admin['naviguer']->sousmenu["mots_partout"]= new Bouton(
 																   "../"._DIR_PLUGIN_MOTSPARTOUT."/tag.png",  // icone
 																   _L('motspartout:mots_partout') //titre
 																   );
+	//}
   return $boutons_admin;
 }
 

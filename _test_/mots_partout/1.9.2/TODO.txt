@@ -9,6 +9,8 @@
 - revoir la logique du stricte, utiliser HAVING de mysql
 
 Pour l'arborescence : 
-- instalation du champ supplementaire id_parent dans la table spip_groupes_mots
-- arborescence dans le choix (select simple) du groupe de mots sur l'édition d'un mot clef : en cours de réalisation
+
+- passage des interfaces possibles par recuperer_fond
+- amélioration du select indenté pour la selection d'un mot dans l'arborescence
 - amélioration de l'interface graphique de exec/mots_tous 
+- gestion de l'arborescence de mots et non uniquement pas de groupes de mots comme c'est le cas a l'heure actuelle
