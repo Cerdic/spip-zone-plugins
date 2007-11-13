@@ -102,45 +102,97 @@ class cfg_dist extends cfg_formulaire
 			. $this->fin_page();
 	}
 
+
+	/*
+	 * Affiche la boite d'info
+	 * des liens vers les autres fonds CFG
+	 * definis par la variable liens
+	 * <!-- liens*=moncfg -->
+	 * 
+	 * s'il y a une chaine de langue 'moncfg', le texte sera traduit
+	 * 
+	 * sinon, peut etre prevoir dans le futur :
+	 * <!-- liens*=moncfg|<:prefix:nomcfg:> --> ?
+	 */	
 	function lier()
 	{
 		$return = '';
 		foreach ($this->liens as $lien) {
-			$return .= $this->boite_liens($lien);
+			$nom = _T($lien);
+			$return .= "<li>" . $this->boite_liens($lien, $nom) . "</li>\n";
 		}
-		return $return;
+		return ($return)?
+			debut_boite_info(true) . "<ul>$return</ul>" . fin_boite_info(true)
+			:'';
 	}
 
-	function boite_liens($lien)
+	/*
+	 * Affiche un lien vers le fond dont le nom ($lien)
+	 * est passe en parametre
+	 * 
+	 * Gere les cas ou c'est un fond Multi 
+	 *  MM: Je me demande s'il ne faudrait pas bazarder cela
+	 *  au profit d'une gestion uniquement dans le fond 
+	 *  de ce genre de liens
+	 */
+	function boite_liens($lien, $nom='')
 	{
-		$dedans = $simple = '';
+		// nom est une chaine, pas une cle de tableau.
+		if (empty($nom) OR !is_string($nom)) $nom = $lien;
+		
+		// multi ?
+		if ($multi = $this->boite_liens_multi($lien, $nom))
+			return $multi;
+		// simple
+		else
+			return "<a href='" . generer_url_ecrire("cfg","cfg=$lien") . "'>$nom</a>\n"; // &cfg_id= <-- a ajouter ?
+	}
+	
+	
+	/*
+	 * Cherche si c'est un formulaire de type multi
+	 * et renvoie un formulaire si c'est le cas
+	 * avec des liens pour modifier les valeurs enregistrees
+	 * et pour creer une nouvelle entree
+	 * 
+	 * (a bazarder ?)
+	 * 
+	 * Suppose que l'enregistrement d'un type multi
+	 * fait que la meta $lien ne contient que des valeurs
+	 * qui sont des tableaux, eux-meme ayant des valeurs
+	 * etant des tableaux (vraiment tordu!) 
+	 */
+	function boite_liens_multi($lien, $nom=''){
+		$dedans = '';
 		if (($exi = lire_config($lien))) {
 			foreach ($exi as $compte => $info) {
 				// config simple ?
+				// Si une des valeurs n'est pas un tableau : on stoppe tout.
 				if (!is_array($info)) {
-					$dedans = '';
-					break;
+					return '';
 				}
-				$dedans .= '
-<p><label for="' . $lien . '_' . $compte . '">' . $compte . '</label>
-<input type="image" id="' . $lien . '_' . $compte . '" name="cfg_id" value="' . $compte . '" src="../dist/images/triangle.gif" style="vertical-align: text-top;"/></p>';
+				$lid = $lien . "_" . $compte;
+				$dedans .= "\n<p><label for='$lid'>$compte</label>\n"
+						.  "<input type='image' id='$lid' name='cfg_id' value='$compte' "
+						.  "src='../dist/images/triangle.gif' style='vertical-align: text-top;'/></p>\n";
 			}
 		}
-		if ($dedans) {
-			$dedans = '
-<p><label for="' . $lien . '_">' . _T('cfg:nouveau') . '</label>
-<input type="image" id="' . $lien . '_" name="nouveau" value="1" src="../dist/images/creer.gif" style="vertical-align: text-top;"/></p>' . $dedans;
-		} else {
-			$simple = '
-<input type="image" id="' . $lien . '" name="cfg_id" value="" src="../dist/images/triangle.gif" style="vertical-align: text-top;"/>';
-		}
-		return debut_boite_info(true) .	'
-<form method="post" action="' . $this->base_url . '">
-<h4>' . _L($lien) . '
-<input type="hidden" name="exec" value="cfg" />
-<input type="hidden" name="cfg" value="' . $lien . '" />' . $simple . '</h4><div>' .
-			$dedans . '</div></form>' . fin_boite_info(true);
+		// s'il effectivement c'est un multi, on ajoute un bouton 'nouveau'
+		if ($dedans) 
+			return    "<form method='post' action='$this->base_url'><div>\n"
+					. "<h4>$nom</h4>\n"
+					. "<input type='hidden' name='exec' value='cfg' />\n"
+					. "<input type='hidden' name='cfg' value='$lien' />\n"
+					. "<label for='$lien" . "_'>" . _T('cfg:nouveau') . "</label>\n"
+					. "<input type='image' id='$lien" . "_' name='nouveau' value='1' "
+					. "src='../dist/images/creer.gif' style='vertical-align: text-top;'/></p>\n" 
+					. $dedans
+					. "\n</div></form>\n";
+	
 	}
+	
+	
+	
 	function debut_page()
 	{
 		include_spip('inc/presentation');
