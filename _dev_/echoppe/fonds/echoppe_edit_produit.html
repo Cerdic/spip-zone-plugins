@@ -127,7 +127,7 @@
 			<b><:echoppe:prix_base:></b>&nbsp;<input type="text" name="prix_base_htva" value="#PRIX_BASE_HTVA" />&nbsp;#DEVISE<br /><br />
 		</div>
 		<hr />
-		<h3><:echoppe:edition_langue:>&nbsp;:&nbsp;[(#LANG_PRODUIT|traduire_nom_langue|sinon{<:echoppe:par_defaut:>})]</h3>
+		<h3><:echoppe:langue_editee:>&nbsp;:&nbsp;[(#LANG_PRODUIT|traduire_nom_langue|sinon{<:echoppe:par_defaut:>})]</h3>
 		[(#INCLURE{fond=fonds/echoppe_edit_produit_description})]
 		<input type="submit" class="fondo" />
 	</div>

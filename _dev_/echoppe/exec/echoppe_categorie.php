@@ -57,8 +57,10 @@ function exec_echoppe_categorie(){
 		}else{
 			echo '<a href="'.generer_url_ecrire('echoppe_categorie','id_categorie='.$id_categorie.'&lang=').'">'._T('echoppe:par_defaut').'</a><br />';
 		}
-		if (count($GLOBALS['meta']['langues_multilingue']) > 1){
-			$les_langues = explode(',',$GLOBALS['meta']['langues_multilingue']);
+		$les_langues = explode(',',$GLOBALS['meta']['langues_multilingue']);
+		
+		if (count($les_langues) > 1){
+			/*$les_langues = explode(',',$GLOBALS['meta']['langues_multilingue']);*/
 			foreach ($les_langues as $key => $value){
 				if ($value == $lang_categorie) {
 					echo '<b>=> <a href="'.generer_url_ecrire('echoppe_categorie','id_categorie='.$id_categorie.'&lang='.$value).'">'.traduire_nom_langue($value).'</a></b><br />';

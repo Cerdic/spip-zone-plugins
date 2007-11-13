@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'categorie_numero' => 'Cat&eacute;gorie num&eacute;ro :',
 'creer_nouvelle_categorie' => 'Cr&eacute;er une cat&eacute;gorie',
 'creer_un_ref_automatiquement' => 'En cr&eacute;er un automatiquement',
-'colisage' => 'Colisage',
+'colisage' => 'Frais de colisage',
 
 // D
 'date_de_mise_en_vente' => 'Date de mise en vente',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer_categorie' => 'Editer',
 'editer_version'=>'Editer la version',
 'edition_de_cetegorie'=>'&Eacute;dition d\'une cat&eacute;gorie',
-'edition_langue' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
+//'edition_langue' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
 'edition_de_produit' => '&Eacute;dition d\'un produit',
 'edition_donnees_globales' => '&Eacute;dition des donn&eacute;es globales.',
 
