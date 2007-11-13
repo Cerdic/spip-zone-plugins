@@ -1,6 +1,6 @@
-#SET{'action','echoppe_sauver_produit'}
-<form [action="(#GET{'action'}|generer_url_action{id_produit=#ID_PRODUIT&id_categorie=#ID_CATEGORIE&lang_produit=#LANG_PRODUIT&new=#NEW})"] method="post" >
+<form [action="(#ACTION|generer_url_action{id_produit=#ID_PRODUIT&id_categorie=#ID_CATEGORIE&lang_produit=#LANG_PRODUIT&new=#NEW})"] method="post" >
 	<div class="echoppe_edit_produit">
+		[<input type="hidden" name="new" value="(#NEW)" />]
 		<h3><:echoppe:edition_donnees_globales:></h3>
 		<div style="float: left;" >
 			<b><:echoppe:date_de_mise_en_vente:></b><br />
