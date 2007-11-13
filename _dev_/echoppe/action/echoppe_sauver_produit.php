@@ -7,20 +7,22 @@ function action_echoppe_sauver_produit(){
 	$titre = _request('titre');
 	$descriptif = _request('descriptif');
 	$texte = _request('texte');
-	$logo = _request('logo');
+	$ps = _request('ps');
 	$id_categorie = _request('id_categorie');
 	$new = _request('new');
+	$ref_produit = _request('ref_produit');
+	
 	//echo _request('new');
 	
 	switch ($new){
 		case 'oui':
-			$sql_insert_categorie = "INSERT INTO spip_echoppe_produits VALUES ('','"._request('id_parent')."')";
-			$res_insert_categorie = spip_query($sql_insert_categorie);
+			$sql_insert_produit = "INSERT INTO spip_echoppe_produits VALUES ('','".$date_debut."', '".$date_fin."', '".$poids."', '".$hauteur."', '".$largeur."', '".$longeur."', '".$colisage."', '".$ref_produit."', '".$prix_base_htva."', '', '".$statut."');";
+			$res_insert_produit = spip_query($sql_insert_categorie);
 			//echo $sql_insert_categorie.'<hr />';
-			$new_id_categorie = spip_insert_id();
-			$sql_insert_categorie_descriptif = "INSERT INTO spip_echoppe_produits_descriptions VALUES ('','".$new_id_categorie."','".$lang_categorie."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".$logo."','','".$statut."') ";
-			$res_insert_categorie_descriptif = spip_query($sql_insert_categorie_descriptif);
-			$id_categorie = $new_id_categorie;
+			$new_id_produit = spip_insert_id();
+			$sql_insert_produit_descriptif = "INSERT INTO spip_echoppe_produits_descriptions VALUES ('','".$new_id_produit."','".$lang_produit."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".addslashes($ps)."','".$tva."','".$quantite_mini."','') ";
+			$res_insert_produit_descriptif = spip_query($sql_insert_categorie_descriptif);
+			$id_produit = $new_id_produit;
 			break;
 		
 		case 'description' :
@@ -35,8 +37,8 @@ function action_echoppe_sauver_produit(){
 			break;
 		
 	}
-	$redirect = generer_url_ecrire('echoppe_categorie', 'id_categorie='.$id_categorie,'&');
-	echo $redirect;
+	$redirect = generer_url_ecrire('echoppe_produit', 'id_produit='.$id_produit,'&');
+	//echo $redirect;
 	redirige_par_entete($redirect);
 }
 

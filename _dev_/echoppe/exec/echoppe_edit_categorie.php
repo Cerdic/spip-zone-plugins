@@ -65,8 +65,7 @@ function exec_echoppe_edit_categorie(){
 	echo fin_boite_info();
 	
 	$raccourcis .= icone_horizontale(_T('echoppe:gerer_echoppe'), generer_url_ecrire("echoppe",""), _DIR_PLUGIN_ECHOPPE."images/echoppe_blk_24.png","", false);
-	$raccourcis .= icone_horizontale(_T('echoppe:retour'), generer_url_ecrire("echoppe_categorie","id_categorie=".$id_categorie."&lang=".$lang_categorie), _DIR_PLUGIN_ECHOPPE."images/retour.png","", false);
-	
+	($new == 'oui' && $id_parent != 0)?$raccourcis .= icone_horizontale(_T('echoppe:retour'), generer_url_ecrire("echoppe_categorie","id_categorie=".$id_parent."&lang=".$lang_categorie), _DIR_PLUGIN_ECHOPPE."images/retour.png","", false):$raccourcis=$raccourcis;	
 	echo bloc_des_raccourcis($raccourcis);
 	
 	

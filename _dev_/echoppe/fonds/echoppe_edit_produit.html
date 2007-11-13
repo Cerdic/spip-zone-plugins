@@ -1,122 +1,134 @@
 #SET{'action','echoppe_sauver_produit'}
 <form [action="(#GET{'action'}|generer_url_action{id_produit=#ID_PRODUIT&id_categorie=#ID_CATEGORIE&lang_produit=#LANG_PRODUIT&new=#NEW})"] method="post" >
-<b><:echoppe:titre_produit:></b><br />
-<input type=text class="forml" name="titre" value="#TITRE"/>
-<hr />
-<div style="margin:8px;">
-	<div style="float: left;" >
-		<b><:echoppe:date_de_mise_en_vente:></b><br />
-		<select name="jour_date_en_ligne">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
-			<option value="13">13</option>
-			<option value="14">14</option>
-			<option value="15">15</option>
-			<option value="16">16</option>
-			<option value="17">17</option>
-			<option value="18">18</option>
-			<option value="19">19</option>
-			<option value="20">20</option>
-			<option value="21">21</option>
-			<option value="22">22</option>
-			<option value="23">23</option>
-			<option value="24">24</option>
-			<option value="25">25</option>
-			<option value="26">26</option>
-			<option value="27">27</option>
-			<option value="28">28</option>
-			<option value="29">29</option>
-			<option value="30">30</option>
-			<option value="31">31</option>
-		</select>
-		<select name="mois_date_en_ligne">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
-		</select>
-		<input type="text" name="annee_date_en_ligne" size="4" maxlength="4" value="#ANNEE_DATE_EN_LIGNE" />
+	<div class="echoppe_edit_produit">
+		<h3><:echoppe:edition_donnees_globales:></h3>
+		<div style="float: left;" >
+			<b><:echoppe:date_de_mise_en_vente:></b><br />
+			<select name="jour_date_en_ligne">
+				<option value=""></option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20</option>
+				<option value="21">21</option>
+				<option value="22">22</option>
+				<option value="23">23</option>
+				<option value="24">24</option>
+				<option value="25">25</option>
+				<option value="26">26</option>
+				<option value="27">27</option>
+				<option value="28">28</option>
+				<option value="29">29</option>
+				<option value="30">30</option>
+				<option value="31">31</option>
+			</select>
+			<select name="mois_date_en_ligne">
+				<option value=""></option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+			</select>
+			<input type="text" name="annee_date_en_ligne" size="4" maxlength="4" value="#ANNEE_DATE_EN_LIGNE" />
+		</div>
+		<div style="float: right;" >
+			<b><:echoppe:date_de_retrait_de_vente:></b><br />
+			<select name="jour_date_retrait_ligne">
+				<option value=""></option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20</option>
+				<option value="21">21</option>
+				<option value="22">22</option>
+				<option value="23">23</option>
+				<option value="24">24</option>
+				<option value="25">25</option>
+				<option value="26">26</option>
+				<option value="27">27</option>
+				<option value="28">28</option>
+				<option value="29">29</option>
+				<option value="30">30</option>
+				<option value="31">31</option>
+			</select>
+			<select name="mois_date_retrait_ligne">
+				<option value=""></option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+			</select>
+			<input type="text" name="annee_date_retrait_ligne" size="4" maxlength="4" value="#ANNEE_DATE_RETRAIT_LIGNE" />
+		</div><div style="clear: both;"> </div>
+		<br />
+		<div style="display: table;width: 100%; ">
+			<div style="display: table-row;" >
+				<div style="display: table-cell;"><b><:echoppe:poids:></b></div><div style="display: table-cell;"><b><:echoppe:hauteur:></b></div><div style="display: table-cell;"><b><:echoppe:largeur:></b></div><div style="display: table-cell;"><b><:echoppe:longeur:></b></div>
+			</div>
+			<div style="display: table-row; " >
+				<div style="display: table-cell;"><input type="text" name="poids" size="4" value="#POIDS" /><br /></div>
+				<div style="display: table-cell;"><input type="text" name="hauteur" size="4" value="#HAUTEUR" /><br /></div>
+				<div style="display: table-cell;"><input type="text" name="largeur" size="4" value="#LARGEUR" /><br /></div>
+				<div style="display: table-cell;"><input type="text" name="longeur" size="4" value="#LONGEUR" /><br /></div>
+			</div>
+		</div>
+		<br />
+		<div>
+			<b><:echoppe:colisage:></b>&nbsp;<input type="text" name="colisage" value="#COLISAGE" /><br /><br />
+			<b><:echoppe:reference_interne:></b>&nbsp;<input type="text" name="colisage" value="#COLISAGE" /><input type="checkbox" name="ref_produit_auto" checked=true /><:echoppe:creer_un_ref_automatiquement:><br /><br />
+			<b><:echoppe:prix_base:></b>&nbsp;<input type="text" name="prix_base_htva" value="#PRIX_BASE_HTVA" />&nbsp;#DEVISE<br /><br />
+		</div>
+		<hr />
+		<h3><:echoppe:edition_langue:>&nbsp;:&nbsp;[(#LANG_PRODUIT|traduire_nom_langue|sinon{<:echoppe:par_defaut:>})]</h3>
+		[(#INCLURE{fond=fonds/echoppe_edit_produit_description})]
+		<input type="submit" class="fondo" />
 	</div>
-	<div style="float: right;" >
-		<b><:echoppe:date_de_retrait_de_vente:></b><br />
-		<select name="jour_date_retrait_ligne">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
-			<option value="13">13</option>
-			<option value="14">14</option>
-			<option value="15">15</option>
-			<option value="16">16</option>
-			<option value="17">17</option>
-			<option value="18">18</option>
-			<option value="19">19</option>
-			<option value="20">20</option>
-			<option value="21">21</option>
-			<option value="22">22</option>
-			<option value="23">23</option>
-			<option value="24">24</option>
-			<option value="25">25</option>
-			<option value="26">26</option>
-			<option value="27">27</option>
-			<option value="28">28</option>
-			<option value="29">29</option>
-			<option value="30">30</option>
-			<option value="31">31</option>
-		</select>
-		<select name="mois_date_retrait_ligne">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
-		</select>
-		<input type="text" name="annee_date_retrait_ligne" size="4" maxlength="4" value="#ANNEE_DATE_RETRAIT_LIGNE" />
-	</div><div style="clear: both;"> </div>
-</div>
-<div style="margin: 8px;" >
-	<b><:echoppe:prix_base:></b>
-	<input type="text" name="prix_base" value="#PRIX_BASE" size="4" />&nbsp;#DEVISE<br />
-</div>
-<hr />
-<b><:echoppe:descriptif:></b><br />
-<textarea name="descriptif" class="forml" >#DESCRIPTIF</textarea><br />
-
-<b><:echoppe:texte:></b><br />
-[(#TEXTE**|barre_textarea{20,40,#LANG})]
-<input type="submit" class="fondo" />
 </form>
-

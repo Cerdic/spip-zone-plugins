@@ -38,6 +38,14 @@ _
 		<!-- chemin du fichier contenant la fonction -->
 		<inclure>echoppe_pipeline.php</inclure>
 	</pipeline>
+	<pipeline>
+		<!-- voir la page sur doc.spip.org, pour connaitre l'ensemble des pipeline -->
+		<nom>header_prive</nom>
+		<!-- nom de la fonction a appelé sans son prefixe -->
+		<action>header_prive</action>
+		<!-- chemin du fichier contenant la fonction -->
+		<inclure>echoppe_pipeline.php</inclure>
+	</pipeline>
 	<bouton id='echoppe' parent='naviguer'>
 		<icone>images/logo.png</icone>
 		<titre>Echoppe</titre>

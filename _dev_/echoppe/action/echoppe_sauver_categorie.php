@@ -36,7 +36,7 @@ function action_echoppe_sauver_categorie(){
 		
 	}
 	$redirect = generer_url_ecrire('echoppe_categorie', 'id_categorie='.$id_categorie,'&');
-	echo $redirect;
+	//echo $redirect;
 	redirige_par_entete($redirect);
 }
 

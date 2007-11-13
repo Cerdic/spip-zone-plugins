@@ -13,9 +13,15 @@ function exec_echoppe_categorie(){
 	}
 	
 	$lang_categorie = _request('lang');
-
-	
 	$id_categorie = _request('id_categorie');
+	$new = _request('new');
+	
+	$sql_test_categorie_existe = "SELECT * FROM spip_echoppe_categories WHERE id_categorie = '".$id_categorie."';";
+	$res_test_categorie_existe = spip_query($sql_test_categorie_existe);
+	if (spip_num_rows($res_test_categorie_existe) == 0 && $new != 'oui'){
+		die(inc_commencer_page_dist(_T('echoppe:les_produits'), "redacteurs", "echoppe")._T('echoppe:pas_de_produit_ici').fin_page());
+	}
+	
 	$sql_select_categorie = "SELECT cat.*, cat_desc.* FROM spip_echoppe_categories cat, spip_echoppe_categories_descriptions cat_desc WHERE cat.id_categorie = '".$id_categorie."' AND cat.id_categorie = cat_desc.id_categorie AND cat_desc.lang='".$lang_categorie."';";
 	$res_select_categorie = spip_query($sql_select_categorie);
 	$categorie = spip_fetch_array($res_select_categorie);
