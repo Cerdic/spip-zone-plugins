@@ -308,6 +308,7 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}."
 	'page_precedente' => 'Page pr&eacute;c&eacute;dente',
 	'page_debut' => 'Premi&egrave;re page',
 	'page_fin' => 'Derni&egrave;re page',
+	'page_lien' => 'Page @page@ : @title@',
 
 // ---------------------------------------------------------------------------
 	'sommaire:nom' => 'Un sommaire pour vos articles',
