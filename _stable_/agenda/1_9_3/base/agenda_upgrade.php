@@ -15,24 +15,24 @@
 				// si pas deja existant
 				$desc = sql_showtable("spip_groupes_mots", true, '');
 				if (!isset($desc['field']['evenements'])){
-					spip_query("ALTER TABLE spip_groupes_mots ADD `evenements` VARCHAR(3) NOT NULL AFTER `syndic`");
+					spip_alter("TABLE spip_groupes_mots ADD `evenements` VARCHAR(3) NOT NULL AFTER `syndic`");
 				}
 				ecrire_meta('agenda_base_version',$current_version=$version_base,'non');
 			}
 			if ($current_version<0.11){
-				spip_query("ALTER TABLE spip_evenements ADD `horaire` ENUM('oui','non') DEFAULT 'oui' NOT NULL AFTER `lieu`");
+				spip_alter("TABLE spip_evenements ADD `horaire` ENUM('oui','non') DEFAULT 'oui' NOT NULL AFTER `lieu`");
 				ecrire_meta('agenda_base_version',$current_version=0.11,'non');
 			}
 			if ($current_version<0.12){
-				spip_query("ALTER TABLE spip_evenements ADD `id_article` bigint(21) DEFAULT '0' NOT NULL AFTER `id_evenement`");
-				spip_query("ALTER TABLE spip_evenements ADD INDEX ( `id_article` )");
-				$res = spip_query ("SELECT * FROM spip_evenements_articles");
+				spip_alter("TABLE spip_evenements ADD `id_article` bigint(21) DEFAULT '0' NOT NULL AFTER `id_evenement`");
+				spip_alter("TABLE spip_evenements ADD INDEX ( `id_article` )");
+				$res = sql_select("*", "spip_evenements_articles");
 				while ($row = sql_fetch($res)){
 					$id_article = $row['id_article'];
 					$id_evenement = $row['id_evenement'];
-					spip_query("UPDATE spip_evenements SET id_article=$id_article WHERE id_evenement=$id_evenement");
+					sql_update("spip_evenements", "id_article=$id_article", "id_evenement=$id_evenement");
 				}
-				spip_query("DROP TABLE spip_evenements_articles");
+				sql_drop_table("spip_evenements_articles");
 				ecrire_meta('agenda_base_version',$current_version=0.12,'non');
 			}
 			if ($current_version<0.13){
@@ -42,7 +42,6 @@
 				ecrire_meta('agenda_base_version',$current_version=0.13,'non');
 			}
 	
-			ecrire_metas();
 		}
 		
 		if (isset($GLOBALS['meta']['INDEX_elements_objet'])){
@@ -50,7 +49,6 @@
 			if (!isset($INDEX_elements_objet['spip_evenements'])){
 				$INDEX_elements_objet['spip_evenements'] = array('titre'=>8,'descriptif'=>4,'lieu'=>3);
 				ecrire_meta('INDEX_elements_objet',serialize($INDEX_elements_objet));
-				ecrire_metas();
 			}
 		}
 		if (isset($GLOBALS['meta']['INDEX_objet_associes'])){
@@ -58,7 +56,6 @@
 			if (!isset($INDEX_objet_associes['spip_articles']['spip_evenements'])){
 				$INDEX_objet_associes['spip_articles']['spip_evenements'] = 1;
 				ecrire_meta('INDEX_objet_associes',serialize($INDEX_objet_associes));
-				ecrire_metas();
 			}
 		}
 		if (isset($GLOBALS['meta']['INDEX_elements_associes'])){
@@ -66,7 +63,6 @@
 			if (!isset($INDEX_elements_associes['spip_evenements'])){
 				$INDEX_elements_associes['spip_evenements'] = array('titre'=>2,'descriptif'=>1);
 				ecrire_meta('INDEX_elements_associes',serialize($INDEX_elements_associes));
-				ecrire_metas();
 			}
 		}
 	}
@@ -75,11 +71,10 @@
 		include_spip('base/agenda_evenements');
 		include_spip('base/abstract_sql');
 		// suppression du champ evenements a la table spip_groupe_mots
-		spip_query("ALTER TABLE spip_groupes_mots DROP evenements");
-		spip_query("DROP TABLE spip_evenements");
-		spip_query("DROP TABLE spip_mots_evenements");
+		spip_alter("TABLE spip_groupes_mots DROP evenements");
+		sql_drop_table("spip_evenements");
+		sql_drop_table("spip_mots_evenements");
 		effacer_meta('agenda_base_version');
-		ecrire_metas();
 	}
 	
 	function Agenda_install($action){
