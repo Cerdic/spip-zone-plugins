@@ -502,7 +502,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots, $cle_objet='',$table="artic
 
 
 // http://doc.spip.org/@select_sous_menu_groupe_mots
-function select_sous_menu_groupe_mots_mots($id_groupe,$table='articles',$niveau=0){
+function select_sous_menu_groupe_mots($id_groupe,$table='articles',$niveau=0){
 //fonction recursive qui permet de recuperer larborescence des groupes de mots et les mots
 
  global $spip_lang,$connect_statut,$cond_id_groupes_vus;
