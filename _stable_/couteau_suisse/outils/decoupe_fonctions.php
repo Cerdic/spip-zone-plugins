@@ -121,7 +121,7 @@ function decouper_en_pages_rempl($texte) {
 	$pagination = $num_pages>3?"$debut\n$precedent\n$milieu\n$suivant\n$fin":"$precedent\n$milieu\n$suivant";
 	$pagination1 = "<div id='decoupe_haut' class='pagination decoupe_haut'>\n$pagination\n</div>\n";
 	$pagination2 = "<div id='decoupe_bas' class='pagination decoupe_bas'>\n$pagination\n</div>\n";
-	$page = trim($pages[$artpage-1]);
+	$page = safehtml(trim($pages[$artpage-1]));
 	if (isset($_GET['decoupe_recherche'])) {
 		include_spip('inc/surligne');
 		$page = surligner_mots($page, $_GET['decoupe_recherche']);
