@@ -32,9 +32,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer_categorie' => 'Editer',
 'editer_version'=>'Editer la version',
 'edition_de_cetegorie'=>'&Eacute;dition d\'une cat&eacute;gorie',
-'edition_langue' => '&Eacute;dition de la langue',
+'edition_langue' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
 'edition_de_produit' => '&Eacute;dition d\'un produit',
 'edition_donnees_globales' => '&Eacute;dition des donn&eacute;es globales.',
+
 // G
 'gerer_echoppe' => 'G&eacute;rer Echoppe',
 
@@ -42,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'hauteur' => 'Hauteur',
 
 // L
-'langue_editee' => '&Eacute;dition de la langue',
+'langue_editee' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
 'largeur' => 'Largeur',
 'les_categories' => 'Les cat&eacute;gories',
 'les_produits' => 'Les produits',
