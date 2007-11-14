@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/mots');
+include_spip('public/assembler'); //pour recuperer_fond
 
 // http://doc.spip.org/@inc_editer_mot_dist
 function inc_editer_mot($objet, $id_objet, $cherche_mot, $select_groupe, $flag,$simplifie='non') {
@@ -51,10 +52,11 @@ function inc_editer_mot($objet, $id_objet, $cherche_mot, $select_groupe, $flag,$
 				if ($key=='id_objet') $_id_objet=$id_objet['id_objet'];
 				else $url_base.=$value;
 			$id_objet=$_id_objet;
-		}			
+		}			 
 	}
 
 
+	//Ceci n'est plus vraiment utile dans le cas de la squeletisation 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot"));
 
 	if (!($nombre_mots = $cpt['n'])) {
@@ -63,6 +65,17 @@ function inc_editer_mot($objet, $id_objet, $cherche_mot, $select_groupe, $flag,$
 
 		if (!$cpt['n']) return;
 	}
+	//////////////////////
+	
+	
+	//preparation de l'utilisation de recuperer_fond a ce niveau
+	//definition du contexte 
+	
+	$squel=recup_squelette_motspartout("listemot_".$table);
+	$contexte_liste=array("table"=>$table,"id_objet"=>$id_objet,"visible"=>$visible,"simplifie"=>$simplifie);
+	
+	$res=recuperer_fond($squel,$contexte_liste);
+	
 
 	//
 	// Preparer l'affichage
@@ -537,6 +550,16 @@ $query="SELECT id_groupe,titre, ".creer_objet_multi ("titre", $spip_lang)." FROM
 }
 
 
+
+function recup_squelette_motspartout($squel){
+	
+	if($fond=find_in_path($squel)) return $fond;
+	else {//on va aller chercher l'interface générale
+		$squel="fond/listemot_general";
+		return find_in_path($squel);
+	}
+	
+}
 
 
 
