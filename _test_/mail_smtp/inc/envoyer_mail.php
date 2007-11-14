@@ -32,13 +32,15 @@ function nettoyer_caracteres_mail($t) {
 	return $t;
 }
 
-// http://doc.spip.org/@nettoyer_titre_email
-function nettoyer_titre_email($titre) {
-	return str_replace("\n", ' ', supprimer_tags(extraire_multi($titre)));
+if (!function_exists('nettoyer_titre_email')){
+	// http://doc.spip.org/@nettoyer_titre_email
+	function nettoyer_titre_email($titre) {
+		return str_replace("\n", ' ', supprimer_tags(extraire_multi($titre)));
+	}
 }
 
 // http://doc.spip.org/@envoyer_mail
-function inc_envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
+function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = "") {
 	include_spip('inc/charsets');
 	include_spip('inc/class.phpmailer');
 	$mailer = new PHPMailer();
