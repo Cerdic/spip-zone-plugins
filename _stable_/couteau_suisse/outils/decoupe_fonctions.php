@@ -11,15 +11,14 @@ $GLOBALS['cs_introduire'][] = 'decoupe_introduire';
 
 // fonction d'urgence, en attendant une ananlyse plus fine d'un texte HTML original a decouper
 function decoupe_safehtml($texte) {
+	// balises <p|span|div> a ouvrir
+	foreach(array('p', 'div', 'span') as $b)
+		if(($fin = strpos($texte, "</$b>")) !== false) {
+			$deb = strpos($texte, '<'.$b);
+			if($deb===false || $fin<$deb) $texte = "<$b>$texte";
+		}
 	// balises a fermer
-	$texte = safehtml(trim($texte));
-	// balise <p> a ouvrir (voir aussi pour span ou div)
-	$fin = strpos($texte, '</p>');
-	if($fin!==false) {
-		$deb = strpos($texte, '<p');
-		if($deb===false || $fin<$deb) $texte = '<p>'.$texte;
-	}
-	return $texte;
+	return safehtml(trim($texte));
 }
 
 function onglets_callback($matches) {
