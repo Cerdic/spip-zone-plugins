@@ -104,6 +104,14 @@ function exec_echoppe_categorie(){
 						</div>
 					</div>';
 			}
+			
+			$sql_les_produits = "SELECT ecp.*, ecd.* FROM spip_echoppe_categories_produits ecp, spip_echoppe_produits_descriptions edp WHERE ecp.id_categorie = '".$id_categorie."' AND epd.id_produit = ecp.id_produit";
+			echo $sql_les_produits;
+			$res_les_produits = spip_query($sql_les_produits);
+			while($les_produits = spip_fetch_array($res_les_produits)){
+				echo '<a href="" ><b>'.$les_produits.'</b></a><br />';
+			}
+			
 	/*}else{
 		echo _T('echoppe:pas_de_categorie_ici');
 	}*/
