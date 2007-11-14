@@ -128,7 +128,7 @@
 		</div>
 		<hr />
 		<h3><:echoppe:langue_editee:>&nbsp;:&nbsp;[(#LANG_PRODUIT|traduire_nom_langue|sinon{<:echoppe:par_defaut:>})]</h3>
-		[(#INCLURE{fond=fonds/echoppe_edit_produit_description})]
+		[(#INCLURE{fond=fonds/echoppe_edit_produit_description}{env})]
 		<input type="submit" class="fondo" />
 	</div>
 </form>

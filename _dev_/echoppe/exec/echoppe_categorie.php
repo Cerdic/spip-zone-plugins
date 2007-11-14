@@ -105,12 +105,16 @@ function exec_echoppe_categorie(){
 					</div>';
 			}
 			
-			$sql_les_produits = "SELECT ecp.*, ecd.* FROM spip_echoppe_categories_produits ecp, spip_echoppe_produits_descriptions edp WHERE ecp.id_categorie = '".$id_categorie."' AND epd.id_produit = ecp.id_produit";
-			echo $sql_les_produits;
+			$sql_les_produits = "SELECT ecp.*, epd.* FROM spip_echoppe_categories_produits ecp, spip_echoppe_produits_descriptions epd WHERE ecp.id_categorie = '".$id_categorie."' AND epd.id_produit = ecp.id_produit";
+			//echo $sql_les_produits;
 			$res_les_produits = spip_query($sql_les_produits);
+			echo '
+					<div class="cadre-sous_rub" style="width: 100%; margin: 10px 0px 0px 0px;">
+						<div class="cadre-padding">';
 			while($les_produits = spip_fetch_array($res_les_produits)){
-				echo '<a href="" ><b>'.$les_produits.'</b></a><br />';
+				echo '<a href="'.generer_url_ecrire("echoppe_edit_produit","id_produit=".$les_produits['id_produit']).'" ><b>'.$les_produits['titre'].'</b></a><br />';
 			}
+			echo '</div></div>';
 			
 	/*}else{
 		echo _T('echoppe:pas_de_categorie_ici');

@@ -24,12 +24,13 @@ function action_echoppe_sauver_produit(){
 			$res_insert_produit = spip_query($sql_insert_produit);
 			//echo $sql_insert_produit.'<hr />';
 			
+			$new_id_produit = spip_insert_id();
 			$id_produit = $new_id_produit;
 			
 			$sql_lien_produit_categorie = "INSERT INTO spip_echoppe_categories_produits VALUES ('".$id_categorie."', '".$id_produit."');";
 			$res_lien_produit_categorie = spip_query($sql_lien_produit_categorie);
 			
-			$new_id_produit = spip_insert_id();
+			
 			$sql_insert_produit_descriptif = "INSERT INTO spip_echoppe_produits_descriptions VALUES ('','".$new_id_produit."','".$lang_produit."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".addslashes($ps)."','".$tva."','".$quantite_mini."','') ";
 			$res_insert_produit_descriptif = spip_query($sql_insert_produit_descriptif);
 			
