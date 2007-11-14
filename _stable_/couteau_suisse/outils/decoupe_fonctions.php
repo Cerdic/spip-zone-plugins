@@ -9,6 +9,19 @@ function decoupe_introduire($texte) {
 }
 $GLOBALS['cs_introduire'][] = 'decoupe_introduire';
 
+// fonction d'urgence, en attendant une ananlyse plus fine d'un texte HTML original a decouper
+function decoupe_safehtml($texte) {
+	// balises a fermer
+	$texte = safehtml(trim($texte));
+	// balise <p> a ouvrir (voir aussi pour span ou div)
+	$fin = strpos($texte, '</p>');
+	if($fin!==false) {
+		$deb = strpos($texte, '<p');
+		if($deb===false || $fin<$deb) $texte = '<p>'.$texte;
+	}
+	return $texte;
+}
+
 function onglets_callback($matches) {
 	// au cas ou on ne veuille pas d'onglets, on remplace les '++++' par un filet et on entoure d'une classe.
 	if ($_GET['cs']=='print') {
@@ -23,7 +36,7 @@ function onglets_callback($matches) {
 	$pages = explode(_decoupe_SEPARATEUR, $matches[1]);
 	foreach ($pages as $p) {
 		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $p, 2);
-		$contenus[] = '<div class="onglets_contenu"><h2 class="cs_onglet"><a href="#">'.trim(textebrut($t[0])).'</a></h2>'.safehtml($t[1]).'</div>';
+		$contenus[] = '<div class="onglets_contenu"><h2 class="cs_onglet"><a href="#">'.trim(textebrut($t[0])).'</a></h2>'.decoupe_safehtml($t[1]).'</div>';
 	}
 	return '<div class="onglets_bloc_initial">'.join('', $contenus).'</div>';
 }
@@ -121,7 +134,7 @@ function decouper_en_pages_rempl($texte) {
 	$pagination = $num_pages>3?"$debut\n$precedent\n$milieu\n$suivant\n$fin":"$precedent\n$milieu\n$suivant";
 	$pagination1 = "<div id='decoupe_haut' class='pagination decoupe_haut'>\n$pagination\n</div>\n";
 	$pagination2 = "<div id='decoupe_bas' class='pagination decoupe_bas'>\n$pagination\n</div>\n";
-	$page = safehtml(trim($pages[$artpage-1]));
+	$page = decoupe_safehtml($pages[$artpage-1]);
 	if (isset($_GET['decoupe_recherche'])) {
 		include_spip('inc/surligne');
 		$page = surligner_mots($page, $_GET['decoupe_recherche']);

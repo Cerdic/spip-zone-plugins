@@ -323,6 +323,7 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et ong
 		'sommaire:aide' => defined('_sommaire_AUTOMATIQUE')?'Un article sans sommaire&nbsp;: @racc@':'Un article avec sommaire&nbsp;: @racc@',
 	'sommaire_titre' => 'Sommaire',
 	'sommaire_page' => ',&nbsp;p@page@',
+	'sommaire_page_long' => ',&nbsp;page&nbsp;@page@',
 
 // ---------------------------------------------------------------------------
 	'liens_orphelins:nom' => 'Liens orphelins',
