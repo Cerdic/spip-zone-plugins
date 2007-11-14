@@ -50,7 +50,9 @@ $GLOBALS['champs_extra_proposes'] = Array (
 
 $table_des_traitements['TITRE'][]= 'supprimer_numero(typo(%s))';
 
+//---------------------------------------------------------
 // [fr] Concu a partir de balise/formulaire_inscription.php
+//---------------------------------------------------------
 function test_inscription($mode, $mail, $nom, $id=0)
 {
 	include_spip('inc/filtres');
@@ -61,22 +63,29 @@ function test_inscription($mode, $mail, $nom, $id=0)
 
 	// Controle de la ban_list
 	include_spip('inc/spipbb');
+	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
 
-	$user_ip = (isset($HTTP_SERVER_VARS['REMOTE_ADDR'])) ? $HTTP_SERVER_VARS['REMOTE_ADDR'] : getenv('REMOTE_ADDR');
+	if (is_array($spipbb_meta) AND
+		$spipbb_meta['configure'] == 'oui' AND
+ 		$spipbb_meta['config_spam_words'] == 'oui' ) {
 
-	$res = sql_select('ban_login,ban_ip, ban_email','spip_ban_liste');
-	while ( $row = sql_fetch($res) )
-	{
+		$user_ip = (isset($HTTP_SERVER_VARS['REMOTE_ADDR'])) ? $HTTP_SERVER_VARS['REMOTE_ADDR'] : getenv('REMOTE_ADDR');
 
-		$match_email = str_replace('*', '.*?', $row['ban_email']);
-		$match_ip = str_replace('*', '.*?', $row['ban_ip']);
-		$match_login = str_replace('*', '.*?', $row['ban_login']);
-		if ( 	preg_match('/^' . $match_email . '$/is', $mail) or
-			preg_match('/^' . $match_ip . '$/is', $user_ip)	or
-			preg_match('/^' . $match_login . '$/is', $nom) ) {
-			return _T('spipbb:info_inscription_invalide');
-		}
-	} // while
+		$res = sql_select('ban_login,ban_ip, ban_email','spip_ban_liste');
+		while ( $row = sql_fetch($res) )
+		{
+
+			$match_email = str_replace('*', '.*?', $row['ban_email']);
+			$match_ip = str_replace('*', '.*?', $row['ban_ip']);
+			$match_login = str_replace('*', '.*?', $row['ban_login']);
+			if ( 	preg_match('/^' . $match_email . '$/is', $mail) or
+				preg_match('/^' . $match_ip . '$/is', $user_ip)	or
+				preg_match('/^' . $match_login . '$/is', $nom) ) {
+				return _T('spipbb:info_inscription_invalide');
+			}
+		} // while
+	} // Fin du bloc traitement specifique spipbb
+
 	return array('email' => $r, 'nom' => $nom, 'bio' => $mode);
 }
 

@@ -1,3 +1,4 @@
+[(#REM) Plugin SpipBB - Licence GPL]
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <!--eliminer les forums des rubriques et articles appartenant aux autres secteurs -->
@@ -49,7 +50,7 @@
 		</tr>
 		</thead>
 
-#SET{id_mot_ferme,#CONFIG{spipbb/spipbb_id_mot_ferme}}
+#SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
 
 		<BOUCLE_forums_liens(FORUMS){doublons}{plat}{par date}{inverse}{age<15}{pagination 20}> 
 			<?php

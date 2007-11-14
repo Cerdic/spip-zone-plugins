@@ -4,8 +4,6 @@
 
 [(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_forums_configuration:>})]
 [(#REM) ------------------------ RUBRIQUE/SECTEUR CONTENANT LES FORUMS ------------------------ ]
-<BOUCLE_rubrique_parcourue(RUBRIQUES){id_rubrique}{tout}>
-[(#REM) On remonte au secteur]
 <BOUCLE_rubrique_principale(RUBRIQUES){id_secteur}{racine}{tout}>
 	<B_categories>
 	<table border='1' cellspacing='1' cellpadding='3' width='100%' >
@@ -96,8 +94,4 @@
 </B_rubrique_principale>
 <a href="<?php echo generer_url_ecrire('articles_edit',"new=oui&id_rubrique=#ID_RUBRIQUE"); ?>"><:spipbb:admin_form_creer_forum:></a>
 <//B_rubrique_principale>
-</BOUCLE_rubrique_parcourue>
-</B_rubrique_parcourue>
-<a href="<?php echo generer_url_ecrire('rubriques_edit',"new=oui&id_parent=#ID_SECTEUR"); ?>"><:spipbb:admin_form_creer_categorie:></a>
-<//B_rubrique_parcourue>
 [(#REM|sinon{1}|fin_cadre_trait_couleur)]

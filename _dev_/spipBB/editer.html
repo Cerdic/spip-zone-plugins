@@ -1,13 +1,14 @@
-<?
+[(#REM) Plugin SpipBB - Licence GPL]
+<?php
 // permet la zolie mise en page comme dans l'espace admin
 $spip_display=1;
 
-include("ecrire/inc/presentation.php"); //encore pour les cadres
-
+include_spip("inc/presentation"); //encore pour les cadres
 
 // On récup les infos du forum
-$result = spip_query("SELECT * FROM spip_forum WHERE id_forum=".$id_forum);
-if ($row = spip_fetch_array($result)) $forum=$row;
+include_spip('inc/spipbb'); // compat 192
+$result = sql_select("*","spip_forum","id_forum=".$id_forum);
+if ($row = sql_fetch($result)) $forum=$row;
 
 //
 // Modification du forum
@@ -44,7 +45,6 @@ if ($_POST['redirect']=='oui') {
     //WHERE id_forum=".$id_forum;
     //sql_query($query) OR die($query);
 
-	if (!function_exists('sql_updateq')) include_spip('inc/spipbb_192');
 	@sql_updateq('spip_forum', array(
 			'titre' => addslashes($forum['titre']),
 			'texte' => addslashes($forum['texte']),
@@ -58,7 +58,7 @@ if ($_POST['redirect']=='oui') {
     // et on redirige vers le fofo en question
     if ($forum['id_parent'] != 0) $id_parent=$forum['id_parent'];
     else $id_parent=$id_forum;
-    header("Location: spip.php?page=voirsujet&id_forum=$id_parent");	
+    header("Location: spip.php?page=voirsujet&id_forum=$id_parent");
 
 }
 
@@ -82,7 +82,7 @@ if ($forum['auteur']==$nom_auteur_session OR $statut=='0minirezo') {
 
 	<INCLURE{fond=entete_BB}{id_article}>
 
-	<div id="corps"> <!-- Section contenant les donnÃ©es -->
+	<div id="corps"> <!-- Section contenant les donnees -->
 		[(#MODELE{spipbb_chemindefer}{id_article}{id_rubrique})]
 		
 
@@ -98,8 +98,8 @@ if ($forum['auteur']==$nom_auteur_session OR $statut=='0minirezo') {
           			<td class="postsmiley"><INCLURE{fond=inc_tableau_smileys}{id_article}></td>
           			<td class="postformulaire"> 
           			<div class="tailformulaire">
-          			<!-- Ce div est lÃ  pour pallier l'illogisme qui fait que selon l'avancement dans le post on se trouve un coup avec .spip_encadrer autour de form et un coup l'inverse -->
-          			<!-- Donc c'est lui qu'il faut dimmensionner et Ã©ventuellement centrer -->
+          			<!-- Ce div est la  pour pallier l'illogisme qui fait que selon l'avancement dans le post on se trouve un coup avec .spip_encadrer autour de form et un coup l'inverse -->
+          			<!-- Donc c'est lui qu'il faut dimmensionner et eventuellement centrer -->
 
 				<div class="formulaire_spip formulaire_forum">
 
@@ -127,8 +127,8 @@ if ($forum['auteur']==$nom_auteur_session OR $statut=='0minirezo') {
                                         <br />
                                         
                                         <? } else { 
-                                $s = spip_query("SELECT * FROM spip_forum WHERE id_forum=".$id_forum);
-                             if ($t = spip_fetch_array($s))
+                                $s = sql_select("*","spip_forum","id_forum=".$id_forum);
+                             if ($t = sql_fetch($s))
                             $titre =  $t['titre'];
                             $texte =  $t['texte'];
                             $auteur =  $t['auteur'];

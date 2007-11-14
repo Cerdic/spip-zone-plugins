@@ -377,4 +377,42 @@ function sql_delete ($table, $where='', $serveur='')
 	return spip_mysql_query("DELETE FROM $table" . ($where ? " WHERE $where" : ''), $serveur);
 } } // sql_delete
 
+#------------------------------------------------------------#
+// sql_showbase
+// from base/abstract_sql.php 193 et req/mysql.php 193
+#------------------------------------------------------------#
+if (!function_exists('sql_showbase')) {
+function sql_showbase($spip=NULL, $serveur='')
+{
+	if ($spip == NULL){
+		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+		$spip = $connexion['prefixe'] . '%';
+	}
+
+	return spip_mysql_query("SHOW TABLES LIKE '$spip'", $serveur);
+} } // sql_showbase
+
+#------------------------------------------------------------#
+// sql_showtable
+// from base/abstract_sql.php 193 et req/mysql.php 193
+#------------------------------------------------------------#
+if (!function_exists('sql_showtable')) {
+function sql_showtable($table, $table_spip = false, $serveur='')
+{
+	if ($table_spip){
+		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+		$prefixe = $connexion['prefixe'];
+		$table = preg_replace('/^spip/', $prefixe, $table);
+	}
+
+	$f = spip_mysql_showtable($table, $serveur);
+	if (!$f) return array();
+	if (isset($GLOBALS['tables_principales'][$table]['join']))
+		$f['join'] = $GLOBALS['tables_principales'][$table]['join'];
+	elseif (isset($GLOBALS['tables_auxiliaires'][$table]['join']))
+		$f['join'] = $GLOBALS['tables_auxiliaires'][$table]['join'];
+	return $f;
+} } // sql_showtable
+
+
 ?>

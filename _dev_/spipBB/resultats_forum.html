@@ -1,3 +1,4 @@
+[(#REM) Plugin SpipBB - Licence GPL]
 <!--éliminer les forums des rubriques et articles appartenant aux autres
 secteurs-->
 <BOUCLE_contexte(RUBRIQUES){id_rubrique}>
@@ -56,7 +57,7 @@ secteurs-->
 					</tr>
 					</thead>
 					<!-- BEGIN searchresults -->
-#SET{id_mot_ferme,#CONFIG{spipbb/spipbb_id_mot_ferme}}
+#SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
 			<BOUCLE_art(FORUMS){recherche}{id_article}{par points}{inverse}>
 				<BOUCLE_thread(FORUMS){id_thread}>
 					#SET{id_sujet,#ID_FORUM|texte_script}

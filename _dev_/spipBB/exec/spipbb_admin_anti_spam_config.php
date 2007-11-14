@@ -26,7 +26,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spipbb');
 
-if( !empty($setmodules) )
+if ( !empty($setmodules) and spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui')
 {
 	$file = basename(__FILE__);
 	$modules['spam']['swconfig'] = $file;
@@ -39,43 +39,12 @@ if( !empty($setmodules) )
 // [fr] Affiche la page complete spip privee avec le formulaire
 // [en] Provides the full spip private space form
 // ------------------------------------------------------------------------------
-function exec_spipbb_admin_anti_spam_config() {
-	global $connect_statut;
-	// [fr] Pour le moment l acces est reserve a l administrateur, a voir plus tard
-	// [fr] pour tester plutot en fonction rubrique de l import comme pour les articles...
-	// [en] For now the access is only allowed to the admin, will check it later
-	// [en] in order to check it for each rubrique like for the articles...
-	$id_rubrique=intval(_request('id_rubrique'));
-
-	// [fr] recuperer les donnees du secteur
-	// [en] load the sector datas
-	$row_rub = sql_fetsel("id_secteur","spip_rubriques","id_rubrique=$id_rubrique");
-	$id_secteur= $row_rub['id_secteur'];
-
-	if ($connect_statut != '0minirezo' or !autoriser('creerarticledans','rubrique',$id_secteur) ) {
-		include_spip('inc/minipres');
-		echo minipres("<strong>"._T('avis_non_acces_page')."</strong>");
+function exec_spipbb_admin_anti_spam_config()
+{
+	if (!spipbb_is_configured() or $GLOBALS['spipbb']['configure']!='oui') {
+		include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire('spipbb_admin_configuration', ''));
 		exit;
-	}
-
-	if (_request('save')=="oui") {
-		if (!autoriser('configurer', 'plugins')) {
-			include_spip('inc/minipres');
-			echo minipres("<strong>"._T('avis_non_acces_page')."</strong>");
-			exit;
-		}
-		$GLOBALS['spipbb']['disable_sw'] = _request('disable_sw');
-		$GLOBALS['spipbb']['sw_nb_spam_ban'] = _request('sw_nb_spam_ban');
-		$GLOBALS['spipbb']['sw_ban_ip'] = _request('sw_ban_ip');
-		$GLOBALS['spipbb']['sw_admin_can_spam'] = _request('sw_admin_can_spam');
-		$GLOBALS['spipbb']['sw_modo_can_spam'] = _request('sw_modo_can_spam');
-		$GLOBALS['spipbb']['sw_send_pm_warning'] = _request('sw_send_pm_warning');
-		$GLOBALS['spipbb']['sw_warning_from_admin'] = _request('sw_warning_from_admin');
-		$GLOBALS['spipbb']['sw_warning_pm_titre'] = _request('sw_warning_pm_titre');
-		$GLOBALS['spipbb']['sw_warning_pm_message'] = _request('sw_warning_pm_message');
-		spipbb_save_metas();
-		//include_spip('inc/headers');
-		//redirige_par_entete(generer_url_ecrire('spipbb_admin_spam_words_config', 'id_rubrique='.$id_rubrique));
 	}
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -91,7 +60,7 @@ function exec_spipbb_admin_anti_spam_config() {
 	echo debut_boite_info(true);
 	echo  _T('spipbb:sw_spam_titre');
 	echo fin_boite_info(true);
-	echo spipbb_admin_gauche($GLOBALS['spipbb']['spipbb_id_rubrique'],'spipbb_admin_spam_words_config');
+	echo spipbb_admin_gauche('spipbb_admin_anti_spam_config');
 
 	echo creer_colonne_droite($id_rubrique,true);
 	echo debut_droite($id_rubrique,true);
@@ -109,9 +78,12 @@ function spipbb_anti_spam_formulaire($id_rubrique) {
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
 
 	$contexte = array(
-			'lien_action' => generer_url_ecrire('spipbb_admin_anti_spam_config', 'save=oui&id_rubrique='.$id_rubrique), // generer_url_action ?
-			'exec_script' => 'spipbb_admin_spam_words_config',
-			'disable_sw' => $GLOBALS['spipbb']['disable_sw'],
+//			'lien_action' => generer_url_ecrire('spipbb_admin_anti_spam_config', 'save=oui&id_rubrique='.$id_rubrique), // generer_url_action ?
+//			'exec_script' => 'spipbb_admin_spam_words_config',
+			'lien_action' => generer_action_auteur('spipbb_admin_reconfig', 'save',generer_url_ecrire('spipbb_admin_anti_spam_config')),
+			'exec_script' => 'spipbb_admin_reconfig',
+
+			'config_spam_words' => $GLOBALS['spipbb']['config_spam_words'],
 			'sw_nb_spam_ban' => $GLOBALS['spipbb']['sw_nb_spam_ban'],
 			'sw_ban_ip' => $GLOBALS['spipbb']['sw_ban_ip'],
 			'sw_admin_can_spam' => $GLOBALS['spipbb']['sw_admin_can_spam'],

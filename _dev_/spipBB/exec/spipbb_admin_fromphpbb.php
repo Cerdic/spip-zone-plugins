@@ -30,7 +30,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/spipbb');
 include_spip('inc/editer_article');
 
-if( !empty($setmodules) )
+if ( !empty($setmodules) and spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui' )
 {
 	$file = basename(__FILE__);
 	$modules['outils']['fromphpbb'] = $file;

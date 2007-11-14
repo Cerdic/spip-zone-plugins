@@ -32,17 +32,14 @@ include_spip('inc/spipbb');
 // ------------------------------------------------------------------------------
 function action_spipbb_spam_word()
 {
-	global $spip_lang_left, $spipbb_fromphpbb, $dir_lang;
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
 	list($id_spam_word, $statut) = preg_split('/\W/', $arg);
 
 	$id_spam_word = intval($id_spam_word);
-	$id_rubrique = intval(_request('id_rubrique'));
 
 	$redirige = urldecode(_request('redirect'));
-	if (!empty($id_rubrique)) $redirige = parametre_url($redirige, 'id_rubrique', $id_rubrique, '&') ;
 
 	switch ($statut) {
 	case 'del' :

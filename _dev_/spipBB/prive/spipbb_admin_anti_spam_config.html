@@ -8,20 +8,34 @@
 [(#ENV{url_post}|form_hidden)]
 
 [(#REM|debut_cadre_trait_couleur{1,'xxx','SpipBB Anti Spam'})]
+
+[(#REM) ------------------------ ACTIVATION DE SPAM WORD ------------------------ ]
+<fieldset>
+<legend><:spipbb:admin_config_spam_words:></legend>
+<p>
+<label>
+	<table cellpadding='3' cellspacing='1' border='0' width='100%'>
+	<tr>
+		<td class='verdana2'><:spipbb:sw_disable_sw_titre:></td>
+		<td>
+		<input type='radio' name='config_spam_words' value='oui' id='config_spam_words_1' [ checked="(#ENV{config_spam_words}|=={'oui'}|?{checked})"] /> <label for='config_spam_words_1'><:oui:></label>
+		&nbsp;
+		<input type='radio' name='config_spam_words' value='non' id='config_spam_words_0' [ checked="(#ENV{config_spam_words}|=={'non'}|?{checked})"] /> <label for='config_spam_words_0'><:non:></label>
+		</td>
+	</tr>
+	</table>
+</label>
+</p>
+</fieldset>
+
+<?php if ( "#ENV{config_spam_words}"=="oui" ) { ?>
+
 [(#REM) ------------------------ Configuration generale ------------------------ ]
 
 <fieldset>
 <legend><:spipbb:sw_config_generale_titre:></legend>
 <div><table border='0' cellspacing='1' cellpadding='3' width="100%">
 <tr><td colspan='2' class='verdana2'><:spipbb:sw_config_generale:></td></tr>
-<tr>
-	<td align='left' class='verdana2'><:spipbb:sw_disable_sw_titre:></td>
-	<td>
-		<input type='radio' name='disable_sw' value='oui' id='disable_sw_1' [ checked="(#ENV{disable_sw}|=={'oui'}|?{checked})"] /> <label for='disable_sw_1'><:oui:></label>
-		&nbsp;
-		<input type='radio' name='disable_sw' value='non' id='disable_sw_0' [ checked="(#ENV{disable_sw}|=={'non'}|?{checked})"] /> <label for='disable_sw_0'><:non:></label>
-	</td>
-</tr>
 <tr>
 	<td align='left' class='verdana2'><:spipbb:sw_nb_spam_ban_titre:></td>
 	<td>
@@ -98,13 +112,13 @@
 </p>
 </fieldset>
 
+<?php //fin spam word active == oui
+} ?>
+
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
 <div>
 <input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:OK:>" class="fondo" />
-<!--
-<input type="reset" value="<:Reset:>" />
-<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
--->
+
 </div>
 
 [(#REM|sinon{1}|fin_cadre_trait_couleur)]

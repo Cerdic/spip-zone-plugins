@@ -1,7 +1,7 @@
 <?php
 #---------------------------------------------------------------#
 #  Plugin  : spipbb - Licence : GPL                             #
-#  File    : exec/spipbb_admin - base admin menu                #
+#  File    : exec/spipbb_admin_etat - base admin menu           #
 #  Authors : Chryjs, 2007                                       #
 #  Contact : chryjs!@!free!.!fr                                 #
 # [en] admin menus                                              #
@@ -23,23 +23,25 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if( !empty($setmodules) )
+if ( !empty($setmodules) and spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui')
 {
 	$file = basename(__FILE__);
-	$modules['01_general']['01_index'] = $file;
+	$modules['01_general']['02_etat'] = $file;
 	return;
 }
 
 include_spip("inc/spipbb"); // spipbb_admin_gauche + divers
 
 // ------------------------------------------------------------------------------
-function exec_spipbb_admin()
+function exec_spipbb_admin_etat()
 {
 	global $connect_statut, $connect_toutes_rubriques;
 
-	// [fr] initialisations
-	// [en] initialize
-	if (!isset($GLOBALS['spipbb'])) spipbb_init_metas() ;
+	if (!spipbb_is_configured() or ($GLOBALS['spipbb']['configure']!='oui')) {
+		include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire('spipbb_admin_configuration', ''));
+		exit;
+	}
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('spipbb:titre_spipbb'), "configuration", 'spipbb');
@@ -54,14 +56,14 @@ function exec_spipbb_admin()
 	echo debut_boite_info(true);
 	echo  _T('spipbb:titre_spipbb');
 	echo fin_boite_info(true);
-	echo spipbb_admin_gauche($GLOBALS['spipbb']['spipbb_id_rubrique'],'spipbb_admin');
+	echo spipbb_admin_gauche('spipbb_admin_etat');
 	echo creer_colonne_droite('', true);
 	echo debut_droite('',true);
 
 	echo spipbb_recap_config();
 
 	echo fin_gauche(), fin_page();
-} // exec_spipbb_admin
+} // exec_spipbb_admin_etat
 
 // ------------------------------------------------------------------------------
 // [fr] Affiche les statistiques generales du forum SpipBB
@@ -88,6 +90,15 @@ function spipbb_recap_config()
 		$users_per_day = $total_users;
 	}
 
+	include_spip('inc/filtres.php');
+	$version=$GLOBALS['spipbb']['version'];
+	if ($svn_revision = version_svn_courante(_DIR_PLUGIN_SPIPBB)) {
+		$version .= ' ' . (($svn_revision < 0) ? 'SVN ':'')
+		. "[<a href='http://zone.spip.org/trac/spip-zone/changeset/"
+		. abs($svn_revision) . "' onclick=\"window.open(this.href); return false;\">"
+		. abs($svn_revision) . "</a>]";
+	}
+
 	// Qui est en ligne
 
 	$r = sql_fetsel("count(*) AS total",'spip_auteurs', 'en_ligne>= DATE_SUB(NOW(), INTERVAL 5 MINUTE )');
@@ -106,9 +117,9 @@ function spipbb_recap_config()
 				'start_date' => normaliser_date($start_date),
 				'forum_age' => $forum_age,
 				'total_online' => $total_online,
-				'spipbb_version' => $GLOBALS['spipbb']['version']
+				'spipbb_version' => $version
 			);
-	$res = recuperer_fond("prive/spipbb_admin_index",$contexte) ;
+	$res = recuperer_fond("prive/spipbb_admin_etat",$contexte) ;
 
 	return $res;
 } // spipbb_recap_config

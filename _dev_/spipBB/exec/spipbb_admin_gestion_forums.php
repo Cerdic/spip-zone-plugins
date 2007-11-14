@@ -1,7 +1,7 @@
 <?php
 #---------------------------------------------------------------#
 #  Plugin  : spipbb - Licence : GPL                             #
-#  File    : exec/spipbb_admin - base admin menu                #
+#  File    : exec/spipbb_admin_gestion_forums - base admin menu #
 #  Authors : Chryjs, 2007 et als                                #
 #  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
 #  Contact : chryjs!@!free!.!fr                                 #
@@ -27,7 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/spipbb');
 include_spip('inc/editer_article');
 
-if( !empty($setmodules) )
+if ( !empty($setmodules) and spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui' )
 {
 	$file = basename(__FILE__);
 	$modules['01_general']['gestion'] = $file;
@@ -37,23 +37,16 @@ if( !empty($setmodules) )
 // ------------------------------------------------------------------------------
 // [fr] Genere la page de gestion globale des forums
 // ------------------------------------------------------------------------------
-function exec_spipbb_admin_forums()
+function exec_spipbb_admin_gestion_forums()
 {
-	global $connect_statut, $connect_toutes_rubriques;
-
-	$id_rubrique=intval(_request('id_rubrique'));
-
-	// [fr] recuperer les donnees du secteur
-	// [en] load the sector datas
-	$row_rub = sql_fetsel("id_secteur","spip_rubriques","id_rubrique=$id_rubrique");
-	$id_secteur= $row_rub['id_secteur'];
-
-	// [fr] initialisations
-	// [en] initialize
-	if (!isset($GLOBALS['spipbb'])) spipbb_init_metas() ;
+	if (!spipbb_is_configured() or ($GLOBALS['spipbb']['configure']!='oui')) {
+		include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire('spipbb_admin_configuration', ''));
+		exit;
+	}
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('spipbb:titre_spipbb'), "configuration", 'spipbb_admin_forums');
+	echo $commencer_page(_T('spipbb:titre_spipbb'), "configuration", 'spipbb_admin_gestion_forums');
 
 	echo gros_titre(_T('spipbb:titre_spipbb'),'',false) ;
 
@@ -65,10 +58,10 @@ function exec_spipbb_admin_forums()
 	echo debut_boite_info(true);
 	echo  _T('spipbb:admin_forums_titre');
 	echo fin_boite_info(true);
-	echo spipbb_admin_gauche($GLOBALS['spipbb']['spipbb_id_rubrique'],'spipbb_admin_forums');
+	echo spipbb_admin_gauche('spipbb_admin_gestion_forums');
 
-	echo creer_colonne_droite($id_rubrique,true);
-	echo debut_droite($id_rubrique,true);
+	echo creer_colonne_droite('',true);
+	echo debut_droite('',true);
 
 	spipbb_renumerote();
 	echo spipbb_admin_forums($row);
@@ -84,9 +77,9 @@ function spipbb_admin_forums()
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
 
 	$contexte = array( 
-			'id_rubrique'=>$GLOBALS['spipbb']['spipbb_id_rubrique'],
+			'id_secteur'=>$GLOBALS['spipbb']['id_secteur'],
 			);
-	$res = recuperer_fond("prive/spipbb_admin_forums",$contexte) ;
+	$res = recuperer_fond("prive/spipbb_admin_gestion_forums",$contexte) ;
 
 	return $res;
 } // spipbb_admin_forums

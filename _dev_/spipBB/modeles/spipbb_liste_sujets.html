@@ -1,7 +1,8 @@
 #CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
 <BOUCLE_forum_principal(ARTICLES){id_article}>
 [(#REM) On recupere le mot cle ferme]
-#SET{id_mot_ferme,#CONFIG{spipbb/spipbb_id_mot_ferme}}
+#SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
 
 [(#REM) on regarde si l'article/forum est ferme ]
 #SET{forumferme,0}
@@ -29,7 +30,7 @@
 	#GET{titreferme}
 
 [(#REM) Les annonces en premier]
-<BOUCLE_messages_annonce(FORUMS){id_article}{!par date_thread}{id_mot=#CONFIG{spipbb/spipbb_id_mot_annonce}}{doublons annonces}>
+<BOUCLE_messages_annonce(FORUMS){id_article}{!par date_thread}{id_mot=#CONFIG{spipbb/id_mot_annonce}}{doublons annonces}>
 	<!-- C est forcement un pied de discussion -->
 	#SET{id_forum_annonce,#ID_FORUM}
 	<!-- BEGIN topicrow_a -->
@@ -74,7 +75,7 @@
 	</tr>
 	<!-- END topicrow_a -->
 </BOUCLE_messages_annonce>
-<BOUCLE_messages_postit(FORUMS){id_article}{!par date_thread}{id_mot=#CONFIG{spipbb/spipbb_id_mot_postit}}{doublons annonces}>
+<BOUCLE_messages_postit(FORUMS){id_article}{!par date_thread}{id_mot=#CONFIG{spipbb/id_mot_postit}}{doublons annonces}>
 	<!-- C est forcement un pied de discussion -->
 	#SET{id_forum_postit,#ID_FORUM}
 	<!-- BEGIN topicrow_p -->
@@ -124,7 +125,7 @@
 	#SET{id_forum,#ID_FORUM}
 
 	<BOUCLE_reponsesalt(FORUMS){id_thread}{plat}> 
-		<BOUCLE_reponse_fermealt(FORUMS){id_forum}{id_mot=#CONFIG{spipbb/spipbb_id_mot_ferme}}>
+		<BOUCLE_reponse_fermealt(FORUMS){id_forum}{id_mot=#CONFIG{spipbb/id_mot_ferme}}>
 			#SET{thread_clos,#ID_FORUM}
 		</BOUCLE_reponse_fermealt>
 	</BOUCLE_reponsesalt>

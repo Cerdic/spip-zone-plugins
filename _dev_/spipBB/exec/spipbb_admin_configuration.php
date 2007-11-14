@@ -28,7 +28,7 @@ include_spip('inc/spipbb');
 if( !empty($setmodules) )
 {
 	$file = basename(__FILE__);
-	$modules['01_general']['configuration'] = $file;
+	$modules['01_general']['01_configuration'] = $file;
 	return;
 }
 
@@ -37,29 +37,21 @@ if( !empty($setmodules) )
 // ------------------------------------------------------------------------------
 function exec_spipbb_admin_configuration()
 {
-	global $connect_statut, $connect_toutes_rubriques;
+	// est-ce qu'un redacteur peut voir ca ??
 
-	// [fr] initialisations
-	// [en] initialize
-	$id_rubrique=intval(_request('id_rubrique'));
-
-	// [fr] recuperer les donnees du secteur
-	// [en] load the sector datas
-	$row_rub = sql_fetsel("id_secteur","spip_rubriques","id_rubrique=$id_rubrique");
-	$id_secteur= $row_rub['id_secteur'];
-
-	if (_request('save')=="oui") {
-		if (!autoriser('configurer', 'plugins')) {
-			include_spip('inc/minipres');
-			echo minipres("Erreur pas autorise");
-			exit;
-		}
+	// [fr] On verifie a quelle etape de la configuration on est
+	// [en] We check which config stage it is
+	if (!spipbb_is_configured()) spipbb_upgrade_all();
+	if (!spipbb_check_tables()) {
+		// creer un upgrade_tables pour faire tout cela
+		include_spip('base/spipbb'); // inclure nouveau schema
+		include_spip('base/create');
+		include_spip('base/abstract_sql');
+		creer_base();
+		$GLOBALS['spipbb']['config_tables']='oui';
 		spipbb_save_metas();
-		include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire('spipbb_admin_configuration', ''));
-	} else {
-
-	if (!isset($GLOBALS['spipbb'])) spipbb_init_metas() ;
+		spip_log('spipbb : exec_spipbb_admin_configuration tables OK');
+	}
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('spipbb:titre_spipbb'), "configuration", 'spipbb_admin_configuration');
@@ -74,7 +66,7 @@ function exec_spipbb_admin_configuration()
 	echo debut_boite_info(true);
 	echo  _T('spipbb:admin_forums_configuration');
 	echo fin_boite_info(true);
-	echo spipbb_admin_gauche($GLOBALS['spipbb']['spipbb_id_rubrique'],'spipbb_admin_configuration');
+	echo spipbb_admin_gauche('spipbb_admin_configuration');
 
 	echo creer_colonne_droite($id_rubrique,true);
 	echo debut_droite($id_rubrique,true);
@@ -83,7 +75,6 @@ function exec_spipbb_admin_configuration()
 
 	echo fin_gauche(), fin_page();
 
-	} // not save
 } // exec_spipbb_admin_configuration
 
 // ------------------------------------------------------------------------------
@@ -91,22 +82,42 @@ function exec_spipbb_admin_configuration()
 // ------------------------------------------------------------------------------
 function spipbb_admin_configuration()
 {
-	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
+	if (!function_exists('recuperer_fond')) include_spip('public/assembler'); // voir un charger fonction
+	$etat_tables = spipbb_check_tables() ? 'oui' : 'non' ;
+	// rajouter tests sur prerequis plugins config spip -motcles forums-
+	$etat_spip = spipbb_check_spip_config();
 
-	$contexte = array( 'spipbb_id_rubrique'=>$GLOBALS['spipbb']['spipbb_id_rubrique'],
-			'lien_action' => generer_url_ecrire('spipbb_admin_configuration', 'save=oui'), // generer_url_action ?
-			'exec_script' => 'spipbb_admin_configuration',
-			'spipbb_id_groupe_mot' => $GLOBALS['spipbb']['spipbb_id_groupe_mot'],
-			'spipbb_id_mot_ferme' => $GLOBALS['spipbb']['spipbb_id_mot_ferme'],
-			'spipbb_id_mot_annonce' => $GLOBALS['spipbb']['spipbb_id_mot_annonce'],
-			'spipbb_id_mot_postit' => $GLOBALS['spipbb']['spipbb_id_mot_postit'],
-			'spipbb_squelette_groupeforum' => $GLOBALS['spipbb']['spipbb_squelette_groupeforum'],
-			'spipbb_squelette_filforum' => $GLOBALS['spipbb']['spipbb_squelette_filforum'],
-
+	$contexte = array( 
+			'lien_action' => generer_action_auteur('spipbb_admin_reconfig', 'save',generer_url_ecrire('spipbb_admin_configuration')), // generer_url_action ?
+			'exec_script' => 'spipbb_admin_reconfig',
+			'etat_tables' => $etat_tables ,
+			'etat_spip' => $etat_spip ,
+			'config_spipbb' => $GLOBALS['spipbb']['configure'],
+			'spipbb_id_secteur' => $GLOBALS['spipbb']['id_secteur'] ,
+			'id_groupe_mot' => $GLOBALS['spipbb']['id_groupe_mot'] ,
+			'id_mot_ferme' => $GLOBALS['spipbb']['id_mot_ferme'],
+			'id_mot_annonce' => $GLOBALS['spipbb']['id_mot_annonce'],
+			'id_mot_postit' => $GLOBALS['spipbb']['id_mot_postit'],
+			'squelette_groupeforum' => $GLOBALS['spipbb']['squelette_groupeforum'],
+			'squelette_filforum' => $GLOBALS['spipbb']['squelette_filforum'],
 			);
 	$res = recuperer_fond("prive/spipbb_admin_configuration",$contexte) ;
 
 	return $res;
 } // spipbb_admin_configuration
+
+// ------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+function spipbb_check_spip_config() {
+	// utiliser mot cles
+
+	// mots_cles_forums articles_mots + mots_cles_forums
+	if ( $GLOBALS['meta']['articles_mots']=='oui' ) $resultat=_T('spipbb:admin_spip_mots_cles_ok');
+	else $resultat=_T('spipbb:admin_spip_mots_cles_erreur');
+	$resultat.="<br />";
+	if ( $GLOBALS['meta']['mots_cles_forums']=='oui' ) $resultat.=_T('spipbb:admin_spip_mots_forums_ok');
+	else $resultat.=_T('spipbb:admin_spip_mots_forums_erreur');
+	return $resultat;
+}
 
 ?>

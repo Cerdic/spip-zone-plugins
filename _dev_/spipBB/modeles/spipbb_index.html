@@ -1,4 +1,5 @@
 #CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
 <BOUCLE_rubrique_parcourue(RUBRIQUES){id_rubrique}>
 <BOUCLE_rubrique_principale(RUBRIQUES){id_secteur}{racine}>
 	<B_categories>
@@ -17,7 +18,7 @@
 		<tr class="salon">
 			<td colspan="5" class="salontitre">[<h2><a href="#URL_RUBRIQUE">(#TITRE)</a></h2>][<p>(#INTRODUCTION)</p>]</td>
 		</tr>
-	#SET{id_mot_ferme,#CONFIG{spipbb/spipbb_id_mot_ferme}}
+	#SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
 	<BOUCLE_forums(ARTICLES){id_rubrique}{par num titre}>
 		#SET{forumferme,0}
 		<BOUCLE_etat(ARTICLES){id_article}{id_mot=#GET{id_mot_ferme}}>

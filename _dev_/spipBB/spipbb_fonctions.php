@@ -1,10 +1,29 @@
 <?php
+#----------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                        #
+#  File    : spipbb_fonctions - fonctions communes         #
+#  Authors : Chryjs, 2007 et als                           #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  Contact : chryjs!@!free!.!fr                            #
+#----------------------------------------------------------#
+
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 // fonction de répartition de la variable date "brute" renvoyée par #MAJ (aaaa-mm-jj hh:mm:ss)
 // en jj-mm-aaaa
 // NB 31/08/2006 17:28:58
 
-//if (!function_exists('spip_num_rows')) include_spip('inc/vieilles_defs');
 if (!function_exists('sql_query')) include_spip('inc/spipbb_192');
 
 function date_maj($maj_brute)
@@ -210,7 +229,7 @@ function spipbb_afficher_signature($id_auteur, $classe='')
 function spipbb_afficher_mots_clefs($texte) {
 	if (($GLOBALS['auteur_session']['statut']=='0minirezo') OR ($GLOBALS['auteur_session']['statut']=='1comite'))
 	{
-		$GLOBALS['afficher_groupe'][]=$GLOBALS['spipbb']['spipbb_id_groupe'];
+		$GLOBALS['afficher_groupe'][]=$GLOBALS['spipbb']['id_groupe_mot'];
 	}
 	else {
 		$GLOBALS['afficher_groupe'][]=0;
@@ -221,7 +240,7 @@ function spipbb_afficher_mots_clefs($texte) {
 function spipbb_pas_afficher_mots_clefs($texte) {
 	if (($GLOBALS['auteur_session']['statut']=='0minirezo'))
 	{
-		$GLOBALS['afficher_groupe'][]=$GLOBALS['spipbb']['spipbb_id_groupe'];
+		$GLOBALS['afficher_groupe'][]=$GLOBALS['spipbb']['id_groupe_mot'];
 	}
 	else {
 		$GLOBALS['afficher_groupe'][]=0;

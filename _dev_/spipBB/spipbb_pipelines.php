@@ -25,7 +25,7 @@ function spipbb_ajouter_boutons($boutons_admin) {
 	// si on est admin ou admin restreint
 	if ($GLOBALS['connect_statut'] == "0minirezo") {
 		// on voit le bouton dans la barre "statistiques"
-		$boutons_admin['forum']->sousmenu["spipbb_admin"]= new Bouton(
+		$boutons_admin['forum']->sousmenu["spipbb_admin_configuration"]= new Bouton(
 		"../"._DIR_PLUGIN_SPIPBB."/img_pack/spipbb-24.png",  // icone
 		_T('spipbb:admin_titre')	// titre
 		);
@@ -41,20 +41,16 @@ function spipbb_affiche_droite($flux)
 {
 	// [fr] Peut etre ajouter un controle d acces
 	// [en] Todo : maybe add access control
-	include_spip('inc/spipbb'); // Compatibilite 192
-	if ( !isset($GLOBALS['meta']['spipbb']) or !is_array($GLOBALS['meta']['spipbb']) ) {
-		spipbb_upgrade_all();
-	}
 
-	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']); // facilite la lecture
-
-	if ( ($flux['args']['exec']=='naviguer') AND (!empty($spipbb_meta)) AND
-	    (!empty($flux['args']['id_rubrique'])) )
-	{
+	if ( ($flux['args']['exec']=='naviguer') AND (!empty($flux['args']['id_rubrique'])) )
+	{ // AND (!empty($GLOBALS['meta']['spipbb']))
+		include_spip('inc/spipbb'); // Compatibilite 192
 		$r = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=".$flux['args']['id_rubrique']);
-		if (empty($spipbb_meta['spipbb_id_rubrique']) ) {
+		if ( !spipbb_is_configured()
+			OR ($GLOBALS['spipbb']['configure']!='oui') 
+			OR (empty($GLOBALS['meta']['spipbb']['id_secteur'])) ) {
 		// [fr] configuration pas terminee -> lien vers la config
-			$url_lien = generer_url_ecrire('spipbb_admin_configuration', "") ;
+			$url_lien = generer_url_ecrire('spipbb_admin_configuration',"") ;
 			$flux['data'] .= debut_cadre_relief('',true);
 			$flux['data'] .= "<div style='font-size: x-small' class='verdana1'><b>" ;
 			$flux['data'] .= _T('spipbb:admin_titre') . " :</b>\n";
@@ -65,9 +61,9 @@ function spipbb_affiche_droite($flux)
 			$flux['data'] .= "<td class='cellule-h-lien'><a href='$url_lien' class='cellule-h'>" ;
 			$flux['data'] .= _T('spipbb:config_spipbb') . "</a></td></tr></table>\n</div>\n" ;
 			$flux['data'] .= fin_cadre_relief(true);
-		} else if (is_array($r) AND $r['id_secteur']==$spipbb_meta['spipbb_id_rubrique']) {
+		} elseif (is_array($r) AND ($r['id_secteur']!=$GLOBALS['meta']['spipbb']['id_secteur'])) {
 		// [fr] configuration Ok et on est dans la rubrique forum
-			$url_lien = generer_url_ecrire('spipbb_admin', "id_rubrique=".$flux['args']['id_rubrique']) ;
+			$url_lien = generer_url_ecrire('spipbb_admin_configuration',"") ;
 			$flux['data'] .= debut_cadre_relief('',true);
 			$flux['data'] .= "<div style='font-size: x-small' class='verdana1'><b>" . _T('spipbb:admin_titre') . " :</b>\n";
 			$flux['data'] .= "<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>\n" ;

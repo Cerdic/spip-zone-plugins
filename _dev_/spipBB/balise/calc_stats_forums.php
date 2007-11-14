@@ -1,10 +1,11 @@
 <?php
-#-----------------------------------------------------------#
-#  Plugin  : spipbb - Licence : GPL                         #
-#  File    : calc_stats_forums - balise #CALC_STATS_FORUMS  #
-#  Authors : Chryjs, 2007 +                                 #
-#  Contact : chryjs¡@!free¡.!fr                             #
-#-----------------------------------------------------------#
+#-----------------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                               #
+#  File    : balise/calc_stats_forums - balise #CALC_STATS_FORUMS #
+#  Authors : Chryjs, 2007 +                                       #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs        #
+#  Contact : chryjs¡@!free¡.!fr                                   #
+#-----------------------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -23,6 +24,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/spipbb'); // Compatibilite 192
+
 function balise_CALC_STATS_FORUMS($p)
 {
 	return calculer_balise_dynamique($p,'CALC_STATS_FORUMS', array());
@@ -36,8 +39,7 @@ function balise_CALC_STATS_FORUMS_stat($args, $filtres)
 function balise_CALC_STATS_FORUMS_dyn($id_forum)
 {
 	if (empty($id_forum)) return '';
-	$r = sql_query("SELECT visites FROM spip_visites_forums WHERE id_forum=$id_forum");
-	$row = sql_fetch($r);
+	$row = sql_fetsel('visites','spip_visites_forums',"id_forum=$id_forum");
 
 	if (is_array($row) and (!empty($row['visites'])) ) {
 		$r = sql_updateq( "spip_visites_forums", array(

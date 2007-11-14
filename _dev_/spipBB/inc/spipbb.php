@@ -1,10 +1,11 @@
 <?php
-#--------------------------------------------------------#
-#  Plugin  : spipbb - Licence : GPL                      #
-#  File    : inc/spipbb - donnees et fonctions du plugin #
-#  Authors : Chryjs, 2007 et als                         #
-#  Contact : chryjs!@!free!.!fr                          #
-#--------------------------------------------------------#
+#----------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                        #
+#  File    : inc/spipbb - donnees et fonctions du plugin   #
+#  Authors : Chryjs, 2007 et als                           #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  Contact : chryjs!@!free!.!fr                            #
+#----------------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -26,15 +27,31 @@ if (!function_exists('plugin_get_infos')) include_spip('inc/plugin');
 
 $infos=plugin_get_infos(_DIR_PLUGIN_SPIPBB);
 $GLOBALS['spipbb_version'] = $infos['version'];
-$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
+/*$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']); a faire plus tard */
 
 if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
 	include_spip('inc/spipbb_192'); // SPIP 1.9.2
 }
-// else if (!function_exists('spip_insert_id')) include_spip('inc/vieilles_defs');
 
+//----------------------------------------------------------------------------
+// [fr] Verifie que spipbb est bien configure et a jour
+// [en] Checks that spipbb is configured and uptodate
+//----------------------------------------------------------------------------
+function spipbb_is_configured() {
+//print_r($GLOBALS['meta']['spipbb']);
+	if ( !isset($GLOBALS['meta']['spipbb']) ) return false;
+	$local_spipbb = @unserialize($GLOBALS['meta']['spipbb']);
+	if ( empty($local_spipbb['version']) ) return false;
+	if ( empty($local_spipbb['configure']) ) return false;
+	if ( version_compare(substr($local_spipbb['version'],0,5),$GLOBALS['spipbb_version'],'<') ) return false;
+	$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
+	return true;
+} // spipbb_is_configured
+
+//----------------------------------------------------------------------------
 // [fr] Met a jour la version et initialise les metas
 // [en] Upgrade release and init metas
+//----------------------------------------------------------------------------
 function spipbb_upgrade_all()
 {
 	$version_code = $GLOBALS['spipbb_version'] ;
@@ -72,12 +89,14 @@ function spipbb_upgrade_all()
 // [fr] Initialisation des valeurs de meta du plugin aux defauts
 // [en] Init plugin meta to default values
 //----------------------------------------------------------------------------
-function spipbb_init_metas($id_rubrique=0)
+function spipbb_init_metas()
 {
 	spipbb_delete_metas(); // [fr] Nettoyage des traces [en] remove old metas
 	unset($spipbb_meta);
 	$spipbb_meta=array();
+	$spipbb_meta['configure'] = 'non';
 	$spipbb_meta['version']= $GLOBALS['spipbb_version'];
+/*
 	$id_rubrique=intval($id_rubrique);
 	if (empty($id_rubrique)) {
 		$row = sql_fetsel('id_rubrique','spip_rubriques',
@@ -89,11 +108,17 @@ function spipbb_init_metas($id_rubrique=0)
 		$spipbb_meta['spipbb_id_rubrique']=  $row['id_rubrique'];
 	}
 	else $spipbb_meta['spipbb_id_rubrique']= $id_rubrique;
+*/
+	$spipbb_meta['id_secteur'] = 0;
+	$spipbb_meta['config_id_secteur'] = 'non';
 
-	$spipbb_meta['spipbb_squelette_groupeforum']= "groupeforum";
-	$spipbb_meta['spipbb_squelette_filforum']= "filforum";
+	$spipbb_meta['squelette_groupeforum']= "groupeforum";
+	$spipbb_meta['squelette_filforum']= "filforum";
+	if ( find_in_path("groupeforum.html") AND find_in_path("filforum.html") )
+		$spipbb_meta['config_squelette'] = 'oui';
 
 	// les mots cles specifiques
+/*
 	$row = sql_fetsel('id_groupe','spip_groupes_mots', "titre = 'spipbb'" ,'','','1');
 	$spipbb_meta['spipbb_id_groupe_mot']=intval($row['id_groupe']);
 
@@ -132,15 +157,22 @@ function spipbb_init_metas($id_rubrique=0)
 			$spipbb_meta['spipbb_id_mot_postit'] = spipbb_init_mot_cle("postit",$spipbb_meta['spipbb_id_groupe_mot']);
 
 	} // if empty spipbb_meta
+*/
+	$spipbb_meta['id_groupe_mot'] = 0;
+	$spipbb_meta['config_groupe_mots'] = 'non';
+	$spipbb_meta['id_mot_ferme'] = 0;
+	$spipbb_meta['id_mot_annonce'] = 0;
+	$spipbb_meta['id_mot_postit'] = 0;
+	$spipbb_meta['config_mot_cles'] = 'non';
 
 	// chemin icones et smileys ?
 
 	// spam words
-	$spipbb_meta['disable_sw'] = "non";
+	$spipbb_meta['config_spam_words'] = 'non';
 	$spipbb_meta['sw_nb_spam_ban'] = 3;
 	$spipbb_meta['sw_ban_ip'] = "non";
-	$spipbb_meta['sw_admin_can_spam'] = "oui";
-	$spipbb_meta['sw_modo_can_spam'] = "oui";
+	$spipbb_meta['sw_admin_can_spam'] = "non";
+	$spipbb_meta['sw_modo_can_spam'] = "non";
 	$spipbb_meta['sw_send_pm_warning'] = "non";
 	$spipbb_meta['sw_warning_from_admin'] = 1; // id_auteur
 	$spipbb_meta['sw_warning_pm_titre'] = _T('spipbb:sw_pm_spam_warning_titre');
@@ -174,28 +206,13 @@ function spipbb_delete_metas()
 } // spipbb_delete_metas
 
 //----------------------------------------------------------------------------
-// [fr] Supprimer les tables dans la base de d du plugin (desinstallation)
-// [en] Delete plugin database tables
-//----------------------------------------------------------------------------
-function spipbb_delete_tables()
-{
-	global $tables_spipbb;
-	include_spip('base/spipbb');
-	reset($tables_spipbb);
-	while ( list($key,$val) = each($tables_spipbb) )
-	{
-		$res=sql_query("DROP TABLE IF EXISTS $val ");
-	}
-} // spipbb_delete_tables
-
-//----------------------------------------------------------------------------
 // [fr] Met a jour les metas du plugin
 // [en] Upgrade plugin metas
 //----------------------------------------------------------------------------
 function spipbb_upgrade_metas()
 {
-	spipbb_init_metas($GLOBALS['spipbb']['spipbb_id_rubrique']);
-} // spipbb_delete_metas
+	spipbb_init_metas();
+} // spipbb_upgrade_metas
 
 //----------------------------------------------------------------------------
 // [fr] Initialisation des valeurs de meta du plugin aux defauts
@@ -203,6 +220,7 @@ function spipbb_upgrade_metas()
 //----------------------------------------------------------------------------
 function spipbb_save_metas()
 {
+/*
 	$spipbb_meta=$GLOBALS['spipbb'];
 
 	if ($id_rubrique = intval(_request('spipbb_id_rubrique')))
@@ -219,16 +237,57 @@ function spipbb_save_metas()
 		$spipbb_meta['spipbb_id_mot_annonce'] = $id_mot_annonce;
 	if ($id_mot_postit = intval(_request('spipbb_id_mot_postit')))
 		$spipbb_meta['spipbb_id_mot_postit'] = $id_mot_postit;
-
 	// final - sauver
 
+*/
+	$GLOBALS['spipbb']['config_id_secteur'] = empty($GLOBALS['spipbb']['id_secteur']) ? 'non' : 'oui';
+	$GLOBALS['spipbb']['config_groupe_mots'] = empty($GLOBALS['spipbb']['id_groupe_mot']) ? 'non' : 'oui';
+	$GLOBALS['spipbb']['config_mot_cles'] = ( empty($GLOBALS['spipbb']['id_mot_ferme']) or
+			empty($GLOBALS['spipbb']['id_mot_annonce']) or 
+			empty($GLOBALS['spipbb']['id_mot_postit']) ) ? 'non' : 'oui';
+	if ( find_in_path($GLOBALS['spipbb']['squelette_groupeforum']) AND 
+		find_in_path($GLOBALS['spipbb']['squelette_filforum']) )
+		$GLOBALS['spipbb']['config_squelette'] = 'oui';
+
 	include_spip('inc/meta');
-	ecrire_meta('spipbb', serialize($spipbb_meta));
+	ecrire_meta('spipbb', serialize($GLOBALS['spipbb']));
 	if (defined('_INC_SPIPBB_192')) ecrire_metas(); // Code 192
 	$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
 	spip_log('spipbb : save_metas OK');
 
 } // spipbb_save_metas
+
+//----------------------------------------------------------------------------
+// [fr] Supprimer les tables dans la base de d du plugin (desinstallation)
+// [en] Delete plugin database tables
+//----------------------------------------------------------------------------
+function spipbb_delete_tables()
+{
+	global $tables_spipbb;
+	include_spip('base/spipbb');
+	reset($tables_spipbb);
+	while ( list($key,$val) = each($tables_spipbb) )
+	{
+		$res=sql_query("DROP TABLE IF EXISTS $val ");
+	}
+} // spipbb_delete_tables
+
+//----------------------------------------------------------------------------
+// [fr] Verifier les tables dans la base de d du plugin (desinstallation)
+// [en] Check plugin database tables
+//----------------------------------------------------------------------------
+function spipbb_check_tables()
+{
+	global $tables_spipbb,$tables_principales;
+	include_spip('base/spipbb');
+	reset($tables_spipbb);
+	while ( list($key,$val) = each($tables_spipbb) )
+	{
+		$res = sql_showtable($val);
+		if ($res != $tables_principales[$val] ) return false ;
+	}
+	return true;
+} // spipbb_check_tables
 
 //----------------------------------------------------------------------------
 // [fr] Initialise le groupe de mot cles necessaire pour spipbb
@@ -271,11 +330,11 @@ function spipbb_init_mot_cle($mot,$groupe)
 // ------------------------------------------------------------------------------
 // [fr] Construit la liste des choix de l'admin spipbb en fonction de ce qui est
 // disponible
-// Pour etre affich� dans la liste, le fichier doit etre dans exec/
+// Pour etre affiche dans la liste, le fichier doit etre dans exec/
 // s'appeler spipbb_admin_XXXX
-// et contenir une fonction / un objet ? associ� ... element de tableau ?
+// et contenir un element de tableau $modules[__titre_categorie__][__element__]
 // ------------------------------------------------------------------------------
-function spipbb_admin_gauche($id_rubrique=0,$adm="")
+function spipbb_admin_gauche($rubrique_admin_courante="")
 {
 	$modules = array();
 
@@ -284,7 +343,7 @@ function spipbb_admin_gauche($id_rubrique=0,$adm="")
 	$setmodules = 1; // permet d'activer le lien lors de l'include
 	while( $file = @readdir($dir) )
 	{
-		if( preg_match("/^spipbb_admin.*?\.php$/", $file) )
+		if( preg_match("/^spipbb_admin_.*?\.php$/", $file) )
 		{
 			// chaque fichier inclu doit contenir ceci (par exemple) en entete :
 			//if( !empty($setmodules) )
@@ -300,60 +359,37 @@ function spipbb_admin_gauche($id_rubrique=0,$adm="")
 	unset($setmodules);
 
 	ksort($modules);
-	$res = "\n";
+	$affichage = "\n";
 	while( list($cat, $action_array) = each($modules) )
 	{
 		$cat = _T('spipbb:admin_cat_'.$cat); // on traduit le nom de chaque categorie
 
-		$res .= debut_boite_info(true). "<b>".$cat."</b>";
+		$affichage .= debut_boite_info(true). "<b>".$cat."</b>";
 		ksort($action_array);
 		while( list($action, $file) = each($action_array) )
 		{
 			$file = substr($file,0,-4); // supprimer l'extension
 			$action = _T('spipbb:admin_action_'.$action) ; // on traduit le nom de chaque action(exec)
-			if ( $adm <> $file ) {
-				$lien = generer_url_ecrire($file, "id_rubrique=".$id_rubrique) ;
-				$res .= "<a href='".$lien."' class='verdana2'>
+			if ( $rubrique_admin_courante <> $file ) {
+				$lien = generer_url_ecrire($file) ;
+				$affichage .= "<a href='".$lien."' class='verdana2'>
 					<div style='margin-top:2px;' class='bouton36blanc'
 					onMouseOver=\"changeclass(this,'bouton36gris')\"
 					onMouseOut=\"changeclass(this,'bouton36blanc')\">".$action.
 					"</div></a>\n";
 			}
-			else {
-				$res .= "<div style='margin-top:2px;' class='bouton36blanc'
+			else {	// pas de lien sur l'action en cours !
+				$affichage .= "<div style='margin-top:2px;' class='bouton36blanc'
 					onMouseOver=\"changeclass(this,'bouton36gris')\"
 					onMouseOut=\"changeclass(this,'bouton36blanc')\">".$action.
 					"</div>\n";
 			}
 		}
-		$res .= fin_boite_info(true)."\n";
+		$affichage .= fin_boite_info(true)."\n";
 	}
-	$res .= "\n";
+	$affichage .= "\n";
 
-	// -- liste des fonctions
-
-/*
-Permissions
-Delester
-Smilies /avatars
-Censure
-Administration des Groupes
-Gestion
-Permissions
-SPAM WORD Log
-Administration des Utilisateurs
-Controle du bannissement
-Interdire un nom d'utilisateur
-Flags
-Link Checker
-Gestion
-Mass Delete Users
-Permissions
-Rangs
-Supprimer les membres inactifs
-Utilisateurs inactifs
-*/
-	return $res;
+	return $affichage;
 }
 
 // ------------------------------------------------------------------------------

@@ -1,10 +1,11 @@
 <?php
-#-----------------------------------------------------#
-#  Plugin  : spipbb - Licence : GPL                   #
-#  File    : spipbb_upgrade - plugin init/test/del    #
-#  Authors : Chryjs, 2007 et als                      #
-#  Contact : chryjs¡@!free¡.!fr                       #
-#-----------------------------------------------------#
+#----------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                        #
+#  File    : spipbb_upgrade - plugin init/test/del         #
+#  Authors : Chryjs, 2007 et als                           #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  Contact : chryjs!@!free!.!fr                            #
+#----------------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -26,13 +27,11 @@ function spipbb_install($action)
 {
 	switch ($action)
 	{
-		case 'test' : // test pour savoir si les actions sont nécessaires + tester les bases
-			return ( isset($GLOBALS['meta']['spipbb']) AND
-				 isset($GLOBALS['spipbb']['version']) AND
-				 ($GLOBALS['spipbb']['version']>= $GLOBALS['spipbb_version'] ) );
+		case 'test' :
+			return true ;
 			break;
 		case 'install' :
-			spipbb_upgrade_all();
+//			spipbb_upgrade_all();
 			break;
 		case 'uninstall' :
 		default :

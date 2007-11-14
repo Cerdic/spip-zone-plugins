@@ -16,7 +16,7 @@ include_spip('inc/spipbb');
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
 function public_styliser($fond, $id_rubrique, $lang) {
-	
+
   // Actuellement tous les squelettes se terminent par .html
   // pour des raisons historiques, ce qui est trompeur
 	$ext = 'html';
@@ -37,31 +37,33 @@ function public_styliser($fond, $id_rubrique, $lang) {
 	$squelette = substr($base, 0, - strlen(".$ext"));
 
 	// traitement spipbb : on recherche un squelette defini
-	unset($sqel);
-	$spipbb_meta=$GLOBALS['spipbb'];
+	unset($squel);
+	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
 	$id_rubrique = intval($id_rubrique);
 
-	if ( is_array($spipbb_meta)
-	     AND ($fond=="article" OR $fond=="rubrique")
-	     AND $id_rubrique>0 )
-	{
-//		echo "debug spipbb:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['spipbb_id_rubrique']."<br>\n"  ;
+	if ( ($spipbb_meta['configure']=='oui') and ($spipbb_meta['config_squelette']== 'oui') ) {
 
-		if (empty($spipbb_meta['spipbb_squelette_filforum']) OR empty($spipbb_meta['spipbb_squelette_groupeforum']) ) spipbb_init_metas($id_rubrique);
-		$id_rub=$id_rubrique;
+		if ( is_array($spipbb_meta)
+			 AND ($fond=="article" OR $fond=="rubrique")
+			 AND $id_rubrique>0 )
+		{
+	//		echo "debug spipbb:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur']."<br>\n"  ;
 
-		while ($id_rub > 0 AND $id_rub!=intval($spipbb_meta['spipbb_id_rubrique'])) {
-			$id_rub = sql_parent($id_rub);
-		}
-		if ( $id_rub==intval($spipbb_meta['spipbb_id_rubrique']) ) {
-			switch ($fond) {
-			case "article" : $sq=$spipbb_meta['spipbb_squelette_filforum']; break;
-			case "rubrique" : $sq=$spipbb_meta['spipbb_squelette_groupeforum']; break;
+			$id_rub=$id_rubrique;
+
+			while ($id_rub > 0 AND $id_rub!=intval($spipbb_meta['id_secteur'])) {
+				$id_rub = sql_parent($id_rub);
 			}
-			if ( $squel=find_in_path("$sq.$ext") ) $squelette = substr($squel, 0, - strlen(".$ext"));
+			if ( $id_rub==intval($spipbb_meta['id_secteur']) ) {
+				switch ($fond) {
+				case "article" : $sq=$spipbb_meta['squelette_filforum']; break;
+				case "rubrique" : $sq=$spipbb_meta['squelette_groupeforum']; break;
+				}
+				if ( $squel=find_in_path("$sq.$ext") ) $squelette = substr($squel, 0, - strlen(".$ext"));
+			}
 		}
+	//	else echo "debug spipbb:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'] ."<br>\n" ;
 	}
-//	else echo "debug spipbb:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['spipbb_id_rubrique'] ."<br>\n" ;
 
 	// traitement normal
 	if (!$squel)
@@ -95,5 +97,5 @@ function public_styliser($fond, $id_rubrique, $lang) {
 	}
 
 	return array($squelette, $ext, $ext, "$squelette.$ext");
-}
+} // public_styliser
 ?>

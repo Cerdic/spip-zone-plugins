@@ -2,9 +2,6 @@
 [(#REM) Plugin SpipBB - Licence GPL]
 [(#REM) SpipBB admin - Page de gestion des forums]
 
-<BOUCLE_rubrique_parcourue(RUBRIQUES){id_rubrique}{tout}>
-[(#REM) On remonte au secteur]
-<BOUCLE_rubrique_principale(RUBRIQUES){id_secteur}{racine}{tout}>
 <B_messages>
 
 [(#REM|debut_cadre_trait_couleur{1,'xxx','SpipBB Anti Spam'})]
@@ -57,10 +54,3 @@
 </B_messages>
 <:spipbb:sw_admin_no_spam:>
 <//B_messages>
-</BOUCLE_rubrique_principale>
-</B_rubrique_principale>
-<:pas_de_messages:>
-<//B_rubrique_principale>
-</BOUCLE_rubrique_parcourue>
-</B_rubrique_parcourue>
-<//B_rubrique_parcourue>

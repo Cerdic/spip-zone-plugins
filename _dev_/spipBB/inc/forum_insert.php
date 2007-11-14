@@ -43,8 +43,14 @@ function spipbb_preg_quote($str, $delimiter)
 // ------------------------------------------------------------------------------
 function inc_forum_insert($force_statut = NULL) {
 
-	// On deroute inc/forum_insert pour verifier d'abord chez akismet
+	// On deroute inc/forum_insert
 	require_once _DIR_RESTREINT.'inc/forum_insert.php';
+
+	// [fr] Si Spipbb ou le filtrage ne sont pas actifs->traitement classique
+	if ( !spipbb_is_configured()
+		or $GLOBALS['spipbb']['configure']!='oui'
+		or $GLOBALS['spipbb']['config_spam_words']!='oui' ) 
+		return inc_forum_insert_dist($force_statut);
 
 	$id_article = intval(_request('id_article'));
 	$id_breve = intval(_request('id_breve'));
@@ -82,9 +88,9 @@ function inc_forum_insert($force_statut = NULL) {
 	if (isset($force_statut))
 		$statut = $force_statut;
 
-//
-// Check spam words config
-//
+	//
+	// Check spam words config
+	//
 
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	$login = _request('auteur') ;
@@ -116,13 +122,6 @@ function insert_pm($id_auteur)
 } // insert_pm
 
 // ------------------------------------------------------------------------------
-// table spip_auteurs_spipbb
-// id_auteur bigint(21) not null primary key
-// spam_warnings unsigned int not null default 0
-// ip_auteur varchar(16)
-// ban_date timestamp
-// ban 'oui' 'non' default 'non'
-// ------------------------------------------------------------------------------
 // [fr] Stocke dans la base l'avertissement de l'auteur
 // [en] Store in database the spammer informations
 // ------------------------------------------------------------------------------
@@ -146,16 +145,6 @@ function warn_user($id_auteur=0)
 	}
 } // warn_user
 
-// ------------------------------------------------------------------------------
-// table spip_spam_words_log
-// id_spam_log BIGINT(21) not null primary key autoincrement
-// id_auteur bigint(21) not null primary key
-// ip_auteur varchar(16)
-// login varchar(255)
-// titre text
-// message mediumtext
-// id_forum bigint(21)
-// id_article bigint(21)
 // ------------------------------------------------------------------------------
 // [fr] Met a jour la log des mots spammes
 // [en] Update the spam word log
@@ -219,17 +208,12 @@ function ban_user($id_auteur)
 	}
 } // ban_user
 
-
 // ------------------------------------------------------------------------------
-// table spip_spam_words
-// id_spam_word BIGINT(21) not null primary key autoincrement
-// spam_word varchar(255)
 // [fr] Verifie s'il s'agit de spam
 // [en] Check if it's a  spam post
 // ------------------------------------------------------------------------------
 function check_spam($id_auteur,$login,$id_forum,$id_article,$message, &$titre)
 {
-	if ($GLOBALS['spipbb']['disable_sw']=="oui") return false;
 	$is_spammer = sql_fetsel('id_auteur, statut', 'spip_auteurs_spipbb', "id_auteur=$id_auteur");
 	if ( $id_auteur==1 AND $GLOBALS['spipbb']['sw_admin_can_spam']=="oui" ) return;
 	if ( $is_spammer['statut']=="0minirezo" AND $GLOBALS['spipbb']['sw_modo_can_spam']=="oui" ) return;

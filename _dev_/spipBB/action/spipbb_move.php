@@ -3,6 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                       #
 #  File    : action/spipbb_move - renumerote un objet     #
 #  Authors : chryjs, 2007                                 #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
 #  Contact : chryjs¡@!free¡.!fr                           #
 #---------------------------------------------------------#
 

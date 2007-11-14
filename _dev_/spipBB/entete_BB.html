@@ -1,4 +1,5 @@
-[(#SET{secteur,[(#ID_SECTEUR|sinon{#CONFIG{spipbb/spipbb_id_rubrique}})]})]
+[(#REM) Plugin SpipBB - Licence GPL]
+[(#SET{secteur,[(#ID_SECTEUR|sinon{#CONFIG{spipbb/id_secteur}})]})]
 
 <div id="entete"><!-- La section d'en-tete -->
 	<BOUCLE_secteur(RUBRIQUES){id_rubrique=#GET{secteur}}>

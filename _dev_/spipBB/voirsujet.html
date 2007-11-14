@@ -1,4 +1,5 @@
 #CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
 <BOUCLE_sujet_principal(FORUMS){id_forum}{doublons}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
@@ -9,7 +10,7 @@
 <body id="voirsujet" dir="#LANG_DIR">
 
 #SET{forumferme,0}
-#SET{id_mot_ferme,#CONFIG{spipbb/spipbb_id_mot_ferme}}
+#SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
 <BOUCLE_etat(ARTICLES){id_article}{id_mot=#GET{id_mot_ferme}}>
 #SET{forumferme,1}
 </BOUCLE_etat>

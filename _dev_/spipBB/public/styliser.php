@@ -1,21 +1,29 @@
 <?php
+#-----------------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                               #
+#  File    : public/styliser - Gestion des squelettes specifiques #
+#  Authors : Chryjs, 2007 et als                                  #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs        #
+#  Contact : chryjs!@!free!.!fr                                   #
+#-----------------------------------------------------------------#
 
-/***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
- *                                                                         *
- *  Copyright (c) 2001-2007                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
-
-
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 global $spip_version_code;
 if (version_compare(substr($spip_version_code,0,5),'1.925','<')){
-	include_spip('public/styliser192');; // SPIP 1.9.2
+	include_spip('public/styliser192'); // SPIP 1.9.2
 } else { // SPIP 1.9.3
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
@@ -23,8 +31,7 @@ if (version_compare(substr($spip_version_code,0,5),'1.925','<')){
 // Actuellement tous les squelettes se terminent par .html
 // pour des raisons historiques, ce qui est trompeur
 
-// http://doc.spip.org/@public_styliser_dist
-function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='html') {
+function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html') {
 	
 	// Accrocher un squelette de base dans le chemin, sinon erreur
 	if (!$base = find_in_path("$fond.$ext")) {
@@ -57,30 +64,32 @@ function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='
 	$squelette = substr($base, 0, - strlen(".$ext"));
 
 	// traitement spipbb : on recherche un squelette defini
-	unset($sqel);
+	unset($squel);
 	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
 	$id_rubrique = intval($id_rubrique);
 
-	if ( is_array($spipbb_meta)
-	  AND ($fond=="article" OR $fond=="rubrique")
-	  AND $id_rubrique>0 ) {
-		spip_log("debug spipbb:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['spipbb_id_rubrique'], 'spipbb');
+	if ( ($spipbb_meta['configure']=='oui') and ($spipbb_meta['config_squelette']== 'oui') ) {
+		if ( is_array($spipbb_meta)
+		  AND ($fond=="article" OR $fond=="rubrique")
+		  AND $id_rubrique>0 ) {
+			spip_log("debug spipbb:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'], 'spipbb');
 
-		if (empty($spipbb_meta['spipbb_squelette_filforum']) OR empty($spipbb_meta['spipbb_squelette_groupeforum']) ) spipbb_init_metas($id_rubrique);
-		$id_rub = $id_rubrique;
+			if (empty($spipbb_meta['squelette_filforum']) OR empty($spipbb_meta['squelette_groupeforum']) ) spipbb_init_metas($id_rubrique);
+			$id_rub = $id_rubrique;
 
-		while ($id_rub > 0 AND $id_rub!=intval($spipbb_meta['spipbb_id_rubrique'])) {
-			$id_rub = quete_parent($id_rub);
-		}
-		if ( $id_rub==intval($spipbb_meta['spipbb_id_rubrique']) ) {
-			switch ($fond) {
-			case "article" : $sq=$spipbb_meta['spipbb_squelette_filforum']; break;
-			case "rubrique" : $sq=$spipbb_meta['spipbb_squelette_groupeforum']; break;
+			while ($id_rub > 0 AND $id_rub!=intval($spipbb_meta['id_secteur'])) {
+				$id_rub = quete_parent($id_rub);
 			}
-			if ( $squel=find_in_path("$sq.$ext") ) $squelette = substr($squel, 0, - strlen(".$ext"));
+			if ( $id_rub==intval($spipbb_meta['id_secteur']) ) {
+				switch ($fond) {
+				case "article" : $sq=$spipbb_meta['squelette_filforum']; break;
+				case "rubrique" : $sq=$spipbb_meta['squelette_groupeforum']; break;
+				}
+				if ( $squel=find_in_path("$sq.$ext") ) $squelette = substr($squel, 0, - strlen(".$ext"));
+			}
 		}
+		else spip_log("debug spipbb:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'], 'spipbb') ;
 	}
-	else spip_log("debug spipbb:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['spipbb_id_rubrique'], 'spipbb') ;
 
 	// traitement normal
 	if (!$squel) { 
@@ -112,7 +121,7 @@ function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='
 	}
 
 	return array($squelette, $ext, $ext, "$squelette.$ext");
-}
+} // public_styliser_dist
 
 } // fin de la condition de version de SPIP
 

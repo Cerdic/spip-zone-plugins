@@ -239,9 +239,9 @@ function fromphpbb_init_metas($spiprubid)
 	$spipbb_fromphpbb['link'] = $GLOBALS['connexions'][0]['link'];
 	$spipbb_fromphpbb['db'] = $GLOBALS['connexions'][0]['db'];
 	$spipbb_fromphpbb['statut_abonne'] = '6forum';
-	$spipbb_fromphpbb['mc_annonce_id'] = $GLOBALS['spipbb']['spipbb_id_mot_annonce'];
-	$spipbb_fromphpbb['mc_postit_id'] = $GLOBALS['spipbb']['spipbb_id_mot_postit'];
-	$spipbb_fromphpbb['mc_ferme_id'] = $GLOBALS['spipbb']['spipbb_id_mot_ferme'];
+	$spipbb_fromphpbb['mc_annonce_id'] = $GLOBALS['spipbb']['id_mot_annonce'];
+	$spipbb_fromphpbb['mc_postit_id'] = $GLOBALS['spipbb']['id_mot_postit'];
+	$spipbb_fromphpbb['mc_ferme_id'] = $GLOBALS['spipbb']['id_mot_ferme'];
 
 	// [fr] recupere les parametres de connexion
 	// [en] Grab the connection parameters
@@ -795,11 +795,11 @@ function migre_threads() {
 			$topic_post[$topic_id] = $insert_id;
 		}
 
-		// Ajout d'un mot-cl� ad�quat pour �tiqueter les topics qui sont des
-		// post-it (la colonne concern�e est topic_type)
+		// Ajout d'un mot-cle adequat pour etiqueter les topics qui sont des
+		// post-it (la colonne concernee est topic_type)
 		// 0 = topic normal
-		// 1 = post-it (un post-it appara�t en t�te des sujets sur la premi�re page)
-		// 2 = annonce (une annonce appara�t en t�te des sujets sur toutes les pages
+		// 1 = post-it (un post-it apparait en tete des sujets sur la premiere page)
+		// 2 = annonce (une annonce apparait en tete des sujets sur toutes les pages
 		// des topics)
 
 		if ($id_parent == 0 && $row['topic_type'] != 0)

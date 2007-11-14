@@ -26,7 +26,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spipbb');
 
-if( !empty($setmodules) )
+if ( !empty($setmodules) and spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui' and $GLOBALS['spipbb']['config_spam_words']=='oui')
 {
 	$file = basename(__FILE__);
 	$modules['spam']['swforum'] = $file;
@@ -40,22 +40,15 @@ if( !empty($setmodules) )
 // [en] Provides the full spip private space form
 // ------------------------------------------------------------------------------
 function exec_spipbb_admin_anti_spam_forum() {
-	global $connect_statut;
-	// [fr] Pour le moment l acces est reserve a l administrateur, a voir plus tard
-	// [fr] pour tester plutot en fonction rubrique de l import comme pour les articles...
-	// [en] For now the access is only allowed to the admin, will check it later
-	// [en] in order to check it for each rubrique like for the articles...
-	$id_rubrique=intval(_request('id_rubrique'));
-	if (empty($id_rubrique)) $id_rubrique = $GLOBALS['spipbb']['spipbb_id_rubrique'];
+	if (!spipbb_is_configured() or ($GLOBALS['spipbb']['configure']!='oui')) {
+		include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire('spipbb_admin_configuration', ''));
+		exit;
+	}
 
-	// [fr] recuperer les donnees du secteur
-	// [en] load the sector datas
-	$row_rub = sql_fetsel("id_secteur","spip_rubriques","id_rubrique=$id_rubrique");
-	$id_secteur= $row_rub['id_secteur'];
-
-	if ($connect_statut != '0minirezo' or !autoriser('creerarticledans','rubrique',$id_secteur) ) {
-		include_spip('inc/minipres');
-		echo minipres("<strong>"._T('avis_non_acces_page')."</strong>");
+	if ($GLOBALS['spipbb']['config_spam_words']!='oui') {
+		include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire('spipbb_admin_anti_spam_config', ''));
 		exit;
 	}
 
@@ -72,12 +65,12 @@ function exec_spipbb_admin_anti_spam_forum() {
 	echo debut_boite_info(true);
 	echo  _T('spipbb:sw_spam_forum_titre');
 	echo fin_boite_info(true);
-	echo spipbb_admin_gauche($GLOBALS['spipbb']['spipbb_id_rubrique'],'spipbb_admin_anti_spam_forum');
+	echo spipbb_admin_gauche('spipbb_admin_anti_spam_forum');
 
-	echo creer_colonne_droite($id_rubrique,true);
-	echo debut_droite($id_rubrique,true);
+	echo creer_colonne_droite('',true);
+	echo debut_droite('',true);
 
-	echo spipbb_anti_spam_forum_formulaire($id_rubrique);
+	echo spipbb_anti_spam_forum_formulaire();
 	echo fin_gauche(), fin_page();
 
 } // exec_spipbb_admin_spam_forum
@@ -86,12 +79,12 @@ function exec_spipbb_admin_anti_spam_forum() {
 // [fr] Genere le formulaire de saisie des parametres de migration
 // [en] Generates the form to fill with migration parameters
 // ------------------------------------------------------------------------------
-function spipbb_anti_spam_forum_formulaire($id_rubrique) {
+function spipbb_anti_spam_forum_formulaire() {
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
 
 	$contexte = array(
 			'exec_script' => 'spipbb_admin_anti_spam_forum',
-			'id_rubrique' => $id_rubrique
+			'id_secteur' => $GLOBALS['spipbb']['id_secteur']
 			);
 	$res = recuperer_fond("prive/spipbb_admin_anti_spam_forum",$contexte) ;
 

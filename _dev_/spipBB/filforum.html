@@ -1,4 +1,5 @@
 #CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
 <BOUCLE_article_principal(ARTICLES) {id_article}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
@@ -11,7 +12,7 @@
 
 <body id="artforum" dir="#LANG_DIR">
 	[(#REM) On regarde si le forum n'est pas ferme ]
-	#SET{id_mot_ferme,#CONFIG{spipbb/spipbb_id_mot_ferme}}
+	#SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
 	#SET{forumferme,0}
 	<BOUCLE_etat(ARTICLES){id_article}{id_mot=#GET{id_mot_ferme}}>#SET{forumferme,1}</BOUCLE_etat>
 

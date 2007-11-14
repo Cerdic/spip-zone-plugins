@@ -1,7 +1,8 @@
 ﻿#CACHE{60}
+[(#REM) Plugin SpipBB - Licence GPL]
 [(#REM) Bloc d'informations a afficher en bas de page]
 
-<BOUCLE_forum_principal(RUBRIQUES){id_rubrique=#CONFIG{spipbb/spipbb_id_rubrique}}>
+<BOUCLE_forum_principal(RUBRIQUES){id_rubrique=#CONFIG{spipbb/id_secteur}}>
 <hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
 <table summary="index" class="spipforum">
 		<tbody[ id="salon(#ID_RUBRIQUE)"]>
