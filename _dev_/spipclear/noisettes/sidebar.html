@@ -39,18 +39,6 @@
 			[(#ID_RUBRIQUE|choixsiegal{#ENV{id_rubrique},<strong>,''})]
 				<a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
 			[(#ID_RUBRIQUE|choixsiegal{#ENV{id_rubrique},</strong>,''})]
-			<B_souscategories>
-			<ul>
-				<BOUCLE_souscategories(RUBRIQUES){id_parent}{par num titre}>
-				<li>[(#ID_RUBRIQUE|choixsiegal{#ENV{id_rubrique},<strong>,''})]
-					<small><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></small>
-				[(#ID_RUBRIQUE|choixsiegal{#ENV{id_rubrique},</strong>,''})]</li>
-				<B_souscategoriesrecursives><li>
-				<BOUCLE_souscategoriesrecursives(BOUCLE_souscategories)></BOUCLE_souscategoriesrecursives>
-				</li></B_souscategoriesrecursives>
-				</BOUCLE_souscategories>
-			</ul>
-			</B_souscategories>
 			</li>
 			</BOUCLE_categories>
 		</ul>
@@ -61,7 +49,7 @@
 	<div id="archives">
 		<h2><:spipclear:archives:></h2>
 		<ul>
-			<BOUCLE_chrono(ARTICLES){id_secteur}{par date}{inverse}>
+			<BOUCLE_chrono(ARTICLES){id_secteur}{lang_select=non}{par date}{inverse}>
 			[<li>[(#DATE|affdate{'Y_m'}|choixsiegal{[(#ENV{date}|affdate{'Y_m'})],<strong>,''})]
 				<a href="[(#ENV{self}|parametre_url{archives,[(#DATE|affdate{'Y-m'})]})]">(#DATE|affdate_mois_annee|unique)</a>
 				[(#DATE|affdate{'Y_m'}|choixsiegal{[(#ENV{date}|affdate{'Y_m'})],</strong>,''})]</li>]
@@ -76,13 +64,6 @@
 		<ul>
 			<BOUCLE_links(SITES){id_secteur}{par date}{inverse}>
 			<li><a href="#URL_SITE"<BOUCLE_mot_lang(MOTS){id_syndic}> hreflang="#TITRE"</BOUCLE_mot_lang>[ title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#NOM_SITE*)]</a>
-			<B_syndic>
-			<ul>
-				<BOUCLE_syndic(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,5}>
-				[<li><small><a href="(#URL_ARTICLE|unique{urls})">#TITRE</a></small></li>]
-				</BOUCLE_syndic>
-			</ul>
-			</B_syndic>
 			</li>
 			</BOUCLE_links>
 		</ul>
