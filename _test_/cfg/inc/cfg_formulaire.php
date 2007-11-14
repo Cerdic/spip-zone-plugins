@@ -96,16 +96,27 @@ class cfg_formulaire
 	    		($this->cfg_id ? '/' . $this->cfg_id : '');
 	}
 
+	/*
+	 * La vue est le nom du fond CFG a lire.
+	 * 
+	 * On lit le fond et on recupere 
+	 * - les parametres CFG contenus dans les balises [(#REM) param=valeur]
+	 * - ainsi que les nom des champs de formulaires
+	 * 
+	 */
 	function set_vue($vue)
 	{
+		// lecture de la vue.
 		$this->vue = $vue;
 		$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html');
 		if (!lire_fichier($fichier, $this->controldata)) {
 			return _L('erreur_lecture_') . $nom;
 		}
+		// recherche et stockage des parametres CFG
 		preg_replace_callback('/(\[\(#REM\) ([a-z0-9]\w+)(\*)?=)(.*?)\]/sim',
 					array(&$this, 'post_params'), $this->controldata);
 
+		// recherche d'au moins un champ de formulaire pour savoir si la vue est valide
 		include_spip('inc/presentation'); // offrir les fonctions d'espace prive
 		include_spip('public/assembler');
 		$fond_compile = recuperer_fond('fonds/cfg_' . $this->vue);
@@ -115,6 +126,8 @@ class cfg_formulaire
 						$fond_compile, $matches, PREG_SET_ORDER)) {
 			return _L('pas_de_champs_dans_') . $nom;
 		}
+		
+		// stockage des champs trouves dans $this->champs
 		foreach ($matches as $regs) {
 			if (substr($regs[3], 0, 5) == '_cfg_') {
 				continue;
@@ -141,11 +154,22 @@ class cfg_formulaire
 	    return '';
 	}
 
+
+	/*
+	 * Verifie les autorisations 
+	 * d'affichage du formulaire
+	 * (parametre autoriser=quoi)
+	 */
 	function autoriser()
 	{
+		include_spip('inc/autoriser');
 		return autoriser(trim($this->autoriser));
 	}
 
+	/*
+	 * Log le message passe en parametre
+	 * $this->log('message');
+	 */
 	function log($message)
 	{
 		($GLOBALS['auteur_session'] && ($qui = $GLOBALS['auteur_session']['login']))
@@ -153,33 +177,50 @@ class cfg_formulaire
 		spip_log('cfg (' . $this->nom_config() . ') par ' . $qui . ': ' . $message);
 	}
 
+	
+	/*
+	 * Modifie ou supprime les donnees postees par le formulaire
+	 */
 	function modifier($supprimer = false)
 	{
+		// suppression ?
 		if ($supprimer) {
 			$ok = $this->sto->modifier($supprimer);
 			$this->message .= ($msg = $ok ? _L('config_supprimee') : _L('erreur_suppression'))
 								. ' <b>' . $this->nom_config() . '</b>';
 			$this->log($msg);
 		}
+		// sinon verification du type des valeurs postees
 		else if (($this->message = $this->controle())) {
 		}
+		// si valeurs valides, ont elles changees ? 
 		else if (!$this->log_modif) {
 			$this->message .= _L('pas_de_changement') . ' <b>' . $this->nom_config() . '</b>';
 		}
+		// si elles ont changees, on modifie !
 		else {
 			$ok = $this->sto->modifier();
 			$this->message .= ($msg = $ok ? _L('config_enregistree') : _L('erreur_enregistrement'))
 								. ' <b>' . $this->nom_config() . '</b>';
 			$this->log($msg . ' ' . $this->log_modif);
 		}
+		// pipeline 'cfg_post_edition'
 		$this->message = pipeline('cfg_post_edition',array('args'=>array('nom_config'=>$this->nom_config()),'data'=>$this->message));
 	}
 
+
+	/*
+	 * Gere le traitement du formulaire qui a ete valide.
+	 * 
+	 */
 	function traiter()
 	{
+		// est on autorise ?
 		if (!$this->_permise) {
 			return;
 		}
+		
+		// enregistrement ou suppression ?
 		$enregistrer = $supprimer = false;
 		if ($this->message ||
 			! (($enregistrer = _request('_cfg_ok')) ||
@@ -189,8 +230,11 @@ class cfg_formulaire
 
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$securiser_action();
+		// suppression
 		if ($supprimer) {
 			$this->modifier('supprimer');
+		// sinon modification
+		// seulement si les types de valeurs attendus sont corrects
 		} elseif (!($this->message = $this->controle())) {
 			if ($this->new_id != $this->cfg_id && !_request('_cfg_copier')) {
 				$this->modifier('supprimer');
@@ -213,16 +257,25 @@ class cfg_formulaire
 		}
 	}
 
+	/*
+	 * Verifie les valeurs postees.
+	 * - stocke les valeurs qui ont changees dans $this->val[$nom_champ] = 'nouvelle_valeur'
+	 * - verifie que les types de valeurs attendus sont corrects ($this->types)
+	 */
 	function controle()
 	{
 	    $return = '';
 		foreach ($this->champs as $name => $def) {
+			// enregistrement des valeurs postees
 			$oldval = $this->val[$name];
 		    $this->val[$name] = _request($name);
 		    if ($oldval != $this->val[$name]) {
 		    	$this->log_modif .= $name . ':' .
 		    		var_export($oldval, true) . '/' . var_export($this->val[$name], true) .', ';
 		    }
+		    // verification du type de valeur attendue
+		    // cela est defini par un nom de class css (class="type_idnum")
+		    // 'idnum' etant defini dans $this->types['idnum']...
 		    if (!empty($def['typ']) && isset($this->types[$def['typ']])) {
 		    	if (!preg_match($this->types[$def['typ']][0], $this->val[$name])) {
 		    		$return .= _L($name) . '&nbsp;:<br />' .
@@ -230,6 +283,7 @@ class cfg_formulaire
 		    	}
 		    }
 	    }
+	    // donner un identifiant au formulaire ?
 		$this->new_id = '';
 		$sep = '';
 		foreach ($this->champs_id as $name) {
@@ -240,10 +294,10 @@ class cfg_formulaire
 	}
 
 	/*
-	 Fabriquer les balises des champs d'apres un modele fonds/cfg_<driver>.html
-		$contexte est un tableau (nom=>valeur)
-		qui sera enrichi puis passe a recuperer_fond
-	*/
+	 * Fabriquer les balises des champs d'apres un modele fonds/cfg_<driver>.html
+	 * $contexte est un tableau (nom=>valeur)
+	 * qui sera enrichi puis passe a recuperer_fond
+	 */
 	function formulaire($contexte = array())
 	{
 
@@ -268,16 +322,14 @@ class cfg_formulaire
 
 
 		// liste des post-proprietes de l'objet cfg, lues apres recuperer_fond()
+		// et stockees dans <!-- param=valeur -->
 		$this->rempar = array(array());
 		if (preg_match_all('/<!-- [a-z0-9]\w+\*?=/i', $this->controldata, $this->rempar)) {
-/* en reserve au cas ou vraiement pas possible autrement
-			$GLOBALS['_current_cfg'] = &this;
-			$return = preg_replace_callback('/(<!-- (\w+)(\*)?=)(.*?)-->/sim',
-								array(&$GLOBALS['_current_cfg'], 'post_params'), $return);
-*/
+			// il existe des champs <!-- param=valeur -->, on les stocke
 			$this->current_rempar = 0;
 			$return = preg_replace_callback('/(<!-- ([a-z0-9]\w+)(\*)?=)(.*?)-->/sim',
 								array(&$this, 'post_params'), $return);
+			// s'il en reste : il y a un probleme !
 			if (preg_match('/<!-- [a-z0-9]\w+\*?=/', $return)) {
 				die('erreur manque parametre externe: '
 					. htmlentities(var_export($this->rempar, true)));
@@ -285,8 +337,25 @@ class cfg_formulaire
 		}
 		return $return;
 	}
-	// callback pour interpreter les parametres objets du formulaire
-	// commun avec celui de set_vue()
+	
+	
+	/* 
+	 * callback pour interpreter les parametres objets du formulaire
+	 * commun avec celui de set_vue()
+	 * 
+	 * Parametres : 
+	 * - $regs[2] = 'param'
+	 * - $regs[3] = '*' ou ''
+	 * - $regs[4] = 'valeur'
+	 * 
+	 * Lorsque des parametres sont passes dans le formulaire 
+	 * [(#REM) param=valeur] ou <!-- param=valeur -->
+	 * stocker $this->param=valeur
+	 * 
+	 * Si <!-- param*=valeur -->
+	 * Stocker $this->param[]=valeur
+	 * 
+	 */
 	function post_params($regs) {
 		// a priori, eviter l'injection du motif
 		if (isset($this->rempar)) {
@@ -295,6 +364,7 @@ class cfg_formulaire
 				die("erreur parametre interne: " . htmlentities(var_export($regs[1], true)));
 			}
 		}
+		// $regs[3] peut valoir '*' pour signaler un tableau
 		if (empty($regs[3])) {
 		    $this->{$regs[2]} = $regs[4];
 		} elseif (is_array($this->{$regs[2]})) {
