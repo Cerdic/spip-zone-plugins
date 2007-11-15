@@ -18,13 +18,13 @@
 
 		<div id="contenu" style="width: 100%; ">
 		<p>Il faut actualiser la page pour voir les changements... Ajax c'est bien,
-		mais du coup, on ne voit presque pas que les valeurs sont enregistrees...
+		mais du coup, on ne voit presque pas que les valeurs sont enregistr&eacute;es...
 		<br /><a href="#SELF&var_mode=recalcul">Recalculer la page</a></p>
 		
 		
 		[(#CFG_ARBO{~[(#SESSION{login})]})]
 		
-		Si je suis loggué, le formulaire s'affiche...
+		Si je suis loggu&eacute;, le formulaire s'affiche...
 		[(#SESSION{login}|?{' '})
 			[(#FORMULAIRE_CFG{testform_auteur, #SESSION{id_auteur}})]
 		]

@@ -1,3 +1,4 @@
+#CACHE{0}
 <div class="formulaire_spip formulaire_cfg" id="formulaire_cfg_#ENV{vue}#ENV{cfg_id}">
 #VUE_CFG{#ENV{vue}, #ENV{id}, oui}
 </div>
@@ -6,7 +7,7 @@
 <script type='text/javascript'><!--
 if (window.jQuery) (function($){
 	// adresse du fragment ajax
-	var url = 'spip.php?page=formulaire_cfg\x26vue=#ENV{vue}';
+	var url = 'spip.php?page=formulaire_cfg';
 
 	$("#formulaire_cfg_[(#ENV{vue})][(#ENV{cfg_id})] form")
 	.ajaxForm({

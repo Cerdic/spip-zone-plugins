@@ -195,6 +195,40 @@ function affiche_sous_arborescence($nom, $tableau){
 
 
 /*
+ * Affiche le formulaire CFG de la vue (fond) demandee
+ */
+
+function balise_VUE_CFG($p){
+	//return calculer_balise_dynamique($p, 'VUE_CFG', array());
+	
+	$vue = 			sinon(interprete_argument_balise(1,$p), "''"); // indispensable neanmmoins
+	$id = 			sinon(interprete_argument_balise(2,$p), "''");
+	$aff_titre = 	sinon(interprete_argument_balise(3,$p), "''");
+	$cfg_id = 		sinon(interprete_argument_balise(4,$p), "''");
+	//include_spip('balise/vue_cfg');
+	$p->code = "calculer_VUE_CFG($vue, $id, $aff_titre, $cfg_id)";
+	return $p;
+}
+
+function calculer_VUE_CFG($fond, $id, $afficher_titre, $cfg_id){
+	include_spip('inc/cfg');
+	$cfg = cfg_charger_classe('cfg');
+	$config = & new $cfg($fond, $fond, $id); 
+
+	$config->traiter();
+	
+	$sortie = ($afficher_titre)
+		? "<h2>$config->titre</h2>\n"
+		: "";
+		
+	return $sortie
+		   . $config->formulaire();	
+}
+
+
+
+
+/*
  * cfg_charger_classe(), sur le meme code que charger_fonction()
  *
  * charge un fichier perso ou, a defaut, standard
