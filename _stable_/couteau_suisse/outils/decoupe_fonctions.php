@@ -44,7 +44,8 @@ function onglets_callback($matches) {
 	$pages = explode(_decoupe_SEPARATEUR, $matches[1]);
 	foreach ($pages as $p) {
 		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $p, 2);
-		$contenus[] = '<div class="onglets_contenu"><h2 class="cs_onglet"><a href="#">'.trim(textebrut($t[0])).'</a></h2>'.decoupe_safebalises($t[1]).'</div>';
+		$t = array(trim(textebrut(nettoyer_raccourcis_typo($t[0]))), decoupe_safebalises($t[1]));
+		$contenus[] = '<div class="onglets_contenu"><h2 class="cs_onglet"><a href="#">'.$t[0].'</a></h2>'.$t[1].'</div>';
 	}
 	return '<div class="onglets_bloc_initial">'.join('', $contenus).'</div>'._onglets_FIN;
 }
