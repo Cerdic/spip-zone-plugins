@@ -49,16 +49,20 @@ function mutualiser_creer_redirection_img($options){
 	$contenu  = "RewriteEngine On\n"
 		 	  . "RewriteBase /\n";
 	// boucler sur les alias pour rediriger
-	foreach($options['sites_alias'] as $domaine => $site){
-		$contenu .= "RewriteCond %{HTTP_HOST} ^($domaine)$\n"
-				  . "RewriteRule .* " 
-				  . $GLOBALS['mutualisation_dir'] 
-				  . "/$site%{REQUEST_URI} [QSA,L]\n";		
+	if (!empty($options['sites_alias'])){
+		$contenu .= "\n# Alias de sites\n";
+		foreach($options['sites_alias'] as $domaine => $site){
+			$contenu .= "RewriteCond %{HTTP_HOST} ^($domaine)$\n"
+					  . "RewriteRule .* " 
+					  . $GLOBALS['mutualisation_dir'] 
+					  . "/$site%{REQUEST_URI} [QSA,L]\n";		
+		}
 	}
 	// sinon redirection normale avec un site du meme nom que le domaine	
-	$contenu .= "RewriteRule .* " 
+	$contenu .= "\n# Toute autre redirection de mutualisation\n";
+			  . "RewriteRule .* " 
 		 	  . $GLOBALS['mutualisation_dir'] 
-		 	  . "/%{HTTP_HOST}%{REQUEST_URI} [QSA,L]";
+		 	  . "/%{HTTP_HOST}%{REQUEST_URI} [QSA,L]\n";
 	
 	include_spip('inc/flock');
 	return 
