@@ -59,7 +59,7 @@ function mutualiser_creer_redirection_img($options){
 		}
 	}
 	// sinon redirection normale avec un site du meme nom que le domaine	
-	$contenu .= "\n# Toute autre redirection de mutualisation\n";
+	$contenu .= "\n# Toute autre redirection de mutualisation\n"
 			  . "RewriteRule .* " 
 		 	  . $GLOBALS['mutualisation_dir'] 
 		 	  . "/%{HTTP_HOST}%{REQUEST_URI} [QSA,L]\n";
