@@ -51,6 +51,7 @@ RewriteBase /
 
 	$host = $_SERVER['HTTP_HOST'];
 	$racine = dirname($_SERVER['SCRIPT_NAME']); // profondeur_url();
+	if ($racine == '/') $racine='';
 	$site = basename(dirname($dir));
 	$bloc = "
 
