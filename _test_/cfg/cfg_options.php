@@ -195,56 +195,6 @@ function affiche_sous_arborescence($nom, $tableau){
 
 
 /*
- * Affiche le formulaire CFG 
- * du fond dont le nom est en parametre
- * 
- * #FORMLAIRE_CFG{mon_fond} 
- * 
- */
-/*
-function balise_FORMULAIRE_CFG ($p) {
-	$fond = interprete_argument_balise(1, $p);
-
-	$p->code = "afficher_FORMULAIRE_CFG($fond)";
-
-	return $p;
-	/*
-	return calculer_balise_dynamique($p,
-		'FORMULAIRE_CFG', # nom de la balise ?
-		array()
-	);
-	* /
-}
-*/
-
-/*
-function afficher_FORMULAIRE_CFG($fond){
-	
-	include_spip('inc/cfg');
-	$cfg = cfg_charger_classe('cfg');
-
-	$config = & new $cfg($fond,'',''); 
-	$config->set_vue($fond);
-/*
-	if ($message = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]) {
-		include_spip('inc/meta');
-		effacer_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur']);
-		$config->message = $message;
-	}* /
-
-	//$config->traiter();
-	
-	return $config->formulaire();	
-
-}
-*/
-
-
-
-
-
-
-/*
  * cfg_charger_classe(), sur le meme code que charger_fonction()
  *
  * charge un fichier perso ou, a defaut, standard
