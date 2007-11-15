@@ -32,7 +32,8 @@ function demarrer_site($site = '', $options = array()) {
 			'cookie_prefix' => false,
 			'repertoire' => 'sites',
 			'utiliser_panel' => false,
-			'url_img_courtes' => false
+			'url_img_courtes' => false,
+			'sites_alias' => array()
 		),
 		$options
 	);
@@ -198,7 +199,7 @@ function demarrer_site($site = '', $options = array()) {
 	 */
 	if ($options['url_img_courtes']){
 		include_once dirname(__FILE__).'/mutualiser_gerer_img.php';
-		mutualiser_gerer_img();
+		mutualiser_gerer_img($options);
 	}
 	
 }

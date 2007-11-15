@@ -1,6 +1,6 @@
 <?php
 
-function mutualiser_gerer_img(){
+function mutualiser_gerer_img($options){
 	// IMG
 	if (!defined('_URL_IMG'))
 		define('_URL_IMG', _DIR_RACINE . _NOM_PERMANENTS_ACCESSIBLES);
@@ -11,8 +11,9 @@ function mutualiser_gerer_img(){
 	// Creer les .htaccess ?	
 	$ok = true;
 	if (   (!file_exists(_URL_IMG . _ACCESS_FILE_NAME))
-		OR (!file_exists(_URL_VAR . _ACCESS_FILE_NAME))){
-		$ok = mutualiser_creer_redirection_img();	
+		OR (!file_exists(_URL_VAR . _ACCESS_FILE_NAME))
+		OR (_REQUEST('var_mode')=='creer_htaccess_img')){
+			$ok = mutualiser_creer_redirection_img($options);	
 	}
 	
 	// Ajouter le pipeline ?
@@ -44,12 +45,20 @@ function mutualiser_gerer_img(){
  * ne pourra pas utiliser l'option url_img_courtes)
  * 
  */
-function mutualiser_creer_redirection_img(){
+function mutualiser_creer_redirection_img($options){
 	$contenu  = "RewriteEngine On\n"
-		 	. "RewriteBase /\n"
-		 	. "RewriteRule .* " 
-		 	. $GLOBALS['mutualisation_dir'] 
-		 	. "/%{HTTP_HOST}%{REQUEST_URI} [QSA,L]";
+		 	  . "RewriteBase /\n";
+	// boucler sur les alias pour rediriger
+	foreach($options['sites_alias'] as $domaine => $site){
+		$contenu .= "RewriteCond %{HTTP_HOST} ^($domaine)$\n"
+				  . "RewriteRule .* " 
+				  . $GLOBALS['mutualisation_dir'] 
+				  . "/$site%{REQUEST_URI} [QSA,L]\n";		
+	}
+	// sinon redirection normale avec un site du meme nom que le domaine	
+	$contenu .= "RewriteRule .* " 
+		 	  . $GLOBALS['mutualisation_dir'] 
+		 	  . "/%{HTTP_HOST}%{REQUEST_URI} [QSA,L]";
 	
 	include_spip('inc/flock');
 	return 
