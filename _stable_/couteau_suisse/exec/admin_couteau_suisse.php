@@ -6,6 +6,8 @@
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
 
+define('_URL_CS_PLUGIN_XML', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/couteau_suisse/plugin.xml?format=txt');
+
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip("inc/presentation");
@@ -341,8 +343,8 @@ echo '<p style="color:red;">Ancienne interface : <a href="', generer_url_ecrire(
 	if ($quiet = $maj[1] && (time()-$maj[0] < 4000)) $distant = $maj[1];
 	else {
 		include_spip('inc/distant');
-		if ($distant = recuperer_page('http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/couteau_suisse/plugin.xml?format=txt'))
-			$distant = $maj[1] = preg_match(',<version>([0-9.]+)</version>,', $distant, $regs)?$regs[1]:'';
+		$distant = recuperer_page(_URL_CS_PLUGIN_XML);
+		if ($distant) $distant = $maj[1] = preg_match(',<version>([0-9.]+)</version>,', $distant, $regs)?$regs[1]:'';
 		$maj[0] = time();
 		if ($distant) ecrire_meta('tweaks_maj', serialize($maj));
 		ecrire_metas();
