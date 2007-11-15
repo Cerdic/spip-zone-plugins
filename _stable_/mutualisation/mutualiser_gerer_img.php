@@ -2,26 +2,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function mutualiser_gerer_img($options){
-	// IMG
-	if (!defined('_URL_IMG'))
-		define('_URL_IMG', _DIR_RACINE . _NOM_PERMANENTS_ACCESSIBLES);
-	// local	
-	if (!defined('_URL_VAR'))
-		define('_URL_VAR', _DIR_RACINE . _NOM_TEMPORAIRES_ACCESSIBLES);
-	
-	// Creer les .htaccess ?	
-	$ok = true;
-	if (   (!file_exists(_URL_IMG . _ACCESS_FILE_NAME))
-		OR (!file_exists(_URL_VAR . _ACCESS_FILE_NAME))
-		OR (_REQUEST('var_mode')=='creer_htaccess_img')){
-			$ok = mutualiser_creer_redirection_img($options);	
-	}
-}
-
-/* 
+/*
  * Creer les rewrite rules
- * 
+ *
  * Dans /IMG, on arrive avec (http://naya/IMG/jpg/photo.jpg) :
  *  %{HTTP_HOST} = 'naya'
  *  %{SCRIPT_NAME} = '/chemin/http/jusqu/a/spip/spip.php'
