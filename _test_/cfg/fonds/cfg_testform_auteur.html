@@ -1,0 +1,28 @@
+
+
+
+[(#REM) titre=Test extra auteur par formulaire public]
+
+<!-- table=spip_auteurs -->
+<!-- storage=extrapack -->
+[(#REM) storage=extrapack]
+<!-- autoriser=voir -->
+
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<input type="hidden" name="id" class="cfg_id" value="#ENV{id}" />
+
+<fieldset><legend>Test par auteur...</legend>
+<label for='frm_afficher_toto'>Afficher toto ?</label>
+<select name="afficher_toto" id='frm_afficher_toto'>
+	<option value='oui' [(#ENV{afficher_toto}|=={oui}|?{selected='selected'})]>Oui</option>
+	<option value='non' [(#ENV{afficher_toto}|=={non}|?{selected='selected'})]>Non</option>
+</select>
+
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
+<input type="reset" value="<:cfg:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" />
+</form>

@@ -1,0 +1,21 @@
+
+<!-- titre=Titre du CFG-->
+[(#REM) titre=Titre du CFG]
+<!-- nom=formulaire_cfg-->
+<!-- autoriser=voir -->
+
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset><legend><:cfg:champs_simples:></legend>
+<label>Type id</label>
+<input type="text" name="testid" value="#ENV{testid}" size="10" />
+<label>Type textarea</label>
+<textarea name="testtextarea" rows="4" cols="40" style="width:100%;">[(#ENV{testtextarea})]</textarea>
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
+<input type="reset" value="<:cfg:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" />
+</form>

@@ -1,0 +1,26 @@
+<div class="formulaire_spip formulaire_cfg" id="formulaire_cfg_#ENV{vue}#ENV{cfg_id}">
+#VUE_CFG{#ENV{vue}, #ENV{id}, oui}
+</div>
+
+
+<script type='text/javascript'><!--
+if (window.jQuery) (function($){
+	// adresse du fragment ajax
+	var url = 'spip.php?page=formulaire_cfg\x26vue=#ENV{vue}';
+
+	$("#formulaire_cfg_[(#ENV{vue})][(#ENV{cfg_id})] form")
+	.ajaxForm({
+		url: url,
+		target: "",
+		beforeSubmit: function(){
+			$("#formulaire_cfg_#ENV{vue}#ENV{cfg_id}")
+			.css('opacity', 0.5);
+		},
+		success: function(){
+			$("#formulaire_cfg_#ENV{vue}#ENV{cfg_id}")
+			.css('opacity', 1);
+		}
+	});
+
+})(jQuery);
+// --></script>

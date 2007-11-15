@@ -84,7 +84,7 @@ class cfg_formulaire
 	    }
 		
 		// creer le storage et lire les valeurs
-		$classto = 'cfg_' . $this->storage;
+		$classto = 'cfg_' . trim($this->storage);
 		include_spip('inc/' . $classto);
 		$this->sto = new $classto($this, $this->optsto);
 		$this->val = $this->sto->lire();

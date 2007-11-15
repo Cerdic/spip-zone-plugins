@@ -144,6 +144,13 @@ function get_table_id($table) {
 
 
 
+
+/*
+ * Affiche une arborescence du contenu d'un #CONFIG
+ * 
+ * #CFG_ARBO, #CFG_ARBO{ma_meta}, #CFG_ARBO{~toto}, #CFG_ARBO{ma_meta/mon_casier}
+ * 
+ */
 function balise_CFG_ARBO($p) {
 	if (!$arg = interprete_argument_balise(1,$p)) {
 		$arg = "''";
@@ -185,12 +192,65 @@ function affiche_sous_arborescence($nom, $tableau){
 }
 
 
+
+
 /*
- *  cfg_charger_classe(), sur le meme code que charger_fonction()
+ * Affiche le formulaire CFG 
+ * du fond dont le nom est en parametre
+ * 
+ * #FORMLAIRE_CFG{mon_fond} 
+ * 
  */
-// charge un fichier perso ou, a defaut, standard
-// et retourne si elle existe le nom de la fonction class homonyme ($nom),
-// ou de suffixe _dist
+/*
+function balise_FORMULAIRE_CFG ($p) {
+	$fond = interprete_argument_balise(1, $p);
+
+	$p->code = "afficher_FORMULAIRE_CFG($fond)";
+
+	return $p;
+	/*
+	return calculer_balise_dynamique($p,
+		'FORMULAIRE_CFG', # nom de la balise ?
+		array()
+	);
+	* /
+}
+*/
+
+/*
+function afficher_FORMULAIRE_CFG($fond){
+	
+	include_spip('inc/cfg');
+	$cfg = cfg_charger_classe('cfg');
+
+	$config = & new $cfg($fond,'',''); 
+	$config->set_vue($fond);
+/*
+	if ($message = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]) {
+		include_spip('inc/meta');
+		effacer_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur']);
+		$config->message = $message;
+	}* /
+
+	//$config->traiter();
+	
+	return $config->formulaire();	
+
+}
+*/
+
+
+
+
+
+
+/*
+ * cfg_charger_classe(), sur le meme code que charger_fonction()
+ *
+ * charge un fichier perso ou, a defaut, standard
+ * et retourne si elle existe le nom de la fonction class homonyme ($nom),
+ * ou de suffixe _dist
+ */
 function cfg_charger_classe($nom, $dossier='inc', $continue=false) {
 
 	if (substr($dossier,-1) != '/') $dossier .= '/';
