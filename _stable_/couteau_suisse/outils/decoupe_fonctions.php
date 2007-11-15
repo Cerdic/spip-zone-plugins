@@ -46,7 +46,7 @@ function onglets_callback($matches) {
 		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $p, 2);
 		$contenus[] = '<div class="onglets_contenu"><h2 class="cs_onglet"><a href="#">'.trim(textebrut($t[0])).'</a></h2>'.decoupe_safebalises($t[1]).'</div>';
 	}
-	return '<div class="onglets_bloc_initial">'.join('', $contenus).'</div>';
+	return '<div class="onglets_bloc_initial">'.join('', $contenus).'</div>'._onglets_FIN;
 }
 
 // fonction appellee sur les parties du texte non comprises entre les balises : html|code|cadre|frame|script|acronym|cite

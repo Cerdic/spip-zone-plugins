@@ -377,7 +377,7 @@ add_outil( array(
 add_outil( array(
 	'id' => 'decoupe',
 	'contrib'	=> 2135,
-	'code:options' => "@define('_decoupe_SEPARATEUR', '++++');
+	'code:options' => "define('_onglets_FIN', '<span class=\'_fooonglets\'></span>');\n@define('_decoupe_SEPARATEUR', '++++');
 if (isset(\$_GET['var_recherche'])) {
 	include_spip('inc/headers');
 	redirige_par_entete(str_replace('var_recherche=', 'decoupe_recherche=', \$GLOBALS['REQUEST_URI']));
@@ -419,7 +419,7 @@ $path = cs_htmlpath(find_in_path(defined('_SPIP19100')?"img_pack/spip_out.gif":"
 add_outil( array(
 	'id' => 'sommaire',
 	'contrib'	=> 2378,
-	'code:options' => "define('_sommaire_REM', '<span class=\'_foo\'></span>');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
+	'code:options' => "define('_sommaire_REM', '<span class=\'_foosommaire\'></span>');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
 	// s'il y a un sommaire, on cache la navigation haute sur les pages
 	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}
 a.sommaire_ancre {background:transparent url($path) no-repeat scroll left center; padding-left:10px; text-decoration:none; }

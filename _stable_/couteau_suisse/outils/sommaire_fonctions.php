@@ -55,6 +55,9 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 		return $sommaire_seul?'':sommaire_retire_raccourcis($texte0);
 	// on retire les raccourcis du texte
 	$texte = sommaire_retire_raccourcis($texte0);
+	// on masque les onglets s'il y en a
+	if(defined('_onglets_FIN'))
+		$texte = preg_replace_callback(',<div class="onglets_bloc_initial.*'._onglets_FIN.',Ums', 'sommaire_echappe_onglets_callback', $texte);
 	// et la, on y va...
 	$sommaire = ''; $i = 1; $nbh3 = 0;
 	// reinitialisation de l'index interne de la fonction
@@ -84,12 +87,17 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	return _sommaire_REM.$sommaire._sommaire_REM.$texte;
 }
 
+// fonction de callback qui echappe les onglets
+function sommaire_echappe_onglets_callback($matches) {
+ return cs_code_echappement($matches[0], 'CS');
+}
+
 // fonction appelee par le traitement de #TEXTE/articles
 function sommaire_d_article($texte) {
 	// s'il n'y a aucun intertitre, on ne fait rien
 	// si la balise est utilisee, il faut quand meme inserer les ancres de retour
 	if((strpos($texte, '<h3')===false)) return $texte;
-		else return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte, false);
+		else return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|onglets', 'sommaire_d_article_rempl', $texte, false);
 }
 
 // fonction appelee par le traitement pre_propre de #CS_SOMMAIRE
@@ -101,7 +109,7 @@ function sommaire_supprime_notes($texte) {
 function sommaire_d_article_balise($texte) {
 	// si la balise n'est pas utilisee ou s'il n'y a aucun intertitre, on ne fait rien
 	if(!defined('_sommaire_BALISE') || (strpos($texte, '<h3')===false)) return '';
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte, true);
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|onglets', 'sommaire_d_article_rempl', $texte, true);
 }
 
 // on veut la balise
