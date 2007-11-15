@@ -18,8 +18,11 @@ function exec_mutualisation_dist() {
 	}
 	sort($sites);
 
+	if (!file_exists(_DIR_IMG.'mutualiser.png'))
+		@copy(find_in_path('mutualiser.png'), _DIR_IMG.'mutualiser.png');
+
 	$titre = '<img style="float:left;" src="'
-		. find_in_path('mutualiser.png')
+		. _DIR_IMG.'mutualiser.png'
 		. '" />';
 	$titre .= _L(count($sites).' '.'sites mutualis&#233;s');
 

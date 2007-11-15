@@ -32,8 +32,7 @@ function demarrer_site($site = '', $options = array()) {
 			'cookie_prefix' => false,
 			'repertoire' => 'sites',
 			'utiliser_panel' => false,
-			'url_img_courtes' => false,
-			'sites_alias' => array()
+			'url_img_courtes' => false
 		),
 		$options
 	);
@@ -197,11 +196,21 @@ function demarrer_site($site = '', $options = array()) {
 	 * connaissance du nom du repertoire.
 	 * 
 	 */
-	if ($options['url_img_courtes']){
-		include_once dirname(__FILE__).'/mutualiser_gerer_img.php';
-		mutualiser_gerer_img($options);
+	if ($options['url_img_courtes']) {
+		$GLOBALS['spip_pipeline']['affichage_final']
+			.= '|mutualisation_url_img_courtes';
 	}
-	
+}
+
+// transformer les sites/truc/IMG/rtf/chose.rtf en /IMG/...
+function mutualisation_url_img_courtes($flux) {
+	if (strpos($flux, _DIR_IMG)
+	OR strpos($flux, _DIR_VAR)) {
+		require_once dirname(__FILE__).'/mutualiser_gerer_img.php';
+		return mutualisation_traiter_url_img_courtes($flux);
+	}
+	else
+		return $flux;
 }
 
 // Cette fonction cree un prefixe acceptable par MySQL a partir du nom

@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function mutualiser_gerer_img($options){
 	// IMG
 	if (!defined('_URL_IMG'))
@@ -15,61 +17,57 @@ function mutualiser_gerer_img($options){
 		OR (_REQUEST('var_mode')=='creer_htaccess_img')){
 			$ok = mutualiser_creer_redirection_img($options);	
 	}
-	
-	// Ajouter le pipeline ?
-	if ($ok)
-		$GLOBALS['spip_pipeline']['affichage_final'] .= '|mutualisation_url_img_courtes';
 }
-
-
-
 
 /* 
  * Creer les rewrite rules
  * 
  * Dans /IMG, on arrive avec (http://naya/IMG/jpg/photo.jpg) :
- *  %{REQUEST_URI} = '/IMG/jpg/photo.jpg'
- *  %{REDIRECT_URL} = ''
- *  %{DOCUMENT_ROOT} = '/home/marcimat/www/spip/'
  *  %{HTTP_HOST} = 'naya'
+ *  %{SCRIPT_NAME} = '/chemin/http/jusqu/a/spip/spip.php'
+ *  %{REQUEST_URI} = '/IMG/jpg/photo.jpg'
  *
- * Si rubrique differente (http://naya/mon_site/IMG/jpg/photo.jpg) :
- *  rien ne change
- * 
- * Si host different (http://cfg.naya/IMG/jpg/photo.jpg) :
- *  %{HTTP_HOST} = 'cfg.naya'
- * 
- * On n'a pas d'autre choix que d'utiliser http_host pour
- * differencier les sites 
- * (du coup, une mutualisation de repertoire
- * ne pourra pas utiliser l'option url_img_courtes)
- * 
  */
-function mutualiser_creer_redirection_img($options){
-	$contenu  = "RewriteEngine On\n"
-		 	  . "RewriteBase /\n";
-	// boucler sur les alias pour rediriger
-	if (!empty($options['sites_alias'])){
-		$contenu .= "\n# Alias de sites\n";
-		foreach($options['sites_alias'] as $domaine => $site){
-			$contenu .= "RewriteCond %{HTTP_HOST} ^($domaine)$\n"
-					  . "RewriteRule .* " 
-					  . $GLOBALS['mutualisation_dir'] 
-					  . "/$site%{REQUEST_URI} [QSA,L]\n";		
-		}
-	}
-	// sinon redirection normale avec un site du meme nom que le domaine	
-	$contenu .= "\n# Toute autre redirection de mutualisation\n"
-			  . "RewriteRule .* " 
-		 	  . $GLOBALS['mutualisation_dir'] 
-		 	  . "/%{HTTP_HOST}%{REQUEST_URI} [QSA,L]\n";
-	
-	include_spip('inc/flock');
-	return 
-		    ecrire_fichier (_URL_IMG . _ACCESS_FILE_NAME, $contenu)
-		AND ecrire_fichier (_URL_VAR . _ACCESS_FILE_NAME, $contenu);
-	
+// sur le repertoire $dir (sites/truc/local/)
+function mutualisation_verifier_htaccess($url, $dir) {
+	// lire le .htaccess existant
+	lire_fichier($url._ACCESS_FILE_NAME, $htaccess);
+	$source = $htaccess;
+
+	// verifier notre bloc init
+	$bloc = '####
+## ce fichier .htaccess est gere par le plugin *mutualisation*
+##
+## ne le modifiez pas : en cas de besoin editez ce plugin,
+## puis effacez ce fichier, il sera recree
+##
+
+RewriteEngine On
+RewriteBase /
+';
+
+	if (strpos($htaccess, $bloc) === false)
+		$htaccess = $bloc;
+
+	$host = $_SERVER['HTTP_HOST'];
+	$racine = dirname($_SERVER['SCRIPT_NAME']); // profondeur_url();
+	$site = basename(dirname($dir));
+	$bloc = "
+
+#### 'http://$host$racine/' = 'sites/$site/'
+RewriteCond %{HTTP_HOST}%{REQUEST_URI} ^".preg_quote("$host$racine/",',')."
+RewriteRule .* $racine/$dir\$0 [L]
+";
+
+	if (strpos($htaccess, $bloc) === false)
+		$htaccess .= $bloc;
+
+
+	return ($htaccess === $source
+		OR ecrire_fichier($url._ACCESS_FILE_NAME, $htaccess)
+		);
 }
+
 
 /*
  * 
@@ -77,12 +75,22 @@ function mutualiser_creer_redirection_img($options){
  * sites/nom_site/(IMG|local).* en (IMG|local).*
  * 
  */
-function mutualisation_url_img_courtes($flux){
+function mutualisation_traiter_url_img_courtes($flux) {
+	// IMG
+	if (!defined('_URL_IMG'))
+		define('_URL_IMG', _DIR_RACINE . _NOM_PERMANENTS_ACCESSIBLES);
+	// local
+	if (!defined('_URL_VAR'))
+		define('_URL_VAR', _DIR_RACINE . _NOM_TEMPORAIRES_ACCESSIBLES);
 
-	return str_replace(
-			array(_DIR_VAR, _DIR_IMG), 
-			array(_URL_VAR, _URL_IMG), 
-			$flux);
+	if (mutualisation_verifier_htaccess(_URL_VAR, _DIR_VAR)
+	AND mutualisation_verifier_htaccess(_URL_IMG, _DIR_IMG)) {
+		return str_replace(
+			array(_DIR_VAR, _DIR_IMG),
+			array(_URL_VAR, _URL_IMG),
+		$flux);
+	} else
+		return $flux;
 }
 
 ?>

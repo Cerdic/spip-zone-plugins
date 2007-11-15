@@ -78,17 +78,6 @@
 	 */
 	
 	/*
-	 * Certains sites mutualises n'ont pas le meme nom de repertoire
-	 * que le nom de domaine, il faut, pour les url_img_courtes
-	 * les indiquer ici :
-	 * ex: http://www.spip-blog.net/ => /sites/spipblog/
-	 * 
-	 * 'sites_alias' => array('www.spip-blog.net'=>'spipblog'),
-	 * 
-	 */
-	
-	
-	/*
 	 * Inscrire ici le nom du site d'administration du tableau de bord
 	 * de la mutualisation (ou plusieurs, separes par des virgules)
 	 * (dans cet exemple, 'scriibe.net' est le top level domain, TLD)
@@ -120,11 +109,9 @@
 			'repertoire' => 'sites',
 			// Utiliser la redirection des URL d'images courtes dans la partie publique (false)
 			'url_img_courtes' => true,
-			// Alias 'nom de domaine' => 'repertoire de stockage' pour 'url_images_courtes'
-			'sites_alias' => array(),
 			// Utiliser une table externe pour recuperer des identifiants
 			// (code, user, pass) permettant a un utilisateur d'installer le site (false)
-			# 'utiliser_panel' => false, 
+			# 'utiliser_panel' => false,
 			// Creer la base de donnees via une URL (methode AlternC)
 			'url_creer_base' => ''
 		)
