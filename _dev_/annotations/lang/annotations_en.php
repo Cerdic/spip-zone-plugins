@@ -20,7 +20,9 @@
 		'preview_csv' => 'Preview of the csv file'
 		'click_select_csv' => 'Click on the icons to select a csv file',
 		'download' => 'Download',
-		'no_data_csv' => 'No data in the csv file'		
+		'no_data_csv' => 'No data in the csv file',
+		'image' => 'Image',
+		'info_no_coord' => 'No coordinate. Please select an image from the previous menu and click on a point'		
 );
 
 ?>

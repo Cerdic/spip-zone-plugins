@@ -49,15 +49,15 @@
 	<fieldset>
 	<legend><:forum_lien_hyper:></legend>
 	<p><:forum_page_url:></p>
-	<p><label for="nom_site">Document</label>
+	<p><label for="nom_site"><:annotations:image:></label>
 	<select name="nom_site" id="nom_site">
 	<option value=""[ selected="selected"(#ENV{nom_site}|?{'',' '})]></option>
 	<BOUCLE_cartes(DOCUMENTS){id_article}{extension IN jpg,gif,png}>
 	<option value="#ID_DOCUMENT"[ selected="selected"(#ENV{nom_site}|=={#ID_DOCUMENT}|?{' ',''})]>#TITRE (#ID_DOCUMENT - #FICHIER)</option>
 	</BOUCLE_cartes>
 	</select></p>
-	<p><label for="url_site">Coordinates</label><br />
-	<span id="anno_map_coords">Please select an image from the previous menu</span>
+	<p><label for="url_site"><:annotations:coordinates:></label><br />
+	<span id="anno_map_coords"><:annotations:info_no_coord:></span>
 	<input type="hidden" class="forml" name="url_site" id="url_site" value="[(#ENV{url_site})]" /></p>
 	</fieldset>
 	<script type="text/javascript">
@@ -76,7 +76,7 @@
 						});
 					});
 				} else {
-					jQuery("#anno_map_coords").html("Please select an image from the previous menu");
+					jQuery("#anno_map_coords").html("<:annotations:info_no_coord:>");
 				}
 			}
 			showMap.apply(jQuery("#nom_site").change(showMap)[0]);

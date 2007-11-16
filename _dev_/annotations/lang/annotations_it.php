@@ -20,7 +20,9 @@
 		'preview_csv' => 'Anteprima del file csv',
 		'click_select_csv' => 'Clicca sulle icone per selezionare un file csv',
 		'download' => 'Scarica',
-		'no_data_csv' => 'Nessun dato nel file csv'
+		'no_data_csv' => 'Nessun dato nel file csv',
+		'image' => 'Immagine',
+		'info_no_coord' => 'Nessuna coordinata. Seleziona un\'immagine dal men&ugrave; precedente e clicca su un punto'
 );
 
 ?>
