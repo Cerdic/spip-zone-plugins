@@ -1,4 +1,5 @@
-<B_liste>[(#ENV{home}|?{'',' '})#PAGINATION]
+<B_liste>
+[(#ENV{debut_liste}|?{[<p class="pagination">(#PAGINATION)</p>],#ANCRE_PAGINATION})]
 <BOUCLE_liste(ARTICLES){branche ?}{lang ?}{archives ?}{par date}{inverse}{pagination 15}>
 <div class="post">
 	[(#LOGO_ARTICLE|right|#URL_ARTICLE|liens_absolus)]
@@ -29,5 +30,5 @@
 	</p>
 </div>
 </BOUCLE_liste>
-[(#ENV{home}|?{'',' '})#PAGINATION]
+[<p class="pagination">(#PAGINATION)</p>]
 </B_liste>
