@@ -24,6 +24,8 @@
 			$trans['<-'] = '«-';
 			$trans['&nbsp;'] = ' ';
 			$texte = strtr($texte, $trans);
+			// certains titles font paniquer l'analyse
+			$texte = preg_replace(',title=".*",msU', 'title=""', $texte);
 			
 			$texte = unicode2charset(charset2unicode($texte), 'iso-8859-1'); // repasser tout dans un charset acceptable par export PDF
 	
