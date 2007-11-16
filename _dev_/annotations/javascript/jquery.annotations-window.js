@@ -11,7 +11,14 @@
 
 (function($){
 	var points_data = {ids:[]},csv_data = {};
-	
+	//IE 6 does not reflow absolute elements after DOM manipulation 
+	var fix_absolute_IE6;
+	if($.browser.msie && $.browser.version=='6.0')
+		fix_absolute_IE6 = function() {$("#annotate_window_cancel").hide().show();};
+	else
+		fix_absolute_IE6 = function() {};
+
+		
 	//init function
 	$(function(){
 		var hash = $("#annotate_window").jqm().getHashWindow();
@@ -45,6 +52,7 @@
 				$("#annotate_window").jqmShow();
 				hash.o.unbind("click");
 				$.carto.annotate_fill_summary_panel(function(p){
+					fix_absolute_IE6();
 					$("#annotate_image_summary").find("div.map_marker,div.map_marker_highlight").remove();
 					var images = {};
 					images[$.carto.id_document] = $("#annotate_image_summary img");
@@ -181,6 +189,7 @@
 						console.log("answer delete all: "+answer.result);
 						points_data.ids = [];
 						$.carto.annotate_fill_summary_panel(points_data,function(p){
+							fix_absolute_IE6();
 							$("#annotate_image_summary").find(".map_marker,.map_marker+map,div.map_marker_highlight").remove();
 							var images = {};
 							images[$.carto.id_document] = $("#annotate_image_summary img");
@@ -235,6 +244,7 @@
 						$.carto.showAnnotatePanel(1);
 						window.scrollTo(0,0);
 						$.carto.annotate_fill_summary_panel(points_data,function(p){
+							fix_absolute_IE6();
 							$("#annotate_image_summary").find(".map_marker,.map_marker+map,div.map_marker_highlight").remove();
 							var images = {};
 							images[$.carto.id_document] = $("#annotate_image_summary img");
@@ -273,6 +283,7 @@
 							$.carto.showAnnotatePanel(1);
 							window.scrollTo(0,0);
 							$.carto.annotate_fill_summary_panel(function(p){
+								fix_absolute_IE6();
 								$("#annotate_image_summary").find(".map_marker,.map_marker+map,div.map_marker_highlight").remove();
 								var images = {};
 								images[$.carto.id_document] = $("#annotate_image_summary img");
@@ -286,6 +297,7 @@
 				});
 				break;
 		}
+		fix_absolute_IE6();
 	}
 	
 	$.carto.displayCsv = function(data,rowsToShow) {
