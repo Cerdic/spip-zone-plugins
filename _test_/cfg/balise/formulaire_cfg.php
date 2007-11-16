@@ -29,6 +29,7 @@ function balise_FORMULAIRE_CFG_dyn($vue, $id) {
 	//	? 'formulaires/formulaire_cfg' //'inc-shoutbox' <- ajax
 	//	: 'formulaires/formulaire_cfg'; // <- non ajax
 
+	$cfg_hash = substr(md5($vue.$id),0,6);
 	return
 		array(
 			// squelette
@@ -40,6 +41,7 @@ function balise_FORMULAIRE_CFG_dyn($vue, $id) {
 				'nom' => $vue,
 				'vue' => $vue,
 				'id' => $id,
+				'cfg_hash' => $cfg_hash,
 				'id_cfg' => $id
 			)
 		);

@@ -187,8 +187,8 @@ function affiche_arborescence($cfg='') {
 							$(this).next('ul').hide();
 						  })
 					});
-					</script>
-					" . "\n";
+					</script>\n";
+
 	$present = true;	
 	
 	$tableau = lire_config($cfg);
@@ -237,13 +237,12 @@ function balise_VUE_CFG($p){
 	$vue = 			sinon(interprete_argument_balise(1,$p), "''"); // indispensable neanmmoins
 	$id = 			sinon(interprete_argument_balise(2,$p), "''");
 	$aff_titre = 	sinon(interprete_argument_balise(3,$p), "''");
-	$cfg_id = 		sinon(interprete_argument_balise(4,$p), "''");
 	//include_spip('balise/vue_cfg');
-	$p->code = "calculer_VUE_CFG($vue, $id, $aff_titre, $cfg_id)";
+	$p->code = "calculer_VUE_CFG($vue, $id, $aff_titre)";
 	return $p;
 }
 
-function calculer_VUE_CFG($fond, $id, $afficher_titre, $cfg_id){
+function calculer_VUE_CFG($fond, $id, $afficher_titre){
 	include_spip('inc/cfg');
 	$cfg = cfg_charger_classe('cfg');
 	$config = & new $cfg($fond, $fond, $id); 
