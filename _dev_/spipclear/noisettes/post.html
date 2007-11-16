@@ -1,4 +1,5 @@
 <BOUCLE_article(ARTICLES){id_article}>
+<div class="post">
 [(#LOGO_ARTICLE|right|#URL_ARTICLE|liens_absolus)]
 <h2 class="post-title">#TITRE</h2>
 <p class="post-info"><B_auteurs><:par_auteur|ucfirst:> <BOUCLE_auteurs(AUTEURS){id_article}{", "}>#NOM</BOUCLE_auteurs>,</B_auteurs>
@@ -17,6 +18,7 @@
 	[<div>#DEBUT_SURLIGNE(#NOTES|appliquer_hreflang)#FIN_SURLIGNE</div>]
 	[<div><strong><:voir_en_ligne:></strong> : <a href="(#URL_SITE)">#NOM_SITE</a></div>]
 </div>]
+</div>
 
 <div id="comments">
 	<h3 id="co"><:spipclear:commentaires|ucfirst:></h3>
