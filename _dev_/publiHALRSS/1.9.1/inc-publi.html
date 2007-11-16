@@ -1,0 +1,15 @@
+<B_P>
+	<h2 class="publi_type">#ENV{titreTypePub}</h2>
+	<ul class="publi"><?php $publiHAL_memo_an=2100; ?>
+	<BOUCLE_P(SYNDIC_ARTICLES){tout}{annee>=#ENV{anDeb}}{annee<=#ENV{anFin}}{tags==[>]#ENV{typePub}}{!par date}>
+		<?php if($publiHAL_memo_an!=[(#DATE|annee|sinon{2100})]){?>[</ul>
+			<h3 class="publi_annee">(#DATE|annee)</h3>
+		<ul class="publi">]<?php } $publiHAL_memo_an=[(#DATE|annee|sinon{2100})]; ?>
+		<li>#PUCE<span class="publi_titre"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></span>
+		[- <span class="publi_refediteur">(#REFEDITEUR)</span>]
+		[<br><span class="publi_auteurs">((#LESAUTEURS|presenteAuteursPubli))</span>]
+		</li>
+	</BOUCLE_P>
+	</ul>
+</B_P>
+<//B_P>

@@ -1,0 +1,114 @@
+[(#REM)
+	Affiche une liste de publications
+
+ART_ACL : Articles dans des revues avec comité de lecture
+ART_SCL : Articles dans des revues sans comité de lecture
+CONF_INV : Conférences invitées
+COMM_ACT : Communications avec actes
+COMM_SACT : Communications sans actes
+OUVS : Ouvrages scientifiques
+COVS : Chapitres d'ouvrages scientifiques
+DOUV : Directions d'ouvrages
+BREVET : Brevets
+HDR : Habilitations à diriger des recherches
+THESE : Thèses
+COURS : Cours
+AUTRE : Autres publications
+RAPPORT : Rapport de recherche
+UNDEFINED : Documents sans référence de publication
+
+]
+<BOUCLE_UnePubli(SYNDIC_ARTICLES){id_syndic_article}>
+	<?php if($publiHAL_memo_an!=[(#DATE|annee|sinon{2100})]){?>[
+	</ul><h3 class="publi_annee">(#DATE|annee)</h3>
+	<ul class="publi">]
+	<?php } $publiHAL_memo_an=[(#DATE|annee|sinon{2100})]; ?>
+	<li>[(#PUCE|inserer_attribut{title,#ID_SYNDIC_ARTICLE})]<span class="publi_titre"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></span>
+	[- <span class="publi_refediteur">(#REFEDITEUR)</span>]
+	[<span class="publi_auteurs">((#LESAUTEURS|presenteAuteursPubli))</span><br>]
+	</li>
+</BOUCLE_UnePubli>
+
+<?php 
+$publiHAL_memo_an=2100;
+if(strcmp('#ENV{typedoc}',"tous")==0){
+?>
+<BOUCLE_mot(MOTS){id_groupe=#EVAL{$GLOBALS['meta']['publiHAL_Type_de_document']}}{par num titre}>
+<?php $publiHAL_memo_an=2100; ?>
+<B_Publi>
+	[<h2 class="publi_type">(#TEXTE|sinon{[(#TITRE|supprimer_numero)]})</h2>]
+	<ul class="publi">
+	<BOUCLE_Publi(SYNDIC_ARTICLES){doublons}{id_mot}{annee>=#ENV{anDeb,1}}{annee<=#ENV{anFin,2100}}{!par date}{par titre}>
+		<BOUCLE_eltPubli(BOUCLE_UnePubli)></BOUCLE_eltPubli>
+	</BOUCLE_Publi>
+	</ul>
+</B_Publi>
+<//B_Publi>
+</BOUCLE_mot>
+<B_Publi0>
+	<h2 class="publi_type">Sans type</h2>
+	<ul class="publi">
+	<BOUCLE_Publi0(SYNDIC_ARTICLES){doublons}{annee>=#ENV{anDeb,1}}{annee<=#ENV{anFin,2100}}{!par date}{par titre}>
+		<BOUCLE_eltPubli0(BOUCLE_UnePubli)></BOUCLE_eltPubli0>
+	</BOUCLE_Publi0>
+	</ul>
+</B_Publi0>
+
+<?php }elseif(preg_match("/^\d+$/isU",'#ENV{labo}')){ 
+?>
+<BOUCLE_mot1(MOTS){id_groupe=#EVAL{$GLOBALS['meta']['publiHAL_Type_de_document']}}{par num titre}>
+<?php $publiHAL_memo_an=2100; ?>
+<B_Publi1>
+	[<h2 class="publi_type">(#TEXTE|sinon{[(#TITRE|supprimer_numero)]})</h2>]
+	<ul class="publi">
+	<BOUCLE_Publi1(SYNDIC_ARTICLES){id_mot}{id_mot=#ENV{labo}}{annee>=#ENV{anDeb,1}}{annee<=#ENV{anFin,2100}}{!par date}{par titre}>
+		<BOUCLE_eltPubli1(BOUCLE_UnePubli)></BOUCLE_eltPubli1>
+	</BOUCLE_Publi1>
+	</ul>
+</B_Publi1>
+<//B_Publi1>
+</BOUCLE_mot1>
+<?php }elseif(preg_match("/^\d+(,\d+)*$/isU",'#ENV{typedoc}')){ 
+?>
+<BOUCLE_mot2(MOTS){id_mot IN #LISTE_IDS{typedoc}}{id_groupe=#EVAL{$GLOBALS['meta']['publiHAL_Type_de_document']}}{par num titre}>
+<?php $publiHAL_memo_an=2100; ?>
+<B_Publi2>
+	[<h2 class="publi_type">(#TEXTE|sinon{[(#TITRE|supprimer_numero)]})</h2>]
+	<ul class="publi">
+	<BOUCLE_Publi2(SYNDIC_ARTICLES){id_mot}{annee>=#ENV{anDeb,1}}{annee<=#ENV{anFin,2100}}{!par date}{par titre}>
+		<BOUCLE_eltPubli2(BOUCLE_UnePubli)></BOUCLE_eltPubli2>
+	</BOUCLE_Publi2>
+	</ul>
+</B_Publi2>
+<//B_Publi2>
+</BOUCLE_mot2>
+<?php }elseif(preg_match("/^\d+(,\d+)*$/isU",'#ENV{id}')){ 
+?>
+<BOUCLE_mot3(MOTS){id_groupe=#EVAL{$GLOBALS['meta']['publiHAL_Type_de_document']}}{par num titre}>
+<?php $publiHAL_memo_an=2100; ?>
+<B_Publi3>
+	[<h2 class="publi_type">(#TEXTE|sinon{[(#TITRE|supprimer_numero)]})</h2>]
+	<ul class="publi">
+	<BOUCLE_Publi3(SYNDIC_ARTICLES){id_mot}{id_syndic_article IN #LISTE_IDS{id}}{annee>=#ENV{anDeb,1}}{annee<=#ENV{anFin,2100}}{!par date}{par titre}>
+		<BOUCLE_eltPubli3(BOUCLE_UnePubli)></BOUCLE_eltPubli3>
+	</BOUCLE_Publi3>
+	</ul>
+</B_Publi3>
+<//B_Publi3>
+</BOUCLE_mot3>
+<?php }elseif(preg_match("/^\d+(,\d+)*$/isU",'#ENV{auteur}')){ 
+?>
+<BOUCLE_mot4(MOTS){id_groupe=#EVAL{$GLOBALS['meta']['publiHAL_Type_de_document']}}{par num titre}>
+<?php $publiHAL_memo_an=2100; ?>
+<B_Publi4>
+	[<h2 class="publi_type">(#TEXTE|sinon{[(#TITRE|supprimer_numero)]})</h2>]
+	<ul class="publi">
+	<BOUCLE_Publi4(SYNDIC_ARTICLES){id_mot}{id_mot IN #LISTE_IDS{auteur}}{annee>=#ENV{anDeb,1}}{annee<=#ENV{anFin,2100}}{!par date}{par titre}>
+		<BOUCLE_eltPubli4(BOUCLE_UnePubli)></BOUCLE_eltPubli4>
+	</BOUCLE_Publi4>
+	</ul>
+</B_Publi4>
+<//B_Publi4>
+</BOUCLE_mot4>
+<?php }
+?>

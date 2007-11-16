@@ -1,0 +1,28 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+</head>
+
+<body class="page_rubrique">
+
+<?php $titre2=""; ?>
+<B_Publi>
+	[<h2 class="publi_type">(#TEXTE|sinon{[(#TITRE|supprimer_numero)]})</h2>]
+	<ul class="publi">
+	<BOUCLE_Publi(groupes_mots){titre="publiHAL_auteurs_publi"}>
+	<h3>Dans le groupe de mots #TITRE</h3>
+	<ul>
+	<BOUCLE_aut(mots){id_groupe}{par titre}>
+	<li>&lt;publi|auteur=#ID_MOT&gt; ( #TITRE )</li>	
+	</BOUCLE_aut>
+	</ul>
+	Si votre nom n'est pas présent il peut être ajouté au groupe de mots #TITRE .
+	
+	</BOUCLE_Publi>
+</B_Publi>
+<//B_Publi>
+
+</body>
+</html>
+</BOUCLE_rubrique_principal>

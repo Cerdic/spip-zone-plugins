@@ -1,0 +1,67 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[Publications - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+	<INCLURE{fond=inc-head}>
+
+</head>
+
+<body class="page_rubrique">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie">
+	<a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_rubrique_ariane(RUBRIQUES){lang_select=non}{id_rubrique}>
+	<BOUCLE_ariane(HIERARCHIE){lang_select=non}{id_rubrique}> &gt;
+	<a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{40})]</a></BOUCLE_ariane>&gt;
+	<a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{40})]</a></BOUCLE_rubrique_ariane>&gt; <:resultats_recherche:>
+	</div>
+	
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de la rubrique ]
+		<div id="contenu-liste">
+
+			<div class="cartouche">
+				<h1 class="titre">Liste de publications <?php
+$ad='#ENV{anDeb}';
+$af='#ENV{anFin}';
+if($ad && $ad==$af) { 
+	echo " de l'année $ad"; 
+} else {
+	if($ad){ echo " depuis $ad"; }
+	if($af){ echo " jusqu'à $af"; }
+} 
+?></h1>
+				<i><span class="soustitre">
+				[(#ENV{typedoc}|choixsiegal{tous,'Tous les types de documents',''})]<?php
+				if(preg_match("/^\d+$/isU",'#ENV{labo}')){ ?>
+				<BOUCLE_typeLabo(MOTS){id_groupe=#EVAL{$GLOBALS['meta']['publiHAL_Labo_publi']}}{id_mot=#ENV{labo}}>
+				[pour (#TEXTE|sinon{#TITRE})]</BOUCLE_typeLabo><?php	}?>
+				</span></i>
+			</div>
+			<br class="nettoyeur" />
+				
+			<!--<div class="contre-encart">-->
+			[(#MODELE{publi}{id=#ENV{id}}{labo=#ENV{labo}}{typedoc=#ENV{typedoc}}{anDeb=#ENV{anDeb}}{anFin=#ENV{anFin}}{auteur=#ENV{auteur}})]
+
+			<!--/div><! fin contre-encart -->
+
+			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>	
