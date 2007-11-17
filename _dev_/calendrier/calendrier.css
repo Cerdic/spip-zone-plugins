@@ -38,6 +38,14 @@ table.calendrier td.aujourdhui{
 	border: 1px solid #493;
 }
 
-table.calendrier td.mois_precedent, table.calendrier td.mois_suivant{
+table.calendrier td.mois_precedent{
 	color: #EFA;
+}
+
+table.calendrier td.mois_suivant{
+	color: #EFA;
+}
+
+table.calendrier td small{
+	font-size: 100%;
 }

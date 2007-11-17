@@ -8,7 +8,7 @@
 
 ]<td class="[(#ENV{hors_periode}) ][(#ENV{aujourdhui}|?{aujourdhui}) ]jour_#ENV{jour_semaine}">#SET{lien,''}[
 	[<a href="(#ENV{url})">#SET{lien,' '}]
-		(#ENV{jour})
+		[(#ENV{hors_periode}|?{<small>})](#ENV{jour})[(#ENV{hors_periode}|?{</small>})]
 	[(#GET{lien}|?{</a>})]][
 		(#ENV{jour}|?{'',&nbsp;})
 ]</td>
