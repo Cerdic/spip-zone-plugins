@@ -302,6 +302,12 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= "&nbsp;</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col ++;
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
+	} elseif (lire_config('btv2/avancee') == 'Oui') {
+		$ret .= "&nbsp;</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
+		$col ++;
+		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
+		$ret .= bouton_barre_racc ("barre_raccourci('&lt;code&gt;','&lt;/code&gt;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/page_white_code_red.png", _T('barre_code'), $champhelp);
+		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;cadre&gt;','&lt;/cadre&gt;\n\n',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/page_white_code.png", _T('barre_cadre'), $champhelp);
 	}
 	$ret .= bouton_barre_racc ("barre_raccourci('[?',']',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
 
