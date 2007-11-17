@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_alignerdroite' => '[/Aligne &agrave; droite/] le paragraphe',
 'barre_encadrer' => '[(Encadrer)] le paragraphe',
 
-'barre_poesie' => 'Mettre en forme comme une &lt;poesie&gt;po&eacute;sie&lt;/poesie&gt;',
+'barre_barre' => 'Barrer le texte',
 
 'barre_avances' => 'Du sens, du sens&nbsp;!',
 'barre_boutonsavances' => 'Mises en sens suppl&eacute;mentaires, &agrave; utiliser avec mod&eacute;ration et discernement&nbsp;!',

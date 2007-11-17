@@ -9,7 +9,7 @@ $reta .= bouton_barre_racc ("barre_raccourci('\n\n{3{','}3}\n\n',$champ)", _DIR_
 $reta .= bouton_barre_racc ("barre_raccourci('[|','|]',$champ)", _DIR_PLUGIN_TYPOENLUMINEE.'/img_pack/icones_barre/center.png', _T('enlumtypo:barre_centrer'), $champhelp);
 $reta .= bouton_barre_racc ("barre_raccourci('[/','/]',$champ)", _DIR_PLUGIN_TYPOENLUMINEE.'/img_pack/icones_barre/right.png', _T('enlumtypo:barre_alignerdroite'), $champhelp);
 $reta .= bouton_barre_racc ("barre_raccourci('[(',')]',$champ)", _DIR_PLUGIN_TYPOENLUMINEE.'/img_pack/icones_barre/cadretexte.png', _T('enlumtypo:barre_encadrer'), $champhelp);
-$reta .= bouton_barre_racc ("barre_raccourci('<poesie>','</poesie>',$champ)", _DIR_PLUGIN_TYPOENLUMINEE."/img_pack/icones_barre/poesie.png", _T('enlumtypo:barre_poesie'), $champhelp);
+$reta .= bouton_barre_racc ("barre_raccourci('<del>','</del>',$champ)", _DIR_PLUGIN_TYPOENLUMINEE."/img_pack/icones_barre/text_strikethrough.png", _T('enlumtypo:barre_texte_barre'), $champhelp);
 	global $spip_lang;
 	$params = array($champ,$champhelp,$spip_lang);
 	$add = pipeline("BarreTypoEnrichie_boutonsavances",array($champ,$champhelp,$spip_lang));
