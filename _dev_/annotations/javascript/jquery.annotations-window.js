@@ -22,10 +22,6 @@
 	//init function
 	$(function(){
 		var hash = $("#annotate_window").jqm().getHashWindow();
-		//bind event to hide window
-		$("#annotate_window_cancel").click(function(){
-			$("#annotate_window").jqmHide();
-		});
 		//hide all wizard pages
 		$("#annotate_window li.wizard_page").hide();
 		//bind links that trigger the wizard
@@ -48,8 +44,8 @@
 				//set up post data
 			  $.carto.postData = data.postData;
 				//show panel
-				$.carto.showAnnotatePanel(1);
 				$("#annotate_window").jqmShow();
+				$.carto.showAnnotatePanel(1);
 				hash.o.unbind("click");
 				$.carto.annotate_fill_summary_panel(function(p){
 					fix_absolute_IE6();
@@ -198,9 +194,17 @@
 					});
 					return false;
 				});
+				//bind event to hide window
+				$("#annotate_window_cancel").unbind().click(function(){
+					$("#annotate_window").jqmHide();
+				});
 				break;
 			case 2:
 				$("#annotate_wizard2").show();
+				//bind event to return to the first page
+				$("#annotate_window_cancel").unbind().click(function(){
+					$.carto.showAnnotatePanel(1);
+				});
 				break;			
 			case 3:
 				//add,chenge point data
@@ -253,6 +257,10 @@
 					});
 					return false;
 				});
+				//bind event to return to the first page
+				$("#annotate_window_cancel").unbind().click(function(){
+					$.carto.showAnnotatePanel(1);
+				});				
 				break;
 			case 4:
 				$("#annotate_wizard4").show();
@@ -293,7 +301,12 @@
 						return false;
 					});
 										
-					$.carto.displayCsv(csv_data,10);					
+					$.carto.displayCsv(csv_data,10);
+					fix_absolute_IE6();					
+				});
+				//bind event to return to the first page
+				$("#annotate_window_cancel").unbind().click(function(){
+					$.carto.showAnnotatePanel(2);
 				});
 				break;
 		}
@@ -305,10 +318,8 @@
 		var container = $("#annotate_csv_panel_container"); 
 		var clean_it = function() {
 			var panel = $("#annotate_csv_panel").empty();
-			container.width($("#annotate_window").width()).
-			height($(window).height()*0.8);
-			
-			panel.append("<tr><th style='text-align:center'><img src='"+$.carto.cfg.loaderImage+"'></th></tr>");		
+			container.width($("#annotate_window").width());
+			panel.append("<thead><tr><th style='text-align:center'><img src='"+$.carto.cfg.loaderImage+"'></th></tr></thead>");		
 		};
 
 		var fill_it = function() {
@@ -333,7 +344,7 @@
 				});
 				row += "</tr>";
 				body += row;
-				if(rowsToShow==0) return;
+				if(rowsToShow==0) return false;
 				rowsToShow--;
 			});
 			body += "</tbody>";
