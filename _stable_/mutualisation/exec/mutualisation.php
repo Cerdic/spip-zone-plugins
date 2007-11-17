@@ -23,7 +23,7 @@ function exec_mutualisation_dist() {
 
 	$titre = '<img style="float:left;" src="'
 		. _DIR_IMG.'mutualiser.png'
-		. '" />';
+		. '" alt="" />';
 	$titre .= _L(count($sites).' '.'sites mutualis&#233;s');
 
 	$page = '';
@@ -32,7 +32,7 @@ function exec_mutualisation_dist() {
 		. ' ' . $GLOBALS['spip_version'].'</div>';
 
 
-	$page .= "<table>
+	$page .= "<table style='clear:both;'>
 	<thead>
 		<tr>
 			<td>Site</td>
@@ -73,7 +73,7 @@ function exec_mutualisation_dist() {
 			$plugins = '-';
 		}
 		$page .= "<tr class='tr". $nsite % 2 ."'"
-			. " style='background: url(${url}spip.php?action=cron&renouvelle_alea=yo);'>
+			. " style='background: url(${url}spip.php?action=cron&amp;renouvelle_alea=yo);'>
 			<td>$v$version_installee$erreur</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire/</a></td>
