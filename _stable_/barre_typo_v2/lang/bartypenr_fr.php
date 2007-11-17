@@ -41,6 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_preview' => 'Mode pr&eacute;visualisation',
 'barre_stats' => 'Afficher les statistiques du texte',
 
+'barre_poesie' => 'Mettre en forme comme une &lt;poesie&gt;po&eacute;sie&lt;/poesie&gt;',
+
 'barre_ancres' => 'Gestion des ancres',
 'barre_gestion_anc_caption' => 'Gestion des ancres',
 'barre_gestion_anc_inserer' => 'Transformer en ancre',
