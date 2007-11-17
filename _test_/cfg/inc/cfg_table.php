@@ -1,11 +1,14 @@
 <?php
+
 /*
- * Plugin cfg : classe cfg_table: storage naturel dans une table
+ * Plugin CFG pour SPIP
+ * (c) toggg 2007, distribue sous licence GNU/GPL
+ * Documentation et contact: http://www.spip-contrib.net/
  *
- * Auteur : bertrand@toggg.com
- * © 2007 - Distribue sous licence LGPL
- *
+ * classe cfg_table: storage naturel dans une table
  */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // cfg_table retrouve et met a jour les donnees d'une table "objet" $cfg->table
 // ici, $cfg->cfg_id est obligatoire

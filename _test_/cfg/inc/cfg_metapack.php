@@ -1,11 +1,14 @@
 <?php
+
 /*
- * Plugin cfg : classe cfg_metapack: storage serialise dans spip_meta
+ * Plugin CFG pour SPIP
+ * (c) toggg 2007, distribue sous licence GNU/GPL
+ * Documentation et contact: http://www.spip-contrib.net/
  *
- * Auteur : bertrand@toggg.com
- * © 2007 - Distribue sous licence LGPL
- *
+ * classe cfg_metapack: storage serialise dans spip_meta
  */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // cfg_metapack retrouve et met a jour les donnees serialisees dans spip_meta
 class cfg_metapack

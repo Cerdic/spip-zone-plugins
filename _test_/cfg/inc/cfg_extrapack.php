@@ -1,11 +1,14 @@
 <?php
+
 /*
- * Plugin cfg : classe cfg_extrapack: storage serialise dans extra de spip_auteurs ou autre
+ * Plugin CFG pour SPIP
+ * (c) toggg 2007, distribue sous licence GNU/GPL
+ * Documentation et contact: http://www.spip-contrib.net/
  *
- * Auteur : bertrand@toggg.com
- * © 2007 - Distribue sous licence LGPL
- *
+ * classe cfg_extrapack: storage serialise dans extra de spip_auteurs ou autre
  */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // cfg_extrapack retrouve et met a jour les donnees serialisees dans la colonne extra
 // d'une table "objet" $cfg->table, par défaut spip_auteurs

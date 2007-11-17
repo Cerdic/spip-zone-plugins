@@ -1,11 +1,14 @@
 <?php
+
 /*
- * Plugin cfg : la classe fabricant le formulaire
- *
- * Auteur : bertrand@toggg.com
- * © 2007 - Distribue sous licence LGPL
+ * Plugin CFG pour SPIP
+ * (c) toggg 2007, distribue sous licence GNU/GPL
+ * Documentation et contact: http://www.spip-contrib.net/
  *
  */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 
 // la classe cfg represente une page de configuration
 class cfg_formulaire

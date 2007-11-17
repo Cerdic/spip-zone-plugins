@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Plugin CFG pour SPIP
+ * (c) toggg 2007, distribue sous licence GNU/GPL
+ * Documentation et contact: http://www.spip-contrib.net/
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

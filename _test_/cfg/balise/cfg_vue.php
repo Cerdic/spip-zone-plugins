@@ -1,9 +1,14 @@
-<?
-
+<?php
 
 /*
+ * Plugin CFG pour SPIP
+ * (c) toggg 2007, distribue sous licence GNU/GPL
+ * Documentation et contact: http://www.spip-contrib.net/
+ *
  * Affiche le formulaire CFG de la vue (fond) demandee
  */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_CFG_VUE($p){
 	//return calculer_balise_dynamique($p, 'VUE_CFG', array());

@@ -1,13 +1,12 @@
 <?php
-/*
- * Plugin cfg : ecrire/?exec=cfg&cfg=xxxx
- *
- * Auteur : bertrand@toggg.com
- * (c) 2007 - Distribue sous licence LGPL
- *
- */
-// la fonction appelee par le core, une simple "factory" de la classe cfg
 
+/*
+ * Plugin CFG pour SPIP
+ * (c) toggg 2007, distribue sous licence GNU/GPL
+ * Documentation et contact: http://www.spip-contrib.net/
+ *
+ * la fonction appelee par le core, une simple "factory" de la classe cfg
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

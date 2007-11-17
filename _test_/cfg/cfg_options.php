@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * Plugin CFG pour SPIP
+ * (c) toggg 2007, distribue sous licence GNU/GPL
+ * Documentation et contact: http://www.spip-contrib.net/
+ *
+ */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+
 // Compatibilite 1.9.2
 if (version_compare($GLOBALS['spip_version_code'],'1.9300','<'))
 	include_spip('inc/compat_cfg');
