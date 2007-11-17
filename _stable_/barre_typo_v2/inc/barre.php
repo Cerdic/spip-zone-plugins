@@ -227,6 +227,23 @@ $tableau_formulaire = '
   return produceWharf('tableau_caracteres','',$tableau_formulaire); 	
 }
 
+// pour les caracteres
+function afficher_formatages_speciaux($champ, $spip_lang, $champhelp, $num_barre) {
+	$reta = bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
+	$reta .= bouton_barre_racc ("barre_raccourci('&lt;code&gt;','&lt;/code&gt;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/page_white_code_red.png", _T('barre_code'), $champhelp);
+	$reta .= bouton_barre_racc ("barre_raccourci('\n\n&lt;cadre&gt;','&lt;/cadre&gt;\n\n',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/page_white_code.png", _T('barre_cadre'), $champhelp);
+	$tableau_formulaire = '
+	<table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
+	  <tr class="spip_barre">
+		<td>'._T('bartypenr:barre_formatages_speciaux').'</td>
+		<td>'.$reta.'
+		</td>
+	  </tr> 
+	</table>
+	';
+	return produceWharf('tableau_formatages_speciaux','',$tableau_formulaire); 	
+}
+
 // construit un tableau de raccourcis pour un noeud de DOM
 
 // http://doc.spip.org/@afficher_barre
@@ -248,6 +265,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
  // Pregeneration des toolzbox.. (wharfing)
     $toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp, $num_barre);
+	$toolbox .= afficher_formatages_speciaux($champ, $spip_lang, $champhelp, $num_barre);
     $toolbox .= afficher_gestion_lien($champ, $num_barre);
     $toolbox .= afficher_gestion_ancre($champ, $num_barre);
     $toolbox .= afficher_gestion_remplacer($champ, $champhelp, $num_barre);
@@ -305,9 +323,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	} elseif (lire_config('btv2/avancee') == 'Oui') {
 		$ret .= "&nbsp;</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col ++;
-		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
-		$ret .= bouton_barre_racc ("barre_raccourci('&lt;code&gt;','&lt;/code&gt;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/page_white_code_red.png", _T('barre_code'), $champhelp);
-		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;cadre&gt;','&lt;/cadre&gt;\n\n',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/page_white_code.png", _T('barre_cadre'), $champhelp);
+		$ret .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_formatages_speciaux']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/tag.png", _T('bartypenr:barre_formatages_speciaux'), $champhelp);;
 	}
 	$ret .= bouton_barre_racc ("barre_raccourci('[?',']',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
 
