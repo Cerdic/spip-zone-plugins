@@ -23,6 +23,7 @@
 // --></style>
 
 [<script type="text/javascript" src="(#CHEMIN{javascript/jquery.MultiFile.js})"></script>
+][<script type="text/javascript" src="(#CHEMIN{javascript/jquery.upload_attach.js})"></script>
 ]
 </head>
 
@@ -96,72 +97,46 @@ pagination_zone();
 
 <script type='text/javascript'><!--
 if (window.jQuery && jQuery.fn.ajaxForm) {
-function upload_attach (re) {
-	jQuery('#formulaire_upload>form')
+	//options
+	//-url (string)
+	//-callback (function)
+	var options = {
+		url: '#URL_PAGE{mini_formulaire_upload}',
+		callback: function() {
+			load_zone_documents(); // recharge la partie du milieu
+			// si on reattache les evenements, remettre les crayons
+			if (window.cQuery)
+				cQuery(".crayon:lt(1000)",this).initcrayon();
+		}
+	};
 
-	// changer l'action : pas indispensable mais permet d'eviter la lenteur du
-	// recalcul total de la page, qui provoque en plus un rechargement
-	// des javascripts etc. dans l'iframe.
-	.attr('action', '#URL_PAGE{mini_formulaire_upload}')
-
-	.ajaxForm({
-		'beforeSubmit': function(formData, jqForm, options){
-			$('#formulaire_upload')
+	jQuery('.formulaire_upload')
+	.upload_attach(options)
+	// et la pagination
+	.each(function() {
+		var self = this;
+		$('.pagination a',self)
+		.click(function(){
+			var r = ($(this).attr('href')||'').match(/[?&;]debut_docs=([0-9]+)/);
+			r = r ? r[1] : 0;
+			$(self)
 			.addClass('ajaxloading')
 			.css({'opacity': 0.5});
-			return true;
-		},
-		'success': function(e){
-			var h;
-			if (h = $('<iframe><\/iframe>').html(e).find('#formulaire_upload').html()) {
-				$('#formulaire_upload')
-				.html(h)
-				.removeClass('ajaxloading')
-				.css({'opacity':1.0});
-				upload_attach(true);
-				load_zone_documents(); // recharge la partie du milieu
-			}
-			else
-				alert('bug !');
-		}
+			$.get(
+				'#URL_PAGE{mini_formulaire_upload}&debut_docs='+r,
+				function(c) {
+					$(self)
+					.removeClass('ajaxloading')
+					.css({'opacity': 1.0})
+					.html(
+						$('<iframe>').html(c).find('.formulaire_upload').html()
+					).
+					upload_attach(options);
+				}
+			);
+			return false;
+		});
 	});
-
-	// si on reattache les evenements, remettre les crayons
-	if (re && window.cQuery)
-		cQuery("#formulaire_upload .crayon:lt(1000)").initcrayon();
-
-	// si multifile est la, on l'utilise (trop bien)
-	if (jQuery.fn.MultiFile)
-	$('#formulaire_upload>form input[@type=file]').MultiFile({
-		max: 5,
-		STRING: {'remove': 'x', 'selected': '$file'}
-	});
-
-	// et la pagination
-	$('#formulaire_upload .pagination a')
-	.click(function(){
-		var r = ($(this).attr('href')||'').match(/[?&;]debut_docs=([0-9]+)/);
-		r = r ? r[1] : 0;
-		$('#formulaire_upload')
-		.addClass('ajaxloading')
-		.css({'opacity': 0.5});
-		$.get(
-			'#URL_PAGE{mini_formulaire_upload}&debut_docs='+r,
-			function(c) {
-				$('#formulaire_upload')
-				.removeClass('ajaxloading')
-				.css({'opacity': 1.0})
-				.html(
-					$('<iframe>').html(c).find('#formulaire_upload').html()
-				);
-				upload_attach(true);
-			}
-		);
-		return false;
-	});
-
-};
-upload_attach(false);
 }
 // --></script>
 

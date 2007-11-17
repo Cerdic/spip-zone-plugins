@@ -16,15 +16,18 @@ function balise_FORMULAIRE_UPLOAD ($p) {
 
 // http://doc.spip.org/@balise_FORMULAIRE_UPLOAD_stat
 function balise_FORMULAIRE_UPLOAD_stat($args, $filtres) {
-	if(!$args[5] || !preg_match(",\w+,",$args[5]))
-		$args[5] = "upload";
+	if(!isset($args[5]) || !preg_match(",article|breve|rubrique|syndic|forum|auteur,",$args[5]))
+		$args[5] = "";
+	if(!$args[6] || !preg_match(",\w+,",$args[6]))
+		$args[6] = "upload";
+		
 	return $args;
 }
 
 
 // http://doc.spip.org/@balise_FORMULAIRE_UPLOAD_dyn
 function balise_FORMULAIRE_UPLOAD_dyn(
-	$id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic, $fond
+	$id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic, $type, $fond
 ) {
 
 	// Le contexte nous servira peut-etre a identifier
@@ -35,17 +38,25 @@ function balise_FORMULAIRE_UPLOAD_dyn(
 	$ids = array();
 	if ($id_rubrique > 0 AND ($id_article OR $id_breve OR $id_syndic))
 		$id_rubrique = 0;
-	foreach (array('id_article', 'id_breve', 'id_rubrique', 'id_syndic', 'id_forum') as $o) {
-		if ($x = intval($$o)) {
-			$ids[$o] = $x;
-			$id = $x;
-			$type = str_replace('id_', '', $o);
-		}
-	}
 
 	if (!$proprietaire = intval($GLOBALS['auteur_session']['id_auteur']))
 		return false;
 
+	if($type) {
+		if($type=="auteur")
+			$ids['id_auteur'] = $proprietaire;
+		else if($x = intval(${"id_".$type})) {
+			$ids['id_'.$type] = $x;
+			$id = $x;	
+		}
+	} else
+		foreach (array('id_article', 'id_breve', 'id_rubrique', 'id_syndic', 'id_forum') as $o) {
+			if ($x = intval($$o)) {
+				$ids[$o] = $x;
+				$id = $x;
+				$type = str_replace('id_', '', $o);
+			}
+		}
 
 	if (!$type) {
 		$type = 'auteur';
@@ -92,6 +103,11 @@ function balise_FORMULAIRE_UPLOAD_dyn(
 		suivre_invalideur("0",true);
 		spip_log('invalider', 'upload');
 	}
+
+	$script_hidden = array();
+	foreach($ids as $t => $id)
+		$script_hidden[] = $t."=".$id;
+	$script_hidden = "?".join("&",$script_hidden);
 
 	return array('formulaires/'.$fond, 0,
 
