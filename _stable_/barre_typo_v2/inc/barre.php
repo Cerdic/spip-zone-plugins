@@ -245,6 +245,12 @@ function afficher_formatages_speciaux($champ, $spip_lang, $champhelp, $num_barre
 	return produceWharf('tableau_formatages_speciaux','',$tableau_formulaire); 	
 }
 
+// cas ou CFG est absent...
+function config_bte($cfg, $valeur) {
+	if(function_exists('lire_config')) return lire_config($cfg) == $valeur;
+	return false;
+}
+
 // construit un tableau de raccourcis pour un noeud de DOM
 
 // http://doc.spip.org/@afficher_barre
@@ -260,8 +266,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$layer_public = '<script type="text/javascript" src="' . find_in_path('javascript/layer.js').'"></script>';
 	$ret = ($num_barre > 1)  ? '' :
 	  $layer_public . '<script type="text/javascript" src="' . find_in_path('javascript/spip_barre.js').'"></script>';
-
-
 
 
  // Pregeneration des toolzbox.. (wharfing)
@@ -321,7 +325,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= "&nbsp;</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col ++;
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
-	} elseif (lire_config('btv2/avancee') == 'Oui') {
+	} elseif (config_bte('btv2/avancee', 'Oui')) {
 		$ret .= "&nbsp;</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col ++;
 		$ret .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_formatages_speciaux']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/tag.png", _T('bartypenr:barre_formatages_speciaux'), $champhelp);;
