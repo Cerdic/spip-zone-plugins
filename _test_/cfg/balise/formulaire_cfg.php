@@ -18,22 +18,23 @@ function balise_FORMULAIRE_CFG ($p) {
 
 // Dans $args on recupere un array des valeurs collectees par balise_FORMULAIRE_CFG
 function balise_FORMULAIRE_CFG_stat($args, $filtres) {
-	return array($vue = $args[0], $id = $args[1]);
+	return array($args[0], $args[1], $args[2], $args[3]);
 }
 
 
 //
-function balise_FORMULAIRE_CFG_dyn($vue, $id) {   
-	// si appel ajax on ne renvoie que le contenu
-	//$squelette = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']))
-	//	? 'formulaires/formulaire_cfg' //'inc-shoutbox' <- ajax
-	//	: 'formulaires/formulaire_cfg'; // <- non ajax
-
-	$cfg_hash = substr(md5($vue.$id),0,6);
+function balise_FORMULAIRE_CFG_dyn($vue, $id, $cfg_form, $cfg_form_ajax) {   
+	
+	if (empty($cfg_form)) 
+		$cfg_form = 'formulaires/formulaire_cfg';
+	if (empty($cfg_form_ajax)) 
+		$cfg_form_ajax = 'oui';
+		
+	$cfg_hash = substr(md5($vue.$id.$cfg_form.$cfg_form_ajax),0,6);
 	return
 		array(
 			// squelette
-			$squelette = 'formulaires/formulaire_cfg',
+			$cfg_form,
 			// delai
 			3600,
 			// contexte
@@ -42,6 +43,8 @@ function balise_FORMULAIRE_CFG_dyn($vue, $id) {
 				'vue' => $vue,
 				'id' => $id,
 				'cfg_hash' => $cfg_hash,
+				'cfg_form' => $cfg_form,
+				'cfg_form_ajax' => $cfg_form_ajax,
 				'id_cfg' => $id
 			)
 		);

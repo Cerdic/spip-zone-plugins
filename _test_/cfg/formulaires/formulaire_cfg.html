@@ -1,28 +1,29 @@
 #CACHE{0}
 <div id="formulaire_cfg_contenu_#ENV{cfg_hash}">
 <div class="formulaire_spip formulaire_cfg" id="formulaire_cfg_#ENV{cfg_hash}">
-#VUE_CFG{#ENV{vue}, #ENV{id}, oui}
+#CFG_VUE{#ENV{vue}, #ENV{id}}
 </div>
 </div>
 
-<script type='text/javascript'><!--
-if (window.jQuery) (function($){
-	// adresse du fragment ajax
-	var url = 'spip.php?page=formulaire_cfg';
+[(#ENV{cfg_form_ajax}|=={non}|?{'',' '})
+	<script type='text/javascript'><!--
+	if (window.jQuery) (function($){
+		// adresse du fragment ajax
+		var url = 'spip.php?page=formulaire_cfg';
 
-	$("#formulaire_cfg_[(#ENV{cfg_hash})] form")
-	.ajaxForm({
-		url: url,
-		target: "#formulaire_cfg_contenu_#ENV{cfg_hash}",
-		beforeSubmit: function(){
-			$("#formulaire_cfg_#ENV{cfg_hash}")
-			.css('opacity', 0.5);
-		},
-		success: function(){
-			$("#formulaire_cfg_#ENV{cfg_hash}")
-			.css('opacity', 1);
-		}
-	});
-
-})(jQuery);
-// --></script>
+		$("#formulaire_cfg_[(#ENV{cfg_hash})] form")
+		.ajaxForm({
+			url: url,
+			target: "#formulaire_cfg_contenu_[(#ENV{cfg_hash})]",
+			beforeSubmit: function(){
+				$("#formulaire_cfg_[(#ENV{cfg_hash})]")
+				.css('opacity', 0.5);
+			},
+			success: function(){
+				$("#formulaire_cfg_[(#ENV{cfg_hash})]")
+				.css('opacity', 1);
+			}
+		});
+	})(jQuery);
+	// --></script>
+]

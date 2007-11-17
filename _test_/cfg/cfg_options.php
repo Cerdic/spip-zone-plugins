@@ -146,121 +146,6 @@ function get_table_id($table) {
 
 
 /*
- * Affiche une arborescence du contenu d'un #CONFIG
- * 
- * #CFG_ARBO, #CFG_ARBO{ma_meta}, #CFG_ARBO{~toto}, #CFG_ARBO{ma_meta/mon_casier}
- * 
- */
-function balise_CFG_ARBO($p) {
-	if (!$arg = interprete_argument_balise(1,$p)) {
-		$arg = "''";
-	}
-	$p->code = 'affiche_arborescence(' . $arg . ')';
-	return $p;
-}
-
-function affiche_arborescence($cfg='') {
-	static $present = false;
-	$sortie = '';
-	
-	// integration du css
-	if (!$present)
-		$sortie .= "<style type='text/css'>\n"
-				.  ".cfg_arbo{}\n"
-				.  ".cfg_arbo h5{padding:0.2em 0.2em; margin:0.2em 0;}\n"
-				.  ".cfg_arbo ul{border:1px solid #ccc; margin:0; padding:0.2em 0.5em; list-style-type:none;}\n"
-				.  "</style>\n";
-	// integration du js	
-	if (!$present)
-		$sortie .= "<script type='text/javascript'>
-					$(document).ready(function(){
-						jQuery('.cfg_arbo ul').hide();
-						jQuery('.cfg_arbo h5')
-						.prepend('<b>[+] </b>')
-						.toggle(
-						  function () {
-							$(this).children('b').text('[-] ');
-							$(this).next('ul').show();
-						  },
-						  function () {
-							$(this).children('b').text('[+] ');
-							$(this).next('ul').hide();
-						  })
-					});
-					</script>\n";
-
-	$present = true;	
-	
-	$tableau = lire_config($cfg);
-	if (empty($cfg)) $cfg = 'spip_meta';
-	// parcours des donnees
-	$sortie .= 
-		"<div class='cfg_arbo'>\n" .
-		affiche_sous_arborescence($cfg, $tableau) .
-		"\n</div>\n";
-
-
-	return $sortie;
-}
-
-function affiche_sous_arborescence($nom, $tableau){
-	$sortie = "\n<h5>$nom</h5>\n";
-	$sortie .= "\n<ul>";
-	if (is_array($tableau)){
-		ksort($tableau);
-		foreach ($tableau as $tab=>$val){
-			if (is_array($val)) 
-				$sortie .= affiche_sous_arborescence($tab, $val);
-			elseif (false !== $v = @unserialize($val))
-				$sortie .= affiche_sous_arborescence($tab, $v);
-			else
-				$sortie .= "<li>$tab = " . htmlentities($val) ."</li>\n";
-			
-		}
-	} else {
-		$sortie .= "<li>$nom = " . htmlentities($tableau) . "</li>";
-	}
-	$sortie .= "</ul>\n";
-	return $sortie;	
-}
-
-
-
-
-/*
- * Affiche le formulaire CFG de la vue (fond) demandee
- */
-
-function balise_VUE_CFG($p){
-	//return calculer_balise_dynamique($p, 'VUE_CFG', array());
-	
-	$vue = 			sinon(interprete_argument_balise(1,$p), "''"); // indispensable neanmmoins
-	$id = 			sinon(interprete_argument_balise(2,$p), "''");
-	$aff_titre = 	sinon(interprete_argument_balise(3,$p), "''");
-	//include_spip('balise/vue_cfg');
-	$p->code = "calculer_VUE_CFG($vue, $id, $aff_titre)";
-	return $p;
-}
-
-function calculer_VUE_CFG($fond, $id, $afficher_titre){
-	include_spip('inc/cfg');
-	$cfg = cfg_charger_classe('cfg');
-	$config = & new $cfg($fond, $fond, $id); 
-
-	$config->traiter();
-	
-	$sortie = ($afficher_titre)
-		? "<h2>$config->titre</h2>\n"
-		: "";
-		
-	return $sortie
-		   . $config->formulaire();	
-}
-
-
-
-
-/*
  * cfg_charger_classe(), sur le meme code que charger_fonction()
  *
  * charge un fichier perso ou, a defaut, standard
@@ -297,6 +182,9 @@ function cfg_charger_classe($nom, $dossier='inc', $continue=false) {
 	exit;
 }
 
+// Inclure les balises sinon SPIP ne voit pas les fonctions calculer_x()... meuh !
+include_spip('balise/cfg_vue');
+include_spip('balise/cfg_arbo');
 
 // signaler le pipeline de notification
 $GLOBALS['spip_pipeline']['cfg_post_edition'] = "";
