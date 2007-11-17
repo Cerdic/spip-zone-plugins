@@ -39,7 +39,7 @@ $spip_visites_forums = array(
 	"date"		=> "date NOT NULL",
 	"id_forum" 	=> "bigint(21) unsigned NOT NULL",
 	"visites" 	=> "int(10) unsigned NOT NULL default '0'",
-	"maj" 		=> "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP"
+	"maj" 		=> "timestamp" , // NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 	);
 
 $spip_visites_forums_key = array(
@@ -56,7 +56,7 @@ $spip_auteurs_spipbb = array( // table spip_auteurs_spipbb
 	"id_auteur"	=> "bigint(21) unsigned NOT NULL", // primary key
 	"spam_warnings"	=> "int(10) unsigned NOT NULL default '0'",
 	'ip_auteur'	=> "varchar(16) default NULL",
-	'ban_date'	=> "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
+	'ban_date'	=> "timestamp", // NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 	'ban'		=> "varchar(3) default 'non'"	// ban 'oui' 'non' default 'non'
 	);
 
@@ -84,7 +84,7 @@ $spip_spam_words_log = array(
 	"id_auteur"	=> "bigint(21) unsigned NOT NULL",
 	"ip_auteur"	=> "varchar(16) default NULL",
 	"login"		=> "varchar(255) default NULL",
-	"log_date"	=> "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
+	"log_date"	=> "timestamp", // NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP"
 	"titre"		=> "text",
 	"message"	=> "mediumtext",
 	"id_forum"	=> "bigint(21) unsigned NOT NULL",
@@ -103,7 +103,7 @@ $spip_ban_liste = array(
 	"ban_login"	=> "text",
 	"ban_ip"	=> "varchar(16) default NULL",
 	"ban_email"	=> "tinytext",
-	"maj"		=> "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP"
+	"maj"		=> "timestamp" //  NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 		);
 
 $spip_ban_liste_key = array( 'PRIMARY KEY' => "id_ban" );
