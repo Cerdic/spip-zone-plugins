@@ -31,11 +31,17 @@ function decoupe_installe() {
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
-// le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
+// le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function decoupe_raccourcis() {
 	$compat = defined('_decoupe_COMPATIBILITE')
 		?_T('cout:decoupe:aide2', array('sep' => '<b>'._decoupe_COMPATIBILITE.'</b>')):'';
 	return _T('cout:decoupe:aide', array('sep' => '<b>'._decoupe_SEPARATEUR.'</b>')).$compat;
 }
+
+// cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
+function decoupe_BarreTypoEnrichie($tr) {
+	return $tr.'<tr><td>'._T('cout:decoupe:nom').' (en projet)</td></tr>';
+}
+
 ?>

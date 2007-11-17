@@ -30,7 +30,7 @@ function filets_sep_installe() {
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
-// le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
+// le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function filets_sep_raccourcis() {
 	return _T('cout:filets_sep:aide', array('liste' => $GLOBALS['meta']['cs_filets_sep_racc']));
@@ -59,4 +59,10 @@ function filets_sep($texte) {
 	if (strpos($texte, '__')===false) return $texte;
 	return cs_echappe_balises('', 'filets_sep_rempl', $texte);
 }
+
+// cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
+function filets_sep_BarreTypoEnrichie($tr) {
+	return $tr.'<tr><td>'._T('cout:filets_sep:nom').' (en projet)</td></tr>';
+}
+
 ?>

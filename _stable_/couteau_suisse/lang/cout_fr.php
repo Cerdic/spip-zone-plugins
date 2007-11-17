@@ -48,6 +48,7 @@ _ &bull; [De tout le plugin->@reset@]@install@
 	'a_jour' => "<br/>Votre version est &agrave; jour.",
 
 	'raccourcis' => "Raccourcis typographiques actifs du Couteau Suisse&nbsp;:",
+	'raccourcis_barre' => "Les raccourcis typographiques du Couteau Suisse",
 	'pipelines' => "Pipelines utilis&eacute;s&nbsp;:",
 	'nb_outil' => '@pipe@ : @nb@ outil',
 	'nb_outils' => '@pipe@ : @nb@ outils',

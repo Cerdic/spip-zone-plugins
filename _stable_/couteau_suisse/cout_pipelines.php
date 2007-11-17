@@ -140,6 +140,28 @@ function couteau_suisse_post_typo($flux){
 		eval($cs_metas_pipelines['post_typo']);
 	return $flux;
 }
+
+// le contenu du sous-menu est gere par les lames elles-memes
+function couteau_suisse_BarreTypoEnrichie_toolbox($paramArray) {
+	global $cs_metas_pipelines;
+	if (!isset($cs_metas_pipelines['BarreTypoEnrichie_toolbox'])) return '';
+	$flux = '';
+	eval($cs_metas_pipelines['BarreTypoEnrichie_toolbox']);
+	$tableau_formulaire = '
+ <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">'
+	. $flux . '
+ </table>';
+	
+	return produceWharf('couteau_suisse', '', $tableau_formulaire);
+}
+
+// bouton principal du Couteau Suisse
+function couteau_suisse_BarreTypoEnrichie_tous($paramArray) {
+	global $cs_metas_pipelines;
+	if (!isset($cs_metas_pipelines['BarreTypoEnrichie_toolbox'])) return $paramArray;
+	return bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['couteau_suisse']."','');", _DIR_PLUGIN_COUTEAU_SUISSE."/img/couteau-24.gif", _T('cout:raccourcis_barre'), $paramArray[1]);
+}
+
 /*
 cs_log("appel de cout_pipelines : strlen=" . strlen($cs_metas_pipelines['pipelines']));
 if (!$GLOBALS['cs_pipelines']) include_once(_DIR_CS_TMP.'pipelines.php');

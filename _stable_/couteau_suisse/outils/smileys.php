@@ -74,7 +74,7 @@ cs_log(" -- abs. path = $path2");
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
-// le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
+// le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function smileys_raccourcis() {
 	return _T('cout:smileys:aide', array('liste' => $GLOBALS['meta']['cs_smileys_racc']));
@@ -111,4 +111,10 @@ function cs_smileys_pre_typo($texte) {
 	// appeler cs_rempl_smileys() une fois que certaines balises ont ete protegees
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'cs_rempl_smileys', $texte);
 }
+
+// cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
+function cs_smileys_BarreTypoEnrichie($tr) {
+	return $tr.'<tr><td>'._T('cout:smileys:nom').' (en projet)</td></tr>';
+}
+
 ?>

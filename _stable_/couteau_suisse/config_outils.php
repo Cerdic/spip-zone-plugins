@@ -391,6 +391,7 @@ div.pagination img { border:0pt none; margin:0pt; padding:0pt; }",
 	'traitement:TEXTE/articles:post_propre' => 'cs_decoupe',
 	'traitement:TEXTE/articles:pre_propre' => 'cs_onglets',
 	'categorie' => 'typo-racc',
+	'pipeline:BarreTypoEnrichie_toolbox' => 'decoupe_BarreTypoEnrichie',
 ));
 
 // couplage avec l'outil 'decoupe', donc 'sommaire' doit etre place juste apres :
@@ -505,6 +506,7 @@ add_outil( array(
 	'categorie'	 => 'typo-racc',
 	'code:options' => "%%decoration_styles%%",
 	'pipeline:pre_typo' => 'decoration_pre_typo',
+	'pipeline:BarreTypoEnrichie_toolbox' => 'decoration_BarreTypoEnrichie',
 ));
 
 add_variable( array(
@@ -586,6 +588,7 @@ add_outil( array(
 	'categorie'	 => 'typo-racc',
 	'contrib'	=> 1563,
 	'pipeline:pre_typo' => 'filets_sep',
+	'pipeline:BarreTypoEnrichie_toolbox' => 'filets_sep_BarreTypoEnrichie',
 ));
 
 add_outil( array(
@@ -595,6 +598,7 @@ add_outil( array(
 	'contrib'	=> 1561,
 	'code:css' => "table.cs_smileys td {text-align:center; font-size:90%; font-weight:bold;}",
 	'pipeline:pre_typo' => 'cs_smileys_pre_typo',
+	'pipeline:BarreTypoEnrichie_toolbox' => 'cs_smileys_BarreTypoEnrichie',
 ));
 
 add_outil( array(
@@ -602,6 +606,7 @@ add_outil( array(
 	'auteur' 	 => 'BoOz (booz.bloog@laposte.net)',
 	'categorie'	 => 'typo-racc',
 	'pipeline:pre_typo' => 'chatons_pre_typo',
+	'pipeline:BarreTypoEnrichie_toolbox' => 'chatons_BarreTypoEnrichie',
 ));
 
 add_variable( array(
@@ -668,6 +673,7 @@ add_outil( array(
 	'categorie'	=> 'typo-racc',
 	'jquery'	=> 'oui',
 	'pipeline:pre_typo' => 'blocs_pre_typo',
+	'pipeline:BarreTypoEnrichie_toolbox' => 'blocs_BarreTypoEnrichie',
 ));
 
 // Idees d'ajouts :

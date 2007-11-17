@@ -72,7 +72,7 @@ cs_log("decoration_installe()");
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
-// le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
+// le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function decoration_raccourcis() {
 	return _T('cout:decoration:aide', array('liste' => $GLOBALS['meta']['cs_decoration_racc']));
@@ -113,6 +113,11 @@ function decoration_pre_typo($texte) {
 	// menage
 	unset($deco_balises);
 	return $texte;
+}
+
+// cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
+function decoration_BarreTypoEnrichie($tr) {
+	return $tr.'<tr><td>'._T('cout:decoration:nom').' (en projet)</td></tr>';
 }
 
 ?>

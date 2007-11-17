@@ -83,4 +83,12 @@ Compatibilit&#233; : SPIP version 1.9 minimum.
 		<nom>post_typo</nom>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>BarreTypoEnrichie_tous</nom>
+		<inclure>cout_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>BarreTypoEnrichie_toolbox</nom>
+		<inclure>cout_pipelines.php</inclure>
+	</pipeline>
 </plugin>
