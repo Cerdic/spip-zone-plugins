@@ -230,8 +230,9 @@ $tableau_formulaire = '
 // pour les caracteres
 function afficher_formatages_speciaux($champ, $spip_lang, $champhelp, $num_barre) {
 	$reta = bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
-	$reta .= bouton_barre_racc ("barre_raccourci('&lt;code&gt;','&lt;/code&gt;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/page_white_code_red.png", _T('barre_code'), $champhelp);
-	$reta .= bouton_barre_racc ("barre_raccourci('\n\n&lt;cadre&gt;','&lt;/cadre&gt;\n\n',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/page_white_code.png", _T('barre_cadre'), $champhelp);
+	$reta .= bouton_barre_racc ("barre_raccourci('&lt;code&gt;','&lt;/code&gt;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/page_white_code_red.png", _T('bartypenr:barre_code'), $champhelp);
+	$reta .= bouton_barre_racc ("barre_raccourci('\n\n&lt;cadre&gt;','&lt;/cadre&gt;\n\n',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/page_white_code.png", _T('bartypenr:barre_cadre'), $champhelp);
+	$reta .= bouton_barre_racc ("barre_raccourci('\n\n&lt;poesie&gt;','&lt;/poesie&gt;\n\n',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/poesie.png", _T('bartypenr:barre_poesie'), $champhelp);
 	$tableau_formulaire = '
 	<table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
 	  <tr class="spip_barre">
