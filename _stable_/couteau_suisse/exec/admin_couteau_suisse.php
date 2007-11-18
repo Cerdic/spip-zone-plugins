@@ -17,13 +17,6 @@ define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 */
 // compatibilite spip 1.9
 if(defined('_SPIP19100') && !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
-if(defined('_SPIP19100') && !function_exists('spip_xml_load')) { 
-	function spip_xml_load($url){
-		$texte = recuperer_page($url);
-		include_spip('inc/plugin');
-		return parse_plugin_xml($texte);
-	}
-}
 
 function cs_admin_styles_et_js() {
 	global $afficher_outil;
@@ -411,7 +404,7 @@ cs_log("Fin   : exec_admin_couteau_suisse()");
 function cs_boite_rss($force) {
 	debut_boite_info();
 	echo '<p><b>'._T('cout:rss_titre').'</b></p><div class="cs_boite_rss"><p>Attente RSS...</p></div>'
-		.'<div style="text-align: right; font-size: 85%;"><a title="'._T('cout:desactiver_rss').'" href="'
+		.'<div style="text-align: right; font-size: 87%;"><a title="'._T('cout:desactiver_rss').'" href="'
 		.generer_url_ecrire(_request('exec'),'cmd=toggle&outil=rss_couteau_suisse').'">'._T('cout:supprimer_cadre').'</a></div>';
 	fin_boite_info();
 }
