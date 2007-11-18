@@ -1,0 +1,38 @@
+#CACHE{86400}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>test cfg</title>
+<meta name="description" content="test cfg" />
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_cfg">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}{lang}>
+	<div id="conteneur">
+
+		[(#REM) Contenu principal: test de cfg ]
+
+		<div id="contenu" style="width: 100%; ">
+		<INCLURE{fond=pages/#ENV{cfg_exemple_page}|sinon{introduction}}{env}>
+		</div><!-- fin contenu -->
+
+	</div><!-- fin conteneur -->
+	
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-nav-cfg_exemples}>
+
+    </div><!--#navigation-->
+    
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{lang}>
+
+</div><!-- fin page -->
+</body>
+</html>

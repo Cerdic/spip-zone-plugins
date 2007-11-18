@@ -1,0 +1,33 @@
+<h1>Formulaire pour spip_meta</h1>
+		
+<h2>Le m&ecirc;me formulaire CFG sans Ajax</a></h2>
+
+<p>On va utiliser le meme fond CFG mais toute la page sera recharg&eacute;e,
+donc pas uniquement le formulaire.
+</p>
+
+<p>
+<b>Code :</b><br />
+<code>&#035;CFG_TRAITER{&#035;ENV{cfg_vue}}</code><br />
+<code>&#035;CFG_ARBO{exemple_meta}</code><br />
+<code>&#035;FORMULAIRE_CFG{exemple_meta,'','',non}</code>
+</p>
+
+#CFG_TRAITER{#ENV{cfg_vue}}
+#CFG_ARBO{exemple_meta}
+#FORMULAIRE_CFG{exemple_meta,'','',non}
+
+<p>Lorsque l'on valide, toute la page se recharge et la balise
+&#035;CFG_ARBO avant la balise &#035;FORMULAIRE_CFG contient les 
+modifications apport&eacute;es.</p>
+
+<p>Il faut n&eacute;anmoins la balise &#035;CFG_TRAITER avant le code susceptible
+d'&ecirc;tre affect&eacute; par les modifications sinon le traitement ne se fait pas.
+</p>
+
+<p><b>Il faudrait trouver une autre &eacute;criture pour cela</b>
+qui puisse faire le traitement depuis cfg_fonctions.php par exemple
+si le formulaire est post&eacute; en dehors d'ajax et en dehors de ?exec=cfg
+ce qui est probl&eacute;matique vu que le formulaire cfg ajoute syst&eacute;matiquement
+le param&egrave;tre exec=cfg... et il sera difficile de faire afficher les 
+m&eacute;ssages d'erreur de cette fa&ccedil;on.</p>

@@ -1,0 +1,27 @@
+<h1>Formulaire pour spip_meta</h1>
+
+<h2>Un formulaire CFG simple : <a href="#EVAL{_DIR_PLUGIN_CFG_EXEMPLES}fonds/cfg_exemple_meta.html">fonds/cfg_exemple_meta.html</a></h2>
+
+<p>
+<b>Code :</b><br />
+<code>&#035;CFG_ARBO{exemple_meta}</code><br />
+<code>&#035;FORMULAIRE_CFG{exemple_meta}</code>
+</p>
+
+#CFG_ARBO{exemple_meta}
+#FORMULAIRE_CFG{exemple_meta}
+
+<p>Lorsque l'on valide,
+seul le formulaire se recharge (AJAX), mais la balise
+&#035;CFG_ARBO avant la balise &#035;FORMULAIRE_CFG ne 
+montre pas les modifications tant que
+la page n'a pas &eacute;t&eacute; calcul&eacute;e de nouveau.<br /> 
+<a href="#SELF&var_mode=calcul">Calculer la page</a>.</p>
+
+<p>Ce comportemant par d&eacute;faut peut &ecirc;tre 
+contourn&eacute; en cr&eacute;ant son propre formulaire
+ou en n'utilisant pas Ajax</p>	
+
+<b>Code du fond CFG :</b>
+#CODE{fonds/cfg_exemple_meta.html}
+

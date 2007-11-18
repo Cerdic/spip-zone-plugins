@@ -1,0 +1,17 @@
+
+[(#REM) titre=Exemple stockage dans fond 'cfg_exemple_meta']
+[(#REM) autoriser=voir]
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<label>Description</label>
+<textarea name="description" rows="4" cols="40" style="width:100%;">[(#ENV{description})]</textarea>
+
+<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
+<input type="reset" value="<:cfg:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" />
+</form>
+
+R&eacute;sultat dans le fond :<br />
+#CFG_ARBO{exemple_meta}

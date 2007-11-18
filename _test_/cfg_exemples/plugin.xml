@@ -1,0 +1,30 @@
+<plugin>
+	<nom>
+	Exemples de cfg, le moteur de configuration
+	</nom>
+	<auteur>Matthieu Marcillaud
+_ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	Plugin pour tester les fonctionnalites introduites en version 1.1
+	du plugin CFG, &agrave; savoir les formulaires publics.
+	
+	Pour spip 1.9.3
+	</description>
+	<lien>
+	[Documentation->http://www.spip-contrib.net/?article1605]
+	</lien>
+	<options>cfg_exemples_options.php</options>
+	<prefix>
+	cfg_exemples
+	</prefix>
+	<chemin dir='' />
+	<necessite id='cfg' version='[1.1.1;]' />
+
+</plugin>

@@ -1,0 +1,33 @@
+#CACHE{0}
+<h1>Formulaire pour spip_meta</h1>
+		
+<h2>Le m&ecirc;me formulaire CFG avec un affichage diff&eacute;rent</a></h2>
+
+<p>Le meme fond CFG mais l'affichage se fait non pas
+avec le fichier <a href="#EVAL{_DIR_PLUGIN_CFG}formulaires/formulaire_cfg_vue.html">
+formulaires/formulaire_cfg_vue.html</a>
+utilisé par d&eacute;faut,
+mais avec un fond pass&eacute; en argument : 
+<a href="#EVAL{_DIR_PLUGIN_CFG_EXEMPLES}formulaires/formulaire_cfg_plus.html">
+formulaires/formulaire_cfg_plus.html</a>
+</p>
+
+<p>
+<b>Code :</b><br />
+<code>&#035;FORMULAIRE_CFG{exemple_meta,'',formulaires/formulaire_cfg_plus}</code>
+</p>
+
+
+#FORMULAIRE_CFG{exemple_meta,'',formulaires/formulaire_cfg_plus}
+
+<p>Ici tout ce qui est dans le code formulaire_cfg_plus.html est mis à jour
+avec les nouvelles valeurs de CFG.</p>
+
+<p>Je ne sais pas pourquoi la page remonte et ne reste pas sur le formulaire (ff/ubuntu).</p>
+
+<b>Code du formulaire formulaire_cfg_plus.html :</b>
+#CODE{formulaires/formulaire_cfg_plus.html}
+
+<b>Code du formulaire formulaire_cfg_vue.html :</b>
+#CODE{formulaires/formulaire_cfg_vue.html}
+
