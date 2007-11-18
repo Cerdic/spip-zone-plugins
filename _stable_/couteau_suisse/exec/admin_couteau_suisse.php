@@ -6,8 +6,6 @@
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
 
-define('_URL_CS_PLUGIN_XML', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/couteau_suisse/plugin.xml?format=txt');
-
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip("inc/presentation");
@@ -18,7 +16,7 @@ define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 // compatibilite spip 1.9
 if(defined('_SPIP19100') && !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
 
-function cs_admin_styles_et_js() {
+function cs_admin_styles_et_js($cs_version) {
 	global $afficher_outil;
 	$a = defined('_SPIP19100')||defined('_SPIP19200')
 		?'div.cadre-info a { background:none; padding:0; border:0; } div.cadre-info { margin-bottom:1em; }'
@@ -190,6 +188,8 @@ jQuery(function(){
 		return false;
 	});
 	
+	// verifier la version du CS
+	jQuery('span.cs_version').load('".generer_url_ecrire('cs_version', 'version='.$cs_version, true)."');
 	// afficher la boite rss, si elle existe
 	jQuery('div.cs_boite_rss').load('".generer_url_ecrire('cs_boite_rss')."');
 
@@ -319,8 +319,12 @@ verif_plugin();
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('cout:titre'), "configuration", 'couteau_suisse');
 	}
+	// pour la  version du plugin
+	include_spip('inc/plugin');
+	$cs_version = plugin_get_infos('couteau_suisse');
+	$cs_version = $maj[1] = $cs_version['version'];
 
-	cs_admin_styles_et_js();
+	cs_admin_styles_et_js($cs_version);
 	echo "<br /><br /><br />";
 	gros_titre(_T('cout:titre'));
 	echo barre_onglets("configuration", 'couteau_suisse');
@@ -328,21 +332,6 @@ echo '<p style="color:red;">Ancienne interface : <a href="', generer_url_ecrire(
 
 	debut_gauche();
 	debut_boite_info();
-	// pour la  version du plugin
-	include_spip('inc/plugin');
-	$cs_infos = plugin_get_infos('couteau_suisse');
-	$cs_infos = $maj[1] = $cs_infos['version'];
-	// pour la version disponible, on regarde toutes les 1h06
-	$maj = isset($GLOBALS['meta']['tweaks_maj'])?unserialize($GLOBALS['meta']['tweaks_maj']):array(0, '');
-	if ($quiet = $maj[1] && (time()-$maj[0] < 4000)) $distant = $maj[1];
-	else {
-		include_spip('inc/distant');
-		$distant = recuperer_page(_URL_CS_PLUGIN_XML);
-		if ($distant) $distant = $maj[1] = preg_match(',<version>([0-9.]+)</version>,', $distant, $regs)?$regs[1]:'';
-		$maj[0] = time();
-		if ($distant) ecrire_meta('tweaks_maj', serialize($maj));
-		ecrire_metas();
-	}
 	// pour la liste des docs sur spip-contrib
 	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();
 	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace('/@@(.*?)@@/e', "couper(_T('\\1'), 25)", $v);
@@ -353,8 +342,8 @@ echo '<p style="color:red;">Ancienne interface : <a href="', generer_url_ecrire(
 	$aide = _T('cout:help', array(
 		'reset' => generer_url_ecrire($exec,'cmd=resetall'),
 		'hide' => generer_url_ecrire($exec,'cmd=showall'),
-		'version' => $cs_infos,
-		'distant' => $distant==$cs_infos?_T('cout:a_jour'):($distant?_T('cout:distant', array('version' => $distant)):''),
+		'version' => $cs_version,
+		'distant' => '<span class="cs_version"><br/>Version distante...</span>',
 		'contribs' => join('', $contribs),
 		'install' => $aide,
 	));
