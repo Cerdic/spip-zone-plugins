@@ -12,7 +12,7 @@ $exceptions =
 	|| (strpos($_GET['page'],'.js') !== false) // filtrage de jquery.js par exemple qui sert pour la partie admin
 	|| (strpos($_GET['page'],'.css') !== false); // on sait jamais...
 
-// si ya pas d'exception, on force bloque le site pour travaux
+// si ya pas d'exception, on bloque le site pour travaux
 if (!$exceptions)
 	$_GET['action'] = "cs_travaux";
 
@@ -23,7 +23,6 @@ function action_cs_travaux(){
 	include_spip('inc/minipres');
 	include_spip('inc/charsets');
 	include_spip('inc/texte');
-	$login = '';
 	if(_en_travaux_ADMIN==1) {
 		include_spip('public/assembler');
 		include_spip('balise/login_public');
@@ -31,7 +30,8 @@ function action_cs_travaux(){
 		if(strlen($login))
 			$login = "<div style='text-align:left'><b>"._T('cout:acces_admin')."</b></div><hr><div style='margin-left:4em;'>$login</div>";
 		else $login = '<br/><hr/><b>'._T('cout:reserve_admin').'</b>';
-	}
+	} else
+		$login = propre('<div style="text-align:right">['.ucfirst(_T('login_espace_prive')).'->./ecrire]</div>');
 	$page = minipres(
 		defined('_en_travaux_TITRE')?_T('info_travaux_titre'):$GLOBALS['meta']['nom_site'],
 		charset2unicode(propre(_en_travaux_MESSAGE)) . $login
