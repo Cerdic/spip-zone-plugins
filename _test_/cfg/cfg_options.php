@@ -195,6 +195,7 @@ function cfg_charger_classe($nom, $dossier='inc', $continue=false) {
 // Inclure les balises sinon SPIP ne voit pas les fonctions calculer_x()... meuh !
 include_spip('balise/cfg_vue');
 include_spip('balise/cfg_arbo');
+include_spip('balise/cfg_traiter');
 
 // signaler le pipeline de notification
 $GLOBALS['spip_pipeline']['cfg_post_edition'] = "";

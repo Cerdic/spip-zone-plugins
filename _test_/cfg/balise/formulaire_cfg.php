@@ -3,8 +3,8 @@
 /*
  * #FORMULAIRE_CFG{nom} dans le squelette
  *
- * (c) Marcimat 2007, licence GNU/GPL
- * 
+ * (c) Marcimat, toggg  2007, licence GNU/GPL
+ * Documentation et contact: http://www.spip-contrib.net/
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
@@ -23,29 +23,27 @@ function balise_FORMULAIRE_CFG_stat($args, $filtres) {
 
 
 //
-function balise_FORMULAIRE_CFG_dyn($vue, $id, $cfg_form, $cfg_form_ajax) {   
-	
+function balise_FORMULAIRE_CFG_dyn($cfg_vue, $cfg_id, $cfg_form, $cfg_form_ajax) {   
 	if (empty($cfg_form)) 
-		$cfg_form = 'formulaires/formulaire_cfg';
+		$cfg_form = 'formulaires/formulaire_cfg_vue';
 	if (empty($cfg_form_ajax)) 
 		$cfg_form_ajax = 'oui';
 		
-	$cfg_hash = substr(md5($vue.$id.$cfg_form.$cfg_form_ajax),0,6);
+	$cfg_hash = substr(md5($cfg_vue . $cfg_id . $cfg_form . $cfg_form_ajax),0,6);
 	return
 		array(
 			// squelette
-			$cfg_form,
+			'formulaires/formulaire_cfg',
 			// delai
 			3600,
 			// contexte
 			array(
-				'nom' => $vue,
-				'vue' => $vue,
-				'id' => $id,
+				'cfg_nom' => $cfg_vue,
+				'cfg_vue' => $cfg_vue,
 				'cfg_hash' => $cfg_hash,
 				'cfg_form' => $cfg_form,
 				'cfg_form_ajax' => $cfg_form_ajax,
-				'id_cfg' => $id
+				'cfg_id' => $cfg_id
 			)
 		);
 }

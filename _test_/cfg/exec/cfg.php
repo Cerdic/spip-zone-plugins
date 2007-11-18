@@ -19,7 +19,7 @@ function exec_cfg_dist($class = null)
 
 	$config = & new $cfg(
 		($nom = _request('cfg'))? $nom : 'cfg',
-		($vue = _request('vue'))? $vue : $nom,
+		($vue = _request('cfg_vue'))? $cfg_vue : $nom,
 		($cfg_id = _request('cfg_id'))? $cfg_id : ''
 		);
 

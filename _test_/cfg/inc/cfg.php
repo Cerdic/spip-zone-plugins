@@ -208,72 +208,71 @@ class cfg_dist extends cfg_formulaire
 		include_spip('inc/presentation');
 		$nom = _request('cfg'); // this->xxx
 
-	pipeline('exec_init',array('args'=>array('exec'=>'cfg'),'data'=>''));
+		pipeline('exec_init',array('args'=>array('exec'=>'cfg'),'data'=>''));
 
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page($this->boite, 'cfg', $this->nom);
-	
-	echo "<br /><br /><br />\n";
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page($this->boite, 'cfg', $this->nom);
+		
+		echo "<br /><br /><br />\n";
 
-	echo gros_titre(sinon($this->titre, _L('Configuration des modules')), '', false);
+		echo gros_titre(sinon($this->titre, _L('Configuration des modules')), '', false);
 
-	echo  barre_onglets("configuration", "cfg");
+		echo  barre_onglets("configuration", "cfg");
 
 
-	if ($l = liste_cfg()) {
-		$res = debut_onglet();
+		if ($l = liste_cfg()) {
+			$res = debut_onglet();
 
-		$n = 0;
-		$classe_cfg = cfg_charger_classe('cfg');
-		foreach($l as $fonds => $cfg) {
-			$url = generer_url_ecrire(_request('exec'), 'cfg='.$fonds);
-			$path = dirname(dirname($cfg));
+			$n = 0;
+			$classe_cfg = cfg_charger_classe('cfg');
+			foreach($l as $fonds => $cfg) {
+				$url = generer_url_ecrire(_request('exec'), 'cfg='.$fonds);
+				$path = dirname(dirname($cfg));
 
-			// On va chercher la config cible
-			// et on regarde ses donnees pour faire l'onglet
-			// seulement si l'onglet doit etre affiche
-			$tmp = & new $classe_cfg($fonds, $fonds,'');
-			if ($tmp->_permise && $tmp->onglet=='oui') {
-				// Faire des lignes s'il y en a effectivement plus de 6
-				if (!($n%6) && ($n>0))
-					$res .= fin_onglet().debut_onglet();
-				if ($tmp->titre)
-					$titre = $tmp->titre;
-				else
-					$titre = $fonds;
-				$icone = '';
-				if ($tmp->icone)
-					$icone = $path.'/'.$tmp->icone;
-				else if (file_exists($path.'/plugin.xml'))
-					$icone = 'plugin-24.gif';
-				else
-					$icone = _DIR_PLUGIN_CFG.'cfg-doc-22.png';
-				$actif = ($fonds == _request('cfg'));
+				// On va chercher la config cible
+				// et on regarde ses donnees pour faire l'onglet
+				// seulement si l'onglet doit etre affiche
+				$tmp = & new $classe_cfg($fonds, $fonds,'');
+				if ($tmp->_permise && $tmp->onglet=='oui') {
+					// Faire des lignes s'il y en a effectivement plus de 6
+					if (!($n%6) && ($n>0))
+						$res .= fin_onglet().debut_onglet();
+					if ($tmp->titre)
+						$titre = $tmp->titre;
+					else
+						$titre = $fonds;
+					$icone = '';
+					if ($tmp->icone)
+						$icone = $path.'/'.$tmp->icone;
+					else if (file_exists($path.'/plugin.xml'))
+						$icone = 'plugin-24.gif';
+					else
+						$icone = _DIR_PLUGIN_CFG.'cfg-doc-22.png';
+					$actif = ($fonds == _request('cfg'));
 
-				$res .= onglet($titre, $url, 'cfg', $actif, $icone);
+					$res .= onglet($titre, $url, 'cfg', $actif, $icone);
 
-				// Faire des lignes s'il y en a plus de 6
-				$n++;
+					// Faire des lignes s'il y en a plus de 6
+					$n++;
+				}
 			}
+			$res .= fin_onglet();
+
+			echo $res;
 		}
-		$res .= fin_onglet();
 
-		echo $res;
-	}
+		echo debut_gauche('', true);
 
-	echo debut_gauche('', true);
+		if ($nom)
+			echo	debut_boite_info(true) .
+					propre($this->descriptif) .
+					fin_boite_info(true);
 
-	if ($nom)
-		echo	debut_boite_info(true) .
-		propre($this->descriptif) .
-		fin_boite_info(true);
-
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'cfg'),'data'=>''));
-	echo creer_colonne_droite('', true);
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'cfg'),'data'=>''));
+		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'cfg'),'data'=>''));
+		echo creer_colonne_droite('', true);
+		echo pipeline('affiche_droite',array('args'=>array('exec'=>'cfg'),'data'=>''));
 
 		echo
-		
 			($this->message ? 
 				debut_boite_info(true) .
 				propre($this->message) .
@@ -283,7 +282,8 @@ class cfg_dist extends cfg_formulaire
 			$this->lier() .
 		
 			debut_droite("", true);
-		}
+	}
+
 
 	function fin_page()
 	{

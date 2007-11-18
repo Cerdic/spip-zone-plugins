@@ -2,7 +2,7 @@
 
 /*
  * Plugin CFG pour SPIP
- * (c) toggg 2007, distribue sous licence GNU/GPL
+ * (c) Marcimat, toggg 2007, distribue sous licence GNU/GPL
  * Documentation et contact: http://www.spip-contrib.net/
  *
  */
@@ -24,7 +24,7 @@ function balise_CFG_ARBO($p) {
 	if (!$arg = interprete_argument_balise(1,$p)) {
 		$arg = "''";
 	}
-	//$p->interdire_scripts = false;
+	$p->interdire_scripts = false;
 	$p->code = 'affiche_arborescence(' . $arg . ')';
 	return $p;
 }
@@ -41,28 +41,33 @@ function affiche_arborescence($cfg='') {
 			.  ".cfg_arbo ul{border:1px solid #ccc; margin:0; padding:0.2em 0.5em; list-style-type:none;}\n"
 			.  "</style>\n";
 	// integration du js	
-	$sortie .= "<script type='text/javascript'>
+	$sortie .= "<script type='text/javascript'><!--
+				
 				$(document).ready(function(){
-					jQuery('.cfg_arbo_$hash ul').hide();
-					jQuery('.cfg_arbo_$hash h5')
-					.prepend('<b>[+] </b>')
-					.toggle(
-					  function () {
-						$(this).children('b').text('[-] ');
-						$(this).next('ul').show();
-					  },
-					  function () {
-						$(this).children('b').text('[+] ');
-						$(this).next('ul').hide();
-					  })
+					function cfg_arbo(){
+						jQuery('#cfg_arbo_$hash ul').hide();
+						jQuery('#cfg_arbo_$hash h5')
+						.prepend('<b>[+] </b>')
+						.toggle(
+						  function () {
+							$(this).children('b').text('[-] ');
+							$(this).next('ul').show();
+						  },
+						  function () {
+							$(this).children('b').text('[+] ');
+							$(this).next('ul').hide();
+						  });						
+					}
+					setTimeout(cfg_arbo,100);
+
 				});
-				</script>\n";	
-	
+				// --></script>\n";
+				
 	$tableau = lire_config($cfg);
 	if (empty($cfg)) $cfg = 'spip_meta';
 	// parcours des donnees
 	$sortie .= 
-		"<div class='cfg_arbo cfg_arbo_$hash'>\n" .
+		"<div class='cfg_arbo' id='cfg_arbo_$hash'>\n" .
 		affiche_sous_arborescence($cfg, $tableau) .
 		"\n</div>\n";
 

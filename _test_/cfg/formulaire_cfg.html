@@ -1,5 +1,8 @@
 #HTTP_HEADER{Content-Type:text/html; charset=#CHARSET}
 [(#REM)
 	Cette page renvoie le fragment necessaire pour l'ajax
+	
+	Faire le traitement avant l'affichage du formulaire !
 ]
-#FORMULAIRE_CFG{#ENV{vue}, #ENV{id}, #ENV{cfg_form}, #ENV{cfg_form_ajax}}
+#CFG_TRAITER{#ENV{cfg_vue}, #ENV{cfg_id}}
+<INCLURE{fond=#ENV{cfg_form}}{env}>

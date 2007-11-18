@@ -311,7 +311,7 @@ class cfg_formulaire
 	    $arg = 'cfg0.0.0-' . $this->nom . '-' . $this->vue;
 		$contexte['_cfg_'] =
 			'?exec=cfg&cfg=' . $this->nom .
-			'&vue=' . $this->vue .
+			'&cfg_vue=' . $this->vue .
 			'&cfg_id=' . $this->cfg_id .
 			'&base_url=' . $this->base_url .
 		    '&lang=' . $GLOBALS['spip_lang'] .

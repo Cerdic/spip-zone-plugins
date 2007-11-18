@@ -10,21 +10,22 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function balise_CFG_VUE($p){
+function balise_CFG_TRAITER($p){
 	$vue = 			sinon(interprete_argument_balise(1,$p), "''"); // indispensable neanmmoins
 	$id = 			sinon(interprete_argument_balise(2,$p), "''");
 
-	$p->code = "calculer_CFG_VUE($vue, $id)";
+	$p->code = "calculer_CFG_TRAITER($vue, $id)";
 	return $p;
 }
 
-function calculer_CFG_VUE($fond, $id){
+function calculer_CFG_TRAITER($fond, $id){
 	include_spip('inc/cfg');
 	$cfg = cfg_charger_classe('cfg');
 	$config = & new $cfg($fond, $fond, $id); 
 		
 	if ($config->autoriser()){
-		return $config->formulaire();	
+		$config->traiter();	
+		return $config->messages;	
 	} else
 		return $config->refus;
 }
