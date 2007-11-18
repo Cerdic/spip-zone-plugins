@@ -1,8 +1,0 @@
-<BOUCLE_periode(EVENEMENTS)
-	{agendafull date_debut, date_fin, periode,
-	#ENV{annee}, #ENV{mois}, #ENV{jour},
-	#ENV{annee_fin}, #ENV{mois_fin}, #ENV{jour_fin}}>[
-(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,#TITRE,#DESCRIPTIF,#LIEU,#URL_ARTICLE, 'calendrier-couleur6'})
-]</BOUCLE_periode>[(#DATE|
-	Agenda_affiche_full{<:aucun_article:>, 'periode', 'calendrier-couleur6'}
-)]<//B_periode>
