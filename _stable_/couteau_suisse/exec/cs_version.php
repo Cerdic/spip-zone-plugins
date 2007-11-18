@@ -41,6 +41,6 @@ function exec_cs_version_dist() {
 	}
 	if (!$distant) ajax_retour('');
 	include_spip('inc/texte');
-	ajax_retour(typo($distant==$version?_T('cout:a_jour'):($distant?_T('cout:distant', array('version' => $distant)):'')));
+	ajax_retour(ptobr(propre($distant==$version?_T('cout:a_jour'):($distant?_T('cout:distant', array('version' => $distant)):''))));
 }
 ?>

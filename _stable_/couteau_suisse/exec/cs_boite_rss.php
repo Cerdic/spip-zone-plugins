@@ -21,6 +21,7 @@ if(!function_exists(ajax_retour)) {
 }
 if(defined('_SPIP19100') && !function_exists('spip_xml_load')) { 
 	function spip_xml_load($url){
+		include_spip('inc/distant');
 		$texte = recuperer_page($url);
 		include_spip('inc/plugin');
 		return parse_plugin_xml($texte);
