@@ -19,13 +19,6 @@ if(!function_exists(ajax_retour)) {
 		exit;
 	}
 }
-if(defined('_SPIP19100') && !function_exists('spip_xml_load')) { 
-	function spip_xml_load($url){
-		$texte = recuperer_page($url);
-		include_spip('inc/plugin');
-		return parse_plugin_xml($texte);
-	}
-}
 
 function exec_cs_version_dist() {
 	if (!cout_autoriser()) {
