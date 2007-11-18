@@ -1,0 +1,217 @@
+<!-- debut code pour fichier resultats_forum.html -->
+#CACHE{0}	
+
+	
+[(#REM) eliminer les forums des rubriques et articles appartenant aux autres secteurs]
+	<BOUCLE_contexte(RUBRIQUES){id_rubrique}>
+		<BOUCLE_secteurs(RUBRIQUES){exclus}{racine}>
+			<BOUCLE_supp(RUBRIQUES){id_secteur}>
+		        <BOUCLE_supp2(FORUMS){id_rubrique}{plat}{doublons}></BOUCLE_supp2>
+			</BOUCLE_supp>
+			<BOUCLE_supp3(ARTICLES){id_secteur}>
+		        <BOUCLE_supp4(FORUMS){id_article}{plat}{doublons}></BOUCLE_supp4>
+			</BOUCLE_supp3>
+			<BOUCLE_supp5(BREVES){id_secteur}>
+		        <BOUCLE_supp6(FORUMS){id_article}{plat}{doublons}></BOUCLE_supp6>
+			</BOUCLE_supp5>
+		</BOUCLE_secteurs>
+	</BOUCLE_contexte>
+		
+
+		<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}>
+
+		<p class="space_20"></p>
+
+
+<B_art_test>
+	<div class="titre_actif"><:forg:recherche:></div>
+	<p class="space_10"></p>
+	
+<BOUCLE_art_test(ARTICLES){id_article}>
+
+	<div class="chemin">
+		<BOUCLE_nb(FORUMS){recherche}{id_article}></BOUCLE_nb>
+		#TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{<:forg:resultat_s_pour_:>,<:forg:resultat_pour_:>})]
+		[ #RECHERCHE ]
+		<//B_nb>
+		<:forg:dans_forum:>&quot; [(#TITRE|supprimer_numero)] &quot;
+	</div>
+	<p class="space_10"></p>
+
+		
+	<B_art>
+	<table class="spipforum" id="resultats">
+		<tr> 
+			<th><:forg:auteur:></th>
+			<th><:forg:message_s:></th>
+		</tr>
+
+	<BOUCLE_art(FORUMS){recherche}{id_article}{par points}{inverse}>
+	
+		<BOUCLE_thread(FORUMS){id_thread}>
+			#SET{id_sujet,#ID_FORUM}
+			#SET{ttr_sujet,#TITRE|texte_script}
+			<BOUCLE_ArticleForum_art(ARTICLES){id_article}>
+				#SET{ttr_forum,#TITRE|texte_script}
+			</BOUCLE_ArticleForum_art>
+			#SET{closed,non}
+			<BOUCLE_reponsesalt(FORUMS){id_thread}{plat}> 
+				<BOUCLE_reponse_fermealt(FORUMS){id_forum}{titre_mot=ferme}>
+					#SET{closed,#ID_FORUM|texte_script}
+				</BOUCLE_reponse_fermealt>
+			</BOUCLE_reponsesalt>
+			#SET{rep_forum,#EVAL{#TOTAL_BOUCLE-1}}
+			</B_reponsesalt>
+        </BOUCLE_thread>
+        
+		<tr class="inter salon"> 
+			<td colspan="2">
+       			<:forg:sujet_dpt:>:&nbsp;
+				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_sujet}}|parametre_url{recherche,#RECHERCHE})]">
+					#TITRE
+				</a>
+			</td>
+   		</tr>
+		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+			<td class="aff_avatar" rowspan="2">
+				<p class="text_nom">
+				<B_auteurp1>
+				<BOUCLE_auteurp1(AUTEURS){id_auteur}{tout}>
+					#NOM
+				</BOUCLE_auteurp1>
+				</B_auteurp1>
+					[(#NOM|sinon{<:forg:anonyme:>})]
+				<//B_auteurp1>
+				</p>
+				[(#GET{rep_forum}|>{1}|?{<:forg:reponse_s_:>,<:forg:reponse_:>})]
+				<br />
+				#GET{rep_forum}
+				
+			</td>
+   			<td  class="date_sujet">	
+   				<:forg:forum_dpt:><a href="#URL_FORUM">#GET{ttr_forum}</a>
+				<br />
+				[(#DATE|nom_jour) ][(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]
+       		</td>
+   		</tr>
+   		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]"> 
+   			<td>
+			   [(#TEXTE|lignes_longues|smileys|couper{300})]
+			</td>
+		</tr>
+	</BOUCLE_art>
+	</table>
+	</B_art>
+	  
+	<p class="space_20"></p>
+
+	<!-- aucun resultat ! -->
+	<table class="spipforum" id="resultats">
+		<tr> 
+			<th><:forg:info:></th>
+		</tr>
+		<tr class="sans_sujet"> 
+			<td><:forg:no_message:></td>
+		</tr>
+	</table>
+
+	<//B_art>
+</BOUCLE_art_test>
+
+
+<!-- recherche elargie -->	
+	<div class="titre_actif"><:forg:recherche_elargie:></div>
+	<p class="space_10"></p>
+	
+	<div class="chemin">
+		<BOUCLE_nb2(FORUMS){recherche}></BOUCLE_nb2>
+		#TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{<:forg:resultat_s_pour_:>,<:forg:resultat_pour_:>})]
+		[ #RECHERCHE ]
+		<//B_nb2>
+		<:forg:dans_forum:>&quot; #TITRE &quot;
+	</div>
+	<p class="space_10"></p>
+
+	<B_tout>
+		<table class="spipforum" id="resultats">
+			<tr> 
+				<th><:forg:auteur:></th>
+				<th><:forg:message:></th>
+			</tr>
+	<BOUCLE_tout(FORUMS){recherche}{doublons}{par points}>
+		
+		<BOUCLE_thread2(FORUMS){id_thread}>
+			#SET{id_sujet,#ID_FORUM|texte_script}
+			#SET{ttr_sujet,#TITRE|texte_script}
+				
+       		<BOUCLE_ArticleForum_art2(ARTICLES){id_article}>
+       		#SET{ttr_forum,#TITRE|texte_script}
+       		</BOUCLE_ArticleForum_art2>
+
+       		#SET{closed,non}
+								
+			<BOUCLE_reponsesalt2(FORUMS){id_thread}{plat}> 
+				<BOUCLE_reponse_fermealt2(FORUMS){id_forum}{titre_mot=ferme}>
+				#SET{closed,#ID_FORUM|texte_script}
+				</BOUCLE_reponse_fermealt2>
+			</BOUCLE_reponsesalt2>
+				#SET{rep_forum,#EVAL{#TOTAL_BOUCLE-1}}
+			</B_reponsesalt2>
+        </BOUCLE_thread2>
+		 
+		 
+		 <tr class="inter salon"> 
+			<td colspan="2">
+				<:forg:sujet_dpt:>:&nbsp;
+				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_sujet}}|parametre_url{recherche,#RECHERCHE})]">
+					#TITRE
+				</a>
+			</td>
+		</tr>
+		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]"> 
+			<td  class="aff_avatar" rowspan="2">
+				<p class="text_nom">
+				<B_auteurp>
+				<BOUCLE_auteurp(AUTEURS){id_auteur}>#NOM</BOUCLE_auteurp>
+				</B_auteurp>
+				[(#NOM|sinon{<:forg:anonyme:>})]
+				<//B_auteurp>
+				</p>
+				[(#GET{rep_forum}|>{1}|?{<:forg:reponse_s_:>,<:forg:reponse_:>})]
+				<br />
+				#GET{rep_forum}
+			</td>
+            <td class="date_sujet">
+				<:forg:forum_dpt:><a href="#URL_FORUM">#GET{ttr_forum}</a>
+				<br />
+				[(#DATE|nom_jour) ][(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]
+			</td>
+		</tr>
+		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]"> 
+			<td>
+				[(#TEXTE|lignes_longues|smileys|couper{300})]
+			</td>
+		</tr>
+		
+	</BOUCLE_tout>
+
+	</table>
+    </B_tout>
+
+    <!-- aucun resultat ! -->
+	<table class="spipforum" id="resultats">
+		<tr> 
+			<th><:forg:info:></th>
+		</tr>
+		<tr class="sans_sujet"> 
+			<td><:forg:no_message:></td>
+		</tr>
+	</table>
+    <//B_tout>
+    
+<//B_art_test>
+
+
+	<INCLURE(session.php){fond=inc_piedforum}{id_rubrique}>
+
+<!-- fin code resultats_forum.html -->

@@ -1,0 +1,21 @@
+<div id="bouton_rss">
+<BOUCLE_syndic_rub(HIERARCHIE){id_article}{" "}>
+	<a href="#URL_PAGE{backend_forum,id_rubrique=#ID_RUBRIQUE}" rel="nofollow" title="<:forg:s_abonner_a:>[(#TITRE|supprimer_numero|couper{50})]">
+		<span>[(#TITRE|supprimer_numero|couper{30})]</span>
+	</a>
+</BOUCLE_syndic_rub>
+
+<BOUCLE_syndic_art(ARTICLES){id_article}>
+	<a href="#URL_PAGE{backend_forum,id_article=#ID_ARTICLE}" rel="nofollow" title="<:forg:s_abonner_a:>[(#TITRE|supprimer_numero|couper{50})]">
+		<span>[(#TITRE|supprimer_numero|couper{30})]</span>
+	</a>
+</BOUCLE_syndic_art>
+	
+<BOUCLE_syndic_for(FORUMS){id_thread=#ID_THREAD}>
+<a href="#URL_PAGE{backend_forum,id_thread=#ID_THREAD}" rel="nofollow" title="<:forg:s_abonner_a:>[(#TITRE|supprimer_numero|couper{50})]">
+	<span>[(#TITRE|couper{30})]</span>
+</a>
+</BOUCLE_syndic_for>
+
+<div style="clear:both;"></div>
+</div>

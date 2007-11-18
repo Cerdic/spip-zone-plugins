@@ -1,0 +1,129 @@
+<div class="formulaire_spip formulaire_profil">
+[<p class="info_echec">(#ENV*{echec})</p>]
+<form action="[(#ENV{self})]" method="post">
+
+<BOUCLE_AUTEUR(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
+
+	<input type='hidden' name='nom' value='[(#NOM)]' />
+	<input type='hidden' name='id_auteur' value="[(#ID_AUTEUR)]" />
+	<input type='hidden' name='modif' value="1" />
+		
+	<p><label for="email"><:forg:votre_email:></label><br />
+	<input type='text' name='email' class='forml' value="[(#EMAIL)]" size='40' />
+	</p>
+	
+	<p><label for="bio"><:forg:votre_bio:></label><br />
+	<textarea name='bio' class='forml' rows='4' cols='40'>[(#BIO*)]</textarea>
+	</p><br />
+
+	<input type='hidden' name='pgp' value="[(#PGP)]" />
+
+	<p><label for="nom_site"><:forg:votre_site:></label><br />
+	<input type='text' name='nom_site' class='forml' value="[(#NOM_SITE)]" size='40' />
+	</p>
+	
+	<p><label for="url_site"><:forg:votre_url_site:></label><br />
+	<input type='text' name='url_site' class='forml' value="[(#URL_SITE)]" size='40' />
+	</p>
+
+	[
+	(#REM) les champs de GAFOSPIP ...
+	]
+	
+	[(#REM) controle nouvel inscrit ]
+	[(#SPIPBB{date_crea_spipbb}|=={''}|?{' ',''})
+	<input type="hidden" name="nouveau" value="1" />
+	]
+	
+	<br />
+	#SET{aff_avatar,#CONFIG{'spipbb/affiche_avatar'}}
+	[(#GET{aff_avatar}|=={oui}|?{' ',''})
+		[(#STATUT|=={'6forum'}|?{' ',''})
+		
+		<p><label for="avatar"><:forg:votre_url_avatar:></label><br />
+		<input type="text" name="avatar" id="avatar" class="forml" value="#SPIPBB{avatar}" size="40" />
+		</p>
+		]
+	]
+	
+	
+	#SET{aff_signature,#CONFIG{'spipbb/affiche_signature_post'}}
+	[(#GET{aff_signature}|=={oui}|?{' ',''})
+		<p><label for="signature_post"><:forg:votre_signature:></label><br />
+		<input type="text" name="signature_post" id="signature_post" class="forml" value="#SPIPBB{signature_post}" size="40" />
+		</p>
+	]
+	
+	
+	[(#SET{check,[(#SPIPBB{annuaire_forum}|=={''}|?{'non',#SPIPBB{annuaire_forum}})]})]
+	<br />
+	<p><label for="annuaire_forum"><:forg:visible_annuaire_forum:></label><br />
+	<input type="radio" name="annuaire_forum" id="annuaire_forum" class="forml" 
+			value="non" [(#GET{check}|=={'non'}|?{'checked="checked"',''})] /><:forg:non:>
+	&nbsp;&nbsp;&nbsp;
+	<input type="radio" name="annuaire_forum" id="annuaire_forum" class="forml" 
+			value="oui" [(#GET{check}|=={'oui'}|?{'checked="checked"',''})] /><:forg:oui:>
+	</p>
+	
+	
+	
+	[(#REM) pour simple transport ]
+	<input type="hidden" name="date_crea_spipbb" value="[(#SPIPBB{date_crea_spipbb})]">
+	
+	
+	[(#REM) liste des threads de l_auteur ==> checkbox refus de suivi ]
+	#SET{select,#SPIPBB{refus_suivi_thread}|chaine2array}
+	<br />
+	<B_suivi_forum>
+	<table class="spipforum" id="liste_refus_suivi">
+	<tr class="inter">
+		<th colspan="2">
+		<:forg:infos_refus_suivi_sujet:>
+		</th>
+	</tr>
+	<BOUCLE_suivi_forum(FORUMS){id_auteur}{plat}{!par date}{fusion id_thread}{doublons}>
+	<tr class="ligne_sujet">
+		<td class="titreforum">
+			#ID_THREAD|&nbsp;&laquo;&nbsp;#TITRE&nbsp;&raquo;&nbsp;
+		</td><td class="nbr_post">
+			<input type="checkbox" name="refus_suivi_thread[]" value="#ID_THREAD" 
+				[(#ID_THREAD|in_array{#GET{select}|is_array|?{#GET{select},alt="lolo"}}|?{'checked="checked"',''})] title="" /><br />
+		</td>
+	</tr>
+	</BOUCLE_suivi_forum>
+	</table>
+	</B_suivi_forum>
+		<p><:forg:infos_suivi_forum_par_inscription:></p>
+	<//B_suivi_forum>
+	
+	
+	
+	[
+	(#REM) h. 11/11/07 .. autres support de champs ... a voir ulterieurement !!
+	Ne pas passer ca sur  "support_auteur"
+	Laisse ici pour memo/infos/reflexo...
+	[(#REM) support : autre -> appel modele adapte ]		
+	#SET{support,#CONFIG{'spipbb/support_auteurs'}}
+	[(#GET{support}|=={autre}|?{' ',''})
+	[(#INCLURE{fond=modeles/form_profil_#GET{support}}{id_auteur}{statut=#SESSION{statut}})]
+	]
+	
+	]
+	
+	
+	<br />
+	<p><label for="new_pass"><:forg:votre_nouveau_passe:></label>
+	<span style="color:red"><:forg:info_plus_cinq_car:></span><br />
+	<input type='password' name='new_pass' id='new_pass' class='forml' value="" size='40' />
+	</p>
+	
+	<p><label for="new_pass2"><:forg:info_confirmer_passe:></label>
+	<input type='password' name='new_pass2' id=='new_pass2' class='forml' value="" size='40' />
+	</p>
+	
+	<div class="spip_bouton"><input type="submit" name="valider_auteur" value="<:valider:>" /></div>
+
+</BOUCLE_AUTEUR>
+
+</form>
+</div>

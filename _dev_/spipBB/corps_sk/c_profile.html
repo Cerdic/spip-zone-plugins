@@ -1,0 +1,40 @@
+#CACHE{0}		
+<BOUCLE_recap(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
+	
+	<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}>
+
+	<p class="space_20"></p>
+	
+
+	<table class="spipforum" id="profile">
+		<tr>
+			<th colspan="2">#NOM</th>
+		</tr>
+		<tr class="inter">
+			<td colspan="2"><:forg:modif_parametre:></td>
+		</tr>
+		<tr class="ligne_sujet">
+			<td class="aff_avatar">
+				[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_prof'}})]
+			</td>
+			<td>
+				#FORMULAIRE_SPIPBB_PROFIL
+			</td>
+		</tr>
+		<tr class="inter">
+			<td colspan="2">&nbsp;</td>
+		</tr>
+	</table>
+
+	<INCLURE(session.php){fond=inc_piedforum}{id_rubrique}>
+
+</BOUCLE_recap>
+</B_recap>
+	[(#REM) si visiteur non identifie : form login ]
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:forg:login:></p>]
+	#LOGIN_PUBLIC
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})
+	&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+	</div>
+	]
+<//B_recap>

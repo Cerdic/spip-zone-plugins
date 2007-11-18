@@ -40,7 +40,6 @@ function balise_CALC_STATS_FORUMS_dyn($id_forum)
 {
 	if (empty($id_forum)) return '';
 	$row = sql_fetsel('visites','spip_visites_forums',"id_forum=$id_forum");
-
 	if (is_array($row) and (!empty($row['visites'])) ) {
 		$r = sql_updateq( "spip_visites_forums", array(
 					'date'	=>	date("Y-m-d"),

@@ -1,0 +1,33 @@
+<!-- debut code pour fichier form_inscript.html -->
+
+<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}>
+
+<p class="space_20"></p>
+
+<table class="spipforum" id="inscript">
+	<tr>
+  		<th colspan="3"><:forg:inscription:></th>
+	</tr>
+	<tr  class="ligne_sujet">
+		<td colspan="3">
+			<:forg:reglement:>
+		</td>
+	</tr>
+	<tr  class="inter salon">
+		<td colspan="3">&nbsp;</td>
+	</tr>
+	<tr  class="ligne_sujet">
+		<td class="aff_avatar"> </td>
+		<td>
+			[(#FORMULAIRE_INSCRIPTION{forum})]
+		</td>
+		<td class="aff_avatar"> </td>
+	</tr>
+	<tr class="ligne_sujet row2"> 
+		<td colspan="3"><:forg:champs_obligatoires:></td>
+	</tr>
+</table>
+
+<INCLURE(session.php){fond=inc_piedforum}{id_rubrique}>
+
+<!-- fin code form_inscript.html -->

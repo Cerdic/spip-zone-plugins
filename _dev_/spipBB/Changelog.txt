@@ -1,3 +1,8 @@
+2007-11-18  chryjs  <chryjs!@!free!.!fr>
+
+ * Integration Gafospip, balises, fonctions et mise en page
+ * passage en 0.3.0 - coherence avec SpipBB
+
 2007-11-14  chryjs  <chryjs!@!free!.!fr>
 
  * Premiere adaptation en vue d'un rapprochement avec Gafospip

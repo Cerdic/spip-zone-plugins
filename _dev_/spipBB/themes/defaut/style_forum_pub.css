@@ -1,0 +1,558 @@
+/* CSS forum public base gafospip - scoty v.0.6 070923 */
+/*
+coul 1 #496B8D (ex . fond entete tableau / coul. foncee)
+coul 2 #A4B3C3 (ex . fond du bloc login / coul. moyenne)
+coul 3 #BBC6D2 (ex . fond ligne titre rubrique  / coul. claire)
+coul 4 #eeeeee (fond table, cellule stand.)
+coul 5 #d3d3d3 (fond cellule second )
+coul 6 #ffffff (bordure table et cellules)
+police par defaut des tableau : voir table.spipforum
+*/
+
+/* ** style pour tableau, par leur id - dimensions ** */
+#rubrique_forum {}
+#article_forum {}
+#post_ferme {}
+#liste_post{}
+#post_origine {}
+#ecrire { width:650px;}
+#prev {}
+#profile { width:600px; }
+#auteur { width:500px; }
+#derniers_msg { width:650px; }
+#membres { width:600px; }
+#inscript { width:600px; }
+#resultats { width:80%; }
+
+#liste_refus_suivi { /* v.0.6 */
+	margin:10px 0px;
+	width:400px;
+}
+
+/* tableau */
+table.spipforum {
+width:100%;
+border-collapse:collapse;
+clear:both;
+font-size: 11px;
+color: #000000;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+/*background-color:#eeeeee;  coul 4 */
+border: 2px solid #ffffff; /* coul 6 */
+}
+
+table.spipforum th {
+padding: 4px;
+border: 1px solid #ffffff; /* coul 6 */
+background-color: #496B8D; /* coul 1 */
+color:#ffffff;
+}
+
+/* diverses lignes */
+tr.inter {
+border: 1px solid #ffffff; /* coul 6 */
+background-color:#BBC6D2; /*coul 3 */
+}
+tr.salon td {
+padding:4px;
+min-height:25px;
+font-size: 13px;
+font-weight : bold;
+color: #496B8D; /* coul 1*/
+font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+tr.entete_sujet td {
+padding:4px;
+font-size: 12px;
+color: #496B8D; /* coul 1*/
+font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+tr.forum_clos td, .mesg_forum_clos {
+padding:3px;
+border: 1px solid #ffffff; /* coul 6 */
+background-color:#BBC6D2; /*coul 3 */
+font-size: 13px;
+font-weight : bold;
+color: #ffffff; 
+font-family: Verdana, Arial, Helvetica, sans-serif;
+text-align:center;
+}
+tr.pagination td {
+height:25px;
+background-color:#ffffff; /* coul 6 */
+font-weight : bold;
+color: #496B8D; /* coul 1*/
+font-family: Verdana, Arial, Helvetica, sans-serif;
+text-align:right;
+}
+tr.sans_sujet td {
+padding:5px;
+background-color:#BBC6D2; /*coul 3 */
+font-size: 13px;
+font-weight : bold;
+color: #ffffff;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+text-align:center;
+}
+
+/* ligne forum / sujet / type annonce .. */
+tr.ligne_forum { height:30px;}
+tr.ligne_sujet, tr.ligne_annonce { height:25px;}
+
+tr.ligne_forum td { padding:3px; border: 1px solid #ffffff;} /* coul 6 */
+tr.ligne_sujet td { padding:3px; border: 1px solid #ffffff; }
+tr.ligne_annonce td { padding:3px; border: 1px solid #ffffff; }
+tr.ligne_postit td { padding:3px; border: 1px solid #ffffff; }
+
+/* alterner coul fond des lignes messages (voirsujet.html) */
+tr.row1 {  }
+tr.row2 { background-color:#d3d3d3; } /* coul 5 */
+
+
+/* ** icone tete de ligne -- type forum/sujet */
+td.etatsujet { width:25px; }
+td.etatforum { width:30px; }
+td.etatsujet span, td.etatforum span { display: none; }
+
+td.titreforum {}
+td.titreforum a.titre{ font-weight:bold; font-size:1.1em; color:#496B8D; } /* coul 1 */
+
+td.nbr_sujet { min-width:10%; text-align:center; }
+td.nbr_post { min-width:10%; text-align:center; background-color:#d3d3d3; } /* coul 5 */
+
+td.auteur_post { min-width:12%; text-align:center; }
+
+td.dernier_msg { width:30%; text-align:center; font-size:0.9em; }
+
+td.forumferme {
+background-image: url(img/folder_lock_big.gif);
+background-repeat: no-repeat;
+background-position: center;
+}
+td.forumouvert {
+background-image: url(img/folder_big.gif);
+background-repeat: no-repeat;
+background-position: center;
+}
+td.sujetannonce {
+background-image: url(img/folder_announce.gif);
+background-repeat: no-repeat;
+background-position: center;
+}
+td.sujetpostit {
+background-image: url(img/folder_sticky.gif);
+background-repeat: no-repeat;
+background-position: center;
+}
+td.post {
+background-image: url(img/folder.gif);
+background-repeat: no-repeat;
+background-position: center;
+}
+td.postferme {
+background-image: url(img/topic_lock.gif);
+background-repeat: no-repeat;
+background-position: center;
+}
+
+td.aff_avatar { width:60px; vertical-align:top; text-align:center; }
+
+td.col_smileys { width:20%; vertical-align:top; padding-top:70px; }
+
+td.date_sujet { vertical-align:top; }
+td.date_sujet span {
+padding-left: 14px;
+background-repeat: no-repeat;
+background-image: url(img/icon_minipost.gif);
+background-position: 0px 2px;
+}
+
+/* ** bouton 'ecrire'/'www' liste inscrits ** */
+td.email, td.www { text-align:center; }
+td.email a, td.www a {
+display:block;
+line-height:20px;
+background-repeat: no-repeat;
+background-position:top center;
+}
+td.email a { background-image: url(img/icon_email.gif); }
+td.www a { background-image: url(img/icon_www.gif); }
+td.email a:hover, td.www a:hover { text-decoration: none; }
+
+/* ** liens pagination ** */
+tr.pagination a.lien_pagination {
+padding:1px 4px;
+border:1px solid #496B8D; /* coul 1 */
+background-color:#d3d3d3; /* coul 5 */
+}
+tr.pagination a.lien_pagination:hover {
+background-color:#eeeeee; /* coul 4 */
+}
+tr.pagination .on {
+padding:1px 4px;
+border:1px solid #496B8D; /* coul 1 */
+background-color:#ffffff; /* coul 6 */
+}
+
+
+/* CLASS SPIP
+ ** formulaire_forum 
+ ** formulaire_ecrire_auteur 
+ ** formulaire_inscription
+ ** formulaire_gaf_profil
+  
+ .. redeclaration de class spip proposées ici a titre d'exemple,
+	à reporter dans votre feuille principale (ou pas !) 
+*/
+.formulaire_spip {
+width:auto; margin:0px; /* v.0.6 */
+padding:2px;
+color:#496B8D; /* coul 1 */
+font-size: 11px;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.formulaire_forum {}
+
+.formulaire_spip .forml {
+	background-color:#ffffff; /* coul 6 */
+	border:1px solid #496B8D; /* coul 1 */
+	padding:2px;
+}
+.formulaire_spip fieldset { border:1px solid #496B8D; /* coul 1 */ }
+.formulaire_spip legend { 
+	font-weight: bold; 
+	padding: 3px;
+	background-color: transparent;
+}
+.spip_encadrer {}
+
+table.spip_barre { }
+.formulaire_spip .barre {
+	margin: 2px 0px;
+	padding:2px;
+	background-color:#ffffff; /* coul 6 */
+	border:1px solid #7B8692;
+	font-size:10px;
+	color:#3E4349;
+}
+.formulaire_spip .spip_barre img {
+	border-left: 1px solid #ffffff; /* coul 6 */
+	border-top: 1px solid #ffffff; /* coul 6 */
+	border-right: 1px solid #496B8D; /* coul 1 */
+	border-bottom: 1px solid #496B8D; /* coul 1 */
+	padding: 3px;
+	background-color:#A4B3C3; /* coul 2 */
+}
+.formulaire_spip .spip_barre a:hover img {}
+div.spip_bouton { }
+div.spip_bouton input {
+	background-color: #A4B3C3; /* coul 2 */
+	border-top:2px solid #d3d3d3; /* coul 5 */
+	border-left:2px solid #d3d3d3; /* coul 5 */
+	border-right:2px solid #496B8D; /* coul 1 */
+	border-bottom:2px solid #496B8D; /* coul 1 */
+	-moz-border-radius:5px;
+	font-size:10px;
+}
+blockquote.spip {
+	border-width:2px;
+}
+/* ********** FIN CLASS SPIP **************/
+
+/* **  teteforum  /  piedforum  ** */
+#pied_forum {}
+#tete_forum {
+float:left; color: #496B8D; /* coul 1 */
+font-family: Verdana, Arial, Helvetica, sans-serif; /* coul 1 */
+text-align:left;
+}
+#tete_forum .titre { font-size: 19px; font-weight : bold; }
+#tete_forum .descript { font-size: 12px; }
+
+#rech_for {
+float:right;
+width:210px;
+text-align:right;
+}
+#rech_for span {
+color:#496B8D; /* coul 1 */
+font-size: 11px;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+#action_for { 
+clear:both;
+margin:5px 0px; /* v.0.6 */
+padding:2px 0px;
+color:#496B8D; /* coul 1 */
+font-size: 11px;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+border-top:1px solid #A4B3C3; /* coul 2 */
+border-bottom:1px solid #A4B3C3; /* coul 2 */
+}
+#action_for ul { text-align:center; list-style-type: none; margin:0; padding:3px;}
+#action_for li { display:inline; }
+#action_for li a {
+color:#496B8D; /* coul 1 */
+padding: 2px 15px 2px 16px;
+background-repeat: no-repeat;
+background-position:0px 3px;
+}
+#action_for li a:hover { text-decoration:none; color:#000000; }
+li.membre a { background-image: url(img/icon_mini_members.gif); }
+li.enreg a { background-image: url(img/icon_mini_register.gif); }
+li.login a { background-image: url(img/icon_mini_login.gif); }
+li.profil a { background-image: url(img/icon_mini_profile.gif); }
+li.dern_messag a { background-image: url(img/icon_mini_message.gif); }
+
+
+
+/* *** divers objet *** */
+
+/* icone dernier message */
+a.adermsg {
+	height: 9px;
+	padding-left: 20px;
+	background-repeat: no-repeat;
+	background-image:url(img/icon_latest_reply.gif);
+	background-position:0px 2px
+}
+a.adermsg span { display: none; }
+a.adermsg:hover { text-decoration: none; }
+
+/*  icone modo */
+td.aff_avatar p.modo {
+	margin-top:5px;
+	height:20px; /* +/- hauteur icone */
+	background-image: url(img/modo-24.png);
+	background-repeat: no-repeat;
+	background-position:top left;
+}
+
+/* ligne moderateurs */
+/* GAF v.0.5, modif v.0.6 */
+.modo_ligne {
+	margin:10px 0px;
+	padding: 2px 24px;
+	background-image: url(img/modo-24.png);
+	background-repeat: no-repeat;
+	background-position:0px 0px;
+	color:#4C788B; /* coul 1 */
+	font-size: 11px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+/* chemin - bloc hierarchie */
+.chemin {
+	clear:both;
+	padding-left:25px;
+	background-repeat: no-repeat;
+	background-image:url(img/3flch_chem.gif);
+	background-position:0px 0px;
+	font-size:11px;
+	color: #496B8D; /* coul 1*/
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align:left;
+}
+.chemin a { color: #496B8D; }
+.chemin a:hover { text-decoration: none; color:#000000; }
+
+/* bloc titre forum/sujet en cours ... */
+.titre_actif {
+	padding-right:30%;
+	text-align:left;
+	font-size: 15px;
+	font-weight:bold;
+	color: #496B8D; /* coul 1*/
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* bouton action : nouveau message / repondre */
+ul.actionforum { padding:0; margin:0; float:right; } /* ou left, as you want */
+ul.actionforum li { list-style:none; display:inline; margin-right: 3px; }
+ul.actionforum li a {
+	padding:0px;
+	margin:0px;
+	padding-left:50px; /* largeur de l'icone +/- */
+	background-repeat:no-repeat;
+	font-size:22px; /* hauteur de l'icone +/- */
+	background-position:center left;
+}
+ul.actionforum li a:hover { text-decoration:none; }
+li.poster a { background-image: url(img/nouveausujet.gif); }
+li.repondre a { background-image: url(img/repondre.gif); }
+
+
+/* bouton 'citer' (td date_sujet ; voirsujet.html ) */
+.bout_citer, .bout_citer a {
+float:right; 
+width:60px; /* +/- largeur icone */
+height:20px; /* +/- hauteur icone */
+}
+.bout_citer a {
+background-image: url(img/icon_quote.gif);
+background-repeat: no-repeat;
+background-position:top right;
+}
+.bout_citer a:hover { text-decoration: none; }
+
+/* bouton 'alerter abus' */ /* GAF v.0.5 */
+.bouton_alerter, .bouton_alerter a {
+float:left;
+width:20px; /* +/- largeur icone */
+height:20px; /* +/- hauteur icone */
+}
+.bouton_alerter a {
+background-image: url(img/alerter.png);
+background-repeat: no-repeat;
+background-position:0px;
+}
+.bouton_alerter a:hover { text-decoration: none; }
+
+/* ** lien propose dans un message ** */
+a.lien_propose {
+	padding:2px 15px 4px 15px;
+	border-top:1px solid #496B8D; /*coul 1*/
+	background-image: url(img/racine-site-12.gif);
+	background-repeat: no-repeat;
+	background-position:0px 2px;
+}
+
+/* ** divers elem texte ** voirsujet.html, formulaire_forum_previsu.html .. */
+.text_nom { font-weight:bold; }
+.text_titre { }
+p.erreur {
+	font-size: 12px;
+	font-weight : bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: center;
+	color: #C20303; /* rouge fonce */
+}
+
+/* Bloc de login ( --> formulaire_login ) */
+div.login {
+	width: 99%; 
+	margin-top: 10px;
+	padding:5px;
+	background-color:#A4B3C3; /* coul 2*/
+	vertical-align:top;
+	font-size: 11px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+} 
+div.login p.login {
+	margin:0;
+	padding:2px;
+	font-weight : bold;
+	color: #ffffff; /* coul 6 */
+}
+div.login form { margin:0; padding:0; }
+div.login fieldset p { margin:0; padding:0px 5px 5px 15px; float:left;  }
+div.login fieldset { border:1px solid #496B8D; } /*coul 1 */
+div.login a { color:#5D5D5D; } /* gris fonce */
+/* .. redeclaration class spip */
+div.login .forml { width: 150px; margin-top:5px; }
+div.login .spip_bouton {text-align:right; }
+div.login .spip_bouton input {font-size:10px; }
+div.login .spip_logos { float:left; }
+
+
+/**** message alerte poster.hmtl : forum/sujet ferme */
+div.alerte_ferme {
+	margin-top:10px;
+	width:100%;
+	border:1px solid #ffffff; /* coul 6 */
+	background-color:#eeeeee; /* coul 4*/
+}
+div.alerte_ferme h2, div.alerte_ferme h3, div.alerte_ferme p {
+	margin:0;
+	padding:5px;
+	border:1px solid #ffffff; /* coul 6 */
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: center;
+	color: #ffffff; /* coul 6 */
+}
+div.alerte_ferme h2 { background-color:#496B8D; font-size: 13px; }/* coul 1*/
+div.alerte_ferme h3 { background-color:#BBC6D2; font-size:11px; } /* coul 3*/
+div.alerte_ferme p { font-size: 11px; color: #000000; font-weight:normal; }
+
+.info_echec { /* v.0.6 */
+	padding:3px;
+	border:2px dotted #B00000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px; color:#B00000; font-weight:normal;
+}
+
+/* bouton RSS + bouton Retour */
+/* modif GAF v.0.5, v.0.6 */
+#bouton_rss a, #bouton_retour a {
+	background-color:#C3CCD0; /* coul 3*/
+	border:1px solid #4C788B; /* coul 1*/	
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	float:left;
+	width:auto;
+	margin-top:2px;
+}
+#bouton_rss a {
+	margin-left:3px;
+	padding:3px;
+	background-image: url(img/feed.png);
+	background-repeat: no-repeat;
+	background-position:1px 1px;
+}
+#bouton_retour a {
+	padding:2px;
+	background-image: url(img/icon_mini_message.gif);
+	background-repeat: no-repeat;
+	background-position:1px 1px;
+}
+#bouton_rss a:hover, #bouton_retour a:hover {
+	text-decoration: none;
+	background-color:#93B3C2; /* coul 2*/
+	color:#ffffff; /* coul 6 */
+}
+#bouton_rss span { padding-left:20px; }
+#bouton_retour span { padding-left:15px; }
+
+p.signature { /* v.0.6 */
+	clear:both;
+	padding:3px 0px 0px 0px;
+	margin:5px 0px 0px 0px;
+	border-top:1px dotted #000;
+	font-family: Arial;
+	font-size:11px;
+	font-style:italic;
+}
+
+
+/* p supporte par IE et Gecko 
+p.space_5, p.space_10, p.space_20 {
+	display:block;
+	margin: 0;
+	_margin: -5px 0;
+	padding: 0;
+	border: 0;
+	clear:both;
+}
+.space_5 {  height: 5px; }
+.space_10 { height: 10px; }
+.space_20 { height: 20px; }*/
+
+/* p supporte "presque par IE" et Gecko a consommer avec moderation */
+p.space_5, p.space_10, p.space_20 {
+	display:block;
+	padding: 0px;
+	border: none;
+}
+.space_5 { min-height:5px; _margin:5px 0px 0px 0px;  }
+.space_10 { min-height:10px; _margin:10px 0px 0px 0px; }
+.space_20 { min-height:20px; _margin:20px 0px 0px 0px; }
+
+/* pour image png24 dans MS IE */
+img {
+	behavior: url("../win_png.htc");
+	border:none;
+}
+
+                    

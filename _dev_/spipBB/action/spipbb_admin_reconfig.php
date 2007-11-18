@@ -161,12 +161,201 @@ function action_spipbb_admin_reconfig()
 			$GLOBALS['spipbb']['sw_warning_pm_message']=$sw_warning_pm_message;
 			$reconf=true;
 		}
+		# ajouts gafospip / scoty
+		# nombre lignes
+		if ((strlen($fixlimit=_request('fixlimit')))
+			and intval($fixlimit)!=$GLOBALS['spipbb']['fixlimit']) {
+			$GLOBALS['spipbb']['fixlimit']=intval($fixlimit);
+			$reconf=true;
+		}
+		# temps avant deplacement
+		if ((strlen($lockmaint=_request('lockmaint')))
+			and intval($lockmaint)!=$GLOBALS['spipbb']['lockmaint']) {
+			$GLOBALS['spipbb']['lockmaint']=intval($lockmaint);
+			$reconf=true;
+		}
+		# scoty gaf_ecrireinstall 16/11/07 :  support_auteurs : table / extra/autres..
+		# => lieu de stockage des champs supplementaires auteurs
+			# petits controles prealable de : table
+				##$options_sap = array('extra','table','autre');
+				#$options_sap = array('extra','table');
+		# form support mal remplis : retour case depart
+		$support_auteurs = _request('support_auteurs');
+		$table_support = _request('table_support');
+		if ( !empty($support_auteurs) AND
+			( ($support_auteurs!=$GLOBALS['spipbb']['support_auteurs']) // soit on modifie le support
+			OR (!empty($table_support) AND ($support_auteurs=='table') AND ($table_support!=$GLOBALS['spipbb']['table_support'])) ) ) // soit on modifie la table et c'est en base
+		{
+			// traitement specifique en cas de changement
+			if($support_auteurs=='table' AND $table_support) {
+				# verif
+				# si table_support existe + fournis (plus bas) liste champs existent : oui/non 
+				$chps_exists = montre_table_support($table_support);
+				if(is_array($chps_exists)) {
+					$t_creer_chps=array();
+					foreach($chps_exists as $k => $v) {
+						if($v=='non') {
+							$t_creer_chps[]=$k;
+						}
+					}
+					if(count($t_creer_chps)) {
+					# maj - ajout champs sur table
+						support_ajout_champs($table_support,$t_creer_chps);
+					# transfert extras vers table sap
+						support_maj_extras($table_support,$t_creer_chps);
+					}
+				} // sinon probleme ?
+				// verifier les stockages en meta + sauver la config !!
+			}
+			$GLOBALS['spipbb']['support_auteurs'] = $support_auteurs;
+			$GLOBALS['spipbb']['table_support'] = $table_support;
+			$reconf=true;
+		}
 
+		#champs supplementaires auteurs
+		$champs_requis = array('date_crea_spipbb','avatar','annuaire_forum','refus_suivi_thread');
+		$champs_definis=array();
+		foreach ($GLOBALS['champs_sap_spipbb'] as $champ => $params) {
+			$champs_definis[]=$champ;
+		}
+		$champs_optionnels = array_diff($champs_definis,$champs_requis);
+		foreach ($champs_optionnels as $champ_a_valider) {
+			$tbl_conf['affiche_'.$chx]=_request('affiche_'.$chx); # oui/non
+			if (($affiche_champ=_request('affiche_'.$champ_a_valider))
+				and $affiche_champ!=$GLOBALS['spipbb']['affiche_'.$champ_a_valider]) {
+				$GLOBALS['spipbb']['affiche_'.$champ_a_valider]=$affiche_champ;
+				$reconf=true;
+			}
+		}
+
+		#avatars
+		if (($affiche_avatar=_request('affiche_avatar'))
+			and $affiche_avatar!=$GLOBALS['spipbb']['affiche_avatar']) {
+			$GLOBALS['spipbb']['affiche_avatar']=$affiche_avatar;
+			$reconf=true;
+		}
+		# on limite la taille en cas de mauvaise saisie : max 200 pixels
+		$taille_image_maxi = '200';
+		# sur page sujet 	
+		if ((strlen($taille_avatar_suj=_request('taille_avatar_suj')))
+			and intval($taille_avatar_suj)!=$GLOBALS['spipbb']['taille_avatar_suj']) {
+			$GLOBALS['spipbb']['taille_avatar_suj']=(intval($taille_avatar_suj)>$taille_image_maxi) ? $taille_image_maxi : intval($taille_avatar_suj);
+			$reconf=true;
+		}		
+		# sur page contact
+		if ((strlen($taille_avatar_cont=_request('taille_avatar_cont')))
+			and intval($taille_avatar_cont)!=$GLOBALS['spipbb']['taille_avatar_cont']) {
+			$GLOBALS['spipbb']['taille_avatar_cont']=(intval($taille_avatar_cont)>$taille_image_maxi) ? $taille_image_maxi : intval($taille_avatar_cont);
+			$reconf=true;
+		}		
+		# sur page profile
+		if ((strlen($taille_avatar_prof=_request('taille_avatar_prof')))
+			and intval($taille_avatar_prof)!=$GLOBALS['spipbb']['taille_avatar_prof']) {
+			$GLOBALS['spipbb']['taille_avatar_prof']=(intval($taille_avatar_prof)>$taille_image_maxi) ? $taille_image_maxi : intval($taille_avatar_prof);
+			$reconf=true;
+		}
+
+		# bouton abus
+		if (($affiche_bouton_abus=_request('affiche_bouton_abus'))
+			and $affiche_bouton_abus!=$GLOBALS['spipbb']['affiche_bouton_abus']) {
+			$GLOBALS['spipbb']['affiche_bouton_abus']=$affiche_bouton_abus;
+			$reconf=true;
+		}
+
+		# bouton rss
+		if (($affiche_bouton_rss=_request('affiche_bouton_rss'))
+			and $affiche_bouton_rss!=$GLOBALS['spipbb']['affiche_bouton_rss']) {
+			$GLOBALS['spipbb']['affiche_bouton_rss']=$affiche_bouton_rss;
+			$reconf=true;
+		}
+		
 		if ($reconf) spipbb_save_metas();
 
 	}
 
 	redirige_par_entete($redirige);
 } // action_spipbb_admin_reconfig
+
+// ------------------------------------------------------------------------------
+# generer tableau des champs profils dans sap si existent
+// ------------------------------------------------------------------------------
+function montre_table_support($table) {
+	# y a quoi dans cette table ?
+	//$contenu = spip_mysql_showtable('spip_'.$table);
+	$contenu = sql_showtable('spip_'.$table,true);
+	$chps_presents=array();
+	if(is_array($contenu)) {
+		# verif nom champ (dans sap_gaf.php)
+		foreach($GLOBALS['champs_sap_spipbb'] as $k => $v) {
+			if($contenu['field'][$k]) {
+				$chps_presents[$k]='oui';
+			}
+			else {
+				$chps_presents[$k]='non';
+			}
+		}
+		return $chps_presents;
+	}
+    else { return ''; }
+} // montre_table_support
+
+// ------------------------------------------------------------------------------
+# Modifier table sap : ajout champ(s)
+// ------------------------------------------------------------------------------
+function support_ajout_champs($table_support,$creer_champs) {
+	$connexion = $GLOBALS['connexions'][0];
+	$prefixe = $connexion['prefixe'];
+	if ($prefixe and $prefixe!='spip') $table_support = preg_replace('/^spip/', $prefixe, $table_support);
+
+	$nomtable = "spip_".$table_support;
+	foreach($creer_champs as $chp) {
+			#recup def des champs (dans sap_gaf.php)
+			$def = $GLOBALS['champs_sap_gaf'][$chp]['sql'];
+			sql_query("ALTER TABLE $nomtable ADD $chp $def");
+	}
+} // support_ajout_champs
+
+// ------------------------------------------------------------------------------
+# Deverser extras dans table support (sap)
+# Et, au passage, on insert tous auteur non encore presens dans la table
+// ------------------------------------------------------------------------------
+function support_maj_extras($table_support,$maj_chps) {
+	# recolte extras des auteurs pour les champs suppl.
+	//$r = spip_query("SELECT id_auteur, extra FROM spip_auteurs");
+	$r = sql_select("id_auteur, extra","spip_auteurs");
+	while($sr = sql_fetch($r)) {
+		$extras = unserialize($sr['extra']);
+		$set='';
+		# pour chq champs gaf en maj ou crea (pas les anciens)
+		foreach($maj_chps as $chp) {
+			if($chp=='date_crea_gaf' && $extras['date_crea_gaf']=='') {
+				$set.=",".$chp."=NOW()";
+			}
+			else {
+				$set.= ",".$chp."="._q($extras[$chp]);
+			}
+		}
+		$set=substr($set,1);
+		if(strlen($set)>0) { $sep = ","; }
+
+		//$q = spip_query("SELECT id_auteur FROM spip_$table_support 
+		//					WHERE id_auteur=".$sr['id_auteur']);
+		$q = sql_select("id_auteur","spip_$table_support","id_auteur=".$sr['id_auteur']);
+		if($sq=sql_fetch($q)) {
+			if($set!='') {
+				//spip_query("UPDATE spip_$table_support 
+				//			SET $set WHERE id_auteur=".$sr['id_auteur']);
+				sql_query("UPDATE spip_$table_support 
+							SET $set WHERE id_auteur=".$sr['id_auteur']);
+			}
+		}
+		else {
+			//spip_query("INSERT INTO spip_$table_support 
+			//			SET id_auteur=".$sr['id_auteur']." ".$sep.$set);
+			sql_query("INSERT INTO spip_$table_support 
+						SET id_auteur=".$sr['id_auteur']." ".$sep.$set);
+		}
+	}
+} // support_maj_extras
 
 ?>

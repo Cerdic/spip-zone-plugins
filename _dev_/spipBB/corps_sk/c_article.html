@@ -1,0 +1,268 @@
+#CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
+<BOUCLE_article_principal(ARTICLES){id_article}>
+[(#REM) On recupere le mot cle ferme]
+#SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
+
+		<INCLURE(session.php){fond=inc_teteforum}{id_article}>
+
+		<p class="space_20"></p>
+
+		[(#REM) On regarde si le forum n'est pas ferme ]
+		#SET{forumferme,0}
+		<BOUCLE_etat(ARTICLES){id_article}{id_mot=#GET{id_mot_ferme}}>
+			#SET{forumferme,1}
+			[(#REM) h.26/09 .. maintenance ]
+			#SET{maintenance,#ID_ARTICLE|spipbb_maintenance}
+		</BOUCLE_etat>
+
+		[(#REM) ligne chemin ]
+		[(#MODELE{chemin_hierarchie}{id_article}{encours=#ENV{id_article}})]
+
+		<p class="space_10"></p>
+        
+		[(#SET{affbouton,[(#GET{forumferme}|=={1}|?{' ',
+			<ul class="actionforum">
+				<li class="poster">
+					<a href="[(#URL_PAGE{poster})]&amp;[(#PARAMETRES_FORUM)]" title="<:forg:sujet_nouveau:>">&nbsp;</a>
+				</li>
+			</ul>
+		})]
+		})]
+		#GET{affbouton}
+	   
+		<div class="titre_actif">[(#TITRE|supprimer_numero)]</div>
+		
+		<p class="space_5"></p>
+		
+		<table class="spipforum" id="article_forum">
+			<tr> 
+				<th colspan="2"><:forg:sujet_s:></th>
+				<th><:forg:message_s:></th>
+				<th><:forg:auteur:></th>
+				<th><:spipbb:visites:></th>
+				<th><:forg:messages_derniers:></th>
+			</tr>
+			
+			[(#REM) message art ferme|maintenance ]
+			[(#GET{forumferme}|=={1}|?{' ',''})
+				<tr class="forum_clos"><td colspan='6'>
+				[(#GET{maintenance}|=={1}|?{<:forg:forum_maintenance:>,<:forg:forum_ferme:>})]
+				</td></tr>
+			]
+			
+			
+		<BOUCLE_message_annonce(FORUMS){id_article}{id_mot=#CONFIG{spipbb/id_mot_annonce}}{!par date_thread}{doublons ann}>
+
+			<!-- C est forcement un pied de discussion -->
+			#SET{id_fo_ann,#ID_FORUM}
+			
+			<!-- BEGIN topicrow -->
+			<tr class="ligne_annonce"> 
+				<td class="etatsujet sujetannonce"><span><:forg:annonce:></span>&nbsp;</td>
+				<td class="titreforum" id="forum#ID_FORUM">
+					<span><:forg:annonce_dpt:></span>
+					<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ID_FORUM})]">#TITRE</a>
+				</td>
+				<td class="nbr_post">
+					<BOUCLE_reponses01(FORUMS){id_thread}{plat}{exclus}></BOUCLE_reponses01>
+					#TOTAL_BOUCLE
+					<//B_reponses01>
+				</td>
+	  			<td class="auteur_post">
+					<B_auteurpa><BOUCLE_auteurpa(AUTEURS){id_auteur}{tout}>
+						<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]">#NOM</a>
+					</BOUCLE_auteurpa>
+					</B_auteurpa>
+					[(#NOM|sinon{<:forg:anonyme:>})]
+					<//B_auteurpa>
+				</td>
+				<td class="nbr_post">
+					<BOUCLE_vues_a(SPIP_VISITES_FORUMS){id_forum}>#VISITES</BOUCLE_vues_a></B_vues_a>0<//B_vues_a>
+				</td>
+				<td class="dernier_msg">
+					<BOUCLE_dernier_message01(FORUMS){id_thread}{plat}{!par date}{0,1}>
+				  		[(#DATE|affdate{'d/m/Y'}),] [(#DATE|heures)]:[(#DATE|minutes)<br />]
+						<:forg:par_:>
+						<B_auteurpar>
+						<BOUCLE_auteurpar(AUTEURS){id_auteur}{tout}>
+							<a
+							[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
+							 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+							]
+							>#NOM</a>
+						</BOUCLE_auteurpar>
+						</B_auteurpar>
+							[(#NOM|sinon{<:forg:anonyme:>})]
+						<//B_auteurpar> 
+						<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_fo_ann}})]#forum#ID_FORUM" class="adermsg" title="<:forg:messages_voir_dernier:>">
+						&nbsp;<span>(<:forg:messages_voir_dernier:>)</span>
+						</a>
+					</BOUCLE_dernier_message01> - <//B_dernier_message01>
+				</td>
+			</tr>
+		</BOUCLE_message_annonce>
+
+		<BOUCLE_message_postit(FORUMS){id_article}{id_mot=#CONFIG{spipbb/id_mot_postit}}{!par date_thread}{doublons ann}>
+
+			<!-- C est forcement un pied de discussion -->
+			#SET{id_fo_ann,#ID_FORUM}
+			
+			<!-- BEGIN topicrow -->
+			<tr class="ligne_postit"> 
+				<td class="etatsujet sujetpostit"><span><:forg:postit:></span>&nbsp;</td>
+				<td class="titreforum" id="forum#ID_FORUM">
+					<span><:forg:postit_dpt:></span>
+					<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ID_FORUM})]">#TITRE</a>
+				</td>
+				<td class="nbr_post">
+					<BOUCLE_reponses02(FORUMS){id_thread}{plat}{exclus}></BOUCLE_reponses02>
+					#TOTAL_BOUCLE
+					<//B_reponses02>
+				</td>
+	  			<td class="auteur_post">
+					<B_auteurpp><BOUCLE_auteurpp(AUTEURS){id_auteur}{tout}>
+						<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]">#NOM</a>
+					</BOUCLE_auteurpp>
+					</B_auteurpp>
+					[(#NOM|sinon{<:forg:anonyme:>})]
+					<//B_auteurpp>
+				</td>
+				<td class="nbr_post">
+					<BOUCLE_vues_p(SPIP_VISITES_FORUMS){id_forum}>#VISITES</BOUCLE_vues_p></B_vues_p>0<//B_vues_p>
+				</td>
+				<td class="dernier_msg">
+					<BOUCLE_dernier_message02(FORUMS){id_thread}{plat}{!par date}{0,1}>
+				  		[(#DATE|affdate{'d/m/Y'}),] [(#DATE|heures)]:[(#DATE|minutes)<br />]
+						<:forg:par_:>
+						<B_auteurparp>
+						<BOUCLE_auteurparp(AUTEURS){id_auteur}{tout}>
+							<a
+							[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
+							 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+							]
+							>#NOM</a>
+						</BOUCLE_auteurparp>
+						</B_auteurparp>
+							[(#NOM|sinon{<:forg:anonyme:>})]
+						<//B_auteurparp> 
+						<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_fo_ann}})]#forum#ID_FORUM" class="adermsg" title="<:forg:messages_voir_dernier:>">
+						&nbsp;<span>(<:forg:messages_voir_dernier:>)</span>
+						</a>
+					</BOUCLE_dernier_message02> - <//B_dernier_message02>
+				</td>
+			</tr>
+		</BOUCLE_message_postit>
+
+		<BOUCLE_messages(FORUMS){id_article}{plat}{!par date_thread}{pagination 20}> 
+		
+		<!-- sujets ...................... -->
+		<BOUCLE_sujet(FORUMS){id_thread}{doublons ann}>
+			#SET{thread_clos,non}
+			#SET{id_forum,#ID_FORUM}
+			
+				<BOUCLE_reponsesalt(FORUMS){id_thread}{plat}> 
+					<BOUCLE_reponse_fermealt(FORUMS){id_forum}{titre_mot=ferme}>
+						#SET{thread_clos,#ID_FORUM}
+					</BOUCLE_reponse_fermealt>
+				</BOUCLE_reponsesalt>
+			
+			
+			[(#REM) test type icone ligne ]
+			[(#SET{aff_ico_thread,[(#GET{thread_clos}|=={non}|?{
+			<td class='etatsujet post'><span>&nbsp;,<td class='etatsujet postferme'><span>&nbsp;
+			})]
+			})]
+			
+			<tr class="ligne_sujet">
+				[(#REM) affiche icone ligne ]
+				[(#GET{aff_ico_thread})]
+				</span>
+				</td>
+				<td class="titreforum" id="forum#ID_FORUM">
+					<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ID_FORUM})]">#TITRE</a>
+				</td>
+				<td class="nbr_post">
+					<BOUCLE_reponses(FORUMS){id_thread}{plat}{exclus}></BOUCLE_reponses>
+					#TOTAL_BOUCLE
+					<//B_reponses>
+				</td>
+				<td class="auteur_post">
+					<B_auteurp>
+					<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
+						<a
+						[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
+						 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+						]
+						>#NOM</a>
+					</BOUCLE_auteurp>
+					</B_auteurp>
+						[(#NOM|sinon{<:forg:anonyme:>})]
+					<//B_auteurp>
+				</td>
+				<td class="nbr_post">
+					<BOUCLE_vues(SPIP_VISITES_FORUMS){id_forum}>#VISITES</BOUCLE_vues></B_vues>0<//B_vues>
+				</td>
+				<td class="dernier_msg">
+					<BOUCLE_dernier_message(FORUMS){id_thread}{plat}{!par date}{0,1}>
+						[(#DATE|affdate{'d/m/Y'})] [ - (#DATE|heures)]:[(#DATE|minutes)]<br />
+						<:forg:par_:>
+						<BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}>
+							<a
+							[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
+							 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+							]
+							>#NOM</a>
+						</BOUCLE_auteurpr>
+						</B_auteurpr>
+							[(#NOM|sinon{<:forg:anonyme:>})]
+						<//B_auteurpr> 
+						
+						<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_forum}})]#forum#ID_FORUM" class="adermsg" title="<:forg:messages_voir_dernier:>">
+							&nbsp;<span>(<:forg:messages_voir_dernier:>)</span>
+						</a>
+					</BOUCLE_dernier_message> - <//B_dernier_message>
+				</td>
+			</tr>
+			
+
+			
+			</BOUCLE_sujet>
+			</BOUCLE_messages>
+			<tr class="pagination">
+				<td colspan="6">
+					#GRAND_TOTAL
+					[(#GRAND_TOTAL|>{1}|?{<:forg:pagine_sujet_s:>,<:forg:pagine_sujet_:>})]
+					[<:forg:pagine_page_:>(#PAGINATION{page_forum})]
+				</td>
+			</tr>
+			</B_messages>
+
+			<tr class="sans_sujet"> 
+				<td colspan="6"><:forg:sujets_aucun:></td>
+			</tr>
+
+			<//B_messages>
+		</table><!--Fin tableau -->
+
+		<p class="space_10"></p>
+		
+		[(#REM) bouton ou pas si forum ferme ]
+		#GET{affbouton}
+		
+		<p class="space_5"></p>
+
+		[(#REM) ligne chemin ]
+		[(#MODELE{chemin_hierarchie}{id_article}{encours=#ENV{id_article}})]
+
+		<INCLURE(session.php){fond=inc_piedforum}{id_article}>
+
+		[(#REM) si visiteur non identifie : form login ]
+		[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:forg:login:></p>]
+		#LOGIN_PUBLIC
+		[(#SESSION{id_auteur}|=={''}|?{' ',''})
+		&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+		</div>
+		]
+
+</BOUCLE_article_principal>

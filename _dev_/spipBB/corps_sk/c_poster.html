@@ -1,0 +1,178 @@
+<!-- debut code pour fichier poster.html -->
+			
+			#SET{sujetclos,0}
+
+			[(#REM) Avant de répondre on récupère l ID du sujet de la discussion 
+			et on regarde si le sujet ou une réponse cloture la discussion.
+			Attention que cette boucle vaut son pesant de cachouettes ]
+			
+			<BOUCLE_fo(FORUMS){id_forum}>
+				
+				<BOUCLE_remonte(FORUMS){id_enfant}>
+					<BOUCLE_remonte_rec(BOUCLE_remonte)></BOUCLE_remonte_rec>
+				</BOUCLE_remonte>
+				<!-- REM indispensable -->
+				[(#REM) #ID_FORUM ]
+				#SET{forumpapa,#ID_FORUM}
+			
+				<BOUCLE_sujet_ferme(FORUMS){id_forum}{titre_mot=ferme}>
+					#SET{sujetclos,#ID_FORUM|texte_script}
+				</BOUCLE_sujet_ferme>
+				
+				<BOUCLE_reponse(FORUMS){id_parent}>
+					<BOUCLE_reponse_ferme(FORUMS){id_forum}{titre_mot=ferme}>
+						#SET{sujetclos,#ID_FORUM|texte_script}
+					</BOUCLE_reponse_ferme>
+						
+					<BOUCLE_descends_rec(BOUCLE_reponse)></BOUCLE_descends_rec>
+				</BOUCLE_reponse>
+				
+				<//B_sujet_ferme>
+				
+				<//B_remonte>
+			</BOUCLE_fo>
+
+
+		[(#REM) article/forum est ferme ? ]
+
+		#SET{forumclos,0}
+		<BOUCLE_etat(ARTICLES){id_article}{titre_mot=ferme}>
+			#SET{forumclos,1}
+		</BOUCLE_etat>
+		
+		[(#REM) On récupère le secteur ]
+		<BOUCLE_article_ds(ARTICLES){id_article}>
+			<BOUCLE_secteur(HIERARCHIE){id_article}{0,1}>
+				#SET{ze_sect,#ID_RUBRIQUE}
+			</BOUCLE_secteur>
+		</BOUCLE_article_ds>
+		
+<!-- -->
+		
+		<INCLURE(session.php){fond=inc_teteforum}{id_article}>
+
+		<p class="space_20"></p>
+		
+
+		[(#REM) ligne chemin ]
+		[(#MODELE{chemin_hierarchie}{id_article})]
+		
+		<p class="space_20"></p>
+		
+		[(#REM) Si la discussion contient un message fermant ]
+
+	[(#SET{none,0})]
+
+	[(#SET{aff_sujetclos,
+		[(#GET{sujetclos}|=={0}|?{' ',
+		<div class="alerte_ferme">
+			<h2><:forg:sujet_clos_titre:></h2>
+			<h3><:forg:sujet_clos_texte:></h3>
+			<p>
+				<:forg:raison_texte:>
+				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ENV{id_forum}})]">
+				<:forg:raison_clic:>
+				</a>
+			</p>
+		</div>
+		[(#SET{none,1})]
+		})]	
+	})]
+	
+	[(#SET{aff_forumclos,
+		[(#GET{forumclos}|=={0}|?{' ',
+		<div class="alerte_ferme">
+			<h2><:forg:forum_ferme:></h2>
+			<h3><:forg:forum_ferme_texte:></h3>
+		</div>
+		[(#SET{none,1})]
+		})]
+	})]
+	
+	[(#GET{'aff_forumclos'})]
+	[(#GET{'aff_sujetclos'})]
+	
+	[(#SET{display,[(#GET{none}|=={0}|?{' ','style="display:none;"'})]})]
+	
+	<div #GET{display}>
+		[(#REM) Si rien ne cloture la discussion on envoi la suite Contenu : texte du message auquel on répond -->]
+		<BOUCLE_forum_parent(FORUMS){id_forum}>
+			[(#REM) h.03/06 : ancre_ret ne sert plus, mais à voir ... !]
+			[(#SET{ancre_ret,#ID_FORUM})]
+			
+			<table class="spipforum" id="post_origine">
+			<tr>
+				<th colspan="2"><:forg:en_reponse_a:></th>
+			</tr>
+			<tr class="ligne_sujet">
+				<td  colspan="2" class="ligne_nom">
+					<span class="text_nom">
+					<B_auteurp>
+					<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
+						<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#GET{ze_sect}})]">
+							[(#NOM)]
+						</a>
+					</BOUCLE_auteurp>
+					</B_auteurp>
+						[(#NOM|sinon{<:forg:anonyme:>})]
+					<//B_auteurp>
+					</span>
+					<span class="text_titre"><:forg:en_rep_sujet_:>
+					<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ENV{id_forum}})]">#TITRE</a>
+					</span>
+				</td>
+			</tr>
+			<tr class="ligne_sujet">
+				<td class="aff_avatar" rowspan="2">
+				</td>
+				<td class="date_sujet">
+					[(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)] - [(#DATE|heures)]:[(#DATE|minutes)]
+				</td>
+	        </tr>
+			<tr class="ligne_sujet">
+	        	<td>
+					[(#TEXTE|lignes_longues|smileys)]
+					[<br /><a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>]
+				</td>
+			</tr>
+			</table>
+
+		
+		<p class="space_20"></p>
+		
+		[(#REM) h..09/07 kecece ça ?? 
+		<!-- si le forum a un parent, on ne peut pas faire une annonce 
+		   # ID _ FORUM | pas_afficher_mots_clefs  -->
+		]
+		</BOUCLE_forum_parent>
+		[(#REM) h..09/07 kecece ça ?? 
+		<!-- si le forum n'a pas de parent, afficher tous les mots clés 
+		 # ID _ FORUM | afficher_mots_clefs  -->
+		]
+		<//B_forum_parent>
+		
+		<table class="spipforum" id="ecrire">
+			<tr> 
+				<th colspan=2><:poster_message:></th>
+			</tr>
+			<tr> 
+				<td class="col_smileys"> 
+					[(#TABLEAU_SMILEYS)]
+				</td>
+				<td>
+					[(#REM) h.19/04/07 .. declare le #SET suivant pour 'retour_forum' cas "reponse"  et cas "nouveau post"]
+					[(#SET{ret_url,[(#GET{forumpapa}|?{spip.php?page=voirsujet&amp;id_forum=#GET{forumpapa},spip.php?article#ENV{id_article}})]})]
+					<!-- #ENV{id_forum}<br />
+					#GET{ret_url}#forum#GET{ancre_ret}<br />
+					#GET{forumpapa}<br /> -->
+					
+					[(#FORMULAIRE_FORUM{[(#GET{ret_url})]})]
+
+          		</td>
+        	</tr>
+      	</table>
+	</div>
+		
+	<INCLURE(session.php){fond=inc_piedforum}{id_article}>
+
+<!-- fin code poster.html -->

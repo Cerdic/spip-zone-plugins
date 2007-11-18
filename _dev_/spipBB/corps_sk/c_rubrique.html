@@ -1,0 +1,153 @@
+#CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
+[(#REM) Squelette : SpipBB Team + scoty]
+[(#REM) Ajouts : chryjs : CONFIG id_mot_ferme]
+#SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
+<BOUCLE_primale(RUBRIQUES){id_rubrique}>
+<BOUCLE_rubrique_principal(RUBRIQUES){id_secteur}{racine}>
+	
+	<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}>
+	#SET{secteur,#ID_SECTEUR}
+
+	<p class="space_20"></p>
+
+	[(#REM) ligne chemin ]
+	[(#MODELE{chemin_rubrique}{rubloc=#ENV{id_rubrique}})]
+
+	<p class="space_10"></p>
+
+	<!-- boucles tableau -->
+	<B_categories>
+	
+	<table class="spipforum" id="rubrique_forum">
+		<tr>
+			<th colspan="2"><:forg:forum:></th>
+			<th><:forg:sujet_s:></th>
+			<th><:forg:message_s:></th>
+			<th><:forg:messages_derniers:></th>
+		</tr>
+<!-- essai h.12/11/07 .. forums du secteur (racine) -->
+		<BOUCLE_forum_secteur(ARTICLES){id_rubrique}{par num titre}>
+				<tr class="ligne_forum">
+		
+			<BOUCLE_etat1(ARTICLES){id_article}{id_mot=#GET{id_mot_ferme}}>
+				<td class="etatforum forumferme"><span>&nbsp;
+			</BOUCLE_etat1>
+			</B_etat1>
+				<td class="etatforum forumouvert"><span>&nbsp;
+			<//B_etat1>
+				</span>
+				</td>
+				<td class="titreforum">
+					[<a href="#URL_ARTICLE" class="titre">(#TITRE|supprimer_numero)</a>]
+					[<br />(#INTRODUCTION)] [(#REM) chryjs (15/11/07) etait DESCRIPTIF pas par defaut]
+				</td>
+		
+			<BOUCLE_sujets1(FORUMS){id_article}{doublons sujets1}></BOUCLE_sujets1>
+				<td class="nbr_sujet">#TOTAL_BOUCLE</td>
+			<//B_sujets1>
+			
+			<BOUCLE_messages1(FORUMS){id_article}{plat}{doublons sujets1}></BOUCLE_messages1>
+				<td class="nbr_post">#TOTAL_BOUCLE</td>
+			<//B_messages1>
+
+				<td class="dernier_msg"> 
+			<BOUCLE_dernier_message1(FORUMS){id_article}{plat}{!par date}{0,1}>
+				[(#DATE|affdate{'d/m/Y'})] [ - (#DATE|heures)]:[(#DATE|minutes)<br	/>] 
+				<:forg:par_:>
+				<BOUCLE_auteurp1(AUTEURS){id_auteur}{tout}>
+					<a
+					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''}) 
+					 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#_rubrique_principal:ID_RUBRIQUE})]"
+					]
+					>#NOM</a>
+				</BOUCLE_auteurp1>
+				</B_auteurp1>
+					[(#NOM|sinon{<:forg:anonyme:>})]
+				<//B_auteurp1> 
+				<BOUCLE_papa1(FORUMS){id_thread}>#SET{idfo,#ID_FORUM}</BOUCLE_papa1>
+				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{idfo}})]#forum#ID_FORUM" class="adermsg" title="<:forg:messages_voir_dernier:>">&nbsp;
+				<span>(<:forg:messages_voir_dernier:>)</span></a>
+			</BOUCLE_dernier_message1> - <//B_dernier_message1>
+				</td>
+			
+			</tr>
+		</BOUCLE_forum_secteur>
+	
+	<!-- sous-rubrique -->	
+	<B_categories>
+	<BOUCLE_categories(RUBRIQUES){id_parent}{par num titre}>
+		<tr class="inter salon">
+			<td colspan="5"><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></td>
+
+		</tr>
+		
+		[(#REM) Afficher table par rubrique ou toute si racine ]
+		#SET{display,#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'display',#ENV{id_rubrique}|=={#GET{secteur}}|?{'display','none'}}}
+		
+		<BOUCLE_forums(ARTICLES){id_rubrique}{par num titre}>
+		
+		<tr class="ligne_forum" style="display:#GET{display};">
+		
+			<BOUCLE_etat(ARTICLES){id_article}{id_mot=#GET{id_mot_ferme}}>
+				<td class="etatforum forumferme"><span>&nbsp;
+			</BOUCLE_etat>
+			</B_etat>
+				<td class="etatforum forumouvert"><span>&nbsp;
+			<//B_etat>
+				</span>
+				</td>
+				<td class="titreforum">
+					[<a href="#URL_ARTICLE" class="titre">(#TITRE|supprimer_numero)</a>]
+					[<br />(#INTRODUCTION)] [(#REM) chryjs (15/11/07) etait DESCRIPTIF pas par defaut]
+				</td>
+		
+			<BOUCLE_sujets(FORUMS){id_article}{doublons sujets}></BOUCLE_sujets>
+				<td class="nbr_sujet">#TOTAL_BOUCLE</td>
+			<//B_sujets>
+			
+			<BOUCLE_messages(FORUMS){id_article}{plat}{doublons sujets}></BOUCLE_messages>
+				<td class="nbr_post">#TOTAL_BOUCLE</td>
+			<//B_messages>
+
+				<td class="dernier_msg"> 
+			<BOUCLE_dernier_message(FORUMS){id_article}{plat}{!par date}{0,1}>
+				[(#DATE|affdate{'d/m/Y'})] [ - (#DATE|heures)]:[(#DATE|minutes)<br	/>] 
+				<:forg:par_:>
+				<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
+					<a
+					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''}) 
+					 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#_rubrique_principal:ID_RUBRIQUE})]"
+					]
+					>#NOM</a>
+				</BOUCLE_auteurp>
+				</B_auteurp>
+					[(#NOM|sinon{<:forg:anonyme:>})]
+				<//B_auteurp> 
+				<BOUCLE_papa(FORUMS){id_thread}>#SET{idfo,#ID_FORUM}</BOUCLE_papa>
+				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{idfo}})]#forum#ID_FORUM" class="adermsg" title="<:forg:messages_voir_dernier:>">&nbsp;
+				<span>(<:forg:messages_voir_dernier:>)</span></a>
+			</BOUCLE_dernier_message> - <//B_dernier_message>
+				</td>
+			
+			</tr>
+
+		</BOUCLE_forums>
+	</BOUCLE_categories>
+	
+	</B_categories>
+	</table>
+	
+		<INCLURE(session.php){fond=inc_piedforum}{id_rubrique=#ENV{id_rubrique}}>
+		
+		[(#REM) si visiteur non identifie : form login ]
+		[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:forg:login:></p>]
+		#LOGIN_PUBLIC
+		[(#SESSION{id_auteur}|=={''}|?{' ',''})
+		&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+		</div>
+		]
+
+</BOUCLE_rubrique_principal>
+
+</BOUCLE_primale>

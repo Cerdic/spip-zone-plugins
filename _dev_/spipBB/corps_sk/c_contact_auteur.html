@@ -1,0 +1,68 @@
+#CACHE{0}
+<BOUCLE_contact_aut(AUTEURS){id_auteur}{tout}>
+	
+	#SET{statmem,#STATUT}
+
+	<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}{id_article}>
+		
+		<p class="space_20"></p>
+		
+		[(#REM) bouton retour forum ]
+		[(#ENV{orig}|?{' ',''})
+		#SET{idforum,#ENV*{orig}|replace{-.*$,''}}
+		#SET{msg,#ENV*{orig}|replace{.*-,''}}
+		<div id="bouton_retour">
+			<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,[(#GET{idforum})]})]#forum#GET{msg}">
+			<span><:forg:retour_forum:></span>
+			</a>
+		</div>
+		<p class="space_5"></p>
+		]
+		
+		<table class="spipforum" id="auteur">
+			<tr>
+				<th colspan="2"><:forg:fiche_contact:></th>
+			</tr>
+			<tr class="inter salon">
+				<td colspan="2">#NOM</td>
+			</tr>
+			<tr class="ligne_forum">
+				<td class="aff_avatar" rowspan="2">
+					[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_cont'}})]
+				</td>
+				<td class="date_sujet">
+					<span>
+					[(#GET{statmem}|=={0minirezo}|?{<:forg:statut_admin:>,''})]
+					[(#GET{statmem}|=={1comite}|?{<:forg:statut_redac:>,''})]
+					[(#GET{statmem}|=={6forum}|?{<:forg:statut_visit:>,''})]
+					</span><br />
+					[<span><:forg:message_s_dpt:>(#ID_AUTEUR|spipbb_nb_messages)</span>]
+				</td>
+			</tr>
+			
+			<tr class="ligne_forum">
+				<td>
+					[(#BIO)]
+					[
+					<p class="space_10"></p>
+					<a class="lien_propose" href="(#URL_SITE)">[(#NOM_SITE|sinon{"<:forg:site_propose:>})]</a>
+					]
+				</td>
+			</tr>
+			<tr class="inter">
+				<td colspan="2"></td>
+			</tr>			
+			<tr class="ligne_sujet">
+				<td colspan="2">[(#EMAIL|?{<:forg:contacter_dpt:> #NOM,''})]</td>
+			</tr>
+			<tr class="ligne_sujet">
+				<td class="aff_avatar"></td>
+				<td colspan="2">
+					#FORMULAIRE_ECRIRE_AUTEUR
+				</td>
+			</tr>
+		</table>
+	
+	<INCLURE(session.php){fond=inc_piedforum}{id_rubrique}{id_article}>
+
+</BOUCLE_contact_aut>

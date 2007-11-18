@@ -1,0 +1,98 @@
+<!-- debut code pour fichier derniers_messages.html -->
+#SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
+#SET{id_mot_annonce,#CONFIG{spipbb/id_mot_annonce}}
+#SET{id_mot_postit,#CONFIG{spipbb/id_mot_postit}}
+
+	<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}>
+
+	[(#REM)éliminer les forums des rubriques et articles appartenant aux autres secteurs]
+	<BOUCLE_contexte(RUBRIQUES){id_rubrique}>
+		<BOUCLE_secteurs(RUBRIQUES){exclus}{racine}>
+			<BOUCLE_supp(RUBRIQUES){id_secteur}>
+		        <BOUCLE_supp2(FORUMS){id_rubrique}{plat}{doublons}{doublons a}></BOUCLE_supp2>
+			</BOUCLE_supp>
+			<BOUCLE_supp3(ARTICLES){id_secteur}>
+			    <BOUCLE_supp4(FORUMS){id_article}{plat}{doublons}{doublons a}></BOUCLE_supp4>
+			</BOUCLE_supp3>
+			<BOUCLE_supp5(BREVES){id_secteur}>
+			    <BOUCLE_supp6(FORUMS){id_article}{plat}{doublons}{doublons a}></BOUCLE_supp6>
+			</BOUCLE_supp5>
+		</BOUCLE_secteurs>
+	</BOUCLE_contexte>
+
+
+	<p clas="space_20"></p>
+	
+	<table class="spipforum" id="derniers_msg">
+		<tr> 
+			<th colspan="4"><:forg:messages_derniers:></th>
+		</tr>
+		
+		<BOUCLE_forums_liens(FORUMS){plat}{!par date}{age<15}{doublons}{pagination 20}>
+			#SET{clos,0}
+			<BOUCLE_fo(FORUMS){id_thread}>
+				[(#REM) pas utilise par spipbb mais propose ]
+				#SET{id_sujet,#ID_FORUM}
+				#SET{titre_sujet,#TITRE|texte_script}
+
+				<BOUCLE_ArticleForum(ARTICLES){id_article}>
+					[(#REM) pas utilise par spipbb mais propose ]
+					#SET{titre_forum,#TITRE|texte_script}
+				</BOUCLE_ArticleForum>
+				
+				<BOUCLE_sujet_type(FORUMS){id_thread}{plat}>
+					<BOUCLE_ferme(FORUMS){id_forum}{id_mot=#GET{id_mot_ferme}}>
+						#SET{clos,1}
+					</BOUCLE_ferme>
+					<BOUCLE_annonce(FORUMS){id_forum}{id_mot=#GET{id_mot_annonce}}>
+						#SET{clos,2}
+					</BOUCLE_annonce>
+					<BOUCLE_postit(FORUMS){id_forum}{id_mot=#GET{id_mot_postit}}>
+						#SET{clos,3}
+					</BOUCLE_postit>
+				</BOUCLE_sujet_type>
+
+			 </B_sujet_ferme>
+				
+			</BOUCLE_fo>
+
+						
+		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+			[(#REM) type icone de ligne ]
+			[(#GET{clos}|=={0}|?{<td class='etatsujet post'><span>&nbsp;,
+				[(#GET{clos}|=={2}|?{<td class="etatsujet sujetannonce"><span>&nbsp;,
+					[(#GET{clos}|=={3}|?{<td class="etatsujet sujetpostit"><span>&nbsp;,<td class="etatsujet postferme"><span>&nbsp;,})]
+				})]
+			})]
+			</span>
+			</td>
+			<!-- on peut ici introduire forum et sujet d'origine, voir SET{titre_forum ; SET{titre_sujet .. -->
+			<td>
+				[(#DATE|nom_jour)] [(#DATE|affdate),] [(#DATE|heures)]:[(#DATE|minutes)]
+			</td>
+			<td class="auteur_post">	
+				<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
+					[(#NOM|sinon{<:forg:anonyme:>})]
+				</BOUCLE_auteurp>
+			</td>
+			<td>
+				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_sujet}})]#forum#ID_FORUM" class="adermsg">
+					#TITRE
+				</a>
+			</td>
+		</tr>
+			
+		</BOUCLE_forums_liens>
+		<tr class="pagination">
+			<td colspan="4">
+				#GRAND_TOTAL
+				[(#GRAND_TOTAL|>{1}|?{<:forg:pagine_post_s:>,<:forg:pagine_post_:>})][<:forg:pagine_page_:>(#PAGINATION{page_forum})]
+			</td>
+		</tr>
+		</B_forums_liens>
+	</table>
+
+	<INCLURE(session.php){fond=inc_piedforum}{id_rubrique}>
+
+
+<!-- fin code derniers_messages.html -->

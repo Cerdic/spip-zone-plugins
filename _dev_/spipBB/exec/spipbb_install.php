@@ -101,32 +101,6 @@ function spipbb_install_etape($etape)
 
 	// etape 0
 	$etat_tables = spipbb_check_tables() ? 'oui' : 'non' ;
-	$contexte = array( 'etat_tables' => $etat_tables );
-/*
-	$affichage = recuperer_fond("prive/spipbb_install_etape_tables",$contexte);
-
-	if ($etat_tables=='oui') {
-		// etape 1
-		$contexte = array( 'id_secteur_spipbb' => $spipbb['id_secteur'] );
-		$affichage .= recuperer_fond("prive/spipbb_install_etape_secteur_forum",$contexte);
-		if ( ($spipbb_config['secteur_forum']=='oui') AND (!empty($spipbb['id_secteur'])) ) {
-			// etape 2
-			$contexte = array( 'id_groupe_mot' => $spipbb['id_groupe_mot'] );
-			$affichage .= recuperer_fond("prive/spipbb_install_etape_groupe_mot",$contexte)
-			if ( ($spipbb_config['mots_cles']=='oui') AND (!empty($spipbb['id_mot_ferme']))
-				AND (!empty($spipbb['id_mot_annonce'])) AND (!empty($spipbb['id_mot_postit'])) ) {
-				// etape 3
-				$contexte = array( 	'id_mot_ferme' => $spipbb['id_mot_ferme'],
-							'id_mot_annonce' => $spipbb['id_mot_ferme'],
-							'id_mot_postit' => $spipbb['id_mot_postit'] );
-				$affichage .= recuperer_fond("prive/spipbb_install_etape_secteur_forum",$contexte);
-			} //etape 3
-		} // etape 2
-	} // etape 1
-
-	$contexte = array( 'bloc_affichage' => $affichage );
-	$affichage = recuperer_fond("prive/spipbb_install_global",$contexte);
-*/
 
 	$contexte = array(
 			'etape' => $etape,

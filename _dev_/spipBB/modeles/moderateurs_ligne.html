@@ -1,0 +1,23 @@
+[(#REM) GAF v.0.5 / v.0.6 .. moderateurs : auteurs article contexte + admin restreint ]
+<BOUCLE_modo_art(AUTEURS){id_article}>
+	#SET{modos,#GET{modos}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_AUTEUR}}}
+</BOUCLE_modo_art>
+
+<BOUCLE_art_rub(ARTICLES){id_article}>
+	<BOUCLE_rub_admin(SPIP_AUTEURS_RUBRIQUES){id_auteur !IN #GET{modos}}{id_rubrique=#ID_RUBRIQUE}>
+		<BOUCLE_aut_admin(AUTEURS){id_auteur}>
+		#SET{modos,#GET{modos}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_AUTEUR}}}
+		</BOUCLE_aut_admin>
+	</BOUCLE_rub_admin>
+</BOUCLE_art_rub>
+
+<B_restitue>
+<div class="modo_ligne">
+	[(#GET{modos}|count|<{1}|?{'',#GET{modos}|count|=={1}|?{<:forg:moderateur_dpt:>,<:forg:moderateurs_dpt:>}})]
+	<BOUCLE_restitue(AUTEURS){id_auteur IN #GET{modos}}{par nom}{', '}>
+	<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]">
+		#NOM
+	</a>
+	</BOUCLE_restitue>
+</div>
+</B_restitue>

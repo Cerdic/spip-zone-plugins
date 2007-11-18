@@ -1,0 +1,57 @@
+<!-- debut code pour fichier membres_liste.html -->
+
+		<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}>
+
+		<p class="space_20"></p>
+		
+		<table class="spipforum" id="membres">
+			<tr class="inter salon">
+				<td colspan="5"><:forg:liste_inscrits:></td>
+			</tr>
+			<tr>
+			   <th><:forg:nom_util:></th>
+			   <th><:forg:statut:></th>
+			   <th><:forg:email:></th>
+			   <th><:forg:message_s:></th>
+			   <th><:forg:site_web:></th>
+			</tr>
+
+		[(#REM) h.17/02/07 {statut IN ... } pour palier a d eventuels nouv. statut auteur --plugins ]
+		<BOUCLE_auteur_principal(AUTEURS){tout}{!par id_auteur}{statut IN 0minirezo,1comite,6forum}{pagination 30}>
+	
+			[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
+			<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{'1','2'})]"> 
+				<td>
+					<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]">
+					#NOM
+					</a>
+				</td>
+				<td>
+					[(#STATUT|=={0minirezo}|?{<:forg:statut_admin:>,''})]
+					[(#STATUT|=={1comite}|?{<:forg:statut_redac:>,''})]
+					[(#STATUT|=={6forum}|?{<:forg:statut_visit:>,''})]
+				</td>
+				<td class="email">
+					[(#EMAIL|?{<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]"><span>&nbsp;</span></a>,''})]
+				</td>
+				<td class="nbr_sujet">
+					[(#ID_AUTEUR|spipbb_nb_messages)]
+				</td>
+				<td class="www">
+					[<a href="(#URL_SITE)" title="#NOM_SITE">&nbsp;</a>]
+				</td>
+			</tr>
+			]
+
+		</BOUCLE_auteur_principal>
+			<tr class="pagination">
+				<td colspan="5">
+				[(#GRAND_TOTAL) <:forg:inscrit_s:>][<:forg:pagine_page_:>(#PAGINATION{page_forum})]
+				</td>
+			</tr>
+		</B_auteur_principal>			
+		</table>
+
+		<INCLURE(session.php){fond=inc_piedforum}{id_rubrique}>
+		
+<!-- fin code membres_liste.html -->

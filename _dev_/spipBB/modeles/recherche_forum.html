@@ -1,0 +1,17 @@
+<div id="rech_for">
+<form action="[(#URL_PAGE{resultats_forum})]" method="POST">		
+	<span><:forg:chercher:></span>&nbsp;
+	<input type="text" style="width: 100px" class="forml" name="recherche" size="30" />
+	<input type="image" src="#CHEMIN{themes/defaut/icones/bout_rech.gif}" border="0" align="absmiddle" width="22" height="23" />
+	<p class="space_5"></p>
+	<B_forum>
+		<select class="forml" name="id_article">
+			<OPTION VALUE="0"><:forg:tous_forums:></OPTION>
+			<BOUCLE_forum(ARTICLES){branche}{par num titre}>
+				<OPTION VALUE="#ID_ARTICLE">[(#TITRE|supprimer_numero|couper{32})]</OPTION>
+			</BOUCLE_forum>
+		</select>
+	</B_forum>
+	<input type="hidden" value="#ENV{id_rubrique}" name="id_rubrique" />
+</form>
+</div>

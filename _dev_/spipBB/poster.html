@@ -1,159 +1,20 @@
 #CACHE{0}
-[(#REM) Plugin SpipBB - Licence GPL]
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="#LANG_DIR" lang="#LANG">
-<head> 
-	<title>[(#NOM_SITE_SPIP|textebrut)] <:poster_message:></title>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="#LANG">
+<head>
+
+<title>[(#NOM_SITE_SPIP|textebrut)] <:forg:poster_message:></title>
+
 <INCLURE{fond=inc-head}>
 <INCLURE{fond=inc-forum-head}>
-</head> 
 
-<body id="posterfor" dir="#LANG_DIR">
+</head>
+<body style="background-color:#efefef;">
+<div style="padding:50px;" align="center">
 
-#SET{sujetferme,0}
-#SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
+<INCLURE{fond=corps_sk/c_poster}{id_article}{id_forum}>
 
-[(#REM) Avant de repondre on recupere l'ID du sujet de la discussion 
-et on regarde si le sujet ou une reponse cloture la discussion.
-Attention que cette boucle vaut son pesant de cahouettes ]
 
-<BOUCLE_fo(FORUMS){id_forum}>
-
-<BOUCLE_remonte(FORUMS){id_enfant}>
-	<BOUCLE_remonte_rec(boucle_remonte)> </BOUCLE_remonte_rec>
-</BOUCLE_remonte>
-	<!-- REM indispensable -->
-	[(#REM) #ID_FORUM ]
-	#SET{forumpere,#ID_FORUM}
-
-	<BOUCLE_sujet_ferme(FORUMS){id_forum}{id_mot=#GET{id_mot_ferme}}>
-	#SET{sujetferme,#ID_FORUM|texte_script}
-	</BOUCLE_sujet_ferme>
-
-	<BOUCLE_reponse(FORUMS){id_parent}>
-		<BOUCLE_reponse_ferme(FORUMS){id_forum}{id_mot=#GET{id_mot_ferme}}>
-		#SET{sujetferme,#ID_FORUM|texte_script}
-		</BOUCLE_reponse_ferme>
-		<BOUCLE_descends_rec(boucle_reponse)> </BOUCLE_descends_rec>
-	</BOUCLE_reponse>
-
-	<//B_sujet_ferme>
-<//B_remonte>
-</BOUCLE_fo>
-
-[(#REM) on vous avait prevenu ! ]
-
-[(#REM) Maintenant on regarde si l'article/forum est ferme ]
-#SET{forumferme,0}
-<BOUCLE_etat(ARTICLES){id_article}{id_mot=#GET{id_mot_ferme}}>
-#SET{forumferme,1}
-</BOUCLE_etat>
-
-[(#REM) On recupere le secteur ]
-<BOUCLE_article_ds(ARTICLES){id_article}>
-	<BOUCLE_secteur(HIERARCHIE){id_article}{0,1}>
-		#SET{ze_sect,#ID_RUBRIQUE}
-	</BOUCLE_secteur>
-</BOUCLE_article_ds>
-
-<a name="haut"></a>
-<div id="contenant"> <!-- Section contenant la page -->
-
-	<INCLURE{fond=entete_BB}{id_article}>
-
-	<div id="corps"> <!-- Section contenant les donnees -->
-		[(#MODELE{spipbb_chemindefer}{id_article}{id_rubrique})]
-
-	[(#REM) Si la discussion contient un message fermant ]
-
-	[(#SET{none,0})]
-
-	[(#SET{aff_sujetclos,
-		[(#GET{sujetferme}|=={0}|?{' ',
-		<div class="prec">
-			<h2><:spipbb:sujet_clos_titre:></h2>
-			<h3><:spipbb:sujet_clos_texte:></h3>
-			<p><:spipbb:raison:> <a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ENV{id_forum}})]#forum#ENV{id_forum}"><:spipbb:click:></a></p>
-		</div>
-		<hr />
-		[(#SET{none,1})]
-		})]
-	})]
-
-	[(#SET{aff_forumclos,
-		[(#GET{forumferme}|=={0}|?{' ',
-		<div class="prec">
-			<h2><:spipbb:forum_ferme:></h2>
-			<h3><:spipbb:forum_ferme_texte:></h3>
-		</div>
-		<hr />
-		[(#SET{none,1})]
-		})]
-	})]
-
-	[(#GET{aff_forumclos})]
-	[(#GET{aff_sujetclos})]
-
-	[(#REM) Si rien ne cloture la discussion on envoi la suite. Contenu : texte du message auquel on repond ]
-
-		<BOUCLE_forum_parent(FORUMS){id_forum}>
-		<div class="prec">
-			<h2><:spipbb:reponse:></h2>
-			<h3><a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ENV{id_forum}})]#forum#ID_FORUM">#TITRE</a> <:par_auteur:>
-			<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
-			<a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique=#ID_RUBRIQUE})]">
-			[(#NOM)]
-			</a>
-			</BOUCLE_auteurp>
-			</B_auteurp>
-			<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a>
-			<//B_auteurp>
-			</h3>
-			<p>[<:spipbb:le:> (#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</p>
-			[(#TEXTE|spipbb_chatons|justifier)]
-		</div>
-		<hr/>
-		<!-- si le forum a un parent, on ne peut pas faire une annonce -->
-		[(#ID_FORUM|spipbb_pas_afficher_mots_clefs)]
-		</BOUCLE_forum_parent>
-		<!-- si le forum n'a pas de parent, afficher tous les mots cles -->
-		[(#ID_FORUM|spipbb_afficher_mots_clefs)]
-		<//B_forum_parent>
-		<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
-		<table class="spipforum" id="ecrire">
-			<thead>
-			<tr>
-				<th colspan="2"><:poster_message:></th>
-			</tr>
-			</thead>
-			<tr>
-				<td class="postsmiley"><INCLURE{fond=inc_tableau_smileys}{id_article}></td>
-				<td class="postformulaire"> 
-				<div class="tailformulaire">
-				<!-- Ce div est la pour pallier l'illogisme qui fait que selon l'avancement dans le post on se trouve un coup avec .spip_encadrer autour de form et un coup l'inverse -->
-				<!-- Donc c'est lui qu'il faut dimmensionner et eventuellement centrer -->
-				[(#REM) declare le #SET suivant pour 'retour_forum' cas "reponse"  et cas "nouveau post"]
-
-				[(#SET{ret_url,[(#GET{forumpere}|?{spip.php?page=voirsujet&amp;id_forum=#GET{forumpere},spip.php?article#ENV{id_article}})]})]
-					<!-- balise de verification : #ENV{id_forum}
-					#GET{ret_url}#forum#GET{ancre_ret}
-					#GET{forumpere}  -->
-
-				[(#FORMULAIRE_FORUM{[(#GET{ret_url})]})]
-
-				</div>
-				</td>
-			</tr>
-		</table>
-	</div> <!-- Fin de la section "corps" -->
-
-	<INCLURE{fond=pied_BB}{id_article}{id_forum}>
-
-	[(#REM) Pied de page standard SPIP]
-	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
-
-</div><!-- fin de la Section contenant -->
-
+</div>
 </body>
-
 </html>

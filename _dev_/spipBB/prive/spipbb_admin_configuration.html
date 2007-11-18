@@ -1,6 +1,6 @@
 #CACHE{0}
 [(#REM) Plugin SpiBB - Licence GPL]
-[(#REM) SpipBB admin - Page d'accueil des statistiques]
+[(#REM) SpipBB admin - Configuration generale SpipBB]
 
 <form method="post" action="#ENV{lien_action}">
 <input type='hidden' id="exec" value="#ENV{exec_script}">
@@ -37,6 +37,7 @@
 <label>
 	<i>[(#ENV{etat_tables}|=={oui}|?{<:spipbb:admin_config_tables_ok:>,<:spipbb:admin_config_tables_erreur:>})]</i><br />
 	<i>#ENV*{etat_spip}</i>
+	<i>#ENV*{etat_plugins}</i>
 </label>
 </p>
 </fieldset>
@@ -169,6 +170,26 @@
 <label>
 </fieldset>
 
+[(#REM) ------------------------ CONFIG ISSUE GAFOSPIP ------------------------ ]
+
+<fieldset>
+<legend>WAS GAFOSPIP</legend>
+<table cellpadding='3' cellspacing='1' border='0' width='100%'>
+<tr>
+	<td><:spipbb:admin_nombre_lignes_messages:></td>
+	<td>
+		<input type='text' name='fixlimit' value='#ENV{fixlimit}' size='4' />
+	</td>
+</tr>
+<tr>
+	<td><:spipbb:admin_temps_deplacement:></td>
+	<td>
+		<input type='text' name='lockmaint' value='#ENV{lockmaint}'' size='4' />
+	</td>
+</tr>
+</table>
+</fieldset>
+
 <?php //fin spipbb active == oui
 } ?>
 
@@ -180,4 +201,4 @@
 
 [(#REM|sinon{1}|fin_cadre_trait_couleur)]
 
-</form>
+<!-- pas de /FORM ici en attendant integration des outils gaf:  /form -->

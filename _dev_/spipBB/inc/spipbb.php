@@ -165,6 +165,29 @@ function spipbb_init_metas()
 	$spipbb_meta['id_mot_postit'] = 0;
 	$spipbb_meta['config_mot_cles'] = 'non';
 
+	// gafopspip
+	#stockage des champs supplementaires
+	$spipbb_meta['support_auteurs'] = 'extra'; //$options_sap = array('extra','table','autre');
+	$spipbb_meta['table_support'] = '';	
+	#champs supplementaires auteurs
+	$champs_requis = array('date_crea_spipbb','avatar','annuaire_forum','refus_suivi_thread');
+	$champs_definis=array();
+	foreach ($GLOBALS['champs_sap_spipbb'] as $champ => $params) {
+		$champs_definis[]=$champ;
+	}
+	$champs_optionnels = array_diff($champs_definis,$champs_requis);
+	foreach ($champs_optionnels as $champ_a_valider) {
+		$spipbb_meta['affiche_'.$champ_a_valider]='oui';
+	}
+	# autres parametres
+	$spipbb_meta['fixlimit'] = 10;
+	$spipbb_meta['lockmaint'] = 600;
+	$spipbb_meta['affiche_avatar'] = 'oui';
+	$spipbb_meta['taille_avatar_suj'] = 50;
+	$spipbb_meta['taille_avatar_cont'] = 80;
+	$spipbb_meta['taille_avatar_prof'] = 80;
+	$spipbb_meta['affiche_bouton_abus'] = 'non';
+	$spipbb_meta['affiche_bouton_rss'] = 'un';
 	// chemin icones et smileys ?
 
 	// spam words
@@ -436,5 +459,20 @@ function spipbb_renumerote()
 		$numero = $numero + 10;
 	} // while
 } // spipbb_renumerote
+
+/*
+| traitement back / balise signature_post
+| GAF v.0.6 - 12/10/07 
+*/
+function spipbb_afficher_signature_post($id_auteur) {
+	#recup de statut et extra/avatar
+	$infos = spipbb_auteur_infos($id_auteur);
+	if($infos['signature_post']!='') {
+		return propre($infos['signature_post']);
+	}
+	return;
+}
+
+
 
 ?>

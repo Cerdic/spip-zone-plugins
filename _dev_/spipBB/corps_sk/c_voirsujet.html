@@ -1,0 +1,313 @@
+#CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
+<!-- debut code pour fichier voirsujet.html -->
+
+<BOUCLE_sujet_principal(FORUMS){id_forum}{doublons}>
+		
+	<INCLURE(session.php){fond=inc_teteforum}{id_article}>
+		
+	<p class="space_20"></p>
+		
+	[(#REM) determiner si le forum ferme / sujet ferme  ]		
+	#SET{forumferme,0}
+	#SET{sujetferme,0}
+	<BOUCLE_etat(ARTICLES){id_article}{titre_mot=ferme}>
+		#SET{forumferme,1}
+		[(#REM) h.26/09 .. maintenance ]
+		#SET{maintenance,#ID_ARTICLE|spipbb_maintenance}
+	</BOUCLE_etat>
+
+
+	[(#REM) post qui ferme le sujet (dernier post du sujet en somme !) ]
+	<BOUCLE_reponse_ferme(FORUMS){id_thread}{plat}{titre_mot=ferme}>
+		#SET{sujetferme,1}
+	
+		<BOUCLE_thelast(FORUMS){id_parent}{!par date}{0,1}{doublons}>
+		
+		<table class="spipforum" id="post_ferme">
+			<tr>
+				<th colspan="2"><:forg:sujet_clos_titre:></th>
+			</tr>
+			<tr class="ligne_sujet">
+				<td id="forum#ID_FORUM" colspan="2">
+					<span class="text_nom">
+					<B_auteurpc2>
+					<BOUCLE_auteurpc2(AUTEURS){id_auteur}{tout}>
+						<a
+						[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
+						 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+						]
+						>#NOM</a>
+					</BOUCLE_auteurpc2>
+					<BOUCLE_modo(AUTEURS){id_article}{id_auteur}>
+						[(#REM) set id_auteur modo , en attendant requette sur admin restreint]
+						#SET{modo,#ID_AUTEUR}
+					</BOUCLE_modo>
+					
+					</B_auteurpc2>
+						[(#NOM|sinon{<:forg:anonyme:>})]
+					<//B_auteurpc2>
+					</span>
+					<span class="text_titre"><:forg:post_titre:>#TITRE</span>
+				</td>
+			</tr>
+			<tr class="ligne_sujet">
+				<td class="aff_avatar" rowspan="2">
+					<BOUCLE_auteur_av(AUTEURS){id_auteur}>
+						[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_suj'}})]
+						[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:forg:moderateur:>"></p>]
+					</BOUCLE_auteur_av>
+				</td>
+				<td class="date_sujet">
+	        		<span><:forg:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+	        	</td>
+	        </tr>
+			<tr class="ligne_sujet">
+	        	<td>
+					[(#TEXTE|lignes_longues|smileys)]
+					
+					[(#REM) signature auteur ]
+					[<p class="signature">(#SIGNATURE_POST)</p>]
+					
+					[
+					<p class="space_5"></p>
+					<a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>
+					]
+				</td>
+			</tr>
+		</table>
+		</BOUCLE_thelast>
+		<p class="space_20"></p>
+	</BOUCLE_reponse_ferme>
+	<!-- fin post fermeture sujet -->
+		
+	
+		
+	[(#REM) affichage commun, tout type situation voirsujet ]
+	
+	[(#REM) ligne chemin ]
+	[(#MODELE{chemin_hierarchie}{id_article})]
+
+	
+	<p class="space_10"></p>
+	[(#REM) message art ferme|maintenance ]
+	[(#GET{forumferme}|=={1}|?{' ',''})
+		<div class="mesg_forum_clos">
+		[(#GET{maintenance}|=={1}|?{<:forg:forum_maintenance:>,<:forg:forum_ferme:>})]
+		</div>
+	]
+	
+	<!-- bouton nouveau_sujet/repondre ou pas ? -->
+	<ul class="actionforum">
+		<li class="poster">
+			<BOUCLE_forum_pere(ARTICLES){id_article}>
+			[(#SET{affboutonnew,[(#GET{forumferme}|=={1}|?{' ',
+				<a href="[(#URL_PAGE{poster})][&amp;(#PARAMETRES_FORUM)]" title="<:forg:sujet_nouveau:>">&nbsp;</a>
+			})]
+			})]
+			#GET{affboutonnew}
+			</BOUCLE_forum_pere>
+		</li>
+		<li class="repondre">
+			[(#SET{affboutonrep,[(#GET{forumferme}|=={1}|?{' ',
+				[(#GET{sujetferme}|=={1}|?{' ',
+				<a href="[(#URL_PAGE{poster})][&amp;(#PARAMETRES_FORUM)]" title="<:forg:sujet_repondre:>">&nbsp;</a>
+				})]
+			})]
+			})]
+			#GET{affboutonrep}
+		</li>	
+	</ul>
+	
+	<div class="titre_actif">#TITRE</div>
+	
+	<p class="space_10"></p>
+	
+	<!-- tableau -->
+	<table class="spipforum" id="liste_post">
+		<tr>
+	  		<th colspan="2"><:forg:message_s:></th>
+		</tr>
+		
+		<tr class="inter entete_sujet">
+			<td id="forum#ID_FORUM" colspan="2">
+				<span class="text_nom">
+				<B_auteurp>
+				<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
+					<a
+					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
+					 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+					]
+					>#NOM</a>
+				</BOUCLE_auteurp>
+				
+				<BOUCLE_modo2(AUTEURS){id_article}{id_auteur}>
+					[(#REM) set id_auteur modo , en attendant requete sur admin restreint ]
+					#SET{modo,#ID_AUTEUR}
+				</BOUCLE_modo2>
+				
+				</B_auteurp>
+					[(#NOM|sinon{<:forg:anonyme:>})]
+				<//B_auteurp>
+				</span>
+				<span class="text_titre"><:forg:en_rep_sujet_:>#TITRE</span>
+			</td>
+		</tr>
+		<tr class="ligne_sujet">
+			<td class="aff_avatar" rowspan="2">
+				[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_suj'}})]
+				
+				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:forg:moderateur:>"></p>]
+				
+				[(#REM) bouton alerter abus ... !]
+				[(#CONFIG{'spipbb/affiche_bouton_abus'}|=={'oui'}|?{' ',''})
+				<div class="bouton_alerter">
+					<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,1}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{alerter,oui}|parametre_url{orig,#ID_THREAD-#ID_FORUM})]" title="<:forg:alerter_abus:>">&nbsp;</a>
+				</div>
+				]
+			</td>
+			<td class="date_sujet">
+			
+				<!-- bouton citer ou pas ? -->
+				[(#SET{affboutonciter,[(#GET{forumferme}|=={1}|?{' ',
+					[(#GET{sujetferme}|=={1}|?{' ',
+					<div class="bout_citer">
+						<a href="[(#URL_PAGE{poster}|parametre_url{citer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:forg:citer:>">&nbsp;</a>
+					</div>
+					})]
+				})]
+				})]
+				#GET{affboutonciter}
+			
+       			<span><:forg:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+        	</td>
+        </tr>
+		<tr class="ligne_sujet">
+        	<td>
+				[(#TEXTE|lignes_longues|smileys)]
+				
+				[(#REM) signature auteur ]
+				[<p class="signature">(#SIGNATURE_POST)</p>]
+				
+				[
+				<p class="space_5"></p>
+				<a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>
+				]
+			</td>
+		</tr>
+		<tr class="inter">
+			<td colspan="2">&nbsp;</td>
+		</tr>
+
+
+		<BOUCLE_posts(FORUMS){id_thread}{plat}{par date}{doublons}{pagination}>
+		<tr>
+			<th colspan="2"></th>
+		</tr>
+		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+			<td  id="forum#ID_FORUM" colspan="2" class="ligne_nom">
+				<span class="text_nom">
+				<B_auteurpr>
+				<BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}>
+					<a
+					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
+					 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+					]
+					>#NOM</a>
+				</BOUCLE_auteurpr>
+				
+					<BOUCLE_modo3(AUTEURS){id_article}{id_auteur}>
+					[(#REM) set id_auteur modo , en attendant reglage sur admin restreint ]
+					#SET{modo,#ID_AUTEUR}
+					</BOUCLE_modo3>	
+				
+				</B_auteurpr>
+					[(#NOM|sinon{<:forg:anonyme:>})]
+				<//B_auteurpr>
+				</span>
+				<span class="text_titre"><:forg:post_titre:>#TITRE</span>
+			</td>
+		</tr>
+		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+			<td class="aff_avatar" rowspan="2">
+				[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_suj'}})]
+				
+				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:forg:moderateur:>"></p>]
+				
+				[(#REM) bouton alerter abus ... ! ]
+				[(#CONFIG{'spipbb/affiche_bouton_abus'}|=={'oui'}|?{' ',''})
+				<div class="bouton_alerter">
+					<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,1}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{alerter,oui}|parametre_url{orig,#ID_THREAD-#ID_FORUM})]" title="<:forg:alerter_abus:>">&nbsp;</a>
+				</div>
+				]
+			</td>
+			<td class="date_sujet">
+				[(#REM) affiche ou pas bouton (repondre)/citer ]
+				[(#SET{affboutonciter,[(#GET{forumferme}|=={1}|?{' ',
+					[(#GET{sujetferme}|=={1}|?{' ',
+					<div class="bout_citer">
+						<a href="[(#URL_PAGE{poster}|parametre_url{citer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:forg:citer:>">&nbsp;</a>
+					</div>
+					})]
+				})]
+				})]
+				#GET{affboutonciter}
+				<span><:forg:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+        	</td>
+        </tr>
+		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+        	<td>
+				[(#TEXTE|lignes_longues|smileys)]
+				
+				[(#REM) signature auteur ]
+				[<p class="signature">(#SIGNATURE_POST)</p>]
+				
+				[
+				<p class="space_5"></p>
+				<a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>
+				]
+			</td>
+		</tr>
+
+		</BOUCLE_posts>
+		<tr class="pagination">
+			<td colspan="2">
+			#GRAND_TOTAL
+			[(#GRAND_TOTAL|>{1}|?{<:forg:pagine_post_s:>,<:forg:pagine_post_:>})]
+			[<:forg:pagine_page_:>(#PAGINATION{page_forum})]
+			</td>
+		</tr>
+		</B_posts>
+	</table>
+
+
+
+	<p class="space_10"></p>
+	
+	<ul class="actionforum">
+		<li class="poster">
+			#GET{affboutonnew}
+		</li>
+		<li class="repondre">
+			#GET{affboutonrep}
+		</li>	
+	</ul>
+
+	<p class="space_10"></p>
+	
+
+	[(#REM) ligne chemin ]
+	[(#MODELE{chemin_hierarchie}{id_article}{encours=#ENV{id_article}})]
+
+	<INCLURE(session.php){fond=inc_piedforum}{id_article}{id_thread}>
+
+	[(#REM) si visiteur non identifie : form login ]
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:forg:login:></p>]
+	#LOGIN_PUBLIC
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})
+	&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+	</div>
+	]
+[(#REM) Chryjs : Balise de calcul des visites - Ne pas retirer]
+[(#CALC_STATS_FORUMS{#ID_FORUM})]
+</BOUCLE_sujet_principal>

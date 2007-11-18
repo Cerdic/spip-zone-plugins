@@ -1,0 +1,8 @@
+	<div class="chemin">
+		<BOUCLE_article_cdf(ARTICLES){id_article}>
+			<BOUCLE_chemindefer(HIERARCHIE){id_article}{" &lt;&gt; "}>
+			<a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+			</BOUCLE_chemindefer>
+			[(#ENV{encours}|?{'',&nbsp;&lt;&gt; <a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a>})]
+		</BOUCLE_article_cdf>
+	</div>

@@ -1,0 +1,8 @@
+	[(#REM) GAF v 0.5 ]
+	<div class="chemin">
+		<BOUCLE_rubrique_cdf(RUBRIQUES){id_rubrique=#ENV{rubloc}}>
+			<BOUCLE_chemindefer_rub(HIERARCHIE){id_rubrique}{" &lt;&gt; "}>
+			<a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+			</BOUCLE_chemindefer_rub>
+		</BOUCLE_rubrique_cdf>
+	</div>

@@ -1,0 +1,67 @@
+[(#REM) champs additionel formulaire_gaf_profil, mode support: extra 
+	si besoin : env: id_auteur, statut
+]
+
+
+#SET{aff_avatar,#CONFIG{'spipbb/affiche_avatar'}}
+[(#GET{aff_avatar}|=={oui}|?{' ',''})
+	[(#ENV{statut}|=={'6forum'}|?{' ',''})
+	<br />
+	<p><label for="avatar"><:forg:votre_url_avatar:></label><br />
+	<input type="text" name="avatar" id="avatar" class="forml" value="[(#CONFIG{~#ID_AUTEUR/avatar})]" size="40" />
+	</p>
+	]
+]
+
+
+#SET{aff_signature,#CONFIG{'spipbb/affiche_signature_post'}}
+[(#GET{aff_signature}|=={oui}|?{' ',''})
+	<br />
+	<p><label for="signature_post"><:forg:votre_signature:></label><br />
+	<input type="text" name="signature_post" id="signature_post" class="forml" value="[(#CONFIG{~#ID_AUTEUR/signature_post})]" size="40" />
+	</p>
+]
+
+
+[(#SET{check,[(#CONFIG{~#ID_AUTEUR/annuaire_forum}|=={''}|?{'oui',#CONFIG{~#ID_AUTEUR/annuaire_forum}})]})]
+<br />
+<p><label for="annuaire_forum"><:forg:visible_annuaire_forum:></label><br />
+<input type="radio" name="annuaire_forum" id="annuaire_forum" class="forml" 
+		value="oui" [(#GET{check}|=={'oui'}|?{'checked="checked"',''})] /><:forg:oui:>
+&nbsp;&nbsp;&nbsp;
+<input type="radio" name="annuaire_forum" id="annuaire_forum" class="forml" 
+		value="non" [(#GET{check}|=={'non'}|?{'checked="checked"',''})] /><:forg:non:>
+</p>
+
+
+
+[(#REM) pour simple transport ]
+<input type="hidden" name="date_crea_spipbb" value="[(#CONFIG{~#ID_AUTEUR/date_crea_spipbb})]">
+
+
+[(#REM) liste des threads de l_auteur ==> checkbox refus de suivi ]
+#SET{select,#CONFIG{~#ID_AUTEUR/refus_suivi_thread}|chaine2array}
+
+</B_suivi_forum>
+<table class="spipforum" id="liste_refus_suivi">
+<tr class="inter">
+	<th colspan="2">
+	<:forg:infos_refus_suivi_sujet:>
+	</th>
+</tr>
+<BOUCLE_suivi_forum(FORUMS){id_auteur=#ENV{id_auteur}}{plat}{!par date}{fusion id_thread}{doublons}>
+<tr class="ligne_sujet">
+	<td class="titreforum">
+		#ID_THREAD|&nbsp;&laquo;&nbsp;#TITRE&nbsp;&raquo;&nbsp;
+	</td><td class="nbr_post">
+		<input type="checkbox" name="refus_suivi_thread[]" value="#ID_THREAD" 
+			[(#ID_THREAD|in_array{#GET{select}|is_array|?{#GET{select},alt="lolo"}}|?{'checked="checked"',''})] title="" /><br />
+	</td>
+</tr>
+</BOUCLE_suivi_forum>
+</table>
+</B_suivi_forum>
+<:forg:infos_suivi_forum_par_inscription:>
+<//B_suivi_forum>
+
+

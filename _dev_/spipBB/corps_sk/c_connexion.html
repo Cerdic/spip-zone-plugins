@@ -1,0 +1,14 @@
+#CACHE{0}
+<!-- debut code pour fichier connexion.html -->
+
+<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}>
+
+<div class="login">
+	<p class="login"><:forg:login:></p>
+	#LOGIN_PUBLIC
+	&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+</div>
+
+<INCLURE(session.php){fond=inc_piedforum}{id_rubrique}>
+			
+<!-- fin code connexion.html -->

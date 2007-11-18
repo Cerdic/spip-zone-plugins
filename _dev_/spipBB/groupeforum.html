@@ -1,50 +1,21 @@
 #CACHE{0}
-[(#REM) Plugin SpipBB - Licence GPL]
-<BOUCLE_rubrique_principal(RUBRIQUES){id_rubrique}>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="#LANG">
 <head>
-<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+
+<title>[(#NOM_SITE_SPIP|textebrut)][ - (#TITRE|textebrut)]</title>
+
 <INCLURE{fond=inc-head}>
 <INCLURE{fond=inc-forum-head}>
 
-[(#REM) Lien vers le flux RSS de la rubrique ]
-<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
- 
-[(#MODELE{spipbb_display_index}{id_secteur})] 
-	
 </head>
+<body style="background-color:#efefef;">
+<div style="padding:50px;" align="center">
 
-<body id="forumsect" dir="#LANG_DIR">
-<a name="haut"></a>
-<div id="contenant"> <!-- Section contenant la page -->
+<INCLURE{fond=corps_sk/c_rubrique}{id_rubrique}>
 
-	<INCLURE{fond=entete_BB}{id_rubrique}>
-
-	<div id="corps"> <!-- Section Corps -->
-	<h2>#TITRE</h2>
-
-	#MODELE{spipbb_chemindefer}
-
-	[(#MODELE{spipbb_index}{id_secteur})]
-
-	#MODELE{spipbb_chemindefer}
-
-	</div> <!-- Fin de la section Corps -->
-
-	[(#MODELE{spipbb_blocinfo}{id_rubrique})]
-
-	#MODELE{spipbb_login}
-
-	<INCLURE{fond=pied_BB}{id_rubrique}>
-
-	[(#REM) Pied de page standard SPIP]
-	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
-
-</div> <!-- Fin de la section contenant -->
-
+</div>
 </body>
 </html>
-
-</BOUCLE_rubrique_principal>
+</BOUCLE_rubrique>
