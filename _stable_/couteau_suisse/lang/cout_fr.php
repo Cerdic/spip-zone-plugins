@@ -22,7 +22,6 @@ _ {&lt;surgris&gt;}Lorem ipsum dolor sit amet{&lt;/surgris&gt;}";
 $temp['decoration'] = "<blockquote style=\"font-size:90%; margin:0 2em 0 2em;\">{$temp['decoration']}</blockquote>";
 $temp['type_urls'] = "<blockquote style=\"font-size:90%; margin:0 2em 0 2em;\">{$temp['type_urls']}</blockquote>";
 $temp['note'] = "<sup>(*)</sup>";
-@define('_CS_RSS_SOURCE', 'http://zone.spip.org/trac/spip-zone/log/_plugins_/_stable_/couteau_suisse?format=rss&mode=stop_on_copy&limit=20');	
 
 // fin du code
 
