@@ -5,6 +5,30 @@
 <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#INTRODUCTION|couper{150}|attribut_html)" />]
 <INCLURE{fond=inc-head}>
+<script type="text/javascript">
+		jQuery(function(){
+			var init = function() {			
+				if(!jQuery.carto || !jQuery.carto.ready)
+					return window.setTimeout(init,10);
+				var carto = new jQuery.carto(cfg_standard);
+				carto.mapMarker = mapMarker;
+				carto.loadMarkersWithTooltip();
+				var carto_forum = new jQuery.carto(cfg_forum);
+				carto_forum.mapMarker = mapMarker_forum;
+				carto_forum.loadMarkersWithTooltip(null,{id_article:#ID_ARTICLE});
+				//if you want to load the annotations text inside an overlay window use the next line instead of the previous one
+				//carto.loadMarkersWithOverlay();
+				var init_window = function() {
+					if(!jQuery.carto.annotate_window || !jQuery.carto.annotate_window.ready) 
+						return window.setTimeout(init_window,10);
+					jQuery.carto.annotate_window.init(carto);
+				};
+				if(jQuery("#annotate_window").size()) 
+					init_window();
+			}
+			window.setTimeout(init,10);
+		});
+</script>
 </head>
 
 <body class="page_article">
@@ -89,7 +113,7 @@
         [(#REM) Forum de l'article ]
         <a href="#forum" name="forum" id="forum"></a>
         <INCLURE{fond=inc-forum}{id_article}>
-        #FORMULAIRE_ANNOTATIONS{#SELF}
+				#FORMULAIRE_ANNOTATIONS{#SELF}
 
 	</div><!--#contenu-->
 	</div><!--#conteneur-->
@@ -100,7 +124,7 @@
 
         [(#REM) Menu de navigation par rubriques ]
         <INCLURE{fond=inc-rubriques}{id_rubrique}>
-
+				
     </div><!--#navigation-->
     
     [(#REM) Menu de navigation laterale ]
@@ -121,6 +145,16 @@
         [(#REM) Menu de navigation mots-cles ]
         #MODELE{article_mots}
         
+        <BOUCLE_aut(AUTEURS){id_auteur=#SESSION{id_auteur}}>
+				#FORMULAIRE_UPLOAD{auteur,upload_annotation_forum}
+				<script type="text/javascript">
+					$(function() {
+						$("#extra .formulaire_upload").upload_attach({
+							url:'#URL_PAGE{annotation_mini_formulaire_upload_forum}'
+						});
+					});
+				</script>
+				</BOUCLE_aut>
     </div><!--#extra-->
 
 	[(#REM) Pied de page ]

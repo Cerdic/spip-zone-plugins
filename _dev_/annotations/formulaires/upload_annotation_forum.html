@@ -1,0 +1,81 @@
+<div class="formulaire_spip formulaire_upload">
+
+<form action="#ENV{url}#formulaire_upload" method="post" enctype="multipart/form-data"><div>
+[(#ENV{url_post}|form_hidden)]
+
+
+[(#REM)
+	Ce qui suit est herite du formulaire forum mais ne semble plus servir, a voir...
+]
+
+[<input type="hidden" name="arg" value="(#ENV{arg})" />]
+[<input type="hidden" name="hash" value="(#ENV{hash})" />]
+[<input type="hidden" name="verif_(#ENV{hash})" value="ok" />]
+[<input type="hidden" name="afficher_texte" value="(#ENV{afficher_texte})" />]
+
+
+#ENV{debug}
+
+	<fieldset><legend><:formupload:yourfiles:></legend>
+
+	<B_docs>
+		#ANCRE_PAGINATION
+	<BOUCLE_docs(DOCUMENTS)
+	{id_auteur?}{id_article?}{id_breve?}{id_rubrique?}
+	{!par id_document}{pagination 3}>
+	<div style="border:1px solid #ccc;margin-top:8px;margin-bottom:8px;padding:3px">
+	<div class="spip_doc_descriptif" style='float:#LANG_LEFT;width:80px; margin-bottom: 8px; text-align:center;'>
+	[(#SET{logo,[(#LOGO_DOCUMENT|#URL_DOCUMENT
+		|inserer_attribut{title,#TYPE_DOCUMENT[
+			- (#TAILLE|taille_en_octets)]})]})]
+	[(#GET{logo}|extraire_attribut{width}|>{78}|?{
+		[(#SET{logo,[(#GET{logo}|image_reduire{140,140}|image_recadre{78,78})]
+	})]})]
+	#GET{logo}
+		[<br />(#DATE|affdate_court)]
+	</div>
+	<div>
+		<div style='float:#LANG_RIGHT;width:10px;'>
+		<input type="checkbox" name="supprimer[]" value="#ID_DOCUMENT" title="<:formupload:doc_delete:>" />
+		</div>
+	
+	<h4 class="#EDIT{titre}">[(#TITRE|sinon{[(#FICHIER|basename|couper{20})]})]</h4>
+	[<div class="spip_doc_descriptif #EDIT{descriptif}">(#DESCRIPTIF|sinon{<:info_descriptif:>})</div>]
+	
+	</div>
+	<br class='nettoyeur' />
+	<div class="insert_code">
+		<strong><:formupload:insert_code:></strong><br />
+		[(#TYPE_DOCUMENT|match{jpg|gif|png}|?{' ',''})
+		<abbr title="<:formupload:img_left:>">&lt;img#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:img_center:>">&lt;img#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formupload:img_right:>">&lt;img#ID_DOCUMENT|right&gt;]
+		[(#TYPE_DOCUMENT|match{jpg|gif|png}|?{'',' '})
+		<abbr title="<:formupload:doc_left:>">&lt;doc#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:doc_center:>">&lt;doc#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formupload:doc_right:>">&lt;doc#ID_DOCUMENT|right&gt;</abbr>]
+	</div>
+	</div>
+	</BOUCLE_docs>
+		[<p class="pagination">(#PAGINATION)</p>]
+	</B_docs>
+		[<p class="pagination">(#PAGINATION)</p>]
+	<//B_docs>
+
+	[(#REM) Piege a robots spammeurs ]
+	<p style='display:none;'><label for="nobot"><:antispam_champ_vide:></label>
+	<input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
+
+	<div style="margin-top:5px; padding:5px; border-top: dotted gray 1px;">
+		<label for="fichier"><:formupload:choosefiles:>
+		<input type="file" name="fichier" class="forml"[ accept="(#CONFIG{formupload/files_accepted})"][ maxlength="(#CONFIG{formupload/files_number})"] />
+		</label>
+	</div>
+
+	<p class="spip_bouton"><input type="submit" value="<:bouton_enregistrer:>" /></p>
+
+	</fieldset>
+	<br style="clear:both;" />
+
+
+</div>
+</form>
+
+</div>
+<br style="clear:both" />

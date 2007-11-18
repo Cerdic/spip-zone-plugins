@@ -51,8 +51,8 @@ pagination_zone();
 (function($){
 	$(function(){
 		$("a.annotate_document").click(function(){
-			$.carto.idCsv = this.id.match(/\d+/);
-			$.carto.showAnnotatePanel(4);
+			$.carto.annotate_window.idCsv = this.id.match(/\d+/);
+			$.carto.annotate_window.showAnnotatePanel(4);
 		})
 	});
 })(jQuery)
@@ -66,44 +66,46 @@ pagination_zone();
 
 <script type='text/javascript'><!--
 if (window.jQuery && jQuery.fn.ajaxForm) {
-	//options
-	//-url (string)
-	//-callback (function)
-	var options = {
-		url: '#URL_PAGE{annotation_mini_formulaire_upload}',
-		callback: function() {
-			load_zone_documents(); // recharge la partie du milieu
-			// si on reattache les evenements, remettre les crayons
-			if (window.cQuery)
-				cQuery(".crayon:lt(1000)",this).initcrayon();
-		}
-	};
-
-	jQuery('#annotate_window .formulaire_upload')
-	.upload_attach(options)
-	// et la pagination
-	.each(function() {
-		var self = this;
-		$('.pagination a',self)
-		.click(function(){
-			var r = ($(this).attr('href')||'').match(/[?&;]debut_docs=([0-9]+)/);
-			r = r ? r[1] : 0;
-			$(self)
-			.addClass('ajaxloading')
-			.css({'opacity': 0.5});
-			$.get(
-				'#URL_PAGE{annotation_mini_formulaire_upload}&debut_docs='+r,
-				function(c) {
-					$(self)
-					.removeClass('ajaxloading')
-					.css({'opacity': 1.0})
-					.html(
-						$('<iframe>').html(c).find('.formulaire_upload').html()
-					).
-					upload_attach(options);
-				}
-			);
-			return false;
+	window.jQuery(function() {
+		//options
+		//-url (string)
+		//-callback (function)
+		var options = {
+			url: '#URL_PAGE{annotation_mini_formulaire_upload}',
+			callback: function() {
+				load_zone_documents(); // recharge la partie du milieu
+				// si on reattache les evenements, remettre les crayons
+				if (window.cQuery)
+					cQuery(".crayon:lt(1000)",this).initcrayon();
+			}
+		};
+	
+		jQuery('#annotate_window .formulaire_upload')
+		.upload_attach(options)
+		// et la pagination
+		.each(function() {
+			var self = this;
+			$('.pagination a',self)
+			.click(function(){
+				var r = ($(this).attr('href')||'').match(/[?&;]debut_docs=([0-9]+)/);
+				r = r ? r[1] : 0;
+				$(self)
+				.addClass('ajaxloading')
+				.css({'opacity': 0.5});
+				$.get(
+					'#URL_PAGE{annotation_mini_formulaire_upload}&debut_docs='+r,
+					function(c) {
+						$(self)
+						.removeClass('ajaxloading')
+						.css({'opacity': 1.0})
+						.html(
+							$('<iframe>').html(c).find('.formulaire_upload').html()
+						).
+						upload_attach(options);
+					}
+				);
+				return false;
+			});
 		});
 	});
 }

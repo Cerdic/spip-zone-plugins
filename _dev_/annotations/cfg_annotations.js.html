@@ -1,39 +1,45 @@
 #CACHE{0}
 #HTTP_HEADER{'Content-Type: text/javascript'}
-jQuery(function() {
-	$.ifixpng("#CHEMIN{'images/rien.gif'}");
-
-	jQuery.extend(jQuery.carto,{
-		mapMarker: {
-			src: "<img src='#CHEMIN{images/annotate_arrow.png}' width='23' height='34' />",
-			map: "<map><area coords='11,29,10,25,8,21,6,16,4,12,1,9,7,8,7,0,15,0,15,8,22,9,18,12,17,15,15,19,13,23,11,31' shape='poly' alt=''' href='javascript:void(0)'/></map>",
-			hotSpot: [11,34]		
-		},
-		cfg: {
-			//For some urls there is a second line commented to be used when loading annotations data from forum table
-			//url to load all document and annotations data
-			loadAnnotations: "#URL_PAGE{get_image_annotations}",
-			//url to load the coords of annotations for a given document
-			loadCoordsAnnotations: "#URL_PAGE{show_image_annotations}",
-			//loadCoordsAnnotations: "#URL_PAGE{show_image_annotations_forum}",
-			//url to load the text of a specified annotation
-			loadAnnotationText: "#URL_PAGE{get_annotation_text}",
-			//loadAnnotationText: "#URL_PAGE{get_annotation_text_forum}",
-			//url to load image info (annotation window)
-			getImageInfo: "#URL_PAGE{get_image_info}",
-			//url to post actions (annotation window)
-			action: "#URL_SITE_SPIP/spip.php",
-			//url to get csv file (annotation window)
-			loadCsv: "#URL_PAGE{get_csv_file}",
-			//images
-			emptyImage: "#CHEMIN{images/rien.gif}",
-			loaderImage: "#CHEMIN{images/loader.gif}",
-			modifyImage: "[(#CHEMIN{images/article-24.gif}|image_masque{#CHEMIN{images/edit.gif},mode=normal}|extraire_attribut{src})]",
-			deleteImage: "[(#CHEMIN{images/article-24.gif}|image_masque{#CHEMIN{images/supprimer.gif},mode=normal}|extraire_attribut{src})]"
-		}
+(function($) {
+	$(function() {
+		$.ifixpng("#CHEMIN{'images/rien.gif'}");	
 	});
+})(jQuery);
 
-	jQuery.carto.loadMarkersWithTooltip();
-	//if you want to load the annotations text inside an overlay window use the next line instead of the previous one
-	//jQuery.carto.loadMarkersWithOverlay();
+var	mapMarker = {
+		src: "<img src='#CHEMIN{images/annotate_arrow.png}' width='23' height='34' />",
+		map: "<map><area coords='11,29,10,25,8,21,6,16,4,12,1,9,7,8,7,0,15,0,15,8,22,9,18,12,17,15,15,19,13,23,11,31' shape='poly' alt=''' href='javascript:void(0)'/></map>",
+		hotSpot: [11,34]		
+};
+var	mapMarker_forum = {
+		src: "<img src='#CHEMIN{images/annotate_arrow_forum.png}' width='23' height='34' />",
+		map: "<map><area coords='11,29,10,25,8,21,6,16,4,12,1,9,7,8,7,0,15,0,15,8,22,9,18,12,17,15,15,19,13,23,11,31' shape='poly' alt=''' href='javascript:void(0)'/></map>",
+		hotSpot: [11,34]		
+};	
+var	cfg_standard = {
+		//url to load all document and annotations data
+		loadAnnotations: "#URL_PAGE{get_image_annotations}",
+		//url to load the coords of annotations for a given document
+		loadCoordsAnnotations: "#URL_PAGE{show_image_annotations}",
+		//url to load the text of a specified annotation
+		loadAnnotationText: "#URL_PAGE{get_annotation_text}",
+		//url to load image info (annotation window)
+		getImageInfo: "#URL_PAGE{get_image_info}",
+		//url to post actions (annotation window)
+		action: "#URL_SITE_SPIP/spip.php",
+		//url to get csv file (annotation window)
+		loadCsv: "#URL_PAGE{get_csv_file}",
+		//images
+		emptyImage: "#CHEMIN{images/rien.gif}",
+		loaderImage: "#CHEMIN{images/loader.gif}",
+		modifyImage: "[(#CHEMIN{images/article-24.gif}|image_masque{#CHEMIN{images/edit.gif},mode=normal}|extraire_attribut{src})]",
+		deleteImage: "[(#CHEMIN{images/article-24.gif}|image_masque{#CHEMIN{images/supprimer.gif},mode=normal}|extraire_attribut{src})]"
+	};
+var cfg_forum = $.extend({},cfg_standard,{
+	loadCoordsAnnotations: "#URL_PAGE{show_image_annotations_forum}",
+	loadAnnotationText: "#URL_PAGE{get_annotation_text_forum}"
 });
+
+//signal configuration loaded
+$.carto.ready = true;
+

@@ -18,17 +18,28 @@
 		}
 	});
 	
-	$.carto = {
-		id_document: 0,
-		postData: {},
-		idCsv: 0,
-		overlay:[],
-		mapMarker: {
+	$.carto = function(cfg) {
+		$.carto.instance++;
+		this.instance = $.carto.instance; 
+		this.mapMarker = {
 			src:"<div style='width:5px;height:5px;background:#000'>",
 			map:"",	
 			hotSpot:[0,0]
-		},
-		cfg: {},
+		};
+		this.cfg = cfg;		
+	}
+	
+	//shared properties
+	$.extend($.carto,{ 
+		//store the number of instances of carto objects
+		instance: 0,
+		//overlay must be shared between all the sources of markers
+		overlay: [],
+		//store if configuration loaded
+		ready: false
+	});
+	
+	$.carto.prototype = {
 		get_xy_coord: function(el,event) {
 		  var off = el.offset();
 			var off_x = event.pageX-off.left,off_y = event.pageY-off.top;
@@ -60,14 +71,21 @@
 			return nIntersect%2?true:false;
 		},
 		addMarker: function(selector,coord,attr) {
-		  attr = attr || {};
+		  var carto = this;
+			attr = attr || {};
 			var container = $(selector).parent();
+			//create the container if it is not present
 			if(!container.is(".marker_container")) {
 		  	container = $(selector).wrap("<div class='marker_container'>").parent().width($(selector).width());
 				container.css({position:"relative",margin:"auto"});
+			}
+			//create the overlay structure if it is not present
+			//a container may be already there if we are showing markers from multiple sources
+			var index;
+			if(!(index =this.getOverlayIndex(container))) {
 				$.carto.overlay.push({container:container,items:$([]),zindex:1});
 				var offset = container.offset();  
-				if($.carto.mapMarker.map) {
+				if(this.mapMarker.map) {
 					container.mousemove(function(e){
 						var x = e.pageX-offset.left;
 						var y = e.pageY-offset.top;
@@ -80,7 +98,7 @@
 							var areas = $.grep(intersect,function(n){
 								var area = $("map[@name="+n.useMap.substring(1)+"] area");
 								var offsetArea = $(n).offset();
-								return $.carto.pointInPoly([e.pageX-offsetArea.left,e.pageY-offsetArea.top],area.attr("coords"));
+								return carto.pointInPoly([e.pageX-offsetArea.left,e.pageY-offsetArea.top],area.attr("coords"));
 							});
 							var $areas = $(areas);
 							$(intersect).not($areas.not(":last")).filter(":visible").css("visibility","hidden");
@@ -89,13 +107,13 @@
 					})
 				}
 		  }
-			var index = $.carto.getOverlayIndex(container);
-		  var hotSpot = $.carto.mapMarker.hotSpot;
-			var marker = $($.carto.mapMarker.src).addClass("map_marker");
+			if(!index) index = this.getOverlayIndex(container);
+		  var hotSpot = this.mapMarker.hotSpot;
+			var marker = $(this.mapMarker.src).addClass("map_marker").addClass("anno_instance"+this.instance);
 			marker.attr(attr);
 			marker.css({zIndex:$.carto.overlay[index].zindex,position:"absolute",left:coord.xy[0]-hotSpot[0]+"px",top:coord.xy[1]-hotSpot[1]+"px"}).
 			appendTo(container).ifixpng();
-			var overlay = $("<img class='map_marker_overlay' src='"+$.carto.cfg.emptyImage+"' width='"+marker.width()+"' height='"+marker.height()+"' />").
+			var overlay = $("<img class='map_marker_overlay anno_instance"+this.instance+"' src='"+this.cfg.emptyImage+"' width='"+marker.width()+"' height='"+marker.height()+"' />").
 			css({zIndex:1000+$.carto.overlay[index].zindex,position:"absolute",left:coord.xy[0]-hotSpot[0]+"px",top:coord.xy[1]-hotSpot[1]+"px"}).
 			appendTo(container);
 			$.carto.overlay[index].items = $.carto.overlay[index].items.add(overlay);
@@ -103,11 +121,11 @@
 			var match = marker.attr("id").match(/(\D+)(\d+)/);
 			var id_prefix = match[1];
 			var id = match[2];
-			if($.carto.mapMarker.map) {
+			if(this.mapMarker.map) {
 				var name = id_prefix+"_html"+id;
 				//IE cannot change name attribute at runtime
-				var map = $($.carto.mapMarker.map.replace(/<map>/,"<map name='"+name+"'>"));
-				map.find("area").attr({title:attr.title,id:id_prefix+"_html_area"+id});
+				var map = $(this.mapMarker.map.replace(/<map>/,"<map name='"+name+"'>"));
+				map.find("area").attr({title:attr.title,id:id_prefix+"_html_area"+id}).addClass("anno_instance"+this.instance);
 				marker.attr("title","");
 				marker.before(map);
 				marker[0].useMap = "#"+name;
@@ -118,7 +136,7 @@
 		},
 		loadAnnotations: function(ids,callback,params) {
 				var options = {
-				url: $.carto.cfg.loadAnnotations,
+				url: this.cfg.loadAnnotations,
 				type: "POST",
 				data: $.extend({'id_document[]':ids},params),
 				dataType: "json",
@@ -128,7 +146,7 @@
 		},
 		loadCoordAnnotations: function(ids,callback,params) {
 				var options = {
-				url: $.carto.cfg.loadCoordsAnnotations,
+				url: this.cfg.loadCoordsAnnotations,
 				type: "POST",
 				data: $.extend({'id_document[]':ids},params),
 				dataType: "json",
@@ -154,7 +172,7 @@
 			})
 			var options = {
 				type: "POST",
-				url: $.carto.cfg.action, 
+				url: this.cfg.action, 
 				data: data,
 				dataType: "json",
 				error: function() {
@@ -173,7 +191,7 @@
 			});
 			var options = {
 				type: "POST",
-				url: $.carto.cfg.action, 
+				url: this.cfg.action, 
 				data: data,
 				dataType: "json",
 				error: function() {
@@ -208,6 +226,7 @@
 		*			}	 												
 		*/
 		displayMarkers: function(points,images,id_prefix,callback) {
+			var carto = this;
 			if($.isFunction(id_prefix)) {
 				callback = id_prefix;
 				id_prefix = null;
@@ -221,7 +240,7 @@
 				var attr = {id:id_prefix+n.id_annotation};
 				if(callback)
 					attr = callback(n,attr);
-				$.carto.addMarker(
+				carto.addMarker(
 					images[n.id_document],
 					{xy:[cx,cy]},
 					attr
@@ -230,7 +249,7 @@
 		},
 		loadCsv: function(id,callback) {
 			var options = {
-				url: $.carto.cfg.loadCsv,
+				url: this.cfg.loadCsv,
 				data: "id_document="+id,
 				dataType: "json",
 				error: function() {
@@ -248,7 +267,7 @@
 				var id = this.id.match(/\d+/);
 				if(id) map_ids.push(id);
 			});
-			$.carto.loadCoordAnnotations(map_ids,function(data) {
+			this.loadCoordAnnotations(map_ids,function(data) {
 				var images = {};
 				$.each(data.documents,function(i,n){
 					images[i] = $("#annotated_map"+i);
@@ -257,8 +276,9 @@
 			},params);
 		},
 		loadMarkersWithTooltip: function(root,params) {
-			$.carto.loadMarkers(root,function(data,images) { 
-				$.carto.displayMarkers(data,images,function(n,attr){ 
+			var carto = this;
+			this.loadMarkers(root,function(data,images) { 
+				carto.displayMarkers(data,images,function(n,attr){ 
 					attr.title = n.title;
 					return attr;
 				});
@@ -266,9 +286,9 @@
 				//IE shows the alt as tooltips
 				if($.browser.msie)
 					$(".marker_container img").attr("alt","");
-				var markers = $(".marker_container map >");
+				var markers = $(".marker_container map > .anno_instance"+carto.instance);
 				if(!markers.size())
-					markers = $(".marker_container .map_marker_overlay");
+					markers = $(".marker_container .map_marker_overlay.anno_instance"+carto.instance);
 				//full tooltip mode
 				$.Tooltip.persistent = true;
 				markers.Tooltip({
@@ -277,9 +297,9 @@
 					bodyHandler: function(current) {
 						var id = this.id.match(/\d+/);
 						if(!$("#annotate_show_text"+id).size()) {
-							$("<div id='annotate_show_text"+id+"' style='display:none'><div style='margin:auto;text-align:center'><img src='"+$.carto.cfg.loaderImage+"' /></div></div>").appendTo("body");
+							$("<div id='annotate_show_text"+id+"' style='display:none'><div style='margin:auto;text-align:center'><img src='"+carto.cfg.loaderImage+"' /></div></div>").appendTo("body");
 							$("#annotate_show_text"+id).load(
-								$.carto.cfg.loadAnnotationText,{id_annotation:id},
+								carto.cfg.loadAnnotationText,{id_annotation:id},
 								function() { 
 									if($.Tooltip.current)
 										$("#tooltip div.body").html($("#annotate_show_text"+id).html());
@@ -291,7 +311,7 @@
 						return $("#annotate_show_text"+id).html(); 						
 					}
 				});
-				$("#tooltip").click(function(e) {
+				$("#tooltip").unbind().click(function(e) {
 					if($(e.target).parents("a.jqmClose").size()) {
 						$.Tooltip.hide();
 						return false;
@@ -300,8 +320,9 @@
 			},params)		
 		},
 		loadMarkersWithOverlay: function(root,params) {
-			$.carto.loadMarkers(root,function(data,images) { 
-				$.carto.displayMarkers(data,images,function(n,attr){ 
+			var carto = this;
+			this.loadMarkers(root,function(data,images) { 
+				carto.displayMarkers(data,images,function(n,attr){ 
 					attr.title = n.title+" ---- click the point to see more";
 					return attr;
 				});
@@ -309,15 +330,15 @@
 				//IE shows the alt as tooltips
 				if($.browser.msie)
 					$(".marker_container img").attr("alt","");
-				var markers = $(".marker_container map >");
+				var markers = $(".marker_container map > .anno_instance"+carto.instance);
 				if(!markers.size())
-					markers = $(".marker_container .map_marker_overlay");
+					markers = $(".marker_container .map_marker_overlay.anno_instance"+carto.instance);
 				//overlay window mode
 				markers.Tooltip({showBody:" ---- ",showURL:false})
 				.click(function(){
 					var id = this.id.match(/\d+/);
 					if(!$("#annotate_show_text"+id).size())
-						$("<div id='annotate_show_text"+id+"' style='display:none' class='jqmWindow'><div style='margin:auto;text-align:center'><img src='"+$.carto.cfg.loaderImage+"' /></div></div>").appendTo("body");
+						$("<div id='annotate_show_text"+id+"' style='display:none' class='jqmWindow'><div style='margin:auto;text-align:center'><img src='"+carto.loaderImage+"' /></div></div>").appendTo("body");
 					$("#annotate_show_text"+id).jqm({
 						onShow: function(h){
 							//mozilla cannot display flash movies when a position:fixed element is in the page
@@ -325,10 +346,10 @@
 							h.o.css({height:$(document).height()+"px",width:$(document).width()+"px",position:"absolute",top:"0px"});
 							h.w.show();
 							$.ajax({
-								url: $.carto.cfg.loadAnnotationText,
+								url: carto.cfg.loadAnnotationText,
 								data: {id_annotation:id},
 								success: function(data) {
-									//IE donesn't like the script with html comments
+									//IE doesn't like the script with html comments
 									if($.browser.msie) {
 										data = $("<div>"+data+"</div>").find("script").each(function() {
 											this.text = $.trim(this.text).replace(/^<!--.*/,"");
