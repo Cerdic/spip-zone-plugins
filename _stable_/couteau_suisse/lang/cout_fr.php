@@ -36,14 +36,14 @@ _ &bull; [De tout le plugin->@reset@]
 </p>",
 	'help' => "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p>"
-		."<p>Version : @version@@distant@</p>"
+		."<p>Version locale : @version@@distant@</p>"
 		."<p>Liens de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p>"
 		."<p>R&eacute;initialisations :
 _ &bull; [Des outils cach&eacute;s->@hide@]
 _ &bull; [De tout le plugin->@reset@]@install@
 </p>",
 	'pour' => '&bull; pour @pack@',
-	'distant' => "<br/>Mise &agrave; jour : [@version@->http://files.spip.org/spip-zone/couteau_suisse.zip]",
+	'distant' => "<br/>Nouvelle version : [@version@->http://files.spip.org/spip-zone/couteau_suisse.zip]",
 	'a_jour' => "<br/>Votre version est &agrave; jour.",
 
 	'raccourcis' => "Raccourcis typographiques actifs du Couteau Suisse&nbsp;:",
@@ -349,6 +349,8 @@ Vous pouvez choisir le type de remplacement :
 _ Merci de votre compr&eacute;hension.",
 	'tous' => 'Tous',
 	'sauf_admin' => 'Tous, sauf les administrateurs',
+	'acces_admin' => 'Acc&egrave;s administrateurs :',
+	'reserve_admin' => 'Acc&egrave;s r&eacute;serv&eacute; aux administrateurs.',
 	'travaux_titre' => '<i>'._T('info_travaux_titre').'</i>',
 	'travaux_nom_site' => '<i>'.$GLOBALS['meta']['nom_site'].'</i>',
 	
