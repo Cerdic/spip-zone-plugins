@@ -6,7 +6,7 @@
 <!-- table=spip_auteurs -->
 <!-- storage=extrapack -->
 [(#REM) storage=extrapack]
-<!-- autoriser=voir -->
+[(#REM) autoriser=voir ]
 
 
 #CACHE{0}
@@ -17,7 +17,7 @@
 <label for='frm_afficher_toto'>Afficher toto ?</label>
 <select name="afficher_toto" id='frm_afficher_toto'>
 	<option value='oui' [(#ENV{afficher_toto}|=={oui}|?{selected='selected'})]>Oui</option>
-	<option value='non' [(#ENV{afficher_toto}|=={non}|?{selected='selected'})]>Non</option>
+	<option value='non' [(#ENV{afficher_toto}|!={oui}|?{selected='selected'})]>Non</option>
 </select>
 
 </fieldset>
