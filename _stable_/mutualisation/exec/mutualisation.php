@@ -32,7 +32,7 @@ function exec_mutualisation_dist() {
 		. ' ' . $GLOBALS['spip_version'].'</div>';
 
 
-	$page .= "<table style='clear:both;'>
+	$page .= "<table border=1 style='clear:both;'>
 	<thead>
 		<tr>
 			<td>Site</td>
@@ -40,6 +40,7 @@ function exec_mutualisation_dist() {
 			<td>ecrire</td>
 			<td title='Popularit&eacute; totale du site'>Stats</td>
 			<td>Plugins</td>
+			<td>date</td>
 		</tr>
 	</thead>
 	<tbody>";
@@ -79,6 +80,7 @@ function exec_mutualisation_dist() {
 			<td><a href='${url}ecrire/'>ecrire/</a></td>
 			<td><a href='${url}ecrire/index.php?exec=statistiques_visites'>${stats}</a></td>
 			<td><a href='${url}ecrire/index.php?exec=admin_plugin'>${plugins}</a></td>
+			<td>".date_creation_repertoire_site($v)."</td>
 			</tr>\n";
 		$nsite++;
 	}
@@ -122,4 +124,7 @@ EOF;
 	}
 }
 
+function date_creation_repertoire_site ($v) {
+return (date("d/M/y", @filectime(_DIR_RACINE.$GLOBALS['mutualisation_dir'].'/'.$v))) ;	
+}
 ?>
