@@ -73,10 +73,19 @@
 		addMarker: function(selector,coord,attr) {
 		  var carto = this;
 			attr = attr || {};
-			var container = $(selector).parent();
+			//store the carto instance 
+			var carto_objs, selector = $(selector);
+			if(!(carto_objs = $.data(selector[0],"carto_objs")))
+				carto_objs = $.data(selector[0],"carto_objs",{});
+			if(!carto_objs[this.cfg.name]) {
+				carto_objs[this.cfg.name] = this;
+				$.data(selector[0],"carto_objs",carto_objs);
+			}
+				
+			var container = selector.parent();
 			//create the container if it is not present
 			if(!container.is(".marker_container")) {
-		  	container = $(selector).wrap("<div class='marker_container'>").parent().width($(selector).width());
+		  	container = selector.wrap("<div class='marker_container'>").parent().width(selector.width());
 				container.css({position:"relative",margin:"auto"});
 			}
 			//create the overlay structure if it is not present
@@ -118,14 +127,14 @@
 			appendTo(container);
 			$.carto.overlay[index].items = $.carto.overlay[index].items.add(overlay);
 			$.carto.overlay[index].zindex++;
-			var match = marker.attr("id").match(/(\D+)(\d+)/);
+			var match = marker.attr("id").match(/(.*)(\d+)$/);
 			var id_prefix = match[1];
 			var id = match[2];
 			if(this.mapMarker.map) {
-				var name = id_prefix+"_html"+id;
+				var name = id_prefix+"html"+id;
 				//IE cannot change name attribute at runtime
 				var map = $(this.mapMarker.map.replace(/<map>/,"<map name='"+name+"'>"));
-				map.find("area").attr({title:attr.title,id:id_prefix+"_html_area"+id}).addClass("anno_instance"+this.instance);
+				map.find("area").attr({title:attr.title,id:id_prefix+"html_area"+id}).addClass("anno_instance"+this.instance);
 				marker.attr("title","");
 				marker.before(map);
 				marker[0].useMap = "#"+name;
@@ -237,7 +246,7 @@
 				var doc = points.documents[n.id_document];
 				cx = (n.x/doc.width)*images[n.id_document].width();
 				cy = (n.y/doc.height)*images[n.id_document].height();
-				var attr = {id:id_prefix+n.id_annotation};
+				var attr = {id:id_prefix+"_"+carto.instance+"_"+n.id_annotation};
 				if(callback)
 					attr = callback(n,attr);
 				carto.addMarker(
@@ -295,20 +304,22 @@
 					showURL: false,
 					extraClass: "carto",
 					bodyHandler: function(current) {
-						var id = this.id.match(/\d+/);
-						if(!$("#annotate_show_text"+id).size()) {
-							$("<div id='annotate_show_text"+id+"' style='display:none'><div style='margin:auto;text-align:center'><img src='"+carto.cfg.loaderImage+"' /></div></div>").appendTo("body");
-							$("#annotate_show_text"+id).load(
+						var id = this.id.match(/\d+$/);
+						var idText = "annotate_show_text_"+carto.instance+"_"+id;
+						if(!$("#"+idText).size()) {
+							$("<div id='"+idText+"' style='display:none'><div style='margin:auto;text-align:center'><img src='"+carto.cfg.loaderImage+"' /></div></div>")
+							.appendTo("body")
+							.load(
 								carto.cfg.loadAnnotationText,{id_annotation:id},
 								function() { 
 									if($.Tooltip.current)
-										$("#tooltip div.body").html($("#annotate_show_text"+id).html());
+										$("#tooltip div.body").html($("#"+idText).html());
 										if($("#tooltip").is(":visible"))
 											$.Tooltip.update();
 								}
 							);
 						}
-						return $("#annotate_show_text"+id).html(); 						
+						return $("#"+idText).html(); 						
 					}
 				});
 				$("#tooltip").unbind().click(function(e) {
@@ -336,10 +347,11 @@
 				//overlay window mode
 				markers.Tooltip({showBody:" ---- ",showURL:false})
 				.click(function(){
-					var id = this.id.match(/\d+/);
-					if(!$("#annotate_show_text"+id).size())
-						$("<div id='annotate_show_text"+id+"' style='display:none' class='jqmWindow'><div style='margin:auto;text-align:center'><img src='"+carto.loaderImage+"' /></div></div>").appendTo("body");
-					$("#annotate_show_text"+id).jqm({
+					var id = this.id.match(/\d+$/);
+					var idText = "annotate_show_text_"+carto.instance+"_"+id;
+					if(!$("#"+idText).size())
+						$("<div id='"+idText+"' style='display:none' class='jqmWindow'><div style='margin:auto;text-align:center'><img src='"+carto.loaderImage+"' /></div></div>").appendTo("body")
+					$("#"+idText).jqm({
 						onShow: function(h){
 							//mozilla cannot display flash movies when a position:fixed element is in the page
 							//explorer also has problems when the body element has padding

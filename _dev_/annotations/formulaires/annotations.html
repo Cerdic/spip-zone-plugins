@@ -69,10 +69,11 @@
 						var width =	$("#anno_map_coords").html("<img src='#CHEMIN{images/loader.gif}' />")
 						.parents("form").width();
 						$.getJSON("#URL_PAGE{get_image_info}&id_document="+val+"&width="+width+"&height=0",function(data){
+							var carto = $.data($("#annotated_map"+val)[0],"carto_objs")["forum"];
 							$("#anno_map_coords").html(data.imagePreview).find("img").click(function(e){
-								var coord = $.carto.get_xy_coord($(this),e);
+								var coord = carto.get_xy_coord($(this),e);
 								$(this).siblings(".map_marker,.map_marker_overlay").remove();
-								$.carto.addMarker(this,{xy:[coord.x,coord.y]},{id:"anno_insert_marker0"});
+								carto.addMarker(this,{xy:[coord.x,coord.y]},{id:"anno_insert_marker0"});
 								$("#url_site").val(parseInt(coord.x*data.attributes.width/$(this).width())+","+parseInt(coord.y*data.attributes.height/$(this).height()));
 							});
 						});

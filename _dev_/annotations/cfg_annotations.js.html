@@ -17,6 +17,8 @@ var	mapMarker_forum = {
 		hotSpot: [11,34]		
 };	
 var	cfg_standard = {
+		//name of the instance
+		name: "standard",
 		//url to load all document and annotations data
 		loadAnnotations: "#URL_PAGE{get_image_annotations}",
 		//url to load the coords of annotations for a given document
@@ -36,6 +38,7 @@ var	cfg_standard = {
 		deleteImage: "[(#CHEMIN{images/article-24.gif}|image_masque{#CHEMIN{images/supprimer.gif},mode=normal}|extraire_attribut{src})]"
 	};
 var cfg_forum = $.extend({},cfg_standard,{
+	name: "forum",
 	loadCoordsAnnotations: "#URL_PAGE{show_image_annotations_forum}",
 	loadAnnotationText: "#URL_PAGE{get_annotation_text_forum}"
 });
