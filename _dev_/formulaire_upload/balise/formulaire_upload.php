@@ -43,9 +43,10 @@ function balise_FORMULAIRE_UPLOAD_dyn(
 		return false;
 
 	if($type) {
-		if($type=="auteur")
+		if($type=="auteur") {
 			$ids['id_auteur'] = $proprietaire;
-		else if($x = intval(${"id_".$type})) {
+			$id = $proprietaire;
+		}	else if($x = intval(${"id_".$type})) {
 			$ids['id_'.$type] = $x;
 			$id = $x;	
 		}
