@@ -1,0 +1,106 @@
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/jqModal_confirm.css}|direction_css)"/>]
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/inscription2.css}|direction_css)"/>]
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/abonnement.css}|direction_css)"/>]
+
+<script src="#CHEMIN{javascript/jqModal.js}" type="text/javascript"></script>
+<script type="text/javascript">
+/* Overriding Javascript's Alert Dialog */
+function confirm(msg,callback) {
+  $('#confirm')
+    .jqmShow()
+    .find('p.jqmConfirmMsg')
+      .html(msg)
+    .end()
+    .find(':submit:visible')
+      .click(function(){
+        if(this.value == 'yes')
+          (typeof callback == 'string') ?
+            window.location.href = callback :
+            callback;
+        $('#confirm').jqmHide();
+      });
+}
+
+// trigger a confirm whenever links of class alert are pressed.
+$().ready(function() {
+  $('#confirm').jqm({overlay: 88, modal: true, trigger: false});
+  
+  // trigger a confirm whenever links of class alert are pressed.
+  $('a.confirm').click(function() { 
+    confirm('',this.href); 
+    return false;
+  });
+});
+</script>
+
+<div id="conteneur">
+
+<div id="menu">
+	
+	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+		#INCLURE{fond=inc/menu_abonnement}	
+	]
+	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{'',' '})
+		#INCLURE{fond=inc/menu_inscription2}	
+	]
+	
+	<div class="legend">
+		
+		<img src="#CHEMIN{'images/admin-12.gif'}" title="<:inscription2:fiche_adherent:>"> Admin<br/>
+		<img src="#CHEMIN{'images/redac-12.gif'}" title="<:inscription2:fiche_adherent:>"> Auteur<br/>
+		<img src="#CHEMIN{'images/adherent-12.gif'}" title="<:inscription2:fiche_adherent:>"> Adherent<br/>
+		<img src="#CHEMIN{'images/aconf-12.gif'}" title="<:inscription2:fiche_adherent:>"> A confirmer<br/>
+		<img src="#CHEMIN{'images/defaut-12.gif'}" title="<:inscription2:fiche_adherent:>"> Autre<br/>
+		
+	</div>
+	
+</div>	
+
+<div id="principal" style="margin-left:25%">
+	<h2><strong>Abonnements</strong></h2>
+        
+	
+	<table class="cadre-r">
+	<tr style="background-color : #E0E0E0 ;">
+	<td>Libelle</td>
+	<td>Nombre d'abonn&eacute;s</td><td>Montant</td>
+		
+	</tr>
+	
+	<?php
+	$result = spip_query("select a.libelle , count(b.id_abonnement) as 'n' , sum(b.montant) as 'pognon' from spip_abonnements a, spip_auteurs_elargis_abonnements b where a.id_abonnement = b.id_abonnement and b.validite <> '0000-00-00 00:00:00' group by b.id_abonnement");
+	while ($row = spip_fetch_array($result)){
+	echo "<tr><td>".$row['libelle']."</td>";
+	echo "<td>".$row['n']."</td>";
+	echo "<td>".$row['pognon']."</td></tr>";
+	}
+	
+	?>
+	</table>	
+
+
+
+<table class="cadre-r" style="margin-top:10px">
+	<tr style="background-color : #E0E0E0 ;">
+	<td>Num&eacute;ro</td>
+	<td>Diffusion payée</td><td>Montant</td>
+		
+	</tr>
+	
+	<?php
+	$result = spip_query("select a.titre , count(b.id_article) as 'n' , sum(b.montant) as 'pognon' from spip_articles a, spip_auteurs_elargis_articles b where a.id_article = b.id_article and b.statut_paiement = 'ok' group by b.id_article order by b.id_article desc");
+	while ($row = spip_fetch_array($result)){
+	echo "<tr><td>".$row['titre']."</td>";
+	echo "<td>".$row['n']."</td>";
+	echo "<td>".$row['pognon']."</td></tr>";
+	}
+	
+	?>
+	</table>
+	
+
+</div>
+
+</div>
+
+
