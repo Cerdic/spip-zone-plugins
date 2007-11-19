@@ -60,6 +60,9 @@ class cfg_formulaire
 		  'idnum' => array('#^\d+$#', 'chiffres', 'intval'),
 		  'pwd' => array('#^.{5}#', 'minimum 5 caract&egrave;res;'));
 	
+	/*
+	 * Constructeur de la classe
+	 */
 	function cfg_formulaire($nom, $vue = '', $cfg_id = '', $opt = array())
 	{
 		$this->nom = $nom;
@@ -93,6 +96,13 @@ class cfg_formulaire
 		$this->val = $this->sto->lire();
 	}
 
+
+	/*
+	 * Determine l'arborescence ou CFG doit chercher les valeurs deja enregistrees
+	 * si nom=toto, casier=chose/truc, cfg_id=2, 
+	 * cfg cherchera dans #CONFIG{toto/chose/truc/2}
+	 * 
+	 */
 	function nom_config()
 	{
 	    return $this->nom . ($this->casier ? '/' . $this->casier : '') .
@@ -115,10 +125,40 @@ class cfg_formulaire
 		if (!lire_fichier($fichier, $this->controldata)) {
 			return _L('erreur_lecture_') . $nom;
 		}
-		// recherche et stockage des parametres CFG
+		
+		// recherche et stockage des parametres de cfg
+		$this->recuperer_parametres();
+		// recherche et stockage des noms de champs de formulaire
+		return $this->recuperer_noms_champs();
+	}
+
+
+
+	/*
+	 * 
+	 * Recherche et stockage
+	 * des parametres passes a CFG
+	 * par #REM ou <!--
+	 * 
+	 */
+	function recuperer_parametres(){
+		// cas de #REM
 		preg_replace_callback('/(\[\(#REM\) ([a-z0-9]\w+)(\*)?=)(.*?)\]/sim',
 					array(&$this, 'post_params'), $this->controldata);
-
+					
+		// cas de <!--
+	}
+	
+	
+	/*
+	 * 
+	 * Recherche et stockage
+	 * des noms des champs (y) du formulaire
+	 * <input type="x" name="y"... />
+	 * 
+	 */	
+	function recuperer_noms_champs(){
+		
 		// recherche d'au moins un champ de formulaire pour savoir si la vue est valide
 		include_spip('inc/presentation'); // offrir les fonctions d'espace prive
 		include_spip('public/assembler');
@@ -155,9 +195,9 @@ class cfg_formulaire
 		    }
 	    }
 	    return '';
-	}
-
-
+	}	 
+	 
+	
 	/*
 	 * Verifie les autorisations 
 	 * d'affichage du formulaire
