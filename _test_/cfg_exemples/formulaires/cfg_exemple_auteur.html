@@ -1,0 +1,12 @@
+#CACHE{0}
+<div class="cfg_exemples_perso">
+Si je suis loggu&eacute;, le formulaire s'affiche...
+[(#SESSION{login}|?{' '})
+	<INCLURE{fond=formulaires/formulaire_cfg_vue}{env}>
+]
+
+Si afficher_toto = oui, TOTO s'affiche :
+[(#CONFIG{~[(#SESSION{login})]/afficher_toto}|=={oui}|?{' ',''})
+	<b>TOTO est là !</b>
+]		
+</div>

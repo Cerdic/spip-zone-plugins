@@ -1,0 +1,22 @@
+<h1>Formulaire pour spip_meta</h1>
+
+<h2>Un formulaire CFG contenant un inclure : <a href="#EVAL{_DIR_PLUGIN_CFG}fonds/cfg_testinclure.html">fonds/cfg_testinclure.html</a></h2>
+
+<p>Un formulaire qui boucle sur les rubriques racines du site.
+Si l'on passe l'option à oui, une liste d'article à sélectionner
+s'affichera après la validation du formulaire.
+</p>
+<p>
+<b>Code :</b><br />
+<code>&#035;CFG_ARBO{testinclure}</code><br />
+<code>&#035;FORMULAIRE_CFG{testinclure}</code>
+</p>
+
+#CFG_ARBO{testinclure}
+#FORMULAIRE_CFG{testinclure}
+
+<b>Code de fonds/cfg_testinclure</b>
+#CODE{fonds/cfg_testinclure.html}
+
+<b>Code de fonds/inc-articles-rubrique</b>
+#CODE{fonds/inc-articles-rubrique.html}
