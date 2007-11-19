@@ -47,6 +47,8 @@ function exec_mutualisation_dist() {
 
 	$nsite = 1;
 	foreach ($sites as $v) {
+		$nom_site=$stats=$plugins=$erreur=$version_installee="";
+
 		if (lire_fichier(_DIR_RACINE.$GLOBALS['mutualisation_dir'].'/'.$v.'/tmp/meta_cache.txt', $meta)
 		AND is_array($meta = @unserialize($meta))
 		AND $url = $meta['adresse_site']) {
