@@ -109,8 +109,8 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'admin_config_spipbb' => 'Activation de SpipBB',
 'admin_config_spipbb_info' => 'Cliquer sur Non pour d&eacute;sactiver SpipBB',
 'admin_config_prerequis' => 'Pr&eacute;requis',
-'admin_config_tables_ok' => 'Tables de SpipBB correctement install&eacute;es',
-'admin_config_tables_erreur' => '<b>Erreur : Tables de SpipBB mal install&eacute;es</b>',
+'admin_config_tables_ok' => 'Table de SpipBB correctement install&eacute;e',
+'admin_config_tables_erreur' => '<b>Erreur : Table de SpipBB mal install&eacute;e</b>',
 'admin_spip_mots_cles_ok' => 'Les mot-clefs sont bien activ&eacute;s dans SPIP',
 'admin_spip_mots_cles_erreur' => '<b>Erreur : Vous devez activer les mot-clefs de SPIP</b>',
 'admin_spip_mots_forums_ok' => 'Les mot-clefs associ&eacute;s aux forums sont bien activ&eacute;s dans SPIP',
@@ -121,6 +121,8 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'admin_action_swwords' => 'Gestion des mots',
 'admin_action_swlog' => 'Log du spam',
 'admin_action_ZZ_debug' => 'Debogage',
+'admin_plugin_requis_ok' => 'Plugin requis install&eacute;',
+'admin_plugin_requis_erreur' => 'Plugin requis manquant',
 
 // B
 'bio' => 'Petite biographie',

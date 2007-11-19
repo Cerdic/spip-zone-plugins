@@ -23,16 +23,20 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 
 include_spip('inc/spipbb');
-include_spip('inc/editer_article');
 
-if ( !empty($setmodules) and spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui' )
+if ( !empty($setmodules) )
 {
-	$file = basename(__FILE__);
-	$modules['01_general']['gestion'] = $file;
+	if ( spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui' ) {
+		$file = basename(__FILE__);
+		$modules['01_general']['gestion'] = $file;
+	}
 	return;
 }
+
+include_spip('inc/editer_article');
 
 // ------------------------------------------------------------------------------
 // [fr] Genere la page de gestion globale des forums

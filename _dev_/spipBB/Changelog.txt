@@ -5,6 +5,8 @@
  * passage en 0.3.1 - meilleurs controles
  * Filtrage (conditions d'acces et menus) des affichages exec=...
  * Correction bug meta spipbb_id_rubrique -> id_secteur
+ * Correction d'un gros bug dans les inclusions (menus admins) qui plantait spip en 192 (certaines versions)...
+ * passage en 0.3.2 - plantage corrige
 
 2007-11-18  chryjs  <chryjs!@!free!.!fr>
 

@@ -21,6 +21,7 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 if (defined("_INC_SPIPBB")) return; else define("_INC_SPIPBB", true);
 
 if (!function_exists('plugin_get_infos')) include_spip('inc/plugin');
@@ -316,8 +317,12 @@ function spipbb_init_mot_cle($mot,$groupe)
 // ------------------------------------------------------------------------------
 function spipbb_admin_gauche($rubrique_admin_courante="")
 {
-	spip_log('inc/spipbb.php : spipbb_admin_gauche START','spipbb');
-
+	spip_log('inc/spipbb.php : spipbb_admin_gauche START :'._DIR_PLUGIN_SPIPBB,'spipbb');
+	
+	if (!function_exists('generer_url_ecrire')) {
+		include_spip('inc/utils');
+		spip_log('inc/spipbb.php : spipbb_admin_gauche generer_url_ecrire not found','spipbb');
+	}
 	$modules = array();
 
 	$dir = @opendir(_DIR_PLUGIN_SPIPBB."exec/");
@@ -334,9 +339,14 @@ function spipbb_admin_gauche($rubrique_admin_courante="")
 			//	$modules['General']['Configuration'] = $file;
 			//	return;
 			//}
-			@include( _DIR_PLUGIN_SPIPBB . "exec/" . $file);
+			if ( is_readable( _DIR_PLUGIN_SPIPBB . "exec/" . $file) )
+				@include( _DIR_PLUGIN_SPIPBB . "exec/" . $file);
+			else
+				spip_log('inc/spipbb.php : spipbb_admin_gauche include impossible :'._DIR_PLUGIN_SPIPBB . "exec/" . $file,'spipbb');
 		}
 	}
+	spip_log('inc/spipbb.php : spipbb_admin_gauche include fin','spipbb');
+
 	@closedir($dir);
 	unset($setmodules);
 

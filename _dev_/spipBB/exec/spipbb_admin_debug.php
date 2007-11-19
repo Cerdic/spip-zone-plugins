@@ -22,6 +22,7 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 
 include_spip("inc/spipbb");
 

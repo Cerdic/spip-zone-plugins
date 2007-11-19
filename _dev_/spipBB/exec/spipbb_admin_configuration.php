@@ -23,6 +23,7 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 
 include_spip('inc/spipbb');
 
@@ -51,7 +52,7 @@ function exec_spipbb_admin_configuration()
 		creer_base();
 		$GLOBALS['spipbb']['config_tables']='oui';
 		spipbb_save_metas();
-		spip_log('spipbb : exec_spipbb_admin_configuration installation tables -fini');
+		spip_log('exec/spipbb_admin_configuration.php exec_spipbb_admin_configuration() installation tables -fini','spipbb');
 	}
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -71,8 +72,8 @@ function exec_spipbb_admin_configuration()
 	echo fin_boite_info(true);
 	echo spipbb_admin_gauche('spipbb_admin_configuration');
 
-	echo creer_colonne_droite($id_rubrique,true);
-	echo debut_droite($id_rubrique,true);
+	echo creer_colonne_droite('',true);
+	echo debut_droite('',true);
 
 	echo spipbb_admin_configuration($row);
 	if (spipbb_check_spip_config() and $GLOBALS['spipbb']['configure']=='oui') {
@@ -90,6 +91,7 @@ function exec_spipbb_admin_configuration()
 // ------------------------------------------------------------------------------
 function spipbb_admin_configuration()
 {
+	spip_log('exec/spipbb_admin_configuration.php spipbb_admin_configuration() DEBUT','spipbb');
 	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler'); // voir un charger fonction
 	$prerequis=true;
@@ -140,6 +142,7 @@ function spipbb_admin_configuration()
 			'lockmaint' => $GLOBALS['spipbb']['lockmaint'],
 			);
 	$res = recuperer_fond("prive/spipbb_admin_configuration",$contexte) ;
+	spip_log('exec/spipbb_admin_configuration.php spipbb_admin_configuration() END','spipbb');
 
 	return $res;
 } // spipbb_admin_configuration

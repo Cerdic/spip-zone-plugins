@@ -26,13 +26,16 @@
 // * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 
 include_spip('inc/spipbb');
 
-if ( !empty($setmodules) and spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui' )
+if ( !empty($setmodules) )
 {
-	$file = basename(__FILE__);
-	$modules['outils']['fromphpbb'] = $file;
+	if ( spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui' ) {
+		$file = basename(__FILE__);
+		$modules['outils']['fromphpbb'] = $file;
+	}
 	return;
 }
 

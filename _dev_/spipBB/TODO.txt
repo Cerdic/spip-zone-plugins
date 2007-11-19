@@ -9,7 +9,6 @@ Todo-list pour spipbb
 -** Installation par etapes
 -** Chaque fonction est soumise a config
 -** Utiliser les descriptions des mots cles (ajoutees dans lang/... mot_...)
--** Installation : "not configured" => Bouton/ case d'alerte + lien vers admin_config
 -** Gestion des annonces / postits / Fermes a tester /controler
 -** Affichage des annonces / postits / Fermes
 -** Affichage du profil a revoir
@@ -19,7 +18,7 @@ Todo-list pour spipbb
 -** Import phpBB : import des MP ? Option de depart ?
 -** Import phpBB : adresse IP des posteurs -> forums
 -** Import phpBB : Si pas Iniset, realisation par etapes de la partie 2 et 3 ? Precalcul a l'avance
--** mot cles ferme, postit, annonce : bug ne doivent s'appliquer qu'au message principal du thread
+-** mot cles ferme, postit, annonce : bug -> ils ne doivent s'appliquer qu'au message principal du thread
 -** Anti spam : sur le login, IP (ban)
 -** Envisager de controler l'etat de la config régulierement ? a chaque passsage dans un menu d'admin ?
 
