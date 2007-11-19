@@ -1,0 +1,241 @@
+#CACHE{3600,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+/* http://blog.html.it/layoutgala/ */
+[(#CONFIG{layoutgala/default_layout,33}|=={1}|?{' ',''})/* 1 */
+div#wrapper{float:left;width:100%}
+div#content{margin: 0 25%}
+div#navigation{float:left;width:25%;margin-left:-100%}
+div#extra{float:left;width:25%;margin-left:-25%}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={2}|?{' ',''})/* 2 */
+div#wrapper{float:left;width:100%}
+div#content{margin: 0 25%}
+div#navigation{float:left;width:25%;margin-left:-25%}
+div#extra{float:left;width:25%;margin-left:-100%}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={3}|?{' ',''})/* 3 */
+div#wrapper{float:left;width:100%}
+div#content{margin-right: 50%}
+div#navigation{float:left;width:25%;margin-left:-50%}
+div#extra{float:left;width:25%;margin-left:-25%}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={4}|?{' ',''})/* 4 */
+div#wrapper{float:left;width:100%}
+div#content{margin-right: 50%}
+div#navigation{float:left;width:25%;margin-left:-25%}
+div#extra{float:left;width:25%;margin-left:-50%}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={5}|?{' ',''})/* 5 */
+div#wrapper{float:left;width:100%}
+div#content{margin-left: 50%}
+div#navigation{float:left;width:25%;margin-left:-100%}
+div#extra{float:left;width:25%;margin-left:-75%}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={6}|?{' ',''})/* 6 */
+div#wrapper{float:left;width:100%}
+div#content{margin-left: 50%}
+div#navigation{float:left;width:25%;margin-left:-75%}
+div#extra{float:left;width:25%;margin-left:-100%}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={7}|?{' ',''})/* 7 */
+div#container{width:#CONFIG{layoutgala/largeurconteneur,900}px;margin:0 auto}
+div#wrapper{float:left;width:100%}
+div#content{margin: 0 #CONFIG{layoutgala/largeurmenudroit,140}px 0 #CONFIG{layoutgala/largeurmenugauche,160}px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px;margin-left:-#CONFIG{layoutgala/largeurconteneur,900}px}
+div#extra{float:left;width:#CONFIG{layoutgala/largeurmenudroit,140}px;margin-left:-#CONFIG{layoutgala/largeurmenudroit,140}px}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={8}|?{' ',''})/* 8 */
+div#container{width:#CONFIG{layoutgala/largeurconteneur,900}px;margin:0 auto}
+div#wrapper{float:left;width:100%}
+div#content{margin: 0 #CONFIG{layoutgala/largeurmenugauche,160}px 0 #CONFIG{layoutgala/largeurmenudroit,140}px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px;margin-left:-#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{float:left;width:#CONFIG{layoutgala/largeurmenudroit,140}px;margin-left:-#CONFIG{layoutgala/largeurconteneur,900}px}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={9}|?{' ',''})/* 9 */
+div#container{width:#CONFIG{layoutgala/largeurconteneur,900}px;margin:0 auto}
+div#wrapper{float:left;width:100%}
+div#content{margin-right:[(#CONFIG{layoutgala/largeurmenugauche,160}|plus{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px;margin-left:-[(#CONFIG{layoutgala/largeurmenugauche,160}|plus{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#extra{float:left;width:#CONFIG{layoutgala/largeurmenudroit,140}px;margin-left:-#CONFIG{layoutgala/largeurmenudroit,140}px}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={10}|?{' ',''})/* 10 */
+div#container{width:#CONFIG{layoutgala/largeurconteneur,900}px;margin:0 auto}
+div#wrapper{float:left;width:100%}
+div#content{margin-right:[(#CONFIG{layoutgala/largeurmenugauche,160}|plus{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px;margin-left:-#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{float:left;width:#CONFIG{layoutgala/largeurmenudroit,140}px;margin-left:-[(#CONFIG{layoutgala/largeurmenugauche,160}|plus{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={11}|?{' ',''})/* 11 */
+div#container{width:#CONFIG{layoutgala/largeurconteneur,900}px;margin:0 auto}
+div#wrapper{float:left;width:100%}
+div#content{margin-left: [(#CONFIG{layoutgala/largeurmenugauche,160}|plus{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px;margin-left:-#CONFIG{layoutgala/largeurconteneur,900}px}
+div#extra{float:left;width:#CONFIG{layoutgala/largeurmenudroit,140}px;margin-left:-[(#CONFIG{layoutgala/largeurconteneur,900}|moins{#CONFIG{layoutgala/largeurmenugauche,160}})]px}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={12}|?{' ',''})/* 12 */
+div#container{width:#CONFIG{layoutgala/largeurconteneur,900}px;margin:0 auto}
+div#wrapper{float:left;width:100%}
+div#content{margin-left: [(#CONFIG{layoutgala/largeurmenugauche,160}|plus{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px;margin-left:-[(#CONFIG{layoutgala/largeurconteneur,900}|moins{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#extra{float:left;width:#CONFIG{layoutgala/largeurmenudroit,140}px;margin-left:-#CONFIG{layoutgala/largeurconteneur,900}px}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={13}|?{' ',''})/* 13 */
+div#wrapper{float:left;width:100%;}
+div#content{margin: 0 #CONFIG{layoutgala/largeurmenudroit,140}px 0 #CONFIG{layoutgala/largeurmenugauche,160}px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px;margin-left:-100%}
+div#extra{float:left;width:#CONFIG{layoutgala/largeurmenudroit,140}px;margin-left:-#CONFIG{layoutgala/largeurmenudroit,140}px}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={14}|?{' ',''})/* 14 */
+div#wrapper{float:left;width:100%}
+div#content{margin: 0 #CONFIG{layoutgala/largeurmenugauche,160}px 0 #CONFIG{layoutgala/largeurmenudroit,140}px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px;margin-left:-#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{float:left;width:#CONFIG{layoutgala/largeurmenudroit,140}px;margin-left:-100%}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={15}|?{' ',''})/* 15 */
+div#wrapper{float:left;width:100%}
+div#content{margin-right: [(#CONFIG{layoutgala/largeurmenugauche,160}|plus{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px;margin-left:-[(#CONFIG{layoutgala/largeurmenugauche,160}|plus{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#extra{float:left;width:#CONFIG{layoutgala/largeurmenudroit,140}px;margin-left:-#CONFIG{layoutgala/largeurmenudroit,140}px}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={16}|?{' ',''})/* 16 */
+div#wrapper{float:left;width:100%}
+div#content{margin-right: [(#CONFIG{layoutgala/largeurmenugauche,160}|plus{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px;margin-left:-#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{float:left;width:#CONFIG{layoutgala/largeurmenudroit,140}px;margin-left:-[(#CONFIG{layoutgala/largeurmenugauche,160}|plus{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={17}|?{' ',''})/* 17 */
+div#wrapper{float:right;width: 100%;margin-left: -[(#CONFIG{layoutgala/largeurmenugauche,160}|plus{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#content{margin-left:[(#CONFIG{layoutgala/largeurmenugauche,160}|plus{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#navigation{float:right;width:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{float:right;width:#CONFIG{layoutgala/largeurmenudroit,140}px}
+div#footer{clear:right;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={18}|?{' ',''})/* 18 */
+div#wrapper{float:right;width: 100%;margin-left: -[(#CONFIG{layoutgala/largeurmenugauche,160}|plus{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#content{margin-left:[(#CONFIG{layoutgala/largeurmenugauche,160}|plus{#CONFIG{layoutgala/largeurmenudroit,140}})]px}
+div#navigation{float:left;width: #CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{float:right;width:#CONFIG{layoutgala/largeurmenudroit,140}px}
+div#footer{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={19}|?{' ',''})/* 19 */
+div#wrapper{float:left;width:100%}
+div#content{margin: 0 33% 0 #CONFIG{layoutgala/largeurmenugauche,160}px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px;margin-left:-100%}
+div#extra{float:left;width:33%;margin-left:-33%}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={20}|?{' ',''})/* 20 */
+div#wrapper{float:left;width:100%}
+div#content{margin: 0 #CONFIG{layoutgala/largeurmenudroit,140}px 0 33%}
+div#navigation{float:left;width:33%;margin-left:-100%}
+div#extra{float:left;width:#CONFIG{layoutgala/largeurmenudroit,140}px;margin-left:-#CONFIG{layoutgala/largeurmenudroit,140}px}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={21}|?{' ',''})/* 21 */
+div#wrapper{float:left;width:100%;margin-left:-25%}
+div#content{margin: 0 #CONFIG{layoutgala/largeurmenugauche,160}px 0 25%}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px;margin-left:-#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{float:left;width:25%}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={22}|?{' ',''})/* 22 */
+div#wrapper{float:left;width:100%;margin-left:-#CONFIG{layoutgala/largeurmenudroit,140}px}
+div#content{margin: 0 25% 0 #CONFIG{layoutgala/largeurmenudroit,140}px}
+div#navigation{float:left;width:25%;margin-left:-25%}
+div#extra{float:left;width:#CONFIG{layoutgala/largeurmenudroit,140}px}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={23}|?{' ',''})/* 23 */
+div#wrapper{float:left;width:100%;margin-left:-#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#content{margin-left:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#navigation{float:right;width:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{float:right;clear:right;width:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#footer{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={24}|?{' ',''})/* 24 */
+div#wrapper{float:right;width:100%;margin-left:-#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#content{margin-left:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{float:left;clear:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#footer{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={25}|?{' ',''})/* 25 */
+div#wrapper{float:left;width:100%;margin-left:-33%}
+div#content{margin-left:33%}
+div#navigation{float:right;width:32.9%}
+div#extra{float:right;clear:right;width:32.9%}
+div#footer{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={26}|?{' ',''})/* 26 */
+div#wrapper{float:right;width:80%;}
+div#navigation{float:left;width:20%}
+div#extra{float:left;clear:left;width:20%}
+div#footer{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={62}|?{' ',''})/* 26 modifie - identifiant 62 */
+div#wrapper{float:right;width:80%;margin-left:-.5%}
+div#navigation{float:left;width:20.5%}
+div#extra{float:left;clear:left;width:20%}
+div#footer{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={27}|?{' ',''})/* 27 */
+div#navigation{float:left;width:50%}
+div#extra{float:left;width:49.9%}
+div#footer{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={28}|?{' ',''})/* 28 */
+div#navigation{float:right;width:50%}
+div#extra{float:right;width:49.9%}
+div#footer{clear:right;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={29}|?{' ',''})/* 29 */
+div#wrapper{float:right;width:70%}
+div#navigation{float:left;width:29.9%}
+div#extra{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={30}|?{' ',''})/* 30 */
+div#wrapper{float:left;width:70%}
+div#navigation{float:right;width:29.9%}
+div#extra{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={31}|?{' ',''})/* 31 */
+div#wrapper{float:left;width:100%;}
+div#content{margin-left:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px;margin-left:-100%}
+div#extra{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={32}|?{' ',''})/* 32 */
+div#wrapper{float:left;width:100%}
+div#content{margin-right:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px;margin-left:-#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{clear:left;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={33}|?{' ',''})/* 33 */
+div#container{width:#CONFIG{layoutgala/largeurconteneur,900}px;margin:0 auto}
+div#content{float:left;width:[(#CONFIG{layoutgala/largeurconteneur,900}|plus{-#CONFIG{layoutgala/largeurmenugauche,160}})]px}
+div#navigation{float:right;width:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{float:right;clear:right;width:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#footer{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={34}|?{' ',''})/* 34 */
+div#container{width:#CONFIG{layoutgala/largeurconteneur,900}px;margin:0 auto}
+div#content{float:right;width:[(#CONFIG{layoutgala/largeurconteneur,900}|plus{-#CONFIG{layoutgala/largeurmenugauche,160}})]px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{float:left;clear:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#footer{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={35}|?{' ',''})/* 35 */
+div#container{width:#CONFIG{layoutgala/largeurconteneur,900}px;margin:0 auto}
+div#content{float:left;width:[(#CONFIG{layoutgala/largeurconteneur,900}|plus{-#CONFIG{layoutgala/largeurmenugauche,160}})]px}
+div#navigation{float:right;width:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{float:left;width:[(#CONFIG{layoutgala/largeurconteneur,900}|plus{-#CONFIG{layoutgala/largeurmenugauche,160}})]px}
+div#footer{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={36}|?{' ',''})/* 36 */
+div#container{width:#CONFIG{layoutgala/largeurconteneur,900}px;margin:0 auto}
+div#content{float:right;width:[(#CONFIG{layoutgala/largeurconteneur,900}|plus{-#CONFIG{layoutgala/largeurmenugauche,160}})]px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{float:right;width:[(#CONFIG{layoutgala/largeurconteneur,900}|plus{-#CONFIG{layoutgala/largeurmenugauche,160}})]px}
+div#footer{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={37}|?{' ',''})/* 37 */
+div#container{width:#CONFIG{layoutgala/largeurconteneur,900}px;margin:0 auto}
+div#content{float:left;width:[(#CONFIG{layoutgala/largeurconteneur,900}|moins{#CONFIG{layoutgala/largeurmenugauche,160}})]px}
+div#navigation{float:right;width:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={38}|?{' ',''})/* 38 */
+div#container{width:#CONFIG{layoutgala/largeurconteneur,900}px;margin:0 auto}
+div#content{float:right;width:[(#CONFIG{layoutgala/largeurconteneur,900}|moins{#CONFIG{layoutgala/largeurmenugauche,160}})]px}
+div#navigation{float:left;width:#CONFIG{layoutgala/largeurmenugauche,160}px}
+div#extra{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={39}|?{' ',''})/* 39 */
+div#container{width:#CONFIG{layoutgala/largeurconteneur,900}px;margin:0 auto}
+div#navigation{float:left;width:50%}
+div#extra{float:right;width:50%}
+div#footer{clear:both;width:100%}
+][(#CONFIG{layoutgala/default_layout,33}|=={40}|?{' ',''})/* 40 */
+div#container{width:#CONFIG{layoutgala/largeurconteneur,900}px;margin:0 auto}
+div#navigation{float:right;width:50%}
+div#extra{float:left;width:50%}
+div#footer{clear:both;width:100%}
+]

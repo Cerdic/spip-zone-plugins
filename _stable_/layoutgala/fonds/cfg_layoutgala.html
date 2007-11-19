@@ -1,0 +1,214 @@
+[(#REM) titre=Positionnement]
+[(#REM) icone=img_pack/layoutgala.png]
+
+[(#SET{logo,
+<img src='#DOSSIER_SQUELETTE/../img_pack/layoutgala.png' width='24' height='24' alt='Logo LayoutGala' style="float:#LANG_RIGHT;" />
+})]
+
+<!-- refus=#GET{logo}<p>
+Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres.</p>
+<p>Pour en savoir plus, voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>.</p>
+-->
+
+<!-- descriptif=
+
+#GET{logo}
+<h4>Configuration du positionnement de la dist</h4>
+<p>Bas&eacute; sur <a href="http://blog.html.it/layoutgala/" hreflang="en">Layout Gala</a></p>
+-->
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset><legend><:cfglayoutgala:largeurs_colonnes:></legend>
+	<label for="lg_largeurconteneur">Largeur du conteneur&nbsp;:</label>
+	<input type="text" name="largeurconteneur" id="lg_largeurconteneur" value="[(#ENV{largeurconteneur,900})]" size="4" class="fondl" /><br />
+	<label for="lg_largeurmenugauche">Largeur du menu principal&nbsp;:</label>
+	<input type="text" name="largeurmenugauche" id="lg_largeurmenugauche" value="[(#ENV{largeurmenugauche,160})]" size="2" class="fondl" /><br />
+	<label for="lg_largeurmenudroit">Largeur du menu secondaire (si séparé du premier)&nbsp;:</label>
+	<input type="text" name="largeurmenudroit" id="lg_largeurmenudroit" value="[(#ENV{largeurmenudroit,140})]" size="2" class="fondl" /><br />
+	<!-- non utilisé et c'est bien dommage !
+	<label for="lg_maxlargeurimage">Largeur maximum des images (les images plus grandes seront automatiquement réduites)&nbsp;:</label>
+	<input type="text" name="maxlargeurimage" id="lg_maxlargeurimage" value="[(#ENV{maxlargeurimage,400})]" size="2" class="fondl" />
+	-->
+</fieldset>
+<fieldset><legend><:cfglayoutgala:layout_gala:></legend>
+<table style="border:1px solid #888;border-collapse:collapse;" class="spip">
+	<thead class="spip">
+		<tr class="spip">
+			<th class="spip" style="border:1px solid #888;"><:cfglayoutgala:layout_agencement:></th>
+			<th class="spip" style="border:1px solid #888;" title="<:cfglayoutgala:layout_defaut_title:>"><:cfglayoutgala:layout_defaut:></th>
+		</tr>
+	</thead>
+	<tbody class="spip">
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout001.gif}" alt="Three percentage columns" title="Three percentage columns" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout11" value="01"[ checked="(#ENV{default_layout,33}|=={01}|?{checked})"] /><label for="lg_default_layout11">&nbsp;01</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout002.gif}" alt="Three percentage columns (InverseColor)" title="Three percentage columns (InverseColor)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout12" value="02"[ checked="(#ENV{default_layout,33}|=={02}|?{checked})"] /><label for="lg_default_layout12">&nbsp;02</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout003.gif}" alt="Three percentage columns (Right)" title="Three percentage columns (Right)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout13" value="03"[ checked="(#ENV{default_layout,33}|=={03}|?{checked})"] /><label for="lg_default_layout13">&nbsp;03</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout004.gif}" alt="Three percentage columns (Right InverseColor)" title="Three percentage columns (Right InverseColor)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout14" value="04"[ checked="(#ENV{default_layout,33}|=={04}|?{checked})"] /><label for="lg_default_layout14">&nbsp;04</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout005.gif}" alt="Three percentage columns (Left)" title="Three percentage columns (Left)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout15" value="05"[ checked="(#ENV{default_layout,33}|=={05}|?{checked})"] /><label for="lg_default_layout15">&nbsp;05</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout006.gif}" alt="Three percentage columns (Left InverseColor)" title="Three percentage columns (Left InverseColor)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout16" value="06"[ checked="(#ENV{default_layout,33}|=={06}|?{checked})"] /><label for="lg_default_layout16">&nbsp;06</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout007.gif}" alt="Three fixed columns" title="Three fixed columns" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout17" value="07"[ checked="(#ENV{default_layout,33}|=={07}|?{checked})"] /><label for="lg_default_layout17">&nbsp;07</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout008.gif}" alt="Three fixed columns (InverseColor)" title="Three fixed columns (InverseColor)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout18" value="08"[ checked="(#ENV{default_layout,33}|=={08}|?{checked})"] /><label for="lg_default_layout18">&nbsp;08</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout009.gif}" alt="Three fixed columns (Right)" title="Three fixed columns (Right)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout19" value="09"[ checked="(#ENV{default_layout,33}|=={09}|?{checked})"] /><label for="lg_default_layout19">&nbsp;09</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout010.gif}" alt="Three fixed columns (Right InverseColor)" title="Three fixed columns (Right InverseColor)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout20" value="10"[ checked="(#ENV{default_layout,33}|=={10}|?{checked})"] /><label for="lg_default_layout20">&nbsp;10</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout011.gif}" alt="Three fixed columns (Left)" title="Three fixed columns (Left)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout21" value="11"[ checked="(#ENV{default_layout,33}|=={11}|?{checked})"] /><label for="lg_default_layout21">&nbsp;11</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout012.gif}" alt="Three fixed columns (Left InverseColor)" title="Three fixed columns (Left InverseColor)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout22" value="12"[ checked="(#ENV{default_layout,33}|=={12}|?{checked})"] /><label for="lg_default_layout22">&nbsp;12</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout013.gif}" alt="Liquid, secondary columns fixed-width" title="Liquid, secondary columns fixed-width" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout23" value="13"[ checked="(#ENV{default_layout,33}|=={13}|?{checked})"] /><label for="lg_default_layout23">&nbsp;13</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout014.gif}" alt="Liquid, secondary columns fixed-width (InverseColor)" title="Liquid, secondary columns fixed-width (InverseColor)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout24" value="14"[ checked="(#ENV{default_layout,33}|=={14}|?{checked})"] /><label for="lg_default_layout24">&nbsp;14</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout015.gif}" alt="Liquid, secondary columns fixed-width (Right)" title="Liquid, secondary columns fixed-width (Right)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout25" value="15"[ checked="(#ENV{default_layout,33}|=={15}|?{checked})"] /><label for="lg_default_layout25">&nbsp;15</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout016.gif}" alt="Liquid, secondary columns fixed-width (Right InverseColor)" title="Liquid, secondary columns fixed-width (Right InverseColor)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout26" value="16"[ checked="(#ENV{default_layout,33}|=={16}|?{checked})"] /><label for="lg_default_layout26">&nbsp;16</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout017.gif}" alt="Liquid, secondary columns fixed-width (Left)" title="Liquid, secondary columns fixed-width (Left)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout27" value="17"[ checked="(#ENV{default_layout,33}|=={17}|?{checked})"] /><label for="lg_default_layout27">&nbsp;17</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout018.gif}" alt="Liquid, secondary columns fixed-width (Left InverseColor)" title="Liquid, secondary columns fixed-width (Left InverseColor)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout28" value="18"[ checked="(#ENV{default_layout,33}|=={18}|?{checked})"] /><label for="lg_default_layout28">&nbsp;18</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout019.gif}" alt="Liquid, three columns, hybrid widths" title="Liquid, three columns, hybrid widths" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout29" value="19"[ checked="(#ENV{default_layout,33}|=={19}|?{checked})"] /><label for="lg_default_layout29">&nbsp;19</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout020.gif}" alt="Liquid, three columns, hybrid widths (InverseColor)" title="Liquid, three columns, hybrid widths (InverseColor)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout30" value="20"[ checked="(#ENV{default_layout,33}|=={20}|?{checked})"] /><label for="lg_default_layout30">&nbsp;20</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout021.gif}" alt="Liquid, three columns, hybrid widths (Right)" title="Liquid, three columns, hybrid widths (Right)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout31" value="21"[ checked="(#ENV{default_layout,33}|=={21}|?{checked})"] /><label for="lg_default_layout31">&nbsp;21</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout022.gif}" alt="Liquid, three columns, hybrid widths (Right InverseColor)" title="Liquid, three columns, hybrid widths (Right InverseColor)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout32" value="22"[ checked="(#ENV{default_layout,33}|=={22}|?{checked})"] /><label for="lg_default_layout32">&nbsp;22</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout023.gif}" alt="Two columns liquid, side fixed" title="Two columns liquid, side fixed" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout33" value="23"[ checked="(#ENV{default_layout,33}|=={23}|?{checked})"] /><label for="lg_default_layout33">&nbsp;23</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout024.gif}" alt="Two columns liquid, side fixed" title="Two columns liquid, side fixed" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout34" value="24"[ checked="(#ENV{default_layout,33}|=={24}|?{checked})"] /><label for="lg_default_layout34">&nbsp;24</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout025.gif}" alt="Two percentage columns" title="Two percentage columns" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout35" value="25"[ checked="(#ENV{default_layout,33}|=={25}|?{checked})"] /><label for="lg_default_layout35">&nbsp;25</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout026.gif}" alt="Two percentage columns" title="Two percentage columns" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout36" value="26"[ checked="(#ENV{default_layout,33}|=={26}|?{checked})"] /><label for="lg_default_layout36">&nbsp;26</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout027.gif}" alt="One column liquid and two halves" title="One column liquid and two halves" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout37" value="27"[ checked="(#ENV{default_layout,33}|=={27}|?{checked})"] /><label for="lg_default_layout37">&nbsp;27</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout028.gif}" alt="One column liquid and two halves (InverseColor)" title="One column liquid and two halves (InverseColor)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout38" value="28"[ checked="(#ENV{default_layout,33}|=={28}|?{checked})"] /><label for="lg_default_layout38">&nbsp;28</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout029.gif}" alt="Two percentage columns and one larger" title="Two percentage columns and one larger" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout39" value="29"[ checked="(#ENV{default_layout,33}|=={29}|?{checked})"] /><label for="lg_default_layout39">&nbsp;29</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout030.gif}" alt="Two percentage columns and one larger (Right)" title="Two percentage columns and one larger (Right)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout40" value="30"[ checked="(#ENV{default_layout,33}|=={30}|?{checked})"] /><label for="lg_default_layout40">&nbsp;30</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout031.gif}" alt="Two columns liquid, fixed side and large one" title="Two columns liquid, fixed side and large one" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout41" value="31"[ checked="(#ENV{default_layout,33}|=={31}|?{checked})"] /><label for="lg_default_layout41">&nbsp;31</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout032.gif}" alt="Two columns liquid, fixed side and large one (Right)" title="Two columns liquid, fixed side and large one (Right)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout42" value="32"[ checked="(#ENV{default_layout,33}|=={32}|?{checked})"] /><label for="lg_default_layout42">&nbsp;32</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout033.gif}" alt="Two colums fixed (Right)" title="Two colums fixed (Right)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout43" value="33"[ checked="(#ENV{default_layout,33}|=={33}|?{checked})"] /><label for="lg_default_layout43">&nbsp;33</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout034.gif}" alt="Two colums fixed" title="Two colums fixed" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout44" value="34"[ checked="(#ENV{default_layout,33}|=={34}|?{checked})"] /><label for="lg_default_layout44">&nbsp;34</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout035.gif}" alt="Two colums fixed (ShortLeft)" title="Two colums fixed (ShortLeft)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout45" value="35"[ checked="(#ENV{default_layout,33}|=={35}|?{checked})"] /><label for="lg_default_layout45">&nbsp;35</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout036.gif}" alt="Two colums fixed (ShortRight)" title="Two colums fixed (ShortRight)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout46" value="36"[ checked="(#ENV{default_layout,33}|=={36}|?{checked})"] /><label for="lg_default_layout46">&nbsp;36</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout037.gif}" alt="Two colums fixed (Right)" title="Two colums fixed (Right)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout47" value="37"[ checked="(#ENV{default_layout,33}|=={37}|?{checked})"] /><label for="lg_default_layout47">&nbsp;37</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout038.gif}" alt="Two colums fixed" title="Two colums fixed" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout48" value="38"[ checked="(#ENV{default_layout,33}|=={38}|?{checked})"] /><label for="lg_default_layout48">&nbsp;38</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout039.gif}" alt="One column fixed and two halves (Right)" title="One column fixed and two halves (Right)" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout49" value="39"[ checked="(#ENV{default_layout,33}|=={39}|?{checked})"] /><label for="lg_default_layout49">&nbsp;39</label></td>
+		</tr>
+		<tr class="spip">
+			<td class="spip" style="border:1px solid #888;"><img src="#CHEMIN{img_pack/layout040.gif}" alt="One column fixed and two halves" title="One column fixed and two halves" /></td>
+			<td class="spip" style="border:1px solid #888;"><input type="radio" name="default_layout" id="lg_default_layout50" value="40"[ checked="(#ENV{default_layout,33}|=={40}|?{checked})"] /><label for="lg_default_layout50">&nbsp;40</label></td>
+		</tr>
+	</tbody>
+</table>
+</fieldset>
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</form>
+
