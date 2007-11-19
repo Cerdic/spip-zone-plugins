@@ -136,7 +136,7 @@
 				$("a.annotate_action_delete").click(function(){
 					var id = $(this).parent().siblings(":first").text();
 					var points = {ids:[{id_annotation:id}]};
-					annotate_window.deleteAnnotations(postData,points,function(answer){
+					carto.deleteAnnotations(postData,points,function(answer){
 						points_data.ids = $.grep(points_data.ids,function(n,i) {
 							return !(n.id_annotation==id); 
 						});

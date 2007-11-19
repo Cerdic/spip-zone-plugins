@@ -47,7 +47,7 @@ function Annotations_insert_head($flux) {
 				if(!scripts.length) {
 					//check for the annotation window
 					if(jQuery("#annotate_window").size()) {
-						options.success = function() {$.carto.annotate_window.ready = true};
+						options.success = null;
 						options.url = "'.url_absolue(find_in_path('javascript/jquery.annotations-window.js')).'";
 						jQuery.ajax(options);			
 					}

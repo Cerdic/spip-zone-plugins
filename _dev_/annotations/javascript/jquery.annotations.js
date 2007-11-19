@@ -73,15 +73,18 @@
 		addMarker: function(selector,coord,attr) {
 		  var carto = this;
 			attr = attr || {};
+						
+			selector = $(selector);
+			
 			//store the carto instance 
-			var carto_objs, selector = $(selector);
+			var carto_objs;
 			if(!(carto_objs = $.data(selector[0],"carto_objs")))
 				carto_objs = $.data(selector[0],"carto_objs",{});
 			if(!carto_objs[this.cfg.name]) {
 				carto_objs[this.cfg.name] = this;
 				$.data(selector[0],"carto_objs",carto_objs);
 			}
-				
+	
 			var container = selector.parent();
 			//create the container if it is not present
 			if(!container.is(".marker_container")) {
@@ -240,6 +243,18 @@
 				callback = id_prefix;
 				id_prefix = null;
 			}
+
+			//store the carto instance 
+			var carto_objs; 
+			$.each(images, function(i,n) {
+				if(!(carto_objs = $.data(n[0],"carto_objs")))
+					carto_objs = $.data(n[0],"carto_objs",{});
+				if(!carto_objs[carto.cfg.name]) {
+					carto_objs[carto.cfg.name] = carto;
+					$.data(n[0],"carto_objs",carto_objs);
+				}
+			});			
+			
 			id_prefix = id_prefix || "map_marker";
 			$.each(points.ids,function(i,n){
 				var cx,cy;
