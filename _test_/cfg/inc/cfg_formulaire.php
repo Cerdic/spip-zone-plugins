@@ -53,6 +53,8 @@ class cfg_formulaire
 	var $val = array();
 // pour tracer les valeurs modifiees
 	var $log_modif = '';
+// stockage du fond compile par recuperer_fond()
+	var $fond_compile = '';
 // configuration des types
 //TODO traductions
 	var $types = array(
@@ -79,6 +81,14 @@ class cfg_formulaire
 
 		$this->_permise = $this->autoriser();
 		
+		/*
+		 * Cas des champs multi, si des champs (Y)
+		 * sont declares id par la classe cfg_id,
+		 * <input type='x' name='Yn' class='cfg_id'>
+		 * on les ajoute dans le chemin pour retrouver les donnees
+		 * #CONFIG{.../y1/y2/y3/...}
+		 * 
+		 */
 		if (_request('_cfg_affiche')) {
 			$this->cfg_id = $sep = '';
 			foreach ($this->champs_id as $name) {
@@ -147,9 +157,25 @@ class cfg_formulaire
 					array(&$this, 'post_params'), $this->controldata);
 					
 		// cas de <!--
+		// liste des post-proprietes de l'objet cfg, lues apres recuperer_fond()
+		// et stockees dans <!-- param=valeur -->
+		$this->rempar = array(array());
+		if (preg_match_all('/<!-- [a-z0-9]\w+\*?=/i', $this->controldata, $this->rempar)) {
+			// il existe des champs <!-- param=valeur -->, on les stocke
+			$this->recuperer_fond();
+			$this->current_rempar = 0;
+			$this->fond_compile = preg_replace_callback('/(<!-- ([a-z0-9]\w+)(\*)?=)(.*?)-->/sim',
+								array(&$this, 'post_params'), $this->fond_compile);
+			// s'il en reste : il y a un probleme !
+			if (preg_match('/<!-- [a-z0-9]\w+\*?=/', $this->fond_compile)) {
+				die('erreur manque parametre externe: '
+					. htmlentities(var_export($this->rempar, true)));
+			}
+		}
+
 	}
 	
-	
+
 	/*
 	 * 
 	 * Recherche et stockage
@@ -157,16 +183,12 @@ class cfg_formulaire
 	 * <input type="x" name="y"... />
 	 * 
 	 */	
-	function recuperer_noms_champs(){
-		
+	function recuperer_noms_champs(){	
 		// recherche d'au moins un champ de formulaire pour savoir si la vue est valide
-		include_spip('inc/presentation'); // offrir les fonctions d'espace prive
-		include_spip('public/assembler');
-		$fond_compile = recuperer_fond('fonds/cfg_' . $this->vue);
-
+		$this->recuperer_fond();
 		if (!preg_match_all(
 		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio|hidden)") name="(\w+)(\[\])?"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?( multiple=)?[^>]*?>#ims',
-						$fond_compile, $matches, PREG_SET_ORDER)) {
+						$this->fond_compile, $matches, PREG_SET_ORDER)) {
 			return _L('pas_de_champs_dans_') . $nom;
 		}
 		
@@ -197,6 +219,24 @@ class cfg_formulaire
 	    return '';
 	}	 
 	 
+	
+	/*
+	 * 
+	 * Compiler le fond CFG si ce n'est pas fait
+	 * 
+	 */
+	function recuperer_fond($contexte = array(), $forcer = false){
+		if (!$this->fond_compile OR $forcer){
+			include_spip('inc/presentation'); // offrir les fonctions d'espace prive
+			include_spip('public/assembler');
+			$this->fond_compile = recuperer_fond(
+					'fonds/cfg_' . $this->vue,
+					$this->val 
+						? array_merge($contexte, $this->val) 
+						: $contexte);
+		}
+	}
+	
 	
 	/*
 	 * Verifie les autorisations 
@@ -308,6 +348,7 @@ class cfg_formulaire
 	function controle()
 	{
 	    $return = '';
+
 		foreach ($this->champs as $name => $def) {
 			// enregistrement des valeurs postees
 			$oldval = $this->val[$name];
@@ -343,7 +384,6 @@ class cfg_formulaire
 	 */
 	function formulaire($contexte = array())
 	{
-
 		if (!find_in_path('fonds/cfg_' . $this->vue . '.html'))
 			return '';
 
@@ -357,28 +397,11 @@ class cfg_formulaire
 		    '&lang=' . $GLOBALS['spip_lang'] .
 		    '&arg=' . $arg .
 		    '&hash=' .  calculer_action_auteur('-' . $arg);
-		include_spip('inc/presentation'); // offrir les fonctions d'espace prive
-		include_spip('public/assembler');
 
-		$return = recuperer_fond('fonds/cfg_' . $this->vue,
-			$this->val ? array_merge($contexte, $this->val) : $contexte);
-
-
-		// liste des post-proprietes de l'objet cfg, lues apres recuperer_fond()
-		// et stockees dans <!-- param=valeur -->
-		$this->rempar = array(array());
-		if (preg_match_all('/<!-- [a-z0-9]\w+\*?=/i', $this->controldata, $this->rempar)) {
-			// il existe des champs <!-- param=valeur -->, on les stocke
-			$this->current_rempar = 0;
-			$return = preg_replace_callback('/(<!-- ([a-z0-9]\w+)(\*)?=)(.*?)-->/sim',
-								array(&$this, 'post_params'), $return);
-			// s'il en reste : il y a un probleme !
-			if (preg_match('/<!-- [a-z0-9]\w+\*?=/', $return)) {
-				die('erreur manque parametre externe: '
-					. htmlentities(var_export($this->rempar, true)));
-			}
-		}
-		return $return;
+		// recuperer le fond avec le contexte
+		// forcer le calcul.
+		$this->recuperer_fond($contexte, true);
+		return $this->fond_compile;
 	}
 	
 	

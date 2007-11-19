@@ -17,10 +17,11 @@ function exec_cfg_dist($class = null)
 		
 	$cfg = cfg_charger_classe($class);
 
+	include_spip('inc/filtres');
 	$config = & new $cfg(
-		($nom = _request('cfg'))? $nom : 'cfg',
-		($vue = _request('cfg_vue'))? $cfg_vue : $nom,
-		($cfg_id = _request('cfg_id'))? $cfg_id : ''
+		($nom = sinon(_request('cfg'), 'cfg')),
+		($vue = sinon(_request('cfg_vue'), $nom)),
+		($cfg_id = sinon(_request('cfg_id'),''))
 		);
 
 	if ($message = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]) {
