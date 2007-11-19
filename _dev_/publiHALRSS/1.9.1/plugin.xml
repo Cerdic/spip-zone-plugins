@@ -1,10 +1,11 @@
 <plugin>
-	<version>1.0</version>
+	<version>0.1</version>
 	<nom>publications HAL avec RSS</nom>
 	<prefix>
 	publiHAL
 	</prefix>
-	<auteur>Bollon Jean-Marc</auteur>
+	<auteur>Bollon Jean-Marc
+_ &#169; 2007 - Distribu&#233; sous licence GNU</auteur>
 	<etat>experimental</etat>
 	<description>
 	publications prises sur HAL via les flux rss
