@@ -29,11 +29,24 @@ class cfg_table
 */
 	}
 	
-// recuperer les valeurs
+
+	/* 
+	 * Recuperer les valeurs
+	 * 
+	 * Le parametre _cfg_new present permet d'autoriser
+	 * une requete sql d'insertion de nouveau contenu.
+	 * 
+	 * Si un message d'erreur est retourne, on ne peut 
+	 * faire aucune modification.
+	 * 
+	 */
 	function lire()
 	{
+		// si cfg_id n'est pas present,
+		// pas la peine de continuer
  		if (!$this->cfg->cfg_id) {
-			$this->cfg->message = _L('id manquant');
+ 			if (!_request('_cfg_new'))
+				$this->cfg->message = _L('id manquant');
 			return false;
 		}
 
@@ -70,7 +83,7 @@ class cfg_table
 		foreach ($this->cfg->champs_id as $i => $name) {
 			$where .= $sep . $name . '=' . 
 				// sans doute un peu brutal ...
-				(is_numeric($cles[$i]) ? intval($cles[$i]) : _q($cles[$i]));
+				(is_numeric($cles[$i]) ? intval($cles[$i]) : sql_quote($cles[$i]));
 			$sep = ' AND ';
 	    }
 		return $where;
@@ -79,7 +92,7 @@ class cfg_table
 // modifier le fragment qui peut etre tout le meta
 	function modifier($supprimer = false)
 	{
-//spip_log($val);
+
 		$this->cfg_id = $sep = '';
 		foreach ($this->cfg->champs_id as $name) {
 			$this->cfg_id .= $sep . _request($name);
@@ -101,7 +114,7 @@ class cfg_table
 				if (isset($def['id'])) {
 					continue;
 				}
-				$query .= $sep . $name .'=' . _q($this->cfg->val[$name]);
+				$query .= $sep . $name .'=' . sql_quote($this->cfg->val[$name]);
 				$sep = ', ';
 		    }
 				spip_log($query . $this->where());
@@ -113,11 +126,12 @@ class cfg_table
 		$values = ' VALUES';
 		foreach ($this->cfg->champs as $name => $def) {
 			$query .= $sep . $name;
-			$values .= $sep . _q($this->cfg->val[$name]);
+			$values .= $sep . sql_quote($this->cfg->val[$name]);
 			$sep = ', ';
 	    }
-				spip_log($query . ')' . $values . ')');
-	    return sql_query($query . ')' . $values . ')');
+	    
+			   spip_log($query . ')' . $values . ')');
+	    return sql_query($query . ')' . $values . ')');  
 	}
 }
 ?>

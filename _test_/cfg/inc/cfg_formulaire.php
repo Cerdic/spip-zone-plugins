@@ -307,7 +307,7 @@ class cfg_formulaire
 		if (!$this->_permise) {
 			return;
 		}
-		
+	
 		// enregistrement ou suppression ?
 		$enregistrer = $supprimer = false;
 		if ($this->message ||
@@ -315,7 +315,7 @@ class cfg_formulaire
 							($supprimer = _request('_cfg_delete')))) {
 			return;
 		}
-
+	
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$securiser_action();
 		// suppression
@@ -324,6 +324,7 @@ class cfg_formulaire
 		// sinon modification
 		// seulement si les types de valeurs attendus sont corrects
 		} elseif (!($this->message = $this->controle())) {
+
 			if ($this->new_id != $this->cfg_id && !_request('_cfg_copier')) {
 				$this->modifier('supprimer');
 			}
