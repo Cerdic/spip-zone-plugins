@@ -131,9 +131,7 @@ function lire_config($cfg='', $def=null, $serialize=false) {
 	return is_null($ret) && $def ? $def : $ret;
 }
 
-function get_table_id($table) {
-	$table = trim($table);
-	
+function get_table_id($table) {	
 	static $catab = array(
 		'tables_principales' => 'base/serial',
 		'tables_auxiliaires' => 'base/auxiliaires',

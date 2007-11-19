@@ -159,6 +159,12 @@ class cfg_formulaire
 		// cas de <!--
 		// liste des post-proprietes de l'objet cfg, lues apres recuperer_fond()
 		// et stockees dans <!-- param=valeur -->
+ 		$this->recuperer_parametres_post_compile();
+
+	}
+	
+	
+	function recuperer_parametres_post_compile(){
 		$this->rempar = array(array());
 		if (preg_match_all('/<!-- [a-z0-9]\w+\*?=/i', $this->controldata, $this->rempar)) {
 			// il existe des champs <!-- param=valeur -->, on les stocke
@@ -171,11 +177,10 @@ class cfg_formulaire
 				die('erreur manque parametre externe: '
 					. htmlentities(var_export($this->rempar, true)));
 			}
-		}
-
+		}		
 	}
 	
-
+	
 	/*
 	 * 
 	 * Recherche et stockage
@@ -246,7 +251,7 @@ class cfg_formulaire
 	function autoriser()
 	{
 		include_spip('inc/autoriser');
-		return autoriser(trim($this->autoriser));
+		return autoriser($this->autoriser);
 	}
 
 	/*
@@ -401,6 +406,7 @@ class cfg_formulaire
 		// recuperer le fond avec le contexte
 		// forcer le calcul.
 		$this->recuperer_fond($contexte, true);
+		//$this->recuperer_parametres_post_compile();
 		return $this->fond_compile;
 	}
 	
@@ -431,6 +437,8 @@ class cfg_formulaire
 			}
 		}
 		// $regs[3] peut valoir '*' pour signaler un tableau
+		$regs[4] = trim($regs[4]);
+		
 		if (empty($regs[3])) {
 		    $this->{$regs[2]} = $regs[4];
 		} elseif (is_array($this->{$regs[2]})) {
