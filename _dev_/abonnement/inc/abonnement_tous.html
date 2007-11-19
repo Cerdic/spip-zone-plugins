@@ -38,25 +38,12 @@ $().ready(function() {
 <div id="menu">
 	
 	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
-	#INCLURE{fond=inc/menu_abonnement}	
+		#INCLURE{fond=inc/menu_abonnement}	
 	]
-	
-	<?php
-	debut_boite_info();
-	?>
-	<div class='raccourcis'>
-		<strong><:inscription2:raccourcis:></strong>
-		<ul>
-			<li><a href="?exec=ajouter_adherent"><:inscription2:ajouter_adherent:></a></li>
-			<li><a href="?exec=cfg&cfg=inscription2"><:inscription2:configuration:></a></li>
-			<li><a class ="confirm" href="?exec=inscription2_adherents&act=net"><:inscription2:nettoyer_tables:></a></li>
+	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{'',' '})
+		#INCLURE{fond=inc/menu_inscription2}	
+	]
 		
-		</ul>
-	</div>
-	<?php
-	fin_boite_info();
-	?>
-	
 	<div class="legend">
 		
 		<img src="#CHEMIN{'images/admin-12.gif'}" title="<:inscription2:fiche_adherent:>"> Admin<br/>
