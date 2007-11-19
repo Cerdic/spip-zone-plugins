@@ -32,7 +32,7 @@ function exec_mutualisation_dist() {
 		. ' ' . $GLOBALS['spip_version'].'</div>';
 
 
-	$page .= "<table border=1 style='clear:both;'>
+	$page .= "<table style='clear:both;'>
 	<thead>
 		<tr>
 			<td>Site</td>
@@ -74,7 +74,7 @@ function exec_mutualisation_dist() {
 			$plugins = '-';
 		}
 		$page .= "<tr class='tr". $nsite % 2 ."'"
-			. " style='background: url(${url}spip.php?action=cron&amp;renouvelle_alea=yo);'>
+			. " style='background-image: url(${url}spip.php?action=cron&amp;renouvelle_alea=yo);'>
 			<td>$v$version_installee$erreur</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire/</a></td>
