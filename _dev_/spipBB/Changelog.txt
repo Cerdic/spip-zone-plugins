@@ -1,3 +1,8 @@
+2007-11-19  chryjs  <chryjs!@!free!.!fr>
+
+ * Suppression de modeles obsoletes 
+
+
 2007-11-18  chryjs  <chryjs!@!free!.!fr>
 
  * Integration Gafospip, balises, fonctions et mise en page
