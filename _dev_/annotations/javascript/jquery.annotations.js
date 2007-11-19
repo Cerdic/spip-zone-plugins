@@ -123,10 +123,13 @@
 		  var hotSpot = this.mapMarker.hotSpot;
 			var marker = $(this.mapMarker.src).addClass("map_marker").addClass("anno_instance"+this.instance);
 			marker.attr(attr);
-			marker.css({zIndex:$.carto.overlay[index].zindex,position:"absolute",left:coord.xy[0]-hotSpot[0]+"px",top:coord.xy[1]-hotSpot[1]+"px"}).
+			var imageOffset = selector.offset({relativeTo:container[0],border:true,padding:true});
+			var posLeft = coord.xy[0]+imageOffset.left-hotSpot[0]+"px";
+			var posTop = coord.xy[1]+imageOffset.top-hotSpot[1]+"px";
+			marker.css({zIndex:$.carto.overlay[index].zindex,position:"absolute",left:posLeft,top:posTop}).
 			appendTo(container).ifixpng();
 			var overlay = $("<img class='map_marker_overlay anno_instance"+this.instance+"' src='"+this.cfg.emptyImage+"' width='"+marker.width()+"' height='"+marker.height()+"' />").
-			css({zIndex:1000+$.carto.overlay[index].zindex,position:"absolute",left:coord.xy[0]-hotSpot[0]+"px",top:coord.xy[1]-hotSpot[1]+"px"}).
+			css({zIndex:1000+$.carto.overlay[index].zindex,position:"absolute",left:posLeft,top:posTop}).
 			appendTo(container);
 			$.carto.overlay[index].items = $.carto.overlay[index].items.add(overlay);
 			$.carto.overlay[index].zindex++;
