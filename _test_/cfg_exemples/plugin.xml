@@ -14,8 +14,10 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	<description>
 	Plugin pour tester les fonctionnalites introduites en version 1.1
 	du plugin CFG, &agrave; savoir les formulaires publics.
+	<br />
+	Pour spip 1.9.3<br />
+	D&eacute;mo ici : <a href="../spip.php?page=cfg_exemples">CFG exemples</a>
 	
-	Pour spip 1.9.3
 	</description>
 	<lien>
 	[Documentation->http://www.spip-contrib.net/?article1605]

@@ -3,3 +3,13 @@
 	margin:0.5em 0.5em 1em 0.5em; 
 	padding:0.5em;
 }
+
+.spip_cadre{
+	border:1px solid #FFB25E;
+	border-left:4px solid #FFB25E;
+	padding: 0.5em;
+	font-size:90%;
+	background:#F2F2F2;
+	color:#3B3B3B;
+	width:95%;
+}
