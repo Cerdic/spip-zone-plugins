@@ -44,6 +44,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (defined("_INC_SPIPBB_192")) return; else define("_INC_SPIPBB_192", true);
 
+spip_log('inc/spipbb_192.php: included','spipbb');
+
 include_spip('base/abstract_sql'); // SPIP 192
 include_spip('base/db_mysql'); // SPIP 192
 
@@ -348,7 +350,7 @@ function spip_mysql_errno()
 	// 2013 Lost connection to MySQL server during query
 	if (in_array($s, array(2006,2013)))
 		define('spip_interdire_cache', true);
-	if ($s) spip_log("Erreur mysql $s");
+	if ($s) spip_log("Erreur mysql $s",'mysql');
 	return $s;
 } } // spip_mysql_errno
 

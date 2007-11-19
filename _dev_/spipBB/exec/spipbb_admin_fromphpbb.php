@@ -43,13 +43,21 @@ if ( !empty($setmodules) and spipbb_is_configured() and $GLOBALS['spipbb']['conf
 // [fr] Affiche la page complete spip privee avec le formulaire
 // [en] Provides the full spip private space form
 // ------------------------------------------------------------------------------
-function exec_spipbb_admin_fromphpbb() {
+function exec_spipbb_admin_fromphpbb()
+{
+	if ( !spipbb_is_configured() or ($GLOBALS['spipbb']['configure']!='oui') 
+		 or $GLOBALS['spipbb']['config_id_secteur'] != 'oui'
+		 or empty($GLOBALS['spipbb']['id_secteur']) ) {
+		include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire('spipbb_admin_configuration', ''));
+		exit;
+	}
+
 	global $connect_statut;
 	// [fr] Pour le moment l acces est reserve a l administrateur, a voir plus tard
 	// [fr] pour tester plutot en fonction rubrique de l import comme pour les articles...
 	// [en] For now the access is only allowed to the admin, will check it later
 	// [en] in order to check it for each rubrique like for the articles...
-	$id_rubrique=intval(_request('id_rubrique'));
 
 	if ($connect_statut != '0minirezo') {
 		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
@@ -62,11 +70,10 @@ function exec_spipbb_admin_fromphpbb() {
 	// [en] initialize
 	if (!function_exists('filtrer_entites')) @include_spip('inc/filtres');
 	$row['titre'] = filtrer_entites(_T('info_nouvel_article'));
-	if (!isset($GLOBALS['meta']['spipbb'])) spipbb_init_metas() ;
 
 	// [fr] La conf pre-existante domine
 	// [en] Pre-existing config leads
-	$row['id_rubrique'] = (!empty($GLOBALS['spipbb']['spipbb_id_rubrique'])) ? $GLOBALS['spipbb']['spipbb_id_rubrique'] : $id_rubrique;
+	$row['id_rubrique'] = $GLOBALS['spipbb']['id_secteur'];
 	if (!$row['id_rubrique']) {
 		if ($connect_id_rubrique)
 			$row['id_rubrique'] = $id_rubrique = $connect_id_rubrique[0];
@@ -90,7 +97,7 @@ function exec_spipbb_admin_fromphpbb() {
 	// [en] load the sector datas
 	//$r = sql_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
 	//$row_rub = sql_fetch($r);
-	$row_rub = sql_fetsel('id_secteur','spip_rubriques',array("id_rubrique=$id_rubrique"));
+	$row_rub = sql_fetsel('id_secteur','spip_rubriques',array("id_rubrique=".$GLOBALS['spipbb']['id_secteur']));
 	$row['id_secteur'] = $row_rub['id_secteur'];
 	$id_rubrique = $row['id_rubrique'];
 
@@ -98,7 +105,7 @@ function exec_spipbb_admin_fromphpbb() {
 	echo $commencer_page(_T('spipbb:fromphpbb_titre'), "configuration", 'spipbb');
 
 	if (!$row
-	   OR !autoriser('creerarticledans','rubrique',$id_rubrique)) {
+	   OR !autoriser('creerarticledans','rubrique',$GLOBALS['spipbb']['id_secteur'])) {
 		echo "<strong>"._T('avis_acces_interdit')."</strong>";
 		echo fin_page();
 		exit;
@@ -106,15 +113,17 @@ function exec_spipbb_admin_fromphpbb() {
 
 	echo gros_titre(_T('spipbb:titre_spipbb'),'',false) ;
 
-	echo debut_grand_cadre(true);
-	echo afficher_hierarchie($id_rubrique);
-	echo fin_grand_cadre(true);
+	if (spipbb_is_configured() AND $GLOBALS['spipbb']['config_id_secteur'] == 'oui' ) {
+		echo debut_grand_cadre(true);
+		echo afficher_hierarchie($GLOBALS['spipbb']['id_secteur']);
+		echo fin_grand_cadre(true);
+	}
 
 	echo debut_gauche('',true);
 	echo debut_boite_info(true);
 	echo  _T('spipbb:fromphpbb_titre');
 	echo fin_boite_info(true);
-	echo spipbb_admin_gauche($GLOBALS['spipbb']['spipbb_id_rubrique'],'spipbb_admin_fromphpbb');
+	echo spipbb_admin_gauche($GLOBALS['spipbb']['id_secteur'],'spipbb_admin_fromphpbb');
 
 	echo creer_colonne_droite($id_rubrique,true);
 	echo debut_droite($id_rubrique,true);
@@ -127,7 +136,9 @@ function exec_spipbb_admin_fromphpbb() {
 // [fr] Genere le formulaire de saisie des parametres de migration
 // [en] Generates the form to fill with migration parameters
 // ------------------------------------------------------------------------------
-function spipbb_fromphpbb_formulaire($row=array()) {
+function spipbb_fromphpbb_formulaire($row=array())
+{
+	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
 
 	// [fr] On va essayer de "deviner" ou on peut trouver un fichier de conf phpbb

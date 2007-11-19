@@ -2,7 +2,7 @@
 #----------------------------------------------------------#
 #  Plugin  : spipbb - Licence : GPL                        #
 #  File    : spipbb_fonctions - fonctions communes         #
-#  Authors : Chryjs, 2007 et als                           #
+#  Authors : Scoty, Gurdil, Booz, Chryjs 2007 et           #
 #  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
 #  Contact : chryjs!@!free!.!fr                            #
 #----------------------------------------------------------#
@@ -20,35 +20,46 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-// fonction de répartition de la variable date "brute" renvoyée par #MAJ (aaaa-mm-jj hh:mm:ss)
-// en jj-mm-aaaa
-// NB 31/08/2006 17:28:58
-
 if (!function_exists('sql_query')) include_spip('inc/spipbb_192');
 
-
-/*
-| generique : balise #GAFOSPIP{champ}, donnee brut (->formulaire)
-*/
-function afficher_champ_spipbb($id_auteur,$champ) {
+// ------------------------------------------------------------------------------
+// generique : balise #SPIPBB{champ}, donnee brut (->formulaire)
+// GAF v.0.6 - 12/10/07 
+// ------------------------------------------------------------------------------
+function afficher_champ_spipbb($id_auteur,$champ)
+{
 	$infos = spipbb_auteur_infos($id_auteur);
 	if($ch=$infos[$champ]) {
 		return $ch;
 	}
 	return;
-}
+} // afficher_champ_spipbb
 
-/* 
-| traitement balise affiche_avatar / + fonction back
-| Fonction relais Affichage Avatar
-| Soit appel fonction perso :
-| [ inc_afficher_avatar() dans fichier inc/afficher_avatar.php ].
-| Soit fonction GAF : gaf_afficher_avatar()
-+-------------------------------------+
-| GAF v.0.6 - 4/10/07
-+-------------------------------------+
-*/
-function afficher_avatar($id_auteur, $classe='') {
+// ------------------------------------------------------------------------------
+// traitement back / balise signature_post
+// GAF v.0.6 - 12/10/07 
+// ------------------------------------------------------------------------------
+function spipbb_afficher_signature_post($id_auteur)
+{
+	#recup de statut et extra/avatar
+	$infos = spipbb_auteur_infos($id_auteur);
+	if($infos['signature_post']!='') {
+		return propre($infos['signature_post']);
+	}
+	return;
+} // spipbb_afficher_signature_post
+
+// ------------------------------------------------------------------------------
+// traitement balise affiche_avatar / + fonction back
+// Fonction relais Affichage Avatar
+// Soit appel fonction perso :
+// [ inc_afficher_avatar() dans fichier inc/afficher_avatar.php ].
+// Soit fonction GAF : spipbb_afficher_avatar()
+// ------------------------------------------------------------------------------
+// GAF v.0.6 - 4/10/07
+// ------------------------------------------------------------------------------
+function afficher_avatar($id_auteur, $classe='')
+{
 	$f='';
 	if(lire_config('spipbb/affiche_avatar')=="oui") {
 		#si modeles/avatar.html present
@@ -65,22 +76,20 @@ function afficher_avatar($id_auteur, $classe='') {
 		}
 	}
 	return $f;
-}
+} // afficher_avatar
 
 
-/*
-| gaf_afficher_avatar (back ou front)
-+-------------------------------------+
-| GAF v.0.6 - 4/10/07
-+-------------------------------------+
-*/
-function spipbb_afficher_avatar($id, $classe='') {
+// ------------------------------------------------------------------------------
+// spipbb_afficher_avatar (back ou front)
+// ------------------------------------------------------------------------------
+// GAF v.0.6 - 4/10/07
+// ------------------------------------------------------------------------------
+function spipbb_afficher_avatar($id, $classe='')
+{
 	if(!$id) { return; }
 	#recup de statut et extra/avatar
 	$infos = spipbb_auteur_infos($id);
-	
-#echo "<pre>"; print_r($infos); echo "</pre>";
-	
+
 	$insert = '';
 	$retour = '';
 
@@ -96,13 +105,16 @@ function spipbb_afficher_avatar($id, $classe='') {
 			$retour="<img".$insert." src=\"".$infos['avatar']."\" alt=\"avatar\" />";
 	}
 	return $retour;
-}
+} // spipbb_afficher_avatar
 
 
-/*
-| relais
-*/
-function afficher_signature_post($id_auteur) {
+// ------------------------------------------------------------------------------
+// relais
+// ------------------------------------------------------------------------------
+// GAF v.0.6 - 4/10/07
+// ------------------------------------------------------------------------------
+function afficher_signature_post($id_auteur)
+{
 	$f='';
 	if(lire_config('spipbb/affiche_signature_post')=='oui' AND $id_auteur!=0) {
 		if($av = find_in_path("modeles/signature_post.html")) {
@@ -118,18 +130,16 @@ function afficher_signature_post($id_auteur) {
 		}
 	}
 	return $f;
-}
+} // afficher_signature_post
 
-
-
-/*
-+----------------------------------+
-	Filtre : insere_texte_alerter
-	Scoty 11/08/07 - GAF 0.5
-	Insere texte alerte-abus dans corps message pour webmaster
-+----------------------------------+
-*/
-function insere_texte_alerter($texte,$insere) {
+// ------------------------------------------------------------------------------
+// Filtre : insere_texte_alerter
+// ------------------------------------------------------------------------------
+// Scoty 11/08/07 - GAF 0.5
+// Insere texte alerte-abus dans corps message pour webmaster
+// ------------------------------------------------------------------------------
+function insere_texte_alerter($texte,$insere)
+{
 	if (!$premiere_passe = _request('valide')) {
 		if(_request('alerter')=='oui') {
 			$origine=explode('-',_request('orig'));
@@ -139,16 +149,15 @@ function insere_texte_alerter($texte,$insere) {
 		}
 	}
 	return $texte;
-}
+} // insere_texte_alerter
 
-/*
-+----------------------------------+
-	Filtre : insere_sujet_alerter
-	Scoty 11/08/07 - GAF 0.5
-	Insere texte alerte-abus dans sujet message pour webmaster
-+----------------------------------+
-*/
-function insere_sujet_alerter($sujet,$insere) {
+// ------------------------------------------------------------------------------
+//	Filtre : insere_sujet_alerter
+//	Scoty 11/08/07 - GAF 0.5
+//	Insere texte alerte-abus dans sujet message pour webmaster
+// ------------------------------------------------------------------------------
+function insere_sujet_alerter($sujet,$insere)
+{
 	if (!$premiere_passe = _request('valide')) {
 		if(_request('alerter')=='oui') {
 			#$insere = _T('forg:alerter_sujet');
@@ -156,17 +165,15 @@ function insere_sujet_alerter($sujet,$insere) {
 		}
 	}
 	return $sujet;
-}
+} // insere_sujet_alerter
 
-
-/*
-+----------------------------------+
-| Lister un repert de smileys passe en arg
-+----------------------------------+
-| d'apres BoOz spipBB
-+----------------------------------+
-*/
-function genere_list_smileys($repert) {
+// ------------------------------------------------------------------------------
+// Lister un repert de smileys passe en arg
+// ------------------------------------------------------------------------------
+// d'apres BoOz spipBB
+// ------------------------------------------------------------------------------
+function genere_list_smileys($repert)
+{
 	$listimag=array();
 	$listfich=opendir($repert);
 	while ($fich=@readdir($listfich)) {
@@ -178,19 +185,18 @@ function genere_list_smileys($repert) {
 	ksort($listimag);
 	reset($listimag);
 	return $listimag;
-}
+} // genere_list_smileys
 
-/*
-+----------------------------------+
-| filtre smileys
-| Sur base filtre smileys2 - Booz
-| Recup les smileys du repert smileys/ ou mes_smileys/
-| Exemple d'application : [(#TEXTE|smileys)]
-+----------------------------------+
-| Scoty GAF v.0.6 - 30/09/07
-+----------------------------------+
-*/
-function smileys($chaine) 	{
+// ------------------------------------------------------------------------------
+// filtre smileys
+// Sur base filtre smileys2 - Booz
+// Recup les smileys du repert smileys/ ou mes_smileys/
+// Exemple d'application : [(#TEXTE|smileys)]
+// ------------------------------------------------------------------------------
+// Scoty GAF v.0.6 - 30/09/07
+// ------------------------------------------------------------------------------
+function smileys($chaine)
+{
 	//$dirbase = _DIR_PLUGINS."gafospip/smileys/";
 	$dirbase = _DIR_SMILEYS_SPIPBB;
 	$listsmil = genere_list_smileys($dirbase);
@@ -204,18 +210,17 @@ function smileys($chaine) 	{
 		$chaine = str_replace(":".$nom, $smil_html , $chaine);
 	}
 	return $chaine;
-}
+} // smileys
 
-/*
-+----------------------------------+
-| Generer le tableau de smileys,
-| pour formulaires de post (back/frontoffice).
-| Voir balise ci-apres
-+----------------------------------+
-| Scoty GAF v.0.6 - 30/09/07
-+----------------------------------+
-*/
-function tableau_smileys($cols='',$return=true) {
+// ------------------------------------------------------------------------------
+// Generer le tableau de smileys,
+// pour formulaires de post (back/frontoffice).
+// Voir balise ci-apres
+// ------------------------------------------------------------------------------
+// Scoty GAF v.0.6 - 30/09/07
+// ------------------------------------------------------------------------------
+function tableau_smileys($cols='',$return=true)
+{
 	$listimag = genere_list_smileys(_DIR_SMILEYS_SPIPBB);
 	// nombre de colonnes (2 par défaut) (pas trop large pour GAF ! !!)
 	if($cols=='') { $cols=2; }
@@ -232,21 +237,18 @@ function tableau_smileys($cols='',$return=true) {
 		if ($compte % $cols == 0) { $aff.= "</tr><tr>\n"; }
 	}
 	$aff.= "</tr></table>\n";
-	
+
 	if($return) { return $aff; } else { echo $aff; }
-}
+} // tableau_smileys
 
-
-
-/*
-+----------------------------------+
-| GAF v.0.6 - 20/10/07
-* spipbb_auteur_infos // ex gaf_auteur_infos
-| infos recuperables pour auteur : $id (table)
-| appel : ici, formulaire_gaf_profil, gaf_inscrits, gaf_notifications
-+----------------------------------+
-*/ 
-function spipbb_auteur_infos($id) {
+// ------------------------------------------------------------------------------
+// GAF v.0.6 - 20/10/07
+// spipbb_auteur_infos // ex gaf_auteur_infos
+// infos recuperables pour auteur : $id (table)
+// appel : ici, formulaire_spipbb_profil, spipbb_inscrits, spipbb_notifications
+// ------------------------------------------------------------------------------
+function spipbb_auteur_infos($id)
+{
 	$chps_sup='';
 	$left_join='';
 	$infos=array();
@@ -298,29 +300,28 @@ function spipbb_auteur_infos($id) {
 	return $infos; # array: statut, nom .. avatar (et +)
 } // spipbb_auteur_infos
 
-
-/*
-| filtre :
-| explode() !!
-| scoty 26/10/07 - GAF v.0.6
-*/
-function chaine2array($chaine,$sep='') {
+// ------------------------------------------------------------------------------
+// filtre :
+// explode() !!
+// scoty 26/10/07 - GAF v.0.6
+// ------------------------------------------------------------------------------
+function chaine2array($chaine,$sep='')
+{
 	$chaine=trim($chaine);
 	if(!$sep) $sep = ',';
 	if($chaine=='') { $chaine=array(); }
 	else { $chaine = explode($sep,$chaine); }
 	return $chaine;
-}
+} // chaine2array
 
-/*
-+----------------------------------+
-	Filtre : spipbb_maintenance ex gaf_maintenance
-	scoty 26/09/07 - GAF v.0.6
-	Sur balise id_article.
-	Signaler une maintenance (donc ferme temporaire)
-+----------------------------------+
-*/
-function spipbb_maintenance($id_article) {
+// ------------------------------------------------------------------------------
+//	Filtre : spipbb_maintenance ex gaf_maintenance
+//	scoty 26/09/07 - GAF v.0.6
+//	Sur balise id_article.
+//	Signaler une maintenance (donc ferme temporaire)
+// ------------------------------------------------------------------------------
+function spipbb_maintenance($id_article)
+{
 	if ($ds = @opendir(_DIR_SESSIONS)) {
 		while (($file = @readdir($ds)) !== false) {
 			if (preg_match('/^gafart_([0-9]+)-([0-9]+)\.lck$/', $file, $match)) {
@@ -329,137 +330,6 @@ function spipbb_maintenance($id_article) {
 		}
 	}
 } // spipbb_maintenance
-
-
-function date_maj($maj_brute)
-{
-	$anneeMaj=substr($maj_brute,0,4);
-	$moisMaj=substr($maj_brute,5,2);
-	$jourMaj=substr($maj_brute,8,2);
-	$heureMaj=substr($maj_brute,11,2);
-	$minuteMaj=substr($maj_brute,14,2);
-	$mise_a_jour=$jourMaj.'-'.$moisMaj.'-'.$anneeMaj.' '.$heureMaj.'h'.$minuteMaj;
-	return $mise_a_jour;
-}
-
-/*
- *   +----------------------------------+
- *    Nom du Filtre :    get_auteur_infos
- *   +----------------------------------+
- *    Date : lundi 23 février 2004
- *    Auteur :  Nikau (luchier@nerim.fr)
- *   +-------------------------------------+
- *    Fonctions de ce filtre :
- *    Cette fonction permet d'obtenir toutes les infos 
- *    d'un auteur avec son nom ou son id_auteur
- *    ATTENTION !! cette fonction ne s'utilise pas de       
- *    façon classique !! voir explication dans la contrib'
- *    Fonction utilisée également dans la fonction
- *    'afficher_avatar'
- *   +-------------------------------------+ 
- *  
- * Pour toute suggestion, remarque, proposition d'ajout
- * reportez-vous au forum de l'article :
- * http://www.spip-contrib.net/article.php3?id_article=261
-*/
-// profile.html + afficher_avatar
-function spipbb_get_auteur_infos($id='', $nom='') {
-	if ($id) $query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id";
-	if ($nom) $query = "SELECT * FROM spip_auteurs WHERE nom='$nom'";
-	$result = sql_query($query);
-
-	if ($row = sql_fetch($result)) {
-		$row=serialize($row);
-	}
-	return $row;
-}
-
-
-/*
- *   +----------------------------------+
- *    Nom du Filtre :    afficher_signature
- *   +----------------------------------+
- *    Date : lundi 29 Septembre 2007
- *    Auteur :  Gurdil (gurdil@free.fr)
- *   +-------------------------------------+
- *    Fonctions de ce filtre :
- *    Cette fonction permet d'afficher 
- *    la signature d'un auteur.
- *    On peut passer une classe CSS pour régler
- *    l'affichage
- *    EXEMPLE :
- *    [(#ID_AUTEUR|spipbb_afficher_avatar{''})] ou
- *     [(#ID_AUTEUR|spipbb_afficher_avatar{'nom_de_la_classe'})]
- *     On ne paut mettre du code html directement
- *     pur des raisons de sécurité mais l'on peut
- *     mettre une image [img]url_de_limage[/img]
- *     et un lien [a="adresse_du_lien"]Mon site[/a]
- *   +-------------------------------------+ 
- *  
- * Pour toute suggestion, remarque, proposition d'ajout
- * reportez-vous au forum de l'article :
- * http://www.uzine.net/spip_contrib/article.php3?id_article=261
-*/
-// voirsujet
-
-function spipbb_afficher_signature($id_auteur, $classe='')
-{
-	if ($classe!='') $insert=" class=\"$classe\""; else $insert="";
-
-	$infos=unserialize(spipbb_get_auteur_infos($id_auteur,''));
-	$source=unserialize($infos[extra]);
-	$texte=$source[signature];
-	$texte = entites_html($texte);
-	$texte = preg_replace('#\[img\](.+)\[/img\]#isU', '<img src="$1" alt="signature"/>', $texte);
-	$texte = preg_replace('#\[a="(.+)"\](.+)\[/a\]#isU', '<a href="$1" alt="$2">$2</a>', $texte);
-
-	if(isset($texte))
-	$retour=$texte;		
-	
-	return $retour;
-} // spipbb_afficher_signature
-
-/*
- *   +----------------------------------+
- *    Nom des Filtres :  afficher_mots_clefs et pas_afficher_mots_clefs
- *   +----------------------------------+
- *    Date : lundi 25 fevrier 2004
- *    Auteur :  Nikau (luchier@nerim.fr)
- *   +-------------------------------------+
- *    Fonctions de ce filtre :
- *    Permet d'afficher ou non les mots clefs pour
- *    les forums selon le statut de l'auteur du message
- *    EXEMPLE :
- *    [(#ID_FORUM|afficher_mots_clefs] ou
- *     [(#ID_FORUM|pas_afficher_mots_clefs]
- *   !! Adaptez les numeros (10 et 11) Ã  vos numeros de groupe de mots cles !!
- *   +-------------------------------------+ 
- *  
- * Pour toute suggestion, remarque, proposition d'ajout
- * reportez-vous au forum de l'article :
- * http://spip-contrib.net/article.php3?id_article=421
-*/
-// poster
-function spipbb_afficher_mots_clefs($texte) {
-	if (($GLOBALS['auteur_session']['statut']=='0minirezo') OR ($GLOBALS['auteur_session']['statut']=='1comite'))
-	{
-		$GLOBALS['afficher_groupe'][]=$GLOBALS['spipbb']['id_groupe_mot'];
-	}
-	else {
-		$GLOBALS['afficher_groupe'][]=0;
-	}
-} // afficher_mots_clefs
-
-// 4 a changer par le num du Groupe de mot cle "Moderation"
-function spipbb_pas_afficher_mots_clefs($texte) {
-	if (($GLOBALS['auteur_session']['statut']=='0minirezo'))
-	{
-		$GLOBALS['afficher_groupe'][]=$GLOBALS['spipbb']['id_groupe_mot'];
-	}
-	else {
-		$GLOBALS['afficher_groupe'][]=0;
-	}
-} //pas_afficher_mots_clefs
 
 /*
  *   +---------------------------------------------+
@@ -480,15 +350,15 @@ function spipbb_pas_afficher_mots_clefs($texte) {
  * http://www.uzine.net/spip_contrib/
  *
  */
-// membres_liste profil_bb
 function spipbb_nb_messages($id_auteur){
 global $table_prefix;
-	$query = "SELECT auteur FROM ".$table_prefix."_forum WHERE id_auteur=$id_auteur";
+	//$query = "SELECT auteur FROM ".$table_prefix."_forum WHERE id_auteur=$id_auteur";
 	$nb_mess = "";
-	$result_auteurs = sql_query($query);
+	//$result_auteurs = sql_query($query);
+	$result_auteurs = sql_select('auteur','spip_forum',"id_auteur=$id_auteur");
 	$nb_mess = sql_count($result_auteurs);
 	return $nb_mess;
-} // nb_messages
+} // spipbb_nb_messages
 
 /*
  *   +----------------------------------+
@@ -506,15 +376,15 @@ global $table_prefix;
  * reportez-vous au forum de l'article :
  * http://www.spip-contrib.net/Pagination,663
 */
-
 function barre_forum_citer($texte, $lan, $rows, $cols, $lang='')
 {
 	if (!$premiere_passe = rawurldecode(_request('retour_forum'))) {
 		if(_request('citer')=='oui'){
 			$id_citation = _request('id_forum') ;
-			$query = "SELECT auteur, texte FROM spip_forum WHERE id_forum=$id_citation";
-			$result = sql_query($query);
-			$row = sql_fetch($result);
+			//$query = "SELECT auteur, texte FROM spip_forum WHERE id_forum=$id_citation";
+			//$result = sql_query($query);
+			//$row = sql_fetch($result);
+			$row = sql_fetsel('auteur,texte','spip_forum',"id_forum=$id_citation");
 			$aut_cite=$row['auteur'];
 			$text_cite=$row['texte'];
 			//ajout de la citation

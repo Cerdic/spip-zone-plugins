@@ -27,7 +27,6 @@ if (!function_exists('plugin_get_infos')) include_spip('inc/plugin');
 
 $infos=plugin_get_infos(_DIR_PLUGIN_SPIPBB);
 $GLOBALS['spipbb_version'] = $infos['version'];
-/*$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']); a faire plus tard */
 
 if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
 	include_spip('inc/spipbb_192'); // SPIP 1.9.2
@@ -38,7 +37,7 @@ if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
 // [en] Checks that spipbb is configured and uptodate
 //----------------------------------------------------------------------------
 function spipbb_is_configured() {
-//print_r($GLOBALS['meta']['spipbb']);
+	spip_log('inc/spipbb.php spipbb_is_configured() glob:'.$GLOBALS['meta']['spipbb'],'spipbb');
 	if ( !isset($GLOBALS['meta']['spipbb']) ) return false;
 	$local_spipbb = @unserialize($GLOBALS['meta']['spipbb']);
 	if ( empty($local_spipbb['version']) ) return false;
@@ -54,6 +53,7 @@ function spipbb_is_configured() {
 //----------------------------------------------------------------------------
 function spipbb_upgrade_all()
 {
+	spip_log('inc/spipbb.php spipbb_upgrade_all()','spipbb');
 	$version_code = $GLOBALS['spipbb_version'] ;
 	if ( isset($GLOBALS['meta']['spipbb'] ) ) {
 		if ( isset($GLOBALS['spipbb']['version'] ) ) {
@@ -75,14 +75,14 @@ function spipbb_upgrade_all()
 		include_spip('base/create');
 		include_spip('base/abstract_sql');
 		creer_base();
-		spip_log('spipbb : spipbb_upgrade_all OK');
+		spip_log('inc/spipbb.php spipbb_upgrade_all creer_base installed_version:'.$installed_version,'spipbb');
 	}
 
 	if ( version_compare(substr($installed_version,0,5),$version_code,'<' ) ) {
 		spipbb_upgrade_metas();
 	}
 
-	spip_log('spipbb : spipbb_upgrade_all OK');
+	spip_log('inc/spipbb.php : spipbb_upgrade_all() END iv:$installed_version: vc:$version_code','spipbb');
 } /* spipbb_upgrade_all */
 
 //----------------------------------------------------------------------------
@@ -96,19 +96,6 @@ function spipbb_init_metas()
 	$spipbb_meta=array();
 	$spipbb_meta['configure'] = 'non';
 	$spipbb_meta['version']= $GLOBALS['spipbb_version'];
-/*
-	$id_rubrique=intval($id_rubrique);
-	if (empty($id_rubrique)) {
-		$row = sql_fetsel('id_rubrique','spip_rubriques',
-				array( "UPPER(titre) LIKE '%FORUM%'","id_parent=0") ,'','','1');
-		if (!is_array($row)) // [fr] Selection de la premiere rubrique
-			$row = sql_fetsel('id_rubrique','spip_rubriques',
-				array("id_parent=0") ,'',array('0+titre','titre'),'1');
-
-		$spipbb_meta['spipbb_id_rubrique']=  $row['id_rubrique'];
-	}
-	else $spipbb_meta['spipbb_id_rubrique']= $id_rubrique;
-*/
 	$spipbb_meta['id_secteur'] = 0;
 	$spipbb_meta['config_id_secteur'] = 'non';
 
@@ -116,48 +103,10 @@ function spipbb_init_metas()
 	$spipbb_meta['squelette_filforum']= "filforum";
 	if ( find_in_path("groupeforum.html") AND find_in_path("filforum.html") )
 		$spipbb_meta['config_squelette'] = 'oui';
+	else 
+		$spipbb_meta['config_squelette'] = 'non';
 
 	// les mots cles specifiques
-/*
-	$row = sql_fetsel('id_groupe','spip_groupes_mots', "titre = 'spipbb'" ,'','','1');
-	$spipbb_meta['spipbb_id_groupe_mot']=intval($row['id_groupe']);
-
-	if (empty($spipbb_meta['spipbb_id_groupe_mot']))
-		$spipbb_meta = spipbb_creer_groupe_mot($spipbb_meta);
-	else {
-		// Verifier aussi la config de SPIP
-		// Utiliser les mot cles oui
-		// Autoriser l'ajout de mot cles aux forums oui
-
-		$row = sql_fetsel('id_mot','spip_mots', array(
-						"titre='ferme'",
-						"id_groupe=".$spipbb_meta['spipbb_id_groupe_mot'])
-				);
-		if ( is_array($row) AND !empty($row['id_mot']) )
-			$spipbb_meta['spipbb_id_mot_ferme']=intval($row['id_mot']);
-		else
-			$spipbb_meta['spipbb_id_mot_ferme'] = spipbb_init_mot_cle("ferme",$spipbb_meta['spipbb_id_groupe_mot']);
-
-		$row = sql_fetsel('id_mot','spip_mots',array(
-						"titre='annonce'",
-						"id_groupe=".$spipbb_meta['spipbb_id_groupe_mot'])
-				);
-		if (is_array($row) AND !empty($row['id_mot']) )
-			$spipbb_meta['spipbb_id_mot_annonce']=intval($row['id_mot']);
-		else
-			$spipbb_meta['spipbb_id_mot_annonce'] = spipbb_init_mot_cle("annonce",$spipbb_meta['spipbb_id_groupe_mot']);
-
-		$row = sql_fetsel('id_mot','spip_mots',array(
-						"titre='postit'",
-						"id_groupe=".$spipbb_meta['spipbb_id_groupe_mot'])
-				);
-		if (is_array($row) AND !empty($row['id_mot']) )
-			$spipbb_meta['spipbb_id_mot_postit']=intval($row['id_mot']);
-		else
-			$spipbb_meta['spipbb_id_mot_postit'] = spipbb_init_mot_cle("postit",$spipbb_meta['spipbb_id_groupe_mot']);
-
-	} // if empty spipbb_meta
-*/
 	$spipbb_meta['id_groupe_mot'] = 0;
 	$spipbb_meta['config_groupe_mots'] = 'non';
 	$spipbb_meta['id_mot_ferme'] = 0;
@@ -207,8 +156,7 @@ function spipbb_init_metas()
 	ecrire_meta('spipbb', serialize($spipbb_meta));
 	if (defined('_INC_SPIPBB_192')) ecrire_metas(); // Code 192
 	$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
-	spip_log('spipbb : init_metas OK');
-
+	spip_log('inc/spipbb.php  : init_metas END '.$GLOBALS['meta']['spipbb'],'spipbb');
 } // spipbb_init_metas
 
 //----------------------------------------------------------------------------
@@ -224,7 +172,7 @@ function spipbb_delete_metas()
 		effacer_meta('spipbb_fromphpbb'); // requis si la migration n est pas finie
 		if (defined('_INC_SPIPBB_192')) ecrire_metas(); // Code 192
 		unset($GLOBALS['meta']['spipbb']);
-		spip_log('spipbb : delete_metas OK');
+		spip_log('inc/spipbb.php : delete_metas OK','spipbb');
 	}
 } // spipbb_delete_metas
 
@@ -235,6 +183,7 @@ function spipbb_delete_metas()
 function spipbb_upgrade_metas()
 {
 	spipbb_init_metas();
+	spip_log('inc/spipbb.php : spipbb_upgrade_metas OK','spipbb');
 } // spipbb_upgrade_metas
 
 //----------------------------------------------------------------------------
@@ -243,26 +192,6 @@ function spipbb_upgrade_metas()
 //----------------------------------------------------------------------------
 function spipbb_save_metas()
 {
-/*
-	$spipbb_meta=$GLOBALS['spipbb'];
-
-	if ($id_rubrique = intval(_request('spipbb_id_rubrique')))
-		$spipbb_meta['spipbb_id_rubrique'] =  $id_rubrique;
-	if ($squelette_groupeforum = _request('spipbb_squelette_groupeforum'))
-		$spipbb_meta['spipbb_squelette_groupeforum'] =  $squelette_groupeforum;
-	if ($squelette_filforum = _request('spipbb_squelette_filforum'))
-		$spipbb_meta['spipbb_squelette_filforum'] =  $squelette_filforum;
-	if ($id_groupe_mot = intval(_request('spipbb_id_groupe_mot')))
-		$spipbb_meta['spipbb_id_groupe_mot'] =  $id_groupe_mot;
-	if ($id_mot_ferme = intval(_request('spipbb_id_mot_ferme')))
-		$spipbb_meta['spipbb_id_mot_ferme'] =  $id_mot_ferme;
-	if ($id_mot_annonce = intval(_request('spipbb_id_mot_annonce')))
-		$spipbb_meta['spipbb_id_mot_annonce'] = $id_mot_annonce;
-	if ($id_mot_postit = intval(_request('spipbb_id_mot_postit')))
-		$spipbb_meta['spipbb_id_mot_postit'] = $id_mot_postit;
-	// final - sauver
-
-*/
 	$GLOBALS['spipbb']['config_id_secteur'] = empty($GLOBALS['spipbb']['id_secteur']) ? 'non' : 'oui';
 	$GLOBALS['spipbb']['config_groupe_mots'] = empty($GLOBALS['spipbb']['id_groupe_mot']) ? 'non' : 'oui';
 	$GLOBALS['spipbb']['config_mot_cles'] = ( empty($GLOBALS['spipbb']['id_mot_ferme']) or
@@ -276,8 +205,7 @@ function spipbb_save_metas()
 	ecrire_meta('spipbb', serialize($GLOBALS['spipbb']));
 	if (defined('_INC_SPIPBB_192')) ecrire_metas(); // Code 192
 	$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
-	spip_log('spipbb : save_metas OK');
-
+	spip_log('inc/spipbb.php : spipbb_save_metas OK '.$GLOBALS['meta']['spipbb'],'spipbb');
 } // spipbb_save_metas
 
 //----------------------------------------------------------------------------
@@ -289,10 +217,13 @@ function spipbb_delete_tables()
 	global $tables_spipbb;
 	include_spip('base/spipbb');
 	reset($tables_spipbb);
+	$liste="";
 	while ( list($key,$val) = each($tables_spipbb) )
 	{
 		$res=sql_query("DROP TABLE IF EXISTS $val ");
+		$liste.="$val ";
 	}
+	spip_log('inc/spipbb.php : spipbb_delete_tables END liste:'.$liste,'spipbb');
 } // spipbb_delete_tables
 
 //----------------------------------------------------------------------------
@@ -309,6 +240,7 @@ function spipbb_check_tables()
 	{
 		$res[$une_table]=spipbb_check_une_table($une_table,$tables_principales);
 	}
+	spip_log('inc/spipbb.php : spipbb_check_tables END','spipbb');
 	return $res;
 } // spipbb_check_tables
 
@@ -355,6 +287,7 @@ function spipbb_creer_groupe_mot($l_meta)
 	$l_meta['spipbb_id_mot_ferme'] = spipbb_init_mot_cle("ferme",$l_meta['spipbb_id_groupe_mot']);
 	$l_meta['spipbb_id_mot_annonce'] = spipbb_init_mot_cle("annonce",$l_meta['spipbb_id_groupe_mot']);
 	$l_meta['spipbb_id_mot_postit'] = spipbb_init_mot_cle("postit",$l_meta['spipbb_id_groupe_mot']);
+	spip_log('inc/spipbb.php : spipbb_creer_groupe_mot END','spipbb');
 	return $l_meta;
 } // spipbb_creer_groupe_mot
 
@@ -383,6 +316,8 @@ function spipbb_init_mot_cle($mot,$groupe)
 // ------------------------------------------------------------------------------
 function spipbb_admin_gauche($rubrique_admin_courante="")
 {
+	spip_log('inc/spipbb.php : spipbb_admin_gauche START','spipbb');
+
 	$modules = array();
 
 	$dir = @opendir(_DIR_PLUGIN_SPIPBB."exec/");
@@ -435,6 +370,7 @@ function spipbb_admin_gauche($rubrique_admin_courante="")
 		$affichage .= fin_boite_info(true)."\n";
 	}
 	$affichage .= "\n";
+	spip_log('inc/spipbb.php : spipbb_admin_gauche END','spipbb');
 
 	return $affichage;
 }
@@ -445,7 +381,7 @@ function spipbb_admin_gauche($rubrique_admin_courante="")
 // ------------------------------------------------------------------------------
 function spipbb_renumerote()
 {
-	$id_secteur = $GLOBALS['spipbb']['spipbb_id_rubrique'];
+	$id_secteur = $GLOBALS['spipbb']['id_secteur'];
 	// les rubriques
 
 	$result = sql_select("id_rubrique, titre", "spip_rubriques", array(
@@ -483,19 +419,6 @@ function spipbb_renumerote()
 		$numero = $numero + 10;
 	} // while
 } // spipbb_renumerote
-
-/*
-| traitement back / balise signature_post
-| GAF v.0.6 - 12/10/07 
-*/
-function spipbb_afficher_signature_post($id_auteur) {
-	#recup de statut et extra/avatar
-	$infos = spipbb_auteur_infos($id_auteur);
-	if($infos['signature_post']!='') {
-		return propre($infos['signature_post']);
-	}
-	return;
-}
 
 // ------------------------------------------------------------------------------
 // [fr] Formatte une sortie de print_r

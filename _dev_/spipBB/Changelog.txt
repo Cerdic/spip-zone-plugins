@@ -3,6 +3,8 @@
  * Suppression de modeles obsoletes 
  * Ajout d'un controle des prerequis a l'activation
  * passage en 0.3.1 - meilleurs controles
+ * Filtrage (conditions d'acces et menus) des affichages exec=...
+ * Correction bug meta spipbb_id_rubrique -> id_secteur
 
 2007-11-18  chryjs  <chryjs!@!free!.!fr>
 

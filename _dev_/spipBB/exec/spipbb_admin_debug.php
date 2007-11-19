@@ -31,24 +31,28 @@ $svn_revision = abs(version_svn_courante(_DIR_PLUGIN_SPIPBB));
 
 if( !empty($setmodules) )
 {
-	if ( $svn_revision AND $svn_revision>0) {
+// Chryjs : test commente : pour le moment on est en SVN !!!
+//	if ( $svn_revision AND $svn_revision>0) {
 		$file = basename(__FILE__);
 		$modules['01_general']['ZZ_debug'] = $file;
-	}
+//	}
 	return;
 }
 
 // ------------------------------------------------------------------------------
+// Affiche le debogage pour la version SVN
+// ------------------------------------------------------------------------------
 function exec_spipbb_admin_debug()
 {
+	spip_log('exec/spipbb_admin_debug.php exec_spipbb_admin_debug()','spipbb');
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('spipbb:titre_spipbb'), "configuration", 'spipbb');
 
 	echo gros_titre(_T('spipbb:titre_spipbb'),'',false) ;
 
-	if (spipbb_is_configured()) {
+	if (spipbb_is_configured() AND 	$GLOBALS['spipbb']['config_id_secteur'] == 'oui' ) {
 		echo debut_grand_cadre(true);
-		echo afficher_hierarchie($GLOBALS['meta']['spipbb']['spipbb_id_rubrique']);
+		echo afficher_hierarchie($GLOBALS['spipbb']['id_secteur']);
 		echo fin_grand_cadre(true);
 	}
 

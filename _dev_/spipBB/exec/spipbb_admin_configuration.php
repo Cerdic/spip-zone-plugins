@@ -39,7 +39,7 @@ if( !empty($setmodules) )
 function exec_spipbb_admin_configuration()
 {
 	// est-ce qu'un redacteur peut voir ca ??
-
+	spip_log('exec/spipbb_admin_configuration.php exec_spipbb_admin_configuration()','spipbb');
 	// [fr] On verifie a quelle etape de la configuration on est
 	// [en] We check which config stage it is
 	if (!spipbb_is_configured()) spipbb_upgrade_all();
@@ -51,7 +51,7 @@ function exec_spipbb_admin_configuration()
 		creer_base();
 		$GLOBALS['spipbb']['config_tables']='oui';
 		spipbb_save_metas();
-		spip_log('spipbb : exec_spipbb_admin_configuration tables OK');
+		spip_log('spipbb : exec_spipbb_admin_configuration installation tables -fini');
 	}
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -59,9 +59,11 @@ function exec_spipbb_admin_configuration()
 
 	echo gros_titre(_T('spipbb:titre_spipbb'),'',false) ;
 
-	echo debut_grand_cadre(true);
-	echo afficher_hierarchie($id_rubrique);
-	echo fin_grand_cadre(true);
+	if (spipbb_is_configured() AND $GLOBALS['spipbb']['config_id_secteur'] == 'oui' ) {
+		echo debut_grand_cadre(true);
+		echo afficher_hierarchie($GLOBALS['spipbb']['id_secteur']);
+		echo fin_grand_cadre(true);
+	}
 
 	echo debut_gauche('',true);
 	echo debut_boite_info(true);
@@ -88,6 +90,7 @@ function exec_spipbb_admin_configuration()
 // ------------------------------------------------------------------------------
 function spipbb_admin_configuration()
 {
+	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler'); // voir un charger fonction
 	$prerequis=true;
 	$etat_tables=$etat_spip=$etat_plugins="";
@@ -96,6 +99,7 @@ function spipbb_admin_configuration()
 			$etat_tables.="<li>$table : ";
 			$etat_tables.= ($etat) ? _T('spipbb:admin_config_tables_ok') : _T('spipbb:admin_config_tables_erreur');
 			$etat_tables.="</li>";
+			if (!$etat) $GLOBALS['spipbb']['config_tables']='non';
 			$prerequis = ($prerequis AND $etat);
 	}
 	$check_spip = spipbb_check_spip_config();

@@ -306,7 +306,6 @@ li.profil a { background-image: url(img/icon_mini_profile.gif); }
 li.dern_messag a { background-image: url(img/icon_mini_message.gif); }
 
 
-
 /* *** divers objet *** */
 
 /* icone dernier message */
@@ -487,7 +486,7 @@ div.alerte_ferme p { font-size: 11px; color: #000000; font-weight:normal; }
 /* modif GAF v.0.5, v.0.6 */
 #bouton_rss a, #bouton_retour a {
 	background-color:#C3CCD0; /* coul 3*/
-	border:1px solid #4C788B; /* coul 1*/	
+	border:1px solid #4C788B; /* coul 1*/
 	font-size: 10px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	float:left;
@@ -551,8 +550,6 @@ p.space_5, p.space_10, p.space_20 {
 
 /* pour image png24 dans MS IE */
 img {
-	behavior: url("../win_png.htc");
+	behavior: url("/win_png.htc");
 	border:none;
 }
-
-                    

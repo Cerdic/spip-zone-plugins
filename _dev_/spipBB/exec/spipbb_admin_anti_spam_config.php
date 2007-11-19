@@ -52,9 +52,11 @@ function exec_spipbb_admin_anti_spam_config()
 
 	echo gros_titre(_T('spipbb:titre_spipbb'),'',false) ;
 
-	echo debut_grand_cadre(true);
-	echo afficher_hierarchie($id_rubrique);
-	echo fin_grand_cadre(true);
+	if (spipbb_is_configured() AND $GLOBALS['spipbb']['config_id_secteur'] == 'oui' ) {
+		echo debut_grand_cadre(true);
+		echo afficher_hierarchie($GLOBALS['spipbb']['id_secteur']);
+		echo fin_grand_cadre(true);
+	}
 
 	echo debut_gauche('',true);
 	echo debut_boite_info(true);
@@ -75,6 +77,7 @@ function exec_spipbb_admin_anti_spam_config()
 // [en] Generates the form to fill with migration parameters
 // ------------------------------------------------------------------------------
 function spipbb_anti_spam_formulaire($id_rubrique) {
+	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
 
 	$contexte = array(

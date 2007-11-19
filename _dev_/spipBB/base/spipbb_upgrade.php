@@ -28,15 +28,17 @@ function spipbb_install($action)
 	switch ($action)
 	{
 		case 'test' :
-			return true ;
+			return isset($GLOBALS['meta']['spipbb']) ;
 			break;
 		case 'install' :
 //			spipbb_upgrade_all();
+			spip_log('base/spipbb_upgrade.php spipbb_install(install)','spipbb');
 			break;
 		case 'uninstall' :
 		default :
 			spipbb_delete_metas();
 			spipbb_delete_tables();
+			spip_log('base/spipbb_upgrade.php spipbb_install(uninstall)','spipbb');
 			break;
 	}
 } /* spipbb_install */
