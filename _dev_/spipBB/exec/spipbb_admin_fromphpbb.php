@@ -28,7 +28,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spipbb');
-include_spip('inc/editer_article');
 
 if ( !empty($setmodules) and spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui' )
 {
@@ -45,6 +44,7 @@ if ( !empty($setmodules) and spipbb_is_configured() and $GLOBALS['spipbb']['conf
 // ------------------------------------------------------------------------------
 function exec_spipbb_admin_fromphpbb()
 {
+	spip_log(__FILE__." exec_spipbb_admin_fromphpbb() CALL",'spipbb');
 	if ( !spipbb_is_configured() or ($GLOBALS['spipbb']['configure']!='oui') 
 		 or $GLOBALS['spipbb']['config_id_secteur'] != 'oui'
 		 or empty($GLOBALS['spipbb']['id_secteur']) ) {
@@ -181,6 +181,7 @@ function spipbb_fromphpbb_formulaire($row=array())
 	$id_secteur = $row['id_secteur'];
 	$retour ="exec=spipbb_admin_fromphpbb";
 
+	include_spip('inc/editer_article');
 	$choix_rubrique = editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider);
 
 	$contexte = array( 
@@ -196,4 +197,24 @@ function spipbb_fromphpbb_formulaire($row=array())
 	return $res;
 } // spipbb_fromphpbb_formulaire
 
+// ------------------------------------------------------------------------------
+// Fonction supprimee en SVN... a remplacer ?
+// etait dans : inc/editer_article
+// ------------------------------------------------------------------------------
+if (!function_exists('')) {
+function editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider)
+{
+	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
+
+	$opt = $chercher_rubrique($id_rubrique, 'article', $config['restreint']);
+
+	$msg = _T('titre_cadre_interieur_rubrique') .
+	  ((preg_match('/^<input[^>]*hidden[^<]*$/', $opt)) ? '' : $aider("artrub"));
+
+	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
+	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";
+	else $logo = "rubrique-24.gif";
+
+	return debut_cadre_couleur($logo, true, "", $msg) . $opt .fin_cadre_couleur(true);
+} } // editer_article_rubrique
 ?>
