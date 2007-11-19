@@ -151,7 +151,7 @@ function mutualiser_creer($e, $options) {
 							$mail = charger_fonction('envoyer_mail', 'inc');
 							$mail($options['mail'],
 								_L('Creation de la base de donn&#233;es '._INSTALL_NAME_DB),
-								_L('La base de donn&#233;es '._INSTALL_NAME_DB.' a &#233;t&#233; cr&#233;&#233;e pour le site '.$e),
+								_L('La base de donn&#233;es '._INSTALL_NAME_DB.'@'._INSTALL_HOST_DB.' ('._INSTALL_USER_DB.':'._INSTALL_PASS_DB.') a &#233;t&#233; cr&#233;&#233;e pour le site '.$e),
 								$options['mail']
 							);
 						}
