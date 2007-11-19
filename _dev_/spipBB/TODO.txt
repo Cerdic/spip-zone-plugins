@@ -25,3 +25,5 @@ Todo-list pour spipbb
 -* INTEGRATION des idees utilisees dans Gafospip -> Scoty | reste / manque
 -** traductions
 -** Boutons d'admin sur l'interface publique ?
+
+-** Il reste un bug qui empeche d'afficher la page de config du spam

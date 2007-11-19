@@ -29,7 +29,7 @@ include_spip('inc/spipbb');
 
 if ( !empty($setmodules) )
 {
-	if ( spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui'  and $GLOBALS['spipbb']['config_spam_words']=='oui') {
+	if ( spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui') {
 		$file = basename(__FILE__);
 		$modules['spam']['swconfig'] = $file;
 	}
