@@ -112,7 +112,7 @@
 
         [(#REM) Forum de l'article ]
         <a href="#forum" name="forum" id="forum"></a>
-        <INCLURE{fond=inc-forum}{id_article}>
+        <!--INCLURE{fond=inc-forum}{id_article}-->
 				#FORMULAIRE_ANNOTATIONS{#SELF}
 
 	</div><!--#contenu-->
@@ -145,7 +145,7 @@
         [(#REM) Menu de navigation mots-cles ]
         #MODELE{article_mots}
         
-        <BOUCLE_aut(AUTEURS){id_auteur=#SESSION{id_auteur}}>
+        <BOUCLE_aut(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
 				#FORMULAIRE_UPLOAD{auteur,upload_annotation_forum}
 				<script type="text/javascript">
 					$(function() {
