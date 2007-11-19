@@ -21,6 +21,7 @@ function MiroirSyndic_ajouter_cron($taches) {
 
 function genie_miroir_syndic($t) {
 #spip_log('miroir de syndication = '.$t, 'syndic');
+	include_spip('inc/vieilles_defs');
 	$nombre = MiroirSyndic_miroir();
 #spip_log('miroir de syndication : '.$nombre, 'syndic');
 	return $nombre;
