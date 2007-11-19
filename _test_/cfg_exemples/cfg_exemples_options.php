@@ -1,4 +1,5 @@
 <?php
+include_spip('base/cfg_exemples');
 
 function balise_CODE($p){
 	$fichier = interprete_argument_balise(1,$p);

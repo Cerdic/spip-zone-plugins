@@ -8,21 +8,20 @@
 [<link rel="stylesheet" href="(#CHEMIN{cfg_exemples.css})" type="text/css" media="all" />]
 
 </head>
-
-<body class="page_cfg">
+<body class="page_sommaire">
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}{lang}>
-	<div id="conteneur">
+	<INCLURE{fond=inc-entete}>
 
-		[(#REM) Contenu principal: test de cfg ]
+	[(#REM) Contenu principal : derniers articles publies ]
+	<div class="hfeed" id="wrapper">
+	[(#REM) Contenu principal: test de cfg ]
+    <div id="contenu">
+	<INCLURE{fond=pages/#ENV{cfg_exemple_page}|sinon{introduction}}{env}>
+	</div><!-- fin contenu -->
 
-		<div id="contenu" style="width: 100%; ">
-		<INCLURE{fond=pages/#ENV{cfg_exemple_page}|sinon{introduction}}{env}>
-		</div><!-- fin contenu -->
-
-	</div><!-- fin conteneur -->
+	</div><!-- fin wrapper -->
 	
     [(#REM) Menu de navigation laterale ]
     <div id="navigation">

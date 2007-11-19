@@ -5,9 +5,8 @@
 	<auteur>Matthieu Marcillaud
 _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
-	<version>
-	0.1
-	</version>
+	<version>0.1</version>
+	<version_base>0.2</version_base>
 	<etat>
 	stable
 	</etat>
@@ -23,6 +22,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	[Documentation->http://www.spip-contrib.net/?article1605]
 	</lien>
 	<options>cfg_exemples_options.php</options>
+	<install>base/cfg_exemples_upgrade.php</install>
 	<prefix>
 	cfg_exemples
 	</prefix>

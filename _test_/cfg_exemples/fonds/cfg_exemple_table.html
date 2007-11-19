@@ -1,0 +1,33 @@
+
+<!-- titre=Exemple stockage dans table -->
+<!-- autoriser=voir -->
+<!-- storage=table -->
+<!-- table=spip_cfg_exemples -->
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset>
+Selection de l'identifiant, vide pour un nouvelle entr&eacute;e.
+<label for="id">*<:cfg:id:></label>
+<select name="id_cfg_exemple" class="cfg_id" style="width:10em";
+onChange="$(this.form).prepend('<input type=\'hidden\' name=\'_cfg_affiche\' value=\'oui\' />').submit()">
+	<option></option>
+	<BOUCLE_e(CFG_EXEMPLES)><option value="#ID_CFG_EXEMPLE"[ (#ID_CFG_EXEMPLE|=={[(#ENV{id_cfg_exemple})]}|?{' ',''})selected='selected' ]>#ID_CFG_EXEMPLE</option></BOUCLE_e>
+</select>
+<input type="submit" name="_cfg_affiche" value="&gt;" >
+<!-- autoriser la creation d'une nouvelle entree dans la table -->
+<input type="hidden" name="_cfg_new" value="oui">
+</fieldset>
+
+<label>Description</label>
+<input type="text" name="description" value="[(#ENV{description})]" />
+
+<br />
+<label>Texte</label>
+<textarea name="texte" rows="4" cols="40" style="width:100%;">[(#ENV{texte})]</textarea>
+
+<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
+<input type="reset" value="<:cfg:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" />
+</form>
