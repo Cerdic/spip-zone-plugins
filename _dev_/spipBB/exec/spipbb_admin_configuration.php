@@ -89,17 +89,41 @@ function exec_spipbb_admin_configuration()
 function spipbb_admin_configuration()
 {
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler'); // voir un charger fonction
-	$etat_tables = spipbb_check_tables() ? 'oui' : 'non' ;
-	// rajouter tests sur prerequis plugins config spip -motcles forums-
-	$etat_spip = spipbb_check_spip_config();
-	$etat_plugins = spipbb_check_plugins_config();
+	$prerequis=true;
+	$etat_tables=$etat_spip=$etat_plugins="";
+	$check_tables = spipbb_check_tables();
+	while (list($table,$etat) = each($check_tables)) {
+			$etat_tables.="<li>$table : ";
+			$etat_tables.= ($etat) ? _T('spipbb:admin_config_tables_ok') : _T('spipbb:admin_config_tables_erreur');
+			$etat_tables.="</li>";
+			$prerequis = ($prerequis AND $etat);
+	}
+	$check_spip = spipbb_check_spip_config();
+	while (list($spip_s,$elem_conf) = each($check_spip)) {
+			$etat_spip.="<li>$spip_s : ";
+			$etat_spip.= $elem_conf['message'];
+			$etat_spip.="</li>";
+			$prerequis = ($prerequis AND $elem_conf['etat']);
+	}
+	$check_plugins = spipbb_check_plugins_config();
+	while (list($plug,$etat) = each($check_plugins)) {
+			$etat_plugins.="<li>$plug : ";
+			$etat_plugins.= ($etat) ? _T('spipbb:admin_plugin_requis_ok') : _T('spipbb:admin_plugin_requis_erreur');
+			$etat_plugins.="</li>";
+			$prerequis = ($prerequis AND $etat);
+	}
 
+	if (!$prerequis) {
+		$GLOBALS['spipbb']['configure']='non';
+		spipbb_save_metas();
+	}
 	$contexte = array( 
 			'lien_action' => generer_action_auteur('spipbb_admin_reconfig', 'save',generer_url_ecrire('spipbb_admin_configuration')), // generer_url_action ?
 			'exec_script' => 'spipbb_admin_reconfig',
 			'etat_tables' => $etat_tables ,
 			'etat_plugins' => $etat_plugins,
 			'etat_spip' => $etat_spip ,
+			'prerequis' => $prerequis ? 'oui':'non',
 			'config_spipbb' => $GLOBALS['spipbb']['configure'],
 			'spipbb_id_secteur' => $GLOBALS['spipbb']['id_secteur'] ,
 			'id_groupe_mot' => $GLOBALS['spipbb']['id_groupe_mot'] ,
@@ -119,15 +143,29 @@ function spipbb_admin_configuration()
 // ------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------
 function spipbb_check_spip_config() {
+	$res=array();
 	// utiliser mot cles
 
 	// mots_cles_forums articles_mots + mots_cles_forums
-	if ( $GLOBALS['meta']['articles_mots']=='oui' ) $resultat=_T('spipbb:admin_spip_mots_cles_ok');
-	else $resultat=_T('spipbb:admin_spip_mots_cles_erreur');
+	if ( $GLOBALS['meta']['articles_mots']=='oui' ) {
+		$res['articles_mots']= array( 'etat'=>true, 'message'=>_T('spipbb:admin_spip_mots_cles_ok'));
+		$resultat=_T('spipbb:admin_spip_mots_cles_ok');
+	}
+	else {
+		$res['articles_mots']= array( 'etat'=>false, 'message'=>_T('spipbb:admin_spip_mots_cles_erreur'));
+		$resultat=_T('spipbb:admin_spip_mots_cles_erreur');
+	}
 	$resultat.="<br />";
-	if ( $GLOBALS['meta']['mots_cles_forums']=='oui' ) $resultat.=_T('spipbb:admin_spip_mots_forums_ok');
-	else $resultat.=_T('spipbb:admin_spip_mots_forums_erreur');
-	return $resultat;
+	if ( $GLOBALS['meta']['mots_cles_forums']=='oui' ) {
+		$resultat.=_T('spipbb:admin_spip_mots_forums_ok');
+		$res['mots_cles_forums']= array( 'etat'=>true, 'message'=>_T('spipbb:admin_spip_mots_forums_ok'));
+	}
+	else {
+		$res['mots_cles_forums']= array( 'etat'=>false, 'message'=>_T('spipbb:admin_spip_mots_forums_erreur'));
+		$resultat.=_T('spipbb:admin_spip_mots_forums_erreur');
+	}
+	return $res;
+	//return $resultat;
 } // spipbb_check_spip_config
 
 // ------------------------------------------------------------------------------
@@ -136,23 +174,29 @@ function spipbb_check_spip_config() {
 // ------------------------------------------------------------------------------
 function spipbb_check_plugins_config() {
 	$resultat="";
+	$res=array();
 	$tab_plugins_installes = unserialize($GLOBALS['meta']['plugin']);
 	if(!is_array($tab_plugins_installes['CFG'])) {
 		$resultat.= "<li>"._T('spipbb:admin_plugin_requis_erreur')." CFG</li>";
+		$res['CFG']=false;
 	} else {
 		$resultat.= "<li>"._T('spipbb:admin_plugin_requis_ok')." CFG</li>";
+		$res['CFG']=true;
 	}
 
 	// Le plugin balise_session n'est plus necessaire depuis SPIP 1.945
 	if (version_compare(substr($GLOBALS['spip_version'],0,5),'1.945','<')) {
 		if (!is_array($tab_plugins_installes['BALISESESSION'])) {
 			$resultat.= "<li>"._T('spipbb:admin_plugin_requis_erreur')." BALISESESSION</li>";
+			$res['BALISESESSION']=true;
 		} else {
 			$resultat.= "<li>"._T('spipbb:admin_plugin_requis_ok')." BALISESESSION</li>";
+			$res['BALISESESSION']=true;
 		}
 	}
 	if ($resultat) $resultat="<ul>".$resultat."</ul>";
-	return $resultat;
+	return $res;
+	//return $resultat;
 } // spipbb_check_plugins_config
 
 

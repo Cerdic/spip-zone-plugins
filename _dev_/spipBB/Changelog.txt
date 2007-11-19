@@ -1,12 +1,13 @@
 2007-11-19  chryjs  <chryjs!@!free!.!fr>
 
  * Suppression de modeles obsoletes 
-
+ * Ajout d'un controle des prerequis a l'activation
+ * passage en 0.3.1 - meilleurs controles
 
 2007-11-18  chryjs  <chryjs!@!free!.!fr>
 
  * Integration Gafospip, balises, fonctions et mise en page
- * passage en 0.3.0 - coherence avec SpipBB
+ * passage en 0.3.0 - coherence avec gafospip
 
 2007-11-14  chryjs  <chryjs!@!free!.!fr>
 

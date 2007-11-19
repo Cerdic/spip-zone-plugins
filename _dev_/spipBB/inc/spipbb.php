@@ -296,7 +296,7 @@ function spipbb_delete_tables()
 } // spipbb_delete_tables
 
 //----------------------------------------------------------------------------
-// [fr] Verifier les tables dans la base de d du plugin (desinstallation)
+// [fr] Verifier les tables dans la base de d du plugin
 // [en] Check plugin database tables
 //----------------------------------------------------------------------------
 function spipbb_check_tables()
@@ -304,13 +304,37 @@ function spipbb_check_tables()
 	global $tables_spipbb,$tables_principales;
 	include_spip('base/spipbb');
 	reset($tables_spipbb);
-	while ( list($key,$val) = each($tables_spipbb) )
+	$res=array();
+	while ( list(,$une_table) = each($tables_spipbb) )
 	{
-		$res = sql_showtable($val);
-		if ($res != $tables_principales[$val] ) return false ;
+		$res[$une_table]=spipbb_check_une_table($une_table,$tables_principales);
 	}
-	return true;
+	return $res;
 } // spipbb_check_tables
+
+//----------------------------------------------------------------------------
+// [fr] Verifier une table de la base de d du plugin
+// [en] Check plugin database tables
+//----------------------------------------------------------------------------
+function spipbb_check_une_table($nom_table,$tables_principales)
+{
+	$res = sql_showtable($nom_table);
+	// une petite manip pour s'affranchir des differents formats des bases variees
+	// on ne s'interre pas aux index pour le moment
+	while ( list($k,$v) = each($res['field']) )
+	{
+		$param=preg_split("/\s/",$v);
+		$res['field'][$k]=strtolower($param[0]);
+	}
+	$table_origine=$tables_principales[$nom_table];
+	while ( list($k,$v) = each($table_origine['field']) )
+	{
+		$param=preg_split("/\s/",$v);
+		$table_origine['field'][$k]=strtolower($param[0]);
+	}
+	if ($res['field'] != $table_origine['field'] ) return false ;
+	else return true;
+} // spipbb_check_une_table
 
 //----------------------------------------------------------------------------
 // [fr] Initialise le groupe de mot cles necessaire pour spipbb
@@ -473,6 +497,22 @@ function spipbb_afficher_signature_post($id_auteur) {
 	return;
 }
 
+// ------------------------------------------------------------------------------
+// [fr] Formatte une sortie de print_r
+// [en] Html-ize print_r output
+// ------------------------------------------------------------------------------
+function print_r_html($var,$return_data=false)
+{
+    $data = print_r($var,true);
+    $data = str_replace( "  ","&nbsp;&nbsp;", $data);
+    $data = str_replace( "\r\n","<br />\r\n", $data);
+    $data = str_replace( "\r","<br />\r", $data);
+    $data = str_replace( "\n","<br />\n", $data);
 
+    if (!$return_data)
+        echo $data;   
+    else
+        return $data;
+}
 
 ?>

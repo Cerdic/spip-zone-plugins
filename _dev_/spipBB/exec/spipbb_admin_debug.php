@@ -79,22 +79,4 @@ function spipbb_show_debug()
 	return $res;
 } // spipbb_show_debug
 
-// ------------------------------------------------------------------------------
-// [fr] Formatte une sortie de print_r
-// [en] Html-ize print_r output
-// ------------------------------------------------------------------------------
-function print_r_html($var,$return_data=false)
-{
-    $data = print_r($var,true);
-    $data = str_replace( "  ","&nbsp;&nbsp;", $data);
-    $data = str_replace( "\r\n","<br />\r\n", $data);
-    $data = str_replace( "\r","<br />\r", $data);
-    $data = str_replace( "\n","<br />\n", $data);
-
-    if (!$return_data)
-        echo $data;   
-    else
-        return $data;
-}
-
 ?>

@@ -1,33 +1,28 @@
 Todo-list pour spipbb
 ---------------------
 
--* améliorer l'"administration" des forums (interface privee)
+-* ameliorer l'"administration" des forums (interface privee)
 -* nettoyer les squelettes
 -* lien entre auteur et la liste des messages qu'il a publie
 
 -* Bugs et autres elements non finis :
 -** Installation par etapes
--** Ne pas initialiser la config si pas install terminee
 -** Chaque fonction est soumise a config
--** Utiliser les descriptions des mots clés (ajoutees dans lang/... mot_...)
+-** Utiliser les descriptions des mots cles (ajoutees dans lang/... mot_...)
 -** Installation : "not configured" => Bouton/ case d'alerte + lien vers admin_config
--** Gestion des annonces / postits / Fermés à tester /controler
--** Affichage des annonces / postits / Fermés
--** Affichage du profil à revoir
--** Affichage de poster à revoir (les chatons sont trop ecartes)
--** Getion avatar : a ameliorer + téléchargement (droits ?)
+-** Gestion des annonces / postits / Fermes a tester /controler
+-** Affichage des annonces / postits / Fermes
+-** Affichage du profil a revoir
+-** Getion avatar : a ameliorer + tÃ©lÃ©chargement (droits ?)
 -** Import phpBB : test mot de passe / authentification d'un auteur importe
 -** Import phpBB : verifier difference login et nom auteur
 -** Import phpBB : import des MP ? Option de depart ?
 -** Import phpBB : adresse IP des posteurs -> forums
--** Import phpBB : Si pas Iniset, realisation par etapes de la partie 2 et 3 ? Precalcul à l'avance
+-** Import phpBB : Si pas Iniset, realisation par etapes de la partie 2 et 3 ? Precalcul a l'avance
 -** mot cles ferme, postit, annonce : bug ne doivent s'appliquer qu'au message principal du thread
 -** Anti spam : sur le login, IP (ban)
-
--** Avantage/inconvénients utilisation d'une portion de code similaire à balise #SESSION
--** Citations
+-** Envisager de controler l'etat de la config rÃ©gulierement ? a chaque passsage dans un menu d'admin ?
 
 -* INTEGRATION des idees utilisees dans Gafospip -> Scoty | reste / manque
-
--** Chemin vers Smileys + DEFINE associe
 -** traductions
+-** Boutons d'admin sur l'interface publique ?

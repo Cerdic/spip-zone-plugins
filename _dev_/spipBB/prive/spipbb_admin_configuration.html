@@ -9,6 +9,26 @@
 
 [(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_forums_configuration:>})]
 
+[(#REM) ------------------------ ETAT DES PREREQUIS ------------------------ ]
+<fieldset>
+<legend><:spipbb:admin_config_prerequis:></legend>
+<p>
+<label>
+	<ul>
+	#ENV*{etat_spip}
+	</ul>
+	<ul>
+	#ENV*{etat_plugins}
+	</ul>
+	<ul>
+	#ENV*{etat_tables}
+	</ul>
+</label>
+</p>
+</fieldset>
+
+<?php if ( "#ENV{prerequis}"=="oui" ) { ?>
+
 [(#REM) ------------------------ ACTIVATION DE SPIPBB ------------------------ ]
 <fieldset>
 <legend><:spipbb:admin_config_spipbb:></legend>
@@ -29,18 +49,6 @@
 </fieldset>
 
 <?php if ( "#ENV{config_spipbb}"=="oui" ) { ?>
-
-[(#REM) ------------------------ ETAT DES PREREQUIS ------------------------ ]
-<fieldset>
-<legend><:spipbb:admin_config_prerequis:></legend>
-<p>
-<label>
-	<i>[(#ENV{etat_tables}|=={oui}|?{<:spipbb:admin_config_tables_ok:>,<:spipbb:admin_config_tables_erreur:>})]</i><br />
-	<i>#ENV*{etat_spip}</i>
-	<i>#ENV*{etat_plugins}</i>
-</label>
-</p>
-</fieldset>
 
 [(#REM) ------------------------ RUBRIQUE/SECTEUR CONTENANT LES FORUMS ------------------------ ]
 
@@ -194,10 +202,10 @@
 } ?>
 
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
-<div>
-<input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:OK:>" class="fondo" />
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:OK:>" class="fondo" /></div>
 
-</div>
+<?php //fin spipbb prerequis == oui
+} ?>
 
 [(#REM|sinon{1}|fin_cadre_trait_couleur)]
 
