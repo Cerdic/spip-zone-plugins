@@ -91,10 +91,11 @@ function exec_mutualisation_dist() {
 	$page = str_replace('</head>', '
 		<style type="text/css">
 		a {color:#5a3463;}
-		tr {vertical-align:top;}
+		table {border-collapse: collapse; border: 1px solid #999;}
+		tr {vertical-align:top;border: 1px solid #999;}
 		.tr0 {background-color:#ddded5}
 		thead tr {font-weight:bold;background-color:#333;color:#fff;}
-		td {text-align:left;}
+		td {text-align:left;border-left: 1px solid #ccc;}
 		#minipres{width:50em;}
 		.upgrade {text-align: center; padding:1em .5em;}
 		.upgrade input { border: 2px solid red;color:red; background-color:#fff; font-weight:bold;}
