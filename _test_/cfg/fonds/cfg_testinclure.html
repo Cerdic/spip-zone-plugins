@@ -1,5 +1,6 @@
 <!-- descriptif=Fond de test inclusions et boucles pour le plugin de configuration cfg :
-boucle sur les rubriques racine et inclusion des champs de formulaire par &lt;INCLURE...&gt; . 
+boucle sur 3 rubriques racine et inclusion des champs de formulaire par &lt;INCLURE...&gt; 
+(5 articles dans la rubrique). 
 
 
 <br /><a href="../?page=test_cfg&var_mode=recalcul" class="spip_in">
@@ -8,6 +9,9 @@ boucle sur les rubriques racine et inclusion des champs de formulaire par &lt;IN
 <:crayons:editer:>-->
 
 <!-- titre=Test boucles et inclusions pour le plugin cfg -->
+[(#REM) refus=Vous ne pouvez pas acceder &agrave; ce formulaire !
+<br />Vous devez &ecirc;tre administrateur et connect&eacute;.
+]
 
 [(#REM) liens*=testtable]
 [(#REM) liens*=testcasier]
@@ -22,10 +26,8 @@ boucle sur les rubriques racine et inclusion des champs de formulaire par &lt;IN
 #CACHE{0}
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 
-#CFG_ARBO{testinclure}
-
 <fieldset><legend><:cfg:boucles_et_inclusions:></legend>
-<BOUCLE_racine(RUBRIQUES){racine}{par num titre}>
+<BOUCLE_racine(RUBRIQUES){racine}{par num titre}{0,3}>
 
 	<label for="cfg_bidule_rubrique_#ID_RUBRIQUE">#TITRE</label>
 	<select name="bidule_rubrique_#ID_RUBRIQUE" id="cfg_bidule_rubrique_#ID_RUBRIQUE" class="forml">
