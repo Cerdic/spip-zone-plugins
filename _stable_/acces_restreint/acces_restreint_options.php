@@ -132,5 +132,16 @@ function autoriser_evenement_voir($faire, $type, $id, $qui, $opt) {
 	return !isset($evenements_exclus[$publique][$id]);
 }
 }
+if(!function_exists('autoriser_document_voir')) {
+function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
+	include_spip('inc/acces_restreint');
+	static $documents_exclus;
+	if (!isset($documents_exclus)) {
+		$documents_exclus = AccesRestreint_liste_documents_exclus(_DIR_RESTREINT!="");
+		$documents_exclus = array_flip($documents_exclus);
+	}
+	return !isset($evenements_exclus[$id]);
+}
+}
 
 ?>

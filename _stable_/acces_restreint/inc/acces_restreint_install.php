@@ -10,7 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 				|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 			include_spip('base/acces_restreint');
-			if ($current_version==0.0){
+			if (version_compare($current_version,'0.0','<=')){
 				include_spip('base/create');
 				include_spip('base/abstract_sql');
 				creer_base();
@@ -27,7 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				echo "AccesRestreint Install<br/>";
 				ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 			}
-			if ($current_version<0.2){
+			if (version_compare($current_version,'0.2','<')){
 				include_spip('base/create');
 				include_spip('base/abstract_sql');
 				// ajout des champs publique/privee si pas existants
@@ -37,15 +37,20 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				if (!isset($desc['field']['privee']))
 					spip_query("ALTER TABLE spip_zones ADD privee ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER publique");
 				echo "AccesRestreint@0.2<br />";
-				ecrire_meta($nom_meta_base_version,$current_version=0.2,'non');
+				ecrire_meta($nom_meta_base_version,$current_version='0.2','non');
 			}
-			if ($current_version<0.3){
+			if (version_compare($current_version,'0.3','<')){
 				spip_query("ALTER TABLE `zones_auteurs` DROP INDEX `id_zone`");
 				spip_query("ALTER TABLE `zones_auteurs` ADD PRIMARY KEY ( `id_zone` , `id_auteur` )");
 				spip_query("ALTER TABLE `zones_rubriques` DROP INDEX `id_zone`");
 				spip_query("ALTER TABLE `zones_rubriques` ADD PRIMARY KEY ( `id_zone` , `id_rubrique` )");
 				echo "AccesRestreint@0.3<br />";
-				ecrire_meta($nom_meta_base_version,$current_version=0.3,'non');
+				ecrire_meta($nom_meta_base_version,$current_version='0.3','non');
+			}
+			if (version_compare($current_version,'0.3.0.1','<')){
+				ecrire_meta('creer_htaccess','oui');
+				echo "AccesRestreint@0.3.0.1<br />";
+				ecrire_meta($nom_meta_base_version,$current_version='0.3.0.1','non');
 			}
 			ecrire_metas();
 		}
@@ -55,6 +60,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		spip_query("DROP TABLE spip_zones");
 		spip_query("DROP TABLE spip_zones_auteurs");
 		spip_query("DROP TABLE spip_zones_rubriques");
+		effacer_meta('creer_htaccess');
 		effacer_meta($nom_meta_base_version);
 		ecrire_metas();
 	}
