@@ -26,16 +26,16 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 spip_log(__FILE__.' : included','spipbb');
 
-include_spip('inc/spipbb');
-
 if ( !empty($setmodules) )
 {
-	if ( spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui' and $GLOBALS['spipbb']['config_spam_words']=='oui') {
+	if ( spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui'
+		 and $GLOBALS['spipbb']['config_spam_words']=='oui') {
 		$file = basename(__FILE__);
 		$modules['spam']['swwords'] = $file;
 	}
 	return;
 }
+if (defined("_SPAM_SWWORDS")) return; else define("_SPAM_SWWORDS", true);
 
 // ------------------------------------------------------------------------------
 // [fr] Methode exec
@@ -45,6 +45,7 @@ if ( !empty($setmodules) )
 // ------------------------------------------------------------------------------
 function exec_spipbb_admin_anti_spam_words()
 {
+	include_spip('inc/spipbb');
 	if (!spipbb_is_configured() or ($GLOBALS['spipbb']['configure']!='oui')) {
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('spipbb_admin_configuration', ''));

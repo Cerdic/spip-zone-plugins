@@ -24,21 +24,22 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 spip_log(__FILE__.' : included','spipbb');
 
-include_spip("inc/spipbb");
-
-// Module secifique de debogage
-include_spip('inc/filtres.php');
-$svn_revision = abs(version_svn_courante(_DIR_PLUGIN_SPIPBB));
-
 if( !empty($setmodules) )
 {
+	// Module secifique de debogage
 // Chryjs : test commente : pour le moment on est en SVN !!!
+	//include_spip('inc/filtres.php');
+	//$svn_revision = abs(version_svn_courante(_DIR_PLUGIN_SPIPBB));
+
 //	if ( $svn_revision AND $svn_revision>0) {
 		$file = basename(__FILE__);
 		$modules['01_general']['ZZ_debug'] = $file;
 //	}
 	return;
 }
+if (defined("_GENERAL_DEBUG")) return; else define("_GENERAL_DEBUG", true);
+
+include_spip("inc/spipbb");
 
 // ------------------------------------------------------------------------------
 // Affiche le debogage pour la version SVN
@@ -51,7 +52,7 @@ function exec_spipbb_admin_debug()
 
 	echo gros_titre(_T('spipbb:titre_spipbb'),'',false) ;
 
-	if (spipbb_is_configured() AND 	$GLOBALS['spipbb']['config_id_secteur'] == 'oui' ) {
+	if (spipbb_is_configured() AND $GLOBALS['spipbb']['config_id_secteur'] == 'oui' ) {
 		echo debut_grand_cadre(true);
 		echo afficher_hierarchie($GLOBALS['spipbb']['id_secteur']);
 		echo fin_grand_cadre(true);

@@ -317,6 +317,7 @@ function spipbb_init_mot_cle($mot,$groupe)
 // ------------------------------------------------------------------------------
 function spipbb_admin_gauche($rubrique_admin_courante="")
 {
+	// cette fonction pose des problemes et est realisee  en plusieurs etapes pour debogage
 	spip_log('inc/spipbb.php : spipbb_admin_gauche START :'._DIR_PLUGIN_SPIPBB,'spipbb');
 	
 	if (!function_exists('generer_url_ecrire')) {
@@ -324,31 +325,41 @@ function spipbb_admin_gauche($rubrique_admin_courante="")
 		spip_log('inc/spipbb.php : spipbb_admin_gauche generer_url_ecrire not found','spipbb');
 	}
 	$modules = array();
+	$modules_to_include=array();
 
-	$dir = @opendir(_DIR_PLUGIN_SPIPBB."exec/");
-
-	$setmodules = 1; // permet d'activer le lien lors de l'include
-	while( $file = @readdir($dir) )
-	{
-		if( preg_match("/^spipbb_admin_.*?\.php$/", $file) )
+	if ( $dir = opendir(_DIR_PLUGIN_SPIPBB."exec/") ) {
+		$setmodules = 1; // permet d'activer le lien lors de l'include
+		while( false !== ($file = readdir($dir)) ) // cf http://fr.php.net/manual/fr/function.readdir.php
 		{
-			// chaque fichier inclu doit contenir ceci (par exemple) en entete :
-			//if( !empty($setmodules) )
-			//{
-			//	$file = basename(__FILE__);
-			//	$modules['General']['Configuration'] = $file;
-			//	return;
-			//}
-			if ( is_readable( _DIR_PLUGIN_SPIPBB . "exec/" . $file) )
-				@include( _DIR_PLUGIN_SPIPBB . "exec/" . $file);
-			else
-				spip_log('inc/spipbb.php : spipbb_admin_gauche include impossible :'._DIR_PLUGIN_SPIPBB . "exec/" . $file,'spipbb');
+			if( preg_match("/^spipbb_admin_.*?\.php$/", $file) )
+			{
+				// chaque fichier inclu doit contenir ceci (par exemple) en entete :
+				//if( !empty($setmodules) )
+				//{
+				//	$file = basename(__FILE__);
+				//	$modules['General']['Configuration'] = $file;
+				//	return;
+				//}
+				if ( is_readable( _DIR_PLUGIN_SPIPBB . "exec/" . $file) ) {
+					require( _DIR_PLUGIN_SPIPBB . "exec/" . $file);
+					$modules_to_include[] = _DIR_PLUGIN_SPIPBB . "exec/" . $file ;
+					spip_log('inc/spipbb.php : spipbb_admin_gauche include RETOUR include :'._DIR_PLUGIN_SPIPBB . "exec/" . $file,'spipbb');
+				}
+				else
+					spip_log('inc/spipbb.php : spipbb_admin_gauche include impossible :'._DIR_PLUGIN_SPIPBB . "exec/" . $file,'spipbb');
+			}
 		}
-	}
-	spip_log('inc/spipbb.php : spipbb_admin_gauche include fin','spipbb');
+		spip_log('inc/spipbb.php : spipbb_admin_gauche include fin','spipbb');
 
-	@closedir($dir);
+		@closedir($dir);
+	}
 	unset($setmodules);
+	reset($modules_to_include);
+	spip_log('inc/spipbb.php : spipbb_admin_gauche include list:'.join(":",$modules_to_include),'spipbb');
+	//while (list(,$file)=each($modules_to_include)) {
+	//	require( $file);
+	//	spip_log('inc/spipbb.php : spipbb_admin_gauche include RETOUR include :'._DIR_PLUGIN_SPIPBB . "exec/" . $file,'spipbb');
+	//}
 
 	ksort($modules);
 	$affichage = "\n";

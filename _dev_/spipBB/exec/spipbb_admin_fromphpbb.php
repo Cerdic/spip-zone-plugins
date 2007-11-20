@@ -28,8 +28,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 spip_log(__FILE__.' : included','spipbb');
 
-include_spip('inc/spipbb');
-
 if ( !empty($setmodules) )
 {
 	if ( spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui' ) {
@@ -38,6 +36,9 @@ if ( !empty($setmodules) )
 	}
 	return;
 }
+if (defined("_OUTILS_FROMPHPBB")) return; else define("_OUTILS_FROMPHPBB", true);
+
+include_spip('inc/spipbb');
 
 // ------------------------------------------------------------------------------
 // [fr] Methode exec

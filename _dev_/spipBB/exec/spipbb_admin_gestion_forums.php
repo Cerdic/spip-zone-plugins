@@ -25,8 +25,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 spip_log(__FILE__.' : included','spipbb');
 
-include_spip('inc/spipbb');
-
 if ( !empty($setmodules) )
 {
 	if ( spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui' ) {
@@ -35,8 +33,11 @@ if ( !empty($setmodules) )
 	}
 	return;
 }
+if (defined("_GENERAL_GESTION")) return; else define("_GENERAL_GESTION", true);
 
-include_spip('inc/editer_article');
+include_spip('inc/spipbb');
+
+//include_spip('inc/editer_article');
 
 // ------------------------------------------------------------------------------
 // [fr] Genere la page de gestion globale des forums

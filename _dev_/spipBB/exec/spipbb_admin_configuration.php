@@ -25,14 +25,15 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 spip_log(__FILE__.' : included','spipbb');
 
-include_spip('inc/spipbb');
-
 if( !empty($setmodules) )
 {
 	$file = basename(__FILE__);
 	$modules['01_general']['01_configuration'] = $file;
 	return;
 }
+if (defined("_GENERAL_CONFIGURATION")) return; else define("_GENERAL_CONFIGURATION", true);
+
+include_spip('inc/spipbb');
 
 // ------------------------------------------------------------------------------
 // [fr] Genere la page de gestion globale des forums

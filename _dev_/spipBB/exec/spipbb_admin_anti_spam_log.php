@@ -1,11 +1,11 @@
 <?php
-
 #---------------------------------------------------------------#
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : exec/spipbb_admin_anti_spam_log                    #
+#  Authors : Chryjs, 2007 et als                                #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
 #  Contact : chryjs!@!free!.!fr                                 #
 #---------------------------------------------------------------#
-
 //    This program is free software; you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
 //    the Free Software Foundation; either version 2 of the License, or any later version.
@@ -25,16 +25,16 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 spip_log(__FILE__.' : included','spipbb');
 
-include_spip('inc/spipbb');
-
 if ( !empty($setmodules) )
 {
-	if ( spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui'  and $GLOBALS['spipbb']['config_spam_words']=='oui') {
+	if ( spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui'
+		 and $GLOBALS['spipbb']['config_spam_words']=='oui') {
 		$file = basename(__FILE__);
 		$modules['spam']['swlog'] = $file;
 	}
 	return;
 }
+if (defined("_SPAM_SWLOG")) return; else define("_SPAM_SWLOG", true);
 
 // ------------------------------------------------------------------------------
 // [fr] Methode exec
@@ -44,6 +44,8 @@ if ( !empty($setmodules) )
 // ------------------------------------------------------------------------------
 function exec_spipbb_admin_anti_spam_log()
 {
+	include_spip('inc/spipbb');
+
 	if (!spipbb_is_configured() or ($GLOBALS['spipbb']['configure']!='oui')) {
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('spipbb_admin_configuration', ''));

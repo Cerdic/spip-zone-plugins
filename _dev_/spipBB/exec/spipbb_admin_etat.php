@@ -32,14 +32,13 @@ if ( !empty($setmodules) )
 	}
 	return;
 }
+if (defined("_GENERAL_ETAT")) return; else define("_GENERAL_ETAT", true);
 
 include_spip("inc/spipbb"); // spipbb_admin_gauche + divers
 
 // ------------------------------------------------------------------------------
 function exec_spipbb_admin_etat()
 {
-	global $connect_statut, $connect_toutes_rubriques;
-
 	if (!spipbb_is_configured() or ($GLOBALS['spipbb']['configure']!='oui')) {
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('spipbb_admin_configuration', ''));

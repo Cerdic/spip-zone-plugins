@@ -1,11 +1,11 @@
 <?php
-
 #---------------------------------------------------------------#
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : exec/spipbb_admin_anti_spam_config                 #
+#  Authors : Chryjs, 2007 et als                                #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
 #  Contact : chryjs!@!free!.!fr                                 #
 #---------------------------------------------------------------#
-
 //    This program is free software; you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
 //    the Free Software Foundation; either version 2 of the License, or any later version.
@@ -23,9 +23,8 @@
 // * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-spip_log(__FILE__.' : included','spipbb');
 
-include_spip('inc/spipbb');
+spip_log(__FILE__.' : included','spipbb');
 
 if ( !empty($setmodules) )
 {
@@ -35,6 +34,9 @@ if ( !empty($setmodules) )
 	}
 	return;
 }
+if (defined("_SPAM_SWCONFIG")) return; else define("_SPAM_SWCONFIG", true);
+
+include_spip('inc/spipbb');
 
 // ------------------------------------------------------------------------------
 // [fr] Methode exec
@@ -67,10 +69,10 @@ function exec_spipbb_admin_anti_spam_config()
 	echo fin_boite_info(true);
 	echo spipbb_admin_gauche('spipbb_admin_anti_spam_config');
 
-	echo creer_colonne_droite($id_rubrique,true);
-	echo debut_droite($id_rubrique,true);
+	echo creer_colonne_droite('',true);
+	echo debut_droite('',true);
 
-	echo spipbb_anti_spam_formulaire($id_rubrique);
+	echo spipbb_anti_spam_formulaire();
 	echo fin_gauche(), fin_page();
 
 } // exec_spipbb_admin_spam_words_config
@@ -79,7 +81,7 @@ function exec_spipbb_admin_anti_spam_config()
 // [fr] Genere le formulaire de saisie des parametres de migration
 // [en] Generates the form to fill with migration parameters
 // ------------------------------------------------------------------------------
-function spipbb_anti_spam_formulaire($id_rubrique) {
+function spipbb_anti_spam_formulaire() {
 	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
 
