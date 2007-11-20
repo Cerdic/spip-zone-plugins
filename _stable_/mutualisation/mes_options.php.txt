@@ -90,30 +90,17 @@
 	
 	demarrer_site($site,
 		array(
-			// Creer ou non le site s'il n'existe pas (defaut: false) 
-			'creer_site' => true, 
-			// Creer ou non la base de donnee si elle n'existe pas (false)
-			'creer_base' => true, 
-			// Creer ou non un utilisateur pour la nouvelle base de donnee (false)
-			'creer_user_base' => false,
-			// Adresse mail pour recevoir un mail lors d'une creation de site mutualise ('') 
-			'mail' => '',
-			// Code d'activation ('ecureuil')
-			'code' => 'ecureuil',
-			// Definir automatiquement le prefixe de table (false)
-			// /!\ mettre true si tous les sites dans la meme base 
-			'table_prefix' => false,
-			// Definir automatiquement le prefixe de cookie (false)
-			'cookie_prefix' => true,
-			// Nom du repertoire contenant les sites mutualises ('sites')
-			'repertoire' => 'sites',
-			// Utiliser la redirection des URL d'images courtes dans la partie publique (false)
-			'url_img_courtes' => true,
-			// Utiliser une table externe pour recuperer des identifiants
-			// (code, user, pass) permettant a un utilisateur d'installer le site (false)
-			# 'utiliser_panel' => false,
-			// Creer la base de donnees via une URL (methode AlternC)
-			'url_creer_base' => ''
+			'creer_site' => true,        // Creer ou non le site s'il n'existe pas (defaut: false) 
+			'creer_base' => true,        // Creer ou non la base de donnee si elle n'existe pas (false)
+			'creer_user_base' => false,  // Creer ou non un utilisateur pour la nouvelle base de donnee (false)
+			'mail' => '',                // Adresse mail pour recevoir un mail lors d'une creation de site mutualise ('') 
+			'code' => 'ecureuil',        // Code d'activation ('ecureuil') 
+			'table_prefix' => false,     // Definir automatiquement le prefixe de table (false) ... mettre true si tous les sites dans la meme base 
+			'cookie_prefix' => true,     // Definir automatiquement le prefixe de cookie (false)
+			'repertoire' => 'sites',     // Nom du repertoire contenant les sites mutualises ('sites')
+			'url_img_courtes' => true,   // Utiliser la redirection des URL d'images courtes dans la partie publique (false)
+			# 'utiliser_panel' => false, // Utiliser une table externe pour recuperer des identifiants ... (code, user, pass) permettant a un utilisateur d'installer le site (false) 
+			'url_creer_base' => ''       // Creer la base de donnees via une URL (methode AlternC)
 		)
 	);
 
