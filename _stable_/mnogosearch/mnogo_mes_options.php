@@ -168,9 +168,7 @@ function hash_where($recherche=NULL, $c=false){
 	// alors qu'en MySQL 4.1 c'est interdit !
 	$vers = spip_query("SELECT VERSION() AS v");
 	$vers = spip_fetch_array($vers);
-	if ((substr($vers['v'], 0, 1) >= 4
-		AND substr($vers['v'], 2, 1) >= 1 )
-		OR substr($vers['v'], 0, 1) >= 5)
+	if (version_compare($vers['v'],'4.1.12','>='))
 		return "hash=0x$h";
 	else
 		return  "HEX(hash)='$h'";
