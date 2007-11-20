@@ -136,11 +136,15 @@ if(!function_exists('autoriser_document_voir')) {
 function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/acces_restreint');
 	static $documents_exclus;
-	if (!isset($documents_exclus)) {
-		$documents_exclus = AccesRestreint_liste_documents_exclus(_DIR_RESTREINT!="");
-		$documents_exclus = array_flip($documents_exclus);
+	if (isset($opt['publique']))
+		$publique = $opt['publique'];
+	else
+		$publique = _DIR_RESTREINT!="";
+	if (!isset($documents_exclus[$publique]) || !is_array($documents_exclus[$publique])) {
+		$documents_exclus[$publique] = AccesRestreint_liste_documents_exclus($publique,$qui['id_auteur']);
+		$documents_exclus[$publique] = array_flip($documents_exclus[$publique]);
 	}
-	return !isset($evenements_exclus[$id]);
+	return !isset($documents_exclus[$publique][$id]);
 }
 }
 
