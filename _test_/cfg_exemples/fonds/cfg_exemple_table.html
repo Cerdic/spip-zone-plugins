@@ -3,6 +3,8 @@
 <!-- autoriser=voir -->
 <!-- storage=table -->
 <!-- table=spip_cfg_exemples -->
+[(#REM) autoriser la creation d'une nouvelle entree dans la table ]
+<!-- autoriser_absence_id=oui -->
 
 #CACHE{0}
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
@@ -16,8 +18,7 @@ onChange="$(this.form).prepend('<input type=\'hidden\' name=\'_cfg_affiche\' val
 	<BOUCLE_e(CFG_EXEMPLES)><option value="#ID_CFG_EXEMPLE"[ (#ID_CFG_EXEMPLE|=={[(#ENV{id_cfg_exemple})]}|?{' ',''})selected='selected' ]>#ID_CFG_EXEMPLE</option></BOUCLE_e>
 </select>
 <input type="submit" name="_cfg_affiche" value="&gt;" >
-<!-- autoriser la creation d'une nouvelle entree dans la table -->
-<input type="hidden" name="_cfg_new" value="oui">
+
 </fieldset>
 
 <label>Description</label>
