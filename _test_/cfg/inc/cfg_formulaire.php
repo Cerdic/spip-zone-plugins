@@ -51,6 +51,10 @@ class cfg_formulaire
 	var $champs_id = array();
 // leurs valeurs
 	var $val = array();
+// nom de la table sql pour storage extra ou table
+	var $table = '';
+// autoriser l'insertion de nouveau contenu dans une table sans donner d'identifiant ?
+	var $autoriser_absence_id = 'non';
 // pour tracer les valeurs modifiees
 	var $log_modif = '';
 // stockage du fond compile par recuperer_fond()
@@ -153,7 +157,7 @@ class cfg_formulaire
 	 */
 	function recuperer_parametres(){
 		// cas de #REM
-		preg_replace_callback('/(\[\(#REM\) ([a-z0-9]\w+)(\*)?=)(.*?)\]/sim',
+		preg_replace_callback('/(\[\(#REM\) ([a-z0-9_]\w+)(\*)?=)(.*?)\]/sim',
 					array(&$this, 'post_params'), $this->controldata);
 					
 		// cas de <!--
@@ -166,14 +170,14 @@ class cfg_formulaire
 	
 	function recuperer_parametres_post_compile(){
 		$this->rempar = array(array());
-		if (preg_match_all('/<!-- [a-z0-9]\w+\*?=/i', $this->controldata, $this->rempar)) {
+		if (preg_match_all('/<!-- [a-z0-9_]\w+\*?=/i', $this->controldata, $this->rempar)) {
 			// il existe des champs <!-- param=valeur -->, on les stocke
 			$this->recuperer_fond();
 			$this->current_rempar = 0;
-			$this->fond_compile = preg_replace_callback('/(<!-- ([a-z0-9]\w+)(\*)?=)(.*?)-->/sim',
+			$this->fond_compile = preg_replace_callback('/(<!-- ([a-z0-9_]\w+)(\*)?=)(.*?)-->/sim',
 								array(&$this, 'post_params'), $this->fond_compile);
 			// s'il en reste : il y a un probleme !
-			if (preg_match('/<!-- [a-z0-9]\w+\*?=/', $this->fond_compile)) {
+			if (preg_match('/<!-- [a-z0-9_]\w+\*?=/', $this->fond_compile)) {
 				die('erreur manque parametre externe: '
 					. htmlentities(var_export($this->rempar, true)));
 			}

@@ -25,7 +25,7 @@ function calculer_CFG_TRAITER($fond, $id){
 		
 	if ($config->autoriser()){
 		$config->traiter();	
-		return $config->messages;	
+		return $config->message;	
 	} else
 		return $config->refus;
 }

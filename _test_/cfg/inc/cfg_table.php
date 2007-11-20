@@ -33,8 +33,10 @@ class cfg_table
 	/* 
 	 * Recuperer les valeurs
 	 * 
-	 * Le parametre _cfg_new present permet d'autoriser
-	 * une requete sql d'insertion de nouveau contenu.
+	 * Le parametre 'autoriser_absence_id=oui' permet d'autoriser
+	 * une requete sql d'insertion de nouveau contenu
+	 * meme si l'on ne donne pas la valeur du champs cle primaire (id)
+	 * ce qui permet d'executer la requete si le champ id est autoincrement.
 	 * 
 	 * Si un message d'erreur est retourne, on ne peut 
 	 * faire aucune modification.
@@ -45,7 +47,8 @@ class cfg_table
 		// si cfg_id n'est pas present,
 		// pas la peine de continuer
  		if (!$this->cfg->cfg_id) {
- 			if (!_request('_cfg_new'))
+ 			// ignorer cette erreur si le champ id est 'autoincrement'
+ 			if (!$this->cfg->autoriser_absence_id == 'oui')
 				$this->cfg->message = _L('id manquant');
 			return false;
 		}

@@ -19,7 +19,7 @@ function exec_cfg_dist($class = null)
 
 	include_spip('inc/filtres');
 	$config = & new $cfg(
-		($nom = sinon(_request('cfg'), 'cfg')),
+		($nom = sinon(_request('cfg'), '')),
 		($vue = sinon(_request('cfg_vue'), $nom)),
 		($cfg_id = sinon(_request('cfg_id'),''))
 		);

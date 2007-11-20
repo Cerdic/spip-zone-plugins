@@ -24,7 +24,9 @@ function calculer_CFG_VUE($fond, $id){
 	$config = & new $cfg($fond, $fond, $id); 
 		
 	if ($config->autoriser()){
-		return $config->formulaire();	
+		return 
+			"<div class='cfg_message'>" . $config->message . "</div>"
+			. $config->formulaire();	
 	} else
 		return $config->refus;
 }
