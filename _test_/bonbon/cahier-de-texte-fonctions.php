@@ -33,4 +33,24 @@ function bonbon_matches_id_document ($a_matcher) {
  	};
 	return $sortie;
 }
+//Cette fonction détermine l'année scolaire à partir de la date et retransmet sous forme 2007/2008 par exemple
+function bonbon_annee_scolaire ($date,$mois_de_debut_annee=9) {
+//quelle date est-on ?
+		$num_month= mois($date);
+		$num_month=(integer) $num_month;
+		$num_annee=annee($date);
+		$num_annee=(integer) $num_annee;
+//déterminer dans quelle année scolaire on est (de sept à sept)
+		if ($num_month<$mois_de_debut_annee) {
+			$nom_rub_annee=($num_annee-1)."/".$num_annee;
+		} else {
+			$nom_rub_annee=$num_annee."/".($num_annee+1);
+		}
+		return $nom_rub_annee;
+}
+//Ce filtre rend les tableaux fusionnés
+function bonbon_fusion_tableau($tab,$autretab) {
+ $final=array_merge((array)$tab,(array)$autretab);
+ return $final;
+}
 ?>

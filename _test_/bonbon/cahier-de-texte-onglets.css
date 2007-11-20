@@ -1,0 +1,148 @@
+.cahier.textes {
+	position:	relative;
+	width:		100%;		/* width needed weird IE bug */
+	margin-right:	-2px;	/* to make room for the shadow */
+	border: none;
+}
+
+.cahier .onglets-verticaux {
+	float:right;
+	width:9%;
+	
+}
+
+.cahier .onglets-horizontaux .onglet {
+	cursor:          Default;
+	display:         inline;
+	margin:          1px -2px 1px 2px;
+	float:           left;
+	padding:         2px 5px 3px 5px;
+	background:      #E6E6FA;
+	border:          1px solid;
+	border-color:    Grey Black
+			Black Grey;
+	border-bottom:   0;
+	z-index:         1;
+	position:        relative;
+	top:             0;
+	font-family: Arial, Helvetica, sans-serif;
+	color: 		#000066 ;
+	font-size: 	8pt;
+
+}
+
+.cahier .onglets-verticaux .onglet {
+	cursor:          Default;
+	display:         block;
+	margin:          2px 1px -2px -1px;
+	float:           left;
+	padding:         5px 3px 5px 2px;
+	background:      #E6E6FA;
+	border:          1px solid;
+	border-color:    Grey Black
+			Black Grey;
+	border-left:   0;
+	z-index:         1;
+	position:        relative;
+	top:             0;
+	font-family: Arial, Helvetica, sans-serif;
+	color: 		#000066 ;
+	text-align:	right;
+	font-size: 	8pt;
+	width: 90%;
+
+}
+.cahier .onglets-horizontaux .onglet.on {
+	border-bottom:   0;
+	z-index:         3;
+	padding:         2px 6px 5px 7px;
+	margin:          1px -3px -2px 0px;
+	top:             -2px;
+	background:      White;
+	font-weight:	bold;
+	text-transform:	uppercase;
+}
+.cahier .onglets-verticaux .onglet.on {
+	border-left:   0;
+	z-index:         3;
+	padding:         7px 5px 6px 2px;
+	margin:          0px -2px -3px -3px;
+	right:             -2px;
+	background:      White;
+	font-weight:	bold;
+	text-transform:	uppercase;
+}
+
+.cahier .onglets-horizontaux .onglet.hover {
+
+	background:      White;
+	cursor: pointer;
+}
+
+.cahier .onglets-verticaux .onglet.hover {
+
+	background:      White;
+	cursor: pointer;
+}
+
+.cahier .onglets-horizontaux .onglet a {
+	cursor:          default;
+	color:		#003399;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	color: 		#000066 ;
+	font-size: 	8pt;
+	text-transform:	none;
+	font-weight: 	light;
+}
+
+.cahier .onglets-verticaux .onglet a {
+	cursor:          default;
+	color:		#003399;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	color: 		#000066 ;
+	font-size: 	8pt;
+	text-transform:	none;
+	font-weight: 	light;
+}
+
+.cahier .onglets-horizontaux .onglets .hover a {
+	color: #6699FF;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.cahier .onglets-verticaux .onglets.hover a {
+	color: #6699FF;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+
+
+.cahier .liste-seances {   clear:           left;
+   border:          1px solid;
+   border-color:    Grey Black
+                    Black Grey;
+   background:      White;
+   z-index:         2;
+   position:        relative;
+   top:             -2px;
+   padding:         10px;
+	margin-right: 20em;
+	width:88%;
+}
+
+.cahier .onglets-horizontaux {
+	z-index:		1;
+	white-space:	nowrap;
+}
+
+.cahier .onglets-verticaux {
+	z-index:		1;
+}
+
+.spacer {
+  clear: both;
+}

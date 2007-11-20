@@ -15,10 +15,14 @@
 [(#REM) Commentée en attendant l'adaptation à Eva 3	<link href="#CHEMIN{eva_style.css}" rel="stylesheet" type="text/css" media="screen" title="Defaut" />
 ]
 	<link href="#CHEMIN{cahier-de-texte-complementaire.css}" rel="stylesheet" type="text/css" media="screen" title="Defaut" />
+	<link href="#CHEMIN{cahier-de-texte-onglets.css}" rel="stylesheet" type="text/css" media="screen" />
 	<link rel="icon" type="image/png" href="#URL_SITE_SPIP/images/favicon.png" />
 	<script type="text/javascript" src="#URL_SITE_SPIP/dist/javascript/layer.js"></script>
 	<script type="text/javascript" src="#URL_SITE_SPIP/dist/javascript/presentation.js"></script>
 	#INSERT_HEAD
+<link href="#CHEMIN{js/ui.datepicker.css}" rel="stylesheet" type="text/css" media="screen" title="Defaut" />
+	<script type="text/javascript" src="#CHEMIN{js/ui.datepicker.js}"></script>
+	<script type="text/javascript" src="#CHEMIN{js/ui.datepicker-fr.js}"></script>
 	<script type="text/javascript">
 		//<![CDATA[
 		<!--
@@ -27,10 +31,12 @@
 		$(".replie span").hide();
 		$(".replie a").click(function(event){
 		  $(this).siblings("span").slideToggle(); 
-});
-});
+			});
+    		$("#date_seance").datepicker({firstDay: 1, changeFirstDay: false,
+changeMonth: false, changeYear: false, showOn: 'button', buttonImageOnly: true, buttonImage: '#CHEMIN{images/date.png}', buttonText: 'Voir le calendrier', closeAtTop: false,});
+    		$(".date_calendrier").datepicker({firstDay: 1, changeFirstDay: false,
+changeMonth: false, changeYear: false, showOn: 'button', buttonImageOnly: true, buttonImage: '#CHEMIN{images/date.png}', buttonText: 'Voir le calendrier', closeAtTop: false,});
+		});
 		//-->
 		//]]>
 		</script>
-[(#REM) Quand calendar popup sera ok:	<link href="#DOSSIER_SQUELETTE/jquery-calendar/jquery-calendar.css" rel="stylesheet" type="text/css" media="screen" title="Defaut" />
-	<script type="text/javascript" src="#DOSSIER_SQUELETTE/jquery-calendar/jquery-calendar.js"></script>]

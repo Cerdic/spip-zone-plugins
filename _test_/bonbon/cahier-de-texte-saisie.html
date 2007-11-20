@@ -1,4 +1,5 @@
 #CACHE{1}
+#SET{virgule,","} [(#REM) utile pour les explodes]
 <!--
 *****Cahier de texte pour Spip: Bonbon !
 *****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
@@ -13,6 +14,7 @@ moinsclasse= réafficher le formulaire avec un sélecteur de classe en moins
 id_matiere= id du mot-clé de la matière
 id_groupe= id du groupe
 classe_matière= quand la classe et la matière sont déterminées
+id_article=contient un id_article que l'on veut dupliquer (ou modifier)
 Par POST:
 date_seance= date de la séance au format d/m/Y
 contenu_seance= le texte du contenu de la séance
@@ -20,7 +22,8 @@ date_devoirx où x est un nombre= date du devoir n°x donné lors de la séance
 contenu_devoirx où x est un nombre= contenu du devoir n°x donné lors de la séance
 devoirs= nombre de devoirs-1 liés à la séance
 plusdate= rafficher le formulaire avec un champs devoirs+date en plus.
-id_article=contient un id_article que l'on veut dupliquer (ou modifier)
+doc_seance_XXX= où XXX est un id_doc. quand on duplique une séance les docs d'id_documents=XXX où doc_seance_XXX est défini sont conservés, les autres enlevés.
+doc_devoirXXX_YYY= où YYY est un id_doc. XXX est le n° du devoir concerné (pas son ID). quand on duplique une séance les docs d'id_documents=YYY où doc_devoirXXX_YYY est défini sont conservés, les autres enlevés.
 
 enregistrer_fiche= quand la fiche est validée
 modifier_fiche= quand la fiche est remplie, mais que le contenu doit être modifié
@@ -35,34 +38,8 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 [(#REM)Inclusion du pied de page]
 <INCLURE{fond=cahier-de-texte-en-tete}>
 
-	<script type="text/javascript" src="./fckeditor/fckeditor.js"></script>
-<!-- Javascript du calendrier en pop-up-->
-	<script type="text/javascript" src="#DOSSIER_SQUELETTE/CalendarPopup.js"></script>
-	<SCRIPT LANGUAGE="JavaScript">
-//paramètres pour la fenêtre pop-up
-		var cal = new CalendarPopup();
-		cal.setMonthNames('Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre');
-		cal.setDayHeaders('D','L','M','M','J','V','S');
-		cal.setWeekStartDay(1);
-		cal.setTodayText("Aujourd'hui");
-		cal.setDisabledWeekDays(6);
-//paramètres de fckeditor
-		<!--
-        	function ReplaceAllTextareas() {
-                // replace all of the textareas
-                var allTextAreas = document.getElementsByTagName("textarea");
-                for (var i=0; i < allTextAreas.length; i++) {
-                var oFCKeditor = new FCKeditor( allTextAreas[i].name ) ;
-		oFCKeditor.BasePath = './fckeditor/';
-		oFCKeditor.Config["CustomConfigurationsPath"] = "../Cahier-de-texte-config.js"  ;
-	        oFCKeditor.ToolbarSet = 'CahierDeTexte' ;
-                oFCKeditor.ReplaceTextarea() ;
-                }
-        }
-        // -->
-	</SCRIPT>
 </head>
-<body onLoad="javascript: ReplaceAllTextareas()">
+<body>
 <div id="NoMenu">
 	<div id="EntetePage">
 			<ul class="boutons">
@@ -100,11 +77,11 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 	$id_matiere=($_GET["id_matiere"]);
 
 	$date_seance=(stripslashes($_POST['date_seance']));
-	$contenu_seance=(stripslashes($_POST['contenu_seance']));
+	$contenu_seance=(stripslashes(html_entity_decode($_POST['contenu_seance'])));
 	$devoirs=($_POST['devoirs']);
 	for ($count=0; $count<=$devoirs; $count++) {
 		$date_devoir[$count]=($_POST["date_devoir$count"]);
-		$contenu_devoir[$count]=(stripslashes($_POST["contenu_devoir$count"]));
+		$contenu_devoir[$count]=(stripslashes(html_entity_decode($_POST["contenu_devoir$count"])));
 	};//les dates ont été placées dans $date_devoir[], les contenus dans $contenu_devoir[]
 
 //Si le id_matière n'est pas défini, on essaie d'aider un peu en le prédéfinissant... C'est tj qq sec de gagnées pour le prof qui saisis.
@@ -131,19 +108,55 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 <?php
 	}//fin du not classe0 et if id_article
 
-//si on demande à dupliquer ou modifier un article *et qu'on a choisi classe et matière*: on récupère les données de l'article (si elles ne sont pas déjà présentes en GET)
+//si on demande à dupliquer ou modifier un article *et qu'on a choisi classe et matière*: on récupère les données de l'article
 
-	if (($_GET['classe_matiere'] or $_GET['effacer_fiche']) and $id_article and !$_POST['enregistrer_fiche'] and !$_POST['modifier_fiche'] and !$_POST['valider_fiche']){ //si la matière est validée on récupère le contenu de la séance
+	if (($_GET['classe_matiere'] or $_GET['effacer_fiche']) and $id_article){ //si la matière est validée on récupère le contenu de la séance
 ?>
-<BOUCLE_Trouve_Infos_Seance_id_article(ARTICLES){id_article}><?php
-		$date_seance='[(#DATE|affdate{d/m/Y}|texte_script)]';
-		$contenu_seance='[(#TEXTE*|texte_script)]';
-		$devoirs=-1; ?>
+<BOUCLE_Trouve_Infos_Seance_id_article(ARTICLES){id_article}>[
+
+(#REM) On récupère la liste des documents liés à l'article
+
+		]<BOUCLE_Documents_originaux_Seances(DOCUMENTS){id_article}>[(#SET{liste_docs_seance,#GET{liste_docs_seance}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Documents_originaux_Seances>[
+
+(#REM) On récupère dans le surtitre la liste des documents qui ont été copié dans cette séance (quand on veut ajouter des documents sans les remettre sur le serveur
+
+		][(#SET{liste_docs_copies_seance,[(#GET{virgule}|explode{[(#SURTITRE*|bonbon_matches_id_document)]})]})]
+		<BOUCLE_Copies_Documents_Seances(DOCUMENTS){id_document IN #GET{liste_docs_copies_seance}}>[(#SET{liste_docs_seance,#GET{liste_docs_seance}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Copies_Documents_Seances><?php
+		
+		if (!$_POST['enregistrer_fiche'] and !$_POST['modifier_fiche'] and !$_POST['valider_fiche']) {
+			//les autres infos sur la séance (seulement s'il n'y a pas eu potientiellement des modifs !): 
+			$date_seance='[(#DATE|affdate{d/m/Y}|texte_script)]';
+			$contenu_seance='[(#TEXTE*|texte_script)]';
+		}
+		$devoirs=-1;?>
 	<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){titre_mot="Devoirs à faire"}{ps==#ENV{id_article}}><?php
 		$devoirs++;
-		$date_devoir[$devoirs]='[(#DATE|affdate{d/m/Y}|texte_script)]';
-		$contenu_devoir[$devoirs]='[(#TEXTE*|texte_script)]';
-		$id_devoirs[$devoirs]='[(#ID_ARTICLE|texte_script)]';
+		$compteur_doc_devoirs=0;
+		$liste_docs_Devoirs="";?>[
+
+(#REM) On récupère la liste des documents liés à l'article
+
+		]<BOUCLE_Documents_originaux_Devoirs(DOCUMENTS){id_article}><?php
+			$compteur_doc_devoirs++;
+			$liste_docs_Devoirs[$compteur_doc_devoirs]='[(#ID_DOCUMENT)]'; ?>[(#SET{liste_docs_devoirs,#GET{liste_docs_devoirs}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Documents_originaux_Devoirs>[
+
+(#REM) On récupère dans le surtitre la liste des documents qui ont été copié dans cette séance (quand on veut ajouter des documents sans les remettre sur le serveur
+
+		][(#SET{liste_docs_copies_Devoirs,[(#GET{virgule}|explode{[(#SURTITRE*|bonbon_matches_id_document)]})]})]
+		<BOUCLE_Copies_Documents_Devoirs(DOCUMENTS){id_document IN #GET{liste_docs_copies_Devoirs}}><?php
+			$compteur_doc_devoirs++;
+			$liste_docs_Devoirs[$compteur_doc_devoirs]='[(#ID_DOCUMENT)]'; ?>[(#SET{liste_docs_devoirs,#GET{liste_docs_devoirs}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Copies_Documents_Devoirs>[
+(#REM) On met dans un tableau la liste des devoirs		
+		]<?php
+		$liste_des_listes_de_docs[$devoirs] = $liste_docs_Devoirs;
+
+		if (!$_POST['enregistrer_fiche'] and !$_POST['modifier_fiche'] and !$_POST['valider_fiche']) {
+
+			//les autres infos sur le devoir (seulement s'il n'y a pas eu potientiellement des modifs !): 
+			$date_devoir[$devoirs]='[(#DATE|affdate{d/m/Y}|texte_script)]';
+			$contenu_devoir[$devoirs]='[(#TEXTE*|texte_script)]';
+			$id_devoirs[$devoirs]='[(#ID_ARTICLE|texte_script)]';
+		}
 	?></BOUCLE_Trouve_Infos_Devoirs_id_article>
 </BOUCLE_Trouve_Infos_Seance_id_article>
 <?php
@@ -169,9 +182,10 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 ?>
 [(#REM)Nom de la matière]
 <BOUCLE_DireMatiere(MOTS){type="Matières"}><?php if ('[(#ID_MOT|texte_script)]'==$id_matiere) {$matiere_titre='[(#TITRE)]';} ?></BOUCLE_DireMatiere>
-<?php for ($count=0; $count<=$classes; $count++) {?>
+<?php $premiere_classe="";
+for ($count=0; $count<=$classes; $count++) {?>
 [(#REM)Nom de la ou les classes]
-<BOUCLE_DireClasse(MOTS){type="Classes"}><?php if ('[(#ID_MOT|texte_script)]'==$id_classe[$count]) { $classes_titre .='[(#TITRE)]'; if (($count+1)<=$classes) $classes_titre .= ", "; } ?></BOUCLE_DireClasse>
+<BOUCLE_DireClasse(MOTS){type="Classes"}><?php if ('[(#ID_MOT|texte_script)]'==$id_classe[$count]) { $classes_titre .='[(#TITRE)]'; if (($count+1)<=$classes) $classes_titre .= ", "; if (!$premiere_classe) $premiere_classe='[(#TITRE)]'; } ?></BOUCLE_DireClasse>
 <?php } //fin du for count classes
 if ($id_groupe!=0) { $groupe_titre .= " (";?>
 [(#REM)Nom du groupe s'il y a... Il est encadré par une parenthèse]
@@ -247,8 +261,25 @@ if ($id_groupe!=0) { $groupe_titre .= " (";?>
 	<div id="Contenu"><div class="bloc">
 		<div id="documents">
 			<h3 class="titre"><?php echo $titre_contenu_seance?></h3>
-			<div class="texte"><?php echo propre($contenu_seance);?></div>
+			<div class="texte"><?php echo propre($contenu_seance);?></div>[
 
+(#REM) Si la séance est dupliquée/Modifiée, on affiche les documents qui sont liés à la séance...
+
+]
+<BOUCLE_On_Affiche_les_Docs_seance_dupliquee_verif(ARTICLES){id_article}>[
+
+(#REM) On affiche les documents liés à la séance
+
+		]<B_Documents_Seances_verif>
+			<div class="documents-seance">
+				<h4 class="documents-seance"><b>>></b>&nbsp;Documents déjà joints à la séance&nbsp;:</h4>
+		<BOUCLE_Documents_Seances_verif(DOCUMENTS){id_document IN #GET{liste_docs_seance}}{"&nbsp;| "}{par titre}>
+				<?php if ($_POST['doc_seance_'.'[(#ID_DOCUMENT)]']) {?><a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT||image_reduire{22,22})]&nbsp;[(#TITRE|sinon{#FICHIER|basename})] (<em>#TYPE_DOCUMENT</em> de [(#TAILLE|taille_en_octets)])</a>
+				<?php }// fin du if le document est conservé?>
+		</BOUCLE_Documents_Seances_verif>
+			</div>
+		</B_Documents_Seances_verif>
+</BOUCLE_On_Affiche_les_Docs_seance_dupliquee_verif>
 <?php //si il y a des devoirs
 if ($contenu_devoir[0]!="") {
 ?>
@@ -256,9 +287,35 @@ if ($contenu_devoir[0]!="") {
 			<div>
 				<h4 class="devoirs">Devoirs des<?php echo(" $classes_titre$groupe_titre&nbsp;:")?></h4>
 <?php //Pour chaque devoir:
- for ($count=0; $count<=$devoirs; $count++) {?>
-				<div><h5 class="devoirs">Pour le <?php echo $date_devoir[$count]?>&nbsp;:</h5>
-				<?php echo propre($contenu_devoir[$count]);?></div>
+ for ($count=0; $count<=$devoirs; $count++) {
+	$liste_docs_Devoir = $liste_des_listes_de_docs[$count]; ?>
+				<div class="devoirs"><h5 class="devoirs"><b>>></b>&nbsp;Devoir pour le <?php echo $date_devoir[$count]?>&nbsp;:</h5>
+				<span><?php echo propre($contenu_devoir[$count]);?></span>[
+
+(#REM) Si la fiche est dupliquée/Modifiée, on affiche les documents qui sont liés au devoir...
+
+		]<B_Documents_Devoir_verif><?php
+			if ($liste_docs_Devoir) {?>
+			<div class="documents-seance">
+				<b>>>></b>&nbsp;Documents déjà joints à ce devoir&nbsp;:
+			<?php } //fin du if liste_docs_Devoir ?>
+		<BOUCLE_Documents_Devoir_verif(DOCUMENTS){id_document IN #GET{liste_docs_devoirs}}{par titre}><?php
+//On vérifie parmis les docs liés aux (tous) devoirs de la fiche qu'ils correspondent au devoir: on vérifie que l'id_document est bien dans le tableau des docs liés à ce devoir.
+				reset($liste_docs_Devoir);
+				$ok=false;
+				while(list ($key, $val) = each ($liste_docs_Devoir)) {
+					if ($val=='[(#ID_DOCUMENT)]') $ok="ok";
+				}
+				if ($ok) {
+					 if ($_POST['doc_devoir'.$count.'_'.'[(#ID_DOCUMENT)]']) { ?><a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT||image_reduire{22,22})]&nbsp;[(#TITRE|sinon{#FICHIER|basename})] (<em>#TYPE_DOCUMENT</em> de [(#TAILLE|taille_en_octets)])</a>&nbsp;| 
+					<?php }//fin du if doc_devoirXXX_YYY ?>
+				<?php } //fin du if liste_docs_Devoir ?>
+		</BOUCLE_Documents_Devoir_verif><?php
+			if ($liste_docs_Devoir) {?>
+			</div>
+			<?php } //fin du if liste_docs_Devoir ?>
+		</B_Documents_Devoir_verif>
+		</div><br />
 <?php } //fin du for count devoirs?>
 			</div>
 <?php } //fin du if contenu_devoir?>
@@ -274,7 +331,7 @@ if ($contenu_devoir[0]!="") {
 		while (list($key,$val)=each($post)) {
 			if ($key!="enregistrer_fiche") {
 ?>
-		<input type="Hidden" <?php echo 'name="'.$key.'" value="'.addslashes($val).'"'; ?>>
+		<input type="Hidden" <?php echo 'name="'.$key.'" value="'.htmlentities($val).'"'; ?>>
 <?php			}//fin du if key
 		}//fin du while $key $val?>
 	<!--Modifier la fiche -->
@@ -301,39 +358,51 @@ if ($contenu_devoir[0]!="") {
 //------------------------------------------------------------------
 
 	if ($_POST['valider_fiche']) {
-//quelle date est-on ?
-		$num_month= date("n");
-		$num_month=(integer) $num_month;
-		$num_annee=date("Y");
-		$num_annee=(integer) $num_annee;
-//déterminer dans quelle année scolaire on est (de sept à sept)
-		if ($num_month<9) {
-			$nom_rub_annee=($num_annee-1)."/".$num_annee;
-		} else {
-			$nom_rub_annee=$num_annee."/".($num_annee+1);
-		}
-?>
-<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>#SET{id_rub_annee,#ID_RUBRIQUE}
-[(#REM)Vérifier si il existe déjà une sous rubrique du cahier de texte pour l'année en cours]
-	<BOUCLE_Verifie_RubriqueAnnee(RUBRIQUES){id_parent}{tout}><?php if ('[(#TITRE|texte_script)]'==$nom_rub_annee) {$everything_ok=1; $id_rub_cdt='[(#ID_RUBRIQUE|texte_script)]';}
-//id_rub_cdt contient l'id de la sous-rubrique pour l'année en cours?>
-	</BOUCLE_Verifie_RubriqueAnnee>
-<?php if ($everything_ok!=1) {
+?>[
+(#REM) année scolaire
+][
+	(#SET{annee_scolaire,[(#ENV{date}|bonbon_annee_scolaire)]})
+
+]<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}>[
+(#REM)Vérifier si il existe déjà une sous rubrique du cahier de texte pour l'année en cours
+	]<BOUCLE_Verifie_RubriqueAnnee(RUBRIQUES){id_parent}{titre=#GET{annee_scolaire}}{0,1}><?php
+		$id_rub_cdt='[(#ID_RUBRIQUE|texte_script)]'; //id_rub_cdt contient l'id de la sous-rubrique pour l'année en cours
+?></BOUCLE_Verifie_RubriqueAnnee></B_Verifie_RubriqueAnnee>[
+	
+	(#SET{descriptif_rubrique,"Cahier de texte de l'année scolaire "})
+][
+	(#SET{descriptif_rubrique,[(#GET{descriptif_rubrique}|concat{#GET{annee_scolaire},"\n\n{{Cette rubrique ne doit pas être renommée}}. Sinon, les enregistrements du cahier de texte de l'année en cours seront perdus"})]})
+]<?php
 //Si la rubrique pour l'année en cours n'existe pas, on la crée !
 		$sql = "INSERT INTO spip_rubriques (titre, id_parent, descriptif , statut, date) 
-		VALUES ('".addslashes($nom_rub_annee)."','[(#_Contexte_RubriqueCDT:ID_RUBRIQUE|texte_script)]','".addslashes("Cahier de texte de l'année scolaire $nom_rub_annee\n\n{{Cette rubrique ne doit pas être renommée}}. Sinon, les enregistrements du cahier de texte de l'année en cours seront perdus")."', 'publie',NOW())";
+		VALUES ('[(#GET{annee_scolaire}|texte_script)]','[(#_Contexte_RubriqueCDT:ID_RUBRIQUE|texte_script)]','[(#GET{descriptif_rubrique}|texte_script)]', 'publie',NOW())";
 	
 		$result = spip_query($sql);
 		$id_rubrique=spip_insert_id();
 		$id_rub_cdt=$id_rubrique;
-		echo "la sous-rubrique $nom_rub_annee a été créée pour gérer le cahier de texte de cette année scolaire. Ne l'effacez pas, ne la renommez pas et laissez la dans la rubrique Cahier de texte !";
-	}//fin du ifnot everything_ok
 ?>
+		la sous-rubrique #GET{annee_scolaire} a été créée pour gérer le cahier de texte de cette année scolaire. Ne l'effacez pas, ne la renommez pas et laissez la dans la rubrique Cahier de texte !
+	<//B_Verifie_RubriqueAnnee>
 </BOUCLE_Contexte_RubriqueCDT>
 			<h1>La fiche <?php if ($id_article) {echo "dupliquée ";}; ?>est définitivement enregistrée&nbsp;:</h1>
 			<br class="clear" />	
 	</div>
-	<div id="Contenu"><div class="bloc">
+	<div id="Contenu"><div class="bloc">[
+
+(#REM) Si la séance est dupliquée/Modifiée, on enregistre dans le surtitre les documents qui sont liés à la séance...
+
+]
+<BOUCLE_On_Affiche_les_Docs_seance_dupliquee_enregistrement(ARTICLES){id_article}>[
+
+(#REM) On récupère dans le surtitre les documents de la liste
+
+		]<BOUCLE_Documents_Seances_enregistrement(DOCUMENTS){id_document IN #GET{liste_docs_seance}}{par titre}>
+				<?php
+			if ($_POST['doc_seance_'.'[(#ID_DOCUMENT)]']) {
+				$surtitre_avec_docs = $surtitre_avec_docs."<doc".'[(#ID_DOCUMENT)]'."> ";
+			}// fin du if le document est conservé?>
+		</BOUCLE_Documents_Seances_enregistrement>
+</BOUCLE_On_Affiche_les_Docs_seance_dupliquee_enregistrement>
 <?php
 
 //insertion de l'article du contenu du cours dans la base
@@ -342,8 +411,8 @@ if ($contenu_devoir[0]!="") {
 	$date_base_seance = date ("Y-m-d H:i:s", mktime(0,0,0,substr($date_seance,3,2),substr($date_seance,0,2),substr($date_seance,6,4)));
 
 //le contenu
-	$sql = "INSERT INTO spip_articles (titre, texte, id_rubrique, statut, date) 
-	VALUES ('".addslashes($titre_contenu_seance)."','".addslashes($contenu_seance)."','$id_rub_cdt', 'publie', '".addslashes($date_base_seance)."')";
+	$sql = "INSERT INTO spip_articles (titre, texte, id_rubrique, statut, date, surtitre) 
+	VALUES ('".addslashes($titre_contenu_seance)."','".addslashes($contenu_seance)."','$id_rub_cdt', 'publie', '".addslashes($date_base_seance)."','".addslashes($surtitre_avec_docs)."')";
 	
 	$result = spip_query($sql);
 	$id_contenu_seance=spip_insert_id();
@@ -387,11 +456,29 @@ if ($contenu_devoir[0]!="") {
 	<?php
 	//Puis pour chaque devoir:
 	for ($count=0; $count<=$devoirs; $count++) {
+		$liste_docs_Devoir = $liste_des_listes_de_docs[$count];
+		$surtitre_avec_docs="";?>[
+
+(#REM) Si la fiche est dupliquée/Modifiée, on enregistre dans le surtitre les documents qui sont liés au devoir...
+
+		]<BOUCLE_Documents_Devoir_enregistrement(DOCUMENTS){id_document IN #GET{liste_docs_devoirs}}{par titre}><?php
+//On vérifie parmis les docs liés aux (tous) devoirs de la fiche qu'ils correspondent au devoir: on vérifie que l'id_document est bien dans le tableau des docs liés à ce devoir.
+				reset($liste_docs_Devoir);
+				$ok=false;
+				while(list ($key, $val) = each ($liste_docs_Devoir)) {
+					if ($val=='[(#ID_DOCUMENT)]') $ok="ok";
+				}
+				if ($ok) {
+					 if ($_POST['doc_devoir'.$count.'_'.'[(#ID_DOCUMENT)]']) { 
+						$surtitre_avec_docs = $surtitre_avec_docs."<doc".'[(#ID_DOCUMENT)]'."> ";
+					 }//fin du if doc_devoirXXX_YYY ?>
+				<?php } //fin du if liste_docs_Devoir ?>
+		</BOUCLE_Documents_Devoir_enregistrement><?php
 		//détermine la date au format de la base
 		$date_base_devoir = date ("Y-m-d H:i:s", mktime(0,0,0,substr($date_devoir[$count],3,2),substr($date_devoir[$count],0,2),substr($date_devoir[$count],6,4)));
 		//insère le devoir avec titre, contenu, date et surtout un PS qui renvoie au contenu
-		$sql = "INSERT INTO spip_articles (titre, texte, id_rubrique, statut, date, ps) 
-		VALUES ('".addslashes("Devoir à faire pour le $date_devoir[$count]$fragment_titre_devoir")."','".addslashes($contenu_devoir[$count])."','$id_rub_cdt', 'publie', '".addslashes($date_base_devoir)."','".addslashes("[Donné $titre_contenu_seance$fleche$id_contenu_seance]")."')";
+		$sql = "INSERT INTO spip_articles (titre, texte, id_rubrique, statut, date, ps, surtitre) 
+		VALUES ('".addslashes("Devoir à faire pour le $date_devoir[$count]$fragment_titre_devoir")."','".addslashes($contenu_devoir[$count])."','$id_rub_cdt', 'publie', '".addslashes($date_base_devoir)."','".addslashes("[Donné $titre_contenu_seance$fleche$id_contenu_seance]")."','".addslashes($surtitre_avec_docs)."')";
 		
 		$result = spip_query($sql);
 		$id_contenu_devoir[$count]=spip_insert_id();
@@ -449,7 +536,7 @@ if ($contenu_devoir[0]!="") {
 		echo("&id_classe$count=".$id_classe[$count]);
 	};
 	if ($classes>0) echo ("&classes=$classes");
-			?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a>&nbsp;| <a href="#URL_PAGE{cahier-de-texte-affichage,senschrono=1}&id_auteur=<?php echo($auteur_session['id_auteur']);?>" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a>&nbsp;|<a href="#URL_PAGE{cahier-de-texte-accueil}" title="retour à l'accueil"><img src="#CHEMIN{images/logo-mini2-22.png}" alt="icône" vspace="2" align="middle">Retourner à l'accueil</a></p>
+			?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a>&nbsp;| <a href="#URL_PAGE{cahier-de-texte-affichage,senschrono=1}&id_auteur=<?php echo($auteur_session['id_auteur']);?>&classe=<?php echo($premiere_classe); ?>&matiere=<?php echo($matiere_titre);?>" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a>&nbsp;|<a href="#URL_PAGE{cahier-de-texte-accueil}" title="retour à l'accueil"><img src="#CHEMIN{images/logo-mini2-22.png}" alt="icône" vspace="2" align="middle">Retourner à l'accueil</a></p>
 		</div>		
 	</div></div>
 
@@ -542,26 +629,64 @@ if($_GET['classe_matiere']){
 		<input type="hidden" name="page" value="cahier-de-texte-saisie">
 			<fieldset>
 			<legend><?php if ($id_article) {echo "Modifier le ";}; ?>Contenu de la séance</legend>
-			<p>Séance du <INPUT TYPE="text" ID="date_seance" NAME="date_seance" VALUE="<?php if (!$date_seance) echo date("d/m/Y"); else echo $date_seance;?>" SIZE=12>
-			<A HREF="#"
-			onClick="cal.select(document.forms['contenu'].date_seance,'ancre-date','dd/MM/yyyy'); return false;"
-			NAME="ancre-date" ID="ancre-date" TITLE="Choisissez la date dans le calendrier">voir le calendrier</A></p>
-			<textarea id="contenu_seance" name="contenu_seance" cols="60" rows="5"><?php echo $contenu_seance;?></textarea>
+			<p class="dates">Séance du <INPUT TYPE="text" ID="date_seance" NAME="date_seance" VALUE="<?php if (!$date_seance) echo date("d/m/Y"); else echo $date_seance;?>" SIZE=12></p><?php
+	include_spip('inc/barre');
+	echo afficher_barre("document.getElementById('contenu_seance')"); ?>
+			<textarea id="contenu_seance" name="contenu_seance" cols="60" rows="5"><?php echo $contenu_seance;?></textarea>[
+
+(#REM) Si la séance est dupliquée/Modifiée, on affiche les documents qui sont liés à la séance...
+
+		]<B_Documents_Seances_saisie>
+			<div class="documents-seance">
+				<h4 class="documents-seance"><b>>></b>&nbsp;Documents déjà joints à la séance&nbsp;:</h4>
+				(décochez ceux que vous ne voulez pas conserver associés à cette séance)<br />
+		<BOUCLE_Documents_Seances_saisie(DOCUMENTS){id_document IN #GET{liste_docs_seance}}{"&nbsp;| "}{par titre}>
+				<input type="checkbox" name="doc_seance_#ID_DOCUMENT" <?php if ($_POST['doc_seance_'.'[(#ID_DOCUMENT)]'] or !$_POST['modifier_fiche']) echo "CHECKED"; ?> title="cochez pour conserver le document, décochez pour l'enlever"><a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT||image_reduire{22,22})]&nbsp;[(#TITRE|sinon{#FICHIER|basename})] (<em>#TYPE_DOCUMENT</em> de [(#TAILLE|taille_en_octets)])</a>
+		</BOUCLE_Documents_Seances_saisie>
+			</div>
+		</B_Documents_Seances_saisie>
 			</fieldset>
 	<!--Devoirs à faire -->
 			<fieldset>
 			<legend><?php if ($id_article) {echo "Modifier les ";}; ?>Devoirs</legend>
+
 <?php for ($count=0; $count<=$devoirs; $count++) {
-?>
-			<p>À faire pour le <INPUT TYPE="text" ID="date_devoir<?php echo $count;?>" NAME="date_devoir<?php echo $count;?>" VALUE="<?php if (!$date_devoir[$count]) echo date("d/m/Y"); else echo $date_devoir[$count];?>" SIZE=12><A HREF="#"
-			onClick="cal.select(document.forms['contenu'].date_devoir<?php echo $count;?>,'ancre-date-devoir<?php echo $count;?>','dd/MM/yyyy'); return false;"
-			NAME="ancre-date-devoir<?php echo $count;?>" ID="ancre-date-devoir<?php echo $count;?>" TITLE="Choisissez la date dans le calendrier">voir le calendrier</A></p>
-			<textarea id="contenu_devoir<?php echo $count;?>" name="contenu_devoir<?php echo $count;?>" cols="60" rows="5"><?php echo $contenu_devoir[$count];?></textarea>
+	$liste_docs_Devoir = $liste_des_listes_de_docs[$count]; ?>
+			<p>À faire pour le <INPUT TYPE="text" class="date_calendrier" NAME="date_devoir<?php echo $count;?>" VALUE="<?php if (!$date_devoir[$count]) echo date("d/m/Y"); else echo $date_devoir[$count];?>" SIZE=12></p><?php
+	echo afficher_barre("document.getElementById('contenu_devoir$count')"); ?>
+			<textarea id="contenu_devoir<?php echo $count;?>" name="contenu_devoir<?php echo $count;?>" cols="60" rows="5"><?php echo $contenu_devoir[$count];?></textarea>[
+
+(#REM) Si la fiche est dupliquée/Modifiée, on affiche les documents qui sont liés au devoir...
+
+		]<B_Documents_Devoir_saisie><?php
+			if ($liste_docs_Devoir) {?>
+			<div class="documents-seance">
+				<h4 class="documents-seance"><b>>></b>&nbsp;Documents déjà joints à ce devoir&nbsp;:</h4> 
+				(décochez ceux que vous ne voulez pas conserver associés à cette séance)<br />
+			<?php } //fin du if liste_docs_Devoir ?>
+		<BOUCLE_Documents_Devoir_saisie(DOCUMENTS){id_document IN #GET{liste_docs_devoirs}}{par titre}><?php
+//On vérifie parmis les docs liés aux (tous) devoirs de la fiche qu'ils correspondent au devoir: on vérifie que l'id_document est bien dans le tableau des docs liés à ce devoir.
+				reset($liste_docs_Devoir);
+				$ok=false;
+				while(list ($key, $val) = each ($liste_docs_Devoir)) {
+					if ($val=='[(#ID_DOCUMENT)]') $ok="ok";
+				}
+				if ($ok) { ?>
+				<input type="checkbox" name="doc_devoir<?php echo $count;?>_#ID_DOCUMENT" <?php if ($_POST['doc_devoir'.$count.'_'.'[(#ID_DOCUMENT)]'] or !$_POST['modifier_fiche']) echo "CHECKED"; ?> title="cochez pour conserver le document, décochez pour l'enlever"><a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT||image_reduire{22,22})]&nbsp;[(#TITRE|sinon{#FICHIER|basename})] (<em>#TYPE_DOCUMENT</em> de [(#TAILLE|taille_en_octets)])</a>
+				<?php } //fin du if liste_docs_Devoir ?>
+		</BOUCLE_Documents_Devoir_saisie><?php
+			if ($liste_docs_Devoir) {?>
+			</div>
+			<?php } //fin du if liste_docs_Devoir ?>
+		</B_Documents_Devoir_saisie>
 <?php }//fin du for count devoirs?>
 			<input type="hidden" name="devoirs" value="<?php echo $devoirs;?>">
 			<input type="Submit" value="Rajouter un devoir pour une autre date" name="plusdate">
-			</fieldset>
-			<p>Vous pourrez ajouter des documents joints à la séance ou aux devoirs après les avoir enregistrés</p>
+			</fieldset>[
+(#REM) On ne parle de docs joints que si on est aps en train de dupliquer ou modifier une fiche.
+][
+	(#ENV{id_article}|?{'',' '})
+			<p>Vous pourrez ajouter des documents joints à la séance ou aux devoirs après les avoir enregistrés</p>]
 			<br>
 	<!--validation-->
 			<input type="Submit" value="Enregistrer dans le cahier de texte" name="enregistrer_fiche">
@@ -576,11 +701,20 @@ if($_GET['classe_matiere']) {
 (#REM)Affichage des dernières entrées dans le cahier de texte en fonction du contexte (dans le GET)
 ][
 
+(#REM) On se place dans le contexte de la rubrique du cahier de texte de l'année
+]
+<BOUCLE_Contexte_RubriqueCDT_affichage(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>[
+(#REM) On détermine quelle est l'année scolaire que l'on veut afficher
+][	(#SET{annee_rubrique,[(#ENV{date}|bonbon_annee_scolaire)]})
+][	(#ENV{annee_scolaire}|?{' ',''})
+		#SET{annee_rubrique,#ENV{annee_scolaire}}
+	]<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre=#GET{annee_rubrique}}{!par titre}{0,1}>[
+
 (#REM) On prépare une liste des artciles parmis lesquels faire la requête. Cette liste sera «stockée» dans {!doublons requete}. Ceci atomise les requêtes avec des Regexp et évite les trop grosses requêtes SQL. Merci à Cédric Morin pour l'idée.
 
 ][
-(#REM) on selectionne ceux qui ont la bonne les classes
-]<BOUCLE_PrepaClasses(ARTICLES){id_auteur ?}{id_mot=#ENV{id_classe0}}{doublons Prepa_Classes_auteur}></BOUCLE_PrepaClasses>[
+(#REM) on selectionne ceux qui ont la bonne les classes, bon auteur et bonne rubrique
+]<BOUCLE_PrepaClasses(ARTICLES){id_rubrique}{id_auteur ?}{id_mot=#ENV{id_classe0}}{doublons Prepa_Classes_auteur}></BOUCLE_PrepaClasses>[
 (#REM) on selectionne ceux qui ont la bonne matière
 ]<BOUCLE_Prepa_Matiere(ARTICLES){id_mot=#ENV{id_matiere}}
 {!doublons Prepa_Classes_auteur}{doublons Prepa_Matiere}></BOUCLE_Prepa_Matiere>[
@@ -596,13 +730,18 @@ if($_GET['classe_matiere']) {
 ]<B_Seances>
 <div class="bloc">
 <h2>Dernières entrées du même type dans le cahier de textes&nbsp;:</h2>
-<BOUCLE_Seances(ARTICLES){!doublons QueSeances}{!par date}{0,10}>
+<BOUCLE_Seances(ARTICLES){!doublons QueSeances}{!par date}{0,10}{'
+<br clear="left">
+<hr>'}>
 		<INCLURE(session.php){fond=cahier-de-texte-une-seance}{id_article=#ID_ARTICLE}{admin_fiche=non}>
 </BOUCLE_Seances>
+<br clear="all">
 </div>
 </B_Seances>
 <p>Pas encore d'entrées du même type trouvées dans le cahier de texte...</p>
 <//B_Seances>
+	</BOUCLE_AnneeScol>
+</BOUCLE_Contexte_RubriqueCDT_affichage>
 <?php
 	if (!($_POST['enregistrer_fiche'])) {
 ?>

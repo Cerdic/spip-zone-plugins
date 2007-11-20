@@ -1,5 +1,5 @@
 #CACHE{300}
-[(#ENV{id_auteur}|?{' ',''})#CACHE{1}]
+[(#ENV{id_auteur}|?{' ',''})#CACHE{0}]
 <!--
 *****Cahier de texte pour Spip: Bonbon !
 *****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
@@ -18,12 +18,16 @@ Si les deux arguments sont données (seances_seules et devoirs_seul rien ne s'aff
 annee_scolaire= définit quelle année scolaire (sous le format XXXX%2FYYYY comme par exemple 2006%2F2007). Si ce n'est pas défini, c'est l'année scolaire la plus récente qui s'affiche. Note: %2F est un slash (/) encodé pour aller dans l'url.
 nb=nombre maxi d'entrées listées (par défaut 20 entrées...)
 senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chrono.
--->
-[
+-->[
+
 (#REM) On se place dans le contexte de la rubrique du cahier de texte de l'année
 ]
-<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>
-	<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre==#ENV{annee_scolaire,.}}{!par titre}{0,1}>
+<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>[
+(#REM) On détermine quelle est l'année scolaire que l'on veut afficher
+][	(#SET{annee_rubrique,[(#ENV{date}|bonbon_annee_scolaire)]})
+][	(#ENV{annee_scolaire}|?{' ',''})
+		#SET{annee_rubrique,#ENV{annee_scolaire}}
+	]<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre=#GET{annee_rubrique}}{!par titre}{0,1}>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -64,20 +68,96 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 		<p>[à partir du (#ENV{date_debut}|affdate) ][jusqu'au (#ENV{date_fin}|affdate)]</p>
 	</div>
 	<div id="Contenu">
+	<div class="cahier textes">
+<p class="apres"><a href="[(#SELF|parametre_url{'senschrono',[(#ENV{senschrono}|?{0,1})]})]" title="inverser l'ordre de classement des séances">inverser l'ordre chronologique</a></p>
+<br clear="all" />
+<!--Liste des classes-->
+		<div class="onglets-horizontaux">
+			<span class="onglet inactif" style="background: bisque;">Classes&nbsp;&rarr; </span>
+#SET{classe_env,#ENV{classe,''}}#SET{compteur,0}
+<BOUCLE_ToutesLesClasses_affichage(MOTS){type="Classes"}{par titre}><BOUCLE_Que_les_classes_avec_article(ARTICLES){id_rubrique}{id_auteur?}{id_mot}{0,1}>[
+		(#SET{compteur,[(#GET{compteur}|plus{1})]})
+][
+(#REM) La classe par défaut est la première. Si il n'y a pas de classe dans #ENV alors, c'est la classe par défut qui est choisie
+][
+		(#GET{compteur}|=={1}|?{' ',''})
+		#SET{classe_defaut,#_ToutesLesClasses_affichage:TITRE}
+		[
+		(#GET{classe_env}|?{'',' '})
+			#SET{classe_env,#_ToutesLesClasses_affichage:TITRE}
+		]
+][
+		(#SET{select,''})
+][
+		(#GET{classe_env}|=={#_ToutesLesClasses_affichage:TITRE}|?{' ',''})#SET{select,'on '}
+]			<a href="[(#SELF|parametre_url{'classe',#_ToutesLesClasses_affichage:TITRE})]" title="Afficher le cahier de texte de la [(#_ToutesLesClasses_affichage:TITRE|textebrut)]" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#_ToutesLesClasses_affichage:TITRE</a>
+</BOUCLE_Que_les_classes_avec_article></BOUCLE_ToutesLesClasses_affichage>
+
+<!-- les groupes-->
+			<span class="onglet inactif" style="background: bisque;">Groupes&nbsp;&rarr; </span>
+<BOUCLE_Les_Groupes(MOTS){type="Sous groupes de classes"}{par titre}><BOUCLE_Que_les_groupes_avec_article(ARTICLES){id_rubrique}{id_auteur?}{id_mot}{titre_mot=#ENV{classe,#GET{classe_defaut}}}{0,1}>[
+		(#SET{select,''})
+][
+		(#ENV{groupe}|=={#_Les_Groupes:TITRE}|?{' ',''})#SET{select,'on '}
+]			<a href="[(#SELF|parametre_url{'groupe',#_Les_Groupes:TITRE})]" title="Afficher le cahier de texte de la #ENV{classe,#GET{classe_defaut}} - #_Les_Groupes:TITRE" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#_Les_Groupes:TITRE</a>
+</BOUCLE_Que_les_groupes_avec_article></BOUCLE_Les_Groupes>[
+		(#ENV{groupe}|?{' ',''})<a href="[(#SELF|parametre_url{'groupe',''})]" title="Afficher le cahier de texte de tous les groupes de la #ENV{classe,#GET{classe_defaut}}" class="onglet" onmouseover="this.className='onglet  hover'" onmouseout="this.className='onglet'">Les deux groupes</a>
+]
+		</div>
+		<br clear="all">
+<?php
+//Si on ne demande pas que les devoirs, on affiche les séances
+if (!($_GET['devoirs_seuls'] and !$_GET['matiere'])) {
+?>
+<!--Liste des matières-->
+		<div class="onglets-verticaux">
+			<span class="onglet inactif" style="background: bisque;"><center>Matières<br />&darr;</center></span>
+#SET{matiere_env,#ENV{matiere,''}}
+<BOUCLE_ToutesLesMatieres_affichage(MOTS){type="Matières"}{par titre}><BOUCLE_Que_les_matieres_avec_article(ARTICLES){id_rubrique}{id_auteur?}{id_mot}{titre_mot=#ENV{classe,#GET{classe_defaut}}}{0,1}>[
+(#REM) La matiere par défaut est la première qui a une fiche qui correspond à la classe par défaut. Si il n'y a pas de matiere dans #ENV alors, c'est la matiere par défaut qui est choisie
+][
+		(#GET{matiere_defaut}|?{'',' '})
+		#SET{matiere_defaut,#_ToutesLesMatieres_affichage:TITRE}
+		[
+		(#GET{matiere_env}|?{'',' '})
+			#SET{matiere_env,#_ToutesLesMatieres_affichage:TITRE}
+		]
+][
+		(#SET{select,''})
+][
+		(#GET{matiere_env}|=={#_ToutesLesMatieres_affichage:TITRE}|?{' ',''})#SET{select,'on '}
+]			<a href="[(#SELF|parametre_url{'matiere',#_ToutesLesMatieres_affichage:TITRE})]" title="Afficher le cahier de texte de la matière [(#_ToutesLesMatieres_affichage:TITRE|textebrut)]"  class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select} hover'" onmouseout="this.className='onglet #GET{select}'">[(#_ToutesLesMatieres_affichage:TITRE)]</a>
+</BOUCLE_Que_les_matieres_avec_article></BOUCLE_ToutesLesMatieres_affichage>
+		</div>
+<?php
+} //fin du if !devoirs_seuls et pas de matière dans GET
+?>
 [
 
 (#REM) On prépare une liste des artciles parmis lesquels faire la requête. Cette liste sera «stockée» dans {!doublons requete}. Ceci atomise les requêtes avec des Regexp et évite les trop grosses requêtes SQL. Merci à Cédric Morin pour l'idée.
 
 ][
-(#REM) on selectionne ceux qui ont la bonne les classes et l'auteur (s'il y a)
-]<BOUCLE_PrepaClasses(ARTICLES){id_rubrique}{id_auteur ?}{titre_mot==#ENV{classe,.}}{doublons Prepa_Classes_auteur}></BOUCLE_PrepaClasses>[
+(#REM) on selectionne ceux qui sont dans la bonne rubrique (année), ont la bonne les classes et l'auteur (s'il y a)
+]<BOUCLE_PrepaClasses(ARTICLES){id_rubrique}{id_auteur ?}{titre_mot=#ENV{classe,#GET{classe_defaut}}}{doublons Prepa_Classes_auteur}></BOUCLE_PrepaClasses>[
 (#REM) on selectionne ceux qui ont la bonne matière
-]<BOUCLE_Prepa_Matiere(ARTICLES){id_rubrique}{titre_mot==#ENV{matiere,.}}
+]<BOUCLE_Prepa_Matiere(ARTICLES){titre_mot=#ENV{matiere,#GET{matiere_defaut}}}
 {!doublons Prepa_Classes_auteur}{doublons Prepa_Matiere}></BOUCLE_Prepa_Matiere>[
+
+(#REM) On prépare une variable Spip "matiere_ou_non". Elle va déterminer quelle pile (!doublon) va être utilisée dans la boucle date: si on veut les devoirs et qu'on a pas défini de matière on utilise la pile des classes (puisqu'aucun critère de matière n'est necessaire), sinon on utilise la pile matière
+
+][
+	(#SET{matiere_ou_non,'Prepa_Matiere'})
+][
+	(#ENV{devoirs_seuls}|?{' ',''})
+		#SET{matiere_ou_non,'Prepa_Classes_auteur'}
+][
+	(#ENV{matiere}|?{' ',''})
+		#SET{matiere_ou_non,'Prepa_Matiere'}
+][
 (#REM) Idem pour les dates 
-]<BOUCLE_PrepaDates(ARTICLES){id_rubrique}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{!doublons Prepa_Matiere}{doublons Date}></BOUCLE_PrepaDates>[
+]<BOUCLE_PrepaDates(ARTICLES){date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{!doublons #GET{matiere_ou_non}}{doublons Date}></BOUCLE_PrepaDates>[
 (#REM) on choisi les articles qui sont du bon groupe
-]<BOUCLE_Prepa_Groupes(ARTICLES){id_rubrique}{titre_mot==#ENV{groupe,.}}{!doublons Date}{doublons requete}></BOUCLE_Prepa_Groupes>[
+]<BOUCLE_Prepa_Groupes(ARTICLES){titre_mot==#ENV{groupe,.}}{!doublons Date}{doublons requete}></BOUCLE_Prepa_Groupes>[
 
 (#REM) {!doublons requete} est donc un critère qui sélectionne tous les articles qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
 
@@ -86,27 +166,63 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 if (!($_GET['devoirs_seuls'])) {
 ?>[
 (#REM)On restrient la requête aux descriptions de séances en suivant le même modèle que précédement.
-]<BOUCLE_QueSeances(ARTICLES){id_rubrique}{titre_mot="Description de séance"}{!doublons requete}{doublons QueSeances}></BOUCLE_QueSeances>[
+]<BOUCLE_QueSeances(ARTICLES){titre_mot="Description de séance"}{!doublons requete}{doublons QueSeances}></BOUCLE_QueSeances>[
 (#REM) {!doublons QueSeances} est donc un critère qui sélectionne toutes les Descriptions de séances qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
-]<B_Seances>
-<div class="apres"><a href="[(#SELF|parametre_url{'senschrono',[(#ENV{senschrono}|?{0,1})]})]" title="inverser l'ordre de classement des séances">inverser l'ordre chronologique</a></div><br clear="all" />
+]
+		<div class="liste-seances">
+<B_Seances>
+<div>
 #ANCRE_PAGINATION
-<BOUCLE_Seances(ARTICLES){id_rubrique}{!doublons QueSeances}{par #ENV{tri}}{pagination #ENV{nb,20}}{par date}{inverse #ENV{senschrono}}>
+<BOUCLE_Seances(ARTICLES){!doublons QueSeances}{par #ENV{tri}}{pagination #ENV{nb,20}}{par date}{inverse #ENV{senschrono}}{'
+<br clear="left">
+<hr>'}>
 		<INCLURE(session.php){fond=cahier-de-texte-une-seance}{id_article=#ID_ARTICLE}>
 </BOUCLE_Seances>
+</div>
 [<div class="apres">Pages&nbsp;: (#PAGINATION{page_precedent_suivant})</div>]
 </B_Seances>
+<p>Pas encore de fiche dans le cahier de texte pour cette classe et cette matière.</p><p>Choisissez une autre classe [
+
+(#REM) On regarde s'il y a d'autres classes avec des fiches pour cette matière
+
+]<BOUCLE_Autres_classes_articles(ARTICLES){id_rubrique}{id_auteur?}{titre_mot=#ENV{matiere,#GET{matiere_defaut}}}{titre_mot="Description de séance"}><BOUCLE_Autres_classes(MOTS){id_article}{type="Classes"}{par titre}{doublons autres_classes}></BOUCLE_Autres_classes></BOUCLE_Autres_classes_articles>
+[
+
+(#REM) Et on affiche ces classes
+
+]<B_Affiche_Autres_classes>(<BOUCLE_Affiche_Autres_classes(MOTS){!doublons autres_classes}{", "}><a href="[(#SELF|parametre_url{'classe',#TITRE})]" title="Afficher le cahier de texte de la [(#TITRE|textebrut)] en #ENV{matiere,#GET{matiere_defaut}}">#TITRE</a></BOUCLE_Affiche_Autres_classes>)</B_Affiche_Autres_classes>
+et/ou une autre matière [
+
+(#REM) On regarde s'il y a d'autres matières avec des fiches pour cette classe
+
+]<BOUCLE_Autres_matieres_articles(ARTICLES){id_rubrique}{id_auteur?}{titre_mot=#ENV{classe,#GET{classe_defaut}}}{titre_mot="Description de séance"}><BOUCLE_Autres_matieres(MOTS){id_article}{type="Matières"}{par titre}{doublons autres_matieres}></BOUCLE_Autres_matieres></BOUCLE_Autres_matieres_articles>[
+
+(#REM) Et on affiche ces matières
+
+]<B_Affiche_Autres_matieres>(<BOUCLE_Affiche_Autres_matieres(MOTS){!doublons autres_matieres}{", "}><a href="[(#SELF|parametre_url{'matiere',#TITRE})]" title="Afficher le cahier de texte de la [(#ENV{classe,#GET{classe_defaut}}|concat{" "})] en [(#TITRE|textebrut)]">#TITRE</a></BOUCLE_Affiche_Autres_matieres>)</B_Affiche_Autres_matieres>
+grâce aux onglets.</p>
+<//B_Seances>
+		<br clear="all" />
+		</div>
 <?php
 } //fin du if !devoirs_seuls
 ?>
 <?php
+
+
+
 //Si on ne demande que les devoirs, on les affiche comme un tableau (pratique !)
+
+
+
 if (($_GET['devoirs_seuls'])) {
 ?>[
 (#REM)On restrient la requête aux devoirs en suivant le même modèle que précédement.
-]<BOUCLE_QueDevoirs(ARTICLES){id_rubrique}{titre_mot="Devoirs à faire"}{!doublons requete}{doublons QueDevoirs}></BOUCLE_QueDevoirs>[
+]<BOUCLE_QueDevoirs(ARTICLES){titre_mot="Devoirs à faire"}{!doublons requete}{doublons QueDevoirs}></BOUCLE_QueDevoirs>[
 (#REM) {!doublons QueDevoirs} est donc un critère qui sélectionne toutes les Devoirs à faire qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
-]<B_Devoirs>
+]
+		<div class="liste-seances">
+<B_Devoirs>
 #ANCRE_PAGINATION
 		<table width="100%" border=1 class="spip">
 			<tr>
@@ -119,7 +235,7 @@ if (($_GET['devoirs_seuls'])) {
 				<th>Donné le</th>
 			</tr>
 
-<BOUCLE_Devoirs(ARTICLES){id_rubrique}{!doublons QueDevoirs}{par #ENV{tri}}{pagination #ENV{nb,20}}{!par date}>
+<BOUCLE_Devoirs(ARTICLES){!doublons QueDevoirs}{par #ENV{tri}}{pagination #ENV{nb,20}}{!par date}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})]">
 				<td>[(#DATE|affdate)]</td>
 				[(#ENV{classe}|?{'',<td>})]
@@ -156,9 +272,42 @@ if (($_GET['devoirs_seuls'])) {
 		</table>
 [<div class="apres">Pages&nbsp;: (#PAGINATION{page_precedent_suivant})</div>]
 </B_Devoirs>
+<p>Pas encore de devoirs dans le cahier de texte pour cette classe et cette matière.</p><p>Choisissez une autre classe [
+
+(#REM) On regarde s'il y a d'autres classes avec des fiches pour cette matière
+
+]<BOUCLE_Autres_classes_articles_Devoirs_Sans_matiere(ARTICLES){id_rubrique}{id_auteur?}{titre_mot="Devoirs à faire"}><BOUCLE_Autres_classes_Devoirs_Sans_matiere(MOTS){id_article}{type="Classes"}{par titre}{doublons autres_classes_sans_matiere}></BOUCLE_Autres_classes_Devoirs_Sans_matiere></BOUCLE_Autres_classes_articles_Devoirs_Sans_matiere>
+<BOUCLE_Autres_classes_articles_Devoirs(ARTICLES){!doublons autres_classes_sans_matiere}{titre_mot=#ENV{matiere,#GET{matiere_defaut}}}><BOUCLE_Autres_classes_Devoirs(MOTS){id_article}{type="Classes"}{par titre}{doublons autres_classes}></BOUCLE_Autres_classes_Devoirs></BOUCLE_Autres_classes_articles_Devoirs>[
+
+(#REM) On prépare une variable Spip "matiere_ou_non". Elle va déterminer quelle pile (!doublon) va être utilisée dans la boucle suivante: si une matière est définie dans le #ENV on prend la pile qui a selectionné en fonction des matières, sinon, non.
+
+][
+	(#SET{matiere_ou_non,'autres_classes_sans_matiere'})
+][
+	(#ENV{matiere}|?{' ',''})
+		#SET{matiere_ou_non,'autres_classes'}
+][
+
+(#REM) Et on affiche ces classes
+
+]<B_Affiche_Autres_classes_Devoirs>(<BOUCLE_Affiche_Autres_classes_Devoirs(MOTS){!doublons #GET{matiere_ou_non}}{", "}><a href="[(#SELF|parametre_url{'classe',#TITRE})]" title="Afficher le cahier de texte de la [(#TITRE|textebrut)] en #ENV{matiere,#GET{matiere_defaut}}">#TITRE</a></BOUCLE_Affiche_Autres_classes_Devoirs>)</B_Affiche_Autres_classes_Devoirs>
+et/ou une autre matière [
+
+(#REM) On regarde s'il y a d'autres matières avec des fiches pour cette classe
+
+]<BOUCLE_Autres_matieres_articles_Devoirs(ARTICLES){id_rubrique}{id_auteur?}{titre_mot=#ENV{classe,#GET{classe_defaut}}}{titre_mot="Devoirs à faire"}><BOUCLE_Autres_matieres_Devoirs(MOTS){id_article}{type="Matières"}{par titre}{doublons autres_matieres}></BOUCLE_Autres_matieres_Devoirs></BOUCLE_Autres_matieres_articles_Devoirs>[
+
+(#REM) Et on affiche ces matières
+
+]<B_Affiche_Autres_matieres_Devoirs>(<BOUCLE_Affiche_Autres_matieres_Devoirs(MOTS){!doublons autres_matieres}{", "}><a href="[(#SELF|parametre_url{'matiere',#TITRE})]" title="Afficher le cahier de texte de la [(#ENV{classe,#GET{classe_defaut}}|concat{" "})] en [(#TITRE|textebrut)]">#TITRE</a></BOUCLE_Affiche_Autres_matieres_Devoirs>)</B_Affiche_Autres_matieres_Devoirs>
+grâce aux onglets.</p>
+<//B_Devoirs>
+		<br clear="all">
+		</div>
 <?php
 } //fin du if devoirs_seuls
 ?>
+	</div>
 	<br clear="All">
 	<hr>
 [(#REM)Inclusion de la noisette de selection]

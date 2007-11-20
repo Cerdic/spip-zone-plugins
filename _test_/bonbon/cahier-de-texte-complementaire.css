@@ -87,6 +87,19 @@ p.Copie_doc {
 	padding: 2px;
 	-moz-border-radius: 6px;
 }
+.onglets-matieres{
+	float:right;
+	width:10%;
+}
+
+.onglets-matieres a {
+	display: block;
+	float:left;
+}
+.liste-seances {
+	margin-right: 20em;
+	width:88%;
+}
 
 a.clic:hover {
 	cursor: pointer;
@@ -107,7 +120,53 @@ a.clic:hover {
 	-moz-border-radius: 6px;
 }
 
+.date {
+	font-style: italic;
+	font-weight:normal;
+	font-size: 1em;
+	color: blue;
+	
+}
+.groupe {
+	float:left;
+	width: 3em;
+	background-color: beige;
+	padding-top: 4em;
+	padding-bottom:4em;
+}
+.texte {
+}
+.spip {
+	font-size: 1.1em;
+	font-family: "Times New Roman", serif;
+}
+h3.spip {
+	font-size: 2em;
+	color: purple;
+	font-weight:bold;
+	font-family: Georgia,"Times New Roman", serif;
+	text-align: left;
+	padding-left: 2em;
+	
+}
+.documents-seance {
+	font-weight:normal;
+	font-size: 1em;
+	color: green;
+}
+
+.seance {
+	font-size: 1.1em;
+	font-family: "Times New Roman", serif;
+}
+
 /*Devoirs affichés sous les séances*/
+.devoirs {
+	background-color:#CAE1FF;
+	font-size: 1.1em;
+	font-family: "Times New Roman", serif;
+}
+
 h4.devoirs {
 	margin: 0px;
 	padding: 0px;
@@ -117,8 +176,8 @@ h5.devoirs {
 	display: inline;
 	font-style: italic;
 	font-weight:normal;
-	font-size: 12px;
-	color: red;
+	font-size: 1em;
+	color: blue;
 }
 
 /*élements de pagination*/

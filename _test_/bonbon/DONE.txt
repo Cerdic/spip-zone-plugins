@@ -2,31 +2,37 @@ Ce qui a été fait avec «Bonbon !»
 
 1.9 Passage préliminaire à Spip 1.9
 -----------------------------------
-Passage à la version 1.9 de Spip
-Mise en plug-in
-Quelques corrections (les classes, matières, profs ne sont affichés que s'ils mènent vers des entrées du CDT)
-«Bonbon !» est sur la zone (svn) en test.
-La pagination est désormais celle de Spip>1.9 (à la place de la pagination nulle aui avait été mise en place)
-Optimisations:	-utilisation de {id_auteur ?} à la place de {id_auteur==#ENV{prof,.}} (merci BoOz).
+- Passage à la version 1.9 de Spip
+- Mise en plug-in
+- Utilisation de ui.datepicker (qui utilise jquery) à la place de calendar popup (=élimination d'un blob non GPL: calendar popup n'était pas redistribuable, ui.datepicker est GPL).
+- Quelques corrections (les classes, matières, profs ne sont affichés que s'ils mènent vers des entrées du CDT)
+- «Bonbon !» est sur la zone (svn) en test.
+- La pagination est désormais celle de Spip>1.9 (à la place de la pagination nulle aui avait été mise en place)
+- Optimisations:	-utilisation de {id_auteur ?} à la place de {id_auteur==#ENV{prof,.}} (merci BoOz).
 		-atomisation des requêtes SQL grâce à des {!doublons bidule) (merci à Cédric Morin pour l'idée remarquable !).
-Des corrections de bugs divers... (voir SVN)
-Un rafraichissement plus fréquent des pages (durée de cache plus courte)
-Des améliorations dans l'interface de saisie: 	-matière et classes sont préslecetionnés quand on vient de finir de saisir une séance et qu'on passe à la suivante.
-						- la classe est -plus ou moins- préremplie quand on clique sur saisir une séance depuis l'accueil ou l'en-tête (ça devrait quand même fonctionner dans la plupart des cas)
-						-au dessus du formulaire de saisie il y a un rappel du contexte...
-						-après la saisie, une fois qu'on a confirmé l'enregistrement, on peut voir la séance et mettre des pièces jointes dans une pop-up. (on peut même la modifier via les crayons).
-						-c'est plus joli avec des icônes !
-						- etc...
-Fonctionalité majeure: On peut dupliquer une séance déjà saisie ! (pour copier coller ce qui a été fait avec une classe sur une autre)...
-Fonctionnalité majeure: intégrations des «crayons». Quand le plugin «Les crayons» est présent on peut modifier le contenu des séances et des devoirs directement comme dans un Wiki.
-Fonctionnalité importante: possibilité de supprimer des séances.
-Fonctionnalité fondamentale: les documents joints sont implémentés dans les séances et les devoirs !!!.
-Pour éviter de surcharger le serveur avec des doublons de documents (du genre poly distribué à 10 classes), il est possible (et vivement conseillé) d'associer un doc joint d'un séance/devoir à une autre fiche (en fait l'ID_DOCUMENT est copié dans le SURTITRE, et Bonbon sait l'y retrouver).
-Mise en place d'un pop-up qui permet de modifier les docs joints aux séances et devoirs (changer le fichier, le titre, la date et même le désaciocier à la fiche quand il a été copié (s'il est dans le surtitre)).
-Les devoirs sont désormais affichés in-extenso avec les séances (et plus simplement pour quand ils sont à faire).
-Les séances peuvent être affichées dans l'ordre chronologique et chronologique inverse.
-Externalisation de la gestion de l'affichage d'une séance dans une noisette. Ce qui permet: de préparer les changement d'aspect, d'afficher la séance juste après sa saisie, d'avoir un affichage correct de la séance depuis la liste des devoirs.
-Abandon de l'affichage des séances seules (sans les devoirs)... Quel est l'intérêt ?
+		-minimiser les REGEXP en affichant qu'une classe et une matière à al fois pour les séances.
+- Gros bug des guillemets (corrigé ?)
+- Des corrections de bugs -très- divers... (voir SVN)
+- Un nouveau filtre donne l'année scolaire et simplifie pas mal les choses.
+- Un rafraichissement plus fréquent des pages (durée de cache plus courte)
+- Des améliorations dans l'interface de saisie: 	-matière et classes sont préslecetionnés quand on vient de finir de saisir une séance et qu'on passe à la suivante.
+						-* la classe est -plus ou moins- préremplie quand on clique sur saisir une séance depuis l'accueil ou l'en-tête (ça devrait quand même fonctionner dans la plupart des cas)
+						-* au dessus du formulaire de saisie il y a un rappel du contexte...
+						-* après la saisie, une fois qu'on a confirmé l'enregistrement, on peut voir la séance et mettre des pièces jointes dans une pop-up. (on peut même la modifier via les crayons).
+						-* c'est plus joli avec des icônes !
+						-* etc...
+- Fonctionalité majeure: On peut dupliquer une séance déjà saisie ! (pour copier coller ce qui a été fait avec une classe sur une autre)... Les doucments sont dupliqués aussi avec (comme docs liés, c'est à dire sans prendre de place sur le disque dur). D'ailleurs ça a pas été facile :-)
+- Fonctionnalité majeure: intégrations des «crayons». Quand le plugin «Les crayons» est présent on peut modifier le contenu des séances et des devoirs directement comme dans un Wiki.
+- Fonctionnalité importante: possibilité de supprimer des séances.
+- Fonctionnalité fondamentale: les documents joints sont implémentés dans les séances et les devoirs !!!.
+- Pour éviter de surcharger le serveur avec des doublons de documents (du genre poly distribué à 10 classes), il est possible (et vivement conseillé) d'associer un doc - joint d'un séance/devoir à une autre fiche (en fait l'ID_DOCUMENT est copié dans le SURTITRE, et Bonbon sait l'y retrouver).
+- Mise en place d'un pop-up qui permet de modifier les docs joints aux séances et devoirs (changer le fichier, le titre, la date et même le désaciocier à la fiche quand il a été copié (s'il est dans le surtitre)).
+- Les devoirs sont désormais affichés in-extenso avec les séances (et plus simplement pour quand ils sont à faire).
+- Les séances peuvent être affichées dans l'ordre chronologique et chronologique inverse.
+- Externalisation de la gestion de l'affichage d'une séance dans une noisette. Ce qui permet: de préparer les changement d'aspect, d'afficher la séance juste après sa saisie, d'avoir un affichage correct de la séance depuis la liste des devoirs.
+- Abandon de l'affichage des séances seules (sans les devoirs)... Quel est l'intérêt ?
+- Gros changements dans l'affichage: le cahier de texte s'affiche désormais plus comme un cahier (avec des onglet pour les classes et les matières). Par contre on ne peut plus avoir différentes matières et/ou classes sur la même page/requête (quel intérêt ?). Celà optimise un peu les requêtes SQL (moins de REGXP) et rend je l'espère l'affichage plus pratique pour les élèves/parents.
+- Bonbon utilise la barre typographique de Spip (qui peut être la v2 si le plugin est installé) ! (merci Stephane)
 
 
 1.0 Première sortie de Bonbon

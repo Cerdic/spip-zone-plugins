@@ -30,26 +30,31 @@ Deux conditions à remplir:
 	(#ENV{admin_fiche}|=={non}|?{' ',''})
 		#SET{admin_fiche,''}
 	]
-]<div id="documents">
-			<h3 class="titre">#TITRE</h3>
-			<div class="#_Seances:EDIT{texte} texte"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez ici pour modifier le texte de cette séance"]>#TEXTE</div>[
+]<div class="seance">
+<B_Groupe>
+			<div class="groupe">
+<BOUCLE_Groupe(MOTS){id_article}{type="Sous groupes de classes"}>[(#TITRE|image_typo{police=dustismo_bold.ttf,taille=15}|image_rotation{-90})]#SET{margin,' style="margin-left:4em;"'}</BOUCLE_Groupe>
+			</div>
+</B_Groupe>
+			<h3 class="#_Seances:EDIT{date} date"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez ici pour modifier la date de cette séance"]#GET{margin}><b>></b>&nbsp;Le [(#DATE|affdate)]&nbsp;:</h3>
+			<div class="#_Seances:EDIT{texte} texte"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez ici pour modifier le texte de cette séance"]#GET{margin}>#TEXTE</div>[
 
 (#REM) On récupère la liste des documents liés à l'article
 
-		]<BOUCLE_Documents_originaux_Seances(DOCUMENTS){id_article}>[(#SET{liste_docs_seance,#GET{liste_docs_seance}|fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Documents_originaux_Seances>[
+		]<BOUCLE_Documents_originaux_Seances(DOCUMENTS){id_article}>[(#SET{liste_docs_seance,#GET{liste_docs_seance}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Documents_originaux_Seances>[
 
 (#REM) On récupère dans le surtitre la liste des documents qui ont été copié dans cette séance (quand on veut ajouter des documents sans les remettre sur le serveur
 
 		][(#SET{liste_docs_copies_seance,[(#GET{virgule}|explode{[(#SURTITRE*|bonbon_matches_id_document)]})]})]
-		<BOUCLE_Copies_Documents_Seances(DOCUMENTS){id_document IN #GET{liste_docs_copies_seance}}>[(#SET{liste_docs_seance,#GET{liste_docs_seance}|fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Copies_Documents_Seances>[
+		<BOUCLE_Copies_Documents_Seances(DOCUMENTS){id_document IN #GET{liste_docs_copies_seance}}>[(#SET{liste_docs_seance,#GET{liste_docs_seance}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Copies_Documents_Seances>[
 
 (#REM) On affiche les documents de la liste
 
 		]<B_Documents_Seances>
-			<div>
-				<h4 class="devoirs">Documents joints à la séance</h4>
-		<BOUCLE_Documents_Seances(DOCUMENTS){id_document IN #GET{liste_docs_seance}}{"&nbsp;|"}{par titre}>
-				[(#SESSION{id_auteur}|?{' ',''})<a href="[(#URL_PAGE{cahier-de-texte-modifier-document,id_article=#ID_ARTICLE}|parametre_url{'id_document',#ID_DOCUMENT})]" title="modfier ce document (titre, fichier, effacer, etc.)" onClick="javascript:window.open(this.href,'modif-doc', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;" name="button"><img src="#CHEMIN{images/preferences-desktop-sosmall.png}" alt="icône" vspace="2" align="middle"></a>]<a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT||image_reduire{22,22})]&nbsp;[(#TITRE|sinon{#FICHIER|basename})] (<em>#TYPE_DOCUMENT</em> de [(#TAILLE|taille_en_octets)])</a>
+			<div class="documents-seance"#GET{margin}>
+				<h4 class="documents-seance"><b>>></b>&nbsp;Documents joints à la séance&nbsp;:</h4>
+		<BOUCLE_Documents_Seances(DOCUMENTS){id_document IN #GET{liste_docs_seance}}{"&nbsp;| "}{par titre}>
+				[(#GET{admin_fiche}|?{' ',''})<a href="[(#URL_PAGE{cahier-de-texte-modifier-document,id_article=#ID_ARTICLE}|parametre_url{'id_document',#ID_DOCUMENT})]" title="modfier ce document (titre, fichier, effacer, etc.)" onClick="javascript:window.open(this.href,'modif-doc', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;" name="button"><img src="#CHEMIN{images/preferences-desktop-sosmall.png}" alt="icône" vspace="2" align="middle"></a>]<a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT||image_reduire{22,22})]&nbsp;[(#TITRE|sinon{#FICHIER|basename})] (<em>#TYPE_DOCUMENT</em> de [(#TAILLE|taille_en_octets)])</a>
 		</BOUCLE_Documents_Seances>
 			</div>
 		</B_Documents_Seances>
@@ -57,7 +62,7 @@ Deux conditions à remplir:
 (#REM) Si c'est une séance écrite par le prof qui visite il peut faire des tas de trucs à la séance
 ]
 [(#GET{admin_fiche}|?{' ',''})
-	<div class="bloc_auteur">
+	<div class="bloc_auteur"#GET{margin}>
 		<a href="#URL_PAGE{cahier-de-texte-saisie,id_article=#ID_ARTICLE}" title="Copier le contenu de cette séance pour une autre classe/groupe"><img src="#CHEMIN{images/go-jump.png}" alt="icône" vspace="2" align="middle">Dupliquer cette séance</a>
 		&nbsp;|<a href="[(#URL_PAGE{cahier-de-texte-saisie,&id_article=#ID_ARTICLE}|parametre_url{'effacer_fiche','a_confirmer'})]" title="Effacer cette fiche: séance et devoirs (c'est définitif !)"><img src="#CHEMIN{images/dialog-cancel.png}" alt="icône" vspace="2" align="middle">Effacer la fiche de cette séance</a>
 		&nbsp;| <span class="replie">
@@ -87,31 +92,31 @@ Deux conditions à remplir:
 (#REM) On commence par un gros hack pour éviter une Regexp dans la requête SQL: on cherche les numéros d'articles dans le PS de l'article et on les mets dans un tableau
 ][(#SET{liste_des_devoirs,[(#GET{virgule}|explode{[(#PS*|bonbon_matches_id_article)]})]})]
 		<B_Trouve_Infos_Devoirs_id_article>
-			<hr>
-			<h4 class="devoirs">Devoirs donnés&nbsp;:</h4>
-			<div>
+			<div class="devoirs"#GET{margin}>
 		<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){id_article IN #GET{liste_des_devoirs}}>
-				<div class="#EDIT{texte} texte"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez sur ce texte pour modifier le texte de ce devoir"]>
-					<h5 class="devoirs">Pour le [(#DATE|affdate)]&nbsp;: </h5>
-					#TEXTE[
+				<div class="texte"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez sur ce texte pour modifier le texte de ce devoir"]>
+					<h5 class="#EDIT{date} devoirs"><b>>></b>&nbsp;Devoir pour le [(#DATE|affdate)]&nbsp;: </h5>
+					<span class="#EDIT{texte}">#TEXTE</span>[
 
 (#REM) On récupère la liste des documents liés à l'article
 
-		]<BOUCLE_Documents_originaux_Devoirs(DOCUMENTS){id_article}>[(#SET{liste_docs_devoirs,#GET{liste_docs_devoirs}|fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Documents_originaux_Devoirs>[
+		][
+	(#SET{liste_docs_devoirs,""})
+]<BOUCLE_Documents_originaux_Devoirs(DOCUMENTS){id_article}>[(#SET{liste_docs_devoirs,#GET{liste_docs_devoirs}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Documents_originaux_Devoirs>[
 
 (#REM) On récupère dans le surtitre la liste des documents qui ont été copié dans cette séance (quand on veut ajouter des documents sans les remettre sur le serveur
 
 		][(#SET{liste_docs_copies_devoirs,[(#GET{virgule}|explode{[(#SURTITRE*|bonbon_matches_id_document)]})]})]
-		<BOUCLE_Copies_Documents_Devoirs(DOCUMENTS){id_document IN #GET{liste_docs_copies_devoirs}}>[(#SET{liste_docs_devoirs,#GET{liste_docs_devoirs}|fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Copies_Documents_Devoirs>[
+		<BOUCLE_Copies_Documents_Devoirs(DOCUMENTS){id_document IN #GET{liste_docs_copies_devoirs}}>[(#SET{liste_docs_devoirs,#GET{liste_docs_devoirs}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Copies_Documents_Devoirs>[
 
 (#REM) On affiche les documents de la liste
 
 		]
 			<B_Documents_Devoir>
-					<div>
-						Documents joints à ce devoir&nbsp;: 
-			<BOUCLE_Documents_Devoir(DOCUMENTS){id_document IN #GET{liste_docs_devoirs}}{"&nbsp;|"}>			
-						[(#SESSION{id_auteur}|?{' ',''})<a href="[(#URL_PAGE{cahier-de-texte-modifier-document,id_article=#ID_ARTICLE}|parametre_url{'id_document',#ID_DOCUMENT})]" title="modfier ce document (titre, fichier, effacer, etc.)" onClick="javascript:window.open(this.href,'modif-doc', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;" name="button"><img src="#CHEMIN{images/preferences-desktop-sosmall.png}" alt="icône" vspace="2" align="middle"></a>]<a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT||image_reduire{22,22})]&nbsp;[(#TITRE|sinon{#FICHIER|basename})] (<em>#TYPE_DOCUMENT</em> de [(#TAILLE|taille_en_octets)])</a>
+					<div class="documents-seance">
+						<b>>>></b>&nbsp;Documents joints à ce devoir&nbsp;: 
+			<BOUCLE_Documents_Devoir(DOCUMENTS){id_document IN #GET{liste_docs_devoirs}}{"&nbsp;| "}>			
+						[(#GET{admin_fiche}|?{' ',''})<a href="[(#URL_PAGE{cahier-de-texte-modifier-document,id_article=#ID_ARTICLE}|parametre_url{'id_document',#ID_DOCUMENT})]" title="modfier ce document (titre, fichier, effacer, etc.)" onClick="javascript:window.open(this.href,'modif-doc', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;" name="button"><img src="#CHEMIN{images/preferences-desktop-sosmall.png}" alt="icône" vspace="2" align="middle"></a>]<a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT||image_reduire{22,22})]&nbsp;[(#TITRE|sinon{#FICHIER|basename})] (<em>#TYPE_DOCUMENT</em> de [(#TAILLE|taille_en_octets)])</a>
 			</BOUCLE_Documents_Devoir>
 					</div>
 			</B_Documents_Devoir>
@@ -144,6 +149,6 @@ Deux conditions à remplir:
 		</BOUCLE_Trouve_Infos_Devoirs_id_article>
 			</div>
 		</B_Trouve_Infos_Devoirs_id_article>
-		</div>
+</div>
 	</BOUCLE_Auteur_Seances>
 </BOUCLE_Seances>

@@ -47,7 +47,7 @@ if($_GET['doc-choisi']) {
 }// fin du if doc choisi
 ?>
 <BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>
-	<BOUCLE_Articles_de_auteur(ARTICLES){id_secteur}{id_auteur}>[(#SET{liste_articles,#GET{liste_articles}|fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})]</BOUCLE_Articles_de_auteur>
+	<BOUCLE_Articles_de_auteur(ARTICLES){id_secteur}{id_auteur}>[(#SET{liste_articles,#GET{liste_articles}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})]</BOUCLE_Articles_de_auteur>
 </BOUCLE_Contexte_RubriqueCDT>
 <B_Documents>
 #ANCRE_PAGINATION

@@ -15,6 +15,8 @@ if ($auteur_session) {
 Cette page prend le paramètre suivant (en GET):
 id_article= n° de la séance. Ce paramètre est obligatoire
 id_document= n° du doc choisi à relier à id_article. Ce paramètre est obligatoire
+effacer= quand cet argument est non nul, le document id_document est effacé. Pour l'instant celà ne peut-être que le cas des docs liés via le surtitre
+effacement_total= non actif (devrait permettre d'effacer un doc de la base et du répertoire ftp)
 -->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -50,7 +52,7 @@ if($_GET['effacer'] and !$_GET['effacement_total']) {
 <?php if (!$_GET['effacer'] and !$_GET['effacement_total']) {?>
 #SET{titres,""}
 <BOUCLE_Liste_articles_directement_attaches(ARTICLES){id_document}>[
-	(#SET{liste_articles,#GET{liste_articles}|fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})
+	(#SET{liste_articles,#GET{liste_articles}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})
 ][
 	(#SET{titre,[(#GET{titre}|concat{#TITRE," "})]})
 ][
@@ -64,7 +66,7 @@ if($_GET['effacer'] and !$_GET['effacement_total']) {
 <BOUCLE_Liste_articles_indirectement_lies(ARTICLES){surtitre==#GET{docXXX}}>[
 	(#SET{compteur,[(#COMPTEUR_BOUCLE|plus{#_Liste_articles_directement_attaches:TOTAL_BOUCLE})]})
 ][
-	(#SET{liste_articles,#GET{liste_articles}|fusion_tableau{#ARRAY{#GET{compteur},#ID_ARTICLE}}})
+	(#SET{liste_articles,#GET{liste_articles}|bonbon_fusion_tableau{#ARRAY{#GET{compteur},#ID_ARTICLE}}})
 ]</BOUCLE_Liste_articles_indirectement_lies>
 		<div class="bloc_auteur">
 			<p>Les modfications que vous allez faire ce sur document vont affecter toutes les fiches auxquelles il est attaché&nbsp;:</p>

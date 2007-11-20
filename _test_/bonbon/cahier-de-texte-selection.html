@@ -8,24 +8,13 @@
 ***Selection des éléments à faire afficher par cahier-de-texte-affichage
 -->]
 <!--Formulaire pour les requêtes précises-->
-	<!-- Javascript du calendrier en pop-up-->
-<script type="text/javascript" src="#DOSSIER_SQUELETTE/CalendarPopup.js"></script>
-<SCRIPT LANGUAGE="JavaScript">
-//paramètres pour la fenêtre pop-up
-		var cal = new CalendarPopup();
-		cal.setMonthNames('Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre');
-		cal.setDayHeaders('D','L','M','M','J','V','S');
-		cal.setWeekStartDay(1);
-		cal.setTodayText("Aujourd'hui");
-		cal.setDisabledWeekDays(6);
-</SCRIPT>
 <a name="requete"></a>
 <div class="bloc">
 	<h3 class="titre"><img src="#CHEMIN{images/edit-find-replace.png}" alt="icône" vspace="2" align="top">Faire une requête précise dans le cahier de texte&nbsp;:</h3>
 	<form name="choisir" method="get" action="spip.php">
 		<input type="hidden" name="page" value="cahier-de-texte-affichage">
 		<center><div class="moyen-bloc">
-			<p>(Choisir en détail les élements que l'on veut afficher)
+			<p>(Choisir en détail les élements que l'on veut afficher. Chaque élément est optionnel.)
 			</p>
 			<select id="nb" name="nb" size="1">
 				<option value="20" selected="selected">nombre max. d'élements affichés</option>
@@ -80,14 +69,8 @@
 }?>
 			</fieldset>
 			<fieldset>
-				<legend>Dates</legend>
-				<p><INPUT TYPE="hidden" ID="date_debut" NAME="date_debut" VALUE="" SIZE=12>
-				<A HREF="#"
-				onClick="cal.select(document.forms['choisir'].date_debut,'ancre-date_debut','yyyy-MM-dd'); return false;"
-				NAME="ancre-date_debut" ID="ancre-date_debut" TITLE="Choisissez la date dans le calendrier">choisir le début de la période à consulter</A>&nbsp;- <INPUT TYPE="hidden" ID="date_fin" NAME="date_fin" VALUE="" SIZE=12>
-				<A HREF="#"
-				onClick="cal.select(document.forms['choisir'].date_fin,'ancre-date_fin','yyyy-MM-dd'); return false;"
-				NAME="ancre-date_fin" ID="ancre-date_fin" TITLE="Choisissez la date dans le calendrier">choisir la fin de la période à consulter</A></p>
+				<legend>Dates (jj/mm/aaaa)</legend>
+				<p>choisir le début de la période à consulter <INPUT TYPE="text" class="date_calendrier" NAME="date_debut" VALUE="" SIZE=12><br /> choisir la fin de la période à consulter <INPUT TYPE="text" class="date_calendrier" NAME="date_fin" VALUE="" SIZE=12></p>
 			</fieldset>
 </BOUCLE_CDT_entier>
 		</div>
