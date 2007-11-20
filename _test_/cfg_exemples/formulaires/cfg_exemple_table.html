@@ -1,21 +1,15 @@
-#CACHE{0}
+
 <div class="cfg_exemples_perso">
 
 Une boucle sur les champs de la table spip_cfg_exemples
-
 <B_a>
 <table class='spip' border='1' width='90%'>
 <tr><th>id</th><th>description</th><th>texte</th></tr>
 <BOUCLE_a(CFG_EXEMPLES)>
-	<tr>
-	<td>#ID_CFG_EXEMPLE</td>
-	<td>#DESCRIPTION*</td>
-	<td>#TEXTE*</td>
-	</tr>
+<tr><td>#ID_CFG_EXEMPLE</td><td>#DESCRIPTION*</td><td>#TEXTE*</td></tr>
 </BOUCLE_a>
 </table>
 </B_a>
 <INCLURE{fond=formulaires/formulaire_cfg_vue}{env}>
-
 
 </div>
