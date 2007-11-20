@@ -128,6 +128,6 @@ EOF;
 }
 
 function date_creation_repertoire_site ($v) {
-return (date("d/M/y", @filectime(_DIR_RACINE.$GLOBALS['mutualisation_dir'].'/'.$v))) ;	
+return (date("d/M/y", @filectime(_DIR_RACINE.$GLOBALS['mutualisation_dir'].'/'.$v."/config/connect.php"))) ;	
 }
 ?>
