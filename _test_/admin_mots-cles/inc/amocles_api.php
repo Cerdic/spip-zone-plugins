@@ -180,6 +180,19 @@ if(!function_exists('__plugin_current_version_base_get')) {
 	}
 } // end if __plugin_current_version_base_get
 
+/**/
+if(!function_exists('__plugin_real_tag_get')) {
+	function __plugin_real_tag_get ($prefix, $s) {
+		$dir = __plugin_get_meta_dir($prefix);
+		$f = _DIR_PLUGINS.$dir."/"._FILE_PLUGIN_CONFIG;
+		if(is_readable($f) && ($c = file_get_contents($f))) {
+			$p = array("/<!--(.*?)-->/is","/<\/".$s.">.*/s","/.*<".$s.">/s");
+			$r = array("","","");
+			$r = preg_replace($p, $r, $c);
+		}
+		return(!empty($r) ? $r : false);
+	}
+} // end if __plugin_real_tag_get
 
 if(!function_exists('__plugin_ecrire_key_in_serialized_meta')) {
 	// ecriture dans les metas, format sérialisé

@@ -79,7 +79,7 @@ spip_log("amocles_install() --", _AMOCLES_PREFIX);
 function amocles_init () {
 	$amocles_init = array(
 		'prefix' => _AMOCLES_PREFIX
-		, 'version' => __plugin_real_tag_get('version')
+		, 'version' => __plugin_real_tag_get(_AMOCLES_PREFIX, 'version')
 		, 'date' => date('Y-m-d_H:i:s')
 		, 'admins_groupes_mots_ids' => array()
 	);
