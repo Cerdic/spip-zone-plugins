@@ -47,30 +47,12 @@ function publiHAL_installation(){
 		
 		
 		publiHAL_ajoute_mot($id_groupe,'120. HDR','HDR','Habilitations à diriger des recherches');
-		publiHAL_ajoute_mot($id_groupe,'130. Thèses','THESE','<multi>PhD thesis[fr]Thèses</multi>');
+		publiHAL_ajoute_mot($id_groupe,'130. THESE','THESE','<multi>PhD thesis[fr]Thèses</multi>');
 		publiHAL_ajoute_mot($id_groupe,'140. COURS','COURS','<multi>Lectures[fr]Cours</multi>');
 		
 		publiHAL_ajoute_mot($id_groupe,'150. UNDEFINED','UNDEFINED','<multi>Document without publication reference[fr]Documents sans référence de publication</multi>');
 
-//		publiHAL_ajoute_mot($id_groupe,'50. BREVET','BREVET','Brevets');
-		// anciens codes HAL-INRIA
 
-//		publiHAL_ajoute_mot($id_groupe,'317. ARTJOURNAL','ARTJOURNAL','Article de revue scientifique / vulgarisation');
-//		publiHAL_ajoute_mot($id_groupe,'322. ARTCOLLOQUE','ARTCOLLOQUE','Article de conférence-workshop');
-//		publiHAL_ajoute_mot($id_groupe,'332. OUVRAGE','OUVRAGE','Ouvrage - Livre et Congrès');
-//		publiHAL_ajoute_mot($id_groupe,'342. ARTOUVRAGE','ARTOUVRAGE','Chapitre de livre');
-//		publiHAL_ajoute_mot($id_groupe,'367. FICHELOGICIEL','FICHELOGICIEL','Fiche logiciel');
-//		publiHAL_ajoute_mot($id_groupe,'377. PREPUB','PREPUB','Document non publié');
-
-//ARTJOURNAL  	Article de revue scientifique / vulgarisation
-//ARTCOLLOQUE 	Article de conférence-workshop
-//OUVRAGE 	Ouvrage - Livre et Congrès
-//ARTOUVRAGE 	Chapitre de livre
-//RAPPORT 	Rapport
-//COURS 	Cours, tutorial
-//BREVET 	Brevet
-//FICHELOGICIEL 	Fiche logiciel
-//PREPUB 	Document non publié
 		
 		ecrire_meta('publiHAL_Type_de_document',$id_groupe);
 		$r|=1;
