@@ -32,29 +32,35 @@ function publiHAL_installation(){
 		" , " . spip_abstract_quote('Indique quel est le type du document') . 
 		" , " . spip_abstract_quote("Attention ne pas changer le titre!\n_ Indique quel est le type de document ou de publication : article, conférence, livre ...") . 
 		" , 'non' , 'non' , 'oui' , '' , 'non' , 'oui' , 'oui' , 'oui' , 'non' , 'oui' )");
-		// codes HAL
-		publiHAL_ajoute_mot($id_groupe,'10. Articles de revues','ART_ACL','Articles dans des revues avec comité de lecture');
-		publiHAL_ajoute_mot($id_groupe,'15. Articles de revues sans comité de lecture','ART_SCL','Articles dans des revues sans comité de lecture');
-		publiHAL_ajoute_mot($id_groupe,'20. CONF_INV','CONF_INV','Conférences invitées');
-		publiHAL_ajoute_mot($id_groupe,'25. COMM_ACT','COMM_ACT','Communications avec actes');
-		publiHAL_ajoute_mot($id_groupe,'30. COMM_SACT','COMM_SACT','Communications sans actes');
-		publiHAL_ajoute_mot($id_groupe,'35. OUVS','OUVS','Ouvrages scientifiques');
-		publiHAL_ajoute_mot($id_groupe,'40. Chapitres d\'ouvrages scientifiques','COVS','Chapitres d\'ouvrages scientifiques');
-		publiHAL_ajoute_mot($id_groupe,'45. DOUV','DOUV','Directions d\'ouvrages');
-		publiHAL_ajoute_mot($id_groupe,'50. BREVET','BREVET','Brevets');
-		publiHAL_ajoute_mot($id_groupe,'55. HDR','HDR','Habilitations à diriger des recherches');
-		publiHAL_ajoute_mot($id_groupe,'60. Thèses','THESE','Thèses');
-		publiHAL_ajoute_mot($id_groupe,'65. COURS','COURS','Cours');
-		publiHAL_ajoute_mot($id_groupe,'70. AUTRE','AUTRE','Autres publications');
-		publiHAL_ajoute_mot($id_groupe,'75. RAPPORT','RAPPORT','Rapport de recherche');
-		publiHAL_ajoute_mot($id_groupe,'80. UNDEFINED','UNDEFINED','Documents sans référence de publication');
-		// codes HAL-INRIA
-		publiHAL_ajoute_mot($id_groupe,'17. ARTJOURNAL','ARTJOURNAL','Article de revue scientifique / vulgarisation');
-		publiHAL_ajoute_mot($id_groupe,'22. ARTCOLLOQUE','ARTCOLLOQUE','Article de conférence-workshop');
-		publiHAL_ajoute_mot($id_groupe,'32. OUVRAGE','OUVRAGE','Ouvrage - Livre et Congrès');
-		publiHAL_ajoute_mot($id_groupe,'42. ARTOUVRAGE','ARTOUVRAGE','Chapitre de livre');
-		publiHAL_ajoute_mot($id_groupe,'67. FICHELOGICIEL','FICHELOGICIEL','Fiche logiciel');
-		publiHAL_ajoute_mot($id_groupe,'77. PREPUB','PREPUB','Document non publié');
+		// codes HAL INRIA
+		publiHAL_ajoute_mot($id_groupe,'10. ART_ACL','ART_ACL','<multi>Articles in peer-reviewed journal[fr]Articles dans des revues avec comité de lecture</multi>');
+		publiHAL_ajoute_mot($id_groupe,'20. ART_SCL','ART_SCL','<multi>Articles in non peer-reviewed journal[fr]Articles dans des revues sans comité de lecture</multi>');
+		publiHAL_ajoute_mot($id_groupe,'30. COMM_ACT','COMM_ACT','<multi>Peer-reviewed conference/proceedings[fr]Communications avec actes</multi>');
+		publiHAL_ajoute_mot($id_groupe,'40. COMM_SACT','COMM_SACT','<multi>Congres communications[fr]Communications sans actes</multi>');
+		publiHAL_ajoute_mot($id_groupe,'50. CONF_INV','CONF_INV','<multi>Invited conferences[fr]Conférences invitées</multi>');
+		publiHAL_ajoute_mot($id_groupe,'60. OUVS','OUVS','<multi>Scientific Books[fr]Ouvrages scientifiques</multi>');
+		publiHAL_ajoute_mot($id_groupe,'70. COVS','COVS','<multi>Scientific Book chapters[fr]Chapitres d\'ouvrages scientifiques</multi>');
+		publiHAL_ajoute_mot($id_groupe,'80. DOUV','DOUV','<multi>Direction of work[fr]Directions d\'ouvrages</multi>');
+		publiHAL_ajoute_mot($id_groupe,'90. REPORT','REPORT','<multi>Research report[fr]Rapport</multi>');
+		publiHAL_ajoute_mot($id_groupe,'100. PATENT','PATENT','<multi>Patents[fr]Brevets</multi>');
+		publiHAL_ajoute_mot($id_groupe,'110. OTHER','OTHER','<multi>Other publications[fr]Autres publications</multi>');
+		
+		
+		publiHAL_ajoute_mot($id_groupe,'120. HDR','HDR','Habilitations à diriger des recherches');
+		publiHAL_ajoute_mot($id_groupe,'130. Thèses','THESE','<multi>PhD thesis[fr]Thèses</multi>');
+		publiHAL_ajoute_mot($id_groupe,'140. COURS','COURS','<multi>Lectures[fr]Cours</multi>');
+		
+		publiHAL_ajoute_mot($id_groupe,'150. UNDEFINED','UNDEFINED','<multi>Document without publication reference[fr]Documents sans référence de publication</multi>');
+
+//		publiHAL_ajoute_mot($id_groupe,'50. BREVET','BREVET','Brevets');
+		// anciens codes HAL-INRIA
+
+//		publiHAL_ajoute_mot($id_groupe,'317. ARTJOURNAL','ARTJOURNAL','Article de revue scientifique / vulgarisation');
+//		publiHAL_ajoute_mot($id_groupe,'322. ARTCOLLOQUE','ARTCOLLOQUE','Article de conférence-workshop');
+//		publiHAL_ajoute_mot($id_groupe,'332. OUVRAGE','OUVRAGE','Ouvrage - Livre et Congrès');
+//		publiHAL_ajoute_mot($id_groupe,'342. ARTOUVRAGE','ARTOUVRAGE','Chapitre de livre');
+//		publiHAL_ajoute_mot($id_groupe,'367. FICHELOGICIEL','FICHELOGICIEL','Fiche logiciel');
+//		publiHAL_ajoute_mot($id_groupe,'377. PREPUB','PREPUB','Document non publié');
 
 //ARTJOURNAL  	Article de revue scientifique / vulgarisation
 //ARTCOLLOQUE 	Article de conférence-workshop
