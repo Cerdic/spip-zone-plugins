@@ -346,7 +346,7 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'sw_spam_words_action' => 'A partir de cette page, vous pouvez ajouter, &eacute;diter et supprimer des mots associ&eacute;s &agrave; du spam. Le caract&egrave;re (*) est accept&eacute; dans le mot. Par exemple&nbsp;: {{*tes*}} capturera {d&eacute;testable}, {{tes*}} capturera {tester}, {{*tes}} capturera {portes}.',
 'sw_word' => 'Mot',
 'sw_spam_words_mass_add' => 'Copier-coller ou saisir vos mots dans cette zone. S&eacute;parer chaque mot par une virgule, deux points ou un retour &agrave; la ligne.',
-'sw_spam_words_url_add' => 'Saisir l\'URL d\'un fichier contenant une liste de mots format&eacute;e comme ci-dessus. Exemple&nbsp;: http://spipbb.homelinux.org/plugins/spipBB/base/spamwordlist.csv .',
+'sw_spam_words_url_add' => 'Saisir l\'URL d\'un fichier contenant une liste de mots format&eacute;e comme ci-dessus. Exemple&nbsp;: http://spipbb.spip-zone.info/plugins/spipBB/base/spamwordlist.csv .',
 
 //T
 'texte_login_precaution' => 'Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.

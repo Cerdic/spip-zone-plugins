@@ -61,13 +61,13 @@ function spipbb_upgrade_all()
 			$installed_version = $GLOBALS['spipbb']['version'];
 		}
 		else {
-			$installed_version = 0.10 ; // first release didn't store the release level
+			$installed_version = '0.1.0' ; // first release didn't store the release level
 		}
 	}
 	else {
-		$installed_version = 0.0 ; // aka not installed
+		$installed_version = '0.0.0' ; // aka not installed
 	}
-	if ( $installed_version == 0.0 ) {
+	if ( $installed_version == '0.0.0' ) {
 		spipbb_init_metas();
 	}
 
@@ -78,9 +78,18 @@ function spipbb_upgrade_all()
 		creer_base();
 		spip_log('inc/spipbb.php spipbb_upgrade_all creer_base installed_version:'.$installed_version,'spipbb');
 	}
+	// Revoir la config des tables ?
+	if (!spipbb_check_tables()) {
+		spipbb_delete_tables(); // on drop tout ?
+		include_spip('base/spipbb'); // inclure nouveau schema
+		include_spip('base/create');
+		include_spip('base/abstract_sql');
+		creer_base();
+		spip_log('inc/spipbb.php spipbb_upgrade_all recreer_base installed_version:'.$installed_version,'spipbb');
+	}
 
 	if ( version_compare(substr($installed_version,0,5),$version_code,'<' ) ) {
-		spipbb_upgrade_metas();
+		spipbb_upgrade_metas($installed_version,$version_code);
 	}
 
 	spip_log('inc/spipbb.php : spipbb_upgrade_all() END iv:$installed_version: vc:$version_code','spipbb');
@@ -92,33 +101,36 @@ function spipbb_upgrade_all()
 //----------------------------------------------------------------------------
 function spipbb_init_metas()
 {
-	spipbb_delete_metas(); // [fr] Nettoyage des traces [en] remove old metas
+	// priorite a la config de spipbb
+	$old_meta = @unserialize($GLOBALS['meta']['spipbb']); // recupere de vieilles metas
+	// chargement de la config de gafospip le vrai !!
+	if (!is_array($old_meta)) $old_meta=spipbb_import_gafospip_metas();
 	unset($spipbb_meta);
 	$spipbb_meta=array();
-	$spipbb_meta['configure'] = 'non';
+	$spipbb_meta['configure'] = $old_meta['configure'] ? $old_meta['configure'] :'non';
 	$spipbb_meta['version']= $GLOBALS['spipbb_version'];
-	$spipbb_meta['id_secteur'] = 0;
-	$spipbb_meta['config_id_secteur'] = 'non';
+	$spipbb_meta['id_secteur'] = $old_meta['id_secteur'] ? $old_meta['id_secteur'] : 0;
+	$spipbb_meta['config_id_secteur'] = $old_meta['config_id_secteur'] ? $old_meta['config_id_secteur'] : 'non';
 
-	$spipbb_meta['squelette_groupeforum']= "groupeforum";
-	$spipbb_meta['squelette_filforum']= "filforum";
+	$spipbb_meta['squelette_groupeforum']= $old_meta['squelette_groupeforum'] ? $old_meta['squelette_groupeforum'] : "groupeforum";
+	$spipbb_meta['squelette_filforum']= $old_meta['squelette_filforum'] ? $old_meta['squelette_filforum'] : "filforum";
 	if ( find_in_path("groupeforum.html") AND find_in_path("filforum.html") )
 		$spipbb_meta['config_squelette'] = 'oui';
 	else 
 		$spipbb_meta['config_squelette'] = 'non';
 
 	// les mots cles specifiques
-	$spipbb_meta['id_groupe_mot'] = 0;
-	$spipbb_meta['config_groupe_mots'] = 'non';
-	$spipbb_meta['id_mot_ferme'] = 0;
-	$spipbb_meta['id_mot_annonce'] = 0;
-	$spipbb_meta['id_mot_postit'] = 0;
-	$spipbb_meta['config_mot_cles'] = 'non';
+	$spipbb_meta['id_groupe_mot'] = $old_meta['id_groupe_mot'] ? $old_meta['id_groupe_mot'] : 0;
+	$spipbb_meta['config_groupe_mots'] = $old_meta['config_groupe_mots'] ? $old_meta['config_groupe_mots'] : 'non';
+	$spipbb_meta['id_mot_ferme'] = $old_meta['id_mot_ferme'] ? $old_meta['id_mot_ferme'] : 0;
+	$spipbb_meta['id_mot_annonce'] = $old_meta['id_mot_annonce'] ? $old_meta['id_mot_annonce'] : 0;
+	$spipbb_meta['id_mot_postit'] = $old_meta['id_mot_postit'] ? $old_meta['id_mot_postit'] : 0;
+	$spipbb_meta['config_mot_cles'] = $old_meta['config_mot_cles'] ? $old_meta['config_mot_cles'] : 'non';
 
-	// gafopspip
+	// gafospip
 	#stockage des champs supplementaires
-	$spipbb_meta['support_auteurs'] = 'extra'; //$options_sap = array('extra','table','autre');
-	$spipbb_meta['table_support'] = '';	
+	$spipbb_meta['support_auteurs'] = $old_meta['support_auteurs'] ? $old_meta['support_auteurs'] : 'extra'; //$options_sap = array('extra','table','autre');
+	$spipbb_meta['table_support'] = $old_meta['table_support'] ? $old_meta['table_support'] : '';
 	#champs supplementaires auteurs
 	$champs_requis = array('date_crea_spipbb','avatar','annuaire_forum','refus_suivi_thread');
 	$champs_definis=array();
@@ -127,31 +139,32 @@ function spipbb_init_metas()
 	}
 	$champs_optionnels = array_diff($champs_definis,$champs_requis);
 	foreach ($champs_optionnels as $champ_a_valider) {
-		$spipbb_meta['affiche_'.$champ_a_valider]='oui';
+		$spipbb_meta['affiche_'.$champ_a_valider]=$old_meta['affiche_'.$champ_a_valider] ? $old_meta['affiche_'.$champ_a_valider] : 'oui';
 	}
 	# autres parametres
-	$spipbb_meta['fixlimit'] = 10;
-	$spipbb_meta['lockmaint'] = 600;
-	$spipbb_meta['affiche_avatar'] = 'oui';
-	$spipbb_meta['taille_avatar_suj'] = 50;
-	$spipbb_meta['taille_avatar_cont'] = 80;
-	$spipbb_meta['taille_avatar_prof'] = 80;
-	$spipbb_meta['affiche_bouton_abus'] = 'non';
-	$spipbb_meta['affiche_bouton_rss'] = 'un';
+	$spipbb_meta['fixlimit'] = $old_meta['fixlimit'] ? $old_meta['fixlimit'] : 10;
+	$spipbb_meta['lockmaint'] = $old_meta['lockmaint'] ? $old_meta['lockmaint'] : 600;
+	$spipbb_meta['affiche_avatar'] = $old_meta['affiche_avatar'] ? $old_meta['affiche_avatar'] : 'oui';
+	$spipbb_meta['taille_avatar_suj'] = $old_meta['taille_avatar_suj'] ? $old_meta['taille_avatar_suj'] : 50;
+	$spipbb_meta['taille_avatar_cont'] = $old_meta['taille_avatar_cont'] ? $old_meta['taille_avatar_cont'] : 80;
+	$spipbb_meta['taille_avatar_prof'] = $old_meta['taille_avatar_prof'] ? $old_meta['taille_avatar_prof'] : 80;
+	$spipbb_meta['affiche_bouton_abus'] = $old_meta['affiche_bouton_abus'] ? $old_meta['affiche_bouton_abus'] : 'non';
+	$spipbb_meta['affiche_bouton_rss'] = $old_meta['affiche_bouton_rss'] ? $old_meta['affiche_bouton_rss'] : 'un';
 	// chemin icones et smileys ?
 
 	// spam words
-	$spipbb_meta['config_spam_words'] = 'non';
-	$spipbb_meta['sw_nb_spam_ban'] = 3;
-	$spipbb_meta['sw_ban_ip'] = "non";
-	$spipbb_meta['sw_admin_can_spam'] = "non";
-	$spipbb_meta['sw_modo_can_spam'] = "non";
-	$spipbb_meta['sw_send_pm_warning'] = "non";
-	$spipbb_meta['sw_warning_from_admin'] = 1; // id_auteur
-	$spipbb_meta['sw_warning_pm_titre'] = _T('spipbb:sw_pm_spam_warning_titre');
-	$spipbb_meta['sw_warning_pm_message'] = _T('spipbb:sw_pm_spam_warning_message');
+	$spipbb_meta['config_spam_words'] = $old_meta['config_spam_words'] ? $old_meta['config_spam_words'] : 'non';
+	$spipbb_meta['sw_nb_spam_ban'] = $old_meta['sw_nb_spam_ban'] ? $old_meta['sw_nb_spam_ban'] : 3;
+	$spipbb_meta['sw_ban_ip'] = $old_meta['sw_ban_ip'] ? $old_meta['sw_ban_ip'] : "non";
+	$spipbb_meta['sw_admin_can_spam'] = $old_meta['sw_admin_can_spam'] ? $old_meta['sw_admin_can_spam'] : "non";
+	$spipbb_meta['sw_modo_can_spam'] = $old_meta['sw_modo_can_spam'] ? $old_meta['sw_modo_can_spam'] : "non";
+	$spipbb_meta['sw_send_pm_warning'] = $old_meta['sw_send_pm_warning'] ? $old_meta['sw_send_pm_warning'] : "non";
+	$spipbb_meta['sw_warning_from_admin'] = $old_meta['sw_warning_from_admin'] ? $old_meta['sw_warning_from_admin'] : 1; // id_auteur
+	$spipbb_meta['sw_warning_pm_titre'] = $old_meta['sw_warning_pm_titre'] ? $old_meta['sw_warning_pm_titre'] : _T('spipbb:sw_pm_spam_warning_titre');
+	$spipbb_meta['sw_warning_pm_message'] = $old_meta['sw_warning_pm_message'] ? $old_meta['sw_warning_pm_message'] : _T('spipbb:sw_pm_spam_warning_message');
 
 	// final - sauver
+	spipbb_delete_metas(); // [fr] Nettoyage des traces [en] remove old metas
 
 	include_spip('inc/meta');
 	ecrire_meta('spipbb', serialize($spipbb_meta));
@@ -159,6 +172,44 @@ function spipbb_init_metas()
 	$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
 	spip_log('inc/spipbb.php  : init_metas END '.$GLOBALS['meta']['spipbb'],'spipbb');
 } // spipbb_init_metas
+
+//----------------------------------------------------------------------------
+// Importe les metas de GAFOSPIP s'ils existent, retourne un tableau
+//----------------------------------------------------------------------------
+function spipbb_import_gafospip_metas()
+{
+	if (isset($GLOBALS['meta']['gaf_install'])) {
+		$tbl_conf=@unserialize($GLOBALS['meta']['gaf_install']);
+		$spipbb_meta=array();
+		$spipbb_meta['config_id_secteur']=$tbl_conf['groupe']; # num groupe
+		$spipbb_meta['fixlimit']=$tbl_conf['fixlimit']; # n lignes
+		$spipbb_meta['lockmaint']=$tbl_conf['lockmaint']=intval(_request('lockmaint')); # n secondes
+		$spipbb_meta['support_auteurs']=$tbl_conf['support_auteurs']; # extra / table / autre
+		$spipbb_meta['table_support']=$tbl_conf['table_support']; # nom table generique, ex. : auteurs_profils
+		#$tbl_conf['champs_gaf']; # array xx,yy,zz
+		$spipbb_meta['taille_avatar_suj']=$tbl_conf['taille_avatar_suj']; # nbr pix
+		$spipbb_meta['taille_avatar_cont']=$tbl_conf['taille_avatar_cont']; # nbr pix
+		$spipbb_meta['taille_avatar_prof']=$tbl_conf['taille_avatar_prof']; # nbr pix
+		$spipbb_meta['affiche_avatar']=$tbl_conf['affiche_avatar']; # oui/non
+		$spipbb_meta['affiche_bouton_abus']=$tbl_conf['affiche_bouton_abus']; # oui/non
+		$spipbb_meta['affiche_bouton_rss']=$tbl_conf['affiche_bouton_rss']; # non/un/tout
+		###$tbl_conf['affiche_signature']; # oui/non
+
+		# affichage champ 'nnn_nnn'
+		#champs supplementaires auteurs
+		$champs_requis = array('date_crea_spipbb','avatar','annuaire_forum','refus_suivi_thread');
+		$champs_definis=array();
+		foreach ($GLOBALS['champs_sap_spipbb'] as $champ => $params) {
+			$champs_definis[]=$champ;
+		}
+		$champs_optionnels = array_diff($champs_definis,$champs_requis);
+		foreach ($champs_optionnels as $champ_a_valider) {
+			$spipbb_meta['affiche_'.$champ_a_valider]=$tbl_conf['affiche_'.$champ_a_valider];
+		}
+		return $spipbb_meta;
+	}
+	else return array();
+} // spipbb_import_gafospip_metas
 
 //----------------------------------------------------------------------------
 // [fr] Supprimer les metas du plugin (desinstallation)
@@ -181,9 +232,11 @@ function spipbb_delete_metas()
 // [fr] Met a jour les metas du plugin
 // [en] Upgrade plugin metas
 //----------------------------------------------------------------------------
-function spipbb_upgrade_metas()
+function spipbb_upgrade_metas($installed_version='',$version_code='')
 {
-	spipbb_init_metas();
+	if ( version_compare(substr($installed_version,0,5),'0.3.0','<' ) ) {
+		spipbb_init_metas();
+	} // else si on fait des changements apres la 0.3.0
 	spip_log('inc/spipbb.php : spipbb_upgrade_metas OK','spipbb');
 } // spipbb_upgrade_metas
 
@@ -257,7 +310,10 @@ function spipbb_check_une_table($nom_table,$tables_principales)
 	while ( list($k,$v) = each($res['field']) )
 	{
 		$param=preg_split("/\s/",$v);
-		$res['field'][$k]=strtolower($param[0]);
+		$champ=strtolower($param[0]);
+		$champ=preg_replace("/^char(.*)/","varchar\\1",$champ); // char(x)==varchar(x) ?
+		$champ=preg_replace("/^timestamp.*/","timestamp",$champ); // timestamp(14)==timestamp ?
+		$res['field'][$k]=$champ;
 	}
 	$table_origine=$tables_principales[$nom_table];
 	while ( list($k,$v) = each($table_origine['field']) )
@@ -265,7 +321,10 @@ function spipbb_check_une_table($nom_table,$tables_principales)
 		$param=preg_split("/\s/",$v);
 		$table_origine['field'][$k]=strtolower($param[0]);
 	}
-	if ($res['field'] != $table_origine['field'] ) return false ;
+	if ($res['field'] != $table_origine['field'] ) {
+		spip_log(__FILE__.": spipbb_check_une_table diff(".$nom_table.") res:".join(",",$res['field']).":orig:".join(",",$table_origine['field']),'spipbb');
+		return false ;
+	}
 	else return true;
 } // spipbb_check_une_table
 
@@ -307,94 +366,6 @@ function spipbb_init_mot_cle($mot,$groupe)
 			);
 	return $id_mot;
 } // spipbb_init_mot_cle
-
-// ------------------------------------------------------------------------------
-// [fr] Construit la liste des choix de l'admin spipbb en fonction de ce qui est
-// disponible
-// Pour etre affiche dans la liste, le fichier doit etre dans exec/
-// s'appeler spipbb_admin_XXXX
-// et contenir un element de tableau $modules[__titre_categorie__][__element__]
-// ------------------------------------------------------------------------------
-function spipbb_admin_gauche($rubrique_admin_courante="")
-{
-	// cette fonction pose des problemes et est realisee  en plusieurs etapes pour debogage
-	spip_log('inc/spipbb.php : spipbb_admin_gauche START :'._DIR_PLUGIN_SPIPBB,'spipbb');
-	
-	if (!function_exists('generer_url_ecrire')) {
-		include_spip('inc/utils');
-		spip_log('inc/spipbb.php : spipbb_admin_gauche generer_url_ecrire not found','spipbb');
-	}
-	$modules = array();
-	$modules_to_include=array();
-
-	if ( $dir = opendir(_DIR_PLUGIN_SPIPBB."exec/") ) {
-		$setmodules = 1; // permet d'activer le lien lors de l'include
-		while( false !== ($file = readdir($dir)) ) // cf http://fr.php.net/manual/fr/function.readdir.php
-		{
-			if( preg_match("/^spipbb_admin_.*?\.php$/", $file) )
-			{
-				// chaque fichier inclu doit contenir ceci (par exemple) en entete :
-				//if( !empty($setmodules) )
-				//{
-				//	$file = basename(__FILE__);
-				//	$modules['General']['Configuration'] = $file;
-				//	return;
-				//}
-				if ( is_readable( _DIR_PLUGIN_SPIPBB . "exec/" . $file) ) {
-					require( _DIR_PLUGIN_SPIPBB . "exec/" . $file);
-					$modules_to_include[] = _DIR_PLUGIN_SPIPBB . "exec/" . $file ;
-					spip_log('inc/spipbb.php : spipbb_admin_gauche include RETOUR include :'._DIR_PLUGIN_SPIPBB . "exec/" . $file,'spipbb');
-				}
-				else
-					spip_log('inc/spipbb.php : spipbb_admin_gauche include impossible :'._DIR_PLUGIN_SPIPBB . "exec/" . $file,'spipbb');
-			}
-		}
-		spip_log('inc/spipbb.php : spipbb_admin_gauche include fin','spipbb');
-
-		@closedir($dir);
-	}
-	unset($setmodules);
-	reset($modules_to_include);
-	spip_log('inc/spipbb.php : spipbb_admin_gauche include list:'.join(":",$modules_to_include),'spipbb');
-	//while (list(,$file)=each($modules_to_include)) {
-	//	require( $file);
-	//	spip_log('inc/spipbb.php : spipbb_admin_gauche include RETOUR include :'._DIR_PLUGIN_SPIPBB . "exec/" . $file,'spipbb');
-	//}
-
-	ksort($modules);
-	$affichage = "\n";
-	while( list($cat, $action_array) = each($modules) )
-	{
-		$cat = _T('spipbb:admin_cat_'.$cat); // on traduit le nom de chaque categorie
-
-		$affichage .= debut_boite_info(true). "<b>".$cat."</b>";
-		ksort($action_array);
-		while( list($action, $file) = each($action_array) )
-		{
-			$file = substr($file,0,-4); // supprimer l'extension
-			$action = _T('spipbb:admin_action_'.$action) ; // on traduit le nom de chaque action(exec)
-			if ( $rubrique_admin_courante <> $file ) {
-				$lien = generer_url_ecrire($file) ;
-				$affichage .= "<a href='".$lien."' class='verdana2'>
-					<div style='margin-top:2px;' class='bouton36blanc'
-					onMouseOver=\"changeclass(this,'bouton36gris')\"
-					onMouseOut=\"changeclass(this,'bouton36blanc')\">".$action.
-					"</div></a>\n";
-			}
-			else {	// pas de lien sur l'action en cours !
-				$affichage .= "<div style='margin-top:2px;' class='bouton36blanc'
-					onMouseOver=\"changeclass(this,'bouton36gris')\"
-					onMouseOut=\"changeclass(this,'bouton36blanc')\">".$action.
-					"</div>\n";
-			}
-		}
-		$affichage .= fin_boite_info(true)."\n";
-	}
-	$affichage .= "\n";
-	spip_log('inc/spipbb.php : spipbb_admin_gauche END','spipbb');
-
-	return $affichage;
-}
 
 // ------------------------------------------------------------------------------
 // [fr] Verifie que les rubriques et les articles sont bien numerotes et les

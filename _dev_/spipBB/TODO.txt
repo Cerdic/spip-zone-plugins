@@ -21,6 +21,7 @@ Todo-list pour spipbb
 -** mot cles ferme, postit, annonce : bug -> ils ne doivent s'appliquer qu'au message principal du thread
 -** Anti spam : sur le login, IP (ban)
 -** Envisager de controler l'etat de la config régulierement ? a chaque passsage dans un menu d'admin ?
+-** Le changement de version du plugin oblige a tout reconfigurer et perds toutes les infos... <-- regle ? non il faut encore passer par la page de config (mais tous les params sont stockés)... a cause de de l'ordre des check_if...
 
 -* INTEGRATION des idees utilisees dans Gafospip -> Scoty | reste / manque
 -** traductions

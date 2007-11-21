@@ -25,15 +25,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 spip_log(__FILE__.' : included','spipbb');
 
-if( !empty($setmodules) )
-{
-	$file = basename(__FILE__);
-	$modules['01_general']['01_configuration'] = $file;
-	return;
-}
 if (defined("_GENERAL_CONFIGURATION")) return; else define("_GENERAL_CONFIGURATION", true);
 
 include_spip('inc/spipbb');
+include_spip('inc/interface_admin');
 
 // ------------------------------------------------------------------------------
 // [fr] Genere la page de gestion globale des forums
@@ -220,11 +215,11 @@ function spipbb_config_infos_auteurs()
 	#$options_sap = array('extra','table','autre');
 	$options_sap = array('extra','table');
 	
-	$res  = debut_cadre_trait_couleur("",true,"",_L('Gestion champs auteurs supplémentaires'));	
+	$res  = debut_cadre_trait_couleur("",true,"",_L('Gestion champs auteurs suppl&eacute;mentaires'));	
 	$res .= "<table width='100%' cellpadding='2' cellspacing='0' border='0' align='center' class='verdana2'>\n";
 
 	# les champs, infos
-	$res .= "<tr><td colspan='3'>"._L('Les champs nécessaires a SpipBB')."</td></tr>\n";
+	$res .= "<tr><td colspan='3'>"._L('Les champs n&eacute;cessaires &agrave; SpipBB')."</td></tr>\n";
 	$res .= "<tr><td colspan='3'>";
 	foreach($GLOBALS['champs_sap_spipbb'] as $champ => $def) {
 		$res .= "<b>".$champ."</b>, ".$def['info']."<br />";
@@ -264,11 +259,11 @@ function spipbb_config_avatars()
 {
 	$options_a = array('oui','non');
 
-	$res  =debut_cadre_trait_couleur("",true,"",_L('Gestion des avatars, réglage général'));
+	$res  =debut_cadre_trait_couleur("",true,"",_L('Gestion des avatars, r&eacute;glage g&eacute;n&eacute;ral'));
 	$res .= "<table width='100%' cellpadding='2' cellspacing='0' border='0' align='center' class='verdana2'>\n";
 
 	# afficher avatars ?
-	$res .= "<tr><td valign='top'>"._L('Accepter et afficher les avatars (oui par défaut en prem install)').
+	$res .= "<tr><td valign='top'>"._L('Accepter et afficher les avatars (oui par d&eacute;faut en prem install)').
 		"</td><td width='5%'> </td><td width='25%'>\n";
 	if(!isset($GLOBALS['spipbb']['affiche_avatar'])) { $GLOBALS['spipbb']['affiche_avatar']='oui'; }
 	foreach($options_a as $val) {

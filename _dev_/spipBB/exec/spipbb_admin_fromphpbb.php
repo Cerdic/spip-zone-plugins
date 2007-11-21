@@ -28,17 +28,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 spip_log(__FILE__.' : included','spipbb');
 
-if ( !empty($setmodules) )
-{
-	if ( spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui' ) {
-		$file = basename(__FILE__);
-		$modules['outils']['fromphpbb'] = $file;
-	}
-	return;
-}
 if (defined("_OUTILS_FROMPHPBB")) return; else define("_OUTILS_FROMPHPBB", true);
 
 include_spip('inc/spipbb');
+include_spip('inc/interface_admin');
 
 // ------------------------------------------------------------------------------
 // [fr] Methode exec

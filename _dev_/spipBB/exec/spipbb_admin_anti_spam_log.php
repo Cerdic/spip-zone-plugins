@@ -25,16 +25,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 spip_log(__FILE__.' : included','spipbb');
 
-if ( !empty($setmodules) )
-{
-	if ( spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui'
-		 and $GLOBALS['spipbb']['config_spam_words']=='oui') {
-		$file = basename(__FILE__);
-		$modules['spam']['swlog'] = $file;
-	}
-	return;
-}
 if (defined("_SPAM_SWLOG")) return; else define("_SPAM_SWLOG", true);
+include_spip('inc/spipbb');
+include_spip('inc/interface_admin');
 
 // ------------------------------------------------------------------------------
 // [fr] Methode exec
@@ -44,7 +37,6 @@ if (defined("_SPAM_SWLOG")) return; else define("_SPAM_SWLOG", true);
 // ------------------------------------------------------------------------------
 function exec_spipbb_admin_anti_spam_log()
 {
-	include_spip('inc/spipbb');
 
 	if (!spipbb_is_configured() or ($GLOBALS['spipbb']['configure']!='oui')) {
 		include_spip('inc/headers');

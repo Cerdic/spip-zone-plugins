@@ -25,17 +25,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 spip_log(__FILE__.' : included','spipbb');
 
-if ( !empty($setmodules) )
-{
-	if ( spipbb_is_configured() and $GLOBALS['spipbb']['configure']=='oui' ) {
-		$file = basename(__FILE__);
-		$modules['01_general']['gestion'] = $file;
-	}
-	return;
-}
 if (defined("_GENERAL_GESTION")) return; else define("_GENERAL_GESTION", true);
 
 include_spip('inc/spipbb');
+include_spip('inc/interface_admin');
 
 //include_spip('inc/editer_article');
 

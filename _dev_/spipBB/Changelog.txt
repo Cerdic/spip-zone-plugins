@@ -1,7 +1,11 @@
 2007-11-20  chryjs  <chryjs!@!free!.!fr>
 
  * Recherche et correction bug interface privee
-
+ * Petite correction de lien dans la traduction
+ * Meilleure gestion de la mise a jour avec conservation des tables et des metas
+ * Upgrade/install possible en utilisant la config de Gafospip si pre-existe (lecture des metas)
+ * check_une_table optimisee pour cause de difference de structure parfois + log en cas de probleme pour debug
+ * passage en 0.3.4 - reecriture de la partie causant les plantages (enfin !)
 
 2007-11-19  chryjs  <chryjs!@!free!.!fr>
 

@@ -342,7 +342,7 @@ Words less than three letters long will be ignored.',
 'sw_spam_words_action' => 'From this control panel you can add, edit, and remove spam words. Wildcards (*) are accepted in the word field. For example, *test* will match detestable, test* would match testing, *test would match detest.',
 'sw_spam_words_mass_add' => 'Paste or type your spam words lists into the text area. Separate each spam word by either a comma, semi-colon, or line-break',
 'sw_spam_words_url_add' => 'Type the URL of file with a properly formatted word list.
-Example: http://spipbb.homelinux.org/plugins/spipBB/base/spamwordlist.csv .',
+Example: http://spipbb.spip-zone.info/plugins/spipBB/base/spamwordlist.csv .',
 
 //T
 'texte_login_precaution' => 'Warning! this is the login with which your are connected at present.
