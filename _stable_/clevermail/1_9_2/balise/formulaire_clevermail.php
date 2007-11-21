@@ -4,7 +4,7 @@
 	 * CleverMail : plugin de gestion de lettres d'information basé sur CleverMail
 	 * Author : Thomas Beaumanoir
 	 * Clever Age <http://www.clever-age.com>
-	 * Copyright (c) 2006 - Distribue sous licence GNU/GPL
+	 * Copyright (c) 2007 - Distribue sous licence GNU/GPL
 	 *
 	 **/
 
@@ -44,13 +44,13 @@ function balise_FORMULAIRE_CLEVERMAIL_dyn($id_liste, $formulaire) {
 		$erreur = '';
 		$cm_sub = 'null';
 		if (ereg("^[^@ ]+@[^@ ]+\.[^@. ]+$", $address)) {
-			$result = spip_fetch_array(spip_query("SELECT sub_id FROM cm_subscribers WHERE sub_email='"._q($address)."'"));
+			$result = spip_fetch_array(spip_query("SELECT sub_id FROM cm_subscribers WHERE sub_email="._q($address)));
 			$recId = $result['sub_id'];
 			if (!$recId) {
 				// Nouvelle adresse e-mail
-				spip_query("INSERT INTO cm_subscribers (sub_id, sub_email, sub_profile) VALUES ('', '"._q($address)."', '')");
+				spip_query("INSERT INTO cm_subscribers (sub_id, sub_email, sub_profile) VALUES ('', "._q($address).", '')");
 				$recId = spip_insert_id();
-				spip_query("UPDATE cm_subscribers SET sub_profile = '".md5($recId.'#'._q($address).'#'.time())."' WHERE sub_id='"._q($recId)."'");
+				spip_query("UPDATE cm_subscribers SET sub_profile = '".md5($recId.'#'._q($address).'#'.time())."' WHERE sub_id="._q($recId));
 			}
 			$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_lists_subscribers WHERE lst_id = "._q($listId)." AND sub_id = "._q($recId)));
 			if ($result['nb'] == 1) {
@@ -71,7 +71,7 @@ function balise_FORMULAIRE_CLEVERMAIL_dyn($id_liste, $formulaire) {
 						$actionId = md5('subscribe#'.$listId.'#'.$recId.'#'.time());
 						$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_pending WHERE lst_id = "._q($listId)." AND sub_id = "._q($recId)));
 						if ($result['nb'] == 0) {
-							spip_query("INSERT INTO cm_pending (lst_id, sub_id, pnd_action, pnd_mode, pnd_action_date, pnd_action_id) VALUES ("._q($listId).", "._q($recId).", 'subscribe', "._q($mode).", ".time().", '"._q($actionId)."')");
+							spip_query("INSERT INTO cm_pending (lst_id, sub_id, pnd_action, pnd_mode, pnd_action_date, pnd_action_id) VALUES ("._q($listId).", "._q($recId).", 'subscribe', "._q($mode).", ".time().", "._q($actionId).")");
 						}
 
 						// Composition du message de demande de confirmation
@@ -110,7 +110,7 @@ function balise_FORMULAIRE_CLEVERMAIL_dyn($id_liste, $formulaire) {
 						$actionId = md5('subscribe#'.$listId.'#'.$recId.'#'.time());
 						$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_pending WHERE lst_id = "._q($listId)." AND sub_id = "._q($recId)));
 						if ($result['nb'] == 0) {
-							spip_query("INSERT INTO cm_pending (lst_id, sub_id, pnd_action, pnd_mode, pnd_action_date, pnd_action_id) VALUES ("._q($listId).", "._q($recId).", 'subscribe', "._q($mode).", ".time().", '"._q($actionId)."')");
+							spip_query("INSERT INTO cm_pending (lst_id, sub_id, pnd_action, pnd_mode, pnd_action_date, pnd_action_id) VALUES ("._q($listId).", "._q($recId).", 'subscribe', "._q($mode).", ".time().", "._q($actionId).")");
 						}
 
 						// Composition du message de demande de confirmation au moderateur
