@@ -6,14 +6,14 @@
 		
 		<table class="spipforum" id="membres">
 			<tr class="inter salon">
-				<td colspan="5"><:forg:liste_inscrits:></td>
+				<td colspan="5"><:spipbb:liste_inscrits:></td>
 			</tr>
 			<tr>
-			   <th><:forg:nom_util:></th>
-			   <th><:forg:statut:></th>
-			   <th><:forg:email:></th>
-			   <th><:forg:message_s:></th>
-			   <th><:forg:site_web:></th>
+			   <th><:spipbb:nom_util:></th>
+			   <th><:spipbb:statut:></th>
+			   <th><:spipbb:email:></th>
+			   <th><:spipbb:message_s:></th>
+			   <th><:spipbb:site_web:></th>
 			</tr>
 
 		[(#REM) h.17/02/07 {statut IN ... } pour palier a d eventuels nouv. statut auteur --plugins ]
@@ -27,9 +27,9 @@
 					</a>
 				</td>
 				<td>
-					[(#STATUT|=={0minirezo}|?{<:forg:statut_admin:>,''})]
-					[(#STATUT|=={1comite}|?{<:forg:statut_redac:>,''})]
-					[(#STATUT|=={6forum}|?{<:forg:statut_visit:>,''})]
+					[(#STATUT|=={0minirezo}|?{<:spipbb:statut_admin:>,''})]
+					[(#STATUT|=={1comite}|?{<:spipbb:statut_redac:>,''})]
+					[(#STATUT|=={6forum}|?{<:spipbb:statut_visit:>,''})]
 				</td>
 				<td class="email">
 					[(#EMAIL|?{<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]"><span>&nbsp;</span></a>,''})]
@@ -46,7 +46,7 @@
 		</BOUCLE_auteur_principal>
 			<tr class="pagination">
 				<td colspan="5">
-				[(#GRAND_TOTAL) <:forg:inscrit_s:>][<:forg:pagine_page_:>(#PAGINATION{page_forum})]
+				[(#GRAND_TOTAL) <:spipbb:inscrit_s:>][<:spipbb:pagine_page_:>(#PAGINATION{page_forum})]
 				</td>
 			</tr>
 		</B_auteur_principal>			

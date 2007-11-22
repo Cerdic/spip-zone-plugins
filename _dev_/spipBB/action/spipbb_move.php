@@ -65,6 +65,8 @@ function action_spipbb_move()
 		$move_increment = 0;
 		break;
 	}
+	if (!function_exists('recuperer_numero')) include_spip('inc/filtres');
+
 	$ancien_numero = recuperer_numero($row['titre']) ;
 	$nouveau_numero = $ancien_numero + $move_increment;
 

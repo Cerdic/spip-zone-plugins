@@ -24,7 +24,7 @@
 		[(#SET{affbouton,[(#GET{forumferme}|=={1}|?{' ',
 			<ul class="actionforum">
 				<li class="poster">
-					<a href="[(#URL_PAGE{poster})]&amp;[(#PARAMETRES_FORUM)]" title="<:forg:sujet_nouveau:>">&nbsp;</a>
+					<a href="[(#URL_PAGE{poster})]&amp;[(#PARAMETRES_FORUM)]" title="<:spipbb:sujet_nouveau:>">&nbsp;</a>
 				</li>
 			</ul>
 		})]
@@ -37,17 +37,17 @@
 		
 		<table class="spipforum" id="article_forum">
 			<tr> 
-				<th colspan="2"><:forg:sujet_s:></th>
-				<th><:forg:message_s:></th>
-				<th><:forg:auteur:></th>
+				<th colspan="2"><:spipbb:sujet_s:></th>
+				<th><:spipbb:message_s:></th>
+				<th><:spipbb:auteur:></th>
 				<th><:spipbb:visites:></th>
-				<th><:forg:messages_derniers:></th>
+				<th><:spipbb:messages_derniers:></th>
 			</tr>
 			
 			[(#REM) message art ferme|maintenance ]
 			[(#GET{forumferme}|=={1}|?{' ',''})
 				<tr class="forum_clos"><td colspan='6'>
-				[(#GET{maintenance}|=={1}|?{<:forg:forum_maintenance:>,<:forg:forum_ferme:>})]
+				[(#GET{maintenance}|=={1}|?{<:spipbb:forum_maintenance:>,<:spipbb:forum_ferme:>})]
 				</td></tr>
 			]
 			
@@ -59,9 +59,9 @@
 			
 			<!-- BEGIN topicrow -->
 			<tr class="ligne_annonce"> 
-				<td class="etatsujet sujetannonce"><span><:forg:annonce:></span>&nbsp;</td>
+				<td class="etatsujet sujetannonce"><span><:spipbb:annonce:></span>&nbsp;</td>
 				<td class="titreforum" id="forum#ID_FORUM">
-					<span><:forg:annonce_dpt:></span>
+					<span><:spipbb:annonce_dpt:></span>
 					<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ID_FORUM})]">#TITRE</a>
 				</td>
 				<td class="nbr_post">
@@ -74,7 +74,7 @@
 						<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]">#NOM</a>
 					</BOUCLE_auteurpa>
 					</B_auteurpa>
-					[(#NOM|sinon{<:forg:anonyme:>})]
+					[(#NOM|sinon{<:spipbb:anonyme:>})]
 					<//B_auteurpa>
 				</td>
 				<td class="nbr_post">
@@ -83,7 +83,7 @@
 				<td class="dernier_msg">
 					<BOUCLE_dernier_message01(FORUMS){id_thread}{plat}{!par date}{0,1}>
 				  		[(#DATE|affdate{'d/m/Y'}),] [(#DATE|heures)]:[(#DATE|minutes)<br />]
-						<:forg:par_:>
+						<:spipbb:par_:>
 						<B_auteurpar>
 						<BOUCLE_auteurpar(AUTEURS){id_auteur}{tout}>
 							<a
@@ -93,10 +93,10 @@
 							>#NOM</a>
 						</BOUCLE_auteurpar>
 						</B_auteurpar>
-							[(#NOM|sinon{<:forg:anonyme:>})]
+							[(#NOM|sinon{<:spipbb:anonyme:>})]
 						<//B_auteurpar> 
-						<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_fo_ann}})]#forum#ID_FORUM" class="adermsg" title="<:forg:messages_voir_dernier:>">
-						&nbsp;<span>(<:forg:messages_voir_dernier:>)</span>
+						<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_fo_ann}})]#forum#ID_FORUM" class="adermsg" title="<:spipbb:messages_voir_dernier:>">
+						&nbsp;<span>(<:spipbb:messages_voir_dernier:>)</span>
 						</a>
 					</BOUCLE_dernier_message01> - <//B_dernier_message01>
 				</td>
@@ -110,9 +110,9 @@
 			
 			<!-- BEGIN topicrow -->
 			<tr class="ligne_postit"> 
-				<td class="etatsujet sujetpostit"><span><:forg:postit:></span>&nbsp;</td>
+				<td class="etatsujet sujetpostit"><span><:spipbb:postit:></span>&nbsp;</td>
 				<td class="titreforum" id="forum#ID_FORUM">
-					<span><:forg:postit_dpt:></span>
+					<span><:spipbb:postit_dpt:></span>
 					<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ID_FORUM})]">#TITRE</a>
 				</td>
 				<td class="nbr_post">
@@ -125,7 +125,7 @@
 						<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]">#NOM</a>
 					</BOUCLE_auteurpp>
 					</B_auteurpp>
-					[(#NOM|sinon{<:forg:anonyme:>})]
+					[(#NOM|sinon{<:spipbb:anonyme:>})]
 					<//B_auteurpp>
 				</td>
 				<td class="nbr_post">
@@ -134,7 +134,7 @@
 				<td class="dernier_msg">
 					<BOUCLE_dernier_message02(FORUMS){id_thread}{plat}{!par date}{0,1}>
 				  		[(#DATE|affdate{'d/m/Y'}),] [(#DATE|heures)]:[(#DATE|minutes)<br />]
-						<:forg:par_:>
+						<:spipbb:par_:>
 						<B_auteurparp>
 						<BOUCLE_auteurparp(AUTEURS){id_auteur}{tout}>
 							<a
@@ -144,10 +144,10 @@
 							>#NOM</a>
 						</BOUCLE_auteurparp>
 						</B_auteurparp>
-							[(#NOM|sinon{<:forg:anonyme:>})]
+							[(#NOM|sinon{<:spipbb:anonyme:>})]
 						<//B_auteurparp> 
-						<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_fo_ann}})]#forum#ID_FORUM" class="adermsg" title="<:forg:messages_voir_dernier:>">
-						&nbsp;<span>(<:forg:messages_voir_dernier:>)</span>
+						<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_fo_ann}})]#forum#ID_FORUM" class="adermsg" title="<:spipbb:messages_voir_dernier:>">
+						&nbsp;<span>(<:spipbb:messages_voir_dernier:>)</span>
 						</a>
 					</BOUCLE_dernier_message02> - <//B_dernier_message02>
 				</td>
@@ -197,7 +197,7 @@
 						>#NOM</a>
 					</BOUCLE_auteurp>
 					</B_auteurp>
-						[(#NOM|sinon{<:forg:anonyme:>})]
+						[(#NOM|sinon{<:spipbb:anonyme:>})]
 					<//B_auteurp>
 				</td>
 				<td class="nbr_post">
@@ -206,7 +206,7 @@
 				<td class="dernier_msg">
 					<BOUCLE_dernier_message(FORUMS){id_thread}{plat}{!par date}{0,1}>
 						[(#DATE|affdate{'d/m/Y'})] [ - (#DATE|heures)]:[(#DATE|minutes)]<br />
-						<:forg:par_:>
+						<:spipbb:par_:>
 						<BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}>
 							<a
 							[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
@@ -215,11 +215,11 @@
 							>#NOM</a>
 						</BOUCLE_auteurpr>
 						</B_auteurpr>
-							[(#NOM|sinon{<:forg:anonyme:>})]
+							[(#NOM|sinon{<:spipbb:anonyme:>})]
 						<//B_auteurpr> 
 						
-						<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_forum}})]#forum#ID_FORUM" class="adermsg" title="<:forg:messages_voir_dernier:>">
-							&nbsp;<span>(<:forg:messages_voir_dernier:>)</span>
+						<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_forum}})]#forum#ID_FORUM" class="adermsg" title="<:spipbb:messages_voir_dernier:>">
+							&nbsp;<span>(<:spipbb:messages_voir_dernier:>)</span>
 						</a>
 					</BOUCLE_dernier_message> - <//B_dernier_message>
 				</td>
@@ -232,14 +232,14 @@
 			<tr class="pagination">
 				<td colspan="6">
 					#GRAND_TOTAL
-					[(#GRAND_TOTAL|>{1}|?{<:forg:pagine_sujet_s:>,<:forg:pagine_sujet_:>})]
-					[<:forg:pagine_page_:>(#PAGINATION{page_forum})]
+					[(#GRAND_TOTAL|>{1}|?{<:spipbb:pagine_sujet_s:>,<:spipbb:pagine_sujet_:>})]
+					[<:spipbb:pagine_page_:>(#PAGINATION{page_forum})]
 				</td>
 			</tr>
 			</B_messages>
 
 			<tr class="sans_sujet"> 
-				<td colspan="6"><:forg:sujets_aucun:></td>
+				<td colspan="6"><:spipbb:sujets_aucun:></td>
 			</tr>
 
 			<//B_messages>
@@ -258,7 +258,7 @@
 		<INCLURE(session.php){fond=inc_piedforum}{id_article}>
 
 		[(#REM) si visiteur non identifie : form login ]
-		[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:forg:login:></p>]
+		[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]
 		#LOGIN_PUBLIC
 		[(#SESSION{id_auteur}|=={''}|?{' ',''})
 		&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;

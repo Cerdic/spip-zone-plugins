@@ -143,7 +143,7 @@ function insere_texte_alerter($texte,$insere)
 	if (!$premiere_passe = _request('valide')) {
 		if(_request('alerter')=='oui') {
 			$origine=explode('-',_request('orig'));
-			#$insere = _T('forg:alerter_texte');
+			#$insere = _T('spipbb:alerter_texte');
 			$lien_forum = generer_url_public('voirsujet',"id_forum=".$origine[0]."#forum".$origine[1],true);
 			$texte = $insere."\n".$lien_forum."\n\n";
 		}
@@ -160,7 +160,7 @@ function insere_sujet_alerter($sujet,$insere)
 {
 	if (!$premiere_passe = _request('valide')) {
 		if(_request('alerter')=='oui') {
-			#$insere = _T('forg:alerter_sujet');
+			#$insere = _T('spipbb:alerter_sujet');
 			$sujet = $insere;
 		}
 	}

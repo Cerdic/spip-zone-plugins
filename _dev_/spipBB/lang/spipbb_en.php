@@ -23,7 +23,7 @@ You do agree that all the messages posted to these forums reflect the opinions o
 <p>While we don\'t expect the language within the forums to be that of the vicarage tea party, anyone who indulges in, among other things, abusive, illegal, sexually or racially objectionable, defamatory or harassing language of any sort will find their messages deleted as soon as they are discovered. Offenders may find themselves permanently banned (and their ISP will be informed). The IP address of each message is recorded in order to uphold these regulations. You do agree that the Webmaster, the administrator and the moderators of this forum have the right to delete, edit, move or lock any topic of discussion at any moment. As a user, you do agree that the information you provide below will be stored in a database. However, this information will not be disclosed to any third party or company without your prior consent. The Webmaster, the administrator and the moderators will not be held liable if a hacking attempt succeeds in getting access to this data.</p>
 
 <p>This forum will log information via cookies stored in your computer. These cookies will not contain any information that you have entered below, their only goal is to enhance the user experience.
-The e-mail address will be used only to confirm the details of your registration and your password (and also to send you a new password should you forget yours).
+The e-mail address will be used only to confirm the details of your registration and your password (and also to send you a new password should you spipbbet yours).
 </p>
 <p>By registering, you guarantee your agreement with the above regulations.</p>',
 
@@ -148,7 +148,7 @@ The e-mail address will be used only to confirm the details of your registration
 //D
 'dans_forum' => 'in the forum',
 'date' => 'registered on',
-'deja_enregistree' => 'This e-mail address is already registered<p><a href=\'spip.php?page=formulaire_oubli\'>[ Forgotten password ]</a></p>',
+'deja_enregistree' => 'This e-mail address is already registered<p><a href=\'spip.php?page=formulaire_oubli\'>[ spipbbotten password ]</a></p>',
 'dernier' => '&nbsp;Last<br>',
 
 //E
@@ -227,7 +227,7 @@ The e-mail address will be used only to confirm the details of your registration
 'luiecrire' => 'Write to them',
 
 //M
-'maintenance' => 'Don\'t forget to remove<br>\"Closed for maintenance\",<br>
+'maintenance' => 'Don\'t spipbbet to remove<br>\"Closed for maintenance\",<br>
 				from the required Forums.',
 'maintenance_ferme' => 'Closed for maintenance',
 'membre' => 'Member',

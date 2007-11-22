@@ -9,7 +9,7 @@
 [(#GET{aff_avatar}|=={oui}|?{' ',''})
 	[(#ENV{statut}|=={'6forum'}|?{' ',''})
 	<br />
-	<p><label for="avatar"><:forg:votre_url_avatar:></label><br />
+	<p><label for="avatar"><:spipbb:votre_url_avatar:></label><br />
 	<input type="text" name="avatar" id="avatar" class="forml" value="#AVATAR" size="40" />
 	</p>
 	]
@@ -19,7 +19,7 @@
 #SET{aff_signature,#CONFIG{'spipbb/affiche_signature_post'}}
 [(#GET{aff_signature}|=={oui}|?{' ',''})
 	<br />
-	<p><label for="signature_post"><:forg:votre_signature:></label><br />
+	<p><label for="signature_post"><:spipbb:votre_signature:></label><br />
 	<input type="text" name="signature_post" id="signature_post" class="forml" value="#SIGNATURE_POST" size="40" />
 	</p>
 ]
@@ -27,12 +27,12 @@
 
 [(#SET{check,[(#ANNUAIRE_FORUM|=={''}|?{'oui',#ANNUAIRE_FORUM})]})]
 <br />
-<p><label for="annuaire_forum"><:forg:visible_annuaire_forum:></label><br />
+<p><label for="annuaire_forum"><:spipbb:visible_annuaire_forum:></label><br />
 <input type="radio" name="annuaire_forum" id="annuaire_forum" class="forml" 
-		value="oui" [(#GET{check}|=={'oui'}|?{'checked="checked"',''})] /><:forg:oui:>
+		value="oui" [(#GET{check}|=={'oui'}|?{'checked="checked"',''})] /><:spipbb:oui:>
 &nbsp;&nbsp;&nbsp;
 <input type="radio" name="annuaire_forum" id="annuaire_forum" class="forml" 
-		value="non" [(#GET{check}|=={'non'}|?{'checked="checked"',''})] /><:forg:non:>
+		value="non" [(#GET{check}|=={'non'}|?{'checked="checked"',''})] /><:spipbb:non:>
 </p>
 
 
@@ -48,7 +48,7 @@
 <table class="spipforum" id="liste_refus_suivi">
 <tr class="inter">
 	<th colspan="2">
-	<:forg:infos_refus_suivi_sujet:>
+	<:spipbb:infos_refus_suivi_sujet:>
 	</th>
 </tr>
 <BOUCLE_suivi_forum(FORUMS){id_auteur=#ENV{id_auteur}}{plat}{!par date}{fusion id_thread}{doublons}>
@@ -63,7 +63,7 @@
 </BOUCLE_suivi_forum>
 </table>
 </B_suivi_forum>
-<:forg:infos_suivi_forum_par_inscription:>
+<:spipbb:infos_suivi_forum_par_inscription:>
 <//B_suivi_forum>
 
 

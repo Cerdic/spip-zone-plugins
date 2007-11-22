@@ -13,7 +13,7 @@
 		#SET{msg,#ENV*{orig}|replace{.*-,''}}
 		<div id="bouton_retour">
 			<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,[(#GET{idforum})]})]#forum#GET{msg}">
-			<span><:forg:retour_forum:></span>
+			<span><:spipbb:retour_forum:></span>
 			</a>
 		</div>
 		<p class="space_5"></p>
@@ -21,7 +21,7 @@
 		
 		<table class="spipforum" id="auteur">
 			<tr>
-				<th colspan="2"><:forg:fiche_contact:></th>
+				<th colspan="2"><:spipbb:fiche_contact:></th>
 			</tr>
 			<tr class="inter salon">
 				<td colspan="2">#NOM</td>
@@ -32,11 +32,11 @@
 				</td>
 				<td class="date_sujet">
 					<span>
-					[(#GET{statmem}|=={0minirezo}|?{<:forg:statut_admin:>,''})]
-					[(#GET{statmem}|=={1comite}|?{<:forg:statut_redac:>,''})]
-					[(#GET{statmem}|=={6forum}|?{<:forg:statut_visit:>,''})]
+					[(#GET{statmem}|=={0minirezo}|?{<:spipbb:statut_admin:>,''})]
+					[(#GET{statmem}|=={1comite}|?{<:spipbb:statut_redac:>,''})]
+					[(#GET{statmem}|=={6forum}|?{<:spipbb:statut_visit:>,''})]
 					</span><br />
-					[<span><:forg:message_s_dpt:>(#ID_AUTEUR|spipbb_nb_messages)</span>]
+					[<span><:spipbb:message_s_dpt:>(#ID_AUTEUR|spipbb_nb_messages)</span>]
 				</td>
 			</tr>
 			
@@ -45,7 +45,7 @@
 					[(#BIO)]
 					[
 					<p class="space_10"></p>
-					<a class="lien_propose" href="(#URL_SITE)">[(#NOM_SITE|sinon{"<:forg:site_propose:>})]</a>
+					<a class="lien_propose" href="(#URL_SITE)">[(#NOM_SITE|sinon{"<:spipbb:site_propose:>})]</a>
 					]
 				</td>
 			</tr>
@@ -53,7 +53,7 @@
 				<td colspan="2"></td>
 			</tr>			
 			<tr class="ligne_sujet">
-				<td colspan="2">[(#EMAIL|?{<:forg:contacter_dpt:> #NOM,''})]</td>
+				<td colspan="2">[(#EMAIL|?{<:spipbb:contacter_dpt:> #NOM,''})]</td>
 			</tr>
 			<tr class="ligne_sujet">
 				<td class="aff_avatar"></td>

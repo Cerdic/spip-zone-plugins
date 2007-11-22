@@ -21,10 +21,10 @@
 	
 	<table class="spipforum" id="rubrique_forum">
 		<tr>
-			<th colspan="2"><:forg:forum:></th>
-			<th><:forg:sujet_s:></th>
-			<th><:forg:message_s:></th>
-			<th><:forg:messages_derniers:></th>
+			<th colspan="2"><:spipbb:forum:></th>
+			<th><:spipbb:sujet_s:></th>
+			<th><:spipbb:message_s:></th>
+			<th><:spipbb:messages_derniers:></th>
 		</tr>
 <!-- essai h.12/11/07 .. forums du secteur (racine) -->
 		<BOUCLE_forum_secteur(ARTICLES){id_rubrique}{par num titre}>
@@ -54,7 +54,7 @@
 				<td class="dernier_msg"> 
 			<BOUCLE_dernier_message1(FORUMS){id_article}{plat}{!par date}{0,1}>
 				[(#DATE|affdate{'d/m/Y'})] [ - (#DATE|heures)]:[(#DATE|minutes)<br	/>] 
-				<:forg:par_:>
+				<:spipbb:par_:>
 				<BOUCLE_auteurp1(AUTEURS){id_auteur}{tout}>
 					<a
 					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''}) 
@@ -63,11 +63,11 @@
 					>#NOM</a>
 				</BOUCLE_auteurp1>
 				</B_auteurp1>
-					[(#NOM|sinon{<:forg:anonyme:>})]
+					[(#NOM|sinon{<:spipbb:anonyme:>})]
 				<//B_auteurp1> 
 				<BOUCLE_papa1(FORUMS){id_thread}>#SET{idfo,#ID_FORUM}</BOUCLE_papa1>
-				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{idfo}})]#forum#ID_FORUM" class="adermsg" title="<:forg:messages_voir_dernier:>">&nbsp;
-				<span>(<:forg:messages_voir_dernier:>)</span></a>
+				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{idfo}})]#forum#ID_FORUM" class="adermsg" title="<:spipbb:messages_voir_dernier:>">&nbsp;
+				<span>(<:spipbb:messages_voir_dernier:>)</span></a>
 			</BOUCLE_dernier_message1> - <//B_dernier_message1>
 				</td>
 			
@@ -113,7 +113,7 @@
 				<td class="dernier_msg"> 
 			<BOUCLE_dernier_message(FORUMS){id_article}{plat}{!par date}{0,1}>
 				[(#DATE|affdate{'d/m/Y'})] [ - (#DATE|heures)]:[(#DATE|minutes)<br	/>] 
-				<:forg:par_:>
+				<:spipbb:par_:>
 				<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
 					<a
 					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''}) 
@@ -122,11 +122,11 @@
 					>#NOM</a>
 				</BOUCLE_auteurp>
 				</B_auteurp>
-					[(#NOM|sinon{<:forg:anonyme:>})]
+					[(#NOM|sinon{<:spipbb:anonyme:>})]
 				<//B_auteurp> 
 				<BOUCLE_papa(FORUMS){id_thread}>#SET{idfo,#ID_FORUM}</BOUCLE_papa>
-				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{idfo}})]#forum#ID_FORUM" class="adermsg" title="<:forg:messages_voir_dernier:>">&nbsp;
-				<span>(<:forg:messages_voir_dernier:>)</span></a>
+				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{idfo}})]#forum#ID_FORUM" class="adermsg" title="<:spipbb:messages_voir_dernier:>">&nbsp;
+				<span>(<:spipbb:messages_voir_dernier:>)</span></a>
 			</BOUCLE_dernier_message> - <//B_dernier_message>
 				</td>
 			
@@ -141,7 +141,7 @@
 		<INCLURE(session.php){fond=inc_piedforum}{id_rubrique=#ENV{id_rubrique}}>
 		
 		[(#REM) si visiteur non identifie : form login ]
-		[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:forg:login:></p>]
+		[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]
 		#LOGIN_PUBLIC
 		[(#SESSION{id_auteur}|=={''}|?{' ',''})
 		&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;

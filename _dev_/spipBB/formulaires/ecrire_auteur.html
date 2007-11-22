@@ -31,10 +31,10 @@
 	<input type="text" class="forml" name="email_message_auteur#ENV{id}" id="email_message_auteur#ENV{id}" value="#ENV{mail}" size="30" />
 </p>
 <p><label for="sujet_message_auteur#ENV{id}"><:form_prop_sujet:></label>
-	<input type="text" class="forml" name="sujet_message_auteur#ENV{id}" id="sujet_message_auteur#ENV{id}" value="[(#ENV{sujet}|insere_sujet_alerter{<:forg:alerter_sujet:>})]" size="30" />
+	<input type="text" class="forml" name="sujet_message_auteur#ENV{id}" id="sujet_message_auteur#ENV{id}" value="[(#ENV{sujet}|insere_sujet_alerter{<:spipbb:alerter_sujet:>})]" size="30" />
 </p>
 <p><label for="texte_message_auteur#ENV{id}"><:info_texte_message:></label>
-	<textarea class="forml" name="texte_message_auteur#ENV{id}" id="texte_message_auteur#ENV{id}" rows="10" cols="40">[(#ENV{texte}|insere_texte_alerter{<:forg:alerter_texte:>})]</textarea>
+	<textarea class="forml" name="texte_message_auteur#ENV{id}" id="texte_message_auteur#ENV{id}" rows="10" cols="40">[(#ENV{texte}|insere_texte_alerter{<:spipbb:alerter_texte:>})]</textarea>
 </p>
 
 [<p class="spip_bouton"><input type="submit" name="valide" value="(#ENV{bouton})" /></p>]

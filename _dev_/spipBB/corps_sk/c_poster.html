@@ -66,12 +66,12 @@
 	[(#SET{aff_sujetclos,
 		[(#GET{sujetclos}|=={0}|?{' ',
 		<div class="alerte_ferme">
-			<h2><:forg:sujet_clos_titre:></h2>
-			<h3><:forg:sujet_clos_texte:></h3>
+			<h2><:spipbb:sujet_clos_titre:></h2>
+			<h3><:spipbb:sujet_clos_texte:></h3>
 			<p>
-				<:forg:raison_texte:>
+				<:spipbb:raison_texte:>
 				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ENV{id_forum}})]">
-				<:forg:raison_clic:>
+				<:spipbb:raison_clic:>
 				</a>
 			</p>
 		</div>
@@ -82,8 +82,8 @@
 	[(#SET{aff_forumclos,
 		[(#GET{forumclos}|=={0}|?{' ',
 		<div class="alerte_ferme">
-			<h2><:forg:forum_ferme:></h2>
-			<h3><:forg:forum_ferme_texte:></h3>
+			<h2><:spipbb:forum_ferme:></h2>
+			<h3><:spipbb:forum_ferme_texte:></h3>
 		</div>
 		[(#SET{none,1})]
 		})]
@@ -102,7 +102,7 @@
 			
 			<table class="spipforum" id="post_origine">
 			<tr>
-				<th colspan="2"><:forg:en_reponse_a:></th>
+				<th colspan="2"><:spipbb:en_reponse_a:></th>
 			</tr>
 			<tr class="ligne_sujet">
 				<td  colspan="2" class="ligne_nom">
@@ -114,10 +114,10 @@
 						</a>
 					</BOUCLE_auteurp>
 					</B_auteurp>
-						[(#NOM|sinon{<:forg:anonyme:>})]
+						[(#NOM|sinon{<:spipbb:anonyme:>})]
 					<//B_auteurp>
 					</span>
-					<span class="text_titre"><:forg:en_rep_sujet_:>
+					<span class="text_titre"><:spipbb:en_rep_sujet_:>
 					<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ENV{id_forum}})]">#TITRE</a>
 					</span>
 				</td>

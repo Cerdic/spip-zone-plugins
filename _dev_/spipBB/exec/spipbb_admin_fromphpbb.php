@@ -198,6 +198,8 @@ function spipbb_fromphpbb_formulaire($row=array())
 // Fonction supprimee en SVN... a remplacer ?
 // etait dans : inc/editer_article
 // ------------------------------------------------------------------------------
+
+if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','>')) {
 if (!function_exists('')) {
 function editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider)
 {
@@ -213,5 +215,6 @@ function editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider)
 	else $logo = "rubrique-24.gif";
 
 	return debut_cadre_couleur($logo, true, "", $msg) . $opt .fin_cadre_couleur(true);
-} } // editer_article_rubrique
+} } } // editer_article_rubrique
+
 ?>

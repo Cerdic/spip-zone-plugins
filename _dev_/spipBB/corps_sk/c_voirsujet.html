@@ -26,7 +26,7 @@
 		
 		<table class="spipforum" id="post_ferme">
 			<tr>
-				<th colspan="2"><:forg:sujet_clos_titre:></th>
+				<th colspan="2"><:spipbb:sujet_clos_titre:></th>
 			</tr>
 			<tr class="ligne_sujet">
 				<td id="forum#ID_FORUM" colspan="2">
@@ -45,21 +45,21 @@
 					</BOUCLE_modo>
 					
 					</B_auteurpc2>
-						[(#NOM|sinon{<:forg:anonyme:>})]
+						[(#NOM|sinon{<:spipbb:anonyme:>})]
 					<//B_auteurpc2>
 					</span>
-					<span class="text_titre"><:forg:post_titre:>#TITRE</span>
+					<span class="text_titre"><:spipbb:post_titre:>#TITRE</span>
 				</td>
 			</tr>
 			<tr class="ligne_sujet">
 				<td class="aff_avatar" rowspan="2">
 					<BOUCLE_auteur_av(AUTEURS){id_auteur}>
 						[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_suj'}})]
-						[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:forg:moderateur:>"></p>]
+						[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:spipbb:moderateur:>"></p>]
 					</BOUCLE_auteur_av>
 				</td>
 				<td class="date_sujet">
-	        		<span><:forg:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+	        		<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
 	        	</td>
 	        </tr>
 			<tr class="ligne_sujet">
@@ -93,7 +93,7 @@
 	[(#REM) message art ferme|maintenance ]
 	[(#GET{forumferme}|=={1}|?{' ',''})
 		<div class="mesg_forum_clos">
-		[(#GET{maintenance}|=={1}|?{<:forg:forum_maintenance:>,<:forg:forum_ferme:>})]
+		[(#GET{maintenance}|=={1}|?{<:spipbb:forum_maintenance:>,<:spipbb:forum_ferme:>})]
 		</div>
 	]
 	
@@ -102,7 +102,7 @@
 		<li class="poster">
 			<BOUCLE_forum_pere(ARTICLES){id_article}>
 			[(#SET{affboutonnew,[(#GET{forumferme}|=={1}|?{' ',
-				<a href="[(#URL_PAGE{poster})][&amp;(#PARAMETRES_FORUM)]" title="<:forg:sujet_nouveau:>">&nbsp;</a>
+				<a href="[(#URL_PAGE{poster})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:sujet_nouveau:>">&nbsp;</a>
 			})]
 			})]
 			#GET{affboutonnew}
@@ -111,7 +111,7 @@
 		<li class="repondre">
 			[(#SET{affboutonrep,[(#GET{forumferme}|=={1}|?{' ',
 				[(#GET{sujetferme}|=={1}|?{' ',
-				<a href="[(#URL_PAGE{poster})][&amp;(#PARAMETRES_FORUM)]" title="<:forg:sujet_repondre:>">&nbsp;</a>
+				<a href="[(#URL_PAGE{poster})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:sujet_repondre:>">&nbsp;</a>
 				})]
 			})]
 			})]
@@ -126,7 +126,7 @@
 	<!-- tableau -->
 	<table class="spipforum" id="liste_post">
 		<tr>
-	  		<th colspan="2"><:forg:message_s:></th>
+	  		<th colspan="2"><:spipbb:message_s:></th>
 		</tr>
 		
 		<tr class="inter entete_sujet">
@@ -147,22 +147,22 @@
 				</BOUCLE_modo2>
 				
 				</B_auteurp>
-					[(#NOM|sinon{<:forg:anonyme:>})]
+					[(#NOM|sinon{<:spipbb:anonyme:>})]
 				<//B_auteurp>
 				</span>
-				<span class="text_titre"><:forg:en_rep_sujet_:>#TITRE</span>
+				<span class="text_titre"><:spipbb:en_rep_sujet_:>#TITRE</span>
 			</td>
 		</tr>
 		<tr class="ligne_sujet">
 			<td class="aff_avatar" rowspan="2">
 				[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_suj'}})]
 				
-				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:forg:moderateur:>"></p>]
+				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:spipbb:moderateur:>"></p>]
 				
 				[(#REM) bouton alerter abus ... !]
 				[(#CONFIG{'spipbb/affiche_bouton_abus'}|=={'oui'}|?{' ',''})
 				<div class="bouton_alerter">
-					<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,1}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{alerter,oui}|parametre_url{orig,#ID_THREAD-#ID_FORUM})]" title="<:forg:alerter_abus:>">&nbsp;</a>
+					<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,1}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{alerter,oui}|parametre_url{orig,#ID_THREAD-#ID_FORUM})]" title="<:spipbb:alerter_abus:>">&nbsp;</a>
 				</div>
 				]
 			</td>
@@ -172,14 +172,14 @@
 				[(#SET{affboutonciter,[(#GET{forumferme}|=={1}|?{' ',
 					[(#GET{sujetferme}|=={1}|?{' ',
 					<div class="bout_citer">
-						<a href="[(#URL_PAGE{poster}|parametre_url{citer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:forg:citer:>">&nbsp;</a>
+						<a href="[(#URL_PAGE{poster}|parametre_url{citer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:citer:>">&nbsp;</a>
 					</div>
 					})]
 				})]
 				})]
 				#GET{affboutonciter}
 			
-       			<span><:forg:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+       			<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
         	</td>
         </tr>
 		<tr class="ligne_sujet">
@@ -222,22 +222,22 @@
 					</BOUCLE_modo3>	
 				
 				</B_auteurpr>
-					[(#NOM|sinon{<:forg:anonyme:>})]
+					[(#NOM|sinon{<:spipbb:anonyme:>})]
 				<//B_auteurpr>
 				</span>
-				<span class="text_titre"><:forg:post_titre:>#TITRE</span>
+				<span class="text_titre"><:spipbb:post_titre:>#TITRE</span>
 			</td>
 		</tr>
 		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
 			<td class="aff_avatar" rowspan="2">
 				[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_suj'}})]
 				
-				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:forg:moderateur:>"></p>]
+				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:spipbb:moderateur:>"></p>]
 				
 				[(#REM) bouton alerter abus ... ! ]
 				[(#CONFIG{'spipbb/affiche_bouton_abus'}|=={'oui'}|?{' ',''})
 				<div class="bouton_alerter">
-					<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,1}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{alerter,oui}|parametre_url{orig,#ID_THREAD-#ID_FORUM})]" title="<:forg:alerter_abus:>">&nbsp;</a>
+					<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,1}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{alerter,oui}|parametre_url{orig,#ID_THREAD-#ID_FORUM})]" title="<:spipbb:alerter_abus:>">&nbsp;</a>
 				</div>
 				]
 			</td>
@@ -246,13 +246,13 @@
 				[(#SET{affboutonciter,[(#GET{forumferme}|=={1}|?{' ',
 					[(#GET{sujetferme}|=={1}|?{' ',
 					<div class="bout_citer">
-						<a href="[(#URL_PAGE{poster}|parametre_url{citer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:forg:citer:>">&nbsp;</a>
+						<a href="[(#URL_PAGE{poster}|parametre_url{citer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:citer:>">&nbsp;</a>
 					</div>
 					})]
 				})]
 				})]
 				#GET{affboutonciter}
-				<span><:forg:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+				<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
         	</td>
         </tr>
 		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
@@ -273,8 +273,8 @@
 		<tr class="pagination">
 			<td colspan="2">
 			#GRAND_TOTAL
-			[(#GRAND_TOTAL|>{1}|?{<:forg:pagine_post_s:>,<:forg:pagine_post_:>})]
-			[<:forg:pagine_page_:>(#PAGINATION{page_forum})]
+			[(#GRAND_TOTAL|>{1}|?{<:spipbb:pagine_post_s:>,<:spipbb:pagine_post_:>})]
+			[<:spipbb:pagine_page_:>(#PAGINATION{page_forum})]
 			</td>
 		</tr>
 		</B_posts>
@@ -302,7 +302,7 @@
 	<INCLURE(session.php){fond=inc_piedforum}{id_article}{id_thread}>
 
 	[(#REM) si visiteur non identifie : form login ]
-	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:forg:login:></p>]
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]
 	#LOGIN_PUBLIC
 	[(#SESSION{id_auteur}|=={''}|?{' ',''})
 	&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;

@@ -24,17 +24,17 @@
 
 
 <B_art_test>
-	<div class="titre_actif"><:forg:recherche:></div>
+	<div class="titre_actif"><:spipbb:recherche:></div>
 	<p class="space_10"></p>
 	
 <BOUCLE_art_test(ARTICLES){id_article}>
 
 	<div class="chemin">
 		<BOUCLE_nb(FORUMS){recherche}{id_article}></BOUCLE_nb>
-		#TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{<:forg:resultat_s_pour_:>,<:forg:resultat_pour_:>})]
+		#TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{<:spipbb:resultat_s_pour_:>,<:spipbb:resultat_pour_:>})]
 		[ #RECHERCHE ]
 		<//B_nb>
-		<:forg:dans_forum:>&quot; [(#TITRE|supprimer_numero)] &quot;
+		<:spipbb:dans_forum:>&quot; [(#TITRE|supprimer_numero)] &quot;
 	</div>
 	<p class="space_10"></p>
 
@@ -42,8 +42,8 @@
 	<B_art>
 	<table class="spipforum" id="resultats">
 		<tr> 
-			<th><:forg:auteur:></th>
-			<th><:forg:message_s:></th>
+			<th><:spipbb:auteur:></th>
+			<th><:spipbb:message_s:></th>
 		</tr>
 
 	<BOUCLE_art(FORUMS){recherche}{id_article}{par points}{inverse}>
@@ -66,7 +66,7 @@
         
 		<tr class="inter salon"> 
 			<td colspan="2">
-       			<:forg:sujet_dpt:>:&nbsp;
+       			<:spipbb:sujet_dpt:>:&nbsp;
 				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_sujet}}|parametre_url{recherche,#RECHERCHE})]">
 					#TITRE
 				</a>
@@ -80,16 +80,16 @@
 					#NOM
 				</BOUCLE_auteurp1>
 				</B_auteurp1>
-					[(#NOM|sinon{<:forg:anonyme:>})]
+					[(#NOM|sinon{<:spipbb:anonyme:>})]
 				<//B_auteurp1>
 				</p>
-				[(#GET{rep_forum}|>{1}|?{<:forg:reponse_s_:>,<:forg:reponse_:>})]
+				[(#GET{rep_forum}|>{1}|?{<:spipbb:reponse_s_:>,<:spipbb:reponse_:>})]
 				<br />
 				#GET{rep_forum}
 				
 			</td>
    			<td  class="date_sujet">	
-   				<:forg:forum_dpt:><a href="#URL_FORUM">#GET{ttr_forum}</a>
+   				<:spipbb:forum_dpt:><a href="#URL_FORUM">#GET{ttr_forum}</a>
 				<br />
 				[(#DATE|nom_jour) ][(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]
        		</td>
@@ -108,10 +108,10 @@
 	<!-- aucun resultat ! -->
 	<table class="spipforum" id="resultats">
 		<tr> 
-			<th><:forg:info:></th>
+			<th><:spipbb:info:></th>
 		</tr>
 		<tr class="sans_sujet"> 
-			<td><:forg:no_message:></td>
+			<td><:spipbb:no_message:></td>
 		</tr>
 	</table>
 
@@ -120,23 +120,23 @@
 
 
 <!-- recherche elargie -->	
-	<div class="titre_actif"><:forg:recherche_elargie:></div>
+	<div class="titre_actif"><:spipbb:recherche_elargie:></div>
 	<p class="space_10"></p>
 	
 	<div class="chemin">
 		<BOUCLE_nb2(FORUMS){recherche}></BOUCLE_nb2>
-		#TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{<:forg:resultat_s_pour_:>,<:forg:resultat_pour_:>})]
+		#TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{<:spipbb:resultat_s_pour_:>,<:spipbb:resultat_pour_:>})]
 		[ #RECHERCHE ]
 		<//B_nb2>
-		<:forg:dans_forum:>&quot; #TITRE &quot;
+		<:spipbb:dans_forum:>&quot; #TITRE &quot;
 	</div>
 	<p class="space_10"></p>
 
 	<B_tout>
 		<table class="spipforum" id="resultats">
 			<tr> 
-				<th><:forg:auteur:></th>
-				<th><:forg:message:></th>
+				<th><:spipbb:auteur:></th>
+				<th><:spipbb:message:></th>
 			</tr>
 	<BOUCLE_tout(FORUMS){recherche}{doublons}{par points}>
 		
@@ -162,7 +162,7 @@
 		 
 		 <tr class="inter salon"> 
 			<td colspan="2">
-				<:forg:sujet_dpt:>:&nbsp;
+				<:spipbb:sujet_dpt:>:&nbsp;
 				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_sujet}}|parametre_url{recherche,#RECHERCHE})]">
 					#TITRE
 				</a>
@@ -174,15 +174,15 @@
 				<B_auteurp>
 				<BOUCLE_auteurp(AUTEURS){id_auteur}>#NOM</BOUCLE_auteurp>
 				</B_auteurp>
-				[(#NOM|sinon{<:forg:anonyme:>})]
+				[(#NOM|sinon{<:spipbb:anonyme:>})]
 				<//B_auteurp>
 				</p>
-				[(#GET{rep_forum}|>{1}|?{<:forg:reponse_s_:>,<:forg:reponse_:>})]
+				[(#GET{rep_forum}|>{1}|?{<:spipbb:reponse_s_:>,<:spipbb:reponse_:>})]
 				<br />
 				#GET{rep_forum}
 			</td>
             <td class="date_sujet">
-				<:forg:forum_dpt:><a href="#URL_FORUM">#GET{ttr_forum}</a>
+				<:spipbb:forum_dpt:><a href="#URL_FORUM">#GET{ttr_forum}</a>
 				<br />
 				[(#DATE|nom_jour) ][(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]
 			</td>
@@ -201,10 +201,10 @@
     <!-- aucun resultat ! -->
 	<table class="spipforum" id="resultats">
 		<tr> 
-			<th><:forg:info:></th>
+			<th><:spipbb:info:></th>
 		</tr>
 		<tr class="sans_sujet"> 
-			<td><:forg:no_message:></td>
+			<td><:spipbb:no_message:></td>
 		</tr>
 	</table>
     <//B_tout>

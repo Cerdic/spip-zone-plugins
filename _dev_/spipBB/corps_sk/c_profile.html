@@ -11,7 +11,7 @@
 			<th colspan="2">#NOM</th>
 		</tr>
 		<tr class="inter">
-			<td colspan="2"><:forg:modif_parametre:></td>
+			<td colspan="2"><:spipbb:modif_parametre:></td>
 		</tr>
 		<tr class="ligne_sujet">
 			<td class="aff_avatar">
@@ -31,7 +31,7 @@
 </BOUCLE_recap>
 </B_recap>
 	[(#REM) si visiteur non identifie : form login ]
-	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:forg:login:></p>]
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]
 	#LOGIN_PUBLIC
 	[(#SESSION{id_auteur}|=={''}|?{' ',''})
 	&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
