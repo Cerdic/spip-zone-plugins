@@ -38,6 +38,7 @@
 		}
 	}
 	
+	$spip_auteurs_elargis['idx'] = "enum('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL";
 	$spip_auteurs_elargis['id_auteur'] = "bigint(21) NOT NULL";
 	$spip_auteurs_elargis_key = array("PRIMARY KEY"	=> "id", 'KEY id_auteur' => 'id_auteur');
 	
@@ -59,35 +60,35 @@
 	}*/
 	
 # autoriser les visiteurs a modifier leurs infos
-#define ('_DEBUG_AUTORISER', true);
+define ('_DEBUG_AUTORISER', true);
 if (!function_exists('autoriser_spip_auteurs_elargis')) {
-function autoriser_auteurs_elargi($faire, $type, $id, $qui, $opt) {
-	$query = spip_query("select id_auteur from spip_auteurs_elargis where id=$id");
-	$query = spip_fetch_array($query);
-	if($query['id_auteur']==$qui['id_auteur'])
-		$qui['id_auteur'] = $id;
-	return autoriser($faire,'auteur', $id, $qui, $opt);
-}
+	function autoriser_auteurs_elargi($faire, $type, $id, $qui, $opt) {
+		$query = spip_query("select id_auteur from spip_auteurs_elargis where id=$id");
+		$query = spip_fetch_array($query);
+		if($query['id_auteur']==$qui['id_auteur'])
+			$qui['id_auteur'] = $id;
+		return autoriser($faire,'auteur', $id, $qui, $opt);
+	}
 }
 
 if (!function_exists('autoriser_auteur_modifier')) {
-function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
-
-	// Ni admin ni redacteur => non
-	if (in_array($qui['statut'], array('0minirezo', '1comite')))
-		return autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt);
-	else
-		return
-			$qui['statut'] == '6forum'
-			AND $id == $qui['id_auteur'];
-}
+	function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
+	
+		// Ni admin ni redacteur => non
+		if (in_array($qui['statut'], array('0minirezo', '1comite')))
+			return autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt);
+		else
+			return
+				$qui['statut'] == '6forum'
+				AND $id == $qui['id_auteur'];
+	}
 }
 
 function revision_auteurs_elargi($id, $c=false) {
 
 	return modifier_contenu('auteurs_elargi', $id,
 		array(
-			'champs' => array('nom_famille', 'prenom', 'adresse','ville','code_postal'),
+			'champs' => array('nom_famille', 'prenom', 'adresse','ville','code_postal','pays','telephone','fax','mobile'),
 			'nonvide' => array('nom_email' => _T('info_sans_titre'))
 		),
 		$c);
@@ -96,10 +97,12 @@ function revision_auteurs_elargi($id, $c=false) {
 //email envoye lors de l'inscription
 
 function envoyer_inscription2($id_auteur,$mode="inscription") {
-	if ($GLOBALS['spip_version_code']>=1.9259){include_spip('inc/envoyer_mail');}
+	if ($GLOBALS['spip_version_code']>=1.9259){
+		include_spip('inc/envoyer_mail');
+	}
 	else{
-	include_spip('inc/filtres'); // pour email_valide(), sinon pas d'envoi...
-	include_spip('inc/mail');
+		include_spip('inc/filtres'); // pour email_valide(), sinon pas d'envoi...
+		include_spip('inc/mail');
 	}
 	
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
@@ -110,15 +113,12 @@ function envoyer_inscription2($id_auteur,$mode="inscription") {
 	$var_user=spip_fetch_array(spip_query("select a.nom, $prenom a.id_auteur, a.alea_actuel, a.login, a.email from spip_auteurs a join spip_auteurs_elargis b where a.id_auteur='$id_auteur' and a.id_auteur=b.id_auteur"));
 	
 	if($var_user['alea_actuel']==''){
-	$var_user['alea_actuel'] = rand(1,99999);
-	spip_query("UPDATE spip_auteurs SET alea_actuel='".$var_user['alea_actuel']."' WHERE id_auteur = ".$id_auteur);
-	
+		$var_user['alea_actuel'] = rand(1,99999);
+		spip_query("UPDATE spip_auteurs SET alea_actuel='".$var_user['alea_actuel']."' WHERE id_auteur = ".$id_auteur);
 	}
 	
-	
-	
 	if($mode="inscription"){
-	$message = _T('inscription2:message_auto')."\n\n"
+		$message = _T('inscription2:message_auto')."\n\n"
 			. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n"
 			. _T('inscription2:texte_email_inscription', array(
 			'link_activation' => $adresse_site.'/?page=inscription2_confirmation&id='
@@ -127,27 +127,22 @@ function envoyer_inscription2($id_auteur,$mode="inscription") {
 			   .$var_user['id_auteur'].'&cle='.$var_user['alea_actuel'].'&mode=sup',
 			'login' => $var_user['login'], 'nom_site' => $nom_site_spip ));
 		$sujet = "[$nom_site_spip] "._T('inscription2:activation_compte');
-
 	}
 	
 	if($mode="rappel_mdp"){
-	
-	
-	$message = _T('inscription2:message_auto')."\n\n"
+		$message = _T('inscription2:message_auto')."\n\n"
 			. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n"
 			. _T('inscription2:rappel_password')."\n\n"
 			. _T('inscription2:choisir_nouveau_password')."\n\n"
-
 			. $adresse_site."/?page=inscription2_confirmation&id="
 			. $var_user['id_auteur']."&cle=".$var_user['alea_actuel']."&mode=conf"."\n\n"
 			. _T('inscription2:rappel_login') . $var_user['login'] ;
-	$sujet = "[$nom_site_spip] "._T('inscription2:rappel_password');
+		$sujet = "[$nom_site_spip] "._T('inscription2:rappel_password');
 	}
 	
-	
 	if (envoyer_mail($var_user['email'],
-			 $sujet,
-			 $message))
+		$sujet,
+		$message))
 		return "ok";
 	else
 		return _T('inscription2:probleme_email');
