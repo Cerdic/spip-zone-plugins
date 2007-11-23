@@ -37,10 +37,10 @@ function exec_mutualisation_dist() {
 		<tr>
 			<td>Site</td>
 			<td>Nom</td>
-			<td>ecrire</td>
+			<td>Admin</td>
 			<td title='Popularit&eacute; totale du site'>Stats</td>
 			<td>Plugins</td>
-			<td>date</td>
+			<td>Date</td>
 		</tr>
 	</thead>
 	<tbody>";
@@ -79,7 +79,7 @@ function exec_mutualisation_dist() {
 			. " style='background-image: url(${url}spip.php?action=cron&amp;renouvelle_alea=yo);'>
 			<td>$v$version_installee$erreur</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
-			<td><a href='${url}ecrire/'>ecrire/</a></td>
+			<td><a href='${url}ecrire/'>ecrire</a></td>
 			<td><a href='${url}ecrire/index.php?exec=statistiques_visites'>${stats}</a></td>
 			<td><a href='${url}ecrire/index.php?exec=admin_plugin'>${plugins}</a></td>
 			<td>".date_creation_repertoire_site($v)."</td>
