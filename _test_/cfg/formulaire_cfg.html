@@ -4,5 +4,8 @@
 	
 	Faire le traitement avant l'affichage du formulaire !
 ]
-<div class='cfg_message'>#CFG_TRAITER{#ENV{cfg_vue}, #ENV{cfg_id}}</div>
+[(#SET{messages,[(#CFG_TRAITER{#ENV{cfg_vue}, #ENV{cfg_id}})]})]
+[(#ENV{cfg_afficher_messages}|=={non}|?{'',' '})
+	[<div class='cfg_message'>(#GET{messages})</div>]
+]
 <INCLURE{fond=#ENV{cfg_form}}{env}>

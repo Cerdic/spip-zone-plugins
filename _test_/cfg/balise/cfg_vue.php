@@ -18,14 +18,14 @@ function balise_CFG_VUE($p){
 	return $p;
 }
 
-function calculer_CFG_VUE($fond, $id){
+function calculer_CFG_VUE($fond, $id, $afficher_messages = true){
 	include_spip('inc/cfg');
 	$cfg = cfg_charger_classe('cfg');
 	$config = & new $cfg($fond, $fond, $id); 
 		
 	if ($config->autoriser()){
 		return 
-			"<div class='cfg_message'>" . $config->message . "</div>"
+			(($afficher_messages) ? "<div class='cfg_message'>" . $config->message . "</div>" : "")
 			. $config->formulaire();	
 	} else
 		return $config->refus;

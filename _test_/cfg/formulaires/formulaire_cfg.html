@@ -8,13 +8,14 @@
 	<script type='text/javascript'><!--
 	if (window.jQuery) (function($){
 		// adresse du fragment ajax
-		var url = 'spip.php?page=formulaire_cfg';
+		var url = '#EVAL{_DIR_RACINE}spip.php?page=formulaire_cfg';
 
 		function start_ajax_cfg(){
 			$("#formulaire_cfg_[(#ENV{cfg_hash})] form")
 			// parametres supplementaires
 			.prepend("<input type='hidden' name='cfg_form' value='#ENV{cfg_form}' />")
 			.prepend("<input type='hidden' name='cfg_hash' value='#ENV{cfg_hash}' />")
+			.prepend("<input type='hidden' name='cfg_afficher_messages' value='#ENV{cfg_afficher_messages}' />")
 			// parametres du post ajax
 			.ajaxForm({
 				url: url,
