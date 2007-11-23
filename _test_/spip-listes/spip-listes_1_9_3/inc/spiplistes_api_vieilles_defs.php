@@ -55,7 +55,8 @@ function bouton_block_visible ($nom_block) {
 	return bouton_block_depliable(_T("info_sans_titre"),true,$nom_block);
 }
 
-// toujours a cette valeur a present
+// utilisé en 192C (inc/boutons.php)
+// toujours a cette valeur a present en 193
 $GLOBALS['options'] = 'avancees';
 
 function bandeau_titre_boite2 ($titre, $logo="", $fond="toile_blanche", $texte="ligne_noire") {
@@ -89,7 +90,9 @@ function spip_abstract_showtable ($table, $serveur='', $table_spip = false) {
     return sql_showtable($table, $serveur, $table_spip);
 }
 
-//constantes spip pour mysql_fetch_array()
+// utilisé en 192C (base/db_mysql.php)
+// constantes spip pour mysql_fetch_array()
+// qui est encore dans inc/utils.php en 193
 define('SPIP_BOTH', MYSQL_BOTH);
 define('SPIP_ASSOC', MYSQL_ASSOC);
 define('SPIP_NUM', MYSQL_NUM);
