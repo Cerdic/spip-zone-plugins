@@ -297,7 +297,7 @@ $.fn.activatecrayon = function(percent) {
           ) || (!e.charCode && e.keyCode == 119 /* F8, windows */)
           ) {
             crayon
-            .find("form.formulaire_spip")
+            .find("form.formulaire_crayon")
             .submit();
           }
           var maxh = this.className.match(/\bmaxheight(\d+)?\b/);
