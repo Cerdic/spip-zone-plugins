@@ -1,22 +1,6 @@
-[(#REM)
-	Affiche une liste de publications
-
-ART_ACL : Articles dans des revues avec comité de lecture
-ART_SCL : Articles dans des revues sans comité de lecture
-CONF_INV : Conférences invitées
-COMM_ACT : Communications avec actes
-COMM_SACT : Communications sans actes
-OUVS : Ouvrages scientifiques
-COVS : Chapitres d'ouvrages scientifiques
-DOUV : Directions d'ouvrages
-BREVET : Brevets
-HDR : Habilitations à diriger des recherches
-THESE : Thèses
-COURS : Cours
-AUTRE : Autres publications
-RAPPORT : Rapport de recherche
-UNDEFINED : Documents sans référence de publication
-
+[(#REM) -------- Affiche une ou des publications -----------]
+[
+(#REM) "procédure" BOUCLE_UnePubli d'affichage d'une publi
 ]
 <BOUCLE_UnePubli(SYNDIC_ARTICLES){id_syndic_article}>
 	<?php if($publiHAL_memo_an!=[(#DATE|annee|sinon{2100})]){?>[
@@ -32,7 +16,13 @@ UNDEFINED : Documents sans référence de publication
 <?php 
 $publiHAL_memo_an=2100;
 if(strcmp('#ENV{typedoc}',"tous")==0){
-?>
+?>[
+(#REM) **** Affiche les publi classées par type de doc et même celle sans type selon l'année de début ou de fin
+<publi|typedoc=tous|anDeb=2001|anFin=2002> 2001 et 2002
+<publi|typedoc=tous|anDeb=2001> 2001 et après
+<publi|typedoc=tous|anFin=2000> 2000 et avant
+<publi|typedoc=tous> toutes les années
+]
 <BOUCLE_mot(MOTS){id_groupe=#EVAL{$GLOBALS['meta']['publiHAL_Type_de_document']}}{par num titre}>
 <?php $publiHAL_memo_an=2100; ?>
 <B_Publi>
@@ -56,6 +46,11 @@ if(strcmp('#ENV{typedoc}',"tous")==0){
 
 <?php }elseif(preg_match("/^\d+$/isU",'#ENV{labo}')){ 
 ?>
+[
+(#REM) **** Affiche les publi classées par type de doc pour un labo YYY= id mot clef
+<publi|labo=YYY>
+<publi|labo=YYY|anDeb=2001|anFin=2002>
+]
 <BOUCLE_mot1(MOTS){id_groupe=#EVAL{$GLOBALS['meta']['publiHAL_Type_de_document']}}{par num titre}>
 <?php $publiHAL_memo_an=2100; ?>
 <B_Publi1>
@@ -70,13 +65,18 @@ if(strcmp('#ENV{typedoc}',"tous")==0){
 </BOUCLE_mot1>
 <?php }elseif(preg_match("/^\d+(,\d+)*$/isU",'#ENV{typedoc}')){ 
 ?>
+[
+(#REM) **** Affiche les publi de type doc XXX,YYY,ZZZ= id mot clef
+<publi|typedoc=XXX,YYY,ZZZ>
+<publi|typedoc=ZZZ|anDeb=2001|anFin=2002>
+]
 <BOUCLE_mot2(MOTS){id_mot IN #LISTE_IDS{typedoc}}{id_groupe=#EVAL{$GLOBALS['meta']['publiHAL_Type_de_document']}}{par num titre}>
 <?php $publiHAL_memo_an=2100; ?>
 <B_Publi2>
 	[<h2 class="publi_type">(#TEXTE|sinon{[(#TITRE|supprimer_numero)]})</h2>]
 	<ul class="publi">
 	<BOUCLE_Publi2(SYNDIC_ARTICLES){id_mot}{annee>=#ENV{anDeb,1}}{annee<=#ENV{anFin,2100}}{!par date}{par titre}>
-		<BOUCLE_eltPubli2(BOUCLE_UnePubli)></BOUCLE_eltPubli2>
+		[bizarre  mais nécessaire(#ID_SYNDIC_ARTICLE|?{'',''})]<BOUCLE_eltPubli2(BOUCLE_UnePubli)></BOUCLE_eltPubli2>
 	</BOUCLE_Publi2>
 	</ul>
 </B_Publi2>
@@ -84,13 +84,17 @@ if(strcmp('#ENV{typedoc}',"tous")==0){
 </BOUCLE_mot2>
 <?php }elseif(preg_match("/^\d+(,\d+)*$/isU",'#ENV{id}')){ 
 ?>
+[
+(#REM) **** Affiche des publi selon leur id=id_syndic_article
+<publi|id=XXX,YYY,ZZZ>
+]
 <BOUCLE_mot3(MOTS){id_groupe=#EVAL{$GLOBALS['meta']['publiHAL_Type_de_document']}}{par num titre}>
 <?php $publiHAL_memo_an=2100; ?>
 <B_Publi3>
 	[<h2 class="publi_type">(#TEXTE|sinon{[(#TITRE|supprimer_numero)]})</h2>]
 	<ul class="publi">
 	<BOUCLE_Publi3(SYNDIC_ARTICLES){id_mot}{id_syndic_article IN #LISTE_IDS{id}}{annee>=#ENV{anDeb,1}}{annee<=#ENV{anFin,2100}}{!par date}{par titre}>
-		<BOUCLE_eltPubli3(BOUCLE_UnePubli)></BOUCLE_eltPubli3>
+		[bizarre  mais nécessaire(#ID_SYNDIC_ARTICLE|?{'',''})]<BOUCLE_eltPubli3(BOUCLE_UnePubli)></BOUCLE_eltPubli3>
 	</BOUCLE_Publi3>
 	</ul>
 </B_Publi3>
@@ -98,6 +102,10 @@ if(strcmp('#ENV{typedoc}',"tous")==0){
 </BOUCLE_mot3>
 <?php }elseif(preg_match("/^\d+(,\d+)*$/isU",'#ENV{auteur}')){ 
 ?>
+[
+(#REM) **** Affiche des publi selon leur auteur id=id mot clef auteur
+<publi|auteur=XXX,YYY,ZZZ>
+]
 <BOUCLE_mot4(MOTS){id_groupe=#EVAL{$GLOBALS['meta']['publiHAL_Type_de_document']}}{par num titre}>
 <?php $publiHAL_memo_an=2100; ?>
 <B_Publi4>
