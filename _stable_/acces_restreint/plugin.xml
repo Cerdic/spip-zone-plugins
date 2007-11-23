@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>[fr]Acces Restreint 2.0[es]Acceso restringido 2.0</multi>
+	<multi>[fr]Acces Restreint 2.0[es]Acceso restringido 2.0[en]Restricted Access</multi>
 	</nom>
 	<icon>img_pack/zones-acces-48.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
@@ -8,6 +8,7 @@
 	<multi>
 _ &#169; 2007 - [fr]Distribu&#233; sous licence GPL
 	[es]Distribuido bajo licencia GPL 
+	[en]Distributed under GPL license
 	</multi>
 	</auteur>
 	<version>0.2</version>
@@ -26,6 +27,11 @@ _ A partir de SPIP 1.92, les zones peuvent concerner l'espace public et/ou l'esp
 _ Cada zona contiene secciones.
 _ Los autores podr&aacute;n ser asociados a ciertas zonas restringidas para tener derechos de acceso a ellas.
 _ Todos los bucles nativos de SPIP quedan modificados para filtrar los resultados en funci&oacute;n de los derechos del visitante.
+	[en]Restricted access management.
+_ Each area contains sections.
+_ Authors can be associated with these areas to gain access to them.
+_ All SPIP's loops are loaded with the necessary tools to filter the results according to the visitors' access priviliges.
+_ From SPIP 1.9.2, restricted areas can be found in the private area and/or in the public site.
 	</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Le-plugin-Acces-Restreint,1420</lien> <!-- URI de documentation -->
