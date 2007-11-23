@@ -12,7 +12,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 
 function balise_FORMULAIRE_CFG ($p) {
-	//return calculer_balise_dynamique($p, 'FORMULAIRE_CFG', array());
 	$cfg_vue 				= interprete_argument_balise(1, $p);
 	$cfg_id 				= sinon(interprete_argument_balise(2, $p),"''");
 	$cfg_form 				= sinon(interprete_argument_balise(3, $p),"'formulaires/formulaire_cfg_vue'");
