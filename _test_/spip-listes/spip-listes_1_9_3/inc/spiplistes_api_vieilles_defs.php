@@ -12,6 +12,16 @@ if(version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
 	return(false);
 }
 
+// conflit (doublons) avec plugins important vieilles defs...
+// en attendant de tout nettoyer
+$included_files = get_included_files();
+foreach ($included_files as $filename) {
+	if(basename($filename) == "vieilles_defs.php") {
+		return(true);
+	}
+}
+
+
 function debut_page ($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil") {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page($titre, $rubrique, $sous_rubrique, $id_rubrique);
