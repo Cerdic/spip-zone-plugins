@@ -1,0 +1,15 @@
+
+<!-- titre=Test extra sur articles -->
+<!-- table=spip_articles -->
+<!-- storage=extrapack -->
+<!-- autoriser=modifier_article_#ENV{id} -->
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<input type="hidden" name="id" class="cfg_id" value="#ENV{id}" />
+
+<label for='frm_documentation'>URL de documentation</label>
+<input type="text" name="url_documentation" id="frm_documentation" value="[(#ENV{url_documentation})]" class="fondl" />
+
+<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="fondl" />
+</form>

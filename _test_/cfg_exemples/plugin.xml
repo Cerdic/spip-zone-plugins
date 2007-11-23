@@ -23,6 +23,12 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</lien>
 	<options>cfg_exemples_options.php</options>
 	<install>base/cfg_exemples_upgrade.php</install>
+	
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>cfg_exemples_pipelines.php</inclure>
+	</pipeline>	
+	
 	<prefix>
 	cfg_exemples
 	</prefix>
