@@ -1,7 +1,6 @@
 #CACHE{0}
 [(#REM) Plugin SpipBB - Licence GPL]
 <!-- debut code pour fichier voirsujet.html -->
-
 <BOUCLE_sujet_principal(FORUMS){id_forum}{doublons}>
 		
 	<INCLURE(session.php){fond=inc_teteforum}{id_article}>
@@ -309,5 +308,9 @@
 	</div>
 	]
 [(#REM) Chryjs : Balise de calcul des visites - Ne pas retirer]
-[(#CALC_STATS_FORUMS{#ID_FORUM})]
+<?php
+include_once(_DIR_PLUGIN_SPIPBB."visites.php");
+?>
 </BOUCLE_sujet_principal>
+</B_sujet_principal>
+<!-- fin code pour fichier voirsujet.html -->

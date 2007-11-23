@@ -7,7 +7,7 @@
 _ &#169; 2006 - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version>
-		0.3.5
+		0.3.6
 	</version>
 	<etat>
 		experimental
@@ -36,6 +36,10 @@ _ [Admin-> .?exec=spipbb_admin_configuration] Access to the admin panel.
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouter_boutons</action>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
 		<inclure>spipbb_pipelines.php</inclure>
 	</pipeline>
 	<chemin dir='' />

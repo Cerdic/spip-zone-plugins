@@ -76,6 +76,11 @@ function spipbb_affiche_droite($flux)
 		}
 	}
 	return $flux;
-}
+} // spipbb_affiche_droite
+
+function spipbb_taches_generales_cron($taches_generales){
+	$taches_generales['statvisites'] = 30 * 1; // toutes les 30 sec
+	return $taches_generales;
+} // spipbb_taches_generales_cron
 
 ?>

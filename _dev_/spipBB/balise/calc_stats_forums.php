@@ -28,16 +28,18 @@ include_spip('inc/spipbb'); // Compatibilite 192
 
 function balise_CALC_STATS_FORUMS($p)
 {
-	return calculer_balise_dynamique($p,'CALC_STATS_FORUMS', array());
+	return calculer_balise_dynamique($p,'CALC_STATS_FORUMS', array('id_forum'));
 }
 
 function balise_CALC_STATS_FORUMS_stat($args, $filtres)
 {
+	spip_log(__FILE__." balise_CALC_STATS_FORUMS_stat ".$args,'spipbb');
 	return $args;
 }
 
 function balise_CALC_STATS_FORUMS_dyn($id_forum)
 {
+	spip_log(__FILE__." balise_CALC_STATS_FORUMS_dyn ".$id_forum,'spipbb');
 	if (empty($id_forum)) return '';
 	$row = sql_fetsel('visites','spip_visites_forums',"id_forum=$id_forum");
 	if (is_array($row) and (!empty($row['visites'])) ) {

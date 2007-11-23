@@ -1,3 +1,9 @@
+2007-11-23  chryjs  <chryjs!@!free!.!fr>
+
+ * Passage en fichier des stats... reste le bug de la double passe des pages SPIP pourquoi ?
+ * Correction tables inclues bug mutu ?
+ * Passage en revision 0.3.6
+
 2007-11-22  chryjs  <chryjs!@!free!.!fr>
 
  * Ajouts/correction des traductions (en fr seulement)... il en manque beaucoup

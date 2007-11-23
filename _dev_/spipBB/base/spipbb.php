@@ -31,6 +31,8 @@ global $tables_principales;
 global $tables_auxiliaires;
 global $tables_spipbb;
 
+// cf inc/interfaces.php
+
 $tables_spipbb = array( 'spip_visites_forums', 'spip_auteurs_spipbb', 'spip_spam_words', 'spip_spam_words_log', 'spip_ban_liste' );
 
 // suivi des visites (sur la base de spip_visites_articles)
@@ -114,14 +116,16 @@ $tables_principales['spip_ban_liste'] = array(
 
 //-- Relations ----------------------------------------------------
 global $tables_jointures;
-$tables_jointures['spip_visites_forums'][] = 'spip_forums';
-$tables_jointures['spip_auteurs_spipbb'][] = 'spip_auteurs';
+$tables_jointures['visites_forums'][] = 'forums';
+$tables_jointures['auteurs_spipbb'][] = 'auteurs';
 
 global $table_des_tables;
-$table_des_tables['spip_visites_forums'] = 'spip_visites_forums';
-$table_des_tables['spip_auteurs_spipbb'] = 'spip_auteurs_spipbb';
-$table_des_tables['spip_spam_words'] = 'spip_spam_words';
-$table_des_tables['spip_spam_words_log'] = 'spip_spam_words_log';
-$table_des_tables['spip_ban_liste'] = 'spip_ban_liste';
+$table_des_tables['visites_forums'] = 'visites_forums';
+$table_des_tables['auteurs_spipbb'] = 'auteurs_spipbb';
+$table_des_tables['spam_words'] = 'spam_words';
+$table_des_tables['spam_words_log'] = 'spam_words_log';
+$table_des_tables['ban_liste'] = 'ban_liste';
+
+//$table_date['articles']='date';
 
 ?>
