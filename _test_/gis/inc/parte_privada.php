@@ -14,6 +14,15 @@ function gis_cambiar_coord($id_article) {
 	global $spip_lang_left, $spip_lang_right;
 	$id_article = _request(id_article);
 	
+	///////////////////////////////////////
+	// GESTION de la spécialisation de gis pour une branche donnée
+	//evite de charger le bloc sur toutes les pages quand on en a pas besoin
+	
+	if(lire_config('gis/specialisation')){
+		if(gis_is_not_rubrique()) return "";
+	}
+	/////////////////////////////////////////////////////////
+	
 	$glat = NULL;
 	$glonx = NULL;
 	$gicon = NULL;

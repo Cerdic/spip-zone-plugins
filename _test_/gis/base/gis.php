@@ -73,4 +73,7 @@ $tables_jointures['spip_articles'][]= 'gis';
 $tables_jointures['spip_gis'][] = 'articles';
 $tables_jointures['spip_mots'][]= 'gis_mots';
 $tables_jointures['spip_gis_mots'][] = 'mots';
+
+
+
 ?>

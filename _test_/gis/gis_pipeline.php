@@ -49,6 +49,15 @@ function gis_insertar_head($flux){
 // inserta no head da parte PUBLICA
 // --------------------------------
 function gis_affichage_final($flux){
+	
+		///////////////////////////////////////
+		// GESTION de la spécialisation de gis pour une branche donnée
+		//evite de charger tous les js sur toutes les pages quand on en a pas besoin
+		if(lire_config('gis/specialisation')){
+			if(gis_is_not_rubrique()) return $flux;
+		}
+		/////////////////////////////////////////////////////////
+	
     if ((strpos($flux, '<div id="map') == true) or (strpos($flux, "<div id='map") == true) or (strpos($flux, '<div id="formMap') == true)){
 	
 		$incHead='
