@@ -174,7 +174,7 @@ function exec_gerer_courrier(){
 		if($email_test !=''){
 			$destinataire = $email_test ;
 			if(email_valide($destinataire)){				
-				$destinataire = "l'email de test : ".$destinataire ;
+				$destinataire = _T('spiplistes:email_test2').$destinataire ;
 				$pret_envoi=true;
 			}
 			else{
@@ -185,7 +185,7 @@ function exec_gerer_courrier(){
 		elseif(intval($id_liste) !=0){
 			$query_ = spip_query ("SELECT * FROM spip_listes WHERE id_liste = "._q($id_liste));
 			$row = spip_fetch_array($query_);
-			$destinataire = 'la liste : <a href="'.generer_url_ecrire('listes','id_liste='.$id_liste).'">'.$row['titre'].'</a>';
+			$destinataire = _T('spiplistes:la_liste').' <a href="'.generer_url_ecrire('listes','id_liste='.$id_liste).'">'.$row['titre'].'</a>';
 			//ajouter le nombre d'inscrits
 			// ici
 			$pret_envoi=true;
