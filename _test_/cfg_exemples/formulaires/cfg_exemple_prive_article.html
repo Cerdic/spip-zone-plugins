@@ -6,7 +6,10 @@
 	[(#SET{bouton,[(#GET{bouton}|bouton_block_depliable{1, cfg_exemples_articles})]})]
 ]
 
-[(#VAL{auteur-24.gif}|debut_cadre_enfonce{1,'',[(#GET{bouton})]})]
+[(#REM) Icone en URL absolue, sinon elle disparait en cliquant sur valider
+		dans l'espace prive car le script charge spip.php
+ ]
+[(#VAL{[(#EVAL{_DIR_PLUGIN_CFG})]cfg-22.png}|url_absolue|debut_cadre_enfonce{1,'',[(#GET{bouton})]})]
 
 	[<a href="(#CONFIG{articles:[(#ENV{cfg_id})]/url_documentation})">
 		[(#CONFIG{article:[(#ENV{cfg_id})]/url_documentation})]
