@@ -46,7 +46,7 @@ onfocus="this.value='';"
 </p>
 
 <label for="shoutbox_nick_#ENV{objet}" class="labelhide"><:form_pet_votre_nom:></label>
-<input type="text" name="shoutbox_nick_#ENV{objet}" value="[(#ENV{nick})]" class="forml" style="width:50%;" />
+<input type="text" name="session_nom" id="shoutbox_nick_#ENV{objet}" value="[(#SESSION{session_nom}|sinon{#SESSION{nom}})]" class="forml" style="width:50%;" />
 </fieldset>
 
 [(#REM) Antispam "nobot" ]

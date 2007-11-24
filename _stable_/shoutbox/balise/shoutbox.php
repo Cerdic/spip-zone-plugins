@@ -58,38 +58,13 @@ function balise_SHOUTBOX_stat($args, $filtres) {
 	return array($defaut, $a);
 }
 
-/*
- # bof...
-function shoutbox_command_nick(&$val, $r, &$nom) {
-	include_spip('inc/cookie');
-	spip_setcookie('spip_shoutbox_nick', $r[2]);
-	$val = $nom.' is now known as '.$r[2];
-	$nom = htmlspecialchars($r[2]);
-}
-*/
-
 // http://doc.spip.org/@balise_SHOUTBOX_dyn
 function balise_SHOUTBOX_dyn($defaut, $a) {
 
-	// analyser le nick envoye et poser/supprimer le cookie
-	if (_request('valide'.$a)) {
-		$nick = strval(_request('shoutbox_nick_'.$a));
-		if ($nick != strval($_COOKIE['spip_shoutbox_nick'])) {
-			include_spip('inc/cookie');
-			if (strlen($nick))
-				spip_setcookie('spip_shoutbox_nick',
-					$nick,
-					time()+7*24*3600);
-			else
-				spip_setcookie('spip_shoutbox_nick',
-					$_COOKIE['spip_shoutbox_nick'],
-					time()-3600);
-			$_COOKIE['spip_shoutbox_nick'] = $nick;
-		}
-	}
-
-	if (!$nick = htmlspecialchars($_COOKIE['spip_shoutbox_nick']))
-		$nick = $GLOBALS['auteur_session']['nom'];
+	// Le nickname c'est celui qu'on a donne, meme si on est loge
+	$nick = isset($GLOBALS['auteur_session']['session_nom'])
+		? $GLOBALS['auteur_session']['session_nom']
+		: $GLOBALS['auteur_session']['nom'];
 
 	// si $_POST correspondant a notre formulaire : stocker un truc
 	// dans la base de donnees
@@ -144,8 +119,7 @@ function balise_SHOUTBOX_dyn($defaut, $a) {
 				'defaut' => $defaut,
 				'bouton' => 'ok',
 				'nouveau' => isset($id), # si on vient de faire l'insertion
-				'erreur' => $erreur,
-				'nick' => $nick # attention avec l'IP on perdrait le cache d'un visiteur a l'autre
+				'erreur' => $erreur
 			)
 		);
 }
