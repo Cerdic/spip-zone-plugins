@@ -9,7 +9,7 @@ return this.each(function(){
 	var label = $(this);
 	if (!label.attr('for')) return;
 
-	var input = $("input[name='"+label.attr('for')+"']");
+	var input = $("input[id='"+label.attr('for')+"']");
 	if (!input.length) return;
 
 	var default_label = label.html();
