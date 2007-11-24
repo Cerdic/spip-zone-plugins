@@ -19,7 +19,7 @@ function exec_echoppe_categorie(){
 	$sql_test_categorie_existe = "SELECT * FROM spip_echoppe_categories WHERE id_categorie = '".$id_categorie."';";
 	$res_test_categorie_existe = spip_query($sql_test_categorie_existe);
 	if (spip_num_rows($res_test_categorie_existe) == 0 && $new != 'oui'){
-		die(inc_commencer_page_dist(_T('echoppe:les_produits'), "redacteurs", "echoppe")._T('echoppe:pas_de_produit_ici').fin_page());
+		die(inc_commencer_page_dist(_T('echoppe:les_produits'), "redacteurs", "echoppe")._T('echoppe:pas_de_categorie_ici').fin_page());
 	}
 	
 	$sql_select_categorie = "SELECT cat.*, cat_desc.* FROM spip_echoppe_categories cat, spip_echoppe_categories_descriptions cat_desc WHERE cat.id_categorie = '".$id_categorie."' AND cat.id_categorie = cat_desc.id_categorie AND cat_desc.lang='".$lang_categorie."';";
@@ -102,9 +102,10 @@ function exec_echoppe_categorie(){
 							<b><a href="'.generer_url_ecrire('echoppe_categorie', 'id_categorie='.$categorie['id_categorie']).'">'.$categorie['titre'].'</a></b><br />
 							<div class="verdana1">'.couper($categorie['descriptif'],'150').'</div>
 						</div>
+						<div style="clear: both;"> </div>
 					</div>';
 			}
-			
+			echo '<br/><br/>';
 			$sql_les_produits = "SELECT ecp.*, epd.* FROM spip_echoppe_categories_produits ecp, spip_echoppe_produits_descriptions epd WHERE ecp.id_categorie = '".$id_categorie."' AND epd.id_produit = ecp.id_produit";
 			//echo $sql_les_produits;
 			$res_les_produits = spip_query($sql_les_produits);
@@ -112,9 +113,9 @@ function exec_echoppe_categorie(){
 					<div class="cadre-sous_rub" style="width: 100%; margin: 10px 0px 0px 0px;">
 						<div class="cadre-padding">';
 			while($les_produits = spip_fetch_array($res_les_produits)){
-				echo '<a href="'.generer_url_ecrire("echoppe_edit_produit","id_produit=".$les_produits['id_produit']).'" ><b>'.$les_produits['titre'].'</b></a><br />';
+				echo '<a href="'.generer_url_ecrire("echoppe_produit","id_produit=".$les_produits['id_produit']).'" ><b>'.$les_produits['titre'].'</b></a><br />';
 			}
-			echo '</div></div>';
+			echo '</div><div style="clear: both;"> </div></div>';
 			
 	/*}else{
 		echo _T('echoppe:pas_de_categorie_ici');

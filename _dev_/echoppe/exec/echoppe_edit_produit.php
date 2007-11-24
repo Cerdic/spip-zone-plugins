@@ -32,7 +32,11 @@ function exec_echoppe_edit_produit(){
 	//echo $contexte['new'];
 	
 	(spip_num_rows($res_description_produit) == 0 && $contexte['new'] != 'oui')?$contexte['new'] = 'ajout_description':$contexte['new'] = $contexte['new'];
-	(spip_num_rows($res_description_produit) > 0 && $contexte['new'] != 'oui')?$contexte['new'] = 'maj_descriptif':$contexte['new'] = $contexte['new'];
+	(spip_num_rows($res_description_produit) > 0 && $contexte['new'] != 'oui')?$contexte['new'] = 'maj_description':$contexte['new'] = $contexte['new'];
+	(is_array($le_produit))?$contexte = array_merge($contexte, $le_produit):$contexte = $contexte;
+	(is_array($description_produit))?$contexte = array_merge($contexte,$description_produit):$contexte = $contexte;
+	
+	$contexte['action'] = 'echoppe_sauver_produit';
 	
 	//echo $contexte['new'];
 	
@@ -48,15 +52,8 @@ function exec_echoppe_edit_produit(){
 	echo debut_droite(_T('echoppe:edition_de_produit'));
 	echo gros_titre(_T("echoppe:edition_de_produit"));
 	
-	(is_array($le_produit))?$contexte = array_merge($contexte, $le_produit):$contexte = $contexte;
-	(is_array($description_produit))?$contexte = array_merge($contexte,$description_produit):$contexte = $contexte;
-	
-	$contexte['action'] = 'echoppe_sauver_produit';
-	
 	echo recuperer_fond('fonds/echoppe_edit_produit', $contexte);
 
-
-	
 	echo fin_gauche();
 	echo fin_page();
 }

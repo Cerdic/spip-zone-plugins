@@ -1,0 +1,18 @@
+<div class='formuilaire edite_option'>
+	<form action="[(#ACTION|generer_url_action)]" method="post">
+		<fieldset>
+			<legend><:echoppe:information_de_l_option:></legend>#NEW	
+			<p>
+				<label for="textarea_1"><:echoppe:titre_ou_texte_de_l_option:></label>
+				<br/>
+				[(#TEXTE**|barre_textarea{20,40,#LANG})]
+			</p>
+			<p class="spip_bouton">
+				<input type="hidden" name="new" value="#NEW" /><input type="hidden" name="lang" value="#LANG_OPTION" />
+				[<input type="hidden" name="id_produit" value="(#ID_PRODUIT)" />]
+				[<input type="hidden" name="id_categorie" value="(#ID_CATEGORIE)" />]
+				<input type="submit" value="<:enregistrer:>"/>
+			</p>
+		</fieldset>
+	</form>
+</div>

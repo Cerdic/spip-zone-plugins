@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_echoppe_sauver_produit(){
 	$lang_produit = _request('lang_produit');
 	$titre = _request('titre');
-	$descriptif = _request('descriptif');
+	$descriptif = _request('description');
 	$texte = _request('texte');
 	$ps = _request('ps');
 	$id_categorie = _request('id_categorie');
@@ -14,7 +14,15 @@ function action_echoppe_sauver_produit(){
 	$ref_produit = _request('ref_produit');
 	$quantite_mini = _request('quantite_mini');
 	$tva = _request('tva');
-	
+	$date_debut = _request('annee_date_en_ligne').'-'._request('mois_date_en_ligne').'-'._request('jour_date_en_ligne').' 00:00:00';
+	$date_fin = _request('annee_date_retrait_ligne').'-'._request('mois_date_retrait_ligne').'-'._request('jour_date_retrait_ligne').' 00:00:00';
+	$poids = _request('poids');
+	$largeur = _request('largeur');
+	$longueur = _request('longueur');
+	$hauteur = _request('hauteur');
+	$colisage = _request('colisage');
+	$ref_produit = _request('ref_produit');
+	$prix_base_htva = _request('prix_base_htva');
 	
 	//echo $new.'<---';
 	
@@ -51,13 +59,13 @@ function action_echoppe_sauver_produit(){
 			break;
 		
 		default :
-			$sql_update_produit_descriptif = "UPDATE spip_echoppe_produits_descriptions SET titre = '".addslashes($titre)."', descriptif = '".addslashes($descriptif)."', texte = '".addslashes($texte)."', statut = '".$statut."' WHERE id_produit = '".$id_produit."' AND lang = '".$lang_produit."' ";
+			//$sql_update_produit_descriptif = "UPDATE spip_echoppe_produits_descriptions SET titre = '".addslashes($titre)."', descriptif = '".addslashes($descriptif)."', texte = '".addslashes($texte)."', statut = '".$statut."' WHERE id_produit = '".$id_produit."' AND lang = '".$lang_produit."' ";
 			//echo $sql_update_produit_descriptif;
-			$res_update_produit_descriptif = spip_query($sql_update_produit_descriptif);
+			//$res_update_produit_descriptif = spip_query($sql_update_produit_descriptif);
 			break;
 		
 	}
-	$redirect = generer_url_ecrire('echoppe', 'id_produit='.$id_produit,'&');
+	$redirect = generer_url_ecrire('echoppe_produit', 'id_produit='.$id_produit,'&');
 	//echo $redirect;
 	redirige_par_entete($redirect);
 }

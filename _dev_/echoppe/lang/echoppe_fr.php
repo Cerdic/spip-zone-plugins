@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'categorie_numero' => 'Cat&eacute;gorie num&eacute;ro :',
+'centimetre_racourcci' => 'cm.',
 'creer_nouvelle_categorie' => 'Cr&eacute;er une cat&eacute;gorie',
 'creer_un_ref_automatiquement' => 'En cr&eacute;er un automatiquement',
 'colisage' => 'Frais de colisage',
@@ -34,10 +35,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'edition_de_cetegorie'=>'&Eacute;dition d\'une cat&eacute;gorie',
 //'edition_langue' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
 'edition_de_produit' => '&Eacute;dition d\'un produit',
-'edition_donnees_globales' => '&Eacute;dition des donn&eacute;es globales.',
+'edition_donnees_globales' => '&Eacute;dition des donn&eacute;es globales',
+'euro' => '&euro;',
 
 // G
 'gerer_echoppe' => 'G&eacute;rer Echoppe',
+'gramme_racourcci' => 'gr.',
 
 // H
 'hauteur' => 'Hauteur',
@@ -46,8 +49,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'langue_editee' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
 'largeur' => 'Largeur',
 'les_categories' => 'Les cat&eacute;gories',
+'les_options_du_produit' => 'Les options de ce produit',
 'les_produits' => 'Les produits',
-'longeur' => 'Longeur',
+'longeur' => 'Longueur',
+
+// M
+'mettre_a_jour' => 'Mettre &agrave; jour',
 
 // N
 'nouveau_produit' => 'Cr&eacute;er un produit',
@@ -73,11 +80,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // T
 'texte'=>'Texte :',
 'titre_categorie' => 'Titre de la cat&eacute;gorie :',
+'titre_ou_texte_de_l_option' => 'Titre/Texte de l\'option',
+'information_de_l_option' => 'informations dur l\'option',
 'titre_produit' => 'Titre du produit :',
 'tva' => 'TVA',
 
 // U
 'unites' => 'Unit&eacute;(s)',
+
+// V
+'visualisation_d_un_produit' => 'Visualisation de',
 
 // X
 'xxx' => 'xxx'

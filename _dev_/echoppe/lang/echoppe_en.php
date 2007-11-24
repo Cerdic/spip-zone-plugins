@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'edition_de_cetegorie'=>'Category edition',
 'edition_langue' => 'Language edition',
 'edition_de_produit' => 'Product edition',
-'edition_donnees_globales' => 'Global datas edition'
+'edition_donnees_globales' => 'Global datas edition',
 
 // G
 'gerer_echoppe' => 'Administer Echoppe',
