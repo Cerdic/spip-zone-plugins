@@ -2,13 +2,13 @@
 
  * Reprise de regression fonctionnelle whosonline -> modeles/bloc_informations
  * Corrections erreurs de traduction
-
+ * Anonyme n'est pas un "auteur" :)
+ * On doit explicitement demander a ne pas paraitre dans l'annuaire pour ne pas y figurer
 
 2007-11-24  chryjs  <chryjs!@!free!.!fr>
 
  * Ajout traductions anglais
  * Mots cles dans formulaire/forum.html <-- est-ce bien utile ?
-
 
 2007-11-23  chryjs  <chryjs!@!free!.!fr>
 

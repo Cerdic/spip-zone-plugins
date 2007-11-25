@@ -364,13 +364,19 @@ global $table_prefix;
 // Calcule le nombre de messages par auteur et les classes par ordre decroissant
 function spipbb_nb_messages_groupe($id_bidon){
 	$aut_nb = array();
-	$result_auteurs = sql_select('id_auteur, auteur, COUNT(auteur) AS total','spip_forum',"statut='publie'",
+	$result_auteurs = sql_select('id_auteur, auteur, COUNT(auteur) AS total','spip_forum',
+							array("statut='publie'","id_auteur>0") , // WHERE
 							"auteur", // GROUPBY
 							"total desc", // ORDERBY
-							"10"  // LIMIT
+							"100" // LIMIT
 							);
-	while ($row = sql_fetch($result_auteurs)) {
-		$aut_nb[]=$row['auteur']."(".$row['total'].")";
+	$compte = 0;
+	while ($row = sql_fetch($result_auteurs) AND $compte++<10) {
+		$infos = spipbb_auteur_infos($row['id_auteur']);
+		if( $infos['annuaire_forum']!='non') {
+			// Peut apparaitre dans la liste
+			$aut_nb[]=$row['auteur']."(".$row['total'].")";
+		}
 	}
 
 	return join(", ",$aut_nb) ;
