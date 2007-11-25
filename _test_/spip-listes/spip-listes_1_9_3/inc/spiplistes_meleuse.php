@@ -327,7 +327,7 @@ function spiplistes_meleuse () {
 						else {  // email fin TXT /HTML  -----------------------------------------
 							$nb_emails_non_envoyes++; //desabonnes 
 							spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur=$id_auteur AND id_courrier="._q($id_courrier));	
-							$str_temp .= _L('pas abonne en ce moment');
+							$str_temp .= " "._T('spiplistes:pas_abonne_en_ce_moment');
 						} /* fin abo*/
 						spiplistes_log("MEL: ".$str_temp, SPIPLISTES_LOG_DEBUG);
 					}/* fin while */

@@ -351,6 +351,7 @@ et de recevoir les lettres d\'informations.',
 'nb_abos' => "qt.",
 
 //P
+'pas_abonne_en_ce_moment' => "n'est pas abonné",
 'par_date' => 'Par date d\'inscription',
 'patron_disponibles' => 'Patrons disponibles',
 'Patrons' => 'Patrons',
