@@ -30,6 +30,8 @@ include_spip ("inc/filtres");    /* email_valide() */
 include_spip ("inc/acces");      /* creer_uniqid() */
 include_spip('inc/charsets');
 
+include_spip('inc/plugin_globales_lib');
+include_spip('inc/spiplistes_api_globales');
 
 /* function privee
  * multi_queries mysql n'est pas en mesure de le faire en natif :-(
@@ -1143,10 +1145,7 @@ function spiplistes_format_est_correct ($format) {
 }
 
 function spiplistes_ecrire_metas() {
-	if(isset($GLOBALS['spip_version_code']) && $GLOBALS['spip_version_code']>=1.93) return(true);
-	include_spip("inc/meta");
-	ecrire_metas();
-	return(true);
+	return(__ecrire_metas());
 }
 
 // hack de chez hack. 
