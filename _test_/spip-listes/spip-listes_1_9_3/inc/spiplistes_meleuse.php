@@ -50,6 +50,7 @@ include_spip('inc/spiplistes_api_globales');
 */
 	
 function spiplistes_meleuse () {
+spiplistes_log("MEL: spiplistes_meleuse()", SPIPLISTES_LOG_DEBUG);
 
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/meta');
@@ -59,7 +60,7 @@ function spiplistes_meleuse () {
 	
 	include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 
-	// initialise les options
+	// initialise les options (préférences)
 	foreach(array(
 		'opt_simuler_envoi'
 		, 'opt_suspendre_meleuse'
@@ -79,11 +80,17 @@ function spiplistes_meleuse () {
 
 	$sql_result = spip_query($sql_query);
 
-	$nb_courriers =spip_num_rows($sql_result);
+	$nb_courriers = spip_num_rows($sql_result);
 	
+	// si meleuse suspendue, signale en log 
 	if($opt_suspendre_meleuse == 'oui') {
-		spiplistes_log("MEL: suspendu par admin", SPIPLISTES_LOG_DEBUG);
+		spiplistes_log("MEL: SUSPEND MODE !!!");
 		return(0 - $nb_courriers);
+	}
+
+	// signale en log si mode simulation
+	if($opt_simuler_envoi == 'oui') {
+		spiplistes_log("MEL: SIMULATION MODE !!!");
 	}
 
 	$meleuse_statut = "1";
@@ -329,13 +336,13 @@ function spiplistes_meleuse () {
 							spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur=$id_auteur AND id_courrier="._q($id_courrier));	
 							$str_temp .= " "._T('spiplistes:pas_abonne_en_ce_moment');
 						} /* fin abo*/
-						spiplistes_log("MEL: ".$str_temp, SPIPLISTES_LOG_DEBUG);
+						spiplistes_log("MEL: ".$str_temp);
 					}/* fin while */
 					
 					// si c'est un test on repasse en redac
 					if($is_a_test) {
 						spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_REDAC."',email_test='',total_abonnes=0 WHERE id_courrier=$id_courrier");
-						spiplistes_log('MEL: repasse en redac', SPIPLISTES_LOG_DEBUG);
+						spiplistes_log('MEL: repasse document en statut redac', SPIPLISTES_LOG_DEBUG);
 					}
 					$email_a_envoyer['texte']->SmtpClose();
 					$email_a_envoyer['html']->SmtpClose();

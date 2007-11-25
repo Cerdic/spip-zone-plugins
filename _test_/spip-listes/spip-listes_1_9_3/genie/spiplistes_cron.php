@@ -69,7 +69,7 @@ function cron_spiplistes_cron ($last_time) {
 spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
 
 	if($opt_suspendre_trieuse == 'oui') {
-		spiplistes_log("CRON: suspendu par admin", SPIPLISTES_LOG_DEBUG);
+		spiplistes_log("TRI: SUSPEND MODE !!!");
 		if($nb_listes) {
 			return(0 - $nb_listes);
 		}
