@@ -291,6 +291,8 @@ spiplistes_log("MEL: spiplistes_meleuse()", SPIPLISTES_LOG_DEBUG);
 		
 							if ($is_from_valide) {
 								$_url = generer_url_public('abonnement','d='.$cookie);
+								// le &amp; semble poser problème sur certains MUA. A suivre...
+								$_url = preg_replace(',(&amp;),','&', $_url);
 								switch($format_abo) {
 									case 'html':
 										$body =
