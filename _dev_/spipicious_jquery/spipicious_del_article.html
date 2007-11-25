@@ -1,0 +1,8 @@
+#HTTP_HEADER{Content-Type:text/html}
+<B_mots>
+<BOUCLE_mots(SPIP_SPIPICIOUS mots){id_auteur=#SESSION{id_auteur}}{id_article=#ENV{id_article}}>
+	#TITRE <a href="#" class="deletemot supprimer" id="mot-#ID_MOT" style="display:inline" title="<:spipicious:remove:>">&nbsp;</a><br />
+</BOUCLE_mots>
+</B_mots>
+	<p><:spipicious:no_tags_associes:></p>
+<//B_mots>

@@ -1,8 +1,8 @@
 <?php
-	
-	$GLOBALS['spipicious_base_version'] = 0.01;
-	
-	function spipicious_verifier_base(){
+
+	$GLOBALS['spipicious_base_version'] = 0.2;
+
+	function spipicious_upgrade(){
 		$version_base = $GLOBALS['spipicious_base_version'];
 		$current_version = 0.0;
 		if (   (!isset($GLOBALS['meta']['spipicious_base_version']) )
@@ -15,13 +15,18 @@
 				ecrire_meta('spipicious_base_version',$current_version=$version_base,'non');
 				echo "Installation des tables de spip.icio.us";
 			}
+			if($current_version<0.2){
+				spip_query("ALTER TABLE `spip_spipicious` ADD PRIMARY KEY (`id_mot`) ");
+				spip_query("ALTER TABLE `spip_spipicious` ADD KEY (`id_auteur`) ");	
+				spip_query("ALTER TABLE `spip_spipicious` ADD maj timestamp AFTER position ");
+				echo "spipicious update @ 0.2<br/>";
+				ecrire_meta('spipicious_base_version',$current_version=0.2,'non');
+			}
 			ecrire_metas();
 		}
 	}
 	
 	function spipicious_vider_tables() {
-		include_spip('base/spipicious');
-		include_spip('base/abstract_sql');
 		spip_query("DROP TABLE spip_spipicious");
 		effacer_meta('spipicious_base_version');
 		ecrire_metas();
@@ -34,11 +39,11 @@
 				return (isset($GLOBALS['meta']['spipicious_base_version']) AND ($GLOBALS['meta']['spipicious_base_version']>=$version_base));
 				break;
 			case 'install':
-				spipicious_verifier_base();
+				spipicious_upgrade();
 				break;
 			case 'uninstall':
 				spipicious_vider_tables();
 				break;
 		}
-	}	
+	}
 ?>

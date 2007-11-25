@@ -4,31 +4,36 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-   //
-   'add_tags' => 'Vos tags (ajout/ modification)',
+	// A
+	'add_tags' => 'Ajouter des tags',
 
-  // B
-  'by' => 'Par',
+	// B
+	'by' => 'Par',
 
-   // I
-  'identifier' => 'Pour ajouter des tags sur cet article, vous devez vous identifier',
+	// I
+	'identifier' => 'Pour ajouter des tags sur cet article, vous devez vous identifier',
    
-   // S
-  'spipicious' => "Spip.icio.us",
+	// N
+	'no_tags_associes' => 'Vous n\'avez pas de mot cl&eacute; associ&eacute;',
+	
+	// S
+	'spipicious' => "Spip.icio.us",
   
-    // T
-  'to' => "avec", 
-  
-  // W
-  'waiting' => 'recherche de vos tags',
-  
-  'administrateurs' => 'Les administrateurs',
-  'redacteurs' => 'Les r&eacute;dacteurs',
-  'visiteurs' => 'Les visiteurs',
-  'types_utilisateurs' => 'Qui a acc&egrave;s au formulaire ?',
-  'nom_groupe_tag' => 'Groupe de mots cl&eacute; associ&eacute;',
-  'waiting' => 'recherche de vos tags',
-  
+	// T
+	'to' => "avec", 
 
- 
+	// V
+	'vos_tags' => 'Vos tags (modification)',  
+
+	// W
+	'waiting' => 'recherche de vos tags',
+  
+	'administrateurs' => 'Les administrateurs',
+	'redacteurs' => 'Les r&eacute;dacteurs',
+	'visiteurs' => 'Les visiteurs',
+	'types_utilisateurs' => 'Qui a acc&egrave;s au formulaire ?',
+	'nom_groupe_tag' => 'Groupe de mots cl&eacute; associ&eacute;',
+	'waiting' => 'recherche de vos tags',
+	'remove' => 'Supprimer',
 );
+?>

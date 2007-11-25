@@ -25,8 +25,8 @@ function spipicious_affichage_final($page){
 		// attacher l'autocompleter
 		inp.each(function() {
 			var me = this;
-			var id_groupe = $("#select_groupe").val();
-			var id_article = $("#spipicious_id").val();
+			var id_groupe = jQuery("#select_groupe").val();
+			var id_article = jQuery("#spipicious_id").val();
 			jQuery(this)
 			.Autocomplete({
 				'source': '$urlselecteur'+'\x26id_article='+id_article+'\x26id_groupe='+id_groupe,
