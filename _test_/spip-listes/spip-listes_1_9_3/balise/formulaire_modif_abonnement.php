@@ -18,7 +18,7 @@ function balise_FORMULAIRE_MODIF_ABONNEMENT ($p) {
 
 function balise_FORMULAIRE_MODIF_ABONNEMENT_stat ($args, $filtres) {
 
-spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_stat () <<");
+spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_stat () <<", SPIPLISTES_LOG_DEBUG);
 
 	if(!$args[0]) {
 		$args[0]='formulaire_modif_abonnement';
@@ -28,7 +28,7 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_stat () <<");
 
 function balise_FORMULAIRE_MODIF_ABONNEMENT_dyn ($formulaire) {
 
-spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<");
+spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<", SPIPLISTES_LOG_DEBUG);
 
 	include_spip ("inc/meta");
 	include_spip ("inc/session");
@@ -39,8 +39,10 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<");
 	include_spip ("inc/acces");
 	include_spip ("inc/spiplistes_api");
 
-
-	global $confirm, $d, $list, $email_desabo;
+	$confirm = _request('confirm');
+	$d = _request('d');
+	$list = _request('list');
+	$email_desabo = _request('email_desabo');
 
 	$formulaire_cookie_affiche = $formulaire_affiche = $message_formulaire = $modif_affiche = $erreur = '';
 	

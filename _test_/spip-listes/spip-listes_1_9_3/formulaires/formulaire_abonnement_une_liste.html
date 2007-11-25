@@ -1,10 +1,21 @@
 <div class="formulaire_spip formulaire_inscription">
-[(#REM) 
-texte d'inscription en tant que rédacteur
-]
-[(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
+[(#REM)
+
+// formulaire_abonnement_une_liste.html
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+// Ce formulaire est appelé quand balise FORMULAIRE_ABONNEMENT avec un argument (listeN, ou N == id_liste)
+
+][(#REM)
+	================================
+	texte d'inscription en tant que rédacteur
+
+][(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
 <fieldset>
-<legend style="color:#000000"><:spiplistes:devenir_abonne:></legend>
+<legend style="color:#000"><:spiplistes:devenir_abonne:></legend>
 <strong><:spiplistes:devenir_redac:></strong>
 <div><:spiplistes:inscription_redacteurs:></div>
 <div style="margin-top:5px"><:form_forum_indiquer_nom_email:></div>
@@ -12,11 +23,12 @@ texte d'inscription en tant que rédacteur
 ]
 
 [(#REM) 
-texte d'inscription en tant que visiteur
-]
-[(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
+	================================
+	texte d'inscription en tant que visiteur
+
+][(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
 <fieldset>
-<legend style="color:#000000"><:spiplistes:devenir_abonne:></legend>
+<legend style="color:#000"><:spiplistes:devenir_abonne:></legend>
 <div><:spiplistes:inscription_visiteurs:></div>
 <div style="margin-top:5px"><:form_forum_indiquer_nom_email:></div>
 	[(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})
@@ -31,7 +43,7 @@ texte d'inscription en tant que visiteur
 [(#ENV{mode_login}|?{' ',''})
 	<form action="#SELF#spip-listes" method="post" class="lettre">
 ]
-		<BOUCLE_liste(LISTES) {statut=liste} {id_liste=#ENV{id_liste}}>
+		<BOUCLE_liste(LISTES) {statut IN 'liste', 'pub_mois'} {id_liste=#ENV{id_liste}}>
 			<fieldset style="margin-bottom:1em;">
 			<legend style="font-weight:bold;color:#000000">#TITRE</legend>
 			[(#ENV{mode_login}|?{' ',''})

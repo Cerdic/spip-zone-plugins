@@ -22,6 +22,7 @@ Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent
 
 //A
 'abo_1_lettre' => 'Lettre d\'information',
+'abonne_une_seule_liste_publique' => "Abonnement &agrave; la seule liste disponible ",
 'abonnement_0' => 'Abonnement',
 'abonnement'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information',
 'abonnement_bouton'=>'Modifier votre abonnement',
@@ -366,6 +367,7 @@ et de recevoir les lettres d\'informations.',
 'Prets_a_envoi' => "Pr&ecirc;ts &agrave; l'envoi",
 'Publies' => "Publi&eacute;s",
 'Pas_de_liste' => "Pas de liste",
+'aucune_liste_publique' => "Aucune liste de diffusion publique disponible.",
 'Pas_de_liste_en_auto' => "Pas de liste en envoi programm&eacute;s (chrono)",
 'Patron_du_tampon' => "Patron du tampon ",
 'Patron_de_pied_' => "Patron de pied ",

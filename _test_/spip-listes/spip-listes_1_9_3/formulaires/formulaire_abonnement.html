@@ -6,6 +6,10 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+][(#REM) 
+	================================
+	mot de passe oublié 
+
 ][(#ENV{oubli_pass}|=={oui}|?{' ',''})
 	<h2><:pass_mot_oublie:></h2>
 
@@ -28,10 +32,10 @@
 
 <div class="formulaire_spip formulaire_inscription">
 [(#REM) 
-	________________________
+	================================
 	texte d'inscription en tant que rédacteur
-]
-[(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
+
+][(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
 <fieldset>
 <legend style="color:#000"><:spiplistes:devenir_abonne:></legend>
 <strong><:spiplistes:devenir_redac:></strong>
@@ -41,10 +45,10 @@
 ]
 
 [(#REM) 
-	________________________
+	================================
 	texte d'inscription en tant que visiteur
-]
-[(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
+
+][(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
 <fieldset>
 <legend style="color:#000"><:spiplistes:devenir_abonne:></legend>
 <div><:spiplistes:inscription_visiteurs:></div>
@@ -56,26 +60,31 @@
 </fieldset>
 ]
 
-
 [<span style="color:red">(#ENV*{reponse_formulaire})</span>]
-
 
 [(#ENV{mode_login}|?{' ',''})
 	<form action="#SELF#spiplistes_formabo_a" method="post">
 ][(#REM) 
-	________________________
+	================================
 	liste des listes
-]
 
+]
 		<a name="spip-listes"></a>
+		[(#REM) 
+			================================
+			Si une seule liste en paramètre de la balise, ne liste que celle-ci
+		]
 		<BOUCLE_liste(LISTES) {statut IN 'liste', 'pub_mois'} {id_liste=#ENV{liste}} {0,(#ENV{mode_login}|?{1,0})}>
 			[<fieldset style="margin-bottom:1em;">
 			[<legend style="font-weight:bold;">(#TITRE)</legend>]
 			(#TEXTE)
 			</fieldset>]
 		</BOUCLE_liste>
-
 		
+		[(#REM) 
+			================================
+			Sinon liste complète des publiques
+		]
 		<B_listes>
 			<fieldset>
 			<legend style="color:#000">[(#TOTAL_BOUCLE|=={1}|?{
@@ -85,40 +94,52 @@
 		<BOUCLE_listes(LISTES) {statut IN 'liste', 'pub_mois'} {0,(#ENV{mode_login}|?{100,0})}>
 				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
 				<input type="hidden" name="list&#91;&#93;"  checked="checked" value="#ID_LISTE" />
+				<:spiplistes:abonne_une_seule_liste_publique:>: <strong>#TITRE</strong> [- <em>(#TEXTE|textebrut|couper{80})</em>]
 				]
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<div style="text-align:left; padding:0px 0px 4px 0px;clear:both">
-				<label><input type="checkbox" name="list&#91;&#93;"  [(#COMPTEUR_BOUCLE|=={1}|?{'checked="checked"',''})]  value="#ID_LISTE" />#TITRE</a></label></div>]
+				<label><input type="checkbox" name="list&#91;&#93;"  [(#COMPTEUR_BOUCLE|=={1}|?{'checked="checked"',''})]  value="#ID_LISTE" />
+				[<strong>(#TITRE)</strong>][ - <em>(#TEXTE|textebrut|couper{80})</em>]</a></label></div>]
 		</BOUCLE_listes>
 		[(#COMPTEUR_BOUCLE|!={1}|?{'<br />',''})]
 		</B_listes>
+			<:spiplistes:aucune_liste_publique:>
 			[(#ENV{mode_login}|?{' ',''})
 			<fieldset style="color:#000">
 			<legend><:spiplistes:abo_1_lettre:></legend>]
 		<//B_listes>
-		[(#ENV{mode_login}|?{' ',''})
+		
+[(#REM) 
+	================================
+	mode_login
+
+][(#ENV{mode_login}|?{' ',''})
 		<div>
 				<input name="suppl_abo" id="suppl_abo_html" value="html"  type="hidden" />
 				
-[(#ENV{acces_membres}|=={oui}|?{' ',''})
-				<div style="margin-top:5px"><label for="nom_inscription_" style="font-weight:bold;"><:form_pet_votre_nom:></label></div>
-				<input type="text" class="forml" style="width:12em" name="nom_inscription_" id="nom_inscription_" value="" size="30" style="clear:both;" />
-				]
 [(#REM) 
-	________________________
+	================================
+	acces_membres
+
+][(#ENV{acces_membres}|=={oui}|?{' ',''})
+				<div style="margin-top:0.5em;"><label for="nom_inscription_" style="font-weight:bold;"><:form_pet_votre_nom:></label></div>
+				<input type="text" class="forml" style="width:12em" name="nom_inscription_" id="nom_inscription_" value="" size="40" style="clear:both;" />
+][(#REM) 
+	================================
 	fin du formulaire
 ]
 			<div style="margin-top:5px">
-				<label for="mail_inscription_" style="font-weight:bold;"><:form_pet_votre_email:> :</label></div>
-				<input type="text" class="forml" style="width:12em;clear:both;" name="mail_inscription_" id="mail_inscription_" value="" size="30" />
-			<div>
-				<input name="desabo" id="suppl_abo_oui" value="non" checked type="radio" />
-				<label for="suppl_abo_oui"><:spiplistes:abonnement_0:></label>
+				<label style="font-weight:bold;"><:form_pet_votre_email:> :
+				<input type="text" class="forml" style="width:12em;clear:both;" name="mail_inscription_" value="" size="30" /></label>
 			</div>
 			<div>
-				<input name="desabo" id="suppl_abo_non" value="oui" type="radio" />
-				<label for="suppl_abo_non"><:spiplistes:desabonnement:></label>
+				<label><input name="desabo" id="suppl_abo_oui" value="non" checked type="radio" /><:spiplistes:abonnement_0:></label>
 			</div>
-		<div class="spip_bouton" style="text-align:right"><input type="submit" name="Valider" class="spip_bouton" value="<:bouton_valider:>" /></div>
+			<div>
+				<label><input name="desabo" id="suppl_abo_non" value="oui" type="radio" /><:spiplistes:desabonnement:></label>
+			</div>
+			<div style="text-align:right;height:1.4em;line-height:1.4em;">
+				<input type="submit" name="Valider" class="spip_bouton" value="<:bouton_valider:>" />
+			</div>
 		</div></fieldset></form>]
 </div>

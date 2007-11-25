@@ -2,8 +2,6 @@
 
 include_spip('base/spiplistes_tables');
 
-spip_log("spiplistes_mes_fonctions.php <<", SPIPLISTES_LOG_DEBUG);
-
 // Boucles SPIP-listes
 global $tables_principales,$exceptions_des_tables,$table_date;
 
@@ -12,11 +10,20 @@ global $tables_principales,$exceptions_des_tables,$table_date;
 // <BOUCLE(LISTES)>
 //
 function boucle_LISTES($id_boucle, &$boucles) {
-	spiplistes_log("boucle_LISTES() << ", SPIPLISTES_LOG_DEBUG);
-        $boucle = &$boucles[$id_boucle];
-        $id_table = $boucle->id_table;
-        $boucle->from[$id_table] =  "spip_listes";  
-        return calculer_boucle($id_boucle, $boucles);
+	global $table_des_tables;
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$type = $boucle->type_requete;
+	$id_table = $table_des_tables[$type];
+	if (!$id_table)
+	//      table hors SPIP
+		$boucle->from[$type] =  $type;
+	else {
+	// les tables declarees par spip ont un prefixe et un surnom
+		$boucle->from[$id_table] =  'spip_' . $type ;
+	}
+	
+	return (calculer_boucle($id_boucle, $boucles));
 }
 
 
