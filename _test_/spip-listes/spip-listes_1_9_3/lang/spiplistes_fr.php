@@ -320,7 +320,9 @@ et de recevoir les lettres d\'informations.',
 'mis_a_jour' => 'Mis &agrave; jour',
 'Modifier_un_courrier_:' => "Modifier un courrier :",
 'Modifier_ce_courrier' => "Modifier ce courrier",
-'Mode_simulation' => "Mode simulation",
+'mode_simulation' => "Mode simulation",
+'mode_simulation_info' => "Le mode simulation est activ&eacute;. La m&eacute;leuse fait semblant d'envoyer le courrier. 
+	En r&eacute;alit&eacute;, aucun courrier n'est exp&eacute;di&eacute;.",
 'Simuler_les_envois' => "Simuler les envois de courriers",
 'Mode_suspendre_trieuse' => "Suspendre le traitement des envois des listes de diffusion",
 'Suspendre_le_tri_des_listes' => "Cette option vous permet - en cas d'engorgement - de suspendre le traitement des 
@@ -421,6 +423,7 @@ liste.",
 'separateur_de_champ_' => "S&eacute;parateur de champ ",
 'separateur_tabulation' => "tabulation (<code>\\t</code>)",
 'separateur_semicolon' => "point-virgule (<code>;</code>)",
+'simulation_desactive' => "Mode simulation d&eacute;sactiv&eacute;.",
 
  //T
 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',

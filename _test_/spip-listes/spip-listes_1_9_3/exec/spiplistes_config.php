@@ -354,9 +354,9 @@ function exec_spiplistes_config () {
    	. "<label class='verdana2' for='opt_suspendre_meleuse'>"._T('spiplistes:Suspendre_lenvoi_des_courriers')."</label>\n"
 		. fin_cadre_relief(true)
 		//
-		. debut_cadre_relief("", true, "", _T('spiplistes:Mode_simulation'))
+		. debut_cadre_relief("", true, "", _T('spiplistes:mode_simulation'))
    	. "<input type='checkbox' name='opt_simuler_envoi' value='oui' id='opt_simuler_envoi' "
-			. ((__plugin_lire_key_in_serialized_meta('opt_simuler_envoi', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "") . " />\n"
+			. ((__plugin_lire_key_in_serialized_meta('opt_simuler_envoi', _SPIPLISTES_META_PREFERENCES) == "oui") ? "checked='checked'" : "") . " />\n"
    	. "<label class='verdana2' for='opt_simuler_envoi'>"._T('spiplistes:Simuler_les_envois')."</label>\n"
 		. fin_cadre_relief(true)
 		//

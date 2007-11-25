@@ -909,6 +909,22 @@ function spiplistes_boite_autocron ($return = false) {
 		}
 	}
 	
+	// Informe si mode simulation en cours
+	if($opt_simuler_envoi == 'oui') {
+		if(_request('opt_simuler_envoi')=='non') {
+			if($connect_id_auteur == 1) {
+				__plugin_ecrire_key_in_serialized_meta ('opt_simuler_envoi', $opt_simuler_envoi = 'non', _SPIPLISTES_META_PREFERENCES);
+				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:simulation_desactive')."</p>\n";
+			}
+		}
+		else {
+			$result .= spiplistes_boite_autocron_info(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_envoyer-24.png", true
+				, _T('spiplistes:Mode_simulation'), _T('bouton_annuler')
+				, _T('spiplistes:mode_simulation_info'), 'opt_simuler_envoi', _DIR_IMG_PACK."warning-24.gif"
+				);
+		}
+	}
+	
 	include_spip('genie/spiplistes_cron');
 	if($ii = cron_spiplistes_cron($time) > 0) { 
 	// le CRON n'a rien a faire. Pas de boite autocron
@@ -941,7 +957,7 @@ spiplistes_log("AUTOCRON nb courriers prets envoi $n", SPIPLISTES_LOG_DEBUG);
 			// message si simulation d'envoi	
 			.	(
 					($opt_simuler_envoi == 'oui') 
-					? "<div style='color:white;background-color:red;text-align:center;line-height:1.4em;'>"._T('spiplistes:Mode_simulation')."</div>\n" 
+					? "<div style='color:white;background-color:red;text-align:center;line-height:1.4em;'>"._T('spiplistes:mode_simulation')."</div>\n" 
 				: ""
 				)
 			;
