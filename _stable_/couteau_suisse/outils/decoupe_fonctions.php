@@ -57,6 +57,12 @@ function decouper_en_onglets_rempl($texte) {
 		$texte = str_replace(_decoupe_COMPATIBILITE,_decoupe_SEPARATEUR, $texte);
 	// si pas de balise, on sort
 	if (strpos($texte, '<')===false) return $texte;
+	// compatibilite avec la syntaxe de Pierre Troll
+	if (strpos($texte, '<onglet|')!==false) {
+		$texte = str_replace('<onglet|fin>', '</onglets>', $texte);
+		$texte = preg_replace(',<onglet\|debut\|titre=([^>]*)>\s*,', "<onglets>\\1\n\n", $texte);
+		$texte = preg_replace(',\s*<onglet\|titre=([^>]*)>\s*,', "\n\n++++\\1\n\n", $texte);
+	}
 	// il faut un callback pour analyser l'interieur du texte
 	return preg_replace_callback(',<onglets>(.*?)</onglets>,ms', 'onglets_callback', $texte);
 }

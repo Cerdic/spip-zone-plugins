@@ -22,7 +22,7 @@ jQuery(document).ready(function() {
 			jQuery(this).removeClass('hover')
 		}
 	);
-	bloc.attr('class','onglets_bloc');
+	bloc.attr('class','onglets_bloc').each(function(i) {this.id = 'ongl_'+i;});
 	jQuery('h2.onglets_titre').click(
 		function(e) {
 			var contenu = '#' + this.id;
@@ -30,6 +30,7 @@ jQuery(document).ready(function() {
 			jQuery(this).parent().parent().find('.selected').removeClass('selected');
 			jQuery(contenu).addClass('selected');
 			jQuery(this).addClass('selected');
+			return false;
 		}
 	);
   }
