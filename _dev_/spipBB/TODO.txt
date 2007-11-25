@@ -1,6 +1,8 @@
 Todo-list pour spipbb
 ---------------------
 
+-* Gestion des membres (efficace et rapide par tableau avec cases à cocher et filtres eventuels)
+
 -* ameliorer l'"administration" des forums (interface privee)
 -* nettoyer les squelettes
 -* lien entre auteur et la liste des messages qu'il a publie
