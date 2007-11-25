@@ -416,5 +416,13 @@ function sql_showtable($table, $table_spip = false, $serveur='')
 	return $f;
 } } // sql_showtable
 
+#------------------------------------------------------------#
+# calcul_bornes_pagination devient bornes_pagination
+# cf http://article.gmane.org/gmane.comp.web.spip.devel/43020/match=calcul_bornes_pagination
+#------------------------------------------------------------#
+if (!function_exists('bornes_pagination')) {
+function bornes_pagination($courante, $nombre, $max = 10) {
+	return calcul_bornes_pagination($courante, $nombre, $max);
+} }
 
 ?>

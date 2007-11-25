@@ -4,6 +4,7 @@
  * Corrections erreurs de traduction
  * Anonyme n'est pas un "auteur" :)
  * On doit explicitement demander a ne pas paraitre dans l'annuaire pour ne pas y figurer
+ * Compat 192/193 calcul_bornes_pagination devient bornes_pagination  cf http://article.gmane.org/gmane.comp.web.spip.devel/43020/match=calcul_bornes_pagination
 
 2007-11-24  chryjs  <chryjs!@!free!.!fr>
 
