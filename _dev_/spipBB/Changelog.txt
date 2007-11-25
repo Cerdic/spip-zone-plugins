@@ -1,3 +1,15 @@
+2007-11-25  chryjs  <chryjs!@!free!.!fr>
+
+ * Reprise de regression fonctionnelle whosonline -> modeles/bloc_informations
+ * Corrections erreurs de traduction
+
+
+2007-11-24  chryjs  <chryjs!@!free!.!fr>
+
+ * Ajout traductions anglais
+ * Mots cles dans formulaire/forum.html <-- est-ce bien utile ?
+
+
 2007-11-23  chryjs  <chryjs!@!free!.!fr>
 
  * Passage en fichier des stats... reste le bug de la double passe des pages SPIP pourquoi ?

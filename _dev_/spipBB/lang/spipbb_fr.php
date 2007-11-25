@@ -62,16 +62,16 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 
 // Les menus d'admin
 'admin_cat_01_general' => 'Administration',
-'admin_cat_spam' => 'Anti Spam',
 'admin_cat_outils' => 'Outils',
+'admin_cat_spam' => 'Anti Spam',
+'admin_action_01_configuration' => 'Configuration',
 'admin_action_02_etat' => 'Etat des forums',
 'admin_action_fromphpbb' => 'Import de PhpBB',
 'admin_action_gestion' => 'Gestion',
-'admin_action_01_configuration' => 'Configuration',
 'admin_action_swconfig' => 'Configuration',
 'admin_action_swforum' => 'Posts marqu&eacute;s',
-'admin_action_swwords' => 'Gestion des mots',
 'admin_action_swlog' => 'Log du spam',
+'admin_action_swwords' => 'Gestion des mots',
 'admin_action_ZZ_debug' => 'Debogage',
 
 // Interface d'admin
@@ -79,9 +79,9 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'admin_average_posts'=> 'Moyenne de messages/jour',
 'admin_average_users' => 'Moyenne d\'inscriptions/jour',
 'admin_config_prerequis' => 'Pr&eacute;requis',
-//'admin_config_spam_words' => '',
+'admin_config_spam_words' => 'Configuration de l\'anti-spam',
 'admin_config_spipbb' => 'Activation de SpipBB',
-'admin_config_spipbb_info' => 'Cliquer sur Non pour d&eacute;sactiver SpipBB',
+'admin_config_spipbb_info' => 'Cliquer sur Oui pour activer SpipBB',
 'admin_config_tables_ok' => 'Table de SpipBB correctement install&eacute;e',
 'admin_date_ouverture' => 'Date d\'ouverture',
 'admin_form_action' => 'Action',
@@ -96,7 +96,7 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'admin_forums_configuration' => 'Configuration de SpipBB',
 'admin_forums_titre' => 'Gestion des forums',
 'admin_infos' => 'SpipBB - Administration - R&eacute;capitulatif',
-//'admin_nombre_lignes_messages' =>'',
+'admin_nombre_lignes_messages' =>'Nombre de lignes de messages',
 'admin_plugin_requis_erreur' => 'Plugin requis manquant',
 'admin_plugin_requis_ok' => 'Plugin requis install&eacute;',
 'admin_sous_titre' => 'Acc&egrave;der au panneau d\'administration des forums avec SpipBB',
@@ -107,7 +107,7 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'admin_spip_mots_forums_ok' => 'Les mot-clefs associ&eacute;s aux forums sont bien activ&eacute;s dans SPIP',
 'admin_statistique' => 'Information',
 'admin_surtitre' => 'G&eacute;rer les forums',
-//'admin_temps_deplacement' => '',
+'admin_temps_deplacement' => 'Temps requis avant d&eacute;placement par un admin',
 'admin_titre' => 'Administration SpipBB',
 'admin_total_posts' => 'Nombre total de messages',
 'admin_total_users' => 'Nombre de membres',
@@ -172,6 +172,7 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 */
 'dans_forum' => 'dans le forum',
 'deconnexion_' => 'D&eacute;connexion ',
+'dernier_membre' => 'Dernier membre enregistr&eacute; : ',
 
 //E
 /*
@@ -189,7 +190,8 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 */
 
 'email' => 'E-mail',
-//'emploi' => '',
+'emploi' => 'Emploi',
+'en_ligne' => 'Qui est en ligne ?',
 'en_reponse_a' => 'En r&eacute;ponse au message',
 'en_rep_sujet_' => '&nbsp;:::&nbsp;Sujet : ',
 
@@ -262,7 +264,7 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'info_confirmer_passe' => 'Confirmer ce nouveau mot de passe&nbsp;:',
 'info_inscription_invalide' => 'Inscription impossible',
 'info_plus_cinq_car' => 'plus de 5 caract&egrave;res',
-//'infos_refus_suivi_sujet' => '',
+'infos_refus_suivi_sujet' => 'Ne plus suivre les sujets',
 //'infos_suivi_forum_par_inscription' => '',
 'inscription' => 'Inscription',
 'inscrit_s' => 'Inscrits',
@@ -276,7 +278,7 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'luiecrire' => 'Lui &eacute;crire',
 */
 
-'liste_inscrits' => 'Liste des Inscrits',
+'liste_inscrits' => 'Liste des membres',
 'localisation' => 'Localisation',
 'login' => 'Connexion',
 'loisirs' => 'Loisirs',
@@ -287,7 +289,6 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'maintenance' => 'N\'oubliez pas d\'enlever<br />\"Fermeture pour maintenance\",<br />
 				sur les Forums concern&eacute;s.',
 'maintenance_ferme' => 'Ferm&eacute; pour maintenance',
-'membre' => 'Membre',
 'membres_liste' => 'Liste des Membres',
 'membres_groupes' => 'Groupes d\'utilisateurs',
 'membres_profil' => 'Profil',
@@ -301,18 +302,20 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'mp' => 'Message Priv&eacute;',
 */
 
+'membres_inscrits' => 'membres inscrits',
+'membres_les_plus_actifs' => 'Membres les plus actifs',
 'message' => 'Message',
 'messages' => 'R&eacute;ponses',
 'message_s' => 'Messages',
 'messages_derniers' => 'Derniers Messages',
 'message_s_dpt' => 'Messages&nbsp;: ',
 'messages_voir_dernier' => 'Voir le dernier message',
-'messages_voir_dernier_s' => 'Voir derniers messages',
+'messages_voir_dernier_s' => 'Voir les derniers messages',
 'moderateur_dpt' => 'Mod&eacute;rateur&nbsp;: ', ## GAF 0.6
 'moderateurs' => 'Mod&eacute;rateur(s)',
 'moderateurs_dpt' => 'Mod&eacute;rateurs&nbsp;: ', ## 0.5
 'modif_parametre' => 'Modifiez vos param&egrave;tres',
-//'mot_' => '',
+'mot_' => 'mot',
 //'mot_groupe_moderation' => '',
 
 
@@ -434,7 +437,6 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'secteur'=> 'Secteur .. ',
 'secteur_forum'=> 'SECTEURS FORUMS',
 'selection_efface'=> 'Effacer la s&eacute;lection .. ',
-'sinscrire'=> 's\'enregistrer',
 'site' => 'Site web',
 'sousrub_salon'=> ' Sous-rubrique / Salon<br />',
 'sujet' => 'Sujet&nbsp;',
@@ -452,6 +454,7 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 's_abonner_a' => 'RSS . S\'abonner &agrave; : ',
 'signature_saisie_texte' => 'Saisir ici le texte de votre signature', ## GAF 0.6+
 'sign_tempo' => 'R&eacute;alis&eacute; avec <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
+'sinscrire'=> 'S\'inscrire',
 'site_propose' => 'Site propos&eacute;',
 'site_web' => 'Site web',
 'squelette_filforum' => 'Base de squelette pour les fils de discussions :',
@@ -469,6 +472,7 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'sujets' => 'Sujets',
 'sujet_s' => 'Sujets',
 'sujets_aucun' => 'Pas de sujet dans ce forum pour l\'instant',
+
 'sw_admin_can_spam' => 'Les admins sont autoris&eacute;s',
 'sw_admin_no_spam' => 'Pas de spam',
 'sw_ban_ip_titre' => 'Bannir l\'IP en m&ecirc;me temps',
@@ -504,9 +508,10 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'titre_cadre_signature_obligatoire' => '<b>Signature</b> [Obligatoire]<br />',
 'toutes_categories' => 'Toutes les cat&eacute;gories',
 'tout_apropos' => 'Tout &agrave; propos de',
-'total_messages' => 'Total messages',
 */
 'titre_spipbb' => 'SpipBB',
+'total_membres' => 'Nous avons un total de ',
+'total_messages_membres' => 'Nos membres ont post&eacute; un total de ',
 'tous_forums' => 'Tous les forums',
 
 
@@ -529,7 +534,7 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'votre_bio' => 'Courte biographie en quelques mots.',
 'votre_email' => 'Votre adresse email',
 'votre_nouveau_passe' => 'Nouveau mot de passe',
-'votre_signature' => 'Votre signature de message :', ## GAF 0.6
+'votre_signature' => 'Votre signature', ## GAF 0.6
 'votre_site' => 'Le nom de votre site',
 'votre_url_avatar' => 'URL de votre Avatar (http://...)', ## GAF 0.6
 'votre_url_site' => 'L\'adresse (URL) de votre site',

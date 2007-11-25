@@ -6,7 +6,6 @@ Todo-list pour spipbb
 -* lien entre auteur et la liste des messages qu'il a publie
 
 -* Bugs et autres elements non finis :
--** Installation par etapes
 -** Chaque fonction est soumise a config
 -** Utiliser les descriptions des mots cles (ajoutees dans lang/... mot_...)
 -** Gestion des annonces / postits / Fermes a tester /controler
@@ -25,7 +24,4 @@ Todo-list pour spipbb
 -** Bug ?? pourquoi la balise CALC_STATS... est elle calculee 2 fois de suite ?
 
 -* INTEGRATION des idees utilisees dans Gafospip -> Scoty | reste / manque
--** traductions
 -** Boutons d'admin sur l'interface publique ?
-
--** Il reste un bug qui empeche d'afficher la page de config du spam

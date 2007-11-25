@@ -360,6 +360,23 @@ global $table_prefix;
 	return $nb_mess;
 } // spipbb_nb_messages
 
+
+// Calcule le nombre de messages par auteur et les classes par ordre decroissant
+function spipbb_nb_messages_groupe($id_bidon){
+	$aut_nb = array();
+	$result_auteurs = sql_select('id_auteur, auteur, COUNT(auteur) AS total','spip_forum',"statut='publie'",
+							"auteur", // GROUPBY
+							"total desc", // ORDERBY
+							"10"  // LIMIT
+							);
+	while ($row = sql_fetch($result_auteurs)) {
+		$aut_nb[]=$row['auteur']."(".$row['total'].")";
+	}
+
+	return join(", ",$aut_nb) ;
+} // spipbb_nb_messages_groupe
+
+
 /*
  *   +----------------------------------+
  *    Nom du Filtre :    citation
@@ -394,28 +411,4 @@ function barre_forum_citer($texte, $lan, $rows, $cols, $lang='')
 	return barre_textarea($texte, $rows, $cols, $lang);
 } // barre_forum_citer
 
-/*
-function enreg_stat_forum($id_forum) 
-{
-	spip_log(__FILE__." enreg_stat_forum ".$id_forum,'spipbb');
-	if (empty($id_forum)) return '';
-	$row = sql_fetsel('visites','spip_visites_forums',"id_forum=$id_forum");
-	if (is_array($row) and (!empty($row['visites'])) ) {
-		$r = sql_updateq( "spip_visites_forums", array(
-					'date'	=>	date("Y-m-d"),
-					'visites' =>	$row['visites']+1
-					),
-				"id_forum=$id_forum");
-	}
-	else {
-		$spip_id = sql_insertq('spip_visites_forums', array(
-						'id_forum' => $id_forum,
-						'date' => date("Y-m-d"),
-						'visites' => "1" )
-					);
-	}
-
-	return ''; // "<p> spip_visites_forums $id_forum updated </p>"
-}
-*/
 ?>

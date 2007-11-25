@@ -124,6 +124,18 @@ td.auteur_post { min-width:12%; text-align:center; }
 
 td.dernier_msg { width:30%; text-align:center; font-size:0.9em; }
 
+td.actifs {
+background-image: url(img/top_users.gif);
+background-repeat: no-repeat;
+background-position: center;
+}
+
+td.enligne {
+background-image: url(img/whosonline.png);
+background-repeat: no-repeat;
+background-position: center;
+}
+
 td.forumferme {
 background-image: url(img/folder_lock_big.gif);
 background-repeat: no-repeat;

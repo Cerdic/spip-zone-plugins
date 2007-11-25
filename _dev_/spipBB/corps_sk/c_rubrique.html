@@ -4,9 +4,9 @@
 [(#REM) Ajouts : chryjs : CONFIG id_mot_ferme]
 #SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
 <BOUCLE_primale(RUBRIQUES){id_rubrique}>
+	<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}>
 <BOUCLE_rubrique_principal(RUBRIQUES){id_secteur}{racine}>
 	
-	<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}>
 	#SET{secteur,#ID_SECTEUR}
 
 	<p class="space_20"></p>
@@ -136,8 +136,13 @@
 	</BOUCLE_categories>
 	
 	</B_categories>
-	</table>
 	
+	</table>
+
+</BOUCLE_rubrique_principal>
+
+	[(#MODELE{bloc_informations}{id_rubrique})]
+
 		<INCLURE(session.php){fond=inc_piedforum}{id_rubrique=#ENV{id_rubrique}}>
 		
 		[(#REM) si visiteur non identifie : form login ]
@@ -147,7 +152,5 @@
 		&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
 		</div>
 		]
-
-</BOUCLE_rubrique_principal>
 
 </BOUCLE_primale>

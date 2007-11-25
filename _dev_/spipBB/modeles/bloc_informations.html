@@ -1,0 +1,52 @@
+﻿#CACHE{60}
+[(#REM) Plugin SpipBB - Licence GPL]
+[(#REM) Bloc d'informations a afficher en bas de page]
+
+<BOUCLE_forum_principal(RUBRIQUES){id_rubrique=#CONFIG{spipbb/id_secteur}}>
+<p class="space_10"></p>
+<table summary="bloc_informations" class="spipforum">
+		<tbody[ id="salon(#ID_RUBRIQUE)"]>
+		<tr>
+			<th colspan="2"><:spipbb:en_ligne:></th>
+		</tr>
+		<tr class="ligne_forum">
+			<td rowspan="2" class="etatforum enligne">
+				<span>&nbsp;</span>
+			</td>
+			<td class="titreforum">
+			<?php $total_messages=0 ?>
+			<BOUCLE_rub_main(RUBRIQUES){id_rubrique}>
+				<BOUCLE_sous_rub(RUBRIQUES){id_parent}>
+					<BOUCLE_forum(ARTICLES){id_rubrique}>
+					<BOUCLE_sujets(FORUMS){id_article}>
+					<BOUCLE_posts(FORUMS){id_thread}{plat}></BOUCLE_posts><?php $total_messages+=#TOTAL_BOUCLE ?><//B_posts>
+					</BOUCLE_sujets><//B_threads>
+					</BOUCLE_forum>
+					<BOUCLE_sous_sous_rub(BOUCLE_sous_rub)></BOUCLE_sous_sous_rub>
+				</BOUCLE_sous_rub>
+			</BOUCLE_rub_main>
+			<:spipbb:total_messages_membres:> <?php echo $total_messages ?> <:spipbb:message_s:><br />
+			<BOUCLE_auteurs(AUTEURS){tout}{statut IN 0minirezo,1comite,6forum}></BOUCLE_auteurs><:spipbb:total_membres:> #TOTAL_BOUCLE <:spipbb:membres_inscrits:><br /><//B_auteurs>
+			<B_dernier_auteur><:spipbb:dernier_membre:> <BOUCLE_dernier_auteur(AUTEURS){tout}{statut IN 0minirezo,1comite,6forum}{par id_auteur}{inverse}{0,1}><a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></BOUCLE_dernier_auteur><br /></B_dernier_auteur>
+			</td>
+		</tr>
+		<tr  class="ligne_forum">
+			<td class="dernmsg">
+				[(#TOTAL_AUTEURS_EN_LIGNE{'5 MINUTE'}) <:spipbb:membres_en_ligne:><br />]
+			</td>
+		</tr>
+		<tr>
+			<th colspan="2"><:spipbb:membres_les_plus_actifs:></th>
+		</tr>
+		<tr class="ligne_forum">
+			<td class="etatforum actifs">
+				<span>&nbsp;</span>
+			</td>
+			<td class="dernmsg">
+				[(#ID_RUBRIQUE|spipbb_nb_messages_groupe)]
+			</td>
+		</tr>
+		</tbody>
+</table>
+</BOUCLE_forum_principal>
+
