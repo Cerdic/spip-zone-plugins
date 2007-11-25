@@ -76,7 +76,6 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn() << ", SPIPLISTES_LOG_DEBUG);
 	
 	
 	// recuperation de la config
-		
 	$acces_abonne = lire_meta('abonnement_config');
 	$acces_membres = ($acces_abonne == 'membre') ? 'oui' : 'non';
 		
@@ -121,7 +120,7 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn() << ", SPIPLISTES_LOG_DEBUG);
 		}
 		else
 			$erreur = _T('pass_erreur_non_valide', array('email_oubli' => htmlspecialchars($email_oubli)));
-	}
+	} // end if $email_oubli
 	
 	// afficher le formulaire d'oubli du pass
 	if($oubli_pass == "oui") {
@@ -177,8 +176,6 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn() << ", SPIPLISTES_LOG_DEBUG);
 // Dans ces deux cas, renvoie un mail de confirmation.
 function formulaire_inscription($mail_inscription_, $type, $acces_membres, $formulaire) {
 	
-	$request_uri = $GLOBALS["REQUEST_URI"]."#abo";
-	
 	global
 		 $nom_inscription_
 		, $list
@@ -214,7 +211,6 @@ function formulaire_inscription($mail_inscription_, $type, $acces_membres, $form
 	if(!$id_fond) {$verify_source_fond = true;}
 	elseif($id_fond==$formulaire) $verify_source_fond = true;
 
-spiplistes_log("### : ->".$mail_inscription_, SPIPLISTES_LOG_DEBUG);
 	
 	if($mail_inscription_ && $verify_source_fond) {
 		$mail_valide = email_valide($mail_inscription_);	
@@ -222,6 +218,7 @@ spiplistes_log("### : ->".$mail_inscription_, SPIPLISTES_LOG_DEBUG);
 		
 	if ($mail_valide && $nom_inscription_) {
 	
+spiplistes_log("### : ->".$mail_inscription_, SPIPLISTES_LOG_DEBUG);
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE email="._q($mail_inscription_));
 	
 		//echo "<div class='reponse_formulaire'>";
@@ -400,7 +397,7 @@ spiplistes_log("inscription : ->".$mail_inscription_, SPIPLISTES_LOG_DEBUG);
 			}
 		} // end if abonne_existant
 	
-	}
+	} // end if ($mail_valide && $nom_inscription_)
 	else {
 		//Non c'è email o non è valida
 		// adresse email invalide ?

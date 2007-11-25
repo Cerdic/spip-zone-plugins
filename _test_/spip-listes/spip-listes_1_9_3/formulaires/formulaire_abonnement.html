@@ -98,12 +98,13 @@
 				]
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<div style="text-align:left; padding:0px 0px 4px 0px;clear:both">
-				<label><input type="checkbox" name="list&#91;&#93;"  [(#COMPTEUR_BOUCLE|=={1}|?{'checked="checked"',''})]  value="#ID_LISTE" />
+				<label><input type="checkbox" name="list&#91;&#93;" value="#ID_LISTE" />
 				[<strong>(#TITRE)</strong>][ - <em>(#TEXTE|textebrut|couper{80})</em>]</a></label></div>]
 		</BOUCLE_listes>
 		[(#COMPTEUR_BOUCLE|!={1}|?{'<br />',''})]
 		</B_listes>
-			<:spiplistes:aucune_liste_publique:>
+			[(#ENV{reponse_formulaire}|?{'',' '})
+				<:spiplistes:aucune_liste_publique:>]
 			[(#ENV{mode_login}|?{' ',''})
 			<fieldset style="color:#000">
 			<legend><:spiplistes:abo_1_lettre:></legend>]
@@ -135,9 +136,11 @@
 			<div>
 				<label><input name="desabo" id="suppl_abo_oui" value="non" checked type="radio" /><:spiplistes:abonnement_0:></label>
 			</div>
+			[(#ENV{d}|?{' ',''})
 			<div>
 				<label><input name="desabo" id="suppl_abo_non" value="oui" type="radio" /><:spiplistes:desabonnement:></label>
 			</div>
+			]
 			<div style="text-align:right;height:1.4em;line-height:1.4em;">
 				<input type="submit" name="Valider" class="spip_bouton" value="<:bouton_valider:>" />
 			</div>
