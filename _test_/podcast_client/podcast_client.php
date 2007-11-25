@@ -37,6 +37,7 @@
 
 		$data['enclosures_all'][] = $data['enc_enclosure'] ;	
 
+		// analyser le descriptif de l'article syndiqué
 		// trouver une image dans le descriptif (flickr)
 
 		// <img src="http://farm1.static.flickr.com/209/465887020_320ee68662_m.jpg" width="180" height="240" alt="Apéro Belleville 19/7/04" style="border: 1px solid #ddd;" />
@@ -86,7 +87,32 @@
 			$data['enclosures_all'][] = $data['enc_media'] ;
 			$data['enclosures_all'][] = $data['enc_thumbnail'] ;
 		}
+		
+		
+		//trouver une video utube ou dalilymotion
+		
+		# <embed width="480" height="390" src="http://www.dailymotion.com/swf/1mt6qo4nfRX3Np77L" 
+		# type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always">
+		
+		//var_dump($data['item']);
+		
+		//echo $item ;
+		if (preg_match(',(<embed[^>]*>),i',
+		$data['item'], $match)) {
+			$go=str_replace('media:content','mediacontent',$match[1]);
+			$data['enc_emb']['url'] = extraire_attribut($go, 'src');
+			$data['enc_emb']['duration'] = extraire_attribut($go, 'duration');
+			$data['enc_emb']['width'] = extraire_attribut($go, 'width');
+			$data['enc_emb']['height'] = extraire_attribut($go, 'height');
+			$data['enc_emb']['type'] = trim(extraire_attribut($go,'type'));
+			
+			//var_dump($data['enc_emb']);
+			$data['enclosures_all'][] = $data['enc_emb'] ;
 
+		}
+
+
+		
 //var_dump($data['item']);var_dump($data['descriptif']);var_dump($data['enclosures_all']);die("coucou");
 
 		/**/
