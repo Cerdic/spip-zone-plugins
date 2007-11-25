@@ -1,0 +1,26 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Feuille de style instable
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	[erational->http://www.erational.org]
+_ &#169; 2007 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	stable
+	</etat>
+	<description>
+un plugin gadget qui d&eacute;grade la feuille de style de votre site
+_ attention: peut provoquer des migraines visuelles   
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>cssinstable</prefix>
+	<pipeline>
+		<nom>insert_head</nom> 
+		<action>insert_head</action>
+		<inclure>cssinstable_pipelines_public.php</inclure>
+	</pipeline>
+</plugin>
