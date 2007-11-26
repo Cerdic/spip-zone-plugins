@@ -33,5 +33,17 @@ jQuery(document).ready(function() {
 			return false;
 		}
 	);
+	if(onglet_get) {
+		sel=jQuery('#onglets_titre_'+onglet_get);
+		sel.click();
+	}
   }
 });
+
+function get_onglet(url) {
+ tab=url.match(/[?&]onglet=([0-9]*)/);
+ if (tab==null) return false;
+ return tab[1];
+}
+
+var onglet_get = get_onglet(window.location.search);
