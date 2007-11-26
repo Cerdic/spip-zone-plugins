@@ -1,7 +1,7 @@
 2007-11-26  chryjs  <chryjs!@!free!.!fr>
 
- * OREDER BY doit etre un array !!!!
-
+ * ORDER BY doit etre un array !!!!
+ * Attention a ameliorer la gestion des champs extras
 
 2007-11-25  chryjs  <chryjs!@!free!.!fr>
 

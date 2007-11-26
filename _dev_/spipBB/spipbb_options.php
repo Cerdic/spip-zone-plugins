@@ -94,6 +94,15 @@ if (!defined("_DIR_SMILEYS_SPIPBB")) {
 # sur champ de type radio, mettre valeur par defaut en premier !
 
 $GLOBALS['champs_sap_spipbb'] = array(
+# Pour rajouter une entree de champ "extra" avec incription.html, dans spipbb il faut les rajouter ici
+# avec un exemple comme ci dessous
+//	"mon_champ_extra" => array(
+//		"info" => _L('mon explication sur le champ'),
+//		"sql" => "VALEUR DE CHAMP SQL SI ON UTILISE UNE TABLE SINON VIDE",
+//		"filtres_recup" => "filtre_a_passer_apres_saisie_sinono_vide",
+//		"extra" => "filtre_champ_extra|"."Titre du champ de saisie",
+//		"extra_proposes" => "tous" (ou la liste des profils concernes
+//	),
 	"date_crea_spipbb" => array(
 		"info" => _L('date de premiere saisie profil SpipBB'), ## petit texte infos pour SAP
 		"sql" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
