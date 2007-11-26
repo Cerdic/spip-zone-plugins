@@ -82,7 +82,6 @@ function Notifications_envoi($emails, $subject, $body) {
 	$emails = array_unique(array_filter(array_map('email_valide',array_map('trim', explode(',',$emails)))));
 	foreach ($emails as $email) {
 		$bodyc = $body;
-		var_dump($email);
 		if ($GLOBALS['notifications']['suivi']) {
 			$a = Notifications_creer_auteur($email);
 			if (is_array($a)
@@ -92,10 +91,7 @@ function Notifications_envoi($emails, $subject, $body) {
 
 			$bodyc .= "\n\n$url\n";
 		}
-
-	var_dump($bodyc);
-
-		#envoyer_mail($email, $subject, $bodyc);
+		envoyer_mail($email, $subject, $bodyc);
 	}
 }
 
