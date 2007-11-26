@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:notifications:Notifications:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inc-head}>
+<meta name="robots" content="none" />
+</head>
+
+<body class="page_forum">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Contenu : poster un message dans le forum ]
+    <div id="wrapper">
+    <div id="contenu">
+    
+        [(#REM) Fil d'Ariane ]
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+            &gt; <strong class="on"><:notifications:Notifications:></strong>
+
+        </div><!--#hierarchie-->
+
+        <div class="cartouche">
+            <h1><:notifications:Notifications:></h1>
+
+			<div class="chapo">
+			<p>Ceci est votre page personnalis&#233;e de suivi du site #NOM_SITE_SPIP.</p>
+			
+			<p>Vous pourrez (quand ce sera fonctionnel...) y retrouver tous vos messages de forum, obtenir un fil RSS des r&#233;ponses qui y seront apport&#233;es, choisir votre mode de notification, etc.</p>
+
+			</div>
+
+			<BOUCLE_perso(AUTEURS){id_auteur=#SESSION{id_auteur}}{tous}>
+
+
+			<dl>
+			<dt>
+			<div style="float:#LANG_RIGHT;" class="#EDIT{logo}">[(#LOGO_AUTEUR||image_reduire{64}|sinon{charger un logo})]</div>
+			<:info_nom:></dt>
+			<dd class="#EDIT{nom}"> #NOM</dd>
+			<dt><:info_email:></dt>
+			<dd class="#EDIT{email}"> #EMAIL</dd>
+			</dl>
+
+			</BOUCLE_perso>
+
+        </div>
+
+        <div class="menu articles">
+            <h2>Options :</h2>
+
+			<p>TODO: case à cocher pour ne plus recevoir de notifications</p>
+			<p>TODO: case à cocher sur chaque article/thread</p>
+			<p>TODO: changer d'email</p>
+
+			#SESSION{nom}
+
+			<B_forums>
+			#ANCRE_PAGINATION
+            <h2>Vos forums</h2>
+			[<p class="pagination">(#PAGINATION)</p>]
+			<ul>
+            <BOUCLE_forums(FORUMS) {id_auteur=#SESSION{id_auteur}}
+            {!par date_heure} {plat} {pagination}
+            >
+            <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_FORUM"[
+            title="(#TITRE|couper{80}|texte_backend)"]>[(#TEXTE|couper{80})]</a></li>
+            </BOUCLE_forums>
+            </ul>
+			[<p class="pagination">(#PAGINATION)</p>]
+			</B_forums>
+
+        </div>
+
+	</div><!--#contenu-->
+	</div><!--#wrapper-->
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}>
+        [(#REM) Timeline des forums ]
+        <B_forumstimeline>
+        <div class="menu timeline">
+        <h2>Vos forums, par date</h2>
+        <ul>
+         <BOUCLE_forumstimeline(FORUMS) {id_auteur=#SESSION{id_auteur}}
+            {!par date_heure} {plat}>[#GET{fermeul}<li>(#DATE|annee|unique)<ul>[(#SET{fermeul,</ul></li>})]]
+            [<li><a href="[(#SELF|parametre_url{debut_forums,#COMPTEUR_BOUCLE})]">(#DATE|affdate_court|unique)</a></li>
+	]</BOUCLE_forumstimeline>
+	#GET{fermeul}
+	</ul>
+	</div>
+	</B_forumstimeline>
+
+    </div><!--#navigation-->
+    
+    [(#REM) Menu de navigation laterale ]
+    <div id="extra">
+	&nbsp;
+    </div><!--#extra-->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!--#page-->
+</body>
+</html>

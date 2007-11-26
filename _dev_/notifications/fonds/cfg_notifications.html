@@ -121,6 +121,30 @@ Les &#233;v&#233;nements suivants peuvent d&#233;clencher une notification par e
 </fieldset>
 
 
+
+[(#REM) --------------- SUIVI PERSONNALISE ----------- ]
+<fieldset>
+<legend>
+	Suivi personnalis&#233;
+</legend>
+
+<label>
+<p><strong>Ajouter une URL de suivi personnalis&#233;</strong> dans chacun des emails de notification. &#192; partir de cette URL, l'utilisateur pourra configurer ses pr&#233;f&#233;rences individuelles de notification.</p>
+
+<p>Si vous activez cette option, chaque visiteur qui se connecte sur cet URL de suivi sera enregistr&#233; dans la table <code>spip_auteurs</code>, avec le statut <code>6visiteur</code>. Il pourra alors voir l'ensemble des messages qu'il a signés sur le forum, régler ses options de notification, etc.</p>
+
+
+<select name="suivi">
+		<option value="">Pas de suivi</option>
+		<option value="1"[ selected="(#ENV{suivi}|?{selected})"]>Suivi activ&#233;</option>
+	</select>
+</label>
+
+</p>
+</fieldset>
+
+
+
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
 <div>
 <input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
