@@ -248,6 +248,7 @@ function fromphpbb_init_metas($spiprubid)
 
 	$source_nr = intval(_request('fromphpbb_source'));
 	$filename = _request('fromphpbb_filename_'.$source_nr);
+	$tablename = _request('fromphpbb_table_'.$source_nr);
 	if ($filename) {
 		global $dbhost,$dbuser,$dbpasswd,$dbname,$table_prefix;
 		require($filename);
@@ -257,6 +258,20 @@ function fromphpbb_init_metas($spiprubid)
 		$spipbb_fromphpbb['phpdb'] = $dbname;
 		$spipbb_fromphpbb['phpbbroot'] = dirname($filename); // remove config.php
 		$spipbb_fromphpbb['PR'] = $table_prefix;
+	} else if ($tablename) {
+		// Meme base que spip
+		$f = _FILE_CONNECT ;
+		$handle = fopen ($f, "r");
+		$contents = fread ($handle, filesize ($f));
+		fclose ($handle);
+		$r=preg_match("#spip_connect_db\('([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)#",$contents,$params);
+
+		$spipbb_fromphpbb['phpbb_host'] = $params[1];
+		$spipbb_fromphpbb['phpbb_login'] = $params[3];
+		$spipbb_fromphpbb['phpbb_pass'] = $params[4];
+		$spipbb_fromphpbb['phpdb'] = $params[5];
+		$spipbb_fromphpbb['phpbbroot'] = _request('fromphpbb_table_path_'.$source_nr);
+		$spipbb_fromphpbb['PR'] = substr($tablename,0,-6); // enlever config du nom
 	} else {
 		$spipbb_fromphpbb['phpbb_host'] = _request('phpbb_host');
 		$spipbb_fromphpbb['phpbb_login'] = _request('phpbb_login');
@@ -281,7 +296,7 @@ function fromphpbb_init_metas($spiprubid)
 
 	// recuperation du secteur ou seront implantes les forums
 	select_spip_db();
-	$result = $sql_select('id_secteur','spip_rubriques', "id_rubrique='".$spipbb_fromphpbb['spiprubid']."'");
+	$result = sql_select('id_secteur','spip_rubriques', "id_rubrique='".$spipbb_fromphpbb['spiprubid']."'");
 	$row = sql_fetch($result) or die(_T('spipbb:fromphpbb_erreur_db_spip'));
 	$spipbb_fromphpbb['spip_id_secteur'] = $row['id_secteur'];
 
@@ -390,7 +405,7 @@ function migre_categories_forums() {
 							'statut_tmp'=>'publie')
 							);
 				$res .= "<p>Groupe $rub_name [ $spip_id ]</p>";
-				// memorise la relation entre les id de cat�gories et les rubriques
+				// memorise la relation entre les id de categories et les rubriques
 				$spipbb_fromphpbb['spiprub_from_catid'][$row['cat_id']] = $spip_id;
 			}
 			else {
@@ -411,7 +426,7 @@ function migre_categories_forums() {
 	
 	//
 	// transfert des forums
-	// 1 forum = 1 article dans la rubrique cat�gorie
+	// 1 forum = 1 article dans la rubrique categorie
 	//
 	select_phpbb_db();
 	$result = mysql_query("SELECT * FROM ".$spipbb_fromphpbb['PR']."forums",$spipbb_fromphpbb['phpbb_connect']) or

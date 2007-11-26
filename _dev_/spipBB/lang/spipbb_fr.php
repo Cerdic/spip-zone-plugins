@@ -145,6 +145,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fromphpbb_password' => 'Mot de passe&nbsp;:',
 'fromphpbb_prefix' => 'Pr&eacute;fixe des tables&nbsp;:',
 'fromphpbb_racine' => 'Chemin vers phpBB (avatars)&nbsp;:',
+'fromphpbb_table' => 'Table de configuration PhpBB trouv&eacute;e&nbsp;:',
 'fromphpbb_titre' => 'Import d\'un forum PhpBB',
 'fromphpbb_titre_etape' => 'Import d\'un forum PhpBB - &eacute;tape',
 

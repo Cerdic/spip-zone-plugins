@@ -140,6 +140,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fromphpbb_password' => 'Password:',
 'fromphpbb_prefix' => 'Tables prefix:',
 'fromphpbb_racine' => 'Path to phpBB (avatars):',
+'fromphpbb_table' => 'PhpBB config table found:',
 'fromphpbb_titre' => 'Import from a PhpBB forum',
 'fromphpbb_titre_etape' => 'Import from a PhpBB forum - step',
 

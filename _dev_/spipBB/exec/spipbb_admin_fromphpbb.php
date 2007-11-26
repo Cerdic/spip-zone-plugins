@@ -133,7 +133,7 @@ function exec_spipbb_admin_fromphpbb()
 // [fr] Genere le formulaire de saisie des parametres de migration
 // [en] Generates the form to fill with migration parameters
 // ------------------------------------------------------------------------------
-function spipbb_fromphpbb_formulaire($row=array())
+function spipbb_fromphpbb_formulaire($conf=array())
 {
 	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
@@ -204,17 +204,27 @@ function spipbb_fromphpbb_formulaire($row=array())
 				
 				// chryjs :le 25/11/07 il ne reste plus qu'a ajouter au formulaire et recuperer les infos de config a l'arrivee
 				
-				//if ($phpbbversion) echo $phpbbversion['config_value'];
-				
+				if ($phpbbversion) {
+					// on recupere le chemin vers les avatars
+					$avatar_path=sql_fetsel("config_value",$table_config,"config_name='avatar_path'");
+					$script_path=sql_fetsel("config_value",$table_config,"config_name='script_path'");
+					//echo $phpbbversion['config_value'];script_path
+					$contexte = array( 
+						'avatar_path'=>$script_path['config_value']."/".$avatar_path['config_value'],
+						'tablename'=>$table_config,
+						'key'=>$radio,
+						);
+					$liste_fichiers .= recuperer_fond("prive/spipbb_admin_fromphpbb_tables", $contexte) ;
+					$radio++;
+				}
 			} // on a trouve une table de meme config que phpbb_
 		}
 	}
 
-
 	$aider = charger_fonction('aider', 'inc');
 	$config = "";
-	$id_rubrique = $row['id_rubrique'];
-	$id_secteur = $row['id_secteur'];
+	$id_rubrique = $conf['id_rubrique'];
+	$id_secteur = $conf['id_secteur'];
 	$retour ="exec=spipbb_admin_fromphpbb";
 
 	include_spip('inc/editer_article');
