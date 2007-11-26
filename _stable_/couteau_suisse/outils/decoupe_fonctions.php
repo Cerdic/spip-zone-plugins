@@ -1,6 +1,9 @@
 <?php
 @define('_decoupe_NB_CARACTERES', 60);
 
+define('_onglets_CONTENU', '<div class="onglets_contenu"><h2 class="cs_onglet"><a href="#">');
+define('_onglets_DEBUT', '<div class="onglets_bloc_initial">');
+
 // aide le Couteau Suisse a calculer la balise #INTRODUCTION
 function decoupe_introduire($texte) {
 	if (defined('_decoupe_COMPATIBILITE'))
@@ -45,9 +48,9 @@ function onglets_callback($matches) {
 	foreach ($pages as $p) {
 		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $p, 2);
 		$t = array(trim(textebrut(nettoyer_raccourcis_typo($t[0]))), decoupe_safebalises($t[1]));
-		$contenus[] = '<div class="onglets_contenu"><h2 class="cs_onglet"><a href="#">'.$t[0].'</a></h2>'.$t[1].'</div>';
+		$contenus[] = _onglets_CONTENU.$t[0].'</a></h2>'.$t[1].'</div>';
 	}
-	return '<div class="onglets_bloc_initial">'.join('', $contenus).'</div>'._onglets_FIN;
+	return _onglets_DEBUT.join('', $contenus).'</div>'._onglets_FIN;
 }
 
 // fonction appellee sur les parties du texte non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
@@ -190,8 +193,24 @@ function cs_decoupe($texte){
 }
 
 // Compatibilite
-function decouper_en_pages($texte){
-	return cs_decoupe($texte);
+function decouper_en_pages($texte){ return cs_decoupe($texte); }
+
+// Balises pour des onglets en squelette
+function balise_ONGLETS_DEBUT($p) {
+	$arg = interprete_argument_balise(1,$p);
+	eval("\$arg=_onglets_DEBUT._onglets_CONTENU.$arg.'</a></h2>';");
+	$p->code = "'$arg'";
+	return $p;
+}
+function balise_ONGLETS_TITRE($p) {
+	$arg = interprete_argument_balise(1,$p);
+	eval("\$arg='</div>'._onglets_CONTENU.$arg.'</a></h2>';");
+	$p->code = "'$arg'";
+	return $p;
+}
+function balise_ONGLETS_FIN($p) {
+	$p->code = "'</div></div>'";
+	return $p;
 }
 
 ?>
