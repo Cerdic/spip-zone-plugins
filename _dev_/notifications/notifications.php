@@ -220,7 +220,6 @@ function notifications_forumprive($quoi, $id_forum) {
 		$msg = email_notification_forum($t, $email);
 		Notifications_envoi($email, $msg['subject'], $msg['body']);
 	}
-
 }
 
 
@@ -363,6 +362,30 @@ function notifications_forumposte($quoi, $id_forum) {
 		$notifications = charger_fonction('notifications', 'inc');
 		$notifications('forumvalide', $id_forum);
 	}
+
+/* TODO
+	// Envoyer un message de bienvenue/connexion au posteur du forum,
+	// dans le cas ou il ne s'est pas authentifie
+	// Souci : ne pas notifier comme ca si on est deja present dans le thread
+	// (eviter d'avoir deux notificaitons pour ce message qu'on a, dans 99,99%
+	// des cas, poste nous-memes !)
+	if (strlen(trim($t['email_auteur']))
+	AND email_valide($t['email_auteur'])
+	AND !$GLOBALS['visiteur_session']['id_auteur']) {
+		$msg = Notifications_jeuneposteur($t, $email);
+		if ($t['email_auteur'] == 'fil@rezo.net')
+			Notifications_envoi($t['email_auteur'], $msg['subject'], $msg['body']);
+	}
+*/
+
 }
+
+/*
+// Creer un mail pour les forums envoyes par quelqu'un qui n'est pas authentifie
+// en lui souhaitant la bienvenue et avec un lien suivi&p= de connexion au site
+function Notifications_jeuneposteur($t, $email) {
+	return array('test', 'coucou');
+}
+*/
 
 ?>
