@@ -367,7 +367,7 @@ function spipbb_nb_messages_groupe($id_bidon){
 	$result_auteurs = sql_select('id_auteur, auteur, COUNT(auteur) AS total','spip_forum',
 							array("statut='publie'","id_auteur>0") , // WHERE
 							"auteur", // GROUPBY
-							"total desc", // ORDERBY
+							array("total desc"), // ORDERBY
 							"100" // LIMIT
 							);
 	$compte = 0;

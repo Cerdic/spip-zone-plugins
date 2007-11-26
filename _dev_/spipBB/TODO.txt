@@ -27,3 +27,4 @@ Todo-list pour spipbb
 
 -* INTEGRATION des idees utilisees dans Gafospip -> Scoty | reste / manque
 -** Boutons d'admin sur l'interface publique ?
+-** Admin boutons RSS configuration ont disparu...

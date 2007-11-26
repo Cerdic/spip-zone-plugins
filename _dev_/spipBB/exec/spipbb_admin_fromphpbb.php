@@ -120,7 +120,7 @@ function exec_spipbb_admin_fromphpbb()
 	echo debut_boite_info(true);
 	echo  _T('spipbb:fromphpbb_titre');
 	echo fin_boite_info(true);
-	echo spipbb_admin_gauche($GLOBALS['spipbb']['id_secteur'],'spipbb_admin_fromphpbb');
+	echo spipbb_admin_gauche('spipbb_admin_fromphpbb');
 
 	echo creer_colonne_droite($id_rubrique,true);
 	echo debut_droite($id_rubrique,true);
@@ -170,6 +170,45 @@ function spipbb_fromphpbb_formulaire($row=array())
 			} // file_exists
 		} // while subdirs
 	} // while rootdirs
+
+	// on peut essayer de deviner aussi si phpbb est installe sur la meme base que spip ?
+	$struc_mini_config_phpbb=array(
+						"config_name"	=> "varchar(255)",
+						"config_value" 	=> "varchar(255)",
+						);
+	$req=sql_query("SHOW TABLES LIKE '%_config'");
+	$liste_config=array();
+	while ($row = sql_fetch($req)) {
+		// on compare la desc avec le mini puis la valeur
+		$liste_config[]=join("",$row);
+	}
+	
+	reset($liste_config);
+	while ( list(,$table_config) = each($liste_config) ) {
+		if ($table_config) {
+			//echo "coucou:".$table_config;
+			$structure=sql_showtable($table_config);
+			$idem=true;
+			while ( list($k,$v) = each($struc_mini_config_phpbb) AND $idem )
+			{
+				$param=preg_split("/\s/",$structure['field'][$k]);
+				$champ=strtolower($param[0]);
+				$champ=preg_replace("/^char(.*)/","varchar\\1",$champ); // char(x)==varchar(x) ?
+				$champ=preg_replace("#^timestamp.*#","timestamp",$champ); // timestamp(14)==timestamp ?
+				//$structure['field'][$k]=$champ;
+				$idem = ($struc_mini_config_phpbb[$k]==$champ);
+			}
+			if ($idem) { 
+				//echo $table_config; 
+				$phpbbversion=sql_fetsel("config_value",$table_config,"config_name='version'");
+				
+				// chryjs :le 25/11/07 il ne reste plus qu'a ajouter au formulaire et recuperer les infos de config a l'arrivee
+				
+				//if ($phpbbversion) echo $phpbbversion['config_value'];
+				
+			} // on a trouve une table de meme config que phpbb_
+		}
+	}
 
 
 	$aider = charger_fonction('aider', 'inc');

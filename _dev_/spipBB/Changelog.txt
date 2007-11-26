@@ -1,3 +1,8 @@
+2007-11-26  chryjs  <chryjs!@!free!.!fr>
+
+ * OREDER BY doit etre un array !!!!
+
+
 2007-11-25  chryjs  <chryjs!@!free!.!fr>
 
  * Reprise de regression fonctionnelle whosonline -> modeles/bloc_informations
