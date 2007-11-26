@@ -174,6 +174,16 @@ function action_spipbb_admin_reconfig()
 			$GLOBALS['spipbb']['lockmaint']=intval($lockmaint);
 			$reconf=true;
 		}
+		if (($affiche_bouton_abus=_request('affiche_bouton_abus'))
+			and $affiche_bouton_abus!=$GLOBALS['spipbb']['affiche_bouton_abus']) {
+			$GLOBALS['spipbb']['affiche_bouton_abus']=$affiche_bouton_abus;
+			$reconf=true;
+		}
+		if (($affiche_bouton_rss=_request('affiche_bouton_rss'))
+			and $affiche_bouton_rss!=$GLOBALS['spipbb']['affiche_bouton_rss']) {
+			$GLOBALS['spipbb']['affiche_bouton_rss']=$affiche_bouton_rss;
+			$reconf=true;
+		}
 		# scoty gaf_ecrireinstall 16/11/07 :  support_auteurs : table / extra/autres..
 		# => lieu de stockage des champs supplementaires auteurs
 			# petits controles prealable de : table

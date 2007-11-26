@@ -28,7 +28,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_action_ZZ_debug' => 'Debug',
 
 // Admin interface
+'admin_afficher_bouton_alerte_abus' => 'Show Abuse alert buttons',
+'admin_affichier_bouton_rss' => 'Show RSS buttons',
 'admin_age_forum' => 'Forum age Y/m',
+'admin_avatar_affiche' => 'Accept and shows the avatars (default is Yes after install)',
+'admin_avatar_taille_sujet' => 'Avatars\s size (in pixels) on the topics page',
+'admin_avatar_taille_contact' => 'Avatars\s size (in pixels) on the contact page',
+'admin_avatar_taille_profil' => 'Avatars\s size (in pixels) on the profile page',
 'admin_average_posts'=> 'Daily posts average',
 'admin_average_users' => 'Daily inscription average',
 'admin_config_prerequis' => 'Requirements',
@@ -47,8 +53,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_form_monter' => 'Up',
 'admin_form_sujets' => '&nbsp;',
 'admin_forums_configuration' => 'Configure SpipBB',
+'admin_forums_configuration_specifique' => 'Specific items',
+'admin_forums_configuration_avatar' => 'General configuration of avatars',
 'admin_forums_titre' => 'Forums admin',
 'admin_infos' => 'SpipBB - Admin - Summary',
+'admin_interface' => 'Public interface options',
 'admin_nombre_lignes_messages' =>'Number of lines of messages',
 'admin_plugin_requis_erreur' => 'missing required Plugin',
 'admin_plugin_requis_ok' => 'required Plugin installed',
@@ -291,6 +300,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //T
 'titre_spipbb' => 'SpipBB',
+'total_membres' => 'We have a total of ',
+'total_messages_membres' => 'Our members posted a total of ',
+'tous' => 'All',
 'tous_forums' => 'All forums',
 
 //V

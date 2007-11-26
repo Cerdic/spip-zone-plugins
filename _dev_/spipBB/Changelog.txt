@@ -2,6 +2,8 @@
 
  * ORDER BY doit etre un array !!!!
  * Attention a ameliorer la gestion des champs extras
+ * Ajout des boutons RSS en alerte abus + passage de avatar en page prive/
+ * Passage en 0.3.7 du aux metas
 
 2007-11-25  chryjs  <chryjs!@!free!.!fr>
 

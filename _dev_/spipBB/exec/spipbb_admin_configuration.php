@@ -74,7 +74,6 @@ function exec_spipbb_admin_configuration()
 	echo spipbb_admin_configuration($row);
 	if (spipbb_check_spip_config() and $GLOBALS['spipbb']['configure']=='oui') {
 		echo spipbb_config_infos_auteurs();
-		echo spipbb_config_avatars();
 	}
 	echo "</form>"; // integration formulaires ci-dessus orig Scoty : gaf_install
 	
@@ -136,6 +135,13 @@ function spipbb_admin_configuration()
 			'squelette_filforum' => $GLOBALS['spipbb']['squelette_filforum'],
 			'fixlimit' => $GLOBALS['spipbb']['fixlimit'],
 			'lockmaint' => $GLOBALS['spipbb']['lockmaint'],
+			'affiche_bouton_abus' => $GLOBALS['spipbb']['affiche_bouton_abus'],
+			'affiche_bouton_rss' => $GLOBALS['spipbb']['affiche_bouton_rss'],
+			'affiche_avatar' => $GLOBALS['spipbb']['affiche_avatar'],
+			'taille_avatar_suj' => $GLOBALS['spipbb']['taille_avatar_suj'],
+			'taille_avatar_suj' => $GLOBALS['spipbb']['taille_avatar_suj'],
+			'taille_avatar_cont' => $GLOBALS['spipbb']['taille_avatar_cont'],
+			'taille_avatar_prof' => $GLOBALS['spipbb']['taille_avatar_prof'],
 			);
 	$res = recuperer_fond("prive/spipbb_admin_configuration",$contexte) ;
 	spip_log('exec/spipbb_admin_configuration.php spipbb_admin_configuration() END','spipbb');
@@ -248,50 +254,5 @@ function spipbb_config_infos_auteurs()
 	$res .= fin_cadre_trait_couleur(true);
 	return $res;
 } // spipbb_config_infos_auteurs
-
-// ------------------------------------------------------------------------------
-#
-# gestion avatars
-#
-// adapte de scoty gaf_install
-// ------------------------------------------------------------------------------
-function spipbb_config_avatars()
-{
-	$options_a = array('oui','non');
-
-	$res  =debut_cadre_trait_couleur("",true,"",_L('Gestion des avatars, r&eacute;glage g&eacute;n&eacute;ral'));
-	$res .= "<table width='100%' cellpadding='2' cellspacing='0' border='0' align='center' class='verdana2'>\n";
-
-	# afficher avatars ?
-	$res .= "<tr><td valign='top'>"._L('Accepter et afficher les avatars (oui par d&eacute;faut en prem install)').
-		"</td><td width='5%'> </td><td width='25%'>\n";
-	if(!isset($GLOBALS['spipbb']['affiche_avatar'])) { $GLOBALS['spipbb']['affiche_avatar']='oui'; }
-	foreach($options_a as $val) {
-		$aff_checked = ($GLOBALS['spipbb']['affiche_avatar']==$val) ? 'checked=\"checked\"' : '' ;
-		$res .= "<input type='radio' name='affiche_avatar' value='".$val."' ".$aff_checked." />&nbsp;"._L($val)."<br />";
-	}
-	$res .= "</td></tr>\n";
-	$res .= "<tr><td colspan='3'>&nbsp;</td></tr>\n";
-	
-	# taille des avatars espace public
-	$res .= "<tr><td valign='top'>"._L('Taille avatars (en pixels) sur page sujets').
-		"</td><td width='5%'> </td><td width='25%'>\n".
-		"<input type='text' name='taille_avatar_suj' value='".($GLOBALS['spipbb']['taille_avatar_suj']?$GLOBALS['spipbb']['taille_avatar_suj']:50)."' size='4' />".
-		"</td></tr>\n";
-	$res .= "<tr><td valign='top'>"._L('Taille avatars (en pixels) sur page contact').
-		"</td><td width='5%'> </td><td width='25%'>\n".
-		"<input type='text' name='taille_avatar_cont' value='".($GLOBALS['spipbb']['taille_avatar_cont']?$GLOBALS['spipbb']['taille_avatar_cont']:80)."' size='4' />".
-		"</td></tr>\n";
-	$res .= "<tr><td valign='top'>"._L('Taille avatars (en pixels) sur page profil').
-		"</td><td width='5%'> </td><td width='25%'>\n".
-		"<input type='text' name='taille_avatar_prof' value='".($GLOBALS['spipbb']['taille_avatar_prof']?$GLOBALS['spipbb']['taille_avatar_prof']:80)."' size='4' />".
-		"</td></tr>\n";
-
-	$res .= "<tr><td colspan='3'>&nbsp;</td></tr>\n";
-	$res .= "</table>\n";
-	$res .= "<div align='right'><input type='submit' value='"._T('valider')."' class='fondo' /></div>\n";
-	$res .= fin_cadre_trait_couleur(true);
-	return $res;
-} // spipbb_config_avatars
 
 ?>

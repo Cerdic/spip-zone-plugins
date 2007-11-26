@@ -144,6 +144,8 @@ function spipbb_init_metas()
 	# autres parametres
 	$spipbb_meta['fixlimit'] = $old_meta['fixlimit'] ? $old_meta['fixlimit'] : 10;
 	$spipbb_meta['lockmaint'] = $old_meta['lockmaint'] ? $old_meta['lockmaint'] : 600;
+	$spipbb_meta['affiche_bouton_abus'] = $old_meta['affiche_bouton_abus'] ? $old_meta['affiche_bouton_abus'] : 'non';
+	$spipbb_meta['affiche_bouton_rss'] = $old_meta['affiche_bouton_rss'] ? $old_meta['affiche_bouton_rss'] : 'un';
 	$spipbb_meta['affiche_avatar'] = $old_meta['affiche_avatar'] ? $old_meta['affiche_avatar'] : 'oui';
 	$spipbb_meta['taille_avatar_suj'] = $old_meta['taille_avatar_suj'] ? $old_meta['taille_avatar_suj'] : 50;
 	$spipbb_meta['taille_avatar_cont'] = $old_meta['taille_avatar_cont'] ? $old_meta['taille_avatar_cont'] : 80;

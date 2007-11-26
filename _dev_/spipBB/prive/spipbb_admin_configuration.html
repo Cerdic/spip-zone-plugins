@@ -38,9 +38,9 @@
 	<tr>
 		<td class='verdana2'><:spipbb:admin_config_spipbb_info:></td>
 		<td>
-		<input type='radio' name='config_spipbb' value='oui' id='config_spipbb_1' [ checked="(#ENV{config_spipbb}|=={'oui'}|?{checked})"] /> <label for='config_spipbb_1'><:oui:></label>
+		<input type='radio' name='config_spipbb' value='oui' id='config_spipbb_1' [ checked="(#ENV{config_spipbb}|=={'oui'}|?{checked})"] /> <label for='config_spipbb_1'><:spipbb:oui:></label>
 		&nbsp;
-		<input type='radio' name='config_spipbb' value='non' id='config_spipbb_0' [ checked="(#ENV{config_spipbb}|=={'non'}|?{checked})"] /> <label for='config_spipbb_0'><:non:></label>
+		<input type='radio' name='config_spipbb' value='non' id='config_spipbb_0' [ checked="(#ENV{config_spipbb}|=={'non'}|?{checked})"] /> <label for='config_spipbb_0'><:spipbb:non:></label>
 		</td>
 	</tr>
 	</table>
@@ -178,10 +178,16 @@
 <label>
 </fieldset>
 
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:valider:>" class="fondo" /></div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_forums_configuration_specifique:>})]
+
 [(#REM) ------------------------ CONFIG ISSUE GAFOSPIP ------------------------ ]
 
 <fieldset>
-<legend>WAS GAFOSPIP</legend>
+<legend><:spipbb:admin_interface:></legend>
 <table cellpadding='3' cellspacing='1' border='0' width='100%'>
 <tr>
 	<td><:spipbb:admin_nombre_lignes_messages:></td>
@@ -195,6 +201,62 @@
 		<input type='text' name='lockmaint' value='#ENV{lockmaint}'' size='4' />
 	</td>
 </tr>
+<tr>
+	<td><:spipbb:admin_afficher_bouton_alerte_abus:></td>
+	<td>
+		<input type='radio' name='affiche_bouton_abus' value='oui' id='affiche_bouton_abus_1' [ checked="(#ENV{affiche_bouton_abus}|=={'oui'}|?{checked})"] /> <label for='affiche_bouton_abus_1'><:spipbb:oui:></label>
+		&nbsp;
+		<input type='radio' name='affiche_bouton_abus' value='non' id='affiche_bouton_abus_0' [ checked="(#ENV{affiche_bouton_abus}|=={'non'}|?{checked})"] /> <label for='affiche_bouton_abus_0'><:spipbb:non:></label>
+	</td>
+</tr>
+<tr>
+	<td><:spipbb:admin_affichier_bouton_rss:></td>
+	<td>
+		<input type='radio' name='affiche_bouton_rss' value='non' id='affiche_bouton_rss_0' [ checked="(#ENV{affiche_bouton_rss}|=={'non'}|?{checked})"] /> <label for='affiche_bouton_rss_0'><:spipbb:non:></label>
+		&nbsp;
+		<input type='radio' name='affiche_bouton_rss' value='un' id='affiche_bouton_rss_1' [ checked="(#ENV{affiche_bouton_rss}|=={'un'}|?{checked})"] /> <label for='affiche_bouton_rss_1'><:spipbb:un:></label>
+		&nbsp;
+		<input type='radio' name='affiche_bouton_rss' value='tous' id='affiche_bouton_rss_2' [ checked="(#ENV{affiche_bouton_rss}|=={'tous'}|?{checked})"] /> <label for='affiche_bouton_rss_1'><:spipbb:tous:></label>
+	</td>
+</tr>
+</table>
+</fieldset>
+
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:valider:>" class="fondo" /></div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_forums_configuration_avatar:>})]
+[(#REM) ------------------------ AVATARS ------------------------ ]
+<fieldset>
+<legend><:spipbb:admin_forums_configuration_avatar:></legend>
+<table cellpadding='3' cellspacing='1' border='0' width='100%'>
+<tr>
+	<td><:spipbb:admin_avatar_affiche:></td>
+	<td>
+		<input type='radio' name='affiche_avatar' value='oui' id='affiche_avatar_1' [ checked="(#ENV{affiche_avatar}|=={'oui'}|?{checked})"] /> <label for='affiche_avatar_1'><:spipbb:oui:></label>
+		&nbsp;
+		<input type='radio' name='affiche_avatar' value='non' id='affiche_avatar_0' [ checked="(#ENV{affiche_avatar}|=={'non'}|?{checked})"] /> <label for='affiche_avatar_0'><:spipbb:non:></label>
+	</td>
+</tr>
+<tr>
+	<td><:spipbb:admin_avatar_taille_sujet:></td>
+	<td>
+		<input type="text" name="taille_avatar_suj" value="#ENV{taille_avatar_suj}" />
+	</td>
+</tr>
+<tr>
+	<td><:spipbb:admin_avatar_taille_contact:></td>
+	<td>
+		<input type="text" name="taille_avatar_cont" value="#ENV{taille_avatar_cont}" />
+	</td>
+</tr>
+<tr>
+	<td><:spipbb:admin_avatar_taille_profil:></td>
+	<td>
+		<input type="text" name="taille_avatar_prof" value="#ENV{taille_avatar_prof}" />
+	</td>
+</tr>
 </table>
 </fieldset>
 
@@ -202,7 +264,7 @@
 } ?>
 
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
-<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:OK:>" class="fondo" /></div>
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:valider:>" class="fondo" /></div>
 
 <?php //fin spipbb prerequis == oui
 } ?>
