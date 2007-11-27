@@ -52,6 +52,7 @@ spip_log("exec_spiplistes_courrier_previsu()");
 	include_spip('inc/filtres');
 	include_spip('inc/lang');
 	include_spip('inc/spiplistes_api');
+	include_spip('inc/spiplistes_api_courrier');
 	
 	foreach(array('patron', 'titre', 'message', 'Confirmer', 'date', 'id_rubrique', 'id_rubrique', 'id_mot', 'id_courrier', 'id_liste'
 		, 'lire_base', 'format', 'plein_ecran') as $key) {
@@ -106,8 +107,8 @@ spip_log("exec_spiplistes_courrier_previsu()");
 
 					$message_texte = 
 						empty($message_texte) 
-						? version_texte($texte_html) 
-						: version_texte($texte_lien_courrier).$message_texte.version_texte($pied_page).version_texte($texte_editeur)
+						? spiplistes_version_texte($texte_html) 
+						: spiplistes_version_texte($texte_lien_courrier).$message_texte.spiplistes_version_texte($pied_page).spiplistes_version_texte($texte_editeur)
 						;
 					echo($message_texte);
 					exit(0);

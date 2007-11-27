@@ -41,6 +41,7 @@ function cron_spiplistes_cron ($last_time) {
 	include_spip('inc/spiplistes_api_globales');
 	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
+	include_spip('inc/spiplistes_api_courrier');
 
 spiplistes_log("CRON: cron_spiplistes_cron() <<", SPIPLISTES_LOG_DEBUG);
 		
@@ -126,7 +127,7 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
 		
 //spiplistes_log("CRON: Titre => $titre", SPIPLISTES_LOG_DEBUG);
 
-		$taille_courrier_ok = (spiplistes_strlen(version_texte($texte)) > 10);
+		$taille_courrier_ok = (spiplistes_strlen(spiplistes_version_texte($texte)) > 10);
 
 		if($taille_courrier_ok) {
 			include_spip('inc/filtres');

@@ -40,6 +40,7 @@ function exec_spiplistes_courrier_gerer () {
 	include_spip('inc/barre');
 	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
+	include_spip('inc/spiplistes_api_courrier');
 	include_spip('inc/spiplistes_api_presentation');
 	include_spip('inc/spiplistes_destiner_envoi');
 	include_spip('inc/spiplistes_naviguer_paniers');
@@ -234,7 +235,7 @@ function exec_spiplistes_courrier_gerer () {
 			}
 			else{
 				$alt_message_texte = _T('spiplistes:calcul_html');
-				$message_texte = version_texte($texte);
+				$message_texte = spiplistes_version_texte($texte);
 			}
 			// construit la boite de sélection destinataire
 			$boite_selection_destinataire = (($statut==_SPIPLISTES_STATUT_REDAC) || ($statut==_SPIPLISTES_STATUT_READY))
@@ -460,7 +461,7 @@ function exec_spiplistes_courrier_gerer () {
 				. " title='"._T('spiplistes:Apercu_plein_ecran')." ($alt_message_texte)' target='_blank'>\n"
 			. "<img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."oeil-16.png' alt='' width:'16' height='16' border='0' /></a><br />\n"
 			. "<textarea readonly='readonly' name='texte' rows='".(($spip_ecran == "large") ? 28 : 20)."' class='formo' cols='40' wrap='soft'>"
-			. version_texte(propre($message_texte))
+			. spiplistes_version_texte(propre($message_texte))
 			. "</textarea>\n"
 			. fin_cadre_couleur(true)
 			//

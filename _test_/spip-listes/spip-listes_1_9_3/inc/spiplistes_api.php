@@ -231,28 +231,7 @@ function spiplistes_desabonner_des_listes($id_auteur, $ids_liste) {
 	__exec_multi_queries($query);
 }
 
-//function spiplistes_propre($texte)
-// passe propre() sur un texte puis nettoye les trucs rajoutes par spip sur du html
-// ca s'utilise pour afficher un courrier dans l espace prive
-// on l'applique au courrier avant de confirmer l'envoi
-function spiplistes_propre($texte){
-	$temp_style = ereg("<style[^>]*>[^<]*</style>", $texte, $style_reg);
-	if (isset($style_reg[0])) 
-		$style_str = $style_reg[0]; 
-	else 
-		$style_str = "";
-	$texte = ereg_replace("<style[^>]*>[^<]*</style>", "__STYLE__", $texte);
-	//passer propre si y'a pas de html (balises fermantes)
-	if( !preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $texte) ) 
-	$texte = propre($texte); // pb: enleve aussi <style>...  
-	$texte = propre_bloog($texte); //nettoyer les spip class truc en trop
-	$texte = ereg_replace("__STYLE__", $style_str, $texte);
-	//les liens avec double début #URL_SITE_SPIP/#URL_ARTICLE
-	$texte = ereg_replace($GLOBALS['meta']['adresse_site']."/".$GLOBALS['meta']['adresse_site'], $GLOBALS['meta']['adresse_site'], $texte);
-	$texte = liens_absolus($texte);
-	
-	return $texte;
-}
+
 
 /* Demande d'abonnement à une liste d'un visiteur
  * NE VALIDE PAS L'ABONNEMENT : il faut confirmer
@@ -730,25 +709,6 @@ function spiplistes_tampon_html_get ($tampon_patron) {
 	return(recuperer_fond(_SPIPLISTES_PATRONS_TAMPON_DIR.$tampon_patron, $contexte_patron));
 }
 
-// donne contenu tampon au format texte (CP-20071013)
-// tampon_patron: nom du tampon (fichier, sans extension)
-// tampon_html: contenu html converti en texte si pas de contenu
-function spiplistes_tampon_texte_get ($tampon_patron, $tampon_html) {
-	$contexte_patron = array();
-	$result = false;
-	foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
-		$contexte_patron[$key] = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
-	}
-	$f = _SPIPLISTES_PATRONS_TAMPON_DIR.$tampon_patron;
-	if (find_in_path($f."_texte.html")){
-		$result = recuperer_fond($f, $contexte_patron);
-	}
-	if(!$result) {
-		$result = version_texte($tampon_html);
-	}
-	return($result);
-}
-
 // donne contenu lien_courrier au format html (CP-20071014)
 // lien_patron: nom du tampon (fichier, sans extension)
 function spiplistes_lien_courrier_html_get ($lien_patron, $url_courrier) {
@@ -768,7 +728,7 @@ function spiplistes_lien_courrier_texte_get ($lien_patron, $lien_html, $url_cour
 		$result = recuperer_fond($f, $contexte_patron);
 	}
 	if(!$result) {
-		$result = version_texte($lien_html);
+		$result = spiplistes_version_texte($lien_html);
 	}
 	return($result);
 }

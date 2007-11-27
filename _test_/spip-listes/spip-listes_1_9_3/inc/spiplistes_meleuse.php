@@ -52,11 +52,12 @@ include_spip('inc/spiplistes_api_globales');
 function spiplistes_meleuse () {
 spiplistes_log("MEL: spiplistes_meleuse()", SPIPLISTES_LOG_DEBUG);
 
-	include_spip('inc/spiplistes_api');
 	include_spip('inc/meta');
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
 	include_spip('inc/acces');
+	include_spip('inc/spiplistes_api');
+	include_spip('inc/spiplistes_api_courrier');
 	
 	include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 
@@ -183,9 +184,9 @@ spiplistes_log("MEL: spiplistes_meleuse()", SPIPLISTES_LOG_DEBUG);
 		
 			////////////////////////////////////		  
 			// Prepare la version texte
-			$objet_texte = version_texte($objet_html);
-			$page_texte = ($message_texte !='') ? $message_texte : version_texte($page_html);
-			$pied_page_texte = version_texte($pied_page_html);
+			$objet_texte = spiplistes_version_texte($objet_html);
+			$page_texte = ($message_texte !='') ? $message_texte : spiplistes_version_texte($page_html);
+			$pied_page_texte = spiplistes_version_texte($pied_page_html);
 			
 			////////////////////////////////////		  
 			// Ajoute lien tete de courrier
@@ -403,6 +404,18 @@ spiplistes_log("MEL: spiplistes_meleuse()", SPIPLISTES_LOG_DEBUG);
 	}
 	
 	return($meleuse_statut);
+} // end spiplistes_meleuse()
+
+/*
+*/
+function spiplistes_langue_liste ($id_liste) {
+	if(($id_liste = intval($id_liste)) > 0) {
+		$lang = spip_query("SELECT lang FROM spip_listes WHERE id_liste=$id_liste LIMIT 0,1");
+		$lang = spip_fetch_array($lang);
+		$lang = $lang['lang'];
+		return ($lang);
+	}
+	return(false);
 }
 
 

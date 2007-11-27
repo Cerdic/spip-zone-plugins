@@ -285,8 +285,6 @@ $spiplistes_items = array(
 		)
 	);
 
-	include_spip('inc/options_spip_listes');
-	
 	$spiplistes_version = lire_meta('spiplistes_version');
 	$spiplistes_base_version = lire_meta('spiplistes_base_version');
 	if(
