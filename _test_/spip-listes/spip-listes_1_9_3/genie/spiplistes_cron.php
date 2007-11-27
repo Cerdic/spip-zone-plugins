@@ -126,7 +126,7 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
 		
 //spiplistes_log("CRON: Titre => $titre", SPIPLISTES_LOG_DEBUG);
 
-		$taille_courrier_ok = (strlen(spip_listes_strlen(version_texte($texte))) > 10);
+		$taille_courrier_ok = (spiplistes_strlen(version_texte($texte)) > 10);
 
 		if($taille_courrier_ok) {
 			include_spip('inc/filtres');

@@ -156,10 +156,10 @@ function spiplistes_listes_items_get ($keys, $where=false, $limit=false) {
 	return(__table_items_get('spip_listes', $keys, $where, $limit));
 }
 
-//taille d'une chaine sans saut de lignes ni espaces
-function spip_listes_strlen($out){
-	$out = preg_replace("/(\r\n|\n|\r| )+/", "", $out);
-	return $out ;
+//taille d'une chaine sans saut de lignes ni espaces ni punct
+function spiplistes_strlen($out){
+	$out = preg_replace("/([[:space:]]|[[:punct:]])+/", "", $out);
+	return (strlen($out));
 }
 
 // desabonner des listes (CP-20071016)
