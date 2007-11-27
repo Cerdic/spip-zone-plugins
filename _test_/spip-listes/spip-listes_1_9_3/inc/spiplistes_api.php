@@ -733,39 +733,8 @@ function spiplistes_lien_courrier_texte_get ($lien_patron, $lien_html, $url_cour
 	return($result);
 }
 
-// donne contenu pied_page au format html (CP-20071014)
-// lien_patron: nom du tampon (fichier, sans extension)
-function spiplistes_pied_page_html_get ($pied_patron, $lang = "") {
-	if(empty($lang)) $lang = $GLOBALS['spip_lang'];
-	$contexte_patron = array('lang'=>$lang);
-	include_spip('public/assembler');
-	$result = recuperer_fond(_SPIPLISTES_PATRONS_PIED_DIR.$pied_patron, $contexte_patron);
-	return($result);
-}
 
-function spiplistes_onglets ($rubrique, $onglet, $return = false) {
-
-	$result = "";
-	
-	if ($rubrique == _SPIPLISTES_RUBRIQUE){
-		$result = ""
-			. "<br />"
-			. debut_onglet()
-			. onglet(_T('spiplistes:Casier_a_courriers'), generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE), $rubrique
-				, $onglet, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_hyperlink-mail-and-news-24.gif")
-			. onglet(_T('spiplistes:listes_de_diffusion_'), generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE), $rubrique
-				, $onglet, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif")
-			. onglet(_T('spiplistes:Suivi_des_abonnements'), generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE), $rubrique
-				, $onglet, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."addressbook-24.gif")
-			. fin_onglet()
-		;
-	}
-
-	if($return) return($result);
-	else echo($result);
-}
-
-// Petit formulaire dans la bote autocron (CP-20071018)
+// Petit formulaire dans la boite autocron (CP-20071018)
 function spiplistes_boite_autocron_form($titre, $option, $value) {
 	global $connect_id_auteur;
 	$result = "";

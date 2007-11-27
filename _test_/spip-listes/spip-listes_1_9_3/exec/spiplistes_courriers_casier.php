@@ -103,6 +103,7 @@ function exec_spiplistes_courriers_casier () {
 	include_spip ('inc/documents');
 	
 	include_spip('inc/spiplistes_api');
+	include_spip('inc/spiplistes_api_presentation');
 	include_spip('inc/spiplistes_naviguer_paniers');
 
 	spiplistes_log("spiplistes_afficher_pile_messages()2 <<", SPIPLISTES_LOG_DEBUG); 	
