@@ -1,8 +1,8 @@
 <?php
 
-if (!defined('_DIR_PLUGIN_WIDGET_CALENDAR')){
+if (!defined('_DIR_PLUGIN_WCALENDAR')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-	define('_DIR_PLUGIN_WIDGET_CALENDAR',(_DIR_PLUGINS.end($p)));
+	define('_DIR_PLUGIN_WCALENDAR',(_DIR_PLUGINS.end($p)));
 }
 
 function WCalendar_point_entree($suffixe){
@@ -153,12 +153,12 @@ function WCalendar_header_prive($flux) {
 		$trans_tbl = array_flip ($trans_tbl);
 		
 		// les includes JS statiques
-		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/SPIP.js' type='text/javascript'></script>\n";
-		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/dom.js' type='text/javascript'></script>\n";
-		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/event.js' type='text/javascript'></script>\n";
-		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/calendar.js' type='text/javascript'></script>\n";
-		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/calendar_custom.js' type='text/javascript'></script>\n";
-		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_WIDGET_CALENDAR . '/img_pack/calendar.css" type="text/css" />'. "\n";
+		$flux .= "<script src = '"._DIR_PLUGIN_WCALENDAR."/img_pack/SPIP.js' type='text/javascript'></script>\n";
+		$flux .= "<script src = '"._DIR_PLUGIN_WCALENDAR."/img_pack/dom.js' type='text/javascript'></script>\n";
+		$flux .= "<script src = '"._DIR_PLUGIN_WCALENDAR."/img_pack/event.js' type='text/javascript'></script>\n";
+		$flux .= "<script src = '"._DIR_PLUGIN_WCALENDAR."/img_pack/calendar.js' type='text/javascript'></script>\n";
+		$flux .= "<script src = '"._DIR_PLUGIN_WCALENDAR."/img_pack/calendar_custom.js' type='text/javascript'></script>\n";
+		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_WCALENDAR . '/img_pack/calendar.css" type="text/css" />'. "\n";
 
 		// les noms de mois et de jour selon les fichiers de langue :
 		$months_long = "";
@@ -187,9 +187,9 @@ function WCalendar_header_prive($flux) {
 		$days_short = substr($days_short,1);
 		$days_1char = substr($days_1char,1);
 		$start_weekday = 1;
-		$img_arrow_left = _DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/callt.gif";
-		$img_arrow_right = _DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/calrt.gif";
-		$img_close = _DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/calx.gif";
+		$img_arrow_left = _DIR_PLUGIN_WCALENDAR."/img_pack/callt.gif";
+		$img_arrow_right = _DIR_PLUGIN_WCALENDAR."/img_pack/calrt.gif";
+		$img_close = _DIR_PLUGIN_WCALENDAR."/img_pack/calx.gif";
 
 
 	// le JS dynamique d'init
