@@ -5,10 +5,13 @@
 
 include_spip("inc/plugin_globales_lib");
 
+define("_SPIPLISTES_PREFIX", "spiplistes");
+
 if (!defined('_DIR_PLUGIN_SPIPLISTES')) {
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_SPIPLISTES',(_DIR_PLUGINS.end($p)).'/');
 } 
+
 
 //nombre de processus d'envoi simultanes
 @define('_SPIP_LISTE_SEND_THREADS',1);
@@ -76,8 +79,6 @@ define("_SPIPLISTES_COURRIERS_STATUTS"
 define("_SPIPLISTES_CHARSETS_ALLOWED", "iso-8859-1;iso-8859-9;iso-8859-6;iso-8859-15;utf-8");
 define("_SPIPLISTES_CHARSET_ENVOI", "iso-8859-1"); // pour historique
 define("_SPIPLISTES_CHARSET_DEFAULT", _SPIPLISTES_CHARSET_ENVOI);
-
-define("_SPIPLISTES_PREFIX", "spiplistes");
 
 define("_SPIPLISTES_EXEC_PREFIX", _SPIPLISTES_PREFIX."_");
 define("_SPIPLISTES_EXEC_ABONNE_EDIT", _SPIPLISTES_EXEC_PREFIX."abonne_edit");

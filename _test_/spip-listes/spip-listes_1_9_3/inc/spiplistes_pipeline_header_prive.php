@@ -30,6 +30,7 @@ function spiplistes_header_prive ($flux) {
 		, _SPIPLISTES_EXEC_COURRIERS_LISTE
 		, _SPIPLISTES_EXEC_LISTES_LISTE
 		, _SPIPLISTES_EXEC_MAINTENANCE
+		, _SPIPLISTES_EXEC_CONFIGURE
 		, 'auteur_infos' // liste-listes
 		)
 		)

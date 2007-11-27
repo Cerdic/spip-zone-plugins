@@ -1,5 +1,5 @@
 <?php
-
+// genie/spiplistes_cron.php
 /******************************************************************************************/
 /* SPIP-listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email  pour SPIP.                                                                  */
@@ -25,7 +25,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/spiplistes_api_globales');
 
 	// Appelé en tache de fond (CRON SPIP)
 	
@@ -38,10 +37,12 @@ include_spip('inc/spiplistes_api_globales');
 
 function cron_spiplistes_cron ($last_time) {
 	
+	include_spip('inc/utils');
+	include_spip('inc/spiplistes_api_globales');
 	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
 
-//spiplistes_log("CRON: cron_spiplistes_cron() <<", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("CRON: cron_spiplistes_cron() <<", SPIPLISTES_LOG_DEBUG);
 		
 	$current_time = time();
 
@@ -174,11 +175,13 @@ spiplistes_log("CRON: envoi mail nouveautes : pas de nouveautes", SPIPLISTES_LOG
 		return(spiplistes_meleuse());
 	}
 	return ($last_time); 
-}
+} // cron_spiplistes_cron()
 
 // SPIP 193 ?
 
 function genie_spiplistes_cron ($last_time) {
+	include_spip('inc/spiplistes_api_globales');
+spiplistes_log("CRON: genie_spiplistes_cron() <<", SPIPLISTES_LOG_DEBUG);
 	cron_spiplistes_cron ($last_time);
 }
 

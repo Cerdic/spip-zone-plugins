@@ -14,6 +14,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+if(defined("_PGL_PLUGIN_GLOBALES_LIB") && _PGL_PLUGIN_GLOBALES_LIB) return;
 define("_PGL_PLUGIN_GLOBALES_LIB", true);
 
 include_spip("inc/plugin");
@@ -222,7 +223,7 @@ if(!function_exists('__plugin_boite_meta_info')) {
 				}
 			}
 			if(!empty($result)) {
-				$result = "<ul style='margin:0;padding:0 1ex;list-style: none;text-align: $spip_lang_left;' class='verdana2'>$result</ul>";
+				$result = "<ul style='margin:0;padding:0 1ex;list-style: none;text-align: $spip_lang_left;' class='verdana2 meta-info-liste'>$result</ul>";
 			}
 		}
 		return($result);

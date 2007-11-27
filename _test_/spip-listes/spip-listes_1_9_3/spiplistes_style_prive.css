@@ -80,3 +80,8 @@ ul.liste-format, ul.liste-format-desabo {
 ul.liste-format li, ul.liste-format-desabo li {
 	display:block;
 }
+
+/* supprimes les <p> ajoutés aux infos par 193 */
+ul.meta-info-liste p {
+	display:inline;
+}
