@@ -153,8 +153,16 @@ function spipbb_admin_configuration()
 // ------------------------------------------------------------------------------
 function spipbb_check_spip_config() {
 	$res=array();
-	// utiliser mot cles
+	// Les forums de SPIP sont ils actives ????????
+	if ( $GLOBALS['meta']['forums_publics']!='non' ) {
+		$res['forums_publics']= array( 'etat'=>true, 'message'=>_T('spipbb:admin_spip_forums_ok'));
+		$resultat=_T('spipbb:admin_spip_forums_ok');
+	} else {
+		$res['forums_publics']= array( 'etat'=>true, 'message'=>_T('spipbb:admin_spip_forums_erreur'));
+		$resultat=_T('spipbb:admin_spip_forums_erreur');
+	}
 
+	// utiliser mot cles 
 	// mots_cles_forums articles_mots + mots_cles_forums
 	if ( $GLOBALS['meta']['articles_mots']=='oui' ) {
 		$res['articles_mots']= array( 'etat'=>true, 'message'=>_T('spipbb:admin_spip_mots_cles_ok'));

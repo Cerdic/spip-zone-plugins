@@ -1,10 +1,14 @@
+2007-11-27  chryjs  <chryjs!@!free!.!fr>
+
+ * Controler l'activation des forums public comme precondition a l'activation !
+
 2007-11-26  chryjs  <chryjs!@!free!.!fr>
 
  * ORDER BY doit etre un array !!!!
  * Attention a ameliorer la gestion des champs extras
  * Ajout des boutons RSS en alerte abus + passage de avatar en page prive/
  * Passage en 0.3.7 du aux metas
- * Import à partir de base pour phpbb
+ * Import a partir de base pour phpbb
 
 2007-11-25  chryjs  <chryjs!@!free!.!fr>
 
@@ -77,7 +81,7 @@
  * Controle de l'insertion de mot de spam (pas de doublons)
  * Supprimer n'est pas bienvenue dans la gestion des categories et forums
  * forum_insert : ajout filtre mots clés retenus lors de l'enreg (passage en gras spip {{ }} )
- * Ajout ban list et filtrage à l'inscription
+ * Ajout ban list et filtrage a l'inscription
 
 2007-11-11  chryjs  <chryjs!@!free!.!fr>
 
