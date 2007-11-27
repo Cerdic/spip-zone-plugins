@@ -94,7 +94,7 @@ function Agenda_action_update_liste_mots($id_evenement,$liste_mots){
 	// suppression des mots obsoletes
 	$cond_in = "";
 	if (count($liste_mots))
-		$cond_in = "AND " . calcul_mysql_in('id_mot', implode(",",$liste_mots), 'NOT');
+		$cond_in = "AND " . sql_in('id_mot', $liste_mots, 'NOT');
 	spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement="._q($id_evenement)." ".$cond_in);
 	// ajout/maj des nouveaux mots
 	foreach($liste_mots as $id_mot){
@@ -167,7 +167,7 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 		// les mots cles : par groupes
 		$res = spip_query("SELECT * FROM spip_groupes_mots WHERE evenements='oui' ORDER BY titre");
 		$liste_mots = array();
-		while ($row = spip_fetch_array($res,MYSQL_ASSOC)){
+		while ($row = sql_fetch($res)){
 			$id_groupe = $row['id_groupe'];
 			$id_mot_a = _request("evenement_groupe_mot_select_$id_groupe",$c); // un array
 			if (is_array($id_mot_a) && count($id_mot_a)){

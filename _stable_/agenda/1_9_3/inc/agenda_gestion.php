@@ -64,7 +64,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 		$out .= "<div class='liste liste-evenements'>";
 		$out .= "<table width='100%' cellpadding='3' cellspacing='0'>";
 		$table = array();
-		while ($row = spip_fetch_array($result,MYSQL_ASSOC)) {
+		while ($row = sql_fetch($result)) {
 			$vals = array();
 			$id_evenement = $row['id_evenement'];
 			$titre = typo($row['titre']);
@@ -361,7 +361,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	// donne un select
 	$out .=  "<div class='agenda_mots_cles'>";
 	$res = spip_query("SELECT * FROM spip_groupes_mots WHERE evenements='oui' ORDER BY titre");
-	while ($row = spip_fetch_array($res,MYSQL_ASSOC)){
+	while ($row = sql_fetch($res)){
 		$id_groupe = $row['id_groupe'];
 		$multiple = ($row['unseul']=='oui')?"size='4'":"multiple='multiple' size='4'";
 
@@ -380,7 +380,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 		$select .= "\n<option value='x' style='font-variant: small-caps;' >".supprimer_numero($row['titre'])."</option>";
 
 		$res2= spip_query("SELECT * FROM spip_mots WHERE id_groupe="._q($id_groupe)." ORDER BY titre");
-		while ($row2 = spip_fetch_array($res2,MYSQL_ASSOC)){
+		while ($row2 = sql_fetch($res2)){
 			$id_mot = $row2['id_mot'];
 			$titre = typo($row2['titre']);
 			$select .= my_sel($id_mot, "&nbsp;&nbsp;&nbsp;$titre", in_array($id_mot,$id_mot_select)?$id_mot:0);
