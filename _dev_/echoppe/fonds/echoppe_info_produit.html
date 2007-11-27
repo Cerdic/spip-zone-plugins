@@ -1,17 +1,19 @@
-<B_LeProduit>
+<div style="text-align: center;">
+	<B_LeProduit>
 
-<BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS){id_produit}>
-	<div style="font-weight:bold;text-align: center; text-transform : uppercase;"><:echoppe:produit_numero:></div>
-	<div style="font-weight:bold;text-align: center;" class="spip_xx-large">#ID_PRODUIT</div>
-	<div style="font-size: 10;text-align: center;"><:echoppe:derniere_modification:> : <br />
-	[<b>(#MAJ|affdate|sinon{<:echoppe:pas_encore_modifie:>})</b></div>]
-	<br />
-	<:echoppe:editer_version:><br />
-	<BOUCLES_LesLdescriptions(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS){id_produit}>
-		<a href="?exec=echoppe_edit_produit&id_produit=#ID_PRODUIT&lang_produit=#LANG_PRODUIT"><:echoppe:version:> [(#LANG_PRODUIT|sinon{<:echoppe:par_defaut:>})]</a>
-	</BOUCLES_LesLdescriptions>
-</BOUCLE_LeProduit>
+	<BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS){id_produit}>
+		<div style="font-weight:bold;text-align: center; text-transform : uppercase;"><:echoppe:produit_numero:></div>
+		<div style="font-weight:bold;text-align: center;" class="spip_xx-large">#ID_PRODUIT</div>
+		<div style="font-size: 10;text-align: center;"><:echoppe:derniere_modification:> : <br />
+		[<b>(#MAJ|affdate|sinon{<:echoppe:pas_encore_modifie:>})</b></div>]
+		<br />
+		<:echoppe:edition_de_la_version:><br />
+		<BOUCLES_LesLdescriptions(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS){id_produit}>
+			<strong><a href="?exec=echoppe_edit_produit&id_produit=#ID_PRODUIT&lang_produit=#LANG_PRODUIT">[(#LANG_PRODUIT|sinon{<:echoppe:par_defaut:>})]</a></strong>
+		</BOUCLES_LesLdescriptions>
+	</BOUCLE_LeProduit>
 
-</B_LeProduit>
-<:echoppe:pas_de_produit_ici:>
-<//B_LeProduit>
+	</B_LeProduit>
+	<:echoppe:pas_de_produit_ici:>
+	<//B_LeProduit>
+</div>

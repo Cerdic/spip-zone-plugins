@@ -42,6 +42,10 @@ function exec_echoppe_produit(){
 		echo inc_commencer_page_dist($contexte['titre'], "redacteurs", "echoppe");
 	}
 	
+	echo debut_grand_cadre();
+	echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
+	echo fin_grand_cadre();
+	
 	echo debut_gauche();
 	
 	echo debut_boite_info();

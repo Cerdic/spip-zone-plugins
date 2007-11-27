@@ -13,11 +13,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'acces_non_autorise'=>'D&eacute;sol&eacute,<br />vous n\'avez pas le droit d\'acc&eacute;der &aacute; cette partie.',
+'ajouter_une_option' => 'Ajouter une option',
 
 // C
 'categorie_numero' => 'Cat&eacute;gorie num&eacute;ro :',
 'centimetre_racourcci' => 'cm.',
+'chemin_categorie' => 'Chemin de la cat&eacute;gorie',
 'creer_nouvelle_categorie' => 'Cr&eacute;er une cat&eacute;gorie',
+'creer_nouvelle_sous_categorie' => 'Cr&eacute;er une sous-cat&eacute;gorie',
 'creer_un_ref_automatiquement' => 'En cr&eacute;er un automatiquement',
 'colisage' => 'Frais de colisage',
 
@@ -33,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer_categorie' => 'Editer',
 'editer_version'=>'Editer la version',
 'edition_de_cetegorie'=>'&Eacute;dition d\'une cat&eacute;gorie',
+'edition_de_la_version'=>'&Eacute;dition de la version',
 //'edition_langue' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
 'edition_de_produit' => '&Eacute;dition d\'un produit',
 'edition_donnees_globales' => '&Eacute;dition des donn&eacute;es globales',
@@ -51,6 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'les_categories' => 'Les cat&eacute;gories',
 'les_options_du_produit' => 'Les options de ce produit',
 'les_produits' => 'Les produits',
+'les_produits_de_cette_categories' => 'Les produits de cette cat&eacute;gorie',
+'les_sous_categories' => 'Les sous-cat&eacute;gories',
 'longeur' => 'Longueur',
 
 // M
@@ -58,9 +64,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // N
 'nouveau_produit' => 'Cr&eacute;er un produit',
-'nouvelle_cetegorie' => 'Nouvelle cat&eacute;gorie',
+'nouvelle_categorie' => 'Nouvelle cat&eacute;gorie',
 
 // P
+'pas_d_options_pour_le_produit' => 'Pas d\'option pour ce produit',
 'par_defaut' => 'Par d&eacute;faut',
 'pas_de_categorie_ici' => 'Pas de cat&eacute;gorie ici.',
 'pas_de_produit_ici' => 'Pas de produits &agrave; cette adresse.',
@@ -76,6 +83,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'reference_interne' => 'Num&eacute;ro de r&eacute;f&eacute;rence',
 'retour' => 'Retour',
+'retour_a_la_categorie' => 'Retour &agrave; la cat&eacute;gorie',
+'retour_au_produit' => 'Retour au produit',
 
 // T
 'texte'=>'Texte :',

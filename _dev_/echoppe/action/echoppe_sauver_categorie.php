@@ -3,12 +3,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_echoppe_sauver_categorie(){
-	$lang_categorie = _request('lang');
+	$lang_categorie = _request('lang_categorie');
 	$titre = _request('titre');
 	$descriptif = _request('descriptif');
 	$texte = _request('texte');
 	$logo = _request('logo');
-	$id_categorie = _request('id_categorie_descriptif');
+	$id_categorie = _request('id_categorie_description');
 	$new = _request('new');
 	//echo _request('new');
 	

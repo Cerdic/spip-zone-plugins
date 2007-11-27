@@ -1,0 +1,19 @@
+<strong><:echoppe:chemin_categorie:></strong>
+<B_CatsALaRacine>
+<ul>
+<BOUCLE_CatsALaRacine(SPIP_ECHOPPE_CATEGORIES){id_parent = 0}>
+	<li>
+		<BOUCLE_Titre(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS){id_categorie=#ID_CATEGORIE}{0,1}>[<a href="[(#EVAL{echoppe_categorie}|GENERER_URL_ECRIRE{id_categorie=#ID_CATEGORIE})]" >(#TITRE|couper{100})]</a></BOUCLE_Titre>
+		<B_SousCats>
+		<ul calss="display: #EXPOSER{block,none}">
+		<BOUCLE_SousCats(SPIP_ECHOPPE_CATEGORIES){id_parent = #ID_CATEGORIE}>
+			<li>
+				<BOUCLE_TitreSousCat(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS){id_categorie=#ID_CATEGORIE}{0,1}>[<a href="[(#EVAL{echoppe_categorie}|GENERER_URL_ECRIRE{id_categorie=#ID_CATEGORIE})]" >(#TITRE|couper{100})]</a></BOUCLE_TitreSousCat>
+			</li>
+		</BOUCLE_SousCats>
+		</ul>
+		</B_SousCats>
+	</li>
+</BOUCLE_CatsALaRacine>
+</ul>
+</B_CatsALaRacine>

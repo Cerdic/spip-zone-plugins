@@ -1,0 +1,38 @@
+<div class="cadre-r">
+		[<h1>(#TITRE)</h1>]
+		[<p class="verdana1">(#DESCRIPTIF**)</p>]
+</div>
+<B_LesSousCategorie>
+<br />
+<div>
+	<strong><:echoppe:les_sous_categories:></strong>
+		<ul>
+		<BOUCLE_LesSousCategorie(SPIP_ECHOPPE_CATEGORIES){id_parent=#ID_CATEGORIE}>
+			<li class="cadre-sous_rub" style="width: 45%;margin: 10px 0px 0px 0px;">
+				<BOUCLE_TitreCategorie(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS){id_categorie=#ID_CATEGORIE}{0,1}>
+					<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">#TITRE</a></strong>
+					[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
+				</BOUCLE_TitreCategorie>
+			</li>
+		</BOUCLE_LesSousCategorie>
+		</ul>
+	<div class="nettoyeur"> </div>
+</div>
+</B_LesSousCategorie>
+
+<B_LesProduits>
+<br />
+<div>
+		<strong><:echoppe:les_produits_de_cette_categories:></strong>
+		<ul>
+		<BOUCLE_LesProduits(SPIP_ECHOPPE_PRODUITS spip_echoppe_categories_produits){id_categorie}>
+			<li class="cadre-sous_rub" style="width: 100%; margin: 10px 0px 0px 0px;">
+				<BOUCLE_LeTitreDuProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS){id_produit}>
+					<strong><a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT})]">#TITRE</a></strong>[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
+				</BOUCLE_LeTitreDuProduit>
+			</li>
+		</BOUCLE_LesProduits>
+		</ul>
+	<div class="nettoyeur"> </div>
+</div>
+</B_LesProduits>
