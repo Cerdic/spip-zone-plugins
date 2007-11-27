@@ -93,6 +93,8 @@ _ &bull; [De tout le plugin->@reset@]@install@
 	'erreur:description' => "id manquant dans la d&eacute;finition de l'outil !",
 	'erreur:version' => 'Cet outil est indisponible dans cette version de SPIP.',
 	'erreur:traitements' => "Le Couteau Suisse - Erreur de compilation des traitements : m&eacute;lange 'typo' et 'propre' interdit !",
+	'erreur:probleme' => 'Probl&egrave;me sur : @pb@',
+	'erreur:distant' => 'le serveur distant',
 
 // categories d'outils
 // --------------------

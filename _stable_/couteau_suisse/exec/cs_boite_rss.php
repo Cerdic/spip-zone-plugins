@@ -35,15 +35,14 @@ function exec_cs_boite_rss_dist() {
 		exit;
 	}
 $force = _request('force');
-$force = false;
+$force = true;
 	$p = '';
 	// on cherche le flux rss toutes les deux heures
-	$lastmodified = @file_exists(_DIR_RSS_TMP)?@filemtime(_DIR_RSS_TMP):0;
-	if (!$force && (time()-$lastmodified < 2*3600)) lire_fichier(_DIR_RSS_TMP, $p);
-	if(strlen($p)) {
-		ajax_retour($p);
-		return;
+	if(!$force) {
+		$lastmodified = @file_exists(_DIR_RSS_TMP)?@filemtime(_DIR_RSS_TMP):0;
+		if (time()-$lastmodified < 2*3600) lire_fichier(_DIR_RSS_TMP, $p);
 	}
+	if(strlen($p)) ajax_retour($p);
 	include_spip('action/editer_site');
 	include_spip('inc/xml');
 	$r = spip_xml_load(_CS_RSS_SOURCE);
@@ -60,15 +59,18 @@ $force = false;
 		 $t = str_replace('&amp;', '&', htmlentities($r3[$i]['title'][0], ENT_NOQUOTES, "UTF-8"));
 		 $t = preg_replace(',\s*&#8364;(&brvbar;)?,', '&nbsp;(&hellip;)', $t);
 		 $t = preg_replace(',^(.*?):,', "&bull; <a href='$l' class='spip_out' target='_cout'>$1</a>:", $t);
-		 $p .= "<li style='padding-top:0.6em;'>$t</li>";
+			 $p .= "<li style='padding-top:0.6em;'>$t</li>";
 		}
+	} else {
+		include_spip('cout_fonctions');
+		$p = '<span style="color: red;">'._T('cout:erreur:probleme', array('pb'=>cs_lien(_CS_RSS_SOURCE,_T('cout:erreur:distant')))).'</span>';
 	}
 	include_spip('inc/filtres');
 	$du = affdate_heure(date('Y-m-d H:i:s',time()));
 	$p = '<ul style="list-style-type:none; padding:0; ">'.$p
 		.'</ul><p class="spip_xx-small"><b>'
 		._T('cout:edition')."</b><br/>$du</p>";
-	ecrire_fichier(_DIR_RSS_TMP, $p);
+	if($c) ecrire_fichier(_DIR_RSS_TMP, $p);
 	
 	ajax_retour($p);
 }
