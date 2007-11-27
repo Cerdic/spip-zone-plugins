@@ -67,7 +67,7 @@
 	  1 => 
 	  array (
 	    'idsite' => '1',
-	    'name' => '".$GLOBALS['meta']['nom_site']."',
+	    'name' => '".addslashes($GLOBALS['meta']['nom_site'])."',
 	    'logo' => 'pixel.gif',
 	    'params_choice' => 'all',
 	    'params_names' => '',
