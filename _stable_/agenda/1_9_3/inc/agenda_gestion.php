@@ -326,8 +326,8 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	$out .=  "<input type='checkbox' name='evenement_horaire' value='oui' ";
 	$out .= ($fhoraire=='oui'?"checked='checked' ":"");
 	$out .= " onclick=\"var element =  findObj('evenement_horaire');var choix = element.checked;
-	if (choix==true){	setvisibility('afficher_horaire_debut_evenement', 'visible');setvisibility('afficher_horaire_fin_evenement', 'visible');}
-	else{setvisibility('afficher_horaire_debut_evenement', 'hidden');setvisibility('afficher_horaire_fin_evenement', 'hidden');}\"";
+	if (choix==true){ $('#afficher_horaire_debut_evenement').css('visibility', 'visible'); $('#afficher_horaire_fin_evenement').css('visibility', 'visible');}
+	else{ $('#afficher_horaire_debut_evenement').css('visibility', 'hidden'); $('#afficher_horaire_fin_evenement').css('visibility', 'hidden');}\"";
 	$out .= "/>";
 	$out .= _T('agenda:evenement_horaire')."</div>";
 
