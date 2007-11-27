@@ -55,22 +55,31 @@ function action_instituer_groupe_mots_post($id_groupe)
 		$texte = (corriger_caracteres($texte));
 		$descriptif = (corriger_caracteres($descriptif));
 
+		$champs = array(
+			'titre' => $change_type,
+			'texte' => $texte,
+			'descriptif' => $descriptif,
+			'unseul' => $unseul,
+			'obligatoire' => $obligatoire,
+			'articles' => $articles,
+			'breves' => $breves,
+			'rubriques' => $rubriques,
+			'syndic' => $syndic	  	
+		);
+		if (defined('_DIR_PLUGIN_AGENDA')) $champs['evenements'] = _request('evenements');
+		if (defined('_DIR_PLUGIN_PIMAGENDA')) $champs['pim_agenda'] = _request('pim_agenda');
+		$champs = array_merge($champs, array(
+			'minirezo' => $acces_minirezo,
+			'comite' => $acces_comite,
+			'forum' => $acces_forum	
+		));
+		  
 		if ($id_groupe) {	// modif groupe
 			sql_updateq("spip_mots", array("type" => $change_type), "id_groupe=$id_groupe");
-
-			spip_query("UPDATE spip_groupes_mots SET titre=" . _q($change_type) . ", texte=" . _q($texte) . ", descriptif=" . _q($descriptif) . ", unseul=" . _q($unseul) . ", obligatoire=" . _q($obligatoire) . ", articles=" . _q($articles) . ", breves=" . _q($breves) . ", rubriques=" . _q($rubriques) . ", syndic=" . _q($syndic) 
-			. (defined('_DIR_PLUGIN_AGENDA')?", evenements=" . _q(_request('evenements')):"") 
-			. (defined('_DIR_PLUGIN_PIMAGENDA')?", pim_agenda=" . _q(_request('pim_agenda')):"") 
-			. ", minirezo=" . _q($acces_minirezo) . ", comite=" . _q($acces_comite) . ", forum=" . _q($acces_forum) . " WHERE id_groupe=$id_groupe");
-
+		
+			sql_updateq("spip_groupes_mots", $champs, "id_groupe=$id_groupe");
 		} else {	// creation groupe
-		  sql_insert('spip_groupes_mots', "(titre, texte, descriptif, unseul,  obligatoire, articles, breves, rubriques, syndic,"
-			. (defined('_DIR_PLUGIN_AGENDA')?" evenements,":"") 
-			. (defined('_DIR_PLUGIN_PIMAGENDA')?" pim_agenda,":"") 
-		  ." minirezo, comite, forum)", "(" . _q($change_type) . ", " . _q($texte) . " , " . _q($descriptif) . " , " . _q($unseul) . " , " . _q($obligatoire) . " , " . _q($articles) . " ," . _q($breves) . " , " . _q($rubriques) . " , " . _q($syndic) . " , " 
-			. (defined('_DIR_PLUGIN_AGENDA')?_q(_request('evenements')). " , ":"") 
-			. (defined('_DIR_PLUGIN_PIMAGENDA')?_q(_request('pim_agenda')). " , ":"") 
-		  . _q($acces_minirezo) . " ,  " . _q($acces_comite) . " , " . _q($acces_forum) . " )");
+			sql_insertq('spip_groupes_mots', $champs);
 		}
 	}
 }
@@ -80,8 +89,18 @@ function action_instituer_groupe_mots_post($id_groupe)
 function action_instituer_groupe_mots_get($table)
 {
 	$titre = _T('info_mot_sans_groupe');
-
-	$id_groupe = sql_insert("spip_groupes_mots", "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, evenements, minirezo, comite, forum)", "(" . _q($titre) . ", 'non',  'non', '" . (($table=='articles') ? 'oui' : 'non') ."', '" . (($table=='breves') ? 'oui' : 'non') ."','" . (($table=='rubriques') ? 'oui' : 'non') ."','" . (($table=='syndic') ? 'oui' : 'non') ."', 'non', 'oui', 'non', 'non'" . ")");
+	$id_groupe = sql_insertq("spip_groupes_mots", array(
+		'titre' => $titre,
+		'unseul' => 'non',
+		'obligatoire' => 'non',
+		'articles' =>  (($table=='articles') ? 'oui' : 'non'),
+		'breves' => (($table=='breves') ? 'oui' : 'non'),
+		'rubriques' => (($table=='rubriques') ? 'oui' : 'non'),
+		'syndic' =>  (($table=='syndic') ? 'oui' : 'non'),
+		'evenements' =>  'non',
+		'minirezo' =>  'oui',
+		'comite' =>  'non',
+		'forum' => 'non')) ;
 
         redirige_par_entete(parametre_url(urldecode(_request('redirect')),
 					  'id_groupe', $id_groupe, '&'));
