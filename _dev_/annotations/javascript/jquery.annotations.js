@@ -133,7 +133,7 @@
 			appendTo(container);
 			$.carto.overlay[index].items = $.carto.overlay[index].items.add(overlay);
 			$.carto.overlay[index].zindex++;
-			var match = marker.attr("id").match(/(.*)(\d+)$/);
+			var match = marker.attr("id").match(/(.*_)(\d+)$/);
 			var id_prefix = match[1];
 			var id = match[2];
 			if(this.mapMarker.map) {
