@@ -10,6 +10,8 @@
 \***************************************************************************/
 
 function balise_SESSION_dist($p) {
+	$p->descr['session'] = true;
+	
 	if(function_exists('balise_ENV'))
 		return balise_ENV($p, '$GLOBALS["auteur_session"]');
 	else

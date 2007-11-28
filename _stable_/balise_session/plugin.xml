@@ -9,6 +9,7 @@
 	</description>
 	<lien>http://www.spip-contrib.net/Balise-SESSION</lien>
 	<fonctions>fonctions_session.php</fonctions>
+	<options>options_session.php</options>
 	<prefix>BaliseSession</prefix>
 	<necessite version="[;1.9262)" />
 </plugin>
