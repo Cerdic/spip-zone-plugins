@@ -25,7 +25,7 @@ function action_echoppe_attribuer_logo_produit(){
 
     // on copie le fichier dans le dossier de destination
     $name_file = 'prod'.$contexte['id_produit'].'_'.$contexte['lang_produit'].strrchr($_FILES['logo_produit']['name'], '.');
-	unlink($content_dir . $name_file);
+	(file_exists($content_dir . $name_file))?unlink($content_dir . $name_file):$name_file=$name_file;
     if( !move_uploaded_file($tmp_file, $content_dir . $name_file) )
     {
         die(_T('echoppe:inmpossible_copier_dans').$content_dir);
