@@ -497,6 +497,17 @@
 				spip_query($q="INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
 					"VALUES ".join(',', $inserts));
 			}
+			// Envoyer aux plugins apres enregistrement
+			$valeurs = pipeline('forms_post_edition_donnee',
+				array(
+					'args' => array(
+						'id_form' => $id_form,
+						'id_donnee' => $id_donnee,
+						'champs' => $champs
+					),
+					'data' => $valeurs
+				)
+			);
 		}
 		return count($inserts);
 	}

@@ -34,6 +34,7 @@ if (!isset($GLOBALS['spip_pipeline']['forms_ajoute_styles'])) $GLOBALS['spip_pip
 if (!isset($GLOBALS['spip_pipeline']['forms_pre_remplit_formulaire'])) $GLOBALS['spip_pipeline']['forms_pre_remplit_formulaire'] = '';
 #modification des donnees apres saisie du formulaire
 if (!isset($GLOBALS['spip_pipeline']['forms_pre_edition_donnee'])) $GLOBALS['spip_pipeline']['forms_pre_edition_donnee'] = '';
+if (!isset($GLOBALS['spip_pipeline']['forms_post_edition_donnee'])) $GLOBALS['spip_pipeline']['forms_post_edition_donnee'] = '';
 if (!isset($GLOBALS['spip_pipeline']['forms_valide_conformite_champ'])) $GLOBALS['spip_pipeline']['forms_valide_conformite_champ'] = '';
 
 
