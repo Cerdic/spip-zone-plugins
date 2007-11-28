@@ -44,17 +44,21 @@ include_spip('base/abstract_sql');
  utile si version php < 4.3 
  http://www.spip-contrib.net/Le-plugin-acces-restreint-par#forum400361
 */
-if (!function_exists('html_entity_decode')){
-function html_entity_decode ($string){
-// Remplace les entités numériques
-$string = preg_replace(’ &#x([0-9a-f]+) ; ei’, ’chr(hexdec(« \\1 »))’, $string) ;
-$string = preg_replace(’ &#([0-9]+) ; e’, ’chr(« \\1 »)’, $string) ;
-// Remplace les entités litérales
-$trans_tbl = get_html_translation_table (HTML_ENTITIES) ;
-$trans_tbl = array_flip ($trans_tbl) ;
-return strtr ($string, $trans_tbl) ;
+if (!defined('accesgroupes_php4funct_defined')) {
+	define('accesgroupes_php4funct_defined', 1);
+	if (!function_exists('html_entity_decode')){
+		function html_entity_decode ($string){
+			// Remplace les entités numériques
+			$string = preg_replace(’ &#x([0-9a-f]+) ; ei’, ’chr(hexdec(« \\1 »))’, $string) ;
+			$string = preg_replace(’ &#([0-9]+) ; e’, ’chr(« \\1 »)’, $string) ;
+			// Remplace les entités litérales
+			$trans_tbl = get_html_translation_table (HTML_ENTITIES) ;
+			$trans_tbl = array_flip ($trans_tbl) ;
+			return strtr ($string, $trans_tbl) ;
+		}
+	}
 }
-}
+
 function exec_accesgroupes_admin() {
 	// définir comme constante le chemin du répertoire du plugin
 	$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
