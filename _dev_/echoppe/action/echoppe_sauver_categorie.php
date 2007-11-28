@@ -8,9 +8,10 @@ function action_echoppe_sauver_categorie(){
 	$descriptif = _request('descriptif');
 	$texte = _request('texte');
 	$logo = _request('logo');
-	$id_categorie = _request('id_categorie_description');
+	$id_categorie = _request('id_categorie');
 	$new = _request('new');
-	//echo _request('new');
+	
+	
 	
 	switch ($new){
 		case 'oui':

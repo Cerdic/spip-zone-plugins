@@ -50,6 +50,20 @@ function exec_echoppe_produit(){
 	
 	echo debut_boite_info();
 	echo recuperer_fond('fonds/echoppe_info_produit', $contexte);
+	$les_langues = explode(',',$GLOBALS['meta']['langues_multilingue']);
+	//if (count($les_langues) > 1){
+		echo '<form action="index.php" method="get">
+		<input type="hidden" name="exec" value="echoppe_edit_produit" />
+		<input type="hidden" name="id_produit" value="'.$contexte['id_produit'].'" />
+		<select name="lang_produit">';
+		echo '<option value="">'._T('echoppe:par_defaut').'</option>';
+		foreach ($les_langues as $value) {
+			echo '<option value="'.$value.'">'.traduire_nom_langue($value).'</option>';
+		}
+		echo '</form>
+		<input type="submit" value="'._T('echoppe:editer').'" />
+		</select>';
+	//}
 	echo fin_boite_info();
 	
 	

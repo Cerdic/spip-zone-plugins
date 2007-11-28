@@ -20,7 +20,7 @@ function exec_echoppe_edit_categorie(){
 		$res_descriptif_categorie = spip_query($sql_descriptif_categorie);
 		$descriptif_categorie = spip_fetch_array($res_descriptif_categorie);
 		
-		(spip_num_rows($res_descriptif_categorie) > 0)?$new = $new:$new = 'description';
+		(spip_num_rows($res_descriptif_categorie) > 0)?$contexte['new'] = $contexte['new']:$contexte['new'] = 'description';
 		(is_array($descriptif_categorie))?$contexte = array_merge($contexte, $descriptif_categorie):$contexte = $contexte;
 		
 	}
@@ -48,9 +48,13 @@ function exec_echoppe_edit_categorie(){
 	echo fin_boite_info();*/
 	
 	($contexte['new'] == 'oui' && $contexte['id_parent'] != 0)?$raccourcis .= icone_horizontale(_T('echoppe:retour'), generer_url_ecrire("echoppe_categorie","id_categorie=".$contexte['id_parent']."&lang=".$contexte['lang_categorie']), _DIR_PLUGIN_ECHOPPE."images/retour.png","", false)."<hr />":$raccourcis=$raccourcis;	
+	($contexte['new'] != 'oui' && $contexte['id_categorie'] > 0)?$raccourcis .= icone_horizontale(_T('echoppe:retour_a_la_categorie'), generer_url_ecrire("echoppe_categorie","id_categorie=".$contexte['id_categorie']."&lang=".$contexte['lang_categorie']), _DIR_PLUGIN_ECHOPPE."images/retour.png","", false)."<hr />":$raccourcis=$raccourcis;	
 	$raccourcis .= icone_horizontale(_T('echoppe:gerer_echoppe'), generer_url_ecrire("echoppe",""), _DIR_PLUGIN_ECHOPPE."images/echoppe_blk_24.png","", false);
 	echo bloc_des_raccourcis($raccourcis);
 	
+	echo debut_boite_info();
+	echo recuperer_fond('fonds/echoppe_logo_categorie',$contexte);
+	echo fin_boite_info();
 	
 	echo creer_colonne_droite();
 	echo debut_droite(_T('echoppe:edition_de_cetegorie'));

@@ -1,0 +1,17 @@
+<div class="titre_logo"><:echoppe:logo_de_la_categorie:></div>
+<div class="logo_categorie">
+	<div class="logo">
+	<BOUCLE_LeLogo(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS){id_categorie = #ID_CATEGORIE}{lang = #LANG_CATEGORIE}>
+	[<img src="../IMG/(#LOGO)" />]
+	</BOUCLE_LeLogo>
+	</B_LeLogo>
+	<//B_LeLogo>
+	</div>
+	<div class="formulaire_logo">
+		<form action="[(#EVAL{echoppe_attribuer_logo_categorie}|generer_url_action{id_categorie=#ID_CATEGORIE&lang_categorie=#LANG_CATEGORIE})]" method="post" enctype="multipart/form-data" >
+			<label for="logo_categorie"><:echoppe:telecharger_un_nouveau_logo:></label>
+			<input type="file" name="logo_categorie" class="forml spip_xx-small" />
+			<input type="submit" value="<:echoppe:enregistrer:>" />
+		</form>
+	</div>
+</div>

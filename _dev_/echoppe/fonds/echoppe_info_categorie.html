@@ -4,7 +4,6 @@
 	<div style="font-size: 10;"><:echoppe:derniere_modification:> : <br /><b>[(#MAJ|affdate|=={0000}|?{<:echoppe:pas_encore_modifie:>,#MAJ|affdate})]</b></div>
 	<br />
 	<:echoppe:edition_de_la_version:><br />
-	[<strong>(#LANG_CATEGORIE|traduire_nom_langue|sinon{<:echoppe:par_defaut:>})</strong>]
 	<!--
 			if (empty($contexte['lang_categorie'])) {
 				echo '<b>=> <a href="'.generer_url_ecrire('echoppe_edit_categorie','id_categorie='.$contexte['id_categorie'].'&lang_categorie=').'">'._T('echoppe:par_defaut').'</a></b><br />';

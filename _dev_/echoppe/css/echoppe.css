@@ -1,3 +1,14 @@
 .echoppe_edit_produit{
 	font-size: 10px;
 }
+div.titre_logo{
+	font-weight: bold;
+	padding-bottom: 10px;
+	text-align: center;
+}
+div.logo{
+	text-align: center;
+}
+div.logo IMG{
+	width: 150px;
+}

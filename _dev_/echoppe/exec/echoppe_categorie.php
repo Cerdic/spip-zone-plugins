@@ -13,7 +13,7 @@ function exec_echoppe_categorie(){
 		die(echoppe_echec_autorisation().fin_page());
 	}
 	
-	$contexte['lang_categorie'] = _request('lang');
+	$contexte['lang_categorie'] = _request('lang_categorie');
 	$contexte['id_categorie'] = _request('id_categorie');
 	$contexte['new'] = _request('new');
 	
@@ -57,14 +57,30 @@ function exec_echoppe_categorie(){
 	
 	echo debut_boite_info();
 	echo recuperer_fond('fonds/echoppe_info_categorie',$contexte);
-	echo fin_boite_info();
 
+	$les_langues = explode(',',$GLOBALS['meta']['langues_multilingue']);
+
+	//if (count($les_langues) > 1){
+		echo '<form action="index.php" method="get">
+		<input type="hidden" name="exec" value="echoppe_edit_categorie" />
+		<input type="hidden" name="id_categorie" value="'.$contexte['id_categorie'].'" />
+		<select name="lang_categorie">';
+		echo '<option value="">'._T('echoppe:par_defaut').'</option>';
+		foreach ($les_langues as $value) {
+			echo '<option value="'.$value.'">'.traduire_nom_langue($value).'</option>';
+		}
+		echo '</form>
+		<input type="submit" value="'._T('echoppe:editer').'" />
+		</select>';
+	//}
+	echo fin_boite_info();
+	
+	
 	$raccourcis .= icone_horizontale(_T('echoppe:creer_nouvelle_sous_categorie'), generer_url_ecrire("echoppe_edit_categorie","new=oui&id_parent="._request('id_categorie')), _DIR_PLUGIN_ECHOPPE."images/categorie-24.png","creer.gif", false);
 	$raccourcis .= icone_horizontale(_T('echoppe:nouveau_produit'), generer_url_ecrire("echoppe_edit_produit","new=oui&id_categorie="._request('id_categorie')), "","creer.gif", false);
 	$raccourcis .= '<hr />';
 	$raccourcis .= icone_horizontale(_T('echoppe:gerer_echoppe'), generer_url_ecrire("echoppe",""), _DIR_PLUGIN_ECHOPPE."images/echoppe_blk_24.png","", false);
 	echo bloc_des_raccourcis($raccourcis);
-	
 	
 	echo creer_colonne_droite();
 	

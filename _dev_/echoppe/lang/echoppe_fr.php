@@ -33,7 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'echoppe'=>'Echoppe, le plugin.',
-'editer_categorie' => 'Editer',
+'editer'=>'Editer',
+'editer_categorie' => 'Editer la cat&eacute;gorie',
 'editer_version'=>'Editer la version',
 'edition_de_cetegorie'=>'&Eacute;dition d\'une cat&eacute;gorie',
 'edition_de_la_version'=>'&Eacute;dition de la version',
@@ -46,8 +47,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'gerer_echoppe' => 'G&eacute;rer Echoppe',
 'gramme_racourcci' => 'gr.',
 
+// F
+'fichier_introuvable' => 'Le fichier est introuvable',
+'fichier_pas_une_image' => 'Le fichier n\'est pas une image',
+
 // H
 'hauteur' => 'Hauteur',
+
+// I
+'impossible_copier_dans'=>'Impossible de copier le fichier dans ',
 
 // L
 'langue_editee' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
@@ -57,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'les_produits' => 'Les produits',
 'les_produits_de_cette_categories' => 'Les produits de cette cat&eacute;gorie',
 'les_sous_categories' => 'Les sous-cat&eacute;gories',
+'logo_de_la_categorie' => 'Logo de la cat&eacute;gorie',
 'longeur' => 'Longueur',
 
 // M
@@ -71,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'par_defaut' => 'Par d&eacute;faut',
 'pas_de_categorie_ici' => 'Pas de cat&eacute;gorie ici.',
 'pas_de_produit_ici' => 'Pas de produits &agrave; cette adresse.',
+'pas_de_titre' => 'Pas de titre',
 'pas_encore_cree' => 'N\'existe pas encore.',
 'pas_encore_modifie' => 'Jamais modifi&eacute;',
 'prix_base' => 'Prix de base HTVA',
@@ -88,6 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte'=>'Texte :',
+'telecharger_un_nouveau_logo' => 'T&eacute;l&eacute;charger un nouveau logo',
 'titre_categorie' => 'Titre de la cat&eacute;gorie :',
 'titre_ou_texte_de_l_option' => 'Titre/Texte de l\'option',
 'information_de_l_option' => 'informations dur l\'option',
