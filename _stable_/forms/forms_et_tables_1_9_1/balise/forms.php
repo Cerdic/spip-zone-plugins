@@ -18,6 +18,8 @@ global $balise_FORMS_collecte;
 $balise_FORMS_collecte = array('id_form','id_article','id_donnee', 'id_donnee_liee');
 
 function balise_FORMS ($p) {
+	$p->descr['session'] = true;
+
 	return calculer_balise_dynamique($p,'FORMS', array('id_form', 'id_article', 'id_donnee','id_donnee_liee', 'class'));
 }
 
