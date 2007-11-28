@@ -1,0 +1,17 @@
+<div class="titre_logo"><:echoppe:logo_du_produit:></div>
+<div class="logo_produit">
+	<div class="logo">
+	<BOUCLE_LeLogo(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS){id_produit = #ID_PRODUIT}{lang = #LANG_PRODUIT}>
+	[<img src="../IMG/(#LOGO)" />]
+	</BOUCLE_LeLogo>
+	</B_LeLogo>
+	<//B_LeLogo>
+	</div>
+	<div class="formulaire_logo">
+		<form action="[(#EVAL{echoppe_attribuer_logo_produit}|generer_url_action{id_produit=#ID_PRODUIT&lang_produit=#LANG_PRODUIT})]" method="post" enctype="multipart/form-data" >
+			<label for="logo_produit"><:echoppe:telecharger_un_nouveau_logo:></label>
+			<input type="file" name="logo_produit" class="forml spip_xx-small" />
+			<input type="submit" value="<:echoppe:enregistrer:>" />
+		</form>
+	</div>
+</div>

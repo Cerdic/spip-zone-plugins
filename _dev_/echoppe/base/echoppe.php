@@ -9,7 +9,7 @@ global $tables_auxiliaires;
 global $tables_jointures;
 global $table_des_tables;
 
-$GLOBALS['echoppe_version_base'] = 0.4;
+$GLOBALS['echoppe_version_base'] = 0.5;
 
 
 $spip_echoppe_categories = array(
@@ -92,6 +92,7 @@ $spip_echoppe_produits_descriptions = array(
 	"ps"				=> "text NOT NULL",
 	"tva"				=> "float DEFAULT '0' NOT NULL",	// (doit à mon avis être internationalisé... non ? )
 	"quantite_mini"			=> "int NOT NULL",
+	"logo"				=> "text NOT NULL",
 	"maj"				=> "TIMESTAMP",
 	);
 

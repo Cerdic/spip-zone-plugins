@@ -24,14 +24,14 @@ function action_echoppe_attribuer_logo_categorie(){
     }
 
     // on copie le fichier dans le dossier de destination
-    $name_file = 'cat'.$contexte['id_categorie'].strrchr($_FILES['logo_categorie']['name'], '.');
+    $name_file = 'cat'.$contexte['id_categorie'].'_'.$contexte['lang_categorie'].strrchr($_FILES['logo_categorie']['name'], '.');
 	unlink($content_dir . $name_file);
     if( !move_uploaded_file($tmp_file, $content_dir . $name_file) )
     {
         die(_T('echoppe:inmpossible_copier_dans').$content_dir);
     }
 
-    $sql_maj_logo_categorie = "UPDATE spip_echoppe_categories_descriptions SET logo = 'cat".$contexte['id_categorie'].strrchr($_FILES['logo_categorie']['name'], '.')."' WHERE id_categorie = '".$contexte['id_categorie']."' AND lang = '".$contexte['lang']."';";
+    $sql_maj_logo_categorie = "UPDATE spip_echoppe_categories_descriptions SET logo = '".$name_file."' WHERE id_categorie = '".$contexte['id_categorie']."' AND lang = '".$contexte['lang']."';";
     $res_maj_logo_categorie = spip_query($sql_maj_logo_categorie);
     //die($sql_maj_logo_categorie);
     
