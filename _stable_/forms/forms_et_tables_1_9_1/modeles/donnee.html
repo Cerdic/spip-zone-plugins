@@ -1,7 +1,6 @@
-<B_data>
-<span id='donnee-#ID_DONNEE' class='donnees'>
 #SET{donnee,''}
 <BOUCLE_data(FORMS_DONNEES){id_donnee}>
+<span id='donnee-#ID_DONNEE' class='donnees form-#ID_FORM table-#ID_FORM'>
 	#SET{wrap_prec,''}
 	#SET{tampon,''}
 	<BOUCLE_champs(FORMS_CHAMPS){id_form}{par rang}>
@@ -16,7 +15,6 @@
 	<BOUCLE_f(FORMS){id_form}>
 	[(#GET{donnee}|wrap_champ{#HTML_WRAP})]
 	</BOUCLE_f>
-</BOUCLE_data>
 <span class='nettoyeur'> </span>
 </span>
-</B_data>
+</BOUCLE_data>
