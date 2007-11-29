@@ -11,11 +11,11 @@ function Annotations_insert_js($flux) {
 */
 
 function Annotations_insert_head($flux) {
-	$flux .= '<link rel="stylesheet" href="'.url_absolue(find_in_path('css/jqModal.css')).'" type="text/css" />
-<link rel="stylesheet" href="'.url_absolue(find_in_path('css/jquery.tooltip.css')).'" type="text/css" />';
 
 	if(_request("carto_debug")) 
-		$flux .= '<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jquery.ifixpng.js')).'"></script>
+		$flux .= '<link rel="stylesheet" href="'.url_absolue(find_in_path('css/jqModal.css')).'" type="text/css" />
+		<link rel="stylesheet" href="'.url_absolue(find_in_path('css/jquery.tooltip.css')).'" type="text/css" /> 
+		<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jquery.ifixpng.js')).'"></script>
 		<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jquery.ifixpng.js')).'"></script>
 		<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jqModal.js')).'"></script>
 		<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jquery.tooltip.js')).'"></script>
@@ -29,6 +29,16 @@ function Annotations_insert_head($flux) {
 	jQuery(function(){
 		//check for annotated images
 		if(jQuery("img[@id^=annotated_map]").size()) {
+			//load css files
+			var css = [
+				"'.url_absolue(find_in_path('css/jqModal.css')).'",
+				"'.url_absolue(find_in_path('css/jquery.tooltip.css')).'"
+			];
+			var link_attr = {"rel":"stylesheet","type":"text/css"};
+			jQuery.each(css,function(i,n){
+				link_attr.href = n;
+				jQuery("<link>").attr(link_attr).appendTo("head");
+			})
 			//load all scripts in sync mode
 			var options = {
 			 	dataType: "script",
