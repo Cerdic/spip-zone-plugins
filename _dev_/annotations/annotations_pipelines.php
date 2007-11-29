@@ -58,7 +58,7 @@ function Annotations_insert_head($flux) {
 				if(!scripts.length) {
 					//check for the annotation window
 					if(jQuery("#annotate_window").size()) {
-						options.success = null;
+						options.success = function() {};
 						options.url = "'.url_absolue(find_in_path('javascript/jquery.annotations-window.js')).'";
 						jQuery.ajax(options);			
 					}
