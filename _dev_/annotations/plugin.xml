@@ -35,6 +35,11 @@
 		<action>insert_head</action>
 		<inclure>annotations_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>affichage_final</action>
+		<inclure>annotations_pipelines.php</inclure>
+	</pipeline>	
 	<necessite id="spip" version="[1.9300;]" />
 	<necessite id="FormulaireUpload" version="[0.1;]" />
 	

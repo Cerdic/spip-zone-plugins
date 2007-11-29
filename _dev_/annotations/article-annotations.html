@@ -4,31 +4,8 @@
 <head>
 <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#INTRODUCTION|couper{150}|attribut_html)" />]
+<meta name="annotations_article" content="#ID_ARTICLE" />
 <INCLURE{fond=inc-head}>
-<script type="text/javascript">
-		jQuery(function(){
-			var init = function() {			
-				if(!jQuery.carto || !jQuery.carto.ready)
-					return window.setTimeout(init,10);
-				var carto = new jQuery.carto(cfg_standard);
-				carto.mapMarker = mapMarker;
-				carto.loadMarkersWithTooltip();
-				var carto_forum = new jQuery.carto(cfg_forum);
-				carto_forum.mapMarker = mapMarker_forum;
-				carto_forum.loadMarkersWithTooltip(null,{id_article:#ID_ARTICLE});
-				//if you want to load the annotations text inside an overlay window use the next line instead of the previous one
-				//carto.loadMarkersWithOverlay();
-				var init_window = function() {
-					if(!jQuery.carto.annotate_window) 
-						return window.setTimeout(init_window,10);
-					jQuery.carto.annotate_window.init(carto);
-				};
-				if(jQuery("#annotate_window").size()) 
-					init_window();
-			}
-			window.setTimeout(init,10);
-		});
-</script>
 </head>
 
 <body class="page_article">
@@ -161,7 +138,6 @@
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 	
 </div><!--#page-->
-<INCLUDE{fond=inc-annotationswindow}{lang=#LANG}>
 </body>
 </html>
 </BOUCLE_article_principal>

@@ -50,7 +50,8 @@ function Annotations_insert_head($flux) {
 			 "'.url_absolue(find_in_path('javascript/jquery.tooltip.js')).'",
 			 "'.url_absolue(find_in_path('javascript/jquery.dimensions.js')).'",
 			 "'.url_absolue(find_in_path('javascript/jquery.annotations.js')).'",
-			 "'.generer_url_public("cfg_annotations.js").'"
+			 "'.generer_url_public("cfg_annotations.js").'",
+			 "'.url_absolue(find_in_path('javascript/jquery.annotations.init.js')).'"
 			];
 			
 			var load_scripts = function() {
@@ -75,6 +76,29 @@ function Annotations_insert_head($flux) {
 </script>
 ';
 
+	return $flux;
+}
+
+
+function Annotations_affichage_final($flux) {
+	if(isset($GLOBALS['auteur_session']['statut']) &&
+		 ($GLOBALS['auteur_session']['statut']=="0minirezo" ||
+		 	$GLOBALS['auteur_session']['statut']=="1comite"
+		 ) &&
+		 strpos($flux,"annotated_map")!==false && 
+		 preg_match(",<img [^>]*id\s*=\s*([\"'])annotated_map[^>]+\\1,iU",$flux)) {
+		$lang = preg_match(",<html [^>]*lang\s*=\s*([\"'])([^>]*)\\1,iU",$flux,$match);
+		$context = $lang?array("lang" => $match[2]):array();
+
+		include_spip("public/admin");
+		include_spip("public/assembler");
+		
+		($pos = strripos($flux, '</body>'))
+    || ($pos = strripos($flux, '</html>'))
+    || ($pos = strlen($flux));
+		$flux = substr_replace($flux,recuperer_fond("inc-annotationswindow",$context),$pos,0);	
+	}
+	
 	return $flux;
 }
 
