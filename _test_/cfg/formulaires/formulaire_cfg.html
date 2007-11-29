@@ -1,4 +1,4 @@
-
+#CACHE{0}
 <div id="formulaire_cfg_contenu_#ENV{cfg_hash}">
 <INCLURE{fond=#ENV{cfg_form}}{env}>
 </div>
@@ -8,8 +8,8 @@
 	<script type='text/javascript'><!--
 	if (window.jQuery) (function($){
 		// adresse du fragment ajax
-		var url = '#EVAL{_DIR_RACINE}spip.php?page=formulaire_cfg';
-
+		var url = '#URL_PAGE{formulaire_cfg}';
+		
 		function start_ajax_cfg(){
 			$("#formulaire_cfg_[(#ENV{cfg_hash})] form")
 			// parametres supplementaires
