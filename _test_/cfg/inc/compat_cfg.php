@@ -62,8 +62,40 @@ function compat_cfg_defs_dist() {
 		'sql_query' => 
 			'($res, $serveur=\'\') {
 				return spip_query_db($res);
-			}',				
-			
+			}',	
+		
+		// sql_quote : mysql_escape_string depuis 1.9.3, ici _q
+		'sql_quote' => 
+			'($val, $serveur=\'\') {
+				return _q($val);
+			}',	
+						
+		'sql_select' => 
+			'(
+				$select = array(), 
+				$from = array(), 
+				$where = array(),
+				$groupby = array(), 
+				$orderby = array(), 
+				$limit = \'\', 
+				$having = array(),
+				$serveur=\'\'
+			) {
+				return spip_abstract_select(
+					$select, 
+					$from, 
+					$where, 
+					$groupby, 
+					$orderby, 
+					$limit, 
+					$limit, 
+					$sousrequete = \'\', 
+					$having,
+					$table = \'\', 
+					$id = \'\', 
+					$serveur);
+			}'
+		
 		/*'sql_count' => 
 			'($res, $serveur=\'\') {
 				return spip_mysql_count($res);

@@ -91,14 +91,12 @@ function lire_config($cfg='', $def=null, $serialize=false) {
 	}
 	// dans une table
 	if ($table) {
-		$extra = 'SELECT extra FROM ' . $table;
-		$and = ' WHERE ';
+		$where = array();
 		foreach ($colid as $i => $name) {
-			$extra .= $and . $name . '=' . 
-				(is_numeric($id[$i]) ? intval($id[$i]) : _q($id[$i]));
-			$and = ' AND ';
+			$where[] = $name . '=' 
+						. (is_numeric($id[$i]) ? intval($id[$i]) : sql_quote($id[$i]));
 	    }
-		$extra = sql_query($extra);
+		$extra = sql_select('extra', $table, $where);
 		$extra = sql_fetch($extra);
 		$config = isset($extra['extra']) && $extra['extra'] ?
 					$extra['extra'] :  array();
