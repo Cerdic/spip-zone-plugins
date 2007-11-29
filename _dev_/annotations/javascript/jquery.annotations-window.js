@@ -127,7 +127,7 @@
 							$("#annotate_point_x").text(n.x);
 							$("#annotate_point_y").text(n.y);
 							$("#annotate_window").find(".map_marker,.map_marker+map").remove();
-							carto.addMarker($("#map_annotate"),{xy:[n.x,n.y]},{id:"map_marker_change"+id});
+							carto.addMarker($("#map_annotate"),{xy:[n.x,n.y]},{id:"map_marker_change_"+id});
 							return false;
 						}
 					});
@@ -234,7 +234,7 @@
 						$("#annotate_point_x").text(xy.x);
 						$("#annotate_point_y").text(xy.y);
 						$("#annotate_window").find(".map_marker,.map_marker+map").remove();
-						carto.addMarker(this,{xy:[xy.x,xy.y]},{id:"map_marker_preview0"});
+						carto.addMarker(this,{xy:[xy.x,xy.y]},{id:"map_marker_preview_0"});
 						return false;
 					});
 					//bind click on save button
