@@ -249,7 +249,6 @@
 						};
 						var points = {ids:[point]};
 						carto.saveAnnotations(postData,points,function(answer){
-							console.log("answer save point: "+answer.result);
 							if(answer.mode=="insert") {
 								point.id_annotation = answer.new_id;
 								points_data.ids.push(point);
