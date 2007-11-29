@@ -198,7 +198,7 @@ class cfg_formulaire
 		if (!preg_match_all(
 		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio|hidden)") name="(\w+)(\[\])?"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?( multiple=)?[^>]*?>#ims',
 						$this->fond_compile, $matches, PREG_SET_ORDER)) {
-			return _L('pas_de_champs_dans_') . $nom;
+			return _T('cfg:pas_de_champs_dans_') . $nom;
 		}
 		
 		// stockage des champs trouves dans $this->champs
@@ -287,7 +287,7 @@ class cfg_formulaire
 		}
 		// si valeurs valides, ont elles changees ? 
 		else if (!$this->log_modif) {
-			$this->message .= _L('pas_de_changement') . ' <b>' . $this->nom_config() . '</b>';
+			$this->message .= _T('cfg:pas_de_changement') . ' <b>' . $this->nom_config() . '</b>';
 		}
 		// si elles ont changees, on modifie !
 		else {

@@ -15,8 +15,9 @@ $GLOBALS['i18n_cfg_fr'] = array(
 // boutons validation
 'ok' => 'OK',
 'reset' => 'Effacer',
-'supprimer' => 'Supprimer'
-
+'supprimer' => 'Supprimer',
+'pas_de_changement' => 'Pas de changement',
+'pas_de_changement_dans_' => 'Pas de changement dans ',
 );
 
 ?>
