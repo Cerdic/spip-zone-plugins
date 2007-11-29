@@ -44,8 +44,8 @@ function icone_lien_cfg($dir) {
 			$ret .= '<a href="'.generer_url_ecrire('cfg', 'cfg='.$fonds).'">'
 				.'<img src="'._DIR_PLUGIN_CFG.'cfg-16.png"
 					width="16" height="16"
-					alt="'._L('configuration').' '.$fonds.'"
-					title="'._L('configuration').' '.$fonds.'"
+					alt="'._T('icone_configuration_site').' '.$fonds.'"
+					title="'._T('icone_configuration_site').' '.$fonds.'"
 				/></a>';
 		}
 	}
@@ -73,7 +73,7 @@ class cfg_dist extends cfg_formulaire
 		($this->titre && $this->boite)
 		 ||	($this->titre && ($this->boite = $this->titre) && !($this->titre = ''))
 		 || $this->boite
-		 || ($this->boite = _L('Configuration') . ' ' . $this->nom);
+		 || ($this->boite = _T('icone_configuration_site') . ' ' . $this->nom);
 
 		if (!$this->_permise || !$this->autoriser()) {
 			include_spip('inc/minipres');
@@ -93,7 +93,7 @@ class cfg_dist extends cfg_formulaire
 		if (!$formulaire) {
 			$formulaire = 
 			"<img src='"._DIR_PLUGIN_CFG.'cfg.png'."' style='float:right' alt='' />\n";
-			$formulaire .= _L("<h3>Choisissez le module &#224; configurer.</h3>");
+			$formulaire .= "<h3>" . _T("cfg:choisir_module_a_configurer") . "</h3>";;
 		}
 		
 		else
@@ -215,7 +215,7 @@ class cfg_dist extends cfg_formulaire
 		
 		echo "<br /><br /><br />\n";
 
-		echo gros_titre(sinon($this->titre, _L('Configuration des modules')), '', false);
+		echo gros_titre(sinon($this->titre, _T('cfg:configuration_modules')), '', false);
 
 		echo  barre_onglets("configuration", "cfg");
 

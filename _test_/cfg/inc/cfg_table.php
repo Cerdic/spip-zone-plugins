@@ -20,7 +20,7 @@ class cfg_table
 		foreach ($opt as $o=>$v) {
 			$this->$o = $v;
 		}
-		$this->cfg->table || ($this->cfg->message = _L('nom table manquant'));
+		$this->cfg->table || ($this->cfg->message = _T('cfg:nom_table_manquant'));
 /*
 		$this->cfg->champs_id || ($this->cfg->champs_id = array(
 				strpos('_', $this->cfg->table) !== false ?
@@ -49,7 +49,7 @@ class cfg_table
  		if (!$this->cfg->cfg_id) {
  			// ignorer cette erreur si le champ id est 'autoincrement'
  			if (!$this->cfg->autoriser_absence_id == 'oui')
-				$this->cfg->message = _L('id manquant');
+				$this->cfg->message = _T('cfg:id_manquant');
 			return false;
 		}
 

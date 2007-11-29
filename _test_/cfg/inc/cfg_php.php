@@ -103,8 +103,8 @@ class cfg_php
 			}
 			$fp = @fopen($this->cfg->fichier, "w");
 			if ($fp === false) {
-				$this->cfg->message = $this->cfg->fichier . ': ' .
-						 _T('cfg:erreur_open_w_fichier');
+				$this->cfg->message = 
+					_T('cfg:erreur_open_w_fichier', array('fichier'=> $this->cfg->fichier));
 				return false;
 			}
 			$code = '<?php

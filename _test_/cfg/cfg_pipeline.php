@@ -17,7 +17,7 @@ function cfg_ajouter_onglets($flux) {
 		$flux['data']['cfg'] =
 			new Bouton(
 			_DIR_PLUGIN_CFG."cfg-22.png",  // icone
-			_L('CFG'),	// titre
+			_T('cfg:CFG'),	// titre
 			generer_url_ecrire('cfg'),
 			NULL,
 			'cfg'

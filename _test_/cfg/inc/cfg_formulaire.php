@@ -137,7 +137,7 @@ class cfg_formulaire
 		$this->vue = $vue;
 		$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html');
 		if (!lire_fichier($fichier, $this->controldata)) {
-			return _L('erreur_lecture_') . $nom;
+			return _T('cfg:erreur_lecture', array('nom' => $nom));
 		}
 		
 		// recherche et stockage des parametres de cfg
@@ -198,7 +198,7 @@ class cfg_formulaire
 		if (!preg_match_all(
 		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio|hidden)") name="(\w+)(\[\])?"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?( multiple=)?[^>]*?>#ims',
 						$this->fond_compile, $matches, PREG_SET_ORDER)) {
-			return _T('cfg:pas_de_champs_dans_') . $nom;
+			return _T('cfg:pas_de_champs_dans', array('nom' => $nom));
 		}
 		
 		// stockage des champs trouves dans $this->champs
@@ -278,8 +278,9 @@ class cfg_formulaire
 		// suppression ?
 		if ($supprimer) {
 			$ok = $this->sto->modifier($supprimer);
-			$this->message .= ($msg = $ok ? _L('config_supprimee') : _L('erreur_suppression'))
-								. ' <b>' . $this->nom_config() . '</b>';
+			$this->message .= ($msg = $ok 
+						? _T('cfg:config_supprimee', array('nom' => $this->nom_config())) 
+						: _T('cfg:erreur_suppression', array('nom' => $this->nom_config())));
 			$this->log($msg);
 		}
 		// sinon verification du type des valeurs postees
@@ -287,13 +288,14 @@ class cfg_formulaire
 		}
 		// si valeurs valides, ont elles changees ? 
 		else if (!$this->log_modif) {
-			$this->message .= _T('cfg:pas_de_changement') . ' <b>' . $this->nom_config() . '</b>';
+			$this->message .= _T('cfg:pas_de_changement', array('nom' => $this->nom_config()));
 		}
 		// si elles ont changees, on modifie !
 		else {
 			$ok = $this->sto->modifier();
-			$this->message .= ($msg = $ok ? _L('config_enregistree') : _L('erreur_enregistrement'))
-								. ' <b>' . $this->nom_config() . '</b>';
+			$this->message .= ($msg = $ok 
+						? _T('cfg:config_enregistree', array('nom' => $this->nom_config())) 
+						: _T('cfg:erreur_enregistrement', array('nom' => $this->nom_config())));
 			$this->log($msg . ' ' . $this->log_modif);
 		}
 		// pipeline 'cfg_post_edition'
@@ -370,9 +372,10 @@ class cfg_formulaire
 		    // verification du type de valeur attendue
 		    // cela est defini par un nom de class css (class="type_idnum")
 		    // 'idnum' etant defini dans $this->types['idnum']...
+		    // si le nom du champ possede une traduction, il sera traduit.
 		    if (!empty($def['typ']) && isset($this->types[$def['typ']])) {
 		    	if (!preg_match($this->types[$def['typ']][0], $this->val[$name])) {
-		    		$return .= _L($name) . '&nbsp;:<br />' .
+		    		$return .= _T($name) . '&nbsp;:<br />' .
 		    		  $this->types[$def['typ']][1] . '<br />';
 		    	}
 		    }

@@ -34,7 +34,7 @@ class cfg_extrapack
 	function lire()
 	{
  		if (!$this->cfg->cfg_id) {
-			$this->cfg->message = _L('id manquant');
+			$this->cfg->message = _T('cfg:id_manquant');
 			return false;
 		}
 
