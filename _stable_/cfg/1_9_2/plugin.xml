@@ -1,6 +1,6 @@
 <plugin>
 	<nom>
-	cfg: moteur de configuration (spip &gt;= 1.9.2)
+	cfg: moteur de configuration (spip &lt;= 1.9.2)
 	</nom>
 	<auteur>bertrand Gugger [->http://toggg.com/]
 _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
