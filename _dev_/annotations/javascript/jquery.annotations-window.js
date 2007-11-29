@@ -99,7 +99,7 @@
 					$(this).css("background","#FEFFAF");
 					var id = $(this).find("td:first").text();
 					var marker_container = $("#annotate_image_summary div.marker_container");
-					var marker = $("#map_marker_preview"+id);
+					var marker = $("#map_marker_preview_"+carto.instance+"_"+id);
 					if(!marker.size()) return;
 					marker_container.find("div.map_marker_highlight").remove();
 					var marker_highlight = $("<div class='map_marker_highlight'>");
