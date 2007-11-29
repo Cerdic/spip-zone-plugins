@@ -1,0 +1,39 @@
+#CACHE{0}
+<div id="formulaire_cfg_contenu_#ENV{cfg_hash}">
+<INCLURE{fond=#ENV{cfg_form}}{env}>
+</div>
+
+
+[(#ENV{cfg_form_ajax}|=={non}|?{'',' '})
+	<script type='text/javascript'><!--
+	if (window.jQuery) (function($){
+		// adresse du fragment ajax
+		var url = '#URL_PAGE{formulaire_cfg}';
+		
+		function start_ajax_cfg(){
+			$("#formulaire_cfg_[(#ENV{cfg_hash})] form")
+			// parametres supplementaires
+			.prepend("<input type='hidden' name='cfg_form' value='#ENV{cfg_form}' />")
+			.prepend("<input type='hidden' name='cfg_hash' value='#ENV{cfg_hash}' />")
+			.prepend("<input type='hidden' name='cfg_afficher_messages' value='#ENV{cfg_afficher_messages}' />")
+			// parametres du post ajax
+			.ajaxForm({
+				url: url,
+				target: "#formulaire_cfg_contenu_[(#ENV{cfg_hash})]",
+				beforeSubmit: function(){
+					$("#formulaire_cfg_[(#ENV{cfg_hash})]")
+					.css('opacity', 0.5);
+				},
+				success: function(){
+					$("#formulaire_cfg_[(#ENV{cfg_hash})]")
+					.css('opacity', 1);
+					start_ajax_cfg();
+				}
+			});
+		}
+		 start_ajax_cfg();
+		
+	})(jQuery);
+	// --></script>
+]
+
