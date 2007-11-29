@@ -14,6 +14,8 @@
 	define ('_INSTALL_USER_DB', 'loginsql');
 	define ('_INSTALL_PASS_DB', '123456HDJ');
 	define ('_INSTALL_NAME_DB', 'mu_'.prefixe_mutualisation($site));
+	
+	/* mettre en commentaire la ligne suivante si vous utilisez l'option table_prefixe plus bas dans la config */ 
 	define ('_INSTALL_TABLE_PREFIX', 'spip');
 
 	/* 
