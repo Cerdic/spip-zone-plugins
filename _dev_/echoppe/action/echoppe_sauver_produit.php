@@ -28,7 +28,7 @@ function action_echoppe_sauver_produit(){
 	
 	switch ($new){
 		case 'oui':
-			$sql_insert_produit = "INSERT INTO spip_echoppe_produits VALUES ('','".$date_debut."', '".$date_fin."', '".$poids."', '".$hauteur."', '".$largeur."', '".$longeur."', '".$colisage."', '".$ref_produit."', '".$prix_base_htva."', '', '".$statut."');";
+			$sql_insert_produit = "INSERT INTO spip_echoppe_produits VALUES ('','".$date_debut."', '".$date_fin."', '".$poids."', '".$hauteur."', '".$largeur."', '".$longeur."', '".$colisage."', '".$ref_produit."', '".$prix_base_htva."', '', 'prepa');";
 			$res_insert_produit = spip_query($sql_insert_produit);
 			//echo $sql_insert_produit.'<hr />';
 			
@@ -39,7 +39,7 @@ function action_echoppe_sauver_produit(){
 			$res_lien_produit_categorie = spip_query($sql_lien_produit_categorie);
 			
 			
-			$sql_insert_produit_descriptif = "INSERT INTO spip_echoppe_produits_descriptions VALUES ('','".$new_id_produit."','".$lang_produit."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".addslashes($ps)."','".$tva."','".$quantite_mini."','') ";
+			$sql_insert_produit_descriptif = "INSERT INTO spip_echoppe_produits_descriptions VALUES ('','".$new_id_produit."','".$lang_produit."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".addslashes($ps)."','".$tva."','".$quantite_mini."', '', '') ";
 			$res_insert_produit_descriptif = spip_query($sql_insert_produit_descriptif);
 			
 			//echo $sql_insert_produit_descriptif.'<hr />';
@@ -47,7 +47,7 @@ function action_echoppe_sauver_produit(){
 			break;
 		
 		case 'ajout_description' :
-			$sql_insert_produit_descriptif = "INSERT INTO spip_echoppe_produits_descriptions VALUES ('','".$id_produit."','".$lang_produit."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".addslashes($ps)."','".$tva."','".$quantite_mini."','') ";
+			$sql_insert_produit_descriptif = "INSERT INTO spip_echoppe_produits_descriptions VALUES ('','".$id_produit."','".$lang_produit."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".addslashes($ps)."','".$tva."','".$quantite_mini."', '', '') ";
 			//echo $sql_insert_produit_descriptif;
 			$res_insert_produit_descriptif = spip_query($sql_insert_produit_descriptif);
 			break;

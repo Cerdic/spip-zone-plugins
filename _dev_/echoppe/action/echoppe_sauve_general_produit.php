@@ -9,6 +9,7 @@ function action_echoppe_sauve_general_produit(){
 	$texte = _request('texte');
 	$ps = _request('ps');
 	$id_categorie = _request('id_categorie');
+	$id_new_categorie = _request('id_new_categorie');
 	$id_produit = _request('id_produit');
 	$new = _request('new');
 	$ref_produit = _request('ref_produit');
@@ -27,6 +28,9 @@ function action_echoppe_sauve_general_produit(){
 	$sql_maj_produit_general = "UPDATE spip_echoppe_produits SET date_debut = '".$date_debut."', date_fin = '".$date_fin."', poids = '".$poids."', hauteur = '".$hauteur."', longueur = '".$longueur."', largeur= '".$largeur."', colisage = '".$colisage."', ref_produit ='".$ref_produit."', prix_base_htva='".$prix_base_htva."' WHERE id_produit = '".$id_produit."';";
 	$res_maj_produit_general = spip_query($sql_maj_produit_general);
 	
+	$sql_maj_lien_categorie = "UPDATE spip_echoppe_categories_produits SET id_categorie = '".$id_new_categorie."' WHERE id_produit = '".$id_produit."';";
+	$res_maj_lien_categorie = spip_query($sql_maj_lien_categorie);
+
 	$redirect = generer_url_ecrire('echoppe_produit', 'id_produit='.$id_produit,'&');
 	//echo $redirect;
 	redirige_par_entete($redirect);

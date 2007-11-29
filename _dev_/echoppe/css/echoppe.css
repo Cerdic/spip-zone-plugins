@@ -12,3 +12,65 @@ div.logo{
 div.logo IMG{
 	width: 150px;
 }
+/* par Exibit */
+.cadre-sous_rub, .cadre-r{
+	padding:8px;
+}
+LI.cadre-sous_rub{
+	list-style:none;
+	
+}
+ul{
+	padding-left:0;
+}
+h1{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:1.4em;
+}
+ul.chemin{
+	margin:0;
+}
+ul.chemin li{
+	list-style:none;
+	margin-left:15px;
+}
+DIV.categorie{
+	position:relative;
+}
+DIV.categorie H1{
+	position:absolute;
+	top:-25px;
+	left:10px;
+	background: transparent url(../images/categorie-24.png) no-repeat scroll 0px 0px;
+	padding-left:30px;
+}
+INPUT.formo{
+	float:none;
+	min-width:20px;
+	margin-right:5px;
+	display:inline;
+}
+DIV.etat {
+	height: 10px;
+	width: 10px;
+}
+
+DIV.prepa{
+	background-color: white;
+	border: 1px #666 solid;
+}
+DIV.propose{
+	background-color: orange;
+	border: 1px #666 solid;
+}
+DIV.poubelle{
+	background-color: #CCC;
+	border: 1px #666 solid;
+}
+DIV.publie{
+	background-color: green;
+	border: 1px #666 solid;
+}
+DIV.boutton_statut A{
+	color: black;
+}

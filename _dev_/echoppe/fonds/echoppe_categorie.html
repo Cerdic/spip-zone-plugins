@@ -1,16 +1,16 @@
-<div class="cadre-r">
-		[<h1>(#TITRE)</h1>]
-		[<p class="verdana1">(#DESCRIPTIF**)</p>]
+<div class="cadre-r categorie">
+	[<h1 class="categorie verdana2 spip_large">(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})</h1>]
+	[<p class="verdana1">(#DESCRIPTIF)</p>]
 </div>
 <B_LesSousCategorie>
 <br />
 <div>
 	<strong><:echoppe:les_sous_categories:></strong>
 		<ul>
-		<BOUCLE_LesSousCategorie(SPIP_ECHOPPE_CATEGORIES){id_parent=#ID_CATEGORIE}>
+		<BOUCLE_LesSousCategorie(SPIP_ECHOPPE_CATEGORIES){id_parent=#ID_CATEGORIE}{par num titre}>
 			<li class="cadre-sous_rub" style="width: 45%;margin: 10px 0px 0px 0px;">
 				<BOUCLE_TitreCategorie(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS){id_categorie=#ID_CATEGORIE}{0,1}>
-					<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">#TITRE</a></strong>
+					<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</a></strong>
 					[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
 				</BOUCLE_TitreCategorie>
 			</li>
@@ -22,17 +22,25 @@
 
 <B_LesProduits>
 <br />
-<div>
-		<strong><:echoppe:les_produits_de_cette_categories:></strong>
-		<ul>
+	<div class="liste">
+	<div style="position: relative;">
+	<div style="position: absolute; top: -12px; left: 3px;"><img src="../plugins/echoppe/images/produit-24.png" alt=""></div>
+	<div style="border-bottom: 1px solid rgb(68, 68, 68); padding: 3px 3px 3px 30px; background-color: white; color: black;" class="verdana2"><strong><:echoppe:les_produits_de_cette_categories:></strong></div>
+	</div>
+	<table width="100%">
+	<tbody>
+	<tr class="tr_liste">
 		<BOUCLE_LesProduits(SPIP_ECHOPPE_PRODUITS spip_echoppe_categories_produits){id_categorie}>
-			<li class="cadre-sous_rub" style="width: 100%; margin: 10px 0px 0px 0px;">
+			<td style="width: 11px;"><div class='etat #STATUT'> </div></td>
+			<td class="arial2">
 				<BOUCLE_LeTitreDuProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS){id_produit}{lang=''}>
 					<strong><a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT})]">[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</a></strong>[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
 				</BOUCLE_LeTitreDuProduit>
-			</li>
+			</td>
 		</BOUCLE_LesProduits>
-		</ul>
+	</tr>
+	</tbody>
+	</table>
 	<div class="nettoyeur"> </div>
 </div>
 </B_LesProduits>

@@ -53,9 +53,11 @@ function exec_echoppe_edit_produit(){
 	$raccourcis .= icone_horizontale(_T('echoppe:gerer_echoppe'), generer_url_ecrire("echoppe",""), _DIR_PLUGIN_ECHOPPE."images/echoppe_blk_24.png","", false);
 	echo bloc_des_raccourcis($raccourcis);
 
-	echo debut_boite_info();
-	echo recuperer_fond('fonds/echoppe_logo_produit',$contexte);
-	echo fin_boite_info();
+	if ($contexte['new'] != 'oui' && $contexte['new'] != 'ajout_description'){
+		echo debut_boite_info();
+		echo recuperer_fond('fonds/echoppe_logo_produit',$contexte);
+		echo fin_boite_info();
+	}
 
 	echo creer_colonne_droite();
 	echo debut_droite(_T('echoppe:edition_de_produit'));

@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colisage' => 'Frais de colisage',
 
 // D
+'dans_la_categorie' => 'Dans la cat&eacute;gorie',
 'date_de_mise_en_vente' => 'Date de mise en vente',
 'date_de_retrait_de_vente' => 'Date de retrait de la vente',
 'descriptif'=>'Descriptif :',
@@ -32,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniere_modification' => 'Derni&egrave;re modification',
 
 // E
-'echoppe'=>'Echoppe, le plugin.',
+'echoppe'=>'Echoppe',
 'editer'=>'Editer',
 'editer_categorie' => 'Editer la cat&eacute;gorie',
 'editer_version'=>'Editer la version',
@@ -41,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //'edition_langue' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
 'edition_de_produit' => '&Eacute;dition d\'un produit',
 'edition_donnees_globales' => '&Eacute;dition des donn&eacute;es globales',
+'etat_du_produit' => '&Eacute;tat du produit',
 'euro' => '&euro;',
 
 // G
@@ -83,8 +85,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pas_de_titre' => 'Pas de titre',
 'pas_encore_cree' => 'N\'existe pas encore.',
 'pas_encore_modifie' => 'Jamais modifi&eacute;',
+'prepa' => 'en pr&eacute;paration',
 'prix_base' => 'Prix de base HTVA',
+'propose' => 'propos&eacute;',
 'poids' => 'Poids',
+'publie' => 'publi&eacute;',
+'poubelle' => '&agrave; la poubelle',
 'ps' => 'Remarque',
 
 // Q

@@ -74,7 +74,7 @@ function exec_echoppe_produit(){
 	
 	echo creer_colonne_droite();
 	echo debut_droite(_T('echoppe:visualisation_d_un_produit'));
-	echo gros_titre($contexte['titre']);
+	//echo gros_titre($contexte['titre']);
 	
 	echo recuperer_fond('fonds/echoppe_produit', $contexte);
 	echo recuperer_fond('fonds/echoppe_options_produit', $contexte);

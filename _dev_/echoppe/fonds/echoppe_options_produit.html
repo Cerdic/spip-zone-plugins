@@ -1,13 +1,13 @@
-<h3><:echoppe:les_options_du_produit:></h3>
-<BOUCLE_LesOptionsDuProduit(SPIP_ECHOPPE_OPTIONS){id_produit}>
+<div class="echoppe_edit_option">
+	<h3><:echoppe:les_options_du_produit:></h3>
+	<BOUCLE_LesOptionsDuProduit(SPIP_ECHOPPE_OPTIONS){id_produit}>
 
-</BOUCLE_LesOptionsDuProduit>
-
-</B_LesOptionsDuProduit>
-<echoppe:pas_d_options_pour_le_produit:>
-<//B_LesOptionsDuProduit>
-<form [action="?exec=option_produit&id_produit=#ID_PRODUIT"] method="post" >
-	<div class="echoppe_edit_option">
-	<input type="submit" class="fondo" value="<:echoppe:ajouter_une_option:>" />
-	</div>
-</form>
+	</BOUCLE_LesOptionsDuProduit>
+		Test
+	</B_LesOptionsDuProduit>
+		<echoppe:pas_d_options_pour_le_produit:>
+	<//B_LesOptionsDuProduit>
+	<form action="[(#EVAL{echoppe_ajouter_option}|generer_url_action{id_produit=#ID_PRODUIT})]" method="post" >
+		<input type="submit" class="fondo" value="<:echoppe:ajouter_une_option:>" />
+	</form>
+</div>
