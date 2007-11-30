@@ -21,12 +21,6 @@ class cfg_table
 			$this->$o = $v;
 		}
 		$this->cfg->table || ($this->cfg->message = _T('cfg:nom_table_manquant'));
-/*
-		$this->cfg->champs_id || ($this->cfg->champs_id = array(
-				strpos('_', $this->cfg->table) !== false ?
-					 'id' . preg_replace(',s$,', '', strrchr($this->cfg->table, '_')) :
-					 'id_' . $this->cfg->table ));
-*/
 	}
 	
 
@@ -55,19 +49,15 @@ class cfg_table
 
    		$cles = explode('/', $this->cfg->cfg_id);
     	$val = array();
-//    		explode('/', $this->cfg->nom . ($this->cfg->casier ? '/' . $this->cfg->casier : ''))
-
-		$query = '';
-		$sep = 'SELECT ';
+    	// selection des champs du select
+		$select = array();
 		foreach ($this->cfg->champs as $name => $def) {
 			if (isset($def['id'])) {
 				continue;
 			}
-			$query .= $sep . $name;
-			$sep = ', ';
+			$select[] = $name;
 	    }
-		$query .= ' FROM ' . $this->cfg->table . $this->where();
-		$query = sql_query($query);
+		$query = sql_select($select, $this->cfg->table, $this->where());
 		($query = sql_fetch($query)) && ($val = $query);
 
 		foreach ($this->cfg->champs_id as $i => $name) {
@@ -77,17 +67,14 @@ class cfg_table
 	    return $val;
 	}
 	
-// fabriquer le WHERE depuis cfg_id
+// fabriquer un array WHERE depuis cfg_id
 	function where()
 	{
    		$cles = explode('/', $this->cfg->cfg_id);
-		$sep = ' WHERE ';
-		$where = '';
+		$where = array();
 		foreach ($this->cfg->champs_id as $i => $name) {
-			$where .= $sep . $name . '=' . 
-				// sans doute un peu brutal ...
-				(is_numeric($cles[$i]) ? intval($cles[$i]) : sql_quote($cles[$i]));
-			$sep = ' AND ';
+			$where[] = $name . '=' 
+					. (is_numeric($cles[$i]) ? intval($cles[$i]) : sql_quote($cles[$i]));
 	    }
 		return $where;
 	}
@@ -104,37 +91,42 @@ class cfg_table
     	$base = $this->lire();
 		// Hmm... a revoir pour table uniquement de liaison...
     	$existe = count($base) > count($this->cfg->champs_id);
-    	
+
     	if ($supprimer) {
 			return !$existe || 
-				sql_query('DELETE FROM ' . $this->cfg->table . $this->where());
+				sql_delete($this->cfg->table, $this->where() );
 		}
 
-		if ($existe) {
-			$query = 'UPDATE ' . $this->cfg->table;
-			$sep = ' SET ';
-			foreach ($this->cfg->champs as $name => $def) {
-				if (isset($def['id'])) {
-					continue;
-				}
-				$query .= $sep . $name .'=' . sql_quote($this->cfg->val[$name]);
-				$sep = ', ';
-		    }
-				spip_log($query . $this->where());
-		    return sql_query($query . $this->where());
-	    }
-
-		$query = 'INSERT INTO ' . $this->cfg->table;
-		$sep = ' (';
-		$values = ' VALUES';
+		$champs = array();
 		foreach ($this->cfg->champs as $name => $def) {
-			$query .= $sep . $name;
-			$values .= $sep . sql_quote($this->cfg->val[$name]);
-			$sep = ', ';
+			if ($existe && isset($def['id'])) {
+				continue;
+			}
+			$champs[$name] = sql_quote($this->cfg->val[$name]);
+		}	
+			
+		// update
+		if ($existe) {	
+		    return sql_update($this->cfg->table, $champs, $this->where() );
 	    }
-	    
-			   spip_log($query . ')' . $values . ')');
-	    return sql_query($query . ')' . $values . ')');  
+		
+		// sinon insert
+		
+		// recherche de cles primaires autoincrementes
+		// pour ne pas les integrer (sinon pg rale !)
+		// pour l'instant, on part du principe que
+		// si le champs primaire est vide, c'est qu'il est auto-increment
+		// bof bof !
+		print_r($this->cfg->champs_id);
+		foreach ($champs as $name => $def) {
+			if (in_array($name, $this->cfg->champs_id) && $def == "''" ) {
+				unset($champs[$name]);
+			}
+		}
+		
+	    return sql_insert($this->cfg->table, 
+	    	'(' . implode(',', array_keys($champs)) . ')', 
+	    	'(' . implode(',', array_values($champs)) . ')' );
 	}
 }
 ?>

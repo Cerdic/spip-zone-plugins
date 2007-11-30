@@ -22,12 +22,6 @@ class cfg_extrapack
 			$this->$o = $v;
 		}
 		$this->cfg->table || ($this->cfg->table = 'spip_auteurs');
-/*
-		$this->cfg->champs_id || ($this->cfg->champs_id = array(
-				strpos('_', $this->cfg->table) !== false ?
-					 'id' . preg_replace(',s$,', '', strrchr($this->cfg->table, '_')) :
-					 'id_' . $this->cfg->table ));
-*/
 	}
 	
 // recuperer les valeurs, utilise la fonction commune lire_config() de cfg_options.php
@@ -99,15 +93,15 @@ class cfg_extrapack
 		}
 
 		list($table, $colid) = get_table_id($this->cfg->table);
-		$extra = 'UPDATE ' . $table . ' SET extra=' .
-			($base ? _q(serialize($base)) : "''");
-		$and = ' WHERE ';
+		$where = array();
 		foreach ($colid as $i => $name) {
-			$extra .= $and . $name . '=' . 
-				(is_numeric($cles[$i]) ? intval($cles[$i]) : _q($cles[$i]));
-			$and = ' AND ';
+			$where[] = $name . '=' 
+					. (is_numeric($cles[$i]) ? intval($cles[$i]) : sql_quote($cles[$i]));
 	    }
-		return sql_query($extra);
+	    return sql_updateq(
+	    	$table, 
+	    	array('extra' => ($base ? serialize($base) : "''")),
+	    	$where);
 	}
 }
 ?>

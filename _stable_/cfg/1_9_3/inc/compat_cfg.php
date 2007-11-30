@@ -49,24 +49,37 @@ function inc_compat_cfg_dist($quoi = NULL) {
 function compat_cfg_defs_dist() {
 	$defs = array(
 		'sql_fetch' => 
-			'($res, $serveur=\'\') {
+			'(
+				$res, 
+				$serveur=\'\'
+			) {
 				return spip_fetch_array($res);
 			}',
-		
-		/*'sql_selectdb' => 
-			'($res, $serveur=\'\') {
-				$GLOBALS[\'spip_mysql_db\'] = mysql_select_db($res);
-				return $GLOBALS[\'spip_mysql_db\'];
-			}',	*/
 		
 		'sql_query' => 
 			'($res, $serveur=\'\') {
 				return spip_query_db($res);
 			}',	
-		
-		// sql_quote : mysql_escape_string depuis 1.9.3, ici _q
+			
+		// n'existe pas en 1.9.2
+		// on cree la requete directement
+		'sql_delete' => 
+			'($table, $where=\'\', $serveur=\'\') {
+				if (!is_array($table)) $table = array($table);
+				if (!is_array($where)) $where = array($where);
+				$query = \'DELETE FROM \'
+						. implode(\',\', $table)
+						. \' WHERE \'
+						. implode(\' AND \', $where);
+				return spip_query_db($query);
+			}',
+			
+		// sql_quote : _q directement
 		'sql_quote' => 
-			'($val, $serveur=\'\') {
+			'(
+				$val, 
+				$serveur=\'\'
+			) {
 				return _q($val);
 			}',	
 						
@@ -94,12 +107,81 @@ function compat_cfg_defs_dist() {
 					$table = \'\', 
 					$id = \'\', 
 					$serveur);
+			}',
+			
+		// n'existe pas en 1.9.2
+		// on cree la requete directement
+		'sql_update' => 
+			'(
+				$table, 
+				$champs, 
+				$where=\'\', 
+				$desc=array(), 
+				$serveur=\'\'
+			) {
+				if (!is_array($table)) 	$table = array($table);
+				if (!is_array($champs)) $champs = array($champs);
+				if (!is_array($where)) 	$where = array($where);
+
+				$query = $r = \'\';
+				foreach ($champs as $champ => $val)
+					$r .= \',\' . $champ . "=$val";
+				if ($r = substr($r, 1))
+					$query = \'UPDATE \'
+							. implode(\',\', $table)
+							. \' SET \' . $r
+							. (empty($where) ? \'\' :\' WHERE \' . implode(\' AND \', $where));
+				if ($query)
+					return spip_query_db($query);
+			}',
+
+		'sql_updateq' => 
+			'(
+				$table, 
+				$champs, 
+				$where=\'\', 
+				$desc=array(), 
+				$serveur=\'\'
+			) {
+				if (!is_array($champs)) $exp = array($champs);
+				
+				foreach ($champs as $k => $val) {
+					$champs[$k] = sql_quote($val);
+				}
+				
+				return sql_update(				
+					$table, 
+					$champs, 
+					$where, 
+					$desc, 
+					$serveur
+				);
+			}',	
+			
+		
+	
+			
+		/*
+		'sql_count' => 
+			'(
+				$res, 
+				$serveur=\'\'
+			) {
+				return spip_mysql_count($res);
 			}'
 		
-		/*'sql_count' => 
-			'($res, $serveur=\'\') {
-				return spip_mysql_count($res);
-			}'*/
+		
+		'sql_selectdb' => 
+			'(
+				$res, 
+				$serveur=\'\'
+			) {
+				$GLOBALS[\'spip_mysql_db\'] = mysql_select_db($res);
+				return $GLOBALS[\'spip_mysql_db\'];
+			}',	
+		
+		
+		*/
 	);
 	return $defs;
 }
