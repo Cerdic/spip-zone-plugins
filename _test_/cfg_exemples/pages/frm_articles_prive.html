@@ -10,6 +10,14 @@ d'ajouter une 'url de documentation' (c'est pour inciter les gens &agrave; docum
 
 <p>Cette entr&eacute;e utilise le pipeline affichage_milieu</p>
 
+<b>Les 5 derniers articles</b>
+<B_art>
+<ul>
+<BOUCLE_art(ARTICLES){0,5}{par date}{inverse}>
+<li><a href="[(#VAL{articles}|generer_url_ecrire{id_article=#ID_ARTICLE})]">#TITRE</a></li>
+</BOUCLE_art>
+</ul>
+</B_art>
 
 <b>Code du fond CFG :</b>
 #CODE{fonds/cfg_exemple_prive_article.html}
