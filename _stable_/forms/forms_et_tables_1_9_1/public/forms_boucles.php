@@ -117,6 +117,33 @@
 		}
 	}
 	
+	// {deja_repondu id_form [qui]}
+	// retourne les reponses a un formulaire d'un auteur
+	// ou la reponse unique a un formulaire tague comme reponse unique (pose d'un cookie sur les visiteurs non connectes)
+	// ou la reponse unique a un sondage
+	function critere_deja_repondu_dist($idb, &$boucles, $crit) {
+		global $table_des_tables;
+		$boucle = &$boucles[$idb];
+		$t = $boucle->id_table;
+		if ($t=='forms_donnees'){
+			$_id_form = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+			$test_cookie = true;
+			if (isset($crit->param[1])) {
+				$test_cookie = false; // ne pas tester le cookie si l'id auteur est specifie par le critere
+				$_qui = calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent);
+			}
+			else
+				$_qui = "\$GLOBALS['auteur_session']['id_auteur']";
+			$_cookie = "\$_COOKIE[\$cf=Forms_nom_cookie_form($_id_form)]";
+
+			$boucle->where[]= array("'='","'$t.id_form'",$_id_form);
+			$boucle->where[] = "'('.(
+			".($test_cookie?"isset($_cookie)":"false")."?
+			('cookie='._q(\$_COOKIE[\$cf]). ($_qui?' OR id_auteur='._q($_qui):''))
+			:($_qui?'id_auteur='._q($_qui):'0=1')
+			).')'";
+		}
+	}	
 	function boucle_TABLES_dist($id_boucle, &$boucles){
 		if (function_exists($f='boucle_FORMS') OR function_exists($f='boucle_FORMS_dist'))
 			return $f($id_boucle, $boucles);

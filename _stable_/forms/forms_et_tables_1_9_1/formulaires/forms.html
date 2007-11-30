@@ -10,7 +10,8 @@
 [<p class='spip_form_ok'>(#ENV{formok})
 	[(#TYPE_FORM|=={sondage}|?{' ',''})	<a href='[(#ENV{self}|parametre_url{'resultats',#ID_FORM}|ancre_url{form#ID_FORM})]'><:forms:voir_resultats:></a>]
 	[<span class='spip_form_ok_confirmation'>(#ENV{reponse})</span>]
-</p>]
+</p>
+#ENV*{message_complementaire}]
 [<p class='spip_form_erreur'>(#ENV*{erreur_message})</p>]
 [<img src='(#ENV{url_validation})' width='1' height='1' alt='validation de la saisie' />]
 [(#ENV{formvisible}|?{' '})
@@ -24,7 +25,7 @@
 		[<input type='hidden' name='id_donnee' value='(#ENV{id_donnee})' />]
 
 		<input type='hidden' name='retour_form' value='#ENV{url_retour}' />
-		[(#TYPE_FORM|=={sondage}|?{' '})<input type='hidden' name='ajout_cookie_form' value='oui' />]
+		[(#ENV{pose_cookie}|?{' '})<input type='hidden' name='ajout_cookie_form' value='oui' />]
 		</div>
 			<INCLURE{fond=#ENV{class}}{id_form}{affiche_sondage}{erreur}{valeurs=#ENV**{valeurs}}>
 	[(#ENV{formactif})

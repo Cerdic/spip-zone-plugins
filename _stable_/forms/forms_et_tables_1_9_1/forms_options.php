@@ -36,6 +36,8 @@ if (!isset($GLOBALS['spip_pipeline']['forms_pre_remplit_formulaire'])) $GLOBALS[
 if (!isset($GLOBALS['spip_pipeline']['forms_pre_edition_donnee'])) $GLOBALS['spip_pipeline']['forms_pre_edition_donnee'] = '';
 if (!isset($GLOBALS['spip_pipeline']['forms_post_edition_donnee'])) $GLOBALS['spip_pipeline']['forms_post_edition_donnee'] = '';
 if (!isset($GLOBALS['spip_pipeline']['forms_valide_conformite_champ'])) $GLOBALS['spip_pipeline']['forms_valide_conformite_champ'] = '';
+if (!isset($GLOBALS['spip_pipeline']['forms_message_complement_post_saisie'])) $GLOBALS['spip_pipeline']['forms_message_complement_post_saisie'] = '';
+
 
 
 #affichage des donnees
@@ -194,8 +196,9 @@ function Forms_poser_cookie_sondage($id_form) {
 			$cookie = creer_uniqid();
 		}
 		$GLOBALS['cookie_form'] = $cookie; // pour utilisation dans inc_forms...
+		include_spip("inc/cookie");
 		// Expiration dans 30 jours
-		setcookie($nom_cookie, $cookie, time() + 30 * 24 * 3600);
+		spip_setcookie($nom_cookie, $_COOKIE[$nom_cookie] = $cookie, time() + 30 * 24 * 3600);
 	}
 }
 
@@ -206,31 +209,40 @@ function Forms_generer_url_sondage($id_form) {
 if ((intval(_request('ajout_reponse'))) && (_request('ajout_cookie_form') == 'oui'))
 	Forms_poser_cookie_sondage(_request('ajout_reponse'));
 
-// test si un cookie sondage a ete pose
-foreach($_COOKIE as $cookie=>$value){
-	if (preg_match(",".$GLOBALS['cookie_prefix']."cookie_form_([0-9]+),",$cookie,$reg)){
-		$idf = intval($reg[1]);
-		$res = spip_query("SELECT id_article,id_rubrique FROM spip_forms_articles WHERE id_form=".intval($idf));
-		while($row=spip_fetch_array($res)){
-			$ida = $row['id_article'];
-			$idr = $row['id_rubrique'];
-			if (
-						(isset($GLOBALS['article'])&&($GLOBALS['article']==$ida))
-					||(isset($GLOBALS['id_article'])&&($GLOBALS['id_article']==$ida))
-					||(isset($GLOBALS["article$ida"]))
-					||(isset($GLOBALS['contexte_inclus']['id_article'])&&($GLOBALS['contexte_inclus']['id_article']==$idr))
-					||(isset($GLOBALS['rubrique'])&&($GLOBALS['rubrique']==$idr))
-					||(isset($GLOBALS['id_rubrique'])&&($GLOBALS['id_rubrique']==$idr))
-					||(isset($GLOBALS["rubrique$idr"]))
-					||(isset($GLOBALS['contexte_inclus']['rubrique'])&&($GLOBALS['contexte_inclus']['rubrique']==$idr))
-					){
-					// un article qui utilise le form va etre rendu
-					// il faut utiliser le marquer cache pour ne pas polluer la page commune
-					$GLOBALS['marqueur'].=":sondage $idf";
-					break;
-				}
+// le cache est gerer automatiquement par le core en 1.9.3 ou avec le plugin balise session
+if (!defined('_DIR_PLUGIN_BALISESESSION') AND version_compare($GLOBALS['spip_version_code'],'1.93','<')) {
+	// test si un cookie sondage a ete pose
+	foreach($_COOKIE as $cookie=>$value){
+		if (preg_match(",".$GLOBALS['cookie_prefix']."cookie_form_([0-9]+),",$cookie,$reg)){
+			$idf = intval($reg[1]);
+			$res = spip_query("SELECT id_article,id_rubrique FROM spip_forms_articles WHERE id_form=".intval($idf));
+			while($row=spip_fetch_array($res)){
+				$ida = $row['id_article'];
+				$idr = $row['id_rubrique'];
+				if (
+							(isset($GLOBALS['article'])&&($GLOBALS['article']==$ida))
+						||(isset($GLOBALS['id_article'])&&($GLOBALS['id_article']==$ida))
+						||(isset($GLOBALS["article$ida"]))
+						||(isset($GLOBALS['contexte_inclus']['id_article'])&&($GLOBALS['contexte_inclus']['id_article']==$idr))
+						||(isset($GLOBALS['rubrique'])&&($GLOBALS['rubrique']==$idr))
+						||(isset($GLOBALS['id_rubrique'])&&($GLOBALS['id_rubrique']==$idr))
+						||(isset($GLOBALS["rubrique$idr"]))
+						||(isset($GLOBALS['contexte_inclus']['rubrique'])&&($GLOBALS['contexte_inclus']['rubrique']==$idr))
+						){
+						// un article qui utilise le form va etre rendu
+						// il faut utiliser le marquer cache pour ne pas polluer la page commune
+						$GLOBALS['marqueur'].=":sondage $idf";
+						break;
+					}
+			}
 		}
 	}
 }
-
+function Forms_definir_session($session){
+	foreach($_COOKIE as $cookie=>$value){
+		if (strpos($cookie,'cookie_form_')!==FALSE)
+			$session .= "-$cookie:$value";
+	}
+	return $session;
+}
 ?>

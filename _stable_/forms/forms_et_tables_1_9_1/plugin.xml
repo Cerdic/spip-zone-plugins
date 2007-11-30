@@ -49,6 +49,9 @@
 	<install>base/forms_upgrade.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
+		<nom>definir_session</nom>
+	</pipeline>
+	<pipeline>
 		<nom>pre_propre</nom>
 		<action>forms_avant_propre</action>
 		<inclure>forms_filtres.php</inclure>

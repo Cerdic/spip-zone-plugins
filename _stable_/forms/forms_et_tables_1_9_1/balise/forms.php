@@ -54,6 +54,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 	$formok = '';
 	$valeurs = pipeline('forms_pre_remplit_formulaire',array('args'=>array('id_form'=>$id_form,'id_donne'=>$id_donnee),'data'=>array('0'=>'0')));
 	$affiche_sondage = '';
+	$pose_cookie = false;
 	$formactif = (
 	  (
 		   (_DIR_RESTREINT==_DIR_RESTREINT_ABS )
@@ -76,6 +77,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 			}
 			if ($reponse)
 			  $reponse = _T($message_confirm,array('mail'=>$reponse));
+			$message_complementaire = pipeline('forms_message_complement_post_saisie',array('args'=>array('id_donnee'=>$id_donnee),'data'=>''));
 			if (!_DIR_RESTREINT 
 			  AND (($r=_request('id_donnee'))===NULL OR $r==$id_donnee OR ($r<0 AND !in_array(_request('exec'),$GLOBALS['forms_saisie_km_exec']))) )
 				$valeurs = Forms_valeurs($id_donnee,$id_form);
@@ -96,20 +98,23 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 	&& ( ($row['modifiable']=='oui') || ($row['multiple']=='non') )
 	){
 		global $auteur_session;
-		$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
+		$pose_cookie = true; // on pose un cookie pour reperer les gens qui repondent sans etre connectes, et gerer les caches !
+		$id_auteur = $auteur_session['id_auteur'] ? intval($auteur_session['id_auteur']) : 0;
 		include_spip('inc/forms');
 		$cookie = $_COOKIE[Forms_nom_cookie_form($id_form)];
 		//On retourne les donnees si auteur ou cookie
 		$q = "SELECT donnees.id_donnee " .
 			"FROM spip_forms_donnees AS donnees " .
 			"WHERE donnees.id_form="._q($id_form)." ".
-			"AND donnees.statut='publie' ";
-		if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).") ";
-		else
-			if ($id_auteur)
-				$q.="AND id_auteur="._q($id_auteur)." ";
+			"AND donnees.statut='publie' AND (";
+		if ($cookie) { 
+			$q.="cookie="._q($cookie). ($id_auteur?" OR id_auteur="._q($id_auteur):"");
+		}
+		else if ($id_auteur)
+				$q.="id_auteur="._q($id_auteur);
 			else
-				$q.="AND 0=1 ";
+				$q.="0=1";
+		$q .= ") ";
 		//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
 		if ($row['multiple']=='oui') $q.="AND donnees.id_donnee="._q($id_donnee);
 		$res = spip_query($q);
@@ -121,6 +126,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 	}
 
 	if ($row['type_form'] == 'sondage'){
+		$pose_cookie = true;
 		include_spip('inc/forms');
 		if ((Forms_verif_cookie_sondage_utilise($id_form)==true)&&(_DIR_RESTREINT!=""))
 			$affiche_sondage=' ';
@@ -132,6 +138,8 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 			'erreur_message'=>isset($erreur['@'])?$erreur['@']:'',
 			'erreur'=>serialize($erreur),
 			'reponse'=>filtrer_entites($reponse),
+			'message_complementaire' => $message_complementaire ? $message_complementaire : '',
+			'pose_cookie' => $pose_cookie,
 			'id_article' => $id_article,
 			'id_form' => $id_form,
 			'id_donnee' => $id_donnee?$id_donnee:(0-$GLOBALS['auteur_session']['id_auteur']), # GROS Hack pour les jointures a la creation
@@ -142,7 +150,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 			'formok' => filtrer_entites($formok),
 			'formvisible' => $formok?(_DIR_RESTREINT!=_DIR_RESTREINT_ABS):true,
 			'formactif' => $formactif,
-			'class' => 'formulaires/'.($class?$class:'forms_structure')
+			'class' => 'formulaires/'.($class?$class:'forms_structure'),
 		));
 }
 
