@@ -22,6 +22,12 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+if (!defined('_DIR_PLUGIN_SPIPBB')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_SPIPBB',(_DIR_PLUGINS.end($p))."/");
+}
+
+include_spip('base/spipbb');
 
 $table_des_traitements['TITRE'][]= 'supprimer_numero(typo(%s))';
 

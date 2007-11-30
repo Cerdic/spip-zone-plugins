@@ -158,18 +158,27 @@ function spipbb_check_spip_config() {
 		$res['forums_publics']= array( 'etat'=>true, 'message'=>_T('spipbb:admin_spip_forums_ok'));
 		$resultat=_T('spipbb:admin_spip_forums_ok');
 	} else {
-		$res['forums_publics']= array( 'etat'=>true, 'message'=>_T('spipbb:admin_spip_forums_erreur'));
+		$res['forums_publics']= array( 'etat'=>false, 
+										'message'=>_T('spipbb:admin_spip_forums_erreur')
+										//'message' => spipbb_
+										);
 		$resultat=_T('spipbb:admin_spip_forums_erreur');
 	}
 
 	// utiliser mot cles 
 	// mots_cles_forums articles_mots + mots_cles_forums
 	if ( $GLOBALS['meta']['articles_mots']=='oui' ) {
-		$res['articles_mots']= array( 'etat'=>true, 'message'=>_T('spipbb:admin_spip_mots_cles_ok'));
+		$res['articles_mots']= array( 'etat'=>true, 
+										'message'=>_T('spipbb:admin_spip_mots_cles_ok')
+									
+										);
 		$resultat=_T('spipbb:admin_spip_mots_cles_ok');
 	}
 	else {
-		$res['articles_mots']= array( 'etat'=>false, 'message'=>_T('spipbb:admin_spip_mots_cles_erreur'));
+		$res['articles_mots']= array( 'etat'=>false, 
+										//'message'=>_T('spipbb:admin_spip_mots_cles_erreur')
+										'message'=> spipbb_config_mots()
+										);
 		$resultat=_T('spipbb:admin_spip_mots_cles_erreur');
 	}
 	$resultat.="<br />";
@@ -262,5 +271,65 @@ function spipbb_config_infos_auteurs()
 	$res .= fin_cadre_trait_couleur(true);
 	return $res;
 } // spipbb_config_infos_auteurs
+
+
+// config des mots cles importee de configuration/mots
+
+function spipbb_config_mots(){
+	include_spip('inc/presentation');
+	include_spip('inc/config');
+
+	global $spip_lang_left;
+
+	$articles_mots = $GLOBALS['meta']["articles_mots"];
+	$mots_cles_forums = $GLOBALS['meta']["mots_cles_forums"];
+	$forums_publics = $GLOBALS['meta']["forums_publics"];
+
+	$res .= "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
+	. "<tr><td class='verdana2'>"
+	. _T('texte_mots_cles')."<br />\n"
+	. _T('info_question_mots_cles')
+	. "</td></tr>"
+	. "<tr>"
+	. "<td align='center' class='verdana2'>"
+	. bouton_radio("articles_mots", "oui", _T('item_utiliser_mots_cles'), $articles_mots == "oui", "changeVisible(this.checked, 'mots-config', 'block', 'none');")
+	. " &nbsp;"
+	. bouton_radio("articles_mots", "non", _T('item_non_utiliser_mots_cles'), $articles_mots == "non", "changeVisible(this.checked, 'mots-config', 'none', 'block');");
+
+	//	$res .= afficher_choix('articles_mots', $articles_mots,
+	//		array('oui' => _T('item_utiliser_mots_cles'),
+	//			'non' => _T('item_non_utiliser_mots_cles')), "<br />");
+	$res .= "</td></tr></table>";
+
+	if ($articles_mots != "non") $style = "display: block;";
+	else $style = "display: none;";
+	
+	$res .= "<div id='mots-config' style='$style'>"
+	. "<br />\n" ;
+	if ($forums_publics != "non"){
+		$res .= "<br />\n"
+		. debut_cadre_relief("", true, "", _T('titre_mots_cles_dans_forum'))
+		. "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
+		. "<tr><td class='verdana2'>"
+		. _T('texte_mots_cles_dans_forum')
+		. "</td></tr>"
+		. "<tr>"
+		. "<td align='$spip_lang_left' class='verdana2'>"
+		. afficher_choix('mots_cles_forums', $mots_cles_forums,
+			array('oui' => _T('item_ajout_mots_cles'),
+				'non' => _T('item_non_ajout_mots_cles')))
+		. "</td></tr>"
+		. "</table>"
+		. fin_cadre_relief(true);
+	}
+	$res .= "</div>";	
+
+	$res = debut_cadre_trait_couleur("mot-cle-24.gif", true, "", _T('info_mots_cles'))
+	. ajax_action_post('configurer', 'mots', 'configuration','',$res) 
+	. fin_cadre_trait_couleur(true);
+
+	return ajax_action_greffe('configurer-mots', '', $res);
+
+}
 
 ?>

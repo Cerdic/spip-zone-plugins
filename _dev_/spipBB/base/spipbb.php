@@ -39,8 +39,8 @@ $tables_spipbb = array( 'spip_visites_forums', 'spip_auteurs_spipbb', 'spip_spam
 
 $spip_visites_forums = array(
 	"date"		=> "date NOT NULL",
-	"id_forum" 	=> "bigint(21) unsigned NOT NULL",
-	"visites" 	=> "int(10) unsigned NOT NULL default '0'",
+	"id_forum" 	=> "bigint(21) NOT NULL",
+	"visites" 	=> "int(10) NOT NULL default '0'",
 	"maj" 		=> "timestamp" , // NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 	);
 
@@ -55,8 +55,8 @@ $tables_principales['spip_visites_forums'] = array(
 	'key' => &$spip_visites_forums_key);
 
 $spip_auteurs_spipbb = array( // table spip_auteurs_spipbb
-	"id_auteur"	=> "bigint(21) unsigned NOT NULL", // primary key
-	"spam_warnings"	=> "int(10) unsigned NOT NULL default '0'",
+	"id_auteur"	=> "bigint(21) NOT NULL", // primary key
+	"spam_warnings"	=> "int(10) NOT NULL default '0'",
 	'ip_auteur'	=> "varchar(16) default NULL",
 	'ban_date'	=> "timestamp", // NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 	'ban'		=> "varchar(3) default 'non'"	// ban 'oui' 'non' default 'non'
@@ -71,7 +71,7 @@ $tables_principales['spip_auteurs_spipbb'] = array(
 		'key' => &$spip_auteurs_spipbb_key );
 
 $spip_spam_words = array(
-	"id_spam_word"	=> "bigint(21) unsigned NOT NULL auto_increment",
+	"id_spam_word"	=> "bigint(21) NOT NULL auto_increment",
 	"spam_word"	=> "varchar(255) NOT NULL" );
 
 $spip_spam_words_key = array( 'PRIMARY KEY' => "id_spam_word",
@@ -82,15 +82,15 @@ $tables_principales['spip_spam_words'] = array(
 		'key' => &$spip_spam_words_key );
 
 $spip_spam_words_log = array(
-	"id_spam_log"	=> "bigint(21) unsigned NOT NULL auto_increment",
-	"id_auteur"	=> "bigint(21) unsigned NOT NULL",
+	"id_spam_log"	=> "bigint(21) NOT NULL auto_increment",
+	"id_auteur"	=> "bigint(21) NOT NULL",
 	"ip_auteur"	=> "varchar(16) default NULL",
 	"login"		=> "varchar(255) default NULL",
 	"log_date"	=> "timestamp", // NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP"
 	"titre"		=> "text",
 	"message"	=> "mediumtext",
-	"id_forum"	=> "bigint(21) unsigned NOT NULL",
-	"id_article"	=> "bigint(21) unsigned NOT NULL"
+	"id_forum"	=> "bigint(21) NOT NULL",
+	"id_article"	=> "bigint(21) NOT NULL"
 		);
 
 $spip_spam_words_log_key = array( 'PRIMARY KEY' => "id_spam_log" );
@@ -101,7 +101,7 @@ $tables_principales['spip_spam_words_log'] = array(
 
 
 $spip_ban_liste = array(
-	"id_ban"	=> "bigint(21) unsigned NOT NULL auto_increment",
+	"id_ban"	=> "bigint(21) NOT NULL auto_increment",
 	"ban_login"	=> "text",
 	"ban_ip"	=> "varchar(16) default NULL",
 	"ban_email"	=> "tinytext",
