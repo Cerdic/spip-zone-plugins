@@ -22,7 +22,8 @@ function Annotations_insert_head($flux) {
 		<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jquery.dimensions.js')).'"></script>
 		<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jquery.annotations.js')).'"></script>
 		<script type="text/javascript" src="'.generer_url_public("cfg_annotations.js").'"></script>
-		<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jquery.annotations-window.js')).'"></script>';
+		<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jquery.annotations-window.js')).'"></script>
+		<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jquery.annotations.init.js')).'"></script>';
 	else
 		$flux .= '
 <script type="text/javascript">
@@ -80,6 +81,28 @@ function Annotations_insert_head($flux) {
 }
 
 
+function Annotations_exec_init($flux = false) {
+	static $id_article = 0;
+	if($flux) {
+		if($flux["args"]["exec"]=="articles")
+			$id_article = $flux["args"]["id_article"];
+	}	else 
+		return $id_article;
+};
+
+function Annotations_header_prive($flux) {
+	$id_article = Annotations_exec_init();
+	if($id_article)
+		return Annotations_insert_head($flux).
+		"<style type=\"text/css\">
+		#annotate_window {display:none}
+		</style>
+		<meta name=\"annotations_article\" content=\"".$id_article."\" />
+		";
+	else
+		return $flux;
+}
+
 function Annotations_affichage_final($flux) {
 	if(isset($GLOBALS['auteur_session']['statut']) &&
 		 ($GLOBALS['auteur_session']['statut']=="0minirezo" ||
@@ -99,6 +122,15 @@ function Annotations_affichage_final($flux) {
 		$flux = substr_replace($flux,recuperer_fond("inc-annotationswindow",$context),$pos,0);	
 	}
 	
+	return $flux;
+}
+
+function Annotations_body_prive($flux) {
+	$id_article = Annotations_exec_init();
+	if($id_article) {
+		include_spip("public/assembler");
+		$flux .= recuperer_fond("inc-annotationswindow");
+	}
 	return $flux;
 }
 

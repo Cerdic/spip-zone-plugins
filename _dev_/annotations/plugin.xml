@@ -40,6 +40,21 @@
 		<action>affichage_final</action>
 		<inclure>annotations_pipelines.php</inclure>
 	</pipeline>	
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_prive</action>
+		<inclure>annotations_pipelines.php</inclure>	
+	</pipeline>
+	<pipeline>
+		<nom>body_prive</nom>
+		<action>body_prive</action>
+		<inclure>annotations_pipelines.php</inclure>	
+	</pipeline>
+	<pipeline>
+		<nom>exec_init</nom>
+		<action>exec_init</action>
+		<inclure>annotations_pipelines.php</inclure>	
+	</pipeline>
 	<necessite id="spip" version="[1.9300;]" />
 	<necessite id="FormulaireUpload" version="[0.1;]" />
 	

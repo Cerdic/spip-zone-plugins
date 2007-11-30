@@ -17,7 +17,7 @@
 		'save_point' => 'Save this point',
 		'select_fields' => 'Select the fields to add',
 		'import' => 'Import',
-		'preview_csv' => 'Preview of the csv file'
+		'preview_csv' => 'Preview of the csv file',
 		'click_select_csv' => 'Click on the icons to select a csv file',
 		'download' => 'Download',
 		'no_data_csv' => 'No data in the csv file',
