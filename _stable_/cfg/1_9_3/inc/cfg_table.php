@@ -102,12 +102,12 @@ class cfg_table
 			if ($existe && isset($def['id'])) {
 				continue;
 			}
-			$champs[$name] = sql_quote($this->cfg->val[$name]);
+			$champs[$name] = $this->cfg->val[$name];
 		}	
 			
 		// update
 		if ($existe) {	
-		    return sql_update($this->cfg->table, $champs, $this->where() );
+		    return sql_updateq($this->cfg->table, $champs, $this->where() );
 	    }
 		
 		// sinon insert
@@ -117,16 +117,13 @@ class cfg_table
 		// pour l'instant, on part du principe que
 		// si le champs primaire est vide, c'est qu'il est auto-increment
 		// bof bof !
-		print_r($this->cfg->champs_id);
 		foreach ($champs as $name => $def) {
 			if (in_array($name, $this->cfg->champs_id) && $def == "''" ) {
 				unset($champs[$name]);
 			}
 		}
 		
-	    return sql_insert($this->cfg->table, 
-	    	'(' . implode(',', array_keys($champs)) . ')', 
-	    	'(' . implode(',', array_values($champs)) . ')' );
+	    return sql_insertq($this->cfg->table, $champs);
 	}
 }
 ?>
