@@ -298,6 +298,7 @@ function exec_gerer_courrier(){
 				echo "<input style='float:left' type='text' name='adresse_test' value='"._T('spiplistes:email_adresse')."' class='fondo' size='35' onfocus=\"this.value=''\" />" ;
 				echo "<div style='font-size:12px;font-familly:Verdana,Garamond,Times,serif;color:#000000;'>";
 				echo "<div style='float:right'><input type='submit' name='envoi_test' value='"._T('spiplistes:email_tester')."' class='fondo'  /></div>";
+				echo "<div style='clear:both;'> </div>";
 				echo "</div>" ;
 				echo fin_cadre_enfonce() ;
 				
