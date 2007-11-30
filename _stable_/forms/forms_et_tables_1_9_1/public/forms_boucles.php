@@ -137,11 +137,11 @@
 			$_cookie = "\$_COOKIE[\$cf=Forms_nom_cookie_form($_id_form)]";
 
 			$boucle->where[]= array("'='","'$t.id_form'",$_id_form);
-			$boucle->where[] = "'('.(
+			$boucle->where[] = "('('.(
 			".($test_cookie?"isset($_cookie)":"false")."?
-			('cookie='._q(\$_COOKIE[\$cf]). ($_qui?' OR id_auteur='._q($_qui):''))
-			:($_qui?'id_auteur='._q($_qui):'0=1')
-			).')'";
+			('$t.cookie='._q(\$_COOKIE[\$cf]). ($_qui?' OR $t.id_auteur='._q($_qui):''))
+			:($_qui?'$t.id_auteur='._q($_qui):'0=1')
+			).')')";
 		}
 	}	
 	function boucle_TABLES_dist($id_boucle, &$boucles){

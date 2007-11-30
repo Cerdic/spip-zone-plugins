@@ -191,11 +191,13 @@ function Forms_poser_cookie_sondage($id_form) {
 	if ($id_form = intval($id_form)) {
 		$nom_cookie = $GLOBALS['cookie_prefix'].'cookie_form_'.$id_form;
 		// Ne generer un nouveau cookie que s'il n'existe pas deja
-		if (!$cookie = $_COOKIE[$nom_cookie]) {
+		if (!($cookie = $_COOKIE[$nom_cookie])) {
 			include_spip("inc/acces");
 			$cookie = creer_uniqid();
 		}
-		$GLOBALS['cookie_form'] = $cookie; // pour utilisation dans inc_forms...
+		// pour utilisation dans inc_forms...
+		// on utilise directement $_COOKIE
+		//$GLOBALS['cookie_form'] = $cookie; 
 		include_spip("inc/cookie");
 		// Expiration dans 30 jours
 		spip_setcookie($nom_cookie, $_COOKIE[$nom_cookie] = $cookie, time() + 30 * 24 * 3600);

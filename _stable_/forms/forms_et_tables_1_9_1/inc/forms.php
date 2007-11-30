@@ -273,11 +273,13 @@
 		$cookie = $_COOKIE[Forms_nom_cookie_form($id_form)];
 		$q="SELECT id_donnee FROM spip_forms_donnees " .
 			"WHERE statut='publie' AND id_form=".intval($id_form)." ";
-		if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")";
-		else
-			if ($id_auteur)
-				$q.="AND id_auteur=".$id_auteur;
-			else 
+		$q .= "AND (";
+		if ($cookie) { 
+			$q.="cookie="._q($cookie). ($id_auteur?" OR id_auteur="._q($id_auteur):"");
+		}
+		else if ($id_auteur)
+				$q.="id_auteur="._q($id_auteur);
+			else
 				return false;
 		//On retourne le tableau des id_donnee de l'auteur ou false
 		$res = spip_query($q);
@@ -617,16 +619,17 @@
 				$confirme = true;
 			}
 			
-			if ($row['type_form']=='sondage') {
-				$confirmation = 'attente';
-				$cookie = $GLOBALS['cookie_form'];
-				$nom_cookie = Forms_nom_cookie_form($id_form);
-			}
+			$nom_cookie = Forms_nom_cookie_form($id_form);
+			if (isset($_COOKIE[$nom_cookie]))
+				$cookie = $_COOKIE[$nom_cookie];
 			else {
-				$confirmation = 'valide';
 				include_spip("inc/acces");
-				$cookie = creer_uniqid();
+				$cookie = creer_uniqid();				
 			}
+			if ($row['type_form']=='sondage')
+				$confirmation = 'attente';
+			else
+				$confirmation = 'valide';
 			if ($moderation == 'posteriori') 
 				$statut='publie';
 			else {
