@@ -56,79 +56,156 @@ function balise_CONFIG($p) {
 // $serialize: defaut false contrairement a la balise
 // (en php on veut plutot un tableau, en squellette, du texte)
 function lire_config($cfg='', $def=null, $serialize=false) {
-	$table = false;
-	if (is_string($cfg)) {
-		$cfg = explode('/', $cfg);
-		// si ca commence par ~duchmol/ , on veut un auteur par son login ou id
-		if ($cfg[0][0] == '~') {
-			$table = 'spip_auteurs';
-			// si c'est ~duchmol/ , on veut un auteur par son login ou id
-			if (strlen($cfg[0]) > 1) {
-				$id = array(substr(array_shift($cfg), 1));
-				$colid = array(is_numeric($id[0]) ? 'id_auteur' : 'login');
-			// dans l'extra de l'auteur connecte, ne marche que si cache nul
-			} else {;
-				array_shift($cfg);
-				$id = $GLOBALS['auteur_session'] ? $GLOBALS['auteur_session']['id_auteur'] : '';
-				$colid = array('id_auteur');
-			}
-		// si ca commence par table:id:id.../ , on veut une table
-		} elseif (strpos($cfg[0], ':')) {
-			$id = explode(':', array_shift($cfg));
-			list($table, $colid) = get_table_id(array_shift($id));
-		}
-	} elseif ($cfg) {
-		// on peut aussi comme cfg_extrapack donner directement table et le reste
-		list($table, $colid, $id, $cfg) = array_pad($cfg, '', 4);
-		if ($table && !$colid) {
-			list($table, $colid) = get_table_id($table);
-		}
-		if (!is_array($cfg)) {
-			$cfg = explode('/', $cfg);
-		}
-	} else {
-		$cfg = array();
-	}
-	// dans une table
-	if ($table) {
-		$where = array();
-		foreach ($colid as $i => $name) {
-			$where[] = $name . '=' 
-						. (is_numeric($id[$i]) ? intval($id[$i]) : sql_quote($id[$i]));
-	    }
-		$extra = sql_select('extra', $table, $where);
-		$extra = sql_fetch($extra);
-		$config = isset($extra['extra']) && $extra['extra'] ?
-					$extra['extra'] :  array();
-	// sinon classiquement de meta
-	} else {
-		$config = $GLOBALS['meta'];
-	}
-
-	while ($x = array_shift($cfg)) {
-		if (is_string($config) && is_array($c = @unserialize($config))) {
-			$config = $c[$x];
-		} else {
-			$config = $config[$x];
-		}
-	}
-
-	// transcodage vers le mode serialize
-	if ($serialize && is_array($config)) {
-		$ret = serialize($config);
-	} elseif (!$serialize && is_null($config) && !$def) {
-	// pas de serialize requis et config vide, c'est qu'on veut une array()
-		$ret = array();
-	} elseif (!$serialize && ($c = @unserialize($config))) {
-	// transcodage vers le mode non serialize
-		$ret = $c;
-	} else {
-	// pas de transcodage
-		$ret = $config;
-	}
-	return is_null($ret) && $def ? $def : $ret;
+	$params = cfg_analyse_param($cfg);
+	return cfg_lire_config($params['chemin'], $params['donnees'], $def, $serialize);
 }
 
+/*
+ * 
+ * ecrire_config($chemin, $valeur) 
+ * permet d'enregistrer une configuration
+ * 
+ * Si valeur == null : suppression.
+ * 
+ * $serialise = true : serialise les donnees (choix par defaut)
+ */
+function ecrire_config($cfg='', $valeur=null, $serialize=true){
+	$params = cfg_analyse_param($cfg);
+	
+// 1) lecture
+	// on recupere toutes les informations depuis
+	// la racine de la meta ou du champ de table (extra par defaut)
+	$chemin = explode('/', $params['chemin']);
+	$champ 	= $chemin[count($chemin)-1];
+	$racine = $chemin[0];
+
+	switch ($params['storage']) {
+		case 'auteur':
+			$base = lire_config('~' . implode('', $params['table']['id']));
+			break; 
+			
+		case 'table':
+			$base = lire_config($params['table']['nom'] . ':' . implode(':', $params['table']['id']));
+			break; 
+			
+		case 'meta':
+		default:
+			$base = lire_config($racine);
+			break;	
+	}
+	
+	
+// 2) modifications
+	// on modifie le tableau recupere pour prendre en compte
+	// les changements (modifs ou suppressions)
+	$ici = &$base;
+	$supprimer = ($valeur === null);
+
+	// champs compose : 'chose/truc', 'chose/bidule/truc', ...
+	if (count($chemin)>1){
+		array_pop($chemin);				
+		$ici = &cfg_monte_arbre($ici, $chemin);
+		if (!is_array($ici)) $ici = array();
+		
+		if ($supprimer) unset($ici[$champ]);
+		else $ici[$champ] = $valeur;
+			
+	// champs simples : 'truc'
+	} else {
+		switch ($params['storage']) {
+			case 'auteur':
+			case 'table':
+				// si pas de champ (ie. '~duchmol/' ou '~duchmol' ou 'auteur:3')
+				// modifier tout le contenu
+				if (empty($champ)) {
+					if ($supprimer) unset($base);
+					else $base = $valeur;	
+				
+				// si un champ 	(ie. '~duchmol/champ')	
+				// ne modifier que celui ci		
+				} else {
+					if (!is_array($ici)) $ici = array();
+					
+					if ($supprimer) unset($ici[$champ]);
+					else $ici[$champ] = $valeur;	
+				}				
+				break; 
+				
+			case 'meta':
+			default:
+				if ($supprimer) unset($base);
+				else $base = $valeur;
+				
+				break;	
+		}			
+	}
+		
+	
+// 3) ecriture
+	// on sauvegarde les changements dans la meta
+	// ou le champ de table (extra par defaut)
+	switch ($params['storage']) {
+		case 'table':
+		case 'auteur':
+			// une requete sql pour mettre a jour
+			// where
+			$where = array();
+			foreach ($params['table']['id'] as $nom => $val)
+				$where[] = "$nom = '$val'";
+			// contenu
+			$c = (($base == null) ? '' : (($serialize) ? serialize($base) : $base));
+			
+			sql_updateq(
+				$params['table']['nom'],
+				array($params['table']['champ'] => $c ),
+				$where);
+			break;	
+			
+		case 'meta':
+		default:	
+			if (!$base) effacer_meta($racine);
+			else ecrire_meta($racine, (($serialize) ? serialize($base) : $base) );
+				
+			break;	
+	}
+
+}
+
+/*
+ * effacer_config($chemin) 
+ * permet de supprimer une config 
+ */
+function effacer_config($cfg=''){
+	ecrire_config($cfg);		
+}
+
+
+/*
+ *  se positionner dans le tableau arborescent
+ */
+function & cfg_monte_arbre(&$base, $chemin){
+	if (!$chemin) {
+		return $base;
+	}
+	
+	if (!is_array($chemin)) {
+		$chemin = explode('/', $chemin);
+	}	
+	
+	if (!is_array($base)) {
+		$base = array();
+	}
+
+	foreach ($chemin as $chunk) {
+		if (!isset($base[$chunk])) {
+			$base[$chunk] = array();
+		}
+		$base = &$base[$chunk];
+	}
+	return $base;
+}
+	
+	
 function get_table_id($table) {	
 	static $catab = array(
 		'tables_principales' => 'base/serial',
@@ -151,6 +228,182 @@ function get_table_id($table) {
 }
 
 
+/*
+ * 
+ * Analyse la chaine ou le tableau passe a CFG
+ * et retourne un tableau renseignant le type
+ * de donnee a chercher (meta ou table)
+ * ainsi que le chemin de la donnee
+ * 
+ */
+function cfg_analyse_param($cfg){
+	
+	$params = array(
+		'storage' => 'meta',
+		'chemin' => '',
+		'donnees' => '',
+		'table' => array(
+			'nom' => '',
+			'id' => array(), // $nom => $valeur
+			'champ' => ''
+		)
+	);
+	
+	/*
+	 * On peut passer une chaine
+	 * ou directement un tableau array($table, $nom_colonne_id, $id, $chemin_cfg)
+	 */
+	if (is_string($cfg)) {
+		/*
+		 * Cas de la recherche par auteur
+		 * dans l'extra de la table auteur
+		 * 
+		 * '~login/monchamp'
+		 */
+		if ($cfg[0] == '~') {
+			$cfg = explode('/', $cfg);
+			$params['storage'] = 'auteur';
+			$params['table']['nom'] = 'spip_auteurs';
+			// ~duchmol/ ou ~32/ , on veut un auteur par son login ou id
+			if (strlen($cfg[0]) > 1) {
+				$id = substr(array_shift($cfg),1);
+				$colid = is_numeric($id) ? 'id_auteur' : 'login';
+			// ~/
+			// dans l'extra de l'auteur connecte, ne marche que si cache nul
+			} else {
+				array_shift($cfg);
+				$id = $GLOBALS['auteur_session'] ? $GLOBALS['auteur_session']['id_auteur'] : '';
+				$colid = 'id_auteur';
+			}
+			$params['table']['id'][$colid] = $id;
+			$params['table']['champ'] = 'extra';
+			$params['chemin'] = implode('/', $cfg);
+			
+		/*
+		 * si ca commence par table:id:id.../ , 
+		 * on veut une table
+		 * 
+		 * 'rubrique:3/monchamp'
+		 */
+		} elseif (strpos($cfg, ':')) {
+			$cfg = explode('/', $cfg);
+			$id = explode(':', array_shift($cfg));
+			list($table, $colid) = get_table_id(array_shift($id));
+			$params['storage'] = 'table';
+			$params['table']['nom'] = $table;
+			foreach ($colid as $n=>$c) {
+				$params['table']['id'][$c] = $id[$n];
+			}
+			$params['table']['champ'] = 'extra';
+			$params['chemin'] = implode('/', $cfg);
+		/*
+		 * Sinon, c'est une meta
+		 */
+		} else {
+			$params['storage'] = 'meta';
+			$params['chemin'] = $cfg;			
+		}
+	/*
+	 * Sinon, on a passe a cfg directement un tableau
+	 */
+	} elseif ($cfg) {
+		// on peut aussi comme cfg_extrapack donner directement table et le reste
+		list($table, $colid, $id, $cfg) = array_pad($cfg, '', 4);
+		if ($table && !$colid) {
+			list($table, $colid) = get_table_id($table);
+		}
+		if (!is_array($cfg)) {
+			$cfg = array($cfg);
+		}
+		if (!is_array($colid)){
+			$colid = array($colid);
+			$id = array($id);
+		}		
+		$params['storage'] = 'table';
+		$params['table']['nom'] = $table;
+		foreach ($colid as $n=>$c) {
+			$params['table']['id'][$c] = $id[$n];
+		}
+		$params['table']['champ'] = 'extra';
+		$params['chemin'] = implode('/', $cfg);		
+	} 
+	
+	/*
+	 * On recupere les donnees (racine du chemin) 
+	 * qui serviront a trouver la valeur du chemin demande
+	 */
+	$params['donnees'] = cfg_recuperer_donnees($params);
+	return $params;
+}
+
+
+/*
+ * Recuperer les donnees en fonction du storage
+ */
+function cfg_recuperer_donnees($params){
+	switch ($params['storage']) {
+		case 'table':
+		case 'auteur':
+			// recuperer la valeur du champ de la table sql
+			$where = array();
+			foreach ($params['table']['id'] as $nom => $id) {
+				$where[] = $nom . '=' . (is_numeric($id) ? intval($id) : sql_quote($id));
+			}
+
+			$res = sql_select($champ = $params['table']['champ'], $params['table']['nom'], $where);
+			$res = sql_fetch($res);
+			$donnees = isset($res[$champ]) && $res[$champ] ?
+						$res[$champ] :  array();		
+			break;
+			
+		case 'meta':
+		default:
+			$donnees = $GLOBALS['meta'];
+			break;	
+	}	
+	
+	return $donnees;
+}
+
+
+/*
+ * Lire une entree generale
+ */
+function cfg_lire_config($chemin, $config, $def=null, $serialize=false){
+	
+	$cfg = explode('/',$chemin);
+
+	$vide = false;
+	
+	while ($x = array_shift($cfg)) {
+		if (is_string($config) && is_array($c = @unserialize($config))) {
+			$config = $c[$x];
+		} else {
+			if (is_string($config)) {
+				$config = null;
+				$vide = true;
+			} else {
+				$config = $config[$x];
+			}
+		}
+	}
+
+	// transcodage vers le mode serialize
+	if ($serialize && is_array($config)) {
+		$ret = serialize($config);
+	} elseif (!$serialize && is_null($config) && !$def && !$vide) {
+		// pas de serialize requis et config vide, c'est qu'on veut une array()
+		// un truc de toggg que je ne sais pas a quoi ca sert.
+		$ret = array();
+	} elseif (!$serialize && ($c = @unserialize($config))) {
+	// transcodage vers le mode non serialize
+		$ret = $c;
+	} else {
+	// pas de transcodage
+		$ret = $config;
+	}
+	return is_null($ret) && $def ? $def : $ret;	
+}
 
 
 /*
