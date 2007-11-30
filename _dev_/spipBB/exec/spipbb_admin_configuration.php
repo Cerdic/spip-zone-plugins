@@ -176,8 +176,8 @@ function spipbb_check_spip_config() {
 	}
 	else {
 		$res['articles_mots']= array( 'etat'=>false, 
-										//'message'=>_T('spipbb:admin_spip_mots_cles_erreur')
-										'message'=> spipbb_config_mots()
+										'message'=>_T('spipbb:admin_spip_mots_cles_erreur')
+										//'message'=> spipbb_config_mots()
 										);
 		$resultat=_T('spipbb:admin_spip_mots_cles_erreur');
 	}
