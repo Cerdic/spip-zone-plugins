@@ -8,7 +8,7 @@ $GLOBALS['jquery_plugins'] = array(
 	//autocomplete
 	'autocomplete' => array(
 		'dir' => 'jquery.autocomplete',
-		'url' => '',
+		'url' => 'http://bassistance.de/jquery-plugins/jquery-plugin-autocomplete/',
 		//'install_zip' => 'http://dev.jquery.com/view/trunk/plugins/autocomplete/jquery.autocomplete.zip',
 		'files' => array(
 			//'autocomplete.autocomplete'		=> 'jquery.autocomplete.js', // alias
