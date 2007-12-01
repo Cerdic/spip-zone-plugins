@@ -146,38 +146,50 @@ function jqueryp_add_plugins($plugins, $flux=null){
 }
 
 /* fourni un tableau 'nom' => 'adresse' des plugins possibles */
-function jqueryp_liste_plugins_dispo(){
-	$l = jqueryp_liste_dispo();
+function jqueryp_liste_plugins_dispo($groupe = ''){
+	$l = jqueryp_liste_dispo($groupe);
 	return $l['plugins'];
 }
 
 /* fourni un tableau 'nom' => 'adresse' des themes possibles */
-function jqueryp_liste_themes_dispo(){
-	$l = jqueryp_liste_dispo();
+function jqueryp_liste_themes_dispo($groupe = ''){
+	$l = jqueryp_liste_dispo($groupe);
 	return $l['themes'];
 }
 
-function jqueryp_liste_dispo($theme = false){
+
+function jqueryp_liste_dispo($groupe = ''){
 	global $jquery_plugins;
 	
 	$liste_plugins = array();
 	$liste_themes = array();
-	foreach ($jquery_plugins as $nom_ext=>$extension) {
-		if(isset($extension['files'])){
-			foreach ($extension['files'] as $nom=>$fichier){
-				$liste_plugins[$nom] = _DIR_LIB . $extension['dir'] . '/' . $fichier;
-			}
-		}
-		if(isset($extension['themes'])){
-			foreach ($extension['themes'] as $nom=>$dossier){
-				$liste_themes[$nom] = _DIR_LIB . $extension['dir'] . '/' . $extension['dir_themes'] . '/' . $dossier;
-			}
-		}
-	}
 	
+	if (!$groupe){
+		foreach ($jquery_plugins as $nom_ext=>$extension) {
+			_jquery_liste($nom_ext, $extension, &$liste_plugins, &$liste_themes);
+		}
+	} elseif (isset($jquery_plugins[$groupe]) ) {
+		_jquery_liste($groupe, $jquery_plugins[$groupe], &$liste_plugins, &$liste_themes);
+	}
+
 	return array('plugins' => $liste_plugins, 'themes'  => $liste_themes);
 }
 
+
+function _jquery_liste($nom_ext, $extension, &$liste_plugins, &$liste_themes){
+	if (isset($extension['files'])){
+		foreach ($extension['files'] as $nom=>$fichier){
+			$liste_plugins[$nom] = _DIR_LIB . $extension['dir'] . '/' . $fichier;
+		}
+	}
+	if (isset($extension['themes'])){
+		foreach ($extension['themes'] as $nom=>$dossier){
+			$liste_themes[$nom] = _DIR_LIB . $extension['dir'] . '/' . $extension['dir_themes'] . '/' . $dossier;			
+		}
+	}
+}
+	
+	
 function jqueryp_liste_plugins_actifs(){
 	$l = jqueryp_liste_actifs();
 	return $l['plugins'];
@@ -188,8 +200,11 @@ function jqueryp_liste_actifs(){
 	$lpa = lire_config('jqueryp/plugins_actifs');
 	$lpd  = jqueryp_liste_plugins_dispo();
 
-	foreach ($lpa as $p){
-		$lp[$p] = $lpd[$p];	
+	$lp = array();
+	if (is_array($lpa)){
+		foreach ($lpa as $p){
+			$lp[$p] = $lpd[$p];	
+		}
 	}
 	
 	return 
@@ -200,9 +215,53 @@ function jqueryp_liste_actifs(){
 
 function balise_JQUERY_PLUGINS_DISPO_dist($p) {
 	if(function_exists('balise_ENV'))
-		return balise_ENV($p, 'jqueryp_liste_plugins_dispo()');
+		return balise_ENV($p, 'jqueryp_liste_plugins_groupe()');
 	else
-		return balise_ENV_dist($p, 'jqueryp_liste_plugins_dispo()');
+		return balise_ENV_dist($p, 'jqueryp_liste_plugins_groupe()');
 	return $p;
+}
+
+function balise_JQUERY_PLUGINS_DISPO_GROUPE_dist($p) {
+	if(function_exists('balise_ENV'))
+		return balise_ENV($p, 'jqueryp_liste_plugins_dispo_groupe()');
+	else
+		return balise_ENV_dist($p, 'jqueryp_liste_plugins_dispo_groupe()');
+	return $p;
+} 
+
+function jqueryp_liste_plugins_groupe(){
+	global $jquery_plugins;
+	
+	$groupes = array();
+	$actifs = array_keys(jqueryp_liste_plugins_actifs());
+	
+	foreach ($jquery_plugins as $nom_ext=>$valeurs) {
+		$groupes[$nom_ext] = 'replie';
+		// pour depliage auto de la liste
+		// si un des plugins est coche
+		foreach (jqueryp_liste_plugins_dispo($nom_ext) as $nom=>$url){
+			if (in_array($nom, $actifs)){
+				$groupes[$nom_ext] = 'deplie';
+				break;
+			}
+		}
+	}
+	return $groupes;
+}
+
+/* 
+ * fonction pour balise foreach qui ne peut passer directement des arguments
+ * enfin, du moins, je n'ai pas trouve comment
+ */
+function jqueryp_liste_plugins_dispo_groupe($groupe = ''){
+	static $plugins = array();
+	
+	// on stocke tous les plugins commencant pas '$groupe'
+	if (!empty($groupe)){
+		$plugins = jqueryp_liste_plugins_dispo($groupe);
+		return true;
+	}
+	
+	return $plugins;
 }
 ?>

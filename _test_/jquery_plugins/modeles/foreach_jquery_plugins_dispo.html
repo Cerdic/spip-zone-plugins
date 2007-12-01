@@ -1,4 +1,16 @@
 [(#REM) #ENV{cle} et #ENV{valeur} ]
-<input type="checkbox" name="plugins_actifs[]" value="#ENV{cle}" id="plugactif_#ENV{cle}"
-	[(#ENV{cle}|in_array{#CONFIG{jqueryp/plugins_actifs,'',''}}|?{checked="checked"})] />
-	<label for="plugactif_#ENV{cle}" >#ENV{cle}</label><br />
+
+#SET{hash, jqueryp_#ENV{cle}}
+[(#SET{bouton,[(#ENV{cle}|bouton_block_depliable{1, #GET{hash} })]})]
+
+[(#CHEMIN{images/administration-24.gif}|url_absolue|debut_cadre_enfonce{1,'',[(#GET{bouton})]})]
+
+[(#ENV{valeur}|=={deplie}|?{1,0}|debut_block_depliable{#GET{hash}})]
+
+	[(#ENV{cle}|jqueryp_liste_plugins_dispo_groupe|vide)]
+	[(#FOREACH{JQUERY_PLUGINS_DISPO_GROUPE})]
+
+[(#REM|fin_block)]
+[(#VAL{1}|fin_cadre_enfonce)]
+
+

@@ -5,6 +5,21 @@ if (!defined('_DIR_LIB')) define('_DIR_LIB', 'lib/');
 /* liste des plugins de jquery */
 $GLOBALS['jquery_plugins'] = array(
 
+	//autocomplete
+	'autocomplete' => array(
+		'dir' => 'jquery.autocomplete',
+		'url' => '',
+		//'install_zip' => 'http://dev.jquery.com/view/trunk/plugins/autocomplete/jquery.autocomplete.zip',
+		'files' => array(
+			//'autocomplete.autocomplete'		=> 'jquery.autocomplete.js', // alias
+			'autocomplete' 					=> 'jquery.autocomplete.js', 
+			'autocomplete.min'				=> 'jquery.autocomplete.min.js',
+			'autocomplete.pack' 			=> 'jquery.autocomplete.pack.js',
+			'autocomplete.bundle' 			=> 'jquery.autocomplete-bundle.js',
+			'autocomplete.bundle.pack' 		=> 'jquery.autocomplete-bundle.pack.js'
+		)
+	),
+	
 	//datepicker
 	'datepicker' => array(
 		'dir' => 'jquery.datepicker',
@@ -53,7 +68,7 @@ $GLOBALS['jquery_plugins'] = array(
 			'ui.calendar' 		=> 'ui.calendar.js',
 			'ui.dialog' 		=> 'ui.dialog.js',
 			'ui.dimensions' 	=> 'jquery.dimensions.js',
-			'jquery.dimensions' => 'jquery.dimensions.js', // au cas ou quelqu'un l'appelle comme cela
+			//'jquery.dimensions' => 'jquery.dimensions.js', // au cas ou quelqu'un l'appelle comme cela
 			'ui.draggable' 		=> 'ui.draggable.js',
 			'ui.draggable.ext' 	=> 'ui.draggable.ext.js',
 			'ui.droppable' 		=> 'ui.droppable.js',
@@ -84,8 +99,7 @@ $GLOBALS['jquery_plugins'] = array(
 			'validate.additional-methods' 	=> 'additional-methods.js',
 			'validate.ajaxQueue'			=> 'jquery.ajaxQueue.js',
 			'validate.metadata' 			=> 'jquery.metadata.js',
-			'validate.metadata' 			=> 'jquery.metadata.js',
-			'validate.validate' 			=> 'jquery.validate.js',
+			//'validate.validate' 			=> 'jquery.validate.js',
 			'validate' 						=> 'jquery.validate.js', // alias
 			'validate.min'					=> 'jquery.validate.min.js',
 			'validate.pack' 				=> 'jquery.validate.pack.js'
