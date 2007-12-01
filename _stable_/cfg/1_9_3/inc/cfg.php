@@ -174,7 +174,7 @@ class cfg_dist extends cfg_formulaire
 	 */
 	function boite_liens_multi($lien, $nom=''){
 		$dedans = '';
-		if (($exi = lire_config($lien))) {
+		if (($exi = lire_config($lien)) && is_array($exi)) {
 			foreach ($exi as $compte => $info) {
 				// config simple ?
 				// Si une des valeurs n'est pas un tableau : on stoppe tout.

@@ -370,18 +370,15 @@ function cfg_recuperer_donnees($params){
  * Lire une entree generale
  */
 function cfg_lire_config($chemin, $config, $def=null, $serialize=false){
-	
+
 	$cfg = explode('/',$chemin);
 
-	$vide = false;
-	
 	while ($x = array_shift($cfg)) {
 		if (is_string($config) && is_array($c = @unserialize($config))) {
 			$config = $c[$x];
 		} else {
 			if (is_string($config)) {
 				$config = null;
-				$vide = true;
 			} else {
 				$config = $config[$x];
 			}
@@ -391,9 +388,12 @@ function cfg_lire_config($chemin, $config, $def=null, $serialize=false){
 	// transcodage vers le mode serialize
 	if ($serialize && is_array($config)) {
 		$ret = serialize($config);
-	} elseif (!$serialize && is_null($config) && !$def && !$vide) {
-		// pas de serialize requis et config vide, c'est qu'on veut une array()
+	} elseif (!$serialize && is_null($config) && !$def 
+			&& $serialize === '') // hack affreux pour le |in_array...
+	{
+		// pas de serialize requis et config vide, c'est qu'on veut un array()
 		// un truc de toggg que je ne sais pas a quoi ca sert.
+		// bon, ça sert si on fait un |in_array{#CONFIG{chose,'',''}}
 		$ret = array();
 	} elseif (!$serialize && ($c = @unserialize($config))) {
 	// transcodage vers le mode non serialize
