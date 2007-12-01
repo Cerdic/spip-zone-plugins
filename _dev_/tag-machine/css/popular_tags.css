@@ -1,4 +1,8 @@
-#popularTags {line-height:1.2em }
+#popularTags {
+line-height:1.2em ;
+height:150px;
+overflow:auto;
+}
 #suggestions {margin:3px }
 #popularTags span { background-color: #cccccc; cursor: pointer; margin:2px }
 #suggestions span { cursor: pointer; margin:2px; background-color:#ccc; }
