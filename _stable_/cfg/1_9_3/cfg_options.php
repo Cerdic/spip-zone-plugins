@@ -407,7 +407,7 @@ function cfg_lire_config($chemin, $config, $def=null, $serialize=false){
 	{
 		// pas de serialize requis et config vide, c'est qu'on veut un array()
 		// un truc de toggg que je ne sais pas a quoi ca sert.
-		// bon, ça sert si on fait un |in_array{#CONFIG{chose,'',''}}
+		// bon, ca sert si on fait un |in_array{#CONFIG{chose,'',''}}
 		$ret = array();
 	} elseif (!$serialize && ($c = @unserialize($config))) {
 	// transcodage vers le mode non serialize
