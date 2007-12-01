@@ -101,20 +101,19 @@ function ecrire_config($cfg='', $valeur=null, $serialize=true){
 	$ici = &$base;
 	$supprimer = ($valeur === null);
 
-	// champs compose : 'chose/truc', 'chose/bidule/truc', ...
-	if (count($chemin)>1){
-		array_pop($chemin);				
-		$ici = &cfg_monte_arbre($ici, $chemin);
-		if (!is_array($ici)) $ici = array();
-		
-		if ($supprimer) unset($ici[$champ]);
-		else $ici[$champ] = $valeur;
-			
-	// champs simples : 'truc'
-	} else {
-		switch ($params['storage']) {
-			case 'auteur':
-			case 'table':
+	switch ($params['storage']) {
+		case 'auteur':
+		case 'table':
+			// champs compose : 'chose/truc', 'chose/bidule/truc', ...
+			if (count($chemin)>1){
+				array_pop($chemin);		
+				$ici = &cfg_monte_arbre($ici, $chemin);
+
+				if ($supprimer) unset($ici[$champ]);
+				else $ici[$champ] = $valeur;
+				
+			// champs simples : 'truc'
+			} else {
 				// si pas de champ (ie. '~duchmol/' ou '~duchmol' ou 'auteur:3')
 				// modifier tout le contenu
 				if (empty($champ)) {
@@ -128,17 +127,29 @@ function ecrire_config($cfg='', $valeur=null, $serialize=true){
 					
 					if ($supprimer) unset($ici[$champ]);
 					else $ici[$champ] = $valeur;	
-				}				
-				break; 
+				}
+			}			
+			break; 
+			
+		case 'meta':
+		default:
+			// champs compose : 'chose/truc', 'chose/bidule/truc', ...
+			if (count($chemin)>1){	
+				array_pop($chemin);
+				array_shift($chemin);
+				$ici = &cfg_monte_arbre($ici, $chemin);
+	
+				if ($supprimer) unset($ici[$champ]);
+				else $ici[$champ] = $valeur;
 				
-			case 'meta':
-			default:
+			// champs simples : 'truc'
+			} else {
 				if ($supprimer) unset($base);
 				else $base = $valeur;
-				
-				break;	
-		}			
-	}
+			}
+			break;	
+	}			
+
 		
 	
 // 3) ecriture
@@ -183,7 +194,7 @@ function effacer_config($cfg=''){
 /*
  *  se positionner dans le tableau arborescent
  */
-function & cfg_monte_arbre(&$base, $chemin){
+function &cfg_monte_arbre(&$base, $chemin){
 	if (!$chemin) {
 		return $base;
 	}
@@ -191,7 +202,7 @@ function & cfg_monte_arbre(&$base, $chemin){
 	if (!is_array($chemin)) {
 		$chemin = explode('/', $chemin);
 	}	
-	
+
 	if (!is_array($base)) {
 		$base = array();
 	}
@@ -202,6 +213,9 @@ function & cfg_monte_arbre(&$base, $chemin){
 		}
 		$base = &$base[$chunk];
 	}
+	
+	if (!is_array($base)) $base = array();
+	
 	return $base;
 }
 	
