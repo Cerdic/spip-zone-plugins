@@ -37,7 +37,7 @@ function liste_cfg() {
 // donne
 function icone_lien_cfg($dir) {
 	$ret = '';
-	if (basename($dir) != 'cfg')
+	if (basename($dir) != basename(str_replace('/inc','',dirname(__FILE__))))
 	if ($l = preg_files($dir.'/fonds/', '/cfg_.*html$')) {
 		foreach($l as $cfg) {
 			$fonds = substr(basename($cfg,'.html'),4);
