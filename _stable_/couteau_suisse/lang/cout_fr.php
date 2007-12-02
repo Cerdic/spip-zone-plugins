@@ -303,6 +303,7 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 	'decoupe:nom' => 'D&eacute;coupe en pages et onglets',
 	'decoupe:description' => "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.
 _ Si vous utilisez ce s&eacute;parateur &agrave; l'int&eacute;rieur des balises &lt;onglets&gt; et &lt;/onglets&gt; alors vous obtiendrez un jeu d'onglets.
+_ Dans les squelettes : vous avez à votre disposition les nouvelles balises #ONGLETS_DEBUT, #ONGLETS_TITRE et #ONGLETS_FIN.
 _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.",
 	'decoupe:aide' => 'S&eacute;parateur de pages ou d\'onglets&nbsp;: @sep@',
 	'decoupe:aide2' => ' (alias&nbsp;:&nbsp;@sep@)',
