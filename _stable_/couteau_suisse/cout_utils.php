@@ -129,7 +129,8 @@ function set_cs_metas_pipelines_fichier($infos_pipelines, $type) {
 cs_log("set_cs_metas_pipelines_fichier($type) : strlen=".strlen($code));
 	$fichier_dest = _DIR_CS_TMP . "mes_$type.php";
 cs_log(" -- fichier_dest = $fichier_dest");
-	ecrire_fichier($fichier_dest, '<'."?php\n// Code de controle pour le plugin 'Couteau Suisse'\n++\$GLOBALS['cs_$type'];\n$code?".'>');
+	if(!ecrire_fichier($fichier_dest, '<'."?php\n// Code d'inclusion pour le plugin 'Couteau Suisse'\n++\$GLOBALS['cs_$type'];\n$code?".'>', true))
+		cs_log("ERREUR ECRITURE : $fichier_dest");
 }
 
 // installation de $cs_metas_pipelines
