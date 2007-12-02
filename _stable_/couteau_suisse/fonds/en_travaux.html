@@ -3,11 +3,20 @@
 <html lang='#LANG' dir='#LANG_DIR'>
 <head>
 	<title>[(#ENV*{titre})]</title>
-	<link rel='stylesheet' href='[(#CHEMIN{minipres.css}|direction_css)]' type='text/css' />
 <style type="text/css">
 <!--
-	body.page_login { text-align: center; font: 1em Verdana, Tahoma, Geneva, Helvetica, sans-serif; }
-	#minipres { width:30em;}
+	body { font-family: Trebuchet Ms,Verdana, Geneva, Sans, sans-serif; font-size: 0.9em; color: #2e3436; background: #babdb6 url(images/minipres-gris.png) no-repeat scroll 97% 100px;
+	}
+	h1 { margin: 1em 0 1em 0; font-size: 1.3em; font-weigth: bold; color: #5c3566; }
+	h2 { margin: 0.8em 0 0.8em 0; font-size: 1.2em; font-weigth: normal; }
+	img { border: 0; }
+	ul { text-align: justify; list-style-type: none; }
+	fieldset, .fieldset { text-align: left; padding: 0; border: 0; margin-top: 1em; font-size: 0.9em; }
+	legend { font-weight: bold; font-size: 1.1em; color: #000; }
+	label {}
+	#minipres { width: 30em; background: #FFF repeat; margin: 1em auto; padding: 1em; border: 1px solid #888; text-align: center; }
+	.pass #minipres { width: 90%; }
+
 	.formulaire_spip { text-align: #LANG_LEFT; font-size: 0.8em; }
 	.formulaire_spip fieldset {border: 1px solid #BABDB6; padding:10px;font-size: 1em;}
 	.formulaire_menu_lang { float: #LANG_RIGHT; }
