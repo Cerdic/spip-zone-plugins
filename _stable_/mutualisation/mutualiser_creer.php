@@ -124,17 +124,39 @@ function mutualiser_creer($e, $options) {
 	
 							// le nom de la machine MySQL peut etre different 
 							// du nom de la connexion via DNS
-							define ('_INSTALL_HOST_DB_LOCALNAME', _INSTALL_HOST_DB); 							
-							if (!sql_query("GRANT Alter,Select,Insert,Update,Delete,Create,Drop,Execute ON "
-								. _INSTALL_NAME_DB.".* TO '" 
-								. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
-								. "' IDENTIFIED BY '" . _INSTALL_PASS_DB."'", _INSTALL_SERVER_DB)) 
-							{
-								die (__FILE__." " . __LINE__ 
-									. ": Erreur sur  : GRANT Select,Insert,Update,Delete,Create,Drop,Execute ON "
-									. _INSTALL_NAME_DB.".* TO '"
-									. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
-									. "'  IDENTIFIED BY 'xxx'");
+							define ('_INSTALL_HOST_DB_LOCALNAME', _INSTALL_HOST_DB); 
+							
+							// requete differente entre pg et mysql...
+							$req = $err = array();
+							switch (strtolower(_INSTALL_SERVER_DB)){
+									
+								case 'pg':
+									// d'abord creer l'utilisateur
+									$req[] = "CREATE USER " . _INSTALL_USER_DB . " WITH PASSWORD '" . _INSTALL_PASS_DB . "'";
+									$err[] = "CREATE USER " . _INSTALL_USER_DB . " WITH PASSWORD 'xxx'";
+									// pas de ' autour du pass
+									$req[] = $r = "GRANT ALL PRIVILEGES ON DATABASE " 
+										. _INSTALL_NAME_DB . " TO ". _INSTALL_USER_DB;
+									$err[] = $r;
+									break;
+									
+								case 'mysql':
+								default:
+									$req[] = "GRANT Alter,Select,Insert,Update,Delete,Create,Drop,Execute ON "
+										. _INSTALL_NAME_DB.".* TO '" 
+										. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
+										. "' IDENTIFIED BY '" . _INSTALL_PASS_DB . "'";
+									$err[] = "GRANT Alter,Select,Insert,Update,Delete,Create,Drop,Execute ON "
+										. _INSTALL_NAME_DB.".* TO '" 
+										. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
+										. "' IDENTIFIED BY 'xxx'";
+									break;	
+								
+							}
+							foreach ($req as $n=>$sql){
+								if (!sql_query($sql, _INSTALL_SERVER_DB)) {
+									die (__FILE__." " . __LINE__ . ": Erreur (" ._INSTALL_SERVER_DB . ") sur  :" . $err[$n]);
+								}
 							}
 							mutu_close();
 							$link = mutu_connect_db(_INSTALL_HOST_DB,'',  _INSTALL_USER_DB, _INSTALL_PASS_DB, '', _INSTALL_SERVER_DB);
