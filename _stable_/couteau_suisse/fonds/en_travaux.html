@@ -34,7 +34,7 @@
 <body>
 <div id='minipres'>
 	<h1>[(#ENV*{titre})]</h1>
-	<div>
+	<div id='en_travaux'>
 		[(#ENV{message}|propre)]
 		[(#ENV*{login}|!={oui}|?{' ',''})<div style="text-align:right"><a href="./ecrire" class="spip_out"><:login_espace_prive:></a></div>]
 	</div>
