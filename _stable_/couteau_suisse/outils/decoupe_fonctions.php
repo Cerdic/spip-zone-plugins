@@ -176,7 +176,7 @@ function decoupe_notes_orphelines(&$texte) {
 	$GLOBALS['les_notes'] = trim($notes);
 }
 
-// ici on est en pre_propre, tests requis
+// ici on est en pre_propre, tests d'installation requis
 function cs_onglets($texte){
 	// verification des metas qui stockent les liens d'image
 	if (!isset($GLOBALS['meta']['cs_decoupe'])) {
@@ -186,7 +186,7 @@ function cs_onglets($texte){
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_onglets_rempl', $texte);
 }
 
-// ici on est en post_propre, tests non requis
+// ici on est en post_propre, tests d'installation non requis
 function cs_decoupe($texte){
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_pages_rempl', $texte);

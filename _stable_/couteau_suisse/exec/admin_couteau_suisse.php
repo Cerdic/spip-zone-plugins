@@ -294,7 +294,7 @@ verif_plugin();
 	}
 	// reset de l'affichage
 	if ($cmd=='showall'){
-		spi_log("Reset de tous les affichages du Couteau Suisse par l'auteur id=$connect_id_auteur");
+		spip_log("Reset de tous les affichages du Couteau Suisse par l'auteur id=$connect_id_auteur");
 		effacer_meta('tweaks_caches');
 		ecrire_metas();
 	}
