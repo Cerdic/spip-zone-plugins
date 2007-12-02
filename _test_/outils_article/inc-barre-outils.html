@@ -26,6 +26,13 @@
 #ENVIAR_EMAIL** 
 ]
 
+<BOUCLE_rub_rss(RUBRIQUES) {id_rubrique}>
+[(#CONFIG{outils_article/rss}|?{' ',''})
+<a rel="alternate" type="application/rss+xml" 
+href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
+[ title="RSS (#TITRE|texte_backend)"]><img src="#CHEMIN{img_pack/feed.gif}" alt="suivre la vie du site" title="suivre la vie du site"  /></a>
+]
+</BOUCLE_rub_rss>
 
 
 <BOUCLE_auteur_article(AUTEURS){id_article}>
@@ -43,6 +50,10 @@
 #TOTAL_BOUCLE réactions
 ]
 <//B_compteur_forum>
+
+[(#CONFIG{outils_article/note}|?{' ',''})
+#NOTATION
+]
 
 </ul>
 </BOUCLE_article_boite>

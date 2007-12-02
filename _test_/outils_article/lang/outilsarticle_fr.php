@@ -1,19 +1,22 @@
 <?php
 
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
-		'titre'				=>	'Boite à outils',
+		'titre'				=>	'Boite &agrave; outils',
 		'taille'			=>	'Taille',
 		'pdf'				=>	'Format pdf',
 		'impression'		=>	'Impression',
 		'impression_title'	=>	'version imprimable de l\'article',
-		'auteur'			=>	'Du même auteur',
-		'reaction'			=>	'Réactions',
-		'reagir'			=>	'Réagir à l\'article',
-		'config_titre'		=>	'Boite à outils pour article',
-		'config_descr'		=>	'vous pouvez configurer les éléments à afficher dans la boite à outils',
-		'elements'			=>	'Eléments à afficher',
+		'auteur'			=>	'Du m&ecirc;me auteur',
+		'reaction'			=>	'R&eacute;actions',
+		'reagir'			=>	'R&eacute;agir &agrave; l\'article',
+		'config_titre'		=>	'Boite &agrave; outils pour article',
+		'config_descr'		=>	'vous pouvez configurer les &eacute;l&eacute;ments &agrave; afficher dans la boite &agrave; outils',
+		'elements'			=>	'El&eacute;ments &agrave; afficher',
 		'mail'				=>	'envoyer par mail',
-		'compteur'			=>	'nombre de réactions',
+		'compteur'			=>	'nombre de r&eacute;actions',
+		'note'				=>	'donner une note &agrave; l\'article avec le plugin notation',
+		'rss'				=>	'syndiquer la rubrique',
+		
 		
 	);
 

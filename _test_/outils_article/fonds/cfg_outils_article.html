@@ -1,36 +1,68 @@
+
+
+[(#REM) descriptif=
+<h4><legend>Boite &agrave; outils pour article</legend></h4>
+Vous pouvez configurer les &eacute;l&eacute;ments &agrave; afficher dans la boite &agrave; outils<br />
+un début de documentation sur <a href="http://www.spip-contrib.net/Boite-a-outils-pour-article,32">contrib</a><br />
+
+Plugins complémentaires
+<ul>
+<li><a href="http://www.spip-contrib.net/Plugin-Article-PDF">Plugin Article PDF</a>
+
+<li><a href="http://www.spip-contrib.net/Plugin-envoyer-a-un-ami">Plugin envoyer &agrave; un ami</a>
+
+<li><a href="http://www.spip-contrib.net/Texte-agrandi-ou-pleine-page">Plugin Bouton texte</a>
+
+<li><a href="http://www.spip-contrib.net/Notation-d-articles-SPIP">Plugin Notation</a>
+
+<li><a href="http://www.spip-contrib.net/cfg-references">Plugin cfg</a>
+
+</ul>
+]
+
+[(#REM) titre=Outils article]
+[(#REM) icone=img_pack/icone_cfg.png]
+
 #CACHE{0}
 
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 
-[(#REM) descriptif=
-<h4><:outilsarticle:config_titre:></h4>
-<:outilsarticle:config_descr:><br />
-
-]
-[(#REM) titre=plugin outils article]
-
-
 <fieldset><legend><:outilsarticle:elements:></legend>
-   <label><:outilsarticle:taille:></label>
-   <input type="checkbox" name="texte" [checked="(#ENV{texte,on})"] />
+   &nbsp;&nbsp;<label><:outilsarticle:taille:></label>
+   <input type="checkbox" name="texte" [checked="(#ENV{texte})"] />
    <br />
-    <label><:outilsarticle:pdf:></label>
-   <input type="checkbox" name="pdf" [checked="(#ENV{pdf,on})"] />
+   
+    &nbsp;&nbsp;<label><:outilsarticle:pdf:></label>
+   <input type="checkbox" name="pdf" [checked="(#ENV{pdf})"] />
    <br />
-    <label><:outilsarticle:impression:></label>
-   <input type="checkbox" name="impression" [checked="(#ENV{impression,on})"] />
+   
+    &nbsp;&nbsp;<label><:outilsarticle:impression:></label>
+   <input type="checkbox" name="impression" [checked="(#ENV{impression})"] />
    <br />
+   
    &nbsp;&nbsp;<label><:outilsarticle:mail:></label>
-   <input type="checkbox" name="mail" [checked="(#ENV{mail,on})"] />
+   <input type="checkbox" name="mail" [checked="(#ENV{mail})"] />
    <br />
+   
+   &nbsp;&nbsp;<label><:outilsarticle:rss:></label>
+   <input type="checkbox" name="rss" [checked="(#ENV{rss})"] />
+   <br />
+   
    &nbsp;&nbsp;<label><:outilsarticle:auteur:></label>
-   <input type="checkbox" name="auteur" [checked="(#ENV{auteur,on})"] />	
+   <input type="checkbox" name="auteur" [checked="(#ENV{auteur})"] />	
    <br />
+   
 	 &nbsp;&nbsp;<label><:outilsarticle:reagir:></label>
-   <input type="checkbox" name="reagir" [checked="(#ENV{reagir,on})"] />
+   <input type="checkbox" name="reagir" [checked="(#ENV{reagir})"] />
    <br />
+   
 	 &nbsp;&nbsp;<label><:outilsarticle:compteur:></label>
-   <input type="checkbox" name="compteur" [checked="(#ENV{compteur,on})"] />
+   <input type="checkbox" name="compteur" [checked="(#ENV{compteur})"] />
+   <br />
+   
+   &nbsp;&nbsp;<label><:outilsarticle:notation:></label>
+   <input type="checkbox" name="note" [checked="(#ENV{note})"] />
+   
 </fieldset>
 
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
