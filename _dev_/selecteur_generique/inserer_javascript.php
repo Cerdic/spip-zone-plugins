@@ -94,6 +94,7 @@ var appliquer_selecteur_cherche_mot = function() {
 			'selectClass': 'selectAutocompleter',
 			'minchars': 1,
 			'mustMatch': true,
+		//	'multiple': true,
 			'cacheLength': 20,
 			'onSelect': function(li) {
 				if (li.id > 0) {
@@ -106,7 +107,8 @@ var appliquer_selecteur_cherche_mot = function() {
 					)
 					.find("input[@type=submit]")
 						.click()
-					.end();
+					.end()
+					;
 				}
 			}
 		});
@@ -218,12 +220,12 @@ function SelecteurGenerique_inserer_javascript($flux) {
 		. "\n"
 
 		. '<script type="text/javascript" src="'
-		. find_in_path('javascript/interface.js')
+		. find_in_path('javascript/iutil.js')
 		. '"></script>'
 		. "\n"
 
 		. '<link rel="stylesheet" type="text/css" '
-		. 'href="'.find_in_path('jquery.autocomplete.css').'" />'
+		. 'href="'.find_in_path('iautocompleter.css').'" />'
 		. "\n"
 
 		. '<script type="text/javascript"><!--'
