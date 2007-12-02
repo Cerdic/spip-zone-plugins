@@ -67,10 +67,14 @@ function compat_autorite_defs_dist() {
 	$defs = array();
 
 	// http://trac.rezo.net/trac/spip/changeset/9919
-	if ($GLOBALS['spip_version_code'] < '1.9259')
+	if ($GLOBALS['spip_version_code'] < '1.9259') {
 	$defs['sql_fetch'] = '($res, $serveur=\'\') {
 		return spip_fetch_array($res);
 	}';
+	$defs['sql_count'] = '($res, $serveur=\'\') {
+		return spip_num_rows($res);
+	}';
+	}
 
 	return $defs;
 }

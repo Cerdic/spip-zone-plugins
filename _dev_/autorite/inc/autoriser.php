@@ -142,7 +142,7 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 				array('0minirezo', '1comite', '6forum'))
 			AND in_array($r['statut'],
 				array('publie', 'prop', 'prepa', 'poubelle'))
-			AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+			AND sql_count(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
 		)
 		OR (
 			// un redacteur peut-il modifier un article propose ?
@@ -282,7 +282,7 @@ function autoriser_modererforum($faire, $type, $id, $qui, $opt) {
 			$GLOBALS['autorite']['auteur_modere_forum']
 			AND $type == 'article'
 			AND in_array($qui['statut'], array('0minirezo', '1comite'))
-			AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+			AND sql_count(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
 		);
 }
 } else
@@ -303,7 +303,7 @@ function autoriser_modererpetition($faire, $type, $id, $qui, $opt) {
 			$GLOBALS['autorite']['auteur_modere_petition']
 			AND $type == 'article'
 			AND in_array($qui['statut'], array('0minirezo', '1comite'))
-			AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+			AND sql_count(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
 		);
 }
 } else
@@ -392,7 +392,7 @@ function autoriser_forum_modifier($faire, $type, $id, $qui, $opt) {
 		if ($GLOBALS['autorite']['editer_forums'] == 3)
 			$q .= " AND date_heure > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
 		$s = spip_query($q);
-		if (spip_num_rows($s))
+		if (sql_count($s))
 			return true;
 	}
 
