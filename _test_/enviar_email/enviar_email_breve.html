@@ -127,7 +127,7 @@ include_spip('inc/meta'); // para coger datos automáticamente del servidor, usu
 $mail = new PHPMailer();
 
 $mail->IsSMTP();
-$mail->Mailer = "smtp"; 
+$mail->Mailer = "mail"; 
 $mail->Host 	= "localhost"; // Servidor de SMTP 
 
 $mail->SetLanguage("es", "phpmailer/language/");
