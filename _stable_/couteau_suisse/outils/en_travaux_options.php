@@ -20,24 +20,13 @@ if (!$exceptions)
 unset($exceptions);
 
 function action_cs_travaux(){
-	include_spip('inc/minipres');
-	include_spip('inc/charsets');
-	include_spip('inc/texte');
-	if(_en_travaux_ADMIN==1) {
-		include_spip('public/assembler');
-		include_spip('balise/login_public');
-		$login = inclure_balise_dynamique(balise_LOGIN_PUBLIC_dyn('', ''), false);
-		if(strlen($login))
-			$login = "<div style='text-align:left'><b>"._T('cout:acces_admin')."</b></div><hr><div style='margin-left:4em;'>$login</div>";
-		else $login = '<br/><hr/><b>'._T('cout:reserve_admin').'</b>';
-	} else
-		$login = propre('<div style="text-align:right">['.ucfirst(_T('login_espace_prive')).'->./ecrire]</div>');
-	$page = minipres(
-		defined('_en_travaux_TITRE')?_T('info_travaux_titre'):$GLOBALS['meta']['nom_site'],
-		charset2unicode(propre(_en_travaux_MESSAGE)) . $login
-	);
-	// a partir de spip 1.9.2 ces fonctions ne font plus l'echo directement
-	if ($GLOBALS['spip_version']>=1.92) echo $page;
+	include_spip('public/assembler');
+	@define('_sommaire_TITRE', _T('cout:sommaire_titre'));
+	echo recuperer_fond('fonds/en_travaux', array(
+		'message'=>_en_travaux_MESSAGE, 
+		'titre'=>defined('_en_travaux_TITRE')?_T('info_travaux_titre'):$GLOBALS['meta']['nom_site'],
+		'login'=>_en_travaux_ADMIN==1?'oui':'',
+	));
 	return true;
 }
 ?>
