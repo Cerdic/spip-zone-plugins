@@ -1,3 +1,7 @@
+2007-12-02  chryjs  <chryjs!@!free!.!fr>
+
+ * sql_showtable(.., true) permet de faire le remplacement pour les tables "spip"
+
 2007-11-27  chryjs  <chryjs!@!free!.!fr>
 
  * Controler l'activation des forums public comme precondition a l'activation !

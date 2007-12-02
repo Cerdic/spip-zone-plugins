@@ -306,7 +306,7 @@ function spipbb_check_tables()
 //----------------------------------------------------------------------------
 function spipbb_check_une_table($nom_table,$tables_principales)
 {
-	$res = sql_showtable($nom_table);
+	$res = sql_showtable($nom_table,true);
 	// une petite manip pour s'affranchir des differents formats des bases variees
 	// on ne s'interre pas aux index pour le moment
 	while ( list($k,$v) = each($res['field']) )
