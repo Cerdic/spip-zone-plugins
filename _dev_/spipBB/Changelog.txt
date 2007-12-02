@@ -1,6 +1,7 @@
 2007-12-02  chryjs  <chryjs!@!free!.!fr>
 
  * sql_showtable(.., true) permet de faire le remplacement pour les tables "spip"
+ * GLOBALS connexions prefixe n existe pas en 192... il faut utiliser table_prefix
 
 2007-11-27  chryjs  <chryjs!@!free!.!fr>
 
