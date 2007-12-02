@@ -117,7 +117,7 @@ include_spip('inc/meta'); // para coger datos automáticamente del servidor, usu
 $mail = new PHPMailer();
 
 $mail->IsSMTP();
-$mail->Mailer = "smtp"; 
+$mail->Mailer = "mail"; 
 
 
 /*
@@ -170,10 +170,12 @@ if (!$HTTP_POST_VARS["email"]) { $replica = '[(#EMAIL_WEBMASTER)]'; } else { $re
 $sitio='[(#NOM_SITE_SPIP)]';
 $url_sitio='[(#URL_SITE_SPIP)]';
 $url_art='[(#URL_ARTICLE)]';
+$logo='[(#LOGO_SITE_SPIP||liens_absolus)]';
+
 
 $texto_html ="<div style='margin:1.2em;font-family:tahoma,verdana,arial,helvetica,sans-serif;background-color:#ffffff;color:#727860;border:1px solid #f28000'>";
 
-$texto_html.="<p style='padding:0px;margin:0px;text-align:left;font-size:120%;font-weight:bold;background-color:#f28000'><a href='$url_sitio' style='display:block;text-decoration:none;color:#edef9f;padding:.3em'><img src='logo_64.jpg' border='0' /> ".$sitio."</a></p>";
+$texto_html.="<p style='padding:0px;margin:0px;text-align:left;font-size:120%;font-weight:bold;background-color:#f28000'><a href='$url_sitio' style='display:block;text-decoration:none;color:#edef9f;padding:.3em'> ".$logo."<br>".$sitio."</a></p>";
 
 $texto_html.="<div style='padding:.9em;padding-top:0px'>";
 
