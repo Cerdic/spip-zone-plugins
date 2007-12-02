@@ -134,7 +134,7 @@ function mutualiser_creer($e, $options) {
 									// d'abord creer l'utilisateur
 									$req[] = "CREATE USER " . _INSTALL_USER_DB . " WITH PASSWORD '" . _INSTALL_PASS_DB . "'";
 									$err[] = "CREATE USER " . _INSTALL_USER_DB . " WITH PASSWORD 'xxx'";
-									// pas de ' autour du pass
+									// l'affecter a sa base de donnee
 									$req[] = $r = "GRANT ALL PRIVILEGES ON DATABASE " 
 										. _INSTALL_NAME_DB . " TO ". _INSTALL_USER_DB;
 									$err[] = $r;
