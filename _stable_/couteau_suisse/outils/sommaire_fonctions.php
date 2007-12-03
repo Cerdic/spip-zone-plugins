@@ -17,10 +17,11 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	static $index; if(!$index || $page===false) $index=0;
 	if ($page===false) return;
 	@define('_sommaire_NB_CARACTERES', 30);
+	$self = nettoyer_uri();//self();//$GLOBALS['REQUEST_URI'];
 	// si on n'est pas en mode impression, on calcule l'image de retour au sommaire
 	if($_GET['cs']!='print') {
 		$titre = _T('cout:sommaire_titre');
-		$haut = "<a title=\"$titre\" href=\"".self()."#outil_sommaire\" class=\"sommaire_ancre\">&nbsp;</a>";
+		$haut = "<a title=\"$titre\" href=\"".$self."#outil_sommaire\" class=\"sommaire_ancre\">&nbsp;</a>";
 	} else $haut = '';
 	// traitement des titres <h3>
 	preg_match_all(',(<h3[^>]*)>(.*)</h3>,Umsi',$texte, $regs);
@@ -39,7 +40,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 			$lien = couper($regs[2][$i], _sommaire_NB_CARACTERES);
 			$lien = preg_replace('/[!?,;.:]+$/', '', $lien); // eviter une ponctuation a la fin
 			$titre = attribut_html(propre(couper($regs[2][$i], 100)));
-			$sommaire .= "<li><a $st title=\"$titre\" href=\"".parametre_url(self(),'artpage', $page)."#outil_sommaire_$index\">$lien</a>$p</li>";
+			$sommaire .= "<li><a $st title=\"$titre\" href=\"".parametre_url($self,'artpage', $page)."#outil_sommaire_$index\">$lien</a>$p</li>";
 		}
 	}
 	return $sommaire;

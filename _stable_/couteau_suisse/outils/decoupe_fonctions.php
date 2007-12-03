@@ -98,7 +98,7 @@ function decouper_en_pages_rempl($texte) {
 	if (strlen($_GET['var_recherche']) || $artpage < 1 || $artpage > $num_pages)
 		return join("<hr/>", $pages);
 */
-	$self = self();//$GLOBALS['REQUEST_URI'];
+	$self = nettoyer_uri();//self();//$GLOBALS['REQUEST_URI'];
 
 	// images calculees par decoupe_installe()
 	$images = unserialize($GLOBALS['meta']['cs_decoupe']);
