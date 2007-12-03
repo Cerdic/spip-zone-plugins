@@ -1,0 +1,84 @@
+/*
++--------------------------------------------+
+| ACTIVITE DU JOUR v. 1.52 - 08/2007 - SPIP 1.9.2
++--------------------------------------------+
+| H. AROUX . Scoty . koakidi.com
+| Script certifié KOAK2.0 strict, mais si !
++--------------------------------------------+
+*/
+.cell_info {
+	margin-top:2px;
+	padding:3px;
+	border:1px solid #969696;
+	-moz-border-radius:6px;
+	font-family:Verdana,Arial;
+	font-size:12px;
+}
+
+.alter-fond { background-color:#efefef; }
+
+.cell_moymens { 
+	position:absolute;
+	z-index:2;
+	top:-2px;
+	left:2px;
+	padding-left:2px;
+	padding-right:2px;
+	border:1px solid #878787;
+	-moz-border-radius:4px;
+	-moz-opacity:0.8;
+	filter:alpha(opacity=80);
+	background:#FFFFFF;
+}
+
+.fond_barre {
+	width:100%;
+	height:10px;
+	background-color:#efefef;
+	border-top:1px solid #696969;
+	border-bottom:1px solid #C6C6C6;
+}
+
+.bouton_droite { float:right; margin-top:-2px; }
+
+.bouton_maj {
+	float:right;
+	right:0;
+	margin-bottom:3px;
+	padding:4px;
+	border:1px solid #CECECE;
+	background-color:#efefef;
+	-moz-border-radius:5px;
+}
+
+.cart_titre { margin:4px 10px 4px 10px; padding:4px; border-bottom:1px solid #BABABA; }
+
+.cell_huit_t {
+	padding:1px;
+	color:#FFFFFF;
+	font-family:Verdana;
+	font-size:11px;
+	text-align:center;
+}
+.cell_huit_m {
+	padding:1px;
+	font-family:Verdana;
+	font-size:11px;
+	text-align:center;
+}
+.cell_huit_p {
+	padding:1px;
+	font-family:Arial;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+}
+
+tr.head_tbl td {
+	color:#FFFFFF;
+	font-family:Arial;
+	font-size:11px;
+	text-align:center;
+}
+
+.bold { font-weight:bold; }
