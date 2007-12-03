@@ -16,13 +16,12 @@ _ &#169; 2007 - Distribu&eacute; sous licence GPL
 	Avoir a disposition dans spip une liste de continent / pays / ville utilisable par les autres plugins facilement...
 	</description>
 	<lien>http://www.spip-contrib.net/Un-plugin-spip-geo-localisation</lien> <!-- URI de documentation -->
-	<options>
-	</options>
-	<fonctions>
-	</fonctions>
 	<prefix>
 	spip_geo
 	</prefix>
+	<options>
+	spip_geo_options.php
+	</options>
 	<install>base/spip_geo_upgrade.php</install>
 	<chemin dir='' />
 </plugin>
