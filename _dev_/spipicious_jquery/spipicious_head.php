@@ -7,6 +7,7 @@ function spipicious_affichage_final($page){
 
 	$iautocompleter = find_in_path('javascript/iautocompleter.js');
 	$autocompletecss = find_in_path('jquery.autocomplete.css');
+
 	$urlselecteur = parametre_url(generer_url_public('selecteurs_tags'),id_article, $id_article, '\\x26');
 
     $incHead = <<<EOS

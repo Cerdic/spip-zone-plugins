@@ -1,7 +1,13 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type:text/html}
 <B_motsarticle>
 	<ul class="tags">
 		<BOUCLE_motsarticle(MOTS){id_article}>
-			<li><a href="#URL_MOT" title="#TITRE">#TITRE</a></li>
+			<li><a href="#URL_MOT" title="#TITRE">#TITRE</a>
+			<BOUCLE_aut(SPIPICIOUS){id_mot}{id_article=#ENV{id_article}}>
+				#ID_AUTEUR #ID_ARTICLE
+			</BOUCLE_aut>
+			</li>
 		</BOUCLE_motsarticle>
 	</ul>
 </B_motsarticle>

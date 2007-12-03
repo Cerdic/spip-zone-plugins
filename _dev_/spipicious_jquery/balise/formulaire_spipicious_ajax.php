@@ -44,35 +44,6 @@ function balise_FORMULAIRE_SPIPICIOUS_AJAX_dyn($id_document,$id_rubrique,$id_for
 	$type_groupe_tags = _request('type_groupe');
 	$add_tags = _request('add_tags');
 	
-	// supprimer des mots ?
-	if (is_array(_request('supprimer_mot')))
-	foreach (_request('supprimer_mot') as $supprimer) {
-		if ($supprimer = intval($supprimer)
-		AND $s = sql_select("*","spip_spipicious","id_auteur=".$auteur_id." AND id_${type}=".$id." AND id_mot=".$supprimer)
-		AND $t = sql_fetch($s)) {
-			sql_delete("spip_spipicious","id_auteur=$auteur_id AND id_${type}="._q($id)." AND id_mot="._q($supprimer).""); // on efface le mot associŽ a l'auteur sur l'objet
-			spip_log("suppression spipiciousmot (id_$type=$id) id_mot=".$supprimer, 'spipicious');
-			$newquery = sql_select("*","spip_spipicious","id_mot=".$supprimer);
-			$newt = sql_fetch($newquery);
-			if (!$newt){
-				sql_delete("spip_mots_".$type."s","id_mot=".$supprimer." AND id_".$type."=".$id); 
-				sql_delete("spip_mots","id_mot=".$supprimer); // on efface le mot si il n'est plus associŽ ˆ rien
-				spip_log("suppression spip_mot non utilise id_mot=".$supprimer, 'spipicious');
-				spip_log("suppression spip_mots_".$type."s (id_article=$id) non utilise id_mot=".$supprimer, 'spipicious');
-			}
-			else {
-				spip_log("mot toujours utilise : id_mot=".$supprimer, 'spipicious');
-			}
-			$invalider = true;
-		}
-	}
-	
-	if ($invalider) {
-		include_spip('inc/invalideur');
-		suivre_invalideur("0",true);
-		spip_log('invalider', 'spipicious');
-	}
-	
 	if ($add_tags && $auteur_id){
 
 	if ($tags && $auteur_id) {
@@ -86,14 +57,14 @@ function balise_FORMULAIRE_SPIPICIOUS_AJAX_dyn($id_document,$id_rubrique,$id_for
 			if ($tag!="" && !in_array($tag,$tag_analysed)) {
 				$tag = corriger_caracteres($tag);
 				// doit on creer un nouveau tag ?
-				$result = sql_select("*","spip_mots AS mots","titre='".$tag."' AND id_groupe=$id_groupe_tags");
+				$result = sql_select("*","spip_mots","titre='".$tag."' AND id_groupe=$id_groupe_tags");
 	
 				if (sql_count($result) == 0) { // creation tag
 					$exist = 'mot inexistant';
 					$log = spip_log($exist,'spipicious');
 					sql_insertq("spip_mots", array('titre' => $tag,'id_groupe' => $id_groupe_tags,'type' => $type_groupe_tags));
 					spip_log('creation du nouveau mot est '.$tag.'','spipicious');
-					$result2 = sql_select("*","spip_mots AS mots","titre = '".$tag."' AND id_groupe=$id_groupe_tags");
+					$result2 = sql_select("*","spip_mots","titre = '".$tag."' AND id_groupe=$id_groupe_tags");
 					while($row=sql_fetch($result2)){
 						$id_tag = $row['id_mot'];
 						spip_log('id_mot du nouveau mot est '.$id_tag.'','spipicious');

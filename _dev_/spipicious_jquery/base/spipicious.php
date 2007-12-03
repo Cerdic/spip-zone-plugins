@@ -33,7 +33,7 @@
 	  	'field' => &$spip_spipicious,
 	  	'key' => &$spip_spipicious_key);
 	
-	$tables_jointures['spip_mots'][] = 'spipicious';
+//	$tables_jointures['spip_mots'][] = 'spipicious';
 
 	$table_des_tables['spipicious'] = 'spipicious';
 

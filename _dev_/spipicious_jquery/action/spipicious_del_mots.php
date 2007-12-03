@@ -22,10 +22,15 @@ function action_spipicious_del_mots(){
 		if ($supprimer
 		AND $s = sql_select("*","spip_spipicious","id_auteur=".$id_auteur." AND id_${type}=".$id." AND id_mot=".$supprimer)
 		AND $t = sql_fetch($s)) {
+			// On le vire de notre auteur dans spipicious
 			sql_delete("spip_spipicious","id_auteur=".$id_auteur." AND id_${type}=".$id." AND id_mot=".$supprimer); // on efface le mot associŽ a l'auteur sur l'objet
 			spip_log("suppression spipiciousmot (id_$type=$id) id_mot=".$supprimer."", 'spipicious');
+			
+			// Utilisation par un autre utilisateur => sinon : il n'est plus du tout utilise =>
+			// suppression du mot pure et simple dans spip_mots_$type et spip_mot
 			$newquery = sql_select("*","spip_spipicious","id_mot=".$supprimer);
 			$newt = sql_fetch($newquery);
+			
 			if (!$newt){
 				sql_delete("spip_mots_".$type."s","id_mot=".$supprimer." AND id_".$type."=".$id); 
 				spip_log("suppression spip_mots_".$type."s (id_article=$id) non utilise id_mot=".$supprimer, 'spipicious');
@@ -33,6 +38,13 @@ function action_spipicious_del_mots(){
 				spip_log("suppression spip_mot non utilise id_mot=".$supprimer, 'spipicious');
 			}
 			else {
+				// Utilisation par un autre utilisateur ok mais utilisation sur le meme id_$type
+				$newquery2 = sql_select("*","spip_spipicious","id_".$type."=".$id);
+				$newt2 = sql_fetch($newquery2);
+				if(!$newt2){
+					sql_delete("spip_mots_".$type."s","id_mot=".$supprimer." AND id_".$type."=".$id); 
+					spip_log("suppression spip_mots_".$type."s (id_article=$id) non utilise id_mot=".$supprimer, 'spipicious');
+				}
 				spip_log("mot toujours utilise : id_mot=".$delete, 'spipicious');
 			}
 			$invalider = true;
