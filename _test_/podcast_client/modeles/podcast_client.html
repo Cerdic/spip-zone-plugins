@@ -1,0 +1,26 @@
+[(#REM)
+  modele pour podcast_plugin
+	
+	action:
+	- affiche une video syndiquee 
+	
+	parametre
+	- id_syndic_article
+
+]<BOUCLE_articlesyndic(SYNDIC_ARTICLES){id_syndic_article}> 
+<BOUCLE_image(DOCUMENTS){id_syndic_article}{mode=document}{extension == jpg}>
+			#SET{start_image,#FICHIER}
+</BOUCLE_image>
+<BOUCLE_video(DOCUMENTS){id_syndic_article}{mode=document}{extension=flv}>
+			<object type="application/x-shockwave-flash" data="#EVAL{_DIR_PLUGIN_PLAYER}player_flv.swf" width="[(#LARGEUR|=={0}|?{400,#LARGEUR})]" height="[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]">
+<param name="movie" value="#EVAL{_DIR_PLUGIN_PLAYER}player_flv.swf" />
+<param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#LARGEUR|=={0}|?{400,#LARGEUR})]&amp;height=[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;title=[(#TITRE|urlencode)]&amp;startimage=#GET{start_image}" />
+<param name="wmode" value="opaque" />
+[<span><a href="(#URL_DOCUMENT)" rel="enclosure">#URL_DOCUMENT</a></span>]
+</object>
+</BOUCLE_video>
+			
+<BOUCLE_videoswf(DOCUMENTS){id_syndic_article}{mode=document}{extension=swf}>
+			#EMBED_DOCUMENT
+</BOUCLE_videoswf>
+</BOUCLE_articlesyndic>
