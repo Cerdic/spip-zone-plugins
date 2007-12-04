@@ -159,7 +159,22 @@ function compat_cfg_defs_dist() {
 			}',	
 			
 		
-	
+		// n'existe pas en 1.9.2
+		// on cree la requete directement
+		'sql_insertq' => 
+			'(
+				$table,
+				$champs
+			) {
+				if (!is_array($champs)) $exp = array($champs);
+				
+				foreach ($champs as $k => $val) {
+					$champs[$k] = sql_quote($val);
+				}
+				
+				$query = "INSERT INTO $table (".implode(",", array_keys($champs)).") VALUES (".implode(",", $champs).")";
+				return sql_query($query);
+			}',
 			
 		/*
 		'sql_count' => 
