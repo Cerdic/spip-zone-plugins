@@ -15,7 +15,7 @@ define( "_LG_ANCRE", $tm_lg_ancre);
 define("_SEP_ANCRE", $tm_sep_ancre);
 define("_MIN_ANCRE", $tm_min_ancre);
 	
-define("_RETOUR_TDM", '<a href="#tdm"><img src="' .
+define("_RETOUR_TDM", '<a href="#tdm" class="tdm"><img src="' .
 	find_in_path('images/tdm.png') . 
 	'" /></a>');
 
