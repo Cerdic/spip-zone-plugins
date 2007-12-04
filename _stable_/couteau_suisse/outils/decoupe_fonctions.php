@@ -45,7 +45,6 @@ function onglets_callback($matches) {
 	}
 	$onglets = $contenus = array();
 	$pages = explode(_decoupe_SEPARATEUR, $matches[1]);
-print_r($pages);
 	foreach ($pages as $p) {
 		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $p, 2);
 		$t = array(trim(textebrut(nettoyer_raccourcis_typo($t[0]))), decoupe_safebalises($t[1]));
