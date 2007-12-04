@@ -30,6 +30,7 @@ function action_autoriser_dist()
 		OR !($res = spip_query("SELECT fichier FROM spip_documents WHERE id_document="._q($arg)))
 		OR !($row = spip_fetch_array($res))
 		OR !($file = $row['fichier'])
+		OR !(file_exists($file))
 		) {
     spip_log("Acces refuse (restreint) au document " . $arg . ': ' . $file);
     redirige_par_entete('./?page=404');
