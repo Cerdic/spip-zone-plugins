@@ -411,7 +411,7 @@ $(document).ready(function(){';
 	$('.$champ.').before("<div id=\"article_stats'.$num_barre.'\"></div>");
 	';
 	global $spip_version_code;
-	if (version_compare($spip_version_code,'1.925','<')){
+	if (version_compare($spip_version_code,'1.9250','<')){
 	 $ret .= '$.ajaxTimeout( 5000 );
 	 '; // jquery < 1.1.4
 	} else {
