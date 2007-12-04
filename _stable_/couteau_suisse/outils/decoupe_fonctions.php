@@ -38,17 +38,18 @@ function onglets_callback($matches) {
 	if ($_GET['cs']=='print') {
 		@define(_decoupe_FILET, '<p style="border-bottom:1px dashed #666; padding:0; margin:1em 20%; font-size:4pt;" >&nbsp; &nbsp;</p>');
 		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $matches[1], 2);
-		$texte = preg_replace(','.preg_quote(_decoupe_SEPARATEUR, ',').'(.*?)(\n\n|\r\n\r\n|\r\r),ms', _decoupe_FILET."<h4>$1</h4>\n", $t[1]);
+		$texte = preg_replace(','.preg_quote(_decoupe_SEPARATEUR, ',').'(.*?)(\n\n|\r\n\r\n|\r\r),ms', _decoupe_FILET."<h4>$1</h4>\n\n", $t[1]);
 		// on sait jamais...
 		str_replace(_decoupe_SEPARATEUR, _decoupe_FILET, $texte);
-		return '<div class="onglets_print"><h4>' . textebrut($t[0]) . "</h4>$texte</div>";
+		return '<div class="onglets_print"><h4>' . textebrut($t[0]) . "</h4>\n$texte</div>";
 	}
 	$onglets = $contenus = array();
 	$pages = explode(_decoupe_SEPARATEUR, $matches[1]);
+print_r($pages);
 	foreach ($pages as $p) {
 		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $p, 2);
 		$t = array(trim(textebrut(nettoyer_raccourcis_typo($t[0]))), decoupe_safebalises($t[1]));
-		$contenus[] = _onglets_CONTENU.$t[0].'</a></h2>'.$t[1].'</div>';
+		$contenus[] = _onglets_CONTENU.$t[0]."</a></h2>\n\n".$t[1].'</div>';
 	}
 	return _onglets_DEBUT.join('', $contenus).'</div>'._onglets_FIN;
 }
