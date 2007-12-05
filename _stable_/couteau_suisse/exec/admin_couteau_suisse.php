@@ -329,6 +329,10 @@ verif_plugin();
 	gros_titre(_T('cout:titre'));
 	echo barre_onglets("configuration", 'couteau_suisse');
 echo '<p style="color:red;">Ancienne interface : <a href="', generer_url_ecrire('admin_couteau_suisse_old'), '">par ici</a></p>';
+// verification d'une base venant de SPIP 1.8
+$res = spip_query("DESCRIBE spip_meta valeur");
+$resultat = function_exists('spip_fetch_array')?spip_fetch_array($res):sql_fetch($res);
+if($resultat['Type']!='text') echo "<p style=\"color:red;\">Attention : votre base semble ancienne et le Couteau Suisse ne va pas bien fonctionner.</p><p>La table 'spip_meta' a pour type de valeur '$resultat[Type]' au lieu de 'text'.</p>";
 
 	debut_gauche();
 	debut_boite_info();
