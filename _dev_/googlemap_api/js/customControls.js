@@ -292,3 +292,95 @@ cornerControl.prototype.initialize = function(map) {
 cornerControl.prototype.getDefaultPosition = function() {
 	return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(0, 0));
 }
+//***********
+// Adress Custom Control
+//***********
+function mapAddressControl() {
+}
+mapAddressControl.prototype = new GControl();
+mapAddressControl.prototype.initialize = function(map) {
+	var container = document.createElement("div");
+	var imgAddress = document.createElement("img");
+	GEvent.addDomListener(imgAddress, "click", function() {
+		$("#menuses").toggle();
+	});
+	imgAddress.src = URLbase + "/googlemap_api/img_pack/" + images_folder + "/libro." + images_extension;
+	imgAddress.style.cursor = "pointer";
+	imgAddress.style.position = "absolute";
+	imgAddress.style.left= "314px";
+	
+	var formContainer = document.createElement("div");
+	formContainer.style.display = "none";
+	formContainer.id = "menuses";
+	
+	var left = document.createElement("img");
+	left.src = URLbase + "/googlemap_api/img_pack/" + images_folder + "/left." + images_extension;
+	left.style.position = "absolute";
+	left.style.top= "10px";
+	left.style.left= "0px";
+	formContainer.appendChild(left);
+	
+	var center = document.createElement("img");
+	center.src = URLbase + "/googlemap_api/img_pack/" + images_folder + "/center." + images_extension;
+	center.style.width = "290px";
+	center.style.height = "35px";
+	center.style.position = "absolute";
+	center.style.top= "10px";
+	center.style.left= "7px";
+	formContainer.appendChild(center);
+	
+	var input = document.createElement("input");
+	input.name="address";
+	input.id="address";
+	input.type = "text";
+	input.value = "Plaza Juda; Levi, Cordoba, Spain";
+	input.size = "30";
+	input.style.position = "absolute";
+	input.style.top= "15px";
+	input.style.left= "8px";
+	formContainer.appendChild(input);
+	var boton = document.createElement("img");
+	boton.src = URLbase + "/googlemap_api/img_pack/" + images_folder + "/go." + images_extension;
+	boton.style.cursor = "pointer";
+	boton.style.position = "absolute";
+	boton.style.top= "15px";
+	boton.style.left= "265px";
+	GEvent.addDomListener(boton, "click", function() {
+		var geocoder = new GClientGeocoder();
+		var address = document.getElementById("address").value;
+		if (geocoder) {
+       		geocoder.getLatLng(
+				address,
+         		function(point) {
+            		if (!point) {
+             			alert(address + " not found");
+            		} else {
+              			map.setCenter(point, 13);
+              			var marker = new GMarker(point);
+              			formMap.addOverlay(marker);
+           				marker.openInfoWindowHtml(address);
+						$('#form_lat').val(point.y);
+						$('#form_long').val(point.x);
+           			}
+       			}
+       		);
+   		}
+	});
+	formContainer.appendChild(boton);
+	
+	var right = document.createElement("img");
+	right.src = URLbase + "/googlemap_api/img_pack/" + images_folder + "/right." + images_extension;
+	right.style.position = "absolute";
+	right.style.top= "10px";
+	right.style.left= "297px";
+	formContainer.appendChild(right);
+	
+	container.appendChild(imgAddress);
+	container.appendChild(formContainer);
+
+	map.getContainer().appendChild(container);
+	return container;
+}
+mapAddressControl.prototype.getDefaultPosition = function() {
+	return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(90, 290));
+}

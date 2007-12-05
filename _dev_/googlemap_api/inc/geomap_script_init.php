@@ -17,7 +17,7 @@ function inc_geomap_script_init_dist(){
 	$geomap = compacte_js(find_in_path('js/geomap.js'));
 	$gmap_script = compacte_js(recuperer_page('http://maps.google.com/maps?file=api&v=2&key='.$config));
 	return '<script type="text/javascript" src="'.$geomap.'"></script>'
-	.'<script type="text/javascript">'.$gmap_script.'</script>';
+	.'<script type="text/javascript">'.$gmap_script.'</script>'.'<script type="text/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
 }
 
 ?>
