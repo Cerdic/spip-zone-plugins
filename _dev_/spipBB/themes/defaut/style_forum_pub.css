@@ -114,7 +114,7 @@ td.etatsujet { width:25px; }
 td.etatforum { width:30px; }
 td.etatsujet span, td.etatforum span { display: none; }
 
-td.titreforum {}
+td.titreforum {text-align:left;}
 td.titreforum a.titre{ font-weight:bold; font-size:1.1em; color:#496B8D; } /* coul 1 */
 
 td.nbr_sujet { min-width:10%; text-align:center; }
