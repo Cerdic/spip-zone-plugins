@@ -259,7 +259,7 @@ function spipbb_config_infos_auteurs()
 
 	# choix du mode
 	foreach($options_sap as $val) {
-		$aff_checked = ($GLOBALS['spipbb']['support_auteurs']==$val) ? 'checked=\"checked\"' : '' ;
+		$aff_checked = ($GLOBALS['spipbb']['support_auteurs']==$val) ? 'checked="checked"' : '' ;
 		$res .= "<input type='radio' name='support_auteurs' value='".$val."' ".$aff_checked." />&nbsp;"._L($val)."<br />";
 	}
 	$res .= "[spip_]<input type='text' name='table_support' value='".$GLOBALS['spipbb']['table_support']."' size='8' />";

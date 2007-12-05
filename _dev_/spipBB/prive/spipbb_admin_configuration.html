@@ -3,7 +3,7 @@
 [(#REM) SpipBB admin - Configuration generale SpipBB]
 
 <form method="post" action="#ENV{lien_action}">
-<input type='hidden' id="exec" value="#ENV{exec_script}">
+<input type='hidden' id="exec" value="#ENV{exec_script}" />
 
 [(#ENV{url_post}|form_hidden)]
 
@@ -161,7 +161,6 @@
 <p>
 	<i><:spipbb:choix_squelettes:></i>
 </p>
-<label>
 </select>
 <table cellpadding='3' cellspacing='1' border='1' width='100%'>
 <tr>	
@@ -175,7 +174,6 @@
 	</td>
 </tr>
 </table>
-<label>
 </fieldset>
 
 <div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:valider:>" class="fondo" /></div>
@@ -198,7 +196,7 @@
 <tr>
 	<td><:spipbb:admin_temps_deplacement:></td>
 	<td>
-		<input type='text' name='lockmaint' value='#ENV{lockmaint}'' size='4' />
+		<input type='text' name='lockmaint' value='#ENV{lockmaint}' size='4' />
 	</td>
 </tr>
 <tr>
