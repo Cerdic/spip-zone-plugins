@@ -216,17 +216,16 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$champhelp = "document.getElementById('barre_$num_barre')";
 
 
- // Pr�g�n�ration des toolzbox.. (wharfing)
+ // Pregeneration des toolzbox.. (wharfing)
     $toolbox .= afficher_gestion_tableau($champ);
     $toolbox .= afficher_gestion_lien($champ);
 	$toolbox .= afficher_gestion_ancre($champ);
 	$toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp);
     $toolbox .= afficher_gestion_remplacer($champ);
-//un pipeline pour ajouter une toolbox
-    $params=array($champ,$champhelp,$spip_lang);
-    $add=pipeline("BarreTypoEnrichie_toolbox",$params);
-    if ($params!=$add)
-		$toolbox .= $add;
+ // Pipeline pour ajouter des toolzbox
+    $params = array('champ'=>$champ, 'help'=>$champhelp, 'lang'=>$spip_lang, 'num'=>$num_barre, 'flux'=>'');
+    $add = pipeline("BT_toolbox", $params);
+    $toolbox .= $add['flux'];
 
 	$ret .= "<table class='spip_barre' style='width:auto;' cellpadding='0' cellspacing='0' border='0' summary=''>";
 	$ret .= "\n<tr style='width: auto;' class='spip_barre'>";

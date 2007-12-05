@@ -244,10 +244,10 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	include_spip('inc/layer');
 	if (!$GLOBALS['browser_barre']) return '';
 	if (!$lang) $lang = $spip_lang;
-//	$layer_public = '<script type="text/javascript" src="' . find_in_path('javascript/layer.js').'"></script>';
-//	$ret = ($num_barre > 0)  ? '' :
-//	  $layer_public . '<script type="text/javascript" src="' . find_in_path('js/spip_barre.js').'"></script>';
-
+/*	$layer_public = '<script type="text/javascript" src="' . find_in_path('javascript/layer.js').'"></script>';
+	$ret = ($num_barre > 0)  ? '' :
+	  $layer_public . '<script type="text/javascript" src="' . find_in_path('js/spip_barre.js').'"></script>';
+*/
 
 	$num_barre++;
 	$champhelp = "document.getElementById('barre_$num_barre')";
@@ -259,11 +259,10 @@ function afficher_barre($champ, $forum=false, $lang='') {
     $toolbox .= afficher_gestion_lien($champ);
 	$toolbox .= afficher_gestion_ancre($champ);
     $toolbox .= afficher_gestion_remplacer($champ, $champhelp);
-//un pipeline pour ajouter une toolbox
-    $params=array($champ,$champhelp,$spip_lang);
-    $add=pipeline("BarreTypoEnrichie_toolbox",$params);
-    if ($params!=$add)
-		$toolbox .= $add;
+ // Pipeline pour ajouter des toolzbox
+    $params = array('champ'=>$champ, 'help'=>$champhelp, 'lang'=>$spip_lang, 'num'=>$num_barre, 'flux'=>'');
+    $add = pipeline("BT_toolbox", $params);
+    $toolbox .= $add['flux'];
 
 //
 	 $ret .= '<script type="text/javascript"><!--

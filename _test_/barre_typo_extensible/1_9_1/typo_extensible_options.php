@@ -4,7 +4,7 @@
 // des fichiers d'appel, en verifiant qu'elles n'ont pas ete passees
 // par le visiteur (sinon, pas de cache)
 //
-$GLOBALS['spip_pipeline']['BarreTypoEnrichie_toolbox'] = ''; 
+$GLOBALS['spip_pipeline']['BT_toolbox'] = ''; 
 $GLOBALS['spip_pipeline']['BarreTypoEnrichie_tous'] = ''; 
 $GLOBALS['spip_pipeline']['BarreTypoEnrichie_avancees'] = ''; 
 $GLOBALS['spip_pipeline']['BarreTypoEnrichie_forum'] = ''; 
