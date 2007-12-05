@@ -35,7 +35,7 @@ function exec_cs_boite_rss_dist() {
 		exit;
 	}
 $force = _request('force');
-$force = true;
+$force = false;
 	$p = '';
 	// on cherche le flux rss toutes les deux heures
 	if(!$force) {
