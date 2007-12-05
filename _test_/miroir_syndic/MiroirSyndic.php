@@ -68,6 +68,7 @@ function MiroirSyndic_regler_rubrique($t) {
 		spip_query("UPDATE spip_articles SET
 		id_rubrique=$r WHERE id_article=".$t['id_article']);
 	}
+
 }
 
 // Cette fonction regarde les spip_syndic_articles modifies recemment
@@ -120,8 +121,8 @@ function MiroirSyndic_miroir() {
 			// est la meme que la rubrique du site syndique (idem pour le secteur)
 			if (!$t['id_article']) {
 				$t['id_article'] = MiroirSyndic_creer_article($t);
-	
 				MiroirSyndic_regler_rubrique($t);
+				$creation = true;
 			}
 	
 			spip_query("UPDATE spip_articles SET
@@ -135,6 +136,15 @@ function MiroirSyndic_miroir() {
 		}
 
 #spip_log($q, 'syndic');
+	}
+
+	if ($creation) {
+		if (function_exists('calculer_rubriques'))
+			calculer_rubriques();
+		if (function_exists('calculer_langues_rubriques'))
+			calculer_langues_rubriques();
+		if (function_exists('propager_les_secteurs'))
+			propager_les_secteurs();
 	}
 
 	spip_log('miroir de '.intval($nombre).' articles syndiques', 'syndic');
