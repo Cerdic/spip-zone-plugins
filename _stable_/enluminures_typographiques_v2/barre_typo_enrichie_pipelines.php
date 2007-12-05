@@ -31,9 +31,9 @@ $tableau_formulaire = '
   return produceWharf('tableau_boutonsavances','',$tableau_formulaire); 	
 }
 
-function TypoEnluminee_BarreTypoEnrichie_toolbox($paramArray) {
-	$paramArray = afficher_boutonsavances($paramArray[0], $paramArray[1]);
-	return $paramArray;
+function TypoEnluminee_BT_toolbox($params) {
+	$params['flux'] .= afficher_boutonsavances($params['champ'], $params['help']);
+	return $params;
 }
 
 function TypoEnluminee_BarreTypoEnrichie_avancees($paramArray) {
