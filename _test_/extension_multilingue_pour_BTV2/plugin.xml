@@ -10,7 +10,7 @@
 	</auteur>
 	<lien></lien>
 	<version>
-	1.2
+	1.3
 	</version>
 	<etat>
 	test
@@ -49,7 +49,7 @@
 	</icon>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
-		<nom>BarreTypoEnrichie_toolbox</nom>
+		<nom>BT_toolbox</nom>
 		<inclure>extension_multilingue.php</inclure>
 	</pipeline>
  	
@@ -58,7 +58,7 @@
 		<inclure>extension_multilingue.php</inclure>
 	</pipeline>
 	<necessite id="CFG" version="[1.0;]" />
-	<necessite id="BarreTypoEnrichie" version="[2.2.0;]" />
+	<necessite id="BarreTypoEnrichie" version="[2.3.1;]" />
 	<necessite id="barre_typo_generalisee" version="[1.4;]" />
 	<necessite id='spip' version='[1.92;]' />
 	

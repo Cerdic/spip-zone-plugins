@@ -1,21 +1,21 @@
 <?php
-function ExtensionMultilingue_BarreTypoEnrichie_toolbox($paramArray) {
-if (strpos($paramArray[0], "zone_multilingue") === FALSE)
+function ExtensionMultilingue_BT_toolbox($params) {
+if (strpos($params['champ'], "zone_multilingue") === FALSE)
 {
 	
 $ret="";
 	//le champ est passé soit sous la forme document.formulaire.champ, soit sous la forme document.getElementsByName('champ')[0]
-	if (strpos($paramArray[0], "document.formulaire") === false)
-		$nom_champ = substr($paramArray[0], strpos($paramArray[0], "'")+1, strlen(substr($paramArray[0], strpos($paramArray[0], "'")+1))-5 );
+	if (strpos($params['champ'], "document.formulaire") === false)
+		$nom_champ = substr($params['champ'], strpos($params['champ'], "'")+1, strlen(substr($params['champ'], strpos($params['champ'], "'")+1))-5 );
 	else
-		$nom_champ = substr($paramArray[0], strrpos($paramArray[0], ".")+1);
-		
-	
+		$nom_champ = substr($params['champ'], strrpos($params['champ'], ".")+1);
+
+
 	$langues_choisies = explode(",",lire_config('ExtensionMultilingue/langues_ExtensionMultilingue','fr,en,de'));	
 	
 	if ($_GET['exec'] == "rubriques_edit")
 	{
-		if (lire_config("ExtensionMultilingue/rubriques_".$nom_champ."_ExtensionMultilingue", '') != "on")
+		if (lire_config('ExtensionMultilingue/rubriques_'.$nom_champ.'_ExtensionMultilingue', '') != "on")
 		return $ret;
 	
 		if ($_GET['new'] == "oui") 
@@ -169,13 +169,11 @@ $ret="";
 	if (($_GET['exec'] == "sites_edit") || ($_GET['exec'] == "articles_edit") || ($_GET['exec'] == "breves_edit") || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
 	{
 		
-
-		
-	if (($nom_champ == "titre") || ($nom_champ == "nom_site") || ($nom_champ == "change_type"))
+		if (($nom_champ == "titre") || ($nom_champ == "nom_site") || ($nom_champ == "change_type"))
 		{
 			//on gère le numéro dans un input séparé
 			$ret .= "
-			<label>Num&eacute;ro : <input type='text' name=\"numero_zone_multilingue_".$nom_champ."\" value=\"".extraire_numero($titre)."\" size='5' /></label><div class=\"container-onglets\">
+			<label>Num&eacute;ro : <input type='text' name=\"numero_zone_multilingue_".$nom_champ."\" value=\"".extension_multilingue_extraire_numero($titre)."\" size='5' /></label><div class=\"container-onglets\">
         		<ul class=\"tabs-nav\">";
         		for ($i=0; $i<count($langues_choisies); $i++)
 			{
@@ -743,11 +741,8 @@ function calculer_actions_head_multilingues_titre ($champ, $langues_choisies, $t
 			});";
 			return $resultat;
 }
-function extraire_numero ($titre) {
-	
-if (ereg("([0-9]+)\.", $titre, $match)) {
-	return $match[1];
-}
-else return "";
+function extension_multilingue_extraire_numero($titre) {
+	if (ereg("([0-9]+)\.", $titre, $match)) return $match[1];
+	return '';
 }
 ?>
