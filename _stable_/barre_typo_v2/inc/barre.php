@@ -274,11 +274,10 @@ function afficher_barre($champ, $forum=false, $lang='') {
     $toolbox .= afficher_gestion_lien($champ, $num_barre);
     $toolbox .= afficher_gestion_ancre($champ, $num_barre);
     $toolbox .= afficher_gestion_remplacer($champ, $champhelp, $num_barre);
-//un pipeline pour ajouter une toolbox
-    $params = array($champ,$champhelp,$spip_lang, $num_barre);
-    $add = pipeline("BarreTypoEnrichie_toolbox", $params);
-    if ($params!=$add)
-		$toolbox .= $add;
+ // Pipeline pour ajouter des toolzbox
+    $params = array('champ'=>$champ,'help'=>$champhelp,'lang'=>$spip_lang, 'num'=>$num_barre, 'flux'=>'');
+    $add = pipeline("BT_toolbox", $params);
+    $toolbox .= $add['flux'];
 
 //
 

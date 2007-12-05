@@ -1,4 +1,7 @@
 <plugin>
+	<version>
+	2.3.1
+	</version>
 	<nom> <!-- Nom du plugin -->
 	<multi>[ar]&#1588;&#1585;&#1610;&#1591; &#1578;&#1606;&#1587;&#1610;&#1602; &#1573;&#1589;&#1583;&#1575;&#1585; &#1634; &#1604;&#1600;&#1633;.&#1641;.&#1634; &#1608;&#1605;&#1575; &#1576;&#1593;&#1583;&#1607;[fr]Barre Typo V2 pour 1.9.2 et suivantes[en]Typographical toolbar V2 for 1.9.2 and newer versions</multi>
 	</nom>
@@ -34,9 +37,6 @@ _ CUSTOMISATION FOR SPIP 1.9.2 from [Coyote->http://www.spip-contrib.net/_Coyote
 </multi>
 _ <multi>[ar]&#169; &#1634;&#1632;&#1632;&#1639; - &#1605;&#1608;&#1586;&#1593; &#1576;&#1605;&#1608;&#1580;&#1576; &#1575;&#1604;&#1578;&#1585;&#1582;&#1610;&#1589; &#1575;&#1604;&#1593;&#1575;&#1605; GNU/GPL[fr]&#169; 2007 - Distribu&#233; sous licence GNU/GPL[en]&#169; 2007 - distributed under the GNU/GPL license</multi>
 	</auteur>
-	<version>
-	2.3.0
-	</version>
 	<etat>
 	stable
 	</etat>
