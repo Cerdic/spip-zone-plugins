@@ -2,9 +2,10 @@
 function ExtensionMultilingue_BT_toolbox($params) {
 if (strpos($params['champ'], "zone_multilingue") === FALSE)
 {
+	$fetch = function_exists('spip_fetch_array')?'spip_fetch_array':'sql_fetch';
+	$ret = '';
 	
-$ret="";
-	//le champ est passé soit sous la forme document.formulaire.champ, soit sous la forme document.getElementsByName('champ')[0]
+	//le champ est passe soit sous la forme document.formulaire.champ, soit sous la forme document.getElementsByName('champ')[0]
 	if (strpos($params['champ'], "document.formulaire") === false)
 		$nom_champ = substr($params['champ'], strpos($params['champ'], "'")+1, strlen(substr($params['champ'], strpos($params['champ'], "'")+1))-5 );
 	else
@@ -13,23 +14,20 @@ $ret="";
 
 	$langues_choisies = explode(",",lire_config('ExtensionMultilingue/langues_ExtensionMultilingue','fr,en,de'));	
 	
-	if ($_GET['exec'] == "rubriques_edit")
-	{
+	if ($_GET['exec'] == "rubriques_edit") {
+
 		if (lire_config('ExtensionMultilingue/rubriques_'.$nom_champ.'_ExtensionMultilingue', '') != "on")
-		return $ret;
+			return $params;
 	
-		if ($_GET['new'] == "oui") 
-		{
+		if ($_GET['new'] == "oui") {
 			$titre = filtrer_entites(_T('titre_nouvelle_rubrique'));
 			$descriptif = "";
 			$texte = "";
-		} 
-		else 
-		{
+		} else {
 			$id_rubrique_tmp = intval($_GET['id_rubrique']);
-			$row = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique_tmp'"));
+			$row = $fetch(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique_tmp'"));
 	
-			if (!$row) return "";
+			if (!$row) return $params;
 	
 			$titre = str_replace("\"","'",$row['titre']);
 			$descriptif = $row['descriptif'];
@@ -39,10 +37,9 @@ $ret="";
 	else if ($_GET['exec'] == "articles_edit")
 	{
 		if (lire_config("ExtensionMultilingue/articles_".$nom_champ."_ExtensionMultilingue", '') != "on")
-		return $ret;
+			return $params;
 
-		if ($_GET['new'] == "oui") 
-		{
+		if ($_GET['new'] == "oui") {
 			$surtitre = "";
 			$titre = filtrer_entites(_T('info_nouvel_article'));
 			$soustitre = "";
@@ -50,13 +47,11 @@ $ret="";
 			$chapo = "";
 			$texte = "";
 			$ps = "";
-		} 
-		else
-		{
+		} else {
 			$id_article_tmp = intval($_GET['id_article']);
-			$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article_tmp'"));
+			$row = $fetch(spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article_tmp'"));
 	
-			if (!$row) return "";
+			if (!$row) return $params;
 	
 			$surtitre = str_replace("\"","'",$row['surtitre']);
 			$titre = str_replace("\"","'",$row['titre']);
@@ -71,7 +66,7 @@ $ret="";
 	else if ($_GET['exec'] == "breves_edit")
 	{
 		if (lire_config("ExtensionMultilingue/breves_".$nom_champ."_ExtensionMultilingue", '') != "on")
-		return $ret;
+			return $params;
 		if ($_GET['new'] == "oui") 
 		{
 			$titre = filtrer_entites(_T('titre_nouvelle_breve'));
@@ -81,9 +76,9 @@ $ret="";
 		else 
 		{
 			$id_breve_tmp = intval($_GET['id_breve']);
-			$row = spip_fetch_array(spip_query("SELECT * FROM spip_breves WHERE id_breve='$id_breve_tmp'"));
+			$row = $fetch(spip_query("SELECT * FROM spip_breves WHERE id_breve='$id_breve_tmp'"));
 	
-			if (!$row) return "";
+			if (!$row) return $params;
 	
 			$titre = str_replace("\"","'",$row['titre']);
 			$texte = $row['texte'];
@@ -94,7 +89,7 @@ $ret="";
 	else if ($_GET['exec'] == "configuration")
 	{
 		if (lire_config("ExtensionMultilingue/configuration_".$nom_champ."_ExtensionMultilingue", '') != "on")
-		return $ret;
+			return $params;
 		$titre = str_replace("\"","'",$GLOBALS['meta']["nom_site"]);
 		$descriptif = $GLOBALS['meta']["descriptif_site"];
 
@@ -103,7 +98,7 @@ $ret="";
 	{
 		
 		if (lire_config("ExtensionMultilingue/groupesmots_".$nom_champ."_ExtensionMultilingue", '') != "on")
-		return $ret;
+			return $params;
 		if ($_GET['new'] == "oui") {
 		  	$titre = filtrer_entites(_T('titre_nouveau_groupe'));
 		  	$descriptif = "";
@@ -113,7 +108,7 @@ $ret="";
 			$id_groupe_tmp= intval($_GET['id_groupe']);
 			$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe_tmp");
 
-			while($row = spip_fetch_array($result_groupes)) {
+			while($row = $fetch($result_groupes)) {
 				$titre = str_replace("\"","'",$row['titre']);
 				$descriptif = $row['descriptif'];
 				$texte = $row['texte'];
@@ -126,41 +121,32 @@ $ret="";
 	{
 		
 		if (lire_config("ExtensionMultilingue/mots_".$nom_champ."_ExtensionMultilingue", '') != "on")
-		return $ret;
+			return $params;
 	
 		$id_mot_tmp = intval($_GET['id_mot']);
-		$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot='$id_mot_tmp'"));
+		$row = $fetch(spip_query("SELECT * FROM spip_mots WHERE id_mot='$id_mot_tmp'"));
 		 if ($row) {
 			$titre = str_replace("\"","'",$row['titre']);
 			$descriptif = $row['descriptif'];
 			$texte = $row['texte'];
-			
-	 	}
-		else {
-			
+	 	} else {
 			$titre = filtrer_entites(_T('texte_nouveau_mot'));
 			$descriptif = "";
 			$texte = "";
-			
-			
 	 	}
 
 	}
 
-	else if ($_GET['exec'] == "sites_edit")
-	{
-		
+	else if ($_GET['exec'] == "sites_edit")	{
+
 		if (lire_config("ExtensionMultilingue/sites_".$nom_champ."_ExtensionMultilingue", '') != "on")
-		return $ret;
+			return $params;
 		$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=" . intval($_GET['id_syndic']) );
 
-		if ($row = spip_fetch_array($result)) {
+		if ($row = $fetch($result)) {
 			$titre = str_replace("\"","'",$row["nom_site"]);
 			$descriptif = $row["descriptif"];
-			
-		}
-		else
-		{
+		} else {
 			$titre = "";
 			$descriptif = "";
 		}
@@ -171,7 +157,7 @@ $ret="";
 		
 		if (($nom_champ == "titre") || ($nom_champ == "nom_site") || ($nom_champ == "change_type"))
 		{
-			//on gère le numéro dans un input séparé
+			//on gere le numero dans un input separe
 			$ret .= "
 			<label>Num&eacute;ro : <input type='text' name=\"numero_zone_multilingue_".$nom_champ."\" value=\"".extension_multilingue_extraire_numero($titre)."\" size='5' /></label><div class=\"container-onglets\">
         		<ul class=\"tabs-nav\">";
@@ -396,7 +382,8 @@ $ret="";
 		}
     		
 	}		
-	return $ret;
+	$params['flux'] .= $ret;
+	return $params;
 	}	
 }
 
@@ -409,7 +396,7 @@ $newtab="";
 	{
 
 		
-		//cas de l'édition des rubriques
+		//cas de l'edition des rubriques
 		if ($_GET['exec'] == "rubriques_edit")
 		{
 			
@@ -441,7 +428,7 @@ $newtab="";
 		
 			$newtab .= "</script>";
 		}
-		//cas de l'édition des articles
+		//cas de l'edition des articles
 		else if ($_GET['exec'] == "articles_edit")
 		{
 			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
@@ -473,7 +460,7 @@ $newtab="";
 				{	
 				$newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea")."$('table.spip_barre').css(\"display\", \"none\");";		
 				
-				//on annule le découpage des textes trop longs fait par SPIP
+				//on annule le decoupage des textes trop longs fait par SPIP
 				$newtab .= "$('textarea[@id=texte1]').css(\"display\", \"none\");$('textarea[@id=texte1]').val('');";
 				$newtab .= "$('textarea[@id=texte2]').css(\"display\", \"none\");$('textarea[@id=texte2]').val('');";
 				$newtab .= "$('textarea[@id=texte3]').css(\"display\", \"none\");$('textarea[@id=texte3]').val('');";
@@ -497,7 +484,7 @@ $newtab="";
 		
 			$newtab .= "</script>";
 		}	
-		//cas de l'édition des brèves
+		//cas de l'edition des breves
 		else if ($_GET['exec'] == "breves_edit")
 		{
 		$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
@@ -527,7 +514,7 @@ $newtab="";
 		
 			$newtab .= "</script>";
 		}
-		//cas de l'édition de la configuration
+		//cas de l'edition de la configuration
 		else if ($_GET['exec'] == "configuration")
 		{
 			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
@@ -552,7 +539,7 @@ $newtab="";
 		
 			$newtab .= "</script>";
 		}
-		//cas de l'édition des groupes de mots clefs
+		//cas de l'edition des groupes de mots clefs
 		else if ($_GET['exec'] == "mots_type") 
 		{
 			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
@@ -581,7 +568,7 @@ $newtab="";
 		
 			$newtab .= "</script>";
 		}
-		//cas de l'édition des mots clefs
+		//cas de l'edition des mots clefs
 		else if ($_GET['exec'] == "mots_edit")
 		{
 			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
@@ -609,7 +596,7 @@ $newtab="";
 		
 			$newtab .= "</script>";
 		}
-		//cas de l'édition des sites référencés
+		//cas de l'edition des sites references
 		else if ($_GET['exec'] == "sites_edit") 
 		{
 			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
