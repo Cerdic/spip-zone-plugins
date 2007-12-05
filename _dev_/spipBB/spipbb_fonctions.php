@@ -206,7 +206,7 @@ function smileys($chaine)
 	}
 	*/
 	while (list($nom,$chem) = each($listsmil)) {
-		$smil_html = "<img src=\"".$chem."\" border=\"0\" title=\"".$nom."\"  alt=\"smiley\" align=\"baseline\" />";
+		$smil_html = "<img src=\"".$chem."\" style=\"border-width:0;\" title=\"".$nom."\"  alt=\"smiley\" align=\"baseline\" />";
 		$chaine = str_replace(":".$nom, $smil_html , $chaine);
 	}
 	return $chaine;
@@ -226,11 +226,11 @@ function tableau_smileys($cols='',$return=true)
 	if($cols=='') { $cols=2; }
 	$compte=0;
 
-	$aff = "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"1\" border=\"0\"><tr>\n";
+	$aff = "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"1\" style=\"border-width:0;\"><tr>\n";
 	while (list($nom,$chem) = each($listimag)) { 
-		$aff.= "<td valign=\"bottom\" class=\"verdana1\"><div align=\"center\">
+		$aff.= "<td style=\"vertical-align:bottom;\" class=\"verdana1\"><div style=\"text-align:center;\">
 			<a href=\"javascript:emoticon(':".$nom."')\">
-			<img src=\"".$chem."\" border=\"0\" title=\"smiley - ".$nom."\" />
+			<img src=\"".$chem."\" style=\"border-width:0;\" alt=\"smiley - ".$nom."\" />
 			</a></div></td>\n";
 		
 		$compte++; 
