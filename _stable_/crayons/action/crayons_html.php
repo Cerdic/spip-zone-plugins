@@ -245,11 +245,22 @@ class Crayon {
 			$type = is_array($spec) ? $spec[$champ]['type'] : $spec;
 			switch ($type) {
 				case 'texte':
-					$input = '
-<textarea style="width:100%;" class="crayon-active"'
-					. ' name="content_'.$this->key.'_'.$champ.'">'
+					$id = uniqid();
+					$input = '<textarea style="width:100%;" class="crayon-active"'
+					. ' name="content_'.$this->key.'_'.$champ.'" id="'.$id.'">'
 					. entites_html($val)
 					. "</textarea>\n";
+
+					// petit truc crado pour mettre la barre typo si demandee
+					// pour faire propre il faudra reprogrammer la bt en jquery
+					if ($GLOBALS['meta']['crayons']['barretypo']) {
+						include_spip('inc/barre');
+						$input = "<span style='width:100%; height:20px;'>"
+							. afficher_barre("document.getElementById('$id')")
+							. '</span>'
+							. $input;
+					}
+
 					break;
 				case 'ligne':
 				default:

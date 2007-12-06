@@ -12,6 +12,14 @@ Ici vous pouvez configurer le plugin Crayons.
 
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 
+<fieldset><legend>Barre typographique</legend>
+<p>
+<label><input type="checkbox" name="barretypo"[ checked="(#ENV{barretypo})"] />
+Activer la barre typo dans les crayons.</label>
+</p>
+</fieldset>
+
+
 <fieldset><legend><:crayons:messages:></legend>
 <p>
 <label><input type="checkbox" name="msgNoChange" [checked="(#ENV{msgNoChange})"] />
