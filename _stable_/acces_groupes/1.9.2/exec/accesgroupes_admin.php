@@ -49,8 +49,8 @@ if (!defined('accesgroupes_php4funct_defined')) {
 	if (!function_exists('html_entity_decode')){
 		function html_entity_decode ($string){
 			// Remplace les entités numériques
-			$string = preg_replace(’ &#x([0-9a-f]+) ; ei’, ’chr(hexdec(« \\1 »))’, $string) ;
-			$string = preg_replace(’ &#([0-9]+) ; e’, ’chr(« \\1 »)’, $string) ;
+			$string = preg_replace('~&#x([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $string);
+			$string = preg_replace('~&#([0-9]+);~e', 'chr("\\1")', $string);
 			// Remplace les entités litérales
 			$trans_tbl = get_html_translation_table (HTML_ENTITIES) ;
 			$trans_tbl = array_flip ($trans_tbl) ;
