@@ -242,7 +242,7 @@ _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 	'rss_titre' => '&laquo;&nbsp;Le Couteau Suisse&nbsp;&raquo; en d&eacute;veloppement :',
 	'edition' => 'Flux RSS mis &agrave; jour le :',
 	'supprimer_cadre' => 'Supprimer ce cadre',
-	'desactiver_rss' => 'D&eacute;sactiver les &laquo; Révisions du Couteau Suisse &raquo;',
+	'desactiver_rss' => 'D&eacute;sactiver les &laquo; R&eacute;visions du Couteau Suisse &raquo;',
 
 	'cookie_prefix:nom' => 'Pr&eacute;fixe des cookies',
 	'cookie_prefix:description' => 'Sp&eacute;cifie le pr&eacute;fixe &agrave; donner aux cookies de ce site. Utile pour installer des sites SPIP dans des sous-r&eacute;pertoires.[[Votre choix :->%cookie_prefix%]]',

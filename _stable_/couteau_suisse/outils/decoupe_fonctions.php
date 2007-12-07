@@ -189,7 +189,7 @@ function cs_onglets($texte){
 // ici on est en post_propre, tests d'installation non requis
 function cs_decoupe($texte){
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_pages_rempl', $texte);
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|table', 'decouper_en_pages_rempl', $texte);
 }
 
 // Compatibilite

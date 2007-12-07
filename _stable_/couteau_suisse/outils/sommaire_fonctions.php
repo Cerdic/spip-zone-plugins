@@ -98,7 +98,7 @@ function sommaire_d_article($texte) {
 	// s'il n'y a aucun intertitre, on ne fait rien
 	// si la balise est utilisee, il faut quand meme inserer les ancres de retour
 	if((strpos($texte, '<h3')===false)) return $texte;
-		else return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|onglets', 'sommaire_d_article_rempl', $texte, false);
+		else return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|onglets|table', 'sommaire_d_article_rempl', $texte, false);
 }
 
 // fonction appelee par le traitement pre_propre de #CS_SOMMAIRE
@@ -110,7 +110,7 @@ function sommaire_supprime_notes($texte) {
 function sommaire_d_article_balise($texte) {
 	// si la balise n'est pas utilisee ou s'il n'y a aucun intertitre, on ne fait rien
 	if(!defined('_sommaire_BALISE') || (strpos($texte, '<h3')===false)) return '';
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|onglets', 'sommaire_d_article_rempl', $texte, true);
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|onglets|table', 'sommaire_d_article_rempl', $texte, true);
 }
 
 // on veut la balise
