@@ -12,7 +12,12 @@ function exec_player_admin()
 
 	include_spip('player_config_fonctions');
 
-	debut_page("Lecteur multimedia");
+	if (function_exists('debut_page')) {
+		debut_page("Lecteur multimedia");
+	} else {
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page("Lecteur multimedia");
+	}
 
 	debut_gauche();
 	
