@@ -71,7 +71,7 @@ function TableMatieres_LienRetour($texte, $affiche_table = false) {
 	$_table = recuperer_fond('modeles/table_matieres');
 	return $affiche_table ?
 		$_table :
-		((TableMatieres_BalisePresente() ? //calcul :)
+		(((TableMatieres_BalisePresente() OR !strlen(trim($_table))) ? //calcul :)
 			'' :
 			'<div class="encart">'.$_table."</div>\n\n") .
 		str_replace('@@RETOUR_TDM@@', $_RETOUR_TDM, $texte));
