@@ -9,8 +9,8 @@
 			$player = find_in_path('dewplayer.swf');
 		$playa_ = "
 <object type='application/x-shockwave-flash' 
-data='$player?son=$url' width='200' height='20'>
-<param name='movie' value='$player?son=$url'/>
+data='$player?mp3=$url' width='200' height='20'>
+<param name='movie' value='$player?mp3=$url'/>
 </object>";
 	
 		return $playa_;
