@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 	$GLOBALS['i18n_tdm_fr'] = array(
 		'config' => 'Param&egrave;tres',
 		'longueur' => 'Longueur',

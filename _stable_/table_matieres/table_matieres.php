@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function TableMatieres_Table($url = '', $titre = '', $cId = 0, $vider_table = false) {
 	static $table = array();
 	if($vider_table) return ($table = array());
@@ -52,18 +54,11 @@ function TableMatieres_Callback($matches, $retour_cId = false) {
 function TableMatieres_AjouterAncres($texte) {
 	static $textes = array();
 	$md5 = md5($texte);
-	if(!$textes[$md5]) {
+	if(!isset($textes[$md5])) {
 		$texte_ancre = echappe_html($texte, 'TDM');
 		$texte_ancre = preg_replace_callback("/{{{(.*)}}}/UmsS", 'TableMatieres_Callback', $texte_ancre);
 		$nb_ancres = TableMatieres_Callback('', true);
-		if($nb_ancres < _MIN_ANCRE) {
-			TableMatieres_ViderTable();
-			$texte_ancre = propre($texte);
-		}
-		else {
-			$texte_ancre = propre($texte_ancre);
-			$texte_ancre = echappe_retour($texte_ancre, 'TDM');
-		}
+		$texte_ancre = echappe_retour($texte_ancre, 'TDM');
 		$textes[$md5] = $texte_ancre;
 	}
 	return $textes[$md5];
@@ -79,7 +74,7 @@ function TableMatieres_LienRetour($texte, $affiche_table = false) {
 		((TableMatieres_BalisePresente() ? //calcul :)
 			'' :
 			'<div class="encart">'.$_table.'</div>') .
-		preg_replace('/@@RETOUR_TDM@@/S', $_RETOUR_TDM, $texte));
+		str_replace('@@RETOUR_TDM@@', $_RETOUR_TDM, $texte));
 }
 
 function balise_TABLE_MATIERES_dist($p) {

@@ -1,25 +1,25 @@
 <?php
 
-$tm_lg_ancre  = 35;
-$tm_sep_ancre = '-';
-$tm_min_ancre = 3;
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
-#tester la presence de CFG
-if(function_exists('lire_config')) {
-	$tm_lg_ancre  = ($t = lire_config('table_matieres/lg' )) ? $t :  $tm_lg_ancre;
-	$tm_sep_ancre = ($t = lire_config('table_matieres/sep')) ? $t :  $tm_sep_ancre;
-	$tm_min_ancre = ($t = lire_config('table_matieres/min')) ? $t :  $tm_min_ancre;
-}
+// tester la presence de CFG
+$tm = @unserialize($GLOBALS['meta']['table_matieres']);
 
-define( "_LG_ANCRE", $tm_lg_ancre);
-define("_SEP_ANCRE", $tm_sep_ancre);
-define("_MIN_ANCRE", $tm_min_ancre);
-	
-define("_RETOUR_TDM", '<a href="#tdm" class="tdm"><img src="' .
+define('_LG_ANCRE', isset($tm['lg']) ? $tm['lg'] : 35);
+define('_SEP_ANCRE', isset($tm['sep']) ? $tm['sep'] : '-');
+define('_MIN_ANCRE', isset($tm['min']) ? $tm['min'] : 3);
+define('_RETOUR_TDM', '<a href="#tdm" class="tdm"><img src="' .
 	find_in_path('images/tdm.png') . 
 	'" /></a>');
 
-$table_des_traitements['TEXTE']['articles']= 'TableMatieres_LienRetour(TableMatieres_AjouterAncres(%s))';
+$table_des_traitements['TEXTE']['articles'] =
+	str_replace(
+		'%s',
+		'TableMatieres_LienRetour(TableMatieres_AjouterAncres(%s))',
+		isset($table_des_traitements['TEXTE']['articles'])
+			? $table_des_traitements['TEXTE']['articles']
+			: $table_des_traitements['TEXTE'][0]
+	);
 $table_des_traitements['TABLE_MATIERES']['articles']= 'TableMatieres_LienRetour(TableMatieres_AjouterAncres(%s), true)';
 
 ?>

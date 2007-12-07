@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 	$GLOBALS['i18n_tdm_en'] = array(
 		'table_matiere' => 'Table of contents',
 		'retour_table_matiere' => 'back to the table of contents',
