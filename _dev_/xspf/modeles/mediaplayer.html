@@ -136,7 +136,7 @@ Plusieurs methodes d'insertion :
 <noscript><p>D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia </p></noscript>
 <!-- alternetive texte pour ceux qui ont le js desactive -->
 
-<div id="mediaplayer[(#GET{objet_spip})][(#GET{objet_val})]" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
+<div id="mediaplayer_[(#ENV{id})]_[(#GET{objet_spip})]_[(#GET{objet_val})]" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
 
 <p>
 <a href="http://www.macromedia.com/go/getflashplayer">
@@ -146,41 +146,41 @@ Get the Flash Player</a> to see this player.
 <script type="text/javascript">
 // <![CDATA[
 
-	var s1 = new SWFObject("#CHEMIN{lib/jw_media_player/mediaplayer.swf}","mediaplayer","#GET{width}","#GET{height}","7");
-	s1.addParam("allowfullscreen","#GET{allowfullscreen}");
-	s1.addParam("wmode","#GET{wmode}");
-	s1.addVariable("file",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|url_absolue|parametre_url{type,#GET{type},'&'}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
-	s1.addVariable("backcolor","#GET{backcolor}");
-	s1.addVariable("frontcolor","#GET{frontcolor}");
-	s1.addVariable("lightcolor","#GET{lightcolor}");
-	s1.addVariable("showdigits","#GET{showdigits}");
-	s1.addVariable("thumbsinplaylist","#GET{thumbs}");
-	s1.addVariable("type","'#GET{type}'");
-	s1.addVariable("showvolume","#GET{showvolume}");	
-	s1.addVariable("overstretch","#GET{overstretch}");
-	s1.addVariable("shuffle","#GET{shuffle}");
-	s1.addVariable("repeat","#GET{repeat}");
-	s1.addVariable("height","#GET{height}");
-	s1.addVariable("autostart","#GET{autostart}");
-	s1.addVariable("showicons","#GET{showicons}");
-	s1.addVariable("showeq","#GET{showeq}");
-	s1.addVariable("width","#GET{width}");
-	[(#GET{jwlogo}|!={''}|?{'s1.addVariable("logo","#GET{jwlogo}");',''})]
-	s1.addVariable("displaywidth","#GET{displaywidth}");
-	s1.addVariable("displayheight","#GET{displayheight}");
-	s1.addVariable("showdownload","#GET{showdownload}");
-	s1.addVariable("autoscroll","#GET{autoscroll}");
+	var s_[(#ENV{id})]_[(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/jw_media_player/mediaplayer.swf}","mediaplayer","#GET{width}","#GET{height}","7");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("allowfullscreen","#GET{allowfullscreen}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("wmode","#GET{wmode}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|url_absolue|parametre_url{type,#GET{type},'&'}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("backcolor","#GET{backcolor}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("frontcolor","#GET{frontcolor}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("lightcolor","#GET{lightcolor}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showdigits","#GET{showdigits}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("thumbsinplaylist","#GET{thumbs}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("type","'#GET{type}'");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showvolume","#GET{showvolume}");	
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("overstretch","#GET{overstretch}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("shuffle","#GET{shuffle}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("repeat","#GET{repeat}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("height","#GET{height}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("autostart","#GET{autostart}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showicons","#GET{showicons}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showeq","#GET{showeq}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("width","#GET{width}");
+	[(#GET{jwlogo}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("logo","#GET{jwlogo}");',''})]
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("displaywidth","#GET{displaywidth}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("displayheight","#GET{displayheight}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showdownload","#GET{showdownload}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("autoscroll","#GET{autoscroll}");
 	[(#GET{enablejs}|=={true}|?{' ',''})
-	s1.addVariable("enablejs","#GET{enablejs}");
-	s1.addVariable("javascriptid","[(#GET{javascriptid,player})][(#GET{objet_spip})][(#GET{objet_val})]");]
-	[(#GET{audio}|!={''}|?{'s1.addVariable("audio","#GET{audio}");',''})]
-	s1.addVariable("useaudio","#GET{useaudio}");
-	[(#GET{link}|!={''}|?{'s1.addVariable("link","#GET{link}");',''})]
-	s1.addVariable("linkfromdisplay","#GET{linkfromdisplay}");
-	s1.addVariable("linktarget","#GET{linktarget}");	
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("enablejs","#GET{enablejs}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("javascriptid","[(#GET{javascriptid,player})][(#GET{objet_spip})][(#GET{objet_val})]");]
+	[(#GET{audio}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("audio","#GET{audio}");',''})]
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("useaudio","#GET{useaudio}");
+	[(#GET{link}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("link","#GET{link}");',''})]
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linkfromdisplay","#GET{linkfromdisplay}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linktarget","#GET{linktarget}");	
 	
 	$(document).ready(function() {
-		s1.write("mediaplayer[(#GET{objet_spip})][(#GET{objet_val})]");
+		s_[(#ENV{id})]_[(#GET{objet_val})].write("mediaplayer_[(#ENV{id})]_[(#GET{objet_spip})]_[(#GET{objet_val})]");
 	});
 // ]]>
 </script>
