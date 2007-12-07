@@ -12,6 +12,7 @@ define('_RETOUR_TDM', '<a href="#tdm" class="tdm"><img src="' .
 	find_in_path('images/tdm.png') . 
 	'" /></a>');
 
+include_spip('public/interfaces');
 $table_des_traitements['TEXTE']['articles'] =
 	str_replace(
 		'%s',

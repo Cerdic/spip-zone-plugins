@@ -73,7 +73,7 @@ function TableMatieres_LienRetour($texte, $affiche_table = false) {
 		$_table :
 		((TableMatieres_BalisePresente() ? //calcul :)
 			'' :
-			'<div class="encart">'.$_table.'</div>') .
+			'<div class="encart">'.$_table."</div>\n\n") .
 		str_replace('@@RETOUR_TDM@@', $_RETOUR_TDM, $texte));
 }
 
