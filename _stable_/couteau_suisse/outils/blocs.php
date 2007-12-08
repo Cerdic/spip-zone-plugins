@@ -41,7 +41,7 @@ function blocs_pre_typo($texte) {
 }
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
-function blocs_BT($tr) {
+function blocs_BarreTypo($tr) {
 	return $tr.'<tr><td>'._T('cout:blocs:nom').' (en projet)</td></tr>';
 }
 

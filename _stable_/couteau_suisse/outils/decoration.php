@@ -116,7 +116,7 @@ function decoration_pre_typo($texte) {
 }
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
-function decoration_BT($tr) {
+function decoration_BarreTypo($tr) {
 	return $tr.'<tr><td>'._T('cout:decoration:nom').' (en projet)</td></tr>';
 }
 

@@ -45,7 +45,7 @@ function chatons_raccourcis() {
 }
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
-function chatons_BT($tr) {
+function chatons_BarreTypo($tr) {
 	return $tr.'<tr><td>'._T('cout:chatons:nom').' (en projet)</td></tr>';
 }
 

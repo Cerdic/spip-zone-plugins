@@ -61,7 +61,7 @@ function filets_sep($texte) {
 }
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
-function filets_sep_BT($tr) {
+function filets_sep_BarreTypo($tr) {
 	return $tr.'<tr><td>'._T('cout:filets_sep:nom').' (en projet)</td></tr>';
 }
 

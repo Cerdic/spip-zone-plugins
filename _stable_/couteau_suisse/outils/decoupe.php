@@ -40,7 +40,7 @@ function decoupe_raccourcis() {
 }
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
-function decoupe_BT($tr) {
+function decoupe_BarreTypo($tr) {
 	return $tr.'<tr><td>'._T('cout:decoupe:nom').' (en projet)</td></tr>';
 }
 
