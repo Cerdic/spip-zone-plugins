@@ -391,7 +391,7 @@ div.pagination img { border:0pt none; margin:0pt; padding:0pt; }",
 	'traitement:TEXTE/articles:post_propre' => 'cs_decoupe',
 	'traitement:TEXTE/articles:pre_propre' => 'cs_onglets',
 	'categorie' => 'typo-racc',
-	'pipeline:BT_toolbox' => 'decoupe_BT',
+	'pipeline:BT_toolbox' => 'decoupe_BarreTypo',
 ));
 
 // couplage avec l'outil 'decoupe', donc 'sommaire' doit etre place juste apres :
@@ -506,7 +506,7 @@ add_outil( array(
 	'categorie'	 => 'typo-racc',
 	'code:options' => "%%decoration_styles%%",
 	'pipeline:pre_typo' => 'decoration_pre_typo',
-	'pipeline:BT_toolbox' => 'decoration_BT',
+	'pipeline:BT_toolbox' => 'decoration_BarreTypo',
 ));
 
 add_variable( array(
@@ -588,7 +588,7 @@ add_outil( array(
 	'categorie'	 => 'typo-racc',
 	'contrib'	=> 1563,
 	'pipeline:pre_typo' => 'filets_sep',
-	'pipeline:BT_toolbox' => 'filets_sep_BT',
+	'pipeline:BT_toolbox' => 'filets_sep_BarreTypo',
 ));
 
 add_outil( array(
@@ -598,7 +598,7 @@ add_outil( array(
 	'contrib'	=> 1561,
 	'code:css' => "table.cs_smileys td {text-align:center; font-size:90%; font-weight:bold;}",
 	'pipeline:pre_typo' => 'cs_smileys_pre_typo',
-	'pipeline:BT_toolbox' => 'cs_smileys_BT',
+	'pipeline:BT_toolbox' => 'cs_smileys_BarreTypo',
 ));
 
 add_outil( array(
@@ -606,7 +606,7 @@ add_outil( array(
 	'auteur' 	 => 'BoOz (booz.bloog@laposte.net)',
 	'categorie'	 => 'typo-racc',
 	'pipeline:pre_typo' => 'chatons_pre_typo',
-	'pipeline:BT_toolbox' => 'chatons_BT',
+	'pipeline:BT_toolbox' => 'chatons_BarreTypo',
 ));
 
 add_variable( array(
@@ -673,8 +673,16 @@ add_outil( array(
 	'categorie'	=> 'typo-racc',
 	'jquery'	=> 'oui',
 	'pipeline:pre_typo' => 'blocs_pre_typo',
-	'pipeline:BT_toolbox' => 'blocs_BT',
+	'pipeline:BT_toolbox' => 'blocs_BarreTypo',
 ));
+
+// Ajout des outils personnalises
+if(isset($GLOBALS['mes_outils']))
+	foreach($GLOBALS['mes_outils'] as $id=>$outil) {
+		$outil['id'] = $id;
+		if(strlen($outil['nom'])) $outil['nom'] = "<i>$outil[nom]</i>";
+		add_outil($outil);
+	}
 
 // Idees d'ajouts :
 // http://archives.rezo.net/spip-core.mbox/

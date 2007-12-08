@@ -35,10 +35,10 @@ if($GLOBALS['cs_options']) {
 		}
 	}
 
-	// liste de filtres qui sert a la balise #INTRODUCTION
-	$GLOBALS['cs_introduire'] = array();
 	// fonction appelant une liste de fonctions qui permettent de nettoyer un texte original de ses raccourcis indesirables
 	function cs_introduire($texte) {
+		// liste de filtres qui sert a la balise #INTRODUCTION
+		if(!is_array($GLOBALS['cs_introduire'])) return $texte;
 		$liste = array_unique($GLOBALS['cs_introduire']);
 		foreach($liste as $f)
 			if (function_exists($f)) $texte = $f($texte);

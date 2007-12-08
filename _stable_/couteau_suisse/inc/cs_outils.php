@@ -96,7 +96,8 @@ function liste_outils() {
 			$test = $outil['actif']?'s_actifs':'s_inactifs';
 			$hide = cs_version_erreur($outil) || (!$outil['actif'] && isset($metas_caches[$outil['id']]['cache']));
 			if (!$hide)
-				${$test}[] .= _T('cout:'.$outil['id'].':nom') . '|' . $outil['index'] . '|' . $outil['id'];
+//				${$test}[] .= _T('cout:'.$outil['id'].':nom') . '|' . $outil['index'] . '|' . $outil['id'];
+				${$test}[] .= $outil['nom'] . '|' . $outil['index'] . '|' . $outil['id'];
 		}
 		foreach(array('s_actifs', 's_inactifs') as $temp) {
 			sort(${$temp});

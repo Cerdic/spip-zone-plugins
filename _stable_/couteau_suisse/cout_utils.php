@@ -230,7 +230,7 @@ function cs_sauve_configuration() {
 	global $outils, $metas_vars;
 	$metas = $metas_actifs = $variables = $lesoutils = $actifs = array();
 	foreach($outils as $t) {
-		$lesoutils[] = chr(9)."// "._T("cout:$t[id]:nom")."\n".chr(9)."'".$t['id']."' => '".join('|', $t['variables']) . "'";
+		$lesoutils[] = chr(9)."// ".$t['nom']."\n".chr(9)."'".$t['id']."' => '".join('|', $t['variables']) . "'";
 		if($t['actif']) {
 			$actifs[] = $t['id'];
 			$variables = array_merge($variables, $t['variables']);

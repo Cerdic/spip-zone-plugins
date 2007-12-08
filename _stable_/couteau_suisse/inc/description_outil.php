@@ -66,8 +66,8 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$outil = &$outils[$outil_];
 	$actif = $outil['actif'];
 	$index = $outil['index'];
-	// la description de base est dans le fichier de langue
-	$descrip = _T('cout:'.$outil['id'].':description');
+	// la description de base est a priori dans le fichier de langue
+	$descrip = isset($outil['description'])?$outil['description']:_T('cout:'.$outil['id'].':description');
 	// remplacement des puces
 	$descrip = str_replace('#PUCE', definir_puce(), $descrip);
 	// remplacement des zone input de format [[label->varable]]
