@@ -37,9 +37,10 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 				. $ancre . $haut . $titre
 				. substr($texte, $pos2 + strlen($regs[1][$i])+1 + strlen($regs[2][$i]));
 			$pos = $pos2 + strlen($ancre) + strlen($regs[0][$i]);
-			$lien = couper($regs[2][$i], _sommaire_NB_CARACTERES);
+			$brut = textebrut($regs[2][$i]);
+			$lien = propre(couper($brut, _sommaire_NB_CARACTERES));
 			$lien = preg_replace('/[!?,;.:]+$/', '', $lien); // eviter une ponctuation a la fin
-			$titre = attribut_html(propre(couper($regs[2][$i], 100)));
+			$titre = attribut_html(couper($brut, 100));
 			$sommaire .= "<li><a $st title=\"$titre\" href=\"".parametre_url($self,'artpage', $page)."#outil_sommaire_$index\">$lien</a>$p</li>";
 		}
 	}
