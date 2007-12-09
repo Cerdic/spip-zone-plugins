@@ -537,6 +537,7 @@ add_outil( array(
 	'categorie'	 => 'typo-racc',
 	'contrib'	=> 2427,
 	'pipeline:pre_typo' => 'couleurs_pre_typo',
+	'pipeline:BT_toolbox' => 'couleurs_BarreTypo',
 	'code:options' => "%%couleurs_fonds%%%%set_couleurs%%%%couleurs_perso%%",
 	'code:fonctions' => "// aide le Couteau Suisse a calculer la balise #INTRODUCTION
 function couleurs_introduire(\$texte) {

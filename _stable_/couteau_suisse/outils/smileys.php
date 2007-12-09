@@ -128,6 +128,7 @@ function smileys_uniques($smileys) {
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
 function cs_smileys_BarreTypo($tr) {
+	if (!isset($GLOBALS['meta']['cs_smileys']))	smileys_installe();
 	// le tableau des smileys est present dans les metas
 	$smileys = smileys_uniques(unserialize($GLOBALS['meta']['cs_smileys']));
 	$max = count($smileys[0]);
