@@ -75,7 +75,9 @@ function couteau_suisse_header_prive($flux){
 	if (isset($cs_metas_pipelines['header_prive']))
 		eval($cs_metas_pipelines['header_prive']);
 	if (isset($cs_metas_pipelines['header']))
-		$flux .= "\n<!-- Debut header du Couteau Suisse -->\n" . join("\n", $cs_metas_pipelines['header']) . "\n<!-- Fin header du Couteau Suisse -->\n\n";
+		$flux .= "\n<!-- Debut header du Couteau Suisse -->\n"
+			. join("\n", $cs_metas_pipelines['header'])
+			. "\n<!-- Fin header du Couteau Suisse -->\n\n";
 		else $flux .= "\n<!-- Rien pour le Couteau Suisse -->\n";
 	return $flux;
 }

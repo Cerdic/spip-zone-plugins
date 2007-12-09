@@ -45,15 +45,20 @@ if($GLOBALS['cs_options']) {
 		return $texte;
 	}
 	
+	// Fonction propre() sans paragraphage
+	function cs_propre($texte) {
+		$mem = $GLOBALS['toujours_paragrapher'];
+		$GLOBALS['toujours_paragrapher'] = false;
+		$texte = propre($texte);
+		$GLOBALS['toujours_paragrapher'] = $mem;
+		return $texte;
+	}
+
 	// Filtre creant un lien <a> sur un texte
 	// Exemple d'utilisation : [(#EMAIL*|cs_lien{#NOM})]
 	function cs_lien($lien, $texte='') {
 		if(!$lien) return $texte;
-		$mem = $GLOBALS['toujours_paragrapher'];
-		$GLOBALS['toujours_paragrapher'] = false;
-		$lien = propre("[{$texte}->{$lien}]");
-		$GLOBALS['toujours_paragrapher'] = $mem;
-		return $lien;
+		return cs_propre("[{$texte}->{$lien}]");
 	}
 	
 	// inclusion des fonctions pre-compilees
