@@ -25,7 +25,8 @@ function balise_SMILEYS_dist($p) {
 			$head = "<thead><tr class=\"row_first\"><td colspan=\"$nb_col\">$titre</td></tr></thead>";
 		// on veut un lien d'insertion sur chaque smiley
 		elseif ($arg=="'liens'") {
-			$liens = true; 
+			$liens = true;
+			include_spip('outils/smileys');
 			$smileys = smileys_uniques($smileys);
 		}
 		$arg = interprete_argument_balise($n++,$p);
