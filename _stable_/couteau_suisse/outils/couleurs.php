@@ -150,7 +150,7 @@ function couleurs_BarreTypo($tr) {
 	if(_COULEURS_FONDS===1) {
 		foreach($couleurs[2] as $i=>$v)
 			$r2[] = "<a href=\"javascript:barre_raccourci('[fond $i]','[/fond $i]',@@champ@@)\"><span style=\"background-color:#FFDDAA; font-size:140%; color:$v; border:1px outset #CCCC99;\">&nbsp;F&nbsp;</span></a>";
-		$r2 = ' Fonds : <b>'.join(' ', $r2).'</b>'; 
+		$r2 = ' '._T('cout:fonds').' <b>'.join(' ', $r2).'</b>'; 
 	} else $r2='';
 	return $tr.'<tr><td><p style="margin:0; line-height:1.8em;">'._T('cout:couleurs:nom').'&nbsp;'.$r1.$r2.'</div></td></tr>';
 }

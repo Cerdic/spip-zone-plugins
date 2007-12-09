@@ -471,6 +471,7 @@ function cs_installe_outils() {
 cs_log(" -- $f() : installé !");
 		}
 	}
+	ecrire_metas();
 }
 
 ?>

@@ -183,6 +183,7 @@ Idem pour changer le fond, si l'option ci-dessous le permet :
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]texte[/coul]</b>, <b>[bg&nbsp;coul]texte[/coul]</b>',
 	'toutes_couleurs' => "Les 36 couleurs des styles css :" . $temp['couleurs'],
 	'certaines_couleurs' => "Seules les balises d&eacute;finies ci-dessous{$temp['note']} :",
+	'fonds' => 'Fonds :',
 
 // ---------------------------------------------------------------------------
 	'typo_exposants:nom' => 'Exposants typographiques',

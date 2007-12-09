@@ -60,7 +60,6 @@ if(!isset($_GET['page']) OR !preg_match(',\.(css|js)$,', $_GET['page'])) {
 		// lancer la procedure d'installation pour chaque outil
 		cs_log("[#$rand]  -- cs_installe_outils...");
 		cs_installe_outils();
-		ecrire_metas();
 	}
 	
 	cs_log(' -- appel de cout_options achevé... cs_options = '.intval($GLOBALS['cs_options']) 
