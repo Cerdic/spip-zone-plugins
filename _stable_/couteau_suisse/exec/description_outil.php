@@ -34,6 +34,8 @@ cs_log(" -- exec_description_outil_dist() - Appel de config_outils.php : nb_outi
 	// charger les metas
 	$metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
 	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
+	// installer les outils
+	cs_installe_outils();
 
 cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de description_outil($outil, $script) :");
 	include_spip('inc/cs_outils');
