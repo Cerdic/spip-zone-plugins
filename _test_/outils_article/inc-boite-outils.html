@@ -42,16 +42,20 @@
 </BOUCLE_auteur_article>
 
 [(#CONFIG{outils_article/reagir}|?{' ',''})
-<li>
-[<a href="(#PARAMETRES_FORUM|url_reponse_forum)"><img src="#CHEMIN{img_pack/chat.png}"><:outilsarticle:reagir:></a>]
-</li>
-]
+
+[<li><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><img src="#CHEMIN{img_pack/chat.png}"><:outilsarticle:reagir:></a>]
+</li>]
 
 <BOUCLE_compteur_forum(FORUMS){id_article}></BOUCLE_compteur_forum>
 [(#CONFIG{outils_article/compteur}|?{' ',''})
 <li>#TOTAL_BOUCLE <:outilsarticle:reaction:></li>
 ]
 <//B_compteur_forum>
+
+[#CONFIG{outils_article/note}|?{' ',''})
+<li>
+#NOTATION
+</li>]
 
 </ul>
 </BOUCLE_article_boite>
