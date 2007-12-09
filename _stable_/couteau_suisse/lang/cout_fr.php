@@ -305,7 +305,7 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 _ Si vous utilisez ce s&eacute;parateur &agrave; l'int&eacute;rieur des balises &lt;onglets&gt; et &lt;/onglets&gt; alors vous obtiendrez un jeu d'onglets.
 _ Dans les squelettes : vous avez à votre disposition les nouvelles balises #ONGLETS_DEBUT, #ONGLETS_TITRE et #ONGLETS_FIN.
 _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.",
-	'decoupe:aide' => 'Bloc d\'onglets : <i>&lt;onglets>&lt;/onglets></i><br/>S&eacute;parateur de pages ou d\'onglets&nbsp;: @sep@.',
+	'decoupe:aide' => 'Bloc d\'onglets : <b>&lt;onglets>&lt;/onglets></b><br/>S&eacute;parateur de pages ou d\'onglets&nbsp;: @sep@.',
 	'decoupe:aide2' => ' (alias&nbsp;:&nbsp;@sep@)',
 	'page_suivante' => 'Page suivante',
 	'page_precedente' => 'Page pr&eacute;c&eacute;dente',

@@ -112,9 +112,30 @@ function cs_smileys_pre_typo($texte) {
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'cs_rempl_smileys', $texte);
 }
 
+// fonction qui renvoie un tableau de smileys uniques
+function smileys_uniques($smileys) {
+	$max = count($smileys[1]);
+	$new = array(array(), array(), array());
+	for ($i=0; $i<$max; $i++) {
+		if(!in_array($smileys[2][$i], $new[2])) {
+			$new[0][] = $smileys[0][$i]; // texte
+			$new[1][] = $smileys[1][$i]; // image
+			$new[2][] = $smileys[2][$i]; // nom de fichier
+		}
+	}
+	return $new;
+}
+
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
 function cs_smileys_BarreTypo($tr) {
-	return $tr.'<tr><td>'._T('cout:smileys:nom').' (en projet)</td></tr>';
+	// le tableau des smileys est present dans les metas
+	$smileys = smileys_uniques(unserialize($GLOBALS['meta']['cs_smileys']));
+	$max = count($smileys[0]);
+	$res = '';
+	for ($i=0; $i<$max; $i++)
+		$res .= "<a href=\"javascript:barre_inserer('{$smileys[0][$i]}',@@champ@@)\">{$smileys[1][$i]}</a>";
+
+	return $tr.'<tr><td><@@span@@>'._T('cout:smileys:nom').'</span>&nbsp;'.echappe_retour($res, 'SMILE').'</td></tr>';
 }
 
 ?>

@@ -5,20 +5,6 @@
 // Toutes les infos sur : http://www.spip-contrib.net/?article1561
 // dessin des frimousses : Sylvain Michel [http://www.guaph.net/]
 
-// fonction qui renvoie un tableau de smileys uniques
-function smileys_uniques($smileys) {
-	$max = count($smileys[1]);
-	$new = array(array(), array(), array());
-	for ($i=0; $i<$max; $i++) {
-		if(!in_array($smileys[2][$i], $new[2])) {
-			$new[0][] = $smileys[0][$i]; // texte
-			$new[1][] = $smileys[1][$i]; // image
-			$new[2][] = $smileys[2][$i]; // nom de fichier
-		}
-	}
-	return $new;
-}
-
 function balise_SMILEYS_dist($p) {
 	// le tableau des smileys est present dans les metas
 	$smileys = unserialize($GLOBALS['meta']['cs_smileys']);

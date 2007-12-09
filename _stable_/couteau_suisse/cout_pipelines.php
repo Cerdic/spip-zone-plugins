@@ -149,7 +149,7 @@ function couteau_suisse_BT_toolbox($params) {
 	eval($cs_metas_pipelines['BT_toolbox']);
 	$tableau_formulaire = '
  <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">'
-	. $flux . '
+	. str_replace(array('@@champ@@','@@span@@'), array($params['champ'], 'span style="vertical-align:75%;"'), $flux) . '
  </table>';
 	$params['flux'] .= produceWharf('couteau_suisse', '', $tableau_formulaire);
 	return $params;
