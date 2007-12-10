@@ -1,0 +1,22 @@
+
+
+*h ........... --> 1.53
+
+*h.15/11 -> 10/12
+.. creer inc/affiche_blocs.php :
+	-> contient les fonctions correspondantes aux bloc d'infos de actijour_pg ; actijour_hier ; actijour_top
+	--> actijour_pg ; actijour_hier ; actijour_top -> simplifie : appel fonctions blocs.
+
+.. creer inc/requetes_stats -> rassemble diverses requetes de base stats.
+.. inc/func_acj -> ne contient  plus que fonctions communes affichages.
+.. ameliore tableau "stats sur 8 jours (tient compte des jours à "0".
+.. ameliore tableau à jauge "18 mois".
+.. afficher datetime des stats (base sur derniere entree table spip)
+.. reconnait DW2 -> signale nbre telech du jour. + lien
+.. reconnait spipBB (new generation) et Gafospip !
+.. modif actijour_pipe.php : header_prive (css..js) uniquement sur exec "actijour_*"
+
+.. petites modif de mise en page.
+
+* h. aout 2007
+	--> diffusion : v. 1.52
