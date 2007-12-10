@@ -74,7 +74,9 @@ function cs_rempl_glossaire($texte) {
 			$lien = generer_url_mot($id);
 			$mem = $GLOBALS['toujours_paragrapher'];
 			$GLOBALS['toujours_paragrapher'] = false;
-			$definition = safehtml(propre(nl2br(trim(strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte']))));
+			$definition = nl2br(trim(strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte']));
+			// on retire les notes avant propre()
+			$definition = safehtml(propre(preg_replace(', *\[\[(.*?)\]\],msS', '', $definition)));
 			$GLOBALS['toujours_paragrapher'] = $mem;
 			$table1[$id] = "<a name=\"mot$id\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"gl_mot\">";
 			$table2[$id] = defined('_GLOSSAIRE_JS')
