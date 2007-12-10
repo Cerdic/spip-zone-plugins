@@ -34,7 +34,7 @@ _ All SPIP's loops are loaded with the necessary tools to filter the results acc
 _ From SPIP 1.9.2, restricted areas can be found in the private area and/or in the public site.
 	</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Le-plugin-Acces-Restreint,1420</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Le-plugin-Acces-Restreint</lien> <!-- URI de documentation -->
 	<options>acces_restreint_options.php</options>
 	<fonctions>acces_restreint.php</fonctions>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
