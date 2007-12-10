@@ -24,7 +24,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/spipbb'); // Compatibilite 192
+include_spip('inc/spipbb_192'); // Compatibilite 192
 
 function balise_CALC_STATS_FORUMS($p)
 {

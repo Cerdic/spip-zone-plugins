@@ -21,7 +21,16 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_spip('inc/spipbb');
+
+#include_spip('inc/spipbb');
+
+include_spip('inc/spipbb_inc_metas');
+include_spip('inc/spipbb_inc_config');
+
+# conversion spip 192
+if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
+	include_spip('inc/spipbb_192'); // SPIP 1.9.2
+}
 
 function spipbb_install($action)
 {

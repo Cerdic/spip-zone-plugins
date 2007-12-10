@@ -3,7 +3,7 @@
 [(#REM) SpipBB admin - Configuration generale SpipBB]
 
 <form method="post" action="#ENV{lien_action}">
-<input type='hidden' id="exec" value="#ENV{exec_script}" />
+<input type='hidden' id="exec" value="#ENV{exec_script}">
 
 [(#ENV{url_post}|form_hidden)]
 
@@ -161,6 +161,7 @@
 <p>
 	<i><:spipbb:choix_squelettes:></i>
 </p>
+<label>
 </select>
 <table cellpadding='3' cellspacing='1' border='1' width='100%'>
 <tr>	
@@ -174,19 +175,19 @@
 	</td>
 </tr>
 </table>
+<label>
 </fieldset>
 
 <div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:valider:>" class="fondo" /></div>
 
 [(#REM|sinon{1}|fin_cadre_trait_couleur)]
 
-[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_forums_configuration_specifique:>})]
 
 [(#REM) ------------------------ CONFIG ISSUE GAFOSPIP ------------------------ ]
 
-<fieldset>
-<legend><:spipbb:admin_interface:></legend>
-<table cellpadding='3' cellspacing='1' border='0' width='100%'>
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_interface:>})]
+
+<table cellpadding='3' cellspacing='0' border='0' width='100%'>
 <tr>
 	<td><:spipbb:admin_nombre_lignes_messages:></td>
 	<td>
@@ -199,6 +200,14 @@
 		<input type='text' name='lockmaint' value='#ENV{lockmaint}' size='4' />
 	</td>
 </tr>
+</table>
+
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:valider:>" class="fondo" /></div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:bouton_speciaux_sur_skels:>})]
+<table cellpadding='3' cellspacing='0' border='0' width='100%'>
 <tr>
 	<td><:spipbb:admin_afficher_bouton_alerte_abus:></td>
 	<td>
@@ -218,16 +227,15 @@
 	</td>
 </tr>
 </table>
-</fieldset>
 
 <div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:valider:>" class="fondo" /></div>
 
 [(#REM|sinon{1}|fin_cadre_trait_couleur)]
 
-[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_forums_configuration_avatar:>})]
+
 [(#REM) ------------------------ AVATARS ------------------------ ]
-<fieldset>
-<legend><:spipbb:admin_forums_configuration_avatar:></legend>
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_forums_configuration_avatar:>})]
 <table cellpadding='3' cellspacing='1' border='0' width='100%'>
 <tr>
 	<td><:spipbb:admin_avatar_affiche:></td>
@@ -256,7 +264,7 @@
 	</td>
 </tr>
 </table>
-</fieldset>
+
 
 <?php //fin spipbb active == oui
 } ?>

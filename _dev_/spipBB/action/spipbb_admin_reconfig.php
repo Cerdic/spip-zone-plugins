@@ -25,7 +25,18 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/spipbb');
+#include_spip('inc/spipbb');
+
+
+
+# conversion spip 192
+include_spip('inc/spipbb_util');
+
+# fonction requises
+include_spip('inc/spipbb_inc_metas');
+
+# recup des metas
+$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
 
 // ------------------------------------------------------------------------------
 // [fr] Verification et declenchement de l'operation
@@ -46,9 +57,21 @@ function action_spipbb_admin_reconfig()
 		exit;
 	}
 
-	if ( ($action=="save") AND spipbb_is_configured() ) {
+#	if ( ($action=="save") AND spipbb_is_configured() ) {
+# h. pourquoi ce controle 
+# il y a un controle avant et apres cette "action" ! et vu les conditions de cette
+# fonction on ne peut atteindre la reecriture de la config !!
+
+# Il serait bien de pourvoir renvoyer en arg de $redirige un code d'erreur
+# interpreter dans spipbb_cofiguration pour indiquer (en rouge) l'objet qui 
+# empeche la config : "vous n'avez pas remplis ce champs, choisir ceci ... " !!?
+#(voir gafospip)
+
+
+	if ($action=="save") {
 
 		$reconf=false;
+		
 		if (($config_spipbb=_request('config_spipbb'))
 			and $config_spipbb!=$GLOBALS['spipbb']['configure']) {
 			$GLOBALS['spipbb']['configure']=$config_spipbb;
@@ -61,11 +84,21 @@ function action_spipbb_admin_reconfig()
 		}
 
 		if ((strlen($id_groupe_mot=_request('id_groupe_mot')))
-			and intval($id_groupe_mot)!=$GLOBALS['spipbb']['id_groupe_mot']) {
+				and intval($id_groupe_mot)!=$GLOBALS['spipbb']['id_groupe_mot']) {
+			
+			# solution boiteuse (au 1/12/07) ; peut etre revoir l_ensemble !
+			# Mais il est important de conserver la correspondance article/post
+			# avec leur mot-clef associes (ferme et annonce)
+			
+			# on memorise le precedent id_groupe
+			$id_groupe_premodif = $GLOBALS['spipbb']['id_groupe_mot'];
+				
 			$GLOBALS['spipbb']['id_groupe_mot']=intval($id_groupe_mot);
 			$reconf=true;
-		} else if ( empty($GLOBALS['spipbb']['id_groupe_mot']) and
+		}
+		else if ( empty($GLOBALS['spipbb']['id_groupe_mot']) and
 				(strlen($nom_groupe_mot=trim(_request('nom_groupe_mot')))) ) {
+				
 				// on cherche s'il n'existe pas deja
 				$row = sql_fetsel('id_groupe','spip_groupes_mots', "titre = '$nom_groupe_mot'" ,'','','1');
 				if (!$row) { // Celui la n'existe pas
@@ -80,6 +113,9 @@ function action_spipbb_admin_reconfig()
 								);
 					$row['id_groupe'] = $res;
 				}
+				#
+				$id_groupe_premodif='non';
+				
 				$GLOBALS['spipbb']['id_groupe_mot'] = $row['id_groupe'];
 				// on cree les mots cles associes
 				$row = sql_fetsel('count(*) AS total','spip_mots',
@@ -93,11 +129,19 @@ function action_spipbb_admin_reconfig()
 		}
 		if ((strlen($id_mot_ferme=_request('id_mot_ferme')))
 			and intval($id_mot_ferme)!=$GLOBALS['spipbb']['id_mot_ferme']) {
+			
+			#on memorise le precedent mot
+			$id_ferme_premodif = $GLOBALS['spipbb']['id_mot_ferme'];
+			
 			$GLOBALS['spipbb']['id_mot_ferme']=intval($id_mot_ferme);
 			$reconf=true;
 		}
 		if ((strlen($id_mot_annonce=_request('id_mot_annonce')))
 			and intval($id_mot_annonce)!=$GLOBALS['spipbb']['id_mot_annonce']) {
+			
+			#on memorise le precedent mot
+			$id_annonce_premodif = $GLOBALS['spipbb']['id_mot_annonce'];
+			
 			$GLOBALS['spipbb']['id_mot_annonce']=intval($id_mot_annonce);
 			$reconf=true;
 		}
@@ -162,13 +206,13 @@ function action_spipbb_admin_reconfig()
 			$reconf=true;
 		}
 		# ajouts gafospip / scoty
-		# nombre lignes
+		# nombre lignes dans divers tableau de presentation
 		if ((strlen($fixlimit=_request('fixlimit')))
 			and intval($fixlimit)!=$GLOBALS['spipbb']['fixlimit']) {
 			$GLOBALS['spipbb']['fixlimit']=intval($fixlimit);
 			$reconf=true;
 		}
-		# temps avant deplacement
+		# temps avant deplacement d_un thread
 		if ((strlen($lockmaint=_request('lockmaint')))
 			and intval($lockmaint)!=$GLOBALS['spipbb']['lockmaint']) {
 			$GLOBALS['spipbb']['lockmaint']=intval($lockmaint);
@@ -184,23 +228,29 @@ function action_spipbb_admin_reconfig()
 			$GLOBALS['spipbb']['affiche_bouton_rss']=$affiche_bouton_rss;
 			$reconf=true;
 		}
-		# scoty gaf_ecrireinstall 16/11/07 :  support_auteurs : table / extra/autres..
-		# => lieu de stockage des champs supplementaires auteurs
-			# petits controles prealable de : table
-				##$options_sap = array('extra','table','autre');
-				#$options_sap = array('extra','table');
-		# form support mal remplis : retour case depart
+		
+		# scoty gaf_ecrireinstall 16/11/07 :
+		# gestion du support de champs supp. sur : extra ou table
+		# Cette table ($table_support) : 
+		# (cree par autre plugin ou spip_auteurs apres tout ??!! ou sur spipbb ??? ) 
+		# sert de stockage des champs supplementaires auteurs,
+		# certains sont requis par spipbb, d_autres sont optionnels
+		# pour la fiche "profil" des visiteurs (et tous auteurs spip !)
+		
 		$support_auteurs = _request('support_auteurs');
 		$table_support = _request('table_support');
-		if ( !empty($support_auteurs) AND
-			( ($support_auteurs!=$GLOBALS['spipbb']['support_auteurs']) // soit on modifie le support
-			OR (!empty($table_support) AND ($support_auteurs=='table') AND ($table_support!=$GLOBALS['spipbb']['table_support'])) ) ) // soit on modifie la table et c'est en base
+		
+		if ( !empty($support_auteurs) 
+			AND ( ($support_auteurs!=$GLOBALS['spipbb']['support_auteurs']) // soit on modifie le support
+				OR (!empty($table_support) 
+					AND ($support_auteurs=='table') 
+					AND ($table_support!=$GLOBALS['spipbb']['table_support'])) ) ) // soit on modifie la table et c'est en base
 		{
-			// traitement specifique en cas de changement
+ 
 			if($support_auteurs=='table' AND $table_support) {
-				# verif
-				# si table_support existe + fournis (plus bas) liste champs existent : oui/non 
+				# verif si "table_support" existe + liste champs existants (oui/non) 
 				$chps_exists = montre_table_support($table_support);
+				# table existe !
 				if(is_array($chps_exists)) {
 					$t_creer_chps=array();
 					foreach($chps_exists as $k => $v) {
@@ -208,27 +258,46 @@ function action_spipbb_admin_reconfig()
 							$t_creer_chps[]=$k;
 						}
 					}
+					# si tous les champs supp. sont pas presents 
+					# on les ajoute a "table_support"
 					if(count($t_creer_chps)) {
-					# maj - ajout champs sur table
 						support_ajout_champs($table_support,$t_creer_chps);
-					# transfert extras vers table sap
+						# + recherche et transfert des extras (si existent) 
+						# vers "table_support".
+						# Permet un passage gestion "extra" a "table"
 						support_maj_extras($table_support,$t_creer_chps);
 					}
-				} // sinon probleme ?
-				// verifier les stockages en meta + sauver la config !!
+				} 
+				else {
+					# le choix de "table" est invalide 
+					# puisque table_support n_existe pas !
+					# donc on repasse sur extra !
+					$support_auteurs=='extra';
+					$table_support = "";
+				}
 			}
+			else {
+				# on est en "extra", alors on nettoie $table_support au cas zou !
+				$table_support = "";
+			}
+			
 			$GLOBALS['spipbb']['support_auteurs'] = $support_auteurs;
 			$GLOBALS['spipbb']['table_support'] = $table_support;
 			$reconf=true;
 		}
 
-		#champs supplementaires auteurs
+
+		# Proposer choix affichage (oui/non) des champs suppl. dans la config
+		#
 		$champs_requis = array('date_crea_spipbb','avatar','annuaire_forum','refus_suivi_thread');
 		$champs_definis=array();
+		# on collecte les champs declarer dans globale champs_sap_spipbb
 		foreach ($GLOBALS['champs_sap_spipbb'] as $champ => $params) {
 			$champs_definis[]=$champ;
 		}
+		# on compile par diff. cette liste
 		$champs_optionnels = array_diff($champs_definis,$champs_requis);
+		# on creer l_entree dans spipbb metas
 		foreach ($champs_optionnels as $champ_a_valider) {
 			$tbl_conf['affiche_'.$chx]=_request('affiche_'.$chx); # oui/non
 			if (($affiche_champ=_request('affiche_'.$champ_a_valider))
@@ -238,7 +307,8 @@ function action_spipbb_admin_reconfig()
 			}
 		}
 
-		#avatars
+		# gestion avatars
+		#
 		if (($affiche_avatar=_request('affiche_avatar'))
 			and $affiche_avatar!=$GLOBALS['spipbb']['affiche_avatar']) {
 			$GLOBALS['spipbb']['affiche_avatar']=$affiche_avatar;
@@ -265,13 +335,13 @@ function action_spipbb_admin_reconfig()
 			$reconf=true;
 		}
 
+		# bouton speciaux
 		# bouton abus
 		if (($affiche_bouton_abus=_request('affiche_bouton_abus'))
 			and $affiche_bouton_abus!=$GLOBALS['spipbb']['affiche_bouton_abus']) {
 			$GLOBALS['spipbb']['affiche_bouton_abus']=$affiche_bouton_abus;
 			$reconf=true;
 		}
-
 		# bouton rss
 		if (($affiche_bouton_rss=_request('affiche_bouton_rss'))
 			and $affiche_bouton_rss!=$GLOBALS['spipbb']['affiche_bouton_rss']) {
@@ -279,12 +349,116 @@ function action_spipbb_admin_reconfig()
 			$reconf=true;
 		}
 		
+		# h. 1/12/08 #########################################
+		# Recuperer la jointure de mot-clef annonce, ferme pour articles et posts
+		# d_une precedente install gafospip ( et spipbb anc. generation ??? )
+		# et/ou
+		# d_un changement de mot-clef (-> nouvel ID)
+		#
+		# Rappel :: les mots annonce et ferme peuvent etre associes 
+		# aux articles comme au posts 
+		#
+		if($GLOBALS['spipbb']['id_mot_annonce']>0 AND $GLOBALS['spipbb']['id_mot_ferme']>0) {
+			$mots_base=array('annonce','ferme');
+			$mots_preced=array();
+			
+			# gafospip ? (passe juste en premiere install !!)
+			if( $id_groupe_premodif=='non' AND strlen($GLOBALS['meta']['gaf_install']) )
+			{
+				$gaf_install = @unserialize($GLOBALS['meta']['gaf_install']);
+				$id_groupe_preced = $gaf_install['groupe'];
+			
+				# cherche mot "annonce" et "ferme" dans ce groupe
+				foreach($mots_base as $m) {
+					$q = spip_query("SELECT id_mot FROM spip_mots 
+									WHERE titre="._q($m)."
+									AND id_groupe="._q($id_groupe_preced));
+					if($row = spip_fetch_array($q)) {
+						$mots_preced[$m] = $row['id_mot'];
+					}
+				}
+				recreer_jointures_mots($GLOBALS['spipbb']['id_mot_annonce'], $GLOBALS['spipbb']['id_mot_ferme'], $mots_preced, $mots_base);
+			}
+			# si antecedent non gafospip (sinon rien a faire)
+			elseif(is_int($id_groupe_premodif) AND $id_groupe_premodif>0)
+			{
+				$mots_preced['annonce']=$id_annonce_premodif;
+				$mots_preced['ferme']=$id_ferme_premodif;
+				recreer_jointures_mots($GLOBALS['spipbb']['id_mot_annonce'], $GLOBALS['spipbb']['id_mot_ferme'], $mots_preced, $mots_base);
+				nettoyer_ante_jointures($mots_preced, $mots_base);
+			}
+
+		}
+		
+		# enreg. metas spipbb
 		if ($reconf) spipbb_save_metas();
 
 	}
 
 	redirige_par_entete($redirige);
 } // action_spipbb_admin_reconfig
+
+
+#
+# relier les mots annonce/ferme (ou equiv.) avec les articles/posts antecedents
+#
+function recreer_jointures_mots($id_mot_annonce, $id_mot_ferme, $mots_preced, $mots_base) {
+	foreach($mots_base as $m) {
+		$id_nouv = ($m=="annonce")?$id_mot_annonce:$id_mot_ferme;
+		if($mots_preced[$m]!=0) {
+			# recup jointure mot - articles
+			$qa = spip_query("SELECT id_article FROM spip_mots_articles 
+								WHERE id_mot="._q($mots_preced[$m]));
+			while ($ra = spip_fetch_array($qa)) {
+				$id_art = $ra['id_article'];
+				spip_query("INSERT INTO spip_mots_articles (id_mot,id_article) 
+							VALUES ('$id_nouv','$id_art')");
+			}
+			
+			# recup jointure mot - posts
+			$qf = spip_query("SELECT id_forum FROM spip_mots_forum 
+								WHERE id_mot="._q($mots_preced[$m]));
+			while ($rf=spip_fetch_array($qf)) {
+				$id_post = $rf['id_forum'];
+				spip_query("INSERT INTO spip_mots_forum (id_mot,id_forum) 
+							VALUES ('$id_nouv','$id_post')");
+			}		
+		}
+	}
+}
+#
+# nettoyer les precedentes jointures
+#
+function nettoyer_ante_jointures($mots_preced, $mots_base) {
+	foreach($mots_base as $m) {
+		if($mots_preced[$m]!=0) {
+			# erase - articles
+			$qa = spip_query("DELETE FROM spip_mots_articles 
+								WHERE id_mot="._q($mots_preced[$m]));
+			# erase - posts
+			$qf = spip_query("SELECT id_forum FROM spip_mots_forum 
+								WHERE id_mot="._q($mots_preced[$m]));
+		}
+	}
+}
+
+
+//----------------------------------------------------------------------------
+// [fr] Cree le mot cle donne dans le groupe donne et retourne son id_mot
+//----------------------------------------------------------------------------
+function spipbb_init_mot_cle($mot,$groupe)
+{
+	if (empty($mot) OR empty($groupe)) return 0;
+	$groupe_mot = sql_fetsel ("titre","spip_groupes_mots",array("id_groupe"=>$groupe));
+	$id_mot = sql_insertq("spip_mots",array(
+				'titre'=>$mot,
+				'id_groupe'=>$groupe,
+				'descriptif'=> _T('spipbb:mot_'.$mot),
+				'type' => $groupe_mot['titre'])
+			);
+	return $id_mot;
+} // spipbb_init_mot_cle
+
 
 // ------------------------------------------------------------------------------
 # generer tableau des champs profils dans sap si existent
@@ -295,7 +469,7 @@ function montre_table_support($table) {
 	$contenu = sql_showtable('spip_'.$table,true);
 	$chps_presents=array();
 	if(is_array($contenu)) {
-		# verif nom champ (dans sap_gaf.php)
+		# verif nom champ (dans base/sap_spipbb.php)
 		foreach($GLOBALS['champs_sap_spipbb'] as $k => $v) {
 			if($contenu['field'][$k]) {
 				$chps_presents[$k]='oui';
@@ -313,14 +487,18 @@ function montre_table_support($table) {
 # Modifier table sap : ajout champ(s)
 // ------------------------------------------------------------------------------
 function support_ajout_champs($table_support,$creer_champs) {
+	/* kcc ça ??
 	$connexion = $GLOBALS['connexions'][0];
 	$prefixe = $connexion['prefixe'];
 	if ($prefixe and $prefixe!='spip') $table_support = preg_replace('/^spip/', $prefixe, $table_support);
-
+	*/
+	## h. oui pour le controle ;-) mais alors :
+	$table_support = preg_replace($GLOBALS['table_prefix'], '', $table_support);
+	
 	$nomtable = "spip_".$table_support;
 	foreach($creer_champs as $chp) {
-			#recup def des champs (dans sap_gaf.php)
-			$def = $GLOBALS['champs_sap_gaf'][$chp]['sql'];
+			#recup def des champs (dans base/sap_spipbb.php)
+			$def = $GLOBALS['champs_sap_spipbb'][$chp]['sql'];
 			sql_query("ALTER TABLE $nomtable ADD $chp $def");
 	}
 } // support_ajout_champs
@@ -338,7 +516,7 @@ function support_maj_extras($table_support,$maj_chps) {
 		$set='';
 		# pour chq champs gaf en maj ou crea (pas les anciens)
 		foreach($maj_chps as $chp) {
-			if($chp=='date_crea_gaf' && $extras['date_crea_gaf']=='') {
+			if($chp=='date_crea_spipbb' && $extras['date_crea_spipbb']=='') {
 				$set.=",".$chp."=NOW()";
 			}
 			else {

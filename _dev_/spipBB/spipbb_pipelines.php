@@ -21,22 +21,46 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
+#
+# bouton interface spip
+#
 function spipbb_ajouter_boutons($boutons_admin) {
 	// si on est admin ou admin restreint
 	if ($GLOBALS['connect_statut'] == "0minirezo") {
 		// on voit le bouton dans la barre "statistiques"
-		$boutons_admin['forum']->sousmenu["spipbb_admin_configuration"]= new Bouton(
-		"../"._DIR_PLUGIN_SPIPBB."/img_pack/spipbb-24.png",  // icone
-		_T('spipbb:admin_titre')	// titre
+		$boutons_admin['forum']->sousmenu["spipbb_admin"]= new Bouton(
+		"../"._DIR_PLUGIN_SPIPBB."img_pack/spipbb-24.png",  // icone
+		_L('titre_spipbb_plugin')	// titre
 		);
+## h. un seul bouton suffit !! 
+		/*
 		$boutons_admin['configuration']->sousmenu["spipbb_admin_configuration"]= new Bouton(
 		"../"._DIR_PLUGIN_SPIPBB."/img_pack/spipbb-24.png",  // icone
 		_T('spipbb:admin_forums_configuration')	// titre
 		);
+		*/
 	}
 	return $boutons_admin;
 }
 
+#
+# js + css prive
+#
+function spipbb_header_prive($flux) {
+	$exec = _request('exec');
+	if(ereg('^(spipbb_).*',$exec)) {
+	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_SPIPBB.'img_pack/spipbb_styles.css" />'."\n";
+	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_SPIPBB.'javascript/spipbb_vueavatar.js"></script>'."\n";
+	}
+	if($exec=="spipbb_formpost") {
+	$flux.='<script type="text/javascript" src="'._DIR_PLUGIN_SPIPBB.'javascript/spipbb_js_formpost.js"></script>'."\n";
+	}
+	return $flux;
+}
+
+#
+# bouton interface spip col. droite sur exec/naviguer (rubrique)
+#
 function spipbb_affiche_droite($flux)
 {
 	// [fr] Peut etre ajouter un controle d acces
@@ -44,7 +68,7 @@ function spipbb_affiche_droite($flux)
 
 	if ( ($flux['args']['exec']=='naviguer') AND (!empty($flux['args']['id_rubrique'])) )
 	{ // AND (!empty($GLOBALS['meta']['spipbb']))
-		include_spip('inc/spipbb'); // Compatibilite 192
+		include_spip('inc/spipbb_192'); // Compatibilite 192
 		$r = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=".$flux['args']['id_rubrique']);
 		if ( !spipbb_is_configured()
 			OR ($GLOBALS['spipbb']['configure']!='oui') 
@@ -76,8 +100,26 @@ function spipbb_affiche_droite($flux)
 		}
 	}
 	return $flux;
-} // spipbb_affiche_droite
+}
 
+
+#
+# affiche formulaire sur page exec_auteur_infos
+function spipbb_affiche_milieu($flux) {
+	$exec =  $flux['args']['exec'];
+	if ($exec=='auteur_infos'){
+		$id_auteur = $flux['args']['id_auteur'];
+		if(lire_config("spipbb/support_auteurs")=="table") {
+			include_spip('inc/spipbb_auteur_infos');
+			$flux['data'].= spipbb_auteur_infos($id_auteur);
+		}
+	}
+	return $flux;
+}
+
+#
+# ch. traiter visite-forum en cron
+#
 function spipbb_taches_generales_cron($taches_generales){
 	$taches_generales['statvisites'] = 30 * 1; // toutes les 30 sec
 	return $taches_generales;

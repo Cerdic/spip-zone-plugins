@@ -22,40 +22,47 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+/*
 spip_log(__FILE__.' : included','spipbb');
 
 if (defined("_GENERAL_DEBUG")) return; else define("_GENERAL_DEBUG", true);
 
 include_spip("inc/spipbb");
 include_spip('inc/interface_admin');
+*/
+
 
 // ------------------------------------------------------------------------------
 // Affiche le debogage pour la version SVN
 // ------------------------------------------------------------------------------
-function exec_spipbb_admin_debug()
-{
-	spip_log('exec/spipbb_admin_debug.php exec_spipbb_admin_debug()','spipbb');
+function exec_spipbb_admin_debug() {
+
+	# initialiser spipbb
+	include_spip('inc/spipbb_init');
+	
+	# initialiser spipbb
+	include_spip('inc/spipbb_init');
+	
+	# requis de cet exec
+	#
+
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('spipbb:titre_spipbb'), "configuration", 'spipbb');
+	echo $commencer_page(_L('titre_page_'._request('exec')), "forum", "spipbb_admin", '');
+	echo "<a name='haut_page'></a>";
 
-	echo gros_titre(_T('spipbb:titre_spipbb'),'',false) ;
-
-	if (spipbb_is_configured() AND $GLOBALS['spipbb']['config_id_secteur'] == 'oui' ) {
-		echo debut_grand_cadre(true);
-		echo afficher_hierarchie($GLOBALS['spipbb']['id_secteur']);
-		echo fin_grand_cadre(true);
-	}
 
 	echo debut_gauche('',true);
-	echo debut_boite_info(true);
-	echo  _T('spipbb:titre_spipbb');
-	echo fin_boite_info(true);
-	echo spipbb_admin_gauche('spipbb_admin_debug');
+		spipbb_menus_gauche(_request('exec'));
+		
 	echo creer_colonne_droite('', true);
+	
 	echo debut_droite('',true);
 
 	echo spipbb_show_debug();
 
+	# pied page exec
+	bouton_retour_haut();
+	
 	echo fin_gauche(), fin_page();
 } // exec_spipbb_admin_debug
 
@@ -64,11 +71,12 @@ function exec_spipbb_admin_debug()
 // ------------------------------------------------------------------------------
 function spipbb_show_debug()
 {
-	$loc_meta = @unserialize($GLOBALS['meta']['spipbb']);
-	$res = debut_cadre_trait_couleur('',true,'xxx','SpipBB DEBUG');
-	$res.= "<fieldset><legend>SPIPBB META</legend>";
-	$res.= print_r_html($loc_meta,true);
-	$res.="</fieldset>";
+	#$loc_meta = @unserialize($GLOBALS['meta']['spipbb']);
+	$res = debut_cadre_trait_couleur('',true,'xxx',_L('SpipBB METAs'));
+	#$res.= "<fieldset style='border:1px solid #000;'><legend>SPIPBB META</legend>";
+	#$res.= print_r_html($GLOBALS['spipbb'],true);
+	$res.= affiche_metas_spipbb($GLOBALS['spipbb']);
+	#$res.="</fieldset>";
 	$res.= fin_cadre_trait_couleur(true);
 	return $res;
 } // spipbb_show_debug

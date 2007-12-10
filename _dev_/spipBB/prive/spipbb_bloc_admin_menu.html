@@ -2,10 +2,11 @@
 [(#REM) Bloc du menu gauche de l'interface privee]
 
 
-[(#ENV{lien}|=={0}|?{' ',<a href='[(#ENV*{lien})]' class='verdana2'>})]
+[(#ENV{lien}|=={0}|?{'<strong>',<a href='[(#ENV*{lien})]' class='verdana2'>})]
 <div style='margin-top:2px;' class='bouton36blanc'
 	onmouseover="changeclass(this,'bouton36gris')"
 	onmouseout="changeclass(this,'bouton36blanc')">
+#ENV*{icone_menu}
 #ENV*{action}
 </div>
-[(#ENV{lien}|=={0}|?{' ',</a>})]
+[(#ENV{lien}|=={0}|?{'</strong>',</a>})]

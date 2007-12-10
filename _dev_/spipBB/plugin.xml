@@ -16,10 +16,10 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 		<multi>
 		[fr]SpipBB vous permettra d'utiliser un secteur comme base d'un groupe de forums "&agrave; la" phpbb. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d'un article y d&eacute;marre un thread.
 _ Plugin spipbb en cours de developpement. A vos risques et perils :)
-_ [Administration-> .?exec=spipbb_admin_configuration] Acc&egrave;s au panneau d'administration.
+_ [Administration-> .?exec=spipbb_configuration] Acc&egrave;s au panneau d'administration.
 		[en]SpipBB will allow you to use a sector as the base for a group of forums "&agrave; la" phpbb. In this sector, the sub-sectors, are forum groups, the articles are forums, and each post in the forum of such articles will start a new thread.
 _ Spipbb plugin, dev in progress. Use it at your own risks :)
-_ [Admin-> .?exec=spipbb_admin_configuration] Access to the admin panel.
+_ [Admin-> .?exec=spipbb_configuration] Access to the admin panel.
 		</multi>
 	</description>
 	<lien>[Documentation->http://www.spip-contrib.net/SpipBB-le-forum]</lien> <!-- [fr] URI de documentation [en] documentation URI -->
@@ -34,8 +34,16 @@ _ [Admin-> .?exec=spipbb_admin_configuration] Access to the admin panel.
 		<inclure>spipbb_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouter_boutons</action>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+		<pipeline>
+		<nom>header_prive</nom>
 		<inclure>spipbb_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>

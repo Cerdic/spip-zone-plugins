@@ -25,7 +25,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/spipbb');
+#include_spip('inc/spipbb');
+
+# pour convers. 192 + fonct. renumerote
+include_spip('inc/spipbb_util');
 
 // ------------------------------------------------------------------------------
 // [fr] Verification et declenchement de l'operation

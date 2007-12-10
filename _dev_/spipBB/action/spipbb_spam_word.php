@@ -27,6 +27,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spipbb');
 
+#############################
+# h. 28/11 ... encore rien vue ici !
+# a priori invalider inclus inc/spipbb !
+# +
+
+# conversion spip 192
+include_spip('inc/spipbb_util');
+
+
+#############################
+
 // ------------------------------------------------------------------------------
 // [fr] Verification et declenchement de l'operation
 // ------------------------------------------------------------------------------

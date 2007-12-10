@@ -8,59 +8,44 @@
 # [fr] menus d'administration                                   #
 #---------------------------------------------------------------#
 
-//    This program is free software; you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation; either version 2 of the License, or any later version.
-//
-//    This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//
-//    You should have received a copy of the GNU General Public License
-//    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-spip_log(__FILE__.' : included','spipbb');
 
-if (defined("_GENERAL_ETAT")) return; else define("_GENERAL_ETAT", true);
-
-include_spip("inc/spipbb"); // spipbb_admin_gauche + divers
-include_spip('inc/interface_admin');
 
 // ------------------------------------------------------------------------------
-function exec_spipbb_admin_etat()
-{
-	if (!spipbb_is_configured() or ($GLOBALS['spipbb']['configure']!='oui')) {
-		include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire('spipbb_admin_configuration', ''));
-		exit;
-	}
+function exec_spipbb_admin_etat() {
 
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('spipbb:titre_spipbb'), "configuration", 'spipbb');
+# requis spip
+#
 
-	echo gros_titre(_T('spipbb:titre_spipbb'),'',false) ;
+# initialiser spipbb
+include_spip('inc/spipbb_init');
 
-	if (spipbb_is_configured() AND 	$GLOBALS['spipbb']['config_id_secteur'] == 'oui' ) {
-		echo debut_grand_cadre(true);
-		echo afficher_hierarchie($GLOBALS['spipbb']['id_secteur']);
-		echo fin_grand_cadre(true);
-	}
+# requis de cet exec
 
-	echo debut_gauche('',true);
-	echo debut_boite_info(true);
-	echo  _T('spipbb:titre_spipbb');
-	echo fin_boite_info(true);
-	echo spipbb_admin_gauche('spipbb_admin_etat');
-	echo creer_colonne_droite('', true);
-	echo debut_droite('',true);
+#
+# affichage
+#
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_L('titre_page_'._request('exec')),  "forum", "spipbb_admin");
+echo "<a name='haut_page'></a>";
 
+echo debut_gauche('',true);
+	spipbb_menus_gauche(_request('exec'),$id_salon);
+	
+echo creer_colonne_droite('', true);
+
+echo debut_droite('',true);
+	
 	echo spipbb_recap_config();
 
-	echo fin_gauche(), fin_page();
+
+# pied page exec
+bouton_retour_haut();
+
+echo fin_gauche(), fin_page();
 } // exec_spipbb_admin_etat
+
 
 // ------------------------------------------------------------------------------
 // [fr] Affiche les statistiques generales du forum SpipBB

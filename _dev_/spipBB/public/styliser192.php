@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_spip('inc/spipbb');
+include_spip('inc/spipbb_192');
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 

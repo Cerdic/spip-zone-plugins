@@ -22,12 +22,13 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+# h. pourquoi ??
+/*
 if (!defined('_DIR_PLUGIN_SPIPBB')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_SPIPBB',(_DIR_PLUGINS.end($p))."/");
 }
-
-include_spip('base/spipbb');
+*/
 
 $table_des_traitements['TITRE'][]= 'supprimer_numero(typo(%s))';
 
@@ -43,7 +44,7 @@ function test_inscription($mode, $mail, $nom, $id=0)
 	if (!$r = email_valide($mail)) return _T('info_email_invalide');
 
 	// Controle de la ban_list
-	include_spip('inc/spipbb');
+	include_spip('inc/spipbb_192');
 	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
 
 	if (is_array($spipbb_meta) AND
@@ -70,15 +71,24 @@ function test_inscription($mode, $mail, $nom, $id=0)
 	return array('email' => $r, 'nom' => $nom, 'bio' => $mode);
 }
 
+
 # h.22/05/07 GAF 0.4 spip 1.9.2
-# valider notification (voir inc/notifications.php - fonction : notifications_forumvalide_dist() .. )
-# Tous les participants d'un thread recoivent les nouveaux messages
+#
+# Valider notification
+# (voir inc/notifications.php - fonction : notifications_forumvalide_dist() .. )
+# Fonction redeclaree dans inc/spipbb_notifications.php
+# Tous les participants d'un thread recoivent les nouveaux messages,
+# sauf sur threads refuses (voir profil -> refus_suivi_thread)
+#
 define('_SUIVI_FORUM_THREAD', "1");
 
-# GAF 0.6 - 30/09/07
-# definir repertoire des smileys ; recherche dans l'arbo
+
+# h. GAF 
+# definir repertoire des smileys ;
+# permet un repert perso de remplacement : mes_smileys/
+#
 if (!defined("_DIR_SMILEYS_SPIPBB")) {
-	$smilbase = _DIR_PLUGIN_SPIPBB."chatons/";
+	$smilbase = _DIR_PLUGIN_SPIPBB."smileys/";
 	$smilperso = _DIR_PLUGIN_SPIPBB."mes_smileys/";
 	foreach (creer_chemin() as $dir) {
 		if (@is_dir($f = "$dir$smilperso")) {
@@ -91,124 +101,15 @@ if (!defined("_DIR_SMILEYS_SPIPBB")) {
 	define('_DIR_SMILEYS_SPIPBB', $repert);
 }
 
-/*************************************************************************************/
-// Les lignes qui suivent servent à définir les champs extra ou leur equivalent en table
-/************************************************************************************/
-
-# def des champs supplementaire pour ce plugin
-# nom de variable generique : champs_sap_[prefix_plugin]
-# sur champ de type radio, mettre valeur par defaut en premier !
-
-$GLOBALS['champs_sap_spipbb'] = array(
-# Pour rajouter une entree de champ "extra" avec incription.html, dans spipbb il faut les rajouter ici
-# avec un exemple comme ci dessous
-//	"mon_champ_extra" => array(
-//		"info" => _L('mon explication sur le champ'),
-//		"sql" => "VALEUR DE CHAMP SQL SI ON UTILISE UNE TABLE SINON VIDE",
-//		"filtres_recup" => "filtre_a_passer_apres_saisie_sinono_vide",
-//		"extra" => "filtre_champ_extra|"."Titre du champ de saisie",
-//		"extra_proposes" => "tous" (ou la liste des profils concernes
-//	),
-	"date_crea_spipbb" => array(
-		"info" => _L('date de premiere saisie profil SpipBB'), ## petit texte infos pour SAP
-		"sql" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"filtres_recup" => "", ## filtrage dans fichier (balise/) recup saisie
-		#"form_milieu" => "hidden", ## type input, sur auteur_infos.php
-		"extra" => "hidden|brut|"._T('spipbb:avatar_saisie_url'), ## pour usage Extra et form prive
-		"extra_proposes" => "tous,6forum"
-	),
-	"avatar" => array(
-		"info" => _L('URL de l\'avatar du visiteur'),
-		"sql" => "VARCHAR(255) NOT NULL",
-		"filtres_recup" => "corriger_caracteres",
-		#"form_milieu" => "text",
-		"extra" => "ligne|propre|"._T('spipbb:avatar_saisie_url'),
-		"extra_proposes" => "6forum"
-	),
-	"signature_post" => array(
-	 	"info" => _L('Court texte de signature des messages'),
-	 	"sql" => "VARCHAR(255) NOT NULL",
-	 	"filtres_recup" => "corriger_caracteres",
-	 	#"form_milieu" => "text",
-	 	"extra" => "ligne|propre|"._T('spipbb:signature_saisie_texte'),
-	 	"extra_proposes" => "tous,6forum"
-	 ),
-	"annuaire_forum" => array(
-		"info" => _L('Permet de refuser l\'affichage dans l\'annuaire des inscrits en zone public'),
-	 	"sql" => "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
-	 	"filtres_recup" => "",
-	 	#"form_milieu" => "radio",
-	 	"extra" => "radio|brut|"._T('spipbb:visible_annuaire')."|"._T('non').","._T('oui')."|non,oui",
-	 	"extra_proposes" => "tous,6forum"
-	),
-	"Localisation" => array(
-		"info" => _L('Localisation du visiteur'),
-	 	"sql" => "VARCHAR(255) NOT NULL",
-	 	"filtres_recup" => "corriger_caracteres",
-	 	#"form_milieu" => "text",
-	 	"extra" => "ligne|propre|"._T('spipbb:localisation'),
-	 	"extra_proposes" => "tous,6forum"
-	),
-	"Emploi" => array(
-		"info" => _L('Emploi du visiteur'),
-	 	"sql" => "VARCHAR(255) NOT NULL",
-	 	"filtres_recup" => "corriger_caracteres",
-	 	#"form_milieu" => "text",
-	 	"extra" => "ligne|propre|"._T('spipbb:emploi'),
-	 	"extra_proposes" => "tous,6forum"
-	),
-	"Loisirs" => array(
-		"info" => _L('Loisirs du visiteur'),
-	 	"sql" => "VARCHAR(255) NOT NULL",
-	 	"filtres_recup" => "corriger_caracteres",
-	 	#"form_milieu" => "text",
-	 	"extra" => "ligne|propre|"._T('spipbb:loisirs'),
-	 	"extra_proposes" => "tous,6forum"
-	),
-	"Numero_ICQ" => array(
-		"info" => _L('Numero ICQ du visiteur'),
-	 	"sql" => "VARCHAR(14) NOT NULL",
-	 	"filtres_recup" => "corriger_caracteres",
-	 	#"form_milieu" => "text",
-	 	"extra" => "ligne|propre|"._T('spipbb:numero_icq'),
-	 	"extra_proposes" => "tous,6forum"
-	),
-	"Nom_AIM" => array(
-		"info" => _L('Nom AIM du visiteur'),
-	 	"sql" => "VARCHAR(128) NOT NULL",
-	 	"filtres_recup" => "corriger_caracteres",
-	 	#"form_milieu" => "text",
-	 	"extra" => "ligne|propre|"._T('spipbb:nom_aim'),
-	 	"extra_proposes" => "tous,6forum"
-	),
-	"Nom_Yahoo" => array(
-		"info" => _L('Nom Yahoo du visiteur'),
-	 	"sql" => "VARCHAR(128) NOT NULL",
-	 	"filtres_recup" => "corriger_caracteres",
-	 	#"form_milieu" => "text",
-	 	"extra" => "ligne|propre|"._T('spipbb:nom_yahoo'),
-	 	"extra_proposes" => "tous,6forum"
-	),
-	"Nom_MSNM" => array(
-		"info" => _L('Nom MSNM du visiteur'),
-	 	"sql" => "VARCHAR(128) NOT NULL",
-	 	"filtres_recup" => "corriger_caracteres",
-	 	#"form_milieu" => "text",
-	 	"extra" => "ligne|propre|"._T('spipbb:nom_msnm'),
-	 	"extra_proposes" => "tous,6forum"
-	),
-	"refus_suivi_thread" => array(
-		"info" => _L('Liste des threads pour lesquels on ne souhaite plus recevoir de notification'),
-		"sql" => "TEXT DEFAULT '' NOT NULL",
-		"filtres_recup" => "",
-		#"form_milieu" => "hidden",
-		"extra" => "hidden|brut|"._T('spipbb:refus_suivi_thread'),
-		"extra_proposes" => "tous,6forum"
-	)
-);
 
 #
-# Definition de tous les extras possibles (voir base/sap_gaf.php)
+# inclus def de champs (voir ci-apres !)
+#
+include_spip("base/sap_spipbb");
+
+
+#
+# Definition de tous les extras possibles (voir base/sap_spipbb.php)
 #
 /* lire_config fourni par CFG */
 /* Voir si pas plus simple d'utiliser meta ?*/

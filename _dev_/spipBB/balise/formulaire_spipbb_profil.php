@@ -1,20 +1,20 @@
 <?php
 /*
 +-------------------------------------------+
-| / orig GAFoSPIP v. 0.5 - 21/08/07 - spip 1.9.2
 +-------------------------------------------+
-| Gestion Alternative des Forums SPIP
-+-------------------------------------------+
-| Hugues AROUX - SCOTY @ koakidi.com
-+-------------------------------------------+
-| Script origine : spipBB 
+| SPIPBB James-Booz 
 | Modif . scoty pour GAFoSPIP v. 0.4
 +-------------------------------------------+
 */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_spip ("inc/spipbb");
+
+# conversin spip 1.9.2
+if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
+	include_spip('inc/spipbb_192'); // SPIP 1.9.2
+}
+
 
 function balise_FORMULAIRE_SPIPBB_PROFIL ($p) {
 	return calculer_balise_dynamique($p,'FORMULAIRE_SPIPBB_PROFIL', array('id_auteur'));
@@ -37,7 +37,7 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 	$id_auteur_session=$GLOBALS["auteur_session"]['id_auteur'];
 	
 	# detail infos sur auteur
-	$auteur=spipbb_auteur_infos($id_auteur_session);
+	$auteur=spipbb_donnees_auteur($id_auteur_session);
 
 	# chps spip passer dans le formulaire
 	$new_pass = _request('new_pass');

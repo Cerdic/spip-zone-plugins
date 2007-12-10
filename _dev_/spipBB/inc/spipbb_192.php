@@ -386,9 +386,9 @@ function sql_delete ($table, $where='', $serveur='')
 if (!function_exists('sql_showbase')) {
 function sql_showbase($spip=NULL, $serveur='')
 {
-	global $table_prefix;
 	if ($spip == NULL){
-		$spip = $table_prefix . '%';
+		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+		$spip = $connexion['prefixe'] . '%';
 	}
 
 	return spip_mysql_query("SHOW TABLES LIKE '$spip'", $serveur);
@@ -401,10 +401,12 @@ function sql_showbase($spip=NULL, $serveur='')
 if (!function_exists('sql_showtable')) {
 function sql_showtable($table, $table_spip = false, $serveur='')
 {
-	global $table_prefix;
 	if ($table_spip){
-		$table = preg_replace('/^spip/', $table_prefix, $table);
+		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+		$prefixe = $connexion['prefixe'];
+		$table = preg_replace('/^spip/', $prefixe, $table);
 	}
+
 	$f = spip_mysql_showtable($table, $serveur);
 	if (!$f) return array();
 	if (isset($GLOBALS['tables_principales'][$table]['join']))

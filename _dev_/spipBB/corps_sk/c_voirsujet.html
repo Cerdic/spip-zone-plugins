@@ -2,12 +2,17 @@
 [(#REM) Plugin SpipBB - Licence GPL]
 <!-- debut code pour fichier voirsujet.html -->
 <BOUCLE_sujet_principal(FORUMS){id_forum}{doublons}>
-		
+
+	[
+	(#REM) entete corps forum
+	]
 	<INCLURE(session.php){fond=inc_teteforum}{id_article}>
 		
 	<p class="space_20"></p>
 		
-	[(#REM) determiner si le forum ferme / sujet ferme  ]		
+	[
+	(#REM) determiner si le forum ferme / sujet ferme  
+	]		
 	#SET{forumferme,0}
 	#SET{sujetferme,0}
 	<BOUCLE_etat(ARTICLES){id_article}{titre_mot=ferme}>
@@ -16,8 +21,29 @@
 		#SET{maintenance,#ID_ARTICLE|spipbb_maintenance}
 	</BOUCLE_etat>
 
+	[(#REM) forum type annonce ? ]
+	#SET{forum_annonce,0}
+	<BOUCLE_mot_ferme(MOTS){id_article}{id_groupe=#CONFIG{'spipbb/id_groupe_mot'}}>
+	#SET{forum_annonce,#TITRE|=={annonce}|?{1,#GET{forum_annonce}}}
+	</BOUCLE_mot_ferme>
 
-	[(#REM) post qui ferme le sujet (dernier post du sujet en somme !) ]
+
+	[(#REM) ligne chemin ]
+	[(#MODELE{chemin_hierarchie}{id_article})]
+	
+	<p class="space_10"></p>
+	[
+	(#REM) message art ferme|maintenance
+	]
+	[(#GET{forumferme}|=={1}|?{' ',''})
+		<div class="mesg_forum_clos">
+		[(#GET{maintenance}|=={1}|?{<:spipbb:forum_maintenance:>,<:spipbb:forum_ferme:>})]
+		</div>
+	]
+	
+	[
+	(#REM) post qui ferme le sujet (dernier post du sujet en somme !
+	]
 	<BOUCLE_reponse_ferme(FORUMS){id_thread}{plat}{titre_mot=ferme}>
 		#SET{sujetferme,1}
 	
@@ -84,36 +110,28 @@
 		
 	[(#REM) affichage commun, tout type situation voirsujet ]
 	
-	[(#REM) ligne chemin ]
-	[(#MODELE{chemin_hierarchie}{id_article})]
-
-	
-	<p class="space_10"></p>
-	[(#REM) message art ferme|maintenance ]
-	[(#GET{forumferme}|=={1}|?{' ',''})
-		<div class="mesg_forum_clos">
-		[(#GET{maintenance}|=={1}|?{<:spipbb:forum_maintenance:>,<:spipbb:forum_ferme:>})]
-		</div>
+	[
+	(#REM) bouton nouveau_sujet/repondre ou pas ?
 	]
-	
-	<!-- bouton nouveau_sujet/repondre ou pas ? -->
 	<ul class="actionforum">
 		<li class="poster">
 			<BOUCLE_forum_pere(ARTICLES){id_article}>
-			[(#SET{affboutonnew,[(#GET{forumferme}|=={1}|?{' ',
+			[(#SET{affboutonnew,[(#GET{forumferme}|!={1}|?{' ',''})
+				[(#GET{forum_annonce}|!={1}|?{' ',''})
 				<a href="[(#URL_PAGE{poster})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:sujet_nouveau:>">&nbsp;</a>
-			})]
-			})]
+				]
+			]})]
 			#GET{affboutonnew}
 			</BOUCLE_forum_pere>
 		</li>
 		<li class="repondre">
-			[(#SET{affboutonrep,[(#GET{forumferme}|=={1}|?{' ',
-				[(#GET{sujetferme}|=={1}|?{' ',
+			[(#SET{affboutonrep,[(#GET{forumferme}|!={1}|?{' ',''})
+				[(#GET{forum_annonce}|!={1}|?{' ',''})
+				[(#GET{sujetferme}|!={1}|?{' ',''})
 				<a href="[(#URL_PAGE{poster})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:sujet_repondre:>">&nbsp;</a>
-				})]
-			})]
-			})]
+				]
+				]
+			]})]
 			#GET{affboutonrep}
 		</li>	
 	</ul>
@@ -167,15 +185,16 @@
 			</td>
 			<td class="date_sujet">
 			
-				<!-- bouton citer ou pas ? -->
-				[(#SET{affboutonciter,[(#GET{forumferme}|=={1}|?{' ',
-					[(#GET{sujetferme}|=={1}|?{' ',
+				[(#REM) bouton citer ou pas ? ]
+				[(#SET{affboutonciter,[(#GET{forumferme}|!={1}|?{' ',''})
+					[(#GET{forum_annonce}|!={1}|?{' ',''})
+					[(#GET{sujetferme}|!={1}|?{' ',''})
 					<div class="bout_citer">
 						<a href="[(#URL_PAGE{poster}|parametre_url{citer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:citer:>">&nbsp;</a>
 					</div>
-					})]
-				})]
-				})]
+					]
+					]
+				]})]
 				#GET{affboutonciter}
 			
        			<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
@@ -189,7 +208,7 @@
 				[<p class="signature">(#SIGNATURE_POST)</p>]
 				
 				[
-				<p class="space_5"></p>
+				<p class="space_10"></p>
 				<a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>
 				]
 			</td>
@@ -242,14 +261,15 @@
 			</td>
 			<td class="date_sujet">
 				[(#REM) affiche ou pas bouton (repondre)/citer ]
-				[(#SET{affboutonciter,[(#GET{forumferme}|=={1}|?{' ',
-					[(#GET{sujetferme}|=={1}|?{' ',
+				[(#SET{affboutonciter,[(#GET{forumferme}!={1}|?{' ',''})
+					[(#GET{forum_annonce}|!={1}|?{' ',''})
+					[(#GET{sujetferme}|!={1}|?{' ',''})
 					<div class="bout_citer">
 						<a href="[(#URL_PAGE{poster}|parametre_url{citer,oui})][&amp;(#PARAMETRES_FORUM)]" title="<:spipbb:citer:>">&nbsp;</a>
 					</div>
-					})]
-				})]
-				})]
+					]
+					]
+				]})]
 				#GET{affboutonciter}
 				<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
         	</td>
@@ -262,7 +282,7 @@
 				[<p class="signature">(#SIGNATURE_POST)</p>]
 				
 				[
-				<p class="space_5"></p>
+				<p class="space_10"></p>
 				<a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>
 				]
 			</td>

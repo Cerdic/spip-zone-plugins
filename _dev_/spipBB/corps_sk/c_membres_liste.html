@@ -18,8 +18,10 @@
 
 		[(#REM) h.17/02/07 {statut IN ... } pour palier a d eventuels nouv. statut auteur --plugins ]
 		<BOUCLE_auteur_principal(AUTEURS){tout}{!par id_auteur}{statut IN 0minirezo,1comite,6forum}{pagination 30}>
+	
 			[(#REM) c.25/11/07 On doit explicitement demander a ne pas paraitre dans l'annuaire]
-			[(#SPIPBB{annuaire_forum}|!={'non'}|?{' ',''})
+			[(#REM) h.1/12/07 .. euh ... justement l'inverse ! a cause de plugins comme spip-liste ! ]
+			[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
 			<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{'1','2'})]"> 
 				<td>
 					<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]">
