@@ -69,8 +69,23 @@ var is_moz = 0;
 var is_win = ((clientPC.indexOf("win")!=-1) || (clientPC.indexOf("16bit") != -1));
 var is_mac = (clientPC.indexOf("mac")!=-1);
 
+function barre_raccourci_etendu(debut,fin,seul,champ,barre) {
+	var txtarea = champ;
+	txtarea.focus();
+	isSelected = false;
+	if ((clientVer >= 4) && is_ie && is_win) {
+		theSelection = document.selection.createRange().text; // Get text selection
+		if(theSelection) isSelected = true;
+	}
+	else if (txtarea.selectionEnd && (txtarea.selectionEnd - txtarea.selectionStart > 0))
+		isSelected = true;
+	if(isSelected)
+		barre_raccourci(debut,fin,champ,barre);
+	else
+		barre_inserer(seul,champ,barre);
+}
 
-function barre_raccourci(debut,fin,champ, barre) {
+function barre_raccourci(debut,fin,champ,barre) {
 	var txtarea = champ;
 
 	txtarea.focus();
@@ -137,7 +152,7 @@ function barre_ancre(debut,milieu,fin,affich,champ,barre) {
 	}
 }
 
-function barre_inserer(text,champ, barre) {
+function barre_inserer(text,champ,barre) {
 	var txtarea = champ;
 	
 	 if (is_ie) {

@@ -275,7 +275,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
     $toolbox .= afficher_gestion_ancre($champ, $num_barre);
     $toolbox .= afficher_gestion_remplacer($champ, $champhelp, $num_barre);
  // Pipeline pour ajouter des toolzbox
-    $params = array('champ'=>$champ,'help'=>$champhelp,'lang'=>$spip_lang, 'num'=>$num_barre, 'flux'=>'');
+    $params = array('champ'=>$champ, 'help'=>$champhelp, 'lang'=>$spip_lang, 'num'=>$num_barre, 'flux'=>'');
     $add = pipeline("BT_toolbox", $params);
     $toolbox .= $add['flux'];
 
@@ -341,7 +341,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	// gestion du remplacement
       $ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_remplacer']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/chercher_remplacer.png", _T('bartypenr:barre_chercher'), $champhelp);
 	// DEB Galerie JPK
-	// idée originale de http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images-et-documents.html
+	// idee originale de http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images-et-documents.html
 	if (!$forum) {
 		$ret .= bouton_barre_racc ("javascript:barre_galerie($champ, '"._DIR_RESTREINT."')",
 			_DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/galerie.png', _T('bartypenr:barre_galerie'), $formulaire, $texte);
