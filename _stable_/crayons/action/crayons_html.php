@@ -245,7 +245,7 @@ class Crayon {
 			$type = is_array($spec) ? $spec[$champ]['type'] : $spec;
 			switch ($type) {
 				case 'texte':
-					$id = uniqid();
+					$id = uniqid('wid');
 					$input = '<textarea style="width:100%;" class="crayon-active"'
 					. ' name="content_'.$this->key.'_'.$champ.'" id="'.$id.'">'
 					. entites_html($val)
