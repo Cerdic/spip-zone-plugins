@@ -1,10 +1,10 @@
 <?php
 /*
 +--------------------------------------------+
-| ACTIVITE DU JOUR v. 1.52 - 08/2007 - SPIP 1.9.2
+| ACTIVITE DU JOUR v. 1.53 - 12/2007 - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
-| Script certifié KOAK2.0 strict, mais si !
+| Script certifie KOAK2.0 strict, mais si !
 +--------------------------------------------+
 | Declare pipeline
 +--------------------------------------------+
@@ -13,7 +13,7 @@
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_ACTIJOUR',(_DIR_PLUGINS.end($p)));
  
-
+	# bouton interface spip
 	function actijour_ajouterBoutons($boutons_admin) {
 		// si on est admin
 		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
@@ -26,10 +26,19 @@ define('_DIR_PLUGIN_ACTIJOUR',(_DIR_PLUGINS.end($p)));
 		return $boutons_admin;
 	}
 
-	// style
+	# style + css
 	function actijour_header_prive($flux) {
-		$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_ACTIJOUR.'actijour_styles.css" >'."\n";
+		$exec = _request('exec');
+		if(ereg('^(actijour_).*',$exec)) {
+		$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_ACTIJOUR.'actijour_styles.css" />'."\n";
 		$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_ACTIJOUR.'func_js_acj.js"></script>'."\n";
+		}
 		return $flux;
+	}
+	
+
+	# repertoire icones ACTIJOUR
+	if (!defined("_DIR_IMG_ACJR")) {
+		define('_DIR_IMG_ACJR', _DIR_PLUGIN_ACTIJOUR.'/img_pack/');
 	}
 ?>

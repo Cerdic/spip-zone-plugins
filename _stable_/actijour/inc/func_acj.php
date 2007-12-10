@@ -1,123 +1,59 @@
 <?php
 /*
 +--------------------------------------------+
-| ACTIVITE DU JOUR v. 1.52 - 08/2007 - SPIP 1.9.2
+| ACTIVITE DU JOUR v. 1.53 - 12/2007 - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
-| Script certifié KOAK2.0 strict, mais si !
+| Script certifie KOAK2.0 strict, mais si !
 +--------------------------------------------+
-| diverses fonctions de requetes ...
+| diverses fonctions communes ...
 +--------------------------------------------+
 */
 
-function tranches_liste_art($encours,$nligne,$fl)
-	{
+# affiche les tranches de tableau
+function tranches_liste_art($encours,$nligne,$fl) {
 	$exec = _request("exec");
-	#global $nligne, $fl;
 	$fract=ceil($nligne/$fl);
-	for ($i=0; $i<$fract; $i++)
-		{
+	$aff='';
+	for ($i=0; $i<$fract; $i++) {
 		$debaff=($i*$fl)+1;
 		$f_aff=($i*$fl)+$fl;
 		$liais=$i*$fl;
 		if ($f_aff<$nligne) { $finaff=$f_aff; $sep = " | "; }
 		else { $finaff=$nligne; $sep = ""; }
-		if ($debaff==$encours)
-			{
-			echo "<b>$debaff - $finaff</b> $sep";}
-		else
-			{
-			echo "<a href='".generer_url_ecrire($exec,"vl=".$liais)."'>".$debaff." - ".$finaff."</a> ".$sep;
-			}
+		if ($debaff==$encours) {
+			$aff.= "<b>$debaff - $finaff</b> $sep";
+		}
+		else {
+			$aff.= "<a href='".generer_url_ecrire($exec,"vl=".$liais)."'>"
+				.$debaff." - ".$finaff."</a> ".$sep;
 		}
 	}
-
-
-
-#
-#  requetes
-#
-
-// nombre de jours depuis debut stats
-function nb_jours_stats() {
-	$q = spip_query("SELECT COUNT(*) as nbj FROM spip_visites");
-	$r = spip_fetch_array($q);
-	#h.21/03/07 .. correctif : $r['nbj'] > 1
-	if ($r['nbj'] > 1){ $nb = $r['nbj']; }
-	else { $nb = "1"; }
-	return $nb;
+	return $aff;
 }
 
-// date debut stats
-function prim_jour_stats() {
-	$q = spip_query("SELECT DATE_FORMAT(date,'%d/%m/%Y') AS jourj FROM spip_visites LIMIT 0,1");
-	$r = spip_fetch_array($q);
-	return $r['jourj'];
+# affiche le logo actijour + gros titre
+function entete_page($titre) {
+	echo "<div style='float:left; margin-right:5px; min-height:70px;'>"; 
+	echo "<img src='"._DIR_PLUGIN_ACTIJOUR."/img_pack/acjr_48.gif' alt='acjr' />";
+	echo "</div>";
+	gros_titre($titre);
+	echo "<div style='clear:both;'></div>";
 }
 
-// total visites du jour
-function global_jour($date) {
-	$q = spip_query("SELECT visites FROM spip_visites WHERE date='$date'");
-	if ($r = @spip_fetch_array($q))
-		$g = $r['visites'];
-	else
-		$g = 0;
-			
-	return $g;
-}
-
-// Total visite depuis debut stats
-function global_stats() {
-	$q = spip_query("SELECT SUM(visites) AS total_absolu FROM spip_visites");
-	$r = spip_fetch_array($q);
-	$t = $r['total_absolu'];
-	return $t;
-}
-
-// jour maxi-visites depuis debut stats
-function max_visites_stats() {
-	$qv = spip_query("SELECT MAX(visites) as maxvi FROM spip_visites");
-	$rv = spip_fetch_array($qv);
-	$valmaxi = $rv['maxvi'];
-
-	$qd = spip_query("SELECT DATE_FORMAT(date,'%d/%m/%y') AS jmax FROM spip_visites WHERE visites = $valmaxi");
-	$rd = spip_fetch_array($qd);
-	$jourmaxi = $rd['jmax'];
-	$a = array($valmaxi,$jourmaxi);
-	return $a;
-}
-
-// Cumul pages visitees
-function global_pages_stats() {
-	$q = spip_query("SELECT SUM(visites) AS nb_pag FROM spip_visites_articles");
-	if ($r = spip_fetch_array($q)) {
-		$t = $r['nb_pag'];
-	}
-	return $t;
-}
-
-// articles visites jour
-function articles_visites_jour($date) {
-	$q=spip_query("SELECT id_article, visites FROM spip_visites_articles WHERE date='$date'");
-	$add_visit_art = array();
-	while ($r=spip_fetch_array($q)) {
-		$add_visit_art[]=$r['visites'];
-	}
-	return $add_visit_art;
-}
-
-// nbr posts du jour sur vos forum
-function nombre_posts_forum($date) {
-	$q=spip_query("SELECT id_forum FROM spip_forum WHERE DATE_FORMAT(date_heure,'%Y-%m-%d') = '$date' AND statut !='perso'");
-	return $nbr=spip_num_rows($q);
+# bouton retour haut de page
+function bouton_retour_haut() {
+	echo "<div style='float:right; margin-top:6px;' class='icone36' title='"._T('acjr:haut_page')."'>\n";
+	echo "<a href='#haut_page'>";
+	echo "<img src='"._DIR_IMG_PACK."spip_out.gif' border='0' align='absmiddle' />\n";
+	echo "</a></div>";
+	echo "<div style='clear:both;'></div>\n";
 }
 
 
-//
-// visites sur rubrique
-//
 
-// lister rubrique/secteur => visites
+
+# lister rubrique/secteur => visites
 function rubriques_du_jour($date) {
 	//recup les id_article visites du jour
 	$query="SELECT sva.visites, ".
@@ -146,11 +82,12 @@ function rubriques_du_jour($date) {
 				$tab_rubart[$id_secteur]['rub'][$id_rubrique]=$visa;
 			}
 		}
-		
 	}
 	return $tab_rubart;
-}
+} //rubriques_du_jour
 
+
+# renvois titre rubrique
 function info_rubrique($id) {
 	$inforub = array();
 	$q = spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique = $id");
@@ -158,47 +95,8 @@ function info_rubrique($id) {
 	return $r['titre'];
 }
 
-// affichage visites par rubrique
-function tableau_visites_rubriques($date) {
-	global $couleur_claire;
-	$tab_rubart = rubriques_du_jour($date);
-	if($tab_rubart) {
-		// add visites
-		$nbr=0;
-		foreach($tab_rubart as $s => $c) { $nbr+=$c['vis'];	}
-		
-		$ifond = 0;
-	
-		echo "<table cellpadding='2' cellspacing='0' width='100%' border='0'>\n";
-		
-		foreach($tab_rubart as $sect => $cat) {
-			$ifond = $ifond ^ 1;
-			$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
-			$s_titre = typo(info_rubrique($sect));
-			$prct_s = round(($cat['vis']/$nbr)*100, 1);
-			
-			echo "<tr bgcolor='$couleur'>\n<td colspan='2'>".
-					http_img_pack('secteur-12.gif','ico','align=\'absmiddle\'','')."&nbsp;<b>".
-					$s_titre."</b></td>\n<td width='8%'><div align='right'><b>".$cat['vis']."</b></div></td>\n".
-					"<td width='12%'><div class='verdana2 bold' align='right'>$prct_s%</div></td>\n</tr>\n";
-			
-			if($cat['rub']) {
-				foreach($cat['rub'] as $idr => $vis) {
-					$r_titre = typo(info_rubrique($idr));
-					$prct_r = round(($vis/$nbr)*100, 1);
-					echo "<tr bgcolor='$couleur'>\n<td width='2%'>&nbsp;</td><td>".
-					http_img_pack('rubrique-12.gif','ico','align=\'absmiddle\'','')."&nbsp;".
-							$r_titre."</td>\n<td width='8%'><div align='right'>".$vis."</div></td>\n".
-							"<td width='12%'><div class='verdana1' align='right'>$prct_r%</div></td>\n</tr>\n";
-				}
-			}
-		}
-		echo "</table>\n";
-	}
-}
 
-
-// affiche lien titre art. : vers stats spip ou stats popup actijour
+# affiche lien titre art. : vers stats spip ou stats popup actijour
 function affiche_lien_graph($id_article, $titre, $statut, $type='actijour') {
 	if ($statut == 'publie') {
 		$graph_pop = 
@@ -222,7 +120,25 @@ function affiche_lien_graph($id_article, $titre, $statut, $type='actijour') {
 		$graph_std = $id_article;
 	}
 	
-	if($type=='actijour') { return $graph_pop; } else { return $graph_std; }
+	if($type=='actijour') {
+		return $graph_pop;
+	} else {
+		return $graph_std;
+	}
+} //info_rubrique
+
+
+/*---------------------------------------------------------------------------*\
+produire date formatee : "d/m", moins 'n' jour(s) - ou son timestamp
+\*---------------------------------------------------------------------------*/
+function ante_date_jour($moins,$formater=false) {
+	if($formater) {
+		$ante = date('d/m', mktime(0, 0, 0, date("m"), date("d")-$moins, date("Y")));
+	}
+	else {
+		$ante = mktime(0, 0, 0, date("m"), date("d")-$moins, date("Y"));
+	}
+	return $ante;
 }
 
 

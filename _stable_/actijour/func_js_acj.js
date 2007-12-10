@@ -1,9 +1,9 @@
 /* 
 +--------------------------------------------+
-| ACTIVITE DU JOUR v. 1.52 - 08/2007 - SPIP 1.9.2
+| ACTIVITE DU JOUR v. 1.53 - 12/2007 - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
-| Script certifié KOAK2.0 strict, mais si !
+| Script certifie KOAK2.0 strict, mais si !
 +--------------------------------------------+
 | javascript ... popup pour bargraph actijour
 +--------------------------------------------+

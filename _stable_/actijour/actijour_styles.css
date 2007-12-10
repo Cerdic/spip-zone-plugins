@@ -1,9 +1,9 @@
 /*
 +--------------------------------------------+
-| ACTIVITE DU JOUR v. 1.52 - 08/2007 - SPIP 1.9.2
+| ACTIVITE DU JOUR v. 1.53 - 12/2007 - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
-| Script certifié KOAK2.0 strict, mais si !
+| Script certifie KOAK2.0 strict, mais si !
 +--------------------------------------------+
 */
 .cell_info {
@@ -17,11 +17,14 @@
 
 .alter-fond { background-color:#efefef; }
 
-.cell_moymens { 
+/* texte et jauge visites mois */
+.cell_moymens, .cell_info_mois, .cell_info_tot {
 	position:absolute;
 	z-index:2;
-	top:-2px;
-	left:2px;
+}
+.cell_moymens {
+	top:-1px;
+	left:50px;
 	padding-left:2px;
 	padding-right:2px;
 	border:1px solid #878787;
@@ -30,14 +33,23 @@
 	filter:alpha(opacity=80);
 	background:#FFFFFF;
 }
-
+.cell_info_mois {
+	top:0px;
+	left:5px;
+}
+.cell_info_tot {
+	top:0px;
+	right:5px;
+}
 .fond_barre {
 	width:100%;
-	height:10px;
+	height:11px;
+	margin:1px;/**/
 	background-color:#efefef;
 	border-top:1px solid #696969;
 	border-bottom:1px solid #C6C6C6;
 }
+/* ****************** */
 
 .bouton_droite { float:right; margin-top:-2px; }
 
@@ -51,7 +63,12 @@
 	-moz-border-radius:5px;
 }
 
-.cart_titre { margin:4px 10px 4px 10px; padding:4px; border-bottom:1px solid #BABABA; }
+.cart_titre, .cart_titre_bold {
+	margin:4px 10px 4px 10px; 
+	padding:4px;
+	border-bottom:1px solid #BABABA;
+}
+.cart_titre_bold { font-weight:bold; }
 
 .cell_huit_t {
 	padding:1px;
@@ -81,4 +98,21 @@ tr.head_tbl td {
 	text-align:center;
 }
 
+tr.legend_topten {
+	font-family:Verdana; font-size:11px;
+}
+tr.legend_topten td { text-align:center; }
+
+/*  **** */
 .bold { font-weight:bold; }
+
+/* p supporte "presque par IE" et Gecko a consommer avec moderation */
+p.space_5, p.space_10, p.space_20 {
+	display:block;
+	padding: 0px;
+	border: none;
+	margin:0px;
+}
+.space_5 { min-height:5px; _margin:5px 0px 0px 0px;  }
+.space_10 { min-height:10px; _margin:10px 0px 0px 0px; }
+.space_20 { min-height:20px; _margin:20px 0px 0px 0px; }

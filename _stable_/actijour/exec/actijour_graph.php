@@ -20,7 +20,7 @@ function http_img_rien($width, $height, $style='', $title='') {
 		       "width='$width' height='$height'" 
 		       . (!$style ? '' : (" style='$style'"))
 		       . (!$title ? '' : (" title=\"$title\"")));
-}
+} // http_img_rien
 
 #
 #
@@ -28,22 +28,17 @@ function http_img_rien($width, $height, $style='', $title='') {
 
 function exec_actijour_graph() {
 
-	// elements spip
+	# elements spip
 	global 	$connect_statut,
 			$connect_toutes_rubriques,
 			$connect_id_auteur,
 			$couleur_claire, $couleur_foncee,
 			$spip_lang_left;
 			
+	$id_article=intval(_request('id_article'));
+	$aff_jours = intval(_request('aff_jours'));
 
-// reconstruire .. var=val des get et post
-	// var : $outil
-	// .. Option .. utiliser : $var = _request($var);
-	foreach($_GET as $k => $v) { $$k=$_GET[$k]; }
-	foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
-	
-	$id_article=intval($id_article);
-	$aff_jours = intval($aff_jours);
+
 #h.09/03 adaptation 1.9.2
 ##
 include_spip('inc/headers');
@@ -62,10 +57,14 @@ echo init_entete(_T('graph article : '.$id_article),'');
 echo "<body>\n";
 
 if ($id_article) {
-	$query = "SELECT titre, visites, popularite, DATE_FORMAT(date,'%d/%m/%y') AS date_ed, DATE_FORMAT(date_redac,'%d/%m/%y') AS date_red FROM spip_articles WHERE statut='publie' AND id_article ='$id_article'";
-	$result = spip_query($query);
+	$q = spip_query("SELECT titre, visites, popularite, 
+					DATE_FORMAT(date,'%d/%m/%y') AS date_ed, 
+					DATE_FORMAT(date_redac,'%d/%m/%y') AS date_red 
+					FROM spip_articles 
+					WHERE statut='publie' AND id_article ='$id_article'"
+					);
 
-	if ($row = spip_fetch_array($result)) {
+	if ($row = spip_fetch_array($q)) {
 		$titre = typo($row['titre']);
 		$total_absolu = $row['visites'];
 		$val_popularite = round($row['popularite']);
@@ -75,38 +74,29 @@ if ($id_article) {
 	}
 } 
 else {
-	$query = "SELECT SUM(visites) AS total_absolu FROM spip_visites";
-	$result = spip_query($query);
+	$query = spip_query("SELECT SUM(visites) AS total_absolu FROM spip_visites");
 
-	if ($row = spip_fetch_array($result)) {
+	if ($row = spip_fetch_array($query)) {
 		$total_absolu = $row['total_absolu'];
 	}
 }
 
-
-
-
 	echo "<div style='margin:5px;'>";
+	
 	gros_titre($titre);
 	
-
-if ($connect_statut != '0minirezo') {
-	echo _T('avis_non_acces_page');
-	fin_page();
-	exit;
-}
-
-
+	# acces page : admin principal
+	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+		echo _T('avis_non_acces_page');
+		fin_page();
+		exit;
+	}
 
 /* ------------------------------- */
-
 
 if (!$aff_jours) $aff_jours = 105;
 
 if (!$origine) {
-
-
-
 
 	if ($id_article) {
 		$table = "spip_visites_articles";
@@ -118,15 +108,19 @@ if (!$origine) {
 		$where = "1";
 	}
 	
-	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table ".
-		"WHERE $where ORDER BY date LIMIT 0,1";
+	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix 
+			FROM $table 
+			WHERE $where 
+			ORDER BY date LIMIT 0,1";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
 		$date_premier = $row['date_unix'];
 	}
 
-	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table ".
-		"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date";
+	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix, visites 
+			FROM $table 
+			WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) 
+			ORDER BY date";
 	$result=spip_query($query);
 
 	while ($row = spip_fetch_array($result)) {
@@ -200,15 +194,13 @@ if (!$origine) {
 // add. koak 
 	$date_deb_fr=date('d/m/Y', $date_debut);
 		echo "<div class='verdana2'>Stat. depuis le $date_deb_fr";
-		if ($id_article)
-			{
+		if ($id_article) {
 			echo "... (Art. Edité le $date_edit";
-			if ($date_redac>0)
-				{ 
+			if ($date_redac>0) { 
 				echo " - Redac. le $date_redac";
-				}
-			echo ")";
 			}
+			echo ")";
+		}
 		echo "</div><br />";
 // fin add. koak
 		
@@ -225,16 +217,7 @@ if (!$origine) {
 				     "border='0' valign='center'",
 				     _T('info_zoom'). '+'), "&nbsp;";
 	
-		/*
-		if ($spip_svg_plugin == 'oui') {
-			echo "<div>";
-			echo "<object data='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours' width='450' height='310' type='image/svg+xml'>";
-			echo "<embed src='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours'  width='450' height='310' type='image/svg+xml' />";
-			echo "</object>";
-			echo "</div>";
-		} 
-		else {
-		*/
+
 			echo "<table cellpadding=0 cellspacing=0 border=0><tr>",
 			  "<td background='", _DIR_IMG_PACK, "fond-stats.gif'>";
 			echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
@@ -469,9 +452,14 @@ if (!$origine) {
 		echo "<span class='verdana2'><b>"._T('info_visites_par_mois')."</b></span>";
 
 		echo "<div align='left'>";
-		///////// Affichage par mois
-		$query="SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(visites) AS total_visites  FROM $table ".
-			"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY) GROUP BY date_unix ORDER BY date";
+		
+		## Affichage par mois
+		$query="SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, 
+				SUM(visites) AS total_visites  
+				FROM $table 
+				WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY) 
+				GROUP BY date_unix 
+				ORDER BY date";
 		$result=spip_query($query);
 		
 		$i = 0;

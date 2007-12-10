@@ -8,6 +8,9 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
+'abrv_administrateur' => 'Admin.', ## 1.53
+'abrv_redacteur' => 'redac.', ## 1.53
+'abrv_visiteur' => 'Visit.', ## 1.53
 'activite_du_jour' => 'Actividad del d&iacute;a',
 'afficher_stats_art' => 'Mostrar estad&iacute;sticas del Art&iacute;culo',
 'article_inexistant' => ':: <i>Art&iacute;culo inexistente</i> ::',
@@ -28,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'entete_tableau_art_jour' => '<b>@nb_art_visites_jour@ Art&iacute;culos visitados</b>, 
-								o "apuntados", <b>hoy @aff_date_now@</b>',
+								o "apuntados"<b> @aff_date_now@</b>',
 'entete_tableau_art_hier' => '<b>@nb_art_visites_jour@ Art&iacute;culos visitados</b>, 
 								o "apuntados", <b>ayer @aff_date_now@</b>',
 'entete_tableau_mois' => '<i><b>Para informaci&oacute;n ... en cifras !</b></i><br />Las visitas de 18 meses.',
@@ -42,14 +45,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // H
 'huit_derniers_jours' => 'Los 8 &uacute;ltimos d&iacute;as ...',
+'haut_page' => 'Haut de page', ## 1.53
 
 // I
 'info_colonnes_topten' => 'Info columnas tablas:<br />
-							1 - Num. art&iacute;culo.<br />
-							2 - T&iacute;tulo art&iacute;culo.<br />
-							..3 - Total visitas del periodo.<br />
-							..4 - M&aacute;ximo visitas (1 d&iacute;a) del periodo.<br />
-							5 - Total visitas del art&iacute;culo.',
+							A - Num. art&iacute;culo.<br />
+							B - T&iacute;tulo art&iacute;culo.<br />
+							C - Total visitas del periodo.<br />
+							D - M&aacute;ximo visitas (1 d&iacute;a) del periodo.<br />
+							E - Total visitas del art&iacute;culo.',
 
 // J
 'jour' => 'D&iacute;a',
@@ -84,11 +88,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'popularite' => 'Poblac.',
 
 //R
-'repartition_visites_secteurs' => 'Reparto de las Visitas por Sectores (p&aacute;ginas art&iacute;culos vistas)',
+'repartition_visites_secteurs' => 'Visitas por Sectores del D&iacute;a 
+									(p&aacute;ginas art&iacute;culos vistas)', ## 1.53
 
 // S
 's' => 's',
-'signature_plugin' => '<b>Actividad del D&iacute;a v. 1.52</b><br />(10/04 - 08/07)<br />
+'signature_plugin' => '<b>Actividad del D&iacute;a v. 1.53</b><br />(10/04 - 12/07)<br />
 						Peque&ntilde;o gadget ... para ver las visitas del sitio.<br />
 						Por Scoty - <a href=\'http://www.koakidi.com\'>
 						koakidi.com</a><br />
@@ -99,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'stats_actives_' => 'Estad&iacute;sticas activas ...',
 
 // T
+'telechargements_dpt' => 'Descargas :', ##1.53
 'title_vers_page_graph' => 'Hacia la p&aacute;gina de estad&iacute;sticas gr&aacute;ficas de SPIP',
 'title_vers_popup_graph' => 'Stat gr&aacute;fica en Popup',
 'titre_actijour' => 'Actividad del d&iacute;a',
@@ -113,7 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'visites_jour' => 'v. d&iacute;a', // hacer corto - faire court
 'visites' => 'Visitas',
 'voir' => 'ver',
-'voir_gafospip' => 'Ver p&aacute;ge GAFoSPIP',
+#'voir_gafospip' => 'Ver p&aacute;ge GAFoSPIP',##1.53
+'voir_plugin' => 'Ver p&aacute;ge : ', ## 1.53
 'voir_suivi_forums' => 'Ver p&iacute;gina Seguimiento Foros',
 'voir_suivi_petitions' => 'Ver p&iacute;gina Seguimiento Peticiones',
 

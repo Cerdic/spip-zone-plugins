@@ -1,12 +1,15 @@
 <?php
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// actijour 1.52 - 08/2007
+// actijour 1.53 - 12/2007
 // "... et comme disait geraldine : cause mieux la france Scoty !"
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
+'abrv_administrateur' => 'Admin.', ## 1.53
+'abrv_redacteur' => 'redac.', ## 1.53
+'abrv_visiteur' => 'Visit.', ## 1.53
 'activite_du_jour' => 'Activit&eacute du jour',
 'afficher_stats_art' => 'Afficher stats de l\'Article',
 'article_inexistant' => ':: <i>Article inexistant</i> ::',
@@ -27,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'entete_tableau_art_jour' => '<b>@nb_art_visites_jour@ Articles visit&eacute;s</b>, 
-								ou "point&eacute;s", <b>aujourd\'hui @aff_date_now@</b>',
+								ou "point&eacute;s"<b> @aff_date_now@</b>',
 'entete_tableau_art_hier' => '<b>@nb_art_visites_jour@ Articles visit&eacute;s</b>, 
 								ou "point&eacute;s", <b>hier @aff_date_now@</b>',
 'entete_tableau_mois' => '<i><b>Pour info ... en chiffres !</b></i><br />Les visites sur 18 mois.',
@@ -41,14 +44,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // H
 'huit_derniers_jours' => 'Les 8 derniers jours ...',
+'haut_page' => 'Haut de page', ## 1.53
 
 // I
 'info_colonnes_topten' => 'Info colonnes tableaux :<br />
-							1 - Num. article.<br />
-							2 - Titre article.<br />
-							..3 - Total visites de la p&eacute;riode.<br />
-							..4 - Maximum visites (1 jour) de la p&eacute;riode.<br />
-							5 - Total visites de l\'article.',
+							A - Num. article.<br />
+							B - Titre article.<br />
+							C - Total visites de la p&eacute;riode.<br />
+							D - Maximum visites (1 jour) de la p&eacute;riode.<br />
+							E - Total visites de l\'article.',
 
 // J
 'jour' => 'Jour',
@@ -83,11 +87,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'popularite' => 'Popul.',
 
 //R
-'repartition_visites_secteurs' => 'R&eacute;partitions des Visites par Secteurs (pages articles vues)',
+'repartition_visites_secteurs' => 'Visites par Secteurs/rubriques du jour (pages articles vues)', ## 1.53
 
 // S
 's' => 's',
-'signature_plugin' => '<b>Activit&eacute; du Jour v. 1.52</b><br />(10/04 - 08/07)<br />
+'signature_plugin' => '<b>Activit&eacute; du Jour v. 1.53</b><br />(10/04 - 12/07)<br />
 						Petit gadget ... pour voir autrement les visites.<br />
 						Par Scoty - <a href=\'http://www.koakidi.com\'>koakidi.com</a><br />
 						<br />Ce n\'est pas indispensable !<br />Mais bon ... !',
@@ -97,12 +101,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'stats_actives_' => 'Stats actives ...',
 
 // T
+'telechargements_dpt' => 'T&eacute;l&eacute;chargements :', ## 1.53
 'title_vers_page_graph' => 'Vers page stats graphique SPIP',
 'title_vers_popup_graph' => 'Stat graphique en Popup',
 'titre_actijour' => 'Activit&eacute; du jour',
 'titre_article' => 'Titre article',
-'top_ten_article_8_j' => 'TopTen article sur 8 jours',
-'top_ten_article_30_j' => 'TopTen article sur 30 jours',
+'top_ten_article_8_j' => 'TopTen articles sur 8 jours',
+'top_ten_article_30_j' => 'TopTen articles sur 30 jours',
 'top_ten_article_gen' => 'TopTen Articles g&eacute;n&eacute;ral',
 'total_visites' => 'TT Vis.',
 
@@ -110,7 +115,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'visites_jour' => 'v. jour', // faire court
 'visites' => 'Visites',
 'voir' => 'voir',
-'voir_gafospip' => 'Voir page GAFoSPIP',
+#'voir_gafospip' => 'Voir page GAFoSPIP',##1.53
+'voir_plugin' => 'Voir page : ', ## 1.53
 'voir_suivi_forums' => 'Voir page Suivi Forums',
 'voir_suivi_petitions' => 'Voir page Suivi P&eacute;titions',
 
