@@ -29,15 +29,18 @@ function cron_comarquage_update_xml($t){
 		$table = preg_files(_DIR_CACHE._DIR_CACHE_COMARQUAGE_XML, '[.]*\.xml$');
 		$time = time();
 		foreach ($table as $file){
-	    if ( ($time - filemtime($file)) >$GLOBALS['meta']['comarquage_local_refresh']) {
-	    	$file_liste[] = $file;
-	    }
+			if ( (count($file_liste)<1000)
+			 && (($time - filemtime($file)) >$GLOBALS['meta']['comarquage_local_refresh'])
+			) {
+				$file_liste[] = $file;
+			}
 		}
 		if (count($file_liste)){
 			ecrire_meta('comarquage_xml_to_update',serialize($file_liste));
 			ecrire_metas();
 			spip_log("[comarquage] ".count($file_liste)." fichiers a mettre a jour ...");
-			return (0 - $t); // revenir ...
+			//return (0 - $t); // revenir ...
+			return 1; // fini pour cette fois
 		}
 		else {
 			effacer_meta('comarquage_xml_to_update');
@@ -73,7 +76,7 @@ function cron_comarquage_update_xml($t){
 		ecrire_metas();
 		spip_log("[comarquage] ".count($file_liste)." fichiers restant a mettre a jour ...");
 		//return (0 - $t); // revenir ...
-		return 1; // fini
+		return 1; // fini pour cette fois
 	}
 	else {
 		effacer_meta('comarquage_xml_to_update');
