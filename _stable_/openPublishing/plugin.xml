@@ -43,7 +43,7 @@ _ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 		
 		{{feuille de style : }} attention, il <b>faut</b> copier les styles du plugin dans <b>votre</b> feuille de style<br />
 	</description>
-	<lien>[Documentation->http://edd.lautre.net/wiki], et [Configuration->.?exec=cfg&cfg=openPublishing]</lien>
+	<lien>[Documentation->http://edd.lautre.net/wiki], et [Configuration->.?exec=cfg&amp;cfg=openPublishing]</lien>
 	<prefix>op</prefix>
 	<options> <!-- fichier charge a chaque hit -->
 		op_options.php
