@@ -1,42 +1,22 @@
 #CACHE{0}
-[(#REM) titre=xspf]
-[(#REM) icone=css/_img/xifish_icone.gif]
+<!-- icone=css/_img/xifish_icone.gif -->
+
 [(#SET{logo, <img src='#DOSSIER_SQUELETTE/../css/_img/xifish.gif' width='64' height='64' alt='xifish' style="float:#LANG_RIGHT;" /> })]
-<!-- descriptif= [(#GET{logo})]
-<h4>Configuration du plugin xspf</h4>
-<p>Ici vous pouvez configurer les diff&eacute;rents options de chacun des lecteurs.</p>
-<p><strong>Lecteurs de <a href="http://musicplayer.sourceforge.net/">XSPF Web Music Player</a></strong>
-- Music Player
-- Slim Player
-- Button Player</p>
-</p>
-<p><strong>Lecteurs de <a href="http://www.jeroenwijering.com/">Jeroen Wijering</a></strong>
-- Rotator
-- Media Player
-- Flash Video Player</p>
-<p><small>Attention, la licence de ces trois lecteurs est semi-commerciale, c&rsquo;est pourquoi ils ne sont pas inclus dans cette contribution. 
-Vous &ecirc;tes libres de les installer selon vos convictions et nous ne pouvons &ecirc;tre tenus responsables du non-respect de ces licences.</small>
-</p>
-En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>
--->
 
-[(#REM) titre=XSPF plugin]
+<!-- descriptif= [(#GET{logo})] <:xspf:description_xspf:> -->
 
-[(#EVAL{defined('_DIR_PLUGIN_JQUERYP')}|?{' ',''})
-	[(#JQUERY_PLUGIN{ui.tabs})]
-	[(#JQUERY_PLUGIN_THEME{jqueryp.tabs.css})]
-	<script>
-		$(document).ready(function(){
-		  $("#mestabulations > ul").tabs();
-		});
-	</script>
-]
+<!-- titre=XSPF plugin -->
+<!-- nom=xspf -->
 
-
+<!-- liens*=xspf_flvplayer -->
+<!-- liens*=xspf_mediaplayer -->
+<!-- liens*=xspf_musicplayer -->
+<!-- liens*=xspf_rotator -->
   
+ 
+<:xspf:description_xspf_lecteurs:>
+ 
 <form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
-
-[(#REM) titre=XSPF plugin]
 
 <fieldset>
 	<h4><:xspf:wmode:></h4>
@@ -49,40 +29,6 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 	<label for="jwlogo"><a href="#" title="<:xspf:jwlogo:> - <:xspf:desc_jwlogo:>"><:xspf:jwlogo:></a></label>
 	<input type="text" name="jwlogo" class="forml" style="width:200px;display:inline" id="jwlogo" value="#ENV{jwlogo}" /> <i>URL</i>
 </fieldset>
-
-<div id="mestabulations">
-	<ul>
-		<li><a href="#fragment-1"><span>MUSICPLAYER</span></a></li>
-		<li><a href="#fragment-2"><span>JW ROTATOR</span></a></li>
-		<li><a href="#fragment-3"><span>JW MEDIAPLAYER</span></a></li>
-		<li><a href="#fragment-4"><span>JW FLVPLAYER</span></a></li>
-	</ul>
-
-	[(#REM) ------------- MUSICPLAYER / SLIMPLAYER / BUTTONPLAYER --------------- ]
-
-	<div id="fragment-1">
-		<INCLURE{fond=fonds/xspf_musicplayer}>
-	</div>
-
-	[(#REM) ------------------------ JW ROTATOR ------------------------ ]
-
-	<div id="fragment-2">
-		<INCLURE{fond=fonds/xspf_jw_rotator}>
-	</div>
-	
-	[(#REM) ------------------------ JW MEDIAPLAYER ------------------------ ]
-
-	<div id="fragment-3">
-		<INCLURE{fond=fonds/xspf_jw_mediaplayer}>
-	</div>
-
-	[(#REM) ------------------------ JW FLVPLAYER ------------------------ ]
-
-	<div id="fragment-4">
-		<INCLURE{fond=fonds/xspf_jw_flvplayer}>
-	</div>
-
-</div>
 
 	<input type="submit" class="fondo" name="_cfg_ok" value="<:xspf:OK:>" />
 	<input type="reset" class="fondo" value="<:xspf:Reset:>" />

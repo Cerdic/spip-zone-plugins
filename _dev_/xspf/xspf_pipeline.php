@@ -56,7 +56,6 @@ function xspf_header_prive($texte) {
 						pick.css('opacity', 0.25);
 						$(selected = this).css('opacity', 0.75).removeClass('colorwell-selected');
 					});
-				$('#container-1').tabs();
 			});
 			</script>\n";
 	}

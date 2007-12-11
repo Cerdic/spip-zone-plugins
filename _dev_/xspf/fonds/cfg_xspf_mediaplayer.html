@@ -1,4 +1,19 @@
+#CACHE{0}
+<!-- titre=XSPF Media Player -->
+<!-- icone=css/_img/xifish_icone.gif -->
+
+<!-- nom=xspf -->
+<!-- onglet=non -->
+
+<!-- liens*=xspf -->
+<!-- liens*=xspf_flvplayer -->
+<!-- liens*=xspf_musicplayer -->
+<!-- liens*=xspf_rotator -->
+
 [(#CHEMIN{lib/jw_media_player/mediaplayer.swf}|?{' ',''})
+
+<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
+
 	<fieldset>
 		<legend><:xspf:conf_jw_mpl:></legend>
 		
@@ -150,7 +165,13 @@
 		<label for="mpljavascriptid"><a href="#mpljavascriptid" title="<:xspf:javascriptid:> - <:xspf:desc_javascriptid:>"><:xspf:javascriptid:></a></label>&nbsp;
 		<input type="text" name="mpljavascriptid" class="forml" style="width:200px;display:inline" id="mpljavascriptid" value="#CONFIG{xspf/mpljavascriptid}" />
 				
-	</fieldset>]
+	</fieldset>
+
+	<input type="submit" class="fondo" name="_cfg_ok" value="<:xspf:OK:>" />
+	<input type="reset" class="fondo" value="<:xspf:Reset:>" />
+</form>	
+	
+]
 	
 [(#CHEMIN{lib/jw_media_player/mediaplayer.swf}|?{'',' '})
 

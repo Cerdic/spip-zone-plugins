@@ -1,3 +1,18 @@
+#CACHE{0}
+<!-- titre=XSPF Music Player -->
+<!-- icone=css/_img/xifish_icone.gif -->
+
+<!-- nom=xspf -->
+<!-- onglet=non -->
+
+<!-- liens*=xspf -->
+<!-- liens*=xspf_flvplayer -->
+<!-- liens*=xspf_mediaplayer -->
+<!-- liens*=xspf_rotator -->
+
+
+<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
+
 <fieldset>
 		<legend><:xspf:conf_msc:></legend>
 		
@@ -85,3 +100,7 @@
 		</select>
 		
 	</fieldset>
+
+	<input type="submit" class="fondo" name="_cfg_ok" value="<:xspf:OK:>" />
+	<input type="reset" class="fondo" value="<:xspf:Reset:>" />
+</form>

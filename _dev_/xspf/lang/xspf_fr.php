@@ -1,6 +1,33 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+// description du plugin
+'description_xspf' => '
+<h4>Configuration du plugin xspf</h4>
+<p>Ici vous pouvez configurer les diff&eacute;rents options de chacun des lecteurs.</p>
+En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>
+',
+
+'description_xspf_lecteurs' => '
+Lecteurs de <a href="http://musicplayer.sourceforge.net/">XSPF Web Music Player</a>
+<ul>
+<li>Music Player</li>
+<li>Slim Player</li>
+<li>Button Player</li>
+</ul>
+Lecteurs de <a href="http://www.jeroenwijering.com/">Jeroen Wijering</a>
+<ul>
+<li>Rotator</li>
+<li>Media Player</li>
+<li>Flash Video Player</li>
+</ul>
+
+<p><small>Attention, la licence de ces trois lecteurs est semi-commerciale, c&rsquo;est pourquoi ils ne sont pas inclus dans cette contribution. 
+Vous &ecirc;tes libres de les installer selon vos convictions et nous ne pouvons &ecirc;tre tenus responsables du non-respect de ces licences.</small>
+</p>
+',
+
+
 //page d\'affichage de la configuration du plugin
 'width' => 'Largeur',
 'height' => 'Hauteur',

@@ -1,4 +1,19 @@
+#CACHE{0}
+<!-- titre=XSPF FLV Player -->
+<!-- icone=css/_img/xifish_icone.gif -->
+
+<!-- nom=xspf -->
+<!-- onglet=non -->
+
+<!-- liens*=xspf -->
+<!-- liens*=xspf_mediaplayer -->
+<!-- liens*=xspf_musicplayer -->
+<!-- liens*=xspf_rotator -->
+
 [(#CHEMIN{lib/jw_flv_player/flvplayer.swf}|?{' ',''})
+
+<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
+
 	<fieldset>
 		<legend><:xspf:conf_jw_flp:></legend>
 		
@@ -142,7 +157,12 @@
 		<p><label><a href="#flppostrolllink" title="<:xspf:postrolllink:> - <:xspf:desc_postrolllink:>"><:xspf:postrolllink:></a></label>&nbsp;
 		<input type="text" name="flppostrolllink" class="forml" style="width:200px;display:inline" id="flppostrolllink" value="#CONFIG{xspf/flppostrolllink}" /> <i>URL</i></p>
 		
-	</fieldset>]
+	</fieldset>
+
+	<input type="submit" class="fondo" name="_cfg_ok" value="<:xspf:OK:>" />
+	<input type="reset" class="fondo" value="<:xspf:Reset:>" />
+</form>	
+]
 
 [(#CHEMIN{lib/jw_flv_player/flvplayer.swf}|?{'',' '})
 [(#CONFIG{version_installee}|>={1.941}|?{' ',''})
