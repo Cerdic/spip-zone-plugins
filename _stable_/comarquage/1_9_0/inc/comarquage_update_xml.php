@@ -72,7 +72,8 @@ function cron_comarquage_update_xml($t){
 		ecrire_meta('comarquage_xml_to_update',serialize($file_liste));
 		ecrire_metas();
 		spip_log("[comarquage] ".count($file_liste)." fichiers restant a mettre a jour ...");
-		return (0 - $t); // revenir ...
+		//return (0 - $t); // revenir ...
+		return 1; // fini
 	}
 	else {
 		effacer_meta('comarquage_xml_to_update');

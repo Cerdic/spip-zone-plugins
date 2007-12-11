@@ -11,7 +11,7 @@
  */
 
 function comarquage_taches_generales_cron($taches_generales){
-	$taches_generales['comarquage_update_xml'] = 24*3600; // mettre a jour une fois par jour
+	$taches_generales['comarquage_update_xml'] = 600; // mettre a jour une fois par heure
 	return $taches_generales;
 }
 
