@@ -183,9 +183,12 @@ function comarquage_prepare_parametres_cache(& $parametres,$url_base){
 // lire le fichier xml parse en cache
 function & comarquage_lire_cache($parametres) {
 	$fichier = $parametres['cache_full_path'];
-	if (file_exists($fichier) &&
-		filemtime($fichier) > filemtime($parametres['xml_full_path']) &&
-		filemtime($fichier) > filemtime(dirname($parametres['xsl_full_path']))) {
+	if (file_exists($fichier) 
+		&& ($t = filemtime($fichier))
+		&& (time()-$t < $GLOBALS['meta']['comarquage_local_timeout'])
+		&& ($t > filemtime($parametres['xml_full_path']))
+		&& ($t > filemtime(dirname($parametres['xsl_full_path'])))
+		) {
 		
 		$ma_page = "";
 		if (lire_fichier ($fichier, $ma_page))
