@@ -74,17 +74,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'numero_' => 'n&uacute;mero: &nbsp;',
 'numero_court' => 'n°',
 
+// O
+'onglet_actijour_hier' => 'Ayer', ## 1.53
+'onglet_actijour_pg' => 'Actividad del d&iacute;a', ## 1.53
+'onglet_actijour_prev' => 'pr&eacute;visions', ## 1.53-> translate
+'onglet_actijour_top' => 'TopTen', ## 1.53
+
 // P
-'page_activite' => 'Actividad del d&iacute;a',
+#'page_activite' => 'Actividad del d&iacute;a',## 1.53
 'pages_article_vues' => 'P&aacute;ginas \'Art&iacute;culo\' Vistas',
 'pages_art_cumul_jour' => 'd&iacute;a: <b>@cumul_vis_art_jour@</b> p.',
 'pages_art_moyenne_jour' => 'Son <b>@moy_pages_jour@</b> p./visita',
 'pages_global_cumul_jour' => 'Global: <b>@global_pages_stats@</b> p.',
 'pages_global_moyenne_jour' => 'Son <b>@moy_pag_vis@</b> p./visita',
-'page_hier' => 'Ayer',
+#'page_hier' => 'Ayer',## 1.53
 'page_phpinfo' => 'P&aacute;gina phpinfo',
 'pied_tableau_mois' => '* no toma en cuenta la jornada actual.',
-'page_topten' => 'Pag. TopTen',
+#'page_topten' => 'Pag. TopTen',## 1.53
 'popularite' => 'Poblac.',
 
 //R
@@ -118,6 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // V
 'visites_jour' => 'v. d&iacute;a', // hacer corto - faire court
 'visites' => 'Visitas',
+'depuis_date_visites_' => 'Depuis @heure@ (@date@), @nb_visite@ Visites', ## 1.53 translate
 'voir' => 'ver',
 #'voir_gafospip' => 'Ver p&aacute;ge GAFoSPIP',##1.53
 'voir_plugin' => 'Ver p&aacute;ge : ', ## 1.53

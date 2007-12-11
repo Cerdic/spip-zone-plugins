@@ -160,10 +160,12 @@ function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art) {
 
 	// bouton relance brut de la page
 	// en attendant de passer a jquery !
-	$aff.= "<div class='bouton_maj'>\n"
-		. "<a href='".generer_url_ecrire("actijour_pg")."'>"
-		. http_img_pack('puce-blanche.gif','ico','',_T('acjr:mise_a_jour'))."</a>\n"
-		. "</div>\n";
+	if($date_jour == date('Y-m-d', mktime(0, 0, 0, date("m"), date("d"), date("Y")))) {
+		$aff.= "<div class='bouton_maj'>\n"
+			. "<a href='".generer_url_ecrire("actijour_pg")."'>"
+			. http_img_pack('puce-blanche.gif','ico','',_T('acjr:mise_a_jour'))."</a>\n"
+			. "</div>\n";
+	}
 	
 	// texte entete
 	if(empty($date_maj_art)) {
@@ -696,12 +698,12 @@ function topten_articles_global() {
 Telechargement de fichiers du jour (via DW2)
 \*---------------------------------------------------------------------------*/
 function telechargement_dw2_jour($date) {
-	$pluged= unserialize($GLOBALS['meta']['plugin']);
+	$plugins= unserialize($GLOBALS['meta']['plugin']);
 	$aff='';
 	
 	# si DW2 present ?
-	if(is_array($pluged['DW2'])) {
-		$icone = "<img src='"._DIR_PLUGINS.$pluged['DW2']['dir']."/img_pack/telech.gif' border='0'>";
+	if(is_array($plugins['DW2'])) {
+		$icone = "<img src='"._DIR_PLUGINS.$plugins['DW2']['dir']."/img_pack/telech.gif' border='0'>";
 		$url = generer_url_ecrire("dw2_admin");
 		$plugin='DW2';
 		

@@ -6,7 +6,7 @@
 | H. AROUX . Scoty . koakidi.com
 | Script certifie KOAK2.0 strict, mais si !
 +--------------------------------------------+
-| Stats hier : articles, referers, forums, petitions.
+| Stats de la veille : articles, referers, forums, petitions.
 +--------------------------------------------+
 */
 
@@ -106,10 +106,7 @@ Telechargement de fichiers du jour (via DW2)
 /*---------------------------------------------------------------------------*\
 scoty signe son mefait
 \*---------------------------------------------------------------------------*/
-	echo "<p class='space_10'></p>";
-	debut_boite_info();
-		echo _T('acjr:signature_plugin')."\n";
-	fin_boite_info();
+	echo signature_plugin();
 
 
 
@@ -119,12 +116,7 @@ debut_droite();
 /*---------------------------------------------------------------------------*\
 Onglets pages sup.
 \*---------------------------------------------------------------------------*/
-echo debut_onglet().
-onglet(_T('acjr:page_activite'), generer_url_ecrire("actijour_pg"), 'page_activite', '', _DIR_PLUGIN_ACTIJOUR."img_pack/activ_jour.gif").
-onglet(_T('acjr:page_hier'), generer_url_ecrire("actijour_hier"), 'page_hier', 'page_hier', _DIR_PLUGIN_ACTIJOUR."img_pack/activ_hier.gif").
-onglet(_T('acjr:page_topten'), generer_url_ecrire("actijour_top"), 'page_topten', '', "article-24.gif").
-fin_onglet();
-
+	echo onglets_actijour(_request('exec'));
 
 
 /*---------------------------------------------------------------------------*\
@@ -146,7 +138,7 @@ Affichage des referers du jour (orig. spip inc/statistiques)
 
 
 # retour haut de page
-bouton_retour_haut();
+echo bouton_retour_haut();
 
 echo fin_gauche(), fin_page();
 

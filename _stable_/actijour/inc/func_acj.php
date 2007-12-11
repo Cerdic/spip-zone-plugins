@@ -43,14 +43,38 @@ function entete_page($titre) {
 
 # bouton retour haut de page
 function bouton_retour_haut() {
-	echo "<div style='float:right; margin-top:6px;' class='icone36' title='"._T('acjr:haut_page')."'>\n";
-	echo "<a href='#haut_page'>";
-	echo "<img src='"._DIR_IMG_PACK."spip_out.gif' border='0' align='absmiddle' />\n";
-	echo "</a></div>";
-	echo "<div style='clear:both;'></div>\n";
+	return $aff= "<div style='float:right; margin-top:6px;' class='icone36' title='"
+				. _T('acjr:haut_page')."'>\n"
+				. "<a href='#haut_page'>"
+				. "<img src='"._DIR_IMG_PACK."spip_out.gif' border='0' align='absmiddle' />\n"
+				. "</a></div>"
+				. "<div style='clear:both;'></div>\n";
 }
 
+# generer liste des onglets
+function onglets_actijour($actif) {
+	# script => icone
+	$pages=array('actijour_pg'=>_DIR_PLUGIN_ACTIJOUR."img_pack/activ_jour.gif",
+				'actijour_hier'=>_DIR_PLUGIN_ACTIJOUR."img_pack/activ_hier.gif",
+				'actijour_top'=>"article-24.gif",
+				'actijour_prev'=>""
+				);
+	$res='';
+	foreach($pages as $exec => $icone) {
+		$res.= onglet(_T('acjr:onglet_'.$exec),generer_url_ecrire($exec), $exec,($actif==$exec?$exec:''),$icone);
+	}
+	$aff=debut_onglet().$res.fin_onglet();
+	return $aff;
+}
 
+# signature plugin
+function signature_plugin() {
+	$aff="<p class='space_10'></p>"
+		. debut_boite_info(true)
+		. _T('acjr:signature_plugin')."\n"
+		. fin_boite_info(true);
+	return $aff;
+}
 
 
 # lister rubrique/secteur => visites
@@ -139,6 +163,47 @@ function ante_date_jour($moins,$formater=false) {
 		$ante = mktime(0, 0, 0, date("m"), date("d")-$moins, date("Y"));
 	}
 	return $ante;
+}
+
+
+/*---------------------------------------------------------------------------*\
+recense les sessions tmp/visites/ --> visites en attente de traitement
+\*---------------------------------------------------------------------------*/
+function calcul_prevision_visites() {
+	# requis spip
+	include_spip('inc/visites');
+	
+	# h. issue de ecrire/inc/visites.php : calculer_visites()
+	// Initialisations
+	$visites = ''; # visites du site
+	$visites_a = array(); # tableau des visites des articles
+	$referers = array(); # referers du site
+	$referers_a = array(); # tableau des referers des articles
+	$articles = array(); # articles vus dans ce lot de visites
+
+	// charger un certain nombre de fichiers de visites,
+	// et faire les calculs correspondants
+
+	# h. passe à 5 minutes
+	#Traiter jusqu'a 100 sessions datant d'au moins "5" minutes
+	$sessions = preg_files(sous_repertoire(_DIR_TMP, 'visites'));
+	$compteur = 100;
+	$date_init = time()-30*60;
+
+	foreach ($sessions as $item) {
+		$tps_file=@filemtime($item);
+		if ($tps_file < $date_init) {
+
+			compte_fichier_visite($item,
+				$visites, $visites_a, $referers, $referers_a, $articles);
+
+			if (--$compteur <= 0)
+				break;
+		}
+		$temps[]=$tps_file;
+	}
+	
+	return array($temps,$visites,$visites_a);
 }
 
 

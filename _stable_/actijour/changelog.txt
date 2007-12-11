@@ -2,6 +2,13 @@
 
 *h ........... --> 1.53
 
+*h 11/12
+.. onglets --> fonctions
+.. ajout exec/actijour_prev
+	-> page prevision visites (analyse sessions dans tmp/visites/)
+	Actualise lang/ .. func_acj
+	Onglet suppl.
+
 *h.15/11 -> 10/12
 .. creer inc/affiche_blocs.php :
 	-> contient les fonctions correspondantes aux bloc d'infos de actijour_pg ; actijour_hier ; actijour_top

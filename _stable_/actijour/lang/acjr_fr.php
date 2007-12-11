@@ -73,17 +73,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'numero_' => 'num&eacute;ro : &nbsp;',
 'numero_court' => 'n°',
 
+// O
+'onglet_actijour_hier' => 'Hier', ## 1.53
+'onglet_actijour_pg' => 'Activit&eacute du jour', ## 1.53
+'onglet_actijour_prev' => 'pr&eacute;visions', ## 1.53
+'onglet_actijour_top' => 'TopTen', ## 1.53
+
 // P
-'page_activite' => 'Activit&eacute du jour',
+#'page_activite' => 'Activit&eacute du jour',##1.53
 'pages_article_vues' => 'Pages \'Article\' Vues',
 'pages_art_cumul_jour' => 'jour : <b>@cumul_vis_art_jour@</b> p.',
 'pages_art_moyenne_jour' => 'Soit <b>@moy_pages_jour@</b> p./visite',
 'pages_global_cumul_jour' => 'Global : <b>@global_pages_stats@</b> p.',
 'pages_global_moyenne_jour' => 'Soit <b>@moy_pag_vis@</b> p./visite',
-'page_hier' => 'Hier',
+#'page_hier' => 'Hier',##1.53
 'page_phpinfo' => 'Page phpinfo',
 'pied_tableau_mois' => '* ne tient pas compte de la journ&eacute;e en cours.',
-'page_topten' => 'Page TopTen',
+#'page_topten' => 'Page TopTen',##1.53
 'popularite' => 'Popul.',
 
 //R
@@ -114,6 +120,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // V
 'visites_jour' => 'v. jour', // faire court
 'visites' => 'Visites',
+'depuis_date_visites_' => 'Depuis @heure@ (@date@), @nb_visite@ Visites', ## 1.53
 'voir' => 'voir',
 #'voir_gafospip' => 'Voir page GAFoSPIP',##1.53
 'voir_plugin' => 'Voir page : ', ## 1.53
