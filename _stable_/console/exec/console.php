@@ -5,6 +5,7 @@ function exec_console(){
 	global $connect_id_auteur;
 	global $connect_toutes_rubriques;
 	global $spip_lang_right;
+	include_spip("inc/headers");
 
 	if ($connect_statut == "0minirezo" && $connect_toutes_rubriques) {
 		$liste_auteur_console_active = array();
