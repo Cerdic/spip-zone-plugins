@@ -47,7 +47,7 @@ href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
 
 <BOUCLE_compteur_forum(FORUMS){id_article}></BOUCLE_compteur_forum>
 [(#CONFIG{outils_article/compteur}|?{' ',''})
-#TOTAL_BOUCLE réactions
+[(#TOTAL_BOUCLE|accord_pluriel{r&eacute;action})]
 ]
 <//B_compteur_forum>
 
