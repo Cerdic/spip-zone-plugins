@@ -1,6 +1,7 @@
 <div class="cadre-r categorie">
 	[<h1 class="categorie verdana2 spip_large">(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})</h1>]
-	[<p class="verdana1">(#DESCRIPTIF)</p>]
+	[<p class="verdana1 spip_small">(#DESCRIPTIF)</p>]
+	[<p class="spip">(#TEXTE)</p>]
 </div>
 <B_LesSousCategorie>
 <br />
@@ -12,6 +13,7 @@
 				<BOUCLE_TitreCategorie(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS){id_categorie=#ID_CATEGORIE}{0,1}>
 					<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</a></strong>
 					[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
+					
 				</BOUCLE_TitreCategorie>
 			</li>
 		</BOUCLE_LesSousCategorie>
@@ -29,16 +31,20 @@
 	</div>
 	<table width="100%">
 	<tbody>
-	<tr class="tr_liste">
+	
 		<BOUCLE_LesProduits(SPIP_ECHOPPE_PRODUITS spip_echoppe_categories_produits){id_categorie}>
+			<tr class="tr_liste">
 			<td style="width: 11px;"><div class='etat #STATUT'> </div></td>
 			<td class="arial2">
 				<BOUCLE_LeTitreDuProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS){id_produit}{lang=''}>
 					<strong><a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT})]">[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</a></strong>[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
 				</BOUCLE_LeTitreDuProduit>
 			</td>
+			<td width="80px" class="arial1">XXX en stock</td>
+			<td width="50px" class="arial1">ref</td>
+			</tr>
 		</BOUCLE_LesProduits>
-	</tr>
+	
 	</tbody>
 	</table>
 	<div class="nettoyeur"> </div>

@@ -1,13 +1,13 @@
-<div class="verdana3" style="background: transparent url(../dist/images/racine-site-12.gif) no-repeat scroll left center; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; padding-left: 15px;"><a href="[(#EVAL{echoppe}|generer_url_ecrire)]"><strong><:echoppe:chemin_categorie:></strong></a></div>
+<div class="verdana3" style="background: transparent url(../dist/images/racine-site-12.gif) no-repeat scroll left top;padding-left: 15px;"><a href="[(#EVAL{echoppe}|generer_url_ecrire)]"><strong><:echoppe:chemin_categorie:></strong></a></div>
 <B_CatsALaRacine>
 <ul class="chemin">
-<BOUCLE_CatsALaRacine(SPIP_ECHOPPE_CATEGORIES){id_parent = 0}>
-	<li class="verdana3" style="background: transparent url(../dist/images/secteur-12.gif) no-repeat scroll left center; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; padding-left: 15px;">
+<BOUCLE_CatsALaRacine(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){lang = ""}{par num titre}{id_parent = 0}>
+	<li class="verdana3" style="background: transparent url(../dist/images/secteur-12.gif) no-repeat scroll left top; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; padding-left: 15px; padding-bottom:4px;">
 		<BOUCLE_Titre(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS){id_categorie=#ID_CATEGORIE}{0,1}>[<a href="[(#EVAL{echoppe_categorie}|GENERER_URL_ECRIRE{id_categorie=#ID_CATEGORIE})]" >(#TITRE|couper{100})]</a></BOUCLE_Titre>
 		<B_SousCats>
 		<ul calss="display: #EXPOSER{block,none}">
-		<BOUCLE_SousCats(SPIP_ECHOPPE_CATEGORIES){id_parent = #ID_CATEGORIE}>
-			<li>
+		<BOUCLE_SousCats(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){lang = ""}{id_parent = #ID_CATEGORIE}>
+			<li  style="background: transparent url(../dist/images/secteur-12.gif) no-repeat scroll left center; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; padding-left: 15px;">
 				<BOUCLE_TitreSousCat(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS){id_categorie=#ID_CATEGORIE}{0,1}>[<a href="[(#EVAL{echoppe_categorie}|GENERER_URL_ECRIRE{id_categorie=#ID_CATEGORIE})]" >(#TITRE|couper{100})]</a></BOUCLE_TitreSousCat>
 			</li>
 		</BOUCLE_SousCats>
