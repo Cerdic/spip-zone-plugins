@@ -57,7 +57,7 @@ function onglets_actijour($actif) {
 	$pages=array('actijour_pg'=>_DIR_PLUGIN_ACTIJOUR."img_pack/activ_jour.gif",
 				'actijour_hier'=>_DIR_PLUGIN_ACTIJOUR."img_pack/activ_hier.gif",
 				'actijour_top'=>"article-24.gif",
-				'actijour_prev'=>""
+				'actijour_prev'=>_DIR_PLUGIN_ACTIJOUR."img_pack/acjr_prev.gif"
 				);
 	$res='';
 	foreach($pages as $exec => $icone) {
@@ -188,7 +188,7 @@ function calcul_prevision_visites() {
 	#Traiter jusqu'a 100 sessions datant d'au moins "5" minutes
 	$sessions = preg_files(sous_repertoire(_DIR_TMP, 'visites'));
 	$compteur = 100;
-	$date_init = time()-30*60;
+	$date_init = time()-5*60;
 
 	foreach ($sessions as $item) {
 		$tps_file=@filemtime($item);

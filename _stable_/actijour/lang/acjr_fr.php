@@ -24,6 +24,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_jour_maxi_vis' => 'Le @date_max@ : @visites_max@ vis.',
+'depuis_date_visites_pg' => 'Depuis @heure@ @date@, @nb_visite@ Visites 
+							sur @nb_articles@ articles 
+							(voir Pr&eacute;visions).', ## 1.53
+'depuis_date_visites_prev' => 'Depuis @heure@ @date@, @nb_visite@ visites 
+							sur @nb_articles@ articles.', ## 1.53
 'depuis_le_prim_jour' => 'Depuis le <b>@prim_jour_stats@</b>',
 'dernieres_connections' => 'Derni&egrave;res Connexions*',
 'info_dernieres_connections' => '*Les 20 derni&egrave;res connexions des "Auteurs"',
@@ -53,6 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 							C - Total visites de la p&eacute;riode.<br />
 							D - Maximum visites (1 jour) de la p&eacute;riode.<br />
 							E - Total visites de l\'article.',
+'info_page_actijour_prev' => 'Visites et nombre d\'articles non encore trait&eacute;s
+								par SPIP dans la BDD',
 
 // J
 'jour' => 'Jour',
@@ -93,7 +100,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'popularite' => 'Popul.',
 
 //R
-'repartition_visites_secteurs' => 'Visites par Secteurs/rubriques du jour (pages articles vues)', ## 1.53
+'repartition_visites_secteurs' => 'Visites par Secteurs/rubriques du jour 
+												(pages articles vues)', ## 1.53
 
 // S
 's' => 's',
@@ -120,7 +128,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // V
 'visites_jour' => 'v. jour', // faire court
 'visites' => 'Visites',
-'depuis_date_visites_' => 'Depuis @heure@ (@date@), @nb_visite@ Visites', ## 1.53
 'voir' => 'voir',
 #'voir_gafospip' => 'Voir page GAFoSPIP',##1.53
 'voir_plugin' => 'Voir page : ', ## 1.53

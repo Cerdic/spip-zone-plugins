@@ -84,6 +84,9 @@ include_spip('inc/affiche_blocs');
 	
 	# nbr posts du jour sur vos forum
 	$nbr_post_jour = nombre_posts_forum($date_auj);
+	
+	# les visites non-traitees (tmp/visites)
+	$prev_visites = calcul_prevision_visites();
 /*
 	# nouveaux inscrits visiteur, redacteur, admin
 	$nouveaux_inscrits = inscrit_auteur($date_auj);
@@ -115,7 +118,7 @@ debut_gauche();
 Elements de stats generales : visites, pages, global, moyenne gen.
 \*---------------------------------------------------------------------------*/
 	echo bloc_stats_generales(
-			$global_jour,$date_globaljour,$global_stats,
+			$prev_visites,$global_jour,$date_globaljour,$global_stats,
 			$prim_jour_stats,$nb_jours_stats,
 			$moy_global_stats,
 			$cumul_vis_art_jour,$moy_pages_jour,
@@ -248,7 +251,7 @@ Onglets pages sup.
 /*---------------------------------------------------------------------------*\
 Lister Articles du jour
 \*---------------------------------------------------------------------------*/
-	echo liste_articles_jour($date_auj,$nb_art_visites_jour,$date_maj_art);
+	echo liste_articles_jour($date_auj,$nb_art_visites_jour,$date_maj_art,$prev_visites);
 
 
 /*---------------------------------------------------------------------------*\

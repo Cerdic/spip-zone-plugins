@@ -14,17 +14,32 @@
 Elements de stats generales : visites, pages, global, moyenne gen.
 \*---------------------------------------------------------------------------*/
 function bloc_stats_generales(
-			$global_jour,$date_globaljour,$global_stats,$prim_jour_stats,$nb_jours_stats,
-			$moy_global_stats,$cumul_vis_art_jour,$moy_pages_jour,
-			$global_pages_stats,$moy_pag_vis,$date_max,$visites_max) {
+			$prev_visites,$global_jour,$date_globaljour,$global_stats,
+			$prim_jour_stats,$nb_jours_stats,
+			$moy_global_stats,
+			$cumul_vis_art_jour,$moy_pages_jour,
+			$global_pages_stats,$moy_pag_vis,
+			$date_max,$visites_max
+			) {
+
+	if(is_array($prev_visites)) {
+		if($prev=intval($prev_visites[1])) {
+			$prev = "&nbsp;+ ".$prev;
+		}
+	}
+
 
 	$aff='';
 	
 	$aff.= debut_cadre_relief("statistiques-24.gif",true)
 		. "<span class='verdana3 bold'>"._T('acjr:nombre_visites_')."</span>\n"
 		. "<br /><span class='verdana2'>".$date_globaljour."</span>"
-		. "<div class='cell_info alter-fond'>"._T('acjr:global_vis_jour', array('global_jour'=>$global_jour))."</div>\n"
-		. "<div class='cell_info'>"._T('acjr:global_vis_global', array('global_stats'=>$global_stats))."</div>\n";
+		. "<div class='cell_info alter-fond'>"
+		. _T('acjr:global_vis_jour', array('global_jour'=>$global_jour.$prev))
+		. "</div>\n"
+		. "<div class='cell_info'>"
+		. _T('acjr:global_vis_global', array('global_stats'=>$global_stats))
+		. "</div>\n";
 	
 	$aff.= "<div style='margin-top:8px;'>\n"
 		. "<span class='verdana3 bold'>"._T('acjr:stats_actives_')."</span>\n"
@@ -134,7 +149,7 @@ function auteurs_date_passage() {
 /*---------------------------------------------------------------------------*\
  Lister Articles du jour.
 \*---------------------------------------------------------------------------*/
-function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art) {
+function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art,$prev_visites) {
 	global $couleur_foncee,$couleur_claire;
 	
 	// fixer le nombre de ligne du tableau (tranche)
@@ -174,7 +189,7 @@ function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art) {
 	$aff.= "<div class='verdana3'>"
 		. _T('acjr:entete_tableau_art_jour', array(
 						'nb_art_visites_jour'=>$nb_art_visites_jour, 
-						'aff_date_now'=> '( '.$date_maj_art.' )'))
+						'aff_date_now'=> ' - '.$date_maj_art))
 		. "</div>\n";
 
 	// affichage tableau
@@ -185,10 +200,9 @@ function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art) {
 		$ifond = 0;
 	
 		// Presenter valeurs de la tranche de la requete
-		$aff.= "<div align='center' class='iconeoff' style='clear:both;'>"
-			. "<span class='verdana2 bold'>\n"
+		$aff.= "<div align='center' class='iconeoff verdana2 bold' style='clear:both;'>\n"
 			. tranches_liste_art($nba1,$nb_art_visites_jour,$fl)
-			. "\n</span></div>\n";
+			. "\n</div>\n";
 
 		// tableau
 		$aff.= "<table align='center' border='0' cellpadding='1' cellspacing='1' width='100%'>\n"
@@ -238,6 +252,7 @@ function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art) {
 		$aff.= "<div align='center' class='iconeoff bold' style='clear:both;'>"
 			. _T('acjr:aucun_article_visite')."</div><br />\n";
 	}
+	$aff.= visites_pre_traitement($prev_visites);
 	$aff.= fin_cadre_relief(true);
 	
 	return $aff;
@@ -525,80 +540,31 @@ function visites_mensuelles_chiffres($global_jour) {
 
 
 /*---------------------------------------------------------------------------*\
-signatures petitions du jour
+recense les sessions tmp/visites/ - bloc -> liste_articles_jour()
 \*---------------------------------------------------------------------------*/
-function signatures_petitions_jour($date) {
-	$r=spip_query("SELECT ss.id_article, 
-				COUNT(DISTINCT ss.id_signature) AS nb_sign_pet, sa.titre 
-				FROM spip_signatures ss 
-				LEFT JOIN spip_articles sa ON ss.id_article = sa.id_article 
-				WHERE DATE_FORMAT(ss.date_time,'%Y-%m-%d') = '$date' 
-				GROUP BY ss.id_article"
-				);
+function visites_pre_traitement($prev_visites) {
 
-	$aff = debut_cadre_relief("suivi-petition-24.gif",true)
-		. "<div class='bouton_droite icone36'>\n"
-		. "<a href='".generer_url_ecrire("controle_petition")."' title='"
-		. _T('acjr:voir_suivi_petitions')."'>\n"
-		. http_img_pack('suivi-petition-24.gif','ico','','')."</a>\n"
-		. "</div>\n\n"
-		. "<br /><span class='arial2 bold'>"._T('acjr:signatures_petitions')."</span>\n"
-		. "<div style='clear:both;'></div>\n"
-		. "<ol class='verdana1' style='padding-left:30px;'>\n";
+	$temps=$prev_visites[0];
+	$visites=$prev_visites[1];
+	$visites_a=$prev_visites[2];
 	
-	if (spip_num_rows($r)) {
-		while ($t = spip_fetch_array($r)) {
-			$aff.="<li value='".$t['id_article']."'>"
-				. $t['titre']." : <b>".$t['nb_sign_pet']."</b>"
-				. "</li>\n";
-		}
-	}
-	else {
-		$aff.="<li value='0'>"._T('acjr:aucune_moment')."</li>";
-	}
-	$aff.="</ol>\n";
-	$aff.= fin_cadre_relief(true);
-	return $aff;
-}
-
-
-
-/*---------------------------------------------------------------------------*\
-nombre de message forum public (identif. GAFoSPIP/SPIPBB)
-\*---------------------------------------------------------------------------*/
-function activite_forum_site($nbr_post_jour) {
-
-	$pluged= unserialize($GLOBALS['meta']['plugin']);
+	if(count($temps)) { sort($temps); }
 	
-	if(is_array($pluged['GAF'])) {
-		$icone = "<img src='"._DIR_PLUGINS.$pluged['GAF']['dir']."/img_pack/gaf_ico-24.gif' border='0'>";
-		$url = generer_url_ecrire("gaf_admin");
-		$plugin='GAFoSPIP';
+	$aff='';
+	if($nb_articles = count($visites_a)) {
+		$heure_f = date('H\hi',$temps[0]);
+		$date_f = date('d/m/Y',$temps[0]);
+		
+		$aff.= "<div align='center' class='iconeoff verdana2 bold' style='clear:both;'>\n"
+			. _T('acjr:depuis_date_visites_pg',
+					array(
+						'heure'=>$heure_f,
+						'date'=>$date_f==date('d/m/Y')?'':'('.$date_f.')',
+						'nb_visite'=>$visites,
+						'nb_articles'=>$nb_articles
+						))
+			. "\n</div>\n";
 	}
-	elseif(is_array($pluged['SPIPBB'])) {
-		$icone = "<img src='"._DIR_PLUGINS.$pluged['SPIPBB']['dir']."/img_pack/spipbb-24.png' border='0'>";
-		$url = generer_url_ecrire("spipbb_admin");
-		$plugin='SpipBB';
-	}
-	else {
-		$icone = http_img_pack('suivi-forum-24.gif','ico','','');
-		$url = generer_url_ecrire("controle_forum");
-	}
-	$aff= debut_cadre_relief("forum-public-24.gif",true);
-	$aff.= "<div class='bouton_droite icone36'>\n"
-				. "<a href='".$url."' title='"
-				. ($plugin ? _T('acjr:voir_plugin').$plugin : _T('acjr:voir_suivi_forums'))."'>\n"
-				. $icone."</a>\n"
-				. "</div>\n<br />";
-				
-	// nbr posts du jour sur vos forum
-	if($nbr_post_jour) { $aff.= $nbr_post_jour."&nbsp;"; }
-	else { $aff.= _T('acjr:aucun'); }
-	if($nbr_post_jour>1) { $ps=_T('acjr:s'); }
-	$aff.= _T('acjr:message', array('ps' =>$ps));
-	
-	$aff.= fin_cadre_relief(true);
-	
 	return $aff;
 }
 
@@ -692,6 +658,86 @@ function topten_articles_global() {
 	
 	return $aff;
 } // topten_articles_global
+
+
+/*---------------------------------------------------------------------------*\
+signatures petitions du jour
+\*---------------------------------------------------------------------------*/
+function signatures_petitions_jour($date) {
+	$r=spip_query("SELECT ss.id_article, 
+				COUNT(DISTINCT ss.id_signature) AS nb_sign_pet, sa.titre 
+				FROM spip_signatures ss 
+				LEFT JOIN spip_articles sa ON ss.id_article = sa.id_article 
+				WHERE DATE_FORMAT(ss.date_time,'%Y-%m-%d') = '$date' 
+				GROUP BY ss.id_article"
+				);
+
+	$aff = debut_cadre_relief("suivi-petition-24.gif",true)
+		. "<div class='bouton_droite icone36'>\n"
+		. "<a href='".generer_url_ecrire("controle_petition")."' title='"
+		. _T('acjr:voir_suivi_petitions')."'>\n"
+		. http_img_pack('suivi-petition-24.gif','ico','','')."</a>\n"
+		. "</div>\n\n"
+		. "<br /><span class='arial2 bold'>"._T('acjr:signatures_petitions')."</span>\n"
+		. "<div style='clear:both;'></div>\n"
+		. "<ol class='verdana1' style='padding-left:30px;'>\n";
+	
+	if (spip_num_rows($r)) {
+		while ($t = spip_fetch_array($r)) {
+			$aff.="<li value='".$t['id_article']."'>"
+				. $t['titre']." : <b>".$t['nb_sign_pet']."</b>"
+				. "</li>\n";
+		}
+	}
+	else {
+		$aff.="<li value='0'>"._T('acjr:aucune_moment')."</li>";
+	}
+	$aff.="</ol>\n";
+	$aff.= fin_cadre_relief(true);
+	return $aff;
+}
+
+
+
+/*---------------------------------------------------------------------------*\
+nombre de message forum public (identif. GAFoSPIP/SPIPBB)
+\*---------------------------------------------------------------------------*/
+function activite_forum_site($nbr_post_jour) {
+
+	$pluged= unserialize($GLOBALS['meta']['plugin']);
+	
+	if(is_array($pluged['GAF'])) {
+		$icone = "<img src='"._DIR_PLUGINS.$pluged['GAF']['dir']."/img_pack/gaf_ico-24.gif' border='0'>";
+		$url = generer_url_ecrire("gaf_admin");
+		$plugin='GAFoSPIP';
+	}
+	elseif(is_array($pluged['SPIPBB'])) {
+		$icone = "<img src='"._DIR_PLUGINS.$pluged['SPIPBB']['dir']."/img_pack/spipbb-24.png' border='0'>";
+		$url = generer_url_ecrire("spipbb_admin");
+		$plugin='SpipBB';
+	}
+	else {
+		$icone = http_img_pack('suivi-forum-24.gif','ico','','');
+		$url = generer_url_ecrire("controle_forum");
+	}
+	$aff= debut_cadre_relief("forum-public-24.gif",true);
+	$aff.= "<div class='bouton_droite icone36'>\n"
+				. "<a href='".$url."' title='"
+				. ($plugin ? _T('acjr:voir_plugin').$plugin : _T('acjr:voir_suivi_forums'))."'>\n"
+				. $icone."</a>\n"
+				. "</div>\n<br />";
+				
+	// nbr posts du jour sur vos forum
+	if($nbr_post_jour) { $aff.= $nbr_post_jour."&nbsp;"; }
+	else { $aff.= _T('acjr:aucun'); }
+	if($nbr_post_jour>1) { $ps=_T('acjr:s'); }
+	$aff.= _T('acjr:message', array('ps' =>$ps));
+	
+	$aff.= fin_cadre_relief(true);
+	
+	return $aff;
+}
+
 
 
 /*---------------------------------------------------------------------------*\

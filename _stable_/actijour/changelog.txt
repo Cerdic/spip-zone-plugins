@@ -2,6 +2,10 @@
 
 *h ........... --> 1.53
 
+*h 12/12
+.. affine page actijour_prev
+.. integre visites prev dans actijour_pg
+
 *h 11/12
 .. onglets --> fonctions
 .. ajout exec/actijour_prev

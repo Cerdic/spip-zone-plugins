@@ -51,6 +51,11 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 
 debut_gauche();
 	entete_page(_T('acjr:titre_actijour'));
+	
+	echo "<p class='space_10'></p>";
+	debut_boite_info();
+	echo _T('acjr:info_page_actijour_prev');
+	fin_boite_info();
 
 /*---------------------------------------------------------------------------*\
 scoty signe son mefait
@@ -94,17 +99,22 @@ echo "articles :<br /><pre>"; print_r($temps); echo "</pre>";
 
 	$aff='';
 	
-	if(count($visites_a)) {
+	if($nb_articles = count($visites_a)) {
 		$aff.= debut_cadre_relief("cal-jour.gif",true);
 		
 		$heure_f = date('H\hi',$temps[0]);
 		$date_f = date('d/m/Y',$temps[0]);
 		
 		// nombre de visites 
-			$aff.= "<div align='center' class='iconeoff' style='clear:both;'>"
-				. "<span class='verdana2 bold'>\n"
-				. _T('acjr:depuis_date_visites_',array('heure'=>$heure_f,'date'=>$date_f,'nb_visite'=>$visites))
-				. "\n</span></div>\n";
+		$aff.= "<div align='center' class='iconeoff verdana2 bold' style='clear:both;'>\n"
+			. _T('acjr:depuis_date_visites_prev',
+					array(
+					'heure'=>$heure_f,
+					'date'=>$date_f==date('d/m/Y')?'':'('.$date_f.')',
+					'nb_visite'=>$visites,
+					'nb_articles'=>$nb_articles
+					))
+			. "\n</div>\n";
 		
 		// tableau
 		$aff.= "<table align='center' border='0' cellpadding='1' cellspacing='1' width='100%'>\n"

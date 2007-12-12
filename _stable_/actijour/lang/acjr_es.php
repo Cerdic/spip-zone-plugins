@@ -1,8 +1,7 @@
 <?php
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// actijour 1.5 - dec. 2006
-// "... et comme disait geraldine : cause mieux la france Scoty !"
+// actijour 1.53 - 12/2007
 // Traducción ES, JSJ, Mayo 2007
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -25,6 +24,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_jour_maxi_vis' => 'El @date_max@ : @visites_max@ vis.',
+'depuis_date_visites_pg' => 'Depuis @heure@ @date@, @nb_visite@ Visites 
+							sur @nb_articles@ articles 
+							(voir Pr&eacute;visions).', ## 1.53
+'depuis_date_visites_prev' => 'Depuis @heure@ @date@, @nb_visite@ visites 
+							sur @nb_articles@ articles.', ## 1.53
 'depuis_le_prim_jour' => 'Desde el <b>@prim_jour_stats@</b>',
 'dernieres_connections' => '&Uacute;ltimas Conexiones*',
 'info_dernieres_connections' => '*Las 20 &uacute;ltimas conexiones de los "Autores"',
@@ -54,6 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 							C - Total visitas del periodo.<br />
 							D - M&aacute;ximo visitas (1 d&iacute;a) del periodo.<br />
 							E - Total visitas del art&iacute;culo.',
+'info_page_actijour_prev' => 'Visites et nombre d\'articles non encore trait&eacute;s
+								par SPIP dans la BDD', ## 1.53
 
 // J
 'jour' => 'D&iacute;a',
@@ -75,10 +81,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'numero_court' => 'n°',
 
 // O
-'onglet_actijour_hier' => 'Ayer', ## 1.53
-'onglet_actijour_pg' => 'Actividad del d&iacute;a', ## 1.53
-'onglet_actijour_prev' => 'pr&eacute;visions', ## 1.53-> translate
-'onglet_actijour_top' => 'TopTen', ## 1.53
+'onglet_actijour_hier' => 'Ayer', ## 1.53 ok !
+'onglet_actijour_pg' => 'Actividad del d&iacute;a', ## 1.53 ok !
+'onglet_actijour_prev' => 'pr&eacute;visions', ## 1.53
+'onglet_actijour_top' => 'TopTen', ## 1.53 ok !
 
 // P
 #'page_activite' => 'Actividad del d&iacute;a',## 1.53
@@ -95,7 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //R
 'repartition_visites_secteurs' => 'Visitas por Sectores del D&iacute;a 
-									(p&aacute;ginas art&iacute;culos vistas)', ## 1.53
+									(p&aacute;ginas art&iacute;culos vistas)', ## 1.53 ok !
 
 // S
 's' => 's',
@@ -110,7 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'stats_actives_' => 'Estad&iacute;sticas activas ...',
 
 // T
-'telechargements_dpt' => 'Descargas :', ##1.53
+'telechargements_dpt' => 'Descargas :', ## 1.53 ok !
 'title_vers_page_graph' => 'Hacia la p&aacute;gina de estad&iacute;sticas gr&aacute;ficas de SPIP',
 'title_vers_popup_graph' => 'Stat gr&aacute;fica en Popup',
 'titre_actijour' => 'Actividad del d&iacute;a',
@@ -124,10 +130,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // V
 'visites_jour' => 'v. d&iacute;a', // hacer corto - faire court
 'visites' => 'Visitas',
-'depuis_date_visites_' => 'Depuis @heure@ (@date@), @nb_visite@ Visites', ## 1.53 translate
 'voir' => 'ver',
 #'voir_gafospip' => 'Ver p&aacute;ge GAFoSPIP',##1.53
-'voir_plugin' => 'Ver p&aacute;ge : ', ## 1.53
+'voir_plugin' => 'Ver p&aacute;ge : ', ## 1.53 ok !
 'voir_suivi_forums' => 'Ver p&iacute;gina Seguimiento Foros',
 'voir_suivi_petitions' => 'Ver p&iacute;gina Seguimiento Peticiones',
 
