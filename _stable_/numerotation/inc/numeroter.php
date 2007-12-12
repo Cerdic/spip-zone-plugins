@@ -8,13 +8,31 @@ function numero_numeroter_rubrique($id_rubrique,$type='rubrique',$numerote=true)
 	$table = table_objet($type);
 	$key = id_table_objet($type);
 	$parent = ($type=='rubrique')?'id_parent':'id_rubrique';
+
+	$cond = "";
+	$zero = true;
+	if ($numerote && defined('_NUMERO_MOT_ARTICLE_ACCUEIL') && ($type=='article')){
+		// numeroter 0. l'article d'accueil de la rubrique
+		$res = spip_query("SELECT a.id_article,a.titre FROM spip_articles AS a INNER JOIN spip_mots_articles as J ON J.id_article=a.id_article
+		 WHERE a.id_rubrique="._q($id_rubrique)." 
+		 AND J.id_mot="._q(_NUMERO_MOT_ARTICLE_ACCUEIL)."
+		 ORDER BY 0+a.titre, a.maj DESC LIMIT 0,1");
+		if ($row = spip_fetch_array($res)){
+			$titre = "0. " . numero_denumerote_titre($row['titre']);
+			spip_query("UPDATE spip_$table SET titre="._q($titre)." WHERE $key=".$row[$key]);
+			$zero = false;
+			$cond = " AND id_article<>"._q($row[$key]);
+		}
+	}
 	
-	$res = spip_query("SELECT $key,titre FROM spip_$table WHERE $parent="._q($id_rubrique)." ORDER BY 0+titre, maj DESC");
+	$res = spip_query("SELECT $key,titre FROM spip_$table WHERE $parent="._q($id_rubrique)."$cond ORDER BY 0+titre, maj DESC");
 	$cpt = 1;
 	while($row = spip_fetch_array($res)) {
 		// conserver la numerotation depuis zero si deja presente
-		if (($cpt==1) && preg_match(',^0+[.]\s,',$row['titre']))
+		if ($zero && ($cpt==1) && preg_match(',^0+[.]\s,',$row['titre'])) {
+			$zero = false;
 			$cpt = 0;
+		}
 		$titre = ($numerote?($cpt*10) . ". ":"") . numero_denumerote_titre($row['titre']);
 		spip_query("UPDATE spip_$table SET titre="._q($titre)." WHERE $key=".$row[$key]);
 		$cpt++;
