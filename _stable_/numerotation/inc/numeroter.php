@@ -25,6 +25,10 @@ function numero_numeroter_rubrique($id_rubrique,$type='rubrique',$numerote=true)
 		}
 	}
 	
+	if ($type=='article') {
+		$cond .= " AND statut!='poubelle'";
+	}
+	
 	$res = spip_query("SELECT $key,titre FROM spip_$table WHERE $parent="._q($id_rubrique)."$cond ORDER BY 0+titre, maj DESC");
 	$cpt = 1;
 	while($row = spip_fetch_array($res)) {
