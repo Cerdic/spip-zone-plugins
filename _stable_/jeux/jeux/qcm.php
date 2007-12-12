@@ -178,9 +178,9 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 			$codeHTML.='<input type="checkbox" class="jeux_cocher qcm_cocher" name="'.$nomVarSelect
 				. '[]" value="'.$i.'" id="'.$nomVarSelect.$i.'"><label for="'.$nomVarSelect.$i.'">&nbsp;'
 				. $valeur.'</label><br />';
-	// S'il y a plus de 5 choix, on utilise une liste
-	// Sinon, entre 2 et 4 choix, des radio boutons
-	} elseif ($qcms[$indexQCM]['nbpropositions']>5) {
+	// S'il y a plus de _QCM_MAX_RADIO choix, on utilise une liste
+	// Sinon, des radio boutons
+	} elseif ($qcms[$indexQCM]['nbpropositions']>_QCM_MAX_RADIO) {
 		$codeHTML.='<select name="'.$nomVarSelect.'" class="qcm_select"><option value="">'._T('jeux:votre_choix').'</option>';
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) $codeHTML.="<option value=\"$i\">$valeur</option>";
 		$codeHTML.='</select>';
@@ -309,6 +309,7 @@ function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
 function jeux_qcm($texte, $indexJeux) {
   // initialisation  
   global $qcms, $qcm_score;
+  @define('_QCM_MAX_RADIO', 5);
  
   $qcms = array(); $indexQCM = $qcm_score = 0;
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
