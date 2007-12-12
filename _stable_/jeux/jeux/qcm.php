@@ -17,8 +17,10 @@
 separateurs obligatoires : [qcm], [qrm] ou [quiz]
 separateurs optionnels   : [titre], [texte], [config]
 parametres de configurations par defaut :
-	trou=auto	// taille du trou affiche en cas de proposition unique
-	solution=non	// donne la(les) bonne(s) reponse(s) lors de la correction
+	trou=auto // taille du trou affiche en cas de proposition unique
+	solution=non // donne la(les) bonne(s) reponse(s) lors de la correction
+	max_radios=5 // nombre maximal de boutons radios affiches avant le choix d'une liste deroulante
+	colonnes=1 // nombre de boutons (type radio ou a cocher) par ligne
 
 Exemple de syntaxe dans l'article :
 ------------------------------------
@@ -151,15 +153,16 @@ function qcm_un_trou($nomVarSelect, $indexQCM) {
 
 function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoints) {
   global $qcms, $qcm_score;
-//print_r($qcms[$indexQCM]);
   if (!$qcms[$indexQCM]['nbpropositions'] || !$qcms[$indexQCM]['maxscore']) 
   	return "<div class=\"jeux_question\">".definir_puce()._T('jeux:erreur_syntaxe').'</div><br />';
+
   // Initialisation du code a retourner
   $nomVarSelect = "var{$indexJeux}_Q{$indexQCM}";
   $question = trim(str_replace('&nbsp;', ' ', $qcms[$indexQCM]['question']));
   $trou = $qcms[$indexQCM]['nbpropositions']==1;
   $qrm = $qcms[$indexQCM]['qrm'];
-  
+  $nbcol = jeux_config('colonnes');
+
   // affichage des points dans la question
   if ($gestionPoints) {
     $pointsQ = $qcms[$indexQCM]['maxscore'];
@@ -177,10 +180,10 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) 
 			$codeHTML.='<input type="checkbox" class="jeux_cocher qcm_cocher" name="'.$nomVarSelect
 				. '[]" value="'.$i.'" id="'.$nomVarSelect.$i.'"><label for="'.$nomVarSelect.$i.'">&nbsp;'
-				. $valeur.'</label><br />';
-	// S'il y a plus de _QCM_MAX_RADIO choix, on utilise une liste
-	// Sinon, des radio boutons
-	} elseif ($qcms[$indexQCM]['nbpropositions']>_QCM_MAX_RADIO) {
+				. $valeur.'</label>'
+				. ($i % $nbcol?' &nbsp; ':'<br />');
+	// S'il y a trop de choix, on utilise une liste a la place des boutons radio
+	} elseif ($qcms[$indexQCM]['nbpropositions']>jeux_config('max_radios')) {
 		$codeHTML.='<select name="'.$nomVarSelect.'" class="qcm_select"><option value="">'._T('jeux:votre_choix').'</option>';
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) $codeHTML.="<option value=\"$i\">$valeur</option>";
 		$codeHTML.='</select>';
@@ -188,7 +191,8 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) 
 			$codeHTML.='<input type="radio" class="jeux_radio qcm_radio" name="'.$nomVarSelect
 				. '" value="'.$i.'" id="'.$nomVarSelect.$i.'"><label for="'.$nomVarSelect.$i.'">&nbsp;'
-				. $valeur.'</label><br />';
+				. $valeur.'</label>'
+				. ($i % $nbcol?' &nbsp; ':'<br />');
 	}
 	$codeHTML.="</div> <br />";
 
@@ -196,7 +200,6 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 
   // Sinon on affiche la correction
   else {
-//print_r($_POST);
   	 $reponse = $_POST[$nomVarSelect];
 	 if (!is_array($reponse)) $reponse=trim($reponse);
 	 $bonneReponse = false; $qrm_score = 0;
@@ -309,7 +312,6 @@ function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
 function jeux_qcm($texte, $indexJeux) {
   // initialisation  
   global $qcms, $qcm_score;
-  @define('_QCM_MAX_RADIO', 5);
  
   $qcms = array(); $indexQCM = $qcm_score = 0;
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
@@ -321,6 +323,8 @@ function jeux_qcm($texte, $indexJeux) {
   jeux_config_init("
 	trou=auto	// taille du trou affiche en cas de proposition unique
 	solution=non	// donne la(les) bonne(s) reponse(s) lors de la correction
+	max_radios=5 // nombre maximal de boutons radios affiches avant le choix d'une liste deroulante
+	colonnes=1 // nombre de boutons par ligne
   ", false);
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];

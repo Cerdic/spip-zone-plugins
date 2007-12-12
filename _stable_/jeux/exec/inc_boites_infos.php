@@ -98,6 +98,7 @@ function boite_infos_accueil() {
 		echo ( (_request('exec')!='jeux_tous') || !function_exists('lire_config')?'':
 		icone_horizontale(_T('jeux:configurer_jeux'),generer_url_ecrire('cfg','cfg=jeux'),find_in_path('img/jeu-cfg.png'))
 		);
+	echo '<br /><i><b>Attention</b> : partie du plugin en cours de d&eacute;veloppement.</i>';
 	fin_boite_info();
 }
 
@@ -105,7 +106,8 @@ function boite_infos_jeux_tous() {
 	debut_boite_info();
 	echo icone_horizontale(_T('jeux:nouveau_jeu'),generer_url_ecrire('jeux_edit','nouveau=oui'),find_in_path('img/jeu-nouveau.png'));
 	echo icone_horizontale(_T('jeux:configurer_jeux'),generer_url_ecrire('cfg','cfg=jeux'),find_in_path('img/jeu-cfg.png'));
-	if (autoriser('gererresultats')) {echo icone_horizontale(_T('jeux:gerer_resultats'),generer_url_ecrire('jeux_gerer_resultats'),find_in_path('img/jeu-laurier.png'));}
+	if (autoriser('gererresultats'))
+		echo icone_horizontale(_T('jeux:gerer_resultats'),generer_url_ecrire('jeux_gerer_resultats'),find_in_path('img/jeu-laurier.png'));
 	fin_boite_info();
 }
 
