@@ -12,6 +12,9 @@ function numero_numeroter_rubrique($id_rubrique,$type='rubrique',$numerote=true)
 	$res = spip_query("SELECT $key,titre FROM spip_$table WHERE $parent="._q($id_rubrique)." ORDER BY 0+titre, maj DESC");
 	$cpt = 1;
 	while($row = spip_fetch_array($res)) {
+		// conserver la numerotation depuis zero si deja presente
+		if (($cpt==1) && preg_match(',^0+[.]\s,',$row['titre']))
+			$cpt = 0;
 		$titre = ($numerote?($cpt*10) . ". ":"") . numero_denumerote_titre($row['titre']);
 		spip_query("UPDATE spip_$table SET titre="._q($titre)." WHERE $key=".$row[$key]);
 		$cpt++;
