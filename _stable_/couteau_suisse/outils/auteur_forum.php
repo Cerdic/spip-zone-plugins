@@ -3,6 +3,7 @@
 function Auteur_forum_affichage_final($flux){
 	if(_request('page')=='forum') {
 		$form = defined('_SPIP19100')?"$('.previsu').parent()":"$('.previsu').parent().parent()";
+		$auteur = defined('_SPIP19300')?'session_nom':'auteur';
 		#	include_spip('inc/charsets');
 		// filtrer et remettre le tout dans le charset cible
 		$nom = unicode2charset(html2unicode(_T('cout:nom_forum')));
@@ -12,7 +13,7 @@ function Auteur_forum_affichage_final($flux){
 <script type="text/javascript"><!--
 $(document).ready(function(){
  form = $form;
- auteur = $('#auteur');
+ auteur = $('#$auteur');
 // label = auteur.prev();
  if(form.length && auteur.length)
  	// eviter les forums anonymes
