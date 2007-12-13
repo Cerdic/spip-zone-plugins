@@ -335,7 +335,7 @@ $resultat = function_exists('spip_fetch_array')?spip_fetch_array($res):sql_fetch
 if($resultat['Type']!='text') echo "<p style=\"color:red;\">Attention : votre base semble ancienne et le Couteau Suisse ne va pas bien fonctionner.</p><p>La table 'spip_meta' a pour type de valeur '$resultat[Type]' au lieu de 'text'.</p>";
 // verification de la barre typo V2
 $res = plugin_get_infos('barre_typo_v2');
-if (strlen($res['version'])) echo "<p><span style=\"color:red;\">Attention :</span> la barre typographique (version $res[version]) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; 2.3.2.</p>";
+if (strlen($res['version']) and (version_compare($res['version'],'2.3.2','<'))) echo "<p><span style=\"color:red;\">Attention :</span> la barre typographique (version $res[version]) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; 2.3.2.</p>";
 
 	debut_gauche();
 	debut_boite_info();
