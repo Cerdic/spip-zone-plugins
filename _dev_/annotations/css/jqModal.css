@@ -66,7 +66,7 @@ a.annotate_action_change span,a.annotate_action_delete span {position:absolute;t
 
 #annotate_image_summary {width:200px;margin:auto}
 
-
+#annotate_wizard3 input,#annotate_wizard3 textarea {width:100%}
 
 #annotate_csv_panel_container {overflow:auto;padding:1px}
 #annotate_csv_panel{width:100%;border:#000 1px solid;font-size:10px;}

@@ -309,7 +309,8 @@
 		var left = helper.parent[0].offsetLeft;
 		var top = helper.parent[0].offsetTop;
 		
-		if(helper.parent.width()>600) helper.parent.width(600);
+		helper.parent.css("width","");
+    if(helper.parent.width()>600) helper.parent.width(600);
 		if(helper.parent.width()<100) helper.parent.width(100);
 		
 		if(event) {
