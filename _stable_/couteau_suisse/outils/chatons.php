@@ -46,7 +46,7 @@ function chatons_raccourcis() {
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
 function chatons_BarreTypo($tr) {
-	if (!isset($GLOBALS['meta']['cs_chatons']))	smileys_installe();
+	if (!isset($GLOBALS['meta']['cs_chatons']))	chatons_installe();
 	// le tableau des chatons est present dans les metas
 	$chatons = unserialize($GLOBALS['meta']['cs_chatons']);
 	$max = count($chatons[0]);

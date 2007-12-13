@@ -138,7 +138,7 @@ decoration_installe();
 	foreach($balises[4] as $v)
 		$res[] = "<a href=\"javascript:barre_raccourci$v[1],@@champ@@)\"><span class=\"cs_BT\">$v[0]</span></a>";
 	$res = join(' ', $res); 
-	return $tr.'<tr><td><p style="margin:0; line-height:1.8em;">'._T('cout:decoration:nom').'&nbsp;'.$res.'</div></td></tr>';
+	return $tr.'<tr><td><p style="margin:0; line-height:1.8em;">'._T('cout:decoration:nom')."&nbsp;$res</p></td></tr>";
 }
 
 ?>

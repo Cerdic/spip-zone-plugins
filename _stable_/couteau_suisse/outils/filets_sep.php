@@ -62,7 +62,17 @@ function filets_sep($texte) {
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
 function filets_sep_BarreTypo($tr) {
-	return $tr.'<tr><td>'._T('cout:filets_sep:nom').' (en projet)</td></tr>';
+	if (!isset($GLOBALS['meta']['cs_filets_sep'])) filets_sep_installe();
+	// le tableau des filets est present dans les metas
+	$filets = unserialize($GLOBALS['meta']['cs_filets_sep']);
+	$res = array();
+	for ($i=0; $i<=7; $i++)
+		$res[] = "<a title=\"__{$i}__\" href=\"javascript:barre_inserer('\\n\\n__{$i}__\\n\\n',@@champ@@)\"><span class=\"cs_BT\">CSS {$i}</span></a>";
+	$max = count($filets[0]);
+	for ($i=0; $i<$max; $i++)
+		$res[] = "<a title=\"{$filets[0][$i]}\" href=\"javascript:barre_inserer('\\n\\n{$filets[0][$i]}\\n\\n',@@champ@@)\"><span class=\"cs_BT\">{$filets[0][$i]}</span></a>";
+	$res = join(' ', $res);
+	return $tr.'<tr><td><p style="margin:0; line-height:1.8em;">'._T('cout:filets_sep:nom')."&nbsp;$res</p></td></tr>";
 }
 
 ?>
