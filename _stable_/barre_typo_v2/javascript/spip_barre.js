@@ -347,8 +347,9 @@ function mozWrap(txtarea, ouvre, ferme, barre)
 	if ((txtarea.value).substring(selStart,selStart+1) == '{' && ouvre.substring(0,1) == "{") ouvre = ouvre + " ";
 
 	txtarea.value = s1 + ouvre + s2 + ferme + s3;
-	selDeb = selStart + ouvre.length;
-	selFin = selEnd + ouvre.length;
+	depl = selStart==selEnd?ferme.length:ouvre.length;
+	selDeb = selStart + depl;
+	selFin = selEnd + depl;
 	window.setSelectionRange(txtarea, selDeb, selFin);
 	txtarea.scrollTop = selTop;
 	txtarea.focus();
