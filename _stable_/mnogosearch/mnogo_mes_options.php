@@ -171,7 +171,7 @@ function hash_where($recherche=NULL, $c=false){
 	if (version_compare($vers['v'],'4.1.12','>='))
 		return "hash=0x$h";
 	else
-		return  "HEX(hash)='$h'";
+		return  "(HEX(hash)='$h' OR hash=0x$h)";
 }
 
 function mnogo_checkresults($recherche, $debut, $nombre, $c=false){
