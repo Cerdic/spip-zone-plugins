@@ -1,8 +1,9 @@
 <?php
 
 /*
-   Cet outil 'decoration' permet aux redacteurs d'un site spip de d'appliquer les styles souligné, barré, au dessus aux textes SPIP
-   Attention : seules les balises en minuscules sont reconnues.
+	Cet outil 'decoration' permet aux redacteurs d'un site spip de d'appliquer des styles aux textes SPIP
+	Attention : seules les balises en minuscules sont reconnues.
+	Doc : http://www.spip-contrib.net/?article2427
 */
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
@@ -11,31 +12,40 @@ function decoration_installe() {
 cs_log("decoration_installe()");
 	// on decode les balises entrees dans la config
 	$deco_balises = preg_split("/[\r\n]+/", trim(_decoration_BALISES));
-	$aide = $trouve = $remplace = $alias = $auto_balises = $auto_remplace = array();
+	$aide = $trouve = $remplace = $alias = $auto_balises = $auto_remplace = $BT = array();
 	foreach ($deco_balises as $balise) {
 		if (preg_match('/(span|div|auto)\.([^.]+)\.(class|lang)\s*=(.+)$/', $balise, $regs)) {
 			// les class/lang
 			list($div, $racc, $class) = array($regs[1], trim($regs[2]), trim($regs[4]));
+			$BT[] = array(
+				$racc,//$div=='div'?strtoupper($racc):$racc,
+				$div=='auto'?"('<$racc>','</$racc>'":"_etendu('<$racc>','</$racc>','<$racc/>'",
+			);
 			if ($div=='auto') {
 				$auto_balises[] = $racc; 
-				$auto_remplace[$racc] = "$regs[3]=\"$class\">";
+				$auto_remplace[$racc] = "$attr>";
 			} else {
 				$aide[] = $racc; 
 				$trouve[] = "<$racc>"; $trouve[] = "</$racc>"; $trouve[] = "<$racc/>";
-				$remplace[] = $a = "<$regs[1] $regs[3]=\"$class\">"; 
-				$remplace[] = $b = "</$regs[1]>"; $remplace[] = $a.$b;
+				$remplace[] = $a = "<$div $attr>"; 
+				$remplace[] = $b = "</$div>"; $remplace[] = $a.$b;
 			}
 		} elseif (preg_match('/(span|div|auto)\.([^=]+)=(.+)$/', $balise, $regs)) {
 			// les styles inline
 			list($div, $racc, $style) = array($regs[1], trim($regs[2]), trim($regs[3]));
+			$attr="style=\"$style\"";
+			$BT[] = array(
+				$racc,//$div=='span'?"<$div $attr>$racc</$div>":($div=='div'?strtoupper($racc):$racc),
+				$div=='auto'?"('<$racc>','</$racc>'":"_etendu('<$racc>','</$racc>','<$racc/>'",
+			);
 			if ($div=='auto') {
 				$auto_balises[] = $racc; 
-				$auto_remplace[$racc] = "style=\"$style\">";
+				$auto_remplace[$racc] = "$attr>";
 			} else {
 				$aide[] = $racc; 
 				$trouve[] = "<$racc>"; $trouve[] = "</$racc>"; $trouve[] = "<$racc/>";
-				$remplace[] = $a = "<$regs[1] style=\"$style\">";
-				$remplace[] = $b = "</$regs[1]>"; $remplace[] = $a.$b;
+				$remplace[] = $a = "<$div $attr>";
+				$remplace[] = $b = "</$div>"; $remplace[] = $a.$b;
 			}
 		} elseif (preg_match('/([^=]+)=(.+)$/', $balise, $regs)) {
 			// les alias
@@ -52,9 +62,9 @@ cs_log("decoration_installe()");
 			$auto_remplace[$a] = $auto_remplace[$v];
 		}
 	// liste des balises disponibles
-	$aide = '<b>'.join('</b>, <b>', array_merge($aide, $auto_balises)).'</b>';
+	$aide = array_merge($aide, $auto_balises);
 	// sauvegarde en meta : aide
-	ecrire_meta('cs_decoration_racc', $aide);
+	ecrire_meta('cs_decoration_racc', '<b>'.join('</b>, <b>', $aide).'</b>');
 	// protection $auto_balises pour la future regExpr
 	foreach($auto_balises as $i=>$v) $auto_balises[$i] = preg_quote($v, ',');
 	// sauvegarde en meta : decoration
@@ -66,7 +76,9 @@ cs_log("decoration_installe()");
 		// RegExpr pour les balises automatiques
 		count($auto_balises)?',<('.join('|', $auto_balises).')>(.*?)</\1>,ms':'',
 		// association pour les balises automatiques
-		$auto_remplace
+		$auto_remplace,
+		// balises disponibles
+		$BT,
 	)));
 	ecrire_metas();
 }
@@ -102,8 +114,7 @@ function decoration_rempl($texte) {
 // fonction pipeline
 function decoration_pre_typo($texte) {
 	if (strpos($texte, '<')===false || !defined('_decoration_BALISES')) return $texte;
-	if (!isset($GLOBALS['meta']['cs_decoration']))
-		decoration_installe();
+	if (!isset($GLOBALS['meta']['cs_decoration'])) decoration_installe();
 	// pour les callbacks
 	global $deco_balises;
 	// lecture des balises et des remplacements
@@ -117,7 +128,17 @@ function decoration_pre_typo($texte) {
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
 function decoration_BarreTypo($tr) {
-	return $tr.'<tr><td>'._T('cout:decoration:nom').' (en projet)</td></tr>';
+	// les raccoucis de couleur sont-il dispo ?
+	if (!isset($GLOBALS['meta']['cs_decoration'])) decoration_installe();
+	// le tableau des smileys est present dans les metas
+decoration_installe();
+	$balises = unserialize($GLOBALS['meta']['cs_decoration']);
+//print_r($balises);die();
+	$res = array(); 
+	foreach($balises[4] as $v)
+		$res[] = "<a href=\"javascript:barre_raccourci$v[1],@@champ@@)\"><span class=\"cs_BT\">$v[0]</span></a>";
+	$res = join(' ', $res); 
+	return $tr.'<tr><td><p style="margin:0; line-height:1.8em;">'._T('cout:decoration:nom').'&nbsp;'.$res.'</div></td></tr>';
 }
 
 ?>

@@ -63,10 +63,10 @@ if($GLOBALS['cs_options']) {
 	
 	// inclusion des fonctions pre-compilees
 	if (!$GLOBALS['cs_fonctions']) include_once(_DIR_CS_TMP.'mes_fonctions.php');
-	cs_log(' -- appel cout_fonctions achevé... cs_fonctions = ' . intval($GLOBALS['cs_fonctions']));
+	cs_log(' -- sortie de cout_fonctions... cs_fonctions = ' . intval($GLOBALS['cs_fonctions']));
 
 } else {
-	spip_log('COUTEAU-SUISSE.  -- appel de cout_fonctions achevé sans inclusion');
+	spip_log('COUTEAU-SUISSE.  -- sortie de cout_fonctions (sans inclusion)');
 }
 
 ?>

@@ -9,14 +9,15 @@
    Attention : seules les balises en minuscules sont reconnues.
 */
 /*
- *   +----------------------------------+
- *    Nom de l'outil : Couleurs dans vos textes
- *   +----------------------------------+
- *    Date : Vendredi 11 août 2003
- *    Idee originale :  Aurelien PIERARD : aurelien.pierard(a)dsaf.pm.gouv.fr
- *    Serieuse refonte et integration au Couteau Suisse : Patrice Vanneufville, mars 2007
- *   +-------------------------------------+
- *  
+   +----------------------------------+
+    Nom de l'outil : Couleurs dans vos textes
+   +----------------------------------+
+    Date : Vendredi 11 août 2003
+    Idee originale :  Aurelien PIERARD : aurelien.pierard(a)dsaf.pm.gouv.fr
+    Serieuse refonte et integration au Couteau Suisse : Patrice Vanneufville, mars 2007
+	Doc : http://www.spip-contrib.net/?article2427
+   +-------------------------------------+
+  
 */
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
@@ -140,19 +141,18 @@ function couleurs_pre_typo($texte) {
 function couleurs_BarreTypo($tr) {
 	// les raccoucis de couleur sont-il dispo ?
 	if (!isset($GLOBALS['meta']['cs_couleurs'])) couleurs_installe();
-//couleurs_installe(); echo 'toto:',_COULEURS_FONDS;
 	// le tableau des smileys est present dans les metas
 	$couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
 	$r1 = $r2 = array(); 
 	foreach($couleurs[2] as $i=>$v)
-		$r1[] = "<a href=\"javascript:barre_raccourci('[$i]','[/$i]',@@champ@@)\"><span style=\"background-color:#FFDDAA; font-size:140%; color:$v; border:1px outset #CCCC99;\">&nbsp;A&nbsp;</span></a>";
-	$r1 = ': <b>'.join(' ', $r1).'</b>'; 
+		$r1[] = "<a href=\"javascript:barre_raccourci('[$i]','[/$i]',@@champ@@)\"><span class=\"cs_BT cs_BTg\" style=\"color:$v;\">A</span></a>";
+	$r1 = join(' ', $r1); 
 	if(_COULEURS_FONDS===1) {
 		foreach($couleurs[2] as $i=>$v)
-			$r2[] = "<a href=\"javascript:barre_raccourci('[fond $i]','[/fond $i]',@@champ@@)\"><span style=\"background-color:#FFDDAA; font-size:140%; color:$v; border:1px outset #CCCC99;\">&nbsp;F&nbsp;</span></a>";
-		$r2 = ' '._T('cout:fonds').' <b>'.join(' ', $r2).'</b>'; 
+			$r2[] = "<a href=\"javascript:barre_raccourci('[fond $i]','[/fond $i]',@@champ@@)\"><span class=\"cs_BT cs_BTg\" style=\"color:$v;\">F</span></a>";
+		$r2 = ' '._T('cout:fonds').' '.join(' ', $r2).''; 
 	} else $r2='';
-	return $tr.'<tr><td><p style="margin:0; line-height:1.8em;">'._T('cout:couleurs:nom').'&nbsp;'.$r1.$r2.'</div></td></tr>';
+	return $tr.'<tr><td><p style="margin:0; line-height:1.9em;">'._T('cout:couleurs:nom')."&nbsp;$r1$r2</div></td></tr>";
 }
 
 ?>

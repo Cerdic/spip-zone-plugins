@@ -62,10 +62,10 @@ if(!isset($_GET['page']) OR !preg_match(',\.(css|js)$,', $_GET['page'])) {
 		cs_installe_outils();
 	}
 	
-	cs_log(' -- appel de cout_options achevé... cs_options = '.intval($GLOBALS['cs_options']) 
+	cs_log(' -- sortie de cout_options... cs_options = '.intval($GLOBALS['cs_options']) 
 		. ($file_exists?" et fichier '$f' trouvé":" et fichier '$f' non trouvé !!"));
 } else {
-	if(defined('_LOG_CS')) spip_log('COUTEAU-SUISSE.  -- appel de cout_options achevé sans initialisation du plugin ');
+	if(defined('_LOG_CS')) spip_log('COUTEAU-SUISSE.  -- sortie de cout_options sans initialisation du plugin ');
 }
 
 ?>

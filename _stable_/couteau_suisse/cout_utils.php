@@ -315,6 +315,10 @@ function cs_initialise_includes() {
 			}
 		}
 	}
+	// insertion du css pour la BarreTypo
+	if(in_array('BT_toolbox', $pipelines_utilises))
+		$temp_css[] = 'span.cs_BT {background-color:#FFDDAA; font-weight:bold; border:1px outset #CCCC99; padding:0.2em 0.3em;}
+span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	// concatenation des css inline, js inline et filtres trouves
 	if (count($temp_css))
 		$cs_metas_pipelines['header'][] = "<style type=\"text/css\">\n"

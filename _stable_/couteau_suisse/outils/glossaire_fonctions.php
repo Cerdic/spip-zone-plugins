@@ -2,7 +2,7 @@
 
 // Outils GLOSSAIRE - 26 mai 2007
 // Serieuse refonte et integration au Couteau Suisse : Patrice Vanneufville
-// Toutes les infos sur : http://www.spip-contrib.net/Plugin-glossaire
+// Doc : http://www.spip-contrib.net/?article2206
 
 charger_generer_url();  # pour generer_url_mot()
 

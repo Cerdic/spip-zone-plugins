@@ -167,6 +167,6 @@ function couteau_suisse_BarreTypoEnrichie_tous($paramArray) {
 /*
 cs_log("appel de cout_pipelines : strlen=" . strlen($cs_metas_pipelines['pipelines']));
 if (!$GLOBALS['cs_pipelines']) include_once(_DIR_CS_TMP.'pipelines.php');
-cs_log(' -- appel cout_pipelines achevé... cs_pipelines = ' . intval($GLOBALS['cs_pipelines']));
+cs_log(' -- sortie de cout_pipelines... cs_pipelines = ' . intval($GLOBALS['cs_pipelines']));
 */
 ?>
