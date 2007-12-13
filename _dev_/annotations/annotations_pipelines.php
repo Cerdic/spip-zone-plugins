@@ -28,17 +28,15 @@ function Annotations_insert_head($flux) {
 		$flux .= '
 <script type="text/javascript">
 	jQuery(function(){
-		//check for annotated images
+    //check for annotated images
 		if(jQuery("img[@id^=annotated_map]").size()) {
-			//load css files
+      //load css files
 			var css = [
 				"'.url_absolue(find_in_path('css/jqModal.css')).'",
 				"'.url_absolue(find_in_path('css/jquery.tooltip.css')).'"
 			];
-			var link_attr = {"rel":"stylesheet","type":"text/css"};
-			jQuery.each(css,function(i,n){
-				link_attr.href = n;
-				jQuery("<link>").attr(link_attr).appendTo("head");
+      jQuery.each(css,function(i,n){
+				jQuery("<link href=\""+n+"\" rel=\"stylesheet\" type=\"text/css\">").appendTo("head");
 			})
 			//load all scripts in sync mode
 			var options = {
@@ -56,7 +54,7 @@ function Annotations_insert_head($flux) {
 			];
 			
 			var load_scripts = function() {
-				if(!scripts.length) {
+        if(!scripts.length) {
 					//check for the annotation window
 					if(jQuery("#annotate_window").size()) {
 						options.success = function() {};
