@@ -324,7 +324,7 @@ function setSelectionRange(input, selectionStart, selectionEnd) {
 }
 
 // From http://www.massless.org/mozedit/
-function mozWrap(txtarea, open, close, barre)
+function mozWrap(txtarea, ouvre, ferme, barre)
 {
 	var selLength = txtarea.textLength;
 	var selStart = txtarea.selectionStart;
@@ -341,14 +341,14 @@ function mozWrap(txtarea, open, close, barre)
 	var s3 = (txtarea.value).substring(selEnd, selLength);
 
 	// Eviter melange bold-italic-intertitre
-	if ((txtarea.value).substring(selEnd,selEnd+1) == '}' && close.substring(0,1) == "}") close = close + " ";
-	if ((txtarea.value).substring(selEnd-1,selEnd) == '}' && close.substring(0,1) == "}") close = " " + close;
-	if ((txtarea.value).substring(selStart-1,selStart) == '{' && open.substring(0,1) == "{") open = " " + open;
-	if ((txtarea.value).substring(selStart,selStart+1) == '{' && open.substring(0,1) == "{") open = open + " ";
+	if ((txtarea.value).substring(selEnd,selEnd+1) == '}' && ferme.substring(0,1) == "}") ferme = ferme + " ";
+	if ((txtarea.value).substring(selEnd-1,selEnd) == '}' && ferme.substring(0,1) == "}") ferme = " " + ferme;
+	if ((txtarea.value).substring(selStart-1,selStart) == '{' && ouvre.substring(0,1) == "{") ouvre = " " + ouvre;
+	if ((txtarea.value).substring(selStart,selStart+1) == '{' && ouvre.substring(0,1) == "{") ouvre = ouvre + " ";
 
-	txtarea.value = s1 + open + s2 + close + s3;
-	selDeb = selStart + open.length;
-	selFin = selEnd + close.length;
+	txtarea.value = s1 + ouvre + s2 + ferme + s3;
+	selDeb = selStart + ouvre.length;
+	selFin = selEnd + ouvre.length;
 	window.setSelectionRange(txtarea, selDeb, selFin);
 	txtarea.scrollTop = selTop;
 	txtarea.focus();
