@@ -145,11 +145,11 @@ function couleurs_BarreTypo($tr) {
 	$couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
 	$r1 = $r2 = array(); 
 	foreach($couleurs[2] as $i=>$v)
-		$r1[] = "<a href=\"javascript:barre_raccourci('[$i]','[/$i]',@@champ@@)\"><span class=\"cs_BT cs_BTg\" style=\"color:$v;\">A</span></a>";
+		$r1[] = "<a title=\"$i\" href=\"javascript:barre_raccourci('[$i]','[/$i]',@@champ@@)\"><span class=\"cs_BT cs_BTg\" style=\"color:$v;\">A</span></a>";
 	$r1 = join(' ', $r1); 
 	if(_COULEURS_FONDS===1) {
 		foreach($couleurs[2] as $i=>$v)
-			$r2[] = "<a href=\"javascript:barre_raccourci('[fond $i]','[/fond $i]',@@champ@@)\"><span class=\"cs_BT cs_BTg\" style=\"color:$v;\">F</span></a>";
+			$r2[] = "<a title=\"fond $i\" href=\"javascript:barre_raccourci('[fond $i]','[/fond $i]',@@champ@@)\"><span class=\"cs_BT cs_BTg\" style=\"color:$v;\">F</span></a>";
 		$r2 = ' '._T('cout:fonds').' '.join(' ', $r2).''; 
 	} else $r2='';
 	return $tr.'<tr><td><p style="margin:0; line-height:1.9em;">'._T('cout:couleurs:nom')."&nbsp;$r1$r2</div></td></tr>";
