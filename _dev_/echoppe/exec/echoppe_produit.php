@@ -42,12 +42,13 @@ function exec_echoppe_produit(){
 		echo inc_commencer_page_dist($contexte['titre'], "redacteurs", "echoppe");
 	}
 	
-	echo debut_grand_cadre();
+	/*echo debut_grand_cadre();
 	echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
-	echo fin_grand_cadre();
+	echo fin_grand_cadre();*/
 	
 	echo debut_gauche();
 	
+	echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
 	echo debut_boite_info();
 	echo recuperer_fond('fonds/echoppe_info_produit', $contexte);
 	$les_langues = explode(',',$GLOBALS['meta']['langues_multilingue']);
@@ -73,6 +74,7 @@ function exec_echoppe_produit(){
 	echo bloc_des_raccourcis($raccourcis);
 	
 	echo creer_colonne_droite();
+	
 	echo debut_droite(_T('echoppe:visualisation_d_un_produit'));
 	//echo gros_titre($contexte['titre']);
 	

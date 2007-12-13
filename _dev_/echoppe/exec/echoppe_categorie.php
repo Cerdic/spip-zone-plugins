@@ -49,12 +49,12 @@ function exec_echoppe_categorie(){
 	
 	
 	
-	echo debut_grand_cadre();
+	/*echo debut_grand_cadre();
 	echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
-	echo fin_grand_cadre();
+	echo fin_grand_cadre();*/
 	
 	echo debut_gauche();
-	
+	echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
 	echo debut_boite_info();
 	echo recuperer_fond('fonds/echoppe_info_categorie',$contexte);
 
