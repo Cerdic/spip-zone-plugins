@@ -66,7 +66,7 @@ function exec_reparer_liens_documents(){
 			$liste_doc = array();
 			$id_objet = $row[$primary];
 			foreach($row as $field=>$value){
-				if (preg_match_all(",<(img|doc|emb)([0-9]+)(\|[[:alnum:]])*>,",$value,$matches,PREG_SET_ORDER)){
+				if (preg_match_all(",<(img|doc|emb)([0-9]+)\s*[|>],Uims",$value,$matches,PREG_SET_ORDER)){
 					foreach($matches as $match){
 						#echo "$primary=$id_objet champ $field : tag " . $match[1] .$match[2] ."<br/>";
 						$liste_doc[intval($match[2])]=true;
