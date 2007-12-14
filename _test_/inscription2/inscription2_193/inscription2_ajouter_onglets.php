@@ -21,7 +21,7 @@ function Inscription2_header_prive($flux){
 		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_INSCRIPTION2."css/inscription2_forms.css' type='text/css' media='all' />\n";
 		$flux .= "<link rel='stylesheet' href='".direction_css(_DIR_PLUGIN_INSCRIPTION2."css/inscription2.css")."' type='text/css' media='all' />\n";
 		$flux .= "<script type='text/javascript' src='"._DIR_PLUGIN_INSCRIPTION2."javascript/jquery.validate.js'></script>\n";
-		$flux .= "<script type='text/javascript' src='"._DIR_PLUGIN_INSCRIPTION2."javascript/md5.js'></script>\n";
+		$flux .= "<script type='text/javascript' src='"._DIR_PLUGIN_INSCRIPTION2."javascript/md5_inscription2.js'></script>\n";
 	}
 	return $flux;
 }
