@@ -119,7 +119,7 @@ function critere_recherche_sections_dist($idb, &$boucles, $crit) {
 
 
 function mnogo_querystring($recherche,$debut,$nombre, $c=false){
-	$default_qs=array('q'=>'','m'=>'bool','wm'=>'wrd','sp'=>1,'sy'=>1,'wf'=>'2221','type'=>'','ul'=>'','fmt'=>'xml','np'=>0,'ps'=>10,'GroupBySite'=>'no');
+	$default_qs=array('q'=>'','m'=>'bool','wm'=>'wrd','sp'=>1,'sy'=>1,'wf'=>'2221','type'=>'','ul'=>'','fmt'=>'xml','np'=>0,'ps'=>10,'GroupBySite'=>'no','g'=>'fr');
 	$key_translate = array('recherche'=>'q','site'=>'ul');
 	if (isset($GLOBALS['mnogosearch_default_qs']))
 		$default_qs = $GLOBALS['mnogosearch_default_qs'];
