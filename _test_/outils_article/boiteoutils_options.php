@@ -33,5 +33,37 @@ function accord_pluriel ($nombre, $nom1='', $nom2='') {
 }
 // FIN du Filtre accord_pluriel
 
+// Toute personne censee se detournerait de la rfc 822... et pourtant
+function date_rfc822($date_heure) {
+	list($annee, $mois, $jour) = recup_date($date_heure);
+	list($heures, $minutes, $secondes) = recup_heure($date_heure);
+	$time = mktime($heures, $minutes, $secondes, $mois, $jour, $annee);
+	$timezone = sprintf('%+03d',intval(date('Z')/3600)).'00';
+	return date("D, d M Y H:i:s", $time)." $timezone";
+}
+
+// renvoie une couleur fonction de l'age du forum
+function dec2hex($v) {
+	return substr('00'.dechex($v), -2);
+}
+
+function age_style($date) {
+	
+	// $decal en secondes
+	$decal = date("U") - date("U", strtotime($date));
+ 
+	// 3 jours = vieux
+	$decal = min(1.0, sqrt($decal/(3*24*3600)));
+ 
+	// Quand $decal = 0, c'est tout neuf : couleur vive
+	// Quand $decal = 1, c'est vieux : bleu pale
+	$red = ceil(128+127*(1-$decal));
+	$blue = ceil(130+60*$decal);
+	$green = ceil(200+55*(1-$decal));
+ 
+	$couleur = dec2hex($red).dec2hex($green).dec2hex($blue);
+ 
+	return 'background-color: #'.$couleur.';';
+}
 
 ?>
