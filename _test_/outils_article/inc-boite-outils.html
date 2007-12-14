@@ -30,7 +30,22 @@
 #ENVIAR_EMAIL**{id_article}
 </li>
 ]
+<BOUCLE_rub_rss(RUBRIQUES) {id_rubrique}>
+[(#CONFIG{outils_article/rss}|?{' ',''})
+<li><a rel="alternate" type="application/rss+xml" 
+href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
+[ title="RSS (#TITRE|texte_backend)"]><img src="#CHEMIN{img_pack/rss_black.png}" alt="suivre la vie du site" title="suivre la vie du site"  /><:outilsarticle:rss:></a>
+</li>
+]
+</BOUCLE_rub_rss>
 
+<BOUCLE_forum_rss(ARTICLES){id_article}>
+[(#CONFIG{outils_article/rssforum}|?{' ',''})
+<li>
+<a href="[(#PARAMETRES_FORUM|url_rss_forum)]" rel="nofollow"><img src="#CHEMIN{img_pack/feed.gif}" alt="syndiquer le forum" title="syndiquer le forum"/><:outilsarticle:rssforum:></a>
+</li>
+]
+</BOUCLE_forum_rss>
 
 
 <BOUCLE_auteur_article(AUTEURS){id_article}>
