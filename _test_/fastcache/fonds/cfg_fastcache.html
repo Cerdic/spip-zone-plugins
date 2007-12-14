@@ -1,0 +1,57 @@
+[(#REM) descriptif=
+<h4>
+Ici vous pouvez configurer le plugin Fast Cache.
+</h4>
+<a href="http://www.spip-contrib.net/" class="spip_out">Documentation &#224; venir sur contrib</a>
+]
+
+[(#REM) titre=Fast Cache]
+[(#REM) icone=]
+
+#CACHE{0}
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset><legend>Options</legend>
+<p>
+<label><input type="checkbox" name="debug" [checked="(#ENV{debug})"] />
+Debug <small>(affiche un commentaire html en bas des pages trait&#233;es)</small></label>
+<br />
+<label><input type="checkbox" name="pnghack" [checked="(#ENV{pnghack})"] />
+MSIE PNG Hack <small>(&#224; partir de SPIP 1.9.3&nbsp;: ajouter le code javascript specifique a Internet Explorer pour le traitement des PNG).</small></label>
+<br />
+<label>
+P&#233;riode (en secondes) de validit&#233; d'un cache rapide: <input type="text" name="periode" [value="(#ENV{periode}|sinon{180})"] /></label>
+</p>
+</fieldset>
+
+
+<?php
+	// Effacer le lanceur, pour qu'il reflete la nouvelle config
+	supprimer_fichier(_DIR_TMP.'pre_spip.inc');
+
+	// Patcher spip.php a la racine
+	lire_fichier(_DIR_PLUGIN_FASTCACHE.'spip.php', $t);
+	if (_request('recopier_spip_php')) {
+		echo ecrire_fichier(_DIR_RACINE.'spip.php', $t)
+			? "recopie OK"
+			: "echec de la recopie, veuillez le faire a la main";
+	}
+
+	lire_fichier(_DIR_RACINE.'spip.php', $s);
+	if ($s !== $t) {
+		echo "Pour terminer l'installation, veuillez recopier
+		le fichier <tt>".joli_repertoire(_DIR_PLUGIN_FASTCACHE.'spip.php')."</tt> &#224; la place de <tt>".joli_repertoire(_DIR_RACINE.'spip.php')."</tt>
+		(<a href='".parametre_url(self(), 'recopier_spip_php', 'oui')."'>COPIER</a>)
+		.\n";
+	} else
+		echo "<small>L'installation est OK.</small>";
+?>
+
+
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" style="float:#LANG_RIGHT;" />
+<!-- <input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+-->
+</form>
