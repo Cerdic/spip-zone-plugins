@@ -14,6 +14,9 @@
 		'elements'			=>	'Elementos que deben indicarse ',
 		'mail'				=>	'enviar por email',
 		'compteur'			=>	'muchas reacciones ',
+		'note'				=>	'',
+		'rss'				=>	'',
+		'rssforum'			=>	'',
 	);
 
 ?>

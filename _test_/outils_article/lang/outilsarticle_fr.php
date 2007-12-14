@@ -16,7 +16,7 @@
 		'compteur'			=>	'nombre de r&eacute;actions',
 		'note'				=>	'donner une note &agrave; l\'article avec le plugin notation',
 		'rss'				=>	'syndiquer la rubrique',
-		
+		'rssforum'			=>	'syndiquer le forum de l\'article',
 		
 	);
 
