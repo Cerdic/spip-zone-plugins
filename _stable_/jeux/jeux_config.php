@@ -30,6 +30,7 @@ define('_JEUX_TEXTE', 'texte');		// separateur indiquant un contenu a garder tel
 define('_JEUX_CONFIG', 'config');	// separateur permettant de passer des parametres au jeu
 define('_JEUX_REPONSE', 'reponse');
 define('_JEUX_SOLUTION', 'solution');
+define('_JEUX_SCORE', 'score');
 define('_JEUX_HORIZONTAL', 'horizontal');
 define('_JEUX_VERTICAL', 'vertical');
 define('_JEUX_SUDOKU', 'sudoku');
@@ -61,7 +62,7 @@ $jeux_caracteristiques = array(
 	'sudoku' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_SUDOKU, _JEUX_SOLUTION, _JEUX_CONFIG),
 	'kakuro' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_KAKURO, _JEUX_SOLUTION, _JEUX_CONFIG),
 	'mots_croises' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_HORIZONTAL, _JEUX_VERTICAL, _JEUX_SOLUTION, _JEUX_CONFIG),
-	'qcm' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_QCM, _JEUX_QRM, _JEUX_QUIZ, _JEUX_CONFIG),
+	'qcm' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_QCM, _JEUX_QRM, _JEUX_QUIZ, _JEUX_CONFIG, _JEUX_SCORE),
 	'textes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_POESIE, _JEUX_CITATION, _JEUX_BLAGUE, _JEUX_AUTEUR, _JEUX_RECUEIL),
 	'devinettes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_DEVINETTE, _JEUX_CHARADE, _JEUX_REPONSE, _JEUX_CONFIG),
 	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_TROU, _JEUX_CONFIG),

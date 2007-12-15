@@ -1,99 +1,91 @@
 [(#REM)
 
-	Ce squelette definit les styles de l'espace prive
+	Ce squelette definit les styles du plugin jeux
 
-	Note: l'entete "Vary:" sert a repousser l'entete par
-	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	Note:l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary:Cookie,Accept-Encoding", qui est (un peu)
 	genant en cas de "rotation du cookie de session" apres
 	un changement d'IP (effet de clignotement).
 
-	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	ATTENTION:il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
 ]
 #CACHE{3600*100,cache-client}
-#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
-#HTTP_HEADER{Vary: Accept-Encoding}
+#HTTP_HEADER{Content-Type:text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary:Accept-Encoding}
 
 /* Histoire de mettre tous les navigateurs d'accord... */
 .jeux_global { margin:0pt; padding:0pt; }
 .jeux_global p { margin:1em auto; } /* separation des paragraphes */
-/*ul, ol, dd, dir, menu { padding-left: 40px; } /* decalage des listes */
+/*ul, ol, dd, dir, menu { padding-left:40px; } /* decalage des listes */
 /*ul, ol { margin:1em; } /* marge des listes */
-/*ol ul, ul ol, ul ul, ol ol { margin-top: 0; margin-bottom: 0 } /* liste imbriquees */
+/*ol ul, ul ol, ul ul, ol ol { margin-top:0; margin-bottom:0 } /* liste imbriquees */
 /*fieldset { padding:4pt; }
 .check { margin-left:3pt; margin-right:3pt; }*/
 
 /* Espaceur de blocs */
-.jeux_nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
+.jeux_nettoyeur { clear:both; margin:0; padding:0; border:none; height:0; line-height:1px; font-size:1px; }
 
-/* Un cadre. Par exemple : les QCM ou les trous */
+/* Un cadre. Par exemple :les QCM ou les trous */
 .jeux_cadre { 
  text-align:left;
- font-size: 90%;
- /*font-family     : arial, helvetica, sans-serif;*/
- color: #3F5264;
- /*font-size: 12;*/
- border: 1px solid #F78C54;
- padding: 3px; 
- margin: 3px; 
- background-color: #FFEADE;
+ font-size:90%;
+ color:#3F5264;
+ border:1px solid #F78C54;
+ padding:3px; 
+ margin:3px; 
+ background-color:#FFEADE;
  width:100%;
 }
 
 .jeux_titre{ 
-/* text-align: center;*/
  font-size:120%;
- font-weight: bold;
-/* color: #3F5264; */
+ font-weight:bold;
+/* color:#3F5264; */
 }
 
 .jeux_question{ 
- font-size: 80%;
-/* font-size: 12;*/
- font-weight: bold;
-/* color: #3F5264;*/
+ font-size:80%;
+ font-weight:bold;
+/* color:#3F5264;*/
  }
 
 
 .jeux_bouton{ 
- color: #3F5264;
- font-size: 80%;
-/* font-size: 10; */
- font-weight: bold;
- background-color: #FFEADE;
- padding: 2px; 
+ color:#3F5264;
+ font-size:80%;
+ font-weight:bold;
+ background-color:#FFEADE;
+ padding:2px; 
  text-align:center;
 }
 
 .jeux_input{ 
- color: #3F5264;
-/* font-size: 10; 
- font-weight: bold; */
- background-color: #FFEADE;
- border: 1px solid;
+ color:#3F5264;
+ background-color:#FFEADE;
+ border:1px solid;
 }
 
 .jeux_score{  
  text-align:center;
  width:23%;
- font-family: arial, helvetica, sans-serif;
- color: red;
- /*font-size: 12;*/
- font-weight: bold;
- border: 2px solid green;
- padding: 3px; 
+ font-family:arial, helvetica, sans-serif;
+ color:red;
+ font-weight:bold;
+ border:2px solid green;
+ padding:3px;
+ margin:0 auto;
 }
 
 .jeux_point{ 
-/* font-size: 10;*/
- font-weight: normal;
-/* color: #3F5264;*/
+ font-weight:normal;
+/* color:#3F5264;*/
 }
 
 .jeux_erreur{ 
- font-family: arial, helvetica, sans-serif;
- color: red;
- font-size: 90%;
+ font-family:arial, helvetica, sans-serif;
+ color:red;
+ font-size:90%;
  font-weight:bold;
  font-style:italic;
 /*	float:left;*/
@@ -102,7 +94,7 @@
  }
 
 .jeux_regle{
- font-size: 75%;
+ font-size:75%;
  font-style:italic;
 }
 
@@ -111,9 +103,8 @@
 }
 
 .jeux_solution  {
-/* font-size: 14;*/
- font-weight: bold;
- padding: 4pt 0 0 0;
+ font-weight:bold;
+ padding:4pt 0 0 0;
  clear:both;
 }
 
@@ -180,16 +171,16 @@ table.jeux_grille td{
 
 /* Deplier / Replier */
 .jeux_global .titrem { 
-	display: inline;
-/*	display: block; background-color: #eee; */
-	padding-top: 6px; padding-bottom: 4px;
-	background-repeat: no-repeat;
-	background-position: [(#ENV{ltr}|choixsiegal{left,left,right})] 0.6em;
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 14px;
+	display:inline;
+/*	display:block; background-color:#eee; */
+	padding-top:6px; padding-bottom:4px;
+	background-repeat:no-repeat;
+	background-position:[(#ENV{ltr}|choixsiegal{left,left,right})] 0.6em;
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]:14px;
 	cursor:pointer;
-	}
-.jeux_global .replie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
-.jeux_global .deplie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
+}
+.jeux_global .replie { background-image:url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
+.jeux_global .deplie { background-image:url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
 .jeux_global .impliable {}
-.jeux_global .bloc_depliable.replie { display: none; }
-.jeux_global .bloc_depliable.deplie { display: block; background: none; }
+.jeux_global .bloc_depliable.replie { display:none; }
+.jeux_global .bloc_depliable.deplie { display:block; background:none; }

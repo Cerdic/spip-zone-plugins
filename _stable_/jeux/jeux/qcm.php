@@ -228,7 +228,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 				
 			// les precisions eventuelles
 			$prec = $qcms[$indexQCM]['precisions'][$trou?0:$reponse];
-			if (strlen($prec)) $codeHTML.="<div align=\"center\"><div class=\"qcm_precision\">$prec</div></div>";
+			if (strlen($prec)) $codeHTML.="<div class=\"qcm_precision\">$prec</div>";
 	
 			$codeHTML .= '<div class="qcm_reponse"><span class="qcm_correction_'.($bonneReponse?'juste':'faux').'">'
 				._T('jeux:reponse'.($bonneReponse?'Juste':'Fausse')).'</span></div>';
@@ -253,7 +253,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 
 			// les precisions eventuelles
 			$prec = $qcms[$indexQCM]['precisions'][$r];
-			if (strlen($prec)) $codeHTML.="<div align=\"center\"><div class=\"qcm_precision\">$prec</div></div>";
+			if (strlen($prec)) $codeHTML.="<div class=\"qcm_precision\">$prec</div>";
 		}
 
 	// pas de reponse postee...
@@ -270,7 +270,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 				foreach($qcms[$indexQCM]['bonnesreponses'] as $i=>$val) if ($qcms[$indexQCM]['bonnesreponses'][$i]==1) {
 					$prec = $qcms[$indexQCM]['precisions'][$i];
 					$temp[] = $qcms[$indexQCM]['propositions'][$i]
-						. (strlen($prec)?"<div align=\"center\"><div class=\"qcm_precision\">$prec</div></div>":'<br />');
+						. (strlen($prec)?"<div class=\"qcm_precision\">$prec</div>":'<br />');
 				}
 				$codeHTML.=join(''._T('info_ou').' ', $temp);
 			}
@@ -283,7 +283,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 					$prec = $qcms[$indexQCM]['precisions'][$i];
 					$temp[] = '<div class="qcm_reponse">&nbsp;&#8226;&nbsp;'
 						. qcm_les_points($qcms[$indexQCM]['propositions'][$i], $qcms[$indexQCM]['points'][$i]).'</div>'
-						. (strlen($prec)?"<div align=\"center\"><div class=\"qcm_precision\">$prec</div></div>":'<br />');
+						. (strlen($prec)?"<div class=\"qcm_precision\">$prec</div>":'<br />');
 				}
 			}
 			if (count($temp)) $codeHTML.='<div class="qcm_reponse"><span class="qcm_correction_juste">'._T('jeux:Correction').'</span></div>'.join('', $temp).'</div>';
@@ -294,6 +294,16 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
      
   } // fin du cas avec correction
   return $codeHTML;
+}
+
+function qcm_afficher_commentaire($categ, $score, $total) {
+	if(!categ) return '';
+	$categ = preg_split(',(^|\n|\r)\s*([0-9]+)(%|pt|pts)\s*:,', trim($categ), -1, PREG_SPLIT_DELIM_CAPTURE);
+	for($i=2; $i<count($categ); $i+=4) {
+		$limite = $categ[$i+1]=='%'?$total*$categ[$i]/100:$categ[$i];
+		if($score<=$limite)
+			return '<br /><div class="qcm_precision">'.$categ[$i+2].'</div>';
+	}
 }
 
 function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
@@ -315,7 +325,7 @@ function jeux_qcm($texte, $indexJeux) {
  
   $qcms = array(); $indexQCM = $qcm_score = 0;
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
-  $titre = $horizontal = $vertical = $solution = $html = false;
+  $titre = $horizontal = $vertical = $solution = $html = $categ_score = false;
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('qcm', $texte);
@@ -338,6 +348,7 @@ function jeux_qcm($texte, $indexJeux) {
 	  	$indexQCM++;
 	  }
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
+	  elseif ($valeur==_JEUX_SCORE) $categ_score = $tableau[$i+1];
   }
 
   // si un qrm a ete insere ou si certaines questions ne valent pas 1 point, on affiche les points
@@ -350,12 +361,13 @@ function jeux_qcm($texte, $indexJeux) {
   $tete = '<div class="jeux_cadre qcm">'.($titre?'<div class="jeux_titre qcm_titre">'.$titre.'<hr /></div>':'');
   $id_jeu = _request('id_jeu');
 //  echo $auteur_session;
-  if (!isset($_POST["var_correction_".$indexJeux])) { 
+  if (!isset($_POST["var_correction_".$indexJeux])) {
 	$tete .= jeux_form_debut('qcm', $indexJeux);
 	$pied = '<br /><div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></div>'.jeux_form_fin();
   } else {
       $pied = jeux_afficher_score($qcm_score, $qcms['totalscore'], $id_jeu)
-  			. jeux_bouton_reinitialiser();
+  			. qcm_afficher_commentaire($categ_score, $qcm_score, $qcms['totalscore'])
+			. jeux_bouton_reinitialiser();
   }
   
   unset($qcms); unset($qcm_score);
