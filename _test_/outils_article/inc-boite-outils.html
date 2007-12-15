@@ -34,7 +34,7 @@
 [(#CONFIG{outils_article/rss}|?{' ',''})
 <li><a rel="alternate" type="application/rss+xml" 
 href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
-[ title="RSS (#TITRE|texte_backend)"]><img src="#CHEMIN{img_pack/rss_black.png}" alt="suivre la vie du site" title="suivre la vie du site"  /><:outilsarticle:rss:></a>
+[ title="RSS (#TITRE|texte_backend)"]><img src="#CHEMIN{img_pack/rss_black.png}" alt="suivre la vie du site" title="suivre la vie du site"  /> <:outilsarticle:rss:></a>
 </li>
 ]
 </BOUCLE_rub_rss>
@@ -42,7 +42,7 @@ href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
 <BOUCLE_forum_rss(ARTICLES){id_article}>
 [(#CONFIG{outils_article/rssforum}|?{' ',''})
 <li>
-<a href="[(#PARAMETRES_FORUM|url_rss_forum)]" rel="nofollow"><img src="#CHEMIN{img_pack/feed.gif}" alt="syndiquer le forum" title="syndiquer le forum"/><:outilsarticle:rssforum:></a>
+<a href="[(#PARAMETRES_FORUM|url_rss_forum)]" rel="nofollow"><img src="#CHEMIN{img_pack/feed.gif}" alt="syndiquer le forum" title="syndiquer le forum"/> <:outilsarticle:rssforum:></a>
 </li>
 ]
 </BOUCLE_forum_rss>
@@ -63,14 +63,13 @@ href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
 
 <BOUCLE_compteur_forum(FORUMS){id_article}></BOUCLE_compteur_forum>
 [(#CONFIG{outils_article/compteur}|?{' ',''})
-<li>#TOTAL_BOUCLE <:outilsarticle:reaction:></li>
+[<li>(#TOTAL_BOUCLE|accord_pluriel{r&eacute;action})</li>]
 ]
 <//B_compteur_forum>
 
-[#CONFIG{outils_article/note}|?{' ',''})
-<li>
-#NOTATION
-</li>]
+[(#CONFIG{outils_article/note}|?{' ',''})
+<li>#NOTATION</li>
+]
 
 </ul>
 </BOUCLE_article_boite>
