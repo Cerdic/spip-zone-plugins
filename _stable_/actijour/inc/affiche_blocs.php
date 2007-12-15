@@ -28,7 +28,6 @@ function bloc_stats_generales(
 		}
 	}
 
-
 	$aff='';
 	
 	$aff.= debut_cadre_relief("statistiques-24.gif",true)
@@ -83,12 +82,13 @@ Derniere visite des "auteurs".
 \*---------------------------------------------------------------------------*/
 function auteurs_date_passage() {
 	global $couleur_claire,$connect_id_auteur;
-
+	$nb_auteurs=$GLOBALS['actijour']['nbl_aut'];
+	
 	$q=spip_query("SELECT id_auteur, nom, DATE_FORMAT(en_ligne,'%d/%m/%y %H:%i') AS vu, statut 
 			FROM spip_auteurs 
 			WHERE statut IN ('0minirezo', '1comite') 
 			ORDER BY en_ligne DESC 
-			LIMIT 0,20"
+			LIMIT 0,$nb_auteurs"
 			);
 	$ifond = 0;
 	$aff='';
@@ -149,11 +149,11 @@ function auteurs_date_passage() {
 /*---------------------------------------------------------------------------*\
  Lister Articles du jour.
 \*---------------------------------------------------------------------------*/
-function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art,$prev_visites) {
+function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art,$prev_visites='') {
 	global $couleur_foncee,$couleur_claire;
 	
 	// fixer le nombre de ligne du tableau (tranche)
-	$fl=20;
+	$fl=$GLOBALS['actijour']['nbl_art'];
 
 	// recup $vl dans URL
 	$dl=intval(_request('vl'));
@@ -437,7 +437,7 @@ function visites_mensuelles_chiffres($global_jour) {
 	
 	$periode = date('m/y');		// mois /annee en cours (format de $date)
 	$dday = date('j');			// numero du jour
-	$nb_mois = '18';			// nombre mois affiche
+	$nb_mois = $GLOBALS['actijour']['nbl_mensuel'];	// nombre mois affiche
 
 	$requete="SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%m') AS d_mois, 
 			FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%y') AS d_annee, 
@@ -453,14 +453,13 @@ function visites_mensuelles_chiffres($global_jour) {
 		$tblmax[count($tblmax)+1]=$rmx['visit_mois'];
 	}
 	reset ($tblmax);
-	#h.28/02/07 
+
 	if(count($tblmax)==0) { $tblmax[]=1; }
-	#
 	$divis = max($tblmax)/100;
 		
 	//le tableau a jauges horizontales
 	$aff.= debut_cadre_relief("",true)
-		. "<span class='arial2'>"._T('acjr:entete_tableau_mois')."\n</span>"
+		. "<span class='arial2'>"._T('acjr:entete_tableau_mois',array('nb_mois'=>$nb_mois))."\n</span>"
 		. "<table width='100%' cellpadding='2' cellspacing='0' border='0' class='arial2'>\n"
 		. "<tr><td align='left'>"._T('acjr:mois_pipe')
 		. "</td><td width='50%'>"._T('acjr:moyenne_mois')."</td>\n"
@@ -503,19 +502,6 @@ function visites_mensuelles_chiffres($global_jour) {
 		}
 		else { $coul_jauge=$couleur_claire; }
 
-/*				
-		$aff.= "<tr><td width='19%'><span class='arial1'>$date</span>|</td>"
-			. "<td style='text-align:right;'><b>$totvisit</b>$idefix</td>\n"
-			. "<td width='50%' align='left' valign='middle' class='arial2'>\n"
-			. "<div style='position:relative; z-index:1; width:100%;'>"
-			. "<div class='cell_moymens'>$moy_mois</div>"
-			. "</div>";	
-		# barre horiz 
-		$aff.= "<div class='fond_barre'>\n"
-			. "<div style='width:".$long."px; height:10px; background-color:".$coul_jauge.";'></div>\n"
-			. "</div>\n"
-			. "</td></tr>\n";
-*/
 		$aff.= "<tr><td class='arial2' colspan='3'>"
 			. "<div style='position:relative; z-index:1; width:100%;'>"
 			. "<div class='cell_info_mois'>$date</div>"
@@ -543,6 +529,9 @@ function visites_mensuelles_chiffres($global_jour) {
 recense les sessions tmp/visites/ - bloc -> liste_articles_jour()
 \*---------------------------------------------------------------------------*/
 function visites_pre_traitement($prev_visites) {
+
+	# pour page hier
+	if(!is_array($prev_visites)) return;
 
 	$temps=$prev_visites[0];
 	$visites=$prev_visites[1];
@@ -574,6 +563,14 @@ classement des 10 articles les + visites sur 8 / 30 jours
 \*---------------------------------------------------------------------------*/
 function topten_articles_periode($periode) {
 	global $couleur_claire;
+	
+	if($periode=='8') {
+		$top = $GLOBALS['actijour']['nbl_topsem'];
+	}
+	elseif($periode=='30') {
+			$top = $GLOBALS['actijour']['nbl_topmois'];
+	}
+	else { $top='10'; }
 
 	$q=spip_query("SELECT sva.id_article, SUM(sva.visites) AS volume, 
 				MAX(sva.visites) AS picvis, sa.statut, sa.titre, sa.visites 
@@ -582,7 +579,7 @@ function topten_articles_periode($periode) {
 				WHERE sa.statut='publie' AND sva.date > DATE_SUB(NOW(),INTERVAL $periode DAY) 
 				GROUP BY sva.id_article 
 				ORDER BY volume DESC 
-				LIMIT 0,10"
+				LIMIT 0,$top"
 				);
 	$ifond = 0;
 	$aff='';
@@ -625,10 +622,11 @@ classement des 10 articles les + visites
 \*---------------------------------------------------------------------------*/
 function topten_articles_global() {
 	global $couleur_claire;
+	$top = $GLOBALS['actijour']['nbl_topgen'];
 	
 	$q=spip_query("SELECT id_article, titre, statut, visites 
 				FROM spip_articles WHERE statut='publie' 
-				ORDER BY visites DESC LIMIT 0,10"
+				ORDER BY visites DESC LIMIT 0,$top"
 				);
 	$ifond = 0;
 	$aff='';

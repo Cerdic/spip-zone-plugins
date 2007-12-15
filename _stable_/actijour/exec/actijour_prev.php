@@ -6,8 +6,8 @@
 | H. AROUX . Scoty . koakidi.com
 | Script certifie KOAK2.0 strict, mais si !
 +--------------------------------------------+
-| Stats globales : pages, articles, visites.
-| Divers liens, avertissements ...
+| Visites et articles avant traitement spip
+| ../tmp/visites/...
 +--------------------------------------------+
 */
 
@@ -27,7 +27,7 @@ global 	$connect_statut,
 #
 # function requises ...
 #
-include_spip("inc/func_acj");
+include_spip("inc/actijour_init");
 
 
 

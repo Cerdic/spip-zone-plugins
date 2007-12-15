@@ -27,7 +27,7 @@ global 	$connect_statut,
 #
 # function requises ...
 #
-include_spip("inc/func_acj");
+include_spip("inc/actijour_init");
 include_spip("inc/requetes_stats");
 include_spip('inc/affiche_blocs');
 

@@ -10,6 +10,40 @@
 +--------------------------------------------+
 */
 
+# initialise metas sur install ou MaJ
+function initialise_metas_actijour($old_vers=''){
+	$metas=array();
+	
+	if($old_vers) {
+		foreach($GLOBALS['actijour'] as $k => $v) {
+			# corriger version
+			if($k=='version')
+				$metas[$k]=$GLOBALS['actijour_plug_version'];
+			else
+				$metas[$k]=$v;
+		}
+	}
+	else {
+		$metas['version']=$GLOBALS['actijour_plug_version'];
+		# 1.53
+		$metas['nbl_art']='20';
+		$metas['nbl_aut']='20';
+		$metas['nbl_mensuel']='18';
+		$metas['nbl_topsem']='10';
+		$metas['nbl_topmois']='10';
+		$metas['nbl_topgen']='10';
+		#
+	}	
+
+	$chaine = serialize($metas);
+	ecrire_meta('actijour',$chaine);
+	ecrire_metas();
+	
+	# on relit ..
+	$GLOBALS['actijour'] = @unserialize($GLOBALS['meta']['actijour']);
+}
+
+
 # affiche les tranches de tableau
 function tranches_liste_art($encours,$nligne,$fl) {
 	$exec = _request("exec");
@@ -38,6 +72,7 @@ function entete_page($titre) {
 	echo "<img src='"._DIR_PLUGIN_ACTIJOUR."/img_pack/acjr_48.gif' alt='acjr' />";
 	echo "</div>";
 	gros_titre($titre);
+	echo "<span class='verdana2'>".date('d/m/Y H:i')."</span>";
 	echo "<div style='clear:both;'></div>";
 }
 
@@ -57,13 +92,14 @@ function onglets_actijour($actif) {
 	$pages=array('actijour_pg'=>_DIR_PLUGIN_ACTIJOUR."img_pack/activ_jour.gif",
 				'actijour_hier'=>_DIR_PLUGIN_ACTIJOUR."img_pack/activ_hier.gif",
 				'actijour_top'=>"article-24.gif",
-				'actijour_prev'=>_DIR_PLUGIN_ACTIJOUR."img_pack/acjr_prev.gif"
+				'actijour_prev'=>_DIR_PLUGIN_ACTIJOUR."img_pack/acjr_prev.gif",
+				'actijour_conf'=>''
 				);
 	$res='';
 	foreach($pages as $exec => $icone) {
 		$res.= onglet(_T('acjr:onglet_'.$exec),generer_url_ecrire($exec), $exec,($actif==$exec?$exec:''),$icone);
 	}
-	$aff=debut_onglet().$res.fin_onglet();
+	$aff=debut_onglet().$res.fin_onglet()."<p class='space_20'></p>";
 	return $aff;
 }
 
@@ -71,7 +107,7 @@ function onglets_actijour($actif) {
 function signature_plugin() {
 	$aff="<p class='space_10'></p>"
 		. debut_boite_info(true)
-		. _T('acjr:signature_plugin')."\n"
+		. _T('acjr:signature_plugin',array('version'=>$GLOBALS['actijour_plug_version']))."\n"
 		. fin_boite_info(true);
 	return $aff;
 }
@@ -95,7 +131,6 @@ function rubriques_du_jour($date) {
 		
 		if($tab_rubart[$id_secteur]) {
 			$tab_rubart[$id_secteur]['vis']+=$visa;
-
 			if($id_rubrique!=$id_secteur) {
 				$tab_rubart[$id_secteur]['rub'][$id_rubrique]+=$visa;
 			}
@@ -113,7 +148,6 @@ function rubriques_du_jour($date) {
 
 # renvois titre rubrique
 function info_rubrique($id) {
-	$inforub = array();
 	$q = spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique = $id");
 	$r=spip_fetch_array($q);
 	return $r['titre'];
@@ -153,7 +187,7 @@ function affiche_lien_graph($id_article, $titre, $statut, $type='actijour') {
 
 
 /*---------------------------------------------------------------------------*\
-produire date formatee : "d/m", moins 'n' jour(s) - ou son timestamp
+produire date formatee : "d/m", moins 'n' jour(s) // ou son timestamp - 'n' jours
 \*---------------------------------------------------------------------------*/
 function ante_date_jour($moins,$formater=false) {
 	if($formater) {
@@ -192,35 +226,19 @@ function calcul_prevision_visites() {
 
 	foreach ($sessions as $item) {
 		$tps_file=@filemtime($item);
+		$temps[]=$tps_file;
+		
 		if ($tps_file < $date_init) {
-
+			# lire fichier tmp/visites
 			compte_fichier_visite($item,
 				$visites, $visites_a, $referers, $referers_a, $articles);
 
 			if (--$compteur <= 0)
 				break;
 		}
-		$temps[]=$tps_file;
 	}
-	
 	return array($temps,$visites,$visites_a);
 }
-
-
-/*
-// inscrit table auteur
-# h. 9/11 .. pas interessant :
-# 'maj' est modifie a chaque passage de l_auteur 
-function inscrit_auteur($date_auj) {
-	$modif_aut=array();
-	$q=spip_query("SELECT id_auteur, nom, login, statut FROM spip_auteurs WHERE FROM_UNIXTIME(UNIX_TIMESTAMP(maj),'%Y-%m-%d')= '$date_auj'");
-	while($r=spip_fetch_array($q)) {
-		$modif_aut[$r['id_auteur']]=array($r['nom'],$r['login'],$r['statut']);
-	}
-	return $modif_aut;
-}
-*/
-
 
 
 ?>

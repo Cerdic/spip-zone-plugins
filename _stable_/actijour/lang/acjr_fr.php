@@ -22,6 +22,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 'bargraph_trimestre_popup' => 'Bargraph trimestre en Popup',
 
+// C
+'configuration_commune' => 'Configuration commune', ## 1.53
+'configuration_perso' => 'Configuration personnelle de : @nom@', ## 1.53
+'conf_nbl_art' => 'Nombre de lignes par tranche, du tableau des articles visit&eacute;s du jour.', ## 1.53
+'conf_nbl_aut' => 'Nombre d\'auteurs affich&eacute;s dans le tableau 
+					"Derni&egrave;res Connexions".', ## 1.53
+'conf_nbl_mensuel' => 'Nombre de mois affich&eacute;s dans le tableau des visites mensuelles (jauges).', ## 1.53
+'conf_nbl_topgen' => 'Page TopTen. Transformez le tableau "Topten g&eacute;n&eacute;ral" en Top-15, 20..<br />
+						Entrez le nombre d\'articles &agrave; afficher.', ## 1.53
+'conf_nbl_topmois' => 'Page TopTen. Transformez le tableau "Topten sur 30 jours" en Top-15, 20..<br />
+						Entrez le nombre d\'articles &agrave; afficher.', ## 1.53
+'conf_nbl_topsem' => 'Page TopTen. Transformez le tableau "Topten sur 8 jours" en Top-15, 20..<br />
+						Entrez le nombre d\'articles &agrave; afficher.', ## 1.53
+'conf_ordon_milieu' => 'Changez l\'ordre d\'affichage des blocs de la colonne du milieu 
+						sur la page principale : "Activit&eacute du jour".<br />
+						- tableau des articles : <b>1</b><br />
+						- tableau des rubriques : <b>2</b><br />
+						- tableau des visites sur 8 jours : <b>3</b><br />
+						- liste des liens entrants : <b>4</b><br />
+						Entrez les num&eacute;ros de blocs s&eacute;par&eacute; par une virgule 
+						(ex. : 1,2,3,4).', ## 1.53
+
 // D
 'date_jour_maxi_vis' => 'Le @date_max@ : @visites_max@ vis.',
 'depuis_date_visites_pg' => 'Depuis @heure@ @date@, @nb_visite@ Visites 
@@ -31,14 +53,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 							sur @nb_articles@ articles.', ## 1.53
 'depuis_le_prim_jour' => 'Depuis le <b>@prim_jour_stats@</b>',
 'dernieres_connections' => 'Derni&egrave;res Connexions*',
-'info_dernieres_connections' => '*Les 20 derni&egrave;res connexions des "Auteurs"',
+'info_dernieres_connections' => '*Les 20 derni&egrave;res connexions parmis les "Auteurs" du site', ## 1.53 modif
 
 // E
 'entete_tableau_art_jour' => '<b>@nb_art_visites_jour@ Articles visit&eacute;s</b>, 
 								ou "point&eacute;s"<b> @aff_date_now@</b>',
 'entete_tableau_art_hier' => '<b>@nb_art_visites_jour@ Articles visit&eacute;s</b>, 
 								ou "point&eacute;s", <b>hier @aff_date_now@</b>',
-'entete_tableau_mois' => '<i><b>Pour info ... en chiffres !</b></i><br />Les visites sur 18 mois.',
+'entete_tableau_mois' => '<i><b>Pour info ... en chiffres !</b></i><br />Les visites sur @nb_mois@ mois.',
 
 // G
 'global_vis_hier' => 'Hier : <b>@global_jour@</b>',
@@ -85,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'onglet_actijour_pg' => 'Activit&eacute du jour', ## 1.53
 'onglet_actijour_prev' => 'pr&eacute;visions', ## 1.53
 'onglet_actijour_top' => 'TopTen', ## 1.53
+'onglet_actijour_conf' => 'Config', ## 1.53
 
 // P
 #'page_activite' => 'Activit&eacute du jour',##1.53
@@ -105,7 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 's' => 's',
-'signature_plugin' => '<b>Activit&eacute; du Jour v. 1.53</b><br />(10/04 - 12/07)<br />
+'signature_plugin' => '<b>Activit&eacute; du Jour - @version@</b><br />(10/04 - 12/07)<br />
 						Petit gadget ... pour voir autrement les visites.<br />
 						Par Scoty - <a href=\'http://www.koakidi.com\'>koakidi.com</a><br />
 						<br />Ce n\'est pas indispensable !<br />Mais bon ... !',

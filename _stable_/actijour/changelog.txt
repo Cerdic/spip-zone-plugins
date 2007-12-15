@@ -1,6 +1,14 @@
 
 
-*h ........... --> 1.53
+*h 15/12/07 ..  --> version 1.53 ***********************************************
+* stabilise 1.53 .. TODO --> trad [ES] [EN] !!?!! avant diffusion !
+
+*h 15/12
+.. page configuration : Chaque Admin peut changer l'ordre d'affichage des blocs
+	de la page principale (actijour_pg) (memorisé dans meta)
+.. config du nombre d'éléments de requetes (tableau article, mois-jauge ...)
+.. Enreg. meta "actijour"(spip_meta)
+.. fichier d'initialisation inc/actijour_init
 
 *h 12/12
 .. affine page actijour_prev
@@ -14,8 +22,9 @@
 	Onglet suppl.
 
 *h.15/11 -> 10/12
-.. creer inc/affiche_blocs.php :
-	-> contient les fonctions correspondantes aux bloc d'infos de actijour_pg ; actijour_hier ; actijour_top
+.. inc/affiche_blocs.php :
+	-> contient les fonctions correspondantes aux bloc d'infos de :
+		actijour_pg ; actijour_hier ; actijour_top
 	--> actijour_pg ; actijour_hier ; actijour_top -> simplifie : appel fonctions blocs.
 
 .. creer inc/requetes_stats -> rassemble diverses requetes de base stats.
@@ -29,5 +38,4 @@
 
 .. petites modif de mise en page.
 
-* h. aout 2007
-	--> diffusion : v. 1.52
+* h. ../08/07 --> diffusion : v. 1.52 ******************************************

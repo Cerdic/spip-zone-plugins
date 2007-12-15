@@ -103,6 +103,21 @@ tr.legend_topten {
 }
 tr.legend_topten td { text-align:center; }
 
+/* ****** page config ******* */
+.table_config {
+	font-family:Verdana;
+	font-size:11px;
+}
+td.col_info {
+	width:80%;
+	padding:5px;
+}
+td.col_val {
+	width:20%;
+	padding:5px;
+	text-align:right;
+}
+
 /*  **** */
 .bold { font-weight:bold; }
 

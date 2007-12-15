@@ -28,7 +28,7 @@ global 	$connect_statut,
 #
 # function requises ...
 #
-include_spip("inc/func_acj");
+include_spip("inc/actijour_init");
 include_spip("inc/requetes_stats");
 include_spip('inc/affiche_blocs');
 
@@ -87,10 +87,7 @@ include_spip('inc/affiche_blocs');
 	
 	# les visites non-traitees (tmp/visites)
 	$prev_visites = calcul_prevision_visites();
-/*
-	# nouveaux inscrits visiteur, redacteur, admin
-	$nouveaux_inscrits = inscrit_auteur($date_auj);
-*/
+
 
 
 #
@@ -242,6 +239,7 @@ scoty signe son mefait
 debut_droite();
 
 
+
 /*---------------------------------------------------------------------------*\
 Onglets pages sup.
 \*---------------------------------------------------------------------------*/
@@ -251,26 +249,31 @@ Onglets pages sup.
 /*---------------------------------------------------------------------------*\
 Lister Articles du jour
 \*---------------------------------------------------------------------------*/
-	echo liste_articles_jour($date_auj,$nb_art_visites_jour,$date_maj_art,$prev_visites);
-
+	$m[1] = liste_articles_jour($date_auj,$nb_art_visites_jour,$date_maj_art,$prev_visites);
 
 /*---------------------------------------------------------------------------*\
 Visites du jour par secteur/rubrique
 \*---------------------------------------------------------------------------*/
-	echo tableau_visites_rubriques($date_auj);
-
+	$m[2] = tableau_visites_rubriques($date_auj);
 
 /*---------------------------------------------------------------------------*\
 Visites et Nbr articles /j. sur les 8 derniers jours + moyenne.
 \*---------------------------------------------------------------------------*/
-	echo articles_visites_semaine();
-
+	$m[3] = articles_visites_semaine();
 
 /*---------------------------------------------------------------------------*\
 Affichage des referers du jour (orig. spip inc/statistiques)
 \*---------------------------------------------------------------------------*/
-	echo liste_referers_jour('jour');
+	$m[4] = liste_referers_jour('jour');
 
+#
+# affichage des blocs ordonnes $m
+#
+$ordon_admin=$GLOBALS['actijour']['admin-'.$connect_id_auteur]['ordon_pg_m'];
+if(!$ordon_admin) { $ordon_admin='1,2,3,4'; }
+foreach(explode(',',$ordon_admin) as $bloc) {
+	echo $m[$bloc];
+}
 
 
 # retour haut de page
@@ -278,6 +281,6 @@ echo bouton_retour_haut();
 
 echo fin_gauche(), fin_page();
 
-} // fin fonction
+} // fin exec
 
 ?>

@@ -1,17 +1,19 @@
 <?php
-
-
-
-
-#
-#  requetes
-#
+/*
++--------------------------------------------+
+| ACTIVITE DU JOUR v. 1.53 - 12/2007 - SPIP 1.9.2
++--------------------------------------------+
+| H. AROUX . Scoty . koakidi.com
+| Script certifie KOAK2.0 strict, mais si !
++--------------------------------------------+
+| Requetes principales sur base
++--------------------------------------------+
+*/
 
 // nombre de jours depuis debut stats
 function nb_jours_stats() {
 	$q = spip_query("SELECT COUNT(*) as nbj FROM spip_visites");
 	$r = spip_fetch_array($q);
-	#h.21/03/07 .. correctif : $r['nbj'] > 1
 	if ($r['nbj'] > 1){ $nb = $r['nbj']; }
 	else { $nb = "1"; }
 	return $nb;
@@ -31,7 +33,7 @@ function global_jour($date) {
 	if ($r = @spip_fetch_array($q)) {
 		$g = $r;
 	} else {
-		$g['visites'] = 0;
+		$g['visites'] = '0';
 		$g['date']=date('d/m/y H:i', mktime(0, 1, 0, date("m"), date("d"), date("Y")));
 	}
 	return $g;
