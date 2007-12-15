@@ -10,7 +10,7 @@
 	stable
 	</etat>
 	<description>
-	Ce plugin rajoute, sur la page exec=articles, une boîte texte contenant le contenu brut d'un article (avec les raccourcis typographiques SPIP), afin qu'un r&eacute;dacteur puisse copier/coller le contenu d'un article m&ecirc;me s'il n'est pas autoris&eacute; &agrave; &eacute;diter l'article source.
+	Ce plugin rajoute, sur la page exec=articles, une bo&icirc;te texte contenant le contenu brut d'un article (avec les raccourcis typographiques SPIP), afin qu'un r&eacute;dacteur puisse copier/coller le contenu d'un article m&ecirc;me s'il n'est pas autoris&eacute; &agrave; &eacute;diter l'article source.
 	</description>
 	<lien>
 	</lien>
