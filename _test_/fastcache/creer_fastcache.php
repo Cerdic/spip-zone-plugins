@@ -16,7 +16,11 @@ function creer_fastcache() {
 	$periode = var_export($periode, true);
 
 	$stats = var_export($GLOBALS['meta']['activer_statistiques'] === 'oui', true);
-	$cache = var_export(_DIR_CACHE, true);
+
+	if (!$cache = $cfg['cache'])
+		$cache = _DIR_CACHE;
+	$cache = var_export($cache, true);
+
 	$meta = var_export(_FILE_META, true);
 	$prefix = var_export($GLOBALS['cookie_prefix'], true);
 

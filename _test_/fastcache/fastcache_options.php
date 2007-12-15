@@ -52,26 +52,37 @@ function Fastcache_affichage_final($texte) {
 					.var_export(intval($GLOBALS[$id]),true).";\n";
 
 			// stocker les caches
-			ecrire_fichier(_FC_FILE.'_head.inc', $head);
-			ecrire_fichier(_FC_FILE, $texte
+			$ok = ecrire_fichier(_FC_FILE.'_head.inc', $head);
+			$ok &= ecrire_fichier(_FC_FILE, $texte
 			.(_FC_DEBUG?"\n<!-- read "._FC_FILE." -->\n":''));
-			ecrire_fichier(_FC_FILE.'.gz', $texte
+			$ok &= ecrire_fichier(_FC_FILE.'.gz', $texte
 			.(_FC_DEBUG?"\n<!-- read "._FC_FILE.".gz -->\n":''));
 
 			// version MSIE
 			if (_FC_IE_PNGHACK
 			AND $html) {
 				$textemsie = Fastcache_versionie($texte);
-				ecrire_fichier(_FC_FILE.'_ie', $textemsie
+				$ok &= ecrire_fichier(_FC_FILE.'_ie', $textemsie
 				.(_FC_DEBUG?"\n<!-- read "._FC_FILE."_ie -->\n":''));
-				ecrire_fichier(_FC_FILE.'_ie.gz', $textemsie
+				$ok &= ecrire_fichier(_FC_FILE.'_ie.gz', $textemsie
 				.(_FC_DEBUG?"\n<!-- read "._FC_FILE."_ie.gz -->\n":''));
 			}
 
 			supprimer_fichier(_FC_FILE.'.lock');
 
-			return $texte. (_FC_DEBUG?"\n<!-- stored "._FC_FILE." -->\n":'');
+			if (!$ok) {
+				include_once 'ecrire/inc_version.php';
+				sous_repertoire(dirname(_FC_DIR_CACHE), basename(_FC_DIR_CACHE), true);
+			}
 
+			return $texte
+				. (_FC_DEBUG
+					? ($ok
+						? "\n<!-- stored "._FC_FILE." -->\n"
+						: "\n<!-- error "._FC_FILE." -->\n"
+						)
+					: ''
+				);
 		}
 
 	}
