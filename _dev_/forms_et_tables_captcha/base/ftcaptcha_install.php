@@ -1,7 +1,7 @@
 <?php
 include_spip('base/create');
 include_spip('base/abstract_sql');
-include_spip('base/captcha');
+include_spip('base/ftcaptcha');
 
 creer_base();
 

@@ -55,4 +55,18 @@ function ftcaptcha_forms_input_champs($flux){
 	return $flux;
 }
 
+function ftcaptcha_forms_valide_conformite_champ($flux){
+    $type = $flux['args']['type'];
+    $info = $flux['args']['info'];
+    $extrainfo = $infos['extra_info'];
+    $champ = $flux['args']['champ'];
+    
+    if ($type == 'captcha') {
+					if(check(_request($champ.'_code', $c.'_code'), _request($champ, $c))==0){
+						 $erreur[$champ] .= 'r&eacute;sultat du captcha incorrect. Veuillez ressaisir le r&eacute;sultat du captcha.';
+					}
+			}
+    return $erreur;
+}
+
 ?>
