@@ -39,8 +39,8 @@ function cs_liens_raccourcis_callback($matches)
 function cs_liens_email_callback($matches)
 	{return cs_code_echappement(expanser_liens("[$matches[2]->mailto:$matches[2]]"), 'LIENS');}
 function echappe_interro_amp($texte)
-	{return str_replace(array('?', '&'), array('++cs_INTERRO++', '++cs_AMP++'), $texte);}
+	{return str_replace(array('?', '!', '&'), array('++cs_INTERRO++', '++cs_EXCLAM++', '++cs_AMP++'), $texte);}
 function retour_interro_amp($texte)
-	{return str_replace(array('++cs_INTERRO++', '++cs_AMP++'), array('?', '&'), $texte);}
+	{return str_replace(array('++cs_INTERRO++', '++cs_EXCLAM++', '++cs_AMP++'), array('?', '!', '&'), $texte);}
 
 ?>

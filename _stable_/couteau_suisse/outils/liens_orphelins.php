@@ -18,14 +18,14 @@ function interro_liens_callback($matches) {
 
 // Fonction de remplacement
 function interro_rempl($texte) {
-	// prudence 1 : on protege TOUTES les balises contenant des "?", histoire de voir plus clair
+	// prudence 1 : on protege TOUTES les balises contenant des "?" ou "!", histoire de voir plus clair
 	if (strpos($texte, '<')!==false) 
-		$texte = preg_replace_callback(',(<[^>]+\?[^>]*>),Ums', 'cs_liens_echappe_callback', $texte);
+		$texte = preg_replace_callback(',(<[^>]+[?!][^>]*>),Ums', 'cs_liens_echappe_callback', $texte);
 	// prudence 2 : on protege TOUS les liens de raccourcis de liens Spip, au cas ou...
 	if (strpos($texte, '[')!==false) 
 		$texte = preg_replace_callback(',\[[^][]*->>?([^]]*)\],msS', 'cs_liens_echappe_callback', $texte);
 	// encore ici, on s'en va si pas de "?"...
-	if (strpos($texte, '?')===false) return echappe_retour($texte, 'LIENS');
+	if (strpos($texte, '?')===false && strpos($texte, '!')===false) return echappe_retour($texte, 'LIENS');
 	// chiffres, lettres, caracteres speciaux autorises dans les urls
 	$autorises = _cs_liens_AUTORISE;
 	$autorisesfin = _cs_liens_AUTORISE_FIN;
@@ -40,14 +40,14 @@ function interro_rempl($texte) {
  
 // Fonctions de pipeline
 function interro_pre_typo($texte) {
- 	if (!$GLOBALS["liens_interrogation"] || strpos($texte, '?')===false) return $texte;
+ 	if (!$GLOBALS["liens_interrogation"] || (strpos($texte, '?')===false && strpos($texte, '!')===false)) return $texte;
  	// appeler interro_rempl() une fois que certaines balises ont ete protegees
  	return cs_echappe_balises('', 'interro_rempl', $texte);
 }
 
 function interro_post_propre($texte) {
  	if (!$GLOBALS["liens_interrogation"]) return $texte;
-	return str_replace(array('++cs_INTERRO++', '++cs_AMP++'), array('?', '&amp;'), $texte);
+	return str_replace(array('++cs_INTERRO++', '++cs_EXCLAM++', '++cs_AMP++'), array('?', '!', '&amp;'), $texte);
 }
 
 ?>

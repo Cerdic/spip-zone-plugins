@@ -335,7 +335,7 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et ong
 
 #PUCE {{Liens corrects}}.
 
-SPIP a pour habitude d\'ins&eacute;rer un espace avant les points d\'interrogation, typo fran&ccedil;aise oblige. Voici un outil qui prot&egrave;ge le point d\'interrogation dans les URLs de vos textes.[[Prot&eacute;ger les URLs :->%liens_interrogation%]]
+SPIP a pour habitude d\'ins&eacute;rer un espace avant les points d\'interrogation ou d\'exclamation, typo fran&ccedil;aise oblige. Voici un outil qui prot&egrave;ge le point d\'interrogation dans les URLs de vos textes.[[Prot&eacute;ger les URLs :->%liens_interrogation%]]
 
 #PUCE {{Liens orphelins}}.
 
