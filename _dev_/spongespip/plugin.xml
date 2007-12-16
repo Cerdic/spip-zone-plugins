@@ -1,0 +1,27 @@
+<plugin>
+	<nom>Spongespip</nom>
+	<auteur>fetard@gmail.com [->http://lahaut.info/]
+_ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
+</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<icon></icon>
+	<description>Spongespip est l'adaptation &agrave; SPIP de Spongestats, un outil de statistiques utilisant massivement Ajax et proposant des donn&eacute; plus compl&egrave;tes que le module int&eacute;gr&eacute;.</description>
+	<options><!-- spiplistes_mes_options.php --></options>
+	<fonctions>inc/spongespip_fonctions.php</fonctions>
+	<prefix>spongespip</prefix>
+	<install><!-- base/spiplistes_upgrade.php --></install>
+	<lien></lien>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>spongespip_pipe.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>inserer_entete</action>
+		<inclure>spongespip_pipe.php</inclure>
+		</pipeline>
+	<chemin dir='' />
+</plugin>

@@ -1,0 +1,15 @@
+[(#REM) titre=Spongespip]
+[(#REM) descriptif=Options]
+[(#REM) nom=spongespip]
+
+[(#REM) liens*=exclusions]
+[(#REM) liens*=interface_et_affichage]
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<input type="hidden" name="champ_fake">
+Description spongespip
+<p><label for="prefixe">Pr&eacute;fixe des tables&nbsp;</label>
+<input type="text" name="prefixe" value="#ENV{prefixe}" size="3" /></p>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />	
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>

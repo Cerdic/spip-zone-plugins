@@ -1,0 +1,46 @@
+[(#REM) titre=Spongespip : interface et affichage]
+[(#REM) descriptif=SPS : pour param&eacute;trer l'affichage de l'application]
+[(#REM) nom=spongespip]
+[(#REM) onglet=non]
+[(#REM) casier=interface]
+[(#REM) liens*=exclusions]
+[(#REM) liens*=interface_et_affichage]
+<style>
+.spongespip label {float:left;text-align:right;width:60%;line-height:1.8em;font-size:80%;}
+
+</style>
+<form method="post" class="spongespip">[(#ENV{_cfg_}|form_hidden)]
+
+<p><label for="nombre_visiteurs">Nombre de visiteurs&nbsp;</label>
+<input type="text" name="nombre_visiteurs" value="#ENV{nombre_visiteurs}" size="3" /></p>
+
+<p><label for="nombre_pages_vues">Nombre de pages vues&nbsp;</label>
+<input type="text" name="nombre_pages_vues" value="#ENV{nombre_pages_vues}" size="3"  /></p>
+
+<p><label for="nombre_pages_entree">Nombre de pages d'entr&eacute;e&nbsp;</label>
+<input type="text" name="nombre_pages_entree" value="#ENV{nombre_pages_entree}" size="3"  /></p>
+
+<p><label for="nombre_pages_referer">Nombre de pages referers&nbsp;</label>
+<input type="text" name="nombre_pages_referer" value="#ENV{nombre_pages_referer}" size="3"  /></p>
+
+<p><label for="nombre_domaines_referents">Nombre de domaines r&eacute;f&eacute;rents&nbsp;</label>
+<input type="text" name="nombre_domaines_referents" value="#ENV{nombre_domaines_referents}" size="3"  /></p>
+
+<p><label for="nombre_mots_cles">Nombre de pages mots-cl&eacute;s&nbsp;</label>
+<input type="text" name="nombre_mots_cles" value="#ENV{nombre_mots_cles}" size="3"  /></p>
+
+<p><label for="nombre_occurences_mots_cles">Nombre d'occurences des mots-cl&eacute;s&nbsp;</label>
+<input type="text" name="nombre_occurences_mots_cles" value="#ENV{nombre_occurences_mots_cles}" size="3"  /></p>
+
+<p><label for="nombre_jour_evolution_mots_cles">Nombre de jours pour l'&eacute;volution des mots-cl&eacute;s&nbsp;</label>
+<input type="text" name="nombre_jour_evolution_mots_cles" value="#ENV{nombre_jour_evolution_mots_cles}" size="3"  /></p>
+
+<p><label for="nombre_ip">Nombre d'IP&nbsp;</label>
+<input type="text" name="nombre_ip" value="#ENV{nombre_ip}" size="3"  /></p>
+
+<p><label for="nombre_hotes">Nombre d'hôtes&nbsp;</label>
+<input type="text" name="nombre_hotes" value="#ENV{nombre_hotes}" size="3"  /></p>
+
+<!-- <p> --><input type="submit" name="_cfg_ok" value="<:OK:>" />	
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" /><!-- </p> -->
+</form>
