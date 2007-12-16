@@ -11,6 +11,10 @@
 	[(#GET{intertitre}
 		|?{'',#SET{intertitre,#TITRE}}
 		)]
+	[(#SET{extrait,
+		[(#TEXTE
+			|extrait_de_texte{#ENV{debut,0},#ENV{taille,20}})]
+		})]
 </BOUCLE_Article>
 </B_Article>
 	[(#SET{intertitre,"renvoi"})]
@@ -20,5 +24,5 @@
 (#REM) Le renvoi est rédigé
 ]
 [(#GET{crochet}
-	|concat{#GET{intertitre},"->",#ENV{id},"#",#ENV{partie},"]"}
+	|concat{[(#GET{intertitre}|trim)],[|(#GET{extrait})(...)],"->",#ENV{id},"#",#ENV{partie},"]"}
 	|propre)]
