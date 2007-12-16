@@ -14,10 +14,12 @@
 		})]
 </BOUCLE_Article>
 #SET{quote,"<quote>"}
+#SET{pasdebut,""}
+[(#ENV{debut}|?{#SET{pasdebut,"(...) "}})]
 [
 (#REM) L'extrait est encadré par des quotes et contient l'intertitre
 ]
 [(#GET{quote}
-	|concat{"{{{",#GET{intertitre},"}}}",#GET{extrait},"(...)</quote>"}
+	|concat{"{{{",#GET{intertitre},"}}}",#GET{pasdebut},#GET{extrait},"(...)</quote>"}
 	|propre)]
 
