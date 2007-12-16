@@ -35,9 +35,9 @@ if (!defined('_SPIP19300')) {
 function cs_liens_echappe_callback($matches)
 	{return cs_code_echappement($matches[0], 'LIENS');}
 function cs_liens_raccourcis_callback($matches)
-	{return cs_code_echappement(expanser_liens('[->'.retour_interro_amp($matches[0]).']', 'LIENS'));}
+	{return cs_code_echappement(expanser_liens('[->'.retour_interro_amp($matches[0]).']'), 'LIENS');}
 function cs_liens_email_callback($matches)
-	{return cs_code_echappement(expanser_liens("[$matches[2]->mailto:$matches[2]]", 'LIENS'));}
+	{return cs_code_echappement(expanser_liens("[$matches[2]->mailto:$matches[2]]"), 'LIENS');}
 function echappe_interro_amp($texte)
 	{return str_replace(array('?', '&'), array('++cs_INTERRO++', '++cs_AMP++'), $texte);}
 function retour_interro_amp($texte)

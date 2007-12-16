@@ -660,7 +660,7 @@ add_outil( array(
 	'auteur' 	=> 'Alexis Roussel, Paolo',
 	'contrib'	=> 2443,
 	'jquery'	=> 'oui',
-	'pipelinecode:post_propre' => "if(strpos(\$flux, '@')===false) \$flux=cs_echappe_balises('', 'mailcrypt', \$flux);",
+	'pipelinecode:post_propre' => "if(strpos(\$flux, '@')!==false) \$flux=cs_echappe_balises('', 'mailcrypt', \$flux);",
 	'code:js' => "function lancerlien(a,b){ x='ma'+'ilto'+':'+a+'@'+b; return x; }",
 	// jQuery pour remplacer l'arobase image par l'arobase texte
 	'code:jq' => "\$('span.spancrypt').after('<span class=\"cryptOK\">&#6'+'4;<\/span>'); \$('span.spancrypt').remove();",

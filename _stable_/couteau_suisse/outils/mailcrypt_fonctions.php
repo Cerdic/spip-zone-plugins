@@ -1,5 +1,8 @@
 <?php
 
+// pour _cs_liens_AUTORISE
+include_spip('outils/inc_cs_liens');
+
 // tip visible onMouseOver
 @define('_mailcrypt_AROBASE_JS', '..&aring;t..');
 // span ayant l'arobase en background
