@@ -12,10 +12,13 @@
 	stable
 	</etat>
 	<description>
-	Ajoute le script Google analytics dans l'espace public en ins&eacute;rant le code perso de google analytics dans l'espace priv&eacute;
+	Ajoute le script Google analytics dans l'espace public en ins&eacute;rant le code perso de google analytics dans l'espace
+ priv&eacute;
+ <h4>[Configuration->.?exec=cfg&amp;cfg=googleanalytics]</h4>
 	</description>
+	<icon>ga.png</icon>
 	<lien>
-	si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=googleanalytics]
+		[Documentation->http://www.spip-contrib.net/?article2495]
     </lien>
 	<prefix>
 	googleanalytics
