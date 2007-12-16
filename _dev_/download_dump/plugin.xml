@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Dump Download</nom>
+	<auteur>phil</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+	Ce plugin ajoute une fonctionnalit&eacute; dans la zone de configuration du site permettant de t&eacute;l&eacute;charger le dump sur site sur son ordinateur. Spip 1.9.2.
+	</description>
+	<lien>
+	[Documentation->http://www.spip-contrib.net/?article2563]
+	</lien>
+	<icon>
+	dd.png
+	</icon>
+	<prefix>dd</prefix>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>dd_pipeline.php</inclure>
+	</pipeline>
+		<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>dd_pipeline.php</inclure>
+	</pipeline>
+</plugin>
