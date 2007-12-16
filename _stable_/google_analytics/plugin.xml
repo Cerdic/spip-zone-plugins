@@ -15,7 +15,7 @@
 	Ajoute le script Google analytics dans l'espace public en ins&eacute;rant le code perso de google analytics dans l'espace priv&eacute;
 	</description>
 	<lien>
-	si vous avez cfg: [Configuration->.?exec=cfg&cfg=googleanalytics]
+	si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=googleanalytics]
     </lien>
 	<prefix>
 	googleanalytics
