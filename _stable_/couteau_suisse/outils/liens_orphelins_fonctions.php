@@ -1,76 +1,38 @@
 <?php
+/*
+ Liens orphelins - Code & integration 2007 : Patrice Vanneufville
+ Toutes les infos sur : http://www.spip-contrib.net/?article2443
+*/
 
-// chiffres, lettres, 20 caracteres speciaux autorises dans les urls
-@define('_liens_orphelins_AUTORISE', '\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\.\{\|\}\~a-zA-Z0-9');
-@define('_liens_orphelins_AUTORISE_FIN', '\#\$\&\'\*\+\-\/\=\^\_\`\|\~a-zA-Z0-9');
-
-// expanser_liens() est introduit sous SPIP 1.93
-if (!defined('_SPIP19300')) {
-	@define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
-	function expanser_liens($letexte) {
-		$inserts = array();
-		if (preg_match_all(_RACCOURCI_LIEN, $letexte, $matches, PREG_SET_ORDER)) {
-			$i = 0;
-			foreach ($matches as $regs) {
-				$inserts[++$i] = traiter_raccourci_lien($regs);
-				$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE_LIEN_$i@@", $letexte);
-			}
-		}
-		$letexte = typo($letexte, /* echap deja fait, accelerer */ false);
-		foreach ($inserts as $i => $insert)
-			$letexte = str_replace("@@SPIP_ECHAPPE_LIEN_$i@@", $insert, $letexte);
-		return $letexte;
-	}
-}
-
-function liens_orphelins_echappe_balises_callback($matches) {
- return cs_code_echappement($matches[1], 'LIENS');
-}
-function liens_orphelins_raccourcis_callback($matches) {
- return cs_code_echappement('[->'.$matches[1].']', 'LIENS');
-}
+include_spip('outils/inc_cs_liens');
 
 function liens_orphelins($texte){
 	// deja, on s'en va si pas de point...
-	if (strpos($texte, '.')===false) return $texte;
+	if ($GLOBALS["liens_orphelins"]<0 || strpos($texte, '.')===false) return $texte;
 	// prudence 1 : on protege TOUTES les balises <a></a> pour eviter les doublons
 	if (strpos($texte, '<a')!==false) 
-		$texte = preg_replace_callback(',(<a\s*[^<]+</a>),Ums', 'liens_orphelins_echappe_balises_callback', $texte);
+		$texte = preg_replace_callback(',<a\s*[^<]+</a>,Ums', 'cs_liens_echappe_callback', $texte);
 	// prudence 2 : on protege TOUS les raccourcis de liens Spip, au cas ou...
 	if (strpos($texte, '[')!==false) 
-		$texte = preg_replace_callback(',(\[([^][]*)->(>?)([^]]*)\]),msS', 'liens_orphelins_echappe_balises_callback', $texte);
+		$texte = preg_replace_callback(',\[([^][]*)->(>?)([^]]*)\],msS', 'cs_liens_echappe_callback', $texte);
 	// prudence 3 : on protege TOUTES les balises contenant des points, histoire de voir plus clair
 	if (strpos($texte, '<')!==false) 
-		$texte = preg_replace_callback(',(<[^>]+\.[^>]*>),Ums', 'liens_orphelins_echappe_balises_callback', $texte);
+		$texte = preg_replace_callback(',<[^>]+\.[^>]*>,Ums', 'cs_liens_echappe_callback', $texte);
 	// encore ici, on s'en va si pas de point...
 	if (strpos($texte, '.')===false) return echappe_retour($texte, 'LIENS');
 
-	// chiffres, lettres, caracteres speciaux autorises dans les urls
-	$autorises = _liens_orphelins_AUTORISE;
-	$autorisesfin = _liens_orphelins_AUTORISE_FIN;
+	// trouve et protege : protocole://qqchose
+	$texte = preg_replace_callback(_cs_liens_HTTP, 'cs_liens_raccourcis_callback', $texte);
+	// trouve et protege : www.lieu.qqchose ou ftp.lieu.qqchose
+	$texte = preg_replace_callback(_cs_liens_WWW, 'cs_liens_raccourcis_callback', $texte);
 
-   // trouve : protocole://qqchose
-   $texte = preg_replace(",([a-zA-Z]+://[{$autorises}:@]*[{$autorisesfin}]),", "@@LO1@@$1@@LO2@@", $texte);
-   // on protege, pour la suite...
-   $texte = preg_replace_callback(',@@LO1@@(.+)@@LO2@@,U', 'liens_orphelins_raccourcis_callback', $texte);
-// bizarre j'arrive pas a faire marcher directement :
-//	$texte = preg_replace_callback(',([a-zA-Z]+://[{$autorises}:@]*),', 'liens_orphelins_raccourcis_callback', $texte);
-
-   // trouve : www.lieu.qqchose ou ftp.lieu.qqchose
-   $texte = preg_replace(",\b((www|ftp)\.[a-zA-Z0-9_-]+\.[{$autorises}]*[{$autorisesfin}]),", "@@LO1@@$1@@LO2@@", $texte);
-   // on protege, pour la suite...
-   $texte = preg_replace_callback(',@@LO1@@(.+)@@LO2@@,U', 'liens_orphelins_raccourcis_callback', $texte);
-// bizarre j'arrive pas a faire marcher directement :
-//	$texte = preg_replace_callback(',\b((www|ftp)\.[a-zA-Z0-9_-]+\.[{$autorises}]*),', 'liens_orphelins_raccourcis_callback', $texte);
-
-   // trouve : mailto:qqchose ou news:qqchose
-   if($GLOBALS["liens_orphelins_etendu"]) {
-	   $texte = preg_replace(",\b(news:[{$autorises}]*[{$autorisesfin}]),", "[->$1]", $texte);
-	   $texte = preg_replace(",\b(mailto:)?([{$autorises}]*@[a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?[{$autorises}]*)?),", "[$2->mailto:$2]", $texte);
+	$autorises = _cs_liens_AUTORISE;
+	$autorisesfin = _cs_liens_AUTORISE_FIN;
+	// trouve : mailto:qqchose ou news:qqchose
+	if($GLOBALS["liens_orphelins"]>0) {
+	   $texte = preg_replace_callback(_cs_liens_NEWS, 'cs_liens_raccourcis_callback', $texte);
+	   $texte = preg_replace_callback(_cs_liens_MAILS, 'cs_liens_email_callback', $texte);
 	}
-
-	// SPIP 1.93 ne repasse plus les liens : ils sont deja expanses
-	if (defined('_SPIP19300')) $texte=expanser_liens($texte);
 
 	return echappe_retour($texte, 'LIENS');
 }

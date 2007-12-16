@@ -47,6 +47,10 @@ function cs_rempl_glossaire($texte) {
 	$r = spip_query("SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE " . $GLOBALS['glossaire_groupes_type']);
 	// compatibilite SPIP 1.92
 	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
+	// protection des liens SPIP
+	if (strpos($texte, '[')!==false) 
+		$texte = preg_replace_callback(',(\[([^][]*)->(>?)([^]]*)\]),msS', 'glossaire_echappe_balises_callback', $texte);
+	
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
 	while($mot = $fetch($r)) if ($mot['id_mot']<>$GLOBALS['id_mot']) {
 		// prendre en compte les formes du mot : architrave/architraves

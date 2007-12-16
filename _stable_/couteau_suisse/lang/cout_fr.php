@@ -330,13 +330,21 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et ong
 	'sommaire_page_long' => ',&nbsp;page&nbsp;@page@',
 
 // ---------------------------------------------------------------------------
-	'liens_orphelins:nom' => 'Liens orphelins',
-	'liens_orphelins:description' => 'Remplace syst&eacute;matiquement tous les liens laiss&eacute;s en texte par les utilisateurs (notamment dans les forums) et qui ne sont donc pas cliquables, par des liens hypertextes au format SPIP. Par exemple : {<html>www.spip.net</html>} est remplac&eacute; par [->www.spip.net].
+	'liens_orphelins:nom' => 'Belles URLs',
+	'liens_orphelins:description' => 'Cet outil a deux fonctions :
+
+#PUCE {{Liens corrects}}.
+
+SPIP a pour habitude d\'ins&eacute;rer un espace avant les points d\'interrogation, typo fran&ccedil;aise oblige. Voici un outil qui prot&egrave;ge le point d\'interrogation dans les URLs de vos textes.[[Prot&eacute;ger les URLs :->%liens_interrogation%]]
+
+#PUCE {{Liens orphelins}}.
+
+Remplace syst&eacute;matiquement toutes les URLs laiss&eacute;es en texte par les utilisateurs (notamment dans les forums) et qui ne sont donc pas cliquables, par des liens hypertextes au format SPIP. Par exemple : {<html>www.spip.net</html>} est remplac&eacute; par [->www.spip.net].
 
 Vous pouvez choisir le type de remplacement :
-- {Basique} : sont remplac&eacute;s les liens du type {<html>http://spip.net</html>} (tout protocole) ou {<html>www.spip.net</html>}.
-- {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
-[[Votre choix :->%liens_orphelins%]]',
+_ &bull; {Basique} : sont remplac&eacute;s les liens du type {<html>http://spip.net</html>} (tout protocole) ou {<html>www.spip.net</html>}.
+_ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
+[[Liens cliquables :->%liens_orphelins%]]',
 	'basique' => 'Basique',
 	'etendu' => '&Eacute;tendu',
 
@@ -421,6 +429,11 @@ D&eacute;finissez ci-dessous le nombre maximal d'auteurs &agrave; afficher sur c
  #BLOC_FIN</code></quote>
 ",
 	'blocs:aide' => 'Blocs D&eacute;pliables : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
+
+
+// ---------------------------------------------------------------------------
+	'insertions:nom' => 'Corrections automatiques',
+	'insertions:description' => 'Outil en tests !! [[Corrections automatiques :->%insertions%]]',
 /*
 // ---------------------------------------------------------------------------
 	':nom' => '',

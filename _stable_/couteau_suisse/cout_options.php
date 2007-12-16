@@ -68,4 +68,39 @@ if(!isset($_GET['page']) OR !preg_match(',\.(css|js)$,', $_GET['page'])) {
 	if(defined('_LOG_CS')) spip_log('COUTEAU-SUISSE.  -- sortie de cout_options sans initialisation du plugin ');
 }
 
+$p=find_in_path('corrections.txt');
+$pp=find_in_path('corrections_.txt');
+lire_fichier($p, $p);
+$p = explode(chr(0).chr(0), $p);
+unset($p[0],$p[1],$p[2]);
+foreach($p as $i=>$v) {
+	$v = substr($v, 2);
+	$v = str_replace(chr(0), '', $v);
+	$v = str_replace(chr(25), "'", $v);
+	$v = str_replace(chr(24), "'", $v);
+	$v = str_replace(chr(83).chr(1), '&oelig;', $v);
+	$v = str_replace(chr(82).chr(1), '&OElig;', $v);
+	$v = str_replace(chr(172), '&euro;', $v);
+	$v = str_replace(chr(174), '&reg;', $v);
+	$v = str_replace(chr(34).chr(33), '&trade;', $v);
+	$v = str_replace(chr(38).chr(32), '&hellip;', $v);
+//	$v = $v . ' - ' . sprintf('%d, %d, %d', ord($v[0]), ord($v[1]), ord($v[2]));
+	$x = preg_quote($y=$p[$i-1], '/');
+	$z=$x==$y?'':"# preg : $x\n";
+	$x=htmlentities($y);
+	$z.=$x==$y?'':"# html : $x\n";
+	$vv = str_replace('&amp;', '&', htmlentities(trim($v)));
+//	if(preg_match(',(.+)s$,', $y, $r1) && preg_match(',(.+)s$,', $vv, $r2)) { $vv = $r2[1].'$1'; $y = $r1[1].'(s?)'; }
+	if(!($i % 2)) {
+		$q[$z.'('.$y.')'] = $vv;
+		$GLOBALS['ins']["deux $y trois"] = "deux $vv trois";
+	}
+	$p[$i] = trim($v);
+}
+$p = '';
+foreach($q as $i=>$v)
+	$p .= "$i = $v\n";
+//print_r($GLOBALS['ins']);
+//ecrire_fichier($pp, $p);
+
 ?>

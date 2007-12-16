@@ -567,20 +567,29 @@ add_outil( array(
 ));
 
 add_variable( array(
+	'nom' => 'liens_interrogation',
+	'format' => 'nombre',
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
+	'defaut' => 1,
+	'code:%s' => "\$GLOBALS['liens_interrogation']=true;\n",
+));
+add_variable( array(
 	'nom' => 'liens_orphelins',
 	'format' => 'nombre',
-	'radio' => array(0 => 'cout:basique', 1 => 'cout:etendu'),
+	'radio' => array(-1 => 'item_non', 0 => 'cout:basique', 1 => 'cout:etendu'),
 	'defaut' => 0,
-	'code:%s' => '$GLOBALS["liens_orphelins_etendu"]=true;',
+	'code' => '$GLOBALS["liens_orphelins"]=%s;',
 ));
 // attention : liens_orphelins doit etre place avant mailcrypt
 add_outil( array(
 	'id' => 'liens_orphelins',
 	'categorie'	 => 'typo-corr',
 	'contrib'	=> 2443,
-	'code:options' => '%%liens_orphelins%%',
+	'code:options' => '%%liens_interrogation%%%%liens_orphelins%%',
 	'pipeline:pre_propre' => 'liens_orphelins_pipeline',
 	'traitement:EMAIL' => 'expanser_liens(liens_orphelins',
+ 	'pipeline:pre_typo'   => 'interro_pre_typo',
+ 	'pipeline:post_propre'   => 'interro_post_propre',
 ));
 
 add_outil( array(
@@ -651,7 +660,7 @@ add_outil( array(
 	'auteur' 	=> 'Alexis Roussel, Paolo',
 	'contrib'	=> 2443,
 	'jquery'	=> 'oui',
-	'pipeline:post_propre' => 'mailcrypt_post_propre',
+	'pipelinecode:post_propre' => "if(strpos(\$flux, '@')===false) \$flux=cs_echappe_balises('', 'mailcrypt', \$flux);",
 	'code:js' => "function lancerlien(a,b){ x='ma'+'ilto'+':'+a+'@'+b; return x; }",
 	// jQuery pour remplacer l'arobase image par l'arobase texte
 	'code:jq' => "\$('span.spancrypt').after('<span class=\"cryptOK\">&#6'+'4;<\/span>'); \$('span.spancrypt').remove();",
@@ -675,6 +684,28 @@ add_outil( array(
 	'jquery'	=> 'oui',
 	'pipeline:pre_typo' => 'blocs_pre_typo',
 	'pipeline:BT_toolbox' => 'blocs_BarreTypo',
+));
+
+add_variable( array(
+	'nom' => 'insertions',
+	'format' => 'chaine',
+	'lignes' => 8,
+	'defaut' => '"coeur = c&oelig;ur
+manoeuvre = man&oelig;uvre
+(oeuvre(s?|r?)) = &oelig;uvre$1
+(O(E|e)uvre(s?|r?)\b/ = &OElig;uvre$2
+((h|H)uits) = $1uit
+/\b(c|C|m.c|M.c|rec|Rec)onn?aiss?a(nce|nces|nt|nts|nte|ntes|ble)\b/ = $1onnaissa$2
+/\boeuf(s?)\b/ = &oelig;uf$1
+"',
+	'code' => "define('_insertions_LISTE', %s);",
+));
+add_outil( array(
+	'id' => 'insertions',
+	'categorie'	 => 'typo-corr',
+	'code:options' => "%%insertions%%",
+	'traitement:TEXTE:pre_propre' => 'insertions_pre_propre',
+	'traitement:TEXTE/articles:pre_propre' => 'insertions_pre_propre',
 ));
 
 // Ajout des outils personnalises
