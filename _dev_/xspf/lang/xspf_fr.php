@@ -4,9 +4,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // description du plugin
 'description_xspf' => '
 <h4>Configuration du plugin xspf</h4>
-<p>Ici vous pouvez configurer les diff&eacute;rents options de chacun des lecteurs.</p>
-En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>
-',
+<p>Ici vous pouvez configurer les diff&eacute;rentes options de chacun des lecteurs.</p>
+En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
+
+'description_flvplayer' => '
+<h4>Configuration du  flvplayer</h4>
+<p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur "flvplayer" de Jeroen Wijering.</p>
+En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
+
+'description_mediaplayer' => '
+<h4>Configuration du mediaplayer</h4>
+<p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur "mediaplayer" de Jeroen Wijering.</p>
+En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
+
+'description_musicplayer' => '
+<h4>Configuration du musicplayer</h4>
+<p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur musicplayer.</p>
+En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
+
+'description_rotator' => '
+<h4>Configuration de rotator</h4>
+<p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur "rotator" de Jeroen Wijering.</p>
+En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
 
 'description_xspf_lecteurs' => '
 Lecteurs de <a href="http://musicplayer.sourceforge.net/">XSPF Web Music Player</a>

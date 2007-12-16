@@ -1,6 +1,50 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+// description du plugin
+'description_xspf' => '
+<NEW><h4>Configuration du plugin xspf</h4>
+<p>Ici vous pouvez configurer les diff&eacute;rentes options de chacun des lecteurs.</p>
+En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
+
+'description_flvplayer' => '
+<NEW><h4>Configuration du  flvplayer</h4>
+<p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur "flvplayer" de Jeroen Wijering.</p>
+En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
+
+'description_mediaplayer' => '
+<NEW><h4>Configuration du mediaplayer</h4>
+<p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur "mediaplayer" de Jeroen Wijering.</p>
+En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
+
+'description_musicplayer' => '
+<NEW><h4>Configuration du musicplayer</h4>
+<p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur musicplayer.</p>
+En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
+
+'description_rotator' => '
+<NEW><h4>Configuration de rotator</h4>
+<p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur "rotator" de Jeroen Wijering.</p>
+En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
+
+'description_xspf_lecteurs' => '
+<NEW>Lecteurs de <a href="http://musicplayer.sourceforge.net/">XSPF Web Music Player</a>
+<ul>
+<li>Music Player</li>
+<li>Slim Player</li>
+<li>Button Player</li>
+</ul>
+Lecteurs de <a href="http://www.jeroenwijering.com/">Jeroen Wijering</a>
+<ul>
+<li>Rotator</li>
+<li>Media Player</li>
+<li>Flash Video Player</li>
+</ul>
+
+<p><small>Attention, la licence de ces trois lecteurs est semi-commerciale, c&rsquo;est pourquoi ils ne sont pas inclus dans cette contribution. 
+Vous &ecirc;tes libres de les installer selon vos convictions et nous ne pouvons &ecirc;tre tenus responsables du non-respect de ces licences.</small>
+</p>',
+
 //page d\'affichage de la configuration du plugin
 'width' => 'Width',
 'desc_width' => 'As with the height of the player/rotator, this variable is already set with a default embed code. However, sometimes (notably on IE), this won\t get through (so you get a messed-up display). Then use this flashvar to tell the player/rotator how many pixels wide it should be.',
@@ -105,7 +149,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'desc_postrolllocation' =>'Adresse du fichier de postface',
 'desc_postrolllink' =>'Lien depuis le fichier de postface',
 
-
 'jw_media_player' => '<p>The JW Media Player supports playback of a single media file of any format the Adobe Flash Player can handle (MP3, FLV, SWF, JPG, PNG and GIF). 
 It also supports RSS, XSPF and ATOM playlist (with mixed mediatypes and advertisement possibilities), a wide range of flashvars (settings) for tweaking both behavior and appearance and an extensive, documented javascript/actionscript API.</p>
 <p><a href="http://www.jeroenwijering.com/?item=JW_Media_Player">http://www.jeroenwijering.com/?item=JW_Media_Player</a></p>',
@@ -116,13 +159,13 @@ It supports rotation of an RSS, XSPF or ATOM playlist with JPG, GIF and PNG imag
 It supports playback of a single Flash video file, RTMP streams or RSS, XSPF and ATOM playlists (with advertisement possibilities), a wide range of flashvars (settings) for tweaking both behavior and appearance and an extensive, documented javascript/actionscript API.</p>
 <p><a href="http://www.jeroenwijering.com/?item=JW_FLV_Player">http://www.jeroenwijering.com/?item=JW_FLV_Player</a></p>',
 
-'jw_media_player_install' => '<NEW><p>The JW Media Player supports playback of a single media file of any format the Adobe Flash Player can handle (MP3, FLV, SWF, JPG, PNG and GIF). 
+'jw_media_player_install' => '<p>The JW Media Player supports playback of a single media file of any format the Adobe Flash Player can handle (MP3, FLV, SWF, JPG, PNG and GIF). 
 It also supports RSS, XSPF and ATOM playlist (with mixed mediatypes and advertisement possibilities), a wide range of flashvars (settings) for tweaking both behavior and appearance and an extensive, documented javascript/actionscript API.</p>
 <p><a href="http://www.jeroenwijering.com/?item=JW_Media_Player">http://www.jeroenwijering.com/?item=JW_Media_Player</a></p>',
-'jw_rotator_install' => '<NEW><p>The JW Image Rotator enables you to show a couple of photos in sequence, with fluid transitions between them. 
+'jw_rotator_install' => '<p>The JW Image Rotator enables you to show a couple of photos in sequence, with fluid transitions between them. 
 It supports rotation of an RSS, XSPF or ATOM playlist with JPG, GIF and PNG images, a wide range of flashvars (settings) for tweaking both behavior and appearance and an extensive, documented javascript and actionscript API.</p>
 <p><a href="http://www.jeroenwijering.com/?item=JW_Image_Rotator">http://www.jeroenwijering.com/?item=JW_Image_Rotator</a></p>',
-'jw_flv_player_install' => '<NEW><p>The JW FLV Player can be used standalone, without the need for the Flash authoring tool. The player allows you to show your videos more controlled and to a broader audience than with Quicktime, Windows Media or Real Media. 
+'jw_flv_player_install' => '<p>The JW FLV Player can be used standalone, without the need for the Flash authoring tool. The player allows you to show your videos more controlled and to a broader audience than with Quicktime, Windows Media or Real Media. 
 It supports playback of a single Flash video file, RTMP streams or RSS, XSPF and ATOM playlists (with advertisement possibilities), a wide range of flashvars (settings) for tweaking both behavior and appearance and an extensive, documented javascript/actionscript API.</p>
 <p><a href="http://www.jeroenwijering.com/?item=JW_FLV_Player">http://www.jeroenwijering.com/?item=JW_FLV_Player</a></p>',
 
