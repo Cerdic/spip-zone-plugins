@@ -60,6 +60,25 @@ function extrait_liens($texte) {
  };
  return $sortie;
 }
+function extrait_un_titre ($texte,$ancre) {
+ preg_match ("/<h(\d) class=\"spip\"><a name='$ancre'><\/a>(.*?)<\/h\\1>/",$texte,$matches);
+ $titre = textebrut($matches[2]);
+ return $titre;
+}
+function extrait_de_texte ($texte,$debut=0,$taille=20) {
+ $mots = explode (" ",textebrut($texte));
+ $extrait = implode (" ",
+		array_slice($mots,$debut,$taille)
+		);
+return $extrait;
+}
+function extrait_partie ($texte,$ancre,$debut=0,$taille) {
+ preg_match ("/<h(\d) class=\"spip\"><a name='$ancre'><\/a>.*?<\/h\\1>(.*?)<h\\1 class=\"spip\">/s",$texte,$matches);
+ $partie = $matches[2];
+ if (!$taille) $taille = str_word_count($partie);
+ $extrait = extrait_de_texte ($partie,$debut,$taille);
+ return $extrait;
+}
 
 function table_des_matieres ($texte,$tdm) {
  return IntertitresTdm_table_des_matieres($texte,$tdm);

@@ -1,0 +1,23 @@
+ [
+(#REM) Affiche un extrait d'une partie du texte d'un article
+
+
+]
+<BOUCLE_Article(ARTICLES){id_article=#ENV{id}}>
+	[(#SET{intertitre,
+		[(#TEXTE
+			|extrait_un_titre{#ENV{partie}})]
+		})]
+	[(#SET{extrait,
+		[(#TEXTE
+			|extrait_partie{#ENV{partie},#ENV{debut,0},#ENV{taille,20}})]
+		})]
+</BOUCLE_Article>
+#SET{quote,"<quote>"}
+[
+(#REM) L'extrait est encadré par des quotes et contient l'intertitre
+]
+[(#GET{quote}
+	|concat{"{{{",#GET{intertitre},"}}}",#GET{extrait},"(...)</quote>"}
+	|propre)]
+
