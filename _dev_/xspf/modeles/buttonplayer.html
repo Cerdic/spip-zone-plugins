@@ -64,11 +64,11 @@
 <!-- alternetive texte pour ceux qui ont le js desactive -->
 
 <div id="buttonplayer[(#GET{objet_spip})]#ENV{id}" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
-
-<p>
-<a href="http://www.macromedia.com/go/getflashplayer">
-Get the Flash Player</a> to see this player.
-</p>
+[(#GET{objet_spip})]#ENV{id}
+	<p>
+		<a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.
+	</p>
+</div>
 
 <script type="text/javascript">
 // <![CDATA[
@@ -82,7 +82,5 @@ Get the Flash Player</a> to see this player.
 	$(document).ready(function() {
 		s1.write("buttonplayer[(#GET{objet_spip})]#ENV{id}");
 	});
-
 // ]]>
 </script>
-</div>

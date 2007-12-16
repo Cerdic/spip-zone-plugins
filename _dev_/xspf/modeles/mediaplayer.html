@@ -137,15 +137,13 @@ Plusieurs methodes d'insertion :
 <!-- alternetive texte pour ceux qui ont le js desactive -->
 
 <div id="mediaplayer_[(#ENV{id})]_[(#GET{objet_spip})]_[(#GET{objet_val})]" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
-
-<p>
-<a href="http://www.macromedia.com/go/getflashplayer">
-Get the Flash Player</a> to see this player.
-</p>
+	<p>
+		<a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.
+	</p>
+</div>
 
 <script type="text/javascript">
 // <![CDATA[
-
 	var s_[(#ENV{id})]_[(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/jw_media_player/mediaplayer.swf}","mediaplayer","#GET{width}","#GET{height}","7");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("allowfullscreen","#GET{allowfullscreen}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("wmode","#GET{wmode}");
@@ -185,7 +183,6 @@ Get the Flash Player</a> to see this player.
 // ]]>
 </script>
 
-</div>
 [(#REM)
 Assistant wizard pour personnaliser les variables
 http://www.jeroenwijering.com/extras/wizard.html

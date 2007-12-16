@@ -11,12 +11,12 @@
 	Modele spip mis au point sur irc a l'initiative d'alexandra
 	avec la participation de kent1, cy_altern, marcimat, renato et toggg.
 	
-	Méthode classique <template><rotator123></template> ou 123 est l'id article fournissant les documents attaches
-	Méthode par rubrique (on prend les videos parmis les documents de la rubrique) :
+	Methode classique <template><rotator123></template> ou 123 est l'id article fournissant les documents attaches
+	Methode par rubrique (on prend les videos parmis les documents de la rubrique) :
 	<template><rotator|rubrique=123></template>
-	Méthode par secteur (on prend les videos parmis les documents du secteur) :
+	Methode par secteur (on prend les videos parmis les documents du secteur) :
 	<template><rotator|secteur=123></template>
-	Méthode par document unique (on prend un seul document) :
+	Methode par document unique (on prend un seul document) :
 	<template><rotator|document=123></template>
 	
 	Pour les options, voir http://www.jeroenwijering.com/extras/readme.html
@@ -38,7 +38,6 @@
 	- link: url
 	- linkfromdisplay: true|false, false
 	- linktarget: _blanl|_self|_parent|_top|framename, _self
-	
 	- align : left|center|right,center
 	
 ]
@@ -111,16 +110,15 @@
 
 <noscript><p>D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia </p></noscript>
 <!-- alternetive texte pour ceux qui ont le js desactive -->
-<div id="rotator_[(#ENV{id})]_[(#GET{objet_spip})]_[(#GET{objet_val})]" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
 
-<p>
-<a href="http://www.macromedia.com/go/getflashplayer">
-Get the Flash Player</a> to see this player.
-</p>
+<div id="rotator_[(#ENV{id})]_[(#GET{objet_spip})]_[(#GET{objet_val})]" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
+	<p>
+		<a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.
+	</p>
+</div>
 
 <script type="text/javascript">
 // <![CDATA[
-
 	var s_[(#ENV{id})]_[(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/jw_image_rotator/imagerotator.swf}","rotator","#GET{width}","#GET{height}","7");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("wmode","#GET{wmode}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,'jpg|png|gif','&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
@@ -150,11 +148,8 @@ Get the Flash Player</a> to see this player.
 	$(document).ready(function() {
 		s_[(#ENV{id})]_[(#GET{objet_val})].write("rotator_[(#ENV{id})]_[(#GET{objet_spip})]_[(#GET{objet_val})]");
 	});
-
 // ]]>
 </script>
-
-</div>
 
 [(#REM)
 Toutes les options du flash image rotator des flashvars sont disponibles ici http://www.jeroenwijering.com/extras/readme.html
