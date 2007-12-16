@@ -1,0 +1,17 @@
+ <plugin>
+ <nom>Intertitres hiérarchisés et Table des matières</nom>
+ <version>0.1</version>
+ <prefix>IntertitresTdm</prefix>
+ <etat>dev</etat>
+ <auteur>Mortimer, Chtitux (et Beurt pour la mise en plugin)</auteur>
+ <description>Intertitres hi&eacute;rarchis&eacute;s et Table des mati&eagrave;res rajoute des raccourcis typographiques pour g&eacute;rer des niveaux d&#39;intertitres, num&eacute;rot&eacute;s ou non, dans Spip (Ce plugin peut r&eacute;utiliser les intertitres des enluminures typographiques). Il permet aussi d&#39;ajouter dans l&#39;article, une table des mati&agrave;res qui liste les intertitres contenus dans l&#39;article grâce &agrave; un mod&egrave;le. D&#39;autres mod&egrave;les permettent de se r&eacute;f&eacute;rer &agrave; une sous partie d&#39;un article dans un autre article (en citant le titre, extrait ou rien).
+
+Ce plug-in est sous licence GNU/GPL v2</description>
+ <options>intertitres_tdm_options.php</options>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>intertitres_tdm_fonctions_header_prive.php</inclure>
+	</pipeline>
+ <fonctions>intertitres_tdm_fonctions.php</fonctions>
+</plugin>
