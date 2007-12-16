@@ -5,7 +5,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // ajoute les css et js necessaires dans les pages adequates
 function xspf_header_prive($texte) {
 	global $auteur_session, $spip_display, $spip_lang;
-	if (_request('cfg') == 'xspf'){
+	$cfg = _request('cfg');
+	$pos = strpos($cfg, 'xspf');
+	if ($pos === 0){
 		$tooltipcss = find_in_path('javascript/jquery.tooltip.css');
 		$farbcss = url_absolue_css(direction_css(find_in_path('css/farbtastic.css')));
 		
@@ -15,7 +17,6 @@ function xspf_header_prive($texte) {
 		$farbjs = find_in_path('javascript/farbtastic.js');
 				
 		$texte.= "
-		
 			<link rel='stylesheet' type='text/css' href='$tooltipcss' />\n
 			<link rel='stylesheet' type='text/css' href='$farbcss' />\n
 			<script type='text/javascript' src='$bgiframejs'></script>\n
