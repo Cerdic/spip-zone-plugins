@@ -7,3 +7,6 @@ jQuery(function(){
 		return false;
 	});
 });
+
+// un JS actif replie les blocs invisibles
+document.write('<style type="text/css">div.cs_blocs div.blocs_invisible {display:none;}</style>');

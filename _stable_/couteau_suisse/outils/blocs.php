@@ -21,7 +21,7 @@ function blocs_callback($matches) {
 		$div = '>';
 	} else {
 		$h4 = ' class="blocs_replie">';
-		$div = ' class="blocs_invisible"">';
+		$div = ' class="blocs_invisible">';
 	}
 	return '<div class="cs_blocs"><h4' . $h4 . $t[0] . '</h4><div' . $div . $t[1] . '</div></div>';
 }
