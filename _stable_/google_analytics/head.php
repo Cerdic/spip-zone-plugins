@@ -7,7 +7,10 @@ if (!$id_google || $id_google == '_' || $id_google == 'UA-xxxxxx') {
 	}
 	else {
 
-$flux .= '<script type="text/javascript">
+$flux .= '
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
 _uacct = "'.$id_google.'";
 urchinTracker();
 </script>';
