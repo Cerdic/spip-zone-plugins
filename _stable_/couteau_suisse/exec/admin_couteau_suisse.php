@@ -240,11 +240,11 @@ function cs_LireCookie(nom){
 
 function cs_Categorie(nom){
 	c=cs_LireCookie(nom);
-	return c==='cs_hidden'?'cs_hidden':'';
+	return (c=='cs_hidden' || c==null)?'cs_hidden':'';
 }
 function cs_Titre(nom){
 	c=cs_LireCookie(nom);
-	return c==='cs_hidden'?'':' cs_hidden';
+	return (c=='cs_hidden' || c==null)?'':' cs_hidden';
 }
 
 //--></script>";
