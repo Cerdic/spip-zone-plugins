@@ -101,15 +101,20 @@ function liste_outils() {
 		}
 		foreach(array('s_actifs', 's_inactifs') as $temp) {
 			sort(${$temp});
-			$titre = " <span class='light cs_hidden'>(".count(${$temp}).")</span>";
+			$titre = "<script type=\"text/javascript\"><!--
+document.write('<span class=\"light'+cs_Titre('sous_liste_$id')+'\">');
+//--></script><noscript><span class='light cs_hidden'></noscript>" 
+				." (".count(${$temp}).")</span>";
 			preg_match(',([0-9]+)\.?\s*(.*),', _T('cout:'.$c), $reg);
 			$titre = "<div class='titrem categorie'>$reg[2]$titre</div>";
 			$href = generer_url_ecrire(_request('exec'),"cmd=descrip&outil=");
-			foreach(${$temp} as $j=>$v) {
+			foreach(${$temp} as $j=>$v)
 				${$temp}[$j] = preg_replace(',^(.*)\|(.*)\|(.*)$,', '<a class="cs_href" id="href_$3" name="$3" href="'.$href.'$3">$1</a>', $v);
-			}
 			${$temp} = join("<br/>\n", ${$temp});
-			if (strlen(${$temp})) ${'result'.$temp} .= $titre . "<div id='sous_liste_$id'>" . ${$temp} . '</div>';
+			if (strlen(${$temp})) ${'result'.$temp} .= $titre
+				. "<script type=\"text/javascript\"><!--
+document.write('<div id=\"sous_liste_$id\" class=\"'+cs_Categorie('sous_liste_$id')+'\">');
+//--></script><noscript><div id=\"sous_liste_$id\"></noscript>" . ${$temp} . '</div>';
 			$id++;
 		}
 	}

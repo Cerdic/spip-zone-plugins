@@ -118,10 +118,13 @@ function outils_toggle() {
 }
 
 jQuery(function(){
+	jQuery('div.cs_liste script').remove();
 	// clic sur un titre de categorie
 	jQuery('div.categorie').click( function() {
 		jQuery(this).children().toggleClass('cs_hidden');
-		jQuery(this).next().toggleClass('cs_hidden');
+		next = jQuery(this).next();
+		next.toggleClass('cs_hidden');
+		cs_EcrireCookie(next[0].id, next[0].className, dixans);
 		// annulation du clic
 		return false;
 	})
@@ -131,6 +134,10 @@ jQuery(function(){
 		b = jQuery(id+' a.cs_href').length;
 		if(a==b) jQuery(id+' a.outil_on').removeClass('outil_on');
 		else jQuery(id+' a.cs_href').addClass('outil_on');
+		jQuery(this).children().addClass('cs_hidden');
+		next = jQuery(this).next();
+		next.removeClass('cs_hidden');
+		cs_EcrireCookie(next[0].id, next[0].className, dixans);
 		set_selected();
 		set_categ(this.nextSibling.id);
 		return false;
@@ -194,6 +201,51 @@ jQuery(function(){
 	jQuery('div.cs_boite_rss').load('".generer_url_ecrire('cs_boite_rss')."');
 
 });
+
+var dixans=new Date;
+dixans.setFullYear(dixans.getFullYear()+10);
+
+// ref : http://www.actulab.com/ecrire-les-cookies.php
+function cs_EcrireCookie(nom, valeur){
+	var argv=cs_EcrireCookie.arguments;
+	var argc=cs_EcrireCookie.arguments.length;
+	var expires=(argc > 2) ? argv[2] : null;
+	var path=(argc > 3) ? argv[3] : null;
+	var domain=(argc > 4) ? argv[4] : null;
+	var secure=(argc > 5) ? argv[5] : false;
+	document.cookie=nom+'='+escape(valeur)+
+	((expires==null) ? '' : ('; expires='+expires.toGMTString()))+
+	((path==null) ? '' : ('; path='+path))+
+	((domain==null) ? '' : ('; domain='+domain))+
+	((secure==true) ? '; secure' : '');
+}
+function cs_getCookieVal(offset){
+	var endstr=document.cookie.indexOf (';', offset);
+	if (endstr==-1) endstr=document.cookie.length;
+	return unescape(document.cookie.substring(offset, endstr)); 
+}
+function cs_LireCookie(nom){
+	var arg=nom+'=';
+	var alen=arg.length;
+	var clen=document.cookie.length;
+	var i=0;
+	while (i<clen){
+		var j=i+alen;
+		if (document.cookie.substring(i, j)==arg) return cs_getCookieVal(j);
+		i=document.cookie.indexOf(' ',i)+1;
+		if (i==0) break;
+	}
+	return null; 
+}
+
+function cs_Categorie(nom){
+	c=cs_LireCookie(nom);
+	return c==='cs_hidden'?'cs_hidden':'';
+}
+function cs_Titre(nom){
+	c=cs_LireCookie(nom);
+	return c==='cs_hidden'?'':' cs_hidden';
+}
 
 //--></script>";
 }
