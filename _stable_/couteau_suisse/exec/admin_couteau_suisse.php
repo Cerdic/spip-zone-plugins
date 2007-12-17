@@ -124,7 +124,7 @@ jQuery(function(){
 		jQuery(this).children().toggleClass('cs_hidden');
 		next = jQuery(this).next();
 		next.toggleClass('cs_hidden');
-		cs_EcrireCookie(next[0].id, next[0].className, dixans);
+		cs_EcrireCookie(next[0].id, '+'+next[0].className, dixans);
 		// annulation du clic
 		return false;
 	})
@@ -137,7 +137,7 @@ jQuery(function(){
 		jQuery(this).children().addClass('cs_hidden');
 		next = jQuery(this).next();
 		next.removeClass('cs_hidden');
-		cs_EcrireCookie(next[0].id, next[0].className, dixans);
+		cs_EcrireCookie(next[0].id, '+'+next[0].className, dixans);
 		set_selected();
 		set_categ(this.nextSibling.id);
 		return false;
@@ -224,6 +224,7 @@ function cs_getCookieVal(offset){
 	if (endstr==-1) endstr=document.cookie.length;
 	return unescape(document.cookie.substring(offset, endstr)); 
 }
+alert(document.cookie);
 function cs_LireCookie(nom){
 	var arg=nom+'=';
 	var alen=arg.length;
@@ -240,11 +241,11 @@ function cs_LireCookie(nom){
 
 function cs_Categorie(nom){
 	c=cs_LireCookie(nom);
-	return (c=='cs_hidden' || c==null)?'cs_hidden':'';
+	return (c===null || c=='+cs_hidden')?'cs_hidden':'';
 }
 function cs_Titre(nom){
 	c=cs_LireCookie(nom);
-	return (c=='cs_hidden' || c==null)?'':' cs_hidden';
+	return (c===null || c=='+cs_hidden')?'':' cs_hidden';
 }
 
 //--></script>";
