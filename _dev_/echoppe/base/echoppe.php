@@ -7,7 +7,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 global $tables_principales;
 global $tables_auxiliaires;
 global $tables_jointures;
-global $table_des_tables;
+
+
 
 $GLOBALS['echoppe_version_base'] = 0.5;
 
@@ -551,5 +552,13 @@ $tables_principales['spip_echoppe_stock_produits'] = array(
 	'key' => &$spip_echoppe_stock_produits_key,
 	'join' => &$spip_echoppe_stock_produits_join
 	);
+
+global $table_des_tables;
+
+$table_des_tables['produits'] = 'echoppe_produits';
+$table_des_tables['categories'] = 'echoppe_categories';
+$table_des_tables['produits_descriptions'] = 'echoppe_produits_descriptions';
+$table_des_tables['categories_descriptions'] = 'echoppe_categories_descriptions';
+
 
 ?>
