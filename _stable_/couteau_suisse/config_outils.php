@@ -44,7 +44,7 @@ add_variable( array(
 add_variable( array(
 	'nom' => 'quota_cache',
 	'format' => 'nombre',
-	'defaut' => "\$GLOBALS['quota_cache']",
+	'defaut' => 10, // 10 Mo
 	'code' => "\$GLOBALS['quota_cache']=%s;\n",
 ));
 add_variable( array(
@@ -81,7 +81,7 @@ add_outil( array(
 add_variable( array(
 	'nom' => 'cookie_prefix',
 	'format' => 'chaine',
-	'defaut' => "\$GLOBALS['cookie_prefix']",
+	'defaut' => "'spip'",
 	'code' => "\$GLOBALS['cookie_prefix']=%s;",
 ));
 add_outil( array(
@@ -103,7 +103,7 @@ add_variable( array(
 	'nom' => 'paragrapher',
 	'format' => 'nombre',
 	'radio' => array(1 => 'item_oui', 0 => 'item_non', -1 => 'cout:par_defaut'),
-	'defaut' => "\$GLOBALS['toujours_paragrapher']?1:-1",
+	'defaut' => "-1",
 	'code:%s>=0' => "\$GLOBALS['toujours_paragrapher']=%s;",
 ));
 add_outil( array(
@@ -184,7 +184,7 @@ add_variable( array(
 	'radio' => array('page' => 'cout:page', 'html' => 'cout:html', 'propres' => 'cout:propres', 'propres2' => 'cout:propres2',
 			'standard' => 'cout:standard', 'propres-qs' => 'cout:propres-qs' ),
 	'radio/ligne' => 4,
-	'defaut' => "strlen(\$GLOBALS['type_urls'])?\$GLOBALS['type_urls']:'page'",
+	'defaut' => "'page'",
 	'code' => "\$GLOBALS['type_urls']=%s;\n",
 ));
 add_variable( array(
@@ -450,13 +450,13 @@ add_variable( array(
 	'nom' => 'radio_target_blank3',
 	'format' => 'nombre',
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
-	'defaut' => 1,
+	'defaut' => 0,
 	'code' => '$GLOBALS["tweak_target_blank"]=%s;',
 ));
 add_variable( array(
 	'nom' => 'url_glossaire_externe2',
 	'format' => 'chaine',
-	'defaut' => '$GLOBALS["url_glossaire_externe"]',
+	'defaut' => '""',
 	'code:strlen(%s)' => '$GLOBALS["url_glossaire_externe"]=%s;',
 ));
 add_outil( array(
