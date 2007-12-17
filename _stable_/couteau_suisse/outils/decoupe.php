@@ -17,11 +17,10 @@
 // et calcule a l'avance les images trouvees dans le repertoire img/decoupe/
 function decoupe_installe() {
 //cs_log('decoupe_installe()');
-	$path = find_in_path('img/decoupe');
-	if(!$path) return;
 	$images = array();
-	$dossier=opendir($path);
-	while ($image = readdir($dossier)) {
+	$path = find_in_path('img/decoupe');
+	$dossier = opendir($path);
+	if($path) while ($image = readdir($dossier)) {
 		if (preg_match(',^([a-z][a-z0-9_-]*)\.(png|gif|jpg),', $image, $reg)) { 
 			list(,,,$size) = @getimagesize("$path/$reg[1].$reg[2]");
 			$images[$reg[1]] = "<img class=\"no_image_filtrer\" src=\"".cs_htmlpath($path)."/$reg[1].$reg[2]\" $size";

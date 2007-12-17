@@ -11,11 +11,10 @@
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function filets_sep_installe() {
 //cs_log('filets_sep_installe()');
-	$path = find_in_path('img/filets');
-	if(!$path) return;
 	$liste = $filets = array();
+	$path = find_in_path('img/filets');
 	$dossier = opendir($path);
-	while ($image = readdir($dossier)) {
+	if($path) while ($image = readdir($dossier)) {
 		if (preg_match(',^(([a-z0-9_-]+)\.(png|gif|jpg)),', $image, $reg)) { 
 			$liste[] = '<b>__'.$reg[1].'__</b>';	
 			$filets[0][] = '__'.$reg[1].'__';	
