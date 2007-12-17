@@ -10,15 +10,16 @@ charger_generer_url();  # pour generer_url_mot()
 if(defined('_SPIP19100') && !function_exists('_q')) { function _q($t) {return spip_abstract_quote($t);} }
 
 // on calcule ici la globale $GLOBALS['glossaire_groupes_type']
-$groupes = trim($GLOBALS['glossaire_groupes']);
-if(!strlen($groupes)) $groupes = _q('Glossaire');
-	else {
-		$groupes = explode(':', $groupes);
-		foreach($groupes as $i=>$g) $groupes[$i] = _q(trim($g));
-		$groupes = join(" OR type=", $groupes);
-	}
-$GLOBALS['glossaire_groupes_type'] = 'type=' . $groupes;
-unset($groupes);
+function glossaire_groupes() {
+	$groupes = trim($GLOBALS['glossaire_groupes']);
+	if(!strlen($groupes)) return _q('Glossaire');
+		else {
+			$groupes = explode(':', $groupes);
+			foreach($groupes as $i=>$g) $groupes[$i] = _q(trim($g));
+			return join(" OR type=", $groupes);
+		}
+}
+$GLOBALS['glossaire_groupes_type'] = 'type=' . glossaire_groupes();
 
 // compatibilite SPIP 1.91
 include_spip('inc/texte');
