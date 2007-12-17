@@ -17,7 +17,7 @@
 // et calcule a l'avance les images trouvees dans le repertoire img/decoupe/
 function decoupe_installe() {
 //cs_log('decoupe_installe()');
-	$path = dirname(find_in_path('img/decoupe/test'));
+	$path = find_in_path('img/decoupe');
 	$images = array();
 	$dossier=opendir($path);
 	while ($image = readdir($dossier)) {

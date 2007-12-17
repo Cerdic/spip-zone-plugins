@@ -11,7 +11,7 @@
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function filets_sep_installe() {
 //cs_log('filets_sep_installe()');
-	$path = dirname(find_in_path('img/filets/test'));
+	$path = find_in_path('img/filets');
 	$liste = $filets = array();
 	$dossier = opendir($path);
 	while ($image = readdir($dossier)) {
@@ -40,7 +40,7 @@ function filets_sep_raccourcis() {
 // Cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
 function filets_sep_rempl($texte) {
 	if (strpos($texte, '__')===false) return $texte;
-	
+
 	// On memorise les modeles d'expression rationnelle a utiliser pour chercher les balises numeriques.
 	$modele_nombre = "#([\n\r]\s*)__(\d+)__(\s*[\n\r])#iU";
 

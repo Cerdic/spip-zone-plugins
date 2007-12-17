@@ -7,7 +7,7 @@
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function smileys_installe() {
-	$path = dirname(find_in_path('img/smileys/test'));
+	$path = find_in_path('img/smileys');
 cs_log("smileys_installe() : $path");
 	$path2 = cs_htmlpath($path);
 cs_log(" -- abs. path = $path2");

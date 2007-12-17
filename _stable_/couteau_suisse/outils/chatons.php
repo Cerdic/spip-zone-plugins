@@ -21,9 +21,10 @@ function chatons_pre_typo($texte) {
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function chatons_installe() {
 //cs_log('chatons_installe()');
-	$path = dirname(find_in_path('img/chatons/test'));
+	$path = find_in_path('img/chatons');
+	if(!$path) return;
 	$liste = $chatons = array();
-	$dossier=opendir($path);
+	$dossier = opendir($path);
 	while ($image = readdir($dossier)) {
 		if (preg_match(',^([a-z][a-z0-9_-]*)\.(png|gif|jpg),', $image, $reg)) { 
 			$chatons[0][] = ':'.$reg[1];

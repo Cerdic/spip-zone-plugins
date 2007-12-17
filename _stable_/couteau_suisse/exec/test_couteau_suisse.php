@@ -101,7 +101,7 @@ function cs_les_tests() {
 
 
 	// test de cs_htmlpath()
-	$relative_path = dirname(find_in_path('img/smileys/test'));
+	$relative_path = find_in_path('img/smileys');
 	$realpath = str_replace("\\", "/", realpath($relative_path));
 	$root = preg_replace(',/$,', '', $_SERVER['DOCUMENT_ROOT']);
 	$test_result=substr($realpath, strlen($root));
@@ -115,8 +115,7 @@ function cs_les_tests() {
 			'PHP_SELF'=>$_SERVER['PHP_SELF'],
 			'__FILE__'=>__FILE__,
 			'$root'=>$root,
-			"find_in_path('img/smileys/test')"=>find_in_path('img/smileys/test'),
-			"dirname(find_in_path('img/smileys/test'))"=>$relative_path,
+			"find_in_path('img/smileys')"=>find_in_path('img/smileys'),
 			"str_replace('\\', '/', realpath('$relative_path'))"=>$realpath,
 			"substr('$realpath', strlen('$root'))"=>cs_red($test_result),
 			"return?"=>(strlen($root) && strpos($realpath, $root)===0)?'oui':'non',
