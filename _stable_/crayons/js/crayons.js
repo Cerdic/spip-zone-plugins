@@ -143,7 +143,7 @@ $.fn.opencrayon = function(evt, percent) {
           $(me).parents().each(function(){
             if($(this).css("position") == "fixed")
               position = 'fixed';
-          }
+          });
 
           $(me)
           .css('visibility','hidden')
