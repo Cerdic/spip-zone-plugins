@@ -1,12 +1,12 @@
-<script type="text/javascript">
+<script type="text/javascript"><!--
 /* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
-	
+
 	jQuery.validator.addMethod("chainenombre", function(value, element) {
-		return this.required(element) || /^[A-Za-z0-9\-\'\.���������� ]+$/.test(value);
+		return this.required(element) || /^[A-Za-z0-9\-\'\.ÂâÄäÁÀàËëÈèÊêÉéÏïÎîÌìÍÒòÓÔôÖöÙùÜüÛû‡,˚ ]+$/.test(value);
 	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:> <:inscription2:chainenombre:>");
         
 	jQuery.validator.addMethod("chaine", function(value, element) {
-		return this.required(element) || /^[A-Za-z\-\'\.���������� ]+$/.test(value);
+		return this.required(element) || /^[A-Za-z\-\'\.ÂâÄäÁÀàËëÈèÊêÉéÏïÎîÌìÍÒòÓÔôÖöÙùÜüÛû‡,˚ ]+$/.test(value);
 	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:> <:inscription2:chainelettre:>");
 
 	jQuery.validator.addMethod("postal", function(value, element) {
@@ -17,12 +17,12 @@
 		return this.required(element) || /^[0-9\+\. \-]+$/.test(value);
 	}, "<:inscription2:champ_obligatoire:>, <:inscription2:numero_valide:>");
 	
-	$(document).ready(function() {
+	jQuery(document).ready(function() {
 	// validate signup form on submit
-	$("#inscription").validate({
+	jQuery("#inscription").validate({
 		event: "keyup",
 		errorPlacement: function(error, element) {
-			error.appendTo( element.parent("div") ).after("<br class='nettoyeur' />");
+			error.appendTo( element.parent("div") ).after("");
 		},
 		rules: {
 			[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
@@ -159,20 +159,20 @@
 	});
 
 	// propose username and name by combining first- and lastname
-	$("#username").focus(function() {
-		var prenom = $("#prenom").val();
-		var nom = $("#nom_famille").val();
+	jQuery("#username").focus(function() {
+		var prenom = jQuery("#prenom").val();
+		var nom = jQuery("#nom_famille").val();
 		if(prenom && nom && !this.value) {
 			this.value = prenom + "." + nom;
 		}
 	});
-	$("#nom").focus(function() {
-		var prenom = $("#prenom").val();
-		var nom = $("#nom_famille").val();
+	jQuery("#nom").focus(function() {
+		var prenom = jQuery("#prenom").val();
+		var nom = jQuery("#nom_famille").val();
 		if(prenom && nom && !this.value) {
 			this.value = prenom + " " + nom;
 		}
 	});
-	$('.obligatoire label').append('*');
-});
+	jQuery('.obligatoire label').append('*');
+});// -->
 </script>
