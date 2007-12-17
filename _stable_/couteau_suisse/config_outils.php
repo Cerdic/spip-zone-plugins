@@ -76,8 +76,7 @@ add_outil( array(
 	'categorie' => 'admin',
 ));
 
-	// ici on a besoin d'une case input. La variable est : cookie_prefix
-	// a la toute premiere activation de l'outil, la valeur sera : $GLOBALS['cookie_prefix']
+/*
 add_variable( array(
 	'nom' => 'cookie_prefix',
 	'format' => 'chaine',
@@ -89,6 +88,7 @@ add_outil( array(
 	'code:options' => "%%cookie_prefix%%",
 	'categorie' => 'admin',
 ));
+*/
 
 add_outil( array(
 	'id' => 'supprimer_numero',

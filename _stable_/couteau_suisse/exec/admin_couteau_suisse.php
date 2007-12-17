@@ -237,6 +237,11 @@ function cs_LireCookie(nom){
 	}
 	return null; 
 }
+function cs_EffaceCookie(nom){
+	date=new Date;
+	date.setFullYear(date.getFullYear()-1);
+	cs_EcrireCookie(nom,null,date); 
+}
 
 function cs_Categorie(nom){
 	c=cs_LireCookie(nom);

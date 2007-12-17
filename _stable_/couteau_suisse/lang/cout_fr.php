@@ -244,10 +244,10 @@ _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 	'edition' => 'Flux RSS mis &agrave; jour le :',
 	'supprimer_cadre' => 'Supprimer ce cadre',
 	'desactiver_rss' => 'D&eacute;sactiver les &laquo; R&eacute;visions du Couteau Suisse &raquo;',
-
+/*
 	'cookie_prefix:nom' => 'Pr&eacute;fixe des cookies',
 	'cookie_prefix:description' => 'Sp&eacute;cifie le pr&eacute;fixe &agrave; donner aux cookies de ce site. Utile pour installer des sites SPIP dans des sous-r&eacute;pertoires.[[Votre choix :->%cookie_prefix%]]',
-
+*/
 	'filtrer_javascript:nom' => 'Gestion du javascript',
 	'filtrer_javascript:description' => 'Pour g&eacute;rer le javascript dans les articles, trois modes sont disponibles :
 - <i>jamais</i> : le javascript est refus&eacute; partout
