@@ -224,7 +224,6 @@ function cs_getCookieVal(offset){
 	if (endstr==-1) endstr=document.cookie.length;
 	return unescape(document.cookie.substring(offset, endstr)); 
 }
-alert(document.cookie);
 function cs_LireCookie(nom){
 	var arg=nom+'=';
 	var alen=arg.length;
