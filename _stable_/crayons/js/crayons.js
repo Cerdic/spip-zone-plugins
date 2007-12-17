@@ -138,6 +138,13 @@ $.fn.opencrayon = function(evt, percent) {
             return false;
           }
           id_crayon++;
+          
+          var position = 'absolute';
+          $(me).parents().each(function(){
+            if($(this).css("position") == "fixed")
+              position = 'fixed';
+          }
+
           $(me)
           .css('visibility','hidden')
           .addClass('crayon-has')
@@ -147,7 +154,7 @@ $.fn.opencrayon = function(evt, percent) {
           var pos = $(me).offset({'scroll':false});
           $('<div class="crayon-html" id="crayon_'+id_crayon+'"></div>')
           .css({
-            'position':'absolute',
+            'position':position,
             'top':pos['top']-1,
             'left':pos['left']-1
           })
