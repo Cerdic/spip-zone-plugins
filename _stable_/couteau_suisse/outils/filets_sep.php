@@ -12,6 +12,7 @@
 function filets_sep_installe() {
 //cs_log('filets_sep_installe()');
 	$path = find_in_path('img/filets');
+	if(!$path) return;
 	$liste = $filets = array();
 	$dossier = opendir($path);
 	while ($image = readdir($dossier)) {

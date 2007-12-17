@@ -18,6 +18,7 @@
 function decoupe_installe() {
 //cs_log('decoupe_installe()');
 	$path = find_in_path('img/decoupe');
+	if(!$path) return;
 	$images = array();
 	$dossier=opendir($path);
 	while ($image = readdir($dossier)) {
