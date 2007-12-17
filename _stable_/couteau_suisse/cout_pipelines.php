@@ -68,7 +68,12 @@ function couteau_suisse_affiche_droite($flux){
 		eval($cs_metas_pipelines['affiche_droite']);
 	return $flux;
 }
-
+function couteau_suisse_affiche_milieu($flux){
+	global $cs_metas_pipelines;
+	if (isset($cs_metas_pipelines['affiche_milieu']))
+		eval($cs_metas_pipelines['affiche_milieu']);
+	return $flux;
+}
 
 function couteau_suisse_header_prive($flux){
 	global $cs_metas_pipelines;

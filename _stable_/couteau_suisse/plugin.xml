@@ -64,6 +64,10 @@ Compatibilit&#233; : SPIP version 1.9 minimum.
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>cout_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>nettoyer_raccourcis_typo</nom>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>

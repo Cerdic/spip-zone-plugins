@@ -397,6 +397,13 @@ _ Merci de votre compr&eacute;hension.",
 	'liens_en_clair:description' => "Met &agrave; votre disposition le filtre : 'liens_en_clair'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre 'cs=print' ou 'page=print' dans l'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.",
 
 // ---------------------------------------------------------------------------
+	'boites_privees:nom' => 'Bo&icirc;tes priv&eacute;es',
+	'boites_privees:description' => "#PUCE {{Les articles en format SPIP}}
+
+(outil en cours de d&eacute;veloppement)",
+	'texte_formatspip' => 'TEXTE AU FORMAT SPIP',
+
+// ---------------------------------------------------------------------------
 	'stats_rapides:nom' => 'Les auteurs en stat',
 	'stats_rapides:description' => "Un cadre d'informations suppl&eacute;mentaires sur [la page des auteurs->".generer_url_ecrire('auteurs')."]
 - les 10 derniers connect&eacute;s
@@ -429,7 +436,6 @@ D&eacute;finissez ci-dessous le nombre maximal d'auteurs &agrave; afficher sur c
  #BLOC_FIN</code></quote>
 ",
 	'blocs:aide' => 'Blocs D&eacute;pliables : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-
 
 // ---------------------------------------------------------------------------
 	'insertions:nom' => 'Corrections automatiques',

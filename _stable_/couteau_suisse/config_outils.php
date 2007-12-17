@@ -345,6 +345,12 @@ add_outil( array(
 	'auteur' => '[Arnaud Ventre->ventrea@gmail.com]',
 ));
 
+add_outil( array(
+	'id' => 'boites_privees',
+	'categorie' => 'admin',
+	'pipeline:affiche_milieu' => 'boites_privees_affiche_milieu',
+));
+
 add_variable( array(
 	'nom' => 'max_auteurs_page',
 	'format' => 'nombre',
