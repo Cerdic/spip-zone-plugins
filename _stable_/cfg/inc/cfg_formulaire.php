@@ -78,6 +78,7 @@ class cfg_formulaire
 		}
 
 		// pre-analyser le formulaire
+		// c'est a dire recuperer les parametres CFG et les noms des champs du formulaire
 		if ($vue) {
 			$erreur = $this->set_vue($vue);
 			$this->message .= $erreur;
@@ -104,7 +105,8 @@ class cfg_formulaire
 	    }
 		
 		// creer le storage et lire les valeurs
-		$classto = 'cfg_' . trim($this->storage);
+		$this->storage = strtolower(trim($this->storage));
+		$classto = 'cfg_' . $this->storage;
 		include_spip('inc/' . $classto);
 		$this->sto = new $classto($this, $this->optsto);
 		$this->val = $this->sto->lire();

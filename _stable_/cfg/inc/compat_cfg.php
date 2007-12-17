@@ -60,7 +60,13 @@ function compat_cfg_defs_dist() {
 			'($res, $serveur=\'\') {
 				return spip_query_db($res);
 			}',	
-			
+		
+		// n'existe pas en 1.9.2
+		'sql_alter' => 
+			'($res, $serveur=\'\') {
+				return spip_query_db(\'ALTER \' . $res);
+			}',	
+				
 		// n'existe pas en 1.9.2
 		// on cree la requete directement
 		'sql_delete' => 
@@ -175,6 +181,7 @@ function compat_cfg_defs_dist() {
 				$query = "INSERT INTO $table (".implode(",", array_keys($champs)).") VALUES (".implode(",", $champs).")";
 				return sql_query($query);
 			}',
+		
 			
 		/*
 		'sql_count' => 
