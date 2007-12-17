@@ -338,7 +338,7 @@ function exec_amocles_configuration () {
 			. debut_cadre_trait_couleur(_DIR_PLUGIN_AMOCLES_IMG_PACK."redacteurs-admin-24.png", true, "", _T(_AMOCLES_LANG."deleguer_admin"))
 			. amocles_liste_admins_groupes_mots('auteur', 1, $flag_editable, $cherche_auteur, $ids, _T(_AMOCLES_LANG."administrateurs_mots_cles"), "amocles_configuration")
 			. "<div  style='text-align: $spip_lang_left;' class='verdana2'>\n"
-			. "<form name='form_adm_ajout' id='form_adm_ajout' method='post' action=''>\n"
+			. "<form id='form_adm_ajout' method='post' action=''>\n"
 			. "<fieldset style='margin-top:0.75em;border:1px solid gray;'>\n"
 			. "<legend>"._T(_AMOCLES_LANG."options_")."</legend>\n"
 			. "<div  style='text-align: $spip_lang_left;font-style: italic;' class='verdana2'>\n"
@@ -372,7 +372,7 @@ function exec_amocles_configuration () {
 		. "</div>\n"
 		. $message_erreur
 		. "<div  style='text-align: $spip_lang_left;' class='verdana2'>\n"
-		. "<form name='form_mots_import' id='form_mots_import' method='post' action='' enctype='multipart/form-data'>\n"
+		. "<form id='form_mots_import' method='post' action='' enctype='multipart/form-data'>\n"
 		. "<fieldset style='margin-top:0.75em;border:1px solid gray;'>\n"
 		. "<legend>"._T(_AMOCLES_LANG."vos_groupes_")."</legend>\n"
 		;
@@ -409,7 +409,7 @@ function exec_amocles_configuration () {
 		. _T(_AMOCLES_LANG."info_exporter_mots_cles")
 		. "</div>\n"
 		. "<div  style='text-align: $spip_lang_left;' class='verdana2'>\n"
-		. "<form name='form_groupes_export' id='form_groupes_export' method='post' action=''>\n"
+		. "<form id='form_groupes_export' method='post' action=''>\n"
 		. "<fieldset style='margin-top:0.75em;border:1px solid gray;'>\n"
 		. "<legend>"._T(_AMOCLES_LANG."vos_groupes_")."</legend>\n"
 		;

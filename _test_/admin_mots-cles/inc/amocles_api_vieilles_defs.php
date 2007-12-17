@@ -54,29 +54,38 @@ if(version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
 	return(false);
 }
 
+if (!function_exists(spip_num_rows)) {
 function spip_num_rows ($r) {
 	return sql_count($r);
 }
+}
 
+if (!function_exists(bouton_block_invisible)) {
 function bouton_block_invisible ($nom_block, $icone='') {
 	include_spip('inc/layer');
 	return bouton_block_depliable(_T("info_sans_titre"),false,$nom_block);
 }
+}
 
+if (!function_exists(bouton_block_visible)) {
 function bouton_block_visible ($nom_block) {
 	include_spip('inc/layer');
 	return bouton_block_depliable(_T("info_sans_titre"),true,$nom_block);
 }
+}
 
+if (!function_exists(debut_block_visible)) {
 function debut_block_visible ($id="") {
 	include_spip('inc/layer');
 	return debut_block_depliable(true,$id);
 }
+}
 
+if (!function_exists(debut_block_invisible)) {
 function debut_block_invisible ($id="") {
 	include_spip('inc/layer');
 	return debut_block_depliable(false,$id);
 }
-
+}
 
 ?>
