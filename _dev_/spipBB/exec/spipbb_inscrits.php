@@ -1,17 +1,36 @@
 <?php
-/*
-+-------------------------------------------+
-| Hugues AROUX - SCOTY @ koakidi.com
-+-------------------------------------------+
-| Page des inscrits
-+-------------------------------------------+
-*/
+#---------------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                             #
+#  File    : exec/spipbb_inscrits - members management          #
+#  Authors : Hugues AROUX scoty 2007                            #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  Contact : scoty!@!koakidi!.!com                              #
+# [fr] Page des inscrits                                        #
+# [en]                                                          #
+#---------------------------------------------------------------#
+
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+// * [fr] Acces restreint, plugin pour SPIP * //
+// * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 
-
+// ------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 function exec_spipbb_inscrits() {
-
 	# requis spip
 	global 	$connect_statut,
 			$connect_toutes_rubriques,
@@ -23,7 +42,6 @@ function exec_spipbb_inscrits() {
 
 	# requis de cet exec
 	include_spip("inc/traiter_imagerie");
-			
 
 	$vl=intval(_request('vl'));
 
@@ -68,34 +86,34 @@ function exec_spipbb_inscrits() {
 
 	// affichage tableau
 
-	// valeur de tranche affichée	
+	// valeur de tranche affichée
 	$nba1 = $dl+1;
-	//	
+	//
 	// adresse retour des tranche
-	$retour_gaf_local = generer_url_ecrire("spipbb_inscrits");
-		
-	echo gros_titre(_T('gaf:inscrits_visiteurs'),'',false);
-		
+	$retour_spipbb_local = generer_url_ecrire("spipbb_inscrits");
+
+	echo gros_titre(_T('spipbb:inscrits_visiteurs'),'',false);
+
 	// Présenter valeurs de la tranche de la requête
 	echo "<div align='center' class='iconeoff verdana2' style='clear:both;'>\n";
-	tranches_liste_forum($nba1,$retour_gaf_local,$nligne);
+	tranches_liste_forum($nba1,$retour_spipbb_local,$nligne);
 	echo "\n</div>\n";
 
 	// entête ...
 	echo "<table border='0' cellpadding='2' cellspacing='0' width='100%'>\n
 			<tr>\n".
 			"<td width='8%'>";
-			if($odb=='id_auteur') { echo "<b>&gt;"._T('gaf:id_mjsc')."&lt;</b>"; }
-			else { echo "<a href='".parametre_url(self(),'tri','')."'>"._T('gaf:id_mjsc')."</a>"; }
+			if($odb=='id_auteur') { echo "<b>&gt;"._T('spipbb:id_mjsc')."&lt;</b>"; }
+			else { echo "<a href='".parametre_url(self(),'tri','')."'>"._T('spipbb:id_mjsc')."</a>"; }
 			echo "</td>\n".
 			"<td width='30%'>";
-			if($odb=='nom') { echo "<b>&gt;"._T('gaf:nom')."&lt;</b>"; }
-			else { echo "<a href='".parametre_url(self(),'tri','nom')."'>"._T('gaf:nom')."</a>"; }
+			if($odb=='nom') { echo "<b>&gt;"._T('spipbb:nom')."&lt;</b>"; }
+			else { echo "<a href='".parametre_url(self(),'tri','nom')."'>"._T('spipbb:nom')."</a>"; }
 			echo "</td>\n".
-			"<td width='10%' style='text-align:center;'>"._T('gaf:email')."</td>\n".
+			"<td width='10%' style='text-align:center;'>"._T('spipbb:email')."</td>\n".
 			"<td width='15%' style='text-align:center;'>"._L('date_crea')."</td>\n".
 			"<td width='15%' style='text-align:center;'>"._L('signature')."</td>\n".
-			"<td width='22%' style='text-align:center;'>"._T('gaf:avatar')."</td>\n".
+			"<td width='22%' style='text-align:center;'>"._T('spipbb:avatar')."</td>\n".
 			"</tr>\n";
 
 
@@ -112,7 +130,7 @@ function exec_spipbb_inscrits() {
 		
 		if($infos['avatar']!='') {
 			$ico_avatar = "<a href='".$infos['avatar']."' class='load'>".
-			http_img_pack('fiche-perso-24.gif','ico'," border='0' valign='absmiddle'",_T('gaf:avatar')).
+			http_img_pack('fiche-perso-24.gif','ico'," border='0' valign='absmiddle'",_T('spipbb:avatar')).
 			"</a>";
 		}
 		if($infos['signature_post']!='') {
@@ -123,7 +141,7 @@ function exec_spipbb_inscrits() {
 				. http_img_pack('fiche-perso-24.gif','ico'," border='0' valign='absmiddle'",_L('Signature'))
 				. "</a>";
 		}
-		if($infos['date_crea_gaf']!='') {
+		if($infos['date_crea_spipbb']!='') {
 			$aff_date=affdate($infos['date_crea_spipbb'],'d/m/Y');
 		}
 		

@@ -1,11 +1,35 @@
 <?php
-/*
-| page de configuration
-*/
+#---------------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                             #
+#  File    : exec/spipbb_configuration - general config page    #
+#  Authors : scoty 2007                                         #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  Contact : scoty!@!koakidi!.!com                              #
+# [fr] page de configuration                                    #
+# [en]                                                          #
+#---------------------------------------------------------------#
+
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+// * [fr] Acces restreint, plugin pour SPIP * //
+// * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 
-
+// ------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 function exec_spipbb_configuration() {
 	# requis spip
 	global 	$connect_statut,
@@ -26,7 +50,7 @@ function exec_spipbb_configuration() {
 	# affichage
 	#
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('titre_page_'._request('exec')), "configuration", "spipbb_configuration");
+	echo $commencer_page(_T('spipbb:admin_titre_page_'._request('exec')), "configuration", "spipbb_configuration");
 	echo "<a name='haut_page'></a>";
 
 	echo debut_gauche('',true);
@@ -35,24 +59,24 @@ function exec_spipbb_configuration() {
 	echo debut_droite('',true);
 
 	# reserve au Admins
-		if ($connect_statut!='0minirezo' OR !$connect_toutes_rubriques) {
-			echo debut_cadre_relief("",true);
-			echo _T('avis_non_acces_page');
-			echo fin_cadre_relief();
-			echo fin_gauche(), fin_page();
-			exit;
-		}
+	if ($connect_statut!='0minirezo' OR !$connect_toutes_rubriques) {
+		echo debut_cadre_relief("",true);
+		echo _T('avis_non_acces_page');
+		echo fin_cadre_relief();
+		echo fin_gauche(), fin_page();
+		exit;
+	}
 
-		# cas install
-		if(!spipbb_is_configured()) {
-			spipbb_upgrade_metas($GLOBALS['spipbb']['version'],$GLOBALS['spipbb_plug_version']);
-			spipbb_upgrade_tables($GLOBALS['spipbb']['version']);
-		}
-		
-		# install ou maj
-		echo spipbb_admin_configuration();
+	# cas install
+	if(!spipbb_is_configured()) {
+		spipbb_upgrade_metas($GLOBALS['spipbb']['version'],$GLOBALS['spipbb_plug_version']);
+		spipbb_upgrade_tables($GLOBALS['spipbb']['version']);
+	}
+	
+	# install ou maj
+	echo spipbb_admin_configuration();
 
-		echo "</form>";
+	echo "</form>";
 
 	# pied page exec
 	bouton_retour_haut();
@@ -142,13 +166,10 @@ function spipbb_admin_configuration() {
 		$res.= spipbb_config_support_auteurs();
 		$res.= spipbb_config_champs_supp();
 	}
-	
+
 	return $res;
-	
-	
+
 } // spipbb_admin_configuration
-
-
 
 
 // ------------------------------------------------------------------------------

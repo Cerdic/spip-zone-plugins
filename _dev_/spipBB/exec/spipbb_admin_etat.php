@@ -8,42 +8,56 @@
 # [fr] menus d'administration                                   #
 #---------------------------------------------------------------#
 
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 
+if (defined("_ADMIN_ETAT")) return; else define("_ADMIN_ETAT", true);
 
 // ------------------------------------------------------------------------------
 function exec_spipbb_admin_etat() {
 
-# requis spip
-#
+	# requis spip
+	#
 
-# initialiser spipbb
-include_spip('inc/spipbb_init');
+	# initialiser spipbb
+	include_spip('inc/spipbb_init');
 
-# requis de cet exec
+	# requis de cet exec
 
-#
-# affichage
-#
-$commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_L('titre_page_'._request('exec')),  "forum", "spipbb_admin");
-echo "<a name='haut_page'></a>";
+	#
+	# affichage
+	#
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('spipbb:admin_titre_page_'._request('exec')),  "forum", "spipbb_admin");
+	echo "<a name='haut_page'></a>";
 
-echo debut_gauche('',true);
-	spipbb_menus_gauche(_request('exec'),$id_salon);
-	
-echo creer_colonne_droite('', true);
+	echo debut_gauche('',true);
+		spipbb_menus_gauche(_request('exec'),$id_salon);
 
-echo debut_droite('',true);
-	
+	echo creer_colonne_droite('', true);
+
+	echo debut_droite('',true);
+
 	echo spipbb_recap_config();
 
 
-# pied page exec
-bouton_retour_haut();
+	# pied page exec
+	bouton_retour_haut();
 
-echo fin_gauche(), fin_page();
+	echo fin_gauche(), fin_page();
 } // exec_spipbb_admin_etat
 
 

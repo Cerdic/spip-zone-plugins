@@ -7,6 +7,8 @@
  * Ajout des icones manquants dans les menus
  * Correction bug dans le pipeline
  * Page debogage toujours dispo meme si pas configuré !!
+ * Uniformisation de la presentation + quelques traductions + entetes + divers
+ * Passage en 0.3.8 : elements majeurs presents
 
 2007-12-10  scoty  <scoty!@!koakidi!.!com>
 

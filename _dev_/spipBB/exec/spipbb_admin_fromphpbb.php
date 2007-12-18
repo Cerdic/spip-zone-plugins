@@ -28,13 +28,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 spip_log(__FILE__.' : included','spipbb');
 
-if (defined("_OUTILS_FROMPHPBB")) return; else define("_OUTILS_FROMPHPBB", true);
-
-/*
-include_spip('inc/spipbb');
-include_spip('inc/interface_admin');
-*/
-
 // ------------------------------------------------------------------------------
 // [fr] Methode exec
 // [en] Exec method
@@ -107,6 +100,7 @@ function exec_spipbb_admin_fromphpbb()
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('spipbb:fromphpbb_titre'), "configuration", 'spipbb');
+//	echo $commencer_page(_T('spipbb:admin_titre_page_'._request('exec')), "forum", "spipbb_admin", '');
 
 	if (!$row
 	   OR !autoriser('creerarticledans','rubrique',$GLOBALS['spipbb']['id_secteur'])) {
@@ -115,7 +109,7 @@ function exec_spipbb_admin_fromphpbb()
 		exit;
 	}
 
-	echo gros_titre(_T('spipbb:titre_spipbb'),'',false) ;
+//	echo gros_titre(_T('spipbb:titre_spipbb'),'',false) ;
 /*
 	if (spipbb_is_configured() AND $GLOBALS['spipbb']['config_id_secteur'] == 'oui' ) {
 		echo debut_grand_cadre(true);
@@ -126,10 +120,6 @@ function exec_spipbb_admin_fromphpbb()
 	echo "<a name='haut_page'></a>";
 	echo debut_gauche('',true);
 		spipbb_menus_gauche(_request('exec'));
-
-	echo debut_boite_info(true);
-	echo  _T('spipbb:fromphpbb_titre');
-	echo fin_boite_info(true);
 
 	echo creer_colonne_droite($id_rubrique,true);
 	echo debut_droite($id_rubrique,true);

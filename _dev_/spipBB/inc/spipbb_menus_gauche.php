@@ -1,9 +1,24 @@
 <?php
-/*
-+-------------------------------------------+
-| compil menu_arbo.php(gaf) + interface_admin.php(spipbb)
-+-------------------------------------------+
-*/
+#---------------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                             #
+#  File    : inc/spipbb_menus_gauche                            #
+#  Authors : scoty 2007                                         #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  Contact : Hugues AROUX scoty!@!koakidi!.!com                 #
+# [fr] compil menu_arbo.php(gaf) + interface_admin.php(spipbb)  #
+#---------------------------------------------------------------#
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #
 # affichage de la colonne de menus
@@ -110,18 +125,19 @@ function entete_colonne_gauche($titre_page) {
 	$aff = "<div style='float:left; margin-right:5px; margin-bottom:20px;'>"
 		. "<img src='"._DIR_PLUGIN_SPIPBB."img_pack/spipbb-48.png' alt='ico' />"
 		. "</div>"
-		. gros_titre(_T('spipbb:titre_spipbb_plugin'),'',false)
-		. "<span class='verdana2'>"
-		. _L('titre_page_'.$titre_page)
-		. "</span>";
+		. gros_titre(_T('spipbb:titre_spipbb'),'',false)
+		. debut_boite_info(true)
+		. _T('spipbb:admin_titre_page_'.$titre_page)
+		. fin_boite_info(true);
+
 	if(_request('exec')=='spipbb_rubriques_edit') {
 		$aff.="<span class='verdana2'>";
-		$aff.= _request('new')? _L('nouveau_salon') : _L('modifier_salon');
+		$aff.= _request('new')? _T('nouveau_salon') : _T('modifier_salon');
 		$aff.="</span>";
 	}
 	if(_request('exec')=='spipbb_articles_edit') {
 		$aff.="<span class='verdana2'>";
-		$aff.= _request('new')? _L('nouveau_forum') : _L('modifier_forum');
+		$aff.= _request('new')? _T('nouveau_forum') : _T('modifier_forum');
 		$aff.="</span>";
 	}
 	

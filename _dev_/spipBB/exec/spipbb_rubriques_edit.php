@@ -1,5 +1,14 @@
 <?php
-/* base sur le script spip : rubrique_edit*/
+#-------------------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                                 #
+#  File    : exec/spipbb_rubriques_edit                             #
+#  Authors : scoty 2007                                             #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs          #
+#  Source  : base sur le script spip : rubrique_edit                #
+#  Contact : Hugues AROUX scoty!@!koakidi!.!com                     #
+# [fr] page sujet/thread                                            #
+#-------------------------------------------------------------------#
+
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *  Copyright (c) 2001-2007                                                *
@@ -8,13 +17,29 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 
 include_spip('inc/documents');
 
-// http://doc.spip.org/@exec_rubriques_edit_dist
+// ------------------------------------------------------------------------------
+// source http://doc.spip.org/@exec_rubriques_edit_dist
+// ------------------------------------------------------------------------------
 function exec_spipbb_rubriques_edit_dist() {
-	
+
 	global
 	  $champs_extra,
 	  $connect_statut,
@@ -41,9 +66,9 @@ function exec_spipbb_rubriques_edit_dist() {
 		$id_rubrique = intval($id_rubrique);
 
 		$row = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'"));
-	
+
 		if (!$row) exit;
-	
+
 		$id_parent = $row['id_parent'];
 		$titre = $row['titre'];
 		$descriptif = $row['descriptif'];

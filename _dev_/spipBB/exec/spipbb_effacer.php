@@ -1,18 +1,36 @@
 <?php
-/*
-+-------------------------------------------+
-| Hugues AROUX - SCOTY @ koakidi.com
-+-------------------------------------------+
-| Page Effacer des posts
-+-------------------------------------------+
-*/
+#---------------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                             #
+#  File    : exec/spipbb_effacer                                #
+#  Authors : scoty 2007                                         #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  Contact : Hugues AROUX scoty!@!koakidi!.!com                 #
+# [fr] Page Effacer des posts                                   #
+# [en] delete posts                                             #
+#---------------------------------------------------------------#
+
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+// * [fr] Acces restreint, plugin pour SPIP * //
+// * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 
-
+// ------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 function exec_spipbb_effacer() {
-
-
 	# requis spip
 	global 	$connect_statut,
 			$connect_toutes_rubriques,
@@ -32,13 +50,12 @@ function exec_spipbb_effacer() {
 	# affichage
 	#
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_L('titre_page_'._request('exec')), "forum", "spipbb_admin",'');
+	echo $commencer_page(_T('spipbb:admin_titre_page_'._request('exec')), "forum", "spipbb_admin",'');
 	echo "<a name='haut_page'></a>";
 
 
 	echo debut_gauche('',true);
 		spipbb_menus_gauche(_request('exec'));
-
 
 	echo debut_droite('',true);
 
@@ -57,16 +74,16 @@ function exec_spipbb_effacer() {
 		$tbl_eraze=$_POST['eraze'];
 		//suppresion des posts selectionnés
 		debut_cadre_relief("poubelle.gif");
-		echo gros_titre(_T('gaf:poste_effac'),'',false);
+		echo gros_titre(_T('spipbb:poste_effac'),'',false);
 		
 		$nbr_eraze = count($tbl_eraze);
 		if ($nbr_eraze==0) {
-			echo "<div class='verdana3'><b>"._T('gaf:aucun_pt')."</b></div>";
+			echo "<div class='verdana3'><b>"._T('spipbb:aucun_pt')."</b></div>";
 		}
 		else {
 			foreach($tbl_eraze as $id)
 				{ $req = spip_query("DELETE FROM spip_forum WHERE id_forum=$id and statut='off'"); }
-			echo "<div class='verdana3'>".$nbr_eraze._T('gaf:poste_effac')."</div>";
+			echo "<div class='verdana3'>".$nbr_eraze._T('spipbb:poste_effac')."</div>";
 		}
 		fin_cadre_relief();
 	}
@@ -80,7 +97,7 @@ function exec_spipbb_effacer() {
 	echo "<table cellpadding='3' cellspacing='0' border='0' width='100%'>\n";
 	echo "<tr width='100%'>\n";
 	echo "<td height='35' valign='top' colspan='2'>\n";
-	echo gros_titre(_T('gaf:poste_refuse'),'',false);
+	echo gros_titre(_T('spipbb:poste_refuse'),'',false);
 	echo "</td></tr>";
 
 	$ifond=0;
@@ -101,7 +118,7 @@ function exec_spipbb_effacer() {
 		echo "<tr class='verdana2' bgcolor='".$couleur."'><td><div style='margin-left:".$retrait."px;'>\n";
 		echo "<img src='"._DIR_IMG_SPIPBB.$ico_ligne."' /> ".$id_post." - ".propre($titre);
 		echo "&nbsp;<a href='".url_post_tranche($id_post, $id_thread)."'>&nbsp;".
-			http_img_pack("plus.gif",'ico',"align='absmiddle' border='0'",_T('gaf:voir')).
+			http_img_pack("plus.gif",'ico',"align='absmiddle' border='0'",_T('spipbb:voir')).
 			"</a>";
 		echo "</div>";
 		echo "</td><td valign='absmiddle'>\n";
@@ -117,9 +134,9 @@ function exec_spipbb_effacer() {
 				echo "<tr class='verdana2' bgcolor='".$couleur."'><td>\n";
 				echo "<div class='verdana2' style='color:#ED4242; margin-left:30px; padding:2px;'>\n";
 				echo "<img src='"._DIR_IMG_SPIPBB."gaf_post-12.gif' align='absmiddle' />&nbsp;";
-				echo _T('gaf:poste_efface_lui');
+				echo _T('spipbb:poste_efface_lui');
 				echo "<a href='".generer_url_ecrire("spipbb_sujet","id_sujet=".$id_post)."'>&nbsp;".
-						http_img_pack("plus.gif",'ico',"border='0' align='absmiddle'",_T('gaf:sujet_verifie'));
+						http_img_pack("plus.gif",'ico',"border='0' align='absmiddle'",_T('spipbb:sujet_verifie'));
 				echo "</a></div>\n";
 				while ($row=sql_fetch($res2))
 					{ echo "<input type='hidden' name='eraze[]' value='".$row['id_forum']."' />\n"; }
@@ -142,16 +159,14 @@ function exec_spipbb_effacer() {
 	}
 		
 	echo "</table><br />\n";
-	echo "<div align='right' class='verdana3'>\n"._T('gaf:selection_efface').
-		"\n<input type='submit' value='"._T('gaf:effacer')."' class='fondo' />\n".
+	echo "<div align='right' class='verdana3'>\n"._T('spipbb:selection_efface').
+		"\n<input type='submit' value='"._T('spipbb:effacer')."' class='fondo' />\n".
 		"</div></form>\n";
-fin_cadre_relief();
+	fin_cadre_relief();
 
+	# pied page exec
+	bouton_retour_haut();
 
-
-# pied page exec
-bouton_retour_haut();
-
-echo fin_gauche(), fin_page();
+	echo fin_gauche(), fin_page();
 } // exec_spipbb_effacer
 ?>

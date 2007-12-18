@@ -22,16 +22,9 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
 spip_log(__FILE__.' : included','spipbb');
 
 if (defined("_GENERAL_DEBUG")) return; else define("_GENERAL_DEBUG", true);
-
-/*
-include_spip("inc/spipbb");
-include_spip('inc/interface_admin');
-*/
-
 
 // ------------------------------------------------------------------------------
 // Affiche le debogage pour la version SVN
@@ -58,21 +51,18 @@ function exec_spipbb_admin_debug() {
 		define('_DIR_IMG_SPIPBB', _DIR_PLUGIN_SPIPBB.'/img_pack/');
 	}
 
-
-
 	# requis de cet exec
 	#
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_L('titre_page_'._request('exec')), "forum", "spipbb_admin", '');
+	echo $commencer_page(_T('spipbb:admin_titre_page_'._request('exec')), "forum", "spipbb_admin", '');
 	echo "<a name='haut_page'></a>";
-
 
 	echo debut_gauche('',true);
 		spipbb_menus_gauche(_request('exec'));
 		
 	echo creer_colonne_droite('', true);
-	
+
 	echo debut_droite('',true);
 
 	echo spipbb_show_debug();

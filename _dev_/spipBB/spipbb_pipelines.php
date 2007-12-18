@@ -30,7 +30,7 @@ function spipbb_ajouter_boutons($boutons_admin) {
 		// on voit le bouton dans la barre "statistiques"
 		$boutons_admin['forum']->sousmenu["spipbb_admin"]= new Bouton(
 		"../"._DIR_PLUGIN_SPIPBB."img_pack/spipbb-24.png",  // icone
-		_T('spipbb:titre_spipbb_plugin')	// titre
+		_T('spipbb:titre_spipbb')	// titre
 		);
 ## h. un seul bouton suffit !! 
 		/*
