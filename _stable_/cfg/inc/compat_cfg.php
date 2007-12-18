@@ -182,7 +182,11 @@ function compat_cfg_defs_dist() {
 				return sql_query($query);
 			}',
 		
-			
+		'sql_showtable' => '($table, $serveur=\'\') {
+			return spip_abstract_showtable($table, \'mysql\', true);
+		}'
+		
+
 		/*
 		'sql_count' => 
 			'(
