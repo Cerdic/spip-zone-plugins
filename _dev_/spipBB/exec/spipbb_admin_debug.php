@@ -39,7 +39,26 @@ include_spip('inc/interface_admin');
 function exec_spipbb_admin_debug() {
 
 	# initialiser spipbb
-	include_spip('inc/spipbb_init');
+//	include_spip('inc/spipbb_init'); // sauf que si bug là -> erreur !!
+	# lire version plugin.xml
+	#
+	if (!function_exists('plugin_get_infos')) include_spip('inc/plugin');
+	$infos=plugin_get_infos(_DIR_PLUGIN_SPIPBB);
+	$GLOBALS['spipbb_plug_version'] = $infos['version'];
+
+	# recup des metas
+	// c: 18/12/7 normalement ce n'est pas utile !! car deja initialise ailleurs !
+	$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
+
+	include_spip('inc/spipbb_util');
+	include_spip('inc/spipbb_presentation');
+	include_spip('inc/spipbb_menus_gauche');
+	# Def. repertoire icones back
+	if (!defined("_DIR_IMG_SPIPBB")) {
+		define('_DIR_IMG_SPIPBB', _DIR_PLUGIN_SPIPBB.'/img_pack/');
+	}
+
+
 
 	# requis de cet exec
 	#

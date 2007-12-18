@@ -30,7 +30,7 @@ function spipbb_ajouter_boutons($boutons_admin) {
 		// on voit le bouton dans la barre "statistiques"
 		$boutons_admin['forum']->sousmenu["spipbb_admin"]= new Bouton(
 		"../"._DIR_PLUGIN_SPIPBB."img_pack/spipbb-24.png",  // icone
-		_L('titre_spipbb_plugin')	// titre
+		_T('spipbb:titre_spipbb_plugin')	// titre
 		);
 ## h. un seul bouton suffit !! 
 		/*
@@ -69,12 +69,14 @@ function spipbb_affiche_droite($flux)
 	if ( ($flux['args']['exec']=='naviguer') AND (!empty($flux['args']['id_rubrique'])) )
 	{ // AND (!empty($GLOBALS['meta']['spipbb']))
 		include_spip('inc/spipbb_192'); // Compatibilite 192
+		include_spip('inc/spipbb_util'); // pour spipbb_is_configured
 		$r = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=".$flux['args']['id_rubrique']);
+		$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
 		if ( !spipbb_is_configured()
 			OR ($GLOBALS['spipbb']['configure']!='oui') 
-			OR (empty($GLOBALS['meta']['spipbb']['id_secteur'])) ) {
+			OR (empty($GLOBALS['spipbb']['id_secteur'])) ) {
 		// [fr] configuration pas terminee -> lien vers la config
-			$url_lien = generer_url_ecrire('spipbb_admin_configuration',"") ;
+			$url_lien = generer_url_ecrire('spipbb_configuration',"") ;
 			$flux['data'] .= debut_cadre_relief('',true);
 			$flux['data'] .= "<div style='font-size: x-small' class='verdana1'><b>" ;
 			$flux['data'] .= _T('spipbb:admin_titre') . " :</b>\n";
@@ -87,7 +89,7 @@ function spipbb_affiche_droite($flux)
 			$flux['data'] .= fin_cadre_relief(true);
 		} elseif (is_array($r) AND ($r['id_secteur']!=$GLOBALS['meta']['spipbb']['id_secteur'])) {
 		// [fr] configuration Ok et on est dans la rubrique forum
-			$url_lien = generer_url_ecrire('spipbb_admin_configuration',"") ;
+			$url_lien = generer_url_ecrire('spipbb_admin',"") ;
 			$flux['data'] .= debut_cadre_relief('',true);
 			$flux['data'] .= "<div style='font-size: x-small' class='verdana1'><b>" . _T('spipbb:admin_titre') . " :</b>\n";
 			$flux['data'] .= "<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>\n" ;
@@ -101,7 +103,6 @@ function spipbb_affiche_droite($flux)
 	}
 	return $flux;
 }
-
 
 #
 # affiche formulaire sur page exec_auteur_infos

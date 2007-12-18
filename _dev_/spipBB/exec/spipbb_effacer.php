@@ -13,68 +13,68 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_spipbb_effacer() {
 
 
-# requis spip
-global 	$connect_statut,
-		$connect_toutes_rubriques,
-		$connect_id_auteur,
-		$couleur_claire, $couleur_foncee,
-		$spip_display;
+	# requis spip
+	global 	$connect_statut,
+			$connect_toutes_rubriques,
+			$connect_id_auteur,
+			$couleur_claire, $couleur_foncee,
+			$spip_display;
 
-# initialiser spipbb
-include_spip('inc/spipbb_init');
-
-
-# requis de cet exec
-#
+	# initialiser spipbb
+	include_spip('inc/spipbb_init');
 
 
-#
-# affichage
-#
-$commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_L('titre_page_'._request('exec')), "forum", "spipbb_admin",'');
-echo "<a name='haut_page'></a>";
+	# requis de cet exec
+	#
 
 
-echo debut_gauche('',true);
-	spipbb_menus_gauche(_request('exec'));
+	#
+	# affichage
+	#
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_L('titre_page_'._request('exec')), "forum", "spipbb_admin",'');
+	echo "<a name='haut_page'></a>";
 
 
-debut_droite();
+	echo debut_gauche('',true);
+		spipbb_menus_gauche(_request('exec'));
 
-// réservé au Admins
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-		debut_cadre_relief("");
-		echo _T('avis_non_acces_page');
+
+	echo debut_droite('',true);
+
+	// réservé au Admins
+		if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+			debut_cadre_relief("");
+			echo _T('avis_non_acces_page');
+			fin_cadre_relief();
+			echo fin_gauche(), fin_page();
+			exit;
+		}
+
+
+	// effacer définitivement les posts inscrit à "off"
+	if($action=='efface_select') {
+		$tbl_eraze=$_POST['eraze'];
+		//suppresion des posts selectionnés
+		debut_cadre_relief("poubelle.gif");
+		echo gros_titre(_T('gaf:poste_effac'),'',false);
+		
+		$nbr_eraze = count($tbl_eraze);
+		if ($nbr_eraze==0) {
+			echo "<div class='verdana3'><b>"._T('gaf:aucun_pt')."</b></div>";
+		}
+		else {
+			foreach($tbl_eraze as $id)
+				{ $req = spip_query("DELETE FROM spip_forum WHERE id_forum=$id and statut='off'"); }
+			echo "<div class='verdana3'>".$nbr_eraze._T('gaf:poste_effac')."</div>";
+		}
 		fin_cadre_relief();
-		echo fin_gauche(), fin_page();
-		exit;
 	}
 
+	$res=spip_query("SELECT id_forum, id_parent, titre, id_thread, COUNT(id_forum) as total_post 
+					FROM spip_forum WHERE statut = 'off' GROUP BY id_thread ");
 
-// effacer définitivement les posts inscrit à "off"
-if($action=='efface_select') {
-	$tbl_eraze=$_POST['eraze'];
-	//suppresion des posts selectionnés
-	debut_cadre_relief("poubelle.gif");
-	echo gros_titre(_T('gaf:poste_effac'),'',false);
-	
-	$nbr_eraze = count($tbl_eraze);
-	if ($nbr_eraze==0) {
-		echo "<div class='verdana3'><b>"._T('gaf:aucun_pt')."</b></div>";
-	}
-	else {
-		foreach($tbl_eraze as $id)
-			{ $req = spip_query("DELETE FROM spip_forum WHERE id_forum=$id and statut='off'"); }
-		echo "<div class='verdana3'>".$nbr_eraze._T('gaf:poste_effac')."</div>";
-	}
-	fin_cadre_relief();
-}
-
-$res=spip_query("SELECT id_forum, id_parent, titre, id_thread, COUNT(id_forum) as total_post 
-				FROM spip_forum WHERE statut = 'off' GROUP BY id_thread ");
-
-debut_cadre_relief("");
+	debut_cadre_relief("");
 	echo "<form action='".generer_url_ecrire("spipnn_effacer")."' method='post'>\n";
 	echo "<input type='hidden' name='action' value='efface_select'>\n";
 	echo "<table cellpadding='3' cellspacing='0' border='0' width='100%'>\n";
@@ -108,7 +108,7 @@ debut_cadre_relief("");
 		echo "<input type='checkbox' name='eraze[]' value='".$id_post."'>";
 		echo "</td></tr>\n";
 		if ($total_post>'1') {
-			$res2=spip_query("SELECT id_forum, titre FROM spip_forum 
+			$res2=sql_query("SELECT id_forum, titre FROM spip_forum 
 							WHERE id_thread=$id_thread AND statut='off' AND id_forum!=$id_post");
 			
 			if($id_parent=='0')
@@ -121,13 +121,13 @@ debut_cadre_relief("");
 				echo "<a href='".generer_url_ecrire("spipbb_sujet","id_sujet=".$id_post)."'>&nbsp;".
 						http_img_pack("plus.gif",'ico',"border='0' align='absmiddle'",_T('gaf:sujet_verifie'));
 				echo "</a></div>\n";
-				while ($row=spip_fetch_array($res2))
+				while ($row=sql_fetch($res2))
 					{ echo "<input type='hidden' name='eraze[]' value='".$row['id_forum']."' />\n"; }
 				echo "</td><td valign='absmiddle'></td></tr>\n";
 				}
 			else
 				{
-				while ($row=spip_fetch_array($res2))
+				while ($row=sql_fetch($res2))
 					{			
 					echo "<tr class='verdana2' bgcolor='".$couleur."'><td>\n";
 					echo "<div class='verdana2' style='margin-left:25px; padding:2px;'>\n";

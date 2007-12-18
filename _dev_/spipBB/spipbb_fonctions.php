@@ -17,7 +17,8 @@ include_spip('inc/traiter_imagerie');
 
 include_spip('public/spipbb_balises');
 //echo "\n<br>\n include spipbb_fonctions --4";
-//chryjs: le 18/12/2007 bug total plante interface privee : include_spip("inc/spipbb_notifications");
+//chryjs: le 18/12/2007 bug total plante interface privee : 
+include_spip("inc/spipbb_notifications");
 //echo "\n<br>\n include spipbb_fonctions --5";
 
 

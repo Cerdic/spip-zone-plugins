@@ -14,6 +14,7 @@ Todo-list pour spipbb
 -** Problemes titres _T et _L // traductions à revoir corriger finir
 -** Manque icone postit interface publique
 -** quest devenue la page de gestion (ppossibilite ordonner la presentation) ?
+-** bugs mysql qui remplissent la logs a corriger
 
 -** Bug dans include spipbb_fonctions
 -** Chaque fonction est soumise a config

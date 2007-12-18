@@ -12,60 +12,61 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_spipbb_inscrits() {
 
-# requis spip
-global 	$connect_statut,
-		$connect_toutes_rubriques,
-		$connect_id_auteur,
-		$couleur_claire, $couleur_foncee;
+	# requis spip
+	global 	$connect_statut,
+			$connect_toutes_rubriques,
+			$connect_id_auteur,
+			$couleur_claire, $couleur_foncee;
 
-# initialiser spipbb
-include_spip('inc/spipbb_init');
+	# initialiser spipbb
+	include_spip('inc/spipbb_init');
 
-# requis de cet exec
-include_spip("inc/traiter_imagerie");
-		
+	# requis de cet exec
+	include_spip("inc/traiter_imagerie");
+			
 
-$vl=intval(_request('vl'));
+	$vl=intval(_request('vl'));
 
-# limites requete
-$dl=($vl+0);
-$fixlimit = $GLOBALS['spipbb']['fixlimit'];
+	# limites requete
+	$dl=($vl+0);
+	$fixlimit = $GLOBALS['spipbb']['fixlimit'];
 
-# tri
-	$tri=_request('tri');
-	if($tri=='nom') { $odb='nom'; }
-	else { $odb='id_auteur'; }
+	# tri
+		$tri=_request('tri');
+		if($tri=='nom') { $odb='nom'; }
+		else { $odb='id_auteur'; }
 
-# requete principale
-$q=spip_query("SELECT SQL_CALC_FOUND_ROWS id_auteur, nom, email, extra 
-				FROM spip_auteurs 
-				WHERE statut='6forum' 
-				ORDER BY $odb 
-				LIMIT $dl,$fixlimit");
+	# requete principale
+	// c: 18/12/7 c'est surement une optimisation mais je doute que ce soit standard tous SQL confondus...
+	$q=sql_query("SELECT SQL_CALC_FOUND_ROWS id_auteur, nom, email, extra 
+					FROM spip_auteurs 
+					WHERE statut='6forum' 
+					ORDER BY $odb 
+					LIMIT $dl,$fixlimit");
 
-# recup nombre total d'entree
-$nl= spip_query("SELECT FOUND_ROWS()");
-$r_found = @spip_fetch_array($nl);
-$nligne=$r_found['FOUND_ROWS()'];
-
-
-#
-# affichage
-#
-$commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_L('titre_page_'._request('exec')), "forum", "spipbb_admin", '');
-echo "<a name='haut_page'></a>";
-
-echo debut_gauche('',true);
-spipbb_menus_gauche(_request('exec'),$id_salon,$id_art);
+	# recup nombre total d'entree
+	$nl= sql_query("SELECT FOUND_ROWS()");
+	$r_found = @spip_fetch_array($nl);
+	$nligne=$r_found['FOUND_ROWS()'];
 
 
-debut_droite();
+	#
+	# affichage
+	#
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_L('titre_page_'._request('exec')), "forum", "spipbb_admin", '');
+	echo "<a name='haut_page'></a>";
+
+	echo debut_gauche('',true);
+	spipbb_menus_gauche(_request('exec'),$id_salon,$id_art);
 
 
-echo debut_cadre_formulaire('',true);
+	echo debut_droite('',true);
 
-// affichage tableau
+
+	echo debut_cadre_formulaire('',true);
+
+	// affichage tableau
 
 	// valeur de tranche affichée	
 	$nba1 = $dl+1;
@@ -100,7 +101,7 @@ echo debut_cadre_formulaire('',true);
 
 	// corps du tableau
 	$ifond=0;
-	while ($r=spip_fetch_array($q)) {
+	while ($r=sql_fetch($q)) {
 		$ifond = $ifond ^ 1;
 		$coul_ligne = ($ifond) ? $couleur_claire : '#ffffff';
 
@@ -142,13 +143,14 @@ echo debut_cadre_formulaire('',true);
 	echo "<div id='code'></div>";
 	echo "<div id='code_sign'></div>";
 		
-echo fin_cadre_formulaire(true);
+	echo fin_cadre_formulaire(true);
 
 
-# pied page exec
-bouton_retour_haut();
+	# pied page exec
+	bouton_retour_haut();
 
-echo fin_gauche(), fin_page();
+	echo fin_gauche(), fin_page();
 
-}
+} // exec_spipbb_inscrits
+
 ?>

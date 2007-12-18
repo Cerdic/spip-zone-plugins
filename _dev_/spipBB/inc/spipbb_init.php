@@ -13,6 +13,7 @@ $infos=plugin_get_infos(_DIR_PLUGIN_SPIPBB);
 $GLOBALS['spipbb_plug_version'] = $infos['version'];
 
 # recup des metas
+// c: 18/12/7 normalement ce n'est pas utile !! car deja initialise ailleurs !
 $GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
 
 #
@@ -24,6 +25,7 @@ include_spip('inc/spipbb_util');
 #
 # Si Install/Maj ? Redir immediate, sauf si on y est !
 #
+// c: 18/12/7 pas beau mais pas beau du tout un redirect planque dans un include !!!
 if(!spipbb_is_configured() AND _request('exec')!="spipbb_configuration") {
 	include_spip('inc/headers');
 	redirige_par_entete(generer_url_ecrire("spipbb_configuration",'',true));

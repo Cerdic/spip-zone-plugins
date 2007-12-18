@@ -12,7 +12,6 @@
 # Introduire la restriction fournie par chaque visiteur
 # dans le champ profil : "refus_suivi_thread"
 # 
-echo "\n<br>\n include spipbb_notifications --1";
 
 // cette notification s'execute quand on valide un message 'prop'ose,
 // dans ecrire/inc/forum_insert.php ; ici on va notifier ceux qui ne l'ont
@@ -20,15 +19,16 @@ echo "\n<br>\n include spipbb_notifications --1";
 // suivre si le forum est valide directement ('pos' ou 'abo')
 // http://doc.spip.org/@notifications_forumvalide_dist
 function notifications_forumvalide($quoi, $id_forum) {
-	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
-	if (!$t = spip_fetch_array($s))
+
+	$s = sql_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
+	if (!$t = sql_fetch($s))
 		return;
 
+	// c: 18/12/7 tous ces includes sont ils vraiment necessaires ?
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
 	include_spip('inc/mail');
 	include_spip('inc/autoriser');
-
 
 	// Qui va-t-on prevenir ?
 	$tous = array();
@@ -38,9 +38,9 @@ function notifications_forumvalide($quoi, $id_forum) {
 	// pas le droit de le moderer (les autres l'ont recu plus tot)
 	if ($t['id_article']
 	AND $GLOBALS['meta']['prevenir_auteurs'] == 'oui') {
-		$result = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+		$result = sql_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
 
-		while ($qui = spip_fetch_array($result)) {
+		while ($qui = sql_fetch($result)) {
 			if (!autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))
 				$tous[] = $qui['email'];
 			else
@@ -56,21 +56,23 @@ function notifications_forumvalide($quoi, $id_forum) {
 #### hack gafospip 0.6
 # _SUIVI_FORUM_THREAD => reactive par gafospip (gaf_mesoptions) !
 #
+	include_spip('inc/spipbb_auteur_infos'); // c: 18/12/7 necessaire ?
 
-	if (defined('_SUIVI_FORUM_THREAD') AND _SUIVI_FORUM_THREAD) {
+	if (defined('_SUIVI_FORUM_THREAD') AND (_SUIVI_FORUM_THREAD==true) ) {
 		$infos=array();
-		$s = spip_query("SELECT DISTINCT(email_auteur), id_auteur FROM spip_forum WHERE id_thread=".$t['id_thread']." AND email_auteur != ''");
-		while ($r = spip_fetch_array($s)) {
+		$s = sql_query("SELECT DISTINCT(email_auteur), id_auteur FROM spip_forum WHERE id_thread=".$t['id_thread']." AND email_auteur != ''");
+		while ($r = sql_fetch($s)) {
 			# par defaut visiteur non-inscrit : pas de notif.
 			if($r['id_auteur']!='0') {
 				$tous[] = $r['email_auteur'];
 			}
-			
+
 			# participant au thread refuse de suivre ?
-			$infos = gaf_auteur_infos($r['id_auteur']);
+			$infos = spipbb_auteur_infos($r['id_auteur']); // c: 18/12/7 remplace gaf_auteur_infos
+
 			if($infos['refus_suivi_thread'] && $infos['refus_suivi_thread']!='') {
-				$refus=explode(',',$infos['refus_suivi_thread']);
-				if(in_array($t['id_thread'],$refus) {
+				$refus=explode(",",$infos['refus_suivi_thread']);
+				if (in_array($t['id_thread'],$refus) ) {
 					$pasmoi[] = $r['email_auteur'];
 				}
 			}
@@ -87,7 +89,7 @@ function notifications_forumvalide($quoi, $id_forum) {
 	AND _SUIVI_FORUMS_REPONSES
 	AND $t['statut'] == 'publie') {
 		$id_parent = $id_forum;
-		while ($r = spip_fetch_array(spip_query("SELECT email_auteur, id_parent FROM spip_forum WHERE id_forum=$id_parent AND statut='publie'"))) {
+		while ($r = sql_fetch(sql_query("SELECT email_auteur, id_parent FROM spip_forum WHERE id_forum=$id_parent AND statut='publie'"))) {
 			$tous[] = $r['email_auteur'];
 			$id_parent = $r['id_parent'];
 		}
@@ -112,6 +114,7 @@ function notifications_forumvalide($quoi, $id_forum) {
 		$msg = email_notification_forum($t, $email);
 		envoyer_mail($email, $msg['subject'], $msg['body']);
 	}
+
 }
 
 ?>

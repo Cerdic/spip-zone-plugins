@@ -3,11 +3,7 @@
 +-------------------------------------------+
 | compil menu_arbo.php(gaf) + interface_admin.php(spipbb)
 +-------------------------------------------+
-*/	
-
-
-
-
+*/
 
 #
 # affichage de la colonne de menus
@@ -18,45 +14,45 @@ function spipbb_menus_gauche($script, $id_salon='', $id_art='', $id_sujet='', $m
 			$connect_toutes_rubriques,
 			$connect_id_rubrique,
 			$connect_id_auteur;
-	
+
 	#
 	# Liste de tous les menus d'administration (exec/...) 
 	#
 	# $modules[cat][rang]=array(nom,file,icone)
 	$modules=array();
-	
+
 	// ces menus doivent toujours etre actifs
 	# plus besoin de 01_/ZZ_ ... sur nom
 	$modules['01_general'][40]=array('01_configuration',"spipbb_configuration",'administration-24.gif'); 
-	$modules['01_general'][50]=array('ZZ_debug',"spipbb_admin_debug");
-	
+	$modules['01_general'][50]=array('ZZ_debug',"spipbb_admin_debug",'racine-24.gif');
+
 	if($GLOBALS['spipbb']['configure']=='oui') {
 		// tous ces menus necessitent que spipbb soit configure et active
 		if ($GLOBALS['spipbb']['config_id_secteur'] == 'oui' AND !empty($GLOBALS['spipbb']['id_secteur'])) {
 			// ces menus ont besoin d'un secteur/forums defini (a priori)
 			$modules['01_general'][15] = array('inscrits',"spipbb_inscrits","redacteurs-24.gif");
-			
+
 			if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 			$modules['01_general'][10] = array('gestion',"spipbb_admin",_DIR_IMG_SPIPBB.'spipbb-24.png');
 			# h. 28/11 .. ordonner art/rub : inclus dans spipbb_admin
 			#$modules['01_general'][20] = array('ordonner',"spipbb_admin_gestion_forums",'descendre-16.png');
 			$modules['01_general'][25] = array('effacer',"spipbb_effacer",'poubelle.gif') ;
-			
-			$modules['outils'][10] = array('fromphpbb',"spipbb_admin_fromphpbb");
-			
+
+			$modules['outils'][10] = array('fromphpbb',"spipbb_admin_fromphpbb",_DIR_IMG_SPIPBB.'fromphpbb-24.png');
+
 				if ($GLOBALS['spipbb']['config_spam_words']=='oui') {
 					// ces menus ont besoin que le spam soit active
-					$modules['spam'][15] = array('swwords',"spipbb_admin_anti_spam_words");
-					$modules['spam'][16] = array('swlog',"spipbb_admin_anti_spam_log");
-					$modules['spam'][17] = array('swforum',"spipbb_admin_anti_spam_forum");
-				}		
+					$modules['spam'][15] = array('swwords',"spipbb_admin_anti_spam_words",'cadenas-24.gif');
+					$modules['spam'][16] = array('swlog',"spipbb_admin_anti_spam_log",'doc-24.gif');
+					$modules['spam'][17] = array('swforum',"spipbb_admin_anti_spam_forum",'petition-24.gif');
+				}
 			}
-			
+
 		}
 		$modules['01_general'][30] = array('02_etat',"spipbb_admin_etat",'statistiques-24.gif');
-		$modules['spam'][10] = array('swconfig',"spipbb_admin_anti_spam_config");
+		$modules['spam'][10] = array('swconfig',"spipbb_admin_anti_spam_config",'administration-24.gif');
 	}
-	
+
 	#
 	# entete (icone + titre)
 	#
@@ -65,14 +61,14 @@ function spipbb_menus_gauche($script, $id_salon='', $id_art='', $id_sujet='', $m
 	#
 	# bloc hierarchie
 	#
-	if($id_salon OR $id_art) {
+	if(!empty($id_salon) OR !empty($id_art)) {
 		bloc_hierarchie($id_salon,$id_art);
 	}
 
 	#
 	# rubriques de l_admin-restreint connecte
 	#
-	if($connect_id_rubrique AND ($id_salon OR $id_art)) {
+	if($connect_id_rubrique AND (!empty($id_salon) OR !empty($id_art)) ) {
 		echo rubriques_admin_restreint($connect_id_auteur);
 	}
 
@@ -141,12 +137,11 @@ function entete_colonne_gauche($titre_page) {
 #
 function bloc_hierarchie($id_rubrique, $id_article, $parents='') {
 	global $spip_lang_left, $lang_dir;
-	
+
 	$id_rub_courant=intval(_request('id_salon'));
 	$id_art_courant=intval(_request('id_article'));
-	
-	
-	if ($id_article) {
+
+	if (!empty($id_article)) {
 		$result=sql_query("SELECT id_article, id_rubrique, titre 
 							FROM spip_articles 
 							WHERE id_article=$id_article");
@@ -167,7 +162,7 @@ function bloc_hierarchie($id_rubrique, $id_article, $parents='') {
 			}
 		bloc_hierarchie($id_rubrique, "", $parents);
 	}
-	elseif($id_rubrique) {
+	elseif(!empty($id_rubrique)) {
 
 		$query = "SELECT id_rubrique, id_parent, titre, lang 
 				FROM spip_rubriques 
@@ -206,7 +201,7 @@ function bloc_hierarchie($id_rubrique, $id_article, $parents='') {
 		$parents = "<div class='verdana3' " 
 		  . http_style_background($logo, "$spip_lang_left top no-repeat; padding-$spip_lang_left: 25px") 
 		  . "><a href='".generer_url_ecrire("spipbb_admin"). "'><b>"
-		  . _T('gaf:secteur_forum')."</b></a></div>\n<div style='margin-$spip_lang_left: 3px;'>"
+		  . _T('spipbb:secteur_forum')."</b></a></div>\n<div style='margin-$spip_lang_left: 3px;'>"
 		  . $parents."</div>";
 
 		echo $parents."<br />";
@@ -220,7 +215,7 @@ function bloc_hierarchie($id_rubrique, $id_article, $parents='') {
 #
 function rubriques_admin_restreint($connect_id_auteur) {
 	$aff = "<br />";
-	$aff.= debut_cadre_relief("../"._DIR_IMG_GAF."spipbb-24.gif", true, '',_L('moderation'));	
+	$aff.= debut_cadre_relief("../"._DIR_IMG_SPIPBB."spipbb-24.gif", true, '',_T('moderation'));
 
 	$q = sql_query("SELECT R.id_rubrique, R.titre, R.descriptif 
 					FROM spip_rubriques AS R, spip_auteurs_rubriques AS A 
@@ -230,13 +225,13 @@ function rubriques_admin_restreint($connect_id_auteur) {
 	while ($r = sql_fetch($q)) {
 		$rubs[] = "<a title='" .
 		    typo($r['descriptif']) .
-		    "' href='" . generer_url_ecrire('gaf_admin', "id_salon=" .$r['id_rubrique']) . "'>" .
+		    "' href='" . generer_url_ecrire('spipbb_admin', "id_salon=" .$r['id_rubrique']) . "'>" .
 		    supprimer_numero(typo($r['titre'])) .
 		    '</a>';
 	}
 	$aff.= "<ul style='margin:0px; padding-left: 20px; margin-bottom: 5px;'>\n<li>". join("</li>\n<li>", $rubs). "\n</li></ul>";
 	$aff.= fin_cadre_relief(true);
-	
+
 	return $aff;
 }
 
@@ -250,7 +245,7 @@ function posts_proposes_attente_moderation() {
 							ORDER BY date_heure LIMIT 0,10");
 	// récup nombre total d'entrées de $result (mysql 4.0.0 mini)
 	$ttligne= sql_query("SELECT FOUND_ROWS()");
-	
+
 	list($nbrprop) = @spip_fetch_array($ttligne);
 
 	$aff='';
@@ -260,7 +255,7 @@ function posts_proposes_attente_moderation() {
 			. bandeau_titre_boite2(_L('poste_valide'),"gaf_p_prop.gif",'','',false)
 			. "<div class='plan-articles'>";
 		
-		while($row = spip_fetch_array($result))
+		while($row = sql_fetch($result))
 			{
 			$idprop=$row['id_forum'];
 			$titreprop=$row['titre'];
@@ -270,7 +265,7 @@ function posts_proposes_attente_moderation() {
 			$aff.= "<a href='".$urlprop."'>".couper($titreprop,30)."</a>\n";
 			}
 		
-		if($nbrprop>10) { $aff.= _T('gaf:etplus'); }
+		if($nbrprop>10) { $aff.= _T('spipbb:etplus'); }
 		$aff.= "</div></div>\n";
 	}
 	return $aff;
@@ -280,9 +275,9 @@ function posts_proposes_attente_moderation() {
 # contenu : liste des modos	
 function liste_moderateurs($modos,$id_salon,$id_art) {
 	if(!is_array($modos)) { $modos=array(); }
-	
+
 	# sur page sujet, recherche rub de art (du thread en cours) + auteurs
-	if(!$id_salon) {
+	if (empty($id_salon) and !empty($id_art)) {
 		$r_s = sql_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_art");
 		if(sql_count($r_s)) {
 			$row=sql_fetch($r_s);
@@ -304,23 +299,26 @@ function liste_moderateurs($modos,$id_salon,$id_art) {
 		$modos_dbl = join(',', array_keys($modos));
 		$where_modos = "A.id_auteur NOT IN ($modos_dbl) AND";
 	}
-	
+
 	# admins rubrique
-	$res = sql_query("SELECT DISTINCT A.nom, A.id_auteur, A.statut 
-						FROM  spip_auteurs AS A, spip_auteurs_rubriques AS B 
-						WHERE $where_modos A.id_auteur=B.id_auteur AND id_rubrique=$id_salon");
-	if (sql_count($res)) {
-		while ($row = sql_fetch($res)) {
-			$modos[$row['id_auteur']]['nom'] = $row['nom'];
-			$modos[$row['id_auteur']]['statut'] = bonhomme_statut($row);
-			$modos[$row['id_auteur']]['acces'] = generer_url_ecrire('auteur_infos', "id_auteur=".$row['id_auteur']);
+	if (!empty($id_salon)) {
+
+		$res = sql_query("SELECT DISTINCT A.nom, A.id_auteur, A.statut 
+							FROM  spip_auteurs AS A, spip_auteurs_rubriques AS B 
+							WHERE $where_modos A.id_auteur=B.id_auteur AND id_rubrique=$id_salon");
+		if (sql_count($res)) { // c: 18/12/7 count un peu inutile car le while fait quasi le meme test
+			while ($row = sql_fetch($res)) {
+				$modos[$row['id_auteur']]['nom'] = $row['nom'];
+				$modos[$row['id_auteur']]['statut'] = bonhomme_statut($row);
+				$modos[$row['id_auteur']]['acces'] = generer_url_ecrire('auteur_infos', "id_auteur=".$row['id_auteur']);
+			}
 		}
 	}
-	
+
 	# aff.liste modos
 	$aff='';
 	if(count($modos)>=1) {
-		$aff.= debut_cadre_relief("fiche-perso-24.gif", true, '', _T('gaf:moderateurs'));
+		$aff.= debut_cadre_relief("fiche-perso-24.gif", true, '', _T('spipbb:moderateurs'));
 		foreach($modos as $k => $v) {
 			$aff.= "\n<a href='".$v['acces']."'>".$v['statut']."&nbsp;".typo($v['nom'])."</a><br />";
 		}
@@ -344,25 +342,24 @@ function alerte_maintenance() {
 				$row=sql_fetch($req);
 				$req2=sql_query("SELECT titre FROM spip_articles WHERE id_article=$art_mt");
 				$row2=sql_fetch($req2);
-				
+
 				$aff = "<br />"
-					. debut_cadre_trait_couleur("../"._DIR_IMG_GAF."gaf_verrou2.gif",true,"",_T('gaf:maintenance'))
+					. debut_cadre_trait_couleur("../"._DIR_IMG_SPIPBB."gaf_verrou2.gif",true,"",_T('spipbb:maintenance'))
 					. "<div class='verdana3'><b>".$row['nom']."</b></div>\n"
-					. "<div class='verdana2'>"._T('gaf:admfermer')."<br />\n"
+					. "<div class='verdana2'>"._T('spipbb:admfermer')."<br />\n"
 					. "<b><a href='".generer_url_ecrire("gaf_forum","id_article=".$art_mt)."'>"
-					. $row2['titre']."</a></b><br />"._T('gaf:pour_maintenance')."<br />".$datime."</div>\n"
+					. $row2['titre']."</a></b><br />"._T('spipbb:pour_maintenance')."<br />".$datime."</div>\n"
 					. fin_cadre_trait_couleur(true);
 			}
 		}
 	}
 }
 
-
 #
 # contenu : les boutons de fonctions (chrys - spipbb_admin_gauche() )
 #
 function spipbb_admin_gauche($script,$modules) {
-	
+
 	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler'); // voir un charger fonction
 
@@ -373,36 +370,30 @@ function spipbb_admin_gauche($script,$modules) {
 
 		$affichage.= debut_boite_info(true). "<b>".$cat."</b>";
 		ksort($rang);
-		
+
 		while( list($num,$action) = each($rang) ) {
 			$nom=$action[0];
 			$file=$action[1];
 			$icone=$action[2];
-			
+
 			$nom = _T('spipbb:admin_action_'.$nom) ; // on traduit le nom de chaque action(exec)
-			
+
 			if ( $script <> $file ) { $lien = generer_url_ecrire($file); }
 			else { $lien="0"; }	// pas de lien sur l'action en cours ! 
-			
+
 			if($icone) {
 				$icone = http_img_pack($icone,""," border='0' align='absmiddle'")."\n";
 			}
-			
+
 			$contexte = array(
 							'lien' => $lien,
 							'action' => $nom,
 							'icone_menu' => $icone
 							);
-			
+
 			// chryjs: desactive et remplace par le bloc ci apres 
 			$affichage.= recuperer_fond("prive/spipbb_bloc_admin_menu",$contexte);
-/*			
-			if ($lien=="0") {
-				$affichage.= "<strong><div style='margin-top:2px;' class='bouton36blanc' onmouseover=\"changeclass(this,'bouton36gris')\" onmouseout=\"changeclass(this,'bouton36blanc')\">".$icone."\n".$nom."</div></strong>";
-			} else {
-				$affichage.= "<a href='".$lien."' class='verdana2'><div style='margin-top:2px;' class='bouton36blanc' onmouseover=\"changeclass(this,'bouton36gris')\" onmouseout=\"changeclass(this,'bouton36blanc')\">".$icone."\n".$nom."</div></a>";
-			}
-*/			
+
 		}
 		$affichage .= fin_boite_info(true)."<br />\n";
 	}

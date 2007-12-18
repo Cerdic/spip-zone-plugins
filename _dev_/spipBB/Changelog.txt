@@ -1,9 +1,12 @@
 ﻿2007-12-18  chryjs  <chryjs!@!free!.!fr>
 
  * correction appels base de données (pour etre compatible 1.9.3)
- * bug a resdoudre dans spipbb_fonctions (include) -> plante affichage espace privé !
  * correction affichages admin
-
+ * correction bug inc/spipbb_presentation + reactivation dans spipbb_fonctions
+ * corrections appels sql avec parametres vides
+ * Ajout des icones manquants dans les menus
+ * Correction bug dans le pipeline
+ * Page debogage toujours dispo meme si pas configuré !!
 
 2007-12-10  scoty  <scoty!@!koakidi!.!com>
 
@@ -185,7 +188,6 @@
  * Chaque element des menus est propose sous condition
  * Les traitements, balises sont aussi soumis a condition
 
-
 2007-11-12  chryjs  <chryjs!@!free!.!fr>
 
  * spipbb_pipelines : appel a inc/spipbb pour la compatibilite necessaire 192 a cause de sql_fetsel bug report X. Burot (email)
@@ -217,11 +219,9 @@
  * Admin Correction de la presentation + bug select id_rubrique + actions / exec
  * inc/forum_insert doit inclure inc/spipbb pour la compatibilite 192 voir : http://www.spip-contrib.net/Plugin-SpipBB#forum400088
 
-
 2007-11-09  chryjs  <chryjs!@!free!.!fr>
 
  * admin : Gestion des messages de spam, ajout de la gestion de mot, envoyer un message, logger etc
-
 
 2007-11-08  chryjs  <chryjs!@!free!.!fr>
 
