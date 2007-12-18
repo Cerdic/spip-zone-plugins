@@ -1,7 +1,7 @@
 <?php
 /*
 	Mini Calendrier pour Alternatives
- 	Patrice VANNEUFVILLE - patrice.vanneufville<@>laposte.net
+ 	Patrice VANNEUFVILLE - patrice.vanneufville(!arob!)laposte.net
 	(c) 2007 - Distribue sous licence GPL
 	Plugin pour spip 1.9
 	Licence GNU/GPL

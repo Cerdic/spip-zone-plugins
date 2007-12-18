@@ -136,6 +136,7 @@ if ($y && $m) if ($j){ ?>
 	Contextual menus (right) 
     ************************************************************* -->
   <div id="encart">  
+<INCLURE{fond=inc/alter_calendrier}{var_date=archives}{date=#ENV{archives,#DATE}}{self=#SELF}{lang}>
 <INCLURE{fond=inc/inc-annonces}{lang}>
 
 <INCLURE{fond=inc/inc-breves}{lang}>
@@ -162,7 +163,7 @@ if ($y && $m) if ($j){ ?>
     </B_forums_liens>
     
   </div><!-- encart -->
-<INCLURE{fond=inc/inc-menu}{lang}>
+<INCLURE{fond=inc/inc-menu}{lang}{archive=#ENV{archive}}{self=#SELF}>
 <INCLURE{fond=inc/inc-bas}{lang}></div><!-- page -->
 
 </body>

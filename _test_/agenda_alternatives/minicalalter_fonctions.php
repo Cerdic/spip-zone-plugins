@@ -1,19 +1,12 @@
 <?php
 /*
 	Mini Calendrier pour Alternatives
- 	Patrice VANNEUFVILLE - patrice.vanneufville<@>laposte.net
+ 	Patrice VANNEUFVILLE - patrice.vanneufville(!arob!)laposte.net
 		(idee de James)
 	(c) 2007 - Distribue sous licence GPL
 	Plugin pour spip 1.9
 	Licence GNU/GPL
 */
-
-function url_evenements($D, $M, $Y) {
- $Time = mktime(0, 0, 0, $M, $D, $Y);
- return parametre_url(generer_url_public('evenements'),VAR_DATE_CAL,
- 	sprintf("%04d-%02d-%02d",intval(date('Y', $Time)),intval(date('m', $Time)),intval(date('d', $Time)))
- );
-}			  
 
 // A supprimer bientot !! (En principe, intégrée dans Agenda...)
 //

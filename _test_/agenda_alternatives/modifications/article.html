@@ -48,9 +48,9 @@
       
       <div class="cartouche">
 			[<span style="float:right;">(#LOGO_ARTICLE||reduire_image{160,0})</span>]
-			[<div class="surtitre">(#SURTITRE)</div>]
-			<h1 class="titre-article">[(#TITRE|supprimer_numero)]</h1>
-            [<div class="sous-titre">(#SOUSTITRE)</div>]
+			[<div  class="#EDIT{surtitre} surtitre">(#SURTITRE)</div>]
+			<h1 class="#EDIT{titre} titre-article">[(#TITRE|supprimer_numero)]</h1>
+            [<div class="#EDIT{soustitre} sous-titre">(#SOUSTITRE)</div>]
 				<p class="detail">
 				[(#DATE|nom_jour)] [(#DATE|affdate)]
 				<B_auteurs_recents><:par_auteur:>
@@ -61,56 +61,54 @@
       </div><!-- cartouche -->
 
 
-		[<div class="chapo">(#CHAPO|reduire_image{440,0})</div>]
+		[<div class="#EDIT{chapo} chapo">(#CHAPO|reduire_image{440,0})</div>]
 		[<div id="sommaire">
 			<h4><:icone_brouteur:></h4> [(#REM) = "Navigation rapide" on aurait prefere "Sommaire", mais pas de traduction ]
 			(#TEXTE*|sommaire_article|propre)
 		</div>]
-		[<div class="texte">(#TEXTE*|decouper_en_page{#ID_ARTICLE}|propre|reduire_image{440,0})</div>]
-		[<div class="ps">(#PS)</div>]
+		[<div class="#EDIT{texte} texte">(#TEXTE*|decouper_en_page{#ID_ARTICLE}|propre|reduire_image{440,0})</div>]
+		[<div class="#EDIT{ps} ps">(#PS)</div>]
 		[<div class="notes">(#NOTES)</div>]
 		[(#TEXTE|?{""})]
 		[<div class="chapo"><:voir_en_ligne:> : <a href="(#URL_SITE)">[(#NOM_SITE|sinon{#URL_SITE})]</a></div>]
+		<br class="nettoyeur" />
 
-			[(#REM) Portfolio : album d'images ]
-			<B_documents_portfolio>
-			<div id="documents_portfolio">
-				<h2><:info_portfolio:></h2>
-				<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>
-				[<a href="#URL_DOCUMENT" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||image_reduire{0,60}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
-				</BOUCLE_documents_portfolio>
-			</div>
-			</B_documents_portfolio>
+[(#REM) Portfolio : album d'images ]
+	<B_documents_portfolio>
+		<div id="documents_portfolio">
+			<h2><:info_portfolio:></h2>
+	<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>
+			[<a href="#URL_DOCUMENT" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||image_reduire{0,60}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
+	</BOUCLE_documents_portfolio>
+		</div>
+		<br class="nettoyeur" />
+	</B_documents_portfolio>
 
 			<BOUCLE_afficher_document(DOCUMENTS) {id_document} {id_article} {mode=document}{extension IN png,jpg,gif}>
 			<div class="spip_documents spip_documents_center" id="document_actif">
 				[<a href="[(#URL_DOCUMENT|url_absolue)]">(#FICHIER|reduire_image{450,0}|inserer_attribut{alt,[(#TITRE|supprimer_numero|couper{80}|texte_backend)]})</a>]
-				[<div class="spip_doc_titre">(#TITRE)</div>]
-				[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+				[<div  class="#EDIT{titre} spip_doc_titre">(#TITRE)</div>]
+				[<div class="#EDIT{descriptif} spip_doc_descriptif">(#DESCRIPTIF)</div>]
 			</div>
 			</BOUCLE_afficher_document>
 
-<B_documents_joints>
-<div><hr />
-<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons}>
-	<div style="float: left;">
-	[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<div style="clear: both;"><b>(#TITRE)</b></div>][<div style="clear: both;">(#DESCRIPTIF)</div>]
-	</div>
-</BOUCLE_documents_joints>
-</div>
-<div style="clear: both;"></div>
-</B_documents_joints>
+		<B_documents_joints>
+			<div>
+			<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons}>
+				<div style="float: left;">
+				[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<div style="clear: both;"><b>(#TITRE)</b></div>][<div style="clear: both;">(#DESCRIPTIF)</div>]
+				</div>
+			</BOUCLE_documents_joints>
+			</div>
+			<br class="nettoyeur" />
+		</B_documents_joints>
 
-		<br />
-			[(#REM) Petition :
-			La petition ayant une PAGINATION il faut absolument lui passer SELF en argument. ]
-			[ #REM Conserver cet invalideur : (#PETITION|?{'',''}) ]
+		[(#REM) Petition :
+		La petition ayant une PAGINATION il faut absolument lui passer SELF en argument. ]
+		[ #REM Conserver cet invalideur : (#PETITION|?{'',''}) ]
 			<INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
-
-<!-- Debut Patrice -->
-	[(#MODELE{evenements_article}{id_article}{lang}{self=#SELF})]
-<!-- Fin Patrice -->
-
+[(#MODELE{evenements_article}{id_article}{lang}{self=#SELF})]
+		
 		<!-- Derniers articles des auteurs de l'article -->
 		<B_auteurs>
 			<div class="ps">
@@ -161,8 +159,9 @@
 		</div>]
 		<B_forums>
 		<h2 class="structure"><:Forum:></h2>
+			#ANCRE_PAGINATION
 		<ul class="forum-total">
-			<BOUCLE_forums(FORUMS){id_article}{par date}{inverse}>
+			<BOUCLE_forums(FORUMS){id_article}{par date}{inverse}{pagination 20}>
 				<li>
 					<div class="forum-fil">
 						<div class="forum">
@@ -171,16 +170,15 @@
 								<div class="forum-titre">[(#TITRE|supprimer_numero)]</div>
 								[(#DATE|affdate)][, <:par_auteur:> <strong>(#NOM)</strong>]
 							</div><!-- forum-chapo -->
-							<div class="forum-item">
+							<div class="forum-item" style="background-color: #ffe;">
 								#TEXTE
 								[<div class="forum-titre"><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
 								[<div class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a></div>]
 							</div><!-- forum-item -->
 						</div><!-- forum -->
 						<B_forums_fils>
-						<ul>
 						<BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
-
+						<ul>
 							<li>
 								<div class="forum">
 									<a name="forum#ID_FORUM"></a>
@@ -194,15 +192,25 @@
 										[<div class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a></div>]
 									</div><!-- forum-item -->
 								</div><!-- forum -->
-							<BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
-								</li>
-							</BOUCLE_forums_fils>
+							</li>
 						</ul>
-						</B_forums_fils><!-- forum-fil -->
-					</div>
+							<BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
+						</BOUCLE_forums_fils>
+						</B_forums_fils>
+					</div><!-- forum-fil -->
 				</li>
 			</BOUCLE_forums>
 		</ul><!-- forum-total -->
+		
+		[<div class="pagination">
+			<div class="ligne1">
+				<div dir="#LANG_DIR">#TOTAL_BOUCLE/#GRAND_TOTAL <:messages_forum:></div>
+			</div>
+			<div class="ligne2">
+        		(#PAGINATION)
+			</div>
+		</div><!-- pagination -->]
+
 		</B_forums>
 	</div><!-- bloc-contenu -->
 	
@@ -228,8 +236,6 @@
 							</BOUCLE_articles_rubrique>
 						</ul>
 					</li>
-    <!--[if lte IE 6]><style>#encart a{height:1em;}#encart li{height:1em;float:left;clear:both;width:100%}</style><![endif]-->
-    <!--[if IE 6]><style>#encart li{clear:none;}</style><![endif]-->
 				</ul>
 				#PAGINATION
 			</div><!-- menu -->

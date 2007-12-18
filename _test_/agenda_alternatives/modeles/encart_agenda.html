@@ -1,16 +1,16 @@
 [(#REM) affichage des évenements correspondant dans agenda]		
 	 <B_agenda>
-		<!-- cette boucle permet d'afficher les attributs des évenements les plus proche avec comme affichage de l'encart A Noter-->
+		<!-- cette boucle permet d'afficher les attributs des evenements les plus proche avec comme affichage de l'encart A Noter-->
 		<div class="menu">
-		<h2 class="structure"><:icone_agenda:></h2>
+		<h2 class="structure"><:minicalalter:a_venir:></h2>
 		  <ul>
-			<li><b><:icone_agenda:>
+			<li><b><:minicalalter:a_venir:>
 <!--				  <small><:onglet_repartition_lang:></small> -->
 				</b>
 			  <ul>
 
 	<BOUCLE_agenda(EVENEMENTS){0,6} {age_fin<0} {par date_debut} {statut=publie}>
-	<!-- la boucle s'effectue avec les parametres entre {} donc evenement attachés a cette rubrique : id_rubrique non dépassé age<0 triés par date (sous entendu croissante sinon mettre {inverse} affiche 6 evenements {0,6} uniquement pour un article publié  -->
+	<!-- la boucle s'effectue avec les parametres entre {} donc evenement attaches a cette rubrique : id_rubrique non depasse age<0 tries par date (sous entendu croissante sinon mettre {inverse} affiche 6 evenements {0,6} uniquement pour un article publie  -->
 	
 	<li><a href="#URL_ARTICLE">#TITRE</a></li>
 	<li><small>[-&nbsp;(#DESCRIPTIF)][ -&nbsp;(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})][ -&nbsp;(#LIEU)]</small></li>
@@ -23,4 +23,4 @@
       </ul>
     </div><!-- menu -->
 	</B_agenda>
-<!-- fin de la boucle qui affiche les évenements a venir en encart a droite -->
+<!-- fin de la boucle qui affiche les evenements a venir en encart a droite -->

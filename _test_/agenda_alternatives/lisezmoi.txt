@@ -1,57 +1,59 @@
 ----------------------------------------------------------------------
 Permet l'utilisation du plugin Agenda dans le squelettes Alternatives.
-(Contrib testée pour Spip 1.9.1 et Spip 1.9.2)
+(Contrib testée avec Spip 1.9.2c et Alternatives 1.9.2c)
 ----------------------------------------------------------------------
 
-Dans le squelette, quatre fichiers à modifier : 
+Dans le squelette, trois fichiers à modifier : 
 	themes/alternatives/sommaire.html, 
 	themes/alternatives/article.html, 
-	themes/alternatives/inc/inc-menu.html
 	themes/alternatives/inc/inc-menu-principal.html
 
 ----------------------------------------------------------------------
 1. Pour sommaire.html, placer le code : 
-	[(#MODELE{encart_agenda}{lang}{self=#SELF})] 
+	[(#MODELE{encart_agenda}{lang})] 
 
 	après la ligne : 
 	<INCLURE{fond=inc/inc-annonces}{lang}>
-
-2. Pour inc/inc-menu-principal.html, placer le code : 
-	<B_agenda><li id="menu-principal-agenda"><a href="<BOUCLE_agenda(EVENEMENTS){0,1}>[(#URL_PAGE{evenements})]</BOUCLE_agenda>" title="<:icone_agenda:>"><:icone_agenda:></a></li></B_agenda>
+	(vers ligne 43)
 	
+2. Pour sommaire.html, placer le code : 
+	<INCLURE{fond=inc/alter_calendrier}{var_date=archives}{date=#ENV{archives,#DATE}}{self=#SELF}{lang}>
+	après la ligne : 
+	<div id="encart">
+	(vers ligne 39)
+
+3. Pour inc/inc-menu-principal.html, placer le code : 
+	<B_agenda><li id="menu-principal-agenda"><a href="<BOUCLE_agenda(EVENEMENTS){0,1}>[(#URL_PAGE{evenements})]</BOUCLE_agenda>" title="<:icone_agenda:>"><:icone_agenda:></a></li></B_agenda>
+
 	après la ligne qui se termine par : 
 	<:accueil_site:></a></li>
-
-3. Pour inc/inc-menu.html, placer le code : 
-	[(#MODELE{rubrique_calendrier}{self=#SELF}{var_date=archives}{date=#ENV{archives,#DATE}}{lang}{id_rubrique})]
-	
-	après la ligne : 
-	<div class="menu" id="menu-rubriques">
+	(vers ligne 3)
 
 4. Pour article.html, placer le code : 
 	[(#MODELE{evenements_article}{id_article}{lang}{self=#SELF})] 
-	
+
 	après la ligne  : 
 	<INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
-	
+	(vers ligne 108)
+
 ----------------------------------------------------------------------
 Pour vous simplifer la vie, les fichiers originaux ainsi modifiés ont été placés dans : 
 	plugins/agenda_alternatives/modifications
 
-Il suffit donc pour vous de remplacer les 4 fichiers originaux dans :
+Il suffit donc pour vous de remplacer les 3 fichiers originaux dans :
 	themes/alternatives et themes/alternatives/inc
 
 Mais attention : il se peut que le squelette alternatives que vous avez entre les mains soit légèrement différent que celui qui est proposé ici.
 Si vous le pouvez donc, il vaut mieux que vous fassiez les changements vous-même.
 
-Les quatres modifs ci-dessus sont indépendantes, vous n'êtes pas obligé de les faire toutes ou de respecter un ordre précis. L'emplacement du code proposé ci-dessus dans les fichiers html est également modifiable : avec un peu d'astuce, vous saurez placer les différents modules là où bon vous semble...
+Les trois modifs ci-dessus sont indépendantes, vous n'êtes pas obligé de les faire toutes ou de respecter un ordre précis. L'emplacement du code proposé ci-dessus dans les fichiers html est également modifiable : avec un peu d'astuce, vous saurez placer les différents modules là où bon vous semble...
 	
 ----------------------------------------------------------------------
 Vous obtiendrez donc :
 
-	- Un mini calendrier dans le cadre de gauche (modif 3)
+	- Un mini calendrier dans le cadre de droite (modif 2)
 	- Un encart 'Agenda' dans le cadre de droite avec les prochains évènements (modif 1)
-	- Un bouton 'Agenda' supplémentaire en haut (modif 2), menant à :
+	- Un bouton 'Agenda' supplémentaire en haut (modif 3), menant à :
 	- Une page 'evenements' qui liste les évènements (du jour/du mois, prochains, passés)
 	- La liste des évènements associés au bas de chaque article (modif 4)
 
@@ -75,7 +77,7 @@ II. Assurez-vous des compatibilités. Par exemple :
 	Agenda 1.9.2 avec Spip 1.9.2
 
 III. Faites les choses dans l'ordre :
-	1. s'assurer que spip fonctionne
+	1. s'assurer que SPIP fonctionne
 	2. s'assurer que le squelette fonctionne
 	3. activer l'agenda et widget calendar et s'assurer que tout fonctionne encore
 	4. procéder aux modifications du squelettes et activer agenda_alternatives.
@@ -83,5 +85,25 @@ III. Faites les choses dans l'ordre :
 IV. Ajouter vos évènements attachés à vos articles.
 
 ----------------------------------------------------------------------
-Toutes vos remarques : patrice.vanneufville!@!laposte.net
+Question à trois centimes : Mettre le mini-calendrier à gauche et non à droite...
+
+Dans ce cas, le calendrier serait visible de toutes les pages du site.
+Séduisant, mais le cache de SPIP pose problème car votre squelette ne transmet jamais les parametres 'archive' et 'self' à inc-menu.html
+Bon, si vous y tenez, alors :
+
+1. Remplacez TOUS les : <INCLURE{fond=inc/inc-menu}{lang} de votre site
+	par : <INCLURE{fond=inc/inc-menu}{lang}{archive=#ENV{archive}}{self=#SELF}
+(Notez que le dernier chevron est manquant car d'autres paramètres peuvent éventuellement exister)
+Dans le squelette de base, il y a 41 remplacements à faire sans compter ceux de : alter-perso/
+Seul le fichier 'evenements.html' de ce plugin est prêt à gérer un mini-calendrier à gauche.
+
+2. Pour inc/inc-menu.html, placer le code : 
+	<INCLURE{fond=inc/alter_calendrier}{var_date=archives}{date=#ENV{archives,#DATE}}{self=#SELF}{lang}>
+
+	après la ligne : 
+	<div class="menu" id="menu-rubriques">
+	(vers ligne 15)
+
+----------------------------------------------------------------------
+Toutes vos remarques : patrice.vanneufville(!arob!)laposte.net
 	

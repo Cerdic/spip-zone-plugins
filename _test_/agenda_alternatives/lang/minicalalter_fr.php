@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenements_mois' => 'Les &eacute;v&egrave;nements du mois de @month_year@',
 	'evenements_jour' => 'Les &eacute;v&egrave;nements du @day_month_year@',
 	'activer_agenda' => "ERREUR !<br /><br />Merci d'activer le Plugin Agenda.",
+	'a_venir' => '&Agrave; venir',
 		
 );
 

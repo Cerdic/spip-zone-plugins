@@ -1,4 +1,4 @@
-#CACHE{7200}
+[(#CACHE{7200})]
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
@@ -23,7 +23,7 @@
     ************************************************************* -->
   <div id="bloc-contenu">
     <div class="edito">
-		<INCLURE{fond=inc/inc-sommaire-edito}{lang}>
+		<INCLURE{fond=inc/inc-sommaire-edito}{lang}{self=#SELF}>
     </div><!-- edito -->
     
     <h2 class="structure"><:articles_recents:></h2>
@@ -37,14 +37,12 @@
 	Contextual menus (right) 
     ************************************************************* -->
   <div id="encart">  
+<INCLURE{fond=inc/alter_calendrier}{var_date=archives}{date=#ENV{archives,#DATE}}{self=#SELF}{lang}>
 
 <INCLURE{fond=inc/inc-trad}{lang}>
 
 <INCLURE{fond=inc/inc-annonces}{lang}>
-
-<!-- Debut Patrice -->
-	[(#MODELE{encart_agenda}{lang}{self=#SELF})]
-<!-- Fin Patrice -->
+[(#MODELE{encart_agenda}{lang})] 
 
 <INCLURE{fond=inc/inc-breves}{lang}>
 
@@ -69,6 +67,5 @@
 <INCLURE{fond=inc/inc-bas} {lang}>
 
 </div><!-- page-->
-#SPIP_CRON
 </body>
 </html>
