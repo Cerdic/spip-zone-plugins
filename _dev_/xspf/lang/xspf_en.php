@@ -170,8 +170,8 @@ It supports playback of a single Flash video file, RTMP streams or RSS, XSPF and
 <p><a href="http://www.jeroenwijering.com/?item=JW_FLV_Player">http://www.jeroenwijering.com/?item=JW_FLV_Player</a></p>',
 
 'jw_media_player_install' => '<NEW><p>Pour installer JW Media Player, t&eacute;l&eacute;chargez le <a href="http://www.jeroenwijering.com/upload/jw_media_player.zip">ici</a> et d&eacute;compressez le tel quel dans un dossier lib/ &agrave; la racine du site (en pr&eacute;vision de la verion 1.9.3 de SPIP.</p>',
-'jw_rotator_install' => '<NEW><p>Pour installer JW Image Rotator, t&eacute;l&eacute;chargez le <a href="http://www.jeroenwijering.com/upload/jw_flv_player.zip">ici</a> et d&eacute;compressez le tel quel dans un dossier lib/ &agrave; la racine du site (en pr&eacute;vision de la verion 1.9.3 de SPIP.</p>',
-'jw_flv_player_install' => '<NEW><p>Pour installer JW Flv Player, t&eacute;l&eacute;chargez le <a href="http://www.jeroenwijering.com/upload/jw_image_rotator.zip">ici</a> et d&eacute;compressez le tel quel dans un dossier lib/ &agrave; la racine du site (en pr&eacute;vision de la verion 1.9.3 de SPIP.</p>',
+'jw_rotator_install' => '<NEW><p>Pour installer JW Image Rotator, t&eacute;l&eacute;chargez le <a href="http://www.jeroenwijering.com/upload/jw_image_rotator.zip">ici</a> et d&eacute;compressez le tel quel dans un dossier lib/ &agrave; la racine du site (en pr&eacute;vision de la verion 1.9.3 de SPIP.</p>',
+'jw_flv_player_install' => '<NEW><p>Pour installer JW Flv Player, t&eacute;l&eacute;chargez le <a href="http://www.jeroenwijering.com/upload/jw_flv_player.zip">ici</a> et d&eacute;compressez le tel quel dans un dossier lib/ &agrave; la racine du site (en pr&eacute;vision de la verion 1.9.3 de SPIP.</p>',
 
 );
 ?>
