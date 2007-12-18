@@ -238,16 +238,6 @@ _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 	'log_couteau_suisse:nom' => 'Log d&eacute;taill&eacute; du Couteau Suisse',
 	'log_couteau_suisse:description' => "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Le Couteau Suisse' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".cs_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
 
-	'rss_couteau_suisse:nom' => 'R&eacute;visions du Couteau Suisse',
-	'rss_couteau_suisse:description' => "Ajoute un cadre sur la pr&eacute;sente page de configuration, o&ugrave; figurent les derni&egrave;res modifications apport&eacute;es au code du plugin 'Le Couteau Suisse' ([Source->"._CS_RSS_SOURCE."]).",
-	'rss_titre' => '&laquo;&nbsp;Le Couteau Suisse&nbsp;&raquo; en d&eacute;veloppement :',
-	'edition' => 'Flux RSS mis &agrave; jour le :',
-	'supprimer_cadre' => 'Supprimer ce cadre',
-	'desactiver_rss' => 'D&eacute;sactiver les &laquo; R&eacute;visions du Couteau Suisse &raquo;',
-/*
-	'cookie_prefix:nom' => 'Pr&eacute;fixe des cookies',
-	'cookie_prefix:description' => 'Sp&eacute;cifie le pr&eacute;fixe &agrave; donner aux cookies de ce site. Utile pour installer des sites SPIP dans des sous-r&eacute;pertoires.[[Votre choix :->%cookie_prefix%]]',
-*/
 	'filtrer_javascript:nom' => 'Gestion du javascript',
 	'filtrer_javascript:description' => 'Pour g&eacute;rer le javascript dans les articles, trois modes sont disponibles :
 - <i>jamais</i> : le javascript est refus&eacute; partout
@@ -398,20 +388,27 @@ _ Merci de votre compr&eacute;hension.",
 
 // ---------------------------------------------------------------------------
 	'boites_privees:nom' => 'Bo&icirc;tes priv&eacute;es',
-	'boites_privees:description' => "#PUCE {{Les articles en format SPIP}}
+	'boites_privees:description' => "Toutes les bo&icirc;tes d&eacute;crites ci-dessous apparaissent dans la partie priv&eacute;e.
 
-(outil en cours de d&eacute;veloppement)",
-	'texte_formatspip' => 'TEXTE AU FORMAT SPIP',
+#PUCE {{Les r&eacute;visions du Couteau Suisse}} : un cadre sur la pr&eacute;sente page de configuration, indiquant les derni&egrave;res modifications apport&eacute;es au code du plugin ([Source->"._CS_RSS_SOURCE."]).
+[[Votre choix :->%cs_rss%]]
+	
+#PUCE {{Les articles au format SPIP}} : un cadre repliable suppl&eacute;mentaire pour vos articles afin de conna&icirc;tre le code source utilis&eacute; par leurs auteurs.[[Votre choix :->%format_spip%]]
 
-// ---------------------------------------------------------------------------
-	'stats_rapides:nom' => 'Les auteurs en stat',
-	'stats_rapides:description' => "Un cadre d'informations suppl&eacute;mentaires sur [la page des auteurs->".generer_url_ecrire('auteurs')."]
-- les 10 derniers connect&eacute;s
-- les inscriptions non confirm&eacute;es.
+#PUCE {{Les auteurs en stat}} : un cadre suppl&eacute;mentaires sur [la page des auteurs->".generer_url_ecrire('auteurs')."] indiquant les 10 derniers connect&eacute;s et les inscriptions non confirm&eacute;es. Seuls les administrateurs voient ces informations.
+[[Votre choix :->%stat_auteurs%]]
 
-D&eacute;finissez ci-dessous le nombre maximal d'auteurs &agrave; afficher sur cette page.
-[[Auteurs par page->%max_auteurs_page%]]",
-	'derniers_connectes' => '10 derniers connect&eacute;s :',
+D&eacute;finissez ci-dessous le nombre maximal d'auteurs &agrave; afficher sur le cadre central de cette page.
+[[Auteurs par page->%max_auteurs_page%]]
+",
+	'rss_titre' => '&laquo;&nbsp;Le Couteau Suisse&nbsp;&raquo; en d&eacute;veloppement :',
+	'edition' => 'Flux RSS mis &agrave; jour le :',
+	'supprimer_cadre' => 'Supprimer ce cadre',
+	'desactiver_rss' => 'D&eacute;sactiver les &laquo; R&eacute;visions du Couteau Suisse &raquo;',
+
+	'texte_formatspip' => 'TEXTE ORIGINAL AU FORMAT SPIP',
+	'textes_formatspip' => 'TEXTES ORIGINAUX AU FORMAT SPIP',
+
 	'non_confirmes' => 'Non confirm&eacute;s :',
 	'stats_auteur' => '@icon@ @nom@, le&nbsp;@date@',
 	'attente_confirmation' => "En attente de confirmation",

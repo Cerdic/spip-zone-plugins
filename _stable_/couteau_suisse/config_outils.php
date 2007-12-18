@@ -279,10 +279,6 @@ add_outil( array(
 ));
 
 add_outil( array(
-	'id' => 'rss_couteau_suisse',
-));
-
-add_outil( array(
 	'id' => 'xml',
 	'code:options' => "\$GLOBALS['xhtml']='sax';",
 	'auteur' => 'Ma&iuml;eul Rouquette (maieulrouquette@tele2.fr)',
@@ -345,12 +341,28 @@ add_outil( array(
 	'auteur' => '[Arnaud Ventre->ventrea@gmail.com]',
 ));
 
-add_outil( array(
-	'id' => 'boites_privees',
-	'categorie' => 'admin',
-	'pipeline:affiche_milieu' => 'boites_privees_affiche_milieu',
+add_variable( array(
+	'nom' => 'cs_rss',
+	'format' => 'nombre',
+	'radio' => array(1 => 'cout:activer', 0 => 'cout:desactiver'),
+	'defaut' => 1,
+	'code:%s' => "define('boites_privees_CS', %s);
+@define('_CS_RSS_SOURCE', 'http://zone.spip.org/trac/spip-zone/log/_plugins_/_stable_/couteau_suisse?format=rss&mode=stop_on_copy&limit=20');\n",
 ));
-
+add_variable( array(
+	'nom' => 'format_spip',
+	'format' => 'nombre',
+	'radio' => array(1 => 'cout:activer', 0 => 'cout:desactiver'),
+	'defaut' => 1,
+	'code:%s' => "define('boites_privees_ARTICLES', %s);\n",
+));
+add_variable( array(
+	'nom' => 'stat_auteurs',
+	'format' => 'nombre',
+	'radio' => array(1 => 'cout:activer', 0 => 'cout:desactiver'),
+	'defaut' => 1,
+	'code:%s' => "define('boites_privees_AUTEURS', %s)\n;",
+));
 add_variable( array(
 	'nom' => 'max_auteurs_page',
 	'format' => 'nombre',
@@ -358,12 +370,21 @@ add_variable( array(
 	'code:%s' => "@define('MAX_AUTEURS_PAR_PAGE', %s);",
 ));
 add_outil( array(
+	'id' => 'boites_privees',
+	'auteur'=>'Pat, Joseph LARMARANGE (format SPIP)',
+	'code:options' => "%%cs_rss%%%%format_spip%%%%stat_auteurs%%%%max_auteurs_page%%",
+	'categorie' => 'admin',
+	'pipeline:affiche_milieu' => 'boites_privees_affiche_milieu',
+	'pipeline:affiche_droite' => 'boites_privees_affiche_droite',
+));
+/*
+add_outil( array(
 	'id' => 'stats_rapides',
 	'code:options' => "%%max_auteurs_page%%",
 	'categorie' => 'admin',
 	'pipeline:affiche_droite' => 'stats_rapides_affiche_droite',
 ));
-
+*/
 //-----------------------------------------------------------------------------//
 //                               fonctions                                     //
 //-----------------------------------------------------------------------------//

@@ -429,9 +429,8 @@ if (strlen($res['version']) and (version_compare($res['version'],'2.3.2','<'))) 
 
 	creer_colonne_droite();
 	lire_metas();
-	// si l'outil rss_couteau_suisse est actif, on telecharge les news...
-	$actifs = unserialize($GLOBALS['meta']['tweaks_actifs']);
-	if ($actifs['rss_couteau_suisse'][actif]==1) cs_boite_rss(!$quiet);
+	// on telecharge les news...
+	if (defined('boites_privees_CS')) cs_boite_rss(!$quiet);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
 	debut_droite();
 
@@ -457,8 +456,8 @@ cs_log("Fin   : exec_admin_couteau_suisse()");
 function cs_boite_rss($force) {
 	debut_boite_info();
 	echo '<p><b>'._T('cout:rss_titre').'</b></p><div class="cs_boite_rss"><p>Attente RSS...</p></div>'
-		.'<div style="text-align: right; font-size: 87%;"><a title="'._T('cout:desactiver_rss').'" href="'
-		.generer_url_ecrire(_request('exec'),'cmd=toggle&outil=rss_couteau_suisse').'">'._T('cout:supprimer_cadre').'</a></div>';
+		/*.'<div style="text-align: right; font-size: 87%;"><a title="'._T('cout:desactiver_rss').'" href="'
+		.generer_url_ecrire(_request('exec'),'cmd=toggle&outil=rss_couteau_suisse').'">'._T('cout:supprimer_cadre').'</a></div>'*/;
 	fin_boite_info();
 }
 

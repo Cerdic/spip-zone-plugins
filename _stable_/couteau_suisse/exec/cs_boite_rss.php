@@ -7,8 +7,6 @@
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-@define('_CS_RSS_SOURCE', 'http://zone.spip.org/trac/spip-zone/log/_plugins_/_stable_/couteau_suisse?format=rss&mode=stop_on_copy&limit=20');	
-
 // compatibilite spip 1.9
 if(!function_exists(ajax_retour)) { 
 	function ajax_retour($corps) {
