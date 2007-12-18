@@ -1,3 +1,116 @@
+﻿2007-12-18  chryjs  <chryjs!@!free!.!fr>
+
+ * correction appels base de données (pour etre compatible 1.9.3)
+ * bug a resdoudre dans spipbb_fonctions (include) -> plante affichage espace privé !
+ * correction affichages admin
+
+
+2007-12-10  scoty  <scoty!@!koakidi!.!com>
+
+ * reorga des fichiers .. en général ! voir ci-apres !
+ * intialisation des exec par un fichier : spipbb_init : exécute controle d'install de tout exec ; charge fonctions utiles/communes.
+ * Reste a modifier certains skel (corps_sk/) pour accepter/afficher forums(article) en racine du secteur. (issu de GAF 0.6)
+ * n'est pas encore touché aux exec/ ..spam.. ; ni fromphpbb
+ * renommé chatons/ en smileys/ (denomin. + courante !)
+ * nouvelle icones de l'espace public (themes/defaut/img/) ; suppress. icones non utilisées
+ * suggest. : base/spipbb_uprgrade.php -> ajouter delete des groupe_mot, mots-clef  si désintallation du plugin !?!
+ * reorganisation des fichiers :
+	** : nouveau  /  @@ : supprimé
+
+	## spipbb_configuration.php (exec/)**
+	remplace spipbb_admin_configuration
+	Nouveau processus !
+
+	## spipbb.php (inc/) @@
+	suppression !
+	dispatch fonction dans divers fichiers
+	Nouveau processus --> spipbb_init.php
+
+	## spipbb_util.php (inc/)**
+	diverses fonctions communes a plusieurs scripts
+	ou du variés de tout poil inclassable !
+
+	## spipbb_inc_config (inc/)**
+	diverses fonction de inc/spipbb.php ayant trait à la config
+		--> les "spipbb_check_ .."
+
+	## spipbb_inc_metas (inc/)**
+	Rassemble diverses fonctions (de inc/spipbb.php !) ayant trait au metas
+	spipbb_import_gafospip_metas() ==> correspond a recup sur gaf 0.6, hors ce plugin jamais diffusé, donc
+		faire recup des 3 premier champs (gaf 0.5 !).
+
+	## spipbb_presentation (inc/) ** 
+	[[ anc. inc/gaf_inc.php ]]
+	.. Diverses fonctions liées à la presentation 
+	==> bouton de tout genre, positionnement spécifique, encadrement ... 
+
+	## spipbb_menus_gauche (inc/)**
+	Assemblage de (gaf)menu_arbo.php + (spipbb)interface_admin.php
+	.. integré en une fonction de Menus (accepter icone sur bouton menu)
+
+	## spipbb_init (inc/) **
+	appel systematique à chaque exec du plugin
+	verifie l'état de la config, fait les includes communs à tous exec de spipbb
+
+	## statvisites.php (genie/)
+	supprime appel spipbb.php
+	ajout inc/spipbb_192.php
+
+	## spipbb_admin_reconfig (action/)
+	.. ajout fonction : spipbb_init_mot_cle (issue de feu inc/spipbb.php)
+	.. ajout (essai) recup jointure article/forum des anc. mot-clef gaf
+
+	## spipbb_fonctions.php
+	Deplaces fonctions traitement balises dans traiter_imagerie.php
+
+	## spipbb_pipelines.php
+	.. Supprime un des deux boutons => un bouton pour spipbb suffit ! tout est derrière
+	.. Ajout pipeline "header_prive" -->  css et le js sur tout exec "spipbb_.....", js sur spipbb_formpost
+	.. ajout pipeline "affiche_milieu" --> formulaire sur exec[/]_auteur_infos
+
+	## spipbb_options.php
+	.. Deplace $GLOBALS['champs_sap_spipbb'] dans base/sap_spipbb.php
+	Certes ce sont des champs extra mais aussi et surtout def. champs table.
+	De plus liés à un test de plugin générant une table "auteurs_profils" cherchant "ce" fichier dans "base/"
+
+	.. inclure base/sap_spipbb.php
+
+	## plugin.xml
+	.. ajout pipeline "header_prive" | "affiche_milieu" (form supp. sur auteur_infos.php)
+
+	## repert balise/
+	supprime : affiche_avatar.php, signature_post.php, spipbb.php, tableau_smileys.php
+	--> ces balises sont dans public/spipbb_balises.php
+
+	## repert javascript/ **
+	.. ajout de deux fichiers spipbb_vueavatar.js ; spipbb_formpost.js
+
+	## spipbb_js_formpost.js (javascript)**
+	.. fonction emoticon pour backoffice +  window(focus)
+	--> origine exec/gaf_formpost.php
+	-- appel passer dans le pipeline "header_prive".
+
+	## spipbb_affecter_thread.php (exec/)**
+	(anc. gaf_affect.php) --> déplacement de threads
+
+	## spipbb_inc_affecter.php (inc/)**
+	(anc. heritage.php) fonctions hierarchie 
+
+	## spipbb_affecter_affiche.php (exec/)**
+	(anc. gaf_val_affect.php)
+
+	!! ## (h)gaf_auteur_infos() -> (chrys) spipbb_auteur_infos() 
+		DEVIENT : spipbb_donnees_auteur() ... risque confusion avec les script + fonction spipbb_auteur_infos destinées
+		à l'affichage d'un formulaire dans exec/auteur_infos (spip) !!
+
+	## spipbb_admin_gestion_forum.php@@
+	fonctionnalités : ordonner les art/rub, intégrée à spipbb_admin !!
+	Mais reste toujours le problème de monter descendre sur article .. dysfonctionnement sous 1.9.2 !!! 
+	Corrigé sur 0.3.7 ???
+
+	## spipbb_styles.css (img_pack/)**
+	(anc. gaf_styles.css) dans img_pack/
+
 2007-12-02  chryjs  <chryjs!@!free!.!fr>
 
  * sql_showtable(.., true) permet de faire le remplacement pour les tables "spip"

@@ -121,7 +121,7 @@ function affiche_metas_spipbb($var) {
 //
 function verif_article_ferme($id_article,$id_mot_ferme) {
 	$res=spip_query("SELECT * FROM spip_mots_articles WHERE id_mot=$id_mot_ferme AND id_article=$id_article");
-	if ($row=spip_num_rows($res)) {
+	if ($row=sql_count($res)) {
 		$rf ="ferme";
 		if ($ds = @opendir(_DIR_SESSIONS)) {
 			while (($file = @readdir($ds)) !== false) {
@@ -141,7 +141,7 @@ function verif_article_ferme($id_article,$id_mot_ferme) {
 //
 function verif_sujet_ferme($id_sujet,$id_mot_ferme) {
 	$res=spip_query("SELECT * FROM spip_mots_forum WHERE id_mot=$id_mot_ferme AND id_forum=$id_sujet");
-	if ($row=spip_num_rows($res)) { $rf ="ferme"; }
+	if ($row=sql_count($res)) { $rf ="ferme"; }
 	return $rf;
 }
 
@@ -165,7 +165,7 @@ function auth_deplace_connecte() {
 function verif_sujet_annonce($id_sujet) {
 	$req=spip_query("SELECT id_forum FROM spip_mots_forum 
 					WHERE id_mot=".$GLOBALS['spipbb']['id_mot_annonce']." AND id_forum=$id_sujet");
-	$res=spip_num_rows($req);
+	$res=sql_count($req);
 	if($res) { return true; }
 }
 #
@@ -174,7 +174,7 @@ function verif_sujet_annonce($id_sujet) {
 function verif_forum_annonce($id_article) {
 	$req=spip_query("SELECT id_article FROM spip_mots_articles 
 					WHERE id_mot=".$GLOBALS['spipbb']['id_mot_annonce']." AND id_article=$id_article");
-	if(spip_num_rows($req)) {
+	if(sql_count($req)) {
 		return true;
 	}
 }
@@ -207,7 +207,8 @@ function tranches_liste_forum($encours, $retour_gaf, $nligne) {
 // gaf - verifier info plugin en cours
 # au cas ou, ... car plus utiliser sur fonction signature_spipbb()
 function verifier_infos_plugin($item) {
-	include_spip('inc/plugin');
+	if (!function_exists('plugin_get_infos')) include_spip('inc/plugin');
+	
 	$info_plugin = plugin_get_infos('spipbb');
 	return $info_plugin[$item];
 }

@@ -33,8 +33,8 @@ if($id_salon) {
 	$req_srg =	"SELECT id_rubrique, id_parent, titre, descriptif 
 				FROM spip_rubriques 
 				WHERE id_rubrique=$id_salon";
-	$res_srg = spip_query($req_srg);
-	$row=spip_fetch_array($res_srg);
+	$res_srg = sql_query($req_srg);
+	$row=sql_fetch($res_srg);
 
 	$id_salon = $row['id_rubrique'];
 	$desc_salon = $row['descriptif'];
@@ -61,11 +61,10 @@ echo $commencer_page(textebrut(typo($titre_salon)), "forum", "spipbb_admin",$id_
 echo "<a name='haut_page'></a>";
 
 
-debut_gauche();
-	spipbb_menus_gauche(_request('exec'),$id_salon);
+echo debut_gauche('',true);
+spipbb_menus_gauche(_request('exec'),$id_salon);
 	
-
-debut_droite();
+echo debut_droite('',true);
 
 //
 // présenter UN salon/rubrique
@@ -128,20 +127,20 @@ if($id_salon) {
 	#
 	# les forums de ce salon
 	#
-	$res_af = spip_query("SELECT id_article, titre, descriptif, statut 
+	$res_af = sql_query("SELECT id_article, titre, descriptif, statut 
 						FROM spip_articles 
 						WHERE id_rubrique = $id_salon 
 						ORDER BY titre");
 	
 	# compter les forums
-	if($nombre_forums=spip_num_rows($res_af)) {
+	if($nombre_forums=sql_count($res_af)) {
 		$flag_ordonne = ($nombre_forums>1)?true:false;
 	}
 	else $flag_ordonne = false;
 	
 	$ifond=0;
 	
-	while ($row=spip_fetch_array($res_af)) {
+	while ($row=sql_fetch($res_af)) {
 		$id_forum = $row['id_article'];
 		$titre_forum = supprimer_numero($row['titre']);
 		$desc_forum = $row['descriptif'];
@@ -155,23 +154,23 @@ if($id_salon) {
 						WHERE id_article='$id_forum' 
 						AND id_parent=0 AND statut IN ('publie', 'off', 'prop') 
 						"; 
-			$res_sujet = spip_query($req_sujet);
-			$nbr_sujet=spip_num_rows($res_sujet);
+			$res_sujet = sql_query($req_sujet);
+			$nbr_sujet=sql_count($res_sujet);
 			
 			// nombre total de posts de ce $id_forum
 			$req_post= "SELECT id_forum FROM spip_forum 
 						WHERE id_article='$id_forum' AND statut IN ('publie', 'off', 'prop') 
 						"; 
-			$res_post = spip_query($req_post);
-			$nbr_post=spip_num_rows($res_post);
+			$res_post = sql_query($req_post);
+			$nbr_post=sql_count($res_post);
 			
 			// dernier post
 			$req_date = "SELECT id_forum, id_thread, DATE_FORMAT(date_heure, '%d/%m/%Y %H:%i') AS dateur 
 						FROM spip_forum
 						WHERE id_article=$id_forum AND statut IN ('publie', 'off', 'prop') 
 						ORDER BY date_heure DESC LIMIT 0, 1";
-			$res_date = spip_query($req_date);
-			$rd = spip_fetch_array($res_date);
+			$res_date = sql_query($req_date);
+			$rd = sql_fetch($res_date);
 			$id_post = $rd['id_forum'];
 			$id_sujet = $rd['id_thread'];
 			$der_date = $rd['dateur'];
@@ -266,13 +265,13 @@ if($id_salon) {
 $req = "SELECT id_forum, id_thread, date_heure, auteur, titre, statut FROM spip_forum
 			WHERE statut IN ('publie', 'off', 'prop') $wheres 
 			ORDER BY date_heure DESC LIMIT 0,20";
-$res = spip_query($req);
+$res = sql_query($req);
 
 
-debut_cadre_formulaire('');
+echo debut_cadre_formulaire('',true);
 echo "\n<table cellpadding='3' cellspacing='0' border='0' width='600'>\n";
 echo "<tr><td colspan='3'><span class='verdana3'><b>"._T('gaf:derniers_messages')."</b></span></td></tr>\n";
-while ($row = spip_fetch_array($res))
+while ($row = sql_fetch($res))
 	{
 	$id_post = $row['id_forum'];
 	$date_rel = date_relative($row['date_heure']);
@@ -308,7 +307,7 @@ while ($row = spip_fetch_array($res))
 	echo "</td></tr>\n";
 	}
 echo "</table>\n";
-fin_cadre_formulaire();
+echo fin_cadre_formulaire(true);
 
 
 

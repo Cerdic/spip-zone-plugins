@@ -223,7 +223,7 @@ function url_post_tranche($id_post, $id_sujet, $compt_rang="") {
 		$url_post = generer_url_ecrire("spipbb_sujet","id_sujet=".$id_sujet);
 	}
 	else {
-		$nbr_id=spip_num_rows(spip_query("SELECT id_forum FROM spip_forum WHERE id_thread=$id_sujet"));
+		$nbr_id=sql_count(spip_query("SELECT id_forum FROM spip_forum WHERE id_thread=$id_sujet"));
 		if ($nbr_id<=$fixlimit)
 			{ $url_post = generer_url_ecrire("spipbb_sujet", "&id_sujet=".$id_sujet."#".$id_post); }
 		else {
@@ -311,7 +311,7 @@ function bouton_deplace_sujet($id_forum, $id_sujet) {
 function branche_rubriques($id) {
 	$liste = array();
 	$res = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=$id");
-	if(spip_num_rows($res)) {
+	if(sql_count($res)) {
 		while($row=spip_fetch_array($res)) {
 			$liste[]=$row['id_rubrique'];
 		}

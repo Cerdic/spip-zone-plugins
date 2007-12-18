@@ -7,13 +7,18 @@
 #  Contact : chryjs!@!free!.!fr                            #
 #----------------------------------------------------------#
 
-
+//echo "\n<br>\n include spipbb_fonctions --1";
 if (!function_exists('sql_query')) include_spip('inc/spipbb_192');
+//echo "\n<br>\n include spipbb_fonctions --2";
 
 # requis
 include_spip('inc/traiter_imagerie');
+//echo "\n<br>\n include spipbb_fonctions --3";
+
 include_spip('public/spipbb_balises');
-include_spip("inc/spipbb_notifications");
+//echo "\n<br>\n include spipbb_fonctions --4";
+//chryjs: le 18/12/2007 bug total plante interface privee : include_spip("inc/spipbb_notifications");
+//echo "\n<br>\n include spipbb_fonctions --5";
 
 
 // ------------------------------------------------------------------------------

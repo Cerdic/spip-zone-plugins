@@ -7,61 +7,57 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function exec_spipbb_configuration() {
+	# requis spip
+	global 	$connect_statut,
+			$connect_toutes_rubriques,
+			$connect_id_auteur,
+			$couleur_claire, $couleur_foncee;
 
-# requis spip
-global 	$connect_statut,
-		$connect_toutes_rubriques,
-		$connect_id_auteur,
-		$couleur_claire, $couleur_foncee;
-
-# initialiser spipbb
-include_spip('inc/spipbb_init');
-
-
-# requis de cet exec
-include_spip('inc/spipbb_inc_config');
-include_spip('inc/spipbb_inc_metas');
+	# initialiser spipbb
+	include_spip('inc/spipbb_init');
 
 
-
-#
-# affichage
-#
-$commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_L('titre_page_'._request('exec')), "forum", "spipbb_admin", '');
-echo "<a name='haut_page'></a>";
+	# requis de cet exec
+	include_spip('inc/spipbb_inc_config');
+	include_spip('inc/spipbb_inc_metas');
 
 
-debut_gauche();
+	#
+	# affichage
+	#
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_page_'._request('exec')), "configuration", "spipbb_configuration");
+	echo "<a name='haut_page'></a>";
+
+	echo debut_gauche('',true);
 	spipbb_menus_gauche(_request('exec'));
 
+	echo debut_droite('',true);
 
-debut_droite();
+	# reserve au Admins
+		if ($connect_statut!='0minirezo' OR !$connect_toutes_rubriques) {
+			echo debut_cadre_relief("",true);
+			echo _T('avis_non_acces_page');
+			echo fin_cadre_relief();
+			echo fin_gauche(), fin_page();
+			exit;
+		}
 
-# reserve au Admins
-	if ($connect_statut!='0minirezo' OR !$connect_toutes_rubriques) {
-		debut_cadre_relief("");
-		echo _T('avis_non_acces_page');
-		fin_cadre_relief();
-		echo fin_gauche(), fin_page();
-		exit;
-	}
+		# cas install
+		if(!spipbb_is_configured()) {
+			spipbb_upgrade_metas($GLOBALS['spipbb']['version'],$GLOBALS['spipbb_plug_version']);
+			spipbb_upgrade_tables($GLOBALS['spipbb']['version']);
+		}
+		
+		# install ou maj
+		echo spipbb_admin_configuration();
 
-	# cas install
-	if(!spipbb_is_configured()) {
-		spipbb_upgrade_metas($GLOBALS['spipbb']['version'],$GLOBALS['spipbb_plug_version']);
-		spipbb_upgrade_tables($GLOBALS['spipbb']['version']);
-	}
-	
-	# install ou maj
-	echo spipbb_admin_configuration();
+		echo "</form>";
 
-	echo "</form>";
+	# pied page exec
+	bouton_retour_haut();
 
-# pied page exec
-bouton_retour_haut();
-
-echo fin_gauche(), fin_page();
+	echo fin_gauche(), fin_page();
 } // exec_spipbb_config
 
 

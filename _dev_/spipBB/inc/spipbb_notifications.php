@@ -12,6 +12,7 @@
 # Introduire la restriction fournie par chaque visiteur
 # dans le champ profil : "refus_suivi_thread"
 # 
+echo "\n<br>\n include spipbb_notifications --1";
 
 // cette notification s'execute quand on valide un message 'prop'ose,
 // dans ecrire/inc/forum_insert.php ; ici on va notifier ceux qui ne l'ont

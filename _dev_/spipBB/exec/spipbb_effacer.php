@@ -36,7 +36,7 @@ echo $commencer_page(_L('titre_page_'._request('exec')), "forum", "spipbb_admin"
 echo "<a name='haut_page'></a>";
 
 
-debut_gauche();
+echo debut_gauche('',true);
 	spipbb_menus_gauche(_request('exec'));
 
 
@@ -57,7 +57,7 @@ if($action=='efface_select') {
 	$tbl_eraze=$_POST['eraze'];
 	//suppresion des posts selectionnés
 	debut_cadre_relief("poubelle.gif");
-	gros_titre(_T('gaf:poste_effac'));
+	echo gros_titre(_T('gaf:poste_effac'),'',false);
 	
 	$nbr_eraze = count($tbl_eraze);
 	if ($nbr_eraze==0) {
@@ -80,7 +80,7 @@ debut_cadre_relief("");
 	echo "<table cellpadding='3' cellspacing='0' border='0' width='100%'>\n";
 	echo "<tr width='100%'>\n";
 	echo "<td height='35' valign='top' colspan='2'>\n";
-	gros_titre(_T('gaf:poste_refuse'));
+	echo gros_titre(_T('gaf:poste_refuse'),'',false);
 	echo "</td></tr>";
 
 	$ifond=0;

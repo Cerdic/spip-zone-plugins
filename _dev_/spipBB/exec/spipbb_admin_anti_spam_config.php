@@ -28,8 +28,10 @@ spip_log(__FILE__.' : included','spipbb');
 
 if (defined("_SPAM_SWCONFIG")) return; else define("_SPAM_SWCONFIG", true);
 
+/*
 include_spip('inc/spipbb');
 include_spip('inc/interface_admin');
+*/
 
 // ------------------------------------------------------------------------------
 // [fr] Methode exec
@@ -39,11 +41,14 @@ include_spip('inc/interface_admin');
 // ------------------------------------------------------------------------------
 function exec_spipbb_admin_anti_spam_config()
 {
+	/*
 	if (!spipbb_is_configured() or $GLOBALS['spipbb']['configure']!='oui') {
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('spipbb_admin_configuration', ''));
 		exit;
 	}
+	*/
+	include_spip('inc/spipbb_init');
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('spipbb:sw_spam_titre'), "configuration", 'spipbb');
@@ -57,10 +62,12 @@ function exec_spipbb_admin_anti_spam_config()
 	}
 
 	echo debut_gauche('',true);
+		spipbb_menus_gauche(_request('exec'));
+
 	echo debut_boite_info(true);
 	echo  _T('spipbb:sw_spam_titre');
 	echo fin_boite_info(true);
-	echo spipbb_admin_gauche('spipbb_admin_anti_spam_config');
+	//echo spipbb_admin_gauche('spipbb_admin_anti_spam_config');
 
 	echo creer_colonne_droite('',true);
 	echo debut_droite('',true);

@@ -9,6 +9,13 @@ Todo-list pour spipbb
 -* lien entre auteur et la liste des messages qu'il a publie
 
 -* Bugs et autres elements non finis :
+-** Uniformisation de la presentation des pages admin apres integration scoty 
+-** Integration icones apres integration scoty
+-** Problemes titres _T et _L // traductions à revoir corriger finir
+-** Manque icone postit interface publique
+-** quest devenue la page de gestion (ppossibilite ordonner la presentation) ?
+
+-** Bug dans include spipbb_fonctions
 -** Chaque fonction est soumise a config
 -** Utiliser les descriptions des mots cles (ajoutees dans lang/... mot_...)
 -** Gestion des annonces / postits / Fermes a tester /controler
@@ -25,6 +32,8 @@ Todo-list pour spipbb
 -** Envisager de controler l'etat de la config régulierement ? a chaque passsage dans un menu d'admin ?
 -** Le changement de version du plugin oblige a tout reconfigurer et perds toutes les infos... <-- regle ? non il faut encore passer par la page de config (mais tous les params sont stockés)... a cause de de l'ordre des check_if...
 -** Bug ?? pourquoi la balise CALC_STATS... est elle calculee 2 fois de suite ?
+-** Pouvoir configurer l'ordre de presentation des menus d'admins (par le webmaster)
+-** documenter pourquoi membre_liste peut etre vide si les auteurs n ont pas demande la parution
 
 -* INTEGRATION des idees utilisees dans Gafospip -> Scoty | reste / manque
 -** Boutons d'admin sur l'interface publique ?

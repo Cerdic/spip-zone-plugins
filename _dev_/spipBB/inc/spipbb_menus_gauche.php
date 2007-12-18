@@ -57,12 +57,11 @@ function spipbb_menus_gauche($script, $id_salon='', $id_art='', $id_sujet='', $m
 		$modules['spam'][10] = array('swconfig',"spipbb_admin_anti_spam_config");
 	}
 	
-	
 	#
 	# entete (icone + titre)
 	#
 	echo entete_colonne_gauche($script);
-	
+
 	#
 	# bloc hierarchie
 	#
@@ -76,7 +75,7 @@ function spipbb_menus_gauche($script, $id_salon='', $id_art='', $id_sujet='', $m
 	if($connect_id_rubrique AND ($id_salon OR $id_art)) {
 		echo rubriques_admin_restreint($connect_id_auteur);
 	}
-	
+
 	#
 	# Les posts ('prop') en attente de moderation
 	#
@@ -115,7 +114,7 @@ function entete_colonne_gauche($titre_page) {
 	$aff = "<div style='float:left; margin-right:5px; margin-bottom:20px;'>"
 		. "<img src='"._DIR_PLUGIN_SPIPBB."img_pack/spipbb-48.png' alt='ico' />"
 		. "</div>"
-		. gros_titre(_L('titre_spipbb_plugin'))
+		. gros_titre(_T('spipbb:titre_spipbb_plugin'),'',false)
 		. "<span class='verdana2'>"
 		. _L('titre_page_'.$titre_page)
 		. "</span>";
@@ -148,10 +147,10 @@ function bloc_hierarchie($id_rubrique, $id_article, $parents='') {
 	
 	
 	if ($id_article) {
-		$result=spip_query("SELECT id_article, id_rubrique, titre 
+		$result=sql_query("SELECT id_article, id_rubrique, titre 
 							FROM spip_articles 
 							WHERE id_article=$id_article");
-		while($row = spip_fetch_array($result))
+		while($row = sql_fetch($result))
 			{
 			$id_article = $row['id_article'];
 			$id_rubrique = $row['id_rubrique'];
@@ -173,9 +172,9 @@ function bloc_hierarchie($id_rubrique, $id_article, $parents='') {
 		$query = "SELECT id_rubrique, id_parent, titre, lang 
 				FROM spip_rubriques 
 				WHERE id_rubrique=$id_rubrique";
-		$result = spip_query($query);
+		$result = sql_query($query);
 
-		while ($row = spip_fetch_array($result)) {
+		while ($row = sql_fetch($result)) {
 
 			$id_rubrique = $row['id_rubrique'];
 			$id_parent = $row['id_parent'];
@@ -223,12 +222,12 @@ function rubriques_admin_restreint($connect_id_auteur) {
 	$aff = "<br />";
 	$aff.= debut_cadre_relief("../"._DIR_IMG_GAF."spipbb-24.gif", true, '',_L('moderation'));	
 
-	$q = spip_query("SELECT R.id_rubrique, R.titre, R.descriptif 
+	$q = sql_query("SELECT R.id_rubrique, R.titre, R.descriptif 
 					FROM spip_rubriques AS R, spip_auteurs_rubriques AS A 
 					WHERE A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique 
 					ORDER BY titre");
 	$rubs = array();
-	while ($r = spip_fetch_array($q)) {
+	while ($r = sql_fetch($q)) {
 		$rubs[] = "<a title='" .
 		    typo($r['descriptif']) .
 		    "' href='" . generer_url_ecrire('gaf_admin', "id_salon=" .$r['id_rubrique']) . "'>" .
@@ -246,11 +245,11 @@ function rubriques_admin_restreint($connect_id_auteur) {
 # contenu : les posts en attente de moderation
 #
 function posts_proposes_attente_moderation() {
-	$result = spip_query ("SELECT SQL_CALC_FOUND_ROWS id_forum, titre, id_thread 
+	$result = sql_query ("SELECT SQL_CALC_FOUND_ROWS id_forum, titre, id_thread 
 							FROM spip_forum WHERE statut='prop' 
 							ORDER BY date_heure LIMIT 0,10");
 	// récup nombre total d'entrées de $result (mysql 4.0.0 mini)
-	$ttligne= spip_query("SELECT FOUND_ROWS()");
+	$ttligne= sql_query("SELECT FOUND_ROWS()");
 	
 	list($nbrprop) = @spip_fetch_array($ttligne);
 
@@ -284,16 +283,16 @@ function liste_moderateurs($modos,$id_salon,$id_art) {
 	
 	# sur page sujet, recherche rub de art (du thread en cours) + auteurs
 	if(!$id_salon) {
-		$r_s = spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_art");
-		if(spip_num_rows($r_s)) {
-			$row=spip_fetch_array($r_s);
+		$r_s = sql_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_art");
+		if(sql_count($r_s)) {
+			$row=sql_fetch($r_s);
 			$id_salon = $row['id_rubrique'];
 		}
 		#auteurs article
-		$result = spip_query("SELECT a.id_auteur, a.nom, a.statut 
+		$result = sql_query("SELECT a.id_auteur, a.nom, a.statut 
 							FROM spip_auteurs as a, spip_auteurs_articles as b 
 							WHERE a.id_auteur=b.id_auteur AND b.id_article=$id_art");
-		while ($ro = spip_fetch_array($result)) {
+		while ($ro = sql_fetch($result)) {
 			$modos[$ro['id_auteur']]['nom'] = $ro["nom"];
 			$modos[$ro['id_auteur']]['statut'] = bonhomme_statut($ro);
 			$modos[$ro['id_auteur']]['acces'] = generer_url_ecrire('auteur_infos', "id_auteur=".$ro['id_auteur']);
@@ -307,11 +306,11 @@ function liste_moderateurs($modos,$id_salon,$id_art) {
 	}
 	
 	# admins rubrique
-	$res = spip_query("SELECT DISTINCT A.nom, A.id_auteur, A.statut 
+	$res = sql_query("SELECT DISTINCT A.nom, A.id_auteur, A.statut 
 						FROM  spip_auteurs AS A, spip_auteurs_rubriques AS B 
 						WHERE $where_modos A.id_auteur=B.id_auteur AND id_rubrique=$id_salon");
-	if (spip_num_rows($res)) {
-		while ($row = spip_fetch_array($res)) {
+	if (sql_count($res)) {
+		while ($row = sql_fetch($res)) {
 			$modos[$row['id_auteur']]['nom'] = $row['nom'];
 			$modos[$row['id_auteur']]['statut'] = bonhomme_statut($row);
 			$modos[$row['id_auteur']]['acces'] = generer_url_ecrire('auteur_infos', "id_auteur=".$row['id_auteur']);
@@ -341,10 +340,10 @@ function alerte_maintenance() {
 				$datime=date("d/m/y H:i",@filemtime(_DIR_SESSIONS.$file));
 				$art_mt=$match[1];
 				$aut_mt=$match[2];
-				$req=spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$aut_mt");
-				$row=spip_fetch_array($req);
-				$req2=spip_query("SELECT titre FROM spip_articles WHERE id_article=$art_mt");
-				$row2=spip_fetch_array($req2);
+				$req=sql_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$aut_mt");
+				$row=sql_fetch($req);
+				$req2=sql_query("SELECT titre FROM spip_articles WHERE id_article=$art_mt");
+				$row2=sql_fetch($req2);
 				
 				$aff = "<br />"
 					. debut_cadre_trait_couleur("../"._DIR_IMG_GAF."gaf_verrou2.gif",true,"",_T('gaf:maintenance'))
@@ -395,7 +394,15 @@ function spipbb_admin_gauche($script,$modules) {
 							'icone_menu' => $icone
 							);
 			
+			// chryjs: desactive et remplace par le bloc ci apres 
 			$affichage.= recuperer_fond("prive/spipbb_bloc_admin_menu",$contexte);
+/*			
+			if ($lien=="0") {
+				$affichage.= "<strong><div style='margin-top:2px;' class='bouton36blanc' onmouseover=\"changeclass(this,'bouton36gris')\" onmouseout=\"changeclass(this,'bouton36blanc')\">".$icone."\n".$nom."</div></strong>";
+			} else {
+				$affichage.= "<a href='".$lien."' class='verdana2'><div style='margin-top:2px;' class='bouton36blanc' onmouseover=\"changeclass(this,'bouton36gris')\" onmouseout=\"changeclass(this,'bouton36blanc')\">".$icone."\n".$nom."</div></a>";
+			}
+*/			
 		}
 		$affichage .= fin_boite_info(true)."<br />\n";
 	}

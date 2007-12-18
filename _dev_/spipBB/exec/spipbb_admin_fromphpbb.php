@@ -30,8 +30,10 @@ spip_log(__FILE__.' : included','spipbb');
 
 if (defined("_OUTILS_FROMPHPBB")) return; else define("_OUTILS_FROMPHPBB", true);
 
+/*
 include_spip('inc/spipbb');
 include_spip('inc/interface_admin');
+*/
 
 // ------------------------------------------------------------------------------
 // [fr] Methode exec
@@ -42,6 +44,7 @@ include_spip('inc/interface_admin');
 function exec_spipbb_admin_fromphpbb()
 {
 	spip_log(__FILE__." exec_spipbb_admin_fromphpbb() CALL",'spipbb');
+/*
 	if ( !spipbb_is_configured() or ($GLOBALS['spipbb']['configure']!='oui') 
 		 or $GLOBALS['spipbb']['config_id_secteur'] != 'oui'
 		 or empty($GLOBALS['spipbb']['id_secteur']) ) {
@@ -49,6 +52,10 @@ function exec_spipbb_admin_fromphpbb()
 		redirige_par_entete(generer_url_ecrire('spipbb_admin_configuration', ''));
 		exit;
 	}
+*/
+	# initialiser spipbb
+	include_spip('inc/spipbb_init');
+
 
 	global $connect_statut;
 	// [fr] Pour le moment l acces est reserve a l administrateur, a voir plus tard
@@ -109,18 +116,20 @@ function exec_spipbb_admin_fromphpbb()
 	}
 
 	echo gros_titre(_T('spipbb:titre_spipbb'),'',false) ;
-
+/*
 	if (spipbb_is_configured() AND $GLOBALS['spipbb']['config_id_secteur'] == 'oui' ) {
 		echo debut_grand_cadre(true);
 		echo afficher_hierarchie($GLOBALS['spipbb']['id_secteur']);
 		echo fin_grand_cadre(true);
 	}
-
+*/
+	echo "<a name='haut_page'></a>";
 	echo debut_gauche('',true);
+		spipbb_menus_gauche(_request('exec'));
+
 	echo debut_boite_info(true);
 	echo  _T('spipbb:fromphpbb_titre');
 	echo fin_boite_info(true);
-	echo spipbb_admin_gauche('spipbb_admin_fromphpbb');
 
 	echo creer_colonne_droite($id_rubrique,true);
 	echo debut_droite($id_rubrique,true);

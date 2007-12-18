@@ -56,14 +56,14 @@ $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_L('titre_page_'._request('exec')), "forum", "spipbb_admin", '');
 echo "<a name='haut_page'></a>";
 
-debut_gauche();
-	spipbb_menus_gauche(_request('exec'),$id_salon,$id_art);
+echo debut_gauche('',true);
+spipbb_menus_gauche(_request('exec'),$id_salon,$id_art);
 
 
 debut_droite();
 
 
-debut_cadre_formulaire();
+echo debut_cadre_formulaire('',true);
 
 // affichage tableau
 
@@ -73,7 +73,7 @@ debut_cadre_formulaire();
 	// adresse retour des tranche
 	$retour_gaf_local = generer_url_ecrire("spipbb_inscrits");
 		
-	gros_titre(_T('gaf:inscrits_visiteurs'));
+	echo gros_titre(_T('gaf:inscrits_visiteurs'),'',false);
 		
 	// Présenter valeurs de la tranche de la requête
 	echo "<div align='center' class='iconeoff verdana2' style='clear:both;'>\n";
@@ -142,7 +142,7 @@ debut_cadre_formulaire();
 	echo "<div id='code'></div>";
 	echo "<div id='code_sign'></div>";
 		
-fin_cadre_formulaire();
+echo fin_cadre_formulaire(true);
 
 
 # pied page exec

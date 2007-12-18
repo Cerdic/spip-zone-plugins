@@ -11,12 +11,13 @@
 // http://doc.spip.org/@sous_enfant_rub
 function sous_enfant_rubfo($collection2){
 	global $lang_dir, $spip_lang_dir, $spip_lang_left;
+	if (!function_exists('debut_block_invisible')) include_spip('inc/vieilles_defs');
 
-	$result3 = spip_query("SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre");
+	$result3 = sql_query("SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre");
 
-	if (!spip_num_rows($result3)) return '';
+	if (!sql_count($result3)) return '';
 	$retour = debut_block_invisible("enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
-	while($row=spip_fetch_array($result3)){
+	while($row=sql_fetch($result3)){
 			$id_rubrique2=$row['id_rubrique'];
 			$id_parent2=$row['id_parent'];
 			$titre2=supprimer_numero($row['titre']);
@@ -43,19 +44,19 @@ function enfant_rubfo($collection){
 
 	$les_enfants = "";
 
-	$res = spip_query("SELECT id_rubrique, id_parent, titre, descriptif, lang 
+	$res = sql_query("SELECT id_rubrique, id_parent, titre, descriptif, lang 
 					FROM spip_rubriques 
 					WHERE id_parent='$collection' 
 					ORDER BY 0+titre,titre");
 
 	# compter les forums
-	if($nombre_forums=spip_num_rows($res)) {
+	if($nombre_forums=sql_count($res)) {
 		$flag_ordonne = ($nombre_forums>1)?true:false;
 	}
 	else $flag_ordonne = false;
 
 
-	while($row=spip_fetch_array($res)) {
+	while($row=sql_fetch($res)) {
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=supprimer_numero($row['titre']);
@@ -70,8 +71,8 @@ function enfant_rubfo($collection){
 					FROM spip_mots_rubriques smr 
 					LEFT JOIN spip_rubriques sr ON sr.id_rubrique = smr.id_rubrique
 					WHERE sr.id_rubrique=$id_rubrique AND smr.id_mot = ".$GLOBALS['id_mot_rub_gaf'];
-		$rs_gaf = spip_query($rq_gaf);
-		if(spip_num_rows($rs_gaf)) { $icone_secteur = _DIR_IMG_GAF."gaf_ico-24.gif"; }
+		$rs_gaf = sql_query($rq_gaf);
+		if(sql_count($rs_gaf)) { $icone_secteur = _DIR_IMG_GAF."gaf_ico-24.gif"; }
 		*/
 		if($id_rubrique == $GLOBALS['spipbb']['id_secteur']) {
 			$icone_secteur = _DIR_IMG_SPIPBB."spipbb-24.png";
