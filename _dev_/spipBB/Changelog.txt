@@ -9,6 +9,7 @@
  * Page debogage toujours dispo meme si pas configuré !!
  * Uniformisation de la presentation + quelques traductions + entetes + divers
  * Passage en 0.3.8 : elements majeurs presents
+ * Integration de la definition de la base dans spipbb_options et adaptation squelette boucle pour compatibilite avec mutualisation
 
 2007-12-10  scoty  <scoty!@!koakidi!.!com>
 

@@ -32,6 +32,8 @@ if (!defined('_DIR_PLUGIN_SPIPBB')){
 
 $table_des_traitements['TITRE'][]= 'supprimer_numero(typo(%s))';
 
+include_spip('base/spipbb'); // requis pour la mutualisation et les boucles avec les tables additionnelles
+
 //---------------------------------------------------------
 // [fr] Concu a partir de balise/formulaire_inscription.php
 //---------------------------------------------------------
