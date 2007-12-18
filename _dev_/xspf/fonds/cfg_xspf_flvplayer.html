@@ -43,16 +43,18 @@
 		<p><strong><:xspf:opt_lec:></strong></p>
 		<label for="flpautostart"><a href="#flpautostart" title="<:xspf:autostart:>; <:xspf:desc_autostart:>"><:xspf:autostart:></a></label>
 		<select name="flpautostart" id="flpautostart">
-			<option [(#CONFIG{xspf/flpautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-			<option [(#CONFIG{xspf/flpautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-			<option [(#CONFIG{xspf/flpautostart}|=={mute}|?{selected="selected",''})] value="mute"><:xspf:mute:></option>
+			#SET{flpautostart,#CONFIG{xspf/flpautostart}}
+			<option [(#GET{flpautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#GET{flpautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#GET{flpautostart}|=={mute}|?{selected="selected",''})] value="mute"><:xspf:mute:></option>
 		</select><br /><br />
 		
 		<label for="flprepeat"><a href="#flprepeat" title="<:xspf:repeat:> - <:xspf:desc_jwrepeat:>"><:xspf:repeat:></a></label>
 		<select name="flprepeat" id="flprepeat">
-			<option [(#CONFIG{xspf/flprepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-			<option [(#CONFIG{xspf/flprepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-			<option [(#CONFIG{xspf/flprepeat}|=={list}|?{selected="selected",''})] value="list"><:xspf:list:></option>	
+			#SET{flprepeat,#CONFIG{xspf/flprepeat}}
+			<option [(#GET{flprepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#GET{flprepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#GET{flprepeat}|=={list}|?{selected="selected",''})] value="list"><:xspf:list:></option>	
 		</select>&nbsp;&nbsp;
 		
 		<label for="bufferlength"><a href="#bufferlength" title="<:xspf:bufferlength:> - <:xspf:desc_bufferlength:>"><:xspf:bufferlength:></a></label>
@@ -76,17 +78,19 @@
 		
 		<label for="flpoverstretch"><a href="#flpoverstretch" title="<:xspf:overstretch:> - <:xspf:desc_overstretch:>"><:xspf:overstretch:></a></label>
 		<select name="flpoverstretch" id="flpoverstretch">
-			<option [(#CONFIG{xspf/flpoverstretch}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-			<option [(#CONFIG{xspf/flpoverstretch}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-			<option [(#CONFIG{xspf/flpoverstretch}|=={fit}|?{selected="selected",''})] value="fit"><:xspf:fit:></option>
-			<option [(#CONFIG{xspf/flpoverstretch}|=={none}|?{selected="selected",''})] value="none"><:xspf:none:></option>
+			#SET{flpoverstretch,#CONFIG{xspf/flpoverstretch}}
+			<option [(#GET{flpoverstretch}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#GET{flpoverstretch}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#GET{flpoverstretch}|=={fit}|?{selected="selected",''})] value="fit"><:xspf:fit:></option>
+			<option [(#GET{flpoverstretch}|=={none}|?{selected="selected",''})] value="none"><:xspf:none:></option>
 		</select></p>
 		
 		<label for="flpshowdigits"><a href="#flpshowdigits" title="<:xspf:showdigits:> - <:xspf:desc_showdigits:>"><:xspf:showdigits:></a></label>
 		<select name="flpshowdigits" id="flpshowdigits">
-			<option [(#CONFIG{xspf/flpshowdigits}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-			<option [(#CONFIG{xspf/flpshowdigits}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-			<option [(#CONFIG{xspf/flpshowdigits}|=={total}|?{selected="selected",''})] value="total"><:xspf:total:></option>	
+			#SET{flpshowdigits,#CONFIG{xspf/flpshowdigits}}
+			<option [(#GET{flpshowdigits}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#GET{flpshowdigits}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#GET{flpshowdigits}|=={total}|?{selected="selected",''})] value="total"><:xspf:total:></option>	
 		</select>&nbsp;&nbsp;
 		
 		<label for="flpshowvolume"><a href="#flpshowvolume" title="<:xspf:showvolume:> - <:xspf:desc_showvolume:>"><:xspf:showvolume:></a></label>

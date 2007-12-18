@@ -47,16 +47,18 @@
 		<p><strong><:xspf:opt_lec:></strong></p>
 		<label for="mplautostart"><a href="#mplautostart" title="<:xspf:autostart:> - <:xspf:desc_autostart:>"><:xspf:autostart:></a></label>&nbsp;
 		<select name="mplautostart" id="mplautostart">
-			<option [(#CONFIG{xspf/mplautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-			<option [(#CONFIG{xspf/mplautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-			<option [(#CONFIG{xspf/mplautostart}|=={mute}|?{selected="selected",''})] value="mute"><:xspf:mute:></option>	
+			#SET{mplautostart,#CONFIG{xspf/mplautostart}}
+			<option [(#GET{mplautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#GET{mplautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#GET{mplautostart}|=={mute}|?{selected="selected",''})] value="mute"><:xspf:mute:></option>	
 		</select>
 		<br />
 		<label for="mplrepeat"><a href="#mplrepeat" title="<:xspf:repeat:> - <:xspf:desc_jwrepeat:>"><:xspf:repeat:></a></label>&nbsp;
 		<select name="mplrepeat" id="mplrepeat">
-			<option [(#CONFIG{xspf/mplrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-			<option [(#CONFIG{xspf/mplrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-			<option [(#CONFIG{xspf/mplrepeat}|=={list}|?{selected="selected",''})] value="list"><:xspf:list:></option>	
+			#SET{mplrepeat,#CONFIG{xspf/mplrepeat}}
+			<option [(#GET{mplrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#GET{mplrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#GET{mplrepeat}|=={list}|?{selected="selected",''})] value="list"><:xspf:list:></option>	
 		</select>&nbsp;		
 		
 		<label for="mplshuffle"><a href="#mplshuffle" title="<:xspf:shuffle:> - <:xspf:desc_shuffle:>"><:xspf:shuffle:></a></label>&nbsp;
@@ -74,25 +76,28 @@
 		
 		<label for="mploverstretch"><a href="#mploverstretch" title="<:xspf:overstretch:> - <:xspf:desc_overstretch:>"><:xspf:overstretch:></a></label>&nbsp;
 		<select name="mploverstretch" id="mploverstretch">
-			<option [(#CONFIG{xspf/mploverstretch}|=={none}|?{selected="selected",''})] value="none"><:xspf:none:></option>	
-			<option [(#CONFIG{xspf/mploverstretch}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-			<option [(#CONFIG{xspf/mploverstretch}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-			<option [(#CONFIG{xspf/mploverstretch}|=={fit}|?{selected="selected",''})] value="fit"><:xspf:fit:></option>	
+			#SET{mploverstretch,#CONFIG{xspf/mploverstretch}}
+			<option [(#GET{mploverstretch}|=={none}|?{selected="selected",''})] value="none"><:xspf:none:></option>	
+			<option [(#GET{mploverstretch}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#GET{mploverstretch}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#GET{mploverstretch}|=={fit}|?{selected="selected",''})] value="fit"><:xspf:fit:></option>	
 		</select>
 	
 		<br /><br />
 		
 		<label for="mplshowdigits"><a href="#mplshowdigits" title="<:xspf:showdigits:> - <:xspf:desc_showdigits:>"><:xspf:showdigits:></a></label>&nbsp;
 		<select name="mplshowdigits" id="mplshowdigits">
-			<option [(#CONFIG{xspf/mplshowdigits}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-			<option [(#CONFIG{xspf/mplshowdigits}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-			<option [(#CONFIG{xspf/mplshowdigits}|=={total}|?{selected="selected",''})] value="total"><:xspf:total:></option>	
+			#SET{mplshowdigits,#CONFIG{xspf/mplshowdigits}}
+			<option [(#GET{mplshowdigits}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#GET{mplshowdigits}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#GET{mplshowdigits}|=={total}|?{selected="selected",''})] value="total"><:xspf:total:></option>	
 		</select>&nbsp;&nbsp;
 		
 		<label for="mplshowvolume"><a href="#mplshowvolume" title="<:xspf:showvolume:> - <:xspf:desc_showvolume:>"><:xspf:showvolume:></a></label>&nbsp;
 		<select name="mplshowvolume" id="mplshowvolume">
-			<option [(#CONFIG{xspf/mplshowvolume}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-			<option [(#CONFIG{xspf/mplshowvolume}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			#SET{mplshowvolume,#CONFIG{xspf/mplshowvolume}}
+			<option [(#GET{mplshowvolume}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#GET{mplshowvolume}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 		</select>
 		
 		<br /><br />
