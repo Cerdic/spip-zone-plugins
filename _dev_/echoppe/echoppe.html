@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<title>Test d'&Eacute;choppe</title>
+	</head>
+	<body>
+	Bon, allez, Go !<br />
+<h1 style="background:transparent url('[(#CHEMIN{'images/echoppe_blk_128.png'})]') no-repeat left center;padding-left:140px;height:128px"><:echoppe:echoppe:></h1>
+<B_CatsALaRacine>
+<div >
+	<ul>
+		<BOUCLE_CatsALaRacine(CATEGORIES)>
+		<li class="cadre-sous_rub" style="width: 40%;margin: 10px 0px 0px 10px;">#ID_CATEGORIE - #TITRE - #ID_PARENT</li>
+		</BOUCLE_CatsALaRacine>
+	</ul>
+</div>
+</B_CatsALaRacine>
+<hr />
+<B_Prod>
+<div >
+	<ul>
+		<BOUCLE_Prod(PRODUITS)>
+		<li class="cadre-sous_rub" style="width: 40%;margin: 10px 0px 0px 10px;">#ID_CATEGORIE - #TITRE</li>
+		</BOUCLE_Prod>
+	</ul>
+</div>
+</B_Prod>
+	</body>
+</html>
