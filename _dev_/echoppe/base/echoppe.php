@@ -553,20 +553,18 @@ $tables_principales['spip_echoppe_stock_produits'] = array(
 	'join' => &$spip_echoppe_stock_produits_join
 	);
 
-/*global $tables_jointures;
 
-$tables_jointures['spip_echoppe_categories'][] = 'spip_echoppe_categories_descriptions';
-$tables_jointures['spip_echoppe_produits'][] = 'spip_echoppe_produits_descriptions';-*/
 
-global $table_des_tables;
+
+/*global $table_des_tables;
 $table_des_tables['categories']='echoppe_categories';
 $table_des_tables['categories_descriptions']='echoppe_categories_descriptions';
 $tables_jointures['spip_echoppe_categories'][]= 'echoppe_categories_descriptions';
 $tables_jointures['spip_echoppe_categories_descriptions'][]= 'echoppe_categories';
-
+*/
 
 //$table_des_tables['produits_descriptions'] = 'echoppe_produits_descriptions';
 //$table_des_tables['categories_descriptions'] = 'echoppe_categories_descriptions';
-$table_des_tables['produits'] = 'echoppe_produits';
+//$table_des_tables['produits'] = 'echoppe_produits';
 //$table_des_tables['categories'] = 'echoppe_categories';
 ?>

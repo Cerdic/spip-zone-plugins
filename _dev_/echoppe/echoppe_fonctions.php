@@ -5,86 +5,16 @@ include_spip('base/echoppe');
 
 
 
-//var_dump($tables_jointures);
+global $tables_jointures;
 
-function boucle_PRODUITS_dist($id_boucle, &$boucles) {
-    $boucle = &$boucles[$id_boucle];
-    $id_table = $boucle->id_table;
-    $mstatut = $id_table .'.statut';
+//$tables_jointures['spip_echoppe_categories'][] = 'spip_echoppe_categories_descriptions';
+$tables_jointures['spip_echoppe_categories_produits'][] = 'spip_echoppe_produits';
 
-    // Restreindre aux elements publies
-    if (!isset($boucle->modificateur['criteres']['statut'])) {
-        if (!$GLOBALS['var_preview']) {
-            $boucle->where[]= array("'='", "'$mstatut'", "'\\'publie\\''");
-            //if ($GLOBALS['meta']["post_dates"] == 'non')
-            //    $boucle->where[]= array("'<'", "'$id_table" . ".date'", "'NOW()'");
-        } else {
-            $boucle->where[]= array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'");
-        }
-        
-    }
-    return calculer_boucle($id_boucle, $boucles);
+function generer_logo($nom_fichier){
+	
+	$logo = '<img src="IMG/'.$nom_fichier.'" alt="'.textebrut($nom_fichier).'" />';
+	if (strlen($nom_fichier) > 0) return $logo;
+	
 }
-
-
-function boucle_PRODUITS_DESCRIPTION_dist($id_boucle, &$boucles) {
-    $boucle = &$boucles[$id_boucle];
-    $id_table = $boucle->id_table;
-    $mstatut = $id_table .'.statut';
-
-    // Restreindre aux elements publies
-    if (!isset($boucle->modificateur['criteres']['statut'])) {
-        if (!$GLOBALS['var_preview']) {
-            $boucle->where[]= array("'='", "'$mstatut'", "'\\'publie\\''");
-            //if ($GLOBALS['meta']["post_dates"] == 'non')
-            //    $boucle->where[]= array("'<'", "'$id_table" . ".date'", "'NOW()'");
-        } else {
-            $boucle->where[]= array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'");
-        }
-        
-    }
-    return calculer_boucle($id_boucle, $boucles);
-}
-
-
-function boucle_CATEGORIES_dist($id_boucle, &$boucles) {
-    $boucle = &$boucles[$id_boucle];
-    $id_table = $boucle->id_table;
-    $mstatut = $id_table .'.statut';
-
-    // Restreindre aux elements publies
-    /*if (!isset($boucle->modificateur['criteres']['statut'])) {
-        if (!$GLOBALS['var_preview']) {
-            $boucle->where[]= array("'='", "'$mstatut'", "'\\'publie\\''");
-            //if ($GLOBALS['meta']["post_dates"] == 'non')
-            //    $boucle->where[]= array("'<'", "'$id_table" . ".date'", "'NOW()'");
-        } else {
-            $boucle->where[]= array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'");
-        }
-        
-    }*/
-    return calculer_boucle($id_boucle, $boucles);
-}
-
-
-function boucle_CATEGORIES_DESCRIPTION_dist($id_boucle, &$boucles) {
-    $boucle = &$boucles[$id_boucle];
-    $id_table = $boucle->id_table;
-    $mstatut = $id_table .'.statut';
-
-    // Restreindre aux elements publies
-    /*if (!isset($boucle->modificateur['criteres']['statut'])) {
-        if (!$GLOBALS['var_preview']) {
-            $boucle->where[]= array("'='", "'$mstatut'", "'\\'publie\\''");
-            //if ($GLOBALS['meta']["post_dates"] == 'non')
-            //    $boucle->where[]= array("'<'", "'$id_table" . ".date'", "'NOW()'");
-        } else {
-            $boucle->where[]= array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'");
-        }
-        
-    }*/
-    return calculer_boucle($id_boucle, $boucles);
-}
-
 
 ?>

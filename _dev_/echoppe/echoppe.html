@@ -1,28 +1,52 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>Test d'&Eacute;choppe</title>
 	</head>
 	<body>
-	Bon, allez, Go !<br />
+	<h1>Démonstration des boucles d'echoppe.</h1><br />
 <h1 style="background:transparent url('[(#CHEMIN{'images/echoppe_blk_128.png'})]') no-repeat left center;padding-left:140px;height:128px"><:echoppe:echoppe:></h1>
-<B_CatsALaRacine>
+<B_CategoriesALaRacine>
 <div >
 	<ul>
-		<BOUCLE_CatsALaRacine(CATEGORIES)>
-		<li class="cadre-sous_rub" style="width: 40%;margin: 10px 0px 0px 10px;">#ID_CATEGORIE - #TITRE - #ID_PARENT</li>
-		</BOUCLE_CatsALaRacine>
+		
+		
+		<BOUCLE_CategoriesALaRacine(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){par num titre}{id_parent = 0}{lang = ""}>
+		<li class="cadre-sous_rub" style="width: 40%;margin: 10px 0px 0px 10px;">[<strong>(#TITRE|supprimer_numero)</strong>]<br />
+			<div style="border: 1px #CCC doted;">[<small>(#DESCRIPTIF|couper{100})</small>]
+			[(#TEXTE)]</div>
+			<B_LesProduitsDeCetteCategorie>
+				<ul>
+					<BOUCLE_LesProduitsDeCetteCategorie(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits spip_echoppe_categories_produits){statut = publie}{par num titre}{id_categorie}{lang=""}>
+					<li class="cadre-sous_rub" style="width: 40%;margin: 10px 0px 0px 10px;">[<em>(#TITRE|supprimer_numero)</em>]<br />[(#LOGO_PRODUIT||image_reduire{100})] <br />prix HTVA : #PRIX_BASE_HTVA &euro;</li>
+					</BOUCLE_LesProduitsDeCetteCategorie>
+				</ul>
+			</B_LesProduitsDeCetteCategorie>
+			
+			
+			<B_LesSousCategories>
+				<ul>
+					<BOUCLE_LesSousCategories(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){par num titre}{id_parent = #ID_CATEGORIE}{lang=""}>
+					<li class="cadre-sous_rub" style="width: 40%;margin: 10px 0px 0px 10px;">[<strong>(#TITRE|supprimer_numero)</strong>]
+					<B_LesProduitsDeCetteCategorie2>
+						<ul>
+							<BOUCLE_LesProduitsDeCetteCategorie2(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits spip_echoppe_categories_produits){statut = publie}{par num titre}{id_categorie}{lang=""}>
+							<li class="cadre-sous_rub" style="width: 40%;margin: 10px 0px 0px 10px;">[<em>(#TITRE|supprimer_numero)</em>]<br />[(#LOGO_PRODUIT||image_reduire{100})] <br />prix HTVA : #PRIX_BASE_HTVA &euro;</li>
+							</BOUCLE_LesProduitsDeCetteCategorie2>
+						</ul>
+					</B_LesProduitsDeCetteCategorie2>
+					</li>
+					</BOUCLE_LesSousCategories>
+				</ul>
+			</B_LesSousCategories>
+		</li>
+		</BOUCLE_CategoriesALaRacine>
+		
+		
 	</ul>
 </div>
-</B_CatsALaRacine>
+</B_CategoriesALaRacine>
 <hr />
-<B_Prod>
-<div >
-	<ul>
-		<BOUCLE_Prod(PRODUITS)>
-		<li class="cadre-sous_rub" style="width: 40%;margin: 10px 0px 0px 10px;">#ID_CATEGORIE - #TITRE</li>
-		</BOUCLE_Prod>
-	</ul>
-</div>
-</B_Prod>
+
 	</body>
 </html>
