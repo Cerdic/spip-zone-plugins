@@ -34,8 +34,8 @@ dd + code {padding-top:1em;}
 <h1>Tests du plugin fonctions d'images</h1>
 
 <p>Liste des filtres, avec quelques exemples.<br />
-Le code <code>[(# CHEMIN{img/souci.jpg}|en_image)]</code> peut &ecirc;tre 
-remplac&eacute; par <code>[(# FICHIER)]</code> dans une boucle document.
+Le code <code>[(&#035;CHEMIN{img/souci.jpg}|en_image)]</code> peut &ecirc;tre 
+remplac&eacute; par <code>[(&#035;FICHIER)]</code> dans une boucle document.
 </p>
 
 
@@ -44,9 +44,10 @@ remplac&eacute; par <code>[(# FICHIER)]</code> dans une boucle document.
 <dt>en_image</dt>
 <dd>convertit une adresse d'image en balise img pour
 	&ecirc;tre utilis&eacute;e dans les fonctions de traitement d'image de spip</dd>
-<dd><code>[(# CHEMIN{img/souci.jpg}|en_image)]</code></dd>
+<dd>N'est plus n&eacute;cessaire en SPIP 1.9.3</dd>
+<dd><code>[(&#035;CHEMIN{img/souci.jpg}|en_image)]</code></dd>
 <dd>[(#CHEMIN{img/souci.jpg}|en_image)]</dd>	
-<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_sepia{14579c})]</code></dd>
+<dd><code>[(&#035;CHEMIN{img/souci.jpg}|en_image|image_sepia{14579c})]</code></dd>
 <dd>[(#CHEMIN{img/souci.jpg}|en_image|image_sepia{14579c})]</dd>
 
 
@@ -54,15 +55,15 @@ remplac&eacute; par <code>[(# FICHIER)]</code> dans une boucle document.
 <dd>Donne une couleur dans la roue chromatique 
 (Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Une-palette-de-couleurs">
 Une palette de couleurs</a>)</dd>
-<dd><code>#[(# CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_chroma{3/6})]</code></dd>
+<dd><code>#[(&#035;CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_chroma{3/6})]</code></dd>
 <dd>#[(#CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_chroma{3/6})]</dd>
 
 
 <dt>couleur_saturer</dt>
 <dd> (De)sature une couleur</a></dd>
-<dd><code>#[(# CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{1.3})]</code></dd>
+<dd><code>#[(&#035;CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{1.3})]</code></dd>
 <dd>#[(#CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{1.3})]</dd>
-<dd><code>#[(# CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{0.7})]</code></dd>
+<dd><code>#[(&#035;CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{0.7})]</code></dd>
 <dd>#[(#CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{0.7})]</dd>
 
 
@@ -70,9 +71,9 @@ Une palette de couleurs</a>)</dd>
 <dd> (De)sature une image 
 (Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/De-saturer-une-image-en-passant-en">
 D&eacute;saturer une image</a>)</dd>
-<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_saturer{1.5})]</code></dd>
+<dd><code>[(&#035;CHEMIN{img/souci.jpg}|en_image|image_saturer{1.5})]</code></dd>
 <dd>[(#CHEMIN{img/souci.jpg}|en_image|image_saturer{1.5})]</dd>
-<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_saturer{0.5})]</code></dd>
+<dd><code>[(&#035;CHEMIN{img/souci.jpg}|en_image|image_saturer{0.5})]</code></dd>
 <dd>[(#CHEMIN{img/souci.jpg}|en_image|image_saturer{0.5})]</dd>
 
 
@@ -80,7 +81,7 @@ D&eacute;saturer une image</a>)</dd>
 <dd> Correction automatique des niveaux 
 (Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Corriger-les-niveaux-des-images">
 Corriger les niveaux des images</a>)</dd>
-<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_niveaux_gris_auto)]</code></dd>
+<dd><code>[(&#035;CHEMIN{img/souci.jpg}|en_image|image_niveaux_gris_auto)]</code></dd>
 <dd>[(#CHEMIN{img/souci.jpg}|en_image|image_niveaux_gris_auto)]</dd>
 
 
@@ -89,7 +90,7 @@ Corriger les niveaux des images</a>)</dd>
 de gris compris entre les 2 param&egrave;tres suivants (100 et 255) 
 (Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Creer-automatiquement-une">
 Cr&eacute;er automatiquement une publicit&eacute; podPod</a>)</dd>
-<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_podpod{dd5500,100,255})]</code></dd>
+<dd><code>[(&#035;CHEMIN{img/souci.jpg}|en_image|image_podpod{dd5500,100,255})]</code></dd>
 <dd>[(#CHEMIN{img/souci.jpg}|en_image|image_podpod{dd5500,100,255})]</dd>
 
 
@@ -97,11 +98,11 @@ Cr&eacute;er automatiquement une publicit&eacute; podPod</a>)</dd>
 <dd> Changer les courbes de niveau d'une image 
 (Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Modifier-les-courbes-d-une-image">
 Modifier les courbes d'une image</a>)</dd>
-<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 62=30, 193=220})]</code></dd>
+<dd><code>[(&#035;CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 62=30, 193=220})]</code></dd>
 <dd>[(#CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 62=30, 193=220})]</dd>	
-<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 0=255, 100=0})]</code></dd>
+<dd><code>[(&#035;CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 0=255, 100=0})]</code></dd>
 <dd>[(#CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 0=255, 100=0})]</dd>	
-<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 1=255, 100=1})]</code></dd>
+<dd><code>[(&#035;CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 1=255, 100=1})]</code></dd>
 <dd>[(#CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 1=255, 100=1})]</dd>
 
 
@@ -109,7 +110,7 @@ Modifier les courbes d'une image</a>)</dd>
 <dd>Faire un texte qui &eacute;pouse une image 
 (Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Un-habillage-irregulier-2">
 Un habillage irr&eacute;gulier</a>)</dd>
-<dd><code>[(# CHEMIN{img/decoupe.png}|en_image|image_float{left,10,ffffff})]</code></dd>
+<dd><code>[(&#035;CHEMIN{img/decoupe.png}|en_image|image_float{left,10,ffffff})]</code></dd>
 <dd>
 <p>
 [(#CHEMIN{img/decoupe.png}|en_image|image_float{left,10,ffffff})]
@@ -140,9 +141,9 @@ Nunc eros.
 <dd>Tracer des contours d'une image 
 (Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Tracer-les-contours-de">
 Tracer les contours de transparence</a>)</dd>
-<dd><code>[(# NOM_SITE_SPIP|image_typo|image_contour_alpha{ff0000,2})]</code></dd>
+<dd><code>[(&#035;NOM_SITE_SPIP|image_typo|image_contour_alpha{ff0000,2})]</code></dd>
 <dd>[(#NOM_SITE_SPIP|image_typo{taille=30, padding=5}|image_contour_alpha{ff0000,2})]</dd>
-<dd><code>[(# CHEMIN{img/decoupe.png}|en_image|image_contour_alpha{ff0000,2})]</code></dd>
+<dd><code>[(&#035;CHEMIN{img/decoupe.png}|en_image|image_contour_alpha{ff0000,2})]</code></dd>
 <dd>[(#CHEMIN{img/decoupe.png}|en_image|image_contour_alpha{ff0000,2})]</dd>	
 
 
@@ -151,7 +152,7 @@ Tracer les contours de transparence</a>)</dd>
 <dd>D&eacute;saturation contrast&eacute;e + accentuation du rouge 
 (Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Welcome-to-Spip-City">
 Welcome to Spip-City</a>)</dd>
-<dd><code>[(# CHEMIN{img/souci.jpg}|image_sincity)]</code></dd>
+<dd><code>[(&#035;CHEMIN{img/souci.jpg}|image_sincity)]</code></dd>
 <dd>[(#CHEMIN{img/souci.jpg}|image_sincity)]</dd>	
 
 
@@ -160,8 +161,8 @@ Welcome to Spip-City</a>)</dd>
 <dd>R&eacute;aliser des estampages 
 (Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Des-titres-en-relief">
 Des titres en relief</a>)</dd>
-<dd><code>[(# NOM_SITE_SPIP|image_typo{couleur=8cc42a,taille=40,padding=4}<br />
-		|image_masque{[(# NOM_SITE_SPIP|image_typo{couleur=8cc42a,taille=40,padding=4}<br />
+<dd><code>[(&#035;NOM_SITE_SPIP|image_typo{couleur=8cc42a,taille=40,padding=4}<br />
+		|image_masque{[(&#035;NOM_SITE_SPIP|image_typo{couleur=8cc42a,taille=40,padding=4}<br />
  		|image_flou{2}|image_estampage_alpha{1,1.5}<br />
  		|extraire_attribut{src})],top=-1,left=-1})]</code></dd>
 <dd>[(#NOM_SITE_SPIP|image_typo{couleur=8cc42a,taille=40,padding=4}
@@ -179,18 +180,18 @@ Des titres en relief</a>)</dd>
 <dd>R&eacute;aliser des dispersions, des floutages
 (Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Un-filtre-de-dispersion-graphique">
 Un filtre de dispersion graphique</a>)</dd>
-<dd><code>[(# CHEMIN{img/souci.jpg}|image_dispersion{img/disp-points.png,4,4})]<br />
-		[(# CHEMIN{img/disp-points.png}|en_image|image_recadre{200,150})]</code></dd>
+<dd><code>[(&#035;CHEMIN{img/souci.jpg}|image_dispersion{img/disp-points.png,4,4})]<br />
+		[(&#035;CHEMIN{img/disp-points.png}|en_image|image_recadre{200,150})]</code></dd>
 <dd>[(#CHEMIN{img/souci.jpg}|image_dispersion{img/disp-points.png,4,4})] 
 		[(#CHEMIN{img/disp-points.png}|en_image|image_recadre{200,150})]</dd>
 	
-<dd><code>[(# CHEMIN{img/souci.jpg}|image_dispersion{img/disp-twirl.png,8,8})]<br />
-		[(# CHEMIN{img/disp-twirl.png}|en_image|image_recadre{200,150})]</code></dd>
+<dd><code>[(&#035;CHEMIN{img/souci.jpg}|image_dispersion{img/disp-twirl.png,8,8})]<br />
+		[(&#035;CHEMIN{img/disp-twirl.png}|en_image|image_recadre{200,150})]</code></dd>
 <dd>[(#CHEMIN{img/souci.jpg}|image_dispersion{img/disp-twirl.png,8,8})] 
 		[(#CHEMIN{img/disp-twirl.png}|en_image|image_recadre{200,150})]</dd>
 	
-<dd><code>[(# CHEMIN{img/souci.jpg}|image_dispersion{img/disp-noir.png,6,6})]<br />
-		[(# CHEMIN{img/disp-noir.png}|en_image|image_recadre{200,150})]</code></dd>
+<dd><code>[(&#035;CHEMIN{img/souci.jpg}|image_dispersion{img/disp-noir.png,6,6})]<br />
+		[(&#035;CHEMIN{img/disp-noir.png}|en_image|image_recadre{200,150})]</code></dd>
 <dd>[(#CHEMIN{img/souci.jpg}|image_dispersion{img/disp-noir.png,6,6})] 
 		[(#CHEMIN{img/disp-noir.png}|en_image|image_recadre{200,150})]</dd>	
 

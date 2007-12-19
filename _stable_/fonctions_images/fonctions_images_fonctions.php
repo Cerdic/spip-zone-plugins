@@ -924,6 +924,9 @@ function image_dispersion($im, $masque, $h=5, $v=5, $pos="") {
 /*
  * autorise les filtres images sur les chemins.
  * #CHEMIN{fichier}|en_image|image_sepia{14579c}
+ * 
+ * Cette fonction est devenue inutile en 1.9.3 [10980]
+ * 
  */
 function en_image($url, $alt=''){
 	return 	"<img src='". $url ."' alt='". $alt ."' />";
