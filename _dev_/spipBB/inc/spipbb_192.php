@@ -44,7 +44,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (defined("_INC_SPIPBB_192")) return; else define("_INC_SPIPBB_192", true);
 
-spip_log('inc/spipbb_192.php: included','spipbb');
+if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','>=')) {
+	// On ne devrait pas etre la
+	spip_log(__FILE__.' : included : ERROR wrong release','spipbb');
+	return;
+}
+spip_log(__FILE__.' : included','spipbb');
 
 include_spip('base/abstract_sql'); // SPIP 192
 include_spip('base/db_mysql'); // SPIP 192

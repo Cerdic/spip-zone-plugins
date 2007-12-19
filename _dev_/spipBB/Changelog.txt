@@ -1,4 +1,9 @@
-﻿2007-12-18  chryjs  <chryjs!@!free!.!fr>
+﻿2007-12-19  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction impossible de publier (problemes de librairies et de versions)
+ * Ajout controle version dans librairie 192 (au cas où)
+
+2007-12-18  chryjs  <chryjs!@!free!.!fr>
 
  * correction appels base de données (pour etre compatible 1.9.3)
  * correction affichages admin
