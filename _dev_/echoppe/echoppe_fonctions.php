@@ -2,13 +2,10 @@
 
 include_spip('public/boucles');
 include_spip('base/echoppe');
-//include_spip('public/jointure');
-global $table_des_tables;
-global $tables_jointures;
 
 
-$tables_jointures['produits']['id_categorie'] = 'echoppe_categories_produits';
-//$tables_jointures['categories'][''] = 'categories_descriptions';
+
+//var_dump($tables_jointures);
 
 function boucle_PRODUITS_dist($id_boucle, &$boucles) {
     $boucle = &$boucles[$id_boucle];
