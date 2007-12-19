@@ -62,9 +62,23 @@ Une palette de couleurs</a>)</dd>
 <dt>couleur_saturer</dt>
 <dd> (De)sature une couleur</a></dd>
 <dd><code>#[(&#035;CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{1.3})]</code></dd>
-<dd>#[(#CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{1.3})]</dd>
-<dd><code>#[(&#035;CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{0.7})]</code></dd>
-<dd>#[(#CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{0.7})]</dd>
+[(#SET{couleur, #[(#CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{1.3})]})]
+<dd style="color:#GET{couleur}">#GET{couleur}</dd>
+<dd><code>#[(&#035;CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{0.5})]</code></dd>
+[(#SET{couleur, #[(#CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{0.5})]})]
+<dd style="color:#GET{couleur}">#GET{couleur}</dd>
+
+
+
+<dt>couleur_teinter</dt>
+<dd> Modifie la teinte d'une couleur</a></dd>
+<dd><code>#[(&#035;CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_teinter{30})]</code></dd>
+[(#SET{couleur, #[(#CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_teinter{30})]})]
+<dd style="color:#GET{couleur}">#GET{couleur}</dd>
+<dd><code>#[(&#035;CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_teinter{-30})]</code></dd>
+[(#SET{couleur, #[(#CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_teinter{-30})]})]
+<dd style="color:#GET{couleur}">#GET{couleur}</dd>
+
 
 
 <dt>image_saturer</dt>

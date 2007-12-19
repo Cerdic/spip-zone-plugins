@@ -964,6 +964,41 @@ function couleur_saturer ($coul, $val=1.2) {
 }
 
 
+
+/*
+ * Change la teinte d'une couleur
+ * 
+ * $val entre +/- 0 à 360
+ */
+function couleur_teinter ($coul, $val=30) {
+	
+	include_spip("inc/filtres");
+	$couleurs = couleur_hex_to_dec($coul);
+	$r= $couleurs["red"];
+	$g= $couleurs["green"];
+	$b= $couleurs["blue"];
+
+	$hsv = image_rgb2hsv($r,$g,$b);
+	$h = $hsv["h"];
+	$s = $hsv["s"];
+	$v = $hsv["v"];
+
+	$h = $h*360 + $val;
+	$h = ($h<0)?$h+360:$h;
+	$h = ($h % 360);
+	$h = ($h == 0)?$h:$h/360;
+	
+	$rgb = image_hsv2rgb($h,$s,$v);
+	$r = $rgb["r"];
+	$g = $rgb["g"];
+	$b = $rgb["b"];
+	
+	$couleurs = couleur_dec_to_hex($r, $g, $b);
+	
+	return $couleurs;
+}
+
+
 /*
  *
  * Affiche un tableau avec les couleurs de l'arbre chromatique
