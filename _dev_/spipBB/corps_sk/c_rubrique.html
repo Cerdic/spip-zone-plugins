@@ -79,8 +79,8 @@
 			</tr>
 		</BOUCLE_forum_secteur>
 	
-	<!-- sous-rubrique -->	
-	<B_categories>
+	<!-- sous-rubrique -->
+	[(#REM) chryjs 19/12/7 supprime doublon : B_categories ]
 	<BOUCLE_categories(RUBRIQUES){id_parent}{par num titre}>
 		<tr class="inter salon">
 			<td colspan="5"><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></td>

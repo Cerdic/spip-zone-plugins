@@ -13,6 +13,8 @@ Todo-list pour spipbb
 -** Integration icones apres integration scoty
 -** Problemes titres _T et _L // traductions à revoir corriger finir
 -** Manque icone postit interface publique
+-** Bug dans le move d'un forum des fois ça ne fonctionne pas... (valider les cas et corriger)
+-** Membres les plus actifs vérifier le recalcul...
 
 -** Bug dans include spipbb_fonctions
 -** Chaque fonction est soumise a config

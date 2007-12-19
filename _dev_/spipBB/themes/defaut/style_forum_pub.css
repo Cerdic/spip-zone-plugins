@@ -39,6 +39,7 @@ color: #000000;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 /*background-color:#eeeeee;  coul 4 */
 border: 2px solid #ffffff; /* coul 6 */
+text-align:left;
 }
 
 table.spipforum th {
@@ -98,11 +99,12 @@ text-align:center;
 
 /* ligne forum / sujet / type annonce .. */
 tr.ligne_forum { height:30px;}
-tr.ligne_sujet, tr.ligne_annonce { height:25px;}
+tr.ligne_sujet, tr.ligne_annonce, tr.ligne_postit { height:25px;}
 
 tr.ligne_forum td { padding:3px; border: 1px solid #ffffff;} /* coul 6 */
 tr.ligne_sujet td { padding:3px; border: 1px solid #ffffff; }
 tr.ligne_annonce td { padding:3px; border: 1px solid #ffffff; }
+tr.ligne_postit td { padding:3px; border: 1px solid #ffffff; }
 
 /* alterner coul fond des lignes messages (voirsujet.html) */
 tr.row1 {  }
@@ -151,6 +153,11 @@ background-position: center;
 }
 td.sujetannonce {
 background-image: url(img/sujet_annonce.png);/*folder_announce.gif*/
+background-repeat: no-repeat;
+background-position: center;
+}
+td.sujetpostit {
+background-image: url(img/folder_sticky.png);/*folder_sticky.gif*/
 background-repeat: no-repeat;
 background-position: center;
 }

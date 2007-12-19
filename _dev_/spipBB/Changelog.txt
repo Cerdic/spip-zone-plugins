@@ -2,6 +2,8 @@
 
  * Correction impossible de publier (problemes de librairies et de versions)
  * Ajout controle version dans librairie 192 (au cas où)
+ * Ajout ligne postit + alignement a gauche
+ * Correction bug B_annonce en double dans le squelette c_rubrique (regression)
 
 2007-12-18  chryjs  <chryjs!@!free!.!fr>
 
