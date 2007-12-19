@@ -71,6 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_forums_configuration_avatar' => 'Gestion des avatars, r&eacute;glage g&eacute;n&eacute;ral',
 //'admin_forums_titre' => 'Gestion des forums',
 //'admin_infos' => 'SpipBB - Administration - R&eacute;capitulatif',
+'admin_id_mjsc' => 'N&deg;',
 'admin_interface' => 'Options de l\'interface',
 'admin_nombre_lignes_messages' =>'Nombre de lignes de messages',
 'admin_plugin_requis_erreur' => 'Plugin requis manquant',

@@ -4,6 +4,7 @@
  * Ajout controle version dans librairie 192 (au cas où)
  * Ajout ligne postit + alignement a gauche
  * Correction bug B_annonce en double dans le squelette c_rubrique (regression)
+ * Ajout selection et suppression (passe en 5poubelle) des membres sur la page de gestion + presentation + comptage des messages + selection des 'nouveau'x aussi !
 
 2007-12-18  chryjs  <chryjs!@!free!.!fr>
 

@@ -43,6 +43,14 @@ function exec_spipbb_inscrits() {
 	# requis de cet exec
 	include_spip("inc/traiter_imagerie");
 
+	// c: 19/12/7 : a passer dans action
+	// pour le moment on les passe au statut poubelle : il faudra : choisir ce que l'on fait de leurs message et verifier qu'on peut faire cela comme ça
+	$sel_membre=_request('selectmembre');
+	if (is_array($sel_membre) and count($sel_membre)>0) {
+		$list_id_del=join(",",$sel_membre);
+		$delq=sql_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur IN ($list_id_del)");
+	}
+	
 	$vl=intval(_request('vl'));
 
 	# limites requete
@@ -56,13 +64,16 @@ function exec_spipbb_inscrits() {
 
 	# requete principale
 	// c: 18/12/7 c'est surement une optimisation mais je doute que ce soit standard tous SQL confondus...
-	$q=sql_query("SELECT SQL_CALC_FOUND_ROWS id_auteur, nom, email, extra 
-					FROM spip_auteurs 
-					WHERE statut='6forum' 
-					ORDER BY $odb 
+	// La magie du LEFT JOIN pour calculer le nombre de messages et ne pas masquer un membre qui n'aurait jamais poste !!!
+	$q=sql_query("SELECT SQL_CALC_FOUND_ROWS A.id_auteur, A.nom, A.email, A.statut, count(F.id_forum) as nb_mes
+					FROM spip_auteurs AS A
+					LEFT JOIN spip_forum AS F ON (A.id_auteur=F.id_auteur)
+					WHERE ( A.statut='6forum' OR A.statut='nouveau' )
+					GROUP BY A.id_auteur
+					ORDER BY A.$odb 
 					LIMIT $dl,$fixlimit");
 
-	# recup nombre total d'entree
+					# recup nombre total d'entree
 	$nl= sql_query("SELECT FOUND_ROWS()");
 	$r_found = @spip_fetch_array($nl);
 	$nligne=$r_found['FOUND_ROWS()'];
@@ -72,15 +83,13 @@ function exec_spipbb_inscrits() {
 	# affichage
 	#
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_L('titre_page_'._request('exec')), "forum", "spipbb_admin", '');
+	echo $commencer_page(_T('spipbb:titre_page_'._request('exec')), "forum", "spipbb_admin", '');
 	echo "<a name='haut_page'></a>";
 
 	echo debut_gauche('',true);
 	spipbb_menus_gauche(_request('exec'),$id_salon,$id_art);
 
-
 	echo debut_droite('',true);
-
 
 	echo debut_cadre_formulaire('',true);
 
@@ -98,22 +107,37 @@ function exec_spipbb_inscrits() {
 	echo "<div align='center' class='iconeoff verdana2' style='clear:both;'>\n";
 	tranches_liste_forum($nba1,$retour_spipbb_local,$nligne);
 	echo "\n</div>\n";
-
+	// c: 19/12/7 cest gorse ce javascript je ne sais pas faire mieux !  attention il depends du nom du formulaire.
+	echo "<script language=\"JavaScript\" type=\"text/javascript\">\n".
+		"<!--\n".
+		"	function check_switch(val)\n".
+		"	{\n".
+		"		for( i = 0; i < document.formmembre.elements.length; i++ )\n".
+		"		{\n".
+		"			document.formmembre.elements[i].checked = val;\n".
+		"		}\n".
+		"	}\n".
+		"//-->\n".
+		"</script>\n";
+	echo  "<form method='post' action='' name='formmembre'>";
+	
 	// entête ...
 	echo "<table border='0' cellpadding='2' cellspacing='0' width='100%'>\n
 			<tr>\n".
 			"<td width='8%'>";
-			if($odb=='id_auteur') { echo "<b>&gt;"._T('spipbb:id_mjsc')."&lt;</b>"; }
-			else { echo "<a href='".parametre_url(self(),'tri','')."'>"._T('spipbb:id_mjsc')."</a>"; }
+			if($odb=='id_auteur') { echo "<b>&gt;"._T('spipbb:admin_id_mjsc')."&lt;</b>"; }
+			else { echo "<a href='".parametre_url(self(),'tri','')."'>"._T('spipbb:admin_id_mjsc')."</a>"; }
 			echo "</td>\n".
 			"<td width='30%'>";
-			if($odb=='nom') { echo "<b>&gt;"._T('spipbb:nom')."&lt;</b>"; }
-			else { echo "<a href='".parametre_url(self(),'tri','nom')."'>"._T('spipbb:nom')."</a>"; }
+			if($odb=='nom') { echo "<b>&gt;"._T('spipbb:auteur')."&lt;</b>"; }
+			else { echo "<a href='".parametre_url(self(),'tri','nom')."'>"._T('spipbb:auteur')."</a>"; }
 			echo "</td>\n".
 			"<td width='10%' style='text-align:center;'>"._T('spipbb:email')."</td>\n".
-			"<td width='15%' style='text-align:center;'>"._L('date_crea')."</td>\n".
-			"<td width='15%' style='text-align:center;'>"._L('signature')."</td>\n".
-			"<td width='22%' style='text-align:center;'>"._T('spipbb:avatar')."</td>\n".
+			"<td width='14%' style='text-align:center;'>"._T('date_crea')."</td>\n".
+			"<td width='14%' style='text-align:center;'>"._T('signature')."</td>\n".
+			"<td width='14%' style='text-align:center;'>"._T('spipbb:avatar')."</td>\n".
+			"<td width='8%' style='text-align:center;'>"._T('spipbb:admin_total_posts')."</td>\n".
+			"<td width='2%' style='text-align:center;'>"._T('spipbb:marquer')."</td>\n".
 			"</tr>\n";
 
 
@@ -144,10 +168,10 @@ function exec_spipbb_inscrits() {
 		if($infos['date_crea_spipbb']!='') {
 			$aff_date=affdate($infos['date_crea_spipbb'],'d/m/Y');
 		}
-		
-		echo "<tr bgcolor='".$coul_ligne."'>".
-			"<td>".$r['id_auteur']."</td>".
-			"<td><a href='".generer_url_ecrire("auteur_infos","id_auteur=".$r['id_auteur'])."'>".typo($r['nom'])."</a></td>".
+		$aut_nouv=($r['statut']=='nouveau') ? "*" : "";
+		echo "<tr bgcolor='".$coul_ligne."'>\n".
+			"<td>".$r['id_auteur'].$aut_nouv."</td>".
+			"<td><a href='".generer_url_ecrire("auteur_infos","id_auteur=".$r['id_auteur'])."'>".couper(typo($r['nom']),20)."</a></td>".
 			"<td style='text-align:center;'>".
 			"<a href='mailto:".htmlspecialchars($r['email'])."'>".
 			http_img_pack('envoi-message-24.gif','mail'," border='0' align='absmiddle'",htmlspecialchars($r['email'])).
@@ -155,9 +179,14 @@ function exec_spipbb_inscrits() {
 			"<td style='text-align:center;'>".$aff_date."</td>".
 			"<td style='text-align:center;'>".$ico_signature."</td>".
 			"<td style='text-align:center;'>".$ico_avatar."</td>".
-			"</tr>";
+			"<td style='text-align:center;'>".$r['nb_mes']."</td>".
+			"<td width='2%' style='text-align:center;'><input type='checkbox' name='selectmembre[]' value='".$r['id_auteur']."' /></td>".
+			"</tr>\n";
 	}
 	echo "</table>\n";
+	echo "<a href=\"javascript:check_switch(true);\">"._T('spipbb:select_all')."</a> :: <a href=\"javascript:check_switch();\">"._T('spipbb:unselect_all')."</a>\n";
+	echo "<div align='right'><input type='submit' name='_spipbb_supprimer' value='"._T('supprimer')."' class='fondo' /></div>\n";
+	echo "</form>\n";
 	echo "<div id='code'></div>";
 	echo "<div id='code_sign'></div>";
 		
