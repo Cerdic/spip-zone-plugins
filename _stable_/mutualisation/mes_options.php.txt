@@ -9,10 +9,10 @@
 		redirige_par_entete('http://'.$site.'/');
 	}
 
-	define ('_INSTALL_SERVER_DB', 'mysql');
-	define ('_INSTALL_HOST_DB', 'localhost');
-	define ('_INSTALL_USER_DB', 'loginsql');
-	define ('_INSTALL_PASS_DB', '123456HDJ');
+	define ('_INSTALL_SERVER_DB', 'mysql'); 
+	define ('_INSTALL_HOST_DB', 'localhost'); 
+	define ('_INSTALL_USER_DB', 'loginsql');  
+	define ('_INSTALL_PASS_DB', '123456HDJ'); 
 	define ('_INSTALL_NAME_DB', 'mu_'.prefixe_mutualisation($site));
 	
 	/* mettre en commentaire la ligne suivante si vous utilisez l'option table_prefixe plus bas dans la config */ 
@@ -27,13 +27,13 @@
 	
 	/* 
 	 * Si le serveur n'est pas mysql, il faut le preciser obligatoirement.
-	 * # define ('_INSTALL_SERVER_DB', 'pg'); // mysql|pg
+	 * # define ('_INSTALL_SERVER_DB', 'pg'); // mysql|pg|sqlite2|sqlite3
 	 * 
 	 * /!\ En PG, il est conseille d'utiliser la creation d'utilisateur SQL
 	 */
 	
 	/*
-	 * Creer automatiquement les users SQL
+	 * Creer automatiquement les users SQL (pg|mysql)
 	 * 
 	 * Cela permet 
 	 * - d'avoir un utilisateur root possedant les droits 
@@ -93,7 +93,7 @@
 	demarrer_site($site,
 		array(
 			'creer_site' => true,        // Creer ou non le site s'il n'existe pas (defaut: false) 
-			'creer_base' => true,        // Creer ou non la base de donnee si elle n'existe pas (false)
+			'creer_base' => true,        // Creer ou non la base de donnee si elle n'existe pas (false) 
 			'creer_user_base' => false,  // Creer ou non un utilisateur pour la nouvelle base de donnee (false)
 			'mail' => '',                // Adresse mail pour recevoir un mail lors d'une creation de site mutualise ('') 
 			'code' => 'ecureuil',        // Code d'activation ('ecureuil') 
@@ -106,4 +106,32 @@
 		)
 	);
 
+	/*
+	 * Notes concernant SQLite
+	 * 
+	 * 1) creer_base = false
+	 * 	Avec SQLite, il est inutile de mettre creer_base a true.
+	 * 	Si creer_base est true, une base sera cree (par l'outil de mutualisation)
+	 * 	dans le repertoire defini par la constante _DIR_DB.
+	 * 
+	 * 	Si cette constante n'est pas renseignee, elle vaudra
+	 * 	_DIR_ETC/bases/ soit : config/bases/, ce qui ne correspond pas
+	 * 	a l'emplacement du futur site : sites/X/config/bases.
+	 * 
+	 * 	En laissant l'option a false, SPIP creera la base de donnee
+	 * 	au moment de l'installation (exec=install) et a ce moment
+	 * 	la, _DIR_ETC vaudra 'sites/X/config' donc la base sera stockee
+	 * 	ou il faut si _DIR_DB n'est pas defini.
+	 * 
+	 * 2) creer_user_base = false
+	 * 	SQLite ne gerant pas de droits d'utilisateurs,
+	 * 	(les droits sont ceux du fichier .sqlite)
+	 * 	mettre true provoquera des erreurs (je suppose)
+	 *  
+	 * 3) constantes a definir :
+	 *  define ('_INSTALL_SERVER_DB', 'sqlite3'); //  sqlite2 ou sqlite3
+	 *  define ('_INSTALL_NAME_DB', 'mu_'.prefixe_mutualisation($site));
+	 * 
+	 * 	les constantes _INSTALL_(HOST|PASS|USER)_DB sont inutiles.
+	 */
 ?>

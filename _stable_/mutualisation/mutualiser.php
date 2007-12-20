@@ -51,7 +51,7 @@ function demarrer_site($site = '', $options = array()) {
 	 * 
 	 * Il faut lancer la creation de mutualisation
 	 */
-	if  ($ok = !is_dir($e = _DIR_RACINE . $options['repertoire'].'/' . $site . '/')
+	if  ($a_installer = (!is_dir($e = _DIR_RACINE . $options['repertoire'].'/' . $site . '/')
 	    OR !(defined('_DIR_CONNECT')?
 			(defined('_FILE_CONNECT_INS')?
 				   file_exists(_DIR_CONNECT . _FILE_CONNECT_INS . '.php'):
@@ -60,7 +60,7 @@ function demarrer_site($site = '', $options = array()) {
 				   file_exists($e . _NOM_PERMANENTS_INACCESSIBLES . _FILE_CONNECT_INS . '.php'):
 				   file_exists($e . _NOM_PERMANENTS_INACCESSIBLES . 'connect.php'))
 			)
-		)
+		))
 	{	
 		/*
 		 * - Recuperer les identifiants manquants
@@ -124,14 +124,30 @@ function demarrer_site($site = '', $options = array()) {
 		}
 		
 		/*
-		 * Si le site n'existe pas encore, 
-		 * lancer la procedure de creation
+		 * Si l'installation n'est pas faite,
+		 * il faut soit creer le site mutualise
+		 * soit lancer la procedure d'installation de SPIP
+		 * si le site a deja ete cree
 		 */
-		if (!is_dir($e)) {
-			spip_initialisation();
-			include_once dirname(__FILE__).'/mutualiser_creer.php';
-			mutualiser_creer($e, $options);
-			exit;
+		if ($a_installer) {
+			/*
+			 * Pour savoir si l'installation de la mutu est terminee, 
+			 * on verifie que le fichier d'installation a bien ete supprime
+			 * sinon, c'est qu'il reste quelque chose a faire.
+			 */
+			define('_MUTU_INSTALLATION_FILE','mutu_tmp_install.txt');
+			
+			if (!is_dir($e) || is_file($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE)){
+				spip_initialisation(
+					(_DIR_RACINE  . _NOM_PERMANENTS_INACCESSIBLES),
+					(_DIR_RACINE  . _NOM_PERMANENTS_ACCESSIBLES),
+					(_DIR_RACINE  . _NOM_TEMPORAIRES_INACCESSIBLES),
+					(_DIR_RACINE  . _NOM_TEMPORAIRES_ACCESSIBLES)
+				);
+				include_once dirname(__FILE__).'/mutualiser_creer.php';
+				mutualiser_creer($e, $options);
+				exit;
+			}
 		}
 
 	}

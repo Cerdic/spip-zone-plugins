@@ -26,9 +26,21 @@ function mutualiser_creer($e, $options) {
 	if (!defined('_INSTALL_SERVER_DB'))
 		define('_INSTALL_SERVER_DB','mysql');
 
-	/*
-	 * Code d'activation du site
-	 */
+	mutu_etape_code_activation($e, $options);
+	mutu_etape_creer_repertoires($e, $options);
+	mutu_etape_creer_base($e, $options);
+	mutu_etape_fin($e, $options);
+}
+
+
+/*
+ * Code d'activation du site
+ * 
+ * Demander le code pour autoriser cette creation de site
+ * Si le code est valide, poser un cookie
+ * 
+ */
+function mutu_etape_code_activation($e, $options){
 	if ($options['code']) {
 		$secret = md5($code.$options['code']);
 
@@ -57,20 +69,22 @@ function mutualiser_creer($e, $options) {
 		} else {
 			setcookie('mutu_code_activation', $secret);
 		}
-	}
+	}	
+}
 
 
-	/*
-	 * Creation de la base
-	 */
+/*
+ * Creation de la base
+ * 
+ * Cree la base de donnee
+ * Cree eventuellement un utilisateur pour cette base
+ * 
+ */
+function mutu_etape_creer_base($e, $options){
+
 	if ($options['creer_base']) {
 
-		if (defined('_INSTALL_HOST_DB')
-		AND (
-			(defined('_INSTALL_USER_DB_ROOT') AND defined('_INSTALL_PASS_DB_ROOT'))
-			OR
-			(defined('_INSTALL_USER_DB') AND defined('_INSTALL_PASS_DB'))
-			)
+		if (defined('_INSTALL_SERVER_DB')
 		AND defined('_INSTALL_NAME_DB')) {
 
 			if (defined('_INSTALL_USER_DB_ROOT')) {
@@ -161,11 +175,17 @@ function mutualiser_creer($e, $options) {
 							mutu_close();
 							$link = mutu_connect_db(_INSTALL_HOST_DB,'',  _INSTALL_USER_DB, _INSTALL_PASS_DB, '', _INSTALL_SERVER_DB);
 						}
+						
+						// creation ok
+						// supprimer le fichier d'installation
+						include_spip('inc/flock');
+						@supprimer_fichier($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE);
+						
 						echo minipres(
 							_L('La base de donn&#233;es <tt>'._INSTALL_NAME_DB.'</tt> a &#233;t&#233; cr&#233;&#233;e'),
 							"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 							'<h3>'
-							._L('<a href="'.parametre_url(self(), 'creerbase', '').'">Continuer...</a>')
+							._L('Vous pouvez <a href="'.generer_url_ecrire('install').'">poursuivre l\'installation de SPIP</a>.')
 							.'</h3>'
 						);
 
@@ -215,8 +235,14 @@ function mutualiser_creer($e, $options) {
 			);
 			exit;
 		}
-	}
+	}	
+}
 
+
+/*
+ * Cree les dossiers necessaires au site mutualise
+ */
+function mutu_etape_creer_repertoires($e, $options){
 	if ($options['creer_site']) {
 		$ok_dir =
 		is_dir(_DIR_RACINE . $options['repertoire'])
@@ -233,7 +259,7 @@ function mutualiser_creer($e, $options) {
 			exit;
 		}
 
-		if (_request('creerrepertoire')) {
+		if (_request('creerrepertoire') && _request('creerrepertoire')=='oui') {
 			$ok =
 			mkdir($e, _SPIP_CHMOD)
 			AND chmod($e, _SPIP_CHMOD)
@@ -245,14 +271,21 @@ function mutualiser_creer($e, $options) {
 			AND chmod($e._NOM_PERMANENTS_ACCESSIBLES, _SPIP_CHMOD)
 			AND chmod($e._NOM_TEMPORAIRES_INACCESSIBLES, _SPIP_CHMOD)
 			AND chmod($e._NOM_TEMPORAIRES_ACCESSIBLES, _SPIP_CHMOD);
-
+			
+			// pour signaler qu'il reste des etapes a realises, 
+			// malgre la presence des repertoires
+			if ($ok){
+				include_spip('inc/flock');
+				ecrire_fichier($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE, 'ok');
+			}
+			
 			echo minipres(
 				_L('Creation du r&eacute;pertoire du site (<tt>'.joli_repertoire($e).'</tt>)'),
 
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
 				.'<h3>'
 				. ($ok
-					? _L('Cr&#233;ation des r&#233;pertoires OK. Vous pouvez <a href="'.generer_url_ecrire('install').'">installer votre site</a>.')
+					? _L('Cr&#233;ation des r&#233;pertoires OK. Vous pouvez <a href="'.parametre_url(self(), 'creerrepertoire', '').'">Continuer...</a>.')
 					: _L('erreur')
 				).'</h3>'
 			);
@@ -267,7 +300,12 @@ function mutualiser_creer($e, $options) {
 			}
 			exit;
 
-		} else {
+		} elseif (
+			   !is_dir($e._NOM_PERMANENTS_INACCESSIBLES)
+			|| !is_dir($e._NOM_PERMANENTS_ACCESSIBLES)
+			|| !is_dir($e._NOM_TEMPORAIRES_INACCESSIBLES)
+			|| !is_dir($e._NOM_TEMPORAIRES_ACCESSIBLES)
+		) {
 			echo minipres(
 				_L('Creation du r&eacute;pertoire du site (<tt>'.joli_repertoire($e).'</tt>)'),
 
@@ -297,7 +335,26 @@ function mutualiser_creer($e, $options) {
 		);
 		exit;
 
-	}
+	}	
 }
 
+
+/*
+ * Fin de la procedure, proposer l'installation de SPIP
+ */
+function mutu_etape_fin($e, $options){
+	// supprimer le fichier d'installation
+	include_spip('inc/flock');
+	@supprimer_fichier($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE);
+	
+	echo minipres(
+		_L('Les r&#233;pertoires et la base de donn&#233;e du site sont maintenant cr&#233;&#233;s.'),
+
+		"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
+		.'<h3>'.
+			_L('Vous pouvez <a href="'.generer_url_ecrire('install').'">poursuivre l\'installation de SPIP</a>.')
+		.'</h3>'
+	);
+	exit;		
+}
 ?>
