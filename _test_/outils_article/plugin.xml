@@ -16,7 +16,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 			</multi>		
         </auteur>
         <version>
-          0.2
+          0.3
         </version>
         <etat>
           stable
@@ -41,7 +41,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 		      et si vous avez cfg: [Configuration des &eacute;l&eacute;ments &agrave; afficher->.?exec=cfg&amp;cfg=outils_article]
 		    </lien>
         <icon>img_pack/icone-plugin1.png</icon>
-		<options>boiteoutils_options.php</options>
+		<fonctions>boiteoutils_fonctions.php</fonctions>
         <prefix>
           outils_article
         </prefix>
