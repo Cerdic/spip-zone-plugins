@@ -38,6 +38,7 @@ Bugs et autres elements non finis :
 -* Bug ?? pourquoi la balise CALC_STATS... est elle calculee 2 fois de suite ?
 -* Pouvoir configurer l'ordre de presentation des menus d'admins (par le webmaster)
 -* Boutons d'admin sur l'interface publique ?
+-* Que fait test_inscriptions dans spipbb_options ?
 
 
 Documentation

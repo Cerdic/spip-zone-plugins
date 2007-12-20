@@ -7,20 +7,14 @@
 #  Contact : chryjs!@!free!.!fr                            #
 #----------------------------------------------------------#
 
-//echo "\n<br>\n include spipbb_fonctions --1";
 if (!function_exists('sql_query')) include_spip('inc/spipbb_192');
-//echo "\n<br>\n include spipbb_fonctions --2";
 
 # requis
 include_spip('inc/traiter_imagerie');
-//echo "\n<br>\n include spipbb_fonctions --3";
 
-include_spip('public/spipbb_balises');
-//echo "\n<br>\n include spipbb_fonctions --4";
-//chryjs: le 18/12/2007 bug total plante interface privee : 
+// c: 20/12/7 Les balises sont dans balises/ include inutile a priori (et meme dangereux ?)
+//include_spip('public/spipbb_balises');
 include_spip("inc/spipbb_notifications");
-//echo "\n<br>\n include spipbb_fonctions --5";
-
 
 // ------------------------------------------------------------------------------
 // Filtre : insere_texte_alerter
@@ -39,7 +33,6 @@ function insere_texte_alerter($texte,$insere)
 	}
 	return $texte;
 } // insere_texte_alerter
-
 
 // ------------------------------------------------------------------------------
 //	Filtre : insere_sujet_alerter

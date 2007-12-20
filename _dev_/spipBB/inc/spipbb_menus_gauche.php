@@ -60,6 +60,7 @@ function spipbb_menus_gauche($script, $id_salon='', $id_art='', $id_sujet='', $m
 					$modules['spam'][15] = array('swwords',"spipbb_admin_anti_spam_words",'cadenas-24.gif');
 					$modules['spam'][16] = array('swlog',"spipbb_admin_anti_spam_log",'doc-24.gif');
 					$modules['spam'][17] = array('swforum',"spipbb_admin_anti_spam_forum",'petition-24.gif');
+					$modules['spam'][18] = array('gere_ban',"spipbb_admin_gere_ban",''); // c: 19/12/7 gestion des bannis
 				}
 			}
 

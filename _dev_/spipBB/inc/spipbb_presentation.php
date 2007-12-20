@@ -11,10 +11,7 @@
 +-------------------------------------------+
 */
 
-
 include_spip("inc/filtres");
-
-
 
 //
 // diver bloc et boutons
@@ -56,7 +53,7 @@ function fin_bloc() { echo "</div>\n"; }
 function signature_spipbb() {
 	$aff = "<br />"
 		. debut_boite_info(true)
-		. _T('gaf:credits_s1', array('version' => $GLOBALS['spipbb_plug_version']))
+		. _T('spipbb:sign_tempo')." [".$GLOBALS['spipbb_plug_version']."] "
 		. fin_boite_info(true);
 	return $aff;
 }
@@ -64,7 +61,7 @@ function signature_spipbb() {
 //
 // bouton retour haut de page
 function bouton_retour_haut() {
-	echo "<div style='float:right; margin-top:6px;' class='icone36' title='"._T('gaf:haut_page')."'>\n";
+	echo "<div style='float:right; margin-top:6px;' class='icone36' title='"._T('spipbb:haut_page')."'>\n";
 	echo "<a href='#haut_page'>";
 	echo "<img src='"._DIR_IMG_PACK."spip_out.gif' border='0' align='absmiddle' />\n";
 	echo "</a></div>";
@@ -77,16 +74,16 @@ function bouton_ecrire_post($id_article, $id_sujet, $id_citer="") {
 	if ($id_sujet) {
 		if($id_citer) {
 			$icone="gaf_citer.png";
-			$texte_icone=_T('gaf:citer');
+			$texte_icone=_T('spipbb:citer');
 			$citer_sujet = "&citer=".$id_citer;
 		} else {
 			$icone="gaf_post.gif";
-			$texte_icone=_T('gaf:repondre');
+			$texte_icone=_T('spipbb:repondre');
 		}
 		$ico_sup = "edit.gif";
 	}
 	else
-		{ $icone="gaf_sujet.gif"; $texte_icone=_T('gaf:sujet_nouveau'); $ico_sup="creer.gif"; }
+		{ $icone="gaf_sujet.gif"; $texte_icone=_T('spipbb:sujet_nouveau'); $ico_sup="creer.gif"; }
 	
 	
 	$url = generer_url_ecrire("spipbb_formpost","forum=".$id_article."&sujet=".$id_sujet.$citer_sujet);
@@ -111,11 +108,11 @@ function icone_statut_post($statut_post) {
 	// icone état du post
 	switch ($statut_post) {
 		case"off":
-		$aff_statut = "<div style='float:right;' title='"._T('gaf:sujet_rejete')."'>
+		$aff_statut = "<div style='float:right;' title='"._T('spipbb:sujet_rejete')."'>
 					<img src='"._DIR_IMG_SPIPBB."gaf_p_off.gif'></div>";
 		break;
 		case"prop":
-		$aff_statut = "<div style='float:right;' title='"._T('gaf:sujet_valide')."'>
+		$aff_statut = "<div style='float:right;' title='"._T('spipbb:sujet_valide')."'>
 					<img src='"._DIR_IMG_SPIPBB."gaf_p_prop.gif'></div>";
 		break;
 		case"publie":
@@ -139,7 +136,7 @@ function formulaire_bouton_libereferme($id_forum, $mode, $src_img) {
 	echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";
 	echo "<input type='hidden' name='id_mot_ferme' value='".$GLOBALS['spipbb']['id_mot_ferme']."' />\n";
 	echo "<input type='hidden' name='mode' value='".$mode."' />";
-	echo "<input type='image' src='".$src_img."' title='"._T('gaf:title_'.$mode)."'/>";
+	echo "<input type='image' src='".$src_img."' title='"._T('spipbb:title_'.$mode)."'/>";
 	echo "</form></div>";
 }
 
@@ -154,7 +151,7 @@ function formulaire_bouton_ferlibsujet($id_sujet, $mode, $src_img) {
 	echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";
 	echo "<input type='hidden' name='id_mot_ferme' value='".$GLOBALS['spipbb']['id_mot_ferme']."' />\n";
 	echo "<input type='hidden' name='mode' value='".$mode."' />";
-	echo "<input type='image' src='".$src_img."' title='"._T('gaf:title_sujet_'.$mode)."'/>";
+	echo "<input type='image' src='".$src_img."' title='"._T('spipbb:title_sujet_'.$mode)."'/>";
 	echo "</form></div>";
 }
 
@@ -167,7 +164,7 @@ function bouton_formulaire_annonce($id_sujet, $mode, $src_img) {
 	echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";
 	echo "<input type='hidden' name='id_mot_annonce' value='".$GLOBALS['spipbb']['id_mot_annonce']."' />\n";	
 	echo "<input type='hidden' name='mode' value='".$mode."' />\n";
-	echo "<input type='image' src='".$src_img."' title='"._T('gaf:fil_annonce_'.$mode)."' />\n";
+	echo "<input type='image' src='".$src_img."' title='"._T('spipbb:fil_annonce_'.$mode)."' />\n";
 	echo "</form></div>\n";
 
 }
@@ -181,7 +178,7 @@ function bouton_formulaire_forum_annonce($id_article, $mode, $src_img) {
 	echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";
 	echo "<input type='hidden' name='id_mot_annonce' value='".$GLOBALS['spipbb']['id_mot_annonce']."' />\n";	
 	echo "<input type='hidden' name='mode' value='".$mode."' />\n";
-	echo "<input type='image' src='".$src_img."' title='"._T('gaf:forum_annonce_'.$mode)."' />\n";
+	echo "<input type='image' src='".$src_img."' title='"._T('spipbb:forum_annonce_'.$mode)."' />\n";
 	echo "</form></div>\n";
 
 }
@@ -243,12 +240,12 @@ function bloc_info_etat($type_ferme, $obj='',$annonce='') {
 	
 	$aff='';
 	if($obj=='sujet') {
-		$leg_ferme = _T('gaf:sujet_ferme');
-		$leg_titre = _T('gaf:info_annonce_ferme');
+		$leg_ferme = _T('spipbb:sujet_ferme');
+		$leg_titre = _T('spipbb:info_annonce_ferme');
 	}
 	elseif($obj=='forum') {
-		$leg_ferme = _T('gaf:forum_ferme');
-		$leg_titre = _T('gaf:info_ferme');
+		$leg_ferme = _T('spipbb:forum_ferme');
+		$leg_titre = _T('spipbb:info_ferme');
 	}
 	
 	if($obj) {
@@ -265,7 +262,7 @@ function bloc_info_etat($type_ferme, $obj='',$annonce='') {
 	if ($type_ferme=="maintenance") {
 		$aff.= "<div class='verdana3' style='color:#B23232; font-weight:bold;'>\n"
 			. "<img src='"._DIR_IMG_SPIPBB."gaf_verrou2.gif' align='absmiddle' />\n"
-			. _T('gaf:maintenance_ferme')
+			. _T('spipbb:maintenance_ferme')
 			. "</div>\n";
 	}
 	
@@ -273,9 +270,9 @@ function bloc_info_etat($type_ferme, $obj='',$annonce='') {
 		if($obj) {
 			$aff.="<span class='verdana3' style='color:$couleur_foncee; font-weight:bold;'>\n";
 		}
-		$aff.="<img src='"._DIR_IMG_SPIPBB."gaf_annonce.gif' align='absmiddle' title='"._T('gaf:'.$obj.'_annonce')."' />";
+		$aff.="<img src='"._DIR_IMG_SPIPBB."gaf_annonce.gif' align='absmiddle' title='"._T('spipbb:'.$obj.'_annonce')."' />";
 		if($obj) {
-			$aff.= _T('gaf:'.$obj.'_annonce') . "</span>\n";
+			$aff.= _T('spipbb:'.$obj.'_annonce') . "</span>\n";
 		}	
 	}
 	echo $aff;
@@ -297,7 +294,7 @@ function bouton_deplace_sujet($id_forum, $id_sujet) {
 		echo "<form action='".generer_url_ecrire("spipbb_affect")."' method='post'>\n";
 		echo "<input type='hidden' name='id_article' value='".$id_forum."' />\n";
 		echo "<input type='hidden' name='id_sujet' value='".$id_sujet."' />\n";
-		echo "<input type='image' src='"._DIR_IMG_SPIPBB."deplac_thread.gif' border='0' title='"._T('gaf:fil_deplace')."' />\n";
+		echo "<input type='image' src='"._DIR_IMG_SPIPBB."deplac_thread.gif' border='0' title='"._T('spipbb:fil_deplace')."' />\n";
 		echo "</form></div>\n";
 		}
 }

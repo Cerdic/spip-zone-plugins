@@ -34,6 +34,33 @@ $table_des_traitements['TITRE'][]= 'supprimer_numero(typo(%s))';
 
 include_spip('base/spipbb'); // requis pour la mutualisation et les boucles avec les tables additionnelles
 
+#
+# inclus def de champs (voir ci-apres !)
+#
+include_spip("base/sap_spipbb");
+
+define('_SUIVI_FORUM_THREAD', "1");
+
+
+# h. GAF 
+# definir repertoire des smileys ;
+# permet un repert perso de remplacement : mes_smileys/
+#
+if (!defined("_DIR_SMILEYS_SPIPBB")) {
+	$smilbase = _DIR_PLUGIN_SPIPBB."smileys/";
+	$smilperso = _DIR_PLUGIN_SPIPBB."mes_smileys/";
+	foreach (creer_chemin() as $dir) {
+		if (@is_dir($f = "$dir$smilperso")) {
+			$repert = $f;
+		}
+		elseif (@is_dir($f = "$dir$smilbase")) {
+			$repert = $f;
+		}
+	}
+	define('_DIR_SMILEYS_SPIPBB', $repert);
+}
+
+
 //---------------------------------------------------------
 // [fr] Concu a partir de balise/formulaire_inscription.php
 //---------------------------------------------------------
@@ -46,7 +73,10 @@ function test_inscription($mode, $mail, $nom, $id=0)
 	if (!$r = email_valide($mail)) return _T('info_email_invalide');
 
 	// Controle de la ban_list
-	include_spip('inc/spipbb_192');
+	if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
+		include_spip('inc/spipbb_192'); // SPIP 1.9.2
+	}
+
 	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
 
 	if (is_array($spipbb_meta) AND
@@ -82,32 +112,7 @@ function test_inscription($mode, $mail, $nom, $id=0)
 # Tous les participants d'un thread recoivent les nouveaux messages,
 # sauf sur threads refuses (voir profil -> refus_suivi_thread)
 #
-define('_SUIVI_FORUM_THREAD', "1");
 
-
-# h. GAF 
-# definir repertoire des smileys ;
-# permet un repert perso de remplacement : mes_smileys/
-#
-if (!defined("_DIR_SMILEYS_SPIPBB")) {
-	$smilbase = _DIR_PLUGIN_SPIPBB."smileys/";
-	$smilperso = _DIR_PLUGIN_SPIPBB."mes_smileys/";
-	foreach (creer_chemin() as $dir) {
-		if (@is_dir($f = "$dir$smilperso")) {
-			$repert = $f;
-		}
-		elseif (@is_dir($f = "$dir$smilbase")) {
-			$repert = $f;
-		}
-	}
-	define('_DIR_SMILEYS_SPIPBB', $repert);
-}
-
-
-#
-# inclus def de champs (voir ci-apres !)
-#
-include_spip("base/sap_spipbb");
 
 
 #
@@ -116,32 +121,40 @@ include_spip("base/sap_spipbb");
 /* lire_config fourni par CFG */
 /* Voir si pas plus simple d'utiliser meta ?*/
 if(function_exists('lire_config')) {
-	if(lire_config('spipbb/support_auteurs')=='extra') {
-		# champs a creer
-		if (!is_array($GLOBALS['champs_extra'])) {
-			$GLOBALS['champs_extra'] = Array ();
-		}
-		foreach($GLOBALS['champs_sap_spipbb'] as $k =>$v) {
-			$GLOBALS['champs_extra']['auteurs'][$k]=$v['extra'];
-		}
-		
-		# champs affiches
-		if (!is_array($GLOBALS['champs_extra_proposes'])) {
-			$GLOBALS['champs_extra_proposes'] = Array ();
-		}
-		foreach($GLOBALS['champs_sap_spipbb'] as $nom => $c) {
-			$les_dest = explode(',',$c['extra_proposes']);
-			foreach($les_dest as $dest) {
-				if (isset($GLOBALS['champs_extra_proposes']['auteurs'][$dest])) {
-					$prim = $GLOBALS['champs_extra_proposes']['auteurs'][$dest];
-					$GLOBALS['champs_extra_proposes']['auteurs'][$dest]=$prim."|".$nom;
-				}
-				else {
-					$GLOBALS['champs_extra_proposes']['auteurs'][$dest]=$nom;
+	// a activer seulement si spipbb est configure
+	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
+
+	if (is_array($spipbb_meta) AND
+		$spipbb_meta['configure'] == 'oui' ) {
+			
+		if (lire_config('spipbb/support_auteurs')=='extra') {
+			# champs a creer
+			if (!is_array($GLOBALS['champs_extra'])) {
+				$GLOBALS['champs_extra'] = Array ();
+			}
+			foreach($GLOBALS['champs_sap_spipbb'] as $k =>$v) {
+				$GLOBALS['champs_extra']['auteurs'][$k]=$v['extra'];
+			}
+			
+			# champs affiches
+			if (!is_array($GLOBALS['champs_extra_proposes'])) {
+				$GLOBALS['champs_extra_proposes'] = Array ();
+			}
+			foreach($GLOBALS['champs_sap_spipbb'] as $nom => $c) {
+				$les_dest = explode(',',$c['extra_proposes']);
+				foreach($les_dest as $dest) {
+					if (isset($GLOBALS['champs_extra_proposes']['auteurs'][$dest])) {
+						$prim = $GLOBALS['champs_extra_proposes']['auteurs'][$dest];
+						$GLOBALS['champs_extra_proposes']['auteurs'][$dest]=$prim."|".$nom;
+					}
+					else {
+						$GLOBALS['champs_extra_proposes']['auteurs'][$dest]=$nom;
+					}
 				}
 			}
 		}
-	}
+	} // spipbb actif
+	
 } else {
 	spip_log("SpipBB : Debug spipbb_options.php : Pas de lire_config");
 }

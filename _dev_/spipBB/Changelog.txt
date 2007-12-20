@@ -1,10 +1,17 @@
-﻿2007-12-19  chryjs  <chryjs!@!free!.!fr>
+﻿2007-12-20  chryjs  <chryjs!@!free!.!fr>
+
+ * Rajout page racine connexion manquante
+ * Corrections d'inclusions dans spipbb_fonctions le fichier public/spipbb_balises est obsolete
+ * Corrections d'inclusions dans spipbb_options, l'execution d'une partie du code est suspendu a l'activation de spipbb !
+
+2007-12-19  chryjs  <chryjs!@!free!.!fr>
 
  * Correction impossible de publier (problemes de librairies et de versions)
  * Ajout controle version dans librairie 192 (au cas où)
  * Ajout ligne postit + alignement a gauche
  * Correction bug B_annonce en double dans le squelette c_rubrique (regression)
  * Ajout selection et suppression (passe en 5poubelle) des membres sur la page de gestion + presentation + comptage des messages + selection des 'nouveau'x aussi !
+ * Ajout signature + version interface privée
 
 2007-12-18  chryjs  <chryjs!@!free!.!fr>
 
