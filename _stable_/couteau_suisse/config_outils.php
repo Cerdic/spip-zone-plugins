@@ -309,7 +309,7 @@ add_variable( array(
 add_variable( array(
 	'nom' => 'racc_hr',
 	'format' => 'chaine',
-	'defaut' => "'<hr class=\"spip\" />'",
+	'defaut' => defined('_SPIP19300')?"'<hr />'":"'<hr class=\"spip\" />'",
 	'code:strlen(%s)' => '$GLOBALS[\'ligne_horizontale\']=%s;',
 ));
 add_variable( array(
@@ -322,7 +322,6 @@ add_outil( array(
 	'id' => 'class_spip',
 	'code:options' => "\$GLOBALS['class_spip']='%%style_p%%';\n\$GLOBALS['class_spip_plus']='%%style_h%%';\n%%racc_hr%%\n%%puce%%",
 	'categorie' => 'public',
-	'version-min' => 1.93,
 ));
 
 add_variable( array(

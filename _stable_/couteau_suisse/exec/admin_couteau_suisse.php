@@ -296,7 +296,7 @@ function cout_exec_redirige($p = '') {
 function exec_admin_couteau_suisse() {
 cs_log("Début : exec_admin_couteau_suisse()");
 	global $spip_lang_right;
-	global $outils, $afficher_outil;
+	global $outils, $afficher_outil, $metas_vars;
 
 	if (!cout_autoriser()) {
 		include_spip('inc/minipres');
@@ -327,19 +327,18 @@ verif_plugin();
 	if ($cmd=='install' && isset($_GET['pack']) && isset($GLOBALS['cs_installer'][$_GET['pack']]['outils'])){
 		spip_log("Installation peronnalisee de '$_GET[outils]' par l'auteur id=$connect_id_auteur");
 		$pack = &$GLOBALS['cs_installer'][$_GET['pack']];
-		$vars = unserialize($GLOBALS['meta']['tweaks_variables']);
 		effacer_meta('tweaks_actifs');
 		$actifs = array();
 		foreach(explode('|', $pack['outils']) as $o) $actifs[trim($o)]['actif'] = 1;
-		if(isset($pack['variables'])) foreach($pack['variables'] as $i=>$v) $vars[$i] = $v;
+		if(isset($pack['variables'])) foreach($pack['variables'] as $i=>$v) $metas_vars[$i] = $v;
 		ecrire_meta('tweaks_actifs', serialize($actifs));
-		ecrire_meta('tweaks_variables', serialize($vars));
+		ecrire_meta('tweaks_variables', serialize($metas_vars));
 		cout_exec_redirige();
 	}
 	// reset des variables d'un outil
 	if ($cmd=='reset' && strlen($_GET['outil'])){
 		spip_log("Reset des variables de '$_GET[outil]' par l'auteur id=$connect_id_auteur");
-		$metas_vars = unserialize($GLOBALS['meta']['tweaks_variables']);	
+//echo "Reset des variables de '$_GET[outil]' par l'auteur id=$connect_id_auteur";
 		global $outils;
 		include_spip('cout_utils');
 		include_spip('config_outils');
@@ -428,7 +427,6 @@ if (strlen($res['version']) and (version_compare($res['version'],'2.3.2','<'))) 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
 
 	creer_colonne_droite();
-	lire_metas();
 	// on telecharge les news...
 	if (defined('boites_privees_CS')) cs_boite_rss(!$quiet);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));

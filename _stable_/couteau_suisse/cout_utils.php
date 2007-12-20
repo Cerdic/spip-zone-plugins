@@ -201,7 +201,7 @@ function cs_aide_raccourcis() {
 
 // retourne une aide concernant les pipelines utilises par l'outil
 function cs_aide_pipelines() {
-	global $cs_metas_pipelines, $outils;
+	global $cs_metas_pipelines, $outils, $metas_outils;
 	$aide = array();
 	foreach (array_keys($cs_metas_pipelines) as $pipe) {
 		// stockage de la liste des pipelines et du nombre d'outils actifs concernes
@@ -209,7 +209,7 @@ function cs_aide_pipelines() {
 		if ($nb) $aide[] = '<li style="margin-top: 0.7em;">' .  _T('desc:nb_outil'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb)) . '</li>';
 	}
 	// nombre d'outils actifs
-	$nb = isset($GLOBALS['meta']['tweaks_actifs'])?count(unserialize($GLOBALS['meta']['tweaks_actifs'])):0;
+	$nb=0; foreach($metas_outils as $o) if($o['actif']) $nb++;
 	// nombre d'outils caches
 	$ca = isset($GLOBALS['meta']['tweaks_caches'])?count(unserialize($GLOBALS['meta']['tweaks_caches'])):0;
 	return '<p><b>' . _T('desc:pipelines') . '</b> '.count($aide).'</p><ul style="margin: 0 0 0 0.7em; padding-left: 0.7em; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>'
@@ -467,8 +467,8 @@ function cs_optimise_js($code) {
 // la fonction doit etre ecrite sous la forme monoutil_installe() et placee
 // dans le fichier outils/monoutil.php
 function cs_installe_outils() {
-	$actifs = unserialize($GLOBALS['meta']['tweaks_actifs']);
-	foreach($actifs as $nom=>$actif) if($actif['actif']) {
+	global $metas_outils;
+	foreach($metas_outils as $nom=>$o) if($o['actif']) {
 		include_spip('outils/'.$nom);
 		if (function_exists($f = $nom.'_installe')) {
 			$f();

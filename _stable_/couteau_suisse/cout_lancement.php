@@ -37,7 +37,7 @@ function cs_code_echappement($rempl, $source='') {
 // lit ecrit les metas et initialise $cs_metas_pipelines
 // cette fonction est appellee par cout_options a chaque hit de la page
 function cs_initialisation($forcer=false) {
-	global $cs_metas_pipelines;
+	global $cs_metas_pipelines, $metas_outils;
 	$rand = rand();
 	// au premier passage, on force l'installation si var_mode est defini
 	static $deja_passe_ici;
@@ -49,11 +49,6 @@ cs_log("[#$rand] Version PHP courante : ".phpversion()." - Versions SPIP (base/c
 	$deja_passe_ici++;
 	// si les metas ne sont pas lus, on les lit
 cs_log("[#$rand] cs_initialisation($forcer) : Entrée #$deja_passe_ici");
-	if (!isset($GLOBALS['meta']['tweaks_actifs']) || $forcer) {
-cs_log("[#$rand]  -- lecture metas");
-		include_spip('inc/meta');
-		lire_metas();
-	}
 	if (isset($GLOBALS['meta']['tweaks_pipelines'])) {
 		$cs_metas_pipelines = unserialize($GLOBALS['meta']['tweaks_pipelines']);
 
@@ -62,16 +57,9 @@ if(defined('_LOG_CS')) {
 	cs_log("[#$rand]  -- cs_metas_pipelines = ".$liste);
 }
 
-		$actifs = unserialize($GLOBALS['meta']['tweaks_actifs']);
-		// compatibilite : SPIP_cache => spip_cache
-		if (isset($actifs['SPIP_cache'])) { 
-			$actifs['spip_cache'] = $actifs['SPIP_cache']; unset($actifs['SPIP_cache']);
-			ecrire_meta('tweaks_actifs', serialize($actifs));
-			ecrire_metas();
-		}
 		// liste des actifs & definition des constantes attestant qu'un outil est bien actif : define('_CS_monoutil', 'oui');
 		$liste = array();
-		foreach($actifs as $nom=>$actif) if($actif['actif']) { $liste[]=$nom; @define('_CS_'.$nom, 'oui'); }
+		foreach($metas_outils as $nom=>$o) if($o['actif']) { $liste[]=$nom; @define('_CS_'.$nom, 'oui'); }
 		$liste2 = join(', ', $liste);
 cs_log("[#$rand]  -- ".count($liste).' outil(s) actif(s)'.(strlen($liste2)?" = ".$liste2:''));
 		// Vanter notre art de la compilation...
@@ -86,11 +74,12 @@ cs_log("[#$rand] ".($forcer?"\$forcer = true":"cs_initialisation($forcer) : Sort
 	// ici on commence l'initialisation de tous les outils
 	global $outils, $metas_vars, $metas_outils;
 	include_spip('cout_utils');
-	// charger les metas
-	$metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
-	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
 	// remplir $outils (et aussi $cs_variables qu'on n'utilise pas ici);
 	include_spip('config_outils');
+	// verifier que tous les outils actives sont bien presents
+	foreach($metas_outils as $nom=>$o) if($o['actif']) { if(!isset($outils[$nom])) unset($metas_outils[$nom]); }
+	ecrire_meta('tweaks_actifs', serialize($metas_outils));
+	ecrire_metas();
 	// nettoyage des versions anterieures
 	cs_compatibilite_ascendante();
 	// stocker les types de variables declarees

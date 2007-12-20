@@ -77,7 +77,7 @@ function cs_red($s){ return "<span style='color:red;'>$s</span>"; }
 
 // effectue tous les tests !
 function cs_les_tests() {
-	global $icone;
+	global $icone, $metas_vars, $metas_outils;
 	$icone = find_in_path('img/couteau-24.gif');
 
 	test_outil($_SERVER, 'Echo de : $_SERVER[]');
@@ -92,13 +92,8 @@ function cs_les_tests() {
 	test_outil($a, 'Echo de : getenv()');
 
 	// lecture des variables stockees en meta
-	include_spip('inc/meta');
-	lire_metas();
-	$metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
-	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
 	test_outil($metas_outils, 'Outils actifs : $metas_outils[]');
 	test_outil($metas_vars, 'Contenu des variables : $metas_vars[]');
-
 
 	// test de cs_htmlpath()
 	$relative_path = find_in_path('img/smileys');

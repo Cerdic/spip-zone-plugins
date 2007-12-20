@@ -298,7 +298,6 @@ verif_plugin();
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
 	debut_droite();
-	lire_metas();
 
 	debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),'','','&nbsp;'._T('desc:liste_outils'));
 

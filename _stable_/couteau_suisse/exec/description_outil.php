@@ -20,7 +20,6 @@ if(!function_exists(ajax_retour)) {
 
 function exec_description_outil_dist() {
 cs_log("Début : exec_description_outil_dist() - Préparation du retour par Ajax (données transmises par GET)");
-
 	$script = _request('script');
 	$outil = _request('outil');
 cs_log(" -- outil = $outil - script = $script");
@@ -31,9 +30,6 @@ cs_log(" -- outil = $outil - script = $script");
 	// remplir $outils (et aussi $cs_variables qu'on n'utilise pas ici);
 	include_spip('config_outils');
 cs_log(" -- exec_description_outil_dist() - Appel de config_outils.php : nb_outils = ".count($outils));
-	// charger les metas
-	$metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
-	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
 	// installer les outils
 	cs_installe_outils();
 

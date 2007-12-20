@@ -47,10 +47,6 @@ function description_outil2($outil_id) {
 	include_spip('config_outils');
 cs_log(" -- exec_charger_description_outil_dist() - Appel de config_outils.php : nb_outils = ".count($outils));
 
-	// charger les metas
-	$metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
-	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
-
 cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de description_outil($outil_id, $script) :");
 	$description_outil = charger_fonction('description_outil', 'inc');
 	$descrip = cs_initialisation_d_un_outil($outil_id, $description_outil, true);
