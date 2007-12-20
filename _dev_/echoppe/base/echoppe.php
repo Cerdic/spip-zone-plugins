@@ -10,22 +10,25 @@ global $tables_jointures;
 
 
 
-$GLOBALS['echoppe_version_base'] = 0.5;
+$GLOBALS['echoppe_version_base'] = 0.6;
 
 
 $spip_echoppe_categories = array(
 	"id_categorie"	=> "bigint(21) NOT NULL",
-	"id_parent"	=> "bigint(21) NOT NULL"
+	"id_parent"	=> "bigint(21) NOT NULL",
+	"id_secteur" => "bigint(21) NOT NULL"
 	);
 	
 $spip_echoppe_categories_key = array(
 	"PRIMARY KEY"		=> "id_categorie",
-	"KEY id_parent"	=> "id_parent"
+	"KEY id_parent"	=> "id_parent",
+	"KEY id_secteur" => "id_secteur"
 	);
 
 $spip_echoppe_categories_join = array(
 	"id_categorie"		=> "id_categorie",
-	"id_parent"		=> "id_parent"
+	"id_parent"		=> "id_parent",
+	"id_secteur" => "id_secteur"
 	);
 
 
@@ -553,8 +556,13 @@ $tables_principales['spip_echoppe_stock_produits'] = array(
 	'join' => &$spip_echoppe_stock_produits_join
 	);
 
-
-
+global $table_des_tables;
+$table_des_tables['categories']='echoppe_categories';
+global $tables_jointures;
+	$tables_jointures['spip_echoppe_categories'][]= 'spip_echoppe_categories_descriptions';
+//global $tables_jointures;
+//$tables_jointures['spip_echoppe_categories'][]= 'spip_echoppe_categories_descriptions'; // ou echoppe_categories_description ?
+//$tables_jointures['spip_echoppe_categories_descriptions'][]= 'spip_echoppe_categories'; // ou echoppe_categories ? 
 
 /*global $table_des_tables;
 $table_des_tables['categories']='echoppe_categories';

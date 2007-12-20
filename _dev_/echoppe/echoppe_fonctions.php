@@ -5,10 +5,10 @@ include_spip('base/echoppe');
 
 
 
-global $tables_jointures;
+//global $tables_jointures;
 
 //$tables_jointures['spip_echoppe_categories'][] = 'spip_echoppe_categories_descriptions';
-$tables_jointures['spip_echoppe_categories_produits'][] = 'spip_echoppe_produits';
+//$tables_jointures['spip_echoppe_categories_produits'][] = 'spip_echoppe_produits';
 
 function generer_logo($nom_fichier){
 	
