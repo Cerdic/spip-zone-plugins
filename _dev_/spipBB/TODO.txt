@@ -24,6 +24,8 @@ Interface publique - Générale :
 -* Gestion avatar : a ameliorer + téléchargement (droits ?)
 -* Affichage du profil a revoir
 -* Manque icone postit interface publique
+-* Logout bug en 193 uniq id ?
+-* Manque formulaire inscription
 
 Bugs et autres elements non finis :
 -* Problemes titres _T et _L // traductions à revoir corriger finir

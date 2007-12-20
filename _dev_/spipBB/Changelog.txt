@@ -4,6 +4,7 @@
  * Corrections d'inclusions dans spipbb_fonctions le fichier public/spipbb_balises est obsolete
  * Corrections d'inclusions dans spipbb_options, l'execution d'une partie du code est suspendu a l'activation de spipbb !
  * Correction regression inc/spipbb_192
+ * Rajout page racine fom_inscript manquante (pour l'inscription façon forums)
 
 2007-12-19  chryjs  <chryjs!@!free!.!fr>
 
