@@ -15,15 +15,28 @@ function cout_autoriser() {
 // Pour forcer les logs du plugin, outil actif ou non :
 // define('_LOG_CS_FORCE', 'oui');
 
+// liste des outils et de leurs variables
+global $metas_vars, $metas_outils;
+if (!isset($GLOBALS['meta']['tweaks_actifs'])) {
+cs_log("  -- lecture metas");
+		include_spip('inc/meta');
+		lire_metas();
+}
+$metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
+$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
+
 // on active tout de suite les logs, si l'outil est actif.
-if (strpos($GLOBALS['meta']['tweaks_actifs'], 'log_couteau_suisse') !== false || defined('_LOG_CS_FORCE')) {
+if ($metas_outils['log_couteau_suisse']['actif'] || defined('_LOG_CS_FORCE')) {
 	define('_LOG_CS', 'oui');
 	spip_log('COUTEAU-SUISSE. ' . str_repeat('-', 80));
 	spip_log('COUTEAU-SUISSE. appel de cout_options (début) pour : '.$_SERVER['REQUEST_URI']);
 }
 
-// on initialise le plugin s'il ne s'agit pas de css ou de js
-if(!isset($_GET['page']) OR !preg_match(',\.(css|js)$,', $_GET['page'])) {
+// le plugin ne met pas son nez dans les css ou les js (sauf si le cache est desactive)
+if(!($metas_outils['spip_cache']['actif'] && $metas_vars['radio_desactive_cache3'])
+	&& (isset($_GET['page']) && preg_match(',\.(css|js)$,', $_GET['page']))) {
+	if(defined('_LOG_CS')) spip_log('COUTEAU-SUISSE.  -- sortie de cout_options sans initialisation du plugin ');
+} else {
 	// $cs_metas_pipelines ne sert qu'a l'execution et ne comporte que :
 	//	- le code pour <head></head>
 	//	- le code pour les options.php
@@ -64,8 +77,6 @@ if(!isset($_GET['page']) OR !preg_match(',\.(css|js)$,', $_GET['page'])) {
 	
 	cs_log(' -- sortie de cout_options... cs_options = '.intval($GLOBALS['cs_options']) 
 		. ($file_exists?" et fichier '$f' trouvé":" et fichier '$f' non trouvé !!"));
-} else {
-	if(defined('_LOG_CS')) spip_log('COUTEAU-SUISSE.  -- sortie de cout_options sans initialisation du plugin ');
 }
 
 ?>
