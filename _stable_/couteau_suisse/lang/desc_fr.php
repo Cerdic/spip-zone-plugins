@@ -69,7 +69,7 @@ _ &bull; [De tout le plugin->@reset@]@install@
 	'neplusafficher' => "Ne plus afficher",
 	'validez_page' => 'Pour acc&eacute;der aux modifications :',
 	'modifier_vars' => 'Modifier ces @nb@ param&egrave;tres',
-	'vars_modifiees' => 'Merci, les donn&eacute;es ont &eacute;t&eacute; modifi&eacute;es',
+	'vars_modifiees' => 'Les donn&eacute;es ont bien &eacute;t&eacute; modifi&eacute;es',
 	'variable_vide' => '(Vide)',
 	'detail_inline' => 'Code inline :',
 	'detail_fichiers' => 'Fichiers :',
@@ -284,11 +284,14 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 
 // ---------------------------------------------------------------------------
 // TODO : a partir de 1.93 il faut changer (ul ol pour style_h et simplement li pour style_p)
-	'class_spip:nom' => 'SPIP et les styles&hellip;',
-	'class_spip:description' => "<p>Jusqu'&agrave; la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class=\"spip\"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu'aucun style particulier ne sera appliqu&eacute;.</p>
-<p>#PUCE Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[Votre style :->%style_p%]]
-#PUCE Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :[[Votre style :->%style_h%]]</p>
-<p>Attention : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les styles standards associ&eacute;s &agrave; ces raccourcis.</p>"
+	'class_spip:nom' => 'SPIP et ses raccourcis&hellip;',
+	'class_spip:description' => "#PUCE {{Les styles de SPIP}}. Jusqu'&agrave; la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class=\"spip\"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu'aucun style particulier ne sera appliqu&eacute;.<blockquote>
+_ {{1.}} Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[Votre style :->%style_p%]]
+_ {{2.}} Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :[[Votre style :->%style_h%]]
+
+Attention : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les styles standards associ&eacute;s &agrave; ces balises.</blockquote>
+#PUCE {{Les raccourcis de SPIP}}. D&eacute;finissez ici ce que SPIP doit mettre à la place des raccourcis suivants (une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut) : [[Ligne horizontale &laquo;<html>----</html>&raquo; :->%racc_hr%]][[Puce publique &laquo;<html>-</html>&raquo; :->%puce%]]
+Attention : en d&eacute;finissant le remplacement de la ligne horizontale, le style {{2.}} sp&eacute;cifi&eacute; plus haut sera sans effet."
 ,//	."<p>Pour afiner un peu, vous pouvez maintenant d&eacute;finir le style particulier des balises suivantes :</p>",
 
 	'decoupe:nom' => 'D&eacute;coupe en pages et onglets',
@@ -418,7 +421,7 @@ D&eacute;finissez ci-dessous le nombre maximal d'auteurs &agrave; afficher sur l
 
 // ---------------------------------------------------------------------------
 	'insertions:nom' => 'Corrections automatiques',
-	'insertions:description' => 'Outil en tests !! [[Corrections automatiques :->%insertions%]]',
+	'insertions:description' => 'Outil en cours de &eacute;veloppement !! [[Corrections automatiques :->%insertions%]]',
 /*
 // ---------------------------------------------------------------------------
 	':nom' => '',

@@ -306,9 +306,21 @@ add_variable( array(
 	'defaut' => '"spip"',
 	'code:strlen(%s)' => ' class=%s',
 ));
+add_variable( array(
+	'nom' => 'racc_hr',
+	'format' => 'chaine',
+	'defaut' => "'<hr class=\"spip\" />'",
+	'code:strlen(%s)' => '$GLOBALS[\'ligne_horizontale\']=%s;',
+));
+add_variable( array(
+	'nom' => 'puce',
+	'format' => 'chaine',
+	'defaut' => '"AUTO"',
+	'code:strlen(%s)' => '$GLOBALS[\'puce\']=%s;',
+));
 add_outil( array(
 	'id' => 'class_spip',
-	'code:options' => "\$GLOBALS['class_spip']='%%style_p%%';\n\$GLOBALS['class_spip_plus']='%%style_h%%';",
+	'code:options' => "\$GLOBALS['class_spip']='%%style_p%%';\n\$GLOBALS['class_spip_plus']='%%style_h%%';\n%%racc_hr%%\n%%puce%%",
 	'categorie' => 'public',
 	'version-min' => 1.93,
 ));
@@ -377,14 +389,7 @@ add_outil( array(
 	'pipeline:affiche_milieu' => 'boites_privees_affiche_milieu',
 	'pipeline:affiche_droite' => 'boites_privees_affiche_droite',
 ));
-/*
-add_outil( array(
-	'id' => 'stats_rapides',
-	'code:options' => "%%max_auteurs_page%%",
-	'categorie' => 'admin',
-	'pipeline:affiche_droite' => 'stats_rapides_affiche_droite',
-));
-*/
+
 //-----------------------------------------------------------------------------//
 //                               fonctions                                     //
 //-----------------------------------------------------------------------------//
