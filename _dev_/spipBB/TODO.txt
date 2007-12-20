@@ -22,16 +22,16 @@ Interface Privée - Anti spam :
 Interface publique - Générale :
 -* lien entre auteur et la liste des messages qu'il a publie
 -* Gestion avatar : a ameliorer + téléchargement (droits ?)
+-* Affichage du profil a revoir
+-* Manque icone postit interface publique
 
 Bugs et autres elements non finis :
 -* Problemes titres _T et _L // traductions à revoir corriger finir
--* Manque icone postit interface publique
 -* Bug dans le move d'un forum des fois ça ne fonctionne pas... (valider les cas et corriger)
 -* Membres les plus actifs vérifier le recalcul...
 -* Utiliser les descriptions des mots cles (ajoutees dans lang/... mot_...)
 -* Gestion des annonces / postits / Fermes a tester /controler
 -* Affichage des annonces / postits / Fermes
--* Affichage du profil a revoir
 -* mot cles ferme, postit, annonce : bug -> ils ne doivent s'appliquer qu'au message principal du thread
 -* Envisager de controler l'etat de la config régulierement ? a chaque passsage dans un menu d'admin ?
 -* Le changement de version du plugin oblige a tout reconfigurer et perds toutes les infos... <-- regle ? non il faut encore passer par la page de config (mais tous les params sont stockés)... a cause de de l'ordre des check_if...

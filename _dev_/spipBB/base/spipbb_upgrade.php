@@ -22,8 +22,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-#include_spip('inc/spipbb');
-
 include_spip('inc/spipbb_inc_metas');
 include_spip('inc/spipbb_inc_config');
 
