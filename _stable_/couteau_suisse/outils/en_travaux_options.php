@@ -21,7 +21,6 @@ unset($exceptions);
 
 function action_cs_travaux(){
 	include_spip('public/assembler');
-	@define('_sommaire_TITRE', _T('cout:sommaire_titre'));
 	echo recuperer_fond('fonds/en_travaux', array(
 		'message'=>_en_travaux_MESSAGE, 
 		'titre'=>defined('_en_travaux_TITRE')?_T('info_travaux_titre'):$GLOBALS['meta']['nom_site'],

@@ -55,7 +55,7 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 				:"<html><textarea rows='$lignes' name='HIDDENCSVAR__$variable' $width>"
 					. htmlspecialchars($valeur) . '</textarea></html>'
 			) . _VAR_OUTIL;
-		$ok_valeur = $label.'<html>'.(strlen($valeur)?nl2br(echapper_tags($valeur)):'&nbsp;'._T('cout:variable_vide')).'</html>';
+		$ok_valeur = $label.'<html>'.(strlen($valeur)?nl2br(echapper_tags($valeur)):'&nbsp;'._T('desc:variable_vide')).'</html>';
 	}
 	$ok_input_ .= $ok_input; $ok_valeur_ .= $ok_valeur;
 }
@@ -67,7 +67,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$actif = $outil['actif'];
 	$index = $outil['index'];
 	// la description de base est a priori dans le fichier de langue
-	$descrip = isset($outil['description'])?$outil['description']:_T('cout:'.$outil['id'].':description');
+	$descrip = isset($outil['description'])?$outil['description']:_T('desc:'.$outil['id'].':description');
 	// remplacement des puces
 	$descrip = str_replace('#PUCE', definir_puce(), $descrip);
 	// remplacement des zone input de format [[label->varable]]
@@ -98,11 +98,11 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	// bouton 'Modifier' : en dessous du texte s'il y a plusieurs variables, a la place de _VAR_OUTIL s'il n'y en a qu'une.
 	// attention : on ne peut pas modifier les variables si l'outil est inactif
 	if ($actif) {
-		$bouton = "<input type='submit' class='fondo' value=\"".($c>1?_T('cout:modifier_vars', array('nb'=>$c)):_T('bouton_modifier'))."\" />";
+		$bouton = "<input type='submit' class='fondo' value=\"".($c>1?_T('desc:modifier_vars', array('nb'=>$c)):_T('bouton_modifier'))."\" />";
 		if($c>1) $ok_input .= "<div style=\"margin-top: 0; text-align: right;\">$bouton</div>";
 			else $ok_input = str_replace(_VAR_OUTIL, $bouton, $ok_input);
 	} else
-		$ok_input = $ok_valeur . '<div style="margin-top: 0; text-align: right;">'._T('cout:validez_page').' <span class="fondo" style="cursor:pointer; padding:0.2em;" onclick="submit_general('.$index.')">'._T('bouton_valider').'</span></div>';
+		$ok_input = $ok_valeur . '<div style="margin-top: 0; text-align: right;">'._T('desc:validez_page').' <span class="fondo" style="cursor:pointer; padding:0.2em;" onclick="submit_general('.$index.')">'._T('bouton_valider').'</span></div>';
 	// nettoyage...
 	$ok_input = str_replace(_VAR_OUTIL, '', $ok_input);
 	// HIDDENCSVAR__ pour eviter d'avoir deux inputs du meme nom...
@@ -119,7 +119,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	}
 //cs_log("Fin   : inc_description_outil_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvée(s)");
 	$res = preg_replace(',(<br />)?</fieldset><fieldset><legend></legend>,', '', $res);
-	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('cout:vars_modifiees').'&nbsp;&lt;</div>':'';
+	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('desc:vars_modifiees').'&nbsp;&lt;</div>':'';
 	return cs_ajax_action_greffe("description_outil-$index", $res, $modif);
 }
 ?>

@@ -76,7 +76,7 @@ function cs_compatibilite_ascendante() {
 function add_outil($tableau) {
 	global $outils;
 	static $id; $id = isset($id)?$id + 10:0;
-	if (!isset($tableau['id'])) { $tableau['id']='erreur'.count($outils); $tableau['nom'] = _T('cout:erreur_id');	}
+	if (!isset($tableau['id'])) { $tableau['id']='erreur'.count($outils); $tableau['nom'] = _T('desc:erreur_id');	}
 	$tableau['index'] = $id;
 	$outils[$tableau['id']] = $tableau;
 }
@@ -191,12 +191,12 @@ function cs_aide_raccourcis() {
 			$id = $outil['id'];
 			include_spip('outils/'.$id);	
 			if (function_exists($f = $id.'_raccourcis')) $aide[] = '<li style="margin: 0.7em 0 0 0;">&bull; ' . $f() . '</li>';
-			elseif (!preg_match(',:aide$,', _T("cout:$id:aide") ))
-				$aide[] = '<li style="margin: 0.7em 0 0 0;">&bull; ' .  _T("cout:$id:aide") . '</li>';
+			elseif (!preg_match(',:aide$,', _T("desc:$id:aide") ))
+				$aide[] = '<li style="margin: 0.7em 0 0 0;">&bull; ' .  _T("desc:$id:aide") . '</li>';
 		}
 	}
 	if(!count($aide)) return '';
-	return '<p><b>' . _T('cout:raccourcis') . '</b></p><ul style="list-style-type:none; padding:0; margin: 0; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>';
+	return '<p><b>' . _T('desc:raccourcis') . '</b></p><ul style="list-style-type:none; padding:0; margin: 0; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>';
 }
 
 // retourne une aide concernant les pipelines utilises par l'outil
@@ -206,15 +206,15 @@ function cs_aide_pipelines() {
 	foreach (array_keys($cs_metas_pipelines) as $pipe) {
 		// stockage de la liste des pipelines et du nombre d'outils actifs concernes
 		$nb=0; foreach($outils as $outil) if($outil['actif'] && isset($outil['pipeline:'.$pipe])) $nb++;
-		if ($nb) $aide[] = '<li style="margin-top: 0.7em;">' .  _T('cout:nb_outil'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb)) . '</li>';
+		if ($nb) $aide[] = '<li style="margin-top: 0.7em;">' .  _T('desc:nb_outil'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb)) . '</li>';
 	}
 	// nombre d'outils actifs
 	$nb = isset($GLOBALS['meta']['tweaks_actifs'])?count(unserialize($GLOBALS['meta']['tweaks_actifs'])):0;
 	// nombre d'outils caches
 	$ca = isset($GLOBALS['meta']['tweaks_caches'])?count(unserialize($GLOBALS['meta']['tweaks_caches'])):0;
-	return '<p><b>' . _T('cout:pipelines') . '</b> '.count($aide).'</p><ul style="margin: 0 0 0 0.7em; padding-left: 0.7em; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>'
-		. '<p><b>' . _T('cout:actifs') . "</b> $nb</p>"
-		. '<p><b>' . _T('cout:caches') . "</b> $ca</p>";
+	return '<p><b>' . _T('desc:pipelines') . '</b> '.count($aide).'</p><ul style="margin: 0 0 0 0.7em; padding-left: 0.7em; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>'
+		. '<p><b>' . _T('desc:actifs') . "</b> $nb</p>"
+		. '<p><b>' . _T('desc:caches') . "</b> $ca</p>";
 }
 
 // met en forme le fichier $f en vue d'un insertion en head
@@ -332,7 +332,7 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	foreach($traitements_utilises as $b=>$balise) {
 		foreach($balise as $p=>$precision) {
 			// ici, on fait attention de ne pas melanger propre et typo
-			if(array_key_exists('typo', $precision) && array_key_exists('propre', $precision)) die(_T('cout:erreur:traitements'));
+			if(array_key_exists('typo', $precision) && array_key_exists('propre', $precision)) die(_T('desc:erreur:traitements'));
 			foreach($precision as $f=>$fonction)  {
 				if ($f===0)	$traitements_utilises[$b][$p][$f] = join("(", array_reverse($fonction)).'(';
 				else {

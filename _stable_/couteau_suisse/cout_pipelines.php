@@ -166,7 +166,7 @@ function couteau_suisse_BT_toolbox($params) {
 function couteau_suisse_BarreTypoEnrichie_tous($paramArray) {
 	global $cs_metas_pipelines;
 	if (!isset($cs_metas_pipelines['BT_toolbox'])) return $paramArray;
-	return bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['couteau_suisse']."','');", _DIR_PLUGIN_COUTEAU_SUISSE."/img/couteau-24.gif", _T('cout:raccourcis_barre'), $paramArray[1]);
+	return bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['couteau_suisse']."','');", _DIR_PLUGIN_COUTEAU_SUISSE."/img/couteau-24.gif", _T('desc:raccourcis_barre'), $paramArray[1]);
 }
 
 /*

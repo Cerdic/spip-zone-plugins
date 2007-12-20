@@ -17,7 +17,7 @@
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function sommaire_raccourcis() {
-	return _T('cout:sommaire:aide', array('racc' => '<b>'
+	return _T('desc:sommaire:aide', array('racc' => '<b>'
 		. (defined('_sommaire_AUTOMATIQUE')?_sommaire_SANS_SOMMAIRE:_sommaire_AVEC_SOMMAIRE)
 		. '</b>'));
 }

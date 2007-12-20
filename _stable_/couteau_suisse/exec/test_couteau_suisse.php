@@ -30,14 +30,14 @@ cs_log("D&eacute;but : exec_test_couteau_suisse()");
 	cs_initialisation(true);
 
 	if(defined('_SPIP19100'))
-  		debut_page(_T('cout:titre_tests'), 'configuration', 'couteau_suisse');
+  		debut_page(_T('desc:titre_tests'), 'configuration', 'couteau_suisse');
   	else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('cout:titre_tests'), "configuration", 'couteau_suisse');
+		echo $commencer_page(_T('desc:titre_tests'), "configuration", 'couteau_suisse');
 	}
 
 	echo "<br /><br /><br />";
-	gros_titre(_T('cout:titre_tests'));
+	gros_titre(_T('desc:titre_tests'));
 	echo '<div style="width:98%; text-align:left; margin:0 auto">';
 	// et hop, on lance les tests !
 	cs_les_tests();

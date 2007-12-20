@@ -69,11 +69,11 @@ cs_log("couleurs_installe()");
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
-// si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
+// si cette fonction n'existe pas, le plugin cherche alors  _T('desc:un_outil:aide');
 function couleurs_raccourcis() {
-	return _T('cout:couleurs:aide', array(
+	return _T('desc:couleurs:aide', array(
 		'liste' => $GLOBALS['meta']['cs_couleurs_racc'],
-		'fond' => _COULEURS_FONDS==1?_T('cout:couleurs_fonds'):'',
+		'fond' => _COULEURS_FONDS==1?_T('desc:couleurs_fonds'):'',
 	));
 }
 
@@ -150,9 +150,9 @@ function couleurs_BarreTypo($tr) {
 	if(_COULEURS_FONDS===1) {
 		foreach($couleurs[2] as $i=>$v)
 			$r2[] = "<a title=\"fond $i\" href=\"javascript:barre_raccourci('[fond $i]','[/fond $i]',@@champ@@)\"><span class=\"cs_BT cs_BTg\" style=\"color:$v;\">F</span></a>";
-		$r2 = ' '._T('cout:fonds').' '.join(' ', $r2).''; 
+		$r2 = ' '._T('desc:fonds').' '.join(' ', $r2).''; 
 	} else $r2='';
-	return $tr.'<tr><td><p style="margin:0; line-height:1.9em;">'._T('cout:couleurs:nom')."&nbsp;$r1$r2</div></td></tr>";
+	return $tr.'<tr><td><p style="margin:0; line-height:1.9em;">'._T('desc:couleurs:nom')."&nbsp;$r1$r2</div></td></tr>";
 }
 
 ?>

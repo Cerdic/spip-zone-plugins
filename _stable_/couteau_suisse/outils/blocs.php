@@ -9,9 +9,9 @@
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
-// si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
+// si cette fonction n'existe pas, le plugin cherche alors  _T('desc:un_outil:aide');
 function blocs_raccourcis() {
-	return _T('cout:blocs:aide');
+	return _T('desc:blocs:aide');
 }
 
 function blocs_callback($matches) {
@@ -42,7 +42,7 @@ function blocs_pre_typo($texte) {
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
 function blocs_BarreTypo($tr) {
-	return $tr.'<tr><td>'._T('cout:blocs:nom').' (en projet)</td></tr>';
+	return $tr.'<tr><td>'._T('desc:blocs:nom').' (en projet)</td></tr>';
 }
 
 ?>

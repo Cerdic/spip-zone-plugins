@@ -102,7 +102,7 @@ add_outil( array(
 add_variable( array(
 	'nom' => 'paragrapher',
 	'format' => 'nombre',
-	'radio' => array(1 => 'item_oui', 0 => 'item_non', -1 => 'cout:par_defaut'),
+	'radio' => array(1 => 'item_oui', 0 => 'item_non', -1 => 'desc:par_defaut'),
 	'defaut' => "-1",
 	'code:%s>=0' => "\$GLOBALS['toujours_paragrapher']=%s;",
 ));
@@ -181,8 +181,8 @@ add_outil( array(
 add_variable( array(
 	'nom' => 'radio_type_urls3',
 	'format' => 'chaine',
-	'radio' => array('page' => 'cout:page', 'html' => 'cout:html', 'propres' => 'cout:propres', 'propres2' => 'cout:propres2',
-			'standard' => 'cout:standard', 'propres-qs' => 'cout:propres-qs' ),
+	'radio' => array('page' => 'desc:page', 'html' => 'desc:html', 'propres' => 'desc:propres', 'propres2' => 'desc:propres2',
+			'standard' => 'desc:standard', 'propres-qs' => 'desc:propres-qs' ),
 	'radio/ligne' => 4,
 	'defaut' => "'page'",
 	'code' => "\$GLOBALS['type_urls']=%s;\n",
@@ -199,11 +199,11 @@ add_outil( array(
 	'categorie' => 'admin',
 ));
 
-	// ici on a besoin de trois boutons radio : _T('cout:js_jamais'), _T('cout:js_defaut') et _T('cout:js_toujours')
+	// ici on a besoin de trois boutons radio : _T('desc:js_jamais'), _T('desc:js_defaut') et _T('desc:js_toujours')
 add_variable( array(
 	'nom' => 'radio_filtrer_javascript3',
 	'format' => 'nombre',
-	'radio' => array(-1 => 'cout:js_jamais', 0 => 'cout:js_defaut', 1 => 'cout:js_toujours'),
+	'radio' => array(-1 => 'desc:js_jamais', 0 => 'desc:js_defaut', 1 => 'desc:js_toujours'),
 	'defaut' => 0,
 	// si la variable est non nulle, on code...
 	'code:%s' => "\$GLOBALS['filtrer_javascript']=%s;",
@@ -238,11 +238,11 @@ add_outil( array(
 	'pipeline:affichage_final' => 'Auteur_forum_affichage_final',
 ));
 
-	// ici on a besoin de trois boutons radio : _T('cout:par_defaut'), _T('cout:sf_amont') et _T('cout:sf_tous')
+	// ici on a besoin de trois boutons radio : _T('desc:par_defaut'), _T('desc:sf_amont') et _T('desc:sf_tous')
 add_variable( array(
 	'nom' => 'radio_suivi_forums3',
 	'format' => 'chaine',
-	'radio' => array('defaut' => 'cout:par_defaut', '_SUIVI_FORUMS_REPONSES' => 'cout:sf_amont', '_SUIVI_FORUM_THREAD' => 'cout:sf_tous'),
+	'radio' => array('defaut' => 'desc:par_defaut', '_SUIVI_FORUMS_REPONSES' => 'desc:sf_amont', '_SUIVI_FORUM_THREAD' => 'desc:sf_tous'),
 	'defaut' => '"defaut"',
 	// si la variable est differente de 'defaut' alors on codera le define
 	'code:%s!=="defaut"' => "define(%s, true);",
@@ -316,21 +316,21 @@ add_outil( array(
 add_variable( array(
 	'nom' => 'admin_travaux',
 	'format' => 'nombre',
-	'radio' => array(0 => 'cout:tous', 1 => 'cout:sauf_admin'),
+	'radio' => array(0 => 'desc:tous', 1 => 'desc:sauf_admin'),
 	'defaut' => 0,
 	'code' => "define('_en_travaux_ADMIN', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'message_travaux',
 	'format' => 'chaine',
-	'defaut' => "_T('cout:prochainement')",
+	'defaut' => "_T('desc:prochainement')",
 	'lignes' => 3,
 	'code' => "define('_en_travaux_MESSAGE', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'titre_travaux',
 	'format' => 'nombre',
-	'radio' => array(1 => 'cout:travaux_titre', 0 => 'cout:travaux_nom_site'),
+	'radio' => array(1 => 'desc:travaux_titre', 0 => 'desc:travaux_nom_site'),
 	'defaut' => 1,
 	'code:%s' => "define('_en_travaux_TITRE', %s);",
 ));
@@ -344,7 +344,7 @@ add_outil( array(
 add_variable( array(
 	'nom' => 'cs_rss',
 	'format' => 'nombre',
-	'radio' => array(1 => 'cout:activer', 0 => 'cout:desactiver'),
+	'radio' => array(1 => 'desc:activer', 0 => 'desc:desactiver'),
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_CS', %s);
 @define('_CS_RSS_SOURCE', 'http://zone.spip.org/trac/spip-zone/log/_plugins_/_stable_/couteau_suisse?format=rss&mode=stop_on_copy&limit=20');\n",
@@ -352,14 +352,14 @@ add_variable( array(
 add_variable( array(
 	'nom' => 'format_spip',
 	'format' => 'nombre',
-	'radio' => array(1 => 'cout:activer', 0 => 'cout:desactiver'),
+	'radio' => array(1 => 'desc:activer', 0 => 'desc:desactiver'),
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_ARTICLES', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'stat_auteurs',
 	'format' => 'nombre',
-	'radio' => array(1 => 'cout:activer', 0 => 'cout:desactiver'),
+	'radio' => array(1 => 'desc:activer', 0 => 'desc:desactiver'),
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_AUTEURS', %s)\n;",
 ));
@@ -546,7 +546,7 @@ add_variable( array(
 add_variable( array(
 	'nom' => 'set_couleurs',
 	'format' => 'nombre',
-	'radio' => array(0 => 'cout:toutes_couleurs', 1 => 'cout:certaines_couleurs'),
+	'radio' => array(0 => 'desc:toutes_couleurs', 1 => 'desc:certaines_couleurs'),
 	'radio/ligne' => 1,
 	'defaut' => 0,
 	'code' => "define('_COULEURS_SET', %s);\n",
@@ -603,7 +603,7 @@ add_variable( array(
 add_variable( array(
 	'nom' => 'liens_orphelins',
 	'format' => 'nombre',
-	'radio' => array(-1 => 'item_non', 0 => 'cout:basique', 1 => 'cout:etendu'),
+	'radio' => array(-1 => 'item_non', 0 => 'desc:basique', 1 => 'desc:etendu'),
 	'defaut' => 0,
 	'code' => '$GLOBALS["liens_orphelins"]=%s;',
 ));
@@ -660,7 +660,7 @@ add_variable( array(
 ));
 add_variable( array(
 	'nom' => 'glossaire_js',
-	'radio' => array(0 => 'cout:glossaire_css', 1 => 'cout:glossaire_js'),
+	'radio' => array(0 => 'desc:glossaire_css', 1 => 'desc:glossaire_js'),
 	'format' => 'nombre',
 	'defaut' => 1,
 	'code:%s' => "define('_GLOSSAIRE_JS', %s);",

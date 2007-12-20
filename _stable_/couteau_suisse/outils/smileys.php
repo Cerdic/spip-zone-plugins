@@ -75,9 +75,9 @@ cs_log(" -- abs. path = $path2");
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
-// si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
+// si cette fonction n'existe pas, le plugin cherche alors  _T('desc:un_outil:aide');
 function smileys_raccourcis() {
-	return _T('cout:smileys:aide', array('liste' => $GLOBALS['meta']['cs_smileys_racc']));
+	return _T('desc:smileys:aide', array('liste' => $GLOBALS['meta']['cs_smileys_racc']));
 }
 
 function smileys_echappe_balises_callback($matches) {
@@ -136,7 +136,7 @@ function cs_smileys_BarreTypo($tr) {
 	for ($i=0; $i<$max; $i++)
 		$res .= "<a href=\"javascript:barre_inserer('{$smileys[0][$i]}',@@champ@@)\">{$smileys[1][$i]}</a>";
 
-	return $tr.'<tr><td><@@span@@>'._T('cout:smileys:nom').'</span>&nbsp;'.echappe_retour($res, 'SMILE').'</td></tr>';
+	return $tr.'<tr><td><@@span@@>'._T('desc:smileys:nom').'</span>&nbsp;'.echappe_retour($res, 'SMILE').'</td></tr>';
 }
 
 ?>
