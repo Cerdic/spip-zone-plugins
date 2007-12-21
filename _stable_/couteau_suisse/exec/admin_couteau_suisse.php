@@ -258,24 +258,23 @@ function cs_Titre(nom){
 // mise a jour des donnees si envoi via formulaire
 function enregistre_modif_outils($cmd){
 cs_log("Début : enregistre_modif_outils()");
-	global $outils;
+	global $outils, $metas_outils;
 	// recuperer les outils dans $_POST ou $_GET
 	$toggle = array();
 	if(isset($_GET['outil'])) $toggle[] = $_GET['outil'];
 		elseif(isset($_POST['cs_selection'])) $toggle = explode(',', $_POST['cs_selection']);
 		else return;
 	$_GET['outil'] = ($cmd!='hide' && count($toggle)==1)?$toggle[0]:'';
-
 	$i = $cmd=='hide'?'cache':'actif';
 	${$i} = isset($GLOBALS['meta']["tweaks_{$i}s"])?unserialize($GLOBALS['meta']["tweaks_{$i}s"]):array();
 	foreach($toggle as $o) if(isset(${$i}[$o][$i]))
 			unset(${$i}[$o][$i]);
 			else ${$i}[$o][$i] = 1;
-	
 	if(defined('_SPIP19300')) $connect_id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 		else global $connect_id_auteur;
 	spip_log("Changement de statut ($i) des outils par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys(${$i})));
 	ecrire_meta("tweaks_{$i}s", serialize(${$i}));
+	if($cmd=='toggle') $metas_outils = ${$i};
 
 	include_spip('inc/plugin');
 	verif_plugin();	
