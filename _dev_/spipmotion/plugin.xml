@@ -19,7 +19,7 @@
 	</multi>
 	</description>
 	<lien>http://kent1.sklunk.net/spip.php?article93</lien>
-	<necessite id='cfg' version='[1.0.2;]' />
+	<necessite id='cfg' version='[1.2.0;]' />
 	<options> <!-- fichier charge a chaque hit -->
 	spipmotion_options.php
 	</options>
