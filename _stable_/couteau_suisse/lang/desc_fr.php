@@ -290,9 +290,9 @@ _ {{1.}} Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; et les listes (&lt;ol&gt;,
 _ {{2.}} Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :[[Votre style :->%style_h%]]
 
 Attention : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les styles standards associ&eacute;s &agrave; ces balises.</blockquote>
-#PUCE {{Les raccourcis de SPIP}}. D&eacute;finissez ici ce que SPIP doit mettre à la place des raccourcis suivants (une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut) : [[Ligne horizontale &laquo;<html>----</html>&raquo; :->%racc_hr%]][[Puce publique &laquo;<html>-</html>&raquo; :->%puce%]]
+#PUCE {{Les raccourcis de SPIP}}. D&eacute;finissez ici ce que SPIP doit mettre &agrave; la place des raccourcis suivants (une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut) : [[Ligne horizontale &laquo;<html>----</html>&raquo; :->%racc_hr%]][[Puce publique &laquo;<html>-</html>&raquo; :->%puce%]]
 Attention : en d&eacute;finissant le remplacement de la ligne horizontale, le style {{2.}} sp&eacute;cifi&eacute; plus haut ne sera pas appliqu&eacute; sur &lt;hr />."
-:"D&eacute;finissez ici ce que SPIP doit mettre à la place du raccourci suivant (une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut) : [[Ligne horizontale &laquo;<html>----</html>&raquo; :->%racc_hr%]]"
+:"D&eacute;finissez ici ce que SPIP doit mettre &agrave; la place du raccourci suivant (une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut) : [[Ligne horizontale &laquo;<html>----</html>&raquo; :->%racc_hr%]]"
 ,
 
 	'decoupe:nom' => 'D&eacute;coupe en pages et onglets',
