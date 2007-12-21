@@ -139,7 +139,7 @@
 			if(this.mapMarker.map) {
 				var name = id_prefix+"html"+id;
 				//IE cannot change name attribute at runtime
-				var map = $(this.mapMarker.map.replace(/<map>/,"<map name='"+name+"'>"));
+				var map = $(this.mapMarker.map.replace(/<map>/,"<map name='"+name+"'>")).addClass("anno_instance"+this.instance);
 				map.find("area").attr({title:attr.title,id:id_prefix+"html_area"+id}).addClass("anno_instance"+this.instance);
 				marker.attr("title","");
 				marker.before(map);
@@ -273,6 +273,55 @@
 					attr
 				)
 			});				
+		},
+		/* Remove the markers from the images
+		*  
+		*	 removeMarkers(element,ids,all_instances)
+		*			or
+		*	 removeMarkers(element,ids)
+		*	 		or		
+		*	 removeMarkers(element)
+		*
+		*	 Arguments:
+		*	 -element (element or selector or jQuery object):
+		*	 		element or selector or jQuery object that contains one or more annotated map
+		*			or the annotated image itself	 							
+		*	 -ids (array - optional):
+		*	 		array of point ids to remove (if null all points of the current instance of carto are removed) 
+		*	 -all_instances (boolean - optional):
+		*	 		force to remove points of all the instances of carto if true	 	
+		*/
+		removeMarkers: function(root,ids,all_instances) {
+			var selector,filter,carto = this;
+			
+			if(!all_instances)
+				selector = ">.anno_instance"+this.instance;
+			else
+				selector = ">:not(img:first)";
+			if(ids)
+				filter = function() {
+					var found = false,el = this;
+					$.each(ids,function(i,n) {
+						var match = this.id.match(/_(\d+)$/);
+						if(match[1]==n) {
+							found = true;
+							return false;
+						}
+					});
+					return !found;
+				}
+			else
+				filter = null;
+			
+			var container = $(root).find(".marker_container");
+			if(!container.size())
+				container = $(root).parents(".marker_container").eq(0);
+			if(container.size()) {
+				var els = container.find(selector);
+				if(filter)
+					els = els.filter(filter);
+				els.remove();
+			}
 		},
 		loadCsv: function(id,callback) {
 			var options = {

@@ -63,7 +63,7 @@
 					hash.o.unbind("click");
 					annotate_window.annotate_fill_summary_panel(function(p){
 						fix_absolute_IE6();
-						$("#annotate_image_summary").find("div.map_marker,div.map_marker_highlight").remove();
+						carto.removeMarkers("#annotate_image_summary");
 						var images = {};
 						images[id_document] = $("#annotate_image_summary img");
 						carto.displayMarkers(p,images,"map_marker_preview");
@@ -80,7 +80,6 @@
 				panelBody.append("<tr><td colspan='5' style='text-align:center'><img src='"+carto.cfg.loaderImage+"'></td></tr>");		
 			};
 			var fill_it = function() {
-				//var panel = $("#annotate_summary_panel");
 				var panelBody = $("#annotate_summary_panel tbody").empty();
 				if(!points_data.ids.length) {
 					panelBody.append("<tr><td colspan='5' style='text-align:center'>"+points_data.msg.noData+"</td></tr>");							
@@ -117,6 +116,7 @@
 	
 				//bind action change
 				$("a.annotate_action_change",rows).click(function(){
+					carto.removeMarkers("#map_annotate");
 					annotate_window.showAnnotatePanel(3);
 					var id = $(this).parent().siblings(":first").text();
 					$.each(points_data.ids,function(i,n) {
@@ -126,7 +126,6 @@
 							$("#annotate_point_text").val(n.text);
 							$("#annotate_point_x").text(n.x);
 							$("#annotate_point_y").text(n.y);
-							$("#annotate_window").find(".map_marker,.map_marker+map").remove();
 							carto.addMarker($("#map_annotate"),{xy:[n.x,n.y]},{id:"map_marker_change_"+id});
 							return false;
 						}
@@ -142,7 +141,7 @@
 						});
 						annotate_window.showAnnotatePanel(1);
 						annotate_window.annotate_fill_summary_panel(points_data,function(p){
-							$("#annotate_image_summary").find(".map_marker,.map_marker+map,div.map_marker_highlight").remove();
+							carto.removeMarkers("#annotate_image_summary");
 							var images = {};
 							images[id_document] = $("#annotate_image_summary img");
 							carto.displayMarkers(p,images);
@@ -185,7 +184,7 @@
 							params.push(i+"="+n);
 						});
 						params.push("export=1");
-						var url = "?"+params.join("&");
+            var url = carto.cfg.action+"?"+params.join("&");
 						window.location = url;
 						return false;
 					});
@@ -199,7 +198,7 @@
 							points_data.ids = [];
 							annotate_window.annotate_fill_summary_panel(points_data,function(p){
 								fix_absolute_IE6();
-								$("#annotate_image_summary").find(".map_marker,.map_marker+map,div.map_marker_highlight").remove();
+								carto.removeMarkers("#annotate_image_summary");
 								var images = {};
 								images[id_document] = $("#annotate_image_summary img");
 								carto.displayMarkers(p,images);
@@ -220,7 +219,7 @@
 					});
 					break;			
 				case 3:
-					//add,chenge point data
+					//add,change point data
 					$("#annotate_wizard3").show();
 					//reset params
 					$("#annotate_point_id").text('');
@@ -233,7 +232,7 @@
 						var xy = carto.get_xy_coord($(this),event);
 						$("#annotate_point_x").text(xy.x);
 						$("#annotate_point_y").text(xy.y);
-						$("#annotate_window").find(".map_marker,.map_marker+map").remove();
+						carto.removeMarkers(this);
 						carto.addMarker(this,{xy:[xy.x,xy.y]},{id:"map_marker_preview_0"});
 						return false;
 					});
@@ -261,7 +260,7 @@
 							window.scrollTo(0,0);
 							annotate_window.annotate_fill_summary_panel(points_data,function(p){
 								fix_absolute_IE6();
-								$("#annotate_image_summary").find(".map_marker,.map_marker+map,div.map_marker_highlight").remove();
+								carto.removeMarkers("#annotate_image_summary");
 								var images = {};
 								images[id_document] = $("#annotate_image_summary img");
 								carto.displayMarkers(p,images,"map_marker_preview");
@@ -304,7 +303,7 @@
 								window.scrollTo(0,0);
 								annotate_window.annotate_fill_summary_panel(function(p){
 									fix_absolute_IE6();
-									$("#annotate_image_summary").find(".map_marker,.map_marker+map,div.map_marker_highlight").remove();
+									carto.removeMarkers("#annotate_image_summary");
 									var images = {};
 									images[id_document] = $("#annotate_image_summary img");
 									carto.displayMarkers(p,images);
