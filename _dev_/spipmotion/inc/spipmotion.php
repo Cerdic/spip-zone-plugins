@@ -175,7 +175,6 @@ function est_inclus_videos($id_document) {
 		in_array($id_document,$GLOBALS['doublons_documents_inclus']) : false;
 }
 
-
 //
 // Afficher un document sous forme de ligne depliable (pages xxx_edit)
 //
