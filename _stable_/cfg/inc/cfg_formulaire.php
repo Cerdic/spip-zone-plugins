@@ -43,6 +43,8 @@ class cfg_formulaire
 	var $onglet = 'oui'; 
 // compte-rendu des mises a jour, vide == pas d'erreur
 	var $message = '';
+// afficher ce compte rendu ?
+	var $afficher_messages = true;
 // liens optionnels sur des sous-config [(#REM) liens*=xxx]
 	var $liens = array();
 // les champs trouve dans le fond
@@ -200,7 +202,7 @@ class cfg_formulaire
 		if (!preg_match_all(
 		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio|hidden)") name="(\w+)(\[\])?"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?( multiple=)?[^>]*?>#ims',
 						$this->fond_compile, $matches, PREG_SET_ORDER)) {
-			return _T('cfg:pas_de_champs_dans', array('nom' => $nom));
+			return _T('cfg:pas_de_champs_dans', array('nom' => $this->vue));
 		}
 		
 		// stockage des champs trouves dans $this->champs

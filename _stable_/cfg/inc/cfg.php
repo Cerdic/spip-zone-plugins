@@ -274,7 +274,7 @@ class cfg_dist extends cfg_formulaire
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'cfg'),'data'=>''));
 
 		echo
-			($this->message ? 
+			(($this->message && $this->afficher_messages)? 
 				debut_boite_info(true) .
 				propre($this->message) .
 				fin_boite_info(true)
