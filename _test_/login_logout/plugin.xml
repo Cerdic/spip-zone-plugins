@@ -1,0 +1,52 @@
+<plugin>
+	<!--  
+
+	// lilo plugin.xml
+
+	// $LastChangedRevision: 16682 $
+	// $LastChangedBy: paladin@quesaco.org $
+	// $LastChangedDate: 2007-12-05 19:45:20 +0100 (mer., 07 nov. 2007) $
+	
+	 -->
+	<nom>Login Logout (LiLo)</nom>
+	<auteur>cpaulus@quesaco.org</auteur>
+	<version>0.02</version>
+	<version_base>0.01</version_base>
+	<icon>images/lilo-64.png</icon>
+	<etat>test</etat>
+
+	<description>Login-Logout (LiLo) propose une page login, un bloc login et une boite de statut.
+	La page login est appel&eacute;e lors de la tentative d'acc&egrave;s &agrave; l'espace priv&eacute;. 
+	Le bloc login est construit par l'appel &agrave; la balise LOGIN_PUBLIC.
+	La boite statut appara&icirc;t dans l'espace public lorsque le visiteur est authentifi&eacute;.</description>
+
+	<lien>[Documentation->http://www.quesaco.org/Page-de-login-et-boite-statut-pour]</lien>
+	
+	<prefix>lilo</prefix>
+
+	<options>lilo_mes_options.php</options>
+	<fonctions>lilo_mes_fonctions.php</fonctions>
+	
+	<install>base/lilo_install.php</install>
+
+	<pipeline>
+		<!-- les onglets de config dans l'espace privé -->
+		<nom>ajouter_onglets</nom>
+		<inclure>inc/lilo_pipeline_ajouter_onglets.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<!-- les css du plugin dans l'espace privé -->
+		<nom>header_prive</nom>
+		<inclure>inc/lilo_pipeline_header_prive.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<!-- les css et js dans l'espace public -->
+		<nom>insert_head</nom>
+		<inclure>inc/lilo_pipeline_insert_head.php</inclure>
+	</pipeline>
+
+	<chemin dir='' />
+
+</plugin>
