@@ -14,8 +14,8 @@ if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
 	include_spip('inc/spipbb_192'); // SPIP 1.9.2
 }
 
-function spipbb_auteur_infos($id_auteur) {
-
+function spipbb_auteur_infos($id_auteur=0) {
+	if (empty($id_auteur)) return;
 	# spip
 	global 	$connect_statut,
 			$connect_toutes_rubriques,
@@ -52,14 +52,17 @@ function spipbb_auteur_infos($id_auteur) {
 
 }
 
-function formulaire_spipbb_auteur_infos($id_auteur) {
+function formulaire_spipbb_auteur_infos($id_auteur=0) {
+	if (empty($id_auteur)) return ;
 	$table_support=lire_config("spipbb/table_support");
+	$type_support = lire_config('spipbb/support_auteurs');
+	
 	$affiche='';
 	$select='';
 		
 	# statut de cet id_auteur
-	$qa=spip_query("SELECT statut FROM spip_auteurs WHERE id_auteur=$id_auteur");
-	$ra=spip_fetch_array($qa);
+	$qa=sql_query("SELECT statut FROM spip_auteurs WHERE id_auteur=$id_auteur");
+	$ra=sql_fetch($qa);
 	$aut_statut=$ra['statut'];
 	
 	# prepa des champs a presenter
@@ -67,12 +70,15 @@ function formulaire_spipbb_auteur_infos($id_auteur) {
 		$select.= ",".$chp;
 		$tab_suppleant[$chp]="";
 	}
-	$select=substr($select,1);
-	$q=spip_query("SELECT $select FROM spip_$table_support WHERE id_auteur=$id_auteur");
-	$r=spip_fetch_array($q);
+
+	if ($type_support=="table") {
+		$select=substr($select,1);
+		$q=sql_query("SELECT $select FROM spip_$table_support WHERE id_auteur=$id_auteur");
+		$r=sql_fetch($q);
+	}
 	
 	# cas nouv. inscrit
-	if(!$r) {
+	if (!$r) {
 		$r=$tab_suppleant;
 		$affiche.= "<input type='hidden' name='spipbb_nouveau' value='1' />";
 	}
@@ -85,11 +91,11 @@ function formulaire_spipbb_auteur_infos($id_auteur) {
 
 		# valider affichage du champ sur statut
 		$aff_champ=false;
-		if(in_array('tous',$statuts)) {
+		if (in_array('tous',$statuts)) {
 			$aff_champ=true;
 		}
 		else {
-			if(in_array($aut_statut,$statuts)) {
+			if (in_array($aut_statut,$statuts)) {
 				$aff_champ=true;
 			}
 		}
