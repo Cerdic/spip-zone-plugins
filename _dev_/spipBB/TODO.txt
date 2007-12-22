@@ -20,7 +20,6 @@ Interface Privée - Anti spam :
 -* Anti spam : sur le login, IP (ban)
 
 Interface publique - Générale :
--* lien entre auteur et la liste des messages qu'il a publie
 -* Gestion avatar : a ameliorer + téléchargement (droits ?)
 -* Affichage du profil a revoir
 -* Manque icone postit interface publique

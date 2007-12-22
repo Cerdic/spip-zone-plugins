@@ -38,7 +38,7 @@
 					[(#EMAIL|?{<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]"><span>&nbsp;</span></a>,''})]
 				</td>
 				<td class="nbr_sujet">
-					[(#ID_AUTEUR|spipbb_nb_messages)]
+					<a href="[(#URL_PAGE{liste_messages}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]">[(#ID_AUTEUR|spipbb_nb_messages)]</a>
 				</td>
 				<td class="www">
 					[<a href="(#URL_SITE)" title="#NOM_SITE">&nbsp;</a>]
