@@ -2,6 +2,7 @@
 
  * Corrections petites erreurs (bug report BB)
  * Correction prefixes et autres librairie 192
+ * Correction regression
  
 2007-12-20  chryjs  <chryjs!@!free!.!fr>
 
