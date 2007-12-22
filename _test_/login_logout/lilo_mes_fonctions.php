@@ -2,6 +2,9 @@
 
 	// lilo_mes_fonctions.php
 
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
 
 	/*****************************************************
 	Copyright (C) 2007 Christian PAULUS

@@ -2,6 +2,10 @@
 
 	// lilo_mes_options.php
 
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+
 	/*****************************************************
 	Copyright (C) 2007 Christian PAULUS
 	cpaulus@quesaco.org - http://www.quesaco.org/
