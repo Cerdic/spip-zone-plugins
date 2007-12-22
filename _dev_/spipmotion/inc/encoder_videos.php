@@ -32,7 +32,7 @@ function inc_encoder_videos_dist($v) {
 	AND $GLOBALS['flag_upload']) {
 		if($dir = determine_upload('documents')) {
 			// quels sont les docs accessibles en ftp ?
-			$l = texte_encoder_manuel_videos($dir, '', $v['mode']);
+			$l = texte_encoder_manuel_videos($dir, '');
 			// s'il n'y en a pas, on affiche un message d'aide
 			// en mode document, mais pas en mode vignette
 			if ($l OR ($mode == 'videos'))
@@ -80,7 +80,7 @@ function inc_encoder_videos_dist($v) {
 // Retourner le code HTML d'utilisation de fichiers envoyes
 //
 
-function texte_encoder_manuel_videos($dir, $inclus = '', $mode = 'videos') {
+function texte_encoder_manuel_videos($dir, $inclus = '') {
 	$fichiers = preg_files($dir);
 	$exts = array();
 	$dirs = array(); 
@@ -133,7 +133,7 @@ function texte_encoder_manuel_videos($dir, $inclus = '', $mode = 'videos') {
 // http://doc.spip.org/@afficher_transferer_upload
 function afficher_transferer_encoder_videos($texte_upload, $dir)
 {
-	$doc = array('upload' => '<b>' . joli_repertoire($dir) . '</b>');
+	$doc = array('upload' => '<strong>' . joli_repertoire($dir) . '</strong>');
 	if (!$texte_upload) {
 		return "\n<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
 			_T('spipmotion:info_installer_encoder_ftp', $doc).
@@ -145,7 +145,7 @@ function afficher_transferer_encoder_videos($texte_upload, $dir)
 		"<div style='color: #505050;' id='encodage'><div id='encodage_txt'>"
 		._T('spipmotion:info_selectionner_fichier_encoder', $doc)
 		."&nbsp;:<br /></div>\n" .
-		"\n<select name='chemin' id='chemin_encodage' size='1' class='fondl'>" .
+		"\n<select name='chemin_encodage' id='chemin_encodage' size='1' class='fondl' style='width:100%'>" .
 		$texte_upload .
 		"\n</select>" .
 		"\n</div><div align='".

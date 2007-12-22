@@ -2,7 +2,7 @@
 ## spipmotion : A shell program to convert videos in flv format (flash video)
 ## Version 0.1
 ## Dependancies :
-##   * ffmpeg with mp3-lame support
+##   * ffmpeg with libmp3lame support
 ## Credits prealables : aozeo - http://www.aozeo.com/blog/40-linux-convertir-videos-flv-ffmpeg-telephone-portable
 
 version="0.1"
@@ -26,7 +26,7 @@ Exemple :
 
 #####################################################
 ##  Ce programme recquiert une version de ffmpeg   ##
-##        compilée avec le support mp3-lame        ##
+##        compilée avec le support libmp3lame        ##
 ## Voir http://kent1.sklunk.net/spip.php?article71 ##
 #####################################################
 "
@@ -139,6 +139,6 @@ fi
 ############# ON UTILISE FFMPEG ################
 
 echo "ah$chemin"
-"$chemin" -i $entree -acodec mp3 -f flv -s $size -b $bitrate.kb -ab $audiobitrate -ar $audiofreq -r $fps -y $sortie
+"$chemin" -i $entree -acodec libmp3lame -f flv -s $size -b $bitrate.kb -ab $audiobitrate -ar $audiofreq -r $fps -y $sortie
 
 echo "$succes"

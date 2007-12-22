@@ -18,6 +18,7 @@ include_spip('inc/actions');
 
 function action_encoder_video_dist(){
 	global $redirect;
+	
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
@@ -36,7 +37,7 @@ function action_encoder_video_sous_action($id, $id_document, $mode, $type, &$doc
 
 	$hash = _request('hash');
 	$url = _request('url');
-	$chemin = _request('chemin');
+	$chemin = _request('chemin_encodage');
 	$ancre = _request('ancre');
 	$sousaction1 = _request('sousaction1');
 	$sousaction2 = _request('sousaction2');
@@ -54,7 +55,7 @@ function action_encoder_video_sous_action($id, $id_document, $mode, $type, &$doc
 	 ($sousaction3 ? 3 : 
 	  ($sousaction4 ? 4 :
 	   $sousaction5 ))));
-
+	   	spip_log("$chemin");
      $path = ($sousaction1 ? ($_FILES ? $_FILES : $GLOBALS['HTTP_POST_FILES']) :
 	     ($sousaction2 ? $url : $chemin));
 
@@ -95,6 +96,7 @@ function inc_encoder_video3_dist($path, $mode, $type, $id, $id_document,$hash, $
 	if (!$path || strstr($path, '..')) return;
 	    
 	$upload = determine_upload();
+		spip_log($upload);
 	if ($path != '/' AND $path != './') $upload .= $path;
 
 	if (!is_dir($upload))
@@ -116,7 +118,7 @@ function inc_encoder_video3_dist($path, $mode, $type, $id, $id_document,$hash, $
 }
 
 function encoder_video($files, $mode, $type, $id, $id_document, $hash, $redirect, &$actifs, $iframe_redirect)
-{
+{	spip_log("$files");
 	$encodage = charger_fonction('encodage', 'inc');
 
 	foreach ($files as $arg) {

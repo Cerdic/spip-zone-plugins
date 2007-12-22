@@ -11,20 +11,18 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions'); // *action_auteur et determine_upload
-include_spip('inc/date');
-include_spip('inc/documents');
-include_spip('base/abstract_sql');
+
 
 function inc_spipmotion_dist($id_article) {
 	global $connect_id_auteur, $connect_statut;
 	$id_article = _request('id_article');
 
-	// Ajouter le formulaire d'ajout de videos
-	$s = afficher_videos_colonne($id_article, 'article', true);
+	// Ajouter le formulaire d'encodage de videos
+	$s = afficher_encodage($id_article, 'article', true);
 	return $s;
 }
 
-function afficher_videos_colonne($id, $type="article", $flag_modif = true) {
+function afficher_encodage($id, $type="article", $flag_modif = true) {
 	
 	include_spip('inc/autoriser');
 	// il faut avoir les droits de modif sur l'article pour pouvoir uploader !
@@ -59,11 +57,10 @@ function afficher_videos_colonne($id, $type="article", $flag_modif = true) {
 			'iframe_script' => generer_url_ecrire("documents_colonne_video","id=$id&type=$type",true)
 		));
 	}
-
-		$ret .= "</div>";
+	$ret .= "</div>";
 	
   if (test_espace_prive()){
-	$ret .= "<script src='"._DIR_PLUGIN_SPIPMOTION."/javascript/async_encode.js' type='text/javascript'></script>\n";
+	$ret .= "<script src='"._DIR_PLUGIN_SPIPMOTION."javascript/async_encode.js' type='text/javascript'></script>\n";
 	$ret .= <<<EOF
 	<script type='text/javascript'>
 	$("form.form_encode").async_encode(async_encode_article_edit)
