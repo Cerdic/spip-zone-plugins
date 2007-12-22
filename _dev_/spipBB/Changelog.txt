@@ -1,4 +1,9 @@
-﻿2007-12-20  chryjs  <chryjs!@!free!.!fr>
+﻿2007-12-22  chryjs  <chryjs!@!free!.!fr>
+
+ * Corrections petites erreurs (bug report BB)
+ * Correction prefixes et autres librairie 192
+ 
+2007-12-20  chryjs  <chryjs!@!free!.!fr>
 
  * Rajout page racine connexion manquante
  * Corrections d'inclusions dans spipbb_fonctions le fichier public/spipbb_balises est obsolete

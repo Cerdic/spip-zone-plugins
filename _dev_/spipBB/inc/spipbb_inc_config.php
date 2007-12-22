@@ -71,7 +71,7 @@ function spipbb_check_plugins_config() {
 	if (version_compare(substr($GLOBALS['spip_version'],0,5),'1.945','<')) {
 		if (!is_array($tab_plugins_installes['BALISESESSION'])) {
 			$resultat.= "<li>"._T('spipbb:admin_plugin_requis_erreur')." BALISESESSION</li>";
-			$res['BALISESESSION']=true;
+			$res['BALISESESSION']=false;
 		} else {
 			$resultat.= "<li>"._T('spipbb:admin_plugin_requis_ok')." BALISESESSION</li>";
 			$res['BALISESESSION']=true;

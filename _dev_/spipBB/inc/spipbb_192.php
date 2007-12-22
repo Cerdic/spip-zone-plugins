@@ -128,12 +128,15 @@ function sql_query($ins, $serveur='')
 if (!function_exists('spip_mysql_query')) {
 function spip_mysql_query($query, $serveur='')
 {
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
-	$prefixe = $connexion['prefixe'];
-	$link = $connexion['link'];
-	$db = $connexion['db'];
+	global $table_prefix;
 
-	$query = traite_query($query, $db, $prefixe);
+	// c : 22/12/7 n'existe pas en 192
+	//$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	//$prefixe = $connexion['prefixe']; -> $table_prefix
+	$link = $GLOBALS['spip_mysql_link']; // $connexion['link'];
+	$db = $GLOBALS['mysql_rappel_connexion']; //$connexion['db'];
+
+	$query = traite_query($query, $db, $table_prefix);
 
 	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
 	$r = $link ? mysql_query($query, $link) : mysql_query($query);
@@ -215,13 +218,15 @@ function trace_query_chrono($m1, $m2, $query, $result)
 if (!function_exists('spip_mysql_explain')) {
 function spip_mysql_explain($query, $serveur='')
 {
+	global $table_prefix;
 	if (strpos($query, 'SELECT') !== 0) return array();
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
-	$prefixe = $connexion['prefixe'];
-	$link = $connexion['link'];
-	$db = $connexion['db'];
+	// c : 22/12/7 n'existe pas en 192
+	//$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	//$prefixe = $connexion['prefixe']; // $table_prefix
+	$link = $GLOBALS['spip_mysql_link']; // $connexion['link'];
+	$db = $GLOBALS['mysql_rappel_connexion']; //$connexion['db'];
 
-	$query = 'EXPLAIN ' . traite_query($query, $db, $prefixe);
+	$query = 'EXPLAIN ' . traite_query($query, $db, $table_prefix);
 	$r = $link ? mysql_query($query, $link) : mysql_query($query);
 	return spip_mysql_fetch($r, MYSQL_ASSOC);
 } } // spip_mysql_explain
