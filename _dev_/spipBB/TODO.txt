@@ -30,7 +30,6 @@ Interface publique - Générale :
 Bugs et autres elements non finis :
 -* Problemes titres _T et _L // traductions à revoir corriger finir
 -* Bug dans le move d'un forum des fois ça ne fonctionne pas... (valider les cas et corriger)
--* Membres les plus actifs vérifier le recalcul...
 -* Utiliser les descriptions des mots cles (ajoutees dans lang/... mot_...)
 -* Gestion des annonces / postits / Fermes a tester /controler
 -* Affichage des annonces / postits / Fermes

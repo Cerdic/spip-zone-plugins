@@ -83,7 +83,7 @@ function exec_spipbb_inscrits() {
 	# affichage
 	#
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('spipbb:titre_page_'._request('exec')), "forum", "spipbb_admin", '');
+	echo $commencer_page(_T('spipbb:admin_titre_page_'._request('exec')), "forum", "spipbb_admin", '');
 	echo "<a name='haut_page'></a>";
 
 	echo debut_gauche('',true);
@@ -101,7 +101,7 @@ function exec_spipbb_inscrits() {
 	// adresse retour des tranche
 	$retour_spipbb_local = generer_url_ecrire("spipbb_inscrits");
 
-	echo gros_titre(_T('spipbb:inscrits_visiteurs'),'',false);
+	echo gros_titre(_T('spipbb:admin_titre_page_'._request('exec')),'',false);
 
 	// Présenter valeurs de la tranche de la requête
 	echo "<div align='center' class='iconeoff verdana2' style='clear:both;'>\n";
@@ -133,11 +133,11 @@ function exec_spipbb_inscrits() {
 			else { echo "<a href='".parametre_url(self(),'tri','nom')."'>"._T('spipbb:auteur')."</a>"; }
 			echo "</td>\n".
 			"<td width='10%' style='text-align:center;'>"._T('spipbb:email')."</td>\n".
-			"<td width='14%' style='text-align:center;'>"._T('date_crea')."</td>\n".
-			"<td width='14%' style='text-align:center;'>"._T('signature')."</td>\n".
-			"<td width='14%' style='text-align:center;'>"._T('spipbb:avatar')."</td>\n".
+			"<td width='14%' style='text-align:center;'>"._T('spipbb:col_date_crea')."</td>\n".
+			"<td width='14%' style='text-align:center;'>"._T('spipbb:col_signature')."</td>\n".
+			"<td width='14%' style='text-align:center;'>"._T('spipbb:col_avatar')."</td>\n".
 			"<td width='8%' style='text-align:center;'>"._T('spipbb:admin_total_posts')."</td>\n".
-			"<td width='2%' style='text-align:center;'>"._T('spipbb:marquer')."</td>\n".
+			"<td width='2%' style='text-align:center;'>"._T('spipbb:col_marquer')."</td>\n".
 			"</tr>\n";
 
 
@@ -184,7 +184,7 @@ function exec_spipbb_inscrits() {
 			"</tr>\n";
 	}
 	echo "</table>\n";
-	echo "<a href=\"javascript:check_switch(true);\">"._T('spipbb:select_all')."</a> :: <a href=\"javascript:check_switch();\">"._T('spipbb:unselect_all')."</a>\n";
+	echo "<div align='right'><a href=\"javascript:check_switch(true);\">"._T('spipbb:bouton_select_all')."</a> :: <a href=\"javascript:check_switch();\">"._T('spipbb:bouton_unselect_all')."</a></div>\n";
 	echo "<div align='right'><input type='submit' name='_spipbb_supprimer' value='"._T('supprimer')."' class='fondo' /></div>\n";
 	echo "</form>\n";
 	echo "<div id='code'></div>";

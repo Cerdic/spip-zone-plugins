@@ -117,6 +117,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'auteur' => 'Auteur',
 
 // B
+'bouton_select_all' => 'Tout s&eacute;lectionner',
+'bouton_unselect_all' => 'Tout d&eacute;-s&eacute;lectionner',
 
 //C
 
@@ -129,6 +131,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choix_rubrique_selection' => 'S&eacute;lectionner un secteur qui sera la base de vos forums. Dedans, chaque sous-rubrique sera un groupe de forums, chaque article publi&eacute; ouvrira un forum.',
 'choix_squelettes' => 'Vous pouvez en choisir d\'autres, mais les fichiers qui remplacent groupeforum.html et filforum.html doivent exister !',
 'citer' => 'Citer',
+'col_avatar' => 'Avatar',
+'col_date_crea' => 'Date inscription',
+'col_marquer' => 'Marquer',
+'col_signature' => 'Signature',
 'config_choix_mots' => 'Choisir le groupe de mot-cl&eacute;s',
 'config_choix_rubrique' => 'Choisir la rubrique contenant les forums spipBB',
 'config_choix_squelettes' => 'Choisir les squelettes utilis&eacute;s',
