@@ -289,6 +289,13 @@ $.fn.activatecrayon = function(percent) {
             this.selectionEnd=position;
           }
         })
+        .keydown(function(e){
+          if(!e.charCode && e.keyCode == 119 /* F8, windows */) {
+              crayon
+              .find("form.formulaire_crayon")
+              .submit();        
+          }        
+        })
         .keypress(function(e){
           if (e.keyCode == 27) {
             me
@@ -301,7 +308,7 @@ $.fn.activatecrayon = function(percent) {
             ((e.charCode||e.keyCode) == 115) || ((e.charCode||e.keyCode) == 83))
             /* ctrl-s, safari */
             || (e.charCode==19 && e.keyCode==19)
-          ) || (!e.charCode && e.keyCode == 119 /* F8, windows */)
+          )
           ) {
             crayon
             .find("form.formulaire_crayon")
