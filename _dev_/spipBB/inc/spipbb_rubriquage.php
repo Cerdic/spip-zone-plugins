@@ -1,19 +1,41 @@
 <?php
-/*
-+-------------------------------------------+
+#---------------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                             #
+#  File    : inc/spipbb_rubriquage                              #
+#  Authors : scoty 2007                                         #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  Contact : scoty!@!koakidi!.!com                              #
+# [fr]   generer arbo rubriques comme spip                      #
+# [en]                                                          #
+#---------------------------------------------------------------#
 
-+-------------------------------------------+
-| generer arbo rubriques comme spip
-+-------------------------------------------+
-*/
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+// * [fr] Acces restreint, plugin pour SPIP * //
+// * [en] Restricted access, SPIP plugin * //
 
-// http://doc.spip.org/@sous_enfant_rub
+if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
+
+// ------------------------------------------------------------------------------
+// voir http://doc.spip.org/@sous_enfant_rub
+// ------------------------------------------------------------------------------
 function sous_enfant_rubfo($collection2){
 	global $lang_dir, $spip_lang_dir, $spip_lang_left;
 	if (!function_exists('debut_block_invisible')) include_spip('inc/vieilles_defs');
 
-	$result3 = sql_query("SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre");
+	$result3 = sql_select("*", "spip_rubriques", "id_parent=$collection2",'', array('0+titre,titre'));
 
 	if (!sql_count($result3)) return '';
 	$retour = debut_block_invisible("enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
@@ -33,10 +55,11 @@ function sous_enfant_rubfo($collection2){
 	$retour .= "</ul>\n\n".fin_block()."\n\n";
 	
 	return $retour;
-}
+} // sous_enfant_rubfo
 
-
-// http://doc.spip.org/@enfant_rub
+// ------------------------------------------------------------------------------
+// voir http://doc.spip.org/@enfant_rub
+// ------------------------------------------------------------------------------
 function enfant_rubfo($collection){
 	global $couleur_foncee, $lang_dir;
 	global $spip_display, $spip_lang_left, $spip_lang_right, $spip_lang;
@@ -44,19 +67,16 @@ function enfant_rubfo($collection){
 
 	$les_enfants = "";
 
-	$res = sql_query("SELECT id_rubrique, id_parent, titre, descriptif, lang 
-					FROM spip_rubriques 
-					WHERE id_parent='$collection' 
-					ORDER BY 0+titre,titre");
+	$result = sql_select("id_rubrique, id_parent, titre, descriptif, lang ", "spip_rubriques", "id_parent=$collection",'', array('0+titre,titre'));
 
 	# compter les forums
-	if($nombre_forums=sql_count($res)) {
+	if($nombre_forums=sql_count($result)) {
 		$flag_ordonne = ($nombre_forums>1)?true:false;
 	}
 	else $flag_ordonne = false;
 
 
-	while($row=sql_fetch($res)) {
+	while($row=sql_fetch($result)) {
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=supprimer_numero($row['titre']);
@@ -88,11 +108,13 @@ function enfant_rubfo($collection){
 
 		if ($spip_display == 4) $les_enfants .= "";
 
+		if (function_exists('bouton_block_depliable')) $bouton = bouton_block_depliable("&nbsp;",false,"enfants$id_rubrique");
+		else $bouton = bouton_block_invisible("enfants$id_rubrique"); 
 
-		$les_enfants .= "<tr class='verdana3' bgcolor='".$coul_ligne."'><td width='6%' valign='top'>"
+		$les_enfants .= "\n<tr class='verdana3' bgcolor='".$coul_ligne."'><td width='6%' valign='top'>"
 			. http_img_pack(($id_parent ? "rubrique-24.gif" : $icone_secteur), '','')
 			. "</td><td width='2%' valign='top'>"
-			. (!$les_sous_enfants ? "" : bouton_block_invisible("enfants$id_rubrique"))
+			. (!$les_sous_enfants ? "" : $bouton)
 			. "</td><td width='93%' valign='top'>"
 			. (!acces_restreint_rubrique($id_rubrique) ? "" : 
 				http_img_pack("admin-12.gif", '', '', _T('image_administrer_rubrique')))
@@ -121,18 +143,18 @@ function enfant_rubfo($collection){
 	changer_typo($spip_lang); # remettre la typo de l'interface pour la suite
 	return $les_enfants;
 
-}
+} // enfant_rubfo
 
-
-
-// http://doc.spip.org/@afficher_enfant_rub
+// ------------------------------------------------------------------------------
+// voir http://doc.spip.org/@afficher_enfant_rub
+// ------------------------------------------------------------------------------
 function afficher_enfant_rubfo($id_rubrique, $afficher_bouton_creer=false) {
 	global  $spip_lang_right;
 
-	echo "\n<table cellpadding='3' cellspacing='0' border='0' width='600'>\n";
+	echo "\n<table cellpadding='3' cellspacing='0' border='0' width='100%'>\n";
 	echo enfant_rubfo($id_rubrique);
 	echo "</table>\n";
 
-}
+} // afficher_enfant_rubfo
 
 ?>

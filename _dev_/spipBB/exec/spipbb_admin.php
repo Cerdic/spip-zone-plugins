@@ -79,7 +79,7 @@ function exec_spipbb_admin() {
 	# affichage
 	#
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(textebrut(typo($titre_salon)), "forum", "spipbb_admin",$id_salon);
+	echo $commencer_page(_T('spipbb:admin_titre_page_'._request('exec'))." : ".textebrut(typo($titre_salon)), "forum", "spipbb_admin",$id_salon);
 	echo "<a name='haut_page'></a>";
 
 
@@ -87,6 +87,10 @@ function exec_spipbb_admin() {
 	spipbb_menus_gauche(_request('exec'),$id_salon);
 
 	echo debut_droite('',true);
+
+	echo debut_cadre_formulaire('',true);
+
+	echo gros_titre(_T('spipbb:admin_titre_page_'._request('exec')),'',false);
 
 	//
 	// présenter UN salon/rubrique
@@ -269,6 +273,8 @@ function exec_spipbb_admin() {
 	//
 	afficher_enfant_rubfo($id_salon);
 
+	echo fin_cadre_formulaire(true);
+
 	echo "<br />";
 
 
@@ -289,7 +295,7 @@ function exec_spipbb_admin() {
 
 
 	echo debut_cadre_formulaire('',true);
-	echo "\n<table cellpadding='3' cellspacing='0' border='0' width='600'>\n";
+	echo "\n<table cellpadding='3' cellspacing='0' border='0' width='100%'>\n";
 	echo "<tr><td colspan='3'><span class='verdana3'><b>"._T('spipbb:derniers_messages')."</b></span></td></tr>\n";
 	while ($row = sql_fetch($res))
 		{
