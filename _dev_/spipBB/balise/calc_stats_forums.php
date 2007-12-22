@@ -24,7 +24,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','>=')) {
+if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
 	include_spip('inc/spipbb_192'); // Compatibilite 192
 }
 

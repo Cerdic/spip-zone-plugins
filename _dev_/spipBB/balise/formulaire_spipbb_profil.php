@@ -49,6 +49,8 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 	$auteur_email = _request('email');
 	$nouveau = _request('nouveau');
 
+	$traiter_chps=array(); // c: 21/12/7 Bug report BB du 2
+
 	if($modif=_request('modif')) {
 	
 		// changement de pass, a securiser en jaja ?
@@ -116,9 +118,7 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 		$support_auteurs=lire_config("spipbb/support_auteurs");
 		$table_support=lire_config("spipbb/table_support");
 		#$champs_gaf = lire_config("spipbb/champs_gaf");
-		
-		$traiter_chps=array();
-		
+				
 		if($support_auteurs=='table' && $table_support!='') {
 			# pour les champs connus GAF on attribue la val. recup
 			foreach($GLOBALS['champs_sap_spipbb'] as $chp => $def) {

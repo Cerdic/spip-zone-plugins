@@ -101,7 +101,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'annonce_dpt' => 'Annonce&nbsp;: ',
 'anonyme' => 'Anonyme',
 'auteur' => 'Auteur',
-'avatar_saisie_url' => 'URL de votre avatar (http://... ...)', ## GAF 0.6
 
 // B
 
@@ -132,11 +131,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //E
 
 'email' => 'E-mail',
-'emploi' => 'Emploi',
 'en_ligne' => 'Qui est en ligne ?',
 'en_reponse_a' => 'En r&eacute;ponse au message',
 'en_rep_sujet_' => '&nbsp;:::&nbsp;Sujet : ',
-
+'extra_avatar_saisie_url' => 'URL de votre avatar (http://... ...)', ## GAF 0.6
+'extra_avatar_saisie_url_info' => 'URL de l\'avatar du visiteur', ## GAF 0.6
+'extra_date_crea' => 'Date de premiere saisie profil SpipBB',
+'extra_date_crea_info' => 'Date de premiere saisie profil SpipBB',
+'extra_emploi' => 'Emploi',
+'extra_localisation' => 'Localisation',
+'extra_loisirs' => 'Loisirs',
+'extra_nom_AIM'=>'Contacts chat (AIM)',
+'extra_nom_MSNM'=>'Contacts chat (MSN Messenger)',
+'extra_nom_yahoo'=>'Contacts chat (Yahoo)',
+'extra_numero_ICQ'=>'Contacts chat (ICQ)',
+'extra_refus_suivi_thread' => '(refus suivi) Ne pas modifier !', ## GAF 0.6
+'extra_refus_suivi_thread_info' => 'Liste des threads pour lesquels on ne souhaite plus recevoir de notification',
+'extra_signature_saisie_texte' => 'Saisir ici le texte de votre signature', ## GAF 0.6+
+'extra_signature_saisie_texte_info' => 'Court texte de signature des messages',
+'extra_visible_annuaire' => 'Apparaitre dans la liste des Inscrits (public)', ## GAF 0.6
+'extra_visible_annuaire_info' => 'Permet de refuser l\'affichage dans l\'annuaire des inscrits en zone public',
 
 //F
 
@@ -185,9 +199,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //L
 
 'liste_inscrits' => 'Liste des membres',
-'localisation' => 'Localisation',
 'login' => 'Connexion',
-'loisirs' => 'Loisirs',
 
 
 //M
@@ -211,13 +223,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 //N
-'nom_AIM'=>'Contacts chat (AIM)',
 'no_message' => 'Aucun sujet ou message ne correspond &agrave; vos crit&egrave;res de recherche',
-'nom_MSNM'=>'Contacts chat (MSN Messenger)',
 'nom_util' => 'Nom d\'utilisateur',
-'nom_Yahoo'=>'Contacts chat (Yahoo)',
 'non' => 'Non',
-'numero_icq'=>'Contacts chat (ICQ)',
 
 //O
 'oui' => 'Oui',
@@ -244,7 +252,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'raison_texte' => 'Pour en connaitre la raison',
 'recherche' => 'Recherche',
 'recherche_elargie' => 'Recherche &eacute;largie',
-'refus_suivi_thread' => '(refus suivi) Ne pas modifier !', ## GAF 0.6
 'reglement' => '<p>Les administrateurs et mod&eacute;rateurs de ce forum s\'efforceront de supprimer 
 				ou &eacute;diter tous les messages &agrave; caract&egrave;re r&eacute;pr&eacute;hensible 
 				aussi rapidement que possible. Toutefois, il leur est impossible de passer en revue tous 
@@ -283,7 +290,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //S
 
 's_abonner_a' => 'RSS . S\'abonner &agrave; : ',
-'signature_saisie_texte' => 'Saisir ici le texte de votre signature', ## GAF 0.6+
 'sign_tempo' => 'R&eacute;alis&eacute; avec <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 'sinscrire'=> 'S\'inscrire',
 'site_propose' => 'Site propos&eacute;',
@@ -340,7 +346,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 //V
-'visible_annuaire' => 'Apparaitre dans la liste des Inscrits (public)', ## GAF 0.6
 'visible_annuaire_forum' => 'Apparaitre dans la liste des Inscrits', ## GAF 0.6
 'visites' => 'Vu',
 'votre_bio' => 'Courte biographie en quelques mots.',
