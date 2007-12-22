@@ -60,7 +60,32 @@ if($GLOBALS['cs_options']) {
 		if(!$lien) return $texte;
 		return cs_propre("[{$texte}->{$lien}]");
 	}
-	
+
+	// Controle (basique!) des 3 balises usuelles p|div|span eventuellement coupees
+	// Attention : simple traitement pour des balises non imbriquees
+	function cs_safebalises($texte) {
+		$texte = trim($texte);
+		// ouvre la premiere balise trouvee fermee
+		if(preg_match(',^(.*)</(.+)>,Ums', $texte, $m) && !preg_match(",<$m[2][ >],", $m[1])) $texte="<$m[2]>$texte";
+		// referme la derniere balise laissee ouverte
+		if(preg_match(',^(.*)[ >]([^ >]*[^/])<,Ums', $rev = strrev($texte), $m) && !preg_match(",>$m[2]/<,", $m[1])) $texte = strrev(">$m[2]/<$rev");
+		// balises <p|span|div> a traiter
+		foreach(array('span', 'div', 'p') as $b) {
+			// ouvrante manquante
+			if(($fin = strpos($texte, "</$b>")) !== false)
+				if(!preg_match(",<{$b}[ >],", substr($texte, 0, $fin)))
+					$texte = "<$b>$texte";
+			// fermante manquante
+			$texte = strrev($texte);
+			if(preg_match(',[ >]'.strrev("<{$b}").',', $texte, $reg)) {
+				$fin = strpos(substr($texte, 0, $deb = strpos($texte, $reg[0])), strrev("</$b>"));
+				if($fin===false || $fin>$deb) $texte = strrev("</$b>").$texte;
+			}
+			$texte = strrev($texte);
+		}
+		return $texte;
+	}	
+
 	// inclusion des fonctions pre-compilees
 	if (!$GLOBALS['cs_fonctions']) include_once(_DIR_CS_TMP.'mes_fonctions.php');
 	cs_log(' -- sortie de cout_fonctions... cs_fonctions = ' . intval($GLOBALS['cs_fonctions']));

@@ -12,27 +12,6 @@ function decoupe_introduire($texte) {
 }
 $GLOBALS['cs_introduire'][] = 'decoupe_introduire';
 
-// controle des 3 balises usuelles p|div|span eventuellement coupees
-// simple traitement pour les balises non imbriquees
-function decoupe_safebalises($texte) {
-	$texte = trim($texte);
-	// balises <p|span|div> a traiter
-	foreach(array('span', 'div', 'p') as $b) {
-		// ouvrante manquante
-		if(($fin = strpos($texte, "</$b>")) !== false)
-			if(!preg_match(",<{$b}[ >],", substr($texte, 0, $fin)))
-				$texte = "<$b>$texte";
-		// fermante manquante
-		$texte = strrev($texte);
-		if(preg_match(',[ >]'.strrev("<{$b}").',', $texte, $reg)) {
-			$fin = strpos(substr($texte, 0, $deb = strpos($texte, $reg[0])), strrev("</$b>"));
-			if($fin===false || $fin>$deb) $texte = strrev("</$b>").$texte;
-		}
-		$texte = strrev($texte);
-	}
-	return $texte;
-}
-
 function onglets_callback($matches) {
 	// au cas ou on ne veuille pas d'onglets, on remplace les '++++' par un filet et on entoure d'une classe.
 	if ($_GET['cs']=='print') {
@@ -47,7 +26,7 @@ function onglets_callback($matches) {
 	$pages = explode(_decoupe_SEPARATEUR, $matches[1]);
 	foreach ($pages as $p) {
 		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $p, 2);
-		$t = array(trim(textebrut(nettoyer_raccourcis_typo($t[0]))), decoupe_safebalises($t[1]));
+		$t = array(trim(textebrut(nettoyer_raccourcis_typo($t[0]))), cs_safebalises($t[1]));
 		if(strlen($t[0].$t[1])) $contenus[] = _onglets_CONTENU.$t[0]."</a></h2>\n\n".$t[1].'</div>';
 	}
 	return _onglets_DEBUT.join('', $contenus).'</div>'._onglets_FIN;
@@ -56,8 +35,9 @@ function onglets_callback($matches) {
 // fonction appellee sur les parties du texte non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_onglets_rempl($texte) {
 	// surcharge possible de _decoupe_SEPARATEUR par _decoupe_COMPATIBILITE
-	if (defined('_decoupe_COMPATIBILITE'))
-		$texte = str_replace(_decoupe_COMPATIBILITE,_decoupe_SEPARATEUR, $texte);
+	$rempl = preg_quote(_decoupe_SEPARATEUR,',')
+		. (defined('_decoupe_COMPATIBILITE')?'|'.preg_quote(_decoupe_COMPATIBILITE,','):'');
+	$texte = preg_replace(",\s*($rempl)\s*,", "\n\n"._decoupe_SEPARATEUR."\n\n", $texte);
 	// si pas de balise, on sort
 	if (strpos($texte, '<')===false) return $texte;
 	// compatibilite avec la syntaxe de Pierre Troll
@@ -138,7 +118,7 @@ function decouper_en_pages_rempl($texte) {
 			$milieu[] = "<span style=\"color: lightgrey; font-weight: bold; text-decoration: underline;\">$i</span>";
 		} else {
 			// isoler la premiere ligne non vide de chaque page pour l'attribut title
-			$page = supprimer_tags(decoupe_safebalises(cs_introduire($pages[$i-1])));
+			$page = supprimer_tags(cs_safebalises(cs_introduire($pages[$i-1])));
 			$title = preg_split("/[\r\n]+/", trim($page), 2);
 			$title = attribut_html(/*propre*/(couper($title[0], _decoupe_NB_CARACTERES)));//.' (...)';
 			$title = _T('cout:page_lien', array('page' => $i, 'title' => $title));
@@ -152,7 +132,7 @@ function decouper_en_pages_rempl($texte) {
 	$pagination = $num_pages>3?"$debut\n$precedent\n$milieu\n$suivant\n$fin":"$precedent\n$milieu\n$suivant";
 	$pagination1 = "<div id='decoupe_haut' class='pagination decoupe_haut'>\n$pagination\n</div>\n";
 	$pagination2 = "<div id='decoupe_bas' class='pagination decoupe_bas'>\n$pagination\n</div>\n";
-	$page = decoupe_safebalises($pages[$artpage-1]);
+	$page = cs_safebalises($pages[$artpage-1]);
 	if (isset($_GET['decoupe_recherche'])) {
 		include_spip('inc/surligne');
 		$page = surligner_mots($page, $_GET['decoupe_recherche']);
