@@ -1,0 +1,33 @@
+#HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
+#HTTP_HEADER{"Pragma: no-cache"}
+
+<!-- lilo-statut-public [	
+	(#REM)
+
+	// formulaires/statut_public.html
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	N'apparait que si connecté
+	
+]-->
+[<div id='lilo-statut-public' [(#ENV{statut_style})]>
+<div class='row'>
+[(#ENV{voir_logo_auteur}|match{oui}|?{' '})
+	[<div id='lilo-tete'>(#ENV{logo_auteur}||image_reduire{24}|inserer_attribut{'alt',logo de [(#ENV{nom})]})</div>]]
+	<div id='lilo-buste'>
+		<span class='lilo-nom'>[(#ENV{nom})]</span><span class='lilo-login'><br />((#ENV{login}) #[(#ENV{id_auteur})])</span>
+		</div>
+	<div id='lilo-ventre'>
+	[(#ENV{voir_boutons_admins}|match{oui}|?{' '})
+		[(#FORMULAIRE_ADMIN)] ]<a href="[(#URL_LOGOUT)]"><:icone_deconnecter:></a>
+		</div>
+</div>
+</div>
+<script language="JavaScript" type="text/JavaScript">
+$('.spip-admin-boutons').attr('class','spip-admin-boutons-lilo');
+$('.spip-admin-bloc').attr('class','spip-admin-bloc-lilo');
+</script>
+]

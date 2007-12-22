@@ -1,0 +1,64 @@
+[(#REM)
+
+	// login.html
+	
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+
+
+	Le fichier est en cache dans SPIP, mais les navigateurs ne doivent pas
+	conserver cette page en memoire
+]
+#CACHE{24 * 3600}
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title><:login_acces_prive:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<meta name="robots" content="none" />
+<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" />
+#INSERT_HEAD
+<link rel='stylesheet' href='[(#CHEMIN{lilo_prive.css}|compacte)]' type='text/css' />
+<style type="text/css">
+<!--
+	.formulaire_spip { text-align: #LANG_LEFT;  }
+	.formulaire_menu_lang { float: #LANG_RIGHT; }
+	.formulaire_login label { color:##ENV{couleur_foncee,3874b0}; }
+	.spip_bouton input { float: #LANG_RIGHT; background-color: ##ENV{couleur_foncee,3874b0}; }
+	#bloc_session_remember { text-align:#LANG_LEFT}
+-->
+</style>
+<script language="JavaScript" type="text/JavaScript">
+jQuery().ready(function(){
+	$('#var_login_id').focus();
+});
+</script>
+</head>
+<body class="page_login">
+
+<div id='buste'>
+	<h1 class="spip">#NOM_SITE_SPIP<br /><small><:login_acces_prive:></small></h1>
+	<div id='ventre'>
+		#MENU_LANG_ECRIRE
+		<div class="formulaire_spip formulaire_login">
+			[(#LOGO_SITE_SPIP|!={}|?{' '})[(#LOGO_SITE_SPIP||image_reduire{128,128}
+				|inserer_attribut{'alt','Logotype du site'}|inserer_attribut{'class','lilo-logo'})]]
+			[(#LOGO_SITE_SPIP|!={}|?{'',' '})[(#LOGO_LILO_SPIP)]]
+			#LOGIN_PRIVE
+
+			<p class="login-options">
+			[&#91;<a href="#URL_PAGE{spip_inscription,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{mode_inscription})" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a>&#93;]
+			&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:login_motpasseoublie:></a>&#93;
+			&#91;<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>&#93;
+			</p>
+
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

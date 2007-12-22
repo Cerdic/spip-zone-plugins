@@ -1,0 +1,140 @@
+﻿/* 
+
+	// lilo_prive.css 
+
+	// $LastChangedRevision: 16682 $
+	// $LastChangedBy: paladin@quesaco.org $
+	// $LastChangedDate: 2007-12-07 19:45:20 +0100 (mer., 07 nov. 2007) $
+*/
+
+	/*
+		Si modification, vider le cache (le css est compressé par 'compacte'
+	*/
+
+/* uniquement chargée par login.html */
+
+html { height:100%; background-color: #ccc; }
+body.page_login { 
+	height:100%; 
+	background-color: #ccc;
+	text-align: center;
+	font: 90% Verdana, Tahoma, Arial, Helvetica, sans-serif;
+}
+fieldset { border:0; }
+#buste {
+	height:50%;
+	line-height:50%;
+	position:relative;
+	top:25%;
+	text-align: center;
+}
+h1 {
+	color:#fff;
+	line-height:1.4em;
+	font-weight: 100;
+	font-size:140%;
+}
+#ventre {
+	border: 0;
+}
+#buste, h1, #ventre {
+	margin: 0 auto; padding:0; width:700px;
+}
+.formulaire_spip {
+	text-align: left;
+	font-size: 90%; 
+}
+.formulaire_menu_lang {
+	float: right;
+}
+.formulaire_menu_lang label { display: none; }
+.formulaire_login { 
+	clear: both; 
+}
+#lilo-panel {
+	margin-left:132px;
+}
+.formulaire_login fieldset { 
+	margin:0;
+	padding:1em;
+	display:block;
+}
+.formulaire_login label, #lilo_login label {
+	display:block;
+	width:150px;
+	float:left;
+	color:#fff;
+	text-align:right;
+	line-height:1.4em;
+	padding-right:1ex;
+	font-size:110%;
+}
+.forml { width: 12em; font-family: inherit; font-size: inherit; }
+.spip_bouton { 
+	position:relative;
+	display:block;
+	height:3em;
+}
+.spip_bouton input { 
+	position:absolute;
+	float: right; 
+	background-color: red;
+	color:#fff;
+	bottom:0;
+	right:0;
+	padding:0.1em 2ex;
+}
+div.reponse_formulaire, .reponse_formulaire p {
+	font-weight: bold; 
+	color: #fff;
+	background-color: #f00;
+	height:auto !important;
+	margin:0 0 1em; padding:0 1ex;
+	line-height:1.3em;
+}
+.reponse_formulaire legend {
+	background-color:#000; color:#fff;
+	margin-top:0;
+	line-height:normal;
+	font-size:normal;
+	padding:0 1ex;
+}
+.reponse_formulaire p {
+	margin:1ex; padding:1ex;
+}
+a { color: #e86519; text-decoration: none; }
+.lilo-logo {
+	height: 128px;
+	width: 128px;
+	float:left;
+	display:block;
+	margin-left:16px;
+}
+.login-options {
+	text-align: center;
+	line-height:1.4em;
+}
+#bloc_session_remember { width:auto;height:1.4em; text-align:left; }
+#bloc_session_remember .marge { width:150px;float:left;height:1.4em; }
+#bloc_session_remember input { display:block; float:left;width:2em; }
+#bloc_session_remember label { display:block;width:auto; }
+
+#lilo_login {
+	font: normal 100%/normal "Myriad Web Pro", Verdana, Arial, Helvetica, sans-serif;
+	color: #fff;
+	background: #ccc;
+	text-align: left;
+	white-space: nowrap;
+	display: block;
+	border: none;
+	position: static;
+	margin: 0px;
+	padding: 0px;
+	height: auto;
+	width: auto;
+}
+#lilo_login .forml {
+	height: 1.4em;
+	display:inline;
+	color: #000;
+}
