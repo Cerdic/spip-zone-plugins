@@ -15,7 +15,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if(defined("_PGL_PLUGIN_GLOBALES_LIB") && _PGL_PLUGIN_GLOBALES_LIB) return;
-define("_PGL_PLUGIN_GLOBALES_LIB", true);
+define("_PGL_PLUGIN_GLOBALES_LIB", 20071222.1814); //date.heure
+
+// HISTORY:
+// CP-20071222: optimisation __plugin_boite_meta_info() pour plugin en mode stable et mode dev
 
 include_spip("inc/plugin");
 
@@ -188,9 +191,24 @@ if(!function_exists('__plugin_boite_meta_info')) {
 					. "</div>\n"
 				: ""
 				;
-			//$result .= __plugin_boite_meta_info_liste($info, true); // pour DEBUG
-			$result .= __plugin_boite_meta_info_liste($info, false);
-			$result .= __plugin_boite_meta_info_liste($meta_info, true);
+			if(isset($info['etat']) && ($info['etat']=='stable')) {
+			// en version stable, ne sort plus les infos de debug
+				foreach(array('description','lien','auteur') as $key) {
+					if(isset($info[$key]) && !isset($meta_info[$key])) {
+						$meta_info[$key] = $info[$key];
+					}
+				}
+				$result .= __plugin_boite_meta_info_liste($meta_info, true) // nom, etat, dir, version, description, lien, auteur
+					;
+			}
+			else {
+			// un peu plus d'info en mode test et dev
+				$mode_dev = (isset($info['etat']) && ($info['etat']=='dev'));
+				$result .= 
+					__plugin_boite_meta_info_liste($meta_info, true) // nom, etat, dir, version
+					. __plugin_boite_meta_info_liste($info, $mode_dev)  // et tout ce qu'on a en magasin
+					;
+			}
 			if(!empty($result)) {
 				$result = ""
 					. debut_cadre_relief('plugin-24.gif', true, '', $prefix)
