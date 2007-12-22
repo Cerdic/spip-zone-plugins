@@ -7,6 +7,7 @@
  * Liste des messages publiés par un membre
  * Correction inclusion erronee de spipbb_192 dans genie
  * Gestion des bans (login/ip/email)
+ * Correction regression : erreur d'appel sql_showtable pour permettre l'adaptation (mutualisation) bug report Gurdil
  
 2007-12-20  chryjs  <chryjs!@!free!.!fr>
 
