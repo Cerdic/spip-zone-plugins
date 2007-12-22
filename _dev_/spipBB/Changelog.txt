@@ -5,6 +5,8 @@
  * Correction regression
  * Suppression de fichiers obsoletes (archive trop lourde)
  * Liste des messages publiés par un membre
+ * Correction inclusion erronee de spipbb_192 dans genie
+ * Gestion des bans (login/ip/email)
  
 2007-12-20  chryjs  <chryjs!@!free!.!fr>
 

@@ -18,6 +18,7 @@ Interface Privée - Import PhpBB :
 
 Interface Privée - Anti spam :
 -* Anti spam : sur le login, IP (ban)
+-* Gestion des bans : bug avec ajax !
 
 Interface publique - Générale :
 -* Gestion avatar : a ameliorer + téléchargement (droits ?)
