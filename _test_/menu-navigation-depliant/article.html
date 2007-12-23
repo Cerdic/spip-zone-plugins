@@ -41,7 +41,7 @@
 			#DEBUT_SURLIGNE
 			[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
 			<br class="nettoyeur" />
-			[<p class="#EDIT{hyperlien} lien"><:voir_en_ligne:> : <a href="../dist/(#url_site)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			[<p class="#EDIT{hyperlien} lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 			[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>]
 			#FIN_SURLIGNE
 
@@ -89,7 +89,7 @@
 
 			[(#REM) Forum de l'article ]
 			<a href="#forum" name="forum" id="forum"></a>
-			[<h2 class="forum-repondre"><a href="../dist/(#parametres_forum:url_reponse_forum)"><:repondre_article:></a></h2>]
+			[<h2 class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></h2>]
 			<INCLURE{fond=inc-forum}{id_article}>
 
 		</div><!-- fin contenu -->
