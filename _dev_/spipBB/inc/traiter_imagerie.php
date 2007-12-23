@@ -57,8 +57,7 @@ function smileys($chaine) 	{
 	}
 	
 	while (list($nom,$chem) = each($listsmil)) {
-		$smil_html = "<img src=\"".$chem."\" border=\"0\" title=\"".$nom."\" 
-						alt=\"smil\" align=\"baseline\" />";
+		$smil_html = "<img src='".$chem."' style='border:0' title='".$nom."' alt='smil' align='baseline' />";
 		$chaine = str_replace(":".$nom, $smil_html , $chaine);
 	}
 	return $chaine;
@@ -75,15 +74,15 @@ function smileys($chaine) 	{
 */
 function tableau_smileys($cols='',$return=true) {
 	$listimag = genere_list_smileys(_DIR_SMILEYS_SPIPBB);
-	// nombre de colonnes (2 par défaut) (pas trop large pour GAF ! !!)
-	if($cols=='') { $cols=2; }
+	// nombre de colonnes (2 par défaut) (pas trop large pour GAF ! !!) c: 23/12/7 Il vaut mieux 3 ou reduire l'espace disponible ou le nombre d'emoticons
+	if($cols=='') { $cols=3; }
 	$compte=0;
 
-	$aff = "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"1\" border=\"0\"><tr>\n";
+	$aff = "<table width='100%' cellspacing='0' cellpadding='1' border='0'><tr>\n";
 	while (list($nom,$chem) = each($listimag)) { 
-		$aff.= "<td valign=\"bottom\" class=\"verdana1\"><div align=\"center\">
-			<a href=\"javascript:emoticon(':".$nom."')\">
-			<img src=\"".$chem."\" border=\"0\" title=\"smiley - ".$nom."\" />
+		$aff.= "<td style='vertical-align:bottom' class='verdana1'><div style='text-align:center'>\n
+			<a href=\"javascript:emoticon(':".$nom."')\">\n
+			<img src='".$chem."' style='border:0' title='smiley - ".$nom."' />\n
 			</a></div></td>\n";
 		
 		$compte++; 

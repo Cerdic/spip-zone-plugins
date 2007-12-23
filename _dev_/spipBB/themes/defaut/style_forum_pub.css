@@ -174,7 +174,7 @@ background-position: center;
 
 td.aff_avatar { width:60px; vertical-align:top; text-align:center; }
 
-td.col_smileys { width:20%; vertical-align:top; padding-top:70px; }
+td.col_smileys { width:20%; vertical-align:top; padding-top:7px; }
 
 td.date_sujet { vertical-align:top; }
 td.date_sujet span {

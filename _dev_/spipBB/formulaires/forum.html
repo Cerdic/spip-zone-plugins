@@ -35,7 +35,7 @@
 >
 [(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
 	<fieldset>
-	<legend><:mots_clefs:> : #TITRE</legend>
+	<legend><:mots_clefs:>[(#REM) c: 23/12/7 utilite de : #TITRE ici ?]</legend>
 		<INCLURE{fond=formulaires/choix_mots}{id_groupe}{ajouter_mot}{unseul}>
 	</fieldset>
 ]</BOUCLE_G>
@@ -66,7 +66,7 @@
 		[(#ENV**{texte}|barre_forum_citer{<:spipbb:aecrit:>,12,40})]
 	</fieldset>
 		<br />
-		[<p>(#ENV*{table})</p>]
+		[(#REM) c: 23/12/7 que faire de ce parametre ici ? <!-- p>( #ENV*{table} )</p -->]
 	<fieldset class="spip_encadrer">
 			<legend><:forum_lien_hyper:></legend>
 			<p><:forum_page_url:></p>
@@ -78,16 +78,20 @@
 			</label></p>
 	</fieldset>
 		<br />
+		
+		[(#REM) chryjs : 23/12/7 on n'affiche la demande que si l'auteur est anonyme]
+		[(#SESSION{id_auteur}|=={''}|?{' ',''})
 		<fieldset class="spip_encadrer">
 			<legend><:forum_qui_etes_vous:></legend>
 			<p><label><:forum_votre_nom:>
-				<input type="text" name="auteur" value="[(#ENV{auteur})]" class="forml" size="40" [(#ENV{disabled})] />
+				<input type="text" name="auteur" value="[(#ENV{auteur}||sinon{'Anonyme'})]" class="forml" size="40" [(#ENV{disabled})] />
 			</label></p>
 			<p><label><:forum_votre_email:>
 				<input type="text" name="email_auteur" value="[(#ENV{email_auteur})]" class="forml" size="40" [(#ENV{disabled})] />
 			</label></p>
 		</fieldset>
 		<br />
+		]
 		
 		[(#REM) Piege a robots spammeurs ]
 		<p style='display:none;'><label for="nobot"><:antispam_champ_vide:></label>

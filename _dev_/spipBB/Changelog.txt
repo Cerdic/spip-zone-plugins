@@ -1,4 +1,8 @@
-﻿2007-12-22  chryjs  <chryjs!@!free!.!fr>
+﻿2007-12-23  chryjs  <chryjs!@!free!.!fr>
+
+ * Petit nettoyage XHTML
+
+2007-12-22  chryjs  <chryjs!@!free!.!fr>
 
  * Corrections petites erreurs (bug report BB)
  * Correction prefixes et autres librairie 192
