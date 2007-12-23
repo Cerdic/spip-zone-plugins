@@ -10,7 +10,7 @@
 	 -->
 	<nom>Menu de navigation d&eacute;pliant</nom>
 	<auteur>cpaulus@quesaco.org</auteur>
-	<version>0.21</version>
+	<version>0.22</version>
 	<version_base>0.01</version_base>
 	<icon>images/menudep-64.png</icon>
 	<etat>test</etat>
