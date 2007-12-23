@@ -141,13 +141,11 @@ function set_cs_metas_pipelines_pipeline($infos_pipelines, $pipeline) {
 		$a = &$infos_pipelines[$pipeline];
 		if(is_array($a['inline'])) foreach ($a['inline'] as $inc) $code .= "$inc\n";
 		if(is_array($a['inclure'])) foreach ($a['inclure'] as $inc) $code .= "include_spip('outils/$inc');\n";
-		if(is_array($a['fonction'])) foreach ($a['fonction'] as $fonc) $code .= "if (function_exists('$fonc')) \$flux = $fonc(\$flux);\n\telse spip_log('Erreur - $fonc(\$flux) non definie !');\n";
+		if(is_array($a['fonction'])) foreach ($a['fonction'] as $fonc) $code .= "if (function_exists('$fonc')) \$flux=$fonc(\$flux);\n\telse spip_log('Erreur - $fonc(\$flux) non definie !');\n";
 	}
 	$cs_metas_pipelines[$pipeline] = $code;
 cs_log("set_cs_metas_pipelines_pipeline($pipeline) : strlen=".strlen($code));
-	$fichier_dest = _DIR_CS_TMP . "$pipeline.php";
-cs_log(" -- fichier_dest = $fichier_dest");
-	ecrire_fichier($fichier_dest, '<'."?php\n// Code de controle pour le plugin 'Couteau Suisse'\n$code?".'>');
+	return "# Copie du code code utilise en eval() pour le pipeline '$pipeline(\$flux)'\n$code";
 }
 
 // est-ce que $pipe est un pipeline ?
@@ -356,7 +354,11 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	// installation de $cs_metas_pipelines
 	set_cs_metas_pipelines_fichier($infos_pipelines, 'options');
 	set_cs_metas_pipelines_fichier($infos_pipelines, 'fonctions');
-	foreach($pipelines_utilises as $pipe) set_cs_metas_pipelines_pipeline($infos_pipelines, $pipe);
+	$code = array();
+	foreach($pipelines_utilises as $pipe) $code[] = set_cs_metas_pipelines_pipeline($infos_pipelines, $pipe);
+	if($nb=count($code))
+		ecrire_fichier(_DIR_CS_TMP . "pipelines.php", 
+			'<'."?php\n// Code de controle pour le plugin 'Couteau Suisse' : $nb pipeline(s) actif(s)\n\n".join("\n", $code).'?'.'>');
 }
 
 // retire les guillemets extremes s'il y en a

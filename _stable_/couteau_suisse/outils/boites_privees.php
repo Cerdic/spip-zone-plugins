@@ -75,6 +75,12 @@ function cs_formatspip($id_article){
 			. fin_cadre_enfonce(true);
 }
 
+function cs_listeulli($res) {
+	if(!count($res)) $res[] = _T('cout:variable_vide');
+	$li = '<li style="margin:0.2em 0.4em;">';
+	return "<p><ul style='list-style-type:none; padding:0;margin:0;'>$li".join("</li>$li", $res).'</li></ul></p>';
+}
+
 function cs_derniers_connectes($fetch){ 
 	$query = spip_query("SELECT nom,statut,email,en_ligne FROM spip_auteurs ORDER BY en_ligne DESC LIMIT 10"); 
 	$res = array(); 
@@ -83,8 +89,7 @@ function cs_derniers_connectes($fetch){
 		'nom' => cs_lien($row['email'], $row['nom']),
 		'date' => $row['en_ligne']
 	));
-	if(!count($res)) $res[] = _T('cout:variable_vide');
-	return '<p>'.join('<br/>', $res).'</p>';
+	return cs_listeulli($res);
 } 
 
 function cs_non_confirmes($fetch){ 
@@ -95,8 +100,7 @@ function cs_non_confirmes($fetch){
 		'nom' => cs_lien($row['email'], $row['nom']),
 		'date' => $row['maj']
 	)); 
-	if(!count($res)) $res[] = _T('cout:variable_vide');
-	return '<p>'.join('<br/>', $res).'</p>';
+	return cs_listeulli($res);
 } 
 
 ?>

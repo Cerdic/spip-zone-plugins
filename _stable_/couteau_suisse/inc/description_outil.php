@@ -78,7 +78,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 //cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
 	$ok_input = $ok_valeur = $ok_visible = '';
 	$outil['nb_variables'] = 0; $variables = array();
-	for($i=0;$i<count($t);$i+=2) if (strlen($var=trim($t[$i+1]))) {
+	for($i=0;$i<count($t);$i+=2) if (isset($t[$i+1]) && strlen($var=trim($t[$i+1]))) {
 		// si la variable est presente on fabrique le input
 		if (isset($cs_variables[$var])) {
 			description_outil_une_variable(

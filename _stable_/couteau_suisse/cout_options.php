@@ -87,7 +87,7 @@ if($zap) {
 	// si une installation a eu lieu...
 	if (defined('_CS_INSTALLATION')) {
 		// lancer la procedure d'installation pour chaque outil
-		cs_log("$rand -- cs_installe_outils...");
+		cs_log(' -- cs_installe_outils...');
 		cs_installe_outils();
 	}
 	

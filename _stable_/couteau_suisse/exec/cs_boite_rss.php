@@ -65,7 +65,7 @@ $force = false;
 	}
 	include_spip('inc/filtres');
 	$du = affdate_heure(date('Y-m-d H:i:s',time()));
-	$p = '<ul style="list-style-type:none; padding:0; ">'.$p
+	$p = '<ul style="list-style-type:none; padding:0; margin:0; ">'.$p
 		.'</ul><p class="spip_xx-small"><b>'
 		._T('desc:edition')."</b><br/>$du</p>";
 	if($c) ecrire_fichier(_DIR_RSS_TMP, $p);
