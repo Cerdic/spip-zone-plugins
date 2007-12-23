@@ -136,7 +136,7 @@ cs_log(" -- fichier_dest = $fichier_dest");
 // installation de $cs_metas_pipelines
 function set_cs_metas_pipelines_pipeline($infos_pipelines, $pipeline) {
 	global $cs_metas_pipelines;
-	$code = '';
+	$code = "include_spip('cout_fonctions');\n";
 	if (isset($infos_pipelines[$pipeline])) {
 		$a = &$infos_pipelines[$pipeline];
 		if(is_array($a['inline'])) foreach ($a['inline'] as $inc) $code .= "$inc\n";

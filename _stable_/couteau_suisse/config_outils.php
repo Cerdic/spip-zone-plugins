@@ -456,7 +456,7 @@ add_outil( array(
 	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}
 a.sommaire_ancre {background:transparent url($path) no-repeat scroll left center; padding-left:10px; text-decoration:none; }
 div.cs_sommaire a:after {display:none;}",
-	'code:jq' => 'if($("div.cs_sommaire").length) $("div.decoupe_haut").css("display", "none");',
+	'code:jq' => 'if(jQuery("div.cs_sommaire").length) jQuery("div.decoupe_haut").css("display", "none");',
 	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'sommaire_d_article',
 	'traitement:CS_SOMMAIRE:post_propre' => 'sommaire_d_article_balise',
@@ -496,7 +496,7 @@ add_outil( array(
 	'contrib'	=> 2443,
 	'jquery'	=> 'oui',
 	'code:options' => "%%radio_target_blank3%%\n%%url_glossaire_externe2%%",
-	'code:jq' => 'if (%%radio_target_blank3%%) { $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }',
+	'code:jq' => 'if (%%radio_target_blank3%%) { jQuery("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }',
 ));
 
 //-----------------------------------------------------------------------------//
@@ -694,7 +694,7 @@ add_outil( array(
 	'pipelinecode:post_propre' => "if(strpos(\$flux, '@')!==false) \$flux=cs_echappe_balises('', 'mailcrypt', \$flux);",
 	'code:js' => "function lancerlien(a,b){ x='ma'+'ilto'+':'+a+'@'+b; return x; }",
 	// jQuery pour remplacer l'arobase image par l'arobase texte
-	'code:jq' => "\$('span.spancrypt').after('<span class=\"cryptOK\">&#6'+'4;<\/span>'); \$('span.spancrypt').remove();",
+	'code:jq' => "jQuery('span.spancrypt').after('<span class=\"cryptOK\">&#6'+'4;<\/span>'); jQuery('span.spancrypt').remove();",
 	'code:css' => 'span.spancrypt {background:transparent url(' . find_in_path('img/mailcrypt/leure.gif')
 		. ') no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none;}',
 	'traitement:EMAIL' => 'mailcrypt',

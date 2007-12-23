@@ -13,6 +13,7 @@ function decoupe_introduire($texte) {
 $GLOBALS['cs_introduire'][] = 'decoupe_introduire';
 
 function onglets_callback($matches) {
+	$matches[1] = preg_replace(','.preg_quote(_decoupe_SEPARATEUR,',').'\s+,', _decoupe_SEPARATEUR, $matches[1]);
 	// au cas ou on ne veuille pas d'onglets, on remplace les '++++' par un filet et on entoure d'une classe.
 	if ($_GET['cs']=='print') {
 		@define(_decoupe_FILET, '<p style="border-bottom:1px dashed #666; padding:0; margin:1em 20%; font-size:4pt;" >&nbsp; &nbsp;</p>');
