@@ -20,6 +20,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 
 if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
 	include_spip('inc/spipbb_192'); // SPIP 1.9.2
@@ -30,15 +31,17 @@ if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
 function compte_fichier_visite_forum($fichier, &$visites_f) {
 
 	$content = array();
-	if (lire_fichier($fichier, $content))
+	if (lire_fichier($fichier, $content)) {
+		spip_log(__FILE__." compte_fichier_visite_forum[$fichier]:".$content,"spipbb");
 		$content = @unserialize($content);
+	}
 	if (!is_array($content)) return;
 
 	foreach ($content as $source => $num) {
 		list($log_type, $log_id_num)
 			= preg_split(",\t,", $source, 3);
 
-		// S'il s'agit d'un article, noter ses visites
+		// S'il s'agit d'une visite de forum, noter ses visites
 		if ($log_type == 'forum'
 		AND $id_forum = intval($log_id_num)) {
 			$visites_f[$id_forum] ++;
@@ -59,10 +62,10 @@ function calculer_visites_forums($t) {
 	$sessions = preg_files(sous_repertoire(_DIR_TMP, 'spipbb-visites'));
 
 	$compteur = 100;
-	$date_init = time()-1*60;
+	$date_init = time()-5*60; // pour l'instant on a positionne a toutes les 5 minutes pour les tests
 	foreach ($sessions as $item) {
 		if (@filemtime($item) < $date_init) {
-			spip_log("traite la session $item","spipbb");
+			spip_log(__FILE__." traite la session $item","spipbb");
 			compte_fichier_visite_forum($item, $visites_f);
 			spip_unlink($item);
 			if (--$compteur <= 0)
@@ -81,6 +84,7 @@ function calculer_visites_forums($t) {
 		foreach($visites_f as $id_forum => $n) {
 		  if (!sql_countsel('spip_visites_forums',
 				 "id_forum=$id_forum AND date='$date'")){
+			spip_log(__FILE__." sql_insertq[$n]:".$id_forum,"spipbb");
 			sql_insertq('spip_visites_forums',
 					array('id_forum' => $id_forum,
 					      'visites' => $n,
@@ -89,6 +93,7 @@ function calculer_visites_forums($t) {
 		}
 		foreach ($ar as $n => $liste) {
 			$tous = sql_in('id_forum', $liste);
+			spip_log(__FILE__." sql_update[$n]:".$tous,"spipbb");
 			sql_update('spip_visites_forums',
 				array('visites' => "visites+$n"),
 				   "date='$date' AND $tous");
@@ -97,7 +102,7 @@ function calculer_visites_forums($t) {
 
 	// S'il reste des fichiers a manger, le signaler pour reexecution rapide
 	if ($compteur==0) {
-		spip_log("il reste des visites a traiter...","spipbb");
+		spip_log(__FILE__." il reste des visites a traiter...","spipbb");
 		return -$t;
 	}
 } // calculer_visites_forums
