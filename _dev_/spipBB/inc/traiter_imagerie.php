@@ -137,6 +137,7 @@ function spipbb_donnees_auteur($id) {
 						$infos[$c]=$chps_extra[$c];
 					}
 				}
+				if (!is_array($chps_extra)) spip_log(__FILE__." ERREUR chps_extra no array : ".$chps_extra,'spipbb');
 				# tous les autres extra
 				foreach($chps_extra as $cle => $ve) {
 					# recup tous extra sauf gaf

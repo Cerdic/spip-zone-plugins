@@ -3,6 +3,7 @@
  * Petit nettoyage XHTML + Passage du tableau de smiley à 3 colonnes : il faudrait revoir la presentation
  * Renvoi vers la page de profil utilisateur
  * Correction formulaire_spipbb_profil : array mal défini bug report Jack sur Gmane (meme jour)
+ * Ajout d'un test dans traiter_imagerie pour identifier la cause d'un bug
 
 2007-12-22  chryjs  <chryjs!@!free!.!fr>
 
