@@ -50,6 +50,7 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 	$nouveau = _request('nouveau');
 
 	$traiter_chps=array(); // c: 21/12/7 Bug report BB du 2
+	$renvois_chps=array(); // c: 23/12/7 Bug report Jack sur gmane
 
 	if($modif=_request('modif')) {
 	
@@ -89,7 +90,7 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 		#
 		# Extra : recup champs extra (gaf ou pas) passer dans le formulaire
 		#
-		$renvois_chps=array();
+
 		$add_extra = '';
 		if ($GLOBALS['champs_extra']) {
 		# tous extra (auteurs) existants
