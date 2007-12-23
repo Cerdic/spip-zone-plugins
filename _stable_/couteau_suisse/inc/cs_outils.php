@@ -47,7 +47,7 @@ function description_outil2($outil_id) {
 	include_spip('config_outils');
 cs_log(" -- exec_charger_description_outil_dist() - Appel de config_outils.php : nb_outils = ".count($outils));
 
-cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de description_outil($outil_id, $script) :");
+cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de description_outil($outil_id) :");
 	$description_outil = charger_fonction('description_outil', 'inc');
 	$descrip = cs_initialisation_d_un_outil($outil_id, $description_outil, true);
 

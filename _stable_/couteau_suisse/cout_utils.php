@@ -10,7 +10,7 @@
 #-----------------------------------------------------#
 
 cs_log("chargement de cout_utils.php et lancement de cs_initialisation...");
-@define('_CS_INSTALLATION', 1);
+$GLOBALS['cs_utils']++;
 
 // $outils : tableau ultra complet avec tout ce qu'il faut savoir sur chaque outil
 // $cs_variables : tableau de toutes les variables que les outils peuvent utiliser et manipuler

@@ -17,11 +17,12 @@ function cout_autoriser() {
 }
 
 // Logs de tmp/spip.log
-function cs_log($variable, $prefixe='') {
+function cs_log($variable, $prefixe='', $stat='') {
+	static $rand;
+	if($stat) $rand = $stat;
 	if(!defined('_LOG_CS') || !strlen($variable)) return;
 	if (!is_string($variable)) $variable = var_export($variable, true);
-	global $cs_rand;
-	spip_log($cs_rand.$prefixe.$variable);
+	spip_log($rand.$prefixe.$variable);
 }
 
 // liste des outils et des variables
@@ -37,9 +38,7 @@ $metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['
 // on active tout de suite les logs, si l'outil est actif.
 if ($metas_outils['log_couteau_suisse']['actif'] || defined('_LOG_CS_FORCE') || $_GET['cs']=='log') {
 	define('_LOG_CS', 'oui');
-	global $cs_rand; 
-	$cs_rand = sprintf('COUTEAU-SUISSE. [#%04X]. ', rand());
-	cs_log(str_repeat('-', 80));
+	cs_log(str_repeat('-', 80), '', sprintf('COUTEAU-SUISSE. [#%04X]. ', rand()));
 	cs_log('INIT : cout_options, '.$_SERVER['REQUEST_URI']);
 }
 
@@ -67,32 +66,39 @@ if($zap) {
 	define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, "couteau-suisse"));
 	define('_DIR_RSS_TMP', _DIR_TMP . 'rss_couteau_suisse.html');
 	// alias pour passer en mode impression
-	if(isset($_GET['page']) && in_array($_GET['page'], array('print', 'imprimer', 'imprimir_articulo', 'imprimir_breve', 'article_pdf')))
+	if(isset($_GET['page']) && in_array($_GET['page'], array('print','imprimer','imprimir_articulo','imprimir_breve','article_pdf')))
 		$_GET['cs']='print';
 	
+	// test sur le fichier a inclure ici
+	$cs_exists = file_exists($f_cs = _DIR_CS_TMP.'mes_options.php');
+
 	// fonctions indispensables a l'execution
 	include_spip('cout_lancement');
 	// lancer l'initialisation du plugin
-	cs_initialisation();
+	if(!$cs_exists) cs_log(" -- '$f_cs' introuvable !");
+	cs_initialisation(!$cs_exists);
 	cs_log("PUIS : cout_options, initialisation terminee");
-	
+
 	// inclusion des options pre-compilees, si l'on n'est jamais passe par ici...
 	if (!$GLOBALS['cs_options']) {
-		$file_exists = file_exists($f = _DIR_CS_TMP.'mes_options.php');
-		if($file_exists) include_once($f);
-			// si les fichiers sont absents, on recompile tout
-			else cs_initialisation(1);
-	}
-	
-	// si une installation a eu lieu...
-	if (defined('_CS_INSTALLATION')) {
+
+		if(file_exists($f_cs)) {
+			cs_log(" -- inclusion de '$f_cs'");
+			include_once($f_cs);
+		} else {
+			$GLOBALS['cs_utils'] = 0;
+			cs_log(" -- fichier '$f_cs' toujours introuvable !!");
+		}
+	} else cs_log(" -- pas d'inclusion de '$f_cs' ; on est deja passe par ici !?");
+
+	// si une recompilation a eu lieu avec succes...
+	if ($GLOBALS['cs_utils']) {
 		// lancer la procedure d'installation pour chaque outil
 		cs_log(' -- cs_installe_outils...');
 		cs_installe_outils();
 	}
-	
-	cs_log(' FIN : cout_options, cs_options = '.intval($GLOBALS['cs_options']) 
-		. ($file_exists?" et fichier '$f' present":" et fichier '$f' introuvable !!"));
+
+	cs_log(' FIN : cout_options, cs_options = '.intval($GLOBALS['cs_options']));
 }
 
 ?>

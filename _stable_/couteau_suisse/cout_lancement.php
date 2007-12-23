@@ -11,7 +11,7 @@
 #  cout_utils.php et compiler les outils.             #
 #-----------------------------------------------------#
 
-cs_log("chargement de cout_lancement.php pour initialisation");
+cs_log("inclusion des fonctions de cout_lancement.php pour initialisation");
 
 // compatibilite avec les plugins de version anterieure a 1.7.0.0
 function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); return ''; }
@@ -35,8 +35,8 @@ function cs_initialisation($forcer=false) {
 	// au premier passage, on force l'installation si var_mode est defini
 	static $deja_passe_ici;
 	if (!intval($deja_passe_ici)) {
-cs_log("#### 1er PASSAGE $rand################################# - \$forcer = ".intval($forcer));
-cs_log("{$rand}version PHP courante : ".phpversion()." - Versions SPIP (base/code) : {$GLOBALS['spip_version']}/{$GLOBALS['spip_version_code']}");
+cs_log("#### 1er PASSAGE $rand################################# - \$forcer = ".intval($forcer)
+	. "\n{$rand}version PHP courante : ".phpversion()." - Versions SPIP (base/code) : {$GLOBALS['spip_version']}/{$GLOBALS['spip_version_code']}");
 		$forcer |= (_request('var_mode')!=NULL);
 	}
 	$deja_passe_ici++;
