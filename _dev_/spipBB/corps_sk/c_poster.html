@@ -107,9 +107,9 @@
 			<tr class="ligne_sujet">
 				<td  colspan="2" class="ligne_nom">
 					<span class="text_nom">
-					<B_auteurp>
+					<B_auteurp>[(#REM) c.23/12/7 on passe par la page profile]
 					<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
-						<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#GET{ze_sect}})]">
+						<a href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#GET{ze_sect}})]">
 							[(#NOM)]
 						</a>
 					</BOUCLE_auteurp>

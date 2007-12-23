@@ -27,7 +27,8 @@
 			</BOUCLE_rub_main>
 			<:spipbb:total_messages_membres:> <?php echo $total_messages ?> <:spipbb:message_s:><br />
 			<BOUCLE_auteurs(AUTEURS){tout}{statut IN 0minirezo,1comite,6forum}></BOUCLE_auteurs><:spipbb:total_membres:> #TOTAL_BOUCLE <:spipbb:membres_inscrits:><br /><//B_auteurs>
-			<B_dernier_auteur><:spipbb:dernier_membre:> <BOUCLE_dernier_auteur(AUTEURS){tout}{statut IN 0minirezo,1comite,6forum}{par id_auteur}{inverse}{0,1}><a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ID_RUBRIQUE})]">#NOM</a></BOUCLE_dernier_auteur><br /></B_dernier_auteur>
+			[(#REM) c.23/12/7 on passe par la page profile]
+			<B_dernier_auteur><:spipbb:dernier_membre:> <BOUCLE_dernier_auteur(AUTEURS){tout}{statut IN 0minirezo,1comite,6forum}{par id_auteur}{inverse}{0,1}><a href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ID_RUBRIQUE})]">#NOM</a></BOUCLE_dernier_auteur><br /></B_dernier_auteur>
 			</td>
 		</tr>
 		<tr  class="ligne_forum">

@@ -57,10 +57,11 @@
 				<td id="forum#ID_FORUM" colspan="2">
 					<span class="text_nom">
 					<B_auteurpc2>
+					[(#REM) c.23/12/7 on passe par la page profile]
 					<BOUCLE_auteurpc2(AUTEURS){id_auteur}{tout}>
 						<a
 						[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
-						 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+						 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
 						]
 						>#NOM</a>
 					</BOUCLE_auteurpc2>
@@ -150,10 +151,11 @@
 			<td id="forum#ID_FORUM" colspan="2">
 				<span class="text_nom">
 				<B_auteurp>
+				[(#REM) c.23/12/7 on passe par la page profile]
 				<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
 					<a
 					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
-					 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+					 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
 					]
 					>#NOM</a>
 				</BOUCLE_auteurp>
@@ -226,10 +228,11 @@
 			<td  id="forum#ID_FORUM" colspan="2" class="ligne_nom">
 				<span class="text_nom">
 				<B_auteurpr>
+				[(#REM) c.23/12/7 on passe par la page profile]
 				<BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}>
 					<a
 					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
-					 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+					 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
 					]
 					>#NOM</a>
 				</BOUCLE_auteurpr>

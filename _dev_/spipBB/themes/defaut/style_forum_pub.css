@@ -17,7 +17,7 @@ police par defaut des tableau : voir table.spipforum
 #post_origine {}
 #ecrire { width:650px;}
 #prev {}
-#profile { width:600px; }
+#profile { width:100%; }
 #auteur { width:500px; }
 #derniers_msg { width:650px; }
 #membres { width:600px; }

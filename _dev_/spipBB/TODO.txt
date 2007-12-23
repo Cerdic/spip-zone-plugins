@@ -21,11 +21,13 @@ Interface Privée - Anti spam :
 -* Gestion des bans : bug avec ajax !
 
 Interface publique - Générale :
--* Gestion avatar : a ameliorer + téléchargement (droits ?)
 -* Affichage du profil a revoir
+-* Gestion avatar : a ameliorer + téléchargement (droits ?)
 -* Manque icone postit interface publique
 -* Logout bug en 193 uniq id ?
--* Manque formulaire inscription
+-* Manque formulaire inscription optionnel (remplacer le standard que l'on ne doit plus modifier par un specifique spipbb)
+-* 0.3.9 : j'ai un doute sur la fonctionnalité "ne plus suivre les sujets" page profil publique
+-* 0.3.9 : nouveau message : le sujet est prérempli avec le titre du forum. Ne serait-il pas mieux d'avoir cette zone à blanc, et d'imposer qu'elle ne  soit pas laissée à vide ? (dans le cas d'un nouveau sujet, pas d'une  réponse)
 
 Bugs et autres elements non finis :
 -* Problemes titres _T et _L // traductions à revoir corriger finir

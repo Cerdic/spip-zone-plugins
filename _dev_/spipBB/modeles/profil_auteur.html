@@ -1,0 +1,99 @@
+<div>
+	[(#REM) Peut etre faire un test sur la visibilite]
+	[(#SET{check,[(#SPIPBB{annuaire_forum}|=={''}|?{'non',#SPIPBB{annuaire_forum}})]})]
+
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+<table class="spipforum" id="profile-auteur">
+<tr class="inter">
+	<td>Avatar</td>
+	<td>Tout &agrave; propos de #NOM</td>
+</tr>
+<tr>
+	<td style="height:#CONFIG{'spipbb/taille_avatar_prof'}px">
+		[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_prof'}})]
+	</td>
+	<td rowspan='3'>
+		<table width="100%" border='0' cellspacing='0' cellpadding='0' style='border:0'>
+		[<tr>
+			<td>
+			Inscrit le :
+			</td>
+			<td>
+				(#SPIPBB{date_crea_spipbb})
+			</td>
+		</tr>]
+		[<tr>
+			<td>
+			Messages :
+			</td>
+			<td>
+			(#ID_AUTEUR|spipbb_nb_messages)]
+			</td>
+		</tr>]
+		<a href="">Trouver tous les messages de #NOM</a><br />
+		#SET{aff_localisation,#CONFIG{'spipbb/affiche_localisation'}}
+		[(#GET{aff_localisation}|=={oui}|?{' ',''})
+		<:spipbb:localisation:>#SPIPBB{localisation}<br />
+		]
+		<:spipbb:votre_site:> :<a href="[(#URL_SITE)]">[(#NOM_SITE)]</a>
+		#SET{aff_emploi,#CONFIG{'spipbb/affiche_emploi'}}
+		[(#GET{aff_emploi}|=={oui}|?{' ',''})
+		<:spipbb:emploi:>#SPIPBB{emploi}<br />
+		]
+		#SET{aff_loisirs,#CONFIG{'spipbb/affiche_loisirs'}}
+		[(#GET{aff_loisirs}|=={oui}|?{' ',''})
+		<:spipbb:loisirs:>#SPIPBB{loisirs}<br />
+		]
+	</td>
+</tr>
+<tr class="inter">		
+	<td>
+		<:spipbb:contacter_dpt:> #NOM
+	</td>
+</tr>
+<tr>		
+	<td>
+		<table width="100%" border='0' cellspacing='0' cellpadding='0' style='border:0'>
+		<tr>
+			<td>
+				<:spipbb:email:>
+			</td>
+			<td class='email'>
+				<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]">
+				<span>&nbsp;</span></a>
+			</td>
+			</tr>
+		<tr>
+			<td>
+			MSN
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Yahoo
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			AIM
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			ICQ
+			</td>
+			<td>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</BOUCLE_auteur>
+</div>

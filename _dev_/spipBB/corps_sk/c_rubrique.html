@@ -60,10 +60,11 @@
 			<BOUCLE_dernier_message1(FORUMS){id_article}{plat}{!par date}{0,1}>
 				[(#DATE|affdate{'d/m/Y'})] [ - (#DATE|heures)]:[(#DATE|minutes)<br	/>] 
 				<:spipbb:par_:>
+				[(#REM) c.23/12/7 on passe par la page profile]
 				<BOUCLE_auteurp1(AUTEURS){id_auteur}{tout}>
 					<a
 					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''}) 
-					 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#_rubrique_principal:ID_RUBRIQUE})]"
+					 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#_primale:ID_RUBRIQUE})]"
 					]
 					>#NOM</a>
 				</BOUCLE_auteurp1>
@@ -118,11 +119,11 @@
 				<td class="dernier_msg"> 
 			<BOUCLE_dernier_message(FORUMS){id_article}{plat}{!par date}{0,1}>
 				[(#DATE|affdate{'d/m/Y'})] [ - (#DATE|heures)]:[(#DATE|minutes)<br	/>] 
-				<:spipbb:par_:>
+				<:spipbb:par_:>[(#REM) c.23/12/7 on passe par la page profile]
 				<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
 					<a
 					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''}) 
-					 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#_rubrique_principal:ID_RUBRIQUE})]"
+					 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#_primale:ID_RUBRIQUE})]"
 					]
 					>#NOM</a>
 				</BOUCLE_auteurp>

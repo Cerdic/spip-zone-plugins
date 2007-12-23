@@ -70,8 +70,9 @@
 					<//B_reponses01>
 				</td>
 	  			<td class="auteur_post">
+				[(#REM) c.23/12/7 on passe par la page profile]
 					<B_auteurpa><BOUCLE_auteurpa(AUTEURS){id_auteur}{tout}>
-						<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]">#NOM</a>
+						<a href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{id_article,#ID_ARTICLE})]">#NOM</a>
 					</BOUCLE_auteurpa>
 					</B_auteurpa>
 					[(#NOM|sinon{<:spipbb:anonyme:>})]
@@ -85,10 +86,11 @@
 				  		[(#DATE|affdate{'d/m/Y'}),] [(#DATE|heures)]:[(#DATE|minutes)<br />]
 						<:spipbb:par_:>
 						<B_auteurpar>
+						[(#REM) c.23/12/7 on passe par la page profile]
 						<BOUCLE_auteurpar(AUTEURS){id_auteur}{tout}>
 							<a
 							[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
-							 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+							 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{id_article,#ID_ARTICLE})]"
 							]
 							>#NOM</a>
 						</BOUCLE_auteurpar>
@@ -121,8 +123,9 @@
 					<//B_reponses02>
 				</td>
 	  			<td class="auteur_post">
+					[(#REM) c.23/12/7 on passe par la page profile]
 					<B_auteurpp><BOUCLE_auteurpp(AUTEURS){id_auteur}{tout}>
-						<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]">#NOM</a>
+						<a href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{id_article,#ID_ARTICLE})]">#NOM</a>
 					</BOUCLE_auteurpp>
 					</B_auteurpp>
 					[(#NOM|sinon{<:spipbb:anonyme:>})]
@@ -136,10 +139,11 @@
 				  		[(#DATE|affdate{'d/m/Y'}),] [(#DATE|heures)]:[(#DATE|minutes)<br />]
 						<:spipbb:par_:>
 						<B_auteurparp>
+						[(#REM) c.23/12/7 on passe par la page profile]
 						<BOUCLE_auteurparp(AUTEURS){id_auteur}{tout}>
 							<a
 							[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
-							 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+							 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{id_article,#ID_ARTICLE})]"
 							]
 							>#NOM</a>
 						</BOUCLE_auteurparp>
@@ -188,11 +192,11 @@
 					<//B_reponses>
 				</td>
 				<td class="auteur_post">
-					<B_auteurp>
+					<B_auteurp>[(#REM) c.23/12/7 on passe par la page profile]
 					<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
 						<a
 						[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
-						 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+						 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{id_article,#ID_ARTICLE})]"
 						]
 						>#NOM</a>
 					</BOUCLE_auteurp>
@@ -206,11 +210,11 @@
 				<td class="dernier_msg">
 					<BOUCLE_dernier_message(FORUMS){id_thread}{plat}{!par date}{0,1}>
 						[(#DATE|affdate{'d/m/Y'})] [ - (#DATE|heures)]:[(#DATE|minutes)]<br />
-						<:spipbb:par_:>
+						<:spipbb:par_:>[(#REM) c.23/12/7 on passe par la page profile]
 						<BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}>
 							<a
 							[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
-							 href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+							 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{id_article,#ID_ARTICLE})]"
 							]
 							>#NOM</a>
 						</BOUCLE_auteurpr>

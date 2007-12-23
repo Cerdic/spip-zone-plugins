@@ -25,7 +25,8 @@
 			[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
 			<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{'1','2'})]"> 
 				<td>
-					<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]">
+					[(#REM) c.23/12/7 on passe par la page profile]
+					<a href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]">
 					#NOM
 					</a>
 				</td>
