@@ -1,7 +1,7 @@
 <?
 // expanser_liens() est introduit sous SPIP 1.93
 if (!defined('_SPIP19300')) {
-	@define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
+	@define('_RACCOURCI_LIEN', ',\[([^][]*)->(>?)([^]]*)\],msS');
 	function expanser_liens($letexte) {
 		$inserts = array();
 		if (preg_match_all(_RACCOURCI_LIEN, $letexte, $matches, PREG_SET_ORDER)) {
