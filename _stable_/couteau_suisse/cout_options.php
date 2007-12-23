@@ -1,10 +1,13 @@
 <?php
 // Ce fichier est charge a chaque hit //
 
-/* COMPATIBILTES */
+// Compatibilites
 if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP19300', 1);
 if (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) @define('_SPIP19200', 1);
 else @define('_SPIP19100', 1);
+
+// Pour forcer les logs du plugin, outil actif ou non :
+// define('_LOG_CS_FORCE', 'oui');
 
 // Droits pour le Couteau Suisse
 function cout_autoriser() {
@@ -12,7 +15,8 @@ function cout_autoriser() {
 		?autoriser('configurer', 'plugins')
 		:$GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"];
 }
-// On logue dans tmp/spip.log
+
+// Logs de tmp/spip.log
 function cs_log($variable, $prefixe='') {
 	if(!defined('_LOG_CS') || !strlen($variable)) return;
 	if (!is_string($variable)) $variable = var_export($variable, true);
@@ -20,10 +24,7 @@ function cs_log($variable, $prefixe='') {
 	spip_log($cs_rand.$prefixe.$variable);
 }
 
-// Pour forcer les logs du plugin, outil actif ou non :
-// define('_LOG_CS_FORCE', 'oui');
-
-// liste des outils et de leurs variables
+// liste des outils et des variables
 global $metas_vars, $metas_outils;
 if (!isset($GLOBALS['meta']['tweaks_actifs'])) {
 cs_log("  -- lecture metas");
@@ -46,9 +47,9 @@ if ($metas_outils['log_couteau_suisse']['actif'] || defined('_LOG_CS_FORCE') || 
 if ($_GET['cs']=='report') error_reporting(E_ALL ^ E_NOTICE);
 elseif ($_GET['cs']=='reportall' && $auteur_session['statut']=='0minirezo') error_reporting(E_ALL);
 
-// on zappe le CS si un reset general est demande
+// on passe son chemin si un reset general est demande
 $zap = (_request('cmd')=='resetall')
-// la page est un css ou un js (sauf si le cache est desactive)
+// idem si la page est un css ou un js (sauf si le cache est desactive)
  || (!($metas_outils['spip_cache']['actif'] && $metas_vars['radio_desactive_cache3'])
 		&& (isset($_GET['page']) && preg_match(',(\.(css|js)$|style_prive(_ie)?),', $_GET['page'])));
 if($zap) {
@@ -56,7 +57,6 @@ if($zap) {
 } else {
 	// $cs_metas_pipelines ne sert qu'a l'execution et ne comporte que :
 	//	- le code pour <head></head>
-	//	- le code pour options.php et fonction.php
 	//	- le code pour les pipelines utilises
 	global $cs_metas_pipelines;
 	$cs_metas_pipelines = array();
