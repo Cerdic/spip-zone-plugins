@@ -11,6 +11,7 @@ if ($GLOBALS['meta']['en_travaux']=='true')
 	$en_travaux_mode_admin |= isset($_GET['action']);
 	$en_travaux_mode_admin |= isset($_POST['action']);
 	$en_travaux_mode_admin |= $_GET['page'] == 'style_prive'; // filtrage de la feuille de style admin mise en squelette
+	$en_travaux_mode_admin |= $_GET['page'] == 'style_prive_ie'; // idem IE
 	$en_travaux_mode_admin |= $_GET['page'] == 'jquery.js';   // filtrage de jquery qui sert pour la partie admin
 	
 	if ($en_travaux_mode_admin) {
@@ -29,7 +30,7 @@ function action_en_travaux(){
 	$corps = charset2unicode(propre($GLOBALS['meta']['en_travaux_message']));
 	$page = minipres(_T('info_travaux_titre'), $corps);
 	// a partir de spip 1.9.2 ces fonctions ne font plus l'echo directement
-	if ($GLOBALS['spip_version']>=1.92) echo $page;
+	if (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) echo $page;
 	return true;
 }
 ?>
