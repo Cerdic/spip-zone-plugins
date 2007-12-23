@@ -1,6 +1,6 @@
 <?
 
-$GLOBALS['jeux_base_version'] = 0.12;
+$GLOBALS['jeux_base_version'] = 0.13;
 
 function jeux_install($install){
 	$version_base = $GLOBALS['jeux_base_version'];
@@ -29,12 +29,18 @@ function spip_abstract_showtable_jeux($table, $table_spip = false, $serveur='') 
 	return spip_abstract_showtable($table, $serveur, $table_spip);
 }
 
+function jeux_maj_version(&$v1, $v2) {
+	echo "MAJ Jeux : $v1 =&gt; $v2<br />";
+	ecrire_meta('jeux_base_version', $v1=$v2, 'non');
+}
+
 function jeux_verifier_base(){
 	// version de la base de donnee
-	$version_base = $GLOBALS['jeux_base_version'];
-	$current_version = 0.0;
-	if (   (!isset($GLOBALS['meta']['jeux_base_version']) )
-			|| (($current_version = $GLOBALS['meta']['jeux_base_version']) != $version_base)){
+echo	$version_base = $GLOBALS['jeux_base_version'];
+echo	$current_version = isset($GLOBALS['meta']['jeux_base_version'])
+		?$GLOBALS['meta']['jeux_base_version']
+		:0.0;
+	if ($current_version != $version_base){
 		include_spip('base/create');
 		include_spip('base/abstract_sql');
 		// compatibilite SPIP 1.92
@@ -44,6 +50,10 @@ function jeux_verifier_base(){
 		include_spip('base/jeux_tables');
 		if ($current_version==0.0){
 			creer_base();
+//			ecrire_meta('jeux_base_version', $current_version=0.10, 'non');
+			jeux_maj_version($current_version, 0.10);
+		}
+		if ($current_version<($test_version=0.11)){
 			// ajout du champ 'nom' a la table spip_jeux, si pas deja existant
 			$desc = $showtable("spip_jeux", true);
 			if (!isset($desc['field']['nom'])){
@@ -54,11 +64,7 @@ function jeux_verifier_base(){
 				while ($row = $fetch($res))
 					spip_query("UPDATE spip_jeux SET nom='$sans' WHERE id_jeu=".$row['id_jeu']);
 			}
-			ecrire_meta('jeux_base_version', $current_version=0.10, 'non');
-		}
-		if ($current_version<($test_version=0.11)){
 			// ajout du champ 'titre' a la table spip_jeux, si pas deja existant
-			$desc = $showtable("spip_jeux", true);
 			if (!isset($desc['field']['titre'])){
 				spip_query("ALTER TABLE spip_jeux ADD `titre` text NOT NULL AFTER `nom`");
 				// ajout d'un titre par defaut aux jeux existants
@@ -67,7 +73,8 @@ function jeux_verifier_base(){
 				while ($row = $fetch($res))
 					spip_query("UPDATE spip_jeux SET titre='$sans' WHERE id_jeu=".$row['id_jeu']);
 			}
-			ecrire_meta('agenda_base_version', $current_version=$test_version, 'non');
+//			ecrire_meta('jeux_base_version', $current_version=$test_version, 'non');
+			jeux_maj_version($current_version, $test_version);
 		}
 		if ($current_version<($test_version=0.12)){
 			// changement de noms 'titre' => 'titre_prive' et 'nom' => 'type_jeu'
@@ -76,7 +83,18 @@ function jeux_verifier_base(){
 				spip_query('ALTER TABLE `spip_jeux` CHANGE `titre` `titre_prive` TEXT');
 			if (isset($desc['field']['nom']))
 				spip_query('ALTER TABLE `spip_jeux` CHANGE `nom` `type_jeu` TEXT');
-			ecrire_meta('agenda_base_version', $current_version=$test_version, 'non');
+//			ecrire_meta('jeux_base_version', $current_version=$test_version, 'non');
+			jeux_maj_version($current_version, $test_version);
+		}
+		if ($current_version<($test_version=0.13)){
+			// suppression de 'titre' et 'nom'
+			$desc = $showtable("spip_jeux", true);
+			if (isset($desc['field']['titre']))
+				spip_query('ALTER TABLE `spip_jeux` DROP `titre`');
+			if (isset($desc['field']['nom']))
+				spip_query('ALTER TABLE `spip_jeux` DROP `nom`');
+//			ecrire_meta('jeux_base_version', $current_version=$test_version, 'non');
+			jeux_maj_version($current_version, $test_version);
 		}
 
 		if(!defined('_SPIP19300')) ecrire_metas();
