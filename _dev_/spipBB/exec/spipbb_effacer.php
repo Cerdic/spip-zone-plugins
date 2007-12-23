@@ -74,7 +74,7 @@ function exec_spipbb_effacer() {
 		$tbl_eraze=$_POST['eraze'];
 		//suppresion des posts selectionnés
 		debut_cadre_relief("poubelle.gif");
-		echo gros_titre(_T('spipbb:poste_effac'),'',false);
+		echo gros_titre(_T('spipbb:admin_titre_page_'._request('exec')),'',false);
 		
 		$nbr_eraze = count($tbl_eraze);
 		if ($nbr_eraze==0) {
@@ -88,11 +88,11 @@ function exec_spipbb_effacer() {
 		fin_cadre_relief();
 	}
 
-	$res=spip_query("SELECT id_forum, id_parent, titre, id_thread, COUNT(id_forum) as total_post 
+	$res=sql_query("SELECT id_forum, id_parent, titre, id_thread, COUNT(id_forum) as total_post 
 					FROM spip_forum WHERE statut = 'off' GROUP BY id_thread ");
 
 	debut_cadre_relief("");
-	echo "<form action='".generer_url_ecrire("spipnn_effacer")."' method='post'>\n";
+	echo "<form action='".generer_url_ecrire("spipbb_effacer")."' method='post'>\n";
 	echo "<input type='hidden' name='action' value='efface_select'>\n";
 	echo "<table cellpadding='3' cellspacing='0' border='0' width='100%'>\n";
 	echo "<tr width='100%'>\n";
@@ -102,7 +102,7 @@ function exec_spipbb_effacer() {
 
 	$ifond=0;
 	
-	while ($row=spip_fetch_array($res)) {
+	while ($row=sql_fetch($res)) {
 		$id_post = $row['id_forum'];
 		$id_parent = $row['id_parent'];
 		$id_thread = $row['id_thread'];
