@@ -88,8 +88,9 @@ _ &bull; [De tout le plugin->@reset@]@install@
 	'selectiontous' => "S&eacute;lectionner tous les outils actifs",
 	'tous' => 'TOUS',
 	'par_defaut' => 'Par d&eacute;faut',
-	'jquery1' => "{{Attention}} : cette fonctionnalit&eacute; n&eacute;cessite le plugin {jQuery} pour fonctionner avec cette version de SPIP.",
-	'jquery2' => "Cette fonctionnalit&eacute;  utilise la librairie {jQuery}.",
+	'jquery1' => "{{Attention}} : cet outil n&eacute;cessite le plugin {jQuery} pour fonctionner avec cette version de SPIP.",
+	'jquery2' => "Cet outil  utilise la librairie {jQuery}.",
+	'balise_etoilee' => '{{Attention}} : V&eacute;rifiez bien l\'utilisation faite par vos squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outils ne s\'appliqueront pas sur : @bal@.',
 	'erreur:nom' => 'Erreur !',
 	'erreur:description' => "id manquant dans la d&eacute;finition de l'outil !",
 	'erreur:version' => 'Cet outil est indisponible dans cette version de SPIP.',
@@ -118,7 +119,7 @@ _ &bull; [De tout le plugin->@reset@]@install@
 ,/*		. "#PUCE &Agrave; un article particulier, une rubrique particuli&egrave;re, il est possible d'attribuer une valeur de cache. Listez ci-dessous (en les s&eacute;parant par une virgule) les identifiants et la dur&eacute;e de vie (en secondes) du cache correspondant.<br />Exemple : &laquo; rubrique12=7*24*3600, article34=60*60, article56=0 &raquo;.[[Liste d'exceptions :->%exceptions_cache%]]",*/
 
 	'supprimer_numero:nom' => 'Supprime le num&eacute;ro',
-	'supprimer_numero:description' => "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des {{titres}} et des {{noms}} du site public, sans que le filtre supprimer_numero soit pr&eacute;sent dans les squelettes.<br />Voici la syntaxe &agrave; utiliser dans le cadre d'un site multilingue : <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code><br />Attention, cette fonctionnalit&eacute; ne sera pas prise en compte si votre squelette utilise les balises &eacute;toil&eacute;es : <code>#TITRE*</code> ou <code>#NOM*</code>",
+	'supprimer_numero:description' => "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des {{titres}} et des {{noms}} du site public, sans que le filtre supprimer_numero soit pr&eacute;sent dans les squelettes.<br />Voici la syntaxe &agrave; utiliser dans le cadre d'un site multilingue : <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code>",
 
 	'paragrapher2:nom' => 'Paragrapher',
 	'paragrapher2:description' => "La fonction SPIP <code>paragrapher()</code> ins&egrave;re des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont d&eacute;pourvus de paragraphes. Afin de g&eacute;rer plus finement vos styles et vos mises en page, vous avez la possibilit&eacute; d'uniformiser l'aspect des textes de votre site.[[Toujours paragrapher :->%paragrapher%]]",
@@ -300,19 +301,25 @@ Attention : en d&eacute;finissant le remplacement de la ligne horizontale, le st
 _ Si vous utilisez ce s&eacute;parateur &agrave; l'int&eacute;rieur des balises &lt;onglets&gt; et &lt;/onglets&gt; alors vous obtiendrez un jeu d'onglets.
 _ Dans les squelettes : vous avez &agrave; votre disposition les nouvelles balises #ONGLETS_DEBUT, #ONGLETS_TITRE et #ONGLETS_FIN.
 _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.",
-	'decoupe:aide' => 'Bloc d\'onglets : <b>&lt;onglets>&lt;/onglets></b><br/>S&eacute;parateur de pages ou d\'onglets&nbsp;: @sep@.',
-	'decoupe:aide2' => "\n_ Alias&nbsp;:&nbsp;@sep@",
+	'decoupe:aide' => 'Bloc d\'onglets : <b>&lt;onglets>&lt;/onglets></b><br/>S&eacute;parateur de pages ou d\'onglets&nbsp;: @sep@',
+	'decoupe:aide2' => '<br/>Alias&nbsp;:&nbsp;@sep@',
 
 // ---------------------------------------------------------------------------
 	'sommaire:nom' => 'Un sommaire pour vos articles',
-	'sommaire:description' => "Construit un sommaire pour vos articles afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).\n\n#PUCE Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[Largeur du sommaire (9 &agrave; 99) :->%lgr_sommaire% caract&egrave;res]]\n\n
+	'sommaire:description' => "Construit un sommaire pour vos articles afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
+
+#PUCE Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[Largeur du sommaire (9 &agrave; 99) :->%lgr_sommaire% caract&egrave;res]]
+
 #PUCE Vous pouvez aussi fixer le comportement du plugin concernant la cr&eacute;ation du sommaire: 
-- Syst&eacute;matique pour chaque article (une balise <code>[!sommaire]</code> plac&eacute;e n&rsquo;importe o&ugrave; &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article cr&eacute;era une exception).
-- Uniquement pour les articles contenant la balise <code>[sommaire]</code>.\n\n[[Cr&eacute;ation syst&eacute;matique du sommaire :->%auto_sommaire%]]\n\n
+_ &bull; Syst&eacute;matique pour chaque article (une balise <code>[!sommaire]</code> plac&eacute;e n&rsquo;importe o&ugrave; &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article cr&eacute;era une exception).
+_ &bull; Uniquement pour les articles contenant la balise <code>[sommaire]</code>.
+
+[[Cr&eacute;ation syst&eacute;matique du sommaire :->%auto_sommaire%]]
+
 #PUCE Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d'article automatiquement. Mais vous avez la possibilt&eacute; de placer ce sommaire ailleurs dans votre squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE que vous pouvez activer ici :
-[[Activer la balise #CS_SOMMAIRE :->%balise_sommaire%]]\n\n
-Attention, aucun sommaire automatique (balise #CS_SOMMAIRE inactive) ne sera pas ins&eacute;r&eacute; dans l'article si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>.
-_ Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et onglets}.",
+[[Activer la balise #CS_SOMMAIRE :->%balise_sommaire%]]
+
+Ce sommaire peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et onglets}.",
 	'sommaire:aide' => defined('_sommaire_AUTOMATIQUE')?'Un article sans sommaire&nbsp;: @racc@':'Un article avec sommaire&nbsp;: @racc@',
 
 // ---------------------------------------------------------------------------

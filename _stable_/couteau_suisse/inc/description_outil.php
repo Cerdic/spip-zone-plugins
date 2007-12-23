@@ -117,7 +117,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 		// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 		$res = ajax_action_auteur('description_outil', $index, $url_self, "outil={$outil['id']}", "$res");
 	}
-//cs_log("Fin   : inc_description_outil_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvée(s)");
+//cs_log(" FIN : inc_description_outil_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvee(s)");
 	$res = preg_replace(',(<br />)?</fieldset><fieldset><legend></legend>,', '', $res);
 	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('desc:vars_modifiees').'&nbsp;&lt;</div>':'';
 	return cs_ajax_action_greffe("description_outil-$index", $res, $modif);

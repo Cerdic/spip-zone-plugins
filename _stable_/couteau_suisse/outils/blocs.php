@@ -3,7 +3,7 @@
 /*
    Cet outil 'blocs' permet aux redacteurs d'un site spip d'inclure des blocs visibles ou invisibles dans leurs textes
    balises : <bloc></bloc> ou <invisible></invisible>, et <visible></visible>
-   le titre est obtenu en sautant deux lignes à l'interieur du bloc
+   le titre est obtenu en sautant deux lignes a l'interieur du bloc
    Attention : seules les balises en minuscules sont reconnues.
 */
 

@@ -122,6 +122,6 @@ if (!function_exists('balise_INTRODUCTION')) {
 	}
 	
 } //!function_exists('balise_INTRODUCTION') 
-else spip_log("Erreur - balise_INTRODUCTION() existe déjà et ne peut pas être surchargée par le Couteau Suisse !");
+else spip_log("Erreur - balise_INTRODUCTION() existe deja et ne peut pas etre surchargee par le Couteau Suisse !");
 
 ?>

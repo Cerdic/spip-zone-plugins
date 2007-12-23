@@ -19,7 +19,7 @@ function version_plein_texte($texte){
 /*06*/		'@<[\/\!]*?[^<>]*?'.'>@si',		// Supprime les balises HTML
 /*07*/		'@([\r\n])[\s]+@',				// Supprime les espaces
 /*08*/		',[\r\n][_]{2},sm',
-/*09*/		'@&(quot|#34);@i',				// Remplace les entités HTML
+/*09*/		'@&(quot|#34);@i',				// Remplace les entites HTML
 /*10*/		'@&(amp|#38);@i',
 /*11*/		'@&(lt|#60);@i',
 /*12*/		'@&(gt|#62);@i',

@@ -4,7 +4,7 @@
 	#BLOC_TITRE
 	Mon titre
 	#BLOC_DEBUT
-	Mon texte dépliable
+	Mon texte depliable
 	#BLOC_FIN
 	
 	Les trois balises doivent se suivre et sont imperatives

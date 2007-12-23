@@ -6,10 +6,18 @@ if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP
 if (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) @define('_SPIP19200', 1);
 else @define('_SPIP19100', 1);
 
+// Droits pour le Couteau Suisse
 function cout_autoriser() {
 	return function_exists('autoriser')
 		?autoriser('configurer', 'plugins')
 		:$GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"];
+}
+// On logue dans tmp/spip.log
+function cs_log($variable, $prefixe='') {
+	if(!defined('_LOG_CS') || !strlen($variable)) return;
+	if (!is_string($variable)) $variable = var_export($variable, true);
+	global $cs_rand;
+	spip_log($cs_rand.$prefixe.$variable);
 }
 
 // Pour forcer les logs du plugin, outil actif ou non :
@@ -19,28 +27,32 @@ function cout_autoriser() {
 global $metas_vars, $metas_outils;
 if (!isset($GLOBALS['meta']['tweaks_actifs'])) {
 cs_log("  -- lecture metas");
-		include_spip('inc/meta');
-		lire_metas();
+	include_spip('inc/meta');
+	lire_metas();
 }
 $metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
 $metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
 
 // on active tout de suite les logs, si l'outil est actif.
-if ($metas_outils['log_couteau_suisse']['actif'] || defined('_LOG_CS_FORCE')) {
+if ($metas_outils['log_couteau_suisse']['actif'] || defined('_LOG_CS_FORCE') || $_GET['cs']=='log') {
 	define('_LOG_CS', 'oui');
-	spip_log('COUTEAU-SUISSE. ' . str_repeat('-', 80));
-	spip_log('COUTEAU-SUISSE. appel de cout_options (début) pour : '.$_SERVER['REQUEST_URI']);
+	global $cs_rand; 
+	$cs_rand = sprintf('COUTEAU-SUISSE. [#%04X]. ', rand());
+	cs_log(str_repeat('-', 80));
+	cs_log('INIT : cout_options, '.$_SERVER['REQUEST_URI']);
 }
 
-// le plugin ne met pas son nez dans les css ou les js (sauf si le cache est desactive)
-if(!($metas_outils['spip_cache']['actif'] && $metas_vars['radio_desactive_cache3'])
-	&& (isset($_GET['page']) && preg_match(',\.(css|js)$,', $_GET['page']))) {
-	if(defined('_LOG_CS')) spip_log('COUTEAU-SUISSE.  -- sortie de cout_options sans initialisation du plugin ');
+// on zappe le CS si un reset general est demande
+$zap = (_request('cmd')=='resetall')
+// la page est un css ou un js (sauf si le cache est desactive)
+ || (!($metas_outils['spip_cache']['actif'] && $metas_vars['radio_desactive_cache3'])
+		&& (isset($_GET['page']) && preg_match(',(\.(css|js)$|style_prive(_ie)?),', $_GET['page'])));
+if($zap) {
+	cs_log(' FIN : cout_options sans initialisation du plugin');
 } else {
 	// $cs_metas_pipelines ne sert qu'a l'execution et ne comporte que :
 	//	- le code pour <head></head>
-	//	- le code pour les options.php
-	//	- le code pour les fonction.php
+	//	- le code pour options.php et fonction.php
 	//	- le code pour les pipelines utilises
 	global $cs_metas_pipelines;
 	$cs_metas_pipelines = array();
@@ -58,7 +70,7 @@ if(!($metas_outils['spip_cache']['actif'] && $metas_vars['radio_desactive_cache3
 	include_spip('cout_lancement');
 	// lancer l'initialisation du plugin
 	cs_initialisation();
-	cs_log("appel de cout_options (suite) : strlen=".strlen($cs_metas_pipelines['options']));
+	cs_log("PUIS : cout_options, initialisation terminee");
 	
 	// inclusion des options pre-compilees, si l'on n'est jamais passe par ici...
 	if (!$GLOBALS['cs_options']) {
@@ -71,12 +83,12 @@ if(!($metas_outils['spip_cache']['actif'] && $metas_vars['radio_desactive_cache3
 	// si une installation a eu lieu...
 	if (defined('_CS_INSTALLATION')) {
 		// lancer la procedure d'installation pour chaque outil
-		cs_log("[#$rand]  -- cs_installe_outils...");
+		cs_log("$rand -- cs_installe_outils...");
 		cs_installe_outils();
 	}
 	
-	cs_log(' -- sortie de cout_options... cs_options = '.intval($GLOBALS['cs_options']) 
-		. ($file_exists?" et fichier '$f' trouvé":" et fichier '$f' non trouvé !!"));
+	cs_log(' FIN : cout_options, cs_options = '.intval($GLOBALS['cs_options']) 
+		. ($file_exists?" et fichier '$f' present":" et fichier '$f' introuvable !!"));
 }
 
 ?>

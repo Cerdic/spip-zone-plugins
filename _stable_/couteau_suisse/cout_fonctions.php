@@ -2,8 +2,7 @@
 // Ce fichier est charge a chaque recalcul //
 
 // attention, ici il se peut que le plugin ne soit pas initialise (cas des .js/.css par exemple)
-// et donc, pas de fonction cs_log !!
-if(defined('_LOG_CS')) spip_log('COUTEAU-SUISSE. appel de cout_fonctions : strlen=' . strlen($cs_metas_pipelines['fonctions']));
+cs_log('INIT : cout_fonctions');
 
 // plugin initialise ?
 if($GLOBALS['cs_options']) {
@@ -88,10 +87,9 @@ if($GLOBALS['cs_options']) {
 
 	// inclusion des fonctions pre-compilees
 	if (!$GLOBALS['cs_fonctions']) include_once(_DIR_CS_TMP.'mes_fonctions.php');
-	cs_log(' -- sortie de cout_fonctions... cs_fonctions = ' . intval($GLOBALS['cs_fonctions']));
+	cs_log(' FIN : sortie de cout_fonctions, cs_fonctions = ' . intval($GLOBALS['cs_fonctions']));
 
-} else {
-	spip_log('COUTEAU-SUISSE.  -- sortie de cout_fonctions (sans inclusion)');
-}
+} else
+	cs_log(' FIN : cout_fonctions (sans inclusion)');
 
 ?>

@@ -3,8 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // attention, ici il se peut que le plugin ne soit pas initialise (cas des .js/.css par exemple)
-// et donc, pas de fonction cs_log !!
-if(defined('_LOG_CS')) spip_log("COUTEAU-SUISSE. inclusion de cout_pipelines.php");
+cs_log("inclusion de cout_pipelines.php");
 
 /***********
  * INSTALL *
@@ -53,7 +52,7 @@ function couteau_suisse_ajouter_onglets($flux){
 }
 
 // ajout d'une icone sur la page de configuration des plugins
-// ce code ne sert à rien puisque le pipeline 'affiche_gauche' n'est pas pris en compte dans 'admin_plugin'...
+// ce code ne sert a rien puisque le pipeline 'affiche_gauche' n'est pas pris en compte dans 'admin_plugin'...
 function couteau_suisse_affiche_gauche($flux){
 /*
 	if (_request('exec') == 'admin_plugin')
@@ -170,7 +169,7 @@ function couteau_suisse_BarreTypoEnrichie_tous($paramArray) {
 }
 
 /*
-cs_log("appel de cout_pipelines : strlen=" . strlen($cs_metas_pipelines['pipelines']));
+cs_log("INIT : cout_pipelines, lgr=" . strlen($cs_metas_pipelines['pipelines']));
 if (!$GLOBALS['cs_pipelines']) include_once(_DIR_CS_TMP.'pipelines.php');
 cs_log(' -- sortie de cout_pipelines... cs_pipelines = ' . intval($GLOBALS['cs_pipelines']));
 */

@@ -55,7 +55,7 @@ if ( count($_POST)
 			_T('cout:explique_spam')
 		);
 		// a partir de spip 1.9.2 ces fonctions ne font plus l'echo directement
-		if ($GLOBALS['spip_version']>=1.92) echo $page;
+		if (defined('_SPIP19200')) echo $page;
 		return true;
 	}
 }

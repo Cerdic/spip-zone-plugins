@@ -180,9 +180,9 @@ function outilchange(index) {
 //--></script>";
 }
 
-// mise à jour des données si envoi via formulaire
+// mise a jour des donnees si envoi via formulaire
 function enregistre_modif_outils(){
-cs_log("Début : enregistre_modif_outils()");
+cs_log("INIT : enregistre_modif_outils()");
 	global $outils;
 	// recuperer les outils dans l'ordre des $_POST
 	$test = array();
@@ -208,11 +208,11 @@ verif_plugin();
 		@unlink(_DIR_TMP."couteau-suisse.plat");
 	cs_initialisation(true);
 
-cs_log("Fin   : enregistre_modif_outils()");
+cs_log(" FIN : enregistre_modif_outils()");
 }
 
 function exec_admin_couteau_suisse_old() {
-cs_log("Début : exec_admin_couteau_suisse()");
+cs_log("INIT : exec_admin_couteau_suisse()");
 	global $connect_statut, $connect_toutes_rubriques;
 	global $spip_lang_right;
 	global $couleur_claire;
@@ -346,7 +346,7 @@ verif_plugin();
 	echo "</form>";
 
 	echo fin_gauche(), fin_page();
-cs_log("Fin   : exec_admin_couteau_suisse()");
+cs_log(" FIN : exec_admin_couteau_suisse()");
 }
 
 // affiche un outil sur une ligne

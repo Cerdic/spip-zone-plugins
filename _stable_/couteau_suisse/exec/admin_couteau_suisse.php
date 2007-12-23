@@ -257,7 +257,7 @@ function cs_Titre(nom){
 
 // mise a jour des donnees si envoi via formulaire
 function enregistre_modif_outils($cmd){
-cs_log("Début : enregistre_modif_outils()");
+cs_log("INIT : enregistre_modif_outils()");
 	global $outils, $metas_outils;
 	// recuperer les outils dans $_POST ou $_GET
 	$toggle = array();
@@ -279,7 +279,7 @@ cs_log("Début : enregistre_modif_outils()");
 	include_spip('inc/plugin');
 	verif_plugin();	
 
-cs_log("Fin   : enregistre_modif_outils()");
+cs_log(" FIN : enregistre_modif_outils()");
 }
 
 function cout_exec_redirige($p = '') {
@@ -293,9 +293,9 @@ function cout_exec_redirige($p = '') {
 }
 
 function exec_admin_couteau_suisse() {
-cs_log("Début : exec_admin_couteau_suisse()");
+cs_log("INIT : exec_admin_couteau_suisse()");
 	global $spip_lang_right;
-	global $outils, $afficher_outil, $metas_vars;
+	global $outils, $afficher_outil, $metas_vars, $metas_outils;
 
 	if (!cout_autoriser()) {
 		include_spip('inc/minipres');
@@ -315,29 +315,31 @@ verif_plugin();
 
 	// reset general
 	if ($cmd=='resetall'){
-		spip_log("Reset de tous les outils du Couteau Suisse par l'auteur id=$connect_id_auteur");
+		spip_log("Reset General du Couteau Suisse par l'auteur id=$connect_id_auteur");
 		foreach(array_keys($GLOBALS['meta']) as $meta) {
 			if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
 			if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
 		}
-		cout_exec_redirige();
+		$metas_vars = $metas_outils = array();
+		// ici, pas d'initialisation...
+		include_spip('cout_lancement');
+		cout_exec_redirige('cmd=resetjs');
 	}
 	// installation personnalisee
 	if ($cmd=='install' && isset($_GET['pack']) && isset($GLOBALS['cs_installer'][$_GET['pack']]['outils'])){
 		spip_log("Installation peronnalisee de '$_GET[outils]' par l'auteur id=$connect_id_auteur");
 		$pack = &$GLOBALS['cs_installer'][$_GET['pack']];
 		effacer_meta('tweaks_actifs');
-		$actifs = array();
-		foreach(explode('|', $pack['outils']) as $o) $actifs[trim($o)]['actif'] = 1;
+		$metas_outils = array();
+		foreach(explode('|', $pack['outils']) as $o) $metas_outils[trim($o)]['actif'] = 1;
 		if(isset($pack['variables'])) foreach($pack['variables'] as $i=>$v) $metas_vars[$i] = $v;
-		ecrire_meta('tweaks_actifs', serialize($actifs));
+		ecrire_meta('tweaks_actifs', serialize($metas_outils));
 		ecrire_meta('tweaks_variables', serialize($metas_vars));
 		cout_exec_redirige();
 	}
 	// reset des variables d'un outil
 	if ($cmd=='reset' && strlen($_GET['outil'])){
 		spip_log("Reset des variables de '$_GET[outil]' par l'auteur id=$connect_id_auteur");
-//echo "Reset des variables de '$_GET[outil]' par l'auteur id=$connect_id_auteur";
 		global $outils;
 		include_spip('cout_utils');
 		include_spip('config_outils');
@@ -432,22 +434,21 @@ if (strlen($res['version']) and (version_compare($res['version'],'2.3.2','<'))) 
 	debut_droite();
 
 	debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),'','','&nbsp;'._T('desc:liste_outils'));
-	echo _T('desc:presente_outils2');
-	echo "\n<table border='0' cellspacing='0' cellpadding='5' style='width:100%;'><tr><td class='sansserif'>";
+	echo _T('desc:presente_outils2'),
+		"\n<table border='0' cellspacing='0' cellpadding='5' style='width:100%;'><tr><td class='sansserif'>";
 
 	include_spip('inc/cs_outils');
 	$_GET['source'] = $exec;
-	echo '<div class="conteneur">' . liste_outils()
-	. '</div><br class="conteneur" /><div class="conteneur">'
-	. description_outil2(strlen($afficher_outil)?$afficher_outil:'') . '</div>';
+	echo '<div class="conteneur">', liste_outils(),
+		'</div><br class="conteneur" /><div class="conteneur">',
+		description_outil2(strlen($afficher_outil)?$afficher_outil:''), '</div>',
 
-	echo "</td></tr></table>\n";
+		"</td></tr></table>\n";
 	fin_cadre_trait_couleur();
 
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$exec),'data'=>''));
-
-	echo fin_gauche(), fin_page();
-cs_log("Fin   : exec_admin_couteau_suisse()");
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$exec),'data'=>'')),
+		fin_gauche(), fin_page();
+cs_log(" FIN : exec_admin_couteau_suisse()");
 }
 
 function cs_boite_rss($force) {

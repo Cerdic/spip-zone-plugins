@@ -81,7 +81,7 @@ function add_outil($tableau) {
 	$outils[$tableau['id']] = $tableau;
 }
 
-// ajoute une variable à $cs_variables et fabrique une liste des chaines et des nombres
+// ajoute une variable a $cs_variables et fabrique une liste des chaines et des nombres
 function add_variable($tableau) {
 	global $cs_variables;
 	$nom = $tableau['nom'];
@@ -97,7 +97,7 @@ function cs_get_defaut($variable) {
 	global $cs_variables;
 	// si la variable n'est pas declaree, serieux pb dans config_outils !
 	if (!isset($cs_variables[$variable])) {
-		spip_log("Erreur - variable '$variable' non déclarée dans config_outils.php !");
+		spip_log("Erreur - variable '$variable' non declaree dans config_outils.php !");
 		return false;
 	}
 	$variable = &$cs_variables[$variable];
@@ -472,7 +472,7 @@ function cs_installe_outils() {
 		include_spip('outils/'.$nom);
 		if (function_exists($f = $nom.'_installe')) {
 			$f();
-cs_log(" -- $f() : installé !");
+cs_log(" -- $f() : OK !");
 		}
 	}
 	ecrire_metas();

@@ -19,7 +19,7 @@ if(!function_exists(ajax_retour)) {
 }
 
 function exec_description_outil_dist() {
-cs_log("Début : exec_description_outil_dist() - Préparation du retour par Ajax (données transmises par GET)");
+cs_log("INIT : exec_description_outil_dist() - Preparation du retour par Ajax (donnees transmises par GET)");
 	$script = _request('script');
 	$outil = _request('outil');
 cs_log(" -- outil = $outil - script = $script");
@@ -37,7 +37,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	include_spip('inc/cs_outils');
 	$description_outil = charger_fonction('description_outil', 'inc');
 	$descrip = cs_initialisation_d_un_outil($outil, $description_outil, true);
-cs_log("Fin   : exec_description_outil_dist() - Appel maintenant de ajax_retour() pour afficher la ligne de configuration de l'outil");	
+cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour() pour afficher la ligne de configuration de l'outil");	
 
 	include_spip('inc/texte');
 	ajax_retour(propre($descrip));

@@ -15,8 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // TODO : revoir tout ca avec compare_version() et la syntaxe de <necessite>
 function cs_version_erreur($outil) {
-	return (isset($outil['version-min']) && $GLOBALS['spip_version']<$outil['version-min'])
-		|| (isset($outil['version-max']) && $GLOBALS['spip_version']>$outil['version-max']);
+	return (isset($outil['version-min']) && $GLOBALS['spip_version_code']<$outil['version-min'])
+		|| (isset($outil['version-max']) && $GLOBALS['spip_version_code']>$outil['version-max']);
 }
 
 // initialise un outil, ses variables, et en renvoie la description compilee
@@ -70,6 +70,9 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	include_spip('inc/texte');
 	$s .= propre($descrip);
 
+	$serial = serialize(array_keys($outil));
+	if (preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
+		$p .=  _T('desc:balise_etoilee', array('bal' => '#'.join('*, #', array_unique($regs[1])).'*'));	
 	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T(defined('_SPIP19100')?'desc:jquery1':'desc:jquery2') . '</p>';
 	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
 	if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('desc:contrib', array('id'=>$outil['contrib'])) . '</p>';
@@ -92,12 +95,12 @@ function liste_outils() {
 			$test = $outil['actif']?'s_actifs':'s_inactifs';
 			$hide = cs_version_erreur($outil) || (!$outil['actif'] && isset($metas_caches[$outil['id']]['cache']));
 			if (!$hide)
-//				${$test}[] .= _T('desc:'.$outil['id'].':nom') . '|' . $outil['index'] . '|' . $outil['id'];
 				${$test}[] .= $outil['nom'] . '|' . $outil['index'] . '|' . $outil['id'];
 		}
 		foreach(array('s_actifs', 's_inactifs') as $temp) {
 			sort(${$temp});
-			$titre = "<script type=\"text/javascript\"><!--
+			$reset=_request('cmd')=='resetjs'?"\ncs_EffaceCookie('sous_liste_$id');":'';
+			$titre = "<script type=\"text/javascript\"><!--$reset
 document.write('<span class=\"light'+cs_Titre('sous_liste_$id')+'\">');
 //--></script><noscript><span class='light cs_hidden'></noscript>" 
 				." (".count(${$temp}).")</span>";

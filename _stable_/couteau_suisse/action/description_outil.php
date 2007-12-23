@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/filtres');
 
 function action_description_outil_dist() {
-cs_log("Debut : action_description_outil_dist() - Une modification de variable(s) a ete demandee !");
+cs_log("INIT : action_description_outil_dist() - Une modification de variable(s) a ete demandee !");
 	if (defined('_SPIP19200')) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -19,7 +19,7 @@ cs_log("Debut : action_description_outil_dist() - Une modification de variable(s
 	if (preg_match(",^\W*(\d+)$,", $arg, $r))
 		action_description_outil_post($r[1]);
 	else spip_log("action_description_outil_dist $arg pas compris");
-cs_log("Fin   : action_description_outil_dist($arg)");
+cs_log(" FIN : action_description_outil_dist($arg)");
 }
 
 function action_description_outil_post($index) {
@@ -54,6 +54,6 @@ cs_log(" -- donc, reinitialisation forcee !");
 	purger_repertoire(_DIR_CACHE);
 	include_spip('cout_utils');
 	cs_initialisation(true);
-cs_log("Fin   : action_description_outil_post(Array($index)) - Reinitialisation forcee terminee.");
+cs_log(" FIN : action_description_outil_post(Array($index)) - Reinitialisation forcee terminee.");
 }
 ?>

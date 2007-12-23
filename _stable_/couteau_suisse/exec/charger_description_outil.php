@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Un morceau d'ajax qui affiche le descriptif d'un outil a partir
 // des listes d'outils a telecharger, dans exec=admin_couteau_suisse
 function exec_charger_description_outil_dist() {
-cs_log("Début : exec_charger_description_outil_dist() - Préparation du retour par Ajax sur div#cs_infos");
+cs_log("INIT : exec_charger_description_outil_dist() - Preparation du retour par Ajax sur div#cs_infos");
 
 	if (!cout_autoriser()) {
 		include_spip('inc/minipres');
@@ -25,7 +25,7 @@ cs_log("Début : exec_charger_description_outil_dist() - Préparation du retour pa
 		echo description_outil2($outil_id);
 	}
 
-cs_log("Fin   : exec_charger_description_outil_dist()");	
+cs_log(" FIN : exec_charger_description_outil_dist()");	
 }
 
 ?>

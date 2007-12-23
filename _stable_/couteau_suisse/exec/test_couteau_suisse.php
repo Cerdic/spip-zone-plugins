@@ -44,7 +44,7 @@ cs_log("D&eacute;but : exec_test_couteau_suisse()");
 	echo '</div>';
 
 	echo fin_page();
-cs_log("Fin   : exec_test_couteau_suisse()");
+cs_log(" FIN : exec_test_couteau_suisse()");
 }
 
 // renvoie un tableau contenant le texte original et sa transfrmation par la fonction $fonction
