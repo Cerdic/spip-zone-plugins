@@ -86,8 +86,7 @@ function Notifications_envoi($emails, $subject, $body) {
 			$a = Notifications_creer_auteur($email);
 			if (is_array($a)
 			AND isset($a['id_auteur']))
-				$url = url_absolue(generer_url_public('suivi',
-					'p='.$a['cookie_oubli'], '&'));
+				$url = url_absolue(generer_url_public('suivi'));
 
 			$bodyc .= "\n\n$url\n";
 		}
