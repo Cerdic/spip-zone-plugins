@@ -60,7 +60,10 @@ function balise_STATUT_PUBLIC_stat ($args, $filtres) {
 }
 
 function balise_STATUT_PUBLIC_dyn () {	
-	if(isset($GLOBALS['auteur_session'])) {
+	
+	static $lilo_boite_statut_inseree = false;
+
+	if(isset($GLOBALS['auteur_session']) && !$lilo_boite_statut_inseree) {
 		
 		$auteur_session = $GLOBALS['auteur_session'];
 		
@@ -94,7 +97,9 @@ function balise_STATUT_PUBLIC_dyn () {
 			. "background-color:#".$config['lilo_statut_bgcolor'].";"
 			;
 		$auteur_session['statut_style'] = "style='$statut_style $transparent'";
-					
+		
+		$lilo_boite_statut_inseree = true;
+		
 		return array('formulaires/statut_public'
 			, 0 //$GLOBALS['delais']
 			, $auteur_session
