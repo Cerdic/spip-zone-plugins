@@ -9,6 +9,7 @@ $exceptions =
 	|| isset($_POST['action'])
 	|| ($_GET['page'] == 'login')
 	|| ($_GET['page'] == 'style_prive') // filtrage de la feuille de style admin mise en squelette
+	|| ($_GET['page'] == 'style_prive_ie') // idem IE
 	|| (strpos($_GET['page'],'.js') !== false) // filtrage de jquery.js par exemple qui sert pour la partie admin
 	|| (strpos($_GET['page'],'.css') !== false); // on sait jamais...
 
