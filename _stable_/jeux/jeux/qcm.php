@@ -19,6 +19,7 @@ separateurs optionnels   : [titre], [texte], [config]
 parametres de configurations par defaut :
 	trou=auto // taille du trou affiche en cas de proposition unique
 	solution=non // donne la(les) bonne(s) reponse(s) lors de la correction
+	points=oui // affiche eventuellement les points dans les questions
 	max_radios=5 // nombre maximal de boutons radios affiches avant le choix d'une liste deroulante
 	colonnes=1 // nombre de boutons (type radio ou a cocher) par ligne
 
@@ -137,7 +138,8 @@ function qcm_analyse_le_qcm($qcm, $indexQCM, $isQRM) {
 } // function
 
 function qcm_les_points($phrase, $points) {
-    $pointsHTML = '<span class="jeux_point"> ('.$points. _T('jeux:point'.(abs($points)>1?'s':'')).')</span>';
+	if (!jeux_config('points')) return $phrase;
+    $pointsHTML = '<span class="jeux_points"> ('.$points. _T('jeux:point'.(abs($points)>1?'s':'')).')</span>';
   	if (ereg('^(.*)( ?:)( *)$', $phrase, $eregResult)) $phrase = $eregResult[1].$pointsHTML.$eregResult[2].$eregResult[3];
 	  else $phrase .= $pointsHTML;
 	return $phrase;  
@@ -333,6 +335,7 @@ function jeux_qcm($texte, $indexJeux) {
   jeux_config_init("
 	trou=auto	// taille du trou affiche en cas de proposition unique
 	solution=non	// donne la(les) bonne(s) reponse(s) lors de la correction
+	points=oui // affiche eventuellement les points dans les questions
 	max_radios=5 // nombre maximal de boutons radios affiches avant le choix d'une liste deroulante
 	colonnes=1 // nombre de boutons par ligne
   ", false);
