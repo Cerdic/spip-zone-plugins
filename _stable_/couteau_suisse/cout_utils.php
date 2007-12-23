@@ -112,9 +112,8 @@ function cs_get_defaut($variable) {
 	return $defaut2;
 }
 
-// installation de $cs_metas_pipelines
 // $type ici est egal a 'options' ou 'fonctions'
-function set_cs_metas_pipelines_fichier($infos_pipelines, $type) {
+function ecrire_fichier_en_tmp($infos_pipelines, $type) {
 	global $cs_metas_pipelines;
 	$code = '';
 	if (isset($infos_pipelines['inc_'.$type]))
@@ -122,13 +121,11 @@ function set_cs_metas_pipelines_fichier($infos_pipelines, $type) {
 	if (isset($infos_pipelines['code_'.$type]))
 		foreach ($infos_pipelines['code_'.$type] as $inline) $code .= $inline."\n";
 	// on optimise avant...
-	$code = str_replace('intval("")', '0', $code);
+	$code = str_replace(array('intval("")',"intval('')"), '0', $code);
 	$code = str_replace("\n".'if(strlen($foo="")) ',"\n\$foo=''; //", $code);
 	// ... en avant le code !
-	$cs_metas_pipelines[$type] = $code;
-cs_log("set_cs_metas_pipelines_fichier($type) : strlen=".strlen($code));
 	$fichier_dest = _DIR_CS_TMP . "mes_$type.php";
-cs_log(" -- fichier_dest = $fichier_dest");
+cs_log("ecrire_fichier_en_tmp($type) : lgr=".strlen($code))." pour $fichier_dest";
 	if(!ecrire_fichier($fichier_dest, '<'."?php\n// Code d'inclusion pour le plugin 'Couteau Suisse'\n++\$GLOBALS['cs_$type'];\n$code?".'>', true))
 		cs_log("ERREUR ECRITURE : $fichier_dest");
 }
@@ -352,8 +349,8 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		closedir($handle);
 	} else spip_log('Erreur - cs_initialise_includes() : '._DIR_CS_TMP.' introuvable !');
 	// installation de $cs_metas_pipelines
-	set_cs_metas_pipelines_fichier($infos_pipelines, 'options');
-	set_cs_metas_pipelines_fichier($infos_pipelines, 'fonctions');
+	ecrire_fichier_en_tmp($infos_pipelines, 'options');
+	ecrire_fichier_en_tmp($infos_pipelines, 'fonctions');
 	$code = array();
 	foreach($pipelines_utilises as $pipe) $code[] = set_cs_metas_pipelines_pipeline($infos_pipelines, $pipe);
 	if($nb=count($code))
