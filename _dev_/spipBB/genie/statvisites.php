@@ -44,7 +44,7 @@ function compte_fichier_visite_forum($fichier, &$visites_f) {
 		// S'il s'agit d'une visite de forum, noter ses visites
 		if ($log_type == 'forum'
 		AND $id_forum = intval($log_id_num)) {
-			$visites_f[$id_forum] ++;
+			$visites_f[$id_forum]=$visites_f[$id_forum] + intval($num);
 		}
 	}
 }
