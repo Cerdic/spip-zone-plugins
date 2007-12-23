@@ -24,10 +24,7 @@
 // * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-#include_spip('inc/spipbb');
-
-
+spip_log(__FILE__.' : included','spipbb');
 
 # conversion spip 192
 include_spip('inc/spipbb_util');

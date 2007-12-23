@@ -3,6 +3,9 @@
 | diverses fonction communes : sur exec_ et/ou action_
 */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
+
 #
 # inclure : fonctions convers 193->192
 #

@@ -24,19 +24,11 @@
 // * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 
-include_spip('inc/spipbb');
-
-#############################
-# h. 28/11 ... encore rien vue ici !
-# a priori invalider inclus inc/spipbb !
-# +
-
-# conversion spip 192
-include_spip('inc/spipbb_util');
-
-
-#############################
+if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
+	include_spip('inc/spipbb_192'); // SPIP 1.9.2
+}
 
 // ------------------------------------------------------------------------------
 // [fr] Verification et declenchement de l'operation

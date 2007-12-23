@@ -11,7 +11,8 @@ retour donnee brut
 | gaf 0.6 - 10/11/07
 */
 
-include_spip('inc/spipbb');
+if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 
 function balise_SPIPBB_dist($p) {
 	$_id_auteur = champ_sql('id_auteur', $p);

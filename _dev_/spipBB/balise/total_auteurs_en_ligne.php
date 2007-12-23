@@ -28,8 +28,11 @@
 /* en cas d'omission on garde 5 minutes comme délais */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 
-include_spip('inc/spipbb'); // Compatibilite 192
+if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
+	include_spip('inc/spipbb_192'); // SPIP 1.9.2
+}
 
 function balise_TOTAL_AUTEURS_EN_LIGNE($p) {
 	return calculer_balise_dynamique($p,'TOTAL_AUTEURS_EN_LIGNE', array());
@@ -43,7 +46,7 @@ function balise_TOTAL_AUTEURS_EN_LIGNE_dyn($delais='5 MINUTE') {
 	if (empty($delais)) $delais='5 MINUTE';
 
 	$o = sql_fetsel('COUNT(*) AS total','spip_auteurs',"en_ligne>= DATE_SUB(NOW(), INTERVAL ".$delais." )");
-	return $o['total'] ;
+	return is_array($o) ? $o['total'] : 0 ;
 }
 
 ?>

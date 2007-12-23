@@ -5,7 +5,8 @@
 | 
 +----------------------------------+*/
 
-include_spip('inc/spipbb');
+if (!defined("_ECRIRE_INC_VERSION")) return;
+spip_log(__FILE__.' : included','spipbb');
 
 /*
 +----------------------------------+
