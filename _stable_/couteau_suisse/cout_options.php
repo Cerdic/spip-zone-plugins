@@ -44,7 +44,7 @@ if ($metas_outils['log_couteau_suisse']['actif'] || defined('_LOG_CS_FORCE') || 
 
 // pour voir les erreur ?
 if ($_GET['cs']=='report') error_reporting(E_ALL ^ E_NOTICE);
-elseif ($_GET['cs']=='reportall' && cout_autoriser()) error_reporting(E_ALL);
+elseif ($_GET['cs']=='reportall' && $auteur_session['statut']=='0minirezo') error_reporting(E_ALL);
 
 // on zappe le CS si un reset general est demande
 $zap = (_request('cmd')=='resetall')
