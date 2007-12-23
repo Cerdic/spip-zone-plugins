@@ -653,7 +653,7 @@ add_outil( array(
 add_variable( array(
 	'nom' => 'glossaire_groupes',
 	'format' => 'chaine',
-	'defaut' => "Glossaire",
+	'defaut' => "'Glossaire'",
 	'code' => "\$GLOBALS['glossaire_groupes']=%s;\n",
 ));
 add_variable( array(

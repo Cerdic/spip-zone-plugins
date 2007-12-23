@@ -42,6 +42,10 @@ if ($metas_outils['log_couteau_suisse']['actif'] || defined('_LOG_CS_FORCE') || 
 	cs_log('INIT : cout_options, '.$_SERVER['REQUEST_URI']);
 }
 
+// pour voir les erreur ?
+if ($_GET['cs']=='report') error_reporting(E_ALL ^ E_NOTICE);
+elseif ($_GET['cs']=='reportall' && cout_autoriser()) error_reporting(E_ALL);
+
 // on zappe le CS si un reset general est demande
 $zap = (_request('cmd')=='resetall')
 // la page est un css ou un js (sauf si le cache est desactive)

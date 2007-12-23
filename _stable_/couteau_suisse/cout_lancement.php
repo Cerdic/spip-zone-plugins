@@ -63,14 +63,14 @@ cs_log($rand.($forcer?"\$forcer = true":"cs_initialisation($forcer) : Sortie car
 		// Les pipelines sont en meta, tout va bien on peut partir d'ici.
 		if (!$forcer) return;
 	}
-
 	// ici on commence l'initialisation de tous les outils
 	global $outils, $metas_vars, $metas_outils;
+	include_spip('inc/meta');
 	include_spip('cout_utils');
 	// remplir $outils (et aussi $cs_variables qu'on n'utilise pas ici);
 	include_spip('config_outils');
 	// verifier que tous les outils actives sont bien presents
-	foreach($metas_outils as $nom=>$o) if($o['actif']) { if(!isset($outils[$nom])) unset($metas_outils[$nom]); }
+ 	foreach($metas_outils as $nom=>$o) if($o['actif']) { if(!isset($outils[$nom])) unset($metas_outils[$nom]); }
 	ecrire_meta('tweaks_actifs', serialize($metas_outils));
 	ecrire_metas();
 	// nettoyage des versions anterieures

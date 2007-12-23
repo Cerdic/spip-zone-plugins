@@ -9,7 +9,7 @@
 #  la configuration du plugin                         #
 #-----------------------------------------------------#
 
-cs_log("Chargement de cout_utils.php et lancement de cs_initialisation...");
+cs_log("chargement de cout_utils.php et lancement de cs_initialisation...");
 @define('_CS_INSTALLATION', 1);
 
 // $outils : tableau ultra complet avec tout ce qu'il faut savoir sur chaque outil
@@ -390,7 +390,7 @@ function cs_get_code_variable($variable, $valeur) {
 		$valeur = cs_php_format($valeur, $cs_variable['format']!='nombre');
 	$code = '';
 	foreach($cs_variable as $type=>$param) if (preg_match(',^code(:(.*))?$,', $type, $regs)) {
-		$eval = '$test = ' . (strlen($regs[2])?str_replace('%s', $valeur, $regs[2]):'true') . ';';
+		$eval = '$test = ' . (isset($regs[2])?str_replace('%s', $valeur, $regs[2]):'true') . ';';
 		$test = false;
 		eval($eval);
 		if($test) return str_replace('%s', $valeur, $param);
