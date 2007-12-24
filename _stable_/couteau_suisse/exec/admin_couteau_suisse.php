@@ -353,7 +353,7 @@ verif_plugin();
 	if ($cmd=='showall'){
 		spip_log("Reset de tous les affichages du Couteau Suisse par l'auteur id=$connect_id_auteur");
 		effacer_meta('tweaks_caches');
-		ecrire_metas();
+		cout_exec_redirige();
 	}
 
 	// afficher la description d'un outil ?
@@ -444,9 +444,10 @@ if (strlen($res['version']) and (version_compare($res['version'],'2.3.2','<'))) 
 		description_outil2(strlen($afficher_outil)?$afficher_outil:''), 
 		'<script type="text/javascript"><!--
 document.write("<style>div#csjs{display:none;}</style>");
-//--></script><div id="csjs" style="color:red;"><br/>', _T('desc:erreur:js'),'</div>',
+//--></script><div id="csjs" style="color:red;"><br/>', _T('desc:erreur:js'),'</div>
+<noscript><style>div#csjs{display:none;}</style><div style="color:red;"><br/>', _T('desc:erreur:nojs'),
+$_GET['modif']=='oui'?'<br/>'._T('desc:vars_modifiees').'.':'','</div></noscript>',
 		'</div>',
-
 		"</td></tr></table>\n";
 	fin_cadre_trait_couleur();
 
