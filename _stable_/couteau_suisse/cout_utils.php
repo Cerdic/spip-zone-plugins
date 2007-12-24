@@ -242,9 +242,9 @@ function cs_sauve_configuration() {
 
 $sauve .= "\n############## PACK ACTUEL DE CONFIGURATION DU COUTEAU SUISSE #################\n"
 	. "\n// Attention, les surcharges sur les define() ou les globales ne sont pas specifiees ici\n"
-	. "\$GLOBALS['cs_installer']['Pack Actuel'] = array(\n// Installation des outils par defaut\n"
+	. "\$GLOBALS['cs_installer']['Pack Actuel'] = array(\n\t// Installation des outils par defaut\n"
 	. "\t'outils' =>\n\t\t'".join('|', $actifs)."',\n"
-	. "// Installation des variables par defaut\n"
+	. "\t// Installation des variables par defaut\n"
 	. "\t'variables' => array(\n\t" . join(",\n\t", $metas_actifs) . "\n\t)\n);\n";
 
 	$fichier_dest = _DIR_CS_TMP . "config.php";

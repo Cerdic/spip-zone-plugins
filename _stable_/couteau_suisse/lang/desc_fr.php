@@ -43,7 +43,7 @@ _ &bull; [De tout le plugin->@reset@]
 _ &bull; [Des outils cach&eacute;s->@hide@]
 _ &bull; [De tout le plugin->@reset@]@install@
 </p>",
-	'pour' => '&bull; pour @pack@',
+	'pour' => '&bull; du pack @pack@',
 	'distant' => "<br/>Nouvelle version : [@version@->http://files.spip.org/spip-zone/couteau_suisse.zip]",
 	'a_jour' => "<br/>Votre version est &agrave; jour.",
 
