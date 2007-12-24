@@ -18,6 +18,7 @@ if(defined("_PGL_PLUGIN_GLOBALES_LIB") && _PGL_PLUGIN_GLOBALES_LIB) return;
 define("_PGL_PLUGIN_GLOBALES_LIB", 20071224.0535); //date.heure
 
 // HISTORY:
+// CP-20071224: ajout de __plugin_current_svnrevision_get() et modif __plugin_html_signature()
 // CP-20071222: optimisation __plugin_boite_meta_info() pour plugin en mode stable et mode dev
 
 include_spip("inc/plugin");
@@ -114,15 +115,15 @@ if(!function_exists('__plugin_current_version_base_get')) {
 	}
 } // end if __plugin_current_version_base_get
 
-if(!function_exists('__plugin_current_LastChangedRevision_get')) {
+if(!function_exists('__plugin_current_svnrevision_get')) {
 	// renvoie le dernier numero de révision svn
-	function __plugin_current_LastChangedRevision_get ($prefix) {
+	function __plugin_current_svnrevision_get ($prefix) {
 		if(!empty($prefix)) {
 			// lire directement dans plugin.xml (éviter le cache ?)
-			$result = __plugin_real_tag_get($prefix, "LastChangedRevision");
+			$result = __plugin_real_tag_get($prefix, "LastChanged"."Revision");
 			// protéger de svn qui va le prendre pour un tag
 			$result = trim($result, '$');
-			return(preg_replace('=^LastChangedRevision: ([0-9]+) $=', '${1}', $result));
+			return(preg_replace("=^LastChanged"."Revision: ([0-9]+) $=", '${1}', $result));
 		}
 		return(false);
 	}
@@ -273,11 +274,11 @@ if(!function_exists('__plugin_html_signature')) {
 		$version = typo($info['version']);
 		//$base_version = typo($info['version_base']); // cache ?
 		$base_version = __plugin_current_version_base_get($prefix);
-		$LastChangedRevision = __plugin_current_LastChangedRevision_get($prefix);
+		$svnrevision = __plugin_current_svnrevision_get($prefix);
 		$revision = "";
 		if($html) {
 			$version = (($version) ? " <span style='color:gray;'>".$version : "")
-				. (($LastChangedRevision) ? "-".$LastChangedRevision : "")
+				. (($svnrevision) ? "-".$svnrevision : "")
 				. "</span>"
 				;
 			$base_version = (($base_version) ? " <span style='color:#66c;'>&lt;".$base_version."&gt;</span>" : "");
