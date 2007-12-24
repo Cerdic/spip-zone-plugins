@@ -20,7 +20,7 @@ function filets_sep_installe() {
 			$filets[0][] = '__'.$reg[1].'__';	
 			list(,$haut) = @getimagesize("$path/$reg[1]");
 			if ($haut) $haut="height:{$haut}px;";
-			$f = cs_htmlpath($path).'/'.$reg[1];
+			$f = url_absolue($path).'/'.$reg[1];
 			$filets[1][] = "<html><p class=\"spip filet_sep filet_sep_image\" style=\"$haut background-image: url($f);\">&nbsp; &nbsp; &nbsp;</p></html>";
 		}
 	}

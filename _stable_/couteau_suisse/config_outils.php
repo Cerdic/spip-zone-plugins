@@ -447,7 +447,7 @@ add_variable( array(
 	'defaut' => 0,
 	'code:%s' => "define('_sommaire_BALISE', %s);",
 ));
-$path = cs_htmlpath(find_in_path(defined('_SPIP19100')?"img_pack/spip_out.gif":"images/spip_out.gif"));
+$path = url_absolue(find_in_path(defined('_SPIP19100')?"img_pack/spip_out.gif":"images/spip_out.gif"));
 add_outil( array(
 	'id' => 'sommaire',
 	'contrib'	=> 2378,

@@ -9,8 +9,7 @@
 function smileys_installe() {
 	$path = find_in_path('img/smileys');
 cs_log("smileys_installe() : $path");
-	$path2 = cs_htmlpath($path);
-cs_log(" -- abs. path = $path2");
+	$path2 = url_absolue($path);
 
 	// l'ordre des smileys ici est important :
 	//  - les doubles, puis les simples, puis les courts

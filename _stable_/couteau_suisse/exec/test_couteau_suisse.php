@@ -95,7 +95,7 @@ function cs_les_tests() {
 	test_outil($metas_outils, 'Outils actifs : $metas_outils[]');
 	test_outil($metas_vars, 'Contenu des variables : $metas_vars[]');
 
-	// test de cs_htmlpath()
+	// test de url_absolue()
 	$relative_path = find_in_path('img/smileys');
 	$realpath = str_replace("\\", "/", realpath($relative_path));
 	$root = preg_replace(',/$,', '', $_SERVER['DOCUMENT_ROOT']);
@@ -114,11 +114,11 @@ function cs_les_tests() {
 			"str_replace('\\', '/', realpath('$relative_path'))"=>$realpath,
 			"substr('$realpath', strlen('$root'))"=>cs_red($test_result),
 			"return?"=>(strlen($root) && strpos($realpath, $root)===0)?'oui':'non',
-			"cs_htmlpath('$relative_path')"=>cs_htmlpath($relative_path),
+			"url_absolue('$relative_path')"=>url_absolue($relative_path),
 			'$dir'=>$dir,
 			"cs_canonicalize('$dir'.'/'.'$relative_path')"=>cs_red(cs_canonicalize($dir.'/'.$relative_path)),
 		);
-	test_outil($a, 'Test sur : cs_htmlpath()');
+	test_outil($a, 'Test sur : url_absolue()');
 
 	// test de cs_canonicalize()
 	$dir = $dir.'/'.$relative_path;

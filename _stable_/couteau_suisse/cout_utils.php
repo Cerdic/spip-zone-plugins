@@ -216,9 +216,9 @@ function cs_aide_pipelines() {
 function cs_insert_header($f, $type) {
 	if ($type=='css') {
 		include_spip('inc/filtres');
-		return "<link rel=\"stylesheet\" href=\"".cs_htmlpath(direction_css($f))."\" type=\"text/css\" media=\"projection, screen\" />\n";
+		return "<link rel=\"stylesheet\" href=\"".url_absolue(direction_css($f))."\" type=\"text/css\" media=\"projection, screen\" />\n";
 	} elseif ($type=='js')
-		return "<script type=\"text/javascript\" src=\"".cs_htmlpath($f)."\"></script>\n";
+		return "<script type=\"text/javascript\" src=\"".url_absolue($f)."\"></script>\n";
 }
 // sauve la configuration dans un fichier tmp/couteau-suisse/config.php
 function cs_sauve_configuration() {

@@ -23,7 +23,7 @@ function decoupe_installe() {
 	if($path) while ($image = readdir($dossier)) {
 		if (preg_match(',^([a-z][a-z0-9_-]*)\.(png|gif|jpg),', $image, $reg)) { 
 			list(,,,$size) = @getimagesize("$path/$reg[1].$reg[2]");
-			$images[$reg[1]] = "<img class=\"no_image_filtrer\" src=\"".cs_htmlpath($path)."/$reg[1].$reg[2]\" $size";
+			$images[$reg[1]] = "<img class=\"no_image_filtrer\" src=\"".url_absolue($path)."/$reg[1].$reg[2]\" $size";
 		}
 	}
 	ecrire_meta('cs_decoupe', serialize($images));

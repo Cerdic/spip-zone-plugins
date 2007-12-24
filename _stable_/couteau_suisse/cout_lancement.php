@@ -145,20 +145,6 @@ function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 	return $texte;
 }
 
-// transforme un chemin d'image relatif en chemin html absolu
-// cette fonction est utilisable par les outils eux-memes durant l'execution du plugin
-function cs_htmlpath($relative_path) {
-	$realpath = str_replace('\\', '/', realpath($relative_path));
-	$root = preg_replace(',/$,', '', $_SERVER['DOCUMENT_ROOT']);
-	if (strlen($root) && strpos($realpath, $root)===0)
-		return substr($realpath, strlen($root));
-	$dir = dirname(!empty($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] :
-			(!empty($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] :
-			(!empty($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : str_replace('\\','/',__FILE__)
-		)));
-	return cs_canonicalize($dir.'/'.$relative_path);
-}
-
 // retourne un chemin canonique a partir d'un chemin contenant des ../
 function cs_canonicalize($address) {
 	$address = str_replace('\\', '/', str_replace('//', '/', $address));

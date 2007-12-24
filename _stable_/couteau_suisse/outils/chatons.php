@@ -29,7 +29,7 @@ function chatons_installe() {
 			$chatons[0][] = ':'.$reg[1];
 			$liste[] = '<b>:'.$reg[1].'</b>';	
 			list(,,,$size) = @getimagesize("$path/$reg[1].$reg[2]");
-			$chatons[1][] = "<img class=\"no_image_filtrer\" alt=\"$reg[1]\" title=\"$reg[1]\" src=\"".cs_htmlpath($path)."/$reg[1].$reg[2]\" $size/>";
+			$chatons[1][] = "<img class=\"no_image_filtrer\" alt=\"$reg[1]\" title=\"$reg[1]\" src=\"".url_absolue($path)."/$reg[1].$reg[2]\" $size/>";
 		}
 	}
 	ecrire_meta('cs_chatons_racc', join(', ', $liste));
