@@ -382,13 +382,15 @@ verif_plugin();
 	if(isset($GLOBALS['meta']['plugin'])) {
 		$t = unserialize($GLOBALS['meta']['plugin']);
 		$dir = $t['COUTEAU_SUISSE']['dir'];
-		$dir_bt = $t['BARRETYPOENRICHIE']['dir'];
+		$cs_version = $t['COUTEAU_SUISSE']['version'];
+		$bt_dir = $t['BARRETYPOENRICHIE']['dir'];
+		$bt_version = $t['BARRETYPOENRICHIE']['version'];
 		unset($t);
 	}
 	if(!strlen($dir)) $dir = 'couteau_suisse';
-	if(!strlen($dir_bt)) $dir_bt = 'barre_typo_v2';
-	$cs_version = plugin_get_infos($dir);
-	$cs_version = $maj[1] = $cs_version['version'];
+	if(!strlen($bt_dir)) $bt_dir = 'barre_typo_v2';
+	if(!strlen($cs_version)) { $cs_version = plugin_get_infos($dir); $cs_version = $cs_version['version']; }
+	if(!strlen($bt_version)) { $bt_version = plugin_get_infos($bt_dir); $bt_version = $bt_version['version']; }
 
 	cs_admin_styles_et_js($cs_version);
 	echo "<br /><br /><br />";
@@ -400,8 +402,7 @@ $res = spip_query("DESCRIBE spip_meta valeur");
 $resultat = function_exists('spip_fetch_array')?spip_fetch_array($res):sql_fetch($res);
 if($resultat['Type']!='text') echo "<p style=\"color:red;\">Attention : votre base semble ancienne et le Couteau Suisse ne va pas bien fonctionner.</p><p>La table 'spip_meta' a pour type de valeur '$resultat[Type]' au lieu de 'text'.</p>";
 // verification de la barre typo V2
-$res = plugin_get_infos($dir_bt);
-if (strlen($res['version']) and (version_compare($res['version'],'2.3.2','<'))) echo "<p><span style=\"color:red;\">Attention :</span> la barre typographique (version $res[version]) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; 2.3.2.</p>";
+if (strlen($bt_version) and (version_compare($bt_version,'2.3.2','<'))) echo "<p><span style=\"color:red;\">Attention :</span> la barre typographique (version $bt_version) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; 2.3.2.</p>";
 
 	compat_boite('debut_gauche');
 	// pour la liste des docs sur spip-contrib
