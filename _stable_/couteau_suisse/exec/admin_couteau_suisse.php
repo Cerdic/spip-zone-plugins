@@ -410,6 +410,7 @@ if (strlen($res['version']) and (version_compare($res['version'],'2.3.2','<'))) 
 		'distant' => '<span class="cs_version"><br/>Version distante...</span>',
 		'contribs' => join('', $contribs),
 		'install' => $aide,
+		'pack' => '['._T('desc:pack').'->'.generer_url_ecrire($exec,'cmd=pack#cs_infos').']',
 	));
 	echo propre($aide);
 	fin_boite_info();
@@ -441,7 +442,7 @@ if (strlen($res['version']) and (version_compare($res['version'],'2.3.2','<'))) 
 	$_GET['source'] = $exec;
 	echo '<div class="conteneur">', liste_outils(),
 		'</div><br class="conteneur" /><div class="conteneur">',
-		description_outil2(strlen($afficher_outil)?$afficher_outil:''), 
+		$cmd=='pack'?cs_description_pack():description_outil2(strlen($afficher_outil)?$afficher_outil:''),
 		'<script type="text/javascript"><!--
 document.write("<style>div#csjs{display:none;}</style>");
 //--></script><div id="csjs" style="color:red;"><br/>', _T('desc:erreur:js'),'</div>

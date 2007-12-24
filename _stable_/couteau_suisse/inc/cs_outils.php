@@ -38,9 +38,19 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	return $description_outil($outil_, 'admin_couteau_suisse', $modif);
 }
 
+// renvoie le configuration du pack actuel
+function cs_description_pack() {
+	if(!isset($GLOBALS['cs_pack_actuel'])) return '';
+	return _DIV_CS_INFOS . debut_cadre_relief('', true)
+		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' style='border:0;' alt='-' />&nbsp;" . _T('desc:pack') . '</h3>'
+		. propre(_T('desc:descrip_pack') . "\n\n" . _T('desc:contrib', array('id'=>2552)))
+		. "<br/><textarea rows=30 cols=200 style='width:100%;'>$GLOBALS[cs_pack_actuel]</textarea>"
+		. fin_cadre_relief(true) . '</div>';
+}
+
 // renvoie (pour la nouvelle interface) la description d'un outil
 function description_outil2($outil_id) {
-	if(!strlen($outil_id)) return (_DIV_CS_INFOS . _T('desc:cliquezlesoutils') . '</div>');
+	if(!strlen($outil_id)) return _DIV_CS_INFOS . _T('desc:cliquezlesoutils') . '</div>';
 	global $outils, $metas_vars, $metas_outils;
 	include_spip('cout_utils');
 	// remplir $outils (et aussi $cs_variables qu'on n'utilise pas ici);

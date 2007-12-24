@@ -37,13 +37,15 @@ _ &bull; [De tout le plugin->@reset@]
 </p>",
 	'help' => "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p>"
-		."<p>Version locale : @version@@distant@</p>"
+		."<p>Version locale : @version@@distant@<br/>@pack@</p>"
 		."<p>Liens de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p>"
 		."<p>R&eacute;initialisations :
 _ &bull; [Des outils cach&eacute;s->@hide@]
 _ &bull; [De tout le plugin->@reset@]@install@
 </p>",
 	'pour' => '&bull; du pack @pack@',
+	'pack' => 'Configuration Actuelle',
+	'descrip_pack' => "Votre \"Pack de configuration actuelle\" rassemble l'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l'activation des outils et la valeur de leurs &eacute;ventuelles variables.\n\nCe code PHP peut prendre place dans le fichier /config/mes_options.php et ajoutera un lien de r&eacute;initialisation sur cette page \"du pack {Pack Actuel}\". Bien s&ucirc;r il vous est possible de changer son nom ci-dessous.\n\nSi vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suisse se reconfigurera automatiquement en fonction des param&egrave;tres pr&eacute;d&eacute;finis dans le pack.",
 	'distant' => "<br/>Nouvelle version : [@version@->http://files.spip.org/spip-zone/couteau_suisse.zip]",
 	'a_jour' => "<br/>Votre version est &agrave; jour.",
 

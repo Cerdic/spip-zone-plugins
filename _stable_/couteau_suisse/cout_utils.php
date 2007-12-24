@@ -240,15 +240,15 @@ function cs_sauve_configuration() {
 		. "\n// Variables actives\n\$variables_actives =\n\t'" . join('|', $variables) . "';\n"
 		. "\n// Valeurs validees en metas\n\$valeurs_validees = array(\n" . join(",\n", $metas) . "\n);\n";
 
-$sauve .= "\n############## PACK ACTUEL DE CONFIGURATION DU COUTEAU SUISSE #################\n"
+$sauve .= $temp = "\n######## PACK ACTUEL DE CONFIGURATION DU COUTEAU SUISSE #########\n"
 	. "\n// Attention, les surcharges sur les define() ou les globales ne sont pas specifiees ici\n"
-	. "\$GLOBALS['cs_installer']['Pack Actuel'] = array(\n\t// Installation des outils par defaut\n"
+	. "\$GLOBALS['cs_installer']['"._T('desc:pack')."'] = array(\n\n\t// Installation des outils par defaut\n"
 	. "\t'outils' =>\n\t\t'".join('|', $actifs)."',\n"
-	. "\t// Installation des variables par defaut\n"
+	. "\n\t// Installation des variables par defaut\n"
 	. "\t'variables' => array(\n\t" . join(",\n\t", $metas_actifs) . "\n\t)\n);\n";
 
-	$fichier_dest = _DIR_CS_TMP . "config.php";
-	ecrire_fichier($fichier_dest, '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
+	ecrire_fichier(_DIR_CS_TMP.'config.php', '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
+	if($_GET['cmd']=='pack') $GLOBALS['cs_pack_actuel'] = $temp;
 }
 
 // cree un tableau $infos_pipelines et initialise $cs_metas_pipelines
