@@ -225,27 +225,27 @@ function cs_sauve_configuration() {
 	global $outils, $metas_vars;
 	$metas = $metas_actifs = $variables = $lesoutils = $actifs = array();
 	foreach($outils as $t) {
-		$lesoutils[] = chr(9)."// ".$t['nom']."\n".chr(9)."'".$t['id']."' => '".join('|', $t['variables']) . "'";
+		$lesoutils[] = "\t// ".$t['nom']."\n\t'".$t['id']."' => '".join('|', $t['variables']) . "'";
 		if($t['actif']) {
 			$actifs[] = $t['id'];
 			$variables = array_merge($variables, $t['variables']);
 		}
 	}
 	foreach($metas_vars as $i => $v) if($i!='_chaines' && $i!='_nombres') {
-		$metas[] = $temp = "\n".chr(9)."'$i' => " . cs_php_format($v, in_array($i, $metas_vars['_chaines']));
+		$metas[] = $temp = "\t'$i' => " . cs_php_format($v, in_array($i, $metas_vars['_chaines']));
 		if(in_array($i, $variables)) $metas_actifs[] = $temp;
 	}
 	$sauve = "// Tous les outils et leurs variables\n\$liste_outils = array(\n" . join(",\n", $lesoutils) . "\n);\n"
-		. "\n// Outils actifs\n\$outils_actifs =\n" . chr(9) . "'" . join('|', $actifs) . "';\n"
-		. "\n// Variables actives\n\$variables_actives =\n" . chr(9) . "'" . join('|', $variables) . "';\n"
-		. "\n// Valeurs validees en metas\n\$valeurs_validees = array(" . join(', ', $metas) . "\n);\n";
+		. "\n// Outils actifs\n\$outils_actifs =\n\t'" . join('|', $actifs) . "';\n"
+		. "\n// Variables actives\n\$variables_actives =\n\t'" . join('|', $variables) . "';\n"
+		. "\n// Valeurs validees en metas\n\$valeurs_validees = array(\n" . join(",\n", $metas) . "\n);\n";
 
 $sauve .= "\n############## PACK ACTUEL DE CONFIGURATION DU COUTEAU SUISSE #################\n"
 	. "\n// Attention, les surcharges sur les define() ou les globales ne sont pas specifiees ici\n"
-	. "\n// Installation des outils par defaut\n"
-	. "\$GLOBALS['cs_installer']['Pack Actuel']['outils'] =\n".chr(9)."'".join('|', $actifs)."';\n"
-	. "\n// Installation des variables par defaut\n"
-	. "\$GLOBALS['cs_installer']['Pack Actuel']['variables'] = array(" . join(', ', $metas_actifs) . "\n);\n";
+	. "\$GLOBALS['cs_installer']['Pack Actuel'] = array(\n// Installation des outils par defaut\n"
+	. "\t'outils' =>\n\t\t'".join('|', $actifs)."',\n"
+	. "// Installation des variables par defaut\n"
+	. "\t'variables' => array(\n\t" . join(",\n\t", $metas_actifs) . "\n\t)\n);\n";
 
 	$fichier_dest = _DIR_CS_TMP . "config.php";
 	ecrire_fichier($fichier_dest, '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
