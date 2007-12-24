@@ -121,9 +121,9 @@ if(!function_exists('__plugin_current_svnrevision_get')) {
 		if(!empty($prefix)) {
 			// lire directement dans plugin.xml (éviter le cache ?)
 			$result = __plugin_real_tag_get($prefix, "LastChanged"."Revision");
-			// protéger de svn qui va le prendre pour un tag
 			$result = trim($result, '$');
-			return(preg_replace("=^LastChanged"."Revision: ([0-9]+) $=", '${1}', $result));
+			$result = preg_replace("=^LastChanged"."Revision: ([0-9]+) $=", '${1}', $result);
+			if(!empty($result) && (intval($result) > 0)) return($result);
 		}
 		return(false);
 	}
