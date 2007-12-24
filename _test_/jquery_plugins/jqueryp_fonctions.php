@@ -1,5 +1,24 @@
 <?php
 
+/* Renvoie sur la balise env pour les balise_FOREACH */
+function jqueryp_env($p, $nom){
+	if (function_exists('balise_ENV'))
+		return balise_ENV($p, $nom);
+	else
+		return balise_ENV_dist($p, $nom);	
+}
+
+function balise_JQUERY_PLUGINS_DISPO_dist($p) {
+	return jqueryp_env($p, 'jqueryp_liste_plugins_groupe()');
+}
+
+function balise_JQUERY_PLUGINS_DISPO_GROUPE_dist($p) {
+	return jqueryp_env($p, 'jqueryp_liste_plugins_dispo_groupe()');
+} 
+
+function balise_JQUERY_PLUGINS_TELECHARGEMENT_dist($p) {
+	return jqueryp_env($p, 'jqueryp_liste_plugins(\'telechargeables\')');
+} 
 
 
 /*
@@ -18,7 +37,7 @@ function balise_JQUERY_PLUGIN($p){
 		$p->param=array();
 	
 	$i = 0;
-	$liste_plugins = jqueryp_liste_plugins_dispo();
+	$liste_plugins = jqueryp_liste_fichiers_dispo();
 	$p->code = "''";
 	while ($plug = interprete_argument_balise(++$i, $p)){
 		if  ($plug == "''") 
@@ -50,26 +69,28 @@ function balise_JQUERY_PLUGIN_THEME($p){
 		
 	$p->code = "''";
 	
-	$theme = interprete_argument_balise(1, $p);
-	if ($theme = str_replace("'", "", $theme)){
-
+	// liste des themes
+	$themes = jqueryp_liste_themes_dispo();
+	
+	$i = 0;
+	while ($theme = interprete_argument_balise(++$i, $p)){
+		$theme = str_replace("'", "", $theme);
+		
 		// squelette css
-		if (!jqueryp_add_link($p, $theme, true)){
-			// ou theme comme jquery.ui flora
-			$liste_themes = jqueryp_liste_themes_dispo();
-			if (isset($liste_themes[$theme])) {
-				jqueryp_add_link($p, $liste_themes[$theme] . '/' . $theme . '.css');
-				// extensions des themes flora.tabs
-				$i = 1;
-				while ($plug = interprete_argument_balise(++$i, $p)){
-					if  ($plug == "''") 
-						continue;
-					$plug = str_replace("'", "", $plug);
-					jqueryp_add_link($p, $liste_themes[$theme] . '/' . $theme . '.' . $plug . '.css');
-				}				
+		if (jqueryp_add_link($p, $theme, true)){
+			continue;
+		// c'est le nom d'un theme
+		} else {
+			// si 'theme.extension', ne garder que 'theme'
+			$t = explode('.',$theme);
+			$t = array_shift($t);
+			// si le theme existe
+			if (isset($themes[$t])) {
+				jqueryp_add_link($p, $themes[$t] . '/' . $theme . '.css');
 			}
 		}
 	}
+
 
 	$p->interdire_scripts = false;
 	return $p;
@@ -79,7 +100,7 @@ function balise_JQUERY_PLUGIN_THEME($p){
 function jqueryp_add_script(&$p, $adresse){
 	if ($f = find_in_path($adresse))
 		return $p->code .= '. "\n<script type=\"text/javascript\" src=\"'
-				. $f . '\"></script>"';	
+				. $f . '\"></script>\n"';	
 						
 	return false;
 }
@@ -90,7 +111,7 @@ function jqueryp_add_link(&$p, $adresse, $generer_url=false){
 	if ($f = find_in_path($_adresse))
 		return $p->code .= '. "\n<link rel=\"stylesheet\" href=\"' 
 				. (($generer_url)?generer_url_public($adresse):$f)
-				. '\" type=\"text/css\" media=\"screen\" />"';	
+				. '\" type=\"text/css\" media=\"screen\" />\n"';	
 	
 	return false;
 }
@@ -100,12 +121,12 @@ function jqueryp_add_link(&$p, $adresse, $generer_url=false){
  * sont envoyes.
  * 
  * - renvoie un array() avec le nom des fichiers à inserer
- *   pour le pipeline insert_js
+ *   pour le pipeline insert_jquery_plugins
  * jqueryp_add_plugins('ui.tabs', $flux);
  * jqueryp_add_plugins('ui.tabs','ui.dimensions', $flux);
  * 
  * - renvoie <script language='javascript'>...</script>
- *   pour le pipeline insert_head (compatibilite 1.9.2)
+ *   pour le pipeline insert_head 
  * jqueryp_add_plugins('ui.tabs');
  * jqueryp_add_plugins(array('ui.tabs','ui.dimensions'));
  * 
@@ -116,7 +137,8 @@ function jqueryp_add_plugins($plugins, $flux=null){
 	if (empty($lpda)) $lpda = array('nom' => array(), 'adresse' => array());
 	if (!is_array($plugins)) $plugins = array($plugins);
 	
-	$lpa = jqueryp_liste_plugins_dispo();	
+	$lpa = jqueryp_liste_fichiers_dispo();
+			
 	$res = '';
 	foreach ($plugins as $nom){
 		if ($lpda['nom'][$nom] OR $lpda['adresse'][$lpa[$nom]])
@@ -145,107 +167,230 @@ function jqueryp_add_plugins($plugins, $flux=null){
 		return "<script language='javascript'>" . $res . "</script>";
 }
 
-/* fourni un tableau 'nom' => 'adresse' des plugins possibles */
-function jqueryp_liste_plugins_dispo($groupe = ''){
-	$l = jqueryp_liste_dispo($groupe);
-	return $l['plugins'];
-}
-
-/* fourni un tableau 'nom' => 'adresse' des themes possibles */
-function jqueryp_liste_themes_dispo($groupe = ''){
-	$l = jqueryp_liste_dispo($groupe);
-	return $l['themes'];
-}
 
 
-function jqueryp_liste_dispo($groupe = ''){
+/* affiche un bouton pour telecharger ou mettre a jour
+ * un plugin jquery
+ * 
+ * Soit on a un zip a recuperer,
+ * soit un array de fichiers js
+ */
+function jqueryp_bouton_telechargement($id_jquery_plugin){
 	global $jquery_plugins;
+	$j = $jquery_plugins[$id_jquery_plugin];
+
+	// deja present ?  texte du bouton :  "mettre a jour", sinon "telecharger"
+	if (is_dir(_DIR_RACINE . _DIR_LIB . $j['dir'])){
+		$quoi='update';
+	} else {
+		$quoi='install';
+	}
+			
+	// zip -> chargeur plugin/lib de spip
+	if (!is_array($j['install'])){
+		$action = 'charger_plugin';
+		$args = 'lib';
+		$input = "<input type='hidden' name='url_zip_plugin' value='$j[install]' />";
+	// js  -> recuperations des fichiers distants
+	} else {
+		$action = 'jqueryp_charger_lib';
+		$args = '';
+		$input = "<input type='hidden' name='id_jquery_plugin' value='$id_jquery_plugin' />"
+				. "<input type='hidden' name='retour' value='".$_SERVER['QUERY_STRING']."' />";
+	}
 	
-	$liste_plugins = array();
-	$liste_themes = array();
-	
+	include_spip('inc/actions');
+	return redirige_action_auteur(
+		$action, $args, '', '',
+			$input
+			."<input type='submit' class='fondo' name='ok' value='"
+			. (($quoi=='update')?_T('jqueryp:bouton_mettre_a_jour'):_T('bouton_telecharger'))
+			."' />","\nmethod='post'");
+
+}
+
+
+/*
+ * Multiples utilisations du tableau jquery_plugins
+ * 
+ * Creation de listes d'elements
+ * 
+ * Pour la cause, j'ai appele un 'groupe'
+ * le nom du plugin (ui, yav...)
+ */
+function jqueryp_liste_plugins($type, $groupe=''){
+	global $jquery_plugins;
+
+	// soit tous les plugins
+	// soit juste un plugin (groupe)
 	if (!$groupe){
-		foreach ($jquery_plugins as $nom_ext=>$extension) {
-			_jquery_liste($nom_ext, $extension, &$liste_plugins, &$liste_themes);
-		}
-	} elseif (isset($jquery_plugins[$groupe]) ) {
-		_jquery_liste($groupe, $jquery_plugins[$groupe], &$liste_plugins, &$liste_themes);
+		$plugs = $jquery_plugins;
+	} else {
+		$plugs = array($groupe=>$jquery_plugins[$groupe]);
 	}
+			
+				
+	$type = strtolower($type);	
+	switch($type){
+		
+		case 'telechargeables':
+			return $plugs;
+			break;	
+		
+		
+		case 'actifs':
+			// retourne nom->adresse des plugins actifs
+			// liste plugins (nom->adresse)
+			$lpa = lire_config('jqueryp/plugins_actifs');
+			$lpd  = jqueryp_liste_fichiers_dispo();
+			
+			$lp = array();
+			if (is_array($lpa)){
+				foreach ($lpa as $p){
+					$lp[$p] = $lpd[$p];	
+				}
+			}
+			
+			return $lp;		
+			break;
+		
+		
+		case 'disponibles':
+			$liste_plugins = array();
+			$exclus = array('.pack','.min','.js.compresed');
+			
+			foreach ($plugs as $nom=>$extension){
+				// eliminer les plugins non installes
+				if (!is_dir($dir = _DIR_RACINE . _DIR_LIB . $extension['dir'])){
+					unset($plugs[$nom]);
+				// trouver les fichiers js et creer leurs alias	
+				} else {
+					include_spip('inc/flock');
+					// tous les fichiers .js (adresse complete)
+					$files = preg_files($dir.'/','.*\.js$',10000,false);
+					// juste le nom du fichier
+					$files = preg_replace(',^.*([^/]*)$,U','$1',$files);
+					// aliaser
+					$plugs[$nom]['files'] = array();
+					foreach ($files as $f){
+						// le nom peut contenir ui. ou jquery. et .js (parfois .pack.js)
+						// on enleve tout cela
+						if (preg_match(",^((jquery|$nom)\.)?([^.]*)(.*)\.js$,i",$f, $g)){
+							// g4 : .pack .min .ext ...
+							if (!in_array($g[4],$exclus)){
+								$plugs[$nom]['files'][$nom . '.' . $g[3] . $g[4]] 
+									= _DIR_LIB . $extension['dir'] . '/' . $f;
+							}
+						}
+					}
+				}
+			}
+			return $plugs;
+			break;
+			
 
-	return array('plugins' => $liste_plugins, 'themes'  => $liste_themes);
+	}	
 }
 
 
-function _jquery_liste($nom_ext, $extension, &$liste_plugins, &$liste_themes){
-	if (isset($extension['files'])){
-		foreach ($extension['files'] as $nom=>$fichier){
-			$liste_plugins[$nom] = _DIR_LIB . $extension['dir'] . '/' . $fichier;
-		}
-	}
-	if (isset($extension['themes'])){
-		foreach ($extension['themes'] as $nom=>$dossier){
-			$liste_themes[$nom] = _DIR_LIB . $extension['dir'] . '/' . $extension['dir_themes'] . '/' . $dossier;			
-		}
-	}
-}
-	
-	
-function jqueryp_liste_plugins_actifs(){
-	$l = jqueryp_liste_actifs();
-	return $l['plugins'];
-}
 
-function jqueryp_liste_actifs(){
-	// liste plugins (nom->adresse)
-	$lpa = lire_config('jqueryp/plugins_actifs');
-	$lpd  = jqueryp_liste_plugins_dispo();
-
-	$lp = array();
-	if (is_array($lpa)){
-		foreach ($lpa as $p){
-			$lp[$p] = $lpd[$p];	
-		}
-	}
-	
-	return 
-		array(
-			'plugins' => $lp
-		);
-}
-
-function balise_JQUERY_PLUGINS_DISPO_dist($p) {
-	if(function_exists('balise_ENV'))
-		return balise_ENV($p, 'jqueryp_liste_plugins_groupe()');
-	else
-		return balise_ENV_dist($p, 'jqueryp_liste_plugins_groupe()');
-	return $p;
-}
-
-function balise_JQUERY_PLUGINS_DISPO_GROUPE_dist($p) {
-	if(function_exists('balise_ENV'))
-		return balise_ENV($p, 'jqueryp_liste_plugins_dispo_groupe()');
-	else
-		return balise_ENV_dist($p, 'jqueryp_liste_plugins_dispo_groupe()');
-	return $p;
-} 
-
-function jqueryp_liste_plugins_groupe(){
+/*
+ * 
+ * Creation de listes de themes
+ * 
+ * Pour la cause, j'ai appele un 'groupe'
+ * le nom du plugin (ui, yav...)
+ */
+function jqueryp_liste_themes($type, $groupe=''){
 	global $jquery_plugins;
+
+	// soit tous les plugins
+	// soit juste un plugin (groupe)
+	if (!$groupe){
+		$plugs = $jquery_plugins;
+	} else {
+		$plugs = array($groupe=>$jquery_plugins[$groupe]);
+	}
+			
+				
+	$type = strtolower($type);	
+	switch($type){
+		case 'disponibles':
+			$liste_plugins = array();
+			
+			foreach ($plugs as $nom=>$extension){
+				// eliminer les plugins non installes
+				// eliminer les plugins dans themes
+				if ((!is_dir($dir = _DIR_RACINE . _DIR_LIB . $extension['dir']))
+					OR (!isset($extension['themes']))) {
+						unset($plugs[$nom]);
+				} else {
+					// mettre la bonne adresse
+					foreach ($extension['themes'] as $t=>$dir) {
+						$plugs[$nom]['themes'][$t] = _DIR_LIB . $extension['dir'] . '/' . $dir;
+					}
+				}
+			}
+			return $plugs;
+			break;
+			
+
+	}	
+}
+
+
+
+/*
+ * Liste des fichiers js disponibles
+ */
+function jqueryp_liste_fichiers_dispo($groupe=''){
+	$plugs = jqueryp_liste_plugins('disponibles', $groupe);
 	
-	$groupes = array();
-	$actifs = array_keys(jqueryp_liste_plugins_actifs());
+	// tous les alias dans un meme tableau
+	$files = array();
+	foreach ($plugs as $groupe=>$p){
+		$files = array_merge($files, $p['files']);
+	}
+	return $files;
+}
+
+
+/*
+ * Liste des fichiers css disponibles
+ */
+function jqueryp_liste_themes_dispo($groupe=''){
+	$plugs = jqueryp_liste_themes('disponibles', $groupe);
 	
-	foreach ($jquery_plugins as $nom_ext=>$valeurs) {
-		$groupes[$nom_ext] = 'replie';
+	// tous les alias dans un meme tableau
+	$files = array();
+	foreach ($plugs as $groupe=>$p){
+		$files = array_merge($files, $p['themes']);
+	}
+	return $files;
+}
+
+
+/*
+ * Connaitre les groupes qui ont des plugins actifs
+ * On les signale par actif=true
+ */
+function jqueryp_liste_plugins_groupe(){
+	
+	$actifs = array_keys(jqueryp_liste_plugins('actifs'));
+	$groupes = jqueryp_liste_plugins('disponibles');
+	
+	foreach ($groupes as $nom_ext=>$valeurs) {
+		$groupes[$nom_ext]['actif'] = false;
 		// pour depliage auto de la liste
 		// si un des plugins est coche
-		foreach (jqueryp_liste_plugins_dispo($nom_ext) as $nom=>$url){
+		foreach ($valeurs['files'] as $nom=>$url){
 			if (in_array($nom, $actifs)){
-				$groupes[$nom_ext] = 'deplie';
+				$groupes[$nom_ext]['actif'] = true;
 				break;
 			}
 		}
 	}
+
 	return $groupes;
 }
 
@@ -254,14 +399,15 @@ function jqueryp_liste_plugins_groupe(){
  * enfin, du moins, je n'ai pas trouve comment
  */
 function jqueryp_liste_plugins_dispo_groupe($groupe = ''){
-	static $plugins = array();
+	static $_plugins = array();
+	static $_groupe;
 	
 	// on stocke tous les plugins commencant pas '$groupe'
 	if (!empty($groupe)){
-		$plugins = jqueryp_liste_plugins_dispo($groupe);
+		$_plugins = jqueryp_liste_plugins('disponibles', $groupe);
+		$_groupe = $groupe;
 		return true;
 	}
-	
-	return $plugins;
+	return $_plugins[$_groupe]['files'];
 }
 ?>

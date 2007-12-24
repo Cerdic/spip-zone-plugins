@@ -1,18 +1,7 @@
-
-[(#REM) titre=jQuery Plugins ]
-
-
-[(#REM) refus=Seuls les webmestres du site sont autoris&#233;s &#224; 
-modifier ces param&#232;tres.]
-
-[(#REM) descriptif=
-	Cette page permet de choisir les extensions de jquery
-	charg&eacute;es par d&eacute;faut pour chaque page de SPIP (public & priv&eacute;)
-]
-
-
-[(#REM) nom=jqueryp]
-
+<!-- titre=<:jqueryp:jquery_plugins:> -->
+<!-- descriptif=<:jqueryp:decriptif_choix_plugins_defaut:> -->
+<!-- nom=jqueryp -->
+<!-- liens*=jqueryp_installer_plugins -->
 #CACHE{0}
 
 
@@ -21,14 +10,12 @@ modifier ces param&#232;tres.]
 <div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 
-<fieldset class="cadre"><legend>Liste des plugins</legend>
+<fieldset class="cadre"><legend><:jqueryp:liste_plugins:></legend>
 	[(#FOREACH{JQUERY_PLUGINS_DISPO})]
 </fieldset>
 
 
 <br />
-
-
 
 <div>
 <input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
@@ -37,5 +24,4 @@ modifier ces param&#232;tres.]
 </div>
 </div>
 </form>
-
 

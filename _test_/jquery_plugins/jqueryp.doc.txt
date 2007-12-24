@@ -1,0 +1,87 @@
+
+L'objectif de ce plugin est de faciliter le telechargement, 
+l'installation et l'utilisation de plugins pour jquery.
+
+
+Ce plugin necessite
+-------------------
+- SPIP 1.9.3 (chargeur de plugins necessaire)
+- plugin CFG
+
+
+Ce plugin propose
+-----------------
+1) un certain nombre de plugins pour jquery qui s'installeront dans
+le dossier lib/, sur demande de l'utilisateur.
+
+2) de charger certaines librairies ainsi telechargees dans la page
+jquery.js appelee par toutes les pages publique et privees de SPIP; 
+ces librairies sont choisies par l'utilisateur ou par un autre plugin.
+
+3) a d'autres plugins ou squelettes une methode simple pour ajouter
+une librairie :
+	- sur toutes les pages du site (en ajoutant la librairie dans jquery.js)
+	- sur certaines pages du site, en utilisant une balise #JQUERY_PLUGIN
+
+
+Installation
+------------
+Telecharger et activer le plugin.
+Aller dans configuration > CFG > Jquery Plugins > Installer des plugins Jquery
+Telecharger les plugins souhaites.
+
+
+Telechargement des plugins jquery
+---------------------------------
+Le bouton de telechargement propose soit "telecharger" soit "mettre a jour"
+
+Dans tous les cas, si le plugin est dans un zip, c'est le chargeur
+de plugins de spip 1.9.3 qui l'installera.
+
+Si le plugin jquery est fourni simplement par un/des fichiers js, 
+l'installation sera realisee par l'action 'jqueryp_charger_lib'
+
+
+
+Vue de l'exterieur
+------------------
+
+Lorsqu'un plugin veut forcer l'utilisation d'un plugin
+de jquery (qui a été téléchargé), il peut le signaler
+de deux facons :
+
+Soit par un pipeline :
+
+	Ce qui ajoute le/les fichiers js demandes 
+	sur toutes les pages du site (privees et publiques)
+	en l'ajoutant dans le fichier jquery.js
+	
+	<necessite id="jqueryp" />
+	<pipeline>
+			<nom>insert_jquery_plugins</nom>
+			<inclure>PREFIX_pipeline.php</inclure>
+	</pipeline>
+	
+	Avec la fonction php suivante (ajoute ui.mouse et ui.tabs) :
+	
+	function PREFIX_insert_jquery_plugins($flux) {
+			return jqueryp_add_plugins(array('ui.mouse','ui.tabs'), $flux);
+	}
+
+Soit par une balise :
+
+	Ce qui ajoute <script url...> a l'endroit ou est situee la balise
+	
+	#JQUERY_PLUGIN{ui.tabs, ui.mouse}
+	
+	
+	
+Question subsidiaire
+--------------------
+	
+	Que doit-on faire si UI n'a pas ete telecharge par l'utilisateur
+	dans le cadre de l'exemple precedent ?
+	
+	Les plugins spip qui souhaitent utiliser un plugin jquery present dans jquery_plugins
+	doivent signaler a leurs utilisateurs de telecharger ce plugin depuis
+	l'interface de jquery_plugins.

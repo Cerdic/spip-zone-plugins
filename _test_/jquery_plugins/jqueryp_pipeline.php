@@ -17,7 +17,7 @@ function jqueryp_insert_js($flux) {
 */
 
 function _jqueryp_insert_jquery_plugins($flux = null){
-	if (!$lpa = jqueryp_liste_plugins_actifs())
+	if (!$lpa = jqueryp_liste_plugins('actifs'))
 		return $flux;
 		
 	if (isset($flux))

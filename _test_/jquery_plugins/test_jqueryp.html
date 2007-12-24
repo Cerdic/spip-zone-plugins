@@ -3,8 +3,9 @@
 <title>Test Jquery Plugins</title>
 #INSERT_HEAD
 #JQUERY_PLUGIN{ui.tabs}
-#JQUERY_PLUGIN_THEME{jqueryp.tabs.css}
-[(#REM) #JQUERY_PLUGIN_THEME{light, tabs} ]
+[(#REM) #JQUERY_PLUGIN_THEME{jqueryp.tabs.css} ]
+ #JQUERY_PLUGIN_THEME{light, light.tabs} 
+
   <script>
   $(document).ready(function(){
     $("#example > ul").tabs();
@@ -36,7 +37,6 @@
             </div>
         </div>
         
- <h1>Balise Foreach JQUERY_PLUGINS_DISPO</h1>       
-#FOREACH{JQUERY_PLUGINS_DISPO}
+
 </body>
 </html>

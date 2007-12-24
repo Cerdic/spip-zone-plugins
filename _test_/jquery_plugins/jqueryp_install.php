@@ -5,13 +5,14 @@ function jqueryp_install($action){
 		case 'test':
 			break;
 		case 'install':
-			return jqueryp_test_librairies();
+			//return jqueryp_test_librairies();
 			break;
 		case 'uninstall':
 			break;
 	}
 }
 
+/*
 function jqueryp_test_librairies(){
 	global $jquery_plugins;
 	
@@ -77,6 +78,6 @@ function jqueryp_install_librairies($liste_plugins){
 	}
 	return $return;
 }
-
+*/
 
 ?>
