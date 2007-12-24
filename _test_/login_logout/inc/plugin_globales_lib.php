@@ -117,12 +117,51 @@ if(!function_exists('__plugin_current_version_base_get')) {
 
 if(!function_exists('__plugin_current_svnrevision_get')) {
 	// renvoie le dernier numero de révision svn
-	function __plugin_current_svnrevision_get ($prefix) {
+	function __plugin_current_svnrevision_get ($prefix, $verifier_svn) {
+		static $svn_revision = false;
 		if(!empty($prefix)) {
 			// lire directement dans plugin.xml (éviter le cache ?)
 			$result = __plugin_real_tag_get($prefix, "LastChanged"."Revision");
 			$result = trim($result, '$');
 			$result = preg_replace("=^LastChanged"."Revision: ([0-9]+) $=", '${1}', $result);
+			if($verifier_svn && !$svn_revision) {
+			// vérifier les fichiers inclus (gourmand et peut-être trompeur si fichier fantôme ?)
+			// ne vérifier que sur deux niveaux (PLUGIN_ROOT et ses répertoires directs, pas en dessous)
+				define("_PGL_SVN_LIRE_EXTENSIONS", "css|html|js|php|xml");
+				$dir = $_SERVER['DOCUMENT_ROOT']."/plugins/".__plugin_get_meta_dir($prefix);
+				$script_files = array();
+				if(is_dir($dir) && ($dh = opendir($dir))) {
+					while (($file = readdir($dh)) !== false) {
+						if($file[0] == ".") continue;
+						if(is_dir($dir_s = $dir."/".$file) && ($dh_s = opendir($dir_s))) {
+							while (($file = readdir($dh_s)) !== false) {
+								if($file[0] == ".") continue;
+								if(preg_match("=\.("._PGL_SVN_LIRE_EXTENSIONS.")$=i", $file)) $script_files[] = $dir_s."/".$file;
+							}
+							closedir($dh_s);
+						}
+						else if(preg_match("=\.("._PGL_SVN_LIRE_EXTENSIONS.")$=i", $file)) $script_files[] = $dir."/".$file;
+					}
+					closedir($dh);
+				}
+				foreach($script_files as $file) {
+					$revision = 0;
+					// lire le fichier, en espérant trouver le mot clé svn dans les 2048 premiers caractères
+					if($fh = fopen ($file, "rb")) {
+						$buf = fread ($fh, 2048);
+						fclose($fh);
+						if($buf = strstr($buf, "$"."LastChanged"."Revision:")) {
+							$revision = preg_replace('=\$LastChangedRevision$buf, 1);
+							if(strval(intval($revision)) != $revision) { 
+								// erreur dans l'attribut (vide ?)
+								continue;
+							}
+							$result = max($result, $revision);
+						}
+					}
+					//spip_log("##: $file ## $revision");
+				}
+			}
 			if(!empty($result) && (intval($result) > 0)) return($result);
 		}
 		return(false);
@@ -267,14 +306,14 @@ if(!function_exists('__plugin_boite_meta_info')) {
 if(!function_exists('__plugin_html_signature')) {
 	// petite signature de plugin
 	// du style "Dossier plugin [version]"
-	function __plugin_html_signature ($prefix, $return = false, $html = true) {
-	
+	function __plugin_html_signature ($prefix, $return = false, $html = true, $verifier_svn = false) {
+
 		$info = plugin_get_infos(__plugin_get_meta_dir($prefix));
 		$nom = typo($info['nom']);
 		$version = typo($info['version']);
 		//$base_version = typo($info['version_base']); // cache ?
 		$base_version = __plugin_current_version_base_get($prefix);
-		$svnrevision = __plugin_current_svnrevision_get($prefix);
+		$svnrevision = __plugin_current_svnrevision_get($prefix, $verifier_svn);
 		$revision = "";
 		if($html) {
 			$version = (($version) ? " <span style='color:gray;'>".$version : "")
