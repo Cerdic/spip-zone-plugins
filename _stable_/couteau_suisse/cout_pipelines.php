@@ -17,9 +17,9 @@ cs_log("couteau_suisse_install($action)");
 			// affichage d'un lien ici, puisque le pipeline 'affiche_gauche' n'est pas pris en compte dans 'admin_plugin'...
 			if (_request('exec') == 'admin_plugin') {
 				if(!defined('_SPIP19300')) echo '<br/>';
-				debut_cadre_enfonce();
-				echo icone_horizontale(_T('cout:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', true);
-				fin_cadre_enfonce();
+				echo debut_cadre_enfonce('', true),
+					icone_horizontale(_T('cout:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', false),
+					fin_cadre_enfonce(true);
 			}
 			return isset($GLOBALS['meta']['tweaks_actifs']);
 			break;
@@ -58,7 +58,7 @@ function couteau_suisse_affiche_gauche($flux){
 /*
 	if (_request('exec') == 'admin_plugin')
 		$flux['data'] .= 
-			icone_horizontale(_T('cout:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', true);
+			icone_horizontale(_T('cout:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', false);
 */
 	return $flux;
 }

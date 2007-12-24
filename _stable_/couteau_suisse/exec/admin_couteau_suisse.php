@@ -379,7 +379,15 @@ verif_plugin();
 	}
 	// pour la  version du plugin
 	include_spip('inc/plugin');
-	$cs_version = plugin_get_infos('couteau_suisse');
+	if(isset($GLOBALS['meta']['plugin'])) {
+		$t = unserialize($GLOBALS['meta']['plugin']);
+		$dir = $t['COUTEAU_SUISSE']['dir'];
+		$dir_bt = $t['BARRETYPOENRICHIE']['dir'];
+		unset($t);
+	}
+	if(!strlen($dir)) $dir = 'couteau_suisse';
+	if(!strlen($dir_bt)) $dir_bt = 'barre_typo_v2';
+	$cs_version = plugin_get_infos($dir);
 	$cs_version = $maj[1] = $cs_version['version'];
 
 	cs_admin_styles_et_js($cs_version);
@@ -392,7 +400,7 @@ $res = spip_query("DESCRIBE spip_meta valeur");
 $resultat = function_exists('spip_fetch_array')?spip_fetch_array($res):sql_fetch($res);
 if($resultat['Type']!='text') echo "<p style=\"color:red;\">Attention : votre base semble ancienne et le Couteau Suisse ne va pas bien fonctionner.</p><p>La table 'spip_meta' a pour type de valeur '$resultat[Type]' au lieu de 'text'.</p>";
 // verification de la barre typo V2
-$res = plugin_get_infos('barre_typo_v2');
+$res = plugin_get_infos($dir_bt);
 if (strlen($res['version']) and (version_compare($res['version'],'2.3.2','<'))) echo "<p><span style=\"color:red;\">Attention :</span> la barre typographique (version $res[version]) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; 2.3.2.</p>";
 
 	compat_boite('debut_gauche');
@@ -451,7 +459,7 @@ cs_log(" FIN : exec_admin_couteau_suisse()");
 }
 
 function cs_boite_rss($force) {
-	echo debut_boite_info(true), '<p><b>'._T('desc:rss_titre').'</b></p><div class="cs_boite_rss"><p>Attente RSS...</p></div>'
+	echo debut_boite_info(true), '<p><b>'._T('desc:rss_titre').'</b></p><div class="cs_boite_rss"><p>Attente RSS...</p><noscript>D&eacute;sactiv&eacute; !</noscript></div>'
 		/*.'<div style="text-align: right; font-size: 87%;"><a title="'._T('desc:desactiver_rss').'" href="'
 		.generer_url_ecrire(_request('exec'),'cmd=toggle&outil=rss_couteau_suisse').'">'._T('desc:supprimer_cadre').'</a></div>'*/
 		, fin_boite_info(true);
