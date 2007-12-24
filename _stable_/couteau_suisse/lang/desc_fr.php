@@ -97,6 +97,7 @@ _ &bull; [De tout le plugin->@reset@]@install@
 	'erreur:traitements' => "Le Couteau Suisse - Erreur de compilation des traitements : m&eacute;lange 'typo' et 'propre' interdit !",
 	'erreur:probleme' => 'Probl&egrave;me sur : @pb@',
 	'erreur:distant' => 'le serveur distant',
+	'erreur:js' => "Une erreur JavaScript semble &ecirc;tre survenue sur cette page et emp&ecirc;che son bon fonctionnement. Veuillez activer JavaScript sur votre navigateur ou d&eacute;sactiver certains plugins SPIP de votre site.",
 
 // categories d'outils
 // --------------------
