@@ -87,9 +87,21 @@ function afficher_ban_user() {
 		. "<select name='ban_user[]' multiple='multiple' size='5' class='forml'>";
 	
 	// Il ne faudra pas mettre dans cette liste les user deja bannis ! 
+	// Pas supporte par tous les SQL
+	//$query=sql_query("SELECT id_auteur,login FROM spip_auteurs
+	//				WHERE (statut='6forum' OR statut='nouveau' OR statut='5poubelle' )
+	//				AND NOT EXISTS (SELECT ban_login FROM spip_ban_liste WHERE ban_login=login) ");
+
+	$query=sql_select("ban_login","spip_ban_liste","ban_login IS NOT NULL");
+	$tab_login=array();
+	while ($row=sql_fetch($query)) {$tab_login[]="'".$row['ban_login']."'";}
+	$liste_login=join(",",$tab_login);
+	if (count($tab_login)>0) $not_in="AND login NOT IN ($liste_login)";
+	else $not_in="";
+
 	$query=sql_query("SELECT id_auteur,login FROM spip_auteurs
-					WHERE (statut='6forum' OR statut='nouveau' OR statut='5poubelle' )
-					AND NOT EXISTS (SELECT ban_login FROM spip_ban_liste WHERE ban_login=login) ");
+					WHERE (statut='6forum' OR statut='nouveau' OR statut='5poubelle')".$not_in );
+
 	if ( sql_count($query) ) {
 		while ($row = sql_fetch($query)) {
 			$res .= "<option value='".$row['id_auteur']."'>".$row['login']."</option>";
