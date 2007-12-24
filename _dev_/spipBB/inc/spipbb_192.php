@@ -46,10 +46,10 @@ if (defined("_INC_SPIPBB_192")) return; else define("_INC_SPIPBB_192", true);
 
 if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','>=')) {
 	// On ne devrait pas etre la
-	spip_log(__FILE__.' : included : ERROR wrong release','spipbb');
+	spipbb_log('included : ERROR wrong release',1,__FILE__);
 	return;
 }
-spip_log(__FILE__.' : included','spipbb');
+spipbb_log('included',2,__FILE__);
 
 include_spip('base/abstract_sql'); // SPIP 192
 include_spip('base/db_mysql'); // SPIP 192
@@ -250,7 +250,7 @@ function traite_query($query, $db='', $prefixe='')
 	} else $suite ='';
 
 	$r = preg_replace('/([,\s])spip_/', '\1'.$pref, $query) . $suite;
-#	spip_log("traite_query: " . substr($r,0, 50) . ".... $db, $prefixe");
+	spipbb_log(substr($r,0, 50) . ".... $db, $prefixe",3,"traite_query");
 	return $r;
 } } // traite_query
 

@@ -5,6 +5,7 @@ base inc/instituer_article
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spipbb_log("included",3,__FILE__);
 
 // http://doc.spip.org/@inc_instituer_article_dist
 function inc_spipbb_instituer_article($id_article, $statut=-1)

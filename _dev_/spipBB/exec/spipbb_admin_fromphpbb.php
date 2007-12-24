@@ -26,7 +26,8 @@
 // * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-spip_log(__FILE__.' : included','spipbb');
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
 
 // ------------------------------------------------------------------------------
 // [fr] Methode exec
@@ -36,7 +37,7 @@ spip_log(__FILE__.' : included','spipbb');
 // ------------------------------------------------------------------------------
 function exec_spipbb_admin_fromphpbb()
 {
-	spip_log(__FILE__." exec_spipbb_admin_fromphpbb() CALL",'spipbb');
+	spipbb_log("CALL",3,"exec_spipbb_admin_fromphpbb()");
 /*
 	if ( !spipbb_is_configured() or ($GLOBALS['spipbb']['configure']!='oui') 
 		 or $GLOBALS['spipbb']['config_id_secteur'] != 'oui'

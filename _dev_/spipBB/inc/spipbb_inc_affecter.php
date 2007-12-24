@@ -8,6 +8,7 @@
 +-------------------------------------------+
 */
 
+spipbb_log("included",3,__FILE__);
 
 //
 // les pitis articles de grand_ma rubrique

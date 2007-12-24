@@ -27,10 +27,8 @@
 // * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
-	include_spip('inc/spipbb_192'); // SPIP 1.9.2
-}
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
 
 function action_spipbb_admin_gere_ban_dist() {
 
@@ -38,7 +36,7 @@ function action_spipbb_admin_gere_ban_dist() {
 	$arg = $securiser_action(); // $arg=ban_user par ex
 	$r = rawurldecode(_request('redirect'));
 
-	spip_log(__FILE__." ".$arg,'spipbb');
+	spipbb_log($arg,3,"A_a_s_a_g_b_d");
 
 	switch ($arg) {
 	case "ban-user" :

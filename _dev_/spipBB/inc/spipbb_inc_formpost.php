@@ -11,6 +11,7 @@
 +-------------------------------------------+
 */
 
+spipbb_log("included",3,__FILE__);
 
 #
 # La barre de typo dupiquée pour l'occas'
@@ -285,7 +286,7 @@ function enregistre_post_spipbb() {
 
 	// Verifier hash securite
 	if (!verifier_action_auteur("ajout_forum $forum $sujet $alea", $hash)) {
-		spip_log('erreur hash forum');
+		spipbb_log('erreur hash forum',3,"e_p_s");
 		die (_T('forum_titre_erreur')); 	# echec du POST
 	}
 	// verifier fichier lock
@@ -329,7 +330,7 @@ function enregistre_post_spipbb() {
 	WHERE id_forum = $id_message
 	");
 	
-	spip_log('nouveau post: '.$id_thread);
+	spipbb_log('nouveau post: '.$id_thread,3,"e_p_s");
 
 	
 	// Notification

@@ -28,6 +28,8 @@
 // * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
 
 global $time_start;
 $time_start = array_sum(explode(' ', microtime()));;
@@ -338,7 +340,7 @@ function fromphpbb_save_metas()
 		include_spip('inc/meta');
 		ecrire_meta('spipbb_fromphpbb', serialize($spipbb_fromphpbb));
 		ecrire_metas();
-		spip_log('spipbb_fromphpbb : fromphpbb_save_metas() OK');
+		spipbb_log('OK',3,"A_f_save_metas");
 	}
 } // fromphpbb_save_metas
 
@@ -356,7 +358,7 @@ function fromphpbb_delete_metas()
 		unset($GLOBALS['spipbb_fromphpbb']);
 		unset($GLOBALS['meta']['spipbb_fromphpbb']);
 		unset($spipbb_fromphpbb);
-		spip_log('spipbb_fromphpbb : fromphpbb_delete_metas() OK');
+		spipbb_log('OK',3,"A_f_delete_metas");
 	}
 } // fromphpbb_delete_metas
 

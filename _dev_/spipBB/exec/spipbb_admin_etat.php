@@ -22,9 +22,10 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-spip_log(__FILE__.' : included','spipbb');
-
 if (defined("_ADMIN_ETAT")) return; else define("_ADMIN_ETAT", true);
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
+
 
 // ------------------------------------------------------------------------------
 function exec_spipbb_admin_etat() {

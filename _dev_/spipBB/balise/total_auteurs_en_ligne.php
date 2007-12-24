@@ -28,11 +28,8 @@
 /* en cas d'omission on garde 5 minutes comme délais */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-spip_log(__FILE__.' : included','spipbb');
-
-if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
-	include_spip('inc/spipbb_192'); // SPIP 1.9.2
-}
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
 
 function balise_TOTAL_AUTEURS_EN_LIGNE($p) {
 	return calculer_balise_dynamique($p,'TOTAL_AUTEURS_EN_LIGNE', array());

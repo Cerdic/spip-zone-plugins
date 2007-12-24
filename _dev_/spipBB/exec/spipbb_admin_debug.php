@@ -22,9 +22,9 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-spip_log(__FILE__.' : included','spipbb');
-
 if (defined("_GENERAL_DEBUG")) return; else define("_GENERAL_DEBUG", true);
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
 
 // ------------------------------------------------------------------------------
 // Affiche le debogage pour la version SVN

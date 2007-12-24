@@ -26,7 +26,8 @@
 // * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-spip_log(__FILE__.' : included','spipbb');
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
 
 // ------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------
@@ -90,7 +91,7 @@ function exec_spipbb_configuration() {
 // ------------------------------------------------------------------------------
 function spipbb_admin_configuration() {
 
-	spip_log('exec/spipbb_configuration.php spipbb_configuration() DEBUT','spipbb');
+	spipbb_log('DEBUT',3,"spipbb_configuration()");
 	
 	# cet appel vers "assembler" et donc l_usage de skel backoffice
 	# vont bloquer certaines redef de fonctions spip ...
@@ -160,7 +161,7 @@ function spipbb_admin_configuration() {
 			'taille_avatar_prof' => $GLOBALS['spipbb']['taille_avatar_prof']
 			);
 	$res = recuperer_fond("prive/spipbb_admin_configuration",$contexte) ;
-	spip_log('exec/spipbb_configuration.php spipbb_configuration() END','spipbb');
+	spipbb_log('END',3,"spipbb_configuration()");
 
 	if($GLOBALS['spipbb']['configure']=='oui') {
 		$res.= spipbb_config_support_auteurs();

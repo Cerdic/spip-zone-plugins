@@ -5,9 +5,10 @@ sur base action/editer_article
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
 
-# conversion 192
-include_spip('inc/spipbb_util');
+//include_spip('inc/spipbb_util');
 
 
 // http://doc.spip.org/@action_editer_article_dist
@@ -68,7 +69,7 @@ function insert_article($id_rubrique) {
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine
 	if (!$id_rubrique = intval($id_rubrique)) {
-		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
+		$row = sql_fetch(sql_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
 		$id_rubrique = $row['id_rubrique'];
 	}
 
@@ -85,7 +86,7 @@ function insert_article($id_rubrique) {
 		}
 	}
 
-	$row = spip_fetch_array(spip_query("SELECT lang, id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$row = sql_fetch(sql_query("SELECT lang, id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 
 	$id_secteur = $row['id_secteur'];
 
@@ -115,7 +116,7 @@ function revisions_articles ($id_article, $c=false) {
 	if (!is_array($c)) trop_longs_articles();
 
 	// Si l'article est publie, invalider les caches et demander sa reindexation
-	$t = spip_fetch_array(spip_query(
+	$t = sql_fetch(sql_query(
 	"SELECT statut FROM spip_articles WHERE id_article=$id_article"));
 	if ($t['statut'] == 'publie') {
 		$invalideur = "id='id_article/$id_article'";
@@ -136,7 +137,7 @@ function revisions_articles ($id_article, $c=false) {
 		$c);
 
 	if ($r) {
-		spip_query("UPDATE spip_articles SET date_modif=NOW() WHERE id_article="._q($id_article));
+		sql_query("UPDATE spip_articles SET date_modif=NOW() WHERE id_article="._q($id_article));
 	}
 
 	return ''; // pas d'erreur
@@ -154,8 +155,8 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
 
-	$s = spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article");
-	$row = spip_fetch_array($s);
+	$s = sql_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article");
+	$row = sql_fetch($s);
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
 	$champs = array();
@@ -167,7 +168,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 		else if (autoriser('modifier', 'article', $id_article) AND $s != 'publie')
 			$statut = $champs['statut'] = $s;
 		else
-			spip_log("spipbb_editer_article $id_article refus " . join(' ', $c));
+			spipbb_log("$id_article refus " . join(' ', $c),3,"A_i_a");
 
 		// En cas de publication, fixer la date a "maintenant"
 		// sauf si $c commande autre chose
@@ -183,7 +184,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	// de la rubrique actuelle
 	if ($id_parent = _request('id_parent', $c)
 	AND $id_parent != $id_rubrique
-	AND (spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_parent")))) {
+	AND (sql_fetch(sql_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_parent")))) {
 		$champs['id_rubrique'] = $id_parent;
 
 		// si l'article etait publie
@@ -220,7 +221,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	foreach ($champs as $champ => $val)
 		$update[] = $champ . '=' . _q($val);
 
-	spip_query("UPDATE spip_articles SET ".join(', ',$update)." WHERE id_article=$id_article");
+	sql_query("UPDATE spip_articles SET ".join(', ',$update)." WHERE id_article=$id_article");
 
 	// Si on a deplace l'article
 	// - propager les secteurs
@@ -228,15 +229,15 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	if (isset($champs['id_rubrique'])) {
 		propager_les_secteurs();
 
-		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
+		$row = sql_fetch(sql_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
 		$langue_old = $row['lang'];
 		$langue_choisie_old = $row['langue_choisie'];
 
 		if ($langue_choisie_old != "oui") {
-			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique="._q($champs['id_rubrique'])));
+			$row = sql_fetch(sql_query("SELECT lang FROM spip_rubriques WHERE id_rubrique="._q($champs['id_rubrique'])));
 			$langue_new = $row['lang'];
 			if ($langue_new != $langue_old)
-				spip_query("UPDATE spip_articles SET lang='$langue_new' WHERE id_article=$id_article");
+				sql_query("UPDATE spip_articles SET lang='$langue_new' WHERE id_article=$id_article");
 		}
 	}
 
@@ -299,9 +300,9 @@ function article_referent ($id_article, $c) {
 	// selectionner l'article cible, qui doit etre different de nous-meme,
 	// et quitter s'il n'existe pas
 	if (!$row = spip_fetch_array(
-	spip_query("SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad AND NOT(id_article=$id_article)")))
+	sql_query("SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad AND NOT(id_article=$id_article)")))
 	{
-		spip_log("echec lien de trad vers article inexistant ($lier_trad)");
+		spipbb_log("echec lien de trad vers article inexistant ($lier_trad)",3,"A_a_r");
 		return '&trad_err=1';
 	}
 
@@ -312,11 +313,11 @@ function article_referent ($id_article, $c) {
 	// le nouvel id_trad de ce nouveau groupe et on l'affecte aux deux
 	// articles
 	if ($id_lier == 0) {
-		spip_query("UPDATE spip_articles SET id_trad = $lier_trad WHERE id_article IN ($lier_trad, $id_article)");
+		sql_query("UPDATE spip_articles SET id_trad = $lier_trad WHERE id_article IN ($lier_trad, $id_article)");
 	}
 	// sinon on ajouter notre article dans le groupe
 	else {
-		spip_query("UPDATE spip_articles SET id_trad = $id_lier WHERE id_article = $id_article");
+		sql_query("UPDATE spip_articles SET id_trad = $id_lier WHERE id_article = $id_article");
 	}
 
 	return ''; // pas d'erreur

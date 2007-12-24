@@ -7,6 +7,8 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
 
 # h.30/11 .. ok !
 

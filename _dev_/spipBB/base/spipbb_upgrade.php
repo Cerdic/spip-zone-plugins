@@ -21,14 +21,11 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
 
 include_spip('inc/spipbb_inc_metas');
 include_spip('inc/spipbb_inc_config');
-
-# conversion spip 192
-if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
-	include_spip('inc/spipbb_192'); // SPIP 1.9.2
-}
 
 function spipbb_install($action)
 {
@@ -39,13 +36,13 @@ function spipbb_install($action)
 			break;
 		case 'install' :
 //			spipbb_upgrade_all();
-			spip_log('base/spipbb_upgrade.php spipbb_install(install)','spipbb');
+			spipbb_log('(install)',1,"spipbb_install");
 			break;
 		case 'uninstall' :
 		default :
 			spipbb_delete_metas();
 			spipbb_delete_tables();
-			spip_log('base/spipbb_upgrade.php spipbb_install(uninstall)','spipbb');
+			spipbb_log('(uninstall)',1,'spipbb_install');
 			break;
 	}
 } /* spipbb_install */

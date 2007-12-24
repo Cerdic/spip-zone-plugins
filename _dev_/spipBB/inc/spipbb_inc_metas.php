@@ -3,6 +3,8 @@
 |
 */
 
+spipbb_log("included",3,__FILE__);
+
 //----------------------------------------------------------------------------
 // [fr] Initialisation des valeurs de meta du plugin aux defauts
 // [en] Init plugin meta to default values
@@ -88,7 +90,7 @@ function spipbb_init_metas()
 	// Redef. GLOBALS
 	$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
 	
-	spip_log('inc/spipbb.php  : init_metas END '.$GLOBALS['meta']['spipbb'],'spipbb');
+	spipbb_log('END '.$GLOBALS['meta']['spipbb'],3,"init_metas");
 } // spipbb_init_metas
 
 //----------------------------------------------------------------------------
@@ -153,7 +155,7 @@ function spipbb_delete_metas()
 		effacer_meta('spipbb_fromphpbb'); // requis si la migration n est pas finie
 		if (defined('_INC_SPIPBB_192')) ecrire_metas(); // Code 192
 		unset($GLOBALS['meta']['spipbb']);
-		#spip_log('inc/spipbb.php : delete_metas OK','spipbb');
+		spipbb_log('OK',3,'inc/spipbb.php : delete_metas');
 	}
 } // spipbb_delete_metas
 
@@ -178,7 +180,7 @@ function spipbb_save_metas()
 	ecrire_meta('spipbb', serialize($GLOBALS['spipbb']));
 	if (defined('_INC_SPIPBB_192')) ecrire_metas(); // Code 192
 	$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
-	spip_log('inc/spipbb.php : spipbb_save_metas OK '.$GLOBALS['meta']['spipbb'],'spipbb');
+	spipbb_log('OK '.$GLOBALS['meta']['spipbb'],3,"spipbb_save_metas");
 } // spipbb_save_metas
 
 
@@ -197,7 +199,7 @@ function spipbb_upgrade_metas($installed_version='',$version_code='') {
 	} 
 	// else si on fait des changements apres la 0.3.0
 	
-	spip_log('inc/spipbb.php : spipbb_upgrade_metas OK','spipbb');
+	spipbb_log('OK',3,"spipbb_upgrade_metas");
 } // spipbb_upgrade_metas
 
 

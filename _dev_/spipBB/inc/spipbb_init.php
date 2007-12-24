@@ -5,6 +5,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+spipbb_log('included',3,__FILE__);
 
 # lire version plugin.xml
 #

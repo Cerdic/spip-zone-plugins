@@ -5,6 +5,8 @@
 #  Authors : Chryjs, 2007 et als                           #
 #  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
 #  Contact : chryjs!@!free!.!fr                            #
+# [fr] Ce fichier inclu en pied de page voirsujet permet   #
+# [fr] de stocker provisoirement les visites avant cron    #
 #----------------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
@@ -19,6 +21,8 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common'); // pour la log
 
 	// Rejet des robots (qui sont pourtant des humains comme les autres)
 	if (preg_match(
@@ -37,7 +41,8 @@
 	//
 	// stockage sous forme de fichier tmp/spipbb-visites
 	//
-spip_log(__FILE__." calcule les stats ".$GLOBALS['id_forum'],'spipbb');
+
+	spipbb_log("calcule les stats ".$GLOBALS['id_forum'],3,__FILE__);
 
 	// 1. Chercher s'il existe deja une session pour ce numero IP.
 	$content = array();

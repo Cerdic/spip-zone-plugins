@@ -13,6 +13,7 @@
 # Fonctions ici because appel back et front
 # si 192, OK car appel spipbb_192 dans spipbb_fonctions ou fichier exec
 ##
+spipbb_log("included",3,__FILE__);
 
 /*
 +----------------------------------+

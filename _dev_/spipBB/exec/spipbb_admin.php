@@ -26,11 +26,13 @@
 // * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-spip_log(__FILE__.' : included','spipbb');
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
 
 // ------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------
 function exec_spipbb_admin() {
+
 	# requis spip
 	global 	$connect_statut,
 			$connect_toutes_rubriques,
@@ -339,6 +341,7 @@ function exec_spipbb_admin() {
 	bouton_retour_haut();
 
 	echo fin_gauche(), fin_page();
+
 } // exec_spipbb_admin
 
 ?>

@@ -7,6 +7,8 @@
 #  Contact : chryjs¡@!free¡.!fr                                   #
 #-----------------------------------------------------------------#
 
+// OBSOLETE REMPLACE PAR visites.php (a inclure) + genie/statvisites
+
 //    This program is free software; you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
 //    the Free Software Foundation; either version 2 of the License, or any later version.
@@ -23,10 +25,8 @@
 /* Cette balise permet de declencher le stockage des stats des forums */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
-	include_spip('inc/spipbb_192'); // Compatibilite 192
-}
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
 
 function balise_CALC_STATS_FORUMS($p)
 {
@@ -35,13 +35,13 @@ function balise_CALC_STATS_FORUMS($p)
 
 function balise_CALC_STATS_FORUMS_stat($args, $filtres)
 {
-	spip_log(__FILE__." balise_CALC_STATS_FORUMS_stat ".$args,'spipbb');
+	spipbb_log($args,3,"balise_CALC_STATS_FORUMS_stat");
 	return $args;
 }
 
 function balise_CALC_STATS_FORUMS_dyn($id_forum)
 {
-	spip_log(__FILE__." balise_CALC_STATS_FORUMS_dyn ".$id_forum,'spipbb');
+	spipbb_log($id_forum,3,"balise_CALC_STATS_FORUMS_dyn");
 	if (empty($id_forum)) return '';
 	$row = sql_fetsel('visites','spip_visites_forums',"id_forum=$id_forum");
 	if (is_array($row) and (!empty($row['visites'])) ) {

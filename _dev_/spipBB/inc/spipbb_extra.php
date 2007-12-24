@@ -3,6 +3,8 @@
 |
 */
 
+spipbb_log("included",3,__FILE__);
+
 # base  script :inc/extra.php : function extra_recup_saisie()
 # qq modifs, retourne un array()
 // recupere les valeurs postees pour reconstituer l'extra

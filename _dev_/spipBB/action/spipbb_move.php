@@ -24,9 +24,10 @@
 // * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-spip_log(__FILE__.' : included','spipbb');
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
 
-# pour convers. 192 + fonct. renumerote
+# pour fonct. renumerote
 include_spip('inc/spipbb_util');
 
 // ------------------------------------------------------------------------------

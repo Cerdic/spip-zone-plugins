@@ -7,7 +7,8 @@
 #  Contact : chryjs!@!free!.!fr                            #
 #----------------------------------------------------------#
 
-if (!function_exists('sql_query')) include_spip('inc/spipbb_192');
+if (!defined('_INC_SPIPBB_COMMON')) include_spip("inc/spipbb_common");
+//if (!function_exists('sql_query')) include_spip('inc/spipbb_192');
 
 # requis
 include_spip('inc/traiter_imagerie');

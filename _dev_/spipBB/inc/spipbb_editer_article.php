@@ -5,6 +5,7 @@ sur base editer_article
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spipbb_log("included",3,__FILE__);
 
 include_spip('inc/actions');
 include_spip('inc/extra');

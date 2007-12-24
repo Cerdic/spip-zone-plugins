@@ -10,6 +10,7 @@
 | qq fonctions de mise en forme, boutons ...
 +-------------------------------------------+
 */
+spipbb_log("included",3,__FILE__);
 
 include_spip("inc/filtres");
 

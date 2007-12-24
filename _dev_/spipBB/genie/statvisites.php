@@ -20,11 +20,9 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 if (!defined("_ECRIRE_INC_VERSION")) return;
-spip_log(__FILE__.' : included','spipbb');
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
 
-if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
-	include_spip('inc/spipbb_192'); // SPIP 1.9.2
-}
 //
 // prendre en compte un fichier de visite
 //
@@ -32,7 +30,7 @@ function compte_fichier_visite_forum($fichier, &$visites_f) {
 
 	$content = array();
 	if (lire_fichier($fichier, $content)) {
-		spip_log(__FILE__." compte_fichier_visite_forum[$fichier]:".$content,"spipbb");
+		spipbb_log("[$fichier]:".$content,1,"compte_fichier_visite_forum");
 		$content = @unserialize($content);
 	}
 	if (!is_array($content)) return;
@@ -65,7 +63,7 @@ function calculer_visites_forums($t) {
 	$date_init = time()-5*60; // pour l'instant on a positionne a toutes les 5 minutes pour les tests
 	foreach ($sessions as $item) {
 		if (@filemtime($item) < $date_init) {
-			spip_log(__FILE__." traite la session $item","spipbb");
+			spipbb_log("traite la session $item",1,"calculer_visites_forums");
 			compte_fichier_visite_forum($item, $visites_f);
 			spip_unlink($item);
 			if (--$compteur <= 0)
@@ -84,7 +82,7 @@ function calculer_visites_forums($t) {
 		foreach($visites_f as $id_forum => $n) {
 		  if (!sql_countsel('spip_visites_forums',
 				 "id_forum=$id_forum AND date='$date'")){
-			spip_log(__FILE__." sql_insertq[$n]:".$id_forum,"spipbb");
+			spipbb_log("sql_insertq[$n]:".$id_forum,1,"calculer_visites_forums");
 			sql_insertq('spip_visites_forums',
 					array('id_forum' => $id_forum,
 					      'visites' => $n,
@@ -93,7 +91,7 @@ function calculer_visites_forums($t) {
 		}
 		foreach ($ar as $n => $liste) {
 			$tous = sql_in('id_forum', $liste);
-			spip_log(__FILE__." sql_update[$n]:".$tous,"spipbb");
+			spipbb_log("sql_update[$n]:".$tous,1,"calculer_visites_forums");
 			sql_update('spip_visites_forums',
 				array('visites' => "visites+$n"),
 				   "date='$date' AND $tous");
@@ -102,13 +100,13 @@ function calculer_visites_forums($t) {
 
 	// S'il reste des fichiers a manger, le signaler pour reexecution rapide
 	if ($compteur==0) {
-		spip_log(__FILE__." il reste des visites a traiter...","spipbb");
+		spipbb_log("il reste des visites a traiter...",1,"calculer_visites_forums");
 		return -$t;
 	}
 } // calculer_visites_forums
 
 function genie_statvisites($time) {
-	spip_log(__FILE__." genie_statvisites : ".$time,'spipbb');
+	spipbb_log("DEBUT:".$time,1,"genie_statvisites");
 
 	$encore = calculer_visites_forums($time);
 

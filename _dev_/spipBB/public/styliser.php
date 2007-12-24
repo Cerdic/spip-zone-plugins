@@ -20,6 +20,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 if (!defined("_ECRIRE_INC_VERSION")) return;
+spipbb_log("included",3,__FILE__);
 
 global $spip_version_code;
 if (version_compare(substr($spip_version_code,0,5),'1.925','<')){
@@ -72,7 +73,7 @@ function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html'
 		if ( is_array($spipbb_meta)
 		  AND ($fond=="article" OR $fond=="rubrique")
 		  AND $id_rubrique>0 ) {
-			//spip_log("debug spipbb:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'], 'spipbb');
+			spipbb_log("debug spipbb:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'],3,"p_s");
 
 			if (empty($spipbb_meta['squelette_filforum']) OR empty($spipbb_meta['squelette_groupeforum']) ) spipbb_init_metas($id_rubrique);
 			$id_rub = $id_rubrique;
@@ -88,7 +89,7 @@ function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html'
 				if ( $squel=find_in_path("$sq.$ext") ) $squelette = substr($squel, 0, - strlen(".$ext"));
 			}
 		}
-		//else spip_log("debug spipbb:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'], 'spipbb') ;
+		else spipbb_log("debug spipbb:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'],3,"p_s") ;
 	}
 
 	// traitement normal

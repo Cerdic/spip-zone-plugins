@@ -5,6 +5,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+spipbb_log("included",2,__FILE__);
+
 //----------------------------------------------------------------------------
 // controle config de SPIP
 //---------------------------------------------------------------------------- 
@@ -97,7 +99,7 @@ function spipbb_check_tables()
 	{
 		$res[$une_table]=spipbb_check_une_table($une_table,$tables_principales);
 	}
-	spip_log('inc/spipbb.php : spipbb_check_tables END','spipbb');
+	spipbb_log(__FILE__.' spipbb_check_tables END');
 	return $res;
 } // spipbb_check_tables
 
@@ -126,7 +128,7 @@ function spipbb_check_une_table($nom_table,$tables_principales)
 		$table_origine['field'][$k]=strtolower($param[0]);
 	}
 	if ($res['field'] != $table_origine['field'] ) {
-		spip_log(__FILE__.": spipbb_check_une_table diff(".$nom_table.") res:".join(",",$res['field']).":orig:".join(",",$table_origine['field']),'spipbb');
+		spipbb_log(__FILE__.": spipbb_check_une_table diff(".$nom_table.") res:".join(",",$res['field']).":orig:".join(",",$table_origine['field']));
 		return false ;
 	}
 	else return true;
@@ -148,7 +150,7 @@ function spipbb_delete_tables()
 		$res=sql_query("DROP TABLE IF EXISTS $val ");
 		$liste.="$val ";
 	}
-	spip_log('inc/spipbb.php : spipbb_delete_tables END liste:'.$liste,'spipbb');
+	spipbb_log(__FILE__.' spipbb_delete_tables END liste:'.$liste);
 } // spipbb_delete_tables
 
 

@@ -11,7 +11,9 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_spip('inc/spipbb_192');
+spipbb_log("included",3,__FILE__);
+
+include_spip('inc/spipbb_192'); // on est deja sur d'etre en version 1.9.2
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 

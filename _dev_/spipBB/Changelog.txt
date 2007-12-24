@@ -1,4 +1,9 @@
-﻿2007-12-23  chryjs  <chryjs!@!free!.!fr>
+﻿2007-12-24  chryjs  <chryjs!@!free!.!fr>
+
+ * Ajout d'une fonction spipbb_log pour gerer les niveaux de log (a terme)
+
+
+2007-12-23  chryjs  <chryjs!@!free!.!fr>
 
  * Petit nettoyage XHTML + Passage du tableau de smiley à 3 colonnes : il faudrait revoir la presentation
  * Renvoi vers la page de profil utilisateur

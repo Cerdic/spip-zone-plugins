@@ -22,7 +22,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 if (defined("_BASE_SPIPBB")) return; else define("_BASE_SPIPBB", true);
-
+if (!defined('_INC_SPIPBB_COMMON')) include_spip("inc/spipbb_common");
+spipbb_log('included',3,__FILE__);
 //
 // Structure des tables
 //

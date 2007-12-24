@@ -8,13 +8,8 @@
 */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
-
-
-# conversin spip 1.9.2
-if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
-	include_spip('inc/spipbb_192'); // SPIP 1.9.2
-}
-
+include_spip('inc/spipbb_common');
+spipbb_log('included',2,__FILE__);
 
 function balise_FORMULAIRE_SPIPBB_PROFIL ($p) {
 	return calculer_balise_dynamique($p,'FORMULAIRE_SPIPBB_PROFIL', array('id_auteur'));

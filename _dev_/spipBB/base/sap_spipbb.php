@@ -3,6 +3,8 @@
 |
 */
 
+if (!defined('_INC_SPIPBB_COMMON')) include_spip("inc/spipbb_common");
+spipbb_log("included",3,__FILE__);
 #
 # Les lignes qui suivent servent à definir 
 # les champs extra et/ou leur equivalent en table.
