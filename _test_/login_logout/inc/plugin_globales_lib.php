@@ -121,51 +121,58 @@ if(!function_exists('__plugin_current_svnrevision_get')) {
 		static $svn_revision = false;
 		if(!empty($prefix)) {
 			// lire directement dans plugin.xml (éviter le cache ?)
-			$result = __plugin_real_tag_get($prefix, "LastChanged"."Revision");
-			$result = trim($result, '$');
-			$result = preg_replace("=^LastChanged"."Revision: ([0-9]+) $=", '${1}', $result);
+			$dir_plugin = _DIR_PLUGINS.__plugin_get_meta_dir($prefix);
+			// cherche si sur version svn
+			if(!$result = version_svn_courante($dir_plugin)) {
+				// méfiance: il faut que svn/entries soit à jour (svn update sur le poste de travail/serveur !)
+				// si pas de svn/entries, lire l'attribut dans plugin.xml
+				$file = $dir_plugin."/"._FILE_PLUGIN_CONFIG;
+				$result = __plugin_svn_revision_read($file);
+			}
 			if($verifier_svn && !$svn_revision) {
-			// vérifier les fichiers inclus (gourmand et peut-être trompeur si fichier fantôme ?)
-			// ne vérifier que sur deux niveaux (PLUGIN_ROOT et ses répertoires directs, pas en dessous)
+				// vérifier les fichiers inclus (gourmand et peut-être trompeur si fichier fantôme ?)
+				// ne vérifier que sur deux niveaux (PLUGIN_ROOT et ses répertoires directs, pas en dessous)
 				define("_PGL_SVN_LIRE_EXTENSIONS", "css|html|js|php|xml");
-				$dir = $_SERVER['DOCUMENT_ROOT']."/plugins/".__plugin_get_meta_dir($prefix);
 				$script_files = array();
-				if(is_dir($dir) && ($dh = opendir($dir))) {
+				if(is_dir($dir_plugin) && ($dh = opendir($dir_plugin))) {
 					while (($file = readdir($dh)) !== false) {
 						if($file[0] == ".") continue;
-						if(is_dir($dir_s = $dir."/".$file) && ($dh_s = opendir($dir_s))) {
+						if(is_dir($dir_plugin_sub = $dir_plugin."/".$file) && ($dh_s = opendir($dir_plugin_sub))) {
 							while (($file = readdir($dh_s)) !== false) {
 								if($file[0] == ".") continue;
-								if(preg_match("=\.("._PGL_SVN_LIRE_EXTENSIONS.")$=i", $file)) $script_files[] = $dir_s."/".$file;
+								if(preg_match('=\.('._PGL_SVN_LIRE_EXTENSIONS.')$=i', $file)) $script_files[] = $dir_plugin_sub."/".$file;
 							}
 							closedir($dh_s);
 						}
-						else if(preg_match("=\.("._PGL_SVN_LIRE_EXTENSIONS.")$=i", $file)) $script_files[] = $dir."/".$file;
+						else if(preg_match('=\.('._PGL_SVN_LIRE_EXTENSIONS.')$=i', $file)) $script_files[] = $dir_plugin."/".$file;
 					}
 					closedir($dh);
 				}
 				foreach($script_files as $file) {
-					$revision = 0;
-					// lire le fichier, en espérant trouver le mot clé svn dans les 2048 premiers caractères
-					if($fh = fopen ($file, "rb")) {
-						$buf = fread ($fh, 2048);
-						fclose($fh);
-						if($buf = strstr($buf, "$"."LastChanged"."Revision:")) {
-							$revision = preg_replace('=\$LastChangedRevision$buf, 1);
-							if(strval(intval($revision)) != $revision) { 
-								// erreur dans l'attribut (vide ?)
-								continue;
-							}
-							$result = max($result, $revision);
-						}
-					}
-					//spip_log("##: $file ## $revision");
+					if(!$ii = __plugin_svn_revision_read ($file)) {	continue; }
+					$result = max($ii, $result);
 				}
 			}
 			if(!empty($result) && (intval($result) > 0)) return($result);
 		}
 		return(false);
 	}
+}
+
+/**/
+// lire le fichier, en espérant trouver le mot clé svn dans les $buf_size premiers caractères
+function __plugin_svn_revision_read ($filename, $buf_size = 2048) {
+	if($fh = fopen($filename, "rb")) {
+		$buf = fread($fh, $buf_size);
+		fclose($fh);
+		if($buf = strstr($buf, "$"."LastChanged"."Revision:")) {
+			$revision = preg_replace('=^\$LastChanged'.'Revision: ([0-9]+) \$.*$=s', '${1}', $buf, 1);
+			if(strval(intval($revision)) == $revision) { 
+				return($revision);
+			}
+		}
+	}
+	return (false);
 }
 
 /**/
