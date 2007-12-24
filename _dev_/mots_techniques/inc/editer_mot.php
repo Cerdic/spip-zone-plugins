@@ -230,7 +230,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 		$largeurs = array('25', '', '', '');
 		$styles = array('arial11', 'arial2', 'arial2', 'arial1');
 		if (count($les_mots)>0)
-			$res = "\n<div class='liste'>"
+			$res = "\n<div class='cadre-liste'>"
 			. "\n<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
 			. afficher_liste($largeurs, $tableau, $styles)
 			. "</table></div>";
@@ -409,7 +409,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 // http://doc.spip.org/@editer_mot_droits
 function editer_mot_droits($select, $cond)
 {
-	$droit = substr($GLOBALS['auteur_session']['statut'],1);
+	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
 	return sql_select("$select", "spip_groupes_mots", "$droit = 'oui' AND $cond");
 }
 ?>

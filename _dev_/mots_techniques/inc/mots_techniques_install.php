@@ -7,7 +7,7 @@
 				|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 			include_spip('base/mots_techniques');
 			if ($current_version<0.1){
-				sql_alter("TABLE spip_groupes_mots ADD technique text NOT NULL AFTER maj");
+				sql_alter("TABLE spip_groupes_mots ADD technique text NOT NULL DEFAULT '' AFTER maj");
 				sql_alter("TABLE spip_groupes_mots ADD affiche_formulaire varchar(3) DEFAULT 'oui' NOT NULL AFTER technique");
 				echo "Mots Techniques install&eacute;<br/>";
 				ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
@@ -21,7 +21,7 @@
 		effacer_meta($nom_meta_base_version);
 	}
 
-	/*
+	
 	function mots_techniques_install($action){
 		$nom_meta = "mots_techniques_base";
 		
@@ -38,5 +38,5 @@
 				mots_techniques_vider_tables($nom_meta);
 				break;
 		}
-	}*/
+	}
 ?>
