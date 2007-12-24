@@ -45,8 +45,10 @@ class cfg_formulaire
 	var $message = '';
 // afficher ce compte rendu ?
 	var $afficher_messages = true;
-// liens optionnels sur des sous-config [(#REM) liens*=xxx]
+// liens optionnels sur des sous-config <!-- liens*=xxx -->
 	var $liens = array();
+// liens optionnels sur des sous-config pour des fonds utilisant un champ multiple  <!-- liens_multi*=xxx -->
+	var $liens_multi = array();
 // les champs trouve dans le fond
 	var $champs = array();
 // les champs index

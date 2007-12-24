@@ -128,10 +128,16 @@ class cfg_dist extends cfg_formulaire
 	function lier()
 	{
 		$return = '';
+		// liens simples
 		foreach ($this->liens as $lien) {
 			$nom = _T($lien);
 			$return .= "<li>" . $this->boite_liens($lien, $nom) . "</li>\n";
 		}
+		// liens multiples
+		foreach ($this->liens_multi as $lien) {
+			$nom = _T($lien);
+			$return .= "<li>" . $this->boite_liens_multi($lien, $nom) . "</li>\n";
+		}		
 		return ($return)?
 			debut_boite_info(true) . "<ul>$return</ul>" . fin_boite_info(true)
 			:'';
@@ -151,54 +157,38 @@ class cfg_dist extends cfg_formulaire
 		// nom est une chaine, pas une cle de tableau.
 		if (empty($nom) OR !is_string($nom)) $nom = $lien;
 		
-		// multi ?
-		if ($multi = $this->boite_liens_multi($lien, $nom))
-			return $multi;
-		// simple
-		else
-			return "<a href='" . generer_url_ecrire("cfg","cfg=$lien") . "'>$nom</a>\n"; // &cfg_id= <-- a ajouter ?
+		return "<a href='" . generer_url_ecrire("cfg","cfg=$lien") . "'>$nom</a>\n"; // &cfg_id= <-- a ajouter ?
 	}
 	
 	
 	/*
-	 * Cherche si c'est un formulaire de type multi
-	 * et renvoie un formulaire si c'est le cas
-	 * avec des liens pour modifier les valeurs enregistrees
-	 * et pour creer une nouvelle entree
+	 * Les liens multi sont appelles par 
+	 * liens_multi*=nom_du_fond
 	 * 
-	 * (a bazarder ?)
-	 * 
-	 * Suppose que l'enregistrement d'un type multi
-	 * fait que la meta $lien ne contient que des valeurs
-	 * qui sont des tableaux, eux-meme ayant des valeurs
-	 * etant des tableaux (vraiment tordu!) 
 	 */
 	function boite_liens_multi($lien, $nom=''){
+		// nom est une chaine, pas une cle de tableau.
+		if (empty($nom) OR !is_string($nom)) $nom = $lien;
+		
 		$dedans = '';
 		if (($exi = lire_config($lien)) && is_array($exi)) {
 			foreach ($exi as $compte => $info) {
-				// config simple ?
-				// Si une des valeurs n'est pas un tableau : on stoppe tout.
-				if (!is_array($info)) {
-					return '';
-				}
 				$lid = $lien . "_" . $compte;
 				$dedans .= "\n<p><label for='$lid'>$compte</label>\n"
 						.  "<input type='image' id='$lid' name='cfg_id' value='$compte' "
 						.  "src='../dist/images/triangle.gif' style='vertical-align: text-top;'/></p>\n";
 			}
 		}
-		// s'il effectivement c'est un multi, on ajoute un bouton 'nouveau'
-		if ($dedans) 
-			return    "<form method='post' action='$this->base_url'><div>\n"
-					. "<h4>$nom</h4>\n"
-					. "<input type='hidden' name='exec' value='cfg' />\n"
-					. "<input type='hidden' name='cfg' value='$lien' />\n"
-					. "<label for='$lien" . "_'>" . _T('cfg:nouveau') . "</label>\n"
-					. "<input type='image' id='$lien" . "_' name='nouveau' value='1' "
-					. "src='../dist/images/creer.gif' style='vertical-align: text-top;'/></p>\n" 
-					. $dedans
-					. "\n</div></form>\n";
+		// On ajoute un bouton 'nouveau'
+		return    "<form method='post' action='$this->base_url'><div>\n"
+				. "<h4>$nom</h4>\n"
+				. "<input type='hidden' name='exec' value='cfg' />\n"
+				. "<input type='hidden' name='cfg' value='$lien' />\n"
+				. "<label for='$lien" . "_'>" . _T('cfg:nouveau') . "</label>\n"
+				. "<input type='image' id='$lien" . "_' name='nouveau' value='1' "
+				. "src='../dist/images/creer.gif' style='vertical-align: text-top;'/></p>\n" 
+				. $dedans
+				. "\n</div></form>\n";
 	
 	}
 	
