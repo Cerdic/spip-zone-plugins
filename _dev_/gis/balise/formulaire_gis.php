@@ -49,11 +49,6 @@ function balise_FORMULAIRE_GIS_dyn($id_rubrique) {
 	$commentimg= _request('commentimg');
 	$commentsound= _request('commentsound');
 	
-	// palabras chave
-	$mot= _request('mot');
-	$provincias= _request('provincias');
-	$comarcas= _request('comarcas');	
-
 	$auteur= _request('auteur');
 	
 	$lang = _request('var_lang');	
@@ -68,33 +63,13 @@ function balise_FORMULAIRE_GIS_dyn($id_rubrique) {
 		$lang = $r["lang"];
 	}
 	
-	$previsualiser= _request('previsualiser');
 	$valider= _request('valider');
 	$media=_request('media');	
 	
-	$previsu = '';
 	$bouton= '';
 
 
 	// statut de l'article, et formulaire de login en fonction de la configuration choisie
-
-	// pluggin calendrier
-	
-	$calendrier= _request('calendrier');
-	
-	if(!$calendrier){
-		$date_debut = date("Y-m-d H:i:s");
-	} else {
-		$date_debut = date("Y-m-d H:i:s", mktime(_request('heures'),_request('minutes'),0,_request('mois'), _request('jour'), _request('annee')));
-	}
-	
-	$heures = heures($date_debut);
-	$minutes = minutes($date_debut);
-			
-	$choix_date_debut = afficher_jour_mois_annee_h_m($date_debut, $heures, $minutes);
-	$date_redac = $date_debut;
-
-	// fin du pluggin calendrier
 	
 	if($valider)
 		{
@@ -102,7 +77,7 @@ function balise_FORMULAIRE_GIS_dyn($id_rubrique) {
 		$time=time();
 		$date=date('Y-m-d H:i:s',$time);
 
-	  	$statut= 'prop';
+	  	$statut= 'publie';
 		
      	// ajouter le contenu de l'article
 		spip_abstract_insert('spip_articles', "(surtitre, titre, soustitre, descriptif, chapo, texte, ps, statut, date, date_redac, id_rubrique, id_article)", "(
@@ -128,18 +103,13 @@ function balise_FORMULAIRE_GIS_dyn($id_rubrique) {
 		
 		// insertamos o autor do artigo, tomado da cookie de sesion
 		spip_abstract_insert("spip_auteurs_articles", "(id_auteur, id_article)", "(" . $auteur . ", " . $id_novo_article . ")");
-		
-		// insertamos as palabras chave do artigo
-		spip_abstract_insert("spip_mots_articles", "(id_mot, id_article)", "(". $mot .", ". $id_novo_article .")");
-		spip_abstract_insert("spip_mots_articles", "(id_mot, id_article)", "(". $provincias .", " . $id_novo_article .")");
-		spip_abstract_insert("spip_mots_articles", "(id_mot, id_article)", "(". $comarcas .", " . $id_novo_article .")");
-		
+				
 		//proba subir imaxe
 		if ((isset($_FILES['commentimg'])) AND ($_FILES['commentimg']['error'] == "0")) {
     		$freshfile = $_FILES['commentimg'];
-    		move_uploaded_file($freshfile['tmp_name'], _DIR_PLUGIN_GIS."upload_form/".$freshfile['name']) OR die ("<p>Error!</p>");
-			inc_ajouter_documents_dist (_DIR_PLUGIN_GIS."upload_form/".$freshfile['name'], $freshfile['name'], 'article', $id_novo_article , 'document', $id_document, $documents_actifs);
-			unlink (_DIR_PLUGIN_GIS."upload_form/".$freshfile['name']);
+    		move_uploaded_file($freshfile['tmp_name'], _DIR_PLUGIN_GIS.$freshfile['name']) OR die ("<p>Error!</p>");
+			inc_ajouter_documents_dist (_DIR_PLUGIN_GIS.$freshfile['name'], $freshfile['name'], 'article', $id_novo_article , 'document', $id_document, $documents_actifs);
+			unlink (_DIR_PLUGIN_GIS.$freshfile['name']);
 		} else {
 			echo "no fai nada coa imaxe";
 		}
@@ -148,9 +118,9 @@ function balise_FORMULAIRE_GIS_dyn($id_rubrique) {
 		if ((isset($_FILES['commentsound'])) AND ($_FILES['commentsound']['error'] == "0")) {
     		$freshfile = $_FILES['commentsound'];
     		echo $freshfile['tmp_name'];
-    		move_uploaded_file($freshfile['tmp_name'], _DIR_PLUGIN_GIS."upload_form/".$freshfile['name']) OR die ("<p>Error!</p>");
-			inc_ajouter_documents_dist (_DIR_PLUGIN_GIS."upload_form/".$freshfile['name'], $freshfile['name'], 'article', $id_novo_article , 'document', $id_document, $documents_actifs);
-			unlink (_DIR_PLUGIN_GIS."upload_form/".$freshfile['name']);
+    		move_uploaded_file($freshfile['tmp_name'], _DIR_PLUGIN_GIS.$freshfile['name']) OR die ("<p>Error!</p>");
+			inc_ajouter_documents_dist (_DIR_PLUGIN_GIS.$freshfile['name'], $freshfile['name'], 'article', $id_novo_article , 'document', $id_document, $documents_actifs);
+			unlink (_DIR_PLUGIN_GIS.$freshfile['name']);
 		} else {
 			echo "no fai nada co son";
 		}
@@ -163,15 +133,6 @@ function balise_FORMULAIRE_GIS_dyn($id_rubrique) {
 		echo ($id_article);
 	}else{ // SI NON E if($valider), e decir, si non se lle da o boton enviar (podeselle dar o boton previsualizaar por exemplo, ou engadir imaxe)
 
-		$formulaire_date = inclure_balise_dynamique(
-		array(
-			'formulaires/formulaire_date',
-			0,
-			array(
-				'calendrier' => $calendrier,
-				'date_debut' => $choix_date_debut,
-			)
-		), false);
 		return array('formulaires/formulaire_gis', 0,
 			array(
 				'formulaire_date' => $formulaire_date,
@@ -200,29 +161,4 @@ function balise_FORMULAIRE_GIS_dyn($id_rubrique) {
 		);
 	} // FIN if($valider)
 } // FIN function balise_FORMULAIRE_GIS_dyn($id_rubrique)
-
-function barre_article($texte){
-	if (!$GLOBALS['browser_barre'])
-	return "<textarea name='texte' rows='12' class='forml' cols='40'>$texte</textarea>";
-	static $num_formulaire = 0;
-	$num_formulaire++;
-	include_ecrire('inc_barre.php3');
-	return afficher_barre("document.getElementById('formulaire_$num_formulaire')", true) .
-	  "
-	  <textarea name='texte' rows='12' class='forml' cols='40'
-	id='formulaire_$num_formulaire'
-	onselect='storeCaret(this);'
-	onclick='storeCaret(this);'
-	onkeyup='storeCaret(this);'
-	ondbclick='storeCaret(this);'>$texte</textarea>";
-}
-
-function logoauteur($id_auteur, $formats = array ('gif', 'jpg', 'png')) {
-	reset($formats);
-	while (list(, $format) = each($formats)) {
-		$d = _DIR_IMG . "auton$id_auteur.$format";
-		if (@file_exists($d)) return $d;
-	}
-	return  '';
-}
 ?>
