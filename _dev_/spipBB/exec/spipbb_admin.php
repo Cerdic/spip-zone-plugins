@@ -208,7 +208,7 @@ function exec_spipbb_admin() {
 
 			$ouvrir_forum = generer_url_ecrire("spipbb_forum", "id_article=".$id_forum);
 
-			$art_ferme = verif_article_ferme($id_forum, $GLOBALS['id_mot_art_ferme']);
+			$art_ferme = verif_article_ferme($id_forum, $GLOBALS['spipbb']['id_mot_ferme']);
 
 			$ifond = $ifond ^ 1;
 			$coul_sujet = ($ifond) ? $couleur_claire : '#e3e3e3';

@@ -25,7 +25,7 @@ spipbb_log("included",3,__FILE__);
 #
 # affichage de la colonne de menus
 #
-function spipbb_menus_gauche($script, $id_salon='', $id_art='', $id_sujet='', $modos='') {
+function spipbb_menus_gauche($script, $id_salon="", $id_art="", $id_sujet="", $modos="") {
 
 	global $connect_statut,
 			$connect_toutes_rubriques,
@@ -292,7 +292,8 @@ function posts_proposes_attente_moderation() {
 
 #
 # contenu : liste des modos	
-function liste_moderateurs($modos,$id_salon,$id_art) {
+function liste_moderateurs($modos,$id_salon="",$id_art="") {
+	spipbb_log("entree:".$id_salon.":".$id_art.":".$modos,3,"list_modo");
 	if(!is_array($modos)) { $modos=array(); }
 
 	# sur page sujet, recherche rub de art (du thread en cours) + auteurs
@@ -320,7 +321,7 @@ function liste_moderateurs($modos,$id_salon,$id_art) {
 	}
 
 	# admins rubrique
-	if (!empty($id_salon)) {
+	if ($id_salon) {
 
 		$res = sql_query("SELECT DISTINCT A.nom, A.id_auteur, A.statut 
 							FROM  spip_auteurs AS A, spip_auteurs_rubriques AS B 
@@ -335,7 +336,7 @@ function liste_moderateurs($modos,$id_salon,$id_art) {
 	}
 
 	# aff.liste modos
-	$aff='';
+	$aff="";
 	if(count($modos)>=1) {
 		$aff.= debut_cadre_relief("fiche-perso-24.gif", true, '', _T('spipbb:moderateurs'));
 		foreach($modos as $k => $v) {

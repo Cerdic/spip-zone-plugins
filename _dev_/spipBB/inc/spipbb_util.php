@@ -114,8 +114,10 @@ function affiche_metas_spipbb($var) {
 //
 // Article est-il ferme, ferme-maintenance ?
 //
-function verif_article_ferme($id_article,$id_mot_ferme) {
-	$res=spip_query("SELECT * FROM spip_mots_articles WHERE id_mot=$id_mot_ferme AND id_article=$id_article");
+function verif_article_ferme($id_article=0,$id_mot_ferme=0) {
+	if (empty($id_article) or empty($id_mot)) return;
+	$rf="";
+	$res=sql_query("SELECT * FROM spip_mots_articles WHERE id_mot=$id_mot_ferme AND id_article=$id_article");
 	if ($row=sql_count($res)) {
 		$rf ="ferme";
 		if ($ds = @opendir(_DIR_SESSIONS)) {

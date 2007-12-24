@@ -4,7 +4,7 @@
 */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
+if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common');
 spipbb_log("included",2,__FILE__);
 
 //----------------------------------------------------------------------------
@@ -99,7 +99,7 @@ function spipbb_check_tables()
 	{
 		$res[$une_table]=spipbb_check_une_table($une_table,$tables_principales);
 	}
-	spipbb_log(__FILE__.' spipbb_check_tables END');
+	spipbb_log('END',2,__FILE__.":spipbb_check_tables()");
 	return $res;
 } // spipbb_check_tables
 
@@ -128,7 +128,7 @@ function spipbb_check_une_table($nom_table,$tables_principales)
 		$table_origine['field'][$k]=strtolower($param[0]);
 	}
 	if ($res['field'] != $table_origine['field'] ) {
-		spipbb_log(__FILE__.": spipbb_check_une_table diff(".$nom_table.") res:".join(",",$res['field']).":orig:".join(",",$table_origine['field']));
+		spipbb_log("diff(".$nom_table.") res:".join(",",$res['field']).":orig:".join(",",$table_origine['field']),2,__FILE__." spipbb_check_une_table");
 		return false ;
 	}
 	else return true;
