@@ -15,7 +15,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if(defined("_PGL_PLUGIN_GLOBALES_LIB") && _PGL_PLUGIN_GLOBALES_LIB) return;
-define("_PGL_PLUGIN_GLOBALES_LIB", 20071222.1814); //date.heure
+define("_PGL_PLUGIN_GLOBALES_LIB", 20071224.0535); //date.heure
 
 // HISTORY:
 // CP-20071222: optimisation __plugin_boite_meta_info() pour plugin en mode stable et mode dev
@@ -113,6 +113,20 @@ if(!function_exists('__plugin_current_version_base_get')) {
 		return(lire_meta($prefix."_base_version"));
 	}
 } // end if __plugin_current_version_base_get
+
+if(!function_exists('__plugin_current_LastChangedRevision_get')) {
+	// renvoie le dernier numero de révision svn
+	function __plugin_current_LastChangedRevision_get ($prefix) {
+		if(!empty($prefix)) {
+			// lire directement dans plugin.xml (éviter le cache ?)
+			$result = __plugin_real_tag_get($prefix, "LastChangedRevision");
+			// protéger de svn qui va le prendre pour un tag
+			$result = trim($result, '$');
+			return(preg_replace('=^LastChangedRevision: ([0-9]+) $=', '${1}', $result));
+		}
+		return(false);
+	}
+}
 
 /**/
 if(!function_exists('__plugin_real_tag_get')) {
@@ -259,9 +273,13 @@ if(!function_exists('__plugin_html_signature')) {
 		$version = typo($info['version']);
 		//$base_version = typo($info['version_base']); // cache ?
 		$base_version = __plugin_current_version_base_get($prefix);
+		$LastChangedRevision = __plugin_current_LastChangedRevision_get($prefix);
 		$revision = "";
 		if($html) {
-			$version = (($version) ? " <span style='color:gray;'>".$version."</span>" : "");
+			$version = (($version) ? " <span style='color:gray;'>".$version : "")
+				. (($LastChangedRevision) ? "-".$LastChangedRevision : "")
+				. "</span>"
+				;
 			$base_version = (($base_version) ? " <span style='color:#66c;'>&lt;".$base_version."&gt;</span>" : "");
 		}
 		$result = ""
