@@ -42,7 +42,7 @@ if ($metas_outils['log_couteau_suisse']['actif'] || defined('_LOG_CS_FORCE') || 
 	cs_log('INIT : cout_options, '.$_SERVER['REQUEST_URI']);
 }
 
-// pour voir les erreur ?
+// pour voir les erreurs ?
 if ($_GET['cs']=='report') error_reporting(E_ALL ^ E_NOTICE);
 elseif ($_GET['cs']=='reportall' && $auteur_session['statut']=='0minirezo') error_reporting(E_ALL);
 
@@ -59,16 +59,14 @@ if($zap) {
 	//	- le code pour les pipelines utilises
 	global $cs_metas_pipelines;
 	$cs_metas_pipelines = array();
-	
-	// Puisque ce plugin n'est pas destine (pour l'instant) a abandonner la compatibilite avec 1.9.1
-	define('_SIGNALER_ECHOS', false); // horrible      
+
 	// fichiers/dossiers temporaires pour le Couteau Suisse
 	define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, "couteau-suisse"));
 	define('_DIR_RSS_TMP', _DIR_TMP . 'rss_couteau_suisse.html');
 	// alias pour passer en mode impression
 	if(isset($_GET['page']) && in_array($_GET['page'], array('print','imprimer','imprimir_articulo','imprimir_breve','article_pdf')))
 		$_GET['cs']='print';
-	
+
 	// test sur le fichier a inclure ici
 	$cs_exists = file_exists($f_cs = _DIR_CS_TMP.'mes_options.php');
 

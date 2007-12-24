@@ -15,6 +15,7 @@ define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 */
 // compatibilite spip 1.9
 if(defined('_SPIP19100') && !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
+function compat_boite($b) {if(defined('_SPIP19200')) echo $b('', true); else $b(); }
 
 function cs_admin_styles_et_js($cs_version) {
 	global $afficher_outil;
@@ -383,7 +384,7 @@ verif_plugin();
 
 	cs_admin_styles_et_js($cs_version);
 	echo "<br /><br /><br />";
-	gros_titre(_T('desc:titre'));
+	gros_titre(_T('desc:titre'), '', false);
 	echo barre_onglets("configuration", 'couteau_suisse');
 echo '<p style="color:red;">Ancienne interface : <a href="', generer_url_ecrire('admin_couteau_suisse_old'), '">par ici</a></p>';
 // verification d'une base venant de SPIP 1.8
@@ -394,8 +395,7 @@ if($resultat['Type']!='text') echo "<p style=\"color:red;\">Attention : votre ba
 $res = plugin_get_infos('barre_typo_v2');
 if (strlen($res['version']) and (version_compare($res['version'],'2.3.2','<'))) echo "<p><span style=\"color:red;\">Attention :</span> la barre typographique (version $res[version]) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; 2.3.2.</p>";
 
-	debut_gauche();
-	debut_boite_info();
+	compat_boite('debut_gauche');
 	// pour la liste des docs sur spip-contrib
 	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();
 	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace('/@@(.*?)@@/e', "couper(_T('\\1'), 25)", $v);
@@ -412,30 +412,23 @@ if (strlen($res['version']) and (version_compare($res['version'],'2.3.2','<'))) 
 		'install' => $aide,
 		'pack' => '['._T('desc:pack').'->'.generer_url_ecrire($exec,'cmd=pack#cs_infos').']',
 	));
-	echo propre($aide);
-	fin_boite_info();
+	echo debut_boite_info(true), propre($aide), fin_boite_info(true);
 	$aide = cs_aide_raccourcis();
-	if(strlen($aide)) {
-		debut_boite_info();
-		echo $aide;
-		fin_boite_info();
-	}
+	if(strlen($aide))
+		echo debut_boite_info(true), $aide, fin_boite_info(true);
 	$aide = cs_aide_pipelines();
-	if(strlen($aide)) {
-		debut_boite_info();
-		echo $aide;
-		fin_boite_info();
-	}
+	if(strlen($aide))
+		echo debut_boite_info(true), $aide, fin_boite_info(true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
 
-	creer_colonne_droite();
+	compat_boite('creer_colonne_droite');
 	// on telecharge les news...
 	if (defined('boites_privees_CS')) cs_boite_rss(!$quiet);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
-	debut_droite();
+	compat_boite('debut_droite');
 
-	debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),'','','&nbsp;'._T('desc:liste_outils'));
-	echo _T('desc:presente_outils2'),
+	echo debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('desc:liste_outils')),
+		_T('desc:presente_outils2'),
 		"\n<table border='0' cellspacing='0' cellpadding='5' style='width:100%;'><tr><td class='sansserif'>";
 
 	include_spip('inc/cs_outils');
@@ -449,20 +442,19 @@ document.write("<style>div#csjs{display:none;}</style>");
 <noscript><style>div#csjs{display:none;}</style><div style="color:red;"><br/>', _T('desc:erreur:nojs'),
 $_GET['modif']=='oui'?'<br/>'._T('desc:vars_modifiees').'.':'','</div></noscript>',
 		'</div>',
-		"</td></tr></table>\n";
-	fin_cadre_trait_couleur();
+		"</td></tr></table>\n",
+		fin_cadre_trait_couleur(true),
 
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$exec),'data'=>'')),
+		pipeline('affiche_milieu',array('args'=>array('exec'=>$exec),'data'=>'')),
 		fin_gauche(), fin_page();
 cs_log(" FIN : exec_admin_couteau_suisse()");
 }
 
 function cs_boite_rss($force) {
-	debut_boite_info();
-	echo '<p><b>'._T('desc:rss_titre').'</b></p><div class="cs_boite_rss"><p>Attente RSS...</p></div>'
+	echo debut_boite_info(true), '<p><b>'._T('desc:rss_titre').'</b></p><div class="cs_boite_rss"><p>Attente RSS...</p></div>'
 		/*.'<div style="text-align: right; font-size: 87%;"><a title="'._T('desc:desactiver_rss').'" href="'
-		.generer_url_ecrire(_request('exec'),'cmd=toggle&outil=rss_couteau_suisse').'">'._T('desc:supprimer_cadre').'</a></div>'*/;
-	fin_boite_info();
+		.generer_url_ecrire(_request('exec'),'cmd=toggle&outil=rss_couteau_suisse').'">'._T('desc:supprimer_cadre').'</a></div>'*/
+		, fin_boite_info(true);
 }
 
 ?>

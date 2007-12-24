@@ -16,6 +16,7 @@ define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 */
 // compatibilite spip 1.9
 if(defined('_SPIP19100') & !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
+function compat_boite($b) {if(defined('_SPIP19200')) echo $b('', true); else $b(); }
 
 function cs_admin_styles_et_js() {
 	global $couleur_claire, $couleur_foncee;
@@ -273,33 +274,26 @@ verif_plugin();
 
 	cs_admin_styles_et_js();
 	echo "<br /><br /><br />";
-	gros_titre(_T('desc:titre'));
+	gros_titre(_T('desc:titre'), '', false);
 	echo barre_onglets("configuration", 'couteau_suisse');
 
-	debut_gauche();
-	debut_boite_info();
-	echo propre(_T('desc:help0', array(
-		'reset' => generer_url_ecrire($exec,'cmd=resetall'))));
-	fin_boite_info();
+	compat_boite('debut_gauche');
+	echo debut_boite_info(true),
+		propre(_T('desc:help0', array('reset' => generer_url_ecrire($exec,'cmd=resetall')))),
+		fin_boite_info(true);
 	$aide_racc = cs_aide_raccourcis();
-	if(strlen($aide_racc)) {
-		debut_boite_info();
-		echo $aide_racc;
-		fin_boite_info();
-	}
+	if(strlen($aide_racc))
+		echo debut_boite_info(true), $aide_racc, fin_boite_info(true);
 	$aide_pipes = cs_aide_pipelines();
-	if(strlen($aide_pipes)) {
-		debut_boite_info();
-		echo $aide_pipes;
-		fin_boite_info();
-	}
+	if(strlen($aide_pipes))
+		echo debut_boite_info(true), $aide_pipes, fin_boite_info(true);
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
-	debut_droite();
+	compat_boite('debut_droite');
 
-	debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),'','','&nbsp;'._T('desc:liste_outils'));
+	echo debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('desc:liste_outils'));
 
 	$valider = "\n<div style='text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider1' value='"._T('bouton_valider')."' class='fondo' onclick='document.forms.submitform.submit()' /></div>";
@@ -337,10 +331,8 @@ verif_plugin();
 	foreach($temp = $outils as $outil) echo "<input type='hidden' id='tweak_".$outil['id']."' name='tweak_".$outil['id']."' value='".($outil['actif']?"1":"0")."' />";
 	$valider = "\n<div style='margin-top:0.4em; text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider2' value='"._T('bouton_valider')."' class='fondo' /></div>";
-	echo $valider;
-
-	fin_cadre_trait_couleur();
-//	fin_cadre_relief();
+	echo $valider, 
+	fin_cadre_trait_couleur(true);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$exec),'data'=>''));
 	echo "</form>";
