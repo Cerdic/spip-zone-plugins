@@ -8,9 +8,9 @@
 	// $LastChangedDate$
 	
 	 -->
-	<nom>Menu de navigation d&eacute;pliant</nom>
+	<nom>Menu de navigation d&eacute;pliant (MenuDep)</nom>
 	<auteur>cpaulus@quesaco.org</auteur>
-	<version>0.23</version>
+	<version>0.24</version>
 	<version_base>0.01</version_base>
 	<icon>images/menudep-64.png</icon>
 	<etat>test</etat>
@@ -39,7 +39,7 @@
 	</pipeline>
 
 	<pipeline>
-		<!-- les css et js de la barre d'accessibilité dans l'espace public -->
+		<!-- les css et js dans l'espace public -->
 		<nom>insert_head</nom>
 		<inclure>inc/menudep_pipeline_insert_head.php</inclure>
 	</pipeline>

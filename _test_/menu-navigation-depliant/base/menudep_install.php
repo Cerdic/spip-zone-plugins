@@ -53,7 +53,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip("inc/plugin_globales_lib");
 
 function menudep_install ($action) {
-spip_log("##"._MENUDEP_PREFIX."menudep_install() --");
 
 	switch($action) {
 		case 'test':
@@ -61,7 +60,6 @@ spip_log("##"._MENUDEP_PREFIX."menudep_install() --");
 			// la valise plugin "effacer tout" apparaît.
 			// si renvoie false, SPIP revient avec $action = 'install' (une seule fois)
 			$result = intval(isset($GLOBALS['meta'][_MENUDEP_META_PREFERENCES]));
-spip_log("##"._MENUDEP_PREFIX."menudep_install() TEST: ".$result);
 			return($result);
 			break;
 		case 'install':
@@ -90,7 +88,6 @@ function menudep_init () {
 }
 
 function menudep_vider_tables () {
-spip_log("##"._MENUDEP_PREFIX."menudep_vider_tables() --");
 
 	effacer_meta(_MENUDEP_META_PREFERENCES);
 	return(__ecrire_metas());
