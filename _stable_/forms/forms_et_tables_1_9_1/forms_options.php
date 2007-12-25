@@ -150,8 +150,15 @@ function autoriser_form_donnee_modifier_dist($faire, $type, $id_donnee, $qui, $o
 	$cookie = $_COOKIE[Forms_nom_cookie_form($id_form)];
 	if (($row['modifiable'] == 'oui') && $dejareponse) {
 		$q = "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form);
-		if ($cookie) $q.=" AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")";
-		else $q.=" AND id_auteur="._q($id_auteur)." ";
+		$q .= "AND (";
+		if ($cookie) { 
+			$q.="cookie="._q($cookie). ($id_auteur?" OR id_auteur="._q($id_auteur):" AND id_auteur=0");
+		}
+		else if ($id_auteur)
+				$q.="id_auteur="._q($id_auteur);
+			else
+				return false;
+		$q .= ')';
 		//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
 		if ($row['multiple']=='oui' || !_DIR_RESTREINT) $q.=" AND id_donnee="._q($id_donnee);
 		$r=spip_query($q);

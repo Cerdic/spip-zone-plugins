@@ -108,7 +108,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 			"WHERE donnees.id_form="._q($id_form)." ".
 			"AND donnees.statut='publie' AND (";
 		if ($cookie) { 
-			$q.="cookie="._q($cookie). ($id_auteur?" OR id_auteur="._q($id_auteur):"");
+			$q.="cookie="._q($cookie). ($id_auteur?" OR id_auteur="._q($id_auteur):" AND id_auteur=0");
 		}
 		else if ($id_auteur)
 				$q.="id_auteur="._q($id_auteur);
@@ -116,7 +116,8 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 				$q.="0=1";
 		$q .= ") ";
 		//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
-		if ($row['multiple']=='oui') $q.="AND donnees.id_donnee="._q($id_donnee);
+		if ($row['multiple']=='oui') 
+		  $q.="AND donnees.id_donnee="._q($id_donnee);
 		$res = spip_query($q);
 		if($row2 = spip_fetch_array($res)){
 			if (($row['multiple']=='non') && ($row['modifiable']=='non')) return "";
