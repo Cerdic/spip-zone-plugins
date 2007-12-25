@@ -108,15 +108,34 @@ function spipbb_show_log($log_name="spipbb")
 	$content=trim($content);
 	if ($content) {
 		// nettoyage
-		$content=preg_replace(";\r;","",$content); // pas besoin des pids ici
+		$content=str_replace("\r\n","",$content); // pas besoin des pids ici
 		$content=preg_replace(";\(pid.*?\);","",$content); // pas besoin des pids ici
-		$content=preg_replace(";^.*?rotate.*?$;","",$content); // pas besoin des rotates ici
+		//$content=preg_replace(";^.*?rotate.*?$;","",$content); // pas besoin des rotates ici
+		$content=str_replace("[-- rotate --]\n","",$content);
 		// on passe en ordre chronologique inverse
 		$log=explode("\n",$content);
-		$log=array_reverse($log);
-		while (list($k,$v)=each($log)) {
-			$log[$k]=entites_html($v);
+		// logline : 	$m = date("M d H:i:s").' '.$GLOBALS['ip'].' '.$pid.' '.preg_replace("/\n*$/", "\n", $message);
+		$new_log=array();
+		$i=0;
+		while (list(,$v)=each($log)) {
+			// on verifie que la ligne lue n'est pas sans prefixe de date/adresse
+			if (!preg_match("/(\w+) (\w+) (\d+:\d+:\d+) (\d+\.\d+.\d+.\d+) (.*)/i",$v,$matches) and $i>0) {
+				/*
+				// sinon on lui colle le prefixe de la ligne precedente (ligne rompue);
+				$prec=$log[$k-1];
+				@preg_match("/(\w+) (\w+) (\d+:\d+:\d+) (\d+\.\d+.\d+.\d+) (.*)/i",$prec,$matches);
+				$v = $matches[1]." ".$matches[2]." ".$matches[3]." ".$matches[4]." ".$v;
+				*/
+				// Mieux
+				// sinon on la recolle a la precedente ! et on n'incremente pas
+				$new_log[$i-1]=$new_log[$i-1]." ".entites_html($v);
+			} else {
+				$new_log[$i]=entites_html($v);
+				$i++;
+			}
 		}
+		$log=$new_log;
+		$log=array_reverse($log);
 		$content=join("<br />\n",$log);
 		$res .= debut_cadre_trait_couleur('',true,'xxx',_L($log_name.' LOGs'));
 		$res .= "<div style='overflow:auto; width:100%; height: 50em; font-size:80%;border: 1px dashed #ada095;padding:2px;margin:2px;'>";
