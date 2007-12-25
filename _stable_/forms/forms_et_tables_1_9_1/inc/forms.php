@@ -281,6 +281,7 @@
 				$q.="id_auteur="._q($id_auteur);
 			else
 				return false;
+		$q .= ')';
 		//On retourne le tableau des id_donnee de l'auteur ou false
 		$res = spip_query($q);
 		if ($res && spip_num_rows($res)>0) {
