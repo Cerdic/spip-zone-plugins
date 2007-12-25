@@ -66,6 +66,9 @@ function exec_spipbb_admin_debug() {
 	echo debut_droite('',true);
 
 	echo spipbb_show_debug();
+	echo spipbb_show_log("spipbb");
+	echo spipbb_show_log("spip");
+	echo spipbb_show_log("mysql");
 
 	# pied page exec
 	bouton_retour_haut();
@@ -74,7 +77,7 @@ function exec_spipbb_admin_debug() {
 } // exec_spipbb_admin_debug
 
 // ------------------------------------------------------------------------------
-// [fr] Affiche les infos de debogage
+// [fr] Affiche les infos de debogage : les metas
 // ------------------------------------------------------------------------------
 function spipbb_show_debug()
 {
@@ -87,5 +90,41 @@ function spipbb_show_debug()
 	$res.= fin_cadre_trait_couleur(true);
 	return $res;
 } // spipbb_show_debug
+
+// ------------------------------------------------------------------------------
+// [fr] Affiche les infos de debogage : la log specifique
+// ------------------------------------------------------------------------------
+function spipbb_show_log($log_name="spipbb")
+{
+	$res="";
+	$content="";
+	// on lit la log principale
+	@lire_fichier(_DIR_TMP.$log_name.".log", $content);
+	// on lit la log precedente
+	$content_1="";
+	if (lire_fichier(_DIR_TMP.$log_name.".log.1", $content_1)) {
+		$content = $content_1.$content;
+	}
+	$content=trim($content);
+	if ($content) {
+		// nettoyage
+		$content=preg_replace(";\r;","",$content); // pas besoin des pids ici
+		$content=preg_replace(";\(pid.*?\);","",$content); // pas besoin des pids ici
+		$content=preg_replace(";^.*?rotate.*?$;","",$content); // pas besoin des rotates ici
+		// on passe en ordre chronologique inverse
+		$log=explode("\n",$content);
+		$log=array_reverse($log);
+		while (list($k,$v)=each($log)) {
+			$log[$k]=entites_html($v);
+		}
+		$content=join("<br />\n",$log);
+		$res .= debut_cadre_trait_couleur('',true,'xxx',_L($log_name.' LOGs'));
+		$res .= "<div style='overflow:auto; width:100%; height: 50em; font-size:80%;border: 1px dashed #ada095;padding:2px;margin:2px;'>";
+		$res .= $content;
+		$res .= "</div>";
+		$res .= fin_cadre_trait_couleur(true);
+	}
+	return $res;
+} // spipbb_show_log
 
 ?>

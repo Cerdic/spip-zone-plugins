@@ -1,4 +1,10 @@
-﻿2007-12-24  chryjs  <chryjs!@!free!.!fr>
+﻿2007-12-25  chryjs  <chryjs!@!free!.!fr>
+
+ * Conversion des documents en format LF (problemes de logs)
+ * Affichage des logs dans page admin_debug
+
+
+2007-12-24  chryjs  <chryjs!@!free!.!fr>
 
  * Ajout d'une fonction spipbb_log pour gerer les niveaux de log (a terme)
 

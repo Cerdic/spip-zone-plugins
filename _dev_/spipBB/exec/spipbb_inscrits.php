@@ -71,7 +71,7 @@ function exec_spipbb_inscrits() {
 					LEFT JOIN spip_forum AS F ON (A.id_auteur=F.id_auteur)
 					WHERE ( A.statut='6forum' OR A.statut='nouveau' )
 					GROUP BY A.id_auteur
-					ORDER BY A.$odb 
+					ORDER BY A.$odb
 					LIMIT $dl,$fixlimit");
 
 					# recup nombre total d'entree

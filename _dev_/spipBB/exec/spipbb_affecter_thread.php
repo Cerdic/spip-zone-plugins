@@ -148,7 +148,7 @@ function exec_spipbb_affecter_thread()
 		bb_article($id_hotel, $rang_rub, $id_article);
 	}
 
-	echo "<input type='hidden' name='titre_sujet' value='".typo($titre_sujet)."' />";	
+	echo "<input type='hidden' name='titre_sujet' value='".typo($titre_sujet)."' />";
 	echo "<input type='hidden' name='id_sujet' value='".$id_sujet."' />";
 	echo "<input type='hidden' name='id_art_orig' value='".$id_article."' />";
 	echo "</form>";

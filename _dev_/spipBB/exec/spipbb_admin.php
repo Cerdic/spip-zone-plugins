@@ -54,8 +54,8 @@ function exec_spipbb_admin() {
 	if (!empty($id_salon)) {
 
 		// + prepa info rubrique(salon)
-		$req_srg =	"SELECT id_rubrique, id_parent, titre, descriptif 
-					FROM spip_rubriques 
+		$req_srg =	"SELECT id_rubrique, id_parent, titre, descriptif
+					FROM spip_rubriques
 					WHERE id_rubrique=$id_salon";
 		$res_srg = sql_query($req_srg);
 		$row=sql_fetch($res_srg);
@@ -154,9 +154,9 @@ function exec_spipbb_admin() {
 		#
 		# les forums de ce salon
 		#
-		$res_af = sql_query("SELECT id_article, titre, descriptif, statut 
-							FROM spip_articles 
-							WHERE id_rubrique = $id_salon 
+		$res_af = sql_query("SELECT id_article, titre, descriptif, statut
+							FROM spip_articles
+							WHERE id_rubrique = $id_salon
 							ORDER BY titre");
 		
 		# compter les forums
@@ -177,24 +177,24 @@ function exec_spipbb_admin() {
 
 			if($row['statut']=='publie') {
 				// nbre total de sujets de ce $id_forum
-				$req_sujet= "SELECT id_forum FROM spip_forum 
-							WHERE id_article='$id_forum' 
-							AND id_parent=0 AND statut IN ('publie', 'off', 'prop') 
-							"; 
+				$req_sujet= "SELECT id_forum FROM spip_forum
+							WHERE id_article='$id_forum'
+							AND id_parent=0 AND statut IN ('publie', 'off', 'prop')
+							";
 				$res_sujet = sql_query($req_sujet);
 				$nbr_sujet=sql_count($res_sujet);
 
 				// nombre total de posts de ce $id_forum
-				$req_post= "SELECT id_forum FROM spip_forum 
-							WHERE id_article='$id_forum' AND statut IN ('publie', 'off', 'prop') 
-							"; 
+				$req_post= "SELECT id_forum FROM spip_forum
+							WHERE id_article='$id_forum' AND statut IN ('publie', 'off', 'prop')
+							";
 				$res_post = sql_query($req_post);
 				$nbr_post=sql_count($res_post);
 
 				// dernier post
-				$req_date = "SELECT id_forum, id_thread, DATE_FORMAT(date_heure, '%d/%m/%Y %H:%i') AS dateur 
+				$req_date = "SELECT id_forum, id_thread, DATE_FORMAT(date_heure, '%d/%m/%Y %H:%i') AS dateur
 							FROM spip_forum
-							WHERE id_article=$id_forum AND statut IN ('publie', 'off', 'prop') 
+							WHERE id_article=$id_forum AND statut IN ('publie', 'off', 'prop')
 							ORDER BY date_heure DESC LIMIT 0, 1";
 				$res_date = sql_query($req_date);
 				$rd = sql_fetch($res_date);
