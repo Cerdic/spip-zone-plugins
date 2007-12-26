@@ -190,6 +190,7 @@ function balise_ONGLETS_FIN($p) {
 }
 
 // decode le parametre artpage=page-total
+// attention, artpage n'est pas toujours present
 function artpage($t=false, $index=0) {
 	if($t===false) $t=_request('artpage');
 	$t=strlen($t)?explode('-', $t, 2):array('1','0');
