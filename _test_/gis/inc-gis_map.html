@@ -48,7 +48,7 @@
     				var idmap="[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]";
     				$("item", xml[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]).each(function(item[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]){
     					var xmlItem[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})] = xml[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].documentElement.getElementsByTagName("item")[item[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]];
-    					agregarMarcador(xmlItem[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})], idmap, 1, 10);
+    					agregarMarcador(xmlItem[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})], idmap, 0);
 					});
 					markerManager[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].refresh();
    				});
