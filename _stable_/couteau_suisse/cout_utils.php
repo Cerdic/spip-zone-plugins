@@ -133,7 +133,7 @@ cs_log("ecrire_fichier_en_tmp($type) : lgr=".strlen($code))." pour $fichier_dest
 // installation de $cs_metas_pipelines
 function set_cs_metas_pipelines_pipeline($infos_pipelines, $pipeline) {
 	global $cs_metas_pipelines;
-	$code = "include_spip('cout_fonctions');\n";
+	$code = "@include(_COUT_FONCTIONS_PHP);\n";
 	if (isset($infos_pipelines[$pipeline])) {
 		$a = &$infos_pipelines[$pipeline];
 		if(is_array($a['inline'])) foreach ($a['inline'] as $inc) $code .= "$inc\n";
@@ -264,6 +264,9 @@ function cs_initialise_includes() {
 	$temp_css = $temp_js = $temp_jq = $temp_filtre_imprimer = array();
 	// pour la fonction inclure_page()
 	include_spip('public/assembler');
+	// inclure d'office outils/cout_fonctions.php
+	if ($temp=cs_lire_fichier_php("outils/cout_fonctions.php"))
+		$infos_pipelines['code_fonctions'][] = $temp;
 	// parcours de tous les outils
 	foreach ($outils as $i=>$outil) {
 		// stockage de la liste des fonctions par pipeline, si l'outil est actif...
@@ -305,9 +308,8 @@ function cs_initialise_includes() {
 			// recherche d'un fichier monoutil_options.php ou monoutil_fonctions.php pour l'inserer dans le code
 			if ($temp=cs_lire_fichier_php("outils/{$inc}_options.php")) 
 				$infos_pipelines['code_options'][] = $temp;
-			if ($temp=cs_lire_fichier_php("outils/{$inc}_fonctions.php")) {
+			if ($temp=cs_lire_fichier_php("outils/{$inc}_fonctions.php"))
 				$infos_pipelines['code_fonctions'][] = $temp;
-			}
 		}
 	}
 	// insertion du css pour la BarreTypo

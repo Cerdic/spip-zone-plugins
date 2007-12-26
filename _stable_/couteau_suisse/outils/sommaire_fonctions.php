@@ -6,10 +6,7 @@
 // TODO : ajouter un fichier css pour le sommaire
 
 // aide le Couteau Suisse a calculer la balise #INTRODUCTION
-function sommaire_retire_raccourcis($texte) {
-	return str_replace(array(_sommaire_SANS_FOND, _sommaire_SANS_SOMMAIRE, _sommaire_AVEC_SOMMAIRE), '', $texte);
-}
-$GLOBALS['cs_introduire'][] = 'sommaire_retire_raccourcis';
+$GLOBALS['cs_introduire'][] = 'sommaire_nettoyer_raccourcis';
 
 // renvoie le sommaire d'une page d'article
 // $page=false reinitialise le compteur interne des ancres
@@ -54,9 +51,9 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 		?strpos($texte0, _sommaire_SANS_SOMMAIRE)===false
 		:strpos($texte0, _sommaire_AVEC_SOMMAIRE)!==false;
 	if (!$inserer_sommaire || strpos($texte0, '<h3')===false) 
-		return $sommaire_seul?'':sommaire_retire_raccourcis($texte0);
+		return $sommaire_seul?'':sommaire_nettoyer_raccourcis($texte0);
 	// on retire les raccourcis du texte
-	$texte = sommaire_retire_raccourcis($texte0);
+	$texte = sommaire_nettoyer_raccourcis($texte0);
 	// on masque les onglets s'il y en a
 	if(defined('_onglets_FIN'))
 		$texte = preg_replace_callback(',<div class="onglets_bloc_initial.*'._onglets_FIN.',Ums', 'sommaire_echappe_onglets_callback', $texte);
@@ -74,7 +71,7 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 		}
 	} else $sommaire = sommaire_d_une_page($texte, $nbh3);
 	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI) 
-		return $sommaire_seul?'':sommaire_retire_raccourcis($texte0);
+		return $sommaire_seul?'':sommaire_nettoyer_raccourcis($texte0);
 
 	// calcul du sommaire en recuperant le fond qui va bien
 	$fond = strpos($texte0, _sommaire_SANS_FOND)!==false ?2:1;

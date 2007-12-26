@@ -35,6 +35,10 @@ cs_log("  -- lecture metas");
 $metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
 $metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
 
+// chemin du fichier de fonctions
+define('_COUT_FONCTIONS_PHP', find_in_path('cout_fonctions.php'));
+$GLOBALS[cs_options] = $GLOBALS[cs_fonctions] = $GLOBALS['cs_init'] = 0;
+
 // on active tout de suite les logs, si l'outil est actif.
 if ($metas_outils['log_couteau_suisse']['actif'] || defined('_LOG_CS_FORCE') || $_GET['cs']=='log') {
 	define('_LOG_CS', 'oui');
@@ -96,7 +100,7 @@ if($zap) {
 		cs_installe_outils();
 	}
 
-	cs_log(' FIN : cout_options, cs_options = '.intval($GLOBALS['cs_options']));
+	cs_log(" FIN : cout_options, cs_options = $GLOBALS[cs_options]");
 }
 
 ?>

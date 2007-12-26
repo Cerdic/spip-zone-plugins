@@ -58,6 +58,7 @@ cs_log($rand.($forcer?"\$forcer = true":"cs_initialisation($forcer) : Sortie car
 		if (!$forcer) return;
 	}
 	// ici on commence l'initialisation de tous les outils
+	$GLOBALS['cs_init'] = 1;
 	global $outils, $metas_vars, $metas_outils;
 	include_spip('inc/meta');
 	include_spip('cout_utils');
@@ -89,7 +90,7 @@ cs_log("$rand -- foreach(\$outils) : cs_initialisation_d_un_outil()");
 	// installer $cs_metas_pipelines
 	$cs_metas_pipelines = array();
 cs_log("$rand -- cs_initialise_includes()... cout_fonctions.php sera probablement inclus.");
-	// initialiser les includes et creer les fichiers de controle
+	// initialiser les includes et creer le fichier de controle pipelines.php
 	cs_initialise_includes();
 	// sauver la configuration
 	cs_sauve_configuration();
@@ -103,6 +104,7 @@ cs_log("$rand -- ecriture metas");
 	// en metas : les liens sur spip-contrib
 	ecrire_meta('tweaks_contribs', serialize($contribs));
 	ecrire_metas();
+	$GLOBALS['cs_init'] = 0;
 cs_log("{$rand}cs_initialisation($forcer) : Sortie");
 }
 

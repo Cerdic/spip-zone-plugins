@@ -464,6 +464,7 @@ div.cs_sommaire a:after {display:none;}",
 	'traitement:CS_SOMMAIRE:post_propre' => 'sommaire_d_article_balise',
 	'traitement:CS_SOMMAIRE:pre_propre' => 'sommaire_supprime_notes',
 	'categorie' => 'typo-corr',
+	'pipeline:nettoyer_raccourcis_typo' => 'sommaire_nettoyer_raccourcis',
 ));
 
 //-----------------------------------------------------------------------------//

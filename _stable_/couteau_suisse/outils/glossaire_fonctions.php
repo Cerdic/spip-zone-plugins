@@ -31,10 +31,10 @@ if(!function_exists('nettoyer_chapo')) {
 }
 
 // Cette fonction retire du texte les boites de definition
-function glossaire_retire_glossaire($texte) {
+function cs_retire_glossaire($texte) {
 	return preg_replace(',<span class="gl_d[td]">.*?</span>,', '', $texte);
 }
-$GLOBALS['cs_introduire'][] = 'glossaire_retire_glossaire';
+$GLOBALS['cs_introduire'][] = 'cs_retire_glossaire';
 
 function glossaire_echappe_balises_callback($matches) {
  return cs_code_echappement($matches[1], 'GLOSS');
