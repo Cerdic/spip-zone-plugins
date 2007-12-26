@@ -26,8 +26,6 @@ function balise_FORMULAIRE_SPIPICIOUS_AJAX_dyn($id_article ) {
 		$auteur_id = $GLOBALS['auteur_session']['email'];
 		$auteur_statut = $GLOBALS['auteur_session']['statut'];
 	}
-	
-	include_spip('spipicious_fonctions');
 
 	//recuperation des variables utiles
 	$tags = _request('tags');
@@ -42,6 +40,9 @@ function balise_FORMULAIRE_SPIPICIOUS_AJAX_dyn($id_article ) {
 	spip_query("DELETE FROM spip_spipicious WHERE id_auteur='$auteur_id' AND id_article='$id_article' "); // on efface les anciens triplets de cet auteur sur cet article 
 
 	if ($tags && $auteur_id) {
+		if (substr($tags, -1, 1) == ';'){
+			$tags = substr($tags,0,-1);
+		}
 		$tableau_tags = explode("; ",$tags);
 		if (is_array($tableau_tags)) {
 			$position = 0;
@@ -56,7 +57,7 @@ function balise_FORMULAIRE_SPIPICIOUS_AJAX_dyn($id_article ) {
 
 			if (spip_num_rows($result) == 0) { // creation tag
 				$exist = 'mot inexistant';
-				$sql = "INSERT INTO spip_mots (titre,id_groupe,type,idx) VALUES(".spip_abstract_quote(corriger_caracteres($tag)).",$id_groupe_tags,'$type_groupe_tags', 'oui')"; // FIXME encodage caractere ?
+				$sql = "INSERT INTO spip_mots (titre,id_groupe,type) VALUES(".spip_abstract_quote(corriger_caracteres($tag)).",$id_groupe_tags,'$type_groupe_tags')"; // FIXME encodage caractere ?
 				$result = spip_query($sql);
 				$id_tag = spip_insert_id();
 			} else {  // on recupere l'id du tag

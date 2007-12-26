@@ -5,6 +5,7 @@ function spipicious_affichage_final($page){
 	if (!strpos($page, 'formulaire_spipicious_ajax'))
 		return $page;
 
+	$iutils = find_in_path('javascript/iutil.js');
 	$iautocompleter = find_in_path('javascript/iautocompleter.js');
 	$autocompletecss = find_in_path('jquery.autocomplete.css');
 
@@ -12,6 +13,7 @@ function spipicious_affichage_final($page){
 
     $incHead = <<<EOS
 		<script type='text/javascript' src='$iautocompleter'></script>
+		<script type='text/javascript' src='$iutils'></script>
 		<link rel="stylesheet" href="$autocompletecss" type="text/css" media="all" />
 		<script  type="text/javascript"><!--
 	
