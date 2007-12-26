@@ -1,0 +1,177 @@
+#CACHE{0}
+<style>
+
+.radiobox{
+width:296px;
+background-color:#000000;
+padding:20px;
+}
+
+div#playing{
+float:right;
+width:160px;
+color:#999999;
+position:relative;
+}
+div#now_playing{
+float:none;
+border:none;
+color:#fff;
+width:auto;
+}
+
+#scrollbar{
+margin:10px 0px;
+}
+
+div.controles{
+clear:both;
+text-align:left;
+height:74px
+}
+
+.leplayer, .position{
+font-size:2em;
+font-weight:bold;
+color:#FFFFFF;
+font-familly:verdanna;
+}
+
+.duration{
+font-size:9px;
+float:right;
+width:33%;
+}
+
+.play{
+width:70px;
+float:left;
+}
+
+.time{
+width:100px;
+float:left;
+}
+
+.autres_boutons{
+text-align:right;
+}
+
+
+ul.playliste{
+clear:both;
+margin : 5px 0px 15px 0px;
+padding:0px;
+background-color:#e74455;
+border:none;
+}
+
+ul.playliste a{
+color:#fff;
+}
+
+ul.playliste li{
+border-top:1px solid black;
+padding:2px;
+margin:Opx;
+cursor:pointer;
+cursor:hand;
+}
+
+ul.playliste li.over{
+background-color:#a22c38;
+}
+
+ul.playliste li.play_on{
+background-color:#a22c38;
+}
+
+
+
+/* Scroller Box */
+#scroller_container {
+position: relative;
+width:160px;
+height: 30px;
+overflow: hidden;
+float:none;
+border:none;
+}
+
+#scroller {
+width:160px;
+height: 15px;
+position: absolute;
+left:0;
+top:0;
+margin: 0;
+}
+
+
+/* Scoller Box */
+
+/* At the end of the CSS File */
+
+/* CSS Hack Safari */
+#dummy {;# }
+
+#scroller_container {
+overflow: auto;
+}
+
+</style>
+
+		
+<B_doc>
+#ANCRE_PAGINATION
+<div class="radiobox">
+<div id="playing">
+En ce moment vous &eacute;coutez : 
+<div id="scroller_container">
+<div id="scroller">
+<div id="now_playing"> </div>
+</div>
+</div>
+</div>
+
+<div class="leplayer">LE PLAYER</div>
+
+<div id="scrollbar">
+<div id="loading"></div>
+<div id="position"></div>
+</div>
+
+
+<div class="controles">
+<!--
+<li onClick="player_prev()"><</li>
+//-->
+<div class="play">
+	<span onClick="player_play(0)"><img src="#CHEMIN{skins/blogo/play.png}" alt="play"/></span>
+</div>
+<div class="time">
+	<div class="duration">
+	&nbsp;
+	</div>
+	<div class="position">
+	&nbsp;
+	</div>
+</div>
+<div  class="autres_boutons">
+	<span onClick="player_prev()"> <img src="#CHEMIN{skins/blogo/backward.png}" alt="precedant"/></span>
+	<span onClick="player_next()"> <img src="#CHEMIN{skins/blogo/forward.png}" alt="suivant"/></span>
+	<span onClick="player_stop()"><img src="#CHEMIN{skins/blogo/stop.png}" alt="stop"/></span>
+</div>
+	<!--
+	<li onClick="player_next()">></li>
+	//-->
+</div>
+
+<ul class="playliste">
+<BOUCLE_doc (DOCUMENTS) {id_article ?} {extension==mp3}{!par date}{pagination 15}{0,100}>
+<li class="play_"><a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc>
+</ul>
+[<div class="playliste_pagination">(#PAGINATION)</div>]
+</div>
+</B_doc>

@@ -16,7 +16,12 @@
 <!--
 <li onClick="player_prev()"><</li>
 //-->
+<div id="scroller_container">
+<div id="scroller">
 <div id="now_playing">  </div>
+</div>
+</div>
+
 <span onClick="player_prev()"> <img src="#CHEMIN{precedant.jpg}" alt="precedant"/></span>
 <span onClick="player_next()"> <img src="#CHEMIN{suivant.jpg}" alt="suivant"/></span>
 <span onClick="player_play(0)"><img src="#CHEMIN{play.jpg}" alt="play"/></span>
@@ -24,6 +29,11 @@
 <!--
 <li onClick="player_next()">></li>
 //-->
+</div>
+
+<div id="scrollbar">
+<div id="loading"></div>
+<div id="position"></div>
 </div>
 
 <ul class="playliste">

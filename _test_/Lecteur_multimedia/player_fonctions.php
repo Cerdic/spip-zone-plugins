@@ -12,8 +12,10 @@ function Player_head(){
 	. 'var musicplayerurl="'._DIR_PLUGIN_PLAYER.'eraplayer_playlist.swf";'
 	. 'soundManager.url = "'._DIR_PLUGIN_PLAYER.'soundmanager/soundmanager2.swf";'
 	. 'soundManager.consoleOnly = true;'
-  . 'soundManager.debugMode = false;'
+  	. 'soundManager.debugMode = false;'
+  	. 'soundManager.nullURL = "'._DIR_PLUGIN_PLAYER.'soundmanager/null.mp3";'
 	. "//--></script>\n";
+	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'javascript/jscroller.js"></script>';
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>';
 	$flux .= '<script type="text/javascript"><!--
 	$(document).ready(function(){

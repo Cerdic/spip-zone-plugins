@@ -14,9 +14,10 @@ color:#999999;
 .controles {
 cursor:hand;
 cursor:pointer;
-text-align:right;
+text-align:left;
 margin-bottom:5px;
 }
+
 
 .playliste{
 list-style-type:none;
@@ -42,18 +43,12 @@ border: 1px solid #cccccc;
 }
 
 
+
+
 .radiobox li.play_on{
 background:#e6e6e6;
 }
 
-div#now_playing{
-width:120px;
-height:13px;
-overflow:hidden;
-float:left;
-text-align:left;
-border: 1px solid #cccccc;
-}
 
 span.play_{
 background:#E6ECFF;
@@ -65,4 +60,75 @@ span.play_on{
 background:#FF0000;
 cursor:hand;
 cursor:pointer;
+}
+
+
+#scrollbar{
+clear:both;
+height:5px;
+margin:5px 0px;
+border:1px solid white;
+background-color:white;
+position:relative;
+}
+#loading{
+margin:0px;
+padding:0px;
+height:5px;
+background-color:#ccc;
+width:0%;
+position:absolute;
+left:0px;
+top:0px;
+font-size:0.3em;
+z-index:10;
+}
+#position{
+margin:0px;
+padding:0px;
+height:5px;
+background-color:#e74455;
+width:0%;
+position:absolute;
+left:0px;
+top:0px;
+font-size:0.3em;
+z-index:20;
+}
+
+div#now_playing{
+width:120px;
+height:13px;
+text-align:left;
+}
+
+/* Scroller Box */
+#scroller_container {
+position: relative;
+float:left;
+width:120px;
+height: 13px;
+overflow: hidden;
+border: 1px solid #cccccc;
+}
+
+#scroller {
+width:120px;
+height: 13px;
+position: absolute;
+left:0;
+top:0;
+margin: 0;
+}
+
+
+/* Scoller Box */
+
+/* At the end of the CSS File */
+
+/* CSS Hack Safari */
+#dummy {;# }
+
+#scroller_container {
+overflow: auto;
 }
