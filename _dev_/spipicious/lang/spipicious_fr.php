@@ -28,7 +28,4 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'types_utilisateurs' => 'Qui a acc&egrave;s au formulaire ?',
   'nom_groupe_tag' => 'Groupe de mots cl&eacute; associ&eacute;',
   'waiting' => 'recherche de vos tags',
-  
-
- 
 );
