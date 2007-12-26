@@ -37,7 +37,7 @@ $metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['
 
 // chemin du fichier de fonctions
 define('_COUT_FONCTIONS_PHP', find_in_path('cout_fonctions.php'));
-$GLOBALS[cs_options] = $GLOBALS[cs_fonctions] = $GLOBALS['cs_init'] = 0;
+$GLOBALS['cs_options'] = $GLOBALS['cs_fonctions'] = $GLOBALS['cs_fonctions_essai'] = $GLOBALS['cs_init'] = 0;
 
 // on active tout de suite les logs, si l'outil est actif.
 if ($metas_outils['log_couteau_suisse']['actif'] || defined('_LOG_CS_FORCE') || $_GET['cs']=='log') {
@@ -100,7 +100,10 @@ if($zap) {
 		cs_installe_outils();
 	}
 
-	cs_log(" FIN : cout_options, cs_options = $GLOBALS[cs_options]");
+	cs_log(" FIN : cout_options, cs_options = $GLOBALS[cs_options], cs_fonctions_essai = $GLOBALS[cs_fonctions_essai]");
+
+	// a-t-on voulu inclure cout_fonctions.php ?
+	if ($GLOBALS['cs_fonctions_essai']) @include(_COUT_FONCTIONS_PHP);
 }
 
 ?>

@@ -66,8 +66,7 @@ function decouper_en_pages_rempl($texte) {
 	$pages = explode(_decoupe_SEPARATEUR, $texte);
 	$num_pages = count($pages);
 	if ($num_pages == 1) return $texte;
-	list($artpage,$arttotal) = explode('-', $_GET['artpage'], 2);
-	$artpage = max(intval($artpage), 1);
+	$artpage = max(intval(artpage()), 1);
 	$artpage = min($artpage, $num_pages);
 /*
 	// si numero illegal ou si var_recherche existe, alors renvoyer toutes les pages, separees par une ligne <hr/>.
@@ -188,6 +187,21 @@ function balise_ONGLETS_TITRE($p) {
 function balise_ONGLETS_FIN($p) {
 	$p->code = "'</div></div>'";
 	return $p;
+}
+
+// decode le parametre artpage=page-total
+function artpage($t=false, $index=0) {
+	if($t===false) $t=_request('artpage');
+	$t=strlen($t)?explode('-', $t, 2):array('1','0');
+	return $t[$index];
+}
+function artpage_fin($t=false) {
+	if($t===false) $t=_request('artpage');
+	$t=strlen($t)?explode('-', $t, 2):array('1','0');
+	return $t[0]>0 && $t[0]==$t[1];
+}
+function artpage_debut($t=false) {
+	return artpage($t)==1;
 }
 
 ?>

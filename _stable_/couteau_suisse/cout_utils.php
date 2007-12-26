@@ -133,7 +133,8 @@ cs_log("ecrire_fichier_en_tmp($type) : lgr=".strlen($code))." pour $fichier_dest
 // installation de $cs_metas_pipelines
 function set_cs_metas_pipelines_pipeline($infos_pipelines, $pipeline) {
 	global $cs_metas_pipelines;
-	$code = "@include(_COUT_FONCTIONS_PHP);\n";
+	// precaution utile ?
+	$code = '';//"@include(_COUT_FONCTIONS_PHP);\n";
 	if (isset($infos_pipelines[$pipeline])) {
 		$a = &$infos_pipelines[$pipeline];
 		if(is_array($a['inline'])) foreach ($a['inline'] as $inc) $code .= "$inc\n";
