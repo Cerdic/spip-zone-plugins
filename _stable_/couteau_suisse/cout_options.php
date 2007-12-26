@@ -72,9 +72,9 @@ if($zap) {
 
 	// fonctions indispensables a l'execution
 	include_spip('cout_lancement');
-	// lancer l'initialisation du plugin
+	// lancer l'initialisation du plugin. on force la compilation si var_mode=recalcul
 	if(!$cs_exists) cs_log(" -- '$f_cs' introuvable !");
-	cs_initialisation(!$cs_exists);
+	cs_initialisation(!$cs_exists || _request('var_mode')=='recalcul');
 	cs_log("PUIS : cout_options, initialisation terminee");
 
 	// inclusion des options pre-compilees, si l'on n'est jamais passe par ici...

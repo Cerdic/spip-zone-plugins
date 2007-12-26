@@ -423,6 +423,7 @@ div.pagination img { border:0pt none; margin:0pt; padding:0pt; }",
 	'traitement:TEXTE/articles:pre_propre' => 'cs_onglets',
 	'categorie' => 'typo-racc',
 	'pipeline:BT_toolbox' => 'decoupe_BarreTypo',
+	'pipeline:nettoyer_raccourcis_typo' => 'decoupe_nettoyer_raccourcis',
 ));
 
 // couplage avec l'outil 'decoupe', donc 'sommaire' doit etre place juste apres :

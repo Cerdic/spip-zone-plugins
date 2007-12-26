@@ -5,12 +5,7 @@ define('_onglets_CONTENU', '<div class="onglets_contenu"><h2 class="cs_onglet"><
 define('_onglets_DEBUT', '<div class="onglets_bloc_initial">');
 
 // aide le Couteau Suisse a calculer la balise #INTRODUCTION
-function decoupe_introduire($texte) {
-	if (defined('_decoupe_COMPATIBILITE'))
-		return str_replace(array(_decoupe_SEPARATEUR, _decoupe_COMPATIBILITE), '<p>&nbsp;</p>', $texte);
-	return str_replace(_decoupe_SEPARATEUR, '<p>&nbsp;</p>', $texte);
-}
-$GLOBALS['cs_introduire'][] = 'decoupe_introduire';
+$GLOBALS['cs_introduire'][] = 'decoupe_nettoyer_raccourcis';
 
 function onglets_callback($matches) {
 	$matches[1] = preg_replace(','.preg_quote(_decoupe_SEPARATEUR,',').'\s+,', _decoupe_SEPARATEUR, $matches[1]);
@@ -71,7 +66,8 @@ function decouper_en_pages_rempl($texte) {
 	$pages = explode(_decoupe_SEPARATEUR, $texte);
 	$num_pages = count($pages);
 	if ($num_pages == 1) return $texte;
-	$artpage = max(intval($_GET['artpage']), 1);
+	list($artpage,$arttotal) = explode('-', $_GET['artpage'], 2);
+	$artpage = max(intval($artpage), 1);
 	$artpage = min($artpage, $num_pages);
 /*
 	// si numero illegal ou si var_recherche existe, alors renvoyer toutes les pages, separees par une ligne <hr/>.
@@ -88,13 +84,13 @@ function decouper_en_pages_rempl($texte) {
 	// precedent
 	$alt = _T('cout:page_precedente');
 	$alt = "title=\"$alt\" alt=\"$alt\"";
-	$precedent = '<a href="' . parametre_url($self,'artpage', $artpage - 1) . '">'; 
+	$precedent = '<a href="' . parametre_url($self,'artpage', ($artpage - 1)."-$num_pages") . '">'; 
 	$precedent = $artpage == 1?$images['precedent_off']." $alt />"
 		:$precedent.$images['precedent']." $alt /></a>";
 	// suivant
 	$alt = _T('cout:page_suivante');
 	$alt = "title=\"$alt\" alt=\"$alt\"";
-	$suivant = '<a href="' . parametre_url($self,'artpage', $artpage + 1) . '">'; 
+	$suivant = '<a href="' . parametre_url($self,'artpage', ($artpage + 1)."-$num_pages") . '">'; 
 	$suivant = ($artpage == $num_pages)?$images['suivant_off']." $alt />"
 		:$suivant.$images['suivant']." $alt /></a>";
 	// s'il existe plus de trois pages on calcule les liens << et >>
@@ -108,7 +104,7 @@ function decouper_en_pages_rempl($texte) {
 		// fin
 		$alt = _T('cout:page_fin');
 		$alt = "title=\"$alt\" alt=\"$alt\"";
-		$fin = '<a href="' . parametre_url($self,'artpage', $num_pages) . '">';
+		$fin = '<a href="' . parametre_url($self,'artpage',"{$num_pages}-$num_pages") . '">';
 		$fin = ($artpage == $num_pages)?($temp=$images['suivant_off']." $alt />").$temp
 			:$fin.($temp=$images['suivant']." $alt />").$temp.'</a>';
 	}
@@ -123,7 +119,7 @@ function decouper_en_pages_rempl($texte) {
 			$title = preg_split("/[\r\n]+/", trim($page), 2);
 			$title = attribut_html(/*propre*/(couper($title[0], _decoupe_NB_CARACTERES)));//.' (...)';
 			$title = _T('cout:page_lien', array('page' => $i, 'title' => $title));
-			$milieu[] = '<a href="' . parametre_url($self,'artpage', $i) . "\" title=\"$title\">$i</a>";
+			$milieu[] = '<a href="' . parametre_url($self,'artpage',"{$i}-$num_pages") . "\" title=\"$title\">$i</a>";
 		}
 	}
 	$milieu = join(' ', $milieu);

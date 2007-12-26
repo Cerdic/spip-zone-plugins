@@ -32,23 +32,17 @@ function cs_code_echappement($rempl, $source='') {
 function cs_initialisation($forcer=false) {
 	global $cs_metas_pipelines, $metas_outils;
 	$rand = sprintf('[#%04x] ', rand());
-	// au premier passage, on force l'installation si var_mode est defini
 	static $deja_passe_ici;
-	if (!intval($deja_passe_ici)) {
-cs_log("#### 1er PASSAGE $rand################################# - \$forcer = ".intval($forcer)
-	. "\n{$rand}version PHP courante : ".phpversion()." - Versions SPIP (base/code) : {$GLOBALS['spip_version']}/{$GLOBALS['spip_version_code']}");
-		$forcer |= (_request('var_mode')!=NULL);
-	}
+	if (!intval($deja_passe_ici))
+		cs_log("#### 1er PASSAGE $rand################################# - \$forcer = ".intval($forcer)
+			. "\n{$rand}version PHP courante : ".phpversion()." - Versions SPIP (base/code) : {$GLOBALS['spip_version']}/{$GLOBALS['spip_version_code']}");
 	$deja_passe_ici++;
 	// si les metas ne sont pas lus, on les lit
 cs_log("{$rand}cs_initialisation($forcer) : Passage #$deja_passe_ici");
 	if (isset($GLOBALS['meta']['tweaks_pipelines'])) {
 		$cs_metas_pipelines = unserialize($GLOBALS['meta']['tweaks_pipelines']);
 
-if(defined('_LOG_CS')) {
-	$liste = is_array($cs_metas_pipelines)?join(', ',array_keys($cs_metas_pipelines)):'';
-	cs_log("$rand -- cs_metas_pipelines = ".$liste);
-}
+cs_log("$rand -- cs_metas_pipelines = ".(is_array($cs_metas_pipelines)?join(', ',array_keys($cs_metas_pipelines)):''));
 
 		// liste des actifs & definition des constantes attestant qu'un outil est bien actif : define('_CS_monoutil', 'oui');
 		$liste = array();

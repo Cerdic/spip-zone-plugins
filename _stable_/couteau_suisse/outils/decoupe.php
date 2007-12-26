@@ -1,16 +1,10 @@
 <?php
 /*
- *   +----------------------------------+
- *    Nom du Filtre : decouper_en_pages
- *   +----------------------------------+
- *    Date : mardi 28 janvier 2003
- *    Auteur :  "gpl"
- *    Serieuse refonte et integration en mars 2007 : Patrice Vanneufville
- *   +-------------------------------------+
- *    Fonctions de ce filtre :
- *     Presenter un article sur plusieurs pages
- *   +-------------------------------------+ 
- *
+	+----------------------------+
+	Date : mardi 28 janvier 2003
+	Auteur :  "gpl"
+	Serieuse refonte et integration en mars 2007 : Patrice Vanneufville
+	+-------------------------------------------------------------------+
 */
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
@@ -42,6 +36,12 @@ function decoupe_raccourcis() {
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
 function decoupe_BarreTypo($tr) {
 	return $tr.'<tr><td>'._T('desc:decoupe:nom').' (en projet)</td></tr>';
+}
+
+function decoupe_nettoyer_raccourcis($texte) {
+	if (defined('_decoupe_COMPATIBILITE'))
+		return str_replace(array(_decoupe_SEPARATEUR, _decoupe_COMPATIBILITE), '<p>&nbsp;</p>', $texte);
+	return str_replace(_decoupe_SEPARATEUR, '<p>&nbsp;</p>', $texte);
 }
 
 ?>
