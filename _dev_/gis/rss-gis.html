@@ -18,7 +18,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 	</itunes:owner>
 	<itunes:explicit>no</itunes:explicit>
 	<language>#LANG</language>
-	<BOUCLE_un_article(ARTICLES){id_rubrique ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{par date}{inverse}><item>
+	<BOUCLE_un_article(ARTICLES){id_rubrique ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{par date}{inverse}{0, #ENV{limit}}><item>
 	<title>[(#TITRE|supprimer_numero|texte_backend)]</title>[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>][<link>(#URL_ARTICLE|url_absolue)</link>]<description>&lt;div style='width:200px'&gt;
 			&lt;div id='player'&gt;&lt;/div&gt;
 			&lt;div style='font-size:11px; font-weight:bold'&gt;&lt;a href='[(#URL_ARTICLE|url_absolue|texte_backend)]'&gt;[(#TITRE|texte_backend)]&lt;/a&gt; &lt;/div&gt;
