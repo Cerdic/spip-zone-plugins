@@ -3,7 +3,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// Aide des boutons supplémentaires de la barre typo
+// Aide des boutons supplementaires de la barre typo
 'barre_langue' => 'Langue abr&eacute;g&eacute;e', 
 'barre_miseenevidence' => 'Mettre le texte en [*&eacute;vidence*]',
 'barre_exposant' => 'Mettre le texte en &lt;sup&gt;exposant&lt;/sup&gt;',

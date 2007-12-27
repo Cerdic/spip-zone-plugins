@@ -6,6 +6,8 @@ http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images
 
 remplacer test_layer()	par  ???
 */
+if(!function_exists('test_layer')) { function test_layer() { return $GLOBALS['browser_layer']; } }
+
 include_spip('inc/minipres');
 include_spip('inc/presentation');
 include_spip('inc/documents');
@@ -130,9 +132,10 @@ function afficher_un_document_nx($id_document){
 }
 function afficher_un_document($id_document){
 	global $connect_id_auteur, $connect_statut;
-	
-	$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
-	//$document = fetch_document($id_document);
+	// compatibilite SPIP 1.92
+	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
+
+	$document = $fetch(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 
 	$id_vignette = $document['id_vignette'];
 	$id_type = $document['id_type'];
@@ -147,21 +150,25 @@ function afficher_un_document($id_document){
 	}
 
 	$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
-	if ($type = @spip_fetch_array($result))	{
+	if ($type = @$fetch($result))	{
 		$type_extension = $type['extension'];
 		$type_inclus = $type['inclus'];
 		$type_titre = $type['titre'];
 	}
 
 	$retour = '';
-	$bouton = bouton_block_invisible('doc'.$id_document);
+	if(function_exists('bouton_block_depliable')) // fonction de SPIP 1.93
+		$bouton = bouton_block_depliable('', false, 'doc'.$id_document);
+		else $bouton = bouton_block_invisible('doc'.$id_document);
 	if (test_layer()) {
 		$idBlock = ereg_replace(".*triangle([0-9]+)[^0-9].*", "\\1", $bouton);
 		$GLOBALS['blocksDocs'][] = $idBlock;
 	}
 	$retour .= '<tr><td valign="top">'.$bouton.'</td>';
 	$retour .= '<td><img src="'._DIR_IMG_PACK.'doc-24.gif" style="vertical-align:bottom;" alt="" /> '.$titre;
-	$retour .= debut_block_invisible('doc'.$id_document);
+	if(function_exists('debut_block_depliable')) // fonction de SPIP 1.93
+		$retour .= debut_block_depliable(false, 'doc'.$id_document);
+		else $retour .= debut_block_invisible('doc'.$id_document);
 	$retour .= '<div style="border: 1px dashed #666666; padding: 5px; background-color: #f0f0f0;">';
 	$retour .= '<table border="0" cellspacing="3" cellpadding="3"><tr><td rowspan="'.(_GALERIE_MODE ? 5 : 4).'" valign="top">';
 	$retour .= '<a href="'.$fichier.'" target="_blank">'.document_et_vignette($document, $url, true).'</a>';
@@ -196,21 +203,24 @@ function afficher_un_document($id_document){
 
 function sous_arborescence($id_rubrique) {
 	$nbDocsTotal = 0;
+	// compatibilite SPIP 1.92
+	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
+	$sql_count=function_exists('spip_num_rows')?'spip_num_rows':'sql_count';
 	
 	$sousRubriques = spip_query("SELECT id_rubrique, titre FROM spip_rubriques WHERE id_parent = $id_rubrique ORDER BY titre");
-	$nbSousRubriques = spip_num_rows($sousRubriques);
+	$nbSousRubriques = $sql_count($sousRubriques);
 
 	$documentsRubrique = spip_query("SELECT id_document FROM spip_documents_rubriques WHERE id_rubrique = $id_rubrique");
-	$nbDocumentsRubrique = spip_num_rows($documentsRubrique);
+	$nbDocumentsRubrique = $sql_count($documentsRubrique);
 	$nbDocsTotal += $nbDocumentsRubrique;
 
 	$articles = spip_query("SELECT DISTINCT a.id_article, a.titre, COUNT(d.id_document) AS nb FROM spip_articles a, spip_documents_articles d WHERE a.id_article = d.id_article AND a.id_rubrique = ".$id_rubrique." GROUP BY a.id_article ORDER BY a.titre");
-	$nbArticles = spip_num_rows($articles);
+	$nbArticles = $sql_count($articles);
 
 	$nbDocumentsArticles = 0;
 	$listeArticles = array();
 	if ($nbArticles > 0) {
-		while ($row = spip_fetch_array($articles)) {
+		while ($row = $fetch($articles)) {
 			$listeArticles[] = array('id' => $row['id_article'], 'titre' => $row['titre'], 'nb' => $row['nb']);
 			$nbDocumentsArticles += $row['nb'];
 			$nbDocsTotal += $row['nb'];
@@ -220,7 +230,7 @@ function sous_arborescence($id_rubrique) {
 	$retour = '';
 	if (($nbSousRubriques + $nbDocumentsRubrique + $nbDocumentsArticles) > 0) {
 		$retour .= '<table border="0" cellpadding="3" cellspacing="1">';
-		while ($row = spip_fetch_array($sousRubriques)) {
+		while ($row = $fetch($sousRubriques)) {
 			$tmpid = $row['id_rubrique'];
 			list($content, $nbDocs) = sous_arborescence($tmpid);
 			$nbDocsTotal += $nbDocs;
@@ -243,7 +253,12 @@ function sous_arborescence($id_rubrique) {
 			$retour .= $row['titre'].' ('.$nbDocs._T('bartypenr:galerie_document').($nbDocs > 1 ? 's' : '').')';
 			if ($content != '') {
 				$retour .= '<br />';
-				$retour .= debut_block_invisible('rub'.$row['id_rubrique']);
+				if(function_exists('debut_block_depliable')) // fonction de SPIP 1.93
+					$retour .= debut_block_depliable(false, 'doc'.$id_document);
+					else $retour .= debut_block_invisible('doc'.$id_document);
+				if(function_exists('debut_block_depliable')) // fonction de SPIP 1.93
+					$retour .= debut_block_depliable(false, 'rub'.$row['id_rubrique']);
+					else $retour .= debut_block_invisible('rub'.$row['id_rubrique']);
 				$retour .= $content;
 				$retour .= fin_block();
 			}
@@ -265,9 +280,11 @@ $article['titre'] = $listeArticles[$i]['titre'];
 $article['nb'] = $listeArticles[$i]['nb'];
 $article['id'] = $listeArticles[$i]['id'];
 				$documentsArticle = spip_query("SELECT id_document FROM spip_documents_articles WHERE id_article = ".$article['id']);
-				$nbDocumentsArticle = spip_num_rows($documentsArticles);
+				$nbDocumentsArticle = $sql_count($documentsArticles);
 				$retour .= '<tr><td valign="top">';
-				$bouton = bouton_block_invisible('art'.$article['id']);
+				if(function_exists('bouton_block_depliable')) // fonction de SPIP 1.93
+					$bouton = bouton_block_depliable('', false, 'art'.$article['id']);
+					else $bouton = bouton_block_invisible('art'.$article['id']);
 				if (test_layer()) {
 					$idBlock = ereg_replace(".*triangle([0-9]+)[^0-9].*", "\\1", $bouton);
 					$GLOBALS['blocks'][] = $idBlock;
@@ -278,9 +295,11 @@ $article['id'] = $listeArticles[$i]['id'];
 				$retour .= $article['titre'].' ('.$article['nb']._T('bartypenr:galerie_document').($article['nb'] > 1 ? 's' : '').')';
 				//$retour .= $listeArticles[$i]['titre'].' ('.$listeArticles[$i]['nb'].' document'.($listeArticles[$i]['nb'] > 1 ? 's' : '').')';
 				$retour .= '<br />';
-				$retour .= debut_block_invisible('art'.$article['id']);
+				if(function_exists('debut_block_depliable')) // fonction de SPIP 1.93
+					$retour .= debut_block_depliable(false, 'art'.$article['id']);
+					else $retour .= debut_block_invisible('art'.$article['id']);
 				$retour .= '<table border="0" cellpadding="3" cellspacing="1">';
-				while ($doc = spip_fetch_array($documentsArticle)) {
+				while ($doc = $fetch($documentsArticle)) {
 					$retour .= afficher_un_document($doc['id_document']);
 				}
 				$retour .= '</table>';
@@ -288,7 +307,7 @@ $article['id'] = $listeArticles[$i]['id'];
 				$retour .= '</td></tr>';
 			}
 		}
-		while ($row = spip_fetch_array($documentsRubrique)) {
+		while ($row = $fetch($documentsRubrique)) {
 			$retour .= afficher_un_document($row['id_document']);
 		}
 		$retour .= '</table>';

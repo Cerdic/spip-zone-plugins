@@ -7,19 +7,15 @@ include_spip("public/parametrer"); // pour mes_fonctions
 
 function exec_article_preview_dist()
 {
-	global $les_notes, $dir_lang;
-	$ret = "";
-	#lire_metas();
+	lire_metas();
 	#header('Content-Type: text/html;charset='.lire_meta('charset'));
 	#echo "<meta http-equiv='Content-Type' content='text/html; charset=".lire_meta('charset')."' />";
-
-	$ret .= propre($_POST['texte']);
+	echo propre($_POST['texte']);
+	global $les_notes, $dir_lang;
 	if ($les_notes) {
-		$ret .= ("<hr clear='all' /><div $dir_lang class='arial11'>"
+		echo ("<hr clear='all' /><div $dir_lang class='arial11'>"
 		. $les_notes
 		. "</div>");
 	}
-	include_spip('inc/actions');
-	ajax_retour($ret,false);
 }
 ?>
