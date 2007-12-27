@@ -402,7 +402,7 @@ $res = spip_query("DESCRIBE spip_meta valeur");
 $resultat = function_exists('spip_fetch_array')?spip_fetch_array($res):sql_fetch($res);
 if($resultat['Type']!='text') echo "<p style=\"color:red;\">Attention : votre base semble ancienne et le Couteau Suisse ne va pas bien fonctionner.</p><p>La table 'spip_meta' a pour type de valeur '$resultat[Type]' au lieu de 'text'.</p>";
 // verification de la barre typo V2
-if (strlen($bt_version) and (version_compare($bt_version,'2.3.2','<'))) echo "<p><span style=\"color:red;\">Attention :</span> la barre typographique (version $bt_version) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; 2.3.2.</p>";
+if (strlen($bt_version) and (version_compare($bt_version,'2.4.0','<'))) echo "<p><span style=\"color:red;\">Attention :</span> la barre typographique (version $bt_version) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; 2.4.0.</p>";
 
 	cs_compat_boite('debut_gauche');
 	// pour la liste des docs sur spip-contrib
