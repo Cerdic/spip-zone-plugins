@@ -28,7 +28,12 @@ function exec_reparer_liens_documents(){
 	// Recupere les donnees
 	//
 
-	debut_page(_T('gestdoc:reparer_liens'), "documents", "documents");
+	if(function_exists('debut_page'))
+		debut_page(_T("gestdoc:reparer_liens"), "documents", "documents");
+	else {
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T("gestdoc:reparer_liens"), "documents", "documents");
+	}
 	debut_gauche();
 
 

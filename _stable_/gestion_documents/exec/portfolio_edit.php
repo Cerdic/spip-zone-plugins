@@ -38,7 +38,12 @@ function exec_portfolio_edit(){
 	// Recupere les donnees
 	//
 
-	debut_page(_T("gestdoc:tous_docs"), "documents", "documents");
+	if(function_exists('debut_page'))
+		debut_page(_T("gestdoc:tous_docs"), "documents", "documents");
+	else {
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T("gestdoc:tous_docs"), "documents", "documents");
+	}
 	debut_gauche();
 
 
