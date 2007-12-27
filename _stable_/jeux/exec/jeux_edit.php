@@ -3,6 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('exec/inc_boites_infos');
 
 function exec_jeux_edit(){
 	include_spip('inc/utils');
@@ -32,23 +33,23 @@ function exec_jeux_edit(){
 	$enregistrer_resultat  = $requete['enregistrer_resultat'];
 	}
 	
-	debut_gauche();
-	debut_boite_info();
+	jeux_compat_boite('debut_gauche');
+	echo debut_boite_info(true);
 	
 	if ($id_jeu)
-		echo icone_horizontale(_T('jeux:retourner_jeu'),generer_url_ecrire('jeux_voir','id_jeu='.$id_jeu),find_in_path('img/jeu-loupe.png'));
-	echo icone_horizontale(_T('jeux:jeux_tous'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-tous.png'));
-	fin_boite_info();
+		echo icone_horizontale(_T('jeux:retourner_jeu'),generer_url_ecrire('jeux_voir','id_jeu='.$id_jeu),find_in_path('img/jeu-loupe.png'),'',false);
+	echo icone_horizontale(_T('jeux:jeux_tous'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-tous.png'),'',false),
+		fin_boite_info(true);
 
 	
 	echo debut_cadre_relief();
 	echo _T('jeux:explication_jeu');
 	echo fin_cadre_relief();
-	creer_colonne_droite();
-	debut_droite();
-	$nouveau ? gros_titre(_T('jeux:nouveau_jeu')) : gros_titre(_T('jeux:modifier_jeu',array('id'=>$id_jeu,'nom'=>$type_jeu)));
+	jeux_compat_boite('creer_colonne_droite');
+	jeux_compat_boite('debut_droite');
+	$nouveau ? gros_titre(_T('jeux:nouveau_jeu'), '', false) : gros_titre(_T('jeux:modifier_jeu',array('id'=>$id_jeu,'nom'=>$type_jeu)), '', false);
 	
-	debut_cadre_formulaire();
+	if(defined('_SPIP19100'))debut_cadre_formulaire(); else echo debut_cadre_formulaire('', true);
 	echo "<form method='post' name='jeux_edit'>\n";
 	debut_cadre_relief();
 	
@@ -76,7 +77,8 @@ function exec_jeux_edit(){
 	
 	echo "<p align='right'><input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo' /></p>";
 	echo '</form>';
-	echo fin_cadre_formulaire(), fin_gauche(), fin_page();
+	if(defined('_SPIP19100'))fin_cadre_formulaire();else echo fin_cadre_formulaire(true);
+	echo fin_gauche(), fin_page();
 }
 
 function jeux_ajouter_jeu($titre_prive,$contenu, $enregistrer_resultat, $id_jeu=false){

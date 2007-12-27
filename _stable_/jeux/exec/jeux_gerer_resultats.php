@@ -42,14 +42,14 @@ function gerer_resultat_tous($bouton){
 		redirige_par_entete(generer_url_ecrire('jeux_tous'));
 	}	
 	jeux_debut_page(_T("jeux:gerer_resultats_tout"));
-	debut_gauche();
+	jeux_compat_boite('debut_gauche');
 	boite_infos_accueil();
 	
-	creer_colonne_droite();
-	debut_droite();
-	if ($bouton == 'supprimer_tout'  or $bouton == 'compacter_tout') gros_titre(_T("jeux:confirmation"));
+	jeux_compat_boite('creer_colonne_droite');
+	jeux_compat_boite('debut_droite');
+	if ($bouton == 'supprimer_tout'  or $bouton == 'compacter_tout') gros_titre(_T("jeux:confirmation"), '', false);
 	debut_cadre_relief();
-	gros_titre(_T("jeux:gerer_resultats_tout"));
+	gros_titre(_T("jeux:gerer_resultats_tout"), '', false);
 	formulaire_suppression($bouton, 'tout');
 
 	fin_cadre_relief();
@@ -63,7 +63,7 @@ function gerer_resultats_auteur($id_auteur, $bouton){
 
 	if(!$id_auteur){
 		jeux_debut_page(_T("jeux:pas_d_auteur"));
-		gros_titre(_T("jeux:pas_d_auteur"));
+		gros_titre(_T("jeux:pas_d_auteur"), '', false);
 		fin_page();
 		return;
 	}
@@ -83,16 +83,16 @@ function gerer_resultats_auteur($id_auteur, $bouton){
 	}
 	jeux_debut_page(_T("jeux:gerer_resultats_auteur",array('nom'=>$type_jeu)));
 		
-	debut_gauche();
+	jeux_compat_boite('debut_gauche');
 
 	boite_infos_auteur($id_auteur, $type_jeu);
 	boite_infos_accueil();
 
-	creer_colonne_droite();
-	debut_droite();
-	if ($bouton == 'supprimer_tout'  or $bouton == 'compacter_tout') gros_titre(_T("jeux:confirmation"));
+	jeux_compat_boite('creer_colonne_droite');
+	jeux_compat_boite('debut_droite');
+	if ($bouton == 'supprimer_tout'  or $bouton == 'compacter_tout') gros_titre(_T("jeux:confirmation"), '', false);
 	debut_cadre_relief();
-	gros_titre(_T("jeux:gerer_resultats_auteur",array('nom'=>$type_jeu)));
+	gros_titre(_T("jeux:gerer_resultats_auteur",array('nom'=>$type_jeu)), '', false);
 	formulaire_suppression($bouton, 'auteur');
 
 	fin_cadre_relief();
@@ -105,7 +105,7 @@ function gerer_resultat_jeux($id_jeu, $bouton){
 	$type_jeu		= $requete['type_jeu'];
 	if(!$id_jeu){
 		jeux_debut_page(_T("jeux:pas_de_jeu"));
-		gros_titre(_T("jeux:pas_de_jeu"));
+		gros_titre(_T("jeux:pas_de_jeu"), '', false);
 		fin_page();
 		return;
 	}
@@ -127,16 +127,16 @@ function gerer_resultat_jeux($id_jeu, $bouton){
 
 	jeux_debut_page(_T("jeux:gerer_resultats_jeu",array('id'=>$id_jeu,'nom'=>$type_jeu)));
 			
-	debut_gauche();
+	jeux_compat_boite('debut_gauche');
 	boite_infos_jeu($id_jeu, $type_jeu);
 	boite_infos_accueil();
 
-	creer_colonne_droite();
-	debut_droite();
-	if ($bouton == 'supprimer_tout' or $bouton == 'compacter_tout') gros_titre(_T("jeux:confirmation"));
+	jeux_compat_boite('creer_colonne_droite');
+	jeux_compat_boite('debut_droite');
+	if ($bouton == 'supprimer_tout' or $bouton == 'compacter_tout') gros_titre(_T("jeux:confirmation"), '', false);
 	debut_cadre_relief();
 	
-	echo gros_titre(_T("jeux:gerer_resultats_jeu",array('id'=>$id_jeu,'nom'=>$type_jeu)));
+	echo gros_titre(_T("jeux:gerer_resultats_jeu",array('id'=>$id_jeu,'nom'=>$type_jeu)), '', false);
 	formulaire_suppression($bouton, 'jeu'); 
 	
 	fin_cadre_relief();
@@ -144,7 +144,7 @@ function gerer_resultat_jeux($id_jeu, $bouton){
 }
 
 function formulaire_suppression($bouton, $type){
-	debut_cadre_formulaire();
+	if(defined('_SPIP19100'))debut_cadre_formulaire();else echo debut_cadre_formulaire('', true);
 	echo "<form method='post'  name='supprimer_resultat'>";
 	debut_cadre_relief();	
 	
@@ -204,12 +204,12 @@ function formulaire_suppression($bouton, $type){
 	fin_cadre_relief();
 	echo "</form>";
 	
-	fin_cadre_formulaire();
+	if(defined('_SPIP19100'))fin_cadre_formulaire();else echo fin_cadre_formulaire(true);
 }
 function interdit(){
 	jeux_debut_page(_T('avis_non_acces_page'));
-	debut_gauche();
-	debut_droite();
+	jeux_compat_boite('debut_gauche');
+	jeux_compat_boite('debut_droite');
 	echo _T('avis_non_acces_page');
 	echo fin_gauche(), fin_page();
 }

@@ -21,7 +21,7 @@ function exec_jeux_voir(){
 	
 	if(!$id_jeu){
 		jeux_debut_page(_T("jeux:pas_de_jeu"));
-		gros_titre(_T("jeux:pas_de_jeu"));
+		gros_titre(_T("jeux:pas_de_jeu"), '', false);
 		fin_page();
 		return;
 	}
@@ -30,7 +30,7 @@ function exec_jeux_voir(){
 	
 	jeux_debut_page(_T("jeux:jeu_numero",array('id'=>$id_jeu,'nom'=>$type_jeu)));
 			
-	debut_gauche();
+	jeux_compat_boite('debut_gauche');
 	
 	boite_infos_jeu($id_jeu, $type_jeu);
 	boite_infos_accueil();
@@ -39,8 +39,8 @@ function exec_jeux_voir(){
 	echo "<strong>"._t("jeux:derniere_modif")."</strong><br />".affdate($date).' '.heures($date).":".minutes($date);
 	fin_cadre_relief();
 	
-	creer_colonne_droite();
-	debut_droite();
+	jeux_compat_boite('creer_colonne_droite');
+	jeux_compat_boite('debut_droite');
 	debut_cadre_relief();
 	
 	
@@ -52,7 +52,7 @@ function exec_jeux_voir(){
 			jeu_modifier_statut($id_jeu,_request('statut_modif'));
 			$statut=_request('statut_modif');
 		}
-		gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)),puce_statut($statut, " style='vertical-align: center'"));
+		gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)),puce_statut($statut, " style='vertical-align: center'"), '', false);
 		echo propre("<div style='font-weight:bold'>$titre_prive</div>");
 		if($titre_public) echo propre("<div style='font-weight:bold'>$titre_public</div>");
 
@@ -70,8 +70,8 @@ function exec_jeux_voir(){
 		echo "</form>";
 		fin_cadre_relief();
 	}
-	else {
-		gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)),puce_statut($statut, " style='vertical-align: center'"));}
+	else
+		gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)),puce_statut($statut, " style='vertical-align: center'"), '', false);
 	echo '<br />', $contenu;
 
 	fin_cadre_relief();

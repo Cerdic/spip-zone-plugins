@@ -13,30 +13,31 @@ include_spip('base/jeux_tables');
 
 // filtre de compatibilite avec SPIP 1.92
 function puce_compat192($couleur) {
- if ($GLOBALS['spip_version_code']<1.925) {
+ if (!defined('_SPIP19300')) {
  	return http_img_pack("puce-$couleur.gif", "puce $couleur", " style='margin: 1px;'");
  }
  return $couleur;
 }
 
 function boucle_JEUX($id_boucle, &$boucles) {
-        $boucle = &$boucles[$id_boucle];
-        $id_table = $boucle->id_table;
-        $mstatut = $id_table .'.statut';
-        $boucle->from[] =  "spip_jeux AS $id_table";
-        
-       	if (!($boucle->modificateur['criteres']['statut']))
-        	{$boucle->where[] = array("'='", "'$mstatut'", "'\\'publie\\''");}
-      
-        return calculer_boucle($id_boucle, $boucles);
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$mstatut = $id_table .'.statut';
+	// non requis sous 1.93
+	if(!defined('_SPIP19300')) $boucle->from[] =  "spip_jeux AS $id_table";
+//	if (!($boucle->modificateur['criteres']['statut']))
+//		{$boucle->where[] = array("'='", "'$mstatut'", "'\\'publie\\''");}
+	return calculer_boucle($id_boucle, $boucles);
 }
 
-function boucle_JEUX_RESULTATS($id_boucle, &$boucles) {
-        $boucle = &$boucles[$id_boucle];
-        $id_table = $boucle->id_table;
-        $boucle->from[] =  "spip_jeux_resultats AS $id_table";
-      
-        return calculer_boucle($id_boucle, $boucles);
+// non requis sous 1.93
+if(!defined('_SPIP19300')) {
+	function boucle_JEUX_RESULTATS($id_boucle, &$boucles) {
+		$boucle = &$boucles[$id_boucle];
+		$id_table = $boucle->id_table;
+		$boucle->from[] =  "spip_jeux_resultats AS $id_table";
+		return calculer_boucle($id_boucle, $boucles);
+	}
 }
 
 // filtre retournant un lien cliquable si $nb!=0, sinon un simple tiret
