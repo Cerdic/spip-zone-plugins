@@ -22,7 +22,7 @@ function exec_jeux_edit(){
 		redirige_par_entete(generer_url_ecrire('jeux_voir', 'id_jeu='.$id_jeu,true));
 	}
 	
-	$nouveau ? debut_page(_T('jeux:nouveau_jeu')) : debut_page(_T('jeux:modifier_jeu',array('id'=>$id_jeu,'nom'=>$type_jeu)));
+	$nouveau ? jeux_debut_page(_T('jeux:nouveau_jeu')) : jeux_debut_page(_T('jeux:modifier_jeu',array('id'=>$id_jeu,'nom'=>$type_jeu)));
 	
 	if (!$nouveau){
 	$requete = spip_fetch_array(spip_query("SELECT enregistrer_resultat,contenu,type_jeu,titre_prive FROM spip_jeux WHERE id_jeu =".$id_jeu));

@@ -8,7 +8,7 @@ function exec_jeux_tous(){
 	$par = _request('par');
 	($par =='') ? $par='date' : $par = $par;
 	
-	debut_page(_T("jeux:jeux_tous"));
+	jeux_debut_page(_T("jeux:jeux_tous"));
 			
 	debut_gauche();
 	boite_infos_accueil();

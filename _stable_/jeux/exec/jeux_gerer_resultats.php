@@ -28,7 +28,7 @@ function exec_jeux_gerer_resultats(){
 }
 
 function gerer_resultat_tous($bouton){
-	// aïe, aïe, on efface tout !
+	// aie, aie, on efface tout !
 	if ($bouton == 'supprimer_confirmer'){
 		include_spip('base/jeux_supprimer');
 		jeux_supprimer_tout_tout();
@@ -41,7 +41,7 @@ function gerer_resultat_tous($bouton){
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('jeux_tous'));
 	}	
-	debut_page(_T("jeux:gerer_resultats_tout"));
+	jeux_debut_page(_T("jeux:gerer_resultats_tout"));
 	debut_gauche();
 	boite_infos_accueil();
 	
@@ -62,7 +62,7 @@ function gerer_resultats_auteur($id_auteur, $bouton){
 	$id_auteur = $requete['id_auteur'];
 
 	if(!$id_auteur){
-		debut_page(_T("jeux:pas_d_auteur"));
+		jeux_debut_page(_T("jeux:pas_d_auteur"));
 		gros_titre(_T("jeux:pas_d_auteur"));
 		fin_page();
 		return;
@@ -81,7 +81,7 @@ function gerer_resultats_auteur($id_auteur, $bouton){
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('jeux_resultats_auteur', 'id_auteur='.$id_auteur, true));
 	}
-	debut_page(_T("jeux:gerer_resultats_auteur",array('nom'=>$type_jeu)));
+	jeux_debut_page(_T("jeux:gerer_resultats_auteur",array('nom'=>$type_jeu)));
 		
 	debut_gauche();
 
@@ -104,7 +104,7 @@ function gerer_resultat_jeux($id_jeu, $bouton){
 	$id_jeu		= $requete['id_jeu'];
 	$type_jeu		= $requete['type_jeu'];
 	if(!$id_jeu){
-		debut_page(_T("jeux:pas_de_jeu"));
+		jeux_debut_page(_T("jeux:pas_de_jeu"));
 		gros_titre(_T("jeux:pas_de_jeu"));
 		fin_page();
 		return;
@@ -125,7 +125,7 @@ function gerer_resultat_jeux($id_jeu, $bouton){
 	}
 
 
-	debut_page(_T("jeux:gerer_resultats_jeu",array('id'=>$id_jeu,'nom'=>$type_jeu)));
+	jeux_debut_page(_T("jeux:gerer_resultats_jeu",array('id'=>$id_jeu,'nom'=>$type_jeu)));
 			
 	debut_gauche();
 	boite_infos_jeu($id_jeu, $type_jeu);
@@ -207,7 +207,7 @@ function formulaire_suppression($bouton, $type){
 	fin_cadre_formulaire();
 }
 function interdit(){
-	debut_page(_T('avis_non_acces_page'));
+	jeux_debut_page(_T('avis_non_acces_page'));
 	debut_gauche();
 	debut_droite();
 	echo _T('avis_non_acces_page');

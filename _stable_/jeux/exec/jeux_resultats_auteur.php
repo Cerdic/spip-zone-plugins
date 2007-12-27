@@ -14,13 +14,13 @@ function exec_jeux_resultats_auteur(){
 	$id_auteur = $requete['id_auteur'];
 
 	if(!$id_auteur){
-		debut_page(_T("jeux:pas_d_auteur"));
+		jeux_debut_page(_T("jeux:pas_d_auteur"));
 		gros_titre(_T("jeux:pas_d_auteur"));
 		fin_page();
 		return;
 	}
 
-	debut_page(_T("jeux:resultats_auteur",array('nom'=>$nom)));
+	jeux_debut_page(_T("jeux:resultats_auteur",array('nom'=>$nom)));
 			
 	debut_gauche();
 	

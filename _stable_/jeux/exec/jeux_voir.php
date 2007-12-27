@@ -20,7 +20,7 @@ function exec_jeux_voir(){
 	$contenu = $type_jeu==_T('jeux:jeu_vide')?_T('jeux:introuvable'):propre($contenu);
 	
 	if(!$id_jeu){
-		debut_page(_T("jeux:pas_de_jeu"));
+		jeux_debut_page(_T("jeux:pas_de_jeu"));
 		gros_titre(_T("jeux:pas_de_jeu"));
 		fin_page();
 		return;
@@ -28,7 +28,7 @@ function exec_jeux_voir(){
 	
 
 	
-	debut_page(_T("jeux:jeu_numero",array('id'=>$id_jeu,'nom'=>$type_jeu)));
+	jeux_debut_page(_T("jeux:jeu_numero",array('id'=>$id_jeu,'nom'=>$type_jeu)));
 			
 	debut_gauche();
 	

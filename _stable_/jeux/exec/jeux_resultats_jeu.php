@@ -14,12 +14,12 @@ function exec_jeux_resultats_jeu(){
 	$type_jeu		= $requete['type_jeu'];
 	$titre_prive		= $requete['titre_prive'];
 	if(!$id_jeu){
-		debut_page(_T("jeux:pas_de_jeu"));
+		jeux_debut_page(_T("jeux:pas_de_jeu"));
 		gros_titre(_T("jeux:pas_de_jeu"));
 		fin_page();
 		return;
 		}
-	debut_page(_T("jeux:resultats_jeu",array('id'=>$id_jeu,'nom'=>$type_jeu)));
+	jeux_debut_page(_T("jeux:resultats_jeu",array('id'=>$id_jeu,'nom'=>$type_jeu)));
 			
 	debut_gauche();
 	

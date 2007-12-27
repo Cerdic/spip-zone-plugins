@@ -9,6 +9,14 @@ if(!function_exists('sql_countsel')) {
 		return $r['n'];
 	}
 }
+function jeux_debut_page($titre="", $rubrique="accueil", $sous_rubrique="accueil") {
+	if(defined('_SPIP19100'))
+		debut_page($titre, $rubrique, $sous_rubrique);
+	else {
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page($titre, $rubrique, $sous_rubrique);
+	}
+}
 
 // Pagination sur les jeux disponibles
 function jeux_navigation_pagination() {
