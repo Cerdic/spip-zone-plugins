@@ -16,7 +16,7 @@ define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 */
 // compatibilite spip 1.9
 if(defined('_SPIP19100') & !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
-function compat_boite($b) {if(defined('_SPIP19200')) echo $b('', true); else $b(); }
+function cs_compat_boite($b) {if(defined('_SPIP19200')) echo $b('', true); else $b(); }
 
 function cs_admin_styles_et_js() {
 	global $couleur_claire, $couleur_foncee;
@@ -277,7 +277,7 @@ verif_plugin();
 	gros_titre(_T('desc:titre'), '', false);
 	echo barre_onglets("configuration", 'couteau_suisse');
 
-	compat_boite('debut_gauche');
+	cs_compat_boite('debut_gauche');
 	echo debut_boite_info(true),
 		propre(_T('desc:help0', array('reset' => generer_url_ecrire($exec,'cmd=resetall')))),
 		fin_boite_info(true);
@@ -289,9 +289,9 @@ verif_plugin();
 		echo debut_boite_info(true), $aide_pipes, fin_boite_info(true);
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
-	creer_colonne_droite();
+	cs_compat_boite('creer_colonne_droite');
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
-	compat_boite('debut_droite');
+	cs_compat_boite('debut_droite');
 
 	echo debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('desc:liste_outils'));
 

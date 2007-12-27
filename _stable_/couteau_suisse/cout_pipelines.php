@@ -8,7 +8,6 @@ if (!defined('_DIR_PLUGIN_COUTEAU_SUISSE')){
 	define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 }
 
-
 // attention, ici il se peut que le plugin ne soit pas initialise (cas des .js/.css par exemple)
 cs_log("inclusion de cout_pipelines.php");
 
@@ -170,10 +169,11 @@ function couteau_suisse_BT_toolbox($params) {
 }
 
 // bouton principal du Couteau Suisse
-function couteau_suisse_BarreTypoEnrichie_tous($paramArray) {
+function couteau_suisse_BT_gadgets($params) {
 	global $cs_metas_pipelines;
 	if (!isset($cs_metas_pipelines['BT_toolbox'])) return $paramArray;
-	return bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['couteau_suisse']."','');", _DIR_PLUGIN_COUTEAU_SUISSE."/img/couteau-24.gif", _T('desc:raccourcis_barre'), $paramArray[1]);
+	$params['flux'] .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['couteau_suisse']."','');", _DIR_PLUGIN_COUTEAU_SUISSE."/img/couteau-24.gif", _T('desc:raccourcis_barre'), $params['help']);
+	return $params;
 }
 
 /*

@@ -15,7 +15,7 @@ define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 */
 // compatibilite spip 1.9
 if(defined('_SPIP19100') && !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
-function compat_boite($b) {if(defined('_SPIP19200')) echo $b('', true); else $b(); }
+function cs_compat_boite($b) {if(defined('_SPIP19200')) echo $b('', true); else $b(); }
 
 function cs_admin_styles_et_js($cs_version) {
 	global $afficher_outil;
@@ -404,7 +404,7 @@ if($resultat['Type']!='text') echo "<p style=\"color:red;\">Attention : votre ba
 // verification de la barre typo V2
 if (strlen($bt_version) and (version_compare($bt_version,'2.3.2','<'))) echo "<p><span style=\"color:red;\">Attention :</span> la barre typographique (version $bt_version) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; 2.3.2.</p>";
 
-	compat_boite('debut_gauche');
+	cs_compat_boite('debut_gauche');
 	// pour la liste des docs sur spip-contrib
 	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();
 	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace('/@@(.*?)@@/e', "couper(_T('\\1'), 25)", $v);
@@ -430,11 +430,11 @@ if (strlen($bt_version) and (version_compare($bt_version,'2.3.2','<'))) echo "<p
 		echo debut_boite_info(true), $aide, fin_boite_info(true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
 
-	compat_boite('creer_colonne_droite');
+	cs_compat_boite('creer_colonne_droite');
 	// on telecharge les news...
 	if (defined('boites_privees_CS')) cs_boite_rss(!$quiet);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
-	compat_boite('debut_droite');
+	cs_compat_boite('debut_droite');
 
 	echo debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('desc:liste_outils')),
 		_T('desc:presente_outils2'),
