@@ -2,6 +2,13 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// compatibilite SPIP 1.91
+if (!defined('_DIR_PLUGIN_COUTEAU_SUISSE')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
+}
+
+
 // attention, ici il se peut que le plugin ne soit pas initialise (cas des .js/.css par exemple)
 cs_log("inclusion de cout_pipelines.php");
 
