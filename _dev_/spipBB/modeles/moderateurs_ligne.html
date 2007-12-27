@@ -6,7 +6,7 @@
 <BOUCLE_art_rub(ARTICLES){id_article}>
 	<BOUCLE_rub_admin(AUTEURS_RUBRIQUES){id_auteur !IN #GET{modos}}{id_rubrique=#ID_RUBRIQUE}>
 		<BOUCLE_aut_admin(AUTEURS){id_auteur}>
-		#SET{modos,#GET{modos}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_AUTEUR}}}
+		#SET{modos,#GET{modos}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#_aut_admin:ID_AUTEUR}}}
 		</BOUCLE_aut_admin>
 	</BOUCLE_rub_admin>
 </BOUCLE_art_rub>
