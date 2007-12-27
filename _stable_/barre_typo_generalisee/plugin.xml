@@ -7,7 +7,7 @@
  	[OpenStudio->http://www.openstudio.fr] - Licence GPL
 	</auteur>
 	<version>
-	1.4
+	1.5
 	</version>
 	<etat>
 	stable
@@ -19,15 +19,9 @@
 	<lien>http://www.spip-contrib.net/Barre-typographique-generalisee,15</lien> <!-- URI de documentation -->
 	<pipeline>
   		<nom>body_prive</nom>
-  		<action>insertion_in_body_prive</action>
+  		<action>barre_typo_generalisee_body_prive</action>
   		<inclure>barre_typo_generalisee_define_prive.php</inclure>
  	</pipeline>
-	<pipeline>
-  		<nom>header_prive</nom>
-  		<action>insertion_in_head_prive</action>
-  		<inclure>barre_typo_generalisee_define_prive.php</inclure>
- 	</pipeline>
-	
 
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
