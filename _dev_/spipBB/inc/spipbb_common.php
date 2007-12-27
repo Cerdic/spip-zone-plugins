@@ -30,7 +30,7 @@ if (defined("_INC_SPIPBB_COMMON")) return; else define("_INC_SPIPBB_COMMON", tru
 spipbb_log('included',2,__FILE__);
 
 // Default log level
-define('_SPIPBB_LOG_LEVEL',2);
+define('_SPIPBB_LOG_LEVEL',3);
 
 // [fr] Plugin ecrit pour spip rev 1.9.3 -> fournir les fonctions requises pour spip 1.9.2
 // [en] Plugin written for spip rev 1.9.3 -> provide required functions for spip 1.9.2

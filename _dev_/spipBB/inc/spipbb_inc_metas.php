@@ -1,7 +1,33 @@
 <?php
-/*
-|
-*/
+#----------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                        #
+#  File    : inc/spipbb_inc_metas                          #
+#  Authors : chryjs, 2007 et als                           #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  Contact : chryjs!@!free!.!fr                            #
+#  [fr] Gestion des metas propre a spipbb                  #
+#  [en] Manage spipbb metas                                #
+#----------------------------------------------------------#
+
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+// * [fr] Acces restreint, plugin pour SPIP * //
+// * [en] Restricted access, SPIP plugin * //
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+if (!defined("_INC_SPIPBB_COMMON")) include_spip('inc/spipbb_common');
 
 spipbb_log("included",3,__FILE__);
 
@@ -66,6 +92,8 @@ function spipbb_init_metas()
 	$spipbb_meta['taille_avatar_prof'] = $old_meta['taille_avatar_prof'] ? $old_meta['taille_avatar_prof'] : 80;
 	$spipbb_meta['affiche_bouton_abus'] = $old_meta['affiche_bouton_abus'] ? $old_meta['affiche_bouton_abus'] : 'non';
 	$spipbb_meta['affiche_bouton_rss'] = $old_meta['affiche_bouton_rss'] ? $old_meta['affiche_bouton_rss'] : 'un';
+	$spipbb_meta['affiche_membre_defaut'] = $old_meta['affiche_membre_defaut'] ? $old_meta['affiche_membre_defaut'] : 'non'; // c: 27/12/7 par defaut non pour respecter demande Scoty
+	$spipbb_meta['log_level'] = $old_meta['log_level'] ? $old_meta['log_level'] : _SPIPBB_LOG_LEVEL; // c: 27/12/7 par defaut le niveau de log est a 3 (voir inc/spipbb_common
 	// chemin icones et smileys ?
 
 	// spam words

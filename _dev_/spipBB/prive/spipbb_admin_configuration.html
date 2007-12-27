@@ -265,11 +265,42 @@
 </tr>
 </table>
 
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:valider:>" class="fondo" /></div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+[(#REM) ------------------------ OPTIONS ------------------------ ]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_forums_configuration_options:>})]
+
+<table cellpadding='3' cellspacing='1' border='0' width='100%'>
+<tr>
+	<td><:spipbb:admin_forums_affiche_membre_defaut:></td>
+	<td>
+		<input type='radio' name='affiche_membre_defaut' value='oui' id='affiche_membre_defaut_1' [ checked="(#ENV{affiche_membre_defaut}|=={'oui'}|?{checked})"] /> <label for='affiche_membre_defaut_1'><:spipbb:oui:></label>
+		&nbsp;
+		<input type='radio' name='affiche_membre_defaut' value='non' id='affiche_membre_defaut_0' [ checked="(#ENV{affiche_membre_defaut}|=={'non'}|?{checked})"] /> <label for='affiche_membre_defaut_0'><:spipbb:non:></label>
+	</td>
+</tr>
+<tr>
+	<td><:spipbb:admin_forums_log_level:></td>
+	<td>
+	<div style='text-align:center'>
+	<select name="log_level">
+		<option value="0"[ selected="(#ENV{log_level}|=={0}|?{selected})"]>[ 0 ] - <:spipbb:admin_forums_log_level_0:></option>
+		<option value="1"[ selected="(#ENV{log_level}|=={1}|?{selected})"]>[ 1 ] - <:spipbb:admin_forums_log_level_1:></option>
+		<option value="2"[ selected="(#ENV{log_level}|=={2}|?{selected})"]>[ 2 ] - <:spipbb:admin_forums_log_level_2:></option>
+		<option value="3"[ selected="(#ENV{log_level}|=={3}|?{selected})"]>[ 3 ] - <:spipbb:admin_forums_log_level_3:></option>
+	</select>
+	</div>
+	</td>
+</tr>
+</table>
 
 <?php //fin spipbb active == oui
 } ?>
 
-[(#REM) ------------------------ BOUTON OK ------------------------ ]
+[(#REM) ------------------------ DERNIER BOUTON OK ------------------------ ]
 <div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:valider:>" class="fondo" /></div>
 
 <?php //fin spipbb prerequis == oui

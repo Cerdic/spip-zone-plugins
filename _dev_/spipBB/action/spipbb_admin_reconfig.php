@@ -24,7 +24,7 @@
 // * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_spip('inc/spipbb_common');
+if (!defined("_INC_SPIPBB_COMMON")) include_spip('inc/spipbb_common');
 spipbb_log('included',2,__FILE__);
 
 include_spip('inc/spipbb_util');
@@ -313,18 +313,18 @@ function action_spipbb_admin_reconfig()
 		}
 		# on limite la taille en cas de mauvaise saisie : max 200 pixels
 		$taille_image_maxi = '200';
-		# sur page sujet 	
+		# sur page sujet 
 		if ((strlen($taille_avatar_suj=_request('taille_avatar_suj')))
 			and intval($taille_avatar_suj)!=$GLOBALS['spipbb']['taille_avatar_suj']) {
 			$GLOBALS['spipbb']['taille_avatar_suj']=(intval($taille_avatar_suj)>$taille_image_maxi) ? $taille_image_maxi : intval($taille_avatar_suj);
 			$reconf=true;
-		}		
+		}
 		# sur page contact
 		if ((strlen($taille_avatar_cont=_request('taille_avatar_cont')))
 			and intval($taille_avatar_cont)!=$GLOBALS['spipbb']['taille_avatar_cont']) {
 			$GLOBALS['spipbb']['taille_avatar_cont']=(intval($taille_avatar_cont)>$taille_image_maxi) ? $taille_image_maxi : intval($taille_avatar_cont);
 			$reconf=true;
-		}		
+		}
 		# sur page profile
 		if ((strlen($taille_avatar_prof=_request('taille_avatar_prof')))
 			and intval($taille_avatar_prof)!=$GLOBALS['spipbb']['taille_avatar_prof']) {
@@ -345,7 +345,22 @@ function action_spipbb_admin_reconfig()
 			$GLOBALS['spipbb']['affiche_bouton_rss']=$affiche_bouton_rss;
 			$reconf=true;
 		}
-		
+		# c: 27/12/7
+		# Par defaut on n'apparait pas dans la liste des membres sauf si option modifie
+		if (($affiche_membre_defaut=_request('affiche_membre_defaut'))
+			and $affiche_membre_defaut!=$GLOBALS['spipbb']['affiche_membre_defaut']) {
+			$GLOBALS['spipbb']['affiche_membre_defaut']=$affiche_membre_defaut;
+			$reconf=true;
+		}
+		# c: 27/12/7
+		# on peut parametrer le niveau de log de spipbb compris entre 0 et 3 ( _SPIPBB_LOG_LEVEL par defaut )
+		if ((strlen($log_level=_request('log_level')))
+			and intval($log_level)!=$GLOBALS['spipbb']['log_level']) {
+			$log_level=intval($log_level);
+			$GLOBALS['spipbb']['log_level']=($log_level>3) ? _SPIPBB_LOG_LEVEL : ( ($log_level<0) ? _SPIPBB_LOG_LEVEL : $log_level ) ;
+			$reconf=true;
+		}
+
 		# h. 1/12/08 #########################################
 		# Recuperer la jointure de mot-clef annonce, ferme pour articles et posts
 		# d_une precedente install gafospip ( et spipbb anc. generation ??? )
@@ -364,7 +379,7 @@ function action_spipbb_admin_reconfig()
 			{
 				$gaf_install = @unserialize($GLOBALS['meta']['gaf_install']);
 				$id_groupe_preced = $gaf_install['groupe'];
-			
+
 				# cherche mot "annonce" et "ferme" dans ce groupe
 				foreach($mots_base as $m) {
 					$q = spip_query("SELECT id_mot FROM spip_mots 

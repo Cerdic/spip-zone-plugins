@@ -2,6 +2,8 @@
 
  * Correction bug pagination dans spipbb_192 : qui provoquait une fonction infiniment récursive...
  * Corrige le bug auteurs_rubriques table SQL inconnue en 1.9.2
+ * Tableaux plus grands dans la presentation (CSS)
+ * Passage en 0.3.9 : ajout de 2 champs de config supplémentaires (log_level et affiche_membre_defaut)
 
 
 2007-12-25  chryjs  <chryjs!@!free!.!fr>

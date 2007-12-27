@@ -158,7 +158,9 @@ function spipbb_admin_configuration() {
 			'affiche_avatar' => $GLOBALS['spipbb']['affiche_avatar'],
 			'taille_avatar_suj' => $GLOBALS['spipbb']['taille_avatar_suj'],
 			'taille_avatar_cont' => $GLOBALS['spipbb']['taille_avatar_cont'],
-			'taille_avatar_prof' => $GLOBALS['spipbb']['taille_avatar_prof']
+			'taille_avatar_prof' => $GLOBALS['spipbb']['taille_avatar_prof'],
+			'affiche_membre_defaut' => $GLOBALS['spipbb']['affiche_membre_defaut'],
+			'log_level' => $GLOBALS['spipbb']['log_level'],
 			);
 	$res = recuperer_fond("prive/spipbb_admin_configuration",$contexte) ;
 	spipbb_log('END',3,"spipbb_configuration()");
