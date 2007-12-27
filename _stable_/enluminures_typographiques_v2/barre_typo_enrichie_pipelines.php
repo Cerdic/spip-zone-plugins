@@ -1,24 +1,17 @@
 <?php
+define('_DIR_BTE_IMG', _DIR_PLUGIN_TYPOENLUMINEE.'/img_pack/icones_barre/');
 
-// pour les caracteres
+// toolbox pour les paragraphes
 function afficher_boutonsavances($champ, $champhelp) {
-
-$reta = '';
-$reta .= bouton_barre_racc ("barre_raccourci('\n\n{2{','}2}\n\n',$champ)", _DIR_PLUGIN_TYPOENLUMINEE.'/img_pack/icones_barre/intertitre2.png', _T('enlumtypo:barre_intertitre2'), $champhelp);
-$reta .= bouton_barre_racc ("barre_raccourci('\n\n{3{','}3}\n\n',$champ)", _DIR_PLUGIN_TYPOENLUMINEE.'/img_pack/icones_barre/intertitre3.png', _T('enlumtypo:barre_intertitre3'), $champhelp);
-$reta .= bouton_barre_racc ("barre_raccourci('[|','|]',$champ)", _DIR_PLUGIN_TYPOENLUMINEE.'/img_pack/icones_barre/center.png', _T('enlumtypo:barre_centrer'), $champhelp);
-$reta .= bouton_barre_racc ("barre_raccourci('[/','/]',$champ)", _DIR_PLUGIN_TYPOENLUMINEE.'/img_pack/icones_barre/right.png', _T('enlumtypo:barre_alignerdroite'), $champhelp);
-$reta .= bouton_barre_racc ("barre_raccourci('[(',')]',$champ)", _DIR_PLUGIN_TYPOENLUMINEE.'/img_pack/icones_barre/cadretexte.png', _T('enlumtypo:barre_encadrer'), $champhelp);
-$reta .= bouton_barre_racc ("barre_raccourci('<del>','</del>',$champ)", _DIR_PLUGIN_TYPOENLUMINEE."/img_pack/icones_barre/text_strikethrough.png", _T('enlumtypo:barre_texte_barre'), $champhelp);
-	global $spip_lang;
-	$params = array($champ,$champhelp,$spip_lang);
-	$add = pipeline("BarreTypoEnrichie_boutonsavances",array($champ,$champhelp,$spip_lang));
-	if ($params!=$add)
-		$reta .= $add;
-
-$reta .= '&nbsp;';
-	
-$tableau_formulaire = '
+	$reta = '';
+	$reta .= bouton_barre_racc("barre_raccourci('\n\n{2{','}2}\n\n',$champ)", _DIR_BTE_IMG.'intertitre2.png', _T('enlumtypo:barre_intertitre2'), $champhelp);
+	$reta .= bouton_barre_racc("barre_raccourci('\n\n{3{','}3}\n\n',$champ)", _DIR_BTE_IMG.'intertitre3.png', _T('enlumtypo:barre_intertitre3'), $champhelp);
+	$reta .= bouton_barre_racc("barre_raccourci('[|','|]',$champ)", _DIR_BTE_IMG.'center.png', _T('enlumtypo:barre_centrer'), $champhelp);
+	$reta .= bouton_barre_racc("barre_raccourci('[/','/]',$champ)", _DIR_BTE_IMG.'right.png', _T('enlumtypo:barre_alignerdroite'), $champhelp);
+	$reta .= bouton_barre_racc("barre_raccourci('[(',')]',$champ)", _DIR_BTE_IMG.'cadretexte.png', _T('enlumtypo:barre_encadrer'), $champhelp);
+	$reta .= bouton_barre_racc("barre_raccourci('<del>','</del>',$champ)", _DIR_BTE_IMG.'text_strikethrough.png', _T('enlumtypo:barre_texte_barre'), $champhelp);
+		
+	$tableau_formulaire = '
 <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
   <tr class="spip_barre">
     <td>'._T('enlumtypo:barre_avances').'</td>
@@ -27,8 +20,7 @@ $tableau_formulaire = '
   </tr> 
 </table>
 ';
-
-  return produceWharf('tableau_boutonsavances','',$tableau_formulaire); 	
+	return produceWharf('tableau_boutonsavances','',$tableau_formulaire); 	
 }
 
 function TypoEnluminee_BT_toolbox($params) {
@@ -36,14 +28,18 @@ function TypoEnluminee_BT_toolbox($params) {
 	return $params;
 }
 
-function TypoEnluminee_BarreTypoEnrichie_avancees($paramArray) {
-	$ret = bouton_barre_racc ("barre_raccourci('[*','*]',".$paramArray[0].")", _DIR_PLUGIN_TYPOENLUMINEE.'/img_pack/icones_barre/miseenevidence.png', _T('enlumtypo:barre_miseenevidence'), $paramArray[1]);
-	$ret .= bouton_barre_racc ("barre_raccourci('&lt;sup&gt;','&lt;/sup&gt;',".$paramArray[0].")", _DIR_PLUGIN_TYPOENLUMINEE.'/img_pack/icones_barre/exposant.png', _T('enlumtypo:barre_exposant'), $paramArray[1]);
-	$ret .= bouton_barre_racc ("barre_raccourci('&lt;sc&gt;','&lt;/sc&gt;',".$paramArray[0].")", _DIR_PLUGIN_TYPOENLUMINEE.'/img_pack/icones_barre/petitescapitales.png', _T('enlumtypo:barre_petitescapitales'), $paramArray[1]);
-	$ret .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_boutonsavances']."','');", _DIR_PLUGIN_TYPOENLUMINEE."/img_pack/icones_barre/avances.png", _T('enlumtypo:barre_boutonsavances'), $paramArray[1]);
-
-    return $ret;   
+function TypoEnluminee_BT_caracteres($params) {
+	$params['flux'] .= bouton_barre_racc("barre_raccourci('[*','*]',$params[champ])", _DIR_BTE_IMG.'miseenevidence.png', _T('enlumtypo:barre_miseenevidence'), $params['help'])
+		. bouton_barre_racc("barre_raccourci('&lt;sup&gt;','&lt;/sup&gt;',$params[champ])", _DIR_BTE_IMG.'exposant.png', _T('enlumtypo:barre_exposant'), $params['help'])
+		. bouton_barre_racc("barre_raccourci('&lt;sc&gt;','&lt;/sc&gt;',$params[champ])", _DIR_BTE_IMG.'petitescapitales.png', _T('enlumtypo:barre_petitescapitales'), $params['help']);
+    return $params;
 }
 
+// bouton qui controle la toolbox 'tableau_boutonsavances'
+function TypoEnluminee_BT_paragraphes($params) {
+	if(!$params['forum']) $params['flux'] .= 
+		bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_boutonsavances']."','');", _DIR_BTE_IMG.'avances.png', _T('enlumtypo:barre_boutonsavances'), $params['help']);
+    return $params;
+}
 
 ?>

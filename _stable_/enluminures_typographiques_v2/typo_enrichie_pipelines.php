@@ -1,24 +1,14 @@
 <?php
+
 // insert le css pour les styles supplementaires de la BTE dans le <head> du document (#INSERT_HEAD)
 function TypoEnluminee_insert_head($flux) {
-	if (!function_exists('lire_config')) {
+	if (!function_exists('lire_config'))
 		global $BarreTypoEnrichie_Preserve_Header;
-	} else {
-		if (lire_config('bte/insertcss','Oui') == 'Non') {
-			$BarreTypoEnrichie_Preserve_Header = true;
-		} else {
-			$BarreTypoEnrichie_Preserve_Header = false;
-		}
-	}
-	if (!$BarreTypoEnrichie_Preserve_Header) {
-		$cssFile = find_in_path('css/enluminurestypo.css');
-		$incHead = <<<EOH
-<link rel="stylesheet" href="$cssFile" type="text/css" media="all" />
-EOH;
-		return preg_replace('#(</head>)?$#i', $incHead . "\$1\n", $flux, 1);
-	} else {
-		return $flux;
-	}
+	else
+		$BarreTypoEnrichie_Preserve_Header =  lire_config('bte/insertcss','Oui');
+	if (!$BarreTypoEnrichie_Preserve_Header)
+		return $flux.'<link rel="stylesheet" href="'.find_in_path('css/enluminurestypo.css').'" type="text/css" media="all" />'."\n";
+	return $flux;
 }
 
 function TypoEnluminee_header_prive($texte) {
