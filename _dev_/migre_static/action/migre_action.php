@@ -50,7 +50,8 @@ function action_migre_action()
 	$step = _request('etape');
 	$go_back = generer_url_ecrire("naviguer","id_rubrique=$id_rubrique");
 	$link_back  = icone(_T('icone_retour'), $go_back, "rubrique-12.gif", "rien.gif", ' ',false);
-	$corps = $link_back;
+	// presentation pour 192
+	$corps = $link_back."<div style='width:100%;background: #FFF; font-size:90%;'>" ;
 
 	switch ($step) {
 	case 1 :
@@ -78,8 +79,13 @@ function action_migre_action()
 	default :
 		$corps .= "<strong>"._T('avis_non_acces_page')."</strong>";
 	}
+	// presentation pour 1.9.2
+	$style=" style='
+	font-size: 0.9em; color: #2e3436; background: #babdb6;
+	' ";
+	$corps.="</div>";
 
-	echo minipres(_T("migrestatic:titre_migre_action_etape")." $step",$corps);
+	echo minipres(_T("migrestatic:titre_migre_action_etape")." $step",$corps,$style);
 } // action_migre_action
 
 
@@ -136,7 +142,7 @@ global $migre_meta, $dir_lang;
 		$res .= fin_cadre_relief(true);
 		if ($migre_meta['migre_test'] AND $i>5) break; else $i++; // [fr] On ne teste que les 5 premieres pages [en] Test only first 5 pages
 	 };
-	$res .= _T('migrestatic:migre_fini');
+	$res .= "<div style='clear:both'>"._T('migrestatic:migre_fini')."</div>";
 	$res_list.= "<br style='clear: both;' />\n</div>\n";
 	return $res_list.$res;
 }
@@ -219,10 +225,10 @@ global $dir_lang, $migre_meta;
 	}
 	else
 	{
-		$res .= "\n<div $dir_lang style='float:left;width:48%;text-align:center;'>"._T('migrestatic:article_affiche_par_spip')."\n</div>\n";
-		$res .= "\n<div $dir_lang style='float:left;width:48%;text-align:center;'>"._T('migrestatic:article_edite_par_spip')."\n</div>\n<br />\n";
-		$res .= "\n<div $dir_lang style='float:left;width:48%;height:6em;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>".propre($body)."<br style='clear: both;' />\n</div>\n";
-		$res .= "\n<div $dir_lang style='float:left;width:48%;height:6em;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>".nl2br($body)."<br style='clear: both;' />\n</div>\n";
+		$res .= "\n<div $dir_lang style='float:left;width:47%;text-align:center;'>"._T('migrestatic:article_affiche_par_spip')."\n</div>\n";
+		$res .= "\n<div $dir_lang style='float:left;width:47%;text-align:center;'>"._T('migrestatic:article_edite_par_spip')."\n</div>\n<br />\n";
+		$res .= "\n<div $dir_lang style='float:left;width:47%;height:6em;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>".propre($body)."<br style='clear: both;' />\n</div>\n";
+		$res .= "\n<div $dir_lang style='float:left;width:47%;height:6em;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>".nl2br($body)."<br style='clear: both;' />\n</div>\n";
 	}
 
 	return $res;
