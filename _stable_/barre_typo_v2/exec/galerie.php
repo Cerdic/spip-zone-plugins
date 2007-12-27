@@ -254,9 +254,6 @@ function sous_arborescence($id_rubrique) {
 			if ($content != '') {
 				$retour .= '<br />';
 				if(function_exists('debut_block_depliable')) // fonction de SPIP 1.93
-					$retour .= debut_block_depliable(false, 'doc'.$id_document);
-					else $retour .= debut_block_invisible('doc'.$id_document);
-				if(function_exists('debut_block_depliable')) // fonction de SPIP 1.93
 					$retour .= debut_block_depliable(false, 'rub'.$row['id_rubrique']);
 					else $retour .= debut_block_invisible('rub'.$row['id_rubrique']);
 				$retour .= $content;
