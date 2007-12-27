@@ -1,0 +1,146 @@
+#CACHE{#ENV{cache,3600*100}}[(#REM)
+
+        WALMA 3.4b pour SPIP 1.9.2C
+	pour appeler walma 
+	faire /?page=walma
+	ou /?page=walma&id_article=XX
+	ou /?page=walma&id_rubrique=XX
+	si vous avez WALMA_complet vous pouvez configurer walma avec le plugin cfg
+	disponible sur http://files.spip.org/spip-zone/cfg.zip
+ 	aller ensuite sur /ecrire/?exec=cfg&cfg=walma
+
+		************
+	walma -alm- decembre 2007
+	
+][(#NOOP|detect_cfg|?{'',<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>})
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>Portfolio walma [- (#ID_RUBRIQUE|titre_depuis_id{rubrique}|supprimer_numero|textebrut) - ][- (#ID_ARTICLE|titre_depuis_id{article}|supprimer_numero|textebrut) - ][ - <:resultats_recherche:> (#RECHERCHE) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+
+[(#REM)<!-- essentiel 1 pour walma -->]
+#PIPELINE{insert_walma}
+]
+
+
+[(#REM)<!-- debut essentiel 2 pour walma 
+Les SET quelmode et dim definissent les jeux par defaut mme si cfg CONFIG n'est pas actif-->]
+[(#SET{quelmode,[(#ENV{mode,#CONFIG{walma/walma_mode,droite}})]})]
+[(#SET{paramuri,[(#SELF|url_absolue|parametre_url{'mode',''}|parametre_url{id_document,''}|parametre_url{'diapo',''}|parametre_url{'textforum',''}|parametre_url{'recherche',#RECHERCHE})]})]
+[(#SET{stylediapo,[(#ENV{diapo}|=={on}|?{[(#EVAL{defined('_DIR_PLUGIN_DIAPORAMA_INNERFADE')}|?{innerfade,php})],rien})]})]
+
+[(#REM)<!-- On dŽtermine un array des articles (car on veut leurs documents) depuis leurs rubriques
+prend toutes les rubriques, sinon celles choisies via cgg, ce qui empche l'affichage des articles des rubriques non choisies -->]
+
+[(#SET{arraywalma,#ARRAY})]
+[(#SET{arrayrub,#ARRAY})]
+
+<BOUCLE_allrub(RUBRIQUES)>
+[(#SET{arrayrub,[(#GET{arrayrub}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_RUBRIQUE}})]})]
+</BOUCLE_allrub>
+
+[(#SET{whichrubs,[(#CONFIG{walma/espace_walma,#GET{arrayrub},''})]})]
+
+<BOUCLE_rubcfg(ARTICLES){id_article?}{id_rubrique?}{id_rubrique IN #GET{whichrubs}}>
+[(#ID_RUBRIQUE|in_array{#GET{whichrubs}}|?{
+[(#SET{arraywalma,[(#GET{arraywalma}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}})]})]
+})]
+[(#ENV{id_article}|?{[(#SET{thisrub, #ID_RUBRIQUE})],[(#SET{thisrub,#ENV{id_rubrique}})]})]
+</BOUCLE_rubcfg></B_rubcfg>[(#SET{arraywalma,''})]<//B_rubcfg>
+
+	<!-- si une recherche ne renvoit aucun resultat, on vide l'array-->
+	<BOUCLE_search(DOCUMENTS){id_article IN #GET{arraywalma}}{recherche?}{mode=document}{extension IN png,jpg,gif}>
+	[(#POINTS|?{'',#SET{noresult,rien}})]
+	</BOUCLE_search>
+	[(#RECHERCHE|?{[(#GET{noresult}|?{[(#SET{arraywalma,''})]})]})]
+	
+
+	
+[(#ENV{diapo}|=={on}|?{
+	<meta http-equiv=Refresh content="2; URL=[(#GET{paramuri}|parametre_url{'mode','image'}|parametre_url{'diapo','on'}|parametre_url{'debut_image',[(#ENV{debut_image,1}|<={[(#EVAL{[(#_search:TOTAL_BOUCLE)]-2})]}|?{[(#EVAL{[(#ENV{debut_image,0})]+1})],0})]})]">
+})]
+[(#REM)<!-- le diaporama meta refresh sans javascript doit tre dans le head
+fin essentiel 2 pour walma -->]
+
+
+[(#NOOP|detect_cfg|?{'<div class="wbody" id="w">',
+'</head>
+<body class="wbody"> '})]
+
+	[(#REM) NOISETTE En-tete titre et logo du site ]
+	[(#CONFIG{walma/titrelogo_walma}|?{' ',''})
+	<INCLURE{fond=noisettes/inc-titrelogo}{cache=#ENV{cache,86400}}>
+	]
+
+	[(#REM) NOISETTE Fil d'Ariane ]
+	[(#CONFIG{walma/filariane_walma}|?{' ',''})
+	<INCLURE{fond=noisettes/inc-filariane}{id_rubrique=#GET{thisrub}}{id_article}{cache=#ENV{cache,86400}}>
+	]
+
+<div class="wencadre">
+
+	[(#REM) NOISETTE Menu de navigation par rubriques ]
+	[(#CONFIG{walma/walma_menu}|?{' ',''})
+	<INCLURE{fond=noisettes/inc-menurub}{id_rubrique=#GET{thisrub}}{id_article}{cache=#ENV{cache,86400}}>
+	] 
+	
+	
+[(#REM) <!--debut essentiel3 WALMA-->]
+<div class="blocwalma">
+
+	<div class="hautwalma">
+		<a href="[(#GET{paramuri}|parametre_url{'debut_vignettes',''})]&amp;mode=mosaic" id="icomosaic" class="ico icomosaic[(#GET{quelmode}|=={mosaic}|?{on})]" title="<:walma:mosaiclic:>" >&nbsp;</a>
+		<a href="#GET{paramuri}&amp;mode=droite" id="icodroite" class="ico icodroite[ (#GET{quelmode}|=={droite}|?{icoon})]" title="<:walma:droite:>">&nbsp;</a>
+		<a href="#GET{paramuri}&amp;mode=gauche" id="icogauche" class="ico icogauche[ (#GET{quelmode}|=={gauche}|?{icoon})]" title="<:walma:gauche:>">&nbsp;</a>
+		<a href="#GET{paramuri}&amp;mode=image" id="icoimage" class="ico icoimage[ (#GET{quelmode}|=={image}|?{[(#ENV{diapo}|!={on}|?{icoon})]})]" title="Image">&nbsp;</a>
+		<a href="#GET{paramuri}&amp;mode=image[(#ENV{diapo}|!={on}|?{&amp;diapo=on})]" id="icodiapo" class="ico icodiapo[(#ENV{diapo}|=={on}|?{on icoon})]" title="<:walma:diaporama:> [(#ENV{diapo}|=={on}|?{Stop})]" >&gt;</a>
+		<a href="[(#URL_PAGE{walma}|parametre_url{mode,#ENV{mode}}|parametre_url{id_article,#ENV{id_article}|?{'',#ENV{portfolio}}})]" title="<:walma:tout_portfolios:>" class="grandw[(#ENV{id_article}|?{'','on'})]">w</a>
+		<div id="icolang">
+			[<:resultats_recherche:> <strong>(#RECHERCHE)</strong>]
+			<a href="[(#SELF|parametre_url{'lang',[(#ENV{lang}|=={''}|?{en,[(#ENV{lang}|=={fr}|?{en,fr})]})]})]#haut" title="<:walma:change_langue:>">
+			[[(#ENV{lang}|=={fr}|?{fr,en})]]
+			</a>
+		</div>
+	</div>
+
+	<div class="figerhauteurmin"></div>
+
+	[(#REM) vignettes et image]
+	<div class="vignettes vigns[(#GET{quelmode})]"><INCLURE{fond=wvign}{mode}{debut_vignettes}{debut_image}{id_article}{id_rubrique}{recherche}></div>
+	<div class="largeimage limage[(#GET{quelmode})]"><INCLURE{fond=wdoc}{mode}{debut_vignettes}{debut_image}{id_article}{id_rubrique}{recherche}></div>
+
+	<div class="baswalma">
+		[(#CONFIG{walma/walma_search}|?{' ',''}) [(#FORMULAIRE_RECHERCHE|?page=walma)] ]
+		<div id="copid">
+		<:walma:copidlibre:> <a href="http://elastick.net">WALMA 3.4b</a> <:walma:pour:> <a href="http://spip.net">SPIP 1.9.2</a>
+		</div>
+		<br class="nettoyeur"/>
+	</div>
+	
+</div>
+[(#REM)<!-- fin essentiel3 WALMA -->]
+
+<br class="nettoyeur" />
+	[(#REM) NOISETTE boite upload de documents si article dans l'url]
+	[(#ENV{id_article}|?{' ',''})
+		[(#CONFIG{walma/walma_upok}|?{' ',''})
+		<INCLURE{fond=noisettes/inc-upload}{id_article}>
+		]
+	]
+
+
+	[(#REM) NOISETTE texte et forum]
+	[(#CONFIG{walma/walma_forum}|?{' ',''})
+	<INCLURE{fond=noisettes/inc-txtforum}{id_article}{repondre}{id_forum}>
+	]
+	
+	
+	[(#REM) NOISETTE Pied de page ]
+	[(#CONFIG{walma/walma_pied}|?{' ',''})
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+	]
+</div>
+	
+[(#NOOP|detect_cfg|?{'</div>',
+'</body></html>'})]

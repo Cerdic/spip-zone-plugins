@@ -1,0 +1,297 @@
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+#CACHE{#ENV{cache,3600*100}}
+/*CSS walma 
+	Ce squelette CSS definit le style de Walma.
+	Configuration dynamique avec cfg sur
+	/ecrire/?exec=cfg&cfg=walma
+	Rendu du css sur
+	spip.php?page=walmacss
+*/
+
+[(#REM)/*JEU des couleurs*/]
+#SET{colorpage,#CONFIG{walma/walma_colorpage,#ffffff}}
+#SET{colorwalma,#CONFIG{walma/walma_colorwalma,#dadada}}
+#SET{colorvigns,#CONFIG{walma/walma_colorvigns,#ffffff}}
+#SET{colortetepied,#CONFIG{walma/walma_colortetepied,#ffffff}}
+#SET{colorbords,#CONFIG{walma/walma_colorbords,#666}}
+
+[(#REM)/*couleurs automatiques et orange des icones*/]
+[(#SET{colorlinktetepied,[(#GET{colortetepied}|=={#ffffff}|?{#dadada,[#(#GET{colortetepied}|couleur_foncer_si_claire|couleur_eclaircir_si_foncee)]})]})]
+[(#SET{hoverlink,[#(#GET{colorlinktetepied}|couleur_foncer_si_claire|couleur_eclaircir_si_foncee)]})]
+[(#SET{coloricoon,#FF9900})]
+
+[(#REM)/*JEU pour le mode (disposition d'affichage) la dimension de walma, le menu inclus? */]
+[(#SET{dim,#CONFIG{walma/walma_dim,800}})]
+[(#SET{minhauteur,[(#EVAL{[(#GET{dim})]*54/100})]})]
+[(#SET{dimvign,[(#EVAL{[(#GET{dim})]*15/100})]})]
+[(#SET{large_image,[(#EVAL{[(#GET{dim})]*61.2/100})]})]
+#SET{configmenu,#CONFIG{walma/walma_menu}}
+
+
+
+[(#REM)/*Le body, pour la demo devient un div specifique*/]
+.wbody{
+	font-family:Arial, Helvetica, sans-serif; margin:0;
+	clear:both; width:100%; height:auto; text-align:center; font-size:80%;
+	background-color:#GET{colorpage}; 
+	[color:#(#GET{colorpage}|couleur_extreme|couleur_inverser);] /*noir ou blanc suivant intensite*/
+}
+.wbody a{
+	text-decoration:none;
+	[color:#(#GET{colorpage}|couleur_foncer_si_claire|couleur_eclaircir_si_foncee);] 
+}
+/* Espaceur de blocs */
+.nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
+
+#wariane, #titrelogosite{
+	margin:0 auto; text-align:left; width:90%;
+}
+
+#titrelogosite span{
+	font-size:200%;
+}
+
+.wencadre{
+	 margin:0 auto; 
+	padding:1em 0 1em 0;
+/*necessaire pour ajouter un menu*/	
+[(#GET{configmenu}|?{
+	[width:(#EVAL{[(#GET{dim})]+220})px;],
+	[width:(#EVAL{[(#GET{dim})]+2})px;]
+	padding:0;
+})]
+}
+
+.blocwalma{
+	position:relative;
+	text-align:left;
+	margin: 0 auto;	margin-top:0.5em; margin-bottom:1em;
+	[float:(#GET{configmenu}|=={'menugauche'}|?{'right'});]
+	[float:(#GET{configmenu}|=={'menudroite'}|?{'left'});]
+	[width:(#GET{dim})px;]
+	[border: 1px solid (#GET{colorbords});]
+	[background:(#GET{colorwalma});]  
+	/*url("#CHEMIN{skins/fond.jpg}") */;
+	[color:#(#GET{colorwalma}|couleur_extreme|couleur_foncer_si_claire|couleur_eclaircir_si_foncee);] 
+}
+
+.blocwalma a{[color:#(#GET{colorwalma}|couleur_foncer_si_claire|couleur_eclaircir_si_foncee);] }
+.blocwalma a:hover {color:[#(#GET{colorwalma}|couleur_eclaircir)];}
+
+[(#CONFIG{walma/walma_skin}|?{' ',''})
+/*ajoutera un skin @import skin.css */
+#hmilieu{position:absolute; left:60px; top:-20px;}
+#cg{position:absolute; left:-10px; top:54px;}
+#hg{position:absolute; left:-10px; top:-20px;}
+#hd{position:absolute; left:430px; top:-20px;}
+
+#bmilieu{position:absolute; left:60px; top:330px;}
+#cd{position:absolute; left:430px; top:54px;}
+#bg{position:absolute; left:-10px; top:330px;}
+#bd{position:absolute; left:430px; top:330px;}
+]
+
+.hautwalma {
+	height:18px; padding-left:5px; padding-right:5px; font-size:12px;
+	[border-bottom:1px solid (#GET{colorbords});]
+	[background-color:(#GET{colortetepied});]
+}
+.baswalma{
+	clear:both;  font-size:10px; height:17px;
+	[border-top:1px solid (#GET{colorbords});]
+	[background-color:(#GET{colortetepied});]
+}
+.hautwalma a {color:#GET{colorlinktetepied};}
+.hautwalma a:hover, .baswalma a, a#centrecompt:hover {border-color:[(#GET{hoverlink})]; color:[(#GET{hoverlink})]}
+
+/*les boutons des modes*/
+.ico {display:block;cursor:pointer; float:left; font-size:8px; width:9px; margin:3px 5px 2px 2px; text-align:center; 
+border:1px solid #GET{colorlinktetepied};
+}
+a.icomosaic:hover{background-color:[(#GET{hoverlink})]}
+.icomosaic{background-color:#GET{colorlinktetepied};}
+.icomosaicon, a.icomosaicon:hover{background-color:[(#GET{coloricoon})]; border-color:[(#GET{coloricoon})];}
+.icogauche {border-left-width:4px;}
+.icodroite {border-right-width:4px;}
+a.icodiapo, a.icodiapoon{font-family: Verdana, Tahoma, Geneva, sans-serif;}
+a.icodiapoon{text-decoration:blink; cursor:wait; }
+.icoff{border-color:#GET{colorlinktetepied};}
+.icoon, a:hover.icoon {border-color:[(#GET{coloricoon})];}
+a.grandw, .grandwon{font-weight:bold;  font-size:14px; float:left;}
+a.grandwon{color:[(#GET{coloricoon})];}
+#icolang{float:right; font-size:11px;}
+
+
+.figerhauteurmin{
+	width:1px; float:left;
+	[height:(#GET{minhauteur})px;]
+}
+
+/*les compteurs vignettes et image*/
+.compteurvignettes, .compteurimage{
+	width:110px; height:16px; text-align:center; margin:0 auto; white-space:nowrap;
+	font-family: Arial, Verdana, Tahoma, Geneva, sans-serif;
+	[background-color:(#GET{colortetepied});]
+	[border:1px solid (#GET{colorbords});]
+}
+.compteurimage{margin:10px auto;  margin-bottom:2px; display:none; text-align:center;}
+
+.compteurvignettes a, .compteurimage a{
+	display:block; float:left; font-family: Arial, Verdana, Tahoma, Geneva, sans-serif;
+}
+#go, #back{
+	color:[(#GET{coloricoon})]; font-weight:bold; font-size:14px;
+}
+#centrecompt{
+	width:8em; vertical-align:middle; font-size:11px; line-height:14px;
+}
+#go{
+	float:right;
+}
+
+/* les vignettes*/
+.vignettes{}
+.vignsimage{display:none;}
+.vignsdroite{width:32%; padding:12px 1.8% 0% 0%; float:right;}
+.vignsgauche{width:32%; padding:12px 0% 0% 2.2%; float:left;}
+.vignsmosaic{width:95%; padding:12px 1% 3% 3%; float:left; }
+.vignettes ul{margin:0 auto; padding:0; float:left;}
+
+.vignettes li{
+	list-style-type:none; float:left; text-align:center; margin:2px;
+	[background-color:(#GET{colorvigns});]
+	[height:(#GET{dimvign})px;]
+	[width:(#GET{dimvign})px;]
+	overflow:hidden;
+}
+li.vigneton {background:[#(#GET{colorvigns}|couleur_eclaircir)];}
+.vignettes span{
+	width:80%; display:block; font-size:10px; margin:0 auto;
+}
+.vignettes img {
+	border:none;
+	[margin-top:(#EVAL{[(#GET{dimvign})]*8/100})px;]
+}
+.vignettes cite{display:none;}
+
+/* l'image */
+.largeimage{
+	width:63%; text-align:center; position:relative; margin:0; margin-top:32px;
+}
+.limageimage{float:none; margin:0 auto; margin-bottom:30px;}
+.limagedroite{float:right; margin-right:1.5%;}
+.limagegauche{float:left; margin-left:1%;}
+.limagemosaic{display:none}
+
+.largeimage dd, .largeimage p, .largeimage img, .largeimage dl{
+	   margin:0; padding:0; border:none;
+}
+dd.decrire { width: #GET{large_image}px; margin:0 auto; margin-bottom:1em;}
+
+.largeimage dt{
+	font-weight:bold;
+}
+
+.largeimage dd span{
+	font-size:0.8em; display:block;
+}
+
+.largeimage dd span a{
+	text-decoration:underline;
+}
+
+
+[(#GET{configmenu}|?{' ',''})
+/*Si on a demande un menu*/
+#wmenu { 
+	[width:(#GET{configmenu}|=={'menuhaut'}|?{100%,180px});]
+	[float:(#GET{configmenu}|=={'menugauche'}|?{left,right});]
+	line-height:1.5em; padding:1em;
+	[(#GET{configmenu}|=={'menuhaut'}|?{float:none; border:none;})]
+	[color:#(#GET{colorpage}|couleur_extreme|couleur_foncer_si_claire|couleur_eclaircir_si_foncee);]
+}
+#wmenu ul {
+	list-style-type:none; margin:0; padding:0; text-align:left;
+}
+#wmenu li {
+	[display:(#GET{configmenu}|=={'menuhaut'}|?{inline});]
+}
+#wmenu ul ul li{
+border-left:1px solid #GET{colorbords}; padding:0 0.4em 0 0.4em;	
+}
+a.inarray{filter:alpha(opacity=100);-moz-opacity:1;opacity:1;-khtml-opacity:1;}
+a.notinarray{filter:alpha(opacity=50);-moz-opacity:.50;opacity:.50;-khtml-opacity:0.5;}
+a.rubriqon{[color:#(#GET{colorpage}|couleur_extreme|couleur_foncer_si_claire|couleur_eclaircir_si_foncee);] }
+a.art, a.arton{font-size:0.8em;}
+a.arton{font-weight:bold;}
+#wmenu a:hover{text-decoration:underline}
+]
+
+
+
+/*la recherche*/
+.formulaire_spip, .formulaire_recherche{
+	margin:0; padding:0; width:70px; float:left; font-size:10px;
+}
+.formulaire_spip input, .formulaire_recherche input{
+	margin:0; padding:0.1em 0 0 0.2em;  width:70px; height:15px; 
+	color:#666;
+	background-color:#e8e8e8;
+	border:none; 
+}
+
+#noresult{position:absolute; width:90%; top:20%; left:20%; font-size:200%}
+
+
+#copid{
+	float:right; padding:2px;
+}
+
+[(#CONFIG{walma/walma_forum}|?{' ',''})
+/* si on a demande le forum de la galerie */
+/*  Mise en forme des textes  */
+.ajoutextforum{margin-bottom:1em; margin-top:3em; text-align:left; color:#555; border:1px solid #dadada; height:auto; background-color:#f9f9f9;}
+.cartouche{padding: 2em 0 0 4em; text-align:left; font-size:1.5em;}
+.ajoutextforum h1,.ajoutextforum h2,.ajoutextforum h3{margin:0.2em 0 0.2em 0;}
+.logoarticle {margin:2em 5em 2em 2em; float:right;}
+.chapo { font-weight:bold; font-size:1.2em; margin-bottom: 2em;}
+.texte{padding: 3em 8em 5em 8em; text-align:left;  color:#333333}
+.ps {padding-top: 0.6em; margin-top: 0.6em;border-top: 1px dashed #404040; }
+.notes {margin-top: 0.6em;margin-bottom: 0.6em;border-top: 1px solid #a0a0a0;padding: 1.5em;}
+.chapo, .texte, .texte p.spip, .ps, .notes {font-family:Arial, Helvetica, sans-serif;}
+
+
+.formforum {width:400px; margin:0 auto; font-size:0.8em;}
+.forumgalerie {width:80%; margin:0 auto;}
+.boutonforum{ position:relative; float:right; text-align:center; top:-5px; right:-5px; width:140px; display:block; padding: 0.2em; text-decoration:none; color:#777; background-color:#f9f9f9; }
+.reponse a{ text-decoration:none; color:#0099CC; }
+.forumgalerie span{color:#666666; font-size:0.9em;}
+.thread{font-size:0.8em; position:relative; font-family:Verdana, Arial, Helvetica, sans-serif; background-color:#e9e9e9; padding:1em; padding-top:0;  text-align:left; margin:1em;}
+.thread, .boutonforum{  border: 1px solid #C6DDDC; border-bottom: 1px solid #ABD6CC; -moz-border-radius: 1em;}
+.guillemet{ font-size:10em; font-family:Garamond; position:absolute; top:-30px; left:-5px; color:#3399CC;}
+.fil{ background-color:#fff; border:1px dashed #dadada; margin:0.8em 2em 0.8em 2em;}
+.topfil{border-bottom:1px dashed #dadada; background-color:#f9f9f9; padding:0.5em;  }
+.filtxt{background-color:#fff;  margin-bottom:0.8em; padding:0.5em 1em 0.5em 1em; }
+.reponse{text-align:right;}
+.topthread{padding:0.8em; padding-left:0; margin-left:4em;}
+.topthreadtxt, .forumgalerie blockquote{ border:1px solid #ccc; background-color:#fff;  margin-bottom:0.8em; padding:0.5em 1em 0.5em 1em; }
+.topthreadtxt{margin:0em 2em 0.8em 2em;}
+]
+ 
+#telecharge{position:relative; width:200px; background-color:#dadada; color:#000; padding:1em}
+#pied img{margin-top:1em; border:none;}
+
+/*agrandissement*/
+.agrandir{position:relative; margin:0 auto;}
+.puddingtop{padding-top:30px}
+.largetout{position:absolute; height:auto; margin-right:0;  margin-left:0; min-height:#GET{minhauteur}px; z-index:10; left:-1px; top:-14px; text-align:center; width:#GET{dim}px; background-color:#GET{colorwalma}; border:1px solid #GET{colorbords}}
+.menuimage{position:absolute; top:30px; left:#GET{dim}px; height:300px;
+z-index:2000; width:60px; background-color:#dadada; border:1px solid #777; text-align:center; }
+.menuimage a{font-size:4em; display:block; margin:0 auto;}
+.menuimage #centrecompt{font-size:1.5em;  display:block; margin:0 auto;}
+
+#moinsvite{position:absolute; z-index:1000; top:44px; left:20px; font-size:17px; [color:#(#GET{colorwalma}|couleur_inverser|couleur_foncer_si_claire|couleur_eclaircir_si_foncee);] }
+#plusvite{position:absolute; z-index:1000; top:40px; left:31px; font-size:22px; [color:#(#GET{colorwalma}|couleur_inverser|couleur_foncer_si_claire|couleur_eclaircir_si_foncee);] }
+
+

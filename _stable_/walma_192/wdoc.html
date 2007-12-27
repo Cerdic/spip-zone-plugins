@@ -1,0 +1,65 @@
+[<!--(#REM) permet de ne pas afficher les boutons de recalcul-->]#HTTP_HEADER{Content-Type: text/html;  charset=#CHARSET}
+[(#REM)<!--Les SET quelmode et dim se finissent par les jeux par defaut au cas ou cfg ne soit pas actif-->]
+[(#SET{quelmode,[(#ENV{mode,#CONFIG{walma/walma_mode,droite}})]})]
+[(#SET{dim,#CONFIG{walma/walma_dim,800}})]
+[(#SET{hte_image,[(#EVAL{[(#GET{dim})]*50/100}|round)]})]
+[(#SET{large_image,[(#EVAL{[(#GET{dim})]*61.2/100}|round)]})]
+[<!--(#REM)  on tri les documents par id_article lorsque plusieurs articles sont affiches sinon par titre-->]
+[(#SET{queltri,[(#ENV{id_article}|?{'titre','id_article'})]})]
+
+
+[<!--(#REM)  on recup l'array des articles, 
+(on est obligŽ de reprendre le code pour ajax, sinon on peut l'envoyer par critre dans l'include spip de walma.html {arrayarts=#GET{arraywalma}})-->]
+[(#SET{arraywalma,#ARRAY})]
+[(#SET{arrayrub,#ARRAY})]
+
+<BOUCLE_allrub(RUBRIQUES)>
+[(#SET{arrayrub,[(#GET{arrayrub}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_RUBRIQUE}})]})]
+</BOUCLE_allrub>
+
+[(#SET{whichrubs,[(#CONFIG{walma/espace_walma,#GET{arrayrub},''})]})]
+
+<BOUCLE_rubcfg(ARTICLES){id_article?}{id_rubrique?}{id_rubrique IN #GET{whichrubs}}>
+[(#ID_RUBRIQUE|in_array{#GET{whichrubs}}|?{
+[(#SET{arraywalma,[(#GET{arraywalma}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}})]})]
+})]
+[(#ENV{id_article}|?{[(#SET{thisrub, #ID_RUBRIQUE})],[(#SET{thisrub,#ENV{id_rubrique}})]})]
+</BOUCLE_rubcfg></B_rubcfg>[(#SET{arraywalma,''})]<//B_rubcfg>
+
+	<!-- si une recherche ne renvoit aucun resultat, on vide l'array-->
+	<BOUCLE_search(DOCUMENTS){id_article IN #GET{arraywalma}}{recherche?}{mode=document}{extension IN png,jpg,gif}>
+	[(#POINTS|?{'',#SET{noresult,rien}})]
+	</BOUCLE_search>
+	[(#RECHERCHE|?{[(#GET{noresult}|?{[(#SET{arraywalma,''})]})]})]
+
+
+	<B_image>
+	[<div class="compteurimage" [style="(#GET{quelmode}|=={image}|?{display:block;})"]>
+	(#PAGINATION{walma}|sinon{ #TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{<:walma:images:>,<:walma:image:>})]})
+	</div>]
+
+	<BOUCLE_image(DOCUMENTS){id_article IN #GET{arraywalma}}{par #GET{queltri}}{recherche?}{mode=document}{extension IN png,jpg,gif}{pagination 1}>
+	<dl><dd>
+		<a href="#URL_DOCUMENT" title="#TITRE">
+		<img src="[(#URL_DOCUMENT|image_reduire{[(#GET{large_image})],[(#GET{hte_image})]}|extraire_attribut{src}|url_absolue)]" alt='[(#TITRE|supprimer_numero)]'
+		width='[(#URL_DOCUMENT|image_reduire{[(#GET{large_image})],[(#GET{hte_image})]}|largeur)]px' 
+		[(#REM) <!--si la reduction n'a pas ete calculee correctement on ne met pas le height -->]
+		[(#URL_DOCUMENT|image_reduire{[(#GET{large_image})],[(#GET{hte_image})]}|hauteur|>{[(#GET{hte_image})]}|?{
+		style="width:[(#GET{large_image})]px",
+		height='[(#URL_DOCUMENT|image_reduire{[(#GET{large_image})],[(#GET{hte_image})]}|hauteur)]px'
+		})]
+		/>
+		</a>
+		
+		<BOUCLE_thearticle(ARTICLES){id_document}>
+<!--lien retour sur les articles/galeries d'origines-->[(#ENV{id_article}|=={''}|?{
+							 <span><:info_portfolio:> :
+							[<a href="[(#URL_PAGE{walma}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{'mode',#GET{quelmode}})]">
+							 (#TITRE|supprimer_numero)</a>]</span>
+							})]
+		</BOUCLE_thearticle>
+		</dd>
+		<dt class="#EDIT{titre}">[(#TITRE|supprimer_numero)]&nbsp;</dt>
+		<dd class="decrire #EDIT{descriptif}">[(#DESCRIPTIF)]&nbsp;</dd>
+	</dl>
+	</BOUCLE_image>
