@@ -9,10 +9,8 @@
  * © 2006 - Distribue sous licence GPL
  *
  */
-if (!defined('_DIR_PLUGIN_GESTIONDOCUMENTS')){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-	define('_DIR_PLUGIN_GESTIONDOCUMENTS',(_DIR_PLUGINS.end($p)));
-}
+
+include_spip('exec/inc_gestdoc_exec');
 
 function generer_query_string($conteneur,$id_type,$nb_aff,$filtre){
   $query = ($conteneur?"conteneur=$conteneur&":"")
@@ -28,12 +26,6 @@ function exec_portfolio_edit(){
 	global $connect_statut;
 	//global $modif;
 	
-	include_spip ("inc/presentation");
-	include_spip ("inc/documents");
-	include_spip('inc/indexation');
-	include_spip ("inc/logos");
-	include_spip ("inc/session");
-
 	//
 	// Recupere les donnees
 	//
@@ -44,19 +36,14 @@ function exec_portfolio_edit(){
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T("gestdoc:tous_docs"), "documents", "documents");
 	}
-	debut_gauche();
+	gestdoc_compat_boite('debut_gauche');
 
 
 	//////////////////////////////////////////////////////
 	// Boite "voir en ligne"
 	//
 
-	debut_boite_info();
-
-	echo propre(_T('gestdoc:info_doc'));
-
-	fin_boite_info();
-
+	echo debut_boite_info(true), propre(_T('gestdoc:info_doc')), fin_boite_info(true);
 
 	global $connect_statut;
 	if ($connect_statut != '0minirezo') {
@@ -410,9 +397,9 @@ function exec_portfolio_edit(){
 		if ($table_need_update){
 			icone_horizontale (_T('gestdoc:mis_jour_tailles'), 
 				generer_url_ecrire('portfolio_edit',"updatetable=oui&".generer_query_string($conteneur,$id_type,$nb_aff,$filtre)),
-				"administration-24.gif");
+				"administration-24.gif",'',false);
 		}
-		icone_horizontale (_T('gestdoc:reparer_liens'), generer_url_ecrire('reparer_liens_documents'),"../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png");
+		icone_horizontale (_T('gestdoc:reparer_liens'), generer_url_ecrire('reparer_liens_documents'),"../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png",'',false);
 
 		echo "<form action='".generer_url_ecrire('portfolio_edit',generer_query_string($conteneur,"",$nb_aff,$filtre))."' method='post'><div>\n";
 		echo _T('gestdoc:type') . "<br /><select name='id_type'";
@@ -481,7 +468,7 @@ function exec_portfolio_edit(){
 	
 		fin_raccourcis();
 	
-		debut_droite();
+		gestdoc_compat_boite('debut_droite');
 
 		if (count($documents)) {
 			if ($titre_table) echo "<div style='height: 12px;'></div>";

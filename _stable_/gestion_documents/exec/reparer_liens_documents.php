@@ -10,20 +10,11 @@
  *
  */
 
-if (!defined('_DIR_PLUGIN_GESTIONDOCUMENTS')){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-	define('_DIR_PLUGIN_GESTIONDOCUMENTS',(_DIR_PLUGINS.end($p)));
-}
+include_spip('exec/inc_gestdoc_exec');
 
 function exec_reparer_liens_documents(){
 	global $connect_statut;
 	
-	include_spip ("inc/presentation");
-	include_spip ("inc/documents");
-	include_spip ("inc/logos");
-	include_spip ("inc/session");
-	include_spip ("inc/indexation");
-
 	//
 	// Recupere les donnees
 	//
@@ -34,25 +25,21 @@ function exec_reparer_liens_documents(){
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T("gestdoc:reparer_liens"), "documents", "documents");
 	}
-	debut_gauche();
+	gestdoc_compat_boite('debut_gauche');
 
 
 	//////////////////////////////////////////////////////
 	// Boite "voir en ligne"
 	//
 
-	debut_boite_info();
-
-	echo propre(_T('gestdoc:info_reparer'));
-
-	fin_boite_info();
+	echo debut_boite_info(true), propre(_T('gestdoc:info_reparer')), fin_boite_info(true);
 
 	debut_raccourcis();
 	icone_horizontale (_T('gestdoc:portfolio'), 
 		generer_url_ecrire('portfolio_edit'),
-		"../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png");
+		"../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png",'',false);
 	fin_raccourcis();
-	debut_droite();
+	gestdoc_compat_boite('debut_droite');
 
 	global $connect_statut;
 	if ($connect_statut != '0minirezo') {

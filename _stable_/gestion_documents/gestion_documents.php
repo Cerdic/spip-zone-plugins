@@ -15,25 +15,25 @@ if (!defined('_DIR_PLUGIN_GESTIONDOCUMENTS')){
 	define('_DIR_PLUGIN_GESTIONDOCUMENTS',(_DIR_PLUGINS.end($p)));
 }
 
-	function GestionDocuments_ajouterBoutons($boutons_admin) {
-		// si on est admin
-		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]
-		AND $GLOBALS["options"]=="avancees" ) {
+function GestionDocuments_ajouterBoutons($boutons_admin) {
+	// si on est admin
+	if ($GLOBALS['connect_statut']=="0minirezo" && $GLOBALS["connect_toutes_rubriques"]
+	AND $GLOBALS["options"]=="avancees" ) {
 
-		  // on voit les bouton dans la barre "accueil"
-			$boutons_admin['naviguer']->sousmenu["portfolio_edit"]= new Bouton(
-			"../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png",  // icone
-			_T("gestdoc:tous_doc") //titre
-			);
-		}
-		return $boutons_admin;
+	  // on voit les bouton dans la barre "accueil"
+		$boutons_admin['naviguer']->sousmenu["portfolio_edit"]= new Bouton(
+		"../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png",  // icone
+		_T("gestdoc:tous_doc") //titre
+		);
 	}
+	return $boutons_admin;
+}
 
 
-	function GestionDocuments_ajouterOnglets($flux) {
-		$rubrique = $flux['args'];
-		return $flux;
-	}
+function GestionDocuments_ajouterOnglets($flux) {
+	$rubrique = $flux['args'];
+	return $flux;
+}
 
 
 ?>
