@@ -10,11 +10,11 @@ function BTG_barre($id, $name) {
 	return "<div id='barre_typo_$id' style='display: none;'>".afficher_barre("document.getElementsByName('$name')[0]").'</div>';
 }
 
-function barre_typo_generalisee_insertion_javascript() {
-	if (!function_exists('lire_config')) return '';
+function barre_typo_generalisee_header_prive($texte) {
+	if (!function_exists('lire_config')) return $texte;
 	include_spip('inc/barre');
 	$activer_barres = "";
-	
+
 	switch($_GET['exec']) {
 	case 'articles_edit':
 		// barres dans la page article
@@ -64,17 +64,17 @@ function barre_typo_generalisee_insertion_javascript() {
 		if (BTG_on('auteurs_quietesvous')) $activer_barres .= BTG_insertBefore('textarea','auteur_quietesvous','bio');
 	}
 	if (strlen($activer_barres))
-		return "<script type=\"text/javascript\"><!--
+		return "$texte<script type=\"text/javascript\"><!--
 $(document).ready(function(){
 $activer_barres});
 //--></script>
 ";
-	return '';
+	return $texte;
 }
 
-function barre_typo_generalisee_barre_typo_generalisee_body_prive ($texte) {
-	if (!function_exists('lire_config')) return ($texte);
-	$texte .= barre_typo_generalisee_insertion_javascript();
+function barre_typo_generalisee_body_prive($texte) {
+	if (!function_exists('lire_config')) return $texte;
+	include_spip('inc/barre');
 	$barre_temporaire = "";
 	
 	switch($_GET['exec']) {

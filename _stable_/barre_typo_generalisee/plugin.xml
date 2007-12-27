@@ -19,7 +19,10 @@
 	<lien>http://www.spip-contrib.net/Barre-typographique-generalisee,15</lien> <!-- URI de documentation -->
 	<pipeline>
   		<nom>body_prive</nom>
-  		<action>barre_typo_generalisee_body_prive</action>
+  		<inclure>barre_typo_generalisee_define_prive.php</inclure>
+ 	</pipeline>
+	<pipeline>
+  		<nom>header_prive</nom>
   		<inclure>barre_typo_generalisee_define_prive.php</inclure>
  	</pipeline>
 
