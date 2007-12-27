@@ -44,6 +44,17 @@ Bugs et autres elements non finis :
 -* Boutons d'admin sur l'interface publique ?
 -* Que fait test_inscriptions dans spipbb_options ?
 
+Voir l'intéret de :
+-* http://www.spip-contrib.net/Les-fenetres-flottantes
+-* http://www.spip-contrib.net/Notation-d-articles-SPIP
+-* http://www.spip-contrib.net/reCAPTCHA
+-* http://www.spip-contrib.net/Plugin-Champs-homonymes
+-* http://www.spip-contrib.net/Plugin-Captcha2
+-* http://www.spip-contrib.net/Exemple-d-utilisation-de-la-boucle
+-* http://www.spip-contrib.net/Plugin-Suivi-des-forums
+-* http://www.spip-contrib.net/Squelettes-par-profil
+-* http://www.spip-contrib.net/Personnalisation-par-profils-avec
+-* http://www.spip-contrib.net/Les-crayons
 
 Documentation
 ==============

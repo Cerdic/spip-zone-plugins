@@ -15,13 +15,13 @@ police par defaut des tableau : voir table.spipforum
 #post_ferme {}
 #liste_post{}
 #post_origine {}
-#ecrire { width:650px;}
+#ecrire { width:100%;}
 #prev {}
 #profile { width:100%; }
 #auteur { width:500px; }
-#derniers_msg { width:650px; }
-#membres { width:600px; }
-#inscript { width:600px; }
+#derniers_msg { width:100%; }
+#membres { width:100%; }
+#inscript { width:100%; }
 #resultats { width:80%; }
 
 #liste_refus_suivi { /* v.0.6 */
