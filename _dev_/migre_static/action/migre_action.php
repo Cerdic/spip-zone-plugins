@@ -498,7 +498,7 @@ function migre_nettoie_html($anetoyer)
 	$res = str_replace("\n", "\r", $res);
 
 	return $res;
-} migre_nettoie_html
+} // migre_nettoie_html
 
 // ------------------------------------------------------------------------------
 // [fr] Compare le formulaire avec les valeur en meta et les met à jour
