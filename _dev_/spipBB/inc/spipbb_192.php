@@ -51,23 +51,24 @@ if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','>=')) {
 }
 spipbb_log('included',2,__FILE__);
 
+
 include_spip('base/abstract_sql'); // SPIP 192
 include_spip('base/db_mysql'); // SPIP 192
 
-/*
-Principales fonctions definies dans l'ordre alphanumerique :
-
-sql_count
-sql_delete
-sql_fetch
-sql_fetsel
-sql_getfetsel
-sql_insertq
-sql_query
-sql_select
-sql_updateq
-
-*/
+//
+// Principales fonctions definies dans l'ordre alphanumerique :
+// 
+// sql_count
+// sql_delete
+// sql_fetch
+// sql_fetsel
+// sql_getfetsel
+// sql_insertq
+// sql_query
+// sql_select
+// sql_updateq
+// 
+//
 
 #------------------------------------------------------------#
 //  sql_fetsel
@@ -427,10 +428,19 @@ function sql_showtable($table, $table_spip = false, $serveur='')
 #------------------------------------------------------------#
 # calcul_bornes_pagination devient bornes_pagination
 # cf http://article.gmane.org/gmane.comp.web.spip.devel/43020/match=calcul_bornes_pagination
+# voir http://doc.spip.org/@calcul_bornes_pagination
+# de inc/filtres.php spip 192 (sinon on a une inclusion infinie)
+# en fait il devient filtre_bornes_pagination_dist dans inc/filtres en spip 193
 #------------------------------------------------------------#
 if (!function_exists('bornes_pagination')) {
 function bornes_pagination($courante, $nombre, $max = 10) {
-	return calcul_bornes_pagination($courante, $nombre, $max);
-} }
+	if($max<=0 OR $max>=$nombre)
+		return array(1, $nombre);
+
+	$premiere = max(1, $courante-floor(($max-1)/2));
+	$derniere = min($nombre, $premiere+$max-2);
+	$premiere = $derniere == $nombre ? $derniere-$max+1 : $premiere;
+	return array($premiere, $derniere);
+} } // bornes_pagination
 
 ?>

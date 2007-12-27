@@ -22,14 +22,6 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-# h. pourquoi ??
-/*
-if (!defined('_DIR_PLUGIN_SPIPBB')){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_SPIPBB',(_DIR_PLUGINS.end($p))."/");
-}
-*/
-
 $table_des_traitements['TITRE'][]= 'supprimer_numero(typo(%s))';
 
 include_spip('base/spipbb'); // requis pour la mutualisation et les boucles avec les tables additionnelles
@@ -118,8 +110,8 @@ function test_inscription($mode, $mail, $nom, $id=0)
 #
 # Definition de tous les extras possibles (voir base/sap_spipbb.php)
 #
-/* lire_config fourni par CFG */
-/* Voir si pas plus simple d'utiliser meta ?*/
+// lire_config fourni par CFG
+// Voir si pas plus simple d'utiliser meta ?
 if(function_exists('lire_config')) {
 	// a activer seulement si spipbb est configure
 	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);

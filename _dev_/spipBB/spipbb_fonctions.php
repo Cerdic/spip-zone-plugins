@@ -85,17 +85,16 @@ function spipbb_maintenance($id_article)
 } // spipbb_maintenance
 
 
-/*
-+---------------------------------------------+
-Filtre : Nombre de messages 
-base : BoOz Email:booz@bloog.net
-Compte le nombre de messages d'un auteur
-Appel dans squellette : [(#ID_AUTEUR|spipbb_nb_messages)]
-+---------------------------------------------+
+
+//+---------------------------------------------+
+//Filtre : Nombre de messages 
+//base : BoOz Email:booz@bloog.net
+//Compte le nombre de messages d'un auteur
+//Appel dans squellette : [(#ID_AUTEUR|spipbb_nb_messages)]
+//+---------------------------------------------+
 ## h.
 # a renommer plus simple ! => |nombre_post ??
 ##
-*/
 function spipbb_nb_messages($id_auteur){
 	$nb_mess = "";
 	$result_auteurs = sql_select('auteur','spip_forum',"id_auteur=$id_auteur");
@@ -127,14 +126,12 @@ function spipbb_nb_messages_groupe($id_bidon){
 	return join(", ",$aut_nb) ;
 } // spipbb_nb_messages_groupe
 
-/*
-+----------------------------------+
-Filtre :  citation
-Base : BoOz
-Modif scoty  29/10/06 .. -> spip 1.9.1/2 
-Affiche le texte à citer    
-+-------------------------------------+ 
-*/
+//+----------------------------------+
+//Filtre :  citation
+//Base : BoOz
+//Modif scoty  29/10/06 .. -> spip 1.9.1/2 
+//Affiche le texte à citer    
+//+-------------------------------------+ 
 function barre_forum_citer($texte, $lan, $rows, $cols, $lang='')
 {
 	if (!$premiere_passe = rawurldecode(_request('retour_forum'))) {
@@ -152,7 +149,5 @@ function barre_forum_citer($texte, $lan, $rows, $cols, $lang='')
 	}
 	return barre_textarea($texte, $rows, $cols, $lang);
 } // barre_forum_citer
-
-
 
 ?>
