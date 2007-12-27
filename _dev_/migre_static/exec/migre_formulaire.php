@@ -156,8 +156,16 @@ function migre_formulaire($row=array())
 	$id_secteur = $row['id_secteur'];
 	$valeur_url= (!empty($GLOBALS['migrestatic']['migre_liste_pages'])) ? $GLOBALS['migrestatic']['migre_liste_pages'] : _T('migrestatic:liste_des_pages') ;
 	$valeur_test= (!empty($GLOBALS['migrestatic']['migre_test'])) ? $GLOBALS['migrestatic']['migre_test'] : "checked" ;
+	
+	if (!function_exists('editer_article_rubrique')) {
+		$chercher_rubrique=charger_fonction('chercher_rubrique','inc');
+		$selrub=$chercher_rubrique($id_rubrique, 'article', false);
+
+	}
+	else $selrub=editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider);
+	
 	$form= "\n".
-		editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider) .
+		$selrub .
 		"\n<p><b>" .
 		_T('migrestatic:choix_mot_cle') .
 		"</b>\n<br>" ._T('migrestatic:sous_choix_mot_cle') ."<br />".
