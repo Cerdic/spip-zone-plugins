@@ -14,10 +14,12 @@
 [(#GET{i}|<={#ENV{nombre_pages}}|?{' ',' '})
 [(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })]
 ]
-		<a id="centrecompt" href="[(#SELF|parametre_url{id_document,''}|parametre_url{debut_vignettes,''}|parametre_url{debut_image,''}|parametre_url{#ENV{debut},''}|parametre_url{grande,''}|parametre_url{pas,''}|parametre_url{recherche,#RECHERCHE})][(#ENV{url}|match{ajaxdoc}|?{&amp;mode=image})]">
-		[(#ENV{pas}|=={1}|?{[(#GET{item})],[(#ENV{page_courante}|=={1}|?{[(#ENV{page_courante})],[(#EVAL{[(#GET{item})]-[(#ENV{pas})]+1})]}) ]-[ (#GET{item}|>={[(#TOTAL)]}|?{[(#TOTAL)],[(#GET{item})]})] })][ / (#TOTAL)]
-		</a>
+
 
 
 		[(#INCLURE{fond=modeles/paginationitemw}{num=#GET{i}}{sens=go}{texte=&gt;}{url=#ENV{url}|parametre_url{debut_image,#ENV{page_courante}|=={#GET{derniere}}|?{'',#GET{item}}}|parametre_url{grande,''}|parametre_url{#ENV{debut},#ENV{page_courante}|=={#GET{derniere}}|?{'',#GET{item}}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]		
 		
+		
+		<a id="centrecompt" href="[(#SELF|parametre_url{id_document,''}|parametre_url{debut_vignettes,''}|parametre_url{debut_image,''}|parametre_url{#ENV{debut},''}|parametre_url{grande,''}|parametre_url{pas,''}|parametre_url{recherche,#RECHERCHE})][(#ENV{url}|match{ajaxdoc}|?{&amp;mode=image})]">
+		[(#ENV{pas}|=={1}|?{[(#GET{item})],[(#ENV{page_courante}|=={1}|?{[(#ENV{page_courante})],[(#EVAL{[(#GET{item})]-[(#ENV{pas})]+1})]}) ]-[ (#GET{item}|>={[(#TOTAL)]}|?{[(#TOTAL)],[(#GET{item})]})] })][ / (#TOTAL)]
+		</a>

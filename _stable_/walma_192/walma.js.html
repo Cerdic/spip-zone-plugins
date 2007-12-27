@@ -33,9 +33,11 @@ function stopdiapowalma(){
 
 var reinitcrayon = function() {
 [(#EVAL{defined('_DIR_PLUGIN_CRAYONS')}|?{' '})
- $(".crayon-active, .crayon-boutons").remove(); 
+if(typeof(configCrayons)!= "undefined"){
+ $(".crayon-active, .crayon-boutons").remove();
 	if (cQuery && configCrayons.droits) {
 	   cQuery(".largeimage .crayon:lt(1000), inside").filter(configCrayons.droits).initcrayon();
+	}
 	}
 ]
 }
