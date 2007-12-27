@@ -1,4 +1,10 @@
-﻿2007-12-25  chryjs  <chryjs!@!free!.!fr>
+﻿2007-12-27  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction bug pagination dans spipbb_192 : qui provoquait une fonction infiniment récursive...
+ * Corrige le bug auteurs_rubriques table SQL inconnue en 1.9.2
+
+
+2007-12-25  chryjs  <chryjs!@!free!.!fr>
 
  * Conversion des documents en format LF (problemes de logs)
  * Affichage des logs dans page admin_debug

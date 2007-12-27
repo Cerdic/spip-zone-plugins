@@ -127,6 +127,12 @@ $table_des_tables['spam_words'] = 'spam_words';
 $table_des_tables['spam_words_log'] = 'spam_words_log';
 $table_des_tables['ban_liste'] = 'ban_liste';
 
+// c: 27/12/7 corrige le bug auteurs_rubriques table SQL inconnue en 1.9.2
+// je ne suis pas sûr que ce soit très bien de faire cela...
+if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
+	$table_des_tables['auteurs_rubriques'] = 'auteurs_rubriques';
+}
+
 //$table_date['articles']='date';
 
 ?>
