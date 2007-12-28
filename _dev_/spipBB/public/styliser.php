@@ -74,7 +74,7 @@ function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html'
 		if ( is_array($spipbb_meta)
 		  AND ($fond=="article" OR $fond=="rubrique")
 		  AND $id_rubrique>0 ) {
-			spipbb_log("debug spipbb:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'],3,"p_s");
+			spipbb_log("id_rub:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'],3,"p_s");
 
 			if (empty($spipbb_meta['squelette_filforum']) OR empty($spipbb_meta['squelette_groupeforum']) ) spipbb_init_metas($id_rubrique);
 			$id_rub = $id_rubrique;
@@ -90,7 +90,7 @@ function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html'
 				if ( $squel=find_in_path("$sq.$ext") ) $squelette = substr($squel, 0, - strlen(".$ext"));
 			}
 		}
-		else spipbb_log("debug spipbb:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'],3,"p_s") ;
+		else spipbb_log("id_rub:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'],3,"p_s2") ;
 	}
 
 	// traitement normal
@@ -123,7 +123,7 @@ function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html'
 	}
 
 	return array($squelette, $ext, $ext, "$squelette.$ext");
-} // public_styliser_dist
+} // public_styliser
 
 } // fin de la condition de version de SPIP
 
