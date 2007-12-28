@@ -2,7 +2,7 @@
 
  * Ajout d'un controle de revision pour les fonctions trace_query http://www.spip-contrib.net/Plugin-SpipBB#forum400542
  * Presentation du profil auteur dans modeles
-
+ * Probleme de crochets dans entete
 
 2007-12-27  chryjs  <chryjs!@!free!.!fr>
 
