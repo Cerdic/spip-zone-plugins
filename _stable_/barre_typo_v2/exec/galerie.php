@@ -6,11 +6,13 @@ http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images
 
 remplacer test_layer()	par  ???
 */
-if(!function_exists('test_layer')) { function test_layer() { return $GLOBALS['browser_layer']; } }
 
 include_spip('inc/minipres');
 include_spip('inc/presentation');
 include_spip('inc/documents');
+
+if(!function_exists('test_layer')) { function test_layer() { return $GLOBALS['browser_layer']; } }
+if(function_exists('bouton_block_depliable')) @define('_deplie193', '1');
 
 function exec_galerie() {
 	global $connect_toutes_rubriques,$connect_id_auteur, $connect_statut;
@@ -22,13 +24,19 @@ function exec_galerie() {
 
 	echo install_debut_html(_T('bartypenr:galerie'));
 
-	echo '<script type="text/javascript" src="../dist/javascript/layer.js"></script><table width="100%" border="0" cellpadding="5" cellspacing="0" style="text-align:'.$spip_lang_left.';"><tr><td>';
+	// les pliages utilisent desormais jQuery
+	if(version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) echo '<script src="../spip.php?page=jquery.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="../spip.php?page=style_prive&amp;ltr=left&amp;couleur_claire=C5E41C&amp;couleur_foncee=9DBA00" id="cssprivee" />
+<!--[if lt IE 8]>
+<link rel="stylesheet" type="text/css" href="../spip.php?page=style_prive_ie&amp;ltr=left&amp;couleur_claire=C5E41C&amp;couleur_foncee=9DBA00" />
+<![endif]-->';
+	echo '<script type="text/javascript" src="../dist/javascript/layer.js"></script>
+<table width="100%" border="0" cellpadding="5" cellspacing="0" style="text-align:'.$spip_lang_left.';"><tr><td>';
 	list($data, $nbDocsTotal) = sous_arborescence(0);
 	?>
 	<script type="text/javascript" language="JavaScript" >
 	<!--
-	function addDoc(id_doc, alignement)
-	{
+	function addDoc(id_doc, alignement) {
 		//top.opener.zone_selection
 		//window.opener.barre_inserer('\n<doc' + id_doc + '|' + alignement + '>\n', window.opener.<?php echo $_GET['field']; ?>);
 		window.opener.barre_inserer('\n<doc' + id_doc + '|' + alignement + '>\n', top.opener.zone_selection );
@@ -39,75 +47,61 @@ function exec_galerie() {
 	-->
 	</script>
 	<?php
-	if (test_layer()) {
-		?>
-		<script type="text/javascript" language="JavaScript" >
-		<!--
-		function showAll()
-		{
-			<?php
+	if (!test_layer()) {	?>
+		<script type="text/javascript" language="JavaScript" ><!--
+		function showAll() {
+<?php
 			reset($GLOBALS['blocks']);
-			while (list(, $v) = each($GLOBALS['blocks'])) {
-				?>
-				ouvrir_couche('<?php echo $v; ?>', '<?=$spip_lang_rtl?>','<?php echo _DIR_IMG_PACK; ?>');
-				<?php
-			}
-			?>
+			while (list(, $v) = each($GLOBALS['blocks'])) 
+				echo "\t\touvrir_couche('$v', '$spip_lang_rtl','"._DIR_IMG_PACK."');\n"; 
+?>
 			showDocs();
 		}
 		
-		function hideAll()
-		{
-			<?php
+		function hideAll() {
+<?php
 			reset($GLOBALS['blocks']);
-			while (list(, $v) = each($GLOBALS['blocks'])) {
-				?>
-				fermer_couche('<?php echo $v; ?>', '<?=$spip_lang_rtl?>','<?php echo _DIR_IMG_PACK; ?>');
-				<?php
-			}
-			?>
+			while (list(, $v) = each($GLOBALS['blocks']))
+				echo "\t\tfermer_couche('$v', '$spip_lang_rtl','"._DIR_IMG_PACK."');\n"; 
+?>
 			hideDocs();
 		}
 
-		function showNice()
-		{
+		function showNice()	{
 			hideAll();
-			<?php
+				<?php
 			reset($GLOBALS['blocksPleins']);
 			while (list(, $v) = each($GLOBALS['blocksPleins'])) {
 				?>
-				ouvrir_couche('<?php echo $v; ?>', '<?=$spip_lang_rtl?>','<?php echo _DIR_IMG_PACK; ?>');
+				ouvrir_couche('<?php echo $v; ?>', '<?php echo $spip_lang_rtl?>','<?php echo _DIR_IMG_PACK; ?>');
 				<?php
 			}
 			?>
 			showDocs();
 		}
 
-		function showDocs()
-		{
-			<?php
+		function showDocs()	{
+				<?php
 			reset($GLOBALS['blocksDocs']);
 			while (list(, $v) = each($GLOBALS['blocksDocs'])) {
 				?>
-				ouvrir_couche('<?php echo $v; ?>', '<?=$spip_lang_rtl?>','<?php echo _DIR_IMG_PACK; ?>');
+				ouvrir_couche('<?php echo $v; ?>', '<?php echo $spip_lang_rtl?>','<?php echo _DIR_IMG_PACK; ?>');
 				<?php
 			}
 			?>
 		}
 
-		function hideDocs()
-		{
-			<?php
+		function hideDocs(){
+				<?php
 			reset($GLOBALS['blocksDocs']);
 			while (list(, $v) = each($GLOBALS['blocksDocs'])) {
 				?>
-				fermer_couche('<?php echo $v; ?>', '<?=$spip_lang_rtl?>','<?php echo _DIR_IMG_PACK; ?>');
+				fermer_couche('<?php echo $v; ?>', '<?php echo $spip_lang_rtl?>','<?php echo _DIR_IMG_PACK; ?>');
 				<?php
 			}
 			?>
 		}
-		-->
-		</script>
+		--></script>
 		<p>
 		<?php echo _T('bartypenr:galerie_deplier'); ?> 
 		<a href="javascript:showAll();"><?php echo _T('bartypenr:galerie_tout'); ?></a> -
@@ -157,16 +151,16 @@ function afficher_un_document($id_document){
 	}
 
 	$retour = '';
-	if(function_exists('bouton_block_depliable')) // fonction de SPIP 1.93
-		$bouton = bouton_block_depliable('', false, 'doc'.$id_document);
-		else $bouton = bouton_block_invisible('doc'.$id_document);
+	$titre2 = '<img src="'._DIR_IMG_PACK.'doc-24.gif" style="vertical-align:bottom;" alt="" /> '.$titre;
+	if(defined('_deplie193'))
+		$bouton = '<tr><td>&nbsp;</td><td valign="top">'.bouton_block_depliable($titre, false, 'doc'.$id_document);
+		else $bouton = '<tr><td valign="top">'.bouton_block_invisible('doc'.$id_document).'</td><td valign="top">'.$titre2;
 	if (test_layer()) {
 		$idBlock = ereg_replace(".*triangle([0-9]+)[^0-9].*", "\\1", $bouton);
 		$GLOBALS['blocksDocs'][] = $idBlock;
 	}
-	$retour .= '<tr><td valign="top">'.$bouton.'</td>';
-	$retour .= '<td><img src="'._DIR_IMG_PACK.'doc-24.gif" style="vertical-align:bottom;" alt="" /> '.$titre;
-	if(function_exists('debut_block_depliable')) // fonction de SPIP 1.93
+	$retour .= $bouton;
+	if(defined('_deplie193')) // fonction de SPIP 1.93
 		$retour .= debut_block_depliable(false, 'doc'.$id_document);
 		else $retour .= debut_block_invisible('doc'.$id_document);
 	$retour .= '<div style="border: 1px dashed #666666; padding: 5px; background-color: #f0f0f0;">';
@@ -234,26 +228,25 @@ function sous_arborescence($id_rubrique) {
 			$tmpid = $row['id_rubrique'];
 			list($content, $nbDocs) = sous_arborescence($tmpid);
 			$nbDocsTotal += $nbDocs;
-			$retour .= '<tr><td valign="top">';
+			$titre = '<img src="'._DIR_IMG_PACK.'rubrique-24.gif" style="vertical-align:bottom;" alt="" /> '
+				. $row['titre'].' ('.$nbDocs._T('bartypenr:galerie_document').($nbDocs > 1 ? 's' : '').')';
 			if ($content != '') {
-				$bouton = bouton_block_invisible('rub'.$row['id_rubrique']);
+				if(defined('_deplie193'))
+					$bouton = '<tr><td>&nbsp;</td><td valign="top">'.bouton_block_depliable($titre, false, 'rub'.$row['id_rubrique']);
+					else $bouton = '<tr><td valign="top">'.bouton_block_invisible('rub'.$row['id_rubrique']).'</td><td valign="top">'.$titre;
 				if (test_layer()) {
 					$idBlock = ereg_replace(".*triangle([0-9]+)[^0-9].*", "\\1", $bouton);
 					$GLOBALS['blocks'][] = $idBlock;
-					if ($nbDocs > 0) {
+					if ($nbDocs > 0)
 						$GLOBALS['blocksPleins'][] = $idBlock;
-					}
 				}
 				$retour .= $bouton;
 			} else {
-
 				$retour .= '<img src="'._DIR_IMG_PACK.'rien.gif" width="16" height="14" alt="" />';
 			}
-			$retour .= '</td><td valign="top"><img src="'._DIR_IMG_PACK.'rubrique-24.gif" style="vertical-align:bottom;" alt="" /> ';
-			$retour .= $row['titre'].' ('.$nbDocs._T('bartypenr:galerie_document').($nbDocs > 1 ? 's' : '').')';
 			if ($content != '') {
 				$retour .= '<br />';
-				if(function_exists('debut_block_depliable')) // fonction de SPIP 1.93
+				if(defined('_deplie193')) // fonction de SPIP 1.93
 					$retour .= debut_block_depliable(false, 'rub'.$row['id_rubrique']);
 					else $retour .= debut_block_invisible('rub'.$row['id_rubrique']);
 				$retour .= $content;
@@ -278,21 +271,25 @@ $article['nb'] = $listeArticles[$i]['nb'];
 $article['id'] = $listeArticles[$i]['id'];
 				$documentsArticle = spip_query("SELECT id_document FROM spip_documents_articles WHERE id_article = ".$article['id']);
 				$nbDocumentsArticle = $sql_count($documentsArticles);
-				$retour .= '<tr><td valign="top">';
-				if(function_exists('bouton_block_depliable')) // fonction de SPIP 1.93
-					$bouton = bouton_block_depliable('', false, 'art'.$article['id']);
-					else $bouton = bouton_block_invisible('art'.$article['id']);
+				$titre = '<img src="'._DIR_IMG_PACK.'article-24.gif" style="vertical-align:bottom;" alt="" /> '
+					. $article['titre'].' ('.$article['nb']._T('bartypenr:galerie_document').($article['nb'] > 1 ? 's' : '').')';
+//				$retour .= '<tr><td valign="top">';
+				if(defined('_deplie193')) // fonction de SPIP 1.93
+					$bouton = '<tr><td>&nbsp;</td><td valign="top">'.bouton_block_depliable($titre, false, 'art'.$article['id']);
+					else $bouton = '<tr><td valign="top">'.bouton_block_invisible('art'.$article['id']).'</td><td valign="top">'.$titre;
+//		$bouton = bouton_block_depliable('', false, 'art'.$article['id']);
+//		else $bouton = bouton_block_invisible('art'.$article['id']);
 				if (test_layer()) {
 					$idBlock = ereg_replace(".*triangle([0-9]+)[^0-9].*", "\\1", $bouton);
 					$GLOBALS['blocks'][] = $idBlock;
 					$GLOBALS['blocksPleins'][] = $idBlock;
 				}
 				$retour .= $bouton;
-				$retour .= '</td><td valign="top"><img src="'._DIR_IMG_PACK.'article-24.gif" style="vertical-align:bottom;" alt="" /> ';
-				$retour .= $article['titre'].' ('.$article['nb']._T('bartypenr:galerie_document').($article['nb'] > 1 ? 's' : '').')';
+//		$retour .= '</td><td valign="top"><img src="'._DIR_IMG_PACK.'article-24.gif" style="vertical-align:bottom;" alt="" /> ';
+//		$retour .= $article['titre'].' ('.$article['nb']._T('bartypenr:galerie_document').($article['nb'] > 1 ? 's' : '').')';
 				//$retour .= $listeArticles[$i]['titre'].' ('.$listeArticles[$i]['nb'].' document'.($listeArticles[$i]['nb'] > 1 ? 's' : '').')';
 				$retour .= '<br />';
-				if(function_exists('debut_block_depliable')) // fonction de SPIP 1.93
+				if(defined('_deplie193')) // fonction de SPIP 1.93
 					$retour .= debut_block_depliable(false, 'art'.$article['id']);
 					else $retour .= debut_block_invisible('art'.$article['id']);
 				$retour .= '<table border="0" cellpadding="3" cellspacing="1">';
