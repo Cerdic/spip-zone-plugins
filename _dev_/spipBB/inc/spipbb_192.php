@@ -150,8 +150,8 @@ function spip_mysql_query($query, $serveur='')
 #------------------------------------------------------------#
 // from req/mysql.php 193 // apparus en SVN 9932 -> version_code 1.9259/1.9260
 #------------------------------------------------------------#
-if (!function_exists('trace_query_start'))
-AND (version_compare(substr($GLOBALS['spip_version_code'],0,6),'1.9259','<')) {
+if (!function_exists('trace_query_start')
+AND (version_compare(substr($GLOBALS['spip_version_code'],0,6),'1.9259','<')) ) {
 function trace_query_start()
 {
 	static $trace = '?';
@@ -169,8 +169,8 @@ function trace_query_start()
 #------------------------------------------------------------#
 // from req/mysql.php 193 idem trace_query_start
 #------------------------------------------------------------#
-if (!function_exists('trace_query_end')) 
-AND (version_compare(substr($GLOBALS['spip_version_code'],0,6),'1.9259','<')) {
+if (!function_exists('trace_query_end')
+AND (version_compare(substr($GLOBALS['spip_version_code'],0,6),'1.9259','<'))) {
 function trace_query_end($query, $start, $result, $err)
 {
 	global $tableau_des_erreurs;
@@ -189,8 +189,8 @@ function trace_query_end($query, $start, $result, $err)
 #------------------------------------------------------------#
 // from req/mysql.php 193
 #------------------------------------------------------------#
-if (!function_exists('trace_query_chrono'))
-AND (version_compare(substr($GLOBALS['spip_version_code'],0,6),'1.9259','<')) {
+if (!function_exists('trace_query_chrono')
+AND (version_compare(substr($GLOBALS['spip_version_code'],0,6),'1.9259','<'))) {
 function trace_query_chrono($m1, $m2, $query, $result)
 {
 	static $tt = 0, $nb=0;
