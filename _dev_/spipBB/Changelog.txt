@@ -1,4 +1,9 @@
-﻿2007-12-27  chryjs  <chryjs!@!free!.!fr>
+﻿2007-12-28  chryjs  <chryjs!@!free!.!fr>
+
+ * Ajout d'un controle de revision pour les fonctions trace_query http://www.spip-contrib.net/Plugin-SpipBB#forum400542
+
+
+2007-12-27  chryjs  <chryjs!@!free!.!fr>
 
  * Correction bug pagination dans spipbb_192 : qui provoquait une fonction infiniment récursive...
  * Corrige le bug auteurs_rubriques table SQL inconnue en 1.9.2
