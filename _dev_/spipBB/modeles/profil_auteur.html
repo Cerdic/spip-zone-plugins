@@ -27,70 +27,82 @@
 			Messages :
 			</td>
 			<td>
-			(#ID_AUTEUR|spipbb_nb_messages)]
+			(#ID_AUTEUR|spipbb_nb_messages)<br />
+			<a href="[(#URL_PAGE{liste_messages}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]">Trouver tous les messages de #NOM</a>
 			</td>
 		</tr>]
-		<a href="">Trouver tous les messages de #NOM</a><br />
 		#SET{aff_localisation,#CONFIG{'spipbb/affiche_localisation'}}
 		[(#GET{aff_localisation}|=={oui}|?{' ',''})
-		<:spipbb:localisation:>#SPIPBB{localisation}<br />
-		]
-		<:spipbb:votre_site:> :<a href="[(#URL_SITE)]">[(#NOM_SITE)]</a>
+		<tr>
+			<td><:spipbb:localisation:></td>
+			<td>#SPIPBB{localisation}</td>
+		</tr>]
+		[<tr>
+			<td><:spipbb:votre_site:> :</td>
+			<td><a href="[(#URL_SITE)]">(#NOM_SITE)</a></td>
+		</tr>]
 		#SET{aff_emploi,#CONFIG{'spipbb/affiche_emploi'}}
 		[(#GET{aff_emploi}|=={oui}|?{' ',''})
-		<:spipbb:emploi:>#SPIPBB{emploi}<br />
+		<tr>
+			<td><:spipbb:emploi:></td>
+			<td>#SPIPBB{emploi}</td>
+		</tr>
 		]
 		#SET{aff_loisirs,#CONFIG{'spipbb/affiche_loisirs'}}
 		[(#GET{aff_loisirs}|=={oui}|?{' ',''})
-		<:spipbb:loisirs:>#SPIPBB{loisirs}<br />
+		<tr>
+			<td><:spipbb:loisirs:></td>
+			<td>#SPIPBB{loisirs}</td>
+		</tr>
 		]
+		</table>
 	</td>
 </tr>
-<tr class="inter">		
+<tr class="inter">
 	<td>
 		<:spipbb:contacter_dpt:> #NOM
 	</td>
 </tr>
-<tr>		
+<tr>
 	<td>
 		<table width="100%" border='0' cellspacing='0' cellpadding='0' style='border:0'>
-		<tr>
-			<td>
+		[<tr>
+			<td width='70%'>
 				<:spipbb:email:>
 			</td>
 			<td class='email'>
-				<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]">
+				<a href="(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})">
 				<span>&nbsp;</span></a>
 			</td>
-			</tr>
+		</tr>]
+		#SET{aff_Nom_MSNM,#CONFIG{'spipbb/affiche_Nom_MSNM'}}
+		[(#GET{aff_Nom_MSNM}|=={oui}|?{' ',''})
 		<tr>
-			<td>
-			MSN
-			</td>
-			<td>
-			</td>
+			<td><:spipbb:extra_nom_msnm:></td>
+			<td>#SPIPBB{Nom_MSNM}</td>
 		</tr>
+		]
+		#SET{aff_Nom_Yahoo,#CONFIG{'spipbb/affiche_Nom_Yahoo'}}
+		[(#GET{aff_Nom_Yahoo}|=={oui}|?{' ',''})
 		<tr>
-			<td>
-			Yahoo
-			</td>
-			<td>
-			</td>
+			<td><:spipbb:extra_nom_yahoo:></td>
+			<td>#SPIPBB{Nom_Yahoo}</td>
 		</tr>
+		]
+		#SET{aff_Nom_AIM,#CONFIG{'spipbb/affiche_Nom_AIM'}}
+		[(#GET{aff_Nom_AIM}|=={oui}|?{' ',''})
 		<tr>
-			<td>
-			AIM
-			</td>
-			<td>
-			</td>
+			<td><:spipbb:extra_nom_aim:></td>
+			<td>#SPIPBB{Nom_AIM}</td>
 		</tr>
+		]
+		#SET{aff_Numero_ICQ,#CONFIG{'spipbb/affiche_Numero_ICQ'}}
+		[(#GET{aff_Numero_ICQ}|=={oui}|?{' ',''})
 		<tr>
-			<td>
-			ICQ
-			</td>
-			<td>
-			</td>
+			<td><:spipbb:extra_numero_icq:></td>
+			<td>#SPIPBB{Numero_ICQ}</td>
 		</tr>
+		]
 		</table>
 	</td>
 </tr>
