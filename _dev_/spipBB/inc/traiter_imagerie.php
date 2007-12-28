@@ -83,7 +83,7 @@ function tableau_smileys($cols='',$return=true) {
 	while (list($nom,$chem) = each($listimag)) { 
 		$aff.= "<td style='vertical-align:bottom' class='verdana1'><div style='text-align:center'>\n
 			<a href=\"javascript:emoticon(':".$nom."')\">\n
-			<img src='".$chem."' style='border:0' title='smiley - ".$nom."' />\n
+			<img src='".$chem."' style='border:0' title='smiley - ".$nom."' alt='smil' />\n
 			</a></div></td>\n";
 		
 		$compte++; 

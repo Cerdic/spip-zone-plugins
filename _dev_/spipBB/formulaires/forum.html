@@ -5,7 +5,7 @@
 ]
 <div class="formulaire_spip formulaire_forum">
 
-<form action="[(#ENV{url})]" method="post" name="formulaire">
+<form action="[(#ENV{url})]" method="post"><div>
 
 	[(#ENV{url_post}|form_hidden)]
 	[<input type="hidden" name="arg" value="(#ENV{arg})" />]<!-- h.28/05 -->
@@ -100,6 +100,6 @@
 		<div class="spip_bouton"><input type="submit" value="<:forum_voir_avant:>" /></div>
 
 	]
-</form>
+</div></form>
 
 </div>
