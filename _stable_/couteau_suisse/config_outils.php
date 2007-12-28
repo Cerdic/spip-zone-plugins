@@ -698,7 +698,7 @@ add_outil( array(
 	'code:js' => "function lancerlien(a,b){ x='ma'+'ilto'+':'+a+'@'+b; return x; }",
 	// jQuery pour remplacer l'arobase image par l'arobase texte
 	'code:jq' => "jQuery('span.spancrypt').after('<span class=\"cryptOK\">&#6'+'4;<\/span>'); jQuery('span.spancrypt').remove();",
-	'code:css' => 'span.spancrypt {background:transparent url(' . find_in_path('img/mailcrypt/leure.gif')
+	'code:css' => 'span.spancrypt {background:transparent url(' . url_absolue(find_in_path('img/mailcrypt/leure.gif'))
 		. ') no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none;}',
 	'traitement:EMAIL' => 'mailcrypt',
 )); 
