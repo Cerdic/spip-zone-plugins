@@ -112,7 +112,7 @@ Si vous n\'avez pas demand&eacute; cette inscription ou ne voulez plus faire par
 Merci de votre confiance.
 
 L\'&eacute;quipe de @nom_site@',
-'rappel_password' => 'Rappel de votre mot de passe',
+'rappel_password' => 'Votre mot de passe',
 'rappel_login' => 'Rappel : votre identifiant est : ',
 'choisir_nouveau_password' => 'Vous pourrez choisir un nouveau mot de passe en cliquant le lien suivant',
 'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
@@ -182,10 +182,14 @@ L\'&eacute;quipe de @nom_site@',
 'contacts_personnels' => 'Contacts personnels',
 'contacts_pros' => 'Contacts professionnels',
 'votre_adresse' => 'Votre adresse personnelle',
-'votre_adresse_pro' => 'Votre adresse professionnelle',
+'votre_adresse_pro' => 'Votre adresse (professionnelle)',
 'votre_nom_complet' => 'Votre nom complet',
 'vos_contacts_personnels' => 'Vos contacts personnels',
 'website' => 'Site Internet',
+'infos_personnelles' => 'Informations personnelles',
+'non_renseigne' => 'non renseign&eacute;.',
+'non_renseignee' => 'non renseign&eacute;e.',
+'modif_pass_titre' => 'Modifier votre mot de passe',
 
 //validation des champs
 'champ_obligatoire' => 'Ce champ est obligatoire',
@@ -196,6 +200,14 @@ L\'&eacute;quipe de @nom_site@',
 'chainenombre' => '(compos&eacute;e de lettres et/ou de chiffres)',
 'chainelettre' => '(compos&eacute;e uniquement de lettres)',
 'email_valide' => 'Veuillez ins&eacute;rer un email valide',
+
+// Change_pass
+'pass_indiquez_cidessous' => 'Indiquez ci-dessous l\'adresse email sous laquelle vous
+			vous &ecirc;tes pr&eacute;c&eacute;demment enregistr&eacute;. Vous
+			recevrez un email vous indiquant la marche &agrave; suivre pour
+			modifier votre acc&egrave;s.',
+'pass_recevoir_mail' => 'Vous allez recevoir un email vous indiquant comment modifier votre acc&egrave;s au site.',
+'pass_oubli_mot' => 'Changement de votre mot de passe',
 
 'titre_confirmation' => 'Confirmation',
 'page_confirmation' => 'Page de confirmation de votre inscription'

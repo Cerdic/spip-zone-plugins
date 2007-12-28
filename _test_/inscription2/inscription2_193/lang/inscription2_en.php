@@ -162,6 +162,9 @@ The @nom_site@\'s Team',
 'votre_nom_complet' => 'Your complete name',
 'vos_contacts_personnels' => '<NEW>Vos contacts personnels',
 'website' => 'website',
+'infos_personnelles' => '<NEW>Informations personnelles',
+'non_renseigne' => '<NEW>non renseign&eacute;.',
+'non_renseignee' => '<NEW>non renseign&eacute;e.',
 
 //validation des champs
 'champ_obligatoire' => 'This field is required',

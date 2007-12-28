@@ -163,7 +163,7 @@ function inscription2_test_login($var_user) {
 		$var_user['login']=$var_user['nom'];
 	$login = $var_user['login'];
 	for ($i = 1; ; $i++) {
-		$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login' LIMIT 1"));
+		$n = sql_count(spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login' LIMIT 1"));
 		if (!$n){
 			$var_user['login'] = $login;
 			return $var_user;

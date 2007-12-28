@@ -261,7 +261,7 @@ $().ready(function() {
 			$mon_abo = spip_fetch_array(spip_query("select ab.id_abonnement, ab.validite, b.id from spip_auteurs_elargis_abonnements ab, spip_auteurs_elargis b where b.id_auteur='$id' AND ab.id_auteur_elargi = b.id"));
 			$query_abo="select id_abonnement, libelle from spip_abonnements";
 			$result_abo = spip_query($query_abo);
-				if(spip_num_rows($result_abo) > 0){
+				if(sql_count($result_abo) > 0){
 				echo "</select></td></tr>";
 				echo "<tr><td><input type=\"hidden\" name=\"id_auteur_elargi\" value=\"".$mon_abo['id']."\" /><strong>"._T('Abonnement')."</strong></td><td><select name=\"abonnement\" id=\"abonnement\" >";
 					while($row_abo = spip_fetch_array($result_abo)){
@@ -276,10 +276,7 @@ $().ready(function() {
 			
 			if($cle == 'statut_abonnement')
 				echo "<tr><td><strong>"._T('abonnement:Ech&eacute;ance')."</strong></td><td><input type=\"text\" name=\"validite_abo\" value=\"".$mon_abo['validite']."\" /><br /></td></tr>"; 
-
-			
-			
-			
+		
 		}elseif($cle=='publication'){ // checkbox
 			if ($val == 'on')	
 				$val = 'checked';
@@ -331,7 +328,6 @@ $().ready(function() {
 ?>
 <!-- Confirm Dialog -->
 <div class="jqmConfirm" id="confirm">
-
 	<div id="ex3b" class="jqmConfirmWindow">
     <div class="jqmConfirmTitle clearfix">
     <h1>Confirmation </h1><a href="#" class="jqmClose"><em>Close</em></a>

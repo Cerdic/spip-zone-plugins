@@ -179,6 +179,9 @@ L\'&eacute;quipe de @nom_site@',
 'votre_nom_complet' => '<NEW>Votre nom complet',
 'vos_contacts_personnels' => '<NEW>Vos contacts personnels',
 'website' => '<NEW>Site Internet',
+'infos_personnelles' => '<NEW>Informations personnelles',
+'non_renseigne' => '<NEW>non renseign&eacute;.',
+'non_renseignee' => '<NEW>non renseign&eacute;e.',
 
 //validation des champs
 'champ_obligatoire' => '<NEW>Ce champ est obligatoire',

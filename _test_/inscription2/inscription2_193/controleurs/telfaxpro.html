@@ -1,0 +1,38 @@
+[(#REM)
+
+	Controleur pour le crayon 'telfax', uniquement html
+	Validation JS pour les champs spécifiés obligatoires
+	Si les champs ne sont pas activés dans le CFG, ils n'apparaissent pas...
+]
+#CACHE{0}
+<BOUCLE_a(SPIP_AUTEURS_ELARGIS){id_auteur=(#ENV{id_auteurs_elargi})}{tous}>
+<fieldset style="background-color:#fff;">
+	<legend><:inscription2:vos_contacts_personnels:></legend>
+
+	[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})
+	#SET{telephone_pro_obl, false}
+	[(#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|?{' ',''})#SET{telephone_pro_obl, true}]
+	[(#GET{telephone_pro_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+	<label><:inscription2:telephone:> : </label>
+	<input class="crayon-active" name="#ENV{name_telephone_pro}" style="width:#ENV{largeur}px;" value="[(#TELEPHONE_PRO**|entites_html)]" />
+	</div>]
+
+	[(#CONFIG{inscription2/mobile_fiche_mod}|?{' ',''})
+	#SET{mobile_obl, false}
+	[(#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|?{' ',''})#SET{mobile_pro_obl, true}]
+	[(#GET{mobile_pro_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+	<label><:inscription2:mobile:> : </label>
+	<input class="crayon-active" name="#ENV{name_mobile_pro}" style="width:#ENV{largeur}px;" value="[(#MOBILE_PRO**|entites_html)]" />
+	</div>]
+
+	[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})
+	#SET{fax_obl, false}
+	[(#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|?{' ',''})#SET{fax_pro_obl, true}]
+	[(#GET{fax_pro_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+	<label><:inscription2:fax:> : </label>
+	<input class="crayon-active" name="#ENV{name_fax_pro}" style="width:#ENV{largeur}px;" value="[(#FAX_PRO**|entites_html)]" />
+	</div>]
+	
+</fieldset>
+</BOUCLE_a>
+<//B_a>
