@@ -1,3 +1,8 @@
+2007-12-29  chryjs  <chryjs!@!free!.!fr>
+
+ * Mise a jour des liens externes en liens internes type artxxx
+ * migre_static (0.84)
+
 migre_static (0.83)
  * Improved output actions
  * Created step by step operations and allowed to check the page list just in case

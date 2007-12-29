@@ -34,8 +34,12 @@ include_spip('inc/charsets');
 include_spip('inc/minipres');
 include_spip("inc/presentation");
 
+if (!function_exists('spip_insert_id')) include_spip('inc/vieilles_defs');
+
 global $migre_meta;
 $migre_meta = $GLOBALS['migrestatic'];
+
+ini_set('max_execution_time',600); // pas toujours possible mais requis
 
 // ------------------------------------------------------------------------------
 // [fr] Action principale : realise la presentation
@@ -74,6 +78,8 @@ function action_migre_action()
 		break;
 	case 2 :
 		$corps .= migre_pages($id_rubrique);
+		//if (!$migre_meta['migre_test'])
+			$corps .= "<a href='".generer_url_action("migre_url","id_rubrique=$id_rubrique")."' >Migrer tous les liens</a>";
 		$corps .= $link_back;
 		break;
 	default :
@@ -133,15 +139,24 @@ global $migre_meta, $dir_lang;
 
 	$res  = "";
 	$i=0;
+	$table_uri=array();
 	while(list ($key, $migre_uri) = each ($dochtml) )
 	{
 		$res_list .= "<a href='$migre_uri'>".$migre_uri."</a><br />";
 		$res .= debut_cadre_relief('article-24.gif',true,'',
 			_T('migrestatic:processing_page')." <a href='$migre_uri'>".$migre_uri."</a>");
-		$res .= migre_infos_page($migre_uri,$id_rubrique);
+		$id_article_cree=0;
+		$res .= migre_infos_page($migre_uri,$id_rubrique,$id_article_cree);
+		$table_uri[$migre_uri]=$id_article_cree;
 		$res .= fin_cadre_relief(true);
 		if ($migre_meta['migre_test'] AND $i>5) break; else $i++; // [fr] On ne teste que les 5 premieres pages [en] Test only first 5 pages
-	 };
+	}
+	if ($migre_meta['migre_test']) {
+		//print_r($table_uri);
+		$res.="Pas de mise a jour des liens<br>";
+	} else {
+		$res.=  "<b>"._T('migrestatic:mis_a_jour').migre_parse_url($table_uri)."</b>";
+	}
 	$res .= "<div style='clear:both'>"._T('migrestatic:migre_fini')."</div>";
 	$res_list.= "<br style='clear: both;' />\n</div>\n";
 	return $res_list.$res;
@@ -151,7 +166,7 @@ global $migre_meta, $dir_lang;
 // [fr] Recupere les infos de la page web, et traite son contenu
 // [fr] apres l'avoir telechargee
 // ------------------------------------------------------------------------------
-function migre_infos_page($adresse,$id_rubrique) {
+function migre_infos_page($adresse="",$id_rubrique=0, &$id_article_cree) {
 global $dir_lang, $migre_meta;
 	$auteur=$GLOBALS['auteur_session']['id_auteur'];	// [fr] id_auteur de tous les articles récupérés dans Spip
 	$res = "";
@@ -221,7 +236,7 @@ global $dir_lang, $migre_meta;
 
 	if (!$migretest)
 	{
-		$res .= "\n<div $dir_lang style='float:left;width:98%;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>".migre_cree_article($titre,$body,$adresse,$id_rubrique,$auteur,$id_mot,$lang)."\n</div>\n";
+		$res .= "\n<div $dir_lang style='float:left;width:98%;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>".migre_cree_article($titre,$body,$adresse,$id_rubrique,$auteur,$id_mot,$lang,$id_article_cree)."\n</div>\n";
 	}
 	else
 	{
@@ -308,10 +323,10 @@ function migre_filtrer_body($contenu) {
 // [fr] Insere un nouvel article dans Spip.
 // [en] Add a new article into SPIP
 // ------------------------------------------------------------------------------
-function migre_cree_article($titre,$texte,$url_site,$id_rub,$auteur,$id_mot,$lang)
+function migre_cree_article($titre,$texte,$url_site,$id_rub,$auteur,$id_mot,$lang,&$id_article)
 {
 	// [fr] Rechercher une occurence deja presente
-	unset($id_article);
+	$id_article="";
 	$url_site = addslashes(corriger_caracteres($url_site));
 	$sql = "SELECT id_article,statut FROM spip_articles WHERE url_site='".$url_site."' AND statut!='poubelle' AND statut!='refuse' LIMIT 1";
 	$result=spip_query($sql);
@@ -565,5 +580,37 @@ function migre_check_var($id_rubrique)
 	$out .= "\n</table>";
 	return $out;
 } // migre_check_var
+
+// ------------------------------------------------------------------------------
+// [fr] Parcourt la liste des uri/articles et essaie de remplace les URL locales en numeros d'articles
+// ------------------------------------------------------------------------------
+function migre_parse_url($table_uri="") {
+	$cpt=0;
+	if (empty($table_uri) or !is_array($table_uri)) return;
+	//copie de la liste
+	reset($table_uri);
+	while (list(,$id)=each($table_uri)) $table_art[]=$id;
+	//construction des remplacements
+	reset($table_uri);
+	while (list($uri,)=each($table_uri)) $table_search[]=";\-\>$uri\];";
+	reset($table_uri);
+	while (list(,$id)=each($table_uri)) $table_replace[]="->art$id]"; // conversion des URIs dans migre_html_to_spip
+
+	while (list(,$id_article)=each($table_art)) {
+		$sql = "SELECT texte FROM spip_articles WHERE id_article=$id_article";
+		$result=spip_query($sql);
+		if ($row = spip_fetch_array($result)) {
+			$row['texte']=stripslashes($row['texte']);
+			$texte = preg_replace($table_search,$table_replace,$row['texte']); 
+			if ($texte!=$row['texte']) { // on ne fait d'update que s'il y a eu modification(s)
+				$texte=addslashes($texte);
+				$sql="UPDATE spip_articles SET texte='$texte' WHERE id_article=$id_article";
+				$result=spip_query($sql);
+				$cpt++;
+			} // if modif
+		} // if $row
+	} // while
+	return $cpt;
+} // migre_parse_url
 
 ?>

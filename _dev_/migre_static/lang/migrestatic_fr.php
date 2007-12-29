@@ -58,6 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choix_balises_p' => 'P',
 'choix_balises_dern' => 'Dernier filtre',
 
+'mis_a_jour' => 'Nombre de liens mis &agrave; jour&nbsp;:',
+
 // Action
 
 'titre_migre_action' => 'R&eacute;alisation de la migration',
