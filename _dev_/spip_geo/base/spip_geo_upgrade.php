@@ -21,7 +21,7 @@
 			
 		if ($current_version==0.0){
 			$table_pays = "spip_geo_pays";
-			$descpays = spip_abstract_showtable($table_pays, '', false);
+			$descpays = sql_showtable($table_pays, '', false);
 			if(isset($descpays['field']['pays'])){
 				echo 'virage de la table spip_geo_pays';
 				spip_query("DROP TABLE spip_geo_pays");

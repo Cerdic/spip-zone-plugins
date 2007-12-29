@@ -23,5 +23,6 @@ _ &#169; 2007 - Distribu&eacute; sous licence GPL
 	spip_geo_options.php
 	</options>
 	<install>base/spip_geo_upgrade.php</install>
+	<necessite id="SPIP" version='[1.9300;]' />
 	<chemin dir='' />
 </plugin>
