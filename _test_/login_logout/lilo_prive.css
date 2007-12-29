@@ -1,4 +1,4 @@
-ï»¿/* 
+/* 
 
 	// lilo_prive.css 
 
@@ -8,10 +8,10 @@
 */
 
 	/*
-		Si modification, vider le cache (le css est compressÃ© par 'compacte'
+		Si modification, vider le cache (le css est compressé par 'compacte'
 	*/
 
-/* uniquement chargÃ©e par login.html */
+/* uniquement chargée par login.html */
 
 html { height:100%; background-color: #ccc; }
 body.page_login { 

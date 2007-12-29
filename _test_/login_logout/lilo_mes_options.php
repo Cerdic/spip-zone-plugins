@@ -1,4 +1,4 @@
-ï»¿<?php 
+<?php 
 
 	// lilo_mes_options.php
 
@@ -32,19 +32,19 @@
 	Ce fichier est un des composants de LiLo. 
 	
 	LiLo est un programme libre, vous pouvez le redistribuer et/ou le modifier 
-	selon les termes de la Licence Publique Generale GNU publiÃ©e par 
-	la Free Software Foundation (version 2 ou bien toute autre version ultÃ©rieure 
+	selon les termes de la Licence Publique Generale GNU publiée par 
+	la Free Software Foundation (version 2 ou bien toute autre version ultérieure 
 	choisie par vous).
 	
-	LiLo est distribuÃ© car potentiellement utile, mais SANS AUCUNE GARANTIE,
+	LiLo est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,
 	ni explicite ni implicite, y compris les garanties de commercialisation ou
-	d'adaptation dans un but spÃ©cifique. Reportez-vous Ã  la Licence Publique GÃ©nÃ©rale GNU 
-	pour plus de dÃ©tails. 
+	d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU 
+	pour plus de détails. 
 	
-	Vous devez avoir reÃ§u une copie de la Licence Publique Generale GNU 
-	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez Ã  la  
+	Vous devez avoir reçu une copie de la Licence Publique Generale GNU 
+	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez à la  
 	Free Software Foundation, Inc., 
-	59 Temple Place, Suite 330, Boston, MA 02111-1307, Ã‰tats-Unis.
+	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
 	
 	*****************************************************/
 	
