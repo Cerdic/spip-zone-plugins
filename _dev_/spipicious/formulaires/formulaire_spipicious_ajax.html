@@ -1,5 +1,52 @@
 [(#SET{groupe_mot,#CONFIG{spipicious/groupe_mot}})]
+<script type="text/javascript"><!--
+	function init_spipicious(){
+		jQuery('.deletemot')
+			.bind(
+				'click',
+					function(){
+						var id = jQuery(this).attr('id').substr(4);
+						jQuery('#supprimer_mot').val(id);
+						jQuery('#formulaire_spipicious_mots').find('input[@type=submit]').eq(0).each(function(){ this.click(); });
+						jQuery('#deleteID').val('');
+						return false;
+					});
+	}
 
+	var callback = function() {
+		var type = '[(#ENV{id_document}|?{document}|sinon{article})]';
+		if (type == document) {
+			jQuery(".tags").empty().load("[(#URL_PAGE{mots_document}|parametre_url{id_document,#ENV{id_document},"&"})]", "", "");
+		}
+		else{
+			jQuery(".tags").empty().load("[(#URL_PAGE{mots_article}|parametre_url{id_article,#ENV{id_article},"&"})]", "", "");
+		}
+	};
+	
+	onAjaxLoad(init_spipicious);
+	jQuery(document).ready(function(){
+		init_spipicious();
+	});
+// --></script>
+	<script type="text/javascript" src="#CHEMIN{javascript/layer.js}"></script>
+	<form action="[(#EVAL{spipicious_del_mots}|generer_url_action)]" method="post" id="formulaire_spipicious_mots" onsubmit="return AjaxSqueeze(this,'mesmots',callback,event);" class="formulaire_spip">
+		<fieldset>
+			<legend><:spipicious:vos_tags:></legend>
+			<div id="mesmots">
+			[(#ENV{id_document}|?{' '})<INCLURE{fond=spipicious_del_document}{id_document=#ENV{id_document}}>]
+			[(#ENV{id_document}|?{'',' '})<INCLURE{fond=spipicious_del_article}{id_article=#ENV{id_article}}>]
+			</div>
+			
+			<input type="hidden" name="supprimer_mot" id="supprimer_mot" value="" />
+			<input type="hidden" name="objet_spip" id="objet_spip" value="[(#ENV{id_document}|?{document,article})]" />
+			<input type="hidden" name="id_objet_spip" id="id_objet_spip" value="[(#ENV{id_document}|?{#ENV{id_document},#ENV{id_article}})]" />
+			<input type="hidden" name="redirect_del_mots" value="[(#ENV{id_document}|?{[(#URL_PAGE{spipicious_del_document}|parametre_url{id_document,#ENV{id_document}})],[(#URL_PAGE{spipicious_del_article}|parametre_url{id_article,#ENV{id_article}})]})]" />
+			
+			<p class="spip_bouton" style="display:none">
+				<input type="submit" name="add_tags" value="<:bouton_valider:>" class="valider" />
+			</p>
+	</fieldset>
+	</form>
 	<form action="#ENV{url}#formulaire_spipicious_ajax" method="post" id="formulaire_spipicious_ajax" class="formulaire_spip">
 		<fieldset>
 		<legend><:spipicious:add_tags:></legend>
