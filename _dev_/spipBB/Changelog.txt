@@ -1,4 +1,9 @@
-﻿2007-12-28  chryjs  <chryjs!@!free!.!fr>
+﻿2007-12-29  chryjs  <chryjs!@!free!.!fr>
+
+ * Ajout du fond backend-forum manquant pour les boutons RSS http://www.spip-contrib.net/Plugin-SpipBB#forum401676
+
+
+2007-12-28  chryjs  <chryjs!@!free!.!fr>
 
  * Ajout d'un controle de revision pour les fonctions trace_query http://www.spip-contrib.net/Plugin-SpipBB#forum400542
  * Presentation du profil auteur dans modeles
