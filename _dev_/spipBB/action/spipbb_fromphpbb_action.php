@@ -208,17 +208,22 @@ function bbcode_to_raccourcis_spip($texte) {
 // [en] Transcode conversions
 // ------------------------------------------------------------------------------
 function fromphpbb_convert($texte) {
+	if (function_exists('mb_detect_encoding')) $encoding=mb_detect_encoding($texte);
+	spipbb_log('convert:'.$encoding,3,__FILE__);
+/*
 	if (is_ascii($texte)) {
 		$charset='ascii';
 		return corriger_caracteres($texte);
 	}
-
+*/
 	if (is_utf8($texte)) {
 		$charset='utf-8';
 	}
 	else {
 		$charset='iso-8859-1';
 	}
+	spipbb_log('charset:'.$charset,3,__FILE__);
+
 	return corriger_caracteres(importer_charset($texte, $charset));
 }
 
