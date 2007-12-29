@@ -58,12 +58,13 @@
 	
 	[(#SET{check,[(#SPIPBB{annuaire_forum}|=={''}|?{'non',#SPIPBB{annuaire_forum}})]})]
 	<br />
-	<p><:spipbb:visible_annuaire_forum:><br />
-	<label><input type="radio" name="annuaire_forum" class="forml" 
-			value="non" [(#GET{check}|=={'non'}|?{'checked="checked"',''})] /><:spipbb:non:></label>
+	<p><:spipbb:visible_annuaire_forum:>
 	&nbsp;&nbsp;&nbsp;
-	<label><input type="radio" name="annuaire_forum" class="forml" 
-			value="oui" [(#GET{check}|=={'oui'}|?{'checked="checked"',''})] /><:spipbb:oui:></label>
+	<:spipbb:non:><input type="radio" name="annuaire_forum" 
+			value="non" [(#GET{check}|=={'non'}|?{'checked="checked"',''})] />
+	&nbsp;&nbsp;&nbsp;
+	<:spipbb:oui:><input type="radio" name="annuaire_forum" 
+			value="oui" [(#GET{check}|=={'oui'}|?{'checked="checked"',''})] />
 	</p>
 
 	[(#REM) pour simple transport ]

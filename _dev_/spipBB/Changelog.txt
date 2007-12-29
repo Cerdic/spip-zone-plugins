@@ -2,6 +2,7 @@
 
  * Ajout du fond backend-forum manquant pour les boutons RSS http://www.spip-contrib.net/Plugin-SpipBB#forum401676
  * Correction affichage #ID_AUTEUR dans page profil http://www.spip-contrib.net/Plugin-SpipBB#forum401676
+ * Page profil correction pour les boutons radio "Apparaitre dans la liste des Inscrits" corrigé
 
 
 2007-12-28  chryjs  <chryjs!@!free!.!fr>
