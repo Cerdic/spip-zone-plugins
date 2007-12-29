@@ -16,10 +16,10 @@
 	var callback = function() {
 		var type = '[(#ENV{id_document}|?{document}|sinon{article})]';
 		if (type == document) {
-			jQuery(".tags").empty().load("[(#URL_PAGE{mots_document}|parametre_url{id_document,#ENV{id_document},"&"})]", "", "");
+			jQuery("#keywords").empty().load("[(#URL_PAGE{mots_document}|parametre_url{id_document,#ENV{id_document},"&"})]", "", "");
 		}
 		else{
-			jQuery(".tags").empty().load("[(#URL_PAGE{mots_article}|parametre_url{id_article,#ENV{id_article},"&"})]", "", "");
+			jQuery("#keywords").empty().load("[(#URL_PAGE{mots_article}|parametre_url{id_article,#ENV{id_article},"&"})]", "", "");
 		}
 	};
 	
@@ -43,10 +43,11 @@
 			<input type="hidden" name="redirect_del_mots" value="[(#ENV{id_document}|?{[(#URL_PAGE{spipicious_del_document}|parametre_url{id_document,#ENV{id_document}})],[(#URL_PAGE{spipicious_del_article}|parametre_url{id_article,#ENV{id_article}})]})]" />
 			
 			<p class="spip_bouton" style="display:none">
-				<input type="submit" name="add_tags" value="<:bouton_valider:>" class="valider" />
+				<input type="submit" value="<:bouton_valider:>" class="valider" />
 			</p>
 	</fieldset>
 	</form>
+	
 	<form action="#ENV{url}#formulaire_spipicious_ajax" method="post" id="formulaire_spipicious_ajax" class="formulaire_spip">
 		<fieldset>
 		<legend><:spipicious:add_tags:></legend>
