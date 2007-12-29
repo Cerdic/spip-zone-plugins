@@ -314,8 +314,8 @@ function branche_rubriques($id) {
 			$liste[]=$row['id_rubrique'];
 		}
 		foreach($liste as $ids) {
-			$list = branche_rubriques($ids);
-			$liste = array_merge($liste, $list);
+			$list = branche_rubriques($ids); // array
+			$liste = array_merge($liste, $list); // array verifies
 		}
 	}
 	return $liste;

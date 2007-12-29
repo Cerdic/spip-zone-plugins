@@ -94,7 +94,16 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 			$recup_form = spipbb_extra_recup_saisie("auteurs");
 		# merge (remplace dans 'ts_extra' si present par 'recup_form')
 			#$n_extra=array();
-			$n_extra = array_merge($ts_extra,$recup_form);
+			if (!is_array($ts_extra)) {
+				spipbb_log("ts extra not array:".$ts_extra,3,__FILE__);
+				$ts_extra=array($ts_extra);
+			}
+			if (!is_array($recup_form)) {
+				spipbb_log("recup_form not array:".$recup_form,3,__FILE__);
+				$recup_form=array($recup_form);
+			}
+
+			$n_extra = array_merge($ts_extra,$recup_form); // array verifies
 
 			$extra = serialize($n_extra);
 			
@@ -183,7 +192,7 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 		'bio' => $auteur_bio,
 		'echec' => $echec
 		);
-	$ch_retour=array_merge($ch_retour,$renvois_chps,$traiter_chps);
+	$ch_retour=array_merge($ch_retour,$renvois_chps,$traiter_chps); // array deja init
 	return array('formulaires/formulaire_spipbb_profil', 0,$ch_retour);
 
 }
