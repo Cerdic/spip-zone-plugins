@@ -32,8 +32,6 @@ Interface publique - Générale :
 
 Bugs et autres elements non finis :
 -* 0.3.x Erreur array-merge en pied de page... avec les logs et/ou un URL pour le voir ce serait plus facile :)
--* 0.3.x le <code>{#ID_AUTEUR}</code> qui apparaît n'est pas normal je ne l'avais pas remarqué.
--* 0.3.x Le lien pour les boutons RSS est une régression suite à notre fusion avec Gafospip, à corriger...
 -* 0.4.x Page profil Pour les boutons radio ça dépend des affichages, cependant je suis assez d'accord sur le fait qu'ils pourraient être présentés différemment. 
 
 -* 0.4.x Activation des mots clés. Il y a plein de choses à dire et à faire dans ce domaine prévus pour la 0.4 . En attendant, même si les mots clés nécessaires n'ont pas été créés lors de l'installation on peut le faire faire automatiquement à spipBB en effet le formulaire (Configuration) permet de saisir le nom du groupe (spipbb par défaut) de mots clés. Si vous validez (bouton juste en dessous), il créé le groupe de mots clés tout seul :-)
