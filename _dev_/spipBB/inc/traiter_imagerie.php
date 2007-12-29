@@ -54,7 +54,7 @@ function smileys($chaine) 	{
 	# h. indispensable !! pour gerer le changement de repertoire 
 	# en cours de route, donc tous les smileys dispo
 	if(_DIR_SMILEYS_SPIPBB!=$dirbase) {
-		$listperso=genere_list_smileys(_DIR_SMILEYS_SPIPBB)
+		$listperso=genere_list_smileys(_DIR_SMILEYS_SPIPBB);
 		$listsmil = array_merge($listsmil, $listperso); // array verifies
 	}
 	
