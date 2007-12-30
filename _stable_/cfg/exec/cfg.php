@@ -24,7 +24,12 @@ function exec_cfg_dist($class = null)
 		($cfg_id = sinon(_request('cfg_id'),''))
 		);
 
-	if ($message = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]) {
+	// si le fond cfg demande une redirection, 
+	// (et provient de cette redirection), il est possible
+	// qu'il y ait un message a afficher
+	if ($config->rediriger 
+		&& $message = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]) 
+	{
 		include_spip('inc/meta');
 		effacer_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur']);
 		if (defined('_COMPAT_CFG_192')) ecrire_metas();

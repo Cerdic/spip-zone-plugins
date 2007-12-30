@@ -158,11 +158,11 @@ class cfg_formulaire
 	 * 
 	 * Recherche et stockage
 	 * des parametres passes a CFG
-	 * par #REM ou <!--
-	 * 
+	 * par <!--
+	 * ou par #REM (deprecie)
 	 */
 	function recuperer_parametres(){
-		// cas de #REM
+		// cas de #REM (deprecie)
 		preg_replace_callback('/(\[\(#REM\) ([a-z0-9_]\w+)(\*)?=)(.*?)\]/sim',
 					array(&$this, 'post_params'), $this->controldata);
 					
@@ -284,9 +284,17 @@ class cfg_formulaire
 		// suppression ?
 		if ($supprimer) {
 			$ok = $this->sto->modifier($supprimer);
-			$this->message .= ($msg = $ok 
-						? _T('cfg:config_supprimee', array('nom' => $this->nom_config())) 
-						: _T('cfg:erreur_suppression', array('nom' => $this->nom_config())));
+			// dans le cas d'une suppression, il faut vider $this->val qui
+			// contient encore les valeurs du formulaire, sinon elles sont 
+			// passees dans le fond et le formulaire garde les informations
+			// d'avant la suppression
+			if ($ok) {
+				$this->val = array();
+				$msg = _T('cfg:config_supprimee', array('nom' => $this->nom_config()));
+			} else {
+				$msg = _T('cfg:erreur_suppression', array('nom' => $this->nom_config()));
+			}
+			$this->message .= $msg;
 			$this->log($msg);
 		}
 		// sinon verification du type des valeurs postees
@@ -343,13 +351,13 @@ class cfg_formulaire
 			$this->cfg_id = $this->new_id;
 			$this->modifier();
 		}
-//		$this->message .= print_r($this->champs, true);
 
-		// Il s'est produit une modif, on stocke le message dans une meta
+		// Si le fond du formulaire demande expressement une redirection
+		// par <!-- rediriger=1 -->, on stocke le message dans une meta
 		// et on redirige le client, de maniere a charger la page
 		// avec la nouvelle config (ce qui permet par exemple a Autorite
 		// de controler d'eventuels conflits generes par les nouvelles autorisations)
-		if ($this->message && $this->rediriger) {
+		if ($this->rediriger && $this->message) {
 			include_spip('inc/meta');
 			ecrire_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur'], $this->message, 'non');
 			if (defined('_COMPAT_CFG_192')) ecrire_metas();
