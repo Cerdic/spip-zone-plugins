@@ -28,9 +28,10 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 - Easing : [->http://jquery.com/plugins/project/Easing]
 - SyncHeight : [->http://ginader.devjavu.com/browser/trunk/jquery/plugins/syncHeight/]
 - UI : [->http://jquery.com/plugins/project/ui]
-- Validate : [->http://jquery.com/plugins/files/jquery.validate_7.zip]
+- Validate : [->http://jquery.com/plugins/files/jquery.validate_8.zip]
 - Yav : [->http://jquery.com/plugins/project/jquery_yav]
 	</description>
+	<icon>images/jQuery-logo.gif</icon>
 	<prefix>jqueryp</prefix>
 	<necessite id="spip" version="[1.9300;]" /> 
 	<necessite id="cfg" version="[1.2;]" /> 

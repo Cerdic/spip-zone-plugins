@@ -61,9 +61,9 @@ $GLOBALS['jquery_plugins'] = array(
 	
 	//validate
 	'validate' => array(
-		'dir' => 'jquery.validate_7',
+		'dir' => 'jquery.validate_8',
 		'url' => 'http://jquery.com/plugins/project/validate',
-		'install' => 'http://jquery.com/plugins/files/jquery.validate_7.zip',
+		'install' => 'http://jquery.com/plugins/files/jquery.validate_8.zip',
 	),
 		
 	//yav
