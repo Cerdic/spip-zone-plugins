@@ -59,7 +59,7 @@ function balise_STATUT_PUBLIC_stat ($args, $filtres) {
 	return array($filtres[0] ? $filtres[0] : $args[0], $args[1], $args[2]);
 }
 
-function balise_STATUT_PUBLIC_dyn () {	
+function balise_STATUT_PUBLIC_dyn () {
 	
 	static $lilo_boite_statut_inseree = false;
 
@@ -89,14 +89,26 @@ function balise_STATUT_PUBLIC_dyn () {
 			? "filter:alpha(opacity=75); -moz-opacity:0.75; opacity: 0.75;"
 			: ""
 			;
+		
 		$statut_style = ""
 			. "position:"
-			. (($config['lilo_statut_fixed']=='oui') ? 'fixed' : 'absolute') . ";"
-			. (($config['lilo_statut_position'][0]=='t') ? "top" : "bottom") . ":-1px;"
-			. (($config['lilo_statut_position'][1]=='l') ? "left" : "right") . ":-1px;"
+			. (
+				(($fixed = ($config['lilo_statut_fixed'] == 'oui'))
+				&& !($is_ie6 = (($ii = lilo_browser_is_explorer()) && ($ii < 7 )) ? $ii : false)
+				) ? 'fixed' : 'absolute') . " !important;"
+			.	(
+				($fixed && !($is_top = $config['lilo_statut_position'][0] == 't') && !$is_ie6) ? "bottom:" : "top:"
+				)
+				. lilo_css_value_get($fixed, $is_ie6, $is_top, "Top", "Height") . ";"
+			.	(
+				($fixed && !($is_left = $config['lilo_statut_position'][1] == 'l') && !$is_ie6) ? "right:" : "left:"
+				)
+				. lilo_css_value_get($fixed, $is_ie6, ($is_left), "Left", "Width") . ";"
 			. "background-color:#".$config['lilo_statut_bgcolor'].";"
 			;
-		$auteur_session['statut_style'] = "style='$statut_style $transparent'";
+		$auteur_session['statut_style'] = "$statut_style $transparent";
+		$auteur_session['browser_name'] = $GLOBALS['browser_name']."OO";
+		$auteur_session['browser_version'] = $browser_version;
 		
 		$lilo_boite_statut_inseree = true;
 		
@@ -106,6 +118,39 @@ function balise_STATUT_PUBLIC_dyn () {
 			);
 	}
 	return (false);
+}
+
+/*
+	Valeur css pour top ou left
+*/
+function lilo_css_value_get ($fixed, $is_ie6, $origin, $t, $l) {
+	if($fixed && $is_ie6) {
+		$b = ($is_ie6 == 6) ? "document.documentElement" : "document.body";
+		$result = 
+			($origin)
+			? "expression(Number(".$b.".scroll".$t.") + 'px')"
+			: "expression(((ii = Number(".$b.".client".$l." - this.client".$l." + ".$b.".scroll".$t.")) < (".$b.".scroll".$l." - this.client".$l.") ? ii :  ".$b.".scroll".$l." - this.client".$l." - 4) + 'px')"
+			;
+	}
+	else {
+		$result = "-1px";
+	}
+	return($result);
+}
+
+
+/* 
+	Retourne numéro de version (pas sous-version) si IE ou false
+*/
+function lilo_browser_is_explorer () {
+	$version = false;
+	if(!strstr('Opera', $ii = $_SERVER['HTTP_USER_AGENT']) 
+		&& preg_match('=MSIE ([0-9].[0-9]{1,2})=', $ii, $matches)
+		&& ($version = intval($matches[1][0]))
+		) {
+		return($version);
+	}
+	return($version);
 }
 
 ?>

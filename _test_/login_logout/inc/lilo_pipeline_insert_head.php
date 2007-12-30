@@ -83,10 +83,10 @@ function lilo_insert_head ($flux) {
 $lilo_config_vars
 <script type='text/javascript' src='".compacte(find_in_path('javascript/lilo_login.js'), 'js')."'></script>
 <link rel='stylesheet' href='".compacte(find_in_path('lilo_public.css'), 'css')."' type='text/css' />
+$lilo_css_fixed_ie6
 <!-- "._LILO_PREFIX." END -->
 		";
 
 	return ($flux);
-} // end 
-
+} // end lilo_insert_head()
 ?>

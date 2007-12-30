@@ -69,13 +69,10 @@
 	width:24px; height:24px; display:block;
 }
 #lilo-statut-public #lilo-buste {
-	display:block; height:24px; padding:0 4px; line-height:1.4em; height: auto;
+	display:block; height:24px; padding:0; line-height:1.4em; height: auto;
 }
 #lilo-statut-public>#lilo-buste {
 	display:table-cell;
-	background-color:red;
-}
-#lilo-statut-public>#lilo-buste {
 	padding-left:24px;
 	font-size:90%;
 }
