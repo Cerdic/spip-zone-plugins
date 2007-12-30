@@ -41,7 +41,7 @@ $GLOBALS['i18n_'._LILO_PREFIX.'_fr'] = array(
 , 'configurer_statut_transparent' => "Apparence"
 , 'configurer_statut_transparent_desc' => "Boite semi-transparente (75%)."
 
-, 'configurer_statut_position' => "Position de la boite dans l'écran"
+, 'configurer_statut_position' => "Position de la boite statut dans l'écran"
 , 'lilo_statut_position_tl' => "En haut à gauche"
 , 'lilo_statut_position_tr' => "En haut à droite"
 , 'lilo_statut_position_bl' => "En bas à gauche"
@@ -54,7 +54,7 @@ $GLOBALS['i18n_'._LILO_PREFIX.'_fr'] = array(
 , 'configurer_statut_couleur_000' => "Noir"
 , 'configurer_statut_couleur_f00' => "Rouge"
 , 'configurer_statut_couleur_f0f' => "Fushia"
-, 'configurer_statut_couleur_0c0' => "Fond vert"
+, 'configurer_statut_couleur_0c0' => "Vert"
 , 'configurer_statut_couleur_00f' => "Bleu"
 , 'configurer_statut_couleur_666' => "Gris"
 
