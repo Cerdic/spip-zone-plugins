@@ -32,20 +32,20 @@ function action_spipicious_del_mots(){
 			$newt = sql_fetch($newquery);
 			
 			if (!$newt){
-				sql_delete("spip_mots_".$type."s","id_mot=".$supprimer." AND id_".$type."=".$id); 
+				sql_delete("spip_mots_".$type."s","id_mot=".$supprimer." AND id_".$type."=".$id);
 				spip_log("suppression spip_mots_".$type."s (id_article=$id) non utilise id_mot=".$supprimer, 'spipicious');
 				sql_delete("spip_mots","id_mot=".$supprimer); // on efface le mot si il n'est plus associé à rien
 				spip_log("suppression spip_mot non utilise id_mot=".$supprimer, 'spipicious');
 			}
 			else {
 				// Utilisation par un autre utilisateur ok mais utilisation sur le meme id_$type
-				$newquery2 = sql_select("*","spip_spipicious","id_".$type."=".$id);
+				$newquery2 = sql_select("*","spip_spipicious","id_mot=".$supprimer." AND id_".$type."=".$id);
 				$newt2 = sql_fetch($newquery2);
 				if(!$newt2){
-					sql_delete("spip_mots_".$type."s","id_mot=".$supprimer." AND id_".$type."=".$id); 
+					sql_delete("spip_mots_".$type."s","id_mot=".$supprimer." AND id_".$type."=".$id);
 					spip_log("suppression spip_mots_".$type."s (id_article=$id) non utilise id_mot=".$supprimer, 'spipicious');
 				}
-				spip_log("mot toujours utilise : id_mot=".$delete, 'spipicious');
+				spip_log("mot toujours utilise : id_mot=".$supprimer, 'spipicious');
 			}
 			$invalider = true;
 		}

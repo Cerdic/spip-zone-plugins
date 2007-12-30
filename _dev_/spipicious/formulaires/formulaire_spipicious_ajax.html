@@ -40,7 +40,7 @@
 			<input type="hidden" name="supprimer_mot" id="supprimer_mot" value="" />
 			<input type="hidden" name="objet_spip" id="objet_spip" value="#ENV{type}" />
 			<input type="hidden" name="id_objet_spip" id="id_objet_spip" value="#ENV{id}" />
-			<input type="hidden" name="redirect_del_mots" value="[(#ENV{id_document}|?{[(#URL_PAGE{spipicious_del_document}|parametre_url{id_document,#ENV{id_document}})],[(#URL_PAGE{spipicious_del_article}|parametre_url{id_article,#ENV{id_article}})]})]" />
+			<input type="hidden" name="redirect_del_mots" value="[(#URL_PAGE{#GET{fond}}|parametre_url{id_objet,#ENV{id}})]" />
 			
 			<p class="spip_bouton" style="display:none">
 				<input type="submit" value="<:bouton_valider:>" class="valider" />
