@@ -13,7 +13,8 @@ $GLOBALS['i18n_'._LILO_PREFIX.'_fr'] = array(
 , 'configuration_login_logout' => "Configuration Login-Logout"
 , 'configuration_login_logout_desc' => "
 	Les modifications apportées ici sont activées immédiatement.
-	Il est inutile de vider le cache pour valider la configuration."
+	Il est inutile de vider le cache pour valider la configuration, sauf à l'installation du plugin 
+	et à l'insertion de la balise #STATUT_PUBLIC)."
 
 , 'configurer_login_prive' => "Page login"
 , 'configurer_login_prive_desc' => "La page login est appelée pour accéder à l'espace privé."

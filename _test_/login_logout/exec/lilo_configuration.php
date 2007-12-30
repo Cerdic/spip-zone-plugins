@@ -152,8 +152,10 @@ function exec_lilo_configuration () {
 	// Boite principale des réglages
 	$page_result .= ""
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_LILO_IMG_PACK."administration-24.png", true, "", _T(_LILO_LANG."configuration_login_logout"))
+		. debut_cadre_trait_couleur('', true, '', '')
 		. lilo_form_description('configuration_login_logout_desc')
 		. $message_erreur
+		. fin_cadre_trait_couleur(true)
 		. lilo_form_debut_form('form_configuration')
 		;
 	//
