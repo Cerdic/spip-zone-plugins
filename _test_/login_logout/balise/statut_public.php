@@ -107,8 +107,6 @@ function balise_STATUT_PUBLIC_dyn () {
 			. "background-color:#".$config['lilo_statut_bgcolor'].";"
 			;
 		$auteur_session['statut_style'] = "$statut_style $transparent";
-		$auteur_session['browser_name'] = $GLOBALS['browser_name']."OO";
-		$auteur_session['browser_version'] = $browser_version;
 		
 		$lilo_boite_statut_inseree = true;
 		
