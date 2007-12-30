@@ -14,13 +14,7 @@
 	}
 
 	var callback = function() {
-		var type = '[(#ENV{id_document}|?{document}|sinon{article})]';
-		if (type == document) {
-			jQuery("#keywords").empty().load("[(#URL_PAGE{mots_document}|parametre_url{id_document,#ENV{id_document},"&"})]", "", "");
-		}
-		else{
-			jQuery("#keywords").empty().load("[(#URL_PAGE{mots_article}|parametre_url{id_article,#ENV{id_article},"&"})]", "", "");
-		}
+			jQuery("#keywords").empty().load("[(#URL_PAGE{mots_#ENV{type}}|parametre_url{id_#ENV{type},#ENV{id},"&"})]", "", "");
 	};
 	
 	onAjaxLoad(init_spipicious);
