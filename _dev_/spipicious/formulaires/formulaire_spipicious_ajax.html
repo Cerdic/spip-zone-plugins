@@ -33,8 +33,8 @@
 		<fieldset>
 			<legend><:spipicious:vos_tags:></legend>
 			<div id="mesmots">
-			[(#ENV{id_document}|?{' '})<INCLURE{fond=spipicious_del_document}{id_document=#ENV{id_document}}>]
-			[(#ENV{id_document}|?{'',' '})<INCLURE{fond=spipicious_del_article}{id_article=#ENV{id_article}}>]
+			[(#SET{fond,spipicious_del_#ENV{type}})]
+			<INCLURE{fond=#GET{fond}}{id_objet=#ENV{id}}>
 			</div>
 			
 			<input type="hidden" name="supprimer_mot" id="supprimer_mot" value="" />
