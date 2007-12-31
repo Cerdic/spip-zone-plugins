@@ -15,9 +15,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if(defined("_PGL_PLUGIN_GLOBALES_LIB") && _PGL_PLUGIN_GLOBALES_LIB) return;
-define("_PGL_PLUGIN_GLOBALES_LIB", 20071222.1814); //date.heure
+define("_PGL_PLUGIN_GLOBALES_LIB", 20071231.0646); //date.heure
 
 // HISTORY:
+// CP-20071231: __plugin_current_version_base_get complète par lecture plugin.xml si vb manquant dans meta
+// CP-20071224: ajout de __plugin_current_svnrevision_get() et modif __plugin_html_signature()
 // CP-20071222: optimisation __plugin_boite_meta_info() pour plugin en mode stable et mode dev
 
 include_spip("inc/plugin");
@@ -110,9 +112,72 @@ if(!function_exists('__plugin_current_version_base_get')) {
 		// doc: voir inc/plugin.php sur version_base (plugin.xml)
 		// qui s'appelle base_version en spip_meta %-}
 	function __plugin_current_version_base_get ($prefix) {
-		return(lire_meta($prefix."_base_version"));
+		if(!($vb = lire_meta($prefix."_base_version"))) {
+			$vb = __plugin_real_version_base_get ($prefix);
+		}
+		return($vb);
 	}
 } // end if __plugin_current_version_base_get
+
+if(!function_exists('__plugin_current_svnrevision_get')) {
+	// renvoie le dernier numero de révision svn
+	function __plugin_current_svnrevision_get ($prefix, $verifier_svn) {
+		static $svn_revision = false;
+		if(!empty($prefix)) {
+			// lire directement dans plugin.xml (éviter le cache ?)
+			$dir_plugin = _DIR_PLUGINS.__plugin_get_meta_dir($prefix);
+			// cherche si sur version svn
+			if(!$result = version_svn_courante($dir_plugin)) {
+				// méfiance: il faut que svn/entries soit à jour (svn update sur le poste de travail/serveur !)
+				// si pas de svn/entries, lire l'attribut dans plugin.xml
+				$file = $dir_plugin."/"._FILE_PLUGIN_CONFIG;
+				$result = __plugin_svn_revision_read($file);
+			}
+			if($verifier_svn && !$svn_revision) {
+				// vérifier les fichiers inclus (gourmand et peut-être trompeur si fichier fantôme ?)
+				// ne vérifier que sur deux niveaux (PLUGIN_ROOT et ses répertoires directs, pas en dessous)
+				define("_PGL_SVN_LIRE_EXTENSIONS", "css|html|js|php|xml");
+				$script_files = array();
+				if(is_dir($dir_plugin) && ($dh = opendir($dir_plugin))) {
+					while (($file = readdir($dh)) !== false) {
+						if($file[0] == ".") continue;
+						if(is_dir($dir_plugin_sub = $dir_plugin."/".$file) && ($dh_s = opendir($dir_plugin_sub))) {
+							while (($file = readdir($dh_s)) !== false) {
+								if($file[0] == ".") continue;
+								if(preg_match('=\.('._PGL_SVN_LIRE_EXTENSIONS.')$=i', $file)) $script_files[] = $dir_plugin_sub."/".$file;
+							}
+							closedir($dh_s);
+						}
+						else if(preg_match('=\.('._PGL_SVN_LIRE_EXTENSIONS.')$=i', $file)) $script_files[] = $dir_plugin."/".$file;
+					}
+					closedir($dh);
+				}
+				foreach($script_files as $file) {
+					if(!$ii = __plugin_svn_revision_read ($file)) {	continue; }
+					$result = max($ii, $result);
+				}
+			}
+			if(!empty($result) && (intval($result) > 0)) return($result);
+		}
+		return(false);
+	}
+}
+
+/**/
+// lire le fichier, en espérant trouver le mot clé svn dans les $buf_size premiers caractères
+function __plugin_svn_revision_read ($filename, $buf_size = 2048) {
+	if($fh = fopen($filename, "rb")) {
+		$buf = fread($fh, $buf_size);
+		fclose($fh);
+		if($buf = strstr($buf, "$"."LastChanged"."Revision:")) {
+			$revision = preg_replace('=^\$LastChanged'.'Revision: ([0-9]+) \$.*$=s', '${1}', $buf, 1);
+			if(strval(intval($revision)) == $revision) { 
+				return($revision);
+			}
+		}
+	}
+	return (false);
+}
 
 /**/
 if(!function_exists('__plugin_real_tag_get')) {
@@ -252,16 +317,20 @@ if(!function_exists('__plugin_boite_meta_info')) {
 if(!function_exists('__plugin_html_signature')) {
 	// petite signature de plugin
 	// du style "Dossier plugin [version]"
-	function __plugin_html_signature ($prefix, $return = false, $html = true) {
-	
+	function __plugin_html_signature ($prefix, $return = false, $html = true, $verifier_svn = false) {
+
 		$info = plugin_get_infos(__plugin_get_meta_dir($prefix));
 		$nom = typo($info['nom']);
 		$version = typo($info['version']);
 		//$base_version = typo($info['version_base']); // cache ?
 		$base_version = __plugin_current_version_base_get($prefix);
+		$svnrevision = __plugin_current_svnrevision_get($prefix, $verifier_svn);
 		$revision = "";
 		if($html) {
-			$version = (($version) ? " <span style='color:gray;'>".$version."</span>" : "");
+			$version = (($version) ? " <span style='color:gray;'>".$version : "")
+				. (($svnrevision) ? "-".$svnrevision : "")
+				. "</span>"
+				;
 			$base_version = (($base_version) ? " <span style='color:#66c;'>&lt;".$base_version."&gt;</span>" : "");
 		}
 		$result = ""

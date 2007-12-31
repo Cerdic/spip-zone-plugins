@@ -53,8 +53,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_menudep_configuration () {
 
-spip_log("##"._MENUDEP_PREFIX."exec_menudep_configuration() --");
-
 	global $connect_statut
 	, $connect_toutes_rubriques
 	, $connect_id_auteur
@@ -268,7 +266,7 @@ spip_log("##"._MENUDEP_PREFIX."exec_menudep_configuration() --");
 	
 
 	echo($page_result);
-	echo __plugin_html_signature(_MENUDEP_PREFIX, true), fin_gauche(), fin_page();
+	echo __plugin_html_signature(_MENUDEP_PREFIX, true, true, true), fin_gauche(), fin_page();
 	return(true);
 }
 
