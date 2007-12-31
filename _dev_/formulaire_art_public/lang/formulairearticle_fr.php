@@ -1,0 +1,77 @@
+<?php
+
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	//formulaire article
+	'debut' => 'D&eacute;but',
+	'dates' => 'Dates',
+	'votre_article' => 'Votre article',
+	'votre_appel' => 'Votre appel',
+	'info_lieu' => 'Informations sur le lieu (adresse, contacts, horaires)',
+	'localisation' => 'Localisation',
+	'forme_event' => 'Forme de l\'&eacute;v&egrave;nement :',
+	'forme_appel' => 'Type de l\'appel :',
+	'pays' => 'Pays',
+	'ville' => 'Ville',
+	'structure' => 'Structure',
+	'forme' => 'Type',
+	'info_obligatoire_02' => '[Obligatoire]',
+	'fin' => 'Fin : ',
+	'dates_obligatoires' => 'Les dates doivent &ecirc;tre coh&eacute;rentes. La date de d&eacute;but ainsi que celle de fin doivent &ecirc;tre toutes les deux renseign&eacute;es.',
+	'deadline_obligatoires' => 'La date de deadline doit &ecirc;tre coh&eacute;rente. Elle doit &ecirc;tre sup&eacute;rieure &agrave; la date actuelle.',
+	'titre' => 'Titre de l\'&eacute;v&egrave;nement',
+	'titre_appel' => 'Titre de l\'appel',
+	'soustitre_appel' => 'Sous-titre',
+	'info_texte' => 'Texte de l\'&eacute;v&egrave;nement',
+	'where' => 'O&ugrave; ?',
+	'what' => 'Quoi ?',
+	'when' => 'Quand ?',
+	'forum_attention_dates_incoherentes' => '<b>Attention&nbsp;!</b> Les dates de d&eacute;but et de fin sont incoh&eacute;rentes.',
+	'forum_attention_deadline_incoherente' => '<b>Attention&nbsp;!</b> La deadline est incoh&eacute;rente.',
+	'forum_attention_texte_court' => '<b>Attention&nbsp;!</b> Votre texte est trop court.',
+	'forum_attention_type_event' => '<b>Attention&nbsp;!</b> Vous devez choisir une forme d\'&eacute;v&egrave;nement.',
+	'forum_attention_localisation' => '<b>Attention&nbsp;!</b> V&eacute;rifiez votre localisation.',
+	'deadline' => 'Deadline',
+	'deadline_chapo' => 'Deadline : ',
+	'usedatefin' => '&Eacute;v&egrave;nement sur plusieurs jours (afficher le champ de date de fin)',
+	'forum_attention_dates_nonset' => '<b>Attention&nbsp;!</b> Vous devez mettre une date',
+	'nb_caracteres_minimum' => 'Le nombre minimum de caract&egrave;res est de ',
+	
+	// Formulaire Documents
+	'document_joint' => 'Joindre des documents',
+	'yourfiles' => 'Vos fichiers',
+	'choosefiles' => 'Choisir les fichiers &agrave; ajouter&nbsp;:',
+	'nodocs' => 'Pas encore de document sur la zone de t&eacute;l&eacute;chargement',
+	'insert_code' => 'Code &agrave; ins&eacute;rer dans la zone de texte&nbsp;:',
+	'doc_delete' => 'Supprimer ce document',
+	'doc_left' => 'Document flottant &agrave; gauche',
+	'doc_center' => 'Document centr&eacute;',
+	'doc_right' => 'Document flottant &agrave; droite',
+	'img_left' => 'Image flottante &agrave; gauche',
+	'img_center' => 'Image centr&eacute;e',
+	'img_right' => 'Image flottante &agrave; droite',
+	'add_docs' => 'Ajouter',
+	
+	// CFG
+	'sans_previsu' => 'Sans pr&eacute;visualisation ? (Par d&eacute;faut, la premi&egrave;re validation propose une pr&eacute;visualisation de l\'article)',
+	'statuts' => 'Statuts',
+	'droits_ecriture' => 'Qui a le droit d\'&eacute;crire des articles ?',
+	'droits_modifications' => 'Qui a le droit de modifier des articles publi&eacutes ?',
+	'admins' => 'Les administrateurs ',
+	'redacteurs' => 'Les r&eacute;dacteurs ',
+	'visiteurs' => 'Les visiteurs ',
+	'statuts_article' => 'Quel statut pour les articles ?',
+	'prepa' => 'En cours de r&eacute;daction ',
+	'prop' => 'Propos&eacute; &agrave; la publication',
+	'publie' => 'Publi&eacute; ',
+	'non_actif' => 'non activ&eacute; dans la configuration g&eacute;n&eacute;rale du site',
+	'champs_dispos' => 'Champs &agrave; disposition dans le formulaire',
+	'texte_titretaille' => 'Taille minimale du titre (en nombre de caract&egrave;res)',
+	'texte_textetaille' => 'Taille minimale du texte (en nombre de caract&egrave;res)',
+	'autresplugins' => 'Autres Plugins SPIP',
+	'installer_formupload' => 'Vous pouvez installer le plugin tiers "Formulaire Upload" afin d\'avoir la possiblit&eacute; d\'ajouter des documents &agrave; vos articles',
+	'formupload' => 'Formulaire Upload (upload de documents) :'
+);
+?>

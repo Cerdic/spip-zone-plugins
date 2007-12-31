@@ -1,0 +1,23 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Formulaire Article
+	</nom>
+	<auteur><!-- Auteur du plugin -->
+	Quentin Drouet
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Formulaire d'ajout d'articles depuis l'espace public configurable...
+	</description>
+	<prefix>
+	FormulaireArticle
+	</prefix>
+	<necessite id='cfg' version='[1.0.6;]' />
+	<necessite id='Autorite' version='[0.9;]' />
+	<chemin dir='' />
+</plugin>

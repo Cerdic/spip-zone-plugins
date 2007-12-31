@@ -1,0 +1,127 @@
+[(#REM) titre=Formulaire article public]
+
+<!-- descriptif= Ce plugin permet d'ajouter depuis l'espace public un article ... 
+
+L'affichage du formulaire est fait en foncton de la configuration dans l'espace priv&eacute; 
+-->
+
+#CACHE{0}
+
+<script type="text/javascript"><!--
+function showhide(boxName, boxNom) {
+if(boxName.checked){
+	$(boxNom).slideDown('slow');
+}
+else 
+	$(boxNom).slideUp('slow');
+}
+// --></script>
+
+<form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+
+<fieldset>
+<legend>
+	<:formulairearticle:statuts:>
+</legend>
+<label for="pub_directe"><:formulairearticle:sans_previsu:> <input type="checkbox"[ checked="(#CONFIG{FormulaireArticle/pub_directe}?{checked})"] name="pub_directe" id="pub_directe" /></label>
+
+<p><:formulairearticle:droits_ecriture:></p>
+<ul>
+	<li>
+		<label for="ecrire_0minirezo"><:formulairearticle:admins:> <input type="checkbox"[ checked="(#CONFIG{FormulaireArticle/ecrire_0minirezo}?{checked})"] name="ecrire_0minirezo" id="ecrire_0minirezo" /></label>
+	</li>
+		<li>
+		<label for="ecrire_1comite"><:formulairearticle:redacteurs:> <input type="checkbox"[ checked="(#CONFIG{FormulaireArticle/ecrire_1comite}?{checked})"] name="ecrire_1comite" id="ecrire_1comite" /></label>
+	</li>
+	<li>
+		<label for="ecrire_6forum"><:formulairearticle:visiteurs:> <input type="checkbox"[ checked="(#CONFIG{FormulaireArticle/ecrire_6forum}?{checked})"] name="ecrire_6forum" id="ecrire_6forum" /></label>
+	</li>
+</ul>
+
+
+<p><:formulairearticle:droits_modifications:></p>
+
+<p>Cette partie est g&eacute;r&eacute;e par le plugin Autorit&eacute;</p>
+
+
+<p><:formulairearticle:statuts_article:></p>
+<select name="statut_article" id="statut_article" class="formo">
+	<option value="prepa"[ selected="(#ENV{statut_article}|=={prepa}|?{selected})"]><:formulairearticle:prepa:></option>
+	<option value="prop"[ selected="(#ENV{statut_article}|=={prop}|?{selected})"]><:formulairearticle:prop:></option>
+	<option value="publie"[ selected="(#ENV{statut_article}|=={publie}|?{selected})"]><:formulairearticle:publie:></option>
+</select>
+</fieldset>
+
+
+<fieldset>
+<legend>
+	<:formulairearticle:champs_dispos:>
+</legend>
+
+	<p>
+	[(#CONFIG{'articles_surtitre'}|=={non}|?{<span style="color:#666;"><i><:texte_sur_titre:> <:formulairearticle:non_actif:></i></span>})]
+	[(#CONFIG{'articles_surtitre'}|=={oui}|?{' '})<label for="surtitre"><:texte_sur_titre:> :<input type="checkbox"[ checked="(#CONFIG{FormulaireArticle/surtitre}?{checked})"] name="surtitre" id="surtitre" /></label>]
+	</p>
+
+	<p>
+	<label for="titre"><:texte_titre_obligatoire:><input type="checkbox" checked name="titre" id="titre" style="display:none" /></label>
+	</p>
+	
+	[(#CONFIG{FormulaireArticle/titre}|=={on}|?{' ',''})
+	<p>
+	<label for="titretaille"><:formulairearticle:texte_titretaille:> <input type="text" name="titretaille" id="titretaille" class="fondl" style="width:4em;" value=[(#ENV*{titretaille}|?{#ENV*{titretaille},3})] /></label>
+	</p>]
+	
+	<p>
+	[(#CONFIG{'articles_soustitre'}|=={non}|?{<span style="color:#666;"><i><:texte_sous_titre:> <:formulairearticle:non_actif:></i></span>})]
+	[(#CONFIG{'articles_soustitre'}|=={oui}|?{' '})<label for="soustitre"><:texte_sous_titre:> :<input type="checkbox"[ checked="(#CONFIG{FormulaireArticle/soustitre}?{checked})"] name="soustitre" id="soustitre" /></label>]
+	</p>
+
+	<p>
+	[(#CONFIG{'articles_descriptif'}|=={non}|?{<span style="color:#666;"><i><:texte_descriptif_rapide:> <:formulairearticle:non_actif:></i></span>})]
+	[(#CONFIG{'articles_descriptif'}|=={oui}|?{' '})<label for="descriptif"><:texte_descriptif_rapide:> :<input type="checkbox"[ checked="(#CONFIG{FormulaireArticle/descriptif}?{checked})"] name="descriptif" id="descriptif" /></label>]
+	</p>
+
+	<p>
+	[(#CONFIG{'articles_chapeau'}|=={non}|?{<span style="color:#666;"><i><:info_chapeau:> <:formulairearticle:non_actif:></i></span>})]
+	[(#CONFIG{'articles_chapeau'}|=={oui}|?{' '})<label for="chapeau"><:info_chapeau:><input type="checkbox"[ checked="(#CONFIG{FormulaireArticle/chapeau}?{checked})"] name="chapeau" id="chapeau" /></label>]
+	</p>
+
+	<p>
+	[(#CONFIG{'articles_texte'}|=={non}|?{<span style="color:#666;"><i><:info_texte:> <:formulairearticle:non_actif:></i></span>})]
+	[(#CONFIG{'articles_texte'}|=={oui}|?{' '})<label for="textearticle"><:info_texte:> :<input type="checkbox" name="textearticle" id="textearticle" onclick="showhide(this,'#textetaille')"[ checked="(#CONFIG{FormulaireArticle/textearticle}|?{checked})"] /></label>]
+	</p>
+
+	<p id="textetaille" style="[(#ENV{textearticle}|=={on}|?{display: block;, display:none;})]">
+	<label for="textetaille"><:formulairearticle:texte_textetaille:> <input type="text" name="textetaille" id="textetaille" class="fondl" style="width:4em;" value=[(#ENV*{textetaille}|?{#ENV*{textetaille},100})] /></label>
+	</p>
+	
+	<p>
+	[(#CONFIG{'articles_ps'}|=={non}|?{<span style="color:#666;"><i><:info_post_scriptum:> <:formulairearticle:non_actif:></i></span>})]
+	[(#CONFIG{'articles_ps'}|=={oui}|?{' '})<label for="ps"><:info_post_scriptum:> :<input type="checkbox" name="ps" id="ps" [ checked="(#CONFIG{FormulaireArticle/ps}?{checked})"] /></label>]
+	</p>
+
+<p><label for="date_redac"><:texte_date_publication_anterieure:><input type="checkbox" name="date_redac" id="date_redac" [ checked="(#CONFIG{FormulaireArticle/date_redac}?{checked})"] /></label></p>
+
+	<p>
+	[(#CONFIG{'articles_urlref'}|=={non}|?{<span style="color:#666;"><i><:entree_liens_sites:> <:formulairearticle:non_actif:></i></span>})]
+	[(#CONFIG{'articles_urlref'}|=={oui}|?{' '})<label for="lien"><:entree_liens_sites:> :<input type="checkbox"[ checked="(#CONFIG{FormulaireArticle/lien}?{checked})"] name="lien" id="lien" /></label>]
+	</p>
+</fieldset>
+
+<fieldset>
+<legend>
+	<:formulairearticle:autresplugins:>
+</legend>
+	<p>
+	[(#CONFIG{plugin/FORMULAIREUPLOAD}|?{'',<:formulairearticle:installer_formupload:>})]
+	[(#CONFIG{plugin/FORMULAIREUPLOAD}|?{' ',''})<label for="formupload"><:formulairearticle:formupload:><input type="checkbox" name="formupload" id="formupload"[ checked="(#CONFIG{FormulaireArticle/formupload}?{checked})"] /></label>]
+	</p>
+
+</fieldset>
+
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+
+</form>

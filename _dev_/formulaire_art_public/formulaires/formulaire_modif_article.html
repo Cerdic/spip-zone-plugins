@@ -1,0 +1,71 @@
+#CACHE{0}
+<form action="#formulaire_modif_article" method="post" id="formulaire_modif_article" enctype="multipart/form-data" class="formulaire_spip formulaire_modif_article">
+[(#ENV*{previsu})]
+
+	[<div class="erreur">(#ENV*{erreur})</div>]
+	
+<fieldset>
+	<legend><:votre_texte:></legend>
+	<div>
+			<input type="hidden" name="article" value="[(#ENV**{id_article})]" />
+		[(#CONFIG{'articles_surtitre'}|=={oui}|?{' '})
+			[(#CONFIG{FormulaireArticle/surtitre}|=={on}|?{' ',''})
+			<p>
+			<label for="surtitre"><:texte_sur_titre:></label><br />
+			<input type="text" name="surtitre" id="surtitre" value="[(#ENV*{surtitre})]" size="50" />
+			</p>]]
+			
+		<p>
+			<label for="titre"><:texte_titre_obligatoire:></label>
+			<input class="forml" type="text" id="titre" name="titre" value="[(#ENV**{titre})]" size="50" />
+		</p>
+					
+		[(#CONFIG{'articles_soustitre'}|=={oui}|?{' '})
+			[(#CONFIG{FormulaireArticle/soustitre}|=={on}|?{' ',''})
+			<p>
+				<label for="soustitre"><:texte_sous_titre:></label><br />
+				<input type="text" name="soustitre" id="soustitre" value="[(#ENV*{soustitre})]" size="50" />
+			</p>]]
+		
+			[(#CONFIG{'articles_descriptif'}|=={oui}|?{' '})
+				[(#CONFIG{FormulaireArticle/descriptif}|=={on}|?{' ',''})
+				<p>
+					<label for="descriptif"><:texte_descriptif_rapide:></label><br />
+					<textarea id="descriptif" name="descriptif" class="forml" rows="6" cols="50">[(#ENV*{descriptif})]</textarea>
+				</p>]]
+
+				[(#CONFIG{'articles_chapeau'}|=={oui}|?{' '})
+					[(#CONFIG{FormulaireArticle/chapeau}|=={on}|?{' ',''})
+					<div>
+						<label for="chapeau"><:info_chapeau:></label><br />
+						<textarea id="chapeau" name="chapeau" class="forml" rows="10" cols="50">[(#ENV*{chapeau})]</textarea>
+					</div>]]
+				
+	
+				[(#CONFIG{'articles_texte'}|=={oui}|?{' '})
+					[(#CONFIG{FormulaireArticle/textearticle}|=={on}|?{' ',''})
+					[<div>(#ENV*{formulaire_documents})</div>]
+					<div>
+						<label><:info_texte:></label><br />
+						[(#ENV*{texte}|barre_textarea{25,40})]
+					</div>]]
+				
+				[(#CONFIG{'articles_ps'}|=={oui}|?{' '})
+					[(#CONFIG{FormulaireArticle/ps}|=={on}|?{' ',''})
+					<div>
+						<label for="ps"><:info_post_scriptum:></label><br />
+						<textarea id="ps" name="ps" class="forml" rows="6" cols="50">[(#ENV**{ps})]</textarea>
+					</div>]]
+
+					[<p>
+						(#CONFIG{'articles_urlref'}|=={oui}|?{' '})<label for="lien"><:entree_liens_sites:> :<input type="checkbox"[ checked="(#CONFIG{FormulaireArticle/lien}?{checked})"] name="lien" id="lien" /></label><br />
+					</p>]
+	
+				[(#CONFIG{FormulaireArticle/date_redac}|=={on}|?{' ',''})
+					<p><label for="date_redac"><:texte_date_publication_anterieure:><input type="checkbox"[ checked="(#CONFIG{FormulaireArticle/date_redac}?{checked})"] name="date_redac" id="date_redac" /></label><br /></p>]
+				</div>
+</fieldset>
+	<div class="spip_bouton">
+		<input type="submit" name="[(#CONFIG{FormulaireArticle/pub_directe}|?{valider,previsualiser})]" value="[(#CONFIG{FormulaireArticle/pub_directe}|?{<:valider:>,<:previsualiser:>})]" />
+	</div>
+</form>
