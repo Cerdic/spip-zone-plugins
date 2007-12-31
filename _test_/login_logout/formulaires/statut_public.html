@@ -13,7 +13,7 @@
 	N'apparait que si connecté
 	
 ]-->
-[<div id='lilo-statut-public' style="[(#ENV{statut_style})]>"
+[<div id='lilo-statut-public' style="[(#ENV{statut_style})]">
 <div class='row'>
 [(#ENV{voir_logo_auteur}|match{oui}|?{' '})
 	[<div id='lilo-tete'>(#ENV{logo_auteur}||image_reduire{24}|inserer_attribut{'alt',logo de [(#ENV{nom})]})</div>]]
