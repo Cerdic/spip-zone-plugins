@@ -1,7 +1,15 @@
-/* styles pour la noisette de syndication de la gazette SPIP */
-
-#gazette {}
-
+#gazette {	background: #eee;
+	color: #333;	text-align: center;}
+#gazette ul {
+	list-style-image:none;	list-style-position:outside;	list-style-type:none;}
 #gazette li {
-	text-align: center;
+	text-align: center;	margin: 2px;
+}
+#gazette img {	border: none;	margin: auto;}#gazette ul a {
+	text-align: center;	display: block;
+	text-decoration: none;
+}
+#gazette ul a:hover {
+	background: #8AC;
+	text-decoration: none;
 }
