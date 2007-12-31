@@ -185,16 +185,9 @@
 		}
 	}
 
-	
-	
+	 jQuery.noConflict();
+	 jQuery(document).ready(function(){
 		
- 	
-		
-			
-				
-
-		$(document).ready(function(){
-			
 			initpanorama[(#ID_DOCUMENT)]();
 			$(".zone_aller_droite_js_div[(#ID_DOCUMENT)]:last a").bind('mouseover',
 				function() {
@@ -217,7 +210,7 @@
 					return false;
 			});
 
-});
+	});
 	
 	-->
 	</script>
