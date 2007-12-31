@@ -1,0 +1,26 @@
+<plugin>
+	<nom>Gazette</nom>
+	<prefix>gazette</prefix>
+	<version>1</version>
+	<etat>stable</etat>
+	<auteur>[L'&Eacute;quipe SPIP-Mag'->http://mag.spip.net/spip.php?auteur193]</auteur>
+	<lien>[Explications->http://mag.spip.net/spip.php?article68]</lien>
+	<description>
+	Syndication et pr&eacute;sentaion automatique de la Gazette SPIP.
+
+	La Gazette SPIP est un journal en &#171;&nbsp;papier&nbsp;&#187; distribu&eacute; au format &eacute;lectronique PDF.
+
+	Plugin distribu&eacute; sous licence GNU/GPL.
+	Les documents propos&eacute;s en t&eacute;l&eacute;chargement sont distribu&eacute;s sous licence Art Libre.
+	</description>
+	<icon>gazette.jpg</icon>
+	<install>gazette_install.php</install>
+	<pipeline>
+		<nom>insert_head</nom> 
+		<inclure>gazette_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>boussole</nom> 
+		<inclure>gazette_pipelines.php</inclure>
+	</pipeline>
+</plugin>

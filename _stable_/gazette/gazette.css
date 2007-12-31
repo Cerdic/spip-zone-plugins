@@ -1,0 +1,7 @@
+/* styles pour la noisette de syndication de la gazette SPIP */
+
+#gazette {}
+
+#gazette li {
+	text-align: center;
+}

@@ -1,0 +1,13 @@
+[(#REM) La derniere Gazette SPIP]<BOUCLE_gazette(SYNDIC_ARTICLES){id_syndic=#CONFIG{id_syndic_gazette}}{par date}{inverse}{0,1}>[
+(#SET{infos,#TITRE[ - PDF/(#TAGS|afficher_tags{enclosure}|extraire_attribut{title}|taille_en_octets) - ][(#DATE|nom_mois) ][(#DATE|annee)]})
+]<div class="menu" id="gazette">
+	<h2>#TITRE</h2>
+	<ul>
+		<li>			<a href="[(#TAGS				|afficher_tags{enclosure}				|extraire_attribut{href})]"[
+			   title="(#GET{infos}|textebrut|entites_html)"]			   type="application/pdf">			<img src="[(#DESCRIPTIF				|extraire_balise{img}				|extraire_attribut{src}				|copie_locale)]" width="70" height="100"[			   alt="(#GET{infos}|textebrut|entites_html)" />]			</a>
+		</li>
+		[<li>(#GET{infos})</li>]
+	</ul>
+	<p><a href="#URL_SITE"><:form_pet_message_commentaire:></a></p>
+</div>
+</BOUCLE_gazette>
