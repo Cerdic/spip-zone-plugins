@@ -442,7 +442,7 @@ function AccesRestreint_afficher_auteurs_boucle($row, &$tous_id, $voir_logo, $bo
 		if ($voir_logo) {
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
 			if ($logo = $chercher_logo($id_auteur, 'id_auteur', 'on'))  {
-				list($fid, $dir, $nom, $format) = $logo;
+				list($fid, $dir, $nom_img, $format) = $logo;
 				include_spip('inc/filtres_images');
 				$logo = image_reduire("<img src='$fid' alt='' />", 26, 20);
 				if ($logo)
