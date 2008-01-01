@@ -189,7 +189,10 @@
 	 jQuery(document).ready(function(){
 		
 			initpanorama[(#ID_DOCUMENT)]();
-			$(".zone_aller_droite_js_div[(#ID_DOCUMENT)]:last a").bind('mouseover',
+			$(".zone_aller_droite_js_div[(#ID_DOCUMENT)]:last a").bind('click',
+				function() {
+					return false;
+			});$(".zone_aller_droite_js_div[(#ID_DOCUMENT)]:last a").bind('mouseover',
 				function() {
 					deplace_droite[(#ID_DOCUMENT)]();
 					return false;
@@ -199,7 +202,10 @@
 					deplace_gauche[(#ID_DOCUMENT)]();
 					return false;
 			});
-			$(".zone_aller_droite_js_div[(#ID_DOCUMENT)]:last a").bind('mouseout',
+			$(".zone_aller_gauche_js_div[(#ID_DOCUMENT)]:last a").bind('click',
+				function() {
+					return false;
+			});$(".zone_aller_droite_js_div[(#ID_DOCUMENT)]:last a").bind('mouseout',
 				function() {
 					clearTimeout(refresh[(#ID_DOCUMENT)]);
 					return false;
