@@ -5,7 +5,7 @@ include_spip('inc/meta');
 
 function party_install($action) {
 
-	$url = 'http://www.spip-party.net/spip.php?page=backend-calendrier';
+	$url = 'http://www.spip-party.net/calendrier.xml';
 	$id = isset($GLOBALS['meta']['id_syndic_party']) ? intval($GLOBALS['meta']['id_syndic_party']) : false;
 
 	switch ($action) {
