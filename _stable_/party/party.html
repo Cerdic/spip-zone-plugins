@@ -1,0 +1,13 @@
+[(#REM) Les prochains RDV SPIP]<B_party>
+<div class="menu" id="party">
+	<h2>Les prochains RDV SPIP</h2>
+	<ul>
+		<BOUCLE_party(SYNDIC_ARTICLES){id_syndic=#CONFIG{id_syndic_party}}{par date}{age<0}>[
+		<li>
+			(#TAGS|afficher_tags{directory}|unique) :
+			<span><a href="#URL_ARTICLE">[(#DATE|affdate_court)][ - (#DESCRIPTIF|party_lieu)]</a></span>
+		</li>
+		]</BOUCLE_party>
+	</ul>
+</div>
+</B_party>

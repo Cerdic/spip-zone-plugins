@@ -1,0 +1,16 @@
+<plugin>
+	<nom>Party</nom>
+	<prefix>party</prefix>
+	<version>1</version>
+	<etat>stable</etat>
+	<install>party_install.php</install>
+	<options>party_options.php</options>
+	<pipeline>
+		<nom>insert_head</nom> 
+		<inclure>party_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>boussole</nom> 
+		<inclure>party_pipelines.php</inclure>
+	</pipeline>
+</plugin>
