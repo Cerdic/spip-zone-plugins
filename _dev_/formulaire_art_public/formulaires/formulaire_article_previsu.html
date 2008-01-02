@@ -1,16 +1,13 @@
-<fieldset class="previsualisation previsualisation#ENV{mot_cle}" style="position:relative">
+<fieldset class="previsualisation" style="position:relative">
 	<legend><:previsualisation:></legend>
-rubrique=#ENV*{id_rubrique}
 	[<div class="formerreur">(#ENV*{erreur})</div>]
 
-	<div class="infos_lieu">
-		<:formulairearticle:what:> <BOUCLE_mot(MOTS){id_mot=#ENV{mot_cle}}>#TITRE</BOUCLE_mot><br />
-		<:formulairearticle:when:> [(#ENV*{date_redac}|affdate{jmY}|=={[(#ENV*{date}|affdate{jmY})]}|?{[(#ENV*{date}|affdate)],[<:formulairearticle:du:> (#ENV*{date}|affdate{j})] [(#ENV*{date}|nom_mois)]})] [(#ENV*{date_redac}|affdate{jmY}|=={[(#ENV*{date}|affdate{jmY})]}|?{'',[<:formulairearticle:au:> (#ENV*{date_redac}|affdate{j})] [(#ENV*{date_redac}|nom_mois)]})]<br />
-		<:formulairearticle:where:><br /><BOUCLE_continent(MOTS){id_mot=#ENV{continent}}>#TITRE</BOUCLE_continent> - <BOUCLE_pays(MOTS){id_mot=#ENV{pays}}>#TITRE</BOUCLE_pays> - <BOUCLE_ville(MOTS){id_mot=#ENV{ville}}>#TITRE</BOUCLE_ville> - <BOUCLE_structure(MOTS){id_mot=#ENV{structure}}>#TITRE</BOUCLE_structure><br />
-	</div>
-
+	[<div class="surtitre">(#ENV*{surtitre})</div>]
 	[<h2 class="titre">(#ENV*{titre})</h2>]
+	[<div class="soustitre">(#ENV*{soustitre})</div>]
 	[<div class="chapo">(#ENV*{chapo})<br class="nettoyeur" /></div>]
 	[<div class="texte">(#ENV*{texte}|image_reduire{400,0})<br class="nettoyeur" /></div>]
+	[<div class="ps">(#ENV*{ps})</div>]
+	
 	[<div style='text-align:right;'><input type='submit' name='valider' class='spip_bouton' value="(#ENV*{bouton})" /></div>]
 </fieldset>

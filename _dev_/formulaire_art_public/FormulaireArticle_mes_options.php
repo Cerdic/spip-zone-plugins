@@ -23,7 +23,7 @@ if ($GLOBALS['FormulaireArticle']['modifier_article']) {
 						$GLOBALS['FormulaireArticle']['auteur_mod_article']
 						OR in_array($r['statut'], array('publie','prop','prepa', 'poubelle'))
 					)
-					AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur'])) 1.9.2
+					AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur'])) //1.9.2
 					//AND sql_count(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
 				);
 		}

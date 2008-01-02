@@ -209,7 +209,7 @@ function balise_FORMULAIRE_ARTICLE_dyn($id_rubrique,$url) {
 		
 			if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
 				
-			// récupération des variables
+			// recuperation des variables
 		
 			$fichier = $_FILES['doc']['name'];
 			$size = $_FILES['doc']['size'];
