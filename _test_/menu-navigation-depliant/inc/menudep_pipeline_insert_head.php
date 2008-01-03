@@ -76,7 +76,7 @@ $flux .= "
 <script language='JavaScript' type='text/javascript'>
 	var menudep = { ".$js_var_menudep." };
 </script>
-<script type='text/javascript' src='".compacte(find_in_path('javascript/jquery-menudep.js'),'js')."'></script>
+<script type='text/javascript' src='/".compacte(find_in_path('javascript/jquery-menudep.js'),'js')."'></script>
 <!-- "._MENUDEP_PREFIX." END -->
 ";
 
