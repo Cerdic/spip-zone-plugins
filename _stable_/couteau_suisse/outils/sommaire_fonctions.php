@@ -46,6 +46,8 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
+	// pour sommaire_nettoyer_raccourcis()
+	include_spip('outils/sommaire');
 	// si le sommaire est malvenu ou s'il n'y a pas de balise <h3>, alors on laisse tomber
 	$inserer_sommaire =  defined('_sommaire_AUTOMATIQUE')
 		?strpos($texte0, _sommaire_SANS_SOMMAIRE)===false

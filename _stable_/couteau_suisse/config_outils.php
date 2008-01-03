@@ -7,6 +7,11 @@
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
 
+// Noter :
+// outils/mon_outil.php : inclus par les pipelines de l'outil
+// outils/mon_outil_options.php : inclus par cout_options.php
+// outils/mon_outil_fonctions.php : inclus par cout_fonctions.php
+
 cs_log("inclusion de config_outils.php");
 //-----------------------------------------------------------------------------//
 //                               options                                       //
@@ -383,6 +388,7 @@ add_variable( array(
 add_outil( array(
 	'id' => 'boites_privees',
 	'auteur'=>'Pat, Joseph LARMARANGE (format SPIP)',
+	'contrib' => 2564,
 	'code:options' => "%%cs_rss%%%%format_spip%%%%stat_auteurs%%%%max_auteurs_page%%",
 	'categorie' => 'admin',
 	'pipeline:affiche_milieu' => 'boites_privees_affiche_milieu',

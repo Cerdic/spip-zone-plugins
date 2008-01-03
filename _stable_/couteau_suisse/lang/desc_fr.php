@@ -433,7 +433,7 @@ D&eacute;finissez ci-dessous le nombre maximal d'auteurs &agrave; afficher sur l
 
 // ---------------------------------------------------------------------------
 	'insertions:nom' => 'Corrections automatiques',
-	'insertions:description' => 'Outil en cours de &eacute;veloppement !! [[Corrections automatiques :->%insertions%]]',
+	'insertions:description' => 'ATTENTION : outil en cours de d&eacute;veloppement !! [[Corrections automatiques :->%insertions%]]',
 /*
 // ---------------------------------------------------------------------------
 	':nom' => '',

@@ -100,10 +100,13 @@ if($zap) {
 		cs_installe_outils();
 	}
 
-	cs_log(" FIN : cout_options, cs_options = $GLOBALS[cs_options], cs_fonctions_essai = $GLOBALS[cs_fonctions_essai]");
-
 	// a-t-on voulu inclure cout_fonctions.php ?
-	if ($GLOBALS['cs_fonctions_essai']) @include(_COUT_FONCTIONS_PHP);
+	if ($GLOBALS['cs_fonctions_essai']) {
+		cs_log(" -- inclusion de '"._COUT_FONCTIONS_PHP."'");
+		@include(_COUT_FONCTIONS_PHP);
+	}
+
+	cs_log(" FIN : cout_options, cs_options = $GLOBALS[cs_options], cs_fonctions_essai = $GLOBALS[cs_fonctions_essai]");
 }
 
 ?>

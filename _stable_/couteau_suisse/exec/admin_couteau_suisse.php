@@ -9,10 +9,7 @@
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip("inc/presentation");
-/*
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
-*/
+
 // compatibilite spip 1.9
 if(defined('_SPIP19100') && !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
 function cs_compat_boite($b) {if(defined('_SPIP19200')) echo $b('', true); else $b(); }
