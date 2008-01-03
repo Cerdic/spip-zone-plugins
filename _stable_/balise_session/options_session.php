@@ -20,6 +20,8 @@ function invalideur_session(&$Cache) {
 	$Cache['session']=spip_session();
 	return '';
 }
+if (!isset($GLOBALS['spip_pipeline']['definir_session'])) 
+	$GLOBALS['spip_pipeline']['definir_session'] = '';
 // Renvoie une chaine qui decrit la session courante pour savoir si on peut
 // utiliser un cache enregistre pour cette session.
 // Par convention cette chaine ne doit pas contenir de caracteres [^0-9A-Za-z]
