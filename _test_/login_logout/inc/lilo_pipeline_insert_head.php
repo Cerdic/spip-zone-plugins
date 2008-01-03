@@ -57,6 +57,9 @@ function lilo_insert_head ($flux) {
 	include_spip('inc/filtres');
 	include_spip('inc/plugin_globales_lib');
 	
+	// masque les boutons admins standards
+	$GLOBALS['flag_preserver'] = true;
+
 	$config = __plugin_lire_key_in_serialized_meta('config', _LILO_META_PREFERENCES);
 
 	if(!$config) $config = array();

@@ -50,9 +50,6 @@
 	
 	
 	
-	// masque les boutons admins standards
-	$GLOBALS['flag_preserver'] = true;
-
 	define("_LILO_PREFIX", "lilo");
 	define("_LILO_LANG", _LILO_PREFIX.":");
 	define("_DIR_PLUGIN_LILO_IMG_PACK", _DIR_PLUGIN_LILO."images/");
