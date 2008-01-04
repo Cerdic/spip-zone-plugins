@@ -63,7 +63,7 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 //Dans tous les cas, on récupère les paramètres du formulaire:
 //------------------------------------------------------------
 
-//récupération des paramettres (GET et POST)
+//récupération des parametres (GET et POST)
 	//echo "liste des GET\n";
 	//print_r($_GET);
 	//echo "liste des POST\n";
@@ -261,7 +261,11 @@ if ($id_groupe!=0) { $groupe_titre .= " (";?>
 	<div id="Contenu"><div class="bloc">
 		<div id="documents">
 			<h3 class="titre"><?php echo $titre_contenu_seance?></h3>
-			<div class="texte"><?php echo propre($contenu_seance);?></div>[
+			<div class="texte">
+				<?php
+//On vérifie que la date en est bien une grâce à affdate... (ça a l'air de fonctionner).
+	if (!affdate($date_seance)) echo "<p class=\"on\">Attention, la date de cette séance n'est pas correcte&nbsp;: date&nbsp;= \"$date_seance\"</p>"; echo propre($contenu_seance);?>
+			</div>[
 
 (#REM) Si la séance est dupliquée/Modifiée, on affiche les documents qui sont liés à la séance...
 
@@ -289,7 +293,9 @@ if ($contenu_devoir[0]!="") {
 <?php //Pour chaque devoir:
  for ($count=0; $count<=$devoirs; $count++) {
 	$liste_docs_Devoir = $liste_des_listes_de_docs[$count]; ?>
-				<div class="devoirs"><h5 class="devoirs"><b>>></b>&nbsp;Devoir pour le <?php echo $date_devoir[$count]?>&nbsp;:</h5>
+				<div class="devoirs"><h5 class="devoirs"><b>>></b>&nbsp;Devoir pour le <?php
+//On vérifie que la date en est bien une grâce à affdate... (ça a l'air de fonctionner).
+	if (!affdate($date_devoir[$count])) {echo "<span class=\"on\">Attention, la date de ce devoir n'est pas correcte&nbsp;: date&nbsp;= \"$date_devoir[$count]\"</span>";} else { echo $date_devoir[$count];}?>&nbsp;:</h5>
 				<span><?php echo propre($contenu_devoir[$count]);?></span>[
 
 (#REM) Si la fiche est dupliquée/Modifiée, on affiche les documents qui sont liés au devoir...
@@ -526,17 +532,22 @@ if ($contenu_devoir[0]!="") {
 		echo ("<!--update ps: $result-->\n");
 ?>
 			<p><strong>Ne revenez pas en arrière, mais choisissez&nbsp;:</strong></p>
-			<p><a href="#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=recalcul}&id_article=<?php echo ($id_contenu_seance); ?>" title="visualiser et ajouter des documents joints à cette séance ou ses devoirs" onClick="javascript:window.open(this.href,'affichage', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;">
-					<img src="#CHEMIN{images/x-office-spreadsheet.png}" alt="icône" vspace="2" align="middle">
+			<ul>
+				<li><a href="#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=recalcul}&id_article=<?php echo ($id_contenu_seance); ?>" title="visualiser et ajouter des documents joints à cette séance ou ses devoirs" onClick="javascript:window.open(this.href,'affichage', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;">
+						<img src="#CHEMIN{images/x-office-spreadsheet.png}" alt="icône" vspace="2" align="middle">
 				Visualiser et/ou ajouter des documents à cette séance et ses devoirs
-				</a></p>
-			<p><a href="#URL_PAGE{cahier-de-texte-saisie}&id_article=<?php echo ($id_contenu_seance); ?>" title="Faire une copie de la séance que vous venez de saisir, pour une autre classe/groupe"><img src="#CHEMIN{images/go-jump.png}" alt="icône" vspace="2" align="middle">Dupliquer la séance pour une autre classe/groupe</a>&nbsp;| <a href="#URL_PAGE{cahier-de-texte-saisie}<?php
+				</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-saisie}&id_article=<?php echo ($id_contenu_seance); ?>" title="Faire une copie de la séance que vous venez de saisir, pour une autre classe/groupe"><img src="#CHEMIN{images/go-jump.png}" alt="icône" vspace="2" align="middle">Dupliquer la séance pour une autre classe/groupe</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-saisie}<?php
 	echo ("&id_matiere=$id_matiere");
 	for ($count=0; $count<=$classes; $count++) {
 		echo("&id_classe$count=".$id_classe[$count]);
 	};
 	if ($classes>0) echo ("&classes=$classes");
-			?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a>&nbsp;| <a href="#URL_PAGE{cahier-de-texte-affichage,senschrono=1}&id_auteur=<?php echo($auteur_session['id_auteur']);?>&classe=<?php echo($premiere_classe); ?>&matiere=<?php echo($matiere_titre);?>" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a>&nbsp;|<a href="#URL_PAGE{cahier-de-texte-accueil}" title="retour à l'accueil"><img src="#CHEMIN{images/logo-mini2-22.png}" alt="icône" vspace="2" align="middle">Retourner à l'accueil</a></p>
+				?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-affichage,senschrono=1}&id_auteur=<?php echo($auteur_session['id_auteur']);?>&classe=<?php echo($premiere_classe); ?>&matiere=<?php echo($matiere_titre);?>" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-accueil}" title="retour à l'accueil"><img src="#CHEMIN{images/logo-mini2-22.png}" alt="icône" vspace="2" align="middle">Retourner à l'accueil/au tableau de bord</a></li>
+			</ul>
 		</div>		
 	</div></div>
 
@@ -629,10 +640,13 @@ if($_GET['classe_matiere']){
 		<input type="hidden" name="page" value="cahier-de-texte-saisie">
 			<fieldset>
 			<legend><?php if ($id_article) {echo "Modifier le ";}; ?>Contenu de la séance</legend>
-			<p class="dates">Séance du <INPUT TYPE="text" ID="date_seance" NAME="date_seance" VALUE="<?php if (!$date_seance) echo date("d/m/Y"); else echo $date_seance;?>" SIZE=12></p><?php
+			<p class="dates">Séance du <INPUT TYPE="text" ID="date_seance" NAME="date_seance" VALUE="<?php if (!$date_seance) echo date("d/m/Y"); else echo $date_seance;?>" SIZE=12></p><div style="display: block; float: right; font-size:70%">(<em>Astuce&nbsp;:</em> il faut sauter une ligne pour faire un retour à la ligne) <a class='aide'
+href='./ecrire/?exec=aide_index&amp;aide=raccourcis&amp;var_lang=fr'
+onclick="javascript:window.open(this.href,'spip_aide', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;"><img src='#CHEMIN{/images/aide.gif}'
+alt="AIDE"  title="De l'aide sur cet &eacute;l&eacute;ment" class='aide' /></a></div><?php
 	include_spip('inc/barre');
-	echo afficher_barre("document.getElementById('contenu_seance')"); ?>
-			<textarea id="contenu_seance" name="contenu_seance" cols="60" rows="5"><?php echo $contenu_seance;?></textarea>[
+	echo afficher_barre("document.getElementById('contenu_seance')",$forum=true); ?>
+			<textarea id="contenu_seance" name="contenu_seance" cols="95" rows="5"><?php echo $contenu_seance;?></textarea>[
 
 (#REM) Si la séance est dupliquée/Modifiée, on affiche les documents qui sont liés à la séance...
 
@@ -652,9 +666,12 @@ if($_GET['classe_matiere']){
 
 <?php for ($count=0; $count<=$devoirs; $count++) {
 	$liste_docs_Devoir = $liste_des_listes_de_docs[$count]; ?>
-			<p>À faire pour le <INPUT TYPE="text" class="date_calendrier" NAME="date_devoir<?php echo $count;?>" VALUE="<?php if (!$date_devoir[$count]) echo date("d/m/Y"); else echo $date_devoir[$count];?>" SIZE=12></p><?php
-	echo afficher_barre("document.getElementById('contenu_devoir$count')"); ?>
-			<textarea id="contenu_devoir<?php echo $count;?>" name="contenu_devoir<?php echo $count;?>" cols="60" rows="5"><?php echo $contenu_devoir[$count];?></textarea>[
+			<p>À faire pour le <INPUT TYPE="text" class="date_calendrier" NAME="date_devoir<?php echo $count;?>" VALUE="<?php if (!$date_devoir[$count]) echo date("d/m/Y"); else echo $date_devoir[$count];?>" SIZE=12></p><div style="display: block; float: right; font-size:70%">(<em>Astuce&nbsp;:</em> il faut sauter une ligne pour faire un retour à la ligne) <a class='aide'
+href='./ecrire/?exec=aide_index&amp;aide=raccourcis&amp;var_lang=fr'
+onclick="javascript:window.open(this.href,'spip_aide', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;"><img src='#CHEMIN{/images/aide.gif}'
+alt="AIDE"  title="De l'aide sur cet &eacute;l&eacute;ment" class='aide' /></a></div><?php
+	echo afficher_barre("document.getElementById('contenu_devoir$count')",$forum=true); ?>
+			<textarea id="contenu_devoir<?php echo $count;?>" name="contenu_devoir<?php echo $count;?>" cols="95" rows="5"><?php echo $contenu_devoir[$count];?></textarea>[
 
 (#REM) Si la fiche est dupliquée/Modifiée, on affiche les documents qui sont liés au devoir...
 

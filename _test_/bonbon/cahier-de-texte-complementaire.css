@@ -87,18 +87,11 @@ p.Copie_doc {
 	padding: 2px;
 	-moz-border-radius: 6px;
 }
-.onglets-matieres{
-	float:right;
-	width:10%;
-}
-
-.onglets-matieres a {
-	display: block;
-	float:left;
-}
 .liste-seances {
+/*
 	margin-right: 20em;
 	width:88%;
+*/
 }
 
 a.clic:hover {

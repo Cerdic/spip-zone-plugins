@@ -121,7 +121,8 @@
 
 
 
-.cahier .liste-seances {   clear:           left;
+ .liste-seances {
+   clear:           left;
    border:          1px solid;
    border-color:    Grey Black
                     Black Grey;
@@ -130,8 +131,13 @@
    position:        relative;
    top:             -2px;
    padding:         10px;
-	margin-right: 20em;
-	width:88%;
+
+   width:           99.6%; /*valeur pour IE, c'est casse pied ce navigateur*/
+}
+
+/* Ruse grossière pour cacher la vraie valeur de width à IE... casse pieds*/
+.cahier>.liste-seances {
+	width: 88%;
 }
 
 .cahier .onglets-horizontaux {

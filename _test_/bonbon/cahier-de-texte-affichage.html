@@ -90,7 +90,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 		(#SET{select,''})
 ][
 		(#GET{classe_env}|=={#_ToutesLesClasses_affichage:TITRE}|?{' ',''})#SET{select,'on '}
-]			<a href="[(#SELF|parametre_url{'classe',#_ToutesLesClasses_affichage:TITRE})]" title="Afficher le cahier de texte de la [(#_ToutesLesClasses_affichage:TITRE|textebrut)]" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#_ToutesLesClasses_affichage:TITRE</a>
+]			<a href="[(#SELF|parametre_url{'classe',#_ToutesLesClasses_affichage:TITRE})]" title="Afficher le cahier de texte de la [(#_ToutesLesClasses_affichage:TITRE|textebrut)][ en (#ENV{matiere}|textebrut)]" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#_ToutesLesClasses_affichage:TITRE</a>
 </BOUCLE_Que_les_classes_avec_article></BOUCLE_ToutesLesClasses_affichage>
 
 <!-- les groupes-->
@@ -126,7 +126,7 @@ if (!($_GET['devoirs_seuls'] and !$_GET['matiere'])) {
 		(#SET{select,''})
 ][
 		(#GET{matiere_env}|=={#_ToutesLesMatieres_affichage:TITRE}|?{' ',''})#SET{select,'on '}
-]			<a href="[(#SELF|parametre_url{'matiere',#_ToutesLesMatieres_affichage:TITRE})]" title="Afficher le cahier de texte de la matière [(#_ToutesLesMatieres_affichage:TITRE|textebrut)]"  class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select} hover'" onmouseout="this.className='onglet #GET{select}'">[(#_ToutesLesMatieres_affichage:TITRE)]</a>
+]			<a href="[(#SELF|parametre_url{'matiere',#_ToutesLesMatieres_affichage:TITRE})]" title="Afficher le cahier de texte de la [(#ENV{classe,#GET{classe_defaut}}|textebrut)] en [(#_ToutesLesMatieres_affichage:TITRE|textebrut)]"  class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select} hover'" onmouseout="this.className='onglet #GET{select}'">[(#_ToutesLesMatieres_affichage:TITRE)]</a>
 </BOUCLE_Que_les_matieres_avec_article></BOUCLE_ToutesLesMatieres_affichage>
 		</div>
 <?php
