@@ -86,48 +86,7 @@
 	echo "\" title=\"d&eacute;connexion imm&eacute;diate !\">cliquez ici</a>)</p>\n";?>
 			<a href="#URL_PAGE{cahier-de-texte-saisie}&id_auteur=$id_auteur" title="&Eacute;crire le contenu d\'une s&eacute;ance et ses devoirs &eacute;ventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une s&eacute;ance</a>&nbsp;|
 			 <a href="#URL_PAGE{cahier-de-texte-affichage,senschrono=1}&id_auteur=<?php echo $auteur_session['id_auteur']; ?>" title="Aller voir ses propres entr&eacute;es du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses s&eacute;ances</a>
-			<h3 class="titre"><img src="#CHEMIN{images/utilities-system-monitor.png}" alt="icône" vspace="2" align="top">Tableau de bord de #SESSION{nom}</h3>#SET{ulli,"
-					<ul style='margin-left:3em;'>
-						<li>"}
-			<ul style="text-align: left; padding: 1em;">
-<BOUCLE_Classes_de_lauteur(MOTS){type="Classes"}{par titre}><BOUCLE_Optimisation(ARTICLES){id_auteur=#SESSION{id_auteur}}{id_mot}{0,1}>			<li style="list-style-image: url('#CHEMIN{puce.gif}')"><span class="on">#_Classes_de_lauteur:TITRE</span>&nbsp;: dernière séance saisie
-		[(#SET{compteur_matiere,0)}][(#SET{liste_mat_seances,""})
-]		<BOUCLE_Matieres_de_lauteur(MOTS){type="Matières"}{par titre}><BOUCLE_Seances_de_lauteur(ARTICLES){id_mot=#GET{id_mot_description_seance}}{id_auteur=#SESSION{id_auteur}}{id_mot}{id_mot=#_Classes_de_lauteur:ID_MOT}{!par date}{0,1}>#SET{groupe,""}<BOUCLE_y_a_un_groupe(MOTS){type="Sous groupes de classes"}{id_article}>#SET{groupe,#TITRE}</BOUCLE_y_a_un_groupe>[
-				(#SET{compteur_matiere,[(#GET{compteur_matiere}|plus{1})]})
-				][
-				(#GET{compteur_matiere}|>{1}|?{' ',''})
-					[
-					(#SET{liste_mat_seances,[(#GET{liste_mat_seances}|concat{"</li>
-						<li>"})]})
-					]
-				][
-				(#SET{liste_mat_seances,[(#GET{liste_mat_seances}|concat{
-					"en <strong>",
-					#_Matieres_de_lauteur:TITRE,
-					"</strong>&nbsp;: le ",
-					[<span class='on'>(#DATE|affdate)</span>],
-					[ ((#GET{groupe}))],
-					"&nbsp;- <a href='",
-					[(#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=recalcul}|parametre_url{id_article,#ID_ARTICLE})],
-					"' title='",
-					[Extrait&nbsp;: (#TEXTE|textebrut|couper)],
-					"' onClick='javascript:ouvrefenetre(this.href);return false;'>Voir la séance</a>&nbsp;- <a href='",
-					[(#URL_PAGE{cahier-de-texte-saisie,id_classe0=#_Classes_de_lauteur:ID_MOT}|parametre_url{id_matiere,#_Matieres_de_lauteur:ID_MOT})],
-					"' title='Saisir directement une séance pour la ",
-					#_Classes_de_lauteur:TITRE,
-					" en ",
-					#_Matieres_de_lauteur:TITRE,
-					"'>Saisir la suite</a>"
-					})]})
-				]</BOUCLE_Seances_de_lauteur></BOUCLE_Matieres_de_lauteur>[
-				(#GET{compteur_matiere}|>{1}|?{' ',''})
-					[
-					(#SET{liste_mat_seances,[(#GET{ulli}|concat{#GET{liste_mat_seances},"</li>
-					</ul>"})]})
-					]
-				]#GET{liste_mat_seances}</li>
-</BOUCLE_Optimisation></BOUCLE_Classes_de_lauteur>
-			</ul>
+<INCLURE(session.php){fond=cahier-de-texte-tableau-de-bord}>
 <?php } else {?>
 			#LOGIN_PUBLIC
 <?php }

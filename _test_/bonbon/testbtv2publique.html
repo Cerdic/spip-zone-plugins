@@ -1,0 +1,27 @@
+ #CACHE{0}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>test de la BT v2 sur la partie publique d'un site</title>
+<!--insert head entre là -->
+	#INSERT_HEAD
+<!-- et là -->
+
+</head>
+<body>
+<p>Ceci ne sert à rien sinon à tester la BT v2 avec un textarea:</p>
+
+<?php
+	include_spip('inc/barre');
+	echo afficher_barre("document.getElementById('avec_stats')"); ?>
+			<textarea id="avec_stats" name="avec_stats" cols="60" rows="5">cliquez un peu ici pour voir...</textarea>
+
+<p>Et sans les stats... (affichage type forum):</p>
+
+<?php
+	echo afficher_barre("document.getElementById('sans_stats')",$forum=true); ?>
+			<textarea id="sans_stats" name="sans_stats" cols="60" rows="5">cliquez un peu là... et ça fonctionne bien...</textarea>
+#PLUGIN
+
+</body>
+</html>
