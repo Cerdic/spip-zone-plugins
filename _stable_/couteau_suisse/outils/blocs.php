@@ -15,7 +15,7 @@ function blocs_raccourcis() {
 }
 
 function blocs_callback($matches) {
-	$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $matches[2], 2);
+	$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $matches[3], 2);
 	if ($matches[1]=='visible') {
 		$h4 = '>';
 		$div = '>';
@@ -23,14 +23,15 @@ function blocs_callback($matches) {
 		$h4 = ' class="blocs_replie">';
 		$div = ' class="blocs_invisible">';
 	}
-	return '<div class="cs_blocs"><h4' . $h4 . $t[0] . '</h4><div' . $div . $t[1] . '</div></div>';
+	$b = strlen($matches[2])?" cs_bloc$matches[2]":''; 
+	return "<div class=\"cs_blocs$b\"><h4" . $h4 . $t[0] . '</h4><div' . $div . $t[1] . '</div></div>';
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
 function blocs_rempl($texte) {
 	if (strpos($texte, '<')===false) return $texte;
 	// balises blocs|visible|invisible : il faut un callback pour analyser l'interieur du texte
-	return preg_replace_callback(',<(bloc|visible|invisible)>(.*?)</\1>,ms', 'blocs_callback', $texte);
+	return preg_replace_callback(',<(bloc|visible|invisible)([0-9]*)>(.*?)</\1\2>,ms', 'blocs_callback', $texte);
 }
 
 // fonction pipeline
