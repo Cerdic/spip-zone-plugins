@@ -1,0 +1,15 @@
+<plugin>
+	<nom>Herbier</nom>
+	<prefix>herbier</prefix>
+	<version>1</version>
+	<etat>stable</etat>
+	<install>herbier_install.php</install>
+	<pipeline>
+		<nom>insert_head</nom> 
+		<inclure>herbier_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>boussole</nom> 
+		<inclure>herbier_pipelines.php</inclure>
+	</pipeline>
+</plugin>
