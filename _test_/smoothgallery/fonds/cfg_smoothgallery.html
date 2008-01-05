@@ -30,6 +30,16 @@ Pour supprimer une fonctionnalit&eacute;, mettez <b>_</b> dans la valeur du text
 </select>
 </p>
 <p>
+[(#REM) descriptif=
+<h4>Configuration du plugin Smooth Gallery</h4>
+Ici vous pouvez configurer quelques unes des fonctionnalit&eacute;s de la galerie.<br />
+<br />
+]
+
+[(#REM) titre=Smooth Gallery]
+[(#REM) icone=sg-22.png]
+#CACHE{0}
+
 <label for="_sg_showArrows">* Montrer les fl&ecirc;ches</label>
 <select name="showArrows" id="_sg_ showArrows">
 	<option value="false"[ selected="(#ENV{showArrows}|=={false}|?{selected})"]>Non</option>
