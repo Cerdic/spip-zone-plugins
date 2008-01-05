@@ -41,14 +41,12 @@
 						<textarea id="chapeau" name="chapeau" class="forml" rows="10" cols="50">[(#ENV*{chapeau})]</textarea>
 					</div>]]
 				
-	
-				[(#CONFIG{'articles_texte'}|=={oui}|?{' '})
 					[(#CONFIG{FormulaireArticle/textearticle}|=={on}|?{' ',''})
 					[<div>(#ENV*{formulaire_documents})</div>]
 					<div>
 						<label><:info_texte:></label><br />
 						[(#ENV*{texte}|barre_textarea{25,40})]
-					</div>]]
+					</div>]
 				
 				[(#CONFIG{'articles_ps'}|=={oui}|?{' '})
 					[(#CONFIG{FormulaireArticle/ps}|=={on}|?{' ',''})

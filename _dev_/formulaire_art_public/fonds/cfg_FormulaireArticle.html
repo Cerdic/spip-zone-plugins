@@ -90,8 +90,7 @@ else
 	</p>
 
 	<p>
-	[(#CONFIG{'articles_texte'}|=={non}|?{<span style="color:#666;"><i><:info_texte:> <:formulairearticle:non_actif:></i></span>})]
-	[(#CONFIG{'articles_texte'}|=={oui}|?{' '})<label for="textearticle"><:info_texte:> :<input type="checkbox" name="textearticle" id="textearticle" onclick="showhide(this,'#textetaille')"[ checked="(#CONFIG{FormulaireArticle/textearticle}|?{checked})"] /></label>]
+	<label for="textearticle"><:info_texte:> :<input type="checkbox" name="textearticle" id="textearticle" onclick="showhide(this,'#textetaille')"[ checked="(#CONFIG{FormulaireArticle/textearticle}|?{checked})"] /></label>
 	</p>
 
 	<p id="textetaille" style="[(#ENV{textearticle}|=={on}|?{display: block;, display:none;})]">
