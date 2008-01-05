@@ -646,7 +646,11 @@ onclick="javascript:window.open(this.href,'spip_aide', 'scrollbars=yes, resizabl
 alt="AIDE"  title="De l'aide sur cet &eacute;l&eacute;ment" class='aide' /></a></div><?php
 	include_spip('inc/barre');
 	echo afficher_barre("document.getElementById('contenu_seance')",$forum=true); ?>
-			<textarea id="contenu_seance" name="contenu_seance" cols="70" rows="5"><?php echo $contenu_seance;?></textarea>[
+			<textarea id="contenu_seance" name="contenu_seance" cols="70" rows="5"
+				onselect='storeCaret(this);'
+				onclick='storeCaret(this);'
+				onkeyup='storeCaret(this);'
+				ondblclick='storeCaret(this);'><?php echo $contenu_seance;?></textarea>[
 
 (#REM) Si la séance est dupliquée/Modifiée, on affiche les documents qui sont liés à la séance...
 
@@ -671,7 +675,11 @@ href='./ecrire/?exec=aide_index&amp;aide=raccourcis&amp;var_lang=fr'
 onclick="javascript:window.open(this.href,'spip_aide', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;"><img src='#CHEMIN{/images/aide.gif}'
 alt="AIDE"  title="De l'aide sur cet &eacute;l&eacute;ment" class='aide' /></a></div><?php
 	echo afficher_barre("document.getElementById('contenu_devoir$count')",$forum=true); ?>
-			<textarea id="contenu_devoir<?php echo $count;?>" name="contenu_devoir<?php echo $count;?>" cols="70" rows="5"><?php echo $contenu_devoir[$count];?></textarea>[
+			<textarea id="contenu_devoir<?php echo $count;?>" name="contenu_devoir<?php echo $count;?>" cols="70" rows="5"
+				onselect='storeCaret(this);'
+				onclick='storeCaret(this);'
+				onkeyup='storeCaret(this);'
+				ondblclick='storeCaret(this);'><?php echo $contenu_devoir[$count];?></textarea>[
 
 (#REM) Si la fiche est dupliquée/Modifiée, on affiche les documents qui sont liés au devoir...
 
