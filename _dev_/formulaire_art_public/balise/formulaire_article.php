@@ -160,8 +160,6 @@ function balise_FORMULAIRE_ARTICLE_dyn($id_rubrique,$url) {
 		}
 		
 		// Sinon integrer a la base de donnee
-		$titre= addslashes($titre);
-
 		spip_query("UPDATE spip_articles SET titre = "._q($titre).", id_rubrique = '$id_rubrique', texte = "._q($texte).", chapo = "._q($chapo).", statut = '$statut', lang = '$lang', id_secteur = '$id_secteur', date = '$date_modif', date_redac = '$date_redac', date_modif = '$date_modif', lang = '$var_lang' WHERE id_article = '$article'" );
 		spip_log("insert article : -> $titre");
 
