@@ -1,0 +1,61 @@
+[(#REM) descriptif=
+<h4>Configuration du plugin boutonstexte</h4>
+Ici vous pouvez configurer les boutons dans le texte qui servent à augmenter/diminuer la taille de police de l'affichage des textes.<br />
+Pour supprimer une fonctionnalit&eacute;, mettez <b>_</b> dans la valeur du texte * correspondant, vide fonctionne mais ram&egrave;nera le d&eacute;faut &agrave; la prochaine mise &agrave; jour.
+<br /><a href="http://www.spip-contrib.net/?article1474" class="spip_out">Documentation sur contrib</a>
+]
+
+[(#REM) titre=Smooth Gallery]
+[(#REM) icone=images/smoothgallery.png]
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset><legend><:sgslider:Options:></legend>
+<p>
+<label for="_sg_width">* Largeur (px)</label>
+<input type="text" name="largeur" class="type_txt" id="_sg_width" size="5"
+	value="#ENV{largeur,500}" />
+</p>
+<p>
+<label for="_sg_height">* Hauteur (px)</label>
+<input type="text" name="hauteur" class="type_txt" id="_sg_height" size="5"
+	value="#ENV{hauteur,300}" />
+</p>
+<p>
+<label for="_sg_time">* D&eacute;filement automatique</label>
+<select name="time" id="_sg_time">
+	<option value="false"[ selected="(#ENV{time}|=={false}|?{selected})"]>Non</option>
+	<option value="true"[ selected="(#ENV{time}|=={true}|?{selected})"]>Oui</option>
+</select>
+</p>
+<p>
+<label for="_sg_showArrows">* Montrer les fl&ecirc;ches</label>
+<select name="showArrows" id="_sg_ showArrows">
+	<option value="false"[ selected="(#ENV{showArrows}|=={false}|?{selected})"]>Non</option>
+	<option value="true"[ selected="(#ENV{showArrows}|=={true}|?{selected})"]>Oui</option>
+</select>
+</p>
+<p>
+<label for="_sg_showCarousel">* Afficher les vignettes</label>
+<select name="showCarousel" id="_sg_showCarousel">
+	<option value="false"[ selected="(#ENV{showCarousel}|=={false}|?{selected})"]>Non</option>
+	<option value="true"[ selected="(#ENV{showCarousel}|=={true}|?{selected})"]>Oui</option>
+</select>
+</p>
+<label for="_sg_embedLinks">* Images cliquables</label>
+<select name="embedLinks" id="_sg_embedLinks">
+	<option value="false"[ selected="(#ENV{showCarousel}|=={false}|?{selected})"]>Non</option>
+	<option value="true"[ selected="(#ENV{showCarousel}|=={true}|?{selected})"]>Oui</option>
+</select>
+</p>
+</fieldset>
+
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:ok:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</form>
+
