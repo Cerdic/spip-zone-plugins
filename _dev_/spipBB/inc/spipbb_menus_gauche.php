@@ -56,6 +56,7 @@ function spipbb_menus_gauche($script, $id_salon="", $id_art="", $id_sujet="", $m
 			$modules['01_general'][25] = array('effacer',"spipbb_effacer",'poubelle.gif') ;
 
 			$modules['outils'][10] = array('fromphpbb',"spipbb_admin_fromphpbb",_DIR_IMG_SPIPBB.'fromphpbb-24.png');
+			$modules['outils'][15] = array('fromphorum',"spipbb_admin_fromphorum",_DIR_IMG_SPIPBB.'fromphorum-24.png');
 
 				if ($GLOBALS['spipbb']['config_spam_words']=='oui') {
 					// ces menus ont besoin que le spam soit active

@@ -4,6 +4,7 @@ Todo-list pour spipbb
 Interface Privée - Administration générale :
 -* ameliorer l'"administration" des forums (interface privee)
 -* gestion des threads : splitter déplacer etc
+-* Mode "debutant" : création automatique du forum/mots clés et paramétrage
 
 Interface Privée - Membres:
 -* Gestion des membres (efficace et rapide par tableau avec cases à cocher et filtres eventuels)
@@ -16,6 +17,7 @@ Interface Privée - Import PhpBB :
 -* Import phpBB : import des MP ? Option de depart ?
 -* Import phpBB : adresse IP des posteurs -> forums
 -* Import phpBB : Si pas Iniset, realisation par etapes de la partie 2 et 3 ? Precalcul a l'avance
+-* Import phpBB : Mettre en option l'import des auteurs (remplacer l'id par le nom dans les messages)
 
 Interface Privée - Anti spam :
 -* Gestion des bans : bug avec ajax !
@@ -43,7 +45,7 @@ Bugs et autres elements non finis :
 -* Pouvoir configurer l'ordre de presentation des menus d'admins (par le webmaster)
 -* Boutons d'admin sur l'interface publique ?
 -* Que fait test_inscriptions dans spipbb_options ?
--* Erreur array-merge en pied de page... avec les logs et/ou un URL pour le voir ce serait plus facile :)
+-* Erreur array-merge en pied de page... avec les logs et/ou un URL pour le voir ce serait plus facile :) SVN 17856?
 
 Voir l'intéret de :
 -* http://www.spip-contrib.net/Les-fenetres-flottantes
@@ -56,6 +58,7 @@ Voir l'intéret de :
 -* http://www.spip-contrib.net/Squelettes-par-profil
 -* http://www.spip-contrib.net/Personnalisation-par-profils-avec
 -* http://www.spip-contrib.net/Les-crayons
+-* http://www.spip-contrib.net/Une-arborescence-a-la-phorum-en
 
 Documentation
 ==============
