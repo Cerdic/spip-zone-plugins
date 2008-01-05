@@ -33,7 +33,7 @@
 					[<span class='on'>(#DATE|affdate)</span>],
 					[ ((#GET{groupe}))],
 					"&nbsp;- <a href='",
-					[(#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=recalcul}|parametre_url{id_article,#ID_ARTICLE})],
+					[(#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=calcul}|parametre_url{id_article,#ID_ARTICLE})],
 					"' title='",
 					[Extrait&nbsp;: (#TEXTE|textebrut|couper)],
 					"' onClick='javascript:ouvrefenetre(this.href);return false;'>Voir la séance</a>&nbsp;- <a href='",
