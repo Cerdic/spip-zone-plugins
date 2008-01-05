@@ -1,4 +1,7 @@
 [(#REM) GAF v.0.5 / v.0.6 .. moderateurs : auteurs article contexte + admin restreint ]
+
+[(#REM) Ca ne marche pas car ce modele peut etre appele aussi d'une rubrique]
+#SET{modos,#ARRAY{}}
 <BOUCLE_modo_art(AUTEURS){id_article}>
 	#SET{modos,#GET{modos}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_AUTEUR}}}
 </BOUCLE_modo_art>
@@ -21,3 +24,5 @@
 	</BOUCLE_restitue>
 </div>
 </B_restitue>
+Pas de modo
+<//B_restitue>

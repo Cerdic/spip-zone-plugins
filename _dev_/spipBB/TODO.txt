@@ -18,7 +18,6 @@ Interface Privée - Import PhpBB :
 -* Import phpBB : Si pas Iniset, realisation par etapes de la partie 2 et 3 ? Precalcul a l'avance
 
 Interface Privée - Anti spam :
--* Anti spam : sur le login, IP (ban)
 -* Gestion des bans : bug avec ajax !
 
 Interface publique - Générale :
@@ -29,10 +28,9 @@ Interface publique - Générale :
 -* 0.3.9 : j'ai un doute sur la fonctionnalité "ne plus suivre les sujets" page profil publique
 -* 0.4.x : Manque formulaire inscription optionnel (remplacer le standard que l'on ne doit plus modifier par un specifique spipbb)
 -* 0.4.x : nouveau message : le sujet est prérempli avec le titre du forum. Ne serait-il pas mieux d'avoir cette zone à blanc, et d'imposer qu'elle ne  soit pas laissée à vide ? (dans le cas d'un nouveau sujet, pas d'une  réponse)
+-* 0.5 :  L’idéal serait de pouvoir ajouter une photo ou un document dans un post ou réponse à celui-ci et ce serait parfait
 
 Bugs et autres elements non finis :
--* 0.3.x Erreur array-merge en pied de page... avec les logs et/ou un URL pour le voir ce serait plus facile :)
-
 -* 0.4.x Activation des mots clés. Il y a plein de choses à dire et à faire dans ce domaine prévus pour la 0.4 . En attendant, même si les mots clés nécessaires n'ont pas été créés lors de l'installation on peut le faire faire automatiquement à spipBB en effet le formulaire (Configuration) permet de saisir le nom du groupe (spipbb par défaut) de mots clés. Si vous validez (bouton juste en dessous), il créé le groupe de mots clés tout seul :-)
 -* Problemes titres _T et _L // traductions à revoir corriger finir
 -* Bug dans le move d'un forum des fois ça ne fonctionne pas... (valider les cas et corriger)
@@ -41,11 +39,11 @@ Bugs et autres elements non finis :
 -* Affichage des annonces / postits / Fermes
 -* mot cles ferme, postit, annonce : bug -> ils ne doivent s'appliquer qu'au message principal du thread
 -* Envisager de controler l'etat de la config régulierement ? a chaque passsage dans un menu d'admin ?
--* Le changement de version du plugin oblige a tout reconfigurer et perds toutes les infos... <-- regle ? non il faut encore passer par la page de config (mais tous les params sont stockés)... a cause de de l'ordre des check_if...
 -* Bug ?? pourquoi la balise CALC_STATS... est elle calculee 2 fois de suite ?
 -* Pouvoir configurer l'ordre de presentation des menus d'admins (par le webmaster)
 -* Boutons d'admin sur l'interface publique ?
 -* Que fait test_inscriptions dans spipbb_options ?
+-* Erreur array-merge en pied de page... avec les logs et/ou un URL pour le voir ce serait plus facile :)
 
 Voir l'intéret de :
 -* http://www.spip-contrib.net/Les-fenetres-flottantes

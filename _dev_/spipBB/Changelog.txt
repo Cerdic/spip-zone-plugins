@@ -1,4 +1,9 @@
-﻿2007-12-29  chryjs  <chryjs!@!free!.!fr>
+﻿2008-01-05  chryjs  <chryjs!@!free!.!fr>
+
+ * On ne peut afficher un moderateur que pour un forum (ie : un article).. pour un groupe (ie: une rubrique) ca n'a pas de sens
+
+
+2007-12-29  chryjs  <chryjs!@!free!.!fr>
 
  * Ajout du fond backend-forum manquant pour les boutons RSS http://www.spip-contrib.net/Plugin-SpipBB#forum401676
  * Correction affichage #ID_AUTEUR dans page profil http://www.spip-contrib.net/Plugin-SpipBB#forum401676

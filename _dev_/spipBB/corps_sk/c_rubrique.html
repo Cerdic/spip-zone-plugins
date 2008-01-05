@@ -46,8 +46,12 @@
 				<td class="titreforum">
 					[<a href="#URL_ARTICLE" class="titre">(#TITRE|supprimer_numero)</a>]
 					[<br />(#INTRODUCTION)] [(#REM) chryjs (15/11/07) etait DESCRIPTIF pas par defaut]
+
+[(#REM) v.0.5 affichage moderateurs ]
+[(#MODELE{moderateurs_ligne}{id_article}{id_rubrique})]
+
 				</td>
-		
+
 			<BOUCLE_sujets1(FORUMS){id_article}{doublons sujets1}></BOUCLE_sujets1>
 				<td class="nbr_sujet">#TOTAL_BOUCLE</td>
 			<//B_sujets1>
@@ -63,14 +67,14 @@
 				[(#REM) c.23/12/7 on passe par la page profile]
 				<BOUCLE_auteurp1(AUTEURS){id_auteur}{tout}>
 					<a
-					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''}) 
+					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
 					 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#_primale:ID_RUBRIQUE})]"
 					]
 					>#NOM</a>
 				</BOUCLE_auteurp1>
 				</B_auteurp1>
 					[(#NOM|sinon{<:spipbb:anonyme:>})]
-				<//B_auteurp1> 
+				<//B_auteurp1>
 				<BOUCLE_papa1(FORUMS){id_thread}>#SET{idfo,#ID_FORUM}</BOUCLE_papa1>
 				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{idfo}})]#forum#ID_FORUM" class="adermsg" title="<:spipbb:messages_voir_dernier:>">&nbsp;
 				<span>(<:spipbb:messages_voir_dernier:>)</span></a>
@@ -106,6 +110,10 @@
 				<td class="titreforum">
 					[<a href="#URL_ARTICLE" class="titre">(#TITRE|supprimer_numero)</a>]
 					[<br />(#INTRODUCTION)] [(#REM) chryjs (15/11/07) etait DESCRIPTIF pas par defaut]
+					
+[(#REM) v.0.5 affichage moderateurs ]
+[(#MODELE{moderateurs_ligne}{id_article}{id_rubrique})]
+
 				</td>
 		
 			<BOUCLE_sujets(FORUMS){id_article}{doublons sujets}></BOUCLE_sujets>
