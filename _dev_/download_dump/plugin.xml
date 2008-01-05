@@ -5,9 +5,10 @@
 	<etat>dev</etat>
 	<description>
 	Ce plugin ajoute une fonctionnalit&eacute; dans la zone de configuration du site permettant de t&eacute;l&eacute;charger le dump sur site sur son ordinateur. Spip 1.9.2.
+<h4>[T&eacute;l&eacute;charger la sauvergardre de la base de donn&eacute;e->.?exec=dd]</h4>
 	</description>
 	<lien>
-	[Documentation->http://www.spip-contrib.net/?article2563]
+	[Documentation->http://www.spip-contrib.net/Plugin-Download-Dump]
 	</lien>
 	<icon>
 	dd.png
