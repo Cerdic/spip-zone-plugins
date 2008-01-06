@@ -1,6 +1,7 @@
 2008-01-06  chryjs  <chryjs!@!free!.!fr>
 
  * Correction : la lecture des URLs filtre les liens A HREF et valide chaque ligne pour s'assurer qu'il s'agit bien d'une URL bien formée (sans plus)
+ * On log les erreurs (juste au cas où)
  * migre_static (0.85)
 
 
