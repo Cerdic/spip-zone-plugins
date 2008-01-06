@@ -140,7 +140,7 @@ function get_list_of_pages($uri_list="")
 	$uri_pages=array();
 	if (!empty($uri_list)) {
 		if (!preg_match(',^https?://[^.]+\.[^.]+.*/.*$,', $uri_list)) {
-			//echo "$uri_list is not a valid url<br/>\n";
+			spip_log("migrestatic:get_list_of_pages:'$uri_list' is not a valid url");
 			return $uri_pages;
 		}
 		$site=parse_url($uri_list); // urlencode ?
@@ -160,9 +160,9 @@ function get_list_of_pages($uri_list="")
 						$uri_pages[]=$val;
 						//echo "good:$val<br>\n";
 					}
-					//else echo "$val is not in $site_uri<br/>\n" ;
+					else spip_log("migrestatic:get_list_of_pages:'$val' is not in '$site_uri'" ;
 				} // preg_match
-				//else echo "$val : is not an url<br/>\n";
+				else spip_log("migrestatic:get_list_of_pages:'$val' is not an url";
 			} // !empty
 		} // while
 	}
