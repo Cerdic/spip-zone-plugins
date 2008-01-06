@@ -278,6 +278,72 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 // --></script>
 
 
+[(#REM) ------------------------ ESPACE WIKI MOTS CLEF------------------------ ]
+<fieldset>
+    <legend>
+	    Espace wiki par mots clef
+    </legend>
+
+    <p><label>
+            Choisissez ci-dessous les mots clef qui activeront le mode wiki, c'est-&#224;-dire &#233;ditable par tous depuis l'espace public (&#224; condition d'avoir une interface, par exemple les crayons)&nbsp;<br/>
+            <input type="checkbox" name="espace_wiki_motsclef" id="espace_wiki_motsclef"  [checked="(#ENV{espace_wiki_motsclef})"] /> Activer la gestion par mots clef
+    </label></p>
+
+    <p id="espace_wiki_motsclef_qui">
+        Voulez-vous ouvrir ce wiki au-del&#224; des administrateurs&nbsp;:
+        <br />
+        <label>Ouvrir aux r&#233;dacteurs du site&nbsp; :
+            #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_redacteurs,'',''}}
+            <select name="espace_wiki_motsclef_redacteurs" id="espace_wiki_motsclef_redacteurs">
+                [(#REM) Mots clef Wiki Redacteurs]
+                <BOUCLE_mwr(MOTS){tout}{par num titre, titre}>
+	                <option value="#ID_MOT"[(#ENV{espace_wiki_motsclef_redacteurs}|=={#ID_MOT}|?{' selected="selected"'})]>
+	                #TITRE
+	                </option>
+                </BOUCLE_mwr>
+            </select>
+        </label>
+
+        <br />
+        <label>Ouvrir aux visiteurs enregistr&#233;s&nbsp; :
+            #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_visiteurs,'',''}}
+            <select name="espace_wiki_motsclef_visiteurs" id="espace_wiki_motsclef_visiteurs">
+                [(#REM) Mots clef Wiki Visiteurs]
+                <BOUCLE_mwv(MOTS){tout}{par num titre, titre}>
+	                <option value="#ID_MOT" [(#ENV{espace_wiki_motsclef_visiteurs}|=={#ID_MOT}|?{' selected="selected"'})]>
+	                #TITRE
+	                </option>
+                </BOUCLE_mwv>
+            </select>
+        </label>
+
+        <br />
+
+        <label>Ouvrir à tous les visiteurs du site :
+            #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_anonyme,'',''}}
+            <select name="espace_wiki_motsclef_anonyme" id="espace_wiki_motsclef_anonyme">
+                [(#REM) Mots clef Wiki Anonyme]
+                <BOUCLE_mwa(MOTS){tout}{par num titre, titre}>
+	                <option value="#ID_MOT"[(#ENV{espace_wiki_motsclef_anonyme}|=={#ID_MOT}|?{' selected="selected"'})]>
+	                #TITRE
+	                </option>
+                </BOUCLE_mwa>
+            </select>
+        </label>
+    </p>
+</fieldset>
+
+[(#REM) Code jQuery de l'espace wiki par mots clef; plier/deplier la moderation ]
+<script type="text/javascript"><!--
+	$('#espace_wiki_motsclef')
+	.bind('change', function() {
+            $('#espace_wiki_motsclef_qui').slideToggle('slow');
+	})
+	if ($('#espace_wiki_motsclef:checked').length == 0)
+		$('#espace_wiki_motsclef_qui').hide();
+// --></script>
+
+
 [(#REM) ---------------------- CONFIGURATION DU SITE -------------------- ]
 
 <fieldset>

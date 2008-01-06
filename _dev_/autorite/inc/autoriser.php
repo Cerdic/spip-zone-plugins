@@ -68,8 +68,10 @@ include _DIR_RESTREINT.'inc/autoriser.php';
 ##
 ## Dire aux crayons si les visiteurs anonymes ont des droits
 ##
-if ($GLOBALS['autorite']['espace_wiki']
-AND $GLOBALS['autorite']['espace_wiki_anonyme']) {
+if (($GLOBALS['autorite']['espace_wiki']
+AND $GLOBALS['autorite']['espace_wiki_anonyme']) OR (
+    $GLOBALS['autorite']['espace_wiki_motsclef'] 
+AND $GLOBALS['autorite']['espace_wiki_motsclef_anonyme'])) {
 	if (!function_exists('analyse_droits_rapide')) {
 	function analyse_droits_rapide() {
 		return true;
@@ -113,11 +115,53 @@ if ($GLOBALS['autorite']['espace_wiki']) {
 		$autorite_erreurs[] = 'autorisation_wiki_visiteur';
 }
 
+
+##
+## une fonction qui gere les droits wiki géré par mot clef
+##
+if ($GLOBALS['autorite']['espace_wiki_motsclef']) {
+	if (!function_exists('autorisation_wiki_motsclef_visiteur')) {
+	function autorisation_wiki_motsclef_visiteur($qui, $id_article) {
+
+	    //determine les mots clef affectés à l'article
+	    $s = spip_query(
+	    "SELECT id_mot FROM spip_mots_articles WHERE id_article=".$id_article);
+
+	    //obtient la liste des mots clefs affecté à l'article
+        while ( $r = sql_fetch($s) ) { 
+            $array_mot[] = $r['id_mot'];
+        }	    
+        
+        //aucun mot clef d'affecter à l'article, rien à faire
+        if (is_null($array_mot))
+            return false;
+	            	    	    
+	    //vérification que l'article posséde un mot clef correspondant au staut du visiteur
+		switch($qui['statut']) {
+			case '0minirezo':
+			case '1comite':
+				if (in_array($GLOBALS['autorite']['espace_wiki_motsclef_redacteurs'],$array_mot))
+					return true;
+			case '6forum':
+				if (in_array($GLOBALS['autorite']['espace_wiki_motsclef_visiteurs'],$array_mot))
+					return true;
+			default:
+				if (in_array($GLOBALS['autorite']['espace_wiki_motsclef_anonyme'],$array_mot))
+					return true;
+		}
+		return false;
+	}
+	} else
+		$autorite_erreurs[] = 'autorisation_wiki_motsclef_visiteur';
+}
+
+
 ##
 ## autoriser_article_modifier
 ##
 if ($GLOBALS['autorite']['auteur_mod_article']
 OR $GLOBALS['autorite']['espace_wiki']
+OR $GLOBALS['autorite']['espace_wiki_motsclef']
 OR $GLOBALS['autorite']['redacteur_mod_article']
 OR false // autre possibilite de surcharge ?
 ) {
@@ -126,13 +170,18 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
 	"SELECT id_rubrique,id_secteur,statut FROM spip_articles WHERE id_article="._q($id));
 	$r = sql_fetch($s);
-	include_spip('inc/auth');
+	include_spip('inc/auth');		
 	return
 		autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
 		OR (
 			// Cas du wiki, on appelle la fonction qui verifie les droits wiki
 			$GLOBALS['autorite']['espace_wiki']
 			AND autorisation_wiki_visiteur($qui, $r['id_secteur'])
+		)
+		OR (
+			// Cas du wiki par mot clefs, on appelle la fonction qui verifie les droits wiki
+			$GLOBALS['autorite']['espace_wiki_motsclef']
+			AND autorisation_wiki_motsclef_visiteur($qui, _q($id))
 		)
 		OR (
 			// auteur autorise a modifier son article
