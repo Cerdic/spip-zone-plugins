@@ -44,6 +44,9 @@
 				<option value=""[(#ENV{jour_semaine_abbr,''}|=={''}|?{ selected})]>jour complet</option>
 				<option value="abbr"[(#ENV{jour_semaine_abbr,''}|=={abbr}|?{ selected})]>abr&eacute;g&eacute;</option>
 				<option value="initiale"[(#ENV{jour_semaine_abbr,''}|=={initiale}|?{ selected})]>initiale</option>
+				<option value="1car"[(#ENV{jour_semaine_abbr,''}|=={1car}|?{ selected})]>premi&egrave;re lettre</option>
+				<option value="2car"[(#ENV{jour_semaine_abbr,''}|=={2car}|?{ selected})]>deux lettres</option>
+				<option value="3car"[(#ENV{jour_semaine_abbr,''}|=={3car}|?{ selected})]>trois lettres</option>
 			</select>
 			<!-- #ENV{jour_semaine_abbr} -->
 		</p>

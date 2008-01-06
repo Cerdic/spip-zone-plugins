@@ -11,8 +11,25 @@ function jour_semaine($jour) {
 	return ((($jour-1)%7)+1);
 }
 
+//fournit le jour de semaine selon son numero
+// - en entier/abrege/initiale/1-3caracteres
+// - dans la langue ad'hoc
 function date_jour($jour, $abbr='') {
-	return _T('date_jour_'.$jour.($abbr ? '_'.$abbr : ''));
+	$res = 'date_jour_'.$jour;
+	switch ($abbr) {
+	case "1car" :
+	case "2car" :
+	case "3car" :
+		$nb_car = $abbr{0};
+		$res = substr(_T($res), 0, $nb_car);
+		break;
+	case "abbr" :
+	case "initiale" :
+		$res .= '_'.$abbr;
+	default :
+		$res = _T($res);
+	}
+	return $res;
 }
 
 function minical_compteur($code) {
