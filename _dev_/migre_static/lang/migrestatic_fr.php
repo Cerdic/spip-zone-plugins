@@ -21,9 +21,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'liste_des_pages' => 'http://www.monsite.com/la_liste_des_pages.html',
 'sous_choix_url_listepages' => 'par exemple http://www.monsite.com/la_liste_des_pages.html',
 'choix_balise_centre_debut'=> 'Filtre (expresssion r&eacute;guli&egrave;re) de d&eacute;but de bloc (facultatif)',
-'sous_choix_balise_centre_debut'=>'Par exemple : &lt;.{3,5}NAME.*index.{3,5}&gt;',
+'sous_choix_balise_centre_debut'=>'Par exemple : &lt;.{3,5}BEGIN.{3,5}&gt;',
 'choix_balise_centre_fin'=> 'Balise de fin de bloc (facultatif)',
-'sous_choix_balise_centre_fin'=> 'Par exemple : &lt;.{3,5}END.*index.*&gt;',
+'sous_choix_balise_centre_fin'=> 'Par exemple : &lt;.{3,5}END.*&gt;',
 'choix_test'=>'Attention : R&eacute;aliser un import &agrave; blanc',
 'sous_choix_test'=>'Si la case est coch&eacute;e les contenus seront seulement affich&eacute;s',
 

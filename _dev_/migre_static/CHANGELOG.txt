@@ -1,3 +1,9 @@
+2008-01-06  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction : la lecture des URLs filtre les liens A HREF et valide chaque ligne pour s'assurer qu'il s'agit bien d'une URL bien formée (sans plus)
+ * migre_static (0.85)
+
+
 2007-12-29  chryjs  <chryjs!@!free!.!fr>
 
  * Mise a jour des liens externes en liens internes type artxxx

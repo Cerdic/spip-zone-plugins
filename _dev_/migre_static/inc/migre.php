@@ -139,20 +139,31 @@ function get_list_of_pages($uri_list="")
 	include_spip("inc/distant");
 	$uri_pages=array();
 	if (!empty($uri_list)) {
+		if (!preg_match(',^https?://[^.]+\.[^.]+.*/.*$,', $uri_list)) {
+			//echo "$uri_list is not a valid url<br/>\n";
+			return $uri_pages;
+		}
 		$site=parse_url($uri_list); // urlencode ?
 		$site_uri= $site[host];
 		$dochtml = recuperer_page($uri_list,true);
+		$dochtml = preg_replace(';\<[\t| |\s]*a[\t| |\s]*href[\t| |\s]*=[\t| |\s]*["\']?([^"\']*)["\']?.*?\>(.*?)<\/a>;i','\\1',$dochtml); // extract from a href=
 		$prelist = preg_split("/\r\n|\n\r|\n|\r|\s| |\t/",$dochtml);
 		reset($prelist);
 		while (list($key,$val)=each($prelist)) {
-			$val=preg_replace("/[\t| |\s]#.*/","",$val); // remove comments
-			$val=preg_replace("/^#.*$/","",$val); // remove comments line
+			$val = preg_replace("/[\t| |\s]#.*/","",$val); // remove comments
+			$val = preg_replace("/^#.*$/","",$val); // remove comments line
+
 			if (!empty($val)) {
-				$site=parse_url($val);
-				if ($site[host] == $site_uri) {
-					$uri_pages[]=$val;
-				}
-			}
+				if (preg_match(',^https?://[^.]+\.[^.]+.*/.*$,', $val)) {
+					$site=parse_url($val);
+					if ($site[host] == $site_uri) {
+						$uri_pages[]=$val;
+						//echo "good:$val<br>\n";
+					}
+					//else echo "$val is not in $site_uri<br/>\n" ;
+				} // preg_match
+				//else echo "$val : is not an url<br/>\n";
+			} // !empty
 		} // while
 	}
 	return $uri_pages;
