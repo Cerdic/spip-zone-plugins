@@ -15,6 +15,7 @@ function analyse_droits_rapide_dist() {
 
 // Le pipeline header_prive (pour y tester les crayons)
 function Crayons_insert_head($head) {
+
     // Pages crayonnables
     if (!in_array(_request('exec'), array( /* 'articles', 'etc...' */ )))
         return $head;
@@ -40,10 +41,12 @@ function Crayons_insert_head($head) {
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
 function &Crayons_affichage_final(&$page) {
 
+    include_spip('inc/autoriser');
+
     // ne pas se fatiguer si le visiteur n'a aucun droit
     if (!(function_exists('analyse_droits_rapide')?analyse_droits_rapide():analyse_droits_rapide_dist()))
         return $page;
-
+    
     // sinon regarder rapidement si la page a des classes crayon
     if (strpos($page, 'crayon')===FALSE)
         return $page;
