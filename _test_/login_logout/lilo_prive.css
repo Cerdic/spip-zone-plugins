@@ -96,7 +96,7 @@ div.reponse_formulaire, .reponse_formulaire p {
 	background-color:#000; color:#fff;
 	margin-top:0;
 	line-height:normal;
-	font-size:normal;
+	font-size:100%;
 	padding:0 1ex;
 }
 .reponse_formulaire p {
