@@ -193,7 +193,7 @@ function bbcode_to_raccourcis_spip($texte) {
 	//    $result = $texte;
 	// on applique les transformations simples
 	$result = str_replace($bbcode, $spipcode, $result);
-	//    $result = preg_replace('/\[quote(:)?[A-Fa-f0-9]*="([^"]*)"\]/','<div class="quote"><p>\\2 <i>a �crit :</i></p><p>',$result);
+	//    $result = preg_replace('/\[quote(:)?[A-Fa-f0-9]*="([^"]*)"\]/','<div class="quote"><p>\\2 <i>a ecrit :</i></p><p>',$result);
 	//    $result = preg_replace('/\[\/quote(:)?[A-Fa-f0-9]*\]/','</p></div>',$result);
 	$result = nl2br($result);
 
@@ -373,12 +373,12 @@ function fromphpbb_delete_metas()
 function migre_categories_forums() {
 	global $spipbb_fromphpbb;
 
-	$res = "<p>Traduction en cours...</p>";
+	$res = "<h1>"._T('spipbb:fromphpbb_migre_categories')."</h1>";
 
-	$res .= "<p>Implantation des forums dans la rubrique ".$spipbb_fromphpbb['spiprubid']."</p>\n";
-	$res .= "<p>Les annonces recevront le mot clef ".$spipbb_fromphpbb['mc_annonce_id']."</p>\n";
-	$res .= "<p>Les post its recevront le mot clef ".$spipbb_fromphpbb['mc_postit_id']."</p>\n";
-	$res .= "<p>Les sujets clos recevront le mot clef ".$spipbb_fromphpbb['mc_ferme_id']."</p>\n";
+	$res .= "<p>"._T('spipbb:fromphpbb_migre_categories_dans_rub_dpt') .$spipbb_fromphpbb['spiprubid']."</p>\n";
+	$res .= "<p>"._T('spipbb:fromphpbb_migre_categories_kw_ann_dpt') .$spipbb_fromphpbb['mc_annonce_id']."</p>\n";
+	$res .= "<p>"._T('spipbb:fromphpbb_migre_categories_kw_postit_dpt') .$spipbb_fromphpbb['mc_postit_id']."</p>\n";
+	$res .= "<p>"._T('spipbb:fromphpbb_migre_categories_kw_ferme_dpt').$spipbb_fromphpbb['mc_ferme_id']."</p>\n";
 	$res .= "<hr />";
 	//die ("arret pour debug");
 
@@ -390,7 +390,7 @@ function migre_categories_forums() {
 	select_phpbb_db();
 
 	$result = mysql_query("SELECT * FROM ".$spipbb_fromphpbb['PR']."categories",$spipbb_fromphpbb['phpbb_connect']) or
-		die("Impossible de recuperer les categories");
+		die(_T('spipbb:fromphpbb_migre_categories_impossible'));
 	// cat_id   	  cat_title   	  cat_order 
 	$spiprub = 0;
 	select_spip_db();
@@ -411,7 +411,7 @@ function migre_categories_forums() {
 							'lang'=>$spipbb_fromphpbb['phpbb_lang'],
 							'statut_tmp'=>'publie')
 							);
-				$res .= "<p>Groupe $rub_name [ $spip_id ]</p>";
+				$res .= "<p>"._T('spipbb:fromphpbb_migre_categories_groupe')." $rub_name [ $spip_id ]</p>";
 				// memorise la relation entre les id de categories et les rubriques
 				$spipbb_fromphpbb['spiprub_from_catid'][$row['cat_id']] = $spip_id;
 			}
@@ -426,7 +426,7 @@ function migre_categories_forums() {
 			} // (go)
 		}
 		else {
-			$res .= "<p>$rub_name existe : $verif</p>";
+			$res .= "<p>$rub_name "._T('spipbb:fromphpbb_migre_existe_dpt')." $verif</p>";
 			$spipbb_fromphpbb['spiprub_from_catid'][$row['cat_id']] = $verif;
 		} // empty(verif)
 	}
@@ -461,7 +461,7 @@ function migre_categories_forums() {
 								'lang'=>$spipbb_fromphpbb['phpbb_lang'] )
 							);
 				$spipbb_fromphpbb['spip_art_from_forumid'][$row['forum_id']] = $spip_id;
-				$res .= "<p>Forum $titre [ $spip_id ]</p>";
+				$res .= "<p>"._T('spipbb:fromphpbb_migre_categories_forum')." $titre [ $spip_id ]</p>";
 			}
 			else {
 				$res .= "<p>$rub, $titre, $descriptif</p>";
@@ -474,7 +474,7 @@ function migre_categories_forums() {
 			} // (go)
 		}
 		else {
-			$res .= "<p>$rub, $titre, $descriptif existe : $verif</p>";
+			$res .= "<p><strong>$rub, $titre, $descriptif"._T('spipbb:fromphpbb_migre_existe_dpt')." $verif</strong></p>";
 			$spipbb_fromphpbb['spip_art_from_forumid'][$row['forum_id']] = $verif;
 		} // empty(verif)
 	}
@@ -488,7 +488,7 @@ function migre_categories_forums() {
 function migre_utilisateurs() {
 	global $spipbb_fromphpbb;
 
-	$res = "<p>Traduction en cours...</p>";
+	$res = "<h1>"._T('spipbb:fromphpbb_migre_utilisateurs')."</h1>";
 
 	$res .= "<hr />";
 	//die ("arret pour debug");
@@ -496,10 +496,9 @@ function migre_utilisateurs() {
 	//
 	// transfert des utilisateurs
 	//
-	$res .= "<p>Transfert des utilisateurs</p>";
 	select_phpbb_db();
 	$result = mysql_query("select * FROM ".$spipbb_fromphpbb['PR']."users",$spipbb_fromphpbb['phpbb_connect']) or
-		die("Impossible de recuperer les utilisateurs");
+		die(_T('spipbb:fromphpbb_migre_utilisateurs_impossible'));
 
 	$compte_user = 0;
 	$spipaut = 0;
@@ -507,8 +506,8 @@ function migre_utilisateurs() {
 	select_spip_db();
 	while ($row = mysql_fetch_assoc($result))
 	{
-		// on commence par la date de la derni�re visite et
-		// par la date d'inscription pour �liminer les gus
+		// on commence par la date de la derniere visite et
+		// par la date d'inscription pour eliminer les gus
 		// qui sont inscrit depuis longtemps mais qui ne
 		// sont jamais venus sur les forums
 		$date_inscription = $row['user_regdate'];
@@ -537,7 +536,8 @@ function migre_utilisateurs() {
 			$nom = addslashes($row['username']);
 			$email = $row['user_email'];
 			$pass = $row['user_password'];
-			$site = $row['user_website']; if ($site == "http://") { $site = ""; }
+			$site = $row['user_website']; 
+			if ((!preg_match(',^https?://[^.]+\.[^.]+.*/.*$,', $site)) { $site = ""; } // on vire les url non conformes
 			$user_lang = $row['user_lang'];
 			$user_lang = $user_lang ? $user_lang : $spipbb_fromphpbb['spip_lang'] ;
 			$voir_en_ligne = ($row['user_allow_viewonline']==1) ? 'oui' : 'non' ;
@@ -611,7 +611,7 @@ function migre_utilisateurs() {
 				} // ($spipbb_fromphpbb['go'])
 			}
 			else {
-				$res .= "<p>$nom existe : $verif</p>";
+				$res .= "<p>$nom "._T('spipbb:fromphpbb_migre_existe_dpt')." $verif</p>";
 				$spipbb_fromphpbb['spip_auteur_from_user_id'][$row['user_id']] = $spip_id;
 				$auteur_spip = true;
 			} // emtpy(spip_id)
@@ -645,7 +645,7 @@ function migre_utilisateurs() {
 								);
 					}
 					else {
-						$res .= "<p>Ajout admin restreint</p>";
+						$res .= "<p>"._T('spipbb:fromphpbb_migre_utilisateurs_admin_restreint_add'). "</p>";
 						$query = "INSERT INTO spip_auteurs_rubriques (id_auteur,id_rubrique) ".
 							"VALUES ('$spip_id','".$spipbb_fromphpbb['spiprubid']."')";
 						$res .= "<p>$query</p>";
@@ -653,7 +653,7 @@ function migre_utilisateurs() {
 				}
 			}
 			else {
-				$res .= "<p>Deja admin restreint</p>";
+				$res .= "<p>"._T('spipbb:fromphpbb_migre_utilisateurs_admin_restreint_already'). "</p>";
 			}
 
 			if (($compte_user % 20) == 0) { $res .= sprintf("<p>[%d]",$compte_user); }
@@ -661,7 +661,7 @@ function migre_utilisateurs() {
 			$compte_user++;
 		}
 	}
-	$res .= "\n<p> Ajout de $compte_user utilisateurs.</p>" ;
+	$res .= "\n<p>"._T('spipbb:fromphpbb_migre_utilisateurs_total_dpt'). " $compte_user</p>" ;
 
 	return $res;
 } // migre_utilisateurs
@@ -672,8 +672,8 @@ function migre_utilisateurs() {
 function migre_threads() {
 	global $spipbb_fromphpbb;
 
-	$res .= "<p>Import des topics et des posts</p>";
-	
+	$res = "<h1>"._T('spipbb:fromphpbb_migre_thread')."</h1>";
+
 	select_phpbb_db();
 	$query = "SELECT * FROM ".$spipbb_fromphpbb['PR']."topics,".$spipbb_fromphpbb['PR'].
 		"posts,".$spipbb_fromphpbb['PR']."posts_text WHERE (".$spipbb_fromphpbb['PR'].
@@ -682,7 +682,7 @@ function migre_threads() {
 		$spipbb_fromphpbb['PR']."posts.post_id";
 
 	$result = mysql_query($query,$spipbb_fromphpbb['phpbb_connect']) or
-		die("Impossible de recuperer les posts : ".mysql_error($spipbb_fromphpbb['phpbb_connect']));
+		die(_T('spipbb:fromphpbb_migre_thread_impossible_dpt').mysql_error($spipbb_fromphpbb['phpbb_connect']));
 
 	$compte_posts = 0;
 	$topic_post = array();
@@ -699,13 +699,13 @@ function migre_threads() {
 		else {
 			$id_parent = $topic_post[$topic_id];
 		}
-	
+
 		// traite le cas des posts qui appartiennent a un forum qui n'existe plus
 		if (! isset($spipbb_fromphpbb['spip_art_from_forumid'][$row['forum_id']])) { continue; }
-		
+
 		$id_article = $spipbb_fromphpbb['spip_art_from_forumid'][$row['forum_id']];
 		$date_heure = date("Y-m-d H:i:s",$row['post_time']);
-		
+
 		if ($id_parent == 0) {
 			$titre = fromphpbb_convert($row['topic_title']);
 		}
@@ -717,9 +717,9 @@ function migre_threads() {
 			$titre = fromphpbb_convert($row['post_subject']);
 			}
 		}
-		
+
 		$texte = fromphpbb_convert($row['post_text']);
-		
+
 		$poster_id = $row['poster_id'];
 		if (! isset($spipbb_fromphpbb['spip_auteur_from_user_id'][$poster_id])) {
 			$id_auteur = 0;
@@ -727,7 +727,7 @@ function migre_threads() {
 		else {
 			$id_auteur = $spipbb_fromphpbb['spip_auteur_from_user_id'][$poster_id];
 		}
-		
+
 		$username = fromphpbb_convert($row['post_username']);
 		if ($username != '') {
 			$auteur = $username;
@@ -742,7 +742,7 @@ function migre_threads() {
 				$auteur = 'anonyme';
 			}
 		}
-		
+
 		// recupere l'email
 		$query = "SELECT email FROM spip_auteurs WHERE id_auteur=$id_auteur";
 		$r_email = sql_query($query) or die("Erreur SQL($query)");
@@ -752,13 +752,13 @@ function migre_threads() {
 		else {
 			$email_auteur = 'nobody@nowhere.nodomain';
 		}
-		
-		$statut = 'publie';
-		
+
+
 		// converti le bbcode en raccourcis SPIP
 		$titre = bbcode_to_raccourcis_spip($titre);
 		$texte = bbcode_to_raccourcis_spip($texte);
-		
+		$ip_post = decode_ip($row['poster_ip']);
+
 		if (empty($id_parent)) {
 			$id_thread=$id_forum ;
 
@@ -778,28 +778,29 @@ function migre_threads() {
 							'texte'=>$texte,
 							'auteur'=>$auteur,
 							'statut'=>$statut,
+							'ip'=>$ip_post,
 							'id_auteur'=>$id_auteur,
 							'date_thread'=>$date_heure)
 							);
 				}
 				else {
-					$res .= "<p>Ajout thread</p>";
+					$res .= "<p>"._T('spipbb:fromphpbb_migre_thread_ajout')."</p>";
 					$query = "INSERT INTO spip_forum ".
 						"(id_parent,id_article,email_auteur,date_heure,titre,texte,auteur,".
-						"statut,id_auteur,date_thread) VALUES ".
+						"statut,ip,id_auteur,date_thread) VALUES ".
 						"('$id_parent','$id_article','".$email_auteur."','$date_heure',".
 						"'".$titre."','".$texte."','".$auteur.
-						"','$statut','$id_auteur','$date_heure')";
+						"','$statut','$ip_post','$id_auteur','$date_heure')";
 					$res .= "<p>$query</p>";
 					$insert_id=$poid++;
 				}
 			}
 			else {
-				$res .= "<p>Forum existe :$verif</p>";
+				$res .= "<p>"._T('spipbb:fromphpbb_migre_thread_existe_dpt')."$verif</p>";
 				$insert_id = $verif;
 			}
 		}
-	
+
 		if (empty($id_parent)) {$id_thread=$insert_id;} else {$id_thread=$id_parent;}
 
 		if ($spipbb_fromphpbb['go']) {
@@ -824,6 +825,25 @@ function migre_threads() {
 		// 2 = annonce (une annonce apparait en tete des sujets sur toutes les pages
 		// des topics)
 
+		if ($row['topic_status']==1) {
+			// Traitement d'un message ferme
+			if ($spipbb_fromphpbb['mc_ferme_id'] != 0) {
+				if ($spipbb_fromphpbb['go']) {
+					$l_id = sql_insertq('spip_mots_forum', array(
+								'id_mot'=>$spipbb_fromphpbb['mc_ferme_id'],
+								'id_forum'=>$insert_id)
+							);
+				}
+				else {
+					$res .= "<p>"._T('spipbb:fromphpbb_migre_thread_ferme')."</p>";
+					$query = "INSERT INTO spip_mots_forum (id_mot,id_forum) VALUES (".
+							$spipbb_fromphpbb['mc_ferme_id'].",$insert_id)";
+					$res .= "<p>$query</p>";
+				}
+				$res .= "<p>"._T('spipbb:fromphpbb_migre_thread_ferme')." - id_php_bb = $topic_id - spip_id = $insert_id</p>";
+			}
+		}
+
 		if ($id_parent == 0 && $row['topic_type'] != 0)
 		{
 			// Traitement des post-its
@@ -835,15 +855,15 @@ function migre_threads() {
 							);
 				}
 				else {
-					$res .= "<p>Post-it</p>";
+					$res .= "<p>"._T('spipbb:fromphpbb_migre_thread_postit')."</p>";
 					$query = "INSERT INTO spip_mots_forum (id_mot,id_forum) VALUES (".
 							$spipbb_fromphpbb['mc_postit_id'].",$insert_id)";
 					$res .= "<p>$query</p>";
 				}
-				$res .= "<p>Post it - id_php_bb = $topic_id - spip_id = $insert_id</p>";
+				$res .= "<p>"._T('spipbb:fromphpbb_migre_thread_postit')." - id_php_bb = $topic_id - spip_id = $insert_id</p>";
 			}
 			// Traitement des annonces
-			if ($spipbb_fromphpbb['mc_annonce_id'] != 0 && $row['topic_type'] == 2) {
+			if ($spipbb_fromphpbb['mc_annonce_id'] != 0 && ( ($row['topic_type'] == 2) OR ($row['topic_type'] == 3))) {
 				if ($spipbb_fromphpbb['go']) {
 					$l_id = sql_insertq('spip_mots_forum', array(
 								'id_mot'=>$spipbb_fromphpbb['mc_annonce_id'],
@@ -851,11 +871,12 @@ function migre_threads() {
 							);
 				}
 				else {
-					$res .= "<p>Annonce</p>";
+					$res .= "<p>"._T('spipbb:fromphpbb_migre_thread_annonce')."</p>";
 					$query = "INSERT INTO spip_mots_forum (id_mot,id_forum) VALUES (".
 							$spipbb_fromphpbb['mc_annonce_id'].",$insert_id)";
 					$res .= "<p>$query</p>";
 				}
+				$res .= "<p>"._T('spipbb:fromphpbb_migre_thread_annonce')." - id_php_bb = $topic_id - spip_id = $insert_id</p>";
 			}
 			// Traitement des messages ferme ???
 
@@ -865,9 +886,16 @@ function migre_threads() {
 		$res .= '.';
 		$compte_posts ++;
 	}
-	$res .= "\n<p> Ajout de $compte_posts posts.</p>" ;
+	$res .= "\n<p>"._T('spipbb:fromphpbb_migre_thread_total_dpt'). " $compte_posts</p>" ;
 
 	return $res;
 } // migre_threads
+
+// Import de phpBB includes/functions
+function decode_ip($int_ip)
+{
+	$hexipbang = explode('.', chunk_split($int_ip, 2, '.'));
+	return hexdec($hexipbang[0]). '.' . hexdec($hexipbang[1]) . '.' . hexdec($hexipbang[2]) . '.' . hexdec($hexipbang[3]);
+} // decode_ip
 
 ?>

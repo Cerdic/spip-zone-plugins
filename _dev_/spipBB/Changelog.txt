@@ -1,4 +1,11 @@
-﻿2008-01-05  chryjs  <chryjs!@!free!.!fr>
+﻿2008-01-06  chryjs  <chryjs!@!free!.!fr>
+
+ * Import phpBB : verif difference login et nom auteur => nom=login lors de l'import donc pas de difference
+ * Import phpBB : adresse IP des posteurs -> forums
+ * Import phpBB : traduction
+
+
+2008-01-05  chryjs  <chryjs!@!free!.!fr>
 
  * On ne peut afficher un moderateur que pour un forum (ie : un article).. pour un groupe (ie: une rubrique) ca n'a pas de sens
  * Ajout de l'import a partir de Phorum (v5)
