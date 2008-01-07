@@ -1,5 +1,5 @@
 BUGS:
-- problème de cache sur les articles (une séance)
+- problème de cache sur les articles (une séance): censé être résolu par calcul à la place de recalcul... en test
 - problème avec les crayons/autorité sur les docs pour les rédacteurs (cf fil & james ?)
 - Souci avec la barre typo v2 les stats plantent (ramènent un 404)... ->voir avec RealET... (cohabitation avec jquery difficile à débugger avec http://demobonbon.free.fr/1.9/spip.php?page=testbtv2publique )... vaste pb avec le js semble-t-il...
 

@@ -545,8 +545,8 @@ if ($contenu_devoir[0]!="") {
 	};
 	if ($classes>0) echo ("&classes=$classes");
 				?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a></li>
-				<li><a href="#URL_PAGE{cahier-de-texte-affichage,senschrono=1}&id_auteur=<?php echo($auteur_session['id_auteur']);?>&classe=<?php echo($premiere_classe); ?>&matiere=<?php echo($matiere_titre);?>" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
-				<li><a href="#URL_PAGE{cahier-de-texte-accueil}" title="retour à l'accueil"><img src="#CHEMIN{images/logo-mini2-22.png}" alt="icône" vspace="2" align="middle">Retourner à l'accueil/au tableau de bord</a></li>
+				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,senschrono=1}|parametres_url{var_mode,"calcul"})}&id_auteur=<?php echo($auteur_session['id_auteur']);?>&classe=<?php echo($premiere_classe); ?>&matiere=<?php echo($matiere_titre);?>" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-accueil,var_mode=calcul}" title="retour à l'accueil"><img src="#CHEMIN{images/logo-mini2-22.png}" alt="icône" vspace="2" align="middle">Retourner à l'accueil/au tableau de bord</a></li>
 			</ul>
 		</div>		
 	</div></div>

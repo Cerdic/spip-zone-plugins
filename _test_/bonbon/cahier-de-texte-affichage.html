@@ -1,4 +1,4 @@
-#CACHE{300}
+#CACHE{1*55*60}
 [(#ENV{id_auteur}|?{' ',''})#CACHE{0}]
 <!--
 *****Cahier de texte pour Spip: Bonbon !
@@ -78,7 +78,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 <BOUCLE_ToutesLesClasses_affichage(MOTS){type="Classes"}{par titre}><BOUCLE_Que_les_classes_avec_article(ARTICLES){id_rubrique}{id_auteur?}{id_mot}{0,1}>[
 		(#SET{compteur,[(#GET{compteur}|plus{1})]})
 ][
-(#REM) La classe par défaut est la première. Si il n'y a pas de classe dans #ENV alors, c'est la classe par défut qui est choisie
+(#REM) La classe par défaut est la première. Si il n'y a pas de classe dans #ENV alors, c'est la classe par défaut qui est choisie
 ][
 		(#GET{compteur}|=={1}|?{' ',''})
 		#SET{classe_defaut,#_ToutesLesClasses_affichage:TITRE}
@@ -165,7 +165,7 @@ if (!($_GET['devoirs_seuls'] and !$_GET['matiere'])) {
 //Si on ne demande pas que les devoirs, on affiche les séances
 if (!($_GET['devoirs_seuls'])) {
 ?>[
-(#REM)On restrient la requête aux descriptions de séances en suivant le même modèle que précédement.
+(#REM)On restreint la requête aux descriptions de séances en suivant le même modèle que précédement.
 ]<BOUCLE_QueSeances(ARTICLES){titre_mot="Description de séance"}{!doublons requete}{doublons QueSeances}></BOUCLE_QueSeances>[
 (#REM) {!doublons QueSeances} est donc un critère qui sélectionne toutes les Descriptions de séances qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
 ]
@@ -217,7 +217,7 @@ grâce aux onglets.</p>
 
 if (($_GET['devoirs_seuls'])) {
 ?>[
-(#REM)On restrient la requête aux devoirs en suivant le même modèle que précédement.
+(#REM)On restreint la requête aux devoirs en suivant le même modèle que précédement.
 ]<BOUCLE_QueDevoirs(ARTICLES){titre_mot="Devoirs à faire"}{!doublons requete}{doublons QueDevoirs}></BOUCLE_QueDevoirs>[
 (#REM) {!doublons QueDevoirs} est donc un critère qui sélectionne toutes les Devoirs à faire qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
 ]
