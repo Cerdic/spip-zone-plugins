@@ -262,13 +262,14 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$num_barre++;
 	$champhelp = "document.getElementById('barre_$num_barre')";
 	$ecrire = test_espace_prive();
+	$crayons = _request('action')=='crayons_html';
 	// le champ est passe sous la forme document.formulaire.champ ou sous la forme document.getElementsByName('champ')[0]
 	if(preg_match(",(document\.formulaire\.(\w+)|document\.getElementsByName\('(\w+)'\)),", $champ, $reg))
 		$name = $reg[2]?$reg[2]:$reg[3]; else $name = '';
 	// le champ est passe sous la forme document.getElementById('champ')
 	if(preg_match(",document\.getElementById\('(\w+)'\),", $champ, $reg))
 		$id = $reg[1]; else $id = '';
-    $params_vierge = array('champ'=>$champ, 'help'=>$champhelp, 'lang'=>$spip_lang, 'name'=>$name, 'id'=>$id, 'num'=>$num_barre, 'forum'=>$forum, 'ecrire'=>$ecrire, 'flux'=>'');
+    $params_vierge = array('champ'=>$champ, 'help'=>$champhelp, 'lang'=>$spip_lang, 'name'=>$name, 'id'=>$id, 'num'=>$num_barre, 'forum'=>$forum, 'ecrire'=>$ecrire, 'crayons'=> $crayons, 'flux'=>'');
 	$layer_public = '<script type="text/javascript" src="' . find_in_path('javascript/layer.js').'"></script>';
 	$ret = ($num_barre > 1)  ? '' :
 	  $layer_public . '<script type="text/javascript" src="' . find_in_path('javascript/spip_barre.js').'"></script>';
@@ -288,7 +289,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 	$col = 0;
 
-//$ret .='C:';
 	// Raccourcis de caracteres : italique & gras
 	$ret .= bouton_barre_racc("barre_raccourci('{','}',$champ)", _DIR_IMG_ICONES_BARRE."italique.png", _T('barre_italic'), $champhelp);
 	$ret .= bouton_barre_racc("barre_raccourci('{{','}}',$champ)", _DIR_IMG_ICONES_BARRE."gras.png", _T('barre_gras'), $champhelp);
@@ -299,7 +299,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	//$params = array($champ,$champhelp,$spip_lang); $add = pipeline("BarreTypoEnrichie_avancees",array($champ,$champhelp,$spip_lang)); if ($params!=$add) $retP .= $add;
 
 	$retP = '';
-//$retP ='P:';
 	// Raccourcis de paragraphes : intertitres, formatages speciaux
 	if (!$forum) {
 		// $params = array($champ,$champhelp,$spip_lang); $add = pipeline("BarreTypoEnrichie_ecrire",array($champ,$champhelp,$spip_lang)); if ($params!=$add) $retP .= $add;
@@ -315,7 +314,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$col++;
 
 	$retL = '';
-//$retL ='L:';
 	// Gestion des liens, ancres, notes, glossaire
     $retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_lien']."','');", _DIR_IMG_ICONES_BARRE."lien.png", _T('barre_lien'), $champhelp);
 	$retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_BTV2_IMG.'ancre.png', _T('bartypenr:barre_ancres'), $champhelp);  
@@ -331,7 +329,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$col++;
 
 	$retS = '';
-//$retS ='S:';
 	// Gestion des structures : remplacement, tableaux, images
      $retS .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_remplacer']."','');", _DIR_BTV2_IMG.'chercher_remplacer.png', _T('bartypenr:barre_chercher'), $champhelp);
 	$retS .= bouton_barre_racc("barre_tableau($champ, '"._DIR_RESTREINT."')", _DIR_BTV2_IMG.'barre-tableau.png', _T('bartypenr:barre_tableau'), $champhelp);
@@ -347,10 +344,9 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 
 	$retG = '';
-//$retG ='G:';
 	// Place pour les gadgets : caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...), preview, stats
 	$retG .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_caracteres']."','');", _DIR_BTV2_IMG.'clavier.png', _T('bartypenr:barre_caracteres'), $champhelp);
-	if ($ecrire && !$forum) {
+	if (!$crayons && $ecrire && !$forum) {
 		$retG .= bouton_barre_racc("toggle_preview($num_barre,'".str_replace("'","\\'",$champ)."');", _DIR_BTV2_IMG.'eye.png', _T('bartypenr:barre_preview'), $champhelp);
 		$retG .= bouton_barre_racc("toggle_stats($num_barre,'".str_replace("'","\\'",$champ)."');", _DIR_BTV2_IMG.'stats.png', _T('bartypenr:barre_stats'), $champhelp);
 	}
