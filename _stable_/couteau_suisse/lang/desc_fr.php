@@ -92,7 +92,7 @@ _ &bull; [De tout le plugin->@reset@]@install@
 	'par_defaut' => 'Par d&eacute;faut',
 	'jquery1' => "{{Attention}} : cet outil n&eacute;cessite le plugin {jQuery} pour fonctionner avec cette version de SPIP.",
 	'jquery2' => "Cet outil  utilise la librairie {jQuery}.",
-	'balise_etoilee' => '{{Attention}} : V&eacute;rifiez bien l\'utilisation faite par vos squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outils ne s\'appliqueront pas sur : @bal@.',
+	'balise_etoilee' => '{{Attention}} : V&eacute;rifiez bien l\'utilisation faite par vos squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outil ne s\'appliqueront pas sur : @bal@.',
 	'erreur:nom' => 'Erreur !',
 	'erreur:description' => "id manquant dans la d&eacute;finition de l'outil !",
 	'erreur:version' => 'Cet outil est indisponible dans cette version de SPIP.',
