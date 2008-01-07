@@ -2,48 +2,47 @@ Todo-list pour spipbb
 ======================
 
 Interface Privée - Administration générale :
--* 0.4 ameliorer l'"administration" des forums (interface privee)
--* 0.4 gestion des threads : splitter déplacer etc
+-* 0.4.2 ameliorer l'"administration" des forums (interface privee) : gestion des threads : splitter déplacer etc
 -* 0.5 Mode "debutant" : création automatique du forum/mots clés et paramétrage
 
 Interface Privée - Membres:
--* 0.4 Gestion des membres (efficace et rapide par tableau avec cases à cocher et filtres eventuels)
--* 0.4    \___> lien entre auteur et la liste des messages qu'il a publie
+-* 0.4.1 Gestion des membres (efficace et rapide par tableau avec cases à cocher et filtres eventuels)
+-* 0.4.1    \___> lien entre auteur et la liste des messages qu'il a publie
 -* 0.5 Meilleure gestion des champs extras cf http://www.spip-contrib.net/Plugin-SpipBB#forum400496
 
 Interface Privée - Import PhpBB :
--* 0.4 Import phpBB : test mot de passe / authentification d'un auteur importe non. phpbb2 : php.md5($pass) spip: php.md5($alea.$pass) donc ?creer? un inc/auth_phpbb.php avec un login qui fait update au premier login (pour la conversion) + mettre ident avec 'source'=phpbb avant
--* 0.5 Import phpBB : import des MP ? Option de depart ? A priori pas compatibles
+-* 0.5 Import phpBB : test mot de passe / authentification d'un auteur importe non. phpbb2 : php.md5($pass) spip: php.md5($alea.$pass) donc ?creer? un inc/auth_phpbb.php avec un login qui fait update au premier login (pour la conversion) + mettre ident avec 'source'=phpbb avant
+-* 0.5 Import phpBB : import des Messages Perso ? Option de depart ? A priori pas compatibles
 -* 0.5 Import phpBB : Si pas Iniset, realisation par etapes de la partie 2 et 3 ? Precalcul a l'avance
 -* 0.5 Import phpBB : Mettre en option l'import des auteurs (remplacer l'id par le nom dans les messages)
 
 Interface Privée - Anti spam :
--* Gestion des bans : bug avec ajax !
+-* 0.4.0 Gestion des bans : bug avec ajax ! -> reconstruction de la configuration façon SPIP
 
 Interface publique - Générale :
--* Affichage du profil a revoir
--* Gestion avatar : a ameliorer + téléchargement (droits ?)
--* Manque icone postit interface publique
--* Logout bug en 193 uniq id ?
--* 0.4 j'ai un doute sur la fonctionnalité "ne plus suivre les sujets" page profil publique
--* 0.4 Manque formulaire inscription optionnel (remplacer le standard que l'on ne doit plus modifier par un specifique spipbb)
--* 0.4 nouveau message : le sujet est prérempli avec le titre du forum. Ne serait-il pas mieux d'avoir cette zone à blanc, et d'imposer qu'elle ne  soit pas laissée à vide ? (dans le cas d'un nouveau sujet, pas d'une  réponse)
+-* 0.4.0 Manque icone postit interface publique
+-* 0.4.2 Manque formulaire inscription optionnel (remplacer le standard que l'on ne doit plus modifier par un specifique spipbb)
+-* 0.4.3 Gestion avatar : a ameliorer + téléchargement (droits ?)
+-* 0.4.4 Affichage du profil a revoir
+-* 0.4.5 nouveau message : le sujet est prérempli avec le titre du forum. Ne serait-il pas mieux d'avoir cette zone à blanc, et d'imposer qu'elle ne  soit pas laissée à vide ? (dans le cas d'un nouveau sujet, pas d'une  réponse)
+-* 0.4.7 j'ai un doute sur la fonctionnalité "ne plus suivre les sujets" page profil publique
 -* 0.5 L’idéal serait de pouvoir ajouter une photo ou un document dans un post ou réponse à celui-ci et ce serait parfait
+-* 0.5 Logout bug en 193 uniq id ?
 
 Bugs et autres elements non finis :
--* 0.4 Activation des mots clés. Il y a plein de choses à dire et à faire dans ce domaine prévus pour la 0.4 . En attendant, même si les mots clés nécessaires n'ont pas été créés lors de l'installation on peut le faire faire automatiquement à spipBB en effet le formulaire (Configuration) permet de saisir le nom du groupe (spipbb par défaut) de mots clés. Si vous validez (bouton juste en dessous), il créé le groupe de mots clés tout seul :-)
--* Problemes titres _T et _L // traductions à revoir corriger finir
--* Bug dans le move d'un forum des fois ça ne fonctionne pas... (valider les cas et corriger)
--* Utiliser les descriptions des mots cles (ajoutees dans lang/... mot_...)
--* Gestion des annonces / postits / Fermes a tester /controler
--* Affichage des annonces / postits / Fermes
--* mot cles ferme, postit, annonce : bug -> ils ne doivent s'appliquer qu'au message principal du thread
--* Envisager de controler l'etat de la config régulierement ? a chaque passsage dans un menu d'admin ?
--* Bug ?? pourquoi la balise CALC_STATS... est elle calculee 2 fois de suite ?
--* Pouvoir configurer l'ordre de presentation des menus d'admins (par le webmaster)
--* Boutons d'admin sur l'interface publique ?
--* Que fait test_inscriptions dans spipbb_options ?
--* Erreur array-merge en pied de page... avec les logs et/ou un URL pour le voir ce serait plus facile :) SVN 17856?
+-* 0.4.1 Bug ?? pourquoi la balise CALC_STATS... est elle calculee 2 fois de suite ? Non mais autre bug
+-* 0.4.2 Boutons d'admin sur l'interface publique ?
+
+-* 0.4.7 Bug dans le move (ordre de priorites) d'un forum des fois ça ne fonctionne pas... (valider les cas et corriger)
+-* 0.4.8 Activation des mots clés. Il y a plein de choses à dire et à faire dans ce domaine prévus pour la 0.4 . En attendant, même si les mots clés nécessaires n'ont pas été créés lors de l'installation on peut le faire faire automatiquement à spipBB en effet le formulaire (Configuration) permet de saisir le nom du groupe (spipbb par défaut) de mots clés. Si vous validez (bouton juste en dessous), il créé le groupe de mots clés tout seul :-)
+-* 0.4.9 Utiliser les descriptions des mots cles (ajoutees dans lang/... mot_...)
+-* 0.4.9 Problemes titres _T et _L // traductions à revoir corriger finir
+-* 0.5 mot cles ferme, postit, annonce : bug -> ils ne doivent s'appliquer qu'au message principal du thread
+-* 0.5 Pouvoir configurer l'ordre de presentation des menus d'admins (par le webmaster)
+-* 0.5 Que fait test_inscriptions dans spipbb_options ? Revoir l'arborescence des fonctions (schéma ?)
+-* 0.5 Envisager de controler l'etat de la config régulierement ? a chaque passsage dans un menu d'admin ?
+-* 0.5 Gestion + règles d'affichage public (à vérifier) des annonces / postits / Fermes a tester /controler
+-* 0.3 Regle ? : Erreur array-merge en pied de page... avec les logs et/ou un URL pour le voir ce serait plus facile :) SVN 17856? 
 
 Voir l'intéret de :
 -* http://www.spip-contrib.net/Les-fenetres-flottantes
