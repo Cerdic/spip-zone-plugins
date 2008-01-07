@@ -50,6 +50,9 @@ if ($metas_outils['log_couteau_suisse']['actif'] || defined('_LOG_CS_FORCE') || 
 if ($_GET['cs']=='report') error_reporting(E_ALL ^ E_NOTICE);
 elseif ($_GET['cs']=='reportall' && $auteur_session['statut']=='0minirezo') error_reporting(E_ALL);
 
+// fichiers/dossiers temporaires pour le Couteau Suisse
+define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, "couteau-suisse"));
+
 // on passe son chemin si un reset general est demande
 $zap = (_request('cmd')=='resetall')
 // idem si la page est un css ou un js (sauf si le cache est desactive)
@@ -64,9 +67,6 @@ if($zap) {
 	global $cs_metas_pipelines;
 	$cs_metas_pipelines = array();
 
-	// fichiers/dossiers temporaires pour le Couteau Suisse
-	define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, "couteau-suisse"));
-	define('_DIR_RSS_TMP', _DIR_TMP . 'rss_couteau_suisse.html');
 	// alias pour passer en mode impression
 	if(isset($_GET['page']) && in_array($_GET['page'], array('print','imprimer','imprimir_articulo','imprimir_breve','article_pdf')))
 		$_GET['cs']='print';

@@ -721,6 +721,7 @@ add_outil( array(
 add_outil( array(
 	'id' => 'blocs',
 	'categorie'	=> 'typo-racc',
+	'contrib' => 2583,
 	'jquery'	=> 'oui',
 	'pipeline:pre_typo' => 'blocs_pre_typo',
 	'pipeline:BT_toolbox' => 'blocs_BarreTypo',
