@@ -731,20 +731,18 @@ if($_GET['classe_matiere']) {
 <BOUCLE_Contexte_RubriqueCDT_affichage(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>[
 (#REM) On détermine quelle est l'année scolaire que l'on veut afficher
 ][	(#SET{annee_rubrique,[(#ENV{date}|bonbon_annee_scolaire)]})
-][	(#ENV{annee_scolaire}|?{' ',''})
-		#SET{annee_rubrique,#ENV{annee_scolaire}}
 	]<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre=#GET{annee_rubrique}}{!par titre}{0,1}>[
 
 (#REM) On prépare une liste des artciles parmis lesquels faire la requête. Cette liste sera «stockée» dans {!doublons requete}. Ceci atomise les requêtes avec des Regexp et évite les trop grosses requêtes SQL. Merci à Cédric Morin pour l'idée.
 
 ][
 (#REM) on selectionne ceux qui ont la bonne les classes, bon auteur et bonne rubrique
-]<BOUCLE_PrepaClasses(ARTICLES){id_rubrique}{id_auteur ?}{id_mot=#ENV{id_classe0}}{doublons Prepa_Classes_auteur}></BOUCLE_PrepaClasses>[
+]<BOUCLE_PrepaClasses(ARTICLES){id_rubrique}{id_auteur ?}{id_mot=#ENV*{id_classe0}}{doublons Prepa_Classes_auteur}></BOUCLE_PrepaClasses>[
 (#REM) on selectionne ceux qui ont la bonne matière
-]<BOUCLE_Prepa_Matiere(ARTICLES){id_mot=#ENV{id_matiere}}
+]<BOUCLE_Prepa_Matiere(ARTICLES){id_mot=#ENV*{id_matiere}}
 {!doublons Prepa_Classes_auteur}{doublons Prepa_Matiere}></BOUCLE_Prepa_Matiere>[
 (#REM) on choisi les articles qui sont du bon groupe
-]<BOUCLE_Prepa_Groupes(ARTICLES){id_mot==#ENV{id_groupe,.}}{!doublons Prepa_Matiere}{doublons requete}></BOUCLE_Prepa_Groupes>[
+]<BOUCLE_Prepa_Groupes(ARTICLES){id_mot==#ENV*{id_groupe,.}}{!doublons Prepa_Matiere}{doublons requete}></BOUCLE_Prepa_Groupes>[
 
 (#REM) {!doublons requete} est donc un critère qui sélectionne tous les articles qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
 
