@@ -359,6 +359,8 @@ verif_plugin();
 
 	// initialisation generale forcee : recuperation de $outils;
 	cs_initialisation(true);
+	cs_installe_outils();
+
 	// mise a jour des donnees si envoi via formulaire
 	// sinon fait une passe de verif sur les outils
 	if ($cmd=='toggle' OR $cmd=='hide'){

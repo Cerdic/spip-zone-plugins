@@ -46,6 +46,19 @@ function decouper_en_onglets_rempl($texte) {
 	return preg_replace_callback(',<onglets>(.*?)</onglets>,ms', 'onglets_callback', $texte);
 }
 
+// fonction renvoyant l'image appellee dans img/decoupe
+function decoupe_image($fich, $help, $self, $off, $val, &$images, $double=false) {
+	$alt = _T('cout:'.$help);
+	$alt = "title=\"$alt\" alt=\"$alt\"";
+	if ($off) {
+		$tmp = $images[$fich.'_off']." $alt />";
+		return $double?$tmp.$tmp:$tmp;
+	} else {
+		$tmp=$images[$fich]." $alt />";
+		return '<a href="'.parametre_url($self,'artpage', $val).'">'.($double?$tmp.$tmp:$tmp).'</a>';
+	}
+}
+
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_pages_rempl($texte) {
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
@@ -80,32 +93,15 @@ function decouper_en_pages_rempl($texte) {
 	$images = unserialize($GLOBALS['meta']['cs_decoupe']);
 
 	// images et liens pour la navigation sous forme : << < ... > >>
-	// precedent
-	$alt = _T('cout:page_precedente');
-	$alt = "title=\"$alt\" alt=\"$alt\"";
-	$precedent = '<a href="' . parametre_url($self,'artpage', ($artpage - 1)."-$num_pages") . '">'; 
-	$precedent = $artpage == 1?$images['precedent_off']." $alt />"
-		:$precedent.$images['precedent']." $alt /></a>";
-	// suivant
-	$alt = _T('cout:page_suivante');
-	$alt = "title=\"$alt\" alt=\"$alt\"";
-	$suivant = '<a href="' . parametre_url($self,'artpage', ($artpage + 1)."-$num_pages") . '">'; 
-	$suivant = ($artpage == $num_pages)?$images['suivant_off']." $alt />"
-		:$suivant.$images['suivant']." $alt /></a>";
-	// s'il existe plus de trois pages on calcule les liens << et >>
+	$precedent = decoupe_image('precedent', 'page_precedente', $self, $artpage==1, ($artpage - 1)."-$num_pages", $images);
+	$suivant = decoupe_image('suivant', 'page_suivante', $self, $artpage==$num_pages, ($artpage + 1)."-$num_pages", $images);
 	if ($num_pages>3) {
-		// debut
-		$alt = _T('cout:page_debut');
-		$alt = "title=\"$alt\" alt=\"$alt\"";
-		$debut = '<a href="' . parametre_url($self,'artpage', 0) . '">'; 
-		$debut = $artpage == 1?($temp=$images['precedent_off']." $alt />").$temp
-			:$debut.($temp=$images['precedent']." $alt />").$temp.'</a>';
-		// fin
-		$alt = _T('cout:page_fin');
-		$alt = "title=\"$alt\" alt=\"$alt\"";
-		$fin = '<a href="' . parametre_url($self,'artpage',"{$num_pages}-$num_pages") . '">';
-		$fin = ($artpage == $num_pages)?($temp=$images['suivant_off']." $alt />").$temp
-			:$fin.($temp=$images['suivant']." $alt />").$temp.'</a>';
+		$debut = isset($images['debut'])
+			?decoupe_image('debut', 'page_debut', $self, $artpage==1, 0, $images)
+			:decoupe_image('precedent', 'page_debut', $self, $artpage==1, 0, $images, true);
+		$fin = isset($images['fin'])
+			?decoupe_image('fin', 'page_fin', $self, $artpage==$num_pages, "{$num_pages}-$num_pages", $images)
+			:decoupe_image('suivant', 'page_fin', $self, $artpage==$num_pages, "{$num_pages}-$num_pages", $images, true);
 	}
 	// liens des differentes pages sous forme : 1 2 3 4
 	$milieu = array();
