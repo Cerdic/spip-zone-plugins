@@ -47,8 +47,10 @@ if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common'); // pour l
 	// 1. Chercher s'il existe deja une session pour ce numero IP.
 	$content = array();
 	$fichier = sous_repertoire(_DIR_TMP, 'spipbb-visites') . $client_id;
-	if (lire_fichier($fichier, $content))
+	if (lire_fichier($fichier, $content)) {
+		spipbb_log("Contenu stats:".$content,3,__FILE__);
 		$content = @unserialize($content);
+	}
 
 	// 2. Plafonner le nombre de hits pris en compte pour un IP (robots etc.)
 	// et ecrire la session
@@ -74,6 +76,7 @@ if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common'); // pour l
 		}
 		else	$content[$log_type] = 1; // bienvenue au club
 
+		spipbb_log("Enregis stats:".$content,3,__FILE__);
 		ecrire_fichier($fichier, serialize($content));
 	}
 

@@ -70,7 +70,7 @@ function spipbb_check_plugins_config() {
 	}
 
 	// Le plugin balise_session n'est plus necessaire depuis SPIP 1.945
-	if (version_compare(substr($GLOBALS['spip_version'],0,5),'1.945','<')) {
+	if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_BALISE_SESSION,'<')) {
 		if (!is_array($tab_plugins_installes['BALISESESSION'])) {
 			$resultat.= "<li>"._T('spipbb:admin_plugin_requis_erreur')." BALISESESSION</li>";
 			$res['BALISESESSION']=false;

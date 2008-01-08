@@ -34,6 +34,7 @@ function compte_fichier_visite_forum($fichier, &$visites_f) {
 		$content = @unserialize($content);
 	}
 	if (!is_array($content)) return;
+	spipbb_log("Depart:".join(",",$visites_f,1,"compte_fichier_visite_forum");
 
 	foreach ($content as $source => $num) {
 		list($log_type, $log_id_num)
@@ -45,6 +46,7 @@ function compte_fichier_visite_forum($fichier, &$visites_f) {
 			$visites_f[$id_forum]=$visites_f[$id_forum] + intval($num);
 		}
 	}
+	spipbb_log("Sortie:".join(",",$visites_f,1,"compte_fichier_visite_forum");
 }
 
 function calculer_visites_forums($t) {
@@ -66,6 +68,7 @@ function calculer_visites_forums($t) {
 			spipbb_log("traite la session $item",1,"calculer_visites_forums");
 			compte_fichier_visite_forum($item, $visites_f);
 			spip_unlink($item);
+			if (file_exists($item)) spipbb_log("Erreur suppression impossible $item",1,"calculer_visites_forums");
 			if (--$compteur <= 0)
 				break;
 		}

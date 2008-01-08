@@ -222,7 +222,7 @@ function spipbb_upgrade_metas($installed_version='',$version_code='') {
 		$installed_version=='0.0.0';
 	}
 
-	if ( version_compare(substr($installed_version,0,5),$version_code,'<' ) ) {
+	if ( version_compare(substr($installed_version,0,5),$version_code,'<' ) ) { // 0.4.5 == 5 char _SPIPBB
 		spipbb_init_metas();
 	} 
 	// else si on fait des changements apres la 0.3.0

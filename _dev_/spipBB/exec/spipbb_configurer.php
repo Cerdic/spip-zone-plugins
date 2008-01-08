@@ -35,7 +35,7 @@ spipbb_log('included',2,__FILE__);
 
 function exec_spipbb_configurer_dist()
 {
-	if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','>=')) {
+	if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_AJAXCONFIG,'>=')) {
 		$configuration = charger_fonction(_request('configuration'), 'configuration', true);
 		ajax_retour($configuration ? $configuration() : 'configure quoi?');
 	}

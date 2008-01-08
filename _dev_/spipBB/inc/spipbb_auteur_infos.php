@@ -12,11 +12,6 @@ include_spip('inc/texte');
 include_spip('inc/layer');
 
 # conversion spip 1.9.2 -- dans common maintenant
-/*
-if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
-	include_spip('inc/spipbb_192'); // SPIP 1.9.2
-}
-*/
 
 function spipbb_auteur_infos($id_auteur=0) {
 	if (empty($id_auteur)) return;

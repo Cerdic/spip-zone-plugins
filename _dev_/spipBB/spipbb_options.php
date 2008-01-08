@@ -65,7 +65,7 @@ function test_inscription($mode, $mail, $nom, $id=0)
 	if (!$r = email_valide($mail)) return _T('info_email_invalide');
 
 	// Controle de la ban_list
-	if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
+	if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_SQL,'<')) {
 		include_spip('inc/spipbb_192'); // SPIP 1.9.2
 	}
 

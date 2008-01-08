@@ -32,9 +32,18 @@ spipbb_log('included',2,__FILE__);
 // Default log level
 define('_SPIPBB_LOG_LEVEL',3);
 
+// Numero de version de spip_version_code pour les differentes comparaisons et inclusions
+define('_SPIPBB_REV_AJAXCONFIG','1.9250'); // Introduction du repertoire configuration/ avec fonctions ajax_... SVN 9080/9081 ->9134 
+define('_SPIPBB_REV_STYLISER','1.9250'); // Evolution de public/styliser (SVN 9918 ?)
+define('_SPIPBB_REV_REQSQL','1.9259'); // trace_query_start apparus en SVN 9932 -> version_code 1.9259/1.9260
+define('_SPIPBB_REV_SQL','1.9260'); // Changement pour les fonctions SQL (abstract) SVN 9919 -> 9955
+define('_SPIPBB_REV_BALISE_SESSION','1.9262'); // Ajout de la balise SESSION SVN 10124/10130 -> 10132
+define('_SPIPBB_REV_TABLE_AUTRUB','1.9270'); // Passage auteurs_rubriques en table principale
+define('_SPIPBB_REV_EDITER_ARTRUB','1.9300'); // Suppression de la fonction editer_article_rubrique SVN 10818
+
 // [fr] Plugin ecrit pour spip rev 1.9.3 -> fournir les fonctions requises pour spip 1.9.2
 // [en] Plugin written for spip rev 1.9.3 -> provide required functions for spip 1.9.2
-if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
+if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_SQL,'<')) {
 	include_spip('inc/spipbb_192'); // SPIP 1.9.2
 }
 

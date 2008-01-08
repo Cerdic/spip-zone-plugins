@@ -22,7 +22,8 @@
 
 // Chryjs : introduit pour maintenir la compatibilite pour spip 192 et SVN193 avant balise SESSION
 
-if (version_compare(substr($GLOBALS['spip_version'],0,5),'1.945','<')) {
+if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common'); // numeros de revision
+if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_BALISE_SESSION,'<')) {
 	@require_once(_DIR_PLUGIN_SESSION."/session.php"); // verifier que _DIR_PLUGIN_SESSION est bien defini ?
 } else {
 	@define('_DIR_RESTREINT_ABS', 'ecrire/');

@@ -22,7 +22,7 @@ function spipbb_is_configured() {
 		OR $GLOBALS['spipbb']['config_groupe_mots']=='non' 
 		OR $GLOBALS['spipbb']['config_mot_cles']=='non') return false;
 	# nouvelle version -> maj
-	if(version_compare(substr($GLOBALS['spipbb']['version'],0,5),$GLOBALS['spipbb_plug_version'],'<')) return false;
+	if(version_compare(substr($GLOBALS['spipbb']['version'],0,5),$GLOBALS['spipbb_plug_version'],'<')) return false; // _SPIPBB version sur 0.4.5 == 5 char
 	# sinon
 	return true;
 } // spipbb_is_configured

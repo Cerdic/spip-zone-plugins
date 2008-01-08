@@ -228,7 +228,7 @@ function spipbb_fromphorum_formulaire($conf=array())
 // etait dans : inc/editer_article
 // ------------------------------------------------------------------------------
 
-if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','>')) {
+if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_EDITER_ARTRUB,'>')) {
 if (!function_exists('')) {
 function editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider)
 {
