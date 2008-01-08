@@ -1,4 +1,9 @@
-﻿2008-01-06  chryjs  <chryjs!@!free!.!fr>
+﻿2008-01-08  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.0 FAIT : Gestion des bans : bug avec ajax ! -> reconstruction de la configuration façon SPIP
+
+
+2008-01-06  chryjs  <chryjs!@!free!.!fr>
 
  * Import phpBB : verif difference login et nom auteur => nom=login lors de l'import donc pas de difference
  * Import phpBB : adresse IP des posteurs -> forums

@@ -1,7 +1,7 @@
 <?php
 #---------------------------------------------------------------#
 #  Plugin  : spipbb - Licence : GPL                             #
-#  File    : exec/spipbb_admin_gere_ban                         #
+#  File    : configuration/spipbb_ban_email                     #
 #  Authors : chryjs 2007 et als                                 #
 #  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
 #  Contact : chryjs!@!free!.!fr                                 #
@@ -28,55 +28,37 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/spipbb_common');
 spipbb_log('included',2,__FILE__);
+include_spip('inc/presentation');
 
 // ------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------
-function exec_spipbb_admin_gere_ban() {
-	# requis spip
-	global $spip_display;
+function configuration_spipbb_ban_email_dist() {
+		// ban email bloc
 
-	# initialiser spipbb
-	include_spip('inc/spipbb_init');
+	$res = debut_cadre_relief("", true, "", "<label for='ban_email'>"._T('spipbb:admin_ban_email_info')."</label>")
+		. "<input type='text' name='ban_email' id='ban_email' size='5' class='forml'>"
+		. fin_cadre_relief(true);
 
-	#
-	# affichage
-	#
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('spipbb:admin_titre_page_'._request('exec')), "forum", "spipbb_admin", '');
+		// unban email bloc
 
-	echo "<a name='haut_page'></a>";
+	$res .= debut_cadre_relief("", true, "", "<label for='unban_email'>"._T('spipbb:admin_unban_email_info')."</label>")
+		. "<select name='unban_email[]' id='unban_email' multiple='multiple' size='5' class='forml'>";
 
-	echo debut_gauche('',true);
-	spipbb_menus_gauche(_request('exec'));
+	$query=sql_query("SELECT id_ban,ban_email FROM spip_ban_liste WHERE ban_email IS NOT NULL ");
+	if ( sql_count($query) ) {
+		while ($row = sql_fetch($query)) {
+			$res .= "<option value='".$row['id_ban']."'>".$row['ban_email']."</option>";
+		}
+	}
+	else {
+		$res .= "<option value='-1'>"._T('spipbb:admin_ban_email_none')."</option>";
+	}
 
-	echo debut_droite('',true);
+	$res .= "</select>"
+		. fin_cadre_relief(true);
 
-	echo debut_cadre_formulaire('',true);
-
-	echo gros_titre(_T('spipbb:admin_titre_page_'._request('exec')),'',false);
-
-	echo debut_cadre_trait_couleur("racine-site-24.gif", true, "", _T('spipbb:admin_ban_user'));
-	$spipbb_ban_user = charger_fonction('spipbb_ban_user', 'configuration');
-	echo $spipbb_ban_user();
-	echo fin_cadre_trait_couleur(true);
-
-	echo debut_cadre_trait_couleur("racine-site-24.gif", true, "", _T('spipbb:admin_ban_ip'));
-	$spipbb_ban_ip = charger_fonction('spipbb_ban_ip', 'configuration');
-	echo $spipbb_ban_ip();
-	echo fin_cadre_trait_couleur(true);
-
-	echo debut_cadre_trait_couleur("racine-site-24.gif", true, "", _T('spipbb:admin_ban_email'));
-	$spipbb_ban_email = charger_fonction('spipbb_ban_email', 'configuration');
-	echo $spipbb_ban_email();
-	echo fin_cadre_trait_couleur(true);
-
-	echo fin_cadre_formulaire(true);
-
-	# pied page exec
-	bouton_retour_haut();
-
-	echo fin_gauche(), fin_page();
-
-} // exec_spipbb_admin_gere_ban
+	$res = ajax_action_post('spipbb_configurer', 'spipbb_ban_email', 'spipbb_admin_gere_ban','',$res) ;
+	return ajax_action_greffe('spipbb_configurer-spipbb_ban_email','', $res); // creer action : "ban" a  la facon de action/configurer
+} // configuration_spipbb_ban_email_dist
 
 ?>
