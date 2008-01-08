@@ -6,7 +6,7 @@
 #  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
 #  Contact : scoty!@!koakidi!.!com                              #
 # [fr] Page des inscrits                                        #
-# [en]                                                          #
+# [en] Members' management                                      #
 #---------------------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
@@ -49,9 +49,10 @@ function exec_spipbb_inscrits() {
 	$sel_membre=_request('selectmembre');
 	if (is_array($sel_membre) and count($sel_membre)>0) {
 		$list_id_del=join(",",$sel_membre);
+		$suppr_mess=_request('supprmess');
 		$delq=sql_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur IN ($list_id_del)");
 	}
-	
+
 	$vl=intval(_request('vl'));
 
 	# limites requete
@@ -63,16 +64,32 @@ function exec_spipbb_inscrits() {
 		if($tri=='nom') { $odb='nom'; }
 		else { $odb='id_auteur'; }
 
+	# c: 8/1/8 : filtrage sur les types de membres
+	$sel_type=_request('seltype');
+	if (!(is_array($sel_type) and count($sel_type)>0)) {
+		$sel_type=array('6forum','nouveau');
+	}
+
+	# Les des differents types de membres réellement dans la base ( sauf poubelle ?)
+	$sel_membre=sql_select("statut","spip_auteurs","statut!='5poubelle'","statut");
+	$liste_types=array();
+	while ($row=sql_fetch($sel_membre)) {
+		$liste_types[]=$row['statut'];
+	}
+	if (count($liste_types)==0) $list_types=array('6forum','nouveau');
+
 	# requete principale
 	// c: 18/12/7 c'est surement une optimisation mais je doute que ce soit standard tous SQL confondus...
 	// La magie du LEFT JOIN pour calculer le nombre de messages et ne pas masquer un membre qui n'aurait jamais poste !!!
-	$q=sql_query("SELECT SQL_CALC_FOUND_ROWS A.id_auteur, A.nom, A.email, A.statut, count(F.id_forum) as nb_mes
-					FROM spip_auteurs AS A
-					LEFT JOIN spip_forum AS F ON (A.id_auteur=F.id_auteur)
-					WHERE ( A.statut='6forum' OR A.statut='nouveau' )
-					GROUP BY A.id_auteur
-					ORDER BY A.$odb
-					LIMIT $dl,$fixlimit");
+	$types_query=sql_in('A.statut',$sel_type);
+	$q=sql_query("SELECT SQL_CALC_FOUND_ROWS A.id_auteur, A.nom, A.email, A.statut, count(F.id_forum) as nb_mes "
+					." FROM spip_auteurs AS A "
+					." LEFT JOIN spip_forum AS F ON (A.id_auteur=F.id_auteur) "
+//					." WHERE ( A.statut='6forum' OR A.statut='nouveau' ) "
+					." WHERE ( $types_query ) "
+					." GROUP BY A.id_auteur "
+					." ORDER BY A.$odb "
+					." LIMIT $dl,$fixlimit");
 
 					# recup nombre total d'entree
 	$nl= sql_query("SELECT FOUND_ROWS()");
@@ -105,23 +122,39 @@ function exec_spipbb_inscrits() {
 	echo gros_titre(_T('spipbb:admin_titre_page_'._request('exec')),'',false);
 
 	// Présenter valeurs de la tranche de la requête
-	echo "<div align='center' class='iconeoff verdana2' style='clear:both;'>\n";
+	echo "<div class='iconeoff verdana2' style='text-align:center;clear:both;'>\n";
 	tranches_liste_forum($nba1,$retour_spipbb_local,$nligne);
 	echo "\n</div>\n";
-	// c: 19/12/7 cest gorse ce javascript je ne sais pas faire mieux !  attention il depends du nom du formulaire.
-	echo "<script language=\"JavaScript\" type=\"text/javascript\">\n".
-		"<!--\n".
-		"	function check_switch(val)\n".
-		"	{\n".
-		"		for( i = 0; i < document.formmembre.elements.length; i++ )\n".
-		"		{\n".
-		"			document.formmembre.elements[i].checked = val;\n".
-		"		}\n".
-		"	}\n".
-		"//-->\n".
-		"</script>\n";
-	echo  "<form method='post' action='' name='formmembre'>";
-	
+	// c: 19/12/7 cest gore ce javascript je ne sais pas faire mieux !  attention il depends du nom du formulaire.
+	echo "<script language=\"JavaScript\" type=\"text/javascript\">\n"
+		. "<!--\n"
+		. "	function check_switch(val)\n"
+		. "	{\n"
+		. "		for( i = 0; i < document.formmembre.elements.length; i++ )\n"
+		. "		{\n"
+		. "			document.formmembre.elements[i].checked = val;\n"
+		. "		}\n"
+		. "	}\n"
+		. "//-->\n"
+		. "</script>\n";
+
+	echo  "<form method='post' action='".generer_url_ecrire(_request('exec'))."' name='formfiltre'>\n";
+
+	echo "<div style='text-align:right'>\n";
+
+	reset($liste_types);
+	while (list(,$type)=each($liste_types)) {
+		$checked = (in_array($type,$sel_type)) ? "checked='checked' " :" ";
+		echo "<input type='checkbox' name='seltype[]' id='seltype' value=$type $checked/>\n";
+		echo "<label for='seltype_$type'>$type</label>\n";
+	}
+	echo "</div>\n";
+	echo "<div style='text-align:right'><input type='submit' name='_spipbb_selectionner' value='"
+		. _T('spipbb:filtrer')
+		. "' class='fondo' /></div>\n";
+	echo "</form>\n";
+	echo  "<form method='post' action='".generer_url_ecrire(_request('exec'))."' name='formmembre'>\n";
+
 	// entête ...
 	echo "<table border='0' cellpadding='2' cellspacing='0' width='100%'>\n
 			<tr>\n".
@@ -135,8 +168,9 @@ function exec_spipbb_inscrits() {
 			echo "</td>\n".
 			"<td width='10%' style='text-align:center;'>"._T('spipbb:email')."</td>\n".
 			"<td width='14%' style='text-align:center;'>"._T('spipbb:col_date_crea')."</td>\n".
-			"<td width='14%' style='text-align:center;'>"._T('spipbb:col_signature')."</td>\n".
-			"<td width='14%' style='text-align:center;'>"._T('spipbb:col_avatar')."</td>\n".
+// c: 8/1/8 est-ce bien utile ici ?
+//			"<td width='14%' style='text-align:center;'>"._T('spipbb:col_signature')."</td>\n".
+//			"<td width='14%' style='text-align:center;'>"._T('spipbb:col_avatar')."</td>\n".
 			"<td width='8%' style='text-align:center;'>"._T('spipbb:admin_total_posts')."</td>\n".
 			"<td width='2%' style='text-align:center;'>"._T('spipbb:col_marquer')."</td>\n".
 			"</tr>\n";
@@ -166,30 +200,54 @@ function exec_spipbb_inscrits() {
 				. http_img_pack('fiche-perso-24.gif','ico'," border='0' valign='absmiddle'",_L('Signature'))
 				. "</a>";
 		}
+		
 		if($infos['date_crea_spipbb']!='') {
 			$aff_date=affdate($infos['date_crea_spipbb'],'d/m/Y');
 		}
-		$aut_nouv=($r['statut']=='nouveau') ? "*" : "";
+		else $aff_date="";
+		$aut_spec=($r['statut']=='nouveau') ? "*" : ( ($r['statut']=='0minirezo') ? "!" : "" );
 		echo "<tr bgcolor='".$coul_ligne."'>\n".
-			"<td>".$r['id_auteur'].$aut_nouv."</td>".
+			"<td>".$r['id_auteur'].$aut_spec."</td>".
 			"<td><a href='".generer_url_ecrire("auteur_infos","id_auteur=".$r['id_auteur'])."'>".couper(typo($r['nom']),20)."</a></td>".
 			"<td style='text-align:center;'>".
 			"<a href='mailto:".htmlspecialchars($r['email'])."'>".
 			http_img_pack('envoi-message-24.gif','mail'," border='0' align='absmiddle'",htmlspecialchars($r['email'])).
 			"</a></td>".
 			"<td style='text-align:center;'>".$aff_date."</td>".
-			"<td style='text-align:center;'>".$ico_signature."</td>".
-			"<td style='text-align:center;'>".$ico_avatar."</td>".
-			"<td style='text-align:center;'>".$r['nb_mes']."</td>".
+//			"<td style='text-align:center;'>".$ico_signature."</td>".
+//			"<td style='text-align:center;'>".$ico_avatar."</td>".
+			"<td style='text-align:center;'>";
+		if ($r['nb_mes']>0) echo "<a href='".generer_url_ecrire('spipbb_admin_posts',"id_auteur=".$r['id_auteur'])."'>".$r['nb_mes']."</a>";
+		else echo $r['nb_mes'];
+		echo "</td>".
 			"<td width='2%' style='text-align:center;'><input type='checkbox' name='selectmembre[]' value='".$r['id_auteur']."' /></td>".
 			"</tr>\n";
 	}
 	echo "</table>\n";
-	echo "<div align='right'><a href=\"javascript:check_switch(true);\">"._T('spipbb:bouton_select_all')."</a> :: <a href=\"javascript:check_switch();\">"._T('spipbb:bouton_unselect_all')."</a></div>\n";
-	echo "<div align='right'><input type='submit' name='_spipbb_supprimer' value='"._T('supprimer')."' class='fondo' /></div>\n";
+	echo "<div style='text-align:right;margin: 4px 0 4px 0;'><a href=\"javascript:check_switch(true);\">"
+		. _T('spipbb:bouton_select_all')
+		. "</a> :: <a href=\"javascript:check_switch();\">"
+		. _T('spipbb:bouton_unselect_all')."</a></div>\n";
+
+	# c 8/1/8 liste des actions possibles (en checkbox ?)
+	# supprimer membre
+	# + supprimer messages
+	# ou laisser messages avec champ nom (et pas d'id_auteur)
+	# ou rendre anonyme messages
+	echo "<div style='text-align:right;'>\n"
+		. _T('spipbb:messages_supprimer_titre_dpt')
+		. "<select name='supprmess' style='margin:0 4px 0 0;font-size:90%'>"
+		. "<option value='tous' selected='selected'>". _T('spipbb:messages_supprimer_tous') . "</option>"
+		. "<option value='nom'>". _T('spipbb:messages_laisser_nom') . "</option>"
+		. "<option value='anonymes'>". _T('spipbb:messages_anonymes') . "</option>"
+		. "</select>\n" ;
+
+	echo "<input type='submit' name='_spipbb_supprimer' value='"
+		. _T('spipbb:supprimer')
+		. "' class='fondo' /></div>\n";
 	echo "</form>\n";
-	echo "<div id='code'></div>";
-	echo "<div id='code_sign'></div>";
+	echo "<div id='code'></div>\n";
+	echo "<div id='code_sign'></div>\n";
 		
 	echo fin_cadre_formulaire(true);
 

@@ -446,4 +446,43 @@ function bornes_pagination($courante, $nombre, $max = 10) {
 	return array($premiere, $derniere);
 } } // bornes_pagination
 
+#------------------------------------------------------------#
+# voir http://doc.spip.org/@sql_in
+#------------------------------------------------------------#
+if (!function_exists('sql_in')) {
+function sql_in($val, $valeurs, $not='', $serveur='') {
+	if (is_array($valeurs)) {
+		$f = sql_serveur('quote', $serveur);
+		$valeurs = join(',', array_map($f, array_unique($valeurs)));
+	} elseif ($valeurs[0]===',') $valeurs = substr($valeurs,1);
+	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
+
+	return spip_mysql_in($val, $valeurs, $not, $serveur);
+} } // sql_in
+
+#------------------------------------------------------------#
+# voir http://doc.spip.org/@sql_in
+#
+# IN (...) est limite a 255 elements, d'ou cette fonction assistante
+#
+#------------------------------------------------------------#
+if (!function_exists('spip_mysql_in')) {
+function spip_mysql_in($val, $valeurs, $not='', $serveur='') {
+	$n = $i = 0;
+	$in_sql ="";
+	while ($n = strpos($valeurs, ',', $n+1)) {
+	  if ((++$i) >= 255) {
+			$in_sql .= "($val $not IN (" .
+			  substr($valeurs, 0, $n) .
+			  "))\n" .
+			  ($not ? "AND\t" : "OR\t");
+			$valeurs = substr($valeurs, $n+1);
+			$i = $n = 0;
+		}
+	}
+	$in_sql .= "($val $not IN ($valeurs))";
+
+	return "($in_sql)";
+} } // spip_mysql_in
+
 ?>

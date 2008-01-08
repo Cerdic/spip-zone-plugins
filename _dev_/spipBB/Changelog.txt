@@ -1,7 +1,8 @@
 ﻿2008-01-08  chryjs  <chryjs!@!free!.!fr>
 
  * 0.4.0 FAIT : Gestion des bans : bug avec ajax ! -> reconstruction de la configuration façon SPIP
-
+ * Passage en 0.4.0 : fin des evolutions prevues
+ * 0.4.1 Premiere evolution pour la gestion des membres : liens vers les messags d'un auteur + filtres par type d'auteur + actions (à finir) sur les messages
 
 2008-01-06  chryjs  <chryjs!@!free!.!fr>
 

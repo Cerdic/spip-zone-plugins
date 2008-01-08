@@ -185,6 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //F
 
 'fiche_contact' => 'Fiche Contact',
+'filtrer' => 'Filtrer',
 'forum' => 'Forums',
 'forum_dpt' => 'Forum&nbsp;: ',
 'forum_ferme' => 'Ce forum est ferm&eacute;',
@@ -286,6 +287,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message_s_dpt' => 'Messages&nbsp;: ',
 'messages_voir_dernier' => 'Voir le dernier message',
 'messages_voir_dernier_s' => 'Voir les derniers messages',
+'messages_supprimer_titre_dpt' => 'Pour les messages&nbsp;:',
+'messages_supprimer_tous' => 'les supprimer',
+'messages_laisser_nom' => 'laisser le nom',
+'messages_anonymes' => 'rendre anonymes',
 'moderateur_dpt' => 'Mod&eacute;rateur&nbsp;: ', ## GAF 0.6
 'moderateurs' => 'Mod&eacute;rateur(s)',
 'moderateurs_dpt' => 'Mod&eacute;rateurs&nbsp;: ', ## 0.5
@@ -382,6 +387,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'sujets' => 'Sujets',
 'sujet_s' => 'Sujets',
 'sujets_aucun' => 'Pas de sujet dans ce forum pour l\'instant',
+'supprimer' => 'Supprimer',
 
 'sw_admin_can_spam' => 'Les admins sont autoris&eacute;s',
 'sw_admin_no_spam' => 'Pas de spam',
