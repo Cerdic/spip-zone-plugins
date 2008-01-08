@@ -29,7 +29,7 @@
  * - ajout d'une fonction qui converti les intertitres des enluminures en
  * intertitres compatibles avec cette contrib'
 */
-function IntertitresTdm_table_des_matieres($texte,$tableseule) {
+function IntertitresTdm_table_des_matieres($texte,$tableseule=false) {
   global $debut_intertitre, $fin_intertitre;
 
    // définition de la balise pour les titres des sections %num% sera remplacé 
@@ -212,7 +212,7 @@ function avant_propre ($texte, $ref=false) {
  return $texte;
 }
 function apres_propre($texte) {
-  //le second paramètre est vide, c'est à dire qu'on affiche pas la table seule.
+  //le second paramètre est vide, c'est à dire qu'on n'affiche pas la table seule.
  $new_texte = IntertitresTdm_table_des_matieres($texte);
  return $new_texte;
 }
