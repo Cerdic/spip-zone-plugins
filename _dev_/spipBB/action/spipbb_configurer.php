@@ -34,17 +34,13 @@ function action_spipbb_configurer() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	$r = rawurldecode(_request('redirect'));
-//echo _request('script'); die("");
-//print_r($r);//die("toto");
 	$r = parametre_url($r, 'configuration', $arg,"&");
 	appliquer_modifs_config($arg);
-//print_r($r);die("");
 	redirige_par_entete($r);
 } // action_spipbb_configurer
 
-function appliquer_modifs_config($params) {
-//print_r($params);
-// $params peut == spipbb_ban_email
+function appliquer_modifs_config($params='') {
+	// $params peut == spipbb_ban_email
 	if ( $liste_user=_request('ban_user') ) {
 		if ( $liste_user AND is_array($liste_user) ) {
 			$liste_id=join(",",$liste_user);
