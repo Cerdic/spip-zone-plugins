@@ -73,8 +73,26 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 	}
 	if($var_user['email'] and $aux){
 		$commentaire = message_inscription2_pass($var_user, $mode);
-		if (is_array($commentaire)) 
-			$commentaire = envoyer_inscription2_pass($commentaire);
+		if (is_array($commentaire)){ 
+				if(defined('_DIR_PLUGIN_ABONNEMENT')){
+				//envoyer un mail a l'admin et a l'abonne
+				$id_abonne = $commentaire["id_abonne"] ;
+				$abonne_res = spip_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, a.validite, b.email, b.id_auteur, b.alea_actuel, b.login , b.pass FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id='$id_abonne' AND a.id_auteur = b.id_auteur") ;
+				
+				while($row = spip_fetch_array($abonne_res)){$abonne = $row ;}
+				// remettre vide pour generer le lien
+				$abonne['pass'] = "" ;
+				$id_auteur = $commentaire["id_auteur"] ;
+
+				spip_query("update spip_auteurs set pass = '' where id_auteur = $id_auteur");
+				abonnement_envoyer_mails_confirmation("ok",$abonne,$commentaire["libelle"],"abonnement","");
+				$commentaire = false ;
+				}
+				else{
+				$commentaire = envoyer_inscription2_pass($commentaire);
+				}
+			}
+		
 		$message = $commentaire ? '' : _T('inscription2:lisez_mail');
 	}
 	$var_user['message'] = $message;
@@ -114,6 +132,8 @@ function inscription2_nouveau_pass($declaration){
 			$elargis[$cle]= $val;
 	}
 	//insertion des données dans la table spip_auteurs
+	$declaration['alea_actuel'] = rand(1,99999);
+	$auteurs['alea_actuel']=$declaration['alea_actuel'];
 	$n = spip_abstract_insert('spip_auteurs', ('(' .join(',',array_keys($auteurs)).')'), ("(" .join(", ",array_map('_q', $auteurs)) .")"));
 	$declaration['id_auteur'] = $n;
 	$elargis['id_auteur'] = $n;
@@ -128,18 +148,43 @@ function inscription2_nouveau_pass($declaration){
 	}}
 	if(isset($declaration['zones'])){
 		foreach($declaration['zones'] as $value)
-			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('$n', '$value')");
+			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`) VALUES ('$n', '$value')");
 	}
 	if(isset($declaration['domaines']) and $declaration['zone'] and lire_config('plugin/ACCESRESTREINT')){
 		foreach($declaration['zone'] as $value)
-			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('$n', '$value')");
+			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`) VALUES ('$n', '$value')");
 	}
 	
 	$n = spip_abstract_insert('`spip_auteurs_elargis`', ('(' .join(',',array_keys($elargis)).')'), ("(" .join(", ",array_map('_q', $elargis)) .")"));
 	
 	if(isset($declaration['abonnement'])){
 		$value = $declaration['abonnement'] ;	
-			spip_query("INSERT INTO `spip_auteurs_elargis_abonnements` (`id_auteur_elargi`, `id_abonnement`) VALUES ('$n', '$value')");
+		
+		spip_query("INSERT INTO `spip_auteurs_elargis_abonnements` (`id_auteur_elargi`, `id_abonnement`) VALUES ('$n', '$value')");
+	
+		$abonnement_res = spip_query("SELECT a.duree, a.periode, a.montant, a.libelle FROM `spip_abonnements` a  WHERE a.id_abonnement = $value") ;
+	
+		while($abonnement = spip_fetch_array($abonnement_res)){
+		$libelle = $abonnement['libelle'];
+		$duree = $abonnement['duree'] ;
+		$periode = $abonnement['periode'] ;
+		$montant = $abonnement['montant'] ;
+		}
+	
+	
+	if($periode == "jours"){
+	$validite =  "DATE_ADD(CURRENT_DATE, INTERVAL ".$duree." DAY)" ;
+	}elseif($periode == "mois"){
+	$validite = "DATE_ADD(CURRENT_DATE, INTERVAL ".$duree." MONTH)" ;
+	}
+	
+	// fixer la date de validite et le statut de paiement, (et des zones acces restreint selon l'abonnement a l'occasion)
+	spip_query("UPDATE `spip_auteurs_elargis` SET statut_abonnement='abonne', statut_paiement='ok'  WHERE id='$n'") ;
+	spip_query("UPDATE `spip_auteurs_elargis_abonnements` SET validite = $validite, montant = '$montant' WHERE id_auteur_elargi='$n'") ;
+	
+	$declaration['libelle'] = $libelle ;
+	$declaration['id_abonne'] = $n ;
+	
 	}
 	
 	return $declaration;
