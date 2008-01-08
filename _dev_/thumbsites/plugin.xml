@@ -1,0 +1,48 @@
+<plugin>
+    <!-- Nom du plugin -->
+	<nom> Thumbsites </nom>
+
+    <!-- Auteur du plugin -->
+	<auteur>
+	    <multi>
+	        Camille Lafitte
+        	&#169; 2008 - à plus tard -
+        	Distribu&#233; sous licence GNU/GPL
+
+		    [it]   Camille Lafitte
+        	&#169; 2008 - a più tardi -
+            Distribuito sotto licenza GNU/GPL
+        </multi>
+	</auteur>
+
+	<version> 0.1 </version>
+	<etat> dev </etat>
+
+    <!-- spécifie une icone pour le plugin -->
+	<icon> images/thumbsites.png </icon>
+
+
+	<description>
+        <multi>Ce plugin {{disponible uniquement &#224; partir de SPIP 1.9.3}} fournit généralise la fonctions de capture de sites. Il est possible d'appliquer directement le filtre <code>thumbisite</code> sur toutes les balise genérant une url. Certains modeles sont disponibles pour les redacteurs tels que <code>&#60;siteXX|thumbsite&#62;</code>
+        [it]Questo plugin {{disponibile solamente da SPIP 1.9.3}} provvede generalizza le funzioni di cattura di luoghi. È possibile applicare direttamente il filtro <code>thumbsite</code> su tutto demarca generando un url. Alcuni modelli sono disponibili per i redattori come <code>&#60;siteXX|thumbsite&#62;</code>
+        </multi>
+	</description>
+
+    <!-- URI de documentation -->
+	<lien>
+	    [<multi>Documentation[it]Documentazione</multi>->http://www.spip-contrib.net/?article2584],
+        <multi>et si vous avez[it] e se avete installato anche</multi> cfg:
+        	[<multi>Configuration[it]Configurazione</multi>->.?exec=cfg&amp;cfg=thumbsites]
+	</lien>
+
+    <!-- precise le prefixe utilisé pour toutes les fonctions du plugin, en general le nom du plugin -->
+	<prefix> thumbsites </prefix>
+
+    <!-- précise les dependances vis-a-vis de d'autres plugins -->
+    <necessite id="cfg" version="[1.0.4;]" />
+
+    <!-- mes fonctions -->
+	<fonctions>thumbsites_fonctions.php</fonctions>
+
+	<chemin dir='' />
+</plugin>

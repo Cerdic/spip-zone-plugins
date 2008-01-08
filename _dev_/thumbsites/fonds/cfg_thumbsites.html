@@ -1,0 +1,100 @@
+[(#REM) rediriger=1]
+
+[(#REM) autoriser=Omnirezo]
+
+[(#REM) icone=images/thumbsites.png]
+
+<!-- refus=<p>
+Seuls les admins du site [(<b>(#REM|liste_0mnirezo)</b>)] sont autoris&#233;s &#224; modifier ces param&#232;tres.</p>
+-->
+
+
+[(#REM) descriptif=
+<h4>
+Ici vous pouvez configurer le plugin Thumbsites.
+</h4>
+<a href="http://www.spip-contrib.net/?article2584" class="spip_out">Documentation sur contrib</a>
+]
+
+[(#REM) titre=Thumbsites]
+
+#CACHE{0}
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset><legend>Activation du plugin</legend>
+    <p>
+        <label for="activer">Activer le plugin </label>
+        <input type="checkbox" name="activer" id="activer" [(#ENV{activer}|?{' ',''})checked="checked"] />
+    </p>
+    <p>
+        <label for="serveur">Choissisez le serveur de capture</label>
+        <select name="serveur" id="serveur">
+            <option value="thumbshots"[(#ENV{serveur}|=={'thumbshots'}|?{' selected="selected"'})]>thumbshots</option>
+            <option value="girafa"[(#ENV{serveur}|=={'girafa'}|?{' selected="selected"'})]>girafa</option>
+        </select>
+    </p>        
+</fieldset>
+
+<fieldset id="thumbshots" class="conf_serveur [(#ENV{serveur}|=={'thumbshots'}|?{'actif'})]"><legend>Thumbshots</legend>
+    <p>
+        <a href="http://www.thumbshots.com">Thumbshots</a> propose un service gratuit qui ne nécessite pas d'identification
+    </p>
+    <p>
+        Les vignettes générées seront de 120 x 90 pixels
+    </p>
+</fieldset>
+
+<fieldset id="girafa" class="conf_serveur [(#ENV{serveur}|=={'girafa'}|?{'actif'})]"><legend>Girafa</legend>
+    <p>
+        Pour utiliser ce service vous devez être inscrit sur le site <a href="http://www.girafa.com">girafa</a>
+        <br/>
+        Il existe une version gratuite si vous souhaitez moins de 2000 captures de site par jour.
+    </p>
+    <p>
+        Les vignettes générées seront au maximum de 160 x 120 pixels (se paramètre sur le site girafa)
+    </p>
+
+    <p>
+        <label for="girafa_identifiant">Saissisez votre identifiant : </label>
+        <input type="text" name="girafa_identifiant" id="girafa_identifiant" [value="(#ENV{girafa_identifiant})"]>
+    </p>
+    <p>
+        <label for="girafa_signature">Saissisez votre signature : </label>
+        <input type="text" name="girafa_signature" id="girafa_signature" [value="(#ENV{girafa_signature})"]>
+    </p>
+</fieldset>
+
+[(#REM) Code jQuery de la gestion des configuration serveur ]
+<script type="text/javascript"><!--
+	if ($('#activer:checked').length == 0) {
+	    //si le plugin inactif, aucun seveur de presenté
+		$('.conf_serveur').hide();
+	} else {	
+	    //on cache les configuration serveur excepté de celui actif
+		$('.conf_serveur:not(.actif)').hide();
+	}
+
+    $('#activer')
+    .bind('change', function() {
+        $('#'+$('#serveur').val()).slideToggle('slow');
+    })
+
+	$('#serveur')
+	.bind('change', function() {
+    	if ($('#activer:checked').length > 0) {
+	        //on cache le serveur eventuellement actif
+            $('.conf_serveur').hide();
+            //on affiche le serveur selectionné
+            $("#"+this.value).show('slow');
+        }
+	})
+// --></script>
+
+
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
+

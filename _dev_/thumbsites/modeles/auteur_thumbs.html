@@ -1,0 +1,9 @@
+<BOUCLE_site(AUTEURS) {id_auteur}>
+    [(#URL_SITE)
+        <span class='spip_auteur_#ID_AUTEUR spip_documents[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+            [<a href="(#URL_SITE)"[ class="(#ENV{lien_class})"]>]
+                <img src='[(#URL_SITE|thumbsite)]' alt="[(#NOM_SITE|texte_backend)]"[ title="(#NOM)"] />
+            [(#URL_SITE|?{</a>})]
+        </span>
+    ]
+</BOUCLE_site>
