@@ -34,9 +34,11 @@ function action_spipbb_configurer() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	$r = rawurldecode(_request('redirect'));
+//echo _request('script'); die("");
+//print_r($r);//die("toto");
 	$r = parametre_url($r, 'configuration', $arg,"&");
 	appliquer_modifs_config($arg);
-
+//print_r($r);die("");
 	redirige_par_entete($r);
 } // action_spipbb_configurer
 

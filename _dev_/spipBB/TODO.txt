@@ -9,6 +9,7 @@ Interface Privée - Membres:
 -* 0.4.1 Gestion des membres (efficace et rapide par tableau avec cases à cocher et filtres eventuels)
 -* 0.4.1    \___> lien entre auteur et la liste des messages qu'il a publie
 -* 0.5 Meilleure gestion des champs extras cf http://www.spip-contrib.net/Plugin-SpipBB#forum400496
+-* 0.5 Passage de l'ensemble de la configuration sur le modèle SPIP (en utilisant Ajax)
 
 Interface Privée - Import PhpBB :
 -* 0.5 Import phpBB : test mot de passe / authentification d'un auteur importe non. phpbb2 : php.md5($pass) spip: php.md5($alea.$pass) donc ?creer? un inc/auth_phpbb.php avec un login qui fait update au premier login (pour la conversion) + mettre ident avec 'source'=phpbb avant

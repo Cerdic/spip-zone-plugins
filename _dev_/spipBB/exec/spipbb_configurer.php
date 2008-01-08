@@ -35,7 +35,13 @@ spipbb_log('included',2,__FILE__);
 
 function exec_spipbb_configurer_dist()
 {
-	$configuration = charger_fonction(_request('configuration'), 'configuration', true);
-	ajax_retour($configuration ? $configuration() : 'configure quoi?');
+	if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','>=')) {
+		$configuration = charger_fonction(_request('configuration'), 'configuration', true);
+		ajax_retour($configuration ? $configuration() : 'configure quoi?');
+	}
+	else { // 1.9.2
+		include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire(_request('script')));
+	}
 }
 ?>

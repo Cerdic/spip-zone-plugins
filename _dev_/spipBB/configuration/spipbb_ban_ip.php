@@ -58,9 +58,14 @@ function configuration_spipbb_ban_ip_dist() {
 		. fin_cadre_relief(true);
 
 
-
-	$res = ajax_action_post('spipbb_configurer', 'spipbb_ban_ip', 'spipbb_admin_gere_ban','',$res) ;
-	return ajax_action_greffe('spipbb_configurer-spipbb_ban_ip','', $res); // creer action : "ban" a  la facon de action/configurer
+	if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','>=')) {
+		$res = ajax_action_post('spipbb_configurer', 'spipbb_ban_ip', 'spipbb_admin_gere_ban','',$res) ;
+		return ajax_action_greffe('spipbb_configurer-spipbb_ban_ip','', $res); // creer action : "ban" a  la facon de action/configurer
+	}
+	else { // 1.9.2
+		$res = ajax_action_post('spipbb_configurer', 'spipbb_ban_ip', 'spipbb_admin_gere_ban','',$res,_T('bouton_valider'),'  class="fondo" ') ;
+		return ajax_action_greffe('spipbb_configurer-spipbb_ban_ip', $res); // creer action : "ban" a  la facon de action/configurer 
+	}
 } // configuration_spipbb_ban_ip_dist
 
 ?>
