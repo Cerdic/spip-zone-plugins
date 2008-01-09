@@ -32,13 +32,14 @@ Ici vous pouvez configurer le plugin Thumbsites.
         <select name="serveur" id="serveur">
             <option value="thumbshots"[(#ENV{serveur}|=={'thumbshots'}|?{' selected="selected"'})]>thumbshots</option>
             <option value="girafa"[(#ENV{serveur}|=={'girafa'}|?{' selected="selected"'})]>girafa</option>
+            <option value="snapshot"[(#ENV{serveur}|=={'snapshot'}|?{' selected="selected"'})]>snapshot</option>
         </select>
     </p>        
 </fieldset>
 
 <fieldset id="thumbshots" class="conf_serveur [(#ENV{serveur}|=={'thumbshots'}|?{'actif'})]"><legend>Thumbshots</legend>
     <p>
-        <a href="http://www.thumbshots.com">Thumbshots</a> propose un service gratuit qui ne nécessite pas d'identification
+        <a href="http://www.thumbshots.com">Thumbshots</a> propose un service gratuit qui ne nécessite pas d'identification.
     </p>
     <p>
         Les vignettes générées seront de 120 x 90 pixels
@@ -62,6 +63,14 @@ Ici vous pouvez configurer le plugin Thumbsites.
     <p>
         <label for="girafa_signature">Saissisez votre signature : </label>
         <input type="text" name="girafa_signature" id="girafa_signature" [value="(#ENV{girafa_signature})"]>
+    </p>
+</fieldset>
+
+<fieldset id="snapshot" class="conf_serveur [(#ENV{serveur}|=={'snapshot'}|?{'actif'})]"><legend>snapshot</legend>
+    <p>
+        <a href="http://www.snap.com">Snap shot</a> propose un service gratuit qui ne nécessite pas d'identification.
+    <p>
+        Les vignettes générées seront au maximum de 270 x 171 pixels.
     </p>
 </fieldset>
 
