@@ -11,9 +11,7 @@
 [(#INCLURE{fond=memobox_config})]
 var memobox_ul,memobox;
 
-$(document).ready(function(){
-	$(MEMOBOX_CONTAINER).append('<div id="memobox"></div>');
-	memobox = $('#memobox').append(MEMOBOX_HEADER).append('<ul></ul>');
+function memobox_active_links(){
 	if(MEMOBOX_MODE=='drag') {
 		memobox.Droppable({accept:'memobox_drag',tolerance:'intersect',ondrop:memobox_dropit});
 		$(DRAGGABLES_SEL).addClass('memobox_drag').Draggable({ghosting:true,revert:true,insideParent:true,zIndex:1,opacity:0.8});
@@ -22,7 +20,14 @@ $(document).ready(function(){
 				memobox_dropit(this.previousSibling);
 		});
 	}
+}
+
+$(document).ready(function(){
+	$(MEMOBOX_CONTAINER).append('<div id="memobox"></div>');
+	memobox = $('#memobox').append(MEMOBOX_HEADER).append('<ul></ul>');
 	memobox_ul = $('ul',memobox);
+	memobox_active_links();
+	onAjaxLoad(memobox_active_links);
 	memobox_init();
 })
 
