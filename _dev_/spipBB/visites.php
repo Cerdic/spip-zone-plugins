@@ -48,7 +48,7 @@ if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common'); // pour l
 	$content = array();
 	$fichier = sous_repertoire(_DIR_TMP, 'spipbb-visites') . $client_id;
 	if (lire_fichier($fichier, $content)) {
-		spipbb_log("Contenu stats:".$content,3,__FILE__);
+		spipbb_log("Contenu stats:".serialize($content),3,__FILE__);
 		$content = @unserialize($content);
 	}
 
@@ -76,7 +76,7 @@ if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common'); // pour l
 		}
 		else	$content[$log_type] = 1; // bienvenue au club
 
-		spipbb_log("Enregis stats:".$content,3,__FILE__);
+		spipbb_log("Enregis stats:".serialize($content),3,__FILE__);
 		ecrire_fichier($fichier, serialize($content));
 	}
 

@@ -34,7 +34,7 @@ function compte_fichier_visite_forum($fichier, &$visites_f) {
 		$content = @unserialize($content);
 	}
 	if (!is_array($content)) return;
-	spipbb_log("Depart:".join(",",$visites_f,1,"compte_fichier_visite_forum");
+	spipbb_log("Depart:".join(",",$visites_f,1,"compte_fichier_visite_forum"));
 
 	foreach ($content as $source => $num) {
 		list($log_type, $log_id_num)
@@ -46,7 +46,7 @@ function compte_fichier_visite_forum($fichier, &$visites_f) {
 			$visites_f[$id_forum]=$visites_f[$id_forum] + intval($num);
 		}
 	}
-	spipbb_log("Sortie:".join(",",$visites_f,1,"compte_fichier_visite_forum");
+	spipbb_log("Sortie:".join(",",$visites_f,1,"compte_fichier_visite_forum"));
 }
 
 function calculer_visites_forums($t) {

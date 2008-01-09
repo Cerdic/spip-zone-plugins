@@ -6,8 +6,6 @@ Interface Privée - Administration générale :
 -* 0.5 Mode "debutant" : création automatique du forum/mots clés et paramétrage
 
 Interface Privée - Membres:
--* 0.4.1 FAIT : Gestion des membres (efficace et rapide par tableau avec cases à cocher et filtres eventuels)
--* 0.4.1 FAIT     \___> lien entre auteur et la liste des messages qu'il a publie
 -* 0.5 Meilleure gestion des champs extras cf http://www.spip-contrib.net/Plugin-SpipBB#forum400496
 -* 0.5 Passage de l'ensemble de la configuration sur le modèle SPIP (en utilisant Ajax)
 
