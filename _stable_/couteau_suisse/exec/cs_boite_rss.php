@@ -40,7 +40,7 @@ $force = false;
 		$lastmodified = @file_exists(_DIR_RSS_TMP)?@filemtime(_DIR_RSS_TMP):0;
 		if (time()-$lastmodified < 2*3600) lire_fichier(_DIR_RSS_TMP, $p);
 	}
-	if(strlen($p)) ajax_retour($p);
+	if(strlen($p)) { ajax_retour($p); return; }
 	include_spip('action/editer_site');
 	include_spip('inc/xml');
 	$r = spip_xml_load(_CS_RSS_SOURCE);
