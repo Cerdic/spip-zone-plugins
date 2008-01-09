@@ -22,7 +22,7 @@
             //determine le serveur d'aperçu à utiliser
             $serveur = lire_config('thumbsites/serveur');
             //Charge le fichier de conf spécifique au serveur
-            include_spip('thumbsites/'.$serveur);
+            include_spip('serveurs/'.$serveur);
             //execute la surcharge
             return thumbsite_serveur($url);
         }
