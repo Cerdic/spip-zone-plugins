@@ -34,34 +34,33 @@ if (version_compare(substr($spip_version_code,0,6),_SPIPBB_REV_STYLISER,'<')){
 // pour des raisons historiques, ce qui est trompeur
 
 function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html') {
-	
-	// Accrocher un squelette de base dans le chemin, sinon erreur
+
+	// Trouver un squelette de base dans le chemin
 	if (!$base = find_in_path("$fond.$ext")) {
 		// Si pas de squelette regarder si c'est une table
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		include_spip('inc/autoriser');
-		if (autoriser('sauvegarder')
-		AND $table = $trouver_table($fond, $connect)) {
-				$base = _DIR_TMP . $fond . ".$ext";
+		if (preg_match('/^table:(.*)$/', $fond, $r)
+		AND $table = $trouver_table($r[1], $connect)
+		AND include_spip('inc/autoriser')
+		AND autoriser('webmestre')
+		) {
+				$fond = $r[1];
+				$base = _DIR_TMP . 'table_'.$fond . ".$ext";
 				if (!file_exists($base)
-				OR  $GLOBALS['var_mode'] == 'recalcul') {
+				OR  $GLOBALS['var_mode']) {
 					$vertebrer = charger_fonction('vertebrer', 'public');
-					$f = fopen($base, 'w');
-					fwrite($f, $vertebrer($table));
-					fclose($f);
+					ecrire_fichier($base, $vertebrer($table));
 				}
 		} else { // on est gentil, mais la ...
-		include_spip('public/debug');
-		erreur_squelette(_T('info_erreur_squelette2',
-				    array('fichier'=>"'$fond'")),
-				 $GLOBALS['dossier_squelettes']);
-		$f = find_in_path(".$ext"); // on ne renvoie rien ici, c'est le resultat vide qui provoquere un 404 si necessaire
-		return array(substr($f, 0, -strlen(".$ext")),
-			     $ext,
-			     $ext,
-			     $f);
+			include_spip('public/debug');
+			erreur_squelette(_T('info_erreur_squelette2',
+				array('fichier'=>"'$fond'")),
+				$GLOBALS['dossier_squelettes']);
+			$f = find_in_path(".$ext"); // on ne renvoie rien ici, c'est le resultat vide qui provoquere un 404 si necessaire
+			return array(substr($f, 0, -strlen(".$ext")), $ext, $ext, $f);
 		}
 	}
+
 	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
 	$squelette = substr($base, 0, - strlen(".$ext"));
 
@@ -87,7 +86,8 @@ function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html'
 				case "article" : $sq=$spipbb_meta['squelette_filforum']; break;
 				case "rubrique" : $sq=$spipbb_meta['squelette_groupeforum']; break;
 				}
-				if ( $squel=find_in_path("$sq.$ext") ) $squelette = substr($squel, 0, - strlen(".$ext"));
+				$squel=find_in_path("$sq.$ext");
+				if ( $squel ) $squelette = substr($squel, 0, - strlen(".$ext"));
 			}
 		}
 		else spipbb_log("id_rub:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'],3,"p_s2") ;
@@ -107,7 +107,8 @@ function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html'
 				if ($squel=find_in_path("$f.$ext")) {
 					$squelette = substr($squel, 0, - strlen(".$ext"));
 					break;
-				} else
+				}
+				else
 					$id_rubrique = quete_parent($id_rubrique);
 			}
 		}
