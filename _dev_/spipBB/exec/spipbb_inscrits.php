@@ -245,7 +245,7 @@ function exec_spipbb_inscrits() {
 //			"<td style='text-align:center;'>".$ico_signature."</td>".
 //			"<td style='text-align:center;'>".$ico_avatar."</td>".
 			"<td style='text-align:center;'>";
-		if ($r['nb_mes']>0) echo "<a href='".generer_url_ecrire('spipbb_admin_posts',"id_auteur=".$r['id_auteur'])."'>".$r['nb_mes']."</a>";
+		if ($r['nb_mes']>0) echo "<a href='".generer_url_public('liste_messages',"id_auteur=".$r['id_auteur']."&id_rubrique=".$GLOBALS['spipbb']['id_secteur'])."'>".$r['nb_mes']."</a>";
 		else echo $r['nb_mes'];
 		echo "</td>".
 			"<td width='2%' style='text-align:center;'><input type='checkbox' name='selectmembre[]' value='".$r['id_auteur']."' /></td>".

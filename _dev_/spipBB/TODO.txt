@@ -6,8 +6,8 @@ Interface Privée - Administration générale :
 -* 0.5 Mode "debutant" : création automatique du forum/mots clés et paramétrage
 
 Interface Privée - Membres:
--* 0.4.1 Gestion des membres (efficace et rapide par tableau avec cases à cocher et filtres eventuels)
--* 0.4.1    \___> lien entre auteur et la liste des messages qu'il a publie
+-* 0.4.1 FAIT : Gestion des membres (efficace et rapide par tableau avec cases à cocher et filtres eventuels)
+-* 0.4.1 FAIT     \___> lien entre auteur et la liste des messages qu'il a publie
 -* 0.5 Meilleure gestion des champs extras cf http://www.spip-contrib.net/Plugin-SpipBB#forum400496
 -* 0.5 Passage de l'ensemble de la configuration sur le modèle SPIP (en utilisant Ajax)
 
@@ -18,6 +18,7 @@ Interface Privée - Import PhpBB :
 -* 0.5 Import phpBB : Mettre en option l'import des auteurs (remplacer l'id par le nom dans les messages)
 
 Interface publique - Générale :
+-* 0.4 Bug emoticons dans nouveaux messages ? (constaté sur site démo)
 -* 0.4.2 Manque formulaire inscription optionnel (remplacer le standard que l'on ne doit plus modifier par un specifique spipbb)
 -* 0.4.3 Gestion avatar : a ameliorer + téléchargement (droits ?)
 -* 0.4.4 Affichage du profil a revoir
