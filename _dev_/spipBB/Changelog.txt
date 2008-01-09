@@ -4,7 +4,8 @@
  * Corrections pour suivre les évolutions de SPIP 1.9.3 dans public/styliser + erreur dans #ARRAY{} vide modeles/moderateur_ligne
  * 0.4.1 lien entre auteur et la liste des messages qu'il a publie (en page publique)
  * Petite mise à jour de la description du plugin
-
+ * 0.4.1 Correction bug affichage total des vues/visites par forums
+ * Passage en 0.4.2 : fin des evolutions prevues
 
 2008-01-08  chryjs  <chryjs!@!free!.!fr>
 

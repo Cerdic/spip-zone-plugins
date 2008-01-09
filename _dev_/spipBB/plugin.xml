@@ -15,7 +15,7 @@ _ &#169; 2006 - <multi>
 </multi>
 	</auteur>
 	<version>
-		0.4.1
+		0.4.2
 	</version>
 	<etat>
 		dev
@@ -34,7 +34,7 @@ _ {{The development of Spipbb plugin is in progress. Use it at your
 
 _ [Access to the admin panel-> .?exec=spipbb_configuration] 
 		[fr]Le plugin SpipBB permet :
--* De g&eacute;rer de fa&cedil;on centralis&eacute;e les forums de SPIP
+-* De g&eacute;rer de fa&ccedil;on centralis&eacute;e les forums de SPIP
  (interface priv&eacute;e),
 -* D'utiliser un secteur comme base d'un groupe de forums comme les
  &laquo;Bulletin Board&raquo; tels que phpBB. Dans ce secteur, les

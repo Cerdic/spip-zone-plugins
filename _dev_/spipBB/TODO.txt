@@ -27,7 +27,6 @@ Interface publique - Générale :
 -* 0.5 Logout bug en 193 uniq id ?
 
 Bugs et autres elements non finis :
--* 0.4.1 Bug ?? pourquoi la balise CALC_STATS... est elle calculee 2 fois de suite ? Non mais autre bug
 -* 0.4.2 Boutons d'admin sur l'interface publique ?
 
 -* 0.4.7 Bug dans le move (ordre de priorites) d'un forum des fois ça ne fonctionne pas... (valider les cas et corriger)
