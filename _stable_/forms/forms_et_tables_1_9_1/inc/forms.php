@@ -753,8 +753,12 @@
 			}
 
 			include_spip('inc/mail');
+			$from_host = parse_url($GLOBALS['meta']['adresse_site']);
+			$from_host = $from_host['host'];
 			if ($mailconfirm !== '') {
-				$head="From: formulaire@".$_SERVER["HTTP_HOST"]."\n";
+				$from = $GLOBALS['meta']['email_webmaster'];
+				//$from = "formulaire@$from_host";
+				$head="From: $from\n";
 				$sujet = $row['titre'];
 				$dest = $mailconfirm;
 				// mettre le texte dans un charset acceptable et sans entites
@@ -770,10 +774,11 @@
 					if (preg_match(",<h[1-6]>(.*)</h[1-6]>,Uims",$regs[1],$hs))
 						$sujet=$hs[1];
 				}
-				envoyer_mail($dest, $sujet, $corps_mail_confirm, "formulaire@".$_SERVER["HTTP_HOST"], $headers);
+				envoyer_mail($dest, $sujet, $corps_mail_confirm, $from, $headers);
 			}
 			if ($email_dest != '') {
-				$head="From: formulaire_$id_form@".$_SERVER["HTTP_HOST"]."\n";
+				$from = $mailconfirm?$mailconfirm:"formulaire_$id_form@$from_host";
+				$head="From: $from\n";
 				$sujet = $row['titre'];
 				$dest = $email_dest;
 				// mettre le texte dans un charset acceptable et sans entites
@@ -789,7 +794,7 @@
 					if (preg_match(",<h[1-6]>(.*)</h[1-6]>,Uims",$regs[1],$hs))
 						$sujet=$hs[1];
 				}
-				envoyer_mail($dest, $sujet, $corps_mail_admin, "formulaire@".$_SERVER["HTTP_HOST"], $headers);
+				envoyer_mail($dest, $sujet, $corps_mail_admin, $from, $headers);
 		 	}
 		}
 	}
