@@ -48,9 +48,32 @@ function exec_spipbb_inscrits() {
 	// pour le moment on les passe au statut poubelle : il faudra : choisir ce que l'on fait de leurs message et verifier qu'on peut faire cela comme ça
 	$sel_membre=_request('selectmembre');
 	if (is_array($sel_membre) and count($sel_membre)>0) {
-		$list_id_del=join(",",$sel_membre);
-		$suppr_mess=_request('supprmess');
-		$delq=sql_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur IN ($list_id_del)");
+		//$list_id_del=join(",",$sel_membre);
+		$list_id_del=sql_in('id_auteur',$sel_membre);
+		switch(_request('supprmess')) {
+		case 'nom' : // detacher les messages des auteurs a supprimer
+			$forumq=sql_query("UPDATE spip_forums SET id_auteur=0 WHERE ($list_id_del)");
+			break;
+		case 'anonymes' : // detacher et rendre anonyme tous les messages de tous les auteurs a supprimer
+			$forumq=sql_query("UPDATE spip_forums SET id_auteur=0,auteur='Anonyme' WHERE ($list_id_del)");
+			break;
+		case 'tous' : // effacer tous les messages de tous les auteurs a supprimer
+			// il faut traiter les messages principaux séparément des threads
+			$req = sql_query ("SELECT id_forum FROM spip_forums WHERE ($list_id_del) AND id_parent=0");
+			while ( $row = sql_fetch($req) ) {
+				$req_fils = sql_query ("SELECT id_forum FROM spip_forums WHERE id_parent=".$row['id_forum']." ORDER BY id_forum LIMIT 0,1" );
+				if ( $row_fils=sql_fetch($req_fils) ) {
+					// on decale le premier enfant comme nouveau pere
+					$upd_fils = sql_query ("UPDATE spip_forums SET id_parent=0 WHERE id_forum=".$row_fils['id_forum']);
+					// on lui rattache les eventuels autres enfants
+					$upd_thread = sql_query ("UPDATE spip_forums SET id_parent=".$row_fils['id_forum']." WHERE id_parent=".$row['id_forum']);
+				}
+			}
+			// maintenant on peut tout effacer
+			$forumq=sql_query("UPDATE spip_forums SET statut='5poubelle' WHERE ($list_id_del)");
+			break;
+		} // switch traitement des messages dans les forums
+		$delq=sql_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE ($list_id_del)");
 	}
 
 	$vl=intval(_request('vl'));
@@ -141,12 +164,17 @@ function exec_spipbb_inscrits() {
 	echo  "<form method='post' action='".generer_url_ecrire(_request('exec'))."' name='formfiltre'>\n";
 
 	echo "<div style='text-align:right'>\n";
+	# c 9/1/8 : la liste officielle des statuts cf ecrire/inc/instituer_auteur : $GLOBALS['liste_des_statuts']
+	$trad_types = array(	"0minirezo" => _T('item_administrateur_2'),
+					"1comite" =>  _T('intem_redacteur'),
+					"6forum" => _T('item_visiteur'),
+					"nouveau" => _T('item_nouvel_auteur'));
 
 	reset($liste_types);
 	while (list(,$type)=each($liste_types)) {
 		$checked = (in_array($type,$sel_type)) ? "checked='checked' " :" ";
-		echo "<input type='checkbox' name='seltype[]' id='seltype' value=$type $checked/>\n";
-		echo "<label for='seltype_$type'>$type</label>\n";
+		echo "<input type='checkbox' name='seltype[]' id='seltype' value='$type' $checked/>\n";
+		echo "<label for='seltype_$type'>".$trad_types[$type]."</label>\n";
 	}
 	echo "</div>\n";
 	echo "<div style='text-align:right'><input type='submit' name='_spipbb_selectionner' value='"
