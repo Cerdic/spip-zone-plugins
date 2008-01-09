@@ -34,12 +34,12 @@ _ {{The development of Spipbb plugin is in progress. Use it at your
 
 _ [Access to the admin panel-> .?exec=spipbb_configuration] 
 		[fr]Le plugin SpipBB permet :
--* De gérer de façon centralisée les forums de SPIP (interface
- priv&eacute;e),
+-* De g&eacute;rer de fa&cedil;on centralis&eacute;e les forums de SPIP
+ (interface priv&eacute;e),
 -* D'utiliser un secteur comme base d'un groupe de forums comme les
- "Bulletin Board" tels que phpBB . Dans ce secteur, les sous-rubriques
- sont des groupes de forums, les articles des forums, chaque message
-  dans le forum d'un article y d&eacute;marre un thread.
+ &laquo;Bulletin Board&raquo; tels que phpBB. Dans ce secteur, les
+ sous-rubriques sont des groupes de forums, les articles des forums,
+ chaque message dans le forum d'un article y d&eacute;marre un thread.
 
 _ {{Plugin spipbb en cours de developpement. Vous l'utilisez &agrave;
  vos risques et p&eacute;rils}}
