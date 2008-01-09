@@ -11,7 +11,7 @@ function Auteur_forum_affichage_final($flux){
 		// code jQuery
 		$code =<<<jscode
 <script type="text/javascript"><!--
-jQuery(document).ready(function(){
+if (window.jQuery) jQuery(document).ready(function(){
  form = $form;
  auteur = jQuery('#$auteur');
 // label = auteur.prev();

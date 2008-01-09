@@ -1,6 +1,6 @@
 var onglet_actif = 0;
 
-jQuery(document).ready(function() {
+if (window.jQuery) jQuery(document).ready(function() {
   if(jQuery('div.onglets_bloc_initial').length) {
 	bloc = jQuery('div.onglets_bloc_initial');
 	bloc.prepend('<div class="onglets_liste"></div>');

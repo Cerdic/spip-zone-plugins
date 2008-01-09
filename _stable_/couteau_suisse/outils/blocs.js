@@ -1,4 +1,4 @@
-jQuery(function(){
+if (window.jQuery) jQuery(function(){
 	// clic sur un outil
 	jQuery('div.cs_blocs h4').click( function() {
 		jQuery(this).toggleClass('blocs_replie')

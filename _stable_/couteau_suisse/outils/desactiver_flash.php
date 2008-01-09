@@ -8,7 +8,7 @@ function InhibeFlash_affichage_final($flux){
 	$code .=<<<jscode
 <script type="text/javascript"><!--
 var code;
-$(document).ready(function(){
+if (window.jQuery) jQuery(document).ready(function(){
   $('object').each(function(){
   	$('param',this).remove();
   }).wrap("<div class='noflash'></div>");

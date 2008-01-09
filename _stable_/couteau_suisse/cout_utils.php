@@ -322,7 +322,7 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		$cs_metas_pipelines['header'][] = "<style type=\"text/css\">\n"
 			.compacte_css(join("\n", $temp_css))."\n</style>";
 	if (count($temp_jq))
-		$temp_js[] = "jQuery(document).ready(function(){\n".join("\n", $temp_jq)."\n});";
+		$temp_js[] = "if (window.jQuery) jQuery(document).ready(function(){\n".join("\n", $temp_jq)."\n});";
 	if (count($temp_js))
 		$cs_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
 			.compacte_js(join("\n", $temp_js))."\n// --></script>";
