@@ -537,7 +537,7 @@ function migre_utilisateurs() {
 			$email = $row['user_email'];
 			$pass = $row['user_password'];
 			$site = $row['user_website']; 
-			if ((!preg_match(',^https?://[^.]+\.[^.]+.*/.*$,', $site)) { $site = ""; } // on vire les url non conformes
+			if ( (!preg_match(',^https?://[^.]+\.[^.]+.*/.*$,', $site)) ) { $site = ""; } // on vire les url non conformes
 			$user_lang = $row['user_lang'];
 			$user_lang = $user_lang ? $user_lang : $spipbb_fromphpbb['spip_lang'] ;
 			$voir_en_ligne = ($row['user_allow_viewonline']==1) ? 'oui' : 'non' ;

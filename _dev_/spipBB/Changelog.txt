@@ -1,6 +1,7 @@
 ﻿2008-01-09  chryjs  <chryjs!@!free!.!fr>
 
  * 0.4.1 Traitement des messages des id_auteurs supprimés selon choix + quelques corrections affichage
+ * Corrections pour suivre les évolutions de SPIP 1.9.3 dans public/styliser + erreur dans #ARRAY{} vide modeles/moderateur_ligne
 
 
 2008-01-08  chryjs  <chryjs!@!free!.!fr>
