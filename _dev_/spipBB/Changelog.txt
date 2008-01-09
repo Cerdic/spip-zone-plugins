@@ -3,6 +3,7 @@
  * 0.4.1 Traitement des messages des id_auteurs supprimés selon choix + quelques corrections affichage
  * Corrections pour suivre les évolutions de SPIP 1.9.3 dans public/styliser + erreur dans #ARRAY{} vide modeles/moderateur_ligne
  * 0.4.1 lien entre auteur et la liste des messages qu'il a publie (en page publique)
+ * Petite mise à jour de la description du plugin
 
 
 2008-01-08  chryjs  <chryjs!@!free!.!fr>

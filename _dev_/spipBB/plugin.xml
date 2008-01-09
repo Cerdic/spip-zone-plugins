@@ -1,28 +1,56 @@
 <plugin>
 	<nom>
-		SpipBB
+	<multi>
+		[en]SpipBB : SPIP forums managements
+		[fr]SpipBB : Gestion des forums de SPIP
+	</multi>
 	</nom>
 	<auteur>
-		Credits : [SpipBB Team :voir la liste->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]
-_ &#169; 2006 - Distribu&eacute; sous licence GPL
+		[<multi>[en]The SpipBB Team: see the contributors' list on Spip-contrib
+[fr]La SpipBB Team : voir la liste des contributeurs sur Spip-contrib</multi>
+		->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]
+_ &#169; 2006 - <multi>
+[en]Distributed under the GPL Licence
+[fr]Distribu&eacute; sous licence GPL
+</multi>
 	</auteur>
 	<version>
 		0.4.1
 	</version>
 	<etat>
-		experimental
+		dev
 	</etat>
 	<description>
 		<multi>
-		[fr]SpipBB vous permettra d'utiliser un secteur comme base d'un groupe de forums "&agrave; la" phpbb. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d'un article y d&eacute;marre un thread.
-_ Plugin spipbb en cours de developpement. A vos risques et perils :)
-_ [Administration-> .?exec=spipbb_configuration] Acc&egrave;s au panneau d'administration.
-		[en]SpipBB will allow you to use a sector as the base for a group of forums "&agrave; la" phpbb. In this sector, the sub-sectors, are forum groups, the articles are forums, and each post in the forum of such articles will start a new thread.
-_ Spipbb plugin, dev in progress. Use it at your own risks :)
-_ [Admin-> .?exec=spipbb_configuration] Access to the admin panel.
+		[en]With SpipBB plugin, you can :
+-* Manage all your SPIP forums (private zone),
+-* Use a sector as the base for a group of forums as the Bulletin 
+Boards such as phpBB. In this sector, the sub-sectors, are forum
+ groups, the articles are forums, and each post in the forum
+ of such articles will start a new thread.
+
+_ {{The development of Spipbb plugin is in progress. Use it at your
+ own risks :)}}
+
+_ [Access to the admin panel-> .?exec=spipbb_configuration] 
+		[fr]Le plugin SpipBB permet :
+-* De gérer de façon centralisée les forums de SPIP (interface
+ priv&eacute;e),
+-* D'utiliser un secteur comme base d'un groupe de forums comme les
+ "Bulletin Board" tels que phpBB . Dans ce secteur, les sous-rubriques
+ sont des groupes de forums, les articles des forums, chaque message
+  dans le forum d'un article y d&eacute;marre un thread.
+
+_ {{Plugin spipbb en cours de developpement. Vous l'utilisez &agrave;
+ vos risques et p&eacute;rils}}
+ 
+_ [Acc&egrave;s au
+ panneau d'administration-> .?exec=spipbb_configuration] 
 		</multi>
 	</description>
-	<lien>[Documentation->http://www.spip-contrib.net/SpipBB-le-forum]</lien> <!-- [fr] URI de documentation [en] documentation URI -->
+	<lien>[<multi>[en]Read the documentation on Spip-contrib
+[fr]Consulter la documentation du plugin sur Spip-contrib</multi>
+->http://www.spip-contrib.net/SpipBB-le-forum]</lien> <!-- [fr] URI de documentation [en] documentation URI -->
 	<icon>img_pack/spipbb-48.png</icon> <!-- [fr] icone du plugin [en] plugin icon -->
 	<fonctions>spipbb_fonctions.php</fonctions>
 	<options>spipbb_options.php</options>
