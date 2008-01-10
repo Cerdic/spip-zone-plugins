@@ -36,7 +36,7 @@ $time_start = array_sum(explode(' ', microtime()));;
 global $spipbb_fromphorum; // stockage des informations et des etapes
 
 include_spip('inc/minipres');
-include_spip('inc/spipbb');
+include_spip('inc/spipbb_init');
 include_spip('inc/presentation');
 
 ini_set('max_execution_time',600); // pas toujours possible mais requis pour etape 2 et surtout 3!
@@ -233,7 +233,7 @@ function fromphorum_init_metas($spiprubid)
 	global $spipbb_fromphorum; // stockage des informations et des etapes
 
 	$spipbb_fromphorum=array();
-	$spipbb_fromphorum['spiprubid'] = $spiprubid;
+	$spipbb_fromphorum['spiprubid'] = ($spiprubid==0) ? $GLOBALS['spipbb']['id_secteur'] : $spiprubid ;
 	$spipbb_fromphorum['spiprub_from_catid'] = array();
 	$spipbb_fromphorum['spip_art_from_forumid'] = array();
 	$spipbb_fromphorum['spip_auteur_from_user_id'] = array();
@@ -243,7 +243,7 @@ function fromphorum_init_metas($spiprubid)
 	$spipbb_fromphorum['prefixe'] = $GLOBALS['connexions'][0]['prefixe'];
 	$spipbb_fromphorum['link'] = $GLOBALS['connexions'][0]['link'];
 	$spipbb_fromphorum['db'] = $GLOBALS['connexions'][0]['db'];
-	$spipbb_fromphorum['statut_abonne'] = '6forum';
+	$spipbb_fromphorum['statut_abonne'] = _SPIPBB_STATUT_ABONNE;
 	$spipbb_fromphorum['mc_annonce_id'] = $GLOBALS['spipbb']['id_mot_annonce'];
 	$spipbb_fromphorum['mc_postit_id'] = $GLOBALS['spipbb']['id_mot_postit'];
 	$spipbb_fromphorum['mc_ferme_id'] = $GLOBALS['spipbb']['id_mot_ferme'];

@@ -37,7 +37,7 @@ $time_start = array_sum(explode(' ', microtime()));;
 global $spipbb_fromphpbb; // stockage des informations et des etapes
 
 include_spip('inc/minipres');
-include_spip('inc/spipbb');
+include_spip('inc/spipbb_init');
 include_spip('inc/presentation');
 
 ini_set('max_execution_time',600); // pas toujours possible mais requis pour etape 2 et surtout 3!
@@ -45,7 +45,7 @@ ini_set('max_execution_time',600); // pas toujours possible mais requis pour eta
 // ------------------------------------------------------------------------------
 // [fr] Verification et declenchement de l'operation
 // ------------------------------------------------------------------------------
-function action_spipbb_fromphpbb_action()
+function action_spipbb_fromphpbb()
 {
 	global $spip_lang_left, $spipbb_fromphpbb, $dir_lang, $time_start;
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -72,7 +72,7 @@ function action_spipbb_fromphpbb_action()
 		$corps .= migre_categories_forums();
 		$form   = "<input type='hidden' name='etape' id='etape' value='2'>";
 		$form  .= "<div align='right'><input class='fondo' type='submit' value='"._T('bouton_suivant')."' /></div>" ;
-		$corps .= generer_action_auteur("spipbb_fromphpbb_action",$id_rubrique, $retour, $form," method='post' name='formulaire'");
+		$corps .= generer_action_auteur("spipbb_fromphpbb",$id_rubrique, $retour, $form," method='post' name='formulaire'");
 		$corps .= $link_back;
 		$spipbb_fromphpbb['etape']++;
 		fromphpbb_save_metas();
@@ -82,7 +82,7 @@ function action_spipbb_fromphpbb_action()
 		$corps .= migre_utilisateurs();
 		$form   = "<input type='hidden' name='etape' id='etape' value='3'>";
 		$form  .= "<div align='right'><input class='fondo' type='submit' value='"._T('bouton_suivant')."' /></div>" ;
-		$corps .= generer_action_auteur("spipbb_fromphpbb_action",$id_rubrique, $retour,$form," method='post' name='formulaire'");
+		$corps .= generer_action_auteur("spipbb_fromphpbb",$id_rubrique, $retour,$form," method='post' name='formulaire'");
 		$corps .= $link_back;
 		$spipbb_fromphpbb['etape']++;
 		fromphpbb_save_metas();
@@ -102,7 +102,7 @@ function action_spipbb_fromphpbb_action()
 	echo minipres(_T("spipbb:fromphpbb_titre_etape")." $step",$corps);
 
 	exit;
-} // action_spipbb_fromphpbb_action
+} // action_spipbb_fromphpbb
 
 // ------------------------------------------------------------------------------
 // [fr] connecte a la base contenant les forums phpbb
@@ -230,12 +230,12 @@ function fromphpbb_convert($texte) {
 // ------------------------------------------------------------------------------
 // [fr] Initialisation
 // ------------------------------------------------------------------------------
-function fromphpbb_init_metas($spiprubid)
+function fromphpbb_init_metas($spiprubid=0)
 {
 	global $spipbb_fromphpbb; // stockage des informations et des etapes
 
 	$spipbb_fromphpbb=array();
-	$spipbb_fromphpbb['spiprubid'] = $spiprubid;
+	$spipbb_fromphpbb['spiprubid'] = ($spiprubid==0) ? $GLOBALS['spipbb']['id_secteur'] : $spiprubid ;
 	$spipbb_fromphpbb['spiprub_from_catid'] = array();
 	$spipbb_fromphpbb['spip_art_from_forumid'] = array();
 	$spipbb_fromphpbb['spip_auteur_from_user_id'] = array();
@@ -245,7 +245,7 @@ function fromphpbb_init_metas($spiprubid)
 	$spipbb_fromphpbb['prefixe'] = $GLOBALS['connexions'][0]['prefixe'];
 	$spipbb_fromphpbb['link'] = $GLOBALS['connexions'][0]['link'];
 	$spipbb_fromphpbb['db'] = $GLOBALS['connexions'][0]['db'];
-	$spipbb_fromphpbb['statut_abonne'] = '6forum';
+	$spipbb_fromphpbb['statut_abonne'] = _SPIPBB_STATUT_ABONNE ;
 	$spipbb_fromphpbb['mc_annonce_id'] = $GLOBALS['spipbb']['id_mot_annonce'];
 	$spipbb_fromphpbb['mc_postit_id'] = $GLOBALS['spipbb']['id_mot_postit'];
 	$spipbb_fromphpbb['mc_ferme_id'] = $GLOBALS['spipbb']['id_mot_ferme'];
@@ -308,7 +308,6 @@ function fromphpbb_init_metas($spiprubid)
 	$spipbb_fromphpbb['spip_id_secteur'] = $row['id_secteur'];
 
 	$spipbb_fromphpbb['go'] = ( _request('phpbb_test') != 'oui' );
-//die ("go : "._request('phpbb_test')." : ".$spipbb_fromphpbb['go']);
 	$spipbb_fromphpbb['etape'] = 1;
 }
 

@@ -68,7 +68,6 @@ function spipbb_affiche_droite($flux)
 
 	if ( ($flux['args']['exec']=='naviguer') AND (!empty($flux['args']['id_rubrique'])) )
 	{ // AND (!empty($GLOBALS['meta']['spipbb']))
-		include_spip('inc/spipbb_192'); // Compatibilite 192
 		include_spip('inc/spipbb_util'); // pour spipbb_is_configured
 		$r = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=".$flux['args']['id_rubrique']);
 		$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
@@ -122,7 +121,8 @@ function spipbb_affiche_milieu($flux) {
 # ch. traiter visite-forum en cron
 #
 function spipbb_taches_generales_cron($taches_generales){
-	$taches_generales['statvisites'] = 30 * 1; // toutes les 30 sec
+	if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common');
+	$taches_generales['statvisites'] = _SPIPBB_DELAIS_CRON ;
 	return $taches_generales;
 } // spipbb_taches_generales_cron
 

@@ -1,6 +1,8 @@
 ﻿2008-01-10  chryjs  <chryjs!@!free!.!fr>
 
  * Corrections des manques dans la librairie de compatibilite (sur fonction sql_in)
+ * Fromphpbb Renommage ancienne fonction + suppression ancienne librairie (qui devenait problematique)
+ * Correction des inclusions associees + definition de constantes dans la librairie commune
 
 
 2008-01-09  chryjs  <chryjs!@!free!.!fr>

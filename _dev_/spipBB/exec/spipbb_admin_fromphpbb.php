@@ -231,8 +231,8 @@ function spipbb_fromphpbb_formulaire($conf=array())
 	$choix_rubrique = editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider);
 
 	$contexte = array( 
-			'lien_action' => generer_action_auteur('spipbb_fromphpbb_action',$id_rubrique,$retour) ,
-			'exec_script' => 'spipbb_fromphpbb_action',
+			'lien_action' => generer_action_auteur('spipbb_fromphpbb',$id_rubrique,$retour) ,
+			'exec_script' => 'spipbb_fromphpbb',
 			'phpbb_liste_fichiers' => $liste_fichiers,
 			'choix_rubrique' => $choix_rubrique,
 			'radio_checked' => $radio,

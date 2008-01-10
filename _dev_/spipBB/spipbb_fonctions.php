@@ -7,15 +7,10 @@
 #  Contact : chryjs!@!free!.!fr                            #
 #----------------------------------------------------------#
 
-if (!defined('_INC_SPIPBB_COMMON')) include_spip("inc/spipbb_common");
-//if (!function_exists('sql_query')) include_spip('inc/spipbb_192');
-
 # requis
+if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common');
 include_spip('inc/traiter_imagerie');
-
-// c: 20/12/7 Les balises sont dans balises/ include inutile a priori (et meme dangereux ?)
-//include_spip('public/spipbb_balises');
-include_spip("inc/spipbb_notifications");
+include_spip('inc/spipbb_notifications');
 
 // ------------------------------------------------------------------------------
 // Filtre : insere_texte_alerter

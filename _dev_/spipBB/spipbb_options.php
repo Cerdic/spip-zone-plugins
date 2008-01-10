@@ -29,7 +29,7 @@ include_spip('base/spipbb'); // requis pour la mutualisation et les boucles avec
 #
 # inclus def de champs (voir ci-apres !)
 #
-include_spip("base/sap_spipbb");
+include_spip('base/sap_spipbb');
 
 define('_SUIVI_FORUM_THREAD', "1");
 

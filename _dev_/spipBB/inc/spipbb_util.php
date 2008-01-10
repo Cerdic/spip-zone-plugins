@@ -4,6 +4,7 @@
 */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common');
 spipbb_log('included',2,__FILE__);
 
 //----------------------------------------------------------------------------

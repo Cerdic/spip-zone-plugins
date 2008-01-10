@@ -41,6 +41,12 @@ define('_SPIPBB_REV_BALISE_SESSION','1.9262'); // Ajout de la balise SESSION SVN
 define('_SPIPBB_REV_TABLE_AUTRUB','1.9270'); // Passage auteurs_rubriques en table principale
 define('_SPIPBB_REV_EDITER_ARTRUB','1.9300'); // Suppression de la fonction editer_article_rubrique SVN 10818
 
+// Cron SPIP
+define('_SPIPBB_DELAIS_CRON', 1 * 30 ); // toutes les 30 sec
+
+// Pour les migrations
+define('_SPIPBB_STATUT_ABONNE', '6forum' ); // Statut par défaut d'un nouveau membre lors d'une migration
+
 // [fr] Plugin ecrit pour spip rev 1.9.3 -> fournir les fonctions requises pour spip 1.9.2
 // [en] Plugin written for spip rev 1.9.3 -> provide required functions for spip 1.9.2
 if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_SQL,'<')) {
