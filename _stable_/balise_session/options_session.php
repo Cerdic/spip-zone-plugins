@@ -11,8 +11,10 @@
 
 // Indique si on est dans l'espace prive
 // http://doc.spip.org/@test_espace_prive
+if (!defined('test_espace_prive')) {
 function test_espace_prive() {
 	return defined('_ESPACE_PRIVE') ? _ESPACE_PRIVE : false;
+}
 }
 // Activer l'invalideur de session
 // http://doc.spip.org/@invalideur_session

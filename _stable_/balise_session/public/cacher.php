@@ -12,6 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// lors de l'upgrade du plugin, le fichier options n'est pas defini et cela casse tout
+if (!defined('test_espace_prive')) {
+	include_spip('options_session');
+}
+
 //
 // Le format souhaite : "a/bout-d-url.md5" (.gz s'ajoutera pour les gros caches)
 // Attention a modifier simultanement le sanity check de
