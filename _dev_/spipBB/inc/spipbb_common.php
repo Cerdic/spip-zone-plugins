@@ -1,6 +1,6 @@
 <?php
 #----------------------------------------------------------#
-#  Plugin  : spipbb_common - Licence : GPL                 #
+#  Plugin  : spipbb - Licence : GPL                        #
 #  File    : inc/spipbb_common                             #
 #  Authors : Chryjs, 2007 et als                           #
 #  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
@@ -46,6 +46,7 @@ define('_SPIPBB_DELAIS_CRON', 1 * 30 ); // toutes les 30 sec
 
 // Pour les migrations
 define('_SPIPBB_STATUT_ABONNE', '6forum' ); // Statut par défaut d'un nouveau membre lors d'une migration
+define('_SPIPBB_IMPORT_TEST','oui'); // Par defaut import a blanc
 
 // [fr] Plugin ecrit pour spip rev 1.9.3 -> fournir les fonctions requises pour spip 1.9.2
 // [en] Plugin written for spip rev 1.9.3 -> provide required functions for spip 1.9.2
