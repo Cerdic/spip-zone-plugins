@@ -452,13 +452,33 @@ function bornes_pagination($courante, $nombre, $max = 10) {
 if (!function_exists('sql_in')) {
 function sql_in($val, $valeurs, $not='', $serveur='') {
 	if (is_array($valeurs)) {
-		$f = sql_serveur('quote', $serveur);
-		$valeurs = join(',', array_map($f, array_unique($valeurs)));
+		$valeurs = join(',', array_map('spip_mysql_quote', array_unique($valeurs)));
 	} elseif ($valeurs[0]===',') $valeurs = substr($valeurs,1);
 	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
 
 	return spip_mysql_in($val, $valeurs, $not, $serveur);
 } } // sql_in
+
+#------------------------------------------------------------#
+# orig req/mysql
+# voir http://doc.spip.org/@sql_in
+#------------------------------------------------------------#
+if (!function_exists('spip_mysql_quote')) {
+function spip_mysql_quote($v)
+{
+	return _q($v);
+} } // spip_mysql_quote
+
+#------------------------------------------------------------#
+# orig base/connect_sql
+# voir http://doc.spip.org/@_q
+#------------------------------------------------------------#
+if (!function_exists('_q')) {
+function _q ($a) {
+	return (is_int($a)) ? strval($a) : 
+		(!is_array($a) ? ("'" . addslashes($a) . "'")
+		 : join(",", array_map('_q', $a)));
+} } // _q
 
 #------------------------------------------------------------#
 # voir http://doc.spip.org/@sql_in

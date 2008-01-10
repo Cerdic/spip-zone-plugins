@@ -1,4 +1,9 @@
-﻿2008-01-09  chryjs  <chryjs!@!free!.!fr>
+﻿2008-01-10  chryjs  <chryjs!@!free!.!fr>
+
+ * Corrections des manques dans la librairie de compatibilite (sur fonction sql_in)
+
+
+2008-01-09  chryjs  <chryjs!@!free!.!fr>
 
  * 0.4.1 Traitement des messages des id_auteurs supprimés selon choix + quelques corrections affichage
  * Corrections pour suivre les évolutions de SPIP 1.9.3 dans public/styliser + erreur dans #ARRAY{} vide modeles/moderateur_ligne
