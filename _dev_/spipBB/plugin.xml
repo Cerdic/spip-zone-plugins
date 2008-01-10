@@ -79,4 +79,5 @@ _ [Acc&egrave;s au
 		<inclure>spipbb_pipelines.php</inclure>
 	</pipeline>
 	<chemin dir='' />
+	<necessite id="cfg" version="[1.0.0;]" />
 </plugin>
