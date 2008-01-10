@@ -17,12 +17,13 @@ function filtre_calculer_nuage_dist($titres, $urls, $poids, $expose) {
     foreach ($titres as $id => $t) {
       $score = $poids[$id]/$max; # entre 0 et 1
       if($score > 0.05){
-        $s = ($unite=floor($score += 0.900001)) . '.' . floor(10*($score - $unite));
+        $s = ($unite=floor($score += 0.900001)) . floor(10*($score - $unite));
+        $s -= 9;
         $resultat[$t] = array(
           'url'   => $urls[$id],
           'poids' => $poids[$id].'/'.$max,
-          'style' => 'font-size: '.$s.'em;',
-          'class' => filtre_find($expose, $id)
+          'class' => $s,
+          'expose' => filtre_find($expose, $id)
         );
       }
     }
@@ -42,21 +43,24 @@ function filtre_nuage_dist($id_mot, $titre = '', $url = '', $poids = -1, $expose
 	else {
 		$calcul = chercher_filtre('calculer_nuage');
 		$retour = $calcul($nuage['titre'], $nuage['url'], $nuage['poids'], $expose);
-    $nuage = array();
+	    $nuage = array();
 	}
 	return !empty($retour) ? $retour : '';
 }
 
 //compat SPIP 1.9.2
-function push($array, $val) {
-	if($array == '' OR !array_push($array, $val)) return '';
-	return $array;
+if(!function_exists('push')) {
+	function push($array, $val) {
+		if($array == '' OR !array_push($array, $val)) return '';
+		return $array;
+	}
 }
 
-function find($array, $val) {
-	return ($array != '' AND in_array($val, $array));
+if(!function_exists('find')) {
+	function find($array, $val) {
+		return ($array != '' AND in_array($val, $array));
+	}
 }
-
 
 //la gestion du critere {frequence}
 include_spip('frequence_fonctions');
