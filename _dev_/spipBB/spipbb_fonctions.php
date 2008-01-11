@@ -91,8 +91,19 @@ function spipbb_maintenance($id_article)
 # a renommer plus simple ! => |nombre_post ??
 ##
 function spipbb_nb_messages($id_auteur){
+	if (empty($id_auteur)) return ;
 	$nb_mess = "";
-	$result_auteurs = sql_select('auteur','spip_forum',"id_auteur=$id_auteur");
+	if ( is_array($GLOBALS['spipbb'])
+		AND $GLOBALS['spipbb']['configure']=='oui'
+		AND $GLOBALS['spipbb']['id_secteur']>0 )
+		$result_auteurs = sql_select('auteur',
+							array('spip_forum','spip_rubriques'), // FROM
+							array("id_auteur=$id_auteur",
+									"spip_forum.id_rubrique=spip_rubriques.id_rubrique",
+									"( spip_rubriques.id_rubrique=".$GLOBALS['spipbb']['id_secteur']." OR spip_rubriques.id_secteur=".$GLOBALS['spipbb']['id_secteur']." )"
+									) //WHERE
+							);
+	else $result_auteurs = sql_select('auteur','spip_forum',"id_auteur=$id_auteur");
 	$nb_mess = sql_count($result_auteurs);
 	return $nb_mess;
 } // spipbb_nb_messages

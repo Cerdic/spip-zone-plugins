@@ -1,4 +1,10 @@
-﻿2008-01-10  chryjs  <chryjs!@!free!.!fr>
+﻿2008-01-11  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction de la configuration
+ * Ajout d'un filtre sur le secteur pour le comptage des messages (report XB)
+
+
+2008-01-10  chryjs  <chryjs!@!free!.!fr>
 
  * Corrections des manques dans la librairie de compatibilite (sur fonction sql_in)
  * Fromphpbb Renommage ancienne fonction + suppression ancienne librairie (qui devenait problematique)
