@@ -1,7 +1,7 @@
 <?php
 #-------------------------------------------------------------------#
 #  Plugin  : spipbb - Licence : GPL                                 #
-#  File    : exec/spipbb_menus_gauche                               #
+#  File    : exec/spipbb_sujet                                      #
 #  Authors : scoty 2007                                             #
 #  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs          #
 #  Source  : GAFoSPIP v. 0.6 - 25/09/07 - spip 1.9.2                #
@@ -25,6 +25,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/spipbb_common');
 spipbb_log('included',2,__FILE__);
 
+# initialiser spipbb
+include_spip('inc/spipbb_init');
+# requis de cet exec
+include_spip('inc/traiter_imagerie');
+# requis spip
+include_spip('inc/chercher_logo');
+
 // ------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------
 function exec_spipbb_sujet() {
@@ -37,28 +44,14 @@ function exec_spipbb_sujet() {
 			$spip_display,
 			$spip_lang_right;
 
-
-	# initialiser spipbb
-	include_spip('inc/spipbb_init');
-
-
-	# requis de cet exec
-	include_spip("inc/traiter_imagerie");
-	#
-
 	# h.26/11/07 .. function boutons_controle_forum() : refonte maison !
 	# tester usage depuis autre que spipbb_presentation, ni spipbb_util
-
-	# requis spip
-	include_spip("inc/chercher_logo");  
-
 
 	# valeurs recup
 	$id_sujet=intval(_request('id_sujet'));
 	$vl=intval(_request('vl'));
 
 	$fixlimit = $GLOBALS['spipbb']['fixlimit'];
-
 
 	#
 	# sujet origine
@@ -114,7 +107,6 @@ function exec_spipbb_sujet() {
 	// adresse retour des tranche
 	$retour_gaf_local = generer_url_ecrire("spipbb_sujet", "id_sujet=".$id_sujet);
 
-
 	#
 	# affichage
 	#
@@ -122,11 +114,10 @@ function exec_spipbb_sujet() {
 	echo $commencer_page(textebrut(typo($titre_sujet)), "forum", "spipbb_admin", $id_art);
 	echo "<a name='haut_page'></a>";
 
-	debut_gauche();
-	spipbb_menus_gauche(_request('exec'),'',$id_art,$id_sujet);
+	echo debut_gauche('',true);
+		spipbb_menus_gauche(_request('exec'),'',$id_art,$id_sujet);
 
-
-	debut_droite();
+	echo debut_droite('',true);
 
 	#
 	# Le sujet
@@ -139,15 +130,15 @@ function exec_spipbb_sujet() {
 	echo "</td>";
 
 	echo "<td width='80%' valing='top'>\n";
-	debut_cadre_relief();
+	debut_cadre_relief("");
 
-	echo "<span class='verdana2'>"._T('gaf:sujet')." .. ".$id_sujet."</span>";
-	gros_titre(typo($titre_sujet));
+	echo "<span class='verdana2'>"._T('spipbb:sujet')." .. ".$id_sujet."</span>";
+	echo gros_titre(typo($titre_sujet),'',false);
 	echo "<br />";
-	
+
 	# boutons (+ message) fermeture/maintenance Sujet/Forum
 	#
-	debut_cadre_couleur('');
+	echo debut_cadre_couleur('',true);
 	// bouton fermer sujet (bloque post en zone public)
 	if(($connect_toutes_rubriques OR acces_restreint_rubrique($id_rubrique)) AND !$art_ferme AND !$sujet_ferme) {
 		formulaire_bouton_ferlibsujet($id_sujet, 'ferme', _DIR_IMG_SPIPBB."gaf_verrou1.gif");
@@ -171,7 +162,7 @@ function exec_spipbb_sujet() {
 	else { $type_ferme=''; }
 	bloc_info_etat($type_ferme, $obj, $annonce);
 
-	fin_cadre_couleur();
+	echo fin_cadre_couleur(true);
 
 	fin_cadre_relief();
 	echo "</td>\n";
@@ -232,7 +223,7 @@ function exec_spipbb_sujet() {
 		$id_auteur = $row['id_auteur'];
 
 		# identifier auteur
-		if($aut_post=="") { $aut_post=_T('gaf:anonyme'); }
+		if($aut_post=="") { $aut_post=_T('spipbb:anonyme'); }
 		# infos sur auteur
 		if($id_auteur!='0') {
 			$infos_aut=spipbb_donnees_auteur($id_auteur);
@@ -282,13 +273,13 @@ function exec_spipbb_sujet() {
 		if ($mail_aut_post && ($connect_toutes_rubriques OR acces_restreint_rubrique($id_rubrique)))
 			{
 			echo "<div style='float:left; margin:2px 3px 0px 0px;'>\n";
-			echo "<a href='mailto:$mail_aut_post?SUBJECT=".textebrut($titre_post)."' title='"._T('gaf:ecrirea')." ".entites_html($aut_post)."'>\n";
+			echo "<a href='mailto:$mail_aut_post?SUBJECT=".textebrut($titre_post)."' title='"._T('spipbb:ecrirea')." ".entites_html($aut_post)."'>\n";
 			echo "<img src='"._DIR_IMG_PACK."cal-messagerie.png' width='18' height='13' border='0' /></a>\n";
 			echo "</div>";
 			}
 
 		echo "<span class='verdana2'><b>".$aut_post."</b></span><br />\n";
-		echo "<span class='verdana2'>"._T('gaf:le')." ".$date_post."</span>\n";	
+		echo "<span class='verdana2'>"._T('spipbb:le')." ".$date_post."</span>\n";	
 		echo "</td><td width='18%' valign='top'><div align='right'>\n";
 		echo "<span class='arial2'>".date_relative($date_post_relative)."</span></div>\n";
 		echo "</td></tr><tr bgcolor='$couleur'>";
@@ -316,7 +307,7 @@ function exec_spipbb_sujet() {
 		if ($site_post)
 			{
 			echo "<div class='verdana2'><br />--------<br />\n";
-			echo http_img_pack('racine-site-12.gif','ico',"border='0' valign='absmiddle'",_T('gaf:site_propose', array('auteur_post' => $aut_post)));
+			echo http_img_pack('racine-site-12.gif','ico',"border='0' valign='absmiddle'",_T('spipbb:site_propose', array('auteur_post' => $aut_post)));
 			echo " <b><a href='".$url_st_post."'>".$site_post."</a></b><br />--------</div>\n"; 
 			}
 		

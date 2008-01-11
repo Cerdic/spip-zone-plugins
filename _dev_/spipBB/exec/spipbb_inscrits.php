@@ -26,8 +26,15 @@
 // * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_spip('inc/spipbb_common');
+if (!defined("_INC_SPIPBB_COMMON")) include_spip('inc/spipbb_common');
 spipbb_log('included',2,__FILE__);
+
+# initialiser spipbb
+include_spip('inc/spipbb_init');
+# requis de cet exec
+include_spip('inc/traiter_imagerie');
+# pour le javascript de (de)selection
+include_spip('inc/spipbb_inc_formpost');
 
 // ------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------
@@ -37,12 +44,6 @@ function exec_spipbb_inscrits() {
 			$connect_toutes_rubriques,
 			$connect_id_auteur,
 			$couleur_claire, $couleur_foncee;
-
-	# initialiser spipbb
-	include_spip('inc/spipbb_init');
-
-	# requis de cet exec
-	include_spip("inc/traiter_imagerie");
 
 	// c: 19/12/7 : a passer dans action
 	// pour le moment on les passe au statut poubelle : il faudra : choisir ce que l'on fait de leurs message et verifier qu'on peut faire cela comme ça
@@ -148,6 +149,7 @@ function exec_spipbb_inscrits() {
 	echo "<div class='iconeoff verdana2' style='text-align:center;clear:both;'>\n";
 	tranches_liste_forum($nba1,$retour_spipbb_local,$nligne);
 	echo "\n</div>\n";
+/*
 	// c: 19/12/7 cest gore ce javascript je ne sais pas faire mieux !  attention il depends du nom du formulaire.
 	echo "<script language=\"JavaScript\" type=\"text/javascript\">\n"
 		. "<!--\n"
@@ -160,7 +162,7 @@ function exec_spipbb_inscrits() {
 		. "	}\n"
 		. "//-->\n"
 		. "</script>\n";
-
+*/
 	echo  "<form method='post' action='".generer_url_ecrire(_request('exec'))."' name='formfiltre'>\n";
 
 	echo "<div style='text-align:right'>\n";
@@ -252,10 +254,13 @@ function exec_spipbb_inscrits() {
 			"</tr>\n";
 	}
 	echo "</table>\n";
+	echo tout_de_selectionner("formmembre");
+	/*
 	echo "<div style='text-align:right;margin: 4px 0 4px 0;'><a href=\"javascript:check_switch(true);\">"
 		. _T('spipbb:bouton_select_all')
 		. "</a> :: <a href=\"javascript:check_switch();\">"
 		. _T('spipbb:bouton_unselect_all')."</a></div>\n";
+*/
 
 	# c 8/1/8 liste des actions possibles (en checkbox ?)
 	# supprimer membre

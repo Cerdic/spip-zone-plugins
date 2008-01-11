@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_cat_spam' => 'Anti Spam',
 'admin_action_01_configuration' => 'Configuration',
 'admin_action_02_etat' => 'Etat des forums',
-'admin_action_effacer' => 'Effacer posts',
+'admin_action_effacer' => 'Messages rejet&eacute;s',
 'admin_action_fromphpbb' => 'Import de PhpBB',
 'admin_action_fromphorum' => 'Import de Phorum',
 'admin_action_gere_ban' => 'Gestion des bans',
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_titre_page_spipbb_admin_fromphorum' => 'Import de Phorum',
 'admin_titre_page_spipbb_admin_gere_ban' => 'Gestion du banissement',
 'admin_titre_page_spipbb_configuration' => 'Configuration de SpipBB',
-'admin_titre_page_spipbb_effacer' => 'Effacer des posts',
+'admin_titre_page_spipbb_effacer' => 'Gestion des messages rejet&eacute;s',
 'admin_titre_page_spipbb_inscrits' => 'Gestion des membres',
 
 // Interface d'admin
@@ -94,8 +94,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_forums_log_level_3' => 'Enorm&eacute;ment de logs',
 
 //'admin_forums_titre' => 'Gestion des forums',
-//'admin_infos' => 'SpipBB - Administration - R&eacute;capitulatif',
 'admin_id_mjsc' => 'N&deg;',
+'admin_infos' => 'SpipBB - Administration - R&eacute;capitulatif',
 'admin_interface' => 'Options de l\'interface',
 'admin_nombre_lignes_messages' =>'Nombre de lignes de messages',
 'admin_plugin_requis_erreur' => 'Plugin requis manquant',
@@ -160,6 +160,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //E
 
+'ecrirea' => 'Ecrire un email &agrave;',
+'effacer' => 'Effacer',
 'email' => 'E-mail',
 'en_ligne' => 'Qui est en ligne ?',
 'en_reponse_a' => 'En r&eacute;ponse au message',
@@ -185,6 +187,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //F
 
 'fiche_contact' => 'Fiche Contact',
+'fil_annonce_annonce' => 'Transformer en Sujet-Annonce',
 'filtrer' => 'Filtrer',
 'forum' => 'Forums',
 'forum_dpt' => 'Forum&nbsp;: ',
@@ -261,6 +264,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //I
 'info' => 'Informations',
+'info_annonce_ferme' => 'Etat Annonce / Fermer', ## 0.6
 'info_confirmer_passe' => 'Confirmer ce nouveau mot de passe&nbsp;:',
 'info_inscription_invalide' => 'Inscription impossible',
 'info_plus_cinq_car' => 'plus de 5 caract&egrave;res',
@@ -276,6 +280,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //L
 
+'le' => 'Le',
 'liste_inscrits' => 'Liste des membres',
 'login' => 'Connexion',
 
@@ -303,7 +308,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //'mot_groupe_moderation' => '',
 
 
-
 //N
 'no_message' => 'Aucun sujet ou message ne correspond &agrave; vos crit&egrave;res de recherche',
 'nom_util' => 'Nom d\'utilisateur',
@@ -322,10 +326,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'poster_message' => 'Poster un message',
 'postit' => 'Postit',
 'postit_dpt' => 'Postit&nbsp;: ',
+'post_aucun_pt' => 'aucun&nbsp;!',
+'post_efface_lui' => 'Ce sujet comprend @$nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\n',
+'post_rejete' => 'Message rejet&eacute;',
+'post_verifier_sujet' => 'V&eacute;rifier ce sujet',
+'posts_effaces' => 'Messages effac&eacute;s&nbsp;!',
+'posts_refuses' => 'Messages refus&eacute;s, &agrave; effacer&nbsp;!',
 'post_titre' => '&nbsp;:::&nbsp;Titre : ',
 'previsualisation' => 'Pr&eacute;visualisation',
 'profil' => 'Profil',
-
 
 
 //R
@@ -372,9 +381,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //S
 
 's_abonner_a' => 'RSS . S\'abonner &agrave; : ',
+'selection_efface'=> 'Effacer la s&eacute;lection .. ',
 'sign_tempo' => 'R&eacute;alis&eacute; avec <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 'sinscrire'=> 'S\'inscrire',
-'site_propose' => 'Site propos&eacute;',
+'site_propose' => 'Site propos&eacute; par @auteur_post@',
 'site_web' => 'Site web',
 'squelette_filforum' => 'Base de squelette pour les fils de discussions :',
 'squelette_groupeforum' => 'Base de squelette pour les groupes de discussions :',
@@ -421,6 +431,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 //T
+'title_sujet_ferme' => 'Fermer ce sujet',
 'titre_spipbb' => 'SpipBB',
 'total_membres' => 'Nous avons un total de ',
 'total_messages_membres' => 'Nos membres ont post&eacute; un total de ',
@@ -438,6 +449,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'votre_site' => 'Le nom de votre site',
 'votre_url_avatar' => 'URL de votre Avatar (http://...)', ## GAF 0.6
 'votre_url_site' => 'L\'adresse (URL) de votre site',
+'voir' => 'VOIR',
 
 //W
 'www' => 'WWW' // ne sert a rien sauf a finir

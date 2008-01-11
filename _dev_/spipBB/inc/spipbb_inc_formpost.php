@@ -349,4 +349,25 @@ function enregistre_post_spipbb() {
 
 }
 
+function tout_de_selectionner($nomformulaire='') {
+	if (empty($nomformulaire)) return ;
+	$res = "<script language=\"JavaScript\" type=\"text/javascript\">\n"
+		. "<!--\n"
+		. "	function check_switch(val)\n"
+		. "	{\n"
+		. "		for( i = 0; i < document.$nomformulaire.elements.length; i++ )\n"
+		. "		{\n"
+		. "			document.$nomformulaire.elements[i].checked = val;\n"
+		. "		}\n"
+		. "	}\n"
+		. "//-->\n"
+		. "</script>\n"
+		. "<div style='text-align:right;margin: 4px 0 4px 0;'><a href=\"javascript:check_switch(true);\">"
+		. _T('spipbb:bouton_select_all')
+		. "</a> :: <a href=\"javascript:check_switch();\">"
+		. _T('spipbb:bouton_unselect_all')."</a></div>\n";
+
+	return $res;
+} // tout_de_selectionner
+
 ?>
