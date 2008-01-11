@@ -160,6 +160,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'inscription' => 'Register',
 'inscrit_s' => 'Registered',
 
+'ip_informations' => 'IP Informations',
+'ip_adresse_post' => 'IP address for this post',
+'ip_adresse_membres' => 'Users posting from this IP address',
+'ip_adresse_autres' => 'Other IP addresses this user has posted from',
+
+
 //L
 'liste_inscrits' => 'Member list',
 'localisation' => 'Localization',

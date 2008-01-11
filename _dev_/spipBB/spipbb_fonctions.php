@@ -156,4 +156,18 @@ function barre_forum_citer($texte, $lan, $rows, $cols, $lang='')
 	return barre_textarea($texte, $rows, $cols, $lang);
 } // barre_forum_citer
 
+// ------------------------------------------------------------------------------
+// chryjs : 11/1/8
+// fait un join sur un tableau compose de key="nomauteur" value ="nbposts"
+// utilise $filtre pour faire ses remplacements ligne par ligne
+// ------------------------------------------------------------------------------
+function spipbb_join_membre($liste_cnt=array(),$filtre="%NOM% [%TOTAL%]<br />"){
+	reset($liste_cnt);
+	$res = "";
+	while (list($nom,$nb)=each($liste_cnt)) {
+		$res .= str_replace(array("%NOM%","%TOTAL%"),array($nom,$nb." "._T('spipbb:message_s')),$filtre)."\n";
+	}
+	return $res;
+} // spipbb_join_membre
+
 ?>

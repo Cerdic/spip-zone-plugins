@@ -10,14 +10,16 @@
 
 	<p class="space_20"></p>
 
-	<BOUCLE_aut_pere(AUTEURS){id_article=#ID_ARTICLE}{id_auteur=#SESSION{id_auteur}}></BOUCLE_aut_pere>
-	<BOUCLE_aut_admin(AUTEURS){statut=0minirezo}{id_auteur=#SESSION{id_auteur}}>#ID_AUTEUR</BOUCLE_aut_admin>
-
-	<BOUCLE_rub_admin(AUTEURS_RUBRIQUES){id_auteur=#SESSION{id_auteur}}{id_rubrique=#ID_RUBRIQUE}></BOUCLE_rub_admin>
+	[(#REM) c: 11/1/8 on determine si on est admin (pour l'affichage)]
+	[(#REM) Probleme des admin restreints a revoir... #SESSION{statut} ? ]
+	#SET{admin,0}
+	<BOUCLE_aut_pere(AUTEURS){id_article=#ID_ARTICLE}{id_auteur=#SESSION{id_auteur}}>#SET{admin,1}</BOUCLE_aut_pere>
+	<BOUCLE_aut_admin(AUTEURS){statut=0minirezo}{id_auteur=#SESSION{id_auteur}}>#SET{admin,1}</BOUCLE_aut_admin>
+	<BOUCLE_rub_admin(AUTEURS_RUBRIQUES){id_auteur=#SESSION{id_auteur}}{id_rubrique=#ID_RUBRIQUE}>#SET{admin,1}</BOUCLE_rub_admin>
 
 	[
 	(#REM) determiner si le forum ferme / sujet ferme  
-	]		
+	]
 	#SET{forumferme,0}
 	#SET{sujetferme,0}
 	<BOUCLE_etat(ARTICLES){id_article}{titre_mot=ferme}>
@@ -90,6 +92,15 @@
 					</BOUCLE_auteur_av>
 				</td>
 				<td class="date_sujet">
+				[(#SET{affboutonadmin,[(#GET{admin}|!={1}|?{'',' '})
+				<div class="bout_admin">
+					<a href="#URL_ACTION_AUTEUR{spipbb_posts,delete-#ID_FORUM,#SELF}" title="<:supprimer:>" class="delete">&nbsp;</a>
+				</div>
+				<div class="bout_admin">
+					<a href="[(#URL_PAGE{post_ip}|parametre_url{ip,#IP}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="#IP" class="ip">&nbsp;</a>
+				</div>
+				]})]
+				#GET{affboutonadmin}
 	        		<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
 	        	</td>
 	        </tr>
@@ -149,9 +160,9 @@
 	<!-- tableau -->
 	<table class="spipforum" id="liste_post">
 		<tr>
-	  		<th colspan="2"><:spipbb:message_s:></th>
+			<th colspan="2"><:spipbb:message_s:></th>
 		</tr>
-		
+
 		<tr class="inter entete_sujet">
 			<td id="forum#ID_FORUM" colspan="2">
 				<span class="text_nom">
@@ -164,12 +175,12 @@
 					]
 					>#NOM</a>
 				</BOUCLE_auteurp>
-				
+
 				<BOUCLE_modo2(AUTEURS){id_article}{id_auteur}>
 					[(#REM) set id_auteur modo , en attendant requete sur admin restreint ]
 					#SET{modo,#ID_AUTEUR}
 				</BOUCLE_modo2>
-				
+
 				</B_auteurp>
 					[(#NOM|sinon{<:spipbb:anonyme:>})]
 				<//B_auteurp>
@@ -180,9 +191,9 @@
 		<tr class="ligne_sujet">
 			<td class="aff_avatar" rowspan="2">
 				[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_suj'}})]
-				
+
 				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:spipbb:moderateur:>"></p>]
-				
+
 				[(#REM) bouton alerter abus ... !]
 				[(#CONFIG{'spipbb/affiche_bouton_abus'}|=={'oui'}|?{' ',''})
 				<div class="bouton_alerter">
@@ -203,12 +214,21 @@
 					]
 				]})]
 				#GET{affboutonciter}
-			
-       			<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
-        	</td>
-        </tr>
+				[(#SET{affboutonadminp,[(#GET{admin}|!={1}|?{'',' '})
+				<div class="bout_admin">
+					<a href="#URL_ACTION_AUTEUR{spipbb_posts,delete-#ID_FORUM,#SELF}" title="<:supprimer:>" class="delete">&nbsp;</a>
+				</div>
+				<div class="bout_admin">
+					<a href="[(#URL_PAGE{post_ip}|parametre_url{ip,#IP}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="#IP" class="ip">&nbsp;</a>
+				</div>
+				]})]
+
+				#GET{affboutonadminp}
+				<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+			</td>
+		</tr>
 		<tr class="ligne_sujet">
-        	<td>
+			<td>
 				[(#TEXTE|lignes_longues|smileys)]
 				
 				[(#REM) signature auteur ]
@@ -241,12 +261,12 @@
 					]
 					>#NOM</a>
 				</BOUCLE_auteurpr>
-				
+
 					<BOUCLE_modo3(AUTEURS){id_article}{id_auteur}>
 					[(#REM) set id_auteur modo , en attendant reglage sur admin restreint ]
 					#SET{modo,#ID_AUTEUR}
 					</BOUCLE_modo3>	
-				
+
 				</B_auteurpr>
 					[(#NOM|sinon{<:spipbb:anonyme:>})]
 				<//B_auteurpr>
@@ -279,11 +299,20 @@
 					]
 				]})]
 				#GET{affboutonciter}
+				[(#SET{affboutonadminpr,[(#GET{admin}|!={1}|?{'',' '})
+				<div class="bout_admin">
+					<a href="#URL_ACTION_AUTEUR{spipbb_posts,delete-#ID_FORUM,#SELF}" title="<:supprimer:>" class="delete">&nbsp;</a>
+				</div>
+				<div class="bout_admin">
+					<a href="[(#URL_PAGE{post_ip}|parametre_url{ip,#IP}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="#IP" class="ip">&nbsp;</a>
+				</div>
+				]})]
+				#GET{affboutonadminpr}
 				<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
-        	</td>
-        </tr>
+			</td>
+		</tr>
 		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
-        	<td>
+			<td>
 				[(#TEXTE|lignes_longues|smileys)]
 				
 				[(#REM) signature auteur ]
@@ -307,21 +336,18 @@
 		</B_posts>
 	</table>
 
-
-
 	<p class="space_10"></p>
-	
+
 	<ul class="actionforum">
 		<li class="poster">
 			#GET{affboutonnew}
 		</li>
 		<li class="repondre">
 			#GET{affboutonrep}
-		</li>	
+		</li>
 	</ul>
 
 	<p class="space_10"></p>
-	
 
 	[(#REM) ligne chemin ]
 	[(#MODELE{chemin_hierarchie}{id_article}{encours=#ENV{id_article}})]

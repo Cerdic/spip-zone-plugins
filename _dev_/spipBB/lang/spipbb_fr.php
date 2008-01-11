@@ -269,6 +269,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'inscription' => 'Inscription',
 'inscrit_s' => 'Inscrits',
 
+'ip_informations' => 'Informations sur une adresse IP et un auteur',
+'ip_adresse_post' => 'Adresse IP de ce message',
+'ip_adresse_membres' => 'Membres ayant post&eacute; de cette adresse IP',
+'ip_adresse_autres' => 'Autres adresses IP &agrave; partir desquelles cet auteur a post&eacute;',
 
 //L
 

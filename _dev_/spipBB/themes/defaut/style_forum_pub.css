@@ -419,7 +419,26 @@ background-image: url(img/bouton_citer.png); /*icon_quote.gif*/
 background-repeat: no-repeat;
 background-position:top right;
 }
-.bout_citer a:hover { text-decoration: none; }
+.bout_citer a:hover, .bout_admin a:hover { text-decoration: none; }
+
+.bout_admin, .bout_admin a {
+float:right; 
+width:30px; /* +/- largeur icone */
+height:20px; /* +/- hauteur icone */
+}
+
+.bout_admin a {
+background-repeat: no-repeat;
+background-position:top right;
+}
+
+.bout_admin a.delete {
+background-image: url(img/icon_delete.png);
+}
+
+.bout_admin a.ip {
+background-image: url(img/icon_ip.png);
+}
 
 /* bouton 'alerter abus' */ /* GAF v.0.5 */
 .bouton_alerter, .bouton_alerter a {
