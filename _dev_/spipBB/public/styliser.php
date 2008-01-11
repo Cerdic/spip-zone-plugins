@@ -30,10 +30,17 @@ if (version_compare(substr($spip_version_code,0,6),_SPIPBB_REV_STYLISER,'<')){
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
+//----------------------------------------------------------------------------
 // Actuellement tous les squelettes se terminent par .html
 // pour des raisons historiques, ce qui est trompeur
-
+//----------------------------------------------------------------------------
 function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html') {
+	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
+
+	if (!is_array($spipbb_meta) OR ($spipbb_meta['configure']!='oui')) {
+		include_once(_DIR_RESTREINT.'public/styliser.php');
+		return public_styliser_dist($fond, $id_rubrique, $lang, $connect, $ext);
+	}
 
 	// Trouver un squelette de base dans le chemin
 	if (!$base = find_in_path("$fond.$ext")) {
@@ -66,7 +73,6 @@ function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html'
 
 	// traitement spipbb : on recherche un squelette defini
 	unset($squel);
-	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
 	$id_rubrique = intval($id_rubrique);
 
 	if ( ($spipbb_meta['configure']=='oui') and ($spipbb_meta['config_squelette']== 'oui') ) {

@@ -1,4 +1,25 @@
 <?php
+#-----------------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                               #
+#  File    : public/styliser_192                                  #
+#  Authors : Chryjs, 2007 et als                                  #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs        #
+#  Contact : chryjs!@!free!.!fr                                   #
+#  Gestion des squelettes specifiques                             #
+#-----------------------------------------------------------------#
+
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
@@ -11,13 +32,18 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_INC_SPIPBB_COMMON")) include_spip('inc/spipbb_common');
 spipbb_log("included",3,__FILE__);
-
-include_spip('inc/spipbb_192'); // on est deja sur d'etre en version 1.9.2
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
 function public_styliser($fond, $id_rubrique, $lang) {
+	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
+
+	if (!is_array($spipbb_meta) OR ($spipbb_meta['configure']!='oui')) {
+		include_once(_DIR_RESTREINT.'public/styliser.php');
+		return public_styliser_dist($fond, $id_rubrique, $lang);
+	}
 
   // Actuellement tous les squelettes se terminent par .html
   // pour des raisons historiques, ce qui est trompeur

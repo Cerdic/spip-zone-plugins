@@ -20,12 +20,12 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_spip('inc/spipbb_common');
+if (!defined("_INC_SPIPBB_COMMON")) include_spip('inc/spipbb_common');
 spipbb_log('included',2,__FILE__);
 
-//
+//----------------------------------------------------------------------------
 // prendre en compte un fichier de visite
-//
+//----------------------------------------------------------------------------
 function compte_fichier_visite_forum($fichier, &$visites_f) {
 
 	$content = array();
@@ -49,6 +49,9 @@ function compte_fichier_visite_forum($fichier, &$visites_f) {
 	spipbb_log("Sortie:".join(",",$visites_f,1,"compte_fichier_visite_forum"));
 }
 
+//----------------------------------------------------------------------------
+// Calcul des visites forum par forum
+//----------------------------------------------------------------------------
 function calculer_visites_forums($t) {
 	include_spip('base/abstract_sql');
 
@@ -108,8 +111,17 @@ function calculer_visites_forums($t) {
 	}
 } // calculer_visites_forums
 
+//----------------------------------------------------------------------------
+// Fonction cron pour calcul des visites pour les threads
+//----------------------------------------------------------------------------
 function genie_statvisites($time) {
 	spipbb_log("DEBUT:".$time,1,"genie_statvisites");
+	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
+
+	if (!is_array($spipbb_meta) OR ($spipbb_meta['configure']!='oui')) {
+		spipbb_log("END: Non Configure",1,"genie_statvisites");
+		return true;
+	}
 
 	$encore = calculer_visites_forums($time);
 

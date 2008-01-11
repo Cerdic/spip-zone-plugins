@@ -2,6 +2,7 @@
 
  * Correction de la configuration
  * Ajout d'un filtre sur le secteur pour le comptage des messages (report XB)
+ * Traitement de genie(cron)/statvisites, public/styliser seulement si plugin configure
 
 
 2008-01-10  chryjs  <chryjs!@!free!.!fr>
