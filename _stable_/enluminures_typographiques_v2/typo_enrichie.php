@@ -223,8 +223,8 @@ function TypoEnluminee_pre_typo($texte) {
 	);
 
 	$remplacer_raccourcis = array(
-		/* 9 */ 	"<i class=\"spip\">",
-		/* 10 */	"</i>",
+		/* 9 */ 	tester_variable('debut_italique', "<i$class_spip>"),
+		/* 10 */	tester_variable('fin_italique', '</i>'),
 		/* 13 */ 	"&harr;",
 		/* 14 */ 	"&rarr;",
 		/* 15 */ 	"&larr;",
