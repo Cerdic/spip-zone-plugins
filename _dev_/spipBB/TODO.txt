@@ -1,6 +1,9 @@
 Todo-list pour spipbb
 ======================
 
+Traitement de genie seulement si plugin configuré
+Idem pour public/
+
 Interface Privée - Administration générale :
 -* 0.4.2 ameliorer l'"administration" des forums (interface privee) : gestion des threads : splitter déplacer etc
 -* 0.5 Mode "debutant" : création automatique du forum/mots clés et paramétrage

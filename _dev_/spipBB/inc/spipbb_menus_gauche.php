@@ -20,11 +20,13 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_INC_SPIPBB_COMMON")) include_spip('inc/spipbb_common');
 spipbb_log("included",3,__FILE__);
 
-#
+// ------------------------------------------------------------------------------
 # affichage de la colonne de menus
-#
+// ------------------------------------------------------------------------------
 function spipbb_menus_gauche($script, $id_salon="", $id_art="", $id_sujet="", $modos="") {
 
 	global $connect_statut,
@@ -120,12 +122,11 @@ function spipbb_menus_gauche($script, $id_salon="", $id_art="", $id_sujet="", $m
 
 } // spipbb_menus_gauche
 
-
-
-#
+// ------------------------------------------------------------------------------
 # contenu Entete page
-#
+// ------------------------------------------------------------------------------
 function entete_colonne_gauche($titre_page) {
+	spipbb_log("entree:$titre_page:",1,"entete_colonne_gauche");
 	$aff = "<div style='float:left; margin-right:5px; margin-bottom:20px;'>"
 		. "<img src='"._DIR_PLUGIN_SPIPBB."img_pack/spipbb-48.png' alt='ico' />"
 		. "</div>"
@@ -144,22 +145,21 @@ function entete_colonne_gauche($titre_page) {
 		$aff.= _request('new')? _T('nouveau_forum') : _T('modifier_forum');
 		$aff.="</span>";
 	}
-	
+
 	$aff.= "<div class='nettoyeur'></div>";
-	
+
 	return $aff;
-}
+} // entete_colonne_gauche
 
-
-
-#
+// ------------------------------------------------------------------------------
 # hierarchie sur élément unique
-#
+// ------------------------------------------------------------------------------
 function bloc_hierarchie($id_rubrique, $id_article, $parents='') {
 	global $spip_lang_left, $lang_dir;
 
 	$id_rub_courant=intval(_request('id_salon'));
 	$id_art_courant=intval(_request('id_article'));
+	spipbb_log("entree idrub:$id_rubrique:idart:$id_article:prt:$parents:idrubc:$id_rub_courant:idartc:$id_art_courant:",1,"bloc_hierarchie");
 
 	if (!empty($id_article)) {
 		$result=sql_query("SELECT id_article, id_rubrique, titre 
@@ -226,14 +226,13 @@ function bloc_hierarchie($id_rubrique, $id_article, $parents='') {
 
 		echo $parents."<br />";
 	}
-}
-//
+} // bloc_hierarchie
 
-
-#
+// ------------------------------------------------------------------------------
 # contenu : rubrique de admin-restreint
-#
+// ------------------------------------------------------------------------------
 function rubriques_admin_restreint($connect_id_auteur) {
+	spipbb_log("entree:$connect_id_auteur:",1,"rubriques_admin_restreint");
 	$aff = "<br />";
 	$aff.= debut_cadre_relief("../"._DIR_IMG_SPIPBB."spipbb-24.gif", true, '',_T('moderation'));
 
@@ -255,11 +254,11 @@ function rubriques_admin_restreint($connect_id_auteur) {
 	return $aff;
 }
 
-
-#
+// ------------------------------------------------------------------------------
 # contenu : les posts en attente de moderation
-#
+// ------------------------------------------------------------------------------
 function posts_proposes_attente_moderation() {
+	spipbb_log("entree",1,"posts_proposes_attente_moderation");
 	$result = sql_query ("SELECT SQL_CALC_FOUND_ROWS id_forum, titre, id_thread 
 							FROM spip_forum WHERE statut='prop' 
 							ORDER BY date_heure LIMIT 0,10");
@@ -289,12 +288,13 @@ function posts_proposes_attente_moderation() {
 		$aff.= "</div></div>\n";
 	}
 	return $aff;
-}
+} // posts_proposes_attente_moderation
 
-#
+// ------------------------------------------------------------------------------
 # contenu : liste des modos	
+// ------------------------------------------------------------------------------
 function liste_moderateurs($modos,$id_salon="",$id_art="") {
-	spipbb_log("entree:".$id_salon.":".$id_art.":".$modos,3,"list_modo");
+	spipbb_log("entree:".$id_salon.":".$id_art.":".$modos,1,"list_modo");
 	if(!is_array($modos)) { $modos=array(); }
 
 	# sur page sujet, recherche rub de art (du thread en cours) + auteurs
@@ -346,13 +346,13 @@ function liste_moderateurs($modos,$id_salon="",$id_art="") {
 		$aff.= fin_cadre_relief(true);
 	}
 	return $aff;
-}
+} // liste_moderateurs
 
-
-#
+// ------------------------------------------------------------------------------
 # contenu : message lock pour maintenance
-#
+// ------------------------------------------------------------------------------
 function alerte_maintenance() {
+	spipbb_log("entree",1,"alerte_maintenance");
 	if ($ds = @opendir(_DIR_SESSIONS)) {
 		while (($file = @readdir($ds)) !== false) {
 			if (preg_match('/^gafart_([0-9]+)-([0-9]+)\.lck$/', $file, $match)) {
@@ -374,12 +374,13 @@ function alerte_maintenance() {
 			}
 		}
 	}
-}
+} // alerte_maintenance
 
-#
+// ------------------------------------------------------------------------------
 # contenu : les boutons de fonctions (chrys - spipbb_admin_gauche() )
-#
+// ------------------------------------------------------------------------------
 function spipbb_admin_gauche($script,$modules) {
+	spipbb_log("entree:$script:".serialize($modules),1,"spipbb_admin_gauche");
 
 	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler'); // voir un charger fonction
@@ -400,7 +401,7 @@ function spipbb_admin_gauche($script,$modules) {
 			$nom = _T('spipbb:admin_action_'.$nom) ; // on traduit le nom de chaque action(exec)
 
 			if ( $script <> $file ) { $lien = generer_url_ecrire($file); }
-			else { $lien="0"; }	// pas de lien sur l'action en cours ! 
+			else { $lien="0"; } // pas de lien sur l'action en cours ! 
 
 			if($icone) {
 				$icone = http_img_pack($icone,""," border='0' align='absmiddle'")."\n";
@@ -412,7 +413,6 @@ function spipbb_admin_gauche($script,$modules) {
 							'icone_menu' => $icone
 							);
 
-			// chryjs: desactive et remplace par le bloc ci apres 
 			$affichage.= recuperer_fond("prive/spipbb_bloc_admin_menu",$contexte);
 
 		}
@@ -421,8 +421,6 @@ function spipbb_admin_gauche($script,$modules) {
 	$affichage.= "\n";
 
 	return $affichage;
-} // spipbb_boutons_fonctions
-
-
+} // spipbb_admin_gauche
 
 ?>

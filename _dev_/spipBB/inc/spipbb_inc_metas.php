@@ -163,7 +163,7 @@ function spipbb_import_gafospip_metas()
 		}
 		*/
 		# h. fin gaf 0.6
-		
+
 		return $spipbb_meta;
 	}
 	else return array();
@@ -186,7 +186,6 @@ function spipbb_delete_metas()
 		spipbb_log('OK',3,'inc/spipbb.php : delete_metas');
 	}
 } // spipbb_delete_metas
-
 
 //----------------------------------------------------------------------------
 // [fr] Initialisation des valeurs de meta du plugin aux defauts
@@ -211,7 +210,6 @@ function spipbb_save_metas()
 	spipbb_log('OK '.$GLOBALS['meta']['spipbb'],3,"spipbb_save_metas");
 } // spipbb_save_metas
 
-
 //----------------------------------------------------------------------------
 // [fr] Met a jour les metas du plugin
 // [en] Upgrade plugin metas
@@ -226,8 +224,8 @@ function spipbb_upgrade_metas($installed_version='',$version_code='') {
 		spipbb_init_metas();
 	} 
 	// else si on fait des changements apres la 0.3.0
-	
-	spipbb_log('OK',3,"spipbb_upgrade_metas");
+
+	spipbb_log("OK from:$installed_version:to:$version_code",3,"spipbb_upgrade_metas");
 } // spipbb_upgrade_metas
 
 

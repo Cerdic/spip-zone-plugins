@@ -1,13 +1,13 @@
 <?php
-#---------------------------------------------------------------#
-#  Plugin  : spipbb - Licence : GPL                             #
-#  File    : exec/spipbb_configuration - general config page    #
-#  Authors : scoty 2007                                         #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
-#  Contact : scoty!@!koakidi!.!com                              #
-# [fr] page de configuration                                    #
-# [en]                                                          #
-#---------------------------------------------------------------#
+#------------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                          #
+#  File    : exec/spipbb_configuration                       #
+#  Authors : scoty 2007                                      #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs   #
+#  Contact : scoty!@!koakidi!.!com                           #
+# [fr] page de configuration                                 #
+# [en] - general config page                                 #
+#------------------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -29,7 +29,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/spipbb_common');
 spipbb_log('included',2,__FILE__);
 
+# initialiser spipbb
+include_spip('inc/spipbb_init'); // + spipbb_util + spipbb_presentation + spipbb_menus_gauche
+
+# requis de cet exec
+include_spip('inc/spipbb_inc_config'); 
+include_spip('inc/spipbb_inc_metas');
+
 // ------------------------------------------------------------------------------
+// [fr] Affichage de la page de configruation generale du plugin
 // ------------------------------------------------------------------------------
 function exec_spipbb_configuration() {
 	# requis spip
@@ -38,14 +46,19 @@ function exec_spipbb_configuration() {
 			$connect_id_auteur,
 			$couleur_claire, $couleur_foncee;
 
-	# initialiser spipbb
-	include_spip('inc/spipbb_init');
+	# reserve au Admins
+	if ($connect_statut!='0minirezo' OR !$connect_toutes_rubriques) {
+		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
+		echo _T('avis_non_acces_page');
+		echo fin_page();
+		exit;
+	}
 
-
-	# requis de cet exec
-	include_spip('inc/spipbb_inc_config');
-	include_spip('inc/spipbb_inc_metas');
-
+	# cas install
+	if(!spipbb_is_configured()) {
+		spipbb_upgrade_metas($GLOBALS['spipbb']['version'],$GLOBALS['spipbb_plug_version']);
+		spipbb_upgrade_tables($GLOBALS['spipbb']['version']);
+	}
 
 	#
 	# affichage
@@ -59,25 +72,8 @@ function exec_spipbb_configuration() {
 
 	echo debut_droite('',true);
 
-	# reserve au Admins
-	if ($connect_statut!='0minirezo' OR !$connect_toutes_rubriques) {
-		echo debut_cadre_relief("",true);
-		echo _T('avis_non_acces_page');
-		echo fin_cadre_relief();
-		echo fin_gauche(), fin_page();
-		exit;
-	}
-
-	# cas install
-	if(!spipbb_is_configured()) {
-		spipbb_upgrade_metas($GLOBALS['spipbb']['version'],$GLOBALS['spipbb_plug_version']);
-		spipbb_upgrade_tables($GLOBALS['spipbb']['version']);
-	}
-	
 	# install ou maj
 	echo spipbb_admin_configuration();
-
-	echo "</form>";
 
 	# pied page exec
 	bouton_retour_haut();
@@ -92,18 +88,19 @@ function exec_spipbb_configuration() {
 function spipbb_admin_configuration() {
 
 	spipbb_log('DEBUT',3,"spipbb_configuration()");
-	
-	# cet appel vers "assembler" et donc l_usage de skel backoffice
+
+	# h : cet appel vers "assembler" et donc l_usage de skel backoffice
 	# vont bloquer certaines redef de fonctions spip ...
-	# très genant !!!
-	
+	# trÃ¨s genant !!!
+	# c: 11/1/8 je ne vois pas ce qui est bloque ? precise ?
+
 	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler'); // voir un charger fonction
-	
+
 	$prerequis=true;
-	
+
 	$etat_tables=$etat_spip=$etat_plugins="";
-	
+
 	# verif etat des tables spipbb (pures)
 	$check_tables = spipbb_check_tables();
 	while (list($table,$etat) = each($check_tables)) {
@@ -170,6 +167,8 @@ function spipbb_admin_configuration() {
 		$res.= spipbb_config_champs_supp();
 	}
 
+	$res .= "</form>"; //temporaire mais necessaire
+
 	return $res;
 
 } // spipbb_admin_configuration
@@ -198,7 +197,7 @@ function spipbb_config_support_auteurs()
 	$res.= "</td></tr>\n";
 	$res.= "<tr><td colspan='3'>&nbsp;</td></tr>\n";
 
-	# mode d exploitation	
+	# mode d exploitation
 	$res.= "<tr><td colspan='3'>"._L('Quel support utiliser pour les champs suppl.');
 	$res.= "</td></tr>\n";
 	$res.= "<tr><td>"._L('Infos champs EXTRA ou autre table, table auteurs_profils.').
@@ -220,10 +219,9 @@ function spipbb_config_support_auteurs()
 	return $res;
 } // spipbb_config_infos_auteurs
 
-
-#
+// ------------------------------------------------------------------------------
 # affichage champs suppl. (hors champs imperatif)
-#
+// ------------------------------------------------------------------------------
 function spipbb_config_champs_supp() {
 
 	$options_a = array('oui','non');
@@ -250,12 +248,12 @@ function spipbb_config_champs_supp() {
 			$res.= "</td></tr>\n"
 			. "<tr><td colspan='3'>&nbsp;</td></tr>\n";
 	}
-		
+
 	$res.= "<tr><td colspan='3'>&nbsp;</td></tr>\n"
 		. "</table>\n"
 		. "<div align='right'><input type='submit' name='_spipbb_ok' value='"._T('valider')."' class='fondo' /></div>\n";
 	$res.= fin_cadre_trait_couleur(true);
-	
+
 	return $res;
 }
 

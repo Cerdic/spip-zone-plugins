@@ -1,10 +1,11 @@
 <?php
 #----------------------------------------------------------#
 #  Plugin  : spipbb - Licence : GPL                        #
-#  File    : spipbb_upgrade - plugin init/test/del         #
+#  File    : base/spipbb_upgrade                           #
 #  Authors : Chryjs, 2007 et als                           #
 #  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
 #  Contact : chryjs!@!free!.!fr                            #
+#  plugin init/test/del                                    #
 #----------------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
