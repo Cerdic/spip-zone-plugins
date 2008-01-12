@@ -59,10 +59,12 @@ function cs_lien($lien, $texte='') {
 // Attention : simple traitement pour des balises non imbriquees
 function cs_safebalises($texte) {
 	$texte = trim($texte);
-	// ouvre la premiere balise trouvee fermee
-	if(preg_match(',^(.*)</(.+)>,Ums', $texte, $m) && !preg_match(",<$m[2][ >],", $m[1])) $texte="<$m[2]>$texte";
-	// referme la derniere balise laissee ouverte
-	if(preg_match(',^(.*)[ >]([^ >]*[^/])<,Ums', $rev = strrev($texte), $m) && !preg_match(",>$m[2]/<,", $m[1])) $texte = strrev(">$m[2]/<$rev");
+	// ouvre/supprime la premiere balise trouvee fermee (attention aux modeles SPIP)
+	if(preg_match(',^(.*)</([a-z]+)>,Ums', $texte, $m) && !preg_match(",<$m[2][ >],", $m[1])) 
+		$texte = strlen($m[1])?"<$m[2]>$texte":trim(substr($texte, strlen($m[2])+3));
+	// referme/supprime la derniere balise laissee ouverte (attention aux modeles SPIP)
+	if(preg_match(',^(.*)[ >]([a-z]+)<,Ums', $rev = strrev($texte), $m) && !preg_match(",>$m[2]/<,", $m[1])) 
+		$texte = strrev(strlen($m[1])?">$m[2]/<$rev":trim(substr($rev, strlen($m[2])+2)));
 	// balises <p|span|div> a traiter
 	foreach(array('span', 'div', 'p') as $b) {
 		// ouvrante manquante
