@@ -100,4 +100,11 @@ jQuery().ready(function(){
 		return(false);
 	}); // end submit
 	
+	$('#lilo-ventre').hide();
+	$('#lilo-statut-public').hover(function(){
+		$('#lilo-ventre').show('slow');
+	 },function(){
+		$('#lilo-ventre').hide('slow');
+	});
+	
 });
