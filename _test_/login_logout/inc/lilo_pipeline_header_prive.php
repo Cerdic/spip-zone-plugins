@@ -96,7 +96,7 @@ fieldset { border:1px solid gray; margin-top:0.5em; }
 .lilo-screen li.tl, .lilo-screen .bl {left:0; }
 .lilo-screen li.tc, .lilo-screen .bc {left:25px; }
 .lilo-screen li.tr, .lilo-screen .br {right:0; }
-ul.meta-info-liste p { display:inline; } /* supprimes les <p> ajoutés aux infos par 193 */
+ul.meta-info-liste p { display:inline; } /* supprimes les <p> ajoute's aux infos par 193 */
 
 -->
 </style>
