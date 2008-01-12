@@ -22,7 +22,8 @@ function cs_log($variable, $prefixe='', $stat='') {
 	if($stat) $rand = $stat;
 	if(!defined('_LOG_CS') || !strlen($variable)) return;
 	if (!is_string($variable)) $variable = var_export($variable, true);
-	spip_log($rand.$prefixe.$variable);
+	spip_log($variable = $rand.$prefixe.$variable);
+	if (defined('_CS_REPORT')) echo '<br/>',$variable;
 }
 
 // liste des outils et des variables
@@ -39,16 +40,16 @@ $metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['
 define('_COUT_FONCTIONS_PHP', find_in_path('cout_fonctions.php'));
 $GLOBALS['cs_options'] = $GLOBALS['cs_fonctions'] = $GLOBALS['cs_fonctions_essai'] = $GLOBALS['cs_init'] = 0;
 
+// pour voir les erreurs ?
+if ($_GET['cs']=='report') error_reporting(E_ALL ^ E_NOTICE);
+elseif ($_GET['cs']=='reportall' && $auteur_session['statut']=='0minirezo') { define('_CS_REPORT', 1); error_reporting(E_ALL); }
+
 // on active tout de suite les logs, si l'outil est actif.
 if ($metas_outils['log_couteau_suisse']['actif'] || defined('_LOG_CS_FORCE') || $_GET['cs']=='log') {
 	define('_LOG_CS', 'oui');
 	cs_log(str_repeat('-', 80), '', sprintf('COUTEAU-SUISSE. [#%04X]. ', rand()));
 	cs_log('INIT : cout_options, '.$_SERVER['REQUEST_URI']);
 }
-
-// pour voir les erreurs ?
-if ($_GET['cs']=='report') error_reporting(E_ALL ^ E_NOTICE);
-elseif ($_GET['cs']=='reportall' && $auteur_session['statut']=='0minirezo') error_reporting(E_ALL);
 
 // fichiers/dossiers temporaires pour le Couteau Suisse
 define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, "couteau-suisse"));
