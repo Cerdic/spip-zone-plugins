@@ -170,4 +170,16 @@ function spipbb_join_membre($liste_cnt=array(),$filtre="%NOM% [%TOTAL%]<br />"){
 	return $res;
 } // spipbb_join_membre
 
+// ------------------------------------------------------------------------------
+// chryjs : 12/1/8
+// Identifie si un (id_)auteur est moderateur de l'artilce == forum passé en paramètre
+// Retourne 'oui' si modo, 'non' dans les autres cas
+// Attention en 1.9.2 , $id_auteur _doit_ etre un int sinon -> pas autorise
+// ------------------------------------------------------------------------------
+function is_modo($id_auteur=0,$id_article=0) {
+	if (!function_exists('autoriser')) include_spip('inc/autoriser'); // 1.9.2 surtout
+	if (autoriser('modifier','article',$id_article,intval($id_auteur))) return 'oui';
+	else return 'non';
+} //
+
 ?>

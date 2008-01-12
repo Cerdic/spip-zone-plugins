@@ -1,4 +1,9 @@
-﻿2008-01-11  chryjs  <chryjs!@!free!.!fr>
+﻿2008-01-12  chryjs  <chryjs!@!free!.!fr>
+
+ * Pour tester les autorisations (moderation) il est preferable de s'appuyer sur la fonction autoriser.
+
+
+2008-01-11  chryjs  <chryjs!@!free!.!fr>
 
  * Correction de la configuration
  * Ajout d'un filtre sur le secteur pour le comptage des messages (report XB)

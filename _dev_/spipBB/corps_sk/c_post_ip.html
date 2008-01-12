@@ -33,12 +33,9 @@
 
 	[(#REM) c: 11/1/8 on determine si on est admin (pour l'affichage)]
 	[(#REM) Probleme des admin restreints a revoir... #SESSION{statut} ? ]
-	#SET{admin,0}
-	<BOUCLE_aut_pere(AUTEURS){id_article=#ID_ARTICLE}{id_auteur=#SESSION{id_auteur}}>#SET{admin,1}</BOUCLE_aut_pere>
-	<BOUCLE_aut_admin(AUTEURS){statut=0minirezo}{id_auteur=#SESSION{id_auteur}}>#SET{admin,1}</BOUCLE_aut_admin>
-	<BOUCLE_rub_admin(AUTEURS_RUBRIQUES){id_auteur=#SESSION{id_auteur}}{id_rubrique=#ID_RUBRIQUE}>#SET{admin,1}</BOUCLE_rub_admin>
+	#SET{admin,#SESSION{id_auteur}|is_modo{#ID_ARTICLE}}
 
-	[(#SET{affboutonadmin,[(#GET{admin}|!={1}|?{'',' '})
+	[(#SET{affboutonadmin,[(#GET{admin}|!={'oui'}|?{'',' '})
 
 	<p class="space_20"></p>
 
