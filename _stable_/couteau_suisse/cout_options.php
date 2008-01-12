@@ -20,10 +20,10 @@ function cout_autoriser() {
 function cs_log($variable, $prefixe='', $stat='') {
 	static $rand;
 	if($stat) $rand = $stat;
-	if(!defined('_LOG_CS') || !strlen($variable)) return;
+	if((!defined('_LOG_CS') && !defined('_CS_REPORT')) || !strlen($variable)) return;
 	if (!is_string($variable)) $variable = var_export($variable, true);
 	spip_log($variable = $rand.$prefixe.$variable);
-	if (defined('_CS_REPORT')) echo '<br/>',$variable;
+	if (defined('_CS_REPORT')) echo '<br/>',htmlentities($variable);
 }
 
 // liste des outils et des variables

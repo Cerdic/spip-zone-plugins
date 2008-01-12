@@ -2,6 +2,10 @@
 // Ce fichier est charge a chaque recalcul
 // Attention, ici il se peut que le plugin ne soit pas initialise (cas des .js/.css par exemple)
 
+// pour voir les erreurs ?
+if ($_GET['cs']=='report') error_reporting(E_ALL ^ E_NOTICE);
+elseif (defined('_CS_REPORT')) error_reporting(E_ALL);
+
 $GLOBALS['cs_fonctions_essai'] = 1;
 //cs_log("INIT : cout_fonctions ($GLOBALS[cs_options]/$GLOBALS[cs_fonctions]/$GLOBALS[cs_init])");
 
