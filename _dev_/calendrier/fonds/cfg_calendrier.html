@@ -1,63 +1,64 @@
-[(#REM) titre= Calendriers]
-[(#REM) descriptif= Calendriers <p><a href="../spip.php?page=calendriers&var_mode=calcul">tests</a></p>
+[(#REM) titre= <:calendrier:Calendriers:> ]
+[(#REM) descriptif= <:calendrier:Calendriers:> <p><a href="../spip.php?page=calendriers&var_mode=calcul">tests</a></p>
 ]
 #CACHE{0}
 <form method="post">[
 	(#ENV{_cfg_}|form_hidden)
 	]<fieldset>
-		<legend><:cal_par_mois:></legend>
+		<legend><:calendrier:cal_par_mois:></legend>
 
 		<p>
-			<label for="navigation"><:navigation:>&nbsp;: </label>
-			<select name"navigation" size="1">
+			<label for="navigation"><:calendrier:navigation:> <:calendrier:par_mois:>&nbsp;: </label>
+			<select name="navigation" size="1">
 				<option value="oui"[(#ENV{navigation,oui}|=={oui}|?{ selected})]><:oui:></option>
 				<option value="non"[(#ENV{navigation,oui}|=={non}|?{ selected})]><:non:></option>
 			</select>
-			<!-- #ENV{navigation,oui} -->
-			<label for= "par_annee"><:par_annee:>&nbsp;: </label>
+			<!-- navigation='#ENV{navigation}' -->
+			<label for="par_annee"><:calendrier:par_annee:>&nbsp;: </label>
 			<select name="par_annee" size="1">
 				<option value="oui"[(#ENV{par_annee,non}|=={oui}|?{ selected})]><:oui:></option>
 				<option value="non"[(#ENV{par_annee,non}|=={non}|?{ selected})]><:non:></option>
 			</select>
-			<!-- #ENV{par_annee,non} -->
+			<!-- par_annee='#ENV{par_annee}' -->
 		</p>
 
 		<p>
-			<label for= "premier_jour_culturel"><:premier_jour_culturel:>&nbsp;: </label>
+			<label for="premier_jour_culturel"><:calendrier:premier_jour_culturel:>&nbsp;: </label>
 			<select name="premier_jour_culturel" size="1">
-				<option value=""[(#ENV{premier_jour_culturel,''}|=={''}|?{ selected})]>automatique</option>
-				<option value="7"[(#ENV{premier_jour_culturel,''}|=={7}|?{ selected})]>samedi</option>
-				<option value="1"[(#ENV{premier_jour_culturel,''}|=={1}|?{ selected})]>dimanche</option>
-				<option value="2"[(#ENV{premier_jour_culturel,''}|=={2}|?{ selected})]>lundi</option>
-				<option value="3"[(#ENV{premier_jour_culturel,''}|=={3}|?{ selected})]>mardi</option>
-				<option value="4"[(#ENV{premier_jour_culturel,''}|=={4}|?{ selected})]>mercredi</option>
-				<option value="5"[(#ENV{premier_jour_culturel,''}|=={5}|?{ selected})]>jeudi</option>
-				<option value="6"[(#ENV{premier_jour_culturel,''}|=={6}|?{ selected})]>vendredi</option>
+				<option value=""[(#ENV{premier_jour_culturel,''}|=={''}|?{ selected})]><:calendrier:automatique:></option>
+				<option value="7"[(#ENV{premier_jour_culturel,''}|=={7}|?{ selected})]><:date_jour_7:></option>
+				<option value="1"[(#ENV{premier_jour_culturel,''}|=={1}|?{ selected})]><:date_jour_1:></option>
+				<option value="2"[(#ENV{premier_jour_culturel,''}|=={2}|?{ selected})]><:date_jour_2:></option>
+				<option value="3"[(#ENV{premier_jour_culturel,''}|=={3}|?{ selected})]><:date_jour_3:></option>
+				<option value="4"[(#ENV{premier_jour_culturel,''}|=={4}|?{ selected})]><:date_jour_4:></option>
+				<option value="5"[(#ENV{premier_jour_culturel,''}|=={5}|?{ selected})]><:date_jour_5:></option>
+				<option value="6"[(#ENV{premier_jour_culturel,''}|=={6}|?{ selected})]><:date_jour_6:></option>
 			</select>
-			<span>(automatique : le dimanche pour les pays anglo-saxons et le japon, le lundi sinon)</span>
-			<!-- #ENV{premier_jour_culturel} -->
+			<br/>
+			<span><:calendrier:desc_pjc_auto:></span>
+			<!-- premier_jour_culturel='#ENV{premier_jour_culturel}' -->
 		</p>
 
 		<p>
-			<label for= "jour_semaine_abbr"><:jour_semaine_abbr:>&nbsp;: </label>
+			<label for="jour_semaine_abbr"><:calendrier:jour_semaine_abbr:>&nbsp;: </label>
 			<select name="jour_semaine_abbr" size="1">
-				<option value=""[(#ENV{jour_semaine_abbr,''}|=={''}|?{ selected})]>jour complet</option>
-				<option value="abbr"[(#ENV{jour_semaine_abbr,''}|=={abbr}|?{ selected})]>abr&eacute;g&eacute;</option>
-				<option value="initiale"[(#ENV{jour_semaine_abbr,''}|=={initiale}|?{ selected})]>initiale</option>
-				<option value="1car"[(#ENV{jour_semaine_abbr,''}|=={1car}|?{ selected})]>premi&egrave;re lettre</option>
-				<option value="2car"[(#ENV{jour_semaine_abbr,''}|=={2car}|?{ selected})]>deux lettres</option>
-				<option value="3car"[(#ENV{jour_semaine_abbr,''}|=={3car}|?{ selected})]>trois lettres</option>
+				<option value=""[(#ENV{jour_semaine_abbr,''}|=={''}|?{ selected})]><:calendrier:mot_entier:></option>
+				<option value="abbr"[(#ENV{jour_semaine_abbr,''}|=={abbr}|?{ selected})]><:calendrier:abreviation:></option>
+				<option value="initiale"[(#ENV{jour_semaine_abbr,''}|=={initiale}|?{ selected})]><:calendrier:initiale:></option>
+				<option value="1car"[(#ENV{jour_semaine_abbr,''}|=={1car}|?{ selected})]><:calendrier:une_lettre:></option>
+				<option value="2car"[(#ENV{jour_semaine_abbr,''}|=={2car}|?{ selected})]><:calendrier:deux_lettres:></option>
+				<option value="3car"[(#ENV{jour_semaine_abbr,''}|=={3car}|?{ selected})]><:calendrier:trois_lettres:></option>
 			</select>
-			<!-- #ENV{jour_semaine_abbr} -->
+			<!-- jour_semaine_abbr='#ENV{jour_semaine_abbr}' -->
 		</p>
 
 		<p>
-			<label for= "revenir_aujourdhui"><:revenir_aujourdhui:>&nbsp;: </label>
+			<label for="revenir_aujourdhui"><:calendrier:revenir_aujourdhui:>&nbsp;: </label>
 			<select name="revenir_aujourdhui" size="1">
 				<option value="oui"[(#ENV{revenir_aujourdhui,oui}|=={oui}|?{ selected})]><:oui:></option>
 				<option value="non"[(#ENV{revenir_aujourdhui,oui}|=={non}|?{ selected})]><:non:></option>
 			</select>
-			<!-- #ENV{revenir_aujourdhui} -->
+			<!-- revenir_aujourd'hui='#ENV{revenir_aujourdhui}' -->
 		</p>
 		
 		<p>
@@ -66,7 +67,7 @@
 			<label for="texte_suivant"><:calendrier:texte_suivant:>&nbsp;: </label>
 			<input type="text" name="texte_suivant" size="3" value="#ENV{texte_suivant,&#187;}" />
 			<br/>
-			<span>texte du lien vers la p&eacute;riode pr&eacute;c&eacute;dente /suivante ('&#171;' / '&#187;' par défaut)</span>
+			<span><:calendrier:desc_texte_prec_suiv:></span>
 		</p>
 	</fieldset>
 
