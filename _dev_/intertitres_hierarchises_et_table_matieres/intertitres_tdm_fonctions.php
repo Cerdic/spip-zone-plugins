@@ -84,4 +84,4 @@ function table_des_matieres ($texte,$tdm) {
  return IntertitresTdm_table_des_matieres($texte,$tdm);
 
 }
-?> 
+?>
