@@ -150,7 +150,7 @@ function spiplistes_activer_inscription_visiteurs () {
 	return(true);
 }
 
-function spiplistes_vider_tables ($nom) {
+function spiplistes_vider_tables () {
 
 //spiplistes_log("spiplistes_vider_tables() <<", SPIPLISTES_LOG_DEBUG);
 
