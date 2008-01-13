@@ -221,4 +221,4 @@ function editer_mag_maj() {
    
 }
 
-?>				 
+?>
