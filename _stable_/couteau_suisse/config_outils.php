@@ -359,23 +359,19 @@ add_outil( array(
 
 add_variable( array(
 	'nom' => 'cs_rss',
-	'format' => 'nombre',
-	'radio' => array(1 => 'desc:activer', 0 => 'desc:desactiver'),
+	'check' => 'desc:cs_rss',
 	'defaut' => 1,
-	'code:%s' => "define('boites_privees_CS', %s);
-@define('_CS_RSS_SOURCE', 'http://zone.spip.org/trac/spip-zone/log/_plugins_/_stable_/couteau_suisse?format=rss&mode=stop_on_copy&limit=20');\n",
+	'code:%s' => "define('boites_privees_CS', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'format_spip',
-	'format' => 'nombre',
-	'radio' => array(1 => 'desc:activer', 0 => 'desc:desactiver'),
+	'check' => 'desc:format_spip',
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_ARTICLES', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'stat_auteurs',
-	'format' => 'nombre',
-	'radio' => array(1 => 'desc:activer', 0 => 'desc:desactiver'),
+	'check' => 'desc:stat_auteurs',
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_AUTEURS', %s)\n;",
 ));

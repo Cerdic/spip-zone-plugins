@@ -202,13 +202,13 @@ function cs_aide_pipelines() {
 	foreach (array_keys($cs_metas_pipelines) as $pipe) {
 		// stockage de la liste des pipelines et du nombre d'outils actifs concernes
 		$nb=0; foreach($outils as $outil) if($outil['actif'] && isset($outil['pipeline:'.$pipe])) $nb++;
-		if ($nb) $aide[] = '<li style="margin-top: 0.7em;">' .  _T('desc:nb_outil'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb)) . '</li>';
+		if ($nb) $aide[] = _T('desc:nb_outil'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb));
 	}
 	// nombre d'outils actifs
 	$nb=0; foreach($metas_outils as $o) if($o['actif']) $nb++;
 	// nombre d'outils caches
 	$ca = isset($GLOBALS['meta']['tweaks_caches'])?count(unserialize($GLOBALS['meta']['tweaks_caches'])):0;
-	return '<p><b>' . _T('desc:pipelines') . '</b> '.count($aide).'</p><ul style="margin: 0 0 0 0.7em; padding-left: 0.7em; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>'
+	return '<p><b>' . _T('desc:pipelines') . '</b> '.count($aide).'</p><p style="margin-left:2em;">' . join("<br/>", $aide) . '</p>'
 		. '<p><b>' . _T('desc:actifs') . "</b> $nb</p>"
 		. '<p><b>' . _T('desc:caches') . "</b> $ca</p>";
 }

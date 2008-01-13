@@ -20,53 +20,28 @@ function cs_compat_boite($b) {if(defined('_SPIP19200')) echo $b('', true); else 
 
 function cs_admin_styles_et_js() {
 	global $couleur_claire, $couleur_foncee;
-	// SPIP v193
-/*
-	if (!$couleur_claire) { 
-		$couleurs = charger_fonction('couleurs', 'inc'); 
-		$couleurs = $couleurs($GLOBALS['auteur_session']['prefs']['couleur']);
-		print_r($couleurs);
-	}
-*/
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
-div.cadre-padding *{
-/*	padding:0;
-	margin:0;*/
-}
-div.cadre-padding form{
-	padding:0;
-	margin:0;
-}
-div.cadre-padding ul li {
-	list-style:none ;
-}
-div.cadre-padding ul {
-	padding-left:1em;
-	margin:.5em 0 .5em 0;
-}
-div.cadre-padding ul ul {
-	border-left:5px solid #DFDFDF;
-}
-div.cadre-padding ul li li {
-	margin:0;
-	padding:0 0 0.25em 0;
-}
-div.cadre-padding ul li li div.nomoutil, div.cadre-padding ul li li div.nomoutil_on {
+div.cadre-padding form{padding:0;margin:0;}
+div.cadre-padding ul li{list-style:none;}
+div.cadre-padding ul{padding-left:1em;margin:.5em 0 .5em 0;}
+div.cadre-padding ul ul{border-left:5px solid #DFDFDF;}
+div.cadre-padding ul li li{margin:0;padding:0 0 0.25em 0;}
+div.cadre-padding ul li li div.nomoutil, div.cadre-padding ul li li div.nomoutil_on{
 	border:1px solid #AFAFAF;
 	padding:.3em .3em .6em .3em;
 	font-weight:normal;
 }
-div.cadre-padding ul li li div.nomoutil a, div.cadre-padding ul li li div.nomoutil_on a {
+div.cadre-padding ul li li div.nomoutil a, div.cadre-padding ul li li div.nomoutil_on a{
 	outline:0;
 	outline:0 !important;
 	-moz-outline:0 !important;
 }
-div.cadre-padding ul li li div.nomoutil_on {
+div.cadre-padding ul li li div.nomoutil_on{
 	background:$couleur_claire;
 	font-weight:bold;
 }
-div.cadre-padding div.droite label {
+div.cadre-padding div.droite label{
 	padding:.3em;
 	background:#EFEFEF;
 	border:1px dotted #95989F !important;
@@ -77,12 +52,8 @@ div.cadre-padding div.droite label {
 	width:10.1em;
 }
 /* debut SPIP v1.93 */
-div.cadre_padding form{
-	padding:0;
-	margin:0;
-}
-
-div.cadre_padding .titrem {
+div.cadre_padding form{padding:0;margin:0;}
+div.cadre_padding .titrem 
 	display:inline;
 	font-weight:normal;
 	background-position:left 1pt;
@@ -90,55 +61,29 @@ div.cadre_padding .titrem {
 	padding:0 0 0 12pt;
 	cursor:help;
 }
-div.cadre-padding .deplie {
-	cursor:default;
-}
-div.cadre-padding .hover {
-	background-color:$couleur_foncee;
-}
+div.cadre-padding .deplie{cursor:default;}
+div.cadre-padding .hover{background-color:$couleur_foncee;}
 /* fin SPIP v1.93 */
-input.checkbox {
-	margin:0;
-	cursor:pointer;
-}
+input.checkbox{margin:0;cursor:pointer;}
 div.detail_outil {
 	border-top:1px solid #B5BECF;
 	padding:0 .5em .5em .5em;
 	background:#F5F5F5;
 }
-div.detail_outil hr {
+div.detail_outil hr{
 	border-top:1px solid #67707F;
 	border-bottom:0;
 	border-left:0;
 	border-right:0;
 	}
-
-div.detail_outil p {
-	margin:0.3em 1em .3em 0;
-	padding:0;
-}
-
-div.detail_outil fieldset {
-	margin:.8em 4em .5em 4em;
-	-moz-border-radius:8px;
-}
-
-div.detail_outil legend {
-	font-weight:bold;
-}
-
-div.detail_outil sup {
-	font-size:85%;
-	font-variant:normal;
-	vertical-align:super;
-}
-
+div.detail_outil p{margin:0.3em 1em .3em 0;padding:0;}
+div.detail_outil fieldset{margin:.8em 4em .5em 4em;-moz-border-radius:8px;}
+div.detail_outil legend{font-weight:bold;}
+div.detail_outil sup{font-size:85%;font-variant:normal;vertical-align:super;}
 EOF;
 	echo "</style>";
 	echo "<script type=\"text/javascript\"><!--
-
 var Outils = new Array(); // Listes des outils
-
 function submit_general(outil) {
 	document.forms.submitform.afficher_outil.value = outil;
 	document.forms.submitform.submit();
@@ -262,8 +207,6 @@ verif_plugin();
 			redirige_par_entete(generer_url_ecrire($exec, "afficher_outil=$afficher_outil", true) . "#outil$afficher_outil");
 			else redirige_par_entete(generer_url_ecrire($exec));
 	}
-//	else
-//		verif_outils();
 
 	if(defined('_SPIP19100'))
   		debut_page(_T('desc:titre'), 'configuration', 'couteau_suisse');
@@ -354,15 +297,6 @@ function ligne_outil($outil, &$js, $afficher, $description_outil){
 	$pliage_id = 'plie_'.$outil_id;
 
 	$s = "<a name='outil$index' id='outil$index'></a><form  style='margin:0 0 0 1em;'><div id='$outil_id' class='nomoutil".($actif?'_on':'')."'>";
-/*
-	if (isset($info['erreur'])){
-		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
-		$erreur = true;
-		foreach($info['erreur'] as $err)
-			$s .= "/!\ $err <br/>";
-		$s .=  "</div>";
-	}
-*/
 	$p = '<div style="margin:0 0 0 2em;">';
 	$p .= "<img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
 	$p .= "<input type='checkbox' class='checkbox' name='foo_$inc' value='O' id='label_$id_input' style=''";

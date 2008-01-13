@@ -25,6 +25,8 @@ function cs_admin_styles_et_js($cs_version) {
 .cs_hidden { display:none; }
 div.cadre-padding form{ padding:0; margin:0; }
 div.cadre_padding form{	padding:0; margin:0; }
+div.cs-cadre{ padding:0.5em; margin:1px; width=100%; border:1px solid #666666; }
+div.cs-cadre h3 { margin:0.2em 0; border-bottom:1px solid #666666; }
 div.cs_infos { }
 div.cs_infos p { margin:0.3em 1em 0.3em 0pt; padding:0pt; }
 div.cs_infos h3.titrem { border-bottom:solid 1px; font-weight:bold; display:block; }
@@ -143,7 +145,9 @@ if (window.jQuery) jQuery(function(){
 
 	// clic sur un outil
 	jQuery('a.cs_href').click( function() {
+//alert(jQuery('#cs_infos')[0].className);
 		jQuery(this).toggleClass('outil_on');
+//jQuery('#cs_infos').show();
 		set_selected();
 		set_categ(this.parentNode.id);
 		// on s'en va si l'outil est deja affiche
@@ -447,11 +451,12 @@ echo '</div>';
 	$_GET['source'] = $exec;
 	echo '<div class="conteneur">', liste_outils(),
 		'</div><br class="conteneur" /><div class="conteneur">',
-		$cmd=='pack'?cs_description_pack():description_outil2(strlen($afficher_outil)?$afficher_outil:''),
+		$cmd=='pack'?cs_description_pack():description_outil2($afficher_outil),
 		'<script type="text/javascript"><!--
-document.write("<style>div#csjs{display:none;}</style>");
+var cs_descripted = "', $afficher_outil, '";
+document.write("<style>#csjs{display:none;}</style>");
 //--></script><div id="csjs" style="color:red;"><br/>', _T('desc:erreur:js'),'</div>
-<noscript><style>div#csjs{display:none;}</style><div style="color:red;"><br/>', _T('desc:erreur:nojs'),
+<noscript><style>#csjs{display:none;}</style><div style="color:red;"><br/>', _T('desc:erreur:nojs'),
 $_GET['modif']=='oui'?'<br/>'._T('desc:vars_modifiees').'.':'','</div></noscript>',
 		'</div>',
 		"</td></tr></table>\n",

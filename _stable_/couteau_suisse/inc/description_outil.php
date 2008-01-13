@@ -41,7 +41,16 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 		$ok_input .= _VAR_OUTIL;
 		$ok_valeur = $label.(strlen($valeur)?ucfirst(_T($radios[$valeur])):'&nbsp;-');
 	}
-	// ici, donc juste une case input
+	// ... ou une case a cocher
+	elseif (isset($cs_variable['check'])) {
+		$ok_input = $label;
+		$ok_input .= '<label><input type="checkbox" '.($valeur?' checked="checked"':'')." value=\"1\" name=\"HIDDENCSVAR__$variable\"/>"
+			.($valeur?'<b>':'')._T($cs_variable['check']).($valeur?'</b>':'').'</label>';
+
+		$ok_input .= _VAR_OUTIL;
+		$ok_valeur = $label._T("desc:$variable")._T($valeur?'desc:2pts_oui':'desc:2pts_non');
+	}
+	// ... ou un textarea ... ou une case input
 	else {
 		$len = $cs_variable['format']=='nombre'?4:0;
 		$width = $len?'':'style="width:100%;" ';

@@ -93,6 +93,8 @@ _ &bull; [De tout le plugin->@reset@]@install@
 	'jquery1' => "{{Attention}} : cet outil n&eacute;cessite le plugin {jQuery} pour fonctionner avec cette version de SPIP.",
 	'jquery2' => "Cet outil  utilise la librairie {jQuery}.",
 	'balise_etoilee' => '{{Attention}} : V&eacute;rifiez bien l\'utilisation faite par vos squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outil ne s\'appliqueront pas sur : @bal@.',
+	'2pts_oui' => '&nbsp;:&nbsp;oui',
+	'2pts_non' => '&nbsp;:&nbsp;non',
 	'erreur:nom' => 'Erreur !',
 	'erreur:description' => "id manquant dans la d&eacute;finition de l'outil !",
 	'erreur:version' => 'Cet outil est indisponible dans cette version de SPIP.',
@@ -392,19 +394,18 @@ _ Merci de votre compr&eacute;hension.",
 
 // ---------------------------------------------------------------------------
 	'boites_privees:nom' => 'Bo&icirc;tes priv&eacute;es',
-	'boites_privees:description' => "Toutes les bo&icirc;tes d&eacute;crites ci-dessous apparaissent dans la partie priv&eacute;e.
-
-#PUCE {{Les r&eacute;visions du Couteau Suisse}} : un cadre sur la pr&eacute;sente page de configuration, indiquant les derni&egrave;res modifications apport&eacute;es au code du plugin ([Source->"._CS_RSS_SOURCE."]).
-[[Votre choix :->%cs_rss%]]
+	'boites_privees:description' => "Toutes les bo&icirc;tes d&eacute;crites ci-dessous apparaissent dans la partie priv&eacute;e.[[Activer :->%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
 	
-#PUCE {{Les articles au format SPIP}} : un cadre repliable suppl&eacute;mentaire pour vos articles afin de conna&icirc;tre le code source utilis&eacute; par leurs auteurs.[[Votre choix :->%format_spip%]]
+#PUCE {{Les r&eacute;visions du Couteau Suisse}} : un cadre sur la pr&eacute;sente page de configuration, indiquant les derni&egrave;res modifications apport&eacute;es au code du plugin ([Source->"._CS_RSS_SOURCE."]).
 
-#PUCE {{Les auteurs en stat}} : un cadre suppl&eacute;mentaires sur [la page des auteurs->".generer_url_ecrire('auteurs')."] indiquant les 10 derniers connect&eacute;s et les inscriptions non confirm&eacute;es. Seuls les administrateurs voient ces informations.
-[[Votre choix :->%stat_auteurs%]]
+#PUCE {{Les articles au format SPIP}} : un cadre repliable suppl&eacute;mentaire pour vos articles afin de conna&icirc;tre le code source utilis&eacute; par leurs auteurs.
 
-D&eacute;finissez ci-dessous le nombre maximal d'auteurs &agrave; afficher sur le cadre central de cette page.
-[[Auteurs par page->%max_auteurs_page%]]
+#PUCE {{Les auteurs en stat}} : un cadre suppl&eacute;mentaires sur [la page des auteurs->".generer_url_ecrire('auteurs')."] indiquant les 10 derniers connect&eacute;s et les inscriptions non confirm&eacute;es. Seuls les administrateurs voient ces informations. Profitez pour D&eacute;finir ici le nombre maximal d'auteurs &agrave; afficher sur le cadre central de la page des auteurs.
+[[Auteurs par page :->%max_auteurs_page%]]
 ",
+	'cs_rss' => 'Les r&eacute;visions du Couteau Suisse',
+	'format_spip' => 'Les articles au format SPIP',
+	'stat_auteurs' => 'Les auteurs en stat',
 	'rss_titre' => '&laquo;&nbsp;Le Couteau Suisse&nbsp;&raquo; en d&eacute;veloppement :',
 	'edition' => 'Flux RSS mis &agrave; jour le :',
 	'supprimer_cadre' => 'Supprimer ce cadre',
