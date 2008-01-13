@@ -54,6 +54,27 @@ function spiplistes_header_prive ($flux) {
 				break;
 			case _SPIPLISTES_EXEC_COURRIERS_LISTE:
 				break;
+			case _SPIPLISTES_EXEC_CONFIGURE:
+				$flux .= "
+<!-- SpipListes JS -->
+<script language='JavaScript' type='text/JavaScript'>
+<!--
+	jQuery.fn.toggle_options = function(div_options) {
+			if($(this).attr('checked')) {
+				$(div_options).show();
+			}
+			else {
+				$(div_options).hide();
+			}
+	};
+	$(document).ready(function(){
+		$('#opt-lien-en-tete-courrier').click( function() { $(this).toggle_options('#div-lien-en-tete-courrier') } );
+		$('#opt-ajout-tampon-editeur').click( function() { $(this).toggle_options('#div-ajout-tampon-editeur') } );
+	});
+//-->
+</script>
+";
+				break;
 		}
 
 		$flux .="<!-- / PLUGIN SPIPLISTES -->\n\n";
