@@ -103,9 +103,6 @@ function exec_spiplistes_config () {
 	if($btn_complement_courrier) {
 		foreach($keys_complement_courrier as $key) {
 			if(!empty($$key)) {
-				if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
-					$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = array();
-				}
 				__plugin_ecrire_key_in_serialized_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
 			} 
 			else {
