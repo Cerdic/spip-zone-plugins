@@ -158,13 +158,12 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
 		// Ajoute les abonnés dans la queue (spip_auteurs_courriers)
 		if($taille_courrier_ok) {
 			$id_courrier = spip_insert_id();
-spiplistes_log("## >> ".$id_courrier);
 			spiplistes_remplir_liste_envois($id_courrier, $id_liste);
 spiplistes_log("CRON: remplir courrier $id_courrier, liste : $id_liste", SPIPLISTES_LOG_DEBUG);
 		} 
 		else {
 			// contenu du courrier vide
-spiplistes_log("CRON: envoi mail nouveautes : pas de nouveautes", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("CRON: envoi mail nouveautes : courrier vide", SPIPLISTES_LOG_DEBUG);
 		} 
 	}// fin traitement des listes
 	
