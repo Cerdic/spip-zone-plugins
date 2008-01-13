@@ -51,4 +51,4 @@ else
 	include_spip("inc/"._request("onglet"));
 	}
 }
-?> 
+?>

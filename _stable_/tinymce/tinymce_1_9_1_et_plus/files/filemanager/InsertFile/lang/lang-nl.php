@@ -55,4 +55,4 @@ $MY_MESSAGES['insertfilesize'] = 'Insert fil size';
 $MY_MESSAGES['insertfilemodifdate'] = 'Insert modification date';
 $MY_MESSAGES['reset'] = 'Cancel';
 
-?> 
+?>

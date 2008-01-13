@@ -156,5 +156,8 @@ function exec_profil() {
 		}	
 	}
 
-fin_cadre_formulaire();
-		 fin_page(); } ?> 
+	fin_cadre_formulaire();
+	fin_page();
+}
+
+?>
