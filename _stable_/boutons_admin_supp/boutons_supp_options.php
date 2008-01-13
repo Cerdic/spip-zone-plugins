@@ -63,4 +63,4 @@ Par defaut, tous les boutons sont affiches.
 // $cacher_le_bouton["deconnexion"]=" style='display:none !important'";
  
 // $cacher_le_bouton["masquer"]=" style='display:none !important'";
-?> 
+?>
