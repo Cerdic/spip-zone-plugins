@@ -228,5 +228,45 @@ function spiplistes_tampon_texte_get ($tampon_patron, $tampon_html) {
 	return($result);
 }
 
+/*
+ * Ajouter les abonnes d'une liste a un envoi
+ * @param : $id_courrier : reference d'un envoi
+ * @param $id_liste : reference d'une liste
+ */
+function spiplistes_remplir_liste_envois ($id_courrier,$id_liste) {
+	if($id_liste==0)
+		$result_m = spip_query("SELECT id_auteur FROM spip_auteurs ORDER BY id_auteur ASC");
+	else
+		$result_m = spip_query("SELECT id_auteur FROM spip_auteurs_listes WHERE id_liste=".
+							   _q($id_liste));
+	
+	while($row_ = spip_fetch_array($result_m)) {
+		$id_abo = $row_['id_auteur'];
+		spip_query("INSERT INTO spip_auteurs_courriers (id_auteur,id_courrier,statut,maj) VALUES (".
+				   _q($id_abo).","._q($id_courrier).",'a_envoyer', NOW()) ");
+	}
+	
+	$res = spip_query("SELECT COUNT(id_auteur) AS n FROM spip_auteurs_courriers WHERE id_courrier=".
+					  _q($id_courrier)." AND statut='a_envoyer'");
+	
+	if ($row = spip_fetch_array($res)) {
+		spip_query("UPDATE spip_courriers SET total_abonnes=".
+				   _q($row['n'])." WHERE id_courrier="._q($id_courrier));
+	}
+}
+
+
+/*
+ * Supprime les abonnes d'une liste à un envoi
+ */
+function spiplistes_supprime_liste_envois ($id_courrier) {
+	$result = false;
+	$id_courrier = intval($id_courrier);
+	if($id_courrier > 0) {
+		$result = spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier=$id_courrier");
+	}
+	return($result);
+}
+
 
 ?>
