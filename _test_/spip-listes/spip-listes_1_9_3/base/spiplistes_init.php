@@ -115,7 +115,7 @@ function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 		$opt_simuler_envoi = "oui";
 	}
 	if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
-		$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = array();
+		$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = "";
 	}
 	//spiplistes_log("### _SPIPLISTES_META_PREFERENCES : $opt_simuler_envoi");
 	__plugin_ecrire_key_in_serialized_meta ('opt_simuler_envoi', $opt_simuler_envoi, _SPIPLISTES_META_PREFERENCES);
