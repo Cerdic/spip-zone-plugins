@@ -48,6 +48,13 @@ define('_SPIPBB_DELAIS_CRON', 1 * 30 ); // toutes les 30 sec
 define('_SPIPBB_STATUT_ABONNE', '6forum' ); // Statut par défaut d'un nouveau membre lors d'une migration
 define('_SPIPBB_IMPORT_TEST','oui'); // Par defaut import a blanc
 
+// Petit controle de definition generale
+if (!defined('_DIR_PLUGIN_SPIPBB')) {
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_SPIPBB',(_DIR_PLUGINS.end($p))."/");
+	spipbb_log('_DIR_PLUGIN_SPIPBB undef redef:'._DIR_PLUGIN_SPIPBB,1,__FILE__);
+}
+
 // [fr] Plugin ecrit pour spip rev 1.9.3 -> fournir les fonctions requises pour spip 1.9.2
 // [en] Plugin written for spip rev 1.9.3 -> provide required functions for spip 1.9.2
 if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_SQL,'<')) {

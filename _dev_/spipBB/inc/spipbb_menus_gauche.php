@@ -24,6 +24,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 if (!defined("_INC_SPIPBB_COMMON")) include_spip('inc/spipbb_common');
 spipbb_log("included",3,__FILE__);
 
+// chargement des librairies requises
+include_spip('inc/utils'); // requis pour generer_url_xxx
+include_spip('inc/minipres'); // requis pour http_img_pack
+include_spip('inc/presentation'); // requis pour debut_boite_info
+
 // ------------------------------------------------------------------------------
 # affichage de la colonne de menus
 // ------------------------------------------------------------------------------
@@ -45,7 +50,7 @@ function spipbb_menus_gauche($script, $id_salon="", $id_art="", $id_sujet="", $m
 	$modules['01_general'][40]=array('01_configuration',"spipbb_configuration",'administration-24.gif'); 
 	$modules['01_general'][50]=array('ZZ_debug',"spipbb_admin_debug",'racine-24.gif');
 
-	if($GLOBALS['spipbb']['configure']=='oui') {
+	if (is_array($GLOBALS['spipbb']) AND $GLOBALS['spipbb']['configure']=='oui') {
 		// tous ces menus necessitent que spipbb soit configure et active
 		if ($GLOBALS['spipbb']['config_id_secteur'] == 'oui' AND !empty($GLOBALS['spipbb']['id_secteur'])) {
 			// ces menus ont besoin d'un secteur/forums defini (a priori)
@@ -383,11 +388,16 @@ function spipbb_admin_gauche($script,$modules) {
 	spipbb_log("entree:$script:".serialize($modules),1,"spipbb_admin_gauche");
 
 	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
-	if (!function_exists('recuperer_fond')) include_spip('public/assembler'); // voir un charger fonction
+	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
+	if (!function_exists('recuperer_fond')) {
+		spipbb_log("BUG recuperer_fond",1,"spipbb_admin_gauche");
+		die("BUG");
+		exit;
+	}
 
 	ksort($modules);
 	$affichage = "\n";
-	while( list($cat, $rang) = each($modules) ) {
+	while ( list($cat, $rang) = each($modules) ) {
 		$cat = _T('spipbb:admin_cat_'.$cat); // on traduit le nom de chaque categorie
 
 		$affichage.= debut_boite_info(true). "<b>".$cat."</b>";
@@ -419,6 +429,8 @@ function spipbb_admin_gauche($script,$modules) {
 		$affichage .= fin_boite_info(true)."<br />\n";
 	}
 	$affichage.= "\n";
+
+	spipbb_log("sortie:$affichage:",1,"spipbb_admin_gauche");
 
 	return $affichage;
 } // spipbb_admin_gauche

@@ -184,7 +184,7 @@ function spipbb_config_support_auteurs()
 {
 	#$options_sap = array('extra','table','autre');
 	$options_sap = array('extra','table');
-	
+
 	$res = debut_cadre_trait_couleur("",true,"",_L('Gestion champs auteurs suppl&eacute;mentaires'));	
 	$res.= "<table width='100%' cellpadding='2' cellspacing='0' border='0' align='center' class='verdana2'>\n";
 
@@ -225,16 +225,16 @@ function spipbb_config_support_auteurs()
 function spipbb_config_champs_supp() {
 
 	$options_a = array('oui','non');
-	
+
 	$requis = array('date_crea_spipbb','avatar','annuaire_forum','refus_suivi_thread');
 	$definis =array();
-	
+
 	foreach($GLOBALS['champs_sap_spipbb'] as $k => $v) { $definis[]=$k; }
 	$montre = array_diff($definis,$requis);
 
 	$res = debut_cadre_trait_couleur("",true,"",_L('Afficher ces champs dans les skel'));
 	$res.= "<table width='100%' cellpadding='2' cellspacing='0' border='0' align='center' class='verdana2'>\n";
-	
+
 	foreach($montre as $chp) {
 		# champs X
 		$res.= "<tr><td valign='top'>"._L('Afficher le champ : '.$chp.'<br />'
