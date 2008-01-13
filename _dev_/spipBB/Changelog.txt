@@ -1,4 +1,10 @@
-﻿2008-01-12  chryjs  <chryjs!@!free!.!fr>
+﻿2008-01-13  chryjs  <chryjs!@!free!.!fr>
+
+ * Corrections et controles divers pour tracer et résoudre certains dysfonctionnements à confirmer (Bug report email Patrick)
+ * Ajout ouverture/fermeture d'un thread + deplacement d'un thread dans un autre forum
+
+
+2008-01-12  chryjs  <chryjs!@!free!.!fr>
 
  * Pour tester les autorisations (moderation) il est preferable de s'appuyer sur la fonction autoriser.
 

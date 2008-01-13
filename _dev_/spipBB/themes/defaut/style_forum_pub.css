@@ -440,6 +440,20 @@ background-image: url(img/icon_delete.png);
 background-image: url(img/icon_ip.png);
 }
 
+.bout_admin a.deplacer {
+background-image: url(img/topic_move.png);
+}
+.bout_admin a.fermer {
+background-image: url(img/sujet_lock.png);
+}
+.bout_admin a.ouvrir {
+background-image: url(img/sujet_unlock.png);
+}
+.bout_admin a.diviser {
+background-image: url(img/topic_split.png);
+}
+
+
 /* bouton 'alerter abus' */ /* GAF v.0.5 */
 .bouton_alerter, .bouton_alerter a {
 float:left;

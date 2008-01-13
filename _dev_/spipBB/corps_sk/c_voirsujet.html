@@ -349,6 +349,26 @@
 	[(#REM) ligne chemin ]
 	[(#MODELE{chemin_hierarchie}{id_article}{encours=#ENV{id_article}})]
 
+	[(#SET{affboutonadminforum,[(#GET{admin}|!={'oui'}|?{'',' '})
+	<div class="bout_admin">
+		<a href="[(#URL_PAGE{deplacer}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]"" title="<:deplacer:>" class="deplacer">
+		</a>
+	</div>
+	<div class="bout_admin"> [(#REM) Ici il faudrait faire un test ferme/ouvert ]
+		<?php if ( "#GET{sujetferme}"=="1" ) { ?>
+		<a href="#URL_ACTION_AUTEUR{spipbb_agir_forum,#ID_FORUM-ouvrir,#ID_ARTICLE|generer_url_article}" title="<:ouvrir:>" class="ouvrir">
+		<?php  } else { ?>
+		<a href="#URL_ACTION_AUTEUR{spipbb_agir_forum,#ID_FORUM-fermer,#ID_ARTICLE|generer_url_article}" title="<:fermer:>" class="fermer">
+		<?php } ?>
+		</a>
+	</div>
+	<div class="bout_admin">
+		<a href="" title="<:diviser:>" class="diviser">
+		</a>
+	</div>
+	]})]
+	#GET{affboutonadminforum}
+
 	<INCLURE(session.php){fond=inc_piedforum}{id_article}{id_thread}>
 
 	[(#REM) si visiteur non identifie : form login ]

@@ -110,6 +110,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //D
 'dans_forum' => 'in the forum',
 'deconnexion_' => 'Logoff ',
+'deplacer_confirmer' => 'Confirm the move',
+'deplacer_sujet_dpt' => 'Moving of:',
+'deplacer_dans_dpt' => 'Move to forum:',
+'deplacer_vide' => 'Not any other forum left: moving this thread is impossible!',
 
 //E
 'email' => 'E-mail',

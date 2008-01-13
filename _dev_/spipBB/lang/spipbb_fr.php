@@ -157,6 +157,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dans_forum' => 'dans le forum',
 'deconnexion_' => 'D&eacute;connexion ',
 'dernier_membre' => 'Dernier membre enregistr&eacute; : ',
+'deplacer_confirmer' => 'Confirmer le d&eacute;placement',
+'deplacer_sujet_dpt' => 'D&eacute;placement de&nbsp;:',
+'deplacer_dans_dpt' => '&Agrave; deplacer dans le forum&nbsp;:',
+'deplacer_vide' => 'Pas d\'autre forum : d&eacute;placement impossible.',
 
 //E
 
