@@ -144,6 +144,7 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 	$listable_admin = $row['listable_admin'];
 	$listable = $row['listable'];
 	$public = $row['public'];
+	$saisie = $row['saisie'];
 	$aide = $row['aide'];
 	$html_wrap = $row['html_wrap'];
 	
@@ -168,6 +169,11 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		$checked = ($listable == 'oui') ? " checked='checked'" : "";
 		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_listable' value='oui' id='list_$champ'$checked> ";
 		$out .= "<label for='list_$champ'>"._T("forms:champ_listable_publique")."</label>";
+		$out .= "<br />\n";
+
+		$checked = ($saisie == 'non') ? " checked='checked'" : "";
+		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_saisie' value='non' id='saisie_$champ'$checked> ";
+		$out .= "<label for='saisie_$champ'>"._T("forms:champ_saisie_desactivee")."</label>";
 		$out .= "<br />\n";
 
 		$checked = ($public == 'oui') ? " checked='checked'" : "";

@@ -57,6 +57,7 @@ $formschamp_field = array(
 		'listable_admin' => "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
 		'listable' => "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
 		'public' => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
+		'saisie' => "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
 		'aide' => "text",
 		'html_wrap' => "text"
 );

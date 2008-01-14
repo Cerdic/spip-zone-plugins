@@ -48,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'champ_nom_texte' => "Texte",
 'champ_public' => "Ce champ est visible dans l'espace public",
 'champ_specifiant' => "Ce champ qualifie la donn&eacute;e (tri, filtre, description)",
+'champ_saisie_desactivee' => "D&eacute;sactiver la saisie de ce champ",
 'champ_type_ligne'=>"Ligne de texte",
 'champ_type_texte'=>"Texte",
 'champ_type_date'=>"Date",

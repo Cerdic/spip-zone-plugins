@@ -11,7 +11,7 @@
  *
  */
 	
-	$GLOBALS['forms_base_version'] = 0.38;
+	$GLOBALS['forms_base_version'] = 0.40;
 	function Forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
@@ -305,6 +305,11 @@
 			spip_query("ALTER TABLE `forms_donnees_auteurs` ADD PRIMARY KEY ( `id_donnee` , `id_auteur` )");
 			echo "forms update @ 0.39<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.39,'non');
+		}
+		if ($current_version<0.40){
+			spip_query("ALTER TABLE spip_forms_champs ADD saisie ENUM('non', 'oui') DEFAULT 'oui' NOT NULL AFTER public");
+			echo "forms update @ 0.40<br/>";
+			ecrire_meta('forms_base_version',$current_version=0.40,'non');
 		}
 
 		ecrire_metas();

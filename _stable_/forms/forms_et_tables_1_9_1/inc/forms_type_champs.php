@@ -117,8 +117,8 @@
 			else
 				$val = _request($champ, $c);
 			if ($type == 'fichier') $val = $_FILES[$champ]['tmp_name'];
-			// verifier la presence des champs obligatoires	
-			if (($val===NULL || !strlen($val)) && ($infos['obligatoire'] == 'oui'))
+			// verifier la presence des champs obligatoires	dont la saisie n'est pas desactivee
+			if (($val===NULL || !strlen($val)) && ($infos['obligatoire'] == 'oui') && ($infos['saisie'] != 'non'))
 				// Cas particulier de l'upload de fichier : on ne force pas à uploader à nouveau un fichier si celui-ci est existant
 				// Cas particulier des password : on ne force pas a donner un nouveau mot de passe si existe deja
 				if (( (in_array($type,array('fichier','password'))) && ($val==NULL) && (Forms_valeurs($id_donnee,$id_form,$champ)!=NULL) ));
