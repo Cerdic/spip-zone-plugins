@@ -25,7 +25,7 @@ function FenFlo_affichage_final($flux)
 
 
 	return str_replace( "</head>", "<script type=\"text/javascript\">
-	$(document).ready(
+	jQuery(document).ready(
 	function()
 	{
 		$('#window').css({left:\"".$valeur_left_FenFlo."\", top:\"".$valeur_top_FenFlo."\", width:\"".$valeur_width_FenFlo."px\", height:\"".$valeur_height_FenFlo."px\"});
@@ -87,7 +87,7 @@ function FenFlo_insertion_in_head($flux)
 
 <script type=\"text/javascript\">
 
-$(document).ready(
+jQuery(document).ready(
 		
 	function()
 	{
