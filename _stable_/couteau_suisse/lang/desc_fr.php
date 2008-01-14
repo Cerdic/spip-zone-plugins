@@ -400,7 +400,7 @@ _ Merci de votre compr&eacute;hension.",
 
 #PUCE {{Les articles au format SPIP}} : un cadre repliable suppl&eacute;mentaire pour vos articles afin de conna&icirc;tre le code source utilis&eacute; par leurs auteurs.
 
-#PUCE {{Les auteurs en stat}} : un cadre suppl&eacute;mentaires sur [la page des auteurs->".generer_url_ecrire('auteurs')."] indiquant les 10 derniers connect&eacute;s et les inscriptions non confirm&eacute;es. Seuls les administrateurs voient ces informations. Profitez pour D&eacute;finir ici le nombre maximal d'auteurs &agrave; afficher sur le cadre central de la page des auteurs.
+#PUCE {{Les auteurs en stat}} : un cadre suppl&eacute;mentaires sur [la page des auteurs->".generer_url_ecrire('auteurs')."] indiquant les 10 derniers connect&eacute;s et les inscriptions non confirm&eacute;es. Seuls les administrateurs voient ces informations. Profitez pour d&eacute;finir ici le nombre maximal d'auteurs &agrave; afficher sur le cadre central de la page des auteurs.
 [[Auteurs par page :->%max_auteurs_page%]]
 ",
 	'cs_rss' => 'Les r&eacute;visions du Couteau Suisse',

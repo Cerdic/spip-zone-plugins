@@ -16,15 +16,14 @@ function blocs_raccourcis() {
 
 function blocs_callback($matches) {
 	$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $matches[3], 2);
-	if ($matches[1]=='visible') {
-		$h4 = '>';
-		$div = '>';
-	} else {
-		$h4 = ' class="blocs_replie">';
-		$div = ' class="blocs_invisible">';
+	if ($matches[1]=='visible')
+		$h = $div = '';
+	else {
+		$h = ' blocs_replie';
+		$div = ' class="blocs_invisible"';
 	}
 	$b = strlen($matches[2])?" cs_bloc$matches[2]":''; 
-	return "<div class=\"cs_blocs$b\"><h4" . $h4 . $t[0] . '</h4><div' . $div . $t[1] . '</div></div>';
+	return "<div class=\"cs_blocs$b\"><h4 class=\"blocs_titre$h\"><a href=\"#\">$t[0]</a></h4><div$div>$t[1]</div></div>";
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script

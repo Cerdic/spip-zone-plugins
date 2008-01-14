@@ -208,7 +208,7 @@ function cs_aide_pipelines() {
 	$nb=0; foreach($metas_outils as $o) if($o['actif']) $nb++;
 	// nombre d'outils caches
 	$ca = isset($GLOBALS['meta']['tweaks_caches'])?count(unserialize($GLOBALS['meta']['tweaks_caches'])):0;
-	return '<p><b>' . _T('desc:pipelines') . '</b> '.count($aide).'</p><p style="margin-left:2em;">' . join("<br/>", $aide) . '</p>'
+	return '<p><b>' . _T('desc:pipelines') . '</b> '.count($aide).'</p><p style="margin-left:1em;">' . join("<br/>", $aide) . '</p>'
 		. '<p><b>' . _T('desc:actifs') . "</b> $nb</p>"
 		. '<p><b>' . _T('desc:caches') . "</b> $ca</p>";
 }

@@ -11,12 +11,12 @@
 */
 
 function balise_BLOC_TITRE($p) {
-	$p->code = "'<div class=\"cs_blocs\"><h4 class=\"blocs_replie\">'";
+	$p->code = "'<div class=\"cs_blocs\"><h4 class=\"blocs_titre blocs_replie\"><a href=\"#\">'";
 	return $p;
 }
 
 function balise_BLOC_DEBUT($p) {
-	$p->code = "'</h4><div class=\"blocs_invisible\">'";
+	$p->code = "'</a></h4><div class=\"blocs_invisible\">'";
 	return $p;
 }
 
