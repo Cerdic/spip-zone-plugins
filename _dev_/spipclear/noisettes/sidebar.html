@@ -73,10 +73,10 @@
 	<div id="syndicate">
 		<h2><:spipclear:syndication:></h2>
 		<ul>
-			[<li><a href="(#ENV{id_secteur}|generer_url_rss)"><:spipclear:fil_rss:></a></li>]
-			[<li><a href="(#ENV{id_secteur}|generer_url_rss|parametre_url{type,co})"><:spipclear:fil_rss_commentaires:></a></li>]
-			[<li><a href="(#ENV{id_secteur}|generer_url_atom)"><:spipclear:fil_atom:></a></li>]
-			[<li><a href="(#ENV{id_secteur}|generer_url_atom|parametre_url{type,co})"><:spipclear:fil_atom_commentaires:></a></li>]
+			[<li><a href="(#URL_PAGE{rss}|parametre_url{id_rubrique,#ENV{id_secteur}})"><:spipclear:fil_rss:></a></li>]
+			[<li><a href="(#URL_PAGE{rss}|parametre_url{id_rubrique,#ENV{id_secteur}}|parametre_url{type,co})"><:spipclear:fil_rss_commentaires:></a></li>]
+			[<li><a href="(#URL_PAGE{atom}|parametre_url{id_rubrique,#ENV{id_secteur}})"><:spipclear:fil_atom:></a></li>]
+			[<li><a href="(#URL_PAGE{atom}|parametre_url{id_rubrique,#ENV{id_secteur}}|parametre_url{type,co})"><:spipclear:fil_atom_commentaires:></a></li>]
 		</ul>
 	</div>
 </div>

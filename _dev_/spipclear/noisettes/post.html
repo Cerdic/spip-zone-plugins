@@ -6,16 +6,16 @@
 [(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
 <span>::</span> <BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></BOUCLE_categorie>
 <span>::</span>#DEBUT_SURLIGNE<a href="#URL_SITE_SPIP/#URL_ARTICLE" title="<:spipclear:permalink_pour:> : [(#TITRE|textebrut|entites_html)]">##ID_ARTICLE</a>#FIN_SURLIGNE
-<span>::</span><a href="[(#ID_ARTICLE|generer_url_rss{article}|parametre_url{type,co})]" title="<:spipclear:rss_pour:> : [(#TITRE|textebrut|entites_html)]">rss</a>
+<span>::</span><a href="[(#URL_AGE{rss}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{type,co})]" title="<:spipclear:rss_pour:> : [(#TITRE|textebrut|entites_html)]">rss</a>
 </p>
 
 [<div class="post-chapo">
-	#DEBUT_SURLIGNE(#CHAPO|appliquer_hreflang)#FIN_SURLIGNE
+	#DEBUT_SURLIGNE(#CHAPO)#FIN_SURLIGNE
 </div>]
 [<div class="post-content" lang="#LANG">
-	#DEBUT_SURLIGNE(#TEXTE|appliquer_hreflang|reduire_image{450})#FIN_SURLIGNE
+	#DEBUT_SURLIGNE(#TEXTE|reduire_image{450})#FIN_SURLIGNE
 	<br style="clear: both;" />
-	[<div>#DEBUT_SURLIGNE(#NOTES|appliquer_hreflang)#FIN_SURLIGNE</div>]
+	[<div>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
 	[<div><strong><:voir_en_ligne:></strong> : <a href="(#URL_SITE)">#NOM_SITE</a></div>]
 </div>]
 </div>
