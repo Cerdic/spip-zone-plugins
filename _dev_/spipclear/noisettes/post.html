@@ -6,7 +6,7 @@
 [(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
 <span>::</span> <BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></BOUCLE_categorie>
 <span>::</span>#DEBUT_SURLIGNE<a href="#URL_SITE_SPIP/#URL_ARTICLE" title="<:spipclear:permalink_pour:> : [(#TITRE|textebrut|entites_html)]">##ID_ARTICLE</a>#FIN_SURLIGNE
-<span>::</span><a href="[(#URL_AGE{rss}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{type,co})]" title="<:spipclear:rss_pour:> : [(#TITRE|textebrut|entites_html)]">rss</a>
+<span>::</span><a href="[(#URL_PAGE{rss}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{type,co})]" title="<:spipclear:rss_pour:> : [(#TITRE|textebrut|entites_html)]">rss</a>
 </p>
 
 [<div class="post-chapo">
