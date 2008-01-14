@@ -11,6 +11,7 @@
 if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common');
 include_spip('inc/traiter_imagerie');
 include_spip('inc/spipbb_notifications');
+include_spip('inc/spipbb_inc_formpost'); // tout_de_selectionner
 
 // ------------------------------------------------------------------------------
 // Filtre : insere_texte_alerter
@@ -172,7 +173,7 @@ function spipbb_join_membre($liste_cnt=array(),$filtre="%NOM% [%TOTAL%]<br />"){
 
 // ------------------------------------------------------------------------------
 // chryjs : 12/1/8
-// Identifie si un (id_)auteur est moderateur de l'artilce == forum passé en paramètre
+// Identifie si un (id_)auteur est moderateur de l'article == forum passé en paramètre
 // Retourne 'oui' si modo, 'non' dans les autres cas
 // Attention en 1.9.2 , $id_auteur _doit_ etre un int sinon -> pas autorise
 // ------------------------------------------------------------------------------

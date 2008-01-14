@@ -161,6 +161,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'deplacer_sujet_dpt' => 'D&eacute;placement de&nbsp;:',
 'deplacer_dans_dpt' => '&Agrave; deplacer dans le forum&nbsp;:',
 'deplacer_vide' => 'Pas d\'autre forum : d&eacute;placement impossible.',
+'diviser_confirmer' => 'Confirmer la s&eacute;paration des messages',
+'diviser_expliquer' => 'A l\'aide du formulaire ci-dessous, vous pourrez s&eacute;parer ce fil en deux, soit : en s&eacute;lectionnant les messages individuellement; soit en choissant le message &agrave; partir duquel il faut les diviser en deux.',
+'diviser_dans_dpt' => '&Agrave; mettre dans le forum&nbsp;:',
+'diviser_separer_choisis' => 'S&eacute;parer les messages s&eacute;lectionn&eacute;s',
+'diviser_separer_suite' => 'S&eacute;parer &agrave; partir du message s&eacute;lectionn&eacute;',
+'diviser_selection_dpt' => 'S&eacute;lection&nbsp;:',
+'diviser_vide' => 'Pas d\'autre forum : division impossible.',
 
 //E
 
@@ -294,8 +301,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'membres_inscrits' => 'membres inscrits',
 'membres_les_plus_actifs' => 'Membres les plus actifs',
 'message' => 'Message',
-'messages' => 'R&eacute;ponses',
 'message_s' => 'Messages',
+'messages' => 'R&eacute;ponses',
+'messages_dpt' => 'Messages&nbsp;:',
 'messages_derniers' => 'Derniers Messages',
 'message_s_dpt' => 'Messages&nbsp;: ',
 'messages_voir_dernier' => 'Voir le dernier message',

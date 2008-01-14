@@ -1,4 +1,9 @@
-﻿2008-01-13  chryjs  <chryjs!@!free!.!fr>
+﻿2008-01-14  chryjs  <chryjs!@!free!.!fr>
+
+ * Separer/diviser un thread
+
+
+2008-01-13  chryjs  <chryjs!@!free!.!fr>
 
  * Corrections et controles divers pour tracer et résoudre certains dysfonctionnements à confirmer (Bug report email Patrick)
  * Ajout ouverture/fermeture d'un thread + deplacement d'un thread dans un autre forum

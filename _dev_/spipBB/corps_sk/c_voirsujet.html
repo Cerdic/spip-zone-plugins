@@ -34,7 +34,7 @@
 
 	[(#REM) ligne chemin ]
 	[(#MODELE{chemin_hierarchie}{id_article})]
-	
+
 	<p class="space_10"></p>
 	[
 	(#REM) message art ferme|maintenance
@@ -44,15 +44,15 @@
 		[(#GET{maintenance}|=={1}|?{<:spipbb:forum_maintenance:>,<:spipbb:forum_ferme:>})]
 		</div>
 	]
-	
+
 	[
 	(#REM) post qui ferme le sujet (dernier post du sujet en somme !
 	]
 	<BOUCLE_reponse_ferme(FORUMS){id_thread}{plat}{titre_mot=ferme}>
 		#SET{sujetferme,1}
-	
+
 		<BOUCLE_thelast(FORUMS){id_parent}{!par date}{0,1}{doublons}>
-		
+
 		<table class="spipforum" id="post_ferme">
 			<tr>
 				<th colspan="2"><:spipbb:sujet_clos_titre:></th>
@@ -73,7 +73,7 @@
 						[(#REM) set id_auteur modo , en attendant requette sur admin restreint]
 						#SET{modo,#ID_AUTEUR}
 					</BOUCLE_modo>
-					
+
 					</B_auteurpc2>
 						[(#NOM|sinon{<:spipbb:anonyme:>})]
 					<//B_auteurpc2>
@@ -98,16 +98,16 @@
 				</div>
 				]})]
 				#GET{affboutonadmin}
-	        		<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
-	        	</td>
-	        </tr>
+					<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+				</td>
+			</tr>
 			<tr class="ligne_sujet">
-	        	<td>
+				<td>
 					[(#TEXTE|lignes_longues|smileys)]
-					
+
 					[(#REM) signature auteur ]
 					[<p class="signature">(#SIGNATURE_POST)</p>]
-					
+
 					[
 					<p class="space_5"></p>
 					<a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>
@@ -119,9 +119,8 @@
 		<p class="space_20"></p>
 	</BOUCLE_reponse_ferme>
 	<!-- fin post fermeture sujet -->
-		
-	
-		
+
+
 	[(#REM) affichage commun, tout type situation voirsujet ]
 	
 	[
@@ -147,13 +146,13 @@
 				]
 			]})]
 			#GET{affboutonrep}
-		</li>	
+		</li>
 	</ul>
-	
+
 	<div class="titre_actif">#TITRE</div>
-	
+
 	<p class="space_10"></p>
-	
+
 	<!-- tableau -->
 	<table class="spipforum" id="liste_post">
 		<tr>
@@ -199,7 +198,7 @@
 				]
 			</td>
 			<td class="date_sujet">
-			
+
 				[(#REM) bouton citer ou pas ? ]
 				[(#SET{affboutonciter,[(#GET{forumferme}|!={1}|?{' ',''})
 					[(#GET{forum_annonce}|!={1}|?{' ',''})
@@ -227,10 +226,10 @@
 		<tr class="ligne_sujet">
 			<td>
 				[(#TEXTE|lignes_longues|smileys)]
-				
+
 				[(#REM) signature auteur ]
 				[<p class="signature">(#SIGNATURE_POST)</p>]
-				
+
 				[
 				<p class="space_10"></p>
 				<a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>
@@ -311,10 +310,10 @@
 		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
 			<td>
 				[(#TEXTE|lignes_longues|smileys)]
-				
+
 				[(#REM) signature auteur ]
 				[<p class="signature">(#SIGNATURE_POST)</p>]
-				
+
 				[
 				<p class="space_10"></p>
 				<a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>
@@ -351,7 +350,7 @@
 
 	[(#SET{affboutonadminforum,[(#GET{admin}|!={'oui'}|?{'',' '})
 	<div class="bout_admin">
-		<a href="[(#URL_PAGE{deplacer}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]"" title="<:deplacer:>" class="deplacer">
+		<a href="[(#URL_PAGE{deplacer}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="<:deplacer:>" class="deplacer">
 		</a>
 	</div>
 	<div class="bout_admin"> [(#REM) Ici il faudrait faire un test ferme/ouvert ]
@@ -363,7 +362,7 @@
 		</a>
 	</div>
 	<div class="bout_admin">
-		<a href="" title="<:diviser:>" class="diviser">
+		<a href="[(#URL_PAGE{diviser}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="<:diviser:>" class="diviser">
 		</a>
 	</div>
 	]})]

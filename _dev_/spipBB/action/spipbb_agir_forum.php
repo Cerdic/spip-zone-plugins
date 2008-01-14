@@ -57,6 +57,7 @@ function action_spipbb_agir_forum() {
 			return;
 
 		sql_updateq("spip_forum", array("id_article" => $id_nouvart), "id_thread=$id_forum");
+
 		break;
 	case "fermer":
 		spipbb_invalider_page($row); // invalider les pages comportant ce forum
@@ -73,6 +74,60 @@ function action_spipbb_agir_forum() {
 		} else {
 			spipbb_log("clef non trouvee ouvrir : $id_forum AND id_mot=".$spipbb_meta['id_mot_ferme'],3,"action_spipbb_agir_forum");
 		}
+		break;
+	case "diviser":
+		$liste = _request('liste'); // on deplace tous les posts marques
+		$suite = _request('suite'); // on demarre apres le post marque
+		$sel_id = _request('sel_id'); // liste des posts selectionnes
+
+		if ((!$liste AND !$suite) OR !is_array($sel_id)) redirige_par_entete($r);
+		if ($suite AND count($sel_id)>1) redirige_par_entete($r);
+
+		// on identifie le forum(article) dans lequel on le deplace et on verifie son existence
+		$id_nouvart = _request('nouveau_forum');
+		$result = sql_select("*", "spip_articles", "id_article=$id_nouvart");
+		if (!($rowart = sql_fetch($result))) return;
+
+		// on cherche le premier post selectionne et on verifie son existence
+		$in_liste_id=sql_in('id_forum',$sel_id);
+
+		if ( !$premier = sql_fetsel("*", 'spip_forum', $in_liste_id,'','id_forum') ) return;
+
+		spipbb_invalider_page($row); // invalider les pages comportant ce forum
+
+		// le premier post va devenir un nouveau parent
+		sql_updateq("spip_forum", array("id_article" => $id_nouvart,
+									"id_parent"=>0,
+									"id_thread"=>$premier['id_forum']),
+					"id_forum=".$premier['id_forum']);
+
+		if ($liste) {
+			$where_enfants=array($in_liste_id, "id_parent=$id_forum");
+			$where_forum=array($in_liste_id, "id_parent!=$id_forum");
+		}
+		if ($suite) {
+			$where_enfants=array("id_forum>".$premier['id_forum'], "id_parent=$id_forum");
+			$where_forum=array("id_forum>".$premier['id_forum'], "id_parent!=$id_forum","id_thread=$id_forum");
+		}
+		// on regreffe les enfants qui étaient rattachés à l'ancien forum sur le nouveau parent
+		sql_updateq("spip_forum", array("id_article" => $id_nouvart,
+								"id_parent"=>$premier['id_forum'],
+								"id_thread"=>$premier['id_forum']), 
+				$where_enfants);
+		// on rattache les autres messages sélectionnés au forum tout simplement
+		sql_updateq("spip_forum", array("id_article" => $id_nouvart,
+								"id_thread"=>$premier['id_forum']), 
+				$where_forum);
+
+		// Une fois la greffe faite on devrait aussi dupliquer les stats de vues
+		// car ces messages ont été vus en même temps que les autres...
+		$stats=sql_fetsel("SUM(visites) AS total",'spip_visites_forums',"id_forum=$id_forum");
+		sql_insertq("spip_visites_forums", array("date"=>"NOW()","id_forum" => $premier['id_forum'],"visites"=>$stats['total'],"maj"=>"NOW()"));
+
+		// on invalide aussi le forum d'accueil !
+		$nouv_premier = sql_fetsel("*", 'spip_forum', "id_forum=".$premier['id_forum']);
+		spipbb_invalider_page($nouv_premier); // invalider les pages comportant ce forum
+
 		break;
 	} // switch (agir)
 

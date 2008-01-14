@@ -138,16 +138,15 @@ if($previsu=='1')
 				if (preg_match('/^forum_([0-9]+)\.lck$/', $file)
 				AND (time()-@filemtime(_DIR_SESSIONS.$file) > 4*3600))
 					@unlink(_DIR_SESSIONS.$file);
-	
+
 	// hash gaf
 		if(!$hash)
 			$hash = calculer_action_auteur("ajout_forum $forum $sujet $alea");
-	
-	
+
 	// supprimer les <form> de la previsualisation
 	// (sinon on ne peut pas faire <cadre>...</cadre> dans les forums) .. code dégueu plutot !
 	$affiche_texte = preg_replace("@<(/?)f(orm[>[:space:]])@ism", "<\\1no-f\\2", $affiche_texte);
-	
+
 	// affichage du prévisu
 	$avant_post="
 		<span class='verdana3'><b>"._T('gaf:messages_verifier')."</b></span>

@@ -114,6 +114,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'deplacer_sujet_dpt' => 'Moving of:',
 'deplacer_dans_dpt' => 'Move to forum:',
 'deplacer_vide' => 'Not any other forum left: moving this thread is impossible!',
+'diviser_confirmer' => 'Split topic control panel',
+'diviser_expliquer' => 'Using the form below you can split a topic in two, either by selecting the posts individually or by splitting at a selected post.',
+'diviser_dans_dpt' => 'Forum for new topic:',
+'diviser_separer_choisis' => 'Split selected posts',
+'diviser_separer_suite' => 'Split from selected posts',
+'diviser_selection_dpt' => 'Select:',
+'diviser_vide' => 'Not any other forum left: spliting this thread is impossible!',
 
 //E
 'email' => 'E-mail',
