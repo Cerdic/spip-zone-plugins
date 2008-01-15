@@ -286,13 +286,13 @@ function exec_spiplistes_config () {
 		//
 		// Méthode d'envoi 
 		. debut_cadre_relief("", true, "", _T('spiplistes:methode_envoi'))
-		. "<span  class='verdana2'>\n"
+		. "<div  class='verdana2'>\n"
 		. _T('spiplistes:pas_sur')
 		. bouton_radio("mailer_smtp", "non", _T('spiplistes:php_mail'), $mailer_smtp == "non", "changeVisible(this.checked, 'smtp', 'none', 'block');")
 		. "<br />\n"
 		. bouton_radio("mailer_smtp", "oui", _T('spiplistes:smtp'), $mailer_smtp == "oui"
 			, "changeVisible(this.checked, 'smtp', 'block', 'none');")
-		. "</span>\n"
+		. "</div>\n"
 		//
 		// si 'smtp', affiche bloc de paramétrage
 		. "<div id='smtp' style='display:".(($mailer_smtp == "oui") ? "block;" : "none;")."'>\n"
@@ -300,8 +300,8 @@ function exec_spiplistes_config () {
 		. "<li>"._T('spiplistes:smtp_hote')." : <input type='text' name='smtp_server' value='$smtp_server' size='30' class='forml' /></li>\n"
 		. "<li>"._T('spiplistes:smtp_port')." : <input type='text' name='smtp_port' value='$smtp_port' size='4' class='fondl' /></li>\n"
 		. "<li>"
-			. "<label for='smtp_sender'>"._T('spiplistes:adresse_smtp')." : \n"
-			. "<input type='text' id='smtp_sender' name='smtp_sender' value=\"$smtp_sender\" class='formo' /></p>\n"
+			. "<label for='smtp_sender'>"._T('spiplistes:adresse_smtp')." : </label>\n"
+			. "<input type='text' id='smtp_sender' name='smtp_sender' value=\"$smtp_sender\" class='formo' />"
 		. "</li>\n"
 		. "<li>"._T('spiplistes:spip_ident')." : "
 		. bouton_radio("smtp_identification", "oui", _T('item_oui'), ($smtp_identification == "oui"), "changeVisible(this.checked, 'smtp-auth', 'block', 'none');")
