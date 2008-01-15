@@ -23,7 +23,7 @@
 				[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_prof'}})]
 				</td>
 				<td>#FORMULAIRE_SPIPBB_PROFIL</td>]
-			[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{'',' '})<td colspan='2'>[(#MODELE{profil_auteur}{id_auteur})]</td>]
+			[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{'',' '})<td colspan='2'>[(#MODELE{profil_auteur}{id_auteur}{id_rubrique})]</td>]
 		</tr>
 		<tr class="inter">
 			<td colspan="2">&nbsp;</td>

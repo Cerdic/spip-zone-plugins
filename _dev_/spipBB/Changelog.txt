@@ -2,6 +2,7 @@
 
  * Nouveau formulaire et balise d'inscription FORMULAIRE_INSCRIPTION_SPIPBB directement tirés de ceux de SPIP (pour l'instant) permettra de séparer l'inscription aux forums (et ses champs spécique) du reste du site
  * Passage en 0.4.3 : fin des evolutions prevues
+ * Correction bug affichage id_rubrique manquant
 
 
 2008-01-14  chryjs  <chryjs!@!free!.!fr>

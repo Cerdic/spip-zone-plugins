@@ -17,7 +17,6 @@ Interface Privée - Import PhpBB :
 
 Interface publique - Générale :
 -* 0.4 Bug emoticons dans nouveaux messages ? (constaté sur site démo)
--* 0.4.2 FAIT : Manque formulaire inscription optionnel (remplacer le standard que l'on ne doit plus modifier par un specifique spipbb)
 -* 0.4.3 Gestion avatar : a ameliorer + téléchargement (droits ?)
 -* 0.4.4 Affichage du profil a revoir
 -* 0.4.5 nouveau message : le sujet est prérempli avec le titre du forum. Ne serait-il pas mieux d'avoir cette zone à blanc, et d'imposer qu'elle ne  soit pas laissée à vide ? (dans le cas d'un nouveau sujet, pas d'une  réponse)
