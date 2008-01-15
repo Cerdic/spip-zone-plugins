@@ -509,7 +509,7 @@ function spiplistes_boite_selection_patrons ($patron="", $return=false, $chemin=
 	// va chercher la liste des patrons
 	$liste_patrons = spiplistes_liste_des_patrons ($chemin);
 	// boite de sélection du patron
-	$result  .= "<select style='width:$width;'  name='". $select_nom . "' name='". $select_nom . "' class='verdana1' size='" . $size_select . "'>\n";
+	$result  .= "<select style='width:$width;'  name='". $select_nom . "' class='verdana1' size='" . $size_select . "'>\n";
 	// par defaut, selectionne le premier
 	$selected = (empty($title_selected) ? "selected='selected'" : ""); 
 	foreach($liste_patrons as $titre_option) {
