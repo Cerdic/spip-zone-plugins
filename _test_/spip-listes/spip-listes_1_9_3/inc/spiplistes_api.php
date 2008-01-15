@@ -728,7 +728,7 @@ function spiplistes_boite_autocron_form($titre, $option, $value) {
 function spiplistes_boite_autocron_info ($icone = "", $return = false, $titre_boite = '', $bouton = "", $texte = "", $nom_option = "", $icone_alerte = false) {
 	$result = ""
 		. debut_cadre_couleur($icone, $return, $fonction, $titre_boite)
-		. ($icone_alerte ? "<div style='text-align:center;'><img alt='' src='$icone_alerte' border:'0' /></div>" : "")
+		. ($icone_alerte ? "<div style='text-align:center;'><img alt='' src='$icone_alerte' border='0' /></div>" : "")
 		. ($texte ? "<p class='verdana2' style='margin:0;'>$texte</p>\n" : "")
 		. ($bouton ? spiplistes_boite_autocron_form($bouton, $nom_option, 'non') : "")
 		. fin_cadre_couleur($return)
