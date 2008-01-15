@@ -505,4 +505,13 @@ function spip_mysql_in($val, $valeurs, $not='', $serveur='') {
 	return "($in_sql)";
 } } // spip_mysql_in
 
+#------------------------------------------------------------#
+// cf http://doc.spip.org/@sql_quote
+#------------------------------------------------------------#
+if (!function_exists('sql_quote')) {
+function sql_quote($val, $serveur='')
+{
+	return spip_mysql_quote($val);
+} } // sql_quote
+
 ?>
