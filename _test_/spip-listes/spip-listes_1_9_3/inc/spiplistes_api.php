@@ -977,6 +977,19 @@ function spiplistes_boite_raccourcis ($return = false) {
 			;
 	}
 	$result .= ""
+		. "<!-- aide en ligne -->\n"
+		. "<li>"
+		. icone_horizontale(
+			_T('spiplistes:aide_en_ligne')
+			, generer_url_ecrire(_SPIPLISTES_EXEC_AIDE)
+			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."aide-24.png"
+			, ""
+			, false
+			, " onclick=\"javascript:window.open(this.href,'spip_aide', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;\" "
+			)
+		. "</li>\n"
+		;
+	$result .= ""
 		. "</ul>\n"
 		. spiplistes_fin_raccourcis(true)
 		;

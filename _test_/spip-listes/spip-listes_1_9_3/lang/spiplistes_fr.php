@@ -18,10 +18,11 @@ Cette liste d'abonn&eacute;s doit &ecirc;tre au format texte seul, une ligne
 L'adresse email doit &ecirc;tre unique, ainsi que le login. Si cette adresse 
    email ou se login existe dans la base du site, la ligne sera rejet&eacute;e.<br />
 Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent 
-   &ecirc;tre ignor&eacute;s (vous pouvez importer des listes issues des anciennces versions de SPIP-Listes).",
+   &ecirc;tre ignor&eacute;s (vous pouvez importer des listes issues des anciennces versions de SPIP-Listes)."
+, 'aide_en_ligne' => "Aide en ligne"
 
 //A
-'abo_1_lettre' => 'Lettre d\'information',
+, 'abo_1_lettre' => 'Lettre d\'information',
 'abonne_une_seule_liste_publique' => "Abonnement &agrave; la seule liste disponible ",
 'abonnement_0' => 'Abonnement',
 'abonnement'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information',
