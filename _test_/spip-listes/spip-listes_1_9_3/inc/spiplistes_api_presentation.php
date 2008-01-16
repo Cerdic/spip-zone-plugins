@@ -35,7 +35,7 @@ include_spip('inc/presentation');
 	// SPIP < 193
 if(version_compare($GLOBALS['spip_version_code'],'1.9300','<')) { 
 	function spiplistes_gros_titre($titre, $ze_logo='', $aff=true) {
-		$r = gros_titre($titre."PP", $ze_logo, $aff);
+		$r = gros_titre($titre, $ze_logo, $aff);
 		if(!$aff) return($r);
 	}
 }
