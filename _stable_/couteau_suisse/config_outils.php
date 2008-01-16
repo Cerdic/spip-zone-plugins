@@ -323,6 +323,18 @@ add_variable( array(
 	'defaut' => '"AUTO"',
 	'code:strlen(%s)' => '$GLOBALS[\'puce\']=%s;',
 ));
+add_variable( array(
+	'nom' => 'racc_i1',
+	'format' => 'chaine',
+	'defaut' => defined('_SPIP19300')?"''":"'<i class=\"spip\" >'",
+	'code:strlen(%s)' => '$GLOBALS[\'debut_italique\']=%s;',
+));
+add_variable( array(
+	'nom' => 'racc_i2',
+	'format' => 'chaine',
+	'defaut' => defined('_SPIP19300')?"''":"'</i>'",
+	'code:strlen(%s)' => '$GLOBALS[\'fin_italique\']=%s;',
+));
 add_outil( array(
 	'id' => 'class_spip',
 	'code:options' => "\$GLOBALS['class_spip']='%%style_p%%';\n\$GLOBALS['class_spip_plus']='%%style_h%%';\n%%racc_hr%%\n%%puce%%",

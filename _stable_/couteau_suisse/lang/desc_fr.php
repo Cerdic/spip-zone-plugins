@@ -292,13 +292,18 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 // ---------------------------------------------------------------------------
 // TODO : a partir de 1.93 il faut changer (ul ol pour style_h et simplement li pour style_p)
 	'class_spip:nom' => 'SPIP et ses raccourcis&hellip;',
-	'class_spip:description' => defined('_SPIP19300')?"#PUCE {{Les styles de SPIP}}. Jusqu'&agrave; la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class=\"spip\"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu'aucun style particulier ne sera appliqu&eacute;.<blockquote>
+	'class_spip:description' => defined('_SPIP19300')?"#PUCE {{Les styles de SPIP}}. Jusqu'&agrave; la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class=\"spip\"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu'aucun style particulier ne sera appliqu&eacute;.<blockquote style='margin:0 2em;'>
 _ {{1.}} Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[Votre style :->%style_p%]]
 _ {{2.}} Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :[[Votre style :->%style_h%]]
 
 Attention : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les styles standards associ&eacute;s &agrave; ces balises.</blockquote>
 #PUCE {{Les raccourcis de SPIP}}. D&eacute;finissez ici ce que SPIP doit mettre &agrave; la place des raccourcis suivants (une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut) : [[Ligne horizontale &laquo;<html>----</html>&raquo; :->%racc_hr%]][[Puce publique &laquo;<html>-</html>&raquo; :->%puce%]]
-Attention : en d&eacute;finissant le remplacement de la ligne horizontale, le style {{2.}} sp&eacute;cifi&eacute; plus haut ne sera pas appliqu&eacute; sur &lt;hr />."
+Attention : en d&eacute;finissant le remplacement de la ligne horizontale, le style {{2.}} sp&eacute;cifi&eacute; plus haut ne sera pas appliqu&eacute; sur &lt;hr />.
+
+SPIP a choisi d'utiliser la balise &lt;i> pour transcrire les italiques. Mais &lt;em> aurait pu &eacute;galement convenir. &Agrave; vous de voir :
+[[Entr&eacute;e d'un italique &laquo;<html>{</html>&raquo; :->%racc_i1%]]
+[[Sortie d'un italique &laquo;<html>}</html>&raquo; :->%racc_i2%]]
+Attention : en modifiant le remplacement des raccourcis d'italiques, le style {{2.}} sp&eacute;cifi&eacute; plus haut ne sera pas appliqu&eacute;."
 :"D&eacute;finissez ici ce que SPIP doit mettre &agrave; la place du raccourci suivant (une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut) : [[Ligne horizontale &laquo;<html>----</html>&raquo; :->%racc_hr%]]"
 ,
 
