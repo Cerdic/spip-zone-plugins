@@ -1,13 +1,99 @@
 [(#REM)
 
 	Controleur pour le crayon 'adressecompletepro', uniquement html
-	Validation JS pour les champs spÃ©cifiÃ©s obligatoires
-	Si les champs ne sont pas activÃ©s dans le CFG, ils n'apparaissent pas...
+	Validation JS pour les champs spcifis obligatoires
+	Si les champs ne sont pas activs dans le CFG, ils n'apparaissent pas...
 
 ]
 #CACHE{0}
 <BOUCLE_a(AUTEURS_ELARGIS){id_auteur=(#ENV{id_auteurs_elargi})}>
-	<fieldset style="background-color:#fff;">
+<script type="text/javascript">
+/* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
+	
+	jQuery.validator.addMethod("chainenombre", function(value, element) {
+		return this.required(element) || /^[A-Za-z0-9\-\'\.§å‰€ŠçËˆè‘éæƒì•ë”í“êñ˜îï™…šô†Ÿóà,û ]+$/.test(value);
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:> <:inscription2:chainenombre:>");
+        
+	jQuery.validator.addMethod("chaine", function(value, element) {
+		return this.required(element) || /^[A-Za-z\-\'\.§å‰€ŠçËˆè‘éæƒì•ë”í“êñ˜îï™…šô†Ÿóà,û ]+$/.test(value);
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:> <:inscription2:chainelettre:>");
+
+	jQuery.validator.addMethod("postal", function(value, element) {
+		return this.required(element) || /^[A-Z]{1,2}[-|\s][0-9]{3,6}$|^[0-9]{3,6}$|^[0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$|^[A-Z]{1,2} [0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$/.test(value);
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:cp_valide:>");
+	
+	var id = cQuery(".auteurs_elargi-adressecompletepro-#ID_AUTEUR").crayon();		
+	function validation(){
+		var validator = jQuery(id).validate({
+			showErrors: function(errors, errorList) {
+				// Si c est pas ok on cache le bouton ok et on affiche les erreurs normales
+				jQuery(id).find('.crayon-submit').hide();
+				console.log(errors);
+				validator.defaultShowErrors();
+			},
+			errorPlacement: function(error, element) {
+				error.appendTo( element.parent("div"));
+			},
+			success: function(label) {
+				label.remove();
+				if(jQuery(id).find('label.error').length == 0){
+					jQuery(id).find('.crayon-submit').show();
+				}else{
+					jQuery(id).find('.crayon-submit').hide();
+				}
+			},
+			rules: {
+				#ENV{name_adresse_pro}: { 
+					[(#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{required: true,}),]
+					rangeLength:[5,1000]
+				},
+				#ENV{name_code_postal_pro}:{
+					[(#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{required: true,}),]
+					postal:true, 
+					rangeLength:[3,20]
+				},
+				#ENV{name_ville_pro}: {
+					[(#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{required: true,}),]
+					chaine:true,
+					rangeLength:[2,30]
+				},
+				#ENV{name_pays_pro}:{[(#CONFIG{inscription2/pays_pro_obligatoire}|=={on}|?{required: true,''})]}
+			},
+			messages: {
+				#ENV{name_adresse_pro}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"},
+				#ENV{name_code_postal_pro}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					postal:"<:inscription2:cp_valide:>",
+					rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
+				#ENV{name_ville_pro}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
+					rangeLength:"Min 2 Max 30 <:inscription2:caracteres:>"},
+				#ENV{name_pays_pro}: {
+					required:"<:inscription2:champ_obligatoire:>"}
+			}
+		});
+		jQuery(id).find('.obligatoire label').not('.error').append('*');
+		jQuery(id).find('.obligatoire input').each(function(){
+			if(jQuery(this).val() =="" ){
+				jQuery(this).addClass('error');
+				var id_label = jQuery(this).attr('name');
+				var label = '<label class="error" generated="true"><:inscription2:champ_obligatoire:></label>';
+				jQuery(this).parent("div").append(label);
+				jQuery(this).parent("div").find("label.error").show();
+				
+				jQuery(id).find('.crayon-submit').hide();
+			}
+		});
+		validator.form();
+	}
+
+	setTimeout('validation()',500);
+	
+</script>
+	<fieldset[ style="(#ENV{style})"]>
 		<legend><:inscription2:votre_adresse_pro:></legend>
 
 		[(#CONFIG{inscription2/adresse_pro}|?{' ',''})	
@@ -40,7 +126,7 @@
 		[(#GET{pays_pro_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
 		<label><:inscription2:pays_pro:></label>
 		#SET{id,#PAYS_PRO}
-		<select class="crayon-active" name="#ENV{name_pays_pro}" onchange="testform()" style="width:#ENV{largeur}px;#ENV{style}">
+		<select class="crayon-active" name="#ENV{name_pays_pro}" onchange="validation()">
 			[(#INCLURE{fond=controleurs/pays}{id=#GET{id}})]
 		</select>
 		</div>]

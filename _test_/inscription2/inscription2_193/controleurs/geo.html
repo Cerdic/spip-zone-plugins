@@ -6,7 +6,7 @@
 #CACHE{0}
 
 <BOUCLE_a(AUTEURS){id_auteur}{tous}>
-<fieldset>
+<fieldset[ style="(#ENV{style})"]>
 <label><:auteurscomplets:entree_latitude:></label> <input class="crayon-active" name="#ENV{name_latitude}"
  style="width:#ENV{largeur}px;" value="[(#LATITUDE**|entites_html)]" />
  <br />

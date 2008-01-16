@@ -54,7 +54,7 @@
 	});
 </script>
 
-<fieldset style="background-color:#fff;">
+<fieldset[ style="(#ENV{style})"]>
 	<legend><:inscription2:votre_nom_complet:></legend>
 
 	[(#CONFIG{inscription2/nom_famille}|?{' ',''})
