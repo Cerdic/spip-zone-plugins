@@ -4,6 +4,7 @@
  * A priori on peut diviser un thread dans le même forum pour sérarer un fil en deux tout simplement par exemple.
  * Debut des modifications pour utiliser un avatar pour tous - reporte a une version ulterieure
  * Passage en 0.4.4 : fin des evolutions prevues (avec report)
+ * Corrections de bugs sur balise ARRAY inclusion de pied et construction de page
  
 
 
