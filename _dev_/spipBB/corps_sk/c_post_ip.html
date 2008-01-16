@@ -6,28 +6,7 @@
 <BOUCLE_recap(FORUMS){id_forum}>
 
 	[(#REM) Comme on ne peut pas faire ces boucles dans la partie conditionnelle on prepare ici]
-	#SET{adr_ip,#ENV{ip}}
-	#SET{liste_membres,#ARRAY{0}}
-	<BOUCLE_sel_art(ARTICLES){id_article}>
-		<BOUCLE_liste_membres(FORUMS){id_secteur}{tout}{ip=#GET{adr_ip}}>
-			#SET{val,#NOM}
-			[(#NOM|=={''}|?{' ',''}) #SET{val,'Anonyme'}]
-			#SET{liste_membres,#GET{liste_membres}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#GET{val}}}}
-		</BOUCLE_liste_membres>
-	</BOUCLE_sel_art>
-	#SET{liste_cnt,#GET{liste_membres}|array_count_values}
-	#SET{liste_membres,#GET{liste_cnt}|spipbb_join_membre{"%NOM% [%TOTAL%]<br />"}}
 
-	#SET{nom_src,#NOM}
-	<BOUCLE_sel_nom(ARTICLES){id_article}>
-		<BOUCLE_liste_membres_nom(FORUMS){id_secteur}{tout}{auteur=#GET{nom_src}}>
-			#SET{val,#IP}
-			[(#IP|=={''}|?{' ',''}) #SET{val,'0.0.0.0'}]
-			#SET{liste_adr,#GET{liste_adr}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#GET{val}}}}
-		</BOUCLE_liste_membres_nom>
-	</BOUCLE_sel_nom>
-	#SET{liste_cnt,#GET{liste_adr}|array_count_values}
-	#SET{liste_adr,#GET{liste_cnt}|spipbb_join_membre{"%NOM% [%TOTAL%]<br />"}}
 
 	<INCLURE(session.php){fond=inc_teteforum}{id_article}>
 
@@ -35,7 +14,7 @@
 	[(#REM) Probleme des admin restreints a revoir... #SESSION{statut} ? ]
 	#SET{admin,#SESSION{id_auteur}|is_modo{#ID_ARTICLE}}
 
-	[(#SET{affboutonadmin,[(#GET{admin}|!={'oui'}|?{'',' '})
+	<?php if ( "#GET{admin}"=="oui" ) { ?>
 
 	<p class="space_20"></p>
 
@@ -57,13 +36,37 @@
 
 		<tr class="inter"><td colspan="2"><:spipbb:ip_adresse_membres:></td></tr>
 		<tr class="ligne_sujet">
-			<td colspan="2">#GET{liste_membres}
+			<td colspan="2">
+				#SET{adr_ip,#ENV{ip}}
+				#SET{liste_membres,#ARRAY{0}}
+				<BOUCLE_sel_art(ARTICLES){id_article}>
+					<BOUCLE_liste_membres(FORUMS){id_secteur}{tout}{ip=#GET{adr_ip}}>
+						#SET{val,#NOM}
+						[(#NOM|=={''}|?{' ',''}) #SET{val,'Anonyme'}]
+						#SET{liste_membres,#GET{liste_membres}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#GET{val}}}}
+					</BOUCLE_liste_membres>
+				</BOUCLE_sel_art>
+				#SET{liste_cnt,#GET{liste_membres}|array_count_values}
+				#SET{liste_membres,#GET{liste_cnt}|spipbb_join_membre{"%NOM% [%TOTAL%]<br />"}}
+				#GET{liste_membres}
 			</td>
 		</tr>
 
 		<tr class="inter"><td colspan="2"><:spipbb:ip_adresse_autres:></td></tr>
 		<tr class="ligne_sujet">
-			<td colspan="2">#GET{liste_adr}
+			<td colspan="2">
+				#SET{nom_src,#NOM}
+				#SET{liste_adr,#ARRAY{0}}
+				<BOUCLE_sel_nom(ARTICLES){id_article}>
+					<BOUCLE_liste_membres_nom(FORUMS){id_secteur}{tout}{auteur=#GET{nom_src}}>
+						#SET{val,#IP}
+						[(#IP|=={''}|?{' ',''}) #SET{val,'0.0.0.0'}]
+						#SET{liste_adr,#GET{liste_adr}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#GET{val}}}}
+					</BOUCLE_liste_membres_nom>
+				</BOUCLE_sel_nom>
+				#SET{liste_cnt,#GET{liste_adr}|array_count_values}
+				#SET{liste_adr,#GET{liste_cnt}|spipbb_join_membre{"%NOM% [%TOTAL%]<br />"}}
+				#GET{liste_adr}
 			</td>
 		</tr>
 
@@ -71,9 +74,8 @@
 			<td colspan="2">&nbsp;</td>
 		</tr>
 	</table>
-	]})]
-	#GET{affboutonadmin}
 
+	<?php } ?>
 
 
 	<INCLURE(session.php){fond=inc_piedforum}{id_rubrique}>
