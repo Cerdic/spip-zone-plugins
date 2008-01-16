@@ -7,31 +7,28 @@
 	]<fieldset>
 		<legend><:calendrier:navigation:></legend>
 		<p>
-			<label for="navigation"><:calendrier:navigation:> <:calendrier:par_mois:>&nbsp;: </label>
-			<select name="navigation" size="1" class="fondl">
-				<option value="oui"[(#ENV{navigation,oui}|=={oui}|?{ selected})]><:oui:></option>
-				<option value="non"[(#ENV{navigation,oui}|=={non}|?{ selected})]><:non:></option>
-			</select>
-			<label for="par_annee"><:calendrier:par_annee:>&nbsp;: </label>
-			<select name="par_annee" size="1" class="fondl">
-				<option value="oui"[(#ENV{par_annee,non}|=={oui}|?{ selected})]><:oui:></option>
-				<option value="non"[(#ENV{par_annee,non}|=={non}|?{ selected})]><:non:></option>
-			</select>
+			<:calendrier:navigation:>
+			<label accesskey="M">
+				<input type="hidden" name="navigation" value="non" />
+				<input type="checkbox" name="navigation" value="oui" [(#ENV{navigation,oui}|=={oui}|?{checked="checked"})] /><:calendrier:par_mois:>
+			</label>
+			<label accesskey="A">
+				<input type="hidden" name="par_annee" value="non" />
+				<input type="checkbox" name="par_annee" value="oui" [(#ENV{par_annee,non}|=={oui}|?{checked="checked"})] /><:calendrier:par_annee:>
+			</label>
 		</p>
 		<p>
 			<label for="texte_precedent" accesskey="P"><:calendrier:texte_precedent:>&nbsp;: </label>
-			<input type="text" name="texte_precedent" id="texte_precedent" size="3" value="#ENV{texte_precedent,&#171;}" class="fondl" />
-			<label for="texte_suivant"><:calendrier:texte_suivant:>&nbsp;: </label>
-			<input type="text" name="texte_suivant" id="texte_suivant" size="3" value="#ENV{texte_suivant,&#187;}" class="fondl" />
+			<input type="text" name="texte_precedent" id="texte_precedent" size="5" value="#ENV{texte_precedent,&#171;}" class="fondl" />
+			<label for="texte_suivant" accesskey="S"><:calendrier:texte_suivant:>&nbsp;: </label>
+			<input type="text" name="texte_suivant" id="texte_suivant" size="5" value="#ENV{texte_suivant,&#187;}" class="fondl" />
 			<br/>
-			<span><:calendrier:desc_texte_prec_suiv:></span>
 		</p>
 		<p>
-			<label for="revenir_aujourdhui"><:calendrier:revenir_aujourdhui:>&nbsp;: </label>
-			<select name="revenir_aujourdhui" size="1" class="fondl">
-				<option value="oui"[(#ENV{revenir_aujourdhui,oui}|=={oui}|?{ selected})]><:oui:></option>
-				<option value="non"[(#ENV{revenir_aujourdhui,oui}|=={non}|?{ selected})]><:non:></option>
-			</select>
+			<label accesskey="R">
+				<input type="hidden" value="non" />
+				<input type="checkbox" name="revenir_aujourdhui" value="oui" [(#ENV{revenir_aujourdhui,oui}|=={oui}|?{checked="checked"})] /><:calendrier:revenir_aujourdhui:>
+			</label>
 		</p>
 	</fieldset>
 	<fieldset>
@@ -64,7 +61,8 @@
 		</p>
 	</fieldset>
 
-	<div>
-		<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+	<div style="float:#LANG_RIGHT;">
+		<input type="button" name="defaut" value="<:par_defaut:>" class="fondo" />
+		<input type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
 	</div>
 </form>

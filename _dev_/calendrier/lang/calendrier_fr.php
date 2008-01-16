@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'trois_lettres' => 'trois lettres',
 	'revenir_aujourdhui' => 'retour &agrave; la date courante',
 	'texte_precedent' => 'texte "pr&eacute;c&eacute;dent"',
-	'texte_suivant' => 'texte "suivant"',
+	'texte_suivant' => '"suivant"',
 	'desc_texte_prec_suiv' => '(texte du lien vers la p&eacute;riode pr&eacute;c&eacute;dente / suivante &ndash; \'&#171;\' / \'&#187;\' par d&eacute;faut)'
 );
 ?>
