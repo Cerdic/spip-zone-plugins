@@ -158,11 +158,10 @@ function get_list_of_pages($uri_list="")
 					$site=parse_url($val);
 					if ($site[host] == $site_uri) {
 						$uri_pages[]=$val;
-						//echo "good:$val<br>\n";
 					}
-					else spip_log("migrestatic:get_list_of_pages:'$val' is not in '$site_uri'" ;
+					else spip_log("migrestatic:get_list_of_pages:'$val' is not in '$site_uri'") ;
 				} // preg_match
-				else spip_log("migrestatic:get_list_of_pages:'$val' is not an url";
+				else spip_log("migrestatic:get_list_of_pages:'$val' is not an url");
 			} // !empty
 		} // while
 	}
