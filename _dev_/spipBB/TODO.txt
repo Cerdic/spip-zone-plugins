@@ -16,8 +16,15 @@ Interface Privée - Import PhpBB :
 -* 0.5 Import phpBB : Mettre en option l'import des auteurs (remplacer l'id par le nom dans les messages)
 
 Interface publique - Générale :
--* 0.4 Bug emoticons dans nouveaux messages ? (constaté sur site démo)
+-* 0.4 FAIT : Bug emoticons dans nouveaux messages ? (constaté sur site démo)
 -* 0.4.3 Gestion avatar : a ameliorer + téléchargement (droits ?)
+
+<script src='../dist/javascript/async_upload.js' type='text/javascript'></script>
+      <script type='text/javascript'>
+      $("form.form_upload_icon").async_upload(async_upload_icon);
+      </script>
+
+
 -* 0.4.4 Affichage du profil a revoir
 -* 0.4.5 nouveau message : le sujet est prérempli avec le titre du forum. Ne serait-il pas mieux d'avoir cette zone à blanc, et d'imposer qu'elle ne  soit pas laissée à vide ? (dans le cas d'un nouveau sujet, pas d'une  réponse)
 -* 0.4.7 j'ai un doute sur la fonctionnalité "ne plus suivre les sujets" page profil publique
