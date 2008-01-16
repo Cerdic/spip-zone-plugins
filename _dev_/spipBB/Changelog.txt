@@ -1,6 +1,7 @@
 ﻿2008-01-16  chryjs  <chryjs!@!free!.!fr>
 
  * Correction bug emoticons : revert sur formulaire/forum ...
+ * A priori on peut diviser un thread dans le même forum pour sérarer un fil en deux tout simplement par exemple.
 
 
 2008-01-15  chryjs  <chryjs!@!free!.!fr>

@@ -39,7 +39,7 @@
 			<td colspan="3">
 			<:spipbb:diviser_dans_dpt:>
 			<select name='nouveau_forum' style='width:80%'>
-	<BOUCLE_art_secteur(ARTICLES){id_secteur=#GET{secteur}}{tout}{id_article!=#ID_ARTICLE}>
+	<BOUCLE_art_secteur(ARTICLES){id_secteur=#GET{secteur}}{tout}>
 				<option value='#ID_ARTICLE'>#TITRE</option>
 	</BOUCLE_art_secteur>
 			</select>
