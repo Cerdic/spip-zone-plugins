@@ -10,7 +10,7 @@
 	 -->
 	<nom>Login Logout (LiLo)</nom>
 	<auteur>cpaulus@quesaco.org</auteur>
-	<version>0.19</version>
+	<version>0.20</version>
 	<version_base>0.01</version_base>
 	<icon>images/lilo-64.png</icon>
 	<etat>test</etat>

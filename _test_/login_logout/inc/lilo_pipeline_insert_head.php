@@ -56,40 +56,238 @@ function lilo_insert_head ($flux) {
 
 	include_spip('inc/filtres');
 	include_spip('inc/plugin_globales_lib');
+//spip_log('_____ lilo_insert_head()');
 	
 	// masque les boutons admins standards
 	$GLOBALS['flag_preserver'] = true;
 
+	$page = _request('page');
+	
 	$config = __plugin_lire_key_in_serialized_meta('config', _LILO_META_PREFERENCES);
 
 	if(!$config) $config = array();
 
 	$lilo_values_array = unserialize(_LILO_DEFAULT_VALUES_ARRAY);
 
-	$lilo_config_vars = "";
+	$lilo_js_insert_head = "";
 	
 	foreach($lilo_values_array as $key => $value) {
 		if(!isset($config[$key]) || !$config[$key] || empty($config[$key])) $config[$key] = $value;
-		$lilo_config_vars .= "'".preg_replace(',(lilo_),','',$key)."':'".$config[$key]."',";
+		$lilo_js_insert_head .= "'".preg_replace(',(lilo_),','',$key)."':'".$config[$key]."',";
 	}
-	$lilo_config_vars = ""
-		. "<script language='JavaScript' type='text/javascript'>"
-		. " var lilo_config = { "
-		. rtrim($lilo_config_vars, ",")
-		. " };"
-		. "</script>"
-		;
+	$lilo_js_insert_head = " var lilo_config = { " . rtrim($lilo_js_insert_head, ",") . " };";
 
-	// 
-	$flux .= "
-<!-- "._LILO_PREFIX." START -->
-$lilo_config_vars
-<script type='text/javascript' src='/".compacte(find_in_path('javascript/lilo_login.js'), 'js')."'></script>
-<link rel='stylesheet' href='/".compacte(find_in_path('lilo_public.css'), 'css')."' type='text/css' />
-$lilo_css_fixed_ie6
-<!-- "._LILO_PREFIX." END -->
-		";
+	if($page == 'login') {
+	
+		$lilo_css_insert_head = 
+		// CSS
+		"
+			#lilo_login {
+				font: normal 10px/normal 'Myriad Web Pro', Verdana, Arial, Helvetica, sans-serif;
+				color: #000;
+				background: #fff;
+				text-align: left;
+				white-space: nowrap;
+				display: block;
+				border: none;
+				position: static;
+				margin: 0;
+				padding: 0;
+				height: auto;
+				width: auto;
+			}
+			#lilo_login label, #lilo_login .forml {
+				height: 1.4em;
+				width: auto;
+				display:block;
+			}
+		"; // end $lilo_css_insert_head
+
+		$lilo_js_insert_head .= 
+		// Javascript
+		"
+			var alea_actuel = '', alea_futur = '';
+		
+			$('#var_login_id').blur(function(){
+				if($(this).val().length) {
+					$.ajax({
+						type: 'post'
+						, url: $('#lilo_url_action').val()
+						, data: {var_login: $('#var_login_id').val(), url: $('input[@name=url]').val()}
+						, success: function(data) {
+							var result = data.split(' ');
+							var id_auteur = result[0];
+							alea_actuel = result[1];
+							alea_futur = result[2];
+							var logo_src = result[3];
+							$('input[@name=session_password_md5]').val(alea_actuel);
+							$('input[@name=next_session_password_md5]').val(alea_futur);
+							/* change logo uniquement si OK et page login */
+							if((login_voir_logo=='oui') && logo_src.length) {
+								$('img.lilo-logo').attr({ src: logo_src, alt: 'Logo auteur' });
+							}
+							return true;
+						}
+						, error: function(xmlhttprequest, type, e) {
+							if(lilo_config['login_identifiant_inconnu']) {
+								alert(lilo_config['login_identifiant_inconnu']);
+							}
+						}
+					}); /* end $.ajax */
+				} /* end if */
+			}); /* end blur */
+			
+			$('#lilo_login').submit( function() {
+				if (
+					(this.session_password.value.length > 0)
+					&& (this.var_login.value.length > 0)
+					) {
+					this.session_password_md5.value = calcMD5(alea_actuel + this.session_password.value);
+					this.next_session_password_md5.value = calcMD5(alea_futur + this.session_password.value);
+					this.session_login_hidden.value = this.var_login.value;
+					this.session_password.value = ''; 
+					return(true);
+					}
+				return(false);
+			}); /* end submit */
+		"; // end $lilo_js_insert_head
+		
+	} // end if($page == 'login')
+	
+	else {
+	
+		// si pas dans la page login, le css et js pour la boite statut
+		
+		$lilo_css_insert_head = 
+		// CSS
+		"
+			#lilo-statut-public {
+				font: normal 11px/normal 'Myriad Web Pro', Verdana, Arial, Helvetica, sans-serif;
+				color: #fff;
+				background: #00f;
+				height: auto;
+				border: 1px solid black;
+				z-index:1024;
+				margin:0;
+				padding:2px;
+				text-align:left;
+				display:table;
+			}
+			#lilo-statut-public .row {
+				display:table-row; font-size:100%;
+			}
+			#lilo-statut-public * {
+				margin:0; padding:0;
+			}
+			#lilo-statut-public #lilo-tete {
+				width:26px; height:26px;
+				margin-right:2px;
+				display:block;
+				float:left;
+				height:100%;
+				padding:1px;
+			}
+			#lilo-statut-public>#lilo-tete {
+				display:table-cell;
+				float:none;
+			}
+			#lilo-statut-public #lilo-tete img {
+				width:24px; height:24px; display:block;
+			}
+			#lilo-statut-public #lilo-buste {
+				display:block; height:24px; padding:0; line-height:1.4em; height: auto;
+			}
+			#lilo-statut-public>#lilo-buste {
+				display:table-cell;
+				padding-left:24px;
+				font-size:90%;
+			}
+			#lilo-statut-public .lilo-nom {
+				font-weight:700;
+			}
+			#lilo-statut-public .lilo-login {
+				font-size:75%; text-align:center;
+			}
+			#lilo-statut-public .spip-admin-bloc-lilo {
+			}
+			#lilo-statut-public .spip-admin-boutons-lilo {
+				white-space: nowrap;
+			}
+			#lilo-statut-public a {
+				display:block;
+				color: #ff0;
+				text-decoration: underline;
+				margin:3px 0 0 !important;
+				line-height:1.4em;
+			}
+		"; // end $lilo_css_insert_head
+
+		$lilo_js_insert_head .= 
+		// Javascript
+		"
+			$('#lilo-ventre').hide();
+			$('#lilo-statut-public').hover(function(){
+				$('#lilo-ventre').show('slow');
+			 },function(){
+				$('#lilo-ventre').hide('slow');
+			});
+		"; // end $lilo_js_insert_head
+		
+	} // end else
+	
+	$lilo_css_insert_head = lilo_envelopper_script($lilo_css_insert_head, 'css');
+	$lilo_js_insert_head = lilo_envelopper_script($lilo_js_insert_head, 'js');
+		
+	// compacter
+	//$lilo_js_insert_head = compacte_js($lilo_js_insert_head); // pas glop! génère des [ho|e]rreurs
+	$lilo_js_insert_head = lilo_compacter_script($lilo_js_insert_head);
+	$lilo_css_insert_head = lilo_compacter_script($lilo_css_insert_head);
+	
+	// inclure
+	$flux .= "\n<!-- "._LILO_PREFIX." -->\n" . $lilo_css_insert_head . $lilo_js_insert_head . "<!-- /"._LILO_PREFIX." -->\n";
 
 	return ($flux);
+	
 } // end lilo_insert_head()
+
+function lilo_envelopper_script ($s, $type) {
+	switch($type) {
+		case 'css':
+			$s = "
+				<style type='text/css'>
+				<!--
+				" 
+				. $s
+				. "
+				-->
+				</style>
+			";
+			break;
+		case 'js':
+			$s = "
+				<script language='JavaScript' type='text/javascript'>
+				jQuery().ready(function(){
+				" 
+				. $s
+				. "
+				});
+				</script>
+			";
+			break;
+		default:
+			$s = "\n\n<!-- erreur envelopper: type inconnu -->\n\n";
+	}
+	return($s);
+}
+
+// version locale de compacte.
+// ne pas mettre de commentaires en // dans le source. N'est pas pris en charge ici.
+function lilo_compacter_script ($s) {
+	// supprimer les commentaires entre /**/
+	$s = preg_replace('=/\*.*\*/=Ums','',$s);
+	// supprimer les espaces en trop
+	$s = preg_replace('=[[:space:]]+=', ' ', $s);
+	return($s);
+}
+
 ?>
