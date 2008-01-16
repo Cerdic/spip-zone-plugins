@@ -1,5 +1,6 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	'affichage' => 'affichage',
 	'calendriers' => 'Calendriers',
 	'cal_par_mois' => 'calendrier mensuel',
 	'navigation' => 'navigation',
