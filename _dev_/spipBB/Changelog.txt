@@ -2,6 +2,9 @@
 
  * Correction bug emoticons : revert sur formulaire/forum ...
  * A priori on peut diviser un thread dans le même forum pour sérarer un fil en deux tout simplement par exemple.
+ * Debut des modifications pour utiliser un avatar pour tous - reporte a une version ulterieure
+ * Passage en 0.4.4 : fin des evolutions prevues (avec report)
+ 
 
 
 2008-01-15  chryjs  <chryjs!@!free!.!fr>
