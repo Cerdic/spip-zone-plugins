@@ -338,9 +338,9 @@ function exec_spiplistes_liste_gerer () {
 			. __boite_alerte (_T('spiplistes:Attention_suppression_liste')."<br />"._T('spiplistes:Confirmez_requete'), true)
 			. "<form name='form_suppr_liste' id='form_suppr_liste' method='post' action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE, "")."'>\n"
 			. "<div class='verdana2' style='text-align:right;'>\n"
-			. "<input type='hidden' name='id_liste' value='$id_liste'>\n"
-   		. "<label for='supprimer_liste_confirme'>"._T('spiplistes:Confirmer_la_suppression_de_la_liste')."# $id_liste : </label>\n"
-   		. "<input class='fondo' type='submit' name='btn_supprimer_liste_confirme' value='"._T('bouton_valider')."' id='supprimer_liste_confirme'>\n"
+			. "<input type='hidden' name='id_liste' value='$id_liste' />\n"
+   		. "<label>"._T('spiplistes:Confirmer_la_suppression_de_la_liste')."# $id_liste : \n"
+   		. "<input class='fondo' type='submit' name='btn_supprimer_liste_confirme' value='"._T('bouton_valider')."' /></label>\n"
 			. "</div>\n"
 			. "</form>\n"
 			. "<br />\n"
