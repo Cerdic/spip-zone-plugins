@@ -2,7 +2,7 @@
 
 [(#REM) c: 23/12/7 petite manip pour recuperer eventuellement la rubrique]
 #SET{id_rubrique,#ENV{id_rubrique}}
-<BOUCLE_selart(ARTICLES){id_article?}> </BOUCLE_selart>#SET{id_rubrique,#ID_RUBRIQUE}</B_selart>
+<BOUCLE_selart(ARTICLES){id_article?}>#SET{id_rubrique,#ID_RUBRIQUE}</BOUCLE_selart>
 [(#REM) c: 23/12/7 petite manip pour recuperer eventuellement l'identifiant auteur]
 #SET{id_auteur,#ENV{id_auteur}}
 [(#ENV{id_auteur}|=={''}|?{#SET{id_auteur,#SESSION{id_auteur}},''})]
