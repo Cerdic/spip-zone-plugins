@@ -20,7 +20,6 @@
 		  Inscription2
 	</prefix>
 	<necessite id="cfg" version="[1.0.7;]" />
-	<necessite id="compat9919" version="[1.9.3.1;]" />
 	<necessite id="SPIP" version='[1.9262;]' />
 	<install>base/inscription2_installer.php</install>
 	<options>
@@ -35,11 +34,6 @@
 	</pipeline>
 	<pipeline>
 		<nom>affichage_final</nom>
-		<inclure>inscription2_ajouter_onglets.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<action>ajouter_onglets</action>
 		<inclure>inscription2_ajouter_onglets.php</inclure>
 	</pipeline>
 	<pipeline>
