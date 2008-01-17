@@ -1,0 +1,139 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+[(#REM) Lien vers le flux RSS de la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
+</head>
+
+<body class="page_panier">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de la rubrique ]
+		<div id="contenu">
+							
+<!-- Titre de la rubrique -->
+
+				<div class="titrePage">
+				<h2>Mon compte : mes adresses de livraison </h2>
+				</div>
+
+<!-- Contenu de la page -->
+
+				<div class="sousTitrePage">
+				<h3>Mes adresses de livraison</h3>
+				</div>
+	
+			<THELIA_adr type="ADRESSE" client="THELIA-CLIENT_ID">
+			
+				<div class="textePage">
+				THELIA-LIBELLE
+				</div>
+				
+			<a href="#URL_PAGE{livraison_modifier,adresse=THELIA-ID}">Modifier cette adresse<br />
+			</a><a href="THELIA-SUPPRURL">Supprimer cette adresse </a>
+			</THELIA_adr>
+				
+				<div class="separation">
+				</div>
+
+				<div class="sousTitrePage">
+				<h3>Ajouter une nouvelle adresse de livraison</h3>
+				</div>
+				
+			<form action="#URL_PAGE{adresse}" method="post" name="nouveau" id="nouveau">
+            <input type="hidden" name="thelia_action" value="creerlivraison" />
+			<table width="775" border="0" cellspacing="0" cellpadding="5">
+  				<tr>
+    				<td width="190" class="ligneTableau">Lib&eacute;ll&eacute; de l'adresse* </td>
+    				<td width="565" class="ligneTableau"><input name="libelle" type="text" class="zoneDeSaisie"/></td>
+  				</tr>
+				<tr>
+   					<td class="ligneTableau">Civilit&eacute;*</td>
+   					<td class="ligneTableau">
+					<select name="raison" size="1" class="zoneDeSaisie">
+                	<option value="" selected="selected">Choisissez ...</option>
+                	<option value="1">Madame</option>
+               		<option value="2">Mademoiselle</option>
+               		<option value="3">Monsieur</option>
+               		</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="ligneTableau">Nom*</td>
+					<td class="ligneTableau"><input type="text" name="nom" class="zoneDeSaisie" /></td>
+				</tr>
+  				<tr>
+  				  	<td class="ligneTableau">Pr&eacute;nom*</td>
+  				  	<td class="ligneTableau"><input type="text" name="prenom" class="zoneDeSaisie" /></td>
+			  	</tr>
+  				<tr>
+  				  	<td class="ligneTableau">Adresse*</td>
+  				  	<td class="ligneTableau"><input type="text" name="adresse1" class="zoneDeSaisie" /></td>
+			  	</tr>
+  				<tr>
+  				  	<td class="ligneTableau">Adresse (suite) </td>
+  				  	<td class="ligneTableau"><input type="text" name="adresse2" class="zoneDeSaisie" /></td>
+			  	</tr>
+  				<tr>
+  				  	<td class="ligneTableau">Compl&eacute;ment d'adresse </td>
+ 				  	<td class="ligneTableau"><input type="text" name="adresse3" class="zoneDeSaisie" /></td>
+			  	</tr>
+  				<tr>
+  				  	<td class="ligneTableau">Code postal*</td>
+  				  	<td class="ligneTableau"><input type="text" name="cpostal" class="zoneDeSaisie" /></td>
+			  	</tr>
+  				<tr>
+  				  	<td class="ligneTableau">Ville*</td>
+  				  	<td class="ligneTableau"><input type="text" name="ville" class="zoneDeSaisie" /></td>
+			  	</tr>
+  				<tr>
+  				  	<td class="ligneTableau">Pays*</td>
+  				  	<td class="ligneTableau">
+				  	<select name="pays" size="1"  class="zoneDeSaisie">
+				  	<option value="" selected="selected">Choisissez ...</option>
+				  	<THELIA_pays type="PAYS" zdefinie="1">           
+				  	<option value="THELIA-ID">THELIA-TITRE</option>
+				  	</THELIA_pays>
+				  	</select>
+					</td>
+			  	</tr>
+				<tr>
+  				  	<td class="ligneTableau">T&eacute;l&eacute;phone * </td>
+  				  	<td class="ligneTableau"><input type="text" name="tel" class="zoneDeSaisie" /></td>
+			  	</tr>
+			 </table>
+			 
+			 	<div class="boutonMonCompteContenu">
+				<input type="submit" value="Valider" />
+				</div>
+			</form>
+
+		</div>
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>

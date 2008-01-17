@@ -1,0 +1,63 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+[(#REM) Lien vers le flux RSS de la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
+</head>
+
+<body class="page_panier">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de la rubrique ]
+		<div id="contenu">
+					
+<!-- Titre de la rubrique -->
+
+				<div class="titrePage">
+				<h2>Je choisis un mode de r&egrave;glement : par virement  </h2>
+				</div>
+				
+<!-- contenu de la page -->
+	
+			Nous vous remercions de la confiance que vous nous accordez.<br />
+			Un email recapitulatif de votre commande vous a &eacute;t&eacute; envoy&eacute; &agrave; l'adresse: THELIA-CLIENT_EMAIL.<br />
+			Votre commande sera valid&eacute;e par nos services &agrave; r&eacute;ception de votre paiement.<br /><br />
+			Ecrire ici les infos sur le r&eacute;glement par virement ...<br /><br />
+					
+			<THELIA_cmd type="COMMANDE" ref="THELIA-COMMANDE_REF">	
+			N&deg; DE COMMANDE : THELIA-REF <br />
+			DATE : THELIA-DATE<br />
+			TOTAL : THELIA-TOTCMDPORT &euro;<br />	
+			</THELIA_cmd>
+
+
+		</div> <!--fin contenu-->
+
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>

@@ -1,0 +1,52 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+[(#REM) Lien vers le flux RSS de la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
+</head>
+
+<body class="page_panier">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de la rubrique ]
+		<div id="contenu">
+				
+<!-- Titre de la rubrique -->
+
+				<div class="titrePage">
+				<h2>Merci</h2>
+				</div>
+
+<!-- Contenu de la page -->
+	  <p class="commentaires">Notre boutique vous remercie de votre achat</p>
+          <p class="commentaires">Bonne navigation et à bientôt</p>
+		</div> <!--fin contenu-->
+
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>

@@ -1,0 +1,75 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+[(#REM) Lien vers le flux RSS de la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
+</head>
+
+<body class="page_panier">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de la rubrique ]
+		<div id="contenu">
+		
+			
+<!-- Titre de la rubrique -->
+
+				<div class="titrePage">
+				<h2>Visualiser mes commandes </h2>
+				</div>
+
+			
+<!-- Contenu de la page -->
+
+			<table width="775" border="0" cellspacing="0" cellpadding="5">
+				<tr>
+					<td width="285" class="enteteTableau">N&deg; de la commande </td>
+    				<td width="100" class="enteteTableau">Date</td>
+    				<td width="100" class="enteteTableau">Montant</td>
+   					<td width="100" class="enteteTableau">Statut</td>
+   					<td width="140" class="enteteTableau">Voir la commande</td>
+  				</tr>
+			</table>
+			<THELIA_cmd type="COMMANDE" client="THELIA-CLIENT_ID">
+			<table width="775" border="0" cellspacing="0" cellpadding="5">
+  				<tr>
+    				<td width="285" class="ligneTableau"><span class="TexteColonne100">THELIA-REF</span></td>
+    				<td width="100" class="ligneTableau">THELIA-DATE</td>
+    				<td width="100" class="ligneTableau"><span class="TexteColonne100">THELIA-TOTCMDPORT</span></td>
+   					<td width="100" class="ligneTableau"><span class="TexteColonne100">THELIA-STATUT</span></td>
+   					<td width="140" class="ligneTableau"><a href="#URL_PAGE{commande_detail,commande=THELIA-REF}">Voir la commande</a></td>
+  				</tr>
+			</table>
+			</THELIA_cmd>
+
+
+		</div> <!--fin contenu-->
+
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>

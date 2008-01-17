@@ -25,6 +25,7 @@
 ?>
 <?php
 
+	
 	/* Gestion des boucles */
 	include_once("classes/Rubrique.class.php");
 	include_once("classes/Rubriquedesc.class.php");
@@ -45,7 +46,6 @@
 	include_once("classes/Document.class.php");
 	include_once("classes/Documentdesc.class.php");
 	include_once("classes/Accessoire.class.php");
-	include_once("classes/Boutique.class.php");
 	include_once("classes/Pays.class.php");
 	include_once("classes/Paysdesc.class.php");
 	include_once("classes/Zone.class.php");
@@ -70,10 +70,9 @@
 	/* Gestion des boucles de type Rubrique*/
 	function boucleRubrique($texte, $args){
 		global $id_rubrique;
-		// rŽcupŽration des arguments
+		// récupération des arguments
 		$id = lireTag($args, "id");
 		$parent = lireTag($args, "parent");
-		$boutique = lireTag($args, "boutique");
 		$courante = lireTag($args, "courante");
 		$pasvide = lireTag($args, "pasvide");
 		$ligne = lireTag($args, "ligne");
@@ -92,13 +91,16 @@
 		$rubrique = new Rubrique();
 		$rubriquedesc = new Rubriquedesc();
 		
-		// prŽparation de la reqžete
+		// preparation de la requete
+		
+		if($ligne == "") $ligne="1";
+		
+		$search.=" and $rubrique->table.ligne=\"$ligne\"";
+		
 		if($id!="")  $search.=" and $rubrique->table.id in ($id)";
 		if($parent!="") $search.=" and $rubrique->table.parent=\"$parent\"";
-		if($boutique != "") $search .=" and $rubrique->table.boutique='$boutique'";
 		if($courante == "1") $search .=" and $rubrique->table.id='$id_rubrique'";
 		else if($courante == "0") $search .=" and $rubrique->table.id!='$id_rubrique'";
-		if($ligne!="") $search.=" and $rubrique->table.ligne=\"$ligne\"";
 		if($num!="") $limit .= " limit $deb,$num";
 		if($exclusion!="") $search .= " and $rubrique->table.id not in($exclusion)";
 		
@@ -124,6 +126,7 @@
 			
 			if($pasvide != ""){
 						$rec = arbreBoucle($rubrique->id);
+						if(substr($rec, strlen($rec)-1) == ",") $rec = substr($rec, 0, strlen($rec)-1);
 						if($rec) $virg=",";
 						else $virg="";
 						
@@ -172,10 +175,9 @@
 	
 		global $id_dossier;
 		
-		// rŽcupŽration des arguments
+		// récupération des arguments
 		$id = lireTag($args, "id");
 		$parent = lireTag($args, "parent");
-		$boutique = lireTag($args, "boutique");
 		$deb = lireTag($args, "deb");
 		$num = lireTag($args, "num");
 		$courant = lireTag($args, "courant");
@@ -189,13 +191,14 @@
 		
 		if(!$deb) $deb=0;
 		
-		// prï¿½aration de la requï¿½e
+		if($ligne == "") $ligne="1";
+		
+		// preparation de la requete
+		$search .=" and ligne='$ligne'";
 		if($id!="")  $search.=" and id=\"$id\"";
 		if($parent!="") $search.=" and parent=\"$parent\"";
-		if($boutique != "") $search .=" and boutique='$boutique'";
 		if($courant == "1") $search .=" and id='$id_dossier'";
 		else if($courant == "0") $search .=" and id!='$id_dossier'";
-		if($ligne != "") $search .=" and ligne='$ligne'";
 		if($num!="") $limit .= " limit $deb,$num";
 		if($exclusion!="") $search .= " and id not in($exclusion)";
 		
@@ -252,7 +255,7 @@
 	
 	function boucleImage($texte, $args){
 
-		// rŽcupŽration des arguments
+		// récupération des arguments
 		$produit = lireTag($args, "produit");
 		$id = lireTag($args, "id");
 		$num = lireTag($args, "num");
@@ -315,6 +318,11 @@
 			$imagedesc->charger($image->id);
 			$temp = $texte;
 			
+			$temp = str_replace("#FGRANDE", "#FICHIER", $temp);
+			$temp = str_replace("#FPETITE", "#FICHIER", $temp);
+			$temp = str_replace("#GRANDE", "#IMAGE", $temp);
+			$temp = str_replace("#PETITE", "#IMAGE", $temp);
+			
 			if($image->produit != 0){
 					$pr->charger_id($image->produit);
 					$prdesc->charger($image->produit);
@@ -325,15 +333,10 @@
 					
 					
 					if(!$largeur && !$hauteur) 
-						$temp = str_replace("#GRANDE", "client/gfx/photos/produit/grande/" . $image->fichier, $temp);
-					else $temp = str_replace("#GRANDE",  "fonctions/redimlive.php?nomorig=../client/gfx/photos/produit/grande/" . $image->fichier . "&width=$largeur&height=$hauteur" . "&opacite=" . $opacite . "&nb=" . "$noiretblanc" . "&miroir=" . "$miroir", $temp);
+						$temp = str_replace("#IMAGE", "client/gfx/photos/produit/" . $image->fichier, $temp);
+					else $temp = str_replace("#IMAGE",  "fonctions/redimlive.php?nomorig=../client/gfx/photos/produit/" . $image->fichier . "&amp;width=$largeur&amp;height=$hauteur" . "&amp;opacite=" . $opacite . "&amp;nb=" . "$noiretblanc" . "&amp;miroir=" . "$miroir", $temp);
 					
-					if(!$largeur && !$hauteur) 
-						$temp = str_replace("#PETITE",  "client/gfx/photos/produit/petite/" . $image->fichier, $temp);	
-					else $temp = str_replace("#PETITE",  "fonctions/redimlive.php?nomorig=../client/gfx/photos/produit/petite/" . $image->fichier . "&width=$largeur&height=$hauteur" . "&opacite=" . $opacite . "&nb=" . "$noiretblanc" . "&miroir=" . "$miroir", $temp);
-					
-						$temp = str_replace("#FPETITE",  "client/gfx/photos/produit/petite/" . $image->fichier, $temp);
-						$temp = str_replace("#FGRANDE",  "client/gfx/photos/produit/grande/" . $image->fichier, $temp);
+					$temp = str_replace("#FICHIER",  "client/gfx/photos/produit/" . $image->fichier, $temp);
 
 			}
 			
@@ -344,15 +347,10 @@
 				$temp = str_replace("#RUBTITRE", $rudesc->titre, $temp);
 			
 					if(!$largeur && !$hauteur) 
-						$temp = str_replace("#GRANDE", "client/gfx/photos/rubrique/grande/" . $image->fichier, $temp);
-					else $temp = str_replace("#GRANDE",  "fonctions/redimlive.php?nomorig=../client/gfx/photos/rubrique/grande/" . $image->fichier . "&width=$largeur&height=$hauteur" . "&opacite=" . $opacite . "&nb=" . "$noiretblanc" . "&miroir=" . "$miroir", $temp);
-					
-					if(!$largeur && !$hauteur) 
-						$temp = str_replace("#PETITE",  "client/gfx/photos/rubrique/petite/" . $image->fichier, $temp);	
-					else $temp = str_replace("#PETITE",  "fonctions/redimlive.php?nomorig=../client/gfx/photos/rubrique/petite/" . $image->fichier . "&width=$largeur&height=$hauteur" . "&opacite=" . $opacite . "&nb=" . "$noiretblanc" . "&miroir=" . "$miroir", $temp);
-					
-						$temp = str_replace("#FPETITE",  "client/gfx/photos/rubrique/petite/" . $image->fichier, $temp);
-						$temp = str_replace("#FGRANDE",  "client/gfx/photos/rubrique/grande/" . $image->fichier, $temp);
+						$temp = str_replace("#IMAGE", "client/gfx/photos/rubrique/" . $image->fichier, $temp);
+					else $temp = str_replace("#IMAGE",  "fonctions/redimlive.php?nomorig=../client/gfx/photos/rubrique/" . $image->fichier . "&amp;width=$largeur&amp;height=$hauteur" . "&amp;opacite=" . $opacite . "&amp;nb=" . "$noiretblanc" . "&amp;miroir=" . "$miroir", $temp);
+				
+					$temp = str_replace("#FICHIER",  "client/gfx/photos/rubrique/" . $image->fichier, $temp);
 
 			}
 	
@@ -363,15 +361,10 @@
 				$temp = str_replace("#RUBTITRE", $rudesc->titre, $temp);
 			
 					if(!$largeur && !$hauteur) 
-						$temp = str_replace("#GRANDE", "client/gfx/photos/dossier/grande/" . $image->fichier, $temp);
-					else $temp = str_replace("#GRANDE",  "fonctions/redimlive.php?nomorig=../client/gfx/photos/dossier/grande/" . $image->fichier . "&width=$largeur&height=$hauteur" . "&opacite=" . $opacite . "&nb=" . "$noiretblanc" . "&miroir=" . "$miroir", $temp);
+						$temp = str_replace("#IMAGE", "client/gfx/photos/dossier/" . $image->fichier, $temp);
+					else $temp = str_replace("#IMAGE",  "fonctions/redimlive.php?nomorig=../client/gfx/photos/dossier/" . $image->fichier . "&amp;width=$largeur&amp;height=$hauteur" . "&amp;opacite=" . $opacite . "&amp;nb=" . "$noiretblanc" . "&amp;miroir=" . "$miroir", $temp);
 					
-					if(!$largeur && !$hauteur) 
-						$temp = str_replace("#PETITE",  "client/gfx/photos/dossier/petite/" . $image->fichier, $temp);	
-					else $temp = str_replace("#PETITE",  "fonctions/redimlive.php?nomorig=../client/gfx/photos/dossier/petite/" . $image->fichier . "&width=$largeur&height=$hauteur" . "&opacite=" . $opacite . "&nb=" . "$noiretblanc" . "&miroir=" . "$miroir", $temp);
-					
-						$temp = str_replace("#FPETITE",  "client/gfx/photos/dossier/petite/" . $image->fichier, $temp);
-						$temp = str_replace("#FGRANDE",  "client/gfx/photos/dossier/grande/" . $image->fichier, $temp);
+					$temp = str_replace("#FICHIER",  "client/gfx/photos/dossier/" . $image->fichier, $temp);
 
 			}	
 	
@@ -382,20 +375,14 @@
 					$temp = str_replace("#PRODUIT", $image->contenu, $temp);
 					
 					if(!$largeur && !$hauteur) 
-						$temp = str_replace("#GRANDE", "client/gfx/photos/contenu/grande/" . $image->fichier, $temp);
-					else $temp = str_replace("#GRANDE",  "fonctions/redimlive.php?nomorig=../client/gfx/photos/contenu/grande/" . $image->fichier . "&width=$largeur&height=$hauteur". "&opacite=" . $opacite . "&nb=" . "$noiretblanc" . "&miroir=" . "$miroir", $temp);
+						$temp = str_replace("#IMAGE", "client/gfx/photos/contenu/" . $image->fichier, $temp);
+					else $temp = str_replace("#IMAGE",  "fonctions/redimlive.php?nomorig=../client/gfx/photos/contenu/" . $image->fichier . "&amp;width=$largeur&amp;height=$hauteur". "&amp;opacite=" . $opacite . "&amp;nb=" . "$noiretblanc" . "&amp;miroir=" . "$miroir", $temp);
 					
-					if(!$largeur && !$hauteur) 
-						$temp = str_replace("#PETITE",  "client/gfx/photos/contenu/petite/" . $image->fichier, $temp);	
-					else $temp = str_replace("#PETITE",  "fonctions/redimlive.php?nomorig=../client/gfx/photos/contenu/petite/" . $image->fichier . "&width=$largeur&height=$hauteur". "&opacite=" . $opacite . "&nb=" . "$noiretblanc" . "&miroir=" . "$miroir", $temp);
-					
-						$temp = str_replace("#FPETITE",  "client/gfx/photos/contenu/petite/" . $image->fichier, $temp);
-						$temp = str_replace("#FGRANDE",  "client/gfx/photos/contenu/grande/" . $image->fichier, $temp);
+						$temp = str_replace("#FICHIER",  "client/gfx/photos/contenu/" . $image->fichier, $temp);
 
 			}	
 	
 				$temp = str_replace("#ID",  $image->id, $temp);	
-				$temp = str_replace("#FPETITE",  "client/gfx/photos/rubrique/" . $image->fichier, $temp);	
 				$temp = str_replace("#TITRE",  $imagedesc->titre, $temp);	
 				$temp = str_replace("#CHAPO",  $imagedesc->chapo, $temp);	
 				$temp = str_replace("#DESCRIPTION",  $imagedesc->description, $temp);	
@@ -415,7 +402,7 @@
 
 	/* Gestion des boucles de type Client*/
 	function boucleClient($texte, $args){
-		// rŽcupŽration des arguments
+		// récupération des arguments
 		$id = lireTag($args, "id");
 		$ref = lireTag($args, "ref");
 		$raison = lireTag($args, "raison");
@@ -430,7 +417,7 @@
 		$search="";
 		$res="";
 		
-		// prï¿½aration de la requï¿½e
+		// preparation de la requete
 		if($id!="")  $search.=" and id=\"$id\"";
 		if($ref!="")  $search.=" and ref=\"$ref\"";
 		if($raison!="")  $search.=" and raison=\"$raison\"";
@@ -454,7 +441,8 @@
 				$temp = str_replace("#ID", "$row->id", $texte);		
 				$temp = str_replace("#REF", "$row->ref", $temp);		
 				$temp = str_replace("#RAISON", "$row->raison", $temp);		
-				$temp = str_replace("#ENTREPRISE", "$row->entreprise", $temp);					
+				$temp = str_replace("#ENTREPRISE", "$row->entreprise", $temp);
+				$temp = str_replace("#SIRET", "$row->siret", $temp);					
 				$temp = str_replace("#NOM", "$row->nom", $temp);					
 				$temp = str_replace("#PRENOM", "$row->prenom", $temp);					
 				$temp = str_replace("#TELFIXE", "$row->telfixe", $temp);	
@@ -484,7 +472,7 @@
 	
 	function boucleDevise($texte, $args){
 
-		// rŽcupŽration des arguments
+		// récupération des arguments
 		$produit = lireTag($args, "produit");
 		$id = lireTag($args, "id");
 		$somme = lireTag($args, "somme");
@@ -509,15 +497,20 @@
 	
 		$nbres = mysql_numrows($resul);
 		if(!$nbres) return "";
-
+			
 		while( $row = mysql_fetch_object($resul)){
 			$devise->charger($row->id);
 			$prix = round($prod->prix * $devise->taux, 2);
 			$prix2 = round($prod->prix2 * $devise->taux, 2);
 			$convert = round($somme * $devise->taux, 2);
 			$total = round( $_SESSION['navig']->panier->total() * $devise->taux, 2);
+		
+			$prix = number_format($prix, 2, ".", ""); 
+			$prix2 = number_format($prix2, 2, ".", ""); 
+			$total = number_format($total, 2, ".", ""); 
+			$convert = number_format($convert, 2, ".", ""); 
+		
 			$temp = str_replace("#PRIX2",  "$prix2", $texte);	
-			
 			$temp = str_replace("#PRIX", "$prix", $temp);
 			$temp = str_replace("#TOTAL", "$total", $temp);
 			$temp = str_replace("#CONVERT", "$convert", $temp);
@@ -534,7 +527,7 @@
 
 	function boucleDocument($texte, $args){
 
-		// rŽcupŽration des arguments
+		// récupération des arguments
 		$produit = lireTag($args, "produit");
 		$rubrique = lireTag($args, "rubrique");
 		$nb = lireTag($args, "nb");
@@ -580,9 +573,9 @@
 			$document->charger($row->id);
 			$documentdesc->charger($document->id);
 			$temp = str_replace("#TITRE", "$documentdesc->titre", $texte);
-			$temp = str_replace("#CHAPO", "$documentdesc->chapo", $texte);
-			$temp = str_replace("#DESCRIPTION", "$documentdesc->description", $texte);
-			$temp = str_replace("#FICHIER", "client/document/" . $document->fichier, $texte);
+			$temp = str_replace("#CHAPO", "$documentdesc->chapo", $temp);
+			$temp = str_replace("#DESCRIPTION", "$documentdesc->description", $temp);
+			$temp = str_replace("#FICHIER", "client/document/" . $document->fichier, $temp);
 
 			$res .= $temp;
 		}
@@ -595,18 +588,23 @@
 
 	function boucleAccessoire($texte, $args){
 
-		// rŽcupŽration des arguments
+		// récupération des arguments
 		$produit = lireTag($args, "produit");
+		$deb = lireTag($args, "deb");
 		$num = lireTag($args, "num");
 		$aleatoire = lireTag($args, "aleatoire");
+		$classement = lireTag($args, "classement");
 		
 		$search="";
-			
-		if($produit) $search .= " and produit=\"$produit\"";
 		
-		if($num!="") $limit .= " limit 0,$num";
+		if(!$deb) $deb=0;	
+		if(!$num) $num = "999999999";
+		
+		if($produit) $search .= " and produit=\"$produit\"";
+		$limit .= " limit $deb,$num";
 
-		if($aleatoire) $order = "order by "  . " RAND()";		
+		if($classement == "manuel") $order = "order by classement";		
+		else if($aleatoire) $order = "order by "  . " RAND()";		
 		
 		
 		$accessoire = new Accessoire();
@@ -629,13 +627,14 @@
 	}
 	
 	function boucleProduit($texte, $args, $type=0){
-			global $page_thelia, $totbloc, $ref, $page_theliasess;
+			global $page_thelia, $totbloc, $ref, $pagesess;
 			
-			// rŽcupŽration des arguments
+			// récupération des arguments
 			$rubrique = lireTag($args, "rubrique");
-			$boutique = lireTag($args, "boutique");
 			$deb = lireTag($args, "deb");
 			$num = lireTag($args, "num");
+			$passage = lireTag($args, "passage");
+			$ligne = lireTag($args, "ligne");
 			$bloc = lireTag($args, "bloc");
 			$nouveaute = lireTag($args, "nouveaute");
 			$promo = lireTag($args, "promo");
@@ -648,34 +647,32 @@
 			$aleatoire = lireTag($args, "aleatoire");
 			$prixmin = lireTag($args, "prixmin");
 			$prixmax = lireTag($args, "prixmax");
-			$nbmensualite = lireTag($args, "nbmensualite");
-			$taux = lireTag($args, "taux");
 			$caracteristique = lireTag($args, "caracteristique");
 			$caracdisp = lireTag($args, "caracdisp");
 			$caracval = lireTag($args, "caracval");
+			$typech = lireTag($args, "typech");
 			$declinaison = lireTag($args, "declinaison");			
 			$declidisp = lireTag($args, "declidisp");
 			$declival = lireTag($args, "declival");
+			$stockmini = lireTag($args, "stockmini");
 			$declistockmini = lireTag($args, "declistockmini");
 			$courant = lireTag($args, "courant");
 			$profondeur = lireTag($args, "profondeur");		
 			$exclusion = lireTag($args, "exclusion");	
 			$poids = lireTag($args, "poids");
+			$stockvide = lireTag($args, "stockvide");
 						
 			if($bloc) $totbloc=$bloc;
 			if(!$deb) $deb=0;
 			
 			if($page_thelia) $_SESSION['navig']->page = $page_thelia;
-			if($page_theliasess == 1) $page_thelia =  $_SESSION['navig']->page;
+			if($pagesess == 1) $page_thelia =  $_SESSION['navig']->page;
 			
 			if(!$page_thelia ||  $page_thelia==1 ) $page_thelia=0; 
 			
 			if(!$totbloc) $totbloc=1;
 			if($page_thelia) $deb = ($page_thelia-1)*$totbloc*$num+$deb; 
-
-			if(!$taux) $taux=1;
-			if(!$nbmensualite) $nbmensualite=1;
-			
+	
 			// initialisation de variables
 			$search = "";
 			$order = "";
@@ -685,7 +682,7 @@
 			$res="";
 			$virg="";
 			
-			// prï¿½aration de la requï¿½e
+			// preparation de la requete
 			
 			if($courant == "1") $search .= " and ref=\"$ref\"";
 			else if($courant == "0") $search .= " and ref!=\"$ref\"";
@@ -699,6 +696,7 @@
 				$tabrub = explode(",", $rubrique);
 				for($compt = 0; $compt<count($tabrub); $compt++){
 					$rec = arbreBoucle($tabrub[$compt], $profondeur);
+					if(substr($rec, strlen($rec)-1) == ",") $rec = substr($rec, 0, strlen($rec)-1);
 					if($rec) $virg=",";
 					$srub .= $tabrub[$compt] . $virg . $rec . $virg;
 				}
@@ -707,18 +705,24 @@
 				 $search .= " and rubrique in($srub)";
 			}
 			
-			$search .= " and ligne=\"1\"";
+			if($ligne == "") $ligne="1";
 
+			$search .= " and ligne=\"$ligne\"";
 			if($id!="") $search .= " and id=\"$id\"";				 
-			if($boutique != "") $search .=" and boutique='$boutique'";
 			if($nouveaute!="") $search .= " and nouveaute=\"$nouveaute\"";
 			if($promo!="") $search .= " and promo=\"$promo\"";
 			if($reappro!="") $search .= " and reappro=\"$reappro\"";
 			if($garantie!="") $search .= " and garantie=\"$garantie\"";
-			if($prixmin!="") $search .= " and prix2>=\"$prixmin\"";
-			if($prixmax!="") $search .= " and prix2<=\"$prixmax\"";
+			if($prixmin!="") $search .= " and ((prix2>=\"$prixmin\" and promo=\"1\") or (prix>=\"$prixmin\" and promo=\"0\"))";
+			if($prixmax!="") $search .= " and ((prix2<=\"$prixmax\" and promo=\"1\") or (prix<=\"$prixmax\" and promo=\"0\"))";
 			if($poids!="") $search .= " and poids<=\"$poids\"";
-						
+			if($stockmini!="") $search .= " and stock>=\"$stockmini\"";
+
+			if (""!=$stockvide) {
+				if (0 < $stockvide) { $search .= " and stock<=\"0\""; }
+				elseif (0 >= $stockvide) { $search .= " and stock>\"0\""; }
+			}
+									
 			if($refp!="") $search .= " and ref=\"$refp\"";
 
 			if($bloc == "-1") $bloc = "999999999";
@@ -740,6 +744,9 @@
 			/* Demande de caracteristiques */
 			if($caracdisp != ""){
 			
+			if(! strstr($caracteristique, "-")) $caracteristique .= "-";
+			if(! strstr($caracdisp, "-")) $caracdisp .= "-";
+			
 			$lcaracteristique = explode("-", $caracteristique);
 			$lcaracdisp = explode("-", $caracdisp);
 			
@@ -756,7 +763,7 @@
 				else $query = "select * from $tcaracval->table where caracteristique='$caracteristique' and caracdisp='$caracdisp'";
 
 				$resul = mysql_query($query);
-				if(!mysql_numrows($resul)) break;
+				if(!mysql_numrows($resul)) return;
 				
 				$liste="";
 				
@@ -784,7 +791,7 @@
 
 				if($caracval == "*") $query = "select * from $tcaracval->table where caracteristique='$caracteristique' and valeur<>''";
 				else if($caracval == "-") $query = "select * from $tcaracval->table where caracteristique='$caracteristique' and valeur=''";
-	
+				else if($typech == "like") $query = "select * from $tcaracval->table where caracteristique='$caracteristique' and valeur like '$caracval'";
 				else $query = "select * from $tcaracval->table where caracteristique='$caracteristique' and valeur ='$caracval'";
 
 				$resul = mysql_query($query);
@@ -806,6 +813,10 @@
 			/* Demande de declinaisons */
 			if($declidisp != ""){
 
+			if(! strstr($declinaison, "-")) $declinaison .= "-";
+			if(! strstr($declidisp, "-")) $declidisp .= "-";
+			if(! strstr($ldeclistockmini, "-")) $ldeclistockmini .= "-";
+				
 			$ldeclinaison = explode("-", $declinaison);
 			$ldeclidisp = explode("-", $declidisp);
 			$ldeclistockmini = explode("-", $declistockmini);
@@ -859,9 +870,7 @@
 			$produit = new Produit();
 			$produitdesc = new Produitdesc();
 			
-			$boutiqueprod = new Boutique();
-			
-			
+		
 			if($motcle){
 				$liste="";
 				
@@ -879,8 +888,8 @@
 				}
 			
 				$liste = substr($liste, 0, strlen($liste) - 2);
-				$query = "select * from $produit->table where id in ($liste) and ligne=1 $limit";
-				$saveReq = "select * from $produit->table where id in ($liste) and ligne=1";
+				$query = "select * from $produit->table where id in ($liste) and ligne=\"$ligne\" $limit";
+				$saveReq = "select * from $produit->table where id in ($liste) and ligne=\"$ligne\"";
 			}
 			
 		else $query = "select * from $produit->table where 1 $search $order $limit";
@@ -896,24 +905,14 @@
 		$saveRes = mysql_query($saveReq);
 		$countRes = mysql_result($saveRes, 0, "totcount") . " ";
 	
-		while( $row = mysql_fetch_object($resul) ){
+		$compt = 0;
 		
+		while( $row = mysql_fetch_object($resul) ){
 			
-			$boutiqueprod->charger($row->boutique);
+			$compt++;
 			
-			if(!$promo){
-				 $prixd3 = round($row->prix/3, 2);	
-				 $prixd6 = round($row->prix/6, 2);
-			}
-        		else {
-				$prixd3 = round($row->prix2/3, 2);
-				$prixd6 = round($row->prix2/6, 2);
-			}
-
-
-			$prixtotcred = round($row->prix2 * $taux / 100 + $row->prix2, 2);
-			$coutcredit = round($prixtotcred-$row->prix2, 2);
-			$mensualite = round($prixtotcred/$nbmensualite, 2);
+			if($passage != "" && $comptbloc>$passage-1)
+			      break;
 			
 			if($num>0) 
 				if($comptbloc>=ceil($countRes/$num) && $bloc!="") continue;
@@ -921,9 +920,7 @@
 			if($comptbloc == 0) $debcourant=0;
 			else $debcourant = $num * ($comptbloc);
 			$comptbloc++;
-			
-			
-		
+						
 			$rubriquedesc = new Rubriquedesc();
 			$rubriquedesc->charger($row->rubrique, $_SESSION['navig']->lang);
 		
@@ -938,6 +935,7 @@
 
 			$prix = $row->prix - ($row->prix * $_SESSION['navig']->client->pourcentage / 100);
 			$prix2 = $row->prix2 - ($row->prix2 * $_SESSION['navig']->client->pourcentage / 100);
+			$ecotaxe = $row->ecotaxe;
 			
 			$pays = new Pays();
 			$pays->charger($_SESSION['navig']->client->pays);
@@ -948,32 +946,32 @@
 			if($_SESSION['navig']->client->type == "1"){
 				$prix = $prix/1.196;
 				$prix2 = $prix2/1.196;
+				$ecotaxe = $row->ecotaxe/1.196;
+				
 			}
 			
 			$prix = round($prix, 2);
 			$prix2 = round($prix2, 2);
 		
-			$prix = number_format($prix, 2); 
-			$prix2 = number_format($prix2, 2); 
+			$prix = number_format($prix, 2, ".", ""); 
+			$prix2 = number_format($prix2, 2, ".", ""); 
 			
 			if($deb != "" && !$page_thelia) $debcourant+=$deb-1;
 
 			$temp = str_replace("#REF", "$row->ref", $temp);
+			$temp = str_replace("#COMPT", "$compt", $temp);
 			$temp = str_replace("#DATE", substr($row->datemodif, 0, 10), $temp);
 			$temp = str_replace("#HEURE", substr($row->datemodif, 11), $temp);
 			$temp = str_replace("#DEBCOURANT", "$debcourant", $temp);
 			$temp = str_replace("#ID", "$row->id", $temp);		
-            $temp = str_replace("#PRIXD3", "$prixd3", $temp);
-            $temp = str_replace("#PRIXD6", "$prixd6", $temp);
- 			$temp = str_replace("#PRIXTOTCRED", "$prixtotcred", $temp);
-            $temp = str_replace("#COUTCREDIT", "$coutcredit", $temp);
-            $temp = str_replace("#MENSUALITE", "$mensualite", $temp);               
 			$temp = str_replace("#PRIX2", "$prix2", $temp);					
 			$temp = str_replace("#PRIX", "$prix", $temp);	
+			$temp = str_replace("#TVA", "$row->tva", $temp);	
+			$temp = str_replace("#ECOTAXE", "$row->ecotaxe", $temp);	
+			$temp = str_replace("#STOCK", "$row->stock", $temp);	
 			$temp = str_replace("#POURCENTAGE", "$pourcentage", $temp);	
 			$temp = str_replace("#RUBRIQUE", "$row->rubrique", $temp);			
 			$temp = str_replace("#PERSO", "$row->perso", $temp);			
-			$temp = str_replace("#QUANTITE", "$row->quantite", $temp);			
 			$temp = str_replace("#APPRO", "$row->appro", $temp);			
 			$temp = str_replace("#POIDS", "$row->poids", $temp);			
 			$temp = str_replace("#TITRE", "$produitdesc->titre", $temp);
@@ -982,13 +980,11 @@
 			$temp = str_replace("#STRIPCHAPO", strip_tags($produitdesc->chapo), $temp);	
 			$temp = str_replace("#DESCRIPTION", "$produitdesc->description", $temp);
 			$temp = str_replace("#STRIPDESCRIPTION", strip_tags($produitdesc->description), $temp);	
-			$temp = str_replace("#URLBOUTIQUE", $boutiqueprod->url, $temp);	
-			$temp = str_replace("#URL", "produit.php?ref=" . "$row->ref" . "&id_rubrique=" . "$row->rubrique", $temp);	
+			$temp = str_replace("#URL", "produit.php?ref=" . "$row->ref" . "&amp;id_rubrique=" . "$row->rubrique", $temp);	
 			$temp = str_replace("#REWRITEURL", rewrite_prod("$row->ref"), $temp);	
 			$temp = str_replace("#GARANTIE", "$row->garantie", $temp);			
-
-			$temp = str_replace("#PANIER", "panier.php?action=" . "ajouter" . "&" . "ref=" . "$row->ref" , $temp);	
-
+			$temp = str_replace("#PANIERAPPEND", "panier.php?action=" . "ajouter" . "&amp;" . "ref=" . "$row->ref" . "&amp;" . "append=1", $temp);	
+			$temp = str_replace("#PANIER", "panier.php?action=" . "ajouter" . "&amp;" . "ref=" . "$row->ref" , $temp);	
 			$temp = str_replace("#RUBTITRE", "$rubriquedesc->titre", $temp);
 			
 			
@@ -1005,9 +1001,9 @@
 	function boucleContenu($texte, $args, $type=0){
 			global $page_thelia, $totbloc, $id_contenu;
 			
-			// rŽcupŽration des arguments
+			// récupération des arguments
 			$dossier = lireTag($args, "dossier");
-			$boutique = lireTag($args, "boutique");
+			$ligne = lireTag($args, "ligne");
 			$deb = lireTag($args, "deb");
 			$num = lireTag($args, "num");
 			$bloc = lireTag($args, "bloc");
@@ -1033,19 +1029,21 @@
 			$limit="";
 			$res="";
 			
-			// prï¿½aration de la requï¿½e
+			// preparation de la requete
 			if($dossier!=""){
 				if($profondeur == "") $profondeur=0;
 				$rec = arbreBoucle_dos($dossier, $profondeur);
+				if(substr($rec, strlen($rec)-1) == ",") $rec = substr($rec, 0, strlen($rec)-1);
 				if($rec) $virg=",";
 				
 				 $search .= " and dossier in('$dossier'$virg$rec)";
 			}
 			
-			$search .= " and ligne=\"1\"";
+			if($ligne == "") $ligne="1";
+			
+			$search .= " and ligne=\"$ligne\"";
 
 			if($id!="") $search .= " and id=\"$id\"";				 
-			if($boutique != "") $search .=" and boutique='$boutique'";
 			if($courant == "1") $search .=" and id='$id_contenu'";
 			else if($courant == "0") $search .=" and id!='$id_contenu'";
 			if($exclusion!="") $search .= " and id not in($exclusion)";
@@ -1081,17 +1079,14 @@
 				$type="";
 			}
 
-			
-			 if($aleatoire) $order = "order by "  . " RAND()";
+		
+			if($aleatoire) $order = "order by "  . " RAND()";
 			else if($classement == "manuel") $order = "order by classement";
 			else if($classement == "inverse") $order = "order by classement desc";
 			
 			
 			$contenu = new Contenu();
 			$contenudesc = new Contenudesc();
-			
-			$boutiqueprod = new Boutique();
-			
 			
 			if($motcle){
 				$liste="";
@@ -1110,8 +1105,8 @@
 				}
 			
 				$liste = substr($liste, 0, strlen($liste) - 2);
-				$query = "select * from $contenu->table where id in ($liste) and ligne=1 $limit";
-				$saveReq = "select * from $contenu->table where id in ($liste) and ligne=1";
+				$query = "select * from $contenu->table where id in ($liste) and ligne=\"$ligne\" $limit";
+				$saveReq = "select * from $contenu->table where id in ($liste) and ligne=\"$ligne\"";
 			}
 			
 		else $query = "select * from $contenu->table where 1 $search $order $limit";
@@ -1128,9 +1123,6 @@
 		$countRes = mysql_result($saveRes, 0, "totcount") . " ";
 		
 		while( $row = mysql_fetch_object($resul) ){
-		
-			
-			$boutiqueprod->charger($row->boutique);
 	
 			if($num>0) 
 				if($comptbloc>=ceil($countRes/$num) && $bloc!="") continue;
@@ -1157,10 +1149,9 @@
 			$temp = str_replace("#STRIPCHAPO", strip_tags($contenudesc->chapo), $temp);	
 			$temp = str_replace("#DESCRIPTION", "$contenudesc->description", $temp);
 			$temp = str_replace("#STRIPDESCRIPTION", strip_tags($contenudesc->description), $temp);	
-			$temp = str_replace("#URLBOUTIQUE", $boutiqueprod->url, $temp);	
 			$temp = str_replace("#URL", "contenu.php?id_contenu=" . "$row->id", $temp);	
 			$temp = str_replace("#REWRITEURL", rewrite_cont("$row->id"), $temp);			
-			$temp = str_replace("#RUBTITRE", "$dossierdesc->titre", $temp);
+			$temp = str_replace("#DOSTITRE", "$dossierdesc->titre", $temp);
 			$temp = str_replace("#PRODUIT", "$produit", $temp);
 			$temp = str_replace("#RUBRIQUE", "$rubrique", $temp);			
 			
@@ -1174,14 +1165,63 @@
 	}
 
 
+	function boucleContenuassoc($texte, $args){
+        $objet = lireTag($args, "objet");
+        $typeobj = lireTag($args, "typeobj");
+        $contenu = lireTag($args, "contenu");
+        $classement = lireTag($args, "contenu");
+        $num = lireTag($args, "num");
+      	$deb = lireTag($args, "deb");
+		
+		if(!$deb) $deb=0;
+		
+		$search = "";
+
+		if($objet != "")
+        	$search .= " and objet=\"$objet\"";
+
+		if($typeobj != "")
+        	$search .= " and type=\"$typeobj\"";
+
+		if($contenu != "")
+        	$search .= " and contenu=\"$contenu\"";
+
+		$order="";
+		$limit="";
+		
+		if($num!="") $limit .= " limit $deb,$num";
+		
+		if($classement == "manuel")
+			$order = "order by classement";
+		
+		$contenuassoc = new Contenuassoc();
+		$query = "select * from $contenuassoc->table where 1 $search $limit";
+		$resul = mysql_query($query, $contenuassoc->link);
+		
+		if(! mysql_numrows($resul))
+			return "";
+			
+		while($row = mysql_fetch_object($resul)){
+              $temp = str_replace("#OBJET", $row->objet, $texte);
+              $temp = str_replace("#TYPE", $row->type, $temp);
+              $temp = str_replace("#CONTENU", $row->contenu, $temp);
+
+              $res .= $temp;
+
+        }
+
+              return $res;
+		
+	}
+	
 	function bouclePage($texte, $args){
 			global $page_thelia, $id_rubrique;
 			
-			// rŽcupŽration des arguments
+			// récupération des arguments
 			
 			$num = lireTag($args, "num");
 			$courante = lireTag($args, "courante");
-			$page_theliacourante = lireTag($args, "pagecourante");
+			$pagecourante = lireTag($args, "pagecourante");
 			$typeaff = lireTag($args, "typeaff");
 			$max = lireTag($args, "max");
 			$affmin = lireTag($args, "affmin");
@@ -1210,11 +1250,11 @@
 				$page_thelia = $bpage;
 				
 				$nbpage = ceil($nbres/$num);
-				if($page_thelia+1>$nbpage) $page_theliasuiv=$page_thelia;
-				else $page_theliasuiv=$page_thelia+1;
+				if($page_thelia+1>$nbpage) $pagesuiv=$page_thelia;
+				else $pagesuiv=$page_thelia+1;
 				
-				if($page_thelia-1<=0) $page_theliaprec=1;
-				else $page_theliaprec=$page_thelia-1;				
+				if($page_thelia-1<=0) $pageprec=1;
+				else $pageprec=$page_thelia-1;				
 
 
 				if($nbpage<$affmin) return;
@@ -1234,34 +1274,34 @@
 					for( ; $i<$nbpage+1 && $i<$fin; $i++ ){
 					
 						$temp = str_replace("#PAGE_NUM", "$i", $texte);		
-						$temp = str_replace("#PAGE_SUIV", "$page_theliasuiv", $temp);
-						$temp = str_replace("#PAGE_PREC", "$page_theliaprec", $temp);
+						$temp = str_replace("#PAGE_SUIV", "$pagesuiv", $temp);
+						$temp = str_replace("#PAGE_PREC", "$pageprec", $temp);
 						$temp = str_replace("#RUBRIQUE", "$id_rubrique", $temp);
 				
-						if($page_theliacourante && $page_theliacourante == $i){		
+						if($pagecourante && $pagecourante == $i){		
 
 							if($courante =="1" && $page_thelia == $i ) $res .= $temp;	
 							else if($courante == "0" && $page_thelia != $i ) $res .= $temp;	
 							else if($courante == "") $res .= $temp;
 						}	
 						
-						else if(!$page_theliacourante) $res .= $temp;								
+						else if(!$pagecourante) $res .= $temp;								
 					}
 				
 				}
 				
-                else if($typeaff == "0" && ($avance == "precedente" && $page_theliaprec != $page_thelia)){
+                else if($typeaff == "0" && ($avance == "precedente" && $pageprec != $page_thelia)){
 
                         $temp = str_replace("#PAGE_NUM", "$page_thelia", $texte);
-                        $temp = str_replace("#PAGE_PREC", "$page_theliaprec", $temp);
+                        $temp = str_replace("#PAGE_PREC", "$pageprec", $temp);
                         $temp = str_replace("#RUBRIQUE", "$id_rubrique", $temp);
                         $res .= $temp;
                 }
 
-                else if($typeaff == "0" && ($avance == "suivante" && $page_theliasuiv != $page_thelia)){
+                else if($typeaff == "0" && ($avance == "suivante" && $pagesuiv != $page_thelia)){
 
                         $temp = str_replace("#PAGE_NUM", "$page_thelia", $texte);
-                        $temp = str_replace("#PAGE_SUIV", "$page_theliasuiv", $temp);
+                        $temp = str_replace("#PAGE_SUIV", "$pagesuiv", $temp);
                         $temp = str_replace("#RUBRIQUE", "$id_rubrique", $temp);
                         $res .= $temp;
                 }
@@ -1269,8 +1309,8 @@
                 else if($typeaff == "0" && $avance == ""){
 
                         $temp = str_replace("#PAGE_NUM", "$page_thelia", $texte);
-                        $temp = str_replace("#PAGE_SUIV", "$page_theliasuiv", $temp);
-                        $temp = str_replace("#PAGE_PREC", "$page_theliaprec", $temp);
+                        $temp = str_replace("#PAGE_SUIV", "$pagesuiv", $temp);
+                        $temp = str_replace("#PAGE_PREC", "$pageprec", $temp);
                         $temp = str_replace("#RUBRIQUE", "$id_rubrique", $temp);
                         $res .= $temp;
                 }					
@@ -1342,9 +1382,8 @@
 			$dectexte = "";
 			$decval = "";
 			
-			if(isset($compt) && isset($_SESSION['navig']->panier->tabarticle[$compt]))
 			
-			  for($compt = 0; $compt<count($_SESSION['navig']->panier->tabarticle[$compt]->perso); $compt++){
+		    for($compt = 0; $compt<count($_SESSION['navig']->panier->tabarticle[$i]->perso); $compt++){
 				$tperso = $_SESSION['navig']->panier->tabarticle[$i]->perso[$compt];
 				$declinaison->charger($tperso->declinaison);
 				// recup valeur declidisp ou string
@@ -1366,10 +1405,10 @@
 				
 			}	
 		
-			$prix = number_format($prix, 2); 
-			$total = number_format($total, 2); 
+			$prix = number_format($prix, 2, ".", ""); 
+			$total = number_format($total, 2, ".", ""); 
 			$totcmdport = number_format($totcmdport, 2); 
-			$port = number_format($port, 2); 
+			$port = number_format($port, 2, ".", ""); 
 
 			$temp = str_replace("#REF", $_SESSION['navig']->panier->tabarticle[$i]->produit->ref, $texte);
 			$temp = str_replace("#TITRE", $produitdesc->titre, $temp);
@@ -1379,9 +1418,9 @@
 			$temp = str_replace("#TOTAL", "$total", $temp);			
 			$temp = str_replace("#ID", $_SESSION['navig']->panier->tabarticle[$i]->produit->id, $temp);
 			$temp = str_replace("#ARTICLE", "$i", $temp);
-			$temp = str_replace("#PLUSURL", "panier.php?action=" . "modifier" . "&" . "article=" . $i . "&" . "quantite=" . $plus, $temp);			
-			$temp = str_replace("#MOINSURL", "panier.php?action=" . "modifier" . "&" . "article=" . $i . "&" . "quantite=" . $moins, $temp);
-			$temp = str_replace("#SUPPRURL", "panier.php?action=" . "supprimer" . "&" . "article=" . $i, $temp);			
+			$temp = str_replace("#PLUSURL", "panier.php?action=" . "modifier" . "&amp;" . "article=" . $i . "&amp;" . "quantite=" . $plus, $temp);			
+			$temp = str_replace("#MOINSURL", "panier.php?action=" . "modifier" . "&amp;" . "article=" . $i . "&amp;" . "quantite=" . $moins, $temp);
+			$temp = str_replace("#SUPPRURL", "panier.php?action=" . "supprimer" . "&amp;" . "article=" . $i, $temp);			
 			$temp = str_replace("#PRODURL", "produit.php?ref=".$_SESSION['navig']->panier->tabarticle[$i]->produit->ref, $temp);		
 			$temp = str_replace("#TOTSANSPORT", "$totsansport", $temp);
 			$temp = str_replace("#PORT", "$port", $temp);
@@ -1398,19 +1437,23 @@
 	
 		
 	function boucleQuantite($texte, $args){
-		// rŽcupŽration des arguments
+		// récupération des arguments
 
 		$res="";
 	
 		$article = lireTag($args, "article");
+		$max = lireTag($args, "max");
 		
 		$prodtemp = new Produit();
 		$prodtemp->charger($_SESSION['navig']->panier->tabarticle[$article]->produit->ref);
 
+		if($max == "") 
+			$max = 10;
+			
 		$j = 0;
 		
-		for($i=1; $i<$prodtemp->quantite; $i++){
-			if($i==$_SESSION['navig']->panier->tabarticle[$article]->quantite) $selected=" selected";
+		for($i=1; $i<=$max; $i++){
+			if($i==$_SESSION['navig']->panier->tabarticle[$article]->quantite) $selected="selected=\"selected\"";
 			else $selected="";
 		
 			$temp = str_replace("#NUM", "$i", $texte);
@@ -1427,90 +1470,115 @@
 	function boucleChemin($texte, $args){
 		global $id_rubrique;
 
-		// rŽcupŽration des arguments
+		// récupération des arguments
 
 		$rubrique = lireTag($args, "rubrique");		
 		$profondeur = lireTag($args, "profondeur");		
 		$niveau = lireTag($args, "niveau");		
 		
-		
-		if($rubrique=="") $rubrique=$id_rubrique;
 		if($rubrique=="") return "";
 
-		$search ="";
 		$res="";
 		
-		// prï¿½aration de la requï¿½e
-		if($rubrique!="" && isset($id))  $search.=" and id=\"$id\"";
-
 		$trubrique = new Rubrique();
 		$trubrique->charger($rubrique);
 		$trubriquedesc = new Rubriquedesc();
-
 		
 		$i =  0;
- 		do {
-			$trubrique->charger("$trubrique->parent");	
-			$rubtab[$i++] = $trubrique;
-				
-			
-		} while($trubrique->parent != 0);
-	
-		$i--;
 		
-		do {
-		if(($i == $niveau-1 && $niveau != "") || $niveau == "") {
-				$trubriquedesc->charger($rubtab[$i]->id, $_SESSION['navig']->lang);
-				$temp = str_replace("#ID", $rubtab[$i]->id, $texte);
-				$temp = str_replace("#TITRE", "$trubriquedesc->titre", $temp);	
-				$temp = str_replace("#URL", "rubrique.php?id_rubrique=" . $rubtab[$i]->id, $temp);	
-		
-		
-			if(trim($temp) !="") $res .= $temp;
-		}	
-			if($i >= $profondeur && $profondeur != "") break;
-		} while($i--);
-	
+        if(! $trubrique->parent)
+                return "";
 
+        $rubtab = "";
+        $tmp = new Rubrique();
+        $tmp->charger($trubrique->parent);
+        $rubtab[$i] = new Rubrique();
+        $rubtab[$i++] = $tmp;
+
+        while($tmp->parent != 0) {
+                $tmp = new Rubrique();
+                $tmp->charger($rubtab[$i-1]->parent);
+
+                $rubtab[$i] = new Rubrique();
+                $rubtab[$i++] = $tmp;
+        }
+
+        $compt = 0;
+        
+        for($i=count($rubtab)-1; $i>=0; $i--){
+                        if($profondeur != "" && $compt==$profondeur) break;
+                        if($niveau != "" && $niveau != $compt +1 ) { $compt++; continue; }          
+                        $trubriquedesc->charger($rubtab[$i]->id, $_SESSION['navig']->lang);
+                        $temp = str_replace("#ID", $rubtab[$i]->id, $texte);
+                        $temp = str_replace("#TITRE", "$trubriquedesc->titre", $temp);
+                        $temp = str_replace("#URL", "rubrique.php?id_rubrique=" . $rubtab[$i]->id, $temp);
+
+                        $compt++;
+                        
+                        $res .= $temp;
+        }
 	
 		return $res;
-		
-	
 	
 	}	
+
 	
 	function bouclePaiement($texte, $args){
 
 		$res="";
 		
 		$id = lireTag($args, "id");		
+		$nom = lireTag($args, "nom");		
+		$exclusion = lireTag($args, "exclusion");		
+
 		$search ="";
 	
-		// prï¿½aration de la requï¿½e
+		// preparation de la requete
 		if($id!="")  $search.=" and id=\"$id\"";
-	
-		$modules = new Modules();
+		if($nom!="")  $search.=" and nom=\"$nom\"";
+		
+		if($exclusion!=""){
+			$liste="";
+			$tabexcl = explode(",", $exclusion);
+			for($i=0;$i<count($tabexcl);$i++)
+				$liste .= "'" . $tabexcl[$i] . "'" . ",";
+			if(substr($liste, strlen($liste)-1) == ",")
+				$liste = substr($liste, 0, strlen($liste)-1);
+				
+			$search.=" and nom not in ($liste)";
+		} 
+		
+		
+ 		$modules = new Modules();
 		
 		$query = "select * from $modules->table where type='1' and actif='1' $search order by classement";
 		$resul = mysql_query($query, $modules->link);
-	
 		$nbres = mysql_numrows($resul);
+	
 		if(!$nbres) return "";
 		
 
 		while( $row = mysql_fetch_object($resul)){
 
-			include("client/paiement/" . "$row->nom" . "/" . "config.php");
-			$titre = "titre" . $_SESSION['navig']->lang; 
-			$chapo = "chapo" . $_SESSION['navig']->lang; 
-			$description = "description" . $_SESSION['navig']->lang; 
+			$modules = new Modules();
+			$modules->charger_id($row->id);
+			
+			$nom = $modules->nom;
+			$nom[0] = strtoupper($nom[0]);
+
+			include_once("client/plugins/" . $modules->nom . "/$nom.class.php");
+			$tmpobj = new $nom();
+			
+			$titre = $tmpobj->getTitre();
+			$chapo = $tmpobj->getChapo();
+			$description = $tmpobj->getDescription();
 										
 			$temp = str_replace("#ID", "$row->id", $texte);
-			$temp = str_replace("#URLPAYER", "paiement.php?action=paiement&type_paiement=" . $row->id, $temp);
-			$temp = str_replace("#LOGO", "client/paiement/" . "$row->nom" . "/logo.jpg", $temp);
-			$temp = str_replace("#TITRE", $$titre, $temp);
-			$temp = str_replace("#CHAPO", $$chapo, $temp);
-			$temp = str_replace("#DESCRIPTION", $$description, $temp);		
+			$temp = str_replace("#URLPAYER", "commande.php?action=paiement&amp;type_paiement=" . $row->id, $temp);
+			$temp = str_replace("#LOGO", "client/plugins/" . "$row->nom" . "/logo.jpg", $temp);
+			$temp = str_replace("#TITRE", $titre, $temp);
+			$temp = str_replace("#CHAPO", $chapo, $temp);
+			$temp = str_replace("#DESCRIPTION", $description, $temp);		
 			$res .= $temp;
 		}
 	
@@ -1533,7 +1601,7 @@
 		$search ="";
 		$res="";
 		
-		// prï¿½aration de la requï¿½e
+		// preparation de la requete
 		if($id!="")  $search.=" and id=\"$id\"";
 		if($zone!="")  $search.=" and zone=\"$zone\"";
 		if($zdefinie!="") $search.=" and zone!=\"-1\"";
@@ -1568,10 +1636,10 @@
 			$temp = str_replace("#CHAPO", "$paysdesc->chapo", $temp);
 			$temp = str_replace("#DESCRIPTION", "$paysdesc->description", $temp);	
 			if(($_SESSION['navig']->formcli->pays == $row->pays || $_SESSION['navig']->client->pays == $row->pays) && $select=="") 	
-				$temp = str_replace("#SELECTED", "selected", $temp);
-			if($select !="" && $select == $row->pays) $temp = str_replace("#SELECTED", "selected", $temp);	
+				$temp = str_replace("#SELECTED", "selected=\"selected\"", $temp);
+			if($select !="" && $select == $row->pays) $temp = str_replace("#SELECTED", "selected=\"selected\"", $temp);	
 			else $temp = str_replace("#SELECTED", "", $temp);
-			if($default == "1" && $pays->default == "1") $temp = str_replace("#DEFAULT", "selected", $temp);	
+			if($default == "1" && $pays->default == "1") $temp = str_replace("#DEFAULT", "selected=\"selected\"", $temp);	
 			else $temp = str_replace("#DEFAULT", "", $temp);
 			$res .= $temp;
 		}
@@ -1583,15 +1651,18 @@
 
 	function boucleCaracteristique($texte, $args){
 
+		global $caracteristique;
+		
 		$id = lireTag($args, "id");		
 		$rubrique = lireTag($args, "rubrique");		
 		$affiche = lireTag($args, "affiche");		
 		$produit = lireTag($args, "produit");	
+		$courante = lireTag($args, "courante");	
 				
 		$search ="";
 		$res="";
 		
-		// prï¿½aration de la requï¿½e
+		// preparation de la requete
 		 
 		if($produit!=""){
 			$tprod = new Produit();
@@ -1604,29 +1675,37 @@
 		
 		
 		$rubcaracteristique = new Rubcaracteristique();
-		$caracteristique = new Caracteristique();
-		$caracteristiquedesc = new Caracteristiquedesc();
+		$tmpcaracteristique = new Caracteristique();
+		$tmpcaracteristiquedesc = new Caracteristiquedesc();
 		
 		
 		$query = "select DISTINCT(caracteristique) from $rubcaracteristique->table where 1 $search";
-		if($id != "") $query = "select * from $caracteristique->table where 1 $search";
+		if($id != "") $query = "select * from $tmpcaracteristique->table where 1 $search";
 		$resul = mysql_query($query, $rubcaracteristique->link);
 	
 		$nbres = mysql_numrows($resul);
 		if(!$nbres) return "";
 
 		while( $row = mysql_fetch_object($resul)){
-			
-			if($id != "") $caracteristiquedesc->charger($row->id, $_SESSION['navig']->lang);
-			else $caracteristiquedesc->charger($row->caracteristique, $_SESSION['navig']->lang);
+
+			if($courante == "1" && ($id  != $caracteristique && ! strstr($caracteristique, $id . "-")))
+			   continue;
+
+			else if($courante == "0" && ($id  == $caracteristique || strstr($caracteristique, $id . "-")))
+				 continue;
+							
+			if($id != "") $tmpcaracteristiquedesc->charger($row->id, $_SESSION['navig']->lang);
+			else $tmpcaracteristiquedesc->charger($row->caracteristique, $_SESSION['navig']->lang);
 			if($id != "") $temp = str_replace("#ID", "$row->id", $texte);
 			else $temp = str_replace("#ID", "$row->caracteristique", $texte);
 
-			if($caracteristique->affiche == "0" && $affiche == "1") continue;
+			$tmpcaracteristique->charger($tmpcaracteristiquedesc->caracteristique);
+			
+			if($tmpcaracteristique->affiche == "0" && $affiche == "1") continue;
 
-			$temp = str_replace("#TITRE", "$caracteristiquedesc->titre", $temp);
-			$temp = str_replace("#CHAPO", "$caracteristiquedesc->chapo", $temp);
-			$temp = str_replace("#DESCRIPTION", "$caracteristiquedesc->description", $temp);		
+			$temp = str_replace("#TITRE", "$tmpcaracteristiquedesc->titre", $temp);
+			$temp = str_replace("#CHAPO", "$tmpcaracteristiquedesc->chapo", $temp);
+			$temp = str_replace("#DESCRIPTION", "$tmpcaracteristiquedesc->description", $temp);		
 			$temp = str_replace("#PRODUIT", "$produit", $temp);	
 			
 			$res .= $temp;
@@ -1643,7 +1722,13 @@
 		$caracteristique = lireTag($args, "caracteristique");		
 		$etcaracteristique = lireTag($args, "etcaracteristique");		
 		$etcaracdisp = lireTag($args, "etcaracdisp");	
+		$stockmini = lireTag($args, "stockmini");
+		$courante = lireTag($args, "courante");
+		
 		$id = lireTag($args, "caracdisp");
+		if($id == "")
+			$id = lireTag($args, "id");
+			
 		$classement = lireTag($args, "classement");
 		
 		$idsave = $id;
@@ -1659,7 +1744,7 @@
 		
 		$search ="";
 		
-		// prï¿½aration de la requï¿½e
+		// preparation de la requete
 		if($caracteristique!="")  $search.=" and caracteristique=\"$caracteristique\"";
 		if($id !="") $search.=" and id=\"$id\"";
 		if($classement == "alpha") $order="order by titre";
@@ -1704,6 +1789,19 @@
 		if($classement != "" && isset($tabliste2)) $tabliste = $tabliste2;
 		
 		for($i=0; $i<count($tabliste); $i++){
+			
+			if($courante == "1" && ($id  != $caracdisp && ! strstr($caracdisp, "-" . $id )))
+			   continue;
+			
+			else if($courante == "0" && ($id  == $caracdisp || strstr($caracdisp, "-" . $id)))
+				 continue;
+				
+            if($stockmini != ""){
+                  $caracvalch = new Caracval();
+                  $querych = "select count(*) as nb from $caracvalch->table where caracdisp='" . $tabliste[$i] . "'";
+                  $resulch = mysql_query($querych, $caracvalch->link);
+                  if(mysql_result($resulch, 0, "nb")<$stockmini) continue;
+            }
 			$tcaracdispdesc->charger_caracdisp($tabliste[$i], $_SESSION['navig']->lang);
 			$tcaracdisp->charger($tabliste[$i]);
 			
@@ -1713,8 +1811,10 @@
 			if($caracteristique == "$tcaracdisp->caracteristique" . "-" && $caracdisp == $tabliste[$i] . "-") 
 				$selected = "selected=\"selected\""; else $selected = "";
 				
-			$temp = str_replace("#ID", $id . $etcaracdisp, $texte);
-			$temp = str_replace("#CARACTERISTIQUE", $caracteristique . $etcaracteristique, $temp);
+			$temp = str_replace("#ID", $tcaracdisp->id, $texte);
+			$temp = str_replace("#CARACTERISTIQUE", $tcaracdisp->caracteristique, $temp);			
+			$temp = str_replace("#IDC", $id . $etcaracdisp, $temp);
+			$temp = str_replace("#CARACTERISTIQUEC", $caracteristique . $etcaracteristique, $temp);
 			$temp = str_replace("#TITRE", "$tcaracdispdesc->titre", $temp);
 			$temp = str_replace("#SELECTED", "$selected", $temp);
 			
@@ -1743,7 +1843,7 @@
 		$search ="";
 		$res="";
 		
-		// prï¿½aration de la requï¿½e
+		// preparation de la requete
 		$search.=" and caracteristique=\"$caracteristique\"";
 		$search.=" and produit=\"$produit\"";
 		
@@ -1763,7 +1863,7 @@
 				$temp = str_replace("#CARACDISP", $row->caracdisp, $temp);
 				if($row->caracdisp != 0){
 					$caracdispdesc = new Caracdispdesc();
-					$caracdispdesc->charger_caracdisp($row->caracdisp);
+					$caracdispdesc->charger_caracdisp($row->caracdisp, $_SESSION['navig']->lang);
 					if($valeur != "" && (($different == 0 && $caracdispdesc->caracdisp != $valeur) || ($different == 1 && $caracdispdesc->caracdisp == $valeur))) continue;
 					$temp = str_replace("#VALEUR", $caracdispdesc->titre, $temp);
 					
@@ -1797,11 +1897,13 @@
 		$adresse = new Adresse();
 	
 
-		// rŽcupŽration des arguments
+		// récupération des arguments
 
 		$adresse_id = lireTag($args, "adresse");		
 		$client_id = lireTag($args, "client");
-	
+		$defaut = lireTag($args, "defaut");
+		
+		
 		$search ="";
 		$res="";
 		
@@ -1809,11 +1911,16 @@
 		$raison[2] = "Mlle";
 		$raison[3] = "M";
 				
-		// prï¿½aration de la requï¿½e
+		// preparation de la requete
 		if($adresse_id!="")  $search.=" and id=\"$adresse_id\"";
 		if($client_id!="")  $search.=" and client=\"$client_id\"";
 		
-	
+		if($defaut =="1" && $adresse_id != "0")
+			return "";
+		
+		else if($defaut =="0" && $adresse_id == "0")
+			return "";
+			
 		if($adresse_id != "0" ) {
 			$query = "select * from $adresse->table where 1 $search";
 			$resul = mysql_query($query, $adresse->link);
@@ -1848,8 +1955,9 @@
 				$temp = str_replace("#CPOSTAL", "$row->cpostal", $temp);
 				$temp = str_replace("#PAYS", "$row->pays", $temp);
 				$temp = str_replace("#VILLE", "$row->ville", $temp);
-				$temp = str_replace("#SUPPRURL", "livraison_adresse.php?action=supprimerlivraison&id=$row->id", $temp);
-				$temp = str_replace("#URL", "paiement.php?action=modadresse&adresse=$row->id", $temp);
+				$temp = str_replace("#TEL", "$row->tel", $temp);
+				$temp = str_replace("#SUPPRURL", "livraison_adresse.php?action=supprimerlivraison&amp;id=$row->id", $temp);
+				$temp = str_replace("#URL", "commande.php?action=modadresse&amp;adresse=$row->id", $temp);
 
 				$res .= $temp;
 			}
@@ -1905,25 +2013,29 @@
 		$commande = new Commande();
 	
 	
-		// rŽcupŽration des arguments
-
+		// récupération des arguments
+		$commande_id = lireTag($args, "id");		
 		$commande_ref = lireTag($args, "ref");		
 		$client_id = lireTag($args, "client");
 		$statut = lireTag($args, "statut");
+		$classement = lireTag($args, "classement");
 		
-		if($commande_ref == "" && $client_id == "") return;
-
 		$search ="";
+		$order="";
 		$res="";
 		
-		// prï¿½aration de la requï¿½e
+		// preparation de la requete
+		if($commande_id!="")  $search.=" and id=\"$commande_id\"";		
 		if($commande_ref!="")  $search.=" and ref=\"$commande_ref\"";
 		if($client_id!="")  $search.=" and client=\"$client_id\"";
 		if($statut!="" && $statut!="paye")  $search.=" and statut=\"$statut\"";
 		else if($statut=="paye")  $search.=" and statut>\"1\"";
 
+		if($classement == "inverse")
+			$order = "order by date";
+		else $order = "order by date desc";
 	
-		$query = "select * from $commande->table where 1 $search";
+		$query = "select * from $commande->table where 1 $search $order";
 		$resul = mysql_query($query, $commande->link);
 		$nbres = mysql_numrows($resul);
 		if(!$nbres) return "";
@@ -1941,7 +2053,14 @@
   			$heure = substr($row->date, 11, 2);
   			$minute = substr($row->date, 14, 2);
   			$seconde = substr($row->date, 17, 2);
-  		
+
+			$jour_livraison = substr($row->datelivraison, 8, 2);
+			$mois_livraison = substr($row->datelivraison, 5, 2);
+			$annee_livraison = substr($row->datelivraison, 0, 4);
+	
+			$datelivraison = $jour_livraison . "/" . $mois_livraison . "/" . $annee_livraison;
+	
+			  		
   			$query2 = "SELECT sum(prixu*quantite) as total FROM $venteprod->table where commande='$row->id'"; 
   			$resul2 = mysql_query($query2, $venteprod->link);
   			$total = round(mysql_result($resul2, 0, "total"), 2);
@@ -1954,12 +2073,11 @@
 
 			$temp = str_replace("#ID", "$row->id", $texte);
 			$temp = str_replace("#ADRESSE", "$row->adresse", $temp);
+			$temp = str_replace("#DATELIVRAISON", "$datelivraison", $temp);
 			$temp = str_replace("#DATE", $jour . "/" . $mois . "/" . $annee, $temp);
 			$temp = str_replace("#REF", "$row->ref", $temp);
 			$temp = str_replace("#LIVRAISON", "$row->livraison", $temp);
 			$temp = str_replace("#FACTURE", "$row->facture", $temp);
-			$temp = str_replace("#DATELIVRAISON", "$row->datelivraison", $temp);
-			$temp = str_replace("#ENVOI", "$row->envoi", $temp);
 			$temp = str_replace("#PAIEMENT", "$row->paiement", $temp);
 			$temp = str_replace("#REMISE", "$row->remise", $temp);
 			$temp = str_replace("#STATUT", "$statutdesc->titre", $temp);
@@ -1980,7 +2098,7 @@
 	
 	function boucleVenteprod($texte, $args){	
 	
-		// rŽcupŽration des arguments
+		// récupération des arguments
 		$commande_id = lireTag($args, "commande");		
 		$produit = lireTag($args, "produit");
 		$stat = lireTag($args, "stat");
@@ -1988,7 +2106,7 @@
 		$search ="";
 		$res="";
 		
-		// prŽparation de la requte
+		// preparation de la requete
 		if($commande_id!="")  $search.=" and commande=\"$commande_id\"";		
 		if($produit!="")  $search.=" and ref=\"$produit\"";		
 	
@@ -2003,13 +2121,13 @@
 		
 		while( $row = mysql_fetch_object($resul)){
 			
-			$prixu = number_format($row->prixu, 2);
+			$prixu = number_format($row->prixu, 2, ".", "");
 			$totalprod = $row->prixu * $row->quantite;
-			$totalprod = number_format($totalprod, 2);
+			$totalprod = number_format($totalprod, 2, ".", "");
 			
-			$query = "select count(*) as nbvente from $venteprod->table where ref=\"" . $row->ref . "\"";
-			$resul = mysql_query($query, $venteprod->link);
-			$nbvente = mysql_result($resul, 0, "nbvente");
+			$query2 = "select count(*) as nbvente from $venteprod->table where ref=\"" . $row->ref . "\"";
+			$resul2 = mysql_query($query2, $venteprod->link);
+			$nbvente = mysql_result($resul2, 0, "nbvente");
 			
 			$temp = str_replace("#ID", "$row->id", $texte);
 			$temp = str_replace("#COMMANDE", "$row->commande", $temp);
@@ -2019,6 +2137,7 @@
 			$temp = str_replace("#DESCRIPTION", "$row->description", $temp);
 			$temp = str_replace("#QUANTITE", "$row->quantite", $temp);
 			$temp = str_replace("#PRIXU", "$row->prixu", $temp);
+			$temp = str_replace("#TVA", "$row->tva", $temp);	
 			$temp = str_replace("#TOTALPROD", "$totalprod", $temp);
 
 			$res .= $temp;
@@ -2032,7 +2151,7 @@
 
 	function boucleTransport($texte, $args){	
 
-		// rŽcupŽration des arguments
+		// récupération des arguments
 
 		$id = lireTag($args, "id");		
 
@@ -2041,7 +2160,7 @@
 		
 		$modules = new Modules();
 	
-		$query = "select * from $modules->table where type='2'";
+		$query = "select * from $modules->table where type='2' and actif='1' order by classement";
 
 		$resul = mysql_query($query, $modules->link);
 		$nbres = mysql_numrows($resul);
@@ -2063,19 +2182,27 @@
 		   while( $row = mysql_fetch_object($resul)){
 		
 		  	 if( ! $transzone->charger($row->id, $pays->zone)) continue;
-
+	
 			$modules = new Modules();
 			$modules->charger_id($row->id);
+			
+			$nom = $modules->nom;
+			$nom[0] = strtoupper($nom[0]);
 
+			include_once("client/plugins/" . $modules->nom . "/$nom.class.php");
+			$tmpobj = new $nom();
+			
 			$port = round(port($row->id), 2);
-			$titre = $modules->getTitre();
-			$chapo = $modules->getChapo();
-			$description = $modules->getDescription();
+			$titre = $tmpobj->getTitre();
+			$chapo = $tmpobj->getChapo();
+			$description = $tmpobj->getDescription();
 	
+			$port = number_format($port, 2, ".", ""); 
+			
 			$temp = str_replace("#TITRE", "$titre", $texte);
 			$temp = str_replace("#CHAPO", "$chapo", $temp);
 			$temp = str_replace("#DESCRIPTION", "$description", $temp);
-			$temp = str_replace("#URLCMD", "commande.php?action=transport&id=" . $row->id, $temp);
+			$temp = str_replace("#URLCMD", "spip.php?page=commande&thelia_action=transport&amp;id=" . $row->id, $temp);
 			$temp = str_replace("#ID", "$row->id", $temp);	
 			$temp = str_replace("#PORT", "$port", $temp);
 			$res .= $temp;
@@ -2090,9 +2217,12 @@
 
         function boucleRSS($texte, $args){
 
+		$cache = new Cache();
+		$cache->vider("RSS", "%");
+			
 		@ini_set('default_socket_timeout', 5);
                 
-		// rŽcupŽration des arguments
+		// récupération des arguments
                 $url = lireTag($args, "url");
                 $nb = lireTag($args, "nb");
 				$deb = lireTag($args, "deb");
@@ -2148,60 +2278,73 @@
 	
 	function boucleDeclinaison($texte, $args){
 
+		global $declinaison;
+
 		$id = lireTag($args, "id");		
 		$rubrique = lireTag($args, "rubrique");		
 		$produit = lireTag($args, "produit");		
+		$courante = lireTag($args, "courante");	
 		
 		$search ="";
 		$res="";
 		
-		// prŽparation de la requte
+		// preparation de la requete
 		if($rubrique!="")  $search.=" and rubrique=\"$rubrique\"";
 		if($id!="")  $search.=" and id=\"$id\"";
 			
 		$rubdeclinaison = new Rubdeclinaison();
-		$declinaison = new Declinaison();
-		$declinaisondesc = new Declinaisondesc();
+		$tmpdeclinaison = new Declinaison();
+		$tmpdeclinaisondesc = new Declinaisondesc();
 		
 		
 		$query = "select DISTINCT(declinaison) from $rubdeclinaison->table where 1 $search";
-		if($id != "") $query = "select * from $declinaison->table where 1 $search";
+		if($id != "") $query = "select * from $tmpdeclinaison->table where 1 $search";
 		$resul = mysql_query($query, $rubdeclinaison->link);
 
 		$nbres = mysql_numrows($resul);
 		if(!$nbres) return "";
 
 		while( $row = mysql_fetch_object($resul)){
-			if($id != "") $declinaisondesc->charger($row->id, $_SESSION['navig']->lang);
-			else $declinaisondesc->charger($row->declinaison, $_SESSION['navig']->lang);
+			
+			if($courante == "1" && ($row->id  != $declinaison))
+			   continue;
+			
+			else if($courante == "0" && ($row->id  == $declinaison))
+			   continue;
+						
+			if($id != "") $tmpdeclinaisondesc->charger($row->id, $_SESSION['navig']->lang);
+			else $tmpdeclinaisondesc->charger($row->declinaison, $_SESSION['navig']->lang);
 			if($id != "") $temp = str_replace("#ID", "$row->id", $texte);
 			else $temp = str_replace("#ID", "$row->declinaison", $texte);
 
-			$temp = str_replace("#TITRE", "$declinaisondesc->titre", $temp);
-			$temp = str_replace("#CHAPO", "$declinaisondesc->chapo", $temp);
-			$temp = str_replace("#DESCRIPTION", "$declinaisondesc->description", $temp);	
+			$temp = str_replace("#TITRE", "$tmpdeclinaisondesc->titre", $temp);
+			$temp = str_replace("#CHAPO", "$tmpdeclinaisondesc->chapo", $temp);
+			$temp = str_replace("#DESCRIPTION", "$tmpdeclinaisondesc->description", $temp);	
 			$temp = str_replace("#PRODUIT", "$produit", $temp);
 	
 			$res .= $temp;
 		}
 
 		return $res;
-	
 	}	
 
 	function boucleDeclidisp($texte, $args){
 
+		global $declidisp;
+		
 		$declinaison = lireTag($args, "declinaison");		
 		$id = lireTag($args, "id");
 		$produit = lireTag($args, "produit");
 		$classement = lireTag($args, "classement");
 		$stockmini = lireTag($args, "stockmini");
+		$courante = lireTag($args, "courante");
+		
 		$search ="";
 		$liste="";
 		$tabliste[0]="";
 		$res="";
 		
-		// prŽparation de la requte
+		// preparation de la requete
 		if($declinaison!="")  $search.=" and declinaison=\"$declinaison\"";
 		if($id !="") $search.=" and id=\"$id\"";
 		$tdeclidisp = new Declidisp();
@@ -2214,7 +2357,6 @@
 
 		$query = "select * from $tdeclidisp->table where 1 $search";
 		$resul = mysql_query($query, $tdeclidisp->link);
-		
 		
 		$i=0;
 				
@@ -2237,9 +2379,10 @@
 							
 		if($classement != ""){
 			$liste2="";
-			$query = "select * from $tdeclidispdesc->table where declidisp in ($liste) and lang='" . $_SESSION['navig']->lang . "' $order";
-			$resul = mysql_query($query, $tdeclidispdesc->link);
-					
+			if($liste != ""){
+				$query = "select * from $tdeclidispdesc->table where declidisp in ($liste) and lang='" . $_SESSION['navig']->lang . "' $order";
+				$resul = mysql_query($query, $tdeclidispdesc->link);
+			}		
 		
 		
 			$i=0;
@@ -2258,12 +2401,22 @@
 	
 		for($i=0; $i<count($tabliste); $i++){
 		
+			if($courante == "1" && ($tabliste[$i] . "-"  != $declidisp))
+			   continue;
+			
+			else if($courante == "0" && ($tabliste[$i] ."-"  == $declidisp))
+			   continue;
+				
 			if($exdecprod->charger($produit, $tabliste[$i])) continue;		
 			
+			$tdeclidisp = new Declidisp();
+			$tdeclidisp->charger($tabliste[$i]); 
+			
+			$tdeclidispdesc = new Declidispdesc();
 			$tdeclidispdesc->charger_declidisp($tabliste[$i], $_SESSION['navig']->lang);
 			if(! $tdeclidispdesc->titre) $tdeclidispdesc->charger_declidisp($tabliste[$i]);
 			$temp = str_replace("#ID", $tdeclidispdesc->declidisp, $texte);
-			$temp = str_replace("#DECLINAISON", $declinaison, $temp);
+			$temp = str_replace("#DECLINAISON", $tdeclidisp->declinaison, $temp);
 			$temp = str_replace("#TITRE", "$tdeclidispdesc->titre", $temp);
 			$temp = str_replace("#PRODUIT", "$produit", $temp);
 
@@ -2327,10 +2480,11 @@
 				$valeur = $declidispdesc->titre;
 			}
 				
-			else $valeur .= $tperso->valeur;
+			else $valeur = $tperso->valeur;
 
 			$temp = str_replace("#DECLITITRE", "$declinaisondesc->titre", $texte);
 			$temp = str_replace("#VALEUR", "$valeur", $temp);	
+			$temp = str_replace("#DECLIDISP", "$declidispdesc->declidisp", $temp);	
 			
 			$res .= $temp;				
 		}		
@@ -2338,8 +2492,7 @@
 
 
 		return $res;
-		
-	
+			
 	}
 
 ?>

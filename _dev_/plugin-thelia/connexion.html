@@ -1,0 +1,171 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<INCLURE{fond=inc-head}>
+[(#REM) Lien vers le flux RSS de la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
+</head>
+
+<body class="page_panier">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de la rubrique ]
+		
+			
+				<div id="contenu">
+
+				<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Identifiez-vous</div>
+			
+<!-- Titre de la page-->
+
+				<div class="titrePage">
+				<h2>Identifiez-vous </h2>
+				</div>
+				
+<!-- Contenu de la page-->
+
+				<div class="sousTitrePage">
+				<h3>J'ai d&eacute;j&agrave; un compte </h3>
+				</div>
+				
+				<form action="#URL_PAGE{connexion}" method="post" name="connexion" id="connexion">
+            	<input type="hidden" name="thelia_action" value="connexion" />
+				
+				<table width="775" border="0" cellspacing="0" cellpadding="5">
+					<tr>
+						<td class="ligneTableau">Mon e-mail THELIA-ERRCONNEX[<span class="obligatoire">(e-mail ou mot de passe incorrects)</span>]</td>
+						<td class="ligneTableau"><input name="email" type="text" class="zoneDeSaisie"/></td>
+					</tr>
+				  	<tr>
+   						<td width="190" class="ligneTableau">Mon mot de passe </td>
+    					<td width="565" class="ligneTableau"><input name="motdepasse" type="password"  class="zoneDeSaisie"/></td>
+  					</tr>
+				</table>
+				<div class="boutonMonCompteContenu">
+				<input type="submit" value="Valider" />
+				</div>
+				</form>
+				
+				<div class="separation">
+				</div>
+			
+				<div class="sousTitrePage">
+				<h3>Je suis un nouveau client </h3>
+				</div>
+				
+				<form action="#URL_PAGE{nouveau}" method="post" name="nouveau" id="nouveau">
+            	<input type="hidden" name="thelia_action" value="creercompte" />
+				
+				<table width="775" border="0" cellspacing="0" cellpadding="5">
+					<tr>
+						<td class="ligneTableau">Civilit&eacute;*</td>
+						<td class="ligneTableau">
+						<select name="raison" size="1" class="zoneDeSaisie">
+            			<option value="" selected="selected">Choisissez ...</option>
+            			<option value="1">Madame</option>
+            			<option value="2">Mademoiselle</option>
+            			<option value="3">Monsieur</option>
+            			</select>
+						</td>
+					</tr>
+					<tr>
+						<td width="190" class="ligneTableau">Nom*</td>
+						<td width="565" class="ligneTableau"><input name="nom" type="text" class="zoneDeSaisie"/></td>
+					</tr>
+					<tr>
+					  <td class="ligneTableau">Pr&eacute;nom*</td>
+					  <td class="ligneTableau"><input name="prenom" type="text" class="zoneDeSaisie"/></td>
+				  </tr>
+				  <tr>
+				  	<td class="ligneTableau">Adresse*</td>
+					<td class="ligneTableau"><input name="adresse1" type="text" class="zoneDeSaisie"/></td>
+				  </tr>
+				  <tr>
+				  	<td class="ligneTableau">Adresse (suite) </td>
+					<td class="ligneTableau"><input name="adresse2" type="text" class="zoneDeSaisie"/></td>
+				  </tr>
+				  <tr>
+				  	<td class="ligneTableau">Compl&eacute;ment d'adresse </td>
+					<td class="ligneTableau"><input name="adresse3" type="text" class="zoneDeSaisie"/></td>
+				  </tr>
+				  <tr>
+					<td class="ligneTableau">Code postal*</td>
+					<td class="ligneTableau"><input name="cpostal" type="text" class="zoneDeSaisie"/></td>
+				  </tr>
+				  <tr>
+					<td class="ligneTableau">Ville*</td>
+					<td class="ligneTableau"><input name="ville" type="text" class="zoneDeSaisie"/></td>
+				  </tr>
+				  <tr>
+					<td class="ligneTableau">Pays*</td>
+					<td class="ligneTableau">
+					<select name="pays" size="1" class="zoneDeSaisie">
+					<option value="" selected="selected">Choisissez ...</option>
+					<THELIA_pays type="PAYS" zdefinie="1">           
+					<option value="THELIA-ID">THELIA-TITRE</option>
+					</THELIA_pays>
+					</select>	
+					</td>
+				  </tr>
+				  <tr>
+				  	<td class="ligneTableau">T&eacute;l&eacute;phone fixe*</td>
+					<td class="ligneTableau"><input name="telfixe" type="text" class="zoneDeSaisie"/></td>
+				  </tr>
+				  <tr>
+				  	<td class="ligneTableau">T&eacute;l&eacute;phone portable </td>
+					<td class="ligneTableau"><input name="telport" type="text" class="zoneDeSaisie"/></td>
+				  </tr>
+				  <tr>
+				  	<td class="ligneTableau">E-mail*</td>
+					<td class="ligneTableau"><input name="email1" type="text" class="zoneDeSaisie"/></td>
+				  </tr>
+				  <tr>
+				  	<td class="ligneTableau">Confirmation de votre e-mail*</td>
+					<td class="ligneTableau"><input name="email2" type="text" class="zoneDeSaisie"/></td>
+				  </tr>
+				  <tr>
+				  	<td class="ligneTableau">Mot de passe*</td>
+					<td class="ligneTableau"><input  name="motdepasse1" type="password" class="zoneDeSaisie"/></td>
+				  </tr>
+				  <tr>
+					<td class="ligneTableau">Confirmation de votre mot de passe*</td>
+					<td class="ligneTableau"><input name="motdepasse2" type="password" class="zoneDeSaisie"/></td>
+				  </tr>
+			</table>
+			<span class="commentaires">* Champs obligatoires</span>
+			
+			<div class="boutonMonCompteContenu">
+           			 <input type="submit" value="Valider" />
+			</div>
+            		</form>
+			</div>
+<!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>

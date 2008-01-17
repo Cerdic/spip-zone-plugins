@@ -1,0 +1,155 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+[(#REM) Lien vers le flux RSS de la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
+</head>
+
+<body class="page_panier">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de la rubrique ]
+		<div id="contenu">
+					
+						
+<!-- Titre de la page -->
+
+				<div class="titrePage">
+				<h2>Mon compte : modifier mes informations </h2>
+				</div>
+				
+<!-- formulaire "Modifier mon mot de passe" -->
+
+				<div class="sousTitrePage">
+				<h3>Modifier mon mot de passe </h3>
+				</div>
+					
+			<form action="#URL_PAGE{moncompte}" method="post" name="modifier1" id="modifier1">
+            <input type="hidden" name="thelia_action" value="modifiercompte" />
+			<table width="775" border="0" cellspacing="0" cellpadding="5">
+ 				<tr>
+    				<td width="190" class="ligneTableau">Mon mot de passe THELIA-MOTDEPASSE[<span class="obligatoire">(Vérifiez votre mot de passe. 6 car mini)</span>]</td>
+   					<td width="565" class="ligneTableau"><input name="motdepasse1" type="password" class="zoneDeSaisie" /></td>
+  				</tr>
+  				<tr>
+    				<td class="ligneTableau">Confirmation du mot de passe</td>
+    				<td class="ligneTableau"><input name="motdepasse2" type="password" class="zoneDeSaisie" /></td>
+  				</tr>
+			</table>
+			
+				<div class="boutonMonCompteContenu">
+				<input type="submit" value="Valider" />
+				</div>
+			</form>
+				
+				<div class="separation">
+				</div>
+				
+<!-- formulaire "Je suis un nouveau client" -->
+
+				<div class="sousTitrePage">
+				<h3>Je suis un nouveau client </h3>
+				</div>
+				
+		   	<form action="#URL_PAGE{compte_modifier}" method="post" name="modifier2" id="modifier2">
+            <input type="hidden" name="thelia_action" value="modifiercompte" /> 
+			<table width="775" border="0" cellspacing="0" cellpadding="5">
+  				<tr>
+    				<td width="190" class="ligneTableau">Civilit&eacute; THELIA-RAISON[<span class="obligatoire">(obligatoire)</span>]</td>
+    				<td width="565" class="ligneTableau">
+					<select name="raison" size="1" class="zoneDeSaisie">
+                    <option value="">Choisissez ...</option>
+                    <option value="1" THELIA-CLIENT_RAISON1F>Madame</option>
+                    <option value="2" THELIA-CLIENT_RAISON2F>Mademoiselle</option>
+                    <option value="3" THELIA-CLIENT_RAISON3F>Monsieur</option>
+              		</select>					</td>
+  				</tr>
+  				<tr>
+    				<td class="ligneTableau">Nom THELIA-NOM[<span class="obligatoire">(obligatoire)</span>]</td>
+    				<td class="ligneTableau"><input type="text" name="nom"   value="THELIA-CLIENT_NOM" class="zoneDeSaisie" /></td>
+  				</tr>
+  				<tr>
+  				  <td class="ligneTableau">Pr&eacute;nomTHELIA-PRENOM[<span class="obligatoire">(obligatoire)</span>]</td>
+  				  <td class="ligneTableau"><input type="text" name="prenom"   value="THELIA-CLIENT_PRENOM" class="zoneDeSaisie" /></td>
+			  </tr>
+  				<tr>
+  				  <td class="ligneTableau">Adresse THELIA-ADRESSE1[<span class="obligatoire">(obligatoire)</span>]</td>
+  				  <td class="ligneTableau"><input type="text" name="adresse1" class="zoneDeSaisie"  value="THELIA-CLIENT_ADRESSE1" /></td>
+			  </tr>
+  				<tr>
+  				  <td class="ligneTableau">Adresse (suite) </td>
+  				  <td class="ligneTableau"><input type="text" name="adresse2" class="zoneDeSaisie"  value="THELIA-CLIENT_ADRESSE2"/></td>
+			  </tr>
+  				<tr>
+  				  <td class="ligneTableau">Compl&eacute;ment d'adresse </td>
+  				  <td class="ligneTableau"><input type="text" name="adresse3" class="zoneDeSaisie"  value="THELIA-CLIENT_ADRESSE3"/></td>
+			  </tr>
+  				<tr>
+  				  <td class="ligneTableau">Code postal THELIA-CPOSTAL[<span class="obligatoire">(obligatoire)</span>] </td>
+  				  <td class="ligneTableau"><input type="text" name="cpostal" class="zoneDeSaisie"   value="THELIA-CLIENT_CPOSTAL"/></td>
+			  </tr>
+  				<tr>
+  				  <td class="ligneTableau">Ville THELIA-VILLE[<span class="obligatoire">(obligatoire)</span>]</td>
+  				  <td class="ligneTableau"><input type="text" name="ville" class="zoneDeSaisie"   value="THELIA-CLIENT_VILLE"/></td>
+			  </tr>
+  				<tr>
+  				  <td class="ligneTableau">Pays THELIA-PAYS[<span class="obligatoire">(obligatoire)</span>]</td>
+  				  <td class="ligneTableau">
+				  <select name="pays" size="1" class="zoneDeSaisie">
+				  <option value="" selected="selected">Choisissez ...</option>
+				  <THELIA_pays type="PAYS" zdefinie="1">           
+                  <option value="THELIA-ID"  THELIA-SELECTED>THELIA-TITRE</option>
+				  </THELIA_pays>
+				  </select>
+				  </td>
+			  </tr>
+  				<tr>
+  				  <td class="ligneTableau">Téléphone fixe THELIA-TELFIXE[<span class="obligatoire">(obligatoire)</span>] </td>
+  				  <td class="ligneTableau"><input type="text" name="telfixe"   value="THELIA-CLIENT_TELFIXE"  class="zoneDeSaisie" /></td>
+			  </tr>
+  				<tr>
+  				  <td class="ligneTableau">T&eacute;l&eacute;phone portable </td>
+  				  <td class="ligneTableau"><input type="text" name="telport" class="zoneDeSaisie"   value="THELIA-CLIENT_TELPORT"/></td>
+			  </tr>
+  				<tr>
+  				  <td class="ligneTableau">E-mailTHELIA-EMAIL[<span class="obligatoire">(V&eacute;rifiez votre E-Mail)</span>]</td>
+  				  <td class="ligneTableau"><input type="text" name="email1" class="zoneDeSaisie"  value="THELIA-CLIENT_EMAIL"/></td>
+			  </tr>
+  				<tr>
+  				  <td class="ligneTableau">Confirmation de votre e-mail </td>
+  				  <td class="ligneTableau"><input type="text" name="email2" class="zoneDeSaisie"  value="THELIA-CLIENT_EMAIL"/></td>
+			  </tr>
+			</table>
+				<div class="boutonMonCompteContenu">
+				<input type="submit" value="Valider" />
+				</div>
+			</form>
+		</div>
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>

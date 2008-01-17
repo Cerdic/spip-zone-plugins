@@ -1,0 +1,119 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+[(#REM) Lien vers le flux RSS de la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
+</head>
+
+<body class="page_panier">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de la rubrique ]
+		<div id="contenu">
+		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; R&eacute;capitulatif de ma commande</div>
+			
+<!-- Titre de la rubrique -->
+
+				<div class="titrePage">
+				<h2>R&eacute;capitulatif de ma commande </h2>
+				</div>
+
+<!-- Contenu de la page -->
+	
+			<form action="#URL_PAGE{commande}" id="formulaire">
+			<input type="hidden" name="thelia_action" value="codepromo" />
+			<table width="675" border="0" cellspacing="0" cellpadding="5">
+            	<tr>
+					<td width="305" class="enteteTableau">Produits</td>
+                    <td width="110" class="enteteTableau">Prix unitaire </td>
+                    <td width="110" class="enteteTableau">Quantit&eacute;</td>
+                    <td width="110" class="enteteTableau">Total</td>
+				</tr>
+			</table>
+			<THELIA_panier type="PANIER">
+			<table width="675" border="0" cellspacing="0" cellpadding="5">
+              	<tr>
+					<td width="100" class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td><td width="205" class="ligneTableau">THELIA-TITRE - THELIA-REF</td>
+                    <td width="110" class="ligneTableau">THELIA-PRIXU &euro;</td>
+                    <td width="110" class="ligneTableau">THELIA-QUANTITE</td>
+                    <td width="110" class="ligneTableau">THELIA-TOTAL &euro;</td>
+				</tr>
+			</table>
+			</THELIA_panier>
+			<table width="675" border="0" cellspacing="0" cellpadding="5">
+              	<tr>
+					<td width="425" class="enteteTableau">&nbsp;</td>
+                    <td width="110" class="enteteTableau">Frais de livraison </td>
+                    <td width="110" class="enteteTableau">THELIA-PANIER_PORT &euro;</td>
+				</tr>
+			</table>
+			<table width="675" border="0" cellspacing="0" cellpadding="5">
+              	<tr>
+					<td width="425" class="enteteTableau">&nbsp;</td>
+                    <td width="110" class="enteteTableau">Remise </td>
+                    <td width="110" class="enteteTableau">THELIA-PANIER_REMISE &euro;</td>
+				</tr>
+			</table>
+			<table width="675" border="0" cellspacing="0" cellpadding="5">
+              	<tr>
+					<td width="425" class="footerTableau">&nbsp;</td>
+                    <td width="110" class="footerTableau">Total</td>
+                    <td width="110" class="footerTableau">THELIA-PANIER_TOTPORT &euro;</td>
+				</tr>
+			</table>
+			<br />
+			Saisir votre code de réduction
+			<input name="code" type="text" class="zoneDeSaisie"/><input type="submit" value="Valider" />
+			
+			</form>
+
+			<div class="separation">
+			</div>
+			
+			<div class="titrePage">
+				<h2>Je choisis un mode de paiement </h2>
+			</div>
+
+		<!-- contenu de la page -->
+		<table width="675" border="0" cellspacing="0" cellpadding="5">
+		
+		   <THELIA_PAIEMENT type="PAIEMENT">
+		 	<tr>
+			   <td width="305" class="ligneTableau">THELIA-TITRE</td>
+               <td width="110" class="ligneTableau"><a href="#URL_PAGE{commande,thelia_action=paiement&amp;type_paiement=THELIA-ID}">Valider</a></td>
+			</tr>
+
+			</THELIA_PAIEMENT>
+
+		</table>
+			
+		
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>

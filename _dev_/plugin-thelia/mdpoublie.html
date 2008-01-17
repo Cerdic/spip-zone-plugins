@@ -1,0 +1,68 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+[(#REM) Lien vers le flux RSS de la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
+</head>
+
+<body class="page_panier">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de la rubrique ]
+		<div id="contenu">
+			<!-- Titre de la rubrique -->
+
+				<div class="titrePage">
+				<h2>Mon compte : mot de passe perdu ou oubli&eacute; </h2>
+				</div>
+
+			
+<!-- Contenu de la page -->
+
+				<div class="sousTitrePage">
+				<h3>Inscrivez votre email pour recevoir votre mot de passe</h3>
+				</div>
+				
+			<form action="#URL_PAGE{mdpoublie}" method="post" name="formmdp" id="formmdp">
+			<input type="hidden" name="thelia_action" value="chmdp" />
+			<table width="775" border="0" cellspacing="0" cellpadding="5">
+  				<tr>
+   					<td width="190" class="ligneTableau">Votre email</td>
+   					<td width="565" class="ligneTableau"><input name="email" type="text" class="zoneDeSaisie"/></td>
+  				</tr>
+			</table>
+				<div class="boutonMonCompteContenu">
+				<input type="submit" value="Valider" />
+				</div>
+			</form>
+
+		</div> <!--fin contenu-->
+
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
