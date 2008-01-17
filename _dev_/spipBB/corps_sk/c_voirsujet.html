@@ -103,7 +103,7 @@
 			</tr>
 			<tr class="ligne_sujet">
 				<td>
-					[(#TEXTE|lignes_longues|smileys)]
+					[<div class="#EDIT{texte}">(#TEXTE|lignes_longues|smileys)</div>]
 
 					[(#REM) signature auteur ]
 					[<p class="signature">(#SIGNATURE_POST)</p>]
@@ -225,7 +225,7 @@
 		</tr>
 		<tr class="ligne_sujet">
 			<td>
-				[(#TEXTE|lignes_longues|smileys)]
+				[<div class="#EDIT{texte}">(#TEXTE|lignes_longues|smileys)</div>]
 
 				[(#REM) signature auteur ]
 				[<p class="signature">(#SIGNATURE_POST)</p>]
@@ -309,7 +309,7 @@
 		</tr>
 		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
 			<td>
-				[(#TEXTE|lignes_longues|smileys)]
+				[<div class="#EDIT{texte}">(#TEXTE|lignes_longues|smileys)</div>]
 
 				[(#REM) signature auteur ]
 				[<p class="signature">(#SIGNATURE_POST)</p>]
