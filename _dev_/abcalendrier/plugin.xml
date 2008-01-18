@@ -15,22 +15,22 @@ _ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
 	<description>
 	<multi>
 	[it]
-	Questo plugin nasce dall'esigenza di avere un calendari simile al [minicalendrier pour eva->http://eva-web.edres74.net/spip.php?article35], in cui poter inserire oltre agli articoli anche le brevi.
+	Questo plugin nasce dall'esigenza di avere un calendari simile al [minicalendrier pour eva-&#62;http://eva-web.edres74.net/spip.php?article35], in cui poter inserire oltre agli articoli anche le brevi.
 		
-	Utilizza il {surcharge} del file {{extra.php}} preso dal plugin [champs homonymes->http://www.spip-contrib.net/Plugin-Champs-homonymes] per gestire il campo {evento} aggiunto alle brevi.
+	Utilizza il {surcharge} del file {{extra.php}} preso dal plugin [champs homonymes-&#62;http://www.spip-contrib.net/Plugin-Champs-homonymes] per gestire il campo {evento} aggiunto alle brevi.
 	
 	{mini-calendrier per eva} &egrave; stato  modificato levando le dipendenze da eva, aggiungendo cicli sulle brevi e levando cicli non necessari. Inoltre &egrave; stata implementata la localizzazione con i file lang e usando i relativi file di spip
 	
-	<hr />
+	&#60;hr /&#62;
 	
 	{{{Istallazione:}}} attivare il plugin,
 	creare la parola chiave mini-calendrier
 	inserirla in articoli e brevi
 	
-	Inserire il <INCLURE{fond=mini_calendrier}{lang}>
+	Inserire il &#60;INCLURE{fond=mini_calendrier}{lang}&#62;
 	nei modelli
 	
-	<hr />
+	&#60;hr /&#62;
 	
 	to do: 
 	
@@ -38,10 +38,10 @@ _ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
 	
 	lo stile grafico &egrave; attualmente mutuato dalla dist di spip. separare in un css propri gli stili necessari
 	
-	<hr />
+	&#60;hr /&#62;
 	
 	{{{Ringraziamenti}}}
-	Ringraziamenti agli autori di [champs homonymes->http://www.spip-contrib.net/Plugin-Champs-homonymes] francois.vachon@iago.ca e [minicalendrier pour eva->http://eva-web.edres74.net/spip.php?article35] Olivier Gautier e a tutti coloro che contribuiscono a arricchire la documentazione sullo sviluppo dei plugin.
+	Ringraziamenti agli autori di [champs homonymes-&#62;http://www.spip-contrib.net/Plugin-Champs-homonymes] francois.vachon@iago.ca e [minicalendrier pour eva-&#62;http://eva-web.edres74.net/spip.php?article35] Olivier Gautier e a tutti coloro che contribuiscono a arricchire la documentazione sullo sviluppo dei plugin.
 	</multi>
 
 	</description>
