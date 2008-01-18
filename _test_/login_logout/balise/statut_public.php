@@ -72,48 +72,54 @@ function balise_STATUT_PUBLIC_dyn () {
 		
 		$lilo_values_array = unserialize(_LILO_DEFAULT_VALUES_ARRAY);
 		
-		// initialiser la config par défaut si besoin (installation non configurée)
-		foreach($lilo_values_array as $key => $value) {
-			$config[$key] = (isset($config[$key]) && !empty($config[$key])) ? $config[$key] : $lilo_values_array[$key];
-		}
-
-		if(isset($config['lilo_statut_voir_logo']) && ($config['lilo_statut_voir_logo']=='oui')) {
-			$chercher_logo = charger_fonction('chercher_logo', 'inc');
-			if (list($logo_auteur) = $chercher_logo($auteur_session['id_auteur'], 'id_auteur', 'on')) {
-				$auteur_session['logo_auteur'] = $logo_auteur;
-				$auteur_session['voir_logo_auteur'] = 'oui';
+		if($lilo_values_array) {
+			// initialiser la config par défaut si besoin (installation non configurée)
+			foreach($lilo_values_array as $key => $value) {
+				$config[$key] = (isset($config[$key]) && !empty($config[$key])) ? $config[$key] : $lilo_values_array[$key];
 			}
+	
+			if(isset($config['lilo_statut_voir_logo']) && ($config['lilo_statut_voir_logo']=='oui')) {
+				$chercher_logo = charger_fonction('chercher_logo', 'inc');
+				if (list($logo_auteur) = $chercher_logo($auteur_session['id_auteur'], 'id_auteur', 'on')) {
+					$auteur_session['logo_auteur'] = $logo_auteur;
+					$auteur_session['voir_logo_auteur'] = 'oui';
+				}
+			}
+			$auteur_session['voir_boutons_admins'] = $config['lilo_statut_voir_boutons_admins'];
+			$transparent = ($config['lilo_statut_transparent']=='oui')
+				? "filter:alpha(opacity=75); -moz-opacity:0.75; opacity: 0.75;"
+				: ""
+				;
+			
+			$statut_style = ""
+				. "position:"
+				. (
+					(($fixed = ($config['lilo_statut_fixed'] == 'oui'))
+					&& !($is_ie6 = (($ii = lilo_browser_is_explorer()) && ($ii < 7 )) ? $ii : false)
+					) ? 'fixed' : 'absolute') . " !important;"
+				.	(
+					($fixed && !($is_top = $config['lilo_statut_position'][0] == 't') && !$is_ie6) ? "bottom:" : "top:"
+					)
+					. lilo_css_value_get($fixed, $is_ie6, $is_top, "Top", "Height") . ";"
+				.	(
+					($fixed && !($is_left = $config['lilo_statut_position'][1] == 'l') && !$is_ie6) ? "right:" : "left:"
+					)
+					. lilo_css_value_get($fixed, $is_ie6, ($is_left), "Left", "Width") . ";"
+				. "background-color:#".$config['lilo_statut_bgcolor'].";"
+				;
+			$auteur_session['statut_style'] = "$statut_style $transparent";
+			
+			$lilo_boite_statut_inseree = true;
+			
+			return array('formulaires/statut_public'
+				, 0 //$GLOBALS['delais']
+				, $auteur_session
+				);
 		}
-		$auteur_session['voir_boutons_admins'] = $config['lilo_statut_voir_boutons_admins'];
-		$transparent = ($config['lilo_statut_transparent']=='oui')
-			? "filter:alpha(opacity=75); -moz-opacity:0.75; opacity: 0.75;"
-			: ""
-			;
-		
-		$statut_style = ""
-			. "position:"
-			. (
-				(($fixed = ($config['lilo_statut_fixed'] == 'oui'))
-				&& !($is_ie6 = (($ii = lilo_browser_is_explorer()) && ($ii < 7 )) ? $ii : false)
-				) ? 'fixed' : 'absolute') . " !important;"
-			.	(
-				($fixed && !($is_top = $config['lilo_statut_position'][0] == 't') && !$is_ie6) ? "bottom:" : "top:"
-				)
-				. lilo_css_value_get($fixed, $is_ie6, $is_top, "Top", "Height") . ";"
-			.	(
-				($fixed && !($is_left = $config['lilo_statut_position'][1] == 'l') && !$is_ie6) ? "right:" : "left:"
-				)
-				. lilo_css_value_get($fixed, $is_ie6, ($is_left), "Left", "Width") . ";"
-			. "background-color:#".$config['lilo_statut_bgcolor'].";"
-			;
-		$auteur_session['statut_style'] = "$statut_style $transparent";
-		
-		$lilo_boite_statut_inseree = true;
-		
-		return array('formulaires/statut_public'
-			, 0 //$GLOBALS['delais']
-			, $auteur_session
-			);
+		else {
+			include_spip('inc/utils');
+			spip_log("LILO: appel de la balise en cache sur plugin inactif.");
+		}
 	}
 	return (false);
 }
