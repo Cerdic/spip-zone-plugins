@@ -355,13 +355,13 @@ td.aff_avatar p.modo {
 /* ligne moderateurs */
 /* GAF v.0.5, modif v.0.6 */
 .modo_ligne {
-	margin:10px 0px;
-	padding: 2px 24px;
+	margin:4px 0 4px 0;
+	padding: 0px 24px;
 	background-image: url(img/modo-24.png);
 	background-repeat: no-repeat;
 	background-position:0px 0px;
 	color:#4C788B; /* coul 1 */
-	font-size: 11px;
+	font-size: 10px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	text-align:left;
 }

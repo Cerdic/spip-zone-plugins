@@ -38,7 +38,7 @@
 		<tr class="ligne_sujet">
 			<td colspan="2">
 				#SET{adr_ip,#ENV{ip}}
-				#SET{liste_membres,#ARRAY{0,0}}
+				#SET{liste_membres,#ARRAY}
 				<BOUCLE_sel_art(ARTICLES){id_article}>
 					<BOUCLE_liste_membres(FORUMS){id_secteur}{tout}{ip=#GET{adr_ip}}>
 						#SET{val,#NOM}
@@ -56,7 +56,7 @@
 		<tr class="ligne_sujet">
 			<td colspan="2">
 				#SET{nom_src,#NOM}
-				#SET{liste_adr,#ARRAY{0,0}}
+				#SET{liste_adr,#ARRAY}
 				<BOUCLE_sel_nom(ARTICLES){id_article}>
 					<BOUCLE_liste_membres_nom(FORUMS){id_secteur}{tout}{auteur=#GET{nom_src}}>
 						#SET{val,#IP}
