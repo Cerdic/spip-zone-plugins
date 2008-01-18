@@ -1,0 +1,65 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	ABCalendrier: Mini Calendario Articoli e Brevi
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	mmmxvvv@tiscali.it
+_ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.3
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	<multi>
+	[it]
+	Questo plugin nasce dall'esigenza di avere un calendari simile al [minicalendrier pour eva->http://eva-web.edres74.net/spip.php?article35], in cui poter inserire oltre agli articoli anche le brevi.
+		
+	Utilizza il {surcharge} del file {{extra.php}} preso dal plugin [champs homonymes->http://www.spip-contrib.net/Plugin-Champs-homonymes] per gestire il campo {evento} aggiunto alle brevi.
+	
+	{mini-calendrier per eva} è stato  modificato levando le dipendenze da eva, aggiungendo cicli sulle brevi e levando cicli non necessari. Inoltre è stata implementata la localizzazione con i file lang e usando i relativi file di spip
+	
+	<hr />
+	
+	{{{Istallazione:}}} attivare il plugin,
+	creare la parola chiave mini-calendrier
+	inserirla in articoli e brevi
+	
+	Inserire il <INCLURE{fond=mini_calendrier}{lang}>
+	nei modelli
+	
+	<hr />
+	
+	to do: 
+	
+	introdurre il segnaposto #ABCALENDRIER da inserire invece dell'INCLURE e riscrivere di conseguenza il codice.
+	
+	lo stile grafico è attualmente mutuato dalla dist di spip. separare in un css propri gli stili necessari
+	
+	<hr />
+	
+	{{{Ringraziamenti}}}
+	Ringraziamenti agli autori di [champs homonymes->http://www.spip-contrib.net/Plugin-Champs-homonymes] francois.vachon@iago.ca e [minicalendrier pour eva->http://eva-web.edres74.net/spip.php?article35] Olivier Gautier e a tutti coloro che contribuiscono a arricchire la documentazione sullo sviluppo dei plugin.
+	</multi>
+
+	</description>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	abcalendrier
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<fonctions>
+	mes_fonctions_abcalendrier.php
+	</fonctions>
+	<options>
+	mes_options_abcalendrier.php
+	</options>
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+ <install>base/abcalendrier_upgrade.php</install>	
+</plugin>
