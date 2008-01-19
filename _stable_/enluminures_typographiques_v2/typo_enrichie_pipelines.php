@@ -5,8 +5,8 @@ function TypoEnluminee_insert_head($flux) {
 	if (!function_exists('lire_config'))
 		global $BarreTypoEnrichie_Preserve_Header;
 	else
-		$BarreTypoEnrichie_Preserve_Header =  lire_config('bte/insertcss','Oui');
-	if (!$BarreTypoEnrichie_Preserve_Header)
+		$BarreTypoEnrichie_Preserve_Header = lire_config('bte/insertcss','Oui');
+	if ($BarreTypoEnrichie_Preserve_Header != 'Oui')
 		return $flux.'<link rel="stylesheet" href="'.find_in_path('css/enluminurestypo.css').'" type="text/css" media="all" />'."\n";
 	return $flux;
 }
