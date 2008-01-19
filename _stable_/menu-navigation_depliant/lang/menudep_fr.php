@@ -10,7 +10,7 @@ $GLOBALS['i18n_'._MENUDEP_PREFIX.'_fr'] = array(
 
 	'menudep_nom' => "Menu dépliant"
 	
-,  'configuration_menu_depliant' => "Configuration du menu dépliant"
+,  'configuration_menu_depliant' => "Configuration du menu de navigation dépliant"
 , 'configuration_menu_depliant_desc' => "Cette page vous permet de configurer le comportement graphique du menu de navigation
 	présent dans l'espace public du site."
 
@@ -43,7 +43,7 @@ $GLOBALS['i18n_'._MENUDEP_PREFIX.'_fr'] = array(
 
 , 'configurer_vitesse' => "Vitesse d'animation (apparition/disparition du sous-menu) "
 , 'configurer_vitesse_desc' => "Placez dans ce
-	champ une chaine de caractères représentant une des trois vitesses prédéfinies (<em>slow</em>, <em>normal</em> ou <em>fast</em>) 
+	champ une des trois vitesses prédéfinies (<em>slow</em>, <em>normal</em> ou <em>fast</em>) 
 	ou un nombre en millisecondes correspondant à la durée de l'animation."
 , 'configurer_vitesse_in' => "Apparition du sous-menu (mettre 1 pour annuler l'animation) "
 , 'configurer_vitesse_out' => "Disparition du sous-menu (mettre 1 pour annuler l'animation) "
