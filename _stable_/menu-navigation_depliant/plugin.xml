@@ -1,0 +1,49 @@
+<plugin>
+	<!--  
+
+	// menudep plugin.xml
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	 -->
+	<nom>Menu de navigation d&eacute;pliant (MenuDep)</nom>
+	<auteur>cpaulus@quesaco.org</auteur>
+	<version>0.26</version>
+	<version_base>0.01</version_base>
+	<icon>images/menudep-64.png</icon>
+	<etat>test</etat>
+
+	<description>Menu de navigation d&eacute;pliant avec sous-menus incrust&eacute;s ou d&eacute;tach&eacute;s. 
+		Animations param&eacute;trables [via la page de configuration->/ecrire/?exec=configuration].</description>
+
+	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/Menu-de-navigation-depliant-pour]</lien>
+	
+	<prefix>menudep</prefix>
+
+	<options>menudep_mes_options.php</options>
+	
+	<install>base/menudep_install.php</install>
+
+	<pipeline>
+		<!-- les onglets de config dans l'espace privé -->
+		<nom>ajouter_onglets</nom>
+		<inclure>inc/menudep_pipeline_ajouter_onglets.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<!-- les css du plugin dans l'espace privé -->
+		<nom>header_prive</nom>
+		<inclure>inc/menudep_pipeline_header_prive.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<!-- les css et js dans l'espace public -->
+		<nom>insert_head</nom>
+		<inclure>inc/menudep_pipeline_insert_head.php</inclure>
+	</pipeline>
+
+	<chemin dir='' />
+
+</plugin>
