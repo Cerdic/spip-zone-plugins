@@ -10,10 +10,10 @@
 	 -->
 	<nom>Menu de navigation d&eacute;pliant (MenuDep)</nom>
 	<auteur>cpaulus@quesaco.org</auteur>
-	<version>0.26</version>
+	<version>1.00</version>
 	<version_base>0.01</version_base>
 	<icon>images/menudep-64.png</icon>
-	<etat>test</etat>
+	<etat>stable</etat>
 
 	<description>Menu de navigation d&eacute;pliant avec sous-menus incrust&eacute;s ou d&eacute;tach&eacute;s. 
 		Animations param&eacute;trables [via la page de configuration->/ecrire/?exec=configuration].</description>
@@ -43,7 +43,5 @@
 		<nom>insert_head</nom>
 		<inclure>inc/menudep_pipeline_insert_head.php</inclure>
 	</pipeline>
-
-	<chemin dir='' />
 
 </plugin>
