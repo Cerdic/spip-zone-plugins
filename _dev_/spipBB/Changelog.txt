@@ -1,4 +1,9 @@
-﻿2008-01-18  chryjs  <chryjs!@!free!.!fr>
+﻿2008-01-19  chryjs  <chryjs!@!free!.!fr>
+
+ * Corrections sur le champ email pour meilleure compatibilite avec les autres plugins + controle pour la modification (a ameliorer) . Grâce aux infos de Pat
+
+
+2008-01-18  chryjs  <chryjs!@!free!.!fr>
 
  * C'est bien #ARRAY tout court pour un tableau vide :)
  * On resserre un peu la présentation des modérateurs
