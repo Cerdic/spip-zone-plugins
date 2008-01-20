@@ -1,0 +1,7 @@
+<plugin>
+	<nom>Archives mensuelles</nom>
+	<version>1</version>
+	<prefix>dtarch</prefix>
+	<fonctions>dtarch_fonctions.php</fonctions>
+	<lien>http://www.spip-contrib.net/Gestion-de-dates-et-calendriers</lien>
+</plugin>

@@ -1,0 +1,19 @@
+<B_archives>
+<div id="archives" class="menu rubriques">
+	<h2><:dtarch:archives:></h2>
+	<ul>
+		<BOUCLE_archives(ARTICLES){par date}{inverse}{fusion_date_mois}{lang_select=non}{age<366}>[
+		<li>
+			<a href="[(#SELF|parametre_url{date,#DATE})]" rel="(#DATE)"[ class="(#DATE_EXPOSE)"]>[
+				(#DATE|affdate_mois_annee)
+			]</a>
+		</li>
+		]</BOUCLE_archives>
+	</ul>
+	<BOUCLE_test_plus_vieux(ARTICLES){lang_select=non}{age>=366}{0,1}> </BOUCLE_test_plus_vieux>[
+	<p>
+		<a href="(#URL_PAGE{plan})"><:dtarch:toutes_archives:></a>
+	</p>
+	]</B_test_plus_vieux>
+</div>
+</B_archives>
