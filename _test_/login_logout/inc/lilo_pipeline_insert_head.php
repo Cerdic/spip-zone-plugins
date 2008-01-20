@@ -265,7 +265,7 @@ function lilo_envelopper_script ($s, $type) {
 			break;
 		case 'js':
 			$s = "
-				<script language='JavaScript' type='text/javascript'>
+				<script type='text/javascript'>
 				jQuery().ready(function(){
 				" 
 				. $s
