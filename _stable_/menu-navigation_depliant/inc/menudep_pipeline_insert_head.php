@@ -73,7 +73,7 @@ function menudep_insert_head ($flux) {
 
 $flux .= "
 <!-- "._MENUDEP_PREFIX." -->
-<script language='JavaScript' type='text/javascript'>
+<script type='text/javascript'>
 	var menudep = { ".$js_var_menudep." };
 </script>
 <script type='text/javascript' src='/".compacte(find_in_path('javascript/jquery-menudep.js'),'js')."'></script>
