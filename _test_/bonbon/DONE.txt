@@ -41,7 +41,7 @@ Ce qui a été fait avec «Bonbon !»
 - Abandon de l'affichage des séances seules (sans les devoirs)... Quel est l'intérêt ?
 - Gros changements dans l'affichage: le cahier de texte s'affiche désormais plus comme un cahier (avec des onglet pour les classes et les matières). Par contre on ne peut plus avoir différentes matières et/ou classes sur la même page/requête (quel intérêt ?). Celà optimise un peu les requêtes SQL (moins de REGXP) et rend je l'espère l'affichage plus pratique pour les élèves/parents. Des astcuces CSS permettent un bon affichage sous IE...
 - Bonbon utilise la barre typographique de Spip (qui peut être la v2 si le plugin est installé) ! (merci Stephane)
-- Un tableau de bord sur la page d'accueil permet à chaque prof de savoir en un clin d'½il où il en est (dernières fiches publiées pour chaque classe et lien direct vers la saisie pour la classe concernée)... Très pratique pour savoir où on en est quand on a beaucoup de classes (et du retard... :-))
+- Un tableau de bord sur la page d'accueil permet à chaque prof de savoir en un clin d'½il où il en est (dernières fiches publiées pour chaque classe et lien direct vers la saisie pour la classe concernée)... Très pratique pour savoir où on en est quand on a beaucoup de classes (et du retard... :-)). Ce tableau de bord affiche aussi les séances qui ont un problème de date.
 - limitation des la selection des séances à l'année en cours, à moins que ce ne soit explictement mentionné dans les paramètres GET.
 - petites corrections autour des sens chronologiques
 

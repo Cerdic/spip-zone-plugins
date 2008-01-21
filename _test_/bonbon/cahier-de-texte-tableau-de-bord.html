@@ -8,6 +8,13 @@
 ***Affichage du tableau de bord
 -->]
 #CACHE{8*60}
+#SET{maintenant,#DATE}
+<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>[
+(#REM) On détermine quelle est l'année scolaire que l'on veut afficher
+][	(#SET{annee_rubrique,[(#ENV{date}|bonbon_annee_scolaire)]})
+][	(#ENV{annee_scolaire}|?{' ',''})
+		#SET{annee_rubrique,#ENV{annee_scolaire}}
+	]<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre=#GET{annee_rubrique}}{!par titre}{0,1}>
 <BOUCLE_CDT_entier(MOTS){titre="Description de séance"}>
 #SET{id_mot_description_seance,#ID_MOT}
 </BOUCLE_CDT_entier>
@@ -15,9 +22,9 @@
 					<ul style='margin-left:3em;'>
 						<li>"}
 			<ul style="text-align: left; padding: 1em;">
-<BOUCLE_Classes_de_lauteur(MOTS){type="Classes"}{par titre}><BOUCLE_Optimisation(ARTICLES){id_auteur=#SESSION{id_auteur}}{id_mot}{0,1}>			<li style="list-style-image: url('#CHEMIN{puce.gif}')"><span class="on">#_Classes_de_lauteur:TITRE</span>&nbsp;: dernière séance saisie
+<BOUCLE_Classes_de_lauteur(MOTS){type="Classes"}{par titre}><BOUCLE_Optimisation(ARTICLES){id_rubrique}{id_auteur=#SESSION{id_auteur}}{id_mot}{0,1}>			<li style="list-style-image: url('#CHEMIN{puce.gif}')"><span class="on">#_Classes_de_lauteur:TITRE</span>&nbsp;: dernière séance saisie
 		[(#SET{compteur_matiere,0)}][(#SET{liste_mat_seances,""})
-]		<BOUCLE_Matieres_de_lauteur(MOTS){type="Matières"}{par titre}><BOUCLE_Seances_de_lauteur(ARTICLES){id_mot=#GET{id_mot_description_seance}}{id_auteur=#SESSION{id_auteur}}{id_mot}{id_mot=#_Classes_de_lauteur:ID_MOT}{!par date}{0,1}>#SET{groupe,""}<BOUCLE_y_a_un_groupe(MOTS){type="Sous groupes de classes"}{id_article}>#SET{groupe,#TITRE}</BOUCLE_y_a_un_groupe>[
+]		<BOUCLE_Matieres_de_lauteur(MOTS){type="Matières"}{par titre}><BOUCLE_Seances_de_lauteur(ARTICLES){id_rubrique}{id_mot=#GET{id_mot_description_seance}}{id_auteur=#SESSION{id_auteur}}{id_mot}{id_mot=#_Classes_de_lauteur:ID_MOT}{!par date}{0,1}>#SET{groupe,""}<BOUCLE_y_a_un_groupe(MOTS){type="Sous groupes de classes"}{id_article}>#SET{groupe,#TITRE}</BOUCLE_y_a_un_groupe>[
 				(#SET{compteur_matiere,[(#GET{compteur_matiere}|plus{1})]})
 				][
 				(#GET{compteur_matiere}|>{1}|?{' ',''})
@@ -52,4 +59,47 @@
 					]
 				]#GET{liste_mat_seances}</li>
 </BOUCLE_Optimisation></BOUCLE_Classes_de_lauteur>
-			</ul>
+			</ul>[
+
+	(#REM) On calcule le nombre de jours depuis la rentrée...
+
+][
+	(#SET{nb_jour_depuis_rentree,
+		[(#GET{maintenant}
+				|affdate{"U"}
+				|moins{[(#GET{maintenant}
+					|bonbon_annee_scolaire{oui}
+					)]}
+				|div{86400}
+				|plus{1}
+		)]
+	})
+]<B_Mauvaise_date>
+<p><strong class="on">Attention !</strong> Quelques fiches semblent avoir des dates étranges ! (Astuce: dupliquez-les en changeant la date de la copie, puis effacez la)</p>
+#ANCRE_PAGINATION
+<ul style="text-align: left; padding: 1em;">
+<BOUCLE_Mauvaise_date(ARTICLES){id_rubrique}{id_auteur=#SESSION{id_auteur}}{age>#GET{nb_jour_depuis_rentree}}{doublons mauvaisedate}{pagination #ENV{nb,20}}{par date}>
+	<li style="list-style-image: url('#CHEMIN{puce.gif}')"><BOUCLE_Devoir_ou_seance_perso(MOTS){titre="Description de séance"}{0,1}>Une séance#SET{id_a_afficher,#ID_ARTICLE}</BOUCLE_Devoir_ou_seance_perso></B_Devoir_ou_seance_perso>Un devoir#SET{id_a_afficher,[(#PS*|bonbon_matches_id_article)]}<//B_Devoir_ou_seance_perso> des <BOUCLE_QuelleClasse(MOTS){id_article}{type="Classes"}{"/"}>#TITRE</BOUCLE_QuelleClasse> [[(#DATE|?{du })]<span class="on">(#DATE|affdate|sinon{"n'a pas de date"})</span>] ! <a href="[(#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=calcul}|parametre_url{id_article,#GET{id_a_afficher}})]" onClick='javascript:ouvrefenetre(this.href);return false;'>voir la séance en question</a>&nbsp;- <a href="[(#URL_PAGE{cahier-de-texte-saisie,id_article=#GET{id_a_afficher}})]" target="_blank" title="Dupliquer cette séance dans une nouvelle fenêtre pour changer la date">Dupliquer la séance</a>&nbsp;- <a href="[(#URL_PAGE{cahier-de-texte-saisie,id_article=#GET{id_a_afficher}}|parametre_url{effacer_fiche,"a_confirmer"})]" title="Effacer la séance après l'avoir dupliquée">Effacer cette séance</a></li>
+</BOUCLE_Mauvaise_date>
+</ul>
+[<div class="apres">Pages&nbsp;: (#PAGINATION{page_precedent_suivant})</div>]
+<br clear="all">
+</B_Mauvaise_date>
+<BOUCLE_Gestionnaire(AUTEURS){id_auteur=#SESSION{id_auteur}}{statut=0minirezo}>
+<B_Mauvaise_date_des_autres>
+<strong class="on">Attention !</strong> Quelques fiches saisies par vos collègues semblent avoir des dates étranges ! Prévenez-les !</p>
+#ANCRE_PAGINATION
+<ul style="text-align: left; padding: 1em;">
+<BOUCLE_Mauvaise_date_des_autres(ARTICLES){id_rubrique}{age>#GET{nb_jour_depuis_rentree}}{doublons mauvaisedate}{pagination #ENV{nb,20}}{par date}>
+	<li style="list-style-image: url('#CHEMIN{puce.gif}')">#LESAUTEURS  <BOUCLE_Devoir_ou_seance(MOTS){titre="Description de séance"}{0,1}>une séance#SET{id_a_afficher,#ID_ARTICLE}</BOUCLE_Devoir_ou_seance></B_Devoir_ou_seance>un devoir#SET{id_a_afficher,[(#PS*|bonbon_matches_id_article)]}<//B_Devoir_ou_seance> [[(#DATE|?{pour le })]<span class="on">(#DATE|affdate|sinon{"n'a pas de date"})</span>] ! <a href="[(#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=calcul}|parametre_url{id_article,#GET{id_a_afficher}})]" onClick='javascript:ouvrefenetre(this.href);return false;'>voir la séance en question</a></li>
+</BOUCLE_Mauvaise_date_des_autres>
+</ul>
+[<div class="apres">Pages&nbsp;: (#PAGINATION{page_precedent_suivant})</div>]
+<br clear="all">
+</B_Mauvaise_date_des_autres>
+</BOUCLE_Gestionnaire>
+
+
+
+	</BOUCLE_AnneeScol>
+</BOUCLE_Contexte_RubriqueCDT>
