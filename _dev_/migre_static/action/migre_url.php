@@ -93,11 +93,10 @@ function migre_up_url($id_rubrique="") {
 	reset($table_uri);
 	//while (list($uri,)=each($table_uri)) $table_search[]=";\-\>$uri(index\..{3,4})*(\?*.*?)\];";
 	//while (list(,$uri)=each($table_uri)) $table_search[]=";\-\>$uri(\?*.*?)\];";
-	while (list(,$uri)=each($table_uri)) $table_search[]=";\-\>$uri\];";
+	while (list(,$uri)=each($table_uri)) $table_search[]="/\-\>".str_replace("/","\/",html_entity_decode($uri))."\]/";
 	reset($table_uri);
 	while (list($id,)=each($table_uri)) $table_replace[]="->art$id]"; // conversion des URIs dans migre_html_to_spip
 
-//print_r($table_search);
 	reset($table_art);
 	while (list(,$id)=each($table_art)) {
 		$sql = "SELECT texte FROM spip_articles WHERE id_article=$id";

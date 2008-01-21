@@ -102,15 +102,16 @@ function action_migre_action()
 function migre_affiche_pages()
 {
 global $migre_meta;
-	$listepages=$migre_meta['migre_liste_pages'];
-	$dochtml=get_list_of_pages($listepages);
+	$url_liste_pages=$migre_meta['migre_liste_pages'];
+	//$dochtml=get_list_of_pages($listepages);
+
+	$liste_articles=array();
+	$liste_rubriques=array();
+	get_list_of_pages($url_liste_pages,$liste_rubriques,$liste_articles);
 	$i=0;
 	$res  = _T('migrestatic:resultat_liste_pages');
-	$res .= "\n<div style='text-align:left;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;overflow:auto;height:15em;'><ol>";
-	while(list ($key, $migre_uri) = each ($dochtml) )
-	{
-		$res .= "\n<li><a href='$migre_uri'>".$migre_uri."</a></li>";
-	}
+	$res .= "\n<div style='text-align:left;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;overflow:auto;height:15em;'>";
+	$res .= afficher_arbre($liste_rubriques);
 	$res .= "\n</ol></div>";
 	return $res;
 } // migre_affiche_pages
@@ -130,36 +131,23 @@ global $migre_meta, $dir_lang;
 		$id_rubrique = $row['id_rubrique'];
 	}
 
-	$listepages=$migre_meta['migre_liste_pages'];
-	$dochtml=get_list_of_pages($listepages);
+	$url_liste_pages=$migre_meta['migre_liste_pages'];
+	$liste_articles=array();
+	$liste_rubriques=array();
+	get_list_of_pages($url_liste_pages,$liste_rubriques,$liste_articles);
+//print_r($liste_rubriques);
+//die("titi");
+	reorganiser_rubriques($liste_rubriques);
+//print_r($liste_rubriques);
+//die("tutu".$migre_meta['migre_id_rubrique']);
+	maj_arbre_rubriques($liste_rubriques[$migre_meta['migre_id_rubrique']]); // dans la base
+//print_r($liste_rubriques);
+//die("riri");
+	$aff = maj_articles($liste_articles); // dans la base
+//print_r($liste_rubriques);
+//die("lolo");
 
-	// [fr] Récup des URIs du site statique et traitement
-	// [en] Get all URIs and process them
-	$res_list= _T('migrestatic:resultat_liste_pages'). "\n<div $dir_lang style='width:98%;height:4em;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>" ;
-
-	$res  = "";
-	$i=0;
-	$table_uri=array();
-	while(list ($key, $migre_uri) = each ($dochtml) )
-	{
-		$res_list .= "<a href='$migre_uri'>".$migre_uri."</a><br />";
-		$res .= debut_cadre_relief('article-24.gif',true,'',
-			_T('migrestatic:processing_page')." <a href='$migre_uri'>".$migre_uri."</a>");
-		$id_article_cree=0;
-		$res .= migre_infos_page($migre_uri,$id_rubrique,$id_article_cree);
-		$table_uri[$migre_uri]=$id_article_cree;
-		$res .= fin_cadre_relief(true);
-		if ($migre_meta['migre_test'] AND $i>5) break; else $i++; // [fr] On ne teste que les 5 premieres pages [en] Test only first 5 pages
-	}
-	if ($migre_meta['migre_test']) {
-		//print_r($table_uri);
-		$res.="Pas de mise a jour des liens<br>";
-	} else {
-		$res.=  "<b>"._T('migrestatic:mis_a_jour').migre_parse_url($table_uri)."</b>";
-	}
-	$res .= "<div style='clear:both'>"._T('migrestatic:migre_fini')."</div>";
-	$res_list.= "<br style='clear: both;' />\n</div>\n";
-	return $res_list.$res;
+	return $aff;
 }
 
 // ------------------------------------------------------------------------------
@@ -307,11 +295,18 @@ function migre_filtrer_body($contenu) {
 				$conv=@preg_replace('/@r/iUs',"\r",$migre_meta['migre_htos'][$key]['spip']);
 				$conv=@preg_replace('/@n/iUs',"\n",$conv);
 
-				$contenu=@preg_replace($filtre,$conv,$contenu);
+				$nouvcontenu=@preg_replace($filtre,$conv,$contenu);
+
 				if ( function_exists('preg_last_error') AND preg_last_error()<>PREG_NO_ERROR ) {
 					spip_log("migre_static: migre_filtrer_body() erreur regexp:".$key.":filtre:".$filtre.":conv:".$conv);
 					echo "migrestatic: warning function migre_filtrer_body() : invalid regexp key : $key\n<br>";
 				}
+				elseif ( $contenu AND (strlen($nouvcontenu)===0)) {
+					spip_log("migre_static: migre_filtrer_body() warning regexp too strong:".$key.":filtre:".$filtre.":conv:".$conv);
+					echo "migre_static: migre_filtrer_body() warning regexp too strong : $key\n<br>";
+				}
+				else
+					$contenu = $nouvcontenu;
 			}
 		}
 	}
@@ -580,37 +575,5 @@ function migre_check_var($id_rubrique)
 	$out .= "\n</table>";
 	return $out;
 } // migre_check_var
-
-// ------------------------------------------------------------------------------
-// [fr] Parcourt la liste des uri/articles et essaie de remplace les URL locales en numeros d'articles
-// ------------------------------------------------------------------------------
-function migre_parse_url($table_uri="") {
-	$cpt=0;
-	if (empty($table_uri) or !is_array($table_uri)) return;
-	//copie de la liste
-	reset($table_uri);
-	while (list(,$id)=each($table_uri)) $table_art[]=$id;
-	//construction des remplacements
-	reset($table_uri);
-	while (list($uri,)=each($table_uri)) $table_search[]=";\-\>$uri\];";
-	reset($table_uri);
-	while (list(,$id)=each($table_uri)) $table_replace[]="->art$id]"; // conversion des URIs dans migre_html_to_spip
-
-	while (list(,$id_article)=each($table_art)) {
-		$sql = "SELECT texte FROM spip_articles WHERE id_article=$id_article";
-		$result=spip_query($sql);
-		if ($row = spip_fetch_array($result)) {
-			$row['texte']=stripslashes($row['texte']);
-			$texte = preg_replace($table_search,$table_replace,$row['texte']); 
-			if ($texte!=$row['texte']) { // on ne fait d'update que s'il y a eu modification(s)
-				$texte=addslashes($texte);
-				$sql="UPDATE spip_articles SET texte='$texte' WHERE id_article=$id_article";
-				$result=spip_query($sql);
-				$cpt++;
-			} // if modif
-		} // if $row
-	} // while
-	return $cpt;
-} // migre_parse_url
 
 ?>
