@@ -13,10 +13,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 @define('_DIV_CS_INFOS', '<div id="cs_infos" class="cs_infos">');
 
-// TODO : revoir tout ca avec compare_version() et la syntaxe de <necessite>
+// TODO : revoir tout ca avec la syntaxe de <necessite>
 function cs_version_erreur($outil) {
-	return (isset($outil['version-min']) && $GLOBALS['spip_version_code']<$outil['version-min'])
-		|| (isset($outil['version-max']) && $GLOBALS['spip_version_code']>$outil['version-max']);
+	return (isset($outil['version-min']) && version_compare($GLOBALS['spip_version_code'], $outil['version-min'], '<'))
+		|| (isset($outil['version-max']) && version_compare($GLOBALS['spip_version_code'], $outil['version-max'], '>'));
 }
 
 // initialise un outil, ses variables, et en renvoie la description compilee

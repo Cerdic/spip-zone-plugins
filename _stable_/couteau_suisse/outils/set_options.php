@@ -4,9 +4,9 @@ function set_options_header_prive($flux) {
 <script type="text/javascript"><!--
 // des que le DOM est pret...
 if (window.jQuery) jQuery(document).ready(function(){
- if ($('a.icone26').length) {
-	$("#displayfond").hide();
-	$("a.icone26[@href*=set_options]").hide();
+ if (jQuery('a.icone26').length) {
+	jQuery("#displayfond").hide();
+	jQuery("a.icone26[@href*=set_options]").hide();
  }
 });
 //--></script>
