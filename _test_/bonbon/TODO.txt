@@ -5,6 +5,9 @@ BUGS:
 
 FONCTIONALITÉS:
 
+- permettre de donner une date à partir de laquelle les docs seront visibles (et pas avant, par ex. pour les contrôles donnés à plusieurs classes) grâce au champ date de la table document
+- prévoir un systême d'import automatisé d'articles (avec un genre de xml-typographique)
+- pouvoir choisir plusieurs groupes en même temps
 - afficher sur le coté (droite) de saisir une noisette avec le plan du cours, issu du plugin intertitres hiérarchisés, et offrir la possibilité de l'afficher dans une popup.
 - faire une page de planning par classe (mensuel) avec des onglets par matière avec par défaut l'onglet pour toutes les matières
 - affecter un code couleur aux matières dans les devoirs et le planning.

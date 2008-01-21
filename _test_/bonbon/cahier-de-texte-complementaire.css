@@ -153,6 +153,11 @@ h3.spip {
 	font-family: "Times New Roman", serif;
 }
 
+option.on {
+	font-weight: bold;
+	color: red;
+}
+
 /*Devoirs affichés sous les séances*/
 .devoirs {
 	background-color:#CAE1FF;

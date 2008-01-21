@@ -1,0 +1,92 @@
+#CACHE{12*60*60}
+#SET{virgule,","} [(#REM) utile pour les explodes]
+[
+	(#SET{tableau_devoirs,[(#GET{virgule}|explode{#ENV{liste_fiches}})]})
+][
+(#REM)On restreint la requête aux devoirs en suivant le même modèle que précédement.
+]<BOUCLE_QueDevoirs(ARTICLES){titre_mot="Devoirs à faire"}{id_article IN #GET{tableau_devoirs}}{doublons QueDevoirs}></BOUCLE_QueDevoirs>[
+(#REM) {!doublons QueDevoirs} est donc un critère qui sélectionne toutes les Devoirs à faire qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
+]
+		<div class="liste-seances">
+<B_Devoirs>
+#ANCRE_PAGINATION
+		<table width="100%" border=1 class="spip">
+			<tr>
+				<th>Pour le</th>
+				[(#ENV{classe}|?{'',<th>Classe</th>})]
+				[(#ENV{groupe}|?{'',<th>Groupe</th>})]
+				[(#ENV{matiere}|?{'',<th>Matière</th>})]
+				<th>Devoir</th>
+				[(#ENV{id_auteur}|?{'',<th>Professeur</th>})]
+				<th>Donné le</th>
+			</tr>
+
+<BOUCLE_Devoirs(ARTICLES){!doublons QueDevoirs}{par #ENV{tri}}{pagination #ENV{nb,20}}{par date}{inverse #ENV{senschrono}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})]">
+				<td>[(#DATE|affdate)]</td>
+				[(#ENV{classe}|?{'',<td>})]
+				<BOUCLE_classes(MOTS){id_article}{type="Classes"}{"&nbsp;- "}>[(#ENV{classe}|?{'',#TITRE})]</BOUCLE_classes>
+				[(#ENV{classe}|?{'',</td>})]
+				[(#ENV{groupe}|?{'',<td>})]
+				<BOUCLE_groupes(MOTS){id_article}{type="Sous groupes de classes"}{"&nbsp;- "}>[(#ENV{groupe}|?{'',#TITRE})]</BOUCLE_groupes>
+				[(#ENV{groupe}|?{'',</td>})]
+				[(#ENV{matiere}|?{'',<td>})]
+				<BOUCLE_matieres(MOTS){id_article}{type="Matières"}{"&nbsp;- "}>[(#ENV{matiere}|?{'',#TITRE})]</BOUCLE_matieres>
+				[(#ENV{matiere}|?{'',</td>})]
+				<td class="#EDIT{texte}">
+					[(#TEXTE)]
+				<B_Documents_Devoir_seuls> [<i>Docs&nbsp;:</i> 
+				<BOUCLE_Documents_Devoir_seuls(DOCUMENTS){id_article}{"&nbsp;|"}>
+					<span class="#EDIT{fichier}">[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22}|inserer_attribut{'title',[(#TITRE|sinon{#FICHIER|basename})]})]</span>
+				</BOUCLE_Documents_Devoir_seuls>]
+				</B_Documents_Devoir_seuls>
+				</td>
+				[(#ENV{id_auteur}|?{'',<td>})]
+				<BOUCLE_profs(AUTEURS){id_article}{"&nbsp;- "}>[(#ENV{id_auteur}|?{'',#NOM})]</BOUCLE_profs>
+				[(#ENV{id_auteur}|?{'',</td>})]
+				<td>[
+
+(#REM) On cherche ne l'id de la séance au cours de laquelle le devoir a été donné, puis on affiche un lien vers se devoir (la date de la séance).
+
+][(#SET{id_seance,[(#PS*|bonbon_matches_id_article)]})]
+				<BOUCLE_Seance_de_devoir(ARTICLES){id_article=#GET{id_seance}}>
+				<a href="[(#URL_PAGE{cahier-de-texte-affichage-seance,id_article=#ID_ARTICLE})]" title="Afficher les détails de la séance au cours de laquelle le devoir a été donné" onClick="javascript:window.open(this.href,'affichage', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;">[(#DATE|affdate)]</a>
+				</BOUCLE_Seance_de_devoir>
+				</td>
+			</tr>
+</BOUCLE_Devoirs>
+		</table>
+[<div class="apres">Pages&nbsp;: (#PAGINATION{page_precedent_suivant})</div>]
+</B_Devoirs>
+<p>Pas encore de devoirs dans le cahier de texte pour cette classe et cette matière.</p><p>Choisissez une autre classe [
+
+(#REM) On regarde s'il y a d'autres classes avec des fiches pour cette matière
+
+]<BOUCLE_Autres_classes_articles_Devoirs_Sans_matiere(ARTICLES){id_rubrique}{id_auteur?}{titre_mot="Devoirs à faire"}><BOUCLE_Autres_classes_Devoirs_Sans_matiere(MOTS){id_article}{type="Classes"}{par titre}{doublons autres_classes_sans_matiere}></BOUCLE_Autres_classes_Devoirs_Sans_matiere></BOUCLE_Autres_classes_articles_Devoirs_Sans_matiere>
+<BOUCLE_Autres_classes_articles_Devoirs(ARTICLES){!doublons autres_classes_sans_matiere}{titre_mot=#ENV{matiere,#ENV{matiere_defaut}}}><BOUCLE_Autres_classes_Devoirs(MOTS){id_article}{type="Classes"}{par titre}{doublons autres_classes}></BOUCLE_Autres_classes_Devoirs></BOUCLE_Autres_classes_articles_Devoirs>[
+
+(#REM) On prépare une variable Spip "matiere_ou_non". Elle va déterminer quelle pile (!doublon) va être utilisée dans la boucle suivante: si une matière est définie dans le #ENV on prend la pile qui a selectionné en fonction des matières, sinon, non.
+
+][
+	(#SET{matiere_ou_non,'autres_classes_sans_matiere'})
+][
+	(#ENV{matiere}|?{' ',''})
+		#SET{matiere_ou_non,'autres_classes'}
+][
+
+(#REM) Et on affiche ces classes
+
+]<B_Affiche_Autres_classes_Devoirs>(<BOUCLE_Affiche_Autres_classes_Devoirs(MOTS){!doublons #GET{matiere_ou_non}}{", "}><a href="[(#SELF|parametre_url{'classe',#TITRE})]" title="Afficher le cahier de texte de la [(#TITRE|textebrut)] en #ENV{matiere,#ENV{matiere_defaut}}">#TITRE</a></BOUCLE_Affiche_Autres_classes_Devoirs>)</B_Affiche_Autres_classes_Devoirs>
+et/ou une autre matière [
+
+(#REM) On regarde s'il y a d'autres matières avec des fiches pour cette classe
+
+]<BOUCLE_Autres_matieres_articles_Devoirs(ARTICLES){id_rubrique}{id_auteur?}{titre_mot=#ENV{classe,#ENV{classe_defaut}}}{titre_mot="Devoirs à faire"}><BOUCLE_Autres_matieres_Devoirs(MOTS){id_article}{type="Matières"}{par titre}{doublons autres_matieres}></BOUCLE_Autres_matieres_Devoirs></BOUCLE_Autres_matieres_articles_Devoirs>[
+
+(#REM) Et on affiche ces matières
+
+]<B_Affiche_Autres_matieres_Devoirs>(<BOUCLE_Affiche_Autres_matieres_Devoirs(MOTS){!doublons autres_matieres}{", "}><a href="[(#SELF|parametre_url{'matiere',#TITRE})]" title="Afficher le cahier de texte de la [(#ENV{classe,#ENV{classe_defaut}}|concat{" "})] en [(#TITRE|textebrut)]">#TITRE</a></BOUCLE_Affiche_Autres_matieres_Devoirs>)</B_Affiche_Autres_matieres_Devoirs>
+grâce aux onglets.</p>
+<//B_Devoirs>
+		<br clear="all">
+		</div> 

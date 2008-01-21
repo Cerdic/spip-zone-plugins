@@ -12,12 +12,17 @@ Ce qui a été fait avec «Bonbon !»
 		-* utilisation de {id_auteur ?} à la place de {id_auteur==#ENV{prof,.}} (merci BoOz).
 		-* atomisation des requêtes SQL grâce à des {!doublons bidule) (merci à Cédric Morin pour l'idée remarquable !).
 		-* minimiser les REGEXP en affichant qu'une classe et une matière à al fois pour les séances.
+		-* Une erreur de design dans le mélange du PHP et des boucles faisait que toutes la requêtes (même les inutiles) étaient exécutées quelque soit le contexte (en effet, le phraseur de SPIP transforme toutes les boucles de la page en html AVANT que le code php avec des if ne s'exécute.).
+		C'est résolu soit grâce à l'utilisation de noisettes dont l'inculsion est conditionnée par une balise filtrée par un test.
+		Soit par l'utilisation de boucles "fictives" conditionnelles.
+		-* Révision de toutes les valeurs de #CACHE (les pages rares sont mises en cache pour 30 jours, les listes de fiches pour 12h, les fiches pour une semaine) -> moins d'accès à la base de donnée.
+		-* Rajout des var_mode=calcul pour que l'affichage des profs soit rafraichi
 - Gros bug des guillemets (corrigé ?)
 - Des corrections de bugs -très- divers... (voir SVN)
 - Un nouveau filtre donne l'année scolaire et simplifie pas mal les choses.
 - Un rafraichissement plus fréquent des pages (durée de cache plus courte)
 - Des améliorations dans l'interface de saisie:
-					 	-* matière et classes sont préslecetionnés quand on vient de finir de saisir une séance et qu'on passe à la suivante.
+					 	-* matière et classes sont préslecetionnés et mise en évidence en fonction du contexte.
 						-* la classe est -plus ou moins- préremplie quand on clique sur saisir une séance depuis l'accueil ou l'en-tête (ça devrait quand même fonctionner dans la plupart des cas)
 						-* au dessus du formulaire de saisie il y a un rappel du contexte...
 						-* après la saisie, une fois qu'on a confirmé l'enregistrement, on peut voir la séance et mettre des pièces jointes dans une pop-up. (on peut même la modifier via les crayons).
@@ -37,6 +42,8 @@ Ce qui a été fait avec «Bonbon !»
 - Gros changements dans l'affichage: le cahier de texte s'affiche désormais plus comme un cahier (avec des onglet pour les classes et les matières). Par contre on ne peut plus avoir différentes matières et/ou classes sur la même page/requête (quel intérêt ?). Celà optimise un peu les requêtes SQL (moins de REGXP) et rend je l'espère l'affichage plus pratique pour les élèves/parents. Des astcuces CSS permettent un bon affichage sous IE...
 - Bonbon utilise la barre typographique de Spip (qui peut être la v2 si le plugin est installé) ! (merci Stephane)
 - Un tableau de bord sur la page d'accueil permet à chaque prof de savoir en un clin d'½il où il en est (dernières fiches publiées pour chaque classe et lien direct vers la saisie pour la classe concernée)... Très pratique pour savoir où on en est quand on a beaucoup de classes (et du retard... :-))
+- limitation des la selection des séances à l'année en cours, à moins que ce ne soit explictement mentionné dans les paramètres GET.
+- petites corrections autour des sens chronologiques
 
 
 1.0 Première sortie de Bonbon
