@@ -4,13 +4,16 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	if ($_REQUEST['exec']!="") return $texte;
 	if ($_REQUEST['page'] == "forum") return $texte;	
 	include_once("classes/Navigation.class.php");
-
+	
+	session_name('thelia_session');
 	session_start();
-
+	$_SESSION['navig']->lang="";
+	
+	
 	foreach ($_POST as $key => $value) $$key = $value;
 	foreach ($_GET as $key => $value) $$key = $value;
 	switch($page){
-		case 'panier' : $securise=1; $pageret=1; break;
+		case 'panier' : $securise=0; $pageret=1; break;
 		case 'adresse' : $securise=1; $pageret=1; break;
 		case 'cheque' : $securise=1; $pageret=1;$reset=1; break;
 		case 'commande' : $securise=1; $pageret=1; $panier=1; $transport=1; break;
@@ -29,5 +32,6 @@ function spip_thelia_appeler_moteur_thelia($texte)
 
 	
 	include_once(_DIR_PLUGINS."plugin-thelia/moteur-thelia-1_3_3.php");
+	
 }
 ?>
