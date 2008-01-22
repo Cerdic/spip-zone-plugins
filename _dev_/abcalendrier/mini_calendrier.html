@@ -1,97 +1,4 @@
-#CACHE{0}
-<style>
-div.multievent, .calendario a{
-	font-weight:bold;
-	text-decoration:none;
-	color:green;
-}
-/****************/
-div.multievent {
-/*
-	width: 14em;
-	padding-top: 1.7em;
-	padding-bottom: 1em;
-	margin-bottom: 1em;
-	font-size: 0.77em;
-	font-weight: bold;
-	background-image: url(images/coinrond.gif);
-	background-position : right bottom;
-	background-color: black;
-	background-repeat: no-repeat;*/
-}
-
-div.multievent ul {
-	margin: 0;
-	padding: 0;
-	border: none;
-	/*width: 14em;background: black;*/
-
-}
-/* elementi menu normali level 1*/
-div.multievent li.level1>a, div.multievent li.level1 {
-	position: relative;
-	list-style: none;
-	padding:0;
-	margin: 0;
-	border: none;
-	/*height: auto;
-	background: black;
-	color: #f26522;background: #cfcfcf ;grigino */
-}
-/* elementi menu Hover level 1*/
-div.multievent li.level1:hover, div.multievent li.level1:hover>a {
-	color: #f26522;
-	background: blue;/*#cfcfcf grigino */
-}
-
-/* elementi menu level 2*/
-div.multievent ul.level2, div.multievent ul.level3 {
-	background: white ;
-}
-
-div.multievent li.level2, div.multievent li.level3 {
-	position: relative;
-	color: black;
-	background-color: none;/**/
-}
-
-/* elementi menu Hover level 2*/
-div.multievent li.level2:hover, div.multievent li.level3:hover, div.multievent li.level2:hover>a, div.multievent li.level3:hover>a{
-	background: silver;
-	color: red;
-	white-space: nowrap;
-}
-
-div.multievent li a {
-	display: block;
-	padding: 0.25em 0 0.25em 0.5em;
-	text-decoration: none;
-	width: auto;
-	height: auto;
-	white-space: nowrap
-	/*color: white;*/
-}
-
-div.multievent ul.level2 {
-	position: absolute;
-	top: 0;
-	left: 20px;
-	/*width: 15em;*/
-	display: none;
-	margin-top: -1px;
-	background-color: none;
-	font-weight: normal;
-	border-top: 1px #4f4f4f solid;
-	border-right: 1px black solid;
-}
-div.multievent ul.level3 {position: absolute; top: 0; left: 15em; width: 15em; display: none; margin-left: -1px; margin-top: -1px; background-color: none; font-weight: normal; border-top: 1px black solid; border-right: 1px black solid;}
-div.multievent ul ul li {border-bottom: 1px black solid; border-left: 1px black solid;}
-div.multievent ul.level1 li.level1:hover ul.level2 {display:block;}
-div.multievent ul.level2 li.level2:hover ul.level3 {display:block;}
-
-
-	</style>
-
+#CACHE{86400}
 <?php
 
     $calendrier_mois=$_GET['calendrier_mois'];
@@ -228,7 +135,7 @@ $test_mini_agenda_deja_present = 1;
 		if (isset($events[$date])) {
 			if(1==count($events[$date]))
 			{
-				echo '<a href="'.$events[$date]['link'].'" title="'.$events[$date]['title'].'" >'. date('j', mkdate($M, $TempD, $Y)) .'</a>';
+				echo '<a href="'.$events[$date][0]['link'].'" title="'.$events[$date]['title'].'" >'. date('j', mkdate($M, $TempD, $Y)) .'</a>';
 			}
 			else{
 				echo"<div class=\"multievent\" id=\"$date\">\n";

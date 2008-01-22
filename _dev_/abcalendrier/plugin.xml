@@ -7,7 +7,7 @@
 _ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
 	</auteur>
 	<version>
-	0.3
+	0.5
 	</version>
 	<etat>
 	test
@@ -21,7 +21,9 @@ _ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
 	
 	{mini-calendrier per eva} &egrave; stato  modificato levando le dipendenze da eva, aggiungendo cicli sulle brevi e levando cicli non necessari. Inoltre &egrave; stata implementata la localizzazione con i file lang e usando i relativi file di spip
 	
-	&#60;hr /&#62;
+	Inoltre supporta molti eventi per la stessa data con slideout menu
+	<hr />
+
 	
 	{{{Istallazione:}}} attivare il plugin,
 	creare la parola chiave mini-calendrier
@@ -35,16 +37,19 @@ _ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
 	to do: 
 	
 	introdurre il segnaposto #ABCALENDRIER da inserire invece dell'INCLURE e riscrivere di conseguenza il codice.
+
 	
-	lo stile grafico &egrave; attualmente mutuato dalla dist di spip. separare in un css propri gli stili necessari
-	
-	&#60;hr /&#62;
+	lo stile grafico &egrave; attualmente mutuato dalla dist di spip. 	&#60;hr /&#62;
 	
 	{{{Ringraziamenti}}}
 	Ringraziamenti agli autori di [champs homonymes-&#62;http://www.spip-contrib.net/Plugin-Champs-homonymes] francois.vachon@iago.ca e [minicalendrier pour eva-&#62;http://eva-web.edres74.net/spip.php?article35] Olivier Gautier e a tutti coloro che contribuiscono a arricchire la documentazione sullo sviluppo dei plugin.
 	</multi>
 
 	</description>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>abcal_pipelines.php</inclure>
+	</pipeline>	
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
