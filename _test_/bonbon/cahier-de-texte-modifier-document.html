@@ -1,22 +1,78 @@
- 
-<?php
-//on vérifie qu'on a le droit d'être là...
-if ($auteur_session) {
-?>
 #CACHE{0}
 <BOUCLE_Auteur(AUTEURS){id_article}{0,1}>
+<?php
+//on vérifie qu'on a le droit d'être là...
+if ($auteur_session['id_auteur']=='[(#ID_AUTEUR)]') {
+?>
 	<BOUCLE_Article(ARTICLES){id_article}>
+<?php
+$message='';
+//
+//Si on demande à modifier des élements du doc:
+//
+if ($_POST['modif_doc']) {
+	if ($_POST['titre']!=$_POST['ancien_titre']) {
+		//on met le titre modifié dans la base:
+		$sql ="UPDATE spip_documents SET titre='".addslashes($_POST['titre'])."' WHERE id_document=".$_GET['id_document'];
+		$result = spip_query($sql);
+		echo ("		<!--update document: $result-->\n");
+		$message .="<p class=\"avertissement\">Le titre du document «&nbsp;". '[(#ENV{ancien_titre}|textebrut)]'."&nbsp;» été modifié en «&nbsp;<em>".'[(#ENV{titre}|textebrut)]'."</em>&nbsp;»</p>";
+	}// fin du if post titre egale nacien titre
+	if ($_POST['date_document']!=$_POST['ancienne_date']) {
+		if (affdate($_POST['date_document'])) {
+			$date_base_doc = date ("Y-m-d H:i:s", mktime(0,0,0,substr($_POST['date_document'],3,2),substr($_POST['date_document'],0,2),substr($_POST['date_document'],6,4)));
+			//on met le titre modifié dans la base:
+			$sql ="UPDATE spip_documents SET date='".addslashes($date_base_doc)."' WHERE id_document=".$_GET['id_document'];
+			$result = spip_query($sql);
+			echo ("		<!--update document: $result-->\n");
+			$message .="<p class=\"avertissement\">La date du document «&nbsp;". '[(#ENV{ancien_titre}|textebrut)]'."&nbsp;» été modifiée en <em>".'[(#ENV{date_document}|textebrut)]'."</em></p>";
+		}//fin du if affadate
+		else {
+		$message .="<p class=\"avertissement\">La date «&nbsp;<em>".'[(#ENV{date_document}|textebrut)]'."</em>&nbsp;» que vous avez proposée semble incorrecte, recommencez S.V.P.</p>";
+		}//fin du else affdate
+	}// fin du if post titre egale nacien titre
+}// fin du if modif_doc
+
+//
+//Si on demande d'effacer juste pour une séance (c'est à dire dans le surtitre), on enlève l'occurence dans le susrtitre et on met à jour la base.
+//
+if($_GET['effacer'] and !$_GET['effacement_total']) {
+	$surtitre = '[(#SURTITRE*|texte_script)]';
+	$surtitre = preg_replace("/(<doc".$_GET['id_document']."> )/","",$surtitre);
+//on met le surtitre modifié dans la base:
+	$sql ="UPDATE spip_articles SET surtitre='".addslashes($surtitre)."' WHERE id_article=".$_GET['id_article'];
+	$result = spip_query($sql);
+	echo ("		<!--update soustitre: $result-->\n");
+	$message .="<p class=\"avertissement\">Le document «&nbsp;".' [(#ENV{ancien_titre}|textebrut)]'."&nbsp;» été effacé de cette fiche «&nbsp;(".'[(#_Article:TITRE)]'.")&nbsp;»</p>";
+}// fin du if effacer et pas effacement_total
+//
+//Si on efface définivement un document (pour toutes les fiches)
+//
+if($_GET['effacer'] and $_GET['effacement_total']) {
+	include_spip('inc/charsets');	# pour le nom de fichier
+	include_spip('base/abstract_sql');
+	include_spip('action/supprimer');
+	supprimer_document_et_vignette($_GET['id_document']);
+	$message .="<p class=\"avertissement\">Le document «&nbsp;".' [(#ENV{ancien_titre}|textebrut)]'."&nbsp;» été effacé de toutes les fiches auxquelles il était rattaché...</p>";
+}// fin du if effacement_total
+?>
 		<BOUCLE_Document(DOCUMENTS){id_document}>
 <!-- 
 *****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
 *****Sous licence GPL (enfin bon, c'est bonbonware...)
 *****CopyLeft en novembre 2007
 **** Permet de modifier les documents attachés aux articles (séances/devoirs)
-Cette page prend le paramètre suivant (en GET):
+- Cette page prend le paramètre suivant (en GET):
 id_article= n° de la séance. Ce paramètre est obligatoire
 id_document= n° du doc choisi à relier à id_article. Ce paramètre est obligatoire
 effacer= quand cet argument est non nul, le document id_document est effacé. Pour l'instant celà ne peut-être que le cas des docs liés via le surtitre
-effacement_total= non actif (devrait permettre d'effacer un doc de la base et du répertoire ftp)
+effacement_total= efface le doc de la base, donc pour toutes les fiches (et du FTP)
+- Cette page prend les paramètres suivants en POST:
+modif_doc= si est vrai alors on essaie de modifier les infos du document
+titre= nouveau titre à affecter (si modif_doc est vrai)
+ancien_titre= ancien titre (avant modif)
+date_document= nouvelle date à affecter (si modif_doc est vrai)
+ancienne_date= ancienne date (avant modif)
 -->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -36,20 +92,8 @@ effacement_total= non actif (devrait permettre d'effacer un doc de la base et du
 	</div>
 	<div id="Contenu">
 <?php
-
-//Si on demande d'effacer juste pour une séance (c'est à dire dans le surtitre), on enlève l'occurence dans le susrtitre et on met à jour la base.
-if($_GET['effacer'] and !$_GET['effacement_total']) {
-	$surtitre = '[(#SURTITRE*|texte_script)]';
-	$surtitre = preg_replace("/(<doc".$_GET['id_document']."> )/","",$surtitre);
-//on met le surtitre modifié dans la base:
-	$sql ="UPDATE spip_articles SET surtitre='".addslashes($surtitre)."' WHERE id_article=".$_GET['id_article'];
-	$result = spip_query($sql);
-	echo ("		<!--update soustitre: $result-->\n");?>
-		<p class="avertissement">Le document [(#TITRE|sinon{#FICHIER|basename})] été effacé de cette fiche (#_Article:TITRE)</p>
-<?php
-}// fin du if effacer et pas effacement_total
-?>
-<?php if (!$_GET['effacer'] and !$_GET['effacement_total']) {?>
+echo $message;
+	if (!$_GET['effacer'] and !$_GET['effacement_total']) {?>
 #SET{titres,""}
 <BOUCLE_Liste_articles_directement_attaches(ARTICLES){id_document}>[
 	(#SET{liste_articles,#GET{liste_articles}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})
@@ -57,6 +101,9 @@ if($_GET['effacer'] and !$_GET['effacement_total']) {
 	(#SET{titre,[(#GET{titre}|concat{#TITRE," "})]})
 ][
 	(#ID_ARTICLE|=={#ENV{id_article}}|?{#SET{doc_reel,"oui"}})
+][
+	(#SET{id_article_doc_reel,#ID_ARTICLE})
+
 ]</BOUCLE_Liste_articles_directement_attaches>
 [
 (#SET{doc,"<doc"})
@@ -68,18 +115,22 @@ if($_GET['effacer'] and !$_GET['effacement_total']) {
 ][
 	(#SET{liste_articles,#GET{liste_articles}|bonbon_fusion_tableau{#ARRAY{#GET{compteur},#ID_ARTICLE}}})
 ]</BOUCLE_Liste_articles_indirectement_lies>
-		<div class="bloc_auteur">
+		<div class="bloc_fiches_doc">
 			<p>Les modfications que vous allez faire ce sur document vont affecter toutes les fiches auxquelles il est attaché&nbsp;:</p>
 			<ul>
 <BOUCLE_Articles_touche(ARTICLES){id_article IN #GET{liste_articles}}>
 				<li>
-					<a href="[(#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=calcul}|parametre_url{'id_article',#ID_ARTICLE})]" title="aller voir la fiche"onClick="javascript:window.open(this.href,'affichage-depuis-doc', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;">#TITRE</a>
+					<a href="[(#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=calcul}|parametre_url{'id_article',#ID_ARTICLE})]" title="aller voir la fiche"onClick="javascript:window.open(this.href,'affichage-depuis-doc', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;">#TITRE</a>[(#ID_ARTICLE|=={#GET{id_article_doc_reel}}|?{' ',''}) (fiche d'origine)]
 				</li>
 </BOUCLE_Articles_touche>
 			</ul>
 		</div>
-		<center>
-			<p>Double-cliquez sur la miniature pour télécharger un autre fichier à la place. Double-cliquez sur le titre pour modfier le titre.</p>
+		<div class="bloc">
+		<center><form name="modifier un document" method="post">
+			<input type="hidden" name="page" value="#ENV{page}">
+			<input type="hidden" name="ancien_titre" value="[(#TITRE|sinon{#FICHIER|basename})]">
+			<input type="hidden" name="ancienne_date" value="[(#DATE|affdate{d/m/Y})]">
+			<h3 class="titre">éditer le document&nbsp;:</h3>
 			<div class="#EDIT{fichier}" title="Double-cliquez sur cet élément pour le modifier">
 				[(#LOGO_DOCUMENT||image_reduire{128,128})]
 			</div>
@@ -89,12 +140,14 @@ if($_GET['effacer'] and !$_GET['effacement_total']) {
 			<div>
 				Type de fichier&nbsp;: «&nbsp;<em>#TYPE_DOCUMENT</em>&nbsp;». Taille du fichier&nbsp;: [(#TAILLE|taille_en_octets)] [(#TAILLE|>{500000}|?{' ',''})<p class='avertissement'>([(#TAILLE|taille_en_octets)] C'est trop volumineux, vous devriez compresser ce document !)</p>]
 			</div>
-			<div class="#EDIT{date}" title="Double-cliquez sur cet élément pour le modifier">
-				Date&nbsp;: [(#DATE|affdate)]
-			</div>
-			<div class="#EDIT{titre}" title="Double-cliquez sur cet élément pour le modifier">
-				Titre&nbsp;: [(#TITRE|sinon{#FICHIER|basename})]
-			</div>
+			<fieldset style="width:60%;">
+				<legend>Date&nbsp;:</legend>[(#DATE|affdate{U}|>{[(#ENV{date}|affdate{U})]}|?{' ',''})Votre document a une date future, ce qui signifie qu'il ne sera pas affiché aujourd'hui, mais à partir du [(#DATE|affdate)]<br>]
+				<INPUT TYPE="text" class="date_calendrier" NAME="date_document" VALUE="[(#ENV{date_document}|sinon{#DATE|affdate{d/m/Y}})]" size="12">[<br>(#DATE|affdate{U}|>{[(#ENV{date}|affdate{U})]}|?{'',' '})<em>(Pour qu'un document ne soit affiché qu'à partir d'une date précise, mettez une date future !)</em>]
+			</fieldset>
+			<fieldset style="width:60%;">
+				<legend>Titre&nbsp;:</legend>
+				<input type="text" name="titre" value="[(#ENV{titre}|sinon{#TITRE|sinon{#FICHIER|basename}})]" size="40">
+			</fieldset>
 			<div>[
 	(#SET{debut_texte," pour la fiche «&nbsp;"})
 ][
@@ -105,21 +158,23 @@ if($_GET['effacer'] and !$_GET['effacement_total']) {
 (#REM) Pour l'nstant, l'effacement_total n'est pas activé, je cherche une méthode propre pour faire ça...
 ][
 	(#GET{doc_reel}|?{'',' '})
-				<a href="[(#SELF|parametre_url{effacer,'oui'}|parametre_url{effacement_total,[(#GET{effacement_total})]})]" title="Effacer ce document (c'est définitif !)">
+				<a href="[(#SELF|parametre_url{effacer,'oui'}|parametre_url{effacement_total,[(#GET{effacement_total})]}|parametre_url{ancien_titre,[(#ENV{titre}|sinon{#TITRE|sinon{#FICHIER|basename}})]})]" title="Effacer ce document (c'est définitif !)">
 				<img src="#CHEMIN{images/dialog-cancel.png}" alt="icône" vspace="2" align="middle">Effacer ce document[(#GET{doc_reel}|?{'pour toutes les fiches ! (voir liste ci-dessus)',#GET{texte}})]</a>
 			</div>][
-	(#GET{doc_reel}|?{'',' '})
-<!-- pas activé pour l'instant
+	(#GET{doc_reel}|?{' ',''})
+
 			<div>
-				<a href="[(#SELF|parametre_url{effacer,'oui'}|parametre_url{effacement_total,'oui'})]" title="Effacer ce document (c'est définitif !)">
+				<a href="[(#SELF|parametre_url{effacer,'oui'}|parametre_url{effacement_total,'oui'}|parametre_url{ancien_titre,[(#ENV{titre}|sinon{#TITRE|sinon{#FICHIER|basename}})]})]" title="Effacer ce document (c'est définitif pour toutes les fiches auxquelles il est rattaché !!!)">
 				<img src="#CHEMIN{images/dialog-cancel.png}" alt="icône" vspace="2" align="middle">Effacer ce document pour toutes les fiches ! (voir liste ci-dessus)</a>
 			</div>
--->]
-		</center>
+]
+			<br><input type="submit" value="Modifier le document" name="modif_doc">
+		</form></center>
 <?php
 }// fin du if pas effacer et pas effacement_total
 ?>
 		<br clear="all" />
+	</div>
 		<center style="margin-top: 1em;">
 			<input type='button' value='Fermer cette fenêtre (revenir à la séance)' onClick='parent.opener.location.reload();self.close()' name="button">
 		</center>

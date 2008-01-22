@@ -44,7 +44,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 	<div id="EntetePage">
 			<ul class="boutons">
 				<li><a href="#URL_PAGE{cahier-de-texte-accueil}" title="Retourner à la page d'accueil du cahier de texte"><img src="#CHEMIN{images/dialog-ok-upside-down.png}" alt="icône" vspace="2" align="middle">Accueil du cahier de texte</a></li>
-				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,nb=20}|parametre_url{var_mode,calcul})]" title="afficher les dernières entrées du cahier de texte><img src="#CHEMIN{images/system-search.png}" alt="icône" vspace="2" align="middle">Afficher les 20 dernieres séances</a></li>
+				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,nb=20}|parametre_url{var_mode,calcul})]" title="afficher les dernières entrées du cahier de texte"><img src="#CHEMIN{images/system-search.png}" alt="icône" vspace="2" align="middle">Afficher les 20 dernieres séances</a></li>
 <?php if ($auteur_session) {?>
 				<li><a href="#URL_PAGE{cahier-de-texte-saisie}&id_auteur=<?php echo $auteur_session['id_auteur'];?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>
 				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,senschrono=1}|parametre_url{var_mode,calcul})]&id_auteur=<?php echo $auteur_session['id_auteur'];?>" title="Aller voir ses propres entrées du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
@@ -57,7 +57,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 	$auteur=$auteur_session['nom'];
 	$id_auteur=$auteur_session['id_auteur'];
 	echo "<p class='authentifie'>$auteur (si vous n'êtes pas $auteur, <a href=\"";
-?>#URL_LOGOUT<?php
+?>#URL_LOGOUT[(#SET{var_mode,"calcul"})]<?php
 	echo "\" title=\"déconnexion immédiate !\">cliquez ici</a>)</p>\n";}?>
 
 			<h1>Cahier de texte (#NOM_SITE_SPIP)</h1>
@@ -90,7 +90,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 		(#SET{select,''})
 ][
 		(#GET{classe_env}|=={#_ToutesLesClasses_affichage:TITRE}|?{' ',''})#SET{select,'on '}
-]			<a href="[(#SELF|parametre_url{'classe',#_ToutesLesClasses_affichage:TITRE}|parametre_url{matiere,''})]" title="Afficher le cahier de texte de la [(#_ToutesLesClasses_affichage:TITRE|textebrut)]" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#_ToutesLesClasses_affichage:TITRE</a>
+]			<a href="[(#SELF|parametre_url{'classe',#_ToutesLesClasses_affichage:TITRE}|parametre_url{matiere,''}|parametre_url{var_mode,#GET{var_mode}})]" title="Afficher le cahier de texte de la [(#_ToutesLesClasses_affichage:TITRE|textebrut)]" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#_ToutesLesClasses_affichage:TITRE</a>
 </BOUCLE_Que_les_classes_avec_article></BOUCLE_ToutesLesClasses_affichage>
 
 <!-- les groupes-->
@@ -99,7 +99,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 		(#SET{select,''})
 ][
 		(#ENV{groupe}|=={#_Les_Groupes:TITRE}|?{' ',''})#SET{select,'on '}
-]			<a href="[(#SELF|parametre_url{'groupe',#_Les_Groupes:TITRE})]" title="Afficher le cahier de texte de la #ENV{classe,#GET{classe_defaut}} - #_Les_Groupes:TITRE" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#_Les_Groupes:TITRE</a>
+]			<a href="[(#SELF|parametre_url{'groupe',#_Les_Groupes:TITRE}|parametre_url{var_mode,#GET{var_mode}})]" title="Afficher le cahier de texte de la #ENV{classe,#GET{classe_defaut}} - #_Les_Groupes:TITRE" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#_Les_Groupes:TITRE</a>
 </BOUCLE_Que_les_groupes_avec_article></BOUCLE_Les_Groupes>[
 		(#ENV{groupe}|?{' ',''})<a href="[(#SELF|parametre_url{'groupe',''})]" title="Afficher le cahier de texte de tous les groupes de la #ENV{classe,#GET{classe_defaut}}" class="onglet" onmouseover="this.className='onglet  hover'" onmouseout="this.className='onglet'">Les deux groupes</a>
 ]
@@ -135,7 +135,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 		(#SET{select,''})
 ][
 		(#GET{matiere_env}|=={#_ToutesLesMatieres_affichage:TITRE}|?{' ',''})#SET{select,'on '}
-]			<a href="[(#SELF|parametre_url{'matiere',#_ToutesLesMatieres_affichage:TITRE})]" title="Afficher le cahier de texte de la [(#ENV{classe,#GET{classe_defaut}}|textebrut)] en [(#_ToutesLesMatieres_affichage:TITRE|textebrut)]"  class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select} hover'" onmouseout="this.className='onglet #GET{select}'">[(#_ToutesLesMatieres_affichage:TITRE)]</a>
+]			<a href="[(#SELF|parametre_url{'matiere',#_ToutesLesMatieres_affichage:TITRE}|parametre_url{var_mode,#GET{var_mode}})]" title="Afficher le cahier de texte de la [(#ENV{classe,#GET{classe_defaut}}|textebrut)] en [(#_ToutesLesMatieres_affichage:TITRE|textebrut)]"  class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select} hover'" onmouseout="this.className='onglet #GET{select}'">[(#_ToutesLesMatieres_affichage:TITRE)]</a>
 </BOUCLE_Que_les_matieres_avec_article></BOUCLE_ToutesLesMatieres_affichage>
 		</div>
 </BOUCLE_Test_si_devoirs_ou_matiere>[

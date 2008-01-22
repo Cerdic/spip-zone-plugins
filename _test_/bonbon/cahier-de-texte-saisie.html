@@ -222,9 +222,9 @@ if ($id_groupe!=0) { $groupe_titre .= " (";?>
 	<BOUCLE_DireGroupe(MOTS){type="Sous groupes de classes"}><?php if ('[(#ID_MOT|texte_script)]'==$id_groupe) { $groupe_titre .='[(#TITRE)]'; } ?></BOUCLE_DireGroupe>
 <?php $groupe_titre .= ")"; }//fin du if id_groupe
 
-	$titre_matiere_classe="en $matiere_titre avec les $classes_titre$groupe_titre&nbsp;:";
+	$titre_matiere_classe="en $matiere_titre avec les $classes_titre$groupe_titre";
 	$titre_contenu_seance="Le $date_seance, $titre_matiere_classe";
-	$fragment_titre_devoir=", par les $classes_titre$groupe_titre en $matiere_titre&nbsp;:";
+	$fragment_titre_devoir=", par les $classes_titre$groupe_titre en $matiere_titre";
 	$fleche="->";
 ?></BOUCLE_CONDITIONNELLE_2>[
 	(#REM) Hack de la boucle conditionnelle qui remplace le if:

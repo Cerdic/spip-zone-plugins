@@ -34,12 +34,27 @@
 				<BOUCLE_matieres(MOTS){id_article}{type="Matières"}{"&nbsp;- "}>[(#ENV{matiere}|?{'',#TITRE})]</BOUCLE_matieres>
 				[(#ENV{matiere}|?{'',</td>})]
 				<td class="#EDIT{texte}">
-					[(#TEXTE)]
-				<B_Documents_Devoir_seuls> [<i>Docs&nbsp;:</i> 
-				<BOUCLE_Documents_Devoir_seuls(DOCUMENTS){id_article}{"&nbsp;|"}>
+					[(#TEXTE)][
+
+(#REM) On récupère la liste des documents liés à l'article
+
+		][
+	(#SET{liste_docs_devoirs,""})
+]<BOUCLE_Documents_originaux_Devoirs(DOCUMENTS){id_article}{age>=0}>[(#SET{liste_docs_devoirs,#GET{liste_docs_devoirs}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Documents_originaux_Devoirs>[
+
+(#REM) On récupère dans le surtitre la liste des documents qui ont été copié dans cette séance (quand on veut ajouter des documents sans les remettre sur le serveur
+
+		][(#SET{liste_docs_copies_devoirs,[(#GET{virgule}|explode{[(#SURTITRE*|bonbon_matches_id_document)]})]})]
+		<BOUCLE_Copies_Documents_Devoirs(DOCUMENTS){id_document IN #GET{liste_docs_copies_devoirs}}{age>=0}>[(#SET{liste_docs_devoirs,#GET{liste_docs_devoirs}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Copies_Documents_Devoirs>[
+
+(#REM) On affiche les documents de la liste
+
+		]
+			<B_Documents_Devoir> [<i>Docs&nbsp;:</i> 
+				<BOUCLE_Documents_Devoir(DOCUMENTS){id_document IN #GET{liste_docs_devoirs}}{"&nbsp;| "}>
 					<span class="#EDIT{fichier}">[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22}|inserer_attribut{'title',[(#TITRE|sinon{#FICHIER|basename})]})]</span>
-				</BOUCLE_Documents_Devoir_seuls>]
-				</B_Documents_Devoir_seuls>
+				</BOUCLE_Documents_Devoir>]
+				</B_Documents_Devoir>
 				</td>
 				[(#ENV{id_auteur}|?{'',<td>})]
 				<BOUCLE_profs(AUTEURS){id_article}{"&nbsp;- "}>[(#ENV{id_auteur}|?{'',#NOM})]</BOUCLE_profs>

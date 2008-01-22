@@ -1,24 +1,37 @@
+#CACHE{0}
+[
+
+(#REM) On se place dans le contexte de la rubrique du cahier de texte de l'année
+
+]
+<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>[
+(#REM) On détermine quelle est l'année scolaire que l'on veut afficher
+][	(#SET{annee_rubrique,[(#ENV{date}|bonbon_annee_scolaire)]})
+][	(#ENV{annee_scolaire}|?{' ',''})
+		#SET{annee_rubrique,#ENV{annee_scolaire}}
+	]<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre=#GET{annee_rubrique}}{!par titre}{0,1}>
+		<BOUCLE_Auteur(AUTEURS){id_article}{0,1}>
+			<BOUCLE_Article(ARTICLES){id_article}>
 <?php
 //on vérifie qu'on a le droit d'être là...
-if ($auteur_session) {
+if ($auteur_session['id_auteur']=='[(#ID_AUTEUR)]') {
 ?>
-#CACHE{0}
-<BOUCLE_Auteur(AUTEURS){id_article}{0,1}>
-	<BOUCLE_Article(ARTICLES){id_article}>
 <!-- 
 *****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
 *****Sous licence GPL (enfin bon, c'est bonbonware...)
 *****CopyLeft en novembre 2007
-**** Permet de chosir un document parmis ceux de l'auteur de l'article et d'en écrire la référence dans le surtitre.
-Cette page prend le paramètre suivant (en GET):
+**** Permet de chosir un document pour le charger ou choisir parmi les document déjà mis dans des fiches (ajoutés via le surtitre)
+- Cette page prend le paramètre suivant (en GET):
 id_article= n° de la séance. Ce paramètre est obligatoire
 id_document= n° du doc choisi à relier à id_article
 doc-choisi= si cette valeur est non nulle, l'id_document est place dans le surtitre de l'article id_article.
+- Et les paramètres suivants en POST:
+charger_doc= si il est vrai alors on fait une prcédure de chargement de doc classique en PHP avec les données de $_FILES
 -->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>Cahier de texte: Sélection d'un document parmi ceux de [(#NOM|textebrut)]</title>
+	<title>Cahier de texte: Ajout d'un document à une fiche</title>
 
 [
 (#REM)Inclusion du pied de page
@@ -29,12 +42,12 @@ doc-choisi= si cette valeur est non nulle, l'id_document est place dans le surti
 <body>
 <div id="NoMenu">
 	<div id="EntetePage">
-		<h1>Associer un document déjà enregistré à cette fiche</h1>
+		<h1>Associer un document à cette fiche</h1>
 	</div>
-	<div id="Contenu">
+	<div id="Contenu"><div class="bloc">
 <?php
 
-//On vérifie sur un doc a été choisi, si il a été choisi on le rajoute dans le surtitre de l'article
+//On vérifie sur un doc a été choisi parmi les existants, si il a été choisi on le rajoute dans le surtitre de l'article
 if($_GET['doc-choisi']) {
 	$surtitre = '[(#SURTITRE*|texte_script)]';
 	$surtitre = $surtitre."<doc".$_GET['id_document']."> ";
@@ -45,19 +58,60 @@ if($_GET['doc-choisi']) {
 		<p class="avertissement">Le document encadré a été enregistré dans la fiche (#TITRE)</p>
 <?php
 }// fin du if doc choisi
+
+if ($_POST['charger_doc']) {
+	$uploaddir = './tmp/upload/';
+	$uploadfile = $uploaddir . basename($_FILES['chemin']['name']);
+	if (!move_uploaded_file($_FILES['chemin']['tmp_name'], $uploadfile)) {
+		echo "Un problème est survenu lors du chargement du fichier, copiez les informations ci-dessous et communiquez les à votre webmestre.\n";
+		echo '<pre>';
+		echo "Voici quelques informations de débogage d'un move_uploaded_file :";
+		print_r($_FILES);
+		echo '</pre>';
+	}
+	$docs_actifs = array();
+	$lieu_temporaire='[(#URL_SITE_SPIP|textebrut)]'."/tmp/upload/".addslashes(basename($_FILES['chemin']['name']));
+	include_spip('inc/getdocument');
+	include_spip('inc/ajouter_documents');
+	$retour=inc_ajouter_documents_dist($lieu_temporaire,basename($_FILES['chemin']['name']),'article',$_GET['id_article'],'document','',$docs_actifs);
+	if (!unlink  ($uploadfile)) 
+		echo "Une erreur est survenue lors de l'effacement du fichier temporaire ".basename($_FILES['chemin']['name'])." demandez au gestionnaire du site de l'effacer de /tmp/upload/";
+	if ($docs_actifs[0]){
+		?>
+	<p class="avertissement">Votre document a été enregistré dans la fiche (#TITRE). Vous pouvez aussi l'insérer dans le texte de la fiche en y tapant <em>&lt;doc<?php echo $docs_actifs[0]; ?>&gt;</em>.<p>
+	<p class="avertissement">Vous pouvez le modifier son titre, sa date de publication, etc. en cliquant sur <a href="[(#URL_PAGE{cahier-de-texte-modifier-document,id_article=#ID_ARTICLE})]&id_document=<?php echo $docs_actifs[0]; ?>" title="modfier ce document (titre, fichier, effacer, etc.)" onClick="javascript:window.open(this.href,'modif-doc', 'scrollbars=yes, resizable=yes, width=740, height=700'); return false;" name="button"><img src="#CHEMIN{images/preferences-desktop-sosmall.png}" alt="icône" vspace="2" align="middle"></a></p>
+		<?php
+		} else {
+		echo "une erreur inconnue est survenue lors du chargement de votre document... désolé...";
+	}
+}//fin du if charger_doc
+
 ?>
-<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>
-	<BOUCLE_Articles_de_auteur(ARTICLES){id_secteur}{id_auteur}>[(#SET{liste_articles,#GET{liste_articles}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})]</BOUCLE_Articles_de_auteur>
-</BOUCLE_Contexte_RubriqueCDT>
+		<h3 class="titre">Charger un nouveau document</h3>
+		<center>
+		<p class="avertissement">Veillez à ne télécharger que des documents que vous avez le droit de distribuer.<br />
+		Vérifiez que vos images et vos documents ne sont pas trop volumineux (taille en octets faible).<br />
+		Préférez les documents OpenOffice.org (odt, odc, odp, odg) ou PDF aux documents MS-Office (doc, xls, ppt, etc.)</p>
+		<form enctype="multipart/form-data" name="ajouter_un_doc" method="post">
+			<input type="hidden" name="page" value="#ENV{page}">
+			<input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+			<input type="file" name="chemin">
+			<br>
+			<input type="Submit" value="Charger le document" name="charger_doc">
+		</form></center>
+		<br clear="all" />
+		<hr>
+<BOUCLE_Articles_de_auteur(ARTICLES){id_rubrique}{id_auteur}{id_article!=#_Article:ID_ARTICLE}>[(#SET{liste_articles,#GET{liste_articles}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})]</BOUCLE_Articles_de_auteur>
 <B_Documents>
+		<h3 class="titre">Ou, choisir parmi vos documents déjà chargés pour d'autres fiches</h3>
 #ANCRE_PAGINATION
-<BOUCLE_Documents(DOCUMENTS){id_article IN #GET{liste_articles}}{pagination #ENV{nb,8}}>
+<BOUCLE_Documents(DOCUMENTS){id_article IN #GET{liste_articles}}{id_article!=#_Article:ID_ARTICLE}{pagination #ENV{nb,8}}{doublons}>
 		<div class="#EDIT{fichier} Doc-joint [(#ENV{id_document}|=={#ID_DOCUMENT}|?{'doc-cadre',''})]">
 			[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22})]
 			<p class="#EDIT{titre}" title="double cliquez ici pour modifier le titre du document">[(#TITRE|sinon{#FICHIER|basename})]</p>
 			<p>(#TYPE_DOCUMENT de [(#TAILLE|taille_en_octets)])</p>
 			<form method="get" name="choix_doc#ID_DOCUMENT">
-				<input type="hidden"  name="page" value="cahier-de-texte-selection-document">
+				<input type="hidden"  name="page" value="#ENV{page}">
 				<input type="hidden" name="id_article" value="#ID_ARTICLE">
 				<input type="hidden" name="id_document" value="#ID_DOCUMENT">
 				<input type="hidden" name="debut_Documents" value="#ENV{debut_Documents}">
@@ -70,6 +124,7 @@ if($_GET['doc-choisi']) {
 		<div class="apres">Pages&nbsp;: (#PAGINATION{page_precedent_suivant})</div>]
 </B_Documents>
 		<br clear="all" />
+	</div>
 		<center style="margin-top: 1em;">
 			<input type='button' value='Fermer cette fenêtre (revenir à la séance)' onClick='parent.opener.location.reload();self.close()' name="button">
 		</center>
@@ -77,6 +132,9 @@ if($_GET['doc-choisi']) {
 </div>
 </body>
 </html>
-	</BOUCLE_Article>
-</BOUCLE_Auteur>
+
+			</BOUCLE_Article>
+		</BOUCLE_Auteur>
+	</BOUCLE_AnneeScol>
+</BOUCLE_Contexte_RubriqueCDT>
 <?php } else {echo("affichage non autorisé !");}?>
