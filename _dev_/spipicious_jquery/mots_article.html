@@ -4,9 +4,13 @@
 	<ul class="tags">
 		<BOUCLE_motsarticle(MOTS){id_article}>
 			<li><a href="#URL_MOT" title="#TITRE">#TITRE</a>
-			<BOUCLE_aut(SPIPICIOUS){id_mot}{id_article=#ENV{id_article}}>
-				#ID_AUTEUR #ID_ARTICLE
-			</BOUCLE_aut>
+			<B_aut>
+				<small>(
+				<BOUCLE_aut(SPIPICIOUS auteurs){id_mot}{id_article=#ENV{id_article}}{','}>
+					#LOGIN
+				</BOUCLE_aut>
+				)</small>
+			</B_aut>
 			</li>
 		</BOUCLE_motsarticle>
 	</ul>
