@@ -153,8 +153,9 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 			$date_seance='[(#DATE|affdate{d/m/Y}|texte_script)]';
 			$contenu_seance='[(#TEXTE*|texte_script)]';
 		}
-		$devoirs=-1;?>
-	<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){id_rubrique}{titre_mot="Devoirs à faire"}{ps==#ENV{id_article}}><?php
+		$devoirs=-1;?>[
+		(#SET{liste_des_devoirs,[(#GET{virgule}|explode{[(#PS*|bonbon_matches_id_article)]})]})]
+	<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){id_rubrique}{titre_mot="Devoirs à faire"}{id_article IN #GET{liste_des_devoirs}}><?php
 		$devoirs++;
 		$compteur_doc_devoirs=0;
 		$liste_docs_Devoirs="";?>[
