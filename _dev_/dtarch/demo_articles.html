@@ -1,19 +1,70 @@
-<B_archives>
-<div id="archives" class="menu rubriques">
-	<h2><:dtarch:archives:></h2>
+[(#REM)
+
+	Noisette d'Archives Mensuelles pour SPIP 1.9.2c et +
+	(c)2008 James Licence GNU/GPL
+
+	Parametres:
+	self:		la page de destination, souvent celle ou apparait cette noisette.
+				Penser a specifier {self=#SELF} en parametre pour l'INCLURE appelant
+	date:		la date de contexte, transmise par defaut ou specifiee par l'INCLURE appelant.
+				Elle servira a mettre en evidence le mois choisi par le visiteur (class css 'on')
+				Penser a specifier au minimum {date} en parametre pour l'INCLURE appelant
+	var_date:	variable de navigation, facultatif, 'date' par defaut (texte) 
+				{var_date=date_liste} pour &date_liste=2008-02
+
+	Principe:
+	Cet exemple illustre comment generer une liste glissante de liens pointant
+	vers une page permettant l'affichage d'elements du mois choisi par le visiteur.
+	On se base sur l'ensemble des ARTICLES du site.
+	
+	_reference	boucle englobante. Elle sert a definir la date de reference
+				pour demarrer la liste.
+	_archives	boucle principale. Elle n'affichera que la #DATE des articles.
+				
+	_recent,
+	_ancien		deux boucles
+
+][(#REM)
+
+	Periode de reference:
+	Comme dit plus haut, la date de contexte met en evidence le mois selectionne par le visiteur.
+	Elle ne peut donc servir a 
+
+]#SET{date,#EVAL{date('Y-m')}}
+[(#SET{annee_fin,[(#GET{date}|annee|plus{#ENV{decal}})]})]
+[(#SET{annee_deb,[(#GET{annee_fin}|plus{#ENV{decal}|>{0}|?{1,-1}})]})][
+(#REM)
+
+
+
+]<BOUCLE_reference(ARTICLES)
+	{par date}{inverse}{0,1}
+	{agenda date, periode, #GET{annee_deb}, (#GET{date}|mois), 1, #GET{annee_fin}, (#GET{date}|mois), 31}
+><B_archives>
+<div id="archives" class="menu">
+	<h2><:archives:></h2>
+	<BOUCLE_recent(ARTICLES){lang_select=non}{par date}{inverse}{0,1}{mois_relatif<0}>
+	<p>
+		<a href="[(#SELF|parametre_url{decal,[(#ENV{decal}|plus{1})]})]">+1an</a>
+	</p>
+	</BOUCLE_recent>
 	<ul>
-		<BOUCLE_archives(ARTICLES){par date}{inverse}{fusion_date_mois}{lang_select=non}{age<366}>[
-		<li>
-			<a href="[(#SELF|parametre_url{date,#DATE})]" rel="(#DATE)"[ class="(#DATE_EXPOSE)"]>[
-				(#DATE|affdate_mois_annee)
-			]</a>
+		<BOUCLE_archives(ARTICLES)
+			{lang_select=non}{fusion DATE_FORMAT(date,'%Y-%m')}
+			{par date}{inverse}
+			{mois_relatif>=0}{mois_relatif<12}
+		>[<li>
+			<a href="[(#SELF|parametre_url{#ENV{var_date,date},[(#DATE|affdate{Y-m})]})]"[
+				class="(#DATE|affdate{Y-m}|=={[(#ENV{date}|affdate{Y-m})]}|?{on})"
+			]>(#DATE|affdate_mois_annee)</a>
 		</li>
 		]</BOUCLE_archives>
 	</ul>
-	<BOUCLE_test_plus_vieux(ARTICLES){lang_select=non}{age>=366}{0,1}> </BOUCLE_test_plus_vieux>[
+	<BOUCLE_ancien(ARTICLES){lang_select=non}{par date}{inverse}{0,1}{mois_relatif>=12}>
 	<p>
-		<a href="(#URL_PAGE{plan})"><:dtarch:toutes_archives:></a>
+		<a href="[(#SELF|parametre_url{decal,[(#ENV{decal}|moins{1})]})]">-1an</a>
 	</p>
-	]</B_test_plus_vieux>
+	</BOUCLE_ancien>
 </div>
 </B_archives>
+</BOUCLE_reference>
