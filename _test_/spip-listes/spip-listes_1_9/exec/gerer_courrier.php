@@ -244,7 +244,7 @@ if ($statut=="redac") {
 	  debut_boite_info();
 	echo "<h3> "._T('spiplistes:version')." "._T('spiplistes:val_texte')." </h3>";
     echo "<textarea name='texte' rows='20' class='formo' cols='40' wrap=soft>";
-	echo version_texte($texte);
+	echo spiplistes_version_texte($texte);
 	echo "</textarea><p>\n";
 
 	fin_boite_info();

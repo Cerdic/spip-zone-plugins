@@ -358,7 +358,7 @@ if (isset($_POST['patron'])) {
 // echo generer_url_public('patron_switch',"patron=$patron&date=$date") ;
 $texte_patron = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;
 echo "<textarea name='texte' rows='20' class='formo' cols='40' wrap=soft>";
-	echo version_texte($texte_patron);
+	echo spiplistes_version_texte($texte_patron);
 echo "</textarea><p>\n";
            
     }

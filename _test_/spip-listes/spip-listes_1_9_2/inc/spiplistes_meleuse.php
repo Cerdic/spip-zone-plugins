@@ -134,7 +134,7 @@ if ($message_pile > 0){
 	if($message_texte !='')
 		$page_ = $message_texte ;  
 	else
-		$page_ = version_texte($texte);
+		$page_ = spiplistes_version_texte($texte);
     
 
 	if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){

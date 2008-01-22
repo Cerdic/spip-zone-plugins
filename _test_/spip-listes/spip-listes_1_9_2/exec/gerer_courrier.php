@@ -275,7 +275,7 @@ function exec_gerer_courrier(){
 		}
 		else{
 			$alt = _T('spiplistes:calcul_html');
-			$message_texte = version_texte($texte);
+			$message_texte = spiplistes_version_texte($texte);
 		}
 		
 		echo _T('spiplistes:version_texte')." <a href='#' title='$alt'><small>(?)</small></a><br />";

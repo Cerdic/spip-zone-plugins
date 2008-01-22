@@ -129,7 +129,7 @@ if ($message_pile > 0){
 	include_spip('inc/filtres');
 	$texte = liens_absolus($texte);
 	
-	$page_ = version_texte($texte);
+	$page_ = spiplistes_version_texte($texte);
 
 	// on prépare la version texte
 	if ($GLOBALS['spiplistes_charset_envoi'] <> 'utf-8') {

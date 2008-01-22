@@ -119,7 +119,7 @@ function spiplistes_propre_bloog($texte) {
  * d'après Clever Mail (-> NHoizey), mais en mieux.
 ****/
 
-function spiplistes_version_texte ($in) {
+function spiplistes_version_texte($in) {
 // Nettoyage des liens des notes de bas de page
 $out = ereg_replace("<a href=\"#n(b|h)[0-9]+-[0-9]+\" name=\"n(b|h)[0-9]+-[0-9]+\" class=\"spip_note\">([0-9]+)</a>", "\\3", $in);
 

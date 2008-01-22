@@ -77,9 +77,9 @@ function cron_spiplistes_cron($t){
 	
 			// ne pas envoyer des textes de moins de 10 caracteres
 			include_spip('inc/spiplistes_api');
-			$taille = strlen(spip_listes_strlen(version_texte($texte_patron_bg))) ;
+			$taille = strlen(spip_listes_strlen(spiplistes_version_texte($texte_patron_bg))) ;
 			spip_log("taille -> $taille","spiplistes");
-			//spip_log("txt -> ".version_texte($texte_patron_bg),"spiplistes");
+			//spip_log("txt -> ".spiplistes_version_texte($texte_patron_bg),"spiplistes");
 	
 			if ( $taille > 10 ) {
 	
