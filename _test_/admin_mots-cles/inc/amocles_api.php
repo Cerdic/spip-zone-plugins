@@ -247,6 +247,15 @@ function amocles_admins_groupes_mots_get_ids () {
 	return($result);
 }
 
+function amocles_mots_edit_inserer_milieu () {
+	static $inserer_milieu = false;
+	if(!$inserer_milieu) {
+		$config = __plugin_lire_serialized_meta(_AMOCLES_META_PREFERENCES);
+		$inserer_milieu = isset($config['inserer_milieu']) ? $config['inserer_milieu'] : "non";
+	}
+	return($inserer_milieu == "oui");
+}
+
 // charge les vieilles def nécessaires si besoin
 if(version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) { 
 	include_spip("inc/amocles_api_vieilles_defs");

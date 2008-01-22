@@ -5,4 +5,4 @@
 	// $LastChangedBy: paladin@quesaco.org $
 	// $LastChangedDate: 2007-10-29 08:33:41 +0100 (lun., 29 oct. 2007) $
 
-- Interface de saisie pour les titres,descriptifs,textes en <multi>
+- Optimiser l'Interface de saisie pour les titres,descriptifs,textes en <multi> (parfois très lent à l'intialisation)

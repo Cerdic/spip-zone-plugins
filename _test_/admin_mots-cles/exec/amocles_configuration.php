@@ -80,9 +80,10 @@ function exec_amocles_configuration () {
 	// initialise les variables postées par le formulaire
 	foreach(array(
 			'btn_valider_admin', 'ajouter_admins', 'ajouter_auteurs'
-		  , 'btn_valider_import', 'id_groupe'
-		  , 'btn_valider_export', 'groupes_export'
-		  , 'cherche_auteur', 'ids'
+		, 'btn_valider_milieu', 'inserer_milieu'
+		, 'btn_valider_import', 'id_groupe'
+		, 'btn_valider_export', 'groupes_export'
+		, 'cherche_auteur', 'ids'
 		) as $key) {
 		$$key = _request($key);
 	}
@@ -129,6 +130,16 @@ function exec_amocles_configuration () {
 		}
 	}
 
+	////////////////////////////////////
+	// insérer milieu dans mots_edit ?
+	$langues_array = split(',', $GLOBALS['meta']['langues_utilisees']);
+	if((count($langues_array) > 1) && $btn_valider_milieu) {
+		if(!$inserer_milieu) $inserer_milieu = "non";
+		__plugin_ecrire_key_in_serialized_meta('inserer_milieu', $inserer_milieu, _AMOCLES_META_PREFERENCES);
+		__ecrire_metas();
+		spip_log($ii." INSERER MILIEU ($inserer_milieu) BY ID_AUTEUR #".$connect_id_auteur, _AMOCLES_PREFIX);
+	}
+	
 	////////////////////////////////////
 	// importation ?
 	if($btn_valider_import) {
@@ -363,6 +374,31 @@ function exec_amocles_configuration () {
 			;
 	}
 	
+	////////////////////////////////////
+	// Boite insérer milieu dans mots_edit ?
+	if(count($langues_array) > 1) {
+		$checked = (isset($inserer_milieu) && ($inserer_milieu == 'oui')) ? "checked='checked'" : "";
+		$page_result .= ""
+			. debut_cadre_trait_couleur(_DIR_IMG_PACK."langues-24.gif", true, "", _T(_AMOCLES_LANG."inserer_milieu"))
+			. "<div  style='text-align: $spip_lang_left;font-style: italic;' class='verdana2'>\n"
+			. _T(_AMOCLES_LANG."inserer_milieu_desc")
+			. "</div>\n"
+			. "<div  style='text-align: $spip_lang_left;' class='verdana2'>\n"
+			. "<form method='post' action=''>\n"
+			. "<div  style='text-align: $spip_lang_left;font-style: italic;margin-top:0.25em;' class='verdana2'>\n"
+			. "<label><input type='checkbox' name='inserer_milieu' value='oui' $checked />\n"
+			. _T(_AMOCLES_LANG."inserer_boite_edit")."</label>\n"
+			. "</div>\n"
+			// bouton valider
+			. "<div style='text-align:$spip_lang_right'>\n"
+			. "<input type='submit' name='btn_valider_milieu' value='"._T('bouton_valider')."' class='fondo' />\n"
+			. "</div>\n"
+			. "</form>\n"
+			. "</div>\n"
+			. fin_cadre_trait_couleur(true)
+			;
+	}
+
 	////////////////////////////////////
 	// Boite importation des mots-clés
 	$page_result .= ""

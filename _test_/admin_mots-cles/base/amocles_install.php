@@ -81,6 +81,7 @@ function amocles_init () {
 		'prefix' => _AMOCLES_PREFIX
 		, 'version' => __plugin_real_tag_get(_AMOCLES_PREFIX, 'version')
 		, 'date' => date('Y-m-d_H:i:s')
+		, 'inserer_milieu' => "non"
 		, 'admins_groupes_mots_ids' => array()
 	);
 	ecrire_meta(_AMOCLES_META_PREFERENCES, serialize($amocles_init));
