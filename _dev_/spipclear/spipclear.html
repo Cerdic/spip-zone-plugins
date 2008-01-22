@@ -53,7 +53,7 @@
 			</div>
 
 			[(#SET{url,[(#ENV{id_secteur}|generer_url_rubrique)]})]
-			<INCLURE{fond=noisettes/sidebar}{self=#GET{url}}{id_secteur}{id_rubrique}{id_article}{date=#ENV{archives,#ENV{date}}}{archives=#ENV{archives,#ENV{date}}}{recherche}>
+			<INCLURE{fond=noisettes/sidebar}{self=#GET{url}}{id_secteur}{id_rubrique}{id_article}{date=#ENV{archives,#ENV{date}}}{archives=#ENV{archives,#ENV{date}}}{decal}{recherche}>
 
 			<p id="footer"><:spipclear:credits:>, <a href="#URL_SITE_SPIP/"><:spipclear:hebergement:> #NOM_SITE_SPIP</a></p>
 			
