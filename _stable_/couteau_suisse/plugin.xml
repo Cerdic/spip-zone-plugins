@@ -3,7 +3,7 @@
 	<icon>img/couteau-50.gif</icon>
 	<version>1.7.16.07</version>
 	<auteur>Patrice Vanneufville
-_ &#169; 2007 - Distribu&#233; sous licence GPL
+_ &#169; 2007-2008 - Distribu&#233; sous licence GPL
 	</auteur>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	stable
@@ -15,9 +15,9 @@ Chacun de ces outils peut &#234;tre activ&#233; ou non par l'utilisateur sur [la
 
 Les cat&#233;gories disponibles sont : Administration, Am&#233;liorations typographiques, Raccourcis typographiques, Affichage public, Balises, filtres, crit&#232;res.
 
-N'h&#233;sitez pas &#224; consulter les articles de documentation du plugin publi&#233;s sur [Spip-Contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse]
+N'h&#233;sitez pas &#224; consulter les articles de documentation du plugin publi&#233;s sur [Spip-Contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilit&#233; : SPIP version 1.9 minimum.
+Compatibilit&#233; : SPIP toutes versions 1.9x
 	</description>
 	<lien>[->http://www.spip-contrib.net/Le-Couteau-Suisse]</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
