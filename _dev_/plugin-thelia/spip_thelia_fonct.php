@@ -26,7 +26,13 @@ function spip_thelia_appeler_moteur_thelia($texte)
 		case 'regret' : $pageret=1; break;	
 		case 'virement' : $securise=1; $pageret=1; $reset=1; break;	
 	}
-
+	
+	//conflit sur la variable $page. 
+	global $page;
+	$page = new stdclass;
+	$page = "";
+	
+	
 	include_once("classes/Navigation.class.php");
 	
 	session_start();
@@ -51,7 +57,6 @@ function spip_thelia_appeler_moteur_thelia($texte)
 
 	$texte = ob_end_flush();
 		
-
 
 	return "";	
 }
