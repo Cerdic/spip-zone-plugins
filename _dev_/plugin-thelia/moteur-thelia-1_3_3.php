@@ -30,7 +30,8 @@
 	/* Le fichier html associé au php ( fond ) est parsé afin de subsituer les informations au bon endroit */
 
 	include_once("fonctions/boucles.php");
-	include_once(_DIR_PLUGINS."plugin-thelia/action-thelia-1_3_3.php");
+	//include_once(_DIR_PLUGINS."plugin-thelia/action-thelia-1_3_3.php");
+	include_once("fonctions/action.php");
 	include_once("fonctions/substitutions.php");
 	
 	/* Moteur */
