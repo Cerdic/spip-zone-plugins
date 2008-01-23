@@ -7,7 +7,7 @@
 [(#PUBLIC|=={oui}|?{' '})#RESULTATS_SONDAGE]
 </fieldset>
 ]
-<BOUCLE_champs(FORMS_CHAMPS){id_form}{champ?}{tout}{type!=joint}{saisie=oui}{par rang}>
+<BOUCLE_champs(FORMS_CHAMPS){id_form}{champ?}{tout}{type!=joint}{saisie!=non}{par rang}>
 [(#ENV{affiche_sondage}|?{'',' '})
 	[(#GET{fieldset}|?{' '})
 		[[(#GET{need_fieldset}|?{'','</fieldset>'})]<fieldset class='#CHAMP'><legend>(#TYPE|=={separateur}|?{#TITRE,''})</legend> #SET{need_fieldset,0}]
