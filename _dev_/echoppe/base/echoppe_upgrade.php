@@ -10,8 +10,8 @@ function echoppe_install($action){
 		case 'test':
 			//Contrôle du plugin à chaque chargement de la page d'administration
 			// doit retourner true si le plugin est proprement installé et à jour, false sinon
-			$version_echoppe_locale = 0.6;
-			echo $version_echoppe_installee;
+			$version_echoppe_locale = 0.7;
+			echo "Echoppe DB V".$version_echoppe_installee;
 			//~ echo $version_echoppe_locale.' <-> '.$version_echoppe_installee.'<br />';
 			if ($version_echoppe_installee == $version_echoppe_locale){
 				$test = true; 
@@ -25,19 +25,21 @@ function echoppe_install($action){
 		case 'install':
 			//Appel de la fonction d'installation. Lors du clic sur l'icône depuis le panel.
 			//quand le plugin est activé et test retourne false
-			$version_echoppe_locale = 0.6;
+			$version_echoppe_locale = 0.7;
 			include_spip('base/echoppe');
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			include_spip('inc/import_origine');
-			//~ echo ("Test : ".$version_echoppe_locale);
+
+			include_spip('base/echoppe_patch_upgrade');
 			if ($version_echoppe_installee > 0){
 				switch ($version_echoppe_installee){
 					case '0.5' :
-						$sql_ajout_id_secteur = "ALTER TABLE spip_echoppe_categories ADD id_secteur BIGINT NOT NULL AFTER id_parent ;";
-						$res_ajout_id_secteur = spip_query($sql_ajout_id_secteur);
-						ecrire_meta('echoppe_version',$version_echoppe_locale);
-						ecrire_metas();
+						patch_05to06();
+						patch_06to07();
+					break;
+					case '0.6' :
+						patch_06to07();
 					break;
 				}
 				

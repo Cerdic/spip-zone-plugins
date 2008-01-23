@@ -74,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mettre_a_jour' => 'Mettre &agrave; jour',
 
 // N
+'nom_de_la_nouvelle_option' => 'Nom de la nouvelle option',
 'nouveau_produit' => 'Cr&eacute;er un produit',
 'nouvelle_categorie' => 'Nouvelle cat&eacute;gorie',
 

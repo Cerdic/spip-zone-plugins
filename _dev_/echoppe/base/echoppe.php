@@ -10,7 +10,7 @@ global $tables_jointures;
 
 
 
-$GLOBALS['echoppe_version_base'] = 0.6;
+$GLOBALS['echoppe_version_base'] = 0.7;
 
 
 $spip_echoppe_categories = array(
@@ -396,18 +396,20 @@ $spip_echoppe_client_join = array(
 	"token_client"	=> "token_client"
 	);
 
-$spip_echoppe_panier = array(
-	"id_panier"	=> "bigint(21) NOT NULL", //Un panier complet est constitue de plusieurs enregistrelent de cette table. Tous relies par token_panier
+$spip_echoppe_paniers = array(
+	"id_panier"	=> "bigint(21) NOT NULL", //Un panier complet est constitue de plusieurs enregistrement de cette table. Tous relies par token_panier
 	"id_client"	=> "bigint(21) NOT NULL",
 	"id_produit"	=> "bigint(21) NOT NULL",
 	"quantite"	=> "bigint(21) NOT NULL",
 	"configuration"	=> "longblob NOT NULL",
 	"token_client"	=> "VARCHAR(255) NOT NULL",
-	"token_panier"	=> "VARCHAR(255) NOT NULL"
+	"token_panier"	=> "VARCHAR(255) NOT NULL",
+	"statut"		=> "VARCHAR(10) NOT NULL",
+	"date"			=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
 	);
 
 
-$spip_echoppe_panier_key = array(
+$spip_echoppe_paniers_key = array(
 	"PRIMARY KEY"		=> "id_panier",
 	"KEY id_client"		=> "id_client",
 	"KEY token_client"	=> "token_client",
@@ -415,14 +417,31 @@ $spip_echoppe_panier_key = array(
 	);
 
 
-$spip_echoppe_panier_join = array(
+$spip_echoppe_paniers_join = array(
 	"id_panier"	=> "id_panier",
 	"id_client"	=> "id_client",
 	"token_client"	=> "token_client",
 	"token_panier"	=> "token_panier"
 	);
 
+$spip_echoppe_statuts_paniers = array(
+	"id_status_panier"	=> "bigint(21) NOT NULL",
+	"token_panier"	=> "VARCHAR(255) NOT NULL",
+	"statut"		=> "VARCHAR(10) NOT NULL",
+	"commentaires"	=> "TINYTEXT NOT NULL",
+	"date"			=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
+	);
 
+
+$spip_echoppe_statuts_paniers_key = array(
+	"PRIMARY KEY"		=> "id_status_panier",
+	"KEY token_panier"	=> "token_panier"
+	);
+
+
+$spip_echoppe_statuts_paniers_join = array(
+	"token_panier"	=> "token_panier"
+	);
 
 $tables_principales['spip_echoppe_categories'] = array(
 	'field' => &$spip_echoppe_categories,
@@ -538,10 +557,16 @@ $tables_principales['spip_echoppe_client'] = array(
 	'join' => &$spip_echoppe_client_join
 	);
 
-$tables_principales['spip_echoppe_panier'] = array(
-	'field' => &$spip_echoppe_panier,
-	'key' => &$spip_echoppe_panier_key,
-	'join' => &$spip_echoppe_panier_join
+$tables_principales['spip_echoppe_paniers'] = array(
+	'field' => &$spip_echoppe_paniers,
+	'key' => &$spip_echoppe_paniers_key,
+	'join' => &$spip_echoppe_paniers_join
+	);
+
+$tables_principales['spip_echoppe_statuts_paniers'] = array(
+	'field' => &$spip_echoppe_statuts_paniers,
+	'key' => &$spip_echoppe_statuts_paniers_key,
+	'join' => &$spip_echoppe_statuts_paniers_join
 	);
 
 $tables_principales['spip_echoppe_depots'] = array(

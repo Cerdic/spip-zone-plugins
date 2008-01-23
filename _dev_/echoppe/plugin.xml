@@ -6,12 +6,13 @@
 		crowf00t, kent1, yoann etc... &copy; 2007 - Distribu&eacute; sous licence GNU/LGPL
 	</auteur>
 	<version>
-		0.1
+		0.1.7
 	</version>
 	<etat>
 		dev
 	</etat>
 	<description>
+	{{{/!\ Vous ne devriez pas utiliser ce plugin. Il est encore en developpement. /!\}}}
 Un projet de boutique g&eacute;n&eacute;raliste pour spip.
 _ N&eacute;c&eacute;ssite les plugins suivant:
 _ - CFG 1.0.6
