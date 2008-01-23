@@ -40,7 +40,83 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	$_REQUEST['action'] = $_REQUEST['thelia_action'];
 	$_REQUEST['page'] = $_REQUEST['page_thelia'];
 	
-	include_once(_DIR_PLUGINS."plugin-thelia/moteur-thelia-1_3_3.php");
 	
+	//on prépare le flux à envoyer au moteur thélia
+	$res = $texte;
+	$res = str_replace("THELIA-", "#", $res);
+
+	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
+	ob_start("remplacement_sortie_thelia");
+	include_once(_DIR_PLUGINS."plugin-thelia/moteur-thelia-1_3_3.php");
+
+	$texte = ob_end_flush();
+		
+
+
+	return "";	
+}
+function remplacement_sortie_thelia($in_thelia)
+{
+    	//renommage action en thelia_action
+	$in_thelia = str_replace("?action", "?thelia_action", $in_thelia);
+	$in_thelia = str_replace("&action", "&thelia_action", $in_thelia);
+
+	//renommage des pages au format spip
+	$in_thelia = str_replace("adresse.php?", "spip.php?page=adresse&", $in_thelia);
+	$in_thelia = str_replace("cheque.php?", "spip.php?page=cheque&", $in_thelia);
+	$in_thelia = str_replace("commande.php?", "spip.php?page=commande&", $in_thelia);
+	$in_thelia = str_replace("commande_detail.php?", "spip.php?page=commande_detail&", $in_thelia);
+	$in_thelia = str_replace("commande_visualiser.php?", "spip.php?page=commande_visualiser&", $in_thelia);
+	$in_thelia = str_replace("compte_modifier.php?", "spip.php?page=compte_modifier&", $in_thelia);
+	$in_thelia = str_replace("compte_modifiererr.php?", "spip.php?page=compte_modifiererr&", $in_thelia);
+	$in_thelia = str_replace("connexion.php?", "spip.php?page=connexion&", $in_thelia);
+	$in_thelia = str_replace("creercompte.php?", "spip.php?page=creercompte&", $in_thelia);
+	$in_thelia = str_replace("imgpop.php?", "spip.php?page=imgpop&", $in_thelia);
+	$in_thelia = str_replace("livraison_adresse.php?", "spip.php?page=livraison_adresse&", $in_thelia);
+	$in_thelia = str_replace("mdpoublie.php?", "spip.php?page=mdpoublie&", $in_thelia);
+	$in_thelia = str_replace("merci.php?", "spip.php?page=merci&", $in_thelia);
+	$in_thelia = str_replace("moncompte.php?", "spip.php?page=moncompte&", $in_thelia);
+	$in_thelia = str_replace("nouveau.php?", "spip.php?page=nouveau&", $in_thelia);
+	$in_thelia = str_replace("panier.php?", "spip.php?page=panier&", $in_thelia);
+	$in_thelia = str_replace("produit.php?", "spip.php?page=produit&", $in_thelia);
+	$in_thelia = str_replace("regret.php?", "spip.php?page=regret&", $in_thelia);
+	$in_thelia = str_replace("rubrique.php?", "spip.php?page=rubrique_thelia&", $in_thelia);
+	$in_thelia = str_replace("virement.php?", "spip.php?page=virement&", $in_thelia);
+
+	$in_thelia = str_replace("adresse.php", "spip.php?page=adresse", $in_thelia);
+	$in_thelia = str_replace("cheque.php", "spip.php?page=cheque", $in_thelia);
+	$in_thelia = str_replace("commande.php", "spip.php?page=commande", $in_thelia);
+	$in_thelia = str_replace("commande_detail.php", "spip.php?page=commande_detail", $in_thelia);
+	$in_thelia = str_replace("commande_visualiser.php", "spip.php?page=commande_visualiser", $in_thelia);
+	$in_thelia = str_replace("compte_modifier.php", "spip.php?page=compte_modifier", $in_thelia);
+	$in_thelia = str_replace("compte_modifiererr.php", "spip.php?page=compte_modifiererr", $in_thelia);
+	$in_thelia = str_replace("connexion.php", "spip.php?page=connexion", $in_thelia);
+	$in_thelia = str_replace("creercompte.php", "spip.php?page=creercompte", $in_thelia);
+	$in_thelia = str_replace("imgpop.php", "spip.php?page=imgpop", $in_thelia);
+	$in_thelia = str_replace("livraison_adresse.php", "spip.php?page=livraison_adresse", $in_thelia);
+	$in_thelia = str_replace("mdpoublie.php", "spip.php?page=mdpoublie", $in_thelia);
+	$in_thelia = str_replace("merci.php", "spip.php?page=merci", $in_thelia);
+	$in_thelia = str_replace("moncompte.php", "spip.php?page=moncompte", $in_thelia);
+	$in_thelia = str_replace("nouveau.php", "spip.php?page=nouveau", $in_thelia);
+	$in_thelia = str_replace("panier.php", "spip.php?page=panier", $in_thelia);
+	$in_thelia = str_replace("produit.php", "spip.php?page=produit", $in_thelia);
+	$in_thelia = str_replace("regret.php", "spip.php?page=regret", $in_thelia);
+	$in_thelia = str_replace("rubrique.php", "spip.php?page=rubrique_thelia", $in_thelia);
+	$in_thelia = str_replace("virement.php", "spip.php?page=virement", $in_thelia);
+
+	//iso vers utf8
+	$in_thelia = str_replace('é', '&eacute;', $in_thelia);
+	$in_thelia = str_replace('è', '&egrave;', $in_thelia);
+	$in_thelia = str_replace('à', '&agrave;', $in_thelia);
+	$in_thelia = str_replace('ê', '&ecirc;', $in_thelia);
+	$in_thelia = str_replace('î', '&icirc;', $in_thelia);
+	$in_thelia = str_replace('ï', '&iuml;', $in_thelia);
+	$in_thelia = str_replace('Î', '&Icirc;', $in_thelia);
+	$in_thelia = str_replace('É', '&Eacute;', $in_thelia);
+	$in_thelia = str_replace('ç', '&ccedil;', $in_thelia);
+	$in_thelia = str_replace('ô', '&ocirc;', $in_thelia);
+	$in_thelia = str_replace('ë', '&euml;', $in_thelia); 
+
+	return $in_thelia;
 }
 ?>
