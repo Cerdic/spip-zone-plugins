@@ -1,14 +1,14 @@
 <?php
 function spip_thelia_appeler_moteur_thelia($texte)
 {
+	//ne pas appeler thelia dans l'espace privé
 	if ($_REQUEST['exec']!="") return $texte;
+
+	//problème à investiguer avec les pages forums
 	if ($_REQUEST['page'] == "forum") return $texte;	
-	include_once("classes/Navigation.class.php");
-	
-	session_start();
-	if ($_SESSION['navig']->lang != '') $_SESSION['navig']->lang=0;
 	
 	
+	//parsonnalisation des variables thélia
 	switch($_REQUEST['page']){
 		case 'panier' : $securise=0; $pageret=1; break;
 		case 'adresse' : $securise=1; $pageret=1; break;
@@ -27,6 +27,18 @@ function spip_thelia_appeler_moteur_thelia($texte)
 		case 'virement' : $securise=1; $pageret=1; $reset=1; break;	
 	}
 
+	include_once("classes/Navigation.class.php");
+	
+	session_start();
+	
+	//conflit entre spip et thélia sur le nommage des langues. on force provisoirement le français dans thélia.
+	if ($_SESSION['navig']->lang != '') {
+		$_SESSION['navig']->lang=0;
+	}
+
+	//réaffectation des variables de thélia qui ont étées renommées dans les squelettes pour éviter les conflits avec spip
+	$_REQUEST['action'] = $_REQUEST['thelia_action'];
+	$_REQUEST['page'] = $_REQUEST['page_thelia'];
 	
 	include_once(_DIR_PLUGINS."plugin-thelia/moteur-thelia-1_3_3.php");
 	
