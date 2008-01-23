@@ -9,8 +9,8 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	if ($_SESSION['navig']->lang != '') $_SESSION['navig']->lang=0;
 	
 	
-	switch($page){
-		case 'panier' : $securise=1; $pageret=1; break;
+	switch($_REQUEST['page']){
+		case 'panier' : $securise=0; $pageret=1; break;
 		case 'adresse' : $securise=1; $pageret=1; break;
 		case 'cheque' : $securise=1; $pageret=1;$reset=1; break;
 		case 'commande' : $securise=1; $pageret=1; $panier=1; $transport=1; break;
