@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'acces_non_autorise'=>'D&eacute;sol&eacute,<br />vous n\'avez pas le droit d\'acc&eacute;der &aacute; cette partie.',
+'ajouter' => 'Ajouter',
 'ajouter_une_option' => 'Ajouter une option',
 
 // C
@@ -84,6 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pas_de_categorie_ici' => 'Pas de cat&eacute;gorie ici.',
 'pas_de_produit_ici' => 'Pas de produits &agrave; cette adresse.',
 'pas_de_titre' => 'Pas de titre',
+'pas_encore_de_categorie' => 'Pas encore de cat&eacute;gorie',
 'pas_encore_cree' => 'N\'existe pas encore.',
 'pas_encore_modifie' => 'Jamais modifi&eacute;',
 'prepa' => 'en pr&eacute;paration',
