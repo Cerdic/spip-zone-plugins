@@ -109,7 +109,7 @@ function analyse($res){
 	if(!isset($pagesess)) $pagesess=0;
 	if(!$lang)
 		if(!isset($_REQUEST['lang'])) $lang=""; else $lang=$_REQUEST['lang'];
-	if(!isset($_REQUEST['thelia_action'])) $thelia_action=""; else $thelia_action=$_REQUEST['thelia_action'];
+	if(!isset($_REQUEST['action'])) $action=""; else $action=$_REQUEST['action'];
 	if(!isset($_REQUEST['append'])) $append=0; else $append=$_REQUEST['append'];
 	if(!isset($_REQUEST['id'])) $id="";	else $id=$_REQUEST['id'];
 	if(!isset($_REQUEST['id_parrain'])) $id_parrain=""; else $id_parrain=$_REQUEST['id_parrain'];	
@@ -196,9 +196,9 @@ function analyse($res){
 	// fonctions à éxecuter avant le moteur
 	modules_fonction("demarrage");
 		
-	// thelia_actions
+	// actions
 
-	switch($thelia_action){
+	switch($action){
 		case 'ajouter' : ajouter($ref, $quantite, $append, $nouveau); break;
 		case 'supprimer' : supprimer($article); break;
 		case 'modifier' : modifier($article, $quantite); break;
