@@ -31,7 +31,8 @@
 
 	include_once(_DIR_PLUGINS."plugin-thelia/boucles-thelia-1_3_3.php");
 	include_once(_DIR_PLUGINS."plugin-thelia/action-thelia-1_3_3.php");
-	include_once(_DIR_PLUGINS."plugin-thelia/substitutions-thelia-1_3_3.php");
+	//include_once(_DIR_PLUGINS."plugin-thelia/substitutions-thelia-1_3_3.php");
+	include_once("fonctions/substitutions.php");
 	
 	/* Moteur */
 	
@@ -258,7 +259,7 @@ function analyse($res){
     	$res = eval($res);
 	}
 		
-	echo convert_to_html($res); //iconv("ISO-8859-1", "UTF-8", $res);
+	echo $res; //iconv("ISO-8859-1", "UTF-8", $res);
 	
 	// Reset de la commande
 	if($reset){
