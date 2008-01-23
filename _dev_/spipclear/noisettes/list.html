@@ -8,7 +8,7 @@
 	<h2 id="p#ID_ARTICLE" class="post-title"><a href="#URL_ARTICLE">#TITRE</a></h2>
 
 	<p class="post-info">
-	<B_auteurs><:par_auteur|ucfirst:> <BOUCLE_auteurs(AUTEURS){id_article}{", "}>#NOM</BOUCLE_auteurs>, </B_auteurs>
+	<B_auteurs><:par_auteur|ucfirst:> <BOUCLE_auteurs(AUTEURS){id_article}{", "}><span[ title="(#BIO|couper{60}|texte_backend)"]>#NOM</span></BOUCLE_auteurs>, </B_auteurs>
 	[(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
 	<span>::</span>
 	<BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_categorie>
