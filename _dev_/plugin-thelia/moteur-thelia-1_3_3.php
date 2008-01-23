@@ -24,22 +24,18 @@
 /*************************************************************************************/
 ?>
 <?php
-	
-	/* Moteur */
-	
-	/* Le fichier html associŽ au php ( fond ) est parsŽ afin de subsituer les informations au bon endroit */
+	include_once("classes/Navigation.class.php");
 
-	include_once("fonctions/boucles.php");
-	//include_once(_DIR_PLUGINS."plugin-thelia/action-thelia-1_3_3.php");
-	include_once("fonctions/action.php");
-	include_once("fonctions/substitutions.php");
-	
+	session_start();
+
 	/* Moteur */
 	
 	/* Le fichier html associé au php ( fond ) est parsé afin de subsituer les informations au bon endroit */
 
+	include_once("fonctions/boucles.php");
+	include_once("fonctions/substitutions.php");
 	include_once("fonctions/filtres.php");
-	
+	include_once("fonctions/action.php");
 	include_once("fonctions/divers.php");
 	include_once("classes/Client.class.php");
 	include_once("classes/Commande.class.php");
@@ -197,7 +193,7 @@ function analyse($res){
 	// fonctions à éxecuter avant le moteur
 	modules_fonction("demarrage");
 		
-	// actions
+	// Actions
 
 	switch($action){
 		case 'ajouter' : ajouter($ref, $quantite, $append, $nouveau); break;
@@ -219,10 +215,10 @@ function analyse($res){
 
 
 	// Sécurisation
-	if($securise && ! $_SESSION["navig"]->connecte) { header("Location: spip.php?page=connexion"); exit; }
+	if($securise && ! $_SESSION["navig"]->connecte) { header("Location: connexion.php"); exit; }
 
 	// Vérif transport 
-	if($transport && ! $_SESSION["navig"]->commande->transport) { header("Location: spip.php?page=commande"); exit; }
+	if($transport && ! $_SESSION["navig"]->commande->transport) { header("Location: commande.php"); exit; }
 	
 	// Vérif panier
 	if($panier && ! $_SESSION["navig"]->panier->nbart) { header("Location: index.php"); exit; } 
@@ -231,8 +227,10 @@ function analyse($res){
 	modules_fonction("pre");
 	
 	// chargement du squelette	
-	$res = str_replace("THELIA-", "#", $texte);
-	
+	if($res == ""){
+		if(!file_exists($fond)) { echo "Impossible d'ouvrir $fond"; exit; }
+		$res = file_get_contents($fond);
+	}
 	
 	// fonctions à éxecuter avant les inclusions
 	modules_fonction("inclusion");
@@ -259,13 +257,12 @@ function analyse($res){
     	$res = eval($res);
 	}
 		
-	echo $res; //iconv("ISO-8859-1", "UTF-8", $res);
+	echo $res;
 	
 	// Reset de la commande
 	if($reset){
             $_SESSION["navig"]->commande = new Commande();
             $_SESSION["navig"]->panier = new Panier();	
 	}
-
 
 ?>
