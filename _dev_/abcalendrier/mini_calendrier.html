@@ -1,4 +1,4 @@
-#CACHE{86400}
+#CACHE{85400}
 <?php
 
     $calendrier_mois=$_GET['calendrier_mois'];
@@ -99,8 +99,7 @@ $test_mini_agenda_deja_present = 1;
         </a>&nbsp;&nbsp;'.$mes.' '.$Y.'&nbsp;&nbsp;<a href="'.preparation_URL('#SELF',$calendrier_mois_plus,$calendrier_annee_plus).'" title="'._T('abcalendrier:Mois_suivant').'">
         &gt;&gt;</a></center></li>';
 		?>
-	</td>
-</tr>
+
 
 <li class="deux"><center><table width="100%" cellpadding="1" cellspacing="0" align="center">
 
@@ -143,7 +142,7 @@ $test_mini_agenda_deja_present = 1;
 					foreach($events[$date] as $myevent){
 						echo '<li  class="level2"><a href="'.$myevent['link'].'" title="'.$myevent['title'].'" >'.$myevent['title']."</a></li>\n";
 					}
-				echo '</ul></li></div>';
+				echo '</ul></li></ul></div>';
 			}
 		}
 		else {
