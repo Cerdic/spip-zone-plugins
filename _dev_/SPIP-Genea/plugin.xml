@@ -1,0 +1,16 @@
+<plugin>
+	<nom>spip-Genea</nom>
+	<auteur>[Xavier BUROT->mailto:xebiaut@free.fr]
+_ &copy; 2006-2008 - Distribu&eacute; sous licence GNU/GPL</auteur>
+	<lien>[Documentation->http://xebiaut.free.fr/?rubrique89]</lien>
+	<version>0.2</version>
+	<version_base>1.0</version_base>
+	<etat>dev</etat>
+	<description>Plugin de g&eacute;n&eacute;alogie pour SPIP.</description>
+	<prefix>genea</prefix>
+	<icon>img_pack/arbre-24.png</icon>
+	<fonctions>genea_fonctions.php</fonctions>
+	<options>genea_options.php</options>
+	<install>base/genea_install.php</install>
+	<chemin dir='' />
+</plugin>
