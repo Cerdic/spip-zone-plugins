@@ -1,10 +1,12 @@
 <br />
 <div class="echoppe_edit_option">
 	<h3><:echoppe:les_options_du_produit:></h3>
-	<BOUCLE_LesOptionsDuProduit(SPIP_ECHOPPE_OPTIONS){id_produit}>
-
+	</B_LesOptionsDuProduit>
+		<ul>
+	<BOUCLE_LesOptionsDuProduit(SPIP_ECHOPPE_OPTIONS_DESCRIPTIONS spip_echoppe_options){id_produit}>
+		<li><a href="#EVAL{echoppe_edit_option}|generer_url_ecrire{id_option=#ID_OPTION}">#TEXTE</a></li>
 	</BOUCLE_LesOptionsDuProduit>
-		test
+		</ul>
 	</B_LesOptionsDuProduit>
 		<:echoppe:pas_d_options_pour_le_produit:>
 	<//B_LesOptionsDuProduit><br />
@@ -13,6 +15,7 @@
 		<form action="[(#EVAL{echoppe_ajouter_option}|generer_url_action{id_produit=#ID_PRODUIT})]" method="post" >
 			<input type="hidden" name="id_produit" value="#ID_PRODUIT" />
 			<input type="hidden" name="new" value="#NEW" />
+			<input type="hidden" name="lang_produit" value="#LANG_PRODUIT" />
 			<label for="nouvelle_option" class="titre"><:echoppe:nom_de_la_nouvelle_option:></label>
 			<input type="text" id="nouvelle_option" name="titre" value="" /><br />
 			<input type="submit" class="fondo" value="<:echoppe:ajouter:>" />

@@ -8,7 +8,7 @@
 <div>
 	<strong><:echoppe:les_sous_categories:></strong>
 		<ul>
-		<BOUCLE_LesSousCategorie(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){id_secteur = ""}{par num titre}>
+		<BOUCLE_LesSousCategorie(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){id_secteur = #ID_CATEGORIE}{par num titre}>
 			<li class="cadre-sous_rub" style="width: 45%;margin: 10px 0px 0px 0px;">
 				
 					<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</a></strong>
@@ -41,7 +41,7 @@
 				
 			</td>
 			<td width="80px" class="arial1">XXX en stock</td>
-			<td width="50px" class="arial1">ref</td>
+			<td width="50px" class="arial1">[(#REF_PRODUIT|sinon{<em><:echoppe:pas_de_num_de_ref:></em>})]</td>
 			</tr>
 		</BOUCLE_LesProduits>
 	

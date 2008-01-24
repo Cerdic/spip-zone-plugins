@@ -275,8 +275,7 @@ $spip_echoppe_options = array(
 	);
 
 $spip_echoppe_options_key = array(
-	"PRIMARY KEY"		=> "id_option,id_produit,id_categorie",
-	"KEY id_option"		=> "id_option",
+	"PRIMARY KEY"		=> "id_option",
 	"KEY id_produit"	=> "id_produit",//( si =0 et id_categorie != 0 c'est donc une option sur une categorie ) crowfoot +1
 	"KEY id_categorie"	=> "id_categorie"
 	);
@@ -527,7 +526,7 @@ $tables_principales['spip_echoppe_options'] = array(
 	'join' => &$spip_echoppe_options_join
 	);
 
-$tables_principales['spip_echoppe_options_descriptifs'] = array(
+$tables_principales['spip_echoppe_options_descriptions'] = array(
 	'field' => &$spip_echoppe_options_descriptifs,
 	'key' => &$spip_echoppe_options_descriptifs_key,
 	'join' => &$spip_echoppe_options_descriptifs_join

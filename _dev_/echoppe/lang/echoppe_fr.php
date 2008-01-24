@@ -83,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pas_d_options_pour_le_produit' => 'Pas d\'option pour ce produit',
 'par_defaut' => 'Par d&eacute;faut',
 'pas_de_categorie_ici' => 'Pas de cat&eacute;gorie ici.',
+'pas_de_num_de_ref' => 'Aucune',
 'pas_de_produit_ici' => 'Pas de produits &agrave; cette adresse.',
 'pas_de_titre' => 'Pas de titre',
 'pas_encore_de_categorie' => 'Pas encore de cat&eacute;gorie',
