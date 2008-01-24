@@ -30,10 +30,14 @@
 	exemple : #contenu (pour le div de id=contenu), .rubriques (pour le div de class=rubriques)...voir : http://docs.jquery.com <br/>
 	<input type="text" name="attribut_FenFlo" value="[(#CONFIG{FenFlo/attribut_FenFlo}|sinon{contenu})]"></p>
 
-	<p>autoriser la fermeture de la fenêtre<br/>
+	<p>autoriser la fermeture de la fen&ecirc;tre<br/>
 	<input type="checkbox" name="close_FenFlo" [checked="(#CONFIG{FenFlo/close_FenFlo})"]>
 	</p>
 	
+	<p>autoriser le redimensionnement de la fen&ecirc;tre<br/>
+	<input type="checkbox" name="redimensionne_FenFlo" [checked="(#CONFIG{FenFlo/redimensionne_FenFlo})"]>
+	</p>
+
 	<p>effet de zoom en ouverture<br/>
 	<input type="checkbox" name="zoom_ouverture_FenFlo" [checked="(#CONFIG{FenFlo/zoom_ouverture_FenFlo})"]>
 	</p>

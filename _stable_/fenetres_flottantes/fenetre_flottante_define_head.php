@@ -46,7 +46,9 @@ function FenFlo_insertion_in_head($flux)
 	
 	
 
-	$afficher_close = "none";
+	$afficher_close = "none";
+	$afficher_redim = "none";
+	
 	$pos_bouton_close = "10";
 	if (lire_config('FenFlo/close_FenFlo') == "on")
 	{
@@ -54,6 +56,11 @@ function FenFlo_insertion_in_head($flux)
 		$pos_bouton_close = "25";
 	}
 
+	if (lire_config('FenFlo/redimensionne_FenFlo') == "on")
+	{
+		$afficher_redim = "block";
+		$afficher_redim_instruction = "$('#windowResize').show();";
+	}
 
 	
 	$script_open = "$('#window').show();";
@@ -121,6 +128,7 @@ jQuery(document).ready(
 	$('#windowMin').css(\"right\",\"".$pos_bouton_close."px\");
 	
 	$('#windowClose').css(\"display\",\"".$afficher_close."\");
+	$('#windowResize').css(\"display\",\"".$afficher_redim."\");
 	
 	$('".lire_config('FenFlo/attribut_FenFlo','contenu')."').appendTo(\"#windowContent\");
 	$('".lire_config('FenFlo/attribut_FenFlo','contenu')."').css(\"margin\",\"10px\");
@@ -155,7 +163,8 @@ jQuery(document).ready(
 				$('#windowBottom, #windowBottomContent').animate({height: windowSize.hb + 13}, 300);
 				$('#window').animate({height:windowSize.hb+".(lire_config('FenFlo/hauteurentete_FenFlo', '30')+13)."}, 300).get(0).isMinimized = false;
 				$(this).hide();
-				$('#windowMin, #windowResize').show();
+				$('#windowMin').show();
+				".$afficher_redim_instruction."
 			}
 		);
 		$('#window').Resizable(
