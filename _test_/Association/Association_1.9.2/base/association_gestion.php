@@ -11,7 +11,7 @@
 	**/
 	
 	//version actuelle du plugin à changer en cas de maj
-	$GLOBALS['association_version'] = 0.70;	
+	$GLOBALS['association_version'] = 0.62;	
 		
 	function association_verifier_base(){			
 		$version_base = $GLOBALS['association_version'];
@@ -61,6 +61,10 @@
 				ecrire_meta('asso_base_version',$current_version=0.61);
 			}	
 			
+			if ($current_version<0.62){
+				spip_query("ALTER TABLE spip_asso_plan ADD actif TEXT NOT NULL AFTER commentaires");
+				ecrire_meta('asso_base_version',$current_version=0.62);
+			}	
 			ecrire_metas();
 		}
 	}

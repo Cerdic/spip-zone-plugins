@@ -132,6 +132,7 @@
 		"solde_anterieur"	=> "float NOT NULL default '0'",
 		"date_anterieure"	=> "date NOT NULL default '0000-00-00'",
 		"commentaire" 		=> "text NOT NULL",
+		"actif"					=> "text NOT NULL",
 		"maj" 					=> "timestamp(14) NOT NULL"
 	);						
 	$spip_asso_plan_key = array(
