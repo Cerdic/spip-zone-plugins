@@ -169,10 +169,10 @@ jQuery(document).ready(
 					se: '#windowResize'
 				},
 				onResize : function(size, position) {
-					$('#windowBottom, #windowBottomContent').css('height', size.height-33 + 'px');
+					$('#windowBottom, #windowBottomContent').css('height', size.height-".(lire_config('FenFlo/hauteurentete_FenFlo', '30')+3)." + 'px');
 					var windowContentEl = $('#windowContent').css('width', size.width - 25 + 'px');
 					if (!document.getElementById('window').isMinimized) {
-						windowContentEl.css('height', size.height - 48 + 'px');
+						windowContentEl.css('height', size.height - ".(lire_config('FenFlo/hauteurentete_FenFlo', '30')+18)." + 'px');
 					}
 					$.cookie('width_FenFlo', size.width);
 					$.cookie('height_FenFlo', size.height);
