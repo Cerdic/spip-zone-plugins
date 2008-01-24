@@ -36,7 +36,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 [
 (#REM)Inclusion du pied de page
 ]
-<INCLURE{fond=cahier-de-texte-en-tete}>
+[(#INCLURE{fond=cahier-de-texte-en-tete})]
 
 </head>
 <body>
@@ -161,7 +161,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 		#SET{matiere_ou_non,'Prepa_Matiere'}
 ][
 (#REM) Idem pour les dates 
-]<BOUCLE_PrepaDates(ARTICLES){date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{!doublons #GET{matiere_ou_non}}{doublons Date}></BOUCLE_PrepaDates>[
+]<BOUCLE_PrepaDates(ARTICLES){date>=#ENV{date_debut,"1900-01-01 00:00:00"}}{date<=#ENV{date_fin,"9999-12-01 03:25:02"}}{!doublons #GET{matiere_ou_non}}{doublons Date}></BOUCLE_PrepaDates>[
 (#REM) on choisi les articles qui sont du bon groupe
 ]<BOUCLE_Prepa_Groupes(ARTICLES){titre_mot==#ENV{groupe,.}}{!doublons Date}{doublons requete}>[(#SET{tableau_fiches,#GET{tableau_fiches}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})]</BOUCLE_Prepa_Groupes>[
 
@@ -186,11 +186,11 @@ Puis, on implode ce tableau pour le transmettre sous forme de liste aux noisette
 	<br clear="All">
 	<hr>
 [(#REM)Inclusion de la noisette de selection]
-<INCLURE{fond=cahier-de-texte-selection}>
+[(#INCLURE{fond=cahier-de-texte-selection})]
 	</div>
 
 [(#REM)Inclusion du pied de page]
-<INCLURE{fond=cahier-de-texte-pied}>
+[(#INCLURE{fond=cahier-de-texte-pied})]
 
 
 </div>

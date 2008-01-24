@@ -29,7 +29,7 @@ Ce qui a été fait avec «Bonbon !»
 						-* c'est plus joli avec des icônes !
 						-* vérification que les dates en sont à la phase de prévisualisation
 						-* etc...
-- Fonctionnalité fondamentale: les documents joints sont implémentés dans les séances et les devoirs !!!.
+- Fonctionnalité fondamentale: les documents joints sont implémentés dans les séances et les devoirs !!!. On peut définir à partir de quelle date ils seront visibles (pratique pour les contrôles donnés à plusieurs classes).
 - Fonctionalité majeure: On peut dupliquer une séance déjà saisie ! (pour copier coller ce qui a été fait avec une classe sur une autre)... Les doucments sont dupliqués aussi avec (comme docs liés, c'est à dire sans prendre de place sur le disque dur). D'ailleurs ça a pas été facile :-)
 - Fonctionnalité majeure: intégrations des «crayons». Quand le plugin «Les crayons» est présent on peut modifier le contenu des séances et des devoirs directement comme dans un Wiki.
 - Fonctionnalité importante: possibilité de supprimer des séances.

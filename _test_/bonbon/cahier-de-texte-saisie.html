@@ -36,7 +36,7 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 	<title>#NOM_SITE_SPIP: Saisie dans le cahier de texte en ligne</title>
 
 [(#REM)Inclusion du pied de page]
-<INCLURE{fond=cahier-de-texte-en-tete}>
+[(#INCLURE{fond=cahier-de-texte-en-tete})]
 
 </head>
 <body>
@@ -615,7 +615,7 @@ for ($count=0; $count<=$classes; $count++) {
 ][
 	(#SET{premiere_classe_du_prof,"pas encore"})
 ]<BOUCLE_ToutesLesClasses(MOTS){type="Classes"}{par titre}>
-	<BOUCLE_Classes_du_prof(ARTICLES){id_rubrique}{id_mot}{id_auteur?}{0,1}>[
+	<BOUCLE_Classes_du_prof(ARTICLES){id_rubrique}{id_mot}{id_auteur=#SESSION{id_auteur}}{0,1}>[
 		(#GET{premiere_classe_du_prof}|?{' ',''})<?php
 			$sinon=" selected=selected";
 			?>[(#SET{premiere_classe_du_prof,""})
@@ -760,11 +760,11 @@ alt="AIDE"  title="De l'aide sur cet &eacute;l&eacute;ment" class='aide' /></a><
 ][(#SET{condition_boucle,''})]
 [(#ENV{classe_matiere}|?{' ',''})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
 <BOUCLE_CONDITIONNELLE_Affichage_des_fiches_connexes(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
-	<INCLURE{fond=cahier-de-texte-affichage-seances-de-saisie}{id_classe0=#ENV*{id_classe0}}{id_matiere=#ENV*{id_matiere}}{id_groupe=#ENV*{id_groupe}}{id_auteur=#ENV{id_auteur}}{id_mot=#ENV{id_groupe}}>
+	[(#INCLURE{fond=cahier-de-texte-affichage-seances-de-saisie}{id_classe0=#ENV*{id_classe0}}{id_matiere=#ENV*{id_matiere}}{id_groupe=#ENV*{id_groupe}}{id_auteur=#ENV{id_auteur}}{id_mot=#ENV{id_groupe}})]
 </BOUCLE_CONDITIONNELLE_Affichage_des_fiches_connexes>
 	</div>
 [(#REM)Inclusion du pied de page]
-<INCLURE{fond=cahier-de-texte-pied}>
+[(#INCLURE{fond=cahier-de-texte-pied})]
 </div>
 </BOUCLE_Verifie_RubriqueAnnee></B_Verifie_RubriqueAnnee>[
 	

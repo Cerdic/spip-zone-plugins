@@ -2,10 +2,11 @@ BUGS:
 - problème de cache sur les articles (une séance): censé être résolu par calcul à la place de recalcul... en test
 - problème avec les crayons/autorité sur les docs pour les rédacteurs (cf fil & james ?)
 - Souci avec la barre typo v2 les stats plantent (ramènent un 404)... ->voir avec RealET... (cohabitation avec jquery difficile à débugger avec http://demobonbon.free.fr/1.9/spip.php?page=testbtv2publique )... vaste pb avec le js semble-t-il...
+- ui.datepicker ne fonctionne pas partout (c'est le moins qu'on puisse dire)... Passer à jquery datepicker ??? http://kelvinluck.com/assets/jquery/datePicker/v2/demo/index.html
 
 FONCTIONALITÉS:
 
-- permettre de donner une date à partir de laquelle les docs seront visibles (et pas avant, par ex. pour les contrôles donnés à plusieurs classes) grâce au champ date de la table document
+- pouvoir supprimer un devoir sur une séance dupliquée (ou même quand on a cliqué par hasard)
 - prévoir un systême d'import automatisé d'articles (avec un genre de xml-typographique)
 - pouvoir choisir plusieurs groupes en même temps
 - afficher sur le coté (droite) de saisir une noisette avec le plan du cours, issu du plugin intertitres hiérarchisés, et offrir la possibilité de l'afficher dans une popup.

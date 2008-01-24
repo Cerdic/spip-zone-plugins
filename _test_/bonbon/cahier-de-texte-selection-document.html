@@ -36,7 +36,7 @@ charger_doc= si il est vrai alors on fait une prcédure de chargement de doc clas
 [
 (#REM)Inclusion du pied de page
 ]
-<INCLURE{fond=cahier-de-texte-en-tete}>
+[(#INCLURE{fond=cahier-de-texte-en-tete})]
 
 </head>
 <body>
@@ -71,9 +71,8 @@ if ($_POST['charger_doc']) {
 	}
 	$docs_actifs = array();
 	$lieu_temporaire='[(#URL_SITE_SPIP|textebrut)]'."/tmp/upload/".addslashes(basename($_FILES['chemin']['name']));
-	include_spip('inc/getdocument');
-	include_spip('inc/ajouter_documents');
-	$retour=inc_ajouter_documents_dist($lieu_temporaire,basename($_FILES['chemin']['name']),'article',$_GET['id_article'],'document','',$docs_actifs);
+	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+	$retour=$ajouter_documents($lieu_temporaire,basename($_FILES['chemin']['name']),'article',$_GET['id_article'],'document',null,$docs_actifs);
 	if (!unlink  ($uploadfile)) 
 		echo "Une erreur est survenue lors de l'effacement du fichier temporaire ".basename($_FILES['chemin']['name'])." demandez au gestionnaire du site de l'effacer de /tmp/upload/";
 	if ($docs_actifs[0]){
