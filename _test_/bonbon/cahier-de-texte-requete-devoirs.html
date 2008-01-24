@@ -14,7 +14,7 @@
 			<tr>
 				<th>Pour le</th>
 				[(#ENV{classe}|?{'',<th>Classe</th>})]
-				[(#ENV{groupe}|?{'',<th>Groupe</th>})]
+				[(#ENV{titre_mot}|?{'',<th>Groupe</th>})]
 				[(#ENV{matiere}|?{'',<th>Matière</th>})]
 				<th>Devoir</th>
 				[(#ENV{id_auteur}|?{'',<th>Professeur</th>})]
@@ -27,9 +27,9 @@
 				[(#ENV{classe}|?{'',<td>})]
 				<BOUCLE_classes(MOTS){id_article}{type="Classes"}{"&nbsp;- "}>[(#ENV{classe}|?{'',#TITRE})]</BOUCLE_classes>
 				[(#ENV{classe}|?{'',</td>})]
-				[(#ENV{groupe}|?{'',<td>})]
-				<BOUCLE_groupes(MOTS){id_article}{type="Sous groupes de classes"}{"&nbsp;- "}>[(#ENV{groupe}|?{'',#TITRE})]</BOUCLE_groupes>
-				[(#ENV{groupe}|?{'',</td>})]
+				[(#ENV{titre_mot}|?{'',<td>})]
+				<BOUCLE_groupes(MOTS){id_article}{type="Sous groupes de classes"}{"&nbsp;- "}>[(#ENV{titre_mot}|?{'',#TITRE})]</BOUCLE_groupes>
+				[(#ENV{titre_mot}|?{'',</td>})]
 				[(#ENV{matiere}|?{'',<td>})]
 				<BOUCLE_matieres(MOTS){id_article}{type="Matières"}{"&nbsp;- "}>[(#ENV{matiere}|?{'',#TITRE})]</BOUCLE_matieres>
 				[(#ENV{matiere}|?{'',</td>})]

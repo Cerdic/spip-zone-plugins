@@ -7,7 +7,7 @@
 *****CopyLeft en juin 2007
 ***Affichage d'extraits du cahier de texte, cette page prend les paramètres suivants (en GET):
 classe= le nom d'une classe (attention il faut qu'il y ait identité avec le mot clé de la classe)
-groupe= le nom du groupe (attention il faut qu'il y ait identité avec le mot clé du groupe)
+titre_mot= le nom du groupe (attention il faut qu'il y ait identité avec le mot clé du groupe)
 matiere= le nom de la matière (attention il faut qu'il y ait identité avec le mot clé de la matière)
 id_auteur= l'id_auteur d'un auteur (un professeur)
 date_debut=début de la période considérée (sinon c'est depuis le début de l'année en cours)
@@ -64,7 +64,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 			<br class="clear" />
 [(#ENV{devoirs_seuls}|?{' ',''})
 		<h2>Devoirs à faire</h2>]
-		<p>[Classe de (#ENV{classe}) ][(#ENV{groupe}) ][en (#ENV{matiere}) ]<B_Prof>Professeur&nbsp;: <BOUCLE_Prof(AUTEURS){id_auteur}>#NOM</BOUCLE_Prof></p>
+		<p>[Classe de (#ENV{classe}) ][(#ENV{titre_mot}) ][en (#ENV{matiere}) ]<B_Prof>Professeur&nbsp;: <BOUCLE_Prof(AUTEURS){id_auteur}>#NOM</BOUCLE_Prof></p>
 		<p>[à partir du (#ENV{date_debut}|affdate) ][jusqu'au (#ENV{date_fin}|affdate)]</p>
 	</div>
 	<div id="Contenu">
@@ -90,7 +90,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 		(#SET{select,''})
 ][
 		(#GET{classe_env}|=={#_ToutesLesClasses_affichage:TITRE}|?{' ',''})#SET{select,'on '}
-]			<a href="[(#SELF|parametre_url{'classe',#_ToutesLesClasses_affichage:TITRE}|parametre_url{matiere,''}|parametre_url{var_mode,#GET{var_mode}})]" title="Afficher le cahier de texte de la [(#_ToutesLesClasses_affichage:TITRE|textebrut)]" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#_ToutesLesClasses_affichage:TITRE</a>
+]			<a href="[(#SELF|parametre_url{'classe',#_ToutesLesClasses_affichage:TITRE}|parametre_url{matiere,''}|parametre_url{var_mode,#GET{var_mode}}|parametre_url{titre_mot,''})]" title="Afficher le cahier de texte de la [(#_ToutesLesClasses_affichage:TITRE|textebrut)]" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#_ToutesLesClasses_affichage:TITRE</a>
 </BOUCLE_Que_les_classes_avec_article></BOUCLE_ToutesLesClasses_affichage>
 
 <!-- les groupes-->
@@ -98,10 +98,10 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 <BOUCLE_Les_Groupes(MOTS){type="Sous groupes de classes"}{par titre}><BOUCLE_Que_les_groupes_avec_article(ARTICLES){id_rubrique}{id_auteur?}{id_mot}{titre_mot=#ENV{classe,#GET{classe_defaut}}}{0,1}>[
 		(#SET{select,''})
 ][
-		(#ENV{groupe}|=={#_Les_Groupes:TITRE}|?{' ',''})#SET{select,'on '}
-]			<a href="[(#SELF|parametre_url{'groupe',#_Les_Groupes:TITRE}|parametre_url{var_mode,#GET{var_mode}})]" title="Afficher le cahier de texte de la #ENV{classe,#GET{classe_defaut}} - #_Les_Groupes:TITRE" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#_Les_Groupes:TITRE</a>
+		(#ENV{titre_mot}|=={#_Les_Groupes:TITRE}|?{' ',''})#SET{select,'on '}
+]			<a href="[(#SELF|parametre_url{'titre_mot',#_Les_Groupes:TITRE}|parametre_url{var_mode,#GET{var_mode}})]" title="Afficher le cahier de texte de la #ENV{classe,#GET{classe_defaut}} - #_Les_Groupes:TITRE" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#_Les_Groupes:TITRE</a>
 </BOUCLE_Que_les_groupes_avec_article></BOUCLE_Les_Groupes>[
-		(#ENV{groupe}|?{' ',''})<a href="[(#SELF|parametre_url{'groupe',''})]" title="Afficher le cahier de texte de tous les groupes de la #ENV{classe,#GET{classe_defaut}}" class="onglet" onmouseover="this.className='onglet  hover'" onmouseout="this.className='onglet'">Les deux groupes</a>
+		(#ENV{titre_mot}|?{' ',''})<a href="[(#SELF|parametre_url{'titre_mot',''})]" title="Afficher le cahier de texte de tous les groupes de la #ENV{classe,#GET{classe_defaut}}" class="onglet" onmouseover="this.className='onglet  hover'" onmouseout="this.className='onglet'">Les deux groupes</a>
 ]
 		</div>
 		<br clear="all">[
@@ -163,7 +163,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 (#REM) Idem pour les dates 
 ]<BOUCLE_PrepaDates(ARTICLES){date>=#ENV{date_debut,"1900-01-01 00:00:00"}}{date<=#ENV{date_fin,"9999-12-01 03:25:02"}}{!doublons #GET{matiere_ou_non}}{doublons Date}></BOUCLE_PrepaDates>[
 (#REM) on choisi les articles qui sont du bon groupe
-]<BOUCLE_Prepa_Groupes(ARTICLES){titre_mot==#ENV{groupe,.}}{!doublons Date}{doublons requete}>[(#SET{tableau_fiches,#GET{tableau_fiches}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})]</BOUCLE_Prepa_Groupes>[
+]<BOUCLE_Prepa_Groupes(ARTICLES){titre_mot?}{!doublons Date}{doublons requete}>[(#SET{tableau_fiches,#GET{tableau_fiches}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})]</BOUCLE_Prepa_Groupes>[
 
 (#REM) #GET{tableau_fiches} contient donc tous les articles qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
 Puis, on implode ce tableau pour le transmettre sous forme de liste aux noisettes
