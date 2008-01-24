@@ -22,6 +22,10 @@
 	<p>couleur de la bordure (au format CSS)<br>
 	<input type="text" name="couleurbordure_FenFlo" value="[(#CONFIG{FenFlo/couleurbordure_FenFlo}|sinon{#6caf00})]"></p>
 
+	<p>hauteur de l'ent&ecirc;te de la fen&ecirc;tre en pixels <br/>
+	<input type="text" name="hauteurentete_FenFlo" value="[(#CONFIG{FenFlo/hauteurentete_FenFlo}|sinon{30})]"></p>
+
+
 	<p>élément au format jQuery sur lequel sera utilis&eacute; la fenêtre. 
 	exemple : #contenu (pour le div de id=contenu), .rubriques (pour le div de class=rubriques)...voir : http://docs.jquery.com <br/>
 	<input type="text" name="attribut_FenFlo" value="[(#CONFIG{FenFlo/attribut_FenFlo}|sinon{contenu})]"></p>

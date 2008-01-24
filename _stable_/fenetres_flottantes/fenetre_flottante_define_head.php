@@ -18,9 +18,9 @@ function FenFlo_affichage_final($flux)
 		$valeur_height_FenFlo = lire_config('FenFlo/hauteur_FenFlo','300');
 
 	
-	$marge_haut= $valeur_height_FenFlo-30;
+	$marge_haut= $valeur_height_FenFlo-lire_config('FenFlo/hauteurentete_FenFlo', '30');
 	
-	$marge2_haut= $valeur_height_FenFlo-45;
+	$marge2_haut= $marge_haut-15;
 	$marge_larg= $valeur_width_FenFlo-25;
 
 
@@ -106,8 +106,13 @@ jQuery(document).ready(
 	
 	
 	$('#windowContent').css(\"border\",\"1px solid ".lire_config('FenFlo/couleurbordure_FenFlo','#6caf00')."\");
+	$('#windowContent').css(\"top\",\"".lire_config('FenFlo/hauteurentete_FenFlo', '30')."px\");
 	$('#windowTop').css(\"background-image\",\"url("._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_top_end.png)\");
+	$('#windowTop').css(\"height\",\"".lire_config('FenFlo/hauteurentete_FenFlo', '30')."px\");
+	$('#windowTop').css(\"overflow\",\"".lire_config('FenFlo/hauteurentete_FenFlo', '30')."px\");
 	$('#windowTopContent').css(\"background-image\",\"url("._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_top_start.png)\");
+	$('#windowTopContent').css(\"height\",\"".lire_config('FenFlo/hauteurentete_FenFlo', '30')."px\");
+	$('#windowTopContent').css(\"line-height\",\"".lire_config('FenFlo/hauteurentete_FenFlo', '30')."px\");
 	$('#windowBottomContent').css(\"background-image\",\"url("._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_bottom_start.png)\");
 	$('#windowBottom').css(\"background-image\",\"url("._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_bottom_end.png)\");
 	$('#windowBottom').append('<a href=\"#\"  id=\"windowOpen\">&nbsp;</a>');
@@ -134,7 +139,7 @@ jQuery(document).ready(
 			{
 				$('#windowContent').SlideToggleUp(300);
 				$('#windowBottom, #windowBottomContent').animate({height: 10}, 300);
-				$('#window').animate({height:40},300).get(0).isMinimized = true;
+				$('#window').animate({height:".(lire_config('FenFlo/hauteurentete_FenFlo', '30')+10)."},300).get(0).isMinimized = true;
 				$(this).hide();
 				$('#windowResize').hide();
 				$('#windowMax').show();
@@ -148,7 +153,7 @@ jQuery(document).ready(
 				var windowSize = $.iUtil.getSize(document.getElementById('windowContent'));
 				$('#windowContent').SlideToggleUp(300);
 				$('#windowBottom, #windowBottomContent').animate({height: windowSize.hb + 13}, 300);
-				$('#window').animate({height:windowSize.hb+43}, 300).get(0).isMinimized = false;
+				$('#window').animate({height:windowSize.hb+".(lire_config('FenFlo/hauteurentete_FenFlo', '30')+13)."}, 300).get(0).isMinimized = false;
 				$(this).hide();
 				$('#windowMin, #windowResize').show();
 			}
