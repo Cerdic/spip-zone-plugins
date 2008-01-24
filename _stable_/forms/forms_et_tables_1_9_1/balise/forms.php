@@ -71,7 +71,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 		include_spip('inc/forms');
 		$url_validation = Forms_enregistrer_reponse_formulaire($id_form, $id_donnee, $erreur, $reponse, $script_validation, $id_article?"id_article=$id_article":"");
 		if (!$erreur) {
-			$formok = _T($reponse_enregistree);
+			$formok = _T($reponse_enregistree)."<span class='id_donnee' rel='$id_donnee'></span>";
 			if ($id_donnee_liee && $id_donnee){
 				spip_query("INSERT INTO spip_forms_donnees_donnees (id_donnee,id_donnee_liee) VALUES ("._q($id_donnee).","._q($id_donnee_liee).")");
 			}
