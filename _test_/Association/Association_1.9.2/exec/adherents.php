@@ -128,7 +128,6 @@
 		echo '</table>';
 		
 		//Affichage de la liste
-			
 		echo '<form method="post" action="'.$url_action_adherents.'">';
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr bgcolor="#DBE1C5">';
@@ -150,7 +149,7 @@
 		
 		if (empty($debut)) { $debut=0; }
 		if (!empty($lettre)) {$critere2="AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";}
-		$query = spip_query ( "SELECT * FROM spip_auteurs_elargis LEFT JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur LEFT JOIN spip_auteurs ON spip_auteurs.id_auteur=spip_auteurs_elargis.id_auteur WHERE $critere ".$critere2." ORDER BY nom_famille LIMIT $debut,$max_par_page" );
+		$query = spip_query ( "SELECT * FROM spip_auteurs_elargis b LEFT JOIN spip_asso_adherents c ON b.id_auteur=c.id_auteur LEFT JOIN spip_auteurs a ON a.id_auteur=b.id_auteur WHERE $critere ".$critere2." ORDER BY nom_famille LIMIT $debut,$max_par_page" );
 		while ($data = spip_fetch_array($query)) {	
 			$id_adherent=$data['id_adherent'];
 			
@@ -169,7 +168,7 @@
 			echo '</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ="'.$class.'">';
 			
-			if ( !empty ($data['spip_auteurs.id_auteur'])) {
+			if ( !empty ($data['a.id_auteur'])) {
 				echo'<img src="/IMG/auton'.$data['id_auteur'].'.jpg" alt="&nbsp;" width="60" height= "60" title="'.$data["nom_famille"].' '.$data["prenom"].'">';
 			}
 			echo '</td>';
