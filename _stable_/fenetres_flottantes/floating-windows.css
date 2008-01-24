@@ -14,7 +14,7 @@
 #windowTop
 {
 	height: 30px;
-	overflow: 30px;
+	overflow: hidden;
 	background-position: right top;
 	background-repeat: no-repeat;
 	position: relative;

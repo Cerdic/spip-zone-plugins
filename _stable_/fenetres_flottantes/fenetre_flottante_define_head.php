@@ -103,9 +103,9 @@ jQuery(document).ready(
 	$('".lire_config('FenFlo/attribut_FenFlo','contenu')."').parent().append(\"<div id='window'></div>\");
 	$('#window').append(\"<div id='windowTop'></div>\");
 	$('#windowTop').append(\"<div id='windowTopContent'></div>\");
-	$('#windowTop').append(\"<img src='"._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_min.jpg' class='format_png' id='windowMin' alt='minimiser la fenetre' />\");
-	$('#windowTop').append(\"<img src='"._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_max.jpg' class='format_png' id='windowMax' alt='agrandir la fenetre'/>\");
-	$('#windowTop').append(\"<img src='"._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_close.jpg' class='format_png' id='windowClose' alt='fermer la fenetre'/>\");
+	$('#windowTop').append(\"<img src='"._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_min.gif' class='format_png' id='windowMin' alt='minimiser la fenetre' />\");
+	$('#windowTop').append(\"<img src='"._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_max.gif' class='format_png' id='windowMax' alt='agrandir la fenetre'/>\");
+	$('#windowTop').append(\"<img src='"._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_close.gif' class='format_png' id='windowClose' alt='fermer la fenetre'/>\");
 	$('#window').append(\"<div id='windowBottom'></div>\");
 	$('#windowBottom').append(\"<div id='windowBottomContent'>&nbsp;</div>\");
 	$('#window').append(\"<div id='windowContent'></div>\");
@@ -116,7 +116,6 @@ jQuery(document).ready(
 	$('#windowContent').css(\"top\",\"".lire_config('FenFlo/hauteurentete_FenFlo', '30')."px\");
 	$('#windowTop').css(\"background-image\",\"url("._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_top_end.png)\");
 	$('#windowTop').css(\"height\",\"".lire_config('FenFlo/hauteurentete_FenFlo', '30')."px\");
-	$('#windowTop').css(\"overflow\",\"".lire_config('FenFlo/hauteurentete_FenFlo', '30')."px\");
 	$('#windowTopContent').css(\"background-image\",\"url("._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_top_start.png)\");
 	$('#windowTopContent').css(\"height\",\"".lire_config('FenFlo/hauteurentete_FenFlo', '30')."px\");
 	$('#windowTopContent').css(\"line-height\",\"".lire_config('FenFlo/hauteurentete_FenFlo', '30')."px\");
@@ -147,7 +146,7 @@ jQuery(document).ready(
 			{
 				$('#windowContent').SlideToggleUp(300);
 				$('#windowBottom, #windowBottomContent').animate({height: 10}, 300);
-				$('#window').animate({height:".(lire_config('FenFlo/hauteurentete_FenFlo', '30')+10)."},300).get(0).isMinimized = true;
+				$('#window').animate({height:".(lire_config('FenFlo/hauteurentete_FenFlo', '30')+13)."},300).get(0).isMinimized = true;
 				$(this).hide();
 				$('#windowResize').hide();
 				$('#windowMax').show();
