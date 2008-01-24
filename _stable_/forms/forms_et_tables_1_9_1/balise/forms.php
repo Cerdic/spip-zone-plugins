@@ -52,6 +52,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 	$erreur = array();
 	$reponse = '';
 	$formok = '';
+	$formvisible = true;
 	$valeurs = pipeline('forms_pre_remplit_formulaire',array('args'=>array('id_form'=>$id_form,'id_donne'=>$id_donnee),'data'=>array('0'=>'0')));
 	$affiche_sondage = '';
 	$pose_cookie = false;
@@ -78,11 +79,18 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 			if ($reponse)
 			  $reponse = _T($message_confirm,array('mail'=>$reponse));
 			$message_complementaire = pipeline('forms_message_complement_post_saisie',array('args'=>array('id_donnee'=>$id_donnee),'data'=>''));
-			if (!_DIR_RESTREINT 
-			  AND (($r=_request('id_donnee'))===NULL OR $r==$id_donnee OR ($r<0 AND !in_array(_request('exec'),$GLOBALS['forms_saisie_km_exec']))) )
+			if ((!_DIR_RESTREINT OR $row['modifiable']=='oui')
+			  AND (
+			    ($r=_request('id_donnee'))===NULL 
+			    OR intval($r)==0 // id_donnee=new dans l'url par exemple
+			    OR $r==$id_donnee // modif d'une donnee
+			    OR ($r<0 AND (_DIR_RESTREINT OR !in_array(_request('exec'),$GLOBALS['forms_saisie_km_exec'])))
+			  ) )
 				$valeurs = Forms_valeurs($id_donnee,$id_form);
-			else
+			else {
 				$id_donnee = 0;
+				$formvisible = false;
+			}
 		}
 		else {
 			// on reinjecte get et post dans $valeurs
@@ -149,7 +157,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 			'url_validation' => str_replace("&amp;","&",$url_validation),
 			'affiche_sondage' => $affiche_sondage,
 			'formok' => filtrer_entites($formok),
-			'formvisible' => $formok?(_DIR_RESTREINT!=_DIR_RESTREINT_ABS):true,
+			'formvisible' => $formvisible,
 			'formactif' => $formactif,
 			'class' => 'formulaires/'.($class?$class:'forms_structure'),
 		));
