@@ -315,29 +315,41 @@ add_variable( array(
 	'nom' => 'racc_hr',
 	'format' => 'chaine',
 	'defaut' => defined('_SPIP19300')?"'<hr />'":"'<hr class=\"spip\" />'",
-	'code:strlen(%s)' => '$GLOBALS[\'ligne_horizontale\']=%s;',
+	'code:strlen(%s)' => "\$GLOBALS['ligne_horizontale']=%s;\n",
+));
+add_variable( array(
+	'nom' => 'racc_h1',
+	'format' => 'chaine',
+	'defaut' => defined('_SPIP19300')?"''":"'<h3 class=\"spip\">'",
+	'code:strlen(%s)' => "\$GLOBALS['debut_italique']=%s;\n",
+));
+add_variable( array(
+	'nom' => 'racc_h2',
+	'format' => 'chaine',
+	'defaut' => defined('_SPIP19300')?"''":"'</h3>'",
+	'code:strlen(%s)' => "\$GLOBALS['fin_italique']=%s;\n",
+));
+add_variable( array(
+	'nom' => 'racc_i1',
+	'format' => 'chaine',
+	'defaut' => '',
+	'code:strlen(%s)' => "\$GLOBALS['debut_italique']=%s;\n",
+));
+add_variable( array(
+	'nom' => 'racc_i2',
+	'format' => 'chaine',
+	'defaut' => '',
+	'code:strlen(%s)' => "\$GLOBALS['fin_italique']=%s;\n",
 ));
 add_variable( array(
 	'nom' => 'puce',
 	'format' => 'chaine',
 	'defaut' => '"AUTO"',
-	'code:strlen(%s)' => '$GLOBALS[\'puce\']=%s;',
-));
-add_variable( array(
-	'nom' => 'racc_i1',
-	'format' => 'chaine',
-	'defaut' => defined('_SPIP19300')?"''":"'<i class=\"spip\" >'",
-	'code:strlen(%s)' => '$GLOBALS[\'debut_italique\']=%s;',
-));
-add_variable( array(
-	'nom' => 'racc_i2',
-	'format' => 'chaine',
-	'defaut' => defined('_SPIP19300')?"''":"'</i>'",
-	'code:strlen(%s)' => '$GLOBALS[\'fin_italique\']=%s;',
+	'code:strlen(%s)' => "\$GLOBALS['puce']=%s;",
 ));
 add_outil( array(
 	'id' => 'class_spip',
-	'code:options' => "\$GLOBALS['class_spip']='%%style_p%%';\n\$GLOBALS['class_spip_plus']='%%style_h%%';\n%%racc_hr%%\n%%puce%%",
+	'code:options' => "\$GLOBALS['class_spip']='%%style_p%%';\n\$GLOBALS['class_spip_plus']='%%style_h%%';\n%%racc_hr%%%%racc_h1%%%%racc_h2%%%%racc_i1%%%%racc_i2%%%%puce%%",
 	'categorie' => 'public',
 ));
 
@@ -770,9 +782,6 @@ if(isset($GLOBALS['mes_outils']))
 // http://www.spip-contrib.net/Citations
 // http://www.spip-contrib.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
 // http://www.spip-contrib.net/Ajouter-une-lettrine-aux-articles
-// voir :
-//		$GLOBALS['debut_intertitre'] = "<h3 class='mon_style_h3'>";
-//		$GLOBALS['fin_intertitre'] = "</h3>";
 // http://www.spip-contrib.net/Generation-automatique-de
 // Les sessions
 // colorations du code

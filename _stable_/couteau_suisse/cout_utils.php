@@ -344,7 +344,8 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		}
 		$traitements_utilises[$b] = join("\n", $traitements_utilises[$b]);		
 	}
-	$infos_pipelines['code_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
+	if(count($traitements_utilises))
+		$infos_pipelines['code_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
 	// effacement du repertoire temporaire de controle
 	if (@file_exists(_DIR_CS_TMP) && ($handle = @opendir(_DIR_CS_TMP))) {
 		while (($fichier = @readdir($handle)) !== false)
