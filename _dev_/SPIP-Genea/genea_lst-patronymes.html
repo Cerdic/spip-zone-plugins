@@ -36,15 +36,11 @@
 
          <div class="cartouche">
             #DEBUT_SURLIGNE
-            [(#LOGO_INDIVIDU||image_reduire{80,80})]
+            [(#LOGO_RUBRIQUE||image_reduire{80,80})]
             [<p class="surtitre">(#TITRE)</p>]
             <h1 class="titre"><:genea:liste_des_patronymes:></h1>
             <p class="soustitre"><:genea:soustitre_lst_patronymes:></p>
             #FIN_SURLIGNE
-
-            [(#REM) Inclure le modele des liens de traductions ]
-            #MODELE{article_traductions}
-
          </div>
 
          <div class="chapo"><:genea:desc_lst_patronymes:></div>
@@ -52,10 +48,10 @@
          <br class="nettoyeur" />
 
          <div class="texte">
-            <BOUCLE_liste(GENEA_INDIVIDUS){id_genea}{par patronyme}{' '}>
-			[<h3 class="spip"><a name="[(#PATRONYME|initial)]" />(#PATRONYME|initial|unique)</h3>]
-			<BOUCLE_patronymes(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|unique)</a> &#91;[(#TOTAL_BOUCLE)]&#93;]</BOUCLE_patronymes>
-            </BOUCLE_liste>
+			[(#REM) Affichage de la liste des patronymes par ordre alphabetique ]
+         	[(#ENV{patronymes,1}|!={2}|?{' '}) <INCLURE{fond=include/inc-patronymes-alpha}{id_genea}>]
+			[(#REM) Affichage de la liste des patronymes par ordre d'importance ]
+         	[(#ENV{patronymes,1}|=={2}|?{' '}) <INCLURE{fond=include/inc-patronymes-ordre}{id_genea}>]
          </div>
 
       </div><!-- fin contenu -->
@@ -67,7 +63,7 @@
          <INCLURE{fond=inc-rubriques}{id_rubrique}>
 
          [(#REM) Articles dans la meme rubrique ]
-         <INCLURE{fond=include/inc-genealogie}{id_genea}{patronymes=1}{small=oui}>
+         <INCLURE{fond=include/inc-genealogie}{id_genea}{patronymes=#ENV{patronymes,1}}{small=oui}>
 
       </div><!-- fin navigation -->
 
