@@ -16,7 +16,8 @@ cs_log("decoration_installe()");
 	foreach ($deco_balises as $balise) {
 		if (preg_match('/(span|div|auto)\.([^.]+)\.(class|lang)\s*=(.+)$/', $balise, $regs)) {
 			// les class/lang
-			list($div, $racc, $class) = array($regs[1], trim($regs[2]), trim($regs[4]));
+			list($div, $racc, $attr, $valeur) = array($regs[1], trim($regs[2]), trim($regs[3]), trim($regs[4]));
+			$attr="$attr=\"$valeur\"";
 			$BT[] = array(
 				$racc,//$div=='div'?strtoupper($racc):$racc,
 				$div=='auto'?"('<$racc>','</$racc>'":"_etendu('<$racc>','</$racc>','<$racc/>'",
