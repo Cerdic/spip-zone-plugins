@@ -1,0 +1,89 @@
+#CACHE{86400}
+<BOUCLE_genea(SPIP_GENEA){id_genea}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title><:genea:liste_des_individus:>[ - (#ENV{nom}|textebrut)] - [(#NOM_SITE_SPIP|textebrut)]</title>
+	<meta name="description" content="<:genea:desc_liste_des_individus:>" />
+	<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_genea">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<BOUCLE_rub(RUBRIQUES){id_rubrique}><div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; <a href="[(#URL_PAGE{patronymes}|parametre_url{id_genea,#ID_GENEA})]"><:genea:liste_des_patronymes:></a> &gt; <:genea:liste_des_individus:></div></BOUCLE_rub>
+
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div id="contenu">
+
+			<div class="cartouche">
+				#DEBUT_SURLIGNE
+				[(#LOGO_INDIVIDU||image_reduire{80,80})]
+				<BOUCLE_nom_famille(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}>[<p class="surtitre">(#TITRE||supprimer_numero)</p>]</BOUCLE_nom_famille>
+				<h1 class="titre"><:genea:liste_des_individus:></h1>
+				<p class="soustitre"><:genea:soustitre_individus:></p>
+				#FIN_SURLIGNE	
+
+				[(#REM) Inclure le modele des liens de traductions ]
+				#MODELE{article_traductions}
+
+			</div>
+			
+			#DEBUT_SURLIGNE
+			<div class="chapo"><:genea:desc_liste_des_individus:></div>
+			<br class="nettoyeur" />
+			<div class="texte">
+
+				[(#REM) Liste des individus portant le meme patronyme ]
+				[<h3 class="spip"><:genea:patronyme:>&nbsp;:&nbsp;(#ENV{nom}|textebrut)</h3>]
+				<B_individus>
+				<table class="liste-individus">
+					#ANCRE_PAGINATION
+					[<tfoot><tr><td class="pagination">(#PAGINATION)</td></tr></tfoot>]
+					<tbody>
+					<BOUCLE_individus(INDIVIDUS) {id_genea} {nom=#ENV{nom}} {par nom, prenoms} {pagination 20}>
+						<tr>
+							<td class="indivsosa" align="right">[(#SOSA)]</td>
+							<td>[(#SEXE|=={M}|?{' ',''}) #SET{titre_sexe, 'male'}] [(#SEXE|=={F}|?{' ',''}) #SET{titre_sexe, 'femelle'}][<img src="#EVAL{_DIR_PLUGIN_GENEA}/img_pack/(#GET{titre_sexe}).gif" alt="" border="0" width="17" height="17" />]</td>
+							<td>[(#LOGO_INDIVIDU||image_reduire{17,17})]</td>
+							<td><a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">[(#PRENOMS)]</a>&nbsp;<span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span></td>
+						</tr>
+					</BOUCLE_individus>
+					<tbody>
+				</table>
+				</B_individus>
+				<:genea:erreur_individu:>
+				<//B_individus>
+			</div>
+			#FIN_SURLIGNE
+
+			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+			[(#REM) Articles dans la meme rubrique ]
+			<INCLURE{fond=inc-genealogie}{patronymes=1}{small=oui}>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_genea>
