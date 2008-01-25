@@ -243,18 +243,16 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 		if (isset($INDEX_iteration_nb_maxi[$table]))
 			$limit = min($limit,$INDEX_iteration_nb_maxi[$table]);
 
-#$limit = 10;
-
 		// indexer en priorite les 1 (a reindexer), ensuite les 0
 		// (statut d'indexation inconnu), enfin les 2 (ceux dont
 		// l'indexation a precedemment echoue, p. ex. a cause d'un timeout)
 		foreach (array(1, 0, 2) as $mode) {
 			$s = spip_query($q = "SELECT a.$table_primary AS n, id,idx FROM $table AS a LEFT JOIN spip_indexation AS l ON (a.$table_primary = l.id AND l.type=$cle) WHERE (id IS NULL OR idx=$mode) AND $critere LIMIT $limit");
-			#spip_log($q);
+			spip_log($q, 'indexation');
 			while ($t = sql_fetch($s)) {
 				$vu[$table] .= $t['n'].", ";
 				indexer_objet($table, $t['n'], $mode);
-				#spip_log($t);
+				spip_log($t, 'indexation');
 			}
 			if ($vu[$table]) break;
 		}
