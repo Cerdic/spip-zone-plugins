@@ -321,13 +321,13 @@ add_variable( array(
 	'nom' => 'racc_h1',
 	'format' => 'chaine',
 	'defaut' => defined('_SPIP19300')?"''":"'<h3 class=\"spip\">'",
-	'code:strlen(%s)' => "\$GLOBALS['debut_italique']=%s;\n",
+	'code:strlen(%s)' => "\$GLOBALS['debut_intertitre']=%s;\n",
 ));
 add_variable( array(
 	'nom' => 'racc_h2',
 	'format' => 'chaine',
 	'defaut' => defined('_SPIP19300')?"''":"'</h3>'",
-	'code:strlen(%s)' => "\$GLOBALS['fin_italique']=%s;\n",
+	'code:strlen(%s)' => "\$GLOBALS['fin_intertitre']=%s;\n",
 ));
 add_variable( array(
 	'nom' => 'racc_i1',
