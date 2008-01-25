@@ -41,7 +41,13 @@ function action_flickr_ajouter_documents() {
 	  $ajouter_document = charger_fonction('ajouter_documents', 'inc');
 	  foreach($photos as $info) {
 		list($id_photo,$secret) = split('@#@',$info);
-		$id_photo= intval($id_photo);
+		if ($id_photo > 2147483647) {  // limite systeme 32 bits
+		    $id_photo_1 = intval(substr($id_photo,0,6));
+		    $id_photo_2 = intval(substr($id_photo,6));
+		    $id_photo = "$id_photo_1$id_photo_2";
+    }  else {
+        $id_photo = intval($id_photo);
+    } 
 		$photo_sizes = flickr_photos_getSizes($id_photo,$row['auth_token']);
 		if($photo_sizes) {
 		  $url = '';
