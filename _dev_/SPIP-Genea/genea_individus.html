@@ -1,5 +1,6 @@
 #CACHE{86400}
-<BOUCLE_genea(SPIP_GENEA){id_genea}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<BOUCLE_genea(GENEA_INDIVIDUS){id_individu}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 	<title><:genea:liste_des_individus:>[ - (#ENV{nom}|textebrut)] - [(#NOM_SITE_SPIP|textebrut)]</title>
@@ -28,13 +29,9 @@
 				<BOUCLE_nom_famille(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}>[<p class="surtitre">(#TITRE||supprimer_numero)</p>]</BOUCLE_nom_famille>
 				<h1 class="titre"><:genea:liste_des_individus:></h1>
 				<p class="soustitre"><:genea:soustitre_individus:></p>
-				#FIN_SURLIGNE	
-
-				[(#REM) Inclure le modele des liens de traductions ]
-				#MODELE{article_traductions}
-
+				#FIN_SURLIGNE
 			</div>
-			
+
 			#DEBUT_SURLIGNE
 			<div class="chapo"><:genea:desc_liste_des_individus:></div>
 			<br class="nettoyeur" />
@@ -74,7 +71,7 @@
 			<INCLURE{fond=inc-rubriques}{id_rubrique}>
 
 			[(#REM) Articles dans la meme rubrique ]
-			<INCLURE{fond=inc-genealogie}{patronymes=1}{small=oui}>
+			<INCLURE{fond=inc-genealogie}{small=oui}>
 
 		</div><!-- fin navigation -->
 
