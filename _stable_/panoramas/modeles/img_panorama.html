@@ -4,16 +4,16 @@
 	Modele pour <img|panorama>
 
 ]
-<div class="zone_js_div[(#ID_DOCUMENT)]" style="position: relative; top: 0px; left: 0px; overflow: hidden; width: [(#ENV{largeur}|?{#ENV{largeur}, 400})]px; height: auto !important; height: [(#HAUTEUR)]px; min-height: [(#HAUTEUR)]px; z-index: 0;">
+<div class="zone_js_div[(#ID_DOCUMENT)] document_panorama" style="position: relative; top: 0px; left: 0px; overflow: hidden; width: [(#ENV{largeur}|?{#ENV{largeur}, 400})]px; height: auto !important; height: [(#HAUTEUR)]px; min-height: [(#HAUTEUR)]px; z-index: 0;">
 	<div class="zone_aller_gauche_js_div[(#ID_DOCUMENT)]" style="position: absolute; margin-top: [(#HAUTEUR|div{2}|moins{35})]px; padding-left: 10px; width: 70px; height: 70px; z-index: 99;">
 		<a href="#">
-			<img id="aller_gauche[(#ID_DOCUMENT)]" src="#CHEMIN{squelettes/aller_gauche.png}" class="format_png" alt="fleche gauche" title="vers la gauche" width="70px" height="67px" />
+			<img id="aller_gauche[(#ID_DOCUMENT)]" src="#CHEMIN{aller_gauche.png}" class="format_png" alt="fleche gauche" title="vers la gauche" width="70px" height="67px" />
 
 		</a>
 	</div>
 	<div class="zone_aller_droite_js_div[(#ID_DOCUMENT)]" style="position: absolute; margin-top: [(#HAUTEUR|div{2}|moins{35})]px; padding-left: [(#ENV{largeur}|?{#ENV{largeur}, 400}|moins{80})]px; width: 70px; height: 70px; z-index: 98;">
 		<a href="#">
-			<img id="aller_droite[(#ID_DOCUMENT)]" src="#CHEMIN{squelettes/aller_droite.png}" class="format_png" alt="fleche droite" title="vers la droite" width="70px" height="67px" />
+			<img id="aller_droite[(#ID_DOCUMENT)]" src="#CHEMIN{aller_droite.png}" class="format_png" alt="fleche droite" title="vers la droite" width="70px" height="67px" />
 		</a>
 	</div>
 	<div class="zone_attente_js_div[(#ID_DOCUMENT)]" style="position: absolute; margin-top: 100px; margin-left: 50px; z-index: 0; font-size: 12px;">
@@ -185,7 +185,6 @@
 		}
 	}
 
-	 jQuery.noConflict();
 	 jQuery(document).ready(function(){
 		
 			initpanorama[(#ID_DOCUMENT)]();
