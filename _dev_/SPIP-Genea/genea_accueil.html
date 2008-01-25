@@ -10,7 +10,7 @@
 	*********************************************************************
 ]
 #CACHE{7200}
-<BOUCLE_rubrique_principal(RUBRIQUES){id_rubrique}>
+<BOUCLE_rubrique_principal(GENEA rubriques){id_rubrique}>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
@@ -36,7 +36,7 @@
       <div id="contenu">
 
          <div class="cartouche">
-            [(#LOGO_RUBRIQUE||image_reduire{200,200})]
+            [(#LOGO_RUBRIQUE||image_reduire{80,80})]
             <h1 class="#EDIT{titre} titre">#TITRE</h1>
             [<p><small><:dernier_ajout:> : (#DATE|affdate_jourcourt).</small></p>]
          </div>
