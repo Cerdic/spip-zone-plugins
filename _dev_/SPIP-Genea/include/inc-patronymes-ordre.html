@@ -1,0 +1,10 @@
+<B_liste>
+<h3 class="spip"><:genea:lst_patronymes_ordre:></h3>
+[(#ANCRE_PAGINATION)]
+<ul class="spip">
+<BOUCLE_liste(GENEA_INDIVIDUS){id_genea}{fusion_patronyme}{pagination}>
+	[<li><a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;</li>]
+</BOUCLE_liste>
+</ul>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_liste>
