@@ -23,16 +23,23 @@ if (window.jQuery) jQuery(document).ready(function() {
 		}
 	);
 	bloc.attr('class','onglets_bloc').each(function(i) {this.id = 'ongl_'+i;});
-	jQuery('h2.onglets_titre').click(
-		function(e) {
-			var contenu = '#' + this.id;
-			contenu = contenu.replace(/titre/,'contenu');
-			jQuery(this).parent().parent().find('.selected').removeClass('selected');
-			jQuery(contenu).addClass('selected');
-			jQuery(this).addClass('selected');
-			return false;
-		}
-	);
+	// clic du titre...
+	jQuery('h2.onglets_titre').click(function(e) {
+		var contenu = '#' + this.id;
+		contenu = contenu.replace(/titre/,'contenu');
+		jQuery(this).parent().parent().find('.selected').removeClass('selected');
+		jQuery(contenu).addClass('selected');
+		jQuery(this).addClass('selected');
+		return false;
+	});
+	// clic des <a>, au cas ou...
+	jQuery('h2.onglets_titre a').click(function(e){
+		jQuery(this).parent().click();
+		if (e.stopPropagation) e.stopPropagation();
+		e.cancelBubble = true;
+		return false;
+	});
+	// activer un onglet grace a l'url
 	if(onglet_get) {
 		sel=jQuery('#onglets_titre_'+onglet_get);
 		sel.click();
