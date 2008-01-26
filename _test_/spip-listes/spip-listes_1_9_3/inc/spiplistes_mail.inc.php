@@ -15,12 +15,15 @@ include_spip('inc/spiplistes_api_globales');
 
 		function phpMail($email, $objet, $message_html, $message_texte, $charset) {
 		
-			//$charset = $GLOBALS['meta']['spiplistes_charset_envoi'];
-					
-			//$this->From		= lire_meta('email_webmaster');
-			$this->FromName	=  $GLOBALS['meta']['nom_site'];
+			$fromname = $GLOBALS['meta']['nom_site'];
+				if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
+				include_spip('inc/charsets');
+				$fromname = unicode2charset(charset2unicode($fromname),$GLOBALS['meta']['spiplistes_charset_envoi']);
+				}
+			
+			$this->FromName    =  $fromname ; 
 			$this->CharSet	= $charset ;
-	    $this->Mailer	= 'mail';
+	    	$this->Mailer	= 'mail';
 			$this->Subject	= $objet;
 			$this->AddAddress($email); 
 			
