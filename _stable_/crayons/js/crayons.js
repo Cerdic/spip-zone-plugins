@@ -105,10 +105,10 @@ $.fn.opencrayon = function(evt, percent) {
         'w': $(this).width(),
         'h': $(this).height(),
         'wh': window.innerHeight,
-        'em': $(this).css('fontSize'),
+        'em': $(this).px('fontSize'), // eviter un bug MSIE sur fontSize
         'class': me.className,
         'color': $(this).css('color'),
-        'font-size': $(this).css('fontSize'),
+        'font-size': $(this).px('fontSize'),
         'font-family': $(this).css('fontFamily'),
         'font-weight': $(this).css('fontWeight'),
         'line-height': $(this).css('lineHeight'),
