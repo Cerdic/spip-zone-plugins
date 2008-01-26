@@ -16,7 +16,7 @@ $autorite_erreurs = array();
 // Compatibilite 1.92 : on a besoin de sql_fetch
 if ($GLOBALS['spip_version_code'] < '1.93'
 AND $f = charger_fonction('compat_autorite', 'inc'))
-	$f('sql_fetch');
+	$f(array('sql_fetch','sql_count'));
 
 
 //
@@ -170,7 +170,7 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
 	"SELECT id_rubrique,id_secteur,statut FROM spip_articles WHERE id_article="._q($id));
 	$r = sql_fetch($s);
-	include_spip('inc/auth');		
+	include_spip('inc/auth');
 	return
 		autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
 		OR (
