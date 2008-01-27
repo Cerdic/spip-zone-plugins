@@ -27,18 +27,41 @@
 				#DEBUT_SURLIGNE
 				[(#LOGO_INDIVIDU||image_reduire{200,200})]
 				[<p class="surtitre">(#TITRE)</p>]
-				<h1 class="titre">[(#CIVILITE|gtraduc) ][(#PATRONYME|ucfirst) ][(#PRENOMS|ucfirst)]</h1>
-				<p class="soustitre"><img src="#CHEMIN{img_pack/#SEXE.gif}" width="17" height="17" /> [<:genea:sosa:> (#SOSA) ][&ordm;(#DATE_NAISSANCE)] [&dagger;(#DATE_DECES)]</p>
+				<h1 class="titre">[<img src="(#CHEMIN{/img_pack/#SEXE.gif})" width='17' height='17' class="logo_spip" />][(#CIVILITE|gtraduc) ][(#PATRONYME|ucfirst) ][(#PRENOMS|ucfirst)]</h1>
+				[<p class="soustitre">[(#SEXE|!={f}|?{' '})<:genea:aliasm:>][(#SEXE|=={f}|?{' '})<:genea:aliasf:>] &#34;(#SURNOM)&#34;</p>]
 				#FIN_SURLIGNE
 			</div>
 
 			#DEBUT_SURLIGNE
 			<div class="chapo">
-			CHAPEAU
+				<table class="spip">
+					[<tr><td valign="top" nowrap><:genea:sosa:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2" class="indivsosa">(#SOSA)</td></tr>]
+					[<tr><td valign="top" nowrap><:genea:sexe:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#SEXE|gtraduc)</td></tr>]
+					<tr><td valign="top" nowrap><:genea:birt:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">[ o (#DATE_NAISSANCE) ][(#DATE_NAISSANCE|affdate)] [(#LIEU)]</td></tr>
+					<tr><td valign="top" nowrap><:genea:deat:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">[ &dagger; (#DATE_DECES) ][(#DATE_DECES|affdate)] [(#LIEU)]</td></tr>
+				</table>
 			</div>
 			<br class="nettoyeur" />
 			<div class="texte">
-			TEXTE
+
+				<table class="spip">
+					<tr>
+						<td>Général</td>
+						<td>Les unions</td>
+						<td>L'arborescence</td>
+						<td>Les sources</td>
+					</tr>
+				</table>
+
+				<h3 class="spip"><:genea:ascendance:></h3>
+				<ul class="spip">
+					<li><:genea:pere:> : <INCLUDE{fond=include/inc-individu}{id_individu=#ID_PERE}></li>
+					<li><:genea:mere:> : <INCLUDE{fond=include/inc-individu}{id_individu=#ID_MERE}></li>
+				</ul>
+
+				[(#SEXE|!={f}|?{' '}) <INCLUDE{fond=include/inc-descendant}{id_pere=#ID_INDIVIDU}>]
+				[(#SEXE|=={f}|?{' '}) <INCLUDE{fond=include/inc-descendant}{id_mere=#ID_INDIVIDU}>]
+
 			</div>
 			#FIN_SURLIGNE
 

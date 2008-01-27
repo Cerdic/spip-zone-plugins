@@ -59,9 +59,6 @@ $tables_principales[$table_prefix.'_genea'] = array(
 $table_des_tables['genea'] = "genea";
 $table_primary['genea'] = "id_genea";
 
-$tables_jointures['rubriques'][] = 'genea';
-$tables_jointures['genea'][] = 'rubriques';
-
 // -- Definition de la table individu -----------------------------------
 $spip_genea_individus = array(
      "id_individu" => "BIGINT(21) NOT NULL AUTO_INCREMENT",
@@ -89,9 +86,12 @@ $tables_principales[$table_prefix.'_genea_individus'] = array(
 $table_des_tables['genea_individus'] = "genea_individus";
 $table_primary['genea_individus'] = "id_individu";
 
+//$tables_jointures['rubriques'][] = 'genea';
+//$tables_jointures['genea_individus'][] = 'genea';
+
 // -- Definition de la table de nurmerotation SOSA ----------------------
 $spip_genea_sosa =  array(
-     "id_sosa" =>    "BIGINT(21) NOT NULL AUTO_INCREMENT",
+     "id_sosa" =>    "BIGINT(21) DEFAULT '0' NOT NULL",
      "id_individu" => "BIGINT(21) DEFAULT '0' NOT NULL");
 
 $spip_genea_sosa_key = array(

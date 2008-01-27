@@ -50,11 +50,14 @@
          <div class="texte">
 			<B_individus>
 			[(#REM) Liste des individus portant le meme patronyme ]
-			[<h3 class="spip"><:genea:patronyme:>&nbsp;:&nbsp;(#PATRONYME|strtoupper)</h3>]
+			<h3 class="spip">
+				[<:genea:patronyme:>&nbsp;:&nbsp;(#PATRONYME|strtoupper)]
+				[(#PATRONYME|?{'', ' '}) <:genea:no_patronyme:>]
+			</h3>
 			[(#ANCRE_PAGINATION)]
 			<table>
 				<tbody>
-				<BOUCLE_individus(GENEA_INDIVIDUS){id_genea}{patronyme ?}{par patronyme, prenoms}{pagination 3}>
+				<BOUCLE_individus(GENEA_INDIVIDUS){id_genea}{patronyme ?}{par patronyme, prenoms}{pagination 20}>
 					<tr>
 						<td class="sosa">[(#SOSA)]</td>
 						<td class="logo_genea">[(#LOGO_INDIVIDU||image_reduire{17,17})]</td>

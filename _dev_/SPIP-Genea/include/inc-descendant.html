@@ -1,0 +1,22 @@
+<B_descendant>
+<h3 class="spip"><:genea:descendance:></h3>
+<ul class"spip">
+<BOUCLE_descendant(GENEA_INDIVIDUS){id_pere ?}{id_mere ?}{par id_pere, id_mere}>
+	<B_enfant>
+	<li>
+		[(#ENV{id_mere}|>{0}|?{'', ' '}) <INCLUDE{fond=include/inc-individu}{id_individu=#ID_MERE}>]
+		[(#ENV{id_mere}|>{0}|?{' '}) <INCLUDE{fond=include/inc-individu}{id_individu=#ID_PERE}>]
+		<ul class"spip">
+		<BOUCLE_enfant(GENEA_INDIVIDUS){id_pere}{id_mere}{doublons}>
+			<li><INCLUDE{fond=include/inc-individu}{id_individu}></li>
+		</BOUCLE_enfant>
+		</ul>
+	</li>
+	</B_enfant>
+</BOUCLE_descendant>
+</ul>
+</B_descendant>
+<ul class"spip">
+	<li><:genea:aucune_descendance:></li>
+</ul>
+<//B_descendant>

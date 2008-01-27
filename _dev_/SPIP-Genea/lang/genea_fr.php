@@ -121,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nati' => "Nationalit&eacute;",
 'natu' => "Naturalisation",
 'no_arbre' => "Aucun arbre de cr&eacute;er",
+'no_patronyme' => "Tous les patronymes",
 'nbre_evenement' => "Nombre d'&eacute;v&egrave;nements",
 'nbre_filiation' => "Nombre de filiations",
 'nbre_individu' => "Nombre d'individus",
