@@ -26,7 +26,7 @@
    <INCLURE{fond=inc-entete}>
 
    [(#REM) Fil d'Ariane ]
-   <BOUCLE_rub(RUBRIQUES){id_rubrique}><div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; <:genea:liste_des_individus:></div></BOUCLE_rub>
+   <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; <:genea:liste_des_individus:></div>
 
 
    <div id="conteneur">
@@ -36,7 +36,7 @@
 
          <div class="cartouche">
             #DEBUT_SURLIGNE
-            [(#LOGO_RUBRIQUE||image_reduire{80,80})]
+            [(#LOGO_RUBRIQUE||image_reduire{200,200})]
             [<p class="surtitre">(#TITRE)</p>]
             <h1 class="titre"><:genea:liste_des_individus:></h1>
             <p class="soustitre"><:genea:soustitre_lst_individus:></p>
@@ -48,26 +48,25 @@
          <br class="nettoyeur" />
 
          <div class="texte">
-			[(#REM) Liste des individus portant le meme patronyme ]
-			[<h3 class="spip"><:genea:patronyme:>&nbsp;:&nbsp;(#ENV{nom}|textebrut)</h3>]
 			<B_individus>
-			<table class="liste-individus">
-			#ANCRE_PAGINATION
-			[<tfoot><tr><td class="pagination">(#PAGINATION)</td></tr></tfoot>]
-			<tbody>
-			<BOUCLE_individus(INDIVIDUS) {id_genea} {nom=#ENV{nom}} {par nom, prenoms} {pagination 20}>
-			<tr>
-				<td class="indivsosa" align="right">[(#SOSA)]</td>
-				<td>[(#SEXE|=={M}|?{' ',''}) #SET{titre_sexe, 'male'}] [(#SEXE|=={F}|?{' ',''}) #SET{titre_sexe, 'femelle'}][<img src="#EVAL{_DIR_PLUGIN_GENEA}/img_pack/(#GET{titre_sexe}).gif" alt="" border="0" width="17" height="17" />]</td>
-				<td>[(#LOGO_INDIVIDU||image_reduire{17,17})]</td>
-				<td><a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">[(#PRENOMS)]</a>&nbsp;<span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span></td>
-			</tr>
-			</BOUCLE_individus>
-			<tbody>
+			[(#REM) Liste des individus portant le meme patronyme ]
+			[<h3 class="spip"><:genea:patronyme:>&nbsp;:&nbsp;(#PATRONYME|strtoupper)</h3>]
+			[(#ANCRE_PAGINATION)]
+			<table>
+				<tbody>
+				<BOUCLE_individus(GENEA_INDIVIDUS){id_genea}{patronyme ?}{par patronyme, prenoms}{pagination 3}>
+					<tr>
+						<td class="sosa">[(#SOSA)]</td>
+						<td class="logo_genea">[(#LOGO_INDIVIDU||image_reduire{17,17})]</td>
+						<td class="logo_genea"><img src="#CHEMIN{img_pack/#SEXE.gif}" width="17" height="17" /></td>
+						<td class="logo_genea">[(#LOGO_NOTE||image_reduire{17,17})]</td>
+						<td><a href="[(#URL_PAGE{genea_individus}|parametre_url{id_individu,#ID_INDIVIDU})]" class="spip_in">[(#CIVILITE|abreviation) ][(#PATRONYME|ucfirst) ][(#PRENOMS|ucfirst)]</a></td>
+					</tr>
+				</BOUCLE_individus>
+				</tbody>
 			</table>
+			[<p class="pagination">(#PAGINATION)</p>]
 			</B_individus>
-			<:genea:erreur_individu:>
-			<//B_individus>
          </div>
 
       </div><!-- fin contenu -->
@@ -79,11 +78,14 @@
          <INCLURE{fond=inc-rubriques}{id_rubrique}>
 
          [(#REM) Articles dans la meme rubrique ]
-         <INCLURE{fond=include/inc-genealogie}{id_genea}{patronymes=1}{small=oui}>
+         <INCLURE{fond=include/inc-genealogie}{id_genea}{individus=1}{small=oui}>
 
       </div><!-- fin navigation -->
 
    </div><!-- fin conteneur -->
+
+   [(#REM) Pied de page SPIP-Genea ]
+   <INCLURE{fond=include/inc-genea-pied}{id_genea}>
 
    [(#REM) Pied de page ]
    <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>

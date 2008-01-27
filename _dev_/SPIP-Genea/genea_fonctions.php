@@ -12,9 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('public/genea_boucles');
+//include_spip('public/genea_boucles');
 include_spip('inc/genea_filtres');
-include_spip('base/genea_base');
+include_spip('public/genea_balises');
+
 
 // -- Definition de la table permettant l'affichage du logo d'un individu
 include_spip('inc/chercher_logo');
@@ -28,6 +29,7 @@ function balise_GENEA_VERSION_PLUGIN(){
 }
 
 function balise_GENEA_VERSION_BASE(){
+	include_spip('base/genea_base');
 	return $GLOBALS['version_base_genea'];
 }
 ?>

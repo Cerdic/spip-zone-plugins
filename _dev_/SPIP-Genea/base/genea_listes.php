@@ -15,7 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // Securite
 global
 	$liste_filiation,
 	$liste_civilite,
-	$liste_type_evt;
+	$liste_type_evt,
+	$liste_tye_union;
 
 // -- Liste des differents types de filiation --------------------------
 $liste_filiation = array(
@@ -83,4 +84,10 @@ $liste_type_evt = array(
 	"fact",
 	"divf");
 
+// -- Liste des type d'evenements --------------------------------------
+$liste_type_union = array(
+	"marr",
+	"pacs",
+	"ulib",
+	"conc");
 ?>

@@ -12,14 +12,23 @@
 <BOUCLE_genea(GENEA){id_genea ?}{id_rubrique ?}>
 [(#ENV{small}|=={oui}|?{' ', ''})
 <div class="breves">
-   <h2 class="menu-titre"><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
-   <ul>
-      <li><a href="[(#URL_PAGE{genea_statistiques}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{statistiques}|?{' '}) class="on"]><:genea:statistiques:></a></li>
-      <li><a href="[(#URL_PAGE{genea_lst-patronymes}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{patronymes}|?{' '}) class="on"]><:genea:liste_des_patronymes:></a></li>
-      <li><a href="[(#URL_PAGE{genea_lst-lieux}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{lieux}|?{' '}) class="on"]><:genea:liste_des_lieux:></a></li>
-      <li><a href="[(#URL_PAGE{genea_lst-unions}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{unions}|?{' '}) class="on"]><:genea:liste_des_unions:></a></li>
-      <li><a href="[(#URL_PAGE{genea_lst-longevite}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{longevite}|?{' '}) class="on"]><:genea:liste_de_longevite:></a></li>
-   </ul>
+	<h2 class="menu-titre"><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
+	<ul>
+		<li><a href="[(#URL_PAGE{genea_statistiques}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{statistiques}|?{' '}) class="on"]><:genea:statistiques:></a></li>
+		<li><a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{individus}|?{' '}) class="on"]><:genea:liste_des_individus:></a></li>
+		<li><a href="[(#URL_PAGE{genea_lst-patronymes}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{patronymes}|?{' '}) class="on"]><:genea:liste_des_patronymes:></a></li>
+		[(#ENV{patronymes}|?{' '})<ul>
+			<li><a href="[(#URL_PAGE{genea_lst-patronymes}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{patronymes,1}|=={1}|?{' '}) class="on"]><:genea:lst_patronymes_alpha:></a></li>
+			<li><a href="[(#URL_PAGE{genea_lst-patronymes}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronymes,2})]"[(#ENV{patronymes,1}|=={2}|?{' '}) class="on"]><:genea:lst_patronymes_ordre:></a></li>
+		</ul>]
+		<li><a href="[(#URL_PAGE{genea_lst-lieux}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{lieux}|?{' '}) class="on"]><:genea:liste_des_lieux:></a></li>
+		<li><a href="[(#URL_PAGE{genea_lst-unions}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{unions}|?{' '}) class="on"]><:genea:liste_des_unions:></a></li>
+		<li><a href="[(#URL_PAGE{genea_lst-longevite}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{longevite}|?{' '}) class="on"]><:genea:liste_de_longevite:></a></li>
+		[(#ENV{longevite}|?{' '})<ul>
+			<li><a href="[(#URL_PAGE{genea_lst-longevite}|parametre_url{id_genea,#ID_GENEA}|parametre_url{longevite,2})]"[(#ENV{longevite,1}|=={2}|?{' '}) class="on"]><:genea:lst_longevite_h:></a></li>
+			<li><a href="[(#URL_PAGE{genea_lst-longevite}|parametre_url{id_genea,#ID_GENEA}|parametre_url{longevite,3})]"[(#ENV{longevite,1}|=={3}|?{' '}) class="on"]><:genea:lst_longevite_f:></a></li>
+		</ul>]
+	</ul>
 </div>]
 [(#ENV{small}|!={oui}|?{' ', ''})
 <div class="liste-articles">
@@ -30,20 +39,24 @@
          <small><:genea:soustitre_statistiques:></small>
       </li>
       <li>
+         <h3 class="titre"><a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA})]"><:genea:liste_des_individus:></a></h3>
+         <small><:genea:soustitre_lst_individus:></small>
+      </li>
+      <li>
          <h3 class="titre"><a href="[(#URL_PAGE{genea_lst-patronymes}|parametre_url{id_genea,#ID_GENEA})]"><:genea:liste_des_patronymes:></a></h3>
-         <small><:genea:soustitre_patronyme:></small>
+         <small><:genea:soustitre_lst_patronyme:></small>
       </li>
       <li>
          <h3 class="titre"><a href="[(#URL_PAGE{genea_lst-lieux}|parametre_url{id_genea,#ID_GENEA})]"><:genea:liste_des_lieux:></a></h3>
-         <small><:genea:soustitre_lieux:></small>
+         <small><:genea:soustitre_lst_lieux:></small>
       </li>
       <li>
          <h3 class="titre"><a href="[(#URL_PAGE{genea_lst-unions}|parametre_url{id_genea,#ID_GENEA})]"><:genea:liste_des_unions:></a></h3>
-         <small><:genea:soustitre_unions:></small>
+         <small><:genea:soustitre_lst_unions:></small>
       </li>
       <li>
          <h3 class="titre"><a href="[(#URL_PAGE{genea_lst-longevite}|parametre_url{id_genea,#ID_GENEA})]"><:genea:liste_de_longevite:></a></h3>
-         <small><:genea:soustitre_longevite:></small>
+         <small><:genea:soustitre_lst_longevite:></small>
       </li>
    </ul>
 </div>]

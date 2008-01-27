@@ -60,4 +60,17 @@ function boucle_GENEA_SOURCES_dist($id_boucle, &$boucles) {
 	return calculer_boucle($id_boucle, $boucles);
 }
 
+// -- Definition de criteres supplementaires ----------------------------
+
+//
+// {fusion_patronyme} permet de classer par importance les patronymes
+//
+function critere_fusion_patronyme($idb, &$boucles, $crit){
+	$boucle = &$boucles[$idb];
+	$type = $boucle->type_requete;
+	$patronyme = $boucle->id_table.'.patronyme';
+	$boucles[$idb]->group[] = $patronyme;
+	$boucles[$idb]->select[] = $patronyme . ',  COUNT(' . $patronyme . ')';
+}
+
 ?>

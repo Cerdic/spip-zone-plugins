@@ -36,7 +36,7 @@
       <div id="contenu">
 
          <div class="cartouche">
-            [(#LOGO_RUBRIQUE||image_reduire{80,80})]
+            [(#LOGO_RUBRIQUE||image_reduire{200,200})]
             <h1 class="#EDIT{titre} titre">#TITRE</h1>
             [<p><small><:dernier_ajout:> : (#DATE|affdate_jourcourt).</small></p>]
          </div>
@@ -109,8 +109,6 @@
 
          <br class="nettoyeur" />
 
-         <div class="ps"><:genea:text_info:></div>
-
          [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
       </div><!-- fin contenu -->
 
@@ -135,6 +133,9 @@
       </div><!-- fin navigation -->
 
    </div><!-- fin conteneur -->
+
+   [(#REM) Pied de page SPIP-Genea ]
+   <INCLURE{fond=include/inc-genea-pied}{id_genea}>
 
    [(#REM) Pied de page ]
    <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>

@@ -1,7 +1,333 @@
-<B_liste>
 <h3 class="spip"><:genea:lst_patronymes_alpha:></h3>
-<BOUCLE_liste(GENEA_INDIVIDUS){id_genea}{par patronyme}{' '}>
-	[<h4 class="spip"><a name="[(#PATRONYME|initial)]"></a>(#PATRONYME|initial|unique)</h4>]
-	<BOUCLE_patronymes(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]</BOUCLE_patronymes>
-</BOUCLE_liste>
-</B_liste>
+<table class="spip" summary="">
+	<thead>
+		<tr>
+			<td class="genea_i"><a href="#anchor-0" class="spip_in">?</a></td>
+			<td class="genea_i"><a href="#anchor-A" class="spip_in">A</a></td>
+			<td class="genea_i"><a href="#anchor-B" class="spip_in">B</a></td>
+			<td class="genea_i"><a href="#anchor-C" class="spip_in">C</a></td>
+			<td class="genea_i"><a href="#anchor-D" class="spip_in">D</a></td>
+			<td class="genea_i"><a href="#anchor-E" class="spip_in">E</a></td>
+			<td class="genea_i"><a href="#anchor-F" class="spip_in">F</a></td>
+			<td class="genea_i"><a href="#anchor-G" class="spip_in">G</a></td>
+			<td class="genea_i"><a href="#anchor-H" class="spip_in">H</a></td>
+			<td class="genea_i"><a href="#anchor-I" class="spip_in">I</a></td>
+			<td class="genea_i"><a href="#anchor-J" class="spip_in">J</a></td>
+			<td class="genea_i"><a href="#anchor-K" class="spip_in">K</a></td>
+			<td class="genea_i"><a href="#anchor-L" class="spip_in">L</a></td>
+			<td class="genea_i"><a href="#anchor-M" class="spip_in">M</a></td>
+			<td class="genea_i"><a href="#anchor-N" class="spip_in">N</a></td>
+			<td class="genea_i"><a href="#anchor-O" class="spip_in">O</a></td>
+			<td class="genea_i"><a href="#anchor-P" class="spip_in">P</a></td>
+			<td class="genea_i"><a href="#anchor-Q" class="spip_in">Q</a></td>
+			<td class="genea_i"><a href="#anchor-R" class="spip_in">R</a></td>
+			<td class="genea_i"><a href="#anchor-S" class="spip_in">S</a></td>
+			<td class="genea_i"><a href="#anchor-T" class="spip_in">T</a></td>
+			<td class="genea_i"><a href="#anchor-U" class="spip_in">U</a></td>
+			<td class="genea_i"><a href="#anchor-V" class="spip_in">V</a></td>
+			<td class="genea_i"><a href="#anchor-W" class="spip_in">W</a></td>
+			<td class="genea_i"><a href="#anchor-X" class="spip_in">X</a></td>
+			<td class="genea_i"><a href="#anchor-Y" class="spip_in">Y</a></td>
+			<td class="genea_i"><a href="#anchor-Z" class="spip_in">Z</a></td>
+		</tr>
+	</thead>
+	<tbody>
+<!-- Lettre ? -->
+		<tr class="row_even">
+			<td colspan="2" class="genea_i"><a name="anchor-0">?</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_0(GENEA_INDIVIDUS){id_genea}{patronyme==^[?]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_0(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_0>
+			</BOUCLE_famille-lettre_0>
+			</td>
+		</tr>
+<!-- Lettre A -->
+		<tr class="row_odd">
+			<td colspan="2" class="genea_i"><a name="anchor-A">A</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_a(GENEA_INDIVIDUS){id_genea}{patronyme==^[aA]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_a(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_a>
+			</BOUCLE_famille-lettre_a>
+			</td>
+		</tr>
+<!-- Lettre B -->
+		<tr class="row_even">
+			<td colspan="2" class="genea_i"><a name="anchor-B">B</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_b(GENEA_INDIVIDUS){id_genea}{patronyme==^[bB]} {par patronyme} {" "}>
+			<BOUCLE_patronymes_b(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+			</BOUCLE_patronymes_b>
+			</BOUCLE_famille-lettre_b>
+			</td>
+		</tr>
+<!-- Lettre C -->
+		<tr class="row_odd">
+			<td colspan="2" class="genea_i"><a name="anchor-C">C</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_c(GENEA_INDIVIDUS){id_genea}{patronyme==^[cC]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_c(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_c>
+			</BOUCLE_famille-lettre_c>
+			</td>
+		</tr>
+<!-- Lettre D -->
+		<tr class="row_even">
+			<td colspan="2" class="genea_i"><a name="anchor-D">D</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_d(GENEA_INDIVIDUS){id_genea}{patronyme==^[dD]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_d(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_d>
+			</BOUCLE_famille-lettre_d>
+			</td>
+		</tr>
+<!-- Lettre E -->
+		<tr class="row_odd">
+			<td colspan="2" class="genea_i"><a name="anchor-E">E</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_e(GENEA_INDIVIDUS){id_genea}{patronyme==^[eE]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_e(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_e>
+			</BOUCLE_famille-lettre_e>
+			</td>
+		</tr>
+<!-- Lettre F -->
+		<tr class="row_even">
+			<td colspan="2" class="genea_i"><a name="anchor-F">F</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_f(GENEA_INDIVIDUS){id_genea}{patronyme==^[fF]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_f(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_f>
+			</BOUCLE_famille-lettre_f>
+			</td>
+		</tr>
+<!-- Lettre G -->
+		<tr class="row_odd">
+			<td colspan="2" class="genea_i"><a name="anchor-G">G</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_g(GENEA_INDIVIDUS){id_genea}{patronyme==^[gG]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_g(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_g>
+			</BOUCLE_famille-lettre_g>
+			</td>
+		</tr>
+<!-- Lettre H -->
+		<tr class="row_even">
+			<td colspan="2" class="genea_i"><a name="anchor-H">H</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_h(GENEA_INDIVIDUS){id_genea}{patronyme==^[hH]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_h(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_h>
+			</BOUCLE_famille-lettre_h>
+			</td>
+		</tr>
+<!-- Lettre I -->
+		<tr class="row_odd">
+			<td colspan="2" class="genea_i"><a name="anchor-I">I</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_i(GENEA_INDIVIDUS){id_genea}{patronyme==^[iI]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_i(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_i>
+			</BOUCLE_famille-lettre_i>
+			</td>
+		</tr>
+<!-- Lettre J -->
+		<tr class="row_even">
+			<td colspan="2" class="genea_i"><a name="anchor-J">J</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_j(GENEA_INDIVIDUS){id_genea}{patronyme==^[jJ]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_j(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_j>
+			</BOUCLE_famille-lettre_j>
+			</td>
+		</tr>
+<!-- Lettre K -->
+		<tr class="row_odd">
+			<td colspan="2" class="genea_i"><a name="anchor-K">K</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_k(GENEA_INDIVIDUS){id_genea}{patronyme==^[kK]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_k(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_k>
+			</BOUCLE_famille-lettre_k>
+			</td>
+		</tr>
+<!-- Lettre L -->
+		<tr class="row_even">
+			<td colspan="2" class="genea_i"><a name="anchor-L">L</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_l(GENEA_INDIVIDUS){id_genea}{patronyme==^[lL]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_l(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_l>
+			</BOUCLE_famille-lettre_l>
+			</td>
+		</tr>
+<!-- Lettre M -->
+		<tr class="row_odd">
+			<td colspan="2" class="genea_i"><a name="anchor-M">M</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_m(GENEA_INDIVIDUS){id_genea}{patronyme==^[mM]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_m(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_m>
+			</BOUCLE_famille-lettre_m>
+			</td>
+		</tr>
+<!-- Lettre N -->
+		<tr class="row_even">
+			<td colspan="2" class="genea_i"><a name="anchor-N">N</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_n(GENEA_INDIVIDUS){id_genea}{patronyme==^[nN]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_n(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_n>
+			</BOUCLE_famille-lettre_n>
+			</td>
+		</tr>
+<!-- Lettre O -->
+		<tr class="row_odd">
+			<td colspan="2" class="genea_i"><a name="anchor-O">O</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_o(GENEA_INDIVIDUS){id_genea}{patronyme==^[oO]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_o(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_o>
+			</BOUCLE_famille-lettre_o>
+			</td>
+		</tr>
+<!-- Lettre P -->
+		<tr class="row_even">
+			<td colspan="2" class="genea_i"><a name="anchor-P">P</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_p(GENEA_INDIVIDUS){id_genea}{patronyme==^[pP]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_p(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_p>
+			</BOUCLE_famille-lettre_p>
+			</td>
+		</tr>
+<!-- Lettre Q -->
+		<tr class="row_odd">
+			<td colspan="2" class="genea_i"><a name="anchor-Q">Q</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_q(GENEA_INDIVIDUS){id_genea}{patronyme==^[qQ]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_q(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_q>
+			</BOUCLE_famille-lettre_q>
+			</td>
+		</tr>
+<!-- Lettre R -->
+		<tr class="row_even">
+			<td colspan="2" class="genea_i"><a name="anchor-R">R</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_r(GENEA_INDIVIDUS){id_genea}{patronyme==^[rR]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_r(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_r>
+			</BOUCLE_famille-lettre_r>
+			</td>
+		</tr>
+<!-- Lettre S -->
+		<tr class="row_odd">
+			<td colspan="2" class="genea_i"><a name="anchor-S">S</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_s(GENEA_INDIVIDUS){id_genea}{patronyme==^[sS]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_s(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_s>
+			</BOUCLE_famille-lettre_s>
+			</td>
+		</tr>
+<!-- Lettre T -->
+		<tr class="row_even">
+			<td colspan="2" class="genea_i"><a name="anchor-T">T</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_t(GENEA_INDIVIDUS){id_genea}{patronyme==^[tT]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_t(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_t>
+			</BOUCLE_famille-lettre_t>
+			</td>
+		</tr>
+<!-- Lettre U -->
+		<tr class="row_odd">
+			<td colspan="2" class="genea_i"><a name="anchor-U">U</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_u(GENEA_INDIVIDUS){id_genea}{patronyme==^[uU]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_u(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_u>
+			</BOUCLE_famille-lettre_u>
+			</td>
+		</tr>
+<!-- Lettre V -->
+		<tr class="row_even">
+			<td colspan="2" class="genea_i"><a name="anchor-V">V</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_v(GENEA_INDIVIDUS){id_genea}{patronyme==^[vV]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_v(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_v>
+			</BOUCLE_famille-lettre_v>
+			</td>
+		</tr>
+<!-- Lettre W -->
+		<tr class="row_odd">
+			<td colspan="2" class="genea_i"><a name="anchor-W">W</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_w(GENEA_INDIVIDUS){id_genea}{patronyme==^[wW]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_w(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_w>
+			</BOUCLE_famille-lettre_w>
+			</td>
+		</tr>
+<!-- Lettre X -->
+		<tr class="row_even">
+			<td colspan="2" class="genea_i"><a name="anchor-X">X</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_x(GENEA_INDIVIDUS){id_genea}{patronyme==^[xX]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_x(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_x>
+			</BOUCLE_famille-lettre_x>
+			</td>
+		</tr>
+<!-- Lettre Y -->
+		<tr class="row_odd">
+			<td colspan="2" class="genea_i"><a name="anchor-Y">Y</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_y(GENEA_INDIVIDUS){id_genea}{patronyme==^[yY]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_y(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_y>
+			</BOUCLE_famille-lettre_y>
+			</td>
+		</tr>
+<!-- Lettre Z -->
+		<tr class="row_even">
+			<td colspan="2" class="genea_i"><a name="anchor-Z">Z</a></td>
+			<td colspan="25">
+			<BOUCLE_famille-lettre_z(GENEA_INDIVIDUS){id_genea}{patronyme==^[zZ]} {par patronyme} {" "}>
+				<BOUCLE_patronymes_z(GENEA_INDIVIDUS){id_genea}{patronyme}{doublons}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst|unique)</a> &#40;[(#TOTAL_BOUCLE)]&#41;]
+				</BOUCLE_patronymes_z>
+			</BOUCLE_famille-lettre_z>
+			</td>
+		</tr>
+	</tbody>
+</table>

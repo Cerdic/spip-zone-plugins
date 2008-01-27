@@ -26,7 +26,7 @@
    <INCLURE{fond=inc-entete}>
 
    [(#REM) Fil d'Ariane ]
-   <BOUCLE_rub(RUBRIQUES){id_rubrique}><div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; <:genea:statistiques:></div></BOUCLE_rub>
+   <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; <:genea:statistiques:></div>
 
 
    <div id="conteneur">
@@ -36,7 +36,7 @@
 
          <div class="cartouche">
             #DEBUT_SURLIGNE
-            [(#LOGO_RUBRIQUE||image_reduire{80,80})]
+            [(#LOGO_RUBRIQUE||image_reduire{200,200})]
             [<p class="surtitre">(#TITRE)</p>]
             <h1 class="titre"><:genea:statistiques:></h1>
             <p class="soustitre"><:genea:soustitre_statistiques:></p>
@@ -65,9 +65,9 @@
                <BOUCLE_genea_pat(GENEA_INDIVIDUS){id_genea}{par patronyme}></BOUCLE_genea_pat><li class="spip"><:genea:nbre_patronyme:> : #TOTAL_BOUCLE</li><//B_genea_pat>
                < BOUCLE_genea_union(GENEA_UNIONS){id_genea}></BOUCLE_genea_union><li class="spip"><:genea:nbre_union:> : #GRAND_TOTAL</li><//B_genea_union>
 			   	<ul class="spip">
-				<li class="spip"><:genea:mariage:> : X</li>
-				<li class="spip"><:genea:concubinage:> : X</li>
-				<li class="spip"><:genea:union_libre:> : X</li>
+				<li class="spip"><:genea:marr:> : X</li>
+				<li class="spip"><:genea:conc:> : X</li>
+				<li class="spip"><:genea:ulib:> : X</li>
 				<li class="spip"><:genea:pacs:> : X</li>
 			   	</ul>
                <li class="spip"><:genea:nbre_filiation:> : X</li>
@@ -96,6 +96,9 @@
       </div><!-- fin navigation -->
 
    </div><!-- fin conteneur -->
+
+   [(#REM) Pied de page SPIP-Genea ]
+   <INCLURE{fond=include/inc-genea-pied}{id_genea}>
 
    [(#REM) Pied de page ]
    <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>

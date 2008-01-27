@@ -28,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cens' => "Recensement de population",
 'chr' => "Bapt&ecirc;me religieux",
 'chra' => "Bapt&ecirc;me adulte non mormon",
+'conc' => "Concubinage",
 'conf' => "Confirmation religieuse",
 'conl' => "Conversion Mormons",
 // 'creer_arbre' => "Cr&eacute;er un nouvel arbre",
@@ -92,11 +93,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // L
 'liste_des_lieux' => "Liste des lieux",
-'liste_des_individus' => "Liste de individus",
+'liste_des_individus' => "Liste des individus",
+'liste_de_longevite' => "Pyramides des &acirc;ges",
 'liste_des_patronymes' => "Liste de patronymes",
+'liste_des_unions' => "Liste des unions",
+'lst_longivite_f' => "Des femmes",
+'lst_longivite_h' => "Des hommes",
+'lst_patronymes_alpha' => "Par ordre alphab&eacute;tique",
+'lst_patronymes_ordre' => "Par ordre d'importance",
 
 // M
 'm' => "Monsieur",
+'m_court' => "M.",
 'marb' => "Publication des bans de mariage",
 'marc' => "Contrat de mariage",
 'marl' => "Autorisation l&eacute;gale de mariage",
@@ -104,14 +112,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mars' => "Convention ou contrat avant mariage",
 'mere' => "M&egrave;re",
 'mlle' => "Mademoiselle",
+'mlle_court' => "Mlle",
 'mme' => "Madame",
+'mme_court' => "Mme",
 //'modifier_arbre' => "Modifier un arbre",
 
 // N
 'nati' => "Nationalit&eacute;",
 'natu' => "Naturalisation",
 'no_arbre' => "Aucun arbre de cr&eacute;er",
-'nombre_individus' => "Nombre d'individus",
+'nbre_evenement' => "Nombre d'&eacute;v&egrave;nements",
+'nbre_filiation' => "Nombre de filiations",
+'nbre_individu' => "Nombre d'individus",
+'nbre_lieu' => "Nombre de lieux",
+'nbre_patronyme' => "Nombre de patronymes",
+'nbre_source' => "Nombre de sources",
+'nbre_union' => "Nombre d'unions",
 'nom_plugin' => "Genea-SPIP",
 
 // O
@@ -120,6 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ordn' => "Ordination religieuse",
 
 // P
+'pacs' => "PACS",
 'patronyme' => "Patronyme",
 'pere' => "P&egrave;re",
 'prop' => "Bien ou possession",
@@ -140,9 +157,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'sexe' => "Sexe",
 'sir' => "Sire",
 'sosa' => "Sosa",
-'soustitre_individus' => "Liste de l'ensemble des individus portant un m&ecirc;me patronyme",
-'soustitre_lieux' => "Liste de l'ensemble des lieux li&eacute;s &agrave; un &eacute;v&eacutenement ou &agrave un individu",
-'soustitre_patronyme' => "Liste de l'ensemble des patronymes contenue dans cet arbre g&eacute;n&eacute;alogique",
+'soustitre_lst_individus' => "Liste de l'ensemble des individus portant un m&ecirc;me patronyme",
+'soustitre_lst_lieux' => "Liste de l'ensemble des lieux li&eacute;s &agrave; un &eacute;v&eacutenement ou &agrave un individu",
+'soustitre_lst_longevite' => "Liste des individus par long&eacute;vit&eacute;",
+'soustitre_lst_patronyme' => "Liste de l'ensemble des patronymes contenus dans cet arbre g&eacute;n&eacute;alogique",
+'soustitre_lst_unions' => "Liste des unions contenues dans cet arbre g&eacute;n&eacute;alogique",
 'soustitre_statistiques' => "Les quelques chiffres clefs de cet arbre g&eacute;n&eacute;alogique",
 'ssn' => "Num&eacute;ro de s&eacute;curit&eacute; sociale",
 'statistiques' => "Statistiques",
@@ -150,13 +169,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_genea' => "Syndiquer un arbre g&eacute;n&eacute;alogique",
 
 // T
-'text_info' => "Cet arbre est compos&eacute; de nombreuses personnes (<i>des ascendants, des descendants, des collat&eacute;raux, des conjoints, etc.</i>). Si vous reconnaissez parmis celles-ci un membre de votre famille dans les noms cit&eacute;s dans cet arbre g&eacute;n&eacute;alogique, n'h&eacute;sitez pas &agrave; nous contacter.",
+'text_pied_1' => "Cet arbre est compos&eacute; de nombreuses personnes (<i>des ascendants, des descendants, des collat&eacute;raux, des conjoints, etc.</i>). Si vous reconnaissez un membre de votre famille dans les noms cit&eacute;s dans cet arbre g&eacute;n&eacute;alogique, n'h&eacute;sitez pas &agrave; ",
+'text_pied_2' => "nous contacter",
 'titl' => "Titre de noblesse ou honorifique",
 'titre' => "Gestion des g&eacute;n&eacute;alogies",
 'titre_nouvel_arbre' => "Nouvel arbre",
 'tous_arbres' => "Tous les arbres",
 
 // U
+'ulib' => "Union libre",
 'union' => "Unions",
 
 // V

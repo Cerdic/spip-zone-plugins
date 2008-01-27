@@ -26,7 +26,7 @@
    <INCLURE{fond=inc-entete}>
 
    [(#REM) Fil d'Ariane ]
-   <BOUCLE_rub(RUBRIQUES){id_rubrique}><div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; <:genea:liste_des_patronymes:></div></BOUCLE_rub>
+   <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; <:genea:liste_des_patronymes:></div>
 
 
    <div id="conteneur">
@@ -36,10 +36,10 @@
 
          <div class="cartouche">
             #DEBUT_SURLIGNE
-            [(#LOGO_RUBRIQUE||image_reduire{80,80})]
+            [(#LOGO_RUBRIQUE||image_reduire{200,200})]
             [<p class="surtitre">(#TITRE)</p>]
             <h1 class="titre"><:genea:liste_des_patronymes:></h1>
-            <p class="soustitre"><:genea:soustitre_lst_patronymes:></p>
+            <p class="soustitre"><:genea:soustitre_lst_patronyme:></p>
             #FIN_SURLIGNE
          </div>
 
@@ -68,6 +68,9 @@
       </div><!-- fin navigation -->
 
    </div><!-- fin conteneur -->
+
+   [(#REM) Pied de page SPIP-Genea ]
+   <INCLURE{fond=include/inc-genea-pied}{id_genea}>
 
    [(#REM) Pied de page ]
    <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
