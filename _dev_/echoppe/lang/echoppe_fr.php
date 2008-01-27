@@ -49,6 +49,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // G
 'gerer_echoppe' => 'G&eacute;rer Echoppe',
 'gramme_racourcci' => 'gr.',
+// E
+'edition_de' => '&Eacute;dition de',
 
 // F
 'fichier_introuvable' => 'Le fichier est introuvable',
@@ -58,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'hauteur' => 'Hauteur',
 
 // I
+'info_depot' => 'G&eacute;rer vos d&eacute;p&ocirc;ts ici.',
 'impossible_copier_dans'=>'Impossible de copier le fichier dans ',
 
 // L
@@ -82,6 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // P
 'pas_d_options_pour_le_produit' => 'Pas d\'option pour ce produit',
 'par_defaut' => 'Par d&eacute;faut',
+'pas_de_depot_ici' => 'Pas de d&eacute;p&ocirc;t ici.',
 'pas_de_categorie_ici' => 'Pas de cat&eacute;gorie ici.',
 'pas_de_num_de_ref' => 'Aucune',
 'pas_de_produit_ici' => 'Pas de produits &agrave; cette adresse.',
@@ -119,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'unites' => 'Unit&eacute;(s)',
 
 // V
+'visualisation_d_un_depot' => 'Visualisation d\'un d&eacute;p&ocirc;t',
 'visualisation_d_un_produit' => 'Visualisation de',
 
 // X
