@@ -54,6 +54,7 @@
 	define("_LILO_LANG", _LILO_PREFIX.":");
 	define("_DIR_PLUGIN_LILO_IMG_PACK", _DIR_PLUGIN_LILO."images/");
 	define("_LILO_META_PREFERENCES", _LILO_PREFIX."_preferences");
+	define("_LILO_AJAX_RESULT_SEPARATOR", ":");
 	
 	define("_LILO_DEFAULT_VALUES_ARRAY", 
 	 	serialize(

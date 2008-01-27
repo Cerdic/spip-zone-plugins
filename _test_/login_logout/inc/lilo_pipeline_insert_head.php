@@ -115,7 +115,7 @@ function lilo_insert_head ($flux) {
 						, url: $('#lilo_url_action').val()
 						, data: {var_login: $('#var_login_id').val(), url: $('input[@name=url]').val()}
 						, success: function(data) {
-							var result = data.split(' ');
+							var result = data.split('" . _LILO_AJAX_RESULT_SEPARATOR . "');
 							var id_auteur = result[0];
 							alea_actuel = result[1];
 							alea_futur = result[2];

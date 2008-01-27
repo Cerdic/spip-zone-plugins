@@ -60,6 +60,7 @@ function action_lilo_auteur_infos_dist () {
 	if(!empty($var_login)) {
 	
 		$logo_silouhette = find_in_path('images/lilo-silouhette-128.png');
+		$logo_src = "";
 		
 		$sql_select = "id_auteur,alea_actuel,alea_futur";
 		$sql_query = "SELECT $sql_select FROM spip_auteurs WHERE login='$var_login' LIMIT 1";
@@ -67,41 +68,39 @@ function action_lilo_auteur_infos_dist () {
 	
 		if($row = spip_fetch_array($sql_result)) {
 			$ok = true;
-			foreach(split(',',$sql_select) as $key) {
-				$$key = (isset($row[$key]) && !empty($row[$key])) ? $row[$key] : ($ok = '-');
+			foreach(split(',', $sql_select) as $key) {
+				$$key = trim($row[$key]);
 			}
-			if($ok===true) {
-				// lire la config du plugin
-				//include_spip('inc/utils');
-				include_spip('inc/plugin_globales_lib');
-				$config = __plugin_lire_key_in_serialized_meta('config', _LILO_META_PREFERENCES);
-				if(isset($config['lilo_login_voir_logo']) && ($config['lilo_login_voir_logo']=='oui')) {
-					$chercher_logo = charger_fonction('chercher_logo', 'inc');
-					list($logo_src) = $chercher_logo($id_auteur, 'id_auteur', 'on');
-					if (!$logo_src || (empty($logo_src))) {
-						$logo_src = $logo_silouhette;
-					}
+
+			// lire la config du plugin
+			//include_spip('inc/utils');
+			include_spip('inc/plugin_globales_lib');
+			$config = __plugin_lire_key_in_serialized_meta('config', _LILO_META_PREFERENCES);
+
+			if(isset($config['lilo_login_voir_logo']) && ($config['lilo_login_voir_logo']=='oui')) {
+				$chercher_logo = charger_fonction('chercher_logo', 'inc');
+				list($logo_src) = $chercher_logo($id_auteur, 'id_auteur', 'on');
+				if (!$logo_src || (empty($logo_src))) {
+					$logo_src = $logo_silouhette;
 				}
-			}
-			else {
-				// si !$ok, il manque un data. Renvoie quand même ce qui existe (?)
-				$logo_src = $logo_silouhette;
 			}
 		}
 		else {
-			// inconnu ? logo anonyme
-			$logo_src = $logo_silouhette;
-			foreach(split(',',$sql_select) as $key) {
-				$$key = "-";
+			// inconnu ? 
+			foreach(split(',', $sql_select) as $key) {
+				$$key = "";
 			}
 		}
+		
 		// preparer le resultat à renvoyer
 		$result = "";
 		$sql_select .= ",logo_src";
-		foreach(split(',',$sql_select) as $key) {
-			$result .= $$key." ";
+		foreach(split(',', $sql_select) as $key) {
+			$result .= $$key . _LILO_AJAX_RESULT_SEPARATOR;
 		}
-		echo(trim($result));
+		//spip_log("action result: $result", 'lilo');
+		
+		echo($result);
 		return (true);
 	}
 	return (false);
