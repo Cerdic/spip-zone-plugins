@@ -12,6 +12,7 @@ include_spip('base/abstract_sql');
 include_spip('inc/spiplistes_api_globales');
 include_spip('inc/spiplistes_api');
 
+
 // Balise independante du contexte
 
 
@@ -176,12 +177,11 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn() << ", SPIPLISTES_LOG_DEBUG);
 // Dans ces deux cas, renvoie un mail de confirmation.
 function formulaire_inscription($mail_inscription_, $type, $acces_membres, $formulaire) {
 	
-	global
-		 $nom_inscription_
-		, $list
-		, $liste
-		, $id_fond //fond name of the form posting values
-		;
+	
+		 $nom_inscription_ = _request('nom_inscription_');
+		 $list = _request('list');
+		 $liste = _request('liste');
+		 $id_fond = _request('id_fond'); //fond name of the form posting values
 	
 
 	if ($type == 'redac') {
@@ -223,6 +223,8 @@ spiplistes_log("### : ->".$mail_inscription_, SPIPLISTES_LOG_DEBUG);
 	
 		//echo "<div class='reponse_formulaire'>";
 	
+
+	
 		// l'abonne existe deja.
 		if ($row = spip_fetch_array($result)) {
 			$id_auteur = $row['id_auteur'];
@@ -259,7 +261,7 @@ spiplistes_log("### : ->".$mail_inscription_, SPIPLISTES_LOG_DEBUG);
 			
 		// envoyer identifiants par mail
 		if ($continue) {
-				
+
 		//ajouter un code pour retrouver l'abonne
 		
 		$pass = creer_pass_aleatoire(8, $mail_inscription_);
@@ -269,12 +271,12 @@ spiplistes_log("### : ->".$mail_inscription_, SPIPLISTES_LOG_DEBUG);
 		
 		$cookie = creer_uniqid();
 					
-		$type_abo = $GLOBALS['suppl_abo'] ;
+		$type_abo = _request('suppl_abo') ;
 		//verify suppl_abo is correct
 		if($desabo!="oui" && $type_abo!="texte" && $type_abo!="html") return;
 		
 		// inscription d'un abonné
-		if(!empty($login)) {
+		if(!empty($login_)) {
 			$sql_result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login=$login LIMIT 1");
 			if(spip_num_rows($sql_result)) {
 				while($row = spip_fetch_array($sql_result)) {
@@ -300,7 +302,7 @@ spiplistes_log("insert inscription : ->".$mail_inscription_, SPIPLISTES_LOG_DEBU
 		 if ($row = spip_fetch_array($result)) {
 		 $id_auteur = $row['id_auteur'];
 		 $statut = $row['statut'];
-	
+			
 			// on abonne l'auteur aux listes
 			if(is_array($list)){
 				while( list(,$val) = each($list) ){
