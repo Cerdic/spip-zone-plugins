@@ -1,16 +1,21 @@
 <?php
 
+//intégration des fonctions necessaires de SPIP 1.9.3
+if($GLOBALS['spip_version'] < 1.93)
+	include_spip('193_fonctions');
+
 function balise_NUAGE_dist($p) {
   $filtre = chercher_filtre('nuage');
 	$p->interdire_scripts = false;
 	if(function_exists('balise_ENV'))
-		return balise_ENV($p, $filtre.'(0, "", "", -1, $Pile["vars"]["expose"])');
+		return balise_ENV($p, $filtre.'(0, "", "", -1, $Pile["0"]["expose"])');
 	else
-		return balise_ENV_dist($p, $filtre.'(0, "", "", -1, $Pile["vars"]["expose"])');
+		return balise_ENV_dist($p, $filtre.'(0, "", "", -1, $Pile["0"]["expose"])');
 	return $p;
 }
 
 function filtre_calculer_nuage_dist($titres, $urls, $poids, $expose) {
+  $filtre_find = chercher_filtre('find');
   $resultat = array();
   $max = empty($poids)?0:max($poids);
   if($max>0) {
@@ -23,7 +28,7 @@ function filtre_calculer_nuage_dist($titres, $urls, $poids, $expose) {
           'url'   => $urls[$id],
           'poids' => $poids[$id].'/'.$max,
           'class' => $s,
-          'expose' => filtre_find($expose, $id)
+          'expose' => $filtre_find($expose, $id)
         );
       }
     }
@@ -47,23 +52,5 @@ function filtre_nuage_dist($id_mot, $titre = '', $url = '', $poids = -1, $expose
 	}
 	return !empty($retour) ? $retour : '';
 }
-
-//compat SPIP 1.9.2
-if(!function_exists('push')) {
-	function push($array, $val) {
-		if($array == '' OR !array_push($array, $val)) return '';
-		return $array;
-	}
-}
-
-if(!function_exists('find')) {
-	function find($array, $val) {
-		return ($array != '' AND in_array($val, $array));
-	}
-}
-
-//la gestion du critere {frequence}
-include_spip('frequence_fonctions');
-
 
 ?>
