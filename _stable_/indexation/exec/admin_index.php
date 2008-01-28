@@ -39,7 +39,10 @@ function exec_admin_index_dist()
 	if (isset($GLOBALS['meta']['INDEX_elements_objet']))
 		$INDEX_elements_objet = unserialize($GLOBALS['meta']['INDEX_elements_objet']);
 	
-	debut_page(_T('rechercheetendue:moteur_recherche'), "administration", "cache");
+	
+	 $commencer_page = charger_fonction('commencer_page', 'inc');
+	 echo $commencer_page(_T('rechercheetendue:moteur_recherche'),  "administration", "cache");
+
 	
 	debut_gauche();
 	
@@ -47,7 +50,7 @@ function exec_admin_index_dist()
 	echo propre(_T('rechercheetendue:info_admin_index'));
 	fin_boite_info();
 	
-	debut_raccourcis();
+	//debut_raccourcis();
 #	echo "<p>";
 #	icone_horizontale (_T('rechercheetendue:vocabulaire_indexe'),  generer_url_ecrire("index_tous"), "../"._DIR_PLUGIN_INDEXATION."/img_pack/stock_book-alt.gif");
 #	echo "</p>";
@@ -59,7 +62,7 @@ function exec_admin_index_dist()
 	icone_horizontale (_T('rechercheetendue:indexation_resetter'), generer_url_ecrire("admin_index", "resetmeta=oui"), "effacer-cache-24.gif");
 	echo "</div>";
 	
-	fin_raccourcis();
+	//fin_raccourcis();
 
 
 	debut_droite();
