@@ -3,7 +3,7 @@
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 <title>THELIA-RUBRIQUE_NOM - [(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<meta name="description" content="THELIA-STRIPDESCRIPTION" />
 <INCLURE{fond=inc-head}>
 [(#REM) Lien vers le flux RSS de la rubrique ]
 <link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend,id_rubrique_thelia=THELIA-RUBRIQUE_ID})]" />
@@ -16,7 +16,12 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane> &gt; THELIA-RUBRIQUE_NOM</div>
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><THELIA_chemrub type="CHEMIN" rubrique="THELIA-RUBRIQUE_ID">
+			<THELIA_rubdetchem type="RUBRIQUE" id="THELIA-ID">
+			&gt; <a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-ID}" class="LIEN_chemin">THELIA-TITRE</a> 
+			</THELIA_rubdetchem>
+			</THELIA_chemrub>
+			 &gt; THELIA-RUBRIQUE_NOM</div>
 
 	<div id="conteneur">
 

@@ -1,12 +1,11 @@
 #CACHE{7200}
+<THELIA_PROD type="PRODUIT" ref="THELIA-PRODUIT_REF"> 
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
-<title><THELIA_PRODtitre type="PRODUIT" ref="THELIA-PRODUIT_REF">THELIA-TITRE</THELIA_PRODtitre> - [(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<title>THELIA-TITRE - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="THELIA-STRIPDESCRIPTION" />
 <INCLURE{fond=inc-head}>
-[(#REM) Lien vers le flux RSS de la rubrique ]
-<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
 </head>
 
 <body class="page_rubrique">
@@ -16,23 +15,27 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><THELIA_chemrub type="CHEMIN" rubrique="THELIA-RUBRIQUE_ID">
+			<THELIA_rubdetchem type="RUBRIQUE" id="THELIA-ID">
+			&gt; <a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-ID}" class="LIEN_chemin">THELIA-TITRE</a> 
+			</THELIA_rubdetchem>
+			</THELIA_chemrub> &gt; <a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-RUBRIQUE_ID}">THELIA-RUBRIQUE_NOM</a> &gt; THELIA-TITRE</div>
 
 	<div id="conteneur">
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
 		<div id="contenu">
 
-			<THELIA_PROD type="PRODUIT" ref="THELIA-PRODUIT_REF"> 
 			
-<!-- Titre du produit -->
+			
+				[(#REM) Titre du produit ]
 
 				<div class="titrePage">
 				<h2>THELIA-TITRE</h2>
 				</div>
 
 			
-<!-- Détail du produit -->
+				[(#REM) Détail du produit ]
 
 				<div>
 				<THELIA_img type="IMAGE" num="1" produit="THELIA-ID" largeur="300">
@@ -52,9 +55,9 @@
 				 	<a href="#URL_PAGE{panier,thelia_action=ajouter&amp;ref=THELIA-REF}" class="LIEN_commander">Ajouter</a>
 					</div> 
 				</div>
-			</THELIA_PROD>
+			
 							
-<!-- Retour à la page précédente -->	
+			[(#REM) Retour à la page précédente ]	
 
 				<div id="pages">
 				<THELIA_PAGEPREC type="PAGE" rubrique="THELIA-RUBRIQUE_ID" caracteristique="THELIA-CARACTERISTIQUE_ID" caracdisp="THELIA-CARACTERISTIQUE_DISP" num="9" typeaff="0">
@@ -62,13 +65,13 @@
 				</THELIA_PAGEPREC>
 				</div>
 
-		</div><!-- fin contenu -->
+		</div>[(#REM) fin contenu ]
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
 
 			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}{id_rubrique}>
+			<INCLURE{fond=inc-rubriques}{id_rubrique_thelia=THELIA-RUBRIQUE_ID}>
 
 			[(#REM) Menu de navigation mots-cles ]
 			<B_mots>
@@ -89,6 +92,7 @@
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div>[(#REM) fin page ]
 </body>
 </html>
+</THELIA_PROD>
