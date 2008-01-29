@@ -9,8 +9,6 @@ function spip_thelia_appeler_moteur_thelia($texte)
 		return $texte;	
 	}
 	
-	//problème à investiguer avec les pages forums
-	if ($_REQUEST['page'] == "forum") return $texte;	
 	
 	//parsonnalisation des variables thélia
 	switch($_REQUEST['page']){
