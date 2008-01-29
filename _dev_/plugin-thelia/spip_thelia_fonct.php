@@ -4,6 +4,11 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	//ne pas appeler thelia dans l'espace privé
 	if ($_REQUEST['exec']!="") return $texte;
 
+	if (!file_exists("fonctions")) {
+		echo ("erreur : th&eacute;lia introuvable, v&eacute;rifiez que les sous-r&eacute;pertoires de th&eacute;lia et spip sont dans le m&ecirc;me r&eacute;pertoire.");
+		return $texte;	
+	}
+	
 	//problème à investiguer avec les pages forums
 	if ($_REQUEST['page'] == "forum") return $texte;	
 	
@@ -52,13 +57,14 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	$res = str_replace("THELIA-", "#", $res);
 
 	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
-	ob_start("remplacement_sortie_thelia");
+	ob_start();
 	include_once(_DIR_PLUGINS."plugin-thelia/moteur-thelia-1_3_3.php");
 
-	$texte = ob_end_flush();
-	
+	$texte = ob_get_contents();
+	ob_end_clean();
+	$texte = remplacement_sortie_thelia($texte);
 
-	return "";	
+	return $texte;	
 	
 }
 
