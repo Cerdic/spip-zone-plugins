@@ -70,6 +70,8 @@ function exec_echoppe_produit(){
 	
 	$raccourcis .= icone_horizontale(_T('echoppe:retour_a_la_categorie'), generer_url_ecrire("echoppe_categorie","id_categorie=".$contexte['id_categorie']), _DIR_PLUGIN_ECHOPPE."images/categorie-24.png","", false);
 	$raccourcis .= '<hr />';
+	$raccourcis .= icone_horizontale(_T('echoppe:gerer_les_depots'), generer_url_ecrire("echoppe_gerer_depots",""), _DIR_PLUGIN_ECHOPPE."images/go-home.png","", false);
+	$raccourcis .= "<hr />";
 	$raccourcis .= icone_horizontale(_T('echoppe:gerer_echoppe'), generer_url_ecrire("echoppe",""), _DIR_PLUGIN_ECHOPPE."images/echoppe_blk_24.png","", false);
 	echo bloc_des_raccourcis($raccourcis);
 	

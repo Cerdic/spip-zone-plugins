@@ -1,0 +1,12 @@
+<h1><:echoppe:les_depots:></h1>
+<B_LesDepots>
+<ul>
+<BOUCLE_LesDepots(SPIP_ECHOPPE_DEPOTS){par titre}>
+<li><a href="[(#EVAL{'echoppe_depot'}|generer_url_ecrire{id_depot=#ID_DEPOT})]">#TITRE</a></li>
+</BOUCLE_LesDepots>
+</ul>
+</B_LesDepots>
+<:echoppe:pas_encore_de_depots:>
+<//B_LesDepots>
+<br />
+	<a href="[(#EVAL{echoppe_depot}|generer_url_ecrire{new=oui})]" ><img src="#CHEMIN{'images/list-add.png'}" alt="<:echoppe:ajouter_un_depot:>" /><:echoppe:ajouter_un_depot:></a>

@@ -1,5 +1,26 @@
-[<h1><:echoppe:edition_de:>(#TITRE|sinon{<:echoppe:pas_de_titre:>})</h1>]
-<input type="text" name ="titre" value="#TITRE" />
-[(#DESCRIPTION**|barre_textarea{20,40,#LANG})]
-<br />
-
+<form action="[(#EVAL{echoppe_sauver_depot}|generer_url_action)]" method="post" >
+	<input type="hidden" name="new" value="#NEW" />
+	<input type="hidden" name="id_depot" value="#ID_DEPOT" />
+	[<h1>(#NEW|=={"oui"}|?{<:echoppe:nouveau_depot:>,<:echoppe:edition_de:>&nbsp;[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]})</h1>]
+	<input type="text" name ="titre" class="forml" value="#TITRE" /><br /><br />
+	<strong><:echoppe:description_du_depot:></strong><br />
+	[(#DESCRIPTIF**|barre_textarea{10,20,#LANG})]
+	<br />
+	<strong><:echoppe:adresse_du_depot:></strong><br />
+	<input type="text" name="adresse[adresse]" class="forml" value="#ADRESSE" /><br />
+	<strong><:echoppe:numero_du_depot:></strong><br />
+	<input type="text" name="adresse[num]" class="forml" value="#NUM" /><br />
+	<strong><:echoppe:code_postal_du_depot:></strong><br />
+	<input type="text" name="adresse[codepostal]" class="forml" value="#CODEPOSTAL" /><br />
+	<strong><:echoppe:ville_du_depot:></strong><br />
+	<input type="text" name="adresse[ville]" class="forml" value="#VILLE" /><br />
+	<strong><:echoppe:pays_du_depot:></strong><br />
+	<input type="text" name="adresse[pays]" class="forml" value="#PAYS" /><br />
+	<strong><:echoppe:telephone_du_depot:></strong><br />
+	<input type="text" name="adresse[telephone]" class="forml" value="#TELEPHONE" /><br />
+	<strong><:echoppe:fax_du_depot:></strong><br />
+	<input type="text" name="adresse[fax]" class="forml" value="#FAX" /><br />
+	<strong><:echoppe:email_du_depot:></strong><br />
+	<input type="text" name="adresse[email]" class="forml" value="#EMAIL" /><br />
+	<input type="submit" value="<:echoppe:enregistrer:>" class="fondo" />
+</form>

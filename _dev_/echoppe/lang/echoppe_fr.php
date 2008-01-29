@@ -13,7 +13,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'acces_non_autorise'=>'D&eacute;sol&eacute,<br />vous n\'avez pas le droit d\'acc&eacute;der &aacute; cette partie.',
+'adresse_du_depot' => 'Adresse du d&eacute;p&ocirc;t',
 'ajouter' => 'Ajouter',
+'ajouter_un_depot' => 'Ajouter un d&eacute;p&ocirc;t',
 'ajouter_une_option' => 'Ajouter une option',
 
 // C
@@ -23,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'creer_nouvelle_categorie' => 'Cr&eacute;er une cat&eacute;gorie',
 'creer_nouvelle_sous_categorie' => 'Cr&eacute;er une sous-cat&eacute;gorie',
 'creer_un_ref_automatiquement' => 'En cr&eacute;er un automatiquement',
+'code_postal_du_depot' => 'Code postal',
 'colisage' => 'Frais de colisage',
 
 // D
@@ -31,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_de_retrait_de_vente' => 'Date de retrait de la vente',
 'descriptif'=>'Descriptif :',
 'descriptif_echoppe' => 'Echoppe est un plugin de gestion de boutique en ligne. Il tente d\' &ecirc;tre le plus g&eacute;n&eacute;raliste possible.',
+'description_du_depot' => 'Description',
 'derniere_modification' => 'Derni&egrave;re modification',
 
 // E
@@ -43,16 +47,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //'edition_langue' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
 'edition_de_produit' => '&Eacute;dition d\'un produit',
 'edition_donnees_globales' => '&Eacute;dition des donn&eacute;es globales',
+'etat_des_stocks' => '&Eacute;tat des stocks',
 'etat_du_produit' => '&Eacute;tat du produit',
 'euro' => '&euro;',
 
 // G
 'gerer_echoppe' => 'G&eacute;rer Echoppe',
+'gerer_les_depots' => 'G&eacute;rer les d&eacute;p&ocirc;ts',
 'gramme_racourcci' => 'gr.',
+
+
 // E
 'edition_de' => '&Eacute;dition de',
+'email_du_depot' => 'E-Mail',
 
 // F
+'fax_du_depot' => 'Fax',
 'fichier_introuvable' => 'Le fichier est introuvable',
 'fichier_pas_une_image' => 'Le fichier n\'est pas une image',
 
@@ -67,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'langue_editee' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
 'largeur' => 'Largeur',
 'les_categories' => 'Les cat&eacute;gories',
+'les_depots' => 'Les d&eacute;p&ocirc;ts',
 'les_options_du_produit' => 'Les options de ce produit',
 'les_produits' => 'Les produits',
 'les_produits_de_cette_categories' => 'Les produits de cette cat&eacute;gorie',
@@ -79,8 +90,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // N
 'nom_de_la_nouvelle_option' => 'Nom de la nouvelle option',
+'nouveau_depot' => 'Nouveau d&eacute;p&ocirc;t',
 'nouveau_produit' => 'Cr&eacute;er un produit',
 'nouvelle_categorie' => 'Nouvelle cat&eacute;gorie',
+'numero_du_depot' => 'Num&eacute;ro',
 
 // P
 'pas_d_options_pour_le_produit' => 'Pas d\'option pour ce produit',
@@ -91,8 +104,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pas_de_produit_ici' => 'Pas de produits &agrave; cette adresse.',
 'pas_de_titre' => 'Pas de titre',
 'pas_encore_de_categorie' => 'Pas encore de cat&eacute;gorie',
+'pas_encore_de_depots' => 'Il n\'y a pas encore de d&eacute;p&ocirc;t',
 'pas_encore_cree' => 'N\'existe pas encore.',
 'pas_encore_modifie' => 'Jamais modifi&eacute;',
+'pays_du_depot' => 'Pays',
 'prepa' => 'en pr&eacute;paration',
 'prix_base' => 'Prix de base HTVA',
 'propose' => 'propos&eacute;',
@@ -110,9 +125,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_a_la_categorie' => 'Retour &agrave; la cat&eacute;gorie',
 'retour_au_produit' => 'Retour au produit',
 
+// S
+'stock_dans_le_depot' => 'Stock dans le d&eacute;p&ocirc;t',
+'stock_total' => 'Stock TOTAL',
+
 // T
 'texte'=>'Texte :',
 'telecharger_un_nouveau_logo' => 'T&eacute;l&eacute;charger un nouveau logo',
+'telephone_du_depot' => 'T&eacute;l&eacute;phone',
 'titre_categorie' => 'Titre de la cat&eacute;gorie :',
 'titre_ou_texte_de_l_option' => 'Titre/Texte de l\'option',
 'information_de_l_option' => 'informations dur l\'option',
@@ -123,6 +143,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'unites' => 'Unit&eacute;(s)',
 
 // V
+'ville_du_depot' => 'Ville',
 'visualisation_d_un_depot' => 'Visualisation d\'un d&eacute;p&ocirc;t',
 'visualisation_d_un_produit' => 'Visualisation de',
 

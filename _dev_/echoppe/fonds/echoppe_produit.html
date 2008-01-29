@@ -1,58 +1,72 @@
 <h1>[<img src="(#CHEMIN{'images/produit-24.png'})" />]&nbsp;[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</h1>
 <div class="cadre-formulaire">
-<form [action="(#ACTION|generer_url_action{id_produit=#ID_PRODUIT&id_categorie=#ID_CATEGORIE&lang_produit=#LANG_PRODUIT&new=#NEW})"] method="post" >
-	<div class="echoppe_edit_produit">
-		[<input type="hidden" name="new" value="(#NEW)" />]
-		<h3><:echoppe:edition_donnees_globales:></h3>
-		
-		<div style="float: left;" >
-			<b><:echoppe:date_de_mise_en_vente:></b><br />
-			[(#DATE_DEBUT|affdate)]<br />
-			<input type="text" size="1" class="formo" maxlength="2" name="jour_date_en_ligne" value="[(#DATE_DEBUT|affdate{'d'})]" /> / 
-			<input type="text" size="1" class="formo" maxlength="2" name="mois_date_en_ligne" value="[(#DATE_DEBUT|affdate{'m'})]"> / 
-			<input type="text" size="5" class="formo" maxlength="4" name="annee_date_en_ligne" value="[(#DATE_DEBUT|affdate{'Y'})]" />
-		</div>
-		<div style="float: right;" >
-			<b><:echoppe:date_de_retrait_de_vente:></b><br />
-			[(#DATE_FIN|affdate)]<br />
-			<input type="text" size="1" class="formo" maxlength="2" name="jour_date_retrait_ligne" value="[(#DATE_FIN|affdate{'d'})]"/> / 
-			<input type="text" size="1" class="formo" maxlength="2" name="mois_date_retrait_ligne" value="[(#DATE_FIN|affdate{'m'})]" /> / 
-			<input type="text" size="5" class="formo" maxlength="4" name="annee_date_retrait_ligne" value="[(#DATE_FIN|affdate{'Y'})]" />
-		</div>
-		<div style="clear: both;"> </div>
-		
-		<br />
-		<div style="display: table;width: 100%; ">
-			<div style="display: table-row;" >
-				<div style="display: table-cell;"><b><:echoppe:poids:></b></div><div style="display: table-cell;"><b><:echoppe:hauteur:></b></div><div style="display: table-cell;"><b><:echoppe:largeur:></b></div><div style="display: table-cell;"><b><:echoppe:longeur:></b></div>
-			</div>
-			<div style="display: table-row; " >
-				<div style="display: table-cell;"><input type="text" class="formo" name="poids" size="4" value="#POIDS" /><:echoppe:gramme_racourcci:><br /></div>
-				<div style="display: table-cell;"><input type="text" class="formo" name="hauteur" size="4" value="#HAUTEUR" /><:echoppe:centimetre_racourcci:><br /></div>
-				<div style="display: table-cell;"><input type="text" class="formo" name="largeur" size="4" value="#LARGEUR" /><:echoppe:centimetre_racourcci:><br /></div>
-				<div style="display: table-cell;"><input type="text" class="formo" name="longueur" size="4" value="#LONGUEUR" /><:echoppe:centimetre_racourcci:><br /></div>
-			</div>
-		</div>
-		<br />
-		<div>
-			<b><:echoppe:colisage:> (<:echoppe:euro:>)</b>&nbsp;<input class="forml" type="text" name="colisage" value="#COLISAGE" /><br /><br />
-			<b><:echoppe:prix_base:> (<:echoppe:euro:>)</b>&nbsp;<input class="forml" type="text" name="prix_base_htva" value="#PRIX_BASE_HTVA" />&nbsp;#DEVISE<br /><br />
-			<b><:echoppe:reference_interne:></b>&nbsp;<input class="forml" type="text" name="ref_produit" value="#REF_PRODUIT" /><!-- <input type="checkbox" name="ref_produit_auto" checked=true /><:echoppe:creer_un_ref_automatiquement:> -->
-		</div>
-		<br />
-		<div>
-			<strong><:echoppe:dans_la_categorie:></strong>
-			[(#SET{'current_id',#ID_CATEGORIE})]
+	<form [action="(#ACTION|generer_url_action{id_produit=#ID_PRODUIT&id_categorie=#ID_CATEGORIE&lang_produit=#LANG_PRODUIT&new=#NEW})"] method="post" >
+		<div class="echoppe_edit_produit">
+			[<input type="hidden" name="new" value="(#NEW)" />]
+			<h3><:echoppe:edition_donnees_globales:></h3>
 			
-			<select name="id_new_categorie">
-				<BOUCLE_LesCategorie(SPIP_ECHOPPE_CATEGORIES)>
-				<option value="#ID_CATEGORIE" [(#ID_CATEGORIE|=={#GET{'current_id'}}|?{'selected',''})]><BOUCLE_LeTitre(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS){id_categorie = #ID_CATEGORIE}>#ID_CATEGORIE [(#TITRE|couper{80})]</BOUCLE_LeTitre></option>
-				</BOUCLE_LesCategorie>
-			</select>
+			<div style="float: left;" >
+				<b><:echoppe:date_de_mise_en_vente:></b><br />
+				[(#DATE_DEBUT|affdate)]<br />
+				<input type="text" size="1" class="formo" maxlength="2" name="jour_date_en_ligne" value="[(#DATE_DEBUT|affdate{'d'})]" /> / 
+				<input type="text" size="1" class="formo" maxlength="2" name="mois_date_en_ligne" value="[(#DATE_DEBUT|affdate{'m'})]"> / 
+				<input type="text" size="5" class="formo" maxlength="4" name="annee_date_en_ligne" value="[(#DATE_DEBUT|affdate{'Y'})]" />
+			</div>
+			<div style="float: right;" >
+				<b><:echoppe:date_de_retrait_de_vente:></b><br />
+				[(#DATE_FIN|affdate)]<br />
+				<input type="text" size="1" class="formo" maxlength="2" name="jour_date_retrait_ligne" value="[(#DATE_FIN|affdate{'d'})]"/> / 
+				<input type="text" size="1" class="formo" maxlength="2" name="mois_date_retrait_ligne" value="[(#DATE_FIN|affdate{'m'})]" /> / 
+				<input type="text" size="5" class="formo" maxlength="4" name="annee_date_retrait_ligne" value="[(#DATE_FIN|affdate{'Y'})]" />
+			</div>
+			<div style="clear: both;"> </div>
+			
+			<br />
+			<div style="display: table;width: 100%; ">
+				<div style="display: table-row;" >
+					<div style="display: table-cell;"><b><:echoppe:poids:></b></div><div style="display: table-cell;"><b><:echoppe:hauteur:></b></div><div style="display: table-cell;"><b><:echoppe:largeur:></b></div><div style="display: table-cell;"><b><:echoppe:longeur:></b></div>
+				</div>
+				<div style="display: table-row; " >
+					<div style="display: table-cell;"><input type="text" class="formo" name="poids" size="4" value="#POIDS" /><:echoppe:gramme_racourcci:><br /></div>
+					<div style="display: table-cell;"><input type="text" class="formo" name="hauteur" size="4" value="#HAUTEUR" /><:echoppe:centimetre_racourcci:><br /></div>
+					<div style="display: table-cell;"><input type="text" class="formo" name="largeur" size="4" value="#LARGEUR" /><:echoppe:centimetre_racourcci:><br /></div>
+					<div style="display: table-cell;"><input type="text" class="formo" name="longueur" size="4" value="#LONGUEUR" /><:echoppe:centimetre_racourcci:><br /></div>
+				</div>
+			</div>
+			<br />
+			<div>
+				<b><:echoppe:colisage:> (<:echoppe:euro:>)</b>&nbsp;<input class="forml" type="text" name="colisage" value="#COLISAGE" /><br /><br />
+				<b><:echoppe:prix_base:> (<:echoppe:euro:>)</b>&nbsp;<input class="forml" type="text" name="prix_base_htva" value="#PRIX_BASE_HTVA" />&nbsp;#DEVISE<br /><br />
+				<b><:echoppe:reference_interne:></b>&nbsp;<input class="forml" type="text" name="ref_produit" value="#REF_PRODUIT" /><!-- <input type="checkbox" name="ref_produit_auto" checked=true /><:echoppe:creer_un_ref_automatiquement:> -->
+			</div>
+			<br />
+			<div>
+				<strong><:echoppe:dans_la_categorie:></strong>
+				[(#SET{'current_id',#ID_CATEGORIE})]
+				
+				<select name="id_new_categorie">
+					<BOUCLE_LesCategorie(SPIP_ECHOPPE_CATEGORIES)>
+					<option value="#ID_CATEGORIE" [(#ID_CATEGORIE|=={#GET{'current_id'}}|?{'selected',''})]><BOUCLE_LeTitre(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS){id_categorie = #ID_CATEGORIE}>#ID_CATEGORIE [(#TITRE|couper{80})]</BOUCLE_LeTitre></option>
+					</BOUCLE_LesCategorie>
+				</select>
+			</div>
+			<br />
+			<input type="submit" class="fondo" value="<:echoppe:mettre_a_jour:>" />
 		</div>
-		<br />
-		<input type="submit" class="fondo" value="<:echoppe:mettre_a_jour:>" />
-	</div>
-</form>
+	</form>
 </div>
-
+<br />
+<div class="cadre-formulaire">
+	<h3><:echoppe:etat_des_stocks:></h3>
+	<strong><:echoppe:stock_total:>&nbsp;:&nbsp;<?php $grand_total = 0;  ?><BOUCLE_LeTotal(SPIP_ECHOPPE_STOCK_PRODUITS){id_produit}><?php $grand_total = $grand_total + $grand_total;  ?></BOUCLE_LeTotal><?php echo $grand_total;  ?></strong><br />
+	<:echoppe:stock_dans_le_depot:>
+	<B_LesDepots>
+		<select name="id_depot">
+	<BOUCLE_LesDepots(SPIP_ECHOPPE_DEPOTS)>
+		<option value="#ID_DEPOT">#TITRE</option>
+	</BOUCLE_LesDepots>
+		</select>&nbsp;
+	</B_LesDepots>
+	<input type="text" name="modif_stock" size="2" value="1" />&nbsp;<input type="submit" name="plus" value="+" />&nbsp;<input type="submit" name="plus" value="-" />
+	
+</div>
