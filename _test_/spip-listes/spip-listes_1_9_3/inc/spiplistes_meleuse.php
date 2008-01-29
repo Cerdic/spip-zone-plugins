@@ -317,8 +317,8 @@ spiplistes_log("MEL: spiplistes_meleuse()", SPIPLISTES_LOG_DEBUG);
 								$email_a_envoyer[$format_abo]->Body = $body;
 								$email_a_envoyer[$format_abo]->SetAddress($email, $nom_auteur);
 								
-								// envoie le mail
-								if($opt_simuler_envoi ? true : $email_a_envoyer[$format_abo]->send()) {
+								// envoie le mail																
+								if(($opt_simuler_envoi == "oui") ? true : $email_a_envoyer[$format_abo]->send()) {
 									spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur=$id_auteur AND id_courrier=$id_courrier");				
 									$str_temp .= "  [OK]";
 									$nb_emails_envoyes++;
