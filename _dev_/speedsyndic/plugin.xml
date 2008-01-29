@@ -1,0 +1,24 @@
+<plugin>
+       <nom>
+         speedsyndic
+       </nom>
+       <auteur>
+       	Piffeo et Bill
+       </auteur>
+    <version>
+        0.1
+    </version>
+    <etat>
+        stable
+    </etat>
+    <description>
+	Ce plugin permet d'avoir une syndication automatique en temps r&#233;el de certains sites syndiqu&#233;s choisis.
+    </description>
+       <prefix>
+        speedsyndic
+       </prefix>
+       <pipeline>
+               <nom>taches_generales_cron</nom>
+               <inclure>inc/speedsyndic.php</inclure>
+       </pipeline>
+</plugin>
