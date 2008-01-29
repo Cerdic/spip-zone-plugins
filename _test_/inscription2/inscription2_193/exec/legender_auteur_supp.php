@@ -36,6 +36,6 @@ function exec_legender_auteur_supp_dist()
 	
 
 	$legender_auteur_supp = charger_fonction('legender_auteur_supp', 'inc');
-	$fiche = $legender_auteur_supp($id_auteur, $auteur, $initial, $echec, $retour));
+	$fiche = $legender_auteur_supp($id_auteur, $auteur, $initial, $echec, $retour);
 }
 ?>
