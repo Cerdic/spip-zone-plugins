@@ -22,13 +22,13 @@
 		[(#REM) Contenu principal : contenu de la rubrique ]
 		<div id="contenu">
 			
-<!-- Titre de la rubrique -->
+				[(#REM) Titre de la rubrique ]
 
 				<div class="titrePage">
 				<h2>Je choisis un mode de r&egrave;glement : par ch&egrave;que </h2>
 				</div>
 				
-<!-- contenu de la page -->
+			[(#REM) contenu de la page ]
 	
 			Nous vous remercions de la confiance que vous nous accordez.<br />
 			Un email recapitulatif de votre commande vous a &eacute;t&eacute; envoy&eacute; &agrave; l'adresse: THELIA-CLIENT_EMAIL.<br />
@@ -44,7 +44,7 @@
 			TOTAL : THELIA-TOTCMDPORT &euro;<br />	
 			</THELIA_cmd>
 		
-		</div><!-- fin contenu -->
+		</div>[(#REM) fin contenu ]
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
@@ -55,11 +55,11 @@
 
 		</div><!-- fin navigation -->
 
-	</div><!-- fin conteneur -->
+	</div>[(#REM) fin conteneur ]
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div>[(#REM) fin page ]
 </body>
 </html>

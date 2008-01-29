@@ -22,7 +22,7 @@
 		<div id="contenu">
 		
 			
-<!-- Titre de la rubrique -->
+			[(#REM) Titre de la rubrique ]
 				
 				<THELIA_cmd type="COMMANDE" ref="THELIA-COMMANDE_REF" client="THELIA-CLIENT_ID">
 				
@@ -30,7 +30,7 @@
 				<h2>D&eacute;tail de la commande N&deg;THELIA-REF </h2>
 				</div>
 			
-<!-- Détail de la commande -->
+				[(#REM) Détail de la commande ]
 
 				<THELIA_verifpay type="COMMANDE" ref="THELIA-COMMANDE_REF" statut="paye">					
 				<div class="sousTitrePage">
@@ -98,7 +98,7 @@
 
 
 
-		</div> <!--fin contenu-->
+		</div> [(#REM) fin contenu ]
 
 
 		[(#REM) Menu de navigation laterale ]
@@ -115,7 +115,7 @@
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div>[(#REM) fin page ]
 </body>
 </html>
 

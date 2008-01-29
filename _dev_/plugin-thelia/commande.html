@@ -22,13 +22,13 @@
 		<div id="contenu">
 		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; R&eacute;capitulatif de ma commande</div>
 			
-<!-- Titre de la rubrique -->
+			[(#REM) Titre de la rubrique ]
 
 				<div class="titrePage">
 				<h2>R&eacute;capitulatif de ma commande </h2>
 				</div>
 
-<!-- Contenu de la page -->
+			[(#REM) Contenu de la page ]
 	
 			<form action="#URL_PAGE{commande}" id="formulaire" method="post">
 			<input type="hidden" name="thelia_action" value="codepromo" />
@@ -84,7 +84,7 @@
 				<h2>Je choisis un mode de paiement </h2>
 			</div>
 
-		<!-- contenu de la page -->
+		[(#REM) contenu de la page ]
 		<table width="675" border="0" cellspacing="0" cellpadding="5">
 		
 		   <THELIA_PAIEMENT type="PAIEMENT">
@@ -98,7 +98,7 @@
 		</table>
 			
 		
-		</div><!-- fin contenu -->
+		</div>[(#REM) fin contenu ]
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
@@ -114,6 +114,6 @@
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div>[(#REM) fin page ]
 </body>
 </html>

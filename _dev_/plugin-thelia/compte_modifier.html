@@ -24,19 +24,19 @@
 				
 
 			
-<!-- Titre de la page -->
+				[(#REM) Titre de la page ]
 
 				<div class="titrePage">
 				<h2>Mon compte : modifier mes informations </h2>
 				</div>
 				
-<!-- contenu de la page -->
+				[(#REM) contenu de la page ]
 
 				<div class="sousTitrePage">
 				<h3>Modifier mon mot de passe </h3>
 				</div>
 				
-<!-- formulaire "Mot de passe" -->
+				[(#REM) formulaire "Mot de passe" ]
 
 				<form action="#URL_PAGE{moncompte}" method="post" name="modifier1" id="modifier1">
 				<input type="hidden" name="thelia_action" value="modifiercompte" />
@@ -64,7 +64,7 @@
 				</div>
 
 			
-<!-- formulaire "Modifier mes coordonnées" -->
+				[(#REM) formulaire "Modifier mes coordonnées" ]
 	
 				<form action="#URL_PAGE{compte_modifier}" method="post" name="modifier2" id="modifier2">
 				<input type="hidden" name="thelia_action" value="modifiercompte" /> 
@@ -152,13 +152,13 @@
 			<INCLURE{fond=inc-rubriques}>
 
 
-		</div><!-- fin navigation -->
+		</div>[(#REM) fin navigation ]
 
-	</div><!-- fin conteneur -->
+	</div>[(#REM) fin conteneur ]
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div>[(#REM) fin page ]
 </body>
 </html>

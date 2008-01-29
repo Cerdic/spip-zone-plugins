@@ -20,14 +20,14 @@
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
 		<div id="contenu">
-			<!-- Titre de la rubrique -->
+			[(#REM) Titre de la rubrique ]
 
 				<div class="titrePage">
 				<h2>Mon compte : mot de passe perdu ou oubli&eacute; </h2>
 				</div>
 
 			
-<!-- Contenu de la page -->
+				[(#REM) Contenu de la page ]
 
 				<div class="sousTitrePage">
 				<h3>Inscrivez votre email pour recevoir votre mot de passe</h3>
@@ -46,7 +46,7 @@
 				</div>
 			</form>
 
-		</div> <!--fin contenu-->
+		</div> [(#REM)fin contenu]
 
 
 		[(#REM) Menu de navigation laterale ]
@@ -56,13 +56,13 @@
 			<INCLURE{fond=inc-rubriques}>
 
 
-		</div><!-- fin navigation -->
+		</div>[(#REM) fin navigation ]
 
-	</div><!-- fin conteneur -->
+	</div>[(#REM) fin conteneur ]
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div>[(#REM) fin page ]
 </body>
 </html>

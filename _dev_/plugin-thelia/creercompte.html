@@ -1,42 +1,35 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-	#INCLURE "meta.html"
-
-<link href="styles.css" rel="stylesheet" type="text/css" />
-	
+#CACHE{7200}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+[(#REM) Lien vers le flux RSS de la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
 </head>
-<body>
 
-<!-- wrapper & subwrapper -->
-	
-<div id="wrapper">
-	<div id="subwrapper">
-	
-	#INCLURE "entete.html"
+<body class="page_panier">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Je choisis un mode de r&egrave;glement : par ch&egrave;que</div>
 		
-<!-- chemin -->	
-		
-		<div id="chemin">
-		Vous &ecirc;tes ici :
-		<a href="index.php" class="LIEN_chemin">Accueil boutique</a> / Cr&eacute;ation de mon compte
-		</div>
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de la rubrique ]
+		<div id="contenu">
 			
-<!-- contenu -->
-	
-		<div id="content">
-		
-		#INCLURE"menu.html"
-		
-			<div id="contenu">
 			
-<!-- Titre de la page -->
+				[(#REM) Titre de la page ]
 
 				<div class="titrePage">
 				<h2>Cr&eacute;ation de mon compte </h2>
 				</div>
 				
-<!-- Contenu de la page -->
+				[(#REM) Contenu de la page ]
 				
 				<div class="sousTitrePage">
 				<h3>Je cr&eacute;&eacute; mon compte  pour pouvoir commander sur ce site Internet : </h3>
@@ -128,11 +121,23 @@
 				<input type="submit" value="Valider" />
 				</div>
 			</form>
-			</div>
-		#INCLURE "pied.html"
-		</div>
-	</div>
-	#INCLURE "signature.html"
-</div>
+		
+		</div>[(#REM) fin contenu ]
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+
+		</div>[(#REM) fin navigation ]
+
+	</div>[(#REM) fin conteneur ]
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div>[(#REM) fin page ]
 </body>
 </html>

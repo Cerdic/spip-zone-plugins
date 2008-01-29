@@ -21,17 +21,17 @@
 		[(#REM) Contenu principal : contenu de la rubrique ]
 		<div id="contenu">
 						
-<!-- Titre de la rubrique -->
+			[(#REM) Titre de la rubrique ]
 
 				<div class="titrePage">
 				<h2>Erreur de paiement</h2>
 				</div>
 
-<!-- Contenu de la page -->
-	  <p class="commentaires">Nous vous informons que la procédure de paiement n'a pas pu aboutir, veuillez vous renseigner aupr&egrave;s de votre &eacute;tablissement bancaire.</p>
-          <p class="commentaires">Bonne navigation et &agrave; bientôt</p>
+		[(#REM) Contenu de la page ]
+		  <p class="commentaires">Nous vous informons que la procédure de paiement n'a pas pu aboutir, veuillez vous renseigner aupr&egrave;s de votre &eacute;tablissement bancaire.</p>
+      		    <p class="commentaires">Bonne navigation et &agrave; bientôt</p>
 
-		</div> <!--fin contenu-->
+		</div> [(#REM)fin contenu]
 
 
 		[(#REM) Menu de navigation laterale ]
@@ -41,13 +41,13 @@
 			<INCLURE{fond=inc-rubriques}>
 
 
-		</div><!-- fin navigation -->
+		</div>[(#REM) fin navigation ]
 
-	</div><!-- fin conteneur -->
+	</div>[(#REM) fin conteneur ]
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div>[(#REM) fin page ]
 </body>
 </html>

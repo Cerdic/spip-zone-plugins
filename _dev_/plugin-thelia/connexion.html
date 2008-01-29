@@ -27,20 +27,20 @@
 
 				<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Identifiez-vous</div>
 			
-<!-- Titre de la page-->
+				[(#REM) Titre de la page]
 
 				<div class="titrePage">
 				<h2>Identifiez-vous </h2>
 				</div>
 				
-<!-- Contenu de la page-->
+				[(#REM) Contenu de la page]
 
 				<div class="sousTitrePage">
 				<h3>J'ai d&eacute;j&agrave; un compte </h3>
 				</div>
 				
 				<form action="#URL_PAGE{connexion}" method="post" name="connexion" id="connexion">
-            	<input type="hidden" name="thelia_action" value="connexion" />
+            				<input type="hidden" name="thelia_action" value="connexion" />
 				
 				<table width="775" border="0" cellspacing="0" cellpadding="5">
 					<tr>
@@ -65,7 +65,7 @@
 				</div>
 				
 				<form action="#URL_PAGE{nouveau}" method="post" name="nouveau" id="nouveau">
-            	<input type="hidden" name="thelia_action" value="creercompte" />
+            				<input type="hidden" name="thelia_action" value="creercompte" />
 				
 				<table width="775" border="0" cellspacing="0" cellpadding="5">
 					<tr>
@@ -150,7 +150,7 @@
 			</div>
             		</form>
 			</div>
-<!-- fin contenu -->
+		[(#REM) fin contenu ]
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
@@ -159,13 +159,13 @@
 			<INCLURE{fond=inc-rubriques}>
 
 
-		</div><!-- fin navigation -->
+		</div>[(#REM) fin navigation ]
 
-	</div><!-- fin conteneur -->
+	</div>[(#REM) fin conteneur ]
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div>[(#REM) fin page ]
 </body>
 </html>

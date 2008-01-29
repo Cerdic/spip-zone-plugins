@@ -22,20 +22,20 @@
 		<div id="contenu">
 					
 						
-<!-- Titre de la page -->
+				[(#REM) Titre de la page ]
 
 				<div class="titrePage">
 				<h2>Mon compte : modifier mes informations </h2>
 				</div>
 				
-<!-- formulaire "Modifier mon mot de passe" -->
+				[(#REM) formulaire "Modifier mon mot de passe" ]
 
 				<div class="sousTitrePage">
 				<h3>Modifier mon mot de passe </h3>
 				</div>
 					
 			<form action="#URL_PAGE{moncompte}" method="post" name="modifier1" id="modifier1">
-            <input type="hidden" name="thelia_action" value="modifiercompte" />
+            		<input type="hidden" name="thelia_action" value="modifiercompte" />
 			<table width="775" border="0" cellspacing="0" cellpadding="5">
  				<tr>
     				<td width="190" class="ligneTableau">Mon mot de passe THELIA-MOTDEPASSE[<span class="obligatoire">(Vérifiez votre mot de passe. 6 car mini)</span>]</td>
@@ -55,14 +55,14 @@
 				<div class="separation">
 				</div>
 				
-<!-- formulaire "Je suis un nouveau client" -->
+				[(#REM) formulaire "Je suis un nouveau client" ]
 
 				<div class="sousTitrePage">
 				<h3>Je suis un nouveau client </h3>
 				</div>
 				
 		   	<form action="#URL_PAGE{compte_modifier}" method="post" name="modifier2" id="modifier2">
-            <input type="hidden" name="thelia_action" value="modifiercompte" /> 
+           		 <input type="hidden" name="thelia_action" value="modifiercompte" /> 
 			<table width="775" border="0" cellspacing="0" cellpadding="5">
   				<tr>
     				<td width="190" class="ligneTableau">Civilit&eacute; THELIA-RAISON[<span class="obligatoire">(obligatoire)</span>]</td>
@@ -143,13 +143,13 @@
 			<INCLURE{fond=inc-rubriques}>
 
 
-		</div><!-- fin navigation -->
+		</div>[(#REM) fin navigation ]
 
-	</div><!-- fin conteneur -->
+	</div>[(#REM) fin conteneur ]
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div>[(#REM) fin page ]
 </body>
 </html>

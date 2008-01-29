@@ -21,13 +21,13 @@
 		[(#REM) Contenu principal : contenu de la rubrique ]
 		<div id="contenu">
 							
-<!-- Titre de la rubrique -->
+				[(#REM) Titre de la rubrique ]
 
 				<div class="titrePage">
 				<h2>Mon compte : mes adresses de livraison </h2>
 				</div>
 
-<!-- Contenu de la page -->
+				[(#REM) Contenu de la page ]
 
 				<div class="sousTitrePage">
 				<h3>Mes adresses de livraison</h3>
@@ -51,7 +51,7 @@
 				</div>
 				
 			<form action="#URL_PAGE{adresse}" method="post" name="nouveau" id="nouveau">
-            <input type="hidden" name="thelia_action" value="creerlivraison" />
+          			  <input type="hidden" name="thelia_action" value="creerlivraison" />
 			<table width="775" border="0" cellspacing="0" cellpadding="5">
   				<tr>
     				<td width="190" class="ligneTableau">Lib&eacute;ll&eacute; de l'adresse* </td>
@@ -127,13 +127,13 @@
 			<INCLURE{fond=inc-rubriques}>
 
 
-		</div><!-- fin navigation -->
+		</div>[(#REM) fin navigation ]
 
-	</div><!-- fin conteneur -->
+	</div>[(#REM) fin conteneur ]
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div>[(#REM) fin page ]
 </body>
 </html>
