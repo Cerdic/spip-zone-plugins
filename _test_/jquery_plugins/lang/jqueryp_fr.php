@@ -41,7 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'easing' => 'Easing',
 	'easing_description' => ' ',
 	
-	
+	'jcarrousellite' => 'JCarrousselLite',
+	'jcarrousellite_description' => 'Un carrousel pour les images',
+		
 	'syncheight' => 'SyncHeight',
 	'syncheight_description' => 'Harmoniser la hauteur de colonnes',
 	
