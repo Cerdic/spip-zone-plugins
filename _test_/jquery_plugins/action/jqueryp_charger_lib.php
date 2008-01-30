@@ -44,7 +44,7 @@ function action_jqueryp_charger_lib_dist() {
 	// affichage du resultat et bouton de retour
 	include_spip('exec/install'); // pour bouton_suivant()
 
-	$texte  = "<h3>" . _T("jqueryp:telechargement_librairie", array('nom'=>_T("jqueryp:$nom")) . "</h3>\n";
+	$texte  = "<h3>" . _T("jqueryp:telechargement_librairie", array('nom'=>_T("jqueryp:$nom"))) . "</h3>\n";
 	$texte .= "<p>" . _T("jqueryp:fichiers_installes") . "</p>\n";
 	$texte .= "<ul>\n";
 	foreach ($ret as $dest=>$ok){

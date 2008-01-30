@@ -5,7 +5,7 @@
 _ &#169; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
 	<lien></lien>
-	<version>0.4</version>
+	<version>0.4.1</version>
 	<etat>test</etat>
     <description>
 	Permet d'automatiser l'installation et l'utilisation des plugins de jQuery.
@@ -26,6 +26,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 - Autocomplete : [->http://bassistance.de/jquery-plugins/jquery-plugin-autocomplete/]]
 - DatePicker : [->http://jquery.com/plugins/project/datepicker]
 - Easing : [->http://jquery.com/plugins/project/Easing]
+- JCarrouselLite : [->http://www.gmarwaha.com/jquery/jcarousellite]
 - SyncHeight : [->http://ginader.devjavu.com/browser/trunk/jquery/plugins/syncHeight/]
 - UI : [->http://jquery.com/plugins/project/ui]
 - Validate : [->http://jquery.com/plugins/files/jquery.validate_8.zip]
