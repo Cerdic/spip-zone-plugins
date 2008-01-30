@@ -20,7 +20,7 @@ include_spip('inc/vieilles_defs');
 			if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
 				$desc = spip_abstract_showtable("spip_notations", '', true);
 			} else {
-				$desc = spip_abstract_showtable("spip_notations", true, '');
+				$desc = spip_abstract_showtable("spip_notations");
 			}
 			return (isset($desc['field']['maj']));
 			break;
@@ -30,7 +30,7 @@ include_spip('inc/vieilles_defs');
 			if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
 				$desc = spip_abstract_showtable("spip_notations", '', true);
 			} else {
-				$desc = spip_abstract_showtable("spip_notations", true, '');
+				$desc = spip_abstract_showtable("spip_notations");
 			}
 			if (isset($desc['field']['id_notation']))
       { spip_query("ALTER TABLE spip_notations ADD `maj` TIMESTAMP NOT NULL ");
