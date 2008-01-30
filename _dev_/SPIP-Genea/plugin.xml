@@ -12,5 +12,13 @@ _ &#169; 2006-2008 - <multi>[fr]Distribu&#233; sous licence GNU/GPL[en]Distribut
 	<fonctions>genea_fonctions.php</fonctions>
 	<options>genea_options.php</options>
 	<install>base/genea_install.php</install>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>genea_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>calculer_rubriques</nom>
+		<inclure>genea_pipeline.php</inclure>
+	</pipeline>
 	<chemin dir='' />
 </plugin>

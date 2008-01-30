@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'aliasf' => "Surnomm&eacute;e",
+'aliasi' => "Surnomm&eacute;",
 'aliasm' => "Surnomm&eacute;",
 'adop' => "Adoption",
 'anul' => "Annulation ou nullit&eacute; du mariage",
@@ -140,10 +141,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pacs' => "PACS",
 'patronyme' => "Patronyme",
 'pere' => "P&egrave;re",
-'prop' => "Bien ou possession",
 'prob' => "Validation d'un testament",
 'profession' => "Professions",
-'prop' => "Propri&eacute;t&eacute;",
+'prop' => "Bien ou possession",
 
 // Q
 

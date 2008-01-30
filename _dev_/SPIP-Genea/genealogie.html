@@ -1,11 +1,13 @@
 #CACHE{86400}
-<BOUCLE_genea(GENEA_INDIVIDUS){id_individu}>
+<BOUCLE_article_genea(GENEA_INDIVIDUS){id_individu}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 	<title>[(#PATRONYME|ucfirst) ][(#PRENOMS|ucfirst)] - [(#NOM_SITE_SPIP|textebrut)]</title>
-	<meta name="description" content="<:genea:desc_liste_des_individus:>" />
+	[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
 	<INCLURE{fond=inc-head}>
+<style type="text/css">
+    </style>
 </head>
 
 <body class="page_genea">
@@ -15,8 +17,7 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; [(#PATRONYME|ucfirst) ][(#PRENOMS|ucfirst)]</div>
-
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_rub(RUBRIQUES){id_rubrique=#GET{id_rub}}><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>]</BOUCLE_rub> &gt; [(#PATRONYME|ucfirst) ][(#PRENOMS|ucfirst)] </div>
 
 	<div id="conteneur">
 
@@ -28,40 +29,23 @@
 				[(#LOGO_INDIVIDU||image_reduire{200,200})]
 				[<p class="surtitre">(#TITRE)</p>]
 				<h1 class="titre">[<img src="(#CHEMIN{/img_pack/#SEXE.gif})" width='17' height='17' class="logo_spip" />][(#CIVILITE|gtraduc) ][(#PATRONYME|ucfirst) ][(#PRENOMS|ucfirst)]</h1>
-				[<p class="soustitre">[(#SEXE|!={f}|?{' '})<:genea:aliasm:>][(#SEXE|=={f}|?{' '})<:genea:aliasf:>] &#34;(#SURNOM)&#34;</p>]
+				<p class="soustitre">[<span class="surnom">[(#SEXE|=={h}|?{' '})<:genea:aliasm:>][(#SEXE|=={f}|?{' '})<:genea:aliasf:>] &#34;(#SURNOM)&#34;&nbsp;</span>]</p>
 				#FIN_SURLIGNE
 			</div>
 
 			#DEBUT_SURLIGNE
 			<div class="chapo">
-				<table>
+				<table class="spip">
 					[<tr><td valign="top" nowrap><:genea:sosa:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2" class="indivsosa">(#SOSA)</td></tr>]
 					[<tr><td valign="top" nowrap><:genea:sexe:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#SEXE|gtraduc)</td></tr>]
-					[<tr><td valign="top" nowrap><:genea:birt:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#DATE_NAISSANCE|affdate) [(#LIEU)]</td></tr>]
-					[<tr><td valign="top" nowrap><:genea:deat:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#DATE_DECES|affdate) [(#LIEU)]</td></tr>]
+					[<tr><td valign="top" nowrap><:genea:birt:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#DATE_NAISSANCE|affdate) ‡ Paris-14e--Arrondissement (75014), FRANCE</td></tr>]
+					[<tr><td valign="top" nowrap><:genea:deat:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#DATE_DECES|affdate) ‡ Romainville (93230), FRANCE</td></tr>]
 				</table>
 			</div>
+
 			<br class="nettoyeur" />
+
 			<div class="texte">
-
-				<table class="spip">
-					<tr>
-						<td>G√©n√©ral</td>
-						<td>Les unions</td>
-						<td>L'arborescence</td>
-						<td>Les sources</td>
-					</tr>
-				</table>
-
-				<h3 class="spip"><:genea:ascendance:></h3>
-				<ul class="spip">
-					<li><:genea:pere:> : <INCLUDE{fond=include/inc-individu}{id_individu=#ID_PERE}></li>
-					<li><:genea:mere:> : <INCLUDE{fond=include/inc-individu}{id_individu=#ID_MERE}></li>
-				</ul>
-
-				[(#SEXE|!={f}|?{' '}) <INCLUDE{fond=include/inc-descendant}{id_pere=#ID_INDIVIDU}>]
-				[(#SEXE|=={f}|?{' '}) <INCLUDE{fond=include/inc-descendant}{id_mere=#ID_INDIVIDU}>]
-
 			</div>
 			#FIN_SURLIGNE
 
@@ -76,19 +60,17 @@
 			<INCLURE{fond=inc-rubriques}{id_rubrique}>
 
 			[(#REM) Articles dans la meme rubrique ]
-			<INCLURE{fond=include/inc-genealogie}{small=oui}>
+			<INCLURE{fond=include/inc-genealogie}{id_genea}{small=oui}>
 
 		</div><!-- fin navigation -->
 
 	</div><!-- fin conteneur -->
 
-   [(#REM) Pied de page SPIP-Genea ]
-   <INCLURE{fond=include/inc-genea-pied}{id_genea}>
-
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
 </div><!-- fin page -->
+                </span>
 </body>
 </html>
-</BOUCLE_genea>
+</BOUCLE_article_genea>

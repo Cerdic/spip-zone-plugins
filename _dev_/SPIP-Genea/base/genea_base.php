@@ -110,10 +110,11 @@ $spip_genea_evt = array(
    "id_genea_evt" => "BIGINT(21) NOT NULL AUTO_INCREMENT",
    "id_individu" => "BIGINT(21) DEFAULT '0' NOT NULL",
    "type_evt" => "VARCHAR(4) NOT NULL",
-   "date_debut" => "VARCHAR(13) DEFAULT '000000000000 ' NOT NULL",
-   "date_debut2" => "VARCHAR(13) DEFAULT '000000000000' NOT NULL",
-   "date_fin" => "VARCHAR(13) DEFAULT '000000000000 ' NOT NULL",
-   "date_fin2" => "VARCHAR(13) DEFAULT '000000000000' NOT NULL",
+   "date_debut" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
+   "date_debut2" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
+   "date_fin" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
+   "date_fin2" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
+   "precision" => "ENUM('', 'v', 'a', 's', 'p') DEFAULT '' NOT NULL",
    "descriptif" => "TEXT NOT NULL",
    "id_lieu" => "BIGINT(21) DEFAULT '0' NOT NULL");
 
