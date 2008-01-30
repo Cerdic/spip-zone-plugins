@@ -11,7 +11,7 @@ function player_affiche_config_form($exec_page){
 		$out = "";
 		$out .= debut_cadre_trait_couleur("", true, "", "Player Audio");
 		
-		$out .= "<form action='".generer_url_ecrire('player_admin')."' method='post'>";
+		$out .= "<form action='".generer_url_ecrire('player_admin')."' method='post'><div>";
 	
 	
 		$player_ = $GLOBALS['meta']['player'];
@@ -25,9 +25,9 @@ function player_affiche_config_form($exec_page){
 		$out .= "<br />";
 		$out .= bouton_radio("player", "eraplayer", "Erational player", $player_ == "eraplayer");
 	
-		$out .= "<div style='text-align:$spip_lang_right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>";
+		$out .= "<div style='text-align:$spip_lang_right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' /></div>";
 		
-		$out .= "</form>";	
+		$out .= "</div></form>";	
 		$out .= fin_cadre_trait_couleur(true);
 		return $out;
 }
