@@ -34,15 +34,6 @@ $GLOBALS['jquery_plugins'] = array(
 		
 	
 	
-	//jcarrousel
-	'jcarrousellite' => array(
-		'dir' => 'jquery.jcarrousellite',
-		'url' => 'http://www.gmarwaha.com/jquery/jcarousellite/',
-		'install' => array(
-			'jquery.jcarousellite.js' => 'http://www.gmarwaha.com/jquery/jcarousellite/js/jquery.jcarousellite.js'
-		)
-	),
-	
 		
 	//syncHeight
 	'syncheight' => array(
