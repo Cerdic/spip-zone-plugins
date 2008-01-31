@@ -183,11 +183,12 @@ add_outil( array(
 ));
 
 	// ici on a besoin de six boutons radio : 'page', 'html', 'propres', 'propres2, ''standard' et 'propres-qs'
+define('_CS_PROPRE_QS', defined('_SPIP19300')?'propres_qs':'propres-qs');
 add_variable( array(
 	'nom' => 'radio_type_urls3',
 	'format' => 'chaine',
 	'radio' => array('page' => 'desc:page', 'html' => 'desc:html', 'propres' => 'desc:propres', 'propres2' => 'desc:propres2',
-			'standard' => 'desc:standard', 'propres-qs' => 'desc:propres-qs' ),
+			'standard' => 'desc:standard', _CS_PROPRE_QS => 'desc:propres-qs' ),
 	'radio/ligne' => 4,
 	'defaut' => "'page'",
 	'code' => "\$GLOBALS['type_urls']=%s;\n",
