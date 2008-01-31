@@ -5,20 +5,28 @@
 			[<input type="hidden" name="new" value="(#NEW)" />]
 			<h3><:echoppe:edition_donnees_globales:></h3>
 			
-			<div style="float: left;" >
-				<b><:echoppe:date_de_mise_en_vente:></b><br />
-				[(#DATE_DEBUT|affdate)]<br />
-				<input type="text" size="1" class="formo" maxlength="2" name="jour_date_en_ligne" value="[(#DATE_DEBUT|affdate{'d'})]" /> / 
-				<input type="text" size="1" class="formo" maxlength="2" name="mois_date_en_ligne" value="[(#DATE_DEBUT|affdate{'m'})]"> / 
-				<input type="text" size="5" class="formo" maxlength="4" name="annee_date_en_ligne" value="[(#DATE_DEBUT|affdate{'Y'})]" />
-			</div>
-			<div style="float: right;" >
-				<b><:echoppe:date_de_retrait_de_vente:></b><br />
-				[(#DATE_FIN|affdate)]<br />
-				<input type="text" size="1" class="formo" maxlength="2" name="jour_date_retrait_ligne" value="[(#DATE_FIN|affdate{'d'})]"/> / 
-				<input type="text" size="1" class="formo" maxlength="2" name="mois_date_retrait_ligne" value="[(#DATE_FIN|affdate{'m'})]" /> / 
-				<input type="text" size="5" class="formo" maxlength="4" name="annee_date_retrait_ligne" value="[(#DATE_FIN|affdate{'Y'})]" />
-			</div>
+			
+				
+				<fieldset id="date_mise_en_vente" style="float: left;">
+					<b><:echoppe:date_de_mise_en_vente:></b><br />
+					[(#DATE_DEBUT|affdate)]<br />
+					<input type="text" size="1" class="formo" maxlength="2" name="jour_date_en_ligne" value="[(#DATE_DEBUT|affdate{'d'})]" /> / 
+					<input type="text" size="1" class="formo" maxlength="2" name="mois_date_en_ligne" value="[(#DATE_DEBUT|affdate{'m'})]"> / 
+					<input type="text" size="5" class="formo" maxlength="4" name="annee_date_en_ligne" value="[(#DATE_DEBUT|affdate{'Y'})]" /><br />
+					<input type="checkbox" name="ignorer_date_mise_en_vente" onclick="$('#date_mise_en_vente').disabled();" /><:echoppe:ignorer_date_mise_en_vente:>
+				</fieldset>
+			
+			
+				
+				<fieldset id="date_retrait_de_vente" style="float: right;" >
+					<b><:echoppe:date_de_retrait_de_vente:></b><br />
+					[(#DATE_FIN|affdate)]<br />
+					<input type="text" size="1" class="formo" maxlength="2" name="jour_date_retrait_ligne" value="[(#DATE_FIN|affdate{'d'})]"/> / 
+					<input type="text" size="1" class="formo" maxlength="2" name="mois_date_retrait_ligne" value="[(#DATE_FIN|affdate{'m'})]" /> / 
+					<input type="text" size="5" class="formo" maxlength="4" name="annee_date_retrait_ligne" value="[(#DATE_FIN|affdate{'Y'})]" /><br />
+					<input type="checkbox" name="ignorer_date_mise_en_vente" /><:echoppe:ignorer_date_de_retrait_de_vente:>
+				</fieldset>
+			
 			<div style="clear: both;"> </div>
 			
 			<br />
@@ -58,15 +66,21 @@
 <br />
 <div class="cadre-formulaire">
 	<h3><:echoppe:etat_des_stocks:></h3>
-	<strong><:echoppe:stock_total:>&nbsp;:&nbsp;<?php $grand_total = 0;  ?><BOUCLE_LeTotal(SPIP_ECHOPPE_STOCK_PRODUITS){id_produit}><?php $grand_total = $grand_total + $grand_total;  ?></BOUCLE_LeTotal><?php echo $grand_total;  ?></strong><br />
-	<:echoppe:stock_dans_le_depot:>
-	<B_LesDepots>
+	<strong><:echoppe:stock_total:>&nbsp;:&nbsp;<?php $grand_total = 0;  ?><BOUCLE_LeTotal(SPIP_ECHOPPE_STOCK_PRODUITS){id_produit}><?php $grand_total = $grand_total + #QUANTITE;  ?></BOUCLE_LeTotal><?php echo $grand_total;  ?></strong><br />
+	<form action="[(#EVAL{echoppe_modifier_stock}|generer_url_action{id_produit=#ID_PRODUIT})]" method="post" >
+		<input type="submit" name="plus" value="+" />/<input type="submit" name="moins" value="-" />&nbsp;<input type="text" name="modif_stock" size="2" value="1" />&nbsp;<:echoppe:unite_dans_le_depot:>
 		<select name="id_depot">
-	<BOUCLE_LesDepots(SPIP_ECHOPPE_DEPOTS)>
-		<option value="#ID_DEPOT">#TITRE</option>
-	</BOUCLE_LesDepots>
-		</select>&nbsp;
-	</B_LesDepots>
-	<input type="text" name="modif_stock" size="2" value="1" />&nbsp;<input type="submit" name="plus" value="+" />&nbsp;<input type="submit" name="plus" value="-" />
-	
+		<B_LesDepots>	
+		<BOUCLE_LesDepots(SPIP_ECHOPPE_DEPOTS)>
+			<option value="#ID_DEPOT">#TITRE</option>
+		</BOUCLE_LesDepots>
+		</B_LesDepots>
+			<option value="-1"><:echoppe:chez_le_fournisseur:></option>
+		</select>
+	</form>
+	<br />
+	<div style="text-align : right; vertical-align: center;">
+		<a href="#" id="afficher_detail_stock" ><img src="#CHEMIN{images/system-search.png}" alt="<:echoppe:detail_du_stock:>" /><:echoppe:detail_du_stock:></a>
+	</div>
+	<div id="detail_stock" ></div>
 </div>

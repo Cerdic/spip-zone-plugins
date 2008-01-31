@@ -10,11 +10,8 @@
 		<ul>
 		<BOUCLE_LesSousCategorie(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){id_secteur = #ID_CATEGORIE}{par num titre}>
 			<li class="cadre-sous_rub" style="width: 45%;margin: 10px 0px 0px 0px;">
-				
 					<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</a></strong>
 					[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
-					
-				
 			</li>
 		</BOUCLE_LesSousCategorie>
 		</ul>
@@ -40,7 +37,7 @@
 					<strong><a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT})]">[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</a></strong>[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
 				
 			</td>
-			<td width="80px" class="arial1">XXX en stock</td>
+			<td width="80px" class="arial1">&nbsp;<?php $grand_total = 0;  ?><BOUCLE_LeTotal(SPIP_ECHOPPE_STOCK_PRODUITS){id_produit}><?php $grand_total = $grand_total + #QUANTITE;  ?></BOUCLE_LeTotal><?php echo $grand_total;  ?> <:echoppe:en_stock:></td>
 			<td width="50px" class="arial1">[(#REF_PRODUIT|sinon{<em><:echoppe:pas_de_num_de_ref:></em>})]</td>
 			</tr>
 		</BOUCLE_LesProduits>

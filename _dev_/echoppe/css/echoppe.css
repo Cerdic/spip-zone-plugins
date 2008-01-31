@@ -74,3 +74,7 @@ DIV.publie{
 DIV.boutton_statut A{
 	color: black;
 }
+
+A.afficher_detail_stock {
+	text-align: right;
+}

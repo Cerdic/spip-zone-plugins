@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'categorie_numero' => 'Cat&eacute;gorie num&eacute;ro :',
 'centimetre_racourcci' => 'cm.',
 'chemin_categorie' => 'Chemin de la cat&eacute;gorie',
+'chez_le_fournisseur' => 'Chez le fournisseur',
 'creer_nouvelle_categorie' => 'Cr&eacute;er une cat&eacute;gorie',
 'creer_nouvelle_sous_categorie' => 'Cr&eacute;er une sous-cat&eacute;gorie',
 'creer_un_ref_automatiquement' => 'En cr&eacute;er un automatiquement',
@@ -35,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'descriptif'=>'Descriptif :',
 'descriptif_echoppe' => 'Echoppe est un plugin de gestion de boutique en ligne. Il tente d\' &ecirc;tre le plus g&eacute;n&eacute;raliste possible.',
 'description_du_depot' => 'Description',
+'detail_du_stock' => 'D&eacute;tail du stock',
 'derniere_modification' => 'Derni&egrave;re modification',
 
 // E
@@ -42,35 +44,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer'=>'Editer',
 'editer_categorie' => 'Editer la cat&eacute;gorie',
 'editer_version'=>'Editer la version',
+'edition_de' => '&Eacute;dition de',
 'edition_de_cetegorie'=>'&Eacute;dition d\'une cat&eacute;gorie',
 'edition_de_la_version'=>'&Eacute;dition de la version',
 //'edition_langue' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
 'edition_de_produit' => '&Eacute;dition d\'un produit',
 'edition_donnees_globales' => '&Eacute;dition des donn&eacute;es globales',
+'email_du_depot' => 'E-Mail',
+'en_stock' => 'en stock',
 'etat_des_stocks' => '&Eacute;tat des stocks',
 'etat_du_produit' => '&Eacute;tat du produit',
 'euro' => '&euro;',
-
-// G
-'gerer_echoppe' => 'G&eacute;rer Echoppe',
-'gerer_les_depots' => 'G&eacute;rer les d&eacute;p&ocirc;ts',
-'gramme_racourcci' => 'gr.',
-
-
-// E
-'edition_de' => '&Eacute;dition de',
-'email_du_depot' => 'E-Mail',
 
 // F
 'fax_du_depot' => 'Fax',
 'fichier_introuvable' => 'Le fichier est introuvable',
 'fichier_pas_une_image' => 'Le fichier n\'est pas une image',
 
+// G
+'gerer_echoppe' => 'G&eacute;rer Echoppe',
+'gerer_les_depots' => 'G&eacute;rer les d&eacute;p&ocirc;ts',
+'gramme_racourcci' => 'gr.',
+
 // H
 'hauteur' => 'Hauteur',
 
 // I
 'info_depot' => 'G&eacute;rer vos d&eacute;p&ocirc;ts ici.',
+'ignorer_date_de_retrait_de_vente' => 'Ignorer la date de retrait de la vente',
+'ignorer_date_mise_en_vente' => 'Ignorer la date de mise en vente',
 'impossible_copier_dans'=>'Impossible de copier le fichier dans ',
 
 // L
@@ -141,7 +143,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // U
 'unites' => 'Unit&eacute;(s)',
-
+'unite_dans_le_depot' => 'unit&eacute;(s) dans le d&eacute;p&ocirc;t de',
 // V
 'ville_du_depot' => 'Ville',
 'visualisation_d_un_depot' => 'Visualisation d\'un d&eacute;p&ocirc;t',
