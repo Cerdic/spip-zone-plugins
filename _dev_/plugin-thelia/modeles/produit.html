@@ -1,5 +1,5 @@
 <THELIA_produit type="PRODUIT"[ ref="(#ENV{ref}|?{#ENV{ref},''})"][ rubrique="(#ENV{rubrique}|?{#ENV{rubrique},''})"][ id="(#ENV{id}|?{#ENV{id},''})"]>
-<div class="produits_thelia" [style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align}; margin-#ENV{align}: 0;] (#ENV{align,center}|=={center}|?{'',' '})']>	
+<div class="produits_thelia" [style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>	
 	[(#ENV{photo}|=={non}|?{'',' '})<THELIA_images type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><div style="float: left;"><img src="THELIA-IMAGE" /></div></THELIA_images> ]<p class="thelia_titre">THELIA-TITRE</p>
 	<div class="thelia_description">THELIA-DESCRIPTION</div>
 	<p class="thelia_prix">prix : THELIA-PRIX &euro;</p>
