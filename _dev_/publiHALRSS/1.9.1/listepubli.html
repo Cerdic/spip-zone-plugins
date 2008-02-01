@@ -28,21 +28,21 @@
 		<div id="contenu-liste">
 
 			<div class="cartouche">
-				<h1 class="titre">Liste de publications <?php
+				<h1 class="titre"><:publihalrss:liste_de_publications:> <?php
 $ad='#ENV{anDeb}';
 $af='#ENV{anFin}';
-if($ad && $ad==$af) { 
-	echo " de l'année $ad"; 
+if($ad && $ad==$af) { ?>
+<:publihalrss:de_l_annee:>
+<?php	echo " $ad"; 
 } else {
-	if($ad){ echo " depuis $ad"; }
-	if($af){ echo " jusqu'à $af"; }
+	if($ad){ ?> <:publihalrss:depuis:> <?php echo " $ad"; }
+	if($af){ ?> <:publihalrss:jusqu_a:> <?php echo " $af"; }
 } 
 ?></h1>
-				<i><span class="soustitre">
-				[(#ENV{typedoc}|choixsiegal{tous,'Tous les types de documents',''})]<?php
+				<i><span class="soustitre">[<:publihalrss:tous_les_types_de_doc:>(#ENV{typedoc}|choixsiegal{tous,' ',''})]<?php
 				if(preg_match("/^\d+$/isU",'#ENV{labo}')){ ?>
 				<BOUCLE_typeLabo(MOTS){id_groupe=#EVAL{$GLOBALS['meta']['publiHAL_Labo_publi']}}{id_mot=#ENV{labo}}>
-				[pour (#TEXTE|sinon{#TITRE})]</BOUCLE_typeLabo><?php	}?>
+				[<:publihalrss:pour:> (#TEXTE|sinon{#TITRE})]</BOUCLE_typeLabo><?php	}?>
 				</span></i>
 			</div>
 			<br class="nettoyeur" />
