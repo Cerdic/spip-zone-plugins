@@ -295,7 +295,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				if($flag_editable && ($connect_toutes_rubriques || (AccesRestreint_test_appartenance_zone_auteur($id_zone, $connect_id_auteur) && autoriser('modifier', 'auteur', $id_auteur ) && $id_connect_auteur!=$id_auteur))){
 					$editable = true;
 				}
-				$les_zones[] = $id_zone;
+				$les_zones[] = $row['id_zone'];
 			}
 			include_spip('public/assembler');
 			$contexte = array($id_table => $id_objet,'lang'=>$lang, 'editable'=>$editable);
@@ -304,11 +304,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	
 		if ($les_zones) {
 			$nombre_zones_associes = count($les_zones);
-			$les_zones = join($les_zones, ",");
+			$les_zones = implode(',',$les_zones);
 		} else {
 			$les_zones = "0";
 		}
-
 		//
 		// Afficher le formulaire d'ajout de zones d'acces
 		//
