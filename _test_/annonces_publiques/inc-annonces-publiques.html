@@ -1,0 +1,16 @@
+<B_annonces>
+<div class="annonces">
+	<h3 class="menu-titre"><:annonces:bientot:></h3>
+	<BOUCLE_annonces(ANNONCES){par date}{inverse}{a_venir}>
+	<div class="vevent">
+		<h4 class="summary">#TITRE</h4>
+		<p>
+			[<:annonces:du:> <abbr class="dtstart"[ title="(#DATE|date_iso)"]>(#DATE|affdate)</abbr>]
+			[<:annonces:au:> <abbr class="dtend"[ title="(#DATE_FIN|date_iso)"]>(#DATE_FIN|affdate)</abbr>]
+		</p>
+		[<p class="location">(#LIEU)</p>]
+		[<div class="description">(#TEXTE)</div>]
+	</div>	
+	</BOUCLE_annonces>
+</div>
+</B_annonces>

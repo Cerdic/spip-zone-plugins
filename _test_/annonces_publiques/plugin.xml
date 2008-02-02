@@ -1,0 +1,11 @@
+<plugin>
+ 	<nom>Annonces Publiques</nom>
+	<version>1.0</version>
+	<auteur>James</auteur>
+	<etat>test</etat>
+	<lien>http://www.spip-contrib.net/Annonces-Publiques</lien>
+	<description>Ce plugin d&eacute;fini une boucle (ANNONCES) permettant d'afficher les annonces &agrave; afficher dans le calendrier et publi&eacute;es de la messagerie de l'espace priv&eacute; d'un site dans sa partie publique. Compatible 1.9.2d et 1.9.3dev</description>
+	<prefix>AP</prefix>
+	<fonctions>ap_fonctions.php</fonctions>
+	<options>ap_options.php</options>
+</plugin>
