@@ -26,7 +26,9 @@ function spip_thelia_appeler_moteur_thelia($texte)
 		case 'moncompte' : $pageret=1; break;
 		case 'nouveau' : $securise=1; break;
 		case 'regret' : $pageret=1; break;	
-		case 'virement' : $securise=1; $pageret=1; $reset=1; break;	
+		case 'virement' : $securise=1; $pageret=1; $reset=1; break;
+		case 'enviar_email_articulo' : return $texte; //problème de multiple déclaration de phpmailer
+		case 'enviar_email_breve' : return $texte;	
 	}
 	
 	
