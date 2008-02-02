@@ -50,14 +50,23 @@
 
 
 <div class="rubriques">
-<THELIA SI NON CONNECTE>
-<a href="#URL_PAGE{connexion}">se connecter</a>
-</THELIA SI NON CONNECTE>
-<THELIA SI CONNECTE>
-<a href="#URL_PAGE{moncompte}">mon compte</a>
-<br/> <a href="#URL_PAGE{sommaire, thelia_action=deconnexion}">se d&eacute;connecter</a>
-</THELIA SI CONNECTE>
- <br/> <a href="#URL_PAGE{panier}">mon panier</a>
+<h2 class="menu-titre">mon compte</h2>
+<ul>
+	<THELIA SI NON CONNECTE>
+		<li><a href="#URL_PAGE{connexion}">se connecter</a></li>
+	</THELIA SI NON CONNECTE>
+	<THELIA SI CONNECTE>
+		<li><a href="#URL_PAGE{moncompte}">mon compte</a></li>
+		<li><a href="#URL_PAGE{sommaire, thelia_action=deconnexion}">se d&eacute;connecter</a></li>
+	</THELIA SI CONNECTE>
+ 	<T_PANIER>
+		<li><a href="#URL_PAGE{panier}">Votre panier contient THELIA-PANIER_NBART article(s).</a></li>
+	<THELIA_PANIER type="PANIER">
+	</THELIA_PANIER>
+	</T_PANIER>
+		<li><a href="#URL_PAGE{panier}">Votre panier est vide</a></li>
+	<//T_PANIER>
+</ul>
 </div>
 
 
