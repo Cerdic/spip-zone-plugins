@@ -58,7 +58,7 @@ function spip_thelia_appeler_moteur_thelia($texte)
 
 	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
 	ob_start();
-	include_once(_DIR_PLUGINS."plugin-thelia/moteur-thelia-1_3_3.php");
+	include_once(_DIR_PLUGIN_SPIP_THELIA."moteur-thelia-1_3_3.php");
 
 	$texte = ob_get_contents();
 	ob_end_clean();
@@ -106,5 +106,14 @@ function remplacement_sortie_thelia($in_thelia)
 	$in_thelia = str_replace('ë', '&euml;', $in_thelia); 
 
 	return $in_thelia;
+}
+function spip_thelia_ajouter_boutons($boutons_admin){
+	// si on est admin
+	if ($GLOBALS['connect_statut'] == "0minirezo") {
+	  	// on voit le bouton dans la barre "naviguer"
+	  	$boutons_admin['naviguer']->sousmenu['spip_thelia_catalogue']= new Bouton(
+		_DIR_PLUGIN_SPIP_THELIA.'img_pack/logo_thelia_petit.png', 'Catalogue Th&eacute;lia');
+	}
+	return $boutons_admin;
 }
 ?>
