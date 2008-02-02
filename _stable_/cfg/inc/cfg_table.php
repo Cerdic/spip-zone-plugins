@@ -118,11 +118,10 @@ class cfg_table
 		// si le champs primaire est vide, c'est qu'il est auto-increment
 		// bof bof !
 		foreach ($champs as $name => $def) {
-			if (in_array($name, $this->cfg->champs_id) && $def == "''" ) {
+			if (in_array($name, $this->cfg->champs_id) && !$def) {
 				unset($champs[$name]);
 			}
 		}
-		
 	    return sql_insertq($this->cfg->table, $champs);
 	}
 }
