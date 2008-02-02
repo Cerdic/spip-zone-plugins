@@ -102,7 +102,7 @@ function convertir_document($id_document) {
         //determine les ratio de taille
         //si proportion conservé on conserve le plus petit des ratio
         if ($proportion == true) {
-            $ratio_largeur = ($ratio_largeur < $ratio_hauteur) ? $ratio_largeur : $ratio_hauteur;
+            $ratio_largeur = min($ratio_hauteur, $ratio_largeur);
             $ratio_hauteur = $ratio_largeur; 
         }
         
