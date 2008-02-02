@@ -121,7 +121,7 @@ function convertir_document($id_document) {
             //on redimensionne l'image
             if (!($ratio_largeur == 1) || !($ratio_hauteur ==1)) {
                 //imagick_sample($handle, $largeur, $hauteur);
-                imagick_resize($handle_frame, $largeur, $hauteur, IMAGICK_FILTER_UNKNOWN, 0 );
+                imagick_zoom($handle_frame, $largeur, $hauteur, IMAGICK_FILTER_UNKNOWN, 0 );
             }
             //nom du fichier cible, c'est à dire la frame (image) indexée
             $document['frame'] = $document['cible_url'].'/'.$document['name'].'-'.$frame.'.'.$extension;
