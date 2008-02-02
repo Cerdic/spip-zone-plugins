@@ -129,6 +129,12 @@ function doc2img_installer($version,$version_finale) {
 			ecrire_meta('doc2img',serialize($cfg));
         //passage en 0.4, rien à faire
 		case 0.3 :
+		//passage en 0.5
+		case 0.4 :
+		    //on permet la numération des page
+            spip_query("ALTER TABLE spip_doc2img
+                ADD page INT NOT NULL;");
+            		    
     }
 
     //on met … jour la version du plugin

@@ -129,8 +129,8 @@ function convertir_document($id_document) {
             imagick_writeimage($handle_frame, $racine_site.'/'.$document['frame']);
             //sauvegarde les donnees dans la base
             $sql = "INSERT INTO spip_doc2img 
-                (id_doc2img,id_document,fichier) 
-                VALUES('',".$id_document.",'".$document['frame']."');";
+                (id_doc2img,id_document,fichier,page) 
+                VALUES('',".$id_document.",'".$document['frame']."','".$frame."');";
             //on sauve les informations
             spip_query($sql);
             //on libére la frame
