@@ -7,9 +7,9 @@ $exceptions =
 	|| (strpos($_SERVER["PHP_SELF"],'/ecrire') !== false)
 	|| isset($_GET['action'])
 	|| isset($_POST['action'])
-	|| ($_GET['page'] == 'login')
-	|| ($_GET['page'] == 'style_prive') // filtrage de la feuille de style admin mise en squelette
-	|| ($_GET['page'] == 'style_prive_ie') // idem IE
+	|| in_array($_GET['page'], array('login',
+		'style_prive',       // filtrage de la feuille de style admin mise en squelette
+		'style_prive_ie'))   // idem IE
 	|| (strpos($_GET['page'],'.js') !== false) // filtrage de jquery.js par exemple qui sert pour la partie admin
 	|| (strpos($_GET['page'],'.css') !== false); // on sait jamais...
 

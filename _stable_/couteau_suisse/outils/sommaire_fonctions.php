@@ -16,7 +16,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	@define('_sommaire_NB_CARACTERES', 30);
 	$self = nettoyer_uri();//self();//$GLOBALS['REQUEST_URI'];
 	// si on n'est pas en mode impression, on calcule l'image de retour au sommaire
-	if($_GET['cs']!='print') {
+	if(!defined('_CS_PRINT')) {
 		$titre = _T('cout:sommaire_titre');
 		$haut = "<a title=\"$titre\" href=\"".$self."#outil_sommaire\" class=\"sommaire_ancre\">&nbsp;</a>";
 	} else $haut = '';
@@ -64,7 +64,7 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	// reinitialisation de l'index interne de la fonction
 	sommaire_d_une_page($texte, $nbh3, false);
 	// couplage avec l'outil 'decoupe_article'
-	if(defined('_decoupe_SEPARATEUR') && ($_GET['cs']!='print')) {
+	if(defined('_decoupe_SEPARATEUR') && !defined('_CS_PRINT')) {
 		$pages = explode(_decoupe_SEPARATEUR, $texte);
 		if (count($pages) == 1) $sommaire = sommaire_d_une_page($texte, $nbh3);
 		else {

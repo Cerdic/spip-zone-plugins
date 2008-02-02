@@ -20,10 +20,10 @@ function cout_autoriser() {
 function cs_log($variable, $prefixe='', $stat='') {
 	static $rand;
 	if($stat) $rand = $stat;
-	if((!defined('_LOG_CS') && !defined('_CS_REPORT')) || !strlen($variable)) return;
+	if((!defined('_LOG_CS') && !defined('_CS_REPORTALL')) || !strlen($variable)) return;
 	if (!is_string($variable)) $variable = var_export($variable, true);
 	spip_log($variable = $rand.$prefixe.$variable);
-	if (defined('_CS_REPORT')) echo '<br/>',htmlentities($variable);
+	if (defined('_CS_REPORTALL')) echo '<br/>',htmlentities($variable);
 }
 
 // liste des outils et des variables
@@ -43,19 +43,24 @@ $metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['
 define('_COUT_FONCTIONS_PHP', find_in_path('cout_fonctions.php'));
 $GLOBALS['cs_options'] = $GLOBALS['cs_fonctions'] = $GLOBALS['cs_fonctions_essai'] = $GLOBALS['cs_init'] = 0;
 
+// parametres concernant le plugin ?
+$GLOBALS['cs_params'] = isset($_GET['cs'])?explode(',', $_GET['cs']):array();
+
 // pour voir les erreurs ?
-if ($_GET['cs']=='report') error_reporting(E_ALL ^ E_NOTICE);
-elseif ($_GET['cs']=='reportall' && $auteur_session['statut']=='0minirezo') { define('_CS_REPORT', 1); error_reporting(E_ALL); }
+if (in_array('report', $GLOBALS['cs_params'])) 
+	{ define('_CS_REPORT', 1); error_reporting(E_ALL ^ E_NOTICE); }
+elseif (in_array('reportall', $GLOBALS['cs_params']) && $auteur_session['statut']=='0minirezo')
+	{ define('_CS_REPORTALL', 1); error_reporting(E_ALL); }
 
 // on active tout de suite les logs, si l'outil est actif.
-if ($metas_outils['log_couteau_suisse']['actif'] || defined('_LOG_CS_FORCE') || $_GET['cs']=='log') {
+if ($metas_outils['log_couteau_suisse']['actif'] || defined('_LOG_CS_FORCE') || in_array('log', $GLOBALS['cs_params'])) {
 	define('_LOG_CS', 'oui');
 	cs_log(str_repeat('-', 80), '', sprintf('COUTEAU-SUISSE. [#%04X]. ', rand()));
 	cs_log('INIT : cout_options, '.$_SERVER['REQUEST_URI']);
 }
 
 // fichiers/dossiers temporaires pour le Couteau Suisse
-define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, "couteau-suisse"));
+@define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, "couteau-suisse"));
 
 // on passe son chemin si un reset general est demande
 $zap = (_request('cmd')=='resetall')
@@ -72,17 +77,18 @@ if($zap) {
 	$cs_metas_pipelines = array();
 
 	// alias pour passer en mode impression
-	if(isset($_GET['page']) && in_array($_GET['page'], array('print','imprimer','imprimir_articulo','imprimir_breve','article_pdf')))
-		$_GET['cs']='print';
+	if ( in_array('print', $GLOBALS['cs_params']) ||
+		(isset($_GET['page']) && in_array($_GET['page'], array('print','imprimer','imprimir_articulo','imprimir_breve','article_pdf')))
+	   ) define('_CS_PRINT', 1);
 
 	// test sur le fichier a inclure ici
 	$cs_exists = file_exists($f_cs = _DIR_CS_TMP.'mes_options.php');
 
 	// fonctions indispensables a l'execution
 	include_spip('cout_lancement');
-	// lancer l'initialisation du plugin. on force la compilation si var_mode=recalcul
+	// lancer l'initialisation du plugin. on force la compilation si var_mode=cs_calcul
 	if(!$cs_exists) cs_log(" -- '$f_cs' introuvable !");
-	cs_initialisation(!$cs_exists || _request('var_mode')=='recalcul');
+	cs_initialisation(!$cs_exists || in_array('calcul', $GLOBALS['cs_params']));
 	cs_log("PUIS : cout_options, initialisation terminee");
 
 	// inclusion des options pre-compilees, si l'on n'est jamais passe par ici...
