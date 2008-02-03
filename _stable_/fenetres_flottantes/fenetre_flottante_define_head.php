@@ -130,7 +130,6 @@ jQuery(document).ready(
 	$('#windowResize').css(\"display\",\"".$afficher_redim."\");
 	
 	$('".lire_config('FenFlo/attribut_FenFlo','contenu')."').appendTo(\"#windowContent\");
-	$('".lire_config('FenFlo/attribut_FenFlo','contenu')."').css(\"margin\",\"10px\");
 	".$script_open."
 	
 		$('#windowClose').bind(
@@ -144,7 +143,7 @@ jQuery(document).ready(
 			'click',
 			function()
 			{
-				$('#windowContent').SlideToggleUp(300);
+				$('#windowContent').animate({height: 0, border: 'none'}, 300);
 				$('#windowBottom, #windowBottomContent').animate({height: 10}, 300);
 				$('#window').animate({height:".(lire_config('FenFlo/hauteurentete_FenFlo', '30')+13)."},300).get(0).isMinimized = true;
 				$(this).hide();
@@ -158,9 +157,9 @@ jQuery(document).ready(
 			function()
 			{
 				var windowSize = $.iUtil.getSize(document.getElementById('windowContent'));
-				$('#windowContent').SlideToggleUp(300);
-				$('#windowBottom, #windowBottomContent').animate({height: windowSize.hb + 13}, 300);
-				$('#window').animate({height:windowSize.hb+".(lire_config('FenFlo/hauteurentete_FenFlo', '30')+13)."}, 300).get(0).isMinimized = false;
+				$('#windowContent').animate({height: ".(lire_config('FenFlo/hauteur_FenFlo','300') - lire_config('FenFlo/hauteurentete_FenFlo', '30')-13)."}, 300);
+				$('#windowBottom, #windowBottomContent').animate({height: ".(lire_config('FenFlo/hauteur_FenFlo','300') - lire_config('FenFlo/hauteurentete_FenFlo', '30'))."}, 300);
+				$('#window').animate({height:".lire_config('FenFlo/hauteur_FenFlo','300')."}, 300).get(0).isMinimized = false;
 				$(this).hide();
 				$('#windowMin').show();
 				".$afficher_redim_instruction."
