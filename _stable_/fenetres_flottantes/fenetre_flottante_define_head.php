@@ -70,7 +70,7 @@ function FenFlo_insertion_in_head($flux)
 	{
 		$script_close = "$('#window').TransferTo(
 					{
-						to:'windowOpen',
+						to:'windowClose',
 						className:'transferer2', 
 						duration: 400
 					}
@@ -98,7 +98,9 @@ jQuery(document).ready(
 		
 	function()
 	{
-	
+	$.dequeue = function( a , b ){
+                return $(a).dequeue(b);
+	};
 	$('".lire_config('FenFlo/attribut_FenFlo','contenu')."').show();
 	$('".lire_config('FenFlo/attribut_FenFlo','contenu')."').parent().append(\"<div id='window'></div>\");
 	$('#window').append(\"<div id='windowTop'></div>\");
@@ -107,7 +109,7 @@ jQuery(document).ready(
 	$('#windowTop').append(\"<img src='"._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_max.gif' class='format_png' id='windowMax' alt='agrandir la fenetre'/>\");
 	$('#windowTop').append(\"<img src='"._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_close.gif' class='format_png' id='windowClose' alt='fermer la fenetre'/>\");
 	$('#window').append(\"<div id='windowBottom'></div>\");
-	$('#windowBottom').append(\"<div id='windowBottomContent'>&nbsp;</div>\");
+	$('#windowBottom').css('padding', '0 0 0 0').css('margin', '0 0 0 0').append(\"<div id='windowBottomContent'>&nbsp;</div>\");
 	$('#window').append(\"<div id='windowContent'></div>\");
 	$('#window').append(\"<img src='"._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_resize.gif' class='format_png'  id='windowResize' alt='resize' />\");
 	
@@ -121,7 +123,6 @@ jQuery(document).ready(
 	$('#windowTopContent').css(\"line-height\",\"".lire_config('FenFlo/hauteurentete_FenFlo', '30')."px\");
 	$('#windowBottomContent').css(\"background-image\",\"url("._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_bottom_start.png)\");
 	$('#windowBottom').css(\"background-image\",\"url("._DIR_PLUGIN_FENFLO."images/".lire_config('FenFlo/couleur_FenFlo','vert')."/window_bottom_end.png)\");
-	$('#windowBottom').append('<a href=\"#\"  id=\"windowOpen\">&nbsp;</a>');
 	
 	$('#windowMax').css(\"right\",\"".$pos_bouton_close."px\");
 	$('#windowMin').css(\"right\",\"".$pos_bouton_close."px\");
@@ -143,12 +144,14 @@ jQuery(document).ready(
 			'click',
 			function()
 			{
-				$('#windowContent').animate({height: 0, border: 'none'}, 300);
+				$('#windowContent').animate({height: 0, border: 'none'}, 200);
+				$('".lire_config('FenFlo/attribut_FenFlo','contenu')."').hide();
 				$('#windowBottom, #windowBottomContent').animate({height: 10}, 300);
 				$('#window').animate({height:".(lire_config('FenFlo/hauteurentete_FenFlo', '30')+13)."},300).get(0).isMinimized = true;
 				$(this).hide();
 				$('#windowResize').hide();
-				$('#windowMax').show();
+				$('#windowMax').show();
+				
 			}
 		);
 		
@@ -157,7 +160,8 @@ jQuery(document).ready(
 			function()
 			{
 				var windowSize = $.iUtil.getSize(document.getElementById('windowContent'));
-				$('#windowContent').animate({height: ".(lire_config('FenFlo/hauteur_FenFlo','300') - lire_config('FenFlo/hauteurentete_FenFlo', '30')-13)."}, 300);
+				$('".lire_config('FenFlo/attribut_FenFlo','contenu')."').show();
+				$('#windowContent').animate({height: ".(lire_config('FenFlo/hauteur_FenFlo','300') - lire_config('FenFlo/hauteurentete_FenFlo', '30')-13)."}, 200);
 				$('#windowBottom, #windowBottomContent').animate({height: ".(lire_config('FenFlo/hauteur_FenFlo','300') - lire_config('FenFlo/hauteurentete_FenFlo', '30'))."}, 300);
 				$('#window').animate({height:".lire_config('FenFlo/hauteur_FenFlo','300')."}, 300).get(0).isMinimized = false;
 				$(this).hide();
@@ -183,8 +187,6 @@ jQuery(document).ready(
 					}
 					$.cookie('width_FenFlo', size.width);
 					$.cookie('height_FenFlo', size.height);
-					
-						
 				},
 				onDragStop : function() {
 					var topFenFlo = $('#window').css('top');
