@@ -9,8 +9,9 @@ function diaposlide(timeout,mDiapo){
 		mpage="diapo_img";
 		mid_article=mClass[1];
 		mnum=mClass[2];
+		mlang=$("#"+mDiapo).attr('lang');
 		$.get("spip.php",
-			{page : mpage, id_article : mid_article, num : mnum},
+			{page : mpage, id_article : mid_article, num : mnum, lang : mlang},
 			function(txt){
 				debut=txt.indexOf("<!-- debut diapo_img"+mid_article+" -->");
     			fin=txt.lastIndexOf("<!-- fin diapo_img"+mid_article+" -->");
@@ -78,12 +79,13 @@ $.fn.diapo_pagination = function() {
 		mPage="diapo";
 		malign=$("#"+mDiapo+" .diapo_icones a.selected").attr('class').replace("diapo_ico","").replace(" selected","");
 		mid_article=mClass[1];
+		mlang=$("#"+mDiapo).attr('lang');
 		tab=$(this).attr('href').split('#');
     	i=tab[0].lastIndexOf('debut')
     	if (i>0)
 			pagin="?"+tab[0].substring(i,(tab[0].indexOf('=',i)))+"="+tab[0].substring((tab[0].indexOf('=',i)+1),tab[0].length);
     	$.get("spip.php"+pagin,
-    			{page : mPage, id_article : mid_article, align : malign},
+    			{page : mPage, id_article : mid_article, align : malign, lang : mlang},
     			function(txt){
     				debut=txt.indexOf("<!-- debut diapo"+mid_article+" -->");
     				fin=txt.lastIndexOf("<!-- fin diapo"+mid_article+" -->");
@@ -104,10 +106,11 @@ $.fn.diapo_vignette = function() {
     	mClass=$(this).attr("class").split('_');
  		mpage="diapo_img";
 		mid_article=mClass[1];
+		mlang=$("#diapo"+mid_article).attr('lang');
 		mnum=mClass[2]-1;
 		malign=$("#diapo"+mid_article+" .diapo_icones a.selected").attr('class').replace("diapo_ico","").replace(" selected","");
 		$.get("spip.php",
-				{page : mpage, id_article : mid_article, num : mnum, align : malign},
+				{page : mpage, id_article : mid_article, num : mnum, align : malign, lang : mlang},
 				function(txt){
 					debut=txt.indexOf("<!-- debut diapo_img"+mid_article+" -->");
     				fin=txt.lastIndexOf("<!-- fin diapo_img"+mid_article+" -->");
