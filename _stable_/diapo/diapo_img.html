@@ -12,3 +12,9 @@
 <//B_cpt_diapo>
 <!-- fin diapo_img#ID_ARTICLE -->
 </BOUCLE_art>
+<BOUCLE_art_erreur(ARTICLES){id_article}{statut?}>
+<:diapo:erreur_403:> [((#ID_ARTICLE))]
+</BOUCLE_art_erreur>
+<:diapo:erreur_404:> [((#ENV{id}))]
+<//B_art_erreur>
+<//B_art>

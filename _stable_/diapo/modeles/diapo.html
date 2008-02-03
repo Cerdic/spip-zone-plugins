@@ -1,6 +1,6 @@
 <BOUCLE_art(ARTICLES){id_article=#ENV{id}}>
 #SET{nb_vignettes,#DIAPO_VIGNETTES}
-<div id="diapo#ID_ARTICLE" class="diaporama" lang="#LANG">
+<div id="diapo#ID_ARTICLE" class="diaporama"[ lang="(#ENV{lang,#LANG})"]>
 <!-- debut diapo#ID_ARTICLE -->
 <B_docs>
 <div class="diapo_menu">
@@ -40,3 +40,9 @@
 </div>
 <br style="clear:both;"/>
 </BOUCLE_art>
+<BOUCLE_art_erreur(ARTICLES){id_article}{statut?}>
+<:diapo:erreur_403:> [((#ID_ARTICLE))]
+</BOUCLE_art_erreur>
+<:diapo:erreur_404:> [((#ENV{id}))]
+<//B_art_erreur>
+<//B_art>
