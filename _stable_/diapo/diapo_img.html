@@ -1,4 +1,4 @@
-<BOUCLE_art(ARTICLES){id_article}>
+<BOUCLE_art(ARTICLES){id_article}{!lang_select}>
 <!-- debut diapo_img#ID_ARTICLE -->
 <BOUCLE_cpt_diapo(DOCUMENTS){id_article}{extension IN png,jpg,gif}></BOUCLE_cpt_diapo>
 <BOUCLE_docs_diapo(DOCUMENTS){id_article}{extension IN png,jpg,gif}{(#ENV{num}|diapo_seq{#_cpt_diapo:TOTAL_BOUCLE}),1}{par num titre, titre, id_document}>
