@@ -11,6 +11,26 @@ function jour_semaine($jour) {
 	return ((($jour-1)%7)+1);
 }
 
+/**
+ * fonction 'coupe'
+ * coupe un 'mot' aux 'nbcar' premiers caracteres, en comptant
+ * les eventuelles chaines (mots html) de la forme 'car_deb'*'car_fin'
+ * comme de simples caracteres (&*; par defaut).
+ */
+function coupe ($mot, $nbcar, $car_deb='&', $car_fin=';') {
+	//decoupage brut
+	$sousmot = substr($mot,0,$nbcar);
+	// si on n'a pas de debut de mot html
+	if (!($pos_cardeb = strpos($sousmot, $car_deb)))
+		// pas de traitement specifique
+		return $sousmot;
+	// sinon, on traite le premier mot html contenu
+	// fin du premier mot trouve :
+	$pos_carfin = $pos_cardeb + strpos(substr($mot,$pos_cardeb),$car_fin);
+	// et comme cette fonction permet de traiter elle-meme la suite..
+	return substr($mot,0,$pos_carfin+1) . coupe(substr($mot,$pos_carfin+1),$nbcar-($pos_cardeb+1));
+}
+
 //fournit le jour de semaine selon son numero
 // - en entier/abrege/initiale/1-3caracteres
 // - dans la langue ad'hoc
@@ -21,7 +41,7 @@ function date_jour($jour, $abbr='') {
 	case "2car" :
 	case "3car" :
 		$nb_car = $abbr{0};
-		$res = substr(_T($res), 0, $nb_car);
+		$res = coupe(_T($res), $nb_car);
 		break;
 	case "abbr" :
 	case "initiale" :
