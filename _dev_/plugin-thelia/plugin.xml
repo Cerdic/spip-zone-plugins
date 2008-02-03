@@ -15,6 +15,11 @@
   		<inclure>spip_thelia_fonct.php</inclure>
  	</pipeline>
 	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_prive</action>
+		<inclure>spip_thelia_fonct.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouter_boutons</action>
 		<inclure>spip_thelia_fonct.php</inclure>

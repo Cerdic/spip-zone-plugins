@@ -1,14 +1,15 @@
 <?php
+function spip_thelia_header_prive($texte) {
+	if (!file_exists("../fonctions/moteur.php")) 
+		echo ("erreur : th&eacute;lia introuvable, v&eacute;rifiez que les sous-r&eacute;pertoires de th&eacute;lia et spip sont dans le m&ecirc;me r&eacute;pertoire.");
+	return $texte;
+}
+
 function spip_thelia_appeler_moteur_thelia($texte)
 {
-	//ne pas appeler thelia dans l'espace privé
-	if ($_REQUEST['exec']!="") return $texte;
-
-	if (!file_exists("fonctions")) {
-		echo ("erreur : th&eacute;lia introuvable, v&eacute;rifiez que les sous-r&eacute;pertoires de th&eacute;lia et spip sont dans le m&ecirc;me r&eacute;pertoire.");
-		return $texte;	
-	}
-	
+	//si pas de boucle ou de balise thélia dans la page on sort	
+	if ((strpos($texte, "THELIA-") === FALSE) && (strpos($texte, "<THELIA") == FALSE))
+		return $texte;
 	
 	//parsonnalisation des variables thélia
 	switch($_REQUEST['page']){
@@ -27,8 +28,6 @@ function spip_thelia_appeler_moteur_thelia($texte)
 		case 'nouveau' : $securise=1; break;
 		case 'regret' : $pageret=1; break;	
 		case 'virement' : $securise=1; $pageret=1; $reset=1; break;
-		case 'enviar_email_articulo' : return $texte; //problème de multiple déclaration de phpmailer
-		case 'enviar_email_breve' : return $texte;	
 	}
 	
 	
