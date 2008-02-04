@@ -55,21 +55,24 @@
 
             [(#REM) Affichage des tableaux statistiques ]
             <ul class="spip">
-               <li class="spip"><BOUCLE_genea_indiv(GENEA_INDIVIDUS){id_genea}></BOUCLE_genea_indiv><:genea:nbre_individu:> : #GRAND_TOTAL<//B_genea_indiv>
-                  <ul class="spip">
-                     <BOUCLE_genea_homme(GENEA_INDIVIDUS){id_genea}{sexe='h'}></BOUCLE_genea_homme><li class="spip"><:genea:h:> : #TOTAL_BOUCLE</li><//B_genea_homme>
-                     <BOUCLE_genea_femme(GENEA_INDIVIDUS){id_genea}{sexe='f'}></BOUCLE_genea_femme><li class="spip"><:genea:f:> : #TOTAL_BOUCLE</li><//B_genea_femme>
-                     <BOUCLE_genea_inconnu(GENEA_INDIVIDUS){id_genea}{sexe='i'}></BOUCLE_genea_inconnu><li class="spip"><:genea:i:> : #TOTAL_BOUCLE</li><//B_genea_inconnu>
-                  </ul>
+            	<B_genea_indiv>
+            	<BOUCLE_genea_indiv_total(GENEA_INDIVIDUS){id_genea}></BOUCLE_genea_indiv_total><li class="spip"><:genea:nbre_individu:> : #TOTAL_BOUCLE<//B_genea_indiv_total>
+            		<ul class="spip">
+	            	<BOUCLE_genea_indiv(GENEA_INDIVIDUS){id_genea}{importance sexe}>
+                    	[<li class="spip">(#SEXE|gtraduc) : #IMPORTANCE</li>]
+    	            </BOUCLE_genea_indiv>
+	       			</ul>
                </li>
-               <BOUCLE_genea_pat(GENEA_INDIVIDUS){id_genea}{par patronyme}></BOUCLE_genea_pat><li class="spip"><:genea:nbre_patronyme:> : #TOTAL_BOUCLE</li><//B_genea_pat>
-               < BOUCLE_genea_union(GENEA_UNIONS){id_genea}></BOUCLE_genea_union><li class="spip"><:genea:nbre_union:> : #GRAND_TOTAL</li><//B_genea_union>
+               </B_genea_indiv>
+               <BOUCLE_genea_pat(GENEA_INDIVIDUS){id_genea}{par patronyme}{fusion patronyme}></BOUCLE_genea_pat><li class="spip"><:genea:nbre_patronyme:> : #TOTAL_BOUCLE</li><//B_genea_pat>
+               <!--< BOUCLE_genea_union(GENEA_UNIONS){id_genea}></BOUCLE_genea_union>--><li class="spip"><:genea:nbre_union:> : X<!--<//B_genea_union>-->
 			   	<ul class="spip">
 				<li class="spip"><:genea:marr:> : X</li>
 				<li class="spip"><:genea:conc:> : X</li>
 				<li class="spip"><:genea:ulib:> : X</li>
 				<li class="spip"><:genea:pacs:> : X</li>
 			   	</ul>
+			   	</li>
                <li class="spip"><:genea:nbre_filiation:> : X</li>
                <li class="spip"><:genea:nbre_lieu:> : X
                   <ul class="spip">

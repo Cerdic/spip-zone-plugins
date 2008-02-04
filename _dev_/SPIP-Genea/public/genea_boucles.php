@@ -63,14 +63,31 @@ function boucle_GENEA_SOURCES_dist($id_boucle, &$boucles) {
 // -- Definition de criteres supplementaires ----------------------------
 
 //
-// {fusion_patronyme} permet de classer par importance les patronymes
+// {importance xxx} permet de classer par importance un champ de la table
 //
-function critere_fusion_patronyme($idb, &$boucles, $crit){
+function critere_importance($idb, &$boucles, $crit){
+	global $table_prefix;
+	$op='';
 	$boucle = &$boucles[$idb];
-	$type = $boucle->type_requete;
-	$patronyme = $boucle->id_table.'.patronyme';
-	$boucles[$idb]->group[] = $patronyme;
-	$boucles[$idb]->select[] = $patronyme . ',  COUNT(' . $patronyme . ')';
+	$params = $crit->param;
+	$type = array_shift($params);
+	$type = $type[0]->texte;
+	if(preg_match(',^(\w+)([<>=])([0-9]+)$,',$type,$r)){
+		$type=$r[1];
+		$op=$r[2];
+		$op_val=$r[3];
+	}
+	$champ = $boucle->id_table . '.' . $type;
+	$boucle->select[] = 'COUNT('.$champ.') AS importance';
+	$boucles[$idb]->group[] = $champ;
+}
+//
+// -- Balise qui permet de lire le champ IMPORTANCE créé par {importance xxx}
+//
+function balise_IMPORTANCE_dist($p){
+	$p->code = '$Pile[$SP][\'importance\']';
+	$p->interdire_scripts = false;
+	return $p;
 }
 
 ?>

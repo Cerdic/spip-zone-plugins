@@ -26,6 +26,8 @@ include_spip('inc/filtres');
 function genea_date_evt($id_individu, $type_evt, $fin=false, $second=false){
 	global $table_prefix, $connect_statut;
 	$date_evt='';
+	$date_ret = "0000-00-00 00:00:00";
+
 	if ($id_individu) {
 		$q="SELECT ";
 		if ($fin==false) {
@@ -47,14 +49,6 @@ function genea_date_evt($id_individu, $type_evt, $fin=false, $second=false){
 			}
 		}
 	}
-
-	// Transformer au format Date
-	$date_ret = "0000-00-00 00:00:00";
-//	$annee = substr($date_evt, 0, 4);
-//	$mois = substr($date_evt, 4, 2);
-//	$jour = substr($date_evt, 6, 2);
-//	$heure = substr($date_evt, 8,2);
-//	$minute = substr($date_evt, 10,2);
 
 	// Faire verification des droits de visualisation des dates
 	// si elles sont inferieures a 100 ans. Ne pas afficher, sauf
