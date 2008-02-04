@@ -23,5 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'type_livraison_tarif' => 'Type de livraison &amp; tarif',
 'continuer' => 'Continuer',
 'probleme_adresse_livraison' => 'Vous devez choisir une autre adresse de livraison. <br/>Nous ne r&eacute;alisons pas de livraison vers ce pays.',
-'page_precedente' => 'Page précédente');
+'page_precedente' => 'Page précédente',
+'texte_paiement_cheque' => 'Nous vous remercions de la confiance que vous nous accordez.<br />Un email recapitulatif de votre commande vous a &eacute;t&eacute; envoy&eacute; &agrave; l\'adresse: THELIA-CLIENT_EMAIL.<br />Votre commande sera valid&eacute;e par nos services &agrave; r&eacute;ception de votre paiement.<br /><br />Ecrire ici les infos sur le r&eacute;glement par ch&egrave;que ...',
+'reglement_cheque' => 'Je choisis un mode de r&egrave;glement : par ch&egrave;que');
 ?>
