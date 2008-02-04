@@ -95,17 +95,17 @@ function exec_message_edit()
 	$res .= afficher_si_rdv($date_heure, $date_fin, ($rv == "oui")); 
 	$res .= fin_cadre_trait_couleur(true);
 
-	$res .= "\n<p><b>"._T('info_texte_message_02')."</b><br />";
-	$res .= "<textarea name='texte' rows='20' class='formo' cols='40'>";
-	$res .= $texte;
-	$res .= "</textarea></p><br />\n";
-	
 	//Edition du champ LIEU
 	if($type == 'affich') {
 		$res .="<br /><b>"._T('ap:lieu')."</b><br />\n";
 		$res .= "<input type='text' class='formo' name='lieu' value=\"$lieu\" size='40' />";;
 	}
 
+	$res .= "\n<p><b>"._T('info_texte_message_02')."</b><br />";
+	$res .= "<textarea name='texte' rows='20' class='formo' cols='40'>";
+	$res .= $texte;
+	$res .= "</textarea></p><br />\n";
+	
 	$res .= "\n<div align='right'><input type='submit' value='"._T('bouton_valider')."' class='fondo'/></div>"	
 	. "\n</div>";
 

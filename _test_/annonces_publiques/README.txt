@@ -18,5 +18,5 @@ TODO:
 Compatiblite SPIP 1.9.3dev
 Selection annonce publique/privee
 Rubriques/Mots-Cles => Calendriers/Categories
-Repetitions -> RDATE, EXDATE RCF iCal
+Repetitions -> RDATE, EXDATE (RFC iCal)
 Squelettes ical, atom et rss

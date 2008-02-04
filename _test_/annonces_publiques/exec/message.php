@@ -153,6 +153,11 @@ function http_affiche_message_ap($id_message, $expediteur, $statut, $type, $text
 	if ($rv != "non") http_afficher_rendez_vous($date_heure, $date_fin);
 
 
+	//Affichage du champ Lieu
+	if($type == 'affich') {
+		echo "<div class='serif'><p>". _T('ap:lieu') . $lieu ."</p></div>";
+	}
+	
 	//////////////////////////////////////////////////////
 	// Le message lui-meme
 	//
@@ -170,11 +175,6 @@ function http_affiche_message_ap($id_message, $expediteur, $statut, $type, $text
 		echo fin_cadre_relief();
 	}
 
-	//Affichage du champ Lieu
-	if($type == 'affich') {
-		echo "<div class='serif'><p>". _T('ap:lieu') . $lieu ."</p></div>";
-	}
-	
 	if ($expediteur == $connect_id_auteur AND $statut == 'redac') {
 	  if ($type == 'normal' AND $total_dest < 2) {
 	    echo "<p style='color: #666666; text-align: right;' class='verdana1 spip_small'><b>"._T('avis_destinataire_obligatoire')."</b></p>";
