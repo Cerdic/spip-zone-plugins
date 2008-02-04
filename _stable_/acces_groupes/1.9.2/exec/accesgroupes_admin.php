@@ -40,24 +40,6 @@ v0.61 - mars 2006 cy_altern
 include_spip('base/db_mysql');
 include_spip('base/abstract_sql');
 
-/*
- utile si version php < 4.3 
- http://www.spip-contrib.net/Le-plugin-acces-restreint-par#forum400361
-*/
-if (!defined('accesgroupes_php4funct_defined')) {
-	define('accesgroupes_php4funct_defined', 1);
-	if (!function_exists('html_entity_decode')){
-		function html_entity_decode ($string){
-			// Remplace les entités numériques
-			$string = preg_replace('~&#x([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $string);
-			$string = preg_replace('~&#([0-9]+);~e', 'chr("\\1")', $string);
-			// Remplace les entités litérales
-			$trans_tbl = get_html_translation_table (HTML_ENTITIES) ;
-			$trans_tbl = array_flip ($trans_tbl) ;
-			return strtr ($string, $trans_tbl) ;
-		}
-	}
-}
 
 function exec_accesgroupes_admin() {
 	// définir comme constante le chemin du répertoire du plugin
@@ -673,7 +655,8 @@ function exec_accesgroupes_admin() {
 		echo "\r\n<tr style='background-color: #eeeeee;'>";
 		echo "\r\n<td class='verdana11' style='border-top: 1px solid #cccccc; width: 14px; vertical-align:top;'>";
 		if (accesgroupes_est_admin_restreint() == TRUE AND accesgroupes_est_proprio($id_ec) == TRUE) {
-			echo "<img src='img_pack/admin-12.gif' alt='|_' style='vertical-align:top;'>";
+//			echo "<img src='".find_in_path("images/admin-12.gif")."' alt='|_' style='vertical-align:top;'>";
+			echo "<img src='images/admin-12.gif' alt='|_' style='vertical-align:top;'>";
 		}
 		echo "\r\n<img src='"._DIR_PLUGIN_ACCESGROUPES."/img_pack/groupe-12.png' alt='|_'></td>";
 		$h = generer_url_ecrire("accesgroupes_admin","groupe=$id_ec");
@@ -840,7 +823,8 @@ function exec_accesgroupes_admin() {
 			echo "\r\n<td class='verdana11' style='border-top: 1px solid #cccccc; width: 14px; vertical-align:top;'>";
 			$statut_util_ec = accesgroupes_trouve_statut($row['id_auteur']);
 			$statut_util_ec == '0minirezo' ?  $ico_statut = 'admin-12.gif' : ($statut_util_ec == '1comite' ? $ico_statut = 'redac-12.gif' : $ico_statut = 'visit-12.gif');
-			echo "\r\n<img src='img_pack/".$ico_statut."' alt='|_' style='vertical-align:top;'></td>";			
+//			echo "\r\n<img src='".find_in_path("images/".$ico_statut)."' alt='|_' style='vertical-align:top;'></td>";			
+			echo "\r\n<img src='images/".$ico_statut."' alt='|_' style='vertical-align:top;'></td>";
 			$h = generer_url_ecrire("$url_auteur","id_auteur=".$row['id_auteur']);
 			echo "\r\n<td style='border-top: 1px solid #cccccc;'><a href=\"$h\">".$row['nom']."</a></td>";
 			echo "\r\n<td style='border-top: 1px solid #cccccc; text-align : right; padding-right: 20px;'>";
@@ -875,7 +859,8 @@ function exec_accesgroupes_admin() {
 				echo "\r\n<td class='verdana11' style='border-top: 1px solid #cccccc; width: 14px; vertical-align:top;'>";
 				$statut_util_ec = accesgroupes_trouve_statut($row['id_auteur']);
 				$statut_util_ec == '0minirezo' ?  $ico_statut = 'admin-12.gif' : ($statut_util_ec == '1comite' ? $ico_statut = 'redac-12.gif' : $ico_statut = 'visit-12.gif');
-				echo "\r\n<img src='img_pack/".$ico_statut."' alt='|_' style='vertical-align:top;'></td>";
+//				echo "\r\n<img src='".find_in_path("images/".$ico_statut)."' alt='|_' style='vertical-align:top;'></td>";
+				echo "\r\n<img src='images/".$ico_statut."' alt='|_' style='vertical-align:top;'></td>";
 				$h = generer_url_ecrire("$url_auteur","id_auteur=".$row['id_auteur']."&groupe=$groupe");
 				echo "\r\n<td style='border-top: 1px solid #cccccc;'><a href=\"$h\">".$row['nom']."</a></td>";
 				echo "\r\n<td style='border-top: 1px solid #cccccc; text-align : right; padding-right: 20px;'>";
@@ -1017,7 +1002,8 @@ function exec_accesgroupes_admin() {
 			
 			echo "\r\n<tr style='background-color: #eeeeee;'>";
 			echo "\r\n<td class='verdana11' style='border-top: 1px solid #cccccc; width: 14px; vertical-align:top;'>";
-			echo "\r\n<img src='img_pack/".$ico_statut."' alt='|_' style='vertical-align:top;'></td>";
+//			echo "\r\n<img src='".find_in_path("images/".$ico_statut)."' alt='|_' style='vertical-align:top;'></td>";
+			echo "\r\n<img src='images/".$ico_statut."' alt='|_' style='vertical-align:top;'></td>";
 			echo "\r\n<td style='border-top: 1px solid #cccccc;'>".$nom_statut."</td>";			
 			echo "\r\n<td style='border-top: 1px solid #cccccc; text-align : right; padding-right: 20px;'>";
 			if ($id_util_restreint == 0 OR ($id_util_restreint != 0 AND accesgroupes_est_proprio($groupe) == TRUE)) {
@@ -1143,7 +1129,8 @@ function exec_accesgroupes_admin() {
 			$nom_proprio_ec = $row['nom'];
 			echo "\r\n<tr style='background-color: #eeeeee;'>";
 			echo "\r\n<td class='verdana11' style='border-top: 1px solid #cccccc; width: 14px; vertical-align:middle;'>";
-			echo "\r\n<img src='img_pack/rubrique-12.gif' alt='|_'></td>";
+//			echo "\r\n<img src='".find_in_path("images/rubrique-12.gif")."' alt='|_'></td>";
+			echo "\r\n<img src='images/rubrique-12.gif' alt='|_'></td>";
 			$h = generer_url_ecrire("naviguer","id_rubrique=".$row['id_rubrique']);
 			echo "\r\n<td style='border-top: 1px solid #cccccc;'><a href=\"$h\">".typo($row['titre'])."</a></td>";
 			echo "\r\n<td style='border-top: 1px solid #cccccc; text-align: right;'>";
@@ -1225,7 +1212,7 @@ function exec_accesgroupes_admin() {
 	}   // fin du else extra-long (affichage interface gestion si groupe déterminé)
 	
 	
-	echo fin_page();
+	fin_page();
 	
 	
 }  // fin fct exec_accesgroupes_admin
