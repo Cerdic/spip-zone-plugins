@@ -42,7 +42,7 @@
 					"&nbsp;- <a href='",
 					[(#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=calcul}|parametre_url{id_article,#ID_ARTICLE})],
 					"' title='",
-					[Extrait&nbsp;: (#TEXTE|textebrut|couper)],
+					[Extrait&nbsp;: (#TEXTE|couper|textebrut|htmlentities{ENT_QUOTES})],
 					"' onClick='javascript:ouvrefenetre(this.href);return false;'>Voir la séance</a>&nbsp;- <a href='",
 					[(#URL_PAGE{cahier-de-texte-saisie,id_classe0=#_Classes_de_lauteur:ID_MOT}|parametre_url{id_matiere,#_Matieres_de_lauteur:ID_MOT})],
 					"' title='Saisir directement une séance pour la ",
@@ -78,7 +78,7 @@
 <p><strong class="on">Attention !</strong> Quelques fiches semblent avoir des dates étranges ! (Astuce: dupliquez-les en changeant la date de la copie, puis effacez la)</p>
 #ANCRE_PAGINATION
 <ul style="text-align: left; padding: 1em;">
-<BOUCLE_Mauvaise_date(ARTICLES){id_rubrique}{id_auteur=#SESSION{id_auteur}}{age>#GET{nb_jour_depuis_rentree}}{doublons mauvaisedate}{pagination #ENV{nb,20}}{par date}>
+<BOUCLE_Mauvaise_date(ARTICLES){id_rubrique}{id_auteur=#SESSION{id_auteur}}{age>#GET{nb_jour_depuis_rentree}}{doublons mauvaisedate}{pagination #ENV{nb,10}}{par date}>
 	<li style="list-style-image: url('#CHEMIN{puce.gif}')"><BOUCLE_Devoir_ou_seance_perso(MOTS){titre="Description de séance"}{0,1}>Une séance#SET{id_a_afficher,#ID_ARTICLE}</BOUCLE_Devoir_ou_seance_perso></B_Devoir_ou_seance_perso>Un devoir#SET{id_a_afficher,[(#PS*|bonbon_matches_id_article)]}<//B_Devoir_ou_seance_perso> des <BOUCLE_QuelleClasse(MOTS){id_article}{type="Classes"}{"/"}>#TITRE</BOUCLE_QuelleClasse> [[(#DATE|?{du })]<span class="on">(#DATE|affdate|sinon{"n'a pas de date"})</span>] ! <a href="[(#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=calcul}|parametre_url{id_article,#GET{id_a_afficher}})]" onClick='javascript:ouvrefenetre(this.href);return false;'>voir la séance en question</a>&nbsp;- <a href="[(#URL_PAGE{cahier-de-texte-saisie,id_article=#GET{id_a_afficher}})]" target="_blank" title="Dupliquer cette séance dans une nouvelle fenêtre pour changer la date">Dupliquer la séance</a>&nbsp;- <a href="[(#URL_PAGE{cahier-de-texte-saisie,id_article=#GET{id_a_afficher}}|parametre_url{effacer_fiche,"a_confirmer"})]" title="Effacer la séance après l'avoir dupliquée">Effacer cette séance</a></li>
 </BOUCLE_Mauvaise_date>
 </ul>
@@ -90,7 +90,7 @@
 <strong class="on">Attention !</strong> Quelques fiches saisies par vos collègues semblent avoir des dates étranges ! Prévenez-les !</p>
 #ANCRE_PAGINATION
 <ul style="text-align: left; padding: 1em;">
-<BOUCLE_Mauvaise_date_des_autres(ARTICLES){id_rubrique}{age>#GET{nb_jour_depuis_rentree}}{doublons mauvaisedate}{pagination #ENV{nb,20}}{par date}>
+<BOUCLE_Mauvaise_date_des_autres(ARTICLES){id_rubrique}{age>#GET{nb_jour_depuis_rentree}}{doublons mauvaisedate}{pagination #ENV{nb,10}}{par date}>
 	<li style="list-style-image: url('#CHEMIN{puce.gif}')">#LESAUTEURS  <BOUCLE_Devoir_ou_seance(MOTS){titre="Description de séance"}{0,1}>une séance#SET{id_a_afficher,#ID_ARTICLE}</BOUCLE_Devoir_ou_seance></B_Devoir_ou_seance>un devoir#SET{id_a_afficher,[(#PS*|bonbon_matches_id_article)]}<//B_Devoir_ou_seance> [[(#DATE|?{pour le })]<span class="on">(#DATE|affdate|sinon{"n'a pas de date"})</span>] ! <a href="[(#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=calcul}|parametre_url{id_article,#GET{id_a_afficher}})]" onClick='javascript:ouvrefenetre(this.href);return false;'>voir la séance en question</a></li>
 </BOUCLE_Mauvaise_date_des_autres>
 </ul>

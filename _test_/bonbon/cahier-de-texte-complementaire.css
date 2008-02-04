@@ -162,6 +162,12 @@ li.puces_auteur {
 }
 .texte {
 }
+.infos {
+	font-size: 70%;
+	margin: 0px;
+	margin-bottom:0.5em;
+	padding: 0px;
+}
 .spip {
 	font-size: 1.1em;
 	font-family: "Times New Roman", serif;

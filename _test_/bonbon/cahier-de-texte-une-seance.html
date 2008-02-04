@@ -40,11 +40,10 @@ Deux conditions à remplir:
 		<li class="puces_auteur"><center><a  href="[(#URL_PAGE{cahier-de-texte-selection-document,&id_article=#ID_ARTICLE})]" title="ajouter des documents joints à cette séance" onClick="javascript:window.open(this.href,'choix-doc', 'scrollbars=yes, resizable=yes, width=740, height=700'); return false;"><img src="#CHEMIN{images/x-office-spreadsheet.png}" alt="icône" align="middle"><br>Ajouter des docs</a></center></li>
 	</ul></div>
 ]	<div class="bloc_seance">
-<B_Groupe>
-			<div class="groupe">
-<BOUCLE_Groupe(MOTS){id_article}{type="Sous groupes de classes"}>[(#TITRE|image_typo{police=dustismo_bold.ttf,taille=15}|image_rotation{-90})]#SET{margin,' style="margin-left:4em;"'}</BOUCLE_Groupe>
-			</div>
-</B_Groupe>
+<BOUCLE_Groupe(MOTS){id_article}{type="Sous groupes de classes"}>
+			<a href="[(#SELF|parametre_url{titre_mot,#TITRE})]" title="N'afficher que les séances du [(#TITRE|textebrut)]"><div class="groupe">[(#TITRE|image_typo{police=dustismo_bold.ttf,taille=15}|image_rotation{-90})]#SET{margin,' style="margin-left:4em;"'}
+			</div></a>
+</BOUCLE_Groupe>
 			<h3 class="#_Seances:EDIT{date} date"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez ici pour modifier la date de cette séance"]#GET{margin}><b>></b>&nbsp;Le [(#DATE|affdate)]&nbsp;:</h3>
 			<div class="#_Seances:EDIT{texte} texte"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez ici pour modifier le texte de cette séance"]#GET{margin}>#TEXTE</div>[
 

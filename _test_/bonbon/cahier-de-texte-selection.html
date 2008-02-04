@@ -25,22 +25,13 @@
 		<center><div class="moyen-bloc">
 			<p>(Choisir en détail les élements que l'on veut afficher. Chaque élément est optionnel.)
 			</p>
-			<select id="nb" name="nb" size="1">
-				<option value="20" selected="selected">nombre max. d'élements affichés</option>
-				<option value="20">20</option>
-				<option value="50">50</option>
-				<option value="100">100</option>
-				<option value="100000000000000000000000000">Tous !</option>
-			</select>
 			<fieldset>
 				<legend>Classe</legend>
 				<select id="classe" name="classe" size="1">
 					<option value="" selected="selected">Classes</option>
 [(#REM)On extrait toutes les classes de Spip]
-<BOUCLE_ToutesLesClasses_affichage(MOTS){type="Classes"}{par titre}>
-	<BOUCLE_Que_les_classes_avec_article(ARTICLES){id_rubrique}{id_mot}{0,1}>
+<BOUCLE_ToutesLesClasses_affichage(MOTS){id_rubrique}{type="Classes"}{par titre}>
 					<option value="#_ToutesLesClasses_affichage:TITRE">#_ToutesLesClasses_affichage:TITRE</option>
-	</BOUCLE_Que_les_classes_avec_article>
 </BOUCLE_ToutesLesClasses_affichage>
 				</select>
 				<select id="groupe" name="titre_mot" size="1">
@@ -58,24 +49,22 @@
 				<select id="matiere" name="matiere" size="1">
 					<option value="" selected="selected">Matières</option>
 [(#REM)On extrait toutes les matières de Spip]
-	<BOUCLE_ToutesLesMatieres_affichage(MOTS){type="Matières"}{par num titre}{par titre}>
-		<BOUCLE_Que_les_matieres_avec_article_affichage(ARTICLES){id_rubrique}{id_mot=#_CDT_entier:ID_MOT}{id_mot}{0,1}>
+	<BOUCLE_ToutesLesMatieres_affichage(MOTS){id_rubrique}{type="Matières"}{par num titre}{par titre}>
 					<option value="#_ToutesLesMatieres_affichage:TITRE">#_ToutesLesMatieres_affichage:TITRE</option>
-		</BOUCLE_Que_les_matieres_avec_article_affichage>
 	</BOUCLE_ToutesLesMatieres_affichage>
 				</select>
-<?php if ($auteur_session) {?>
+<?php if ($auteur_session) { ?>
 				<select id="id_auteur" name="id_auteur" size="1">
 					<option value="" selected="selected">Liste des enseignants</option>
 [(#REM)On extrait toutes les profs (auteurs) de Spip]
-	<BOUCLE_Auteurs_affichage(AUTEURS){par num nom}{par nom}>
-		<BOUCLE_Que_les_auteurs_du_cahier_de_texte(ARTICLES){id_rubrique}{id_auteur}{id_mot=#_CDT_entier:ID_MOT}{0,1}>
-					<option value="#_Auteurs_affichage:ID_AUTEUR">#_Auteurs_affichage:NOM</option>
-		</BOUCLE_Que_les_auteurs_du_cahier_de_texte>
-	</BOUCLE_Auteurs_affichage>
+<BOUCLE_Rurbrique_pcm(RUBRIQUES){id_parent}{titre="Professeurs-classes-matières"}>
+
+		<BOUCLE_Fiches_Professeur(ARTICLES){id_rubrique}{surtitre="À propos d'un professeur"}{par num titre}>
+					<option value="#PS">#TITRE</option>
+		</BOUCLE_Fiches_Professeur>
+</BOUCLE_Rurbrique_pcm>
 				</select>
-<?php
-}?>
+<?php } ?>
 			</fieldset>
 			<fieldset>
 				<legend>Dates (jj/mm/aaaa)</legend>

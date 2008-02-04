@@ -21,7 +21,7 @@
 				<th>Donné le</th>
 			</tr>
 
-<BOUCLE_Devoirs(ARTICLES){!doublons QueDevoirs}{par #ENV{tri}}{pagination #ENV{nb,20}}{par date}{inverse #ENV{senschrono}}>
+<BOUCLE_Devoirs(ARTICLES){!doublons QueDevoirs}{par #ENV{tri}}{pagination #ENV{nb,10}}{par date}{inverse #ENV{senschrono}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})]">
 				<td>[(#DATE|affdate)]</td>
 				[(#ENV{classe}|?{'',<td>})]

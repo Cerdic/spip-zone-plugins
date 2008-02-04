@@ -24,6 +24,7 @@ devoirs= nombre de devoirs-1 liés à la séance
 plusdate= rafficher le formulaire avec un champs devoirs+date en plus.
 doc_seance_XXX= où XXX est un id_doc. quand on duplique une séance les docs d'id_documents=XXX où doc_seance_XXX est défini sont conservés, les autres enlevés.
 doc_devoirXXX_YYY= où YYY est un id_doc. XXX est le n° du devoir concerné (pas son ID). quand on duplique une séance les docs d'id_documents=YYY où doc_devoirXXX_YYY est défini sont conservés, les autres enlevés.
+liste_id_classes = la liste entre virgules (à exploder) des id_classe. Sous cette forme c'est plus pratique pour vérifier que d'autre séances pour ces classes n'existent pas.
 
 enregistrer_fiche= quand la fiche est validée
 modifier_fiche= quand la fiche est remplie, mais que le contenu doit être modifié
@@ -44,10 +45,10 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 	<div id="EntetePage">
 			<ul class="boutons">
 				<li><a href="#URL_PAGE{cahier-de-texte-accueil}" title="Retourner à la page d'accueil du cahier de texte"><img src="#CHEMIN{images/dialog-ok-upside-down.png}" alt="icône" vspace="2" align="middle">Accueil du cahier de texte</a></li>
-				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,nb=20}|parametre_url{var_mode,calcul})]"><img src="#CHEMIN{images/system-search.png}" alt="icône" vspace="2" align="middle">Afficher les 20 dernières séances</a></li>
+				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,nb=10}|parametre_url{var_mode,calcul})]"><img src="#CHEMIN{images/system-search.png}" alt="icône" vspace="2" align="middle">Afficher les dernières séances</a></li>
 <?php if ($auteur_session) {?>
-				<li><a href="#URL_PAGE{cahier-de-texte-saisie}&id_auteur=<?php echo $auteur_session['id_auteur']; ?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>
-				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,senschrono=1}|parametre_url{var_mode,calcul})]&id_auteur=<?php echo $auteur_session['id_auteur']; ?>" title="Aller voir ses propres entrées du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
+				<li><a href="[(#URL_PAGE{cahier-de-texte-saisie}|parametre_url{id_auteur,#SESSION{id_auteur}})]" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>
+				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,senschrono=1}|parametre_url{var_mode,calcul}|parametre_url{id_auteur,#SESSION{id_auteur}})]" title="Aller voir ses propres entrées du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
 <?php }// fin du if auteur session ?>
 			</ul>
 [(#REM)Vérification de l'authentification]
@@ -64,8 +65,8 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 
 ]<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}>[
 (#REM)Vérifier si il existe déjà une sous rubrique du cahier de texte pour l'année en cours
-	]<BOUCLE_Verifie_RubriqueAnnee(RUBRIQUES){id_parent}{titre=#GET{annee_scolaire}}{0,1}><?php
-		$id_rub_cdt='[(#ID_RUBRIQUE|texte_script)]'; //id_rub_cdt contient l'id de la sous-rubrique pour l'année en cours
+	]<BOUCLE_Verifie_RubriqueAnnee(RUBRIQUES){id_parent}{titre=#GET{annee_scolaire}}{0,1}><BOUCLE_determiner_id_rurbique_de_pcm(RUBRIQUES){id_parent}{titre="Professeurs-classes-matières"}>#SET{id_rubrique_pcm,#ID_RUBRIQUE}</BOUCLE_determiner_id_rurbique_de_pcm><?php
+		$id_rub_cdt='[(#ID_RUBRIQUE|texte_script)]'; //id_rub_cdt contient l'id de la sous-rubrique pour l'année en cours alors que #GET{id_rubrique_pcm} contient l'id de la rubrique qui contient les infos sur les classes et les profs
 
 //------------------------------------------------------------
 //Dans tous les cas, on récupère les paramètres du formulaire:
@@ -78,8 +79,10 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 	//print_r($_POST);
 	$id_article=($_GET['id_article']);
 	$classes=($_GET['classes']);
+	$liste_id_classes="";
 	for ($count=0; $count<=$classes; $count++) {
 		$id_classe[$count]=($_GET["id_classe$count"]);
+		$liste_id_classes.=($_GET["id_classe$count"]).",";
 	};//les classes ont été placées dans le tableau $id_classe[]
 	$id_groupe=($_GET["id_groupe"]);
 	$id_matiere=($_GET["id_matiere"]);
@@ -95,7 +98,7 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 //Si le id_matière n'est pas défini, on essaie d'aider un peu en le prédéfinissant... C'est tj qq sec de gagnées pour le prof qui saisi.
 
 	if ((!$id_matiere) and ($_GET['id_auteur']==$auteur_session['id_auteur'])) { ?>
-		<BOUCLE_TrouveMatiere_auteur(ARTICLES){titre_mot="Description de séance"}{id_auteur=#ENV{id_auteur}}{!par date}{0,1}><BOUCLE_TrouveMot_Matiere(MOTS){id_article}{type=Matières}><?php $id_matiere='[(#ID_MOT|texte_script)]';?></BOUCLE_TrouveMot_Matiere></BOUCLE_TrouveMatiere_auteur>
+		<BOUCLE_TrouveMatiere_auteur(ARTICLES){titre_mot="Description de séance"}{id_auteur=#SESSION{id_auteur}}{!par date}{0,1}><BOUCLE_TrouveMot_Matiere(MOTS){id_article}{type=Matières}><?php $id_matiere='[(#ID_MOT|texte_script)]';?> </BOUCLE_TrouveMot_Matiere></BOUCLE_TrouveMatiere_auteur>
 	<?php };// fin du if pas id_matiere et id_auteur ?>[
 	(#REM) Hack pour conditionner une boucle (évite un if en php et donc que les boucles englobées par Conditionnelle_1 soient exécutées quand la condition n'est pas remplie)
 
@@ -116,14 +119,14 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 	?><BOUCLE_TrouveClasses_id_article(MOTS){id_article}{type=Classes}><?php
 		$count++;
 		$id_classe[$count]='[(#ID_MOT|texte_script)]';
-	?></BOUCLE_TrouveClasses_id_article>
+	?> </BOUCLE_TrouveClasses_id_article>
 		<?php $classes=$count; ?>
 	<BOUCLE_TrouveGroupe_id_article(MOTS){id_article}{type=Sous groupes de classes}><?php
 		$id_groupe='[(#ID_MOT|texte_script)]';
-	?></BOUCLE_TrouveGroupe_id_article>
+	?> </BOUCLE_TrouveGroupe_id_article>
 	<BOUCLE_TrouveMatiere_id_article(MOTS){id_article}{type=Matières}><?php
 		$id_matiere='[(#ID_MOT|texte_script)]';
-	?></BOUCLE_TrouveMatiere_id_article>
+	?> </BOUCLE_TrouveMatiere_id_article>
 </BOUCLE_CONDITIONNELLE_1>[
 
 	(#REM) Hack pour conditionner une boucle (évite un if en php et donc que les boucles englobées par Trouve_Infos_Seance_id_article soient exécutées quand la condition n'est pas remplie)
@@ -183,7 +186,7 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 			$contenu_devoir[$devoirs]='[(#TEXTE*|texte_script)]';
 			$id_devoirs[$devoirs]='[(#ID_ARTICLE|texte_script)]';
 		}
-	?></BOUCLE_Trouve_Infos_Devoirs_id_article>
+	?> </BOUCLE_Trouve_Infos_Devoirs_id_article>
 </BOUCLE_Trouve_Infos_Seance_id_article>
 <?php
 		if ($devoirs==-1) $devoirs="";
@@ -212,22 +215,22 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 [(#ENV{classe_matiere}|?{' ',''})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
 <BOUCLE_CONDITIONNELLE_2(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
 	[(#REM)Nom de la matière]
-	<BOUCLE_DireMatiere(MOTS){type="Matières"}><?php if ('[(#ID_MOT|texte_script)]'==$id_matiere) {$matiere_titre='[(#TITRE)]';} ?></BOUCLE_DireMatiere>
+	<BOUCLE_DireMatiere(MOTS){type="Matières"}><?php if ('[(#ID_MOT|texte_script)]'==$id_matiere) {$matiere_titre='[(#TITRE)]';} ?> </BOUCLE_DireMatiere>
 <?php $premiere_classe="";
 for ($count=0; $count<=$classes; $count++) {?>
 	[(#REM)Nom de la ou les classes]
-	<BOUCLE_DireClasse(MOTS){type="Classes"}><?php if ('[(#ID_MOT|texte_script)]'==$id_classe[$count]) { $classes_titre .='[(#TITRE)]'; if (($count+1)<=$classes) $classes_titre .= ", "; if (!$premiere_classe) $premiere_classe='[(#TITRE)]'; } ?></BOUCLE_DireClasse>
+	<BOUCLE_DireClasse(MOTS){type="Classes"}><?php if ('[(#ID_MOT|texte_script)]'==$id_classe[$count]) { $classes_titre .='[(#TITRE)]'; if (($count+1)<=$classes) $classes_titre .= ", "; if (!$premiere_classe) $premiere_classe='[(#TITRE)]'; } ?> </BOUCLE_DireClasse>
 <?php } //fin du for count classes
 if ($id_groupe!=0) { $groupe_titre .= " (";?>
 	[(#REM)Nom du groupe s'il y a... Il est encadré par une parenthèse]
-	<BOUCLE_DireGroupe(MOTS){type="Sous groupes de classes"}><?php if ('[(#ID_MOT|texte_script)]'==$id_groupe) { $groupe_titre .='[(#TITRE)]'; } ?></BOUCLE_DireGroupe>
+	<BOUCLE_DireGroupe(MOTS){type="Sous groupes de classes"}><?php if ('[(#ID_MOT|texte_script)]'==$id_groupe) { $groupe_titre .='[(#TITRE)]'; } ?> </BOUCLE_DireGroupe>
 <?php $groupe_titre .= ")"; }//fin du if id_groupe
 
 	$titre_matiere_classe="en $matiere_titre avec les $classes_titre$groupe_titre";
 	$titre_contenu_seance="Le $date_seance, $titre_matiere_classe";
 	$fragment_titre_devoir=", par les $classes_titre$groupe_titre en $matiere_titre";
 	$fleche="->";
-?></BOUCLE_CONDITIONNELLE_2>[
+?> </BOUCLE_CONDITIONNELLE_2>[
 	(#REM) Hack de la boucle conditionnelle qui remplace le if:
 
 
@@ -242,7 +245,12 @@ if ($id_groupe!=0) { $groupe_titre .= " (";?>
 	[(#ENV{effacer_fiche}|!={"a_confirmer"}|?{' ',''})
 		[(#SET{condition_boucle,#ID_RUBRIQUE})]
 	]
-]<BOUCLE_CONDITIONNELLE_confirmation_effacement(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}><?php
+]<BOUCLE_CONDITIONNELLE_confirmation_effacement(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
+
+<BOUCLE_Recupere_infos(ARTICLES){id_article}>
+	<BOUCLE_Infos_Classes(MOTS){type="Classes"}{id_article}>[(#SET{liste_id_classes,#GET{liste_id_classes}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_MOT}}})]#SET{classe,#TITRE}</BOUCLE_Infos_Classes>
+	<BOUCLE_Infos_Matiere(MOTS){type="Matières"}{id_article}>#SET{id_matiere,#ID_MOT}#SET{matiere,#TITRE}</BOUCLE_Infos_Matiere>
+</BOUCLE_Recupere_infos><?php
 		$liste_des_id_a_jetter[0]=$id_article;
 		$nb_trucs_a_jeter=$devoirs+1;
 		for ($count=1; $count<=$nb_trucs_a_jeter; $count++) {
@@ -254,7 +262,45 @@ if ($id_groupe!=0) { $groupe_titre .= " (";?>
 			$result = spip_query($sql);
 			echo ("<!--update ps: $result-->\n");
 		}
-?>
+?>[
+
+	(#REM) On vérifie la présence d'autres articles pour cette matière. S'il y en a plus, on désacocie la matière de la rurbique de l'année
+
+]<BOUCLE_Verifie_contenu_matiere(ARTICLES){id_article != #ENV{id_article}}{id_rubrique}{id_rubrique != #GET{id_rubrique_pcm}}{id_mot=#GET{id_matiere}}{0,1}>  </BOUCLE_Verifie_contenu_matiere>
+	<?php
+	$sql="DELETE FROM spip_mots_rubriques WHERE id_mot=".'[(#GET{id_matiere}|texte_script)]'." AND id_rubrique=".'[(#ID_RUBRIQUE)]';
+	$result = spip_query($sql);
+	echo ("<!--délier la matière à la rubrique: $result-->\n");
+	?>#SET{matiere,''}
+<//B_Verifie_contenu_matiere>[
+
+	(#REM) On vérifie la présence d'autres articles pour ces classes.
+	- si il y a des articles pour ces classes, on vérifie qu'il y a des articles pour la combinaison classe/matière. Si ce n'est pas le cas, on désassocie la matière de l'article classe.
+	- s'il n'y a plus d'articles pour la classe, on désassocie la classe de la rurbique de l'année et on met à la poubelle l'article de la classe.
+
+]<BOUCLE_Mot_de_la_classe(MOTS){id_mot IN #GET{liste_id_classes}}>
+	<BOUCLE_Article_de_la_classe(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre=#_Mot_de_la_classe:TITRE}>#SET{id_article_classe,#ID_ARTICLE}</BOUCLE_Article_de_la_classe>
+	<BOUCLE_Verifie_contenu_classe(ARTICLES){id_article != #ENV{id_article}}{id_rubrique}{id_rubrique != #GET{id_rubrique_pcm}}{id_mot}{0,1}>
+		<BOUCLE_Verifie_contenu_classe_et_matiere(ARTICLES){id_article != #ENV{id_article}}{id_rubrique}{id_rubrique != #GET{id_rubrique_pcm}}{id_mot}{id_mot=#GET{id_matiere}}{0,1}> </BOUCLE_Verifie_contenu_classe_et_matiere>
+			<?php
+			$sql="DELETE FROM spip_mots_articles WHERE id_mot=".'[(#GET{id_matiere}|texte_script)]'." AND id_article=".'[(#GET{id_article_classe})]';
+			$result = spip_query($sql);
+			echo ("<!--délier la matière de l'article de la classe: $result-->\n");
+			?>#SET{matiere,''}
+		<//B_Verifie_contenu_classe_et_matiere>
+	</BOUCLE_Verifie_contenu_classe>
+		<?php 
+			//effacer (mettre à la poubelle) le fichier de la classe
+			$sql ="UPDATE spip_articles SET statut='poubelle' WHERE id_article=".'[(#GET{id_article_classe})]';
+			$result = spip_query($sql);
+			echo ("<!--update poubelle: $result-->\n");
+			//délier classe et rubrique de l'année
+			$sql="DELETE FROM spip_mots_rubriques WHERE id_mot=".'[(#ID_MOT)]'." AND id_rubrique=".'[(#ID_RUBRIQUE)]';
+			$result = spip_query($sql);
+			echo ("<!--délier la classe à la rubrique: $result-->\n");
+		?>#SET{classe,''}
+	<//B_Verifie_contenu_classe>
+</BOUCLE_Mot_de_la_classe>
 	<h1>La fiche est définitivement effacée</h1>
 			<br class="clear" />	
 	</div>
@@ -268,7 +314,7 @@ if ($id_groupe!=0) { $groupe_titre .= " (";?>
 	};
 	if ($classes>0) echo ("&classes=$classes");
 				?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a></li>
-				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,senschrono=1}|parametre_url{var_mode,calcul})]&id_auteur=<?php echo($auteur_session['id_auteur']);?>&classe=<?php echo($premiere_classe); ?>&matiere=<?php echo($matiere_titre);?>" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
+				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,senschrono=1}|parametre_url{var_mode,calcul}|parametre_url{classe,#GET{classe}}|parametre_url{matiere,#GET{matiere}}|parametre_url{id_auteur,#SESSION{id_auteur}})]" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
 				<li><a href="#URL_PAGE{cahier-de-texte-accueil,var_mode=calcul}" title="retour à l'accueil"><img src="#CHEMIN{images/logo-mini2-22.png}" alt="icône" vspace="2" align="middle">Retourner à l'accueil/au tableau de bord</a></li>
 			</ul>
 </BOUCLE_CONDITIONNELLE_confirmation_effacement>[
@@ -384,7 +430,9 @@ if ($contenu_devoir[0]!="") {
 		<input type="Hidden" <?php echo 'name="'.$key.'" value="'.htmlentities($val).'"'; ?>>
 <?php			}//fin du if key
 		}//fin du while $key $val?>
+		<input type="hidden" name="liste_id_classes" value="<?php echo $liste_id_classes; ?>">
 	<!--Modifier la fiche -->
+		
 		<input type="Submit" name="modifier_fiche" value="Modifier la fiche">
 		<input type="Submit" name="valider_fiche" value="Confirmer l'enregistrement de la fiche (elle ne sera plus modifiée)">
 	</form>
@@ -451,7 +499,8 @@ if ($contenu_devoir[0]!="") {
 //ajout des mots-clés
 	//le mot-clé qui définit que c'est le contenu d'une séance
 	//d'abord on récupère son id:?>
-<BOUCLE_Dire_id_mot_contenu(MOTS){titre="Description de séance"}><?php $id_identif_contenu='[(#ID_MOT)]'?></BOUCLE_Dire_id_mot_contenu>
+<BOUCLE_Dire_id_mot_contenu(MOTS){titre="Description de séance"}><?php $id_identif_contenu='[(#ID_MOT)]'?> </BOUCLE_Dire_id_mot_contenu>
+[(#SET{liste_id_classes_tableau,[(#GET{virgule}|explode{#ENV{liste_id_classes}})]})]
 <?php	//Puis on associe le mot à l'article
 	$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_identif_contenu . ", " . $id_contenu_seance . ")";
 		$result = spip_query($sql);
@@ -461,7 +510,28 @@ if ($contenu_devoir[0]!="") {
 		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_classe[$count] . ", " . $id_contenu_seance . ")";
 		$result = spip_query($sql);
 		echo ("<!--classe: $result-->\n");
-	}
+	} ?>[
+
+	(#REM) Vérification que la classe est liée à la rubrique de l'année et affectation si ce n'était pas le cas.
+	On crée aussi l'article support pour les matières de la classe
+
+]<BOUCLE_CLasses_de_env(MOTS){id_mot IN #GET{liste_id_classes_tableau}}><BOUCLE_Classe_liee_a_annee(RUBRIQUES){id_rubrique}{id_mot}> </BOUCLE_Classe_liee_a_annee> <?php
+	$sql = "INSERT INTO spip_mots_rubriques (id_mot, id_rubrique) VALUES (" . '[(#ID_MOT)]' . ", " . '[(#ID_RUBRIQUE)]' . ")";
+	$result = spip_query($sql);
+?>
+	<BOUCLE_Article_Classe_Present(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre=#_CLasses_de_env:TITRE}> </BOUCLE_Article_Classe_Present>
+<?php
+		$descriptif="Cet article décrit grâce à ses mots-clés, son auteur et son éventuel contenu la classe de ".'[(#_CLasses_de_env:TITRE|texte_script)]';
+		$sql = "INSERT INTO spip_articles (titre, id_rubrique, statut, date, surtitre, descriptif) 
+		VALUES ('".'[(#_CLasses_de_env:TITRE|texte_script)]'."','".'[(#GET{id_rubrique_pcm})]'."', 'publie', NOW(),'".addslashes("À propos d'une classe")."','".addslashes($descriptif)."')";
+		$result = spip_query($sql);
+		$id_article_classe['[(#_CLasses_de_env:ID_MOT|texte_script)]']=spip_insert_id();
+		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" .'[(#_CLasses_de_env:ID_MOT|texte_script)]' . ", " . $id_article_classe['[(#_CLasses_de_env:ID_MOT|texte_script)]'] . ")";
+		$result = spip_query($sql);
+		?>
+	<//B_Article_Classe_Present>
+<//B_Classe_liee_a_annee></BOUCLE_CLasses_de_env>
+<?php
 	//le groupe éventuel:
 	if ($id_groupe!=0) {
 		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_groupe . ", " . $id_contenu_seance . ")";
@@ -471,14 +541,39 @@ if ($contenu_devoir[0]!="") {
 	//la matière:
 	$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_matiere . ", " . $id_contenu_seance . ")";
 	$result = spip_query($sql);
-	echo ("<!--matière: $result-->\n<p>La séance est enregistrée...</p>\n");
+	echo ("<!--matière: $result-->\n<p>La séance est enregistrée...</p>\n"); ?>[
 
+	(#REM) Vérification que la matière est liée à la rubrique de l'année et affectation si ce n'était pas le cas.
+	On associe aussi la matière à l'article support des classes...
+
+]<BOUCLE_Matiere_liee_a_annee(MOTS){id_rubrique}{id_mot=#ENV{id_matiere}}> </BOUCLE_Matiere_liee_a_annee> <?php
+	$sql = "INSERT INTO spip_mots_rubriques (id_mot, id_rubrique) VALUES (" . '[(#ENV{id_matiere}|texte_script)]' . ", " . '[(#ID_RUBRIQUE)]' . ")";
+	$result = spip_query($sql);
+?>
+<//B_Matiere_liee_a_annee>
+<BOUCLE_mot_des_classes(MOTS){id_mot IN #GET{liste_id_classes_tableau}}>
+	<BOUCLE_Verifie_association_a_article_classe(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre=#TITRE}>#SET{id_article_a_associer,#ID_ARTICLE}
+		<BOUCLE_Verifie_association_a_matiere(MOTS){id_article}{id_mot=#ENV{id_matiere}}> </BOUCLE_Verifie_association_a_matiere>
+	<?php
+		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES ('" . '[(#ENV{id_matiere}|texte_script)]' . "', " . '[(#GET{id_article_a_associer})]' . ")";
+		$result = spip_query($sql);
+	?>
+	<//B_Verifie_association_a_matiere></BOUCLE_Verifie_association_a_article_classe>
+	<?php
+		//j'ai remarqué que l'insertion sql faite qq secondes plus tôt des artciles classes peut ne pas être prise ne compte par les boucles. Le SQL qui suit est donc là par sécurité.
+		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES ('" . '[(#ENV{id_matiere}|texte_script)]' . "', " . $id_article_classe['[(#ID_MOT|texte_script)]'] . ")";
+		$result = spip_query($sql);
+	?>
+	<//B_Verifie_association_a_article_classe>
+</BOUCLE_mot_des_classes>
+
+<?php
 //insertion des articles de devoirs s'il y a
 
 if ($contenu_devoir[0]!="") {
 	$liste_devoirs_contenu ="{{Devoirs donnés:}}\n\n";
 	//d'abord on récupère l'id du mot-clé qui désigne les devoirs:?>
-	<BOUCLE_Dire_id_mot_devoir(MOTS){titre="Devoirs à faire"}><?php $id_identif_devoir='[(#ID_MOT)]'?></BOUCLE_Dire_id_mot_devoir>
+	<BOUCLE_Dire_id_mot_devoir(MOTS){titre="Devoirs à faire"}><?php $id_identif_devoir='[(#ID_MOT)]'?> </BOUCLE_Dire_id_mot_devoir>
 	<?php
 	//Puis pour chaque devoir:
 	for ($count=0; $count<=$devoirs; $count++) {
@@ -565,7 +660,7 @@ if ($contenu_devoir[0]!="") {
 	};
 	if ($classes>0) echo ("&classes=$classes");
 				?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a></li>
-				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,senschrono=1}|parametre_url{var_mode,"calcul"})]&id_auteur=<?php echo($auteur_session['id_auteur']);?>&classe=<?php echo($premiere_classe); ?>&matiere=<?php echo($matiere_titre);?>" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
+				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,senschrono=1}|parametre_url{var_mode,'calcul'}|parametre_url{id_auteur,#SESSION{id_auteur}})]&classe=<?php echo($premiere_classe); ?>&matiere=<?php echo($matiere_titre);?>" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
 				<li><a href="#URL_PAGE{cahier-de-texte-accueil,var_mode=calcul}" title="retour à l'accueil"><img src="#CHEMIN{images/logo-mini2-22.png}" alt="icône" vspace="2" align="middle">Retourner à l'accueil/au tableau de bord</a></li>
 			</ul>
 </BOUCLE_CONDITIONNELLE_Enregistrer_dans_base>[
@@ -598,32 +693,29 @@ if ($contenu_devoir[0]!="") {
 ][(#SET{condition_boucle,''})]
 [(#ENV{classe_matiere}|?{'',' '})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
 <BOUCLE_CONDITIONNELLE_Saisir_la_classe_matiere_ou_le_contenu(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
+<B_Fiche_du_prof>
 	<!--Selecteur de classe et matière-->
 		<form name="classe_matiere" method="get">
 		<input type="hidden" name="page" value="cahier-de-texte-saisie">
-<?php	if ($id_article) echo "<input type=\"hidden\" name=\"id_article\" value=\"$id_article\">";?>
+<?php	if ($id_article) echo "<input type=\"hidden\" name=\"id_article\" value=\"$id_article\">";?>[
+
+	(#REM)On se met dans le contexte du prof grâce à son article-fiche
+
+]<BOUCLE_Fiche_du_prof(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur=#SESSION{id_auteur}}{surtitre="À propos d'un professeur"}{0,1}>
+	<B_ToutesLesClasses>
 		<fieldset>
+			<p class="infos">[(#TOTAL_BOUCLE|>{1}|?{"Seules vos classes sont affichées","Seule votre classe est affichée"})]. <a href="[(#URL_PAGE{cahier-de-texte-choix-classes-matieres}|parametre_url{id_auteur,#SESSION{id_auteur}})]#Classes" title="Rajouter et enlever des classes dans lesquelles on enseigne" onClick="javascript:window.open(this.href,'choix-doc', 'scrollbars=yes, resizable=yes, width=760, height=500'); return false;">Changer ses classes</a></p>
 			<legend><?php if ($id_article) {echo "Modifier ";}; ?>Classe<?php if ($classes>0) echo "s"?>&nbsp;:</legend>
 <?php //Une ou plusieurs classes
 if ($classes>0) echo ("Regroupement de classes&nbsp;:");
 for ($count=0; $count<=$classes; $count++) {
 ?>
-			<select id="classe<?php echo $count;?>" name="id_classe<?php echo $count;?>" size="1">
-[
+			<select id="classe<?php echo $count;?>" name="id_classe<?php echo $count;?>" size="1">[
 	(#REM)On extrait toutes les classes de Spip
 
-][
-	(#SET{premiere_classe_du_prof,"pas encore"})
-]<BOUCLE_ToutesLesClasses(MOTS){type="Classes"}{par titre}>
-	<BOUCLE_Classes_du_prof(ARTICLES){id_rubrique}{id_mot}{id_auteur=#SESSION{id_auteur}}{0,1}>[
-		(#GET{premiere_classe_du_prof}|?{' ',''})<?php
-			$sinon=" selected=selected";
-			?>[(#SET{premiere_classe_du_prof,""})
-		]][
-		(#SET{classe_du_prof,"on"})
-	]</BOUCLE_Classes_du_prof>
-				<option value="#ID_MOT"<?php if ($id_classe[$count]=='[(#ID_MOT|texte_script)]') {echo " selected=selected";} else {echo $sinon;} $sinon='';?>[ class="(#GET{classe_du_prof})"]>#TITRE</option>[(#SET{classe_du_prof,""})]
-</BOUCLE_ToutesLesClasses>
+	]<BOUCLE_ToutesLesClasses(MOTS){id_article}{type="Classes"}{par titre}>
+				<option value="#ID_MOT"<?php if ($id_classe[$count]=='[(#ID_MOT|texte_script)]') {echo " selected=selected";} else {echo $sinon;} $sinon='';?>>#TITRE</option>
+	</BOUCLE_ToutesLesClasses>
 			</select>
 <?php } //fin du for count classes
 
@@ -636,26 +728,43 @@ if ($classes>0) {
 
 			<input type="hidden" name="classes" value="<?php echo $classes;?>">
 			<input type="Submit" value="Rajouter une classe" name="plusclasse">
-			Groupe&nbsp;:<select id="groupe" name="id_groupe" size="1">
+			Groupe&nbsp;: <select id="groupe" name="id_groupe" size="1">
 				<option value="0">Pas de groupe</option>
 [(#REM)On extrait tous les groupes de Spip]
-<BOUCLE_ToutesLesGroupes(MOTS){type="Sous groupes de classes"}{par titre}>
+	<BOUCLE_ToutesLesGroupes(MOTS){type="Sous groupes de classes"}{par titre}>
 				<option value="#ID_MOT"<?php if ($id_groupe=='[(#ID_MOT|texte_script)]') echo " selected=selected";?>>#TITRE</option>
-</BOUCLE_ToutesLesGroupes>
+	</BOUCLE_ToutesLesGroupes>
 			</select>
 		</fieldset>
+
+	</B_ToutesLesClasses>
+<p>Vous n'avez pas encore indiqué à quelle(s) classe(s) vous enseignez.</p>
+<INCLURE{fond=cahier-de-texte-choix-classes-matieres}{id_auteur=#SESSION{id_auteur}}{inclu='oui'}{parent=#ENV{page}}>#SET{inclusion_choix,'oui'}
+	<//B_ToutesLesClasses>
+	<B_ToutesLesMatieres>
 		<fieldset>
 			<legend><?php if ($id_article) {echo "Modifier ";}; ?>Matière&nbsp;:</legend>
+			<p class="infos">[(#TOTAL_BOUCLE|>{1}|?{"Seules vos matières sont affichées","Seule votre matière est affichée"})]. <a href="[(#URL_PAGE{cahier-de-texte-choix-classes-matieres}|parametre_url{id_auteur,#SESSION{id_auteur}})]#Matières" title="Rajouter et enlever des matières dans lesquelles on enseigne" onClick="javascript:window.open(this.href,'choix-doc', 'scrollbars=yes, resizable=yes, width=760, height=500'); return false;">Changer ses matières</a></p>
 			<select id="matiere" name="id_matiere" size="1">
 [(#REM)On extrait toutes les matières de Spip]
-<BOUCLE_ToutesLesMatieres(MOTS){type="Matières"}{par num titre}{par titre}>
+	<BOUCLE_ToutesLesMatieres(MOTS){id_article}{type="Matières"}{par num titre}{par titre}>
 				<option value="#ID_MOT"<?php if ($id_matiere=='[(#ID_MOT|texte_script)]') echo " selected=selected";?>>#TITRE</option>
-</BOUCLE_ToutesLesMatieres>
+	</BOUCLE_ToutesLesMatieres>
 			</select>
 			</fieldset>
-			<input type="hidden" name="id_auteur" value="<?php echo $id_auteur;?>">
-			<input type="Submit" value="<?php if ($id_article) {echo "Modifier";} else {echo "Valider";}; ?> classe<?php if ($classes>0) echo "s"?> et matière" name="classe_matiere">
+	</B_ToutesLesMatieres>
+[(#GET{inclusion_choix}|!={'oui'}|?{' ',''})<p>Vous n'avez pas encore indiqué quelle(s) matière(s) vous enseignez</p>
+<INCLURE{fond=cahier-de-texte-choix-classes-matieres}{id_auteur=#SESSION{id_auteur}}{inclu='oui'}{parent=#ENV{page}}>][(#SET{inclusion_choix,'oui'})]
+	<//B_ToutesLesMatieres>
+</BOUCLE_Fiche_du_prof>
+[(#GET{inclusion_choix}|!={'oui'}|?{' ',''})
+			<input type="hidden" name="id_auteur" value="#SESSION{id_auteur}">
+			<input type="Submit" value="<?php if ($id_article) {echo "Modifier";} else {echo "Valider";}; ?> classe<?php if ($classes>0) echo "s"?> et matière" name="classe_matiere">]
 		</form>
+</B_Fiche_du_prof>
+[(#GET{inclusion_choix}|!={'oui'}|?{' ',''})<p>Vous n'avez pas encore indiqué quelle(s) matière(s) vous enseignez et à quelle(s) classe(s).</p>
+<INCLURE{fond=cahier-de-texte-choix-classes-matieres}{id_auteur=#SESSION{id_auteur}}{inclu='oui'}{parent=#ENV{page}}>]
+<//B_Fiche_du_prof>
 </BOUCLE_CONDITIONNELLE_Saisir_la_classe_matiere_ou_le_contenu>
 </B_CONDITIONNELLE_Saisir_la_classe_matiere_ou_le_contenu>[
 
@@ -760,13 +869,13 @@ alt="AIDE"  title="De l'aide sur cet &eacute;l&eacute;ment" class='aide' /></a><
 ][(#SET{condition_boucle,''})]
 [(#ENV{classe_matiere}|?{' ',''})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
 <BOUCLE_CONDITIONNELLE_Affichage_des_fiches_connexes(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
-	[(#INCLURE{fond=cahier-de-texte-affichage-seances-de-saisie}{id_classe0=#ENV*{id_classe0}}{id_matiere=#ENV*{id_matiere}}{id_groupe=#ENV*{id_groupe}}{id_auteur=#ENV{id_auteur}}{id_mot=#ENV{id_groupe}})]
+	[(#INCLURE{fond=cahier-de-texte-affichage-seances-de-saisie}{id_classe0=#ENV*{id_classe0}}{id_matiere=#ENV*{id_matiere}}{id_groupe=#ENV*{id_groupe}}{id_auteur=#SESSION{id_auteur}}{id_mot=#ENV{id_groupe}})]
 </BOUCLE_CONDITIONNELLE_Affichage_des_fiches_connexes>
 	</div>
 [(#REM)Inclusion du pied de page]
 [(#INCLURE{fond=cahier-de-texte-pied})]
 </div>
-</BOUCLE_Verifie_RubriqueAnnee></B_Verifie_RubriqueAnnee>[
+</BOUCLE_Verifie_RubriqueAnnee>[
 	
 	(#SET{descriptif_rubrique,"Cahier de texte de l'année scolaire "})
 ][
@@ -779,8 +888,12 @@ alt="AIDE"  title="De l'aide sur cet &eacute;l&eacute;ment" class='aide' /></a><
 		$result = spip_query($sql);
 		$id_rubrique=spip_insert_id();
 		$id_rub_cdt=$id_rubrique;
+		$sql = "INSERT INTO spip_rubriques (titre, id_parent, descriptif , statut, date) 
+		VALUES ('".addslashes("Professeurs-classes-matières")."', '$id_rubrique','".addslashes("Cette rubrique contient des données necessaires au fonctionnement du cahier de texte en ligne.\n\n  {{Ne l'effacez pas}}. {{Ne la renommez pas}}. {{Ne modifiez pas son contenu}} sinon il ne fonctionnera plus correctement !")."', 'publie',NOW())";
+		
+		$result = spip_query($sql);
 ?>
-		la sous-rubrique #GET{annee_scolaire} a été créée pour gérer le cahier de texte de cette année scolaire. Ne l'effacez pas, ne la renommez pas et laissez la dans la rubrique Cahier de texte !
+		les sous-rubriques «&nbsp;#GET{annee_scolaire}&nbsp;» et «&nbsp;Professeurs-classes-matières&nbsp;» ont été créées pour gérer le cahier de texte de cette année scolaire. Ne les effacez pas, ne les renommez pas et laissez les dans la rubrique Cahier de texte !
 		<a href="[(#SELF|parametre_url{var_mode,calcul})]" title="rafficher la page">Rafraichissez la page pour remplir une séance S.V.P.</a>
 	<//B_Verifie_RubriqueAnnee>
 </BOUCLE_Contexte_RubriqueCDT>

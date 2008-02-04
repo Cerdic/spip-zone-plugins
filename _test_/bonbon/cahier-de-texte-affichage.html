@@ -8,6 +8,7 @@
 ***Affichage d'extraits du cahier de texte, cette page prend les paramètres suivants (en GET):
 classe= le nom d'une classe (attention il faut qu'il y ait identité avec le mot clé de la classe)
 titre_mot= le nom du groupe (attention il faut qu'il y ait identité avec le mot clé du groupe)
+groupes= si c'est vrai des onglets pour les groupes s'affichent
 matiere= le nom de la matière (attention il faut qu'il y ait identité avec le mot clé de la matière)
 id_auteur= l'id_auteur d'un auteur (un professeur)
 date_debut=début de la période considérée (sinon c'est depuis le début de l'année en cours)
@@ -16,7 +17,7 @@ Les dates sont au format YYYY-MM-DD
 devoirs_seuls= si cet argument est donné, alors seuls les devoirs s'affichent.
 Si les deux arguments sont données (seances_seules et devoirs_seul rien ne s'affiche !)
 annee_scolaire= définit quelle année scolaire (sous le format XXXX%2FYYYY comme par exemple 2006%2F2007). Si ce n'est pas défini, c'est l'année scolaire la plus récente qui s'affiche. Note: %2F est un slash (/) encodé pour aller dans l'url.
-nb=nombre maxi d'entrées listées (par défaut 20 entrées...)
+nb=nombre maxi d'entrées listées (par défaut 10 entrées...)
 senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chrono.
 -->[
 
@@ -27,7 +28,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 ][	(#SET{annee_rubrique,[(#ENV{date}|bonbon_annee_scolaire)]})
 ][	(#ENV{annee_scolaire}|?{' ',''})
 		#SET{annee_rubrique,#ENV{annee_scolaire}}
-	]<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre=#GET{annee_rubrique}}{!par titre}{0,1}>
+	]<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre=#GET{annee_rubrique}}{!par titre}{0,1}><BOUCLE_Rubrique_profs_classes_matieres(RUBRIQUES){id_parent}{titre="Professeurs-classes-matières"}>[(#SET{id_rubrique_pcm,#ID_RUBRIQUE})]</BOUCLE_Rubrique_profs_classes_matieres>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,7 +45,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 	<div id="EntetePage">
 			<ul class="boutons">
 				<li><a href="#URL_PAGE{cahier-de-texte-accueil}" title="Retourner à la page d'accueil du cahier de texte"><img src="#CHEMIN{images/dialog-ok-upside-down.png}" alt="icône" vspace="2" align="middle">Accueil du cahier de texte</a></li>
-				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,nb=20}|parametre_url{var_mode,calcul})]" title="afficher les dernières entrées du cahier de texte"><img src="#CHEMIN{images/system-search.png}" alt="icône" vspace="2" align="middle">Afficher les 20 dernieres séances</a></li>
+				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,nb=10}|parametre_url{var_mode,calcul})]" title="afficher les dernières entrées du cahier de texte"><img src="#CHEMIN{images/system-search.png}" alt="icône" vspace="2" align="middle">Afficher les dernieres séances</a></li>
 <?php if ($auteur_session) {?>
 				<li><a href="#URL_PAGE{cahier-de-texte-saisie}&id_auteur=<?php echo $auteur_session['id_auteur'];?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>
 				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,senschrono=1}|parametre_url{var_mode,calcul})]&id_auteur=<?php echo $auteur_session['id_auteur'];?>" title="Aller voir ses propres entrées du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
@@ -74,25 +75,82 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 <!--Liste des classes-->
 		<div class="onglets-horizontaux">
 			<span class="onglet inactif" style="background: bisque;">Classes&nbsp;&rarr; </span>
-#SET{classe_env,#ENV{classe,''}}#SET{compteur,0}
-<BOUCLE_ToutesLesClasses_affichage(MOTS){type="Classes"}{par titre}><BOUCLE_Que_les_classes_avec_article(ARTICLES){id_rubrique}{id_auteur?}{id_mot}{0,1}>[
+[(#SET{classe_env,#ENV{classe,''}})][(#SET{compteur,0})][
+
+	(#REM) Hack de l'affichage conditionnel évolué puisque cette fois, la boucle sert aussi à afficher !
+
+
+]<BOUCLE_CONDITIONNELLE_affichage_classes_prof_ou_non(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{surtitre="À propos d'un professeur"}{ps=#ID_AUTEUR}>
+	<BOUCLE_Classes_du_prof(MOTS){id_article}{type="Classes"}{par titre}>[
 		(#SET{compteur,[(#GET{compteur}|plus{1})]})
 ][
 (#REM) La classe par défaut est la première. Si il n'y a pas de classe dans #ENV alors, c'est la classe par défaut qui est choisie
 ][
 		(#GET{compteur}|=={1}|?{' ',''})
-		#SET{classe_defaut,#_ToutesLesClasses_affichage:TITRE}
+		#SET{classe_defaut,#TITRE}
 		[
 		(#GET{classe_env}|?{'',' '})
-			#SET{classe_env,#_ToutesLesClasses_affichage:TITRE}
+			#SET{classe_env,#TITRE}
 		]
 ][
 		(#SET{select,''})
 ][
-		(#GET{classe_env}|=={#_ToutesLesClasses_affichage:TITRE}|?{' ',''})#SET{select,'on '}
-]			<a href="[(#SELF|parametre_url{'classe',#_ToutesLesClasses_affichage:TITRE}|parametre_url{matiere,''}|parametre_url{var_mode,#GET{var_mode}}|parametre_url{titre_mot,''})]" title="Afficher le cahier de texte de la [(#_ToutesLesClasses_affichage:TITRE|textebrut)]" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#_ToutesLesClasses_affichage:TITRE</a>
-</BOUCLE_Que_les_classes_avec_article></BOUCLE_ToutesLesClasses_affichage>
+		(#GET{classe_env}|=={#TITRE}|?{' ',''})#SET{select,'on '}
+]			<a href="[(#SELF|parametre_url{'classe',#TITRE}|parametre_url{matiere,''}|parametre_url{var_mode,#GET{var_mode}}|parametre_url{titre_mot,''})]" title="Afficher le cahier de texte de la [(#TITRE|textebrut)] avec [(#LESAUTEURS|textebrut)]" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#TITRE</a>
+	</BOUCLE_Classes_du_prof>
+			<a href="[(#SELF|parametre_url{'classe',''}|parametre_url{matiere,''}|parametre_url{var_mode,#GET{var_mode}}|parametre_url{titre_mot,''}|parametre_url{id_auteur,''})]" title="Afficher toutes les classes" class="onglet" onmouseover="this.className='onglet hover'" onmouseout="this.className='onglet'">Toutes les classes</a>
+	</B_Classes_du_prof>
+</BOUCLE_CONDITIONNELLE_affichage_classes_prof_ou_non>[
 
+	(#REM) Si une matière est choisie on affiche que les classes qui la concernent sinon, on les affiche toutes
+
+	]<BOUCLE_CONDITIONNELLE_affichage_de_matiere(MOTS){titre=#ENV{matiere}}{0,1}>
+		<BOUCLE_LesClasses_de_cette_matiere_affichage(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{surtitre="À propos d'une classe"}{id_mot}{par titre}>[
+				(#SET{compteur,[(#GET{compteur}|plus{1})]})
+		][
+		(#REM) La classe par défaut est la première. Si il n'y a pas de classe dans #ENV alors, c'est la classe par défaut qui est choisie
+		][
+				(#GET{compteur}|=={1}|?{' ',''})
+				#SET{classe_defaut,#TITRE}
+				[
+				(#GET{classe_env}|?{'',' '})
+					#SET{classe_env,#TITRE}
+				]
+		][
+				(#SET{select,''})
+		][
+				(#GET{classe_env}|=={#TITRE}|?{' ',''})#SET{select,'on '}
+		]			<a href="[(#SELF|parametre_url{'classe',#TITRE}|parametre_url{matiere,#ENV{matiere}}|parametre_url{var_mode,#GET{var_mode}}|parametre_url{titre_mot,''})]" title="Afficher le cahier de texte de la [(#TITRE|textebrut)] en [(#_CONDITIONNELLE_affichage_de_matiere:TITRE|textebrut)]" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#TITRE</a>
+		</BOUCLE_LesClasses_de_cette_matiere_affichage>
+		<a href="[(#SELF|parametre_url{'classe',''}|parametre_url{matiere,''}|parametre_url{var_mode,#GET{var_mode}}|parametre_url{titre_mot,''})]" title="Afficher toutes les classes" class="onglet" onmouseover="this.className='onglet hover'" onmouseout="this.className='onglet'">Toutes les classes</a>
+		</B_LesClasses_de_cette_matiere_affichage>
+	</BOUCLE_CONDITIONNELLE_affichage_de_matiere>
+		<BOUCLE_ToutesLesClasses_affichage(MOTS){id_rubrique}{type="Classes"}{par titre}>[
+				(#SET{compteur,[(#GET{compteur}|plus{1})]})
+		][
+		(#REM) La classe par défaut est la première. Si il n'y a pas de classe dans #ENV alors, c'est la classe par défaut qui est choisie
+		][
+				(#GET{compteur}|=={1}|?{' ',''})
+				#SET{classe_defaut,#TITRE}
+				[
+				(#GET{classe_env}|?{'',' '})
+					#SET{classe_env,#TITRE}
+				]
+		][
+				(#SET{select,''})
+		][
+				(#GET{classe_env}|=={#TITRE}|?{' ',''})#SET{select,'on '}
+		]			<a href="[(#SELF|parametre_url{'classe',#TITRE}|parametre_url{matiere,''}|parametre_url{var_mode,#GET{var_mode}}|parametre_url{titre_mot,''})]" title="Afficher le cahier de texte de la [(#TITRE|textebrut)]" class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select}  hover'" onmouseout="this.className='onglet #GET{select}'">#TITRE</a>
+		</BOUCLE_ToutesLesClasses_affichage>
+	<//B_CONDITIONNELLE_affichage_de_matiere>
+<//B_CONDITIONNELLE_affichage_classes_prof_ou_non>[
+
+	(#REM) Hack pour conditionner une boucle pour éviter d'fficher les onglets des groupes (ils ne s'affichent que dans des cas précis
+
+][(#SET{condition_boucle,''})]
+[(#ENV{boucles}|?{' ',''})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
+[(#ENV{titre_mot}|?{' ',''})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
+<BOUCLE_CONDITIONNELLE_Groupes_ou_non(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
 <!-- les groupes-->
 			<span class="onglet inactif" style="background: bisque;">Groupes&nbsp;&rarr; </span>
 <BOUCLE_Les_Groupes(MOTS){type="Sous groupes de classes"}{par titre}><BOUCLE_Que_les_groupes_avec_article(ARTICLES){id_rubrique}{id_auteur?}{id_mot}{titre_mot=#ENV{classe,#GET{classe_defaut}}}{0,1}>[
@@ -103,6 +161,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 </BOUCLE_Que_les_groupes_avec_article></BOUCLE_Les_Groupes>[
 		(#ENV{titre_mot}|?{' ',''})<a href="[(#SELF|parametre_url{'titre_mot',''})]" title="Afficher le cahier de texte de tous les groupes de la #ENV{classe,#GET{classe_defaut}}" class="onglet" onmouseover="this.className='onglet  hover'" onmouseout="this.className='onglet'">Les deux groupes</a>
 ]
+</BOUCLE_CONDITIONNELLE_Groupes_ou_non>
 		</div>
 		<br clear="all">[
 
@@ -117,28 +176,52 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 	(#ENV{devoirs_seuls}|?{'',' '})#SET{affichage_matiere,#ID_RUBRIQUE}
 ][
 	(#ENV{matiere}|?{' ',''})#SET{affichage_matiere,#ID_RUBRIQUE}
-]<BOUCLE_Test_si_devoirs_ou_matiere(RUBRIQUES){id_rubrique=#GET{affichage_matiere}}{0,1}>
+]<BOUCLE_CONDITIONNELLE_Test_si_devoirs_ou_matiere(RUBRIQUES){id_rubrique=#GET{affichage_matiere}}{0,1}>
 <!--Liste des matières-->
 		<div class="onglets-verticaux">
 			<span class="onglet inactif" style="background: bisque;"><center>Matières<br />&darr;</center></span>
-#SET{matiere_env,#ENV{matiere,''}}
-<BOUCLE_ToutesLesMatieres_affichage(MOTS){type="Matières"}{par titre}><BOUCLE_Que_les_matieres_avec_article(ARTICLES){id_rubrique}{id_auteur?}{id_mot}{titre_mot=#ENV{classe,#GET{classe_defaut}}}{0,1}>[
-(#REM) La matiere par défaut est la première qui a une fiche qui correspond à la classe par défaut. Si il n'y a pas de matiere dans #ENV alors, c'est la matiere par défaut qui est choisie
-][
-		(#GET{matiere_defaut}|?{'',' '})
-		#SET{matiere_defaut,#_ToutesLesMatieres_affichage:TITRE}
-		[
-		(#GET{matiere_env}|?{'',' '})
-			#SET{matiere_env,#_ToutesLesMatieres_affichage:TITRE}
-		]
-][
-		(#SET{select,''})
-][
-		(#GET{matiere_env}|=={#_ToutesLesMatieres_affichage:TITRE}|?{' ',''})#SET{select,'on '}
-]			<a href="[(#SELF|parametre_url{'matiere',#_ToutesLesMatieres_affichage:TITRE}|parametre_url{var_mode,#GET{var_mode}})]" title="Afficher le cahier de texte de la [(#ENV{classe,#GET{classe_defaut}}|textebrut)] en [(#_ToutesLesMatieres_affichage:TITRE|textebrut)]"  class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select} hover'" onmouseout="this.className='onglet #GET{select}'">[(#_ToutesLesMatieres_affichage:TITRE)]</a>
-</BOUCLE_Que_les_matieres_avec_article></BOUCLE_ToutesLesMatieres_affichage>
+#SET{matiere_env,#ENV{matiere,''}}[
+
+	(#REM) Hack pour conditionner une boucle	
+
+	]<BOUCLE_CONDITIONNELLE_affichage_matiere_prof_ou_non(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{surtitre="À propos d'un professeur"}{ps=#ID_AUTEUR}>
+		<BOUCLE_Article_de_classe_de_prof(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre=#ENV{classe,#GET{classe_defaut}}}>
+			<BOUCLE_Matieres_du_prof(MOTS){id_article}{id_article=#_CONDITIONNELLE_affichage_matiere_prof_ou_non:ID_ARTICLE}{type="Matières"}{par titre}>[
+				(#REM) La matiere par défaut est la première qui a une fiche qui correspond à la classe par défaut. Si il n'y a pas de matiere dans #ENV alors, c'est la matiere par défaut qui est choisie
+				][
+						(#GET{matiere_defaut}|?{'',' '})
+						#SET{matiere_defaut,#TITRE}
+						[
+						(#GET{matiere_env}|?{'',' '})
+							#SET{matiere_env,#TITRE}
+						]
+				][
+						(#SET{select,''})
+				][
+						(#GET{matiere_env}|=={#TITRE}|?{' ',''})#SET{select,'on '}
+				]			<a href="[(#SELF|parametre_url{'matiere',#TITRE}|parametre_url{var_mode,#GET{var_mode}})]" title="Afficher le cahier de texte de la [(#ENV{classe,#GET{classe_defaut}}|textebrut)] en [(#TITRE|textebrut)]"  class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select} hover'" onmouseout="this.className='onglet #GET{select}'">[(#TITRE)]</a>
+			</BOUCLE_Matieres_du_prof>
+		</BOUCLE_Article_de_classe_de_prof>
+	</BOUCLE_CONDITIONNELLE_affichage_matiere_prof_ou_non>
+		<BOUCLE_Article_de_classe(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre=#ENV{classe,#GET{classe_defaut}}}>
+		<BOUCLE_ToutesLesMatieres_affichage(MOTS){id_article}{type="Matières"}{par titre}>[
+		(#REM) La matiere par défaut est la première qui a une fiche qui correspond à la classe par défaut. Si il n'y a pas de matiere dans #ENV alors, c'est la matiere par défaut qui est choisie
+		][
+				(#GET{matiere_defaut}|?{'',' '})
+				#SET{matiere_defaut,#TITRE}
+				[
+				(#GET{matiere_env}|?{'',' '})
+					#SET{matiere_env,#TITRE}
+				]
+		][
+				(#SET{select,''})
+		][
+				(#GET{matiere_env}|=={#TITRE}|?{' ',''})#SET{select,'on '}
+		]			<a href="[(#SELF|parametre_url{'matiere',#TITRE}|parametre_url{var_mode,#GET{var_mode}})]" title="Afficher le cahier de texte de la [(#ENV{classe,#GET{classe_defaut}}|textebrut)] en [(#TITRE|textebrut)]"  class="onglet #GET{select}" onmouseover="this.className='onglet #GET{select} hover'" onmouseout="this.className='onglet #GET{select}'">[(#TITRE)]</a>
+		</BOUCLE_ToutesLesMatieres_affichage></BOUCLE_Article_de_classe>
+<//B_CONDITIONNELLE_affichage_matiere_prof_ou_non>
 		</div>
-</BOUCLE_Test_si_devoirs_ou_matiere>[
+</BOUCLE_CONDITIONNELLE_Test_si_devoirs_ou_matiere>[
 
 (#REM) On prépare une liste des artciles parmis lesquels faire la requête. Cette liste sera «stockée» dans {!doublons requete}. Ceci atomise les requêtes avec des Regexp et évite les trop grosses requêtes SQL. Merci à Cédric Morin pour l'idée.
 

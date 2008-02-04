@@ -1,4 +1,4 @@
-#CACHE{60}
+#CACHE{0}
 <!--
 *****Cahier de texte pour Spip: Bonbon !
 *****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
@@ -14,19 +14,34 @@
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
 </head>
 <body>
-<h1>Préparation du cahier de texte sous Spip: ajout des classes et des matières et la rubrique du cahier de texte</h1>
-<p>Le bouton présent sur cette page ne doit être cliqué qu'une fois et <strong>une seule</strong>. Après avoir cliqué, ne faites pas <em>Recalculer cette page</em>.<br>
+<h1>Préparation ou mise à jour du cahier de texte sous Spip: ajout des classes et des matières et la rubrique du cahier de texte, mise à jour des fiches des classes et des profs</h1>[
+	(#REM) Hack pour conditionner une boucle (évite un if en php et donc que les boucles englobées par Conditionnelle_1 soient exécutées quand la condition n'est pas remplie)
+
+]<BOUCLE_Nimportequelle_rubrique(RUBRIQUES){0,1}>#SET{une_rubrique,#ID_RUBRIQUE}</BOUCLE_Nimportequelle_rubrique>[
+(#SET{condition_boucle,''})
+][(#ENV{bouton}|?{'',' '})
+	[(#SET{condition_boucle,#GET{une_rubrique}})]
+
+][
+(#SESSION{statut}|=={'0minirezo'}|?{'',' '})
+	[(#SET{condition_boucle,''})]
+
+]<BOUCLE_CONDITIONNELLE_Bouton_presse_ou_non(RUBRIQUES){id_rubrique=#GET{condition_boucle}}>
+</BOUCLE_CONDITIONNELLE_Bouton_presse_ou_non>
 Avant d'exécuter cette page en cliquant sur le bouton, faites une <a href="./ecrire/?exec=admin_tech" title="aller faire la sauvegarde maintenant">sauvegarde de votre base de données</a>.<br>
 En cas de problème vous devrez réutiliser cette sauvegarde.<p>
-<p>Ce squelette va installer dans votre Spip les mots-clés utilisés par le cahier de texte sous Spip.<p>
-<p>Ces mots-clés sont la liste des classes, les listes de matières, quelques autres mots-clés de gestion. Il faut éditer ce squelette pour personnaliser les classes et matières.</p>
-<p>Puis, il sera rajouté une rubrique qui contiendra les entrées du cahier de texte sous forme d'articles. Le nom de cette rubrique devra être conservé. Vous pouvez compléter ce nom (avec un numéro par exemple), mais devez impérativement garder tout le contenu de son titre actuel, sinon le cahier de texte ne fonctionnera plus.</p>
-<form name="form" method="post">
-	<input type="Submit" value="Installer les mots-clés du cahier de texte dans Spip" name="bouton">
+<p>Vous allez installer dans votre Spip les mots-clés, rubriques et autres élements utilisés par le cahier de texte sous Spip.<p>
+<p>Ces mots-clés sont la liste des classes, les listes de matières, quelques autres mots-clés de gestion. Il faut éditer le fichier «cahier-de-texte-installer-mots-cles.html» vers la ligne n°46 pour personnaliser les classes et matières.</p>
+<p>Puis, il sera rajouté une rubrique qui contiendra les entrées du cahier de texte sous forme d'articles. Cette rubrique contiendra aussi des sous-rubriques. Les noms de ces rubriques devront être conservés. Vous pouvez compléter le nom  de la rubrique racine du cahier de texte nommée «Cahier de texte en-ligne» (avec un numéro par exemple), mais devez impérativement garder tout le contenu de son titre actuel, sinon le cahier de texte ne fonctionnera plus.</p>
+<hr>
+<p><strong>Si vous mettez à jour votre cahier de texte, <em>attention</em>&nbsp;:</strong> l'opération peut être très lente et pendre beaucoup des ressources du serveur de base de données. Veillez à ne faire cette mise à jour que pendant des périodes de faible fréquentation du cahier de texte (en général, très tôt le matin ou très tard le soir).</p>
+<form name="form" method="get">
+	<input type="Hidden" value="cahier-de-texte-installer-mots-cles" name="page">[
+(#SESSION{statut}|=={'0minirezo'}|?{' ',''})<input type="Submit" value="Installer les mots-clés du cahier de texte dans Spip" name="bouton">]
 </form>
+</B_CONDITIONNELLE_Bouton_presse_ou_non>
+
 <?php
-//Si le bouton a été pressé
-if($_POST['bouton']){
 
 //à adapter selon vos besoins:
 
@@ -55,6 +70,38 @@ if($_POST['bouton']){
 	"Cahier de texte en-ligne"=>$specif,
 	);
 
+//D'abord on regarde s'il y a déjà un cahier de texte: ?>
+<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>[
+(#REM) On détermine quelle est l'année scolaire que l'on veut afficher
+][	(#SET{annee_rubrique,[(#ENV{date}|bonbon_annee_scolaire)]})
+][	(#ENV{annee_scolaire}|?{' ',''})
+		#SET{annee_rubrique,#ENV{annee_scolaire}}
+	]<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre=#GET{annee_rubrique}}{!par titre}{0,1}>
+		<?php 
+		$id_rubrique_de_annee='[(#ID_RUBRIQUE|texte_script)]';
+		?>
+		[(#SET{id_rubrique,#ID_RUBRIQUE})][(#SET{cdt_existe,'oui'})]
+		<BOUCLE_Rubrique_profs_classes_matieres(RUBRIQUES){id_parent}{titre="Professeurs-classes-matières"}>
+		<?php 
+		$id_rubrique_pcm='[(#ID_RUBRIQUE|texte_script)]';
+		?>
+		[(#SET{id_rubrique_pcm,#ID_RUBRIQUE})]
+		</BOUCLE_Rubrique_profs_classes_matieres>
+		</B_Rubrique_profs_classes_matieres>
+		<?php
+		$sql = "INSERT INTO spip_rubriques (titre, id_parent, descriptif , statut, date) 
+		VALUES ('".addslashes("Professeurs-classes-matières")."', '$id_rubrique_de_annee','".addslashes("Cette rubrique contient des données necessaires au fonctionnement du cahier de texte en ligne.\n\n  {{Ne l'effacez pas}}. {{Ne la renommez pas}}. {{Ne modifiez pas son contenu}} sinon il ne fonctionnera plus correctement !")."', 'publie',NOW())";
+		
+		$result = spip_query($sql);
+		$id_rubrique=spip_insert_id();
+		$texte="<p>La rubrique «Professeurs-classes-matières» pour l'année ".'[(#_AnneeScol:TITRE|texte_script)]'." est la rubrique n°$id_rubrique.";
+		echo $texte;
+		?>	
+		<//B_Rubrique_profs_classes_matieres>
+	</BOUCLE_AnneeScol>
+</BOUCLE_Contexte_RubriqueCDT>
+
+<?php
 //Pour chaque groupe de mot-clés à rajouter:
 	while (list($key,$val)=each($liste_groupes)) {
 
@@ -75,7 +122,10 @@ if($_POST['bouton']){
 ?>
 </BOUCLE_Verifie_Groupe>
 <?php
-		if ($existe!=1) $id_groupe=ajoute_groupe($nom_groupe);
+		if ($existe!=1) {
+			$id_groupe=bonbon_ajoute_groupe($nom_groupe);
+			echo "<h2>Ajout dans Spip du <a href=\"./ecrire/?exec=mots_tous\" title=\"Aller voir tous les groupes\">groupe</a> nommé <a href=\"./ecrire/?exec=mots_type&id_groupe=$id_groupe\" title=\"Aller voir le groupe $nom_groupe\">\"$nom_groupe\" de numéro $id_groupe</a></h2>";
+		}// fin du if not existe
 
 		//Puis les mots...
 		while (list($key2,$val2)=each($val)) {
@@ -91,19 +141,135 @@ if($_POST['bouton']){
 					$existe=1;
 					$id_mot='[(#ID_MOT|texte_script)]';
 					echo "<p>Le mot-clé $val2 existe déjà avec le n°$id_mot. Il ne sera pas rajouté.</p>";
+					$mot='[(#TITRE|texte_script)]';
+
+//Pour les classes et les matières, on regarde si le mot clé est lié à la rubrique, si oui, on passe, sinon, on regarde s'il y a un contenu lié au mot-clé et on colle le mot à la rurbrique
+					if ($id_rubrique_de_annee  and ($nom_groupe=="Classes" OR $nom_groupe=="Matières")) {  ?>
+		<BOUCLE_On_verifie_si_une_classe_est_liee(RUBRIQUES){id_rubrique=#GET{id_rubrique}}{id_mot}>
+		<p>#_Verifie_Mot:TITRE est déjà lié au cahier de texte de l'année #TITRE</p>
+		</BOUCLE_On_verifie_si_une_classe_est_liee>
+		</B_On_verifie_si_une_classe_est_liee>
+			<BOUCLE_Y_a_t_il_du_contenu_lie(ARTICLES){id_rubrique=#GET{id_rubrique}}{id_mot}{0,1}>
+				<?php
+							bonbon_lier_mot('[(#ID_MOT|texte_script)]','[(#GET{id_rubrique}|texte_script)]',"rubrique");
+							echo "le mot ". '[(#ID_MOT|texte_script)]'. " est rattaché à la rubrique n°".'[(#GET{id_rubrique}|texte_script)]';
+				?>
+			</BOUCLE_Y_a_t_il_du_contenu_lie>
+			</B_Y_a_t_il_du_contenu_lie>
+		<p>Pas de contenu lié à #_Verifie_Mot:TITRE dans le cahier de texte de l'année</p>
+			<//B_Y_a_t_il_du_contenu_lie>
+		<//B_On_verifie_si_une_classe_est_liee> <?php
+						if ($nom_groupe=="Classes") { 
+//Pour chaque classe on va vérifier grâce aux mots-clés de la rubrique de l'année s'il y a du contenu. S'il y en a on regarde s'il existe un article qui décrit la classe ?>
+		<BOUCLE_Le_Contenu_existe-t-il(MOTS){id_rubrique=#GET{id_rubrique}}{id_mot}>
+			<BOUCLE_Article_Description_Classe(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre=#_Verifie_Mot:TITRE}>
+				<p>La classe est décrite par l'article n°#ID_ARTICLE</p>
+			</BOUCLE_Article_Description_Classe>
+			</B_Article_Description_Classe>
+			<?php
+			$descriptif="Cet article décrit grâce à ses mots-clés, son auteur et son éventuel contenu la classe de ".'[(#_Verifie_Mot:TITRE|texte_script)]';
+			$sql = "INSERT INTO spip_articles (titre, id_rubrique, statut, date, surtitre, descriptif) 
+			VALUES ('[(#_Verifie_Mot:TITRE|texte_script)]','$id_rubrique_pcm', 'publie', NOW(),'".addslashes("À propos d'une classe")."','".addslashes($descriptif)."')";
+	
+			$result = spip_query($sql);
+			$id_article=spip_insert_id();
+			$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" .'[(#_Verifie_Mot:ID_MOT|texte_script)]' . ", " . $id_article . ")";
+			$result = spip_query($sql);
+			echo ("<p>l'article n°$id_article décrit la classe de ".'[(#_Verifie_Mot:TITRE|texte_script)]'."\n</p>");
+			?>
+			<//B_Article_Description_Classe>
+		</BOUCLE_Le_Contenu_existe-t-il>
+						<?php }//fin du if nom_groupe==classes
+						if ($nom_groupe=="Matières") {
+//Pour chaque matière on regarde pour chacune des classes (peut donc être long) qui a un contenu de cette matière que le mot-clé lui est associé ?>
+		<BOUCLE_Toutes_les_classes(MOTS){type="Classes"}>
+			<BOUCLE_Pour_Chaque_Classe_Avec_Article(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre_mot=#TITRE}>
+				<BOUCLE_Les_deux_mots_attaches(ARTICLES){id_article}{id_mot=#_Verifie_Mot:ID_MOT}{titre_mot=#_Pour_Chaque_Classe_Avec_Article:TITRE}>
+					<p>La matière #_Verifie_Mot:TITRE est enseignée en #TITRE</p>
+				</BOUCLE_Les_deux_mots_attaches>
+				</B_Les_deux_mots_attaches>
+					<BOUCLE_Article_de_cette_matiere_et_classe(ARTICLES){id_mot=#_Verifie_Mot:ID_MOT}{titre_mot=#_Pour_Chaque_Classe_Avec_Article:TITRE}{0,1}>
+					<?php
+					bonbon_lier_mot('[(#_Verifie_Mot:ID_MOT|texte_script)]','[(#_Pour_Chaque_Classe_Avec_Article:ID_ARTICLE|texte_script)]');
+					echo "le mot ". '[(#_Verifie_Mot:ID_MOT|texte_script)]'. " est rattaché à l'article n°".'[(#_Pour_Chaque_Classe_Avec_Article:ID_ARTICLE|texte_script)]';
+					?>
+					<p>La matière #_Verifie_Mot:TITRE a au moins une séance en #_Pour_Chaque_Classe_Avec_Article:TITRE, elle est donc associée à cette classe</p>
+					</BOUCLE_Article_de_cette_matiere_et_classe>
+				<//B_Les_deux_mots_attaches>
+			</BOUCLE_Pour_Chaque_Classe_Avec_Article>
+		</BOUCLE_Toutes_les_classes>
+						<?php } //fin du if nom_groupe==matières
+					}// fin du if id_rubrique_de_annee et classes ou matières
 				}
 			}
 ?>
 </BOUCLE_Verifie_Mot>
 <?php
-			if ($existe!=1) $id_mot=ajoute_mot ($val2,$option_descript="",$id_groupe,$nom_groupe,$existe);
+			if ($existe!=1) {
+				$id_mot=bonbon_ajoute_mot ($val2,$option_descript="",$id_groupe,$nom_groupe,$existe);
+				echo "<p><i>$val2</i> est le mot-clé numéro $id_mot</p>";
+			}// fin du if not existe
 		}//fin du while each($val)
 	}//fin du while each ($list_groupe)
 
 
 	//ajout de la rubrique qui va acceuillir le cahier de texte
 	$existe=0;
-?>
+?>[
+
+	(#REM) Hack de la boucle conditionnelle
+
+][(#SET{condition_boucle,''})]
+[(#GET{cdt_existe}|=={oui}|?{' ',''})
+	[(#SET{condition_boucle,#GET{id_rubrique}})]
+]<BOUCLE_CONDITIONNELLE_Traiter_les_auteurs_ou_non(RUBRIQUES){id_rubrique=#GET{condition_boucle}}>[
+
+	(#REM) Si le CDT de l'année existe, on teste pour chaque auteur s'il a une fiche descriptive. S'il n'en a pas: on regarde s'il a décrit des séances, et si c'est le cas on lui crée la fiche descriptive.
+	Ensuite on regarde pour chaque classe et matière s'il a écrit une fiche, si c'est le cas, on associe ces classes et matières à sa fiche.
+
+]
+	<BOUCLE_Tous_les_Auteurs(AUTEURS)>
+		<BOUCLE_Article_jointure(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur}{surtitre="À propos d'un professeur"}>
+			<p>Le prof #NOM a bien un descriptif de ses classes et matières</p>
+		</BOUCLE_Article_jointure>
+			<BOUCLE_A_t_il_du_contenu(ARTICLES){titre_mot="Description de séance"}{id_auteur}{id_rubrique}{0,1}>
+				<?php
+					//article	
+					$descriptif="Cet article décrit grâce à ses mots-clés, les classes et les matières enseignées par ".'[(#NOM|texte_script)]';
+					$sql = "INSERT INTO spip_articles (titre, id_rubrique, statut, date, surtitre, descriptif,ps) 
+					VALUES ('".'[(#NOM|texte_script)]'."','$id_rubrique_pcm', 'publie', NOW(),'".addslashes("À propos d'un professeur")."','".addslashes($descriptif)."','".'[(#ID_AUTEUR|texte_script)]'."')";
+					$result = spip_query($sql);
+					$id_article=spip_insert_id();
+					// auteur
+					$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES (" . '[(#ID_AUTEUR|texte_script)]' . ", " . $id_article . ")";
+					$result = spip_query($sql);
+					echo "<p>L'article n°$id_article décrit les classes et les matières enseignées par ".'[(#NOM|texte_script)]'."</p>";
+				?>
+			</BOUCLE_A_t_il_du_contenu>
+		<//BOUCLE_Article_jointure>
+		<BOUCLE_Les_Classes_et_les_matieres(MOTS){type IN "Classes","Matières"}>
+			<BOUCLE_Article_auteur_et_matiere(ARTICLES){id_rubrique}{id_auteur}{id_mot}{0,1}>
+				<BOUCLE_Article_fiche(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur}{surtitre="À propos d'un professeur"}>
+					<BOUCLE_Mot_lie_a_fiche(MOTS){id_article}{id_mot}>
+						<p>La #TYPE est associée à #NOM</p>
+					</BOUCLE_Mot_lie_a_fiche><?php
+						bonbon_lier_mot('[(#ID_MOT|texte_script)]','[(#ID_ARTICLE|texte_script)]');
+						echo "le mot ". '[(#ID_MOT|texte_script)]'. " est rattaché à l'article n°".'[(#ID_ARTICLE|texte_script)]';
+					?>
+					<p>#NOM a au moins une séance décrite pour la #TYPE #_Les_Classes_et_les_matieres:TITRE, elle est donc associée à sa fiche</p>
+					<//B_Mot_lie_a_fiche>
+				</BOUCLE_Article_fiche>
+					<?php
+						//j'ai remarqué que l'insertion sql faite qq secondes plus tôt des artciles  des auteurs peut ne pas être prise ne compte par les boucles. Le SQL qui suit est donc là par sécurité.
+						bonbon_lier_mot('[(#ID_MOT|texte_script)]',$id_article);
+						echo "le mot ". '[(#ID_MOT|texte_script)]'. " est rattaché à l'article n°$id_article";
+					?><p>#NOM a au moins une séance décrite pour la #TYPE #_Les_Classes_et_les_matieres:TITRE, elle est donc associée à sa fiche...</p>
+				<//B_Article_fiche>
+			</BOUCLE_Article_auteur_et_matiere>
+		</BOUCLE_Les_Classes_et_les_matieres>
+	</BOUCLE_Tous_les_Auteurs>
+</BOUCLE_CONDITIONNELLE_Traiter_les_auteurs_ou_non>
+
 <BOUCLE_Verifie_Rubrique(RUBRIQUES){tout}>
 <?php
 	$pattern="/(Cahier de texte en-ligne)/";
@@ -123,34 +289,12 @@ if($_POST['bouton']){
 		
 		$result = spip_query($sql);
 		$id_rubrique=spip_insert_id();
-		$texte="<p>La rubrique «Cahier de texte en-ligne» est la rubrique n°$id_rubrique.";
+		$texte="<p name=\"FIN\">La rubrique «Cahier de texte en-ligne» est la rubrique n°$id_rubrique.";
 	}
 	echo "$texte\n<br>Son <em>titre</em> doit <strong>toujours</strong> contenir l'expression «<em>Cahier de texte en-ligne</em>». Si vous souhaitez changer son nom gardez cette expression dedans.</p>
 	<p><strong>Pour améliorer l'intégration du cahier de texte à votre site sous Spip vous pouvez renommer le fichier \"cahier-de-texte-rubrique.html\" livré dans le dossier squelettes en \"rubrique-$id_rubrique.html\"</strong></p>";
 	//fin du script
 	echo "<p><b>Ne rechargez pas la page</b>.<br/><br/>\n <a href=\"./ecrire/?exec=mots_tous\" title=\"Aller vérifier l'installation des groupes\">Passez dans l'espace privé de Spip</a> pour vérifier que les mots-clés et la rubrique sont bien installés.\n<ul>\n <li>En cas de problème, réutilisez votre sauvegarde de la base.</li>\n<li>Si tout va bien, effacez le ficher \"ajouter-classes-matieres-spip.html\" du serveur.</li>\n</ul><p>";
-};
-function ajoute_groupe ($nom_groupe){
-	$sql = "INSERT INTO spip_groupes_mots (titre,articles, breves,rubriques, syndic, minirezo, comite, forum) 
-		VALUES ('".trim($nom_groupe)."','oui','oui','oui','oui','oui','oui','oui')";
-		
-	$result = spip_query($sql);
-	$id_groupe=spip_insert_id();
-	echo "<h2>Ajout dans Spip du <a href=\"./ecrire/?exec=mots_tous\" title=\"Aller voir tous les groupes\">groupe</a> nommé <a href=\"./ecrire/?exec=mots_type&id_groupe=$id_groupe\" title=\"Aller voir le groupe $nom_groupe\">\"$nom_groupe\" de numéro $id_groupe</a></h2>";
-	return $id_groupe;
-};
-function ajoute_mot ($titre,$option_descript="",$id_groupe,$nom_groupe,$descript){
-	$phrase="";
-	if ($option_descript!="") {
-		$option_descript .= trim($descript);
-		$phrase=" de <b>$descript</b>";
-	};
-	$sql = "INSERT INTO spip_mots (titre, descriptif, texte , id_groupe, type) 
-		VALUES ('".trim($titre)."','Sous-thème de ".$option_descript."','','".$id_groupe."','".trim($nom_groupe)."')";
-		
-	$result = spip_query($sql);
-	$id_mot=spip_insert_id();
-	echo "<p><i>$titre</i>$phrase est le mot-clé numéro $id_mot</p>";
-	return $id_mot;
-}
+
 ?>
+<//B_CONDITIONNELLE_Bouton_presse_ou_non>

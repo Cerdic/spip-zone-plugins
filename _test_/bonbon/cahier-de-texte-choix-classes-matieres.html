@@ -1,0 +1,144 @@
+[
+(#REM) année scolaire en cours...
+][
+	(#SET{annee_scolaire,[(#ENV{date}|bonbon_annee_scolaire)]})
+
+]<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}>[
+(#REM)Vérifier si il existe déjà une sous rubrique du cahier de texte pour l'année en cours
+	]<BOUCLE_Verifie_RubriqueAnnee(RUBRIQUES){id_parent}{titre=#GET{annee_scolaire}}{0,1}><BOUCLE_determiner_id_rurbique_de_pcm(RUBRIQUES){id_parent}{titre="Professeurs-classes-matières"}>#SET{id_rubrique_pcm,#ID_RUBRIQUE}</BOUCLE_determiner_id_rurbique_de_pcm>[
+
+	(#REM) Hack de la boucle conditionnelle
+
+][(#SET{condition_boucle,''})]
+[(#ENV{inclu}|=={'oui'}|?{'',' '})
+	[(#SET{condition_boucle,#ID_RUBRIQUE})]
+]
+<BOUCLE_CONDITIONNELLE_En_tete_fenetre(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
+#CACHE{0}
+<!--
+*****Cahier de texte pour Spip: Bonbon !
+*****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+*****Sous licence GPL (enfin bon, c'est bonbonware...)
+*****CopyLeft en janvier 2008
+***Affiche le formulaire pour renseigner la fiche du prof dans une fenêtre externe (target="_blank").
+Cette page prend le paramètre suivant (en GET):
+id_auteur= n° de l'auteur.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>#NOM_SITE_SPIP: Choix de ses classes, ses matières</title>
+
+[
+(#REM)Inclusion du pied de page
+]
+[(#INCLURE{fond=cahier-de-texte-en-tete})]
+
+</head>
+<body>
+<div id="NoMenu">
+	<div id="Contenu">
+</BOUCLE_CONDITIONNELLE_En_tete_fenetre>[
+
+(#REM) On vérifie que le prof a déjà une fiche, si ce n'est pas le cas, on la crée
+
+	]<BOUCLE_Verifie_presence_fiche(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{ps=#SESSION{id_auteur}}{id_auteur=#SESSION{id_auteur}}> #SET{id_fiche,#ID_ARTICLE}</BOUCLE_Verifie_presence_fiche></B_Verifie_presence_fiche>
+		<BOUCLE_Donnees_du_prof(AUTEURS){id_auteur=#SESSION{id_auteur}}{0,1}>
+			[<p class='avertissement'>(#NOM|bonbon_creer_fiche_prof{#ID_AUTEUR,#GET{id_rubrique_pcm}}|?{"Votre fiche a été créée.","Pour des raisons techniques votre fiche n'a pu être créée. Réessayez plus tard."})</p>]
+		</BOUCLE_Donnees_du_prof>
+	<//B_Verifie_presence_fiche>[
+
+	(#REM) Hack pour conditionner une boucle
+
+][(#SET{condition_boucle,''})]
+[(#ENV{valider}|?{' ',''})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
+<BOUCLE_CONDITIONNELLE_Validation_ou_pas(RUBRIQUES){id_rubrique=#GET{condition_boucle}}>
+	<BOUCLE_Classes_Matieres(MOTS){type IN "Classes", "Matières"}>
+		#SET{associee,''}
+		<BOUCLE_Classe_est_Associee(ARTICLES){id_article=#GET{id_fiche}}{id_mot}>#SET{associee,#ID_ARTICLE}</BOUCLE_Classe_est_Associee>
+		[(#ENV{#TYPE#ID_MOT}|=={#TITRE}|?{' ',''})
+			[(#GET{associee}|?{'',' '}) [<p class="avertissement">(#ID_MOT|bonbon_lier_mot{#GET{id_fiche}}|?{"Rajout de "#TITRE,"Problème technique pour rajouter "#TITRE})</p>]
+			]
+		][(#ENV{#TYPE#ID_MOT}|=={#TITRE}|?{'',' '})
+			[(#GET{associee}|?{' ',''}) [<p class="avertissement">(#ID_MOT|bonbon_effacer_lien_mot{#GET{id_fiche}}|?{"Retrait de "#TITRE,"Problème technique pour retirer "#TITRE})</p>]
+			]
+		]
+	</BOUCLE_Classes_Matieres>
+	<BOUCLE_Classes(MOTS){type="Classes"}>
+		#SET{est_pp,''}
+		<BOUCLE_pp(ARTICLES){id_auteur=#SESSION{id_auteur}}{id_rubrique=#GET{id_rubrique_pcm}}{titre=#TITRE}>#SET{est_pp,"oui"}</BOUCLE_pp>
+		<BOUCLE_article_classe(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre=#TITRE}>[
+			(#ENV{pp}|=={#TITRE}|?{' ',''})
+				[(#GET{est_pp}|?{'',' '}) [<p class="avertissement">(#ID_ARTICLE|bonbon_affecter_auteur{#SESSION{id_auteur}}|?{"Vous êtes désormais enregistré comme Professeur Principal de la classe de" #TITRE,"Problème technique pour vous enregistrer comme Professeur Principal de la "#TITRE})</p>]
+				]
+			][(#ENV{pp}|=={#TITRE}|?{'',' '})
+				[(#GET{est_pp}|?{' ',''}) [<p class="avertissement">(#ID_ARTICLE|bonbon_desaffecter_auteur{#SESSION{id_auteur}}|?{"Vous n'êtes désormais plus enregistré comme Professeur Principal de la classe de "#TITRE,"Problème technique pour vous désenregistrer comme Professeur Principal de la "#TITRE})</p>]
+				]
+		]</BOUCLE_article_classe>
+	</BOUCLE_Classes>
+<p class="avertissement">Votre situation a été mise à jour</p>
+</BOUCLE_CONDITIONNELLE_Validation_ou_pas>[
+
+	(#REM) Hack de la boucle conditionnelle (si on a validé et que la page est inclue...)
+
+][(#SET{condition_boucle,''})]
+[(#ENV{inclu}|=={'oui'}|?{' ',''})
+	[(#ENV{valider}|?{'',' '})
+		[(#SET{condition_boucle,#ID_RUBRIQUE})]
+	]
+][(#ENV{inclu}|=={'oui'}|?{'',' '})
+	[(#SET{condition_boucle,#ID_RUBRIQUE})]
+]<BOUCLE_CONDITIONNELLE_Formulaire(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
+<form name="choix_classe_matiere_pp" method="get">
+	<input type="hidden" name="page" value="cahier-de-texte-choix-classes-matieres">
+	<fieldset name="Classes">
+		<legend>Vos classes</legend>
+		<p class="infos">Les classes déjà cochées sont les votres. Cochez celles que vous voulez rajouter, décochez celles que vous voulez retirer.</p>
+<BOUCLE_Toutes_les_classes(MOTS){type="Classes"}{par num titre}>
+		<span><input type="checkbox" name="#TYPE#ID_MOT" value="#TITRE"<BOUCLE_Est_ce_une_classe_du_prof(ARTICLES){id_article=#GET{id_fiche}}{id_mot}> checked</BOUCLE_Est_ce_une_classe_du_prof>>#TITRE </span>
+</BOUCLE_Toutes_les_classes>
+	</fieldset>
+	<fieldset name="Matières">
+		<legend>Vos matières</legend>
+		<p class="infos">Les matières déjà cochées sont les votres. Cochez celles que vous voulez rajouter, décochez celles que vous voulez retirer.</p>
+<BOUCLE_Toutes_les_matieres(MOTS){type="Matières"}{par num titre}>
+		<span><input type="checkbox" name="#TYPE#ID_MOT" value="#TITRE"<BOUCLE_Est_ce_une_matiere_du_prof(ARTICLES){id_article=#GET{id_fiche}}{id_mot}> checked</BOUCLE_Est_ce_une_matiere_du_prof>>#TITRE </span>
+</BOUCLE_Toutes_les_matieres>
+	</fieldset>
+	<fieldset name="ProfesseurPrincipal">
+		<legend>Classe dont vous êtes éventuellement Professeur principal</legend>
+		<p class="infos">Vérifiez que la classe dont vous êtes professeur principal est cochée.</p>[(#SET{est_pp,''})]
+<BOUCLE_Toutes_les_classes_pp(MOTS){type="Classes"}{par num titre}>
+		<span><input type="radio" name="pp" value="#TITRE"<BOUCLE_Est_pp(ARTICLES){id_auteur=#SESSION{id_auteur}}{id_rubrique=#GET{id_rubrique_pcm}}{titre=#TITRE}> checked[(#SET{est_pp,'oui'})]</BOUCLE_Est_pp>>#TITRE </span>
+</BOUCLE_Toutes_les_classes_pp>
+		<span><input type="radio" name="pp" value="Acune classe" [(#GET{est_pp}|?{'','checked'})]>Acune classe </span>
+	</fieldset>
+	<input type="hidden" name="id_auteur" value="#SESSION{id_auteur}">
+	<input type="hidden" name="inclu" value="#ENV{inclu}">
+	<input type="hidden" name="parent" value="#ENV{parent}">
+	<center><input type="submit" name="valider" value="Valider les modifications"></center>
+	</form>
+
+		<a name="Matières"></a>
+		<a name=""></a>
+</BOUCLE_CONDITIONNELLE_Formulaire>
+<a href="#URL_PAGE{#ENV{parent}}" title="Revenir à la sélection de la classe et de la matière de la séance">Revenir à la saisie des séances</a>
+<//B_CONDITIONNELLE_Formulaire>[
+
+	(#REM) Hack de la boucle conditionnelle
+
+][(#SET{condition_boucle,''})]
+[(#ENV{inclu}|=={'oui'}|?{'',' '})
+	[(#SET{condition_boucle,#ID_RUBRIQUE})]
+]
+<BOUCLE_CONDITIONNELLE_Pied_fenetre(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
+		<center>
+			<input type='button' value='Fermer cette fenêtre (revenir au cahier de texte)' onClick='parent.opener.location.reload();self.close()' name="button">
+		</center>
+	</div>
+</div>
+</body>
+</html>
+</BOUCLE_CONDITIONNELLE_Pied_fenetre>
+	</BOUCLE_Verifie_RubriqueAnnee>
+</BOUCLE_Contexte_RubriqueCDT>

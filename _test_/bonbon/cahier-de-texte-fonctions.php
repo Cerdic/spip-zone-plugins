@@ -57,4 +57,85 @@ function bonbon_fusion_tableau($tab,$autretab) {
  $final=array_merge((array)$tab,(array)$autretab);
  return $final;
 }
+
+//Quelques fonctions pour que Bonbon manipule la base de données:
+function bonbon_ajoute_groupe ($nom_groupe){
+	$sql = "INSERT INTO spip_groupes_mots (titre,articles, breves,rubriques, syndic, minirezo, comite, forum) 
+		VALUES ('".trim($nom_groupe)."','oui','oui','oui','oui','oui','oui','oui')";
+		
+	$result = spip_query($sql);
+	$id_groupe=spip_insert_id();
+	return $id_groupe;
+};
+function bonbon_ajoute_mot ($titre,$option_descript="",$id_groupe,$nom_groupe,$descript){
+	$phrase="";
+	if ($option_descript!="") {
+		$option_descript .= trim($descript);
+		$phrase=" de <b>$descript</b>";
+	};
+	$sql = "INSERT INTO spip_mots (titre, descriptif, texte , id_groupe, type) 
+		VALUES ('".trim($titre)."','Sous-thème de ".$option_descript."','','".$id_groupe."','".trim($nom_groupe)."')";
+		
+	$result = spip_query($sql);
+	$id_mot=spip_insert_id();
+	return $id_mot;
+}
+function bonbon_lier_mot ($id_mot,$id_objet,$type_objet="article") {
+	$result=false;
+	$sql = "INSERT INTO spip_mots_".$type_objet."s (id_mot, id_". $type_objet .") VALUES (" . $id_mot . ", " . $id_objet . ")";
+		$result = spip_query($sql);
+		if ($result) {
+			echo ("<!--le mot n°$id_mot est rattaché à $type_objet n°$id_objet-->");
+		} else {
+			echo "<!--problème pour lier le mot n°$id_mot à $type_objet n°$id_objet ! Faites-le à la main !-->";
+		}
+	return $result;
+}
+
+function bonbon_effacer_lien_mot ($id_mot,$id_objet,$type_objet="article") {
+	$result=false;
+	$sql = "DELETE FROM spip_mots_".$type_objet."s WHERE id_mot=$id_mot AND id_$type_objet=$id_objet";
+		$result = spip_query($sql);
+		if ($result) {
+			echo ("<!--le mot n°$id_mot est détaché de $type_objet n°$id_objet-->");
+		} else {
+			echo "<!--problème pour détacher le mot n°$id_mot à $type_objet n°$id_objet ! Faites-le à la main !-->";
+		}
+	return $result;
+}
+function bonbon_affecter_auteur ($id_article, $id_auteur) {
+	$result=false;
+	$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($id_auteur,$id_article)";
+	$result = spip_query($sql);
+	if ($result) {
+		echo ("<!--l'auteur n°$id_mot est attaché à l'article n°$id_article-->");
+	} else {
+			echo "<!--problème pour attacher l'auteur n°$id_mot à l'article n°$id_article ! Faites-le à la main !-->";
+	}
+	return $result;
+}
+
+function bonbon_desaffecter_auteur ($id_article, $id_auteur) {
+	$result=false;
+	$sql = "DELETE FROM spip_auteurs_articles WHERE id_auteur=$id_auteur AND  id_article=$id_article";
+	$result = spip_query($sql);
+	if ($result) {
+		echo ("<!--l'auteur n°$id_mot est détaché de l'article n°$id_article-->");
+	} else {
+			echo "<!--problème pour détacher l'auteur n°$id_mot de l'article n°$id_article ! Faites-le à la main !-->";
+	}
+	return $result;
+}
+function bonbon_creer_fiche_prof ($nom, $id_auteur, $id_rubrique) {
+	$result=false;
+	$descriptif="Cet article décrit grâce à ses mots-clés, les classes et les matières enseignées par $nom";
+	$sql = "INSERT INTO spip_articles (titre, id_rubrique, statut, date, surtitre, descriptif,ps) VALUES ('$nom','$id_rubrique', 'publie', NOW(),'".addslashes("À propos d'un professeur")."','".addslashes($descriptif)."','$id_auteur')";
+	$result = spip_query($sql);
+	if ($result) {
+		$id_article=spip_insert_id();
+		bonbon_affecter_auteur($id_article,$id_auteur);
+	}
+	return $result;
+}
+
 ?>

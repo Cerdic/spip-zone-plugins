@@ -11,7 +11,7 @@
 <B_Seances>
 <div>
 #ANCRE_PAGINATION
-<BOUCLE_Seances(ARTICLES){!doublons QueSeances}{par #ENV{tri}}{pagination #ENV{nb,20}}{par date}{inverse #ENV{senschrono}}{'
+<BOUCLE_Seances(ARTICLES){!doublons QueSeances}{par #ENV{tri}}{pagination #ENV{nb,10}}{par date}{inverse #ENV{senschrono}}{'
 <br clear="both">
 <hr>'}>
 		<INCLURE(session.php){fond=cahier-de-texte-une-seance}{id_article=#ID_ARTICLE}>
