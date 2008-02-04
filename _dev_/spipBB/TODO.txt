@@ -24,6 +24,7 @@ Interface publique - Générale :
 -* 0.5 Logout bug en 193 uniq id ?
 -* 0.5 Parametres et donnees specifiques à renseigner lors de l'inscription (possible avec le formualaire dédié)
 -* 0.5 Reporte : Gestion avatar : a ameliorer + téléchargement (droits ?) : c'est possible en 1.9.3 voir balise SPIPBB_AVATAR mais pas simple en 192
+-* 0.5 Liste des membres affichage cf http://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=516#forum517
 
 Bugs et autres elements non finis :
 -* 0.4.7 Bug dans le move (ordre de priorites) d'un forum des fois ça ne fonctionne pas... (valider les cas et corriger)

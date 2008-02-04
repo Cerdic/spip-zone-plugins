@@ -514,4 +514,18 @@ function sql_quote($val, $serveur='')
 	return spip_mysql_quote($val);
 } } // sql_quote
 
+#------------------------------------------------------------#
+// cf http://doc.spip.org/@sql_countsel
+#------------------------------------------------------------#
+if (!function_exists('sql_countsel')) {
+function sql_countsel($from = array(), $where = array(),
+		      $groupby = array(), $limit = '', $having = array(),
+	$serveur='') {
+
+	$r = sql_select('COUNT(*)', $from, $where, $groupby, '', $limit, $having, $serveur);
+	if ($r) list($r) = sql_fetch($r);
+
+	return $r;
+} } // sql_countsel
+
 ?>

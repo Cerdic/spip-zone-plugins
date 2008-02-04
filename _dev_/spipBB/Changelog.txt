@@ -1,4 +1,9 @@
-﻿2008-01-19  chryjs  <chryjs!@!free!.!fr>
+﻿2008-02-04  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction fonction sql_countsel manquante dans librairie de compatibilité pour spip 192 cf http://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=536
+
+
+2008-01-19  chryjs  <chryjs!@!free!.!fr>
 
  * Corrections sur le champ email pour meilleure compatibilite avec les autres plugins + controle pour la modification (a ameliorer) . Grâce aux infos de Pat
 
