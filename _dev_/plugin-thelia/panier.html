@@ -2,11 +2,9 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<title><:spipthelia:mon_panier:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="<:spipthelia:mon_panier:>" />
 <INCLURE{fond=inc-head}>
-[(#REM) Lien vers le flux RSS de la rubrique ]
-<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
 </head>
 
 <body class="page_panier">
@@ -23,28 +21,28 @@
 					
 			<div id="contenu">
 			[(#REM) Fil d'Ariane ]
-			<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Contenu de mon panier</div>
+			<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:mon_panier:></div>
 
-[(#REM) Titre de la page ]
+				[(#REM) Titre de la page ]
 		
 				<div class="titrePage">
-				<h2>Contenu de mon panier</h2>
+				<h2><:spipthelia:mon_panier:></h2>
 				</div>
 				
-[(#REM) Contenu du panier ]
+			[(#REM) Contenu du panier ]
 
 			<table width="675" border="0" cellpadding="5" cellspacing="0" class="enteteTableau">
   				<tr>
-    				<td width="265">R&eacute;f&eacute;rences produits</td>
-    				<td width="95">Prix unitaire</td>
-    				<td width="95">Quantit&eacute;</td>
-    				<td width="95">Total TTC</td>
-    				<td width="75" align="center">Vider</td>
+    				<td width="265"><:spipthelia:references_produits:></td>
+    				<td width="95"><:spipthelia:prix_unitaire:></td>
+    				<td width="95"><:spipthelia:quantite:></td>
+    				<td width="95"><:spipthelia:total_ttc:></td>
+    				<td width="75" align="center"><:spipthelia:Vider:></td>
 				</tr>
 			</table>
 
 			<table width="575" border="0" cellpadding="5" cellspacing="0">
-    		<THELIA_CONTENU_PANIER type="PANIER">
+    			<THELIA_CONTENU_PANIER type="PANIER">
 				<tr>
 					<td width="100" class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td><td width="165" class="ligneTableau">THELIA-REF<br/>THELIA-TITRE </td>
 					<td width="95" class="ligneTableau">THELIA-PRIXU &euro; </td>
@@ -60,7 +58,7 @@
 					</form>
 					</td>
 					<td width="95" class="ligneTableau">THELIA-TOTAL &euro;</td>
-					<td width="75" align="center" class="ligneTableau"><a href="#URL_PAGE{panier,thelia_action=supprimer&article=THELIA-ARTICLE}">Supprimer</a></td>
+					<td width="75" align="center" class="ligneTableau"><a href="#URL_PAGE{panier,thelia_action=supprimer&article=THELIA-ARTICLE}"><:spipthelia:supprimer:></a></td>
 				</tr>
   	  		</THELIA_CONTENU_PANIER>
 			</table>
@@ -68,17 +66,17 @@
 			<table width="675" border="0" cellpadding="5" cellspacing="0" class="enteteTableau">
 				<tr>
 					<td width="265">&nbsp;</td>
-					<td width="200" align="right">TOTAL DU PANIER :</td>
+					<td width="200" align="right"><:spipthelia:total_panier:> :</td>
     				<td width="180">THELIA-PANIER_TOTAL &euro;</td>
     			</tr>
 			</table>
 			
 
 				<div class="boutonMonCompteContenu">
-				<a href="#URL_PAGE{adresse}">Valider mon panier</a>
+				<a href="#URL_PAGE{adresse}"><:spipthelia:valider_panier:></a>
 				</div>
 				<div class="boutonMonCompteContenu">
-				<a href="#URL_SITE_SPIP">Retour boutique</a>
+				<a href="#URL_SITE_SPIP"><:spipthelia:retour_boutique:></a>
 				</div>
 		  	</div>
 
