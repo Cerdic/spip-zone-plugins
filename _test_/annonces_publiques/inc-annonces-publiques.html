@@ -1,12 +1,15 @@
 <B_annonces>
 <div class="annonces">
-	<h3 class="menu-titre"><:annonces:bientot:></h3>
+	<h3 class="menu-titre"><:ap:bientot:></h3>
 	<BOUCLE_annonces(ANNONCES){par date}{inverse}{a_venir}>
 	<div class="vevent">
 		<h4 class="summary">#TITRE</h4>
+		<p style="display: block; float: left; height: 0; overflow: auto; width: 0;">
+			[<:ap:du:> <abbr class="dtstart"[ title="(#DATE|date_iso)"]>(#DATE|affdate)</abbr>]
+			[<:ap:au:> <abbr class="dtend"[ title="(#DATE_FIN|date_iso)"]>(#DATE_FIN|affdate)</abbr>]
+		</p>
 		<p>
-			[<:annonces:du:> <abbr class="dtstart"[ title="(#DATE|date_iso)"]>(#DATE|affdate)</abbr>]
-			[<:annonces:au:> <abbr class="dtend"[ title="(#DATE_FIN|date_iso)"]>(#DATE_FIN|affdate)</abbr>]
+			[(#DATE|jolies_dates{#DATE_FIN})]
 		</p>
 		[<p class="location">(#LIEU)</p>]
 		[<div class="description">(#TEXTE)</div>]
