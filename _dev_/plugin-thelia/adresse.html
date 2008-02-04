@@ -1,16 +1,13 @@
 #CACHE{7200}
-<?php $securise=1; $pageret=1 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<title><:spipthelia:mes_coordonnees:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="<:spipthelia:mes_coordonnees:>" />
 <INCLURE{fond=inc-head}>
-[(#REM) Lien vers le flux RSS de la rubrique ]
-<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
 </head>
 
-<body class="page_panier">
+<body class="page_adresse">
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
@@ -21,18 +18,18 @@
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
 		<div id="contenu">
-		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Mes coodonn&eacute;es</div>								
+		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:mes_coordonnees:></div>								
 		  
 		[(#REM) Titre de la rubrique ]		  
 		  
 		  		<div class="titrePage">
-				<h2>Mes coordonn&eacute;es </h2>
+				<h2><:spipthelia:mes_coordonnees:></h2>
 				</div>
 				
 				[(#REM) Mon adresse de facturation ]
 
 				<div class="sousTitrePage">
-				<h3>Mon adresse de facturation </h3>
+				<h3><:spipthelia:adresse_facturation:></h3>
 				</div>
 				
 				<span class="textePage">
@@ -41,7 +38,7 @@
 				THELIA-CLIENT_ADRESSE1 THELIA-CLIENT_ADRESSE2 THELIA-CLIENT_ADRESSE3<br />
 				THELIA-CLIENT_CPOSTAL THELIA-CLIENT_VILLE THELIA-CLIENT_PAYS<br />
 				</span>
-				<a href="#URL_PAGE{compte_modifier}">Modifier cette adresse</a>
+				<a href="#URL_PAGE{compte_modifier}"><:spipthelia:modifier_adresse:></a>
 				
 				<div class="separation">
 				</div>
@@ -49,7 +46,7 @@
 				[(#REM) Mon adresse de livraison ]
 					
 				<div class="sousTitrePage">
-				<h3>Mon adresse de livraison </h3>
+				<h3><:spipthelia:adresse_livraison:></h3>
 				</div>
 				
 			  <span class="textePage">
@@ -66,33 +63,33 @@
 			  </span>
 			  <br />
 			<THELIA_adrmodcours type="ADRESSE" adresse="THELIA-ADRESSE_ACTIVE" defaut="0">
-					  <a href="#URL_PAGE{livraison_modifier,adresse=THELIA-ID}">Modifier cette adresse</a>
+					  <a href="#URL_PAGE{livraison_modifier,adresse=THELIA-ID}"><:spipthelia:modifier_adresse:></a>
 			</THELIA_adrmodcours>
 			
 			 </THELIA_adrcours>
 			
 				<br /><br />
-				<span class="commentaires"> S&eacute;lectionnez une autre adresse de livraison : </span><br />
-				<a href="#URL_PAGE{adresse,thelia_action=modadresse&amp;adresse=0}">Mon adresse de facturation par d&eacute;faut </a>
+				<span class="commentaires"><:spipthelia:selectionner_autre_adresse:> : </span><br />
+				<a href="#URL_PAGE{adresse,thelia_action=modadresse&amp;adresse=0}"><:spipthelia:adresse_facturation_defaut:> </a>
 				<THELIA_adr type="ADRESSE" client="THELIA-CLIENT_ID">
 				<br />
 				<a href="#URL_PAGE{adresse,thelia_action=modadresse&amp;adresse=THELIA-ID}">THELIA-LIBELLE</a>
 				</THELIA_adr>
 				<br />
 				<br />
-				<a href="#URL_PAGE{livraison_adresse}">Ajouter une adresse de livraison </a><br />
+				<a href="#URL_PAGE{livraison_adresse}"><:spipthelia:ajouter_adresse_livraison:></a><br />
 				<br />
 				<div class="separation">
 				</div>
 
 				<div class="titrePage">
-				<h2>Choix du mode de livraison </h2>
+				<h2><:spipthelia:choix_mode_livraison:></h2>
 				</div>
 
 				[(#REM) contenu de la page ]
 
 				<div class="sousTitrePage">
-				<h3>Type de livraison &amp; tarif </h3>
+				<h3><:spipthelia:type_livraison_tarif:></h3>
 				</div>
 
 				<div class="textePage">
@@ -100,15 +97,14 @@
 				<THELIA_transport type="TRANSPORT">
 				THELIA-TITRE THELIA-PORT &euro;<br />
 				<div class="boutonMonCompteContenu">
-				<a href="THELIA-URLCMD">Continuer</a>
+				<a href="THELIA-URLCMD"><:spipthelia:continuer:></a>
 				</div>
 				</THELIA_transport>
 				</T_transport>
-					Vous devez choisir une autre adresse de livraison. 
-					<br/>Nous ne r&eacute;alisons pas de livraison vers ce pays.
+					<:spipthelia:probleme_adresse_livraison:>
 				<//T_transport>
 				</div>
-				<a href="THELIA-URLPREC">Page précédente</a>
+				<a href="THELIA-URLPREC"><:spipthelia:page_precedente:></a>
 				
 				<div class="boutonMonCompteContenu">
 					
