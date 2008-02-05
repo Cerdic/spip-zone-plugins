@@ -1,55 +1,21 @@
-[(#REM)
-
-	Noisette d'Archives Mensuelles pour SPIP 1.9.2c et +
-	(c)2008 James Licence GNU/GPL
-
-	Parametres:
-	self:		la page de destination, souvent celle ou apparait cette noisette.
-				Penser a specifier {self=#SELF} en parametre pour l'INCLURE appelant
-	date:		la date de contexte, transmise par defaut ou specifiee par l'INCLURE appelant.
-				Elle servira a mettre en evidence le mois choisi par le visiteur (class css 'on')
-				Penser a specifier au minimum {date} en parametre pour l'INCLURE appelant
-	var_date:	variable de navigation, facultatif, 'date' par defaut (texte) 
-				{var_date=date_liste} pour &date_liste=2008-02
-
-	Principe:
-	Cet exemple illustre comment generer une liste glissante de liens pointant
-	vers une page permettant l'affichage d'elements du mois choisi par le visiteur.
-	On se base sur l'ensemble des ARTICLES du site.
-	
-	_reference	boucle englobante. Elle sert a definir la date de reference
-				pour demarrer la liste.
-	_archives	boucle principale. Elle n'affichera que la #DATE des articles.
-				
-	_recent,
-	_ancien		deux boucles
-
-][(#REM)
-
-	Periode de reference:
-	Comme dit plus haut, la date de contexte met en evidence le mois selectionne par le visiteur.
-	Elle ne peut donc servir a 
-
-]#SET{date,#EVAL{date('Y-m')}}
+#SET{date,#EVAL{date('Y-m')}}
 [(#SET{annee_fin,[(#GET{date}|annee|plus{#ENV{decal}})]})]
-[(#SET{annee_deb,[(#GET{annee_fin}|plus{#ENV{decal}|>{0}|?{1,-1}})]})][
-(#REM)
-
-
-
-]<BOUCLE_reference(ARTICLES){id_secteur}
+[(#SET{annee_deb,[(#GET{annee_fin}|plus{#ENV{decal}|>{0}|?{1,-1}})]})]
+<BOUCLE_reference(ARTICLES){id_secteur ?}
 	{par date}{inverse}{0,1}
 	{agenda date, periode, #GET{annee_deb}, (#GET{date}|mois), 1, #GET{annee_fin}, (#GET{date}|mois), 31}
 ><B_archives>
 <div id="archives" class="menu">
 	<h2><:spipclear:archives:></h2>
-	<BOUCLE_recent(ARTICLES){id_secteur}{lang_select=non}{par date}{inverse}{0,1}{mois_relatif<0}>
+	<BOUCLE_recent(ARTICLES){id_secteur ?}{lang_select=non}{par date}{inverse}{0,1}{mois_relatif<0}>
 	<p>
-		<a href="[(#ENV{self}|parametre_url{decal,[(#ENV{decal}|plus{1})]})]">+1an</a>
+		<a href="[(#ENV{self}|parametre_url{decal,[(#ENV{decal}|plus{1})]})]">
+			<img src="#CHEMIN{images/up.png}" alt="+1an" />
+		</a>
 	</p>
 	</BOUCLE_recent>
 	<ul>
-		<BOUCLE_archives(ARTICLES){id_secteur}
+		<BOUCLE_archives(ARTICLES){id_secteur ?}
 			{lang_select=non}{fusion DATE_FORMAT(date,'%Y-%m')}
 			{par date}{inverse}
 			{mois_relatif>=0}{mois_relatif<12}
@@ -60,9 +26,11 @@
 		</li>
 		]</BOUCLE_archives>
 	</ul>
-	<BOUCLE_ancien(ARTICLES){id_secteur}{lang_select=non}{par date}{inverse}{0,1}{mois_relatif>=12}>
+	<BOUCLE_ancien(ARTICLES){id_secteur ?}{lang_select=non}{par date}{inverse}{0,1}{mois_relatif>=12}>
 	<p>
-		<a href="[(#ENV{self}|parametre_url{decal,[(#ENV{decal}|moins{1})]})]">-1an</a>
+		<a href="[(#ENV{self}|parametre_url{decal,[(#ENV{decal}|moins{1})]})]">
+			<img src="#CHEMIN{images/down.png}" alt="-1an" />
+		</a>
 	</p>
 	</BOUCLE_ancien>
 </div>

@@ -10,7 +10,7 @@
 		<ul>
 			<BOUCLE_a_retenir(ARTICLES){id_secteur}{titre_mot=selection}{par date}{inverse}>
 			<li>[(#ID_ARTICLE|choixsiegal{#ENV|{id_article},<strong>,''})]
-				<a href="#URL_ARTICLE">#TITRE</a>
+				<a [class="(#EXPOSE)" ]href="#URL_ARTICLE">#TITRE</a>
 			[(#ID_ARTICLE|choixsiegal{#ENV|{id_article},</strong>,''})]</li>
 			</BOUCLE_a_retenir>
 		</ul>
@@ -21,11 +21,11 @@
 	<div id="languages">
 		<h2><:spipclear:langues:></h2>
 		<ul>
-			<BOUCLE_languages(ARTICLES){id_secteur}{par lang}>
-			[<li>[(#LANG|choixsiegal{#ENV{lang},<strong>,''})]
-				<a href="[(#ENV{self}|parametre_url{lang,#LANG})]">(#LANG|unique)</a>
-			[(#LANG|choixsiegal{#ENV{lang},</strong>,''})]</li>]
-			</BOUCLE_languages>
+			<BOUCLE_languages(ARTICLES){id_secteur ?}{fusion lang}>[(#TOTAL_BOUCLE|>{1}|?{' '})
+			<li>
+				<a href="[(#ENV{self}|parametre_url{lang,#LANG})]">#LANG</a>
+			</li>
+			]</BOUCLE_languages>
 		</ul>
 	</div>
 	</B_languages>
@@ -45,7 +45,7 @@
 	</div>
 	</B_categories>
 
-	<INCLURE{fond=noisettes/inc-archives}{self=#SELF}{env}{var_date=archives}{date=#ENV{archives,#DATE}}>
+	<INCLURE{fond=noisettes/inc-archives}{id_secteur}{self=#SELF}{decal}{var_date=archives}{date=#ENV{archives,#DATE}}>
 
 	#PIPELINE{boussole}
 
