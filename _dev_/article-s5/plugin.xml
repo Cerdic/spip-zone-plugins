@@ -1,0 +1,41 @@
+<plugin>
+        <nom> <!-- Nom du plugin -->
+          <multi>
+					[fr]article s5
+					[en]article s5
+					</multi>
+        </nom>
+        <auteur>        <!-- Auteur du plugin -->
+          <multi>
+					[fr]cy_altern, d'apr&#232;s une contrib de Bourgeon, Déesse A., Fil et une autre contrib de Cogefip
+_ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
+					</multi>
+        </auteur>
+        <version>
+          0.1
+        </version>
+        <etat>
+          dev
+        </etat>
+        <description>
+        <multi>
+			  [fr]transformer un article en diaporama
+          </multi>
+        </description>
+		    <lien>
+              [Documentation->http://www.spip-contrib.net/Squelette-S5-Slide-Show],
+		      et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=s5]
+		    </lien>
+        <icon>plugin-24.gif</icon>
+        <prefix>
+          s5
+        </prefix>
+<!--  
+        <pipeline>
+        		<nom>ajouter_boutons</nom>
+            <inclure>aa_pipelines.php</inclure>
+        </pipeline>	
+				<necessite id="cfg" version="[1.0.0;]" />
+-->
+				<chemin dir='' />
+</plugin>

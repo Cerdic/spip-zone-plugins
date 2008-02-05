@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"         
+"http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
+<BOUCLE_globale(ARTICLES) {id_article}>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=#CHARSET" />
+    <meta http-equiv="content-language" content="#LANG" />
+
+    <title>#NOM_SITE_SPIP[ - (#TITRE|supprimer_numero)]</title>
+    <!--  ****************************************************************************************************** -->
+<!-- Traitement dates -->    
+         [<meta name="date-creation-ddmmyyyy" content="(#DATE|affdate{dmY})" />]
+         [<meta name="date-revision-ddmmyyyy" content="(#DATE_MODIF|affdate{dmY})" />]
+<!-- CSS et javascript -->    
+      <link rel="stylesheet" href="[(#CHEMIN{css_js/slides.css})]" type="text/css" media="projection" id="slideProj" />
+      <link rel="stylesheet" href="[(#CHEMIN{css_js/outline.css})]" type="text/css" media="screen" id="outlineStyle" />
+      <link rel="stylesheet" href="[(#CHEMIN{css_js/print.css})]" type="text/css" media="print" id="slidePrint" />
+      <link rel="stylesheet" href="[(#CHEMIN{css_js/opera.css})]" type="text/css" media="projection" id="operaFix" />
+
+      <script src="[(#CHEMIN{css_js/slides.js})]" type="text/javascript"></script>
+  </head>
+  <body dir="#LANG_DIR">
+      <div class="layout">
+        <div id="controls"></div><!-- Laisser vide, éléments générés par le système-->
+        <div id="currentSlide"></div><!-- Laisser vide, éléments générés par le système-->
+        <div id="header" class="#EDIT{titre}"><!-- contenu de l'en-tête -->
+        [(#TITRE|supprimer_numero)]
+        </div>
+        <div id=footer><!-- contenu du pied -->
+        #LESAUTEURS [(#DATE|affdate)]
+         <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
+        <a href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|couper{60})]">[(#TITRE|supprimer_numero)]</a>
+         </BOUCLE_rubrique>
+        </div>
+        <!-- éléments optionnels du layout (caractère de finition -->
+<!--
+        <div class="topleft"></div>
+        <div class="topright"></div>
+        <div class="bottomleft"></div>
+        <div class="bottomright"></div>
+-->
+        <!-- fin des éléments optionnels  layout -->        
+      </div>
+
+      <div class="#EDIT{texte} presentation">
+        [<div class="slide">
+            <div class="#EDIT{descriptif} slidecontent">
+               (#DESCRIPTIF)
+            </div>
+        </div>]
+        [<div class="slide">
+            <div class="#EDIT{chapo} slidecontent">
+               (#CHAPO)
+            </div>
+        </div>]
+        [(#TEXTE|creer_slides_incremental)]
+        <div class="slide">
+            <div class="#EDIT{ps} slidecontent">
+               [(#PS|sinon{<:merci_attention:>})]
+            </div>
+        </div>
+      </div>
+  </body>
+</BOUCLE_globale>
+</html>
