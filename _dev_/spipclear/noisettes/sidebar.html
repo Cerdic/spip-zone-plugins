@@ -1,6 +1,8 @@
 <div id="sidebar">
 
 	[(#CALENDRIER_MINI{[(#ENV{self})]})]
+
+	<INCLURE{fond=noisettes/inc-archives}{id_secteur}{self=#SELF}{decal}{var_date=archives}{date=#ENV{archives,#DATE}}>
 	
 	#FORMULAIRE_RECHERCHE
 
@@ -44,8 +46,6 @@
 		</ul>
 	</div>
 	</B_categories>
-
-	<INCLURE{fond=noisettes/inc-archives}{id_secteur}{self=#SELF}{decal}{var_date=archives}{date=#ENV{archives,#DATE}}>
 
 	#PIPELINE{boussole}
 
