@@ -137,5 +137,29 @@ function bonbon_creer_fiche_prof ($nom, $id_auteur, $id_rubrique) {
 	}
 	return $result;
 }
+function bonbon_mot_existe ($titre) {
+	$result = spip_query($sql);
+	$result = spip_optim_select(
+		array("mots.id_mot"), # SELECT
+		array('mots' => 'spip_mots'), # FROM
+		array(
+			array('=', 'mots.titre',"'$titre'")
+		), # WHERE
+		array(), # WHERE pour jointure
+		'', # GROUP
+		array(), # ORDER
+		'', # LIMIT
+		'', # sous
+		array(), # HAVING
+		'mots', # table
+		'', # boucle
+		''); # serveur
+	while ($Pile[$SP] = @spip_abstract_fetch($result,"")) {
+		print_r ($Pile[$SP]);
+		$resultat .= $Pile[$SP]['id_mot'];
+	}
+	@spip_abstract_free($result,'');
+	return $resultat;
+}
 
 ?>

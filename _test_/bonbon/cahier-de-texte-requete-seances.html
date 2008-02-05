@@ -1,17 +1,10 @@
 #CACHE{12*60*60}
 #SET{virgule,","} [(#REM) utile pour les explodes]
-[
-	(#SET{tableau_seances,[(#GET{virgule}|explode{#ENV{liste_fiches}})]})
-][
-(#REM)On restreint la requête aux descriptions de séances en suivant le même modèle que précédement.
-]<BOUCLE_QueSeances(ARTICLES){titre_mot="Description de séance"}{id_article IN #GET{tableau_seances}}{doublons QueSeances}></BOUCLE_QueSeances>[
-(#REM) {!doublons QueSeances} est donc un critère qui sélectionne toutes les Descriptions de séances qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
-]
 		<div class="liste-seances">
 <B_Seances>
 <div>
 #ANCRE_PAGINATION
-<BOUCLE_Seances(ARTICLES){!doublons QueSeances}{par #ENV{tri}}{pagination #ENV{nb,10}}{par date}{inverse #ENV{senschrono}}{'
+<BOUCLE_Seances(ARTICLES){id_rubrique}{titre_mot="Description de séance"}{id_auteur?}{titre_mot=#ENV{classe}}{titre_mot=#ENV{matiere}}{date>=#ENV{date_debut}}{date<=#ENV{date_fin}}{titre_mot?}{par #ENV{tri}}{pagination #ENV{nb,10}}{par date}{inverse #ENV{senschrono}}{'
 <br clear="both">
 <hr>'}>
 		<INCLURE(session.php){fond=cahier-de-texte-une-seance}{id_article=#ID_ARTICLE}>

@@ -222,48 +222,16 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 <//B_CONDITIONNELLE_affichage_matiere_prof_ou_non>
 		</div>
 </BOUCLE_CONDITIONNELLE_Test_si_devoirs_ou_matiere>[
-
-(#REM) On prépare une liste des artciles parmis lesquels faire la requête. Cette liste sera «stockée» dans {!doublons requete}. Ceci atomise les requêtes avec des Regexp et évite les trop grosses requêtes SQL. Merci à Cédric Morin pour l'idée.
-
-][
-(#REM) on selectionne ceux qui sont dans la bonne rubrique (année), ont la bonne les classes et l'auteur (s'il y a)
-]<BOUCLE_PrepaClasses(ARTICLES){id_rubrique}{id_auteur ?}{titre_mot=#ENV{classe,#GET{classe_defaut}}}{doublons Prepa_Classes_auteur}></BOUCLE_PrepaClasses>[
-(#REM) on selectionne ceux qui ont la bonne matière
-]<BOUCLE_Prepa_Matiere(ARTICLES){titre_mot=#ENV{matiere,#GET{matiere_defaut}}}
-{!doublons Prepa_Classes_auteur}{doublons Prepa_Matiere}></BOUCLE_Prepa_Matiere>[
-
-(#REM) On prépare une variable Spip "matiere_ou_non". Elle va déterminer quelle pile (!doublon) va être utilisée dans la boucle date: si on veut les devoirs et qu'on a pas défini de matière on utilise la pile des classes (puisqu'aucun critère de matière n'est necessaire), sinon on utilise la pile matière
-
-][
-	(#SET{matiere_ou_non,'Prepa_Matiere'})
-][
-	(#ENV{devoirs_seuls}|?{' ',''})
-		#SET{matiere_ou_non,'Prepa_Classes_auteur'}
-][
-	(#ENV{matiere}|?{' ',''})
-		#SET{matiere_ou_non,'Prepa_Matiere'}
-][
-(#REM) Idem pour les dates 
-]<BOUCLE_PrepaDates(ARTICLES){date>=#ENV{date_debut,"1900-01-01 00:00:00"}}{date<=#ENV{date_fin,"9999-12-01 03:25:02"}}{!doublons #GET{matiere_ou_non}}{doublons Date}></BOUCLE_PrepaDates>[
-(#REM) on choisi les articles qui sont du bon groupe
-]<BOUCLE_Prepa_Groupes(ARTICLES){titre_mot?}{!doublons Date}{doublons requete}>[(#SET{tableau_fiches,#GET{tableau_fiches}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})]</BOUCLE_Prepa_Groupes>[
-
-(#REM) #GET{tableau_fiches} contient donc tous les articles qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
-Puis, on implode ce tableau pour le transmettre sous forme de liste aux noisettes
-
-][
-	(#SET{liste_fiches,[(#GET{virgule}|implode{#GET{tableau_fiches}})]})
-][
 	(#REM) Si on ne veut pas que les devoirs, on inclu la noisette qui affiche les séances
 ][(#ENV{devoirs_seuls}
 	|?{'',' '})
-	<INCLURE{fond=cahier-de-texte-requete-seances}{liste_fiches=#GET{liste_fiches}}{self=#SELF}{matiere_defaut=#GET{matiere_defaut}}{id_rubrique=#ID_RUBRIQUE}{senschrono=#ENV{senschrono}}>
+	<INCLURE{fond=cahier-de-texte-requete-seances}{self=#SELF}{id_rubrique=#ID_RUBRIQUE}{id_auteur=#ENV{id_auteur}}{classe=#ENV{classe,#GET{classe_defaut}}}{matiere=#ENV{matiere,#GET{matiere_defaut}}}{date_debut=#ENV{date_debut,"1900-01-01 00:00:00"}}{date_fin=#ENV{date_fin,"9999-12-01 03:25:02"}}{titre_mot=#ENV{titre_mot}}{tri=#ENV{tri}}{nb=#ENV{nb}}{senschrono=#ENV{senschrono}}>
 ][
 	(#REM) Si on veut que les devoirs, on inclu la noisette qui affiche les devoirs
 ]
 [(#ENV{devoirs_seuls}
 	|?{' ',''})
-	<INCLURE{fond=cahier-de-texte-requete-devoirs}{liste_fiches=#GET{liste_fiches}}{self=#SELF}{matiere_defaut=#GET{matiere_defaut}}{id_rubrique=#ID_RUBRIQUE}{matiere_ou_non=#GET{matiere_ou_non}}{senschrono=#ENV{senschrono}|choixsiegal{'',1,0}}>
+	<INCLURE{fond=cahier-de-texte-requete-devoirs}{self=#SELF}{id_rubrique=#ID_RUBRIQUE}{id_rubrique=#ID_RUBRIQUE}{id_auteur=#ENV{id_auteur}}{classe=#ENV{classe,#GET{classe_defaut}}}{matiere=#ENV{matiere,#GET{matiere_defaut}}}{date_debut=#ENV{date_debut,"1900-01-01 00:00:00"}}{date_fin=#ENV{date_fin,"9999-12-01 03:25:02"}}{titre_mot=#ENV{titre_mot}}{tri=#ENV{tri}}{nb=#ENV{nb}}{senschrono=#ENV{senschrono}|choixsiegal{'',1,0}}>
 ]
 	</div>
 	<br clear="All">

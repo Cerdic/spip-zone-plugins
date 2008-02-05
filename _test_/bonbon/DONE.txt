@@ -11,7 +11,6 @@ Ce qui a été fait avec «Bonbon !»
 - Optimisations:
 		-* utilisation de {id_auteur ?} à la place de {id_auteur==#ENV{prof,.}} (merci BoOz).
 		-* utilisation de {titre_mot ?} pour les groupes ce qui élimine la dernière REGEXP. Donc il n'y a plus de REGEXP MySQL!
-		-* atomisation des requêtes SQL grâce à des {!doublons bidule) (merci à Cédric Morin pour l'idée remarquable !).
 		-* Une erreur de design dans le mélange du PHP et des boucles faisait que toutes la requêtes (même les inutiles) étaient exécutées quelque soit le contexte (en effet, le phraseur de SPIP transforme toutes les boucles de la page en html AVANT que le code php avec des if ne s'exécute.). C'est résolu soit grâce à l'utilisation de noisettes dont l'inculsion est conditionnée par une balise filtrée par un test. Soit par l'utilisation de boucles "fictives" conditionnelles. L'utilisation intensives de BOUCLES_CONDITIONNELLES évitent le php et donc permettent de mieux gérer le cache.
 		-* Début de déPHPisation (remplacement du PHP dans les squelettes au maxi, par des boucles/balises et éventuellement des fonctions définies dans le fichier idoine)
 		-* Révision de toutes les valeurs de #CACHE (les pages rares sont mises en cache pour 30 jours, les listes de fiches pour 12h, les fiches pour une semaine) -> moins d'accès à la base de donnée.

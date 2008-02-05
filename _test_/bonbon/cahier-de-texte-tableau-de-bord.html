@@ -42,7 +42,7 @@
 					"&nbsp;- <a href='",
 					[(#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=calcul}|parametre_url{id_article,#ID_ARTICLE})],
 					"' title='",
-					[Extrait&nbsp;: (#TEXTE|couper|textebrut|htmlentities{ENT_QUOTES})],
+					[Extrait&nbsp;: (#TEXTE|couper|textebrut|htmlentities)],
 					"' onClick='javascript:ouvrefenetre(this.href);return false;'>Voir la séance</a>&nbsp;- <a href='",
 					[(#URL_PAGE{cahier-de-texte-saisie,id_classe0=#_Classes_de_lauteur:ID_MOT}|parametre_url{id_matiere,#_Matieres_de_lauteur:ID_MOT})],
 					"' title='Saisir directement une séance pour la ",

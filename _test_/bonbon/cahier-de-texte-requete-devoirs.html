@@ -21,7 +21,7 @@
 				<th>Donné le</th>
 			</tr>
 
-<BOUCLE_Devoirs(ARTICLES){!doublons QueDevoirs}{par #ENV{tri}}{pagination #ENV{nb,10}}{par date}{inverse #ENV{senschrono}}>
+<BOUCLE_Devoirs(ARTICLES){id_rubrique}{titre_mot="Devoirs à faire"}{titre_mot=#ENV{classe}}{titre_mot=#ENV{matiere,"Devoirs à faire"}}{date>=#ENV{date_debut}}{date<=#ENV{date_fin}}{titre_mot?}{par #ENV{tri}}{pagination #ENV{nb,10}}{par date}{inverse #ENV{senschrono}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})]">
 				<td>[(#DATE|affdate)]</td>
 				[(#ENV{classe}|?{'',<td>})]
@@ -91,7 +91,7 @@
 
 (#REM) Et on affiche ces classes
 
-]<B_Affiche_Autres_classes_Devoirs>(<BOUCLE_Affiche_Autres_classes_Devoirs(MOTS){!doublons #GET{matiere_ou_non}}{", "}><a href="[(#SELF|parametre_url{'classe',#TITRE})]" title="Afficher le cahier de texte de la [(#TITRE|textebrut)] en #ENV{matiere,#ENV{matiere_defaut}}">#TITRE</a></BOUCLE_Affiche_Autres_classes_Devoirs>)</B_Affiche_Autres_classes_Devoirs>
+]<B_Affiche_Autres_classes_Devoirs>(<BOUCLE_Affiche_Autres_classes_Devoirs(MOTS){!doublons #GET{matiere_ou_non}}{", "}><a href="[(#SELF|parametre_url{'classe',#TITRE})]" title="Afficher le cahier de texte de la [(#TITRE|textebrut)] [en (#ENV{matiere})]">#TITRE</a></BOUCLE_Affiche_Autres_classes_Devoirs>)</B_Affiche_Autres_classes_Devoirs>
 et/ou une autre matière [
 
 (#REM) On regarde s'il y a d'autres matières avec des fiches pour cette classe
