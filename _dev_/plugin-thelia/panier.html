@@ -1,6 +1,6 @@
 #CACHE{7200}
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-<html dir="#LANG_DIR" lang="#LANG">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
 <title><:spipthelia:mon_panier:> - [(#NOM_SITE_SPIP|textebrut)]</title>
 <meta name="description" content="<:spipthelia:mon_panier:>" />
@@ -19,7 +19,6 @@
 		[(#REM) Contenu principal : contenu de la rubrique ]
 		<div id="contenu">
 					
-			<div id="contenu">
 			[(#REM) Fil d'Ariane ]
 			<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:mon_panier:></div>
 
@@ -31,44 +30,49 @@
 				
 			[(#REM) Contenu du panier ]
 
-			<table width="675" border="0" cellpadding="5" cellspacing="0" class="enteteTableau">
-  				<tr>
-    				<td width="265"><:spipthelia:references_produits:></td>
-    				<td width="95"><:spipthelia:prix_unitaire:></td>
-    				<td width="95"><:spipthelia:quantite:></td>
-    				<td width="95"><:spipthelia:total_ttc:></td>
-    				<td width="75" align="center"><:spipthelia:Vider:></td>
-				</tr>
-			</table>
-
-			<table width="575" border="0" cellpadding="5" cellspacing="0">
-    			<THELIA_CONTENU_PANIER type="PANIER">
+			<table id="panier">
+  			<thead> 
 				<tr>
-					<td width="100" class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td><td width="165" class="ligneTableau">THELIA-REF<br/>THELIA-TITRE </td>
-					<td width="95" class="ligneTableau">THELIA-PRIXU &euro; </td>
-    				<td width="95" class="ligneTableau">
-					<form action="#URL_PAGE{panier, thelia_action=modifier&article=THELIA-ARTICLE}" method="post" name="formpanierTHELIA-ARTICLE" id="formpanierTHELIA-ARTICLE">
-                	<input type="hidden" name="article" value="THELIA-ARTICLE" />
-                	<input type="hidden" name="thelia_action" value="modifier" />
-                	<select name="quantite" size="1" class="zoneDeSaisie" onchange="document.formpanierTHELIA-ARTICLE.submit()">
-                	<THELIA_quantite type="QUANTITE" article="THELIA-ARTICLE" max="50">
-					<option value="THELIA-NUM" THELIA-SELECTED>THELIA-NUM</option>
-					</THELIA_quantite>
-					</select>
+    					<th class="enteteTableau"><:spipthelia:photo_produit:></th>
+    					<th class="enteteTableau"><:spipthelia:references_produits:></th>
+    					<th class="enteteTableau"><:spipthelia:prix_unitaire:></th>
+    					<th class="enteteTableau"><:spipthelia:quantite:></th>
+    					<th class="enteteTableau"><:spipthelia:total_ttc:></th>
+    					<th class="enteteTableau"><:spipthelia:Vider:></th>
+				</tr>
+			</thead>
+
+			<tbody> 
+				<THELIA_CONTENU_PANIER type="PANIER">
+				<tr>
+					<td class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td>
+					<td class="ligneTableau">THELIA-REF<br/>THELIA-TITRE </td>
+					<td class="ligneTableau">THELIA-PRIXU &euro; </td>
+    					<td class="ligneTableau">
+					<form action="#URL_PAGE{panier, article=THELIA-ARTICLE}" method="post" name="formpanierTHELIA-ARTICLE" id="formpanierTHELIA-ARTICLE">
+                				<input type="hidden" name="article" value="THELIA-ARTICLE" />
+                				<input type="hidden" name="thelia_action" value="modifier" />
+                				<select name="quantite" size="1" class="zoneDeSaisie" onchange="document.formpanierTHELIA-ARTICLE.submit()">
+                				<THELIA_quantite type="QUANTITE" article="THELIA-ARTICLE" max="50">
+							<option value="THELIA-NUM" THELIA-SELECTED>THELIA-NUM</option>
+						</THELIA_quantite>
+						</select>
 					</form>
 					</td>
-					<td width="95" class="ligneTableau">THELIA-TOTAL &euro;</td>
-					<td width="75" align="center" class="ligneTableau"><a href="#URL_PAGE{panier,thelia_action=supprimer&article=THELIA-ARTICLE}"><:spipthelia:supprimer:></a></td>
+					<td class="ligneTableau">THELIA-TOTAL &euro;</td>
+					<td class="ligneTableau"><a href="#URL_PAGE{panier,thelia_action=supprimer&article=THELIA-ARTICLE}"><:spipthelia:supprimer:></a></td>
 				</tr>
   	  		</THELIA_CONTENU_PANIER>
-			</table>
 			
-			<table width="675" border="0" cellpadding="5" cellspacing="0" class="enteteTableau">
 				<tr>
-					<td width="265">&nbsp;</td>
-					<td width="200" align="right"><:spipthelia:total_panier:> :</td>
-    				<td width="180">THELIA-PANIER_TOTAL &euro;</td>
-    			</tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td align="right"><:spipthelia:total_panier:> :</td>
+    					<td>THELIA-PANIER_TOTAL &euro;</td>
+					<td></td>
+    				</tr>
+			</tbody>
 			</table>
 			
 
@@ -78,8 +82,6 @@
 				<div class="boutonMonCompteContenu">
 				<a href="#URL_SITE_SPIP"><:spipthelia:retour_boutique:></a>
 				</div>
-		  	</div>
-
 		
 		</div>[(#REM) fin contenu ]
 
