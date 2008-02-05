@@ -12,6 +12,11 @@ Version 1.0 - 2008-02-01
 -* Criteres a_venir, en_cours, revolus
 -* Noisette microformat hCalendar
 
+BUGS:
+-----
+
+-* s'arrurer qu'une annonce ne sort pas des creneaux correspondant aux criteres a_venir, en_cours et revolus.
+
 TODO:
 -----
 
