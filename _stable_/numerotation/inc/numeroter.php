@@ -11,20 +11,30 @@ function numero_numeroter_rubrique($id_rubrique,$type='rubrique',$numerote=true)
 
 	$cond = "";
 	$zero = true;
-	if ($numerote && defined('_NUMERO_MOT_ARTICLE_ACCUEIL') && ($type=='article')){
-		// numeroter 0. l'article d'accueil de la rubrique
-		$res = spip_query("SELECT a.id_article,a.titre FROM spip_articles AS a INNER JOIN spip_mots_articles as J ON J.id_article=a.id_article
-		 WHERE a.id_rubrique="._q($id_rubrique)." 
-		 AND J.id_mot="._q(_NUMERO_MOT_ARTICLE_ACCUEIL)."
-		 ORDER BY 0+a.titre, a.maj DESC LIMIT 0,1");
-		if ($row = spip_fetch_array($res)){
+	if ($numerote && ($type=='article')){
+		$row = false;
+		if (defined('_NUMERO_MOT_ARTICLE_ACCUEIL')) {
+			// numeroter 0. l'article d'accueil de la rubrique
+			$res = spip_query("SELECT a.id_article,a.titre FROM spip_articles AS a INNER JOIN spip_mots_articles as J ON J.id_article=a.id_article
+			 WHERE a.id_rubrique="._q($id_rubrique)." 
+			 AND J.id_mot="._q(_NUMERO_MOT_ARTICLE_ACCUEIL)."
+			 ORDER BY 0+a.titre, a.maj DESC LIMIT 0,1");
+			$row = spip_fetch_array($res);
+		}
+		if (defined('_DIR_PLUGIN_FONDS')){
+			// numeroter 0. l'article d'accueil de la rubrique
+			$res = spip_query($q="SELECT a.id_article,a.titre FROM spip_articles AS a INNER JOIN spip_rubriques as J ON J.id_accueil=a.id_article
+			 WHERE a.id_rubrique="._q($id_rubrique)." 
+			 ORDER BY 0+a.titre, a.maj DESC LIMIT 0,1");
+			$row = spip_fetch_array($res);
+		}	
+		if ($row){
 			$titre = "0. " . numero_denumerote_titre($row['titre']);
 			spip_query("UPDATE spip_$table SET titre="._q($titre)." WHERE $key=".$row[$key]);
 			$zero = false;
 			$cond = " AND id_article<>"._q($row[$key]);
 		}
 	}
-	
 	if ($type=='article') {
 		$cond .= " AND statut!='poubelle'";
 	}
