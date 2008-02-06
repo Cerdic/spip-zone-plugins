@@ -1,12 +1,10 @@
 #CACHE{7200}
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-<html dir="#LANG_DIR" lang="#LANG">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<title><:spipthelia:erreur_paiement:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="<:spipthelia:erreur_paiement:>" />
 <INCLURE{fond=inc-head}>
-[(#REM) Lien vers le flux RSS de la rubrique ]
-<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
 </head>
 
 <body class="page_panier">
@@ -20,16 +18,16 @@
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
 		<div id="contenu">
+		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:erreur_paiement:></div>		
 						
 			[(#REM) Titre de la rubrique ]
-
-				<div class="titrePage">
-				<h2>Erreur de paiement</h2>
-				</div>
+			<div class="titrePage">
+				<h2><:spipthelia:erreur_paiement:></h2>
+			</div>
 
 		[(#REM) Contenu de la page ]
-		  <p class="commentaires">Nous vous informons que la procédure de paiement n'a pas pu aboutir, veuillez vous renseigner aupr&egrave;s de votre &eacute;tablissement bancaire.</p>
-      		    <p class="commentaires">Bonne navigation et &agrave; bientôt</p>
+		  <p class="commentaires"><:spipthelia:commentaire_erreur_paiement:></p>
+      		    <p class="commentaires"><:spipthelia:commentaire_erreur_paiement_suite:></p>
 
 		</div> [(#REM)fin contenu]
 
