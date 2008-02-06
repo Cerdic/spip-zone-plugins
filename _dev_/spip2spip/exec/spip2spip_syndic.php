@@ -12,7 +12,8 @@ function exec_spip2spip_syndic(){
   include_spip("inc/distant"); 
   include_spip("inc/syndic"); 
   include_spip("inc/mail"); 
-  include_spip("inc/getdocument");   
+  include_spip("inc/getdocument"); 
+  include_spip("inc/ajouter_documents");   
   
   // Recupere la config
   global $table_prefix;
