@@ -1,4 +1,9 @@
-﻿2008-02-04  chryjs  <chryjs!@!free!.!fr>
+﻿2008-02-06  chryjs  <chryjs!@!free!.!fr>
+
+ * Probleme de compatibilite PostGres (simplification des controles) cf Bug Report Adeline D
+
+
+2008-02-04  chryjs  <chryjs!@!free!.!fr>
 
  * Correction fonction sql_countsel manquante dans librairie de compatibilité pour spip 192 cf http://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=536
 
@@ -27,7 +32,7 @@
  * Debut des modifications pour utiliser un avatar pour tous - reporte a une version ulterieure
  * Passage en 0.4.4 : fin des evolutions prevues (avec report)
  * Corrections de bugs sur balise ARRAY inclusion de pied et construction de page
- 
+
 
 
 2008-01-15  chryjs  <chryjs!@!free!.!fr>
@@ -151,7 +156,7 @@
  * Correction regression : erreur d'appel sql_showtable pour permettre l'adaptation (mutualisation) bug report Gurdil
  * Amélioration de la présentation de la page des inscrits
  * Amélioration de la présentation de la page d'admin
- 
+
 2007-12-20  chryjs  <chryjs!@!free!.!fr>
 
  * Rajout page racine connexion manquante
@@ -216,10 +221,10 @@
 	spipbb_import_gafospip_metas() ==> correspond a recup sur gaf 0.6, hors ce plugin jamais diffusé, donc
 		faire recup des 3 premier champs (gaf 0.5 !).
 
-	## spipbb_presentation (inc/) ** 
+	## spipbb_presentation (inc/) **
 	[[ anc. inc/gaf_inc.php ]]
-	.. Diverses fonctions liées à la presentation 
-	==> bouton de tout genre, positionnement spécifique, encadrement ... 
+	.. Diverses fonctions liées à la presentation
+	==> bouton de tout genre, positionnement spécifique, encadrement ...
 
 	## spipbb_menus_gauche (inc/)**
 	Assemblage de (gaf)menu_arbo.php + (spipbb)interface_admin.php
@@ -271,18 +276,18 @@
 	(anc. gaf_affect.php) --> déplacement de threads
 
 	## spipbb_inc_affecter.php (inc/)**
-	(anc. heritage.php) fonctions hierarchie 
+	(anc. heritage.php) fonctions hierarchie
 
 	## spipbb_affecter_affiche.php (exec/)**
 	(anc. gaf_val_affect.php)
 
-	!! ## (h)gaf_auteur_infos() -> (chrys) spipbb_auteur_infos() 
+	!! ## (h)gaf_auteur_infos() -> (chrys) spipbb_auteur_infos()
 		DEVIENT : spipbb_donnees_auteur() ... risque confusion avec les script + fonction spipbb_auteur_infos destinées
 		à l'affichage d'un formulaire dans exec/auteur_infos (spip) !!
 
 	## spipbb_admin_gestion_forum.php@@
 	fonctionnalités : ordonner les art/rub, intégrée à spipbb_admin !!
-	Mais reste toujours le problème de monter descendre sur article .. dysfonctionnement sous 1.9.2 !!! 
+	Mais reste toujours le problème de monter descendre sur article .. dysfonctionnement sous 1.9.2 !!!
 	Corrigé sur 0.3.7 ???
 
 	## spipbb_styles.css (img_pack/)**
@@ -342,7 +347,7 @@
 
 2007-11-19  chryjs  <chryjs!@!free!.!fr>
 
- * Suppression de modeles obsoletes 
+ * Suppression de modeles obsoletes
  * Ajout d'un controle des prerequis a l'activation
  * passage en 0.3.1 - meilleurs controles
  * Filtrage (conditions d'acces et menus) des affichages exec=...
@@ -384,7 +389,7 @@
  * meilleure presentation de menu admin
  * Retour en arriere sur le fichier plugin.xml et spipbb_pipelines pour remettres les boutons qui n'etaient plus visibles en 192
  * Passage en 0.2.5
- 
+
 2007-11-10  chryjs  <chryjs!@!free!.!fr>
 
  * Anti Spam : ajout de l'import d'un CSV avec une liste de mots

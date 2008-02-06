@@ -27,7 +27,7 @@ spipbb_log("included",2,__FILE__);
 
 //----------------------------------------------------------------------------
 // controle config de SPIP
-//---------------------------------------------------------------------------- 
+//----------------------------------------------------------------------------
 function spipbb_check_spip_config() {
 	$res=array();
 	// Les forums de SPIP sont ils actives ????????
@@ -35,19 +35,19 @@ function spipbb_check_spip_config() {
 		$res['forums_publics']= array( 'etat'=>true, 'message'=>_T('spipbb:admin_spip_forums_ok'));
 		$resultat=_T('spipbb:admin_spip_forums_ok');
 	} else {
-		$res['forums_publics']= array( 'etat'=>false, 
+		$res['forums_publics']= array( 'etat'=>false,
 										'message'=>_T('spipbb:admin_spip_forums_erreur')
 										//'message' => spipbb_
 										);
 		$resultat=_T('spipbb:admin_spip_forums_erreur');
 	}
 
-	// utiliser mot cles 
+	// utiliser mot cles
 	// mots_cles_forums articles_mots + mots_cles_forums
 	if ( $GLOBALS['meta']['articles_mots']=='oui' ) {
-		$res['articles_mots']= array( 'etat'=>true, 
+		$res['articles_mots']= array( 'etat'=>true,
 										'message'=>_T('spipbb:admin_spip_mots_cles_ok')
-									
+
 										);
 		$resultat=_T('spipbb:admin_spip_mots_cles_ok');
 	}
@@ -56,7 +56,7 @@ function spipbb_check_spip_config() {
 		//$spipbb_mots = charger_fonction('spipbb_mots', 'configuration');
 		//$config_mots = $spipbb_mots();
 
-		$res['articles_mots']= array( 'etat'=>false, 
+		$res['articles_mots']= array( 'etat'=>false,
 										'message'=>_T('spipbb:admin_spip_mots_cles_erreur')
 										//'message'=> $config_mots,
 										);
@@ -141,13 +141,23 @@ function spipbb_check_une_table($nom_table,$tables_principales)
 		$champ=strtolower($param[0]);
 		$champ=preg_replace("/^char(.*)/","varchar\\1",$champ); // char(x)==varchar(x) ?
 		$champ=preg_replace("/^timestamp.*/","timestamp",$champ); // timestamp(14)==timestamp ?
+		$champ=preg_replace("/^bigint.*/","bigint",$champ); // bigint(21)==bigint ?
+		$champ=preg_replace("/^varcharacter/","varchar",$champ); //varcharacter == varchar
+		$champ=preg_replace("/^integer/","int",$champ); //integer == int
+		$champ=preg_replace("/^tinytext/","text",$champ); //tinytext == text
+
 		$res['field'][$k]=$champ;
 	}
 	$table_origine=$tables_principales[$nom_table];
 	while ( list($k,$v) = each($table_origine['field']) )
 	{
 		$param=preg_split("/\s/",$v);
-		$table_origine['field'][$k]=strtolower($param[0]);
+		$champ=$param[0];
+		$champ=preg_replace("/^bigint.*/","bigint",$champ); // bigint(21)==bigint ?
+		$champ=preg_replace("/^int.*/","int",$champ); // int(10)==int ?
+		$champ=preg_replace("/^varchar.*/","varchar",$champ); // varchar(10)==varchar ?
+		$champ=preg_replace("/^tinytext/","text",$champ); //tinytext == text
+		$table_origine['field'][$k]=strtolower($champ);
 	}
 	if ($res['field'] != $table_origine['field'] ) {
 		spipbb_log("diff(".$nom_table.") res:".join(",",$res['field']).":orig:".join(",",$table_origine['field']),2,__FILE__." spipbb_check_une_table");
@@ -178,7 +188,7 @@ function spipbb_delete_tables()
 
 //----------------------------------------------------------------------------
 # ecrire tables spipbb
-//---------------------------------------------------------------------------- 
+//----------------------------------------------------------------------------
 function spipbb_ecrire_tables() {
 	include_spip('base/spipbb');
 	include_spip('base/create');
