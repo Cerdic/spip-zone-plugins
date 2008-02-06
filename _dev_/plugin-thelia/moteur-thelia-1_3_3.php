@@ -206,7 +206,7 @@ function analyse($res){
 		case 'creercompte' : creercompte($raison, $entreprise, $siret, $prenom, $nom, $adresse1, $adresse2, $adresse3, $cpostal, $ville, $pays, $telfixe, $telport, $email1, $email2, $motdepasse1, $motdepasse2, $parrain); break;	
 		case 'modifiercompte' : modifiercompte($raison, $entreprise, $siret, $prenom, $nom, $adresse1, $adresse2, $adresse3, $cpostal, $ville, $pays, $telfixe, $telport, $email1, $email2, $motdepasse1, $motdepasse2); break;	
 		case 'creerlivraison' : creerlivraison($id, $libelle, $raison, $prenom, $nom, $adresse1, $adresse2, $adresse3, $cpostal, $ville, $tel, $pays); break;
-        case 'supprimerlivraison' : supprimerlivraison($id);
+        	case 'supprimerlivraison' : supprimerlivraison($id);
 		case 'modifierlivraison' : modifierlivraison($id, $libelle, $raison, $prenom, $nom, $adresse1, $adresse2, $adresse3, $cpostal, $ville, $tel, $pays); break;
 		case 'modadresse' : modadresse($adresse); break;
 		case 'codepromo' : codepromo($code); break;

@@ -1,12 +1,10 @@
 #CACHE{7200}
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-<html dir="#LANG_DIR" lang="#LANG">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<title><:spipthelia:merci:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="<:spipthelia:merci:>" />]
 <INCLURE{fond=inc-head}>
-[(#REM) Lien vers le flux RSS de la rubrique ]
-<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
 </head>
 
 <body class="page_panier">
@@ -21,25 +19,21 @@
 		[(#REM) Contenu principal : contenu de la rubrique ]
 		<div id="contenu">
 				
-		[(#REM)Titre de la rubrique ]
+			[(#REM)Titre de la rubrique ]
+			<div class="titrePage">
+				<h2><:spipthelia:merci:></h2>
+			</div>
 
-				<div class="titrePage">
-				<h2>Merci</h2>
-				</div>
-
-	[(#REM) Contenu de la page ]	
-	  <p class="commentaires">Notre boutique vous remercie de votre achat</p>
-          <p class="commentaires">Bonne navigation et à bientôt</p>
-		</div> <!--fin contenu-->
+			[(#REM) Contenu de la page ]	
+			<p class="commentaires"><:spipthelia:merci_achat:></p>
+        	  	<p class="commentaires"><:spipthelia:a_bientot:></p>
+		</div> <!-- fin contenu -->
 
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
-
 			[(#REM) Menu de navigation par rubriques ]
 			<INCLURE{fond=inc-rubriques}>
-
-
 		</div><!-- fin navigation -->
 
 	</div>[(#REM) fin conteneur ]
