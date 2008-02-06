@@ -29,7 +29,7 @@ $.ajax({
    dataType: "json",
    data: "texte="+text_a_sauver+"&arg="+arg+"&id_parent="+id_parent+"&titre="+titre,
    success: function(msg){
-   console.log(msg);
+
    $("form[@name='formulaire'] input[@name='arg']").val(msg.id_article);
    $("form[@name='formulaire'] input[@name='hash']").val(msg.hash);
      $("#div_result").html("sauvegard&eacute; &agrave; " + msg.date);
