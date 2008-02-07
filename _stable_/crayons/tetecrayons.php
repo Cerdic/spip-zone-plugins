@@ -15,10 +15,25 @@ function analyse_droits_rapide_dist() {
 
 // Le pipeline header_prive (pour y tester les crayons)
 function Crayons_insert_head($head) {
-    // Pages crayonnables
-    if (!in_array(_request('exec'), array( /* 'articles', 'etc...' */ )))
-        return $head;
+    include_spip('cfg_options');
 
+    //par défaut, pas de traitement sur les entetes
+    $res = $head;
+    
+    //vérifie que l'éditiojn de l'espace privé est autorisé
+    if (lire_config('crayons/espaceprive') == 'on') {
+        //determine les pages (exec) crayonnables
+        if (in_array(_request('exec'), explode(',',lire_config('crayons/exec_autorise')))) {
+            //Calcul des droits
+            include_spip('inc/crayons');
+            $res = Crayons_preparer_page($head, '*', wdgcfg(), 'head');
+        } 
+    }
+    
+    //retourne l'entete modifiée
+    return $res;
+        
+    /*
     // Est-on autorise ?
     include_spip('inc/autoriser');
     switch (_request('exec')) {
@@ -32,9 +47,8 @@ function Crayons_insert_head($head) {
 
     if (!$droits)
         return $head;
+    */
 
-    include_spip('inc/crayons');
-    return Crayons_preparer_page($head, '*', wdgcfg(), 'head');
 }
 
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
