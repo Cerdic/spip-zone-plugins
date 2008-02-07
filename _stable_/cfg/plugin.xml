@@ -1,20 +1,28 @@
 <plugin>
-	<nom>
-	cfg: moteur de configuration
-	</nom>
-	<auteur>bertrand Gugger [->http://toggg.com/]
-_ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
-	</auteur>
-	<version>
-	1.3.2
-	</version>
-	<etat>
-	stable
-	</etat>
-	<description>
-Ce plugin permet de g&#233;rer tr&#232;s simplement des interfaces de configuration pour diff&#233;rents modules.
+    <nom>
+    <multi>
+    [fr]cfg: moteur de configuration
+    [de]cfg: Konfigurationsmotor
+    </multi>
+    </nom>
+    <auteur>bertrand Gugger [->http://toggg.com/]
+_ &#169; 2007 - <multi>[fr]Distribu&#233; sous licence[de]Vertrieb unter Lizenz</multi> GNU/LGPL
+    </auteur>
+    <version>
+    1.3.2
+    </version>
+    <etat>
+    stable
+    </etat>
+    <description>
+    <multi>
+[fr]Ce plugin permet de g&#233;rer tr&#232;s simplement des interfaces de configuration pour diff&#233;rents modules.
 
 Il est utilis&#233; par de nombreux plugins, mais il peut aussi avoir d'autres usages comme le param&#233;trage de squelettes.
+[de]Dieses Plugin erm&#246;glicht es, in sehr einfacher Weise die Konfigurationsschnittstellen verschiedener Module zu verwalten.
+
+Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie die Parametereinstellung von Skeletten.
+    </multi>
 <!--
 
 (infos developpeurs, cf. documentation)
@@ -26,25 +34,25 @@ _ Il fournit une balise #CONFIG &#233;tendue comme #CONFIG&#123;xxx/nom_valeur&#
 _ La fonction correspondante {{lire_config($cfg='', $defaut=null, $serialize=false)}} est fournie pour le php, attention, en php le d&eacute;faut pour serialize est faux alors qu'il est vrai pour la balise des squelettes.
 
 -->
-	</description>
-	<lien>
-	[Documentation->http://www.spip-contrib.net/?article1605]
-	</lien>
-	<prefix>
-	cfg
-	</prefix>
-	<icon>
-	cfg.png
-	</icon>
-	<chemin dir='' />
-	<options>
-	cfg_options.php
-	</options>
+    </description>
+    <lien>
+    [<multi>[fr]Documentation[de]Dokumentation</multi>->http://www.spip-contrib.net/?article1605]
+    </lien>
+    <prefix>
+    cfg
+    </prefix>
+    <icon>
+    cfg.png
+    </icon>
+    <chemin dir='' />
+    <options>
+    cfg_options.php
+    </options>
 
-	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<action>ajouter_onglets</action>
-		<inclure>cfg_pipeline.php</inclure>
-	</pipeline>
+    <pipeline>
+        <nom>ajouter_onglets</nom>
+        <action>ajouter_onglets</action>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
 
 </plugin>

@@ -32,7 +32,7 @@ $GLOBALS['i18n_cfg_fr'] = array(
 // I
 'id_manquant' => 'Identifiant manquant',
 // N
-'nom_table_manquant' => 'Nom de la tale SQL manquant',
+'nom_table_manquant' => 'Nom de la table SQL manquant',
 'nouveau' => 'Nouveau',
 // P
 'pas_de_changement' => 'Pas de changement dans <b>@nom@</b>',
