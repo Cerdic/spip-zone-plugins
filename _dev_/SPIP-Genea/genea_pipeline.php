@@ -13,9 +13,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // --
 function genea_ajouter_boutons($boutons_admin){
-	global $connect_statut, $connect_toutes_rubriques;
+	//global $connect_statut, $connect_toutes_rubriques;
+	//$connect_statut == "0minirezo" && $connect_toutes_rubriques
 	// si on est admin
-	if ($connect_statut == "0minirezo" && $connect_toutes_rubriques){
+	if (autoriser('voir','genea')){
 		// on voit le bouton dans la barre "naviguer"
 		$boutons_admin['naviguer']->sousmenu['genea_naviguer']= new Bouton(
 			url_absolue(find_in_path('/img_pack/arbre-24.png')),  // icone
@@ -25,17 +26,29 @@ function genea_ajouter_boutons($boutons_admin){
 	return $boutons_admin;
 }
 
-function genea_calculer_rubriques(){
+function genea_calculer_rubriques($flux){
 	global $table_prefix;
+	$date_tmp = getdate();
 	// Publier et dater les rubriques qui ont un arbre genealogique
-	$r = spip_query("SELECT rub.id_rubrique AS id,
+	$r = spip_query("SELECT rub.id_rubrique AS id
 	FROM ".$table_prefix."_rubriques AS rub, ".$table_prefix."_genea AS fille
 	WHERE rub.id_rubrique = fille.id_rubrique
 //	AND rub.date_tmp <= fille.date_heure AND fille.statut='publie'
 	GROUP BY rub.id_rubrique");
+	print_r ($row);
 	while ($row = spip_fetch_array($r))
 		spip_query("UPDATE spip_rubriques
-		SET statut_tmp='publie',
+		SET statut_tmp='publie', date_tmp='".strtotime(normaliser_date($date_tmp))."'
 		WHERE id_rubrique=".$row['id']);
+}
+
+function genea_affiche_milieu($flux){
+print_r ($flux);
+	$exec = $flux['args']['exec'];
+	if ($exec == 'rubriques_edit') {
+		$flux['data'] .= "coucou";
+	}
+
+	return $flux;
 }
 ?>

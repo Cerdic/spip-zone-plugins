@@ -54,10 +54,18 @@ function exec_genea_naviguer_dist() {
 }
 
 function genea_affiche_liste_arbre(){
+	global $table_prefix;
 	pipeline('exec_init',array('args'=>array('exec'=>'genea_naviguer'),'data'=>''));
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('genea:titre'), 'naviguer', 'genea');
+
+	// Controle d'acces a la gestion des arbres genealogiques
+	if (!autoriser('voir', 'genea', $id_genea)) {
+		echo "<strong>" . _T('avis_acces_interdit') . "</strong>";
+		echo fin_page();
+		exit;
+	}
 
 	echo "<br /><br /><br />\n";
 	gros_titre(_T('genea:titre'));
@@ -75,7 +83,16 @@ function genea_affiche_liste_arbre(){
 
 	debut_droite();
 
- 	echo genea_afficher_arbres('<b>' . _T('genea:titre_arbres_proposes') . '</b>', array("SELECT" => 'spip_genea.*, COUNT(spip_genea_individus.id_individu) AS nombre',"FROM" => 'spip_genea INNER JOIN spip_genea_individus', "WHERE" => 'spip_genea.id_genea=spip_genea_individus.id_genea AND spip_genea.id_rubrique<1', "GROUP BY" => 'spip_genea.id_genea', "ORDER BY"=>'spip_genea.id_genea'));
+	// Affiche les arbres en attente d'affectation a une rubrique
+	$relief = spip_num_rows(spip_query("SELECT id_genea FROM " . $table_prefix. "_genea WHERE id_rubrique<1 LIMIT 1"));
+
+	if ($relief) {
+		$res = debut_cadre_couleur('', true);
+		$res .= "<div class='verdana2' style='coloe: black;'><b>" . _T('genea:texte_en_attente') . "</b></div>";
+ 		$res .= genea_afficher_arbres('<b>' . _T('genea:titre_arbres_attente') . '</b>', array("SELECT" => 'spip_genea.*, COUNT(spip_genea_individus.id_individu) AS nombre',"FROM" => 'spip_genea INNER JOIN spip_genea_individus', "WHERE" => 'spip_genea.id_genea=spip_genea_individus.id_genea AND spip_genea.id_rubrique<1', "GROUP BY" => 'spip_genea.id_genea', "ORDER BY"=>'spip_genea.id_genea'));
+ 		$res .= fin_cadre_couleur(true);
+		echo $res;
+	}
 
 	echo genea_afficher_arbres('<b>' . _T('genea:titre_arbres_tous') . '</b>', array("SELECT" => 'spip_genea.*, spip_rubriques.titre, COUNT(spip_genea_individus.id_individu) AS nombre',"FROM" => 'spip_genea INNER JOIN spip_rubriques, spip_genea_individus', "WHERE" => 'spip_genea.id_genea=spip_genea_individus.id_genea AND spip_genea.id_rubrique=spip_rubriques.id_rubrique AND spip_genea.id_rubrique>0', "GROUP BY" => 'spip_genea.id_genea', "ORDER BY"=>'spip_genea.id_genea'));
 
@@ -85,7 +102,29 @@ function genea_affiche_liste_arbre(){
 }
 
 function genea_voir_arbre($id_genea) {
+	pipeline('exec_init',array('args'=>array('exec'=>'genea_naviguer'),'data'=>''));
+
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('genea:titre'), 'naviguer', 'genea');
+
+	// Controle d'acces a la gestion des arbres genealogiques
+	if (!autoriser('voir', 'genea', $id_genea)) {
+		echo "<strong>" . _T('avis_acces_interdit') . "</strong>";
+		echo fin_page();
+		exit;
+	}
+
+	echo "<br /><br /><br />\n";
+	echo gros_titre(_T('genea:titre'));
+	echo barre_onglets("genea", "contenu");
+
+	echo debut_gauche();
+
+	echo genea_infos_naviguer($id_genea, $id_rubrique);
+
 	echo "voir arbre";
+
+	echo fin_gauche(), fin_page();
 }
 
 function genea_efface_arbre($id_genea) {
@@ -102,7 +141,7 @@ function genea_boite_info($titre, $texte){
 	fin_boite_info();
 }
 
-function genea_infos_naviguer($id_genea){
+function genea_infos_naviguer($id_genea, $id_rubrique=0){
 	debut_boite_info();
 
 	$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>"
@@ -111,7 +150,7 @@ function genea_infos_naviguer($id_genea){
 		  . $id_genea
 		  . '</span></div>';
 	echo $res;
-//	voir_en_ligne ('site', $id_syndic, $statut);
+	if ($id_rubrique>0) voir_en_ligne ('rubrique', $id_rubrique, 'publie');
 	fin_boite_info();
 }
 

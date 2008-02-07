@@ -5,12 +5,15 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
+'affiche_liste_arbres' => "Liste des arbres",
 'aliasf' => "Surnomm&eacute;e",
 'aliasi' => "Surnomm&eacute;",
 'aliasm' => "Surnomm&eacute;",
 'adop' => "Adoption",
 'anul' => "Annulation ou nullit&eacute; du mariage",
 'ascendance' => "Ascendance",
+'attente_no_vide' => "Arbre en attente avec individu",
+'attente_vide' => "Arbre en attente sans individu",
 
 // B
 'bapl' => "Bapt&ecirc;me de l'Eglise des Mormons",
@@ -59,6 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'elem' => "Enfant l&eacute;gitim&eacute;",
 'emig' => "&Eacute;migration",
 'emon' => "Enfant mort-n&eacute;",
+'en_ligne_no_vide' => "Arbre en ligne avec individu",
+'en_ligne_vide' => "Arbre en ligne sans individu",
 'enfant' => "Enfant",
 'enga' => "Fian&ccedil;ialles",
 'enat' => "Enfant naturel",
@@ -85,6 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'idno' => "Identification externe",
 'immi' => "Immigration",
 'import_arbre' => "Import d'un fichier GEDCOM",
+'individus' => "individu(s)",
 'install_err' => "Erreur d'installation !!!<br />Les tables n&eacute;cessaires n'ont pas pu &ecirc;tre install&eacute;es.",
 'install_ok' => "Les tables ont &eacute;t&eacute; correctements install&eacute;es.",
 
@@ -153,6 +159,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'resi' => "Domicile",
 'reti' => "Retraite",
 'retour' => "Retour",
+'rubrique' => "Rub.",
 
 // S
 'sexe' => "Sexe",
@@ -172,8 +179,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // T
 'text_pied_1' => "Cet arbre est compos&eacute; de nombreuses personnes (<i>des ascendants, des descendants, des collat&eacute;raux, des conjoints, etc.</i>). Si vous reconnaissez un membre de votre famille dans les noms cit&eacute;s dans cet arbre g&eacute;n&eacute;alogique, n'h&eacute;sitez pas &agrave; ",
 'text_pied_2' => "nous contacter",
+'texte_en_attente' => "Les arbres contenus dans cette liste sont en attente d'affectation &agrave; une rubrique. Vous pouvez tout de m&ecirc;me cr&eacute;er et g&eacute;rer des individus mais ceux-ci ne seront pas visible dans la partie publique.",
 'titl' => "Titre de noblesse ou honorifique",
 'titre' => "Gestion des g&eacute;n&eacute;alogies",
+'titre_arbres_attente' => "Liste des arbres en attente",
+'titre_arbre_numero' => "ARBRE NUM&Eacute;RO",
+'titre_arbres_tous' => "Liste des arbres en ligne",
 'titre_nouvel_arbre' => "Nouvel arbre",
 'tous_arbres' => "Tous les arbres",
 

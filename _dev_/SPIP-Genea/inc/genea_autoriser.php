@@ -16,4 +16,8 @@ function autoriser_genea_voir($faire, $type, $id, $qui, $opt){
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
 
+function autoriser_genea_voirfiche($faire, $type, $id, $qui, $opt){
+	return $qui['statut'] == '0minirezo' OR $qui['statut'] == '1comite';
+}
+
 ?>

@@ -59,7 +59,7 @@
 				<tbody>
 				<BOUCLE_individus(GENEA_INDIVIDUS){id_genea}{patronyme ?}{par patronyme, prenoms}{pagination 20}>
 					<tr>
-						<td class="sosa">[(#SOSA)]</td>
+						<td class="sosa">[(s (#SOSA))]</td>
 						<td class="logo_genea">[(#LOGO_INDIVIDU||image_reduire{17,17})]</td>
 						<td class="logo_genea"><img src="#CHEMIN{img_pack/#SEXE.gif}" width="17" height="17" /></td>
 						<td class="logo_genea">[(#LOGO_NOTE||image_reduire{17,17})]</td>

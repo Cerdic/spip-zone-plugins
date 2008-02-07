@@ -20,5 +20,9 @@ _ &#169; 2006-2008 - <multi>[fr]Distribu&#233; sous licence GNU/GPL[en]Distribut
 		<nom>calculer_rubriques</nom>
 		<inclure>genea_pipeline.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>genea_pipeline.php</inclure>
+	</pipeline>
 	<chemin dir='' />
 </plugin>

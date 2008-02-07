@@ -22,9 +22,12 @@ include_spip('inc/filtres');
 
 // -- Recupere et verif le droit a l'affichage des dates ----------------
 function genea_date_evt($id_individu, $type_evt, $fin=false, $second=false){
-	global $table_prefix, $connect_statut;
-	$date_evt='';
-	$date_ret = "0000-00-00 00:00:00";
+	global $table_prefix;
+
+	include_spip('inc/genea_autoriser');
+
+	$date_evt = '';
+	$date_ret = '';
 
 	if ($id_individu) {
 		$q="SELECT ";
@@ -51,9 +54,9 @@ function genea_date_evt($id_individu, $type_evt, $fin=false, $second=false){
 	// Faire verification des droits de visualisation des dates
 	// si elles sont inferieures a 100 ans. Ne pas afficher, sauf
 	// pour les redacteurs et les administrateurs autorises.
-	$cejour= getdate();
-	$centans = intval($cejour['annee'])-100;
-	if (($centans>=date("Y", strtotime(normaliser_date($date_evt)))) || ($GLOBALS['auteur_session']['statut'] == "0minirezo") || ($GLOBALS['auteur_session']['statut'] == "1comite")) $date_ret = $date_evt;
+	$maintenant = getdate();
+	$centans = intval($maintenant["year"])-100;
+	if (($centans>=date("Y", strtotime(normaliser_date($date_evt)))) OR autoriser('voirfiche', 'genea', $id_individus)) $date_ret = $date_evt;
 
 	return vider_date(normaliser_date($date_ret));
 }

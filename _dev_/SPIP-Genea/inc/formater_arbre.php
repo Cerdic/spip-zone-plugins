@@ -103,9 +103,9 @@ function inc_formater_arbre_dist($row){
 	. "</a>"
 	. "</div>";
 
-	$vals[] = ($id_rubrique>0) ? "</a> &nbsp;&nbsp; <span class='spip_xx-small'><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>"._T('rubrique')." N° $id_rubrique</a></span>" : "";
+	$vals[] = ($id_rubrique>0) ? "</a> &nbsp;&nbsp; <span class='spip_xx-small'><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>"._T('genea:rubrique')." : $id_rubrique</a></span>" : "";
 
-	$vals[] = $row['nombre'] ? "<span class='spip_xx-small' style='color: red'>$total_individus "._T('genea:nbre_individu')."</span>" : "&nbsp;";
+	$vals[] = $row['nombre'] ? "<span class='spip_xx-small' style='color: red'>$total_individus "._T('genea:individus')."</span>" : "&nbsp;";
 
 	if  ($nb) $vals[]= afficher_numero_edit($id_genea, 'id_genea', 'genea');
 
