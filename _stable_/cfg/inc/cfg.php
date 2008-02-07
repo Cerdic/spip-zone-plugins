@@ -131,12 +131,12 @@ class cfg_dist extends cfg_formulaire
 		// liens simples
 		foreach ($this->liens as $lien) {
 			$nom = _T($lien);
-			$return .= "<li>" . $this->boite_liens($lien, $nom) . "</li>\n";
+			$return .= ($l = $this->boite_liens($lien, $nom)) ? "<li>$l</li>\n" : "";
 		}
 		// liens multiples
 		foreach ($this->liens_multi as $lien) {
 			$nom = _T($lien);
-			$return .= "<li>" . $this->boite_liens_multi($lien, $nom) . "</li>\n";
+			$return .= ($l = $this->boite_liens_multi($lien, $nom)) ? "<li>$l</li>\n" : "";
 		}		
 		return ($return)?
 			debut_boite_info(true) . "<ul>$return</ul>" . fin_boite_info(true)
@@ -146,16 +146,13 @@ class cfg_dist extends cfg_formulaire
 	/*
 	 * Affiche un lien vers le fond dont le nom ($lien)
 	 * est passe en parametre
-	 * 
-	 * Gere les cas ou c'est un fond Multi 
-	 *  MM: Je me demande s'il ne faudrait pas bazarder cela
-	 *  au profit d'une gestion uniquement dans le fond 
-	 *  de ce genre de liens
+	 * a condition que le fichier fonds/cfg_$lien.html existe
 	 */
 	function boite_liens($lien, $nom='')
 	{
 		// nom est une chaine, pas une cle de tableau.
 		if (empty($nom) OR !is_string($nom)) $nom = $lien;
+		if (!find_in_path('fonds/cfg_'.$lien)) return "";
 		
 		return "<a href='" . generer_url_ecrire("cfg","cfg=$lien") . "'>$nom</a>\n"; // &cfg_id= <-- a ajouter ?
 	}
@@ -164,11 +161,13 @@ class cfg_dist extends cfg_formulaire
 	/*
 	 * Les liens multi sont appelles par 
 	 * liens_multi*=nom_du_fond
+	 * a condition que le fichier fonds/cfg_$lien.html existe
 	 * 
 	 */
 	function boite_liens_multi($lien, $nom=''){
 		// nom est une chaine, pas une cle de tableau.
 		if (empty($nom) OR !is_string($nom)) $nom = $lien;
+		if (!find_in_path('fonds/cfg_'.$lien)) return "";
 		
 		$dedans = '';
 		if (($exi = lire_config($lien)) && is_array($exi)) {

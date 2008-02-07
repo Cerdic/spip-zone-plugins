@@ -1,5 +1,8 @@
 Un changelog pour se reperer un peu
 
+v1.3.3 (07.02.2008) :
+- Si un lien est demande dans le fond <!-- lien=toto --> 
+mais que fonds/cfg_toto.html n'existe pas, le lien n'est pas propose
 
 v1.3.2 (02.02.2008) :
 - correction de bug sur storage table : l'insertions de nouvelles entrees 
@@ -18,11 +21,11 @@ un parametre specifique : liens_multi
 
 v1.2 :
 - corrections bugs sur #FORMULAIRE_CFG
-- homogénéise le passage de paramètres à CFG depuis un fond en
+- homogeneise le passage de paramètres à CFG depuis un fond en
 utilisant uniquement <!-- param=valeur --> 
 (l'autre écriture [(#REM) param=valeur] est decpeciee.
 - fourni des fonctions pour écrire et modifier les contenus arborescents 
-générés par CFG (storage meta et extra uniquement) : ecrire_config() et effacer_config().
+generes par CFG (storage meta et extra uniquement) : ecrire_config() et effacer_config().
 - toutes les chaînes de langues sont maintenant 
 regroupées dans le fichier lang/cfg_fr.php et attendent des traductions/traducteurs.
 
