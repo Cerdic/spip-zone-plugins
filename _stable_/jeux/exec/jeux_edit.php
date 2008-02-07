@@ -29,7 +29,7 @@ function exec_jeux_edit(){
 	$requete = spip_fetch_array(spip_query("SELECT enregistrer_resultat,contenu,type_jeu,titre_prive FROM spip_jeux WHERE id_jeu =".$id_jeu));
 	$type_jeu = $requete['type_jeu'];
 	$titre_prive = $requete['titre_prive']==_T('jeux:sans_titre_prive')?'':entites_html($requete['titre_prive']);
-	$contenu = entites_html(strip_tags($requete['contenu']));
+	$contenu = entites_html(str_replace(array("<jeux>","</jeux>"), "", $requete['contenu']));
 	$enregistrer_resultat  = $requete['enregistrer_resultat'];
 	}
 	
