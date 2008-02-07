@@ -1,33 +1,41 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Article PDF
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
+    <nom> <!-- Nom du plugin -->
+    <multi>
+    [fr]Article PDF
+    [de]PDF Artikel
+    </multi>
+    </nom>
+    <auteur>    <!-- Auteur du plugin -->
 [chag->http://www.spip-contrib.net/_chag_]
 _ [Paul Sanches->http://www.spip-contrib.net/_Paul-Sanches_]
 _ [Aquinatus->http://www.spip-contrib.net/_Aquinatus_]
 _ [C&#233;dric Morin->http://www.notre-ville.net]
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	stable
-	</etat>
-	<description>
-	Conversion d'un article au format pdf pour t&#233;l&#233;chargement
+    </auteur>
+    <version>
+    0.1
+    </version>
+    <etat>
+    stable
+    </etat>
+    <description>
+    <multi>
+    [fr]Conversion d'un article au format pdf pour t&#233;l&#233;chargement
 _ N&#233;cessite GD2 sur votre serveur
 _ Inserez la balise #ARTICLE_PDF dans votre squelette pour avoir un lien de t&#233;l&#233;chargement de l'article au format PDF
-	</description>
-	<lien>http://www.spip-contrib.net/article2226.html</lien> <!-- URI de documentation -->
-	<options> <!-- fichier charge a chaque hit -->
-	article_pdf_mes_options.php
-	</options>
-	<fonctions> <!-- fichier charge a chaque recalcul -->
-	article_pdf_mes_fonctions.php
-	</fonctions>
-	<prefix> 
-	article_pdf
-	</prefix>
+    [de]Konvertierung eines Artikels in das PDF Format zum herunterladen
+_ Ben&ouml;tigt GD2 auf Ihrem Server
+_ F&uuml;gen Sie den Tag #ARTICLE_PDF in Ihr Skelett ein um über einen Link zum Herunterladen des Artikels im PDF Format zu verf&uuml;gen
+    </multi>
+    </description>
+    <lien>http://www.spip-contrib.net/article2226.html</lien> <!-- URI de documentation -->
+    <options> <!-- fichier charge a chaque hit -->
+    article_pdf_mes_options.php
+    </options>
+    <fonctions> <!-- fichier charge a chaque recalcul -->
+    article_pdf_mes_fonctions.php
+    </fonctions>
+    <prefix> 
+    article_pdf
+    </prefix>
 
 </plugin>
