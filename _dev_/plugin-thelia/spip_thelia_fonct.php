@@ -10,7 +10,7 @@ function spip_thelia_header_prive($texte) {
 function spip_thelia_appeler_moteur_thelia($texte)
 {
 	//récupérer la version de thélia : valeurs possibles :
-	//	- supérieure ou égale à 1.3.4 = "1_3_4" (par défaut)  
+	//	- supérieure ou égale à 1.3.4 = "after_1_3_4" (par défaut)  
 	//	- 1.3.3 = "1_3_3"
 
 	if (function_exists('lire_config')) {
