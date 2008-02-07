@@ -3,6 +3,9 @@ $(document).ready(function(){
 	$("#text_area").parent().append("<div style='float:right;margin-top:10px' id='div_result'></div><input id='autosave' type='submit' name='autosave' value='sauvegarder'>").keypress(function(){
 	
 	$("#autosave").removeAttr("disabled");
+	if(typeof autosave !== 'undefined')
+		clearTimeout(autosave);
+	autosave = setTimeout(saveauto,5000);
 	
 	});
 
@@ -13,8 +16,18 @@ $(document).ready(function(){
 });
 
 saveauto = function(e){
+//console.log(e.type);
 
-e.preventDefault();
+var automatiquement = '' ;
+
+if(typeof autosave !== 'undefined')
+		clearTimeout(autosave);
+		
+if(e.type !== undefined){
+	e.preventDefault();
+}else{
+	automatiquement = 'automatiquement' ;
+}	
 
 var titre = $("form[@name='formulaire'] input[@name='titre']").val();
 var text_a_sauver = $("#text_area").val() ;
@@ -32,7 +45,7 @@ $.ajax({
 
    $("form[@name='formulaire'] input[@name='arg']").val(msg.id_article);
    $("form[@name='formulaire'] input[@name='hash']").val(msg.hash);
-     $("#div_result").html("sauvegard&eacute; &agrave; " + msg.date);
+     $("#div_result").html("sauvegard&eacute; "+ automatiquement +" &agrave; " + msg.date);
      $("#autosave").attr("disabled","disabled");
    }
  });
