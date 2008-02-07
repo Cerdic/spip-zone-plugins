@@ -1,9 +1,10 @@
 <plugin>
 	<nom>Interface Th&eacute;lia</nom>
- 	<version>0.4</version>
+ 	<version>0.5</version>
  	<prefix>spip_thelia</prefix>
  	<auteur>Arnault Pachot [OpenStudio->http://www.openstudio.fr]</auteur>
- 	<description>Plugin permettant d'utiliser les boucles Th&eacute;lia dans vos squelettes 
+ 	<description>Plugin permettant d'utiliser les boucles Th&eacute;lia dans vos squelettes <br/>
+	[acc&egrave;s au panneau de configuration pour param&eacute;trer la version deTh&eacute;lia->.?exec=cfg&amp;cfg=spip_thelia] 
 <br/>Distribu&eacute; sous licence GNU/GPL   </description>
 	
 	<lien>http://www.spip-contrib.net/Plugin-Thelia</lien> <!-- URI de documentation -->
@@ -25,5 +26,6 @@
 		<inclure>spip_thelia_fonct.php</inclure>
 	</pipeline>
 	<icon>img_pack/logo_thelia.png</icon>
- 	<necessite id='spip' version='[1.92;]' />
+ 	<necessite id="CFG" version="[1.0;]" />
+	<necessite id='spip' version='[1.92;]' />
 </plugin>
