@@ -10,7 +10,7 @@
 	<BOUCLE_recent(ARTICLES){id_secteur ?}{lang_select=non}{par date}{inverse}{0,1}{mois_relatif<0}>
 	<p class="recent">
 		<a href="[(#ENV{self}|parametre_url{decal,[(#ENV{decal}|plus{1})]})]#archives">
-			<img src="#CHEMIN{images/up.png}" alt="+1an" />
+			<img src="#CHEMIN{images/up.png}" alt="[(#ENV{decal}|plus{1})]" title="+1an" />
 		</a>
 	</p>
 	</BOUCLE_recent>
@@ -20,7 +20,7 @@
 			{par date}{inverse}
 			{mois_relatif>=0}{mois_relatif<12}
 		>[<li>
-			<a href="[(#ENV{self}|parametre_url{#ENV{var_date,date},[(#DATE|affdate{Y-m})]})]"[
+			<a href="[(#ENV{self}|parametre_url{#ENV{var_date,date},[(#DATE|affdate{Y-m})]})]#archives"[
 				class="(#DATE|affdate{Y-m}|=={[(#ENV{date}|normaliser_date|affdate{Y-m})]}|?{on})"
 			]>(#DATE|affdate_mois_annee)</a>
 		</li>
@@ -29,7 +29,7 @@
 	<BOUCLE_ancien(ARTICLES){id_secteur ?}{lang_select=non}{par date}{inverse}{0,1}{mois_relatif>=12}>
 	<p class="ancien">
 		<a href="[(#ENV{self}|parametre_url{decal,[(#ENV{decal}|moins{1})]})]#archives">
-			<img src="#CHEMIN{images/down.png}" alt="-1an" />
+			<img src="#CHEMIN{images/down.png}" alt="[(#ENV{decal}|moins{1})]" title="-1an" />
 		</a>
 	</p>
 	</BOUCLE_ancien>

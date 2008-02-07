@@ -2,7 +2,7 @@
 
 	[(#CALENDRIER_MINI{[(#ENV{self})]})]
 
-	<INCLURE{fond=noisettes/inc-archives}{id_secteur}{self=#SELF}{decal}{var_date=archives}{date=#ENV{archives,#DATE}}>
+	<INCLURE{fond=inc-archives}{id_secteur}{self=#SELF}{decal}{var_date=archives}{date=#ENV{archives,#DATE}}>
 	
 	#FORMULAIRE_RECHERCHE
 
@@ -19,19 +19,6 @@
 	</div>
 	</B_a_retenir>
 
-	<B_languages>
-	<div id="languages">
-		<h2><:spipclear:langues:></h2>
-		<ul>
-			<BOUCLE_languages(ARTICLES){id_secteur ?}{fusion lang}>[(#TOTAL_BOUCLE|>{1}|?{' '})
-			<li>
-				<a href="[(#ENV{self}|parametre_url{lang,#LANG})]">#LANG</a>
-			</li>
-			]</BOUCLE_languages>
-		</ul>
-	</div>
-	</B_languages>
-
 	<B_categories>
 	<div id="categories">
 		<h2><:spipclear:categories:></h2>
@@ -46,6 +33,19 @@
 		</ul>
 	</div>
 	</B_categories>
+
+	<B_languages>
+	<div id="languages">
+		<h2><:spipclear:langues:></h2>
+		<ul>
+			<BOUCLE_languages(ARTICLES){id_secteur ?}{fusion lang}>[(#TOTAL_BOUCLE|>{1}|?{' '})
+			<li>
+				<a href="[(#ENV{self}|parametre_url{lang,#LANG})]">#LANG</a>
+			</li>
+			]</BOUCLE_languages>
+		</ul>
+	</div>
+	</B_languages>
 
 	#PIPELINE{boussole}
 

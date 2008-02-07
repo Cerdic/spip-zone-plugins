@@ -21,6 +21,76 @@
 		[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]style.css})" media="screen" />]
 		[<link rel="shortcut icon" href="(#CHEMIN{[(#GET{chemin_theme})]images/favicon.ico})" />]
 		#INSERT_HEAD
+<script type="text/javascript">
+var sablier = '[<img class="sablier" src="(#CHEMIN{images/searching.gif})" />]';
+var data = '[(#URL_PAGE{inc-archives}|
+	parametre_url{var_date,archives,&}|
+	parametre_url{date,#ENV{archives,#DATE},&}|
+	parametre_url{id_secteur,#ENV{id_secteur},&}|
+	replace{'(.*)spip\.php\?(.*)','$2'}
+	)]';
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+	$("#archives p a").attr("href", "#archives");
+
+	$("#archives .recent a").click (
+		function() {
+			/* faire patienter */
+			$("#archives h2").append(sablier);
+
+			/*appeler la noisette en get avec le parametre de decalage */
+			var decal = "&decal=" + $("#archives .ancien a img").attr("alt");
+			data = data + decal;
+			$.ajax({
+				type: "GET",
+				url: "spip.php",
+				data: data,
+				success: function(html) {
+    				$("#archives ul").append(html);
+				}
+			});
+
+			/*conserver la hauteur 12xli pour le ul*/
+			/*effet: faire descendre la liste courante et faire apparitre le nouveau contenu du ul*/
+			/*si p.ancien dans le retour du get, ajouter ou remplacer apres le ul*/
+			/*si p.recent dans le retour du get, ajouter ou remplacer avant le ul*/
+
+			/* c'est fini */
+			$("#archives h2 img.sablier").remove();
+		}
+	);
+
+	$("#archives .ancien a").click (
+		function() {
+			/* faire patienter */
+			$("#archives h2").append(sablier);
+
+			/*appeler la noisette en get avec le parametre de decalage */
+			var decal = "&decal=" + $("#archives .ancien a img").attr("alt");
+			data = data + decal;
+			$.ajax({
+				type: "GET",
+				url: "spip.php",
+				data: data,
+				success: function(html) {
+    				$("#archives ul").append(html);
+				}
+			});
+
+			/*conserver la hauteur 12xli pour le ul*/
+			/*effet: faire monter la liste courante et faire apparaitre le nouveau contenu du ul*/
+			/*si p.ancien dans le retour du get, ajouter ou remplacer apres le ul*/
+			/*si p.recent dans le retour du get, ajouter ou remplacer avant le ul*/
+
+			/* c'est fini */
+			$("#archives h2 img.sablier").remove();
+		}
+	);
+
+});
+</script>
 	</head>
 
 	<body>
