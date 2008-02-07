@@ -145,6 +145,7 @@ function spipbb_check_une_table($nom_table,$tables_principales)
 		$champ=preg_replace("/^varcharacter/","varchar",$champ); //varcharacter == varchar
 		$champ=preg_replace("/^integer/","int",$champ); //integer == int
 		$champ=preg_replace("/^tinytext/","text",$champ); //tinytext == text
+		$champ=preg_replace("/^mediumtext/","text",$champ); //mediumtext == text
 
 		$res['field'][$k]=$champ;
 	}
@@ -157,6 +158,7 @@ function spipbb_check_une_table($nom_table,$tables_principales)
 		$champ=preg_replace("/^int.*/","int",$champ); // int(10)==int ?
 		$champ=preg_replace("/^varchar.*/","varchar",$champ); // varchar(10)==varchar ?
 		$champ=preg_replace("/^tinytext/","text",$champ); //tinytext == text
+		$champ=preg_replace("/^mediumtext/","text",$champ); //mediumtext == text
 		$table_origine['field'][$k]=strtolower($champ);
 	}
 	if ($res['field'] != $table_origine['field'] ) {

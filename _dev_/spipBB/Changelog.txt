@@ -1,4 +1,9 @@
-﻿2008-02-06  chryjs  <chryjs!@!free!.!fr>
+﻿2008-02-07  chryjs  <chryjs!@!free!.!fr>
+
+ * Suite : problemes de compatibilite PostGres (simplification des controles) cf Bug Report Adeline D
+
+
+2008-02-06  chryjs  <chryjs!@!free!.!fr>
 
  * Probleme de compatibilite PostGres (simplification des controles) cf Bug Report Adeline D
 
