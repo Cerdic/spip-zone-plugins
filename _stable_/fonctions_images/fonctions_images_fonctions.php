@@ -963,8 +963,6 @@ function couleur_saturer ($coul, $val=1.2) {
 	return $couleurs;
 }
 
-
-
 /*
  * Change la teinte d'une couleur
  * 
@@ -1018,7 +1016,118 @@ function couleur_tableau_chroma($coul, $tot=6, $debut=1, $fin=0){
 	$retour .= "</div>\n";
 	
 	return $retour;
-} 
- 
- 
+}
+
+/*
+ *
+ * D'apres http://www.easyrgb.com/math.php
+ */
+function image_rgb2hsl($R,$G,$B) {
+	$var_R = ( $R / 255 );                     //Where RGB values = 0 ÷ 255
+	$var_G = ( $G / 255 );
+	$var_B = ( $B / 255 );
+
+	$var_Min = min( $var_R, $var_G, $var_B );    //Min. value of RGB
+	$var_Max = max( $var_R, $var_G, $var_B );    //Max. value of RGB
+	$del_Max = $var_Max - $var_Min ;            //Delta RGB value
+
+	$L = ( $var_Max + $var_Min ) / 2;
+
+	if ( $del_Max == 0 )                     //This is a gray, no chroma...
+		{
+		   $H = 0;                                //HSL results = 0 ÷ 1
+		   $S = 0;
+		}
+	else                                    //Chromatic data...
+		{
+		   if ( $L < 0.5 ) $S = $del_Max / ( $var_Max + $var_Min );
+		   else           $S = $del_Max / ( 2 - $var_Max - $var_Min );
+
+		   $del_R = ( ( ( $var_Max - $var_R ) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
+		   $del_G = ( ( ( $var_Max - $var_G ) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
+		   $del_B = ( ( ( $var_Max - $var_B ) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
+
+		   if      ( $var_R == $var_Max ) $H = $del_B - $del_G;
+		   else if ( $var_G == $var_Max ) $H = ( 1 / 3 ) + $del_R - $del_B;
+		   else if ( $var_B == $var_Max ) $H = ( 2 / 3 ) + $del_G - $del_R;
+
+		   if ( $H < 0 ) ; $H += 1;
+		   if ( $H > 1 ) ; $H -= 1;
+		}
+		
+	$ret["h"] = $H;
+	$ret["s"] = $S;
+	$ret["l"] = $L;
+	
+	return $ret;
+}
+
+function image_hue_2_rgb($v1, $v2, $vH) {
+   if ( $vH < 0 ) $vH += 1;
+   if ( $vH > 1 ) $vH -= 1;
+   if ( ( 6 * $vH ) < 1 ) return ( $v1 + ( $v2 - $v1 ) * 6 * $vH );
+   if ( ( 2 * $vH ) < 1 ) return ( $v2 );
+   if ( ( 3 * $vH ) < 2 ) return ( $v1 + ( $v2 - $v1 ) * ( ( 2 / 3 ) - $vH ) * 6 );
+   return ( $v1 );
+}
+
+function image_hsl2rgb($H,$S,$L) {
+	if ( $S == 0 )                       //HSL values = 0 ÷ 1
+		{
+		   $R = $L * 255;                      //RGB results = 0 ÷ 255
+		   $G = $L * 255;
+		   $B = $L * 255;
+		}
+	else
+		{
+		   if ( $L < 0.5 ) $var_2 = $L * ( 1 + $S );
+		   else           $var_2 = ( $L + $S ) - ( $S * $L );
+
+		   $var_1 = 2 * $L - $var_2;
+
+		   $R = 255 * image_hue_2_rgb( $var_1, $var_2, $H + ( 1 / 3 ) );
+		   $G = 255 * image_hue_2_rgb( $var_1, $var_2, $H );
+		   $B = 255 * image_hue_2_rgb( $var_1, $var_2, $H - ( 1 / 3 ) );
+		}
+
+	$ret["r"] = floor($R);
+	$ret["g"] = floor($G);
+	$ret["b"] = floor($B);
+	
+	return $ret;
+}
+
+/*
+ *
+ * Permet d'éclaircir ou de foncer une couleur si elle est foncee
+ * ou de la foncer si elle est claire
+ */
+function couleur_inverserluminosite($coul,$pourcentage=20) {
+	include_spip("inc/filtres");
+	$couleurs = couleur_hex_to_dec($coul);
+	$r= $couleurs["red"];
+	$g= $couleurs["green"];
+	$b= $couleurs["blue"];
+
+	$hsl = image_rgb2hsl($r,$g,$b);
+	$h = $hsl["h"];
+	$s = $hsl["s"];
+	$l = $hsl["l"];
+echo 'avant:'.$l;
+	if ($l < 0.5) {
+		$l = $l + (1-$l)*(1-(100-$pourcentage)/100);
+	} else {
+		$l = $l*(1-$pourcentage/100);
+	}
+echo 'apres:'.$l;
+	$rgb = image_hsl2rgb($h,$s,$l);
+	$r = $rgb["r"];
+	$g = $rgb["g"];
+	$b = $rgb["b"];
+	
+	$couleurs = couleur_dec_to_hex($r, $g, $b);
+	
+	return $couleurs;
+}
+
 ?>
