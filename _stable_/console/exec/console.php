@@ -29,16 +29,27 @@ function exec_console(){
 		}
 	}
 	
-	include_ecrire("inc_presentation");
+	include_spip("inc/presentation");
 
-	debut_page("Suivi des logs", "", "");
+	$vieilledef = ($GLOBALS['spip_version']<10000) ? true:false;
+	if ($vielledef){
+		debut_page("Suivi des logs", "", "");
+	} else {
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page("Suivi des logs", "","");
+	}
+
 	
-	echo "<br><br><br>";
-	gros_titre("Suivi des logs");
+	echo "<br /><br /><br />";
 	
-	debut_gauche();
+	if ($vielledef) gros_titre("Suivi des logs");
+	else echo gros_titre("Suivi des logs",'',false);
 	
-	debut_droite();
+	if ($vielledef) debut_gauche();
+	else echo debut_gauche('',true);
+	
+	if ($vielledef) debut_droite();
+	else echo debut_droite('',true);
 	
 	if ($connect_statut != "0minirezo" OR !$connect_toutes_rubriques) {
 		echo "<B>Vous n'avez pas acc&egrave;s &agrave; cette page.</B>";
@@ -58,7 +69,10 @@ echo "<script>
 	echo "<div style='text-align:center'>
 		<input id='belle_console' type='submit' name='afficher_belle_console' value='"._L('Afficher la belle console')."' class='fondo'></div>";
 
-	echo generer_url_post_ecrire('console');
+	$action = generer_url_ecrire('console');
+	echo "\n<form action='$action' method='post'>"
+		.form_hidden($action);		
+	
 	
 	if ($console_active){
 		echo "<div style='text-align:$spip_lang_right'>
@@ -76,7 +90,8 @@ echo "<script>
 	echo "</a>";
 	
 	
-	fin_page();
+	if ($vielledef) fin_page();
+	else echo fin_page('',false);
 }
 
 ?>

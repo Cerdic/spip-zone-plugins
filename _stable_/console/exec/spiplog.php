@@ -1,6 +1,7 @@
 <?php
 
 include_spip('inc/console');
+include_spip("console_options"); // Pour Spip 1.9.2 ?
 
 function exec_spiplog(){
 	global $connect_statut;
@@ -10,11 +11,9 @@ function exec_spiplog(){
 		return "";
 	}
 	$logfile = _request('logfile');
-	
-	if (!in_array($logfile,array('spip','mysql'))){
-		$logfile = 'spip';
-	}
-	
+
+	if (!$logfile) {$logfile = _FILE_LOG;}
+
 	$out = console_lit_log($logfile);
 
 	$format = _request('format');

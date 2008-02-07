@@ -1,7 +1,7 @@
 <?php
-
+include_spip("console_options"); // Pour Spip 1.9.2 ?
 function console_code_flash($width='300',$height='600'){
-		$urlspiplog = urlencode(generer_url_ecrire('spiplog','logfile=spip',true));
+		$urlspiplog = urlencode(generer_url_ecrire('spiplog','logfile='._FILE_LOG,true));
 		$urlsqllog = urlencode(generer_url_ecrire('spiplog','logfile=mysql',true));
 		$flash = find_in_path('console.swf');
 		return "
@@ -15,7 +15,7 @@ function console_code_flash($width='300',$height='600'){
 
 
 function console_lit_log($logname){
-	$files = preg_files(defined('_DIR_TMP')?_DIR_TMP:_DIR_SESSION ,"$logname\.log(\.[0-9])?");
+	$files = preg_files(_DIR_LOG. "$logname"._FILE_LOG_SUFFIX."(\.[0-9])?");
 	krsort($files);
 
 	$log = "";

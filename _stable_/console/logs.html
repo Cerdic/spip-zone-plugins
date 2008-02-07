@@ -39,14 +39,17 @@ color : #00CC00 ;
 <?php
 if(!($auteur_session['statut'] == "0minirezo")) {echo "reservé aux admins"; return ;}
 
+include_spip("console_options"); // Pour Spip 1.9.2 ?
+
 function menu_log(){
 $menu ="" ;
-$files = preg_files(defined('_DIR_TMP')?_DIR_TMP:_DIR_SESSION ,"\.log$");
+$files = preg_files(_DIR_LOG ,"\\" . _FILE_LOG_SUFFIX . "$");
+
 
 foreach($files as $log){
 $tab = split("/",$log);
 $log = array_pop($tab);
-$log_cible = str_replace(".log","",$log);
+$log_cible = str_replace(_FILE_LOG_SUFFIX,"",$log);
 
 $menu .= "<li><a href='#$log_cible'>$log</a></li>" ;
 }

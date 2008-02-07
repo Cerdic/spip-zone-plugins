@@ -7,10 +7,10 @@
 _ mail : fil@rezo.net
 _ adaptation en plugin par booz@rezo.net
 _ integration dans un flash/xml par cedric.morin@yterium.com
-_ &#169; 2005-2006 - Distribu&#233; sous licence GNU/GPL
+_ &#169; 2005-2008 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
 	experimental
@@ -27,6 +27,7 @@ _ &#169; 2005-2006 - Distribu&#233; sous licence GNU/GPL
 	<prefix> 
 	Console
 	</prefix>
+	<options>console_options.php</options>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>
@@ -38,5 +39,5 @@ _ &#169; 2005-2006 - Distribu&#233; sous licence GNU/GPL
 		<action>body_prive</action>
 		<inclure>console_boutons.php</inclure>
 	</pipeline>
-	<chemin dir='' type='prive' />
+	<chemin dir='' />
 </plugin>
