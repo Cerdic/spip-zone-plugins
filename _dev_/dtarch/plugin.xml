@@ -1,6 +1,9 @@
 <plugin>
 	<nom>Archives mensuelles</nom>
-	<version>1</version>
+	<version>1.5</version>
 	<prefix>dtarch</prefix>
-	<lien>http://www.spip-contrib.net/Gestion-de-dates-et-calendriers</lien>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>dtarch.php</inclure>
+	</pipeline>
 </plugin>

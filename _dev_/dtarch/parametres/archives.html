@@ -1,0 +1,9 @@
+<script type="text/javascript">
+var sablier = '[<img class="sablier" src="(#CHEMIN{images/searching.gif})" />]';
+var archives_parametres = '[(#URL_PAGE{inc-archives}|
+	parametre_url{self,[(#ENV{self}|parametre_url{date,''}|parametre_url{decal,''})],&}|
+	parametre_url{date,#DATE,&}|
+	parametre_url{decal,#ENV{decal},&}|
+	replace{'(.*)spip\.php\?(.*)','$2'}
+)]';
+</script>

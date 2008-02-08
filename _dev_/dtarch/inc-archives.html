@@ -1,0 +1,36 @@
+#HTTP_HEADER{Content-Type: text/html}#SET{date,#EVAL{date('Y-m')}}[
+(#SET{annee_fin,[(#GET{date}|annee|plus{#ENV{decal}})]})][
+(#SET{annee_deb,[(#GET{annee_fin}|plus{#ENV{decal}|>{0}|?{1,-1}})]})
+]<BOUCLE_reference(ARTICLES){lang_select=non}
+	{agenda date, periode, #GET{annee_deb}, (#GET{date}|mois), 1, #GET{annee_fin}, (#GET{date}|mois), 31}
+	{par date}{inverse}{0,1}
+><B_archives><div id="archives" class="menu">
+	<h2><:dtarch:archives:></h2>
+	<p class="recent">
+	<BOUCLE_recent(ARTICLES){lang_select=non}{mois_relatif<0}{par date}{inverse}{0,1}>	
+		<a href="[(#ENV{self}|parametre_url{decal,[(#ENV{decal}|plus{1})]})]#archives">
+			<img src="#CHEMIN{images/up.png}" alt="[(#ENV{decal}|plus{1})]" title="<:dtarch:recent:>" />
+		</a>
+	</BOUCLE_recent>&nbsp;<//B_recent>
+	</p>
+	<ul>
+		<BOUCLE_archives(ARTICLES){lang_select=non}
+			{fusion DATE_FORMAT(date,'%Y-%m')}
+			{mois_relatif>=0}{mois_relatif<12}
+			{par date}{inverse}
+		>[<li[ class="(#DATE|affdate{Y-m})"]>
+			<a[ rel="chapter" title="(#DATE|affdate_mois_annee)"]
+				href="[(#ENV{self}|parametre_url{#ENV{var_date,date},[(#DATE|affdate{Y-m})]})]#archives"[
+				class="(#DATE|affdate{Y-m}|=={[(#ENV{date}|normaliser_date|affdate{Y-m})]}|?{on})"
+			]>(#DATE|affdate_mois_annee)</a>
+		</li>
+		]</BOUCLE_archives>
+	</ul>
+	<p class="ancien">
+	<BOUCLE_ancien(ARTICLES){lang_select=non}{mois_relatif>=12}{par date}{inverse}{0,1}>
+		<a href="[(#ENV{self}|parametre_url{decal,[(#ENV{decal}|moins{1})]})]#archives">
+			<img src="#CHEMIN{images/down.png}" alt="[(#ENV{decal}|moins{1})]" title="<:dtarch:ancien:>" />
+		</a>
+	</BOUCLE_ancien>&nbsp;<//B_ancien>
+	</p>
+</div></B_archives></BOUCLE_reference>
