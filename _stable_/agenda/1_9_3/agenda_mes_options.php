@@ -1,4 +1,10 @@
 <?php
+//
+// Afficher le menu l'entete de la partie privee de SPIP ?
+// est-ce du code mort ?
+//
+$GLOBALS['css']=true;
+
 
 if (!defined('_DIR_PLUGIN_AGENDA')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
@@ -46,10 +52,10 @@ function exec_calendrier()
 	$mode = _request('mode');
 	$type = _request('type');
 	if ($mode=='editorial'){
-		include_spip('exec/calendrier');
+	  include_spip('exec/calendrier');
 	  global $css;
-	// icones standards, fonction de la direction de la langue
-	
+	  
+	  // icones standards, fonction de la direction de la langue
 	  global $bleu, $vert, $jaune, $spip_lang_rtl;
 	  $bleu = http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', "class='calendrier-icone'");
 	  $vert = http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "class='calendrier-icone'");
@@ -69,9 +75,9 @@ function exec_calendrier()
 			$titre = _T('titre_page_calendrier',
 			    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
 		}
-		
+
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		$res .= $commencer_page($titre, "redacteurs", "calendrier","",$css);
+		$res = $commencer_page($titre, "redacteurs", "calendrier","",$css);
 		$res .= barre_onglets("calendrier", "editorial");
 		$res .= "<div>&nbsp;</div>" ;
 	  $res .= http_calendrier_init('', $type, '','',generer_url_ecrire('calendrier', 'mode=editorial'.($type ? "&type=$type" : '')));
@@ -79,7 +85,7 @@ function exec_calendrier()
 	  $res .= fin_page();
 	  echo $res;
 	}
-	else{
+	else {
 		$var_f = charger_fonction('agenda_evenements');
 		$var_f();
 	}
