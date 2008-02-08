@@ -34,26 +34,25 @@ if (!$id_article = intval($arg)) {
 	// calculer le hash de l'action
 	list($id_auteur, $pass) =  caracteriser_auteur();
 	$hash = _action_auteur("editer_article-$arg", $id_auteur, $pass, 'alea_ephemere');
-	
-	
+
     $new_arg_document = split('/',$arg_document);
     $fin_arg = '';
-   
-    for($i=1; $i < sizeof($new_arg_document) ; $i++){ 
-    	$fin_arg = $fin_arg . '/' . $new_arg_document[$i] ;
-    }
-    
+	    for($i=1; $i < sizeof($new_arg_document) ; $i++){ 
+	    	$fin_arg = $fin_arg . '/' . $new_arg_document[$i] ;
+	    } 
     $new_arg_document = $id_article . $fin_arg ;
   
     $new_arg_vignette = split('/',$arg_vignette);
     $fin_arg = '';
-    for($i=1; $i < sizeof($new_arg_vignette) ; $i++){ 
-    $fin_arg = $fin_arg . '/' . $new_arg_vignette[$i] ;
-    }
+	    for($i=1; $i < sizeof($new_arg_vignette) ; $i++){ 
+	    $fin_arg = $fin_arg . '/' . $new_arg_vignette[$i] ;
+	    }
     $new_arg_vignette = $id_article . $fin_arg ;
 	
 	$hash_document = _action_auteur("joindre-$new_arg_document", $id_auteur, $pass, 'alea_ephemere');
 	$hash_vignette = _action_auteur("joindre-$arg_vignette", $id_auteur, $pass, 'alea_ephemere');
+	
+	// reponse
 	echo "{'id_article':'$id_article', 'date':'".date('h:i:s')."','hash':'$hash','hash_document':'$hash_document','hash_vignette':'$hash_vignette','arg_vignette':'$new_arg_vignette','arg_document':'$new_arg_document'}";	
  
 }

@@ -44,7 +44,8 @@ $.ajax({
    dataType: "json",
    data: "texte="+text_a_sauver+"&arg="+arg+"&id_parent="+id_parent+"&titre="+titre+"&arg_document="+arg_document+"&arg_vignette="+arg_vignette,
    success: function(msg){
-	console.log(msg);
+
+	//console.log(msg);
 
    $("form[@name='formulaire'] input[@name='arg']").val(msg.id_article);
    $("form[@name='formulaire'] input[@name='hash']").val(msg.hash);
