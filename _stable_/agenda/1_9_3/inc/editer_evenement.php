@@ -119,7 +119,7 @@ function Agenda_action_update_evenement($id_evenement, $couples){
 }
 
 // creer un nouvel evenement
-function Agenda_action_insert_evenement($couples){
+function Agenda_action_insere_evenement($couples){
 	// nouvel evenement
 	$id_evenement = sql_insertq("spip_evenements", $couples);
 
@@ -138,7 +138,7 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 	if (($insert || $modif)){
 
 		if ( ($insert) && (!$id_evenement) ){
-			if (!$id_evenement = Agenda_action_insert_evenement(array("id_evenement_source"=>0, "maj"=>"NOW()"))){
+			if (!$id_evenement = Agenda_action_insere_evenement(array("id_evenement_source"=>0, "maj"=>"NOW()"))){
 				return 0;	
 			}
 	 	}
