@@ -19,6 +19,8 @@ Une page de test permet de voir <a href="../?page=tests_fonctions_images">les fi
 - couleur_saturer
 - couleur_teinter
 - couleur_inverserluminosite
+- couleur_foncerluminosite
+- couleur_eclaircirluminosite
 - image_contour_alpha
 - image_courbe
 - image_dispersion
