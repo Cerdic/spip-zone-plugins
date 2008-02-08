@@ -2,7 +2,7 @@
 
 function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots){
 	// evenement source
-	$res = spip_query("SELECT * FROM spip_evenements WHERE id_evenement="._q($id_evenement));
+	$res = sql_select("*", "spip_evenements","id_evenement=".sql_quote($id_evenement));
 	if ($row = sql_fetch(($res))){
 		$titre = $row['titre'];
 		$descriptif = $row['descriptif'];
@@ -18,7 +18,7 @@ function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 
 		$repetitions_updated = array();
 		// mettre a jour toutes les repetitions deja existantes ou les supprimer si plus lieu
-		$res = spip_query("SELECT id_evenement FROM spip_evenements WHERE id_evenement_source="._q($id_evenement));
+		$res = sql_select("id_evenement","spip_evenements","id_evenement_source=".sql_quote($id_evenement));
 		while ($row = sql_fetch($res)){
 			$date = strtotime(date('Y-m-d',$row['date_debut']));
 			if (in_array($date,$repetitions)){
@@ -33,20 +33,23 @@ function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 				$update_lieu = $lieu;
 
 				// mettre a jour l'evenement
-				$res=spip_query("UPDATE spip_evenements SET `titre`="._q($update_titre)
-				. ",`descriptif`="._q($update_descriptif)
-				. ",`lieu`="._q($update_lieu)
-				. ",`horaire`="._q($horaire)
-				. ",`date_debut`="._q($update_date_debut)
-				. ",`date_fin`="._q($update_date_fin)
-				. ",`id_article`="._q($id_article)
-				. " WHERE `id_evenement` ="._q($row['id_evenement']));
+				$res=sql_updateq(
+					"spip_evenements", 
+					array(
+						"titre" => $update_titre,
+						"descriptif" => $update_descriptif,
+						"lieu" => $update_lieu,
+						"horaire" => $horaire,
+						"date_debut" => $update_date_debut,
+						"date_fin" => $update_date_fin,
+						"id_article" => $id_article),
+					"id_evenement = ".sql_quote($row['id_evenement']));
 				Agenda_action_update_liste_mots($row['id_evenement'],$liste_mots);
 			}
 			else {
 				// il est supprime
-				spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement=".$row['id_evenement']);
-				spip_query("DELETE FROM spip_evenements WHERE id_evenement=".$row['id_evenement']);
+				sql_delete("spip_mots_evenements","id_evenement=".$row['id_evenement']);
+				sql_delete("spip_evenements","id_evenement=".$row['id_evenement']);
 			}
 
 		}
@@ -61,19 +64,22 @@ function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 
 				$id_evenement_new = sql_insert("spip_evenements",
 					"(id_evenement_source,maj)",
-					"("._q($id_evenement).",NOW())");
+					"(".sql_quote($id_evenement).",NOW())");
 				if ($id_evenement_new==0)
 					spip_log("agenda action formulaire article : impossible d'ajouter un evenement repete");
 				else {
 					// mettre a jour l'evenement
-					$res=spip_query("UPDATE spip_evenements SET `titre`="._q($update_titre)
-					. ",`descriptif`="._q($update_descriptif)
-					. ",`lieu`="._q($update_lieu)
-					. ",`horaire`="._q($horaire)
-					. ",`date_debut`="._q($update_date_debut)
-					. ",`date_fin`="._q($update_date_fin)
-					. ",`id_article`="._q($id_article)
-					. " WHERE `id_evenement` ="._q($id_evenement_new));
+					$res=sql_updateq(
+						"spip_evenements",
+						array(
+							"titre" => $update_titre,
+							"descriptif" => $update_descriptif,
+							"lieu" => $update_lieu,
+							"horaire" => $horaire,
+							"date_debut" => $update_date_debut,
+							"date_fin" => $update_date_fin,
+							"id_article" => $id_article),
+						"id_evenement = ".sql_quote($id_evenement_new));
 
 					Agenda_action_update_liste_mots($id_evenement_new,$liste_mots);
 				}
@@ -82,11 +88,11 @@ function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 	}
 }
 function Agenda_action_supprime_repetitions($supp_evenement){
-	$res = spip_query("SELECT * FROM spip_evenements WHERE id_evenement_source="._q($supp_evenement));
+	$res = sql_select("*", "spip_evenements", "id_evenement_source=".sql_quote($supp_evenement));
 	while ($row = sql_fetch($res)){
 		$id_evenement = $row['id_evenement'];
-		spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement="._q($id_evenement));
-		spip_query("DELETE FROM spip_evenements WHERE id_evenement="._q($id_evenement));
+		sql_delete("spip_mots_evenements", "id_evenement=".sql_quote($id_evenement));
+		sql_delete("spip_evenements", "id_evenement=".sql_quote($id_evenement));
 	}
 }
 
@@ -95,11 +101,11 @@ function Agenda_action_update_liste_mots($id_evenement,$liste_mots){
 	$cond_in = "";
 	if (count($liste_mots))
 		$cond_in = "AND " . sql_in('id_mot', $liste_mots, 'NOT');
-	spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement="._q($id_evenement)." ".$cond_in);
+	sql_delete("spip_mots_evenements", "id_evenement=".sql_quote($id_evenement)." ".$cond_in);
 	// ajout/maj des nouveaux mots
 	foreach($liste_mots as $id_mot){
-		if (!sql_fetch(spip_query("SELECT * FROM spip_mots_evenements WHERE id_evenement="._q($id_evenement)." AND id_mot="._q($id_mot))))
-			spip_query("INSERT INTO spip_mots_evenements (id_mot,id_evenement) VALUES ("._q($id_mot).","._q($id_evenement).")");
+		if (!sql_fetsel("*", "spip_mots_evenements", array("id_evenement=".sql_quote($id_evenement), "id_mot=".sql_quote($id_mot))))
+			sql_insertq("spip_mots_evenements", array("id_mot"=>$id_mot, "id_evenement"=>$id_evenement));
 	}
 }
 
@@ -122,7 +128,7 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 	 	}
 		if ($id_article){
 			// mettre a jour le lien evenement-article
-			spip_query("UPDATE spip_evenements SET id_article="._q($id_article)." WHERE id_evenement="._q($id_evenement));
+			sql_updateq("spip_evenements", array("id_article"=>$id_article), "id_evenement=".sql_quote($id_evenement));
 	 	}
 		$titre = _request('evenement_titre',$c);
 		$descriptif = _request('evenement_descriptif',$c);
@@ -156,16 +162,19 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 		$date_fin=format_mysql_date(date("Y",$st_date_fin),date("m",$st_date_fin),date("d",$st_date_fin),date("H",$st_date_fin),date("i",$st_date_fin), $s=0);
 
 		// mettre a jour l'evenement
-		$res=spip_query("UPDATE spip_evenements SET `titre`="._q($titre)
-		. ",`descriptif`="._q($descriptif)
-		. ",`lieu`="._q($lieu)
-		. ",`horaire`="._q($horaire)
-		. ",`date_debut`="._q($date_deb)
-		. ",`date_fin`="._q($date_fin)
-		. " WHERE `id_evenement` ="._q($id_evenement));
+		$res=sql_updateq(
+			"spip_evenements",
+			array(
+				"titre" => $titre,
+				"descriptif" => $descriptif,
+				"lieu" => $lieu,
+				"horaire" => $horaire,
+				"date_debut" => $date_deb,
+				"date_fin" => $date_fin),
+			"id_evenement =".sql_quote($id_evenement));
 
 		// les mots cles : par groupes
-		$res = spip_query("SELECT * FROM spip_groupes_mots WHERE evenements='oui' ORDER BY titre");
+		$res = sql_select("*", "spip_groupes_mots", "evenements='oui'", "titre");
 		$liste_mots = array();
 		while ($row = sql_fetch($res)){
 			$id_groupe = $row['id_groupe'];
@@ -209,10 +218,12 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 }
 
 function Agenda_action_supprime_evenement($id_article,$supp_evenement){
-	$res = spip_query("SELECT * FROM spip_evenements WHERE id_article="._q($id_article)." AND id_evenement="._q($supp_evenement));
+	$res = sql_select("*", "spip_evenements", array(
+		"id_article=" . sql_quote($id_article),
+		"id_evenement=" . sql_quote($supp_evenement)));
 	if ($row = sql_fetch($res)){
-		spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement="._q($supp_evenement));
-		spip_query("DELETE FROM spip_evenements WHERE id_evenement="._q($supp_evenement));
+		sql_delete("spip_mots_evenements", "id_evenement=".sql_quote($supp_evenement));
+		sql_delete("spip_evenements", "id_evenement=".sql_quote($supp_evenement));
 	}
 	Agenda_action_supprime_repetitions($supp_evenement);
 	$id_evenement = 0;
