@@ -1062,7 +1062,7 @@ function image_rgb2hsl($R,$G,$B) {
 	return $ret;
 }
 
-function image_hue_2_rgb($v1, $v2, $vH) {
+function image_hue2rgb($v1, $v2, $vH) {
    if ( $vH < 0 ) $vH += 1;
    if ( $vH > 1 ) $vH -= 1;
    if ( ( 6 * $vH ) < 1 ) return ( $v1 + ( $v2 - $v1 ) * 6 * $vH );
@@ -1085,9 +1085,9 @@ function image_hsl2rgb($H,$S,$L) {
 
 		   $var_1 = 2 * $L - $var_2;
 
-		   $R = 255 * image_hue_2_rgb( $var_1, $var_2, $H + ( 1 / 3 ) );
-		   $G = 255 * image_hue_2_rgb( $var_1, $var_2, $H );
-		   $B = 255 * image_hue_2_rgb( $var_1, $var_2, $H - ( 1 / 3 ) );
+		   $R = 255 * image_hue2rgb( $var_1, $var_2, $H + ( 1 / 3 ) );
+		   $G = 255 * image_hue2rgb( $var_1, $var_2, $H );
+		   $B = 255 * image_hue2rgb( $var_1, $var_2, $H - ( 1 / 3 ) );
 		}
 
 	$ret["r"] = floor($R);
@@ -1113,13 +1113,13 @@ function couleur_inverserluminosite($coul,$pourcentage=20) {
 	$h = $hsl["h"];
 	$s = $hsl["s"];
 	$l = $hsl["l"];
-echo 'avant:'.$l;
+
 	if ($l < 0.5) {
 		$l = $l + (1-$l)*(1-(100-$pourcentage)/100);
 	} else {
 		$l = $l*(1-$pourcentage/100);
 	}
-echo 'apres:'.$l;
+
 	$rgb = image_hsl2rgb($h,$s,$l);
 	$r = $rgb["r"];
 	$g = $rgb["g"];
