@@ -32,9 +32,9 @@ function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 				$update_descriptif = $descriptif;
 				$update_lieu = $lieu;
 
-				// mettre a jour l'evenement
-				$res=sql_updateq(
-					"spip_evenements", 
+				// mettre a jour l'evenement					
+				Agenda_action_update_evenement(
+					$row['id_evenement'],
 					array(
 						"titre" => $update_titre,
 						"descriptif" => $update_descriptif,
@@ -42,9 +42,9 @@ function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 						"horaire" => $horaire,
 						"date_debut" => $update_date_debut,
 						"date_fin" => $update_date_fin,
-						"id_article" => $id_article),
-					"id_evenement = ".sql_quote($row['id_evenement']));
-				Agenda_action_update_liste_mots($row['id_evenement'],$liste_mots);
+						"id_article" => $id_article));
+						
+				Agenda_action_update_liste_mots($row['id_evenement'], $liste_mots);
 			}
 			else {
 				// il est supprime
@@ -69,8 +69,8 @@ function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 					spip_log("agenda action formulaire article : impossible d'ajouter un evenement repete");
 				else {
 					// mettre a jour l'evenement
-					$res=sql_updateq(
-						"spip_evenements",
+					Agenda_action_update_evenement(
+						$id_evenement_new,
 						array(
 							"titre" => $update_titre,
 							"descriptif" => $update_descriptif,
@@ -78,15 +78,15 @@ function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 							"horaire" => $horaire,
 							"date_debut" => $update_date_debut,
 							"date_fin" => $update_date_fin,
-							"id_article" => $id_article),
-						"id_evenement = ".sql_quote($id_evenement_new));
+							"id_article" => $id_article));
 
-					Agenda_action_update_liste_mots($id_evenement_new,$liste_mots);
+					Agenda_action_update_liste_mots($id_evenement_new, $liste_mots);
 				}
 			}
 		}
 	}
 }
+
 function Agenda_action_supprime_repetitions($supp_evenement){
 	$res = sql_select("*", "spip_evenements", "id_evenement_source=".sql_quote($supp_evenement));
 	while ($row = sql_fetch($res)){
@@ -109,6 +109,26 @@ function Agenda_action_update_liste_mots($id_evenement,$liste_mots){
 	}
 }
 
+// modifier un evenement
+function Agenda_action_update_evenement($id_evenement, $couples){
+	// mettre a jour l'evenement
+	return sql_updateq(
+		"spip_evenements", 
+		$couples, 
+		"id_evenement = " . sql_quote($id_evenement));
+}
+
+// creer un nouvel evenement
+function Agenda_action_insert_evenement($couples){
+	// nouvel evenement
+	$id_evenement = sql_insertq("spip_evenements", $couples);
+
+	if (!$id_evenement){
+		spip_log("agenda action formulaire article : impossible d'ajouter un evenement");
+		return 0;
+	} 
+	return $id_evenement;	
+}
 
 function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 	include_spip('base/abstract_sql');
@@ -118,17 +138,13 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 	if (($insert || $modif)){
 
 		if ( ($insert) && (!$id_evenement) ){
-			$id_evenement = sql_insert("spip_evenements",
-				"(id_evenement_source,maj)",
-				"('0',NOW())");
-			if ($id_evenement==0){
-				spip_log("agenda action formulaire article : impossible d'ajouter un evenement");
-				return 0;
+			if (!$id_evenement = Agenda_action_insert_evenement(array("id_evenement_source"=>0, "maj"=>"NOW()"))){
+				return 0;	
 			}
 	 	}
 		if ($id_article){
 			// mettre a jour le lien evenement-article
-			sql_updateq("spip_evenements", array("id_article"=>$id_article), "id_evenement=".sql_quote($id_evenement));
+			Agenda_action_update_evenement($id_evenement, array("id_article"=>$id_article));
 	 	}
 		$titre = _request('evenement_titre',$c);
 		$descriptif = _request('evenement_descriptif',$c);
@@ -161,17 +177,15 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 		$st_date_fin = max($st_date_deb,$st_date_fin);
 		$date_fin=format_mysql_date(date("Y",$st_date_fin),date("m",$st_date_fin),date("d",$st_date_fin),date("H",$st_date_fin),date("i",$st_date_fin), $s=0);
 
-		// mettre a jour l'evenement
-		$res=sql_updateq(
-			"spip_evenements",
+		Agenda_action_update_evenement(
+			$id_evenement,
 			array(
 				"titre" => $titre,
 				"descriptif" => $descriptif,
 				"lieu" => $lieu,
 				"horaire" => $horaire,
 				"date_debut" => $date_deb,
-				"date_fin" => $date_fin),
-			"id_evenement =".sql_quote($id_evenement));
+				"date_fin" => $date_fin));
 
 		// les mots cles : par groupes
 		$res = sql_select("*", "spip_groupes_mots", "evenements='oui'", "titre");
