@@ -152,7 +152,7 @@ class cfg_dist extends cfg_formulaire
 	{
 		// nom est une chaine, pas une cle de tableau.
 		if (empty($nom) OR !is_string($nom)) $nom = $lien;
-		if (!find_in_path('fonds/cfg_'.$lien)) return "";
+		if (!find_in_path('fonds/cfg_'.$lien.'.html')) return "";
 		
 		return "<a href='" . generer_url_ecrire("cfg","cfg=$lien") . "'>$nom</a>\n"; // &cfg_id= <-- a ajouter ?
 	}
@@ -167,7 +167,7 @@ class cfg_dist extends cfg_formulaire
 	function boite_liens_multi($lien, $nom=''){
 		// nom est une chaine, pas une cle de tableau.
 		if (empty($nom) OR !is_string($nom)) $nom = $lien;
-		if (!find_in_path('fonds/cfg_'.$lien)) return "";
+		if (!find_in_path('fonds/cfg_'.$lien.'.html')) return "";
 		
 		$dedans = '';
 		if (($exi = lire_config($lien)) && is_array($exi)) {

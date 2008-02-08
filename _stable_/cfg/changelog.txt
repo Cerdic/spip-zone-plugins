@@ -1,5 +1,8 @@
 Un changelog pour se reperer un peu
 
+v1.3.4
+- oubli qui empechaient les liens de fonctionner
+
 v1.3.3 (07.02.2008) :
 - Si un lien est demande dans le fond <!-- lien=toto --> 
 mais que fonds/cfg_toto.html n'existe pas, le lien n'est pas propose
