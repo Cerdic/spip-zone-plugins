@@ -21,7 +21,7 @@
 		
 		$url_adherents = generer_url_ecrire('adherents');
 		$url_ajout_cotisation = generer_url_ecrire('ajout_cotisation');
-		$url_editer_adherent = generer_url_ecrire('editer_adherent','act=val');
+		$url_editer_adherent = generer_url_ecrire('editer_adherent');
 		$url_edit_adherent = generer_url_ecrire('edit_adherent');
 		$url_voir_adherent = generer_url_ecrire('voir_adherent');
 		$url_action_adherents = generer_url_ecrire('action_adherents');
