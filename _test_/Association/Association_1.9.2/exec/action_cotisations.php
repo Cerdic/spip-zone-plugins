@@ -30,11 +30,7 @@
 		
 		if($action=="ajoute") {
 			spip_query( "INSERT INTO spip_asso_comptes (date, journal, recette, justification, imputation, id_journal) VALUES ("._q($date).", "._q($journal).", "._q($montant).", "._q($justification).", "._q($imputation).", "._q($id_auteur)." )" );
-			spip_query( "UPDATE spip_auteurs_elargis SET statut_interne='ok' WHERE id_auteur="._q($id_auteur) );
-			$query=spip_query( "UPDATE spip_asso_adherents SET validite="._q($validite)." WHERE id_auteur="._q($id_auteur) );
-			if(!$query) {
-				spip_query( "INSERT INTO spip_asso_adherents (id_auteur, validite) VALUES ( "._q($id_auteur).", "._q($validite)." )");
-			}
+			spip_query( "UPDATE spip_auteurs_elargis SET statut_interne='ok', validite="._q($validite)."WHERE id_auteur="._q($id_auteur) );
 			header ('location:'.$url_retour);
 			exit;
 		}

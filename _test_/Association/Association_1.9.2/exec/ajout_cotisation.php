@@ -22,7 +22,7 @@
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$id_auteur=$_GET['id'];
-		$query = spip_query( "SELECT * FROM spip_auteurs_elargis b LEFT JOIN spip_asso_adherents c ON b.id_auteur=c.id_auteur WHERE b.id_auteur='$id_auteur' " );
+		$query = spip_query( "SELECT * FROM spip_auteurs_elargis  WHERE id_auteur='$id_auteur' " );
 		while($data = spip_fetch_array($query)) {
 			$nom_famille=$data['nom_famille'];
 			$prenom=$data['prenom'];
