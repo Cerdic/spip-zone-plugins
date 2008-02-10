@@ -140,7 +140,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_statut_echu' => '&Agrave &eacute;ch&eacute;ance',
 	'adherent_libelle_statut_relance' => 'Relanc&eacute;',
 	'adherent_libelle_statut_sorti' => 'D&eacute;sactiv&eacute;',
-	'adherent_libelle_statut_prospect' => 'Prospect',
+	'adherent_libelle_statut_'.lire_config('inscription2/statut_interne') => 'Prospect',
 	
 
 	'adherent_libelle_oui' => 'oui',
