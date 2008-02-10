@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'affiche_liste_arbres' => "Liste des arbres",
+'affiche_voir_arbre' => "Visualiser un arbre",
 'aliasf' => "Surnomm&eacute;e",
 'aliasi' => "Surnomm&eacute;",
 'aliasm' => "Surnomm&eacute;",
@@ -25,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'boite_info' => "Cette page vous permet de g&eacute;rer les arbres g&eacute;n&eacute;alogiques de plusieurs familles simultan&eacute;ment.",
 // 'boite_info_creer' => "Cette page vous permet de cr&eacute;er un nouvel arbre g&eacute;n&eacute;alogique.",
 // 'boite_info_modifier' => "Cette page vous permet de modifier un d&eacute;j&agrave; existant.",
+'boite_info_voir' => "Cette page vous permet de visualiser les diff&eacute;rentes informations contenues dans un arbre.",
 'buri' => "Inhumation - S&eacute;pulture",
 
 // C
@@ -78,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'f' => "F&eacute;minin",
 'fact' => "Fait ou caract&eacute;ristique",
 'fcom' => "Premi&egrave;re communion",
+'filiation' => "Filiation",
 
 // G
 'grad' => "Dipl&ocirc;me ou certificat",
@@ -147,6 +150,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pacs' => "PACS",
 'patronyme' => "Patronyme",
 'pere' => "P&egrave;re",
+'precision_' => "le",
+'precision__court' => "en",
+'precision_a' => "avant le",
+'precision_a_court' => "avant",
+'precision_p' => "entre le",
+'precision_p_court' => "entre",
+'precision_p2' => "et le",
+'precision_p2_court' => "et",
+'precision_s' => "après le",
+'precision_s_court' => "après",
+'precision_v' => "vers le",
+'precision_v_court' => "vers",
 'prob' => "Validation d'un testament",
 'profession' => "Professions",
 'prop' => "Bien ou possession",
@@ -180,11 +195,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'text_pied_1' => "Cet arbre est compos&eacute; de nombreuses personnes (<i>des ascendants, des descendants, des collat&eacute;raux, des conjoints, etc.</i>). Si vous reconnaissez un membre de votre famille dans les noms cit&eacute;s dans cet arbre g&eacute;n&eacute;alogique, n'h&eacute;sitez pas &agrave; ",
 'text_pied_2' => "nous contacter",
 'texte_en_attente' => "Les arbres contenus dans cette liste sont en attente d'affectation &agrave; une rubrique. Vous pouvez tout de m&ecirc;me cr&eacute;er et g&eacute;rer des individus mais ceux-ci ne seront pas visible dans la partie publique.",
+'texte_encart_rubrique' => "Modification des informations contenues dans l'arbre g&eacute;n&eacute;alogique joint à cette rubrique.",
 'titl' => "Titre de noblesse ou honorifique",
 'titre' => "Gestion des g&eacute;n&eacute;alogies",
-'titre_arbres_attente' => "Liste des arbres en attente",
+'titre_arbres_attente' => "Vos arbres en attente",
 'titre_arbre_numero' => "ARBRE NUM&Eacute;RO",
-'titre_arbres_tous' => "Liste des arbres en ligne",
+'titre_arbres_tous' => "Vos arbres en ligne",
+'titre_encart_rubrique' => "Gestion g&eacute;n&eacute;alogique",
 'titre_nouvel_arbre' => "Nouvel arbre",
 'tous_arbres' => "Tous les arbres",
 

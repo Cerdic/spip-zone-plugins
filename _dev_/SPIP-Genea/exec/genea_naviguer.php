@@ -36,7 +36,7 @@ $ze_logo_genea = url_absolue(find_in_path('/img_pack/arbre-24.png'));
 function exec_genea_naviguer_dist() {
 	switch ($_GET['action']) {
 		case 'creer' :
-			genea__modif_arbre(0);
+			genea_modif_arbre(0);
 			break;
 		case 'modif' :
 			genea_modif_arbre($_GET['id_genea']);
@@ -75,6 +75,8 @@ function genea_affiche_liste_arbre(){
 
 	genea_boite_info(_T('genea:affiche_liste_arbres'), _T('genea:boite_info'));
 
+	genea_raccourcis();
+
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'genea_naviguer'),'data'=>''));
 
 	creer_colonne_droite();
@@ -101,7 +103,75 @@ function genea_affiche_liste_arbre(){
 	echo fin_gauche(), fin_page();
 }
 
+function genea_modif_arbre($id_genea) {
+	pipeline('exec_init',array('args'=>array('exec'=>'genea_naviguer','id_genea'=>$id_genea),'data'=>''));
+
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('genea:titre'), 'naviguer', 'genea');
+
+	// Controle d'acces a la gestion des arbres genealogiques
+	if (!autoriser('voir', 'genea', $id_genea)) {
+		echo "<strong>" . _T('avis_acces_interdit') . "</strong>";
+		echo fin_page();
+		exit;
+	}
+
+	echo "<br /><br /><br />\n";
+	echo gros_titre(_T('genea:titre'));
+	echo barre_onglets("genea", "contenu");
+
+	echo debut_gauche();
+
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'genea_naviguer'),'data'=>''));
+
+	echo "modif arbre";
+
+	creer_colonne_droite();
+
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'genea_naviguer'),'data'=>''));
+
+	debut_droite();
+
+	debut_cadre_formulaire();
+
+	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
+	echo "<tr>";
+	echo "<td>";
+
+// -*- pour test -*-
+	$titre = "Nom de l'arbre";
+// -----------------
+
+//	if ($id_genea)
+	 icone(_T('icone_retour'), generer_url_ecrire("genea_naviguer","action=voir&id_rubrique=$id_rubrique"), $ze_logo_genea, "rien.gif");
+//	else icone(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_parent"), $ze_logo, "rien.gif");
+
+	echo "</td>";
+	echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
+	echo "<td style='width: 100%'>";
+	echo _T('genea:info_modifier_arbre');
+	gros_titre($titre);
+	echo "</td></tr></table>";
+
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'genea_naviguer','action'=>'voir','id_rubrique'=>$id_rubrique),'data'=>''));
+
+	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
+
+	$form = "<br/>"
+//	.  "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus />"
+	. debut_cadre_couleur("$logo_parent", true, '', _T('genea:texte_rubrique_rattachee').aide ("geneavoir"))
+	. $chercher_rubrique($id_parent, 'rubrique', !$connect_toutes_rubriques, $id_rubrique);
+
+	echo $form;
+
+	echo fin_cadre_formulaire();
+
+	echo fin_gauche(), fin_page();
+}
+
 function genea_voir_arbre($id_genea) {
+	global $ze_logo_genea;
+
 	pipeline('exec_init',array('args'=>array('exec'=>'genea_naviguer'),'data'=>''));
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -120,9 +190,53 @@ function genea_voir_arbre($id_genea) {
 
 	echo debut_gauche();
 
-	echo genea_infos_naviguer($id_genea, $id_rubrique);
+	if ($id_genea>0) {
+		echo genea_infos_naviguer($id_genea, $id_rubrique);
+		echo "<br />";
+	}
 
-	echo "voir arbre";
+	if ($spip_display != 4) {
+		genea_raccourcis();
+		genea_boite_info(_T('genea:affiche_voir_arbre'), _T('genea:boite_info_voir'));
+	}
+
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'genea_naviguer'),'data'=>''));
+
+	creer_colonne_droite();
+
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'genea_naviguer'),'data'=>''));
+
+	debut_droite();
+
+	debut_cadre_relief($ze_logo);
+
+  global $spip_lang_right, $spip_lang_left;
+
+  $flag_editable = ture; // pour le test
+
+  echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
+  echo "<tr><td style='width: 100%' valign='top'>";
+  gros_titre((!acces_restreint_rubrique($id_rubrique) ? '' :
+		http_img_pack("admin-12.gif",'', "width='12' height='12'",
+			      _T('info_administrer_rubrique'))) .
+	     $titre);
+  echo "</td>";
+
+  if ($id_genea > 0 AND $flag_editable) {
+	echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
+	echo "<td  align='$spip_lang_right' valign='top'>";
+	icone(_T('icone_modifier_arbre'), generer_url_ecrire("genea_naviguer","action=modif&id_genea=$id_genea&retour=nav"), $ze_logo_genea, "edit.gif");
+	echo "</td>";
+}
+  echo "</tr>\n";
+
+  if (strlen($descriptif) > 1) {
+	echo "<tr><td><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>", propre($descriptif."~"), "</div></td></tr>\n";
+  }
+  echo "</table>\n";
+
+
+	fin_cadre_relief();
 
 	echo fin_gauche(), fin_page();
 }
@@ -145,7 +259,7 @@ function genea_infos_naviguer($id_genea, $id_rubrique=0){
 	debut_boite_info();
 
 	$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>"
-		  .  _T('genea:titre_arbre_numero')
+		  .  _T('genea:titre_arbre_numero') . " :"
 		  . "<br /><span class='spip_xx-large'>"
 		  . $id_genea
 		  . '</span></div>';
@@ -157,12 +271,12 @@ function genea_infos_naviguer($id_genea, $id_rubrique=0){
 function genea_raccourcis($id_genea=0){
 	global $ze_logo_genea;
 	debut_raccourcis();
-		icone_horizontale(_T('genea:creer_arbre'), parametre_url(generer_url_ecrire("genea_naviguer"),"new","oui"), $ze_logo_genea, "creer.gif");
+		icone_horizontale(_T('genea:creer_arbre'), parametre_url(generer_url_ecrire("genea_naviguer"),"action","creer"), $ze_logo_genea, "creer.gif");
 		if ($id_genea>0) {
 			icone_horizontale(_T('genea:creer_sosa'), generer_url_ecrire("genea_cree_sosa"), $ze_logo_genea, "");
 			icone_horizontale(_T('genea:import_arbre'), generer_url_ecrire("genea_import"), $ze_logo_genea, url_absolue(find_in_path('/img_pack/communicate.gif')));
 			icone_horizontale(_T('genea:export_arbre'), generer_url_ecrire("genea_export"), $ze_logo_genea, url_absolue(find_in_path('/img_pack/communicate.gif')));
-			icone_horizontale(_T('genea:supprimer_arbre'), generer_url_ecrire("genea_naviguer"), $ze_logo_genea, "supprimer.gif");
+			icone_horizontale(_T('genea:supprimer_arbre'), parametre_url(parametre_url(generer_url_ecrire("genea_naviguer"), "action", "efface"), "id_genea", $id_genea), $ze_logo_genea, "supprimer.gif");
 		}
 	fin_raccourcis();
 }

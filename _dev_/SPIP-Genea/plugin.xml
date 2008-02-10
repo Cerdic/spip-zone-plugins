@@ -21,6 +21,11 @@ _ &#169; 2006-2008 - <multi>[fr]Distribu&#233; sous licence GNU/GPL[en]Distribut
 		<inclure>genea_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>affiche_droite</action>
+		<inclure>genea_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>affiche_milieu</nom>
 		<inclure>genea_pipeline.php</inclure>
 	</pipeline>

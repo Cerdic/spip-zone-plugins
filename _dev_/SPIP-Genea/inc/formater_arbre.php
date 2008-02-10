@@ -90,7 +90,7 @@ function inc_formater_arbre_dist($row){
 
 	$vals[]= "<div>"
 	. "<a href='"
-	. generer_url_ecrire("genea_naviguer","action=voir&id_genea=$id_genea")
+	. parametre_url(parametre_url(generer_url_ecrire("genea_naviguer"), "action", "voir"), "id_genea", $id_genea)
 	. "'"
 	. $dir_lang
 	. " style=\"display:block;\">"
@@ -103,7 +103,7 @@ function inc_formater_arbre_dist($row){
 	. "</a>"
 	. "</div>";
 
-	$vals[] = ($id_rubrique>0) ? "</a> &nbsp;&nbsp; <span class='spip_xx-small'><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>"._T('genea:rubrique')." : $id_rubrique</a></span>" : "";
+	$vals[] = ($id_rubrique>0) ? "</a> &nbsp;&nbsp; <span class='spip_xx-small'><a href='" . parametre_url(generer_url_ecrire("naviguer"),"id_rubrique", $id_rubrique) . "'>"._T('genea:rubrique')." : $id_rubrique</a></span>" : "";
 
 	$vals[] = $row['nombre'] ? "<span class='spip_xx-small' style='color: red'>$total_individus "._T('genea:individus')."</span>" : "&nbsp;";
 
