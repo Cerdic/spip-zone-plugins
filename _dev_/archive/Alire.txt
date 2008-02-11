@@ -1,0 +1,27 @@
+******** Plugin Archive *******
+
+*******************************
+
+Modifications 10/02/2008
+Par Jilou jlpnopub@gmail.com
+
+Ajout d'une tache CRON pour l'archivage automatique
+Configuration avec CFG
+activation / désactivation de l'archivage automatique
+Définition de l'ancienneté des acticles à sauvegarder
+Choix des rubriques à traiter
+
+Merci à Stephane et à Matthieu pour leur aide
+
+Fichiers modifiés:
+
+plugin.xml
+archive_options.php
+fonds/cfg_archive.html
+
+Fichiers ajoutés:
+lang/archive_fr.php
+inc/archive_cron.php
+
+*************
+Testé avec SPIP 1.9.2d
