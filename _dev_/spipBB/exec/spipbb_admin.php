@@ -54,16 +54,21 @@ function exec_spipbb_admin() {
 	if (!empty($id_salon)) {
 
 		// + prepa info rubrique(salon)
+		/* c: 7/2/8 compatibilite pg_sql
 		$req_srg =	"SELECT id_rubrique, id_parent, titre, descriptif
 					FROM spip_rubriques
 					WHERE id_rubrique=$id_salon";
 		$res_srg = sql_query($req_srg);
 		$row=sql_fetch($res_srg);
+		*/
+		$row = sql_fetsel(array("id_rubrique","id_parent","titre","descriptif"), // rows
+							"spip_rubriques", // from
+							"id_rubrique=$id_salon"); //where
 
 		$id_salon = $row['id_rubrique'];
 		$desc_salon = $row['descriptif'];
 		$id_parent_salon = $row['id_parent'];
-		
+
 		# si crea rubrique(salon), renumerote
 		# valable pour la premiere passe sur spipb_admin !
 		if(recuperer_numero($row['titre'])=='') {
@@ -71,7 +76,7 @@ function exec_spipbb_admin() {
 		}
 		$titre_salon = supprimer_numero($row['titre']);
 	}
-	else { 
+	else {
 		$titre_salon=_T('spipbb:titre_spipbb');
 	}
 
@@ -106,11 +111,11 @@ function exec_spipbb_admin() {
 		echo "<tr>";
 		echo "<td valign='top' width='10%'>\n";
 
-		# bouton edition rubrique 
+		# bouton edition rubrique
 		# h. 18/11
 		icone(_T('icone_modifier_rubrique'), generer_url_ecrire("spipbb_rubriques_edit","id_rubrique=$id_salon"), $ico_rang, "edit.gif");
 		#echo http_img_pack($ico_rang,''," border='0' valign='absmiddle'");
-		#echo "<span class='verdana2'>".$id_salon."</span>";	
+		#echo "<span class='verdana2'>".$id_salon."</span>";
 		echo "</td>";
 		echo "<td width='80%' valing='top'>\n";
 
@@ -131,9 +136,9 @@ function exec_spipbb_admin() {
 		echo "\n</td></tr>";
 
 		echo "<tr><td>";
-		
+
 		# bouton nouveau salon (dans rub-secteur)
-		#	
+		#
 		if($id_parent_salon=='0' AND ($connect_toutes_rubriques OR acces_restreint_rubrique($id_salon))) {
 			echo "<div style='float:left; padding:2px;'>";
 			icone(_L('creer_salon'), generer_url_ecrire("spipbb_rubriques_edit", "id_parent=".$id_salon."&new=oui"), "rubrique-24.gif","creer.gif");
@@ -154,11 +159,18 @@ function exec_spipbb_admin() {
 		#
 		# les forums de ce salon
 		#
+		/* c: 7/2/8 compatibilite pg_sql
 		$res_af = sql_query("SELECT id_article, titre, descriptif, statut
 							FROM spip_articles
 							WHERE id_rubrique = $id_salon
 							ORDER BY titre");
-		
+							*/
+		$res_af = sql_select(array("id_article","titre","descriptif","statut"), // rows
+							"spip_articles", // from
+							"id_rubrique = $id_salon", // where
+							"", // groupby
+							array("titre")); // orderby
+
 		# compter les forums
 		if($nombre_forums=sql_count($res_af)) {
 			$flag_ordonne = ($nombre_forums>1)?true:false;
@@ -177,26 +189,40 @@ function exec_spipbb_admin() {
 
 			if($row['statut']=='publie') {
 				// nbre total de sujets de ce $id_forum
+				/* c: 7/2/8 compatibilite pg_sql
 				$req_sujet= "SELECT id_forum FROM spip_forum
 							WHERE id_article='$id_forum'
 							AND id_parent=0 AND statut IN ('publie', 'off', 'prop')
 							";
-				$res_sujet = sql_query($req_sujet);
+				$res_sujet = sql_query($req_sujet);*/
+				$res_sujet = sql_select("id_forum","spip_forum","id_article='$id_forum' AND id_parent=0 AND statut IN ('publie', 'off', 'prop')");
+
 				$nbr_sujet=sql_count($res_sujet);
 
 				// nombre total de posts de ce $id_forum
+				/* c: 7/2/8 compatibilite pg_sql
 				$req_post= "SELECT id_forum FROM spip_forum
 							WHERE id_article='$id_forum' AND statut IN ('publie', 'off', 'prop')
 							";
 				$res_post = sql_query($req_post);
+				*/
+				$res_post = sql_select("id_forum","spip_forum","id_article='$id_forum' AND statut IN ('publie', 'off', 'prop')");
 				$nbr_post=sql_count($res_post);
 
 				// dernier post
+				/* c: 7/2/8 compatibilite pg_sql
 				$req_date = "SELECT id_forum, id_thread, DATE_FORMAT(date_heure, '%d/%m/%Y %H:%i') AS dateur
 							FROM spip_forum
 							WHERE id_article=$id_forum AND statut IN ('publie', 'off', 'prop')
 							ORDER BY date_heure DESC LIMIT 0, 1";
 				$res_date = sql_query($req_date);
+				*/
+				$res_date = sql_select(array("id_forum","id_thread","DATE_FORMAT(date_heure, '%d/%m/%Y %H:%i') AS dateur"), // rows
+										"spip_forum", // from
+										"id_article=$id_forum AND statut IN ('publie', 'off', 'prop')", // where
+										"", // groupby
+										array("date_heure DESC"), // orderby
+										"0,1"); // limit
 				$rd = sql_fetch($res_date);
 				$id_post = $rd['id_forum'];
 				$id_sujet = $rd['id_thread'];
@@ -234,15 +260,15 @@ function exec_spipbb_admin() {
 			. "<td width='8%' valign='top' class='verdana2'>\n";
 
 			debut_bloc_gricont();
-			echo "<img src='"._DIR_IMG_SPIPBB."gaf_sujet-12.gif' border='0' align='absmiddle' title='"._T('spipbb:sujet_nombre')."' /><br />";		
+			echo "<img src='"._DIR_IMG_SPIPBB."gaf_sujet-12.gif' border='0' align='absmiddle' title='"._T('spipbb:sujet_nombre')."' /><br />";
 			echo $nbr_sujet;
 			fin_bloc();
 
 			echo "</td>\n";
 			echo "<td width='8%' valign='top' class='verdana2'>\n";
 
-			debut_bloc_gricont();		
-			echo "<img src='"._DIR_IMG_SPIPBB."gaf_post-12.gif' border='0' align='absmiddle' title='"._T('spipbb:total_messages')."' /><br />";		
+			debut_bloc_gricont();
+			echo "<img src='"._DIR_IMG_SPIPBB."gaf_post-12.gif' border='0' align='absmiddle' title='"._T('spipbb:total_messages')."' /><br />";
 			echo $nbr_post;
 			fin_bloc();
 
@@ -290,11 +316,18 @@ function exec_spipbb_admin() {
 		$wheres = "AND id_article IN ($enum_art)";
 	}
 
+	/* c: 7/2/8 compatibilite pg_sql
 	$req = "SELECT id_forum, id_thread, date_heure, auteur, titre, statut FROM spip_forum
-				WHERE statut IN ('publie', 'off', 'prop') $wheres 
+				WHERE statut IN ('publie', 'off', 'prop') $wheres
 				ORDER BY date_heure DESC LIMIT 0,20";
 	$res = sql_query($req);
-
+	*/
+	$res = sql_select(array("id_forum","id_thread","date_heure","auteur","titre","statut"), // rows
+						"spip_forum", // from
+						"statut IN ('publie', 'off', 'prop') $wheres", // where
+						"", // groupby
+						array("date_heure DESC"), //orderby
+						"0,20");// limit
 
 	echo debut_cadre_formulaire('',true);
 	echo "\n<table cellpadding='3' cellspacing='0' border='0' width='100%'>\n";
@@ -309,7 +342,7 @@ function exec_spipbb_admin() {
 		$url_post = url_post_tranche($id_post, $id_sujet);
 		$statut = $row['statut'];
 		$icostat='';
-		
+
 		switch($statut) {
 			case 'off':
 			$icostat=http_img_pack('puce-poubelle-breve.gif',$statut,"border='0' align='absmiddle'",_T('spipbb:post_rejete'))."&nbsp;";
@@ -320,9 +353,9 @@ function exec_spipbb_admin() {
 			case 'publie': $icostat="";
 			break;
 		}
-		
+
 		if($aut_post=='') { $aut_post=_T('spipbb:anonyme'); }
-		
+
 		$ifond = $ifond ^ 1;
 		$coul_ligne = ($ifond) ? $couleur_claire : '#ffffff';
 

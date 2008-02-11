@@ -39,7 +39,7 @@ function exec_spipbb_admin_fromphpbb()
 {
 	spipbb_log("CALL",3,"exec_spipbb_admin_fromphpbb()");
 /*
-	if ( !spipbb_is_configured() or ($GLOBALS['spipbb']['configure']!='oui') 
+	if ( !spipbb_is_configured() or ($GLOBALS['spipbb']['configure']!='oui')
 		 or $GLOBALS['spipbb']['config_id_secteur'] != 'oui'
 		 or empty($GLOBALS['spipbb']['id_secteur']) ) {
 		include_spip('inc/headers');
@@ -160,7 +160,7 @@ function spipbb_fromphpbb_formulaire($conf=array())
 					$conf['dppasswd'] = $dbpasswd ;
 					$conf['table_prefix'] = $table_prefix;
 					$phpbb_conf[]=$conf;
-					$contexte = array( 
+					$contexte = array(
 						'filename'=>$conf['filename'],
 						'key'=>$radio,
 						);
@@ -176,17 +176,17 @@ function spipbb_fromphpbb_formulaire($conf=array())
 						"config_name"	=> "varchar(255)",
 						"config_value" 	=> "varchar(255)",
 						);
-	$req=sql_query("SHOW TABLES LIKE '%_config'");
+	// c: 7/2/8 compat pg_sql
+	$req=sql_showtable("%_config");
 	$liste_config=array();
 	while ($row = sql_fetch($req)) {
 		// on compare la desc avec le mini puis la valeur
 		$liste_config[]=join("",$row);
 	}
-	
+
 	reset($liste_config);
 	while ( list(,$table_config) = each($liste_config) ) {
 		if ($table_config) {
-			//echo "coucou:".$table_config;
 			$structure=sql_showtable($table_config);
 			$idem=true;
 			while ( list($k,$v) = each($struc_mini_config_phpbb) AND $idem )
@@ -198,18 +198,17 @@ function spipbb_fromphpbb_formulaire($conf=array())
 				//$structure['field'][$k]=$champ;
 				$idem = ($struc_mini_config_phpbb[$k]==$champ);
 			}
-			if ($idem) { 
-				//echo $table_config; 
+			if ($idem) {
 				$phpbbversion=sql_fetsel("config_value",$table_config,"config_name='version'");
-				
+
 				// chryjs :le 25/11/07 il ne reste plus qu'a ajouter au formulaire et recuperer les infos de config a l'arrivee
-				
+
 				if ($phpbbversion) {
 					// on recupere le chemin vers les avatars
 					$avatar_path=sql_fetsel("config_value",$table_config,"config_name='avatar_path'");
 					$script_path=sql_fetsel("config_value",$table_config,"config_name='script_path'");
 					//echo $phpbbversion['config_value'];script_path
-					$contexte = array( 
+					$contexte = array(
 						'avatar_path'=>$script_path['config_value']."/".$avatar_path['config_value'],
 						'tablename'=>$table_config,
 						'key'=>$radio,
@@ -230,7 +229,7 @@ function spipbb_fromphpbb_formulaire($conf=array())
 	include_spip('inc/editer_article');
 	$choix_rubrique = editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider);
 
-	$contexte = array( 
+	$contexte = array(
 			'lien_action' => generer_action_auteur('spipbb_fromphpbb',$id_rubrique,$retour) ,
 			'exec_script' => 'spipbb_fromphpbb',
 			'phpbb_liste_fichiers' => $liste_fichiers,

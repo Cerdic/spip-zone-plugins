@@ -40,14 +40,14 @@ function spipbb_menus_gauche($script, $id_salon="", $id_art="", $id_sujet="", $m
 			$connect_id_auteur;
 
 	#
-	# Liste de tous les menus d'administration (exec/...) 
+	# Liste de tous les menus d'administration (exec/...)
 	#
 	# $modules[cat][rang]=array(nom,file,icone)
 	$modules=array();
 
 	// ces menus doivent toujours etre actifs
 	# plus besoin de 01_/ZZ_ ... sur nom
-	$modules['01_general'][40]=array('01_configuration',"spipbb_configuration",'administration-24.gif'); 
+	$modules['01_general'][40]=array('01_configuration',"spipbb_configuration",'administration-24.gif');
 	$modules['01_general'][50]=array('ZZ_debug',"spipbb_admin_debug",'racine-24.gif');
 
 	if (is_array($GLOBALS['spipbb']) AND $GLOBALS['spipbb']['configure']=='oui') {
@@ -167,20 +167,23 @@ function bloc_hierarchie($id_rubrique, $id_article, $parents='') {
 	spipbb_log("entree idrub:$id_rubrique:idart:$id_article:prt:$parents:idrubc:$id_rub_courant:idartc:$id_art_courant:",1,"bloc_hierarchie");
 
 	if (!empty($id_article)) {
-		$result=sql_query("SELECT id_article, id_rubrique, titre 
-							FROM spip_articles 
+		/* c: 7/2/8 compatibilite pg_sql
+		$result=sql_query("SELECT id_article, id_rubrique, titre
+							FROM spip_articles
 							WHERE id_article=$id_article");
+		*/
+		$result=sql_select(array("id_article","id_rubrique","titre"),"spip_articles","id_article=$id_article");
 		while($row = sql_fetch($result))
 			{
 			$id_article = $row['id_article'];
 			$id_rubrique = $row['id_rubrique'];
 			$titre = supprimer_numero($row['titre']);
 			$logo = _DIR_IMG_SPIPBB."gaf_forum-12.gif";
-			
+
 			if($id_article!=$id_art_courant)
 				{
-				$parents = "<div class='verdana3' ". 
-			  	http_style_background($logo, "$spip_lang_left top no-repeat; padding-$spip_lang_left: 25px;"). 
+				$parents = "<div class='verdana3' ".
+			  	http_style_background($logo, "$spip_lang_left top no-repeat; padding-$spip_lang_left: 25px;").
 			  	"><a href='".generer_url_ecrire("spipbb_forum", "id_article=".$id_article)."'>".
 				typo($titre)."</a></div>\n<div style='margin-$spip_lang_left: 3px;'>".$parents."</div>";
 				}
@@ -189,11 +192,12 @@ function bloc_hierarchie($id_rubrique, $id_article, $parents='') {
 	}
 	elseif(!empty($id_rubrique)) {
 
-		$query = "SELECT id_rubrique, id_parent, titre, lang 
-				FROM spip_rubriques 
+		$query = "SELECT id_rubrique, id_parent, titre, lang
+				FROM spip_rubriques
 				WHERE id_rubrique=$id_rubrique";
-		$result = sql_query($query);
-
+		// c: 7/2/8 compatibilite pg_sql
+		// $result = sql_query($query);
+		$result = sql_select(array("id_rubrique","id_parent","titre","lang"),"spip_rubriques","id_rubrique=$id_rubrique");
 		while ($row = sql_fetch($result)) {
 
 			$id_rubrique = $row['id_rubrique'];
@@ -209,7 +213,7 @@ function bloc_hierarchie($id_rubrique, $id_article, $parents='') {
 			if($id_rubrique!=$id_rub_courant)
 				{
 
-				$parents = "<div class='verdana3' ". 
+				$parents = "<div class='verdana3' ".
 				  http_style_background($logo, "$spip_lang_left top no-repeat; padding-$spip_lang_left: 25px").
 				  ">".
 				  "<a href='".generer_url_ecrire("spipbb_admin", "id_salon=".$id_rubrique)."'>".
@@ -223,8 +227,8 @@ function bloc_hierarchie($id_rubrique, $id_article, $parents='') {
 	else {
 		$logo = "racine-site-12.gif";
 
-		$parents = "<div class='verdana3' " 
-		  . http_style_background($logo, "$spip_lang_left top no-repeat; padding-$spip_lang_left: 25px") 
+		$parents = "<div class='verdana3' "
+		  . http_style_background($logo, "$spip_lang_left top no-repeat; padding-$spip_lang_left: 25px")
 		  . "><a href='".generer_url_ecrire("spipbb_admin"). "'><b>"
 		  . _T('spipbb:secteur_forum')."</b></a></div>\n<div style='margin-$spip_lang_left: 3px;'>"
 		  . $parents."</div>";
@@ -241,10 +245,18 @@ function rubriques_admin_restreint($connect_id_auteur) {
 	$aff = "<br />";
 	$aff.= debut_cadre_relief("../"._DIR_IMG_SPIPBB."spipbb-24.gif", true, '',_T('moderation'));
 
-	$q = sql_query("SELECT R.id_rubrique, R.titre, R.descriptif 
-					FROM spip_rubriques AS R, spip_auteurs_rubriques AS A 
-					WHERE A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique 
+	/* c: 7/2/8 compatibilite pg_sql
+	$q = sql_query("SELECT R.id_rubrique, R.titre, R.descriptif
+					FROM spip_rubriques AS R, spip_auteurs_rubriques AS A
+					WHERE A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique
 					ORDER BY titre");
+	*/
+	$q = sql_select(array("R.id_rubrique","R.titre","R.descriptif"), // rows
+					array("spip_rubriques AS R","spip_auteurs_rubriques AS A"), // from
+					"A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique", // where
+					"", //groupby
+					"titre" ); // orderby
+
 	$rubs = array();
 	while ($r = sql_fetch($q)) {
 		$rubs[] = "<a title='" .
@@ -264,13 +276,25 @@ function rubriques_admin_restreint($connect_id_auteur) {
 // ------------------------------------------------------------------------------
 function posts_proposes_attente_moderation() {
 	spipbb_log("entree",1,"posts_proposes_attente_moderation");
-	$result = sql_query ("SELECT SQL_CALC_FOUND_ROWS id_forum, titre, id_thread 
-							FROM spip_forum WHERE statut='prop' 
+	/* c: 7/2/8 compatibilite pg_sql
+	$result = sql_query ("SELECT SQL_CALC_FOUND_ROWS id_forum, titre, id_thread
+							FROM spip_forum WHERE statut='prop'
 							ORDER BY date_heure LIMIT 0,10");
-	// récup nombre total d'entrées de $result (mysql 4.0.0 mini)
-	$ttligne= sql_query("SELECT FOUND_ROWS()");
+	*/
+	$compte = sql_fetsel("COUNT(*) AS total", "spip_forum", "statut='prop'", "", "", "0,10");
 
-	list($nbrprop) = @spip_fetch_array($ttligne);
+	// récup nombre total d'entrées de $result (mysql 4.0.0 mini)
+	//$ttligne= sql_query("SELECT FOUND_ROWS()");
+	//list($nbrprop) = @spip_fetch_array($ttligne);
+	if (isset($compte['total'])) $nbrprop=$compte['total'];
+		else $nbrprop=0;
+
+	$result = sql_select(array("id_forum","titre","id_thread"), // rows
+						"spip_forum", // from
+						"statut='prop'", //where
+						"", // groupby
+						array("date_heure"), // orderby
+						"0,10"); // limit
 
 	$aff='';
 	if($nbrprop) {
@@ -278,7 +302,7 @@ function posts_proposes_attente_moderation() {
 			. "\n<div class='bandeau_rubriques' style='z-index: 1;'>"
 			. bandeau_titre_boite2(_L('poste_valide'),"gaf_p_prop.gif",'','',false)
 			. "<div class='plan-articles'>";
-		
+
 		while($row = sql_fetch($result))
 			{
 			$idprop=$row['id_forum'];
@@ -288,7 +312,7 @@ function posts_proposes_attente_moderation() {
 			$ico_prop = ($idprop==$idthread) ? "gaf_sujet-12.gif" : "gaf_post-12.gif" ;
 			$aff.= "<a href='".$urlprop."'>".couper($titreprop,30)."</a>\n";
 			}
-		
+
 		if($nbrprop>10) { $aff.= _T('spipbb:etplus'); }
 		$aff.= "</div></div>\n";
 	}
@@ -296,7 +320,7 @@ function posts_proposes_attente_moderation() {
 } // posts_proposes_attente_moderation
 
 // ------------------------------------------------------------------------------
-# contenu : liste des modos	
+# contenu : liste des modos
 // ------------------------------------------------------------------------------
 function liste_moderateurs($modos,$id_salon="",$id_art="") {
 	spipbb_log("entree:".$id_salon.":".$id_art.":".$modos,1,"list_modo");
@@ -304,15 +328,23 @@ function liste_moderateurs($modos,$id_salon="",$id_art="") {
 
 	# sur page sujet, recherche rub de art (du thread en cours) + auteurs
 	if (empty($id_salon) and !empty($id_art)) {
+		/* c: 7/2/8 compatibilite pg_sql
 		$r_s = sql_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_art");
+		*/
+		$r_s = sql_select("id_rubrique","spip_articles","id_article=$id_art");
 		if(sql_count($r_s)) {
 			$row=sql_fetch($r_s);
 			$id_salon = $row['id_rubrique'];
 		}
 		#auteurs article
-		$result = sql_query("SELECT a.id_auteur, a.nom, a.statut 
-							FROM spip_auteurs as a, spip_auteurs_articles as b 
+		/* c: 7/2/8 compatibilite pg_sql
+		$result = sql_query("SELECT a.id_auteur, a.nom, a.statut
+							FROM spip_auteurs as a, spip_auteurs_articles as b
 							WHERE a.id_auteur=b.id_auteur AND b.id_article=$id_art");
+		*/
+		$result = sql_select(array("a.id_auteur","a.nom","a.statut"), // rows
+							array("spip_auteurs as a","spip_auteurs_articles as b"), // from
+							"a.id_auteur=b.id_auteur AND b.id_article=$id_art"); // where
 		while ($ro = sql_fetch($result)) {
 			$modos[$ro['id_auteur']]['nom'] = $ro["nom"];
 			$modos[$ro['id_auteur']]['statut'] = bonhomme_statut($ro);
@@ -328,10 +360,14 @@ function liste_moderateurs($modos,$id_salon="",$id_art="") {
 
 	# admins rubrique
 	if ($id_salon) {
-
-		$res = sql_query("SELECT DISTINCT A.nom, A.id_auteur, A.statut 
-							FROM  spip_auteurs AS A, spip_auteurs_rubriques AS B 
+		/* c: 7/2/8 compatibilite pg_sql
+		$res = sql_query("SELECT DISTINCT A.nom, A.id_auteur, A.statut
+							FROM  spip_auteurs AS A, spip_auteurs_rubriques AS B
 							WHERE $where_modos A.id_auteur=B.id_auteur AND id_rubrique=$id_salon");
+		*/
+		$res = sql_select(array("DISTINCT A.nom","A.id_auteur","A.statut"), // rows
+						array("spip_auteurs AS A","spip_auteurs_rubriques AS B"), // from
+						"A.id_auteur=B.id_auteur AND id_rubrique=$id_salon"); //where
 		if (sql_count($res)) { // c: 18/12/7 count un peu inutile car le while fait quasi le meme test
 			while ($row = sql_fetch($res)) {
 				$modos[$row['id_auteur']]['nom'] = $row['nom'];
@@ -364,10 +400,16 @@ function alerte_maintenance() {
 				$datime=date("d/m/y H:i",@filemtime(_DIR_SESSIONS.$file));
 				$art_mt=$match[1];
 				$aut_mt=$match[2];
+				/* c: 7/2/8 compatibilite pg_sql
 				$req=sql_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$aut_mt");
 				$row=sql_fetch($req);
+				*/
+				$row = sql_fetsel("nom","spip_auteurs","id_auteur=$aut_mt");
+				/* c: 7/2/8 compatibilite pg_sql
 				$req2=sql_query("SELECT titre FROM spip_articles WHERE id_article=$art_mt");
 				$row2=sql_fetch($req2);
+				*/
+				$row2 = sql_fetsel("titre","spip_articles","id_article=$art_mt");
 
 				$aff = "<br />"
 					. debut_cadre_trait_couleur("../"._DIR_IMG_SPIPBB."gaf_verrou2.gif",true,"",_T('spipbb:maintenance'))
@@ -411,7 +453,7 @@ function spipbb_admin_gauche($script,$modules) {
 			$nom = _T('spipbb:admin_action_'.$nom) ; // on traduit le nom de chaque action(exec)
 
 			if ( $script <> $file ) { $lien = generer_url_ecrire($file); }
-			else { $lien="0"; } // pas de lien sur l'action en cours ! 
+			else { $lien="0"; } // pas de lien sur l'action en cours !
 
 			if($icone) {
 				$icone = http_img_pack($icone,""," border='0' align='absmiddle'")."\n";

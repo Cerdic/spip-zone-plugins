@@ -55,12 +55,12 @@ function action_spipbb_admin_reconfig()
 	}
 
 #	if ( ($action=="save") AND spipbb_is_configured() ) {
-# h. pourquoi ce controle 
+# h. pourquoi ce controle
 # il y a un controle avant et apres cette "action" ! et vu les conditions de cette
 # fonction on ne peut atteindre la reecriture de la config !!
 
 # Il serait bien de pourvoir renvoyer en arg de $redirige un code d'erreur
-# interpreter dans spipbb_cofiguration pour indiquer (en rouge) l'objet qui 
+# interpreter dans spipbb_cofiguration pour indiquer (en rouge) l'objet qui
 # empeche la config : "vous n'avez pas remplis ce champs, choisir ceci ... " !!?
 #(voir gafospip)
 
@@ -68,7 +68,7 @@ function action_spipbb_admin_reconfig()
 	if ($action=="save") {
 
 		$reconf=false;
-		
+
 		if (($config_spipbb=_request('config_spipbb'))
 			and $config_spipbb!=$GLOBALS['spipbb']['configure']) {
 			$GLOBALS['spipbb']['configure']=$config_spipbb;
@@ -82,20 +82,20 @@ function action_spipbb_admin_reconfig()
 
 		if ((strlen($id_groupe_mot=_request('id_groupe_mot')))
 				and intval($id_groupe_mot)!=$GLOBALS['spipbb']['id_groupe_mot']) {
-			
+
 			# solution boiteuse (au 1/12/07) ; peut etre revoir l_ensemble !
 			# Mais il est important de conserver la correspondance article/post
 			# avec leur mot-clef associes (ferme et annonce)
-			
+
 			# on memorise le precedent id_groupe
 			$id_groupe_premodif = $GLOBALS['spipbb']['id_groupe_mot'];
-				
+
 			$GLOBALS['spipbb']['id_groupe_mot']=intval($id_groupe_mot);
 			$reconf=true;
 		}
 		else if ( empty($GLOBALS['spipbb']['id_groupe_mot']) and
 				(strlen($nom_groupe_mot=trim(_request('nom_groupe_mot')))) ) {
-				
+
 				// on cherche s'il n'existe pas deja
 				$row = sql_fetsel('id_groupe','spip_groupes_mots', "titre = '$nom_groupe_mot'" ,'','','1');
 				if (!$row) { // Celui la n'existe pas
@@ -112,7 +112,7 @@ function action_spipbb_admin_reconfig()
 				}
 				#
 				$id_groupe_premodif='non';
-				
+
 				$GLOBALS['spipbb']['id_groupe_mot'] = $row['id_groupe'];
 				// on cree les mots cles associes
 				$row = sql_fetsel('count(*) AS total','spip_mots',
@@ -126,19 +126,19 @@ function action_spipbb_admin_reconfig()
 		}
 		if ((strlen($id_mot_ferme=_request('id_mot_ferme')))
 			and intval($id_mot_ferme)!=$GLOBALS['spipbb']['id_mot_ferme']) {
-			
+
 			#on memorise le precedent mot
 			$id_ferme_premodif = $GLOBALS['spipbb']['id_mot_ferme'];
-			
+
 			$GLOBALS['spipbb']['id_mot_ferme']=intval($id_mot_ferme);
 			$reconf=true;
 		}
 		if ((strlen($id_mot_annonce=_request('id_mot_annonce')))
 			and intval($id_mot_annonce)!=$GLOBALS['spipbb']['id_mot_annonce']) {
-			
+
 			#on memorise le precedent mot
 			$id_annonce_premodif = $GLOBALS['spipbb']['id_mot_annonce'];
-			
+
 			$GLOBALS['spipbb']['id_mot_annonce']=intval($id_mot_annonce);
 			$reconf=true;
 		}
@@ -225,27 +225,27 @@ function action_spipbb_admin_reconfig()
 			$GLOBALS['spipbb']['affiche_bouton_rss']=$affiche_bouton_rss;
 			$reconf=true;
 		}
-		
+
 		# scoty gaf_ecrireinstall 16/11/07 :
 		# gestion du support de champs supp. sur : extra ou table
-		# Cette table ($table_support) : 
-		# (cree par autre plugin ou spip_auteurs apres tout ??!! ou sur spipbb ??? ) 
+		# Cette table ($table_support) :
+		# (cree par autre plugin ou spip_auteurs apres tout ??!! ou sur spipbb ??? )
 		# sert de stockage des champs supplementaires auteurs,
 		# certains sont requis par spipbb, d_autres sont optionnels
 		# pour la fiche "profil" des visiteurs (et tous auteurs spip !)
-		
+
 		$support_auteurs = _request('support_auteurs');
 		$table_support = _request('table_support');
-		
-		if ( !empty($support_auteurs) 
+
+		if ( !empty($support_auteurs)
 			AND ( ($support_auteurs!=$GLOBALS['spipbb']['support_auteurs']) // soit on modifie le support
-				OR (!empty($table_support) 
-					AND ($support_auteurs=='table') 
+				OR (!empty($table_support)
+					AND ($support_auteurs=='table')
 					AND ($table_support!=$GLOBALS['spipbb']['table_support'])) ) ) // soit on modifie la table et c'est en base
 		{
- 
+
 			if($support_auteurs=='table' AND $table_support) {
-				# verif si "table_support" existe + liste champs existants (oui/non) 
+				# verif si "table_support" existe + liste champs existants (oui/non)
 				$chps_exists = montre_table_support($table_support);
 				# table existe !
 				if(is_array($chps_exists)) {
@@ -255,18 +255,18 @@ function action_spipbb_admin_reconfig()
 							$t_creer_chps[]=$k;
 						}
 					}
-					# si tous les champs supp. sont pas presents 
+					# si tous les champs supp. sont pas presents
 					# on les ajoute a "table_support"
 					if(count($t_creer_chps)) {
 						support_ajout_champs($table_support,$t_creer_chps);
-						# + recherche et transfert des extras (si existent) 
+						# + recherche et transfert des extras (si existent)
 						# vers "table_support".
 						# Permet un passage gestion "extra" a "table"
 						support_maj_extras($table_support,$t_creer_chps);
 					}
-				} 
+				}
 				else {
-					# le choix de "table" est invalide 
+					# le choix de "table" est invalide
 					# puisque table_support n_existe pas !
 					# donc on repasse sur extra !
 					$support_auteurs=='extra';
@@ -277,7 +277,7 @@ function action_spipbb_admin_reconfig()
 				# on est en "extra", alors on nettoie $table_support au cas zou !
 				$table_support = "";
 			}
-			
+
 			$GLOBALS['spipbb']['support_auteurs'] = $support_auteurs;
 			$GLOBALS['spipbb']['table_support'] = $table_support;
 			$reconf=true;
@@ -313,7 +313,7 @@ function action_spipbb_admin_reconfig()
 		}
 		# on limite la taille en cas de mauvaise saisie : max 200 pixels
 		$taille_image_maxi = '200';
-		# sur page sujet 
+		# sur page sujet
 		if ((strlen($taille_avatar_suj=_request('taille_avatar_suj')))
 			and intval($taille_avatar_suj)!=$GLOBALS['spipbb']['taille_avatar_suj']) {
 			$GLOBALS['spipbb']['taille_avatar_suj']=(intval($taille_avatar_suj)>$taille_image_maxi) ? $taille_image_maxi : intval($taille_avatar_suj);
@@ -367,13 +367,13 @@ function action_spipbb_admin_reconfig()
 		# et/ou
 		# d_un changement de mot-clef (-> nouvel ID)
 		#
-		# Rappel :: les mots annonce et ferme peuvent etre associes 
-		# aux articles comme au posts 
+		# Rappel :: les mots annonce et ferme peuvent etre associes
+		# aux articles comme au posts
 		#
 		if($GLOBALS['spipbb']['id_mot_annonce']>0 AND $GLOBALS['spipbb']['id_mot_ferme']>0) {
 			$mots_base=array('annonce','ferme');
 			$mots_preced=array();
-			
+
 			# gafospip ? (passe juste en premiere install !!)
 			if( $id_groupe_premodif=='non' AND strlen($GLOBALS['meta']['gaf_install']) )
 			{
@@ -382,7 +382,7 @@ function action_spipbb_admin_reconfig()
 
 				# cherche mot "annonce" et "ferme" dans ce groupe
 				foreach($mots_base as $m) {
-					$q = spip_query("SELECT id_mot FROM spip_mots 
+					$q = spip_query("SELECT id_mot FROM spip_mots
 									WHERE titre="._q($m)."
 									AND id_groupe="._q($id_groupe_preced));
 					if($row = spip_fetch_array($q)) {
@@ -401,7 +401,7 @@ function action_spipbb_admin_reconfig()
 			}
 
 		}
-		
+
 		# enreg. metas spipbb
 		if ($reconf) spipbb_save_metas();
 
@@ -419,22 +419,22 @@ function recreer_jointures_mots($id_mot_annonce, $id_mot_ferme, $mots_preced, $m
 		$id_nouv = ($m=="annonce")?$id_mot_annonce:$id_mot_ferme;
 		if($mots_preced[$m]!=0) {
 			# recup jointure mot - articles
-			$qa = spip_query("SELECT id_article FROM spip_mots_articles 
+			$qa = spip_query("SELECT id_article FROM spip_mots_articles
 								WHERE id_mot="._q($mots_preced[$m]));
 			while ($ra = spip_fetch_array($qa)) {
 				$id_art = $ra['id_article'];
-				spip_query("INSERT INTO spip_mots_articles (id_mot,id_article) 
+				spip_query("INSERT INTO spip_mots_articles (id_mot,id_article)
 							VALUES ('$id_nouv','$id_art')");
 			}
-			
+
 			# recup jointure mot - posts
-			$qf = spip_query("SELECT id_forum FROM spip_mots_forum 
+			$qf = spip_query("SELECT id_forum FROM spip_mots_forum
 								WHERE id_mot="._q($mots_preced[$m]));
 			while ($rf=spip_fetch_array($qf)) {
 				$id_post = $rf['id_forum'];
-				spip_query("INSERT INTO spip_mots_forum (id_mot,id_forum) 
+				spip_query("INSERT INTO spip_mots_forum (id_mot,id_forum)
 							VALUES ('$id_nouv','$id_post')");
-			}		
+			}
 		}
 	}
 }
@@ -445,10 +445,10 @@ function nettoyer_ante_jointures($mots_preced, $mots_base) {
 	foreach($mots_base as $m) {
 		if($mots_preced[$m]!=0) {
 			# erase - articles
-			$qa = spip_query("DELETE FROM spip_mots_articles 
+			$qa = spip_query("DELETE FROM spip_mots_articles
 								WHERE id_mot="._q($mots_preced[$m]));
 			# erase - posts
-			$qf = spip_query("SELECT id_forum FROM spip_mots_forum 
+			$qf = spip_query("SELECT id_forum FROM spip_mots_forum
 								WHERE id_mot="._q($mots_preced[$m]));
 		}
 	}
@@ -506,12 +506,14 @@ function support_ajout_champs($table_support,$creer_champs) {
 	*/
 	## h. oui pour le controle ;-) mais alors :
 	$table_support = preg_replace($GLOBALS['table_prefix'], '', $table_support);
-	
+
 	$nomtable = "spip_".$table_support;
 	foreach($creer_champs as $chp) {
 			#recup def des champs (dans base/sap_spipbb.php)
 			$def = $GLOBALS['champs_sap_spipbb'][$chp]['sql'];
-			sql_query("ALTER TABLE $nomtable ADD $chp $def");
+			// c: 10/2/8 compat pg_sql
+			//sql_query("ALTER TABLE $nomtable ADD $chp $def");
+			sql_alter("TABLE $nomtable ADD $chp $def");
 	}
 } // support_ajout_champs
 
@@ -525,35 +527,37 @@ function support_maj_extras($table_support,$maj_chps) {
 	$r = sql_select("id_auteur, extra","spip_auteurs");
 	while($sr = sql_fetch($r)) {
 		$extras = unserialize($sr['extra']);
-		$set='';
+		// c: 10/2/8 compat pg_sql
+		$set=array();
 		# pour chq champs gaf en maj ou crea (pas les anciens)
 		foreach($maj_chps as $chp) {
 			if($chp=='date_crea_spipbb' && $extras['date_crea_spipbb']=='') {
-				$set.=",".$chp."=NOW()";
+				$set[$chp]="NOW()";
 			}
 			else {
-				$set.= ",".$chp."="._q($extras[$chp]);
+				$set[$chp]=_q($extras[$chp]);
 			}
 		}
-		$set=substr($set,1);
-		if(strlen($set)>0) { $sep = ","; }
+		//$set=substr($set,1);
+		//if(strlen($set)>0) { $sep = ","; }
 
-		//$q = spip_query("SELECT id_auteur FROM spip_$table_support 
+		//$q = spip_query("SELECT id_auteur FROM spip_$table_support
 		//					WHERE id_auteur=".$sr['id_auteur']);
 		$q = sql_select("id_auteur","spip_$table_support","id_auteur=".$sr['id_auteur']);
 		if($sq=sql_fetch($q)) {
 			if($set!='') {
-				//spip_query("UPDATE spip_$table_support 
+				// c: 10/2/8 compat pg_sql
+				//sql_query("UPDATE spip_$table_support
 				//			SET $set WHERE id_auteur=".$sr['id_auteur']);
-				sql_query("UPDATE spip_$table_support 
-							SET $set WHERE id_auteur=".$sr['id_auteur']);
+				sql_updateq("spip_$table_support",$set,"id_auteur=".$sr['id_auteur']);
+
 			}
 		}
 		else {
-			//spip_query("INSERT INTO spip_$table_support 
+			// c: 10/2/8 compat pg_sql
+			//sql_query("INSERT INTO spip_$table_support
 			//			SET id_auteur=".$sr['id_auteur']." ".$sep.$set);
-			sql_query("INSERT INTO spip_$table_support 
-						SET id_auteur=".$sr['id_auteur']." ".$sep.$set);
+			sql_insertq("spip_$table_support",array_merge(array('id_auteur'=>$sr['id_auteur']),$set) );
 		}
 	}
 } // support_maj_extras

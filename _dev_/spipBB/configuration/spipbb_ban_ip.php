@@ -44,7 +44,9 @@ function configuration_spipbb_ban_ip_dist() {
 	$res .= debut_cadre_relief("", true, "", "<label for='unban_ip'>"._T('spipbb:admin_unban_ip_info')."</label>")
 		. "<select name='unban_ip[]' id='unban_ip' multiple='multiple' size='5' class='forml'>";
 
-	$query=sql_query("SELECT id_ban,ban_ip FROM spip_ban_liste WHERE ban_ip IS NOT NULL ");
+	// c: 10/2/8 compat multibases
+	//$query=sql_query("SELECT id_ban,ban_ip FROM spip_ban_liste WHERE ban_ip IS NOT NULL ");
+	$query=sql_select(array("id_ban","ban_ip"),"spip_ban_liste","ban_ip IS NOT NULL");
 	if ( sql_count($query) ) {
 		while ($row = sql_fetch($query)) {
 			$res .= "<option value='".$row['id_ban']."'>".$row['ban_ip']."</option>";
@@ -64,7 +66,7 @@ function configuration_spipbb_ban_ip_dist() {
 	}
 	else { // 1.9.2
 		$res = ajax_action_post('spipbb_configurer', 'spipbb_ban_ip', 'spipbb_admin_gere_ban','',$res,_T('bouton_valider'),'  class="fondo" ') ;
-		return ajax_action_greffe('spipbb_configurer-spipbb_ban_ip', $res); // creer action : "ban" a  la facon de action/configurer 
+		return ajax_action_greffe('spipbb_configurer-spipbb_ban_ip', $res); // creer action : "ban" a  la facon de action/configurer
 	}
 } // configuration_spipbb_ban_ip_dist
 

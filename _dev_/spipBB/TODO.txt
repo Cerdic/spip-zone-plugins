@@ -16,8 +16,8 @@ Interface Privée - Import PhpBB :
 -* 0.5 Import phpBB : Mettre en option l'import des auteurs (remplacer l'id par le nom dans les messages)
 
 Interface publique - Générale :
--* 0.4.4 Affichage du profil a revoir
--* 0.4.5 nouveau message : le sujet est prérempli avec le titre du forum. Ne serait-il pas mieux d'avoir cette zone à blanc, et d'imposer qu'elle ne  soit pas laissée à vide ? (dans le cas d'un nouveau sujet, pas d'une  réponse)
+-* 0.4.5 Affichage du profil a revoir
+-* 0.4.6 nouveau message : le sujet est prérempli avec le titre du forum. Ne serait-il pas mieux d'avoir cette zone à blanc, et d'imposer qu'elle ne  soit pas laissée à vide ? (dans le cas d'un nouveau sujet, pas d'une  réponse)
 -* 0.4.7 j'ai un doute sur la fonctionnalité "ne plus suivre les sujets" page profil publique
 -* 0.4.9 Manque icone postit interface publique
 -* 0.5 L’idéal serait de pouvoir ajouter une photo ou un document dans un post ou réponse à celui-ci et ce serait parfait

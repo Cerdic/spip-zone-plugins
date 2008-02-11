@@ -22,20 +22,20 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 /*
-[fr] Ce fichier est inclu pour les problemes de compatibilite, 
+[fr] Ce fichier est inclu pour les problemes de compatibilite,
 lorsqu'on est en 192 et que l'on veut utiliser le nouveau plugin
 Il utilise du code importe de Spip 193 [SVN] et de spip 192
 La plupart du code est donc Copyright les auteurs de SPIP
-Les function_exists sont ajoutes pour resoudre les conflits de 
-redefinitions lorsque d'autres plugins actifs utilisent ce type 
+Les function_exists sont ajoutes pour resoudre les conflits de
+redefinitions lorsque d'autres plugins actifs utilisent ce type
 de mecanisme de compatibilite.
 svn://zone.spip.org/spip-zone/_dev_/compat/ est insuffisant pour nos besoins.
 [en] This file is included to solve compatibility problems
 when used with SPIP 1.9.2 and this new plugin.
 I used code copied from SPIP 193 [SVN] and Spip 192
 therefore most of the code is copyright SPIP authors.
-The function_exisits was added to protect from conflicts with 
-other plugins that also redefine the same function for the same 
+The function_exisits was added to protect from conflicts with
+other plugins that also redefine the same function for the same
 reasons aka compatibility.
 svn://zone.spip.org/spip-zone/_dev_/compat/ isn't enough for our needs.
 */
@@ -57,7 +57,7 @@ include_spip('base/db_mysql'); // SPIP 192
 
 //
 // Principales fonctions definies dans l'ordre alphanumerique :
-// 
+//
 // sql_count
 // sql_delete
 // sql_fetch
@@ -67,7 +67,7 @@ include_spip('base/db_mysql'); // SPIP 192
 // sql_query
 // sql_select
 // sql_updateq
-// 
+//
 //
 
 #------------------------------------------------------------#
@@ -75,7 +75,7 @@ include_spip('base/db_mysql'); // SPIP 192
 // from req/mysql.php 193
 #------------------------------------------------------------#
 if (!function_exists('sql_fetsel')) {
-function sql_fetsel($select, $from = array(), $where = array(), $groupby = '', 
+function sql_fetsel($select, $from = array(), $where = array(), $groupby = '',
 	$orderby = array(), $limit = '', $having = array(), $serveur='')
 {
 	return spip_abstract_fetsel($select,$from,$where,$groupby,$orderby,$limit,'',$having,'','',$serveur) ;
@@ -209,7 +209,7 @@ function trace_query_chrono($m1, $m2, $query, $result)
 	if ($explain) $explain = "<table border='1'>$explain</table>";
 	$result = str_replace('Resource id ','',$result);
 	$query = preg_replace('/([a-z)`])\s+([A-Z])/', '$1<br />$2',$query);
-	$tableau_des_temps[] = array(sprintf("%3f", $dt), 
+	$tableau_des_temps[] = array(sprintf("%3f", $dt),
 				     sprintf(" %3de", $nb),
 				     $query,
 				     $explain,
@@ -285,7 +285,7 @@ function sql_fetch($res, $serveur='')
 #------------------------------------------------------------#
 if (!function_exists('sql_getfetsel')) {
 function sql_getfetsel(
-	$select, $from = array(), $where = array(), $groupby = '', 
+	$select, $from = array(), $where = array(), $groupby = '',
 	$orderby = array(), $limit = '', $having = array(), $serveur='')
 {
 	$r = sql_fetch(sql_select($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur), $serveur);
@@ -475,7 +475,7 @@ function spip_mysql_quote($v)
 #------------------------------------------------------------#
 if (!function_exists('_q')) {
 function _q ($a) {
-	return (is_int($a)) ? strval($a) : 
+	return (is_int($a)) ? strval($a) :
 		(!is_array($a) ? ("'" . addslashes($a) . "'")
 		 : join(",", array_map('_q', $a)));
 } } // _q
@@ -528,4 +528,19 @@ function sql_countsel($from = array(), $where = array(),
 	return $r;
 } } // sql_countsel
 
+
+// sql_alter
+#------------------------------------------------------------#
+if (!function_exists('sql_alter')) {
+function sql_alter($query, $serveur='') {
+	return spip_mysql_query("ALTER ".$query);
+} } // // sql_alter
+
+// sql_drop_table
+#------------------------------------------------------------#
+if (!function_exists('sql_drop_table')) {
+function sql_drop_table($table,$exists='', $serveur='') {
+	if ($exist) $exist =" IF EXISTS";
+	return spip_mysql_query("DROP TABLE$exist $table", $serveur);
+}} // sql_drop_table
 ?>

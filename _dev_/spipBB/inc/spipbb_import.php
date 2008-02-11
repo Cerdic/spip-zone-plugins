@@ -45,7 +45,7 @@ function import_load_metas($origine,$spiprubid=0)
 	{
 		$spipbb_import = unserialize($GLOBALS['meta']['spipbb_import']);
 		// ce n'est pas la fonction pour faire cela !
-		// rappel de connexion 
+		// rappel de connexion
 		//$spipbb_import['phpbb_connect'] =
 		//@mysql_connect($spipbb_fromphpbb['phpbb_host'],$spipbb_fromphpbb['phpbb_login'],$spipbb_fromphpbb['phpbb_pass']) or
 		//	die(_T('spipbb:fromphpbb_erreur_db_phpbb'));
@@ -211,7 +211,7 @@ function import_genere_liste_sources_phpbb(&$radio) {
 				@include_once($filename);
 				if (defined('PHPBB_INSTALLED') and (substr($dbms,0,5)=="mysql") ) {
 					$conf['filename'] = $filename;
-					$contexte = array( 
+					$contexte = array(
 						'filename'=>$filename,
 						'key'=>$radio,
 						);
@@ -227,7 +227,8 @@ function import_genere_liste_sources_phpbb(&$radio) {
 						"config_name"	=> "varchar(255)",
 						"config_value" 	=> "varchar(255)",
 						);
-	$req=sql_query("SHOW TABLES LIKE '%_config'");
+	// c: 10/2/8 compat multibases
+	$req=sql_showtable("%_config");
 	$liste_config=array();
 	while ($row = sql_fetch($req)) {
 		// on compare la desc avec le mini puis la valeur
@@ -248,7 +249,7 @@ function import_genere_liste_sources_phpbb(&$radio) {
 				//$structure['field'][$k]=$champ;
 				$idem = ($struc_mini_config_phpbb[$k]==$champ);
 			}
-			if ($idem) { 
+			if ($idem) {
 				$phpbbversion=sql_fetsel("config_value",$table_config,"config_name='version'");
 
 				// chryjs :le 25/11/07 il ne reste plus qu'a ajouter au formulaire et recuperer les infos de config a l'arrivee
@@ -258,7 +259,7 @@ function import_genere_liste_sources_phpbb(&$radio) {
 					$avatar_path=sql_fetsel("config_value",$table_config,"config_name='avatar_path'");
 					$script_path=sql_fetsel("config_value",$table_config,"config_name='script_path'");
 					//echo $phpbbversion['config_value'];script_path
-					$contexte = array( 
+					$contexte = array(
 						'avatar_path'=>$script_path['config_value']."/".$avatar_path['config_value'],
 						'tablename'=>$table_config,
 						'key'=>$radio,
@@ -291,7 +292,7 @@ function import_genere_liste_sources_phorum(&$radio) {
 				define('PHORUM',true); // allow full inclusion
 				@include_once($filename);
 				if ($PHORUM AND is_array($PHORUM)) {
-					$contexte = array( 
+					$contexte = array(
 						'filename'=>$filename,
 						'key'=>$radio,
 						);
@@ -329,11 +330,11 @@ function import_genere_liste_sources_phorum(&$radio) {
 				//$structure['field'][$k]=$champ;
 				$idem = ($struc_mini_config_phorum[$k]==$champ);
 			}
-			if ($idem) { 
+			if ($idem) {
 				$phorumversion=sql_fetsel("data",$table_config,"name='internal_version'"); // ex: 2007031400
 
 				if ($phorumversion) {
-					$contexte = array( 
+					$contexte = array(
 						'tablename'=>$table_config,
 						'key'=>$radio,
 						);
@@ -352,20 +353,20 @@ function import_genere_liste_sources_phorum(&$radio) {
 // ------------------------------------------------------------------------------
 function bbcode_to_raccourcis_spip($texte) {
 	$bbcode = array(
-	"[list]", "[*]", "[/list]", 
-	"[img]", "[/img]", 
-	"[b]", "[/b]", 
-	"[u]", "[/u]", 
+	"[list]", "[*]", "[/list]",
+	"[img]", "[/img]",
+	"[b]", "[/b]",
+	"[u]", "[/u]",
 	"[i]", "[/i]",
 	'[/size]', '[/color]',
 	"[code]", "[/code]",
 	"[/quote]");
 
 	$spipcode = array(
-	"", "-", "", 
-	"<img>", "</img>", 
-	"{{", "}}", 
-	"{_", "_}", 
+	"", "-", "",
+	"<img>", "</img>",
+	"{{", "}}",
+	"{_", "_}",
 	"{", "}",
 	'', '',
 	"<code>", "</code>",
@@ -541,7 +542,7 @@ function import_origine_metas_phorum()
 }
 
 // ------------------------------------------------------------------------------
-// [fr] 
+// [fr]
 // ------------------------------------------------------------------------------
 function import_rappel_connexion()
 {

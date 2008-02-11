@@ -1,6 +1,8 @@
 ﻿2008-02-11  chryjs  <chryjs!@!free!.!fr>
 
  * Autres corrections sur controle des tables cf bug report http://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=545 + logs
+ * Evolution majeure : Adaptation des requetes pour passage en multi-bases (mysql/pg/sqlite)
+ * Passage en 0.4.4 : grosses adaptations + decalage dans cycle d'evolutions
 
 
 2008-02-07  chryjs  <chryjs!@!free!.!fr>

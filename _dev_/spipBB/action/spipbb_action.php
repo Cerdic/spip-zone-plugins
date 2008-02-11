@@ -51,12 +51,16 @@ function action_spipbb_action_sujetannonce($arg) {
 	global $redirect;
 	global $id_mot_annonce, $mode;
 	$arg = intval($arg); // id_sujet
-	
+
 	if ($mode=="annonce") {
-		sql_query("INSERT INTO spip_mots_forum (id_mot,id_forum) VALUES ('$id_mot_annonce','$arg')");
+		// c: 10/2/8 compat pg_sql
+		//sql_query("INSERT INTO spip_mots_forum (id_mot,id_forum) VALUES ('$id_mot_annonce','$arg')");
+		sql_insertq("spip_mots_forum",array('id_mot'=> $id_mot_annonce,'id_forum'=>'$arg'));
 	}
 	elseif ($mode=="desannonce") {
-		sql_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_mot_annonce AND id_forum=$arg");
+		// c: 10/2/8 compat pg_sql
+		//sql_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_mot_annonce AND id_forum=$arg");
+		sql_delete("spip_mots_forum","id_mot=$id_mot_annonce AND id_forum=$arg");
 	}
 	redirige_par_entete(rawurldecode($redirect));
 }
@@ -68,12 +72,16 @@ function action_spipbb_action_forumannonce($arg) {
 	global $redirect;
 	global $id_mot_annonce, $mode;
 	$arg = intval($arg); // id_article
-	
+
 	if ($mode=="annonce") {
-		sql_query("INSERT INTO spip_mots_articles (id_mot,id_article) VALUES ('$id_mot_annonce','$arg')");
+		// c: 10/2/8 compat pg_sql
+		//sql_query("INSERT INTO spip_mots_articles (id_mot,id_article) VALUES ('$id_mot_annonce','$arg')");
+		sql_insertq("spip_mots_articles",array('id_mot'=> $id_mot_annonce,'id_article'=>$arg));
 	}
 	elseif ($mode=="desannonce") {
-		sql_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_mot_annonce AND id_article=$arg");
+		// c: 10/2/8 compat pg_sql
+		//sql_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_mot_annonce AND id_article=$arg");
+		sql_delete("spip_mots_articles","id_mot=$id_mot_annonce AND id_article=$arg");
 	}
 	redirige_par_entete(rawurldecode($redirect));
 }
@@ -86,31 +94,37 @@ function action_spipbb_action_forumannonce($arg) {
 function action_spipbb_action_fermelibere($arg) {
 	if(!function_exists('verif_article_ferme'))
 		include_spip("inc/spipbb_presentation");
-	
+
 	global $redirect;
 	global $mode, $id_mot_ferme;
 	$arg = intval($arg); // id_article
-	
+
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	$deja_ferme = verif_article_ferme($arg, $id_mot_ferme);
 	$f_gafart = _DIR_SESSIONS."spipbbart_$arg-$id_auteur.lck";
-	
-	if($mode=="ferme" OR $deja_ferme=='')
-		{ sql_query("INSERT INTO spip_mots_articles (id_mot,id_article) VALUES ('$id_mot_ferme','$arg')"); }
+
+	if($mode=="ferme" OR $deja_ferme=='') {
+		// c: 10/2/8 compat pg_sql
+		//sql_query("INSERT INTO spip_mots_articles (id_mot,id_article) VALUES ('$id_mot_ferme','$arg')");
+		sql_insertq("spip_mots_articles",array('id_mot'=> $id_mot_ferme,'id_article'=>$arg));
+	}
 	if($mode=="maintenance")
 		// pose le verrou de maintenance
 		{ spip_touch($f_gafart); }
-	
-	
-	if($mode=="libere")
-		{ sql_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_mot_ferme AND id_article=$arg"); }
+
+
+	if($mode=="libere") {
+		// c: 10/2/8 compat pg_sql
+		//sql_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_mot_ferme AND id_article=$arg");
+		sql_delete("spip_mots_articles","id_mot=$id_mot_ferme AND id_article=$arg");
+	}
 	if($mode=="libere_maintenance")
 		// effacer le verrou de maintenance
 		{
 		if(file_exists($f_gafart))
 			unlink($f_gafart);
 		}
-	
+
 	redirige_par_entete(rawurldecode($redirect));
 }
 
@@ -118,17 +132,23 @@ function action_spipbb_action_fermelibere($arg) {
 function action_spipbb_action_ferlibsujet($arg) {
 
 	#include_spip("inc/spipbb_presentation");
-	
+
 	global $redirect;
 	global $mode, $id_mot_ferme;
 	$arg = intval($arg); // id_sujet
-	
-	if($mode=="ferme" OR $deja_ferme=='')
-		{ sql_query("INSERT INTO spip_mots_forum (id_mot,id_forum) VALUES ('$id_mot_ferme','$arg')"); }
-	
-	if($mode=="libere")
-		{ sql_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_mot_ferme AND id_forum=$arg"); }
-	
+
+	if($mode=="ferme" OR $deja_ferme=='') {
+		// c: 10/2/8 compat pg_sql
+		//sql_query("INSERT INTO spip_mots_forum (id_mot,id_forum) VALUES ('$id_mot_ferme','$arg')");
+		sql_insertq("spip_mots_forum",array('id_mot'=> $id_mot_ferme,'id_forum'=> $arg));
+	}
+
+	if($mode=="libere") {
+		// c: 10/2/8 compat pg_sql
+		//sql_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_mot_ferme AND id_forum=$arg");
+		sql_delete("spip_mots_forum","id_mot=$id_mot_ferme AND id_forum=$arg");
+	}
+
 	redirige_par_entete(rawurldecode($redirect));
 }
 ?>

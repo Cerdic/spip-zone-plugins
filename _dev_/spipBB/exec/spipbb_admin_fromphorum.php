@@ -144,7 +144,7 @@ function spipbb_fromphorum_formulaire($conf=array())
 					$conf['dppasswd'] = $PHORUM['DBCONFIG']['password'];
 					$conf['table_prefix'] = $PHORUM['DBCONFIG']['table_prefix']."_";
 					$phorum_conf[]=$conf;
-					$contexte = array( 
+					$contexte = array(
 						'filename'=>$conf['filename'],
 						'key'=>$radio,
 						);
@@ -161,13 +161,14 @@ function spipbb_fromphorum_formulaire($conf=array())
 //						"type"	=> "enum('V','S')",
 						"data" 	=> "text",
 						);
-	$req=sql_query("SHOW TABLES LIKE '%_settings'");
+	// c: 7/2/8 compat pg_sql
+	$req=sql_showtable("%_settings");
 	$liste_config=array();
 	while ($row = sql_fetch($req)) {
 		// on compare la desc avec le mini puis la valeur
 		$liste_config[]=join("",$row);
 	}
-	
+
 	reset($liste_config);
 	while ( list(,$table_config) = each($liste_config) ) {
 		if ($table_config) {
@@ -183,14 +184,14 @@ function spipbb_fromphorum_formulaire($conf=array())
 				//$structure['field'][$k]=$champ;
 				$idem = ($struc_mini_config_phorum[$k]==$champ);
 			}
-			if ($idem) { 
-				//echo $table_config; 
+			if ($idem) {
+				//echo $table_config;
 				$phorumversion=sql_fetsel("data",$table_config,"name='internal_version'"); // ex: 2007031400
-				
+
 				// chryjs :le 25/11/07 il ne reste plus qu'a ajouter au formulaire et recuperer les infos de config a l'arrivee
-				
+
 				if ($phorumversion) {
-					$contexte = array( 
+					$contexte = array(
 						'tablename'=>$table_config,
 						'key'=>$radio,
 						);
@@ -210,7 +211,7 @@ function spipbb_fromphorum_formulaire($conf=array())
 	include_spip('inc/editer_article');
 	$choix_rubrique = editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider);
 
-	$contexte = array( 
+	$contexte = array(
 			'lien_action' => generer_action_auteur('spipbb_fromphorum',$id_rubrique,$retour) ,
 			'exec_script' => 'spipbb_fromphorum',
 			'phorum_liste_fichiers' => $liste_fichiers,

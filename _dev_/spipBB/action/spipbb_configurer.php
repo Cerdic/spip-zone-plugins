@@ -45,6 +45,7 @@ function appliquer_modifs_config($params='') {
 		if ( $liste_user AND is_array($liste_user) ) {
 			$liste_id=join(",",$liste_user);
 			// construction de  INSERT INTO spip_ban_liste ( ban_login ) (SELECT login from spip_auteurs)
+			// c: 10/2/8 ca fonctionne partout ca ? IGNORE ?
 			$req= sql_query("INSERT IGNORE INTO spip_ban_liste ( ban_login ) "
 				. "SELECT login from spip_auteurs "
 				. "WHERE id_auteur IN ($liste_id) ");
@@ -54,8 +55,11 @@ function appliquer_modifs_config($params='') {
 	if ( $liste_unban=_request('unban_user') ) {
 		if ( $liste_unban AND is_array($liste_unban) ) {
 			$ban_id=join(",",$liste_unban);
-			$req=sql_query("UPDATE spip_ban_liste SET ban_login=NULL WHERE id_ban IN ($ban_id)");
-			$req_nettoie=sql_query("DELETE FROM spip_ban_liste WHERE ban_login IS NULL AND ban_ip IS NULL AND ban_email IS NULL");
+			// c: 10/2/8 compat pg_sql
+			//$req=sql_query("UPDATE spip_ban_liste SET ban_login=NULL WHERE id_ban IN ($ban_id)");
+			$req=sql_updateq("spip_ban_liste",array('ban_login'=>"NULL"),"id_ban IN ($ban_id)");
+			//$req_nettoie=sql_query("DELETE FROM spip_ban_liste WHERE ban_login IS NULL AND ban_ip IS NULL AND ban_email IS NULL");
+			$req_nettoie=sql_delete("spip_ban_liste","ban_login IS NULL AND ban_ip IS NULL AND ban_email IS NULL");
 		}
 	}
 
@@ -143,7 +147,9 @@ function appliquer_modifs_config($params='') {
 			while (list(,$adr)=each($ip_list)) {
 				$adr=trim($adr);
 				if (!empty($adr)) {
-					$req= sql_query("INSERT IGNORE INTO spip_ban_liste SET ban_ip='$adr' ");
+					// c: 10/2/8 compat pg_sql
+					//$req= sql_query("INSERT IGNORE INTO spip_ban_liste SET ban_ip='$adr' ");
+					$req= sql_insertq("spip_ban_liste",array('ban_ip'=>$adr) );
 				}
 			} // while
 		} // if $adresse
@@ -152,8 +158,11 @@ function appliquer_modifs_config($params='') {
 	if ( $liste_unban=_request('unban_ip') ) {
 		if ( $liste_unban AND is_array($liste_unban) ) {
 			$liste_id=join(",",$liste_unban);
-			$req=sql_query("UPDATE spip_ban_liste SET ban_ip=NULL WHERE id_ban IN ($liste_id)");
-			$req_nettoie=sql_query("DELETE FROM spip_ban_liste WHERE ban_login IS NULL AND ban_ip IS NULL AND ban_email IS NULL");
+			// c: 10/2/8 compat pg_sql
+			//$req=sql_query("UPDATE spip_ban_liste SET ban_ip=NULL WHERE id_ban IN ($liste_id)");
+			$req=sql_updateq("spip_ban_liste",array('ban_ip'=>"NULL"),"id_ban IN ($liste_id)");
+			//$req_nettoie=sql_query("DELETE FROM spip_ban_liste WHERE ban_login IS NULL AND ban_ip IS NULL AND ban_email IS NULL");
+			$req_nettoie=sql_delete("spip_ban_liste","ban_login IS NULL AND ban_ip IS NULL AND ban_email IS NULL");
 		}
 	}
 
@@ -168,7 +177,7 @@ function appliquer_modifs_config($params='') {
 				// [fr] Cet test d'ereg est base sur un exemple de php@unreelpro.com
 				// decrit dans les annotations de la documentation php sur php.net (section ereg)
 				// [en] This ereg match is based on one by php@unreelpro.com
-				// contained in the annotated php manual at php.net (ereg section) 
+				// contained in the annotated php manual at php.net (ereg section)
 				//
 				if (preg_match('/^(([a-z0-9&\'\.\-_\+])|(\*))+@(([a-z0-9\-])|(\*))+\.([a-z0-9\-]+\.)*?[a-z]+$/is', trim($email_list_temp[$i])))
 				{
@@ -179,7 +188,9 @@ function appliquer_modifs_config($params='') {
 			while (list(,$adr)=each($email_list)) {
 				$adr=trim($adr);
 				if (!empty($adr)) {
-					$req= sql_query("INSERT IGNORE INTO spip_ban_liste SET ban_email='$adr' ");
+					// c: 10/2/8 compat pg_sql
+					//$req= sql_query("INSERT IGNORE INTO spip_ban_liste SET ban_email='$adr' ");
+					$req= sql_insertq("spip_ban_liste",array('ban_email'=>$adr));
 				}
 			} // while
 		} // if $adresse
@@ -188,8 +199,11 @@ function appliquer_modifs_config($params='') {
 	if ( $liste_unban=_request('unban_email') ) {
 		if ( $liste_unban AND is_array($liste_unban) ) {
 			$liste_id=join(",",$liste_unban);
-			$req=sql_query("UPDATE spip_ban_liste SET ban_email=NULL WHERE id_ban IN ($liste_id)");
-			$req_nettoie=sql_query("DELETE FROM spip_ban_liste WHERE ban_login IS NULL AND ban_ip IS NULL AND ban_email IS NULL");
+			// c: 10/2/8 compat pg_sql
+			//$req=sql_query("UPDATE spip_ban_liste SET ban_email=NULL WHERE id_ban IN ($liste_id)");
+			$req=sql_updateq("spip_ban_liste",array('ban_email'=>"NULL"),"id_ban IN ($liste_id)");
+			//$req_nettoie=sql_query("DELETE FROM spip_ban_liste WHERE ban_login IS NULL AND ban_ip IS NULL AND ban_email IS NULL");
+			$req_nettoie=sql_delete("spip_ban_liste","ban_login IS NULL AND ban_ip IS NULL AND ban_email IS NULL");
 		}
 	}
 

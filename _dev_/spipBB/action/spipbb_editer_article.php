@@ -17,21 +17,21 @@ function action_spipbb_editer_article() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	// si id_article n'est pas un nombre, c'est une creation 
+	// si id_article n'est pas un nombre, c'est une creation
 	// mais on verifie qu'on a toutes les données qu'il faut.
 	if (!$id_article = intval($arg)) {
 		$id_parent = _request('id_parent');
 		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 		if (!($id_parent AND $id_auteur)) redirige_par_entete('./');
 		$id_article = insert_article($id_parent);
-		
+
 		# cf. GROS HACK ecrire/inc/getdocument
 		# rattrapper les documents associes a cet article nouveau
 		# ils ont un id = 0-id_auteur
-		
+
 ###h. modif
 #		spip_query("UPDATE spip_documents_articles SET id_article = $id_article WHERE id_article = ".(0-$id_auteur));
-	} 
+	}
 
 	// Enregistre l'envoi dans la BD
 	$err = articles_set($id_article);
@@ -69,7 +69,9 @@ function insert_article($id_rubrique) {
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine
 	if (!$id_rubrique = intval($id_rubrique)) {
-		$row = sql_fetch(sql_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
+		// c: 10/2/8 compat pg_sql
+		//$row = sql_fetch(sql_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
+		$row = sql_fetsel("id_rubrique","spip_rubriques","id_parent=0","","0+titre,titre","1");
 		$id_rubrique = $row['id_rubrique'];
 	}
 
@@ -86,7 +88,9 @@ function insert_article($id_rubrique) {
 		}
 	}
 
-	$row = sql_fetch(sql_query("SELECT lang, id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	// c: 10/2/8 compat pg_sql
+	//$row = sql_fetch(sql_query("SELECT lang, id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$row = sql_fetsel(array("lang","id_secteur"),"spip_rubriques","id_rubrique=$id_rubrique");
 
 	$id_secteur = $row['id_secteur'];
 
@@ -116,8 +120,9 @@ function revisions_articles ($id_article, $c=false) {
 	if (!is_array($c)) trop_longs_articles();
 
 	// Si l'article est publie, invalider les caches et demander sa reindexation
-	$t = sql_fetch(sql_query(
-	"SELECT statut FROM spip_articles WHERE id_article=$id_article"));
+	// c: 10/2/8 compat pg_sql
+	//$t = sql_fetch(sql_query("SELECT statut FROM spip_articles WHERE id_article=$id_article"));
+	$t = sql_fetsel("statut","spip_articles","id_article=$id_article");
 	if ($t['statut'] == 'publie') {
 		$invalideur = "id='id_article/$id_article'";
 		$indexation = true;
@@ -137,7 +142,9 @@ function revisions_articles ($id_article, $c=false) {
 		$c);
 
 	if ($r) {
-		sql_query("UPDATE spip_articles SET date_modif=NOW() WHERE id_article="._q($id_article));
+		// c: 10/2/8 compat pg_sql
+		//sql_query("UPDATE spip_articles SET date_modif=NOW() WHERE id_article="._q($id_article));
+		sql_updateq("spip_articles",array('date_modif'=>"NOW()"),"id_article="._q($id_article));
 	}
 
 	return ''; // pas d'erreur
@@ -155,7 +162,9 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
 
-	$s = sql_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article");
+	// c: 10/2/8 compat pg_sql
+	//$s = sql_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article");
+	$s = sql_select(array("statut","id_rubrique"),"spip_articles","id_article=$id_article");
 	$row = sql_fetch($s);
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
@@ -182,9 +191,11 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 
 	// Verifier que la rubrique demandee existe et est differente
 	// de la rubrique actuelle
+	// c: 10/2/8 compat pg_sql
+	// sql_fetch(sql_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_parent")
 	if ($id_parent = _request('id_parent', $c)
 	AND $id_parent != $id_rubrique
-	AND (sql_fetch(sql_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_parent")))) {
+	AND ( sql_fetsel("id_rubrique","spip_rubriques","id_rubrique=$id_parent") ) ) {
 		$champs['id_rubrique'] = $id_parent;
 
 		// si l'article etait publie
@@ -218,10 +229,15 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 
 	// Creer la requete SQL
 	$update = array();
-	foreach ($champs as $champ => $val)
-		$update[] = $champ . '=' . _q($val);
+	foreach ($champs as $champ => $val) {
+		// c: 10/2/8 compat pg_sql
+		//$update[] = $champ . '=' . _q($val);
+		$update[$champ] = _q($val);
+	}
 
-	sql_query("UPDATE spip_articles SET ".join(', ',$update)." WHERE id_article=$id_article");
+	// c: 10/2/8 compat pg_sql
+	//sql_query("UPDATE spip_articles SET ".join(', ',$update)." WHERE id_article=$id_article");
+	sql_updateq("spip_articles", $update, "id_article=$id_article");
 
 	// Si on a deplace l'article
 	// - propager les secteurs
@@ -229,15 +245,22 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	if (isset($champs['id_rubrique'])) {
 		propager_les_secteurs();
 
-		$row = sql_fetch(sql_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
+		// c: 10/2/8 compat pg_sql
+		//$row = sql_fetch(sql_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
+		$row = sql_fetsel(array("lang","langue_choisie"),"spip_articles","id_article=$id_article");
+
 		$langue_old = $row['lang'];
 		$langue_choisie_old = $row['langue_choisie'];
 
 		if ($langue_choisie_old != "oui") {
-			$row = sql_fetch(sql_query("SELECT lang FROM spip_rubriques WHERE id_rubrique="._q($champs['id_rubrique'])));
+			// c: 10/2/8 compat pg_sql
+			//$row = sql_fetch(sql_query("SELECT lang FROM spip_rubriques WHERE id_rubrique="._q($champs['id_rubrique'])));
+			$row = sql_fetsel("lang","spip_rubriques","id_rubrique="._q($champs['id_rubrique']));
 			$langue_new = $row['lang'];
 			if ($langue_new != $langue_old)
-				sql_query("UPDATE spip_articles SET lang='$langue_new' WHERE id_article=$id_article");
+				// c: 10/2/8 compat pg_sql
+				//sql_query("UPDATE spip_articles SET lang='$langue_new' WHERE id_article=$id_article");
+				sql_updateq("spip_articles",array('lang'=>$langue_new),"id_article=$id_article");
 		}
 	}
 
@@ -299,8 +322,10 @@ function article_referent ($id_article, $c) {
 
 	// selectionner l'article cible, qui doit etre different de nous-meme,
 	// et quitter s'il n'existe pas
-	if (!$row = spip_fetch_array(
-	sql_query("SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad AND NOT(id_article=$id_article)")))
+	// c: 10/2/8 compat pg_sql
+	//sql_query("SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad AND NOT(id_article=$id_article)")))
+
+	if (!$row = sql_fetsel("id_trad","spip_articles","id_article=$lier_trad AND NOT(id_article=$id_article)"))
 	{
 		spipbb_log("echec lien de trad vers article inexistant ($lier_trad)",3,"A_a_r");
 		return '&trad_err=1';
@@ -313,11 +338,15 @@ function article_referent ($id_article, $c) {
 	// le nouvel id_trad de ce nouveau groupe et on l'affecte aux deux
 	// articles
 	if ($id_lier == 0) {
-		sql_query("UPDATE spip_articles SET id_trad = $lier_trad WHERE id_article IN ($lier_trad, $id_article)");
+		// c: 10/2/8 compat pg_sql
+		//sql_query("UPDATE spip_articles SET id_trad = $lier_trad WHERE id_article IN ($lier_trad, $id_article)");
+		sql_updateq("spip_articles",array('id_trad'=> $lier_trad),"id_article IN ($lier_trad, $id_article)");
 	}
 	// sinon on ajouter notre article dans le groupe
 	else {
-		sql_query("UPDATE spip_articles SET id_trad = $id_lier WHERE id_article = $id_article");
+		// c: 10/2/8 compat pg_sql
+		//sql_query("UPDATE spip_articles SET id_trad = $id_lier WHERE id_article = $id_article");
+		sql_updateq("spip_articles",array('id_trad' => $id_lier),"id_article = $id_article");
 	}
 
 	return ''; // pas d'erreur

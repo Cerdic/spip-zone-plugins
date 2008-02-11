@@ -15,7 +15,7 @@ _ &#169; 2006 - <multi>
 </multi>
 	</auteur>
 	<version>
-		0.4.3
+		0.4.4
 	</version>
 	<etat>
 		dev
@@ -24,7 +24,7 @@ _ &#169; 2006 - <multi>
 		<multi>
 		[en]With SpipBB plugin, you can :
 -* Manage all your SPIP forums (private zone),
--* Use a sector as the base for a group of forums as the Bulletin 
+-* Use a sector as the base for a group of forums as the Bulletin
 Boards such as phpBB. In this sector, the sub-sectors, are forum
  groups, the articles are forums, and each post in the forum
  of such articles will start a new thread.
@@ -32,7 +32,7 @@ Boards such as phpBB. In this sector, the sub-sectors, are forum
 _ {{The development of Spipbb plugin is in progress. Use it at your
  own risks :)}}
 
-_ [Access to the admin panel-> .?exec=spipbb_configuration] 
+_ [Access to the admin panel-> .?exec=spipbb_configuration]
 		[fr]Le plugin SpipBB permet :
 -* De g&eacute;rer de fa&ccedil;on centralis&eacute;e les forums de SPIP
  (interface priv&eacute;e),
@@ -43,9 +43,9 @@ _ [Access to the admin panel-> .?exec=spipbb_configuration]
 
 _ {{Plugin spipbb en cours de developpement. Vous l'utilisez &agrave;
  vos risques et p&eacute;rils}}
- 
+
 _ [Acc&egrave;s au
- panneau d'administration-> .?exec=spipbb_configuration] 
+ panneau d'administration-> .?exec=spipbb_configuration]
 		</multi>
 	</description>
 	<lien>[<multi>[en]Read the documentation on Spip-contrib

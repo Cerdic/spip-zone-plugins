@@ -11,7 +11,7 @@
 # hack - scoty - gafospip 0.6 - 14/10/07
 # Introduire la restriction fournie par chaque visiteur
 # dans le champ profil : "refus_suivi_thread"
-# 
+#
 spipbb_log("included",3,__FILE__);
 
 // cette notification s'execute quand on valide un message 'prop'ose,
@@ -21,7 +21,9 @@ spipbb_log("included",3,__FILE__);
 // http://doc.spip.org/@notifications_forumvalide_dist
 function notifications_forumvalide($quoi, $id_forum) {
 
-	$s = sql_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
+	// c: 10/2/8 compat multibases
+	//$s = sql_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
+	$s = sql_select("*","spip_forum","id_forum="._q($id_forum));
 	if (!$t = sql_fetch($s))
 		return;
 
@@ -39,7 +41,9 @@ function notifications_forumvalide($quoi, $id_forum) {
 	// pas le droit de le moderer (les autres l'ont recu plus tot)
 	if ($t['id_article']
 	AND $GLOBALS['meta']['prevenir_auteurs'] == 'oui') {
-		$result = sql_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+		// c: 10/2/8 compat multibases
+		//$result = sql_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+		$result = sql_select("auteurs.*",array("spip_auteurs AS auteurs","spip_auteurs_articles AS lien"),"lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
 
 		while ($qui = sql_fetch($result)) {
 			if (!autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))
@@ -61,7 +65,9 @@ function notifications_forumvalide($quoi, $id_forum) {
 
 	if (defined('_SUIVI_FORUM_THREAD') AND (_SUIVI_FORUM_THREAD==true) ) {
 		$infos=array();
-		$s = sql_query("SELECT DISTINCT(email_auteur), id_auteur FROM spip_forum WHERE id_thread=".$t['id_thread']." AND email_auteur != ''");
+		// c: 10/2/8 compat multibases
+		//$s = sql_query("SELECT DISTINCT(email_auteur), id_auteur FROM spip_forum WHERE id_thread=".$t['id_thread']." AND email_auteur != ''");
+		$s = sql_select(array("DISTINCT(email_auteur)","id_auteur"),"spip_forum","id_thread=".$t['id_thread']." AND email_auteur != ''");
 		while ($r = sql_fetch($s)) {
 			# par defaut visiteur non-inscrit : pas de notif.
 			if($r['id_auteur']!='0') {
@@ -77,7 +83,7 @@ function notifications_forumvalide($quoi, $id_forum) {
 					$pasmoi[] = $r['email_auteur'];
 				}
 			}
-			
+
 		}
 	}
 
@@ -90,7 +96,9 @@ function notifications_forumvalide($quoi, $id_forum) {
 	AND _SUIVI_FORUMS_REPONSES
 	AND $t['statut'] == 'publie') {
 		$id_parent = $id_forum;
-		while ($r = sql_fetch(sql_query("SELECT email_auteur, id_parent FROM spip_forum WHERE id_forum=$id_parent AND statut='publie'"))) {
+		// c: 10/2/8 compat multibases
+		//while ($r = sql_fetch(sql_query("SELECT email_auteur, id_parent FROM spip_forum WHERE id_forum=$id_parent AND statut='publie'"))) {
+		while ($r = sql_fetsel(array("email_auteur","id_parent"),"spip_forum","id_forum=$id_parent AND statut='publie'") ) {
 			$tous[] = $r['email_auteur'];
 			$id_parent = $r['id_parent'];
 		}

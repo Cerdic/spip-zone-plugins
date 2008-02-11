@@ -5,7 +5,7 @@
 | + genere balise tableau_smileys (frontoffice)
 | + fonctions balise affiche_avatar (back and front)
 | + fonctions balise signature_post (back and front)
-| + fonction generique 
+| + fonction generique
 +-------------------------------------------+
 */
 
@@ -27,7 +27,7 @@ function genere_list_smileys($repert) {
 	$listimag=array();
 	$listfich=opendir($repert);
 	while ($fich=@readdir($listfich)) {
-		if(($fich !='..') and ($fich !='.') and ($fich !='.test') and ($fich !='.svn')) { 
+		if(($fich !='..') and ($fich !='.') and ($fich !='.test') and ($fich !='.svn')) {
 			$nomfich=substr($fich,0,strrpos($fich, "."));
 			$listimag[$nomfich]=$repert.$fich;
 		}
@@ -51,14 +51,14 @@ function smileys($chaine) 	{
 	$dirbase = _DIR_PLUGIN_SPIPBB."smileys/";
 	##$dirbase = _DIR_SMILEYS_SPIPBB;
 	$listsmil = genere_list_smileys($dirbase);
-	
-	# h. indispensable !! pour gerer le changement de repertoire 
+
+	# h. indispensable !! pour gerer le changement de repertoire
 	# en cours de route, donc tous les smileys dispo
 	if(_DIR_SMILEYS_SPIPBB!=$dirbase) {
 		$listperso=genere_list_smileys(_DIR_SMILEYS_SPIPBB);
 		$listsmil = array_merge($listsmil, $listperso); // array verifies
 	}
-	
+
 	while (list($nom,$chem) = each($listsmil)) {
 		$smil_html = "<img src='".$chem."' style='border:0' title='".$nom."' alt='smil' align='baseline' />";
 		$chaine = str_replace(":".$nom, $smil_html , $chaine);
@@ -82,17 +82,17 @@ function tableau_smileys($cols='',$return=true) {
 	$compte=0;
 
 	$aff = "<table width='100%' cellspacing='0' cellpadding='1' border='0'><tr>\n";
-	while (list($nom,$chem) = each($listimag)) { 
+	while (list($nom,$chem) = each($listimag)) {
 		$aff.= "<td style='vertical-align:bottom' class='verdana1'><div style='text-align:center'>\n
 			<a href=\"javascript:emoticon(':".$nom."')\">\n
 			<img src='".$chem."' style='border:0' title='smiley - ".$nom."' alt='smil' />\n
 			</a></div></td>\n";
-		
-		$compte++; 
+
+		$compte++;
 		if ($compte % $cols == 0) { $aff.= "</tr><tr>\n"; }
 	}
 	$aff.= "</tr></table>\n";
-	
+
 	if($return) { return $aff; } else { echo $aff; }
 }
 
@@ -105,30 +105,38 @@ function tableau_smileys($cols='',$return=true) {
 // appel : ici, formulaire_spipbb_profil, spipbb_inscrits, spipbb_notifications
 // ------------------------------------------------------------------------------
 function spipbb_donnees_auteur($id) {
-	$chps_sup='';
+	$chps_sup=array();// c: 10/2/8 compat multibases
 	$left_join='';
 	$infos=array();
 	$liste_chps = array();
-	
+
 	$type_support = lire_config('spipbb/support_auteurs');
 	$table_support = lire_config('spipbb/table_support');
 
 	foreach($GLOBALS['champs_sap_spipbb'] as $ch => $t) {
 		$liste_chps[]=$ch;
 	}
-	
+
 	if($type_support=="table") {
 		foreach($liste_chps as $champ) {
-			$chps_sup.= ", sap.".$champ;
+			// c: 10/2/8 compat multibases
+			//$chps_sup.= ", sap.".$champ;
+			$chps_sup[]= "sap.".$champ;
 		}
 		$left_join = "LEFT JOIN spip_$table_support AS sap ON sa.id_auteur = sap.id_auteur ";
 	}
 
-	$result = sql_query("SELECT sa.id_auteur, sa.statut, sa.nom, sa.login, sa.source, sa.extra 
-						$chps_sup 
-						FROM spip_auteurs AS sa 
+	// c: 10/2/8 compat multibases
+	/*
+	$result = sql_query("SELECT sa.id_auteur, sa.statut, sa.nom, sa.login, sa.source, sa.extra
+						$chps_sup
+						FROM spip_auteurs AS sa
 						$left_join
 						WHERE sa.id_auteur=$id");
+	*/
+	$result = sql_select(array_merge(array("sa.id_auteur","sa.statut","sa.nom","sa.login","sa.source","sa.extra"),$chps_sup),
+						"spip_auteurs AS sa $left_join",
+						"sa.id_auteur=$id");
 	if($row = sql_fetch($result)) {
 		foreach($row as $k => $v) {
 			# extraire extra
@@ -220,7 +228,7 @@ function afficher_avatar($id_auteur, $classe='')
 
 // ------------------------------------------------------------------------------
 // traitement back / balise signature_post
-// GAF v.0.6 - 12/10/07 
+// GAF v.0.6 - 12/10/07
 // ------------------------------------------------------------------------------
 function spipbb_afficher_signature_post($id_auteur)
 {
@@ -260,7 +268,7 @@ function afficher_signature_post($id_auteur)
 
 // ------------------------------------------------------------------------------
 // generique : balise #SPIPBB{champ}, donnee brut (->formulaire)
-// GAF v.0.6 - 12/10/07 
+// GAF v.0.6 - 12/10/07
 // ------------------------------------------------------------------------------
 function afficher_champ_spipbb($id_auteur,$champ)
 {

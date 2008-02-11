@@ -2,7 +2,7 @@
 /*
 +-------------------------------------------+
 +-------------------------------------------+
-| SPIPBB James-Booz 
+| SPIPBB James-Booz
 | Modif . scoty pour GAFoSPIP v. 0.4
 +-------------------------------------------+
 */
@@ -30,7 +30,7 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 
 	$statut=$GLOBALS["auteur_session"]["statut"];
 	$id_auteur_session=$GLOBALS["auteur_session"]['id_auteur'];
-	
+
 	# detail infos sur auteur
 	$auteur=spipbb_donnees_auteur($id_auteur_session);
 
@@ -48,9 +48,9 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 	$renvois_chps=array(); // c: 23/12/7 Bug report Jack sur gmane
 
 	if($modif=_request('modif')) {
-	
+
 		// changement de pass, a securiser en jaja ?
-		if ($new_pass AND ($statut != '5poubelle') 
+		if ($new_pass AND ($statut != '5poubelle')
 					AND $auteur['login'] AND $auteur['source'] == 'spip') {
 			if ($new_pass != $new_pass2)
 				$echec .= _T('info_passes_identiques');
@@ -61,32 +61,38 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 				$auteur_new_pass = $new_pass;
 			}
 		}
-	
+
 		if ($modif_login) {#h.??
 			#include_spip('inc/session');
 			#zap_sessions ($auteur['id_auteur'], true);
 			if ($id_auteur_session == $auteur['id_auteur'])
 				supprimer_sessions($GLOBALS['spip_session']);
 		}
-		
+
 		if ($new_pass) {
 			$htpass = generer_htpass($new_pass);
 			$alea_actuel = creer_uniqid();
 			$alea_futur = creer_uniqid();
 			$pass = md5($alea_actuel.$new_pass);
-			$query_pass = " pass='$pass', htpass='$htpass', 
-							alea_actuel='$alea_actuel', 
+			// c: 10/2/8 compat multibases
+			/*
+			$query_pass = " pass='$pass', htpass='$htpass',
+							alea_actuel='$alea_actuel',
 							alea_futur='$alea_futur', ";
+							*/
+			$query_pass = array("pass"=>$pass,"htpass"=>$htpass,
+							"alea_actuel"=>$alea_actuel,
+							"alea_futur"=>$alea_futur);
 			effacer_low_sec($auteur['id_auteur']);
 		} else
-			$query_pass = '';
-		
-		
+			$query_pass = array();
+
+
 		#
 		# Extra : recup champs extra (gaf ou pas) passer dans le formulaire
 		#
 
-		$add_extra = '';
+		$add_extra = array();// c: 10/2/8 compat multibases
 		if ($GLOBALS['champs_extra']) {
 		# tous extra (auteurs) existants
 			$ts_extra = lire_config("~".$id_auteur_session);
@@ -106,9 +112,9 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 			$n_extra = array_merge($ts_extra,$recup_form); // array verifies
 
 			$extra = serialize($n_extra);
-			
-			$add_extra = ", extra="._q($extra)." ";
-			
+
+			$add_extra ["extra"]=_q($extra);// c: 10/2/8 compat multibases
+
 			# recup champs extra pour retour form (ENV)
 			foreach($n_extra as $k => $v) {
 				$renvois_chps[$k]=$v;
@@ -123,7 +129,7 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 		$support_auteurs=lire_config("spipbb/support_auteurs");
 		$table_support=lire_config("spipbb/table_support");
 		#$champs_gaf = lire_config("spipbb/champs_gaf");
-				
+
 		if($support_auteurs=='table' && $table_support!='') {
 			# pour les champs connus GAF on attribue la val. recup
 			foreach($GLOBALS['champs_sap_spipbb'] as $chp => $def) {
@@ -136,10 +142,12 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 				}
 			}
 		}
-		
-		
+
+
 		if(!$echec) {
 			#  maj spip
+			// c: 10/2/8 compat multibases
+			/*
 			sql_query("UPDATE spip_auteurs SET $query_pass
 				nom="._q($auteur['nom']).",
 				login="._q($auteur['login']).",
@@ -151,36 +159,51 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 				statut="._q($auteur['statut'])."
 				$add_extra
 				WHERE id_auteur=".$auteur['id_auteur']);
-			
+				*/
+			sql_updateq("spip_auteurs",array_merge($query_pass,array(
+				nom=>_q($auteur['nom']),
+				login=>_q($auteur['login']),
+				bio=>_q($auteur_bio),
+				email=>_q($auteur_email),
+				nom_site=>_q($auteur_nom_site),
+				url_site=>_q($auteur_url_site),
+				pgp=>_q($auteur_pgp),
+				statut=>_q($auteur['statut'])),
+				$add_extra),"id_auteur=".$auteur['id_auteur']);
+
 			# maj table support
 			if(count($traiter_chps)>=1) {
-				$set='';
+				$set=array();// c: 10/2/8 compat multibases
 				foreach($traiter_chps as $k => $v) {
 					if($k=="date_crea_spipbb" && $v=='') {
-						$set.= ",".$k."=NOW()";
+						$set[$k]="NOW()";
 					}
 					elseif($k=="refus_suivi_thread" && is_array($v)) {
-						$set.= ",".$k."="._q(join(',',$v));
+						$set[$k]=_q(join(',',$v));
 					}
 					else {
-						$set.= ",".$k."="._q($v);
+						$set[$k]=_q($v);
 					}
 				}
-				$set=substr($set,1);
-				if(strlen($set)>0) { $sep = ","; }
-				
+				//$set=substr($set,1);
+				//if(strlen($set)>0) { $sep = ","; }
+
 				if($nouveau) {
-					sql_query("INSERT INTO spip_".$table_support." SET id_auteur=".$auteur['id_auteur']." ".$sep.$set);
+					// c: 10/2/8 compat multibases
+					//sql_query("INSERT INTO spip_".$table_support." SET id_auteur=".$auteur['id_auteur']." ".$sep.$set);
+					sql_insertq("spip_".$table_support,array_merge(array("id_auteur"=>$auteur['id_auteur']),$set));
 				}
 				else {
-					sql_query("UPDATE spip_".$table_support." SET $set WHERE id_auteur=".$auteur['id_auteur']);	
+					// c: 10/2/8 compat multibases
+					//sql_query("UPDATE spip_".$table_support." SET $set WHERE id_auteur=".$auteur['id_auteur']);
+					sql_updateq("spip_".$table_support, $set, "id_auteur=".$auteur['id_auteur']);
 				}
 			}
 		}
-	
-	
+
+
 	}
-	
+
 	# retour
 	#
 	$ch_retour = array (
@@ -222,7 +245,7 @@ function spipbb_extra_recup_saisie($type, $c=false) {
 					}
 					$extra[$champ] = $multiple;
 					break;
-	
+
 				case 'case':
 				case 'checkbox':
 					if (_request("{$champ}_check") == 'on')
@@ -230,7 +253,7 @@ function spipbb_extra_recup_saisie($type, $c=false) {
 					else
 						$val = 'false';
 					// pas de break; on continue
-	
+
 				default:
 					#traiter date prim enreg.
 					if($champ=='date_crea_spipbb' && ($val=='' || $val==false )) {
@@ -242,7 +265,7 @@ function spipbb_extra_recup_saisie($type, $c=false) {
 					if ($filtre && function_exists($filtre))
 						$extra[$champ] = $filtre($val);
 					else
-						$extra[$champ] = $val;	
+						$extra[$champ] = $val;
 					break;
 				}
 			}

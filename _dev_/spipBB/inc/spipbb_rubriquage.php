@@ -53,7 +53,7 @@ function sous_enfant_rubfo($collection2){
 						. typo($titre2)."</span></a></div>\n";
 	}
 	$retour .= "</ul>\n\n".fin_block()."\n\n";
-	
+
 	return $retour;
 } // sous_enfant_rubfo
 
@@ -80,15 +80,15 @@ function enfant_rubfo($collection){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=supprimer_numero($row['titre']);
-		
+
 		$ifond = $ifond ^ 1;
 		$coul_ligne = ($ifond) ? $couleur_claire : '#ffffff';
-		
+
 		/*
-		// gafospip . trouver rubrique secteur (hotel) des forums, 
+		// gafospip . trouver rubrique secteur (hotel) des forums,
 		// si unique secteur forums -> usage mot : rub_gaforum
-		$rq_gaf =	"SELECT smr.id_rubrique 
-					FROM spip_mots_rubriques smr 
+		$rq_gaf =	"SELECT smr.id_rubrique
+					FROM spip_mots_rubriques smr
 					LEFT JOIN spip_rubriques sr ON sr.id_rubrique = smr.id_rubrique
 					WHERE sr.id_rubrique=$id_rubrique AND smr.id_mot = ".$GLOBALS['id_mot_rub_gaf'];
 		$rs_gaf = sql_query($rq_gaf);
@@ -99,7 +99,7 @@ function enfant_rubfo($collection){
 		}
 		else { $icone_secteur = "secteur-24.gif"; }
 		//
-		
+
 		$les_sous_enfants = sous_enfant_rubfo($id_rubrique);
 
 		changer_typo($row['lang']);
@@ -109,14 +109,14 @@ function enfant_rubfo($collection){
 		if ($spip_display == 4) $les_enfants .= "";
 
 		if (function_exists('bouton_block_depliable')) $bouton = bouton_block_depliable("&nbsp;",false,"enfants$id_rubrique");
-		else $bouton = bouton_block_invisible("enfants$id_rubrique"); 
+		else $bouton = bouton_block_invisible("enfants$id_rubrique");
 
 		$les_enfants .= "\n<tr class='verdana3' bgcolor='".$coul_ligne."'><td width='6%' valign='top'>"
 			. http_img_pack(($id_parent ? "rubrique-24.gif" : $icone_secteur), '','')
 			. "</td><td width='2%' valign='top'>"
 			. (!$les_sous_enfants ? "" : $bouton)
 			. "</td><td width='93%' valign='top'>"
-			. (!acces_restreint_rubrique($id_rubrique) ? "" : 
+			. (!acces_restreint_rubrique($id_rubrique) ? "" :
 				http_img_pack("admin-12.gif", '', '', _T('image_administrer_rubrique')))
 			. ""
 			. "<span dir='$lang_dir' style='color:$couleur_foncee;'><b>"
@@ -126,7 +126,7 @@ function enfant_rubfo($collection){
 			. (!$descriptif ? '' : "<div class='verdana1'>$descriptif</div>");
 
 		if ($spip_display != 4) $les_enfants .= $les_sous_enfants;
-		
+
 		$les_enfants .= "<div style='clear:both;'></div>" . "</td>";
 
 		if($flag_ordonne AND _request('id_salon')) {
@@ -134,7 +134,7 @@ function enfant_rubfo($collection){
 			$les_enfants .= bouton_ordonne_salon($id_rubrique,generer_url_ecrire("spipbb_admin","id_salon="._request('id_salon'),true));
 			$les_enfants .= "</td>";
 		}
-		
+
 		$les_enfants .= "</tr>";
 
 		if ($spip_display == 4) $les_enfants .= "";

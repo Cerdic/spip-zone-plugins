@@ -38,8 +38,8 @@ function configuration_spipbb_ban_user_dist() {
 
 	$res = debut_cadre_relief("", true, "", "<label for='ban_user'>"._T('spipbb:admin_ban_user_info')."</label>")
 		. "<select name='ban_user[]' id='ban_user' multiple='multiple' size='5' class='forml'>";
-	
-	// Il ne faudra pas mettre dans cette liste les user deja bannis ! 
+
+	// Il ne faudra pas mettre dans cette liste les user deja bannis !
 	// Pas supporte par tous les SQL
 	//$query=sql_query("SELECT id_auteur,login FROM spip_auteurs
 	//				WHERE (statut='6forum' OR statut='nouveau' OR statut='5poubelle' )
@@ -52,8 +52,12 @@ function configuration_spipbb_ban_user_dist() {
 	if (count($tab_login)>0) $not_in="AND login NOT IN ($liste_login)";
 	else $not_in="";
 
+	// c: 10/2/8 compat multibases
+	/*
 	$query=sql_query("SELECT id_auteur,login FROM spip_auteurs
 					WHERE (statut='6forum' OR statut='nouveau' OR statut='5poubelle')".$not_in );
+					*/
+	$query=sql_select(array("id_auteur","login"),"spip_auteurs","(statut='6forum' OR statut='nouveau' OR statut='5poubelle') ".$not_in );
 
 	if ( sql_count($query) ) {
 		while ($row = sql_fetch($query)) {
@@ -72,7 +76,9 @@ function configuration_spipbb_ban_user_dist() {
 	$res .= debut_cadre_relief("", true, "", "<label for='unban_user'>"._T('spipbb:admin_unban_user_info')."</label>")
 		. "<select name='unban_user[]' id='unban_user' multiple='multiple' size='5' class='forml'>";
 
-	$query=sql_query("SELECT id_ban,ban_login FROM spip_ban_liste WHERE ban_login IS NOT NULL ");
+	// c: 10/2/8 compat multibases
+	//$query=sql_query("SELECT id_ban,ban_login FROM spip_ban_liste WHERE ban_login IS NOT NULL ");
+	$query=sql_select(array("id_ban","ban_login"),"spip_ban_liste","ban_login IS NOT NULL");
 	if ( sql_count($query) ) {
 		while ($row = sql_fetch($query)) {
 			$res .= "<option value='".$row['id_ban']."'>".$row['ban_login']."</option>";
@@ -87,11 +93,11 @@ function configuration_spipbb_ban_user_dist() {
 
 	if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_AJAXCONFIG,'>=')) {
 		$res = ajax_action_post('spipbb_configurer', 'spipbb_ban_user', 'spipbb_admin_gere_ban','',$res) ;
-		return ajax_action_greffe('spipbb_configurer-spipbb_ban_user','', $res); // creer action : "ban" a  la facon de action/configurer 
+		return ajax_action_greffe('spipbb_configurer-spipbb_ban_user','', $res); // creer action : "ban" a  la facon de action/configurer
 	}
 	else { // 1.9.2
 		$res = ajax_action_post('spipbb_configurer', 'spipbb_ban_user', 'spipbb_admin_gere_ban','',$res,_T('bouton_valider'),'  class="fondo" ') ;
-		return ajax_action_greffe('spipbb_configurer-spipbb_ban_user', $res); // creer action : "ban" a  la facon de action/configurer 
+		return ajax_action_greffe('spipbb_configurer-spipbb_ban_user', $res); // creer action : "ban" a  la facon de action/configurer
 	}
 } // configuration_ban_user_dist
 
