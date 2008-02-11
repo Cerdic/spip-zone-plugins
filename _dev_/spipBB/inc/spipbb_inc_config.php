@@ -142,7 +142,9 @@ function spipbb_check_une_table($nom_table,$tables_principales)
 		$champ=preg_replace("/^char(.*)/","varchar\\1",$champ); // char(x)==varchar(x) ?
 		$champ=preg_replace("/^timestamp.*/","timestamp",$champ); // timestamp(14)==timestamp ?
 		$champ=preg_replace("/^bigint.*/","bigint",$champ); // bigint(21)==bigint ?
+		$champ=preg_replace("/^int.*/","int",$champ); // int(10)==int ?
 		$champ=preg_replace("/^varcharacter/","varchar",$champ); //varcharacter == varchar
+		$champ=preg_replace("/^varchar.*/","varchar",$champ); // varchar(10)==varchar ?
 		$champ=preg_replace("/^integer/","int",$champ); //integer == int
 		$champ=preg_replace("/^tinytext/","text",$champ); //tinytext == text
 		$champ=preg_replace("/^mediumtext/","text",$champ); //mediumtext == text
@@ -181,7 +183,9 @@ function spipbb_delete_tables()
 	$liste="";
 	while ( list($key,$val) = each($tables_spipbb) )
 	{
-		$res=sql_query("DROP TABLE IF EXISTS $val ");
+		// c: 10/2/8 compat multibases
+		//$res=sql_query("DROP TABLE IF EXISTS $val ");
+		$res=sql_drop_table($val,true); // true => if exists
 		$liste.="$val ";
 	}
 	spipbb_log(__FILE__.' spipbb_delete_tables END liste:'.$liste);
