@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'convertir_en' => 'R&eacute;sultat de la conversion: ',
 
 // les formats
+'MediaWiki_SPIP' => 'Wiki (MediaWiki) vers SPIP', 
 'MoinWiki_SPIP' => 'Wiki (MoinWiki) vers SPIP', 
 'BBcode_SPIP' => 'BBcode (PhpBB) vers SPIP', 
 'SPIP_txt' => 'SPIP vers texte brut',

@@ -26,10 +26,67 @@ function exec_convertisseur(){
 	// Definition des regex pour les convertions 
 	// ---------------------------------------------------------------------------
 	$conv_formats = array(); 
+	
+	// syntaxe SPIP
+	// http://www.spip-contrib.net/IMG/html/antiseche_spip-3.html
+	
+	// Convertion MediaWiki -> SPIP
+  // ref. syntaxe: http://www.mediawiki.org/wiki/Help:Formatting
+  $conv_formats['MediaWiki_SPIP'] = array(
+      "pattern" => array(        
+         // applies anywhere     
+        'bold_i' => "'''''([^''''']*)'''''",  
+        'bold'   => "'''([^''']*)'''",   // FIXME ''' test B à l'huile '''   "'''([^''']*)'''"
+        'i'      => "''([^'']*)''",     
+        // only at the beginning of the line         
+        'h4'     => "\n=====([^=====]*)=====",
+        'h3'     => "\n====([^====]*)====",
+        'h2'     => "\n===([^=====]*)===",
+        'h1'     => "\n==([^==]*)==",
+        'ul_3'     => "\n\*\*\* ", 
+        'ul_2'     => "\n\*\* ",  
+        'ul_1'     => "\n\*", 
+        'ol_3'     => "\n\#\#\# ", 
+        'ol_2'     => "\n\#\# ",  
+        'ol_1'     => "\n\# ",  
+        // TODO: Definition list, Preformatted text
+        
+        // links - http://www.mediawiki.org/wiki/Help:Links  
+        'link_int'  => "\[\[([^\[\[]*)\]\]",       
+        'link_ext2'  => "\\[([^\\[]*) ([^ ]*)([^(\\[| )]*)\\]", // FIXME si plusieurs espaces blanc 
+        'link_ext1'  => " http([^ \r]*)",
+        'link_ext0'  => "\nhttp([^ \r]*)",
+        
+        
+         // TODO: Table (http://www.mediawiki.org/wiki/Help:Tables)
+        ),
+      "replacement" => array(
+        'bold_i' => "{{<i>\\1</i>}}",   
+        'bold'   => "{{\\1}}",      
+        'i'      => "{\\1}",                
+        'h4'     => "{{{\\1}}}", 
+        'h3'     => "{{{\\1}}}", 
+        'h2'     => "{{{\\1}}}",  
+        'h1'     => "{{{\\1}}}", 
+        'ul_3'     => "-*** ", 
+        'ul_2'     => "-** ", 
+        'ul_1'     => "-* ", 
+        'ol_3'     => "-### ", 
+        'ol_2'     => "-## ", 
+        'ol_1'     => "-# ",
+        'link_int'  => "\\1",      
+        'link_ext2'  => "[\\2->\\1]",
+        'link_ext1'  => " [->http\\1]",
+        'link_ext0'  => "[->http\\1]",
+        
+        
+        )
+  );
+	
   
   // Convertion MoinWiki -> SPIP
-  // ref. syntaxe: http://zone.spip.org/trac/spip-zone/wiki/WikiFormatting
-  // ref. syntaxe: http://moinmoin.wikiwikiweb.de/HelpOnFormatting?highlight=%28formatting%29  
+  // ref. syntaxe: http://trac.edgewall.org/wiki/WikiFormatting
+  // ref. syntaxe: http://moinmo.in/HelpOnFormatting?highlight=%28formatting%29 
   $conv_formats['MoinWiki_SPIP'] = array(
       "pattern" => array(
         'code'   => "{{{([^}}}]*)}}}", // FIXME si } dans {{{ }}}                
