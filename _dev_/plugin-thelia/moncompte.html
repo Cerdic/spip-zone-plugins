@@ -1,21 +1,21 @@
 #CACHE{7200}
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-<html dir="#LANG_DIR" lang="#LANG">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<title><:spipthelia:mon_compte:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="<:spipthelia:mon_compte:>" />
 <INCLURE{fond=inc-head}>
-[(#REM) Lien vers le flux RSS de la rubrique ]
-<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
 </head>
 
-<body class="page_panier">
+<body class="page_moncompte">
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
-	
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:mon_compte:></div>
+
 	<div id="conteneur">
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
@@ -25,20 +25,20 @@
 				[(#REM) Titre de la rubrique ]
 
 				<div class="titrePage">
-				<h2>Mon compte </h2>
+				<h2><:spipthelia:mon_compte:></h2>
 				</div>
 
 				[(#REM) Contenu de la page ]
 
 				<div class="sousTitrePage">
-				<h3>Visualiser mes coordonn&eacute;es  et mes commandes </h3>
+				<h3><:spipthelia:visualiser_coordonnees_commandes:></h3>
 				</div>
 
-			<a href="#URL_PAGE{compte_modifier}">Modifier mes informations personnelles (coordonn&eacute;es, mot de passe, ... ) <br />
-			</a><a href="#URL_PAGE{livraison_adresse}">Modifier mes adresses de livraison<br />
-			</a><a href="#URL_PAGE{commande_visualiser}">Visualiser mes commandes </a>
+			<a href="#URL_PAGE{compte_modifier}"><:spipthelia:modifier_info_perso:> <br />
+			</a><a href="#URL_PAGE{livraison_adresse}"><:spipthelia:modifier_adresse_livraison:><br />
+			</a><a href="#URL_PAGE{commande_visualiser}"><:spipthelia:visualiser_commandes:></a>
 
-		</div> [(#REM)fin contenu]
+		</div> [(#REM) fin contenu]
 
 
 		[(#REM) Menu de navigation laterale ]

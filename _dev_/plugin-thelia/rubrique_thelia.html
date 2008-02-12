@@ -9,7 +9,7 @@
 <link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend,id_rubrique_thelia=THELIA-RUBRIQUE_ID})]" />
 </head>
 
-<body class="page_rubrique">
+<body class="page_rubriquethelia">
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
@@ -23,7 +23,7 @@
 			</THELIA_chemrub>
 			 &gt; THELIA-RUBRIQUE_NOM</div>
 
-	<div id="conteneur">
+		<div id="conteneur">
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
 		<div id="contenu">
@@ -56,7 +56,7 @@
 				    	<div class="prixProduit">
 						THELIA-PRIX &euro;
 						</div>
-				    <a href="#URL_PAGE{panier,thelia_action=ajouter&amp;ref=THELIA-REF}" class="LIEN_commander">Ajouter au panier </a>	
+				    <a href="#URL_PAGE{panier,thelia_action=ajouter&amp;ref=THELIA-REF}" class="LIEN_commander"><:spipthelia:ajouter_panier:></a>	
 					</div> 
 				</THELIA_PROD>
 				</div>
@@ -66,7 +66,7 @@
 	
 				<div id="pages">
 					<THELIA_PAGEPREC type="PAGE" rubrique="THELIA-RUBRIQUE_ID" num="12" typeaff="0" avance="precedente">
-					<a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-RUBRIQUE_ID&amp;page_thelia=THELIA-PAGE_PREC}" class="LIEN_pages">Page pr&eacute;c&eacute;dente</a>
+					<a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-RUBRIQUE_ID&amp;page_thelia=THELIA-PAGE_PREC}" class="LIEN_pages"><:spipthelia:page_precedente:></a>
 					</THELIA_PAGEPREC>
 					
 					<THELIA_CPAGE type="PAGE" rubrique="THELIA-RUBRIQUE_ID"  num="12" max="10" typeaff="1">
@@ -81,7 +81,7 @@
 					
 					 
 					<THELIA_PAGE_SUIVANTE type="PAGE" rubrique="THELIA-RUBRIQUE_ID" num="12" max="10" typeaff="0" avance="suivante"> 
-					| <a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-RUBRIQUE_ID&amp;page_thelia=THELIA-PAGE_SUIV}" class="LIEN_pages">Page suivante</a>
+					| <a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-RUBRIQUE_ID&amp;page_thelia=THELIA-PAGE_SUIV}" class="LIEN_pages"><:spipthelia:page_suivante:></a>
 					</THELIA_PAGE_SUIVANTE>
 				</div>	
 		</div>[(#REM) fin contenu ]

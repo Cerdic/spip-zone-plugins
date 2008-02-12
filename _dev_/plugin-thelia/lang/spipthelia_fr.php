@@ -32,5 +32,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'a_bientot' => 'Bonne navigation et à bientôt',
 'erreur_paiement' => 'Erreur de paiement',
 'commentaire_erreur_paiement' => 'Nous vous informons que la procédure de paiement n\'a pas pu aboutir, veuillez vous renseigner aupr&egrave;s de votre &eacute;tablissement bancaire.',
-'commentaire_erreur_paiement_suite' => 'Bonne navigation et &agrave; bientôt');
+'commentaire_erreur_paiement_suite' => 'Bonne navigation et &agrave; bientôt',
+'page_precedente' => 'Page pr&eacute;c&eacute;dente',
+'page_suivante' => 'Page suivante',
+'mon_compte' => 'Mon compte',
+'visualiser_coordonnees_commandes' => 'Visualiser mes coordonn&eacute;es  et mes commandes',
+'modifier_info_perso' => 'Modifier mes informations personnelles (coordonn&eacute;es, mot de passe, ... )',
+'modifier_adresse_livraison' => 'Modifier mes adresses de livraison',
+'visualiser_commandes' => 'Visualiser mes commandes');
 ?>

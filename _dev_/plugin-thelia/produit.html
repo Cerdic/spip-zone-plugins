@@ -8,7 +8,7 @@
 <INCLURE{fond=inc-head}>
 </head>
 
-<body class="page_rubrique">
+<body class="page_produit">
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
@@ -52,7 +52,7 @@
 				 		<div class="prixProduit">
 						THELIA-PRIX &euro;
 						</div>
-				 	<a href="#URL_PAGE{panier,thelia_action=ajouter&amp;ref=THELIA-REF}" class="LIEN_commander"><:ajouter_panier:></a>
+				 	<a href="#URL_PAGE{panier,thelia_action=ajouter&amp;ref=THELIA-REF}" class="LIEN_commander"><:spipthelia:ajouter_panier:></a>
 					</div> 
 				</div>
 			
@@ -61,7 +61,7 @@
 
 				<div id="pages">
 				<THELIA_PAGEPREC type="PAGE" rubrique="THELIA-RUBRIQUE_ID" caracteristique="THELIA-CARACTERISTIQUE_ID" caracdisp="THELIA-CARACTERISTIQUE_DISP" num="9" typeaff="0">
-				<a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-RUBRIQUE_ID&page_thelia=THELIA-PAGE_PREC}" class="LIEN_pages">Page pr&eacute;c&eacute;dente</a>
+				<a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-RUBRIQUE_ID&page_thelia=THELIA-PAGE_PREC}" class="LIEN_pages"><:spipthelia:page_precedente:></a>
 				</THELIA_PAGEPREC>
 				</div>
 
@@ -72,19 +72,7 @@
 
 			[(#REM) Menu de navigation par rubriques ]
 			<INCLURE{fond=inc-rubriques}{id_rubrique_thelia=THELIA-RUBRIQUE_ID}>
-
-			[(#REM) Menu de navigation mots-cles ]
-			<B_mots>
-			<div class="divers">
-				<h2 class="menu-titre"><:mots_clefs:></h2>
-				<ul>
-					<BOUCLE_mots(MOTS) {id_rubrique} {par titre}>
-					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
-					</BOUCLE_mots>
-				</ul>
-			</div>
-			</B_mots>
-
+			
 		</div>[(#REM) fin navigation ]
 
 	</div>[(#REM) fin conteneur ]
