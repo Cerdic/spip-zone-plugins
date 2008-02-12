@@ -1,9 +1,9 @@
 #CACHE{7200}
 <THELIA_PROD type="PRODUIT" ref="THELIA-PRODUIT_REF"> 
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-<html dir="#LANG_DIR" lang="#LANG">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>THELIA-TITRE - [(#NOM_SITE_SPIP|textebrut)]</title>
+<title>THELIA-STRIPTITRE - [(#NOM_SITE_SPIP|textebrut)]</title>
 <meta name="description" content="THELIA-STRIPDESCRIPTION" />
 <INCLURE{fond=inc-head}>
 </head>
@@ -40,7 +40,7 @@
 				<div>
 				<THELIA_img type="IMAGE" num="1" produit="THELIA-ID" largeur="300">
 			 	<a href="THELIA-" onclick="window.open('#URL_PAGE{imgpop,ref=THELIA-PRODUIT_REF&amp;id_image=THELIA-ID}', '', 'toolbar,width=600,height=840')">
-				<img src="THELIA-IMAGE"  alt="THELIA-PRODTITRE" title="THELIA-PRODTITRE" border="0" class="contourImage"  id="photozoom" /></a>		   
+				<img src="THELIA-IMAGE"  alt="THELIA-PRODTITRE" title="THELIA-PRODTITRE" class="contourImage"  id="photozoom" /></a>		   
 				</THELIA_img>
 					<div class="ficheProduit">
 				 		<div class="chapoProduit">
