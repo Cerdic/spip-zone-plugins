@@ -25,19 +25,22 @@ function exec_convertisseur(){
   // --------------------------------------------------------------------------- 
 	// Definition des regex pour les convertions 
 	// ---------------------------------------------------------------------------
-	$conv_formats = array(); 
+	$conv_formats = array();       // les regex à appliquer
+	$conv_functions_pre = array(); // les functions à appliquer avant les regex 
 	
 	// syntaxe SPIP
 	// http://www.spip-contrib.net/IMG/html/antiseche_spip-3.html
 	
 	// Convertion MediaWiki -> SPIP
   // ref. syntaxe: http://www.mediawiki.org/wiki/Help:Formatting
+  $conv_functions_pre['MediaWiki_SPIP'] = array("convertisseur_add_ln","mediawiki_doQuotes");
   $conv_formats['MediaWiki_SPIP'] = array(
       "pattern" => array(        
-         // applies anywhere     
-        'bold_i' => "'''''([^''''']*)'''''",  
-        'bold'   => "'''([^''']*)'''",   // FIXME ''' test B à l'huile '''   "'''([^''']*)'''"
-        'i'      => "''([^'']*)''",     
+         // applies anywhere 
+        'ib' => "<i><b>([^<]*)</b></i>",            
+        'b' => "<b>([^<]*)</b>",  
+        'i'   => "<i>([^<]*)</i>", 
+        'ib_post' => "<ib>([^<]*)</ib>",
         // only at the beginning of the line         
         'h4'     => "\n=====([^=====]*)=====",
         'h3'     => "\n====([^====]*)====",
@@ -61,9 +64,10 @@ function exec_convertisseur(){
          // TODO: Table (http://www.mediawiki.org/wiki/Help:Tables)
         ),
       "replacement" => array(
-        'bold_i' => "{{<i>\\1</i>}}",   
-        'bold'   => "{{\\1}}",      
-        'i'      => "{\\1}",                
+        'ib' => "<ib>\\1</ib>", 
+        'b' => "{{\\1}}",   
+        'i' => "{\\1}", 
+        'ib_post' => "{{<i>\\1</i>}}",
         'h4'     => "{{{\\1}}}", 
         'h3'     => "{{{\\1}}}", 
         'h2'     => "{{{\\1}}}",  
@@ -219,7 +223,14 @@ function exec_convertisseur(){
      if (isset($_POST['format'])) {
         $conv_out = $conv_in;
         $format = trim(strip_tags($_POST['format']));        
-        if (is_array($conv_formats[$format])) {
+        if (is_array($conv_formats[$format])) {          
+          // fonctions pre traitement ?
+          if (is_array($conv_functions_pre[$format])) {
+              include_spip("inc/fonction_convertisseur");
+              foreach($conv_functions_pre[$format] as $key=>$pattern)  {                         
+                  $conv_out = $pattern($conv_out);
+              }               
+          } 
           // on convertit (en avant les regex!)                   
           foreach($conv_formats[$format]['pattern'] as $key=>$pattern)  {
               $replacement = $conv_formats[$format]['replacement'][$key];              
@@ -261,7 +272,6 @@ function exec_convertisseur(){
 	echo "<form method='post' enctype='multipart/form-data'>\n";
 	if ($conv_out!="") {
 	   $conv_out = entites_html($conv_out);
-#	   str_replace("</textarea>",'&lt;/textarea&gt;',$conv_out);
 	   echo "<div style='background-color:#E6ECF9;padding:8px 3px;margin-bottom:5px'>"._T("convertisseur:convertir_en");
 	   if (isset($conv_formats[$format])) echo "<strong>"._T("convertisseur:$format")."</strong>\n";
 	   echo "<textarea name='conv_out' cols='65' rows='12'>$conv_out</textarea><br />\n";
