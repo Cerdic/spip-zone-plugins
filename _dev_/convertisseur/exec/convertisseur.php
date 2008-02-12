@@ -54,7 +54,11 @@ function exec_convertisseur(){
         'ol_1'     => "\n\# ",  
         // TODO: Definition list, Preformatted text
         
-        // links - http://www.mediawiki.org/wiki/Help:Links  
+        // links - http://www.mediawiki.org/wiki/Help:Links 
+        'link_img'  => "\[\[(Image|Media):([^\[\[]*)\]\]", 
+        'link_cat'  => "\[\[(Category|Catégorie):([^\[\[]*)\]\]",
+        'link_user'  => "\[\[(Utilisateur|User):([^|\[]*)\|([^\[]*)\]\]",
+        'link_user2'  => "\[\[(Utilisateur|User):([^\[]*)\]\]",    
         'link_int'  => "\[\[([^\[\[]*)\]\]",       
         'link_ext2'  => "\\[([^\\[]*) ([^ ]*)([^(\\[| )]*)\\]", // FIXME si plusieurs espaces blanc 
         'link_ext1'  => " http([^ \r]*)",
@@ -78,6 +82,10 @@ function exec_convertisseur(){
         'ol_3'     => "-### ", 
         'ol_2'     => "-## ", 
         'ol_1'     => "-# ",
+        'link_img' => "",
+        'link_cat' => "",
+        'link_user' => "\\3",
+        'link_user2' => "\\2",
         'link_int'  => "\\1",      
         'link_ext2'  => "[\\2->\\1]",
         'link_ext1'  => " [->http\\1]",
