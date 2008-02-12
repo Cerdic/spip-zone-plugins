@@ -72,7 +72,7 @@ function exec_mutualisation_dist() {
 		}
 		else {
 			$url = 'http://'.$v.'/';
-			$erreur = ' (erreur!)';
+			$erreur = ' (<span class="erreur">erreur!</span>)';
 			$plugins = '-';
 		}
 		$page .= "<tr class='tr". $nsite % 2 ."'"
@@ -101,6 +101,7 @@ function exec_mutualisation_dist() {
 		#minipres{width:50em;}
 		.upgrade {text-align: center; padding:1em .5em;}
 		.upgrade input { border: 2px solid red;color:red; background-color:#fff; font-weight:bold;}
+		.erreur {color:red;font-weight:bold;}
 		</style>
 		</head>
 		', $page);
