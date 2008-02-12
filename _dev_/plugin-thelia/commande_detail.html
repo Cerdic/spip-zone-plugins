@@ -1,12 +1,10 @@
 #CACHE{7200}
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-<html dir="#LANG_DIR" lang="#LANG">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+<title>D&eacute;tail de la commande N&deg;THELIA-REF - [(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
 <INCLURE{fond=inc-head}>
-[(#REM) Lien vers le flux RSS de la rubrique ]
-<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
 </head>
 
 <body class="page_panier">
@@ -14,7 +12,9 @@
 
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
-
+	
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; D&eacute;tail de la commande N&deg;THELIA-REF</div>
 	
 	<div id="conteneur">
 
@@ -27,7 +27,7 @@
 				<THELIA_cmd type="COMMANDE" ref="THELIA-COMMANDE_REF" client="THELIA-CLIENT_ID">
 				
 				<div class="titrePage">
-				<h2>D&eacute;tail de la commande N&deg;THELIA-REF </h2>
+				<h1>D&eacute;tail de la commande N&deg;THELIA-REF </h1>
 				</div>
 			
 				[(#REM) Détail de la commande ]

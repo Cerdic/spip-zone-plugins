@@ -1,6 +1,6 @@
 #CACHE{7200}
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-<html dir="#LANG_DIR" lang="#LANG">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
 <title><:spipthelia:mes_coordonnees:> - [(#NOM_SITE_SPIP|textebrut)]</title>
 <meta name="description" content="<:spipthelia:mes_coordonnees:>" />
@@ -13,17 +13,18 @@
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
-	
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:mes_coordonnees:></div>								
+		
 	<div id="conteneur">
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
 		<div id="contenu">
-		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:mes_coordonnees:></div>								
 		  
 		[(#REM) Titre de la rubrique ]		  
 		  
 		  		<div class="titrePage">
-				<h2><:spipthelia:mes_coordonnees:></h2>
+				<h1><:spipthelia:mes_coordonnees:></h1>
 				</div>
 				
 				[(#REM) Mon adresse de facturation ]

@@ -1,9 +1,9 @@
 #CACHE{7200}
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-<html dir="#LANG_DIR" lang="#LANG">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<title>Identifiez-vous - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="Identifiez-vous" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
 <INCLURE{fond=inc-head}>
@@ -17,7 +17,9 @@
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
-	
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Identifiez-vous</div>
+			
 	<div id="conteneur">
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
@@ -25,12 +27,10 @@
 			
 				<div id="contenu">
 
-				<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Identifiez-vous</div>
-			
 				[(#REM) Titre de la page]
 
 				<div class="titrePage">
-				<h2>Identifiez-vous </h2>
+				<h1>Identifiez-vous </h1>
 				</div>
 				
 				[(#REM) Contenu de la page]

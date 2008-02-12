@@ -1,6 +1,6 @@
 #CACHE{7200}
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-<html dir="#LANG_DIR" lang="#LANG">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
 <title><:spipthelia:reglement_cheque:> - [(#NOM_SITE_SPIP|textebrut)]</title>
 <meta name="description" content="<:spipthelia:reglement_cheque:>" />
@@ -13,6 +13,7 @@
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
+	[(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:reglement_cheque:></div>
 		
 	<div id="conteneur">
@@ -23,7 +24,7 @@
 				[(#REM) Titre de la rubrique ]
 
 				<div class="titrePage">
-				<h2><:spipthelia:reglement_cheque:></h2>
+				<h1><:spipthelia:reglement_cheque:></h1>
 				</div>
 				
 			[(#REM) contenu de la page ]

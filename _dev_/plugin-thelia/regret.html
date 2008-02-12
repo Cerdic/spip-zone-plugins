@@ -13,16 +13,18 @@
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:erreur_paiement:></div>		
 	
 	<div id="conteneur">
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
 		<div id="contenu">
-		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:erreur_paiement:></div>		
+		
 						
 			[(#REM) Titre de la rubrique ]
 			<div class="titrePage">
-				<h2><:spipthelia:erreur_paiement:></h2>
+				<h1><:spipthelia:erreur_paiement:></h1>
 			</div>
 
 		[(#REM) Contenu de la page ]
