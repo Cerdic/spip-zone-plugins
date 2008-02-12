@@ -35,8 +35,9 @@ function exec_convertisseur(){
   // ref. syntaxe: http://www.mediawiki.org/wiki/Help:Formatting
   $conv_functions_pre['MediaWiki_SPIP'] = array("convertisseur_add_ln","mediawiki_doQuotes");
   $conv_formats['MediaWiki_SPIP'] = array(
-      "pattern" => array(        
-         // applies anywhere 
+      "pattern" => array( 
+        'model'  => "{{([^}}]*)}}",       
+         // applies anywhere        
         'ib' => "<i><b>([^<]*)</b></i>",            
         'b' => "<b>([^<]*)</b>",  
         'i'   => "<i>([^<]*)</i>", 
@@ -46,28 +47,31 @@ function exec_convertisseur(){
         'h3'     => "\n====([^====]*)====",
         'h2'     => "\n===([^=====]*)===",
         'h1'     => "\n==([^==]*)==",
-        'ul_3'     => "\n\*\*\* ", 
-        'ul_2'     => "\n\*\* ",  
+        'ul_3'     => "\n\*\*\*", 
+        'ul_2'     => "\n\*\*",  
         'ul_1'     => "\n\*", 
-        'ol_3'     => "\n\#\#\# ", 
-        'ol_2'     => "\n\#\# ",  
-        'ol_1'     => "\n\# ",  
-        // TODO: Definition list, Preformatted text
+        'ol_3'     => "\n\#\#\#", 
+        'ol_2'     => "\n\#\#",  
+        'ol_1'     => "\n\#",  
+        'dt'     => "\n\;([^\r]*)", 
+        'dd'     => "\n\:([^\r]*)", 
+        // TODO: Preformatted text
         
         // links - http://www.mediawiki.org/wiki/Help:Links 
         'link_img'  => "\[\[(Image|Media):([^\[\[]*)\]\]", 
-        'link_cat'  => "\[\[(Category|Catégorie):([^\[\[]*)\]\]",
-        'link_user'  => "\[\[(Utilisateur|User):([^|\[]*)\|([^\[]*)\]\]",
-        'link_user2'  => "\[\[(Utilisateur|User):([^\[]*)\]\]",    
-        'link_int'  => "\[\[([^\[\[]*)\]\]",       
-        'link_ext2'  => "\\[([^\\[]*) ([^ ]*)([^(\\[| )]*)\\]", // FIXME si plusieurs espaces blanc 
-        'link_ext1'  => " http([^ \r]*)",
-        'link_ext0'  => "\nhttp([^ \r]*)",
+        'link_cat'  => "\[\[(Category|Catégorie|:Category):([^\[\[]*)\]\]",
+        'link_user'  => "\[\[(Utilisateur|User):([^|\[]*)\|([^\[]*)\]\]",  // avec pipe
+        'link_user2'  => "\[\[(Utilisateur|User):([^\[]*)\]\]",  
+        'link_int'  => "\[\[([^|\[]*)\|([^\[]*)\]\]",                     // avec pipe
+        'link_int2'  => "\[\[([^\[\[]*)\]\]", 
+        'link_ext0'  => "\nhttp([^ \r]*)", 
+        'link_ext1'  => " http([^ \r]*)", 
+        'link_ext2'  => "\\[([^\\[ ]*) ([^(\\[|)]*)\\]",                  // support ext., supporte plusieurs blancs
         
-        
-         // TODO: Table (http://www.mediawiki.org/wiki/Help:Tables)
+        // TODO: Table (http://www.mediawiki.org/wiki/Help:Tables)
         ),
       "replacement" => array(
+        'model'  => "",
         'ib' => "<ib>\\1</ib>", 
         'b' => "{{\\1}}",   
         'i' => "{\\1}", 
@@ -82,15 +86,17 @@ function exec_convertisseur(){
         'ol_3'     => "-### ", 
         'ol_2'     => "-## ", 
         'ol_1'     => "-# ",
+        'dt'     => "<dt>\\1</dt>", 
+        'dd'     => "<dd>\\1</dd>",
         'link_img' => "",
         'link_cat' => "",
         'link_user' => "\\3",
         'link_user2' => "\\2",
-        'link_int'  => "\\1",      
-        'link_ext2'  => "[\\2->\\1]",
-        'link_ext1'  => " [->http\\1]",
-        'link_ext0'  => "[->http\\1]",
-        
+        'link_int'  => "\\2", 
+        'link_int2'  => "\\1",  
+        'link_ext0'  => "[->http\\1]", 
+        'link_ext1'  => " [->http\\1]",   
+        'link_ext2'  => "[\\2->\\1]", 
         
         )
   );
