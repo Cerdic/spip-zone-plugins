@@ -188,6 +188,21 @@ function TypoEnluminee_post_propre($texte) {
 function TypoEnluminee_pre_typo($texte) {
 	if ($GLOBALS['barre_typo_pas_de_fork_typo'] === true)
 		return $texte;
+		
+	// Compatibilite avec les versions de SPIP < 1.9.3
+	// Impossible de comprendre pourquoi tester_variable('debut_italique', "<i$class_spip>") ne renvoit rien en 1.9.2 !
+	// ==> contournement
+	if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
+		tester_variable('class_spip', ' class="spip"');
+		global $class_spip, $debut_italique, $fin_italique;
+		$debut_italique = "<i$class_spip>";
+		$fin_italique = '</i>';
+	} else {
+		tester_variable('debut_italique', "<i$class_spip>");
+		tester_variable('fin_italique', '</i>');
+		global $debut_italique, $fin_italique;
+	}
+	
 	
 	// remplace les fausses listes a puce par de vraies
 	// (recherche en debut de lignes - suivi d'un ou plusieurs caracteres blancs, en mode multiligne)
@@ -223,8 +238,8 @@ function TypoEnluminee_pre_typo($texte) {
 	);
 
 	$remplacer_raccourcis = array(
-		/* 9 */ 	tester_variable('debut_italique', "<i$class_spip>"),
-		/* 10 */	tester_variable('fin_italique', '</i>'),
+		/* 9 */ 	$debut_italique,
+		/* 10 */	$fin_italique,
 		/* 13 */ 	"&harr;",
 		/* 14 */ 	"&rarr;",
 		/* 15 */ 	"&larr;",
