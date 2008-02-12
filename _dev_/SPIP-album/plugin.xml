@@ -17,9 +17,9 @@ Il ajoute deux mod&#232;les de gestion des photos:
 <p><b><u>Code :</u> </b>&lt;imgXX|gallery|nbre_vignette=YY|sens_tri=Z&gt;.</p>
 <p><b><u>Utilisation :</u></b>
 <ul>
-<li><b>XX</b> correspond au num&#233;ro d&#039;une des images contenues dans la galerie. Il ne sert qu&#039;à transmettre au mod&#232;le l&#039;information qui lui permettra de retrouver la r&#233;f&#233;rence de l&#039;article.<br />
+<li><b>XX</b> correspond au num&#233;ro d&#039;une des images contenues dans la galerie. Il ne sert qu&#039;&agrave; transmettre au mod&#232;le l&#039;information qui lui permettra de retrouver la r&#233;f&#233;rence de l&#039;article.<br />
 Il est &#224; noter que les photos sont tri&#233;es par ordre croissant en fonction du <b>num titre</b> et de la <b>date</b>.</li>
-<li><b>YY</b> correspond au nombre de vignettes affich&#233;es en bas pouvant aller de 1 à 10. En cas d&#039;absence de ce dernier param&#234;tre, le nombre de vignettes est de <b>10</b>.</li>
+<li><b>YY</b> correspond au nombre de vignettes affich&#233;es en bas pouvant aller de 1 &agrave; 10. En cas d&#039;absence de ce dernier param&#234;tre, le nombre de vignettes est de <b>10</b>.</li>
 <li><b>Z</b> correspond au sens du tri.</li>
 </ul>
 <p><b><u>A noter :</u> </b>Cette galerie int&#232;gre aussi l&#039;option {Imagebox} lorsque l&#039;on clique sur la photo s&#233;lectionn&#233;e.</p>
