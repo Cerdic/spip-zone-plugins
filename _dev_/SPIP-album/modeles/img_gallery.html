@@ -1,38 +1,56 @@
+[(#REM) 
+
+	Modele pour <img>
+	
+	Permet l'affichage sous forme de galerie les photos contenues
+	dans un article
+	
+]
+
 <BOUCLE_album(ARTICLES documents_articles documents){id_document}>
 [(#REM) Recuperation des variables d'initialisation du modele]
-#SET{increment, #ENV{nbre_vignette}}
-#SET{sens, #ENV{senstri}}
+#SET{taille, #ENV{taille, #CONFIG{album/taille, 450}}}
+#SET{increment, #ENV{nbre_vignette, #CONFIG{album/nbrevignette, 10}}} [(#GET{increment}|>{10}|?{' ',''}) #SET{increment, 10}]
+#SET{sens, #ENV{senstri, #CONFIG{album/senstri, 0}}}
 
-<B_vignette>
+<B_galerie>
+<script type="text/javascript" src="#CHEMIN{javascript/album_gallery.js}"></script>
 [(#ANCRE_PAGINATION)]
 #SET{debut, 1}
-<BOUCLE_vignette(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens,0}}{pagination #GET{increment,10}}>
+<span id="diaporama" class="spip_document_#ENV{id} spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok" style="[float:(#ENV{align}|match{left|right}); ]height:#GET{taille}px; width:#GET{taille}px;"></span>
+<BOUCLE_galerie(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}{pagination #GET{increment}}>
 [(#GET{debut}|!={0}|?{' ',''})
-<table class="table_photo">
-   <tr>
-      <td id="affiche_photo">
-         <a[ href="(#URL_DOCUMENT)" rel="lightbox"][ title='(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})']>
-            <img[ src="(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{src})"][ width="(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{width})"][ height="(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{height})"][ alt='(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})'] title="Cliquez sur la photo pour la visualiser dans sa taille originale." />
-         </a>
-         <dl>
-            <dt id="titre_photo" class="spip_doc_titre">[(#TITRE|supprimer_numero|sinon{[(#FICHIER)]})]</dt>
-            <dd id="descriptif_photo" class="spip_doc_descriptif">[(#DESCRIPTIF)]</dd>
-         </dl>
-      </td>
-   </tr>
+
+<table class="galerie_photo" style="[width:(#GET{taille}|plus{100})px; ][height:(#GET{taille}|plus{100})px;]">
+	<tr>
+		<td>
+			<dl>
+				<dt id="affiche_photo" style="background:url('#CHEMIN{img_pack/loading.gif}') no-repeat center 50%; width:#GET{taille}; height:#GET{taille};">
+					<a href="[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]" rel="imagebox-gallery"[ title="(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})"]>
+						[<span id="grande_photo">(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|inserer_attribut{title,'<:album:clic_photo:>'})</span>]
+					</a>
+				</dt>
+				<dt id="titre_photo" class="spip_doc_titre">[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]</dt>
+				<dd id="descriptif_photo" class="spip_doc_descriptif">[(#DESCRIPTIF|entites_html)]</dd>
+			</dl>
+		</td>
+	</tr>
 </table>
-[<div id="album_compteur">(#PAGINATION{gallery_compteur}{total=#GRAND_TOTAL})</div>]
-<table id="table_vignette" cellpadding="0" cellspacing="0">
+
+<div id="galerie_compteur">[(#PAGINATION{gallery_compteur}{total=#GRAND_TOTAL}) - ]<a href="#URL_SITE_SPIP/spip.php?page=diaporama&id_document=#ENV{id_document}" onClick="javascript:window.open('#URL_SITE_SPIP/spip.php?page=diaporama&id_document=#ENV{id_document}','','toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, menuBar=0, width=550, height=550');return(false);"><:album:lance_diapo:></a></div>
+
+<table id="bande_vignette" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="arrow">[(#PAGINATION{gallery_precedent})]</td>#SET{debut, 0}]
 		<td class="vignette">
-			<a target="_self" href="javascript:fp_ShowImg('[(#URL_DOCUMENT)]','[(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{src})]','[(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{width})]','[(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{height})]','[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]','[(#DESCRIPTIF|texte_backend)]');" title="[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]">
-            	<img[ src="(#LOGO_DOCUMENT||image_reduire{50}|extraire_attribut{src})"][ width="(#LOGO_DOCUMENT||image_reduire{50}|extraire_attribut{width})"][ height="(#LOGO_DOCUMENT||image_reduire{50}|extraire_attribut{height})"][ alt="(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})"] />
-			</a> 
+			[<a target="_self" href="javascript:Affiche_Image('[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]','[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]','[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{width})]','[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{height})]','[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]','[(#DESCRIPTIF|entites_html)]');" title="[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]">
+				(#LOGO_DOCUMENT||image_reduire{50}|inserer_attribut{alt,[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]})
+   			</a>]
 		</td>
-</BOUCLE_vignette>
+</BOUCLE_galerie>
 		<td class="arrow">[(#PAGINATION{gallery_suivant})]</td>
 	</tr>
 </table>
-</B_vignette>
+</span>
+</B_galerie>
 </BOUCLE_album>

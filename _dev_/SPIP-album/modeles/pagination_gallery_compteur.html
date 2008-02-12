@@ -10,4 +10,4 @@
 [(#GET{derniere}|>{#ENV{total}}|?{' ',''})[(#SET{derniere, #ENV{total}})]]
 
 [(#REM) Affiche le compteur de l'album ]
-<u>Photos :</u> &#91;#GET{premiere}-#GET{derniere}&#93; / #ENV{total}
+<u><:album:photos:> :</u> &#91;#GET{premiere}-#GET{derniere}&#93; / #ENV{total}

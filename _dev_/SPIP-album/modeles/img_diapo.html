@@ -1,0 +1,48 @@
+[(#REM) 
+
+	Modele pour <img>
+	
+	Permet l'affichage sous forme de diaporama des photos contenues
+	dans un article ou une rubrique ou un secteur
+	
+]
+[(#REM) Recuperation des variables d'initialisation du modele]
+#SET{taille, #ENV{taille, #CONFIG{album/taille, 450}}}
+#SET{increment, #ENV{nbre_vignette, #CONFIG{album/nbrevignette, 10}}}
+#SET{sens, #ENV{senstri, #CONFIG{album/senstri, 0}}}
+
+<span id="diaporama" class="spip_document_#ENV{id} spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok" style="[float:(#ENV{align}|match{left|right});][ height:(#GET{taille})px;][ width:(#GET{taille})px;]"></span>
+<script type="text/javascript">
+// Code d'appel de la fonction diaporama.
+var init_diapo = function(){
+	$.slideshow(
+		{
+			container : 'diaporama',
+			loader: '#CHEMIN{img_pack/loading.gif}', 
+			linksClass: 'pagelinks',
+			linksSeparator : '',
+			fadeDuration : 250,
+			activeLinkClass: 'activeSlide',
+			nextslideClass: 'nextSlide',
+			prevslideClass: 'prevSlide',
+			autoplay: 5,
+			random: false,
+			images: [
+<BOUCLE_imgsecteur(DOCUMENTS documents_articles articles types_documents){id_secteur}{statut=publie}{extension IN png,jpg,gif}{par date}{inverse #GET{sens}}{0,#GET{increment}}{", "}>
+						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]' }</BOUCLE_imgsecteur>
+<BOUCLE_imgrubrique(DOCUMENTS documents_articles articles types_documents){id_rubrique}{statut=publie}{extension IN png,jpg,gif}{par date}{inverse #GET{sens}}{0,#GET{increment}}{", "}>
+						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]' }</BOUCLE_imgrubrique>
+<BOUCLE_imgarticle(ARTICLES documents_articles documents){id_document}><BOUCLE_imgdocart(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}>
+						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]' }</BOUCLE_imgdocart></BOUCLE_imgarticle>
+<BOUCLE_imgbreve(BREVES documents_breves documents){id_document}><BOUCLE_imgdocbreve(DOCUMENTS){id_breve}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}>
+						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]' }</BOUCLE_imgdocbreve></BOUCLE_imgbreve>
+<BOUCLE_imgrub(RUBRIQUES documents_rubriques documents){id_document}><BOUCLE_imgdocrub(DOCUMENTS){id_rubrique}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}>
+						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]' }</BOUCLE_imgdocrub></BOUCLE_imgrub><//B_imgbreve><//B_imgarticle><//B_imgrubrique><//B_imgsecteur>
+					]
+		}
+	);
+};
+//onAjaxLoad est utilise seulement dans la partie privee
+if(typeof onAjaxLoad =="function") onAjaxLoad(init_diapo);
+$(document).ready(init_diapo);
+</script>

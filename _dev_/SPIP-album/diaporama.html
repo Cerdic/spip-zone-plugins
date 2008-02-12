@@ -1,0 +1,13 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title><:album:diaporama:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inc-head}>
+</head>
+
+<body>
+	[(#MODELE{img_diapo}{id_secteur}{id_rubrique}{id_document}{align=center}{taille=450})]
+	<p class="spip_bouton" style="text-align:center;"><input type="submit" name="valide" onClick="window.close()" value="<:album:fermer_fenetre:>" style="float:none;" /></p>
+</body>
+</html>
