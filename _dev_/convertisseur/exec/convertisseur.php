@@ -205,6 +205,22 @@ function exec_convertisseur(){
         'url' => "\\1 (\\2)",       
       )      
   );
+  
+   // Convertion XTG -> SPIP
+   // format demandé par Jean Luc Girard
+   // adresse speficication ?   
+  $conv_formats['XTG_SPIP'] = array(
+      "pattern" => array(
+        'tag'    => "<([^>]*)>", 
+        'meta'   => "@([^:]*):",
+        'ul'     => "\n\=* ",  
+      ),
+      "replacement" => array(
+        'tag'   => "", 
+        'meta'   => "\n\n",  // ou "\n_ " ?
+        'ul'     => "\n-* ",   
+      )      
+  );
 
 
   $conv_formats['XPressTags'] = 'quark'; // function extract/
