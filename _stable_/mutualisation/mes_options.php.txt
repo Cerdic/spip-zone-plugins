@@ -134,4 +134,16 @@
 	 * 
 	 * 	les constantes _INSTALL_(HOST|PASS|USER)_DB sont inutiles.
 	 */
+	
+	/*
+	 * Notes concernant MySQL
+	 * 
+	 * - Pour la creation d'utilisateurs MYSQL
+	 * (creer_base+creer_user_base)
+	 * il est possible de definir les droits de ces utilisateurs avec la constante 
+	 * _PRIVILEGES_MYSQL_USER_BASE (ici avec les valeurs utilisees par defaut) :
+	 * 
+	 *  define('_PRIVILEGES_MYSQL_USER_BASE','Alter, Select, Insert, Update, Delete, Create, Drop');
+	 *
+	 */
 ?>

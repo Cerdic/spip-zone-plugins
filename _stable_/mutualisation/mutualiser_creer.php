@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+define('_PRIVILEGES_MYSQL_USER_BASE','Alter, Select, Insert, Update, Delete, Create, Drop');
 
 // http://doc.spip.org/@mutualiser_creer
 function mutualiser_creer($e, $options) {
@@ -156,11 +157,11 @@ function mutu_etape_creer_base($e, $options){
 									
 								case 'mysql':
 								default:
-									$req[] = "GRANT Alter,Select,Insert,Update,Delete,Create,Drop,Execute ON "
+									$req[] = "GRANT " . _PRIVILEGES_MYSQL_USER_BASE . " ON "
 										. _INSTALL_NAME_DB.".* TO '" 
 										. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
 										. "' IDENTIFIED BY '" . _INSTALL_PASS_DB . "'";
-									$err[] = "GRANT Alter,Select,Insert,Update,Delete,Create,Drop,Execute ON "
+									$err[] = "GRANT " . _PRIVILEGES_MYSQL_USER_BASE . " ON "
 										. _INSTALL_NAME_DB.".* TO '" 
 										. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
 										. "' IDENTIFIED BY 'xxx'";
