@@ -27,6 +27,10 @@ function cs_code_echappement($rempl, $source='') {
 	return "<span class='base64$source' title='$base64'></span>";
 }
 
+function cs_preg_quote(&$item) {
+	$item = preg_quote($item, ',');
+}
+
 // lit ecrit les metas et initialise $cs_metas_pipelines
 // cette fonction est appellee par cout_options a chaque hit de la page
 function cs_initialisation($forcer=false) {

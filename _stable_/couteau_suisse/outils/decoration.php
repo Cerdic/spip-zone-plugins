@@ -67,7 +67,7 @@ cs_log("decoration_installe()");
 	// sauvegarde en meta : aide
 	ecrire_meta('cs_decoration_racc', '<b>'.join('</b>, <b>', $aide).'</b>');
 	// protection $auto_balises pour la future regExpr
-	foreach($auto_balises as $i=>$v) $auto_balises[$i] = preg_quote($v, ',');
+	array_walk($auto_balises, 'cs_preg_quote');
 	// sauvegarde en meta : decoration
 	ecrire_meta('cs_decoration', serialize(array(
 		// balises fixes a trouver

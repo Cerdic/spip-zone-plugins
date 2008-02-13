@@ -67,7 +67,7 @@ function cs_rempl_glossaire($texte) {
 		}
 		$m = $mot['titre'];
 		$les_mots = array_unique($les_mots);
-		foreach($les_mots as $i=>$v) $les_mots[$i] = preg_quote($v, ',');
+		array_walk($les_mots, 'cs_preg_quote');
 		$les_mots = join('|', $les_mots);
 		if(preg_match(",\W($les_mots)\W,i", $texte)) {
 			// prudence 1 : on protege TOUTES les balises contenant le mot en question
