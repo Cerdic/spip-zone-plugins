@@ -20,6 +20,12 @@ function Crayons_insert_head($head) {
     //par défaut, pas de traitement sur les entetes
     $res = $head;
     
+    //vérifie la présence de cfg, si pas de cfg on cherche meme pas à faire de l'espace privé
+    if (!function_exists('lire_config')) {
+        return $res;
+    }
+    
+    
     //vérifie que l'éditiojn de l'espace privé est autorisé
     if (lire_config('crayons/espaceprive') == 'on') {
         //determine les pages (exec) crayonnables
