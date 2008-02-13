@@ -196,9 +196,9 @@ function TypoEnluminee_pre_typo($texte) {
 		tester_variable('class_spip', ' class="spip"');
 		global $class_spip;
 	}
-		tester_variable('debut_italique', "<i$class_spip>");
-		tester_variable('fin_italique', '</i>');
-		global $debut_italique, $fin_italique;
+	tester_variable('debut_italique', "<i$class_spip>");
+	tester_variable('fin_italique', '</i>');
+	global $debut_italique, $fin_italique;
 	
 	
 	// remplace les fausses listes a puce par de vraies
