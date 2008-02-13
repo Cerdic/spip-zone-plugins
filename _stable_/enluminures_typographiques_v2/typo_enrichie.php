@@ -194,14 +194,11 @@ function TypoEnluminee_pre_typo($texte) {
 	// ==> contournement
 	if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
 		tester_variable('class_spip', ' class="spip"');
-		global $class_spip, $debut_italique, $fin_italique;
-		$debut_italique = "<i$class_spip>";
-		$fin_italique = '</i>';
-	} else {
+		global $class_spip;
+	}
 		tester_variable('debut_italique', "<i$class_spip>");
 		tester_variable('fin_italique', '</i>');
 		global $debut_italique, $fin_italique;
-	}
 	
 	
 	// remplace les fausses listes a puce par de vraies
