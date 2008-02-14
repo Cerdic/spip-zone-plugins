@@ -50,7 +50,22 @@
 				 		<div class="descriptionProduit">
 							THELIA-DESCRIPTION
 						</div>
-						<div class="caracProduit">
+						<T_caracteristique>
+						<div class="caracteristiqueProduit">
+							<ul>
+							<THELIA_caracteristique type="CARACTERISTIQUE" produit="THELIA-ID">
+								<li>THELIA-TITRE : 
+								<THELIA_caracval type="CARACVAL" produit="THELIA-PRODUIT" caracteristique="THELIA-ID">
+									THELIA-VALEUR
+								</THELIA_caracval></li>
+								
+								
+							</THELIA_caracteristique>
+							</ul>
+						</div>
+						</T_caracteristique>
+						<//T_caracteristique>
+						<div class="declinaisonProduit">
 							<THELIA_declinaisons type="DECLINAISON" produit="THELIA-ID">
 								THELIA-TITRE : <select name="declinaisonTHELIA-ID">
 									<option value=""><:spipthelia:votre_choix:></option>
