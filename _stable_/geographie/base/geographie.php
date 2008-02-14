@@ -28,13 +28,15 @@ $spip_geo_departements_key = array(
 $spip_geo_communes = array(
 		"id_commune"	=> "char(6) default '' NOT NULL",
 		"id_departement"	=> "smallint NOT NULL",
+		"id_pays"	=> "smallint NOT NULL",
 		"code_postal"	=> "char(5) default '' NOT NULL",
 		"nom"	=> "tinytext DEFAULT '' NOT NULL",
 		"longitude"	=> "varchar(15) default '' NOT NULL",
 		"latitude"	=> "varchar(15) default '' NOT NULL",
 );
 $spip_geo_communes_key = array(
-		"PRIMARY KEY"		=> "id_commune"
+		"PRIMARY KEY"		=> "id_commune",
+		"INDEX id_pays"		=> "id_pays"
 );
 
 global $tables_principales;
