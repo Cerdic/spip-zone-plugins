@@ -42,18 +42,30 @@
 			 	<a href="THELIA-" onclick="window.open('#URL_PAGE{imgpop,ref=THELIA-PRODUIT_REF&amp;id_image=THELIA-ID}', '', 'toolbar,width=600,height=840')">
 				<img src="THELIA-IMAGE"  alt="THELIA-PRODTITRE" title="THELIA-PRODTITRE" class="contourImage"  id="photozoom" /></a>		   
 				</THELIA_img>
+					<form action="#URL_PAGE{panier,thelia_action=ajouter&amp;ref=THELIA-REF}" method="post" id="formAjouter">
 					<div class="ficheProduit">
 				 		<div class="chapoProduit">
 						THELIA-CHAPO
 						</div>
 				 		<div class="descriptionProduit">
-						THELIA-DESCRIPTION
+							THELIA-DESCRIPTION
 						</div>
-				 		<div class="prixProduit">
-						THELIA-PRIX &euro;
+						<div class="caracProduit">
+							<THELIA_declinaisons type="DECLINAISON" produit="THELIA-ID">
+								THELIA-TITRE : <select name="declinaisonTHELIA-ID">
+									<option value=""><:spipthelia:votre_choix:></option>
+									<THELIA_decldisp type="DECLIDISP" declinaison="THELIA-ID">
+										<option value="THELIA-ID">THELIA-TITRE</option>
+									</THELIA_decldisp>
+								</select>		 		
+							</THELIA_declinaisons>
 						</div>
-				 	<a href="#URL_PAGE{panier,thelia_action=ajouter&amp;ref=THELIA-REF}" class="LIEN_commander"><:spipthelia:ajouter_panier:></a>
+						<div class="prixProduit">
+							THELIA-PRIX &euro;
+						</div>
+				 		<a href="#" onClick="document.getElementById('formAjouter').submit()" class="LIEN_commander"><:spipthelia:ajouter_panier:></a>
 					</div> 
+					</form>
 				</div>
 			
 							

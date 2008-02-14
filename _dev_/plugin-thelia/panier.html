@@ -46,7 +46,11 @@
 				<THELIA_CONTENU_PANIER type="PANIER">
 				<tr>
 					<td class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td>
-					<td class="ligneTableau">THELIA-REF<br/>THELIA-TITRE </td>
+					<td class="ligneTableau">THELIA-REF<br/>THELIA-TITRE
+						<THELIA_decval type="DECVAL" article="THELIA-ARTICLE">
+							<br/>THELIA-DECLITITRE : THELIA-VALEUR
+						</THELIA_decval>
+					</td>
 					<td class="ligneTableau">THELIA-PRIXU &euro; </td>
     					<td class="ligneTableau">
 					<form action="#URL_PAGE{panier, article=THELIA-ARTICLE}" method="post" name="formpanierTHELIA-ARTICLE" id="formpanierTHELIA-ARTICLE">

@@ -40,5 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'modifier_info_perso' => 'Modifier mes informations personnelles (coordonn&eacute;es, mot de passe, ... )',
 'modifier_adresse_livraison' => 'Modifier mes adresses de livraison',
 'visualiser_commandes' => 'Visualiser mes commandes',
-'recapitulatif_commande' => 'R&eacute;capitulatif de ma commande');
+'recapitulatif_commande' => 'R&eacute;capitulatif de ma commande',
+'votre_choix' => 'Votre choix...');
 ?>
