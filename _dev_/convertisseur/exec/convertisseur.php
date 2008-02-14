@@ -241,27 +241,37 @@ function exec_convertisseur(){
 	// Action ? 
 	// ---------------------------------------------------------------------------
 	if (isset($_POST['conv_in'])) {
-	   $conv_in = $_POST['conv_in'];
-	   
+	   $conv_in = _request('conv_in');
+	   $convert_charset = _request('convert_charset');
+	  	   
 	   // upload ?
+	   $flag_upload = false; 
 	   if ($_FILES) {
 	   	$file = array_pop($_FILES);
 	   	$fname = $file['tmp_name'];
 	   	if ($fname) {
 	   	  include_spip('inc/getdocument');
 	   	  chdir('..'); ## dirty
-	   	  if (
-	   	  deplacer_fichier_upload($fname, 'tmp/convertisseur.tmp')
-                  AND lire_fichier('tmp/convertisseur.tmp', $tmp))
-		   	$conv_in = $tmp;
-                  chdir('ecrire/');
-                }
+	   	  if (deplacer_fichier_upload($fname, 'tmp/convertisseur.tmp') 
+            AND lire_fichier('tmp/convertisseur.tmp', $tmp))
+		   	             $conv_in = $tmp;
+        chdir('ecrire/');
+        $flag_upload = true; 
+        }
 	   }
 
      if (isset($_POST['format'])) {
         $conv_out = $conv_in;
         $format = trim(strip_tags($_POST['format']));        
-        if (is_array($conv_formats[$format])) {          
+        if (is_array($conv_formats[$format])) {  
+         
+         // convertir le charset ?
+         if ($flag_upload && $convert_charset=='true') {
+              include_spip('inc/charsets');
+    	        $conv_out = importer_charset($conv_out, $charset);
+    	        $conv_in = importer_charset($conv_in, $charset);
+	        }	        
+                   
           // fonctions pre traitement ?
           if (is_array($conv_functions_pre[$format])) {
               include_spip("inc/fonction_convertisseur");
@@ -273,7 +283,7 @@ function exec_convertisseur(){
           foreach($conv_formats[$format]['pattern'] as $key=>$pattern)  {
               $replacement = $conv_formats[$format]['replacement'][$key];              
               $conv_out = eregi_replace($pattern, $replacement, $conv_out);
-          }                    
+          }    
         } else {
         
 	        // c'est un nom de fonction : 'quark' par exemple
@@ -321,7 +331,6 @@ function exec_convertisseur(){
 	echo _L("Copiez-le ci-dessous :")."<br />\n";
 
 	$conv_in = entites_html(substr($conv_in,0,40000));
-#	str_replace("</textarea>",'&lt;/textarea&gt;',$conv_in);
 	echo "<textarea name='conv_in' cols='65' rows='12'>$conv_in</textarea><br />\n";
 	echo _T("convertisseur:from");
   echo "<select name='format'>\n"; 
@@ -335,9 +344,10 @@ function exec_convertisseur(){
 	echo "<div align='right'>";
 	echo _L("ou choisissez un fichier :")."<br />\n";
 	echo "<input type='file' name='upload' /><br />\n";
+	echo "<input type='checkbox' value='true' name='convert_charset' />"._L("convertir en UTF-8")."\n";
 	echo "</div>\n";
 
-  echo "<input type='submit' value='". _T("convertisseur:convertir")."'>\n";  
+  echo "<input type='submit' value='". _T("convertisseur:convertir")."'>\n";   
   echo "</form>\n"; 
 
   
