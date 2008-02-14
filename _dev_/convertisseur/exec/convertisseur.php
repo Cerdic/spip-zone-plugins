@@ -23,7 +23,7 @@ function exec_convertisseur(){
 	}
    
   // --------------------------------------------------------------------------- 
-	// Definition des regex pour les convertions 
+	// Definition des regex pour les Conversions 
 	// ---------------------------------------------------------------------------
 	$conv_formats = array();       // les regex à appliquer
 	$conv_functions_pre = array(); // les functions à appliquer avant les regex 
@@ -31,7 +31,7 @@ function exec_convertisseur(){
 	// syntaxe SPIP
 	// http://www.spip-contrib.net/IMG/html/antiseche_spip-3.html
 	
-	// Convertion MediaWiki -> SPIP
+	// Conversion MediaWiki -> SPIP
   // ref. syntaxe: http://www.mediawiki.org/wiki/Help:Formatting
   $conv_functions_pre['MediaWiki_SPIP'] = array("convertisseur_add_ln","mediawiki_doQuotes");
   $conv_formats['MediaWiki_SPIP'] = array(
@@ -110,7 +110,7 @@ function exec_convertisseur(){
   );
 	
   
-  // Convertion MoinWiki -> SPIP
+  // Conversion MoinWiki -> SPIP
   // ref. syntaxe: http://trac.edgewall.org/wiki/WikiFormatting
   // ref. syntaxe: http://moinmo.in/HelpOnFormatting?highlight=%28formatting%29 
   $conv_formats['MoinWiki_SPIP'] = array(
@@ -159,7 +159,7 @@ function exec_convertisseur(){
         )
   );
   
-  // Convertion BBcode -> SPIP
+  // Conversion BBcode -> SPIP
   // ref. syntaxe: http://en.wikipedia.org/wiki/BBCode
   // voir aussi la version filtre: http://www.spip-contrib.net/Du-BBcode-dans-SPIP  
   // question: detecter si barre enrichie pour adopter la syntaxte etendue ?
@@ -198,7 +198,7 @@ function exec_convertisseur(){
       )      
   );
   
-  // Convertion SPIP -> txt
+  // Conversion SPIP -> txt
   $conv_formats['SPIP_txt'] = array(
       "pattern" => array(
         'h'     => "{{{([^}}}]*)}}}",
@@ -214,9 +214,10 @@ function exec_convertisseur(){
       )      
   );
   
-   // Convertion XTG -> SPIP
-   // format demandé par Jean Luc Girard
-   // adresse speficication ?   
+  // Conversion XTG -> SPIP
+  // format demandé par Jean Luc Girard
+  // http://195.13.83.33/twiki/bin/view/FipDoc/QuarkTagsList
+  // http://www.macworld.com/downloads/magazine/XPressTagsList.pdf   
   $conv_formats['XTG_SPIP'] = array(
       "pattern" => array(
         'tag'    => "<([^>]*)>", 
@@ -227,6 +228,25 @@ function exec_convertisseur(){
         'tag'   => "", 
         'meta'   => "\n\n",  // ou "\n_ " ?
         'ul'     => "\n-* ",   
+      )      
+  );
+  
+  // Conversion SLA (Scribus) -> SPIP
+  // SLA 1.2 http://docs.scribus.net/index.php?lang=en&sm=scribusfileformat&page=scribusfileformat
+  // SLA 1.3 http://wiki.scribus.net/index.php/File_Format_for_Scribus_1.3.x 
+  $conv_formats['SLA_SPIP'] = array(
+      "pattern" => array(
+        'ch'    => " CH=\"([^\"]*)\" ",  // "CH=\"<([^>]*)\""
+        'br'    => "&#x5;",
+        'sp'    => "&#x1d;",        
+        'tag'   => "<([^\>]*)>", 
+
+      ),
+      "replacement" => array(
+        'ch'   => ">\\1<",
+        'br'   => "\n\n\n",
+        'sp'   => " ",
+        'tag'   => "",
       )      
   );
 
