@@ -36,12 +36,12 @@ function exec_convertisseur(){
   $conv_functions_pre['MediaWiki_SPIP'] = array("convertisseur_add_ln","mediawiki_doQuotes");
   $conv_formats['MediaWiki_SPIP'] = array(
       "pattern" => array( 
-        'model'  => "{{([^}}]*)}}",       
+        'model'  => "{{([^}}]*)}}",   // FIXME si template ds template       
          // applies anywhere        
         'ib' => "<i><b>([^<]*)</b></i>",            
         'b' => "<b>([^<]*)</b>",  
         'i'   => "<i>([^<]*)</i>", 
-        'ib_post' => "<ib>([^<]*)</ib>",
+        'ib_post' => "<ib>([^<]*)</ib>",        
         // only at the beginning of the line         
         'h4'     => "\n=====([^=====]*)=====",
         'h3'     => "\n====([^====]*)====",
@@ -58,15 +58,19 @@ function exec_convertisseur(){
         // TODO: Preformatted text
         
         // links - http://www.mediawiki.org/wiki/Help:Links 
+        'comment' => "<!--([^\-]*)-->",
         'link_img'  => "\[\[(Image|Media):([^\[\[]*)\]\]", 
         'link_cat'  => "\[\[(Category|Catégorie|:Category):([^\[\[]*)\]\]",
         'link_user'  => "\[\[(Utilisateur|User):([^|\[]*)\|([^\[]*)\]\]",  // avec pipe
-        'link_user2'  => "\[\[(Utilisateur|User):([^\[]*)\]\]",  
+        'link_user2'  => "\[\[(Utilisateur|User):([^\[]*)\]\]", 
+        'link_lang'  => "\[\[([^\:\[]*):([^\[]*)\]\]",  
         'link_int'  => "\[\[([^|\[]*)\|([^\[]*)\]\]",                     // avec pipe
         'link_int2'  => "\[\[([^\[\[]*)\]\]", 
         'link_ext0'  => "\nhttp([^ \r]*)", 
         'link_ext1'  => " http([^ \r]*)", 
         'link_ext2'  => "\\[([^\\[ ]*) ([^(\\[|)]*)\\]",                  // support ext., supporte plusieurs blancs
+        'ref' => "<ref>", 
+        'ref2' => "</ref>",
         
         // TODO: Table (http://www.mediawiki.org/wiki/Help:Tables)
         ),
@@ -88,15 +92,19 @@ function exec_convertisseur(){
         'ol_1'     => "-# ",
         'dt'     => "<dt>\\1</dt>", 
         'dd'     => "<dd>\\1</dd>",
+        'comment' => "",
         'link_img' => "",
         'link_cat' => "",
         'link_user' => "\\3",
         'link_user2' => "\\2",
+        'link_lang' => "",
         'link_int'  => "\\2", 
         'link_int2'  => "\\1",  
         'link_ext0'  => "[->http\\1]", 
         'link_ext1'  => " [->http\\1]",   
-        'link_ext2'  => "[\\2->\\1]", 
+        'link_ext2'  => "[\\2->\\1]",
+        'ref'  => "[[ ",
+        'ref2'  => " ]]",
         
         )
   );
