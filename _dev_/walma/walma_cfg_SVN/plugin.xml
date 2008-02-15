@@ -32,7 +32,7 @@ _ Explications et forum voir [->http://elastick.net/?id_article=51]
 	<prefix>
 walma
 	</prefix>
-	<recommande id="cfg" version='[1.0.5;]' src="http://files.spip.org/spip-zone/cfg.zip" />
+	<!-- recommande id="cfg" version='[1.0.5;]' src="http://files.spip.org/spip-zone/cfg.zip" / -->
 	<fonctions>
 		walma_fonctions.php
 	</fonctions>
