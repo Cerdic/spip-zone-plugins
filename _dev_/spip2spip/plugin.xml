@@ -14,13 +14,13 @@ _ &#169; 2006 - Licence GPL
     <p>Permet de copier les articles de SPIP distant dans le SPIP sous forme d'articles. 
     A la diff&#233;rence de miroir de syndication, vous avez le choix des articles &#224; recopier ou diffuser en attribuant les mots-cl&#233;s du groupe dedi&#233; - spip2spip - 
     <br />Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;es: 
+    </p>
     <ul>
     <li>formatage original SPIP de l'article</li>
     <li>images, documents attach&#233;s recopi&#233;s en documents distants</li>
     <li>essayer de faire correspondre les auteurs</li>
     <li>licence ...</li>  
     </ul>
-    </p>
 	</description>
 	<lien>http://trac.rezo.net/trac/spip-zone/wiki/SpipToSpip</lien> <!-- URI de documentation --> 
 	<fonctions>spiptospip_filtre.php</fonctions>
