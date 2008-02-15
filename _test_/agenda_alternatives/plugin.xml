@@ -10,11 +10,11 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 	<description>Permet l'utilisation des plugins Agenda &amp; Widget Calendar dans le squelettes Alternatives, et donc la gestion des &eacute;v&egrave;nements.
 
 Fonctions :
-<quote>1. Un mini calendrier dans le cadre de gauche
-_ 2. Un encart 'Agenda' dans le cadre de droite avec les prochains &eacute;v&egrave;nements
-_ 3. Un bouton 'Agenda' suppl&eacute;mentaire en haut, menant &agrave; :
-_ 4. Une page 'evenements' qui liste les &eacute;v&egrave;nements (du jour/du mois, prochains, pass&eacute;s)
-_ 5. La liste des &eacute;v&egrave;nements associ&eacute;s au bas de chaque article</quote>
+- 1. Un mini calendrier dans le cadre de gauche
+- 2. Un encart 'Agenda' dans le cadre de droite avec les prochains &eacute;v&egrave;nements
+- 3. Un bouton 'Agenda' suppl&eacute;mentaire en haut, menant &agrave; :
+- 4. Une page 'evenements' qui liste les &eacute;v&egrave;nements (du jour/du mois, prochains, pass&eacute;s)
+- 5. La liste des &eacute;v&egrave;nements associ&eacute;s au bas de chaque article
 
 Pour en savoir plus, lire le fichier {{plugins/agenda_alternatives/lisezmoi.txt}}.
 _ Ce plugin a &eacute;t&eacute; test&eacute; sous Spip v1.9.2c et Alternatives v1.9.2c
