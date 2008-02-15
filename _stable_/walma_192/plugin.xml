@@ -27,7 +27,7 @@ _ Explications et forum voir aussi [->http://elastick.net/?article51]
 <prefix>
 walma
 </prefix>
-	<recommande id="cfg" version='[1.0.5;]' src="http://files.spip.org/spip-zone/cfg.zip" />
+	<!-- recommande id="cfg" version='[1.0.5;]' src="http://files.spip.org/spip-zone/cfg.zip" / -->
 	<install>
 	walma_fonctions.php
 	</install>
