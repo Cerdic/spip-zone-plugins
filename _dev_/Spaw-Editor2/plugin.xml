@@ -5,10 +5,10 @@
 	<etat>dev</etat>
 	<description>
 	{{Edition WYSIWYG avec SPAW Editor 2}}<br /><br />
-	Ce plugin (pour SPIP 1.9.2+) permet d'utiliser SPAW Editor V2 comme éditeur wysisyg dans l'espace prive de SPIP, ceci est une excellente alternative à l'éditeur de SPIP ou bien aux autres éditeurs (FCKeditor, Tinymce, ...).
+	Ce plugin (pour SPIP 1.9.2+) permet d'utiliser SPAW Editor V2 comme Ã©diteur wysisyg dans l'espace prive de SPIP, ceci est une excellente alternative Ã  l'Ã©diteur de SPIP ou bien aux autres Ã©diteurs (FCKeditor, Tinymce, ...).
 	<br />
-	SPAW Editor est un remplacement du textarea traditionnel par un éditeur plus complet, avec support des CSS, tables, polices et styles, ajout/suppression d’éléments multimédia (images, autre. Il supporte aussi le copier / coller depuis les autres applications, et nettoye à la volée le code HTML qui lui est fourni (en provenance de Word, c’est une bonne chose !). Il est gratuit, sous licence GPL, et payant pour les autres utilisations. Il dispose aussi d’une version française, ainsi que d’une version PHP.      <br />
-Nécessite le plugin "chargeur" pour importer l'archive de l'éditeur SPAW Editor 2.
+	SPAW Editor est un remplacement du textarea traditionnel par un Ã©diteur plus complet, avec support des CSS, tables, polices et styles, ajout/suppression dÂ’Ã©lÃ©ments multimÃ©dia (images, autre. Il supporte aussi le copier / coller depuis les autres applications, et nettoye Ã  la volÃ©e le code HTML qui lui est fourni (en provenance de Word, cÂ’est une bonne chose !). Il est gratuit, sous licence GPL, et payant pour les autres utilisations. Il dispose aussi dÂ’une version franÃ§aise, ainsi que dÂ’une version PHP.      <br />
+NÃ©cessite le plugin "chargeur" pour importer l'archive de l'Ã©diteur SPAW Editor 2.
 	</description>
 	<lien>Net Studio : http://www.netstudio-dz.com<br />
 	Spaw Editor 2: http://www.solmetra.com/en/disp.php/en_products/en_spaw/en_spaw_intro</lien>
