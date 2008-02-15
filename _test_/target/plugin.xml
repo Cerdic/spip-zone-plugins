@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
 	<nom> <!-- Nom du plugin -->
 	Target
@@ -16,9 +17,9 @@ _ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
  	Ouvre tous les liens de class spip_out dans une nouvelle fen&#234;tre.
  	Ajoute la class spip_out aux liens de type directory des sites syndiqu&#233;s et les ouvrent dans une nouvelle fen&#234;tre.
  	Ouvre tous les liens de class spip_glossaire (vers wikipedia)  aussi dans une nouvelle fen&#234;tre.
-	<br /><a href="http://monsitespip.com/spip.php?article2" target="_blank">Voir MonSiteSpip.com pour plus de d&eacute;tails</a>
+	<br /><a href="http://monsitespip.com/spip.php?article2">Voir MonSiteSpip.com pour plus de d&eacute;tails</a>
 	</description>
-	<lien>http://monsitespip.com/spip.php?article2</lien> <!-- URI de documentation -->
+	<lien>[->http://monsitespip.com/spip.php?article2]</lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
