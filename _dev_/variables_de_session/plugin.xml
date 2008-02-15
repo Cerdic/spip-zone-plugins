@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
     <!-- Nom du plugin -->
     <nom>Variable session</nom>
@@ -11,10 +12,10 @@
     <!-- URI de documentation -->
     <lien> http://www.spip-contrib.net/variable-session </lien>
 
-    <!-- pr‚cise le prefixe utilisé pour toutes les fonctions du plugin, en général le nom du plugin -->
+    <!-- précise le prefixe utilisé pour toutes les fonctions du plugin, en général le nom du plugin -->
     <prefix>variable_session</prefix>
 
-    <!-- pr‚cise le fichier à charger à chaque recalcul, partie publique -->
+    <!-- précise le fichier à charger à chaque recalcul, partie publique -->
     <!-- <fonctions>chemin du fichier </fonctions> -->
     <!-- précise le fichier à charger à chaque appel de la page, partie publique -->
     <options>variable_session_options.php</options>
