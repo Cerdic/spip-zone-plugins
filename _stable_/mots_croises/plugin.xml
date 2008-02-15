@@ -8,7 +8,7 @@ _ Patrice Vanneufville - patrice.vanneufville@laposte.net
 	</auteur>
 	<description>Des mots-crois&#233;s avec Spip !
 _ Exemple &#224; ins&#233;rer dans un article : 
-<quote><code><mots-croises>
+<pre>&lt;mots-croises&gt;
 
 [horizontal]
 Definition 1
@@ -25,7 +25,7 @@ aaa
 b*g
 a*d
 
-</mots-croises></code></quote>
+&lt;/mots-croises&gt;</pre>
 Ce plugin fonctionne de fa&#231;on optimale sur les squelettes disposant de la balise {{#INSERT_HEAD}}, ainsi que dans l'espace priv&#233;.
 _ Il n&#233;cessite l'activation du plugin {{jQuery}} ou une version de spip sup&#233;rieure &#224; {{1.9.2}}.
 
