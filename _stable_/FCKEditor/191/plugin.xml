@@ -6,10 +6,10 @@
 	<description>
 {{Edition WYSIWYG avec FCKeditor}}
 <br /><br />
-<u>Vous devez t&#233;l&#233;charger fckeditor pour que cette version marche (voir dans le r&#233;pertoire fckeditor du plugin).
-De même, si vous voulez utiliser geshi vous devez l'ajouter dans le r&#233;pertoire \spip_fck\plugins\geshighlighter\geshi.</u>
+<em>Vous devez t&#233;l&#233;charger fckeditor pour que cette version marche (voir dans le r&#233;pertoire fckeditor du plugin).
+De même, si vous voulez utiliser geshi vous devez l'ajouter dans le r&#233;pertoire \spip_fck\plugins\geshighlighter\geshi.</em>
 
-<u>Caract&#233;ristiques :</u>
+<em>Caract&#233;ristiques :</em>
 -* - Edition des articles et des br&#232;ves,
 -* - Seule la zone &laquo;texte&raquo; est &#233;ditable,
 -* - Se substitue &#224; la barre SPIP mais propose une option pour la r&#233;&#233;dition d'article initalement &#233;cris avec l'&#233;diteur SPIP,
@@ -23,17 +23,17 @@ De même, si vous voulez utiliser geshi vous devez l'ajouter dans le r&#233;pert
 -* - Suppression du d&#233;coupage de texte long.
 -* - Coloration syntaxique du code (Geshi).
 
-<u>Limitations</u>
+<em>Limitations</em>
 -* - Ne pas mixer pour un m&#234;me article l'&#233;dition WYSIWYG et le code SPIP,
 -* - Les fichiers envoy&#233;s sur le serveur par l'interm&#233;diaire de FCKeditor sont partag&#233;s entre tous les utilisateurs. 
 -* - Il est possible de d&#233;sactiver ces fonctionnalit&#233;s &#224; l'aide des fichiers de configuration,
 -* - Les fichiers envoy&#233;s par l'interm&#233;diaire de FCKeditor ne sont pas utilisables par SPIP.
 -* - Pour l'instant le plugin doit &#234;tre install&#233;dans la racine du r&#233;pertoire plugin de spip.
 
-<u>Attention</u>
+<em>Attention</em>
 -* - Le plugin passe FCKEditor dans la langue de l'utilisateur de SPIP. Il est donc n&#233;c&#233;ssaire de choisir au moins un fois la langue pour b&#233;n&#233;ficier du fran&#231;ais.
 
-<u>Info</u>
+<em>Info</em>
 -* - De nombreux boutons peuvent &#234;tre jug&#233;s inutiles par les uns ou les autres. Pour faire vos propres barre d'outils, vous pouvez retoucher le fichier fckconfig.php (dans le dossier spip_fck). L&#224;, changez les deux FCKConfig.ToolbarSets (BarreArticle et BarreBr&#232;ve). 
 
 	</description>
