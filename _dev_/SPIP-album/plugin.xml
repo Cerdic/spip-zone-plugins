@@ -11,18 +11,18 @@ Plugin de pr&#233;sentation de photographies bas&#233; sur des mod&#232;les int&
 Il ajoute deux mod&#232;les de gestion des photos:
 
 <h3>Affichage d&#039;une image seule avec l&#039;option Imagebox :</h3>
-<p><b><u>Code :</u> </b>&lt;imgXX|align|largeur=YY|hauteur=ZZ|class=maclass&gt;.</p>
-<p><b><u>Utilisation :</u> </b>Le <b>XX</b> correspond au num&#233;ro de l&#039;image &#224; afficher. Apr&#232;s le param&#234;tre {Imagebox}, vous pouvez ins&#233;rer les param&#234;tres d&#039;alignement (<i>left, right,center</i>) comme pour le mod&#232;le original.</p>
+<p><b><em>Code :</em> </b>&lt;imgXX|align|largeur=YY|hauteur=ZZ|class=maclass&gt;.</p>
+<p><b><em>Utilisation :</em> </b>Le <b>XX</b> correspond au num&#233;ro de l&#039;image &#224; afficher. Apr&#232;s le param&#234;tre {Imagebox}, vous pouvez ins&#233;rer les param&#234;tres d&#039;alignement (<i>left, right,center</i>) comme pour le mod&#232;le original.</p>
 <h3>Affichage d&#039;une gallerie de photos</h3>
-<p><b><u>Code :</u> </b>&lt;imgXX|gallery|nbre_vignette=YY|sens_tri=Z&gt;.</p>
-<p><b><u>Utilisation :</u></b></p>
+<p><b><em>Code :</em> </b>&lt;imgXX|gallery|nbre_vignette=YY|sens_tri=Z&gt;.</p>
+<p><b><em>Utilisation :</em></b></p>
 <ul>
 <li><b>XX</b> correspond au num&#233;ro d&#039;une des images contenues dans la galerie. Il ne sert qu&#039;&agrave; transmettre au mod&#232;le l&#039;information qui lui permettra de retrouver la r&#233;f&#233;rence de l&#039;article.<br />
 Il est &#224; noter que les photos sont tri&#233;es par ordre croissant en fonction du <b>num titre</b> et de la <b>date</b>.</li>
 <li><b>YY</b> correspond au nombre de vignettes affich&#233;es en bas pouvant aller de 1 &agrave; 10. En cas d&#039;absence de ce dernier param&#234;tre, le nombre de vignettes est de <b>10</b>.</li>
 <li><b>Z</b> correspond au sens du tri.</li>
 </ul>
-<p><b><u>A noter :</u> </b>Cette galerie int&#232;gre aussi l&#039;option {Imagebox} lorsque l&#039;on clique sur la photo s&#233;lectionn&#233;e.</p>
+<p><b><em>A noter :</em> </b>Cette galerie int&#232;gre aussi l&#039;option {Imagebox} lorsque l&#039;on clique sur la photo s&#233;lectionn&#233;e.</p>
 <p>Pour plus d&#039;information, consulter la [Documentation->http://xebiaut.free.fr/?article47].</p>
 	</description>
 	<prefix>album</prefix>
