@@ -44,10 +44,23 @@ function balise_IMGLOCAL($p) {
 
 //
 // -- fonction specifique pour afficher un copyright dans une image -----
-// Filtre |image_watermark - D'après le programme proposé par Visualight
+// Filtre |image_watermark - D'après le programme propose par Visualight
 // Cf. http://www.asp-php.net/scripts/asp-php/watermark-2.php
 //
 function image_watermark($im) {
+	// Declaration des valeurs locales
+	static	$watermarktype,		// type de watermark (none / image / text)
+			$watermarkalignh,	//
+			$watermarkalignv,	//
+			$watermarkmargin,	//
+			$watermarkimage,	//
+			$watermarkopacity,	//
+			$watermarktext,		//
+			$watermarkfont,		//
+			$watermarkshadow,	//
+			$watermarkcolor;	//
+
+	// Charge la librairie de traitements des images sous SPIP
 	include_spip('inc/filtres_images');
 
 	if (!function_exists('lire_config')) {
@@ -56,6 +69,7 @@ function image_watermark($im) {
 		tester_variable('watermarkalignv', 'center');
 		tester_variable('watermarkmargin', '10');
 		tester_variable('watermarkopacity', '20');
+		tester_variable('watermarkimage', '/img_pack/copyright.png');
 		tester_variable('watermarktext', 'Copyright (c) '.date('Y').' '.$GLOBALS['meta']['adresse_site']);
 		tester_variable('watermarkfont', '3');
 		tester_variable('watermarkshadow', 'yes');
@@ -66,25 +80,24 @@ function image_watermark($im) {
 		tester_variable('watermarkalignv', lire_config('album/watermarkalignv','center'));
 		tester_variable('watermarkmargin', lire_config('album/watermarkmargin','10'));
 		tester_variable('watermarkopacity', lire_config('album/watermarkopacity','20'));
+		tester_variable('watermarkopacity', lire_config('album/watermarkimage','/img_pack/copyright.png'));
 		tester_variable('watermarktext', lire_config('album/watermarktext','Copyright (c) '.date('Y').' '.$GLOBALS['meta']['adresse_site']));
 		tester_variable('watermarkfont', lire_config('album/watermarkfont','3'));
 		tester_variable('watermarkshadow', lire_config('album/watermarkshadow','yes'));
 		tester_variable('watermarkcolor', lire_config('album/watermarkcolor','FFFFFF'));
 	}
 
-	global $watermarktype;
-	global $watermarkalignh;
-	global $watermarkalignv;
-	global $watermarkmargin;
-	global $watermarkopacity;
-	global $watermarktext;
-	global $watermarkfont;
-	global $watermarkshadow;
-	global $watermarkcolor;
-
-	if ($watermarktype == 'none') $mark = 'wmark';
-	if ($watermarktype == 'text') $mark = 'wmarkt';
-	if ($watermarktype == 'image') $mark = 'wmarki';
+	// Determine le marqueur permettant la recreation des vignettes en cas de modification du mode protection.
+	switch($watermarktype){
+		case 'image':
+			$mark = 'wmarki';
+			break;
+		case 'text':
+			$mark = 'wmarkt';
+			break;
+		default:
+			$mark = 'wmark';
+	}
 
 	$image = image_valeurs_trans($im, $mark);
 	if (!$image) return("");
@@ -100,97 +113,102 @@ function image_watermark($im) {
 	if ($creer) {
 		$im = $image["fonction_imagecreatefrom"]($im);
 
-		if ($watermarktype == 'image') {
-			// WATERMARK_IMAGE_FILE
-			// Chemin vers le fichier image employé comme watermark (Valeur possible : chemin absolu ou relatif).
-			if (!defined('WATERMARK_IMAGE_FILE')) { // Verifie si cette variable n'a pas ete deja definie.
-				define('WATERMARK_IMAGE_FILE', _DIR_PLUGIN_ALBUM.'img_pack/copyright.png');
-			}
+		switch($watermarktype){
+			case 'image':
+				$masque = find_in_path($watermarkimage);
+				$mask = image_valeurs_trans($masque,"");
 
-			$masque = find_in_path(WATERMARK_IMAGE_FILE);
-			$mask = image_valeurs_trans($masque,"");
+				if (!is_array($mask)) return("");
+				$im_m = $mask["fichier"];
+				$x_m = $mask["largeur"];
+				$y_m = $mask["hauteur"];
 
-			if (!is_array($mask)) return("");
-			$im_m = $mask["fichier"];
-			$x_m = $mask["largeur"];
-			$y_m = $mask["hauteur"];
-
-			$im1 = $mask["fonction_imagecreatefrom"]($masque);
-			if ($mask["format_source"] == "gif" AND function_exists('ImageCopyResampled')) {
-				$im1_ = imagecreatetruecolor($x_m, $y_m);
-				// Si un GIF est transparent,
-				// fabriquer un PNG transparent
-				// Conserver la transparence
-				if (function_exists("imageAntiAlias")) imageAntiAlias($im1_,true);
-				@imagealphablending($im1_, false);
-				@imagesavealpha($im1_,true);
-				@ImageCopyResampled($im1_, $im1, 0, 0, 0, 0, $x_m, $y_m, $x_m, $y_m);
-				imagedestroy($im1);
-				$im1 = $im1_;
-			}
+				$im1 = $mask["fonction_imagecreatefrom"]($masque);
+				if ($mask["format_source"] == "gif" AND function_exists('ImageCopyResampled')) {
+					$im1_ = imagecreatetruecolor($x_m, $y_m);
+					// Si un GIF est transparent, fabriquer un PNG transparent pour conserver la transparence
+					if (function_exists("imageAntiAlias")) imageAntiAlias($im1_,true);
+					@imagealphablending($im1_, false);
+					@imagesavealpha($im1_,true);
+					@ImageCopyResampled($im1_, $im1, 0, 0, 0, 0, $x_m, $y_m, $x_m, $y_m);
+					imagedestroy($im1);
+					$im1 = $im1_;
+				}
 
 		        if ($im1) {
-				$watermark_y = $watermarkmargin;
-				if ($watermarkalignv == 'top') {
-					$watermark_y = $watermarkmargin;
-				}
-					elseif ($watermarkalignv == 'bottom') {
-		                		$watermark_y = $y_i - $y_m - $watermarkmargin;
-	        		    	}
-		            			elseif ($watermarkalignv == 'center') {
-			        	        	$watermark_y = (int)($y_i / 2 - $y_m / 2);
-	        			    	}
-	        	    	$watermark_x = $watermarkmargin;
-				if ($watermarkalignh == 'left') {
-	       	        		$watermark_x = $watermarkmargin;
-				}
-					elseif ($watermarkalignh == 'right') {
-			                	$watermark_x = $x_i - $x_m - $watermarkmargin;
+					// Calcule du positionnement vertical de l'icone copyright
+					switch($watermarkalignv){
+						case 'bottom':
+							$watermark_y = $y_i - $y_m - $watermarkmargin;
+							break;
+						case 'center':
+							$watermark_y = (int)($y_i / 2 - $y_m / 2);
+							break;
+						case 'top':
+						default:
+							$watermark_y = $watermarkmargin;
 					}
-	            			elseif ($watermarkalignh == 'center') {
-	                			$watermark_x = (int)($x_i / 2 - $x_m / 2);
-			            	}
-			}
-			imagecopymerge($im,$im1, $watermark_x, $watermark_y, 0, 0, $x_m, $y_m, $watermarkopacity);
-			imagedestroy($im1);
-		}
-		elseif ($watermarktype == 'text') {
 
-		      $color = $watermarkcolor;
-		      $red = hexdec(substr($color, 0, 2));
-		      $green = hexdec(substr($color, 2, 2));
-		      $blue = hexdec(substr($color, 4, 2));
-		      $text_color = imagecolorallocate($im, $red, $green, $blue);
-		      $shadow_color = imagecolorallocate($im, 0, 0, 0);
-		      $text_height = imagefontheight($watermarkfont);
-		      $text_width = strlen($watermarktext) * imagefontwidth($watermarkfont);
-
-		      $watermark_y = $watermarkmargin;
-			if ($watermarkalignv == 'top') {
-				$watermark_y = $watermarkmargin;
-				}
-        			elseif ($watermarkalignv == 'bottom') {
-					$watermark_y = $y_i - $text_height - $watermarkmargin;
+					// Calcule du positionnement horizontal de l'icone copyright
+					switch($watermarkalignv){
+						case 'right':
+							$watermark_x = $x_i - $x_m - $watermarkmargin;
+							break;
+						case 'center':
+							$watermark_x = (int)($x_i / 2 - $x_m / 2);
+							break;
+						case 'left':
+						default:
+							$watermark_x = $watermarkmargin;
 					}
-					elseif ($watermarkalignv == 'center') {
+				}
+
+				imagecopymerge($im,$im1, $watermark_x, $watermark_y, 0, 0, $x_m, $y_m, $watermarkopacity);
+				imagedestroy($im1);
+				break;
+			case 'text':
+				$color = $watermarkcolor;
+				$red = hexdec(substr($color, 0, 2));
+				$green = hexdec(substr($color, 2, 2));
+				$blue = hexdec(substr($color, 4, 2));
+				$text_color = imagecolorallocate($im, $red, $green, $blue);
+				$shadow_color = imagecolorallocate($im, 0, 0, 0);
+				$text_height = imagefontheight($watermarkfont);
+				$text_width = strlen($watermarktext) * imagefontwidth($watermarkfont);
+
+				// Calcule du positionnement vertical du texte de copyright
+				switch ($watermarkalignv){
+					case 'bottom':
+						$watermark_y = $y_i - $text_height - $watermarkmargin;
+						break;
+					case 'center':
 						$watermark_y = (int)($y_i / 2 - $text_height / 2);
-						}
+						break;
+					case 'top':
+					default:
+						$watermark_y = $watermarkmargin;
+				}
 
-		      $watermark_x = $watermarkmargin;
-		      if ($watermarkalignh == 'left') {
-				$watermark_x = $watermarkmargin;
-		        	}
-		        	elseif ($watermarkalignh == 'right') {
-					$watermark_x = $x_i - $text_width - $watermarkmargin;
-					}
-		        		elseif ($watermarkalignh == 'center') {
-		            			$watermark_x = (int)($x_i / 2 - $text_width / 2);
-		        		}
+				// Calcule du positionnement horizontal du texte de copyright
+				switch($watermarkalignv){
+					case 'right':
+						$watermark_x = $x_i - $text_width - $watermarkmargin;
+						break;
+					case 'center':
+						$watermark_x = (int)($x_i / 2 - $text_width / 2);
+						break;
+					case 'left':
+					default:
+						$watermark_x = $watermarkmargin;
+				}
 
-		      if ($watermarkshadow == 'yes') {
-				imagestring($im, $watermarkfont, $watermark_x + 1, $watermark_y + 1, $watermarktext, $shadow_color);
-			}
-			imagestring($im, $watermarkfont, $watermark_x, $watermark_y, $watermarktext, $text_color);
+				if ($watermarkshadow == 'yes') {
+					imagestring($im, $watermarkfont, $watermark_x + 1, $watermark_y + 1, $watermarktext, $shadow_color);
+				}
+				imagestring($im, $watermarkfont, $watermark_x, $watermark_y, $watermarktext, $text_color);
+				break;
+			case 'none':
+			default:
 		}
 
 		$image["fonction_image"]($im, "$dest");
