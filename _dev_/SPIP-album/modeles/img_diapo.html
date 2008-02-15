@@ -1,10 +1,10 @@
-[(#REM) 
+[(#REM)
 
 	Modele pour <img>
-	
+
 	Permet l'affichage sous forme de diaporama des photos contenues
 	dans un article ou une rubrique ou un secteur
-	
+
 ]
 [(#REM) Recuperation des variables d'initialisation du modele]
 #SET{taille, #ENV{taille, #CONFIG{album/taille, 450}}}
@@ -18,7 +18,7 @@ var init_diapo = function(){
 	$.slideshow(
 		{
 			container : 'diaporama',
-			loader: '#CHEMIN{img_pack/loading.gif}', 
+			loader: '../#CHEMIN{img_pack/loading.gif}',
 			linksClass: 'pagelinks',
 			linksSeparator : '',
 			fadeDuration : 250,
@@ -28,8 +28,6 @@ var init_diapo = function(){
 			autoplay: 5,
 			random: false,
 			images: [
-<BOUCLE_imgsecteur(DOCUMENTS documents_articles articles types_documents){id_secteur}{statut=publie}{extension IN png,jpg,gif}{par date}{inverse #GET{sens}}{0,#GET{increment}}{", "}>
-						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]' }</BOUCLE_imgsecteur>
 <BOUCLE_imgrubrique(DOCUMENTS documents_articles articles types_documents){id_rubrique}{statut=publie}{extension IN png,jpg,gif}{par date}{inverse #GET{sens}}{0,#GET{increment}}{", "}>
 						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]' }</BOUCLE_imgrubrique>
 <BOUCLE_imgarticle(ARTICLES documents_articles documents){id_document}><BOUCLE_imgdocart(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}>
@@ -37,7 +35,9 @@ var init_diapo = function(){
 <BOUCLE_imgbreve(BREVES documents_breves documents){id_document}><BOUCLE_imgdocbreve(DOCUMENTS){id_breve}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}>
 						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]' }</BOUCLE_imgdocbreve></BOUCLE_imgbreve>
 <BOUCLE_imgrub(RUBRIQUES documents_rubriques documents){id_document}><BOUCLE_imgdocrub(DOCUMENTS){id_rubrique}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}>
-						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]' }</BOUCLE_imgdocrub></BOUCLE_imgrub><//B_imgbreve><//B_imgarticle><//B_imgrubrique><//B_imgsecteur>
+						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]' }</BOUCLE_imgdocrub></BOUCLE_imgrub>
+<BOUCLE_imgsecteur(DOCUMENTS documents_articles articles types_documents){id_secteur ?}{statut=publie}{extension IN png,jpg,gif}{par date}{inverse #GET{sens}}{0,#GET{increment}}{", "}>
+						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]' }</BOUCLE_imgsecteur><//B_imgrub><//B_imgbreve><//B_imgarticle><//B_imgrubrique>
 					]
 		}
 	);
