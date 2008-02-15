@@ -4,7 +4,7 @@
         </nom>
         <auteur>        <!-- Auteur du plugin -->
           Coyote &#38; cy_altern _ 
-					merci à Cedric cedric.morin@yterium.com pour le concept initial du bridage de l'affichage des BOUCLES (plugin acces_restreint)
+					merci Ã  Cedric cedric.morin@yterium.com pour le concept initial du bridage de l'affichage des BOUCLES (plugin acces_restreint)
         </auteur>
         <version>
           1.1
@@ -17,14 +17,14 @@
           en utilisant des groupes d'utilisateurs.<br />
 					Documentation : [->http://www.spip-contrib.net/Creer-des-groupes-limiter-l-acces]<br /><br />
 					{{/!\ ATTENTION !}} <br />
-					- Ce plugin n'est {{PAS compatible}} avec le plugin {{acces_restreint}} ! Vous ne pouvez PAS utiliser les 2 simultanéments !<br />
+					- Ce plugin n'est {{PAS compatible}} avec le plugin {{acces_restreint}} ! Vous ne pouvez PAS utiliser les 2 simultanÃ©ments !<br />
 					- Si vous {{mettez &#224; jour}} depuis une version 1.8* de SPIP qui utilisait la contrib {{"acc&#232;s restreint par groupes"}} 
 					version 0.61 ou 0.7, vous {{DEVEZ}} proc&#233;der &#224; la mise &#224; jour des tables de la base de donn&#233;es
 					en utilisant le script [->../plugins/acces_groupes/maj_tables.php] {{AVANT}} d'activer ce plugin ! 
 					
 					Version 1.1 : tentative de bridage de l'affichage des rubriques restreintes dans TOUT l'espace prive. 
 					Sans suite car trop couteux en suivi des versions de SPIP.
-					A revoir par filtrage des requêtes SQL comme dans l'espace public quand la squelettisation de l'espace privé sera OK (spip 1.9.2 ?)
+					A revoir par filtrage des requÃªtes SQL comme dans l'espace public quand la squelettisation de l'espace privÃ© sera OK (spip 1.9.2 ?)
         </description>
 	<lien>http://www.spip-contrib.net/Creer-des-groupes-limiter-l-acces</lien> <!-- URI de documentation --> 
         <prefix>
