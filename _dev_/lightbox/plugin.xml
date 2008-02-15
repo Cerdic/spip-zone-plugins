@@ -16,7 +16,7 @@
 
 <code>
 	<script type="text/javascript" src="#CHEMIN{lightbox.js}"></script>
-	&#60;link rel="stylesheet" href="#CHEMIN{lightbox.css}" type="text/css" media="screen" /&#62;
+	<link rel="stylesheet" href="#CHEMIN{lightbox.css}" type="text/css" media="screen" />;
 
 (&#224; transformer en balise #LIGHTBOX)
 </code>
