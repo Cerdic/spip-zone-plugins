@@ -4,8 +4,8 @@
 	<version>0.1</version>
 	<etat>dev</etat>
 	<description>test d'edition d'article avec tinyMCE
-	<lien></lien> <!-- URI de documentation -->
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 
 	<prefix>tinyMCE</prefix>
 </plugin>
