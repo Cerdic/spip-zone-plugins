@@ -29,7 +29,7 @@ v 1.0.2 : impl&#233;mentation du crit&#232;re {{tout_voir}} et du filtre {{acces
 pour afficher les contenus restreints aux utilisateurs n'ayant pas acc&#232;s dans les squelettes
 					<br />
 					Ce plugin est compatible avec les versions <strong>1.9.0</strong> et <strong>1.9.1</strong> de spip.
-					Il n’est <strong>pas compatible</strong> avec la version SVN spip 1.9.2 alpha.
+					Il nÂ’est <strong>pas compatible</strong> avec la version SVN spip 1.9.2 alpha.
 <br />v 1.0.3 Ce script est en cours de dev. pour devenir compatible avec SPIP 1.9.2 et +
 		</description>
 				<lien>http://www.spip-contrib.net/Le-plugin-acces-restreint-par</lien> <!-- URI de documentation -->
