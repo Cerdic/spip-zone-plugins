@@ -6,7 +6,7 @@
  	<description>Plugin permettant d'ouvrir une fen&ecirc;tre flottante,
 	 et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=FenFlo]</description>
  	<etat>stable</etat>
- 	<fonction>fenetre_flottante_fonct.php</fonction>
+ 	<fonctions>fenetre_flottante_fonct.php</fonctions>
  	<pipeline>
   		<nom>insert_head</nom>
   		<action>insertion_in_head</action>
