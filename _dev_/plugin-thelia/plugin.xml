@@ -9,7 +9,7 @@
 	
 	<lien>http://www.spip-contrib.net/Plugin-Thelia</lien> <!-- URI de documentation -->
  	<etat>dev</etat>
- 	<fonction></fonction>
+ 	<fonctions></fonctions>
  	<pipeline>
   		<nom>affichage_final</nom>
   		<action>appeler_moteur_thelia</action>
