@@ -19,12 +19,12 @@
 	<multi>
 		<p><strong>This plugin allows direct use of charts defined by  <a href="http://www.maani.us/xml_charts/">XML/SWF Charts</a>.</strong></p>
 		<p>Create a table with SPIP's shortcuts (by using vertical bars - pipes), then put this table between these pseudo-tags:</p>
-		<p><pre>&lt;chart type="Column"&gt; ... &lt;/chart&gt;</pre></p>
+		<div><pre>&lt;chart type="Column"&gt; ... &lt;/chart&gt;</div>
 		<p>The chart's type (in this example: "Column") will be selected in the types allowed by <a href="http://www.maani.us/xml_charts/">XML/SWF Charts</a>.</p>
 	[fr]
 		<p><strong>Ce plugin permet l'affichage de graphiques en Flash tels que d&eacute;finis par <a href="http://www.maani.us/xml_charts/">XML/SWF Charts</a>.</strong></p>
 		<p>Codez un tableau avec les raccourcis SPIP habituels (en utilisant les barres verticales), puis encadrez votre tableau des mentions:</p>
-		<p><pre>&lt;chart type="Column"&gt; ... &lt;/chart&gt;</pre></p>
+		<div><pre>&lt;chart type="Column"&gt; ... &lt;/chart&gt;</pre></div>
 		<p>Le type de graphique (dans l'exemple: "Column") peut &ecirc;tre choisi parmi tous les types autoris&eacute;s par <a href="http://www.maani.us/xml_charts/">XML/SWF Charts</a>.</p>
 	</multi>
 	</description>
