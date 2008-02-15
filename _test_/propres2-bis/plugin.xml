@@ -16,7 +16,7 @@ _ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
 	<description>
 	Pour un site dont l'architecture est essentiellement bas&#233;e sur des rubriques, la r&#233;&#233;criture classique des urls peut &#234;tre g&#234;nante. Ce plugin permet d'inverser les repr&#233;sentations des rubriques et des articles. Seuls ces derniers commencent donc par un tiret (un seul, car deux m'ont paru inutiles). Ce plugin se substitue au mode propre2. Donc pour l'activer il faut aussi pr&#233;ciser dans mes_options.php : $type_urls = "propres2";
 	</description>
-	<dependances>
+	<!-- dependances>
 		<spip>
 			<version>
 			1.9.2 alpha 2 SVN [7956] (version testée)
@@ -24,7 +24,7 @@ _ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
 		</spip>
 		<plugins>
 		</plugins>
-	</dependances>
+	</dependances -->
 	<prefix> 
 	propres3
 	</prefix>
