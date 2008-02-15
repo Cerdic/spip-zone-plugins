@@ -68,7 +68,7 @@
 						<T_declinaisons>
 						<div class="declinaisonProduit">
 							<THELIA_declinaisons type="DECLINAISON" produit="THELIA-ID">
-								THELIA-TITRE : <select name="declinaisonTHELIA-ID"  onChange="if ($(this).val()!='') $('form#formAjouter').find('.LIEN_commander').show(); else $('form#formAjouter').find('.LIEN_commander').hide();">
+								THELIA-TITRE : <select name="declinaisonTHELIA-ID"  onChange="if ($(this).val()!='') $('form#formAjouter').find('.LIEN_commander').css('visibility','visible'); else $('form#formAjouter').find('.LIEN_commander').css('visibility','hidden');">
 									<option value=""><:spipthelia:votre_choix:></option>
 									<THELIA_decldisp type="DECLIDISP" declinaison="THELIA-ID">
 										<option value="THELIA-ID">THELIA-TITRE</option>
@@ -78,7 +78,7 @@
 						</div>
 						<script type="text/javascript">
 							$(document).ready(function(){
-								$("form#formAjouter").find('.LIEN_commander').hide();
+								$("form#formAjouter").find('.LIEN_commander').css('visibility','hidden');
 							});
 						</script>
 						</T_declinaisons>
