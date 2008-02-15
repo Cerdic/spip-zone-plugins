@@ -11,7 +11,7 @@ Cette balise permet, pour les plugins actifs, de r&eacute;cup&eacute;rer certain
 statiques d&eacute;finies dans plugin.xml ainsi que le statut d'activation du plugin. Ces informations sont fournies brutes 
 et doivent &ecirc;tre format&eacute;es le cas &eacute;ch&eacute;ant.
 <br /><br />
--* {{PREFIX}} : pr&eacute;fixe du plugin recherch&eacute; d&eacute;fini dans le champ <code><prefix></prefix></code> du fichier plugin.xml (non case-sensitive)
+-* {{PREFIX}} : pr&eacute;fixe du plugin recherch&eacute; d&eacute;fini dans le champ <code>&#60;prefix&#62;&#60;/prefix&#62;</code> du fichier plugin.xml (non case-sensitive)
 -* {{INFO}} : peut prendre, entre autres, l'une des valeurs suivantes (non case-sensitive):
 -** NOM: info brute &agrave; formater avec propre
 -** VERSION: info brute, formatage inutile
