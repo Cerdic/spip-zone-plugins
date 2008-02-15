@@ -13,16 +13,16 @@
         </etat>
         <description>  <!-- description -->
           Cr&#233;e un fil RSS pour tous les plugins &#224; partir de leur fichier plugin.xml
-        </description>
-				<url_doc>  <!-- Lien hypertexte -->
+				<!-- url_doc -->  <!-- Lien hypertexte -->
 						http://extranet-eze.dyndns.org/portail/spip_SVN/
-				</url_doc>
-				<url_zip>
+				<!-- /url_doc--> 
+				<!-- url_zip--> 
 				    http://extranet-eze.dyndns.org/portail/spip_SVN/  <!-- extra -->
-				</url_zip>
-				<rss_maj>   <!-- titre lien hypertexte -->
+				<!-- /url_zip--> 
+				<!-- rss_maj-->    <!-- titre lien hypertexte -->
 				    http://extranet-eze.dyndns.org/portail/spip_SVN/spip.php
-				</rss_maj>
+				<!-- /rss_maj--> 
+		</description>
         <prefix>   <!-- chapo -->
             mag_maj
         </prefix>
