@@ -23,7 +23,7 @@ Il est &#224; noter que les photos sont tri&#233;es par ordre croissant en fonct
 <li><b>Z</b> correspond au sens du tri.</li>
 </ul>
 <p><b><em>A noter :</em> </b>Cette galerie int&#232;gre aussi l&#039;option {Imagebox} lorsque l&#039;on clique sur la photo s&#233;lectionn&#233;e.</p>
-<p>Pour plus d&#039;information, consulter la [Documentation->http://xebiaut.free.fr/?article47].</p>
+<p>Pour plus d&#039;information, consulter la [Documentation->http://xebiaut.free.fr/?article287].</p>
 	</description>
 	<prefix>album</prefix>
 	<options>inc/album_options.php</options>
