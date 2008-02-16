@@ -3,7 +3,7 @@
 #  Plugin  : migre_static - Licence : GPL             #
 #  File    : migre_static_pipelines - pipelines       #
 #  Authors : Chryjs, 2007 - Beurt, 2006               #
-#  Contact : chryjs¡@!free¡.!fr                       #
+#  Contact : chryjsï¿½@!freeï¿½.!fr                       #
 #-----------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
@@ -24,9 +24,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if (!defined('_DIR_PLUGIN_ACCESRESTREINT')){ // definie automatiquement en 1.9.2
+if (!defined('_DIR_PLUGIN_MIGRESTATIC')){ // definie automatiquement en 1.9.2
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_ACCESRESTREINT',(_DIR_PLUGINS.end($p)));
+	define('_DIR_PLUGIN_MIGRESTATIC',(_DIR_PLUGINS.end($p)));
 }
 
 function migrestatic_ajouter_boutons() {
