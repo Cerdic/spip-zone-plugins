@@ -4,15 +4,27 @@
 -->
 <!-- titre=<multi>[fr]Configuration du menu-accordeon</multi>-->
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
-<fieldset><legend>Choix du type de menu</legend>
-  <label>Choix des &eacute;l&eacute;ments &agrave; lister :</label>
-  <select name="type">
-    <option value="rub"[ (#ENV{type}|=={rub}|?{selected="selected",''})]>les rubriques</option>
-	<option value="art"[ (#ENV{type}|=={art}|?{selected="selected",''})]>les articles</option>
-  </select>
-</fieldset>
-<input type="submit" name="_cfg_ok" value="<:OK:>" />
-<input type="reset" value="<:Reset:>" />
-<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+<p>
+	<fieldset><legend>Choix du type de menu</legend>
+	  <label>Choix des &eacute;l&eacute;ments &agrave; lister :</label>
+	  <select name="type">
+		<option value="rub"[ (#ENV{type}|=={rub}|?{selected="selected",''})]>les rubriques</option>
+		<option value="art"[ (#ENV{type}|=={art}|?{selected="selected",''})]>les articles</option>
+	  </select>
+	</fieldset>
+</p>
+<p>
+	<fieldset><legend>Comportement du menu</legend>
+	  <label>D&eacute;pliement au clic ou au survol :</label>
+	  <select name="event">
+		<option value="click"[ (#ENV{event}|=={click}|?{selected="selected",''})]>au clic</option>
+		<option value="hover"[ (#ENV{event}|=={hover}|?{selected="selected",''})]>au survol</option>
+	  </select>
+	</fieldset>
+</p>
+<p>
+	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<input type="reset" value="<:Reset:>" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</p>
 </form>
-
