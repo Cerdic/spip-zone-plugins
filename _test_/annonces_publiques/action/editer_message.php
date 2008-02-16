@@ -37,8 +37,9 @@ function action_editer_message() {
 // idem que la focntion standard mais on update le champ lieu en plus.
 function action_editer_message_post_vieux_ap($id_message)
 {
-		
-	spip_query("UPDATE spip_messages SET titre=" . _q(_request('titre')) . ", texte=" . _q(_request('texte')) . ", lieu=" . _q(_request('lieu')) . " WHERE id_message='$id_message'");
+
+	//Champs suppl. LIEU, ID_RUBRIQUE		
+	spip_query("UPDATE spip_messages SET titre=" . _q(_request('titre')) . ", texte=" . _q(_request('texte')) . ", lieu=" . _q(_request('lieu')) . ", id_rubrique=" . _q(_request('id_parent')) . " WHERE id_message='$id_message'");
 
 	spip_query("UPDATE spip_messages SET rv=" . _q(_request('rv')) . " WHERE id_message='$id_message'");
 

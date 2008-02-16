@@ -1,6 +1,10 @@
 README.txt
 ----------
 
+Version 1.2 - 2008-02-15
+
+-* Rubriques => Calendriers
+
 Version 1.1 - 2008-02-04
 
 -* filtres/balises => duree, jolie_dates (credits erational et le gars cerdic)
@@ -22,6 +26,6 @@ TODO:
 
 Compatiblite SPIP 1.9.3dev
 Selection annonce publique/privee
-Rubriques/Mots-Cles => Calendriers/Categories
-Repetitions -> RDATE, EXDATE (RFC iCal)
-Squelettes ical, atom et rss
+Mots-Cles => Categories
+Repetitions -> RRULE, EXRULE, RDATE, EXDATE (RFC iCal)
+Squelettes annonce(rdz), ical, atom et rss

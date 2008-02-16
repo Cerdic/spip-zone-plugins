@@ -24,6 +24,8 @@ function exec_message_edit()
 	$texte = entites_html($row["texte"]);
 	//Ajout du champ lieu
 	$lieu = entites_html($row["lieu"]);
+	//Ajout du champ id_rubrique
+	$id_rubrique =  $row["id_rubrique"];
 	$type = $row["type"];
 	$statut = $row["statut"];
 	$rv = $row["rv"];
@@ -99,7 +101,14 @@ function exec_message_edit()
 	if($type == 'affich') {
 		$res .="<br /><b>"._T('ap:lieu')."</b><br />\n";
 		$res .= "<input type='text' class='formo' name='lieu' value=\"$lieu\" size='40' />";;
+		$res .="<br />\n";
 	}
+
+	// selecteur de rubrique
+	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
+	$res .= debut_cadre_couleur("rubrique-24.gif", true, "",_T('entree_interieur_rubrique'));
+	$res .= $chercher_rubrique($id_rubrique, 'annonce', false); 
+	$res .= fin_cadre_couleur(true);
 
 	$res .= "\n<p><b>"._T('info_texte_message_02')."</b><br />";
 	$res .= "<textarea name='texte' rows='20' class='formo' cols='40'>";

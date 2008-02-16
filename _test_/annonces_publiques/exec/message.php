@@ -47,6 +47,8 @@ function exec_affiche_message($id_message, $cherche_auteur, $forcer_dest)
 	$texte = propre($row["texte"]);
 	//Ajout du champ lieu
 	$lieu = typo($row["lieu"]);
+	//Ajout du champ id_rubrique
+	$id_rubrique = $row['id_rubrique'];
 	$type = $row["type"];
 	$statut = $row["statut"];
 	$rv = $row["rv"];
@@ -93,7 +95,7 @@ function exec_affiche_message($id_message, $cherche_auteur, $forcer_dest)
 	debut_droite();
 
 	//Raison de la surcharge
-	http_affiche_message_ap($id_message, $expediteur, $statut, $type, $texte, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $forcer_dest, $lieu);
+	http_affiche_message_ap($id_message, $expediteur, $statut, $type, $texte, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $forcer_dest, $lieu, $id_rubrique);
 
 	// reponses et bouton poster message
 
@@ -103,7 +105,7 @@ function exec_affiche_message($id_message, $cherche_auteur, $forcer_dest)
  echo fin_gauche(), fin_page();
 }
 
-function http_affiche_message_ap($id_message, $expediteur, $statut, $type, $texte, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $forcer_dest, $lieu)
+function http_affiche_message_ap($id_message, $expediteur, $statut, $type, $texte, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $forcer_dest, $lieu, $id_rubrique)
 {
   global $connect_id_auteur,$connect_statut, $les_notes;
 
@@ -156,6 +158,13 @@ function http_affiche_message_ap($id_message, $expediteur, $statut, $type, $text
 	//Affichage du champ Lieu
 	if($type == 'affich') {
 		echo "<div class='serif'><p>". _T('ap:lieu') . $lieu ."</p></div>";
+	}
+	
+	//Affichage du champ ID_RUBRIQUE (du calendrier)
+	if($type == 'affich') {
+//		$titre_rubrique = sql_getfetsel('titre', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
+		$row = spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		echo "<div class='serif'><p>". _T('ap:calendrier_pub') . typo($row['titre']) ."</p></div>";
 	}
 	
 	//////////////////////////////////////////////////////

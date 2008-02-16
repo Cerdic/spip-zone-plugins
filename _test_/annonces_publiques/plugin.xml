@@ -1,6 +1,6 @@
 <plugin>
  	<nom>Annonces Publiques</nom>
-	<version>1.1</version>
+	<version>1.2</version>
 	<auteur>James</auteur>
 	<etat>test</etat>
 	<lien>http://www.spip-contrib.net/Annonces-Publiques</lien>
@@ -12,6 +12,6 @@
 	<prefix>AP</prefix>
 	<fonctions>ap_fonctions.php</fonctions>
 	<options>ap_options.php</options>
-	<version_base>0.1</version_base>
+	<version_base>0.2</version_base>
 	<install>base/ap_install.php</install>
 </plugin>
