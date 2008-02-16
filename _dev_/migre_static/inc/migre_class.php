@@ -3,7 +3,7 @@
 #  Plugin  : migre_static - Licence : GPL             #
 #  File    : inc/migre_class - include                #
 #  Authors : Chryjs, 2007 - Beurt, 2006               #
-#  Contact : chryjs¡@!free¡.!fr                       #
+#  Contact : chryjsï¿½@!freeï¿½.!fr                       #
 #-----------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
@@ -89,7 +89,6 @@ class Article {
 	var $lang;
 	var $auteur;
 	var $affiche;
-	var $auteur;
 	var $statut;
 	function Article ($url,$id_rubrique_souhaite,$id_secteur) {
 		$this->type='article';
@@ -98,7 +97,7 @@ class Article {
 		$this->id_secteur=$id_secteur;
 		$this->affiche="";
 		$this->statut="prepa";
-		$this->auteur=$GLOBALS['auteur_session']['id_auteur'];	// [fr] id_auteur de tous les articles récupérés dans Spip
+		$this->auteur=$GLOBALS['auteur_session']['id_auteur'];	// [fr] id_auteur de tous les articles rï¿½cupï¿½rï¿½s dans Spip
 	}
 	function migre_article() {
 //		function migre_infos_page($adresse="",$id_rubrique=0, &$id_article_cree) {
@@ -116,7 +115,7 @@ class Article {
 		// [en] Try to clean HTML
 		$page_a_traiter= migre_nettoie_html($page_a_traiter);
 
-		// [fr] On extrait les éléments de la page:
+		// [fr] On extrait les ï¿½lï¿½ments de la page:
 
 		// [fr] la langue [en] the language
 		// [fr] d abord dans la balise HTML [en] In the HTML tag
