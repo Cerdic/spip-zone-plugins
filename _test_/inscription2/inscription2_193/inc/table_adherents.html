@@ -141,19 +141,19 @@ function confirm(msg,callback) {
 	
 	//supprimer un auteur
 	if(!empty($id) and $act=='sup'){
-		$row = spip_fetch_array(spip_query("select statut from spip_auteurs where id_auteur='$id'"));
+		$row = spip_fetch_array(sql_select("statut","spip_auteurs","id_auteur='$id'"));
 		
 		if($row['statut'] !='0minirezo' and $row['statut'] !='1commite')
-			spip_query("DELETE FROM spip_auteurs WHERE id_auteur='$id'");
+			sql_delete("spip_auteurs","id_auteur='$id'");
 
 		spip_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur='$id'");
-		spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur='$id'");
+		sql_delete("spip_auteurs_elargis","id_auteur='$id'");
                 
                 if(defined('_DIR_PLUGIN_ACCESRESTREINT'))
-                    spip_query("DELETE FROM spip_zones_auteurs WHERE id_auteur='$id'");
+                    sql_delete("spip_zones_auteurs","id_auteur='$id'");
 
                 if(defined('_DIR_PLUGIN_SPIPLISTES'))
-                    spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur='$id'");
+                    sql_delete("spip_auteurs_listes","id_auteur='$id'");
 	}
 
 	//nettoyer la table

@@ -18,8 +18,8 @@ function exec_inscription2_adherents() {
 		fin_page();
 		exit;
 	}
-	
-	debut_page(_T('inscription2:gestion_adherents'), "", "");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('inscription2:gestion_adherents'), "", "", "");
 	
 	echo recuperer_fond('inc/table_adherents',array("statut_abonnement"=>_request('statut_abonnement')));
 	
