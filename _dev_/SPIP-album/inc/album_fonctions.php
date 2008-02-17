@@ -48,18 +48,6 @@ function balise_IMGLOCAL($p) {
 // Cf. http://www.asp-php.net/scripts/asp-php/watermark-2.php
 //
 function image_watermark($im) {
-	// Declaration des valeurs locales
-	static	$watermarktype,		// type de watermark (none / image / text)
-			$watermarkalignh,	//
-			$watermarkalignv,	//
-			$watermarkmargin,	//
-			$watermarkimage,	//
-			$watermarkopacity,	//
-			$watermarktext,		//
-			$watermarkfont,		//
-			$watermarkshadow,	//
-			$watermarkcolor;	//
-
 	// Charge la librairie de traitements des images sous SPIP
 	include_spip('inc/filtres_images');
 
@@ -86,6 +74,18 @@ function image_watermark($im) {
 		tester_variable('watermarkshadow', lire_config('album/watermarkshadow','yes'));
 		tester_variable('watermarkcolor', lire_config('album/watermarkcolor','FFFFFF'));
 	}
+
+	// Declaration des valeurs globales
+	global	$watermarktype,		// type de watermark (none / image / text)
+			$watermarkalignh,	// type d'alignement horizontal (left / right, center)
+			$watermarkalignv,	// type d'alignement vertical (top / bottom / center)
+			$watermarkmargin,	//
+			$watermarkimage,	//
+			$watermarkopacity,	//
+			$watermarktext,		//
+			$watermarkfont,		//
+			$watermarkshadow,	//
+			$watermarkcolor;	//
 
 	// Determine le marqueur permettant la recreation des vignettes en cas de modification du mode protection.
 	switch($watermarktype){
