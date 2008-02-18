@@ -165,7 +165,7 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 	if (spip_touch($dircache.'purger_'.$prefix, $duree, true)) {
 		foreach (preg_files($dircache,'[.]txt$') as $f) {
 			if (time() - (@file_exists($f)?@filemtime($f):0) > $duree)
-				spip_unlink($f);
+				@unlink($f);
 		}
 	}
 }
