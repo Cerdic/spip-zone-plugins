@@ -128,7 +128,7 @@ $out = str_replace($GLOBALS['puce'], "\n".'-', $out);
 
 // Remplace tous les liens	
 $patterns = array(
-           "/\<a href=['\"](.*?)['\"][^>]*>(.*?)<\/a>/ims"
+           "/\<a [^>]*?href=['\"](.*?)['\"][^>]*>(.*?)<\/a>/ims"
        );
        $replacements = array(
            "\\2 (\\1)"
