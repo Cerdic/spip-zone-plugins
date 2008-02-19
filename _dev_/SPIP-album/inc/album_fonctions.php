@@ -150,7 +150,7 @@ function image_watermark($im) {
 					}
 
 					// Calcule du positionnement horizontal de l'icone copyright
-					switch($watermarkalignv){
+					switch($watermarkalignh){
 						case 'right':
 							$watermark_x = $x_i - $x_m - $watermarkmargin;
 							break;
@@ -190,7 +190,7 @@ function image_watermark($im) {
 				}
 
 				// Calcule du positionnement horizontal du texte de copyright
-				switch($watermarkalignv){
+				switch($watermarkalignh){
 					case 'right':
 						$watermark_x = $x_i - $text_width - $watermarkmargin;
 						break;
@@ -206,13 +206,13 @@ function image_watermark($im) {
 					imagestring($im, $watermarkfont, $watermark_x + 1, $watermark_y + 1, $watermarktext, $shadow_color);
 				}
 				imagestring($im, $watermarkfont, $watermark_x, $watermark_y, $watermarktext, $text_color);
+
+				$image["fonction_image"]($im, "$dest");
+				imagedestroy($im);
 				break;
 			case 'none':
 			default:
 		}
-
-		$image["fonction_image"]($im, "$dest");
-		imagedestroy($im);
 	}
 
 	$x_dest = largeur($dest);
