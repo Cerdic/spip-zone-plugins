@@ -63,10 +63,10 @@ if ($message_pile > 0){
 	$nomsite = $GLOBALS['meta']['nom_site'];
 	$urlsite = $GLOBALS['meta']['adresse_site'];
 
-	$page_texte="\n\n________________________________________________________________________"  ;
-	$page_texte.="\n\n"._T('spiplistes:editeur').$nomsite."\n"  ;
-	$page_texte.=$urlsite."\n";
-	$page_texte.="________________________________________________________________________"  ;
+	$pied_page_texte="\n\n________________________________________________________________________"  ;
+	$pied_page_texte.="\n\n"._T('spiplistes:editeur').$nomsite."\n"  ;
+	$pied_page_texte.=$urlsite."\n";
+	$pied_page_texte.="________________________________________________________________________"  ;
 		
 	$lang = spiplistes_langue_liste($id_liste);
 	if($lang != '') $GLOBALS['spip_lang'] = $lang ;
@@ -117,14 +117,6 @@ if ($message_pile > 0){
 		$from = unicode2charset(charset2unicode($from),$GLOBALS['meta']['spiplistes_charset_envoi']);
 		$objet = unicode2charset(charset2unicode($objet),$GLOBALS['meta']['spiplistes_charset_envoi']);
 	}
-	$remplacements = array("&#8217;"=>"'","&#8220;"=>'"',"&#8221;"=>'"');
-	if ($GLOBALS['meta']['spiplistes_charset_envoi'] <> 'utf-8') {
-		$objet = strtr($objet, $remplacements);
-		$texte = strtr($texte, $remplacements);
-		$pied_page = strtr($pied_page, $remplacements);
-		$pied_page_texte = strtr($pied_page_texte, $remplacements);
-		$from = strtr($from, $remplacements);
- 	}
 	
 	// on prepare le debut de la version html
 	$pageh = "<html>\n\n<body>\n\n".$texte."\n\n";
@@ -144,6 +136,15 @@ if ($message_pile > 0){
 	}
 
 	$page_.= $pied_page_texte;
+
+	$remplacements = array("&#8216;"=>"'","&#8217;"=>"'","&#8220;"=>'"',"&#8221;"=>'"');
+	if ($GLOBALS['meta']['spiplistes_charset_envoi'] <> 'utf-8') {
+		$objet = strtr($objet, $remplacements);
+		$page_ = strtr($page_, $remplacements);
+		$pied_page = strtr($pied_page, $remplacements);
+		$pied_page_texte = strtr($pied_page_texte, $remplacements);
+		$from = strtr($from, $remplacements);
+ 	}
 	
 	$email_a_envoyer['texte'] = new phpMail('', $objet, '',$page_, $GLOBALS['meta']['spiplistes_charset_envoi']);
 	$email_a_envoyer['texte']->From = $from ; 
@@ -219,16 +220,20 @@ if ($message_pile > 0){
 					spip_query("UPDATE spip_auteurs SET cookie_oubli ="._q($cookie)." WHERE email ="._q($email));				
 
 					if ($is_from_valide){
-						if ($format_abo == 'html')  // email HTML ------------------
-							// desabo pied de page HTML
-							$body = $pageh.$pied_page."<a href=\"".generer_url_public('abonnement','d='.$cookie)."\">"._T('spiplistes:abonnement_mail')."</a>\n\n</body></html>";
-						else						// email TXT -----------------------
-							// desabo pied de page texte			
-							$body = $page_ ."\n\n"
+						$body_html = $pageh.$pied_page."<a href=\"".generer_url_public('abonnement','d='.$cookie)."\">"._T('spiplistes:abonnement_mail')."</a>\n\n</body></html>";
+						$body_text = $page_ ."\n\n"
 							  . filtrer_entites(_T('spiplistes:abonnement_mail'))."\n"
 							  . filtrer_entites(generer_url_public('abonnement','d='.$cookie))."\n\n"  ;
+						
+						if ($format_abo == 'html')  {// email HTML ------------------
+							// desabo pied de page HTML
+							$email_a_envoyer[$format_abo]->Body = $body_html;
+							$email_a_envoyer[$format_abo]->AltBody = $body_text;
+						} else {						// email TXT -----------------------
+							// desabo pied de page texte
+              $email_a_envoyer[$format_abo]->Body = $body_text;
+						}
 
-						$email_a_envoyer[$format_abo]->Body = $body;
 						$email_a_envoyer[$format_abo]->SetAddress($email,$nom_auteur);
 
 						
