@@ -9,4 +9,8 @@
   <prefix>geographie</prefix>
   <install>base/geographie_install.php</install>
   <fonctions>base/geographie.php</fonctions>
+  <pipeline>
+  	<nom>lister_tables_noexport</nom>
+  	<inclure>base/geographie.php</inclure>
+  </pipeline>
 </plugin>

@@ -51,5 +51,12 @@ $table_des_tables['geo_regions'] = 'geo_regions';
 $table_des_tables['geo_departements'] = 'geo_departements';
 $table_des_tables['geo_communes'] = 'geo_communes';
 
+function geographie_lister_tables_noexport($liste){
+	$liste[] = 'spip_geo_communes';
+	$liste[] = 'spip_geo_departements';
+	$liste[] = 'spip_geo_regions';
+	$liste[] = 'spip_geo_pays';
+	return $liste;
+}
 
 ?>
