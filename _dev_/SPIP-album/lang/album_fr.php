@@ -5,6 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
+'active' => 'Activ&eacute;',
 'aucun' => 'Aucun copyright',
 
 // B
@@ -15,6 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_logo_album' => 'Logo SPIP-Album',
 'cfg_nbre_vignette' => 'Nombre de vignettes par d&eacute;faut',
 'cfg_nbre_vignette_label' => 'D&eacute;finir le nombre de photographies affich&eacute;es dans les galeries ou diaporamas',
+'cfg_noclic' => 'Blocage du clic droit de la souris',
+'cfg_noclic_label' => 'Cette option permet de rendre impossible l\'appel au menu contextuel et donc de faire facilement une copie du contenu de votre site',
 'cfg_senstri' => 'Sens de tri par d&eacute;faut',
 'cfg_senstri_label' => 'D&eacute;finir le sens de tri des photographies affich&eacute;es dans les galeries ou diaporamas (<i>Dans les galeries, le tri se fait en fonction de <b>num titre</b> et de la <b>date</b>. Dans les diaporamas, le tri se fait sur la <b>date</b> seule</i>)',
 'cfg_taille' => 'Taille par d&eacute;faut des images',
@@ -22,10 +25,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_titre' => 'Configuration du plugin SPIP-Album',
 'cfg_watermark' => 'Configuration de l\'option Watermark',
 'clic_photo' => 'Cliquer sur la photo pour la visualiser dans sa taille originale.',
+'close' => 'fermer',
 'croissant' => 'Croissant',
 
 // D
 'decroissant' => 'D&eacute;croissant',
+'desactive' => 'D&eacute;sactiv&eacute;',
 
 // E
 

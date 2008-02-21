@@ -118,6 +118,11 @@
 		</tr>
 	</table>
 </fieldset>
+<fieldset><legend><:album:cfg_noclic:></legend>
+	<label for="sc_senstri"><:album:cfg_noclic_label:>&nbsp;:</label><br />
+	<input type="radio" name="noclic" value="0"[ (#ENV{noclic,0}|=={0}|?{checked})]>&nbsp;<:album:desactive:>&nbsp;
+	<input type="radio" name="noclic" value="1"[ (#ENV{noclic,0}|=={1}|?{checked})]>&nbsp;<:album:active:>&nbsp;
+</fieldset>
 
 
 
