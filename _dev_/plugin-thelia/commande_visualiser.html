@@ -22,36 +22,38 @@
 		<div id="contenu">
 		
 			
-				[(#REM) Titre de la rubrique ]
+			[(#REM) Titre de la rubrique ]
 
-				<div class="titrePage">
-				<h1>Visualiser mes commandes </h1>
-				</div>
+			<div class="titrePage">
+				<h1>Visualiser mes commandes</h1>
+			</div>
 
 			
 			[(#REM) Contenu de la page ]
 
-			<table width="675" border="0" cellspacing="0" cellpadding="5">
+			<table>
+			<thead>
 				<tr>
-					<td width="185" class="enteteTableau">N&deg; de la commande </td>
-    				<td width="100" class="enteteTableau">Date</td>
-    				<td width="100" class="enteteTableau">Montant</td>
-   					<td width="100" class="enteteTableau">Statut</td>
-   					<td width="140" class="enteteTableau">Voir la commande</td>
+					<th class="enteteTableau">N&deg; de la commande </td>
+    					<th class="enteteTableau">Date</td>
+    					<th class="enteteTableau">Montant</td>
+   					<th class="enteteTableau">Statut</td>
+   					<th class="enteteTableau">Voir la commande</td>
   				</tr>
-			</table>
+			</thead>
+			<tbody>
 			<THELIA_cmd type="COMMANDE" client="THELIA-CLIENT_ID">
-			<table width="675" border="0" cellspacing="0" cellpadding="5">
-  				<tr>
-    				<td width="185" class="ligneTableau"><span class="TexteColonne100">THELIA-REF</span></td>
-    				<td width="100" class="ligneTableau">THELIA-DATE</td>
-    				<td width="100" class="ligneTableau"><span class="TexteColonne100">THELIA-TOTCMDPORT</span></td>
-   					<td width="100" class="ligneTableau"><span class="TexteColonne100">THELIA-STATUT</span></td>
-   					<td width="140" class="ligneTableau"><a href="#URL_PAGE{commande_detail,commande=THELIA-REF}">Voir la commande</a></td>
+				<tr>
+    					<td class="ligneTableau"><span class="TexteColonne100">THELIA-REF</span></td>
+    					<td class="ligneTableau">THELIA-DATE</td>
+    					<td class="ligneTableau"><span class="TexteColonne100">THELIA-TOTCMDPORT</span></td>
+   					<td class="ligneTableau"><span class="TexteColonne100">THELIA-STATUT</span></td>
+   					<td class="ligneTableau"><a href="#URL_PAGE{commande_detail,commande=THELIA-REF}">Voir la commande</a></td>
   				</tr>
-			</table>
 			</THELIA_cmd>
-
+			</tbody>
+			</table>
+			
 
 		</div> [(#REM) fin contenu ]
 

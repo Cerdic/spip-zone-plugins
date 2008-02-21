@@ -303,6 +303,8 @@ a.LIEN_footer:hover {
 	border-bottom-style: solid;
 	border-bottom-color: #c6cdde;
 	font-size: 0.9em;
+	padding-left: 3px;
+	padding-right: 3px;
 }
 
 .footerTableau {
