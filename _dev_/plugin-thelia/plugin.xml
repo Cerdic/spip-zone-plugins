@@ -21,6 +21,11 @@
 		<inclure>spip_thelia_fonct.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>spip_thelia_fonct.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouter_boutons</action>
 		<inclure>spip_thelia_fonct.php</inclure>

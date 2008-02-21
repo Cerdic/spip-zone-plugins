@@ -1,0 +1,484 @@
+/*  ----------------------------------------------------------- */
+/*  Feuilles de styles des squelettes spip-thelia		*/
+/*  ----------------------------------------------------------- */
+
+/* styles thelia */
+
+.titrePage {
+	text-align: left;
+	font-weight: bold;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+.sousTitrePage {
+	color: #12335B;
+	text-align: left;
+	font-weight: bold;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.textePage {
+	color: #141414;
+	text-align: left;
+	font-weight: bold;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.separation {
+	height: 1px;
+	background-color: #7f8eb9;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	overflow:hidden;
+	zoom:1;
+}
+
+
+
+
+/* Entête
+-------------------------------------------------------- */
+
+
+.logo {
+	float: left;
+	width: 260px;
+	margin: 0;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	padding-left: 10px;
+}
+
+#monCompte {
+	float: left;
+	width: 400px;
+	margin: 0;
+	border-left-width: 1px;
+	border-left-style: dotted;
+	border-left-color: #FFFFFF;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	padding-left: 10px;
+}
+
+.formMonCompte {
+	float: left;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 0;
+	padding-left: 0;
+	margin-top: 0;
+	margin-right: 3px;
+	margin-bottom: 0;
+	margin-left: 0;
+}
+
+.blocMonCompte {
+	float: left;
+	padding:0;
+	margin: 0;
+}
+
+.champFormMonCompte {
+	font-size: 0.9em;
+	padding: 0;
+	margin: 0;
+	color: #12335B;
+	background-color: #e9f4fb;
+	border: 1px solid #12335B;
+	overflow: hidden;
+	zoom: 1;
+}
+
+.menuMonCompte {
+	float: left;
+	color: #a9c9e9;
+	margin-top: 5px;
+	margin-right: 0;
+	margin-bottom: 0;
+	margin-left: 0;
+	width: 100%;
+	padding: 0;
+}
+
+#monPanier {
+	float: left;
+	width: 250px;
+	margin: 0;
+	border-left-width: 1px;
+	border-left-style: dotted;
+	border-left-color: #FFFFFF;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	padding-left: 10px;
+}
+
+.boutonMonCompteEntete {	
+	float: left;
+	margin: 0;
+	padding-top: 5px;
+	padding-right: 0;
+	padding-bottom: 0;
+	padding-left: 0;
+}
+
+a.LIEN_entete:link {
+	font-size: 0.8em;
+	color: #a9c9e9;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.LIEN_entete:visited {
+	font-size: 0.8em;
+	color: #a9c9e9;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.LIEN_entete:hover {
+	font-size: 0.8em;
+	color: #a9c9e9;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+
+
+/* Produit petit & grand
+-------------------------------------------------------- */
+
+.ListeProduitsPetits {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+.produitPetit {
+	float: left;
+	width: 170px;
+	margin-top: 20px;
+	margin-right: 20px;
+	margin-bottom: 0;
+	margin-left: 0;
+	padding: 0;
+}
+
+.contourImage {
+	border: 1px dashed #cccccc;
+	margin-bottom: 5px;
+	float: left;
+}
+
+.titreProduit {
+	color: #12335B;
+	text-align: left;
+	font-weight: bold;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	width: 100%;
+}
+
+.chapoProduit {
+	color: #12335B;
+	text-align: left;
+	font-style: italic;
+	font-size: 0.9em;
+	line-height: 1.2em;
+	margin-bottom: 5px;
+	width: 100%;
+}
+
+.descriptionProduit {
+	color: #12335B;
+	text-align: left;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+.prixProduit {
+	color: #EC8000;
+	text-align: left;
+	font-weight: bold;
+	margin-top: 5px;
+}
+
+.ficheProduit {
+	float:left;
+	width: 470px;
+	margin-left: 10px;
+}
+
+
+a.LIEN_commander {
+	color: #acac90;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+
+
+/* Nombre de pages
+-------------------------------------------------------- */
+
+#pages {
+	float: left;
+	text-align: right;
+	font-size: 0.9em;
+	padding-top: 10px;
+	margin: 0;
+	padding-bottom: 10px;
+	color: #12335B;
+}
+
+a.LIEN_pages:link {
+	color: #12335B;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.LIEN_pages:visited {
+	color: #12335B;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.LIEN_pages:hover {
+	color: #12335B;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+
+/* Pied de page
+-------------------------------------------------------- */
+
+#footer{
+	float: left;
+	width: 960px;
+	color: #0066CC;
+	font-size: 0.9em;
+	text-align: right;
+	border-top-width: 1px;
+	border-top-style: dotted;
+	border-top-color: #0066CC;
+	margin: 10px;
+	padding-top: 10px;
+}
+
+a.LIEN_footer:link {
+	color: #0066CC;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.LIEN_footer:visited {
+	color: #0066CC;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.LIEN_footer:hover {
+	color: #0066CC;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+/* Divers éléments de formulaires & tableaux
+-------------------------------------------------------- */
+
+.enteteTableau {
+	font-weight: bold;
+	border: 1px dashed #cccccc;
+}
+
+.ligneTableau {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #c6cdde;
+	font-size: 0.9em;
+}
+
+.footerTableau {
+	color: #12335B;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFFFF;
+}
+
+.boutonMonCompteContenu {
+	font-weight: bold;
+	text-align: right;
+	margin: 10px;
+}
+
+.zoneDeSaisie {
+	color: #12335B;
+	font-weight: bold;
+	font-size: 0.9em;
+}
+
+.obligatoire {
+	color: #FF0000;
+}
+
+.commentaires {
+	font-size: 1em;
+	font-style: italic;
+	font-weight: bold;
+	color: #12335B;
+}
+
+
+/* Menu général
+-------------------------------------------------------- */
+
+#menuGeneral {
+	float: left;
+	width:175px;
+	padding: 0;
+	margin-top: 20px;
+	margin-right: 0;
+	margin-bottom: 0;
+	margin-left: 10px;
+
+}
+
+
+dl, dt, dd, li {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#menu {
+	position: relative;
+	padding: 0;
+	margin: 0;
+}
+
+dl#menu {
+	width: 175px;
+}
+
+
+dl#menu dt {
+	cursor: pointer;
+}
+
+dl#menu dt a {
+	font-size: 1.2em;
+	color: #ec8000;
+	font-weight: bold;
+	text-decoration: none;
+	display: block;
+	margin: 0;
+	padding-top: 5px;
+	padding-right: 0;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	overflow: hidden;
+	zoom: 1;
+}
+
+dl#menu dt a:hover, dl#menu dt .selected {
+	color: #FFFFFF;
+	background-color: #EC8000;
+}
+
+dl#menu dd {
+}
+
+dl#menu li {
+}
+
+dl#menu li a {
+	font-size: 1em;
+	color: #EC8000;
+	font-weight: bold;
+	text-decoration: none;
+	display: block;
+	margin:0;
+	padding-left: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	overflow: hidden;
+	zoom: 1;
+}
+
+dl#menu li a:hover, dl#menu li .selected {
+	color: #FFFFFF;
+	background-color: #EC8000;
+}
+
+.invisibleW3C {
+	width: 0; 
+	height: 0;
+	padding: 0; 
+	margin: 0;
+}
+
+/* Signature
+-------------------------------------------------------- */
+
+#signature {
+	padding: 0;
+	width: 980px;
+	color: #808185;
+	font-size: 0.8em;
+	margin-top: 10px;
+	margin-right: 0;
+	margin-bottom: 0;
+	margin-left: 0;
+	font-weight: bold;
+}
+
+.W3C {
+	width: 88px;
+	margin: 0;
+	padding: 0;
+	float: right;
+}
+
+a.LIEN_signature:link {
+	color: #808185;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.LIEN_signature:visited {
+	color: #808185;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.LIEN_signature:hover {
+	color: #808185;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+
+/* style propre aux modeles <produit>*/
+
+#contenu .produits_thelia {
+	width: 200px;
+	clear: right;
+	text-align: left;
+	border: 1px dashed #cccccc;
+	padding: 1em;
+}
+

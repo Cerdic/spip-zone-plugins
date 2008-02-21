@@ -1,10 +1,15 @@
 <?php
-function spip_thelia_header_prive($texte) {
+function spip_thelia_header_prive($flux) {
 	if (!file_exists("../fonctions/moteur.php")) 
 		echo ("erreur : th&eacute;lia introuvable, v&eacute;rifiez que les sous-r&eacute;pertoires de th&eacute;lia et spip sont dans le m&ecirc;me r&eacute;pertoire.");
 	if (!function_exists('lire_config'))
 		echo ("erreur : le plugin CFG est n'est pas install&eacute;.");
-	return $texte;
+	return $flux;
+}
+
+function spip_thelia_insert_head($flux) {
+	$flux.="<link rel=\"stylesheet\" href=\""._DIR_PLUGIN_SPIP_THELIA."spipthelia.css\" type=\"text/css\" media=\"projection, screen, tv\" />";
+	return $flux;
 }
 
 function spip_thelia_appeler_moteur_thelia($texte)
