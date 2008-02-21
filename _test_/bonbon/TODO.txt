@@ -26,4 +26,4 @@ regroupement de classes) ? (utile ? même s'il y a la duplication de séance ?)
 - des messages privés visibles depuis l'interface du CDT.
 - automatiser le renommage de cahier-de-texte-rubrique.html (le mieux serait carrement d'automatiser la copie de cahier-de-texte-accueil.html)
 - utiliser cfg (ou autre) pour configurer les mots-clés/rubriques
-- automatiser la mise en place des mots-clés et rubriques (d'autant que le script d'origine est HORRIBLEMENT mal conçu !!!)
+- automatiser la mise en place des mots-clés et rubriques 

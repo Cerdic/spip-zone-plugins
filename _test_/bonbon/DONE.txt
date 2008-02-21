@@ -45,6 +45,7 @@ Ce qui a été fait avec «Bonbon !»
 - Bonbon utilise la barre typographique de Spip (qui peut être la v2 si le plugin est installé) ! (merci Stephane)
 - Un tableau de bord sur la page d'accueil permet à chaque prof de savoir en un clin d'½il où il en est (dernières fiches publiées pour chaque classe et lien direct vers la saisie pour la classe concernée)... Très pratique pour savoir où on en est quand on a beaucoup de classes (et du retard... :-)). Ce tableau de bord affiche aussi les séances qui ont un problème de date.
 - limitation des la selection des séances à l'année en cours, à moins que ce ne soit explictement mentionné dans les paramètres GET.
+- réécriture complète de la page d'installation et de mise à jour qui était vraiment nulle.
 
 
 1.0 Première sortie de Bonbon

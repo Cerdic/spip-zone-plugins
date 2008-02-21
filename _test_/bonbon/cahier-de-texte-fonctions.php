@@ -60,58 +60,40 @@ function bonbon_fusion_tableau($tab,$autretab) {
 
 //Quelques fonctions pour que Bonbon manipule la base de données:
 function bonbon_ajoute_groupe ($nom_groupe){
+	$result=false;
 	$sql = "INSERT INTO spip_groupes_mots (titre,articles, breves,rubriques, syndic, minirezo, comite, forum) 
 		VALUES ('".trim($nom_groupe)."','oui','oui','oui','oui','oui','oui','oui')";
 		
 	$result = spip_query($sql);
-	$id_groupe=spip_insert_id();
-	return $id_groupe;
+	if ($result) $result=spip_insert_id();
+	return $result;
 };
-function bonbon_ajoute_mot ($titre,$option_descript="",$id_groupe,$nom_groupe,$descript){
-	$phrase="";
-	if ($option_descript!="") {
-		$option_descript .= trim($descript);
-		$phrase=" de <b>$descript</b>";
-	};
-	$sql = "INSERT INTO spip_mots (titre, descriptif, texte , id_groupe, type) 
-		VALUES ('".trim($titre)."','Sous-thème de ".$option_descript."','','".$id_groupe."','".trim($nom_groupe)."')";
+function bonbon_ajoute_mot ($titre,$id_groupe,$type){
+	$result=false;
+	$sql = "INSERT INTO spip_mots (titre, id_groupe,type) 
+		VALUES ('".trim($titre)."','".trim($id_groupe)."','".trim($type)."')";
 		
 	$result = spip_query($sql);
-	$id_mot=spip_insert_id();
-	return $id_mot;
+	if ($result) $result=spip_insert_id();
+	return $result;
 }
 function bonbon_lier_mot ($id_mot,$id_objet,$type_objet="article") {
 	$result=false;
 	$sql = "INSERT INTO spip_mots_".$type_objet."s (id_mot, id_". $type_objet .") VALUES (" . $id_mot . ", " . $id_objet . ")";
-		$result = spip_query($sql);
-		if ($result) {
-			echo ("<!--le mot n°$id_mot est rattaché à $type_objet n°$id_objet-->");
-		} else {
-			echo "<!--problème pour lier le mot n°$id_mot à $type_objet n°$id_objet ! Faites-le à la main !-->";
-		}
+	$result = spip_query($sql);
 	return $result;
 }
 
 function bonbon_effacer_lien_mot ($id_mot,$id_objet,$type_objet="article") {
 	$result=false;
 	$sql = "DELETE FROM spip_mots_".$type_objet."s WHERE id_mot=$id_mot AND id_$type_objet=$id_objet";
-		$result = spip_query($sql);
-		if ($result) {
-			echo ("<!--le mot n°$id_mot est détaché de $type_objet n°$id_objet-->");
-		} else {
-			echo "<!--problème pour détacher le mot n°$id_mot à $type_objet n°$id_objet ! Faites-le à la main !-->";
-		}
+	$result = spip_query($sql);
 	return $result;
 }
 function bonbon_affecter_auteur ($id_article, $id_auteur) {
 	$result=false;
 	$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($id_auteur,$id_article)";
 	$result = spip_query($sql);
-	if ($result) {
-		echo ("<!--l'auteur n°$id_mot est attaché à l'article n°$id_article-->");
-	} else {
-			echo "<!--problème pour attacher l'auteur n°$id_mot à l'article n°$id_article ! Faites-le à la main !-->";
-	}
 	return $result;
 }
 
@@ -119,11 +101,6 @@ function bonbon_desaffecter_auteur ($id_article, $id_auteur) {
 	$result=false;
 	$sql = "DELETE FROM spip_auteurs_articles WHERE id_auteur=$id_auteur AND  id_article=$id_article";
 	$result = spip_query($sql);
-	if ($result) {
-		echo ("<!--l'auteur n°$id_mot est détaché de l'article n°$id_article-->");
-	} else {
-			echo "<!--problème pour détacher l'auteur n°$id_mot de l'article n°$id_article ! Faites-le à la main !-->";
-	}
 	return $result;
 }
 function bonbon_creer_fiche_prof ($nom, $id_auteur, $id_rubrique) {
@@ -133,8 +110,36 @@ function bonbon_creer_fiche_prof ($nom, $id_auteur, $id_rubrique) {
 	$result = spip_query($sql);
 	if ($result) {
 		$id_article=spip_insert_id();
-		bonbon_affecter_auteur($id_article,$id_auteur);
+		$result=bonbon_affecter_auteur($id_article,$id_auteur);
+		if ($result) $result=$id_article;
 	}
+	return $result;
+}
+function bonbon_creer_fiche_classe ($nom_classe, $id_rubrique, $id_mot) {
+	$result=false;
+	$descriptif="Cet article décrit grâce à ses mots-clés, son auteur et son éventuel contenu la classe de $nom_classe";
+	$sql = "INSERT INTO spip_articles (titre, id_rubrique, statut, date, surtitre, descriptif) VALUES ('$nom_classe','$id_rubrique', 'publie', NOW(),'".addslashes("À propos d'une classe")."','".addslashes($descriptif)."')";
+	$result = spip_query($sql);
+	if ($result) {
+		$id_article=spip_insert_id();
+		$result=bonbon_lier_mot($id_mot,$id_article);
+	}
+	return $result;
+}
+function bonbon_creer_sous_rubrique ($id_parent, $titre, $descriptif) {
+	$sql = "INSERT INTO spip_rubriques (titre, id_parent, descriptif , statut, date) 
+	VALUES ('".addslashes($titre)."', '$id_parent','".addslashes($descriptif)."', 'publie',NOW())";
+		
+	$result = spip_query($sql);
+	if ($result) $result=spip_insert_id();
+	return $result;
+}
+function bonbon_creer_rubrique ($titre, $descriptif) {
+	$sql = "INSERT INTO spip_rubriques (titre, descriptif , statut, date) 
+	VALUES ('".addslashes($titre)."','".addslashes($descriptif)."', 'publie',NOW())";
+		
+	$result = spip_query($sql);
+	if ($result) $result=spip_insert_id();
 	return $result;
 }
 function bonbon_mot_existe ($titre) {
