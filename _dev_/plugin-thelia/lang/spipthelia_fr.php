@@ -42,5 +42,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'visualiser_commandes' => 'Visualiser mes commandes',
 'recapitulatif_commande' => 'R&eacute;capitulatif de ma commande',
 'votre_choix' => 'Votre choix...',
-'choix_declinaison' => 'Veuillez pr&eacute;ciser les caract&eacute;ristiques souhait&eacute;es');
+'choix_declinaison' => 'Veuillez pr&eacute;ciser les caract&eacute;ristiques souhait&eacute;es',
+'frais_livraison' => 'Frais de livraison',
+'total' => 'Total',
+'remise' => 'Remise',
+'choix_paiement' => 'Je choisis un mode de paiement',
+'code_reduction' => 'Saisir votre code de réduction');
 ?>

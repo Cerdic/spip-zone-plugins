@@ -31,48 +31,52 @@
 	
 			<form action="#URL_PAGE{commande}" id="formulaire" method="post">
 			<input type="hidden" name="thelia_action" value="codepromo" />
-			<table width="675" border="0" cellspacing="0" cellpadding="5">
-            	<tr>
-					<td width="305" class="enteteTableau">Produits</td>
-                    <td width="110" class="enteteTableau">Prix unitaire </td>
-                    <td width="110" class="enteteTableau">Quantit&eacute;</td>
-                    <td width="110" class="enteteTableau">Total</td>
+			<table>
+            		<thead> 
+				<tr>
+    					<th class="enteteTableau"><:spipthelia:photo_produit:></th>
+    					<th class="enteteTableau"><:spipthelia:references_produits:></th>
+    					<th class="enteteTableau"><:spipthelia:prix_unitaire:></th>
+    					<th class="enteteTableau"><:spipthelia:quantite:></th>
+    					<th class="enteteTableau"><:spipthelia:total:></th>
+    				</tr>
+			</thead> 
+			<tbody>
+				<THELIA_panier type="PANIER">
+				<tr>
+					<td class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td>
+					<td class="ligneTableau">THELIA-TITRE - THELIA-REF</td>
+                			<td class="ligneTableau">THELIA-PRIXU &euro;</td>
+                    			<td class="ligneTableau">THELIA-QUANTITE</td>
+                    			<td class="ligneTableau">THELIA-TOTAL &euro;</td>
 				</tr>
-			</table>
-			<THELIA_panier type="PANIER">
-			<table width="675" border="0" cellspacing="0" cellpadding="5">
-              	<tr>
-					<td width="100" class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td><td width="205" class="ligneTableau">THELIA-TITRE - THELIA-REF</td>
-                    <td width="110" class="ligneTableau">THELIA-PRIXU &euro;</td>
-                    <td width="110" class="ligneTableau">THELIA-QUANTITE</td>
-                    <td width="110" class="ligneTableau">THELIA-TOTAL &euro;</td>
+				</THELIA_panier>
+				<tr>
+					<td>&nbsp;</td>
+                		    	<td>&nbsp;</td>
+                		    	<td>&nbsp;</td>
+                		    	<td><:spipthelia:frais_livraison:></td>
+                    			<td>THELIA-PANIER_PORT &euro;</td>
 				</tr>
-			</table>
-			</THELIA_panier>
-			<table width="675" border="0" cellspacing="0" cellpadding="5">
-              	<tr>
-					<td width="425" class="enteteTableau">&nbsp;</td>
-                    <td width="110" class="enteteTableau">Frais de livraison </td>
-                    <td width="110" class="enteteTableau">THELIA-PANIER_PORT &euro;</td>
+				<tr>
+					<td>&nbsp;</td>
+                		    	<td>&nbsp;</td>
+                		    	<td>&nbsp;</td>
+                    			<td><:spipthelia:remise:> </td>
+                    			<td>THELIA-PANIER_REMISE &euro;</td>
 				</tr>
-			</table>
-			<table width="675" border="0" cellspacing="0" cellpadding="5">
-              	<tr>
-					<td width="425" class="enteteTableau">&nbsp;</td>
-                    <td width="110" class="enteteTableau">Remise </td>
-                    <td width="110" class="enteteTableau">THELIA-PANIER_REMISE &euro;</td>
+			  	<tr>
+					<td class="footerTableau">&nbsp;</td>
+					<td class="footerTableau">&nbsp;</td>
+                		    	<td class="footerTableau">&nbsp;</td>
+                    			<td class="footerTableau"><:spipthelia:total:></td>
+                    			<td class="footerTableau">THELIA-PANIER_TOTPORT &euro;</td>
 				</tr>
-			</table>
-			<table width="675" border="0" cellspacing="0" cellpadding="5">
-              	<tr>
-					<td width="425" class="footerTableau">&nbsp;</td>
-                    <td width="110" class="footerTableau">Total</td>
-                    <td width="110" class="footerTableau">THELIA-PANIER_TOTPORT &euro;</td>
-				</tr>
+			</tbody>
 			</table>
 			<br />
-			Saisir votre code de réduction
-			<input name="code" type="text" class="zoneDeSaisie"/><input type="submit" value="Valider" />
+			<:spipthelia:code_reduction:>
+			<input name="code" type="text" class="zoneDeSaisie"/><input type="submit" value="<:valider:>" />
 			
 			</form>
 
@@ -80,21 +84,19 @@
 			</div>
 			
 			<div class="titrePage">
-				<h2>Je choisis un mode de paiement </h2>
+				<h2><:spipthelia:choix_paiement:></h2>
 			</div>
 
-		[(#REM) contenu de la page ]
-		<table width="675" border="0" cellspacing="0" cellpadding="5">
-		
-		   <THELIA_PAIEMENT type="PAIEMENT">
-		 	<tr>
-			   <td width="305" class="ligneTableau">THELIA-TITRE</td>
-               <td width="110" class="ligneTableau"><a href="#URL_PAGE{commande,thelia_action=paiement&amp;type_paiement=THELIA-ID}">Valider</a></td>
-			</tr>
+			[(#REM) contenu de la page ]
+			<table width="675" border="0" cellspacing="0" cellpadding="5">
+			   	<THELIA_PAIEMENT type="PAIEMENT">
+			 	<tr>
+				   	<td class="ligneTableau">THELIA-TITRE</td>
+               				<td class="ligneTableau"><a href="#URL_PAGE{commande,thelia_action=paiement&amp;type_paiement=THELIA-ID}"><:valider:></a></td>
+				</tr>
 
 			</THELIA_PAIEMENT>
-
-		</table>
+			</table>
 			
 		
 		</div>[(#REM) fin contenu ]
