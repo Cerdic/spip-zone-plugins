@@ -42,7 +42,8 @@
 				<form action="#URL_PAGE{connexion}" method="post" name="connexion" id="connexion">
             				<input type="hidden" name="thelia_action" value="connexion" />
 				
-				<table width="775" border="0" cellspacing="0" cellpadding="5">
+				<table border="0" cellspacing="0" cellpadding="5">
+				<tbody>
 					<tr>
 						<td class="ligneTableau">Mon e-mail THELIA-ERRCONNEX[<span class="obligatoire">(e-mail ou mot de passe incorrects)</span>]</td>
 						<td class="ligneTableau"><input name="email" type="text" class="zoneDeSaisie"/></td>
@@ -51,6 +52,7 @@
    						<td width="190" class="ligneTableau">Mon mot de passe </td>
     					<td width="565" class="ligneTableau"><input name="motdepasse" type="password"  class="zoneDeSaisie"/></td>
   					</tr>
+				</tbody>
 				</table>
 				<div class="boutonMonCompteContenu">
 				<input type="submit" value="Valider" />
@@ -67,7 +69,8 @@
 				<form action="#URL_PAGE{nouveau}" method="post" name="nouveau" id="nouveau">
             				<input type="hidden" name="thelia_action" value="creercompte" />
 				
-				<table width="775" border="0" cellspacing="0" cellpadding="5">
+				<table>
+				<tbody>
 					<tr>
 						<td class="ligneTableau">Civilit&eacute;*</td>
 						<td class="ligneTableau">
@@ -142,7 +145,8 @@
 					<td class="ligneTableau">Confirmation de votre mot de passe*</td>
 					<td class="ligneTableau"><input name="motdepasse2" type="password" class="zoneDeSaisie"/></td>
 				  </tr>
-			</table>
+				</tbody>
+				</table>
 			<span class="commentaires">* Champs obligatoires</span>
 			
 			<div class="boutonMonCompteContenu">
