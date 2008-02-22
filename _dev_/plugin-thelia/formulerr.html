@@ -33,15 +33,16 @@
 				[(#REM) Sous-titre de la page ]
 
 				<div class="sousTitrePage">
-				<h3>Relisez les informations que vous souhaitez  nous transmettre. Vous avez sans doute fait une erreur.  </h3>
+					<h3>Relisez les informations que vous souhaitez  nous transmettre. Vous avez sans doute fait une erreur.  </h3>
 				</div>
 				
 				[(#REM) Contenu de la page ]
 						  
 				<form action="#URL_PAGE{nouveau}" method="post" name="nouveau" id="nouveau">
            				 <input type="hidden" name="thelia_action" value="creercompte" />
-				<table width="775" border="0" cellspacing="0" cellpadding="5">
-  					<tr>
+				<table>
+  				<tbody>
+					<tr>
     					<td width="190" class="ligneTableau">Civilit&eacute; THELIA-RAISON[<span class="obligatoire">(obligatoire)</span>]</td>
     					<td width="565" class="ligneTableau">
 						<select name="raison" size="1"  class="zoneDeSaisie">
@@ -115,6 +116,7 @@
     					<td class="ligneTableau">Confirmation de votre mot de passe</td>
     					<td class="ligneTableau"><input name="motdepasse2" type="password"  class="zoneDeSaisie"/></td>
   					</tr>
+				</tbody>
 				</table>
 					<div class="boutonMonCompteContenu">
 					<input type="submit" value="Valider" />
