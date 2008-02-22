@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Interface Th&eacute;lia</nom>
- 	<version>0.5</version>
+ 	<version>0.6</version>
  	<prefix>spip_thelia</prefix>
- 	<auteur>Arnault Pachot [OpenStudio->http://www.openstudio.fr]</auteur>
+ 	<auteur>Arnault Pachot, Alain Cousin</auteur>
  	<description>Plugin permettant d'utiliser les boucles Th&eacute;lia dans vos squelettes <br/>
 	[acc&egrave;s au panneau de configuration pour param&eacute;trer la version deTh&eacute;lia->.?exec=cfg&amp;cfg=spip_thelia] 
 <br/>Distribu&eacute; sous licence GNU/GPL   </description>
