@@ -1,0 +1,129 @@
+#CACHE{7200}
+<INCLURE{fond="header"}>
+[(#REM)   ci-dessus l'include du fichier header avec un délai de 31 jours.   ]
+
+
+<head>
+<meta name="revisit-after" content="15 days" />
+<meta http-equiv="content-type" content="text/html; charset=#CHARSET"/>
+<meta http-equiv="Content-Language" content="fr-fr" />
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+
+
+<INCLURE{fond="header-css"}{date=#ENV{date}}>
+
+</head>
+<body class="page_panier">
+
+<div id="container">   [(#REM)   cette div centre la page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}>  [(#REM)   include du fichier entete avec le logo   ]
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}{id_rubrique}> [(#REM)   le menu horizontal avec les onglets   ]
+<div id="content">  [(#REM)   ouverture contenu   ]
+
+<div class="width25 floatLeft"> [(#REM)   ouverture colone de gauche   ]
+
+<div class="boite_cellule_gauche">[(#REM)   ouverture boite menu   ]
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond="inc_menu_rub"}>
+
+    </div>[(#REM)   fermeture boite menu   ]
+
+</div>[(#REM)   fermeture colone de gauche   ]
+
+<div class="width75 floatRight"> [(#REM)   ouverture colone droite   ]
+ <div class="grande_boite_cellule">[(#REM) ouverture grande boite cellule]
+   <THELIA_cmd type="COMMANDE" ref="THELIA-COMMANDE_REF" client="THELIA-CLIENT_ID">
+     <h4>D&eacute;tail de la commande N&deg;THELIA-REF </h4>
+
+	<THELIA_verifpay type="COMMANDE" ref="THELIA-COMMANDE_REF" statut="paye">
+	  <h3>N&deg; de facture : THELIA-FACTURE / Date : THELIA-DATE</h3>
+	</THELIA_verifpay>
+
+        <table class="width100">
+
+         <thead class="width25">
+	   <tr>
+	     <th class="row_first white alignCenter width25"><strong>Produit et r&eacute;f&eacute;rence</strong></th>
+    	     <th class="row_first white alignCenter width25"><strong>Prix unitaire</strong></th>
+    	     <th class="row_first white alignCenter width25"><strong>Quantit&eacute;</strong></th>
+   	     <th class="row_first white alignCenter width25"><strong>Total</strong></th>
+	    </tr>
+          </thead>
+
+          <tfoot class="width20">
+	      <tr>
+                <td class="width20">&nbsp;</td>
+                <td class="width20">&nbsp;</td>
+		<td class="row_first white alignCenter width20"><strong>Total</strong></td>
+    		<td class="row_even alignCenter width20"><strong>THELIA-TOTALCMD</strong></td>
+	      </tr>
+
+	      <tr>
+                 <td class="width20">&nbsp;</td>
+                 <td class="width20">&nbsp;</td>
+		 <td class="row_first white alignCenter width20"><strong>Remise</strong></td>
+    		<td class="row_even alignCenter width20"><strong>THELIA-REMISE</td>
+	      </tr>
+
+	      <tr>
+                <td class="width20">&nbsp;</td>
+                <td class="width20">&nbsp;</td>
+		<td class="row_first white alignCenter width20"><strong>Frais de livraison</strong></td>
+    		<td class="row_even alignCenter width20"><strong>THELIA-PORT</td>
+	       </tr>
+
+	       <tr>
+                <td class="width20">&nbsp;</td>
+                <td class="width20">&nbsp;</td>
+		<td class="row_first white alignCenter width20"><strong>Total</strong></td>
+    		<td class="row_even alignCenter width20"><strong>THELIA-TOTCMDPORT</strong></td>
+	       </tr>
+	  </tfoot>
+
+
+	 <THELIA_venteprod type="VENTEPROD" commande="THELIA-ID">
+	     <tbody>
+               <tr>
+		<td class="row_even alignCenter width20"><strong>THELIA-TITRE - THELIA-REF</strong></td>
+    		<td class="row_old alignCenter width20"><strong>THELIA-PRIXU</strong></td>
+    		<td class="row_even alignCenter width20"><strong>THELIA-QUANTITE</strong></td>
+   		<td class="row_old alignCenter width20"><strong>THELIA-TOTALPROD</strong></td>
+	      </tr>
+	     </tbody>
+	  </THELIA_venteprod>
+
+        </table>
+
+	<h4>Statut : THELIA-STATUT</h4>
+
+          <THELIA_verifpay type="COMMANDE" ref="THELIA-COMMANDE_REF" statut="paye">
+
+	    <div class="boutonMonCompteContenu">
+	     <a href="client/pdf/facture.php?ref=THELIA-REF">Visualiser la facture au format PDF </a>
+	    </div>
+
+	  </THELIA_verifpay>
+
+	    <div class="boutonMonCompteContenu">
+	       <a href="THELIA-URLPREC">Retour </a>
+	    </div>
+       </THELIA_cmd>
+
+
+
+</div>[(#REM) fermeture grande boite cellule]
+
+</div>[(#REM)   fermeture colone droite   ]
+
+<hr class="spacer" /> [(#REM)   ajoute une barre hr invisible   ]
+</div>[(#REM)   fermeture contenu   ]
+<INCLURE{fond="pieddepage"}> [(#REM)   le pied de page inclu avec délai   ]
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ]
+</body>
+</html>

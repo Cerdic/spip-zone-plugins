@@ -1,0 +1,56 @@
+        [(#REM)  Rubriques non vide à la Racine du catalogue classée par ordre de classement ]
+         <THELIA_MENU_RUBRIQUES type="RUBRIQUE" parent="0" pasvide="1" classement="manuel">
+            <li><a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}" class="sous_menu">THELIA-TITRE</a></li>
+               <ul id="ssmenu_thelia">
+               [(#REM)  sous rubriques  ]
+               <THELIA_BLOC_SOUS_MENU  type="RUBRIQUE" parent="THELIA-ID" pasvide="1" classement="manuel">
+
+                  [(#REM)  sous rubriques courantes  ]
+                  <THELIA_MENU_SOUS_RUBRIQUE_COURANTE type="RUBRIQUE" id="THELIA-ID" courante="1">
+                     <li><a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}" class="selected1">THELIA-TITRE</a></li>
+
+                      [(#REM)  sous-sous-rubriques de la rubrique courante  ]
+                      <THELIA_BLOC_1_SSOUS_RUBRIQUE type="RUBRIQUE" parent="THELIA-ID" pasvide="1" classement="manuel">
+
+                        <THELIA_MENU_1_SSOUS_RUBRIQUE type="RUBRIQUE" id="THELIA-ID">
+                           <li><a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}" class="sousmenu2">THELIA-TITRE</a></li>
+                        </THELIA_MENU_1_SSOUS_RUBRIQUE>
+
+                     </THELIA_BLOC_1_SSOUS_RUBRIQUE>
+
+                  </THELIA_MENU_SOUS_RUBRIQUE_COURANTE>
+
+                  [(#REM)  sous rubriques non courantes  ]
+                  <THELIA_MENU_SOUS_RUBRIQUE type="RUBRIQUE" id="THELIA-ID" courante="0">
+                     <li><a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}" class="sousmenu1">THELIA-TITRE</a></li>
+
+                        [(#REM)  sous-sous-rubriques courante de la rubrique non courante  ]
+                        <THELIA_MENU_2_SSOUS_RUBRIQUE type="RUBRIQUE" parent="THELIA-ID" courante="1">
+
+                           [(#REM)  sous-sous-rubriques avec le même parent  ]
+                           <THELIA_SUR_MENU_2_SSOUS_RUBRIQUE type="RUBRIQUE" parent="THELIA-PARENT" pasvide="1" classement="manuel">
+
+                              [(#REM)  sous-sous-rubrique courante  ]
+                              <THELIA_SUR_MENU_2_SSOUS_RUBRIQUE_COURANTE type="RUBRIQUE" id="THELIA-ID" courante="1">
+                                 <li><a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}" class="selected2">THELIA-TITRE</a></li>
+                              </THELIA_SUR_MENU_2_SSOUS_RUBRIQUE_COURANTE>
+
+                              [(#REM)  sous-sous-rubriques non courantes de la sous-rubrique  ]
+                              <THELIA_SUR_MENU_2_SSOUS_RUBRIQUE_PASCOURANTE type="RUBRIQUE" id="THELIA-ID" courante="0">
+                                 <li><a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}" class="sousmenu2">THELIA-TITRE</a></li>
+                               </THELIA_SUR_MENU_2_SSOUS_RUBRIQUE_PASCOURANTE>
+
+                           </THELIA_SUR_MENU_2_SSOUS_RUBRIQUE>
+
+                        </THELIA_MENU_2_SSOUS_RUBRIQUE>
+
+                  </THELIA_MENU_SOUS_RUBRIQUE>
+
+               </THELIA_BLOC_SOUS_MENU>
+
+         </ul>
+         </THELIA_MENU_RUBRIQUES>
+         <THELIA_MENU_CONTENU type="CONTENU" parent="0" profondeur="1" classement="manuel">
+	   <li><a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}" class="sous_menu">THELIA-TITRE</a></li>
+         </THELIA_MENU_CONTENU>
+
