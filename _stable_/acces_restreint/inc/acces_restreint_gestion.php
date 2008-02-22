@@ -291,8 +291,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 			$tableau= '';
 			while ($row = spip_fetch_array($result)) {		
-				// Un admin restreint ne peut agir que sur les zones auxquelles il appartient (excepté sur les admins) et excepté lui-même pour éviter de se retirer d'une zone par erreur
-				if($flag_editable && ($connect_toutes_rubriques || (AccesRestreint_test_appartenance_zone_auteur($id_zone, $connect_id_auteur) && autoriser('modifier', 'auteur', $id_auteur ) && $id_connect_auteur!=$id_auteur))){
+				// Un admin restreint ne peut agir que sur les zones auxquelles il appartient (excepte sur les admins) et excepte lui-meme pour eviter de se retirer d'une zone par erreur
+				if($flag_editable && ($connect_toutes_rubriques || (AccesRestreint_test_appartenance_zone_auteur($id_zone, $connect_id_auteur) && autoriser('modifier', 'auteur', $id_auteur ) && $connect_id_auteur!=$id_auteur))){
 					$editable = true;
 				}
 				$les_zones[] = $row['id_zone'];
@@ -344,7 +344,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	
 			$out .= "<table border='0' width='100%' style='text-align: $spip_lang_right'>";
 	
-			// Un admin restreint ne peut ajouter à un auteur que les zones auxquelles il appartient
+			// Un admin restreint ne peut ajouter a un auteur que les zones auxquelles il appartient
 			if($connect_toutes_rubriques ){
 				$query = "SELECT * FROM spip_zones AS z WHERE z.id_zone NOT IN ($les_zones) ORDER BY z.titre";
 			} else {
