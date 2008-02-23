@@ -1,9 +1,18 @@
+[(#REM)
+	*********************************************************************
+	*
+	* Copyright (c) 2006-2008
+	* Xavier Burot
+	* fichier : modeles\pagination_gallery_precedent.html
+	*
+	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	*
+	*********************************************************************
+]
 #ENV*{bloc_ancre}
 #SET{bornes,#ENV{page_courante}|calcul_bornes_pagination{#ENV{nombre_pages},10}}
 #SET{premiere, #GET{bornes}|reset}
 #SET{derniere, #GET{bornes}|end}
-
-[(#PAGINATION{gallery_precedent})]
 #SET{i,#ENV{page_courante}|moins{1}}
 [(#GET{i}|>{0}|?{' ',''})[
 	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })
