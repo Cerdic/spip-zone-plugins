@@ -1,0 +1,138 @@
+#CACHE{7200}
+<INCLURE{fond="header"}>
+[(#REM)   ci-dessus l'include du fichier header avec un délai de 31 jours.   ]
+
+
+<head>
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+
+
+<INCLURE{fond="header-css"}{date=#ENV{date}}>
+
+</head>
+<body class="page_panier">
+
+<div id="container">   [(#REM)   cette div centre la page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}>  [(#REM)   include du fichier entete avec le logo   ]
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}{id_rubrique}> [(#REM)   le menu horizontal avec les onglets   ]
+<div id="content">  [(#REM)   ouverture contenu   ]
+
+<div class="width25 floatLeft"> [(#REM)   ouverture colone de gauche   ]
+
+<div class="boite_cellule_gauche">[(#REM)   ouverture boite menu   ]
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond=inc-rubriques}{id_rubrique_thelia=THELIA-RUBRIQUE_ID}>
+
+    </div>[(#REM)   fermeture boite menu   ]
+
+</div>[(#REM)   fermeture colone de gauche   ]
+
+<div class="width75 floatRight"> [(#REM)   ouverture colone droite   ]
+
+    <div class="formulaire_cellule">[(#REM)  ouverture formulaire cellule table   ]
+
+      <fieldset>
+         <legend><strong><:spipthelia:recapitulatif_commande:></strong></legend>
+         <form action="#URL_PAGE{commande}" name="formulaire" id="formulaire" method="post">
+         <input type="hidden" name="thelia_action" id="thelia_action" value="codepromo" />
+
+          <table class="width100">
+
+            	<thead class="width20">
+                  <tr>
+                    <th class="row_first white alignCenter width20"><strong><:spipthelia:produit:></strong></th>
+                    <th class="row_first white alignCenter width20"><strong><:spipthelia:references_produits:></strong></th>
+                    <th class="row_first white alignCenter width20"><strong><:spipthelia:prix_unitaire:></strong></th>
+                    <th class="row_first white alignCenter width20"><strong><:spipthelia:quantite:></strong></th>
+                    <th class="row_first white alignCenter width20"><strong><:spipthelia:total:></strong></th>
+                  </tr>
+		</thead>
+
+               <tfoot class="width20">
+              	<tr>
+                    <td class="width20">&nbsp;</td>
+                    <td class="width20">&nbsp;</td>
+                    <td class="width20">&nbsp;</td>
+                    <td class="row_first white alignCenter width20"><strong><:spipthelia:frais_livraison:></strong></td>
+                    <td class="row_even alignCenter width20"><strong>THELIA-PANIER_PORT &euro;</strong></td>
+		</tr>
+
+              	<tr>
+                    <td class="width20">&nbsp;</td>
+                    <td class="width20">&nbsp;</td>
+                    <td class="width20">&nbsp;</td>
+                    <td class="row_first white alignCenter width20"><strong><:spipthelia:remise:></strong></td>
+                    <td class="row_even alignCenter width20"><strong>THELIA-PANIER_REMISE &euro;</strong></td>
+		</tr>
+
+	       	<tr>
+                    <td class="width20">&nbsp;</td>
+                    <td class="width20">&nbsp;</td>
+                    <td class="width20">&nbsp;</td>
+                    <td class="row_first white alignCenter width20"><strong><:spipthelia:total:></strong></td>
+                    <td class="row_even alignCenter width20"><strong>THELIA-PANIER_TOTPORT &euro;</strong></td>
+		</tr>
+              </tfoot>
+
+              <THELIA_panier type="PANIER">
+               <tbody class="width20">
+              	<tr>
+		    <td class="width20">
+                     <THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1">
+                       <img src="THELIA-IMAGE" />
+                     </THELIA_image>
+                    </td>
+                    <td class="row_old alignCenter width20"><strong>THELIA-TITRE - THELIA-REF</strong></td>
+                    <td class="row_even alignCenter width20"><strong>THELIA-PRIXU &euro;</strong></td>
+                    <td class="row_old alignCenter width20"><strong>THELIA-QUANTITE</strong></td>
+                    <td class="row_even alignCenter width20"><strong>THELIA-TOTAL &euro;</strong></td>
+		</tr>
+              </tbody>
+              </THELIA_panier>
+
+	    </table>
+
+               <label for="code"><span><strong><:spipthelia:code_reduction:></strong></span></label>
+               <input name="code" id="code" type="text" class="zoneDeSaisie" />
+               <br /><br />
+               <input type="submit" value="<:bouton_valider:>" class="button" />
+
+	   </form>
+          </fieldset>
+         </div>[(#REM)   fermeture formulaire cellule table   ]
+
+            <hr class="spacer" /> [(#REM)   ajoute une barre hr invisible   ]
+
+            <div class="grande_boite_cellule">[(#REM) ouverture grande boite cellule]
+              <h4><:spipthelia:mode_paiement:></h4>
+
+
+		[(#REM) contenu de la page ]
+	    <table width="100%" border="0" cellspacing="0" cellpadding="5">
+
+		   <THELIA_PAIEMENT type="PAIEMENT">
+		 	<tr>
+			   <td width="40%" class="ligneTableau">THELIA-TITRE</td>
+              <td width="20%" class="ligneTableau"><a href="#URL_PAGE{commande,thelia_action=paiement&amp;type_paiement=THELIA-ID}"><:spipthelia:valider:></a></td>
+			</tr>
+
+			</THELIA_PAIEMENT>
+
+		</table>
+
+            </div>[(#REM)   fermeture grande boite cellule   ]
+
+</div>[(#REM)   fermeture colone droite   ]
+
+<hr class="spacer" /> [(#REM)   ajoute une barre hr invisible   ]
+</div>[(#REM)   fermeture contenu   ]
+<INCLURE{fond="pieddepage"}> [(#REM)   le pied de page inclu avec délai   ]
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ]
+</body>
+</html>
