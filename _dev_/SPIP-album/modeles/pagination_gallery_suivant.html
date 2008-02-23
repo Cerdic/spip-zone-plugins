@@ -1,15 +1,11 @@
 [(#REM)
-	*********************************************************************
-	*
-	* Copyright (c) 2006-2008
-	* Xavier Burot
-	* fichier : modeles\pagination_gallery_suivant.html
-	*
-	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-	*
-	*********************************************************************
-]
 
+	Modele pour <pagination>
+
+	Permet l'affichage d'une fleche droite permettant
+	l'appel de la serie suivante de photos.
+
+]
 #ENV*{bloc_ancre}
 #SET{bornes,#ENV{page_courante}|calcul_bornes_pagination{#ENV{nombre_pages},10}}
 #SET{premiere, #GET{bornes}|reset}

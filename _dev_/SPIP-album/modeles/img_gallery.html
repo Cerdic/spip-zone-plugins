@@ -30,7 +30,7 @@
 					</a>
 				</dt>
 				<dt id="titre_photo" class="#EDIT{titre} spip_doc_titre">[(#TITRE|supprimer_numero|sinon{[(#FICHIER)]})]</dt>
-				<dd id="descriptif_photo" class="#EDIT{descriptif} spip_doc_descriptif">[(#DESCRIPTIF)]</dd>
+				<dd id="descriptif_photo" class="#EDIT{descriptif} spip_doc_descriptif">[(#DESCRIPTIF) #NOTES]</dd>
 			</dl>
 </BOUCLE_photo_expose>
 		</td>
@@ -38,7 +38,7 @@
 </table>
 </B_photo_expose>
 
-<div id="galerie_compteur">[(#PAGINATION{gallery_compteur}) - ]<a href="[(#URL_PAGE{page=diaporama}|parametre_url{id_document,#ENV{id_document}})]" onClick="javascript:window.open('[(#URL_PAGE{page=diaporama}|parametre_url{id_document,#ENV{id_document}})]','','toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, menuBar=0, width=550, height=550');return(false);"><:album:lance_diapo:></a></div>
+<div id="galerie_compteur">[(#PAGINATION{gallery_compteur}) - ]<a href="[(#URL_PAGE{diaporama}|parametre_url{id_document,#ENV{id_document}})]" onClick="javascript:window.open('[(#URL_PAGE{diaporama}|parametre_url{id_document,#ENV{id_document}})]','','toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, menuBar=0, width=550, height=550');return(false);"><:album:lance_diapo:></a></div>
 
 <table id="bande_vignette" cellpadding="0" cellspacing="0">
 	<tr>
@@ -46,7 +46,7 @@
 <BOUCLE_galerie(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}{pagination #GET{increment}}>
 		<td class="vignette">
 			[<a target="_self" href="javascript:Affiche_Image('[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]','[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]','[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{width})]','[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{height})]','[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]','[(#DESCRIPTIF|entites_html)]');" title="[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]">
-				(#LOGO_DOCUMENT||image_reduire{50}|inserer_attribut{alt,[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]})
+				(#LOGO_DOCUMENT||image_reduire{50,50}|inserer_attribut{alt,[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]})
    			</a>]
 		</td>
 </BOUCLE_galerie>
