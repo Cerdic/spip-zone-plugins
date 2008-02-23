@@ -1,0 +1,137 @@
+#CACHE{7200}
+<INCLURE{fond="header"}>
+[(#REM)   ci-dessus l'include du fichier header avec un délai de 31 jours.   ]
+
+
+<head>
+<meta name="revisit-after" content="15 days" />
+<meta http-equiv="content-type" content="text/html; charset=#CHARSET"/>
+<meta http-equiv="Content-Language" content="fr-fr" />
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+
+
+<INCLURE{fond="header-css"}{date=#ENV{date}}>
+
+</head>
+<body class="page_panier">
+
+<div id="container">   [(#REM)   cette div centre la page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}>  [(#REM)   include du fichier entete avec le logo   ]
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}{id_rubrique}> [(#REM)   le menu horizontal avec les onglets   ]
+<div id="content">  [(#REM)   ouverture contenu   ]
+
+<div class="width25 floatLeft"> [(#REM)   ouverture colone de gauche   ]
+
+<div class="boite_cellule_gauche">[(#REM)   ouverture boite menu   ]
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond="inc_menu_rub"}>
+
+    </div>[(#REM)   fermeture boite menu   ]
+
+</div>[(#REM)   fermeture colone de gauche   ]
+
+<div class="width50 floatLeft">[(#REM)   ouverture de la colone centre   ]
+
+    <div class="formulaire_cellule">[(#REM)  ouverture formulaire   ]
+     <h4><:spipthelia:modif_compte:></h4>
+     <fieldset>
+      <legend><strong><:spipthelia:modif_motdepasse:></strong></legend>
+       <form action="#URL_PAGE{moncompte}" method="post" name="modifier1" id="modifier1">
+       <input type="hidden" name="thelia_action" id="thelia_action" value="modifiercompte" />
+       <label for="motdepasse1"><strong><:spipthelia:nouveau_motdepasse:></strong></label>
+       <input name="motdepasse1" id="motdepasse1" type="password" class="zoneDeSaisie" />
+       <br /><br />
+       <label for="motdepasse2"><strong><:spipthelia:motdepasse2:></strong></label>
+       <input name="motdepasse2" id="motdepasse2" type="password" class="zoneDeSaisie" />
+       <br /><br />
+       <input type="submit" value="<:bouton_valider:>" class="button" />
+       </form>
+     </fieldset>
+     </div>[(#REM)   fermeture formulaire   ]
+
+    <div class="formulaire_cellule">[(#REM)  ouverture formulaire   ]
+     <fieldset>
+     <legend><strong><:spipthelia:modif_coordonnees:></strong></legend>
+     <form action="#URL_PAGE{compte_modifier}" method="post" name="modifier2" id="modifier2">
+     <input type="hidden" name="thelia_action" value="modifiercompte" />
+     <label class="icone_obligatoire" for="raison"><span><strong><:spipthelia:civilite:></strong></span></label>
+       <select name="raison" id="raison" size="1" class="zoneDeSaisie">
+         <option value=""><strong><:spipthelia:choisissez:></strong></option>
+         <option value="1" THELIA-CLIENT_RAISON1F><:spipthelia:Madame:></option>
+         <option value="2" THELIA-CLIENT_RAISON2F><:spipthelia:Mademoiselle:></option>
+         <option value="3" THELIA-CLIENT_RAISON3F><:spipthelia:Monsieur:></option>
+        </select>
+        <br /><br />
+      <label class="icone_obligatoire" for="nom"><span><strong><:spipthelia:nom:></strong></span></label>
+	<input name="nom" id="nom" value="THELIA-CLIENT_NOM" type="text" class="zoneDeSaisie" />
+        <br /><br />
+      <label class="icone_obligatoire" for="prenom"><span><strong><:spipthelia:prenom:></strong></span></label>
+        <input name="prenom" id="prenom" value="THELIA-CLIENT_PRENOM" type="text" class="zoneDeSaisie" />
+        <br /><br />
+      <label class="icone_obligatoire" for="adresse1"><span><strong><:spipthelia:adresse1:></strong></span></label>
+         <input name="adresse1" id="adresse1" value="THELIA-CLIENT_ADRESSE1" type="text" class="zoneDeSaisie" />
+         <br /><br />
+       <label for="adresse2"><span><strong><:spipthelia:adresse2:></strong></span></label>
+	 <input name="adresse2" id="adresse2" value="THELIA-CLIENT_ADRESSE2" type="text" class="zoneDeSaisie" />
+         <br /><br />
+       <label for="adresse3"><span><strong><:spipthelia:adresse3:></strong></span></label>
+         <input name="adresse3" id="adresse3" value="THELIA-CLIENT_ADRESSE3" type="text" class="zoneDeSaisie" />
+         <br /><br />
+       <label class="icone_obligatoire" for="cpostal"><span><strong><:spipthelia:code_postal:></strong></span></label>
+	  <input name="cpostal" id="cpostal" value="THELIA-CLIENT_CPOSTAL" type="text" class="zoneDeSaisie" />
+          <br /><br />
+	<label class="icone_obligatoire" for="ville"><span><strong><:spipthelia:ville:></strong></span></label>
+	  <input name="ville" id="ville" value="THELIA-CLIENT_VILLE" type="text" class="zoneDeSaisie" />
+          <br /><br />
+	<label class="icone_obligatoire" for="pays"><span><strong><:spipthelia:pays:></span></label>
+          <select name="pays" id="pays" size="1" class="zoneDeSaisie">
+	     <option value="" selected="selected"><strong><:spipthelia:choisissez:></strong></option>
+             <THELIA_pays type="PAYS" zdefinie="1">
+             <option value="THELIA-ID"  THELIA-SELECTED>THELIA-TITRE</option>
+             </THELIA_pays>
+           </select>
+           <br /><br />
+	<label class="icone_obligatoire" for="telfixe"><span><strong><:spipthelia:telfixe:></strong></span></label>
+          <input name="telfixe" id="telfixe" value="THELIA-CLIENT_TELFIXE" type="text" class="zoneDeSaisie" />
+          <br /><br />
+	<label for="telport"><span><strong><:spipthelia:telport:></strong></span></label>
+	  <input name="telport" id="telport" value="THELIA-CLIENT_TELPORT" type="text" class="zoneDeSaisie" />
+          <br /><br />
+	<label class="icone_obligatoire" for="email1"><span><strong><:spipthelia:email:></strong></span></label>
+	  <input name="email1" id="email1" value="THELIA-CLIENT_EMAIL" type="text" class="zoneDeSaisie" />
+          <br /><br />
+	<label class="icone_obligatoire" for="email2"><span><strong><:spipthelia:email2:></strong></span></label>
+	  <input name="email2" id="email2" value="THELIA-CLIENT_EMAIL" type="text" class="zoneDeSaisie" />
+          <br /><br />
+	  <h4><p class="icone_obligatoire"><span><:spipthelia:champs_obligatoires:></span></p></h4>
+          <br />
+          <input type="submit" value="<:bouton_valider:>" class="button" />
+       </form>
+    <fieldset>
+    </div>[(#REM)   fermeture formulaire   ]
+
+</div>   [(#REM)   fermeture colone centre   ]
+
+<div class="width25 floatRight"> [(#REM)   ouverture colone de droite   ]
+
+<div class="boite_cellule_droite">[(#REM)   ouverture boite menu   ]
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond=inc-rubriques}{id_rubrique_thelia=THELIA-RUBRIQUE_ID}>
+
+    </div>[(#REM)   fermeture boite menu   ]
+
+</div>[(#REM)   fermeture colone de droite   ]
+
+
+<hr class="spacer" /> [(#REM)   ajoute une barre hr invisible   ]
+</div>[(#REM)   fermeture contenu   ]
+<INCLURE{fond="pieddepage"}> [(#REM)   le pied de page inclu avec délai   ]
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ]
+</body>
+</html>
