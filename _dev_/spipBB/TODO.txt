@@ -16,21 +16,19 @@ Interface Privée - Import PhpBB :
 -* 0.5 Import phpBB : Mettre en option l'import des auteurs (remplacer l'id par le nom dans les messages)
 
 Interface publique - Générale :
--* 0.4.5 Affichage du profil a revoir
--* 0.4.6 nouveau message : le sujet est prérempli avec le titre du forum. Ne serait-il pas mieux d'avoir cette zone à blanc, et d'imposer qu'elle ne  soit pas laissée à vide ? (dans le cas d'un nouveau sujet, pas d'une  réponse)
--* 0.4.7 j'ai un doute sur la fonctionnalité "ne plus suivre les sujets" page profil publique
--* 0.4.9 Manque icone postit interface publique
+-* 0.5 j'ai un doute sur la fonctionnalité "ne plus suivre les sujets" page profil publique
+-* 0.5 Manque icone postit interface publique
 -* 0.5 L’idéal serait de pouvoir ajouter une photo ou un document dans un post ou réponse à celui-ci et ce serait parfait
--* 0.5 Logout bug en 193 uniq id ?
--* 0.5 Parametres et donnees specifiques à renseigner lors de l'inscription (possible avec le formualaire dédié)
+-* 0.5 FAIT (bug selon version de php reglé dans SPIP) Logout bug en 193 uniq id ?
+-* 0.5 Parametres et donnees specifiques à renseigner lors de l'inscription (possible avec le formulaire dédié)
 -* 0.5 Reporte : Gestion avatar : a ameliorer + téléchargement (droits ?) : c'est possible en 1.9.3 voir balise SPIPBB_AVATAR mais pas simple en 192
 -* 0.5 Liste des membres affichage cf http://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=516#forum517
 
 Bugs et autres elements non finis :
--* 0.4.7 Bug dans le move (ordre de priorites) d'un forum des fois ça ne fonctionne pas... (valider les cas et corriger)
--* 0.4.8 Activation des mots clés. Il y a plein de choses à dire et à faire dans ce domaine prévus pour la 0.4 . En attendant, même si les mots clés nécessaires n'ont pas été créés lors de l'installation on peut le faire faire automatiquement à spipBB en effet le formulaire (Configuration) permet de saisir le nom du groupe (spipbb par défaut) de mots clés. Si vous validez (bouton juste en dessous), il créé le groupe de mots clés tout seul :-)
--* 0.4.9 Utiliser les descriptions des mots cles (ajoutees dans lang/... mot_...)
--* 0.4.9 Problemes titres _T et _L // traductions à revoir corriger finir
+-* 0.4.6 Activation des mots clés. Il y a plein de choses à dire et à faire dans ce domaine prévus pour la 0.4 . En attendant, même si les mots clés nécessaires n'ont pas été créés lors de l'installation on peut le faire faire automatiquement à spipBB en effet le formulaire (Configuration) permet de saisir le nom du groupe (spipbb par défaut) de mots clés. Si vous validez (bouton juste en dessous), il créé le groupe de mots clés tout seul :-)
+-* 0.4.7 Utiliser les descriptions des mots cles (ajoutees dans lang/... mot_...)
+-* 0.4.8 Problemes titres _T et _L // traductions à revoir corriger finir
+-* 0.5 Bug dans le move (ordre de priorites) d'un forum des fois ça ne fonctionne pas... (valider les cas et corriger)
 -* 0.5 mot cles ferme, postit, annonce : bug -> ils ne doivent s'appliquer qu'au message principal du thread
 -* 0.5 Pouvoir configurer l'ordre de presentation des menus d'admins (par le webmaster)
 -* 0.5 Que fait test_inscriptions dans spipbb_options ? Revoir l'arborescence des fonctions (schéma ?)

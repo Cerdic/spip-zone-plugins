@@ -1,4 +1,10 @@
-﻿2008-02-11  chryjs  <chryjs!@!free!.!fr>
+﻿2008-02-23  chryjs  <chryjs!@!free!.!fr>
+
+ * Petite adaptation pour forcer le titre a vide dans les forums...
+ * Passage en 0.4.5 : fonctionnalite realisee
+
+
+2008-02-11  chryjs  <chryjs!@!free!.!fr>
 
  * Autres corrections sur controle des tables cf bug report http://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=545 + logs
  * Evolution majeure : Adaptation des requetes pour passage en multi-bases (mysql/pg/sqlite)
