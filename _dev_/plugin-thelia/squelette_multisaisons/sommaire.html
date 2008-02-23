@@ -1,0 +1,176 @@
+#CACHE{864000}
+<INCLURE{fond="header"}>
+[(#REM)   ci-dessus l'include du fichier header avec un délai de 31 jours.   ]
+
+
+<head>
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+
+
+<INCLURE{fond="header-css"}{date=#ENV{date}}>
+
+</head>
+<body>
+
+<div id="container">   [(#REM)   cette div centre la page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}>  [(#REM)   include du fichier entete avec le logo   ]
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}{id_rubrique}> [(#REM)   le menu horizontal avec les onglets   ]
+<div id="content">  [(#REM)   ouverture contenu   ]
+
+<div class="width25 floatLeft"> [(#REM)   ouverture colone de gauche   ]
+
+    <div class="boite_cellule_gauche">[(#REM)   ouverture boite menu   ]
+        <INCLURE{fond="connexion_som"}>
+
+    </div>[(#REM)   fermeture boite menu   ]
+
+    <div class="boite_cellule_gauche">[(#REM)   ouverture boite menu   ]
+        <h4 class="icone_panier"><:spipthelia:mon_panier_som:></h4>
+        <INCLURE{fond="panier_contenu"}>
+
+    </div>[(#REM)   fermeture boite menu   ]
+
+</div>[(#REM)   fermeture colone de gauche   ]
+
+<div class="width50 floatLeft"> [(#REM)   ouverture colone du centre   ]
+
+<div id="cel">
+<ul id="deco">
+<li>
+
+[(#REM) une breve en haut à gauche.]
+
+<BOUCLE_blogbox_haut(BREVES){titre_mot=homebox_haut}{par num titre}{par date}{inverse}{0,1}>
+<h4>[(#TITRE)]</h4>
+<p><span class="logogauche"><a href="#URL_BREVE"><INCLURE{fond=logo}{id_breve}{taille=46}{date=#ENV{date}}></a></span>
+[(#TEXTE|PtoBR|lier_au_glossaire)]</p>
+
+
+</BOUCLE_blogbox_haut>
+<h4>Bienvenue</h4>
+<p>Bienvenue sur #NOM_SITE_SPIP.</p>
+
+<//B_blogbox_haut>
+</li>
+
+
+ [(#REM)  Une breve de news sur la une en haut à droite. Se remplace illico par une brève plus récente.]
+
+<li>
+<BOUCLE_blogue(BREVES){titre_mot=blogue}{doublons}{par num titre}{par date}{inverse}{0,1}>
+
+  <div>[(#REM)  Le logo de la breve bloguee  ]
+
+<h4><a href="#URL_BREVE" title="lire tout">[(#TITRE)]</a></h4>
+<p><span class="logogauche"><a href="#URL_BREVE"><INCLURE{fond=logo}{id_breve}{taille=46}{date=#ENV{date}}></a></span>
+[(#TEXTE|PtoBR|lier_au_glossaire)]</p>
+</BOUCLE_blogue>
+<h4>Plus de news</h4>
+<p>
+ Vous pouvez surveiller les nouveaut&eacute;s du site par ses différents
+  fils de <a href="[(#URL_PAGE{syndication})]">syndication RSS</a>,  sa <a href="[(#URL_PAGE{inscription})]">lettre
+  d'information</a>, ou sa <a href="[(#URL_PAGE{nouveautes})]">page
+  de nouveaut&eacute;s</a>.
+  </p>
+
+<//B_blogue>
+</li>
+</ul>
+</div>
+
+
+ <div class="grande_boite">
+
+ [(#REM)La description d'un article important sur l'accueil]
+
+<BOUCLE_blogue_article(ARTICLES){titre_mot=blogue}{doublons}{par num titre}{par date}{inverse}{pagination}>
+
+	<span class="logogauche"><a href="#URL_ARTICLE#diapo"><INCLURE{fond=logo}{id_article}{taille=46}{date=#ENV{date}}></a></span>
+
+[<h4><a href="#URL_ARTICLE">(#TITRE)</a></h4>]
+[<p>(#DESCRIPTIF) <a href="#URL_ARTICLE">Lire la suite...</a></p>]
+
+<BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{par num titre, date}{0,1}>
+[<p><a href="(#URL_ARTICLE)" title="[(#TITRE|couper{100})]">[(#FICHIER|reduire_image{450,10000}|inserer_attribut{alt,#TITRE})]</a></p>]
+</BOUCLE_documents_portfolio>
+
+</BOUCLE_blogue_article>
+
+<hr class="spacer"/>
+#PAGINATION
+</B_blogue_article>
+  [(#REM)Les rubriques importante sur l'accueil]
+
+              <BOUCLE_appel(RUBRIQUES){titre_mot = menu_rub}{par titre}{tout_voir}> <a href="#URL_RUBRIQUE" title="[(#TITRE)]" class="logogauche"><INCLURE{fond="logo"}{id_rubrique}{taille=46}{date=#ENV{date}}></a>
+[<h4><a href="#URL_RUBRIQUE" title="(#TITRE)">(#TITRE)</a></h4>]
+
+<p> #DESCRIPTIF <INCLURE{fond="inc_cadenas"}{id_rubrique}>
+             <BOUCLE_nouv_art(ARTICLES){id_rubrique}{age<14}{par num titre}{par date}{inverse}{0,5}{tout_voir}>
+             [<br/><strong>Nouveau:</strong>&nbsp;<a href="#URL_ARTICLE">(#TITRE)</a>]
+              <INCLURE{fond="inc_cadenas"}{id_article}>
+                          </BOUCLE_nouv_art>
+ </p> <hr class="spacer" />
+
+  </BOUCLE_appel>
+</div>[(#REM) fermeture grande_boite]
+
+
+<div id="celbas">
+<ul id="decobas">
+
+
+[(#REM)  Les article en une  ]
+<B_une>
+<li>
+<h4>A la une</h4>
+<p>
+<BOUCLE_une(ARTICLES){tout}{doublons}{titre_mot=une}{par date}{inverse}{0,2}{tout_voir}>
+<span class="logogauche"><a href="#URL_ARTICLE"><INCLURE{fond="logo"}{id_article}{taille=30}{date=#ENV{date}}></a></span><strong><a href="#URL_ARTICLE">[(#TITRE)]</a></strong>
+<INCLURE{fond="inc_cadenas"}{id_article}><br/>
+[(#INTRODUCTION|couper{300})]<br/>
+</BOUCLE_une></p>
+</li>
+</B_une>
+
+[(#REM)  Les article populaires  ]
+<B_popu>
+<li>
+<h4>Les articles en vogue</h4> <p>
+<BOUCLE_popu(ARTICLES){tout}{doublons}{par popularite}{inverse}{0,2}{tout_voir}>
+<span class="logogauche"><a href="#URL_ARTICLE"><INCLURE{fond="logo"}{id_article}{taille=30}{date=#ENV{date}}></a></span><strong><a href="#URL_ARTICLE">[(#TITRE)]</a></strong>
+<INCLURE{fond="inc_cadenas"}{id_article}><br/>
+[(#INTRODUCTION|couper{300})]<br/>
+</BOUCLE_popu></p>
+</li>
+</B_popu>
+
+
+</ul>
+</div>     [(#REM)  fin de cel  ]
+
+</div>[(#REM)   fermeture colone du centre   ]
+
+
+<div class="width25 floatRight">[(#REM)   ouverture de la colone de droite   ]
+
+
+    <div class="boite_cellule_droite">[(#REM)   ouverture boite menu   ]
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond=inc-rubriques}{id_rubrique_thelia=THELIA-RUBRIQUE_ID}>
+    </div>[(#REM)   fermeture boite menu   ]
+
+</div>   [(#REM)   fermeture colone de droite   ]
+
+
+<hr class="spacer" /> [(#REM)   ajoute une barre hr invisible   ]
+</div>[(#REM)   fermeture contenu   ]
+<INCLURE{fond="pieddepage"}> [(#REM)   le pied de page inclu avec délai   ]
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ]
+</body>
+</html>
