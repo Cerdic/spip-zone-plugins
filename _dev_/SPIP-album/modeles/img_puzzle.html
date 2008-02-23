@@ -1,0 +1,26 @@
+[(#REM) 
+
+	Modele pour <img>
+	
+	Permet l'affichage sous forme de puzzle d'une photo.
+	
+]
+[(#REM) Recuperation des variables d'initialisation du modele]
+#SET{taille, #ENV{taille, #CONFIG{album/taille, 450}}}
+#SET{larg, #LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{width}}
+#SET{haut, #LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{height}}
+
+<BOUCLE_puzzle(DOCUMENTS){id_document}{extension IN png,jpg,gif}>
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+	<applet code="TruePuzzle.class"[ width="(#GET{larg})"][ height="(#GET{haut})"] name="Puzzle#ID_DOCUMENT" codebase="[(#CHEMIN{java/TruePuzzle.class}|dirname)]">
+		<param name="IMAGE" value="[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]">
+		<param name="HCELLS" value="[(#GET{larg}|div{50}|round)]">
+		<param name="VCELLS" value="[(#GET{haut}|div{50}|round)]">
+		<param name="SNAP" value="5"><:album:nojava:>
+	</applet>
+	<form id="form_puzzle" class="spip_form_puzzle">
+		<input type="button" name="btnResolve#ID_DOCUMENT" value="<:album:resoudre_puzzle:>" onclick="document.Puzzle#ID_DOCUMENT.resolve();"> 
+		<input type="button" name="btnScramble#ID_DOCUMENT" value="<:album:melange_puzzle:>" onclick="document.Puzzle#ID_DOCUMENT.scramble();"> 
+	</form>
+</span>
+</BOUCLE_puzzle>
