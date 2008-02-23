@@ -33,7 +33,7 @@ spipbb_log('included',2,__FILE__);
 define('_SPIPBB_LOG_LEVEL',3);
 
 // Numero de version de spip_version_code pour les differentes comparaisons et inclusions
-define('_SPIPBB_REV_AJAXCONFIG','1.9250'); // Introduction du repertoire configuration/ avec fonctions ajax_... SVN 9080/9081 ->9134 
+define('_SPIPBB_REV_AJAXCONFIG','1.9250'); // Introduction du repertoire configuration/ avec fonctions ajax_... SVN 9080/9081 ->9134
 define('_SPIPBB_REV_STYLISER','1.9250'); // Evolution de public/styliser (SVN 9918 ?)
 define('_SPIPBB_REV_REQSQL','1.9259'); // trace_query_start apparus en SVN 9932 -> version_code 1.9259/1.9260
 define('_SPIPBB_REV_SQL','1.9260'); // Changement pour les fonctions SQL (abstract) SVN 9919 -> 9955
@@ -83,7 +83,44 @@ function spipbb_log($message='',$log_level=1,$obsolete_prefix="") {
 			$message = $bt[0]['file'].":".$bt[1]['function']."():".$message;
 		}
 		else $message=$obsolete_prefix.":".$message;
-		spip_log($message,'spipbb');
+
+		// c: 23/2/8 on ne peut pas utiliser spip_log suite a sa limitation arbitraire a 100 ...
+		//spip_log($message,'spipbb');
+		$logname = 'spipbb';
+
+		$pid = '(pid '.@getmypid().')';
+
+		// accepter spip_log( Array )
+		if (!is_string($message)) $message = var_export($message, true);
+
+		$message = date("M d H:i:s").' '.$GLOBALS['ip'].' '.$pid.' '
+			.preg_replace("/\n*$/", "\n", $message);
+
+		$logfile = _DIR_TMP . $logname . '.log';
+		if (@is_readable($logfile)
+		AND (!$s = @filesize($logfile) OR $s > 10*1024)) {
+			$rotate = true;
+			$message .= "[-- rotate --]\n";
+		} else $rotate = '';
+		$f = @fopen($logfile, "ab");
+		if ($f) {
+			fputs($f, htmlspecialchars($message));
+			fclose($f);
+		}
+		if ($rotate) {
+			@unlink($logfile.'.9');
+			@rename($logfile.'.8',$logfile.'.9');
+			@rename($logfile.'.7',$logfile.'.8');
+			@rename($logfile.'.6',$logfile.'.7');
+			@rename($logfile.'.5',$logfile.'.6');
+			@rename($logfile.'.4',$logfile.'.5');
+			@rename($logfile.'.3',$logfile.'.4');
+			@rename($logfile.'.2',$logfile.'.3');
+			@rename($logfile.'.1',$logfile.'.2');
+			@rename($logfile,$logfile.'.1');
+		}
+		// doit on dupliquer dans le log general ? inutile...
+
 	} // should we log ?
 
 } // spipbb_log
