@@ -1,4 +1,4 @@
-<BOUCLE_document (DOCUMENTS) {id_document}>
+<BOUCLE_img(DOCUMENTS){id_document}>
 [(#REM)
 
 	Modele pour <img>
@@ -15,7 +15,7 @@
 #SET{taille, #ENV{taille, #CONFIG{album/taille, 450}}}
 #SET{larg, #ENV{largeur}|sinon{#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{width}}}
 #SET{haut, #ENV{hauteur}|sinon{#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{height}}}
-[(#ENV{lien}|?{'',' '}) [(#SET{titre, <:album:clic_photo:>})]][(#ENV{lien}|?{' ',''}) #SET{titre, #TITRE|supprimer_numero|texte_backend}]
+[(#ENV{lien}|?{'',' '}) [(#SET{titre, <:album:clic_photo:>})]][(#ENV{lien}|?{' '}) #SET{titre, #TITRE|supprimer_numero|texte_backend}]
 <span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>[(#SET{
 	image,
 		#MODE|=={vignette}
@@ -33,4 +33,4 @@
 <a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]"[(#ENV{lien}|?{'', type="#MIME_TYPE"})][ class="(#ENV{lien_class})"][ title="(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})"]>
 	[(#LOGO_DOCUMENT||image_reduire{#GET{larg},#GET{haut}}|inserer_attribut{alt,#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT}}|inserer_attribut{title,#TITRE|supprimer_numero|texte_backend})]
 </a>
-]</span></BOUCLE_document>
+]</span></BOUCLE_img>
