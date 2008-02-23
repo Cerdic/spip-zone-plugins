@@ -1,0 +1,107 @@
+#CACHE{7200}
+<INCLURE{fond="header"}>
+[(#REM)   ci-dessus l'include du fichier header avec un délai de 31 jours.   ]
+
+
+<head>
+<title>THELIA-RUBRIQUE_NOM - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="THELIA-STRIPDESCRIPTION" />
+<meta name="revisit-after" content="15 days" />
+<meta http-equiv="content-type" content="text/html; charset=#CHARSET"/>
+<meta http-equiv="Content-Language" content="fr-fr" />
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+
+
+<INCLURE{fond="header-css"}{date=#ENV{date}}>
+
+</head>
+<body class="page_rubrique">
+
+<div id="container">   [(#REM)   cette div centre la page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}>  [(#REM)   include du fichier entete avec le logo   ]
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}{id_rubrique}> [(#REM)   le menu horizontal avec les onglets   ]
+<div id="content">  [(#REM)   ouverture contenu   ]
+
+<div class="width25 floatLeft"> [(#REM)   ouverture colone de gauche   ]
+
+<div class="boite_cellule_gauche">[(#REM)   ouverture boite menu   ]
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond=inc-rubriques}{id_rubrique_thelia=THELIA-RUBRIQUE_ID}>
+
+    </div>[(#REM)   fermeture boite menu   ]
+</div>[(#REM)   fermeture colone de gauche   ]
+
+<div class="width75 floatRight"> [(#REM)   ouverture colone droite   ]
+
+                                <div class="cellule_produit">
+                                 <ul class="cellule_deco">
+                                  <THELIA_PROD type="PRODUIT" rubrique="THELIA-RUBRIQUE_ID" classement="inverse" num="12">
+				  <li class="cel24"> [(#REM)   ouverture de la premiere cellule   ]
+
+                                        <h4><a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique=THELIA-RUBRIQUE_ID}">THELIA-TITRE</a></h4>
+					<a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique=THELIA-RUBRIQUE_ID}">
+					<THELIA_IMAGE type="IMAGE" num="1" produit="THELIA-ID">
+ 					   <img src="THELIA-IMAGE" alt="THELIA-PRODTITRE" title="THELIA-PRODTITRE" />
+					</THELIA_IMAGE>
+                   			</a>
+                                        <form action="#URL_PAGE{panier,thelia_action=ajouter&amp;ref=THELIA-REF}" method="post" name="formAjouterTHELIA-ID" id="formAjouterTHELIA-ID">
+                                        <p class="centre">
+                                          THELIA-CHAPO<br />
+
+                                          <THELIA_declinaisons type="DECLINAISON" produit="THELIA-ID">
+                                          <label for="declinaisonTHELIA-ID"><span><strong>THELIA-TITRE</strong></span></label>
+                                             <select name="declinaisonTHELIA-ID">
+						<option value=""><:spipthelia:votre_choix:></option>
+						<THELIA_decldisp type="DECLIDISP" declinaison="THELIA-ID">
+						  <option value="THELIA-ID">THELIA-TITRE</option>
+						</THELIA_decldisp>
+					      </select>
+					   </THELIA_declinaisons>
+
+                                          THELIA-PRIX &euro;<br />
+                                         <a href="#" onClick="document.getElementById('formAjouterTHELIA-ID').submit()" class="LIEN_commander"><:spipthelia:ajouter_panier:></a><br />
+                                        </p>
+                                       </form>
+                                   </li>
+                                  </THELIA_PROD>
+				  </ul>
+				</div>
+
+
+				[(#REM) Page suivante / Nombre de page / Page précdédente ]
+
+				<div id="pages">
+					<THELIA_PAGEPREC type="PAGE" rubrique="THELIA-RUBRIQUE_ID" num="12" typeaff="0" avance="precedente">
+					<a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-RUBRIQUE_ID&amp;page_thelia=THELIA-PAGE_PREC}" class="LIEN_pages"><:spipthelia:page_precedente:></a>
+					</THELIA_PAGEPREC>
+
+					<THELIA_CPAGE type="PAGE" rubrique="THELIA-RUBRIQUE_ID"  num="12" max="10" typeaff="1">
+					|
+                			<THELIA_PAGECONT_PASCOUR type="PAGE" rubrique="THELIA-RUBRIQUE_ID"  num="12" courante="0" pagecourante="THELIA-PAGE_NUM" max="10" typeaff="1">
+					 <a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-RUBRIQUE_ID&amp;page_thelia=THELIA-PAGE_NUM}" class="LIEN_pages">THELIA-PAGE_NUM</a>
+					</THELIA_PAGECONT_PASCOUR>
+				    	<THELIA_PAGECONT_COUR type="PAGE" rubrique="THELIA-RUBRIQUE_ID" num="12" courante="1" pagecourante="THELIA-PAGE_NUM" max="10" typeaff="1">
+					THELIA-PAGE_NUM
+					</THELIA_PAGECONT_COUR>
+					</THELIA_CPAGE>
+
+
+					<THELIA_PAGE_SUIVANTE type="PAGE" rubrique="THELIA-RUBRIQUE_ID" num="12" max="10" typeaff="0" avance="suivante">
+					| <a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-RUBRIQUE_ID&amp;page_thelia=THELIA-PAGE_SUIV}" class="LIEN_pages"><:spipthelia:page_suivante:></a>
+					</THELIA_PAGE_SUIVANTE>
+				</div>
+
+</div>[(#REM)   fermeture colone droite   ]
+
+<hr class="spacer" /> [(#REM)   ajoute une barre hr invisible   ]
+</div>[(#REM)   fermeture contenu   ]
+<INCLURE{fond="pieddepage"}> [(#REM)   le pied de page inclu avec délai   ]
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ]
+</body>
+</html>
