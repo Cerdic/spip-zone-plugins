@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'donnees_nonmodifiable'=>"Donn&eacute;es non modifiables par l'utilisateur.",
 'donnees_nonmultiple'=>"R&eacute;ponse unique.",
 'donnees_pub'=>"Donn&eacute;es publiques. Les donn&eacute;es enregitr&eacute;es seront accessibles aux visiteurs du site.",
-'donnees_prot'=>"Donn&eacute;es prot&eacute;g&eacute;es. Les donn&eacute;es enregitr&eacute;es ne seront accessibles que depuis l'interface priv&eacute;e.",
+'donnees_prot'=>"Donn&eacute;es prot&eacute;g&eacute;es. Les donn&eacute;es enregistr&eacute;es ne seront accessibles que depuis l'interface priv&eacute;e.",
 
 'echec_upload'=>"Le transfert du fichier a &eacute;chou&eacute;.",
 'editer'=>'Editer',
