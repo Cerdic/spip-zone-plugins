@@ -68,7 +68,7 @@ function image_watermark($im) {
 		tester_variable('watermarkalignv', lire_config('album/watermarkalignv','center'));
 		tester_variable('watermarkmargin', lire_config('album/watermarkmargin','10'));
 		tester_variable('watermarkopacity', lire_config('album/watermarkopacity','20'));
-		tester_variable('watermarkopacity', lire_config('album/watermarkimage','/img_pack/copyright.png'));
+		tester_variable('watermarkimage', lire_config('album/watermarkimage','/img_pack/copyright.png'));
 		tester_variable('watermarktext', lire_config('album/watermarktext','Copyright (c) '.date('Y').' '.$GLOBALS['meta']['adresse_site']));
 		tester_variable('watermarkfont', lire_config('album/watermarkfont','3'));
 		tester_variable('watermarkshadow', lire_config('album/watermarkshadow','yes'));
@@ -79,13 +79,13 @@ function image_watermark($im) {
 	global	$watermarktype,		// type de watermark (none / image / text)
 			$watermarkalignh,	// type d'alignement horizontal (left / right, center)
 			$watermarkalignv,	// type d'alignement vertical (top / bottom / center)
-			$watermarkmargin,	//
-			$watermarkimage,	//
-			$watermarkopacity,	//
-			$watermarktext,		//
-			$watermarkfont,		//
-			$watermarkshadow,	//
-			$watermarkcolor;	//
+			$watermarkmargin,	// Definition de la marge du copyright
+			$watermarkimage,	// Adresse url de l'image de copyright
+			$watermarkopacity,	// Niveau d'opacite de l'image de copyright
+			$watermarktext,		// Texte de copyright
+			$watermarkfont,		// Taille de la police de caractere utilisee
+			$watermarkshadow,	// Application d'une ombre au texte de copyright
+			$watermarkcolor;	// Coleur du texte de copyright
 
 	// Determine le marqueur permettant la recreation des vignettes en cas de modification du mode protection.
 	switch($watermarktype){
@@ -102,8 +102,8 @@ function image_watermark($im) {
 	$image = image_valeurs_trans($im, $mark);
 	if (!$image) return("");
 
-      $x_i = $image["largeur"];
-      $y_i = $image["hauteur"];
+    $x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
 
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
@@ -205,14 +205,14 @@ function image_watermark($im) {
 				if ($watermarkshadow == 'yes') {
 					imagestring($im, $watermarkfont, $watermark_x + 1, $watermark_y + 1, $watermarktext, $shadow_color);
 				}
-				imagestring($im, $watermarkfont, $watermark_x, $watermark_y, $watermarktext, $text_color);
 
-				$image["fonction_image"]($im, "$dest");
-				imagedestroy($im);
+				imagestring($im, $watermarkfont, $watermark_x, $watermark_y, $watermarktext, $text_color);
 				break;
 			case 'none':
 			default:
 		}
+		$image["fonction_image"]($im, "$dest");
+		imagedestroy($im);
 	}
 
 	$x_dest = largeur($dest);

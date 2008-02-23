@@ -75,7 +75,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // W
 'watermark_alignh' => 'Alignement horizontal',
 'watermark_alignv' => 'Alignement vertical',
-'watermark_color' => 'Couleur du texte (<i>En Hexad&eacute;cimal</i>)',
+'watermark_color' => 'Couleur du texte<br />(<i>En Hexad&eacute;cimal</i>)',
+'watermark_image' => 'Fichier image de copyright',
 'watermark_font' => 'Taille de police du texte',
 'watermark_margin' => 'Excentrage &agrave; partir du bord',
 'watermark_opacity' => 'Opacit&eacute; de l\'image copyright',

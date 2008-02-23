@@ -69,6 +69,12 @@
 			</td>
 		</tr>
 		<tr>
+			<td valign="top"><label for="sc_watermarkimage"><:album:watermark_image:>&nbsp;:</label></td>
+			<td>
+				<input type="text" name="watermarkimage" id="sc_watermarkimage" value="[(#ENV{watermarkimage,'/img_pack/copyright.png'})]" class="forml" size="20" />
+			</td>
+		</tr>
+		<tr>
 			<td valign="top"><label for="sc_watermarkopacity"><:album:watermark_opacity:>&nbsp;:</label></td>
 			<td>
 				<select  name="watermarkopacity" id="sc_watermarkopacity"  class="fondl">
@@ -88,7 +94,7 @@
 		<tr>
 			<td valign="top"><label for="sc_watermarktext"><:album:watermark_text:>&nbsp;:</label></td>
 			<td>
-				<input type="text" name="watermarktext" id="sc_watermarkmtext" value="[(#ENV{watermarktext,'Copyright (c) '[(#ENV{date}|annee)] - [(#URL_SITE_SPIP)]})]" class="forml" size="20" />
+				<input type="text" name="watermarktext" id="sc_watermarktext" value="[(#ENV{watermarktext,'Copyright (c) '[(#ENV{date}|annee)] - [(#URL_SITE_SPIP)]})]" class="forml" size="20" />
 			</td>
 		</tr>
 		<tr>
