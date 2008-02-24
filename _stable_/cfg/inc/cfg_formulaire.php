@@ -25,6 +25,8 @@ class cfg_formulaire
 	var $_permise = false;
 // en cas de refus, un message informatif [(#REM) refus=...]
 	var $refus = '';
+// partie du fond cfg a inserer dans le head par le pipeline header_prive (todo insert_head?)
+	var $head = '';
 // le nom du meta (ou autre) ou va etre stocke la config concernee
 	var $nom = '';
 // le fond html utilise , en general pour config simple idem $nom
@@ -428,7 +430,7 @@ class cfg_formulaire
 		// recuperer le fond avec le contexte
 		// forcer le calcul.
 		$this->recuperer_fond($contexte, true);
-		//$this->recuperer_parametres_post_compile();
+		$this->recuperer_parametres_post_compile(); // pour enlever les <!-- param=valeur --> ... 
 		return $this->fond_compile;
 	}
 	

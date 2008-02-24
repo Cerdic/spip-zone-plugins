@@ -27,4 +27,34 @@ function cfg_ajouter_onglets($flux) {
 }
 
 
+/*
+ * Gerer l'option <!-- header= xxx --> des fonds CFG
+ * 
+ * (pas sur que cela fonctionne avec #FORMULAIRE_CFG, 
+ *  il faudra verifier)
+ */
+function cfg_insert_head($flux){
+	// a voir
+	return $flux;
+}
+
+function cfg_header_prive($flux){
+	
+	if (!_request('cfg') || (!_request('exec') == 'cfg')) {
+		return $flux;
+	}
+
+	$cfg = cfg_charger_classe('cfg');
+	include_spip('inc/filtres');
+	$config = & new $cfg(
+		($nom = sinon(_request('cfg'), '')),
+		($vue = sinon(_request('cfg_vue'), $nom)),
+		($cfg_id = sinon(_request('cfg_id'),''))
+		);
+	
+	if ($config->head) 
+		$flux .= "\n".$config->head;
+	
+	return $flux;
+}
 ?>
