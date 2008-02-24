@@ -88,7 +88,7 @@ _ &bull; [De tout le plugin->@reset@]@install@
 	'presente_outils2' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition.<br /><br />En cliquant sur le nom des outils ci-dessous, vous s&eacute;lectionnez ceux dont vous pourrez permuter l'&eacute;tat &agrave; l'aide du bouton central : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>. &Agrave; chaque clic, la description apparait au-dessous des listes. Les cat&eacute;gories sont repliables et les outils peuvent &ecirc;tre cach&eacute;s. Le double-clic permet de permuter rapidement un outil.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.<br /><br />Note : le simple chargement de cette page recompile l'ensemble des outils du Couteau Suisse.",
 	'cliquezlesoutils' => "Cliquez sur le nom des outils ci-dessus pour afficher ici leur description.",
 	'selectiontous' => "S&eacute;lectionner tous les outils actifs",
-	'tous' => 'TOUS',
+	'maj_tous' => 'TOUS',
 	'par_defaut' => 'Par d&eacute;faut',
 	'jquery1' => "{{Attention}} : cet outil n&eacute;cessite le plugin {jQuery} pour fonctionner avec cette version de SPIP.",
 	'jquery2' => "Cet outil  utilise la librairie {jQuery}.",
@@ -412,9 +412,7 @@ _ Merci de votre compr&eacute;hension.",
 
 #PUCE {{Les articles au format SPIP}} : un cadre repliable suppl&eacute;mentaire pour vos articles afin de conna&icirc;tre le code source utilis&eacute; par leurs auteurs.
 
-#PUCE {{Les auteurs en stat}} : un cadre suppl&eacute;mentaires sur [la page des auteurs->./?exec=auteurs] indiquant les 10 derniers connect&eacute;s et les inscriptions non confirm&eacute;es. Seuls les administrateurs voient ces informations. Profitez pour d&eacute;finir ici le nombre maximal d'auteurs &agrave; afficher sur le cadre central de la page des auteurs.
-[[Auteurs par page :->%max_auteurs_page%]]
-",
+#PUCE {{Les auteurs en stat}} : un cadre suppl&eacute;mentaires sur [la page des auteurs->./?exec=auteurs] indiquant les 10 derniers connect&eacute;s et les inscriptions non confirm&eacute;es. Seuls les administrateurs voient ces informations.",
 	'cs_rss' => 'Les r&eacute;visions du Couteau Suisse',
 	'format_spip' => 'Les articles au format SPIP',
 	'stat_auteurs' => 'Les auteurs en stat',
@@ -423,6 +421,20 @@ _ Merci de votre compr&eacute;hension.",
 	'supprimer_cadre' => 'Supprimer ce cadre',
 	'desactiver_rss' => 'D&eacute;sactiver les &laquo; R&eacute;visions du Couteau Suisse &raquo;',
 
+// ---------------------------------------------------------------------------
+	'auteurs:nom' => 'Page des auteurs',
+	'auteurs:description' => "Cet outil configure l'apparence de [la page des auteurs->./?exec=auteurs], en partie priv&eacute;e.
+
+#PUCE D&eacute;finissez ici le nombre maximal d'auteurs &agrave; afficher sur le cadre central de la page des auteurs. Au-del&agrave;, une pagination est mise en place.
+[[Auteurs par page :->%max_auteurs_page%]]
+
+#PUCE Quels statuts d'auteurs peuvent &ecirc;tre list&eacute;s sur cette page ?
+[[Votre choix :->%auteurs_tout_voir%]][[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]",
+	'statuts_tous' => 'Tous les statuts',
+	'statuts_spip' => 'Uniquement les statuts SPIP suivants :',
+	'nouveaux' => 'Nouveaux',
+	'effaces' => 'Effac&eacute;s',
+	
 // ---------------------------------------------------------------------------
 	'blocs:nom' => 'Blocs D&eacute;pliables',
 	'blocs:description' => "Vous permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles.\n\n#PUCE {{Dans les textes SPIP}} : les r&eacute;dacteurs ont &agrave; disposition les  nouvelles balises &lt;bloc&gt; (ou &lt;invisible&gt;) et &lt;visible&gt; &agrave; utiliser dans leurs textes comme ceci : 

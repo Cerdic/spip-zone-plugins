@@ -48,7 +48,7 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 			.($valeur?'<b>':'')._T($cs_variable['check']).($valeur?'</b>':'').'</label>';
 
 		$ok_input .= _VAR_OUTIL;
-		$ok_valeur = $label._T("desc:$variable")._T($valeur?'desc:2pts_oui':'desc:2pts_non');
+		$ok_valeur = $label._T($cs_variable['check'])._T($valeur?'desc:2pts_oui':'desc:2pts_non');
 	}
 	// ... ou un textarea ... ou une case input
 	else {
@@ -128,6 +128,8 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	}
 //cs_log(" FIN : inc_description_outil_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvee(s)");
 	$res = preg_replace(',(<br />)?</fieldset><fieldset><legend></legend>,', '', $res);
+	$res = str_replace('</label></div><div style="margin:0;"><label><input type="checkbox"', '</label>&nbsp;<label><input type="checkbox"', $res);
+	
 	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('desc:vars_modifiees').'&nbsp;&lt;</div>':'';
 	return cs_ajax_action_greffe("description_outil-$index", $res, $modif);
 }

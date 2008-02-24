@@ -143,7 +143,7 @@ document.write('<div id=\"sous_liste_$id\" class=\"'+cs_Categorie('sous_liste_$i
 	.	'</div></div></form>'
 	. '<div class="cs_liste cs_actifs">' . $fieldset . '#22BB22;">' . _T('desc:actifs') . '</legend>'
 	. $results_actifs . '</fieldset>'
-	. '<div style="text-align: right;"><a id="cs_tous_a" title="'._T('desc:selectiontous').'" href="#">'._T('desc:tous').'</a></div>'
+	. '<div style="text-align: right;"><a id="cs_tous_a" title="'._T('desc:selectiontous').'" href="#">'._T('desc:maj_tous').'</a></div>'
 	. '</div></div>';
 }
 

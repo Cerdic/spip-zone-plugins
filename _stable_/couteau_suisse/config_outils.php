@@ -398,22 +398,55 @@ add_variable( array(
 	'nom' => 'stat_auteurs',
 	'check' => 'desc:stat_auteurs',
 	'defaut' => 1,
-	'code:%s' => "define('boites_privees_AUTEURS', %s)\n;",
-));
-add_variable( array(
-	'nom' => 'max_auteurs_page',
-	'format' => 'nombre',
-	'defaut' => 30,
-	'code:%s' => "@define('MAX_AUTEURS_PAR_PAGE', %s);",
+	'code:%s' => "define('boites_privees_AUTEURS', %s);\n",
 ));
 add_outil( array(
 	'id' => 'boites_privees',
 	'auteur'=>'Pat, Joseph LARMARANGE (format SPIP)',
 	'contrib' => 2564,
-	'code:options' => "%%cs_rss%%%%format_spip%%%%stat_auteurs%%%%max_auteurs_page%%",
+	'code:options' => "%%cs_rss%%%%format_spip%%%%stat_auteurs%%",
 	'categorie' => 'admin',
 	'pipeline:affiche_milieu' => 'boites_privees_affiche_milieu',
 	'pipeline:affiche_droite' => 'boites_privees_affiche_droite',
+));
+
+add_variable( array(
+	'nom' => 'max_auteurs_page',
+	'format' => 'nombre',
+	'defaut' => 30,
+	'code:%s' => "@define('MAX_AUTEURS_PAR_PAGE', %s);\n",
+));
+add_variable( array(
+	'nom' => 'auteurs_0',	'check' => 'info_administrateurs',	'defaut' => 1,	'code:%s' => "'0minirezo',",
+));
+add_variable( array(
+	'nom' => 'auteurs_1',	'check' => 'info_redacteurs',	'defaut' => 1,	'code:%s' => "'1comite',",
+));
+add_variable( array(
+	'nom' => 'auteurs_5',	'check' => 'info_statut_site_4',	'defaut' => 1,	'code:%s' => "'5poubelle',",
+));
+add_variable( array(
+	'nom' => 'auteurs_6',	'check' => 'info_visiteurs',	'defaut' => 0,	'code:%s' => "'6forum',",
+));
+add_variable( array(
+	'nom' => 'auteurs_n',	'check' => 'desc:nouveaux',	'defaut' => 0,	'code:%s' => "'nouveau',",
+));
+add_variable( array(
+	'nom' => 'auteurs_tout_voir',
+	'format' => 'nombre',
+	'radio' => array(1 => 'desc:statuts_tous', 0 => 'desc:statuts_spip'),
+	'radio/ligne' => 1,
+	'defaut' => 0,
+//	'code:!%s' => "@define('AUTEURS_DEFAUT', join(\$temp_auteurs,','));",
+	'code:!%s' => "if (_request('exec')=='auteurs' && !_request('statut')) \$_GET['statut'] = join(\$temp_auteurs,',');",
+	'code:%s' => "if (_request('exec')=='auteurs' && !_request('statut')) \$_GET['statut'] = '!foo';",
+));
+add_outil( array(
+	'id' => 'auteurs',
+	'code:options' => "%%max_auteurs_page%%\$temp_auteurs=array(%%auteurs_0%%%%auteurs_1%%%%auteurs_5%%%%auteurs_6%%%%auteurs_n%%); %%auteurs_tout_voir%% unset(\$temp_auteurs);",
+	'categorie' => 'admin',
+	'version-min' => 1.93,
+//	'pipeline:affiche_milieu' => 'auteurs_affiche_milieu',
 ));
 
 //-----------------------------------------------------------------------------//
