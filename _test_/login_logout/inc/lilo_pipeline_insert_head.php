@@ -56,7 +56,6 @@ function lilo_insert_head ($flux) {
 
 	include_spip('inc/filtres');
 	include_spip('inc/plugin_globales_lib');
-//spip_log('_____ lilo_insert_head()');
 	
 	// masque les boutons admins standards
 	$GLOBALS['flag_preserver'] = true;
@@ -75,7 +74,7 @@ function lilo_insert_head ($flux) {
 		if(!isset($config[$key]) || !$config[$key] || empty($config[$key])) $config[$key] = $value;
 		$lilo_js_insert_head .= "'".preg_replace(',(lilo_),','',$key)."':'".$config[$key]."',";
 	}
-	$lilo_js_insert_head = " var lilo_config = { " . rtrim($lilo_js_insert_head, ",") . " };";
+	$lilo_js_insert_head = " jQuery().ready(function(){ var lilo_config = { " . rtrim($lilo_js_insert_head, ",") . " };";
 
 	if($page == 'login') {
 	
@@ -83,7 +82,7 @@ function lilo_insert_head ($flux) {
 		// CSS
 		"
 			#lilo_login {
-				font: normal 10px/normal 'Myriad Web Pro', Verdana, Arial, Helvetica, sans-serif;
+				font: normal 10px/normal 'Myriad Web Pro', 'Myriad Web', Verdana, Arial, Helvetica, sans-serif;
 				color: #000;
 				background: #fff;
 				text-align: left;
@@ -107,7 +106,6 @@ function lilo_insert_head ($flux) {
 		// Javascript
 		"
 			var alea_actuel = '', alea_futur = '';
-		
 			$('#var_login_id').blur(function(){
 				if($(this).val().length) {
 					$.ajax({
@@ -235,15 +233,16 @@ function lilo_insert_head ($flux) {
 		
 	} // end else
 	
-	$lilo_css_insert_head = lilo_envelopper_script($lilo_css_insert_head, 'css');
-	$lilo_js_insert_head = lilo_envelopper_script($lilo_js_insert_head, 'js');
+	$lilo_js_insert_head .= "});"; // fin de jQuery().ready(function(){
+	
+	$lilo_css_insert_head = lilo_envelopper_script(compacte_css($lilo_css_insert_head), 'css');
+	$lilo_js_insert_head = lilo_envelopper_script(compacte_js($lilo_js_insert_head), 'js');
 		
-	// compacter
-	//$lilo_js_insert_head = compacte_js($lilo_js_insert_head); // pas glop! génère des [ho|e]rreurs
+	// compacter un peu plus
 	$lilo_js_insert_head = lilo_compacter_script($lilo_js_insert_head);
 	$lilo_css_insert_head = lilo_compacter_script($lilo_css_insert_head);
 	
-	// inclure
+	// inclure le résultat dans le head
 	$flux .= "\n<!-- "._LILO_PREFIX." -->\n" . $lilo_css_insert_head . $lilo_js_insert_head . "<!-- /"._LILO_PREFIX." -->\n";
 
 	return ($flux);
@@ -266,11 +265,9 @@ function lilo_envelopper_script ($s, $type) {
 		case 'js':
 			$s = "
 				<script type='text/javascript'>
-				jQuery().ready(function(){
 				" 
 				. $s
 				. "
-				});
 				</script>
 			";
 			break;
@@ -280,12 +277,8 @@ function lilo_envelopper_script ($s, $type) {
 	return($s);
 }
 
-// version locale de compacte.
-// ne pas mettre de commentaires en // dans le source. N'est pas pris en charge ici.
+// complément des deux 'compacte'. supprimer les espaces en trop.
 function lilo_compacter_script ($s) {
-	// supprimer les commentaires entre /**/
-	$s = preg_replace('=/\*.*\*/=Ums','',$s);
-	// supprimer les espaces en trop
 	$s = preg_replace('=[[:space:]]+=', ' ', $s);
 	return($s);
 }

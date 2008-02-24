@@ -11,7 +11,7 @@
 	 -->
 	<nom>Login Logout (LiLo)</nom>
 	<auteur>cpaulus@quesaco.org</auteur>
-	<version>0.23</version>
+	<version>0.24</version>
 	<version_base>0.01</version_base>
 	<icon>images/lilo-64.png</icon>
 	<etat>test</etat>
@@ -20,7 +20,7 @@
 	La page login est appel&eacute;e lors de la tentative d'acc&egrave;s &agrave; l'espace priv&eacute;. 
 	Le bloc login est construit par l'appel &agrave; la balise LOGIN_PUBLIC.
 	La boite statut appara&icirc;t dans l'espace public lorsque le visiteur est authentifi&eacute;.
-	Page login et boite statut param&eacute;trables apr&egrave; activation [via la page de configuration->./?exec=configuration].
+	Page login et boite statut param&eacute;trables apr&egrave;s activation [via la page de configuration->./?exec=configuration].
 	</description>
 
 	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/Page-de-login-et-boite-statut-pour]</lien>
