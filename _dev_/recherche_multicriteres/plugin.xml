@@ -17,7 +17,6 @@
 		title="Information et Documentation" target="_blank">TiSpiP-sKeLeT</a>
 	</lien>
 	<version>0.1</version>
-	<prefix>rec_mc</prefix>
 	<etat>dev</etat>
 	<auteur>Paul Sanchez - Pluginis&eacute; par Dom Lepaisant</auteur>
 	<icon>img_pack/cles24.png</icon>
@@ -35,7 +34,7 @@
 		<action>insert_head</action>
 		<inclure>rec_mc_pipe.php</inclure>
 	</pipeline>
-	<icone>cle24.gif</icone>
+	
 <prefix>
   rec_mc
     </prefix>
