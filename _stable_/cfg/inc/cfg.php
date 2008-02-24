@@ -119,11 +119,12 @@ class cfg_dist extends cfg_formulaire
 	 * des liens vers les autres fonds CFG
 	 * definis par la variable liens
 	 * <!-- liens*=moncfg -->
-	 * 
 	 * s'il y a une chaine de langue 'moncfg', le texte sera traduit
 	 * 
-	 * sinon, peut etre prevoir dans le futur :
-	 * <!-- liens*=moncfg|<:prefix:nomcfg:> --> ?
+	 * Ou
+	 * <!-- liens*=prefixe_plugin:moncfg -->
+	 * pour utiliser la chaine de langue de prefixe_plugin
+	 * 
 	 */	
 	function lier()
 	{
@@ -131,11 +132,13 @@ class cfg_dist extends cfg_formulaire
 		// liens simples
 		foreach ($this->liens as $lien) {
 			$nom = _T($lien);
+			$lien =  array_pop(explode(':',$lien)); // ne garder que la derniere partie de la chaine de langue
 			$return .= ($l = $this->boite_liens($lien, $nom)) ? "<li>$l</li>\n" : "";
 		}
 		// liens multiples
 		foreach ($this->liens_multi as $lien) {
 			$nom = _T($lien);
+			$lien =  array_pop(explode(':',$lien)); // ne garder que la derniere partie de la chaine de langue
 			$return .= ($l = $this->boite_liens_multi($lien, $nom)) ? "<li>$l</li>\n" : "";
 		}		
 		return ($return)?

@@ -17,6 +17,15 @@ $GLOBALS['i18n_cfg_fr'] = array(
 'reset' => 'Effacer',
 'supprimer' => 'Supprimer',
 
+// liens des fonds CFG
+'testsimple' => 'Exemple simple',
+'testclassic' => 'Exemple m&eacute;ta classique',
+'testmulti' => 'Exemple entr&eacute;es multiples',
+'testtable' => 'Exemple sur champs d\'une table sql',
+'testphp' => 'Exemple de stockage php',
+'testcasier' => 'Exemple de casier',
+'testauteur' => 'Exemple sur champ extra/cfg de la table auteur',
+
 // textes cfg
 // C
 'cfg' => 'CFG',

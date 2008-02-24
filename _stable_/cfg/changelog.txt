@@ -1,10 +1,13 @@
-Un changelog pour se reperer un peu
+v1.3.5 (24.02.2008)
+- les liens s'enrichissent d'une nouvelle syntaxe <!-- liens*=prefixe_plugin:fond_cfg -->
+permettant de mettre des chaines de langue sur les liens directement avec celles du plugin
+dans /lang/prefixe_plugin_fr.php
 
 v1.3.4
 - oubli qui empechaient les liens de fonctionner
 
 v1.3.3 (07.02.2008) :
-- Si un lien est demande dans le fond <!-- lien=toto --> 
+- Si un lien est demande dans le fond <!-- liens*=toto --> 
 mais que fonds/cfg_toto.html n'existe pas, le lien n'est pas propose
 
 v1.3.2 (02.02.2008) :
