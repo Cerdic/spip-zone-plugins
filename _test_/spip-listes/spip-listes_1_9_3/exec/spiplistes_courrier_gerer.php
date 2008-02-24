@@ -1,22 +1,23 @@
 <?php
 // _SPIPLISTES_EXEC_COURRIER_GERER
 /******************************************************************************************/
-/* SPIP-listes est un syst�e de gestion de listes d'information par email pour SPIP      */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique G��ale GNU publi� par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribu�car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but sp�ifique. Reportez-vous �la Licence Publique G��ale GNU  */
-/* pour plus de d�ails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous � la Licence Publique Generale GNU  */
+/* pour plus de d�tails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir re� une copie de la Licence Publique G��ale GNU                    */
-/* en m�e temps que ce programme ; si ce n'est pas le cas, �rivez �la                  */
+/* Vous devez avoir re�u une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, �ats-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 // $LastChangedRevision$
 // $LastChangedBy$
@@ -31,7 +32,7 @@ include_spip('inc/spiplistes_api_globales');
 	Le formulaire permet :
 	- l'envoi sur mail de test
 	- l'attachement d'une liste
-	Dans les deux cas, le statut du courrier passe à _SPIPLISTES_STATUT_READY 
+	Dans les deux cas, le statut du courrier passe a� _SPIPLISTES_STATUT_READY 
 	(la meleuse prend en charge les courriers en statut _SPIPLISTES_STATUT_READY)
 	
 */
@@ -51,7 +52,7 @@ function exec_spiplistes_courrier_gerer () {
 		, $spip_ecran
 		;
 
-	// initialise les variables postées par le formulaire
+	// initialise les variables postees par le formulaire
 	foreach(array(
 		'type'
 		, 'id_courrier'
@@ -73,8 +74,8 @@ function exec_spiplistes_courrier_gerer () {
 			
 	$page_result = $message_erreur = $str_destinataire = "";
 
-	// l'édition du courrier est réservée aux super-admins 
-	// ou aux admin créateur du courrier
+	// l'edition du courrier est reservee aux super-admins 
+	// ou aux admin createur du courrier
 	$flag_editable = (($connect_statut == "0minirezo") 
 		&& ($connect_toutes_rubriques || ($connect_id_auteur == spiplistes_courrier_id_auteur_get($id_courrier)) || !$id_courrier));
 
@@ -82,16 +83,16 @@ function exec_spiplistes_courrier_gerer () {
 		//////////////////////////////////////////////////////
 		// Modification de courrier
 		////
-		// effectue les modifications demandées si retour local ou retour editeur
+		// effectue les modifications demandees si retour local ou retour editeur
 		if($id_courrier > 0) {
 			
 			if($btn_changer_destination) {
 				if($radio_destination == 'email_test') {
 				//////////////////////////////////////////////////////
-				// demande d'envoi à mail de test (formulaire local)
+				// demande d'envoi a� mail de test (formulaire local)
 					if(email_valide($email_test)) {
 						if(spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE email='$email_test' LIMIT 1"))==0) {
-						// vérifie si l'adresse est connue des auteurs
+						// verifie si l'adresse est connue des auteurs
 							// si inconnue, refuse d'envoyer
 							$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_Adresse_email_inconnue'), true);
 						}
@@ -109,14 +110,14 @@ function exec_spiplistes_courrier_gerer () {
 				} // end if($btn_envoi_test)
 				else if($radio_destination == 'id_liste') {
 				//////////////////////////////////////////////////////
-				// demande d'envoi à une liste (formulaire local)
+				// demande d'envoi a� une liste (formulaire local)
 					if($id_liste > 0) {
 						if(($nb_abos = spiplistes_nb_abonnes_count($id_liste)) > 0) {
 							if($row = spip_fetch_array(spip_query ("SELECT titre FROM spip_listes WHERE id_liste = $id_liste LIMIT 1"))) {
 								// va chercher le nom de la liste + nb abos
 								$str_destinataire = _T('spiplistes:sur_liste') . " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>".$row['titre']."</a>"
 									. " " . spiplistes_nb_abonnes_liste_str_get($id_liste, $nb_abos);
-								// Ok. Met à jour le panier
+								// Ok. Met a� jour le panier
 								spip_query("UPDATE spip_courriers SET email_test='',total_abonnes=$nb_abos,id_liste=$id_liste WHERE id_courrier=$id_courrier LIMIT 1");
 								$change_statut = _SPIPLISTES_STATUT_READY;
 							}
@@ -129,7 +130,7 @@ function exec_spiplistes_courrier_gerer () {
 			} // if($btn_changer_destination
 	
 			else if ($btn_courrier_valider) {
-			// retour éditeur
+			// retour editeur
 				if(!empty($titre)) {
 					spip_query("UPDATE spip_courriers SET titre="._q($titre).",texte="._q($texte)." WHERE id_courrier=$id_courrier LIMIT 1");	
 				}
@@ -146,7 +147,7 @@ function exec_spiplistes_courrier_gerer () {
 				$change_statut = _SPIPLISTES_STATUT_ENCOURS;
 				spip_query("UPDATE spip_courriers SET statut='$change_statut' WHERE id_courrier=$id_courrier LIMIT 1");
 				spiplistes_supprime_liste_envois($id_courrier);
-				// passe le courrier à la méleuse
+				// passe le courrier a� la meleuse
 				spiplistes_remplir_liste_envois($id_courrier,$id_liste);
 				spiplistes_log("SEND ID_COURRIER #$id_courrier ON ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur");
 			}
@@ -154,7 +155,7 @@ function exec_spiplistes_courrier_gerer () {
 			// FIN DES MODIFICATIONS
 	}
 	
-		// Ok. recharge les données pour compléter le formulaire
+		// Ok. recharge les donnees pour completer le formulaire
 		$sql_select = "titre,texte,email_test,statut";
 		if($row = spip_fetch_array(spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 1"))) {
 			foreach(explode(",", $sql_select) as $key) {
@@ -168,7 +169,7 @@ function exec_spiplistes_courrier_gerer () {
 	// Nouveau courrier
 	////
 	if(($connect_statut == "0minirezo") && ($new == 'oui')) {
-	// retour éditeur. Création du courrier
+	// retour editeur. Creation du courrier
 		if(!empty($titre)) {
 			$statut = _SPIPLISTES_STATUT_REDAC;
 			$type = 'nl';
@@ -182,7 +183,7 @@ function exec_spiplistes_courrier_gerer () {
 	}
 
 	//////////////////////////////////////////////////////
-	// recharge le courrier pour édition
+	// recharge le courrier pour edition
 	if($id_courrier > 0) {
 		
 		$sql_select_tmp = "email_test,date,titre,texte,message_texte,type,statut,date_debut_envoi,date_fin_envoi";
@@ -202,7 +203,7 @@ function exec_spiplistes_courrier_gerer () {
 			}
 
 			if($change_statut == _SPIPLISTES_STATUT_READY) {
-				$titre = spiplistes_propre($titre);
+				$titre = $titre ; // pas de propre ici, ca fait un <p> </p>
 				$texte = spiplistes_propre($texte);
 				spip_query("UPDATE spip_courriers SET titre="._q($titre).",texte="._q($texte).",statut='$change_statut' WHERE id_courrier=$id_courrier LIMIT 1");
 				spiplistes_log("ID_COURRIER #$id_courrier MODIFIED TO $change_statut BY ID_AUTEUR #$connect_id_auteur");
@@ -214,13 +215,13 @@ function exec_spiplistes_courrier_gerer () {
 			}
 			/* futur
 			else if($change_statut == _SPIPLISTES_STATUT_BREAK) {
-				// si envoi annulé par spiplistes_boite_autocron, stope les envois en cours
+				// si envoi annule par spiplistes_boite_autocron, stope les envois en cours
 				spip_query("SELECT id_courrier,statut FROM spip_courriers WHERE statut='".."'")
 				spiplistes_log("BREAK BY ID_AUTEUR #$connect_id_auteur");
 			}
 			*/
 			
-			// prépare le texte texte seul
+			// prepare le texte texte seul
 			if(!in_array($statut, array(
 					  _SPIPLISTES_STATUT_REDAC
 					, _SPIPLISTES_STATUT_READY
@@ -237,7 +238,7 @@ function exec_spiplistes_courrier_gerer () {
 				$alt_message_texte = _T('spiplistes:calcul_html');
 				$message_texte = spiplistes_version_texte($texte);
 			}
-			// construit la boite de sélection destinataire
+			// construit la boite de selection destinataire
 			$boite_selection_destinataire = (($statut==_SPIPLISTES_STATUT_REDAC) || ($statut==_SPIPLISTES_STATUT_READY))
 				? spiplistes_destiner_envoi($id_courrier, $id_liste, true, $statut, $type, 'btn_changer_destination', $email_test)
 				: ""
@@ -247,7 +248,7 @@ function exec_spiplistes_courrier_gerer () {
 
 	
 	//////////////////////////////////////////////////////
-	// préparation des boutons si droits
+	// preparation des boutons si droits
 	$gros_bouton_modifier = 
 		$gros_bouton_supprimer = 
 		$gros_bouton_arreter_envoi = ""
@@ -259,10 +260,10 @@ function exec_spiplistes_courrier_gerer () {
 	if($flag_editable) {
 		
 		if(($statut == _SPIPLISTES_STATUT_REDAC) || ($statut == _SPIPLISTES_STATUT_READY)) {
-		// Le courrier peut-être modifié si en préparation 
+		// Le courrier peut-a�tre modifie si en preparation 
 			$gros_bouton_modifier = 
 				icone (
-					_T('spiplistes:Modifier_ce_courrier') // légende bouton
+					_T('spiplistes:Modifier_ce_courrier') // legende bouton
 					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT,'id_courrier='.$id_courrier) // lien
 					, spiplistes_items_get_item('icon', $statut) // image du fond
 					, "edit.gif" // image de la fonction. Ici, le crayon
@@ -273,7 +274,7 @@ function exec_spiplistes_courrier_gerer () {
 		}
 		
 		if($statut != _SPIPLISTES_STATUT_PUBLIE) {
-		// Le courrier peut-être supprimé s'il n'a pas été publié
+		// Le courrier peut-a�tre supprime s'il n'a pas ete publie
 			$gros_bouton_supprimer = 
 				"<div style='margin-top:1ex;'>"
 				. icone (
@@ -289,11 +290,11 @@ function exec_spiplistes_courrier_gerer () {
 		}
 	
 		if($statut == _SPIPLISTES_STATUT_ENCOURS) {
-		// L'envoi d'un courrier en cours peut être stoppé
+		// L'envoi d'un courrier en cours peut a�tre stoppe
 			$gros_bouton_arreter_envoi = 
 				icone (
 					_T('spiplistes:Arreter_envoi')
-					// si arreter envoi, passe la main à exec/spip_listes
+					// si arreter envoi, passe la main a� exec/spip_listes
 					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE, "btn_arreter_envoi=$id_courrier")
 					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_redac-24.png"
 					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stop-top-right-24.png"
@@ -322,7 +323,7 @@ function exec_spiplistes_courrier_gerer () {
 	}
 
 	/////////////////////
-	// prépare le message statut du courrier
+	// prepare le message statut du courrier
 	if($id_courrier > 0) {
 		$le_type = _T('spiplistes:message_type');
 		
@@ -400,7 +401,7 @@ function exec_spiplistes_courrier_gerer () {
 
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
-	// la gestion des listes de courriers est réservée aux admins 
+	// la gestion des listes de courriers est reservee aux admins 
 	if($connect_statut != "0minirezo") {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
@@ -427,7 +428,7 @@ function exec_spiplistes_courrier_gerer () {
 			. "<tr>"
 			. "<td>".spiplistes_gros_titre($titre, spiplistes_items_get_item('puce', $statut), false)."</td>"
 			. "<td rowspan='2' style='vertical-align:top;width:90px;'>"
-				// si besoin, l'un de ces deux boutons apparaît
+				// si besoin, l'un de ces deux boutons apparaa�t
 				. $gros_bouton_modifier
 				. $gros_bouton_arreter_envoi
 				."</td>"
@@ -486,22 +487,22 @@ function exec_spiplistes_courrier_gerer () {
 } // end function exec_spiplistes_courrier_gerer ()
 
 /******************************************************************************************/
-/* SPIP-listes est un syst�e de gestion de listes d'abonn� et d'envoi d'information     */
-/* par email  pour SPIP.                                                                  */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique G��ale GNU publi� par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribu�car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but sp�ifique. Reportez-vous �la Licence Publique G��ale GNU  */
-/* pour plus de d�ails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous � la Licence Publique Generale GNU  */
+/* pour plus de d�tails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir re� une copie de la Licence Publique G��ale GNU                    */
-/* en m�e temps que ce programme ; si ce n'est pas le cas, �rivez �la                  */
+/* Vous devez avoir re�u une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, �ats-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 ?>
