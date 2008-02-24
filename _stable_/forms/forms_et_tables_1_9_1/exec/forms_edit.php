@@ -109,7 +109,7 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 		$liste = ob_get_contents();
 		ob_end_clean();
 	}
-		
+
 	$out .= $liste;
 
 	$out .= fin_cadre_relief(true);
@@ -121,7 +121,7 @@ function exec_forms_edit(){
 	$retour = _request('retour');
 
 	$id_form = intval(_request('id_form'));
-	
+
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
 	if (!autoriser('structurer','form',$id_form)) {
@@ -130,19 +130,19 @@ function exec_forms_edit(){
 		echo fin_page();
 		exit();
 	}
-	
+
 	$new = _request('new');
 	$supp_form = intval(_request('supp_form'));
 	$supp_rejet = _request('supp_rejet');
 	$titre = _request('titre');
-	
+
 	_Forms_install();
 	if ($supp_form)
 		$id_form = $supp_form;
 
 	if ($retour)
 		$retour = urldecode($retour);
-	else 
+	else
 		$retour = generer_url_ecrire('forms_tous',"","",true);
   include_spip("inc/presentation");
 	include_spip("inc/config");
@@ -154,9 +154,9 @@ function exec_forms_edit(){
 
 
 	$redirect = generer_url_ecrire('forms_edit',(intval($id_form)?"id_form=$id_form":""));
-	if ($retour) 
+	if ($retour)
 		$redirect = parametre_url($redirect,"retour",urlencode($retour));
-		
+
 	//
 	// Affichage de la page
 	//
@@ -196,8 +196,8 @@ function exec_forms_edit(){
 	if ($ajax_charset && $bloc[0]=='champs') {
 		ajax_retour(Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ,$redirect,isset($bloc[2])?$bloc[2]:false));
 	}
-	
-	
+
+
 	debut_page("&laquo; $titre &raquo;", "documents", "forms","");
 
 	// Recupere les donnees ---------------------------------------------------------------
@@ -205,7 +205,7 @@ function exec_forms_edit(){
 		$row['type_form'] = _request('type_form')?_request('type_form'):""; // possibilite de passer un type par defaut dans l'url de creation
 		$prefixei18n = forms_prefixi18n($row['type_form']);
 		$is_form = 	$prefixei18n=='form';
-		
+
 		$titre = _T("$prefixei18n:nouveau_formulaire");
 		include_spip('inc/charset');
 		$row['titre'] = $titre = unicode2charset(html2unicode($titre));
@@ -227,8 +227,9 @@ function exec_forms_edit(){
 		$row['public'] = "non";
 		$row['linkable'] = "non";
 		$row['documents'] = "non";
+		$row['documents_mail'] = "non";
 		$focus = "antifocus";
-		
+
 		$action_link = generer_action_auteur("forms_edit","new",urlencode($redirect));
 	}
 	$prefixei18n = forms_prefixi18n($row['type_form']);
@@ -236,7 +237,7 @@ function exec_forms_edit(){
 
 	// gauche raccourcis ---------------------------------------------------------------
 	debut_gauche();
-	
+
 	echo "<br /><br />\n";
 	debut_boite_info();
 	if ($id_form>0)
@@ -266,7 +267,7 @@ function exec_forms_edit(){
 		echo "</p>";
 	}
 	fin_boite_info();
-	
+
 	// gauche apercu ---------------------------------------------------------------
 	echo "<div id='apercu_gauche'>";
 	include_spip('public/assembler');
@@ -274,8 +275,8 @@ function exec_forms_edit(){
 	echo $apercu = recuperer_fond('modeles/form',array('id_form'=>$id_form,'var_mode'=>'calcul'));
 	echo "</div>";
 	echo '<a class="verdana2" href="#" onclick="$(\'#apercu_gauche\').remove();$(\'#apercu\').remove();$(this).remove();return false;">'._T('forms:desactiver')."</a>";
-	
-	
+
+
 
 	// droite ---------------------------------------------------------------
 	creer_colonne_droite();
@@ -283,7 +284,7 @@ function exec_forms_edit(){
 
 	if (!$new){
 		echo gros_titre($row['titre'],'',false);
-	
+
 		if ($supp_form && $supp_rejet==NULL)
 			echo Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour,$prefixei18n);
 		echo "<div id='barre_onglets'>";

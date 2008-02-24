@@ -10,8 +10,8 @@
  * (c) 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
-	
-	$GLOBALS['forms_base_version'] = 0.40;
+
+	$GLOBALS['forms_base_version'] = 0.41;
 	function Forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
@@ -19,7 +19,7 @@
 			spip_query("DELETE FROM spip_forms_champs WHERE id_form="._q($id_form));
 			spip_query("DELETE FROM spip_forms_champs_choix WHERE id_form="._q($id_form));
 		}
-		
+
 		$structure = unserialize($row['structure']);
 		if ($structure) { //  precaution pour cas tordus
 			$rang = 1;
@@ -32,12 +32,12 @@
 				$extra_info = isset($type_ext['id_groupe']) ? $type_ext['id_groupe']:'';
 				$extra_info = isset($type_ext['taille']) ? $type_ext['taille']:$extra_info;
 				$obligatoire = $val['obligatoire'];
-				spip_query("INSERT INTO spip_forms_champs (id_form,rang,champ,titre,type,obligatoire,extra_info) 
+				spip_query("INSERT INTO spip_forms_champs (id_form,rang,champ,titre,type,obligatoire,extra_info)
 					VALUES("._q($id_form).","._q($rang++).","._q($champ).","._q($titre).","._q($type).","._q($obligatoire).","._q($extra_info).")");
 				if ($type=='select' OR $type=='multiple'){
 					$rangchoix = 1;
 					foreach($type_ext as $choix=>$titre){
-						spip_query("INSERT INTO spip_forms_champs_choix (id_form,champ,choix,titre,rang) 
+						spip_query("INSERT INTO spip_forms_champs_choix (id_form,champ,choix,titre,rang)
 							VALUES("._q($id_form).","._q($champ).","._q($choix).","._q($titre).","._q($rangchoix++).")");
 					}
 				}
@@ -117,7 +117,7 @@
 			// virer les tables temporaires crees manuellement sur les serveurs ou ca foirait
 			spip_query("DROP TABLE spip_forms_champs");
 			spip_query("DROP TABLE spip_forms_champs_choix");
-			
+
 			// virer les tables vides crees lors dun creer base precedent avec spip_forms_donnees dans la definition
 			spip_query("DROP TABLE spip_forms_donnees");
 			spip_query("DROP TABLE spip_forms_donnees_champs");
@@ -139,7 +139,7 @@
 			spip_query("UPDATE spip_forms SET type_form='sondage', public='oui' WHERE type_form='public'");
 			spip_query("UPDATE spip_forms SET type_form='sondage', public='non' WHERE type_form='prot'");
 			spip_query("UPDATE spip_forms SET type_form='', public='non' WHERE type_form='non'");
-			
+
 			spip_query("ALTER TABLE spip_forms_donnees CHANGE id_reponse id_donnee BIGINT( 21 ) NOT NULL AUTO_INCREMENT");
 			spip_query("ALTER TABLE spip_forms_donnees_champs CHANGE id_reponse id_donnee BIGINT( 21 ) NOT NULL");
 			spip_query("ALTER TABLE spip_forms_donnees_champs DROP INDEX id_reponse ,ADD INDEX id_donnee (id_donnee) ");
@@ -157,7 +157,7 @@
 		}
 		if ($current_version<0.18){
 			spip_query("ALTER TABLE spip_forms ADD linkable ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER public");
-			
+
 			// init la valeur par defaut de extra_info sur les champs select (aurait du etre fait en 0.17
 			$res = spip_query("SELECT * FROM spip_forms_champs WHERE type='select'");
 			while ($row = spip_fetch_array($res)){
@@ -266,7 +266,7 @@
 			ecrire_meta('forms_base_version',$current_version=0.33,'non');
 		}
 		if ($current_version<0.34){
-			spip_query("ALTER TABLE spip_forms_donnees_champs DROP INDEX champ , ADD UNIQUE champ ( champ ( 128 ) , id_donnee , valeur ( 128 ) )"); 
+			spip_query("ALTER TABLE spip_forms_donnees_champs DROP INDEX champ , ADD UNIQUE champ ( champ ( 128 ) , id_donnee , valeur ( 128 ) )");
 			echo "forms update @ 0.34<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.34,'non');
 		}
@@ -290,7 +290,7 @@
 		if ($current_version<0.38){
 			ecrire_meta('forms_et_tables',serialize(array('associer_donnees_articles'=>1,'associer_donnees_rubriques'=>0,'associer_donnees_auteurs'=>0)));
 			echo "forms update @ 0.38<br/>";
-			ecrire_meta('forms_base_version',$current_version=0.38,'non');			
+			ecrire_meta('forms_base_version',$current_version=0.38,'non');
 		}
 		if ($current_version<0.39){
 			spip_query("ALTER TABLE `spip_forms_articles` DROP INDEX `id_form`");
@@ -311,10 +311,15 @@
 			echo "forms update @ 0.40<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.40,'non');
 		}
+		if ($current_version<0.41){
+			spip_query("ALTER TABLE spip_forms ADD documents_mail ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER documents");
+			echo "forms update @ 0.41<br/>";
+			ecrire_meta('forms_base_version',$current_version=0.41,'non');
+		}
 
 		ecrire_metas();
 	}
-	
+
 	function Forms_vider_tables() {
 		spip_query("DROP TABLE spip_forms");
 		spip_query("DROP TABLE spip_forms_champs");
@@ -328,7 +333,7 @@
 		effacer_meta('forms_base_version');
 		ecrire_metas();
 	}
-	
+
 	function Forms_install($action){
 		global $forms_base_version;
 		switch ($action){
@@ -342,5 +347,5 @@
 				Forms_vider_tables();
 				break;
 		}
-	}	
+	}
 ?>

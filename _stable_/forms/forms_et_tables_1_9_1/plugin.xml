@@ -11,7 +11,7 @@
 		</multi>
 	</auteur>
 	<version>
-	0.303
+	0.304
 	</version>
 	<etat>
 	stable
@@ -43,7 +43,7 @@
 	<fonctions> <!-- fichier charge a chaque recalul de page -->
 	public/forms_balises.php
 	</fonctions>
-	<prefix> 
+	<prefix>
 	Forms
 	</prefix>
 	<install>base/forms_upgrade.php</install>

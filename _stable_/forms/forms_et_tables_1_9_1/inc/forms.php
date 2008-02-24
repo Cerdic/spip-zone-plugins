@@ -20,7 +20,7 @@
 			Forms_upgrade();
 		}
 	}
-	
+
 	function Forms_structure($id_form, $complete = true){
 		include_spip('inc/texte'); # typo et textebrut
 		// Preparer la table de traduction code->valeur & mise en table de la structure pour eviter des requettes
@@ -83,7 +83,7 @@
 		}
 		return $valeurs;
 	}
-	
+
 	function Forms_donnees_vide($id_form){
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
@@ -124,7 +124,7 @@
 			$erreur[0][] = _L("Table introuvable");
 			return;
 		}
-		
+
 		$structure = Forms_structure($id_form);
 		$cle = (isset($assoc_field['id_donnee']) AND ($assoc_field['id_donnee']!='-1'))?$assoc_field['id_donnee']:false;
 		$output = "";
@@ -194,13 +194,13 @@
 						  			spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee,champ,valeur,maj) VALUES ("._q($id_donnee).","._q($champ).","._q($v).", NOW() )");
 				 		}
 					}
-					else 
+					else
 					  $erreur[$count_lignes][] = "ajout impossible ::id_donnee nul::<br />";
 		 		}
 			}
 		}
 	}
-	
+
 	function Forms_deplacer_fichier_form($source, $dest) {
 		/* le core interdit l'upload depuis l'espace prive... pourquoi tant de haine ?
 		include_spip('inc/getdocument');
@@ -231,7 +231,7 @@
 			$ext = strtolower($match[2]);
 			$orig = $match[1];
 		}
-		$base = ereg_replace("[^.a-zA-Z0-9_=-]+", "_", 
+		$base = ereg_replace("[^.a-zA-Z0-9_=-]+", "_",
 			translitteration(supprimer_tags(basename($orig))));
 		$n = 0;
 		$fichier = $base.'.'.$ext;
@@ -274,7 +274,7 @@
 		$q="SELECT id_donnee FROM spip_forms_donnees " .
 			"WHERE statut='publie' AND id_form=".intval($id_form)." ";
 		$q .= "AND (";
-		if ($cookie) { 
+		if ($cookie) {
 			$q.="cookie="._q($cookie). ($id_auteur?" OR id_auteur="._q($id_auteur):"");
 		}
 		else if ($id_auteur)
@@ -299,10 +299,10 @@
 			WHERE ch.champ=r.champ AND d.id_donnee = r.id_donnee AND d.id_form = ch.id_form AND r.id_donnee="._q($id_donnee)." ORDER BY ch.rang");
 		}
 		else {
-			$result = spip_query("SELECT * FROM spip_forms_donnees_champs AS r 
-				JOIN spip_forms_champs AS ch ON ch.champ=r.champ 
+			$result = spip_query("SELECT * FROM spip_forms_donnees_champs AS r
+				JOIN spip_forms_champs AS ch ON ch.champ=r.champ
 				JOIN spip_forms_donnees AS d ON d.id_donnee = r.id_donnee
-				WHERE d.id_form = ch.id_form AND r.id_donnee="._q($id_donnee)." ORDER BY ch.rang");	
+				WHERE d.id_form = ch.id_form AND r.id_donnee="._q($id_donnee)." ORDER BY ch.rang");
 		}
 		$valeurs = array();
 		$retour = urlencode(self());
@@ -344,16 +344,16 @@
 		}
 		return array($libelles,$values,$url);
 	}
-	
+
 	//
 	// Afficher un pave formulaires dans la colonne de gauche
 	// (edition des articles)
-	
+
 	function Forms_afficher_insertion_formulaire($id_article) {
 		global $connect_id_auteur, $connect_statut;
 		global $couleur_foncee, $couleur_claire, $options;
 		global $spip_lang_left, $spip_lang_right;
-	
+
 		$s = "";
 		// Ajouter un formulaire
 
@@ -361,7 +361,7 @@
 		$out .= "<div class='verdana2'>";
 		$out .= _T("forms:article_inserer_un_formulaire_detail");
 		$out .= "</div>";
-	
+
 		$query = "SELECT id_form, titre FROM spip_forms ORDER BY titre";
 		$result = spip_query($query);
 		if (spip_num_rows($result)) {
@@ -371,7 +371,7 @@
 			while ($row = spip_fetch_array($result)) {
 				$id_form = $row['id_form'];
 				$titre = typo($row['titre']);
-				
+
 				$link = generer_url_ecrire('forms_edit',"id_form=$id_form&retour=".urlencode(self()));
 				$out .= "<a href='".$link."'>";
 				$out .= $titre."</a>\n";
@@ -382,7 +382,7 @@
 			$out .= "</div>";
 			$out .= "</div>";
 		}
-	
+
 		// Creer un formulaire
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
@@ -392,30 +392,30 @@
 			$out .= icone_horizontale(_T("forms:icone_creer_formulaire"),
 				$link, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "creer.gif", false);
 		}
-		
+
 		if (version_compare($GLOBALS['spip_version_code'],'1.9250','>')){
 			$s .= cadre_depliable(_DIR_PLUGIN_FORMS."img_pack/form-24.png",_T("forms:article_inserer_un_formulaire"),true,$out,"ajouter_form");
 		}
 		else {
 			$s .= "\n";
 			$s .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", true);
-		
+
 			$s .= "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
 			$s .= bouton_block_invisible("ajouter_form");
 			$s .= "<strong class='verdana3' style='text-transform: uppercase;'>"
 				._T("forms:article_inserer_un_formulaire")."</strong>";
 			$s .= "</div>\n";
-		
+
 			$s .= debut_block_invisible("ajouter_form");
 			$s .= $out;
 			$s .= fin_block();
-		
+
 			$s .= fin_cadre_relief(true);
 		}
 
 		return $s;
 	}
-	
+
 	function Forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,&$erreur,&$ok){
 		$inserts = array();
 		if ($type == 'fichier') {
@@ -433,7 +433,7 @@
 					$inserts[] = "("._q($id_donnee).","._q($champ).","._q($dest).")";
 				}
 			}
-			// Cas de la mise a jour pour laquelle on dispose deja  d'un fichier uploade !
+			// Cas de la mise a jour pour laquelle on dispose deja d'un fichier uploade !
 			elseif ( ($val=Forms_valeurs($id_donnee,$id_form,$champ)) != NULL ) {
 				$inserts[] = "("._q($id_donnee).","._q($champ).","._q($val[$champ]).")";
 			}
@@ -450,7 +450,7 @@
 		}
 		return $inserts;
 	}
-	
+
 	function Forms_modifier_reponse($id_form,$id_donnee,&$erreur, $c = NULL, $structure = NULL){
 		if (!$structure)	$structure = Forms_structure($id_form);
 		$inserts = array();
@@ -466,7 +466,7 @@
 			}
 			else
 				$val = isset($c[$champ])?$c[$champ]:NULL;
-			if ($val!==NULL 
+			if ($val!==NULL
 				AND (($infos['type']!=='password') OR strlen($val))){
 				$valeurs[$champ] = $val;
 				$champs[$champ] = $infos;
@@ -525,7 +525,7 @@
 		$id_form = $row['id_form'];
 		$structure = Forms_structure($id_form);
 		include_spip("inc/forms_type_champs");
-		
+
 		$erreur = Forms_valide_conformite_champs_reponse_post($id_form, $id_donnee, $c, $structure);
 		if (!$erreur)
 			Forms_modifier_reponse($id_form,$id_donnee,$erreur, $c, $structure);
@@ -534,7 +534,7 @@
 
 		return $erreur;
 	}
-	
+
 	function Forms_rang_prochain($id_form){
 		$rang = 1;
 		$res = spip_query("SELECT max(rang) AS rang_max FROM spip_forms_donnees WHERE id_form="._q($id_form));
@@ -556,7 +556,7 @@
 			$rang_min = $row['rang_min'];
 			$rang_max = $row['rang_max'];
 		}
-	
+
 		// verifier si des donnees sont pas sans rang et les ramasser
 		$res = spip_query("SELECT id_donnee, rang FROM spip_forms_donnees WHERE (rang=NULL OR rang=0) AND id_form="._q($id_form)." ORDER BY id_donnee");
 		while ($row = spip_fetch_array($res)){
@@ -568,26 +568,26 @@
 		$rang_nouv = min(max($rang_nouv,$rang_min),$rang_max);
 		if ($rang_nouv>$rang) $rang_nouv++; // il faut se decaler d'un car on est devant actuellement
 		$rang_nouv = min($rang_nouv,Forms_rang_prochain($id_form));
-		
+
 		// incrementer tous ceux dont le rang est superieur a la cible pour faire une place
 		$ok = spip_query("UPDATE spip_forms_donnees SET rang=rang+1 WHERE id_form=$id_form AND rang>="._q($rang_nouv));
 		if (!$ok) return $rang;
 		// mettre a jour le rang de l'element demande
 		$ok = spip_query("UPDATE spip_forms_donnees SET rang="._q($rang_nouv)." WHERE id_donnee=$id_donnee");
 		if (!$ok) return $rang;
-		
+
 		// decrementer tous ceux dont le rang est superieur a l'ancien pour recuperer la place
 		spip_query("UPDATE spip_forms_donnees SET rang=rang-1 WHERE id_form=$id_form AND rang>$rang");
 		$res = spip_query("SELECT id_form,rang FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
 		if (!$row = spip_fetch_array($res)) return $rang_nouv;
 		return $row['rang'];
 	}
-	
+
 	function Forms_enregistrer_reponse_formulaire($id_form, &$id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='', $c=NULL, $rang=NULL) {
 		$r = '';
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
-	
+
 		$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 		if (!$row = spip_fetch_array($result)) {
 			$erreur['@'] = _T("forms:probleme_technique");
@@ -619,19 +619,19 @@
 				$ok = false;
 				$confirme = true;
 			}
-			
+
 			$nom_cookie = Forms_nom_cookie_form($id_form);
 			if (isset($_COOKIE[$nom_cookie]))
 				$cookie = $_COOKIE[$nom_cookie];
 			else {
 				include_spip("inc/acces");
-				$cookie = creer_uniqid();				
+				$cookie = creer_uniqid();
 			}
 			if ($row['type_form']=='sondage')
 				$confirmation = 'attente';
 			else
 				$confirmation = 'valide';
-			if ($moderation == 'posteriori') 
+			if ($moderation == 'posteriori')
 				$statut='publie';
 			else {
 				$statut = 'prop';
@@ -653,7 +653,7 @@
 					if ($rang==NULL) $rang = array('rang'=>Forms_rang_prochain($id_form));
 					elseif(!is_array($rang)) $rang=array('rang'=>$rang);
 					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie, "
-					  . implode(',',array_keys($rang)).") " 
+					  . implode(',',array_keys($rang)).") "
 					  .	"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","
 					  . _q($url).", '$confirmation', '$statut',"._q($cookie).","
 					  . implode(',',array_map('_q',$rang)) .")");
@@ -738,7 +738,21 @@
 			$email = unserialize($row['email']);
 			$email_dest = $email['defaut'];
 			$mailconfirm = "";
-			
+
+			// recuperer documents
+			$documents_mail = false;
+			if ($row['documents_mail']=='oui'){
+				$result2 = spip_query("SELECT champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type='fichier'");
+				spip_log("SELECT champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type='fichier'");
+				if ($row2 = spip_fetch_array($result2)) {
+					$result3 = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($row2['champ']));
+					spip_log("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($row2['champ']));
+					if ($row3 = spip_fetch_array($result3)) {
+						$documents[] = $row3['valeur'];
+						$documents_mail = true;
+					}
+				}
+			}
 			// recuperer l'email de confirmation
 			$result2 = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champconfirm));
 			if ($row2 = spip_fetch_array($result2)) {
@@ -794,10 +808,30 @@
 					if (preg_match(",<h[1-6]>(.*)</h[1-6]>,Uims",$regs[1],$hs))
 						$sujet=$hs[1];
 				}
+				//joindre les documents si necessaire
+				if ($documents_mail && is_array($documents)) {
+					$random_hash = md5(date('r', time()));
+					$headers = "Content-Type: multipart/mixed; boundary=\"PHP-mixed-".$random_hash."\"";
+					$charset = $GLOBALS['meta']['charset'];
+					$corps_mail_admin = 	"This is a multi-part message in MIME format." .
+								"\n--PHP-mixed-".$random_hash .
+								"\nContent-Type: text/plain; charset=\"" . $charset . "\"" .
+								"\nContent-Transfer-Encoding: 8bit\n\n" . $corps_mail_admin;
+
+					foreach($documents as $document){
+						$filename = substr(strrchr($document, "/"), 1);
+						$filetype = substr(strrchr($document, "."), 1);
+						$corps_mail_admin .= "\n\n--PHP-mixed-".$random_hash."\nContent-Type: application/".$filetype."; name=\"".$filename."\"\nContent-Transfer-Encoding: base64\nContent-Disposition: attachment; filename=\"".$filename."\"\r\n" .
+									chunk_split(base64_encode(file_get_contents($document)), 72)."\r\n";
+					}
+					$corps_mail_admin .= "\n\n--PHP-mixed-".$random_hash."--\r\n";
+				}
 				envoyer_mail($dest, $sujet, $corps_mail_admin, $from, $headers);
 		 	}
 		}
 	}
+
+
 function Forms_obligatoire($row,$forms_obligatoires){
 	$returned=$row;
 	global $auteur_session;
@@ -821,9 +855,9 @@ function Forms_obligatoire($row,$forms_obligatoires){
 			$returned = spip_fetch_array($res2);
 			$chercher=false;
 		}
-		$i++;	
+		$i++;
 	}
-	return $returned;	
+	return $returned;
 }
 
 function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_table, $script, $bloc_id, $arg_ajax, $retour){
@@ -838,7 +872,7 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 		include_spip("base/forms_base_api");
 		$in_type_table = calcul_mysql_in('d.id_form',implode(",",Forms_liste_tables($type_table)))." AND";
 	}
-	
+
 	$out = "";
 	$iid = intval($id);
 
@@ -848,13 +882,13 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 	$forms = array();
 	$types = array();
 	$prefixi18n = array();
-	
+
 	$champ_donnee_liee = "id_$type_lie";
 	$champ_donnee_source = "id_$type_source";
 	$table_liens = strncmp($type_source,"donnee",6)==0?"spip_forms_donnees_donnees":"spip_forms_donnees_{$type_source}s";
-	
+
 	$res = spip_query("SELECT dl.$champ_donnee_liee
-	  FROM $table_liens AS dl 
+	  FROM $table_liens AS dl
 	  JOIN spip_forms_donnees AS d ON d.id_donnee=dl.$champ_donnee_liee
 	  WHERE $in_type_table dl.$champ_donnee_source="._q($iid));
 	$nombre_donnees = $cpt = spip_num_rows($res);
@@ -864,18 +898,18 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 	$tmp_var = $bloc_id;
 	$nb_aff = floor(1.5 * $tranches);
 	if ($cpt > $nb_aff) {
-		$nb_aff = $tranches; 
+		$nb_aff = $tranches;
 		$tranches = afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire($script,$arg_ajax), $nb_aff);
 	} else $tranches = '';
-	
+
 	$deb_aff = _request($tmp_var);
 	$deb_aff = ($deb_aff !== NULL ? intval($deb_aff) : 0);
-	
-	$limit = (($deb_aff < 0) ? '' : " LIMIT $deb_aff, $nb_aff");	
-	
+
+	$limit = (($deb_aff < 0) ? '' : " LIMIT $deb_aff, $nb_aff");
+
 	$res = spip_query(
-	"SELECT dl.$champ_donnee_liee 
-	FROM $table_liens AS dl 
+	"SELECT dl.$champ_donnee_liee
+	FROM $table_liens AS dl
 	JOIN spip_forms_donnees AS d ON d.id_donnee=dl.$champ_donnee_liee
 	WHERE $in_type_table dl.$champ_donnee_source="._q($iid)."
 	ORDER BY d.id_form $limit");
@@ -893,9 +927,9 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 		$prefixi18n[$type_form] = forms_prefixi18n($type_form);
 	if ($lieeliante=='liee')
 		$type_autoriser = strncmp($type_source,'donnee',6)==0?'donnee':$type_source;
-	else 
+	else
 		$type_autoriser = 'donnee';
-	
+
 	if (count($liste) OR $tranches) {
 		$out .= "<div class='liste liste-donnees'>";
 		$out .= $tranches;
@@ -914,7 +948,7 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 					$auth_modifier = autoriser('modifier',$type_autoriser,$iid,NULL,array('id_donnee_liee'=>$id_donnee));
 				else
 					$auth_modifier = autoriser('modifier',$type_autoriser,$id_donnee,NULL,array('id_form'=>$id_form,'id_donnee_liee'=>$iid));
-				$vals[] = 
+				$vals[] =
 				  ($auth_modifier?"<a href='".generer_url_ecrire("donnees_edit","id_form=$id_form&id_donnee=$id_donnee&retour=".urlencode($retour))."'>":"")
 				  .implode(", ",$champs)
 				  .($auth_modifier?"</a>":"");
@@ -941,7 +975,7 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 		$largeurs = array('', '', '', '', '');
 		$styles = array('arial11', 'arial11', 'arial2', 'arial11', 'arial11');
 		$out .= afficher_liste($largeurs, $table, $styles, false);
-	
+
 		$out .= "</table></div>\n";
 	}
 	return array($out,$les_donnees,$nombre_donnees) ;
@@ -955,7 +989,7 @@ function Forms_liste_decrit_donnee($id_donnee, $specifiant=true, $linkable=true)
 	else $specifiant="";
 	if ($linkable) $linkable = " AND f.linkable='oui'";
 	else $linkable = "";
-	$res2 = spip_query("SELECT c.titre,dc.valeur,f.titre AS titreform,f.id_form,f.type_form FROM spip_forms_donnees_champs AS dc 
+	$res2 = spip_query("SELECT c.titre,dc.valeur,f.titre AS titreform,f.id_form,f.type_form FROM spip_forms_donnees_champs AS dc
 	JOIN spip_forms_donnees AS d ON d.id_donnee=dc.id_donnee
 	JOIN spip_forms_champs AS c ON c.champ=dc.champ AND c.id_form=d.id_form
 	JOIN spip_forms AS f ON f.id_form=d.id_form

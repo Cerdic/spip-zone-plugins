@@ -32,6 +32,7 @@ $spip_forms = array(
 	"public" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	"linkable" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	"documents" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
+	"documents_mail" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	"arborescent" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	'html_wrap' => "text",
 	"maj" 		=> "TIMESTAMP");
@@ -137,7 +138,7 @@ $tables_principales['spip_forms_donnees_champs'] = array(
 	'field' => &$spip_forms_donnees_champs,
 	'key' => &$spip_forms_donnees_champs_key);
 
-	
+
 
 //
 // Formulaires : Liens
@@ -153,7 +154,7 @@ $spip_forms_articles_key = array(
 $tables_auxiliaires['spip_forms_articles'] = array(
 	'field' => &$spip_forms_articles,
 	'key' => &$spip_forms_articles_key);
-	
+
 $spip_forms_donnees_articles = array(
 	"id_donnee" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
 	"id_article" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
@@ -193,7 +194,7 @@ $spip_forms_donnees_donnees_key = array(
 $tables_auxiliaires['spip_forms_donnees_donnees'] = array(
 	'field' => &$spip_forms_donnees_donnees,
 	'key' => &$spip_forms_donnees_donnees_key);
-	
+
 $spip_forms_donnees_auteurs = array(
 	"id_donnee" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
 	"id_auteur" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
@@ -240,12 +241,12 @@ $table_des_tables['forms_donnees']='forms_donnees';
 
 global $spip_version_code;
 if (version_compare($spip_version_code,'1.9250','<')){
-	$table_des_tables['forms_donnees_champs']='forms_donnees_champs'; 
-	$table_des_tables['forms_articles']='forms_articles'; 
-	$table_des_tables['forms_donnees_articles']='forms_donnees_articles'; 
-	$table_des_tables['forms_donnees_auteurs']='forms_donnees_auteurs'; 
-	$table_des_tables['forms_donnees_rubriques']='forms_donnees_rubriques'; 
-	$table_des_tables['documents_donnees']='documents_donnees'; 
+	$table_des_tables['forms_donnees_champs']='forms_donnees_champs';
+	$table_des_tables['forms_articles']='forms_articles';
+	$table_des_tables['forms_donnees_articles']='forms_donnees_articles';
+	$table_des_tables['forms_donnees_auteurs']='forms_donnees_auteurs';
+	$table_des_tables['forms_donnees_rubriques']='forms_donnees_rubriques';
+	$table_des_tables['documents_donnees']='documents_donnees';
 	$table_des_tables['forms_donnees_donnees']='forms_donnees_donnees';
 }
 

@@ -103,6 +103,7 @@ function Forms_update($id_form){
 	$public = _request('public');
 	$linkable = _request('linkable');
 	$documents = _request('documents');
+	$documents_mail = _request('documents_mail');
 	$html_wrap = _request('html_wrap');
 
 	$modif_champ = _request('modif_champ');
@@ -120,11 +121,11 @@ function Forms_update($id_form){
 	$supp_choix = _request('supp_choix');
 	$supp_champ = _request('supp_champ');
 	$ordonne_champs = _request('ordonne_champs');
-	
+
 	//
 	// Modifications des donnees de base du formulaire
 	//
-	
+
 	$nouveau_champ = $champ_visible = $ajout_choix = NULL;
 	// creation
 	if ($id_form == 'new' && $titre) {
@@ -147,6 +148,7 @@ function Forms_update($id_form){
 			"public="._q($public).", ".
 			"linkable="._q($linkable?$linkable:'non').", ".
 			"documents="._q($documents?$documents:'non').", ".
+			"documents_mail="._q($documents_mail?$documents_mail:'non').", ".
 			"html_wrap="._q($html_wrap)." ".
 			"WHERE id_form="._q($id_form);
 		$result = spip_query($query);
@@ -165,12 +167,13 @@ function Forms_update($id_form){
 		$public = $row['public'];
 		$linkable = $row['linkable'];
 		$documents = $row['documents'];
+		$documents_mail = $row['documents_mail'];
 		$email = unserialize($row['email']);
 		$champconfirm = $row['champconfirm'];
 		$html_wrap = $row['html_wrap'];
 		$texte = $row['texte'];
 	}
-	
+
 	if ($id_form) {
 		$champ_visible = NULL;
 		// Ajout d'un champ
