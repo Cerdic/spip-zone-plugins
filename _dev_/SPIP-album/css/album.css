@@ -25,6 +25,8 @@
     ------------------------------------------------------ */
 #diaporama {
 	border:1px solid transparent;
+	clear:both;
+/*	display:block;*/
 	margin:5px;
 	padding:5px;
 	text-align:center;
@@ -56,21 +58,17 @@
 .galerie_photo td, #bande_vignette td {
 	text-align:center;
 	vertical-align:middle; }
-
 #affiche_photo img {
 	margin:auto;
 	padding:auto;
 	text-align:center;
 	vertical-align:middle; }
-
 #titre_photo { margin-top:0.2em; }
-
 #galerie_compteur {
 	font-size: 0.77em;
 	color:#808080;
 	text-align:center;
 	margin:5px auto; }
-
 #bande_vignette .arrow {
 	width:25px;
 	text-align:center;

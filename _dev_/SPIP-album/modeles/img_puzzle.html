@@ -16,7 +16,8 @@
 		<param name="IMAGE" value="[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]">
 		<param name="HCELLS" value="[(#GET{larg}|div{50}|round)]">
 		<param name="VCELLS" value="[(#GET{haut}|div{50}|round)]">
-		<param name="SNAP" value="5"><:album:nojava:>
+		<param name="SNAP" value="5">
+		<:album:nojava:>
 	</applet>
 	<form id="form_puzzle" class="spip_form_puzzle">
 		<input type="button" name="btnResolve#ID_DOCUMENT" value="<:album:resoudre_puzzle:>" onclick="document.Puzzle#ID_DOCUMENT.resolve();">
