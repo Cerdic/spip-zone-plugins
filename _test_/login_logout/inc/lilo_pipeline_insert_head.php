@@ -100,6 +100,9 @@ function lilo_insert_head ($flux) {
 				width: auto;
 				display:block;
 			}
+			@media print {
+				#lilo-statut-public { display:none; }
+			}
 		"; // end $lilo_css_insert_head
 
 		$lilo_js_insert_head .= 
