@@ -28,7 +28,7 @@ function cfg_ajouter_onglets($flux) {
 
 
 /*
- * Gerer l'option <!-- header= xxx --> des fonds CFG
+ * Gerer l'option <!-- head= xxx --> des fonds CFG
  * 
  * (pas sur que cela fonctionne avec #FORMULAIRE_CFG, 
  *  il faudra verifier)
