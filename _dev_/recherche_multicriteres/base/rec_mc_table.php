@@ -1,0 +1,59 @@
+<?php
+######################################################################
+# RECHERCHE MULTI-CRITERES                                           #
+# Auteur: Dominique (Dom) Lepaisant - Octobre 2007                   #
+# Adaptation de la contrib de Paul Sanchez - Netdeveloppeur          #
+# http://www.netdeveloppeur.com                                      #
+# Ce programme est un logiciel libre distribue sous licence GNU/GPL. #
+# Pour plus de details voir le fichier COPYING.txt                   #
+######################################################################
+
+global $tables_principales;
+	global $tables_auxiliaires;
+
+$spip_rmc_rubs_groupes = array(
+			"id_groupe" => "int(11) NOT NULL default'0'",
+			"id_rubrique" => "int(11) NOT NULL default'0'"
+			);
+$spip_rmc_rubs_groupes_key = array(
+			"KEY id_groupe" => "id_groupe,id_rubrique"
+			);
+
+$spip_rmc_rubs_groupes_conf = array(
+			"colonnes" => "int(11) NOT NULL default'0'",
+			"colonnes_rub" => "int(11) NOT NULL default'0'",
+			"taille_police" => "int(11) NOT NULL default'0'",
+			"taille_police_rub" => "int(11) NOT NULL default'0'",
+			"couleur_police" => "varchar(255) NOT NULL default'0'",
+			"couleur_police_rub" => "varchar(255) NOT NULL default'0'",
+			"couleur_bordure" => "varchar(255) NOT NULL default'0'",
+			"couleur_bordure_rub" => "varchar(255) NOT NULL default'0'"
+			);
+$spip_rmc_rubs_groupes_conf_key = array(
+			"KEY colonnes" => "colonnes,colonnes_rub"
+			);
+			
+$spip_rmc_mots_exclus = array(
+			"id_mot_exclu" => "int(11) NOT NULL default'0'",
+			"id_rubrique" => "int(11) default NULL"
+			);
+$spip_rmc_mots_exclus_key = array(
+			"KEY id_mot_exclu" => "id_mot_exclu"
+			);
+
+
+$tables_principales['spip_rmc_rubs_groupes'] = array(
+			'field' => &$spip_rmc_rubs_groupes, 
+			'key' => &$spip_rmc_rubs_groupes_key
+			);
+$tables_principales['spip_rmc_rubs_groupes_conf'] = array(
+			'field' => &$spip_rmc_rubs_groupes_conf, 
+			'key' => &$spip_rmc_rubs_groupes_conf_key
+			);
+$tables_principales['spip_rmc_mots_exclus'] = array(
+			'field' => &$spip_rmc_mots_exclus, 
+			'key' => &$spip_rmc_mots_exclus_key
+			);
+
+?>
+
