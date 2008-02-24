@@ -35,4 +35,8 @@
 		<action>insert_head</action>
 		<inclure>rec_mc_pipe.php</inclure>
 	</pipeline>
+	<icone>cle24.gif</icone>
+<prefix>
+  rec_mc
+    </prefix>
 </plugin>
