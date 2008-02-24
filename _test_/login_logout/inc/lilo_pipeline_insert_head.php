@@ -124,7 +124,7 @@ function lilo_insert_head ($flux) {
 							$('input[@name=session_password_md5]').val(alea_actuel);
 							$('input[@name=next_session_password_md5]').val(alea_futur);
 							/* change logo uniquement si OK et page login */
-							if((login_voir_logo=='oui') && logo_src.length) {
+							if((login_voir_logo=='oui') && (logo_src.length)) {
 								$('img.lilo-logo').attr({ src: logo_src, alt: 'Logo auteur' });
 							}
 							return true;
@@ -163,7 +163,7 @@ function lilo_insert_head ($flux) {
 		// CSS
 		"
 			#lilo-statut-public {
-				font: normal 11px/normal 'Myriad Web Pro', Verdana, Arial, Helvetica, sans-serif;
+				font: normal 11px/normal 'Myriad Web Pro', 'Myriad Web', Verdana, Arial, Helvetica, sans-serif;
 				color: #fff;
 				background: #00f;
 				height: auto;
