@@ -183,7 +183,7 @@ function exec_spiplistes_liste_gerer () {
 			if($btn_modifier_courrier_auto) {
 //spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto <<", SPIPLISTES_LOG_DEBUG);
 				$sql_query = "";
-				$titre_message = spiplistes_titre_propre($titre_message);
+				$titre_message = $titre_message ; // attention propre -> <p>
 //spiplistes_log("LISTE MODIF: envoyer_maintenant".($envoyer_maintenant ? "oui" : "non"), SPIPLISTES_LOG_DEBUG);
 //spiplistes_log("LISTE MODIF: message_auto: $message_auto", SPIPLISTES_LOG_DEBUG);
 //spiplistes_log("LISTE MODIF: auto_mois: $auto_mois", SPIPLISTES_LOG_DEBUG);
