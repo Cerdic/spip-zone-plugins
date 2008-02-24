@@ -23,8 +23,10 @@ $GLOBALS['i18n_cfg_fr'] = array(
 'testmulti' => 'Exemple entr&eacute;es multiples',
 'testtable' => 'Exemple sur champs d\'une table sql',
 'testphp' => 'Exemple de stockage php',
+'testinclure' => 'Exemple d\'inclusion de squelette',
 'testcasier' => 'Exemple de casier',
 'testauteur' => 'Exemple sur champ extra/cfg de la table auteur',
+'extraarticles' => 'Exemple de champ extra sur un article',
 
 // textes cfg
 // C

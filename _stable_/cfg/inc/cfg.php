@@ -157,7 +157,11 @@ class cfg_dist extends cfg_formulaire
 		if (empty($nom) OR !is_string($nom)) $nom = $lien;
 		if (!find_in_path('fonds/cfg_'.$lien.'.html')) return "";
 		
-		return "<a href='" . generer_url_ecrire("cfg","cfg=$lien") . "'>$nom</a>\n"; // &cfg_id= <-- a ajouter ?
+		// si c'est le lien actif, pas de <a>
+		if (_request('cfg') == $lien) 
+			return "$nom\n";
+		else
+			return "<a href='" . generer_url_ecrire("cfg","cfg=$lien") . "'>$nom</a>\n"; // &cfg_id= <-- a ajouter ?
 	}
 	
 	
@@ -210,49 +214,10 @@ class cfg_dist extends cfg_formulaire
 
 		echo gros_titre(sinon($this->titre, _T('cfg:configuration_modules')), '', false);
 
-		echo  barre_onglets("configuration", "cfg");
+		echo barre_onglets("configuration", "cfg");
 
+		echo $this->barre_onglets_cfg();
 
-		if ($l = liste_cfg()) {
-			$res = debut_onglet();
-
-			$n = 0;
-			$classe_cfg = cfg_charger_classe('cfg');
-			foreach($l as $fonds => $cfg) {
-				$url = generer_url_ecrire(_request('exec'), 'cfg='.$fonds);
-				$path = dirname(dirname($cfg));
-
-				// On va chercher la config cible
-				// et on regarde ses donnees pour faire l'onglet
-				// seulement si l'onglet doit etre affiche
-				$tmp = & new $classe_cfg($fonds, $fonds,'');
-				if ($tmp->_permise && $tmp->onglet=='oui') {
-					// Faire des lignes s'il y en a effectivement plus de 6
-					if (!($n%6) && ($n>0))
-						$res .= fin_onglet().debut_onglet();
-					if ($tmp->titre)
-						$titre = $tmp->titre;
-					else
-						$titre = $fonds;
-					$icone = '';
-					if ($tmp->icone)
-						$icone = $path.'/'.$tmp->icone;
-					else if (file_exists($path.'/plugin.xml'))
-						$icone = 'plugin-24.gif';
-					else
-						$icone = _DIR_PLUGIN_CFG.'cfg-doc-22.png';
-					$actif = ($fonds == _request('cfg'));
-
-					$res .= onglet($titre, $url, 'cfg', $actif, $icone);
-
-					// Faire des lignes s'il y en a plus de 6
-					$n++;
-				}
-			}
-			$res .= fin_onglet();
-
-			echo $res;
-		}
 
 		echo debut_gauche('', true);
 
@@ -278,6 +243,105 @@ class cfg_dist extends cfg_formulaire
 	}
 
 
+	/*
+	 * Affiche la liste des onglets de CFG
+	 * 
+	 * Recupere les fonds CFG et analyse ceux-ci
+	 * - si onglet=oui : affiche l'onglet (valeur par defaut)
+	 * - si onglet=non : n'affiche pas l'onglet
+	 * - si onglet=fond_cfg_parent : n'affiche pas l'onglet, mais 'exposera' 
+	 * l'element parent indique (sous entendu que
+	 * le parent n'a pas 'onglet=non' sinon rien ne sera expose...
+	 * 
+	 */
+	function barre_onglets_cfg(){
+		$onglets = array();
+		
+		// scruter les onglets affichables ainsi que l'onglet 'expose'
+		if ($l = liste_cfg()) {
+			$classe_cfg = cfg_charger_classe('cfg');
+			foreach($l as $fonds => $cfg) {
+				
+				if (!isset($onglets[$fonds])) 
+					$onglets[$fonds] = array();
+				$args = array();
+				$args['afficher'] = false;
+				
+				// On va chercher la config cible
+				// et on regarde ses donnees pour faire l'onglet
+				// seulement si l'onglet doit etre affiche
+				$tmp = & new $classe_cfg($fonds, $fonds,'');
+
+				if ($tmp->_permise && $tmp->onglet=='oui') {
+					$args['afficher'] = true;
+					$args['url'] = generer_url_ecrire(_request('exec'), 'cfg='.$fonds);
+					
+					$path = dirname(dirname($cfg));
+					
+					// titre
+					if ($tmp->titre)
+						$args['titre'] = $tmp->titre;
+					else
+						$args['titre'] = $fonds;
+						
+					// icone		
+					$args['icone'] = '';
+					if ($tmp->icone)
+						$args['icone'] = $path.'/'.$tmp->icone;
+					else if (file_exists($path.'/plugin.xml'))
+						$args['icone'] = 'plugin-24.gif';
+					else
+						$args['icone'] = _DIR_PLUGIN_CFG.'cfg-doc-22.png';
+					
+					// onglet actif		
+					$args['actif'] = ($fonds == _request('cfg'));
+				}
+				
+				// rendre actif un parent si l'enfant est actif (onglet=nom_du_parent
+				// (/!\ ne pas le desactiver s'il a deja ete mis actif)
+				if ($tmp->_permise && $tmp->onglet && $tmp->onglet!='oui' && $tmp->onglet!='non'){
+					if (!isset($onglets[$tmp->onglet])) 
+						$onglets[$tmp->onglet]=array();
+					
+					if (!isset($onglets[$tmp->onglet]['enfant_actif'])) 
+						$onglets[$tmp->onglet]['enfant_actif']=false;
+						
+					$onglets[$tmp->onglet]['enfant_actif'] = 
+						($onglets[$tmp->onglet]['enfant_actif'] 
+						|| $fonds == _request('cfg'));
+				}
+				
+				$onglets[$fonds] = array_merge($args, $onglets[$fonds]); // conserver les donnees deja presentes ('enfant_actif')
+			}
+		}
+		
+		// retourner le code des onglets selectionnes
+		$res = "";
+		if ($onglets) {
+			$res = debut_onglet();
+			$n = -1;
+			foreach ($onglets as $titre=>$args){
+				if ($args['afficher']){
+					// Faire des lignes s'il y en a effectivement plus de 6
+					if (!(++$n%6) && ($n>0))
+						$res .= fin_onglet().debut_onglet();
+						
+					$res .= onglet(
+							$args['titre'], 
+							$args['url'], 
+							'cfg', 
+							($args['actif'] || $args['enfant_actif']), 
+							$args['icone']);
+				}	
+			}
+			
+			$res .= fin_onglet();
+			
+		}
+		return $res;
+	}
+	
+	
 	function fin_page()
 	{
 		return fin_gauche() . fin_page();

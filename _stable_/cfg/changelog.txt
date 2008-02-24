@@ -1,3 +1,11 @@
+v1.3.6 (24.02.2008)
+- les onglets s'enrichissent d'une nouvelle syntaxe.
+Il existait <!-- onglet=non --> qui n'affichait pas l'onglet, il y a maintenant
+<!-- onglet=fond_cfg_parent --> qui n'affiche pas l'onglet, mais va "exposer"
+le fond choisi si le fond courant est actif. (Il faut que le fond choisi
+ait son onglet visible par contre - ie: onglet=oui ou non renseigne)
+- Dans un fond cfg, si un lien pointe sur le fond en cours, la balise <a> ne sera pas mise
+
 v1.3.5 (24.02.2008)
 - les liens s'enrichissent d'une nouvelle syntaxe <!-- liens*=prefixe_plugin:fond_cfg -->
 permettant de mettre des chaines de langue sur les liens directement avec celles du plugin
