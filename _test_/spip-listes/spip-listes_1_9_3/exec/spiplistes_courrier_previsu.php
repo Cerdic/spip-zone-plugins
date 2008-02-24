@@ -26,6 +26,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
 
+$charset = lire_meta('charset');
+header("Content-Type: text/html charset=$charset");
+
 
 // adapté de abomailman ()
 // MaZiaR - NetAktiv
