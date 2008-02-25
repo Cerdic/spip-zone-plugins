@@ -81,18 +81,33 @@
 	</ul>
       </div>
 
+<hr class="spacer" /> [(#REM)   ajoute une barre hr invisible   ]
 
 
-			[(#REM) Retour à la page précédente ]
+ <div class="cellule_produit">
+   <ul class="cellule_deco">
+     <THELIA_VIGNETTE type="IMAGE" produit="THELIA-ID">
+       <li class="cel33"> [(#REM)   ouverture de la premiere cellule   ]
+
+        <h4>THELIA-TITRE</h4>
+
+             <p class="centre">
+
+		 <img src="THELIA-IMAGE" alt="THELIA-PRODTITRE" title="THELIA-PRODTITRE" />
+
+              </p>
+        </li>
+    </THELIA_VIGNETTE>
+   </ul>
+  </div>
+
+  [(#REM) Retour à la page précédente ]
 
 				<div id="pages">
 				<THELIA_PAGEPREC type="PAGE" rubrique="THELIA-RUBRIQUE_ID" caracteristique="THELIA-CARACTERISTIQUE_ID" caracdisp="THELIA-CARACTERISTIQUE_DISP" num="9" typeaff="0">
 				<a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-RUBRIQUE_ID&page_thelia=THELIA-PAGE_PREC}" class="LIEN_pages"><:spipthelia:page_precedente:></a>
 				</THELIA_PAGEPREC>
 				</div>
-
-
-
 </div>   [(#REM)   fermeture colone centre   ]
 
 <div class="width25 floatRight"> [(#REM)   ouverture colone de droite   ]
