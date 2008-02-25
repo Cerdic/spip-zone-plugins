@@ -102,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // P
 'photo_produit' => 'Photo',
 'produit' => 'Produits',
+'promo' => 'Promotion',
 'prix_unitaire' => 'Prix unitaire',
 'probleme_adresse_livraison' => 'Vous devez choisir une autre adresse de livraison. <br/>Nous ne r&eacute;alisons pas de livraison vers ce pays.',
 'page_precedente' => 'Page pr&eacute;c&egrave;dente',
