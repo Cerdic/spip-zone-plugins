@@ -202,6 +202,15 @@ label.icone_obligatoire{
 	margin: 6px 0 6px 6px;
 	padding:0;
 	}
+/* 3 colonnes sommaire*/
+.cellule_produit li.cel33{
+        width:31.5%;
+	}
+.cellule_produit li.cel33 h4{
+        word-spacing: 0.1em;
+	display:block;
+	-height:1%;
+	}        
 /* 5 colonnes */
 .cellule li.cel19{
         width:18.8%;
