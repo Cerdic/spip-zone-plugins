@@ -31,9 +31,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	// Trieuse 
 	
 	// - Verifie toutes les listes auto==oui publiques et privées
+	//   dont la date d'envoi est passee
 	// - crée le courrier pour la méleuse dans la table spip_courriers
 	// - determine les dates prochain envoi si periode > 0
 	// - si periode < 0, repasse la liste en dormeuse
+
+	// Precision sur la table spip_listes:
+	// 'date': date d'envoi souhaitee
+	// 'maj': date d'envoi du courrier mis a  jour par cron.
+	
 
 function cron_spiplistes_cron ($last_time) {
 	
@@ -54,7 +60,7 @@ spiplistes_log("CRON: cron_spiplistes_cron() <<", SPIPLISTES_LOG_DEBUG);
 		$$key = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 
-	$sql_select = "id_liste,titre,titre_message,date,message_auto,periode,lang,patron,statut";
+	$sql_select = "id_liste,titre,titre_message,date,maj,message_auto,periode,lang,patron,statut";
 
 	// demande les listes auto valides
 	$sql_query = "SELECT $sql_select FROM spip_listes 
@@ -90,6 +96,7 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
 		}
 		$id_liste = intval($id_liste);
 		$periode = intval($periode);
+		$dernier_envoi = $maj ;
 	
 		// demande id_auteur de la liste pour la signer
 		$id_auteur = spiplistes_mod_listes_get_id_auteur($id_liste);
@@ -105,7 +112,7 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
 			$sql_set = "date='" . __mysql_date_time($next_time) . "',maj=NOW()";
 		}
 		else if($periode) {
-			$next_time = strtotime($date) + (_SPIPLISTES_TIME_1_DAY * $periode);
+			$next_time = time() + (_SPIPLISTES_TIME_1_DAY * $periode);
 			$sql_set = "date='" . __mysql_date_time($next_time) . "',maj=NOW()";
 		}
 		else {
@@ -120,8 +127,9 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
 
 		/////////////////////////////
 		// preparation du courrier à placer dans le panier
+		// en cas de période, la date est dans le passé pour avoir les elements publies depuis cette date
 		include_spip('public/assembler');
-		$contexte_patron = array('date' => $date, 'patron'=>$patron, 'lang'=>$lang);
+		$contexte_patron = array('date' => $dernier_envoi, 'patron'=>$patron, 'lang'=>$lang);
 		$texte = recuperer_fond('patrons/'.$patron, $contexte_patron);
 		$titre = ($titre_message =="") ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
 		
@@ -144,10 +152,7 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
 		
 		/////////////////////////////
 		// Place le courrier dans le casier
-		$sql_query = "INSERT INTO spip_courriers (titre,date,statut,type,id_auteur,id_liste,date_debut_envoi,date_fin_envoi,texte) 
-			VALUES ("._q($titre).", NOW(),'$statut','"._SPIPLISTES_TYPE_LISTEAUTO."'
-			, $id_auteur, $id_liste, $date_debut_envoi, $date_fin_envoi,"._q($texte).")";
-
+	
 		$sql_query = "INSERT INTO spip_courriers (titre,date,statut,type,id_auteur,id_liste,date_debut_envoi,date_fin_envoi,texte) 
 			VALUES ("._q($titre).", NOW(),'$statut','"._SPIPLISTES_TYPE_LISTEAUTO."'
 			, $id_auteur, $id_liste, $date_debut_envoi, $date_fin_envoi,"._q($texte).")";

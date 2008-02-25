@@ -1,22 +1,23 @@
 <?php
 // _SPIPLISTES_EXEC_LISTE_GERER
 /******************************************************************************************/
-/* SPIP-listes est un syst�e de gestion de listes d'information par email pour SPIP      */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique G��ale GNU publi� par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribu�car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but sp�ifique. Reportez-vous �la Licence Publique G��ale GNU  */
-/* pour plus de d�ails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous � la Licence Publique Generale GNU  */
+/* pour plus de d�tails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir re� une copie de la Licence Publique G��ale GNU                    */
-/* en m�e temps que ce programme ; si ce n'est pas le cas, �rivez �la                  */
+/* Vous devez avoir re�u une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, �ats-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 // $LastChangedRevision$
 // $LastChangedBy$
@@ -27,11 +28,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
 
-	// Précision sur la table spip_listes:
-	// 'date': date d'envoi souhaitée
-	// 'maj': date d'envoi du courrier mis à jour par cron.
-	// 'description': (pas utilisé au 20071006)
-	// 'texte': description affichée dans formulaire abonnement
+	// Precision sur la table spip_listes:
+	// 'date': date d'envoi souhaitee
+	// 'maj': date d'envoi du courrier mis a� jour par cron.
+	// 'description': (pas utilise au 20071006)
+	// 'texte': description affichee dans formulaire abonnement
 	
 function exec_spiplistes_liste_gerer () {
 
@@ -49,11 +50,11 @@ function exec_spiplistes_liste_gerer () {
 		, $spip_lang_left,$spip_lang_right
 		;
 
-	// initialise les variables postées par le formulaire
+	// initialise les variables postees par le formulaire
 	foreach(array(
 		'new'	// nouvelle liste si 'oui'
-		, 'id_liste'// si modif dans l'éditeur
-		, 'btn_liste_edit', 'titre', 'texte', 'pied_page' // renvoyés par l'éditeur
+		, 'id_liste'// si modif dans l'editeur
+		, 'btn_liste_edit', 'titre', 'texte', 'pied_page' // renvoyes par l'editeur
 		, 'btn_modifier_diffusion', 'changer_lang', 'statut' // local
 		, 'btn_modifier_replyto', 'email_envoi' // local
 		, 'btn_modifier_courrier_auto', 'message_auto' // local
@@ -77,6 +78,7 @@ function exec_spiplistes_liste_gerer () {
 	$cherche_auteur = _request('cherche_auteur'); // ??
 	$debut = _request('debut'); // ??
 
+
 	$envoyer_maintenant = ($envoyer_maintenant == 'oui');
 	
 	$boite_pour_confirmer_envoi_maintenant = "";
@@ -87,7 +89,7 @@ function exec_spiplistes_liste_gerer () {
 	//////////////////////////////////////////////////////
 	// Creer une liste
 	////
-		// admin lambda peut créer une liste
+		// admin lambda peut creer une liste
 		$flag_editable = ($connect_statut == "0minirezo");
 		
 		if ($btn_liste_edit && ($new=='oui')) {
@@ -104,7 +106,7 @@ function exec_spiplistes_liste_gerer () {
 			//Auteur de la liste (moderateur)
 			spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_liste = "._q($id_liste));
 			spip_query("INSERT INTO spip_auteurs_mod_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
-			//abonne le moderateur à sa liste
+			//abonne le moderateur a� sa liste
 			spip_query("DELETE FROM spip_auteurs_listes WHERE id_liste = "._q($id_liste));
 			spip_query("INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
 		} 
@@ -123,7 +125,7 @@ function exec_spiplistes_liste_gerer () {
 		
 			$sql_query = "";
 
-			// Récupère les données de la liste courante pour optimiser l'update
+			// Recupa�re les donnees de la liste courante pour optimiser l'update
 			$sql_select = "statut,titre,date,lang";
 			if($row = spip_fetch_array(spip_query("SELECT $sql_select FROM spip_listes WHERE id_liste=$id_liste LIMIT 1"))) {
 				foreach(explode(",", $sql_select) as $key) {
@@ -131,7 +133,7 @@ function exec_spiplistes_liste_gerer () {
 				}
 			}
 			
-			// Retour de l'éditeur ?
+			// Retour de l'editeur ?
 			if($btn_liste_edit) {
 				$titre = corriger_caracteres($titre);
 				$texte = corriger_caracteres($texte);
@@ -159,7 +161,7 @@ function exec_spiplistes_liste_gerer () {
 				// Modifier le statut ?
 				if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS)) && ($statut!=$current_liste['statut'])) {
 					$sql_query .= "statut='$statut',";
-					// si la liste passe en privée, retire les invités
+					// si la liste passe en privee, retire les invites
 					if($statut == _SPIPLISTES_PRIVATE_LIST) {
 						$auteur_statut = '6forum';
 						spip_query("DELETE FROM spip_auteurs_listes
@@ -174,7 +176,7 @@ function exec_spiplistes_liste_gerer () {
 				}
 			}
 			
-			// Modifier l'adresse email de réponse ?
+			// Modifier l'adresse email de reponse ?
 			if($btn_modifier_replyto && email_valide($email_envoi) && ($email_envoi!=$current_liste['email_envoi'])) {
 				$sql_query .= "email_envoi="._q($email_envoi).",";
 			}
@@ -196,8 +198,9 @@ function exec_spiplistes_liste_gerer () {
 					$sql_query .= "message_auto='oui',titre_message="._q($titre_message).",";
 
 					if(time() > strtotime($envoyer_quand)) {
-					// envoi dans le passé est considéré comme envoyer maintenant
+					// envoi dans le passe est considere comme envoyer maintenant
 						$envoyer_maintenant = true;
+						$date_depuis = $envoyer_quand ;
 						$envoyer_quand = false;
 					}
 					
@@ -215,7 +218,11 @@ function exec_spiplistes_liste_gerer () {
 							. "</form>"
 							. fin_cadre_couleur(true)
 							;
+						if($date_depuis){
+						$sql_query .= "maj='$date_depuis',periode=$periode,";
+						}
 						$date_prevue = __mysql_date_time(time());
+						
 					}
 					else if($envoyer_quand) {
 							$sql_query .= "date='$envoyer_quand',periode=$periode,";
@@ -223,6 +230,8 @@ function exec_spiplistes_liste_gerer () {
 					if($auto_mois) {
 //spiplistes_log("LISTE MODIF: message_auto: $message_auto", SPIPLISTES_LOG_DEBUG);
 						$sql_query .= "statut='"._SPIPLISTES_MONTHLY_LIST."',";
+					}else{
+						$sql_query .= "statut='inact',";
 					}
 				}
 				else if($message_auto == 'non') {
@@ -249,12 +258,12 @@ function exec_spiplistes_liste_gerer () {
 	}
 
 	//////////////////////////////////////////////////////
-	// Recharge les données la liste
+	// Recharge les donnees la liste
 	$result = spip_query("SELECT * FROM spip_listes WHERE id_liste="._q($id_liste)." LIMIT 1");
 
 	if($row = spip_fetch_array($result)) {
 		foreach(array(
-		// initialise les variables du résultat SQL
+		// initialise les variables du resultat SQL
 			'id_liste', 'titre', 'texte'
 			, 'titre_message', 'pied_page', 'date', 'statut', 'maj'
 			, 'email_envoi', 'message_auto', 'periode', 'patron', 'lang'
@@ -271,12 +280,12 @@ function exec_spiplistes_liste_gerer () {
 
 	$nb_abonnes = spiplistes_nb_abonnes_count ($id_liste);
 
-	// préparation des boutons 
+	// preparation des boutons 
 	if($flag_editable) {
 		// Propose de modifier la liste 
 		$gros_bouton_modifier = 
 			icone (
-				_T('spiplistes:Modifier_cette_liste') // légende bouton
+				_T('spiplistes:Modifier_cette_liste') // legende bouton
 				, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_EDIT,'id_liste='.$id_liste) // lien
 				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif" // image du fond
 				, "edit.gif" // image de la fonction. Ici, le crayon
@@ -306,7 +315,7 @@ function exec_spiplistes_liste_gerer () {
 
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
-	// la gestion des listes de courriers est réservée aux admins 
+	// la gestion des listes de courriers est reservee aux admins 
 	if($connect_statut != "0minirezo") {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
@@ -485,7 +494,7 @@ function exec_spiplistes_liste_gerer () {
 		$page_result .= "<p class='verdana2'>"._T('spiplistes:Pas_de_courrier_auto_programme')."</p>\n";
 	else {
 		$page_result .= ""
-			// petite ligne d'info si envoi programmé
+			// petite ligne d'info si envoi programme
 			. "<p class='verdana2'>"._T('spiplistes:sujet_courrier_auto')."<br />\n"
 			. "<span class='spip_large'> ".$titre_message."</span></p>\n"
 			. "<p class='verdana2'>"
@@ -542,10 +551,11 @@ function exec_spiplistes_liste_gerer () {
 		. "<ul style='list-style-type:none;'>\n"
 		. "<li>"._T('spiplistes:message_sujet').": <input type='text' name='titre_message' value='".$titre_message."' size='50' class='fondl' /> </li>\n"
 		//
-		// chrono début de mois
+		// chrono debut de mois
 		. "
 <script type='text/javascript'><!--
 	function auto_mois_switch(c) {
+		
 		jQuery('#auto_oui').click();
 		if(c.checked) {
 				jQuery('#periode_jours').hide();
@@ -553,6 +563,7 @@ function exec_spiplistes_liste_gerer () {
 		else {
 				jQuery('#periode_jours').show();
 		}
+		
 	}
 --></script>		"
 		// checkbo message mensuel
@@ -653,7 +664,7 @@ function exec_spiplistes_liste_gerer () {
 			. debut_cadre_relief("", true)."\n"
 			//
 			//////////////////////////
-			// propose de forcer les membres sauf invités si la liste est privée
+			// propose de forcer les membres sauf invites si la liste est privee
 			.	(
 					($statut==_SPIPLISTES_PRIVATE_LIST)
 					? "<div class='verdana2'><input type='radio' name='forcer_abo' value='auteurs' id='forcer_abo_tous' />\n"
@@ -661,7 +672,7 @@ function exec_spiplistes_liste_gerer () {
 					: ""
 				)
 			//
-			// propose de forcer les invités si la liste est publique ou périodique
+			// propose de forcer les invites si la liste est publique ou periodique
 			.	(
 					(($statut!=_SPIPLISTES_PRIVATE_LIST) && ($statut!=_SPIPLISTES_TRASH_LIST))
 					? "<div class='verdana2'><input type='radio' name='forcer_abo' value='6forum' id='forcer_abo_6forum' />\n"
@@ -707,21 +718,21 @@ function spiplistes_pied_page_html_get ($pied_patron, $lang = "") {
 
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'abonnés et d'envoi d'information     */
+/* SPIP-listes est un systa�me de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email  pour SPIP.                                                                  */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Généale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a� la Licence Publique Geneale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir rea�u une copie de la Licence Publique Generale GNU                    */
+/* en ma�me temps que ce programme ; si ce n'est pas le cas, ecrivez a� la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
