@@ -164,6 +164,10 @@ function demarrer_site($site = '', $options = array()) {
 		_DIR_RACINE .'dist/javascript/:' . // +
 		_DIR_RESTREINT);
 
+	// definir une constante qui contient l'adresse du repertoire du site mutualise
+	// peut servir dans les fichiers mes_options des sites inclus
+	// par exemple avec  $GLOBALS['dossier_squelettes'] = _DIR_SITE . 'squelettes:' . _DIR_SITE . 'cheznous:dist';
+	define('_DIR_SITE' , $e);
 
 	if (is_dir($e.'squelettes'))
 		$GLOBALS['dossier_squelettes'] = $options['repertoire'].'/' . $site . '/squelettes';
