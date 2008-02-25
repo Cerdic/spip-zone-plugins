@@ -1,13 +1,12 @@
 <?php
 
 function op_ajouterBouton($boutons_admin) {
-	// si on est admin
-	if ($GLOBALS['connect_statut'] == "0minirezo") {
-    // on voit le bouton dans la barre "naviguer"
-	    $boutons_admin['configuration']->sousmenu['op']= new Bouton(
-		    '../'._DIR_PLUGINS.'openPublishing/images/opconfig-24.gif', _T('opconfig:configurer_op'));
-	}
-	return $boutons_admin;
+  if ($GLOBALS['connect_statut'] == "0minirezo") {
+       // on voit le bouton comme  sous-menu de "naviguer"
+       $boutons_admin['naviguer']->sousmenu['cfg&cfg=aa']= new Bouton('../'._DIR_PLUGINS.'openPublishing/images/opconfig-24.gif',
+	 _T('opconfig:configurer_op') );
+    }
+    return $boutons_admin;
 }
 
 function op_ajouterOnglets($flux) {
