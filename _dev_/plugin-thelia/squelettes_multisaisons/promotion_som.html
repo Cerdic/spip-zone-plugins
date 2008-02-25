@@ -1,0 +1,28 @@
+<div class="cellule_produit">
+     <ul class="cellule_deco">
+       <THELIA_PROD type="PRODUIT" rubrique="THELIA-RUBRIQUE_ID" promo="1" num="6">
+       <li class="cel33"> [(#REM)   ouverture de la premiere cellule   ]
+
+             <h4><:spipthelia:promo:></a></h4>
+
+
+                <a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique=THELIA-ID}">
+		<THELIA_IMAGE type="IMAGE" num="1" produit="THELIA-ID">
+ 		  <img src="THELIA-IMAGE" alt="THELIA-PRODTITRE" title="THELIA-PRODTITRE" />
+                </THELIA_IMAGE>
+                </a>
+
+               <p class="centre">
+                  <THELIA_CARACTERISTIQUE type="CARACVAL" produit="THELIA-ID" caracteristique="1">
+	              THELIA-VALEUR
+                  </THELIA_CARACTERISTIQUE>
+                  THELIA-CHAPO<br />
+                  THELIA-PRIX &euro;<br />
+                  THELIA-PRIX2&euro;<br />
+                  <a href="#URL_PAGE{panier,thelia_action=ajouter&amp;ref=THELIA-REF}"><:spipthelia:ajouter_panier:></a><br />
+               </p>
+             </li>
+            </THELIA_PROD>
+           </ul>
+
+      </div>[(#REM)  fermeture cellule_produit  ]
