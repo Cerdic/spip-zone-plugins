@@ -81,11 +81,11 @@ if(stop_la != "oui"){
 	if (statut_fixe=="pas_fixe" && !document.all){
 		barre_boutons.style.position="fixed";
 		document.images['montrer1'].style.position="fixed";
-		document.images['statut_fixation'].src="./fixe.png";
+		document.images['statut_fixation'].src=localisation_fixe;
 		document.images['statut_fixation'].title="Ne pas garder au premier plan";
 	}
 	else if (statut_fixe=="fixe" && !document.all){
-		document.images['statut_fixation'].src="./pas_fixe.png";
+		document.images['statut_fixation'].src=localisation_pas_fixe;
 	}
 }
 
@@ -99,19 +99,19 @@ function fixer_barre(valeur){
 	if(valeur=="fixe" && !document.all){
 		barre_boutons.style.position="fixed";
 		document.images['montrer1'].style.position="fixed";
-		document.images['statut_fixation'].src="./fixe.png";
+		document.images['statut_fixation'].src=localisation_fixe;
 		document.images['statut_fixation'].title="Ne pas garder au premier plan";
 		createCookie("statut_fixe","pas_fixe",7);
 	}
 	else if (valeur=="pas_fixe" && !document.all){
 		barre_boutons.style.position="absolute";
-		document.images['statut_fixation'].src="./pas_fixe.png";
+		document.images['statut_fixation'].src=localisation_pas_fixe;
 		document.images['statut_fixation'].title="Garder au premier plan";
 		document.images['montrer1'].style.position="absolute";
 		createCookie("statut_fixe","fixe",7);
 	}
 	else {
-		document.images['statut_fixation'].src="./rien.gif";
+		document.images['statut_fixation'].src=localisation_rien;
 	}
 }
 function quitter(url_quitter){
