@@ -1,27 +1,28 @@
 #CACHE{86400}
 
-<div style="background-color: #eee; text-style: justify; padding:5px; margin: 5px; margin-right:5px">
+<fieldset><legend><b><:opconfig:document_joint:></b></legend>
+	<table>
+	<tr><td valign="top" width="50%">
+		<p><b><:opconfig:telecharger_document:></b></p>
+		<small>
+		<p>
+		<input name='doc' type='file' class='fondl' style='width: 100%;'><br>
+		<input type=radio name="type" value="vignette" checked>&nbsp;<:opconfig:image_inclusion:><br>
+		<input type=radio name="type" value="document">&nbsp;<:opconfig:document_inclusion:><br>
+		</p>
 
-	<b><:opconfig:document_joint:></b>
-	
-	<p><:opconfig:document_explique:></p>
-	<p><b><:opconfig:extensions_acceptees:></b></p>
-	<p><small>[(#ENV*{tab_ext}|afficher_tab)]</small></p>
+		<p>
+		<input name='media' type='submit' VALUE='#ENV*{bouton}' CLASS='spip_bouton'>
+		<input type="hidden" name="id_article" value="#ENV*{id_article}">
+		</p>
+		</small>
+		<br>
+	</td><td valign="top" width="50%">
 
-	<p><b><:opconfig:telecharger_document:></b></p>
-	<small>
-	<p>
-	<input name='doc' type='file' class='fondl' style='width: 100%;'><br>
-	<input type=radio name="type" value="vignette" checked>&nbsp;<:opconfig:image_inclusion:><br>
-	<input type=radio name="type" value="document">&nbsp;<:opconfig:document_inclusion:><br>
-	</p>
+		<p><:opconfig:document_explique:></p>
 
-	<p>
-	<input name='media' type='submit' VALUE='#ENV*{bouton}' CLASS='spip_bouton'>
-	<input type="hidden" name="id_article" value="#ENV*{id_article}">
-	</p>
-	</small>
-	<br>
 
-	</div>
+	</td></tr>
+	</table>
+</fieldset>
 

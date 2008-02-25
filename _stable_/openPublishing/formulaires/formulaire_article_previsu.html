@@ -1,27 +1,33 @@
 #CACHE{86400}
 
-<h2 class="previsualisation"><center><:opconfig:previsualisation:></center></h2><br />
+<fieldset><legend><:opconfig:previsualisation:></legend>
 
-<div class="block">
-[<div class="block-titre"><b>&nbsp;&nbsp;(#ENV*{titre})</b></div>]
+[<p><b>&nbsp;&nbsp;(#ENV*{surtitre})</b></p>>]
+[<p><b>&nbsp;&nbsp;(#ENV*{titre})</b></p>]
+[<p><b>&nbsp;&nbsp;(#ENV*{soustitre})</b></p>]
+<hr />
+[<p>(#ENV*{descriptif})</p>]
+[<p>(#ENV*{chapo})</p>]
 
-<div class="block-contenu">
-	<p>
-	[(#ENV*{texte}|image_reduire{800,0})]
-	[(#ENV*{erreur})]
-	</p>
+<p>
+[(#ENV*{texte}|image_reduire{800,0})]
+[(#ENV*{erreur})]
+</p>
 
-</div>
-<div class="block-pied">
+<hr />
+[<p>(#ENV*{ps})</p>]
+
+<hr />
+<p>
 	le&nbsp;[(#ENV*{date_redac}|affdate)][, <:par_auteur:> (#LESAUTEURS)]
 		[, &nbsp;Auteur : (#ENV*{nom_inscription})]
 		[, &nbsp;Mail : (#ENV*{mail_inscription})]
 		[, &nbsp;T&eacute;l&eacute;phone : (#ENV*{phone})]
 		[, &nbsp;Groupe : (#ENV*{group_name})]
-</div>
+</p>
 
-</div>
+</fieldset>
 
-<br>
-<br>
+<br />
+<br />
 

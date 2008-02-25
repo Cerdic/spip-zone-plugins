@@ -1,33 +1,39 @@
-#CACHE{86400}
 
-<div style="background-color: #eee; text-style: justify; padding:5px; margin: 5px; margin-right:5px">
 
-	<b><:opconfig:motclefs:></b>
-	<p><:opconfig:motclefs_explique:></p>
-	<p><:opconfig:motclefs_explique2:></p>
+<fieldset><legend><b><:opconfig:motclefs:></b></legend>
+	<table>
+	<tr><td valign="top" width="50%">
+		<select name='motschoix[]' multiple size='20'>
+		<BOUCLE_groupes(GROUPES_MOTS)>
+			<option value="">[(#TITRE|majuscules)]</option>
+			<BOUCLE_mots(MOTS){par titre}{id_groupe}>
+				<option value="#ID_MOT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#TITRE</option>
+			</BOUCLE_mots>
+		</BOUCLE_groupes>
+		</select>
 
-	<select name='motschoix[]' multiple size='8'>
-	<BOUCLE_groupes(GROUPES_MOTS)>
-		<option value="">[(#TITRE|majuscules)]</option>
-		<BOUCLE_mots(MOTS){par titre}{id_groupe}>
-			<option value="#ID_MOT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#TITRE</option>
-		</BOUCLE_mots>
-	</BOUCLE_groupes>
-	</select>
+		<small>
+		<p>
+		<input name='mots' type='submit' VALUE='#ENV*{bouton}' CLASS='spip_bouton'>
+		<input type="hidden" name="id_article" value="#ENV*{id_article}">
+		</p>
+		</small>
 
-	<small>
-	<p>
-	<input name='mots' type='submit' VALUE='#ENV*{bouton}' CLASS='spip_bouton'>
-	<input type="hidden" name="id_article" value="#ENV*{id_article}">
-	</p>
-	</small>
+		<B_motarticle>
+		<b><:opconfig:motclefs_liste:></b><br />
+		<BOUCLE_motarticle(MOTS){par titre}{id_article = #ENV*{id_article} }>
+			[(#TITRE),&nbsp;]
+		</BOUCLE_motarticle>
+		</B_motarticle>
+		<br>
 
-	<B_motarticle>
-	<b><:opconfig:motclefs_liste:></b><br />
-	<BOUCLE_motarticle(MOTS){par titre}{id_article = #ENV*{id_article} }>
-		[(#TITRE),&nbsp;]
-	</BOUCLE_motarticle>
-	</B_motarticle>
-	<br>
+	</td><td valign="top" width="50%">
 
-	</div>
+
+		<p><:opconfig:motclefs_explique:></p>
+		<p><:opconfig:motclefs_explique2:></p>
+
+
+	</td></tr>
+	</table>
+</fieldset>

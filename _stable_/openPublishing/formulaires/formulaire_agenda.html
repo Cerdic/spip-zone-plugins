@@ -1,26 +1,33 @@
-#CACHE{86400}
 
-<div style="background-color: #eee; text-style: justify; padding:5px; margin: 5px; margin-right:5px">
+<fieldset><legend><b><:opconfig:ajouter_agenda:></b></legend>
+	<table>
+	<tr><td valign="top" width="50%">
 
-	<b><:opconfig:ajouter_agenda:></b>
+		
 
-	<p><:opconfig:agenda_explique2:></p>
-	<p><:opconfig:explication_agenda:></p>
-
-
-	<p>
-	[(#ENV**{choix_agenda}|checkbox_agenda)]
-	<br />
-	[(#ENV**{annee}|select_annee)]
-	&nbsp;/&nbsp;
-	[(#ENV**{mois}|select_mois)]
-	&nbsp;/&nbsp;
-	[(#ENV{jour}|select_jour)]
-	&nbsp;:&nbsp;
-	[(#ENV{heure}|select_heure)]
-	<br />
+		<p>
+		[(#ENV**{choix_agenda}|checkbox_agenda)]
+		<br />
+		[(#ENV**{annee}|select_annee)]
+		&nbsp;/&nbsp;
+		[(#ENV**{mois}|select_mois)]
+		&nbsp;/&nbsp;
+		[(#ENV{jour}|select_jour)]
+		&nbsp;:&nbsp;
+		[(#ENV{heure}|select_heure)]
+		<br />
 	
-	</p>
-	<br />
+		</p>
+		<br />
 
-</div>
+	</td><td valign="top" width="50%">
+
+		<p><:opconfig:agenda_explique2:></p>
+		<p><:opconfig:explication_agenda:></p>
+
+
+	</td></tr>
+	</table>
+
+</fieldset>
+
