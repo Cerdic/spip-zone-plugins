@@ -84,6 +84,11 @@ function balise_FORMULAIRE_ARTICLE_dyn($id_rubrique) {
 
 global $_FILES, $_HTTP_POST_FILES;
 
+/* récupération des données de configuration
+ */
+
+$config = lire_config('op');
+
 
 /* securite (additif spip_indy, peut-être toujour utile)
  * pour eviter qu'un article soit modifié apres avoir été publié
@@ -98,7 +103,7 @@ if($article) {
 		// warning , une erreur 404 serait peut etre mieux ?
 	 	die("<H3> D&eacute;sol&eacute;, sorry, lo siento : On ne peut pas modifier l'article demand&eacute;.</H3>");
 	}
-        $query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$article AND id_auteur=$connect_id_auteur";
+        $query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$article AND id_auteur=".$config['IDAuteur'];
         $result_auteur = spip_query($query);
         $flag_auteur = (mysql_num_rows($result_auteur) > 0);
 	if(!$flag_auteur) {
@@ -106,19 +111,9 @@ if($article) {
         }
 }
 
-
-
-/* récupération des données de configuration
- * on récupere la rubrique agenda
- * on récupere l'id de l'auteur anonymous
- */
-
-$rubrique_breve = op_get_rubrique_agenda(); 
-$connect_id_auteur =  op_get_id_auteur();
-
 // si l'auteur anonymous n'est pas dans la base, le plugin openpublishing doit être mal installé
 
-if(!$connect_id_auteur) {
+if(!$config['IDAuteur']) {
 	echo _T('opconfig:erreur_anonymous');
 	die(_T('opconfig:erreur_die'));
 }
@@ -177,13 +172,16 @@ if ($id_rubrique) { if (!$rubrique) { $rubrique=$id_rubrique;}}
 
 $titre			= stripslashes(_request('titre'));
 $texte			= stripslashes(_request('texte'));
+$surtitre		= stripslashes(_request('surtitre'));
+$soustitre		= stripslashes(_request('soustitre'));
+$chapo			= stripslashes(_request('chapo'));
+$descriptif		= stripslashes(_request('descriptif'));
+$ps			= stripslashes(_request('ps'));
 
 // donnée identification
 
 $nom_inscription	= stripslashes(_request('nom_inscription'));
 $mail_inscription	= stripslashes(_request('mail_inscription'));
-$group_name		= stripslashes(_request('group_name'));
-$phone			= stripslashes(_request('phone'));
 
 // le message d'erreur
 
@@ -211,6 +209,11 @@ if ($nom_inscription) $nom_inscription = entites_html($nom_inscription);
 if ($mail_inscription) $mail_inscription = entites_html($mail_inscription);
 if ($group_name) $group_name = entites_html($group_name);
 if ($phone) $phone = entites_html($phone);
+if ($surtitre) $surtitre = entites_html($surtitre);
+if ($soustitre) $soustitre = entites_html($soustitre);
+if ($chapo) $chapo = entites_html($chapo);
+if ($descriptif) $descriptif = entites_html($descriptif);
+if ($ps) $ps = entites_html($ps);
 
 // Si l'utilisateur a cliqué sur le bouton "abandonner"
 
@@ -224,16 +227,16 @@ if ($abandonner) {
 
 	// construction de la page de retour
 
-	$url_retour = $url_site . op_get_url_abandon() ;
-	$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">' . op_get_renvoi_abandon();
-	$message = $message . $retour;
+	$url_retour = $url_site . $config['UrlAbandon'] ;
+	$message = '<META HTTP-EQUIV="refresh" content="'.$config['TempsAtt'].'; url='.$url_retour.'">' . $config['TextAbandon'];
+	//$message = $message . $retour;
 	return $message;
 }
 
 // on demande un nouvel identifiant pour l'article si l'utilisateur clique sur l'un des boutons action
 
 if (($previsualiser) || ($media) || ($valider) || ($tags) || ($mots)) {
-	if (!$article) $article=op_request_new_id($connect_id_auteur);
+	if (!$article) $article=op_request_new_id($config['IDAuteur']);
 }
 
 
@@ -248,40 +251,35 @@ if($auteur_session) {
 // l'auteur demande la publication de son article
 
 if($valider) {
+	// vérification avant mise en Base de donnée
+	$flag_ok = 'ok';
 
 	// récupération du statut par défaut de l'article
-
-	$statut = op_get_statut();
+	$statut = $config['StatutArt'];
 
 	// vérifications et traitements des champs texte
 	// Anti spam (remplace les @ par un texte aléatoire)
-	$flag = op_get_antispam();
-	if ($flag == 'oui') {
+	if ($config['AntiSpam'] == 'yes') {
 		$texte = antispam($texte);
 		$mail_inscription = antispam($mail_inscription);
 	}
 
 	// pas de majuscule dans le titre d'un article
-	$flag = op_get_titre_minus();
-	if ($flag == 'oui') {
+	if ($config['TitreMaj'] != 'yes') {
  		$titre = strtolower($titre);
 	}
 
-	// vérification avant mise en Base de donnée
-	$flag_ok = 'ok';
-	// vérification taille du titre : si trois caractère ou moins : erreur
-	if (strlen($titre) < 4) {
+	// vérification taille du titre : si x caractère ou moins : erreur
+	if (strlen($titre) < $config['TitreMin']) {
 		$flag_ok = 'ko';
-		$mess_error = _T('forum_attention_trois_caracteres');
+		$mess_error = _T('opconfig:erreur_min_len') . $config['TitreMin'] . _T('opconfig:caracteres');
 	}
 		
 
 	// l'auteur demande une insertion dans l'agenda
-
 	if (($choix_agenda == "OK") && ($flag_ok == 'ok')) {
 
 		// construction de la date complete
-
 		$tableau = split('[:]', $heure);
 		$heure = $tableau[0];
 		$minute = $tableau[1];
@@ -299,11 +297,10 @@ if($valider) {
 		" . spip_abstract_quote($texte) . ",
 		" . spip_abstract_quote($lien_url) . ",
 		" . spip_abstract_quote($statut) . ",
-		" . spip_abstract_quote($rubrique_breve) . "
+		" . spip_abstract_quote($config['RubAgenda']) . "
 		)");
 
 		// supression de l'article temporaire
-
 		spip_query("DELETE FROM spip_articles WHERE id_article = '$article' LIMIT 1");
 	}
 	else if ($flag_ok== 'ok') { // soit il s'agit d'un article, soit d'une breve. Les deux à la fois ne sont pas possible
@@ -321,6 +318,11 @@ if($valider) {
  
 		$retour = spip_query('UPDATE spip_articles SET titre = ' . spip_abstract_quote($titre) .
 				',	id_rubrique = ' . spip_abstract_quote($rubrique) .
+				',	surtitre = ' . spip_abstract_quote($surtitre) .
+				',	soustitre = ' . spip_abstract_quote($soustitre) .
+				',	chapo = ' . spip_abstract_quote($schapo) .
+				',	descriptif = ' . spip_abstract_quote($descriptif) .
+				',	ps = ' . spip_abstract_quote($ps) .
 				',	texte = ' . spip_abstract_quote($texte) .
 				',	statut = ' . spip_abstract_quote($statut) .
 				',	lang = ' . spip_abstract_quote($lang) .
@@ -336,7 +338,7 @@ if($valider) {
 		// on lie l'article à l'auteur anonymous
 
 		spip_abstract_insert('spip_auteurs', "(id_auteur,id_article)", "(
-			" . spip_abstract_quote($id_anonymous) .",
+			" . spip_abstract_quote($config['IDAuteur']) .",
 			" . spip_abstract_quote($article) . "
 			)");
 	
@@ -345,20 +347,23 @@ if($valider) {
 		spip_abstract_insert('spip_op_auteurs', "(id_auteur,id_article,id_real_auteur,nom,email,group_name,phone)", "(
 			" . intval($id_auteur_op) .",
 			" . spip_abstract_quote($article) . ",
-			" . spip_abstract_quote($id_anonymous) . ",
+			" . spip_abstract_quote($config['IDAuteur']) . ",
 			" . spip_abstract_quote($nom_inscription) . ",
-			" . spip_abstract_quote($mail_inscription) . ",
-			" . spip_abstract_quote($group_name) . ",
-			" . spip_abstract_quote($phone) . "
+			" . spip_abstract_quote($mail_inscription) . "
 			)");
 	
 	}
 	
-	// construction de la page de retour
 	if ($flag_ok == 'ok') {
-		$url_retour = $url_site . op_get_url_retour();
-		$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">' . op_get_renvoi_normal();
-		$message = $message . $retour;
+		// notification des admins
+		//include_spip('inc/mail');
+		//envoyer_mail("edd@riseup.net", "test", "ceci est un test de notification", $from = "", $headers = "");
+
+
+		// construction de la page de retour
+		$url_retour = $url_site . $config['UrlValidation'];
+		$message = '<META HTTP-EQUIV="refresh" content="'.$config['TempsAtt'].'; url='.$url_retour.'">' . $config['TextValidation'];
+		//$message = $message . $retour;
 		return $message;
 	}
 }
@@ -367,17 +372,21 @@ if($valider) {
 
 
 // statut de l'article : en préparation
-
 $statut="prepa";
 	
 // si l'auteur demande la prévisualisation
 
 if($previsualiser) {
 
-	// quelques petites vérifications
+	// vérification taille du titre : si x caractère ou moins : erreur
+	if (strlen($titre) < $config['TitreMin']) {
+		$flag_ok = 'ko';
+		$mess_error = _T('opconfig:erreur_min_len') . $config['TitreMin'] . _T('opconfig:caracteres');
+	}
 
-	if (strlen($titre) < 3){$erreur .= _T('forum_attention_trois_caracteres');}
-	if(!$erreur){$bouton= _T('form_prop_confirmer_envoi');}
+	if(!$erreur){
+		$bouton= _T('form_prop_confirmer_envoi');
+	}
 
 	// on rempli le formulaire de prévisualisation
 
@@ -385,13 +394,16 @@ if($previsualiser) {
 	array('formulaires/formulaire_article_previsu', 0,
 		array(
 			'date_redac' => $date_redac,
+			'surtitre' => interdire_scripts(typo($surtitre)),
+			'soustitre' => interdire_scripts(typo($soustitre)),
+			'chapo' => propre($chapo),
+			'descriptif' => propre($descriptif),
+			'ps' => propre($ps),
 			'titre' => interdire_scripts(typo($titre)),
 			'texte' => propre($texte),
 			'erreur' => $erreur,
 			'nom_inscription' => $nom_inscription,
-			'mail_inscription' => $mail_inscription,
-			'group_name' => $group_name,
-			'phone' => $phone
+			'mail_inscription' => $mail_inscription
 		)
 	), false);
 
@@ -400,8 +412,7 @@ if($previsualiser) {
 	"<\\1no-f\\2", $formulaire_previsu);
 }
 	
-	// si l'auteur demande des mots-clefs
-
+// si l'auteur demande des mots-clefs
 if($mots) {
 	if ($motschoix){
 		foreach($motschoix as $mot){
@@ -442,11 +453,9 @@ if ($tags) {
 if($media) {
 
 	// compatibilité php < 4.1
-
 	if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
 		
 	// récupération des variables
-
 	$fichier = $_FILES['doc']['name'];
 	$size = $_FILES['doc']['size'];
 	$tmp = $_FILES['doc']['tmp_name'];
@@ -454,7 +463,6 @@ if($media) {
 	$error = $_FILES['doc']['error'];
 		
 	// vérification si upload OK
-
 	if( !is_uploaded_file($tmp) ) {
 		echo $error;
 		$mess_error = _T('opconfig:erreur_upload');
@@ -463,12 +471,10 @@ if($media) {
 	else {
 
 		// verification si extention OK
-
 		$tableau = split('[.]', $fichier);
 		$type_ext = $tableau[1];
 	
 		// renomme les extensions
-
 		if (strcmp($type_ext,"jpeg")==0) $type_ext = "jpg";
 			
 		$tab_ext = get_types_documents();
@@ -476,7 +482,6 @@ if($media) {
 		$ok = 0;
 
 		// test si l'extension est autorisé
-
 		while ($row = mysql_fetch_array($tab_ext)) {
 			if (strcmp($row[0],$type_ext)==0) {
 				$ok = 1;
@@ -484,7 +489,6 @@ if($media) {
 		}
 
 		// ajout du document
-
 		if ($ok==1) {
 			inc_ajouter_documents_dist ($tmp, $fichier, "article", $article, $type_doc, $id_document, $documents_actifs);
 		}
@@ -497,11 +501,9 @@ if($media) {
 
 // cas d'un nouvel article ou re-affichage du formulaire
 
-$flag = op_get_agenda();
-if ($flag == 'oui') {
 
+if ($config['Agenda'] == 'yes') {
 	// Gestion de l'agenda
-
 	$formulaire_agenda = inclure_balise_dynamique(
 	array('formulaires/formulaire_agenda',	0,
 		array(
@@ -514,8 +516,9 @@ if ($flag == 'oui') {
 	), false);
 }
 	
-$flag = op_get_document();
-if ($flag == 'oui') {
+
+// Pour le moment ces des options font la même chose
+if (($config['DocInc'] == 'yes') || ($config['DocLier'] == 'yes')) {
 
 	// Gestion des documents
 
@@ -530,8 +533,8 @@ if ($flag == 'oui') {
 	), false);
 }
 
-$flag = op_get_tagmachine();
-if ($flag == 'oui') {
+
+if ($config['TagMachine'] == 'yes') {
 
 	// Gestion des mot-clefs avec tag machine
 
@@ -543,8 +546,9 @@ if ($flag == 'oui') {
 	), false);
 }
 
-$flag = op_get_motclefs();
-if ($flag =='oui') {
+
+
+if ($config['MotCle'] == 'yes') {
 
 	// Gestion des mot-clefs
 
@@ -557,6 +561,67 @@ if ($flag =='oui') {
 		)
 	), false);
 }
+
+
+if ($config['SurTitre'] == 'yes') {
+	// champ surtitre
+
+	$formulaire_surtitre = inclure_balise_dynamique(
+	array('formulaires/formulaire_surtitre', 0,
+		array(
+			'surtitre' => interdire_scripts(typo($surtitre)),
+		)
+	), false);
+}
+
+
+if ($config['SousTitre'] == 'yes') {
+	// champ soustitre
+
+	$formulaire_soustitre = inclure_balise_dynamique(
+	array('formulaires/formulaire_soustitre', 0,
+		array(
+			'soustitre' => interdire_scripts(typo($soustitre)),
+		)
+	), false);
+}
+
+
+if ($config['Descriptif'] =='yes') {
+	// champ descriptif
+
+	$formulaire_descriptif = inclure_balise_dynamique(
+	array('formulaires/formulaire_descriptif', 0,
+		array(
+			'descriptif' => $descriptif,
+		)
+	), false);
+}
+
+
+if ($config['Chapo'] =='yes') {
+	// champ chapeau
+
+	$formulaire_chapo = inclure_balise_dynamique(
+	array('formulaires/formulaire_chapo', 0,
+		array(
+			'chapo' => $chapo,
+		)
+	), false);
+}
+
+
+if ($config['PostScriptum'] == 'yes') {
+	// champ PostScriptum
+
+	$formulaire_ps = inclure_balise_dynamique(
+	array('formulaires/formulaire_ps', 0,
+		array(
+			'ps' => $ps,
+		)
+	), false);
+}
+
 
 // Liste des documents associés à l'article
 
@@ -575,6 +640,11 @@ return array('formulaires/formulaire_article', 0,
 		'formulaire_agenda' => $formulaire_agenda,
 		'formulaire_tagopen' => $formulaire_tagopen,
 		'formulaire_motclefs' => $formulaire_motclefs,
+		'formulaire_surtitre' => $formulaire_surtitre,
+		'formulaire_soustitre' => $formulaire_soustitre,
+		'formulaire_descriptif' => $formulaire_descriptif,
+		'formulaire_chapo' => $formulaire_chapo,
+		'formulaire_ps' => $formulaire_ps,
 		'bouton' => $bouton,
 		'article' => $article,
 		'rubrique' => $rubrique,
