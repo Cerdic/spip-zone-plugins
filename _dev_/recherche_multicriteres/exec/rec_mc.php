@@ -18,15 +18,6 @@ global 	$connect_statut,
 		$connect_id_auteur,
 		$couleur_claire, $couleur_foncee;
 
-
-//creation de la base
-	include_spip('base/rec_mc_table');
-	include_spip('base/create');
-	include_spip('base/abstract_sql');
-	creer_base();
-
-
-
 //#plug(11-07) : fonctions requises...(construction de la liste des rubriques, ...)
 	include_spip("inc/rec_mc_inc_fonct");
 
@@ -57,8 +48,6 @@ include_spip("inc/rec_mc_inc_pres");
 
 	//#plug(11-07) :  TODO : Etat des lieux...
 		menu_admin() ;
-
-
 
 	creer_colonne_droite();
 

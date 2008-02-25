@@ -19,8 +19,9 @@
 	<version>0.1</version>
 	<prefix>rec_mc</prefix>
 	<etat>dev</etat>
-	<auteur>Paul Sanchez - Pluginis&eacute; par Dom Lepaisant</auteur>
+	<auteur>Dom Lepaisant - dlepaisant@ac-caen.fr</auteur>
 	<icon>img_pack/cles24.png</icon>
+	<install>base/rec_mc_upgrade.php</install>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
@@ -35,4 +36,4 @@
 		<action>insert_head</action>
 		<inclure>rec_mc_pipe.php</inclure>
 	</pipeline>
-</plugin>	
+</plugin>
