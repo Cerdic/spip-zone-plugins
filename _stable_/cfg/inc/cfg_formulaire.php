@@ -175,7 +175,10 @@ class cfg_formulaire
 
 	}
 	
-	
+	// cette fonction recherche et stocke les parametres passes a cfg par <!-- param=valeur -->
+	// ces lignes sont alors effacees du code html.
+	// si la fonction est appelee 2 fois, les parametres identiques ne seront pas copies
+	// sauf si le parametre est un tableau (<!-- param*=valeur -->), les valeurs seront dupliquees
 	function recuperer_parametres_post_compile(){
 		$this->rempar = array(array());
 		if (preg_match_all('/<!-- [a-z0-9_]\w+\*?=/i', $this->controldata, $this->rempar)) {
@@ -192,6 +195,13 @@ class cfg_formulaire
 		}		
 	}
 	
+	// une fonction pour effacer les parametres du code html
+	// ce qui evite de dupliquer les tableaux 
+	// (si on utilisait recuperer_parametres_post_compile() a la place)
+	function effacer_parametres(){
+			$this->fond_compile = preg_replace('/(<!-- ([a-z0-9_]\w+)(\*)?=)(.*?)-->/sim',
+								'', $this->fond_compile);		
+	}
 	
 	/*
 	 * 
@@ -430,7 +440,7 @@ class cfg_formulaire
 		// recuperer le fond avec le contexte
 		// forcer le calcul.
 		$this->recuperer_fond($contexte, true);
-		$this->recuperer_parametres_post_compile(); // pour enlever les <!-- param=valeur --> ... 
+		$this->effacer_parametres(); // pour enlever les <!-- param=valeur --> ... sans dedoubler le contenu lorsque ce sont des tableau (param*=valeur)
 		return $this->fond_compile;
 	}
 	
