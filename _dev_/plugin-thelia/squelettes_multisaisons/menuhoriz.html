@@ -1,0 +1,44 @@
+#CACHE{0}
+
+
+
+  [(#REM)   la navigation par onglets   ]
+  <div id="menu">
+
+   <ul id="nav">
+       <li class="floatLeft" [ class="(#ENV{sommaire})"]><a href="[(#URL_PAGE{sommaire})]">Accueil</a></li>
+
+       <THELIA_rubriquesthelia type="RUBRIQUE" parent="0">
+         <li class="floatLeft">
+           <a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}">THELIA-TITRE</a>
+          </li>
+        </THELIA_rubriquesthelia>
+
+    <B_onglets> 
+         <BOUCLE_onglets(RUBRIQUES){par num titre}{type=barre_menu}{0,5}>
+          <li class="floatRight" [class="(#EXPOSER|oui,non)"]>
+	  <BOUCLE_titre_onglets(MOTS){id_rubrique}{type=barre_menu}{0,1}>
+	  [(#REM) Pas plus de cinq onglets pour la mise en page.]
+          [<a href="(#URL_RUBRIQUE)">][(#LOGO_MOT)][(#TITRE)]</a>
+           </BOUCLE_titre_onglets></li>
+	</BOUCLE_onglets>
+      </ul></B_onglets>
+
+<p class="droite blanc img">
+
+
+
+<BOUCLE_connecte_ou_pas(AUTEURS){tout}{id_auteur=#SESSION{id_auteur}}>
+[(#SESSION{statut}|?{' '})<a href="[(#URL_PAGE{mon-profil})]">Mon profil</a> / <a href="[(#URL_LOGOUT)]">Quitter</a>]
+</BOUCLE_connecte_ou_pas>
+[(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})[<a href="(#URL_PAGE{mon-profil}|parametre_url{type,redac})">]][(#CONFIG{accepter_inscriptions}|=={oui}|?{'',' '})[<a href="(#URL_PAGE{mon-profil}|parametre_url{type,visit})">]]Connexion</a>
+<//B_connecte_ou_pas>
+
+
+
+</p>
+
+
+
+ [(#REM)   fermeture du menu   ]
+</div>
