@@ -549,7 +549,7 @@ function exec_spiplistes_liste_gerer () {
 		. "<label for='auto_oui' ".($auto_checked ? "style='font-weight:bold;'" : "").">"._T('spiplistes:prog_env')."</label>\n"
 		. "<div id='auto_oui_detail' ".((empty($patron) || (!$flag_editable)) ? "style='display:none;'" : "").">"
 		. "<ul style='list-style-type:none;'>\n"
-		. "<li>"._T('spiplistes:message_sujet').": <input type='text' name='titre_message' value='".$titre_message."' size='50' class='fondl' /> </li>\n"
+		. '<li>'._T('spiplistes:message_sujet').': <input type="text" name="titre_message" value="'.$titre_message.'" size="50" class="fondl" /> </li>'."\n"
 		//
 		// chrono debut de mois
 		. "
