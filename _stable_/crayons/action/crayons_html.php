@@ -315,14 +315,14 @@ function crayons_formulaire($html) {
 		return '';
 
 	include_spip('inc/filtres');
-	return liens_absolus(
+	return
 		'<form class="formulaire_crayon" method="post" action="'
 		. url_absolue(parametre_url(self(),'action', 'crayons_store'))
 		. '" enctype="multipart/form-data">'
 		. $html
 		. crayons_boutons()
 		. '</form>'
-	);
+	;
 }
 
 //
