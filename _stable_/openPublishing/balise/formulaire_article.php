@@ -192,7 +192,7 @@ $mess_error		= stripslashes(_request('mess_error'));
 $documents_actifs = array();
 $lang = _request('var_lang');	
 $nom = 'changer_lang';
-lang_dselect();
+//lang_dselect();
 $langues = liste_options_langues($nom, $lang);
 
 // remise à zero 
@@ -308,15 +308,42 @@ if($valider) {
 		// préparation de la mise en base de donnée
 
 		// on recupere le secteur et la langue associée
-		$s = spip_query("SELECT id_secteur, lang FROM spip_rubriques WHERE id_rubrique = '$rubrique' ");
-		if ($r = spip_fetch_array($s)) {
-			$id_secteur = $r["id_secteur"];
-			$lang = $r["lang"];
+		if ($GLOBALS['spip_version_code'] < '1.93') {
+			$s = spip_query("SELECT id_secteur, lang FROM spip_rubriques WHERE id_rubrique = '$rubrique' ");
+			if ($r = spip_fetch_array($s)) {
+				$id_secteur = $r["id_secteur"];
+				$lang = $r["lang"];
+			}
 		}
+		else {
+		
+			$row = sql_fetsel("lang, id_secteur", "spip_rubriques", "id_rubrique=$rubrique");
+			$id_secteur = $row['id_secteur'];
+			$lang_rub = $row['lang'];
+	
+			// La langue a la creation : si les liens de traduction sont autorises
+			// dans les rubriques, on essaie avec la langue de l'auteur,
+			// ou a defaut celle de la rubrique
+			// Sinon c'est la langue de la rubrique qui est choisie + heritee
+			if ($GLOBALS['meta']['multi_articles'] == 'oui') {
+				lang_select($GLOBALS['visiteur_session']['lang']);
+				if (in_array($GLOBALS['spip_lang'],
+				explode(',', $GLOBALS['meta']['langues_multilingue']))) {
+					$lang = $GLOBALS['spip_lang'];
+					$choisie = 'oui';
+				}
+			}
+		
+			if (!$lang) {
+				$choisie = 'non';
+				$lang = $lang_rub ? $lang_rub : $GLOBALS['meta']['langue_site'];
+			}
+		}
+
 
 		// L'article existe déjà, on fait donc un UPDATE, et non un INSERT
  
-		$retour = spip_query('UPDATE spip_articles SET titre = ' . spip_abstract_quote($titre) .
+	/*	$retour = spip_query('UPDATE spip_articles SET titre = ' . spip_abstract_quote($titre) .
 				',	id_rubrique = ' . spip_abstract_quote($rubrique) .
 				',	surtitre = ' . spip_abstract_quote($surtitre) .
 				',	soustitre = ' . spip_abstract_quote($soustitre) .
@@ -330,27 +357,74 @@ if($valider) {
 				',	date = NOW()' .
 				',	date_redac = NOW()' .
 				',	date_modif = NOW()' .
-			 	' WHERE id_article = ' . spip_abstract_quote($article) );
+			 	' WHERE id_article = ' . spip_abstract_quote($article) );*/
+		// calcul extra
+		$extra=array(
+  			"OP_pseudo"=>$nom_inscription,
+  			"OP_mail"=>$mail_inscription
+		);
+		$extra=serialize($extra);
+
+/*		$retour = spip_query('UPDATE spip_articles SET titre = ' . sql_quote($titre) .
+				',	id_rubrique = ' . sql_quote($rubrique) .
+				',	surtitre = ' . sql_quote($surtitre) .
+				',	soustitre = ' . sql_quote($soustitre) .
+				',	chapo = ' . sql_quote($schapo) .
+				',	descriptif = ' . sql_quote($descriptif) .
+				',	ps = ' . sql_quote($ps) .
+				',	texte = ' . sql_quote($texte) .
+				',	statut = ' . sql_quote($statut) .
+				',	lang = ' . sql_quote($lang) .
+				',	id_secteur = ' . sql_quote($id_secteur) .
+				',	date = NOW()' .
+				',	date_redac = NOW()' .
+				',	date_modif = NOW()' .
+				',	extra = ' . sql_quote($extra_serialised) .
+			 	' WHERE id_article = ' . sql_quote($article) );
 
 		if ($retour == 1) { $retour = '';}
 		else { $retour = _T('opconfig:erreur_insertion');}
-	
+*/	
 		// on lie l'article à l'auteur anonymous
 
-		spip_abstract_insert('spip_auteurs', "(id_auteur,id_article)", "(
+		/*spip_abstract_insert('spip_auteurs', "(id_auteur,id_article)", "(
 			" . spip_abstract_quote($config['IDAuteur']) .",
 			" . spip_abstract_quote($article) . "
-			)");
+			)");*/
+
+		sql_update('spip_articles', array(
+			"titre" => sql_quote($titre),
+			"id_rubrique" => sql_quote($rubrique),
+			"surtitre" => sql_quote($surtitre),
+			"soustitre" => sql_quote($soustitre),
+			"chapo" => sql_quote($chapo),
+			"descriptif" => sql_quote($descriptif),
+			"ps" => sql_quote($ps),
+			"texte" => sql_quote($texte),
+			"statut" => sql_quote($statut),
+			"lang" => sql_quote($lang),
+			"id_secteur" => sql_quote($id_secteur),
+			"date" => "NOW()",
+			"date_redac" => "NOW()",
+			"date_modif" => "NOW()",
+			"extra" => sql_quote($extra)
+			),
+			 "id_article=".sql_quote($article));
+
+		sql_insertq('spip_auteurs', array(
+			'id_auteur' => sql_quote($config['IDAuteur']),
+			'id_article' => sql_quote($article)
+			));
 	
 		// on ajoute dans spip_op_auteur l'identitée donnée par l'utilisateur
 
-		spip_abstract_insert('spip_op_auteurs', "(id_auteur,id_article,id_real_auteur,nom,email,group_name,phone)", "(
+		/*spip_abstract_insert('spip_op_auteurs', "(id_auteur,id_article,id_real_auteur,nom,email,group_name,phone)", "(
 			" . intval($id_auteur_op) .",
 			" . spip_abstract_quote($article) . ",
 			" . spip_abstract_quote($config['IDAuteur']) . ",
 			" . spip_abstract_quote($nom_inscription) . ",
 			" . spip_abstract_quote($mail_inscription) . "
-			)");
+			)");*/
 	
 	}
 	
@@ -363,7 +437,7 @@ if($valider) {
 		// construction de la page de retour
 		$url_retour = $url_site . $config['UrlValidation'];
 		$message = '<META HTTP-EQUIV="refresh" content="'.$config['TempsAtt'].'; url='.$url_retour.'">' . $config['TextValidation'];
-		//$message = $message . $retour;
+		$message = $message . $retour .'<br />' .$extra_serialised;
 		return $message;
 	}
 }
