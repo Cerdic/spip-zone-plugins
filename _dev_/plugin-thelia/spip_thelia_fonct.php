@@ -127,6 +127,11 @@ function remplacement_sortie_thelia($in_thelia)
 	$in_thelia = str_replace('ç', '&ccedil;', $in_thelia);
 	$in_thelia = str_replace('ô', '&ocirc;', $in_thelia);
 	$in_thelia = str_replace('ë', '&euml;', $in_thelia); 
+	$in_thelia = str_replace('ù', '&ugrave;', $in_thelia);
+	$in_thelia = str_replace('â', '&acirc;', $in_thelia);
+	$in_thelia = str_replace('ê', '&ecirc;', $in_thelia);
+	$in_thelia = str_replace('€', '&euro;', $in_thelia); 
+	$in_thelia = str_replace('œ', '&oelig;', $in_thelia); 
 
 	return $in_thelia;
 }
