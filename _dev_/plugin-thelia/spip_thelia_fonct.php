@@ -72,6 +72,11 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	$res = $texte;
 	$res = str_replace("THELIA-", "#", $res);
 
+	include_spip('inc/charset');
+
+	//avant d'envoyer à thélia, on convertie en iso pour thélia
+	$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
+
 	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
 	ob_start();
 	
@@ -87,7 +92,8 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	ob_end_clean();
 	$texte = remplacement_sortie_thelia($texte);
 
-	return $texte;	
+	//au retour de thélia, on convertie en utf8 pour spip
+	return (unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8'));	
 	
 }
 
@@ -114,24 +120,6 @@ function remplacement_sortie_thelia($in_thelia)
 	$in_thelia = str_replace("produit.php?action", "produit.php?thelia_action", $in_thelia);
 	$in_thelia = str_replace("regret.php?action", "regret.php?thelia_action", $in_thelia);
 	$in_thelia = str_replace("virement.php?action", "virement.php?thelia_action", $in_thelia);
-	
-	//iso vers utf8
-	$in_thelia = str_replace('é', '&eacute;', $in_thelia);
-	$in_thelia = str_replace('è', '&egrave;', $in_thelia);
-	$in_thelia = str_replace('à', '&agrave;', $in_thelia);
-	$in_thelia = str_replace('ê', '&ecirc;', $in_thelia);
-	$in_thelia = str_replace('î', '&icirc;', $in_thelia);
-	$in_thelia = str_replace('ï', '&iuml;', $in_thelia);
-	$in_thelia = str_replace('Î', '&Icirc;', $in_thelia);
-	$in_thelia = str_replace('É', '&Eacute;', $in_thelia);
-	$in_thelia = str_replace('ç', '&ccedil;', $in_thelia);
-	$in_thelia = str_replace('ô', '&ocirc;', $in_thelia);
-	$in_thelia = str_replace('ë', '&euml;', $in_thelia); 
-	$in_thelia = str_replace('ù', '&ugrave;', $in_thelia);
-	$in_thelia = str_replace('â', '&acirc;', $in_thelia);
-	$in_thelia = str_replace('ê', '&ecirc;', $in_thelia);
-	$in_thelia = str_replace('€', '&euro;', $in_thelia); 
-	$in_thelia = str_replace('œ', '&oelig;', $in_thelia); 
 
 	return $in_thelia;
 }
