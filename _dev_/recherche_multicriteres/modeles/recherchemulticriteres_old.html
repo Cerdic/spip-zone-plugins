@@ -1,0 +1,194 @@
+<?php
+/***************************************************************************\
+ *  Recherche multicritères par mots-clés SPIP                             *
+ *                                                                         *
+ *  Copyright (c) 2005                                                     *
+ *  Paul Sanches - http://www.netdeveloppeur.com                           *
+ *  Adresse de publication de la contribution :	                           *
+ *  http://www.netdeveloppeur.com                                          *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt                       *
+\***************************************************************************/
+?>
+<BOUCLE_rubrique_search(RUBRIQUES) {id_rubrique}>
+<?php
+	$id_rubrique = '[(#ID_RUBRIQUE|texte_script)]';
+?>
+</BOUCLE_rubrique_search>
+<?php
+	if(!isset($id_rubrique)){
+	$id_rubrique = 0;
+	}
+?>
+
+	<?php
+		
+			$sql =  "select spip_groupes_mots.id_groupe,spip_groupes_mots.titre as titregroupe, spip_mots.id_mot,spip_mots.titre as titremot ";
+			$sql .= "from spip_rmc_rubs_groupes inner join spip_groupes_mots on spip_rmc_rubs_groupes.id_groupe = spip_groupes_mots.id_groupe ";
+			$sql .= "inner join spip_mots on spip_mots.id_groupe  = spip_groupes_mots.id_groupe ";
+			$sql .= "where id_rubrique = $id_rubrique ";
+			$sql .= "group by spip_groupes_mots.id_groupe,spip_groupes_mots.titre, spip_mots.id_mot,spip_mots.titre ";
+			$sql .= "order by spip_groupes_mots.titre,spip_mots.titre";
+		
+		$result = mysql_query($sql);
+		if ($result) {
+			$id_grp_prec = 0;
+			$i = 0;
+			$sql1 = "SELECT colonnes as nbcol, colonnes_rub as nbcol_rub, taille_police as taille, taille_police_rub as taille_rub, couleur_police as coul, couleur_police_rub as coul_rub, couleur_bordure as bord, couleur_bordure_rub as bord_rub FROM spip_rmc_rubs_groupes_conf";
+			$result1 = spip_query($sql1);
+			$row1 = mysql_fetch_assoc($result1);
+			extract($row1);
+			if($id_rubrique!=0){
+				$nbcol = $nbcol_rub;
+				$taille = $taille_rub;
+				$coul = $coul_rub;
+				$bord = $bord_rub;
+			}
+			$nbselcreate = 0;
+			$nbline = 0;
+			while ($row = mysql_fetch_assoc($result)) {
+				extract($row);
+				
+				if ($id_groupe != $id_grp_prec) {
+					$i++;
+					
+					if ($id_grp_prec != 0) 
+					{
+					?>	
+						</select>
+						<?php if ($nbselcreate == $nbcol) 
+							{
+								$nbselcreate = 0;
+						?>
+								</td>
+							</tr>
+						
+						<?php
+						
+							}
+							else
+							{
+						?>
+							</td>
+						<?php
+							}
+					}
+					else 
+					{
+					?>	
+						<form action="spip.php?page=rec_mc_result" method="post">
+						<input type="hidden" name="id_rubrique" value='.$id_rubrique.' />
+						<div style="text-align:center;color:<? echo $coul;?>;">
+							<strong>RECHERCHE MULTI-CRITERES</strong>
+						</div>
+						<table width="100%" cellpadding="3" cellspacing="1" bgcolor="<?echo $bord;?>" style="color:<?echo $coul;?>">
+							<tr>
+								<td bgcolor="#FFFFFF" align="left" colspan="<?php echo $nbcol;?>">
+										<strong>Listes des mots clefs :</strong>
+						<p style="text-align:center;font-size:x-small;color:<? echo $coul; ?>">
+							Maintenez la touche clavier "ctrl" enfoncée pour ainsi sélectionner plusieurs critères.
+						</p>
+								</td>
+							</tr>
+						
+					<?php
+					}
+					
+					if ($nbselcreate == 0) 
+					{ 
+						$nbselcreate += 1 ;
+					?> 	
+					<tr> 
+					<?php } else { $nbselcreate += 1 ;} ?>
+					
+						<td  bgcolor="#FFFFFF" style="text-align:center;">
+								<p style="text-align:center;"><strong><?php echo $titregroupe; ?></strong></p>
+									<select name="idmot[]" size="4" multiple="multiple" style="width:120px;">
+					<?php
+				}
+				$s="SELECT id_mot_exclu FROM spip_rmc_mots_exclus WHERE id_mot_exclu=$id_mot AND id_rubrique=$id_rubrique";
+				$r=spip_query($s);
+					$rw=spip_fetch_array($r);
+					if($rw['id_mot_exclu']!=$id_mot){
+
+				?>
+				
+					<option value="<?php echo $id_mot; ?>">- <?php echo supprimer_numero($titremot); ?></option>
+				
+				<?php
+				}
+					$id_grp_prec = $id_groupe;
+				}
+			
+		
+				if ($id_grp_prec != 0) {
+				?>
+					</select>
+					</td>
+					<?php 
+						if ($nbline != 0) 
+						{
+							while ($nbselcreate != $nbcol && $nbselcreate != 0) 
+							{
+								$nbselcreate +=1;
+						?>
+								<td bgcolor="#FFFFFF">&nbsp;</td>		
+						
+						<?php
+							}
+						}
+						?>
+						
+						</tr>
+						<tr>
+							<td bgcolor="#FFFFFF" colspan="<?php echo $nbcol; ?>" align="left" valign="middle">
+												<strong>Chercher les articles de</strong>
+												<select name="nbjour">
+													<option value="0" selected="selected">- tous</option>
+													<option value="7">- 7 jours</option>
+													<option value="30">- 1 mois</option>
+													<option value="9O">- 3 mois</option>
+													<option value="365">- 12 mois</option>
+												</select>
+							</td>
+						</tr>
+				<?php
+					if ($id_rubrique != 0) 
+					{
+				?>
+						<tr>	
+							<td colspan="<?php echo $nbcol; ?>" bgcolor="#FFFFFF" valign="middle" align="left">
+												<strong>Recherche limitée à la rubrique en cours</strong>
+												<input type="checkbox" value="1" name="onlyrub" />
+							</td>
+						</tr>
+				<?php
+					}
+				?> 
+						<tr>	
+							<td colspan="<?php echo $nbcol; ?>" bgcolor="#FFFFFF" valign="middle" align="left">
+												<strong>Tous les mots doivent être présents</strong>
+												<input type="checkbox" value="1" name="allword" />
+							</td>
+						</tr>	
+						
+					<tr>
+						<td bgcolor="#FFFFFF" align="center" colspan="<?php echo $nbcol; ?>">
+							<input type="hidden" value="<?php echo $id_rubrique; ?>" name="rubnum" />
+							<input type="submit" value="Envoyer"  style="background-color:#FFFFFF; border-width:1px; border-style:solid; font-size:8pt; font-family:Arial; font-weight:normal; border-color:#2e5035" />
+							<input type="reset" class="submit" name="annuler" value="Annuler" style="background-color:#FFFFFF; border-width:1px; border-style:solid; font-size:8pt; font-family:Arial; font-weight:normal; border-color:#2e5035" />
+						</td>
+					</tr>
+					</table>
+					</form>
+				<?php
+				echo "<p style=\"text-align: center;\"><a href=\"http://www.netdeveloppeur.com\" title=\"Net Developpeur, création sites web SPIP\"><font color=\"#CCCCCC\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">Développé par Net Developpeur - Création sites web SPIP</font></a></p>";
+			}
+			mysql_free_result($result);
+		}
+		else {
+			echo "<hr>";
+			echo "il n'y a pas de groupe de mots associés à cette rubrique : $id_rubrique<br>";
+			echo "<hr>";	
+		}
+	?>

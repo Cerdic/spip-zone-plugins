@@ -7,16 +7,17 @@
 # Ce programme est un logiciel libre distribue sous licence GNU/GPL. #
 # Pour plus de details voir le fichier COPYING.txt                   #
 ######################################################################
-
+global $table_des_tables;
 global $tables_principales;
-	global $tables_auxiliaires;
+global $tables_auxiliaires;
+global $tables_jointures;
 
 $spip_rmc_rubs_groupes = array(
 			"id_groupe" => "int(11) NOT NULL default'0'",
 			"id_rubrique" => "int(11) NOT NULL default'0'"
 			);
 $spip_rmc_rubs_groupes_key = array(
-			"KEY id_groupe" => "id_groupe,id_rubrique"
+			"PRIMARY KEY" => "id_groupe,id_rubrique"
 			);
 
 $spip_rmc_rubs_groupes_conf = array(
@@ -41,7 +42,6 @@ $spip_rmc_mots_exclus_key = array(
 			"KEY id_mot_exclu" => "id_mot_exclu"
 			);
 
-
 $tables_principales['spip_rmc_rubs_groupes'] = array(
 			'field' => &$spip_rmc_rubs_groupes, 
 			'key' => &$spip_rmc_rubs_groupes_key
@@ -54,6 +54,8 @@ $tables_principales['spip_rmc_mots_exclus'] = array(
 			'field' => &$spip_rmc_mots_exclus, 
 			'key' => &$spip_rmc_mots_exclus_key
 			);
+$tables_jointures['spip_groupes_mots'][]= 'rmc_rubs_groupes';
+$tables_jointures['spip_rubrique'][]= 'rmc_rub_groupes';
 
 ?>
 

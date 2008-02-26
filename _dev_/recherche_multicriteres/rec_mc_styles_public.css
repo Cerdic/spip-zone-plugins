@@ -1,0 +1,88 @@
+/* 
+ * -------------------------------
+ * PLUGIN RECHERCHE MULTI-CRITÈRES
+ * ------------------------------- 
+ */
+#form_mc {
+text-align:center;
+padding:.3em;
+border:1px solid #ccc;
+background:#f4f4f4;
+}
+#form_mc label {
+font-weight:bold;
+}
+/* titre */
+.multicriteres {
+margin:.6em 0;
+width:100%;
+}
+.multicriteres h2 {
+font-weight:bold;
+font-size:1.2em;
+margin-bottom:0;
+text-align:left;
+}
+fieldset {
+border-top:1px solid #ccc;
+border-left:1px solid #ccc;
+border-right:2px solid #fff;
+border-bottom:2px solid #fff;
+background:#dedede;
+}
+legend {
+font-weight:bold;
+}
+fieldset p {
+margin:0;
+}
+fieldset em {
+display:block;
+font-size:small;
+font-weight:normal;
+}
+/* container des listes de mots-cles */
+.liste_mc {
+width:100%;
+color:#000; 
+background-color:#fff;
+}
+/* liste de mots-cles */
+.liste_mc div {
+float:left;
+text-align:center;
+margin:.6em .3em 0;
+}
+/* titre de liste de mots-cles */
+.liste_mc div p {
+margin:0;
+}
+/* les mots-cles */
+.liste_mc div select {
+width:10em;
+}
+.sel_mc {
+height:5em;
+}
+/* block d'options de recherche */
+fieldset.options_mc {
+clear:both;
+text-align:left;
+margin-top:.8em;
+}
+.button_mc {
+background-color:#fff;
+border:1px solid #2e5035; 
+font-size:small; 
+font-family:Arial, sans-serif; 
+font-weight:normal;
+}
+.copyleft_mc {
+text-align:right;
+font-size:x-small; 
+font-family:Verdana, Arial, Helvetica, sans-serif;
+margin-bottom:0;
+}
+.copyleft_mc a {
+color:#CCC; 
+}
