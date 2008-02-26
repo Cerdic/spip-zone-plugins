@@ -2,28 +2,10 @@
 	<nom>Recherche Multi-crit&egrave;res</nom>
 	<description>
 		Recherche Multi-crit&egrave;res par mots-cl&eacute;s.<br />
-		La recherche multicrit&egrave;res par mots-cl&eacute;s permet de rechercher des articles 
-		auxquels vous avez attribu&eacute; des mots-cl&eacute;s.<br />
-		<div style="color:#c00; background:#ffdfdf; border:1px solid #c00; font-weight:bold; font-style:italic; margin:.3em; padding:.3em;">
-			Attention : il est imp&eacute;ratif, pour voir fonctionner cette contrib, d&rsquo;avoir cr&eacute;er au pr&eacute;alable des mots-cl&eacute;s dans l&rsquo;interface priv&eacute;e et d&rsquo;associer certains de ces mots-cl&eacute;s ou tous &agrave; des articles. 
-		</div>
-		Contribution originale de Paul Sanchez - <a href="http://www.netdeveloppeur.com/tutoriaux-et-astuces-spip/spip-recherche-multicriteres-article34.html"  target="_blank">NetDeveloppeur</a>
-	</description>
-	<lien>
-		Documentation et Installation : <a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" 
-		title="Information et Documentation" target="_blank">TiSpiP-sKeLeT</a>
-	</lien>
-	<description>
-		Recherche Multi-crit&egrave;res par mots cl&eacute;.<br />
-		La recherche multicrit&egrave;res par mots-cl&eacute;s permet de rechercher des articles 
-		auxquels nous avons attribu&eacute; des mots-cl&eacute;s.<br />
-		<div style="color:#c00;; border:1px solid #c00; fontweight:bold; font-style:italic; margin:5px;">
-			Attention : il est imp&eacute;ratif, pour voir fonctionner cette contrib, d’avoir cr&eacute;er au 
-			pr&eacute;alable des mots-cl&eacute;s dans l’interface priv&eacute;e et d’associer certains de ces mots-cl&eacute;s ou tous &agrave; des articles. 
-		</div>
-		Contribution originale de Paul Sanchez - <a href="http://www.netdeveloppeur.com/tutoriaux-et-astuces-spip/spip-recherche-multicriteres-article34.html" 
-		title="NetDeveloppeur" target="_blank">NetDeveloppeur</a>
-
+		La recherche multicrit&egrave;res par mots-cl&eacute;s permet de rechercher des articles s&eacute;lectionnant un ou plusieurs mots-cl&eacute;. La recherche retournera la liste d&rsquo;articles associ&eacute;s à ces mots-cl&eacute;<br />
+		Vous pouvez rechercher les articles associ&eacute;s à tous les mots ou non (et/ou)<br />
+		Vous pouvez limiter la recherche par date de publication des articles (-7 jours, -1 mois, -3 mois, -12 mois, tous)<br />
+		Dans le cas de l&rsquo;affichage par rubriques, vous pouvez limiter ou non la recherche &agrave; la rubrique en question.<br />
 	</description>
 	<lien>
 		Documentation et Installation : <a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" 
@@ -32,7 +14,7 @@
 	<version>0.1</version>
 	<prefix>rec_mc</prefix>
 	<etat>dev</etat>
-	<auteur>Dom Lepaisant - dlepaisant@ac-caen.fr</auteur>
+	<auteur>Dom Lepaisant - d&rsquo;apr&egrave;s une contrib de <a href="http://www.netdeveloppeur.com/tutoriaux-et-astuces-spip/spip-recherche-multicriteres-article34.html"  target="_blank">Paul Sanchez - NetDeveloppeur</a></auteur>
 	<icon>img_pack/cles24.png</icon>
 	<install>base/rec_mc_upgrade.php</install>
 	<pipeline>
