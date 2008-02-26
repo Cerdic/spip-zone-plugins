@@ -4,7 +4,7 @@ function imports_geographie_dist(){
 	include_spip('imports/pays');
 	include_spip('inc/charset');
 	foreach($GLOBALS['liste_pays'] as $k=>$p)
-		sql_insertq('spip_geo_pays',array('id_pays'=>$k,'nom'=>$p));
+		sql_insertq('spip_geo_pays',array('id_pays'=>$k,'nom'=>unicode2charset(html2unicode($p))));
 	
 	// importer les regions/dept/communes francaise
 	$id_pays = 70;
