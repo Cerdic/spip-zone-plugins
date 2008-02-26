@@ -256,6 +256,8 @@ if($valider) {
 
 	// récupération du statut par défaut de l'article
 	$statut = $config['StatutArt'];
+	$RubAgenda = $config['RubAgenda'];
+
 
 	// vérifications et traitements des champs texte
 	// Anti spam (remplace les @ par un texte aléatoire)
@@ -286,22 +288,45 @@ if($valider) {
 
 		$date_complete = date('Y-m-d H:i:s',mktime($heure, $minute, 0, $mois, $jour, $annee));
 
+		// calcul extra
+		$extra=array(
+  			"OP_pseudo"=>$nom_inscription,
+  			"OP_mail"=>$mail_inscription
+		);
+		$extra=serialize($extra);
+
 		// construction lien URL désactivé
 		//$lien_url = $url_site . 'spip.php?article' . $article;
 		$lien_url = '';
+		if ($GLOBALS['spip_version_code'] < '1.93') {
 
-		spip_abstract_insert('spip_breves', "(id_breve,date_heure,titre,texte,lien_url,statut,id_rubrique)", "(
-		" . intval($id_breve_op) .",
-		" . spip_abstract_quote($date_complete) . ",
-		" . spip_abstract_quote($titre) . ",
-		" . spip_abstract_quote($texte) . ",
-		" . spip_abstract_quote($lien_url) . ",
-		" . spip_abstract_quote($statut) . ",
-		" . spip_abstract_quote($config['RubAgenda']) . "
-		)");
+			spip_abstract_insert('spip_breves', "(id_breve,date_heure,titre,texte,lien_url,statut,id_rubrique,extra)", "(
+			" . intval($id_breve_op) .",
+			" . spip_abstract_quote($date_complete) . ",
+			" . spip_abstract_quote($titre) . ",
+			" . spip_abstract_quote($texte) . ",
+			" . spip_abstract_quote($lien_url) . ",
+			" . spip_abstract_quote($statut) . ",
+			" . spip_abstract_quote($RubAgenda) . ",
+			" . spip_abstract_quote($extra) . "
+			)");
+	
+			// supression de l'article temporaire
+			spip_query("DELETE FROM spip_articles WHERE id_article = '$article' LIMIT 1");
+		}
+		else {
+			sql_insertq('spip_breves', array(
+				"date_heure" => $date_complete,
+				"titre" => $titre,
+				"texte" => $texte,
+				"lien_url" => $lien_url,
+				"statut" => $statut,
+				"id_rubrique" => $RubAgenda,
+				"extra" => $extra
+			));
 
-		// supression de l'article temporaire
-		spip_query("DELETE FROM spip_articles WHERE id_article = '$article' LIMIT 1");
+			sql_delete('spip_articles','id_article = '.sql_quote($article).' LIMIT 1');
+		}
 	}
 	else if ($flag_ok== 'ok') { // soit il s'agit d'un article, soit d'une breve. Les deux à la fois ne sont pas possible
 
@@ -365,24 +390,7 @@ if($valider) {
 		);
 		$extra=serialize($extra);
 
-/*		$retour = spip_query('UPDATE spip_articles SET titre = ' . sql_quote($titre) .
-				',	id_rubrique = ' . sql_quote($rubrique) .
-				',	surtitre = ' . sql_quote($surtitre) .
-				',	soustitre = ' . sql_quote($soustitre) .
-				',	chapo = ' . sql_quote($schapo) .
-				',	descriptif = ' . sql_quote($descriptif) .
-				',	ps = ' . sql_quote($ps) .
-				',	texte = ' . sql_quote($texte) .
-				',	statut = ' . sql_quote($statut) .
-				',	lang = ' . sql_quote($lang) .
-				',	id_secteur = ' . sql_quote($id_secteur) .
-				',	date = NOW()' .
-				',	date_redac = NOW()' .
-				',	date_modif = NOW()' .
-				',	extra = ' . sql_quote($extra_serialised) .
-			 	' WHERE id_article = ' . sql_quote($article) );
-
-		if ($retour == 1) { $retour = '';}
+/*		if ($retour == 1) { $retour = '';}
 		else { $retour = _T('opconfig:erreur_insertion');}
 */	
 		// on lie l'article à l'auteur anonymous
@@ -437,7 +445,7 @@ if($valider) {
 		// construction de la page de retour
 		$url_retour = $url_site . $config['UrlValidation'];
 		$message = '<META HTTP-EQUIV="refresh" content="'.$config['TempsAtt'].'; url='.$url_retour.'">' . $config['TextValidation'];
-		$message = $message . $retour .'<br />' .$extra_serialised;
+		$message = $message . $retour .'<br />';
 		return $message;
 	}
 }
