@@ -38,8 +38,7 @@
 
 <INCLURE{fond=promotion_som}{id_rubrique_thelia=THELIA-RUBRIQUE_ID}>
 
-</div>[(#REM)   fermeture colone du centre   ]
-
+</div>[(#REM)   fermeture colone centre   ]
 
 <div class="width20 floatRight">[(#REM)   ouverture de la colone de droite   ]
 
@@ -48,6 +47,16 @@
         <h4 class="icone_caddie_ajout"><:spipthelia:boutique:></h4>
         <INCLURE{fond=inc-rubriques}{id_rubrique_thelia=THELIA-RUBRIQUE_ID}>
     </div>[(#REM)   fermeture boite menu   ]
+
+    <div class="boite_cellule_droite"> [(#REM)  ouverture boite menu  ]
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond="inc_menu_rub"}>
+    </div>[(#REM)   fermeture boite menu  ]
+
+    <div class="boite_cellule_droite">
+       <h4 class="icone_membre">Derniers messages</h4>
+          <INCLURE{fond="inc_derniers_messages"}{self=#SELF}>
+    </div>
 
 </div>   [(#REM)   fermeture colone de droite   ]
 
