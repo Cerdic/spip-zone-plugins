@@ -37,6 +37,24 @@
 .cellule_produit li p{
 	background:#fff;
 }
+.icone_caddie_ajout{
+	background:url(../../squelettes/images/icones/automne/automne_caddie_ajout.gif);
+}
+.icone_panier{
+	background:url(../../squelettes/images/icones/automne/automne_panier.gif);
+}
+.icone_identifier{
+	background:url(../../squelettes/images/icones/automne/automne_identifier.gif);
+}
+.icone_compte{
+	background:url(../../squelettes/images/icones/automne/automne_compte.gif);
+}
+.icone_obligatoire{
+	background:url(../../squelettes/images/icones/automne/automne_obligatoire.gif);
+}
+.icone_caddie_ajout{
+	background-repeat:no-repeat;
+}
 .icone_panier{
 	background-repeat:no-repeat;
 }
@@ -48,18 +66,6 @@
 }
 .icone_compte{
 	background-repeat:no-repeat;
-}
-.icone_panier{
-	background:url(../../habillages/MultisaisonsThelia/images/icones/automne/automne_panier.gif);
-}
-.icone_identifier{
-	background:url(../../habillages/MultisaisonsThelia/images/icones/automne/automne_identifier.gif);
-}
-.icone_compte{
-	background:url(../../habillages/MultisaisonsThelia/images/icones/automne/automne_compte.gif);
-}
-.icone_obligatoire{
-	background:url(../../habillages/MultisaisonsThelia/images/icones/automne/automne_obligatoire.gif);
 }
 th.row_first {
 	background-color: #CDA261;

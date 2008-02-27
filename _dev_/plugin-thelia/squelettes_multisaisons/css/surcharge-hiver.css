@@ -46,8 +46,11 @@
 .icone_compte{
 	background:url(../../squelettes/images/icones/hiver/hiver_compte.gif);
 }
-.icone_obligatoire{
-	background:url(../../squelettes/images/icones/hiver/hiver_obligatoire.gif);
+.icone_caddie_ajout{
+	background:url(../../squelettes/images/icones/hiver/hiver_caddie_ajout.gif);
+}
+.icone_caddie_ajout{
+	background-repeat:no-repeat;
 }
 .icone_panier{
 	background-repeat:no-repeat;
