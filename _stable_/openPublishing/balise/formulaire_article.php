@@ -23,6 +23,10 @@ include_spip('base/abstract_sql');
 
 /* Les includes propre au plugin
  */
+
+// Si SPIP est vieux, charger les fonctions de compat
+if ($GLOBALS['spip_version_code'] < '1.93') include_spip('inc/op_compat.php');
+
 include_spip('inc/op_actions'); // base de donnée
 include_spip('inc/op_functions'); // fonctions diverses
 
@@ -84,69 +88,32 @@ function balise_FORMULAIRE_ARTICLE_dyn($id_rubrique) {
 
 global $_FILES, $_HTTP_POST_FILES;
 
-/* récupération des données de configuration
- */
-
+// récupération des données de configuration
 $config = lire_config('op');
 
-
-/* securite (additif spip_indy, peut-être toujour utile)
- * pour eviter qu'un article soit modifié apres avoir été publié
- * remarque : en entrée de script ce test ne sert à rien
- */
-
-$article = (int) $article;
-if($article) {
-	$query = "SELECT id_article FROM  spip_articles WHERE id_article=$article AND (statut='prepa' OR statut='creat')";
-	$result = spip_query($query);
-	if(!mysql_num_rows($result)) {
-		// warning , une erreur 404 serait peut etre mieux ?
-	 	die("<H3> D&eacute;sol&eacute;, sorry, lo siento : On ne peut pas modifier l'article demand&eacute;.</H3>");
-	}
-        $query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$article AND id_auteur=".$config['IDAuteur'];
-        $result_auteur = spip_query($query);
-        $flag_auteur = (mysql_num_rows($result_auteur) > 0);
-	if(!$flag_auteur) {
-	 	die("<H3> D&eacute;sol&eacute;, sorry, lo siento : On ne peut pas modifier l'article demand&egrave;.</H3>");
-        }
-}
-
 // si l'auteur anonymous n'est pas dans la base, le plugin openpublishing doit être mal installé
+if(!$config['IDAuteur']) die(_T('opconfig:erreur_die'));
 
-if(!$config['IDAuteur']) {
-	echo _T('opconfig:erreur_anonymous');
-	die(_T('opconfig:erreur_die'));
-}
-
-/* récupération des variables du formulaire HTML
- * données actions
- * url du site
- * id article (sinon on créé un nouveau article à chaque prévisualisation ou ajout de document ...)
- */
 
 // Les différentes actions que peut faire un utilisateur
-
-$previsualiser	= _request('previsualiser');
-$valider	= _request('valider');
-$media		= _request('media');
-$mots		= _request('mots');
-$agenda		= _request('agenda');
-$abandonner	= _request('abandonner');
-$tags		= _request('tags');
+$previsualiser	= _request('previsualiser'); // demande la prévisualisation
+$valider	= _request('valider'); // demande la validation
+$media		= _request('media'); // demande l'ajout de document
+$mots		= _request('mots'); // demande l'ajout de mot cle
+$agenda		= _request('agenda'); // demande la mise en agenda
+$abandonner	= _request('abandonner'); // demande l'abandon
+$tags		= _request('tags'); // demande des nouveaux mot dans tag machine
 
 // url et id de l'article
-
 $url_site = _request('url_site');
 $article = intval(stripslashes(_request('article')));
 
 // données pour formulaire document
-
 $formulaire_documents 	= stripslashes(_request('formulaire_documents'));
 $doc 			= stripslashes(_request('doc'));
 $type_doc 		= stripslashes(_request('type'));
 
 // données pour formulaire agenda
-
 $formulaire_agenda 	= stripslashes(_request('formulaire_agenda'));
 $annee 			= stripslashes(_request('annee'));
 $mois			= stripslashes(_request('mois'));
@@ -154,22 +121,18 @@ $jour 			= stripslashes(_request('jour'));
 $heure 			= stripslashes(_request('heure'));
 $choix_agenda 		= stripslashes(_request('choix_agenda'));
 
-// données pour formulaire tagopen
-
+// données pour formulaire tagopen (plugin Tag machine)
 $formulaire_tagopen 	= stripslashes(_request('formulaire_tagopen'));
 
 // données pour formulaire motclefs
-
 $formulaire_motclefs 	= stripslashes(_request('formulaire_motclefs'));
 if (!empty($_POST["motschoix"])) { $motschoix=$_POST["motschoix"]; }
 
 // donnée rubrique
-
 $rubrique		= intval(stripslashes(_request('rubrique')));
 if ($id_rubrique) { if (!$rubrique) { $rubrique=$id_rubrique;}}
 
 // donnée article
-
 $titre			= stripslashes(_request('titre'));
 $texte			= stripslashes(_request('texte'));
 $surtitre		= stripslashes(_request('surtitre'));
@@ -179,31 +142,24 @@ $descriptif		= stripslashes(_request('descriptif'));
 $ps			= stripslashes(_request('ps'));
 
 // donnée identification
-
 $nom_inscription	= stripslashes(_request('nom_inscription'));
 $mail_inscription	= stripslashes(_request('mail_inscription'));
 
 // le message d'erreur
-
 $mess_error		= stripslashes(_request('mess_error'));
 
 // déclarations de variables supplémentaires (pour la fonction ajout_document)
-
 $documents_actifs = array();
 $lang = _request('var_lang');	
 $nom = 'changer_lang';
-//lang_dselect();
-$langues = liste_options_langues($nom, $lang);
 
 // remise à zero 
-
 $formulaire_previsu = '';
 $bouton= '';
 $mess_error = '';
 $erreur_document = 0;
 
 // filtrage des zones de texte si elles sont emplies
-
 if ($titre) $titre = entites_html($titre);
 if ($nom_inscription) $nom_inscription = entites_html($nom_inscription);
 if ($mail_inscription) $mail_inscription = entites_html($mail_inscription);
@@ -216,32 +172,24 @@ if ($descriptif) $descriptif = entites_html($descriptif);
 if ($ps) $ps = entites_html($ps);
 
 // Si l'utilisateur a cliqué sur le bouton "abandonner"
-
 if ($abandonner) {
 
 	// suppression des enregistrements éventuellement créé dans la table spip_mot_article
-
-	if($article) {
-		spip_query("DELETE FROM spip_mots_articles WHERE id_article = '$article'");
-	}
-
+	if($article) sql_delete("spip_mots_articles", 'id_article = '.sql_quote($article).' LIMIT 1');
+	
 	// construction de la page de retour
-
 	$url_retour = $url_site . $config['UrlAbandon'] ;
 	$message = '<META HTTP-EQUIV="refresh" content="'.$config['TempsAtt'].'; url='.$url_retour.'">' . $config['TextAbandon'];
-	//$message = $message . $retour;
+	
 	return $message;
 }
 
 // on demande un nouvel identifiant pour l'article si l'utilisateur clique sur l'un des boutons action
-
 if (($previsualiser) || ($media) || ($valider) || ($tags) || ($mots)) {
-	if (!$article) $article=op_request_new_id($config['IDAuteur']);
+	if (!$article) $article = op_request_new_id($config['IDAuteur']);
 }
 
-
 // Affichage des infos si l'auteur est identifié et s'il n'a pas modifié les champs identification
-
 $auteur_session = $GLOBALS['auteur_session'];
 if($auteur_session) {
 	if (!$nom_inscription) $nom_inscription = $auteur_session['nom'];
@@ -249,7 +197,6 @@ if($auteur_session) {
 }
 	
 // l'auteur demande la publication de son article
-
 if($valider) {
 	// vérification avant mise en Base de donnée
 	$flag_ok = 'ok';
@@ -263,6 +210,9 @@ if($valider) {
 	// Anti spam (remplace les @ par un texte aléatoire)
 	if ($config['AntiSpam'] == 'yes') {
 		$texte = antispam($texte);
+		$ps = antispam($ps);
+		$chapo = antispam($chapo);
+		$descriptif = antispam($descriptif);
 		$mail_inscription = antispam($mail_inscription);
 	}
 
@@ -288,117 +238,63 @@ if($valider) {
 
 		$date_complete = date('Y-m-d H:i:s',mktime($heure, $minute, 0, $mois, $jour, $annee));
 
-		// calcul extra
+		// calcul extra, l'identification est gérée dans les brèves agenda
 		$extra=array(
   			"OP_pseudo"=>$nom_inscription,
   			"OP_mail"=>$mail_inscription
 		);
 		$extra=serialize($extra);
 
+		// Concatenation : le texte est composé du texte ET du chapo, descriptif, ps
+		$texte_agenda = $descriptif . $chapo . $texte . $ps;
+
 		// construction lien URL désactivé
 		//$lien_url = $url_site . 'spip.php?article' . $article;
 		$lien_url = '';
-		if ($GLOBALS['spip_version_code'] < '1.93') {
 
-			spip_abstract_insert('spip_breves', "(id_breve,date_heure,titre,texte,lien_url,statut,id_rubrique,extra)", "(
-			" . intval($id_breve_op) .",
-			" . spip_abstract_quote($date_complete) . ",
-			" . spip_abstract_quote($titre) . ",
-			" . spip_abstract_quote($texte) . ",
-			" . spip_abstract_quote($lien_url) . ",
-			" . spip_abstract_quote($statut) . ",
-			" . spip_abstract_quote($RubAgenda) . ",
-			" . spip_abstract_quote($extra) . "
-			)");
-	
-			// supression de l'article temporaire
-			spip_query("DELETE FROM spip_articles WHERE id_article = '$article' LIMIT 1");
-		}
-		else {
-			sql_insertq('spip_breves', array(
-				"date_heure" => $date_complete,
-				"titre" => $titre,
-				"texte" => $texte,
-				"lien_url" => $lien_url,
-				"statut" => $statut,
-				"id_rubrique" => $RubAgenda,
-				"extra" => $extra
-			));
+		sql_insertq('spip_breves', array(
+			"date_heure" => $date_complete,
+			"titre" => $titre,
+			"texte" => $texte_agenda,
+			"lien_url" => $lien_url,
+			"statut" => $statut,
+			"id_rubrique" => $RubAgenda,
+			"extra" => $extra
+		));
 
-			sql_delete('spip_articles','id_article = '.sql_quote($article).' LIMIT 1');
-		}
+		sql_delete('spip_articles','id_article = '.sql_quote($article).' LIMIT 1');
 	}
 	else if ($flag_ok== 'ok') { // soit il s'agit d'un article, soit d'une breve. Les deux à la fois ne sont pas possible
 
 		// préparation de la mise en base de donnée
 
 		// on recupere le secteur et la langue associée
-		if ($GLOBALS['spip_version_code'] < '1.93') {
-			$s = spip_query("SELECT id_secteur, lang FROM spip_rubriques WHERE id_rubrique = '$rubrique' ");
-			if ($r = spip_fetch_array($s)) {
-				$id_secteur = $r["id_secteur"];
-				$lang = $r["lang"];
-			}
-		}
-		else {
-		
-			$row = sql_fetsel("lang, id_secteur", "spip_rubriques", "id_rubrique=$rubrique");
-			$id_secteur = $row['id_secteur'];
-			$lang_rub = $row['lang'];
+		$row = sql_fetsel('lang, id_secteur', 'spip_rubriques', 'id_rubrique='.sql_quote($rubrique));
+		$id_secteur = $row['id_secteur'];
+		$lang_rub = $row['lang'];
 	
-			// La langue a la creation : si les liens de traduction sont autorises
-			// dans les rubriques, on essaie avec la langue de l'auteur,
-			// ou a defaut celle de la rubrique
-			// Sinon c'est la langue de la rubrique qui est choisie + heritee
-			if ($GLOBALS['meta']['multi_articles'] == 'oui') {
-				lang_select($GLOBALS['visiteur_session']['lang']);
-				if (in_array($GLOBALS['spip_lang'],
-				explode(',', $GLOBALS['meta']['langues_multilingue']))) {
-					$lang = $GLOBALS['spip_lang'];
-					$choisie = 'oui';
-				}
-			}
-		
-			if (!$lang) {
-				$choisie = 'non';
-				$lang = $lang_rub ? $lang_rub : $GLOBALS['meta']['langue_site'];
+		// La langue a la creation : si les liens de traduction sont autorises
+		// dans les rubriques, on essaie avec la langue de l'auteur,
+		// ou a defaut celle de la rubrique
+		// Sinon c'est la langue de la rubrique qui est choisie + heritee
+		if ($GLOBALS['meta']['multi_articles'] == 'oui') {
+			lang_select($GLOBALS['visiteur_session']['lang']);
+			if (in_array($GLOBALS['spip_lang'],
+			explode(',', $GLOBALS['meta']['langues_multilingue']))) {
+				$lang = $GLOBALS['spip_lang'];
 			}
 		}
+		
+		if (!$lang) {
+			$lang = $lang_rub ? $lang_rub : $GLOBALS['meta']['langue_site'];
+		}
 
-
-		// L'article existe déjà, on fait donc un UPDATE, et non un INSERT
- 
-	/*	$retour = spip_query('UPDATE spip_articles SET titre = ' . spip_abstract_quote($titre) .
-				',	id_rubrique = ' . spip_abstract_quote($rubrique) .
-				',	surtitre = ' . spip_abstract_quote($surtitre) .
-				',	soustitre = ' . spip_abstract_quote($soustitre) .
-				',	chapo = ' . spip_abstract_quote($schapo) .
-				',	descriptif = ' . spip_abstract_quote($descriptif) .
-				',	ps = ' . spip_abstract_quote($ps) .
-				',	texte = ' . spip_abstract_quote($texte) .
-				',	statut = ' . spip_abstract_quote($statut) .
-				',	lang = ' . spip_abstract_quote($lang) .
-				',	id_secteur = ' . spip_abstract_quote($id_secteur) .
-				',	date = NOW()' .
-				',	date_redac = NOW()' .
-				',	date_modif = NOW()' .
-			 	' WHERE id_article = ' . spip_abstract_quote($article) );*/
 		// calcul extra
 		$extra=array(
   			"OP_pseudo"=>$nom_inscription,
   			"OP_mail"=>$mail_inscription
 		);
 		$extra=serialize($extra);
-
-/*		if ($retour == 1) { $retour = '';}
-		else { $retour = _T('opconfig:erreur_insertion');}
-*/	
-		// on lie l'article à l'auteur anonymous
-
-		/*spip_abstract_insert('spip_auteurs', "(id_auteur,id_article)", "(
-			" . spip_abstract_quote($config['IDAuteur']) .",
-			" . spip_abstract_quote($article) . "
-			)");*/
 
 		sql_update('spip_articles', array(
 			"titre" => sql_quote($titre),
@@ -422,18 +318,7 @@ if($valider) {
 		sql_insertq('spip_auteurs', array(
 			'id_auteur' => sql_quote($config['IDAuteur']),
 			'id_article' => sql_quote($article)
-			));
-	
-		// on ajoute dans spip_op_auteur l'identitée donnée par l'utilisateur
-
-		/*spip_abstract_insert('spip_op_auteurs', "(id_auteur,id_article,id_real_auteur,nom,email,group_name,phone)", "(
-			" . intval($id_auteur_op) .",
-			" . spip_abstract_quote($article) . ",
-			" . spip_abstract_quote($config['IDAuteur']) . ",
-			" . spip_abstract_quote($nom_inscription) . ",
-			" . spip_abstract_quote($mail_inscription) . "
-			)");*/
-	
+			));	
 	}
 	
 	if ($flag_ok == 'ok') {
@@ -498,20 +383,16 @@ if($previsualiser) {
 if($mots) {
 	if ($motschoix){
 		foreach($motschoix as $mot){
-
 			//protection contre mots-clefs vide
-
-			$row = spip_fetch_array(spip_abstract_select('titre', 'spip_mots', "id_mot=$mot LIMIT 1"));
+			$row = sql_fetsel('titre', 'spip_mots', "id_mot=$mot LIMIT 1");
 			$titremot = $row['titre'];
 			if (!(strcmp($titremot,"")==0)) {
 				if ($mot) {
-
-				// on lie l'article aux mots clefs choisis
-
-				spip_abstract_insert('spip_mots_articles', "(id_mot,id_article)", "(
-					" . spip_abstract_quote($mot) .",
-					" . spip_abstract_quote($article) . "
-				)");
+					// on lie l'article aux mots clefs choisis
+					sql_insertq('spip_mots_articles', array(
+						'id_mot' => sql_quote($mot),
+						'id_article' => sql_quote($article)
+						));
 				}
 			}
 		}
@@ -519,7 +400,6 @@ if($mots) {
 }
 	
 // si l'auteur demande des mots-clés avec Tag machine
-	
 if ($tags) {
 	include_spip('inc/tag-machine');
 	ajouter_liste_mots(_request('tags'),
@@ -528,10 +408,9 @@ if ($tags) {
 		'articles',
 		'id_article',
 		true);
-}	
+}
 
 // si l'auteur ajoute un documents
-
 if($media) {
 
 	// compatibilité php < 4.1
@@ -551,7 +430,6 @@ if($media) {
 		$erreur_document = 1;
 	}
 	else {
-
 		// verification si extention OK
 		$tableau = split('[.]', $fichier);
 		$type_ext = $tableau[1];
@@ -582,8 +460,6 @@ if($media) {
 }
 
 // cas d'un nouvel article ou re-affichage du formulaire
-
-
 if ($config['Agenda'] == 'yes') {
 	// Gestion de l'agenda
 	$formulaire_agenda = inclure_balise_dynamique(
@@ -597,12 +473,9 @@ if ($config['Agenda'] == 'yes') {
 		)
 	), false);
 }
-	
 
-// Pour le moment ces des options font la même chose
-if (($config['DocInc'] == 'yes') || ($config['DocLier'] == 'yes')) {
-
-	// Gestion des documents
+// Gestion des documents
+if ($config['DocInc'] == 'yes') {
 
 	$bouton= 'Ajouter l\'image ou le document';
 	$formulaire_documents = inclure_balise_dynamique(
@@ -615,10 +488,8 @@ if (($config['DocInc'] == 'yes') || ($config['DocLier'] == 'yes')) {
 	), false);
 }
 
-
+// Gestion des mot-clefs avec tag machine
 if ($config['TagMachine'] == 'yes') {
-
-	// Gestion des mot-clefs avec tag machine
 
 	$formulaire_tagopen = inclure_balise_dynamique(
 	array('formulaires/formulaire_tagopen',	0,
@@ -629,10 +500,8 @@ if ($config['TagMachine'] == 'yes') {
 }
 
 
-
+// Gestion des mot-clefs
 if ($config['MotCle'] == 'yes') {
-
-	// Gestion des mot-clefs
 
 	$bouton= "Ajouter les nouveaux mot-clefs";
 	$formulaire_motclefs = inclure_balise_dynamique(

@@ -10,7 +10,8 @@
 function barre_article($texte, $rows, $cols, $lang='')
 {
 	static $num_formulaire = 0;
-	include_ecrire('inc/layer');
+	//include_ecrire('inc/layer');
+	include_spip('inc/layer');
 
 	$texte = entites_html($texte);
 	if (!$GLOBALS['browser_barre'])
@@ -53,7 +54,7 @@ function select_annee($annee) {
 	if ($annee !== '') $selected = "SELECTED";
 	$return = "<select name='annee'>"; // pour le moment ne prend en compte que 5 ans
 	for ($i = 0;$i<5;$i++) {
-		$a = 2007 + $i;
+		$a = 2008 + $i;
 		if ($a == $annee) {
 			$return = $return . "<option value='$a' '$selected' >$a</option>";
 		}
@@ -180,12 +181,22 @@ function op_request_new_id($connect_id_auteur)
 {
 	$statut_nouv='prepa';
 	$forums_publics = substr(lire_meta('forums_publics'),0,3);
-	spip_query("INSERT INTO spip_articles (statut, date, accepter_forum) VALUES ( 'prepa', NOW(), '$forums_publics')");
-	$article = mysql_insert_id();
-	spip_query("DELETE FROM spip_auteurs_articles WHERE id_article = $article");
-	spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($connect_id_auteur, $article)");
+	
+	$article = sql_insertq('spip_articles', array (
+		'statut' => 'prepa',
+		'date' => 'NOW()',
+		'accepter_forum' => $forum_publics
+		));
+	
+	sql_delete('spip_auteurs_articles', 'id_article = '.sql_quote($article).' LIMIT 1');
+	sql_insertq('spip_auteurs_articles', array(
+		'id_auteur' => $connect_id_auteur,
+		'id_article' => $article
+		));
+	
 	// lors de la demande d'un nouvel id article, il faut supprimer les relations éventuelles avec la table mots_articles
-	spip_query("DELETE FROM spip_mots_articles WHERE id_article = '$article'");
+	sql_delete('spip_mots_articles','id_article = '.sql_quote($article));
+	
 	return $article;
 }
 

@@ -2,16 +2,17 @@
 	<nom>openPublishing</nom>
 	<version>0.4</version>
 	<etat>stable</etat>
-	<auteur>Collectif Indymedia Lille [contact->mailto:imc.lille@no-log.org]
+	<auteur>Collectif Indymedia Lille
+_ [contact->mailto:imc.lille@no-log.org]
 _ [site->http://lille.indymedia.org]
 _ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<description>
-		{{Plugin openPublishing pour site de publication libre.}} <br /> <br />
+		{{Plugin openPublishing pour site de publication ouverte.}} <br /> <br />
 		{{Ce plugin fourni :}} <br />
 		<ul>
 		<li>un formulaire openPublishing <code>#FORMULAIRE_ARTICLE{#SELF}</code></li>
-		<li>trois nouvelles tables dans la base de donn&#233;es (spip_op_auteurs spip_op_config et spip_op_rubriques). </li>
+		<li>trois nouvelles tables dans la base de donn&#233;es (spip_op_auteurs, spip_op_config, et spip_op_rubriques). </li>
 		<li>une nouvelle balise :
 			<ul>
 			<li> #AGENDA (donne le num&#233;ro de votre rubrique agenda).</li>
@@ -41,9 +42,16 @@ _ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 		<li>D&eacute;sactivez le plugin.</li>
 		</ul>
 		
+		{{Procedure de mise &agrave; jour : }} <br />
+		<ul>
+		<li>Allez dans l'onglet de configuration openPublishing.</li>
+		<li>Cliquez sur "Mettre &agrave; jour openPublishing"</li>
+		<li>Modifier la configuration par d&eacute;faut des nouvelles options du plugins</li>
+		</ul>
+		
 		{{feuille de style : }} attention, il <b>faut</b> copier les styles du plugin dans <b>votre</b> feuille de style<br />
 	</description>
-	<lien>[Documentation->http://edd.lautre.net/wiki], et [Configuration->.?exec=cfg&amp;cfg=openPublishing]</lien>
+	<lien>[Documentation->http://edd.lautre.net/wiki], et [Configuration->.?exec=cfg&amp;cfg=op]</lien>
 	<prefix>op</prefix>
 	<options> <!-- fichier charge a chaque hit -->
 		op_options.php

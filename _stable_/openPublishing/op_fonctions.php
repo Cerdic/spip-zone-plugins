@@ -30,7 +30,7 @@ function balise_AGENDA($p) {
 }
 
 function return_agenda() {
-	$reponse = op_get_rubrique_agenda();
-	return $reponse;
+	$config = lire_config('op');
+	return $config["RubAgenda"];
 }
 ?>

@@ -13,4 +13,5 @@ $GLOBALS['champs_extra'] = Array (
                         "OP_mail" => "ligne|propre|mail du r&eacute;dacteur"
                 )
         );
+
 ?>

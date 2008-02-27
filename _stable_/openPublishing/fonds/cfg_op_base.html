@@ -1,0 +1,74 @@
+<!-- descriptif=Attention, ces actions vont agir sur la base de donnée de spip. Soyez absolument certain de ce que vous faites avant de le faire !
+-->
+<!-- titre=openPublishing : base de donnée-->
+<!-- boite=Base de donnée du plugin openPublishing-->
+<!-- nom=op_base-->
+
+<?php
+
+// suppression des tables obsolétes
+$action = $_GET['action'];
+
+switch ($action) {
+	case 'SupTables' :
+		op_supprimer_tables();
+		echo '<fieldset><legend><b>R&eacute;sultat</b></legend><p><b>les tables spip_op_config et spip_op_rubriques ont été supprim&eacute;e</b></p></fieldset>';
+		break;
+	case 'Maj' :
+		op_maj_auteurs();
+		echo '<fieldset><legend><b>R&eacute;sultat</b></legend><p><b>Les informations concernant les rédacteurs openPublishing sont maintenant conservé dans les champs extras de votre table article. La table spip_op_auteurs est maintenant inutile, vous pouvez la supprimer.</b></p></fieldset>';
+		break;
+	case 'SupAuteur' :
+		op_sup_auteurs();
+		echo '<fieldset><legend><b>R&eacute;sultat</b></legend><p><b>la table spip_op_auteur a été supprim&eacute;e</b></p></fieldset>';
+		break;
+}
+
+?>
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<p>Bonne nouvelle, le plugin openPublishing n'utilise plus de tables "perso" dans la base de donnée de spip.</p>
+<br />
+<fieldset><legend><b>Cas d'une installation "neuve"</b></legend>
+<p>C'est la première fois que vous installez le plugin openPublishing, et vous l'utilisez pour la première fois.</p>
+<p>Vous n'avez rien à faire (réjouissez vous !), ne touchez surtout pas aux options ci-dessous, celles ci concernent les personnes ayant installés une version précendente du plugin openPublishing.</p>
+<p>Vous pouvez en toute sécurité aller modifier les options de configuration du plugin openPublishing</p>
+</fieldset>
+
+<br />
+
+<fieldset><legend><b>Cas d'une mise à jour du plugin</b></legend>
+<p>Vous venez de télécharger la version 0.4 du plugin openPublishing. Vous avez supprimé votre ancienne version dans votre répertoire "plugins/" et vous l'avez remplacé par celle-ci.</p>
+<p>La structure du plugin a évolué depuis la première version à la version présente, notamment au niveau de l'organisation de la base de donnée. C'est pourquoi les outils ci-dessous vont vous aider à mettre à jour votre base de donnée sans risquer de perdre vos données.</p>
+<p>La version 0.4 d'openPublishing n'utilise plus les tables spip_op_config et spip_op_rubriques. Si votre ancienne version du plugin était la 0.3 ou la 0.2.2, il vous faut supprimer totalement ces tables et refaire la configuration de votre plugin :</p>
+<a href="?exec=cfg&cfg=op_base&action=SupTables">Supprimer les tables obsolétes (op_config et op_rubriques)</a><br />
+<p>La version 0.4 d'openPublishing n'utilise plus la table spip_op_auteurs pour stocker les données d'identifications des rédacteurs, mais utilise les champs "extras" de la table spip_article. L'option suivante va vous permettre de mettre à jous tous les articles ayant eu un rédacteurs s'étant identifié via ce système. Cela vous permettra de conserver les données identification de vos rédacteurs et donc de supprimer la table spip_op_auteurs devenue obsoléte</p>
+<a href="?exec=cfg&cfg=op_base&action=Maj">Mettre à jours les champs extra de la table spip_articles, a partir des informations de la table spip_op_auteurs</a><br />
+<p>Si l'opération c'est bien déroulé, vous pouvez maintenant supprimer la table obsoléte.</p>
+<a href="?exec=cfg&cfg=op_base&action=SupAuteur">Suppression de la table spip_op_auteurs</a><br />
+
+</fieldset>
+
+<br />
+
+<fieldset><legend><b>Correction des numéros d'identifications des auteurs</b></legend>
+La version 0.3 du plugin openPublishing utilisai par défaut l'auteur "anonymous" portant le numéro d'identification 999. Cela était une très mauvaise idée, car pour tout auteur créé par la suite, l'identification automatique démarai à partir du numéro 1000 ce qui pouvai causer de multiples bugs dans l'utilisation de spip. L'outil ci-dessous va vous permettre, si vous êtes dans ce cas, de supprimer l'auteur portant l'id 999 (le fameux auteur anonymous) et de re-donner aux auteurs portant l'id 1000 ou plus leur véritable numéro id.</p>
+<p>Avant toute chose, munissez vous du numéro id du dernier auteur créer AVANT l'installation du plugin openPublishing 0.3</p>
+<p>Exemple avec trois auteurs :</p>
+<ul>
+<li>auteur 1 : id = 1</li>
+<li>auteur 2 : id = 2</li>
+<li>anonymous : id = 999</li>
+<li>auteur 3 : id = 1000</li>
+</ul>
+<a>Supprimer l'auteur portant le numéro id 999</a><br />
+<label>Indiquez dans ce champs le dernier numéro id valide (dans l'exemple ci-dessus, il s'agit de "2")</label><br />
+<a><input type="text" size="2" />&nbsp;Corriger la table "auteurs"</a><br />
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
