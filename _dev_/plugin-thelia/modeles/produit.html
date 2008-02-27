@@ -26,6 +26,14 @@
 	</T_produitpromo>
 		<p class="thelia_prix">prix : THELIA-PRIX &euro;</p>
 	<//T_produitpromo>
-	<p class="thelia_panier"><a href="#URL_PAGE{panier,thelia_action=ajouter&ref=THELIA-REF}">ajouter au panier</a></p>
+	<p class="thelia_panier">
+	<T_produitreappro>
+	<THELIA_produitreappro type="PRODUIT" ref="THELIA-REF" reappro="1">
+		<span class="thelia_reappro"><:spipthelia:en_cours_de_reapprovisionnement:></span>
+	</THELIA_produitreappro>
+	</T_produitreappro>
+		<a href="#URL_PAGE{panier,thelia_action=ajouter&ref=THELIA-REF}">ajouter au panier</a>
+	<//T_produitreappro>
+	</p>
 </div></THELIA_produit>
 
