@@ -1,8 +1,31 @@
-<THELIA_produit type="PRODUIT"[ ref="(#ENV{ref}|?{#ENV{ref},''})"][ rubrique="(#ENV{rubrique}|?{#ENV{rubrique},''})"][ id="(#ENV{id}|?{#ENV{id},''})"]>
+<THELIA_produit type="PRODUIT"
+	[ caracteristique="(#ENV{caracteristique}|?{#ENV{caracteristique},''})"]
+	[ prixmax="(#ENV{prixmax}|?{#ENV{prixmax},''})"]
+	[ prixmin="(#ENV{prixmin}|?{#ENV{prixmin},''})"]
+	[ aleatoire="(#ENV{aleatoire}|?{#ENV{aleatoire},''})"]
+	[ classement="(#ENV{classement}|?{#ENV{classement},''})"]
+	[ motcle="(#ENV{motcle}|?{#ENV{motcle},''})"]
+	[ garantie="(#ENV{garantie}|?{#ENV{garantie},''})"]
+	[ reappro="(#ENV{reappro}|?{#ENV{reappro},''})"]
+	[ bloc="(#ENV{bloc}|?{#ENV{bloc},''})"]
+	[ deb="(#ENV{deb}|?{#ENV{deb},''})"]
+	[ boutique="(#ENV{boutique}|?{#ENV{boutique},''})"]
+	[ num="(#ENV{num}|?{#ENV{num},''})"]
+	[ nouveaute="(#ENV{nouveaute}|?{#ENV{nouveaute},''})"]
+	[ promo="(#ENV{promo}|?{#ENV{promo},''})"]
+	[ ref="(#ENV{ref}|?{#ENV{ref},''})"]
+	[ rubrique="(#ENV{rubrique}|?{#ENV{rubrique},''})"]
+	[ id="(#ENV{id}|?{#ENV{id},''})"]>
 <div class="produits_thelia" [style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>	
 	[(#ENV{photo}|=={non}|?{'',' '})<THELIA_images type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><div style="float: left;"><img src="THELIA-IMAGE" /></div></THELIA_images> ]<p class="thelia_titre">THELIA-TITRE</p>
 	<div class="thelia_description">THELIA-DESCRIPTION</div>
-	<p class="thelia_prix">prix : THELIA-PRIX &euro;</p>
+	<T_produitpromo>
+	<THELIA_produitpromo type="PRODUIT" ref="THELIA-REF">
+		<p class="thelia_prix">prix : <span class="thelia_promo">THELIA-PRIX2 &euro;</span> <:spipthelia:au_lieu_de:> THELIA-PRIX &euro;</p>
+	</THELIA_produitpromo>
+	</T_produitpromo>
+		<p class="thelia_prix">prix : THELIA-PRIX &euro;</p>
+	<//T_produitpromo>
 	<p class="thelia_panier"><a href="#URL_PAGE{panier,thelia_action=ajouter&ref=THELIA-REF}">ajouter au panier</a></p>
 </div></THELIA_produit>
 

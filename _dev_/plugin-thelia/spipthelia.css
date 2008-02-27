@@ -194,11 +194,13 @@ a.LIEN_pages:hover {
 
 /* style propre aux modeles <produit>*/
 
-#contenu .produits_thelia {
+.produits_thelia {
 	width: 200px;
-	clear: right;
 	text-align: left;
 	border: 1px dashed #cccccc;
 	padding: 1em;
 }
-
+.thelia_promo {
+	font-size: 1.2em;
+	color: #F60;
+}

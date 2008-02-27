@@ -47,5 +47,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'total' => 'Total',
 'remise' => 'Remise',
 'choix_paiement' => 'Je choisis un mode de paiement',
-'code_reduction' => 'Saisir votre code de réduction');
+'code_reduction' => 'Saisir votre code de réduction',
+'au_lieu_de' => 'au lieu de');
 ?>
