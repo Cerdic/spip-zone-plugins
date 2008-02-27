@@ -1,4 +1,4 @@
-<?
+<?php
 
 $GLOBALS['jeux_base_version'] = 0.13;
 

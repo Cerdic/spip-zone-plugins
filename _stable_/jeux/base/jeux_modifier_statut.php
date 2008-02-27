@@ -1,4 +1,4 @@
-<?
+<?php
 include_spip('inc/utils');
 function jeu_modifier_statut($id,$statut){
 	

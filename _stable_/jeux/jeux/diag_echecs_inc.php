@@ -1,4 +1,4 @@
-<?
+<?php
 
 // transforme la notation FEN en notation classique
 function FEN2classic($fen) {

@@ -1,4 +1,4 @@
-<?
+<?php
 
 // declaration des tables du plugin jeux //
 global $table_des_tables;

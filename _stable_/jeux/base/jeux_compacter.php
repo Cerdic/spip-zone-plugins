@@ -1,4 +1,4 @@
-<?
+<?php
 function jeux_compacter_tout_jeu($id_jeu){
 	include_spip('public/assembler');
 	$liste = recuperer_fond('fonds/jeux_compacter',array('id_jeu'=>$id_jeu));

@@ -1,4 +1,4 @@
-<?
+<?php
 function jeux_ajouter_resulat($id_jeu, $resultat, $resultat_detaille=''){
 	$id_auteur = $GLOBALS["auteur_session"]['id_auteur'];
 	if (!$id_auteur) return;
