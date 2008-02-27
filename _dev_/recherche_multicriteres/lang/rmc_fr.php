@@ -11,7 +11,8 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 //A
 'aide' => 'AIDE en ligne',
-
+'aide_select_multi' =>'Maintenez la touche clavier &laquo;&nbsp;<abbr title="Controle">Ctrl</abbr>&nbsp;&raquo; enfonc&eacute;e pour s&eacute;lectionner plusieurs crit&egrave;res.',
+'articles_date' =>'Chercher les articles de',
 //B
 
 //C
@@ -49,9 +50,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'insert_nb_colonnes' =>'Nombre de colonnes affich&eacute;es pour la recherche g&eacute;n&eacute;rale <i><small>( Affichage de la recherche page sommaire par exemple)</small></i>',
 'insert_nb_colonnes_rub' =>'Nombre de colonnes affich&eacute;es pour la recherche par rubrique <i><small>( Affichage de la recherche page rubrique )</small></i>',
 
+//J
+'jours' =>'jours',
+
+//L
+'liste_mots' =>'Listes des mots-cl&eacute;s', 
+'limiter_recherche_rub' =>'Recherche limit&eacute;e &agrave; la rubrique en cours',
+
 //M
+'mois' =>'mois',
 'mot_exclu' =>'Mot exclu',
 'mot_exclure' =>'Exclure ce mot',
+'mots_tous_presents' =>'Tous les mots doivent &ecirc;tre pr&eacute;sents',
+
+//O
+'options_recherche' =>'Options de recherche',
 
 //R
 'recherche_rubrique' =>'Recherche par rubrique',
@@ -80,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_config' =>'Configuration des groupes de mots cl&eacute; par rubrique.',
 'titre_config_public' =>'Configuration de l\'affichage publique.',
 'titre_page_admin' =>'Recherche Multi-crit&egrave;res',
-
+'tous' =>'tous',
 //Z
 'z' =>'z'
 );

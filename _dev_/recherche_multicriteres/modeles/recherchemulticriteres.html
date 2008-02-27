@@ -1,165 +1,80 @@
-<?php
-/***************************************************************************\
- *  Recherche multicritères par mots-clés SPIP                             *
- *                                                                         *
- *  Copyright (c) 2005                                                     *
- *  Paul Sanches - http://www.netdeveloppeur.com                           *
- *  Adresse de publication de la contribution :	                           *
- *  http://www.netdeveloppeur.com                                          *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt                       *
-\***************************************************************************/
-?>
-<BOUCLE_rubrique_search(RUBRIQUES) {id_rubrique}>
-<?php
-	$id_rubrique = '[(#ID_RUBRIQUE|texte_script)]';
-?>
-</BOUCLE_rubrique_search>
-<?php
-	if(!isset($id_rubrique)){
-		$id_rubrique = 0;
-	}
-		
-	$sql =  "SELECT spip_groupes_mots.id_groupe, spip_groupes_mots.titre AS titregroupe, spip_mots.id_mot,spip_mots.titre AS titremot ";
-	$sql .= "FROM spip_rmc_rubs_groupes INNER JOIN spip_groupes_mots ON spip_rmc_rubs_groupes.id_groupe = spip_groupes_mots.id_groupe ";
-	$sql .= "INNER JOIN spip_mots ON spip_mots.id_groupe  = spip_groupes_mots.id_groupe ";
-	$sql .= "WHERE id_rubrique = $id_rubrique ";
-	$sql .= "GROUP BY spip_groupes_mots.id_groupe,spip_groupes_mots.titre, spip_mots.id_mot,spip_mots.titre ";
-	$sql .= "ORDER BY spip_groupes_mots.titre,spip_mots.titre";
-		
-	$result = mysql_query($sql);
-	if ($result) {
-		$id_grp_prec = 0;
-		$i = 0;
-		$sql1 = "SELECT colonnes AS nbcol, colonnes_rub AS nbcol_rub, taille_police AS taille, taille_police_rub AS taille_rub, couleur_police AS coul, couleur_police_rub AS coul_rub, couleur_bordure AS bord, couleur_bordure_rub AS bord_rub FROM spip_rmc_rubs_groupes_conf";
-		$result1 = spip_query($sql1);
-		$row1 = mysql_fetch_assoc($result1);
-		extract($row1);
-		if($id_rubrique != 0){
-			$nbcol = $nbcol_rub;
-			$taille = $taille_rub;
-			$coul = $coul_rub;
-			$bord = $bord_rub;
-		}
-		$nbselcreate = 0;
-		$nbline = 0;
-		while ($row = mysql_fetch_assoc($result)) {
-			extract($row);
+######################################################################
+# RECHERCHE MULTI-CRITERES                                           #
+# Auteur: Dominique (Dom) Lepaisant - Stephanie De Nadaï - Fev 2008  #
+# Adaptation de la contrib de Paul Sanchez - Netdeveloppeur          #
+# http://www.netdeveloppeur.com                                      #
+# Ce programme est un logiciel libre distribue sous licence GNU/GPL. #
+# Pour plus de details voir le fichier COPYING.txt                   #
+######################################################################
+#INSERT_HEAD [(#REM) n'est pas utile]
+
+[(#REM) On recupere l'id rubrique et on lui attribue 0 s'il n'existe pas ]
+<B_rmc_rubrique><BOUCLE_rmc_rubrique(RUBRIQUES){id_rubrique}> </BOUCLE_rmc_rubrique>
+	#SET{idrub,#ID_RUBRIQUE}
+</B_rmc_rubrique>
+	#SET{idrub,0}
+<//B_rmc_rubrique>
+
+<BOUCLE_format(SPIP_RMC_RUBS_GROUPES_CONF)>
+	[(#GET{idrub}|!={0}|?{#SET(nbcol,#COLONNE_RUB),#SET(nbcol,#COLONNE)}
+	[(#GET{idrub}|!={0}|?{#SET(taille,#TAILLE_POLICE_RUB),#SET(taille,#TAILLE_POLICE)}
+	[(#GET{idrub}|!={0}|?{#SET(coul,#COULEUR_POLICE_RUB),#SET(coul,#COULEUR_POLICE)}
+	[(#GET{idrub}|!={0}|?{#SET(bord,#COULEUR_BORDURE_RUB),#SET(bord,#COULEUR_BORDURE)}
+</BOUCLE_format>
+
+<form action="spip.php?page=rec_mc_result" method="post" id="form_mc" name="form_mc">
+	<input type="hidden" name="id_rubrique" value="#GET{idrub}" />
+	<div class="multicriteres" style="color:<?=$coul?>;">
+		<h2><:rmc:titre_page_admin:></h2></div>
+		<fieldset><legend><:rmc:liste_mots:></legend>
+		<p><em><:rmc:aide_select_multi:></em></p>
+		<div class="liste_mc" style="color:#GET{coul}; background-color:#GET{bord}">
+
+			[(#REM) On recherche les groupes de mots attribues à la rubrique en cours ou au secteur]
+			<BOUCLE_rmc_groupesparrubrique(SPIP_RMC_RUBS_GROUPES){id_rubrique=#GET{idrub}}>
+				<div> 
+					<p>
+					<BOUCLE_groupes(GROUPES_MOTS){id_groupe}{par titre}>
+					<label for="#TITRE">#TITRE</label>
+					</p>
+					<select name="idmot[]" id="#TITRE" multiple="multiple" class="sel_mc">
+						[(#REM) On boucle sur les mots du groupe]
+						<BOUCLE_mots(MOTS){id_groupe}{par titre}>
+						[(#REM) on cherche si le mot est exclu]
+						<B_mots_exclus><BOUCLE_mots_exclus(SPIP_RMC_MOTS_EXCLUS){id_rubrique=#GET{idrub}}{id_mot_exclu=#ID_MOT}>
+						</BOUCLE_mots_exclus></B_mots_exclus>
+						[(#REM) titre du mot]
+						<option value="#_mots:ID_MOT">#_mots:TITRE </option>
+						<//B_mots_exclus>
+						</BOUCLE_mots>
+					</select
+					</BOUCLE_groupes>
+				</div>
+				[(#REM)ici, on peut ajouter un <br avec un style "clear:both;" conditionné au nb de colonnes]
+			</BOUCLE_rmc_groupesparrubrique>
+		</div>
+	</div>
+	<fieldset class="options_mc">
+		<legend><:rmc:options_recherche:></legend>
+		<p>
+			<label for="nbjour"><:rmc:articles_date:></label>
+			<select id="nbjour" name="nbjour">
+				<option value="0" selected="selected">- <:rmc:tous:></option>
+				<option value="7">- 7 <:rmc:jours:></option>
+				<option value="30">- 1 <:rmc:mois:></option>
+				<option value="9O">- 3 <:rmc:mois:></option>
+				<option value="365">- 12 <:rmc:mois:></option>
+			</select>
+		</p>
 			
-			if ($id_groupe != $id_grp_prec) {
-				$i++;
+		[(#GET{idrub}|!={0}|?{<p><label for="onlyrub"><:rmc:limiter_recherche_rub:><input type="checkbox" value="1" name="onlyrub" id="onlyrub" /></label></p>,''})]
 				
-				if ($id_grp_prec != 0) { 	
-?>	
-					</select>
-<?php 			// if / else utile ?
-					if ($nbselcreate == $nbcol) {
-							$nbselcreate = 0;
-?>
-							</div>
-<?php
-					} else {
-?>
-						</div>
-<?php
-					}						
-				} else {
-?>	
-				<form action="spip.php?page=rec_mc_result" method="post" id="form_mc" name="form_mc">
-					<input type="hidden" name="id_rubrique" value="<?=$id_rubrique?>" />
-					<div class="multicriteres" style="color:<?=$coul?>;">
-						<h2>Recherche multi-crit&egrave;res</h2></div>
-						<fieldset><legend>Listes des mots-cl&eacute;s </legend>
-						<p><em>Maintenez la touche clavier &laquo;&nbsp;<abbr title="Controle">Ctrl</abbr>&nbsp;&raquo; enfonc&eacute;e pour s&eacute;lectionner plusieurs crit&egrave;res.</em></p>
-					
-		
-					<div class="liste_mc" style="color:<?=$coul?>; background-color:<?=$bord?>">
-<?php
-				}
-		// if / else utile ? :
-				if ($nbselcreate == 0) { 
-					$nbselcreate += 1 ;
-?> 	
-<?php 
-				} else { 
-					$nbselcreate += 1 ;
-				} 
-?>
-					<div> 
-					
-						<p>
-							<label for="idmot<?=$i?>"><?=$titregroupe?></label></p>
-						<select name="idmot[]" id="idmot<?=$i?>" multiple="multiple" class="sel_mc">
-<?php
-			}
-			$s = "SELECT id_mot_exclu FROM spip_rmc_mots_exclus WHERE id_mot_exclu=$id_mot AND id_rubrique=$id_rubrique";
-			
-			$r = spip_query($s);
-			
-			$rw = spip_fetch_array($r);
-			
-			if($rw['id_mot_exclu'] != $id_mot) {
-?>
-					<option value="<?=$id_mot?>"><?php echo supprimer_numero($titremot); ?></option>
-<?php
-			}
-			$id_grp_prec = $id_groupe;
-		}
-	
-		if ($id_grp_prec != 0) {
-?>
-				</select>
-			</div>
-<?php 
-								# utile ? :
-			if ($nbline != 0) { 
-				while ($nbselcreate != $nbcol && $nbselcreate != 0) {
-					$nbselcreate += 1;
-?>
-					<!--td bgcolor="#FFFFFF">&nbsp;</td-->
-<?php
-				}
-			}					# fin utile ?
-?>
-			
-			</div></fieldset>
-			<fieldset class="options_mc">
-			<legend>Options de recherche</legend>
-				<p>
-					<label for="nbjour">Chercher les articles de</label>
-					<select id="nbjour" name="nbjour">
-						<option value="0" selected="selected">- tous</option>
-						<option value="7">- 7 jours</option>
-						<option value="30">- 1 mois</option>
-						<option value="9O">- 3 mois</option>
-						<option value="365">- 12 mois</option>
-					</select></p>
-<?php
-			if ($id_rubrique != 0) {
-?>
-				<p>
-					<label for="onlyrub">Recherche limit&eacute;e &agrave; la rubrique en cours
-					<input type="checkbox" value="1" name="onlyrub" id="onlyrub" /></label></p>
-<?php
-			}
-?> 
-				<p>
-					<label for="allword">Tous les mots doivent &ecirc;tre pr&eacute;sents
-					<input type="checkbox" value="1" id="allword" name="allword" /></label></p>	
-			</fieldset>
-			<p>
-				<input type="hidden" value="<?=$id_rubrique?>" name="rubnum" />
-				<input type="submit" value="Envoyer" class="button_mc" />
-				<input type="reset" name="annuler" value="Annuler" class="submit button_mc" /></p>
-		<p class="copyleft_mc"><a href="http://www.netdeveloppeur.com">D&eacute;velopp&eacute; par Net Developpeur</a></p>
-		</form>
-<?php
-		}
-		mysql_free_result($result);
-		
-	} else {
-		echo "<hr />";
-		echo "il n'y a pas de groupe de mots associ&eacute;s &agrave; cette rubrique : $id_rubrique<br>";
-		echo "<hr />";	
-	}
-?>
+		<p>
+			<label for="allword"><:rmc:mots_tous_presents:>
+			<input type="checkbox" value="1" id="allword" name="allword" /></label></p>	
+	</fieldset>
+	<p>
+		<input type="hidden" value="#GET{idrub}" name="rubnum" />
+		<input type="submit" value="Envoyer" class="button_mc" />
+		<input type="reset" name="annuler" value="Annuler" class="submit button_mc" /></p>
+</form>
