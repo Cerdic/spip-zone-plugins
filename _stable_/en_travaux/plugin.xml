@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>[fr]En travaux [en]Under construction</multi>
+	<multi>[fr]En travaux [en]Under construction[it]In manutenzione</multi>
 	</nom>
 	<auteur><multi>
 		[fr][Arnaud Ventre->ventrea@gmail.com]
@@ -8,6 +8,8 @@ _ &#169; 2006 - Distribue sous licence GPL
 		[en][Arnaud Ventre->ventrea@gmail.com]
 _ &#169; 2006 - Distributed under GPL Licence
 _ Translated from French by Etienne B. [->http://www.loiseau2nuit.net]
+    [it][Arnaud Ventre->ventrea@gmail.com]
+_ &#169; 2006 - Distribuito sotto Licenza GPL    
 		</multi>
 	</auteur>
 	<version>
@@ -19,6 +21,7 @@ _ Translated from French by Etienne B. [->http://www.loiseau2nuit.net]
 	<description><multi>
 		[fr] Permet d'afficher un message personalisable pendant une phase de maintenance sur tout le site public.
 		[en] Displays a message of your choice during maintenance period on all your public pages.
+		[it] Consente di visualizzare un messaggio personalizzabile durante una sessione di manutenzione su tutte le pagine del sito pubblico.
 		</multi>
 	</description>
 	<lien><multi>
