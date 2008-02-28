@@ -214,6 +214,71 @@ function exec_convertisseur(){
       )      
   );
   
+  // Conversion DotClear -> SPIP
+  // http://doc.dotclear.net/1.2/usage/syntaxes
+  $conv_formats['DotClear_SPIP'] = array(
+      "pattern" => array(
+        // faux amis 
+        'q3' => '{{([^{]*)\|([^\{]*)\|([^\{]*)}}',       
+        'q2' => '{{([^{]*)\|([^\{]*)}}',
+        'q' => '{{([^{]*)}}',
+        
+        // type bloc
+        'h3'  => "\n\!\!\!([^\r]*)",
+        'h4'  => "\n\!\!([^\r]*)",
+        'h5'   => "\n\!([^\r]*)", 
+        'ul'   => "\n\* ([^\r]*)",
+        'ol'   => "\n# ([^\r]*)",     // FIXME gerer les ss listes
+        
+        // en ligne
+        'br'   => "%%%", 
+        'em' => '\'\'([^\']*)\'\'',
+        'strong' => '__([^\_]*)__',
+        'ins' => '\+\+([^\+]*)\+\+',
+        'del' => '--([^\+]*)--',
+        'code'=> '@@([^\@]*)@@',
+        'img' => '\(\(([^\)]*)\)\)',
+        'href_0' => '\[([^\|[]*)\]',                                  // 0 pipe
+        'href_3' => '\[([^\[]*)\|([^\[]*)\|([^\[]*)\|([^\[\|]*)\]',   // 3 pipes
+        'href_2' => '\[([^\[]*)\|([^\[]*)\|([^\[\|]*)\]',             // 2 pipes
+        'href_1' => '\[([^\[]*)\|([^\[\|]*)\]',                       // 1 pipe
+        'a' => '~([^~]*)~',
+        'acronym' => '\?\?([^\?]*)\|([^\?]*)\?\?',
+        'note' => '\$\$([^\$]*)\$\$',
+        
+        
+      ),
+      "replacement" => array(
+        // faux amis 
+        'q3' => '<quote>\\1</quote>',       
+        'q2' => '<quote>\\1</quote>',
+        'q' => '<quote>\\1</quote>',
+        
+        // type bloc
+        'h3'   => "{{{\\1}}}",
+        'h4'   => "{{{\\1}}}", 
+        'h5'   => "{{{\\1}}}", 
+        'ul'   => "\n-* \\1",
+        'ol'   => "\n-# \\1",        
+        
+        // en ligne
+        'br'   => "\n_ ",
+        'em'   => "{{\\1}}",
+        'strong'   => "{{\\1}}",
+        'ins'   => "<ins>\\1</ins>",
+        'del'   => "<del>\\1</del>",
+        'code'   => "<code>\\1</code>",
+        'img'   => "",
+        'href_0'   => "[->\\1]",
+        'href_3' => '[\\2->\\1]',
+        'href_2' => '[\\2->\\1]',
+        'href_1' => '[\\2->\\1]',
+        'a' => '[\\1<-]',
+        'acronym'   => "<acronym  title=\"\\2\">>\\1</acronym>",
+        'note' => '[[\\1]]',
+      )      
+  );
+  
   // Conversion XTG -> SPIP
   // format demandé par Jean Luc Girard
   // http://195.13.83.33/twiki/bin/view/FipDoc/QuarkTagsList

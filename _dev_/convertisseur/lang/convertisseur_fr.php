@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'SPIP_txt' => 'SPIP vers texte brut',
 'SPIP_html' => 'SPIP vers HTML',  
 'SPIPrich_SPIP' => 'SPIP enrichie vers SPIP standard', 
+'DotClear_SPIP'=> 'DotClear vers SPIP', 
 'XPressTags' => 'XPressTags vers SPIP', 
 'XTG_SPIP' => 'XTG vers SPIP', 
 'SLA_SPIP' => 'SLA (Scribus) vers SPIP',
