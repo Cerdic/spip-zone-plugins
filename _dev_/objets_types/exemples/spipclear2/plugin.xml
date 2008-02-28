@@ -1,0 +1,11 @@
+<plugin>
+	<nom>SPIPClear2</nom>
+	<version>1.0</version>
+	<prefix>spipclear</prefix>
+	<options>spipclear_options.php</options>
+	<version_base>0.1</version_base>
+	<install>base/spipclear_install.php</install>
+	<etat>experimental</etat>
+	<necessite id="types" version="[1.0;]" />
+	<necessite id="cfg" version="[1.0;]" />
+</plugin>

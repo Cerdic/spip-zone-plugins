@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+		<meta name="MSSmartTagsPreventParsing" content="TRUE" />
+		[<link rel="alternate" type="application/rss+xml" title="RSS" href="(#URL_PAGE{rss}|parametre_url{id_rubrique,#ID_SECTEUR})" />]
+		[<link rel="alternate" type="application/xml" title="Atom" href="(#URL_PAGE{atom}|parametre_url{id_rubrique,#ID_SECTEUR})" />]
+		<INCLURE{fond=inc-title}{id_article}{id_rubrique}{id_secteur}{archives}>
+		[(#REM) Feuille de style par defaut pour le code genere par SPIP ]
+		<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="all" />
+
+		[(#REM) Feuilles de styles spipclear indexees par le theme choisie ]
+		[(#CONFIG{spipclear/choix_theme}|?{' ',''})
+			[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
+		]
+		[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]layout.css})" media="screen" />]
+		[(#CONFIG{spipclear/navigation_gauche}|=={1}|?{
+			[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]layout-gauche.css})" media="screen" />]
+		})]
+		[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]style.css})" media="screen" />]
+		[<link rel="shortcut icon" href="(#CHEMIN{[(#GET{chemin_theme})]images/favicon.ico})" />]
+		#INSERT_HEAD
+<script type="text/javascript">
+var sablier = '[<img class="sablier" src="(#CHEMIN{images/searching.gif})" />]';
+var data = '[(#URL_PAGE{inc-archives}|
+	parametre_url{self,[(#ENV{id_secteur}|generer_url_rubrique)],&}|
+	parametre_url{var_date,archives,&}|
+	parametre_url{date,#ENV{archives,#DATE},&}|
+	parametre_url{id_secteur,#ENV{id_secteur},&}|
+	replace{'(.*)spip\.php\?(.*)','$2'}
+)]';
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+	/* empecher le get standard*/
+	$("#archives p a").attr("href", "#archives");
+
+	$("#archives p a").click (
+		function() {
+			/* faire patienter */
+			$("#archives h2").append(sablier);
+
+			/*appeler la noisette en get avec le parametre de decalage */
+			var decal = "&decal=" + $(this).find("img").attr("alt");
+			data = data + decal;
+			$.ajax({
+				type:	 "GET",
+				url:	 "spip.php",
+				data:	 data,
+				success: function(html) {
+					/* rafrachir les elements de la noisette */
+					$("#archives p.ancien").html($("p.ancien",html).html());
+					$("#archives p.recent").html($("p.recent",html).html());
+					$("#archives ul").html($("ul",html).html());
+					/* empecher le get standard*/
+					$("#archives p a").attr("href", "#archives");
+				}
+			});
+
+			/* c'est fini */
+			$("#archives h2 img.sablier").remove();
+		}
+	);
+
+});
+</script>
+	</head>
+
+	<body>
+		<div id="page">
+			<div id="top">
+				<BOUCLE_titre(RUBRIQUES){fonction=blog}{id_secteur}{id_parent=0}>
+				[<h1>(#LOGO_RUBRIQUE|#URL_RUBRIQUE|inserer_attribut{alt,#TITRE}|inserer_attribut{title,#TITRE}|sinon{<a href="#URL_RUBRIQUE">#TITRE</a>})</h1>]
+				</BOUCLE_titre>
+				[(#FORMULAIRE_ADMIN)]
+				[(#SPIP_CRON)]
+			</div>
+			
+			<p id="prelude">
+				<a href="#main"><:spipclear:go_main:></a> |
+				<a href="#sidebar"><:spipclear:go_sidebar:></a><!-- |
+				<a href="#search"><:spipclear:go_search:></a>-->
+			</p>
+
+			<div id="main">
+				<div id="content">
+					[(#RECHERCHE|?{'',' '})
+						[(#ENV{id_article}|?{'',' '})
+						<INCLURE{fond=list}{id_rubrique}{archives}{debut_liste}{self}>
+						]
+					]
+					[(#RECHERCHE|?{' ',''})
+					<INCLURE{fond=search}{id_secteur}{recherche}{debut_liste}>]
+					[(#ENV{id_article}|?{' ',''})<INCLURE{fond=post}{id_article}>]
+				</div>
+			</div>
+
+			[(#SET{url,[(#ENV{id_secteur}|generer_url_rubrique)]})]
+			<INCLURE{fond=sidebar}{self=#GET{url}}{id_secteur}{id_rubrique}{id_article}{date=#ENV{archives,#ENV{date}}}{archives=#ENV{archives,#ENV{date}}}{decal}{recherche}>
+
+			<p id="footer"><:spipclear:credits:>, <a href="#URL_SITE_SPIP/"><:spipclear:hebergement:> #NOM_SITE_SPIP</a></p>
+			
+		</div>
+
+	</body>
+</html>
