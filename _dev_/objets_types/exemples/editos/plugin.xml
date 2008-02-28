@@ -1,0 +1,10 @@
+<plugin>
+	<nom>Editos</nom>
+	<version>1.0</version>
+	<prefix>edito</prefix>
+	<options>edito_options.php</options>
+	<version_base>0.1</version_base>
+	<install>base/edito_install.php</install>
+	<etat>experimental</etat>
+	<necessite id="types" version="[1.0;]" />
+</plugin>

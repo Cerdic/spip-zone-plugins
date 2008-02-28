@@ -1,0 +1,10 @@
+<plugin>
+	<nom>Objets Typ&eacute;s</nom>
+	<version>1.1</version>
+	<prefix>types</prefix>
+	<fonctions>types_fonctions.php</fonctions>
+	<options>types_options.php</options>
+	<version_base>0.1</version_base>
+	<install>base/types_install.php</install>
+	<etat>test</etat>
+</plugin>
