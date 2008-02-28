@@ -6,7 +6,7 @@
 # Ce programme est un logiciel libre distribue sous licence GNU/GPL. #
 # Pour plus de details voir le fichier COPYING.txt                   #
 ######################################################################
-#INSERT_HEAD [(#REM) n'est pas utile]
+[(#REM) #INSERT_HEAD n'est pas utile]
 
 [(#REM) On recupere l'id rubrique et on lui attribue 0 s'il n'existe pas ]
 <B_rmc_rubrique><BOUCLE_rmc_rubrique(RUBRIQUES){id_rubrique}> </BOUCLE_rmc_rubrique>
@@ -15,18 +15,22 @@
 	#SET{idrub,0}
 <//B_rmc_rubrique>
 
+<BOUCLE_principale(SPIP_RMC_RUBS_GROUPES){id_rubrique=#GET{idrub}}{0,1}>
+
 <BOUCLE_format(SPIP_RMC_RUBS_GROUPES_CONF)>
-	[(#GET{idrub}|!={0}|?{#SET(nbcol,#COLONNE_RUB),#SET(nbcol,#COLONNE)}
-	[(#GET{idrub}|!={0}|?{#SET(taille,#TAILLE_POLICE_RUB),#SET(taille,#TAILLE_POLICE)}
-	[(#GET{idrub}|!={0}|?{#SET(coul,#COULEUR_POLICE_RUB),#SET(coul,#COULEUR_POLICE)}
-	[(#GET{idrub}|!={0}|?{#SET(bord,#COULEUR_BORDURE_RUB),#SET(bord,#COULEUR_BORDURE)}
+	[(#GET{idrub}|!={0}|?{#SET{nbcol,#COLONNE_RUB},#SET{nbcol,#COLONNE}})]
+	[(#GET{idrub}|!={0}|?{#SET{taille,#TAILLE_POLICE_RUB},#SET{taille,#TAILLE_POLICE}})]
+	[(#GET{idrub}|!={0}|?{#SET{coul,#COULEUR_POLICE_RUB},#SET{coul,#COULEUR_POLICE}})]
+	[(#GET{idrub}|!={0}|?{#SET{bord,#COULEUR_BORDURE_RUB},#SET{bord,#COULEUR_BORDURE}})]
 </BOUCLE_format>
 
 <form action="spip.php?page=rec_mc_result" method="post" id="form_mc" name="form_mc">
 	<input type="hidden" name="id_rubrique" value="#GET{idrub}" />
-	<div class="multicriteres" style="color:<?=$coul?>;">
-		<h2><:rmc:titre_page_admin:></h2></div>
-		<fieldset><legend><:rmc:liste_mots:></legend>
+	<div class="multicriteres" style="color:[(#GET{coul})]">
+		<h2><:rmc:titre_page_admin:></h2>
+	</div>
+	<fieldset>
+		<legend><:rmc:liste_mots:></legend>
 		<p><em><:rmc:aide_select_multi:></em></p>
 		<div class="liste_mc" style="color:#GET{coul}; background-color:#GET{bord}">
 
@@ -47,13 +51,13 @@
 						<option value="#_mots:ID_MOT">#_mots:TITRE </option>
 						<//B_mots_exclus>
 						</BOUCLE_mots>
-					</select
+					</select>
 					</BOUCLE_groupes>
 				</div>
 				[(#REM)ici, on peut ajouter un <br avec un style "clear:both;" conditionné au nb de colonnes]
 			</BOUCLE_rmc_groupesparrubrique>
 		</div>
-	</div>
+	</fieldset>
 	<fieldset class="options_mc">
 		<legend><:rmc:options_recherche:></legend>
 		<p>
@@ -71,10 +75,13 @@
 				
 		<p>
 			<label for="allword"><:rmc:mots_tous_presents:>
-			<input type="checkbox" value="1" id="allword" name="allword" /></label></p>	
+			<input type="checkbox" value="1" id="allword" name="allword" /></label>
+		</p>	
 	</fieldset>
 	<p>
 		<input type="hidden" value="#GET{idrub}" name="rubnum" />
 		<input type="submit" value="Envoyer" class="button_mc" />
-		<input type="reset" name="annuler" value="Annuler" class="submit button_mc" /></p>
+		<input type="reset" name="annuler" value="Annuler" class="submit button_mc" />
+	</p>
 </form>
+</BOUCLE_principale>
