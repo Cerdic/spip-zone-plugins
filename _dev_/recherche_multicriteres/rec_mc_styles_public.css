@@ -64,7 +64,7 @@ width:10em;
 .sel_mc {
 height:5em;
 }
-/* block d'options de recherche */
+/* bloc d'options de recherche */
 fieldset.options_mc {
 clear:both;
 text-align:left;
@@ -86,3 +86,51 @@ margin-bottom:0;
 .copyleft_mc a {
 color:#CCC; 
 }
+
+/* 
+ * -------------------------------
+ *  PAGE DE RESULTATS
+ * ------------------------------- 
+ */
+/* container des résultats */
+.page_result_mc .contre-encart {
+background:#f4f4f4;
+border:1px solid #ccc;
+padding:.5em;
+margin-bottom:1em;
+}
+.page_result_mc h1 {
+font-size:1.3em;
+border-bottom:1px dotted #ccc;
+margin-bottom:.5em;
+}
+/* liste des mots recherchés */
+.mots_mc {
+text-align:center; 
+font-weight:bold;
+}
+.mots_mc a {
+font-size:smaller; 
+font-weight:normal;
+}
+
+/* liste des résultats */
+.result_mc {
+list-style:none;
+margin-left:0;
+padding-left:0;
+}
+.result_mc li {
+background: url(img_pack/page_key.png) no-repeat 0 0;
+padding-left: 20px;
+margin-bottom:1em;
+}
+.result_mc li small {
+display:block;
+margin-left:.5em;
+}
+.result_mc li em {
+font-size:.8em;
+margin-left:.5em;
+}
+

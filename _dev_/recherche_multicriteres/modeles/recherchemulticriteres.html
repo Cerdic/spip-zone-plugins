@@ -37,8 +37,8 @@
 			[(#REM) On recherche les groupes de mots attribues à la rubrique en cours ou au secteur]
 			<BOUCLE_rmc_groupesparrubrique(SPIP_RMC_RUBS_GROUPES){id_rubrique=#GET{idrub}}>
 				<div> 
-					<p>
 					<BOUCLE_groupes(GROUPES_MOTS){id_groupe}{par titre}>
+					<p>
 					<label for="#TITRE">#TITRE</label>
 					</p>
 					<select name="idmot[]" id="#TITRE" multiple="multiple" class="sel_mc">

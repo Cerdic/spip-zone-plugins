@@ -13,6 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aide' => 'AIDE en ligne',
 'aide_select_multi' =>'Maintenez la touche clavier &laquo;&nbsp;<abbr title="Controle">Ctrl</abbr>&nbsp;&raquo; enfonc&eacute;e pour s&eacute;lectionner plusieurs crit&egrave;res.',
 'articles_date' =>'Chercher les articles de',
+'articles_sans' =>'Il n\'y a pas d\'article li&eacute; aux mots ',
+'article_trouve' =>'article trouv&eacute; pour les mots : ',
+'articles_trouves' =>'articles trouv&eacute;s pour les mots : ',
+
 //B
 
 //C
@@ -63,18 +67,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mot_exclure' =>'Exclure ce mot',
 'mots_tous_presents' =>'Tous les mots doivent &ecirc;tre pr&eacute;sents',
 
+//N
+'nouvelle_recherche' =>'Nouvelle recherche',
+
 //O
 'options_recherche' =>'Options de recherche',
 
 //R
 'recherche_rubrique' =>'Recherche par rubrique',
 'recherche_site' =>'Recherche sur tout le site',
+'recherche_resultats' =>'R&eacute;sultats de votre recherche :',
 'rubriques' =>'Rubriques',
 
 //S
 'select_groupes_mots' => 'S&eacute;lectionnez les groupes de mots que vous voulez associer &agrave; la rubrique.',
 'select_rubrique' => 'S&eacute;lectionnez une rubrique',
 'select_ttes_rubriques' => '<strong>Tout le site</strong>',
+'selectionner_mot' =>'Merci de bien vouloir s&eacute;lectionner au moins 1 mot-cl&eacute; !',
 'signature' => '<b>Recherche Multi-crit&egrave;res v.1.0</b><br />
 		Ce plugin vous permet d\'effectuer une recherche d\'articles en s&eacute;lectionnant plusieurs
 		mots cl&eacute;.<br /><br />

@@ -1,274 +1,271 @@
-	
-	<?php
+<?php
 ######################################################################
 # RECHERCHE MULTI-CRITERES                                           #
-# Auteur: Dominique (Dom) Lepaisant - Novembre 2007                   #
+# Auteur: Dominique (Dom) Lepaisant - Novembre 2007                  #
 # Adaptation de la contrib de Paul Sanchez - Netdeveloppeur          #
 # http://www.netdeveloppeur.com                                      #
 # Ce programme est un logiciel libre distribue sous licence GNU/GPL. #
 # Pour plus de details voir le fichier COPYING.txt                   #
 ######################################################################
-		$url = parse_url($_SERVER['QUERY_STRING']);
-	 	
-		$param =  $url['path'];
-	 	$pos = 0;
-	 	$indice = 255;
+$url = parse_url($_SERVER['QUERY_STRING']);
 
+$param = $url['path'];
+$pos = 0;
+$indice = 255;
+
+if (isset($_POST['idmot'])) {	
 		
-	 	if (isset($_POST['idmot'])) 
-		{	
-				
-			// Récupération du nombre de jours
-			// pour periodicité de la rechercher
-			$nbjour = 0;
-			if (isset($_POST['nbjour'])) 
-			{
-				$nbjour =$_POST['nbjour'];
-			}
-			
-			// Limiter la recherche à la rubrique en cours 0=tout le site
-			$idonlyrub = 0;
-			if (isset($_POST['onlyrub'])) {
-				if (isset($_POST['rubnum'])) {	
-					$idonlyrub = $_POST['rubnum'];
-				}
-			}
-			
-			// 1 = Tous les mots doivent être associés aux articles trouvés
-			$allword = 0;
-			if (isset($_POST['allword'])) {
-				$allword = 1;
-			}
-
-/* préference d'affichage : classés par nombre de mots clé ou classés par rubriques. Ne fonctionne pas avec un fichier inclus */
-/*
-			if (isset($_POST['order'])) {	
-				$order = $_POST['order'];
-				if ($order == 0) 
-				{
-	?>
-					<A HREF="./spip.php?<?php echo $param; ?>&order=1">
-						Voir les résultats de la recherche classés par ordre de numéro de rubrique
-					</A>
-					<br />
-					<br />
-	<?php
-				}
-				else 
-				{
-					
-	?>
-					<A HREF="./spip.php?<?php echo $param; ?>&order=0">
-						Voir les résultats de la recherche classés par nombre de mot clé
-					</A>
-					<br />
-					<br />
-	<?php
-				}
-			}
-			else 
-			{
-	?>
-				<A HREF="./spip.php?<?php echo $param; ?>&order=1">
-					Voir les résultats de la recherche classés par ordre de numéro de rubrique
-				</A>
-				<br />
-				<br />
-	<?php		
-			}
-			
-*/
-			//Recuperer les mots selectionnes
-			$nbmot = count($_POST['idmot']);
-			$sql = "select id_mot,titre from spip_mots where id_mot in (". implode(",", $_POST['idmot']) .") group by id_mot,titre";
-			$result = mysql_query($sql);
-			
-			//creation du tableau des mots selectionnes (Stephanie, on ne se fache pas...mais tu vas sans doute aranger ça...) 
-			$tabmot = "<div style='margin-bottom:10px;text-align:center;width:100%;'><table align=\"center\" border=\"0\"><tr>";	
-			$nbcol = 0;
-			//parametrage du nombre de colonnes du tableau des mots selectionnes 
-			$nbcolmax = 4;
-			if ($result) {
-				$compt = 0; // on met le compteur à zero mais pourquoi ? 
-				while ($row = mysql_fetch_assoc($result)) {
-					extract($row);
-					$titre = supprimer_numero($titre);
-					if ($nbcol == $nbcolmax) {
-						$tabmot .= "</tr><tr>";
-						$nbcol=0;
-					}
-					//inclusion de l'icone devant chaque mot
-					$tabmot .= "<td><img src='[(#CHEMIN{img_pack/key_go.png})]' alt=''> $titre </td>";
-					$nbcol += 1;
-				}
-				mysql_free_result($result);
-			}
-			$tabmot .= "</tr></table></div>";//Fin du tableau des mots sélectionnes
-
-			// on recherche tous les articles associés a un des mots cle selectionnes ainsi que les titres des rubriques contenantes
-			//Debut de la requete
-			$sql = "select count(*) as num,spip_articles.id_article,spip_rubriques.id_rubrique,spip_rubriques.titre as titrerub ";
-			$sql .= "from spip_articles inner join spip_rubriques on spip_rubriques.id_rubrique = spip_articles.id_rubrique ";
-			$sql .= "inner join spip_mots_articles on spip_mots_articles.id_article = spip_articles.id_article ";
-			$sql .= " where spip_mots_articles.id_mot in (". implode(",", $_POST['idmot']) .") ";
-			//on initialise la date pour le cas ou l'option a ete choisie
-			$datedeb = date("Y-m-d", mktime(0,0,0,date("m"),(date("d") - $nbjour),date("Y")));
-
-			// on limite la requete aux articles posterieurs à la date
-			if ($nbjour != 0) 
-			{
-				$sql .= "and spip_articles.date >= '$datedeb' ";
-			}
-			// on limite la requete a la rubrique en cours si l'option est choisie
-			if ($idonlyrub != 0) 
-			{
-					$sql .= "and spip_rubriques.id_rubrique= $idonlyrub ";
-			}
-			//uniquement les articles publies
-			$sql .= "and spip_articles.statut like 'publie' group by spip_articles.id_article";
-			//Choix de l'option d'afichage "Par nombre de mots cle" ou "par rubrique" mais c pas jouable si on a un inclure, fonctionne si on a "colle" le code ds la page
-			if ($order == 1)
-			{
-				$sql .= " order by spip_rubriques.id_rubrique,num desc,spip_mots_articles.id_mot,spip_articles.date desc";
-			}
-			else 
-			{	
-				$sql .= " order by num desc,spip_rubriques.id_rubrique,spip_mots_articles.id_mot,spip_articles.date desc";	
-			}
-			// on lance la requete (a remplacer par spip_query ?)
-			$result = mysql_query($sql);
-			
-			//$nbart = mysql_num_rows($result);
-			$nbart = 0;
-			
-			//Debut de la construction de l'affichage des resultats
-			$resultataffiche = "";
-			if ($result) {
-				$titrerub = supprimer_numero($titrerub);
-				$resultataffiche.= "<br />";// pour Stephanie ? lol
-				$idrub = 0;
-				$resultataffiche.= "<h1><:rmc:resultats_recherche:></h1>"; //le titre
-				$listidmot2 ="";
-				$listidmotprec ="";
-				// on stoppe tout si tous les mots doivent etre presents
-				while ($row = mysql_fetch_assoc($result)) {
-					extract($row);
-					if (($num != $nbmot) && ($allword == 1)) {
-			 			break;
-					}
-					// classement par rubrique ?
-					if ($idrub != $id_rubrique) {
-						
-						if (($pospoint = strrpos($titrerub,". ")) === FALSE) {
-							 $titrerub2=$titrerub;
-						}
-						else {
-							if (is_numeric(substr($titrerub,0,$pospoint)) == false)
-								$titrerub2 = $titrerub;
-							else 
-								$titrerub2 = substr($titrerub,$pospoint + 2);
-						}
-					
-						if ($order == 1) 
-						{
-								$resultataffiche.= "<br /><a href=\"./spip.php?page=rubrique&ampid_rubrique=$id_rubrique\">$titrerub2 :</a><br />";
-						}
-					}
-					// on recherche tous les articles sans s'occuper des rubriques
-					$sql2 = "select spip_articles.id_article as artid, spip_articles.titre as titreart, spip_articles.date,spip_mots.id_mot ";
-					$sql2 .= ", spip_mots.titre as titremot from spip_articles inner join spip_mots_articles on spip_mots_articles.id_article = spip_articles.id_article ";
-					$sql2 .= "inner join spip_mots on spip_mots.id_mot=spip_mots_articles.id_mot ";
-					$sql2 .= "where spip_articles.id_article = $id_article and spip_mots_articles.id_mot in (". implode(",", $_POST['idmot']) .")  and statut like 'publie' ";
-					$sql2 .= "order by spip_mots.id_mot";
-					// on lance la requete (a remplacer par spip_query)
-					$result2 = mysql_query($sql2);
-					
-					if ($result2) {
-						$listmot = "<img src='[(#CHEMIN{img_pack/key_go.png})]' alt='' />";//inclusion de l'icone mot-cle
-						$titrearticle = "";
-						$dataffich = "";
-						$idart = 0;
-						while ($row2 = mysql_fetch_assoc($result2)) {
-							extract($row2);
-							$listidmot2 .= "$id_mot,";
-							if ($idart== 0) {
-								$titrearticle = supprimer_numero($titreart);
-								if (!(($pospoint = strpos($titrearticle,'.')) === FALSE))  {
-							 		if (is_numeric(substr($titrearticle,0,$pospoint)) == true)
-										$titrearticle = substr($titrearticle,$pospoint + 2);
-																
-								}
-								if (!(($pospoint = strpos($titremot,'.')) === FALSE)) {
-							 		if (is_numeric(substr($titremot,0,$pospoint)) == true)
-										$titremot = substr($titremot,$pospoint + 2);
-									
-								}
-								$dataffich = date("d/m/Y",strtotime($date))	;//On affiche la date
-								// si classement par rubrique, affichage de l'icone, du titre de l'article avec lien, de la date, et du(des) mot(s) associe(s)
-								if ($order == 1) {
-									$nbart += 1;
-									//
-									$resultataffiche.= "<img src='[(#CHEMIN{img_pack/page_key.png})]' alt='' style='margin-left:10px' /> <a href=\"./spip.php?article$artid\">$titrearticle</a> <small>$dataffich </small>(";
-									$resultataffiche.= "$titremot";		
-								}
-								
-								$listmot .= "$titremot";
-								$idart= 1;
-							}
-							else {
-								$listmot .= ", $titremot";
-								if ($order == 1) {
-									$resultataffiche.= ", $titremot";		
-								}
-							}
-						}
-						
-						if ($order == 1) {
-							$resultataffiche.= ")<br />";
-						}
-						
-						
-						mysql_free_result($result2);
-						// si classement par nombre de mots clé, affichage de l'icone, du titre de l'article avec lien, de la date, et du titre de la rubrique contenante
-						if ($order == 0) {
-							
-							if ($listidmot2 != $listmodidprec) {
-								$resultataffiche.= "<br />$listmot :<br />";
-							}
-							$nbart += 1;
-							$resultataffiche.= "<img src='[(#CHEMIN{img_pack/page_key.png})]' alt='' style='margin-left:10px' /> <a href=\"./spip.php?article$id_article\">$titrearticle</a> <small>$dataffich</small>";
-							$resultataffiche.= "&nbsp;(<i><a href=\"./spip.php?rubrique$id_rubrique\">$titrerub2</a></i>)<br />";
-							$listmodidprec = $listidmot2;
-							$listidmot2 = "";
-						
-						}
-					
-					}
-					$idrub = $id_rubrique;
-				}
-				$resultataffiche.= "<br />";
-				
-				mysql_free_result($result);
-				// combien d'articles trouvés ?
-				echo "<div class=\"text\">$nbart article(s) trouvé(s) pour les mots :<br />$tabmot";	
-				echo "$resultataffiche";
-//				echo "<p style=\"text-align: center;\"><a href=\"http://www.netdeveloppeur.com\" title=\"Net Developpeur, création sites web SPIP\"><font color=\"#CCCCCC\" size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">Développé par Net Developpeur - Création sites web SPIP</font></a></p>";
-				
-				
-			}
-			else {
-				echo "<hr />";
-				echo "<div class=\"text\">il n'y a pas d'article lié aux mots de numéro $the, $org<br /></div>";
-				echo "<hr />";
-					
-			}
-			
-		}
-		else {
-			echo "<div class=\"text\">Merci de bien vouloir sélectionner au moins 1 mot-clé!";
-			echo "<br /><a href=\"javascript:history.back()\">Retour</a></div>";
-			
-		}
-	?>
+	// Récupération du nombre de jours
+	// pour periodicité de la rechercher
+	$nbjour = 0;
+	if (isset($_POST['nbjour'])){
+		$nbjour = $_POST['nbjour'];
+	}
 	
+	// Récupération du nombre de jours
+	// pour periodicité de la rechercher
+	$idonlyrub = 0;
+	if (isset($_POST['onlyrub'])) {
+		if (isset($_POST['rubnum'])) {	
+			$idonlyrub = $_POST['rubnum'];
+		}
+	}
+	
+	// 1 = Tous les mots doivent être associés aux articles trouvés
+	$allword = 0;
+	if (isset($_POST['allword'])) {
+		$allword = 1;
+	}
 
+/*
+	if (isset($_POST['order'])) {	
+		$order = $_POST['order'];
+		if ($order == 0) 
+		{
+?>
+			<a href="./spip.php?<?php echo $param; ?>&order=1">
+				Voir les résultats de la recherche classés par ordre de numéro de rubrique
+			</a>
+			<br />
+			<br />
+<?php
+		}
+		else 
+		{
+			
+?>
+			<a href="./spip.php?<?php echo $param; ?>&order=0">
+				Voir les résultats de la recherche classés par nombre de mot clé
+			</a>
+			<br />
+			<br />
+<?php
+		}
+	}
+	else 
+	{
+?>
+		<a href="./spip.php?<?php echo $param; ?>&order=1">
+			Voir les résultats de la recherche classés par ordre de numéro de rubrique
+		</a>
+		<br />
+		<br />
+<?php		
+	}
+	
+*/
+
+	$nbmot = count($_POST['idmot']);
+				
+	$sql = "SELECT id_mot,titre FROM spip_mots WHERE id_mot IN (". implode(",", $_POST['idmot']) .") GROUP BY id_mot,titre";
+	
+	$result = mysql_query($sql);
+	
+#	$tabmot = "<p class=\"mots_mc\">";	
+	$tabmot = "";
+	$nbcol = 0;
+	$nbcolmax = 4;
+	
+	if ($result) {
+		
+		$compt = 0; 
+		while ($row = mysql_fetch_assoc($result)) {
+			extract($row);
+			$titre = supprimer_numero($titre);
+			if ($nbcol == $nbcolmax) {
+#				$tabmot .= "</tr><tr>";
+				$nbcol = 0;
+			}
+			$tabmot .= "$titre, ";
+			$nbcol += 1;
+		}
+		mysql_free_result($result);
+	}
+#	$tabmot .= "</p>";
+			
+	$sql = "SELECT COUNT(*) AS num, spip_articles.id_article, spip_rubriques.id_rubrique, spip_rubriques.titre AS titrerub ";
+	$sql .= "FROM spip_articles INNER JOIN spip_rubriques ON spip_rubriques.id_rubrique = spip_articles.id_rubrique ";
+	$sql .= "INNER JOIN spip_mots_articles ON spip_mots_articles.id_article = spip_articles.id_article ";
+	$sql .= " WHERE spip_mots_articles.id_mot IN (". implode(",", $_POST['idmot']) .") ";
+	
+	$datedeb = date("Y-m-d", mktime(0, 0, 0, date("m"), (date("d") - $nbjour), date("Y")));
+	
+	if ($nbjour != 0) {
+		$sql .= "AND spip_articles.date >= '$datedeb' ";
+	}
+	
+	if ($idonlyrub != 0) {
+			$sql .= "AND spip_rubriques.id_rubrique = $idonlyrub ";
+	}
+			
+	$sql .= "AND spip_articles.statut LIKE 'publie' GROUP BY spip_articles.id_article";
+	if ($order == 1) {
+		$sql .= " ORDER BY spip_rubriques.id_rubrique, NUM DESC, spip_mots_articles.id_mot, spip_articles.date DESC";
+	}
+	else {	
+		$sql .= " ORDER BY NUM DESC, spip_mots_articles.id_mot, spip_rubriques.id_rubrique, spip_articles.date DESC";	
+	}
+	
+	$result = mysql_query($sql);
+	
+	//$nbart = mysql_num_rows($result);
+	$nbart = 0;
+	
+	$resultataffiche = "";
+	if ($result) {
+		$titrerub = supprimer_numero($titrerub);
+#		$resultataffiche .= "<br />";
+		$idrub = 0;
+		$resultataffiche .= "<h1><:rmc:recherche_resultats:></h1>"; 
+		$listidmot2 = "";
+		$listidmotprec = "";
+		
+		while ($row = mysql_fetch_assoc($result)) {
+			extract($row);
+			if (($num != $nbmot) && ($allword == 1)) {
+				break;
+			}
+			
+			if ($idrub != $id_rubrique) {
+				
+				if (($pospoint = strrpos($titrerub, ". ")) === FALSE) {
+					$titrerub2=$titrerub;
+				}
+				else {
+					if (is_numeric(substr($titrerub, 0, $pospoint)) == false)
+						$titrerub2 = $titrerub;
+					else 
+						$titrerub2 = substr($titrerub, $pospoint + 2);
+				}
+			
+				if ($order == 1) { # je n'ai pas testé l'affichage de cette ligne
+					$resultataffiche.= "<p><a href=\"./spip.php?rubrique$id_rubrique\">$titrerub2 :</a></p>";
+				}
+			}
+			
+			$sql2 = "SELECT spip_articles.id_article AS artid, spip_articles.titre AS titreart, spip_articles.date, spip_mots.id_mot ";
+			$sql2 .= ", spip_mots.titre AS titremot FROM spip_articles INNER JOIN spip_mots_articles ON spip_mots_articles.id_article = spip_articles.id_article ";
+			$sql2 .= "INNER JOIN spip_mots ON spip_mots.id_mot = spip_mots_articles.id_mot ";
+			$sql2 .= "WHERE spip_articles.id_article = $id_article AND spip_mots_articles.id_mot IN (". implode(",", $_POST['idmot']) .") AND statut LIKE 'publie' ";
+			$sql2 .= "ORDER BY spip_mots.id_mot";
+			
+			$result2 = mysql_query($sql2);
+			
+			if ($result2) {
+				$listmot = "<h2><img src=\"[(#CHEMIN{img_pack/key_go.png})]\" alt=\"\" />";
+				$titrearticle = "";
+				$dataffich = "";
+				$idart = 0;
+				while ($row2 = mysql_fetch_assoc($result2)) {
+					extract($row2);
+					$listidmot2 .= "$id_mot,";
+					if ($idart == 0) {
+						$titrearticle = supprimer_numero($titreart);
+						if (!(($pospoint = strpos($titrearticle, '.')) === FALSE))  {
+							if (is_numeric(substr($titrearticle, 0, $pospoint)) == true)
+								$titrearticle = substr($titrearticle, $pospoint + 2);
+														
+						}
+						if (!(($pospoint = strpos($titremot, '.')) === FALSE)) {
+							if (is_numeric(substr($titremot, 0, $pospoint)) == true)
+								$titremot = substr($titremot, $pospoint + 2);
+							
+						}
+						$dataffich = date("d/m/Y", strtotime($date));
+					
+						if ($order == 1) {
+							$nbart += 1;
+							$resultataffiche .= "<li>
+							<a href=\"./spip.php?article$artid\">$titrearticle</a> 
+							<small>$dataffich </small>";
+							$resultataffiche .= "$titremot";	
+						}
+						
+						$listmot .= "$titremot";
+						$idart = 1;
+					}
+					else {
+						$listmot .= ", $titremot";
+						if ($order == 1) {
+							$resultataffiche .= ", $titremot";		
+						}
+					}
+				}		
+				if ($order == 1) {
+					$resultataffiche .= "</li>";
+				}
+				
+				mysql_free_result($result2);
+				
+				if ($order == 0) {
+					
+					if ($listidmot2 != $listmodidprec) { # $listmot est deja annoncé
+						$resultataffiche .= "$listmot </h2><ul class=\"result_mc\">";
+					}
+					$nbart += 1;
+					$resultataffiche .= "
+					<li>
+						<a href=\"./spip.php?article$id_article\">$titrearticle</a> 
+						<small>$dataffich</small>
+						<em>dans <a href=\"./spip.php?rubrique$id_rubrique\">$titrerub2</a></em></li>";
+
+					$listmodidprec = $listidmot2;
+					$listidmot2 = "";
+				}
+			}
+			$idrub = $id_rubrique;
+		}
+		$resultataffiche .= "</ul>";
+		
+		mysql_free_result($result);
+		
+		if($nbart == 0 || $nbart == 1)
+			$nbart_txt = "<:rmc:article_trouve:>";
+		else
+			$nbart_txt = "<:rmc:articles_trouves:>";
+			
+		echo "
+		<div class=\"contre-encart\">
+			<p class=\"mots_mc\">$nbart $nbart_txt pour les mots : "
+			.substr($tabmot, 0, -2)
+			."<br />
+			<a href=\"#form_mc\"><:rmc:nouvelle_recherche:></a></p>";
+			
+		echo "
+		<div class=\"liste-articles\">"
+		.$resultataffiche
+		."	</div>
+		</div>";		
+		
+	} else {
+#		echo "<hr />";
+		echo "<p class=\"mots_mc\"><:rmc:articles_sans:> $the, $org</p>";
+#		echo "<hr />";
+			
+	}	
+} else {
+	echo "<p class=\"mots_mc\"><:rmc:selectionner_mot:>";
+# inutile si form recherche inclus	
+#	echo "<br /><a href=\"".$_SERVER['HTTP_REFERER']."\" onclick=\"javascript:history.back(); return false;\">Retour</a></p>";	
+}
+?>
