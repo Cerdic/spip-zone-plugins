@@ -241,7 +241,7 @@ function player_stop(){
 						$("span.play_on").removeClass("play_on");
 						
 						$(".playliste li.play_on").removeClass("play_on");
-						unLoad("son_" + track_index);
+						soundManager.destroySound("son_" + track_index);
 						soundManager.stopAll();
 						//stop le musicplayer en flash < 8
 						$("#musicplayer").html('');

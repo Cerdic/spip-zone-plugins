@@ -66,11 +66,19 @@ background-color:#e74455;
 border:none;
 }
 
-ul.playliste a{
+#playliste_video{
+clear:both;
+margin : 5px 0px 15px 0px;
+padding:0px;
+background-color:#FF3C00;
+border:none;
+}
+
+ul.playliste a, #playliste_video a{
 color:#fff;
 }
 
-ul.playliste li{
+ul.playliste li, #playliste_video li{
 border-top:1px solid black;
 padding:2px;
 margin:Opx;
@@ -78,11 +86,11 @@ cursor:pointer;
 cursor:hand;
 }
 
-ul.playliste li.over{
+ul.playliste li.over, #playliste_video li.over{
 background-color:#a22c38;
 }
 
-ul.playliste li.play_on{
+ul.playliste li.play_on, li.overli.play_on{
 background-color:#a22c38;
 }
 
@@ -119,12 +127,89 @@ margin: 0;
 overflow: auto;
 }
 
+#media{
+margin-bottom:5px;
+}
+
+#video{
+background:#000;
+}
+
+#menu_affiche{
+list-style-type:none;
+margin:0;
+padding:0;
+}
+
+#menu_affiche li{
+width:30%;
+display:inline;
+padding:5px;
+}
+
+#menu_affiche li a{
+color:#fff;
+font-size:15px;
+font-weight:bold;
+}
+
+#affiche_musique{
+background:#E74455;
+}
+
+#affiche_video{
+background:#FF3C00;
+margin:0px 0px 3px 3px;
+}
 </style>
 
-		
-<B_doc>
-#ANCRE_PAGINATION
+<script>
+$(document).ready(function(){
+$("#playliste_video").hide();
+
+$("#affiche_video a").click(function(e){
+e.preventDefault();
+$(".playliste").hide();
+$("#playliste_video").show();
+});
+
+$("#affiche_musique a").click(function(e){
+e.preventDefault();
+$("#video").hide();
+$("#playliste_video").hide();
+$(".playliste").show();
+});
+
+swfArray = new Array();
+swftitles = new Array();
+$("a[@title='video']").each(
+		function(i) {	 
+				// we store swf links in an array
+				swfArray.push(this.href);
+				swftitles.push($(this).html());
+
+				//demarrer le lecteur lors d'un click
+				$(this).click(
+		             function(e)
+		             {
+		                 e.preventDefault();
+		                $("#media").load("./?page=embed_video&id_document=" + this.rel
+						);	                
+		             }
+		         );
+		        
+		}
+	);
+
+
+
+});
+</script>		
+
 <div class="radiobox">
+<div id="media">
+
+</div>
 <div id="playing">
 En ce moment vous &eacute;coutez : 
 <div id="scroller_container">
@@ -167,11 +252,28 @@ En ce moment vous &eacute;coutez :
 	//-->
 </div>
 
+<ul id="menu_affiche">
+<li id="affiche_musique"><a href="#">Musique</a></li>
+<li id="affiche_video"><a href="#">Vid&eacute;os</a></li>
+</ul>
+
+
+<B_doc>
 <ul class="playliste">
 <BOUCLE_doc (DOCUMENTS) {id_article ?} {extension==mp3}{!par date}{pagination 15}{0,100}>
 <li class="play_"><a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
 </BOUCLE_doc>
 </ul>
 [<div class="playliste_pagination">(#PAGINATION)</div>]
-</div>
 </B_doc>
+
+<B_docswf>
+<ul id="playliste_video">
+<BOUCLE_docswf(DOCUMENTS) {id_article ?} {extension==swf}{!par date}{pagination 15}{0,100}>
+<li class="play_"><a href="#FICHIER" rel="#ID_DOCUMENT" title="video">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_docswf>
+</ul>
+[<div class="playliste_pagination">(#PAGINATION)</div>]
+</B_docswf>
+
+</div>
