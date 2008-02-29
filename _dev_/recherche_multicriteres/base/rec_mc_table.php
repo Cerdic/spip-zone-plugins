@@ -7,15 +7,6 @@
 # Ce programme est un logiciel libre distribue sous licence GNU/GPL. #
 # Pour plus de details voir le fichier COPYING.txt                   #
 ######################################################################
-<?php
-######################################################################
-# RECHERCHE MULTI-CRITERES                                           #
-# Auteur: Dominique (Dom) Lepaisant - Octobre 2007                   #
-# Adaptation de la contrib de Paul Sanchez - Netdeveloppeur          #
-# http://www.netdeveloppeur.com                                      #
-# Ce programme est un logiciel libre distribue sous licence GNU/GPL. #
-# Pour plus de details voir le fichier COPYING.txt                   #
-######################################################################
 global $table_des_tables;
 global $tables_principales;
 global $tables_auxiliaires;
