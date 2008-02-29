@@ -1,11 +1,3 @@
-######################################################################
-# RECHERCHE MULTI-CRITERES                                           #
-# Auteur: Dominique (Dom) Lepaisant - Stephanie De Nadaï - Fev 2008  #
-# Adaptation de la contrib de Paul Sanchez - Netdeveloppeur          #
-# http://www.netdeveloppeur.com                                      #
-# Ce programme est un logiciel libre distribue sous licence GNU/GPL. #
-# Pour plus de details voir le fichier COPYING.txt                   #
-######################################################################
 [(#REM) #INSERT_HEAD n'est pas utile]
 
 [(#REM) On recupere l'id rubrique et on lui attribue 0 s'il n'existe pas ]
@@ -18,10 +10,10 @@
 <BOUCLE_principale(SPIP_RMC_RUBS_GROUPES){id_rubrique=#GET{idrub}}{0,1}>
 
 <BOUCLE_format(SPIP_RMC_RUBS_GROUPES_CONF)>
-	[(#GET{idrub}|!={0}|?{#SET{nbcol,#COLONNE_RUB},#SET{nbcol,#COLONNE}})]
-	[(#GET{idrub}|!={0}|?{#SET{taille,#TAILLE_POLICE_RUB},#SET{taille,#TAILLE_POLICE}})]
-	[(#GET{idrub}|!={0}|?{#SET{coul,#COULEUR_POLICE_RUB},#SET{coul,#COULEUR_POLICE}})]
-	[(#GET{idrub}|!={0}|?{#SET{bord,#COULEUR_BORDURE_RUB},#SET{bord,#COULEUR_BORDURE}})]
+	[(#GET{idrub}|!={0}|?{#SET{nbcol,#CONFIG{Recherche multicritere/col}},#SET{nbcol,#CONFIG{Recherche multicritere/col}}})]
+	[(#GET{idrub}|!={0}|?{#SET{taille,#CONFIG{Recherche multicritere/taillepol}},#SET{taille,#CONFIG{Recherche multicritere/taillepol}}})]
+	[(#GET{idrub}|!={0}|?{#SET{coul,#CONFIG{Recherche multicritere/hexvalpol}},#SET{coul,#CONFIG{Recherche multicritere/hexvalpol}}})]
+	[(#GET{idrub}|!={0}|?{#SET{bord,#CONFIG{Recherche multicritere/hexval}},#SET{bord,#CONFIG{Recherche multicritere/hexval}}})]
 </BOUCLE_format>
 
 <form action="spip.php?page=rec_mc_result" method="post" id="form_mc" name="form_mc">
