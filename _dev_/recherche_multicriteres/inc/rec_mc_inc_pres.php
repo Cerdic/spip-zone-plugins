@@ -68,7 +68,7 @@ function menu_admin() {
 	debut_cadre_enfonce(_DIR_IMG_DW2."configure.gif");
 		echo "<div class='verdana2' style='padding:4px;'><b>"._T('rmc:conf')."<br />";
 			pointe_page(array("rec_mc"), _T('rmc:conf'));
-			pointe_page(array("rec_mc_conf_public"), _T('rmc:conf_public'));
+			pointe_page(array("cfg&cfg=Recherche%20multicritere"), _T('rmc:conf_public'));
 		echo "</b></div>";
 	fin_cadre_enfonce();
 }

@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //C
 'colonnes' => 'Colonnes de goupes de mots',
 'conf' => 'Configuration',
-'conf_public' => 'Affichage publique',
+'conf_public' => 'Affichage public',
 'couleur_bordure' =>'Couleur de la bordure de tableau',
 'couleur_police' =>'Couleur de la police de caract&egrave;res',
 
@@ -86,8 +86,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'selectionner_mot' =>'Merci de bien vouloir s&eacute;lectionner au moins 1 mot-cl&eacute; !',
 'signature' => '<b>Recherche Multi-crit&egrave;res v.1.0</b><br />
 		Ce plugin vous permet d\'effectuer une recherche d\'articles en s&eacute;lectionnant plusieurs
-		mots cl&eacute;.<br /><br />
-		Pluginnis&eacute; par <b>Dom </b>, <a href=\'http://www.etab.ac-caen.fr/bureaudestests/TiSpip\' title=\' \' target=\'_blank\'>TiSpiP-sKeLeT</a> (11/2007 - ??/200?) <br />
+		mots cl&eacute;s.<br /><br />
+		Pluginis&eacute; par <b>Dom </b>, <a href=\'http://www.etab.ac-caen.fr/bureaudestests/TiSpip\' title=\' \' target=\'_blank\'>TiSpiP-sKeLeT</a> (11/2007 - ??/200?) <br />
 		Contrib originale de Paul SANCHEZ - 
 		<a href=\'http://www.netdeveloppeur.com/\' title=\' \' target=\'_blank\'>NetDeveloppeur</a>.<br /><br />
 		Merci &agrave; <strong>Scoty</strong> - <a href=\'www.koakidi.com\' title=\'www.koakidi.com\'>www.koakidi.com</a> (<i>ze king of ze plugin</i>) pour ses conseils salvateurs ',
