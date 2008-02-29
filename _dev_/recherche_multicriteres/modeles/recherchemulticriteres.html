@@ -10,7 +10,6 @@
 <BOUCLE_principale(SPIP_RMC_RUBS_GROUPES){id_rubrique=#GET{idrub}}{0,1}>
 
 <BOUCLE_format(SPIP_RMC_RUBS_GROUPES_CONF)>
-	[(#GET{idrub}|!={0}|?{#SET{nbcol,#CONFIG{Recherche multicritere/col}},#SET{nbcol,#CONFIG{Recherche multicritere/col}}})]
 	[(#GET{idrub}|!={0}|?{#SET{taille,#CONFIG{Recherche multicritere/taillepol}},#SET{taille,#CONFIG{Recherche multicritere/taillepol}}})]
 	[(#GET{idrub}|!={0}|?{#SET{coul,#CONFIG{Recherche multicritere/hexvalpol}},#SET{coul,#CONFIG{Recherche multicritere/hexvalpol}}})]
 	[(#GET{idrub}|!={0}|?{#SET{bord,#CONFIG{Recherche multicritere/hexval}},#SET{bord,#CONFIG{Recherche multicritere/hexval}}})]
@@ -24,7 +23,7 @@
 	<fieldset>
 		<legend><:rmc:liste_mots:></legend>
 		<p><em><:rmc:aide_select_multi:></em></p>
-		<div class="liste_mc" style="color:#GET{coul}; background-color:#GET{bord}">
+		<div class="liste_mc" style="color:#GET{coul}; background-color:#GET{bord}; font-size:#GET{taille}">
 
 			[(#REM) On recherche les groupes de mots attribues à la rubrique en cours ou au secteur]
 			<BOUCLE_rmc_groupesparrubrique(SPIP_RMC_RUBS_GROUPES){id_rubrique=#GET{idrub}}>
