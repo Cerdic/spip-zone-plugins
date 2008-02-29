@@ -43,11 +43,11 @@ document.write("</TABLE>");
 	<fieldset><legend>Type de tableau</legend>
 	  <label>Choix du nombre de colonnes :</label>
 	  <select name="col">
-		<option value="col1"[ (#ENV{col}|=={1}|?{selected="selected",''})]>1</option>
-		<option value="col2"[ (#ENV{col}|=={2}|?{selected="selected",''})]>2</option>
-		<option value="col3"[ (#ENV{col}|=={3}|?{selected="selected",''})]>3</option>
-		<option value="col4"[ (#ENV{col}|=={4}|?{selected="selected",''})]>4</option>
-		<option value="col5"[ (#ENV{col}|=={5}|?{selected="selected",''})]>5</option>
+		<option value="1"[ (#ENV{col}|=={1}|?{selected="selected",''})]>1</option>
+		<option value="2"[ (#ENV{col}|=={2}|?{selected="selected",''})]>2</option>
+		<option value="3"[ (#ENV{col}|=={3}|?{selected="selected",''})]>3</option>
+		<option value="4"[ (#ENV{col}|=={4}|?{selected="selected",''})]>4</option>
+		<option value="5"[ (#ENV{col}|=={5}|?{selected="selected",''})]>5</option>
 	  </select>
 	</fieldset>
 	 
@@ -56,7 +56,10 @@ document.write("</TABLE>");
 	<fieldset><legend>Police de caract&egrave;res</legend>
 	  <label>Taille de la police :</label>
 	  <select name="taillepol">
-		
+		<option value="8"[ (#ENV{taillepol}|=={8}|?{selected="selected",''})]>8</option>
+		<option value="10"[ (#ENV{taillepol}|=={10}|?{selected="selected",''})]>10</option>
+		<option value="12"[ (#ENV{taillepol}|=={12}|?{selected="selected",''})]>12</option>
+		<option value="14"[ (#ENV{taillepol}|=={14}|?{selected="selected",''})]>14</option>
 	  </select>
 	 
 	</fieldset>
