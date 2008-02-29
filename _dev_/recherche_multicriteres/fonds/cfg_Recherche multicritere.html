@@ -1,0 +1,86 @@
+<script type="text/javascript">
+bloc = true;
+function hexa(couleur)
+{
+	if(bloc)
+		document.form.hexval.value = couleur;
+}
+function palette() { 
+document.write("<TABLE border='0' cellpadding='0' cellspacing='0' ><TR>"); 
+var h=new Array('00','33','66','99','CC','FF'); 
+var col=""; 
+for(var i=0;i<6;i++) { 
+for(var j=0;j<6;j++) { 
+for(var k=0;k<6;k++) { 
+ut=col="#"+h[i]+h[j]+h[k]; 
+document.write("<TD width='10' height='10' bgcolor='"+col+"' onMouseOver=\"hexa('"+col+"')\" onClick=\"if(bloc) { bloc = false; } else { bloc = true; }\"></TD>"); 
+} 
+} 
+document.write("</tr>"); 
+} 
+document.write("</TABLE>"); 
+} 
+</SCRIPT>
+#CACHE{0}
+<!-- descriptif=<multi>[fr]Personnalisation du formulaire public.</multi>
+<br /><a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" class="spip_out">Vers documentation</a>
+-->
+<!-- titre=<multi>[fr]Configuration du formulaire public</multi>-->
+
+<form method="post" name="form">[(#ENV{_cfg_}|form_hidden)]
+
+<p>
+	<fieldset><legend>Configuration</legend>
+	  <label>Choix des rubriques :</label>
+	  <select name="rub">
+		<BOUCLE_tout_rub(RUBRIQUES){tout}><option value="#ID_RUBRIQUE"[ (#ENV{rub}|=={#ID_RUBRIQUE}|?{selected="selected",''})]>#TITRE</option></BOUCLE_tout_rub>
+	  </select>
+	</fieldset>
+	 
+</p>
+<p>
+	<fieldset><legend>Type de tableau</legend>
+	  <label>Choix du nombre de colonnes :</label>
+	  <select name="col">
+		<option value="col1"[ (#ENV{col}|=={1}|?{selected="selected",''})]>1</option>
+		<option value="col2"[ (#ENV{col}|=={2}|?{selected="selected",''})]>2</option>
+		<option value="col3"[ (#ENV{col}|=={3}|?{selected="selected",''})]>3</option>
+		<option value="col4"[ (#ENV{col}|=={4}|?{selected="selected",''})]>4</option>
+		<option value="col5"[ (#ENV{col}|=={5}|?{selected="selected",''})]>5</option>
+	  </select>
+	</fieldset>
+	 
+</p>
+<p>
+	<fieldset><legend>Police de caract&egrave;res</legend>
+	  <label>Taille de la police :</label>
+	  <select name="taillepol">
+		
+	  </select>
+	 
+	</fieldset>
+</p>
+<fieldset><legend>Bordure des cadres</legend>
+	  <label>Choix de la couleur des bordures :</label>
+<div align='center'>
+<SCRIPT language="JavaScript"> 
+palette(); 
+</SCRIPT>
+</div>
+Cliquez sur la couleur de votre choix pour la s&eacute;lectionner.<br />
+
+<input type="text" name="hexval" value="#ENV{hexval}" />
+
+
+
+	  
+	
+	</fieldset>
+<p>
+	<input type="submit" name="_cfg_ok" value="<:OK:>" onClick="if(blocolor) { blocolor = false; } else { blocolor = true; }"/>
+	<input type="reset" value="<:Reset:>" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</p>
+</form>
+
+ 

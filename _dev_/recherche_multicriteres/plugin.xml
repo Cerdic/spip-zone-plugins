@@ -31,4 +31,8 @@
 		<action>insert_head</action>
 		<inclure>rec_mc_pipe.php</inclure>
 	</pipeline>
+	<pipeline>
+    	<nom>ajouter_boutons</nom>
+        <inclure>rec_mc_pipelines.php</inclure>
+    </pipeline>
 </plugin>
