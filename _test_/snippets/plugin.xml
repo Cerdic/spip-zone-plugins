@@ -14,7 +14,7 @@
 	<description>
 	Import/Export XML g&#233;n&#233;ralis&#233; de contenus
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Import-export-avec-Snippets</lien> <!-- URI de documentation -->
 	<prefix> 
 	snippets
 	</prefix>
