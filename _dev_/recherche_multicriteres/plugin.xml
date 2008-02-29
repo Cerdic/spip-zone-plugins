@@ -6,6 +6,7 @@
 		Vous pouvez rechercher les articles associ&eacute;s à tous les mots ou non (et/ou)<br />
 		Vous pouvez limiter la recherche par date de publication des articles (-7 jours, -1 mois, -3 mois, -12 mois, tous)<br />
 		Dans le cas de l&rsquo;affichage par rubriques, vous pouvez limiter ou non la recherche &agrave; la rubrique en question.<br />
+		<strong>Ce plugin n&eacute;cessite cfg v 1.3.8 ou sup&eacute;rieur.</strong><br />
 	</description>
 	<lien>
 		Documentation et Installation : <a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" 
