@@ -1,6 +1,6 @@
 <B_liste>
 [(#ENV{debut_liste}|?{[<p class="pagination">(#PAGINATION)</p>],#ANCRE_PAGINATION})]
-<BOUCLE_liste(ARTICLES){fonction=billet}{branche ?}{lang ?}{date==^#ENV{archives}}{par date}{inverse}{pagination 15}>
+<BOUCLE_liste(ARTICLES){fond=billet}{branche ?}{lang ?}{date==^#ENV{archives}}{par date}{inverse}{pagination 15}>
 <div class="post">
 	[(#LOGO_ARTICLE|right|#URL_ARTICLE|liens_absolus)]
 	[<p class="day-date">(#DATE|affdate_long|unique)</p>]
@@ -11,7 +11,7 @@
 	<B_auteurs><:par_auteur|ucfirst:> <BOUCLE_auteurs(AUTEURS){id_article}{", "}><span[ title="(#BIO|couper{60}|texte_backend)"]>#NOM</span></BOUCLE_auteurs>, </B_auteurs>
 	[(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
 	<B_categorie><span>::</span>
-	<BOUCLE_categorie(RUBRIQUES){fonction=categorie}{id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_categorie>
+	<BOUCLE_categorie(RUBRIQUES){fond=categorie}{id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_categorie>
 	</p>
 
 	[<div class="post-content" lang="#LANG">

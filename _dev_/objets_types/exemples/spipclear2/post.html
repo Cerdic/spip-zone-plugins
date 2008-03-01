@@ -1,4 +1,4 @@
-<BOUCLE_article(ARTICLES){fonction=billet}{id_article}>
+<BOUCLE_article(ARTICLES){fond=billet}{id_article}>
 <div class="post">
 [(#LOGO_ARTICLE|right|#URL_ARTICLE|liens_absolus)]
 [<p class="surtitre">(#SURTITRE)</p>]
@@ -6,7 +6,7 @@
 [<p class="soustitre">(#SOUSTITRE)</p>]
 <p class="post-info"><B_auteurs><:par_auteur|ucfirst:> <BOUCLE_auteurs(AUTEURS){id_article}{", "}><span[ title="(#BIO|couper{60}|texte_backend)"]>#NOM</span></BOUCLE_auteurs>,</B_auteurs>
 [(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
-<span>::</span> <BOUCLE_categorie(RUBRIQUES){fonction=categorie}{id_rubrique}><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></BOUCLE_categorie>
+<span>::</span> <BOUCLE_categorie(RUBRIQUES){fond=categorie}{id_rubrique}><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></BOUCLE_categorie>
 <span>::</span>#DEBUT_SURLIGNE<a href="#URL_SITE_SPIP/#URL_ARTICLE" title="<:spipclear:permalink_pour:> : [(#TITRE|textebrut|entites_html)]">##ID_ARTICLE</a>#FIN_SURLIGNE
 <span>::</span><a href="[(#URL_PAGE{rss}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{type,co})]" title="<:spipclear:rss_pour:> : [(#TITRE|textebrut|entites_html)]">rss</a>
 </p>

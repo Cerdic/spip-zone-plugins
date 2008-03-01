@@ -15,7 +15,7 @@ Configuration du plugin SpipClear.
 <fieldset><legend><:spipclear:liste_blogs:></legend>
 	<B_blogs>
 	<ul>
-		<BOUCLE_blogs(RUBRIQUES){fonction=blog}{par titre}>
+		<BOUCLE_blogs(RUBRIQUES){fond=blog}{par titre}>
 		<li>#TITRE
 		<a href="[(#URL_ACTION_AUTEUR{typer,#ID_RUBRIQUE/rubrique/rubrique,[(#VAL{cfg}|generer_url_ecrire|parametre_url{cfg,spipclear,&})]})]"><:spipclear:retour_normal:></a>
 		<a href="[(#VAL{naviguer}|generer_url_ecrire|parametre_url{id_rubrique,#ID_RUBRIQUE})]"><:spipclear:gerer_le_blog:></a>
@@ -28,7 +28,7 @@ Configuration du plugin SpipClear.
 	<p>
 		<label for="id_rubrique"><:spipclear:transformer_en_blog:></label>
 		<select id="id_rubrique" name="id_rubrique">
-			<BOUCLE_nonblogs(RUBRIQUES){fonction!=blog}{racine}{par titre}>
+			<BOUCLE_nonblogs(RUBRIQUES){fond!=blog}{racine}{par titre}>
 			<option value="#ID_RUBRIQUE">#TITRE</option>
 			</BOUCLE_nonblogs>
 		</select>

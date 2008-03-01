@@ -10,7 +10,7 @@
 	<div id="selection">
 		<h2><:spipclear:selection:></h2>
 		<ul>
-			<BOUCLE_a_retenir(ARTICLES){fonction=billet}{id_secteur}{titre_mot=selection}{par date}{inverse}>
+			<BOUCLE_a_retenir(ARTICLES){fond=billet}{id_secteur}{titre_mot=selection}{par date}{inverse}>
 			<li>[(#ID_ARTICLE|choixsiegal{#ENV|{id_article},<strong>,''})]
 				<a [class="(#EXPOSE)" ]href="#URL_ARTICLE">#TITRE</a>
 			[(#ID_ARTICLE|choixsiegal{#ENV|{id_article},</strong>,''})]</li>
@@ -23,7 +23,7 @@
 	<div id="categories">
 		<h2><:spipclear:categories:></h2>
 		<ul>
-			<BOUCLE_categories(RUBRIQUES){fonction=categorie}{id_secteur}{id_parent=#ENV{id_secteur}}{par num titre}>
+			<BOUCLE_categories(RUBRIQUES){fond=categorie}{id_secteur}{id_parent=#ENV{id_secteur}}{par num titre}>
 			<li>
 			[(#ID_RUBRIQUE|choixsiegal{#ENV{id_rubrique},<strong>,''})]
 				<a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
@@ -38,7 +38,7 @@
 	<div id="languages">
 		<h2><:spipclear:langues:></h2>
 		<ul>
-			<BOUCLE_languages(ARTICLES){fonction=billet}{id_secteur ?}{fusion lang}>[(#TOTAL_BOUCLE|>{1}|?{' '})
+			<BOUCLE_languages(ARTICLES){fond=billet}{id_secteur ?}{fusion lang}>[(#TOTAL_BOUCLE|>{1}|?{' '})
 			<li>
 				<a href="[(#ENV{self}|parametre_url{lang,#LANG})]">#LANG</a>
 			</li>

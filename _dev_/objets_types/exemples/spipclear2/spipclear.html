@@ -71,7 +71,7 @@ $(document).ready(function() {
 	<body>
 		<div id="page">
 			<div id="top">
-				<BOUCLE_titre(RUBRIQUES){fonction=blog}{id_secteur}{id_parent=0}>
+				<BOUCLE_titre(RUBRIQUES){fond=blog}{id_secteur}{id_parent=0}>
 				[<h1>(#LOGO_RUBRIQUE|#URL_RUBRIQUE|inserer_attribut{alt,#TITRE}|inserer_attribut{title,#TITRE}|sinon{<a href="#URL_RUBRIQUE">#TITRE</a>})</h1>]
 				</BOUCLE_titre>
 				[(#FORMULAIRE_ADMIN)]
