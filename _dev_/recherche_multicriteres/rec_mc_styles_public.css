@@ -57,6 +57,11 @@ margin:.6em .3em 0;
 .liste_mc div p {
 margin:0;
 }
+/* titre de liste de mots-cles - cases a cocher*/
+.liste_mc div p.check{
+margin:0 .7em;
+text-align:left;
+}
 /* les mots-cles */
 .liste_mc div select {
 width:10em;

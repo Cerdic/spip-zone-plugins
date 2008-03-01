@@ -1,6 +1,7 @@
 #CACHE{0}
 <!-- descriptif=<multi>[fr]Personnalisation du formulaire public.</multi>
 <br /><a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" class="spip_out">Vers documentation</a>
+<p><a href="?exec=rec_mc" class="spip_out">Vers configuration des mots-cl&eacute;</a></p>
 -->
 <!-- titre=<multi>[fr]Recherches Multi-crit&egrave;res</multi>-->
 <!-- head=<script type="text/javascript">
@@ -50,47 +51,59 @@ document.write("</tr>");
 document.write("</TABLE>"); 
 } 
 </script>-->
+
 <form method="post" name="form">[(#ENV{_cfg_}|form_hidden)]
+	<fieldset>
+		<legend>Affichage des mots-cl&eacute;</legend>
+		<BOUCLE_groupes(GROUPES_MOTS spip_rmc_rubs_groupes){par titre}>
+		<strong>Croupe #TITRE : </strong>
+		<label>Liste d&eacute;roulante</label>
+		<input type="radio" name="checklist#ID_GROUPE" value="list#ID_GROUPE" checked />
+		<label>Cases &agrave: cocher</label>
+		<input type="radio" name="checklist#ID_GROUPE" value="check#ID_GROUPE" /><br />
+		</BOUCLE_groupes>
+	</fieldset>
 
-
-<fieldset><legend>Bordure des cadres</legend>
-	  <label>Choix de la couleur des bordures :</label>
-<div align='center'>
-<script language="JavaScript"> 
-palette(); 
-</script>
-</div>
-Cliquez sur la couleur de votre choix pour la s&eacute;lectionner.<br />
-<input type="text" name="hexval" value="#ENV{hexval}" />
+	<fieldset>
+		<legend>Bordure des cadres</legend>
+		<label>Choix de la couleur des bordures :</label>
+		<div align='center'>
+			<script language="JavaScript"> 
+				palette(); 
+			</script>
+		</div>
+		Cliquez sur la couleur de votre choix pour la s&eacute;lectionner.<br />
+		<input type="text" name="hexval" value="#ENV{hexval}" />
 	</fieldset>
-<p>
-	<fieldset><legend>Police de caract&egrave;res</legend>
-	  <label>Taille de la police :</label>
-	  <select name="taillepol">
-		<option value="8"[ (#ENV{taillepol}|=={8}|?{selected="selected",''})]>8</option>
-		<option value="10"[ (#ENV{taillepol}|=={10}|?{selected="selected",''})]>10</option>
-		<option value="12"[ (#ENV{taillepol}|=={12}|?{selected="selected",''})]>12</option>
-		<option value="14"[ (#ENV{taillepol}|=={14}|?{selected="selected",''})]>14</option>
-		<option value="22"[ (#ENV{taillepol}|=={22}|?{selected="selected",''})]>22</option>
-	  </select>
-	 
+	<p>
+	<fieldset>
+		<legend>Police de caract&egrave;res</legend>
+		<label>Taille de la police :</label>
+		<select name="taillepol">
+			<option value="8"[ (#ENV{taillepol}|=={8}|?{selected="selected",''})]>8</option>
+			<option value="10"[ (#ENV{taillepol}|=={10}|?{selected="selected",''})]>10</option>
+			<option value="12"[ (#ENV{taillepol}|=={12}|?{selected="selected",''})]>12</option>
+			<option value="14"[ (#ENV{taillepol}|=={14}|?{selected="selected",''})]>14</option>
+			<option value="22"[ (#ENV{taillepol}|=={22}|?{selected="selected",''})]>22</option>
+		</select>
 	</fieldset>
-</p>
-<fieldset><legend>Police de caract&egrave;res</legend>
-	  <label>Choix de la couleur de la police :</label>
-<div align='center'>
-<script language="JavaScript"> 
-palettepol(); 
-</script>
-</div>
-Cliquez sur la couleur de votre choix pour la s&eacute;lectionner.<br />
-<input type="text" name="hexvalpol" value="#ENV{hexvalpol}" />
+	</p>
+	<fieldset>
+		<legend>Police de caract&egrave;res</legend>
+		<label>Choix de la couleur de la police :</label>
+		<div align='center'>
+			<script language="JavaScript"> 
+				palettepol(); 
+			</script>
+		</div>
+		Cliquez sur la couleur de votre choix pour la s&eacute;lectionner.<br />
+		<input type="text" name="hexvalpol" value="#ENV{hexvalpol}" />
 	</fieldset>
-<p>
-	<input type="submit" name="_cfg_ok" value="<:OK:>" />
-	<input type="reset" value="<:Reset:>" />
-	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
-</p>
+	<p>
+		<input type="submit" name="_cfg_ok" value="<:OK:>" />
+		<input type="reset" value="<:Reset:>" />
+		<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+	</p>
 </form>
 
  

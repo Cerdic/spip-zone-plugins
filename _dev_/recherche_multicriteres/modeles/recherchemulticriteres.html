@@ -23,7 +23,7 @@
 	<fieldset>
 		<legend><:rmc:liste_mots:></legend>
 		<p><em><:rmc:aide_select_multi:></em></p>
-		<div class="liste_mc" style="color:#GET{coul}; background-color:#GET{bord}; font-size:#GET{taille}">
+		<div class="liste_mc" style="color:#GET{coul}; border:1px solid #GET{bord}; font-size:#GET{taille}">
 
 			[(#REM) On recherche les groupes de mots attribues à la rubrique en cours ou au secteur]
 			<BOUCLE_rmc_groupesparrubrique(GROUPES_MOTS spip_rmc_rubs_groupes){id_rubrique}{id_rubrique=#GET{idrub}}>
@@ -31,17 +31,7 @@
 					<p>
 					<label for="#TITRE">#TITRE</label>
 					</p>
-					<select name="idmot[]" id="#TITRE" multiple="multiple" class="sel_mc">
-						[(#REM) On boucle sur les mots du groupe]
-						<BOUCLE_mots(MOTS){id_groupe}{par titre}>
-						[(#REM) on cherche si le mot est exclu]
-						<B_mots_exclus><BOUCLE_mots_exclus(SPIP_RMC_MOTS_EXCLUS){id_rubrique=#GET{idrub}}{id_mot_exclu=#ID_MOT}>
-						</BOUCLE_mots_exclus></B_mots_exclus>
-						[(#REM) titre du mot]
-						<option value="#_mots:ID_MOT">#_mots:TITRE </option>
-						<//B_mots_exclus>
-						</BOUCLE_mots>
-					</select>
+					[(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|=={list#ID_GROUPE}|?{[(#MODELE{rec_mc_list}{id_groupe})],[(#MODELE{rec_mc_check}{id_groupe})]})]
 				</div>
 				[(#REM)ici, on peut ajouter un <br /> avec un style "clear:both;" conditionné au nb de colonnes]
 			</BOUCLE_rmc_groupesparrubrique>
