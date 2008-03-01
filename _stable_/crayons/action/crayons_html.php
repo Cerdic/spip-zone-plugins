@@ -253,7 +253,8 @@ class Crayon {
 
 					// petit truc crado pour mettre la barre typo si demandee
 					// pour faire propre il faudra reprogrammer la bt en jquery
-					if ($GLOBALS['meta']['crayons']['barretypo']) {
+					$meta_crayon = unserialize($GLOBALS['meta']['crayons']);
+					if ($meta_crayon['barretypo']) {
 						include_spip('inc/barre');
 						$input = "<span style='width:100%; height:20px;'>"
 							. afficher_barre("document.getElementById('$id')")
