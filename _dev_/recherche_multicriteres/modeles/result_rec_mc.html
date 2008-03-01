@@ -78,12 +78,7 @@ if (isset($_POST['idmot'])) {
 	}
 			
 	$sql .= "AND spip_articles.statut LIKE 'publie' GROUP BY spip_articles.id_article";
-	if ($order == 1) {
-		$sql .= " ORDER BY spip_rubriques.id_rubrique, NUM DESC, spip_mots_articles.id_mot, spip_articles.date DESC";
-	}
-	else {	
-		$sql .= " ORDER BY NUM DESC, spip_mots_articles.id_mot, spip_rubriques.id_rubrique, spip_articles.date DESC";	
-	}
+	$sql .= " ORDER BY NUM DESC, spip_mots_articles.id_mot, spip_rubriques.id_rubrique, spip_articles.date DESC";	
 	
 	$result = mysql_query($sql);
 	
@@ -152,15 +147,11 @@ if (isset($_POST['idmot'])) {
 					}
 					else {
 						$listmot .= ", $titremot";
-						if ($order == 1) {
-							$resultataffiche .= ", $titremot";		
-						}
 					}
 				}		
 				
 				mysql_free_result($result2);
 				
-				if ($order == 0) {
 					
 					if ($listidmot2 != $listmodidprec) { # $listmot est deja annoncé
 						$resultataffiche .= "$listmot </h2><ul class=\"result_mc\">";
@@ -174,7 +165,6 @@ if (isset($_POST['idmot'])) {
 
 					$listmodidprec = $listidmot2;
 					$listidmot2 = "";
-				}
 			}
 			$idrub = $id_rubrique;
 		}
