@@ -37,51 +37,12 @@ if (isset($_POST['idmot'])) {
 		$allword = 1;
 	}
 
-/*
-	if (isset($_POST['order'])) {	
-		$order = $_POST['order'];
-		if ($order == 0) 
-		{
-?>
-			<a href="./spip.php?<?php echo $param; ?>&order=1">
-				Voir les résultats de la recherche classés par ordre de numéro de rubrique
-			</a>
-			<br />
-			<br />
-<?php
-		}
-		else 
-		{
-			
-?>
-			<a href="./spip.php?<?php echo $param; ?>&order=0">
-				Voir les résultats de la recherche classés par nombre de mot clé
-			</a>
-			<br />
-			<br />
-<?php
-		}
-	}
-	else 
-	{
-?>
-		<a href="./spip.php?<?php echo $param; ?>&order=1">
-			Voir les résultats de la recherche classés par ordre de numéro de rubrique
-		</a>
-		<br />
-		<br />
-<?php		
-	}
-	
-*/
-
 	$nbmot = count($_POST['idmot']);
 				
 	$sql = "SELECT id_mot,titre FROM spip_mots WHERE id_mot IN (". implode(",", $_POST['idmot']) .") GROUP BY id_mot,titre";
 	
 	$result = mysql_query($sql);
 	
-#	$tabmot = "<p class=\"mots_mc\">";	
 	$tabmot = "";
 	$nbcol = 0;
 	$nbcolmax = 4;
@@ -93,7 +54,6 @@ if (isset($_POST['idmot'])) {
 			extract($row);
 			$titre = supprimer_numero($titre);
 			if ($nbcol == $nbcolmax) {
-#				$tabmot .= "</tr><tr>";
 				$nbcol = 0;
 			}
 			$tabmot .= "$titre, ";
@@ -101,7 +61,6 @@ if (isset($_POST['idmot'])) {
 		}
 		mysql_free_result($result);
 	}
-#	$tabmot .= "</p>";
 			
 	$sql = "SELECT COUNT(*) AS num, spip_articles.id_article, spip_rubriques.id_rubrique, spip_rubriques.titre AS titrerub ";
 	$sql .= "FROM spip_articles INNER JOIN spip_rubriques ON spip_rubriques.id_rubrique = spip_articles.id_rubrique ";
@@ -134,7 +93,6 @@ if (isset($_POST['idmot'])) {
 	$resultataffiche = "";
 	if ($result) {
 		$titrerub = supprimer_numero($titrerub);
-#		$resultataffiche .= "<br />";
 		$idrub = 0;
 		$resultataffiche .= "<h1><:rmc:recherche_resultats:></h1>"; 
 		$listidmot2 = "";
@@ -156,10 +114,6 @@ if (isset($_POST['idmot'])) {
 						$titrerub2 = $titrerub;
 					else 
 						$titrerub2 = substr($titrerub, $pospoint + 2);
-				}
-			
-				if ($order == 1) { # je n'ai pas testé l'affichage de cette ligne
-					$resultataffiche.= "<p><a href=\"./spip.php?rubrique$id_rubrique\">$titrerub2 :</a></p>";
 				}
 			}
 			
@@ -192,14 +146,6 @@ if (isset($_POST['idmot'])) {
 							
 						}
 						$dataffich = date("d/m/Y", strtotime($date));
-					
-						if ($order == 1) {
-							$nbart += 1;
-							$resultataffiche .= "<li>
-							<a href=\"./spip.php?article$artid\">$titrearticle</a> 
-							<small>$dataffich </small>";
-							$resultataffiche .= "$titremot";	
-						}
 						
 						$listmot .= "$titremot";
 						$idart = 1;
@@ -211,9 +157,6 @@ if (isset($_POST['idmot'])) {
 						}
 					}
 				}		
-				if ($order == 1) {
-					$resultataffiche .= "</li>";
-				}
 				
 				mysql_free_result($result2);
 				
@@ -264,8 +207,8 @@ if (isset($_POST['idmot'])) {
 			
 	}	
 } else {
-	echo "<p class=\"mots_mc\"><:rmc:selectionner_mot:>";
+	echo "<p class=\"mots_mc\"><:rmc:selectionner_mot:></p>";
 # inutile si form recherche inclus	
-#	echo "<br /><a href=\"".$_SERVER['HTTP_REFERER']."\" onclick=\"javascript:history.back(); return false;\">Retour</a></p>";	
+#	echo "<p><a href=\"".$_SERVER['HTTP_REFERER']."\" onclick=\"javascript:history.back(); return false;\">Retour</a></p>";	
 }
 ?>
