@@ -130,7 +130,7 @@ function Agenda_action_insere_evenement($couples){
 	return $id_evenement;	
 }
 
-function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
+function Agenda_action_formulaire_article($id_article,$id_evenement=NULL, $c=NULL){
 	include_spip('base/abstract_sql');
 	// gestion des requetes de mises a jour dans la base
 	$insert = _request('evenement_insert',$c);
