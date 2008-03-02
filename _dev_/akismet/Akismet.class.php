@@ -117,6 +117,7 @@ class Akismet {
 				"Content-Type: application/x-www-form-urlencoded; charset=utf-8\r\n" .
 				"Content-Length: " . strlen($request) . "\r\n" .
 				"User-Agent: Akismet PHP5 Class " . $this->version . " | Akismet/1.11\r\n" .
+				"Connection: close\r\n" . // cf. http://blog.akismet.com/2008/02/25/using-http-11/
 				"\r\n" .
 				$request
 			;
