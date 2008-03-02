@@ -58,9 +58,9 @@ document.write("</TABLE>");
 		<BOUCLE_groupes(GROUPES_MOTS spip_rmc_rubs_groupes){par titre}>
 		<strong>Croupe #TITRE : </strong>
 		<label>Liste d&eacute;roulante</label>
-		<input type="radio" name="checklist#ID_GROUPE" value="list#ID_GROUPE" checked />
+		<input type="radio" name="checklist#ID_GROUPE" value="list#ID_GROUPE" [(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|=={list#ID_GROUPE}|?{checked,''})] />
 		<label>Cases &agrave: cocher</label>
-		<input type="radio" name="checklist#ID_GROUPE" value="check#ID_GROUPE" /><br />
+		<input type="radio" name="checklist#ID_GROUPE" value="check#ID_GROUPE" [(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|=={check#ID_GROUPE}|?{checked,''})]/><br />
 		</BOUCLE_groupes>
 	</fieldset>
 
