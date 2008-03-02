@@ -67,7 +67,7 @@ $link_prefix=stripslashes(_request('link_prefix'));
 $link_sufixe=stripslashes(_request('link_sufixe'));
 $link=stripslashes(_request('link'));
 $desc=stripslashes(_request('desc'));
-$titre=stripslashes(_request('desc'));
+$titre=stripslashes(_request('titre'));
 $new =stripslashes(_request('new'));
 $retour=stripslashes(_request('retour'));
 $step=intval(_request('step'));
@@ -274,10 +274,11 @@ if ($id_carte) {
 					$nb = $rec->numRows();
 					while ($i<$nb) {
 							if (!is_null($rec->getField($i,$col)) &&
-								is_numeric((float)str_replace($rec->getField($i,$x), ',', '.')) &&
-								is_numeric((float)str_replace($rec->getField($i,$y), ',', '.')))		// Champ code non null et x et y numerique
-							{	$sql = sprintf ("Insert into spip_carto_objets (id_carto_carte, titre, texte, url_objet, url_logo, geometrie) values 		(%d, '%s', '%s', '%s', '', 'point(%f %f)');\n",
-									($carte=="null"?"0":$id_carte),
+								is_numeric((float)str_replace(',', '.',$rec->getField($i,$x))) &&
+								is_numeric((float)str_replace(',', '.',$rec->getField($i,$y))))		// Champ code non null et x et y numerique
+							{
+								$sql = sprintf ("Insert into spip_carto_objets (id_carto_carte, titre, texte, url_objet, url_logo, geometrie) values 		(%d, '%s', '%s', '%s', '', 'point(%f %f)');\n",
+									$id_carte,
 									($col=="null"?"Nouvel Objet":addslashes ($rec->getField($i,$col))),
 									($desc=="null"?"":addslashes ($rec->getField($i,$desc))),
 									($link=="null"?"":addslashes ($link_prefix.$rec->getField($i,$link).$link_sufixe)),
@@ -285,8 +286,9 @@ if ($id_carte) {
 									($y=="0"?0:$rec->getField($i, $y))
 									);
 								//echo $sql;
-							}else
+							}else{
 								$nbErr++;
+							}
 
 							$i++;
 
