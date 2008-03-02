@@ -1,13 +1,26 @@
 /* 
- * -------------------------------
- * PLUGIN RECHERCHE MULTI-CRITÈRES
- * ------------------------------- 
- */
+######################################################################
+# RECHERCHE MULTI-CRITERES -                                         #
+# 		STYLES POUR FORMULAIRE DE RECHERCHE & PAGE RESULTATS         #
+#                                                                    #
+# Auteurs : Dominique (Dom) Lepaisant                                #
+# www.etab.ac-caen.fr/bureaudestests/TiSpip/                         #
+# Stéphanie De Nadaï - www.webdesigneuse.net                         #
+#  - Fev 2008                                                        #
+#                                                                    #
+# Adaptation de la contrib de Paul Sanchez - www.Netdeveloppeur.com  #
+#                                                                    #
+# Ce programme est un logiciel libre distribue sous licence GNU/GPL. #
+# Pour plus de details voir le fichier COPYING.txt                   #
+######################################################################]
+*/
 #form_mc {
+clear:both;
 text-align:center;
 padding:.3em;
 border:1px solid #ccc;
 background:#f4f4f4;
+margin:.5em;
 }
 #form_mc label {
 font-weight:bold;
@@ -40,12 +53,12 @@ fieldset em {
 display:block;
 font-size:small;
 font-weight:normal;
+border-bottom:1px dotted #666;
+margin:.3em;
 }
 /* container des listes de mots-cles */
 .liste_mc {
 width:100%;
-color:#000; 
-background-color:#fff;
 }
 /* liste de mots-cles */
 .liste_mc div {
@@ -118,8 +131,13 @@ font-weight:bold;
 font-size:smaller; 
 font-weight:normal;
 }
-
-/* liste des résultats */
+.page_result_mc .liste-articles h2 {
+font-size:.9em;
+font-weight:bold;
+background: url(img_pack/key_go.png) no-repeat 0 0;
+padding-left : 20px;
+}
+/* liste des résultats <ul> */
 .result_mc {
 list-style:none;
 margin-left:0;
@@ -128,14 +146,12 @@ padding-left:0;
 .result_mc li {
 background: url(img_pack/page_key.png) no-repeat 0 0;
 padding-left: 20px;
-margin-bottom:1em;
+margin:.6em 0 .6em 1em;
 }
 .result_mc li small {
 display:block;
-margin-left:.5em;
 }
 .result_mc li em {
 font-size:.8em;
-margin-left:.5em;
 }
 
