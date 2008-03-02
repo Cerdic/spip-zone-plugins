@@ -5,12 +5,14 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
+'abt' => "Vers",
+'adop' => "Adoption",
 'affiche_liste_arbres' => "Liste des arbres",
 'affiche_voir_arbre' => "Visualiser un arbre",
+'aft' => "Apr&egrave;s",
 'aliasf' => "Surnomm&eacute;e",
 'aliasi' => "Surnomm&eacute;",
 'aliasm' => "Surnomm&eacute;",
-'adop' => "Adoption",
 'anul' => "Annulation ou nullit&eacute; du mariage",
 'ascendance' => "Ascendance",
 'attente_no_vide' => "Arbre en attente avec individu",
@@ -21,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bapm' => "Bapt&ecirc;me non mormon",
 'barm' => "Bar mitzvah",
 'basm' => "Bas mitzvah",
+'bef' => "Avant",
 'birt' => "Naissance",
 'bles' => "B&eacute;n&eacute;diction religieuse",
 'boite_info' => "Cette page vous permet de g&eacute;rer les arbres g&eacute;n&eacute;alogiques de plusieurs familles simultan&eacute;ment.",
@@ -71,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'enat' => "Enfant naturel",
 'entree_contenu_arbre' => "(Contenu de l'arbre g&eacute;n&eacute;logique en quelques mots.)",
 'erec' => "Enfant reconnu",
+'est' => "Vers",
 'etro' => "Enfant trouv&eacute;",
 'even' => "&Eacute;v&egrave;nement",
 'evenement' => "&Eacute;v&egrave;nements",
@@ -79,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 'f' => "F&eacute;minin",
 'fact' => "Fait ou caract&eacute;ristique",
+'fam' => "Famille",
 'fcom' => "Premi&egrave;re communion",
 'filiation' => "Filiation",
 
@@ -93,6 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'idno' => "Identification externe",
 'immi' => "Immigration",
 'import_arbre' => "Import d'un fichier GEDCOM",
+'indi' => 'Individu',
 'individus' => "individu(s)",
 'install_err' => "Erreur d'installation !!!<br />Les tables n&eacute;cessaires n'ont pas pu &ecirc;tre install&eacute;es.",
 'install_ok' => "Les tables ont &eacute;t&eacute; correctements install&eacute;es.",
@@ -150,6 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pacs' => "PACS",
 'patronyme' => "Patronyme",
 'pere' => "P&egrave;re",
+'plac' => "",
 'precision_' => "le",
 'precision__court' => "en",
 'precision_a' => "avant le",
