@@ -79,6 +79,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //O
 'options_recherche' => 'Options de recherche',
 
+//P
+'police' =>'Police de caract&egrave;res :', 
+
 //R
 'recherche_rubrique' => 'Recherche par rubrique',
 'recherche_site' => 'Recherche sur tout le site',
