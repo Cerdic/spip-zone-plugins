@@ -1,4 +1,17 @@
-[(#REM) #INSERT_HEAD n'est pas utile]
+[(#REM)
+######################################################################
+# RECHERCHE MULTI-CRITERES                                           #
+#                                                                    #
+# Auteurs : Dominique (Dom) Lepaisant                                #
+# www.etab.ac-caen.fr/bureaudestests/TiSpip/                         #
+# Stéphanie De Nadaï - www.webdesigneuse.net                         #
+#  - Fev 2008                                                        #
+#                                                                    #
+# Adaptation de la contrib de Paul Sanchez - www.Netdeveloppeur.com  #
+#                                                                    #
+# Ce programme est un logiciel libre distribue sous licence GNU/GPL. #
+# Pour plus de details voir le fichier COPYING.txt                   #
+######################################################################]
 
 [(#REM) On recupere l'id rubrique et on lui attribue 0 s'il n'existe pas ]
 <B_rmc_rubrique><BOUCLE_rmc_rubrique(RUBRIQUES){id_rubrique}> </BOUCLE_rmc_rubrique>
@@ -14,6 +27,11 @@
 	[(#SET{coul,#CONFIG{Recherche multicritere/hexvalpol}})]
 	[(#SET{bord,#CONFIG{Recherche multicritere/hexval}})]
 
+[(#REM) Tentavive de ne pas afficher les styles s'il ne sont pas configurés : ]
+	
+	[(#GET{taille}|!={""}|?{#SET{taille, font-size:#GET{taille}}})]
+	[(#GET{coul}|!={""}|?{#SET{coul, color:#GET{coul}}})]
+	[(#GET{bord}|!={""}|?{#SET{bord, border:1px solid #GET{bord}}})]
 
 <form action="spip.php?page=rec_mc_result" method="post" id="form_mc" name="form_mc">
 	<input type="hidden" name="id_rubrique" value="#GET{idrub}" />
@@ -23,7 +41,7 @@
 	<fieldset>
 		<legend><:rmc:liste_mots:></legend>
 		<p><em><:rmc:aide_select_multi:></em></p>
-		<div class="liste_mc" style="color:#GET{coul}; border:1px solid #GET{bord}; font-size:#GET{taille}">
+		<div class="liste_mc" style="#GET{coul}; #GET{bord}; #GET{taille};">
 
 			[(#REM) On recherche les groupes de mots attribues à la rubrique en cours ou au secteur]
 			<BOUCLE_rmc_groupesparrubrique(GROUPES_MOTS spip_rmc_rubs_groupes){id_rubrique}{id_rubrique=#GET{idrub}}>
@@ -35,6 +53,10 @@
 				</div>
 				[(#REM)ici, on peut ajouter un <br /> avec un style "clear:both;" conditionné au nb de colonnes]
 			</BOUCLE_rmc_groupesparrubrique>
+		
+		[(#REM) pour affichage correct du #GET{bord} : ] 
+				<br class="nettoyeur" />
+				
 		</div>
 	</fieldset>
 	<fieldset class="options_mc">
