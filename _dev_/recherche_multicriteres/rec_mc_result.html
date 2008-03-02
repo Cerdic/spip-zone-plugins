@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title><:rmc:titre_page_result_mc:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_result_mc">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>  &gt; <:rmc:titre_page_result_mc:> </div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal]
+		<div id="contenu">
+		
+		[(#REM) Résultats de la recherche]
+			[(#MODELE{result_rec_mc})]
+
+		[(#REM) Formulaire de recherche multi-critères]
+			[(#MODELE{recherchemulticriteres})]
+			
+		</div><!-- fin contenu -->
+	</div><!-- fin conteneur -->
+	
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}>
+</div><!-- fin page -->
+</body>
+</html>
