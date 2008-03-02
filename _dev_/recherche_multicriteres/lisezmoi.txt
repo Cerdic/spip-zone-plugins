@@ -42,12 +42,13 @@ Dans le cas de l'affichage par rubriques, vous pouvez limiter ou non la recherch
 | TODO                                  |
 +---------------------------------------+
 - Supprimer de la recherche un ou plusieurs mots des groupes validés. [FAIT]
-- Configuration dans l'espace privé de l'affichage public (styles: taille de police, couleur, etc...)[FAIT mais à revoir pour utilisation CFG]
+- Configuration dans l'espace privé de l'affichage public (styles: taille de police, couleur, etc...)[FAIT avec CFG]
 - Modifier l'écriture des scripts publics pour tendre vers une écriture plus spipienne.[EN COURS]
 - Différencier la configuration de la recherche "Pour tout le site" de la recherche "Par rubrique" (est-ce bien utile ?)
 - Supprimer les tables de la base à la désinstallation du plugin. [FAIT]
-- Offrir une alternative à l'affichage des mots-clé sur le formulaire de recherche (checkbox avec ou sans logo)
-- Etendre la recherche aux rubrique, sites, brèves, etc... (offrir le choix)
+- Offrir une alternative à l'affichage des mots-clé sur le formulaire de recherche (checkbox avec ou sans logo)[FAIT]
+- *** pour l'affichage des logos, il me semble que c'est inutile, puisque, si on place un logo sur un mot, c'est qu'on désire qu'il soit affiché ???
+- Etendre la recherche aux rubriques, sites, brèves, etc... (offrir le choix)
 - Adapter l'ecriture des textes de l'affichage public pour le multi linguisme (dossier lang)[EN COURS]
 - Traduire en anglais, espagnol, italien, ... (javanais bifluoré++ et autres...) 
 - + Moults bricoles  ...

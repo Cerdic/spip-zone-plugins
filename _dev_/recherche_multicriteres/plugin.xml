@@ -1,16 +1,29 @@
 <plugin>
-	<nom>Recherche Multi-crit&egrave;res</nom>
+	<nom><multi>[fr]Recherche Multi-Crit&egrave;res[en]Multi Keywords Research</multi</nom>
 	<description>
-		Recherche Multi-crit&egrave;res par mots-cl&eacute;s.<br />
+		<multi>
+		[fr]Recherche Multi-crit&egrave;res par mots-cl&eacute;s.<br />
 		La recherche multicrit&egrave;res par mots-cl&eacute;s permet de rechercher des articles s&eacute;lectionnant un ou plusieurs mots-cl&eacute;. La recherche retournera la liste d&rsquo;articles associ&eacute;s à ces mots-cl&eacute;<br />
+		Vous pouvez choisir le type d'affichage des groupes de mots dans le formulaire (<i>liste d&eacute;roulante ou cases &agrave; cocher</i>)
 		Vous pouvez rechercher les articles associ&eacute;s à tous les mots ou non (et/ou)<br />
 		Vous pouvez limiter la recherche par date de publication des articles (-7 jours, -1 mois, -3 mois, -12 mois, tous)<br />
-		Dans le cas de l&rsquo;affichage par rubriques, vous pouvez limiter ou non la recherche &agrave; la rubrique en question.<br />
+		Dans le cas de l&rsquo;affichage par rubriques, vous pouvez limiter ou non la recherche &agrave; la rubrique en cours.<br />
 		<strong>Ce plugin n&eacute;cessite cfg v 1.3.8 ou sup&eacute;rieur.</strong><br />
+		[en]Multi Keywords Research<br />
+		The multicriteria search by keywords to search for items by selecting one or more keywords. The search will return a list of items associated with these keywords<br />
+		You can choose the type of display groups of words in the form (dropdown or checkboxes)<br />
+		You can search articles associated with all the words or not (and / or)<br />
+		You can narrow your search by date of publication of articles (-7 days, -1 month, -3 months -12 months, all)<br />
+		In the case of the display sections, you can limit or not looking at the current line.<br />
+		<strong>This plugin requires cfg v 1.3.8 or higher.</strong>
+		</multi>
 	</description>
 	<lien>
-		Documentation et Installation : <a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" 
-		title="Information et Documentation" target="_blank">TiSpiP-sKeLeT</a>
+	<multi>
+		[fr]Documentation et Installation : <a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" 
+		title="Aller &agrave la documentation" target="_blank">TiSpiP-sKeLeT</a>
+		[en]Documentation and Installation :<a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" 
+		title="Information and Documentation" target="_blank">TiSpiP-sKeLeT</a>
 	</lien>
 	<version>0.1</version>
 	<prefix>rec_mc</prefix>

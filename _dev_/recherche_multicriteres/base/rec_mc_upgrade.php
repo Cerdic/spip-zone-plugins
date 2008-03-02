@@ -19,7 +19,7 @@ function rec_mc_install($action){
 	// Installer la base
 		case 'install':
 			include_spip('base/create');  // definir la fonction
-			include_spip('base/rec_mc_table'); // definir sa structure
+			include_spip('base/rec_mc_tables'); // definir sa structure
 			creer_base();
 			break;
 	// Supprimer la base

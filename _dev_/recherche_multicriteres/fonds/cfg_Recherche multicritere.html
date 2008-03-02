@@ -1,9 +1,10 @@
 #CACHE{0}
-<!-- descriptif=<multi>[fr]Personnalisation du formulaire public.</multi>
-<br /><a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" class="spip_out">Vers documentation</a>
-<p><a href="?exec=rec_mc" class="spip_out">Vers configuration des mots-cl&eacute;</a></p>
+[(#SET{logo,<img src='[(#CHEMIN{img_pack/cles24.png})]' width='24' height='24' alt='Logo Recherche Multi_Crit&egrave;res' style="float:#LANG_RIGHT;" />})]
+<!-- descriptif=#GET{logo}<multi>[fr]Personnalisation du formulaire public.[en]Customizing the public form[es]Personalización de la forma pública</multi>
+<br /><a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" class="spip_out"><multi>[fr]Vers documentation</multi></a>
+<p><a href="?exec=rec_mc" class="spip_out"><multi>[fr]Vers configuration des mots-cl&eacute</multi>;</a></p>
 -->
-<!-- titre=<multi>[fr]Recherches Multi-crit&egrave;res</multi>-->
+<!-- titre=<multi>[fr]Recherches Multi-Crit&egrave;res[en]Multi Keywords Research</multi>-->
 <!-- head=<script type="text/javascript">
 bloc2 = true;
 function hexa2(couleur2)
@@ -55,36 +56,55 @@ document.write("</TABLE>");
 <form method="post" name="form" id="form_cfg_rec_mc">[(#ENV{_cfg_}|form_hidden)]
 <B_groupes>
 	<fieldset>
-		<legend>Affichage des mots-cl&eacute;s</legend>
+		<legend><:rmc:affichage_groupes_mots:></legend>
 		<ul>
 		<BOUCLE_groupes(GROUPES_MOTS spip_rmc_rubs_groupes){par titre}>
-		<li><strong>Groupe #TITRE : </strong> 
+		<li><strong><:rmc:groupe:> #TITRE : </strong> 
 			<div class="labels_cfg_rec_mc">
-				<label>Liste d&eacute;roulante
-				<input type="radio" name="checklist#ID_GROUPE" value="list#ID_GROUPE" [(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|=={list#ID_GROUPE}|?{checked,''})] /></label>
-				<label>Cases &agrave; cocher
-				<input type="radio" name="checklist#ID_GROUPE" value="check#ID_GROUPE" [(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|=={check#ID_GROUPE}|?{checked,''})] /></label>
+				<label><:rmc:liste_deroulante:>
+				<input type="radio" name="checklist#ID_GROUPE" value="list#ID_GROUPE" [(#ENV{checklist#ID_GROUPE}|=={list#ID_GROUPE}|?{checked,''})] /></label>
+				<label><:rmc:checkboxs:>
+				<input type="radio" name="checklist#ID_GROUPE" value="check#ID_GROUPE" [(#ENV{checklist#ID_GROUPE}|=={check#ID_GROUPE}|?{checked,''})] /></label>
 			</div>
 		</li>
 		</BOUCLE_groupes>
 		</ul>
 	</fieldset>
 </B_groupes>
+	<p>
 	<fieldset>
-		<legend>Bordure des cadres</legend>
-		<label for="hexval">Choix de la couleur des bordures :</label>
+		<legend><:rmc:options_recherche:></legend>
+		<ul>
+		<li>
+			<:rmc:mots_tous_presents:>
+		<div class="labels_cfg_rec_mc">
+			<label><:rmc:oui:>
+			<input type="radio" name="mots_tous" value="oui" [(#ENV{mots_tous}|=={oui}|?{checked,''})] /></label>
+			<label><:rmc:non:>
+			<input type="radio" name="mots_tous" value="non" [(#ENV{mots_tous}|=={non}|?{checked,''})] /></label>
+		</div>
+		</li>
+		</ul>
+		<:rmc:mots_tous_presents_aide:>
+	</fieldset>
+	</p>
+	<p>
+	<fieldset>
+		<legend><:rmc:bordure:></legend>
+		<label for="hexval"><:rmc:couleur_bordure:></label>
 		<div align="center">
 			<script language="JavaScript"> 
 				palette(); 
 			</script>
 		</div>
-		Cliquez sur la couleur de votre choix pour la s&eacute;lectionner.<br />
+		<:rmc:couleur_aide:><br />
 		<input type="text" id="hexval" name="hexval" value="#ENV{hexval}" />
 	</fieldset>
 	<p>
+	<p>
 	<fieldset>
-		<legend>Police de caract&egrave;res</legend>
-		<label for="taillepol">Taille de la police :</label>
+		<legend><:rmc:police:></legend>
+		<label for="taillepol"><:rmc:taille_police:></label>
 		<select name="taillepol" id="taillepol">
 			<option value=""[ (#ENV{taillepol}|=={""}|?{selected="selected",''})]></option>
 			<option value="8"[ (#ENV{taillepol}|=={8}|?{selected="selected",''})]>8</option>
@@ -96,14 +116,14 @@ document.write("</TABLE>");
 	</fieldset>
 	</p>
 	<fieldset>
-		<legend>Police de caract&egrave;res</legend>
-		<label for="hexvalpol" >Choix de la couleur de la police :</label>
+		<legend><:rmc:police:></legend>
+		<label for="hexvalpol" ><:rmc:couleur_police:></label>
 		<div align="center">
 			<script language="JavaScript"> 
 				palettepol(); 
 			</script>
 		</div>
-		Cliquez sur la couleur de votre choix pour la s&eacute;lectionner.<br />
+		<:rmc:couleur_aide:><br />
 		<input type="text" id="hexvalpol" name="hexvalpol" value="#ENV{hexvalpol}" />
 	</fieldset>
 	<p>
