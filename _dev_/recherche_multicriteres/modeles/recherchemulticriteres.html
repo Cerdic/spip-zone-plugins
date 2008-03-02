@@ -27,15 +27,16 @@
 	[(#SET{coul,#CONFIG{Recherche multicritere/hexvalpol}})]
 	[(#SET{bord,#CONFIG{Recherche multicritere/hexval}})]
 
-[(#REM) Tentavive de ne pas afficher les styles s'il ne sont pas configurés : ]
-	
+[(#REM) Tentavive de ne pas afficher les styles s'il ne sont pas configurés ligne 45 : 
+		pas très propre : si tou vide, affiche style="; ; ;"
+]
 	[(#GET{taille}|!={""}|?{#SET{taille, font-size:#GET{taille}}})]
 	[(#GET{coul}|!={""}|?{#SET{coul, color:#GET{coul}}})]
 	[(#GET{bord}|!={""}|?{#SET{bord, border:1px solid #GET{bord}}})]
 
 <form action="spip.php?page=rec_mc_result" method="post" id="form_mc" name="form_mc">
 	<input type="hidden" name="id_rubrique" value="#GET{idrub}" />
-	<div class="multicriteres" style="color:[(#GET{coul})]">
+	<div class="multicriteres"[ style="color:(#GET{coul})"]>
 		<h2><:rmc:titre_page_admin:></h2>
 	</div>
 	<fieldset>
