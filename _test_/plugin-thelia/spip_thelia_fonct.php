@@ -1,6 +1,6 @@
 <?php
 function spip_thelia_header_prive($flux) {
-	if (!file_exists("../fonctions/moteur.php")) 
+	if (!file_exists("../fonctions/moteur.php")&&($_REQUEST['exec']!="")) 
 		echo ("erreur : th&eacute;lia introuvable, v&eacute;rifiez que les sous-r&eacute;pertoires de th&eacute;lia et spip sont dans le m&ecirc;me r&eacute;pertoire.");
 	if (!function_exists('lire_config'))
 		echo ("erreur : le plugin CFG est n'est pas install&eacute;.");
@@ -14,6 +14,8 @@ function spip_thelia_insert_head($flux) {
 
 function spip_thelia_appeler_moteur_thelia($texte)
 {
+	include_spip('inc/charsets');
+
 	//récupérer la version de thélia : valeurs possibles :
 	//	- supérieure ou égale à 1.3.4 = "after_1_3_4" (par défaut)  
 	//	- 1.3.3 = "1_3_3"
@@ -71,8 +73,6 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	//on prépare le flux à envoyer au moteur thélia
 	$res = $texte;
 	$res = str_replace("THELIA-", "#", $res);
-
-	include_spip('inc/charset');
 
 	//avant d'envoyer à thélia, on convertie en iso pour thélia
 	$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
