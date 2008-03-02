@@ -1,12 +1,19 @@
 <?php
 ######################################################################
-# RECHERCHE MULTI-CRITERES                                           #
-# Auteur: Dominique (Dom) Lepaisant - Novembre 2007                  #
-# Adaptation de la contrib de Paul Sanchez - Netdeveloppeur          #
-# http://www.netdeveloppeur.com                                      #
+# RECHERCHE MULTI-CRITERES - MODELE AFFICHAGE DES RESULTATS          #
+#                                                                    #
+# Auteurs : Dominique (Dom) Lepaisant                                #
+# www.etab.ac-caen.fr/bureaudestests/TiSpip/                         #
+# Stéphanie De Nadaï - www.webdesigneuse.net                         #
+#  - Fev 2008                                                        #
+#                                                                    #
+# Adaptation de la contrib de Paul Sanchez - www.Netdeveloppeur.com  #
+#                                                                    #
 # Ce programme est un logiciel libre distribue sous licence GNU/GPL. #
 # Pour plus de details voir le fichier COPYING.txt                   #
 ######################################################################
+
+
 $url = parse_url($_SERVER['QUERY_STRING']);
 
 $param = $url['path'];
@@ -39,7 +46,7 @@ if (isset($_POST['idmot'])) {
 
 	$nbmot = count($_POST['idmot']);
 				
-	$sql = "SELECT id_mot,titre FROM spip_mots WHERE id_mot IN (". implode(",", $_POST['idmot']) .") GROUP BY id_mot,titre";
+	$sql = "SELECT id_mot, titre FROM spip_mots WHERE id_mot IN (". implode(",", $_POST['idmot']) .") GROUP BY id_mot,titre";
 	
 	$result = mysql_query($sql);
 	
@@ -78,7 +85,12 @@ if (isset($_POST['idmot'])) {
 	}
 			
 	$sql .= "AND spip_articles.statut LIKE 'publie' GROUP BY spip_articles.id_article";
-	$sql .= " ORDER BY NUM DESC, spip_mots_articles.id_mot, spip_rubriques.id_rubrique, spip_articles.date DESC";	
+	if ($order == 1) {
+		$sql .= " ORDER BY spip_rubriques.id_rubrique, NUM DESC, spip_mots_articles.id_mot, spip_articles.date DESC";
+	}
+	else {	
+		$sql .= " ORDER BY NUM DESC, spip_mots_articles.id_mot, spip_rubriques.id_rubrique, spip_articles.date DESC";
+	}
 	
 	$result = mysql_query($sql);
 	
@@ -110,6 +122,10 @@ if (isset($_POST['idmot'])) {
 					else 
 						$titrerub2 = substr($titrerub, $pospoint + 2);
 				}
+			
+				if ($order == 1) { 
+					$resultataffiche.= "<p><a href=\"./spip.php?rubrique$id_rubrique\">$titrerub2 :</a></p>";
+				}
 			}
 			
 			$sql2 = "SELECT spip_articles.id_article AS artid, spip_articles.titre AS titreart, spip_articles.date, spip_mots.id_mot ";
@@ -121,7 +137,7 @@ if (isset($_POST['idmot'])) {
 			$result2 = mysql_query($sql2);
 			
 			if ($result2) {
-				$listmot = "<h2><img src=\"[(#CHEMIN{img_pack/key_go.png})]\" alt=\"\" />";
+				$listmot = "<h2>";
 				$titrearticle = "";
 				$dataffich = "";
 				$idart = 0;
@@ -141,30 +157,46 @@ if (isset($_POST['idmot'])) {
 							
 						}
 						$dataffich = date("d/m/Y", strtotime($date));
+					
+						if ($order == 1) {
+							$nbart += 1;
+							$resultataffiche .= "<li>
+							<a href=\"./spip.php?article$artid\">$titrearticle</a> 
+							<small>$dataffich </small>";
+							$resultataffiche .= "$titremot";	
+						}
 						
-						$listmot .= "$titremot";
+						$listmot .= "$titremot"; 
 						$idart = 1;
 					}
 					else {
-						$listmot .= ", $titremot";
+						$listmot .= ", $titremot"; 
+						if ($order == 1) {
+							$resultataffiche .= ", $titremot";		
+						}
 					}
 				}		
+				if ($order == 1) {
+					$resultataffiche .= "</li>";
+				}
 				
 				mysql_free_result($result2);
 				
+				if ($order == 0) {
 					
-					if ($listidmot2 != $listmodidprec) { # $listmot est deja annoncé
-						$resultataffiche .= "$listmot </h2><ul class=\"result_mc\">";
+					if ($listidmot2 != $listmodidprec) { 
+						$resultataffiche .= " $listmot </h2><ul class=\"result_mc\">";
 					}
 					$nbart += 1;
 					$resultataffiche .= "
 					<li>
 						<a href=\"./spip.php?article$id_article\">$titrearticle</a> 
 						<small>$dataffich</small>
-						<em>dans <a href=\"./spip.php?rubrique$id_rubrique\">$titrerub2</a></em></li>";
+						<em><:rmc:dans:> <a href=\"./spip.php?rubrique$id_rubrique\">$titrerub2</a></em></li>";
 
 					$listmodidprec = $listidmot2;
 					$listidmot2 = "";
+				}
 			}
 			$idrub = $id_rubrique;
 		}
@@ -179,7 +211,7 @@ if (isset($_POST['idmot'])) {
 			
 		echo "
 		<div class=\"contre-encart\">
-			<p class=\"mots_mc\">$nbart $nbart_txt"
+			<p class=\"mots_mc\">$nbart $nbart_txt "
 			.substr($tabmot, 0, -2)
 			."<br />
 			<a href=\"#form_mc\"><:rmc:nouvelle_recherche:></a></p>";
@@ -191,14 +223,12 @@ if (isset($_POST['idmot'])) {
 		</div>";		
 		
 	} else {
-#		echo "<hr />";
-		echo "<p class=\"mots_mc\"><:rmc:articles_sans:> $the, $org</p>";
-#		echo "<hr />";
-			
+		echo "<p class=\"mots_mc\"><:rmc:articles_sans:> $the, $org</p>";			
 	}	
 } else {
-	echo "<p class=\"mots_mc\"><:rmc:selectionner_mot:></p>";
+	echo "<p class=\"mots_mc\"><:rmc:selectionner_mot:>";
 # inutile si form recherche inclus	
-#	echo "<p><a href=\"".$_SERVER['HTTP_REFERER']."\" onclick=\"javascript:history.back(); return false;\">Retour</a></p>";	
+#	echo "<br /><a href=\"".$_SERVER['HTTP_REFERER']."\" onclick=\"javascript:history.back(); return false;\">Retour</a></p>";	
 }
 ?>
+
