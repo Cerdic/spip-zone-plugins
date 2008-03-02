@@ -40,3 +40,28 @@ fdiv.conf orm p.double textarea {
 div.conf form p.simple {
 	margin-left: 32%;
 }
+#form_cfg_rec_mc fieldset {
+-moz-border-radius:8px;
+margin-bottom:.5em;
+background-color:#f4f4f4;
+}
+#form_cfg_rec_mc legend {
+font-weight:bold;
+}
+#form_cfg_rec_mc ul {
+margin-left:0;
+padding-left:0;
+list-style:none;
+}
+#form_cfg_rec_mc li {
+border-bottom:1px solid #ccc;
+margin:.1em .5em .5em;
+padding:.3em;
+}
+#form_cfg_rec_mc ul .labels_cfg_rec_mc {
+margin:.3em 0 .3em 3em;
+}
+#form_cfg_rec_mc ul .labels_cfg_rec_mc label {
+cursor:pointer;
+padding-left:.5em;
+}
