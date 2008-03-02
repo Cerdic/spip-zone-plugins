@@ -52,34 +52,41 @@ document.write("</TABLE>");
 } 
 </script>-->
 
-<form method="post" name="form">[(#ENV{_cfg_}|form_hidden)]
+<form method="post" name="form" id="form_cfg_rec_mc">[(#ENV{_cfg_}|form_hidden)]
+<B_groupes>
 	<fieldset>
-		<legend>Affichage des mots-cl&eacute;</legend>
+		<legend>Affichage des mots-cl&eacute;s</legend>
+		<ul>
 		<BOUCLE_groupes(GROUPES_MOTS spip_rmc_rubs_groupes){par titre}>
-		<strong>Croupe #TITRE : </strong>
-		<label>Liste d&eacute;roulante</label>
-		<input type="radio" name="checklist#ID_GROUPE" value="list#ID_GROUPE" [(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|=={list#ID_GROUPE}|?{checked,''})] />
-		<label>Cases &agrave: cocher</label>
-		<input type="radio" name="checklist#ID_GROUPE" value="check#ID_GROUPE" [(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|=={check#ID_GROUPE}|?{checked,''})]/><br />
+		<li><strong>Groupe #TITRE : </strong> 
+			<div class="labels_cfg_rec_mc">
+				<label>Liste d&eacute;roulante
+				<input type="radio" name="checklist#ID_GROUPE" value="list#ID_GROUPE" [(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|=={list#ID_GROUPE}|?{checked,''})] /></label>
+				<label>Cases &agrave; cocher
+				<input type="radio" name="checklist#ID_GROUPE" value="check#ID_GROUPE" [(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|=={check#ID_GROUPE}|?{checked,''})] /></label>
+			</div>
+		</li>
 		</BOUCLE_groupes>
+		</ul>
 	</fieldset>
-
+</B_groupes>
 	<fieldset>
 		<legend>Bordure des cadres</legend>
-		<label>Choix de la couleur des bordures :</label>
-		<div align='center'>
+		<label for="hexval">Choix de la couleur des bordures :</label>
+		<div align="center">
 			<script language="JavaScript"> 
 				palette(); 
 			</script>
 		</div>
 		Cliquez sur la couleur de votre choix pour la s&eacute;lectionner.<br />
-		<input type="text" name="hexval" value="#ENV{hexval}" />
+		<input type="text" id="hexval" name="hexval" value="#ENV{hexval}" />
 	</fieldset>
 	<p>
 	<fieldset>
 		<legend>Police de caract&egrave;res</legend>
-		<label>Taille de la police :</label>
-		<select name="taillepol">
+		<label for="taillepol">Taille de la police :</label>
+		<select name="taillepol" id="taillepol">
+			<option value=""[ (#ENV{taillepol}|=={""}|?{selected="selected",''})]></option>
 			<option value="8"[ (#ENV{taillepol}|=={8}|?{selected="selected",''})]>8</option>
 			<option value="10"[ (#ENV{taillepol}|=={10}|?{selected="selected",''})]>10</option>
 			<option value="12"[ (#ENV{taillepol}|=={12}|?{selected="selected",''})]>12</option>
@@ -90,14 +97,14 @@ document.write("</TABLE>");
 	</p>
 	<fieldset>
 		<legend>Police de caract&egrave;res</legend>
-		<label>Choix de la couleur de la police :</label>
-		<div align='center'>
+		<label for="hexvalpol" >Choix de la couleur de la police :</label>
+		<div align="center">
 			<script language="JavaScript"> 
 				palettepol(); 
 			</script>
 		</div>
 		Cliquez sur la couleur de votre choix pour la s&eacute;lectionner.<br />
-		<input type="text" name="hexvalpol" value="#ENV{hexvalpol}" />
+		<input type="text" id="hexvalpol" name="hexvalpol" value="#ENV{hexvalpol}" />
 	</fieldset>
 	<p>
 		<input type="submit" name="_cfg_ok" value="<:OK:>" />
