@@ -10,18 +10,19 @@
 #SET{taille, #ENV{taille, #CONFIG{album/taille, 450}}}
 #SET{increment, #ENV{nbre_vignette, #CONFIG{album/nbrevignette, 10}}}
 #SET{sens, #ENV{senstri, #CONFIG{album/senstri, 0}}}
+#SET{hauteur, [(#GET{taille}|div{3}|round)]}
 
-<span id="carousel" class="spip_document_#ENV{id} spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok" style="[float:(#ENV{align}|match{left|right});][ height:(#GET{taille}|div{3}|round)px;][ width:(#GET{taille})px;]">
+<span id='carousel' class='[spip_document_(#ENV{id}) ]spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok' style='[float:(#ENV{align}|match{left|right}); ][height:(#GET{hauteur})px;][ width:(#GET{taille})px;]'>
 <BOUCLE_imgrubrique(DOCUMENTS documents_articles articles types_documents){id_rubrique}{statut=publie}{extension IN png,jpg,gif}{par date}{inverse #GET{sens}}{0,#GET{increment}}>
 	[<a href="[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]"[ title="(#TITRE|texte_backend|sinon{[(#FICHIER)]})"] rel="imagebox-carousel"><img src="(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})" width="100%" /></a>]</BOUCLE_imgrubrique>
 <BOUCLE_imgarticle(ARTICLES documents_articles documents){id_document}><BOUCLE_imgdocart(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}>
 	[<a href="[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]"[ title="(#TITRE|texte_backend|sinon{[(#FICHIER)]})"] rel="imagebox-carousel"><img src="(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})" width="100%" /></a>]</BOUCLE_imgdocart></BOUCLE_imgarticle>
 <BOUCLE_imgbreve(BREVES documents_breves documents){id_document}><BOUCLE_imgdocbreve(DOCUMENTS){id_breve}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}>
-	[<a href="[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]"[ title="(#TITRE|texte_backend|sinon{[(#FICHIER)]})"] rel="imagebox-carousel"><img src="(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})" width="100%" /></a>]</BOUCLE_imgdocbreve></BOUCLE_imgbreve>
+	[<a href="[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]"[ title="(#TITRE|texte_backend|sinon{[(#FICHIER)]})"] rel="imagebox-carousel"><img src="(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{hauteur}}|extraire_attribut{src})" width="100%" /></a>]</BOUCLE_imgdocbreve></BOUCLE_imgbreve>
 <BOUCLE_imgrub(RUBRIQUES documents_rubriques documents){id_document}><BOUCLE_imgdocrub(DOCUMENTS){id_rubrique}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}>
-	[<a href="[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]"[ title="(#TITRE|texte_backend|sinon{[(#FICHIER)]})"] rel="imagebox-carousel"><img src="(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})" width="100%" /></a>]</BOUCLE_imgdocrub></BOUCLE_imgrub>
+	[<a href="[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]"[ title="(#TITRE|texte_backend|sinon{[(#FICHIER)]})"] rel="imagebox-carousel"><img src="(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{hauteur}}|extraire_attribut{src})" width="100%" /></a>]</BOUCLE_imgdocrub></BOUCLE_imgrub>
 <BOUCLE_imgsecteur(DOCUMENTS documents_articles articles types_documents){id_secteur ?}{statut=publie}{extension IN png,jpg,gif}{par date}{inverse #GET{sens}}{0,#GET{increment}}>
-	[<a href="[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]"[ title="(#TITRE|texte_backend|sinon{[(#FICHIER)]})"] rel="imagebox-carousel"><img src="(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})" width="100%" /></a>]</BOUCLE_imgsecteur><//B_imgrub><//B_imgbreve><//B_imgarticle><//B_imgrubrique>
+	[<a href="[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]"[ title="(#TITRE|texte_backend|sinon{[(#FICHIER)]})"] rel="imagebox-carousel"><img src="(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{hauteur}}|extraire_attribut{src})" width="100%" /></a>]</BOUCLE_imgsecteur><//B_imgrub><//B_imgbreve><//B_imgarticle><//B_imgrubrique>
 </span>
 
 <script type="text/javascript">

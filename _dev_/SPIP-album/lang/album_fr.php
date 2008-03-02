@@ -13,15 +13,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'center' => 'Centre',
+'cfg_except_admin' => 'Les administrateurs',
+'cfg_except_no' => 'Aucune',
+'cfg_except_redact' => 'Les r&eacute;dacteurs et administrateurs',
 'cfg_logo_album' => 'Logo SPIP-Album',
 'cfg_nbre_vignette' => 'Nombre de vignettes par d&eacute;faut',
-'cfg_nbre_vignette_label' => 'D&eacute;finir le nombre de photographies affich&eacute;es dans les galeries ou diaporamas',
+'cfg_nbre_vignette_label' => 'D&eacute;finit le nombre de photographies affich&eacute;es dans les galeries, diaporamas ou carousel 3D',
 'cfg_noclic' => 'Blocage du clic droit de la souris',
-'cfg_noclic_label' => 'Cette option permet de rendre impossible l\'appel au menu contextuel et donc de faire facilement une copie du contenu de votre site',
-'cfg_senstri' => 'Sens de tri par d&eacute;faut',
-'cfg_senstri_label' => 'D&eacute;finir le sens de tri des photographies affich&eacute;es dans les galeries ou diaporamas (<i>Dans les galeries, le tri se fait en fonction de <b>num titre</b> et de la <b>date</b>. Dans les diaporamas, le tri se fait sur la <b>date</b> seule</i>)',
+'cfg_noclic_except' => 'Blocage non applicable &agrave;',
+'cfg_noclic_presentation' => 'Cette option permet de rendre impossible l\'appel au menu contextuel et donc de faire facilement une copie du contenu de votre site',
+'cfg_noclic_titre' => 'Blocage du menu contextuel',
+'cfg_param_img' => 'Configuration des param&egrave;tres d\'affichage des images',
+'cfg_param_img_presentation' => 'Permet de fixer les param&egrave;tres d\'affichage par d&eacute;faut de vos images dans les articles. Vous maintenez ainsi l\'homog&eacute;n&eacute;isation du contenu de vos articles sans que vos r&eacute;dacteurs aient &agrave; se rappeler des diff&eacute;rents param&egrave;tres &agrave; int&eacute;grer.',
+'cfg_senstri' => 'Sens du tri par d&eacute;faut',
+'cfg_senstri_label' => 'D&eacute;finit le sens du tri des photographies affich&eacute;es dans les galeries, diaporamas ou carousel 3D.<br /><strong>Nota Bene :</strong> Dans les galeries, le tri se fait en fonction de <b>num titre</b> et de la <b>date</b>. Dans les diaporamas et les carousel 3D, le tri se fait sur la <b>date</b> seule',
 'cfg_taille' => 'Taille par d&eacute;faut des images',
-'cfg_taille_label' => 'D&eacute;finir la taille par d&eacute;faut des images affich&eacute;es',
+'cfg_taille_label' => 'D&eacute;finit la taille par d&eacute;faut des images affich&eacute;es ou des zones d\'affichage comme par exemple pour le <strong>carousel 3D</strong>',
 'cfg_titre' => 'Configuration du plugin SPIP-Album',
 'cfg_watermark' => 'Configuration de l\'option Watermark',
 'clic_photo' => 'Cliquer sur la photo pour la visualiser dans sa taille originale.',
@@ -36,6 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fermer_fenetre' => 'Fermer cette fen&ecirc;tre',
+'from' => 'sur',
+
+//H
+'head_debut' => 'Debut de la partie reservee a SPIP-Album',
+'head_fin' => 'Fin de la partie reservee a SPIP-Album',
 
 // I
 'image' => 'Copyright sous forme d\'image',
@@ -62,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'right' => 'Droite',
 
 // S
+'Showing_image' => 'Image num&eacute;ro',
 'suivant' => 'Suivant',
 
 // T
@@ -83,7 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'watermark_shadow' => 'Ombrage du texte',
 'watermark_text' => 'Texte utilis&eacute; pour le copyright',
 'watermark_type' => 'Type de marquage de copyright',
-'watermark_presentation1' => 'L\'option <strong>WaterMark</strong> permet d\'int&eacute;grer un texte ou une image de copyright au sein d\'une image publi&eacute;e, afin d\'en &eacute;viter le vol',
+'watermark_presentation' => 'L\'option <strong>WaterMark</strong> permet d\'int&eacute;grer un texte ou une image de copyright au sein d\'une image publi&eacute;e, afin d\'en &eacute;viter le vol',
 
 // Y
 'yes' => 'Oui',

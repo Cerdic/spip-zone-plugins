@@ -14,7 +14,7 @@
 #SET{sens, #ENV{senstri, #CONFIG{album/senstri, 0}}}
 
 <B_galerie>
-<script type="text/javascript" src="#CHEMIN{javascript/album_gallery.js}"></script>
+[<script type="text/javascript" src="(#CHEMIN{javascript/album_gallery.js}|compacte)"></script>]
 [(#ANCRE_PAGINATION)]
 <span class="spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok" style="[float:(#ENV{align}|match{left|right}); ]height:#GET{taille}px; width:#GET{taille}px;">
 
@@ -25,8 +25,8 @@
 <BOUCLE_photo_expose(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}{#EVAL{_request('debut_galerie'), 0}, 1}>
 			<dl>
 				<dt id="affiche_photo" style="background:url('#CHEMIN{img_pack/loading.gif}') no-repeat center 50%; width:#GET{taille}; height:#GET{taille};">
-					<a href="[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]" rel="imagebox-gallery"[ title="(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})"]>
-						[<span id="grande_photo">(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|inserer_attribut{title,<:album:clic_photo:>})</span>]
+					<a href="[(#FICHIER|image_watermark|extraire_attribut{src})]" rel="imagebox-gallery"[ title="(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})"]>
+						[<span id="grande_photo">(#FICHIER|image_reduire{#GET{taille},#GET{taille}}|inserer_attribut{title,<:album:clic_photo:>})</span>]
 					</a>
 				</dt>
 				<dt id="titre_photo" class="#EDIT{titre} spip_doc_titre">[(#TITRE|supprimer_numero|sinon{[(#FICHIER)]})]</dt>
@@ -45,8 +45,8 @@
 		<td class="arrow">[(#PAGINATION{gallery_precedent})]</td>
 <BOUCLE_galerie(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}{pagination #GET{increment}}>
 		<td class="vignette">
-			[<a target="_self" href="javascript:Affiche_Image('[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]','[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]','[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{width})]','[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{height})]','[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]','[(#DESCRIPTIF|entites_html)]');" title="[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]">
-				(#LOGO_DOCUMENT||image_reduire{50,50}|inserer_attribut{alt,[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]})
+			[<a target="_self" href="javascript:Affiche_Image('[(#FICHIER|image_watermark|extraire_attribut{src})]','[(#FICHIER|image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]','[(#FICHIER|image_reduire{#GET{taille},#GET{taille}}|largeur)]','[(#FICHIER|image_reduire{#GET{taille},#GET{taille}}|hauteur)]','[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]','[(#DESCRIPTIF|entites_html)]');" title="[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]">
+				(#FICHIER||image_reduire{50,50}|image_recadre{50,50,center}|inserer_attribut{alt,[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]})
    			</a>]
 		</td>
 </BOUCLE_galerie>

@@ -1,8 +1,6 @@
 [(#REM) titre=SPIP-Album]
-[(#REM) icone=img_pack/e.gif]
-[(#SET{logo,
-<img src='#DOSSIER_SQUELETTE/../img_pack/moinecopiste.gif' width='59' height='85' alt='<:album:cfg_logo_album:>' style="float:#LANG_RIGHT;" />
-})]
+[(#REM) icone=img_pack/album-22.png]
+[(#SET{logo, <img src='[(#CHEMIN{img_pack/album.png})]' width='43' height='37' alt='<:album:cfg_logo_album:>' style="float:#LANG_RIGHT;" />})]
 <!-- descriptif=
 #GET{logo}
 <h4><:album:cfg_titre:></h4>
@@ -11,36 +9,52 @@
 
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
-<fieldset><legend><:album:cfg_taille:></legend>
-	<label for="sc_taille"><:album:cfg_taille_label:>&nbsp;:</label>
-	<input type="text" name="taille" id="sc_taille" value="[(#ENV{taille,'450'})]" size="3" class="fondl" /> px.
+<fieldset><legend><:album:cfg_param_img:></legend>
+	<p><:album:cfg_param_img_presentation:></p>
+	<table width="100%">
+		<tr>
+			<td valign="top"><labelfor="sc_taille"><:album:cfg_taille:>&nbsp;:</label><br />
+				<em><:album:cfg_taille_label:></em>.
+			</td>
+			<td valign="top"><input type="text" name="taille" id="sc_taille" value="[(#ENV{taille,'450'})]" size="3" class="fondl" /> px.</td>
+		</tr>
+		<tr>
+			<td valign="top"><label for="sc_nbrevignette"><:album:cfg_nbre_vignette:>&nbsp;:</label><br />
+				<em><:album:cfg_nbre_vignette_label:></em>.
+			</td>
+			<td valign="top">
+				<select name="nbrevignette" id="sc_nbrevignette" class="fondl">
+					<option value="1"[ selected="(#ENV{nbrevignette,10}|=={1}|?{selected})"]>1</option>
+					<option value="2"[ selected="(#ENV{nbrevignette,10}|=={2}|?{selected})"]>2</option>
+					<option value="3"[ selected="(#ENV{nbrevignette,10}|=={3}|?{selected})"]>3</option>
+					<option value="4"[ selected="(#ENV{nbrevignette,10}|=={4}|?{selected})"]>4</option>
+					<option value="5"[ selected="(#ENV{nbrevignette,10}|=={5}|?{selected})"]>5</option>
+					<option value="6"[ selected="(#ENV{nbrevignette,10}|=={6}|?{selected})"]>6</option>
+					<option value="7"[ selected="(#ENV{nbrevignette,10}|=={7}|?{selected})"]>7</option>
+					<option value="8"[ selected="(#ENV{nbrevignette,10}|=={8}|?{selected})"]>8</option>
+					<option value="9"[ selected="(#ENV{nbrevignette,10}|=={9}|?{selected})"]>9</option>
+					<option value="10"[ selected="(#ENV{nbrevignette,10}|=={10}|?{selected})"]>10</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top"><label for="sc_senstri"><:album:cfg_senstri:>&nbsp;:</label><br />
+				<em><:album:cfg_senstri_label:></em>.
+			</td>
+			<td valign="top">
+				<input type="radio" name="senstri" value="0"[ (#ENV{senstri,0}|=={0}|?{checked})]>&nbsp;<:album:croissant:><br />
+				<input type="radio" name="senstri" value="1"[ (#ENV{senstri,0}|=={1}|?{checked})]>&nbsp;<:album:decroissant:>
+			</td>
+		</tr>
+	</table>
 </fieldset>
-<fieldset><legend><:album:cfg_nbre_vignette:></legend>
-	<label for="sc_nbrevignette"><:album:cfg_nbre_vignette_label:>&nbsp;:</label>
-	<select name="nbrevignette" id="sc_nbrevignette" class="fondl">
-		<option value="1"[ selected="(#ENV{nbrevignette,10}|=={1}|?{selected})"]>1</option>
-		<option value="2"[ selected="(#ENV{nbrevignette,10}|=={2}|?{selected})"]>2</option>
-		<option value="3"[ selected="(#ENV{nbrevignette,10}|=={3}|?{selected})"]>3</option>
-		<option value="4"[ selected="(#ENV{nbrevignette,10}|=={4}|?{selected})"]>4</option>
-		<option value="5"[ selected="(#ENV{nbrevignette,10}|=={5}|?{selected})"]>5</option>
-		<option value="6"[ selected="(#ENV{nbrevignette,10}|=={6}|?{selected})"]>6</option>
-		<option value="7"[ selected="(#ENV{nbrevignette,10}|=={7}|?{selected})"]>7</option>
-		<option value="8"[ selected="(#ENV{nbrevignette,10}|=={8}|?{selected})"]>8</option>
-		<option value="9"[ selected="(#ENV{nbrevignette,10}|=={9}|?{selected})"]>9</option>
-		<option value="10"[ selected="(#ENV{nbrevignette,10}|=={10}|?{selected})"]>10</option>
-	</select>
-</fieldset>
-<fieldset><legend><:album:cfg_senstri:></legend>
-	<label for="sc_senstri"><:album:cfg_senstri_label:>&nbsp;:</label><br />
-	<input type="radio" name="senstri" value="0"[ (#ENV{senstri,0}|=={0}|?{checked})]>&nbsp;<:album:croissant:>&nbsp;
-	<input type="radio" name="senstri" value="1"[ (#ENV{senstri,0}|=={1}|?{checked})]>&nbsp;<:album:decroissant:>&nbsp;
-</fieldset>
+<br />
 <fieldset><legend><:album:cfg_watermark:></legend>
-	<p><:album:watermark_presentation1:>.</p>
+	<p><:album:watermark_presentation:>.</p>
 	<table width="100%">
 		<tr>
 			<td valign="top"><label for="sc_watermarktype"><:album:watermark_type:>&nbsp;:</label></td>
-			<td>
+			<td valign="top">
 				<input type="radio" name="watermarktype" value="none"[ (#ENV{watermarktype,none}|=={none}|?{checked})]>&nbsp;<:album:aucun:>.<br />
 				<input type="radio" name="watermarktype" value="text"[ (#ENV{watermarktype,none}|=={text}|?{checked})]>&nbsp;<:album:text:>.<br />
 				<input type="radio" name="watermarktype" value="image"[ (#ENV{watermarktype,none}|=={image}|?{checked})]>&nbsp;<:album:image:>.
@@ -48,7 +62,7 @@
 		</tr>
 		<tr>
 			<td valign="top"><label for="sc_watermarkalignh"><:album:watermark_alignh:>&nbsp;:</label></td>
-			<td>
+			<td valign="top">
 				<input type="radio" name="watermarkalignh" value="left"[ (#ENV{watermarkalignh,center}|=={left}|?{checked})]>&nbsp;<:album:left:>.<br />
 				<input type="radio" name="watermarkalignh" value="center"[ (#ENV{watermarkalignh,center}|=={center}|?{checked})]>&nbsp;<:album:center:>.<br />
 				<input type="radio" name="watermarkalignh" value="right"[ (#ENV{watermarkalignh,center}|=={right}|?{checked})]>&nbsp;<:album:right:>.
@@ -56,7 +70,7 @@
 		</tr>
 		<tr>
 			<td valign="top"><label for="sc_watermarkalignv"><:album:watermark_alignv:>&nbsp;:</label></td>
-			<td>
+			<td valign="top">
 				<input type="radio" name="watermarkalignv" value="top"[ (#ENV{watermarkalignv,center}|=={top}|?{checked})]>&nbsp;<:album:top:>.<br />
 				<input type="radio" name="watermarkalignv" value="center"[ (#ENV{watermarkalignv,center}|=={center}|?{checked})]>&nbsp;<:album:center:>.<br />
 				<input type="radio" name="watermarkalignv" value="bottom"[ (#ENV{watermarkalignv,center}|=={bottom}|?{checked})]>&nbsp;<:album:bottom:>.
@@ -64,19 +78,20 @@
 		</tr>
 		<tr>
 			<td valign="top"><label for="sc_watermarkmargin"><:album:watermark_margin:>&nbsp;:</label></td>
-			<td>
+			<td valign="top">
 				<input type="text" name="watermarkmargin" id="sc_watermarkmargin" value="[(#ENV{watermarkmargin,'10'})]" size="3" class="fondl" /> px.
 			</td>
 		</tr>
 		<tr>
-			<td valign="top"><label for="sc_watermarkimage"><:album:watermark_image:>&nbsp;:</label></td>
-			<td>
+			<td valign="top">
+				<label for="sc_watermarkimage"><:album:watermark_image:>&nbsp;:</label></td>
+			<td valign="top">
 				<input type="text" name="watermarkimage" id="sc_watermarkimage" value="[(#ENV{watermarkimage,'/img_pack/copyright.png'})]" class="forml" size="20" />
 			</td>
 		</tr>
 		<tr>
 			<td valign="top"><label for="sc_watermarkopacity"><:album:watermark_opacity:>&nbsp;:</label></td>
-			<td>
+			<td valign="top">
 				<select  name="watermarkopacity" id="sc_watermarkopacity"  class="fondl">
 					<option value="10"[ selected="(#ENV{watermarkopacity,20}|=={10}|?{selected})"]>10</option>
 					<option value="20"[ selected="(#ENV{watermarkopacity,20}|=={20}|?{selected})"]>20</option>
@@ -93,13 +108,13 @@
 		</tr>
 		<tr>
 			<td valign="top"><label for="sc_watermarktext"><:album:watermark_text:>&nbsp;:</label></td>
-			<td>
+			<td valign="top">
 				<input type="text" name="watermarktext" id="sc_watermarktext" value="[(#ENV{watermarktext,'Copyright (c) '[(#ENV{date}|annee)] - [(#URL_SITE_SPIP)]})]" class="forml" size="20" />
 			</td>
 		</tr>
 		<tr>
 			<td valign="top"><label for="sc_watermarkfont"><:album:watermark_font:>&nbsp;:</label></td>
-			<td>
+			<td valign="top">
 				<select name="watermarkfont" id="sc_watermarkfont" class="fondl">
 					<option value="1"[ selected="(#ENV{watermarkfont,3}|=={1}|?{selected})"]>1</option>
 					<option value="2"[ selected="(#ENV{watermarkfont,3}|=={2}|?{selected})"]>2</option>
@@ -111,26 +126,43 @@
 		</tr>
 		<tr>
 			<td valign="top"><label for="sc_watermarkshadow"><:album:watermark_shadow:>&nbsp;:</label></td>
-			<td>
+			<td valign="top">
 				<input type="radio" name="watermarkshadow" value="yes"[ (#ENV{watermarkshadow,yes}|=={yes}|?{checked})]>&nbsp;<:album:yes:>.<br />
 				<input type="radio" name="watermarkshadow" value="no"[ (#ENV{watermarkshadow,yes}|=={no}|?{checked})]>&nbsp;<:album:no:>.<br />
 			</td>
 		</tr>
 		<tr>
 			<td valign="top"><label for="sc_watermarkcolor"><:album:watermark_color:>&nbsp;:</label></td>
-			<td>
+			<td valign="top">
 				<input type="text" name="watermarkcolor" id="sc_watermarkmcolor" value="[(#ENV{watermarkcolor,FFFFFF})]" class="fondl" size="6" />.
 			</td>
 		</tr>
 	</table>
 </fieldset>
-<fieldset><legend><:album:cfg_noclic:></legend>
-	<label for="sc_senstri"><:album:cfg_noclic_label:>&nbsp;:</label><br />
-	<input type="radio" name="noclic" value="0"[ (#ENV{noclic,0}|=={0}|?{checked})]>&nbsp;<:album:desactive:>&nbsp;
-	<input type="radio" name="noclic" value="1"[ (#ENV{noclic,0}|=={1}|?{checked})]>&nbsp;<:album:active:>&nbsp;
+<br />
+<fieldset><legend><:album:cfg_noclic_titre:></legend>
+	<p><:album:cfg_noclic_presentation:>.</p>
+	<table width="100%">
+		<tr>
+			<td valign="top"><label for="sc_noclic"><:album:cfg_noclic:>&nbsp;:</label><br /></td>
+			<td valign="top">
+				<input type="radio" name="noclic" value="0"[ (#ENV{noclic,0}|=={0}|?{checked})]>&nbsp;<:album:desactive:><br />
+				<input type="radio" name="noclic" value="1"[ (#ENV{noclic,0}|=={1}|?{checked})]>&nbsp;<:album:active:>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top"><label for="sc_noclicexcept"><:album:cfg_noclic_except:>&nbsp;:</label><br /></td>
+			<td valign="top">
+				<select name="noclicexcept" id="sc_noclicexcept" class="fondl">
+					<option value="0"[ selected="(#ENV{noclicexcept,0}|=={0}|?{selected})"]><:album:cfg_except_no:></option>
+					<option value="1"[ selected="(#ENV{noclicexcept,0}|=={1}|?{selected})"]><:album:cfg_except_admin:></option>
+					<option value="2"[ selected="(#ENV{noclicexcept,0}|=={2}|?{selected})"]><:album:cfg_except_redact:></option>
+				</select>
+			</td>
+		</tr>
+	</table>
 </fieldset>
-
-
+<br />
 
 <div>
 <input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />

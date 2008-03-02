@@ -17,15 +17,18 @@
 	color: #000; }
 #ImageBoxCaptionImages { margin: 0; }
 #ImageBoxNextImage, #ImageBoxPrevImage { background:url('../img_pack/spacer.gif'); }
-#ImageBoxNextImage:hover { background:url('../img_pack/next_image.jpg') no-repeat right top; color: transparent; text-decoration: none; }
-#ImageBoxPrevImage:hover { background:url('../img_pack/prev_image.jpg') no-repeat left bottom; color: transparent; text-decoration: none; }
+#ImageBoxNextImage:hover { background:url('../img_pack/next_image.jpg') no-repeat right top; }
+#ImageBoxPrevImage:hover { background:url('../img_pack/prev_image.jpg') no-repeat left bottom; }
 
 /*  ------------------------------------------------------
     Definition des styles propres a SlideShow (diaporama)
     ------------------------------------------------------ */
 #diaporama {
 	background:url('../img_pack/loading.gif}') no-repeat center 50%;
-	border:1px solid transparent;
+	border:2px solid #f00;
+/*	border:1px solid transparent;*/
+	clear:both;
+/*	display:block;*/
 	margin:5px;
 	padding:5px;
 	text-align:center;
@@ -45,7 +48,7 @@
 /*  ------------------------------------------------------
     Definition des styles propres au Puzzle
     ------------------------------------------------------ */
-.spip_form_puzzle, .spip_form_puzzle input  {	text-align:center; }
+.spip_form_puzzle {	text-align:center; }
 
 /*  ------------------------------------------------------
     Definition des styles propres a la galerie de photos
