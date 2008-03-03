@@ -200,6 +200,7 @@ L\'&eacute;quipe de @nom_site@',
 'chainenombre' => '(compos&eacute;e de lettres et/ou de chiffres)',
 'chainelettre' => '(compos&eacute;e uniquement de lettres)',
 'email_valide' => 'Veuillez ins&eacute;rer un email valide',
+'email_obligatoire' => 'Le champ email est obligatoire',
 
 // Change_pass
 'pass_indiquez_cidessous' => 'Indiquez ci-dessous l\'adresse email sous laquelle vous
@@ -211,6 +212,7 @@ L\'&eacute;quipe de @nom_site@',
 
 'titre_confirmation' => 'Confirmation',
 'page_confirmation' => 'Page de confirmation de votre inscription'
+
 
 );
 
