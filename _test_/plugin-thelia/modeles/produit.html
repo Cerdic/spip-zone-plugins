@@ -1,4 +1,14 @@
 <THELIA_produit type="PRODUIT"
+	[ caracdisp="(#ENV{caracdisp}|?{#ENV{caracdisp},''})"]
+	[ caracval="(#ENV{caracval}|?{#ENV{caracval},''})"]
+	[ declinaison="(#ENV{declinaison}|?{#ENV{declinaison},''})"]
+	[ declidisp="(#ENV{declidisp}|?{#ENV{declidisp},''})"]
+	[ declival="(#ENV{declival}|?{#ENV{declival},''})"]
+	[ declistockmini="(#ENV{declistockmini}|?{#ENV{declistockmini},''})"]
+	[ courant="(#ENV{courant}|?{#ENV{courant},''})"]
+	[ profondeur="(#ENV{profondeur}|?{#ENV{profondeur},''})"]
+	[ exclusion="(#ENV{exclusion}|?{#ENV{exclusion},''})"]
+	[ poids="(#ENV{poids}|?{#ENV{poids},''})"]
 	[ caracteristique="(#ENV{caracteristique}|?{#ENV{caracteristique},''})"]
 	[ prixmax="(#ENV{prixmax}|?{#ENV{prixmax},''})"]
 	[ prixmin="(#ENV{prixmin}|?{#ENV{prixmin},''})"]
@@ -17,7 +27,7 @@
 	[ rubrique="(#ENV{rubrique}|?{#ENV{rubrique},''})"]
 	[ id="(#ENV{id}|?{#ENV{id},''})"]>
 <div class="produits_thelia" [style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>	
-	[(#ENV{photo}|=={non}|?{'',' '})<THELIA_images type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><div style="float: left;"><img src="THELIA-IMAGE" /></div></THELIA_images> ]<p class="thelia_titre">THELIA-TITRE</p>
+	[(#ENV{photo}|=={non}|?{'',' '})<THELIA_images type="IMAGE" produit="THELIA-ID"[ hauteur="(#ENV{hauteur}|?{#ENV{hauteur},''})"][ largeur="(#ENV{largeur}|?{#ENV{largeur},'100'})"] num="1"><div style="float: left;"><img src="THELIA-IMAGE" /></div></THELIA_images> ]<p class="thelia_titre">THELIA-TITRE</p>
 	<div class="thelia_description">THELIA-DESCRIPTION</div>
 	<T_produitpromo>
 	<THELIA_produitpromo type="PRODUIT" ref="THELIA-REF" promo="1">
@@ -35,5 +45,6 @@
 		<a href="#URL_PAGE{panier,thelia_action=ajouter&ref=THELIA-REF}">ajouter au panier</a>
 	<//T_produitreappro>
 	</p>
-</div></THELIA_produit>
+</div>
+</THELIA_produit>
 
