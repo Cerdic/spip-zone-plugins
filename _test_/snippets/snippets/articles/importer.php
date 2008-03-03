@@ -15,7 +15,7 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 	include_spip('base/abstract_sql');
 	$champs_non_importables = array('id_article',"id_rubrique","id_secteur","maj","export","visites","referers","popularite","id_trad","idx","id_version","url_propre");
 	$champs_non_ajoutables = array('titre',"statut",'date','date_redac','lang');
-	$champs_jointures = array('auteur');
+	$champs_jointures = array('auteur','mot');
 	$champs_defaut_values = array('statut'=>'prop');
 	$table = 'spip_articles';
 	$primary = 'id_article';
@@ -83,6 +83,25 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
         		$sql = "UPDATE ".$table_prefix."_articles SET statut = '".$champs_defaut_values['statut']."' WHERE id_article = '$id_article'";
         		spip_query($sql); 
         		}
+        		
+        		
+        		if ( $objet['mot'] AND $creation){
+			
+					foreach($objet['mot'] as $mot){
+					// ajouter le mot cle
+					$id_article = $id_objet ;
+					$table_prefix = $GLOBALS['table_prefix'] ;
+						 $id_mot  = get_id_mot($mot);
+  				         if ($id_mot) {  				                
+        				 $sql="INSERT INTO ".$table_prefix."_mots_articles (id_mot, id_article) VALUES ($id_mot, $id_article)";
+        				 spip_query($sql);                              				              	
+        				}                   							
+					}
+				}	
+        		
+        		
+        		
+        		
 			}
 		}
 	return $translations;
@@ -104,6 +123,35 @@ function get_id_auteur($name) {
     return spip_insert_id();
 }
 
+// recupere un id_mot selon le type|titre ou le creer
+
+function get_id_mot($name) {
+    if (trim($name)=="") return false; 
+    list($type,$titre) = explode('|',$name) ;
+    spip_log(" -> $type,$titre <-","snippet");
+    $sql = "SELECT id_mot FROM spip_mots WHERE titre='".addslashes($titre)."'";
+    $result = spip_query($sql);
+    while ($row = spip_fetch_array($result)) {
+       return $row['id_mot'];
+    }
+    // creer le groupe ?
+    $sql = "SELECT id_groupe FROM spip_groupes_mots WHERE titre='".addslashes($type)."'";
+    $result = spip_query($sql);
+    $nb = spip_num_rows($result);
+    if ($nb == 0) {
+       $sql = "INSERT INTO spip_groupes_mots (titre) VALUES (\"$type\")";
+       spip_query($sql);
+       $id_groupe = spip_insert_id();
+    }
+    while ($row = spip_fetch_array($result)) {
+       $id_groupe = $row['id_groupe'];
+    }
+    
+    // mot inconnu, on le cree ...
+    $sql = "INSERT INTO spip_mots (type, titre, id_groupe) VALUES (\"$type\", \"$titre\", \"$id_groupe\")";
+    $result = spip_query($sql);
+    return spip_insert_id();
+}
 
 
 ?>
