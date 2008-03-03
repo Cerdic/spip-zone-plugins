@@ -26,39 +26,6 @@ function Inscription2_header_prive($flux){
 	return $flux;
 }
 
-function Inscription2_affiche_milieu($flux){
-	if ($GLOBALS['spip_version_code']<=1.9256){
-		switch($flux['args']['exec']) {	
-		case 'auteur_infos':
-		case 'auteurs_edit':
-			include_spip('inc/inscription2_fiche_adherent');
-				$id_auteur = $flux['args']['id_auteur'];
-				$flux['data'] .= inscription2_fiche_adherent($id_auteur);
-				break;
-			default:
-				break;
-		}
-	}
-	else{
-	switch($flux['args']['exec']) {	
-			case 'auteur_infos':
-				include_spip('inc/inscription2_gestion');
-				$id_auteur = $flux['args']['id_auteur'];
-				$flux['data'] .= inscription2_ajouts($id_auteur);
-				break;
-			case 'auteurs_edit':
-				include_spip('inc/inscription2_fiche_adherent');
-				$id_auteur = $flux['args']['id_auteur'];
-				$flux['data'] .= inscription2_fiche_adherent($id_auteur);
-				break;
-			default:
-				break;
-		}
-	
-	}
-	return $flux;
-}
-
 function inscription2_affichage_final($page){
 
     // regarder si la page contient le formulaire inscription2
