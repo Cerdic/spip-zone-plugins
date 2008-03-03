@@ -28,7 +28,8 @@ function google_like($string, $recherche) {
 	$num = count ($qt);
 	$cc = ceil(200 / $num);
 		for ($i = 0; $i < $num; $i++) {
-			$tab[$i] = preg_split("/($qt[$i])/i",$string,2, PREG_SPLIT_DELIM_CAPTURE);
+			$qt[$i]=str_replace(')','',str_replace('(','',$qt[$i]));
+      $tab[$i] = preg_split("/($qt[$i])/i",$string,2, PREG_SPLIT_DELIM_CAPTURE);
 			if(count($tab[$i])>1){
 				$avant[$i] = substr($tab[$i][0],-$cc,$cc);
 	    	    	        $apres[$i] = substr($tab[$i][2],0,$cc);

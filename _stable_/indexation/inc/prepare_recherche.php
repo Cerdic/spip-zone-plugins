@@ -22,12 +22,18 @@ function Indexation_recherche_sql($recherche) {
 	// Methode FULLTEXT si disponible
 	if (Indexation_test_fulltext()) {
 		$points = array();
-		if ($recherche)
+		if ($recherche) {
 			$s = spip_query($q = "SELECT id,type, MATCH (texte) AGAINST ("._q($recherche).") + 10*MATCH (texte) AGAINST ("._q($recherche)." IN BOOLEAN MODE) AS points FROM spip_indexation WHERE MATCH (texte) AGAINST ("._q($recherche)." IN BOOLEAN MODE)");
+			$s2 = spip_query($q = "SELECT id,type, MATCH (texte) AGAINST ("._q($recherche.'s').") + 10*MATCH (texte) AGAINST ("._q($recherche.'s')." IN BOOLEAN MODE) AS points FROM spip_indexation WHERE MATCH (texte) AGAINST ("._q($recherche.'s')." IN BOOLEAN MODE)");
+    }
 		else
 			$s = spip_query($q = "SELECT id,type,0 AS points FROM spip_indexation WHERE 0=1");
 		while ($t = sql_fetch($s))
 			$points[$t['type']][$t['id']] = ceil(10*$t['points']);
+    if (isset($s2)) {
+      while ($t = sql_fetch($s2))
+  			$points[$t['type']][$t['id']] = ceil(10*$t['points']);
+    }
 	}
 
 	// Methode alternative LIKE / REGEXP

@@ -497,7 +497,8 @@ function nettoyer_texte_indexation($texte) {
 	$texte = preg_replace(',<.*>,Ums',' ',$texte);
 
 	// Supprimer les caracteres de ponctuation, les guillemets...
-	$e = "],:;*\"!\r\n\t\\/)}{[|@<>$%'`?\~.^(";
+	//$e = "],:;*\"!\r\n\t\\/)}{[|@<>$%'`?\~.^(";
+	$e = "\r\n\t}{[]";
 	$texte = strtr($texte, $e, preg_replace('/./', ' ', $e));
 
 	return preg_replace('/\s{2,}/msS', ' ', $texte);
