@@ -2,11 +2,11 @@
 include_spip('base/abstract_sql');
 
 function confirmation_inscription2($id, $mode, $cle){
-	$q = spip_query("SELECT statut, alea_actuel FROM spip_auteurs WHERE id_auteur = '$id'");
-	$q = spip_fetch_array($q);
+	$q = sql_select("statut, alea_actuel","spip_auteurs","id_auteur = '$id'");
+	$q = sql_fetch($q);
 	$statuts_autorises = array( 
- 	"aconfirmer", 
- 	"6forum" 
+ 		"aconfirmer", 
+	 	"6forum" 
  	 ); 
  		        	         
  	if(in_array($q['statut'],$statuts_autorises) and $mode == 'conf' and $cle ==  $q['alea_actuel']){ 		
@@ -53,7 +53,7 @@ function n_to_br($texte){
 }
 
 function id_pays_to_pays($id_pays){
-	$pays = spip_fetch_array(sql_select('pays', 'spip_geo_pays', 'id_pays ='.$id_pays)) ;
+	$pays = sql_fetch(sql_select('pays', 'spip_geo_pays', 'id_pays ='.$id_pays)) ;
 	return $pays['pays'] ;
 }
 
