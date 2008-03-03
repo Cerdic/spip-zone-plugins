@@ -47,8 +47,8 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode, $retour) {
 			);
 			
 		}elseif($n == 'sup'){
-			spip_query("DELETE FROM spip_auteurs WHERE id_auteur = '$id'");
-			spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur = '$id'");
+			sql_delete("spip_auteurs","id_auteur = '$id'");
+			sql_delete("spip_auteurs_elargis","id_auteur = '$id'");
 			echo "<strong>"._T('inscription2:suppression_faite')."</strong>";
 		}else
 			echo "rien a faire";
@@ -61,10 +61,10 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode, $retour) {
 		
 		$htpass = generer_htpass($pass);
 		$statut = lire_config('inscription2/statut_nouveau');
-		spip_query("UPDATE spip_auteurs SET statut = '$statut', pass='$pass', htpass='$htpass', alea_actuel='' WHERE id_auteur = ".$id);
+		sql_updateq("spip_auteurs","array('statut' => $statut, 'pass' => $pass, 'htpass' => $htpass, 'alea_actuel' => ''", "id_auteur = ".$id);
 		echo "<strong>"._T('pass_nouveau_enregistre')."</strong><p><a href='".$retour."'>"._T('retour')."</a></p>";
-		$var_user = spip_query("SELECT nom, email, login FROM spip_auteurs WHERE id_auteur=".$id);
-		$var_user = spip_fetch_array($var_user);
+		$var_user = sql_select("nom, email, login","spip_auteurs","id_auteur=".$id);
+		$var_user = sql_fetch($var_user);
 		if($var_user){
 			$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 			$adresse_site = $GLOBALS['meta']["adresse_site"];
