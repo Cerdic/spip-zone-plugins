@@ -26,13 +26,13 @@ function inscription2_ajouts()
 	$echec = _request('echec');
 	$new = _request('new');
 
-	$s = spip_query("SELECT id_auteur FROM ".$nom_table." WHERE id_auteur=$id_auteur");
-	$auteur = spip_fetch_array($s);
+	$s = sql_select("id_auteur","".$nom_table."","id_auteur=$id_auteur");
+	$auteur = sql_fetch($s);
 
 	if (!$auteur AND !$new) {
 		sql_insert($nom_table, "(id_auteur)", "($id_auteur)");
-		$s = spip_query("SELECT id_auteur FROM ".$nom_table." WHERE id_auteur=$id_auteur");
-		$auteur = spip_fetch_array($s);
+		$s = sql_select("id_auteur","".$nom_table."","id_auteur=$id_auteur");
+		$auteur = sql_fetch($s);
 	}
 
 	$legender_auteur_supp = charger_fonction('legender_auteur_supp', 'inc');

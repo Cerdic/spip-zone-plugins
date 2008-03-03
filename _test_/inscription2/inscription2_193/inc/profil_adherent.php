@@ -15,7 +15,7 @@ include_spip('inc/headers');
 	//liste d'elements a afficher
 	$auteur['b.id'] = "0";
 	foreach(lire_config('inscription2') as $cle => $val) {
-		//Si la $cle est marquŽ pour tre affichŽe mais pas modifiable
+		//Si la $cle est marquï¿½ pour ï¿½tre affichï¿½e mais pas modifiable
 		if($val!='' and ereg("^.+_fiche$", $cle)){ 
 			$aux = str_replace("_fiche", "", $cle);
 			if($aux == 'username' or $aux == 'nom' or $aux == 'email')
@@ -39,8 +39,8 @@ include_spip('inc/headers');
 
 	if(is_array($auteur)){
 		$aux = join(', ',array_keys($auteur));
-		$aux = spip_query("SELECT $aux FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b ON a.id_auteur=b.id_auteur WHERE a.id_auteur = ".$id_auteur );
-		$aux = spip_fetch_array($aux);
+		$aux = sql_select("$aux","spip_auteurs a LEFT JOIN spip_auteurs_elargis b ON a.id_auteur=b.id_auteur"," a.id_auteur = ".$id_auteur );
+		$aux = sql_fetch($aux);
 	}
 	
 	if(!is_array($aux)){
@@ -55,8 +55,8 @@ include_spip('inc/headers');
 			spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id_auteur)");
 			if(is_array($auteur)){
 				$aux = join(', ',array_keys($auteur));
-				$aux = spip_query("SELECT $aux FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b ON a.id_auteur=b.id_auteur WHERE a.id_auteur = ".$id_auteur );
-				$aux = spip_fetch_array($aux);
+				$aux = sql_select("$aux","spip_auteurs a LEFT JOIN spip_auteurs_elargis b ON a.id_auteur=b.id_auteur","a.id_auteur = ".$id_auteur );
+				$aux = sql_fetch($aux);
 			}
 		}foreach($aux as $cle => $val){
 			if($cle != 'id'){

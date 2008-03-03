@@ -55,12 +55,12 @@ $().ready(function() {
 					$var_user['b.'.$cle] =  'b.`'.$cle.'` = '._q(_request($cle));
 			}
 			elseif ($val!='' and $cle == 'accesrestreint'){
-				$aux = spip_query("select id_zone from spip_zones_auteurs where id_auteur = $id");
-				while($q = spip_fetch_array($aux))
+				$aux = sql_select("id_zone","spip_zones_auteurs", "id_auteur = $id");
+				while($q = sql_fetch($aux))
 					$acces[]=$q['id_zone'];
 				$acces_array = $_POST['acces'];
 				if(!empty($acces) and empty($acces_array))
-					spip_query("delete from spip_zones_auteurs where id_auteur = $id");
+					sql_delete("spip_zones_auteurs","id_auteur = $id");
 				elseif(empty($acces) and !empty($acces_array))
 					spip_query("insert into spip_zones_auteurs (id_zone, id_auteur) values (".join(", $id), (", $acces_array).", $id)");
 				elseif(!empty($acces) and !empty($acces_array)){
@@ -102,7 +102,7 @@ $().ready(function() {
 		if($var_user['a.nom'])
 			$q1 = spip_query("update spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur set ".join(', ', $var_user)." where a.`id_auteur`='$id'");
 		if($q1)
-		    $message = "adherent mis à jour";
+		    $message = "adherent mis &agrave; jour";
 	}
 
 
@@ -128,21 +128,21 @@ $().ready(function() {
 		elseif($cle=='accesrestreint' and $val != ''){
 			$aux1=array();
 			$aux2=array();
-			$zones = spip_query("select id_zone, titre from spip_zones");
-			$acces = spip_query("select id_zone from spip_zones_auteurs where id_auteur = $id");
-			while($q = spip_fetch_array($acces))
+			$zones = sql_select("id_zone, titre","spip_zones");
+			$acces = sql_select("id_zone","spip_zones_auteurs","id_auteur = $id");
+			while($q = sql_fetch($acces))
 				$aux1[]=$q['id_zone'];
-			while($q = spip_fetch_array($zones))
+			while($q = sql_fetch($zones))
 				$aux2[] = $q;
 		}
 		elseif($cle=='newsletter' and $val != ''){
 			$aux3=array();
 			$aux4=array();
-			$news = spip_query("select id_liste, titre from spip_listes");
-			$listes = spip_query("select id_liste from spip_auteurs_listes where id_auteur = $id");
-			while($q = spip_fetch_array($listes))
+			$news = sql_select("id_liste, titre","spip_listes");
+			$listes = sql_select("id_liste","spip_auteurs_listes","id_auteur = $id");
+			while($q = sql_fetch($listes))
 				$aux3[]=$q['id_liste'];
-			while($q = spip_fetch_array($news))
+			while($q = sql_fetch($news))
 				$aux4[] = $q;
 		}
 	}
@@ -152,11 +152,11 @@ $().ready(function() {
 		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays where a.id_auteur= $id");
 	else
 		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
-	$query = spip_fetch_array($query);
+	$query = sql_fetch($query);
 	
 	if($query['id'] == NULL){
 		$query2 = spip_query("select id from spip_auteurs_elargis where id_auteur = $id");
-		$query2 = spip_fetch_array($query2);
+		$query2 = sql_fetch($query2);
 		if($query2['id'] == NULL)
 			$id_elargi = spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)"); //source de pbs
 	}
