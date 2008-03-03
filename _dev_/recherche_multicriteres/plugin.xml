@@ -1,11 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
 	<nom><multi>[fr]Recherche Multi-Crit&egrave;res[en]Multi Keywords Research</multi</nom>
 	<description>
 		<multi>
 		[fr]Recherche Multi-crit&egrave;res par mots-cl&eacute;s.<br />
-		La recherche multicrit&egrave;res par mots-cl&eacute;s permet de rechercher des articles s&eacute;lectionnant un ou plusieurs mots-cl&eacute;. La recherche retournera la liste d&rsquo;articles associ&eacute;s à ces mots-cl&eacute;<br />
+		La recherche multicrit&egrave;res par mots-cl&eacute;s permet de rechercher des articles s&eacute;lectionnant un ou plusieurs mots-cl&eacute;. La recherche retournera la liste d&rsquo;articles associ&eacute;s &agrave; ces mots-cl&eacute;<br />
 		Vous pouvez choisir le type d'affichage des groupes de mots dans le formulaire (<i>liste d&eacute;roulante ou cases &agrave; cocher</i>)
-		Vous pouvez rechercher les articles associ&eacute;s à tous les mots ou non (et/ou)<br />
+		Vous pouvez rechercher les articles associ&eacute;s &agrave; tous les mots ou non (et/ou)<br />
 		Vous pouvez limiter la recherche par date de publication des articles (-7 jours, -1 mois, -3 mois, -12 mois, tous)<br />
 		Dans le cas de l&rsquo;affichage par rubriques, vous pouvez limiter ou non la recherche &agrave; la rubrique en cours.<br />
 		<strong>Ce plugin n&eacute;cessite cfg v 1.3.8 ou sup&eacute;rieur.</strong><br />
@@ -21,14 +22,14 @@
 	<lien>
 	<multi>
 		[fr]Documentation et Installation : <a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" 
-		title="Aller &agrave la documentation" target="_blank">TiSpiP-sKeLeT</a>
+		title="Aller &agrave la documentation" >TiSpiP-sKeLeT</a>
 		[en]Documentation and Installation :<a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" 
-		title="Information and Documentation" target="_blank">TiSpiP-sKeLeT</a>
+		title="Information and Documentation">TiSpiP-sKeLeT</a>
 	</lien>
 	<version>0.1</version>
 	<prefix>rec_mc</prefix>
 	<etat>dev</etat>
-	<auteur>Dom Lepaisant - d&rsquo;apr&egrave;s une contrib de <a href="http://www.netdeveloppeur.com/tutoriaux-et-astuces-spip/spip-recherche-multicriteres-article34.html"  target="_blank">Paul Sanchez - NetDeveloppeur</a></auteur>
+	<auteur>Dom Lepaisant - d&rsquo;apr&egrave;s une contrib de <a href="http://www.netdeveloppeur.com/tutoriaux-et-astuces-spip/spip-recherche-multicriteres-article34.html">Paul Sanchez - NetDeveloppeur</a></auteur>
 	<icon>img_pack/cles24.png</icon>
 	<install>base/rec_mc_upgrade.php</install>
 	<pipeline>
