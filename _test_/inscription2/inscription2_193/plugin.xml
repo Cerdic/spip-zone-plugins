@@ -41,9 +41,5 @@
 		<action>ajouter_boutons</action>
 		<inclure>inscription2_ajouter_onglets.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>affiche_milieu</nom>
-		<inclure>inscription2_ajouter_onglets.php</inclure>
-	</pipeline>
 	<chemin dir='' />
 </plugin>
