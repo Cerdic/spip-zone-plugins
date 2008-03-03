@@ -30,6 +30,11 @@
 		<action>ajouter_boutons</action>
 		<inclure>spip_thelia_fonct.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>post_typo</nom>
+  		<action>supprimer_balises_thelia</action>
+  		<inclure>spip_thelia_fonct.php</inclure>
+	</pipeline>
 	<icon>img_pack/logo_thelia.png</icon>
  	<necessite id="CFG" version="[1.0;]" />
 	<necessite id='spip' version='[1.92;]' />

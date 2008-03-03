@@ -1,4 +1,12 @@
 <?php
+function spip_thelia_supprimer_balises_thelia($texte) {
+	//suppression des boucles thélia
+	$texte = str_replace("THELIA_", "DUMMY_", $texte);
+	//suppression des balises thelia
+	$texte = str_replace("THELIA-", "DUMMY-", $texte);
+	return $texte;
+
+}
 function spip_thelia_header_prive($flux) {
 	if (!file_exists("../fonctions/moteur.php")&&($_REQUEST['exec']!="")) 
 		echo ("erreur : th&eacute;lia introuvable, v&eacute;rifiez que les sous-r&eacute;pertoires de th&eacute;lia et spip sont dans le m&ecirc;me r&eacute;pertoire.");
