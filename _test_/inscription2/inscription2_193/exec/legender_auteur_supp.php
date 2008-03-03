@@ -20,20 +20,19 @@ function exec_legender_auteur_supp_dist()
 {
 	global $connect_id_auteur, $spip_display;
 
-	$id_auteur = intval(_request('id_auteur'))
+	$id_auteur = intval(_request('id_auteur'));
 	$nom_table = "spip_auteurs_elargis";
 	$redirect = _request('redirect');
 	$echec = _request('echec');
 	$new = _request('new');
 
-	$s = spip_query("SELECT * FROM ".$nom_table." WHERE id_auteur=$id_auteur");
-	$auteur = spip_fetch_array($s);
+	$s = sql_select("*","".$nom_table."","id_auteur=$id_auteur");
+	$auteur = sql_fetch($s);
 
 	if (!$auteur AND !$new) {
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('auteurs'));
 	}
-	
 
 	$legender_auteur_supp = charger_fonction('legender_auteur_supp', 'inc');
 	$fiche = $legender_auteur_supp($id_auteur, $auteur, $initial, $echec, $retour);
