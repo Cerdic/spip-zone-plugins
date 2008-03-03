@@ -14,7 +14,7 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_stat($args, $filtres) {
 	return array($mode);}
 
 function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
-	//recuperer les infos inserées par le visiteur
+	//recuperer les infos inserÃ©es par le visiteur
 	$var_user = array();
 	foreach(lire_config('inscription2') as $cle => $val) {
 		if($val!='' and !ereg("^.+_(obligatoire|fiche|table).*$", $cle)){
@@ -86,8 +86,8 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 
 
 function message_inscription2_pass($var_user, $mode) {
-	$row = spip_query("SELECT nom, statut, id_auteur, login, email, alea_actuel FROM `spip_auteurs` WHERE email=" . _q($var_user['email']));
-	$row = spip_fetch_array($row);
+	$row = sql_select("nom, statut, id_auteur, login, email, alea_actuel","spip_auteurs", "email=" . _q($var_user['email']));
+	$row = sql_fetch($row);
 
 	if (!$row) 							// il n'existe pas, creer les identifiants  
 		return inscription2_nouveau_pass($var_user);
@@ -104,7 +104,7 @@ function message_inscription2_pass($var_user, $mode) {
 function inscription2_nouveau_pass($declaration){
 	$declaration = inscription2_test_login($declaration);
 
-	//insertion des données ds la table spip_auteurs
+	//insertion des donnÃ©es ds la table spip_auteurs
 	foreach($declaration as $cle => $val){
 		if($cle == 'newsletters' or $cle == 'zones' or $cle =='sites' or $cle == 'zone' or $cle =='abonnement')
 			continue;
@@ -113,33 +113,32 @@ function inscription2_nouveau_pass($declaration){
 		else
 			$elargis[$cle]= $val;
 	}
-	//insertion des données dans la table spip_auteurs
+	//insertion des donnÃ©es dans la table spip_auteurs
 	$n = sql_insert('spip_auteurs', ('(' .join(',',array_keys($auteurs)).')'), ("(" .join(", ",array_map('_q', $auteurs)) .")"));
 	$declaration['id_auteur'] = $n;
 	$elargis['id_auteur'] = $n;
 	$date = date('Y-m-d');
-	//insertion des données dans la table spip_auteurs_elargis
+	//insertion des donnÃ©es dans la table spip_auteurs_elargis
 	if(isset($declaration['newsletters'])){
 		foreach($declaration['newsletters'] as $value){
 			if($value != '0')
-				spip_query("INSERT INTO `spip_auteurs_listes` 
-				(`id_auteur`, `id_liste`, `statut`, `date_inscription`) 
-				VALUES ('$n', '$value', 'valide','$date')");
+				sql_insertq("spip_auteurs_listes",
+				array("id_auteur" => $n, "id_liste" => $value, "statut" =>"valide" , "date_inscription" => $date));
 	}}
 	if(isset($declaration['zones'])){
 		foreach($declaration['zones'] as $value)
-			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('$n', '$value')");
+			sql_insertq("spip_zones_auteurs", array("id_auteur" => $n, "id_zone" => $value));
 	}
 	if(isset($declaration['domaines']) and $declaration['zone'] and lire_config('plugin/ACCESRESTREINT')){
 		foreach($declaration['zone'] as $value)
-			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('$n', '$value')");
+			sql_insertq("spip_zones_auteurs", array("id_auteur" => $n, "id_zone" => $value));
 	}
 	
 	$n = sql_insert('`spip_auteurs_elargis`', ('(' .join(',',array_keys($elargis)).')'), ("(" .join(", ",array_map('_q', $elargis)) .")"));
 	
 	if(isset($declaration['abonnement'])){
 		$value = $declaration['abonnement'] ;	
-			spip_query("INSERT INTO `spip_auteurs_elargis_abonnements` (`id_auteur_elargi`, `id_abonnement`) VALUES ('$n', '$value')");
+			sql_insertq("spip_auteurs_elargis_abonnements", array("id_auteur_elargi" => $n, "id_abonnement" => $value));
 	}
 	
 	return $declaration;
@@ -163,7 +162,7 @@ function inscription2_test_login($var_user) {
 		$var_user['login']=$var_user['nom'];
 	$login = $var_user['login'];
 	for ($i = 1; ; $i++) {
-		$n = sql_count(spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login' LIMIT 1"));
+		$n = sql_count(sql_select("id_auteur","spip_auteurs","login='$login' LIMIT 1"));
 		if (!$n){
 			$var_user['login'] = $login;
 			return $var_user;
