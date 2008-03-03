@@ -139,16 +139,23 @@ function spipbb_donnees_auteur($id) {
 						"sa.id_auteur=$id");
 	if($row = sql_fetch($result)) {
 		foreach($row as $k => $v) {
-			# extraire extra
 			if($k=='extra') {
-				$chps_extra = ($v!=NULL) ? unserialize($v) : array();
+				# extraire extra
+				# c: 4/2/8 il reste un bug ici parfois il est impossible de faire unserialize
+				$v=preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $v );
+				$v=stripslashes($v);
+				if (empty($v)) $chps_extra = array();
+					else  if (!($chps_extra = unserialize($v))) {
+						spipbb_log("ERREUR unserialize : ".gettype($v).":v:".$v.":",1,__FILE__);
+						$chps_extra = array();
+					}
 				# on extrait champs gaf que si support : extra
 				if($type_support=='extra') {
 					foreach($liste_chps as $c) {
 						$infos[$c]=$chps_extra[$c];
 					}
 				}
-				if (!is_array($chps_extra)) spip_log(__FILE__." ERREUR chps_extra no array : ".$chps_extra,'spipbb');
+				if (!is_array($chps_extra)) spipbb_log("ERREUR chps_extra no array : ".gettype($chps_extra).":v:".$v,1,__FILE__);
 				# tous les autres extra
 				foreach($chps_extra as $cle => $ve) {
 					# recup tous extra sauf gaf

@@ -1,4 +1,9 @@
-﻿2008-02-23  chryjs  <chryjs!@!free!.!fr>
+﻿2008-03-03  chryjs  <chryjs!@!free!.!fr>
+
+ * Palliatif pour le probleme de unserialize... qui n'arrive pas a reconstruire un tableau stocke avec serialize !... probleme de conversion dans les requetes virtuelles sql ?
+
+
+2008-02-23  chryjs  <chryjs!@!free!.!fr>
 
  * Petite adaptation pour forcer le titre a vide dans les forums...
  * Passage en 0.4.5 : fonctionnalite realisee
