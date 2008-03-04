@@ -365,6 +365,7 @@ function &crayons_get_table($table, &$nom_table) {
 		include_spip('public/parametrer');
 		$try = array('spip_'.table_objet($table), 'spip_' . $table . 's', $table . 's', 'spip_' . $table, $table);
 		foreach ($catab as $i=>$categ) {
+			// 1ere possibilite : c'est connu de SPIP
 			foreach ($try as $nom) {
 				if (isset($GLOBALS[$categ][$nom])) {
 					$noms[$table] = $nom;
@@ -372,8 +373,17 @@ function &crayons_get_table($table, &$nom_table) {
 					break 2;
 				}
 			}
+			// seconde possibilite : regarder directement la base
+			if (function_exists('sql_showtable'))
+			foreach ($try as $nom) {
+				if ($q = sql_showtable($nom)) {
+					$noms[$table] = $nom;
+					$return[$table] = $q;
+				}
+			}
 		}
 	}
+
 	$nom_table = $noms[$table];
 	return $return[$table];
 }
