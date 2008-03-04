@@ -1,0 +1,58 @@
+<BOUCLE_img(ARTICLES documents_articles documents){id_document}>
+[(#REM)
+
+	Modele pour <img>
+
+	Permet l'affichage sous forme de galerie les photos contenues
+	dans un article
+
+]
+
+[(#REM) Recuperation des variables d'initialisation du modele]
+#SET{taille, #ENV{taille, #CONFIG{album/taille, 450}}}
+#SET{increment, #ENV{nbre_vignette, #CONFIG{album/nbrevignette, 10}}} [(#GET{increment}|>{10}|?{' '}) #SET{increment, 10}][(#GET{increment}|<{1}|?{' '}) #SET{increment, 1}]
+#SET{sens, #ENV{senstri, #CONFIG{album/senstri, 0}}}
+
+<B_galerie>
+[<script type="text/javascript" src="(#CHEMIN{javascript/album_gallery.js}|compacte)"></script>]
+[(#ANCRE_PAGINATION)]
+<span class="spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok" style="[float:(#ENV{align}|match{left|right}); ]height:#GET{taille}px; width:#GET{taille}px;">
+
+<B_photo_expose>
+<table class="galerie_photo" style="[width:(#GET{taille}|plus{100})px; ][height:(#GET{taille}|plus{100})px;]">
+	<tr>
+		<td>
+<BOUCLE_photo_expose(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}{#EVAL{_request('debut_galerie'), 0}, 1}>
+			<dl>
+				<dt id="affiche_photo" style="background:url('#CHEMIN{img_pack/loading.gif}') no-repeat center 50%; width:#GET{taille}; height:#GET{taille};">
+					<a href="[(#FICHIER|image_watermark|extraire_attribut{src})]" rel="imagebox-gallery"[ title="(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})"]>
+						[<span id="grande_photo">(#FICHIER|image_reduire{#GET{taille},#GET{taille}}|inserer_attribut{title,<:album:clic_photo:>})</span>]
+					</a>
+				</dt>
+				<dt id="titre_photo" class="#EDIT{titre} spip_doc_titre">[(#TITRE|supprimer_numero|sinon{[(#FICHIER)]})]</dt>
+				<dd id="descriptif_photo" class="#EDIT{descriptif} spip_doc_descriptif">[(#DESCRIPTIF) #NOTES]</dd>
+			</dl>
+</BOUCLE_photo_expose>
+		</td>
+	</tr>
+</table>
+</B_photo_expose>
+
+<div id="galerie_compteur">[(#PAGINATION{gallery_compteur}) - ]<a href="[(#URL_PAGE{diaporama}|parametre_url{id_document,#ENV{id_document}})]" onClick="javascript:window.open('[(#URL_PAGE{diaporama}|parametre_url{id_document,#ENV{id_document}})]','','toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, menuBar=0, width=550, height=550');return(false);"><:album:lance_diapo:></a></div>
+
+<table id="bande_vignette" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="arrow">[(#PAGINATION{gallery_precedent})]</td>
+<BOUCLE_galerie(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}{pagination #GET{increment}}>
+		<td class="vignette">
+			[<a target="_self" href="javascript:Affiche_Image('[(#FICHIER|image_watermark|extraire_attribut{src})]','[(#FICHIER|image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]','[(#FICHIER|image_reduire{#GET{taille},#GET{taille}}|largeur)]','[(#FICHIER|image_reduire{#GET{taille},#GET{taille}}|hauteur)]','[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]','[(#DESCRIPTIF|entites_html)]');" title="[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]">
+				(#FICHIER||image_reduire{50,50}|image_recadre{50,50,center}|inserer_attribut{alt,[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]})
+   			</a>]
+		</td>
+</BOUCLE_galerie>
+		<td class="arrow">[(#PAGINATION{gallery_suivant})]</td>
+	</tr>
+</table>
+</span>
+</B_galerie>
+</BOUCLE_img>
