@@ -51,7 +51,7 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode, $retour) {
 			sql_delete("spip_auteurs_elargis","id_auteur = '$id'");
 			echo "<strong>"._T('inscription2:suppression_faite')."</strong>";
 		}else
-			echo "rien a faire";
+			echo _T('inscription2:rien_a_faire');
 	}else{
 		if ($GLOBALS['spip_version_code']>=1.9259){
 			include_spip('inc/acces');

@@ -128,7 +128,7 @@ Merci de votre confiance
 
 L\'&eacute;quipe de @nom_site@',
 'compte_active' => 'Votre compte sur @nom_site@',
-'suppression_faite' => 'la suppression de vos donn&eacute;es a &eacute;t&eacute; effectu&eacute;',
+'suppression_faite' => 'La suppression de vos donn&eacute;es a &eacute;t&eacute; effectu&eacute;e',
 
 'janvier' => 'janvier',
 'fevrier' => 'f&eacute;vrier',
@@ -211,7 +211,10 @@ L\'&eacute;quipe de @nom_site@',
 'pass_oubli_mot' => 'Changement de votre mot de passe',
 
 'titre_confirmation' => 'Confirmation',
-'page_confirmation' => 'Page de confirmation de votre inscription'
+'page_confirmation' => 'Page de confirmation de votre inscription',
+
+//Confirmation Inscription
+'rien_a_faire' => 'Rien &agrave; faire'
 
 
 );
