@@ -6,16 +6,16 @@
 
 ]
 #CACHE{0}
-<BOUCLE_a(SPIP_AUTEURS_ELARGIS){id_auteur=(#ENV{id_auteurs_elargi})}{tous}>
+<BOUCLE_a(AUTEURS_ELARGIS){id=#ENV{id_auteurs_elargi}}{tout}>
 <script type="text/javascript">
 /* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
 	
 	jQuery.validator.addMethod("chainenombre", function(value, element) {
-		return this.required(element) || /^[A-Za-z0-9\-\'\.�剀��ˈ��搃��������������,� ]+$/.test(value);
+		return this.required(element) || /^[A-Za-z0-9\-\'\.ßÂâÄäÁÀàËëÈèÊêÉéÏïÎîÌìÍÒòÓÔôÖöÙùÜüÛû‡,˚ ]+$/.test(value);
 	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:> <:inscription2:chainenombre:>");
         
 	jQuery.validator.addMethod("chaine", function(value, element) {
-		return this.required(element) || /^[A-Za-z\-\'\.�剀��ˈ��搃��������������,� ]+$/.test(value);
+		return this.required(element) || /^[A-Za-z\-\'\.ßÂâÄäÁÀàËëÈèÊêÉéÏïÎîÌìÍÒòÓÔôÖöÙùÜüÛû‡,˚ ]+$/.test(value);
 	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:> <:inscription2:chainelettre:>");
 
 	jQuery.validator.addMethod("postal", function(value, element) {
