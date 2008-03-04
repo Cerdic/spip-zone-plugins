@@ -17,28 +17,22 @@
 			[(#TEXTE)]</div>
 			<B_LesProduitsDeCetteCategorie>
 				<ul>
-					<BOUCLE_LesProduitsDeCetteCategorie(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits spip_echoppe_categories_produits){statut = publie}{par num titre}{id_categorie}{lang=""}>
-					<li>[<em>(#TITRE|supprimer_numero)</em>]<br />[(#LOGO_PRODUIT||image_reduire{100})] <br />prix HTVA : #PRIX_BASE_HTVA &euro;</li>
+					<BOUCLE_LesProduitsDeCetteCategorie(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits spip_echoppe_categories_produits){statut = publie}{par num titre}{id_categorie}{lang=""}{"<hr />"}>
+					<li>
+						[<em>(#TITRE|supprimer_numero)</em><br />]
+						[(#LOGO_PRODUIT||image_reduire{100})<br />]
+						Prix HTVA : #PRIX_BASE_HTVA  &euro; (#PRIX_TVAC &euro; TTC) - La tva est de #TAUX_TVA %
+						<br />
+						[(#MODELE{stock}{id_produit})] en stock.
+						<br />
+						[Hauteur : (#HAUTEUR)]
+					</li>
 					</BOUCLE_LesProduitsDeCetteCategorie>
 				</ul>
 			</B_LesProduitsDeCetteCategorie>
 			
 			
-			<B_LesSousCategories>
-				<ul>
-					<BOUCLE_LesSousCategories(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){id_parent = #ID_CATEGORIE}{lang=""}>
-					<li>[<strong>(#TITRE|supprimer_numero)</strong>]
-					<B_LesProduitsDeCetteCategorie2>
-						<ul>
-							<BOUCLE_LesProduitsDeCetteCategorie2(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits spip_echoppe_categories_produits){statut = publie}{par num titre}{id_categorie}{lang=""}>
-							<li >[<em>(#TITRE|supprimer_numero)</em>]<br />[(#LOGO_PRODUIT||image_reduire{100})] <br />prix HTVA : #PRIX_BASE_HTVA &euro;</li>
-							</BOUCLE_LesProduitsDeCetteCategorie2>
-						</ul>
-					</B_LesProduitsDeCetteCategorie2>
-					</li>
-					</BOUCLE_LesSousCategories>
-				</ul>
-			</B_LesSousCategories>
+
 		</li>
 		</BOUCLE_CategoriesALaRacine>
 		

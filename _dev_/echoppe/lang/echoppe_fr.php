@@ -28,6 +28,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'creer_un_ref_automatiquement' => 'En cr&eacute;er un automatiquement',
 'code_postal_du_depot' => 'Code postal',
 'colisage' => 'Frais de colisage',
+'confguration_d_echoppe' => 'Configuration d\'Echoppe',
+'configuration_generale' => 'Configuration g&eacute;n&eacute;rale',
 
 // D
 'dans_la_categorie' => 'Dans la cat&eacute;gorie',
@@ -50,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //'edition_langue' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
 'edition_de_produit' => '&Eacute;dition d\'un produit',
 'edition_donnees_globales' => '&Eacute;dition des donn&eacute;es globales',
+'elements_a_utiliser_dans_les_produits' => '&Eacute;l&eacute;ments &agrave; utiliser dans les produits',
 'email_du_depot' => 'E-Mail',
 'en_stock' => 'en stock',
 'etat_des_stocks' => '&Eacute;tat des stocks',
@@ -85,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'les_produits_de_cette_categories' => 'Les produits de cette cat&eacute;gorie',
 'les_sous_categories' => 'Les sous-cat&eacute;gories',
 'logo_de_la_categorie' => 'Logo de la cat&eacute;gorie',
+'logo_du_produit' => 'Logo du produit',
 'longeur' => 'Longueur',
 
 // M
@@ -92,10 +96,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // N
 'nom_de_la_nouvelle_option' => 'Nom de la nouvelle option',
+'numero_du_depot' => 'Num&eacute;ro',
+'nombre_de_chiffre_apres_la_virgule' => 'Nombre maximum de chiffre apr&egrave;s la virgule',
 'nouveau_depot' => 'Nouveau d&eacute;p&ocirc;t',
 'nouveau_produit' => 'Cr&eacute;er un produit',
 'nouvelle_categorie' => 'Nouvelle cat&eacute;gorie',
-'numero_du_depot' => 'Num&eacute;ro',
+
 
 // P
 'pas_d_options_pour_le_produit' => 'Pas d\'option pour ce produit',
@@ -123,6 +129,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // R
 'reference_interne' => 'Num&eacute;ro de r&eacute;f&eacute;rence',
+'remettre_a_zero' => 'Remettre &agrave; z&eacute;ro',
 'retour' => 'Retour',
 'retour_a_la_categorie' => 'Retour &agrave; la cat&eacute;gorie',
 'retour_au_produit' => 'Retour au produit',
@@ -132,6 +139,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'stock_total' => 'Stock TOTAL',
 
 // T
+'taux_de_tva_par_defaut' => 'Taux de T.V.A. par d&eacute;faut',
 'texte'=>'Texte :',
 'telecharger_un_nouveau_logo' => 'T&eacute;l&eacute;charger un nouveau logo',
 'telephone_du_depot' => 'T&eacute;l&eacute;phone',
@@ -144,6 +152,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // U
 'unites' => 'Unit&eacute;(s)',
 'unite_dans_le_depot' => 'unit&eacute;(s) dans le d&eacute;p&ocirc;t de',
+'utiliser_date_mise_et_retrait_en_ligne' => 'Utiliser les dates de mise en et hors ligne',
+
 // V
 'ville_du_depot' => 'Ville',
 'visualisation_d_un_depot' => 'Visualisation d\'un d&eacute;p&ocirc;t',

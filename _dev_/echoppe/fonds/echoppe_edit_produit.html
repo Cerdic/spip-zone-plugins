@@ -16,7 +16,7 @@
 		<textarea name="ps" class="forml" >#PS*</textarea><br />
 		
 		
-		<b><:echoppe:quantite_minimum:></b>&nbsp;<input type="text" name="quantite_mini" value="#QUANTITE_MINI" />&nbsp;<:echoppe:unites:><br /><br />
+		<b><:echoppe:quantite_minimum:></b>&nbsp;<input type="text" name="quantite_mini" value="[(#QUANTITE_MINI|sinon{1})]" />&nbsp;<:echoppe:unites:><br /><br />
 		<b><:echoppe:tva:></b>&nbsp;<input type="text" name="tva" value="#TVA" />&nbsp;%
 		<hr/>
 		<input type="submit" class="fondo" />
