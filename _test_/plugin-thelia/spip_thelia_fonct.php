@@ -76,6 +76,8 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	//réaffectation des variables de thélia qui ont étées renommées dans les squelettes pour éviter les conflits avec spip
 	$_REQUEST['action'] = $_REQUEST['thelia_action'];
 	$_REQUEST['page'] = $_REQUEST['page_thelia'];
+	if (isset($_REQUEST['thelia_article']))
+		$_REQUEST['article'] = $_REQUEST['thelia_article'];
 	
 	
 	//on prépare le flux à envoyer au moteur thélia
