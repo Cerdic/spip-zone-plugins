@@ -58,5 +58,10 @@ function geographie_lister_tables_noexport($liste){
 	$liste[] = 'spip_geo_pays';
 	return $liste;
 }
+global $IMPORT_tables_noerase;
+$IMPORT_tables_noerase[]='spip_geo_communes';
+$IMPORT_tables_noerase[]='spip_geo_departements';
+$IMPORT_tables_noerase[]='spip_geo_regions';
+$IMPORT_tables_noerase[]='spip_geo_pays';
 
 ?>
