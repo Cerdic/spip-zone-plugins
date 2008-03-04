@@ -122,6 +122,9 @@ a.LIEN_commander {
 	padding-bottom: 10px;
 	color: #12335B;
 }
+.page_produit #pages {
+	clear: left;
+}
 
 a.LIEN_pages:link {
 	color: #12335B;
@@ -207,4 +210,7 @@ a.LIEN_pages:hover {
 .thelia_reappro {
 	font-style: italic;
 	font-size: .9em;
+}
+.autres-images-produit {
+	clear: both;
 }
