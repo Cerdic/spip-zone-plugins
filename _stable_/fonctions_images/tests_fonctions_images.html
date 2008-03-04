@@ -216,6 +216,8 @@ Un filtre de dispersion graphique</a>)</dd>
 <dt>couleur_inverserluminosite</dt>
 <dd> Eclaircie une couleur fonc&eacute;e et fonce une couleur claire</dd>
 <dd style="color:#8746fe">#8746fe va donner</code></dd>
+[(#SET{couleur, #[(#VAL{#8746fe}|couleur_inverserluminosite{40,true})]})]
+<dd style="color:[(#GET{couleur})]">[(#GET{couleur})] avec |couleur_inverserluminosite{40,true}</dd>
 [(#SET{couleur, #[(#VAL{#8746fe}|couleur_inverserluminosite{20})]})]
 <dd style="color:[(#GET{couleur})]">[(#GET{couleur})] avec |couleur_inverserluminosite{20}</dd>
 [(#SET{couleur, #[(#VAL{#8746fe}|couleur_inverserluminosite{40})]})]

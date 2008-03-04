@@ -1099,10 +1099,12 @@ function image_hsl2rgb($H,$S,$L) {
 
 /*
  *
- * Permet d'éclaircir ou de foncer une couleur si elle est foncee
- * ou de la foncer si elle est claire
+ * Permet d'éclaircir une couleur si elle est foncee
+ * ou de la foncer si elle est claire.
+ * La valeur par defaut est 20% (sur une echelle de 0 à 100%).
+ * Le troisieme parametre permet de rendre plus lumineux ou plus sombre ce qui l'est deja
  */
-function couleur_inverserluminosite($coul,$pourcentage=20) {
+function couleur_inverserluminosite($coul,$pourcentage=20, $intensifier=false) {
 	include_spip("inc/filtres");
 	$couleurs = couleur_hex_to_dec($coul);
 	$r= $couleurs["red"];
@@ -1114,10 +1116,18 @@ function couleur_inverserluminosite($coul,$pourcentage=20) {
 	$s = $hsl["s"];
 	$l = $hsl["l"];
 
-	if ($l < 0.5) {
-		$l = $l + (1-$l)*(1-(100-$pourcentage)/100);
+	if (!$intensifier) {
+		if ($l < 0.5) {
+			$l = $l + (1-$l)*(1-(100-$pourcentage)/100);
+		} else {
+			$l = $l*(1-$pourcentage/100);
+		}
 	} else {
-		$l = $l*(1-$pourcentage/100);
+		if ($l >= 0.5) {
+			$l = $l + (1-$l)*(1-(100-$pourcentage)/100);
+		} else {
+			$l = $l*(1-$pourcentage/100);
+		}
 	}
 
 	$rgb = image_hsl2rgb($h,$s,$l);
