@@ -86,7 +86,7 @@ function boite_snippets($titre,$icone,$table,$id,$contexte="",$retour = ""){
 	}
 
 	// formulaire d'upload d'un snippet
-	$action = generer_action_auteur('snippet_importe',"$table:$id",$retour);
+	$action = generer_action_auteur('snippet_importe',"$table:$id:$contexte",$retour);
 	$out .= "<form action='$action' method='POST' enctype='multipart/form-data'>";
 	$out .= form_hidden($action);
 	$out .= "<strong><label for='file_name'>"._T("snippets:importer_fichier")."</label></strong> ";
