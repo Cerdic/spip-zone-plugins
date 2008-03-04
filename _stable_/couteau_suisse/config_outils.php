@@ -172,14 +172,14 @@ add_outil( array(
 	// pipeline pour retirer en javascript le bouton de controle de l'interface
 	'pipeline:header_prive' => 'set_options_header_prive',
 	// non supporte a partir de la version 1.93
-	'version-max' => 1.92,
+	'version-max' => '1.9299',
 ));
 
 add_outil( array(
 	'id' => 'simpl_interface',
 	'code:options' => "@define('_ACTIVER_PUCE_RAPIDE', false);",
 	'categorie' => 'admin',
-	'version-min' => 1.93,
+	'version-min' => '1.9300',
 ));
 
 	// ici on a besoin de six boutons radio : 'page', 'html', 'propres', 'propres2, ''standard' et 'propres-qs'
@@ -218,7 +218,7 @@ add_outil( array(
 	'id' => 'filtrer_javascript',
 	'code:options' => "%%radio_filtrer_javascript3%%",
 	'categorie' => 'admin',
-	'version-min' => 1.92,
+	'version-min' => '1.9200',
 ));
 
 	// ici on a besoin d'une case input. La variable est : forum_lgrmaxi
@@ -233,7 +233,7 @@ add_outil( array(
 	'id' => 'forum_lgrmaxi',
 	'code:options' => "%%forum_lgrmaxi%%",
 	'categorie' => 'admin',
-	'version-min' => 1.92,
+	'version-min' => '1.9200',
 ));
 
 add_outil( array(
@@ -258,8 +258,8 @@ add_outil( array(
 	'code:options' => "%%radio_suivi_forums3%%",
 	'categorie' => 'admin',
 	// effectif que dans la version 1.92 (cf : plugin notifications)
-	'version-min' => 1.92,
-	'version-max' => 1.92,
+	'version-min' => '1.9200',
+	'version-max' => '1.9299',
 ));
 
 add_outil( array(
@@ -277,7 +277,7 @@ add_outil( array(
 	'id' => 'flock',
 	'code:options' => "@define('_SPIP_FLOCK',false);",
 	'categorie' => 'admin',
-	'version-min' => 1.93,
+	'version-min' => '1.9300',
 ));
 
 add_outil( array(
@@ -289,7 +289,7 @@ add_outil( array(
 	'code:options' => "\$GLOBALS['xhtml']='sax';",
 	'auteur' => 'Ma&iuml;eul Rouquette (maieulrouquette@tele2.fr)',
 	'categorie' =>'public',
-	'version-min' => '1.92',
+	'version-min' => '1.9200',
 ));
 
 add_outil( array(
@@ -297,7 +297,7 @@ add_outil( array(
 	'code:options' => "\$GLOBALS['spip_pipeline']['insert_head'] = str_replace('|f_jQuery', '', \$GLOBALS['spip_pipeline']['insert_head']);",
 	'auteur' => 'Fil',
 	'categorie' =>'public',
-	'version-min' => '1.92',
+	'version-min' => '1.9200',
 ));
 
 add_variable( array(
@@ -445,7 +445,7 @@ add_outil( array(
 	'id' => 'auteurs',
 	'code:options' => "%%max_auteurs_page%%\$temp_auteurs=array(%%auteurs_0%%%%auteurs_1%%%%auteurs_5%%%%auteurs_6%%%%auteurs_n%%); %%auteurs_tout_voir%% unset(\$temp_auteurs);",
 	'categorie' => 'admin',
-	'version-min' => 1.93,
+	'version-min' => '1.9300',
 //	'pipeline:affiche_milieu' => 'auteurs_affiche_milieu',
 ));
 
