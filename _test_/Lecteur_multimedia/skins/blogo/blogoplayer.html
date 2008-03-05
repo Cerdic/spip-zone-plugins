@@ -1,183 +1,70 @@
 #CACHE{0}
-<style>
-
-.radiobox{
-width:296px;
-background-color:#000000;
-padding:20px;
-}
-
-div#playing{
-float:right;
-width:160px;
-color:#999999;
-position:relative;
-}
-div#now_playing{
-float:none;
-border:none;
-color:#fff;
-width:auto;
-}
-
-#scrollbar{
-margin:10px 0px;
-}
-
-div.controles{
-clear:both;
-text-align:left;
-height:74px
-}
-
-.leplayer, .position{
-font-size:2em;
-font-weight:bold;
-color:#FFFFFF;
-font-familly:verdanna;
-}
-
-.duration{
-font-size:9px;
-float:right;
-width:33%;
-}
-
-.play{
-width:70px;
-float:left;
-}
-
-.time{
-width:100px;
-float:left;
-}
-
-.autres_boutons{
-text-align:right;
-}
-
-
-ul.playliste{
-clear:both;
-margin : 5px 0px 15px 0px;
-padding:0px;
-background-color:#e74455;
-border:none;
-}
-
-#playliste_video{
-clear:both;
-margin : 5px 0px 15px 0px;
-padding:0px;
-background-color:#FF3C00;
-border:none;
-}
-
-ul.playliste a, #playliste_video a{
-color:#fff;
-}
-
-ul.playliste li, #playliste_video li{
-border-top:1px solid black;
-padding:2px;
-margin:Opx;
-cursor:pointer;
-cursor:hand;
-}
-
-ul.playliste li.over, #playliste_video li.over{
-background-color:#a22c38;
-}
-
-ul.playliste li.play_on, li.overli.play_on{
-background-color:#a22c38;
-}
-
-
-
-/* Scroller Box */
-#scroller_container {
-position: relative;
-width:160px;
-height: 30px;
-overflow: hidden;
-float:none;
-border:none;
-}
-
-#scroller {
-width:160px;
-height: 15px;
-position: absolute;
-left:0;
-top:0;
-margin: 0;
-}
-
-
-/* Scoller Box */
-
-/* At the end of the CSS File */
-
-/* CSS Hack Safari */
-#dummy {;# }
-
-#scroller_container {
-overflow: auto;
-}
-
-#media{
-margin-bottom:5px;
-}
-
-#video{
-background:#000;
-}
-
-#menu_affiche{
-list-style-type:none;
-margin:0;
-padding:0;
-}
-
-#menu_affiche li{
-width:30%;
-display:inline;
-padding:5px;
-}
-
-#menu_affiche li a{
-color:#fff;
-font-size:15px;
-font-weight:bold;
-}
-
-#affiche_musique{
-background:#E74455;
-}
-
-#affiche_video{
-background:#FF3C00;
-margin:0px 0px 3px 3px;
-}
+<style type="text/css" media="screen">
+	@import url('#CHEMIN{skins/blogo/css/radio.css}');
 </style>
-
 <script>
 $(document).ready(function(){
+
 $("#playliste_video").hide();
+$("#playliste_podcast").hide();
+$("img.player_logo_art").hide();
+
+var player_image_url = $("img.player_logo_art").eq(0).attr("src") ; 
+var player_link_url = $("img.player_logo_art").eq(0).next().attr("href");
+
+//console.log(player_link_url);
+
+if(player_image_url !== undefined)
+ $("#media").html("<a href='" + player_link_url + "'><img src='" + player_image_url + "' style='width:285px' /> </a>");
 
 $("#affiche_video a").click(function(e){
 e.preventDefault();
+$("#menu_affiche td div").css("height","auto");
+$(this).parent().css("height","20px");
 $(".playliste").hide();
+$(".controles").hide();
+$("#scrollbar").hide();
+$("#playing").hide();
+$("#media").html('');
+player_stop();
 $("#playliste_video").show();
+var id_start = $("a[@title='video']").eq(0).attr("rel");
+$("#media").load("./?page=embed_video&id_document=" + id_start);
+});
+
+$("#affiche_podcast a").click(function(e){
+e.preventDefault();
+$("#menu_affiche td div").css("height","auto");
+$(this).parent().css("height","20px");
+$(".playliste").hide();
+$(".controles").hide();
+$("#scrollbar").hide();
+$("#playing").hide();
+$("#media").html('');
+player_stop();
+$("#playliste_podcast").show();
 });
 
 $("#affiche_musique a").click(function(e){
 e.preventDefault();
+$(".playliste").hide();
+$("#menu_affiche td div").css("height","auto");
+$(this).parent().css("height","20px");
 $("#video").hide();
-$("#playliste_video").hide();
-$(".playliste").show();
+$("#playliste_musique").show();
+
+var player_image_url = $("img.player_logo_art").eq(0).attr("src") ; 
+var player_link_url = $("img.player_logo_art").eq(0).next().attr("href");
+
+//console.log(player_link_url);
+if(player_image_url !== undefined)
+$("#media").html("<a href='" + player_link_url + "'><img src='" + player_image_url + "' style='width:285px' /> </a>");
+
+		                
+$(".controles").show();
+$("#scrollbar").show();
+$("#playliste_musique").show();
+$("#playing").show();
 });
 
 swfArray = new Array();
@@ -192,9 +79,10 @@ $("a[@title='video']").each(
 				$(this).click(
 		             function(e)
 		             {
-		                 e.preventDefault();
+		                e.preventDefault();
 		                $("#media").load("./?page=embed_video&id_document=" + this.rel
-						);	                
+						);	
+						// $("#now_playing").html($(this).html());                
 		             }
 		         );
 		        
@@ -252,28 +140,104 @@ En ce moment vous &eacute;coutez :
 	//-->
 </div>
 
-<ul id="menu_affiche">
-<li id="affiche_musique"><a href="#">Musique</a></li>
-<li id="affiche_video"><a href="#">Vid&eacute;os</a></li>
-</ul>
+<table id="menu_affiche"><tr>
+<td><div id="affiche_musique"><a href="#">MUSIQUE</a></div></td>
+<td><div id="affiche_video"><a href="#">VIDEOS</a></div></td>
+#SET{visibility,""}
+<BOUCLE_podcast(ARTICLES documents_articles documents types_documents mots_articles) {id_mot = 21}  {statut=publie} {id_article ?} {extension==mp3}{!par date}{0,1}> </BOUCLE_podcast> [(#TOTAL_BOUCLE|=={0}|?{' ',''}) #SET{visibility,"visibility:hidden"} ] <//B_podcast>
 
+<td><div id="affiche_podcast" style="[(#GET{visibility})]"><a href="#">PODCASTS</a></div></td>
+</tr></table>
 
 <B_doc>
-<ul class="playliste">
-<BOUCLE_doc (DOCUMENTS) {id_article ?} {extension==mp3}{!par date}{pagination 15}{0,100}>
-<li class="play_"><a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+<ul id="playliste_musique" class="playliste">
+<BOUCLE_doc (ARTICLES documents_articles documents types_documents){statut=publie} {id_article ?} {extension==mp3}{!par date}{0,30}>
+<BOUCLE_logo_art(ARTICLES){id_article}>
+<BOUCLE_doc_mp3(DOCUMENTS){id_article}{extension==mp3}>
+<li class="play_">
+[(#_logo_art:LOGO_ARTICLE||reduire_image{255}|inserer_attribut{"class","player_logo_art"})]<a href="#_logo_art:URL_ARTICLE" title="lire : #_logo_art:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
+<a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc_mp3>
+</BOUCLE_logo_art>
 </BOUCLE_doc>
 </ul>
-[<div class="playliste_pagination">(#PAGINATION)</div>]
 </B_doc>
 
+
+<B_doc_tout>
+<ul id="playliste_musique" class="playliste">
+<BOUCLE_doc_tout (ARTICLES documents_articles documents types_documents){statut=publie}{extension==mp3}{!par date}{0,100}>
+<BOUCLE_logo_art_tout(ARTICLES){id_article}>
+<BOUCLE_doc_mp3_tout(DOCUMENTS){id_article}{extension==mp3}>
+<li class="play_">
+[(#_logo_art_tout:LOGO_ARTICLE||reduire_image{255}|inserer_attribut{"class","player_logo_art"})]<a href="#_logo_art_tout:URL_ARTICLE" title="lire : #_logo_art_tout:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
+<a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc_mp3_tout>
+</BOUCLE_logo_art_tout>
+</BOUCLE_doc_tout>
+</ul>
+</B_doc_tout>
+
+<//B_doc>
+
 <B_docswf>
-<ul id="playliste_video">
-<BOUCLE_docswf(DOCUMENTS) {id_article ?} {extension==swf}{!par date}{pagination 15}{0,100}>
-<li class="play_"><a href="#FICHIER" rel="#ID_DOCUMENT" title="video">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+<ul id="playliste_video" class="playliste">
+<BOUCLE_docswf (ARTICLES documents_articles documents types_documents){statut=publie} {id_article ?} {extension==swf}{!par date}{0,30}>
+<BOUCLE_logo_art_swf(ARTICLES){id_article}>
+<BOUCLE_doc_swf(DOCUMENTS){id_article}{extension==swf}>
+<li class="play_"><a href="#_logo_art_swf:URL_ARTICLE" title="lire : #_logo_art_swf:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
+<a href="#FICHIER" rel="#ID_DOCUMENT" title="video">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc_swf>
+</BOUCLE_logo_art_swf>
 </BOUCLE_docswf>
 </ul>
-[<div class="playliste_pagination">(#PAGINATION)</div>]
 </B_docswf>
+
+<B_docswf_tout>
+<ul id="playliste_video" class="playliste">
+<BOUCLE_docswf_tout (ARTICLES documents_articles documents types_documents){statut=publie}{extension==swf}{!par date}{0,100}>
+<BOUCLE_logo_art_swf_tout(ARTICLES){id_article}>
+<BOUCLE_doc_swf_tout(DOCUMENTS){id_article}{extension==swf}>
+<li class="play_"><a href="#_logo_art_swf_tout:URL_ARTICLE" title="lire : #_logo_art_swf_tout:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
+<a href="#FICHIER" rel="#ID_DOCUMENT" title="video">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc_swf_tout>
+</BOUCLE_logo_art_swf_tout>
+</BOUCLE_docswf_tout>
+</ul>
+</B_docswf_tout>
+
+<//B_docswf>
+
+
+<B_docpodcast>
+<ul id="playliste_podcast" class="playliste">
+<BOUCLE_docpodcast(ARTICLES documents_articles documents types_documents mots_articles) {id_mot = 21}  {statut=publie} {id_article ?} {extension==mp3}{!par date}{0,30}>
+<BOUCLE_logo_artpodcast(ARTICLES){id_article}>
+<BOUCLE_doc_mp3podcast(DOCUMENTS){id_article}{extension==mp3}>
+<li class="play_">
+<a href="#_logo_artpodcast:URL_ARTICLE" title="lire : #_logo_artpodcast:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
+<a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc_mp3podcast>
+</BOUCLE_logo_artpodcast>
+</BOUCLE_docpodcast>
+</ul>
+</B_docpodcast>
+
+<B_doc_toutpodcast>
+<ul id="playliste_podcast" class="playliste">
+<BOUCLE_doc_toutpodcast (ARTICLES documents_articles documents types_documents mots_articles) {id_mot = 21} {statut=publie}{extension==mp3}{!par date}{0,100}>
+<BOUCLE_logo_art_toutpodcast(ARTICLES){id_article}>
+<BOUCLE_doc_mp3_toutpodcast(DOCUMENTS){id_article}{extension==mp3}>
+<li class="play_">
+<a href="#_logo_art_toutpodcast:URL_ARTICLE" title="lire : #_logo_art_toutpodcast:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
+<a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc_mp3_toutpodcast>
+</BOUCLE_logo_art_toutpodcast>
+</BOUCLE_doc_toutpodcast>
+</ul>
+</B_doc_toutpodcast>
+
+<//B_docpodcast>
+
 
 </div>
