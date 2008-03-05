@@ -7,12 +7,12 @@
    Code licensed under the BSD License:
    http://www.schillmania.com/projects/soundmanager2/license.txt
 
-   Beta V2.0b.20070201
+   V2.0b.20070415
 */
 
 function SoundManager(smURL,smID) {
   var self = this;
-  this.version = 'V2.0b.20070201';
+  this.version = 'V2.0b.20070415';
   this.url = (smURL||'soundmanager2.swf');
 
   this.debugMode = true;           // enable debugging output (div#soundmanager-debug, OR console if available + configured)
@@ -97,6 +97,19 @@ function SoundManager(smURL,smID) {
     }
     if (thisOptions.autoLoad || thisOptions.autoPlay) self.sounds[thisOptions.id].load(thisOptions);
     if (thisOptions.autoPlay) self.sounds[thisOptions.id].playState = 1; // we can only assume this sound will be playing soon.
+  }
+
+  this.destroySound = function(sID) {
+    // explicitly destroy a sound before normal page unload, etc.
+    if (!self._idCheck(sID)) return false;
+    for (var i=self.soundIDs.length; i--;) {
+      if (self.soundIDs[i] == sID) {
+        delete self.soundIDs[i];
+        continue;
+      }
+    }
+    self.sounds[sID].unload();
+    delete self.sounds[sID];
   }
 
   this.load = function(sID,oOptions) {
@@ -490,9 +503,9 @@ function SMSound(oSM,oOptions) {
 
   this.unload = function() {
     // Flash 8/AS2 can't "close" a stream - fake it by loading an empty MP3
-    sm._writeDebug('SMSound().unload()');
+    sm._writeDebug('SMSound().unload(): "'+self.sID+'"');
     self.setPosition(0); // reset current sound positioning
-    sm.o._unload(self.sID,self.nullURL);
+    sm.o._unload(self.sID,sm.nullURL);
     // reset load/status flags
     self.resetProperties();
   }
@@ -544,7 +557,7 @@ function SMSound(oSM,oOptions) {
       self.setVolume(thisOptions.volume);
       self.setPan(thisOptions.pan);
       if (!thisOptions.autoPlay) {
-        sm._writeDebug('starting sound '+self.sID);
+        // sm._writeDebug('starting sound '+self.sID);
         sm.o._start(self.sID,thisOptions.loop||1,self.position); // TODO: verify !autoPlay doesn't cause issue
       }
     }
@@ -627,7 +640,7 @@ function SMSound(oSM,oOptions) {
     var oData = [];
     for (var i=0,j=oID3PropNames.length; i<j; i++) {
       oData[oID3PropNames[i]] = oID3Data[i];
-       sm._writeDebug(oID3PropNames[i]+': '+oID3Data[i]);
+      // sm._writeDebug(oID3PropNames[i]+': '+oID3Data[i]);
     }
     self.id3 = sm._mergeObjects(self.id3,oData);
     if (self.options.onid3) self.options.onid3.apply(self);
@@ -665,14 +678,14 @@ function SMSound(oSM,oOptions) {
     // msOffset: "end of sound" delay actual value (eg. 200 msec, value at event fire time was 187)
     if (!self.didJustBeforeFinish) {
       self.didJustBeforeFinish = true;
-      soundManager._writeDebug('SMSound._onjustbeforefinish()');
+      // soundManager._writeDebug('SMSound._onjustbeforefinish()');
       if (self.options.onjustbeforefinish) self.options.onjustbeforefinish.apply(self);;
     }
   }
 
   this._onfinish = function() {
     // sound has finished playing
-    sm._writeDebug('SMSound._onfinish(): "'+self.sID+'" finished playing');
+    sm._writeDebug('SMSound._onfinish(): "'+self.sID+'"');
     self.playState = 0;
     self.paused = false;
     if (self.options.onfinish) self.options.onfinish.apply(self);
