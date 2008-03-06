@@ -70,7 +70,7 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 		         );
 		         //a passer en .ajoute_musicplayer()	
 				//$(this).before('<span class="play_">play</span>&nbsp;');
-				$(this).before('<span class="play_"><img src="plugins/Lecteur_multimedia/playl.gif"/></span>&nbsp;');
+				$(this).before('<span class="play_"><img src="' + image_play + '"/></span>&nbsp;');
 
 		}
 	);
@@ -135,7 +135,7 @@ function player_play(i){
 	live_track = i ;
 
 	//$("span.play_:eq("+i+")").html("stop").addClass("play_on");		
-	$("span.play_:eq("+i+")").html("<img src='plugins/Lecteur_multimedia/pausel.gif'/>").addClass("play_on");		
+	$("span.play_:eq("+i+")").html("<img src='" + image_pause + "'/>").addClass("play_on");		
 	$(".playliste li:eq("+i+")").addClass("play_on");
 
 	if(soundManager.url != 'undefined'){
@@ -251,7 +251,7 @@ function player_stop(){
 						//reinit d'un autre play
 						
 						//$("span.play_on").html('play');
-						$("span.play_on").html('<img src="plugins/Lecteur_multimedia/playl.gif"/>');
+						$("span.play_on").html('<img src="' + image_play + '"/>');
 						$("span.play_on").removeClass("play_on");
 						live_track = 'stop' ;
 						

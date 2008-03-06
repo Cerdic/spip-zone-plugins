@@ -10,6 +10,8 @@ function Player_head(){
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'soundmanager/soundmanager2.js"></script>';
 	$flux .= '<script type="text/javascript"><!--'."\n"
 	. 'var musicplayerurl="'._DIR_PLUGIN_PLAYER.'eraplayer_playlist.swf";'
+	. 'var image_play="'._DIR_PLUGIN_PLAYER.'playl.gif";'
+	. 'var image_pause="'._DIR_PLUGIN_PLAYER.'pausel.gif";'
 	. 'soundManager.url = "'._DIR_PLUGIN_PLAYER.'soundmanager/soundmanager2.swf";'
 	. 'soundManager.consoleOnly = true;'
   	. 'soundManager.debugMode = false;'
@@ -17,15 +19,6 @@ function Player_head(){
 	. "//--></script>\n";
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'javascript/jscroller.js"></script>';
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>';
-	$flux .= '<script type="text/javascript"><!--
-	$(document).ready(function(){
-	soundManager.onload = function() {'
-  //.  "//soundManager is initialised, ready to use. Create a sound for this demo page.\n"
- 	//.  'soundManager.createSound("aDrumSound", "'._DIR_PLUGIN_PLAYER.'soundmanager/mpc/audio/SPLASH_1.mp3");'
-  . '}'
-	// . 'Player_init("'._DIR_PLUGIN_PLAYER.'soundmanager/mpc/audio/AMB_SN13.mp3");'
-	. "});
-	// --></script>\n";
 	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_PLAYER.'player.css" type="text/css" media="projection, screen, tv" />';
 	return $flux;
 }
