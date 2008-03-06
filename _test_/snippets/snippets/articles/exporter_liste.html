@@ -2,7 +2,7 @@
 [(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
 <?php echo '<' ?>?xml version="1.0"[ encoding="(#CHARSET)"]?>
 <articles>
-	<BOUCLE_article(ARTICLES){id_article=#ENV{id}}{statut IN prepa,prop,publie}>
+	<BOUCLE_article(ARTICLES){id_rubrique = #ENV{id}}{tout}{statut IN prepa,prop,publie}>
 	<article>
 		<id_article>#ID_ARTICLE</id_article>
 		<surtitre>#SURTITRE**</surtitre>
@@ -28,6 +28,9 @@
 		<BOUCLE_auteurs(AUTEURS){id_article}>
 		<auteur>#NOM</auteur>
 		</BOUCLE_auteurs>
+		<BOUCLE_mots(MOTS){id_article}>
+		<mot>#TYPE|#TITRE</mot>
+		</BOUCLE_mots>
 	</article>
 	</BOUCLE_article>
 </articles>
