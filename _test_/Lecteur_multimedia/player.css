@@ -51,13 +51,13 @@ background:#e6e6e6;
 
 
 span.play_{
-background:#E6ECFF;
+/*background:#E6ECFF;*/
 cursor:hand;
 cursor:pointer;
 }
 
 span.play_on{
-background:#FF0000;
+/*background:#FF0000;*/
 cursor:hand;
 cursor:pointer;
 }

@@ -27,8 +27,6 @@ soundManager.onload = function() {
 
 $(document).ready(function(){
 
-//mettre le player aflax en bas de page
-//$("#aflax_obj_0").appendTo("body");
 
 /*
 soundManager.onload = function() {
@@ -38,6 +36,8 @@ soundManager.defaultOptions.volume = 80;    // set global default volume
 */
 
 var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
+
+	live_track = 'stop' ;         
 
 	//$("body").css({background:"#FF0000"});
 	// preparer un plan B si flash < 8
@@ -69,25 +69,35 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 		             }
 		         );
 		         //a passer en .ajoute_musicplayer()	
-				$(this).before('<span class="play_">play</span>&nbsp;');
+				//$(this).before('<span class="play_">play</span>&nbsp;');
+				$(this).before('<span class="play_"><img src="plugins/Lecteur_multimedia/playl.gif"/></span>&nbsp;');
+
 		}
 	);
 
 
+	// toggle play / pause
 	// toggle play / pause
 	$("span.play_").each(
 	function(i) {
 	 
 		$(this).toggle(
 			             function(e){ 
-			             player_play(i) 						
+			            if(live_track !=='stop'){
+			              player_stop();
+			             }else{
+			            player_play(i) ;
+			            }  						
 						 },function(e){
-						 player_stop();
+						
+			              player_stop();
+			              
 						 }		
 			         );
 	
 	}
 	);
+
 
 
 	// pas de boutons play dans la playliste
@@ -122,7 +132,10 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 function player_play(i){
 	player_stop();
 	track_index = i ;
-	$("span.play_:eq("+i+")").html("stop").addClass("play_on");		
+	live_track = i ;
+
+	//$("span.play_:eq("+i+")").html("stop").addClass("play_on");		
+	$("span.play_:eq("+i+")").html("<img src='plugins/Lecteur_multimedia/pausel.gif'/>").addClass("play_on");		
 	$(".playliste li:eq("+i+")").addClass("play_on");
 
 	if(soundManager.url != 'undefined'){
@@ -237,8 +250,10 @@ $("#musicplayer").html('<object '+
 function player_stop(){
 						//reinit d'un autre play
 						
-						$("span.play_on").html('play');
+						//$("span.play_on").html('play');
+						$("span.play_on").html('<img src="plugins/Lecteur_multimedia/playl.gif"/>');
 						$("span.play_on").removeClass("play_on");
+						live_track = 'stop' ;
 						
 						$(".playliste li.play_on").removeClass("play_on");
 						soundManager.destroySound("son_" + track_index);
