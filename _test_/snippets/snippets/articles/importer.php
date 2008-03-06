@@ -44,7 +44,7 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 						AND !in_array($key,$champs_jointures) 
 						AND ($creation OR !in_array($key,$champs_non_ajoutables) OR !$row[$key])
 						AND isset($objet[$key])){
-						$v=trim(applatit_arbre($objet[$key]));
+						$v=trim(spip_xml_aplatit($objet[$key]));
 						$row[$key] = $creation?$v:($row[$key].$v);
 					}
 								
