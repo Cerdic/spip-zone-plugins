@@ -23,7 +23,7 @@ function snippets_affiche_droite($flux){
 	}
 	if ($args['exec']=='naviguer') {
 		$out.=boite_snippets(_L('Article'),'article-24.gif','articles','articles',"id_rubrique=".$args['id_rubrique'],$retour);
-		$out.=boite_snippets(_L('Rubrique'),'rubrique-24.gif','rubriques',$args['id_rubrique'],"",$retour);
+		$out.=boite_snippets(_L('Rubrique'),'rubrique-24.gif','rubriques',$args['id_rubrique'],"",$retour);	
 	}
 	$flux['data'].=$out;
 	return $flux;

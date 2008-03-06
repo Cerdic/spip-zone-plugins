@@ -76,7 +76,7 @@ function boite_snippets($titre,$icone,$table,$id,$contexte="",$retour = ""){
 		$out .= icone_horizontale(_T('snippets:exporter'), $action, $icone, _DIR_PLUGIN_SNIPPETS."images/export.gif", false);
 		$out .= "<hr/>";
 	}
-	
+
 	// liste des snippets disponibles pour import
 	$liste = snippets_liste_imports($table);
 	foreach($liste as $snippet){
@@ -84,7 +84,7 @@ function boite_snippets($titre,$icone,$table,$id,$contexte="",$retour = ""){
 		$action = generer_action_auteur('snippet_importe',"$table:$id:$contexte:$snippet",$retour);
 		$out .= icone_horizontale(basename($snippet,".xml"), $action, $icone, $import_creation?"creer.gif":_DIR_PLUGIN_SNIPPETS."images/import.gif", false);
 	}
-
+	
 	// formulaire d'upload d'un snippet
 	$action = generer_action_auteur('snippet_importe',"$table:$id:$contexte",$retour);
 	$out .= "<form action='$action' method='POST' enctype='multipart/form-data'>";
@@ -96,6 +96,16 @@ function boite_snippets($titre,$icone,$table,$id,$contexte="",$retour = ""){
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
 	$out .= "</div>";
 	$out .= "</form>\n";
+	
+	
+	// icone d'export listes
+	if ($f = find_in_path("snippets/$table/exporter_liste.html") AND $id=="articles"){
+		$out .= "<hr/>";
+		$contexte = ereg_replace("=","-",$contexte);
+		$action = generer_action_auteur('snippet_exporte',"$table:$id:$contexte",$retour);
+		$out .= icone_horizontale(_L('Exporter la liste'), $action, $icone, _DIR_PLUGIN_SNIPPETS."images/export.gif", false);
+	}
+	
 
 	$out .= fin_cadre_relief(true)."</div>";
 	return $out;
