@@ -26,7 +26,7 @@ function critere_branche($idb, &$boucles, $crit) {
 				$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, false);
 		}
 
-     if ($cle) $t = "L$cle";
+     if (intval($cle)) $t = "L$cle";
 		// faire la jointure sur id_rubrique
 		
 		$c = "calcul_mysql_in('" .
