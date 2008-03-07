@@ -97,15 +97,6 @@ function boite_snippets($titre,$icone,$table,$id,$contexte="",$retour = ""){
 	$out .= "</div>";
 	$out .= "</form>\n";
 	
-	
-	// icone d'export listes
-	if ($f = find_in_path("snippets/$table/exporter_liste.html") AND $id=="articles"){
-		$out .= "<hr/>";
-		$contexte = ereg_replace("=","-",$contexte);
-		$action = generer_action_auteur('snippet_exporte',"$table:$id:$contexte",$retour);
-		$out .= icone_horizontale(_L('Exporter la liste'), $action, $icone, _DIR_PLUGIN_SNIPPETS."images/export.gif", false);
-	}
-	
 
 	$out .= fin_cadre_relief(true)."</div>";
 	return $out;
@@ -184,6 +175,49 @@ function snippets_translate_raccourcis_modeles($translations){
 			}
 		}
 	}
+}
+
+
+
+// d'apres spip2spip par erationnal
+// recupere id d'un auteur selon son nom ou le creer
+function get_id_auteur($name) {
+    if (trim($name)=="") return false;    
+    $sql = "SELECT id_auteur FROM spip_auteurs WHERE nom='".addslashes($name)."'";
+    $result = spip_query($sql);
+    while ($row = spip_fetch_array($result)) {
+       return $row['id_auteur'];
+    }
+    // auteur inconnu, on le cree ...
+    return sql_insertq('spip_auteurs',array('nom'=>$name,'statut'=>'1comite')) ;
+}
+
+// recupere un id_mot selon le type|titre ou le creer
+
+function get_id_mot($name) {
+  
+   if (trim($name)=="") return false; 
+    list($type,$titre) = explode('|',$name) ;
+    $sql = "SELECT id_mot FROM spip_mots WHERE titre='".addslashes($titre)."'";
+    $result = spip_query($sql);
+    while ($row = spip_fetch_array($result)) {
+       return $row['id_mot'];
+    }
+
+    // creer le groupe ?
+    $sql = "SELECT id_groupe FROM spip_groupes_mots WHERE titre='".addslashes($type)."'";
+    $result2 = spip_query($sql);
+    $nb = sql_count($result);
+    if ($nb == 0) {
+       $id_groupe = sql_insertq('spip_groupes_mots',array('titre'=>$type)) ;
+    }
+    while ($row = spip_fetch_array($result2)) {
+       $id_groupe = $row['id_groupe'];
+    }
+    
+    // mot inconnu, on le cree ...
+    return  sql_insertq('spip_mots',array('type'=>$type, 'titre'=>$titre , 'id_groupe' => $id_groupe)) ;
+
 }
 
 ?>

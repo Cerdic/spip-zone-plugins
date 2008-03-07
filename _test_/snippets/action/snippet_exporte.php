@@ -23,17 +23,9 @@ function action_snippet_exporte(){
 	if (verifier_action_auteur("snippet_exporte-$arg",$hash,$id_auteur)==TRUE) {
 		$table = $args[0];
 		$id = $args[1];
-		$contexte = explode("-",$args[2]);
 		
-		if( ($contexte[0]=='id_rubrique') AND intval($contexte[1])){
-		$f = "snippets/$table/exporter_liste" ;
-		$id = $contexte[1] ;
-		}else{	
 		$f = snippets_fond_exporter($table, false);
-		}
-		
-		
-		
+			
 		if ($f) {
 			include_spip('public/assembler');
 			$out = recuperer_fond($f,array('id'=>intval($id)));
