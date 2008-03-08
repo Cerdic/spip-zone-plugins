@@ -43,7 +43,7 @@ id_auteur= n° de l'auteur.
 (#REM) On vérifie que le prof a déjà une fiche, si ce n'est pas le cas, on la crée
 
 	]<BOUCLE_Verifie_presence_fiche(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{ps=#SESSION{id_auteur}}{id_auteur=#SESSION{id_auteur}}> #SET{id_fiche,#ID_ARTICLE}</BOUCLE_Verifie_presence_fiche></B_Verifie_presence_fiche>
-		<BOUCLE_Donnees_du_prof(AUTEURS){id_auteur=#SESSION{id_auteur}}{0,1}>
+		<BOUCLE_Donnees_du_prof(AUTEURS){tout}{id_auteur=#SESSION{id_auteur}}{0,1}>[(#REM)le critère {tout} permet de selectionner aussi les auteurs qui n'ont pas d'articles...]
 			[<p class='avertissement'>(#NOM|bonbon_creer_fiche_prof{#ID_AUTEUR,#GET{id_rubrique_pcm}}|?{"Votre fiche a été créée.","Pour des raisons techniques votre fiche n'a pu être créée. Réessayez plus tard."})</p>]
 		</BOUCLE_Donnees_du_prof>
 	<//B_Verifie_presence_fiche>[

@@ -127,7 +127,9 @@ En cas de problème vous devrez réutiliser cette sauvegarde.<p>
 		</BOUCLE_Rubrique_profs_classes_matieres>
 		</B_Rubrique_profs_classes_matieres>
 <h2>Création d'une sous rubrique pour les fiches des profs et des classes</h2>
-		[		<p>(#ID_RUBRIQUE|bonbon_creer_sous_rubrique{"Professeurs-classes-matières","Cette rubrique contient des données necessaires au fonctionnement du cahier de texte en ligne.\n\n  {{Ne l'effacez pas}}. {{Ne la renommez pas}}. {{Ne modifiez pas son contenu}} sinon il ne fonctionnera plus correctement !"}|?{"La rubrique «Professeurs-classes-matières» pour l'année est créée.","Un problème technique est survenu lors de la création de la rubrique «Professeurs-classes-matières» !"})</p>]	
+		[		<p>(#ID_RUBRIQUE|bonbon_creer_sous_rubrique{"Professeurs-classes-matières","Cette rubrique contient des données necessaires au fonctionnement du cahier de texte en ligne.
+
+		  {{Ne l'effacez pas}}. {{Ne la renommez pas}}. {{Ne modifiez pas son contenu}} sinon il ne fonctionnera plus correctement !"}|?{"La rubrique «Professeurs-classes-matières» pour l'année est créée.","Un problème technique est survenu lors de la création de la rubrique «Professeurs-classes-matières» !"})</p>]	
 		<//B_Rubrique_profs_classes_matieres>
 	</BOUCLE_AnneeScol>
 </BOUCLE_Contexte_RubriqueCDT>
@@ -334,10 +336,15 @@ Son {titre} doit {{toujours}} contenir l'expression «{Cahier de texte en-ligne}»
 	
 	(#SET{descriptif_rubrique,"Cahier de texte de l'année scolaire "})
 	][
-	(#SET{descriptif_rubrique,[(#GET{descriptif_rubrique}|concat{#GET{annee_rubrique},"\n\n{{Cette rubrique ne doit pas être renommée}}. Sinon, les enregistrements du cahier de texte de l'année en cours seront perdus"})]})
+	(#SET{descriptif_rubrique,[(#GET{descriptif_rubrique}|concat{#GET{annee_rubrique},"
+
+	{{Cette rubrique ne doit pas être renommée}}. Sinon, les enregistrements du cahier de texte de l'année en cours seront perdus"})]})
 	][
 	(#SET{id_rub_annee_scolaire,#GET{id_rubrique_globale}|bonbon_creer_sous_rubrique{#GET{annee_rubrique},#GET{descriptif_rubrique}}})
-	][<p name="FIN">La sous-rubrique de l'année scolaire #GET{annee_rubrique} &nbsp;a été créée, c'est la rubrique n°(#GET{id_rub_annee_scolaire}).][ Elle contient une sous rubrique	n°(#GET{id_rub_annee_scolaire}|bonbon_creer_sous_rubrique{"Professeurs-classes-matières","Cette rubrique contient des données necessaires au fonctionnement du cahier de texte en ligne.\n\n  {{Ne l'effacez pas}}. {{Ne la renommez pas}}. {{Ne modifiez pas son contenu}} sinon il ne fonctionnera plus correctement !"})&nbsp;nommée «Professeurs-classes-matières».] <strong>Ces sous-rubriques ont été créées pour gérer le cahier de texte de cette année scolaire. Ne les effacez pas, ne les renommez pas et laissez les dans la rubrique «Cahier de texte en-ligne» !</strong></p>
+	][<p name="FIN">La sous-rubrique de l'année scolaire #GET{annee_rubrique} &nbsp;a été créée, c'est la rubrique n°(#GET{id_rub_annee_scolaire}).][ Elle contient une sous rubrique	n°(#GET{id_rub_annee_scolaire}|bonbon_creer_sous_rubrique{"Professeurs-classes-matières","Cette rubrique contient des données necessaires au fonctionnement du cahier de texte en ligne.
+
+
+	  {{Ne l'effacez pas}}. {{Ne la renommez pas}}. {{Ne modifiez pas son contenu}} sinon il ne fonctionnera plus correctement !"})&nbsp;nommée «Professeurs-classes-matières».] <strong>Ces sous-rubriques ont été créées pour gérer le cahier de texte de cette année scolaire. Ne les effacez pas, ne les renommez pas et laissez les dans la rubrique «Cahier de texte en-ligne» !</strong></p>
 
 ]	<?php
 	copy("/plugins/bonbon/cahier-de-texte-rurbrique.html","rurbrique-".'[(#GET{id_rubrique_globale})]'.".html")
