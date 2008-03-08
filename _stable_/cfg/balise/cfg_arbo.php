@@ -35,11 +35,13 @@ function affiche_arborescence($cfg='') {
 	$hash = substr(md5(rand()*rand()),0,6);
 	
 	// integration du css
-	$sortie .= "<style type='text/css'>\n"
-			.  ".cfg_arbo{}\n"
-			.  ".cfg_arbo h5{padding:0.2em 0.2em; margin:0.2em 0;}\n"
-			.  ".cfg_arbo ul{border:1px solid #ccc; margin:0; padding:0.2em 0.5em; list-style-type:none;}\n"
-			.  "</style>\n";
+	// Suppression de cette inclusion des css arbo au profit d'une inclusion d'un fichier cfg.css dans le header prive
+// 	$sortie .= "<style type='text/css'>\n"
+// 			.  ".cfg_arbo{}\n"
+// 			.  ".cfg_arbo h5{padding:0.2em 0.2em; margin:0.2em 0;}\n"
+// 			.  ".cfg_arbo ul{border:1px solid #ccc; margin:0; padding:0.2em 0.5em; list-style-type:none;}\n"
+// 			.  "</style>\n";
+
 	// integration du js	
 	$sortie .= "<script type='text/javascript'><!--
 				

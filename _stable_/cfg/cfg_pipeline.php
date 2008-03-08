@@ -44,6 +44,9 @@ function cfg_header_prive($flux){
 		return $flux;
 	}
 
+	// Ajout des css de cfg (uniquement balise arbo pour l'instant) dans le header prive
+	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_CFG.'css/cfg.css" type="text/css" media="all" />';
+
 	$cfg = cfg_charger_classe('cfg');
 	include_spip('inc/filtres');
 	$config = & new $cfg(
