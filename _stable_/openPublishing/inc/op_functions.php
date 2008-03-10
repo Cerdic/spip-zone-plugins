@@ -3,8 +3,6 @@
 /* Ce fichier contient toutes les fonctions utilisé par la balise #FORMULAIRE_ARTICLE
  */
 
-
-
 // fonction qui affiche la zone de texte et la barre de typographie
 
 function barre_article($texte, $rows, $cols, $lang='')

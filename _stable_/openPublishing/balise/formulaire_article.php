@@ -24,10 +24,9 @@ include_spip('base/abstract_sql');
 /* Les includes propre au plugin
  */
 
-// Si SPIP est vieux, charger les fonctions de compat
+// Si SPIP est vieux, charger les fonctions de compatibilité
 if ($GLOBALS['spip_version_code'] < '1.93') include_spip('inc/op_compat.php');
 
-include_spip('inc/op_actions'); // base de donnée
 include_spip('inc/op_functions'); // fonctions diverses
 
 spip_connect();

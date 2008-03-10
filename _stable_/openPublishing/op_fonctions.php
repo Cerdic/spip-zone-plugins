@@ -1,7 +1,5 @@
 <?php
 
-include_spip('inc/op_actions');
-
 // {openPublishing}
 function critere_openPublishing($idb, &$boucles, $crit) {
 	
@@ -14,7 +12,7 @@ function critere_openPublishing($idb, &$boucles, $crit) {
 	foreach (lire_config('op') as $key => $val) {
 		if ((substr($key,0,3)) == "op_") {
 			if ($val == "openPublishing") {
-				$op_rub = substr($key,3,1);
+				$op_rub = substr($key,3);
 				$list .= $op_rub .',';
 			}
 		}
@@ -23,14 +21,15 @@ function critere_openPublishing($idb, &$boucles, $crit) {
 	$boucle->where[] = array("'IN'", "'$id_rubrique'","'($list)'");
 }
 
+function return_agenda() {
+	$config = lire_config('op');
+	return $config["RubAgenda"];
+}
 function balise_AGENDA($p) {
 	$p->code ='return_agenda()';
 	$p->statut = 'php';
 	return $p;
 }
 
-function return_agenda() {
-	$config = lire_config('op');
-	return $config["RubAgenda"];
-}
+
 ?>

@@ -53,25 +53,10 @@ _ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	</description>
 	<lien>[Documentation->http://edd.lautre.net/wiki], et [Configuration->.?exec=cfg&amp;cfg=op]</lien>
 	<prefix>op</prefix>
-	<options> <!-- fichier charge a chaque hit -->
+	<options>
 		op_options.php
 	</options>
 	<fonctions>
 		op_fonctions.php
 	</fonctions>
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBouton</action>
-		<inclure>op_pipeline.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<action>ajouterOnglets</action>
-		<inclure>op_pipeline.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>header_prive</nom>
-		<action>headerPrive</action>
-		<inclure>op_pipeline.php</inclure>
-	</pipeline>
 </plugin>

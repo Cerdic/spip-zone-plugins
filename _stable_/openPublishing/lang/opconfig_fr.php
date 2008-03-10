@@ -4,6 +4,64 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+// v 0.4
+
+// A
+'aller_config' => 'Vous pouvez en toute s&eacute;curit&eacute; aller modifier les options de configuration du plugin openPublishing',
+
+'avant_toute_chose' => 'Avant toute chose, munissez vous du num&eacute;ro id du dernier auteur cr&eacute;er AVANT l\'installation du plugin openPublishing 0.3',
+
+'attention_temps' => 'Attention, cette op&eacute;ration peut prendre un certain temps (en fonction du nombres d\'articles publi&eacute; en openPublishing dans votre base).',
+
+'auteur' => 'auteur',
+
+// B
+'bonne_nouvelle' => 'Bonne nouvelle, le plugin openPublishing n\'utilise plus de tables "perso" dans la base de donn&eacute;e de spip.',
+
+// C
+'cas_neuve' => 'Cas d\'une installation "neuve"',
+
+'cas_mise_a_jour' => 'Cas d\'une mise &agrave; jour du plugin',
+
+'correction_num_id' => 'Correction des num&eacute;ros d\'identifications des auteurs',
+
+// E
+'expliq_sup_table' => 'La version 0.4 du plugin openPublishing n\'utilise plus les tables spip_op_config et spip_op_rubriques. Si votre ancienne version du plugin &eacute;tait la 0.3 ou la 0.2.2, il vous faut supprimer totalement ces tables et refaire la configuration de votre plugin :',
+
+'expliq_transfert_auteurs' => 'La version 0.4 du plugin openPublishing n\'utilise plus la table spip_op_auteurs pour stocker les donn&eacute;es d\'identifications des r&eacute;dacteurs, mais utilise les champs "extras" de la table spip_articles. L\'option suivante va vous permettre de mettre &agrave; jour tous les articles ayant eu un r&eacute;dacteurs s\'&eacute;tant identifi&eacute; via ce syst&egrave;me. Cela vous permettra de conserver les donn&eacute;es identifications de vos r&eacute;dacteurs et donc de supprimer la table spip_op_auteurs devenue obsol&eacute;te',
+
+'expliq_num_id' => 'La version 0.3 du plugin openPublishing utilisait par d&eacute;faut l\'auteur "anonymous" portant le num&eacute;ro d\'identification 999. Cela &eacute;tait une tr&agrave;s mauvaise id&eacute;e, car pour tout auteur cr&eacute;&eacute; par la suite, l\'identification automatique d&eacute;marait &agrave; partir du num&eacute;ro 1000 ce qui pouvais causer de multiples bugs dans l\'utilisation de spip. L\'outil ci-dessous va vous permettre, si vous &ecirc;tes dans ce cas, de supprimer l\'auteur portant l\'identification 999 (le fameux auteur anonymous) et de re-donner aux auteurs portant l\'identification 1000 ou plus leur v&eacute;ritable num&eacute;ro id.',
+
+'exemple_trois_auteurs' => 'Exemple avec trois auteurs :',
+
+// P
+'premiere_fois' => 'C\'est la premi&egrave;re fois que vous installez le plugin openPublishing, et vous l\'utilisez pour la premi&egrave;re fois.',
+
+// R
+'rien_a_faire' => 'Vous n\'avez rien &agrave; faire (r&eacute;jouissez vous !), ne touchez surtout pas aux options ci-dessous, celles ci concernent les personnes ayant install&eacute;es une version pr&eacute;cendente du plugin openPublishing.',
+
+// S
+'structure' => 'La structure du plugin a &eacute;volu&eacute; depuis la premi&egrave;re version &agrave; la version pr&eacute;sente, notamment au niveau de l\'organisation de la base de donn&eacute;e. C\'est pourquoi les outils ci-dessous vont vous aider &agrave; mettre &agrave; jour votre base de donn&eacute;e sans risquer de perdre vos donn&eacute;es. Suivez correctement l\'ordre des actions propos&eacute;es.',
+
+'sup_auteurs' => 'Suppression de la table spip_op_auteurs',
+
+'sup_auteur_anonymous' => 'Supprimez l\'auteur portant le num&eacute;ro id 999',
+
+'sup_table' => 'Supprimer les tables obsol&eacute;tes (op_config et op_rubriques)',
+
+// T
+'telecharge_install' => 'Vous venez de t&eacute;l&eacute;charger la version 0.4 du plugin openPublishing. Vous avez supprim&eacute; votre ancienne version dans votre r&eacute;pertoire "plugins/" et vous l\'avez remplac&eacute; par celle-ci.',
+
+'transfert_auteurs' => 'Mettre &agrave; jours les champs extra de la table spip_articles, a partir des informations de la table spip_op_auteurs.',
+
+'transfert_auteurs_ok' => 'Si l\'op&eacute;ration c\'est bien d&eacute;roul&eacute;e, vous pouvez maintenant supprimer la table obsol&eacute;te.',
+
+
+
+
+
+
+
 // A
 'ajouter_agenda' => 'Ajouter dans l\'agenda',
 'abandonner' => 'Abandonner',
@@ -44,7 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // D
 'document_joint' => 'Joindre un document ou une image',
 'document_inclusion' => 'Document (le fichier apparaitra sous forme de lien sous l\'article)',
-'document_explique' => 'Cette option permet d\'uploader des documents provenant de votre ordinateur et de les lier &agrave; votre article. Si vous choississez l\'option "image", le document sera inclu directement dans le texte de votre article (attention pour les images, la largeur maximale autorisé est 400 pixels, si votre image est plus large que cela, elle sera automatiquement réduite). Si vous choisissez l\'option "document", votre document apparaitra dans la liste des documents attaché à cet article, mais ne sera pas inclu dans le texte de votre article. ',
+'document_explique' => 'Cette option permet d\'uploader des documents provenant de votre ordinateur et de les lier &agrave; votre article. Si vous choississez l\'option "image", le document sera inclu directement dans le texte de votre article (attention pour les images, la largeur maximale autoris&eacute; est 400 pixels, si votre image est plus large que cela, elle sera automatiquement r&eacute;duite). Si vous choisissez l\'option "document", votre document apparaitra dans la liste des documents attach&eacute; &agrave; cet article, mais ne sera pas inclu dans le texte de votre article. ',
 'deja_base' => ' est d&eacute;j&agrave; dans la base.',
 'deinstaller' => 'D&eacute;sinstaller l\'openPublishing',
 
@@ -132,7 +190,7 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'op_info_base_ok' => 'Le plugin openPublishing est correctement install&eacute;',
 'op_info_base_ko' => 'Les tables de donn&eacute;e du plugin openPublishing doivent-&ecirc;tre install&eacute;es.',
 'op_info_deja_ko' => 'Les tables de donn&eacute;e du plugin openPublishing a &eacute;t&eacute; d&eacute;sinstall&eacute;e',
-'op_info_base_up' => 'Attention, la base de donn&eacute;e du plugin openPublishing doit &ecirc;tre upgrader. Cela est du à un changement de version du plugin openPublishing. Appuyez sur le bouton pour continuer.',
+'op_info_base_up' => 'Attention, la base de donn&eacute;e du plugin openPublishing doit &ecirc;tre upgrader. Cela est du &agrave; un changement de version du plugin openPublishing. Appuyez sur le bouton pour continuer.',
 'op_info_base_ko_bis' => 'Le plugin openPublishing n&eacute;cessite l\'installation de trois tables suppl&eacute;mentaire pour fonctionner. Si vous n\'installez pas ces tables, alors le plugin ne fonctionnera pas.',
 'op_info_desinstal' => '<b>Cette commande efface la base de donn&eacute;e cr&eacute;&eacute;e lors de l\'installation du plugin openPublishing.</b><p />  La base de donn&eacute;e de spip n\'est pas effac&eacute;e. Si vous souhaitez supprimer le plugin openPublishing, alors vous devrez &eacute;galement supprimer par ftp le contenu du dossier plugin openPublishing',
 'op_position_info' => '1. Que voulez-vous faire ?',
