@@ -1,10 +1,12 @@
 #CACHE{0}
-[(#SET{logo,<img src='[(#CHEMIN{img_pack/cles24.png})]' width='24' height='24' alt='Logo Recherche Multi_Crit&egrave;res' style="float:#LANG_RIGHT;" />})]
+[(#SET{logo,<img src='[(#CHEMIN{img_pack/rec_mc-32.png})]' alt='Logo Recherche Multi_Crit&egrave;res' style="float:#LANG_RIGHT;" />})]
 <!-- descriptif=#GET{logo}<multi>[fr]Personnalisation du formulaire public.[en]Customizing the public form[es]Personalización de la forma pública</multi>
 <br /><a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" class="spip_out"><multi>[fr]Vers documentation</multi></a>
 <p><a href="?exec=rec_mc" class="spip_out"><multi>[fr]Vers configuration des mots-cl&eacute</multi>;</a></p>
 -->
-<!-- titre=<multi>[fr]Recherches Multi-Crit&egrave;res[en]Multi Keywords Research</multi>-->
+<!-- titre=<multi>[fr]Recherches Multi-Crit&egrave;res</multi>-->
+<!-- icone=img_pack/rec_mc-24.png-->
+
 <!-- head=<script type="text/javascript">
 bloc2 = true;
 function hexa2(couleur2)
@@ -52,7 +54,6 @@ document.write("</tr>");
 document.write("</TABLE>"); 
 } 
 </script>-->
-
 <form method="post" name="form" id="form_cfg_rec_mc">[(#ENV{_cfg_}|form_hidden)]
 <B_groupes>
 	<fieldset>
@@ -98,9 +99,9 @@ document.write("</TABLE>");
 			</script>
 		</div>
 		<:rmc:couleur_aide:><br />
-		<input type="text" id="hexval" name="hexval" value="#ENV{hexval}" />
+		<input type="text" name="hexval" id="hexval" value="#ENV{hexval}" />
 	</fieldset>
-	<p>
+	</p>
 	<p>
 	<fieldset>
 		<legend><:rmc:police:></legend>
@@ -115,6 +116,7 @@ document.write("</TABLE>");
 		</select>
 	</fieldset>
 	</p>
+	<p>
 	<fieldset>
 		<legend><:rmc:police:></legend>
 		<label for="hexvalpol" ><:rmc:couleur_police:></label>
@@ -124,13 +126,12 @@ document.write("</TABLE>");
 			</script>
 		</div>
 		<:rmc:couleur_aide:><br />
-		<input type="text" id="hexvalpol" name="hexvalpol" value="#ENV{hexvalpol}" />
+		<input type="text" name="hexvalpol" id="hexvalpol" value="#ENV{hexvalpol}" />
 	</fieldset>
+	</p>
 	<p>
 		<input type="submit" name="_cfg_ok" value="<:OK:>" />
 		<input type="reset" value="<:Reset:>" />
 		<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
 	</p>
 </form>
-
- 
