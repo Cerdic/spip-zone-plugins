@@ -207,7 +207,7 @@ function get_id_mot($name) {
     // creer le groupe ?
     $sql = "SELECT id_groupe FROM spip_groupes_mots WHERE titre='".addslashes($type)."'";
     $result2 = spip_query($sql);
-    $nb = sql_count($result);
+    $nb = sql_count($result2);
     if ($nb == 0) {
        $id_groupe = sql_insertq('spip_groupes_mots',array('titre'=>$type)) ;
     }
