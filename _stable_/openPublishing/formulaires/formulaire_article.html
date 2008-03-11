@@ -7,42 +7,55 @@
 
 	[(#ENV*{formulaire_previsu})]
 
-	[<div id="erreur"><p>(#ENV*{mess_error})</p></div>]
+	[<center><p style="color:red;"><b>(#ENV*{mess_error})</b></p></center>]
 
+	<B_document>
+	<p>
+	<fieldset><legend><b><:opconfig:documents_lies:></b></legend>
 
-	<:opconfig:redigez_article:>
-	
+	<p><:opconfig:expliq_balise:></p>
+
+	<BOUCLE_document(DOCUMENTS){ id_article = #ENV**{article} }>
+		#SET{ratio_x,#LARGEUR|div{115}}
+		#SET{ratio_y,#HAUTEUR|div{115}}
+		#SET{ratio,#GET{ratio_x}|<={#GET{ratio_y}}|?{#GET{ratio_x},#GET{ratio_y}}}
+
+		<div style="float:left;">
+			[(#FICHIER|image_reduire_par{#GET{ratio}}|image_recadre{115,115,center})]
+			
+			<center>
+			[(#MODE|=={vignette}|?{
+				<<code>img</code>#ID_DOCUMENT<code>|left</code>><br />
+				<<code>img</code>#ID_DOCUMENT<code>|center</code>><br />
+				<<code>img</code>#ID_DOCUMENT<code>|right</code>><br />
+				,
+				<<code>doc</code>#ID_DOCUMENT<code>|left</code>><br />
+				<<code>doc</code>#ID_DOCUMENT<code>|center</code>><br />
+				<<code>doc</code>#ID_DOCUMENT<code>|right</code>><br />
+			})]
+			</center>
+		</div>
+	</BOUCLE_document>
+	</fieldset>
+	</B_document>
+
 	<p>
 	<fieldset><legend><b><:opconfig:publie_rubrique:></b></legend>
-		<table>
-		<tr><td valign="top" width="50%">
-			
+
 			<p><select name="rubrique" value="[(#ENV**{rubrique})]">
 				<BOUCLE_rubrique(RUBRIQUES){openPublishing}{tout}>
 					[(#ENV**{rubrique}|selected_option{#ID_RUBRIQUE,#TITRE})]
 				</BOUCLE_rubrique>
 			</select></p>
-		</td>
-		<td valign="top" width="50%">
-			<p><:opconfig:explication_rubrique:></p> 
-		</td></tr>
-		</table>
+
 	</fieldset>
 	</p>
-
-
 
 	[<p>(#ENV*{formulaire_surtitre})</p>]
 
 	<p>
 	<fieldset><legend><b><:opconfig:publie_titre:>&nbsp;[<:opconfig:obligatoire:>]</b></legend>
-		<table>
-		<tr><td valign="top" width="50%">
-			<p><input type="text" name="titre" value="[(#ENV**{titre})]"  size="40" maxlength="80"></p>
-		</td><td valign="top" width="50%">
-			<p><:opconfig:explication_titre:></p>
-		</td></tr>
-		</table>
+		<p><input type="text" name="titre" value="[(#ENV**{titre})]"  size="40" maxlength="80"></p>
 	</fieldset>
 	</p>
 
@@ -55,7 +68,6 @@
 	<p>
 	<fieldset><legend><b><:opconfig:publie_texte:></b></legend>
 		<p>[(#ENV**{texte}|barre_article{30,62})]</p>
-		<p><:opconfig:explication_article:></p>
 	</fieldset>
 	</p>
 
@@ -76,22 +88,12 @@
 
 	<p>
 	<fieldset><legend><b><:opconfig:identification:>&nbsp;[<:opconfig:optionel:>]</b></legend>
-		<table>
-		<tr><td valign="top" width="50%">
-			<table cellspacing="0" cellpadding="0" border="0">
-				<tr><td><:opconfig:votre_nom:>&nbsp;:&nbsp;</td><td>
-				<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="15"></td></tr>
-				<tr><td><:opconfig:votre_mail:>&nbsp;:&nbsp;</td><td>
-				<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="15"></td></tr>
-			</table>
-		</td><td valign="top" width="50%">
-			<p><:opconfig:identif_explique:></p>
-		</td></tr>
-		</table>
+		<:opconfig:votre_nom:>&nbsp;:&nbsp;
+		<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="15"><br />
+		<:opconfig:votre_mail:>&nbsp;:&nbsp;
+		<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="15"><br />
 	</fieldset>
 	</p>
-
-
 
 	<p>
 		<input type="submit" name="previsualiser" class="spip_bouton" value="<:opconfig:previsualiser:>" />

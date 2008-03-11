@@ -1,33 +1,20 @@
 
 <fieldset><legend><b><:opconfig:ajouter_agenda:></b></legend>
-	<table>
-	<tr><td valign="top" width="50%">
-
-		
-
-		<p>
-		[(#ENV**{choix_agenda}|checkbox_agenda)]
-		<br />
-		[(#ENV**{annee}|select_annee)]
-		&nbsp;/&nbsp;
-		[(#ENV**{mois}|select_mois)]
-		&nbsp;/&nbsp;
-		[(#ENV{jour}|select_jour)]
-		&nbsp;:&nbsp;
-		[(#ENV{heure}|select_heure)]
-		<br />
+	<p><:opconfig:agenda_explique2:></p>
+	<p><:opconfig:explication_agenda:></p>
+	<p>
+	[(#ENV**{choix_agenda}|checkbox_agenda)]
+	<br />
+	[(#ENV**{annee}|select_annee)]
+	&nbsp;/&nbsp;
+	[(#ENV**{mois}|select_mois)]
+	&nbsp;/&nbsp;
+	[(#ENV{jour}|select_jour)]
+	&nbsp;:&nbsp;
+	[(#ENV{heure}|select_heure)]
+	<br />
 	
-		</p>
-		<br />
-
-	</td><td valign="top" width="50%">
-
-		<p><:opconfig:agenda_explique2:></p>
-		<p><:opconfig:explication_agenda:></p>
-
-
-	</td></tr>
-	</table>
-
+	</p>
+	<br />
 </fieldset>
 

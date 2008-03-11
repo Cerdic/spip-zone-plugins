@@ -1,10 +1,10 @@
 #CACHE{86400}
 
 <fieldset><legend><b><:opconfig:document_joint:></b></legend>
-	<table>
-	<tr><td valign="top" width="50%">
-		<p><b><:opconfig:telecharger_document:></b></p>
-		<small>
+	<p><:opconfig:document_explique:></p>
+
+	<p><b><:opconfig:telecharger_document:></b></p>
+	<small>
 		<p>
 		<input name='doc' type='file' class='fondl' style='width: 100%;'><br>
 		<input type=radio name="type" value="vignette" checked>&nbsp;<:opconfig:image_inclusion:><br>
@@ -15,14 +15,6 @@
 		<input name='media' type='submit' VALUE='#ENV*{bouton}' CLASS='spip_bouton'>
 		<input type="hidden" name="id_article" value="#ENV*{id_article}">
 		</p>
-		</small>
-		<br>
-	</td><td valign="top" width="50%">
-
-		<p><:opconfig:document_explique:></p>
-
-
-	</td></tr>
-	</table>
+	</small>
+	<br />
 </fieldset>
-

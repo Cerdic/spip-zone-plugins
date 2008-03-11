@@ -1,23 +1,21 @@
 #CACHE{86400}
 
+<p>
 <fieldset><legend><:opconfig:previsualisation:></legend>
 
 [<p><b>&nbsp;&nbsp;(#ENV*{surtitre})</b></p>>]
 [<p><b>&nbsp;&nbsp;(#ENV*{titre})</b></p>]
 [<p><b>&nbsp;&nbsp;(#ENV*{soustitre})</b></p>]
-<hr />
 [<p>(#ENV*{descriptif})</p>]
 [<p>(#ENV*{chapo})</p>]
 
 <p>
-[(#ENV*{texte}|image_reduire{800,0})]
-[(#ENV*{erreur})]
+	[(#TEXTE|image_reduire{400,0}|replace{<br>,<br />})]
 </p>
+<br style="clear:both;">
 
-<hr />
 [<p>(#ENV*{ps})</p>]
 
-<hr />
 <p>
 	le&nbsp;[(#ENV*{date_redac}|affdate)][, <:par_auteur:> (#LESAUTEURS)]
 		[, &nbsp;Auteur : (#ENV*{nom_inscription})]
@@ -27,7 +25,4 @@
 </p>
 
 </fieldset>
-
-<br />
-<br />
-
+</p>

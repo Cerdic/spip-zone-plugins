@@ -180,117 +180,41 @@ function op_request_new_id($connect_id_auteur)
 	$statut_nouv='prepa';
 	$forums_publics = substr(lire_meta('forums_publics'),0,3);
 	
-	$article = sql_insertq('spip_articles', array (
-		'statut' => 'prepa',
-		'date' => 'NOW()',
-		'accepter_forum' => $forum_publics
-		));
-	
-	sql_delete('spip_auteurs_articles', 'id_article = '.sql_quote($article).' LIMIT 1');
-	sql_insertq('spip_auteurs_articles', array(
-		'id_auteur' => $connect_id_auteur,
-		'id_article' => $article
-		));
+	sql_insertq(
+		'spip_articles',
+		array (
+			'statut' => 'prepa',
+			'date' => 'NOW()',
+			'accepter_forum' => $forum_publics)
+	);
+
+	$ret = sql_fetch(sql_select(
+		array('MAX(id_article) as id_article'),
+		array('spip_articles')
+	));
+
+	$article = $ret['id_article'];
+
+	sql_delete(
+		'spip_auteurs_articles',
+		array('id_article = '.sql_quote($article).' LIMIT 1')
+	);
+
+	sql_insertq(
+		'spip_auteurs_articles',
+		array(
+			'id_auteur' => $connect_id_auteur,
+			'id_article' => $article
+		)
+	);
 	
 	// lors de la demande d'un nouvel id article, il faut supprimer les relations éventuelles avec la table mots_articles
-	sql_delete('spip_mots_articles','id_article = '.sql_quote($article));
+	sql_delete(
+		'spip_mots_articles',
+		array('id_article = '.sql_quote($article))
+	);
 	
 	return $article;
 }
 
-// fonction qui liste les documents
-
-function op_liste_vignette($article)
-{
-
-
-	$result = spip_query("SELECT * FROM spip_documents_articles WHERE id_article = $article");
-
-	if (mysql_num_rows($result) > 0 ) {
-		echo '<div id="block-center">';
-		echo '<div id="block-center-titre"><b>&nbsp;&nbsp;Vos documents</b></div>';
-		echo '<div id="block-content"><small>';
-		echo '<center><p>'._T('opconfig:aide_inclusion').'</p></center></small>';
-	}
-	else return;
-
-	echo '<center><table><tr>';
-			
-	while($row=mysql_fetch_array($result)){
-		$id_doc = $row[0];
-		$result2 = spip_query("SELECT fichier, mode FROM spip_documents WHERE id_document = $id_doc");
-		while($row2=mysql_fetch_array($result2)){
-			$empla = $row2['fichier'];
-			$mode = $row2['mode'];
-			
-			// ajout du code inclusion
-			if ($mode == "vignette") {
-				echo '<td align="center"><img src="'.$empla.'" width="100" height="100" \><br />';
-				echo '<code>&lt;img'.$id_doc.'|right&gt;</code><br />';
-				echo '<code>&lt;img'.$id_doc.'|center&gt;</code><br />';
-				echo '<code>&lt;img'.$id_doc.'|left&gt;</code><br />';
-			}
-			else {
-				$tableau = split('[.]', $empla);
-				$ext = $tableau[1];
-				// ajout pour utiliser les vignettes spip pour documents
-				list($fic, $largeur, $hauteur) = vignette_par_defaut($ext);
- 				$image = "<img src='$fic'\n\theight='$hauteur' width='$largeur' />";
-				echo '<td align="center">'.$image.'<br />';
-				echo '<code>&lt;doc'.$id_doc.'|right&gt;</code><br />';
-				echo '<code>&lt;doc'.$id_doc.'|center&gt;</code><br />';
-				echo '<code>&lt;doc'.$id_doc.'|left&gt;</code><br />';
-			}
-			echo '</td>';
-		}
-	}
-	echo '</tr></table>';
-
-	echo '</center>';
-	echo '</div></div><br />';
-}
-
-// renvoie sous forme de tableau la liste des extensions autorisée par spip
-
-function get_types_documents() {
-	$query = "SELECT extension FROM spip_types_documents";
-	return spip_query($query);
-}
-	
-// affichage du tableau extension
-
-function afficher_tab($tab_ext) {
-
-	while ($ext = mysql_fetch_array($tab_ext)) {
-		$message = $message . $ext[0] .', ';
-	}
-	return $message;
-}
-
-// reliquat spipindy, fonction qui coupe les trop gros textes.
-
-function coupe_trop_long($texte){    // utile pour les textes > 32ko
-    if (strlen($texte) > 28*1024) {
-        $texte = str_replace("\r\n","\n",$texte);
-        $pos = strpos($texte, "\n\n", 28*1024);    // coupe para > 28 ko
-        if ($pos > 0 and $pos < 32 * 1024) {
-            $debut = substr($texte, 0, $pos)."\n\n<!--SPIP-->\n";
-            $suite = substr($texte, $pos + 2);
-        } else {
-            $pos = strpos($texte, " ", 28*1024);    // sinon coupe espace
-            if (!($pos > 0 and $pos < 32 * 1024)) {
-                $pos = 28*1024;    // au pire (pas d'espace trouv'e)
-                $decalage = 0; // si y'a pas d'espace, il ne faut pas perdre le caract`ere
-            } else {
-                $decalage = 1;
-            }
-            $debut = substr($texte,0,$pos + $decalage); // Il faut conserver l'espace s'il y en a un
-            $suite = substr($texte,$pos + $decalage);
-       }
-  return (array($debut,$suite));
- }
- else return (array($texte,''));
-}
-
 ?>
- 

@@ -25,6 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'correction_num_id' => 'Correction des num&eacute;ros d\'identifications des auteurs',
 
+// D
+
+'documents_lies' => 'Les documents attach&eacute;s &agrave; votre article',
+
 // E
 'expliq_sup_table' => 'La version 0.4 du plugin openPublishing n\'utilise plus les tables spip_op_config et spip_op_rubriques. Si votre ancienne version du plugin &eacute;tait la 0.3 ou la 0.2.2, il vous faut supprimer totalement ces tables et refaire la configuration de votre plugin :',
 
@@ -33,6 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'expliq_num_id' => 'La version 0.3 du plugin openPublishing utilisait par d&eacute;faut l\'auteur "anonymous" portant le num&eacute;ro d\'identification 999. Cela &eacute;tait une tr&agrave;s mauvaise id&eacute;e, car pour tout auteur cr&eacute;&eacute; par la suite, l\'identification automatique d&eacute;marait &agrave; partir du num&eacute;ro 1000 ce qui pouvais causer de multiples bugs dans l\'utilisation de spip. L\'outil ci-dessous va vous permettre, si vous &ecirc;tes dans ce cas, de supprimer l\'auteur portant l\'identification 999 (le fameux auteur anonymous) et de re-donner aux auteurs portant l\'identification 1000 ou plus leur v&eacute;ritable num&eacute;ro id.',
 
 'exemple_trois_auteurs' => 'Exemple avec trois auteurs :',
+
+'expliq_balise' => 'le code donn&eacute; en-dessous de votre image est a placer dans le texte de votre article si vous souhaitez inclure l\'image ou la vignette du document dans votre texte (right, center, left renseigne l\'alignement que prendra votre image  ou vignette).',
 
 // P
 'premiere_fois' => 'C\'est la premi&egrave;re fois que vous installez le plugin openPublishing, et vous l\'utilisez pour la premi&egrave;re fois.',
@@ -57,9 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'transfert_auteurs_ok' => 'Si l\'op&eacute;ration c\'est bien d&eacute;roul&eacute;e, vous pouvez maintenant supprimer la table obsol&eacute;te.',
 
 
-
-
-
+// V 0.2.2 / 0.3
 
 
 // A
@@ -102,7 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // D
 'document_joint' => 'Joindre un document ou une image',
 'document_inclusion' => 'Document (le fichier apparaitra sous forme de lien sous l\'article)',
-'document_explique' => 'Cette option permet d\'uploader des documents provenant de votre ordinateur et de les lier &agrave; votre article. Si vous choississez l\'option "image", le document sera inclu directement dans le texte de votre article (attention pour les images, la largeur maximale autoris&eacute; est 400 pixels, si votre image est plus large que cela, elle sera automatiquement r&eacute;duite). Si vous choisissez l\'option "document", votre document apparaitra dans la liste des documents attach&eacute; &agrave; cet article, mais ne sera pas inclu dans le texte de votre article. ',
+'document_explique' => 'Cette option permet de charger des documents provenant de votre ordinateur et de les lier &agrave; votre article. Si vous choississez l\'option "image", vous pourrez alors inclure votre image directement dans le texte de votre article. Si vous choisissez l\'option "document", vous pourrez alors inclure votre document sous forme de vignette cliquable directement dans le texte de votre article.',
 'deja_base' => ' est d&eacute;j&agrave; dans la base.',
 'deinstaller' => 'D&eacute;sinstaller l\'openPublishing',
 

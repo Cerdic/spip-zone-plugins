@@ -1,63 +1,42 @@
 <?php
 
-/* Test de sécurité
- */
-
+/* Test de sécurité */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /* Les includes de spip utilisé dans cette balise
  */
-include_spip('inc/texte');
-include_spip('inc/lang');
-include_spip('inc/mail');
-include_spip('inc/date');
-include_spip('inc/meta');
-include_spip('inc/session');
-include_spip('inc/filtres');
-include_spip('inc/acces');
-include_spip('inc/documents');
+//include_spip('inc/texte');
+// include_spip('inc/lang');
+// include_spip('inc/mail');
+// include_spip('inc/date');
+// include_spip('inc/meta');
+// include_spip('inc/session');
+// include_spip('inc/filtres');
+// include_spip('inc/acces');
+// include_spip('inc/documents');
 include_spip('inc/ajouter_documents');
-include_spip('inc/getdocument');
+// include_spip('inc/getdocument');
 include_spip('inc/barre');
-include_spip('base/abstract_sql');
+// include_spip('base/abstract_sql');
 
 /* Les includes propre au plugin
  */
 
-// Si SPIP est vieux, charger les fonctions de compatibilité
-if ($GLOBALS['spip_version_code'] < '1.93') include_spip('inc/op_compat.php');
+
+if (version_compare($GLOBALS['spip_version_code'],'1.9300','<'))
+	include_spip('inc/compat_op.php');
 
 include_spip('inc/op_functions'); // fonctions diverses
 
 spip_connect();
 charger_generer_url();
 
-
-
-/* Cette fonction défini la balise, et en particulier les variables à récuperer dans le contexte et à passer à la fonction _stat en appelant    * la fonction "calculer_balise_dynamique". On pourra ainsi récuperer l’id_article d’une boucle englobante ou la langue contenue dans l’url.    *  C’est un peu comme les paramètres que l’on passe à une balise INCLURE spip.
- *
- *  Déclare le nom de la balise et un tableau des variables à récupérer dans le contexte.
- */
-
 function balise_FORMULAIRE_ARTICLE ($p) {
 
-	$p = calculer_balise_dynamique($p,'FORMULAIRE_ARTICLE',array('id_rubrique'));
+	$p = calculer_balise_dynamique($p,'FORMULAIRE_ARTICLE',array());
 	return $p;
 }
 
-
-
-/* Cette fonction reçois deux tableaux :
- *
- *  1. le premier contient les variables collectée avec le tableau cité plus haut ainsi que les paramètres passés directement à la balise.
- *  2. le second reçoit les filtres appliqués à la balise, au cas où on veuille faire un prétraitement dessus (pour récuperer des variables
- *     par exemple).
- *
- * Elle doit retourner soit :
- *
- *  - une chaîne qui représente un message d’erreur
- *  - un tableau qui sera passé à la balise _dyn (contenant des arguments pour la balise, en générale, le paramètre $args)
- */
 
 function balise_FORMULAIRE_ARTICLE_stat($args, $filtres) {
 
@@ -65,33 +44,16 @@ function balise_FORMULAIRE_ARTICLE_stat($args, $filtres) {
 }
 
 
+function balise_FORMULAIRE_ARTICLE_dyn() {
 
-/* c’est ici qu’on met le traitement des données (insertion en base etc).
- *
- * Elle reçoit les valeures retournées par la fonction _stat et doit retourner soit :
- *
- * - un message d’erreur
- * - un tableau représentant un squelette SPIP :
- *        1. le nom du fond (e.g. "formulaires/formulaire_forum")
- *        2. le délais
- *        3. un tableau des paramètres à passer à ce squelette (ensuite accessible par #ENV)
- *
- *  On peut acceder ici aux variables postées par le formulaire en utilisation la fonction _request('name'); et faire des traitements 
- *  en fonction de celles ci pour faire l’insertion en base, envoyer un mail etc...
- */
-
-function balise_FORMULAIRE_ARTICLE_dyn($id_rubrique) {
-
-/* ces variables sont indispensables pour récuperer les documents joints
- */
-
+// ces variables sont indispensables pour récuperer les documents joints
 global $_FILES, $_HTTP_POST_FILES;
 
 // récupération des données de configuration
 $config = lire_config('op');
 
 // si l'auteur anonymous n'est pas dans la base, le plugin openpublishing doit être mal installé
-if(!$config['IDAuteur']) die(_T('opconfig:erreur_die'));
+if(!$config['IDAuteur']) return _T('opconfig:erreur_die');
 
 
 // Les différentes actions que peut faire un utilisateur
@@ -174,7 +136,11 @@ if ($ps) $ps = entites_html($ps);
 if ($abandonner) {
 
 	// suppression des enregistrements éventuellement créé dans la table spip_mot_article
-	if($article) sql_delete("spip_mots_articles", 'id_article = '.sql_quote($article).' LIMIT 1');
+	if($article)
+		sql_delete(
+			array('spip_mots_articles'),
+		 	array('id_article = '.sql_quote($article).' LIMIT 1')
+		);
 	
 	// construction de la page de retour
 	$url_retour = $url_site . $config['UrlAbandon'] ;
@@ -250,25 +216,88 @@ if($valider) {
 		// construction lien URL désactivé
 		//$lien_url = $url_site . 'spip.php?article' . $article;
 		$lien_url = '';
+		
+		sql_insertq(
+			'spip_breves',
+			array(
+				"date_heure" => $date_complete,
+				"titre" => $titre,
+				"texte" => $texte_agenda,
+				"lien_url" => $lien_url,
+				"statut" => $statut,
+				"id_rubrique" => $RubAgenda,
+				"extra" => $extra
+			)
+		);
 
-		sql_insertq('spip_breves', array(
-			"date_heure" => $date_complete,
-			"titre" => $titre,
-			"texte" => $texte_agenda,
-			"lien_url" => $lien_url,
-			"statut" => $statut,
-			"id_rubrique" => $RubAgenda,
-			"extra" => $extra
+		// on recupere l'id de la nouvelle breve
+		$ret = sql_fetch(sql_select(
+			array('MAX(id_breve) as id_breve'),
+			array('spip_breves')
 		));
 
-		sql_delete('spip_articles','id_article = '.sql_quote($article).' LIMIT 1');
+		$breve = $ret['id_breve'];
+
+		// les mots clef liées le sont maintenant a la breve
+		$mots = sql_select (
+			array('id_mot'),
+			array('spip_mots_articles'),
+			array('id_article = '.sql_quote($article))
+			);
+
+		while ($mot = sql_fetch($mots)) {
+			sql_insertq(
+				'spip_mots_breves',
+				array(
+					'id_mot' => $mot['id_mot'],
+					'id_breve' => $breve
+				)
+			);
+		}
+
+		// les images liées le sont maintenant a la breve
+
+		$documents = sql_select (
+			array('id_document'),
+			array('spip_documents_articles'),
+			array('id_article = '.sql_quote($article))
+			);
+
+		while ($document = sql_fetch($documents)) {
+			sql_insertq(
+				'spip_documents_breves',
+				array(
+					'id_document' => $document['id_document'],
+					'id_breve' => $breve
+				)
+			);
+		}
+
+		sql_delete (
+			array('spip_documents_articles'),
+			array('id_article = '.sql_quote($article))
+		);
+
+		sql_delete (
+			array('spip_mots_articles'),
+			array('id_article = '.sql_quote($article))
+		);
+
+		sql_delete(
+			array('spip_articles'),
+			array('id_article = '.sql_quote($article).' LIMIT 1')
+		);
 	}
 	else if ($flag_ok== 'ok') { // soit il s'agit d'un article, soit d'une breve. Les deux à la fois ne sont pas possible
 
 		// préparation de la mise en base de donnée
 
 		// on recupere le secteur et la langue associée
-		$row = sql_fetsel('lang, id_secteur', 'spip_rubriques', 'id_rubrique='.sql_quote($rubrique));
+		$row = sql_fetch(sql_select(
+			array('lang, id_secteur'),
+			array('spip_rubriques'),
+			array('id_rubrique='.sql_quote($rubrique))
+			));
 		$id_secteur = $row['id_secteur'];
 		$lang_rub = $row['lang'];
 	
@@ -295,29 +324,32 @@ if($valider) {
 		);
 		$extra=serialize($extra);
 
-		sql_update('spip_articles', array(
-			"titre" => sql_quote($titre),
-			"id_rubrique" => sql_quote($rubrique),
-			"surtitre" => sql_quote($surtitre),
-			"soustitre" => sql_quote($soustitre),
-			"chapo" => sql_quote($chapo),
-			"descriptif" => sql_quote($descriptif),
-			"ps" => sql_quote($ps),
-			"texte" => sql_quote($texte),
-			"statut" => sql_quote($statut),
-			"lang" => sql_quote($lang),
-			"id_secteur" => sql_quote($id_secteur),
-			"date" => "NOW()",
-			"date_redac" => "NOW()",
-			"date_modif" => "NOW()",
-			"extra" => sql_quote($extra)
-			),
-			 "id_article=".sql_quote($article));
+		sql_update(
+			'spip_articles',
+			array(	"titre" => sql_quote($titre),
+				"id_rubrique" => sql_quote($rubrique),
+				"surtitre" => sql_quote($surtitre),
+				"soustitre" => sql_quote($soustitre),
+				"chapo" => sql_quote($chapo),
+				"descriptif" => sql_quote($descriptif),
+				"ps" => sql_quote($ps),
+				"texte" => sql_quote($texte),
+				"statut" => sql_quote($statut),
+				"lang" => sql_quote($lang),
+				"id_secteur" => sql_quote($id_secteur),
+				"date" => "NOW()",
+				"date_redac" => "NOW()",
+				"date_modif" => "NOW()",
+				"extra" => sql_quote($extra)),
+			 array("id_article=".$article)
+		);
 
-		sql_insertq('spip_auteurs', array(
-			'id_auteur' => sql_quote($config['IDAuteur']),
-			'id_article' => sql_quote($article)
-			));	
+		sql_insertq(
+			'spip_auteurs_articles',
+			array(
+				'id_auteur' => $config['IDAuteur'],
+				'id_article' => $article)
+		);
 	}
 	
 	if ($flag_ok == 'ok') {
@@ -340,8 +372,8 @@ if($valider) {
 // statut de l'article : en préparation
 $statut="prepa";
 	
-// si l'auteur demande la prévisualisation
 
+// si l'auteur demande la prévisualisation
 if($previsualiser) {
 
 	// vérification taille du titre : si x caractère ou moins : erreur
@@ -368,14 +400,10 @@ if($previsualiser) {
 			'titre' => interdire_scripts(typo($titre)),
 			'texte' => propre($texte),
 			'erreur' => $erreur,
-			'nom_inscription' => $nom_inscription,
-			'mail_inscription' => $mail_inscription
+			'nom_inscription' => interdire_scripts(typo($nom_inscription)),
+			'mail_inscription' => interdire_scripts(typo($mail_inscription))
 		)
 	), false);
-
-	// aucune idée de ce que c'est, mais ça à l'air important
-	$formulaire_previsu = preg_replace("@<(/?)f(orm[>[:space:]])@ism",
-	"<\\1no-f\\2", $formulaire_previsu);
 }
 	
 // si l'auteur demande des mots-clefs
@@ -383,15 +411,22 @@ if($mots) {
 	if ($motschoix){
 		foreach($motschoix as $mot){
 			//protection contre mots-clefs vide
-			$row = sql_fetsel('titre', 'spip_mots', "id_mot=$mot LIMIT 1");
+			$row = sql_fetch(sql_select(
+				array('titre'),
+				array('spip_mots'),
+				array('id_mot='.$mot.' LIMIT 1'))
+				);
+
 			$titremot = $row['titre'];
 			if (!(strcmp($titremot,"")==0)) {
 				if ($mot) {
 					// on lie l'article aux mots clefs choisis
-					sql_insertq('spip_mots_articles', array(
-						'id_mot' => sql_quote($mot),
-						'id_article' => sql_quote($article)
-						));
+					sql_insertq(
+						'spip_mots_articles',
+						array(
+							'id_mot' => $mot,
+							'id_article' => $article)
+					);
 				}
 			}
 		}
@@ -435,20 +470,17 @@ if($media) {
 	
 		// renomme les extensions
 		if (strcmp($type_ext,"jpeg")==0) $type_ext = "jpg";
+		// attention a la case : tout en minuscule
+		$type_ext = strtolower($type_ext);
+		
+		$return = sql_fetch(sql_select(
+			array('extension'),
+			array('spip_types_documents'),
+			array('extension = '.sql_quote($type_ext))
+			));
+		if ($return['extension'] == $type_ext) {
+
 			
-		$tab_ext = get_types_documents();
-
-		$ok = 0;
-
-		// test si l'extension est autorisé
-		while ($row = mysql_fetch_array($tab_ext)) {
-			if (strcmp($row[0],$type_ext)==0) {
-				$ok = 1;
-			}
-		}
-
-		// ajout du document
-		if ($ok==1) {
 			inc_ajouter_documents_dist ($tmp, $fichier, "article", $article, $type_doc, $id_document, $documents_actifs);
 		}
 		else { // sinon, erreur
@@ -481,7 +513,6 @@ if ($config['DocInc'] == 'yes') {
 	array('formulaires/formulaire_documents',	0,
 		array(
 			'id_article' => $article,
-			'tab_ext' => get_types_documents(),
 			'bouton' => $bouton,
 		)
 	), false);
@@ -571,11 +602,6 @@ if ($config['PostScriptum'] == 'yes') {
 		)
 	), false);
 }
-
-
-// Liste des documents associés à l'article
-
-op_liste_vignette($article);
 
 // le bouton valider
 
