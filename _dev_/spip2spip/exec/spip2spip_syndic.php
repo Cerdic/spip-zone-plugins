@@ -169,7 +169,7 @@ function exec_spip2spip_syndic(){
   				        spip_query($sql3);
   				        $id_nouvel_article = spip_insert_id();
   				        echo "<a href='?exec=articles&amp;id_article=$id_nouvel_article' style='padding:5px;border:1px solid;background:#ddd;display: block;'>"._T('spiptospip:imported_view')."</a>";
-                  $mailLog .= $article['titre'] ."\n"._T('spiptospip:imported_view').": ".$GLOBALS['meta']['adresse_site']."/ecrire/articles.php?id_article=$id_nouvel_article \n\n";
+                  $mailLog .= $article['titre'] ."\n"._T('spiptospip:imported_view').": ".$GLOBALS['meta']['adresse_site']."/ecrire/?exec=articles&id_article=$id_nouvel_article \n\n";
   				                      			        
                   // ... dans la table auteurs
   				        if ($_id_auteur) {

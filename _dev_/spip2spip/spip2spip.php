@@ -159,7 +159,7 @@ function cron_spip2spip($t) {
   				        $sql3.="VALUES( '$_lang','$_surtitre','$_titre','$_soustitre',$_id_rubrique,'$_descriptif','$_chapo','$_texte','$_ps','$_statut','pos','$_date')";
   				        spip_query($sql3);
   				        $id_nouvel_article = spip_insert_id();
-  				        $mailLog .= $article['titre'] ."\n"._T('spiptospip:imported_view').": ".$GLOBALS['meta']['adresse_site']."/ecrire/articles.php?id_article=$id_nouvel_article \n\n";
+  				        $mailLog .= $article['titre'] ."\n"._T('spiptospip:imported_view').": ".$GLOBALS['meta']['adresse_site']."/ecrire/?exec=articles&id_article=$id_nouvel_article \n\n";
   				                      			        
                   // ... dans la table auteurs
   				        if ($_id_auteur) {
