@@ -8,7 +8,8 @@ function fragahah_insert_head($flux){
 
 // ajouter les fragments sur la pagination !
 function critere_pagination($idb, &$boucles, $crit) {
-	critere_pagination($idb,$boucles,$crit);
+	critere_pagination_dist($idb,$boucles,$crit);
+	$boucle = &$boucles[$idb];
 	if (!isset($boucle->modificateur['fragment']))
 		$boucle->modificateur['fragment'] = 'fragment_'.$boucle->descr['nom'].$idb;
 }
