@@ -55,7 +55,7 @@ function cs_rempl_glossaire($texte) {
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
 	while($mot = $fetch($r)) if ($mot['id_mot']<>$GLOBALS['id_mot']) {
 		// prendre en compte les formes du mot : architrave/architraves
-		$a = explode('/', $mot['titre']);
+		$a = explode('/', extraire_multi($mot['titre']));
 		$id = $mot['id_mot'];
 		$les_mots = array();
 		foreach ($a as $m) {
