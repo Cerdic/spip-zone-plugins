@@ -8,6 +8,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 if (empty($GLOBALS['champs_extra']['articles']))
 	$GLOBALS['champs_extra']['articles'] = Array();
 
+// si les extra de la table que l'on veut etendre sont vide faut creer le tableau
+if (empty($GLOBALS['champs_extra']['breves']))
+	$GLOBALS['champs_extra']['breves'] = Array();
+
 $GLOBALS['champs_extra']['articles']['OP_pseudo'] = "ligne|propre|pseudonyme du r&eacute;dacteur";
 $GLOBALS['champs_extra']['articles']['OP_mail'] = "ligne|propre|mail du r&eacute;dacteur";
 $GLOBALS['champs_extra']['breves']['OP_pseudo'] = "ligne|propre|pseudonyme du r&eacute;dacteur";
