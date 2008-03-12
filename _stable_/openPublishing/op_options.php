@@ -10,5 +10,7 @@ if (empty($GLOBALS['champs_extra']['articles']))
 
 $GLOBALS['champs_extra']['articles']['OP_pseudo'] = "ligne|propre|pseudonyme du r&eacute;dacteur";
 $GLOBALS['champs_extra']['articles']['OP_mail'] = "ligne|propre|mail du r&eacute;dacteur";
+$GLOBALS['champs_extra']['breves']['OP_pseudo'] = "ligne|propre|pseudonyme du r&eacute;dacteur";
+$GLOBALS['champs_extra']['breves']['OP_mail'] = "ligne|propre|mail du r&eacute;dacteur";
 
 ?>
