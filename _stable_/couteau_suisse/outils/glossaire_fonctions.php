@@ -55,7 +55,7 @@ function cs_rempl_glossaire($texte) {
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
 	while($mot = $fetch($r)) if ($mot['id_mot']<>$GLOBALS['id_mot']) {
 		// prendre en compte les formes du mot : architrave/architraves
-		$a = explode('/', extraire_multi($mot['titre']));
+		$a = explode('/', $titre = extraire_multi($mot['titre']));
 		$id = $mot['id_mot'];
 		$les_mots = array();
 		foreach ($a as $m) {
@@ -65,7 +65,6 @@ function cs_rempl_glossaire($texte) {
 			$les_mots = array_merge($les_mots, array(
 				htmlentities($m), $u, unicode_to_utf_8($u), unicode2charset($u), $m));
 		}
-		$m = $mot['titre'];
 		$les_mots = array_unique($les_mots);
 		array_walk($les_mots, 'cs_preg_quote');
 		$les_mots = join('|', $les_mots);
@@ -85,8 +84,8 @@ function cs_rempl_glossaire($texte) {
 			$GLOBALS['toujours_paragrapher'] = $mem;
 			$table1[$id] = "<a name=\"mot$id\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"gl_mot\">";
 			$table2[$id] = defined('_GLOSSAIRE_JS')
-				?'</span><span class="gl_js" title="'.htmlspecialchars($m).'"></span><span title="'.htmlspecialchars($definition).'"></span></a>'
-				:"</span><span class=\"gl_dl\"><span class=\"gl_dt\">$m</span><span class=\"gl_dd\">$definition</span></span></a>";
+				?'</span><span class="gl_js" title="'.htmlspecialchars($titre).'"></span><span title="'.htmlspecialchars($definition).'"></span></a>'
+				:"</span><span class=\"gl_dl\"><span class=\"gl_dt\">$titre</span><span class=\"gl_dd\">$definition</span></span></a>";
 			// a chaque mot reconnu, on pose une balise temporaire	
 			$texte = preg_replace(",(\W)($les_mots)(\W),i", "\\1@@GLOSS\\2#$id@@\\3", $texte, $limit);
 		}
