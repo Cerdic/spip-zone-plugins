@@ -13,8 +13,9 @@ function Auteur_forum_affichage_final($flux){
 <script type="text/javascript"><!--
 if (window.jQuery) jQuery(document).ready(function(){
  form = $form;
- auteur = jQuery('#$auteur');
-// label = auteur.prev();
+ // SPIP 1.93 remplace 'auteur' par 'session_nom'
+ auteur = jQuery('#session_nom');
+ if(!auteur.length) auteur = jQuery('#auteur');
  if(form.length && auteur.length)
  	// eviter les forums anonymes
 	form.bind('submit', function(event){
@@ -22,8 +23,6 @@ if (window.jQuery) jQuery(document).ready(function(){
 			alert($nom);
 			auteur.focus();
 			auteur.attr('style','border-color:#E86519;');
-//			label.attr('style','color:#E86519;');
-//			label.color("#E86519");
 			return false;
 		}
 	});
