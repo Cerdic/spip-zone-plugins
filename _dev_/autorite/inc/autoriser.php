@@ -65,21 +65,6 @@ include _DIR_RESTREINT.'inc/autoriser.php';
 // Les FONCTIONS
 //
 
-##
-## Dire aux crayons si les visiteurs anonymes ont des droits
-##
-if (($GLOBALS['autorite']['espace_wiki']
-AND $GLOBALS['autorite']['espace_wiki_anonyme']) OR (
-    $GLOBALS['autorite']['espace_wiki_motsclef'] 
-AND $GLOBALS['autorite']['espace_wiki_motsclef_anonyme'])) {
-	if (!function_exists('analyse_droits_rapide')) {
-	function analyse_droits_rapide() {
-		return true;
-	}
-	}
-	else
-		$autorite_erreurs[] = 'analyse_droits_rapide';
-}
 
 
 ##
