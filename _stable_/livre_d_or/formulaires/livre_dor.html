@@ -1,0 +1,58 @@
+[(#REM)
+
+	// formulaires/livre_dor.html
+	
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+
+]
+<!-- formulaire livre d or (lido) -->
+<div class="formulaire_spip formulaire_livre_dor">
+<a id="formulaire_livre_dor#ENV{id}" name="formulaire_livre_dor#ENV{id}"></a>
+
+[<p class="reponse_formulaire">(#ENV*{texteko})</p>]
+
+[<fieldset class="reponse_formulaire">
+<legend><:lido:votre_commentaire_:></legend>
+<p>(#ENV*{commentaire_envoye})</p>
+</fieldset>]
+
+[(#REM) 
+	==============================
+	Pas encore enregistré ?
+	==============================
+][(#ENV**{commentaire_envoye}|?{'',' '})
+
+<form action="#SELF#formulaire_livre_dor#ENV{id}" method="post">
+[<input type="hidden" name="num_formulaire_livre_dor" value="(#ENV{id})" />]
+
+[(#REM) 
+	==============================
+	Previsualisation
+	==============================
+][<fieldset class="previsu">
+<legend><:previsualisation:></legend>
+[<p class='commentaire'>(#ENV{texte}|nl2br)</p>]
+[<p class='signature'>(#ENV{signature}|nl2br)</p>]
+<p class="spip_bouton" style="text-align:#ENV{bouton_align}"><input type="submit" name="confirmer#ENV{id}" value="(#ENV{bouton_confirmation})" /></p>
+</fieldset>]
+
+[(#REM) 
+	==============================
+	Formulaire de saisie/correction 
+	==============================
+]<fieldset>
+<legend><:lido:votre_commentaire_:></legend>
+<p><label for="texte#ENV{id}"><:lido:entrez_texte:></label>
+<textarea class="forml" name="texte#ENV{id}" id="texte#ENV{id}" rows="10" cols="40" style='line-height:1.4em;font-size:100%;width:99%'>#ENV{texte}</textarea></p>
+<p><label for="signature#ENV{id}"><:lido:votre_signature_:></label>
+<input type="text" class="forml" name="signature#ENV{id}" id="signature#ENV{id}" value="#ENV{signature}" size="15" style="line-height:1.4em;font-size:100%;" /></p>
+
+[<p class="spip_bouton" style="text-align:#ENV{bouton_align}"><input type="submit" name="valide" value="(#ENV{bouton})" /></p>]
+</fieldset>
+
+</form>
+]
+
+</div>
