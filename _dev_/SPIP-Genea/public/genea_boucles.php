@@ -39,6 +39,17 @@ function boucle_GENEA_INDIVIDUS_dist($id_boucle, &$boucles) {
 }
 
 //
+// <BOUCLE(GENEA_FAMILLES)>
+//
+function boucle_GENEA_FAMILLES_dist($id_boucle, &$boucles) {
+	global $table_prefix;
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$boucle->from[$id_table] = $table_prefix.'_genea_familles';
+	return calculer_boucle($id_boucle, $boucles);
+}
+
+//
 // <BOUCLE(GENEA_EVT)>
 //
 function boucle_GENEA_EVT_dist($id_boucle, &$boucles) {
@@ -63,10 +74,39 @@ function boucle_GENEA_SOURCES_dist($id_boucle, &$boucles) {
 // -- Definition de criteres supplementaires ----------------------------
 
 //
+// {conjoint=id_individu} permet de retrouver la fiche famille d'une
+// personne et donc son conjoint et ses enfants.
+//
+
+function critere_conjoint($idb, &$boucles, $crit){
+//	global $table_prefix;
+	$op='';
+	$boucle = &$boucles[$idb];
+	$params = $crit->param;
+	$type = array_shift($params);
+	$type = $type[0]->texte;
+	if(preg_match(',^(\w+)([<>=])([0-9]+)$,',$type,$r)){
+		$type=$r[1];
+		$op=$r[2];
+		$op_val=$r[3];
+	}
+	print_r ($r);
+	echo '</br>';
+	echo "$type - $op - $op_val";
+
+	$table = $boucle->id_table;
+//	$champ = $boucle->id_table . '.' . $type;
+//	$boucle->where[] = '(\''. $boucle->id_table .'.id_epoux\'='.$op_val.' OR \''. $boucle->id_table .'.id_epouse\'='.$op_val.')';
+	$boucle->where[] = '(\''. $table . '.id_epoux\'=' . $op_val .' OR \'' . $table . '.id_epouse\'=' . $op_val . ')';
+
+//	$boucles[$idb]->group[] = $champ;
+}
+
+//
 // {importance xxx} permet de classer par importance un champ de la table
 //
 function critere_importance($idb, &$boucles, $crit){
-	global $table_prefix;
+//	global $table_prefix;
 	$op='';
 	$boucle = &$boucles[$idb];
 	$params = $crit->param;

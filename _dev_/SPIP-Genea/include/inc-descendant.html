@@ -1,22 +1,28 @@
-<B_descendant>
 <h3 class="spip"><:genea:descendance:></h3>
 <ul class"spip">
-<BOUCLE_descendant(GENEA_INDIVIDUS){id_pere ?}{id_mere ?}{par id_pere, id_mere}>
-	<B_enfant>
-	<li>
-		[(#ENV{id_mere}|>{0}|?{'', ' '}) <INCLUDE{fond=include/inc-individu}{id_individu=#ID_MERE}>]
-		[(#ENV{id_mere}|>{0}|?{' '}) <INCLUDE{fond=include/inc-individu}{id_individu=#ID_PERE}>]
+<BOUCLE_epouse(GENEA_FAMILLES){id_epoux=#ENV{id_individu}}>
+	<B_enfant1>
+	<li>[(#ID_EPOUSE|?{' '}) [(#ID_EPOUSE|>{0}|?{' ', <:genea:mere_inconnue:>}) <INCLUDE{fond=include/inc-individu}{id_individu=#ID_EPOUSE}>]]
 		<ul class"spip">
-		<BOUCLE_enfant(GENEA_INDIVIDUS){id_pere}{id_mere}{doublons}>
+		<BOUCLE_enfant1(GENEA_INDIVIDUS){id_famille}{id_genea}{par position}>
 			<li><INCLUDE{fond=include/inc-individu}{id_individu}></li>
-		</BOUCLE_enfant>
+		</BOUCLE_enfant1>
 		</ul>
 	</li>
-	</B_enfant>
-</BOUCLE_descendant>
+	</B_enfant1>
+</BOUCLE_epouse>
+	<BOUCLE_epoux(GENEA_FAMILLES){id_epouse=#ENV{id_individu}}>
+		<B_enfant2>
+		<li>[(#ID_EPOUX|?{' '})[(#ID_EPOUX|>{0}|?{' ', <:genea:pere_inconnu:>}) <INCLUDE{fond=include/inc-individu}{id_individu=#ID_EPOUX}>]]
+			<ul class"spip">
+			<BOUCLE_enfant2(GENEA_INDIVIDUS){id_famille}{id_genea}{par position}>
+				<li><INCLUDE{fond=include/inc-individu}{id_individu}></li>
+			</BOUCLE_enfant2>
+			</ul>
+		</li>
+		</B_enfant2>
+	</BOUCLE_epoux>
+		<li><:genea:aucune_descendance:></li>
+	<//B_epoux>
+<//B_epouse>
 </ul>
-</B_descendant>
-<ul class"spip">
-	<li><:genea:aucune_descendance:></li>
-</ul>
-<//B_descendant>

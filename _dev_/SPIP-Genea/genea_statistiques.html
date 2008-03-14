@@ -62,30 +62,29 @@
                     	[<li class="spip">(#SEXE|gtraduc) : #IMPORTANCE</li>]
     	            </BOUCLE_genea_indiv>
 	       			</ul>
-               </li>
-               </B_genea_indiv>
-               <BOUCLE_genea_pat(GENEA_INDIVIDUS){id_genea}{par patronyme}{fusion patronyme}></BOUCLE_genea_pat><li class="spip"><:genea:nbre_patronyme:> : #TOTAL_BOUCLE</li><//B_genea_pat>
-               <!--< BOUCLE_genea_union(GENEA_UNIONS){id_genea}></BOUCLE_genea_union>--><li class="spip"><:genea:nbre_union:> : X<!--<//B_genea_union>-->
-			   	<ul class="spip">
-				<li class="spip"><:genea:marr:> : X</li>
-				<li class="spip"><:genea:conc:> : X</li>
-				<li class="spip"><:genea:ulib:> : X</li>
-				<li class="spip"><:genea:pacs:> : X</li>
-			   	</ul>
-			   	</li>
-               <li class="spip"><:genea:nbre_filiation:> : X</li>
-               <li class="spip"><:genea:nbre_lieu:> : X
-                  <ul class="spip">
-                     <li class="spip">France : X</li>
-                     <li class="spip">Belgique : X</li>
-                  </ul>
-               </li>
-               <li class="spip"><:genea:nbre_evenement:> : X</li>
-               <li class="spip"><:genea:nbre_source:> : X</li>
-            </ul>
-         </div>
+				</li>
+				</B_genea_indiv>
+				<BOUCLE_genea_pat(GENEA_INDIVIDUS){id_genea}{par patronyme}{fusion patronyme}></BOUCLE_genea_pat><li class="spip"><:genea:nbre_patronyme:> : #TOTAL_BOUCLE</li><//B_genea_pat>
+				<BOUCLE_genea_union_total(GENEA_FAMILLES){id_genea}></BOUCLE_genea_union_total><li class="spip"><:genea:nbre_union:> : #TOTAL_BOUCLE<//B_genea_union_total>
+					<ul class="spip">
+	            	<BOUCLE_genea_union(GENEA_FAMILLES){id_genea}{importance type_union}>
+                    	[<li class="spip">(#TYPE_UNION|gtraduc) : #IMPORTANCE</li>]
+    	            </BOUCLE_genea_union>
+			   		</ul>
+				</li>
+				<li class="spip"><:genea:nbre_filiation:> : X</li>
+				<li class="spip"><:genea:nbre_lieu:> : X
+					<ul class="spip">
+						<li class="spip">France : X</li>
+						<li class="spip">Belgique : X</li>
+					</ul>
+				</li>
+				<li class="spip"><:genea:nbre_evenement:> : X</li>
+				<li class="spip"><:genea:nbre_source:> : X</li>
+			</ul>
+		</div>
 
-      </div><!-- fin contenu -->
+	</div><!-- fin contenu -->
 
       [(#REM) Menu de navigation laterale ]
       <div id="navigation">

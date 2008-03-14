@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // 'boite_info_creer' => "Cette page vous permet de cr&eacute;er un nouvel arbre g&eacute;n&eacute;alogique.",
 // 'boite_info_modifier' => "Cette page vous permet de modifier un d&eacute;j&agrave; existant.",
 'boite_info_voir' => "Cette page vous permet de visualiser les diff&eacute;rentes informations contenues dans un arbre.",
+'brum' => "brumaire",
 'buri' => "Inhumation - S&eacute;pulture",
 
 // C
@@ -86,8 +87,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fam' => "Famille",
 'fcom' => "Premi&egrave;re communion",
 'filiation' => "Filiation",
+'flor' => "flor&eacute;al",
+'freres_soeurs' => "Freres/S&oelig;urs",
+'frim'=>"frimaire",
+'fruc' => "fructidor",
 
 // G
+'germ' => "germinal",
 'grad' => "Dipl&ocirc;me ou certificat",
 
 // H
@@ -127,6 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'marr' => "Mariage",
 'mars' => "Convention ou contrat avant mariage",
 'mere' => "M&egrave;re",
+'mess' => "messidor",
 'mlle' => "Mademoiselle",
 'mlle_court' => "Mlle",
 'mme' => "Madame",
@@ -136,8 +143,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // N
 'nati' => "Nationalit&eacute;",
 'natu' => "Naturalisation",
-'no_arbre' => "Aucun arbre de cr&eacute;er",
-'no_patronyme' => "Tous les patronymes",
 'nbre_evenement' => "Nombre d'&eacute;v&egrave;nements",
 'nbre_filiation' => "Nombre de filiations",
 'nbre_individu' => "Nombre d'individus",
@@ -145,6 +150,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nbre_patronyme' => "Nombre de patronymes",
 'nbre_source' => "Nombre de sources",
 'nbre_union' => "Nombre d'unions",
+'nivo' => "niv&ocirc;se",
+'no_arbre' => "Aucun arbre de cr&eacute;er",
+'no_patronyme' => "Tous les patronymes",
 'nom_plugin' => "Genea-SPIP",
 
 // O
@@ -157,6 +165,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'patronyme' => "Patronyme",
 'pere' => "P&egrave;re",
 'plac' => "",
+'pluv' => "pluvi&ocircse",
+'prai' => "prairal",
 'precision_' => "le",
 'precision__court' => "en",
 'precision_a' => "avant le",
@@ -203,6 +213,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'text_pied_2' => "nous contacter",
 'texte_en_attente' => "Les arbres contenus dans cette liste sont en attente d'affectation &agrave; une rubrique. Vous pouvez tout de m&ecirc;me cr&eacute;er et g&eacute;rer des individus mais ceux-ci ne seront pas visible dans la partie publique.",
 'texte_encart_rubrique' => "Modification des informations contenues dans l'arbre g&eacute;n&eacute;alogique joint à cette rubrique.",
+'ther' => "thermidor",
 'titl' => "Titre de noblesse ou honorifique",
 'titre' => "Gestion des g&eacute;n&eacute;alogies",
 'titre_arbres_attente' => "Vos arbres en attente",
@@ -217,6 +228,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'union' => "Unions",
 
 // V
+'vend' => "vend&eacute;miaire",
+'vent' => "vent&ocirc;se",
 
 // W
 'will' => "Testament"

@@ -15,16 +15,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/genea_base');
 include_spip('base/create');
 include_spip('inc/filtres');
+include_spip('inc/genea_date');
+
 
 //
 // GESTION DES DATES
 //
 
 // -- Recupere et verif le droit a l'affichage des dates ----------------
+/*
 function genea_date_evt($id_individu, $type_evt, $fin=false, $second=false){
 	global $table_prefix;
 
 	include_spip('inc/genea_autoriser');
+	$auteur_ok = autoriser('voirfiche', 'genea', $id_individus);
+
+	if (!$auteur_ok) return '';
 
 	$date_evt = '';
 	$date_ret = '';
@@ -56,24 +62,27 @@ function genea_date_evt($id_individu, $type_evt, $fin=false, $second=false){
 	// pour les redacteurs et les administrateurs autorises.
 	$maintenant = getdate();
 	$centans = intval($maintenant["year"])-100;
-	if (($centans>=date("Y", strtotime(normaliser_date($date_evt)))) OR autoriser('voirfiche', 'genea', $id_individus)) $date_ret = $date_evt;
+	if ($centans>=date("Y", strtotime(normaliser_date($date_evt))) OR $auteur_ok) $date_ret = $date_evt;
 
 	return vider_date(normaliser_date($date_ret));
 }
-
+*/
 // -- Affiche la date de deces  -----------------------------------------
+/*
 function balise_DATE_DECES($p){
 	$p->code = "genea_date_evt(".champ_sql('id_individu',$p).", 'deat')";
 	$p->interdire_scripts = true;
 	return $p;
-}
+}*/
 
 // -- Affiche la date de naissance --------------------------------------
+/*
 function balise_DATE_NAISSANCE($p){
 	$p->code = "genea_date_evt(".champ_sql('id_individu',$p).", 'birt')";
 	$p->interdire_scripts = true;
 	return $p;
 }
+*/
 
 // -- Recherche le numero SOSA d'un invidu ------------------------------
 function trouve_sosa($id_individu){

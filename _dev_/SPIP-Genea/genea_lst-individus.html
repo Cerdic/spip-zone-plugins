@@ -63,7 +63,7 @@
 						<td class="logo_genea">[(#LOGO_INDIVIDU||image_reduire{17,17})]</td>
 						<td class="logo_genea"><img src="#CHEMIN{img_pack/#SEXE.gif}" width="17" height="17" /></td>
 						<td class="logo_genea">[(#LOGO_NOTE||image_reduire{17,17})]</td>
-						<td><a href="[(#URL_PAGE{genea_individus}|parametre_url{id_individu,#ID_INDIVIDU})]" class="spip_in">[(#CIVILITE|abreviation) ][(#PATRONYME|ucfirst) ][(#PRENOMS|ucfirst)]</a></td>
+						<td><a href="[(#URL_PAGE{genea_individus}|parametre_url{id_individu,#ID_INDIVIDU})]" class="spip_in">[(#CIVILITE|abreviation) ][(#PATRONYME|majuscule) ][(#PRENOMS|majuscule)]</a><em>[ o (#DATE_NAISSANCE|affdate{'Y'})][(#DATE_NAISSANCE|?{' '})[(#DATE_DECES|?{' '}) &hellip; ]][ &dagger; (#DATE_DECES|affdate{'Y'})]</em></td>
 					</tr>
 				</BOUCLE_individus>
 				</tbody>

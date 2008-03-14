@@ -30,18 +30,18 @@ global
    $tables_genea;
 
 // -- Numero de version de la base installee ----------------------------
-$GLOBALS['version_base_genea'] = "1.0";
+$GLOBALS['version_base_genea'] = "1.01";
 
 // -- Liste des differentes tables utilisees par le plugin --------------
 $tables_genea = array(
    $table_prefix."_genea",
    $table_prefix."_genea_individus",
+   $table_prefix."_genea_familles",
    $table_prefix."_genea_sosa",
    $table_prefix."_genea_evt",
    $table_prefix."_genea_sources",
    $table_prefix."_genea_doc_sources",
-   $table_prefix."_genea_notes",
-   $table_prefix."_genea_unions");
+   $table_prefix."_genea_notes");
 
 // -- Definition de la table genea --------------------------------------
 $spip_genea =  array(
@@ -59,25 +59,26 @@ $tables_principales[$table_prefix.'_genea'] = array(
 $table_des_tables['genea'] = "genea";
 $table_primary['genea'] = "id_genea";
 
-// -- Definition de la table individu -----------------------------------
+// -- Definition de la table individus -----------------------------------
 $spip_genea_individus = array(
-     "id_individu" => "BIGINT(21) NOT NULL AUTO_INCREMENT",
-     "patronyme" => "VARCHAR(255) NOT NULL",
-     "prenoms" => "VARCHAR(255) NOT NULL",
-     "surnom" => "VARCHAR(255) NOT NULL",
-     "sexe" => "ENUM('i', 'h', 'f') DEFAULT 'i' NOT NULL",
-     "civilite" => "VARCHAR(4) NOT NULL",
-     "id_genea" => "BIGINT(21) DEFAULT '0' NOT NULL",
-     "id_pere" => "BIGINT(21) DEFAULT '0' NOT NULL",
-     "id_mere" => "BIGINT(21) DEFAULT '0' NOT NULL",
-     "date_creat" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
+	"id_individu" => "BIGINT(21) NOT NULL AUTO_INCREMENT",
+	"patronyme" => "VARCHAR(255) NOT NULL",
+	"prenoms" => "VARCHAR(255) NOT NULL",
+	"surnom" => "VARCHAR(255) NOT NULL",
+	"sexe" => "ENUM('i', 'h', 'f') DEFAULT 'i' NOT NULL",
+	"civilite" => "VARCHAR(4) NOT NULL",
+	"id_genea" => "BIGINT(21) DEFAULT '0' NOT NULL",
+	"id_famille" => "BIGINT(21) DEFAULT '0' NOT NULL",
+	"position" => "INT(10) DEFAULT '0' NOT NULL",
+    "type_filiation" => "VARCHAR(4) NULL DEFAULT NULL",
+	"date_creat" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
 
 $spip_genea_individus_key = array(
-     "PRIMARY KEY" => "id_individu",
-     "KEY patronyme" => "patronyme",
-     "KEY id_genea" => "id_genea",
-     "KEY id_pere" => "id_pere",
-     "KEY id_mere" => "id_mere");
+	"PRIMARY KEY" => "id_individu",
+	"KEY patronyme" => "patronyme",
+	"KEY id_genea" => "id_genea",
+	"KEY id_pere" => "id_pere",
+	"KEY id_mere" => "id_mere");
 
 $tables_principales[$table_prefix.'_genea_individus'] = array(
    'field' => &$spip_genea_individus,
@@ -89,18 +90,42 @@ $table_primary['genea_individus'] = "id_individu";
 //$tables_jointures['rubriques'][] = 'genea';
 //$tables_jointures['genea_individus'][] = 'genea';
 
+// -- Définition de la table familles -----------------------------------
+$spip_genea_familles = array (
+	"id_famille" => "BIGINT(21) NOT NULL AUTO_INCREMENT",
+	"id_epoux" => "BIGINT(21) NULL DEFAULT NULL",
+	"id_epouse" => "BIGINT(21) NULL DEFAULT NULL",
+	"type_union" => "VARCHAR(4) NOT NULL",
+	"nbre_enfants" => "INT(10) DEFAULT '0' NOT NULL",
+	"id_genea" => "BIGINT(21) DEFAULT '0' NOT NULL",
+	"date_creat" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
+
+$spip_genea_familles_key = array(
+     "PRIMARY KEY" => "id_famille",
+     "KEY id_epoux" => "id_epoux",
+     "KEY id_epouse" => "id_epouse");
+
+$tables_principales[$table_prefix.'_genea_familles'] = array(
+   'field' => &$spip_genea_familles,
+   'key' => &$spip_genea_familles_key);
+
+$table_des_tables['genea_familles'] = "genea_familles";
+$table_primary['genea_familles'] = "id_famille";
+
 // -- Definition de la table de nurmerotation SOSA ----------------------
 $spip_genea_sosa =  array(
      "id_sosa" =>    "BIGINT(21) DEFAULT '0' NOT NULL",
+     "id_genea" => "BIGINT(21) DEFAULT '0' NOT NULL",
      "id_individu" => "BIGINT(21) DEFAULT '0' NOT NULL");
 
 $spip_genea_sosa_key = array(
-   "PRIMARY KEY" => "id_sosa",
-   "KEY id_individu" => "id_individu");
+	"PRIMARY KEY" => "id_sosa",
+	"KEY id_genea" => "id_genea",
+	"KEY id_individu" => "id_individu");
 
 $tables_principales[$table_prefix.'_genea_sosa'] = array(
-   'field' => &$spip_genea_sosa,
-   'key' => &$spip_genea_sosa_key);
+	'field' => &$spip_genea_sosa,
+	'key' => &$spip_genea_sosa_key);
 
 $table_des_tables['genea_sosa'] = "genea_sosa";
 $table_primary['genea_sosa'] = "id_sosa";

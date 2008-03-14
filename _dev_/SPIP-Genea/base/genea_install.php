@@ -19,7 +19,9 @@ include_spip('base/genea_base');
 // Creation et mise a jour des tables necessaires a SPIP-GENEA
 function genea_upgrade_tables($version_installee) {
 	include_spip('base/create');  // definir la fonction
+	include_spip('base/genea_data');
 	creer_base();
+	rempli_base();
 	echo "<p><strong>"._T('genea:nom_plugin')." :</strong><br />"._T('genea:install_ok')."</p>";
 	ecrire_meta('genea_version', $GLOBALS[version_base_genea]);
 	ecrire_metas();
@@ -48,8 +50,8 @@ function genea_efface_tables(){
 
 function genea_install($action){
 
-	switch ($action) {  
-	
+	switch ($action) {
+
 		// Test si les tables ont deja ete installees et elles sont de la bonne version
 		case 'test':
 			return (isset($GLOBALS['meta']['genea_version']) AND version_compare($GLOBALS['meta']['genea_version'],$GLOBALS['version_base_genea'],'='));

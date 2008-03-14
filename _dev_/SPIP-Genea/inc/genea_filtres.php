@@ -30,4 +30,17 @@ function abreviation($texte){
 	return _T('genea:'.$texte.'_court');
 }
 
+function majuscule($texte){
+	$mots = explode('-', $texte);
+	foreach($mots as $val){
+		$tampon[] = ucfirst($val);
+	}
+	$texte = implode('-', $tampon);
+	unset($tampon);
+	$mots = explode(' ', $texte);
+	foreach($mots as $val){
+		$tampon[] = ucfirst($val);
+	}
+	return implode(' ', $tampon);
+}
 ?>
