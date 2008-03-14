@@ -24,7 +24,7 @@ $flux .=
 // Inside the function "this" will be "document" when called by ready() 
 // and "the ajaxed element" when called because of onAjaxLoad 
 var init_f = function() {
-	if (jQuey("a.thickbox,a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']",this).addClass("thickbox").size()) {
+	if (jQuery("a.thickbox,a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']",this).addClass("thickbox").size()) {
 		TB_chemin_animation = "'.url_absolue(find_in_path('circle_animation.gif')).'";
 		TB_chemin_close = "'.url_absolue(find_in_path('close.gif')).'";
 		TB_chemin_css = "'.url_absolue(find_in_path('thickbox.css')).'";
