@@ -1,0 +1,6 @@
+<BOUCLE_syndic_nom(SYNDIC_ARTICLES){0,1}{doublons}><li>#NOM_SITE</li></BOUCLE_syndic_nom><B_syndic>		
+					<BOUCLE_syndic(SYNDIC_ARTICLES) {age<180} {par date}{inverse} {0,6}>
+						 <li>[(#DATE|affdate_court)]<br /> <a href="#URL_ARTICLE"[ title="(#NOM_SITE|texte_backend)"] class="spip_out">#TITRE</a></li>
+					</BOUCLE_syndic>
+				
+				</B_syndic>
