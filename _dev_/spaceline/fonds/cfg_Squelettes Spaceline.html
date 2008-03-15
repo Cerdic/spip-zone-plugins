@@ -1,0 +1,207 @@
+#CACHE{0}
+<!-- descriptif=<multi>[fr]Configuration des couleurs du site.</multi>
+<p><a href="?exec=cfg&cfg=police_spaceline" class="spip_out">Vers configuration des polices et liens</a></p>
+<p><a href="?exec=cfg&cfg=site_spaceline" class="spip_out">Vers configuration du site;</a></p>
+-->
+<!-- titre=<multi>[fr]Squelettes Spaceline</multi>-->
+<!-- head=<script type="text/javascript">
+bloc2 = true;
+function hexa2(couleur2)
+{
+	if(bloc2)
+		
+		document.form.hexvalpol.value = couleur2;
+}
+function palettepol() { 
+document.write("<TABLE border='0' cellpadding='0' cellspacing='0' ><TR>"); 
+var h=new Array('00','33','66','99','CC','FF'); 
+var col=""; 
+for(var i=0;i<6;i++) { 
+for(var j=0;j<6;j++) { 
+for(var k=0;k<6;k++) { 
+ut=col="#"+h[i]+h[j]+h[k]; 
+document.write("<TD width='10' height='10' bgcolor='"+col+"' onMouseOver=\"hexa2('"+col+"')\" onClick=\"if(bloc2) { bloc2 = false; } else { bloc2 = true; }\"></TD>"); 
+} 
+} 
+document.write("</tr>"); 
+} 
+document.write("</TABLE>"); 
+} 
+
+bloc = true;
+function hexa(couleur)
+{
+	if(bloc)
+		document.form.hexval.value = couleur;
+
+}
+function palette() { 
+document.write("<TABLE border='0' cellpadding='0' cellspacing='0' ><TR>"); 
+var h=new Array('00','33','66','99','CC','FF'); 
+var col=""; 
+for(var i=0;i<6;i++) { 
+for(var j=0;j<6;j++) { 
+for(var k=0;k<6;k++) { 
+ut=col="#"+h[i]+h[j]+h[k]; 
+document.write("<TD width='10' height='10' bgcolor='"+col+"' onMouseOver=\"hexa('"+col+"')\" onClick=\"if(bloc) { bloc = false; } else { bloc = true; }\"></TD>"); 
+} 
+} 
+document.write("</tr>"); 
+} 
+document.write("</TABLE>"); 
+} 
+bloc3 = true;
+function hexa3(couleur3)
+{
+	if(bloc3)
+		
+		document.form.hexvalhead.value = couleur3;
+}
+function paletteheader() { 
+document.write("<TABLE border='0' cellpadding='0' cellspacing='0' ><TR>"); 
+var h=new Array('00','33','66','99','CC','FF'); 
+var col=""; 
+for(var i=0;i<6;i++) { 
+for(var j=0;j<6;j++) { 
+for(var k=0;k<6;k++) { 
+ut=col="#"+h[i]+h[j]+h[k]; 
+document.write("<TD width='10' height='10' bgcolor='"+col+"' onMouseOver=\"hexa3('"+col+"')\" onClick=\"if(bloc3) { bloc3 = false; } else { bloc3 = true; }\"></TD>"); 
+} 
+} 
+document.write("</tr>"); 
+} 
+document.write("</TABLE>"); 
+} 
+bloc4 = true;
+function hexa4(couleur4)
+{
+	if(bloc4)
+		
+		document.form.hexvalcont.value = couleur4;
+}
+function palettecont() { 
+document.write("<TABLE border='0' cellpadding='0' cellspacing='0' ><TR>"); 
+var h=new Array('00','33','66','99','CC','FF'); 
+var col=""; 
+for(var i=0;i<6;i++) { 
+for(var j=0;j<6;j++) { 
+for(var k=0;k<6;k++) { 
+ut=col="#"+h[i]+h[j]+h[k]; 
+document.write("<TD width='10' height='10' bgcolor='"+col+"' onMouseOver=\"hexa4('"+col+"')\" onClick=\"if(bloc4) { bloc4 = false; } else { bloc4 = true; }\"></TD>"); 
+} 
+} 
+document.write("</tr>"); 
+} 
+document.write("</TABLE>"); 
+} 
+bloc5 = true;
+function hexa5(couleur5)
+{
+	if(bloc5)
+		
+		document.form.hexvalboite.value = couleur5;
+}
+function paletteboite() { 
+document.write("<TABLE border='0' cellpadding='0' cellspacing='0' ><TR>"); 
+var h=new Array('00','33','66','99','CC','FF'); 
+var col=""; 
+for(var i=0;i<6;i++) { 
+for(var j=0;j<6;j++) { 
+for(var k=0;k<6;k++) { 
+ut=col="#"+h[i]+h[j]+h[k]; 
+document.write("<TD width='10' height='10' bgcolor='"+col+"' onMouseOver=\"hexa5('"+col+"')\" onClick=\"if(bloc5) { bloc5 = false; } else { bloc5 = true; }\"></TD>"); 
+} 
+} 
+document.write("</tr>"); 
+} 
+document.write("</TABLE>"); 
+} 
+</script>-->
+
+<form method="post" name="form">[(#ENV{_cfg_}|form_hidden)]
+	
+	
+	<fieldset>
+		<legend>Couleur de fond</legend>
+		<label>Choix de la couleur du fond :</label>
+		<div align='center'>
+			<script language="JavaScript"> 
+				palette(); 
+			</script>
+		</div>
+		Cliquez sur la couleur de votre choix pour la s&eacute;lectionner.<br />
+		<input type="text" name="hexval" value="#ENV{hexval}" />
+	</fieldset>
+	
+	<fieldset>
+		<legend>Police de caract&egrave;res</legend>
+		<label>Choix de la couleur de la police :</label>
+		<div align='center'>
+			<script language="JavaScript"> 
+				palettepol(); 
+			</script>
+		</div>
+		Cliquez sur la couleur de votre choix pour la s&eacute;lectionner.<br />
+		<input type="text" name="hexvalpol" value="#ENV{hexvalpol}" />
+	</fieldset>
+	<fieldset>
+		<legend>Fond de site</legend>
+		<label>Choix de la couleur du contenant :</label>
+		<div align='center'>
+			<script language="JavaScript"> 
+				palettecont(); 
+			</script>
+		</div>
+		Cliquez sur la couleur de votre choix pour la s&eacute;lectionner.<br />
+		<input type="text" name="hexvalcont" value="#ENV{hexvalcont}" />
+	</fieldset>
+	
+		<fieldset>
+		<legend>Couleur du header</legend>
+		<label>Choix de la couleur du header :</label>
+		<div align='center'>
+			<script language="JavaScript"> 
+				paletteheader(); 
+			</script>
+		</div>
+		Cliquez sur la couleur de votre choix pour la s&eacute;lectionner.<br />
+		<input type="text" name="hexvalhead" value="#ENV{hexvalhead}" />
+	</fieldset>
+	
+	<fieldset>
+		<legend>Couleur du header</legend>
+		
+  <label>Choix de la couleur des boites slider:</label>
+		<div align='center'>
+			<script language="JavaScript"> 
+				paletteboite(); 
+			</script>
+		</div>
+		Cliquez sur la couleur de votre choix pour la s&eacute;lectionner.<br />
+		<input type="text" name="hexvalboite" value="#ENV{hexvalboite}" />
+	</fieldset>
+	<fieldset>
+		
+  <legend>Afficher l'image de fond -logo du site</legend>
+<select name="img_fond">
+			<option value="N"[ (#ENV{img_fond|=={N}|?{selected="selected",''})]>OUI</option>
+			<option value="O"[ (#ENV{img_fond}|=={O}|?{selected="selected",''})]>NON</option>
+</select>
+</fieldset>
+	<fieldset>
+		
+  <legend>Afficher le logo du site dans la banniere</legend>
+<select name="img_fond_ban">
+			<option value="N"[ (#ENV{img_fond_ban|=={N}|?{selected="selected",''})]>Non	</option>
+			<option value="O"[ (#ENV{img_fond_ban}|=={O}|?{selected="selected",''})]>Oui</option>
+</select>
+</fieldset>
+
+
+		<input type="submit" name="_cfg_ok" value="<:OK:>" />
+		<input type="reset" value="<:Reset:>" />
+		<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+	</p>
+	</form>
+
+ 
