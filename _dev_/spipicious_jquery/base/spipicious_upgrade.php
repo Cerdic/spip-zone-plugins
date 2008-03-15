@@ -1,6 +1,6 @@
 <?php
 
-	$GLOBALS['spipicious_base_version'] = 0.2;
+	$GLOBALS['spipicious_base_version'] = 0.3;
 
 	function spipicious_upgrade(){
 		$version_base = $GLOBALS['spipicious_base_version'];
@@ -21,6 +21,12 @@
 				spip_query("ALTER TABLE `spip_spipicious` ADD maj timestamp AFTER position ");
 				echo "spipicious update @ 0.2<br/>";
 				ecrire_meta('spipicious_base_version',$current_version=0.2,'non');
+			}
+			if($current_version<0.3){
+				spip_query("ALTER TABLE `spip_spipicious` ADD id_rubrique bigint(21) NOT NULL AFTER`id_article` ");
+				spip_query("ALTER TABLE `spip_spipicious` ADD id_document bigint(21) NOT NULL AFTER`id_rubrique` ");
+				echo "spipicious update @ 0.3<br/>";
+				ecrire_meta('spipicious_base_version',$current_version=0.3,'non');
 			}
 			ecrire_metas();
 		}

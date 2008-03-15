@@ -22,7 +22,7 @@
 	  	"id_article" 	=> "bigint(21) NOT NULL",
 		"id_rubrique" 	=> "bigint(21) NOT NULL",
 		"id_document" 	=> "bigint(21) NOT NULL",
-	    "position"    => "int(10) NOT NULL",
+	      "position"    => "int(10) NOT NULL",
 		"maj" => "TIMESTAMP");
   
  	$spip_spipicious_key = array(
