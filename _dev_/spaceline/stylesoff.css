@@ -1,0 +1,172 @@
+
+a:link {
+color : #3886e0;
+text-decoration : none;
+}
+a:visited {
+color : #3886e0;
+text-decoration : none;
+}
+* {
+border : 0;
+margin : 0;
+}
+body {
+font : 12px Tahoma, Arial, Helvetica, sans-serif;
+color : #ffffff;
+background : #1f000f;
+}
+#main {
+margin : 0 auto;
+width : 733px;
+background : #1f000f url(../squelettes/images/back_all.jpg) no-repeat bottom 0%;
+border-left : 1px solid #ffffff;
+border-right : 1px solid #ffffff;
+}
+#header {
+
+width : 733px;
+height : 130px;
+}
+#logo {
+padding-left : 40px;
+text-align : left;
+padding-top : 20px;
+height : 40px;
+}
+#logo a {
+text-decoration : none;
+text-transform : lowercase;
+font-style : italic;
+font-size : 24px;
+color : #ffffff;
+font-weight : bold;
+}
+#logo H2 a {
+font-size : 10px;
+}
+#buttons {
+height : 61px;
+padding-left : 100px;
+background : url(../squelettes/images/buttons_back.gif) repeat-x;
+}
+#buttons li {
+display : inline;
+}
+#buttons a {
+display : block;
+float : left;
+width : 100px;
+height : 41px;
+margin-left : 1px;
+text-align : center;
+text-decoration : none;
+color : #ffffff;
+font-weight : bold;
+font-size : 16px;
+padding-top : 24px;
+}
+#buttons a:hover {
+text-decoration : none;
+color : #ff0000;
+}
+#content {
+width : 713px;
+padding : 10px;
+}
+#left {
+width : 477px;
+}
+#left H1 {
+color : #ffffff;
+margin : 0;
+padding : 0;
+font-size : 24px;
+}
+#left H2 {
+color : #ffffff;
+margin : 0;
+padding : 0;
+font-size : 18px;
+padding-top : 10px;
+}
+#left a {
+color : #ffffff;
+}
+.small {
+margin : 15px;
+padding : 5px;
+border : 1px solid #ffffff;
+}
+.cont {
+background : #383838;
+padding : 10px;
+}
+#right {
+float : right;
+width : 180px;
+padding-right : 10px;
+}
+#sidebar {
+width : 180px;
+}
+#sidebar ul {
+margin : 0;
+padding : 0;
+list-style : none;
+}
+#sidebar li {
+margin-bottom : 15px;
+}
+#sidebar li ul {
+padding : 10px;
+background : #f0eb5e;
+border-left : 1px solid #977c44;
+border-right : 1px solid #977c44;
+border-bottom : 1px solid #977c44;
+}
+#sidebar li li {
+margin : 0;
+padding : 3px 0;
+color : #000000;
+}
+#sidebar li h2 {
+height : 25px;
+margin : 0;
+padding : 5px 0 0 20px;
+background : #fff;
+font-size : 18px;
+color : #000000;
+}
+#sidebar a:link {
+text-decoration : none;
+}
+#sidebar a:hover {
+text-decoration : underline;
+}
+#sidebar a:visited {
+text-decoration : none;
+}
+#sidebar li a {
+padding-left : 10px;
+background : url(../squelettes/images/img09.gif) no-repeat 1px 5px;
+}
+#footer {
+background : url(../squelettes/images/footer.gif) repeat-x;
+height : 52px;
+font-size : 10px;
+color : #ffffff;
+padding-top : 20px;
+text-align : center;
+border-top : 5px solid #ffffff;
+}
+#footer a {
+color : #000;
+font-size : 10px;
+text-decoration : none;
+}
+.padding {
+padding : 10px;
+color : #ff0000;
+font-weight : bold;
+}

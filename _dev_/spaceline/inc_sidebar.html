@@ -1,0 +1,42 @@
+<div id="right">
+	<div id="sidebar">
+		<ul>
+			<li>
+				<h2>[(#CONFIG{site_spaceline/nom_col})]</h2>
+				<ul>
+					[(#CONFIG{site_spaceline/nom_col}|=={Rubriques}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_rubriques}>]
+[(#CONFIG{site_spaceline/nom_col}|=={Breves}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_breves}>]
+[(#CONFIG{site_spaceline/nom_col}|=={Sur le web}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_syndic}>]
+[(#CONFIG{site_spaceline/nom_col}|=={Commentaires}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_forum}>]	
+					
+				</ul>
+			</li>
+			<li>
+				<h2>[(#CONFIG{site_spaceline/nom_col_bas})]</h2>
+				<ul>
+					[(#CONFIG{site_spaceline/nom_col_bas}|=={Rubriques}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_rubriques}>]
+[(#CONFIG{site_spaceline/nom_col_bas}|=={Breves}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_breves}>]
+[(#CONFIG{site_spaceline/nom_col_bas}|=={Sur le web}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_syndic}>]
+[(#CONFIG{site_spaceline/nom_col_bas}|=={Commentaires}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_forum}>]	
+				</ul>
+			</li>
+[(#CONFIG{site_spaceline/nom_col_bas3}|=={N}|?{'',' '})<li><h2>[(#CONFIG{site_spaceline/nom_col_bas3})]</h2>
+				<ul>			
+[(#CONFIG{site_spaceline/nom_col_bas3}|=={Rubriques}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_rubriques}>]
+[(#CONFIG{site_spaceline/nom_col_bas3}|=={Breves}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_breves}>]	
+[(#CONFIG{site_spaceline/nom_col_bas3}|=={Sur le web}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_syndic}>]
+[(#CONFIG{site_spaceline/nom_col_bas3}|=={Commentaires}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_forum}>]			
+</ul>
+</li>]						
+	
+[(#CONFIG{site_spaceline/nom_col_bas4}|=={N}|?{'',' '})<li><h2>[(#CONFIG{site_spaceline/nom_col_bas4})]</h2>
+				<ul>			
+[(#CONFIG{site_spaceline/nom_col_bas4}|=={Rubriques}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_rubriques}>]
+[(#CONFIG{site_spaceline/nom_col_bas4}|=={Breves}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_breves}>]
+[(#CONFIG{site_spaceline/nom_col_bas4}|=={Sur le web}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_syndic}>]
+[(#CONFIG{site_spaceline/nom_col_bas4}|=={Commentaires}|?{' ',''})<INCLURE{fond=noisettes/inc_mini_forum}>]					
+</ul>
+</li>]									
+					
+[(#CONFIG{site_spaceline/ins_active}|=={O}|?{' ',''})<INCLURE{fond=noisettes/inc_ins_active}>]
+		</ul></div></div>

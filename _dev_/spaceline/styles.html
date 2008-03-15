@@ -1,0 +1,200 @@
+[(#REM)
+
+	Ce squelette definit les styles du plugin
+
+	
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+a:link {
+color : #3886e0;
+text-decoration : none;
+}
+a:visited {
+color : #3886e0;
+text-decoration : none;
+}
+* {
+border : 0;
+margin : 0;
+}
+body {
+font : 12px Tahoma, Arial, Helvetica, sans-serif;
+color : #ffffff;
+background : [(#CONFIG{Squelettes Spaceline/hexval})][(#CONFIG{Squelettes Spaceline/img_fond}|=={N}|?{'',' '});][(#CONFIG{Squelettes Spaceline/img_fond}|=={O}|?{'',' '})url([(#LOGO_SITE||extraire_attribut{src})]) no-repeat;]
+background-attachment:fixed;
+}
+#main {
+margin : 0 auto;
+width : [(#CONFIG{site_spaceline/large_site})]px ;
+height: 100%;
+border-left : 1px solid #ffffff;
+border-right : 1px solid #ffffff;
+}
+#header {
+background:[(#CONFIG{Squelettes Spaceline/hexvalhead})];
+width : [(#CONFIG{site_spaceline/large_site})]px ;
+height : 130px;
+}
+#logo {
+padding-left : 40px;
+text-align : left;
+padding-top : 20px;
+height : 40px;
+}
+#logo a {
+text-decoration : none;
+text-transform : lowercase;
+font-style : italic;
+font-size : 24px;
+color : #ffffff;
+font-weight : bold;
+}
+#logo H2 a {
+font-size : 10px;
+}
+
+#buttons {
+height : 61px;
+padding-left : 100px;
+background : url(#CHEMIN{plugins/spaceline/images/buttons_back.gif}) repeat-x;
+margin-top: 10px;
+}
+#buttons li {
+display : inline;
+}
+#buttons a {
+display : block;
+float : left;
+width : 100px;
+height : 41px;
+margin-left : 1px;
+text-align : center;
+text-decoration : none;
+color : #ffffff;
+font-weight : bold;
+font-size : 16px;
+padding-top : 24px;
+}
+#buttons a:hover {
+text-decoration : none;
+color : #ff0000;
+}
+#content {
+background: [(#CONFIG{Squelettes Spaceline/hexvalcont})];
+
+width : [(#CONFIG{site_spaceline/large_site}|moins{20})]px;
+height: 100%;
+padding : 10px;
+}
+#left {
+
+width : [(#CONFIG{site_spaceline/large_site}|moins{256})]px;
+}
+#left H1 {
+color : #ffffff;
+margin : 0;
+padding : 0;
+font-size : 24px;
+}
+#left H2 {
+color : #ffffff;
+margin : 0;
+padding : 0;
+font-size : 18px;
+padding-top : 10px;
+}
+#left a {
+color : #ffffff;
+}
+.small {
+margin : 15px;
+padding : 5px;
+border : 1px solid [(#CONFIG{site_spaceline/bcl_com_coul})];
+}
+.cont {
+background : #383838;
+padding : 10px;
+}
+#right {
+float : right;
+width : 180px;
+padding-right : 10px;
+}
+#sidebar {
+width : 180px;
+}
+#sidebar ul {
+margin : 0;
+padding : 0;
+list-style : none;
+}
+#sidebar li {
+margin-bottom : 15px;
+}
+#sidebar li ul {
+padding : 10px;
+background : [(#CONFIG{Squelettes Spaceline/hexvalboite})];
+
+}
+#sidebar li li {
+margin : 0;
+padding : 3px 0;
+color : #000000;
+}
+#sidebar li h2 {
+height : 25px;
+margin : 0;
+padding : 5px 0 0 20px;
+background : #fff;
+font-size : 18px;
+color : #000000;
+}
+#sidebar a:link {
+text-decoration : none;
+}
+#sidebar a:hover {
+text-decoration : underline;
+}
+#sidebar a:visited {
+text-decoration : none;
+}
+#sidebar li a {
+padding-left : 10px;
+background : url(#CHEMIN{plugins/spaceline/images/img09.gif}) no-repeat 1px 5px;
+}
+#footer {
+background : url(#CHEMIN{plugins/spaceline/images/footer.gif}) repeat-x;
+height : 52px;
+font-size : 10px;
+color : #000;
+padding-top : 20px;
+text-align : center;
+border-top : 5px solid #ffffff;
+}
+#footer a {
+color : #000;
+font-size : 10px;
+text-decoration : none;
+}
+.padding {
+padding : 10px;
+color : #ff0000;
+font-weight : bold;
+}
+.nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
+.date {
+color :[(#CONFIG{site_spaceline/bcl_com_coul})];
+}
+#carre{
+color : [(#CONFIG{site_spaceline/bcl_com_coul})];
+}
+#carre a {
+color: [(#CONFIG{site_spaceline/bcl_com_coul})];
+text-decoration : none;
+}
