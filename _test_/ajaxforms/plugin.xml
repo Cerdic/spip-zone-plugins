@@ -1,0 +1,27 @@
+<plugin>
+	<nom>
+	Formulaires Ajax
+	</nom>
+	<auteur>
+	Collectif
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Ce plugin offre une collection de formulaires en ajax un peu rigolos ; soit pour les utiliser (et pourquoi pas), soit pour s'en inspirer pour construire les siens.
+
+	#FORMULAIRE_QUI_ES_TU
+
+	</description>
+	<lien>
+	</lien>
+	<prefix>
+	Ajaxforms
+	</prefix>
+	<icon>
+	</icon>
+</plugin>

@@ -1,0 +1,13 @@
+<form action='#SELF' method='post'>
+<legend>Qui es-tu gentil visiteur&nbsp;?</legend>
+#ACTION_FORMULAIRE{#SELF}
+<label for='abonne_nom'>Nom</label>
+<input type='text' name='session_nom' id='abonne_nom'
+	value="[(#SESSION*{session_nom}|sinon{#SESSION{nom}}|entites_html)]"
+	title='votre nom' />
+<label for='abonne_email'>Email</label>
+<input type='text' name='session_email' id='abonne_email'
+	value="[(#SESSION*{session_email}|sinon{#SESSION{email}}|entites_html)]"
+	title='votre email' />
+<input type='submit' name='ok' value='ok' />
+</form>
