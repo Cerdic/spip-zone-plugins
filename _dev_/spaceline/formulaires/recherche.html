@@ -1,0 +1,11 @@
+<div class="formulaire_spip formulaire_recherche">
+<a name="formulaire_recherche" id="formulaire_recherche"></a>
+<form action="[(#ENV{lien})]" method="get"><div>
+	[(#ENV{lien}|form_hidden)]
+	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+	<label for="recherche"></label>
+	<input type="text" class="forml" name="recherche" id="recherche" value="[(#ENV{recherche}|sinon{<:info_rechercher:>" onfocus="this.value='';})]" />
+	<input name="submit" src="plugins/spaceline/images/option_rechercher.gif" style="align:middle" title="<:lancer_recherche:>" type="image" />
+</div>
+</form>
+</div>
