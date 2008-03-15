@@ -9,7 +9,7 @@
 
 <div class="inscription2" [style="(#ENV{commentaires}|=={1}|?{display: block;, display:none;})"]>
 
-<form method="post" action="#SELF" name="inscription" class="formulaire_spip" id="inscription">
+<form method="post" action="#SELF" class="formulaire_spip" id="inscription">
 
 [(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
 
@@ -92,7 +92,7 @@
 [(#CONFIG{inscription2/adresse}|=={on}|?{' ', ''})	
 <div class="textarea[ (#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{obligatoire})]">
 	<label for="adresse"><:inscription2:adresse:></label>
-	<textarea name="adresse" class="forml" id="adresse">#ENV{adresse}</textarea>
+	<textarea name="adresse" class="forml" id="adresse" rows="5" cols="10">#ENV{adresse}</textarea>
 	<br class="nettoyeur" />
 </div>
 ]
