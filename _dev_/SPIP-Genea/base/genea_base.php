@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // Securite
 
-//include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
+include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
 
 //
 // Structure des tables
@@ -34,14 +34,14 @@ $GLOBALS['version_base_genea'] = "1.01";
 
 // -- Liste des differentes tables utilisees par le plugin --------------
 $tables_genea = array(
-   $table_prefix."_genea",
-   $table_prefix."_genea_individus",
-   $table_prefix."_genea_familles",
-   $table_prefix."_genea_sosa",
-   $table_prefix."_genea_evt",
-   $table_prefix."_genea_sources",
-   $table_prefix."_genea_doc_sources",
-   $table_prefix."_genea_notes");
+	$table_prefix."_genea",
+	$table_prefix."_genea_individus",
+	$table_prefix."_genea_familles",
+	$table_prefix."_genea_sosa",
+	$table_prefix."_genea_evt",
+	$table_prefix."_genea_sources",
+	$table_prefix."_genea_doc_sources",
+	$table_prefix."_genea_notes");
 
 // -- Definition de la table genea --------------------------------------
 $spip_genea =  array(
@@ -68,7 +68,7 @@ $spip_genea_individus = array(
 	"sexe" => "ENUM('i', 'h', 'f') DEFAULT 'i' NOT NULL",
 	"civilite" => "VARCHAR(4) NOT NULL",
 	"id_genea" => "BIGINT(21) DEFAULT '0' NOT NULL",
-	"id_famille" => "BIGINT(21) DEFAULT '0' NOT NULL",
+	"id_famille" => "BIGINT(21) NULL DEFAULT NULL",
 	"position" => "INT(10) DEFAULT '0' NOT NULL",
     "type_filiation" => "VARCHAR(4) NULL DEFAULT NULL",
 	"date_creat" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
@@ -77,8 +77,7 @@ $spip_genea_individus_key = array(
 	"PRIMARY KEY" => "id_individu",
 	"KEY patronyme" => "patronyme",
 	"KEY id_genea" => "id_genea",
-	"KEY id_pere" => "id_pere",
-	"KEY id_mere" => "id_mere");
+	"KEY id_famille" => "id_famille");
 
 $tables_principales[$table_prefix.'_genea_individus'] = array(
    'field' => &$spip_genea_individus,
@@ -96,14 +95,14 @@ $spip_genea_familles = array (
 	"id_epoux" => "BIGINT(21) NULL DEFAULT NULL",
 	"id_epouse" => "BIGINT(21) NULL DEFAULT NULL",
 	"type_union" => "VARCHAR(4) NOT NULL",
-	"nbre_enfants" => "INT(10) DEFAULT '0' NOT NULL",
 	"id_genea" => "BIGINT(21) DEFAULT '0' NOT NULL",
 	"date_creat" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
 
 $spip_genea_familles_key = array(
      "PRIMARY KEY" => "id_famille",
      "KEY id_epoux" => "id_epoux",
-     "KEY id_epouse" => "id_epouse");
+     "KEY id_epouse" => "id_epouse",
+	 "KEY id_genea" => "id_genea");
 
 $tables_principales[$table_prefix.'_genea_familles'] = array(
    'field' => &$spip_genea_familles,
@@ -113,15 +112,15 @@ $table_des_tables['genea_familles'] = "genea_familles";
 $table_primary['genea_familles'] = "id_famille";
 
 // -- Definition de la table de nurmerotation SOSA ----------------------
-$spip_genea_sosa =  array(
-     "id_sosa" =>    "BIGINT(21) DEFAULT '0' NOT NULL",
-     "id_genea" => "BIGINT(21) DEFAULT '0' NOT NULL",
-     "id_individu" => "BIGINT(21) DEFAULT '0' NOT NULL");
+$spip_genea_sosa = array(
+	"id_sosa" => "BIGINT(21) DEFAULT '0' NOT NULL",
+	"id_individu" => "BIGINT(21) DEFAULT '0' NOT NULL",
+	"id_genea" => "BIGINT(21) DEFAULT '0' NOT NULL");
 
 $spip_genea_sosa_key = array(
-	"PRIMARY KEY" => "id_sosa",
-	"KEY id_genea" => "id_genea",
-	"KEY id_individu" => "id_individu");
+	"KEY id_sosa" => "id_sosa",
+	"KEY id_individu" => "id_individu",
+	"KEY id_genea" => "id_genea");
 
 $tables_principales[$table_prefix.'_genea_sosa'] = array(
 	'field' => &$spip_genea_sosa,
@@ -135,18 +134,16 @@ $spip_genea_evt = array(
    "id_genea_evt" => "BIGINT(21) NOT NULL AUTO_INCREMENT",
    "id_individu" => "BIGINT(21) DEFAULT '0' NOT NULL",
    "type_evt" => "VARCHAR(4) NOT NULL",
-   "date_debut" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
-   "date_debut2" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
-   "date_fin" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
-   "date_fin2" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
-   "precision" => "ENUM('', 'v', 'a', 's', 'p') DEFAULT '' NOT NULL",
-   "descriptif" => "TEXT NOT NULL",
-   "id_lieu" => "BIGINT(21) DEFAULT '0' NOT NULL");
+   "date_evt" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
+   "descriptif" => "TEXT",
+   "id_lieu" => "BIGINT(21) DEFAULT '0' NOT NULL",
+   	"id_genea" => "BIGINT(21) DEFAULT '0' NOT NULL");
 
 $spip_genea_evt_key = array(
-     "PRIMARY KEY" => "id_genea_evt",
-     "KEY date_debut" => "date_debut",
-     "KEY date_fin" => "date_fin");
+	"PRIMARY KEY" => "id_genea_evt",
+	"KEY date_evt" => "date_evt",
+	"KEY id_lieu" => "id_lieu",
+	"KEY id_genea" => "id_genea");
 
 $tables_principales[$table_prefix.'_genea_evt'] = array(
    'field' => &$spip_genea_evt,
@@ -191,8 +188,7 @@ $table_des_tables['genea_doc_sources'] = "genea_doc_sources";
 $table_primary['genea_doc_sources'] = "id_document";
 
 // -- Definition des parametres de traitement ---------------------------
-//$table_des_traitements['DATE_DEBUT'][] = 'vider_date(%s)';
-//$table_des_traitements['DATE_FIN'][] = 'vider_date(%s)';
+$table_des_traitements['DATE_EVT'][] = 'vider_date(%s)';
 $table_des_traitements['PATRONYME'][] = 'typo(%s)';
 $table_des_traitements['PRENOMS'][] = 'typo(%s)';
 $table_des_traitements['SURNOM'][] = 'typo(%s)';

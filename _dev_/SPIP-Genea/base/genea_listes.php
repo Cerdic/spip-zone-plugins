@@ -25,7 +25,7 @@ $liste_filiation = array(
 	"eadu",
 	"eleg",
 	"eile",
-	"eleg",
+	"elem",
 	"emon",
 	"enat",
 	"erec",

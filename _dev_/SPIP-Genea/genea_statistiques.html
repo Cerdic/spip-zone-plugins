@@ -55,8 +55,8 @@
 
             [(#REM) Affichage des tableaux statistiques ]
             <ul class="spip">
-            	<B_genea_indiv>
             	<BOUCLE_genea_indiv_total(GENEA_INDIVIDUS){id_genea}></BOUCLE_genea_indiv_total><li class="spip"><:genea:nbre_individu:> : #TOTAL_BOUCLE<//B_genea_indiv_total>
+            	<B_genea_indiv>
             		<ul class="spip">
 	            	<BOUCLE_genea_indiv(GENEA_INDIVIDUS){id_genea}{importance sexe}>
                     	[<li class="spip">(#SEXE|gtraduc) : #IMPORTANCE</li>]
@@ -66,11 +66,13 @@
 				</B_genea_indiv>
 				<BOUCLE_genea_pat(GENEA_INDIVIDUS){id_genea}{par patronyme}{fusion patronyme}></BOUCLE_genea_pat><li class="spip"><:genea:nbre_patronyme:> : #TOTAL_BOUCLE</li><//B_genea_pat>
 				<BOUCLE_genea_union_total(GENEA_FAMILLES){id_genea}></BOUCLE_genea_union_total><li class="spip"><:genea:nbre_union:> : #TOTAL_BOUCLE<//B_genea_union_total>
+				<B_genea_union>
 					<ul class="spip">
 	            	<BOUCLE_genea_union(GENEA_FAMILLES){id_genea}{importance type_union}>
                     	[<li class="spip">(#TYPE_UNION|gtraduc) : #IMPORTANCE</li>]
     	            </BOUCLE_genea_union>
 			   		</ul>
+				</B_genea_union>
 				</li>
 				<li class="spip"><:genea:nbre_filiation:> : X</li>
 				<li class="spip"><:genea:nbre_lieu:> : X
@@ -79,7 +81,16 @@
 						<li class="spip">Belgique : X</li>
 					</ul>
 				</li>
-				<li class="spip"><:genea:nbre_evenement:> : X</li>
+            	<BOUCLE_genea_evt_total(GENEA_EVT){id_genea}></BOUCLE_genea_evt_total><li class="spip"><:genea:nbre_evenement:> : #TOTAL_BOUCLE<//B_genea_evt_total>
+				<B_genea_evt>
+            		<ul class="spip">
+	            	<BOUCLE_genea_evt(GENEA_EVT){id_genea}{importance type_evt}>
+                    	[<li class="spip">(#TYPE_EVT|gtraduc) : #IMPORTANCE</li>]
+    	            </BOUCLE_genea_evt>
+	       			</ul>
+				</li>
+				</B_genea_evt>
+
 				<li class="spip"><:genea:nbre_source:> : X</li>
 			</ul>
 		</div>

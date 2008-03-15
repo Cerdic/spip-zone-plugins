@@ -27,7 +27,7 @@
 				#DEBUT_SURLIGNE
 				[(#LOGO_INDIVIDU||image_reduire{200,200})]
 				[<p class="surtitre">(#TITRE)</p>]
-				<h1 class="titre">[<img src="(#CHEMIN{/img_pack/#SEXE.gif})" width='17' height='17' class="logo_spip" />][(#CIVILITE|gtraduc) ][(#PATRONYME|ucfirst) ][(#PRENOMS|ucfirst)]</h1>
+				<h1 class="titre">[<img src="(#CHEMIN{/img_pack/#SEXE.gif})" width='17' height='17' class="logo_spip" />][(#CIVILITE|gtraduc) ][(#PATRONYME|majuscule) ][(#PRENOMS|majuscule)]</h1>
 				[<p class="soustitre">[(#SEXE|!={f}|?{' '})<:genea:aliasm:>][(#SEXE|=={f}|?{' '})<:genea:aliasf:>] &#34;(#SURNOM|majuscule)&#34;</p>]
 				#FIN_SURLIGNE
 			</div>
@@ -75,7 +75,7 @@
 				<div class="forums">
 					<h2 class="menu-titre"><:genea:freres_soeurs:></h2>
 					<ul>
-						<BOUCLE_collateraux(GENEA_INDIVIDUS){id_famille}{id_famille!=0}{id_individu!=#ID_INDIVIDU}{id_genea}{par position}>
+						<BOUCLE_collateraux(GENEA_INDIVIDUS){id_famille}{id_individu!=#ID_INDIVIDU}{id_genea}{par position}>
 						<li><a href="[(#URL_PAGE{genea_individus}|parametre_url{id_individu,#ID_INDIVIDU})]" class="spip_in">[(#CIVILITE|abreviation) ][(#PATRONYME|majuscule) ][(#PRENOMS|majuscule)]</a><em>[ o (#DATE_NAISSANCE|affdate{'Y'})][(#DATE_NAISSANCE|?{' '})[(#DATE_DECES|?{' '}) &hellip; ]][ &dagger; (#DATE_DECES|affdate{'Y'})]</em></li>
 						</BOUCLE_collateraux>
 					</ul>

@@ -30,6 +30,7 @@ function abreviation($texte){
 	return _T('genea:'.$texte.'_court');
 }
 
+// -- Met en majuscule l'initial du ou des mots composants le texte -----
 function majuscule($texte){
 	$mots = explode('-', $texte);
 	foreach($mots as $val){

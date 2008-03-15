@@ -31,11 +31,12 @@ global
 
 // -- Ecriture de la date dans la base de donnees -------------------------
 function genea_ecrire_date($date_evt){
+	return serialize($date_evt);
 }
 
 // -- Lecture de la date dans la base de donnees --------------------------
 function genea_lire_date(){
-	return '';
+	return unserialize($date_evt);
 }
 
 
@@ -49,48 +50,30 @@ function genea_affiche_date($date){
 
 
 // -- Recupere et verifie le droit a l'affichage des dates ----------------
-function genea_date_evt($id_individu, $type_evt, $fin=false, $second=false){
+function genea_date_evt($id_individu, $type_evt, $filtres=NULL){
 	global $table_prefix;
+
+	$date_evt = '';  // Initialisation de la variable de retour
 
 	// lecture des droits d'acces a la donnee en fonction du statut
 	include_spip('inc/genea_autoriser');
 	$auteur_ok = autoriser('voirfiche', 'genea', $id_individus);
 
-	if (!$auteur_ok) return '';
-
-	$date_evt = '';
-	$date_ret = '';
-
-	if ($id_individu) {
-		$q="SELECT ";
-		if ($fin==false) {
-			if (($second==false)) $q.="date_debut";
-			else $q.="date_debut2";
-		}else{
-			if (($second==false)) $q.="date_fin";
-			else $q.="date_fin2";
-		}
-		$q.=" FROM ".$table_prefix."_genea_evt WHERE (id_individu=$id_individu) AND (type_evt='$type_evt')";
+	if (($auteur_ok) AND ($id_individu) AND ($type_evt)) {
+		$q="SELECT date_evt FROM ".$table_prefix."_genea_evt WHERE (id_individu=$id_individu) AND (type_evt='$type_evt')";
 		$res=spip_query($q);
 		if ($row=spip_fetch_array($res)) {
-			if ($fin==false) {
-				if (($second==false)) $date_evt=$row['date_debut'];
-				else $date_evt=$row['date_debut2'];
-			}else{
-				if (($second==false)) $date_evt=$row['date_fin'];
-				else $date_evt=$row['date_fin2'];
-			}
+			$date_ret = normaliser_date($row['date_evt']);
 		}
+
+		// Faire verification des droits de visualisation des dates
+		// si elles sont inferieures a 100 ans. Ne pas afficher, sauf
+		// pour les redacteurs et les administrateurs autorises.
+		$maintenant = getdate();
+		$centans = intval($maintenant["year"])-100;
+		if ($centans>=date("Y", strtotime($date_ret)) OR $auteur_ok) $date_evt = $date_ret;
 	}
-
-	// Faire verification des droits de visualisation des dates
-	// si elles sont inferieures a 100 ans. Ne pas afficher, sauf
-	// pour les redacteurs et les administrateurs autorises.
-	$maintenant = getdate();
-	$centans = intval($maintenant["year"])-100;
-	if ($centans>=date("Y", strtotime(normaliser_date($date_evt))) OR $auteur_ok) $date_ret = $date_evt;
-
-	return vider_date(normaliser_date($date_ret));
+	return vider_date($date_evt);
 }
 
 // -- Affiche la date de deces  -----------------------------------------
@@ -103,6 +86,13 @@ function balise_DATE_DECES($p){
 // -- Affiche la date de naissance --------------------------------------
 function balise_DATE_NAISSANCE($p){
 	$p->code = "genea_date_evt(".champ_sql('id_individu',$p).", 'birt')";
+	$p->interdire_scripts = true;
+	return $p;
+}
+
+// -- Affiche la date d'un evenement ------------------------------------
+function balise_DATE_EVT($p){
+	$p->code = "genea_date_evt(".champ_sql('id_individu',$p).", '".champ_sql('type_evt',$p)."')";
 	$p->interdire_scripts = true;
 	return $p;
 }
@@ -120,29 +110,9 @@ if (!function_exists('convert_date')) {
 	}
 }
 
-function convert_date_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
-	static $restreint = array();
+function convert_date_dist($faire='A|DE', $type='', $date_evt=array(), $precision = '', $filtres = NULL) {
 
-	// Qui ? auteur_session ?
-	if ($qui === NULL)
-		$qui = $GLOBALS['auteur_session']; // "" si pas connecte
-	elseif (is_int($qui)) {
-		$s = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=".$qui);
-		$qui = spip_fetch_array($s);
-	}
-
-	// Admins restreints, les verifier ici (pas generique mais...)
-	// Par convention $restreint est un array des rubriques autorisees
-	// (y compris leurs sous-rubriques), ou 0 si admin complet
-	if (is_array($qui)
-	AND $qui['statut'] == '0minirezo'
-	AND !isset($qui['restreint'])) {
-		if (!isset($restreint[$qui['id_auteur']])) {
-			include_spip('inc/auth'); # pour auth_rubrique
-			$restreint[$qui['id_auteur']] = auth_rubrique($qui['id_auteur'], $qui['statut']);
-		}
-		$qui['restreint'] = $restreint[$qui['id_auteur']];
-	}
+	if ($type='') $type = 'gregorian';
 
 	// Chercher une fonction d'autorisation explicite
 	if (
@@ -152,29 +122,13 @@ function convert_date_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		AND $f = 'convert_date_'.$type.'_'.$faire
 		AND (function_exists($f) OR function_exists($f.='_dist'))
 		)
-
-	// 2. Sous la forme "convert_date_type"
-	// ne pas tester si $type est vide
-	OR (
-		$type
-		AND $f = 'convert_date_'.$type
-		AND (function_exists($f) OR function_exists($f.='_dist'))
-	)
-
-	// 3. Sous la forme "convert_date_faire"
-	OR (
-		$f = 'convert_date_'.$faire
-		AND (function_exists($f) OR function_exists($f.='_dist'))
-	)
-
-	// 4. Sinon autorisation generique
-	OR (
-		$f = 'convert_date_defaut'
-		AND (function_exists($f) OR function_exists($f.='_dist'))
-	)
-
-	)
-		$a = $f($faire,$type,intval($id),$qui,$opt);
+	// 2. Sinon autorisation generique
+		OR (
+			$f = 'convert_date_defaut'
+			AND (function_exists($f) OR function_exists($f.='_dist'))
+			)
+		)
+		$a = $f($faire,$type,$date_evt,$precision,$filtres);
 
 	return $a;
 }
@@ -184,4 +138,12 @@ function convert_date_defaut_dist($date_evt){
 	return $date_evt;
 }
 
+// si pas de convertion possible alors donner date telque.
+function convert_date_gregorian_A_dist($date_evt){
+	return $date_evt;
+}
+
+function convert_date_gregorian_DE_dist($date_evt){
+	return $date_evt;
+}
 ?>
