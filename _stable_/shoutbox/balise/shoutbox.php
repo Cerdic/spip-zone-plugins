@@ -62,9 +62,9 @@ function balise_SHOUTBOX_stat($args, $filtres) {
 function balise_SHOUTBOX_dyn($defaut, $a) {
 
 	// Le nickname c'est celui qu'on a donne, meme si on est loge
-	$nick = isset($GLOBALS['auteur_session']['session_nom'])
-		? $GLOBALS['auteur_session']['session_nom']
-		: $GLOBALS['auteur_session']['nom'];
+	$nick = isset($GLOBALS['visiteur_session']['session_nom'])
+		? $GLOBALS['visiteur_session']['session_nom']
+		: $GLOBALS['visiteur_session']['nom'];
 
 	// si $_POST correspondant a notre formulaire : stocker un truc
 	// dans la base de donnees
@@ -82,9 +82,9 @@ function balise_SHOUTBOX_dyn($defaut, $a) {
 			. _q(sinon($nick, $GLOBALS['ip'])) .','
 			. _q($val) .','
 			. 'NOW()';
-		if (isset($GLOBALS['auteur_session']['id_auteur'])) {
+		if (isset($GLOBALS['visiteur_session']['id_auteur'])) {
 			$ou .= ',id_auteur';
-			$quoi .= ','._q($GLOBALS['auteur_session']['id_auteur']);
+			$quoi .= ','._q($GLOBALS['visiteur_session']['id_auteur']);
 		}
 		$id = sql_insert('spip_shoutbox',
 			"($ou)",
