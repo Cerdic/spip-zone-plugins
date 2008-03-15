@@ -1,0 +1,50 @@
+<style>
+div#quiestu {
+border: 2px solid red;
+background-color:#000000;
+color:white;
+opacity: 0.8;
+position:absolute;
+top:10pt;
+margin:0pt;
+padding:5px;
+text-align:left;
+}
+</style>
+
+<div id="quiestuclic">[(#SESSION*{session_nom}|sinon{#SESSION{nom}}|sinon{Identifiez-vous})]</div>
+
+<div id="quiestu">
+<form action='spip.php' method='post'>
+<legend>Qui es-tu gentil visiteur&nbsp;?</legend>
+#ACTION_FORMULAIRE{#SELF}
+<label for='qui_es_tu_nom'>Nom</label>
+<input type='text' name='session_nom' id='qui_es_tu_nom'
+	value="[(#SESSION*{session_nom}|sinon{#SESSION{nom}}|entites_html)]"
+	title='votre nom' />
+<label for='qui_es_tu_email'>Email</label>
+<input type='text' name='session_email' id='qui_es_tu_email'
+	value="[(#SESSION*{session_email}|sinon{#SESSION{email}}|entites_html)]"
+	title='votre email' />
+<input type='submit' name='ok' value='ok' />
+</form>
+</div>
+
+<script>
+$('#quiestuclic')
+.bind('click',function(){
+	$('#quiestu')
+	.slideToggle('slow', function(){
+		$(this).find(':input:visible:first').focus();
+	});
+});
+$('#quiestu')
+.hide()
+.keypress(function(e){
+	if (e.keyCode == 27) {
+		$('#quiestu').slideToggle('slow');
+	}
+});
+</script>
+
+
