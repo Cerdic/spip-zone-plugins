@@ -3,7 +3,7 @@
 		Inscription2
 	</nom>
 	<auteur>
-		&copy; cmtmt2003 - 2007 - Distribu&eacute; sous licence GNU/LGPL
+		&copy; cmtmt2003 - 2007/2008 - Distribu&eacute; sous licence GNU/LGPL
 	</auteur>
 	<version>
 		0.61
@@ -13,7 +13,6 @@
 	</etat>
 	<description>
 		Inscription personnalis&eacute;e au site par l&rsquo;ajout de champs compl&eacute;mentaires
-		<h4><a href="?exec=cfg&amp;cfg=inscription2">Configuration</a></h4>
 	</description>
 	<icon>images/inscription2.png</icon>
 	<prefix>
@@ -22,6 +21,7 @@
 	<necessite id="cfg" version="[1.0.7;]" />
 	<necessite id="SPIP" version='[1.9262;]' />
 	<necessite id="compat9919" version="[1.9.3.1;]" />
+	<necessite id="lib:jquery-validate" src="http://jquery.bassistance.de/validate/jquery.validate.zip" />
 	<install>base/inscription2_installer.php</install>
 	<options>
 		inscription2_mes_options.php
@@ -35,11 +35,6 @@
 	</pipeline>
 	<pipeline>
 		<nom>affichage_final</nom>
-		<inclure>inscription2_ajouter_onglets.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouter_boutons</action>
 		<inclure>inscription2_ajouter_onglets.php</inclure>
 	</pipeline>
 	<chemin dir='' />
