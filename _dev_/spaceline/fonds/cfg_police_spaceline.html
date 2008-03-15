@@ -67,7 +67,20 @@ Veillez à n'indiquer que le nom de la Page de destination pour les liens 3,4 et 
     </fieldset>
 		<fieldset><label>Nom du lien cinq :</label><input type="text" name="nom_autre5" value="#ENV{nom_autre5}" size="50" class="fondl"  />
 <br />  vers destination : 
-  <input type="text" name="url_autre5" value="#ENV{url_autre5}" size="50" class="fondl"  /><br /></fieldset>	
+  <input type="text" name="url_autre5" value="#ENV{url_autre5}" size="50" class="fondl"  /><br /></fieldset>
+  
+
+<fieldset><legend>Choix du fond du menu :</legend>
+<p>Ne cochez qu'une seule case.</p>
+ <p> <label><img src="../plugins/spaceline/images/buttons_back.gif"></label>
+  <input type="checkbox" name="buttons_back" [checked="(#ENV{buttons_back})"] />
+   
+ <label><img src="../plugins/spaceline/images/buttons_back1.gif"></label>
+   <input type="checkbox" name="buttons_back1" [checked="(#ENV{buttons_back1})"] />
+ <label><img src="../plugins/spaceline/images/buttons_back2.gif"></label>
+   <input type="checkbox" name="buttons_back2" [checked="(#ENV{buttons_back2})"] /></p>      
+</fieldset>
+  	
 		<input type="submit" name="_cfg_ok" value="<:OK:>" />
 		<input type="reset" value="<:Reset:>" />
 		<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />

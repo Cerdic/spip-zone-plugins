@@ -39,7 +39,7 @@ border-right : 1px solid #ffffff;
 #header {
 background:[(#CONFIG{Squelettes Spaceline/hexvalhead})];
 width : [(#CONFIG{site_spaceline/large_site})]px ;
-height : 130px;
+height : [(#CONFIG{site_spaceline/haut_band})]px ;
 }
 #logo {
 padding-left : 40px;
@@ -62,8 +62,8 @@ font-size : 10px;
 #buttons {
 height : 61px;
 padding-left : 100px;
-background : url(#CHEMIN{plugins/spaceline/images/buttons_back.gif}) repeat-x;
-margin-top: 10px;
+background : [(#CONFIG{police_spaceline/buttons_back}|=={''}|?{'',' '})url(plugins/spaceline/images/buttons_back.gif) repeat-x;][(#CONFIG{police_spaceline/buttons_back1}|=={''}|?{'',' '})url(plugins/spaceline/images/buttons_back1.gif) repeat-x;][(#CONFIG{police_spaceline/buttons_back2}|=={''}|?{'',' '})url(plugins/spaceline/images/buttons_back2.gif) repeat-x;]
+margin-top: [(#CONFIG{site_spaceline/haut_band}|moins{120})]px;
 }
 #buttons li {
 display : inline;

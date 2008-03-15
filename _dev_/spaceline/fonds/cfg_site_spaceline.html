@@ -10,13 +10,20 @@
 <fieldset>
 		<legend>Largeur du site</legend>
 <select name="large_site">
-			<option value="733"[ (#ENV{larga_site}|=={733}|?{selected="selected",''})]>733 px</option>
+			<option value="733"[ (#ENV{large_site}|=={733}|?{selected="selected",''})]>733 px</option>
 			<option value="800"[ (#ENV{large_site}|=={800}|?{selected="selected",''})]>800 px</option>
 			<option value="850"[ (#ENV{large_site}|=={850}|?{selected="selected",''})]>850 px</option>
 			<option value="900"[ (#ENV{large_site}|=={900}|?{selected="selected",''})]>900 px</option>
 			<option value="950"[ (#ENV{large_site}|=={950}|?{selected="selected",''})]>950 px</option>
 </select>
-	</fieldset>	
+	</fieldset>
+	<fieldset>
+	<legend>Hauteur du bandeau</legend>
+<select name="haut_band">
+			<option value="130"[ (#ENV{haut_band}|=={130}|?{selected="selected",''})]>130 px</option>
+			<option value="180"[ (#ENV{haut_band}|=={180}|?{selected="selected",''})]>180 px</option>
+</select>
+	</fieldset>
 	<fieldset>
 		<legend>Affichage sommaire</legend>
 <select name="bcl_cfg">
@@ -77,7 +84,7 @@
 			<option value="Rubriques"[ (#ENV{nom_col_bas3}|=={Rubriques}|?{selected="selected",''})]>Rubriques</option>
 			<option value="Sur le web"[ (#ENV{nom_col_bas3}|=={Sur le web}|?{selected="selected",''})]>Sur le web(syndication)</option>
 			<option value="Commentaires"[ (#ENV{nom_col_bas3}|=={Commentaires}|?{selected="selected",''})]>Derniers commentaires</option>
-			<option value="N"[ (#ENV{nom_col_bas3}|=={N}|?{selected="selected",''})]>Pas de colonne</option>
+			<option value="N"[ (#ENV{nom_col_bas3}|=={N}|?{selected="selected",''})]>Pas de bloc</option>
 </select>
 	</fieldset>
 <fieldset>	
@@ -87,7 +94,7 @@
 			<option value="Rubriques"[ (#ENV{nom_col_bas4}|=={Rubriques}|?{selected="selected",''})]>Rubriques</option>
 			<option value="Sur le web"[ (#ENV{nom_col_bas4}|=={Sur le web}|?{selected="selected",''})]>Sur le web(syndication)</option>
 			<option value="Commentaires"[ (#ENV{nom_col_bas4}|=={Commentaires}|?{selected="selected",''})]>Derniers commentaires</option>
-			<option value="N"[ (#ENV{nom_col_bas4}|=={N}|?{selected="selected",''})]>Pas de colonne</option>
+			<option value="N"[ (#ENV{nom_col_bas4}|=={N}|?{selected="selected",''})]>Pas de bloc</option>
 </select>
 	</fieldset>
 	<fieldset>
