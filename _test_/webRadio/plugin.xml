@@ -14,7 +14,7 @@
 		<ul>
 			<li>- Une interface de configuration dans l'espace priv&#233;e.</li>
 			<li>- Une page de gestion webRadio dans l'espace priv&#233;e.</li>
-			<li>- #WEBRADIO : Une balise ouvrant une fenetre popup avec la playlist et un lecteur audio (dewplayer-multi).</li>
+			<li>- #WEBRADIO_RADIO : Une balise ouvrant une fenetre popup avec la playlist et un lecteur audio (dewplayer-multi).</li>
 			<li>- le crit&#232;re <code>{playlist = 'oui'}</code> pos&#233; dans une boucle DOCUMENTS : permet de lister tous les documents de la playlist.</li>
 			<li>- un petit script javascript permettant d'ouvrir une fenetre en popup (utile pour "popupiser" la radio et de permettre la navigation sur le reste du site sans fermer ladite radio.</li>
 		</ul><br /><br/>
