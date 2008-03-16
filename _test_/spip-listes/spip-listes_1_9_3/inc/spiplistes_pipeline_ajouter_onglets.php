@@ -1,5 +1,11 @@
 <?php 
 
+// inc/spiplistes_pipeline_ajouter_onglets.php
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
 /*
 	SPIP-Listes
 	
@@ -11,13 +17,10 @@
 	From: SPIP-Listes-V, http://www.quesaco.org/
 */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/spiplistes_api_globales');
 
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // pipeline (plugin.xml)
 function spiplistes_ajouter_onglets ($flux) {
@@ -27,9 +30,11 @@ function spiplistes_ajouter_onglets ($flux) {
 		;
 
 	// seuls les super-admins ont accès au bouton
-	if($connect_statut 
+	if(
+			$connect_statut 
 		&& $connect_toutes_rubriques
-		&& $flux['args'] == 'configuration') {
+		&& ($flux['args'] == 'configuration')
+	) {
 		$flux['data']['spiplistes'] = new Bouton( 
 			_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png"
 			, _T("spiplistes:listes_de_diffusion_")
