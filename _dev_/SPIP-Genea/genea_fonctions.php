@@ -16,7 +16,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/genea_filtres');
 include_spip('public/genea_balises');
 
-
 // -- Definition de la table permettant l'affichage du logo d'un individu
 include_spip('inc/chercher_logo');
 global $table_logos;

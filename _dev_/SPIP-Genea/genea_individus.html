@@ -1,9 +1,19 @@
-#CACHE{86400}
+[(#REM)
+	*********************************************************************
+	*
+	* Copyright (c) 2007-2008
+	* Xavier Burot
+	* fichier : genea_individu.html
+	*
+	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	*
+	*********************************************************************
+]#CACHE{86400}
 <BOUCLE_genea(GENEA_INDIVIDUS){id_individu}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
-	<title>[(#PATRONYME|ucfirst) ][(#PRENOMS|ucfirst)] - [(#NOM_SITE_SPIP|textebrut)]</title>
+	<title>[(#PATRONYME) ][(#PRENOMS)] - [(#NOM_SITE_SPIP|textebrut)]</title>
 	<meta name="description" content="<:genea:desc_liste_des_individus:>" />
 	<INCLURE{fond=inc-head}>
 </head>
@@ -15,8 +25,7 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; [(#PATRONYME|ucfirst) ][(#PRENOMS|ucfirst)]</div>
-
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique=#ID_RUBRIQUE_GENEA}{tout}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; [(#PATRONYME) ][(#PRENOMS|majuscule)]</div>
 
 	<div id="conteneur">
 
@@ -26,9 +35,9 @@
 			<div class="cartouche">
 				#DEBUT_SURLIGNE
 				[(#LOGO_INDIVIDU||image_reduire{200,200})]
-				[<p class="surtitre">(#TITRE)</p>]
-				<h1 class="titre">[<img src="(#CHEMIN{/img_pack/#SEXE.gif})" width='17' height='17' class="logo_spip" />][(#CIVILITE|gtraduc) ][(#PATRONYME|majuscule) ][(#PRENOMS|majuscule)]</h1>
-				[<p class="soustitre">[(#SEXE|!={f}|?{' '})<:genea:aliasm:>][(#SEXE|=={f}|?{' '})<:genea:aliasf:>] &#34;(#SURNOM|majuscule)&#34;</p>]
+				[<p class="surtitre">(#TITRE_GENEA)</p>]
+				<h1 class="titre">[<img src="(#CHEMIN{/img_pack/#SEXE.gif})" width='17' height='17' class="logo_spip" />][(#CIVILITE|gtraduc) ][(#PATRONYME) ][(#PRENOMS)]</h1>
+				[<p class="soustitre">[(#SEXE|!={f}|?{' '})<:genea:aliasm:>][(#SEXE|=={f}|?{' '})<:genea:aliasf:>] &#34;(#SURNOM)&#34;</p>]
 				#FIN_SURLIGNE
 			</div>
 
@@ -76,7 +85,7 @@
 					<h2 class="menu-titre"><:genea:freres_soeurs:></h2>
 					<ul>
 						<BOUCLE_collateraux(GENEA_INDIVIDUS){id_famille}{id_individu!=#ID_INDIVIDU}{id_genea}{par position}>
-						<li><a href="[(#URL_PAGE{genea_individus}|parametre_url{id_individu,#ID_INDIVIDU})]" class="spip_in">[(#CIVILITE|abreviation) ][(#PATRONYME|majuscule) ][(#PRENOMS|majuscule)]</a><em>[ o (#DATE_NAISSANCE|affdate{'Y'})][(#DATE_NAISSANCE|?{' '})[(#DATE_DECES|?{' '}) &hellip; ]][ &dagger; (#DATE_DECES|affdate{'Y'})]</em></li>
+						<li><a href="[(#URL_PAGE{genea_individus}|parametre_url{id_individu,#ID_INDIVIDU})]" class="spip_in">[(#CIVILITE|abreviation) ][(#PATRONYME) ][(#PRENOMS)]</a><em>[ o (#DATE_NAISSANCE|affdate{'Y'})][(#DATE_NAISSANCE|?{' '})[(#DATE_DECES|?{' '}) &hellip; ]][ &dagger; (#DATE_DECES|affdate{'Y'})]</em></li>
 						</BOUCLE_collateraux>
 					</ul>
 				</div>
@@ -91,7 +100,7 @@
 		<div id="navigation">
 
 			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}{id_rubrique}>
+			<INCLURE{fond=inc-rubriques}{id_rubrique=#ID_RUBRIQUE_GENEA}>
 
 			[(#REM) Articles dans la meme rubrique ]
 			<INCLURE{fond=include/inc-genealogie}{id_genea}{small=oui}>

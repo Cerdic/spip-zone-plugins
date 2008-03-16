@@ -1,9 +1,9 @@
 <h3 class="spip"><:genea:ascendance:></h3>
 <ul class"spip">
 <BOUCLE_parents(GENEA_FAMILLES){id_famille}>
-	[<li><:genea:pere:> : (#ID_EPOUX|?{' '})[(#ID_EPOUX|>{0}|?{' ', <:genea:pere_inconnu:>}) <INCLUDE{fond=include/inc-individu}{id_individu=#ID_EPOUX}>]</li>]
-	[<li><:genea:mere:> : (#ID_EPOUSE|?{' '}) [(#ID_EPOUSE|>{0}|?{' ', <:genea:mere_inconnue:>}) <INCLUDE{fond=include/inc-individu}{id_individu=#ID_EPOUSE}>]</li>]
+	[<li class"spip"><:genea:pere:> : (#ID_EPOUX|?{' '})[(#ID_EPOUX|>{0}|?{' ', <:genea:pere_inconnu:>}) <INCLUDE{fond=include/inc-individu}{id_individu=#ID_EPOUX}>]</li>]
+	[<li class"spip"><:genea:mere:> : (#ID_EPOUSE|?{' '}) [(#ID_EPOUSE|>{0}|?{' ', <:genea:mere_inconnue:>}) <INCLUDE{fond=include/inc-individu}{id_individu=#ID_EPOUSE}>]</li>]
 </BOUCLE_parents>
-	<li><:genea:aucun_ascendant:></li>
+	<li class"spip"><:genea:aucun_ascendant:></li>
 <//B_parents>
 </ul>

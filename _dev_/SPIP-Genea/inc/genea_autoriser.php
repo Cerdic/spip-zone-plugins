@@ -23,10 +23,9 @@ function autoriser_genea_voirfiche_dist($faire, $type, $id, $qui, $opt){
 }
 
 function genea_verifier_droit_rubrique($id_genea){
-	global $table_prefix;
 	$ctrl = true; // Accepte par defaut l'acces
 	if ($id_genea) {
-		$res = spip_query("SELECT id_rubrique FROM " . $table_prefix . "_genea WHERE id_genea=$id_genea LIMIT 1");
+		$res = spip_query("SELECT id_rubrique FROM spip_genea WHERE id_genea=$id_genea LIMIT 1");
 		if ($res) $ctrl = autoriser('voir', 'rubrique', $res['id_rubrique']);
 	}
 	return $crtl;

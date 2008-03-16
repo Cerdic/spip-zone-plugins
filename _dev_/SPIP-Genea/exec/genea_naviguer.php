@@ -54,7 +54,6 @@ function exec_genea_naviguer_dist() {
 }
 
 function genea_affiche_liste_arbre(){
-	global $table_prefix;
 	pipeline('exec_init',array('args'=>array('exec'=>'genea_naviguer'),'data'=>''));
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -86,7 +85,7 @@ function genea_affiche_liste_arbre(){
 	debut_droite();
 
 	// Affiche les arbres en attente d'affectation a une rubrique
-	$relief = spip_num_rows(spip_query("SELECT id_genea FROM " . $table_prefix. "_genea WHERE id_rubrique<1 LIMIT 1"));
+	$relief = spip_num_rows(spip_query("SELECT id_genea FROM spip_genea WHERE id_rubrique<1 LIMIT 1"));
 
 	if ($relief) {
 		$res = debut_cadre_couleur('', true);

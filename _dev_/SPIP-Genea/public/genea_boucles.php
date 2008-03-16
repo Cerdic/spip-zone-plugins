@@ -20,10 +20,9 @@ include_spip('base/genea_base');
 // <BOUCLE(GENEA)>
 //
 function boucle_GENEA_dist($id_boucle, &$boucles) {
-	global $table_prefix;
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] = $table_prefix.'_genea';
+	$boucle->from[$id_table] = 'spip_genea';
 	return calculer_boucle($id_boucle, $boucles);
 }
 
@@ -34,7 +33,7 @@ function boucle_GENEA_INDIVIDUS_dist($id_boucle, &$boucles) {
 	global $table_prefix;
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] = $table_prefix.'_genea_individus';
+	$boucle->from[$id_table] = 'spip_genea_individus';
 	return calculer_boucle($id_boucle, $boucles);
 }
 
@@ -45,7 +44,7 @@ function boucle_GENEA_FAMILLES_dist($id_boucle, &$boucles) {
 	global $table_prefix;
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] = $table_prefix.'_genea_familles';
+	$boucle->from[$id_table] = 'spip_genea_familles';
 	return calculer_boucle($id_boucle, $boucles);
 }
 
@@ -56,7 +55,7 @@ function boucle_GENEA_EVT_dist($id_boucle, &$boucles) {
 	global $table_prefix;
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] = $table_prefix.'_genea_evt';
+	$boucle->from[$id_table] = 'spip_genea_evt';
 	return calculer_boucle($id_boucle, $boucles);
 }
 
@@ -67,7 +66,7 @@ function boucle_GENEA_SOURCES_dist($id_boucle, &$boucles) {
 	global $table_prefix;
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] = $table_prefix.'_genea_sources';
+	$boucle->from[$id_table] = 'spip_genea_sources';
 	return calculer_boucle($id_boucle, $boucles);
 }
 

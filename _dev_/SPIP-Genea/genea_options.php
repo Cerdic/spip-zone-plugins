@@ -14,6 +14,5 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/genea_base');
 include_spip('public/genea_boucles');
-//include_spip('inc/genea_filtres');
 
 ?>

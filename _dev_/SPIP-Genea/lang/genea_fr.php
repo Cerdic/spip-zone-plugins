@@ -88,7 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fcom' => "Premi&egrave;re communion",
 'filiation' => "Filiation",
 'flor' => "flor&eacute;al",
-'freres_soeurs' => "Freres/S&oelig;urs",
+'freres_soeurs' => "Fr&egrave;res/S&oelig;urs",
 'frim'=>"frimaire",
 'fruc' => "fructidor",
 

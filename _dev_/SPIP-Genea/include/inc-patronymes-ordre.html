@@ -3,7 +3,7 @@
 [(#ANCRE_PAGINATION)]
 <ul class="spip">
 <BOUCLE_liste(GENEA_INDIVIDUS){id_genea}{importance patronyme}{par importance}{inverse}{pagination}>
-	[<li><a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME|ucfirst)</a> &#91;[(#IMPORTANCE)]&#93;</li>]
+	[<li><a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME)</a> &#91;[(#IMPORTANCE)]&#93;</li>]
 </BOUCLE_liste>
 </ul>
 [<p class="pagination">(#PAGINATION)</p>]

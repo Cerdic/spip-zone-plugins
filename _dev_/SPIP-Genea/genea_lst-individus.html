@@ -10,7 +10,7 @@
 	*********************************************************************
 ]
 #CACHE{86400}
-<BOUCLE_genea_principal(GENEA rubriques){id_genea}>
+<BOUCLE_genea_principal(GENEA){id_genea}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
@@ -26,7 +26,7 @@
    <INCLURE{fond=inc-entete}>
 
    [(#REM) Fil d'Ariane ]
-   <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; <:genea:liste_des_individus:></div>
+   <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}{tout}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; <:genea:liste_des_individus:></div>
 
 
    <div id="conteneur">
@@ -37,7 +37,7 @@
          <div class="cartouche">
             #DEBUT_SURLIGNE
             [(#LOGO_RUBRIQUE||image_reduire{200,200})]
-            [<p class="surtitre">(#TITRE)</p>]
+            [<p class="surtitre">(#TITRE_GENEA)</p>]
             <h1 class="titre"><:genea:liste_des_individus:></h1>
             <p class="soustitre"><:genea:soustitre_lst_individus:></p>
             #FIN_SURLIGNE

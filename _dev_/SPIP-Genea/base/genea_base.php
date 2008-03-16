@@ -26,7 +26,6 @@ global
    $exceptions_des_tables,
    $table_date,
    $table_des_traitements,
-   $table_prefix,
    $tables_genea;
 
 // -- Numero de version de la base installee ----------------------------
@@ -52,7 +51,7 @@ $spip_genea_key = array(
    "PRIMARY KEY" => "id_genea, id_rubrique",
    "KEY id_rubrique" => "id_rubrique");
 
-$tables_principales[$table_prefix.'_genea'] = array(
+$tables_principales['spip_genea'] = array(
    'field' => &$spip_genea,
    'key' => &$spip_genea_key);
 
@@ -79,15 +78,12 @@ $spip_genea_individus_key = array(
 	"KEY id_genea" => "id_genea",
 	"KEY id_famille" => "id_famille");
 
-$tables_principales[$table_prefix.'_genea_individus'] = array(
+$tables_principales['spip_genea_individus'] = array(
    'field' => &$spip_genea_individus,
    'key' => &$spip_genea_individus_key);
 
 $table_des_tables['genea_individus'] = "genea_individus";
 $table_primary['genea_individus'] = "id_individu";
-
-//$tables_jointures['rubriques'][] = 'genea';
-//$tables_jointures['genea_individus'][] = 'genea';
 
 // -- Définition de la table familles -----------------------------------
 $spip_genea_familles = array (
@@ -104,7 +100,7 @@ $spip_genea_familles_key = array(
      "KEY id_epouse" => "id_epouse",
 	 "KEY id_genea" => "id_genea");
 
-$tables_principales[$table_prefix.'_genea_familles'] = array(
+$tables_principales['spip_genea_familles'] = array(
    'field' => &$spip_genea_familles,
    'key' => &$spip_genea_familles_key);
 
@@ -122,7 +118,7 @@ $spip_genea_sosa_key = array(
 	"KEY id_individu" => "id_individu",
 	"KEY id_genea" => "id_genea");
 
-$tables_principales[$table_prefix.'_genea_sosa'] = array(
+$tables_principales['spip_genea_sosa'] = array(
 	'field' => &$spip_genea_sosa,
 	'key' => &$spip_genea_sosa_key);
 
@@ -145,7 +141,7 @@ $spip_genea_evt_key = array(
 	"KEY id_lieu" => "id_lieu",
 	"KEY id_genea" => "id_genea");
 
-$tables_principales[$table_prefix.'_genea_evt'] = array(
+$tables_principales['spip_genea_evt'] = array(
    'field' => &$spip_genea_evt,
    'key' => &$spip_genea_evt_key);
 
@@ -162,7 +158,7 @@ $spip_genea_sources_key = array(
      "PRIMARY KEY" => "id_source",
      "KEY id_syndic" => "id_syndic");
 
-$tables_principales[$table_prefix.'_genea_sources'] = array(
+$tables_principales['spip_genea_sources'] = array(
    'field' => &$spip_genea_sources,
    'key' => &$spip_genea_sources_key);
 
@@ -180,17 +176,21 @@ $spip_genea_doc_sources_key = array(
      "PRIMARY KEY" => "id_individu, id_genea_evt, id_source, id_document",
      "KEY id_document" => "id_document");
 
-$tables_principales[$table_prefix.'_genea_doc_sources'] = array(
+$tables_principales['spip_genea_doc_sources'] = array(
    'field' => &$spip_genea_doc_sources,
    'key' => &$spip_genea_doc_sources_key);
 
 $table_des_tables['genea_doc_sources'] = "genea_doc_sources";
 $table_primary['genea_doc_sources'] = "id_document";
 
+// -- Definition des jonctions de tables --------------------------------
+$tables_jointures['spip_rubriques']['id_genea'] = 'genea';
+$tables_jointures['spip_genea_individus']['id_rubrique'] = 'genea';
+
 // -- Definition des parametres de traitement ---------------------------
 $table_des_traitements['DATE_EVT'][] = 'vider_date(%s)';
-$table_des_traitements['PATRONYME'][] = 'typo(%s)';
-$table_des_traitements['PRENOMS'][] = 'typo(%s)';
-$table_des_traitements['SURNOM'][] = 'typo(%s)';
+$table_des_traitements['PATRONYME'][] = 'typo(majuscule(%s))';
+$table_des_traitements['PRENOMS'][] = 'typo(majuscule(%s))';
+$table_des_traitements['SURNOM'][] = 'typo(majuscule(%s))';
 $table_des_traitements['LIEU'][] = 'propre(%s)';
 ?>

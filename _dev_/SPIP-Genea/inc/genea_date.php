@@ -51,7 +51,6 @@ function genea_affiche_date($date){
 
 // -- Recupere et verifie le droit a l'affichage des dates ----------------
 function genea_date_evt($id_individu, $type_evt, $filtres=NULL){
-	global $table_prefix;
 
 	$date_evt = '';  // Initialisation de la variable de retour
 
@@ -60,7 +59,7 @@ function genea_date_evt($id_individu, $type_evt, $filtres=NULL){
 	$auteur_ok = autoriser('voirfiche', 'genea', $id_individus);
 
 	if (($auteur_ok) AND ($id_individu) AND ($type_evt)) {
-		$q="SELECT date_evt FROM ".$table_prefix."_genea_evt WHERE (id_individu=$id_individu) AND (type_evt='$type_evt')";
+		$q="SELECT date_evt FROM spip_genea_evt WHERE (id_individu=$id_individu) AND (type_evt='$type_evt')";
 		$res=spip_query($q);
 		if ($row=spip_fetch_array($res)) {
 			$date_ret = normaliser_date($row['date_evt']);
