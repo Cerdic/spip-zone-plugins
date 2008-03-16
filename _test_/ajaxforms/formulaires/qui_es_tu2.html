@@ -30,21 +30,22 @@ text-align:left;
 </form>
 </div>
 
-<script>
-$('#quiestuclic')
-.bind('click',function(){
-	$('#quiestu')
-	.slideToggle('slow', function(){
-		$(this).find(':input:visible:first').focus();
+<script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+setTimeout(function(){
+	$('#quiestuclic')
+	.bind('click',function(){
+		$('#quiestu:hidden')
+		.slideDown('slow', function(){
+				$(this).find(':input:visible:first').focus();
+		});
 	});
-});
-$('#quiestu')
-.hide()
-.keypress(function(e){
-	if (e.keyCode == 27) {
-		$('#quiestu').slideToggle('slow');
-	}
-});
-</script>
+	$('#quiestu')
+	.hide()
+	.keypress(function(e){
+		if (e.keyCode == 27) {
+			$('#quiestu:visible').slideUp('slow');
+		}
+	});
+}, 10); // petit delai pour attendre l'insertion du HTML dans le DOM :(
 
-
+/*#EVAL{chr(93)}#EVAL{chr(93)}>*/</script>
