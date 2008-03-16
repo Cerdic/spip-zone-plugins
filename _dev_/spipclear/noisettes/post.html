@@ -11,13 +11,13 @@
 <span>::</span><a href="[(#URL_PAGE{rss}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{type,co})]" title="<:spipclear:rss_pour:> : [(#TITRE|textebrut|entites_html)]">rss</a>
 </p>
 
-[<div class="post-chapo">
+[<div class="post-chapo #EDIT{chapo}">
 	#DEBUT_SURLIGNE(#CHAPO)#FIN_SURLIGNE
 </div>]
-[<div class="post-content" lang="#LANG">
+[<div class="post-content #EDIT{texte}" lang="#LANG">
 	#DEBUT_SURLIGNE(#TEXTE|reduire_image{450})#FIN_SURLIGNE
 	<br style="clear: both;" />
-	[<div>#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
+	[<div class="#EDIT{ps}">#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
 	[<div>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
 	[<div><strong><:voir_en_ligne:></strong> : <a href="(#URL_SITE)">#NOM_SITE</a></div>]
 </div>]
