@@ -15,9 +15,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if(defined("_PGL_PLUGIN_GLOBALES_LIB") && _PGL_PLUGIN_GLOBALES_LIB) return;
-define("_PGL_PLUGIN_GLOBALES_LIB", 20071224.0535); //date.heure
+define("_PGL_PLUGIN_GLOBALES_LIB", 20080224.2026); //date.heure
 
 // HISTORY:
+// CP-20080224: ajout de __lire_meta()
+// CP-20071231: __plugin_current_version_base_get complète par lecture plugin.xml si vb manquant dans meta
 // CP-20071224: ajout de __plugin_current_svnrevision_get() et modif __plugin_html_signature()
 // CP-20071222: optimisation __plugin_boite_meta_info() pour plugin en mode stable et mode dev
 
@@ -101,7 +103,7 @@ if(!function_exists('__plugin_real_version_base_get')) {
 
 if(!function_exists('__plugin_current_version_get')) {
 	function __plugin_current_version_get ($prefix) {
-		return(lire_meta($prefix."_version"));
+		return(__lire_meta($prefix."_version"));
 	}
 }
 
@@ -111,7 +113,10 @@ if(!function_exists('__plugin_current_version_base_get')) {
 		// doc: voir inc/plugin.php sur version_base (plugin.xml)
 		// qui s'appelle base_version en spip_meta %-}
 	function __plugin_current_version_base_get ($prefix) {
-		return(lire_meta($prefix."_base_version"));
+		if(!($vb = __lire_meta($prefix."_base_version"))) {
+			$vb = __plugin_real_version_base_get ($prefix);
+		}
+		return($vb);
 	}
 } // end if __plugin_current_version_base_get
 
@@ -368,6 +373,7 @@ if(!function_exists('__mysql_max_allowed_packet')) {
 }
 
 // si inc/vieilles_defs.php disparaît ?
+// CP20080224: nota: ce passage/fonction probablement à supprimer (redondant)
 if(!function_exists("lire_meta")) {
 	function lire_meta($key) {
 		$result = 0;
@@ -651,6 +657,12 @@ if(!function_exists('__ecrire_metas')) {
 			ecrire_metas();
 		}
 		return(true);
+	}
+}
+
+if(!function_exists('__lire_meta')) {
+	function __lire_meta ($key) {
+		global $meta; return $meta[$key];
 	}
 }
 
