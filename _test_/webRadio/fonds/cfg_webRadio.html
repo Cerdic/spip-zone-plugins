@@ -1,0 +1,53 @@
+<!-- descriptif=configuration du plugin WebRadio
+-->
+<!-- titre=WebRadio : configuration-->
+<!-- boite=Configuration du plugin WebRadio-->
+<!-- nom=webRadio-->
+
+<?php
+include_spip ('inc/webRadio_actions');
+
+$action = $_GET['action'];
+$retour = $_GET['retour'];
+
+switch ($action) {
+	case 'ajouterLiens' :
+		$_GET['action'] = null;
+		$_GET['retour'] = webRadio_ajouterLien();
+		break;
+	case 'modifierDB' :
+		
+		$_GET['action'] = null;
+		$_GET['retour'] = webRadio_modifierDB();
+		break;
+	default :
+		$_GET['action'] = null;
+		if (!empty($_GET['retour'])) {
+			echo '<fieldset>';
+			echo $_GET['retour'];
+			echo '</fieldset>';
+		}
+		break;
+}
+?>
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset><legend><b><:webradio:base_donnee:></b></legend>
+	<p><:webradio:base_donnee_expliq:></p>
+	<p><:webradio:requete_effectue:> :</p>
+	<code>ALTER TABLE spip_documents ADD playlist ENUM('oui', 'non') NOT NULL DEFAULT 'non'</code>
+
+	<p><:webradio:une_seule_fois:></p>
+	<p><a href="?exec=cfg&cfg=webRadio&action=modifierDB"><:webradio:adapter_bd:></a></p>
+</fieldset>
+
+<fieldset><legend><b><:webradio:webradio:></b></legend>
+		
+	<p><a href="?exec=cfg&cfg=webRadio&action=ajouterLiens"><:webradio:transformer_liens:></a></p>
+	<p><:webradio:transformer_liens_expliq:></p>
+
+</fieldset>
+
+</form>

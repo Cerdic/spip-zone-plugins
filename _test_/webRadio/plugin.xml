@@ -1,0 +1,73 @@
+<plugin>
+	<nom>webRadio</nom>
+	<version>0.1</version>
+	<etat>test</etat>
+	<auteur>Edd
+		- [contact->mailto:edd@no-log.org]
+		- &#169; 2008-2009 - Distribu&#233; sous licence GNU/GPL
+	</auteur>
+	<description>
+		Plugin permettant de g&#233;rer une playlist &agrave; partir des documents mp3 li&#233;s &agrave; vos articles<br /><br/>
+		
+		
+		{{Ce plugin fourni :}}
+		<ul>
+			<li>- Une interface de configuration dans l'espace priv&#233;e.</li>
+			<li>- Une page de gestion webRadio dans l'espace priv&#233;e.</li>
+			<li>- #WEBRADIO : Une balise ouvrant une fenetre popup avec la playlist et un lecteur audio (dewplayer-multi).</li>
+			<li>- le crit&#232;re <code>{playlist = 'oui'}</code> pos&#233; dans une boucle DOCUMENTS : permet de lister tous les documents de la playlist.</li>
+			<li>- un petit script javascript permettant d'ouvrir une fenetre en popup (utile pour "popupiser" la radio et de permettre la navigation sur le reste du site sans fermer ladite radio.</li>
+		</ul><br /><br/>
+		
+		{{Exemple : }}
+		<ul>
+		<li>- La page popup_radio.html contient un squelette spip utilisant la balise #WEBRADIO</li>
+		<li>- Elle est appel&#233; depuis une autre page via le petit script javascript :</li>
+		<div style='width=100%; background-color: #fff; border: 1px dotted #000;'><code><a href="javascript: affichage_radio('#URL_PAGE{popup_radio}', 'Ma Web radio');">radio</a></code></div>
+		<li>- La fenetre popup aura pour titre : "Ma Web radio".</li>
+		</ul>
+	
+		
+		{{L'interface de configuration permet :}}
+		<ul>
+			<li>-De cr&#233;er une nouvelle colonne dans la table spip_documents indiquant pour un document donn&#233; s'il fait oui ou non parti de la playlist.</li>
+			<li>-D'ajouter en tant que document distant li&#233; &#224; un article, les liens spip <code>[xxx->http://mon_serveur/fichier.mp3]</code> pointant vers des fichier mp3, c'est nouveau documents distant pouront êtres manipul&#233; tout comme un document local.</li>
+		</ul><br /><br/>
+		
+		
+		{{L'interface de gestion webRadio permet :}}
+		<ul>
+			<li>-De visualiser le contenu de la playlist.</li>
+			<li>-D'y ajouter ou d'en retirer des &#233;l&#233;ments.</li>
+			<li>-D'&#233;couter (afin de tester) chacun des documents.</li>
+			<li>-De modifier le titre et le descriptif des documents.</li>
+			<li>-De lire l'article auquel le document est li&#233;.</li>
+		</ul><br /><br/>
+		
+		
+		{{Necessite :}}
+		<ul>
+			<li>- Le plugin cfg.</li>
+		</ul>
+	</description>
+	<lien>[Documentation->] / [Configuration->.?exec=cfg&amp;cfg=webRadio] / [Gestion webradio->.?exec=webradio_radio]</lien>
+	<prefix>webRadio</prefix>
+	<options>
+		webRadio_options.php
+	</options>
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>webRadio_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_edition</nom>
+		<action>pre_edition</action>
+		<inclure>webRadio_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouter_boutons</action>
+		<inclure>webRadio_pipeline.php</inclure>
+	</pipeline>
+</plugin>
