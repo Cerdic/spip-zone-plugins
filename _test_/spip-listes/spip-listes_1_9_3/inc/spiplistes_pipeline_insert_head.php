@@ -1,4 +1,11 @@
 <?php 
+
+// inc/spiplistes_pipeline_insert_head.php (CP-20071019)
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
 /*
 	SPIP-Listes pipeline
 	inc/spiplistes_pipeline_insert_head.php (CP-20071019)
@@ -8,12 +15,9 @@
 	
 */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/spiplistes_api_globales');
-
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
 
 function spiplistes_insert_head ($flux) {
 

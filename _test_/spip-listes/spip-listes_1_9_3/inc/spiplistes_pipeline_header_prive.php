@@ -1,18 +1,21 @@
 <?php 
+
+// inc/spiplistes_pipeline_header_prive.php
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
 /*
-	SPIP-Listes pipeline
-	inc/spiplistes_pipeline_header_prive.php
 	
 	Nota: plugin.xml en cache.
 		si modif plugin.xml, il faut réactiver le plugin (config/plugin: désactiver/activer)
 	
 */
 
-include_spip('inc/spiplistes_api_globales');
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
+include_spip('inc/spiplistes_api_globales');
 
 function spiplistes_header_prive ($flux) {
 
