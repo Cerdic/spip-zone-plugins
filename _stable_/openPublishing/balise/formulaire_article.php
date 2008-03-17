@@ -143,6 +143,18 @@ if ($abandonner) {
 		 	array('id_article = '.sql_quote($article).' LIMIT 1')
 		);
 	
+
+	// suppression du logo si il existe
+	if ($config['Logo'] == 'yes') {
+		$nom = 'arton' . intval($article);
+		$formats_logos = Array('jpg' ,'png', 'gif', 'bmp', 'tif');
+	
+		foreach ($formats_logos as $format) {
+			if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format)))
+				@unlink($d);
+		}
+	}
+
 	// construction de la page de retour
 	$url_retour = $url_site . $config['UrlAbandon'] ;
 	$message = '<META HTTP-EQUIV="refresh" content="'.$config['TempsAtt'].'; url='.$url_retour.'">' . $config['TextAbandon'];
