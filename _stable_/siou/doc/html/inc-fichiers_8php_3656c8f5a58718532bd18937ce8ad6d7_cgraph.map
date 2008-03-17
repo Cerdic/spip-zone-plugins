@@ -1,9 +1,0 @@
-<area shape="rect" href="$inc&#45;fichiers_8php.html#2153dd9ac414142bd968bd484f875abe" title="Lit et affiche le contenu d&#39;un fichier csv." alt="" coords="192,56,285,83">
-<area shape="rect" href="$inc&#45;fichiers_8php.html#cc5c7108e3f0ae7b674e0c1f9c0b71f5" title="Detecte l&#39;extension d&#39;un fichier (qui doit comporter un point)." alt="" coords="169,107,308,133">
-<area shape="rect" href="$inc&#45;regles__gestion_8php.html#7b7e71083f065a8f45947cf013206a64" title="reglesGestion" alt="" coords="357,31,467,57">
-<area shape="rect" href="$inc&#45;html_8php.html#fa7c9d548e547f5aa3b1a88df9ec970c" title="Affiche une vignette (icone de type de fichier)." alt="" coords="375,81,449,108">
-<area shape="rect" href="$inc&#45;regles__gestion_8php.html#abf23b66cd362adaa508de5bfb22706a" title="l&#39;utilisateur est il admin ?" alt="" coords="536,5,608,32">
-<area shape="rect" href="$inc&#45;referentiel_8php.html#34801d7492d31569357873533e30d04d" title="isInReferentiel" alt="" coords="516,56,628,83">
-<area shape="rect" href="$inc&#45;referentiel_8php.html#8da6b5d71b8b85a4443092e825841479" title="getReferentiel" alt="" coords="688,31,800,57">
-<area shape="rect" href="$inc&#45;html_8php.html#5b029790bb0355c3329199b4a8cdd8b8" title="Supprime les accents et enleve les espaces inutiles." alt="" coords="679,81,809,108">
-<area shape="rect" href="$inc&#45;odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql." alt="" coords="860,31,948,57">
