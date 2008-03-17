@@ -1,0 +1,27 @@
+<?xml version="1.0" [encoding="(#CHARSET)"]?>
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
+<rss version="2.0"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+
+<channel>
+	<title>Podcast - [(#NOM_SITE_SPIP|textebrut)]</title>
+	<link>[(#URL_SITE_SPIP)]</link>
+	<description>[(#DESCRIPTIF_SITE_SPIP)]</description>
+	<language>[(#LANG)]</language>
+	<generator>SPIP www.spip.net - plugin WebRadio</generator>
+	<managingEditor>[(#EMAIL_WEBMASTER)]</managingEditor>
+
+<BOUCLE_playlist(DOCUMENTS){playlist='oui'}>
+	<item>
+		<title>#TITRE</title>
+		<enclosure url="#FICHIER" [length="(#TAILLE|taille_en_octets)"] type="#TYPE_MIME" />
+		<guid>#ID_DOCUMENT</guid>
+		<description>#DESCRIPTIF</description>
+	</item>
+</BOUCLE_playlist>
+
+</channel>
+</rss>
