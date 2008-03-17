@@ -5,24 +5,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /* Les includes de spip utilisé dans cette balise
  */
-//include_spip('inc/texte');
-// include_spip('inc/lang');
-// include_spip('inc/mail');
-// include_spip('inc/date');
-// include_spip('inc/meta');
-// include_spip('inc/session');
-// include_spip('inc/filtres');
-// include_spip('inc/acces');
-// include_spip('inc/documents');
 include_spip('inc/ajouter_documents');
 include_spip('inc/iconifier');
-// include_spip('inc/getdocument');
 include_spip('inc/barre');
-// include_spip('base/abstract_sql');
 
 /* Les includes propre au plugin
  */
-
 
 if (version_compare($GLOBALS['spip_version_code'],'1.9300','<'))
 	include_spip('inc/compat_op.php');
@@ -620,72 +608,10 @@ if ($config['MotCle'] == 'yes') {
 	), false);
 }
 
-
-if ($config['SurTitre'] == 'yes') {
-	// champ surtitre
-
-	$formulaire_surtitre = inclure_balise_dynamique(
-	array('formulaires/formulaire_surtitre', 0,
-		array(
-			'surtitre' => interdire_scripts(typo($surtitre)),
-		)
-	), false);
-}
-
-
-if ($config['SousTitre'] == 'yes') {
-	// champ soustitre
-
-	$formulaire_soustitre = inclure_balise_dynamique(
-	array('formulaires/formulaire_soustitre', 0,
-		array(
-			'soustitre' => interdire_scripts(typo($soustitre)),
-		)
-	), false);
-}
-
-
-if ($config['Descriptif'] =='yes') {
-	// champ descriptif
-
-	$formulaire_descriptif = inclure_balise_dynamique(
-	array('formulaires/formulaire_descriptif', 0,
-		array(
-			'descriptif' => $descriptif,
-		)
-	), false);
-}
-
-
-if ($config['Chapo'] =='yes') {
-	// champ chapeau
-
-	$formulaire_chapo = inclure_balise_dynamique(
-	array('formulaires/formulaire_chapo', 0,
-		array(
-			'chapo' => $chapo,
-		)
-	), false);
-}
-
-
-if ($config['PostScriptum'] == 'yes') {
-	// champ PostScriptum
-
-	$formulaire_ps = inclure_balise_dynamique(
-	array('formulaires/formulaire_ps', 0,
-		array(
-			'ps' => $ps,
-		)
-	), false);
-}
-
 // le bouton valider
-
 $bouton= _T('form_prop_confirmer_envoi');
 
 // et on remplit le formulaire avec tout ça
-
 return array('formulaires/formulaire_article', 0,
 	array(
 		'formulaire_documents' => $formulaire_documents,
@@ -693,13 +619,17 @@ return array('formulaires/formulaire_article', 0,
 		'formulaire_agenda' => $formulaire_agenda,
 		'formulaire_tagopen' => $formulaire_tagopen,
 		'formulaire_motclefs' => $formulaire_motclefs,
-		'formulaire_surtitre' => $formulaire_surtitre,
 		'formulaire_soustitre' => $formulaire_soustitre,
 		'formulaire_descriptif' => $formulaire_descriptif,
 		'formulaire_chapo' => $formulaire_chapo,
 		'formulaire_ps' => $formulaire_ps,
 		'bouton' => $bouton,
+		'surtitre' => interdire_scripts(typo($surtitre)),
+		'descriptif' => $descriptif,
+		'chapo' => $chapo,
 		'article' => $article,
+		'soustitre' => interdire_scripts(typo($soustitre)),
+		'ps' => $ps,
 		'rubrique' => $rubrique,
 		'mess_error' => $mess_error,
 		'annee' => $annee,
