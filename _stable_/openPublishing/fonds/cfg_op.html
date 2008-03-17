@@ -1,166 +1,181 @@
-<!-- descriptif=configuration du plugin openPublishing
+<!-- descriptif=
+<a name="haut"></a>
+&nbsp;&nbsp;<b>Navigation</b>
+<br />
+- <a href="#rubriques"><:opconfig:gestion_rubrique:></a>
+- <a href="#anonyme"><:opconfig:gestion_auteur:></a>
+- <a href="#composition"><:opconfig:composition_article:></a>
+- <a href="#options"><:opconfig:options_dispos:></a>
+- <a href="#agenda"><:opconfig:gestion_agenda:></a>
+- <a href="#statut"><:opconfig:statut_article:></a>
+- <a href="#postTraitement"><:opconfig:post_traitement:></a>
+- <a href="#renvois"><:opconfig:gestion_renvois:></a>
 -->
-<!-- titre=openPublishing : configuration-->
-<!-- boite=Configuration du plugin openPublishing-->
+<!-- titre=Publication Ouverte-->
+<!-- boite=Configuration de la publication ouverte-->
 <!-- nom=op-->
 
 #CACHE{0}
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 
-<p>Le plugin openPublishing permet la publication d'articles par les visiteurs d'un site, depuis l'espace publique, sans qu'il soit necessaire de s'identifier. Les options ci-dessous permettent d'adapter le fonctionnement du plugin à votre site.</p>
-<ul>
-<li><a href="#rubriques">Gestion des rubriques openPublishing</a></li>
-<li><a href="#anonyme">Gestion de l'auteur "anonyme"</a></li>
-<li><a href="#composition">Composition d'un article</a></li>
-<li><a href="#options">Les options disponibles aux rédacteurs</a></li>
-<li><a href="#agenda">Gestion de l'agenda par openPublishing</a></li>
-<li><a href="#statut">Statut des articles après la rédaction</a></li>
-<li><a href="#postTraitement">Post-traitement des articles</a></li>
-<li><a href="#renvois">Gestion des renvois</a></li>
-</ul>
-
-<br />
-<fieldset><legend><b>Avant toute chose ...</b></legend>
-<p><b>Si vous venez d'installer le plugin openPublishing, allez d'abord dans l'onglet "openPublishing : base de donnée" avant d'effectuer le moindre changement dans la configuration</b></p>
-</fieldset>
-<br />
+<p><:opconfig:description_plugin:></p>
 
 <a name="rubriques"></a>
-<fieldset><legend><b>Gestion des rubriques openPublishing</b></legend>
-<ul>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_rubrique_op:></b></legend>
+
+<p style="background:#fff; border: 1px dotted #000;">
 <BOUCLE_rubrique(RUBRIQUES){tout}{par titre}>
-<li><input type="checkbox" name="op_#ID_RUBRIQUE" value="openPublishing" [(#ENV{op_#ID_RUBRIQUE}|=={openPublishing}|?{checked="yes"})]/>#TITRE</li>
+<input type="checkbox" name="op_#ID_RUBRIQUE" value="openPublishing" [(#ENV{op_#ID_RUBRIQUE}|=={openPublishing}|?{checked="yes"})]/>#TITRE<br />
 </BOUCLE_rubrique>
-</ul>
-<p>Les rubriques cochées accepteront les articles openPublishing.<b>Vous devez au minimum avoir coché une rubrique</b>.</p>
-<p>Si vous cochez plusieurs rubriques, l'espace de rédaction proposera au rédacteur de choisir la rubrique dans laquelle il désire que son article soit publié.</p>
-<p>Si vous ne cochez qu'une seule rubrique, l'espace de rédaction ne proposera plus au rédacteur de choisir sa rubrique.</p>
-<p>Dans votre squelette, pour lister toutes vos rubriques openPublishing, vous pouvez utiliser le critére {openPublishing} dans une boucle RUBRIQUES</p>
+</p>
+
+<p><:opconfig:expliq_rubrique_op:></p>
+<b><:opconfig:attention_minimum:></b>
+
+<p><:opconfig:expliq_rubrique_squelette:></p>
+
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 </fieldset>
 
-<br />
+
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
+
 <a name="anonyme"></a>
-<fieldset><legend><b>L'auteur "anonyme"</b></legend>
-<p>L'auteur "anonyme" est l'auteur au nom du quel les rédacteurs publieront leurs articles. Créez cet auteur dans votre liste d'auteur (remplissez uniquement le champ "Signature" et laissez son statut en "rédacteur"), puis selectionnez le ci-dessous.</p>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_auteur_anonyme:></b></legend>
+<p><:opconfig:expliq_auteur_anonyme:></p>
+
+<p style="background:#fff; border: 1px dotted #000;">
 <select name="IDAuteur" onMouseUp="this.form.id.value = this.options[this.selectedIndex].value;">
 <BOUCLE_auteur(AUTEURS){tout}{par nom}>
 	<option value="#ID_AUTEUR" [(#ENV{IDAuteur}|=={#ID_AUTEUR}|?{selected="selected"})]>#NOM</option>
 </BOUCLE_auteur>
 </select>
+</p>
 
-<p>Afin de récupérer dans une boucle articles les données d'identification du rédacteur vous pouvez utiliser les balises suivantes :</p>
-<ul>
-<li>#EXTRA | pseudo</li>
-<li>#EXTRA | mail</li>
-</ul>
+<p><:opconfig:expliq_auteur_squelette:></p>
+
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 </fieldset>
 
-<br />
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
+
 <a name="composition"></a>
-<fieldset><legend><b>Composition d'un article</b></legend>
-<p>Un article peut être composé de plusieurs champs qui ne sont pas forcément utilisé par tous les sites. Vous pouvez donc activer ou pas les champs ci-dessous. L'espace de rédaction ne proposera aux rédacteurs que les champs cochés (ainsi qu'évidemment le titre et le texte de l'article).</p>
-<ul>
-<li><input type="checkbox" name="SurTitre" value="yes" [(#ENV{SurTitre}|=={yes}|?{checked="yes"})] />Utiliser le champ Sur-titre</li>
-<li><input type="checkbox" name="SousTitre" value="yes" [(#ENV{SousTitre}|=={yes}|?{checked="yes"})] />Utiliser le champ Sous-titre</li>
-<li><input type="checkbox" name="Chapo" value="yes" [(#ENV{Chapo}|=={yes}|?{checked="yes"})] />Utiliser le champ Chapeau</li>
-<li><input type="checkbox" name="Descriptif" value="yes" [(#ENV{Descriptif}|=={yes}|?{checked="yes"})] />Utiliser le champ Descriptif</li>
-<li><input type="checkbox" name="PostScriptum" value="yes" [(#ENV{PostScriptum}|=={yes}|?{checked="yes"})] />Utiliser le champ Post-Scriptum</li>
-</ul>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_composition_article:></b></legend>
+<p><:opconfig:expliq_composition_article:></p>
+
+<p style="background:#fff; border: 1px dotted #000;">
+<input type="checkbox" name="SurTitre" value="yes" [(#ENV{SurTitre}|=={yes}|?{checked="yes"})] /><:opconfig:utiliser_surtitre:><br />
+<input type="checkbox" name="SousTitre" value="yes" [(#ENV{SousTitre}|=={yes}|?{checked="yes"})] /><:opconfig:utiliser_soustitre:><br />
+<input type="checkbox" name="Chapo" value="yes" [(#ENV{Chapo}|=={yes}|?{checked="yes"})] /><:opconfig:utiliser_chapo:><br />
+<input type="checkbox" name="Descriptif" value="yes" [(#ENV{Descriptif}|=={yes}|?{checked="yes"})] /><:opconfig:utiliser_descriptif:><br />
+<input type="checkbox" name="PostScriptum" value="yes" [(#ENV{PostScriptum}|=={yes}|?{checked="yes"})] /><:opconfig:utiliser_ps:><br />
+</p>
+
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 </fieldset>
 
-<br />
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
+
 <a name="options"></a>
-<fieldset><legend><b>Options disponibles aux rédacteurs</b></legend>
-<p>Ces options permettre d'étendre ou de restreindres les fonctionnalitées du plugin openPublishing. Les options cochées seront disponibles dans l'espace de rédaction</p>
-<ul>
-<li><input type="checkbox" name="MotCle" value="yes"  [(#ENV{MotCle}|=={yes}|?{checked="yes"})] />Permettre aux rédacteurs de choisir les mots clefs</li>
-<li><input type="checkbox" name="TagMachine" value="yes"  [(#ENV{TagMachine}|=={yes}|?{checked="yes"})] />Permettre aux rédacteurs d'utiliser le plugin tag-machine</li>
-<li><input type="checkbox" name="DocInc" value="yes"  [(#ENV{DocInc}|=={yes}|?{checked="yes"})] />Permettre aux rédacteurs d'inclure des documents dans l'article</li>
-<li><input type="checkbox" name="Logo" value="yes" [(#ENV{Logo}|=={yes}|?{checked="yes"})] />Permettre aux rédacteurs d'inclure un logo à l'article</li>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_options:></b></legend>
+<p><:opconfig:expliq_options:></p>
+
+<p style="background:#fff; border: 1px dotted #000;">
+<input type="checkbox" name="MotCle" value="yes"  [(#ENV{MotCle}|=={yes}|?{checked="yes"})] /><:opconfig:option_motclef:><br />
+<input type="checkbox" name="TagMachine" value="yes"  [(#ENV{TagMachine}|=={yes}|?{checked="yes"})] /><:opconfig:option_tagmachine:><br />
+<input type="checkbox" name="DocInc" value="yes"  [(#ENV{DocInc}|=={yes}|?{checked="yes"})] /><:opconfig:option_document:><br />
+<input type="checkbox" name="Logo" value="yes" [(#ENV{Logo}|=={yes}|?{checked="yes"})] /><:opconfig:option_logo:><br />
 <!--<li><input type="checkbox" name="PlugAgenda" value="yes"  [(#ENV{PlugAgenda}|=={yes}|?{checked="yes"})] />Permettre aux rédacteurs d'utiliser le plugin Agenda</li>-->
-</ul>
+</p>
+
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 </fieldset>
 
-<br />
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
 
 <a name="agenda"></a>
-<fieldset><legend><b>Gestion de l'agenda par openPublishing</b></legend>
-<p>Si vous cochez cette option, le plugin openPublishing proposera aux rédacteurs de publier leur article sous forme de "date" dans l'agenda. Il s'agit en réalité de publier le contenu de l'article sous forme de brève dans une rubrique spécifique. Seul le titre et le texte de l'article seront pris en compte.</p>
-<input type="checkbox" name="Agenda" value="yes"  [(#ENV{Agenda}|=={yes}|?{checked="yes"})] /><label>utiliser la gestion Agenda du plugin openPublishing</label><br />
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_agenda_op:></b></legend>
+<p><:opconfig:expliq_agenda:></p>
+
+<p style="background:#fff; border: 1px dotted #000;">
+<input type="checkbox" name="Agenda" value="yes"  [(#ENV{Agenda}|=={yes}|?{checked="yes"})] /><label><:opconfig:utiliser_agenda:></label><br />
 <br />
-<label>Choix de la rubrique Agenda</label><br />
+<label><:opconfig:choix_agenda:></label><br />
 <select name="RubAgenda" onMouseUp="this.form.id.value = this.options[this.selectedIndex].value;">
 <BOUCLE_rubag(RUBRIQUES){tout}{par titre}>
 	<option value="#ID_RUBRIQUE" [(#ENV{RubAgenda}|=={#ID_RUBRIQUE}|?{selected="selected"})]>#TITRE</option>
 </BOUCLE_rubag>
 </select>
+</p>
+
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 </fieldset>
 
-
-<br />
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
 
 <a name="statut"></a>
-<fieldset><legend><b>Statut des articles après la rédaction</b></legend>
-<p>Une fois que le rédacteur a validé son article, celui-ci apparaitra dans l'espace privée de votre site avec le statut suivant :</p>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_statut_op:></b></legend>
+<p><:opconfig:expliq_statut:></p>
+
+<p style="background:#fff; border: 1px dotted #000;">
 <select name="StatutArt" onMouseUp="this.form.id.value = this.options[this.selectedIndex].value;">
-<option value="redac" [(#ENV{StatutArt}|=={redac}|?{selected="selected"})]>En Rédaction</option>
-<option value="prop" [(#ENV{StatutArt}|=={prop}|?{selected="selected"})]>Proposer à la validation</option>
-<option value="valid" [(#ENV{StatutArt}|=={valid}|?{selected="selected"})]>Validé</option>
+<option value="redac" [(#ENV{StatutArt}|=={redac}|?{selected="selected"})]><:opconfig:statut_en_redaction:></option>
+<option value="prop" [(#ENV{StatutArt}|=={prop}|?{selected="selected"})]><:opconfig:statut_proposer:></option>
+<option value="valid" [(#ENV{StatutArt}|=={valid}|?{selected="selected"})]><:opconfig:statut_valide:></option>
 </select>
+</p>
+
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 </fieldset>
 
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
 
-<br />
 <a name="postTraitement"></a>
-<fieldset><legend><b>Post-traitement des articles</b></legend>
-<p> Il s'agit içi d'effectuer des traitements de protection sur l'article. Ces options s'appliqueront aprés la validation de l'article.</p>
-<ul>
-<li><input type="checkbox" name="TitreMaj" value="yes"  [(#ENV{TitreMaj}|=={yes}|?{checked="yes"})] />Autoriser les majuscules dans les titres</li>
-<li><input type="checkbox" name="AntiSpam" value="yes"  [(#ENV{AntiSpam}|=={yes}|?{checked="yes"})] />Protection anti-spam sur les adresses mails</li>
-<li>Taille minimal du titre : <input type="text" name="TitreMin" value="#ENV{TitreMin}" size="2" /> charactères</li>
-</ul>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_posttraitement:></b></legend>
+<p><:opconfig:expliq_posttraitement:></p>
+
+<p style="background:#fff; border: 1px dotted #000;">
+<input type="checkbox" name="TitreMaj" value="yes"  [(#ENV{TitreMaj}|=={yes}|?{checked="yes"})] /><:opconfig:post_majuscule:><br />
+<input type="checkbox" name="AntiSpam" value="yes"  [(#ENV{AntiSpam}|=={yes}|?{checked="yes"})] /><:opconfig:post_antispam:><br />
+<:opconfig:post_taille_min:>&nbsp;<input type="text" name="TitreMin" value="#ENV{TitreMin}" size="2" />&nbsp;<:opconfig:post_char:><br />
+</p>
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 </fieldset>
 
-
-<br />
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
 
 <a name="renvois"></a>
-<fieldset><legend><b>Gestion des renvois</b></legend>
-<p>Lorsqu’un rédacteur valide un article ou abandonne, le formulaire affiche un message et redirige au bout de quelques secondes vers une autre page du site. Ces champs permettent de configurer cela. Attention, il faut indiquer des urls de type : « /spip.php ?page=ma_page », le plugin complétera automatiquement l’url.</p>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_renvois:></b></legend>
+<p><:opconfig:expliq_renvois:></p>
 
-<label>url en cas de validation</label>
+<p style="background:#fff; border: 1px dotted #000;">
+#PUCE<label><:opconfig:renvois_url_validation:></label>
 <input type="text" name="UrlValidation" value="#ENV{UrlValidation}" size="30" />
-
-
 <br />
-
-<label>redirection en cas d'abandon</label>
+#PUCE<label><:opconfig:renvois_url_abandon:></label>
 <input type="text" name="UrlAbandon" value="#ENV{UrlAbandon}" size="30" />
-
 <br />
-
-<label>texte en cas d'abandon</label><br />
-<textarea name="TextAbandon" cols="50" rows="6">#ENV{TextAbandon}</textarea>
-
-<br />
-
-<label>texte en cas de validation</label><br />
+#PUCE<label><:opconfig:renvois_texte_validation:></label><br />
 <textarea name="TextValidation" cols="50" rows="6">#ENV{TextValidation}</textarea>
-
 <br />
-<label>Temps d'attente avant le renvoi (exprim&eacute; en secondes)</label>
+#PUCE<label><:opconfig:renvois_texte_abandon:></label><br />
+<textarea name="TextAbandon" cols="50" rows="6">#ENV{TextAbandon}</textarea>
+<br />
+#PUCE<label><:opconfig:renvois_temps:></label>
 <input type="text" name="TempsAtt" value="#ENV{TempsAtt}" size="3" />
-
 <br />
+</p>
+
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 
 </fieldset>
+<a href="#haut"><:opconfig:revenir_haut:></a>
 
 </form>

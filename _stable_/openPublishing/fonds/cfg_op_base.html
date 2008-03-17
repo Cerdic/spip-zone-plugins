@@ -1,4 +1,4 @@
-<!-- descriptif=Attention, ces actions vont agir sur la base de donn&eacute;e de spip. Soyez absolument certain de ce que vous faites avant de le faire !
+<!-- descriptif=<font color="red"><:opconfig:base_attention:></font>
 -->
 <!-- titre=openPublishing : base de donn&eacute;e-->
 <!-- boite=Base de donn&eacute;e du plugin openPublishing-->
@@ -7,11 +7,10 @@
 #CACHE{0}
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 
-[<fieldset><legend><b>Retour</b></legend>
+[<fieldset><legend><b><:opconfig:retour:></b></legend>
 <p>(#CONFIG{op/retourFonction})</p>
 </fieldset>]
 
-<p><:opconfig:bonne_nouvelle:></p>
 <br />
 <fieldset><legend><b><:opconfig:cas_neuve:></b></legend>
 <p><:opconfig:premiere_fois:></p>
