@@ -1,0 +1,14 @@
+Pour générer la documentation technique Siou, rien de plus simple : 
+
+1/ installer doxygen (http://doxygen.org)
+   $ sudo aptitude install doxygen-gui
+
+2/ personnaliser le fichier Doxyfile pour adapter le chemin a votre arborescence
+   - soit en utilisant sed ou un editeur de texte sur le fichier Doxyfile
+   - soit avec l'assistant : $ doxywizard Doxyfile
+
+3/ lancer la creation de la doc :
+   $ doxygen Doxyfile
+
+La doc se retrouve alors dans le repertoire doc/html/ 
+Note : il est de bon ton d'ouvrir la doc via un serveur apache (http://localhost/[site]/plugins/siou/doc/html) afin de pouvoir utiliser le moteur de recherche integre (en haut a droite)
