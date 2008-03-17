@@ -52,32 +52,32 @@ function balise_FORMULAIRE_AJOUTER_ZONE_dyn($id_article) {
 		
 			//creer la bonne rubrique avec le meme nom que l'article
 			sql_insertq("spip_rubriques",  array("id_parent" => $id_rub_orig, "titre" => $titre, "id_secteur" => $id_secteur, "lang" => $lang));
-			spip_log("Creation rubrique $titre", "ajouter_zone");
+			spip_log("Creation rubrique $titre", "squeeze_zone");
 			
 			//on recupere l'id de la rubrique
 			$id_rub = mysql_insert_id();
 			
 			//on deplace l'article
 			sql_updateq("spip_articles", array("id_rubrique" => $id_rub),"id_article=".$id_article);
-			spip_log("Deplacement article $id_article $titre", "ajouter_zone");
+			spip_log("Deplacement article $id_article $titre", "squeeze_zone");
 			
 			// on cree une zone "publique" qui a le meme nom que l'article (pas privee sinon les admin y auraient pas acces)
 			sql_insertq("spip_zones", array("titre" => $titre, "publique" => "oui"));
-			spip_log("Creation zone $titre", "ajouter_zone");
+			spip_log("Creation zone $titre", "squeeze_zone");
 			
 			// on recupere l'id de la zone en question
 			$id_zone_creee = mysql_insert_id();
 			
 			// on applique cette zone a la rubrique
 			sql_insertq("spip_zones_rubriques", array("id_zone" => $id_zone_creee, "id_rubrique" =>$id_rub));
-			spip_log("Insertion article $id_article in zone $titre", "ajouter_zone");
+			spip_log("Insertion article $id_article in zone $titre", "squeeze_zone");
 			
 			// on ajoute le ou les auteur(s) egalement
 			$s = sql_select("id_auteur","spip_auteurs_articles","id_article ="._q($id_article));
 			while($r = sql_fetch($s)){
 				$id_auteur = $r["id_auteur"];
 				sql_insertq("spip_zones_auteurs", array("id_zone" => $id_zone_creee, "id_auteur" =>$id_auteur));
-				spip_log("Insertion auteur $id_auteur in zone $id_zone_creee - $titre", "ajouter_zone");
+				spip_log("Insertion auteur $id_auteur in zone $id_zone_creee - $titre", "squeeze_zone");
 			}
 			$invalider = true;	
 		}
@@ -87,15 +87,15 @@ function balise_FORMULAIRE_AJOUTER_ZONE_dyn($id_article) {
 			sql_delete("spip_zones_auteurs", "id_zone = ".$id_zone);
 			sql_delete("spip_zones_rubriques", "id_zone = ".$id_zone);
 			sql_delete("spip_zones", "id_zone = ".$id_zone);
-			spip_log("Suppression zone $id_zone ($titre)", "ajouter_zone");
+			spip_log("Suppression zone $id_zone ($titre)", "squeeze_zone");
 	
 			//on deplace l'article vers la rubrique parente
 			sql_updateq("spip_articles", array("id_rubrique" => $id_rub_parente), "id_article=".$id_article);
-			spip_log("Deplacement article $id_article $titre vers $id_rub_parente", "ajouter_zone");
+			spip_log("Deplacement article $id_article $titre vers $id_rub_parente", "squeeze_zone");
 			
 			// on supprime definitivement l'ancienne rubrique
 			sql_delete("spip_rubriques","id_rubrique = '$id_rub_orig'");
-			spip_log("Suppression definitive de la rubrique $id_rubrique", "ajouter_zone");
+			spip_log("Suppression definitive de la rubrique $id_rubrique", "squeeze_zone");
 	
 			$invalider = true;
 		}
@@ -111,7 +111,7 @@ function balise_FORMULAIRE_AJOUTER_ZONE_dyn($id_article) {
 							sql_insertq("spip_auteurs_articles",  array("id_auteur" => $add_id_auteur, "id_article" => $id_article));
 						}
 						$invalider = true;
-						spip_log("ajouter utilisateur $add_id_auteur a la zone $id_zone");
+						spip_log("ajouter utilisateur $add_id_auteur a la zone $id_zone","squeeze_zone");
 					}
 				}
 			}
@@ -120,7 +120,7 @@ function balise_FORMULAIRE_AJOUTER_ZONE_dyn($id_article) {
 			//invalider le cache afin de prendre en consideration les changements
 			include_spip('inc/invalideur');
 			suivre_invalideur("0",true);
-			spip_log('invalider', 'ajouter_zone');
+			spip_log('invalider', 'squeeze_zone');
 		}
 		return header("Location: ".generer_url_article($id_article)."");
 	}
