@@ -60,6 +60,7 @@ if(!$config['IDAuteur']) return _T('opconfig:erreur_die');
 // Les différentes actions que peut faire un utilisateur
 $previsualiser	= _request('previsualiser'); // demande la prévisualisation
 $valider	= _request('valider'); // demande la validation
+$sup_logo	= _request('sup_logo'); // demande la supression du logo
 $media		= _request('media'); // demande l'ajout de document
 $mots		= _request('mots'); // demande l'ajout de mot cle
 $agenda		= _request('agenda'); // demande la mise en agenda
@@ -173,7 +174,18 @@ if($auteur_session) {
 	if (!$nom_inscription) $nom_inscription = $auteur_session['nom'];
 	if (!$mail_inscription) $mail_inscription = $auteur_session['email'];
 }
+
+// l'auteur demande la suppression de son logo
+if ($sup_logo) {
+	$nom = 'arton' . intval($article);
+	$formats_logos = Array('jpg' ,'png', 'gif', 'bmp', 'tif');
 	
+	foreach ($formats_logos as $format) {
+		if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format)))
+			@unlink($d);
+	}
+}
+
 // l'auteur demande la publication de son article
 if($valider) {
 	// vérification avant mise en Base de donnée
@@ -494,47 +506,53 @@ if($media) {
 		if ($return['extension'] == $type_ext) {
 
 			if ($type_doc == 'logo') { // reprise du code iconifier ... action/iconifer.php
-				// placer le document arton$article dans IMG
-				$f =_DIR_LOGOS . 'arton'.$article . '.tmp'; // nom temporaire
-				$source = deplacer_fichier_upload($tmp, $f); // on deplace le fichier temp ds le rep logo
-				$size = getimagesize($f);
-				$formats_logos = Array('jpg' ,'png', 'gif', 'bmp', 'tif');
-				if (in_array($type_ext,$formats_logos)) {
-					$poids = filesize($f);
-
-					if (_LOGO_MAX_SIZE > 0
-					AND $poids > _LOGO_MAX_SIZE*1024) {
-						@unlink ($f);
-						$mess_error = _T('info_logo_max_poids',
-							array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
-							'actuel' => taille_en_octets($poids)));
+				// si le logo existe déjà : refus
+				if (!@file_exists( _DIR_LOGOS . 'arton'.$article . '.' . $type_ext)) {
+					// placer le document arton$article dans IMG
+					$f =_DIR_LOGOS . 'arton'.$article . '.tmp'; // nom temporaire
+					$source = deplacer_fichier_upload($tmp, $f); // on deplace le fichier temp ds le rep logo
+					$size = getimagesize($f);
+					$formats_logos = Array('jpg' ,'png', 'gif', 'bmp', 'tif');
+					if (in_array($type_ext,$formats_logos)) {
+						$poids = filesize($f);
+	
+						if (_LOGO_MAX_SIZE > 0
+						AND $poids > _LOGO_MAX_SIZE*1024) {
+							@unlink ($f);
+							$mess_error = _T('info_logo_max_poids',
+								array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
+								'actuel' => taille_en_octets($poids)));
+						}
+			
+						if (_LOGO_MAX_WIDTH * _LOGO_MAX_HEIGHT
+						AND ($size[0] > _LOGO_MAX_WIDTH
+						OR $size[1] > _LOGO_MAX_HEIGHT)) {
+							@unlink ($f);
+							//ERREUR
+							$mess_error = _T('info_logo_max_taille',
+									array(
+									'maxi' =>
+										_T('info_largeur_vignette',
+											array('largeur_vignette' => _LOGO_MAX_WIDTH,
+											'hauteur_vignette' => _LOGO_MAX_HEIGHT)),
+									'actuel' =>
+										_T('info_largeur_vignette',
+											array('largeur_vignette' => $size[0],
+											'hauteur_vignette' => $size[1]))
+								));
+						}
+						@rename ($f, _DIR_LOGOS . 'arton'.$article . '.' . $type_ext);
 					}
-		
-					if (_LOGO_MAX_WIDTH * _LOGO_MAX_HEIGHT
-					AND ($size[0] > _LOGO_MAX_WIDTH
-					OR $size[1] > _LOGO_MAX_HEIGHT)) {
+					else {
 						@unlink ($f);
-						//ERREUR
-						$mess_error = _T('info_logo_max_taille',
-								array(
-								'maxi' =>
-									_T('info_largeur_vignette',
-										array('largeur_vignette' => _LOGO_MAX_WIDTH,
-										'hauteur_vignette' => _LOGO_MAX_HEIGHT)),
-								'actuel' =>
-									_T('info_largeur_vignette',
-										array('largeur_vignette' => $size[0],
-										'hauteur_vignette' => $size[1]))
-							));
+	
+						// ERREUR
+						$mess_error = _T('info_logo_format_interdit',
+									array('formats' => join(', ', $formats_logos)));
 					}
-					@rename ($f, _DIR_LOGOS . 'arton'.$article . '.' . $type_ext);
 				}
-				else {
-					@unlink ($f);
-
-					// ERREUR
-					$mess_error = _T('info_logo_format_interdit',
-								array('formats' => join(', ', $formats_logos)));
+				else  {
+					$mess_error = _T('opconfig:logo_existe_deja');
 				}
 			}
 			else {

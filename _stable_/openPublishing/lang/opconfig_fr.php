@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // L
 'logo_article' => 'Le logo de votre article',
 'logo_inclusion' =>'Logo (l\'image deviendra le logo de votre article)',
+'logo_existe_deja' =>'Le logo existe d&eacute;j&agrave; !',
 
 // P
 'premiere_fois' => 'C\'est la premi&egrave;re fois que vous installez le plugin openPublishing, et vous l\'utilisez pour la premi&egrave;re fois.',
@@ -58,6 +59,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'sup_auteur_anonymous' => 'Supprimez l\'auteur portant le num&eacute;ro id 999',
 
 'sup_table' => 'Supprimer les tables obsol&eacute;tes (op_config et op_rubriques)',
+
+'sup_logo' => 'Supprimer le logo',
 
 // T
 'telecharge_install' => 'Vous venez de t&eacute;l&eacute;charger la version 0.4 du plugin openPublishing. Vous avez supprim&eacute; votre ancienne version dans votre r&eacute;pertoire "plugins/" et vous l\'avez remplac&eacute; par celle-ci.',
