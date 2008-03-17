@@ -1,0 +1,66 @@
+#CACHE{0}
+<script type="text/javascript">
+	function deletepeople(auteur){
+		var id = auteur.substr(7);
+		jQuery('#supprimer_people').val(id);
+		jQuery('#formulaire_zone_del_people input[@type=submit]').click();
+		return false;
+	}
+</script>
+<BOUCLE_zone(ZONES_RUBRIQUES){id_rubrique=#ENV{id_rubrique}}>
+	<form action="[(#EVAL{zone_del_people}|generer_url_action)]" method="post" id="formulaire_zone_del_people" onsubmit="return AjaxSqueeze(this,'del_people','',event)" class="formulaire_spip">
+		<div>
+			<h4><:squeezezone:personnes_autorisees:></h4>
+				<div id="del_people">
+				<BOUCLE_article(ARTICLES){id_rubrique}>
+						<B_autart>
+						<p><strong>[(#TOTAL_BOUCLE|=={1}|?{<:squeezezone:zone_auteur:>,<:squeezezone:zone_auteurs:>})]</strong></p>
+						<ul>
+						<BOUCLE_autart(AUTEURS){id_article}{tout}{doublons}>
+								[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{' '})
+								<li>
+									#NOM [((#LOGIN))]
+									<a href="#" class="deletepeople supprimer" style="display:inline" onclick="if(confirm('<:squeezezone:supprimer_zone_sure:>'))return deletepeople('people-#ID_AUTEUR');else return false;" id="people-#ID_AUTEUR" title="<:squeezezone:delete:>">
+										<img src="#CHEMIN{images/squeeze_delete.png}" alt="<:squeezezone:delete:>" />
+									</a>
+								</li>]
+								[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{'',' '})
+									<li>
+										#NOM [((#LOGIN))]
+										<a href="#" class="deletepeople supprimer" style="display:inline" onclick="if(confirm('<:squeezezone:supprimer_zone_auteur:>'))return deletepeople('people-#ID_AUTEUR');else return false;"  id="people-#ID_AUTEUR" title="<:squeezezone:delete:>">
+											<img src="#CHEMIN{images/squeeze_delete.png}" alt="<:squeezezone:delete:>" />
+										</a>
+									</li>]
+						</BOUCLE_autart>
+						</ul>
+						</B_autart>
+				</BOUCLE_article>
+				<B_zauteur>
+				<p><strong><:squeezezone:zone_users:></strong></p>
+				<ul>
+				<BOUCLE_zauteur(AUTEURS zones_auteurs){id_zone}{doublons}{tout}>
+						[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''})
+							<li>#NOM_FAMILLE #PRENOM  [((#LOGIN))]</li>
+						]
+						[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{'',' '})
+							<li>
+								#NOM [((#LOGIN))]
+								<a href="#" class="deletepeople supprimer" style="display:inline" id="people-#ID_AUTEUR" onclick="if(confirm('<:squeezezone:supprimer_zone_autorise:>'))return deletepeople('people-#ID_AUTEUR');else return false;"  title="<:squeezezone:delete:>">
+									<img src="#CHEMIN{images/squeeze_delete.png}" alt="<:squeezezone:delete:>" /></a>
+							</li>]
+				</BOUCLE_zauteur>
+				</ul>
+				</B_zauteur>
+				</div>
+			<input type="hidden" name="supprimer_people" id="supprimer_people" value="" />
+			<input type="hidden" name="id_rubrique" id="id_rubrique" value="[(#ID_ZONE)]" />
+			<input type="hidden" name="redirect_del_auteur" value="[(#URL_PAGE{zone_del_people}|parametre_url{id_zone,#ID_ZONE}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+			<p class="spip_bouton nodisplay">
+			<input type="submit" name="add_tags" value="<:bouton_valider:>" class="valider" />
+			</p>
+			<br style="clear:both" />
+		</div>
+	</form>
+</BOUCLE_zone>
+
+[(#FORMULAIRE_AJOUTER_ZONE)]

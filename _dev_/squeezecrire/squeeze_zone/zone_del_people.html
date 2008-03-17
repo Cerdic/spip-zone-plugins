@@ -1,0 +1,42 @@
+#HTTP_HEADER{Content-Type:text/html}
+[<div class="error">(#ENV*{erreur})</div>]
+<div id="zone_del_people">
+<BOUCLE_article(ARTICLES){id_rubrique}>
+	<B_autart>
+		<p><strong>[(#TOTAL_BOUCLE|=={1}|?{<:squeezezone:zone_auteur:>,<:squeezezone:zone_auteurs:>})]</strong></p>
+		<ul>
+		<BOUCLE_autart(AUTEURS){id_article}{tout}{doublons}>
+				[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{' '})
+				<li>
+					#NOM [((#LOGIN))]
+					<a href="#" class="deletepeople supprimer" style="display:inline" onclick="if(confirm('<:squeezezone:supprimer_zone_sure:>'))return deletepeople('people-#ID_AUTEUR');else return false;" id="people-#ID_AUTEUR" title="<:squeezezone:delete:>">
+						<img src="#CHEMIN{images/squeeze_delete.png}" alt="<:squeezezone:delete:>" />
+					</a>
+				</li>]
+				[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{'',' '})
+					<li>
+						#NOM [((#LOGIN))]
+						<a href="#" class="deletepeople supprimer" style="display:inline" onclick="if(confirm('<:squeezezone:supprimer_zone_auteur:>'))return deletepeople('people-#ID_AUTEUR');else return false;"  id="people-#ID_AUTEUR" title="<:squeezezone:delete:>">
+							<img src="#CHEMIN{images/squeeze_delete.png}" alt="<:squeezezone:delete:>" />
+						</a>
+					</li>]
+		</BOUCLE_autart>
+		</ul>
+	</B_autart>
+</BOUCLE_article>
+<B_zauteur>
+	<p><strong><:squeezezone:zone_users:></strong></p>
+	<ul>
+	<BOUCLE_zauteur(AUTEURS zones_auteurs){id_zone}{doublons}{tout}>
+			[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''})
+				<li>#NOM_FAMILLE #PRENOM  [((#LOGIN))]</li>
+			]
+			[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{'',' '})
+				<li>
+					#NOM [((#LOGIN))]
+					<a href="#" class="deletepeople supprimer" style="display:inline" id="people-#ID_AUTEUR" onclick="if(confirm('<:squeezezone:supprimer_zone_autorise:>'))return deletepeople('people-#ID_AUTEUR');else return false;"  title="<:squeezezone:delete:>">
+						<img src="#CHEMIN{images/squeeze_delete.png}" alt="<:squeezezone:delete:>" /></a>
+				</li>]
+	</BOUCLE_zauteur>
+	</ul>
+</B_zauteur>

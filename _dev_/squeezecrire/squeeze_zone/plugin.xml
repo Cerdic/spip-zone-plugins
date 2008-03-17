@@ -1,0 +1,29 @@
+	<plugin>
+	<nom><multi>
+		[fr]Squeeze Zone
+	</multi></nom>
+	<auteur>kent1 [->http://kent1.sklunk.net/]
+_ &copy; 2008 - Distribu&#233; sous licence GNU/LGPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<icon>
+	</icon>
+	<description><multi>
+[fr]Sous plugin du plugin g&eacute;n&eacute;ral squeeze ecrire/
+_ Ce plugin permet de cr&eacute;er des zones d'acc&egrave;s restreint &agrave; partir d'un article depuis l'espace public
+_ Ce plugin n&eacute;cessite le plugin "Acc&egrave;s Restreint v2"
+	</multi></description>
+	<lien>http://kent1.sklunk.net/spip.php?article121</lien>
+	<prefix>
+	squeezezone
+	</prefix>
+	<necessite id="SPIP" version='[1.9302;]' />
+	<necessite id="AccesRestreint" version='[0.2;]' />
+	<necessite id="SelecteurGenerique" version="[0.1;]" />
+	<chemin dir='' />
+</plugin>

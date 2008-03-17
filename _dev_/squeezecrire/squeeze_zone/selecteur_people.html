@@ -1,0 +1,48 @@
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}
+<?xml version="1.0"?>
+[(#REM)
+
+	Menu de selection d'auteurs (auteurs elargis => inscription2)
+
+	La reponse doit etre en xml, elle sera exploitee par iautocompleter.js
+
+]
+<ajaxresponse>
+
+[(#REM)
+	Eliminer d'abord les auteurs deja lies a l'article/breve etc.
+	Puis eliminer les auteurs de la zone...
+]
+<BOUCLE_e(AUTEURS){tout}{id_article}{doublons}>#ID_AUTEUR</BOUCLE_e>
+<BOUCLE_zone(ZONES_RUBRIQUES){id_rubrique=#ENV{id_rubrique}}>
+<BOUCLE_ebis(AUTEURS){tout}{id_zone}{doublons}>#ID_AUTEUR</BOUCLE_ebis>
+</BOUCLE_zone>
+[(#REM) Chercher les auteurs correspondant a la requete ]
+<BOUCLE_s(AUTEURS){nom LIKE (#ENV{value})%}{0,20}{par nom_famille}{doublons}>
+<item>
+	<text><![CDATA[<b>#NOM</b>[ - (#LOGIN)]]]></text>
+	<value><![CDATA[[(#NOM|textebrut)]]]></value>
+	<id>#ID_AUTEUR</id>
+
+</item>
+</BOUCLE_s>
+
+	<BOUCLE_s1(AUTEURS_ELARGIS auteurs){login LIKE (#ENV{value})%}{0,20}{par nom_famille}{doublons}>
+	<item>
+		<text><![CDATA[<b>#NOM</b>[ - (#LOGIN)]]]></text>
+		<value><![CDATA[[(#NOM|textebrut)]]]></value>
+		<id>#ID_AUTEUR</id>
+	</item>
+	</BOUCLE_s1>
+	
+		[(#REM) Vraiment on n'a rien trouve ]
+		<item>
+		<text><![CDATA[<spanclass='autocomplete-message'><:selecteurgenerique:pas_suggestion:></span>]]></text>
+		<value><![CDATA[[(#ENV*{value}|textebrut)]]]></value>
+		<id>0</id>
+		</item>
+
+	<//B_s1>
+<//B_s>
+
+</ajaxresponse>
