@@ -33,14 +33,15 @@ $GLOBALS['version_base_genea'] = "1.01";
 
 // -- Liste des differentes tables utilisees par le plugin --------------
 $tables_genea = array(
-	$table_prefix."_genea",
-	$table_prefix."_genea_individus",
-	$table_prefix."_genea_familles",
-	$table_prefix."_genea_sosa",
-	$table_prefix."_genea_evt",
-	$table_prefix."_genea_sources",
-	$table_prefix."_genea_doc_sources",
-	$table_prefix."_genea_notes");
+	"spip_genea",
+	"spip_genea_individus",
+	"spip_genea_familles",
+	"spip_genea_sosa",
+	"spip_genea_evt",
+	"spip_genea_participes",
+	"spip_genea_sources",
+	"spip_genea_doc_sources",
+	"spip_genea_notes");
 
 // -- Definition de la table genea --------------------------------------
 $spip_genea =  array(
@@ -128,7 +129,6 @@ $table_primary['genea_sosa'] = "id_sosa";
 // -- Definition de la table d'evenements -------------------------------
 $spip_genea_evt = array(
    "id_genea_evt" => "BIGINT(21) NOT NULL AUTO_INCREMENT",
-   "id_individu" => "BIGINT(21) DEFAULT '0' NOT NULL",
    "type_evt" => "VARCHAR(4) NOT NULL",
    "date_evt" => "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
    "descriptif" => "TEXT",
@@ -147,6 +147,26 @@ $tables_principales['spip_genea_evt'] = array(
 
 $table_des_tables['genea_evt'] = "genea_evt";
 $table_primary['genea_evt'] = "id_genea_evt";
+
+// -- Definition de la table participations a un evenement --------------
+$spip_genea_participes = array(
+	"id_genea_evt" => "BIGINT(21) DEFAULT '0' NOT NULL",
+	"id_individu" => "BIGINT(21) DEFAULT '0' NOT NULL",
+	"type_liens" => "VARCHAR(4) NULL DEFAULT NULL",
+	"id_genea" => "BIGINT(21) DEFAULT '0' NOT NULL");
+
+$spip_genea_participes_key = array(
+	"KEY id_genea_evt" => "id_genea_evt",
+	"KEY id_individu" => "id_individu",
+	"KEY type_liens" => "type_liens",
+	"KEY id_genea" => "id_genea");
+
+$tables_principales['spip_genea_participes'] = array(
+	'field' => &$spip_genea_participes,
+	'key' => &$spip_genea_participes_key);
+
+$table_des_tables['genea_participes'] = "genea_participes";
+$table_primary['genea_participes'] = "id_genea_evt";
 
 // -- Definition de la table des sources --------------------------------
 $spip_genea_sources = array(
@@ -184,8 +204,8 @@ $table_des_tables['genea_doc_sources'] = "genea_doc_sources";
 $table_primary['genea_doc_sources'] = "id_document";
 
 // -- Definition des jonctions de tables --------------------------------
-$tables_jointures['spip_rubriques']['id_genea'] = 'genea';
-$tables_jointures['spip_genea_individus']['id_rubrique'] = 'genea';
+$tables_jointures['spip_rubriques'][] = 'genea';
+$tables_jointures['spip_genea_individus'][] = 'genea';
 
 // -- Definition des parametres de traitement ---------------------------
 $table_des_traitements['DATE_EVT'][] = 'vider_date(%s)';

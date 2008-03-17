@@ -50,7 +50,7 @@ function genea_affiche_date($date){
 
 
 // -- Recupere et verifie le droit a l'affichage des dates ----------------
-function genea_date_evt($id_individu, $type_evt, $filtres=NULL){
+function genea_date_evt($id_individu, $type_evt, $type_liens='ap', $filtres=NULL){
 
 	$date_evt = '';  // Initialisation de la variable de retour
 
@@ -59,7 +59,7 @@ function genea_date_evt($id_individu, $type_evt, $filtres=NULL){
 	$auteur_ok = autoriser('voirfiche', 'genea', $id_individus);
 
 	if (($auteur_ok) AND ($id_individu) AND ($type_evt)) {
-		$q="SELECT date_evt FROM spip_genea_evt WHERE (id_individu=$id_individu) AND (type_evt='$type_evt')";
+		$q="SELECT evt.date_evt FROM spip_genea_evt AS evt, spip_genea_participes AS liens  WHERE (liens.id_individu=$id_individu) AND (liens.type_liens='$type_liens') AND (liens.id_genea_evt=evt.id_genea_evt) AND (evt.type_evt='$type_evt')";
 		$res=spip_query($q);
 		if ($row=spip_fetch_array($res)) {
 			$date_ret = normaliser_date($row['date_evt']);
@@ -70,7 +70,7 @@ function genea_date_evt($id_individu, $type_evt, $filtres=NULL){
 		// pour les redacteurs et les administrateurs autorises.
 		$maintenant = getdate();
 		$centans = intval($maintenant["year"])-100;
-		if ($centans>=date("Y", strtotime($date_ret)) OR $auteur_ok) $date_evt = $date_ret;
+		if ($centans>=date("Y", strtotime($date_ret)) OR $auteur_ok) $date_evt = convert_date($date_ret, 'DE');
 	}
 	return vider_date($date_evt);
 }
@@ -109,7 +109,7 @@ if (!function_exists('convert_date')) {
 	}
 }
 
-function convert_date_dist($faire='A|DE', $type='', $date_evt=array(), $precision = '', $filtres = NULL) {
+function convert_date_dist($date_evt, $faire='DE', $type='gregorian', $filtres = NULL) {
 
 	if ($type='') $type = 'gregorian';
 
@@ -127,22 +127,13 @@ function convert_date_dist($faire='A|DE', $type='', $date_evt=array(), $precisio
 			AND (function_exists($f) OR function_exists($f.='_dist'))
 			)
 		)
-		$a = $f($faire,$type,$date_evt,$precision,$filtres);
+		$a = $f($date_evt, $faire, $type, $filtres);
 
 	return $a;
 }
 
 // si pas de convertion possible alors donner date telque.
-function convert_date_defaut_dist($date_evt){
-	return $date_evt;
-}
-
-// si pas de convertion possible alors donner date telque.
-function convert_date_gregorian_A_dist($date_evt){
-	return $date_evt;
-}
-
-function convert_date_gregorian_DE_dist($date_evt){
+function convert_date_defaut_dist($date_evt, $faire, $type, $filtres){
 	return $date_evt;
 }
 ?>

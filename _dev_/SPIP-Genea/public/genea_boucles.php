@@ -76,29 +76,33 @@ function boucle_GENEA_SOURCES_dist($id_boucle, &$boucles) {
 // {conjoint=id_individu} permet de retrouver la fiche famille d'une
 // personne et donc son conjoint et ses enfants.
 //
-
+// A RETESTER
 function critere_conjoint($idb, &$boucles, $crit){
-//	global $table_prefix;
 	$op='';
+
+//	echo('bienvenue<br />');
+
 	$boucle = &$boucles[$idb];
 	$params = $crit->param;
 	$type = array_shift($params);
 	$type = $type[0]->texte;
+
+//	echo "* ".serialize($params)."</br>";
+//	echo "* ".serialize($type)."</br>";
+
 	if(preg_match(',^(\w+)([<>=])([0-9]+)$,',$type,$r)){
 		$type=$r[1];
 		$op=$r[2];
 		$op_val=$r[3];
 	}
-	print_r ($r);
-	echo '</br>';
-	echo "$type - $op - $op_val";
+
+	echo "* $type - $op - $op_val<br />";
 
 	$table = $boucle->id_table;
-//	$champ = $boucle->id_table . '.' . $type;
-//	$boucle->where[] = '(\''. $boucle->id_table .'.id_epoux\'='.$op_val.' OR \''. $boucle->id_table .'.id_epouse\'='.$op_val.')';
-	$boucle->where[] = '(\''. $table . '.id_epoux\'=' . $op_val .' OR \'' . $table . '.id_epouse\'=' . $op_val . ')';
-
-//	$boucles[$idb]->group[] = $champ;
+	$q = '('. $table . '.id_epoux=' . $type .' OR ' . $table . '.id_epouse=' . $type . ')';
+//	echo $q;
+	$boucle->where[] = $q;
+//	$boucle->where[] = '('. $table . '.id_epoux=' . $op_val .' OR ' . $table . '.id_epouse=' . $op_val . ')';
 }
 
 //
