@@ -40,6 +40,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'expliq_balise' => 'le code donn&eacute; en-dessous de votre image est a placer dans le texte de votre article si vous souhaitez inclure l\'image ou la vignette du document dans votre texte (right, center, left renseigne l\'alignement que prendra votre image  ou vignette).',
 
+// L
+'logo_article' => 'Le logo de votre article',
+'logo_inclusion' =>'Logo (l\'image deviendra le logo de votre article)',
+
 // P
 'premiere_fois' => 'C\'est la premi&egrave;re fois que vous installez le plugin openPublishing, et vous l\'utilisez pour la premi&egrave;re fois.',
 

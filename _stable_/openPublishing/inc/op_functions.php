@@ -3,6 +3,18 @@
 /* Ce fichier contient toutes les fonctions utilisé par la balise #FORMULAIRE_ARTICLE
  */
 
+// fonction recherchant un éventuel logo pour affichage
+function logo_article($id_article) {
+	$nom = 'arton' . intval($id_article);
+	$formats_logos = Array('jpg' ,'png', 'gif', 'bmp', 'tif');
+
+	foreach ($formats_logos as $format) {
+		if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format)))
+			return '<img src="'.$d.'" title="logo article" width="50" height="50"/>';
+	}
+	return '';
+}
+
 // fonction qui affiche la zone de texte et la barre de typographie
 
 function barre_article($texte, $rows, $cols, $lang='')

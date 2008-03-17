@@ -12,19 +12,13 @@ _ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 		{{Ce plugin fourni :}} <br />
 		<ul>
 		<li>un formulaire openPublishing <code>#FORMULAIRE_ARTICLE{#SELF}</code></li>
-		<li>trois nouvelles tables dans la base de donn&#233;es (spip_op_auteurs, spip_op_config, et spip_op_rubriques). </li>
 		<li>une nouvelle balise :
 			<ul>
 			<li> #AGENDA (donne le num&#233;ro de votre rubrique agenda).</li>
 			</ul>
 		</li>
 			
-		<li>deux nouvelles boucles :
-			<ul>
-			<li>(op_rubriques) qui liste vos rubriques openPublishing.</li>
-			<li>(op_auteur) qui liste les informations d'un auteur pour un article donn&#233;.</li>
-			</ul>
-		</li>
+
 		</ul>
 				
 		{{Procedure d'installation :}} <br />
@@ -48,8 +42,6 @@ _ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 		<li>Cliquez sur "Mettre &agrave; jour openPublishing"</li>
 		<li>Modifier la configuration par d&eacute;faut des nouvelles options du plugins</li>
 		</ul>
-		
-		{{feuille de style : }} attention, il <b>faut</b> copier les styles du plugin dans <b>votre</b> feuille de style<br />
 	</description>
 	<lien>[Documentation->http://edd.lautre.net/wiki], et [Configuration->.?exec=cfg&amp;cfg=op]</lien>
 	<prefix>op</prefix>

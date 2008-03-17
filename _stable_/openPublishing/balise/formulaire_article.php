@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // include_spip('inc/acces');
 // include_spip('inc/documents');
 include_spip('inc/ajouter_documents');
+include_spip('inc/iconifier');
 // include_spip('inc/getdocument');
 include_spip('inc/barre');
 // include_spip('base/abstract_sql');
@@ -411,7 +412,7 @@ if($mots) {
 	if ($motschoix){
 		foreach($motschoix as $mot){
 			//protection contre mots-clefs vide
-			$row = sql_fetch(sql_select(
+			$q = sql_fetch(sql_select(
 				array('titre'),
 				array('spip_mots'),
 				array('id_mot='.$mot.' LIMIT 1'))
@@ -456,9 +457,9 @@ if($media) {
 	$tmp = $_FILES['doc']['tmp_name'];
 	$type = $_FILES['doc']['type'];
 	$error = $_FILES['doc']['error'];
-		
-	// vérification si upload OK
-	if( !is_uploaded_file($tmp) ) {
+
+	// Intercepter une erreur a l'envoi
+	if (check_upload_error($error)) {
 		echo $error;
 		$mess_error = _T('opconfig:erreur_upload');
 		$erreur_document = 1;
@@ -480,8 +481,53 @@ if($media) {
 			));
 		if ($return['extension'] == $type_ext) {
 
-			
-			inc_ajouter_documents_dist ($tmp, $fichier, "article", $article, $type_doc, $id_document, $documents_actifs);
+			if ($type_doc == 'logo') { // reprise du code iconifier ... action/iconifer.php
+				// placer le document arton$article dans IMG
+				$f =_DIR_LOGOS . 'arton'.$article . '.tmp'; // nom temporaire
+				$source = deplacer_fichier_upload($tmp, $f); // on deplace le fichier temp ds le rep logo
+				$size = getimagesize($f);
+				$formats_logos = Array('jpg' ,'png', 'gif', 'bmp', 'tif');
+				if (in_array($type_ext,$formats_logos)) {
+					$poids = filesize($f);
+
+					if (_LOGO_MAX_SIZE > 0
+					AND $poids > _LOGO_MAX_SIZE*1024) {
+						@unlink ($f);
+						$mess_error = _T('info_logo_max_poids',
+							array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
+							'actuel' => taille_en_octets($poids)));
+					}
+		
+					if (_LOGO_MAX_WIDTH * _LOGO_MAX_HEIGHT
+					AND ($size[0] > _LOGO_MAX_WIDTH
+					OR $size[1] > _LOGO_MAX_HEIGHT)) {
+						@unlink ($f);
+						//ERREUR
+						$mess_error = _T('info_logo_max_taille',
+								array(
+								'maxi' =>
+									_T('info_largeur_vignette',
+										array('largeur_vignette' => _LOGO_MAX_WIDTH,
+										'hauteur_vignette' => _LOGO_MAX_HEIGHT)),
+								'actuel' =>
+									_T('info_largeur_vignette',
+										array('largeur_vignette' => $size[0],
+										'hauteur_vignette' => $size[1]))
+							));
+					}
+					@rename ($f, _DIR_LOGOS . 'arton'.$article . '.' . $type_ext);
+				}
+				else {
+					@unlink ($f);
+
+					// ERREUR
+					$mess_error = _T('info_logo_format_interdit',
+								array('formats' => join(', ', $formats_logos)));
+				}
+			}
+			else {
+				inc_ajouter_documents_dist ($tmp, $fichier, "article", $article, $type_doc, $id_document, $documents_actifs);
+			}
 		}
 		else { // sinon, erreur
 			$mess_error = _T('opconfig:erreur_extension');
@@ -509,6 +555,7 @@ if ($config['Agenda'] == 'yes') {
 if ($config['DocInc'] == 'yes') {
 
 	$bouton= 'Ajouter l\'image ou le document';
+
 	$formulaire_documents = inclure_balise_dynamique(
 	array('formulaires/formulaire_documents',	0,
 		array(

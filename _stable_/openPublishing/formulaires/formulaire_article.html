@@ -9,6 +9,12 @@
 
 	[<center><p style="color:red;"><b>(#ENV*{mess_error})</b></p></center>]
 
+	[(#CONFIG{op/Logo,''}|=={yes}?{[<p>
+	<fieldset><legend><b><:opconfig:logo_article:></b></legend>
+		<p>(#ENV**{article}|logo_article)</p>
+	</fieldset>
+	</p>]})]
+
 	<B_document>
 	<p>
 	<fieldset><legend><b><:opconfig:documents_lies:></b></legend>
