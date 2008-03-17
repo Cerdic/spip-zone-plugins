@@ -1,0 +1,860 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Siou: Référence du fichier odb_commun/inc-pdf-attestations.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Généré par Doxygen 1.5.3 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Page&nbsp;principale</span></a></li>
+    <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+    <li><a href="dirs.html"><span>Répertoires</span></a></li>
+    <li>
+      <form action="search.php" method="get">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td><label>&nbsp;Rechercher&nbsp;</label></td>
+            <td><input type="text" name="query" value="" size="20" accesskey="s"/></td>
+          </tr>
+        </table>
+      </form>
+    </li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_d85a68ddeac050d85549308ca402191f.html">odb_commun</a></div>
+<h1>Référence du fichier inc-pdf-attestations.php</h1>
+<p>
+<a href="inc-pdf-attestations_8php-source.html">Aller au code source de ce fichier.</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Variables</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a> = (int)$tTmp[2]</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a> = (int)$tTmp[2]</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a> = $_REQUEST['annee']</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#3a92e859e7c5b76b38102a0503de87e3">$candidat</a> = &quot;$civ $prefixe &lt;b&gt;$nom&lt;/b&gt; $prenoms&quot;</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#6a5a233adfaad0185a2b89ba6c4f3ae3">$colonnes</a> = array('id_table','sexe','prefixe','nom','prenoms','ldn','pays','ddn','delib','moyenne','serie','libSerie','jury','centre')</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#b3d0ef943a60926dea60d237552d4c88">$colonnes2</a> = array('id_table','candidat','ldn','ddn','delib','moyenne','serie','libSerie','jury','centre')</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#55c1b453fa2af507e2c4e9a94d0f84fd">$date_attestation</a> = trim($_REQUEST['date_attestation'])</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#fbbc42ce2f57fdf1aac867214d975c02">$date_delib</a> = trim($_REQUEST['date_delib'])</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="odb__saisie_2img__pack_2vignettes_2index_8php.html#0544c3fe466e421738dae463968b70ba">else</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#12a6f07665340c6c759a07cf96d74ef8">$delib</a> = &quot;&lt;b&gt;$delib&lt;/b&gt;&quot;</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#9a4db75cbb47f99cc82e12e08bb365ec">$delib</a> = &quot;&lt;b&gt;$delib&lt;/b&gt; ($groupe$eme groupe)&quot;</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#9a4db75cbb47f99cc82e12e08bb365ec">$delib</a> = ucfirst(str_replace('abien','Assez bien',str_replace('tbien','Tr&amp;egrave;s bien',strtolower($delib))))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#dd57477ad14361f5834629e405ff5478">$deliberation</a> = $groupe+1</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="odb__saisie_2img__pack_2vignettes_2index_8php.html#0544c3fe466e421738dae463968b70ba">else</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#f0189d802a63b07049d0a278b9ec7df8">$eme</a> = '&amp;egrave;me'</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#6bcaf0e2f3a66b7da57696c4e02eac7d">$extra</a> = ''</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#5f679b919346c1e3a2e0622e46e2f358">$family</a> = 'Helvetica'</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#71f2aa6a4b2bf64caee0b33cd32056dd">$groupe</a> = $_REQUEST['groupe']</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#2c265bba1724371bb03e6901297c30b2">$height</a> = $pdf-&gt;ez['pageHeight']</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#f24aefa35fa703a1521c8145fe8fa082">$infos</a> = array('Title'=&gt;html_entity_decode($titre),'Author'=&gt;'SIOU / Office du Bac','CreationDate'=&gt;date(&quot;d/m/Y&quot;))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="odb__saisie_2img__pack_2vignettes_2index_8php.html#0544c3fe466e421738dae463968b70ba">else</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#27509762da1979df7c3e9f899a758829">$iPage</a> = 1</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#477477d68b3781b42c7fb933b20288af">$jour</a> = (int)$tTmp[0]</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#477477d68b3781b42c7fb933b20288af">$jour</a> = (int)$tTmp[0]</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#1f711ee6f46195ba9dfce71eaf779d02">$jury</a> = $_REQUEST['jury']</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#e05862a0294251c88629b141b5ce329a">$limit</a> = $_REQUEST['limit']</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a> = (int)$tTmp[1]</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a> = (int)$tTmp[1]</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#011800c63ece4cbbfa77136a20607023">$options</a> = array('b'=&gt;'Helvetica-Bold.afm')</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a> = &amp; new Cezpdf('A4','portrait')</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#4dbe106434277d49b9fac7b1dc8602eb">$pdf_dir</a> = 'contrib/ezpdf/'</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#6b9aead899bafbd080a6faef6b5650ad">$pdfcode</a> = str_replace(&quot;\n&quot;,&quot;\n&lt;br&gt;&quot;,htmlspecialchars($pdfcode))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#bda6e620e7f5d772657555a6b23ed449">$pdfG</a> = 'attestations_'</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a> = odb_query($sql,__FILE__,__LINE__)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#9c9258871914db2f42ceec6dc4674d9d">$sDateAttestation</a> = html_entity_decode(utf8_decode(strftime(&quot;%A %d %B %Y&quot;, mktime(0, 0, 0, $mois, $jour, $annee))))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#45830599416786d3e81ab9f93a14f4a1">$sDateDelib</a> = html_entity_decode(utf8_decode(strftime(&quot;%A %d %B %Y&quot;, mktime(0, 0, 0, $mois, $jour, $annee))))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#b83af10f380499902aaae49fbbc67fca">$sommaire</a> = html_entity_decode(&quot;&lt;c:ilink:&quot;.getRewriteString($candidat).&quot;&gt;&quot;.str_pad($id_table,13,'0',STR_PAD_LEFT).&quot; - jury $jury, s&amp;<a class="el" href="inc-pdf-table_8php.html#3f1f14bbce42f11ded67b8b79ead3941">eacute</a>;rie $serie - $candidat ($delib)&lt;/c:ilink&gt;\n&quot;)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#7f53e2bae16251ad448152ff8ae09f7d">$tBddConf</a> = getBddConf()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a> = &quot; jury&quot;</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#cb478ae0bc69ed718c3c6deea2da7bd6">$tTmp</a> = explode('/',$date_attestation)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#cb478ae0bc69ed718c3c6deea2da7bd6">$tTmp</a> = explode('/',$date_delib)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#d4a3e16ae571f7498eedad9de246faf7">$where</a> = ''</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-pdf-attestations_8php.html#5795120b4b324bc4ca83f1e6fdce7d57">$width</a> = $pdf-&gt;ez['pageWidth']</td></tr>
+
+</table>
+<hr><h2>Documentation des variables</h2>
+<a class="anchor" name="b372e2dd50f4a592a1226a01290a2f4f"></a><!-- doxytag: member="inc-pdf-attestations.php::$annee" ref="b372e2dd50f4a592a1226a01290a2f4f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$annee = (int)$tTmp[2]          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00045">45</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="b372e2dd50f4a592a1226a01290a2f4f"></a><!-- doxytag: member="inc-pdf-attestations.php::$annee" ref="b372e2dd50f4a592a1226a01290a2f4f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$annee = (int)$tTmp[2]          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00037">37</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="b372e2dd50f4a592a1226a01290a2f4f"></a><!-- doxytag: member="inc-pdf-attestations.php::$annee" ref="b372e2dd50f4a592a1226a01290a2f4f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$annee = $_REQUEST['annee']          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00022">22</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00307">afficherImpressions()</a>, <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00013">afficherNotes()</a>, <a class="el" href="odb__fonctions_8php-source.html#l00021">balise_CANDIDAT()</a>, <a class="el" href="odb__fonctions_8php-source.html#l00075">balise_CENTRE()</a>, <a class="el" href="odb__fonctions_8php-source.html#l00054">balise_DLDN()</a>, <a class="el" href="odb__fonctions_8php-source.html#l00124">balise_EPF1()</a>, <a class="el" href="odb__fonctions_8php-source.html#l00133">balise_EPF2()</a>, <a class="el" href="odb__fonctions_8php-source.html#l00097">balise_EPS()</a>, <a class="el" href="odb__fonctions_8php-source.html#l00142">balise_ETABLISSEMENT_ORIGINE()</a>, <a class="el" href="odb__fonctions_8php-source.html#l00106">balise_LV1()</a>, <a class="el" href="odb__fonctions_8php-source.html#l00115">balise_LV2()</a>, <a class="el" href="odb__fonctions_8php-source.html#l00176">balise_RESULTAT()</a>, <a class="el" href="odb__fonctions_8php-source.html#l00151">balise_SERIE_TXT()</a>, <a class="el" href="odb__repartition_8php-source.html#l00030">capaciteCentres()</a>, <a class="el" href="odb__import_8php-source.html#l00033">exec_odb_import()</a>, <a class="el" href="odb__notes_8php-source.html#l00068">exec_odb_notes()</a>, <a class="el" href="odb__param_8php-source.html#l00032">exec_odb_param()</a>, <a class="el" href="odb__ref_8php-source.html#l00029">exec_odb_ref()</a>, <a class="el" href="odb__repartition_8avecGeneriques_8php-source.html#l00095">exec_odb_repartition()</a>, <a class="el" href="odb__requete_8php-source.html#l00022">exec_odb_requete()</a>, <a class="el" href="odb__saisie_8php-source.html#l00060">exec_odb_saisie()</a>, <a class="el" href="odb__statistiques_8php-source.html#l00022">exec_odb_statistiques()</a>, <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>, <a class="el" href="odb__suivi_8php-source.html#l00026">exec_odb_suivi()</a>, <a class="el" href="inc-html_8php-source.html#l00161">formSelectAnnee()</a>, <a class="el" href="odb__saisie_2exec_2inc-bdd_8php-source.html#l00002">getNbCandidats()</a>, <a class="el" href="inc-base_8php-source.html#l00089">getRangCandidatDansSalle()</a>, <a class="el" href="inc-base_8php-source.html#l00182">getSeriesDansSalle()</a>, <a class="el" href="odb__saisie_8php-source.html#l00032">odb_form_saisie()</a>, <a class="el" href="inc-regles__gestion_8php-source.html#l00020">reglesGestion()</a>, <a class="el" href="odb__repartition_2exec_2inc-traitements_8php-source.html#l00016">repartirCandidats()</a>, <a class="el" href="inc-fichiers_8php-source.html#l00251">reprise_import()</a>, et <a class="el" href="odb__fonctions_8php-source.html#l00030">siou_spip_dldn()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="3a92e859e7c5b76b38102a0503de87e3"></a><!-- doxytag: member="inc-pdf-attestations.php::$candidat" ref="3a92e859e7c5b76b38102a0503de87e3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$candidat = &quot;$civ $prefixe &lt;b&gt;$nom&lt;/b&gt; $prenoms&quot;          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00087">87</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__param_8php-source.html#l00032">exec_odb_param()</a>, et <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="6a5a233adfaad0185a2b89ba6c4f3ae3"></a><!-- doxytag: member="inc-pdf-attestations.php::$colonnes" ref="6a5a233adfaad0185a2b89ba6c4f3ae3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$colonnes = array('id_table','sexe','prefixe','nom','prenoms','ldn','pays','ddn','delib','moyenne','serie','libSerie','jury','centre')          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00074">74</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__import_8php-source.html#l00033">exec_odb_import()</a>, <a class="el" href="odb__param_8php-source.html#l00032">exec_odb_param()</a>, <a class="el" href="odb__ref_8php-source.html#l00029">exec_odb_ref()</a>, <a class="el" href="odb__repartition_8avecGeneriques_8php-source.html#l00095">exec_odb_repartition()</a>, <a class="el" href="odb__statistiques_8php-source.html#l00022">exec_odb_statistiques()</a>, <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>, et <a class="el" href="inc-referentiel_8php-source.html#l00503">odb_introspection()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="b3d0ef943a60926dea60d237552d4c88"></a><!-- doxytag: member="inc-pdf-attestations.php::$colonnes2" ref="b3d0ef943a60926dea60d237552d4c88" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$colonnes2 = array('id_table','candidat','ldn','ddn','delib','moyenne','serie','libSerie','jury','centre')          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00075">75</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="55c1b453fa2af507e2c4e9a94d0f84fd"></a><!-- doxytag: member="inc-pdf-attestations.php::$date_attestation" ref="55c1b453fa2af507e2c4e9a94d0f84fd" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$date_attestation = trim($_REQUEST['date_attestation'])          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00041">41</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="fbbc42ce2f57fdf1aac867214d975c02"></a><!-- doxytag: member="inc-pdf-attestations.php::$date_delib" ref="fbbc42ce2f57fdf1aac867214d975c02" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$date_delib = trim($_REQUEST['date_delib'])          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00033">33</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="12a6f07665340c6c759a07cf96d74ef8"></a><!-- doxytag: member="inc-pdf-attestations.php::$delib" ref="12a6f07665340c6c759a07cf96d74ef8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="odb__saisie_2img__pack_2vignettes_2index_8php.html#0544c3fe466e421738dae463968b70ba">else</a> $delib = &quot;&lt;b&gt;$delib&lt;/b&gt;&quot;          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00096">96</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="9a4db75cbb47f99cc82e12e08bb365ec"></a><!-- doxytag: member="inc-pdf-attestations.php::$delib" ref="9a4db75cbb47f99cc82e12e08bb365ec" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$delib = &quot;&lt;b&gt;$delib&lt;/b&gt; ($groupe$eme groupe)&quot;          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00094">94</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="9a4db75cbb47f99cc82e12e08bb365ec"></a><!-- doxytag: member="inc-pdf-attestations.php::$delib" ref="9a4db75cbb47f99cc82e12e08bb365ec" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$delib = ucfirst(str_replace('abien','Assez bien',str_replace('tbien','Tr&amp;egrave;s bien',strtolower($delib))))          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00090">90</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__param_8php-source.html#l00032">exec_odb_param()</a>, <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>, et <a class="el" href="odb__fonctions_8php-source.html#l00160">siou_spip_resultat()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="dd57477ad14361f5834629e405ff5478"></a><!-- doxytag: member="inc-pdf-attestations.php::$deliberation" ref="dd57477ad14361f5834629e405ff5478" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$deliberation = $groupe+1          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00021">21</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00013">afficherNotes()</a>, <a class="el" href="odb__notes_8php-source.html#l00068">exec_odb_notes()</a>, <a class="el" href="odb__param_8php-source.html#l00032">exec_odb_param()</a>, <a class="el" href="odb__ref_8php-source.html#l00029">exec_odb_ref()</a>, <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>, <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00684">guessDeliberation()</a>, et <a class="el" href="inc-referentiel_8php-source.html#l00142">odb_maj_decisions()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="f0189d802a63b07049d0a278b9ec7df8"></a><!-- doxytag: member="inc-pdf-attestations.php::$eme" ref="f0189d802a63b07049d0a278b9ec7df8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="odb__saisie_2img__pack_2vignettes_2index_8php.html#0544c3fe466e421738dae463968b70ba">else</a> $eme = '&amp;egrave;me'          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00093">93</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="6bcaf0e2f3a66b7da57696c4e02eac7d"></a><!-- doxytag: member="inc-pdf-attestations.php::$extra" ref="6bcaf0e2f3a66b7da57696c4e02eac7d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$extra = ''          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00112">112</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__notes_8php-source.html#l00068">exec_odb_notes()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="5f679b919346c1e3a2e0622e46e2f358"></a><!-- doxytag: member="inc-pdf-attestations.php::$family" ref="5f679b919346c1e3a2e0622e46e2f358" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$family = 'Helvetica'          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00068">68</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="71f2aa6a4b2bf64caee0b33cd32056dd"></a><!-- doxytag: member="inc-pdf-attestations.php::$groupe" ref="71f2aa6a4b2bf64caee0b33cd32056dd" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$groupe = $_REQUEST['groupe']          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00011">11</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="2c265bba1724371bb03e6901297c30b2"></a><!-- doxytag: member="inc-pdf-attestations.php::$height" ref="2c265bba1724371bb03e6901297c30b2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$height = $pdf-&gt;ez['pageHeight']          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00073">73</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="f24aefa35fa703a1521c8145fe8fa082"></a><!-- doxytag: member="inc-pdf-attestations.php::$infos" ref="f24aefa35fa703a1521c8145fe8fa082" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$infos = array('Title'=&gt;html_entity_decode($titre),'Author'=&gt;'SIOU / Office du Bac','CreationDate'=&gt;date(&quot;d/m/Y&quot;))          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00141">141</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="27509762da1979df7c3e9f899a758829"></a><!-- doxytag: member="inc-pdf-attestations.php::$iPage" ref="27509762da1979df7c3e9f899a758829" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="odb__saisie_2img__pack_2vignettes_2index_8php.html#0544c3fe466e421738dae463968b70ba">else</a> $iPage = 1          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00111">111</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="477477d68b3781b42c7fb933b20288af"></a><!-- doxytag: member="inc-pdf-attestations.php::$jour" ref="477477d68b3781b42c7fb933b20288af" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$jour = (int)$tTmp[0]          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00043">43</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="477477d68b3781b42c7fb933b20288af"></a><!-- doxytag: member="inc-pdf-attestations.php::$jour" ref="477477d68b3781b42c7fb933b20288af" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$jour = (int)$tTmp[0]          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00035">35</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__import_8php-source.html#l00033">exec_odb_import()</a>, <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>, <a class="el" href="odb__suivi_8php-source.html#l00026">exec_odb_suivi()</a>, et <a class="el" href="odb__fonctions_8php-source.html#l00030">siou_spip_dldn()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="1f711ee6f46195ba9dfce71eaf779d02"></a><!-- doxytag: member="inc-pdf-attestations.php::$jury" ref="1f711ee6f46195ba9dfce71eaf779d02" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$jury = $_REQUEST['jury']          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00026">26</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00307">afficherImpressions()</a>, <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00013">afficherNotes()</a>, <a class="el" href="odb__notes_8php-source.html#l00068">exec_odb_notes()</a>, <a class="el" href="odb__param_8php-source.html#l00032">exec_odb_param()</a>, <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>, <a class="el" href="odb__notes_2exec_2inc-bdd_8php-source.html#l00010">getNbCandidats()</a>, <a class="el" href="odb__notes_2exec_2inc-bdd_8php-source.html#l00095">getSeries()</a>, <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00684">guessDeliberation()</a>, et <a class="el" href="inc-referentiel_8php-source.html#l00142">odb_maj_decisions()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="e05862a0294251c88629b141b5ce329a"></a><!-- doxytag: member="inc-pdf-attestations.php::$limit" ref="e05862a0294251c88629b141b5ce329a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$limit = $_REQUEST['limit']          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00024">24</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__saisie_8php-source.html#l00060">exec_odb_saisie()</a>, <a class="el" href="inc-base_8php-source.html#l00041">getCandidatsARepartir()</a>, <a class="el" href="odb__stats__siou_8php-source.html#l00031">icones_impression_convocation()</a>, et <a class="el" href="odb__repartition_2exec_2inc-traitements_8php-source.html#l00016">repartirCandidats()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="c3dd350c90be7c45f992a6efde984c66"></a><!-- doxytag: member="inc-pdf-attestations.php::$mois" ref="c3dd350c90be7c45f992a6efde984c66" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$mois = (int)$tTmp[1]          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00044">44</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="c3dd350c90be7c45f992a6efde984c66"></a><!-- doxytag: member="inc-pdf-attestations.php::$mois" ref="c3dd350c90be7c45f992a6efde984c66" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$mois = (int)$tTmp[1]          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00036">36</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__import_8php-source.html#l00033">exec_odb_import()</a>, <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>, <a class="el" href="odb__suivi_8php-source.html#l00026">exec_odb_suivi()</a>, et <a class="el" href="odb__fonctions_8php-source.html#l00030">siou_spip_dldn()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="011800c63ece4cbbfa77136a20607023"></a><!-- doxytag: member="inc-pdf-attestations.php::$options" ref="011800c63ece4cbbfa77136a20607023" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$options = array('b'=&gt;'Helvetica-Bold.afm')          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00067">67</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="964ee5ee597c515cbb4dad2f14054cb4"></a><!-- doxytag: member="inc-pdf-attestations.php::$pdf" ref="964ee5ee597c515cbb4dad2f14054cb4" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$pdf = &amp; new Cezpdf('A4','portrait')          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00065">65</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="4dbe106434277d49b9fac7b1dc8602eb"></a><!-- doxytag: member="inc-pdf-attestations.php::$pdf_dir" ref="4dbe106434277d49b9fac7b1dc8602eb" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$pdf_dir = 'contrib/ezpdf/'          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00063">63</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="6b9aead899bafbd080a6faef6b5650ad"></a><!-- doxytag: member="inc-pdf-attestations.php::$pdfcode" ref="6b9aead899bafbd080a6faef6b5650ad" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$pdfcode = str_replace(&quot;\n&quot;,&quot;\n&lt;br&gt;&quot;,htmlspecialchars($pdfcode))          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00151">151</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="bda6e620e7f5d772657555a6b23ed449"></a><!-- doxytag: member="inc-pdf-attestations.php::$pdfG" ref="bda6e620e7f5d772657555a6b23ed449" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$pdfG = 'attestations_'          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00010">10</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="112ef069ddc0454086e3d1e6d8d55d07"></a><!-- doxytag: member="inc-pdf-attestations.php::$result" ref="112ef069ddc0454086e3d1e6d8d55d07" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$result = odb_query($sql,__FILE__,__LINE__)          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00061">61</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="9c9258871914db2f42ceec6dc4674d9d"></a><!-- doxytag: member="inc-pdf-attestations.php::$sDateAttestation" ref="9c9258871914db2f42ceec6dc4674d9d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$sDateAttestation = html_entity_decode(utf8_decode(strftime(&quot;%A %d %B %Y&quot;, mktime(0, 0, 0, $mois, $jour, $annee))))          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00048">48</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="45830599416786d3e81ab9f93a14f4a1"></a><!-- doxytag: member="inc-pdf-attestations.php::$sDateDelib" ref="45830599416786d3e81ab9f93a14f4a1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$sDateDelib = html_entity_decode(utf8_decode(strftime(&quot;%A %d %B %Y&quot;, mktime(0, 0, 0, $mois, $jour, $annee))))          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00040">40</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="b83af10f380499902aaae49fbbc67fca"></a><!-- doxytag: member="inc-pdf-attestations.php::$sommaire" ref="b83af10f380499902aaae49fbbc67fca" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$sommaire = html_entity_decode(&quot;&lt;c:ilink:&quot;.getRewriteString($candidat).&quot;&gt;&quot;.str_pad($id_table,13,'0',STR_PAD_LEFT).&quot; - jury $jury, s&amp;<a class="el" href="inc-pdf-table_8php.html#3f1f14bbce42f11ded67b8b79ead3941">eacute</a>;rie $serie - $candidat ($delib)&lt;/c:ilink&gt;\n&quot;)          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00113">113</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="047170d6020a882807665812a27e2525"></a><!-- doxytag: member="inc-pdf-attestations.php::$sql" ref="047170d6020a882807665812a27e2525" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$sql          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+<b>Valeur initiale :</b><div class="fragment"><pre class="fragment"> <span class="stringliteral">"select can.id_table, sex.sexe, pre.prefixe, nom, prenoms, ldn, pays, if(ne_le='0000-00-00',if(ne_en='0000',concat('vers ',ne_vers),concat('en ',ne_en)),DATE_FORMAT(ne_le, 'le %d/%m/%Y')) ddn, delib$deliberation delib, moyenne, ser.serie, ser.libelle libSerie, jury, eta.etablissement centre\n"</span>
+     . <span class="stringliteral">" from odb_decisions decis, odb_ref_etablissement eta, odb_ref_pays pays, odb_ref_sexe sex, odb_ref_serie ser, odb_repartition rep, odb_candidats can\n"</span>
+     . <span class="stringliteral">" left join odb_ref_prefixe pre on pre.id=can.prefixe\n"</span>
+     . <span class="stringliteral">" where rep.id_table=can.id_table and decis.id_table=rep.id_table\n"</span>
+     . <span class="stringliteral">" and decis.annee=$annee and can.annee=$annee and rep.annee=$annee\n"</span>
+     . ' and sex.id=can.sexe and can.serie=ser.id and can.nationalite=pays.id and rep.id_etablissement=eta.id '
+     . <span class="stringliteral">"$andDelib\n"</span>
+     . <span class="stringliteral">" order by jury, ser.serie, id_table"</span>.
+       <span class="stringliteral">" limit $limit, 2000"</span>
+</pre></div>
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00051">51</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="inc-fichiers_8php-source.html#l00080">affiche_csv()</a>, <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00652">afficherHistorique()</a>, <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00307">afficherImpressions()</a>, <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00013">afficherNotes()</a>, <a class="el" href="odb__repartition_8avecGeneriques_8php-source.html#l00029">capaciteCentres()</a>, <a class="el" href="odb__import_8php-source.html#l00033">exec_odb_import()</a>, <a class="el" href="odb__notes_8php-source.html#l00068">exec_odb_notes()</a>, <a class="el" href="odb__param_8php-source.html#l00032">exec_odb_param()</a>, <a class="el" href="odb__ref_8php-source.html#l00029">exec_odb_ref()</a>, <a class="el" href="odb__repartition_8avecGeneriques_8php-source.html#l00095">exec_odb_repartition()</a>, <a class="el" href="odb__requete_8php-source.html#l00022">exec_odb_requete()</a>, <a class="el" href="odb__saisie_8php-source.html#l00060">exec_odb_saisie()</a>, <a class="el" href="odb__statistiques_8php-source.html#l00022">exec_odb_statistiques()</a>, <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>, <a class="el" href="odb__suivi_8php-source.html#l00026">exec_odb_suivi()</a>, <a class="el" href="inc-referentiel_8php-source.html#l00465">formSelectQuery()</a>, <a class="el" href="inc-referentiel_8php-source.html#l00430">formSelectQueryRef()</a>, <a class="el" href="inc-base_8php-source.html#l00041">getCandidatsARepartir()</a>, <a class="el" href="inc-base_8php-source.html#l00009">getCapacite()</a>, <a class="el" href="inc-base_8php-source.html#l00073">getIdTableMax()</a>, <a class="el" href="inc-base_8php-source.html#l00244">getIdVilleEtablissement()</a>, <a class="el" href="odb__notes_2exec_2inc-bdd_8php-source.html#l00040">getJurys()</a>, <a class="el" href="inc-base_8php-source.html#l00236">getLibelleEtablissement()</a>, <a class="el" href="inc-base_8php-source.html#l00252">getLibelleVille()</a>, <a class="el" href="odb__notes_2exec_2inc-bdd_8php-source.html#l00010">getNbCandidats()</a>, <a class="el" href="inc-base_8php-source.html#l00162">getNbCandidatsARepartir()</a>, <a class="el" href="odb__notes_2exec_2inc-bdd_8php-source.html#l00021">getNbCandidatsNotes()</a>, <a class="el" href="inc-odb_8php-source.html#l00129">getNomComplet()</a>, <a class="el" href="inc-odb_8php-source.html#l00010">getParametresODB()</a>, <a class="el" href="inc-base_8php-source.html#l00089">getRangCandidatDansSalle()</a>, <a class="el" href="inc-referentiel_8php-source.html#l00083">getReferentiel()</a>, <a class="el" href="odb__notes_2exec_2inc-bdd_8php-source.html#l00095">getSeries()</a>, <a class="el" href="inc-base_8php-source.html#l00212">getSeriesDansCentre()</a>, <a class="el" href="inc-base_8php-source.html#l00182">getSeriesDansSalle()</a>, <a class="el" href="odb__notes_2exec_2inc-bdd_8php-source.html#l00078">getSeriesFromJury()</a>, <a class="el" href="inc-referentiel_8php-source.html#l00503">odb_introspection()</a>, <a class="el" href="inc-referentiel_8php-source.html#l00142">odb_maj_decisions()</a>, <a class="el" href="inc-odb_8php-source.html#l00078">odb_query()</a>, <a class="el" href="inc-base_8php-source.html#l00123">setRepartition()</a>, et <a class="el" href="inc-base_8php-source.html#l00134">setSynchroIdTableRepartition2Candidats()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="7f53e2bae16251ad448152ff8ae09f7d"></a><!-- doxytag: member="inc-pdf-attestations.php::$tBddConf" ref="7f53e2bae16251ad448152ff8ae09f7d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$tBddConf = getBddConf()          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00004">4</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="inc-odb_8php-source.html#l00104">getBddConf()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="43e5b5a819fedbd12b8cf5421ba6985e"></a><!-- doxytag: member="inc-pdf-attestations.php::$titre" ref="43e5b5a819fedbd12b8cf5421ba6985e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$titre = &quot; jury&quot;          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00031">31</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__import_8php-source.html#l00033">exec_odb_import()</a>, <a class="el" href="odb__notes_8php-source.html#l00068">exec_odb_notes()</a>, <a class="el" href="odb__param_8php-source.html#l00032">exec_odb_param()</a>, <a class="el" href="odb__ref_8php-source.html#l00029">exec_odb_ref()</a>, <a class="el" href="odb__repartition_8avecGeneriques_8php-source.html#l00095">exec_odb_repartition()</a>, <a class="el" href="odb__requete_8php-source.html#l00022">exec_odb_requete()</a>, <a class="el" href="odb__saisie_8php-source.html#l00060">exec_odb_saisie()</a>, <a class="el" href="odb__statistiques_8php-source.html#l00022">exec_odb_statistiques()</a>, <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>, <a class="el" href="odb__suivi_8php-source.html#l00026">exec_odb_suivi()</a>, <a class="el" href="inc-html_8php-source.html#l00215">odb_html_table()</a>, et <a class="el" href="inc-referentiel_8php-source.html#l00503">odb_introspection()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="cb478ae0bc69ed718c3c6deea2da7bd6"></a><!-- doxytag: member="inc-pdf-attestations.php::$tTmp" ref="cb478ae0bc69ed718c3c6deea2da7bd6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$tTmp = explode('/',$date_attestation)          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00042">42</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="cb478ae0bc69ed718c3c6deea2da7bd6"></a><!-- doxytag: member="inc-pdf-attestations.php::$tTmp" ref="cb478ae0bc69ed718c3c6deea2da7bd6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$tTmp = explode('/',$date_delib)          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00034">34</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00013">afficherNotes()</a>, et <a class="el" href="odb__param_8php-source.html#l00032">exec_odb_param()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="d4a3e16ae571f7498eedad9de246faf7"></a><!-- doxytag: member="inc-pdf-attestations.php::$where" ref="d4a3e16ae571f7498eedad9de246faf7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$where = ''          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00009">9</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00013">afficherNotes()</a>, <a class="el" href="odb__notes_8php-source.html#l00068">exec_odb_notes()</a>, <a class="el" href="odb__saisie_8php-source.html#l00060">exec_odb_saisie()</a>, <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>, <a class="el" href="odb__notes_2exec_2inc-bdd_8php-source.html#l00010">getNbCandidats()</a>, <a class="el" href="inc-base_8php-source.html#l00162">getNbCandidatsARepartir()</a>, <a class="el" href="odb__notes_2exec_2inc-bdd_8php-source.html#l00021">getNbCandidatsNotes()</a>, <a class="el" href="inc-odb_8php-source.html#l00010">getParametresODB()</a>, et <a class="el" href="inc-base_8php-source.html#l00212">getSeriesDansCentre()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="5795120b4b324bc4ca83f1e6fdce7d57"></a><!-- doxytag: member="inc-pdf-attestations.php::$width" ref="5795120b4b324bc4ca83f1e6fdce7d57" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$width = $pdf-&gt;ez['pageWidth']          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-pdf-attestations_8php-source.html#l00072">72</a> du fichier <a class="el" href="inc-pdf-attestations_8php-source.html">inc-pdf-attestations.php</a>.</p>
+
+</div>
+</div><p>
+<hr size="1"><address style="text-align: right;"><small>Généré le Mon Mar 17 22:53:25 2008 pour Siou par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.3 </small></address>
+</body>
+</html>

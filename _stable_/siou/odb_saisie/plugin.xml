@@ -1,0 +1,16 @@
+<plugin>
+   <nom>ODB : Saisie des candidats</nom>
+   <auteur>Cedric PROTIERE - AUF - Février 2007</auteur>
+   <version>1.0</version>
+   <etat>stable</etat>
+   <description>Module de saisie (ajout/modification/consultation) des candidats ODB
+   </description>
+   	<lien>http://www.officedubacbenin.bj</lien> <!-- URI de documentation -->
+		<icon>img_pack/logo_odb_150.png</icon> 
+   <prefix>odb_saisie</prefix>
+   <pipeline>
+      <nom>ajouter_boutons</nom>
+      <action>ajouterBoutons</action>
+      <inclure>inc-odb_saisie.php</inclure>
+   </pipeline>
+</plugin>

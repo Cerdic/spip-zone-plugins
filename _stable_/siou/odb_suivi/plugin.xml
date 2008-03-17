@@ -1,0 +1,15 @@
+<plugin>
+   <nom>ODB : Suivi des op&eacute;rateurs de saisie</nom>
+   <auteur>Ghislain VLAVONOU, Cedric PROTIERE - ODB - Janvier 2008</auteur>
+   <version>0.1</version>
+   <etat>dev</etat>
+   <description>Suivi des op&eacute;rateurs de saisie</description>
+   <lien>http://www.officedubacbenin.bj</lien> <!-- URI de documentation -->
+   <icon>img_pack/logo_odb_150.png</icon>
+   <prefix>odb_suivi</prefix>
+   <pipeline>
+      <nom>ajouter_boutons</nom>
+      <action>ajouterBoutons</action>
+      <inclure>inc-odb_suivi.php</inclure>
+   </pipeline>
+</plugin>

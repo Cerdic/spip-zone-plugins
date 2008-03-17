@@ -1,0 +1,15 @@
+<area shape="rect" href="$odb__notes_2exec_2inc&#45;traitements_8php.html#33a267718e90ba67c7a694d64441663b" title="Affiche les notes d&#39;un candidat." alt="" coords="203,5,312,32">
+<area shape="rect" href="$odb__notes_8php.html#477841e21bacf8c8b922a082b668fb2d" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_notes" alt="" coords="404,31,529,57">
+<area shape="rect" href="$odb__param_8php.html#21e2b776a90c950c642402aec61c3928" title="exec_odb_param" alt="" coords="192,107,323,133">
+<area shape="rect" href="$odb__ref_8php.html#f0b6f12f726293fcfdb8dd144b4156e1" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_ref" alt="" coords="413,247,520,273">
+<area shape="rect" href="$odb__repartition_8avecGeneriques_8php.html#b9758b82e8b610bcfeb6a980276cbb72" title="Repartition des candidats ODB." alt="" coords="180,208,335,235">
+<area shape="rect" href="$odb__saisie_8php.html#67a2630322ffbcb7fb0e22fe529cff6f" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_saisie..." alt="" coords="588,411,711,437">
+<area shape="rect" href="$odb__statistiques_8php.html#5704db106a2f57c066729702057fbb75" title="exec_odb_statistiques" alt="" coords="176,309,339,336">
+<area shape="rect" href="$odb__stats__siou_8php.html#0606558a56949a7488641f7e59c887ab" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_stats_siou..." alt="" coords="181,360,333,387">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#c23eab81895f040f0ff6f3ee312a7f63" title="Cree les OPTIONS tirees du referentiel passe en parametre." alt="" coords="169,157,345,184">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#34801d7492d31569357873533e30d04d" title="isInReferentiel" alt="" coords="201,461,313,488">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#caa8fb22e017e5edd73e572b1c091189" title="formSelectRefInTR" alt="" coords="395,183,539,209">
+<area shape="rect" href="$inc&#45;regles__gestion_8php.html#7b7e71083f065a8f45947cf013206a64" title="reglesGestion" alt="" coords="412,461,521,488">
+<area shape="rect" href="$inc&#45;fichiers_8php.html#2153dd9ac414142bd968bd484f875abe" title="Lit et affiche le contenu d&#39;un fichier csv." alt="" coords="603,461,696,488">
+<area shape="rect" href="$inc&#45;fichiers_8php.html#3656c8f5a58718532bd18937ce8ad6d7" title="reprise de l&#39;import de fichier (process de verification apres upload)" alt="" coords="760,461,875,488">
+<area shape="rect" href="$odb__import_8php.html#7bd675bee4f6b2cc8994b9c8a7d03039" title="exec_odb_import" alt="" coords="924,461,1055,488">

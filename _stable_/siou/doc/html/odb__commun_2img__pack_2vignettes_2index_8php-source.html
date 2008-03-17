@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Siou:  Fichier source de odb_commun/img_pack/vignettes/index.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Généré par Doxygen 1.5.3 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Page&nbsp;principale</span></a></li>
+    <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+    <li><a href="dirs.html"><span>Répertoires</span></a></li>
+    <li>
+      <form action="search.php" method="get">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td><label>&nbsp;Rechercher&nbsp;</label></td>
+            <td><input type="text" name="query" value="" size="20" accesskey="s"/></td>
+          </tr>
+        </table>
+      </form>
+    </li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_d85a68ddeac050d85549308ca402191f.html">odb_commun</a>&nbsp;&raquo&nbsp;<a class="el" href="dir_370a0933dcd8b1470a151198a52d3b40.html">img_pack</a>&nbsp;&raquo&nbsp;<a class="el" href="dir_284629d1db0fe3f171e3eb82eab7d2f6.html">vignettes</a></div>
+<h1>index.php</h1><a href="odb__commun_2img__pack_2vignettes_2index_8php.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;!DOCTYPE HTML PUBLIC <span class="stringliteral">"-//W3C//DTD HTML 4.01 Transitional//EN"</span> <span class="stringliteral">"http://www.w3.org/TR/html4/loose.dtd"</span>&gt;
+<a name="l00002"></a>00002 &lt;html&gt;
+<a name="l00003"></a>00003 &lt;head&gt;
+<a name="l00004"></a>00004         &lt;title&gt;Index des vignettes de Spip&lt;/title&gt;
+<a name="l00005"></a>00005         &lt;link rel=<span class="stringliteral">"up"</span> href=<span class="stringliteral">"../"</span>&gt;
+<a name="l00006"></a>00006 &lt;/head&gt;
+<a name="l00007"></a>00007 &lt;body&gt;
+<a name="l00008"></a>00008         &lt;center&gt;
+<a name="l00009"></a>00009                 &lt;h1&gt;Index des vignettes de &lt;a href='http:<span class="comment">//www.spip.net'&gt;Spip&lt;/a&gt;&lt;/h1&gt;</span>
+<a name="l00010"></a>00010 &lt;table&gt;&lt;tr&gt;&lt;th colspan='10'&gt;Format png &amp;amp; gif&lt;/th&gt;
+<a name="l00011"></a>00011 &lt;?php
+<a name="l00012"></a><a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#7497c23de733c18b7f2a86c05bed7874">00012</a>         <a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#7497c23de733c18b7f2a86c05bed7874">$myDir</a> = opendir(<span class="charliteral">'.'</span>);
+<a name="l00013"></a><a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#83018d9153d17d91fbcf3bc10158d34f">00013</a>         <a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#83018d9153d17d91fbcf3bc10158d34f">$i</a>= 0;
+<a name="l00014"></a>00014         <span class="keywordflow">while</span>($file = readdir(<a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#7497c23de733c18b7f2a86c05bed7874">$myDir</a>)) {
+<a name="l00015"></a>00015           
+<a name="l00016"></a>00016           <span class="keywordflow">if</span> (ereg(<span class="stringliteral">"\.(png|gif)$"</span>, $file)) {
+<a name="l00017"></a>00017                 <a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#8abe176bc41afd728f32ba8c506cbd98">$r</a> = <span class="stringliteral">"\n\t&lt;td style='text-align:center; padding:10px'&gt;$file&lt;br /&gt;&lt;img src='$file' alt='$file' /&gt;&lt;/td&gt;"</span>;
+<a name="l00018"></a><a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#0544c3fe466e421738dae463968b70ba">00018</a>                 <span class="keywordflow">if</span> (<a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#83018d9153d17d91fbcf3bc10158d34f">$i</a>%10) echo <a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#8abe176bc41afd728f32ba8c506cbd98">$r</a>; <span class="keywordflow">else</span> echo <span class="stringliteral">"&lt;/tr&gt;\n&lt;tr&gt;"</span>, $r;
+<a name="l00019"></a><a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#83018d9153d17d91fbcf3bc10158d34f">00019</a>                 <a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#83018d9153d17d91fbcf3bc10158d34f">$i</a>++;
+<a name="l00020"></a>00020           }
+<a name="l00021"></a>00021         }
+<a name="l00022"></a>00022 ?&gt;
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024                 &lt;/tr&gt;&lt;/table&gt;
+<a name="l00025"></a>00025         &lt;/center&gt;
+<a name="l00026"></a>00026 &lt;/body&gt;
+<a name="l00027"></a>00027 &lt;/html&gt;
+</pre></div><hr size="1"><address style="text-align: right;"><small>Généré le Mon Mar 17 22:52:59 2008 pour Siou par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.3 </small></address>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Siou:  Fichier source de odb_commun/inc-pdf-attestations.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Généré par Doxygen 1.5.3 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Page&nbsp;principale</span></a></li>
+    <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+    <li><a href="dirs.html"><span>Répertoires</span></a></li>
+    <li>
+      <form action="search.php" method="get">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td><label>&nbsp;Rechercher&nbsp;</label></td>
+            <td><input type="text" name="query" value="" size="20" accesskey="s"/></td>
+          </tr>
+        </table>
+      </form>
+    </li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_d85a68ddeac050d85549308ca402191f.html">odb_commun</a></div>
+<h1>inc-pdf-attestations.php</h1><a href="inc-pdf-attestations_8php.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 include_once('inc-html.php');
+<a name="l00003"></a>00003 include_once('inc-odb.php');
+<a name="l00004"></a><a class="code" href="inc-pdf-attestations_8php.html#7f53e2bae16251ad448152ff8ae09f7d">00004</a> <a class="code" href="inc-pdf-attestations_8php.html#7f53e2bae16251ad448152ff8ae09f7d">$tBddConf</a>=<a class="code" href="inc-odb_8php.html#9b3a021f05992ff16e374c2e0dfa1ef9" title="Recupere les informations de connection bdd du fichier de conf spip.">getBddConf</a>();
+<a name="l00005"></a>00005 
+<a name="l00006"></a>00006 mysql_connect(<a class="code" href="inc-pdf-attestations_8php.html#7f53e2bae16251ad448152ff8ae09f7d">$tBddConf</a>['host'], <a class="code" href="inc-pdf-attestations_8php.html#7f53e2bae16251ad448152ff8ae09f7d">$tBddConf</a>['user'], <a class="code" href="inc-pdf-attestations_8php.html#7f53e2bae16251ad448152ff8ae09f7d">$tBddConf</a>['pass']) or die('Connection impossible&lt;br/&gt;'.mysql_error());
+<a name="l00007"></a>00007 mysql_select_db(<a class="code" href="inc-pdf-attestations_8php.html#7f53e2bae16251ad448152ff8ae09f7d">$tBddConf</a>['bdd']) or die('Base inaccessible&lt;br/&gt;'.mysql_error());
+<a name="l00008"></a>00008 
+<a name="l00009"></a><a class="code" href="inc-pdf-attestations_8php.html#d4a3e16ae571f7498eedad9de246faf7">00009</a> <a class="code" href="inc-pdf-attestations_8php.html#d4a3e16ae571f7498eedad9de246faf7">$where</a>='';
+<a name="l00010"></a><a class="code" href="inc-pdf-attestations_8php.html#bda6e620e7f5d772657555a6b23ed449">00010</a> <a class="code" href="inc-pdf-attestations_8php.html#bda6e620e7f5d772657555a6b23ed449">$pdfG</a>='attestations_';
+<a name="l00011"></a><a class="code" href="inc-pdf-attestations_8php.html#71f2aa6a4b2bf64caee0b33cd32056dd">00011</a> <a class="code" href="inc-pdf-attestations_8php.html#71f2aa6a4b2bf64caee0b33cd32056dd">$groupe</a>=$_REQUEST['groupe'];
+<a name="l00012"></a>00012 <span class="keywordflow">if</span>(<a class="code" href="inc-pdf-attestations_8php.html#71f2aa6a4b2bf64caee0b33cd32056dd">$groupe</a>==2) {
+<a name="l00013"></a>00013         $andDelib = <span class="stringliteral">" and delib1='Admissible' and delib2 = 'Oral' and delib3 = 'Passable'"</span>;
+<a name="l00014"></a>00014         <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>=<span class="stringliteral">"Attestations 2&amp;egrave;me groupe"</span>;
+<a name="l00015"></a>00015         <a class="code" href="inc-pdf-attestations_8php.html#bda6e620e7f5d772657555a6b23ed449">$pdfG</a>.=<a class="code" href="inc-html_8php.html#a99d47bed9e80456aaed4dc43d2fc0cc" title="rend une chaine compatible url-rewriting">getRewriteString</a>(<span class="stringliteral">"groupe2"</span>);
+<a name="l00016"></a>00016 } elseif(<a class="code" href="inc-pdf-attestations_8php.html#71f2aa6a4b2bf64caee0b33cd32056dd">$groupe</a>==1) {
+<a name="l00017"></a>00017         $andDelib = <span class="stringliteral">" and delib1='Admissible' and delib2 != 'Oral' and delib2 != 'Reserve'"</span>;
+<a name="l00018"></a>00018         <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>=<span class="stringliteral">"Attestations 1er groupe"</span>;
+<a name="l00019"></a>00019         <a class="code" href="inc-pdf-attestations_8php.html#bda6e620e7f5d772657555a6b23ed449">$pdfG</a>.=<a class="code" href="inc-html_8php.html#a99d47bed9e80456aaed4dc43d2fc0cc" title="rend une chaine compatible url-rewriting">getRewriteString</a>(<span class="stringliteral">"groupe1"</span>);
+<a name="l00020"></a>00020 } <span class="keywordflow">else</span> die((<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>.<span class="stringliteral">" - Numero de groupe [$groupe] incorrect&lt;br/&gt;"</span>.__FILE__));
+<a name="l00021"></a><a class="code" href="inc-pdf-attestations_8php.html#dd57477ad14361f5834629e405ff5478">00021</a> <a class="code" href="inc-pdf-attestations_8php.html#dd57477ad14361f5834629e405ff5478">$deliberation</a>=<a class="code" href="inc-pdf-attestations_8php.html#71f2aa6a4b2bf64caee0b33cd32056dd">$groupe</a>+1;
+<a name="l00022"></a><a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">00022</a> <a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>=$_REQUEST['annee'];
+<a name="l00023"></a>00023 <span class="keywordflow">if</span>(<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>=='') <a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>=date(<span class="charliteral">'Y'</span>);
+<a name="l00024"></a><a class="code" href="inc-pdf-attestations_8php.html#e05862a0294251c88629b141b5ce329a">00024</a> <a class="code" href="inc-pdf-attestations_8php.html#e05862a0294251c88629b141b5ce329a">$limit</a>=$_REQUEST['limit'];
+<a name="l00025"></a>00025 <span class="keywordflow">if</span>(<a class="code" href="inc-pdf-attestations_8php.html#e05862a0294251c88629b141b5ce329a">$limit</a>=='') <a class="code" href="inc-pdf-attestations_8php.html#e05862a0294251c88629b141b5ce329a">$limit</a>=0;
+<a name="l00026"></a><a class="code" href="inc-pdf-attestations_8php.html#1f711ee6f46195ba9dfce71eaf779d02">00026</a> <a class="code" href="inc-pdf-attestations_8php.html#1f711ee6f46195ba9dfce71eaf779d02">$jury</a>=$_REQUEST['jury'];
+<a name="l00027"></a>00027 <span class="keywordflow">if</span>(<a class="code" href="inc-pdf-attestations_8php.html#1f711ee6f46195ba9dfce71eaf779d02">$jury</a>&gt;0) {
+<a name="l00028"></a>00028         $andDelib.=<span class="stringliteral">" AND jury='$jury'"</span>;
+<a name="l00029"></a>00029         <span class="comment">//$tRefEta=getReferentiel('etablissement');</span>
+<a name="l00030"></a>00030         <a class="code" href="inc-pdf-attestations_8php.html#bda6e620e7f5d772657555a6b23ed449">$pdfG</a>.=<span class="charliteral">'_'</span>.getRewriteString(<span class="stringliteral">"jury $jury"</span>);
+<a name="l00031"></a><a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">00031</a>         <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>.=<span class="stringliteral">" jury"</span>;
+<a name="l00032"></a>00032 }
+<a name="l00033"></a><a class="code" href="inc-pdf-attestations_8php.html#fbbc42ce2f57fdf1aac867214d975c02">00033</a> <a class="code" href="inc-pdf-attestations_8php.html#fbbc42ce2f57fdf1aac867214d975c02">$date_delib</a>=trim($_REQUEST['date_delib']);
+<a name="l00034"></a><a class="code" href="inc-pdf-attestations_8php.html#cb478ae0bc69ed718c3c6deea2da7bd6">00034</a> <a class="code" href="inc-pdf-attestations_8php.html#cb478ae0bc69ed718c3c6deea2da7bd6">$tTmp</a>=explode(<span class="charliteral">'/'</span>,<a class="code" href="inc-pdf-attestations_8php.html#fbbc42ce2f57fdf1aac867214d975c02">$date_delib</a>);
+<a name="l00035"></a><a class="code" href="inc-pdf-attestations_8php.html#477477d68b3781b42c7fb933b20288af">00035</a> <a class="code" href="inc-pdf-attestations_8php.html#477477d68b3781b42c7fb933b20288af">$jour</a>=(int)<a class="code" href="inc-pdf-attestations_8php.html#cb478ae0bc69ed718c3c6deea2da7bd6">$tTmp</a>[0];
+<a name="l00036"></a><a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">00036</a> <a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a>=(int)<a class="code" href="inc-pdf-attestations_8php.html#cb478ae0bc69ed718c3c6deea2da7bd6">$tTmp</a>[1];
+<a name="l00037"></a><a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">00037</a> <a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>=(int)<a class="code" href="inc-pdf-attestations_8php.html#cb478ae0bc69ed718c3c6deea2da7bd6">$tTmp</a>[2];
+<a name="l00038"></a>00038 <span class="keywordflow">if</span>(!checkdate(<a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a>,<a class="code" href="inc-pdf-attestations_8php.html#477477d68b3781b42c7fb933b20288af">$jour</a>,<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>)) die(<span class="stringliteral">"&lt;b&gt;[KO]&lt;/b&gt; La date &lt;b&gt;$date_delib&lt;/b&gt; est incorrecte, veuillez recommencer."</span>);
+<a name="l00039"></a>00039 setlocale(LC_TIME, 'fr_FR<span class="charliteral">','</span>fr_BE.UTF8<span class="charliteral">','</span>fr_FR.UTF8');
+<a name="l00040"></a><a class="code" href="inc-pdf-attestations_8php.html#45830599416786d3e81ab9f93a14f4a1">00040</a> <a class="code" href="inc-pdf-attestations_8php.html#45830599416786d3e81ab9f93a14f4a1">$sDateDelib</a>=html_entity_decode(utf8_decode(strftime(<span class="stringliteral">"%A %d %B %Y"</span>, mktime(0, 0, 0, <a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a>, <a class="code" href="inc-pdf-attestations_8php.html#477477d68b3781b42c7fb933b20288af">$jour</a>, <a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>))));
+<a name="l00041"></a><a class="code" href="inc-pdf-attestations_8php.html#55c1b453fa2af507e2c4e9a94d0f84fd">00041</a> <a class="code" href="inc-pdf-attestations_8php.html#55c1b453fa2af507e2c4e9a94d0f84fd">$date_attestation</a>=trim($_REQUEST['date_attestation']);
+<a name="l00042"></a><a class="code" href="inc-pdf-attestations_8php.html#cb478ae0bc69ed718c3c6deea2da7bd6">00042</a> <a class="code" href="inc-pdf-attestations_8php.html#cb478ae0bc69ed718c3c6deea2da7bd6">$tTmp</a>=explode(<span class="charliteral">'/'</span>,<a class="code" href="inc-pdf-attestations_8php.html#55c1b453fa2af507e2c4e9a94d0f84fd">$date_attestation</a>);
+<a name="l00043"></a><a class="code" href="inc-pdf-attestations_8php.html#477477d68b3781b42c7fb933b20288af">00043</a> <a class="code" href="inc-pdf-attestations_8php.html#477477d68b3781b42c7fb933b20288af">$jour</a>=(int)<a class="code" href="inc-pdf-attestations_8php.html#cb478ae0bc69ed718c3c6deea2da7bd6">$tTmp</a>[0];
+<a name="l00044"></a><a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">00044</a> <a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a>=(int)<a class="code" href="inc-pdf-attestations_8php.html#cb478ae0bc69ed718c3c6deea2da7bd6">$tTmp</a>[1];
+<a name="l00045"></a><a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">00045</a> <a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>=(int)<a class="code" href="inc-pdf-attestations_8php.html#cb478ae0bc69ed718c3c6deea2da7bd6">$tTmp</a>[2];
+<a name="l00046"></a>00046 <span class="keywordflow">if</span>(!checkdate(<a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a>,<a class="code" href="inc-pdf-attestations_8php.html#477477d68b3781b42c7fb933b20288af">$jour</a>,<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>)) die(<span class="stringliteral">"&lt;b&gt;[KO]&lt;/b&gt; La date &lt;b&gt;$date_attestation&lt;/b&gt; est incorrecte, veuillez recommencer."</span>);
+<a name="l00047"></a>00047 setlocale(LC_TIME, 'fr_FR<span class="charliteral">','</span>fr_BE.UTF8<span class="charliteral">','</span>fr_FR.UTF8');
+<a name="l00048"></a><a class="code" href="inc-pdf-attestations_8php.html#9c9258871914db2f42ceec6dc4674d9d">00048</a> <a class="code" href="inc-pdf-attestations_8php.html#9c9258871914db2f42ceec6dc4674d9d">$sDateAttestation</a>=html_entity_decode(utf8_decode(strftime(<span class="stringliteral">"%A %d %B %Y"</span>, mktime(0, 0, 0, <a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a>, <a class="code" href="inc-pdf-attestations_8php.html#477477d68b3781b42c7fb933b20288af">$jour</a>, <a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>))));
+<a name="l00049"></a>00049 <span class="comment">//die($sDateConvoc);</span>
+<a name="l00050"></a>00050 
+<a name="l00051"></a><a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">00051</a> <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a> = <span class="stringliteral">"select can.id_table, sex.sexe, pre.prefixe, nom, prenoms, ldn, pays, if(ne_le='0000-00-00',if(ne_en='0000',concat('vers ',ne_vers),concat('en ',ne_en)),DATE_FORMAT(ne_le, 'le %d/%m/%Y')) ddn, delib$deliberation delib, moyenne, ser.serie, ser.libelle libSerie, jury, eta.etablissement centre\n"</span>
+<a name="l00052"></a>00052      . <span class="stringliteral">" from odb_decisions decis, odb_ref_etablissement eta, odb_ref_pays pays, odb_ref_sexe sex, odb_ref_serie ser, odb_repartition rep, odb_candidats can\n"</span>
+<a name="l00053"></a>00053      . <span class="stringliteral">" left join odb_ref_prefixe pre on pre.id=can.prefixe\n"</span>
+<a name="l00054"></a>00054      . <span class="stringliteral">" where rep.id_table=can.id_table and decis.id_table=rep.id_table\n"</span>
+<a name="l00055"></a>00055      . <span class="stringliteral">" and decis.annee=$annee and can.annee=$annee and rep.annee=$annee\n"</span>
+<a name="l00056"></a>00056      . ' and sex.id=can.sexe and can.serie=ser.id and can.nationalite=pays.id and rep.id_etablissement=eta.id '
+<a name="l00057"></a>00057      . <span class="stringliteral">"$andDelib\n"</span>
+<a name="l00058"></a>00058      . <span class="stringliteral">" order by jury, ser.serie, id_table"</span>.
+<a name="l00059"></a>00059        <span class="stringliteral">" limit $limit, 2000"</span>;
+<a name="l00060"></a>00060 <span class="comment">//die("&lt;pre&gt;$sql");</span>
+<a name="l00061"></a><a class="code" href="inc-pdf-attestations_8php.html#112ef069ddc0454086e3d1e6d8d55d07">00061</a> <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00062"></a>00062 
+<a name="l00063"></a><a class="code" href="inc-pdf-attestations_8php.html#4dbe106434277d49b9fac7b1dc8602eb">00063</a> <a class="code" href="inc-ezpdf_8php.html#4dbe106434277d49b9fac7b1dc8602eb">$pdf_dir</a>='contrib/ezpdf/';
+<a name="l00064"></a>00064 include <a class="code" href="inc-ezpdf_8php.html#4dbe106434277d49b9fac7b1dc8602eb">$pdf_dir</a>.'<span class="keyword">class</span>.ezpdf.php';     <span class="comment">// inclusion du code de la bibliothque</span>
+<a name="l00065"></a><a class="code" href="inc-pdf-attestations_8php.html#964ee5ee597c515cbb4dad2f14054cb4">00065</a> <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a> =&amp; <span class="keyword">new</span> Cezpdf('A4<span class="charliteral">','</span>portrait'); <span class="comment">// 595.28 x 841.89</span>
+<a name="l00066"></a>00066 <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;selectFont(<a class="code" href="inc-ezpdf_8php.html#4dbe106434277d49b9fac7b1dc8602eb">$pdf_dir</a>.'fonts/Helvetica.afm');
+<a name="l00067"></a><a class="code" href="inc-pdf-attestations_8php.html#011800c63ece4cbbfa77136a20607023">00067</a> <a class="code" href="inc-pdf-attestations_8php.html#011800c63ece4cbbfa77136a20607023">$options</a>=array(<span class="charliteral">'b'</span>=&gt;'Helvetica-Bold.afm');
+<a name="l00068"></a><a class="code" href="inc-pdf-attestations_8php.html#5f679b919346c1e3a2e0622e46e2f358">00068</a> <a class="code" href="inc-pdf-attestations_8php.html#5f679b919346c1e3a2e0622e46e2f358">$family</a>='Helvetica';
+<a name="l00069"></a>00069 <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;setFontFamily(<a class="code" href="inc-pdf-attestations_8php.html#5f679b919346c1e3a2e0622e46e2f358">$family</a>,<a class="code" href="inc-pdf-attestations_8php.html#011800c63ece4cbbfa77136a20607023">$options</a>);
+<a name="l00070"></a>00070 <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;setStrokeColor(0,0,0);
+<a name="l00071"></a>00071 <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;setLineStyle(1,'round<span class="charliteral">','</span>round');
+<a name="l00072"></a><a class="code" href="inc-pdf-attestations_8php.html#5795120b4b324bc4ca83f1e6fdce7d57">00072</a> <a class="code" href="inc-pdf-attestations_8php.html#5795120b4b324bc4ca83f1e6fdce7d57">$width</a>=<a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;ez['pageWidth'];
+<a name="l00073"></a><a class="code" href="inc-pdf-attestations_8php.html#2c265bba1724371bb03e6901297c30b2">00073</a> <a class="code" href="inc-pdf-attestations_8php.html#2c265bba1724371bb03e6901297c30b2">$height</a>=<a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;ez['pageHeight'];
+<a name="l00074"></a><a class="code" href="inc-pdf-attestations_8php.html#6a5a233adfaad0185a2b89ba6c4f3ae3">00074</a> <a class="code" href="inc-pdf-attestations_8php.html#6a5a233adfaad0185a2b89ba6c4f3ae3">$colonnes</a>=array('id_table<span class="charliteral">','</span>sexe<span class="charliteral">','</span>prefixe<span class="charliteral">','</span>nom<span class="charliteral">','</span>prenoms<span class="charliteral">','</span>ldn<span class="charliteral">','</span>pays<span class="charliteral">','</span>ddn<span class="charliteral">','</span>delib<span class="charliteral">','</span>moyenne<span class="charliteral">','</span>serie<span class="charliteral">','</span>libSerie<span class="charliteral">','</span>jury<span class="charliteral">','</span>centre');
+<a name="l00075"></a><a class="code" href="inc-pdf-attestations_8php.html#b3d0ef943a60926dea60d237552d4c88">00075</a> <a class="code" href="inc-pdf-attestations_8php.html#b3d0ef943a60926dea60d237552d4c88">$colonnes2</a>=array('id_table<span class="charliteral">','</span>candidat<span class="charliteral">','</span>ldn<span class="charliteral">','</span>ddn<span class="charliteral">','</span>delib<span class="charliteral">','</span>moyenne<span class="charliteral">','</span>serie<span class="charliteral">','</span>libSerie<span class="charliteral">','</span>jury<span class="charliteral">','</span>centre');
+<a name="l00076"></a>00076 <span class="keywordflow">while</span>($row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)) {
+<a name="l00077"></a>00077    <span class="keywordflow">foreach</span>(<a class="code" href="inc-pdf-attestations_8php.html#6a5a233adfaad0185a2b89ba6c4f3ae3">$colonnes</a> as $col) $$col=utf8_decode(stripslashes($row[$col]));
+<a name="l00078"></a>00078    <span class="keywordflow">if</span>($sexe==<span class="charliteral">'M'</span>) {
+<a name="l00079"></a>00079       $civ='M.';
+<a name="l00080"></a>00080       $e='';
+<a name="l00081"></a>00081    }
+<a name="l00082"></a>00082    <span class="keywordflow">else</span> {
+<a name="l00083"></a>00083       $civ='Mlle';
+<a name="l00084"></a>00084       $e=<span class="charliteral">'e'</span>; <span class="comment">// pour mettre des mots au feminin si c'est une candidate</span>
+<a name="l00085"></a>00085    }
+<a name="l00086"></a>00086    <a class="code" href="inc-pdf-convocation_8php.html#a1d1a8c13dd23a13326547e2fb40b700">$prefixe</a>=strtolower(<a class="code" href="inc-pdf-convocation_8php.html#a1d1a8c13dd23a13326547e2fb40b700">$prefixe</a>);
+<a name="l00087"></a><a class="code" href="inc-pdf-attestations_8php.html#3a92e859e7c5b76b38102a0503de87e3">00087</a>    <a class="code" href="inc-pdf-attestations_8php.html#3a92e859e7c5b76b38102a0503de87e3">$candidat</a>=<span class="stringliteral">"$civ $prefixe &lt;b&gt;$nom&lt;/b&gt; $prenoms"</span>;
+<a name="l00088"></a>00088    <span class="keywordflow">if</span>(<a class="code" href="inc-html_8php.html#5b029790bb0355c3329199b4a8cdd8b8" title="Supprime les accents et enleve les espaces inutiles.">supprimeAccents</a>(utf8_encode($pays))!='Benin') $ldn.=<span class="stringliteral">" ($pays)"</span>;
+<a name="l00089"></a>00089    
+<a name="l00090"></a><a class="code" href="inc-pdf-attestations_8php.html#9a4db75cbb47f99cc82e12e08bb365ec">00090</a>    <a class="code" href="inc-pdf-attestations_8php.html#9a4db75cbb47f99cc82e12e08bb365ec">$delib</a>=ucfirst(str_replace('abien<span class="charliteral">','</span>Assez bien',str_replace('tbien<span class="charliteral">','</span>Tr&amp;egrave;s bien',strtolower(<a class="code" href="inc-pdf-attestations_8php.html#9a4db75cbb47f99cc82e12e08bb365ec">$delib</a>))));
+<a name="l00091"></a>00091    <span class="keywordflow">if</span>(<a class="code" href="inc-pdf-attestations_8php.html#9a4db75cbb47f99cc82e12e08bb365ec">$delib</a>=='Passable') {
+<a name="l00092"></a>00092         <span class="keywordflow">if</span>(<a class="code" href="inc-pdf-attestations_8php.html#71f2aa6a4b2bf64caee0b33cd32056dd">$groupe</a>==1) <a class="code" href="inc-pdf-attestations_8php.html#f0189d802a63b07049d0a278b9ec7df8">$eme</a>='er';
+<a name="l00093"></a><a class="code" href="inc-pdf-attestations_8php.html#f0189d802a63b07049d0a278b9ec7df8">00093</a>         <span class="keywordflow">else</span> <a class="code" href="inc-pdf-attestations_8php.html#f0189d802a63b07049d0a278b9ec7df8">$eme</a>='&amp;egrave;me';
+<a name="l00094"></a><a class="code" href="inc-pdf-attestations_8php.html#9a4db75cbb47f99cc82e12e08bb365ec">00094</a>         <a class="code" href="inc-pdf-attestations_8php.html#9a4db75cbb47f99cc82e12e08bb365ec">$delib</a>=<span class="stringliteral">"&lt;b&gt;$delib&lt;/b&gt; ($groupe$eme groupe)"</span>;
+<a name="l00095"></a>00095    }
+<a name="l00096"></a><a class="code" href="inc-pdf-attestations_8php.html#12a6f07665340c6c759a07cf96d74ef8">00096</a>    <span class="keywordflow">else</span> <a class="code" href="inc-pdf-attestations_8php.html#9a4db75cbb47f99cc82e12e08bb365ec">$delib</a>=<span class="stringliteral">"&lt;b&gt;$delib&lt;/b&gt;"</span>;
+<a name="l00097"></a>00097    
+<a name="l00098"></a>00098    <span class="keywordflow">foreach</span>(<a class="code" href="inc-pdf-attestations_8php.html#b3d0ef943a60926dea60d237552d4c88">$colonnes2</a> as $col) $tAttestation[<a class="code" href="inc-pdf-attestations_8php.html#1f711ee6f46195ba9dfce71eaf779d02">$jury</a>][$serie][<a class="code" href="inc-pdf-convocation_8php.html#295929cd9243ffe88a7c63fc065d7e9e">$id_table</a>][$col]=html_entity_decode($$col);
+<a name="l00099"></a>00099    
+<a name="l00100"></a>00100 }
+<a name="l00101"></a>00101 ksort($tAttestation);
+<a name="l00102"></a>00102 <span class="keywordflow">foreach</span>($tAttestation as <a class="code" href="inc-pdf-attestations_8php.html#1f711ee6f46195ba9dfce71eaf779d02">$jury</a>=&gt;$t1) {
+<a name="l00103"></a>00103         ksort($t1);
+<a name="l00104"></a>00104         <span class="keywordflow">foreach</span>($t1 as $serie=&gt;$t2) {
+<a name="l00105"></a>00105                 ksort($t2);
+<a name="l00106"></a>00106                 <span class="keywordflow">foreach</span>($t2 as <a class="code" href="inc-pdf-convocation_8php.html#295929cd9243ffe88a7c63fc065d7e9e">$id_table</a>=&gt;$t3) {
+<a name="l00107"></a>00107                         <span class="keywordflow">foreach</span>(<a class="code" href="inc-pdf-attestations_8php.html#b3d0ef943a60926dea60d237552d4c88">$colonnes2</a> as $col) $$col=$t3[$col];
+<a name="l00108"></a>00108                    <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;addDestination(<a class="code" href="inc-html_8php.html#a99d47bed9e80456aaed4dc43d2fc0cc" title="rend une chaine compatible url-rewriting">getRewriteString</a>(<a class="code" href="inc-pdf-attestations_8php.html#3a92e859e7c5b76b38102a0503de87e3">$candidat</a>),'FitH');
+<a name="l00109"></a>00109                    <span class="keywordflow">if</span>(<a class="code" href="inc-pdf-attestations_8php.html#27509762da1979df7c3e9f899a758829">$iPage</a>&gt;0)
+<a name="l00110"></a>00110                    <a class="code" href="inc-pdf-attestations_8php.html#27509762da1979df7c3e9f899a758829">$iPage</a>=<a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;newPage();
+<a name="l00111"></a><a class="code" href="inc-pdf-attestations_8php.html#27509762da1979df7c3e9f899a758829">00111</a>                    <span class="keywordflow">else</span> <a class="code" href="inc-pdf-attestations_8php.html#27509762da1979df7c3e9f899a758829">$iPage</a>=1;
+<a name="l00112"></a><a class="code" href="inc-pdf-attestations_8php.html#6bcaf0e2f3a66b7da57696c4e02eac7d">00112</a>                    <a class="code" href="inc-pdf-attestations_8php.html#6bcaf0e2f3a66b7da57696c4e02eac7d">$extra</a>='';
+<a name="l00113"></a><a class="code" href="inc-pdf-attestations_8php.html#b83af10f380499902aaae49fbbc67fca">00113</a>                    <a class="code" href="inc-pdf-attestations_8php.html#b83af10f380499902aaae49fbbc67fca">$sommaire</a>.=html_entity_decode(<span class="stringliteral">"&lt;c:ilink:"</span>.<a class="code" href="inc-html_8php.html#a99d47bed9e80456aaed4dc43d2fc0cc" title="rend une chaine compatible url-rewriting">getRewriteString</a>(<a class="code" href="inc-pdf-attestations_8php.html#3a92e859e7c5b76b38102a0503de87e3">$candidat</a>).<span class="stringliteral">"&gt;"</span>.str_pad(<a class="code" href="inc-pdf-convocation_8php.html#295929cd9243ffe88a7c63fc065d7e9e">$id_table</a>,13,<span class="charliteral">'0'</span>,STR_PAD_LEFT).<span class="stringliteral">" - jury $jury, s&amp;eacute;rie $serie - $candidat ($delib)&lt;/c:ilink&gt;\n"</span>);
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115                    <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;addText(420,700,20,<span class="stringliteral">"&lt;b&gt;$serie&lt;/b&gt;"</span>);
+<a name="l00116"></a>00116                    <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;addText(350,680,14,$libSerie);
+<a name="l00117"></a>00117                    
+<a name="l00118"></a>00118                    <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;addText(160,550,14,<a class="code" href="inc-pdf-attestations_8php.html#3a92e859e7c5b76b38102a0503de87e3">$candidat</a>);
+<a name="l00119"></a>00119                    <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;addText(160,525,14,$ldn);
+<a name="l00120"></a>00120                    <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;addText(160,500,14,$ddn);
+<a name="l00121"></a>00121                    
+<a name="l00122"></a>00122                    <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;addText(400,410,20,<span class="stringliteral">"&lt;b&gt;$serie&lt;/b&gt;"</span>);
+<a name="l00123"></a>00123                    <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;addText(120,390,14,<a class="code" href="inc-pdf-attestations_8php.html#45830599416786d3e81ab9f93a14f4a1">$sDateDelib</a>); <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;addText(400,390,14,$centre);
+<a name="l00124"></a>00124                    <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;addText(170,365,13,<a class="code" href="inc-pdf-convocation_8php.html#295929cd9243ffe88a7c63fc065d7e9e">$id_table</a>);   <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;addText(350,365,14,<a class="code" href="inc-pdf-attestations_8php.html#9a4db75cbb47f99cc82e12e08bb365ec">$delib</a>);
+<a name="l00125"></a>00125                    
+<a name="l00126"></a>00126                    <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;addText(370,340,14,<a class="code" href="inc-pdf-attestations_8php.html#9c9258871914db2f42ceec6dc4674d9d">$sDateAttestation</a>);
+<a name="l00127"></a>00127                    
+<a name="l00128"></a>00128                    <span class="comment">//$pdf-&gt;ezSetY(800);</span>
+<a name="l00129"></a>00129                    <span class="comment">//foreach($colonnes2 as $col) $pdf-&gt;ezText(html_entity_decode("$col ".$$col));</span>
+<a name="l00130"></a>00130                 }
+<a name="l00131"></a>00131         }
+<a name="l00132"></a>00132 }
+<a name="l00133"></a>00133 
+<a name="l00134"></a>00134 
+<a name="l00135"></a>00135 <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;ezInsertMode(1,1,'before');
+<a name="l00136"></a>00136 <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;ezNewPage();
+<a name="l00137"></a>00137 <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;ezText(html_entity_decode(<a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>),12);
+<a name="l00138"></a>00138 <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;ezText(<a class="code" href="inc-pdf-attestations_8php.html#b83af10f380499902aaae49fbbc67fca">$sommaire</a>,8);
+<a name="l00139"></a>00139 <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;ezInsertMode(0);
+<a name="l00140"></a>00140 
+<a name="l00141"></a><a class="code" href="inc-pdf-attestations_8php.html#f24aefa35fa703a1521c8145fe8fa082">00141</a> <a class="code" href="inc-pdf-attestations_8php.html#f24aefa35fa703a1521c8145fe8fa082">$infos</a>=array('Title'=&gt;html_entity_decode(<a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>),'Author'=&gt;'SIOU / Office du Bac<span class="charliteral">','</span>CreationDate'=&gt;date(<span class="stringliteral">"d/m/Y"</span>));
+<a name="l00142"></a>00142 <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;addInfo(<a class="code" href="inc-pdf-attestations_8php.html#f24aefa35fa703a1521c8145fe8fa082">$infos</a>);
+<a name="l00143"></a>00143 
+<a name="l00144"></a>00144 <span class="comment">// do the output, this is my standard testing output code, adding ?d=1</span>
+<a name="l00145"></a>00145 <span class="comment">// to the url puts the pdf code to the screen in raw form, good for</span>
+<a name="l00146"></a>00146 <span class="comment">// checking</span>
+<a name="l00147"></a>00147 <span class="comment">// for parse errors before you actually try to generate the pdf file.</span>
+<a name="l00148"></a>00148 <span class="keywordflow">if</span>(isset($_REQUEST[<span class="charliteral">'d'</span>])) <a class="code" href="inc-ezpdf_8php.html#0cf5dd496d9f5ff1edf00d234771dcfe">$d</a>=$_REQUEST[<span class="charliteral">'d'</span>];
+<a name="l00149"></a>00149 <span class="keywordflow">if</span> (isset(<a class="code" href="inc-ezpdf_8php.html#0cf5dd496d9f5ff1edf00d234771dcfe">$d</a>) &amp;&amp; <a class="code" href="inc-ezpdf_8php.html#0cf5dd496d9f5ff1edf00d234771dcfe">$d</a>){
+<a name="l00150"></a>00150    <a class="code" href="inc-ezpdf_8php.html#6b9aead899bafbd080a6faef6b5650ad">$pdfcode</a> = <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;output(1);
+<a name="l00151"></a><a class="code" href="inc-pdf-attestations_8php.html#6b9aead899bafbd080a6faef6b5650ad">00151</a>    <a class="code" href="inc-ezpdf_8php.html#6b9aead899bafbd080a6faef6b5650ad">$pdfcode</a> = str_replace(<span class="stringliteral">"\n"</span>,<span class="stringliteral">"\n&lt;br&gt;"</span>,htmlspecialchars(<a class="code" href="inc-ezpdf_8php.html#6b9aead899bafbd080a6faef6b5650ad">$pdfcode</a>));
+<a name="l00152"></a>00152    echo '&lt;html&gt;&lt;body&gt;';
+<a name="l00153"></a>00153    echo trim(<a class="code" href="inc-ezpdf_8php.html#6b9aead899bafbd080a6faef6b5650ad">$pdfcode</a>);
+<a name="l00154"></a>00154    echo '&lt;/body&gt;&lt;/html&gt;';
+<a name="l00155"></a>00155 } <span class="keywordflow">else</span> {
+<a name="l00156"></a>00156    <span class="comment">//$pdf-&gt;ezStream();</span>
+<a name="l00157"></a>00157 
+<a name="l00158"></a>00158    <a class="code" href="inc-ezpdf_8php.html#6b9aead899bafbd080a6faef6b5650ad">$pdfcode</a> = <a class="code" href="inc-ezpdf_8php.html#964ee5ee597c515cbb4dad2f14054cb4">$pdf</a>-&gt;ezOutput();
+<a name="l00159"></a>00159    $pdf_fic=<span class="stringliteral">"pdf/siou-"</span>.date(<span class="charliteral">'Y'</span>).<span class="stringliteral">"_$pdfG.pdf"</span>;
+<a name="l00160"></a>00160    $fp=fopen($pdf_fic,'wb');
+<a name="l00161"></a>00161    fwrite($fp,<a class="code" href="inc-ezpdf_8php.html#6b9aead899bafbd080a6faef6b5650ad">$pdfcode</a>);
+<a name="l00162"></a>00162    fclose($fp);
+<a name="l00163"></a>00163 
+<a name="l00164"></a>00164         echo <span class="stringliteral">"&lt;A HREF='$pdf_fic'&gt;Cliquez ici pour lire le fichier $pdf_fic&lt;/a&gt;\n"</span>;
+<a name="l00165"></a>00165         echo <span class="stringliteral">"&lt;script&gt;document.location='$pdf_fic'&lt;/script&gt;"</span>;  
+<a name="l00166"></a>00166 }
+<a name="l00167"></a>00167 ?&gt;
+</pre></div><hr size="1"><address style="text-align: right;"><small>Généré le Mon Mar 17 22:52:59 2008 pour Siou par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.3 </small></address>
+</body>
+</html>

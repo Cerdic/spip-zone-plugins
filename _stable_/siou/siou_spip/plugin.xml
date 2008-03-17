@@ -1,0 +1,16 @@
+<plugin>
+<nom>Balises spip pour SIOU</nom>
+<auteur>C&eacute;dric PROTI&Egrave;RE</auteur>
+<version>0.1</version>
+<etat>test</etat>
+<description>
+	<multi>
+	[fr] Balises spip d&eacute;velopp&eacute;es pour SIOU
+	</multi>
+</description>
+<fonctions>odb_fonctions.php</fonctions>
+<prefix>siou_spip</prefix>
+<lien>
+[Auteur (fr)->cedric@protiere.com]
+</lien>	
+</plugin>

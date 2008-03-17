@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Siou:  Fichier source de odb_commun/inc-html.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Généré par Doxygen 1.5.3 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Page&nbsp;principale</span></a></li>
+    <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+    <li><a href="dirs.html"><span>Répertoires</span></a></li>
+    <li>
+      <form action="search.php" method="get">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td><label>&nbsp;Rechercher&nbsp;</label></td>
+            <td><input type="text" name="query" value="" size="20" accesskey="s"/></td>
+          </tr>
+        </table>
+      </form>
+    </li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_d85a68ddeac050d85549308ca402191f.html">odb_commun</a></div>
+<h1>inc-html.php</h1><a href="inc-html_8php.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00010"></a><a class="code" href="inc-html_8php.html#9e275c42206610f6e5a60fb84f386886">00010</a> function <a class="code" href="inc-html_8php.html#9e275c42206610f6e5a60fb84f386886" title="Debut de balise SELECT dans un TR.">formSelectTR1</a>($label,$name,$html='') {
+<a name="l00011"></a>00011         $tr = <span class="stringliteral">"\t&lt;tr&gt;\n\t\t&lt;td align='left'&gt;&lt;label for='$name'&gt;$label&lt;/label&gt;&lt;/td&gt;\n\t\t&lt;td align='left'&gt;&lt;select name='$name' id='$name' $html&gt;\n"</span>;
+<a name="l00012"></a>00012         <span class="keywordflow">return</span> $tr;
+<a name="l00013"></a>00013 }
+<a name="l00014"></a>00014 
+<a name="l00020"></a><a class="code" href="inc-html_8php.html#6479fd1beeb46ce4b7261b9054a8ccb1">00020</a> function <a class="code" href="inc-html_8php.html#6479fd1beeb46ce4b7261b9054a8ccb1" title="Fin de balise SELECT dans un TR.">formSelectTR2</a>() {
+<a name="l00021"></a>00021         <span class="keywordflow">return</span> <span class="stringliteral">"&lt;/select&gt;&lt;/td&gt;\n\t&lt;/tr&gt;\n"</span>;
+<a name="l00022"></a>00022 }
+<a name="l00023"></a>00023 
+<a name="l00032"></a><a class="code" href="inc-html_8php.html#7be54cdf2beda343e02419f1ac46fa0c">00032</a> function <a class="code" href="inc-html_8php.html#7be54cdf2beda343e02419f1ac46fa0c" title="Cree un champ OPTION dans un SELECT.">formOptionsInSelect</a>($label,$value,$selected=<span class="stringliteral">""</span>) {
+<a name="l00033"></a>00033         <span class="keywordflow">if</span> ((<span class="keywordtype">string</span>)trim($selected)==(<span class="keywordtype">string</span>)trim($value) &amp;&amp; trim($selected!=<span class="stringliteral">""</span>)) {
+<a name="l00034"></a>00034                 <span class="comment">//echo "&lt;b&gt;$value==$selected&lt;/b&gt; $label&lt;br&gt;";</span>
+<a name="l00035"></a>00035                 $selected=<span class="stringliteral">"selected"</span>;
+<a name="l00036"></a>00036         } <span class="keywordflow">else</span> {
+<a name="l00037"></a>00037                 <span class="keywordflow">if</span>($label=='Faux') echo <span class="stringliteral">"$label - $value!=$selected&lt;br&gt;"</span>;
+<a name="l00038"></a>00038                 $selected=<span class="stringliteral">""</span>;
+<a name="l00039"></a>00039         }
+<a name="l00040"></a>00040         <span class="keywordflow">return</span> <span class="stringliteral">"\t&lt;option value=\"$value\" $selected&gt;$label&lt;/option&gt;\n"</span>;
+<a name="l00041"></a>00041 }
+<a name="l00042"></a>00042 
+<a name="l00056"></a><a class="code" href="inc-html_8php.html#26ce7f961b7c017f444305029440e0d3">00056</a> function <a class="code" href="inc-html_8php.html#26ce7f961b7c017f444305029440e0d3" title="Ajoute du code javascript.">putJavascript</a>($script) {
+<a name="l00057"></a>00057         <span class="keywordflow">switch</span> ($script)
+<a name="l00058"></a>00058         {
+<a name="l00059"></a>00059                 <span class="keywordflow">case</span> 'changerStyle' :
+<a name="l00060"></a>00060                         $script= &lt;&lt;&lt;FINSCRIPT
+<a name="l00061"></a>00061 function changerStyle(champ,couleurFond,style) {
+<a name="l00062"></a>00062         <span class="keywordflow">switch</span> (style)
+<a name="l00063"></a>00063         {
+<a name="l00064"></a>00064                 <span class="keywordflow">case</span> 'readonly': 
+<a name="l00065"></a>00065                         champ.readonly=<span class="keyword">true</span>;
+<a name="l00066"></a>00066                         <span class="keywordflow">break</span>;
+<a name="l00067"></a>00067                 <span class="keywordflow">case</span> 'disable': 
+<a name="l00068"></a>00068                         champ.disabled=<span class="keyword">true</span>;
+<a name="l00069"></a>00069                         <span class="keywordflow">break</span>;
+<a name="l00070"></a>00070                 <span class="keywordflow">case</span> 'enable':
+<a name="l00071"></a>00071                         champ.disabled=<span class="keyword">false</span>;
+<a name="l00072"></a>00072                         champ.readonly=<span class="keyword">false</span>;
+<a name="l00073"></a>00073                         <span class="keywordflow">break</span>;
+<a name="l00074"></a>00074         }
+<a name="l00075"></a>00075         champ.style.backgroundColor='couleurFond';
+<a name="l00076"></a>00076 }
+<a name="l00077"></a>00077 FINSCRIPT;
+<a name="l00078"></a>00078                         <span class="keywordflow">break</span>;
+<a name="l00079"></a>00079                 <span class="keywordflow">case</span> 'isDate' : 
+<a name="l00080"></a>00080                         $annee_min=(int)(date(<span class="charliteral">'Y'</span>)-100);
+<a name="l00081"></a>00081                         $annee_max=(int)(date(<span class="charliteral">'Y'</span>)-10);
+<a name="l00082"></a>00082                         $script= &lt;&lt;&lt;FINSCRIPT
+<a name="l00083"></a>00083 function isDate(d) {
+<a name="l00084"></a>00084 <span class="comment">// http://www.javascriptfr.com/code.aspx?ID=15737</span>
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086 <span class="keywordflow">if</span> (d == <span class="stringliteral">""</span>) <span class="comment">// si la variable est vide on retourne faux</span>
+<a name="l00087"></a>00087 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089 e = <span class="keyword">new</span> RegExp(<span class="stringliteral">"^[0-9]{1,2}\/[0-9]{1,2}\/([0-9]{2}|[0-9]{4})$"</span>);
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091 <span class="keywordflow">if</span> (!e.test(d)) <span class="comment">// On teste l'expression régulière pour valider la forme de la date</span>
+<a name="l00092"></a>00092 <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Si pas bon, retourne faux</span>
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094 <span class="comment">// On sépare la date en 3 variables pour vérification, parseInt() converti du texte en entier</span>
+<a name="l00095"></a>00095 j = parseInt(d.split(<span class="stringliteral">"/"</span>)[0], 10); <span class="comment">// jour</span>
+<a name="l00096"></a>00096 m = parseInt(d.split(<span class="stringliteral">"/"</span>)[1], 10); <span class="comment">// mois</span>
+<a name="l00097"></a>00097 a = parseInt(d.split(<span class="stringliteral">"/"</span>)[2], 10); <span class="comment">// année</span>
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099 <span class="comment">// Si l'année n'est composée que de 2 chiffres on complète automatiquement</span>
+<a name="l00100"></a>00100 <span class="keywordflow">if</span> (a &lt; 1000) {
+<a name="l00101"></a>00101 <span class="keywordflow">if</span> (a &lt; 89) a+=2000; <span class="comment">// Si a &lt; 89 alors on ajoute 2000 sinon on ajoute 1900</span>
+<a name="l00102"></a>00102 <span class="keywordflow">else</span> a+=1900;
+<a name="l00103"></a>00103 }
+<a name="l00104"></a>00104 
+<a name="l00105"></a>00105 <span class="comment">// Définition du dernier jour de février</span>
+<a name="l00106"></a>00106 <span class="comment">// Année bissextile si annnée divisible par 4 et que ce n'est pas un siècle, ou bien si divisible par 400</span>
+<a name="l00107"></a>00107 <span class="keywordflow">if</span> (a%4 == 0 &amp;&amp; a%100 !=0 || a%400 == 0) fev = 29;
+<a name="l00108"></a>00108 <span class="keywordflow">else</span> fev = 28;
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110 <span class="comment">// Nombre de jours pour chaque mois</span>
+<a name="l00111"></a>00111 nbJours = <span class="keyword">new</span> Array(31,fev,31,30,31,30,31,31,30,31,30,31);
+<a name="l00112"></a>00112 
+<a name="l00113"></a>00113 <span class="comment">// Enfin, retourne vrai si le jour est bien entre 1 et le bon nombre de jours, idem pour les mois, sinon retourn faux</span>
+<a name="l00114"></a>00114 <span class="keywordflow">return</span> ( m &gt;= 1 &amp;&amp; m &lt;=12 &amp;&amp; j &gt;= 1 &amp;&amp; j &lt;= nbJours[m-1] &amp;&amp; a &gt;= $annee_min &amp;&amp; a &lt;= $annee_max);
+<a name="l00115"></a>00115 }
+<a name="l00116"></a>00116 FINSCRIPT;
+<a name="l00117"></a>00117                         <span class="keywordflow">break</span>;
+<a name="l00118"></a>00118         }
+<a name="l00119"></a>00119         <span class="keywordflow">return</span> <span class="stringliteral">"&lt;script type='text/javascript'&gt;&lt;!--\n$script\n//--&gt;\n&lt;/script&gt;\n"</span>;
+<a name="l00120"></a>00120 }
+<a name="l00121"></a>00121 
+<a name="l00133"></a><a class="code" href="inc-html_8php.html#ee820c089a642b6c9643b4a48fc46395">00133</a> function <a class="code" href="inc-html_8php.html#ee820c089a642b6c9643b4a48fc46395" title="Cree un champ INPUT TEXT dans une ligne TR.">formInputTextTR</a>($label,$name,$value='',$html='',$fin_ligne='',<a class="code" href="inc-ezpdf_8php.html#607686ef9f99ea7c42f4f3dd3dbb2b0d">$password</a>='') {
+<a name="l00134"></a>00134         <span class="keywordflow">if</span>(<a class="code" href="inc-ezpdf_8php.html#607686ef9f99ea7c42f4f3dd3dbb2b0d">$password</a>) $type='password'; <span class="keywordflow">else</span> $type='text';
+<a name="l00135"></a>00135         <span class="comment">//if(substr_count($html,'class')==0) $html.=" class='forml'";</span>
+<a name="l00136"></a>00136         $tr = <span class="stringliteral">"\t&lt;tr&gt;\n\t\t&lt;td align='left'&gt;&lt;label for='$name'&gt;$label&lt;/label&gt;&lt;/td&gt;\n\t\t&lt;td align='left'&gt;&lt;input type='$type' name='$name' id='$name' value=\"$value\" $html/&gt;&lt;/td&gt;\n\t\t$fin_ligne\n\t&lt;/tr&gt;\n"</span>;
+<a name="l00137"></a>00137         <span class="keywordflow">return</span> $tr;
+<a name="l00138"></a>00138 }
+<a name="l00139"></a>00139 
+<a name="l00149"></a><a class="code" href="inc-html_8php.html#5d8e88ab9e3dbed93415de2c14978c22">00149</a> function <a class="code" href="inc-html_8php.html#5d8e88ab9e3dbed93415de2c14978c22" title="Cree un champ TEXTAREA dans un TR.">formTextAreaTR</a>($label,$name,$value='',$html='',$html_td='') {
+<a name="l00150"></a>00150         $tr = <span class="stringliteral">"\t&lt;tr&gt;\n\t\t&lt;td align='left'&gt;&lt;label for='$name'&gt;$label&lt;/label&gt;&lt;/td&gt;\n\t\t&lt;td align='left' $html_td&gt;&lt;textarea name='$name' id='$name' $html&gt;$value&lt;/textarea&gt;&lt;/td&gt;\n\t&lt;/tr&gt;\n"</span>;
+<a name="l00151"></a>00151         <span class="keywordflow">return</span> $tr;
+<a name="l00152"></a>00152 }
+<a name="l00153"></a>00153 
+<a name="l00154"></a>00154 
+<a name="l00161"></a><a class="code" href="inc-html_8php.html#8e011c8d22f485dcee8b90fa3ff656c7">00161</a> function <a class="code" href="inc-html_8php.html#8e011c8d22f485dcee8b90fa3ff656c7" title="Cree un champ SELECT contenant les annees de 2002 a annee en cours + 1.">formSelectAnnee</a>(<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>) {
+<a name="l00162"></a>00162         $str=<span class="stringliteral">""</span>;
+<a name="l00163"></a>00163         <span class="keywordflow">for</span> (<a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#83018d9153d17d91fbcf3bc10158d34f">$i</a> = (<span class="keywordtype">int</span>)date(<span class="stringliteral">"Y"</span>)+1; <a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#83018d9153d17d91fbcf3bc10158d34f">$i</a> &gt;= 2002; <a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#83018d9153d17d91fbcf3bc10158d34f">$i</a>--) {
+<a name="l00164"></a>00164                 $str.= <a class="code" href="inc-html_8php.html#7be54cdf2beda343e02419f1ac46fa0c" title="Cree un champ OPTION dans un SELECT.">formOptionsInSelect</a>(<a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#83018d9153d17d91fbcf3bc10158d34f">$i</a>,<a class="code" href="odb__commun_2img__pack_2vignettes_2index_8php.html#83018d9153d17d91fbcf3bc10158d34f">$i</a>,<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>);
+<a name="l00165"></a>00165         }
+<a name="l00166"></a>00166         <span class="keywordflow">return</span> $str;
+<a name="l00167"></a>00167 }
+<a name="l00168"></a>00168 
+<a name="l00175"></a><a class="code" href="inc-html_8php.html#91572c26546b401889dffeb695be248f">00175</a> function <a class="code" href="inc-html_8php.html#91572c26546b401889dffeb695be248f" title="Champ SELECT Vrai/Faux boolean.">formSelectVraiFaux</a>($isVrai) {
+<a name="l00176"></a>00176         $str= <a class="code" href="inc-html_8php.html#7be54cdf2beda343e02419f1ac46fa0c" title="Cree un champ OPTION dans un SELECT.">formOptionsInSelect</a>('Vrai',1,$isVrai);
+<a name="l00177"></a>00177         $str.= <a class="code" href="inc-html_8php.html#7be54cdf2beda343e02419f1ac46fa0c" title="Cree un champ OPTION dans un SELECT.">formOptionsInSelect</a>('Faux',0,$isVrai);
+<a name="l00178"></a>00178         <span class="keywordflow">return</span> $str;
+<a name="l00179"></a>00179 }
+<a name="l00180"></a>00180 
+<a name="l00188"></a><a class="code" href="inc-html_8php.html#fa7c9d548e547f5aa3b1a88df9ec970c">00188</a> function <a class="code" href="inc-html_8php.html#fa7c9d548e547f5aa3b1a88df9ec970c" title="Affiche une vignette (icone de type de fichier).">vignette</a>($ext,<a class="code" href="inc-pdf-convocation_8php.html#da57e7bb7c152edad18fe2f166188691">$title</a>='') {
+<a name="l00189"></a>00189         define('<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>',_DIR_PLUGINS.<span class="stringliteral">"odb/odb_commun/"</span>);
+<a name="l00190"></a>00190 
+<a name="l00191"></a>00191         <span class="keywordflow">switch</span>(trim($ext)) {
+<a name="l00192"></a>00192                 <span class="keywordflow">case</span> <span class="stringliteral">"csv"</span>:
+<a name="l00193"></a>00193                         $ext=<span class="stringliteral">"ods"</span>;
+<a name="l00194"></a>00194                         <span class="keywordflow">break</span>;
+<a name="l00195"></a>00195                 <span class="keywordflow">case</span> <span class="stringliteral">""</span>:
+<a name="l00196"></a>00196                         $ext=<span class="stringliteral">"defaut"</span>;
+<a name="l00197"></a>00197         }
+<a name="l00198"></a>00198         $src=<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>.<span class="stringliteral">"img_pack/vignettes/$ext.png"</span>;
+<a name="l00199"></a>00199         <span class="keywordflow">if</span>(is_file($src))
+<a name="l00200"></a>00200         $str = <span class="stringliteral">"&lt;img src='$src' alt='Fichier $ext' title='$title' align='absmiddle'/&gt;"</span>;
+<a name="l00201"></a>00201         <span class="keywordflow">else</span>
+<a name="l00202"></a>00202         $str = <span class="stringliteral">"&lt;b&gt;[$ext]&lt;/b&gt;\n"</span>;
+<a name="l00203"></a>00203         <span class="keywordflow">return</span> $str;
+<a name="l00204"></a>00204 }
+<a name="l00205"></a>00205 
+<a name="l00215"></a><a class="code" href="inc-html_8php.html#5f91efa37c4c6e04e1e2792cc0c37600">00215</a> function <a class="code" href="inc-html_8php.html#5f91efa37c4c6e04e1e2792cc0c37600" title="Affiche une table html.">odb_html_table</a>(<a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>,$tbody,$thead='',$icone='<a class="code" href="inc-html_8php.html#fa7c9d548e547f5aa3b1a88df9ec970c" title="Affiche une vignette (icone de type de fichier).">vignette</a>-24.png') {
+<a name="l00216"></a>00216         $isMSIE=eregi('msie',$_SERVER['HTTP_USER_AGENT'])&gt;0;
+<a name="l00217"></a>00217 
+<a name="l00218"></a>00218         $wrapper=$isMSIE ? 'wrapper.php?file=<span class="charliteral">':'</span>';
+<a name="l00219"></a>00219 
+<a name="l00220"></a>00220         $ret=<span class="stringliteral">"&lt;div class='liste'&gt;\n"</span>
+<a name="l00221"></a>00221    . <span class="stringliteral">"   &lt;div style='position: relative;'&gt;\n"</span>
+<a name="l00222"></a>00222    . <span class="stringliteral">"      &lt;div style='position: absolute; top: -12px; left: 3px;'&gt;&lt;img src='../dist/images/$wrapper$icone' alt=''  /&gt;&lt;/div&gt;\n"</span>
+<a name="l00223"></a>00223         . <span class="stringliteral">"      &lt;div style='background-color: white; color: black; padding: 3px; padding-left: 30px; border-bottom: 1px solid #444444;' class='verdana2'&gt;\n"</span>
+<a name="l00224"></a>00224    . <span class="stringliteral">"         &lt;b&gt;$titre&lt;/b&gt;\n"</span>
+<a name="l00225"></a>00225         . <span class="stringliteral">"      &lt;/div&gt;\n"</span>
+<a name="l00226"></a>00226    . <span class="stringliteral">"   &lt;/div&gt;\n"</span>
+<a name="l00227"></a>00227    . <span class="stringliteral">"   &lt;table id='"</span>.getRewriteString(<a class="code" href="inc-html_8php.html#5b029790bb0355c3329199b4a8cdd8b8" title="Supprime les accents et enleve les espaces inutiles.">supprimeAccents</a>(strip_tags(substr(html_entity_decode(<a class="code" href="inc-html_8php.html#3dae9c9943cf37bd111dd3552a061650" title="Nettoie une chaine de caracteres.">odb_propre</a>(<a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>)),0,20)))).<span class="stringliteral">"' width='100%' cellpadding='2' cellspacing='0' border='0' class='spip'&gt;\n"</span>
+<a name="l00228"></a>00228    ;
+<a name="l00229"></a>00229    <span class="keywordflow">if</span>($thead!=='') {
+<a name="l00230"></a>00230         $ret.=<span class="stringliteral">"&lt;thead&gt;\n"</span>;
+<a name="l00231"></a>00231         <span class="keywordflow">if</span>(is_array($thead))
+<a name="l00232"></a>00232                 <span class="keywordflow">foreach</span>($thead as $ligne)
+<a name="l00233"></a>00233                         $ret.=<span class="stringliteral">"\t&lt;tr $js&gt;\n\t\t$ligne\n\t&lt;/tr&gt;\n"</span>;
+<a name="l00234"></a>00234         <span class="keywordflow">else</span> $ret.=<span class="stringliteral">"\t&lt;tr $js&gt;\n\t\t$thead\n\t&lt;/tr&gt;\n"</span>;
+<a name="l00235"></a>00235         $ret.=<span class="stringliteral">"&lt;/thead&gt;\n"</span>;
+<a name="l00236"></a>00236         }
+<a name="l00237"></a>00237         $ret.=<span class="stringliteral">"&lt;tbody&gt;\n"</span>;
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239         <span class="comment">//$js=$isMSIE ? "onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\"" : '';</span>
+<a name="l00240"></a>00240         $js=<span class="stringliteral">"onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\""</span>;
+<a name="l00241"></a>00241         <span class="keywordflow">if</span>(is_array($tbody))
+<a name="l00242"></a>00242                 <span class="keywordflow">foreach</span>($tbody as $ligne)
+<a name="l00243"></a>00243                         $ret.=<span class="stringliteral">"\t&lt;tr class='tr_liste' $js&gt;\n\t\t$ligne\n\t&lt;/tr&gt;\n"</span>;
+<a name="l00244"></a>00244         $ret.=<span class="stringliteral">"&lt;/tbody&gt;\n"</span>;
+<a name="l00245"></a>00245         $ret .= <span class="stringliteral">"   &lt;/table&gt;\n&lt;/div&gt;\n"</span>;
+<a name="l00246"></a>00246 
+<a name="l00247"></a>00247         <span class="keywordflow">return</span> $ret;
+<a name="l00248"></a>00248 }
+<a name="l00249"></a>00249 
+<a name="l00257"></a><a class="code" href="inc-html_8php.html#af111db152a79e88015b3a80345d0cdd">00257</a> function <a class="code" href="inc-html_8php.html#af111db152a79e88015b3a80345d0cdd" title="affiche une boite de message">boite_important</a>(<a class="code" href="inc-image_8php.html#354cbaf1d3ac02e1d550c110d5f288c3">$texte</a>,$type='') {
+<a name="l00258"></a>00258         $style=<span class="stringliteral">"border: 1px solid red;background-color:#eee;padding:5px;"</span>;
+<a name="l00259"></a>00259         <span class="keywordflow">switch</span>($type) {
+<a name="l00260"></a>00260                 <span class="comment">//TODO implementer differents types de boite</span>
+<a name="l00261"></a>00261                 <span class="keywordflow">case</span> 'attention':
+<a name="l00262"></a>00262                 <span class="keywordflow">case</span> 'warning':
+<a name="l00263"></a>00263                 <span class="keywordflow">default</span>:
+<a name="l00264"></a>00264                         $panno=<span class="stringliteral">"&lt;b style='color:red;text-decoration:underline;'&gt;/!&lt;/b&gt;"</span>;
+<a name="l00265"></a>00265                         <span class="keywordflow">break</span>;
+<a name="l00266"></a>00266         }
+<a name="l00267"></a>00267         <span class="keywordflow">return</span> <span class="stringliteral">"&lt;p style='$style'&gt;$panno $texte&lt;/p&gt;\n"</span>;
+<a name="l00268"></a>00268 }
+<a name="l00269"></a>00269 
+<a name="l00277"></a><a class="code" href="inc-html_8php.html#5b029790bb0355c3329199b4a8cdd8b8">00277</a> function <a class="code" href="inc-html_8php.html#5b029790bb0355c3329199b4a8cdd8b8" title="Supprime les accents et enleve les espaces inutiles.">supprimeAccents</a>($str,$stripette=<span class="keyword">true</span>) {
+<a name="l00278"></a>00278         <span class="keywordflow">if</span>($stripette) {
+<a name="l00279"></a>00279                 $str=str_replace(<span class="stringliteral">"-"</span>,<span class="stringliteral">" - "</span>,$str);
+<a name="l00280"></a>00280                 $str=str_replace(<span class="stringliteral">"/"</span>,<span class="stringliteral">" / "</span>,$str);
+<a name="l00281"></a>00281         }
+<a name="l00282"></a>00282         <span class="comment">//$str=ereg_replace('^[:blank:]+$',' ',$str);</span>
+<a name="l00283"></a>00283         <span class="keywordflow">while</span>(substr_count($str,'  ')&gt;0)
+<a name="l00284"></a>00284         $str=str_replace('  <span class="charliteral">','</span> ',$str);
+<a name="l00285"></a>00285         $str=utf8_decode($str);
+<a name="l00286"></a>00286         $str = strtr($str,<span class="stringliteral">"\xC0\xC1\xC2\xC3\xC4\xC5\xC6"</span>,<span class="stringliteral">"AAAAAAA"</span>);
+<a name="l00287"></a>00287         $str = strtr($str,<span class="stringliteral">"\xC7"</span>,<span class="stringliteral">"C"</span>);
+<a name="l00288"></a>00288         $str = strtr($str,<span class="stringliteral">"\xC8\xC9\xCA\xCB"</span>,<span class="stringliteral">"EEEE"</span>);
+<a name="l00289"></a>00289         $str = strtr($str,<span class="stringliteral">"\xCC\xCD\xCE\xCF"</span>,<span class="stringliteral">"IIII"</span>);
+<a name="l00290"></a>00290         $str = strtr($str,<span class="stringliteral">"\xD1"</span>,<span class="stringliteral">"N"</span>);
+<a name="l00291"></a>00291         $str = strtr($str,<span class="stringliteral">"\xD2\xD3\xD4\xD5\xD6\xD8"</span>,<span class="stringliteral">"OOOOOO"</span>);
+<a name="l00292"></a>00292         $str = strtr($str,<span class="stringliteral">"\xDD"</span>,<span class="stringliteral">"Y"</span>);
+<a name="l00293"></a>00293         $str = strtr($str,<span class="stringliteral">"\xDF"</span>,<span class="stringliteral">"S"</span>);
+<a name="l00294"></a>00294         $str = strtr($str,<span class="stringliteral">"\xE0\xE1\xE2\xE3\xE4\xE5\xE6"</span>,<span class="stringliteral">"aaaaaaa"</span>);
+<a name="l00295"></a>00295         $str = strtr($str,<span class="stringliteral">"\xE7"</span>,<span class="stringliteral">"c"</span>);
+<a name="l00296"></a>00296         $str = strtr($str,<span class="stringliteral">"\xE8\xE9\xEA\xEB"</span>,<span class="stringliteral">"eeee"</span>);
+<a name="l00297"></a>00297         $str = strtr($str,<span class="stringliteral">"\xEC\xED\xEE\xEF"</span>,<span class="stringliteral">"iiii"</span>);
+<a name="l00298"></a>00298         $str = strtr($str,<span class="stringliteral">"\xF1"</span>,<span class="stringliteral">"n"</span>);
+<a name="l00299"></a>00299         $str = strtr($str,<span class="stringliteral">"\xF2\xF3\xF4\xF5\xF6\xF8"</span>,<span class="stringliteral">"oooooo"</span>);
+<a name="l00300"></a>00300         $str = strtr($str,<span class="stringliteral">"\xF9\xFA\xFB\xFC"</span>,<span class="stringliteral">"uuuu"</span>);
+<a name="l00301"></a>00301         $str = strtr($str,<span class="stringliteral">"\xFD\xFF"</span>,<span class="stringliteral">"yy"</span>);
+<a name="l00302"></a>00302         <span class="keywordflow">return</span> trim($str);
+<a name="l00303"></a>00303 }
+<a name="l00304"></a>00304 
+<a name="l00312"></a><a class="code" href="inc-html_8php.html#a99d47bed9e80456aaed4dc43d2fc0cc">00312</a> function <a class="code" href="inc-html_8php.html#a99d47bed9e80456aaed4dc43d2fc0cc" title="rend une chaine compatible url-rewriting">getRewriteString</a>($sString) {
+<a name="l00313"></a>00313         $string    = htmlentities(strtolower($sString));
+<a name="l00314"></a>00314         $string    = preg_replace(<span class="stringliteral">"/&amp;(.)(acute|cedil|circ|ring|tilde|uml);/"</span>, <span class="stringliteral">"$1"</span>, $string);
+<a name="l00315"></a>00315         $string    = preg_replace(<span class="stringliteral">"/([^a-z0-9]+)/"</span>, <span class="stringliteral">"-"</span>, html_entity_decode($string));
+<a name="l00316"></a>00316         $string    = trim($string, <span class="stringliteral">"-"</span>);
+<a name="l00317"></a>00317         <span class="comment">//echo "$sString&amp;rarr;$string&lt;br&gt;";</span>
+<a name="l00318"></a>00318         <span class="keywordflow">return</span> $string;
+<a name="l00319"></a>00319 }
+<a name="l00320"></a>00320 
+<a name="l00328"></a><a class="code" href="inc-html_8php.html#5646c2c37376d593c6d70fab7aa6699c">00328</a> function <a class="code" href="inc-html_8php.html#5646c2c37376d593c6d70fab7aa6699c" title="affiche un taux sous forme d&amp;#39;image">afficheTaux</a>($taux,$largeur=1) {
+<a name="l00329"></a>00329         $taux=round(100*$taux,1);
+<a name="l00330"></a>00330         <span class="keywordflow">return</span> <span class="stringliteral">"&lt;IMG SRC='"</span>._DIR_PLUGIN_ODB_REPARTITION.<span class="stringliteral">"img_pack/carre.gif' title='$taux %' alt='$taux %' height='5'  width='"</span>.round($largeur*$taux,0).<span class="stringliteral">"'&gt;"</span>;
+<a name="l00331"></a>00331 }
+<a name="l00332"></a>00332 
+<a name="l00342"></a><a class="code" href="inc-html_8php.html#d0713456555cf1be05ad6a7767ba5891">00342</a> function <a class="code" href="inc-html_8php.html#d0713456555cf1be05ad6a7767ba5891" title="affiche un texte la verticale (image, si gd install)">texte90</a>(<a class="code" href="inc-image_8php.html#354cbaf1d3ac02e1d550c110d5f288c3">$texte</a>,<a class="code" href="inc-image_8php.html#36a493700c12c22c6380c8bcb40b4723">$taille</a>,$largeur,$hauteur,$type='img') {
+<a name="l00343"></a>00343         <a class="code" href="inc-image_8php.html#354cbaf1d3ac02e1d550c110d5f288c3">$texte</a>=str_replace(<span class="stringliteral">"'"</span>,<span class="stringliteral">"&amp;quot;"</span>,<a class="code" href="inc-image_8php.html#354cbaf1d3ac02e1d550c110d5f288c3">$texte</a>);
+<a name="l00344"></a>00344         $src=<span class="stringliteral">"../plugins/odb/odb_commun/inc-image.php?text=$texte&amp;x=$largeur&amp;y=$hauteur&amp;taille=$taille"</span>;
+<a name="l00345"></a>00345         <span class="keywordflow">if</span>($type=='img')
+<a name="l00346"></a>00346         <span class="keywordflow">return</span> <span class="stringliteral">"&lt;img alt='$texte' src='$src'/&gt;"</span>;
+<a name="l00347"></a>00347         <span class="keywordflow">else</span> <span class="keywordflow">return</span> $src;
+<a name="l00348"></a>00348 }
+<a name="l00349"></a>00349 
+<a name="l00359"></a><a class="code" href="inc-html_8php.html#c30387742c6bd008f7c588879a73dea9">00359</a> function <a class="code" href="inc-html_8php.html#c30387742c6bd008f7c588879a73dea9" title="table des matieres Le tableau des index determine le texte a afficher et le nom des...">odb_table_matieres</a>($tIndex,$tailleLettrines=24,$html='',$isTrier=<span class="keyword">true</span>) {
+<a name="l00360"></a>00360         <span class="keywordflow">if</span>($isTrier) asort($tIndex);
+<a name="l00361"></a>00361         $sIndex='';
+<a name="l00362"></a>00362         <span class="keywordflow">if</span>($tailleLettrines&gt;0) {
+<a name="l00363"></a>00363                 <span class="keywordflow">foreach</span>($tIndex as $entree) {
+<a name="l00364"></a>00364                         $lettre=$entree[0];
+<a name="l00365"></a>00365                         $lettrine[$lettre][]=substr($entree,1);
+<a name="l00366"></a>00366                 }
+<a name="l00367"></a>00367                 $sIndex=<span class="stringliteral">"&lt;table $html&gt;\n"</span>;
+<a name="l00368"></a>00368                 <span class="keywordflow">foreach</span>($lettrine as $lettre=&gt;$t1) {
+<a name="l00369"></a>00369                         $sIndex.=<span class="stringliteral">"&lt;tr&gt;&lt;td valign='top' style='font-size:"</span>.$tailleLettrines.<span class="stringliteral">"px;font-weight:bolder;'&gt;$lettre&lt;/td&gt;&lt;td valign='middle'&gt;&lt;small&gt;&lt;/small&gt;"</span>;
+<a name="l00370"></a>00370                         <span class="keywordflow">foreach</span>($t1 as $entree) $sIndex.=<span class="stringliteral">"&lt;A HREF='#"</span>.getRewriteString($lettre.$entree).<span class="stringliteral">"'&gt;$entree&lt;/a&gt;&lt;br/&gt;\n"</span>;
+<a name="l00371"></a>00371                         $sIndex.=<span class="stringliteral">"&lt;/small&gt;&lt;/td&gt;&lt;/tr&gt;\n"</span>;
+<a name="l00372"></a>00372                 }
+<a name="l00373"></a>00373                 $sIndex.=<span class="stringliteral">"&lt;/table&gt;\n"</span>;
+<a name="l00374"></a>00374         } <span class="keywordflow">else</span> {
+<a name="l00375"></a>00375                 <span class="keywordflow">foreach</span>($tIndex as $entree) $sIndex.=<span class="stringliteral">"&lt;A HREF='#"</span>.getRewriteString($entree).<span class="stringliteral">"'&gt;&lt;b&gt;"</span>.$entree[0].<span class="stringliteral">"&lt;/b&gt;"</span>.substr($entree,1).<span class="stringliteral">"&lt;/a&gt;&lt;br/&gt;\n"</span>;
+<a name="l00376"></a>00376         }
+<a name="l00377"></a>00377         <span class="keywordflow">return</span> $sIndex;
+<a name="l00378"></a>00378 }
+<a name="l00379"></a>00379 
+<a name="l00386"></a><a class="code" href="inc-html_8php.html#3dae9c9943cf37bd111dd3552a061650">00386</a> function <a class="code" href="inc-html_8php.html#3dae9c9943cf37bd111dd3552a061650" title="Nettoie une chaine de caracteres.">odb_propre</a>($str) {
+<a name="l00387"></a>00387         <span class="comment">//$str=preg_replace('/\s\s+/',' ',$str);</span>
+<a name="l00388"></a>00388         $str=str_replace(array(<span class="stringliteral">"\r"</span>,<span class="stringliteral">"\n"</span>,<span class="stringliteral">"\t"</span>,'  '),<span class="charliteral">' '</span>,trim($str));
+<a name="l00389"></a>00389         $str=str_replace(' - <span class="charliteral">','</span>-',$str);
+<a name="l00390"></a>00390         <span class="keywordflow">return</span> trim($str);
+<a name="l00391"></a>00391 }
+<a name="l00392"></a>00392 
+<a name="l00393"></a>00393 ?&gt;
+</pre></div><hr size="1"><address style="text-align: right;"><small>Généré le Mon Mar 17 22:52:59 2008 pour Siou par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.3 </small></address>
+</body>
+</html>

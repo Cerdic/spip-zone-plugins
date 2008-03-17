@@ -1,0 +1,995 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Siou:  Fichier source de odb_repartition/exec/odb_repartition.avecGeneriques.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Généré par Doxygen 1.5.3 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Page&nbsp;principale</span></a></li>
+    <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+    <li><a href="dirs.html"><span>Répertoires</span></a></li>
+    <li>
+      <form action="search.php" method="get">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td><label>&nbsp;Rechercher&nbsp;</label></td>
+            <td><input type="text" name="query" value="" size="20" accesskey="s"/></td>
+          </tr>
+        </table>
+      </form>
+    </li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_815c5a1351c78a122efb88a2a7d5980d.html">odb_repartition</a>&nbsp;&raquo&nbsp;<a class="el" href="dir_a9fe0185a7b497ba5d897d786e368dbb.html">exec</a></div>
+<h1>odb_repartition.avecGeneriques.php</h1><a href="odb__repartition_8avecGeneriques_8php.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 include_spip('inc/presentation');
+<a name="l00003"></a>00003 include_spip('inc/config');
+<a name="l00004"></a>00004 include_spip('inc/charsets');
+<a name="l00005"></a><a class="code" href="odb__repartition_8avecGeneriques_8php.html#c24ff0f08fb134ed2d43c99826787bc2">00005</a> define('<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>',_DIR_PLUGINS.<span class="stringliteral">"odb/odb_commun/"</span>);
+<a name="l00006"></a>00006 include_once(<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>.'inc-html.php');
+<a name="l00007"></a>00007 include_once(<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>.'inc-referentiel.php');
+<a name="l00008"></a>00008 include_once(<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>.'inc-odb.php');
+<a name="l00009"></a>00009 include_once(<a class="code" href="inc-odb__repartition_8php.html#11ee20e9f2854148d2c4defad4f70990">_DIR_PLUGIN_ODB_REPARTITION</a>.'exec/inc-traitements.php');
+<a name="l00010"></a>00010 
+<a name="l00011"></a><a class="code" href="odb__repartition_8avecGeneriques_8php.html#80964ebc372556b131e270901883e24f">00011</a> define('<a class="code" href="odb__repartition_8avecGeneriques_8php.html#80964ebc372556b131e270901883e24f">MAX_LIGNES</a>',500); <span class="comment">//nb de lignes affichées max</span>
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013 setlocale(LC_TIME, <span class="stringliteral">"fr_FR"</span>);
+<a name="l00014"></a>00014 
+<a name="l00015"></a><a class="code" href="odb__repartition_8avecGeneriques_8php.html#73292a99bd31040ba09df650515015d1">00015</a> global <a class="code" href="inc-fichiers_8php.html#58f5fd0b9d70bc87295be959c7bc176a">$debug</a>, <a class="code" href="odb__import_8php.html#73292a99bd31040ba09df650515015d1">$txt_gauche</a>, <a class="code" href="odb__affiche__csv_8php.html#0a3ebee356c79fa7521c28283a372f76">$txt_debug</a>;
+<a name="l00016"></a><a class="code" href="odb__repartition_8avecGeneriques_8php.html#85ae3e64cd40e9564adceb010085e9dd">00016</a> <a class="code" href="inc-fichiers_8php.html#58f5fd0b9d70bc87295be959c7bc176a">$debug</a>=<span class="keyword">false</span>;
+<a name="l00017"></a>00017 
+<a name="l00018"></a><a class="code" href="odb__repartition_8avecGeneriques_8php.html#c69d1b2260261599b555c6b8d3d77999">00018</a> <a class="code" href="odb__import_8php.html#73292a99bd31040ba09df650515015d1">$txt_gauche</a>=<span class="stringliteral">""</span>;<span class="comment">// texte boite de gauche</span>
+<a name="l00019"></a><a class="code" href="odb__repartition_8avecGeneriques_8php.html#132ad6788dc28adfa8faa0de53ff0dbc">00019</a> <a class="code" href="odb__import_8php.html#132ad6788dc28adfa8faa0de53ff0dbc">$txt_</a>=<span class="stringliteral">""</span>;<span class="comment">// texte boite de droite</span>
+<a name="l00020"></a><a class="code" href="odb__repartition_8avecGeneriques_8php.html#709566ff745c7bb1fd0fe7e2ba030a93">00020</a> <a class="code" href="odb__affiche__csv_8php.html#0a3ebee356c79fa7521c28283a372f76">$txt_debug</a>=<span class="stringliteral">""</span>; <span class="comment">// texte debug</span>
+<a name="l00021"></a><a class="code" href="odb__repartition_8avecGeneriques_8php.html#509f04652b5e1b2d2b9e6bc121a87e50">00021</a> define('<a class="code" href="odb__ref_8php.html#509f04652b5e1b2d2b9e6bc121a87e50">OK</a>',<span class="stringliteral">"&lt;SPAN style='color:#3C3;font-weight:bold;'&gt;[OK]&lt;/SPAN&gt;"</span>);
+<a name="l00022"></a><a class="code" href="odb__repartition_8avecGeneriques_8php.html#e56b96c4dfcced36887ba02c496c40a3">00022</a> define('<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>',<span class="stringliteral">"&lt;SPAN style='color:#C33;font-weight:bold;'&gt;[KO]&lt;/SPAN&gt;"</span>);
+<a name="l00023"></a>00023 
+<a name="l00029"></a><a class="code" href="odb__repartition_8avecGeneriques_8php.html#ddea246a8e91ba341098ee91e0dfa1c2">00029</a> function <a class="code" href="odb__repartition_8avecGeneriques_8php.html#ddea246a8e91ba341098ee91e0dfa1c2" title="Affiche la capacite de chaque centre.">capaciteCentres</a>(<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>, $idDepartement=0) {
+<a name="l00030"></a>00030    global $tab_referentiel;
+<a name="l00031"></a>00031    <span class="keywordflow">if</span>($idDepartement&gt;0)
+<a name="l00032"></a>00032       $whereDept=<span class="stringliteral">"AND eta.id_departement=$idDepartement"</span>;
+<a name="l00033"></a>00033    <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a> = 'SELECT * , eta . id_ville , capacite, nb_salles, nb_salles * capacite capacite_type , nb_salles * capacite - nb_repartis dispo '
+<a name="l00034"></a>00034         . ' FROM odb_ref_etablissement eta , odb_ref_salle salle '
+<a name="l00035"></a>00035         . ' LEFT JOIN ( '
+<a name="l00036"></a>00036         . ' SELECT id_salle , count( * ) nb_repartis '
+<a name="l00037"></a>00037         . ' FROM odb_repartition '
+<a name="l00038"></a>00038         . <span class="stringliteral">" WHERE annee = $annee "</span>
+<a name="l00039"></a>00039         . ' GROUP BY id_salle '
+<a name="l00040"></a>00040         . ' ) rep ON salle . <span class="keywordtype">id</span> = rep . id_salle '
+<a name="l00041"></a>00041         . ' WHERE eta . <span class="keywordtype">id</span> = salle . id_etablissement '
+<a name="l00042"></a>00042         . <span class="stringliteral">" $whereDept"</span>
+<a name="l00043"></a>00043         . ' ORDER BY id_ville , id_etablissement , salle'
+<a name="l00044"></a>00044         ;
+<a name="l00045"></a>00045         <span class="comment">//echo $sql;</span>
+<a name="l00046"></a>00046    <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00047"></a>00047    $nb_rows=mysql_num_rows(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00048"></a>00048    <span class="keywordflow">while</span>($row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)) {
+<a name="l00049"></a>00049       $id_departement=(int)$row['id_departement'];
+<a name="l00050"></a>00050       $departement=$tab_referentiel['departement'][$id_departement];
+<a name="l00051"></a>00051       $id_salle = $row['<span class="keywordtype">id</span>'];
+<a name="l00052"></a>00052       $etablissement=$row['etablissement'];
+<a name="l00053"></a>00053       $id_ville=$row['id_ville'];
+<a name="l00054"></a>00054       $ville=$tab_referentiel['ville'][$id_departement][$id_ville];
+<a name="l00055"></a>00055       <a class="code" href="inc-pdf-convocation_8php.html#02836f11c8d8f2355fc2208ad4adf415">$salle</a>=$row['salle'];
+<a name="l00056"></a>00056       <span class="keywordflow">if</span>($row['dispo']=='') $row['dispo']=$row['capacite_type'];
+<a name="l00057"></a>00057       $champs=array('salle<span class="charliteral">','</span>nb_salles<span class="charliteral">','</span>capacite<span class="charliteral">','</span>nb_repartis<span class="charliteral">','</span>capacite_type<span class="charliteral">','</span>dispo');
+<a name="l00058"></a>00058       <span class="keywordflow">foreach</span>($champs as $champ)
+<a name="l00059"></a>00059          $tab_repart[$departement][$ville][$etablissement][<a class="code" href="inc-pdf-convocation_8php.html#02836f11c8d8f2355fc2208ad4adf415">$salle</a>][$champ]=$row[$champ];
+<a name="l00060"></a>00060    }
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063    $str= <span class="stringliteral">"&lt;table width='100%'&gt;\n&lt;tr&gt;\n&lt;th&gt;&lt;small&gt;"</span>.$cpt_bidon++.<span class="stringliteral">"&lt;/small&gt;&lt;/th&gt;&lt;th&gt;&lt;small&gt;Dept&lt;/small&gt;&lt;/th&gt;&lt;th&gt;&lt;small&gt;Ville&lt;/small&gt;&lt;/th&gt;&lt;th&gt;&lt;small&gt;Centre&lt;/small&gt;&lt;/th&gt;&lt;th&gt;&lt;small&gt;Salle&lt;/small&gt;&lt;/th&gt;&lt;th&gt;&lt;small&gt;Capacit&amp;eacute;&lt;/small&gt;&lt;/th&gt;&lt;th&gt;&lt;small&gt;Dispo&lt;/small&gt;&lt;/th&gt;&lt;th&gt;&lt;small&gt;&amp;Agrave; r&amp;eacute;partir&lt;br/&gt;dans salle en cours&lt;/small&gt;&lt;/th&gt;&lt;/tr&gt;\n"</span>;
+<a name="l00064"></a>00064    ksort($tab_repart);
+<a name="l00065"></a>00065    <span class="keywordflow">foreach</span>($tab_repart as $dept=&gt;$tab) {
+<a name="l00066"></a>00066       <span class="keywordflow">foreach</span>($tab as $ville=&gt;$tab1)
+<a name="l00067"></a>00067          <span class="keywordflow">foreach</span>($tab1 as $centre=&gt;$tab2) {
+<a name="l00068"></a>00068             <span class="keywordflow">foreach</span>($tab2 as <a class="code" href="inc-pdf-convocation_8php.html#02836f11c8d8f2355fc2208ad4adf415">$salle</a>=&gt;$tab3) {
+<a name="l00069"></a>00069                 <span class="keywordflow">foreach</span>(array('dispo<span class="charliteral">','</span>capacite<span class="charliteral">','</span>nb_salles<span class="charliteral">','</span>capacite_type') as $col)
+<a name="l00070"></a>00070                         $$col=$tab3[$col];
+<a name="l00071"></a>00071                <span class="keywordflow">if</span>($capacite_type!=$dispo) $dispo_aff=<span class="stringliteral">"&lt;span style='color:rgb("</span>.round((1-$dispo/$capacite_type)*255,0).<span class="stringliteral">",0,0);'&gt;&lt;b&gt;$dispo&lt;/b&gt;&lt;/span&gt;"</span>;
+<a name="l00072"></a>00072                <span class="keywordflow">else</span> $dispo_aff=$dispo;
+<a name="l00073"></a>00073                <span class="keywordflow">if</span>($dept!=$old_dept) $departement=<span class="stringliteral">"&lt;b&gt;$dept&lt;/b&gt;"</span>;
+<a name="l00074"></a>00074                <span class="keywordflow">else</span> $departement=$dept;
+<a name="l00075"></a>00075                <span class="keywordflow">if</span>($ville!=$old_ville) $ville_=<span class="stringliteral">"&lt;b&gt;$ville&lt;/b&gt;"</span>;
+<a name="l00076"></a>00076                <span class="keywordflow">else</span> $ville_=$ville;
+<a name="l00077"></a>00077                $salleEnCours=$capacite-(($capacite_type-$dispo)%$capacite);
+<a name="l00078"></a>00078                $str.= <span class="stringliteral">"&lt;tr class='tr_liste'&gt;&lt;td&gt;&lt;small&gt;"</span>.$cpt_bidon++.<span class="stringliteral">"&lt;/small&gt;&lt;/td&gt;&lt;td&gt;&lt;small&gt;$departement&lt;/small&gt;&lt;/td&gt;&lt;td&gt;&lt;small&gt;$ville_&lt;/small&gt;&lt;/td&gt;&lt;td&gt;&lt;small&gt;$centre&lt;/small&gt;&lt;/td&gt;&lt;td title='$nb_salles salles $salle : $capacite places'&gt;&lt;small&gt;$salle ($capacite)&lt;/small&gt;&lt;/td&gt;"</span>
+<a name="l00079"></a>00079                   . <span class="stringliteral">"&lt;td&gt;&lt;small&gt;$capacite_type&lt;/small&gt;&lt;/td&gt;&lt;td&gt;&lt;small&gt;$dispo_aff&lt;/small&gt;&lt;/td&gt;&lt;td&gt;&lt;small&gt;$salleEnCours&lt;/small&gt;&lt;/td&gt;&lt;/tr&gt;\n"</span>
+<a name="l00080"></a>00080                   ;
+<a name="l00081"></a>00081                $old_dept=$dept;
+<a name="l00082"></a>00082                $old_ville=$ville;
+<a name="l00083"></a>00083             }
+<a name="l00084"></a>00084          }
+<a name="l00085"></a>00085    }
+<a name="l00086"></a>00086    $str.= <span class="stringliteral">"&lt;/table&gt;\n"</span>;
+<a name="l00087"></a>00087    <span class="keywordflow">return</span> $str;
+<a name="l00088"></a>00088 }
+<a name="l00089"></a>00089 
+<a name="l00095"></a><a class="code" href="odb__repartition_8avecGeneriques_8php.html#b9758b82e8b610bcfeb6a980276cbb72">00095</a> function <a class="code" href="odb__repartition_8avecGeneriques_8php.html#b9758b82e8b610bcfeb6a980276cbb72" title="Repartition des candidats ODB.">exec_odb_repartition</a>() {
+<a name="l00096"></a>00096 global $connect_statut, $connect_toutes_rubriques, <a class="code" href="inc-fichiers_8php.html#58f5fd0b9d70bc87295be959c7bc176a">$debug</a>, <a class="code" href="odb__import_8php.html#73292a99bd31040ba09df650515015d1">$txt_gauche</a>, $txt_droite, <a class="code" href="odb__affiche__csv_8php.html#0a3ebee356c79fa7521c28283a372f76">$txt_debug</a>, $tab_referentiel, <a class="code" href="inc-referentiel_8php.html#32f56aa14be3aa7fa481441d26b8bca5">$odb_referentiel</a>,<a class="code" href="inc-referentiel_8php.html#b3984efda359cc31d6cfe267131a7ff9">$odb_mapping</a>;
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098 include_once(<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>.<span class="stringliteral">"inc-referentiel.php"</span>);
+<a name="l00099"></a>00099 include_once(<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>.<span class="stringliteral">"inc-regles_gestion.php"</span>);
+<a name="l00100"></a>00100 <a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>=date(<span class="stringliteral">"Y"</span>);
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102 $array_ref=array('departement<span class="charliteral">','</span>etablissement<span class="charliteral">','</span>ef<span class="charliteral">','</span>lv<span class="charliteral">','</span>eps<span class="charliteral">','</span>prefixe<span class="charliteral">','</span>serie<span class="charliteral">','</span>sexe<span class="charliteral">','</span>ville<span class="charliteral">','</span>pays');
+<a name="l00103"></a>00103 <span class="keywordflow">foreach</span>($array_ref as $ref)
+<a name="l00104"></a>00104    $tab_referentiel[$ref]=<a class="code" href="inc-referentiel_8php.html#8da6b5d71b8b85a4443092e825841479">getReferentiel</a>($ref,'tout');
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106 debut_page(_T('R&amp;<a class="code" href="inc-pdf-table_8php.html#1c3d7fb9d2f4e0216017175154061426">eacute</a>;partition des candidats'), <span class="stringliteral">""</span>, <span class="stringliteral">""</span>);
+<a name="l00107"></a>00107 echo <span class="stringliteral">"&lt;br /&gt;&lt;br /&gt;"</span>;
+<a name="l00108"></a>00108 gros_titre(_T('Office Du Baccalaur&amp;eacute;at'));
+<a name="l00109"></a>00109 $tab_auteur=$GLOBALS[<span class="stringliteral">"auteur_session"</span>];
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111 <span class="keywordflow">if</span>($tab_auteur['statut']!=<span class="stringliteral">"0minirezo"</span>) {
+<a name="l00112"></a>00112    $isAdmin=<span class="keyword">true</span>;
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114    $etab=$tab_auteur['nom_site'];
+<a name="l00115"></a>00115 
+<a name="l00116"></a>00116    <span class="keywordflow">foreach</span>($tab_referentiel['etablissement'] as $key =&gt; $val)
+<a name="l00117"></a>00117       <span class="keywordflow">if</span>($val==$etab) {
+<a name="l00118"></a>00118          $tab_auteur['id_etablissement']=$key;
+<a name="l00119"></a>00119       }
+<a name="l00120"></a>00120    <span class="keywordflow">if</span> ($debug) echo <span class="stringliteral">"etablissement $etab ("</span>.$tab_auteur['id_etablissement'].<span class="stringliteral">")&lt;br/&gt;\n"</span>;
+<a name="l00121"></a>00121 } <span class="keywordflow">else</span>
+<a name="l00122"></a>00122    $isAdmin=<span class="keyword">true</span>;
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124 <span class="keywordflow">if</span> ($debug) {
+<a name="l00125"></a>00125    echo <span class="stringliteral">"&lt;A HREF='#fin_debug'&gt;Sauter les infos de debug&lt;/A&gt;\n"</span>;
+<a name="l00126"></a>00126    <span class="comment">/*echo "&lt;hr/&gt;Auteur&lt;pre style='text-align:left;'&gt;";</span>
+<a name="l00127"></a>00127 <span class="comment">   print_r($tab_auteur);</span>
+<a name="l00128"></a>00128 <span class="comment">   echo "&lt;/pre&gt;&lt;hr/&gt;";*/</span>
+<a name="l00129"></a>00129    echo <span class="stringliteral">"_REQUEST&lt;pre style='text-align:left;'&gt;"</span>;
+<a name="l00130"></a>00130    print_r($_REQUEST);
+<a name="l00131"></a>00131    echo <span class="stringliteral">"&lt;/pre&gt;&lt;hr/&gt;"</span>;
+<a name="l00132"></a>00132    <span class="comment">/*echo "tab_referentiel&lt;pre style='text-align:left;'&gt;";</span>
+<a name="l00133"></a>00133 <span class="comment">   print_r($tab_referentiel);</span>
+<a name="l00134"></a>00134 <span class="comment">   echo "&lt;/pre&gt;&lt;hr/&gt;";*/</span>
+<a name="l00135"></a>00135    echo <span class="stringliteral">"&lt;A NAME='fin_debug'&gt;&lt;/A&gt;\n"</span>;
+<a name="l00136"></a>00136 }
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138 debut_cadre_relief( <span class="stringliteral">""</span>, <span class="keyword">false</span>, <span class="stringliteral">""</span>, <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a> = _T('R&amp;eacute;partition des candidats'));
+<a name="l00139"></a>00139 <span class="comment">//debut_boite_info();</span>
+<a name="l00140"></a>00140 echo '&lt;br&gt;';
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142 $REFERER=$_SERVER['HTTP_REFERER'];
+<a name="l00143"></a>00143 $REMOTE_ADDR=$_SERVER['REMOTE_ADDR'];
+<a name="l00144"></a>00144 
+<a name="l00145"></a>00145 echo <span class="stringliteral">"&lt;IMG SRC='"</span>._DIR_PLUGIN_ODB_REPARTITION.<span class="stringliteral">"/img_pack/logo_odb.png' alt='Office du bac' ALIGN='absmiddle'&gt;&lt;br&gt;&lt;br&gt;\n"</span>;
+<a name="l00146"></a>00146 <a class="code" href="inc-odb_8php.html#bbbb7d83cb4d809eae2b31b2a3b1f556" title="Interdit l&amp;#39;acces a un utilisateur qui n&amp;#39;est pas dans le tableau $tOK.">isAutorise</a>(array('Admin'));
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148 $etablissement_txt=$_REQUEST['etablissement_txt'];
+<a name="l00149"></a>00149 <span class="keywordflow">if</span>(strlen($_POST['ok_particulier'])&gt;0) {
+<a name="l00151"></a>00151 <a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>=$_REQUEST['annee'];
+<a name="l00152"></a>00152 $nombre=$_REQUEST['nombre'];
+<a name="l00153"></a>00153 $envoi_centre=$_REQUEST['envoi_centre'];
+<a name="l00154"></a>00154 $nombre=$_REQUEST['nombre'];
+<a name="l00155"></a>00155 <span class="keywordflow">if</span>($nombre==<span class="charliteral">'*'</span>) $nombre=<span class="charliteral">'0'</span>;
+<a name="l00156"></a>00156 
+<a name="l00157"></a>00157 <span class="keywordflow">foreach</span>($_POST as $key=&gt;$val)
+<a name="l00158"></a>00158 <span class="keywordflow">if</span>(substr_count($key,'repart_')&gt;0) {
+<a name="l00159"></a>00159    $$key=$val;
+<a name="l00160"></a>00160    $colonne=substr($key,strlen('repart_'));
+<a name="l00161"></a>00161    <span class="comment">//echo "$key=$val ($colonne)&lt;br/&gt;\n";</span>
+<a name="l00162"></a>00162    <span class="keywordflow">if</span>($val&gt;0) $par[$colonne]=$val;
+<a name="l00163"></a>00163 }
+<a name="l00164"></a>00164 
+<a name="l00165"></a>00165 $repartition=<a class="code" href="odb__repartition_2exec_2inc-traitements_8php.html#010c580ae6309b4804db56b0ee07e5f8" title="Répartir les candidats.">repartirCandidats</a>($par,'',$envoi_centre,$etablissement_txt,<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>,$nombre);
+<a name="l00166"></a>00166 $nb_rows=$repartition['nb_rows'];
+<a name="l00167"></a>00167 <span class="comment">/*</span>
+<a name="l00168"></a>00168 <span class="comment">debut_gauche();</span>
+<a name="l00169"></a>00169 <span class="comment">   debut_boite_info();</span>
+<a name="l00170"></a>00170 <span class="comment">      echo "&lt;p&gt;R&amp;eacute;partition de &lt;b&gt;$nb_rows&lt;/b&gt; candidats&lt;/p&gt;\n"</span>
+<a name="l00171"></a>00171 <span class="comment">         ;</span>
+<a name="l00172"></a>00172 <span class="comment">   fin_boite_info();</span>
+<a name="l00173"></a>00173 <span class="comment">   odb_raccourcis('');</span>
+<a name="l00174"></a>00174 <span class="comment">creer_colonne_droite();</span>
+<a name="l00175"></a>00175 <span class="comment">debut_droite();</span>
+<a name="l00176"></a>00176 <span class="comment">*/</span>
+<a name="l00177"></a>00177    debut_cadre_relief(<span class="stringliteral">""</span>, <span class="keyword">false</span>, <span class="stringliteral">""</span>, <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a> = _T(<span class="stringliteral">"R&amp;eacute;partition de $nb_rows candidats $annee dans le $etablissement_txt"</span>));
+<a name="l00178"></a>00178       debut_boite_info();
+<a name="l00179"></a>00179       echo $repartition['msg_info'];
+<a name="l00180"></a>00180       fin_boite_info();
+<a name="l00181"></a>00181       echo <span class="stringliteral">"&lt;br/&gt;\n"</span>;
+<a name="l00182"></a>00182       echo $repartition['msg_repartition'];
+<a name="l00183"></a>00183    fin_cadre_relief();
+<a name="l00184"></a>00184 <span class="comment">/*</span>
+<a name="l00185"></a>00185 <span class="comment">debut_boite_info();</span>
+<a name="l00186"></a>00186 <span class="comment">   echo capaciteCentres($annee, $repart_departement);</span>
+<a name="l00187"></a>00187 <span class="comment">fin_boite_info();</span>
+<a name="l00188"></a>00188 <span class="comment">*/</span>
+<a name="l00189"></a>00189 $inputSerie=<span class="stringliteral">"&lt;SELECT NAME='repart_serie' class='forml'&gt;"</span>.formOptionsRefInSelect('serie',$repart_serie).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00190"></a>00190 $inputDepartement=<span class="stringliteral">"&lt;SELECT NAME='repart_departement' class='forml'&gt;"</span>.formOptionsRefInSelect('departement',$repart_departement).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00191"></a>00191 $inputCentre=<span class="stringliteral">"&lt;SELECT NAME='envoi_centre' class='forml' onChange=\"document.forms['form_repartition'].etablissement_txt.value=this.options[selectedIndex].text;\"&gt;"</span>.formOptionsRefInSelect('centres',$envoi_centre,'',$idDept).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00192"></a>00192 } elseif(strlen($_POST['ok_generique'])&gt;0 || strlen($_REQUEST['from_ville']&gt;0) || strlen($_REQUEST['from_etablissement']&gt;0)) {
+<a name="l00194"></a>00194 <a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>=$_REQUEST['annee'];
+<a name="l00195"></a>00195 $from_ville=$_REQUEST['from_ville'];
+<a name="l00196"></a>00196 $from_serie=$_REQUEST['from_serie'];
+<a name="l00197"></a>00197 $from_etablissement=$_REQUEST['from_etablissement'];
+<a name="l00198"></a>00198 $envoi_centre=$_REQUEST['envoi_centre'];
+<a name="l00199"></a>00199 $etablissement_txt=$_REQUEST['etablissement_txt'];
+<a name="l00200"></a>00200 $envoi_nombre=$_REQUEST['envoi_nombre'];
+<a name="l00201"></a>00201 $repartirIcon=<span class="stringliteral">"&lt;img src='"</span>._DIR_PLUGIN_ODB_REPARTITION.<span class="stringliteral">"img_pack/repartir.png' alt='R&amp;eacute;partir' align='absmiddle'&gt;\n"</span>;
+<a name="l00202"></a>00202 
+<a name="l00203"></a>00203 <span class="keywordflow">if</span>($from_etablissement&gt;0 || $from_ville&gt;0) {
+<a name="l00204"></a>00204    <span class="comment">// affectation manuelle</span>
+<a name="l00205"></a>00205    <span class="keywordflow">if</span>($from_serie&gt;0) $from['ville']=$from_ville;
+<a name="l00206"></a>00206    <span class="keywordflow">if</span>($from_serie&gt;0) $from['serie']=$from_serie;
+<a name="l00207"></a>00207    <span class="keywordflow">if</span>($from_etablissement&gt;0) $from['etablissement']=$from_etablissement;
+<a name="l00208"></a>00208    $repartition=<a class="code" href="odb__repartition_2exec_2inc-traitements_8php.html#010c580ae6309b4804db56b0ee07e5f8" title="Répartir les candidats.">repartirCandidats</a>($from,'',$envoi_centre,$etablissement_txt,<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>,$envoi_nombre);
+<a name="l00209"></a>00209    $msg_info=$repartition['msg_repartition'];
+<a name="l00210"></a>00210    $msg_info.=<span class="stringliteral">"&lt;hr size=1/&gt;\n"</span>.$repartition['msg_info'];
+<a name="l00211"></a>00211 }
+<a name="l00212"></a>00212 $tpsDebut=time();
+<a name="l00213"></a>00213 $sql_centres=<span class="stringliteral">"select eta.id id_etablissement, eta.etablissement, eta.id_ville, ville_eta.ville ville_eta, eta.id_centre, centre.etablissement, centre.id_ville id_ville_centre, ville_centre.ville ville_centre, eta.id_departement, departement.departement, eta.annee_centre"</span>
+<a name="l00214"></a>00214             .<span class="stringliteral">" from odb_ref_etablissement eta, odb_ref_ville ville_eta, odb_ref_ville ville_centre, odb_ref_etablissement centre, odb_ref_departement departement"</span>
+<a name="l00215"></a>00215             .<span class="stringliteral">" where eta.id_centre = centre.id"</span>
+<a name="l00216"></a>00216             .<span class="stringliteral">" and eta.id_ville=ville_eta.id"</span>
+<a name="l00217"></a>00217             .<span class="stringliteral">" and centre.id_ville=ville_centre.id"</span>
+<a name="l00218"></a>00218             .<span class="stringliteral">" and eta.id_departement=departement.id"</span>
+<a name="l00219"></a>00219             .<span class="stringliteral">" order by departement, ville_centre"</span>
+<a name="l00220"></a>00220             ;
+<a name="l00221"></a>00221 
+<a name="l00222"></a>00222 $sql_synthese = 'select centre.id_departement, departement.departement, count(*) nb_eta,'
+<a name="l00223"></a>00223         . ' eta.id_centre, centre.etablissement centre, centre.id_ville id_ville_centre, ville_centre.ville ville_centre'
+<a name="l00224"></a>00224         . ' from odb_ref_etablissement eta, odb_ref_ville ville_eta, odb_ref_ville ville_centre,'
+<a name="l00225"></a>00225         . ' odb_ref_etablissement centre, odb_ref_departement departement'
+<a name="l00226"></a>00226         . ' where eta.id_centre = centre.id'
+<a name="l00227"></a>00227         . ' and eta.id_ville=ville_eta.id'
+<a name="l00228"></a>00228         . ' and centre.id_ville=ville_centre.id'
+<a name="l00229"></a>00229         . ' and eta.id_departement=departement.id'
+<a name="l00230"></a>00230         . ' group by centre'
+<a name="l00231"></a>00231         . ' order by departement, nb_eta desc, ville_centre'
+<a name="l00232"></a>00232         ;
+<a name="l00233"></a>00233         
+<a name="l00234"></a>00234 $sql_plusieurs_eta_dans_meme_ville='SELECT eta.id_departement, departement, id_ville, ville, count( * ) nb_eta'
+<a name="l00235"></a>00235         . ' FROM odb_ref_etablissement eta, odb_ref_ville vil, odb_ref_departement dep'
+<a name="l00236"></a>00236         . ' WHERE annee_centre &gt;0'
+<a name="l00237"></a>00237         . ' AND eta.id_departement = dep.id'
+<a name="l00238"></a>00238         . ' AND eta.id_ville = vil.id'
+<a name="l00239"></a>00239         . ' GROUP BY ville'
+<a name="l00240"></a>00240         . ' ORDER BY departement, nb_eta DESC , ville'
+<a name="l00241"></a>00241         ;
+<a name="l00242"></a>00242         <span class="comment">//echo $sql_plusieurs_eta_dans_meme_ville;</span>
+<a name="l00243"></a>00243 <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=mysql_query($sql_plusieurs_eta_dans_meme_ville) or die (<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>.<span class="stringliteral">" - Erreur dans la requete &lt;pre&gt;$sql_plusieurs_eta_dans_meme_ville&lt;/pre&gt;\n"</span>.mysql_error());
+<a name="l00244"></a>00244 $num_rows=mysql_num_rows(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00245"></a>00245 <a class="code" href="inc-pdf-attestations_8php.html#6a5a233adfaad0185a2b89ba6c4f3ae3">$colonnes</a>=array('id_departement<span class="charliteral">','</span>departement<span class="charliteral">','</span>nb_eta<span class="charliteral">','</span>id_ville<span class="charliteral">','</span>ville');
+<a name="l00246"></a>00246 <span class="keywordflow">while</span>($row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)) {
+<a name="l00247"></a>00247    <span class="keywordflow">foreach</span>(<a class="code" href="inc-pdf-attestations_8php.html#6a5a233adfaad0185a2b89ba6c4f3ae3">$colonnes</a> as $col) {
+<a name="l00248"></a>00248       $$col=$row[$col];
+<a name="l00249"></a>00249    }
+<a name="l00250"></a>00250    <span class="keywordflow">foreach</span>(array('id_departement<span class="charliteral">','</span>nb_eta<span class="charliteral">','</span>id_ville') as $col) {
+<a name="l00251"></a>00251       <span class="comment">//if($nb_eta&gt;1)</span>
+<a name="l00252"></a>00252          $tab_synthese_nEta[$departement][$ville][$col]=$$col;
+<a name="l00253"></a>00253       <span class="comment">//elseif($nb_eta==1)</span>
+<a name="l00254"></a>00254       <span class="comment">// $tab_synthese_1Eta[$departement][$ville][$col]=$$col;</span>
+<a name="l00255"></a>00255    }
+<a name="l00256"></a>00256 }
+<a name="l00257"></a>00257 $sql_aucun_centre_dans_cette_ville=
+<a name="l00258"></a>00258           'select eta.id_departement, dep.departement, id_ville, vil.ville, count(*) nb_eta'
+<a name="l00259"></a>00259         . ' from odb_ref_etablissement eta, odb_ref_departement dep, odb_ref_ville vil'
+<a name="l00260"></a>00260         . ' where eta.id_departement=dep.id and eta.id_ville=vil.id'
+<a name="l00261"></a>00261         . ' and id_ville not in'
+<a name="l00262"></a>00262         . ' (select distinct id_ville from odb_ref_etablissement where annee_centre&gt;0 order by id_ville)'
+<a name="l00263"></a>00263         . ' group by departement, ville'
+<a name="l00264"></a>00264         . ' order by departement, nb_eta desc, ville'
+<a name="l00265"></a>00265         ;
+<a name="l00266"></a>00266 <span class="comment">//echo $sql_aucun_centre_dans_cette_ville;</span>
+<a name="l00267"></a>00267 <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=mysql_query($sql_aucun_centre_dans_cette_ville) or die (<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>.<span class="stringliteral">" - Erreur dans la requete &lt;pre&gt;$sql_aucun_centre_dans_cette_ville&lt;/pre&gt;\n"</span>.mysql_error());
+<a name="l00268"></a>00268 $num_rows=mysql_num_rows(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00269"></a>00269 <a class="code" href="inc-pdf-attestations_8php.html#6a5a233adfaad0185a2b89ba6c4f3ae3">$colonnes</a>=array('id_departement<span class="charliteral">','</span>departement<span class="charliteral">','</span>nb_eta<span class="charliteral">','</span>id_ville<span class="charliteral">','</span>ville');
+<a name="l00270"></a>00270 <span class="keywordflow">while</span>($row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)) {
+<a name="l00271"></a>00271    <span class="keywordflow">foreach</span>(<a class="code" href="inc-pdf-attestations_8php.html#6a5a233adfaad0185a2b89ba6c4f3ae3">$colonnes</a> as $col) {
+<a name="l00272"></a>00272       $$col=$row[$col];
+<a name="l00273"></a>00273    }
+<a name="l00274"></a>00274    <span class="keywordflow">foreach</span>(array('id_departement<span class="charliteral">','</span>nb_eta<span class="charliteral">','</span>id_ville') as $col) {
+<a name="l00275"></a>00275       $tab_synthese_aucun_centre[$departement][$ville][$col]=$$col;
+<a name="l00276"></a>00276    }
+<a name="l00277"></a>00277 }
+<a name="l00278"></a>00278 <span class="comment">//print_r($tab_synthese_aucun_centre);</span>
+<a name="l00280"></a>00280 <span class="comment"></span><span class="comment">// on récupère le tableau des séries pour connaitre celle qui a le plus de candidats au sein de chaque ville</span>
+<a name="l00281"></a>00281 <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a> = 'SELECT departement, can.ville id_ville, vil.ville, can.serie id_serie, ser.serie, count( * ) nbCan'
+<a name="l00282"></a>00282      . ' FROM odb_candidats can, odb_ref_serie ser, odb_ref_ville vil'
+<a name="l00283"></a>00283      . <span class="stringliteral">" WHERE id_table = '0'"</span>
+<a name="l00284"></a>00284      . <span class="stringliteral">" AND annee = $annee"</span>
+<a name="l00285"></a>00285      . ' AND ser.id = can.serie'
+<a name="l00286"></a>00286      . ' and can.ville=vil.id'
+<a name="l00287"></a>00287      . ' GROUP BY departement, vil.ville, serie'
+<a name="l00288"></a>00288      . ' ORDER BY departement, vil.ville, nbCan DESC'
+<a name="l00289"></a>00289      ;
+<a name="l00290"></a>00290 <span class="comment">//echo "series : $sql&lt;hr&gt;";</span>
+<a name="l00291"></a>00291 <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00292"></a>00292 $num_rows=mysql_num_rows(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00293"></a>00293 <span class="keywordflow">while</span>($row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)) {
+<a name="l00294"></a>00294    $departement=$tab_referentiel['departement'][$row['departement']];
+<a name="l00295"></a>00295    $id_ville=$row['id_ville'];
+<a name="l00296"></a>00296    $ville=$row['ville'];
+<a name="l00297"></a>00297    $serie=$row['serie'];
+<a name="l00298"></a>00298    $id_serie=$row['id_serie'];
+<a name="l00299"></a>00299    $nbCan=(int)$row['nbCan'];
+<a name="l00300"></a>00300    <span class="keywordflow">if</span>($nbCan&gt;0) {
+<a name="l00301"></a>00301       $tab_serie[$departement][$ville][$serie]['id_serie']=$id_serie;
+<a name="l00302"></a>00302       $tab_serie[$departement][$ville][$serie]['nbCan']=$nbCan;
+<a name="l00303"></a>00303    } 
+<a name="l00304"></a>00304 }
+<a name="l00305"></a>00305 mysql_free_result(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00306"></a>00306 <span class="comment">// on récupère le tableau des disponibilités dans chaque centre - cf odb_stats_siou</span>
+<a name="l00307"></a>00307 <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a> = 'SELECT * , eta . id_ville , nb_salles * capacite capacite_type , nb_salles * capacite - nb_repartis dispo '
+<a name="l00308"></a>00308      . ' FROM odb_ref_etablissement eta , odb_ref_salle salle '
+<a name="l00309"></a>00309      . ' LEFT JOIN ( '
+<a name="l00310"></a>00310      . '  SELECT id_salle , count( * ) nb_repartis '
+<a name="l00311"></a>00311      . '  FROM odb_repartition '
+<a name="l00312"></a>00312      . <span class="stringliteral">"  WHERE annee = $annee "</span>
+<a name="l00313"></a>00313      . '  GROUP BY id_salle '
+<a name="l00314"></a>00314      . ' ) rep ON salle . <span class="keywordtype">id</span> = rep . id_salle '
+<a name="l00315"></a>00315      . ' WHERE eta . <span class="keywordtype">id</span> = salle . id_etablissement '
+<a name="l00316"></a>00316      . ' ORDER BY id_ville , id_etablissement , salle'
+<a name="l00317"></a>00317      ;
+<a name="l00318"></a>00318      <span class="comment">//echo $sql;</span>
+<a name="l00319"></a>00319 <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00320"></a>00320 $nb_rows=mysql_num_rows(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00321"></a>00321 <span class="keywordflow">while</span>($row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)) {
+<a name="l00322"></a>00322    $id_departement=(int)$row['id_departement'];
+<a name="l00323"></a>00323    $departement=$tab_referentiel['departement'][$id_departement];
+<a name="l00324"></a>00324    $id_salle = $row['<span class="keywordtype">id</span>'];
+<a name="l00325"></a>00325    $etablissement=$row['etablissement'];
+<a name="l00326"></a>00326    $id_ville=$row['id_ville'];
+<a name="l00327"></a>00327    $ville=$tab_referentiel['ville'][$id_departement][$id_ville];
+<a name="l00328"></a>00328    <a class="code" href="inc-pdf-convocation_8php.html#02836f11c8d8f2355fc2208ad4adf415">$salle</a>=$row['salle'];
+<a name="l00329"></a>00329    <span class="keywordflow">if</span>($row['dispo']=='') $row['dispo']=$row['capacite_type'];
+<a name="l00330"></a>00330    <span class="comment">//echo "&lt;hr&gt;$id_salle - $id_etablissement - $departement $id_dept - $etablissement $id_etablissement";</span>
+<a name="l00331"></a>00331    $champs=array('salle<span class="charliteral">','</span>nb_salles<span class="charliteral">','</span>capacite<span class="charliteral">','</span>nb_repartis<span class="charliteral">','</span>capacite_type<span class="charliteral">','</span>dispo');
+<a name="l00332"></a>00332    <span class="keywordflow">foreach</span>($champs as $champ)
+<a name="l00333"></a>00333       $tab_repart[$departement][$ville][$etablissement][<a class="code" href="inc-pdf-convocation_8php.html#02836f11c8d8f2355fc2208ad4adf415">$salle</a>][$champ]=$row[$champ];
+<a name="l00334"></a>00334    <span class="comment">/*echo "&lt;hr&gt;$etablissement $salle&lt;pre&gt;";</span>
+<a name="l00335"></a>00335 <span class="comment">   print_r($tab_repart[$departement][$ville][$etablissement][$salle]);</span>
+<a name="l00336"></a>00336 <span class="comment">   echo "&lt;/pre&gt;\n";*/</span>
+<a name="l00337"></a>00337 }
+<a name="l00338"></a>00338 $sql_rep_eta_centre=
+<a name="l00339"></a>00339          'SELECT eta.id_departement, dep.departement, eta.id_ville, ville.ville, eta.id id_etablissement, eta.etablissement,'
+<a name="l00340"></a>00340         . ' eta.id_centre, centre.etablissement centre, vilcentre.ville ville_centre,'
+<a name="l00341"></a>00341         . ' count(*) nb_candidats'
+<a name="l00342"></a>00342         . ' FROM odb_ref_etablissement eta, odb_ref_departement dep, odb_ref_ville ville,'
+<a name="l00343"></a>00343         . ' odb_candidats can, odb_ref_etablissement centre, odb_ref_ville vilcentre'
+<a name="l00344"></a>00344         . ' WHERE can.etablissement=eta.id'
+<a name="l00345"></a>00345         . ' and centre.id=eta.id_centre'
+<a name="l00346"></a>00346         . ' and vilcentre.id = centre.id_ville'
+<a name="l00347"></a>00347         . ' and eta.id_departement = dep.id'
+<a name="l00348"></a>00348         . ' AND eta.id_ville = ville.id'
+<a name="l00349"></a>00349         . ' AND eta.annee_centre =0'
+<a name="l00350"></a>00350         . <span class="stringliteral">" AND can.annee=$annee"</span>
+<a name="l00351"></a>00351         . <span class="stringliteral">" AND can.id_table='0'"</span>
+<a name="l00352"></a>00352         . ' GROUP BY can.etablissement'
+<a name="l00353"></a>00353         . ' ORDER BY departement, ville, etablissement'
+<a name="l00354"></a>00354         ;
+<a name="l00355"></a>00355 <span class="comment">//echo "sql_rep_eta_centre $sql_rep_eta_centre&lt;hr&gt;";</span>
+<a name="l00356"></a>00356 <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=mysql_query($sql_rep_eta_centre) or die (<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>.<span class="stringliteral">" - Erreur dans la requete &lt;pre&gt;$sql_rep_eta_centre&lt;/pre&gt;&lt;br/&gt;"</span>.mysql_error());
+<a name="l00357"></a>00357 $nb_rows=mysql_num_rows(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00358"></a>00358 <a class="code" href="inc-pdf-attestations_8php.html#6a5a233adfaad0185a2b89ba6c4f3ae3">$colonnes</a>=array('id_departement', 'departement', 'id_ville', 'ville', 'id_etablissement', 'etablissement', 'id_centre', 'centre<span class="charliteral">','</span>id_ville_centre<span class="charliteral">','</span>ville_centre<span class="charliteral">','</span>nb_candidats');
+<a name="l00359"></a>00359 <span class="keywordflow">while</span>($row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)) {
+<a name="l00360"></a>00360    <span class="keywordflow">foreach</span>(<a class="code" href="inc-pdf-attestations_8php.html#6a5a233adfaad0185a2b89ba6c4f3ae3">$colonnes</a> as $col)
+<a name="l00361"></a>00361       $$col=$row[$col];
+<a name="l00362"></a>00362    <span class="keywordflow">foreach</span>(array('id_departement<span class="charliteral">','</span>id_ville<span class="charliteral">','</span>id_etablissement<span class="charliteral">','</span>centre<span class="charliteral">','</span>id_centre<span class="charliteral">','</span>id_ville_centre<span class="charliteral">','</span>ville_centre<span class="charliteral">','</span>nb_candidats') as $col)
+<a name="l00363"></a>00363       $tab_repart_eta_centre[$departement][$ville][$etablissement][$col]=$$col;
+<a name="l00364"></a>00364 }
+<a name="l00365"></a>00365 
+<a name="l00366"></a>00366 <span class="keywordflow">if</span>($debug) {
+<a name="l00367"></a>00367    echo <span class="stringliteral">"&lt;table&gt;\n&lt;tr&gt;\n&lt;th&gt;&lt;small&gt;"</span>.$cpt_bidon++.<span class="stringliteral">"&lt;/small&gt;&lt;/th&gt;&lt;th&gt;&lt;small&gt;Dept&lt;/small&gt;&lt;/th&gt;&lt;th&gt;&lt;small&gt;Ville&lt;/small&gt;&lt;/th&gt;&lt;th&gt;&lt;small&gt;Centre&lt;/small&gt;&lt;/th&gt;&lt;th&gt;&lt;small&gt;Salle&lt;/small&gt;&lt;/th&gt;&lt;th&gt;&lt;small&gt;Capacit&amp;eacute;&lt;/small&gt;&lt;/th&gt;&lt;th&gt;&lt;small&gt;Dispo&lt;/small&gt;&lt;/th&gt;&lt;/tr&gt;\n"</span>;
+<a name="l00368"></a>00368    ksort($tab_repart);
+<a name="l00369"></a>00369    <span class="keywordflow">foreach</span>($tab_repart as $dept=&gt;$tab) {
+<a name="l00370"></a>00370       <span class="keywordflow">foreach</span>($tab as $ville=&gt;$tab1)
+<a name="l00371"></a>00371          <span class="keywordflow">foreach</span>($tab1 as $centre=&gt;$tab2) {
+<a name="l00372"></a>00372             <span class="keywordflow">foreach</span>($tab2 as <a class="code" href="inc-pdf-convocation_8php.html#02836f11c8d8f2355fc2208ad4adf415">$salle</a>=&gt;$tab3) {
+<a name="l00373"></a>00373                $dispo=$tab3['dispo'];
+<a name="l00374"></a>00374                $capacite_type=$tab3['capacite_type'];
+<a name="l00375"></a>00375                <span class="keywordflow">if</span>($capacite_type!=$dispo) $dispo=<span class="stringliteral">"&lt;span style='color:rgb("</span>.round((1-$dispo/$capacite_type)*255,0).<span class="stringliteral">",0,0);'&gt;&lt;b&gt;$dispo&lt;/b&gt;&lt;/span&gt;"</span>;
+<a name="l00376"></a>00376                <span class="keywordflow">if</span>($dept!=$old_dept) $departement=<span class="stringliteral">"&lt;b&gt;$dept&lt;/b&gt;"</span>;
+<a name="l00377"></a>00377                <span class="keywordflow">else</span> $departement=$dept;
+<a name="l00378"></a>00378                <span class="keywordflow">if</span>($ville!=$old_ville) $ville_=<span class="stringliteral">"&lt;b&gt;$ville&lt;/b&gt;"</span>;
+<a name="l00379"></a>00379                <span class="keywordflow">else</span> $ville_=$ville;
+<a name="l00380"></a>00380                echo <span class="stringliteral">"&lt;tr class='tr_liste'&gt;&lt;td&gt;&lt;small&gt;"</span>.$cpt_bidon++.<span class="stringliteral">"&lt;/small&gt;&lt;/td&gt;&lt;td&gt;&lt;small&gt;$departement&lt;/small&gt;&lt;/td&gt;&lt;td&gt;&lt;small&gt;$ville_&lt;/small&gt;&lt;/td&gt;&lt;td&gt;&lt;small&gt;$centre&lt;/small&gt;&lt;/td&gt;&lt;td&gt;&lt;small&gt;$salle&lt;/small&gt;&lt;/td&gt;"</span>
+<a name="l00381"></a>00381                   . <span class="stringliteral">"&lt;td&gt;&lt;small&gt;$capacite_type&lt;/small&gt;&lt;/td&gt;&lt;td&gt;&lt;small&gt;$dispo&lt;/small&gt;&lt;/td&gt;&lt;/tr&gt;\n"</span>
+<a name="l00382"></a>00382                   ;
+<a name="l00383"></a>00383                $old_dept=$dept;
+<a name="l00384"></a>00384                $old_ville=$ville;
+<a name="l00385"></a>00385             }
+<a name="l00386"></a>00386          }
+<a name="l00387"></a>00387    }
+<a name="l00388"></a>00388    echo <span class="stringliteral">"&lt;/table&gt;\n"</span>;
+<a name="l00389"></a>00389 }
+<a name="l00390"></a>00390 $tab_dispos=array();
+<a name="l00391"></a>00391 <span class="comment">// on attribue les numeros de table</span>
+<a name="l00392"></a>00392 <span class="keywordflow">if</span>($msg_info=='') {
+<a name="l00393"></a>00393    $msg_info.=<span class="stringliteral">"&lt;ul&gt;\n&lt;li&gt;&lt;A HREF='#villes1centre'&gt;Villes comportant au moins un centre de composition&lt;/A&gt;&lt;/li&gt;\n"</span>;
+<a name="l00394"></a>00394    $msg_info.=<span class="stringliteral">"&lt;li&gt;&lt;A HREF='#villes0centre'&gt;Villes ne comportant aucun centre de composition&lt;/A&gt;&lt;/li&gt;\n&lt;/ul&gt;\n"</span>;
+<a name="l00395"></a>00395 }
+<a name="l00396"></a>00396 <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;a name='villes1centre'&gt;&lt;/A&gt;\n&lt;h1&gt;Villes comportant au moins un centre de composition&lt;/h1&gt;"</span>;
+<a name="l00397"></a>00397 <span class="keywordflow">foreach</span>($tab_synthese_nEta as $departement=&gt;$tab1) {
+<a name="l00398"></a>00398    <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;h2&gt;$departement&lt;/h2&gt;\n"</span>;
+<a name="l00399"></a>00399    $id_departement=$tab_referentiel['departement'][$departement];
+<a name="l00400"></a>00400    <span class="keywordflow">foreach</span>($tab1 as $ville =&gt; $tab_ville) {
+<a name="l00401"></a>00401       $nbEta=$tab_ville['nb_eta'];
+<a name="l00402"></a>00402       $id_ville=$tab_ville['id_ville'];
+<a name="l00403"></a>00403       <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;a name='Ville_$id_ville'&gt;&lt;/a&gt;&lt;h3&gt;$ville ($nbEta &amp;eacute;tablissement$pluriel)&lt;/h3&gt;"</span>;
+<a name="l00404"></a>00404       $dispoTotal=0;
+<a name="l00405"></a>00405       $id_departement=$tab_ville['id_departement'];
+<a name="l00406"></a>00406       <span class="keywordflow">if</span>($nbEta&gt;1) $pluriel=<span class="charliteral">'s'</span>; <span class="keywordflow">else</span> $pluriel='';
+<a name="l00407"></a>00407       <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.= <span class="stringliteral">"&lt;small&gt;$departement (#$id_departement) - $ville (#$id_ville)&lt;/small&gt;"</span>
+<a name="l00408"></a>00408            . <span class="stringliteral">"&lt;table width='100%' style='border: 1px solid gray;'&gt;\n&lt;tr&gt;\n&lt;th&gt;&amp;Eacute;tablissements&lt;/th&gt;&lt;th&gt;Candidats&lt;/th&gt;&lt;/tr&gt;\n&lt;tr&gt;\n"</span>;
+<a name="l00409"></a>00409       <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;td valign=top style='border: 1px dotted lightgray;'&gt;&lt;table width='100%'&gt;\n&lt;tr&gt;\n\t"</span>
+<a name="l00410"></a>00410           . <span class="stringliteral">"&lt;th&gt;&lt;small&gt;Centre&lt;/small&gt;&lt;/th&gt;\n\t&lt;th&gt;&lt;small&gt;R&amp;eacute;partis&lt;/small&gt;&lt;/th&gt;\n\t&lt;th&gt;&lt;small&gt;Dispo&lt;/small&gt;&lt;/th&gt;\n\t&lt;th&gt;&lt;small&gt;Dispo&lt;br/&gt;Centre&lt;/small&gt;&lt;/th&gt;\n&lt;/tr&gt;\n"</span>;
+<a name="l00411"></a>00411       <span class="keywordflow">if</span>(is_array($tab_repart[$departement][$ville]))
+<a name="l00412"></a>00412          <span class="keywordflow">foreach</span>($tab_repart[$departement][$ville] as $centre=&gt;$tab_centre) {
+<a name="l00413"></a>00413             $dispoCentre=0;$cptTypesDansCentre=0;
+<a name="l00414"></a>00414             <span class="keywordflow">foreach</span>($tab_centre as <a class="code" href="inc-pdf-convocation_8php.html#02836f11c8d8f2355fc2208ad4adf415">$salle</a> =&gt; $tab_tmp) {
+<a name="l00415"></a>00415                $dispoCentre+=(int)$tab_tmp['dispo'];
+<a name="l00416"></a>00416                $cptTypesDansCentre++;
+<a name="l00417"></a>00417             }
+<a name="l00418"></a>00418             <span class="keywordflow">foreach</span>($tab_centre as <a class="code" href="inc-pdf-convocation_8php.html#02836f11c8d8f2355fc2208ad4adf415">$salle</a> =&gt; $tab_tmp) {
+<a name="l00419"></a>00419                $dispo=$tab_tmp['dispo'];
+<a name="l00420"></a>00420                $nb_repartis=$tab_tmp['nb_repartis'];
+<a name="l00421"></a>00421                $capacite_type=$tab_tmp['capacite_type'];
+<a name="l00422"></a>00422                <span class="keywordflow">if</span>($capacite_type!=$dispo) {
+<a name="l00423"></a>00423                   $dispoAff=<span class="stringliteral">"&lt;b&gt;$dispo&lt;/b&gt;"</span>;
+<a name="l00424"></a>00424                   $nb=round((1-$dispo/$capacite_type)*100,0);
+<a name="l00425"></a>00425                   $style=<span class="stringliteral">"style='color:white; background-color:rgb("</span>.($nb+128).<span class="stringliteral">","</span>.(128-$nb).<span class="stringliteral">","</span>.(128-$nb).<span class="stringliteral">");'"</span>;
+<a name="l00426"></a>00426                }
+<a name="l00427"></a>00427                <span class="keywordflow">else</span> {
+<a name="l00428"></a>00428                   $dispoAff=$dispo;
+<a name="l00429"></a>00429                   $style=<span class="stringliteral">""</span>;
+<a name="l00430"></a>00430                }
+<a name="l00431"></a>00431                <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;tr class='tr_liste'&gt;\n\t"</span>
+<a name="l00432"></a>00432                    . <span class="stringliteral">"&lt;td&gt;&lt;small&gt;$centre &lt;small&gt;[$salle]&lt;/small&gt;&lt;/small&gt;&lt;/td&gt;\n\t"</span>
+<a name="l00433"></a>00433                    . <span class="stringliteral">"&lt;td&gt;&lt;small&gt;$nb_repartis&lt;/small&gt;&lt;/td&gt;\n\t"</span>
+<a name="l00434"></a>00434                    . <span class="stringliteral">"&lt;td $style&gt;&lt;small&gt;$dispoAff&lt;/small&gt;&lt;/td&gt;\n\t"</span>
+<a name="l00435"></a>00435                    ;
+<a name="l00436"></a>00436                <span class="keywordflow">if</span>($centre!=$old_centre) {
+<a name="l00437"></a>00437                   <span class="keywordflow">if</span>($cptTypesDansCentre==1) $style=<span class="stringliteral">"style='color:#aaa;'"</span>;
+<a name="l00438"></a>00438                   <span class="keywordflow">else</span> $style=<span class="stringliteral">"style='font-weight:bold;'"</span>;
+<a name="l00439"></a>00439                   <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;td $style rowspan=$cptTypesDansCentre&gt;&lt;small&gt;$dispoCentre&lt;/small&gt;&lt;/td&gt;\n"</span>;
+<a name="l00440"></a>00440                }
+<a name="l00441"></a>00441                <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;/tr&gt;\n"</span>;
+<a name="l00442"></a>00442                $dispoTotal+=(int)$dispo;
+<a name="l00443"></a>00443                $old_centre=$centre;
+<a name="l00444"></a>00444                $tab_dispos['centre'][$ville][$centre]=$dispoCentre;
+<a name="l00445"></a>00445             }
+<a name="l00446"></a>00446          }
+<a name="l00447"></a>00447       $tab_dispos['ville'][$ville]=$dispoTotal;
+<a name="l00448"></a>00448       <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;/table&gt;&lt;hr size=1/&gt;= &lt;b&gt;$dispoTotal places disponibles&lt;/b&gt;&lt;/td&gt;"</span>
+<a name="l00449"></a>00449           . <span class="stringliteral">"&lt;td valign=top style='border: 1px dotted lightgray;'&gt;\n&lt;table width='100%'&gt;\n"</span>
+<a name="l00450"></a>00450           . <span class="stringliteral">"&lt;tr&gt;\n\t&lt;th&gt;&lt;small&gt;S&amp;eacute;rie&lt;/small&gt;&lt;/th&gt;&lt;th&gt;&lt;small&gt;Candidats&lt;/small&gt;&lt;/th&gt;\n&lt;/tr&gt;\n"</span>
+<a name="l00451"></a>00451           ;
+<a name="l00452"></a>00452       $totalCanVille=0;
+<a name="l00453"></a>00453       $cptVilleSerie=0;
+<a name="l00454"></a>00454       <span class="keywordflow">if</span>(is_array($tab_serie[$departement][$ville])) {
+<a name="l00455"></a>00455          <span class="keywordflow">foreach</span>($tab_serie[$departement][$ville] as $serie=&gt;$tab_ser) {
+<a name="l00456"></a>00456             $cptVilleSerie++;
+<a name="l00457"></a>00457             $id_serie=$tab_ser['id_serie'];
+<a name="l00458"></a>00458             $nbCan=$tab_ser['nbCan'];
+<a name="l00459"></a>00459             <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;tr class='tr_liste'&gt;\n&lt;td&gt;&lt;small&gt;&lt;b&gt;$serie&lt;/b&gt; (#$id_serie)&lt;/small&gt;&lt;/td&gt;&lt;td&gt;&lt;small&gt;"</span>;
+<a name="l00460"></a>00460             <span class="comment">//echo "&lt;small&gt;$departement $ville $serie $nbCan&lt;br&gt;&lt;/small&gt;";</span>
+<a name="l00461"></a>00461             <span class="keywordflow">if</span>($cptVilleSerie==1) {
+<a name="l00462"></a>00462                $isChoix=<span class="keyword">false</span>;
+<a name="l00463"></a>00463                $old_dispo=0;$dispoMax=0;
+<a name="l00464"></a>00464                <span class="keywordflow">if</span>(is_array($tab_dispos['centre'][$ville]))
+<a name="l00465"></a>00465                <span class="keywordflow">foreach</span>($tab_dispos['centre'][$ville] as $centre=&gt;$dispo) {
+<a name="l00466"></a>00466                   <span class="keywordflow">if</span>($dispo&gt;$dispoMax) {
+<a name="l00467"></a>00467                      $dispoMax=$dispo;
+<a name="l00468"></a>00468                      $dispoMaxCentre=$centre;
+<a name="l00469"></a>00469                   }
+<a name="l00470"></a>00470                   $old_dispo=$dispo;
+<a name="l00471"></a>00471                }
+<a name="l00472"></a>00472                $old_dispo=$dispoMax;
+<a name="l00473"></a>00473                <span class="keywordflow">if</span>(is_array($tab_dispos['centre'][$ville]))
+<a name="l00474"></a>00474                   <span class="keywordflow">foreach</span>($tab_dispos['centre'][$ville] as $centre=&gt;$dispo) {
+<a name="l00475"></a>00475                      <span class="keywordflow">if</span>($nbCan&lt;=$dispo &amp;&amp; $dispo&lt;=$old_dispo) {
+<a name="l00476"></a>00476                         $dispoChoix=$dispo;
+<a name="l00477"></a>00477                         $dispoChoixCentre=$centre;
+<a name="l00478"></a>00478                         $isChoix=<span class="keyword">true</span>;
+<a name="l00479"></a>00479                      }
+<a name="l00480"></a>00480                      <span class="keywordflow">if</span>($old_dispo&lt;$dispo) $old_dispo=$dispo;
+<a name="l00481"></a>00481                   }
+<a name="l00482"></a>00482                <span class="keywordflow">if</span>($isChoix) {
+<a name="l00483"></a>00483                   <span class="comment">// cas idéal : on a trouvé le plus petit centre capable d'accueillir les nbCan candidats</span>
+<a name="l00484"></a>00484                   <span class="comment">// il faut vérifier si chaque salle a suffisamment de place</span>
+<a name="l00485"></a>00485                   $dispoSalleOld=$dispoChoix;
+<a name="l00486"></a>00486                   $dispoSalleMax=0;
+<a name="l00487"></a>00487                   $is1salleSuffit=<span class="keyword">false</span>;
+<a name="l00488"></a>00488                   <span class="keywordflow">foreach</span>($tab_repart[$departement][$ville][$dispoChoixCentre] as <a class="code" href="inc-pdf-convocation_8php.html#02836f11c8d8f2355fc2208ad4adf415">$salle</a>=&gt;$tab) {
+<a name="l00489"></a>00489                      $dispoSalle=$tab['dispo'];
+<a name="l00490"></a>00490                      <span class="keywordflow">if</span>($dispoSalle&gt;$dispoSalleMax) {
+<a name="l00491"></a>00491                         $dispoSalleMax=$dispoSalle;
+<a name="l00492"></a>00492                      }
+<a name="l00493"></a>00493                      <span class="keywordflow">if</span>($nbCan&lt;=$dispoSalle &amp;&amp; $dispoSalle&lt;=$dispoSalleOld) {
+<a name="l00494"></a>00494                         $is1salleSuffit=<span class="keyword">true</span>;
+<a name="l00495"></a>00495                      }
+<a name="l00496"></a>00496                   }
+<a name="l00497"></a>00497                   <span class="keywordflow">if</span>($is1salleSuffit) $nbEnvoi=$nbCan;
+<a name="l00498"></a>00498                   <span class="keywordflow">else</span> $nbEnvoi=$dispoSalleMax;
+<a name="l00499"></a>00499                   $envoi_centre=$dispoChoixCentre;
+<a name="l00500"></a>00500                   $id_centre=$tab_referentiel['etablissement'][$id_departement][$envoi_centre];
+<a name="l00501"></a>00501                } <span class="keywordflow">else</span> {
+<a name="l00502"></a>00502                   <span class="comment">// cas où pas une salle ne convient : on en envoit le maximum dans la plus grande salle</span>
+<a name="l00503"></a>00503                   $is1salleSuffit=<span class="keyword">false</span>;
+<a name="l00504"></a>00504                   $dispoSalleMax=0;
+<a name="l00505"></a>00505                   $dispoSalleOld=$dispoMax;
+<a name="l00506"></a>00506                   <span class="keywordflow">if</span>(is_array($tab_repart[$departement][$ville][$dispoMaxCentre])) {
+<a name="l00507"></a>00507                      <span class="keywordflow">foreach</span>($tab_repart[$departement][$ville][$dispoMaxCentre] as <a class="code" href="inc-pdf-convocation_8php.html#02836f11c8d8f2355fc2208ad4adf415">$salle</a>=&gt;$tab) {
+<a name="l00508"></a>00508                         $dispoSalle=$tab['dispo'];
+<a name="l00509"></a>00509                         <span class="keywordflow">if</span>($dispoSalle&gt;$dispoSalleMax) {
+<a name="l00510"></a>00510                            $dispoSalleMax=$dispoSalle;
+<a name="l00511"></a>00511                         }
+<a name="l00512"></a>00512                         <span class="keywordflow">if</span>($nbCan&lt;=$dispoSalle &amp;&amp; $dispoSalle&lt;=$dispoSalleOld) {
+<a name="l00513"></a>00513                            $is1salleSuffit=<span class="keyword">true</span>;
+<a name="l00514"></a>00514                         }
+<a name="l00515"></a>00515                      }
+<a name="l00516"></a>00516                   }
+<a name="l00517"></a>00517                   <span class="keywordflow">if</span>($is1salleSuffit) $nbEnvoi=$nbCan; <span class="comment">// ne devrait pas arriver sinon devrait etre dispoChoix</span>
+<a name="l00518"></a>00518                   <span class="keywordflow">else</span> $nbEnvoi=$dispoSalleMax;
+<a name="l00519"></a>00519                   <span class="comment">//$nbEnvoi=$dispoMax;</span>
+<a name="l00520"></a>00520                   $envoi_centre=$dispoMaxCentre;
+<a name="l00521"></a>00521                   $id_centre=$tab_referentiel['etablissement'][$id_departement][$envoi_centre];
+<a name="l00522"></a>00522                }
+<a name="l00523"></a>00523 
+<a name="l00524"></a>00524                <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.= <span class="stringliteral">"$nbCan &lt;a href=\"javascript:document.forms['form_repartition'].from_ville.value=$id_ville;\n"</span>
+<a name="l00525"></a>00525                    . <span class="stringliteral">"document.forms['form_repartition'].from_serie.value=$id_serie;\n"</span>
+<a name="l00526"></a>00526                    . <span class="stringliteral">"document.forms['form_repartition'].from_etablissement.value=0;\n"</span>
+<a name="l00527"></a>00527                    . <span class="stringliteral">"document.forms['form_repartition'].envoi_centre.value=$id_centre;\n"</span>
+<a name="l00528"></a>00528                    . <span class="stringliteral">"document.forms['form_repartition'].etablissement_txt.value='$envoi_centre';\n"</span>
+<a name="l00529"></a>00529                    . <span class="stringliteral">"document.forms['form_repartition'].envoi_nombre.value=$nbEnvoi;\n"</span>
+<a name="l00530"></a>00530                    . <span class="stringliteral">"document.forms['form_repartition'].ok_generique.value='manuel';\n"</span>
+<a name="l00531"></a>00531                    . <span class="stringliteral">"document.forms['form_repartition'].action+='#Ville_$id_ville';\n"</span>
+<a name="l00532"></a>00532                    . <span class="stringliteral">"document.forms['form_repartition'].submit();\n"</span>
+<a name="l00533"></a>00533                    . <span class="stringliteral">"\" title='R&amp;eacute;partir $nbEnvoi candidats de s&amp;eacute;rie $serie &amp;agrave; $envoi_centre ($ville)'&gt;$repartirIcon&lt;/a&gt;"</span>
+<a name="l00534"></a>00534                    ;
+<a name="l00535"></a>00535             } <span class="keywordflow">else</span> <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=$nbCan;
+<a name="l00536"></a>00536             <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;/small&gt;&lt;/td&gt;\n&lt;/tr&gt;\n"</span>;
+<a name="l00537"></a>00537 
+<a name="l00538"></a>00538             $totalCanVille+=(int)$nbCan;
+<a name="l00539"></a>00539          }
+<a name="l00540"></a>00540       }
+<a name="l00541"></a>00541       <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;/table&gt;&lt;hr size=1/&gt;= &lt;b&gt;$totalCanVille candidats&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;\n&lt;/table&gt;\n"</span>;
+<a name="l00542"></a>00542       $nbCanRepartis=0;
+<a name="l00543"></a>00543       <span class="keywordflow">if</span>($totalCanVille&gt;$dispoTotal) {
+<a name="l00544"></a>00544          <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>.<span class="stringliteral">" - impossible de r&amp;eacute;partir $totalCanVille candidats dans une ville capable d'en accueillir seulement $dispoCentre&lt;br/&gt;Veuillez proc&amp;eacute;der &amp;agrave; des r&amp;eacute;partitions par cas particuliers ou ajouter un centre de composition &amp;agrave; $ville"</span>;
+<a name="l00545"></a>00545       }
+<a name="l00546"></a>00546    }
+<a name="l00547"></a>00547 }
+<a name="l00548"></a>00548 <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;A NAME='villes0centre'&gt;&lt;/A&gt;&lt;h1&gt;Villes n'ayant aucun centre de composition&lt;/h1&gt;\n"</span>;
+<a name="l00549"></a>00549 <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;form name='form_sans_centre' class='spip_xx-small'&gt;\n"</span>;
+<a name="l00550"></a>00550 <span class="keywordflow">foreach</span>($tab_synthese_aucun_centre as $departement=&gt;$tab1) {
+<a name="l00551"></a>00551    <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.= <span class="stringliteral">"&lt;h2&gt;$departement&lt;/h2&gt;\n"</span>;
+<a name="l00552"></a>00552    <span class="keywordflow">foreach</span>($tab1 as $ville=&gt;$tab2) {
+<a name="l00553"></a>00553       $id_ville=$tab2['id_ville'];
+<a name="l00554"></a>00554       $id_departement=$tab2['id_departement'];
+<a name="l00555"></a>00555 
+<a name="l00556"></a>00556       $nbEta=$tab2['nb_eta'];
+<a name="l00557"></a>00557       <span class="keywordflow">if</span>($nbEta&gt;0) {
+<a name="l00558"></a>00558          <span class="keywordflow">if</span>($nbEta&gt;1) $pluriel=<span class="charliteral">'s'</span>; <span class="keywordflow">else</span> $pluriel='';
+<a name="l00559"></a>00559          <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;A name='Ville0_$id_ville'&gt;&lt;/A&gt;&lt;h3 title='D&amp;eacute;partement $id_departement - Ville $id_ville'&gt;$ville ($nbEta &amp;eacute;tablissement$pluriel)&lt;/h3&gt;\n"</span>;
+<a name="l00560"></a>00560          <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;table width='100%' style='border:1px solid gray;'&gt;\n&lt;tr&gt;\n&lt;td valign='top' style='border:1px dotted lightgray;'&gt;\n"</span>;
+<a name="l00561"></a>00561          <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;table width='100%'&gt;\n&lt;tr&gt;\n"</span>;
+<a name="l00562"></a>00562          <span class="keywordflow">foreach</span>(array('D&amp;eacute;partement<span class="charliteral">','</span>&amp;Eacute;tablissement<span class="charliteral">','</span>Centre<span class="charliteral">','</span>Ville<span class="charliteral">','</span>Dispo') as <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>)
+<a name="l00563"></a>00563             <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;th&gt;&lt;small&gt;$titre&lt;/small&gt;&lt;/th&gt;\n"</span>;
+<a name="l00564"></a>00564          <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;/tr&gt;\n"</span>;
+<a name="l00565"></a>00565          $nb_candidats=0;
+<a name="l00566"></a>00566          <span class="keywordflow">if</span>(is_array($tab_repart_eta_centre[$departement][$ville])) {
+<a name="l00567"></a>00567             <span class="keywordflow">foreach</span>($tab_repart_eta_centre[$departement][$ville] as $etablissement=&gt;$tab_rep_1) {
+<a name="l00568"></a>00568                <span class="keywordflow">foreach</span>(array('id_centre<span class="charliteral">','</span>centre<span class="charliteral">','</span>id_departement<span class="charliteral">','</span>id_ville<span class="charliteral">','</span>ville_centre<span class="charliteral">','</span>id_etablissement<span class="charliteral">','</span>nb_candidats') as $col) {
+<a name="l00569"></a>00569                   $$col=$tab_rep_1[$col];
+<a name="l00570"></a>00570                }
+<a name="l00571"></a>00571                $dispoCentre=$tab_dispos['centre'][$ville_centre][$centre];
+<a name="l00572"></a>00572                $nbEnvoi=min((<span class="keywordtype">int</span>)$nb_candidats,(<span class="keywordtype">int</span>)$dispoCentre);
+<a name="l00573"></a>00573                $repartir=<span class="stringliteral">"&lt;a href=\"javascript:document.forms['form_repartition'].from_ville.value=0;\n"</span>
+<a name="l00574"></a>00574                    . <span class="stringliteral">"document.forms['form_repartition'].from_etablissement.value=$id_etablissement;\n"</span>
+<a name="l00575"></a>00575                    . <span class="stringliteral">"document.forms['form_repartition'].from_serie.value=0;\n"</span>
+<a name="l00576"></a>00576                    . <span class="stringliteral">"document.forms['form_repartition'].envoi_centre.value=$id_centre;\n"</span>
+<a name="l00577"></a>00577                    . <span class="stringliteral">"document.forms['form_repartition'].etablissement_txt.value='$centre';\n"</span>
+<a name="l00578"></a>00578                    . <span class="stringliteral">"document.forms['form_repartition'].ok_generique.value='manuel';\n"</span>
+<a name="l00579"></a>00579                    . <span class="stringliteral">"document.forms['form_repartition'].envoi_nombre.value=$nbEnvoi;\n"</span>
+<a name="l00580"></a>00580                    . <span class="stringliteral">"document.forms['form_repartition'].action+='#Ville0_$id_ville';\n"</span>
+<a name="l00581"></a>00581                    . <span class="stringliteral">"document.forms['form_repartition'].submit();\n"</span>
+<a name="l00582"></a>00582                    . <span class="stringliteral">"\" title='R&amp;eacute;partir $nbEnvoi candidats dans $centre'&gt;$repartirIcon&lt;/a&gt;"</span>
+<a name="l00583"></a>00583                    ;
+<a name="l00584"></a>00584                $lib_etablissement=substr($etablissement, 0, 12).'&amp;#133;';
+<a name="l00585"></a>00585                $lib_etablissement.=$repartir;
+<a name="l00586"></a>00586                <span class="comment">//$inputCentre="&lt;SELECT NAME='centre_$id_centre' onChange=\"document.forms['form_repartition'].envoi_centre.value=this.value;\" class='fondo'&gt;".formOptionsRefInSelect('centre',$id_centre,'Centre',$id_departement)."&lt;/SELECT&gt;\n";</span>
+<a name="l00587"></a>00587                $lib_centre=substr($centre, 0, 7).'&amp;#133;';
+<a name="l00588"></a>00588                <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;tr class='tr_liste'&gt;&lt;td&gt;&lt;small&gt;$departement&lt;/small&gt;&lt;/td&gt;&lt;td nowrap&gt;&lt;small title='$etablissement (#$id_etablissement) - $nb_candidats candidats'&gt;$lib_etablissement&lt;/small&gt;&lt;/td&gt;&lt;td nowrap&gt;&lt;small title='$centre (#$id_centre)'&gt;$lib_centre&lt;/small&gt;&lt;/td&gt;&lt;td&gt;&lt;small&gt;$ville_centre&lt;/small&gt;&lt;/td&gt;&lt;td&gt;&lt;small&gt;$dispoCentre&lt;/small&gt;&lt;/td&gt;&lt;/tr&gt;\n"</span>;
+<a name="l00589"></a>00589             }
+<a name="l00590"></a>00590          }
+<a name="l00591"></a>00591          <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;/table&gt;\n&lt;/td&gt;\n&lt;td valign='middle' align='center' style='border:1px dotted lightgray;'&gt;\n"</span>;
+<a name="l00592"></a>00592          <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;small&gt;&lt;b&gt;$nb_candidats&lt;/b&gt; candidats"</span>;
+<a name="l00593"></a>00593          <span class="keywordflow">if</span>($nb_candidats&gt;0) {
+<a name="l00594"></a>00594             $tmp=<span class="stringliteral">"&lt;br/&gt;&lt;b&gt;$dispoCentre&lt;/b&gt; places dispo"</span>;
+<a name="l00595"></a>00595             <span class="keywordflow">if</span>($dispoCentre&lt;$nb_candidats)
+<a name="l00596"></a>00596                $tmp=<span class="stringliteral">"&lt;font color='red'&gt;$tmp&lt;/font&gt;"</span>;
+<a name="l00597"></a>00597             <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=$tmp;
+<a name="l00598"></a>00598          }
+<a name="l00599"></a>00599          <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;/small&gt;&lt;/td&gt;\n&lt;/tr&gt;\n&lt;/table&gt;\n"</span>;
+<a name="l00600"></a>00600       }
+<a name="l00601"></a>00601    }
+<a name="l00602"></a>00602 }
+<a name="l00603"></a>00603 <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>.=<span class="stringliteral">"&lt;/form&gt;\n"</span>;
+<a name="l00604"></a>00604                
+<a name="l00605"></a>00605 debut_gauche();
+<a name="l00606"></a>00606    debut_boite_info();
+<a name="l00607"></a>00607       echo <span class="stringliteral">"&lt;p&gt;R&amp;eacute;partition des candidats"</span>
+<a name="l00608"></a>00608          . <span class="stringliteral">"&lt;hr size=1&gt;Cas g&amp;eacute;n&amp;eacute;rique&lt;/p&gt;\n"</span>
+<a name="l00609"></a>00609          ;
+<a name="l00610"></a>00610    fin_boite_info();
+<a name="l00611"></a>00611    <a class="code" href="inc-referentiel_8php.html#ca269ae75f013c9730f590443481c7f9">odb_raccourcis</a>('');
+<a name="l00612"></a>00612 creer_colonne_droite();
+<a name="l00613"></a>00613 debut_droite();
+<a name="l00614"></a>00614    debut_boite_info();
+<a name="l00615"></a>00615       echo $msg_info;
+<a name="l00616"></a>00616    fin_boite_info();
+<a name="l00617"></a>00617    debut_cadre_relief(<span class="stringliteral">""</span>, <span class="keyword">false</span>, <span class="stringliteral">""</span>, <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a> = _T(<span class="stringliteral">"R&amp;eacute;partition des candidats $annee - cas g&amp;eacute;n&amp;eacute;rique"</span>));
+<a name="l00618"></a>00618       echo <a class="code" href="resultats__ajournes__par__centre_8php.html#9e168f4152c267835864153c54449583">$msg</a>;
+<a name="l00619"></a>00619    fin_cadre_relief();
+<a name="l00620"></a>00620 $inputCentre=<span class="stringliteral">"&lt;SELECT NAME='envoi_centre' class='forml' onChange=\"document.forms['form_repartition'].etablissement_txt.value=this.options[selectedIndex].text;\"&gt;"</span>.formOptionsRefInSelect('centres',$envoi_centre).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00621"></a>00621 } 
+<a name="l00622"></a>00622 <span class="keywordflow">if</span>(strlen($_REQUEST[<span class="stringliteral">"step3"</span>])&gt;0) {
+<a name="l00624"></a>00624 <a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>=$_REQUEST['annee'];
+<a name="l00625"></a>00625 $idDept=$_REQUEST['idDept'];
+<a name="l00626"></a>00626 $nbCandidats=$_REQUEST['nbCandidats'];
+<a name="l00627"></a>00627 $step3=$_REQUEST['step3'];
+<a name="l00628"></a>00628 $inputHidden=<span class="stringliteral">"&lt;INPUT type='hidden' name='step3' value='$step3'/&gt;"</span>;
+<a name="l00629"></a>00629 $idSerie=$_REQUEST['idSerie'];
+<a name="l00630"></a>00630 $departement=$tab_referentiel['departement'][$idDept];
+<a name="l00631"></a>00631 $serie=$tab_referentiel['serie'][$idSerie];
+<a name="l00632"></a>00632 $inputSerie=<span class="stringliteral">"&lt;SELECT NAME='repart_serie' class='forml'&gt;"</span>.formOptionsRefInSelect('serie',$idSerie,'S&amp;eacute;rie').<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00633"></a>00633 $inputDepartement=<span class="stringliteral">"&lt;SELECT NAME='repart_departement' class='forml'&gt;"</span>.formOptionsRefInSelect('departement',$idDept).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00634"></a>00634 $inputCentre=<span class="stringliteral">"&lt;SELECT NAME='envoi_centre' class='forml' onChange=\"document.forms['form_repartition'].etablissement_txt.value=this.options[selectedIndex].text;\"&gt;"</span>.formOptionsRefInSelect('centre',$envoi_centre,'',$idDept).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00635"></a>00635 $inputEtablissement=<span class="stringliteral">"&lt;SELECT NAME='repart_etablissement' class='forml'&gt;"</span>.formOptionsRefInSelect('etablissement',$repart_etablissement,'&amp;Eacute;tablissement',$idDept).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00636"></a>00636 $inputVille=<span class="stringliteral">"&lt;SELECT NAME='repart_ville' class='forml'&gt;"</span>.formOptionsRefInSelect('ville',$repart_ville,'Ville',$idDept).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00637"></a>00637    debut_gauche();
+<a name="l00638"></a>00638       debut_boite_info();
+<a name="l00639"></a>00639          echo <span class="stringliteral">"&lt;p&gt;R&amp;eacute;partition des candidats &lt;b&gt;$departement&lt;/b&gt; s&amp;eacute;rie &lt;b&gt;$serie&lt;/b&gt; par &amp;eacute;tablissement"</span>
+<a name="l00640"></a>00640             . <span class="stringliteral">"&lt;hr size=1&gt;Liens directs : &lt;ul&gt;&lt;li&gt;modifier les &lt;A HREF='"</span>.generer_url_ecrire('odb_ref').<span class="stringliteral">"&amp;step2=manuel&amp;table=ETA|$idDept|$departement|odb_ref_etablissement'&gt;&amp;eacute;tablissements $departement&lt;/A&gt;&lt;/li&gt;"</span>
+<a name="l00641"></a>00641             . <span class="stringliteral">"&lt;li&gt;Saisir &lt;A HREF='"</span>.generer_url_ecrire('odb_saisie').<span class="stringliteral">"&amp;filtreSerie=$idSerie&amp;filtreDepartement=$idDept#acces_clic'&gt;ces candidats&lt;/A&gt;&lt;/li&gt;"</span>
+<a name="l00642"></a>00642             . <span class="stringliteral">"&lt;/ul&gt;&lt;/p&gt;\n"</span>
+<a name="l00643"></a>00643             . <span class="stringliteral">"&lt;center style='font-weight:bold;'&gt;"</span>
+<a name="l00644"></a>00644             . <span class="stringliteral">"&lt;A style='font-size:100px;color:#222;' title='R&amp;eacute;partition des $serie' HREF='"</span>.generer_url_ecrire('odb_repartition').<span class="stringliteral">"&amp;step2=isSerie&amp;idSerie=$idSerie&amp;nbCandidats=&amp;annee=$annee'&gt;"</span>
+<a name="l00645"></a>00645             . <span class="stringliteral">"$serie&lt;/A&gt;&lt;br/&gt;&lt;A style='font-size:30px;color:#555;' title='R&amp;eacute;partition dans $departement' HREF='"</span>.generer_url_ecrire('odb_repartition').<span class="stringliteral">"&amp;step2=isDept&amp;idDept=$idDept&amp;nbCandidats=&amp;annee=$annee'&gt;"</span>
+<a name="l00646"></a>00646             . <span class="stringliteral">"$departement&lt;/A&gt;&lt;/center&gt;\n"</span>
+<a name="l00647"></a>00647             ;
+<a name="l00648"></a>00648       fin_boite_info();
+<a name="l00649"></a>00649       <a class="code" href="inc-referentiel_8php.html#ca269ae75f013c9730f590443481c7f9">odb_raccourcis</a>('');
+<a name="l00650"></a>00650    creer_colonne_droite();
+<a name="l00651"></a>00651    debut_droite();
+<a name="l00652"></a>00652       debut_cadre_relief(<span class="stringliteral">""</span>, <span class="keyword">false</span>, <span class="stringliteral">""</span>, <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a> = _T(<span class="stringliteral">"R&amp;eacute;partition des candidats $annee"</span>));
+<a name="l00653"></a>00653          <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>=<span class="stringliteral">"R&amp;eacute;partition "</span>.$tab_referentiel['departement'][$idDept].<span class="stringliteral">", s&amp;eacute;rie "</span>.$tab_referentiel['serie'][$idSerie].<span class="stringliteral">" ($nbCandidats candidats)"</span>;
+<a name="l00654"></a>00654          $tab[]=<span class="stringliteral">"&lt;TH&gt;Ville&lt;/TH&gt;&lt;TH&gt;&amp;Eacute;tablissement&lt;/TH&gt;&lt;TH&gt;&lt;small&gt;Centre&lt;br/&gt;+ proche&lt;/small&gt;&lt;/TH&gt;&lt;TH&gt;&lt;small&gt;Candidats&lt;br/&gt;&amp;agrave; r&amp;eacute;partir&lt;/small&gt;&lt;/TH&gt;&lt;TH&gt;%&lt;/TH&gt;"</span>;
+<a name="l00655"></a>00655          <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>=<span class="stringliteral">"SELECT eta.etablissement, eta.id, eta.id_ville, eta.id_centre, count( * ) nb"</span>
+<a name="l00656"></a>00656             . <span class="stringliteral">" FROM `odb_candidats` can, odb_ref_etablissement eta"</span>
+<a name="l00657"></a>00657             . <span class="stringliteral">" WHERE eta.id = can.etablissement"</span>
+<a name="l00658"></a>00658             . <span class="stringliteral">" AND annee=$annee"</span>
+<a name="l00659"></a>00659             . <span class="stringliteral">" AND serie=$idSerie"</span>
+<a name="l00660"></a>00660             . <span class="stringliteral">" AND departement=$idDept"</span>
+<a name="l00661"></a>00661             . <span class="stringliteral">" AND id_table='0'"</span>
+<a name="l00662"></a>00662             . <span class="stringliteral">" GROUP BY eta.etablissement"</span>
+<a name="l00663"></a>00663             . <span class="stringliteral">" ORDER BY id_ville, eta.etablissement"</span>
+<a name="l00664"></a>00664             ;
+<a name="l00665"></a>00665             <span class="comment">//echo $sql;</span>
+<a name="l00666"></a>00666          <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00667"></a>00667          $num_rows=mysql_num_rows(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00668"></a>00668          $cptVille=0;$old_ville='';<a class="code" href="resultats__ajournes__par__centre_8php.html#ea5d1e230cf3df250120025d801dc7c3">$cpt</a>=0;
+<a name="l00669"></a>00669          <span class="keywordflow">while</span>($row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)) {
+<a name="l00670"></a>00670                 <a class="code" href="resultats__ajournes__par__centre_8php.html#ea5d1e230cf3df250120025d801dc7c3">$cpt</a>++;
+<a name="l00671"></a>00671             $etablissement=$row['etablissement'];
+<a name="l00672"></a>00672             $idEtablissement=$row['<span class="keywordtype">id</span>'];
+<a name="l00673"></a>00673             $idVille=$row['id_ville'];
+<a name="l00674"></a>00674             <a class="code" href="resultats__ajournes__par__centre_8php.html#f25bc576c1b6d0e1a28f8e900989a38f">$idCentre</a>=$row['id_centre'];
+<a name="l00675"></a>00675             $nb_rows=$row['nb'];
+<a name="l00676"></a>00676             $etablissement=$tab_referentiel['etablissement'][$idDept][$idEtablissement];
+<a name="l00677"></a>00677             $ville=$tab_referentiel['ville'][$idDept][$idVille];
+<a name="l00678"></a>00678             $centre=$tab_referentiel['etablissement'][$idDept][<a class="code" href="resultats__ajournes__par__centre_8php.html#f25bc576c1b6d0e1a28f8e900989a38f">$idCentre</a>];
+<a name="l00679"></a>00679             <span class="keywordflow">if</span>(!isset($dispoCentre[<a class="code" href="resultats__ajournes__par__centre_8php.html#f25bc576c1b6d0e1a28f8e900989a38f">$idCentre</a>])) {
+<a name="l00680"></a>00680                <span class="comment">//TODO !!!</span>
+<a name="l00681"></a>00681             }
+<a name="l00682"></a>00682             <span class="keywordflow">if</span>(<a class="code" href="resultats__ajournes__par__centre_8php.html#ea5d1e230cf3df250120025d801dc7c3">$cpt</a>&gt;$num_rows || ($old_ville!=$ville &amp;&amp; $old_ville!='')) {
+<a name="l00683"></a>00683                 <span class="comment">// nouvelle ville : on affiche le total de cette ville et un lien pour repartir candidats de cette ville</span>
+<a name="l00684"></a>00684                 $old_idVille=$tab_referentiel['ville'][$idDept][$old_ville];
+<a name="l00685"></a>00685                                         $tab[]=<span class="stringliteral">"&lt;TH colspan=2 title='Ville $old_idVille'&gt;&lt;small&gt;&lt;div&gt;Total $old_ville&lt;/div&gt;&lt;/small&gt;&lt;/TH&gt;\n\t"</span>
+<a name="l00686"></a>00686                                                         .<span class="stringliteral">"&lt;TH colspan=2&gt;&lt;small&gt;"</span>
+<a name="l00687"></a>00687                                                         .<span class="stringliteral">"&lt;A HREF=\"javascript:document.forms['form_repartition'].nombre.value=$cptVille;"</span>
+<a name="l00688"></a>00688                                                         . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.disabled=false;"</span>
+<a name="l00689"></a>00689                                                         . <span class="stringliteral">"document.forms['form_repartition'].ok_generique.disabled=true;"</span>
+<a name="l00690"></a>00690                                                         . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.value='G&amp;eacute;n&amp;eacute;rer ces $cptVille num&amp;eacute;ros de table';"</span>
+<a name="l00691"></a>00691                                                         . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.focus();"</span>
+<a name="l00692"></a>00692                                                         . <span class="stringliteral">"document.forms['form_repartition'].envoi_centre.value=$old_idCentre;"</span>
+<a name="l00693"></a>00693                                                         . <span class="stringliteral">"document.forms['form_repartition'].repart_ville.value=$old_idVille;"</span>
+<a name="l00694"></a>00694                                                         . <span class="stringliteral">"document.forms['form_repartition'].repart_etablissement.value=0;"</span>
+<a name="l00695"></a>00695                                                         . <span class="stringliteral">"document.forms['form_repartition'].nombre.select();\""</span>
+<a name="l00696"></a>00696                                                         .<span class="stringliteral">" TITLE='Cliquez pour acc&amp;eacute;der &amp;agrave; leur r&amp;eacute;partition'&gt;$cptVille candidats&lt;/A&gt;&lt;/small&gt;"</span>
+<a name="l00697"></a>00697                                                         .<span class="stringliteral">"&lt;/TH&gt;\n\t"</span>
+<a name="l00698"></a>00698                           .<span class="stringliteral">"&lt;TH&gt;"</span>.<a class="code" href="inc-html_8php.html#5646c2c37376d593c6d70fab7aa6699c" title="affiche un taux sous forme d&amp;#39;image">afficheTaux</a>($cptVille/$nbCandidats,2).<span class="stringliteral">"&lt;/TH&gt;\n"</span>
+<a name="l00699"></a>00699                                                         ;
+<a name="l00700"></a>00700                                         $tab[]=<span class="stringliteral">"&lt;td colspan=5&gt;&lt;hr size=0/&gt;&lt;/td&gt;"</span>;
+<a name="l00701"></a>00701                 $cptVille=$nb_rows;
+<a name="l00702"></a>00702                                 } <span class="keywordflow">else</span> {
+<a name="l00703"></a>00703                                         $cptVille+=$nb_rows;
+<a name="l00704"></a>00704                                 }
+<a name="l00705"></a>00705             <span class="keywordflow">foreach</span>(array('etablissement<span class="charliteral">','</span>ville<span class="charliteral">','</span>centre') as $lieu)
+<a name="l00706"></a>00706                <span class="keywordflow">if</span>(trim($$lieu)==<span class="stringliteral">""</span> )
+<a name="l00707"></a>00707                   $$lieu=ucfirst($lieu).' &lt;small&gt;['.${<span class="stringliteral">"id"</span>.ucfirst($lieu)}.']&lt;/small&gt;';
+<a name="l00708"></a>00708             $tab[]=<span class="stringliteral">"&lt;TD&gt;&lt;small&gt;$ville&lt;/small&gt;&lt;/TD&gt;\n\t"</span>
+<a name="l00709"></a>00709                         .<span class="stringliteral">"&lt;TD&gt;&lt;small&gt;&lt;div title='&amp;Eacute;ablissement $idEtablissement'&gt;$etablissement&lt;/div&gt;&lt;/small&gt;&lt;/TD&gt;\n\t"</span>
+<a name="l00710"></a>00710                   .<span class="stringliteral">"&lt;TD&gt;&lt;small&gt;&lt;div title='Centre $idCentre'&gt;$centre&lt;/div&gt;&lt;/small&gt;&lt;/TD&gt;\n\t"</span>
+<a name="l00711"></a>00711                   .<span class="stringliteral">"&lt;TD&gt;&lt;small&gt;"</span>
+<a name="l00712"></a>00712                   .<span class="stringliteral">"&lt;A HREF=\"javascript:document.forms['form_repartition'].nombre.value=$nb_rows;"</span>
+<a name="l00713"></a>00713                   . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.disabled=false;"</span>
+<a name="l00714"></a>00714                   . <span class="stringliteral">"document.forms['form_repartition'].ok_generique.disabled=true;"</span>
+<a name="l00715"></a>00715                   . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.value='G&amp;eacute;n&amp;eacute;rer ces $nb_rows num&amp;eacute;ros de table';"</span>
+<a name="l00716"></a>00716                   . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.focus();"</span>
+<a name="l00717"></a>00717                   . <span class="stringliteral">"document.forms['form_repartition'].envoi_centre.value=$idCentre;"</span>
+<a name="l00718"></a>00718                   . <span class="stringliteral">"document.forms['form_repartition'].repart_etablissement.value=$idEtablissement;"</span>
+<a name="l00719"></a>00719                   . <span class="stringliteral">"document.forms['form_repartition'].nombre.select();\""</span>
+<a name="l00720"></a>00720                   .<span class="stringliteral">" TITLE='Cliquez pour acc&amp;eacute;der &amp;agrave; leur r&amp;eacute;partition'&gt;$nb_rows&lt;/A&gt;&lt;/small&gt;&lt;/TD&gt;\n\t"</span>
+<a name="l00721"></a>00721                   .<span class="stringliteral">"&lt;TD&gt;"</span>.<a class="code" href="inc-html_8php.html#5646c2c37376d593c6d70fab7aa6699c" title="affiche un taux sous forme d&amp;#39;image">afficheTaux</a>($nb_rows/$nbCandidats,2).<span class="stringliteral">"&lt;/TD&gt;\n"</span>
+<a name="l00722"></a>00722                   ;
+<a name="l00723"></a>00723             $old_ville=$ville;
+<a name="l00724"></a>00724             $old_idCentre=$idCentre;
+<a name="l00725"></a>00725          }
+<a name="l00726"></a>00726                         $tab[]=<span class="stringliteral">"&lt;TH colspan=2 title='Ville $idVille'&gt;&lt;small&gt;&lt;div&gt;Total $ville&lt;/div&gt;&lt;/small&gt;&lt;/TH&gt;\n\t"</span>
+<a name="l00727"></a>00727                                         .<span class="stringliteral">"&lt;TH colspan=2&gt;&lt;small&gt;"</span>
+<a name="l00728"></a>00728                                         .<span class="stringliteral">"&lt;A HREF=\"javascript:document.forms['form_repartition'].nombre.value=$cptVille;"</span>
+<a name="l00729"></a>00729                                         . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.disabled=false;"</span>
+<a name="l00730"></a>00730                                         . <span class="stringliteral">"document.forms['form_repartition'].ok_generique.disabled=true;"</span>
+<a name="l00731"></a>00731                                         . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.value='G&amp;eacute;n&amp;eacute;rer ces $cptVille num&amp;eacute;ros de table';"</span>
+<a name="l00732"></a>00732                                         . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.focus();"</span>
+<a name="l00733"></a>00733                                         . <span class="stringliteral">"document.forms['form_repartition'].envoi_centre.value=$old_idCentre;"</span>
+<a name="l00734"></a>00734                                         . <span class="stringliteral">"document.forms['form_repartition'].repart_ville.value=$idVille;"</span>
+<a name="l00735"></a>00735                                         . <span class="stringliteral">"document.forms['form_repartition'].repart_etablissement.value=0;"</span>
+<a name="l00736"></a>00736                                         . <span class="stringliteral">"document.forms['form_repartition'].nombre.select();\""</span>
+<a name="l00737"></a>00737                                         .<span class="stringliteral">" TITLE='Cliquez pour acc&amp;eacute;der &amp;agrave; leur r&amp;eacute;partition'&gt;$cptVille candidats&lt;/A&gt;&lt;/small&gt;"</span>
+<a name="l00738"></a>00738                                         .<span class="stringliteral">"&lt;/TH&gt;\n\t"</span>
+<a name="l00739"></a>00739                .<span class="stringliteral">"&lt;TH&gt;"</span>.<a class="code" href="inc-html_8php.html#5646c2c37376d593c6d70fab7aa6699c" title="affiche un taux sous forme d&amp;#39;image">afficheTaux</a>($cptVille/$nbCandidats,2).<span class="stringliteral">"&lt;/TH&gt;\n"</span>
+<a name="l00740"></a>00740                                         ;
+<a name="l00741"></a>00741                         $tab[]=<span class="stringliteral">"&lt;td colspan=5&gt;&lt;hr size=0/&gt;&lt;/td&gt;"</span>;
+<a name="l00742"></a>00742          echo table_a_la_spip(<a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>,$tab);
+<a name="l00743"></a>00743       fin_cadre_relief();
+<a name="l00744"></a>00744    debut_boite_info();
+<a name="l00745"></a>00745       echo <a class="code" href="odb__repartition_8avecGeneriques_8php.html#ddea246a8e91ba341098ee91e0dfa1c2" title="Affiche la capacite de chaque centre.">capaciteCentres</a>(<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>, $idDept);
+<a name="l00746"></a>00746    fin_boite_info();
+<a name="l00747"></a>00747 
+<a name="l00748"></a>00748 } elseif(strlen($_REQUEST[<span class="stringliteral">"step2"</span>])&gt;0) {
+<a name="l00750"></a>00750 <a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>=$_REQUEST['annee'];
+<a name="l00751"></a>00751 $idDept=$_REQUEST['idDept'];
+<a name="l00752"></a>00752 $idSerie=$_REQUEST['idSerie'];
+<a name="l00753"></a>00753 $nbCandidats=$_REQUEST['nbCandidats'];
+<a name="l00754"></a>00754 <span class="keywordflow">if</span>($nbCandidats=='') {
+<a name="l00755"></a>00755         $nbCandidats=<a class="code" href="odb__notes_2exec_2inc-bdd_8php.html#000899dd9da7cf04c35abc6e440d6ed3" title="Recupere le nombre de candidats selon divers criteres.">getNbCandidats</a>(<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>,$idDept,$idSerie);
+<a name="l00756"></a>00756 }
+<a name="l00757"></a>00757 $step2=$_REQUEST['step2'];
+<a name="l00758"></a>00758    debut_gauche();
+<a name="l00759"></a>00759       debut_boite_info();
+<a name="l00760"></a>00760          echo <span class="stringliteral">"&lt;p&gt;R&amp;eacute;partition des candidats &lt;b&gt;"</span>.$tab_referentiel['departement'][$idDept].$tab_referentiel['serie'][$idSerie].<span class="stringliteral">"&lt;/b&gt;"</span>
+<a name="l00761"></a>00761             . <span class="stringliteral">"&lt;hr size=1&gt;&lt;b&gt;Cliquez&lt;/b&gt; sur le nombre de candidats pour &lt;b&gt;pr&amp;eacute;remplir le formulaire&lt;/b&gt; des cas particulier de r&amp;eacute;partition&lt;/p&gt;\n"</span>
+<a name="l00762"></a>00762             ;
+<a name="l00763"></a>00763       fin_boite_info();
+<a name="l00764"></a>00764       <a class="code" href="inc-referentiel_8php.html#ca269ae75f013c9730f590443481c7f9">odb_raccourcis</a>('');
+<a name="l00765"></a>00765    creer_colonne_droite();
+<a name="l00766"></a>00766    debut_droite();
+<a name="l00767"></a>00767       debut_cadre_relief(<span class="stringliteral">""</span>, <span class="keyword">false</span>, <span class="stringliteral">""</span>, <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a> = _T(<span class="stringliteral">"R&amp;eacute;partition des candidats $annee"</span>));
+<a name="l00768"></a>00768          <span class="keywordflow">if</span>($step2=='isDept') {
+<a name="l00769"></a>00769             echo <span class="stringliteral">"\n&lt;!-- tri par departement --&gt;\n"</span>;
+<a name="l00770"></a>00770             $inputSerie=<span class="stringliteral">"&lt;SELECT NAME='repart_serie'&gt;"</span>.formOptionsRefInSelect('serie',$repart_serie).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00771"></a>00771             $inputDepartement=<span class="stringliteral">"&lt;SELECT NAME='repart_departement'&gt;"</span>.formOptionsRefInSelect('departement',$idDept).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00772"></a>00772             $inputVille=<span class="stringliteral">"&lt;SELECT NAME='repart_ville' class='forml'&gt;"</span>.formOptionsRefInSelect('ville',$repart_ville,'Ville',$idDept).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00773"></a>00773             $inputCentre=<span class="stringliteral">"&lt;SELECT NAME='envoi_centre' onChange=\"document.forms['form_repartition'].etablissement_txt.value=this.options[selectedIndex].text;\"&gt;"</span>.formOptionsRefInSelect('centre',$envoi_centre,'',$idDept).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00774"></a>00774             $inputEtablissement=<span class="stringliteral">"&lt;SELECT NAME='repart_etablissement' class='forml'&gt;"</span>.formOptionsRefInSelect('etablissement',$repart_etablissement,'&amp;Eacute;tablissement',$idDept).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00775"></a>00775             $departement=$tab_referentiel['departement'][$idDept];
+<a name="l00776"></a>00776             <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>=<span class="stringliteral">"R&amp;eacute;partition $departement par s&amp;eacute;rie ($nbCandidats candidats)"</span>;
+<a name="l00777"></a>00777             $triPar=<span class="stringliteral">"S&amp;eacute;rie"</span>;
+<a name="l00778"></a>00778             $ref=$tab_referentiel['serie'];
+<a name="l00779"></a>00779             $isDept=<span class="keyword">true</span>;
+<a name="l00780"></a>00780          } elseif (strlen($idSerie&gt;0)) {
+<a name="l00781"></a>00781             echo <span class="stringliteral">"\n&lt;!-- tri par serie --&gt;\n"</span>;
+<a name="l00782"></a>00782             $inputSerie=<span class="stringliteral">"&lt;SELECT NAME='repart_serie' class='forml'&gt;"</span>.formOptionsRefInSelect('serie',$idSerie).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00783"></a>00783             $inputDepartement=<span class="stringliteral">"&lt;SELECT NAME='repart_departement' class='forml'&gt;"</span>.formOptionsRefInSelect('departement',$repart_departement).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00784"></a>00784                       $inputVille=<span class="stringliteral">"&lt;SELECT NAME='repart_ville' class='forml'&gt;"</span>.formOptionsRefInSelect('villes',$repart_ville).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00785"></a>00785             $inputCentre=<span class="stringliteral">"&lt;SELECT NAME='envoi_centre' class='forml' onChange=\"document.forms['form_repartition'].etablissement_txt.value=this.options[selectedIndex].text;\"&gt;"</span>.formOptionsRefInSelect('centres',$envoi_centre).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00786"></a>00786             $inputEtablissement=<span class="stringliteral">"&lt;SELECT NAME='repart_etablissement' class='forml'&gt;"</span>.formOptionsRefInSelect('etablissements',$repart_etablissement,'&amp;Eacute;tablissement').<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00787"></a>00787             $serie=$tab_referentiel['serie'][$idSerie];
+<a name="l00788"></a>00788             <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>=<span class="stringliteral">"R&amp;eacute;partition s&amp;eacute;rie $serie par d&amp;eacute;partement ($nbCandidats candidats)"</span>;
+<a name="l00789"></a>00789             $triPar=<span class="stringliteral">"D&amp;eacute;partement"</span>;
+<a name="l00790"></a>00790             $ref=$tab_referentiel['departement'];
+<a name="l00791"></a>00791             $isDept=<span class="keyword">false</span>;
+<a name="l00792"></a>00792          } <span class="keywordflow">else</span> die(<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>.<span class="stringliteral">" - Impossible de d&amp;eacute;terminer le tri"</span>);
+<a name="l00793"></a>00793 
+<a name="l00794"></a>00794          $tab[]=<span class="stringliteral">"&lt;TH&gt;$triPar&lt;/TH&gt;&lt;TH&gt;&lt;small&gt;Nombre de candidats&lt;br&gt;&amp;agrave; r&amp;eacute;partir&lt;/small&gt;&lt;/TH&gt;&lt;TH&gt;%&lt;/TH&gt;"</span>;
+<a name="l00795"></a>00795          <span class="keywordflow">foreach</span>($ref as $id =&gt; $valeur) {
+<a name="l00796"></a>00796             <span class="keywordflow">if</span>(is_numeric($id)) {
+<a name="l00797"></a>00797                <span class="keywordflow">if</span>($isDept)
+<a name="l00798"></a>00798                   $idSerie=$id;
+<a name="l00799"></a>00799                <span class="keywordflow">else</span>
+<a name="l00800"></a>00800                   $idDept=$id;
+<a name="l00801"></a>00801                <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>=<span class="stringliteral">"SELECT count(*) FROM odb_candidats can WHERE departement=$idDept AND annee=$annee and serie=$idSerie and id_table='0'"</span>;
+<a name="l00802"></a>00802                <span class="comment">//echo "$id - $valeur&lt;pre&gt;$sql&lt;/pre&gt;";</span>
+<a name="l00803"></a>00803                <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00804"></a>00804                $row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00805"></a>00805                $nb_rows=(int)$row[0];
+<a name="l00806"></a>00806 
+<a name="l00807"></a>00807                <span class="keywordflow">if</span>($nb_rows&gt;0)
+<a name="l00808"></a>00808                   <a class="code" href="resultats__ajournes__par__centre_8php.html#110fc80fcb224fbae884b1a3742c4924">$lien</a>=<span class="stringliteral">"&lt;b&gt;&lt;A HREF='"</span>.generer_url_ecrire('odb_repartition').<span class="stringliteral">"&amp;step3=manuel&amp;idDept=$idDept&amp;idSerie=$idSerie&amp;nbCandidats=$nb_rows&amp;annee=$annee'&gt;$valeur&lt;/A&gt;&lt;/b&gt;"</span>;
+<a name="l00809"></a>00809                <span class="keywordflow">else</span> <a class="code" href="resultats__ajournes__par__centre_8php.html#110fc80fcb224fbae884b1a3742c4924">$lien</a>=$valeur;
+<a name="l00810"></a>00810                <span class="keywordflow">if</span>($nb_rows&gt;0) {
+<a name="l00811"></a>00811                   $nb_rows_txt=<span class="stringliteral">"&lt;A HREF=\"javascript:document.forms['form_repartition'].nombre.value=$nb_rows;"</span>
+<a name="l00812"></a>00812                      . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.disabled=false;"</span>
+<a name="l00813"></a>00813                      . <span class="stringliteral">"document.forms['form_repartition'].ok_generique.disabled=true;"</span>
+<a name="l00814"></a>00814                      . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.value='G&amp;eacute;n&amp;eacute;rer ces $nb_rows num&amp;eacute;ros de table';"</span>
+<a name="l00815"></a>00815                      . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.focus();"</span>
+<a name="l00816"></a>00816                      . <span class="stringliteral">"document.forms['form_repartition'].repart_serie.value=$idSerie;"</span>
+<a name="l00817"></a>00817                      . <span class="stringliteral">"document.forms['form_repartition'].repart_departement.value=$idDept;"</span>
+<a name="l00818"></a>00818                      . <span class="stringliteral">"document.forms['form_repartition'].nombre.select();\""</span>
+<a name="l00819"></a>00819                      .<span class="stringliteral">" TITLE='Cliquez pour acc&amp;eacute;der &amp;agrave; leur r&amp;eacute;partition'&gt;$nb_rows&lt;/A&gt;"</span>;
+<a name="l00820"></a>00820                                                 $tab[]=<span class="stringliteral">"&lt;TD&gt;$lien&lt;/TD&gt;"</span>
+<a name="l00821"></a>00821                                                                 .<span class="stringliteral">"&lt;TD&gt;$nb_rows_txt&lt;/TD&gt;"</span>
+<a name="l00822"></a>00822                                                                 .<span class="stringliteral">"&lt;TD&gt;"</span>.<a class="code" href="inc-html_8php.html#5646c2c37376d593c6d70fab7aa6699c" title="affiche un taux sous forme d&amp;#39;image">afficheTaux</a>($nb_rows/$nbCandidats,4 ).<span class="stringliteral">"&lt;small&gt;("</span>.round(100*$nb_rows/$nbCandidats,2).<span class="stringliteral">"%)&lt;/small&gt;&lt;/TD&gt;\n"</span>
+<a name="l00823"></a>00823                                                                 ;
+<a name="l00824"></a>00824                                         }
+<a name="l00825"></a>00825                <span class="keywordflow">else</span> $nb_rows_txt=$nb_rows;
+<a name="l00826"></a>00826             }
+<a name="l00827"></a>00827          }
+<a name="l00828"></a>00828          echo table_a_la_spip(<a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>,$tab);
+<a name="l00829"></a>00829       fin_cadre_relief();
+<a name="l00830"></a>00830 } 
+<a name="l00831"></a>00831 <span class="keywordflow">if</span>(!((strlen($_POST['ok_generique'])&gt;0 || strlen($_REQUEST['from_ville']&gt;0) || strlen($_REQUEST['from_etablissement']&gt;0))) &amp;&amp; $step2=='' &amp;&amp; $step3==<span class="stringliteral">""</span>) {
+<a name="l00833"></a>00833 <a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>=isset($_REQUEST['annee'])?$_REQUEST['annee']:date(<span class="stringliteral">"Y"</span>);
+<a name="l00834"></a>00834 <span class="keywordflow">if</span>(!isset($_REQUEST['ok_particulier'])) {
+<a name="l00835"></a>00835    debut_gauche();
+<a name="l00836"></a>00836       <a class="code" href="inc-referentiel_8php.html#ca269ae75f013c9730f590443481c7f9">odb_raccourcis</a>('odb_repartition');
+<a name="l00837"></a>00837    creer_colonne_droite();
+<a name="l00838"></a>00838    debut_droite();
+<a name="l00839"></a>00839 }
+<a name="l00840"></a>00840       $inputSerie=<span class="stringliteral">"&lt;SELECT NAME='repart_serie' class='forml'&gt;"</span>.formOptionsRefInSelect('serie',$repart_serie).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00841"></a>00841       $inputDepartement=<span class="stringliteral">"&lt;SELECT NAME='repart_departement' class='forml'&gt;"</span>.formOptionsRefInSelect('departement',$repart_departement).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00842"></a>00842       $inputVille=<span class="stringliteral">"&lt;SELECT NAME='repart_ville' class='forml'&gt;"</span>.formOptionsRefInSelect('villes',$repart_ville).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00843"></a>00843       $inputCentre=<span class="stringliteral">"&lt;SELECT NAME='envoi_centre' class='forml' onChange=\"document.forms['form_repartition'].etablissement_txt.value=this.options[selectedIndex].text;\"&gt;"</span>.formOptionsRefInSelect('centres',$envoi_centre).<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00844"></a>00844 
+<a name="l00845"></a>00845       <a class="code" href="inc-referentiel_8php.html#8a347b23cd689ac91a0c11390ae5a7e4" title="Introspection du referentiel pour l&amp;#39;annee specifiee Consiste a verifier l&amp;#39;integrite...">odb_introspection</a>(<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>);
+<a name="l00846"></a>00846 
+<a name="l00847"></a>00847       debut_cadre_relief(<span class="stringliteral">""</span>, <span class="keyword">false</span>, <span class="stringliteral">""</span>, <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a> = _T(<span class="stringliteral">"R&amp;eacute;partition des candidats $annee"</span>));
+<a name="l00848"></a>00848          <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>=<span class="stringliteral">"SELECT count(*) FROM odb_candidats can WHERE annee=$annee"</span>;
+<a name="l00849"></a>00849          <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00850"></a>00850          $row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00851"></a>00851          $nbCandidats=(int)$row[0];
+<a name="l00852"></a>00852          <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>=<span class="stringliteral">"R&amp;eacute;partition g&amp;eacute;ographique B&amp;eacute;nin ($nbCandidats candidats)"</span>;
+<a name="l00853"></a>00853          $tab[]=<span class="stringliteral">"&lt;TH&gt;D&amp;eacute;partement&lt;/TH&gt;&lt;TH&gt;&lt;small&gt;Nombre de candidats&lt;br/&gt;&amp;agrave; r&amp;eacute;partir&lt;/small&gt;&lt;/TH&gt;&lt;TH&gt;%&lt;/TH&gt;"</span>;
+<a name="l00854"></a>00854          <span class="keywordflow">foreach</span>($tab_referentiel['departement'] as $idDept =&gt; $dept) {
+<a name="l00855"></a>00855             <span class="keywordflow">if</span>(is_numeric($idDept)) {
+<a name="l00856"></a>00856                <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>=<span class="stringliteral">"SELECT count(*) FROM odb_candidats can WHERE departement=$idDept AND annee=$annee and id_table='0'"</span>;
+<a name="l00857"></a>00857                <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00858"></a>00858                $row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00859"></a>00859                $nb_rows=(int)$row[0];
+<a name="l00860"></a>00860 
+<a name="l00861"></a>00861                <span class="keywordflow">if</span>($nb_rows&gt;0) <a class="code" href="resultats__ajournes__par__centre_8php.html#110fc80fcb224fbae884b1a3742c4924">$lien</a>=<span class="stringliteral">"&lt;b&gt;&lt;A HREF='"</span>.generer_url_ecrire('odb_repartition').<span class="stringliteral">"&amp;step2=isDept&amp;idDept=$idDept&amp;nbCandidats=$nb_rows&amp;annee=$annee'&gt;$dept&lt;/A&gt;&lt;/b&gt;"</span>;
+<a name="l00862"></a>00862                <span class="keywordflow">else</span> <a class="code" href="resultats__ajournes__par__centre_8php.html#110fc80fcb224fbae884b1a3742c4924">$lien</a>=$dept;
+<a name="l00863"></a>00863                <span class="keywordflow">if</span>($nb_rows&gt;0) {
+<a name="l00864"></a>00864                   $nb_rows_txt=<span class="stringliteral">"&lt;A HREF=\"javascript:document.forms['form_repartition'].nombre.value=$nb_rows;"</span>
+<a name="l00865"></a>00865                      . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.disabled=false;"</span>
+<a name="l00866"></a>00866                      . <span class="stringliteral">"document.forms['form_repartition'].ok_generique.disabled=true;"</span>
+<a name="l00867"></a>00867                      . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.value='G&amp;eacute;n&amp;eacute;rer ces $nb_rows num&amp;eacute;ros de table';"</span>
+<a name="l00868"></a>00868                      . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.focus();"</span>
+<a name="l00869"></a>00869                      . <span class="stringliteral">"document.forms['form_repartition'].repart_serie.value='0';"</span>
+<a name="l00870"></a>00870                      . <span class="stringliteral">"document.forms['form_repartition'].repart_departement.value=$idDept;"</span>
+<a name="l00871"></a>00871                      . <span class="stringliteral">"document.forms['form_repartition'].nombre.select();\""</span>
+<a name="l00872"></a>00872                      .<span class="stringliteral">" TITLE='Cliquez pour acc&amp;eacute;der &amp;agrave; leur r&amp;eacute;partition'&gt;$nb_rows&lt;/A&gt;"</span>;
+<a name="l00873"></a>00873                                                 $tab[]=<span class="stringliteral">"&lt;TD&gt;$lien&lt;/TD&gt;"</span>
+<a name="l00874"></a>00874                                                                 .<span class="stringliteral">"&lt;TD&gt;$nb_rows_txt&lt;/TD&gt;"</span>
+<a name="l00875"></a>00875                                                                 .<span class="stringliteral">"&lt;TD&gt;"</span>.<a class="code" href="inc-html_8php.html#5646c2c37376d593c6d70fab7aa6699c" title="affiche un taux sous forme d&amp;#39;image">afficheTaux</a>($nb_rows/$nbCandidats,4 ).<span class="stringliteral">"&lt;small&gt;("</span>.round(100*$nb_rows/$nbCandidats,2).<span class="stringliteral">"%)&lt;/small&gt;&lt;/TD&gt;\n"</span>
+<a name="l00876"></a>00876                                                                 ;
+<a name="l00877"></a>00877                                                 }
+<a name="l00878"></a>00878                <span class="keywordflow">else</span> $nb_rows_txt=$nb_rows;
+<a name="l00879"></a>00879             }
+<a name="l00880"></a>00880          }
+<a name="l00881"></a>00881          echo table_a_la_spip(<a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>,$tab);
+<a name="l00882"></a>00882          echo <span class="stringliteral">"&lt;hr size=1&gt;\n"</span>;
+<a name="l00883"></a>00883          unset($tab);
+<a name="l00884"></a>00884          <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>=<span class="stringliteral">"R&amp;eacute;partition par s&amp;eacute;rie B&amp;eacute;nin ($nbCandidats candidats)"</span>;
+<a name="l00885"></a>00885          $tab[]=<span class="stringliteral">"&lt;TH&gt;S&amp;eacute;rie&lt;/TH&gt;&lt;TH&gt;&lt;small&gt;Nombre de candidats&lt;br/&gt;&amp;agrave; r&amp;eacute;partir&lt;/small&gt;&lt;/TH&gt;&lt;TH&gt;%&lt;/TH&gt;"</span>;
+<a name="l00886"></a>00886          <span class="keywordflow">foreach</span>($tab_referentiel['serie'] as $idSerie =&gt; $serie) {
+<a name="l00887"></a>00887             <span class="keywordflow">if</span>(is_numeric($idSerie)) {
+<a name="l00888"></a>00888                <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>=<span class="stringliteral">"SELECT count(*) FROM odb_candidats can WHERE serie=$idSerie AND annee=$annee and id_table='0'"</span>;
+<a name="l00889"></a>00889                <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00890"></a>00890                $row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00891"></a>00891                $nb_rows=(int)$row[0];
+<a name="l00892"></a>00892 
+<a name="l00893"></a>00893                <span class="keywordflow">if</span>($nb_rows&gt;0)
+<a name="l00894"></a>00894                   <a class="code" href="resultats__ajournes__par__centre_8php.html#110fc80fcb224fbae884b1a3742c4924">$lien</a>=<span class="stringliteral">"&lt;b&gt;&lt;A HREF='"</span>.generer_url_ecrire('odb_repartition').<span class="stringliteral">"&amp;step2=isSerie&amp;idSerie=$idSerie&amp;nbCandidats=$nb_rows&amp;annee=$annee'&gt;$serie&lt;/A&gt;&lt;/b&gt;"</span>;
+<a name="l00895"></a>00895                <span class="keywordflow">else</span> <a class="code" href="resultats__ajournes__par__centre_8php.html#110fc80fcb224fbae884b1a3742c4924">$lien</a>=$serie;
+<a name="l00896"></a>00896                <span class="keywordflow">if</span>($nb_rows&gt;0) {
+<a name="l00897"></a>00897                   $nb_rows_txt=<span class="stringliteral">"&lt;A HREF=\"javascript:document.forms['form_repartition'].nombre.value=$nb_rows;"</span>
+<a name="l00898"></a>00898                      . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.disabled=false;"</span>
+<a name="l00899"></a>00899                      . <span class="stringliteral">"document.forms['form_repartition'].ok_generique.disabled=true;"</span>
+<a name="l00900"></a>00900                      . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.value='G&amp;eacute;n&amp;eacute;rer ces $nb_rows num&amp;eacute;ros de table';"</span>
+<a name="l00901"></a>00901                      . <span class="stringliteral">"document.forms['form_repartition'].ok_particulier.focus();"</span>
+<a name="l00902"></a>00902                      . <span class="stringliteral">"document.forms['form_repartition'].repart_serie.value=$idSerie;"</span>
+<a name="l00903"></a>00903                      . <span class="stringliteral">"document.forms['form_repartition'].repart_departement.value=0;"</span>
+<a name="l00904"></a>00904                      . <span class="stringliteral">"document.forms['form_repartition'].nombre.select();\""</span>
+<a name="l00905"></a>00905                      .<span class="stringliteral">" TITLE='Cliquez pour acc&amp;eacute;der &amp;agrave; leur r&amp;eacute;partition'&gt;$nb_rows&lt;/A&gt;"</span>;
+<a name="l00906"></a>00906                                                 $tab[]=<span class="stringliteral">"&lt;TD&gt;$lien&lt;/TD&gt;"</span>
+<a name="l00907"></a>00907                                                                 .<span class="stringliteral">"&lt;TD&gt;$nb_rows_txt&lt;/TD&gt;"</span>
+<a name="l00908"></a>00908                                                                 .<span class="stringliteral">"&lt;TD&gt;"</span>.<a class="code" href="inc-html_8php.html#5646c2c37376d593c6d70fab7aa6699c" title="affiche un taux sous forme d&amp;#39;image">afficheTaux</a>($nb_rows/$nbCandidats,4 ).<span class="stringliteral">"&lt;small&gt;("</span>.round(100*$nb_rows/$nbCandidats,2).<span class="stringliteral">"%)&lt;/small&gt;&lt;/TD&gt;\n"</span>
+<a name="l00909"></a>00909                                                                 ;
+<a name="l00910"></a>00910                                         }
+<a name="l00911"></a>00911                <span class="keywordflow">else</span> $nb_rows_txt=$nb_rows;
+<a name="l00912"></a>00912             }
+<a name="l00913"></a>00913          }
+<a name="l00914"></a>00914          echo table_a_la_spip(<a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a>,$tab);
+<a name="l00915"></a>00915 
+<a name="l00916"></a>00916       fin_cadre_relief();
+<a name="l00917"></a>00917    $inputEtablissement=<span class="stringliteral">"&lt;SELECT NAME='repart_etablissement' class='forml'&gt;"</span>.formOptionsRefInSelect('etablissements',$repart_etablissement,'&amp;Eacute;tablissement').<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00918"></a>00918 }
+<a name="l00919"></a>00919 $nombre=isset($_REQUEST['nombre'])?$_REQUEST['nombre']:0;
+<a name="l00920"></a>00920 $inputLv1=<span class="stringliteral">"&lt;SELECT NAME='repart_lv1' class='fondo'&gt;"</span>.formOptionsRefInSelect('lv',$repart_lv1,'LV1').<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00921"></a>00921 $inputLv2=<span class="stringliteral">"&lt;SELECT NAME='repart_lv2' class='fondo'&gt;"</span>.formOptionsRefInSelect('lv',$repart_lv2,'LV2').<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00922"></a>00922 $inputEf1=<span class="stringliteral">"&lt;SELECT NAME='repart_ef1' class='fondo'&gt;"</span>.formOptionsRefInSelect('ef',$repart_ef1,'EF1').<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00923"></a>00923 $inputEf2=<span class="stringliteral">"&lt;SELECT NAME='repart_ef2' class='fondo'&gt;"</span>.formOptionsRefInSelect('ef',$repart_ef2,'EF2').<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00924"></a>00924 $inputEps=<span class="stringliteral">"&lt;SELECT NAME='repart_eps' class='fondo'&gt;"</span>.formOptionsRefInSelect('eps',$repart_eps,'EPS').<span class="stringliteral">"&lt;/SELECT&gt;\n"</span>;
+<a name="l00925"></a>00925 echo <span class="stringliteral">"&lt;br/&gt;\n&lt;!-- ================== Formulaire repartition ================= --&gt;\n"</span>;
+<a name="l00926"></a>00926 debut_boite_info();
+<a name="l00927"></a>00927 
+<a name="l00928"></a>00928 echo <span class="stringliteral">"&lt;form name='form_repartition' method='POST' action='"</span>.generer_url_ecrire('odb_repartition').<span class="stringliteral">"' class='forml spip_xx-small'&gt;\n"</span>;
+<a name="l00929"></a>00929 echo <span class="stringliteral">"&lt;FIELDSET&gt;\n"</span>;
+<a name="l00930"></a>00930 echo <span class="stringliteral">"&lt;LEGEND&gt;Cas particuliers&lt;/LEGEND&gt;\n"</span>;
+<a name="l00931"></a>00931 echo <span class="stringliteral">"Disposer...\n"</span>
+<a name="l00932"></a>00932    . <span class="stringliteral">"&lt;ul&gt;\n&lt;li&gt;&lt;INPUT name='nombre' class='fondo' size=6 maxlength=6 value='0' onKeyUp=\"if(this.value&gt;0 || this.value=='*') {document.forms['form_repartition'].ok_generique.disabled=true;document.forms['form_repartition'].ok_particulier.disabled=false;document.forms['form_repartition'].ok_particulier.value='G&amp;eacute;n&amp;eacute;rer ces '+this.value+' num&amp;eacute;ros de table';} else {document.forms['form_repartition'].ok_generique.disabled=false;document.forms['form_repartition'].ok_particulier.disabled=true;document.forms['form_repartition'].ok_particulier.value='Choisissez le nombre de candidats &amp;agrave; r&amp;eacute;partir';}\"&gt; candidats (tapez &lt;b&gt;*&lt;/b&gt; pour tous ceux qui correspondent aux crit&amp;egrave;res ci-dessous)&lt;/li&gt;\n&lt;/ul&gt;\n"</span>
+<a name="l00933"></a>00933    . <span class="stringliteral">"&lt;FIELDSET&gt;\n&lt;LEGEND&gt;Choix recommand&amp;eacute;s&lt;/LEGEND&gt;\n"</span>
+<a name="l00934"></a>00934    . <span class="stringliteral">"&lt;table border=0&gt;\n"</span>
+<a name="l00935"></a>00935    . <span class="stringliteral">"&lt;tr&gt;&lt;th&gt;issus de série&lt;/th&gt;&lt;th&gt;$inputSerie&lt;/th&gt;&lt;/tr&gt;\n"</span>
+<a name="l00936"></a>00936    . <span class="stringliteral">"&lt;tr&gt;&lt;th&gt;et du d&amp;eacute;partement&lt;/th&gt;&lt;th&gt;$inputDepartement&lt;/th&gt;&lt;/tr&gt;\n"</span>
+<a name="l00937"></a>00937    . <span class="stringliteral">"&lt;tr&gt;&lt;th&gt;et de la ville&lt;/th&gt;&lt;th&gt;$inputVille&lt;/th&gt;&lt;/tr&gt;\n"</span>
+<a name="l00938"></a>00938    . <span class="stringliteral">"&lt;tr&gt;&lt;th&gt;et de l'&amp;eacute;tablissement&lt;/th&gt;&lt;th&gt;$inputEtablissement&lt;/th&gt;&lt;/tr&gt;\n"</span>
+<a name="l00939"></a>00939    . <span class="stringliteral">"&lt;/table&gt;\n&lt;/FIELDSET&gt;\n"</span>
+<a name="l00940"></a>00940    . <span class="stringliteral">"&lt;FIELDSET&gt;\n&lt;LEGEND&gt;Autres choix&lt;/LEGEND&gt;\n"</span>
+<a name="l00941"></a>00941    . <span class="stringliteral">"&lt;table border=0 width='100%'&gt;\n"</span>
+<a name="l00942"></a>00942    . <span class="stringliteral">"&lt;tr&gt;&lt;td&gt;Langues&lt;/td&gt;&lt;td&gt;$inputLv1 $inputLv2&lt;/td&gt;&lt;/tr&gt;\n"</span>
+<a name="l00943"></a>00943    . <span class="stringliteral">"&lt;tr&gt;&lt;td&gt;&amp;Eacute;preuves facultatives&lt;/td&gt;&lt;td&gt;$inputEf1 $inputEf2&lt;/td&gt;&lt;/tr&gt;\n"</span>
+<a name="l00944"></a>00944    . <span class="stringliteral">"&lt;tr&gt;&lt;td&gt;Sport&lt;/td&gt;&lt;td&gt;$inputEps&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;\n"</span>
+<a name="l00945"></a>00945    . <span class="stringliteral">"&lt;/FIELDSET&gt;\n"</span>
+<a name="l00946"></a>00946    . <span class="stringliteral">"&lt;table border=0&gt;&lt;tr&gt;&lt;th&gt;...dans le centre&lt;/th&gt;&lt;th&gt;$inputCentre&lt;/th&gt;&lt;/tr&gt;&lt;/table&gt;\n"</span>
+<a name="l00947"></a>00947    ;
+<a name="l00948"></a>00948 echo <span class="stringliteral">"&lt;INPUT TYPE=SUBMIT name='ok_particulier' CLASS='fondo' VALUE='Veuillez choisir un nombre de candidats &amp;agrave; r&amp;eacute;partir' disabled"</span>
+<a name="l00949"></a>00949    . <span class="stringliteral">" onclick=\"if(document.forms['form_repartition'].envoi_centre.value=='0') {alert('Veuillez choisir le centre dans lequel vous souhaitez\\ndisposer ces candidats');document.forms['form_repartition'].envoi_centre.focus();return false;}\"/&gt;\n"</span>;
+<a name="l00950"></a>00950 echo <span class="stringliteral">"&lt;/FIELDSET&gt;&lt;/FIELDSET&gt;&lt;br/&gt;\n"</span>;
+<a name="l00951"></a>00951 echo <span class="stringliteral">"&lt;FIELDSET&gt;\n"</span>;
+<a name="l00952"></a>00952 echo <span class="stringliteral">"&lt;LEGEND&gt;Cas g&amp;eacute;n&amp;eacute;riques&lt;/LEGEND&gt;\n"</span>;
+<a name="l00953"></a>00953 echo <span class="stringliteral">"Si vous avez trait&amp;eacute; tous les cas particuliers, vous pouvez :&lt;br/&gt;\n"</span>;
+<a name="l00954"></a>00954 <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>=<span class="stringliteral">"select count(*) from odb_candidats where annee=$annee and id_table='0'"</span>;
+<a name="l00955"></a>00955 <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00956"></a>00956 $row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00957"></a>00957 $nb_restant=$row[0];
+<a name="l00958"></a>00958 echo <span class="stringliteral">"&lt;INPUT TYPE=SUBMIT name='ok_generique' CLASS='fondo' VALUE='G&amp;eacute;n&amp;eacute;rer les $nb_restant num&amp;eacute;ros de table restant' onclick=\"return confirm('Vous souhaitez terminer le processus.\\nEtes-vous bien certain d\'avoir fini la disposition de tous les cas particuliers ?\\n - Series E, F1-F4\\n - Langues mortes\\n - etc')\"&gt;\n"</span>;
+<a name="l00959"></a>00959 echo <span class="stringliteral">"&lt;/FIELDSET&gt;\n"</span>;
+<a name="l00960"></a>00960 echo <span class="stringliteral">"&lt;INPUT TYPE='hidden' NAME='step2' VALUE='$step2'&gt;\n"</span>;
+<a name="l00961"></a>00961 echo <span class="stringliteral">"&lt;INPUT TYPE='hidden' NAME='step3' VALUE='$step3'&gt;\n"</span>;
+<a name="l00962"></a>00962 echo <span class="stringliteral">"&lt;INPUT TYPE='hidden' NAME='idDept' VALUE='$idDept'&gt;\n"</span>;
+<a name="l00963"></a>00963 echo <span class="stringliteral">"&lt;INPUT TYPE='hidden' NAME='idSerie' VALUE='$idSerie'&gt;\n"</span>;
+<a name="l00964"></a>00964 echo <span class="stringliteral">"&lt;INPUT TYPE='hidden' NAME='idEtablissement' VALUE='$idEtablissement'&gt;\n"</span>;
+<a name="l00965"></a>00965 echo <span class="stringliteral">"&lt;INPUT TYPE='hidden' NAME='nbCandidats' VALUE='$nbCandidats'&gt;\n"</span>;
+<a name="l00966"></a>00966 echo <span class="stringliteral">"&lt;INPUT TYPE='hidden' NAME='annee' VALUE='$annee'&gt;\n"</span>;
+<a name="l00967"></a>00967 echo <span class="stringliteral">"&lt;INPUT TYPE='hidden' NAME='from_ville' VALUE='$from_ville'&gt;\n"</span>;
+<a name="l00968"></a>00968 echo <span class="stringliteral">"&lt;INPUT TYPE='hidden' NAME='from_serie' VALUE='$from_serie'&gt;\n"</span>;
+<a name="l00969"></a>00969 echo <span class="stringliteral">"&lt;INPUT TYPE='hidden' NAME='from_etablissement' VALUE='$from_etablissement'&gt;\n"</span>;
+<a name="l00970"></a>00970 echo <span class="stringliteral">"&lt;INPUT TYPE='hidden' NAME='envoi_nombre' VALUE='$envoi_nombre'&gt;\n"</span>;
+<a name="l00971"></a>00971 echo <span class="stringliteral">"&lt;INPUT TYPE='hidden' NAME='etablissement_txt' VALUE='$etablissement_txt'&gt;\n"</span>;
+<a name="l00972"></a>00972 echo <span class="stringliteral">"&lt;/form&gt;\n"</span>;
+<a name="l00973"></a>00973 fin_boite_info();
+<a name="l00974"></a>00974 fin_cadre_relief();
+<a name="l00975"></a>00975 fin_page();
+<a name="l00976"></a>00976 exit;
+<a name="l00977"></a>00977 }
+<a name="l00978"></a>00978 ?&gt;
+<a name="l00979"></a>00979 
+<a name="l00980"></a>00980 
+</pre></div><hr size="1"><address style="text-align: right;"><small>Généré le Mon Mar 17 22:53:00 2008 pour Siou par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.3 </small></address>
+</body>
+</html>

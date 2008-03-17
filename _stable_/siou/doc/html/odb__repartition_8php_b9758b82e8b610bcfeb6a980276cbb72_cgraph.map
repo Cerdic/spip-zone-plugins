@@ -1,0 +1,29 @@
+<area shape="rect" href="$inc&#45;html_8php.html#5646c2c37376d593c6d70fab7aa6699c" title="affiche un taux sous forme d&#39;image" alt="" coords="575,400,668,427">
+<area shape="rect" href="$odb__repartition_8avecGeneriques_8php.html#ddea246a8e91ba341098ee91e0dfa1c2" title="Affiche la capacite de chaque centre." alt="" coords="843,96,968,123">
+<area shape="rect" href="$inc&#45;odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql." alt="" coords="1049,552,1137,579">
+<area shape="rect" href="$inc&#45;base_8php.html#fb37de5c3982a219cab7a817311034a5" title="idEtablissement" alt="" coords="819,197,992,224">
+<area shape="rect" href="$odb__notes_2exec_2inc&#45;bdd_8php.html#000899dd9da7cf04c35abc6e440d6ed3" title="Recupere le nombre de candidats selon divers criteres." alt="" coords="843,248,968,275">
+<area shape="rect" href="$inc&#45;base_8php.html#e1a122fdeec0454b3ac53c3adc2a6b0b" title="Recupere le nombre de candidats NON REPARTIS (sans id_table) pour un departement..." alt="" coords="812,299,999,325">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#8da6b5d71b8b85a4443092e825841479" title="getReferentiel" alt="" coords="265,349,377,376">
+<area shape="rect" href="$odb__repartition_8php.html#9dba294120f6b7ce91b9fec569ad7ef6" title="Ligne du formulaire de repartition." alt="" coords="239,501,404,528">
+<area shape="rect" href="$odb__repartition_8php.html#bdfc25176fe573ce43719376b047c528" title="Ligne &quot;Total ville&quot; du formulaire de repartition." alt="" coords="212,451,431,477">
+<area shape="rect" href="$inc&#45;odb_8php.html#bbbb7d83cb4d809eae2b31b2a3b1f556" title="Interdit l&#39;acces a un utilisateur qui n&#39;est pas dans le tableau $tOK." alt="" coords="280,603,363,629">
+<area shape="rect" href="$inc&#45;html_8php.html#5f91efa37c4c6e04e1e2792cc0c37600" title="Affiche une table html." alt="" coords="561,907,681,933">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#8a347b23cd689ac91a0c11390ae5a7e4" title="Introspection du referentiel pour l&#39;annee specifiee Consiste a verifier l&#39;integrite..." alt="" coords="255,729,388,756">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#ca269ae75f013c9730f590443481c7f9" title="odb_raccourcis" alt="" coords="264,831,379,857">
+<area shape="rect" href="$odb__repartition_2exec_2inc&#45;traitements_8php.html#010c580ae6309b4804db56b0ee07e5f8" title="Répartir les candidats." alt="" coords="255,1033,388,1060">
+<area shape="rect" href="$inc&#45;base_8php.html#e8fb167175d57674d351cad02b5d4036" title="getIdVilleEtablissement" alt="" coords="820,552,991,579">
+<area shape="rect" href="$inc&#45;base_8php.html#d60db3aceb3728f5de5169c662d247aa" title="getLibelleVille" alt="" coords="852,501,959,528">
+<area shape="rect" href="$inc&#45;html_8php.html#a99d47bed9e80456aaed4dc43d2fc0cc" title="rend une chaine compatible url&#45;rewriting" alt="" coords="556,451,687,477">
+<area shape="rect" href="$inc&#45;html_8php.html#3dae9c9943cf37bd111dd3552a061650" title="Nettoie une chaine de caracteres." alt="" coords="859,856,952,883">
+<area shape="rect" href="$inc&#45;odb_8php.html#147d380870b3247e67b18fd9d7adf910" title="Determine le type d&#39;utilisateur." alt="" coords="547,653,696,680">
+<area shape="rect" href="$inc&#45;html_8php.html#5b029790bb0355c3329199b4a8cdd8b8" title="Supprime les accents et enleve les espaces inutiles." alt="" coords="840,907,971,933">
+<area shape="rect" href="$inc&#45;html_8php.html#af111db152a79e88015b3a80345d0cdd" title="affiche une boite de message" alt="" coords="560,755,683,781">
+<area shape="rect" href="$inc&#45;regles__gestion_8php.html#abf23b66cd362adaa508de5bfb22706a" title="l&#39;utilisateur est il admin ?" alt="" coords="585,805,657,832">
+<area shape="rect" href="$inc&#45;html_8php.html#26ce7f961b7c017f444305029440e0d3" title="Ajoute du code javascript." alt="" coords="569,704,673,731">
+<area shape="rect" href="$inc&#45;base_8php.html#ab9ba183925f5b59dcc76998488cb5ae" title="Recupere le tableau des candidats a repartir." alt="" coords="821,1160,989,1187">
+<area shape="rect" href="$inc&#45;base_8php.html#3df289cb98e86548dd5a2ba1d612844f" title="Recupere le tableau de capacite d&#39;accueil d&#39;un centre de composition." alt="" coords="856,1211,955,1237">
+<area shape="rect" href="$inc&#45;base_8php.html#9655e52be1c8d2424b01b145d69bbe3d" title="Recupere le plus grand id_table disponible pour le centre de composition." alt="" coords="849,1109,961,1136">
+<area shape="rect" href="$inc&#45;base_8php.html#e94bb1db4a3bc1bc687818e3eec738b3" title="Recupere le rang (numero de salle et de table) d&#39;un candidat dans une salle." alt="" coords="523,1059,720,1085">
+<area shape="rect" href="$inc&#45;base_8php.html#eafd2085176b2d14d9d1ccb06045c1cc" title="Cree le numero de table du candidat id_saisie." alt="" coords="565,957,677,984">
+<area shape="rect" href="$inc&#45;base_8php.html#4d8032ee329b76b0283193796ff51c13" title="Synchronise les id_table de la table odb_repartition vers la table odb_candidats..." alt="" coords="481,1008,761,1035">

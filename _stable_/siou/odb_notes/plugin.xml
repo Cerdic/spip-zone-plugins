@@ -1,0 +1,15 @@
+<plugin>
+   <nom>ODB : Notes</nom>
+   <auteur>Cedric PROTIERE - AUF - Juin 2007</auteur>
+   <version>0.1</version>
+   <etat>dev</etat>
+   <description>Saisie des notes du bac</description>
+   <lien>http://www.officedubacbenin.bj</lien> <!-- URI de documentation -->
+   <icon>img_pack/logo_odb_150.png</icon>
+   <prefix>odb_notes</prefix>
+   <pipeline>
+      <nom>ajouter_boutons</nom>
+      <action>ajouterBoutons</action>
+      <inclure>inc-odb_notes.php</inclure>
+   </pipeline>
+</plugin>

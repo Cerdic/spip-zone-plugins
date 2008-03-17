@@ -1,0 +1,15 @@
+<plugin>
+   <nom>ODB : Export CSV de requete SQL</nom>
+   <auteur><ul><li>G. VLAVONOU</li><li>Y. EDAHE</li><li>C. PROTIERE</li></ul>ODB - Janvier 2008</auteur>
+   <version>0.2</version>
+   <etat>test</etat>
+   <description>Permet l'export CSV d'une requete SQL</description>
+   <lien>http://www.officedubacbenin.bj</lien> <!-- URI de documentation -->
+   <icon>img_pack/logo_odb_150.png</icon>
+   <prefix>odb_requete</prefix>
+   <pipeline>
+      <nom>ajouter_boutons</nom>
+      <action>ajouterBoutons</action>
+      <inclure>inc-odb_requete.php</inclure>
+   </pipeline>
+</plugin>

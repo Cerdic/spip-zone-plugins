@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Siou:  Fichier source de odb_commun/inc-image_manip.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Généré par Doxygen 1.5.3 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Page&nbsp;principale</span></a></li>
+    <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+    <li><a href="dirs.html"><span>Répertoires</span></a></li>
+    <li>
+      <form action="search.php" method="get">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td><label>&nbsp;Rechercher&nbsp;</label></td>
+            <td><input type="text" name="query" value="" size="20" accesskey="s"/></td>
+          </tr>
+        </table>
+      </form>
+    </li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_d85a68ddeac050d85549308ca402191f.html">odb_commun</a></div>
+<h1>inc-image_manip.php</h1><a href="inc-image__manip_8php.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 <span class="comment">// Creates a transparent image rather than the default black image</span>
+<a name="l00004"></a><a class="code" href="inc-image__manip_8php.html#004002b5e06164228579ba8599cded45">00004</a> function <a class="code" href="inc-image__manip_8php.html#004002b5e06164228579ba8599cded45">imageCreateTransparent</a>(<a class="code" href="inc-image_8php.html#f3a16c5f0dd7a74cf9acf6a49fff73a7">$x</a>, <a class="code" href="inc-image_8php.html#77b973d137fb33212e018b042df6e3e7">$y</a>) {
+<a name="l00005"></a>00005     $imageOut = imagecreate(<a class="code" href="inc-image_8php.html#f3a16c5f0dd7a74cf9acf6a49fff73a7">$x</a>, <a class="code" href="inc-image_8php.html#77b973d137fb33212e018b042df6e3e7">$y</a>);
+<a name="l00006"></a>00006     $colourBlack = imagecolorallocate($imageOut, 0, 0, 0);
+<a name="l00007"></a>00007     imagecolortransparent($imageOut, $colourBlack);
+<a name="l00008"></a>00008     <span class="keywordflow">return</span> $imageOut;
+<a name="l00009"></a>00009 }
+<a name="l00010"></a>00010  
+<a name="l00011"></a>00011 ?&gt;
+</pre></div><hr size="1"><address style="text-align: right;"><small>Généré le Mon Mar 17 22:52:59 2008 pour Siou par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.3 </small></address>
+</body>
+</html>

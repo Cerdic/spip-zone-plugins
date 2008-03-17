@@ -1,0 +1,48 @@
+<area shape="rect" href="$odb__notes_2exec_2inc&#45;traitements_8php.html#25aee0267595ba3fbc7413ba12e14b2e" title="Affiche l&#39;historique du candidat passé en param." alt="" coords="455,1952,591,1979">
+<area shape="rect" href="$odb__notes_8php.html#477841e21bacf8c8b922a082b668fb2d" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_notes" alt="" coords="728,1800,853,1827">
+<area shape="rect" href="$odb__notes_2exec_2inc&#45;traitements_8php.html#99a781952cafb10b8cb8a0adda4baa6d" title="Permet aux operateurs de saisie d&#39;acceder aux listes de resultat en fonction..." alt="" coords="449,1699,596,1725">
+<area shape="rect" href="$odb__notes_2exec_2inc&#45;traitements_8php.html#33a267718e90ba67c7a694d64441663b" title="Affiche les notes d&#39;un candidat." alt="" coords="468,1597,577,1624">
+<area shape="rect" href="$odb__repartition_8avecGeneriques_8php.html#ddea246a8e91ba341098ee91e0dfa1c2" title="Affiche la capacite de chaque centre." alt="" coords="728,508,853,535">
+<area shape="rect" href="$odb__repartition_8avecGeneriques_8php.html#b9758b82e8b610bcfeb6a980276cbb72" title="Repartition des candidats ODB." alt="" coords="919,736,1073,763">
+<area shape="rect" href="$odb__param_8php.html#21e2b776a90c950c642402aec61c3928" title="exec_odb_param" alt="" coords="457,1344,588,1371">
+<area shape="rect" href="$odb__ref_8php.html#f0b6f12f726293fcfdb8dd144b4156e1" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_ref" alt="" coords="737,989,844,1016">
+<area shape="rect" href="$odb__requete_8php.html#e6910fd90b6c90c11ddff04eb85023ee" title="exec_odb_requete" alt="" coords="169,432,308,459">
+<area shape="rect" href="$odb__saisie_8php.html#67a2630322ffbcb7fb0e22fe529cff6f" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_saisie..." alt="" coords="935,1141,1057,1168">
+<area shape="rect" href="$odb__statistiques_8php.html#5704db106a2f57c066729702057fbb75" title="exec_odb_statistiques" alt="" coords="441,989,604,1016">
+<area shape="rect" href="$odb__stats__siou_8php.html#0606558a56949a7488641f7e59c887ab" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_stats_siou..." alt="" coords="447,1800,599,1827">
+<area shape="rect" href="$odb__suivi_8php.html#8f8bc33065238b34963709026e9adde6" title="exec_odb_suivi" alt="" coords="180,635,297,661">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#07bef630f993c827650782c7a4588b21" title="cree une liste SELECT a partir des resultats d&#39;une requete SQL" alt="" coords="456,888,589,915">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#c6883d9c334e278e5a3ca040f8b16cc2" title="cree une liste SELECT a partir des resultats d&#39;une requete SQL pour un referentiel..." alt="" coords="713,736,868,763">
+<area shape="rect" href="$inc&#45;base_8php.html#ab9ba183925f5b59dcc76998488cb5ae" title="Recupere le tableau des candidats a repartir." alt="" coords="439,128,607,155">
+<area shape="rect" href="$inc&#45;base_8php.html#3df289cb98e86548dd5a2ba1d612844f" title="Recupere le tableau de capacite d&#39;accueil d&#39;un centre de composition." alt="" coords="473,179,572,205">
+<area shape="rect" href="$inc&#45;base_8php.html#9655e52be1c8d2424b01b145d69bbe3d" title="Recupere le plus grand id_table disponible pour le centre de composition." alt="" coords="183,280,295,307">
+<area shape="rect" href="$inc&#45;base_8php.html#e94bb1db4a3bc1bc687818e3eec738b3" title="Recupere le rang (numero de salle et de table) d&#39;un candidat dans une salle." alt="" coords="424,229,621,256">
+<area shape="rect" href="$inc&#45;base_8php.html#087d0df256bb4583fa369b3d1d518db5" title="Recupere le nombre de candidats dans chaque serie pour une salle donnee." alt="" coords="449,331,596,357">
+<area shape="rect" href="$inc&#45;base_8php.html#e8fb167175d57674d351cad02b5d4036" title="getIdVilleEtablissement" alt="" coords="153,736,324,763">
+<area shape="rect" href="$odb__notes_2exec_2inc&#45;bdd_8php.html#2bbd012fce7c005628269134b0046665" title="Recupere un tableau de jury." alt="" coords="201,1892,276,1919">
+<area shape="rect" href="$inc&#45;base_8php.html#fb37de5c3982a219cab7a817311034a5" title="idEtablissement" alt="" coords="152,584,325,611">
+<area shape="rect" href="$inc&#45;base_8php.html#d60db3aceb3728f5de5169c662d247aa" title="getLibelleVille" alt="" coords="185,685,292,712">
+<area shape="rect" href="$odb__notes_2exec_2inc&#45;bdd_8php.html#000899dd9da7cf04c35abc6e440d6ed3" title="Recupere le nombre de candidats selon divers criteres." alt="" coords="176,1445,301,1472">
+<area shape="rect" href="$inc&#45;base_8php.html#e1a122fdeec0454b3ac53c3adc2a6b0b" title="Recupere le nombre de candidats NON REPARTIS (sans id_table) pour un departement..." alt="" coords="145,533,332,560">
+<area shape="rect" href="$odb__notes_2exec_2inc&#45;bdd_8php.html#2dde7f62ae89cb87ddcab5f9aaf737aa" title="getNbCandidatsNotes" alt="" coords="156,2104,321,2131">
+<area shape="rect" href="$inc&#45;odb_8php.html#db56fd5dafef546c255b5c2668b3add6" title="getNomComplet" alt="" coords="173,1597,304,1624">
+<area shape="rect" href="$inc&#45;odb_8php.html#43f6ce2d81c74dfbf4c8ea6c54cf321b" title="Recupere les parametres ODB." alt="" coords="164,1547,313,1573">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#8da6b5d71b8b85a4443092e825841479" title="getReferentiel" alt="" coords="183,1192,295,1219">
+<area shape="rect" href="$odb__notes_2exec_2inc&#45;bdd_8php.html#68235e15b2e0c91db7f64dbed807d0ee" title="Recupere le tableau jury=&gt;serie de l&#39;annee." alt="" coords="197,1829,280,1856">
+<area shape="rect" href="$inc&#45;base_8php.html#e650b2b60d956f431fe360f4c8f9190d" title="Recupere le nombre de candidats dans chaque serie pour un centre donne." alt="" coords="443,381,603,408">
+<area shape="rect" href="$odb__notes_2exec_2inc&#45;bdd_8php.html#6c6066c6c35429378e06930dd848253c" title="Recupere le tableau des series (idSerie=&gt;serie) d&#39;un jury." alt="" coords="168,2053,309,2080">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#8a347b23cd689ac91a0c11390ae5a7e4" title="Introspection du referentiel pour l&#39;annee specifiee Consiste a verifier l&#39;integrite..." alt="" coords="172,888,305,915">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#38c3065b99469bad788c627a7b70360b" title="Met les decisions a jour." alt="" coords="169,1699,308,1725">
+<area shape="rect" href="$inc&#45;base_8php.html#eafd2085176b2d14d9d1ccb06045c1cc" title="Cree le numero de table du candidat id_saisie." alt="" coords="467,27,579,53">
+<area shape="rect" href="$inc&#45;base_8php.html#4d8032ee329b76b0283193796ff51c13" title="Synchronise les id_table de la table odb_repartition vers la table odb_candidats..." alt="" coords="383,77,663,104">
+<area shape="rect" href="$odb__repartition_2exec_2inc&#45;traitements_8php.html#010c580ae6309b4804db56b0ee07e5f8" title="Répartir les candidats." alt="" coords="724,179,857,205">
+<area shape="rect" href="$odb__repartition_8php.html#ddea246a8e91ba341098ee91e0dfa1c2" title="Affiche la capacite de chaque centre." alt="" coords="728,356,853,383">
+<area shape="rect" href="$odb__repartition_8php.html#9dba294120f6b7ce91b9fec569ad7ef6" title="Ligne du formulaire de repartition." alt="" coords="440,635,605,661">
+<area shape="rect" href="$odb__repartition_8php.html#b9758b82e8b610bcfeb6a980276cbb72" title="Repartition des candidats ODB." alt="" coords="713,584,868,611">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#c23eab81895f040f0ff6f3ee312a7f63" title="Cree les OPTIONS tirees du referentiel passe en parametre." alt="" coords="435,1091,611,1117">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#34801d7492d31569357873533e30d04d" title="isInReferentiel" alt="" coords="467,1243,579,1269">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#caa8fb22e017e5edd73e572b1c091189" title="formSelectRefInTR" alt="" coords="719,1091,863,1117">
+<area shape="rect" href="$inc&#45;regles__gestion_8php.html#7b7e71083f065a8f45947cf013206a64" title="reglesGestion" alt="" coords="736,1243,845,1269">
+<area shape="rect" href="$inc&#45;fichiers_8php.html#2153dd9ac414142bd968bd484f875abe" title="Lit et affiche le contenu d&#39;un fichier csv." alt="" coords="949,1243,1043,1269">
+<area shape="rect" href="$inc&#45;fichiers_8php.html#3656c8f5a58718532bd18937ce8ad6d7" title="reprise de l&#39;import de fichier (process de verification apres upload)" alt="" coords="1123,1243,1237,1269">
+<area shape="rect" href="$odb__import_8php.html#7bd675bee4f6b2cc8994b9c8a7d03039" title="exec_odb_import" alt="" coords="1287,1243,1417,1269">

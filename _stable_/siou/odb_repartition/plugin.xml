@@ -1,0 +1,16 @@
+<plugin>
+   <nom>ODB : Repartition des candidats</nom>
+   <auteur>Cedric PROTIERE - AUF - Février 2007</auteur>
+   <version>0.1</version>
+   <etat>dev</etat>
+   <description>Permet de repartir les candidats dans les differents centres de composition
+   </description>
+   	<lien>http://www.officedubacbenin.bj</lien> <!-- URI de documentation -->
+		<icon>img_pack/logo_odb_150.png</icon> 
+   <prefix>odb_repartition</prefix>
+   <pipeline>
+      <nom>ajouter_boutons</nom>
+      <action>ajouterBoutons</action>
+      <inclure>inc-odb_repartition.php</inclure>
+   </pipeline>
+</plugin>

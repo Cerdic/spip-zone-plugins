@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Siou:  Fichier source de odb_notes/exec/inc-bdd.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Généré par Doxygen 1.5.3 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Page&nbsp;principale</span></a></li>
+    <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+    <li><a href="dirs.html"><span>Répertoires</span></a></li>
+    <li>
+      <form action="search.php" method="get">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td><label>&nbsp;Rechercher&nbsp;</label></td>
+            <td><input type="text" name="query" value="" size="20" accesskey="s"/></td>
+          </tr>
+        </table>
+      </form>
+    </li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_8304c97eecfdedd1018accbc24201d58.html">odb_notes</a>&nbsp;&raquo&nbsp;<a class="el" href="dir_944f8b8909d831464407f99f29c5403f.html">exec</a></div>
+<h1>inc-bdd.php</h1><a href="odb__notes_2exec_2inc-bdd_8php.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00010"></a><a class="code" href="odb__notes_2exec_2inc-bdd_8php.html#000899dd9da7cf04c35abc6e440d6ed3">00010</a> function <a class="code" href="odb__notes_2exec_2inc-bdd_8php.html#000899dd9da7cf04c35abc6e440d6ed3" title="Recupere le nombre de candidats selon divers criteres.">getNbCandidats</a>(<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>,<a class="code" href="inc-pdf-attestations_8php.html#1f711ee6f46195ba9dfce71eaf779d02">$jury</a>=0,$type='') {
+<a name="l00011"></a>00011     <span class="keywordflow">if</span>(<a class="code" href="inc-pdf-attestations_8php.html#1f711ee6f46195ba9dfce71eaf779d02">$jury</a>&gt;0) <a class="code" href="inc-pdf-attestations_8php.html#d4a3e16ae571f7498eedad9de246faf7">$where</a>=<span class="stringliteral">" and jury=$jury"</span>;
+<a name="l00012"></a>00012     <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>=<span class="stringliteral">"SELECT count(*) nb from odb_repartition where annee=$annee $where"</span>;
+<a name="l00013"></a>00013     <span class="keywordflow">if</span>($type!='')
+<a name="l00014"></a>00014         <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>=<span class="stringliteral">"SELECT count(*) nb FROM odb_notes notes, odb_repartition rep\n"</span>
+<a name="l00015"></a>00015             .<span class="stringliteral">"WHERE rep.id_table=notes.id_table and notes.annee=$annee and rep.annee=$annee and notes.type='$type' and rep.jury=$jury and note is not null"</span>;
+<a name="l00016"></a>00016     <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00017"></a>00017     $nbCandidats=mysql_result(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>,0,0);
+<a name="l00018"></a>00018     <span class="keywordflow">return</span> $nbCandidats;
+<a name="l00019"></a>00019 }
+<a name="l00020"></a>00020 
+<a name="l00021"></a><a class="code" href="odb__notes_2exec_2inc-bdd_8php.html#2dde7f62ae89cb87ddcab5f9aaf737aa">00021</a> function <a class="code" href="odb__notes_2exec_2inc-bdd_8php.html#2dde7f62ae89cb87ddcab5f9aaf737aa">getNbCandidatsNotes</a>(<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>,<a class="code" href="inc-pdf-attestations_8php.html#1f711ee6f46195ba9dfce71eaf779d02">$jury</a>,$id_serie,$id_matiere=0) {
+<a name="l00022"></a>00022     <a class="code" href="inc-pdf-attestations_8php.html#d4a3e16ae571f7498eedad9de246faf7">$where</a>='';
+<a name="l00023"></a>00023     <span class="keywordflow">if</span>($id_matiere&gt;0) <a class="code" href="inc-pdf-attestations_8php.html#d4a3e16ae571f7498eedad9de246faf7">$where</a>=<span class="stringliteral">"AND id_matiere=$id_matiere and note is not null"</span>;
+<a name="l00024"></a>00024     <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>=<span class="stringliteral">"SELECT count(*) nb, id_matiere FROM odb_notes WHERE annee=$annee and jury=$jury and id_serie=$id_serie $where GROUP BY id_matiere LIMIT 0,1"</span>;
+<a name="l00025"></a>00025     <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00026"></a>00026     <span class="keywordflow">if</span>(mysql_num_rows(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)&gt;0)
+<a name="l00027"></a>00027         $nb=mysql_result(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>,0,0);
+<a name="l00028"></a>00028     <span class="keywordflow">else</span> $nb=0;
+<a name="l00029"></a>00029     <span class="keywordflow">return</span> $nb;
+<a name="l00030"></a>00030 }
+<a name="l00031"></a>00031 
+<a name="l00040"></a><a class="code" href="odb__notes_2exec_2inc-bdd_8php.html#2bbd012fce7c005628269134b0046665">00040</a> function <a class="code" href="odb__notes_2exec_2inc-bdd_8php.html#2bbd012fce7c005628269134b0046665" title="Recupere un tableau de jury.">getJurys</a>($login,$statutUtilisateur,<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>) {
+<a name="l00041"></a>00041     global $gauche, $deliberationCentre;
+<a name="l00042"></a>00042     <span class="comment">//echo "Jurys $login / $statutUtilisateur / $annee :";</span>
+<a name="l00043"></a>00043     <span class="keywordflow">if</span>($statutUtilisateur=='Notes') {
+<a name="l00044"></a>00044             <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>='SELECT id_deliberation, deliberation deliberationCentre, jury1, jury2, jury3, jury4 '
+<a name="l00045"></a>00045             . 'from odb_ref_operateur ope, odb_ref_deliberation delib '
+<a name="l00046"></a>00046             . <span class="stringliteral">"where ope.annee=$annee and delib.annee=$annee and delib.id=ope.id_deliberation "</span>
+<a name="l00047"></a>00047             . <span class="stringliteral">"and LCASE(operateur)='"</span>.substr($login,0,strlen($login)-1).<span class="charliteral">'\''</span>;
+<a name="l00048"></a>00048             echo <span class="stringliteral">"&lt;br/&gt;$sql&lt;br/&gt;"</span>;
+<a name="l00049"></a>00049             <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00050"></a>00050             $row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00051"></a>00051             
+<a name="l00052"></a>00052             <span class="keywordflow">foreach</span> (array('deliberationCentre<span class="charliteral">','</span>jury1<span class="charliteral">','</span>jury2<span class="charliteral">','</span>jury3<span class="charliteral">','</span>jury4') as $col) {
+<a name="l00053"></a>00053                     $$col=$row[$col];
+<a name="l00054"></a>00054             }
+<a name="l00055"></a>00055             <span class="keywordflow">foreach</span>(array('jury1<span class="charliteral">','</span>jury2<span class="charliteral">','</span>jury3<span class="charliteral">','</span>jury4') as $col) {
+<a name="l00056"></a>00056                     <span class="keywordflow">if</span>($$col&gt;0) {
+<a name="l00057"></a>00057                             $tJurys[]=$$col; $msgJurys[]=<span class="stringliteral">"&lt;A HREF='"</span>.generer_url_ecrire('odb_notes').<span class="stringliteral">"&amp;jury="</span>.$$col.<span class="stringliteral">"&amp;step2=manuel'&gt;"</span>.$$col.<span class="stringliteral">"&lt;/A&gt;"</span>;
+<a name="l00058"></a>00058                     }
+<a name="l00059"></a>00059             }
+<a name="l00060"></a>00060             $gauche.='&lt;b&gt;'.ODB_BIO_OPERATEUR.<span class="stringliteral">"&lt;/b&gt;&lt;br/&gt;$deliberationCentre&lt;hr size=1/&gt;\nVous avez acc&amp;egrave;s aux jurys "</span>.implode(', ',$msgJurys);
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062     } elseif($statutUtilisateur=='Admin') {
+<a name="l00063"></a>00063             $gauche.='&lt;b&gt;Administrateur SIOU&lt;/b&gt;&lt;br/&gt;Vous avez acc&amp;egrave;s &amp;<a class="code" href="inc-pdf-table_8php.html#6d44afa8f0dc1b03e9806f207b06180c">agrave</a>; tous les jurys';
+<a name="l00064"></a>00064             $deliberationCentre='B&amp;<a class="code" href="inc-pdf-table_8php.html#1c3d7fb9d2f4e0216017175154061426">eacute</a>;nin';
+<a name="l00065"></a>00065             <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>=<span class="stringliteral">"SELECT min(jury) mini, max(jury) maxi from odb_repartition where annee='$annee'"</span>;
+<a name="l00066"></a>00066             <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00067"></a>00067             $row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>);
+<a name="l00068"></a>00068             $tJurys=range((<span class="keywordtype">int</span>)$row['mini'],(<span class="keywordtype">int</span>)$row['maxi']);
+<a name="l00069"></a>00069     } <span class="keywordflow">else</span> die(<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>.' statut incorrect : '.$statutUtilisateur);
+<a name="l00070"></a>00070     <span class="keywordflow">return</span> $tJurys;
+<a name="l00071"></a>00071 }
+<a name="l00072"></a>00072 
+<a name="l00078"></a><a class="code" href="odb__notes_2exec_2inc-bdd_8php.html#6c6066c6c35429378e06930dd848253c">00078</a> function <a class="code" href="odb__notes_2exec_2inc-bdd_8php.html#6c6066c6c35429378e06930dd848253c" title="Recupere le tableau des series (idSerie=&amp;gt;serie) d&amp;#39;un jury.">getSeriesFromJury</a>(<a class="code" href="inc-pdf-attestations_8php.html#1f711ee6f46195ba9dfce71eaf779d02">$jury</a>, <a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>) {
+<a name="l00079"></a>00079     <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>=<span class="stringliteral">"SELECT DISTINCT ser.id id_serie, ser.serie\n FROM odb_ref_serie ser, odb_repartition rep, odb_candidats can\n"</span>.
+<a name="l00080"></a>00080     <span class="stringliteral">" WHERE can.id_saisie = rep.id_saisie AND jury = $jury AND ser.id = can.serie and rep.annee=$annee and can.annee=$annee\n ORDER BY ser.serie"</span>;
+<a name="l00081"></a>00081     <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00082"></a>00082     <span class="keywordflow">while</span>($row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)) {
+<a name="l00083"></a>00083         $sSerie=$row['serie'];
+<a name="l00084"></a>00084         $iIdSerie=$row['id_serie'];
+<a name="l00085"></a>00085         $tSeries[$iIdSerie]=$sSerie;
+<a name="l00086"></a>00086     }
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088     <span class="keywordflow">return</span> $tSeries;
+<a name="l00089"></a>00089 }
+<a name="l00090"></a>00090 
+<a name="l00095"></a><a class="code" href="odb__notes_2exec_2inc-bdd_8php.html#68235e15b2e0c91db7f64dbed807d0ee">00095</a> function <a class="code" href="odb__notes_2exec_2inc-bdd_8php.html#68235e15b2e0c91db7f64dbed807d0ee" title="Recupere le tableau jury=&amp;gt;serie de l&amp;#39;annee.">getSeries</a>(<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>) {
+<a name="l00096"></a>00096     <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>=<span class="stringliteral">"SELECT DISTINCT jury, ser.id id_serie, ser.serie\n FROM odb_ref_serie ser, odb_repartition rep, odb_candidats can\n"</span>.
+<a name="l00097"></a>00097         <span class="stringliteral">" WHERE can.id_saisie = rep.id_saisie AND ser.id = can.serie and rep.annee=$annee and can.annee=$annee\n ORDER BY jury, ser.serie"</span>;
+<a name="l00098"></a>00098     <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>=<a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>(<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>,__FILE__,__LINE__);
+<a name="l00099"></a>00099     <span class="keywordflow">while</span>($row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)) {
+<a name="l00100"></a>00100         <a class="code" href="inc-pdf-attestations_8php.html#1f711ee6f46195ba9dfce71eaf779d02">$jury</a>=$row['jury'];
+<a name="l00101"></a>00101         $tSeries[<a class="code" href="inc-pdf-attestations_8php.html#1f711ee6f46195ba9dfce71eaf779d02">$jury</a>][]=$row['serie'];
+<a name="l00102"></a>00102     }
+<a name="l00103"></a>00103     <span class="keywordflow">return</span> $tSeries;
+<a name="l00104"></a>00104 }
+<a name="l00105"></a>00105 ?&gt;
+</pre></div><hr size="1"><address style="text-align: right;"><small>Généré le Mon Mar 17 22:53:00 2008 pour Siou par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.3 </small></address>
+</body>
+</html>

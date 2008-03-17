@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Siou:  Fichier source de odb_suivi/exec/odb_suivi.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Généré par Doxygen 1.5.3 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Page&nbsp;principale</span></a></li>
+    <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+    <li><a href="dirs.html"><span>Répertoires</span></a></li>
+    <li>
+      <form action="search.php" method="get">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td><label>&nbsp;Rechercher&nbsp;</label></td>
+            <td><input type="text" name="query" value="" size="20" accesskey="s"/></td>
+          </tr>
+        </table>
+      </form>
+    </li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_2c9be3c5abd5b387748c4428f45e6653.html">odb_suivi</a>&nbsp;&raquo&nbsp;<a class="el" href="dir_876dc602ebabe8eeb60510dad127e25a.html">exec</a></div>
+<h1>odb_suivi.php</h1><a href="odb__suivi_8php.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 session_start();
+<a name="l00003"></a>00003 include_spip('inc/presentation');
+<a name="l00004"></a>00004 include_spip('inc/config');
+<a name="l00005"></a>00005 include_spip('inc/charsets');
+<a name="l00006"></a><a class="code" href="odb__suivi_8php.html#c24ff0f08fb134ed2d43c99826787bc2">00006</a> define('<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>',_DIR_PLUGINS.<span class="stringliteral">"odb/odb_commun/"</span>);
+<a name="l00007"></a>00007 include_once(<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>.'inc-html.php');
+<a name="l00008"></a>00008 include_once(<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>.<span class="stringliteral">"inc-referentiel.php"</span>);
+<a name="l00009"></a>00009 include_once(<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>.<span class="stringliteral">"inc-odb.php"</span>);
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 setlocale(LC_TIME, <span class="stringliteral">"fr_FR"</span>);
+<a name="l00012"></a>00012 
+<a name="l00013"></a><a class="code" href="odb__suivi_8php.html#73292a99bd31040ba09df650515015d1">00013</a> global <a class="code" href="inc-fichiers_8php.html#58f5fd0b9d70bc87295be959c7bc176a">$debug</a>, <a class="code" href="odb__import_8php.html#73292a99bd31040ba09df650515015d1">$txt_gauche</a>, <a class="code" href="odb__affiche__csv_8php.html#0a3ebee356c79fa7521c28283a372f76">$txt_debug</a>;
+<a name="l00014"></a><a class="code" href="odb__suivi_8php.html#85ae3e64cd40e9564adceb010085e9dd">00014</a> <a class="code" href="inc-fichiers_8php.html#58f5fd0b9d70bc87295be959c7bc176a">$debug</a>=<span class="keyword">false</span>;
+<a name="l00015"></a>00015 
+<a name="l00016"></a><a class="code" href="odb__suivi_8php.html#c69d1b2260261599b555c6b8d3d77999">00016</a> <a class="code" href="odb__import_8php.html#73292a99bd31040ba09df650515015d1">$txt_gauche</a>=<span class="stringliteral">""</span>;<span class="comment">// texte boite de gauche</span>
+<a name="l00017"></a><a class="code" href="odb__suivi_8php.html#132ad6788dc28adfa8faa0de53ff0dbc">00017</a> <a class="code" href="odb__import_8php.html#132ad6788dc28adfa8faa0de53ff0dbc">$txt_</a>=<span class="stringliteral">""</span>;<span class="comment">// texte boite de droite</span>
+<a name="l00018"></a><a class="code" href="odb__suivi_8php.html#709566ff745c7bb1fd0fe7e2ba030a93">00018</a> <a class="code" href="odb__affiche__csv_8php.html#0a3ebee356c79fa7521c28283a372f76">$txt_debug</a>=<span class="stringliteral">""</span>; <span class="comment">// texte debug</span>
+<a name="l00019"></a><a class="code" href="odb__suivi_8php.html#509f04652b5e1b2d2b9e6bc121a87e50">00019</a> define('<a class="code" href="odb__ref_8php.html#509f04652b5e1b2d2b9e6bc121a87e50">OK</a>',<span class="stringliteral">"&lt;SPAN style='color:#3C3;font-weight:bold;'&gt;[OK]&lt;/SPAN&gt;"</span>);
+<a name="l00020"></a><a class="code" href="odb__suivi_8php.html#e56b96c4dfcced36887ba02c496c40a3">00020</a> define('<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>',<span class="stringliteral">"&lt;SPAN style='color:#C33;font-weight:bold;'&gt;[KO]&lt;/SPAN&gt;"</span>);
+<a name="l00021"></a>00021 
+<a name="l00022"></a><a class="code" href="odb__suivi_8php.html#6fa48c0cc88d14113ae89326f99ae70d">00022</a> define('<a class="code" href="odb__suivi_8php.html#6fa48c0cc88d14113ae89326f99ae70d">STYLE_MAX</a>',<span class="stringliteral">"style='color:#2a2;'"</span>);
+<a name="l00023"></a><a class="code" href="odb__suivi_8php.html#d3d6fd7d3394da3152109ea425f9b8ae">00023</a> define('<a class="code" href="odb__suivi_8php.html#d3d6fd7d3394da3152109ea425f9b8ae">STYLE_MIN</a>',<span class="stringliteral">"style='color:#a22;'"</span>);
+<a name="l00024"></a>00024 
+<a name="l00025"></a>00025 <span class="comment">// exécuté automatiquement par le plugin au chargement de la page ?exec=odb_consultations</span>
+<a name="l00026"></a><a class="code" href="odb__suivi_8php.html#8f8bc33065238b34963709026e9adde6">00026</a> function <a class="code" href="odb__suivi_8php.html#8f8bc33065238b34963709026e9adde6">exec_odb_suivi</a>() {
+<a name="l00027"></a>00027 global $connect_statut, $connect_toutes_rubriques, <a class="code" href="inc-fichiers_8php.html#58f5fd0b9d70bc87295be959c7bc176a">$debug</a>, <a class="code" href="odb__import_8php.html#73292a99bd31040ba09df650515015d1">$txt_gauche</a>, $txt_droite, <a class="code" href="odb__affiche__csv_8php.html#0a3ebee356c79fa7521c28283a372f76">$txt_debug</a>, $tab_referentiel, <a class="code" href="inc-referentiel_8php.html#32f56aa14be3aa7fa481441d26b8bca5">$odb_referentiel</a>,<a class="code" href="inc-referentiel_8php.html#b3984efda359cc31d6cfe267131a7ff9">$odb_mapping</a>;
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029 include_once(<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>.<span class="stringliteral">"inc-referentiel.php"</span>);
+<a name="l00030"></a>00030 include_once(<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>.<span class="stringliteral">"inc-regles_gestion.php"</span>);
+<a name="l00031"></a>00031 <a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>=date(<span class="stringliteral">"Y"</span>);
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034 debut_page(_T(<span class="stringliteral">"Suivi des saisies $annee"</span>), <span class="stringliteral">""</span>, <span class="stringliteral">""</span>);
+<a name="l00035"></a>00035 <span class="comment">//echo "&lt;br /&gt;&lt;br /&gt;";</span>
+<a name="l00036"></a>00036 gros_titre(_T('Office Du Baccalaur&amp;<a class="code" href="inc-pdf-table_8php.html#1c3d7fb9d2f4e0216017175154061426">eacute</a>;at'));
+<a name="l00037"></a>00037 $tab_auteur=$GLOBALS[<span class="stringliteral">"auteur_session"</span>];
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="keywordflow">if</span>($tab_auteur['statut']==<span class="stringliteral">"0minirezo"</span>) {
+<a name="l00040"></a>00040    $isAdmin=<span class="keyword">true</span>;
+<a name="l00041"></a>00041 } 
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043 debut_cadre_relief( <span class="stringliteral">""</span>, <span class="keyword">false</span>, <span class="stringliteral">""</span>, <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a> = _T('Suivi des saisies et des modifications'));
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045 debut_gauche();
+<a name="l00046"></a>00046         echo <span class="stringliteral">"&lt;IMG SRC='"</span>._DIR_PLUGIN_ODB_SUIVI.<span class="stringliteral">"/img_pack/logo_odb.png' alt='Office du bac' ALIGN='absmiddle'/&gt;&lt;br/&gt;\n"</span>;
+<a name="l00047"></a>00047    debut_boite_info();
+<a name="l00048"></a>00048       echo <span class="stringliteral">"&lt;b&gt;Suivi des saisies $annee&lt;/b&gt;"</span>;
+<a name="l00049"></a>00049    fin_boite_info();
+<a name="l00050"></a>00050    <a class="code" href="inc-referentiel_8php.html#ca269ae75f013c9730f590443481c7f9">odb_raccourcis</a>('');
+<a name="l00051"></a>00051 creer_colonne_droite();
+<a name="l00052"></a>00052 debut_droite();
+<a name="l00053"></a>00053    debut_cadre_relief(<span class="stringliteral">""</span>, <span class="keyword">false</span>, <span class="stringliteral">""</span>, <a class="code" href="inc-pdf-attestations_8php.html#43e5b5a819fedbd12b8cf5421ba6985e">$titre</a> = _T(<span class="stringliteral">"Suivi des saisies $annee"</span>));
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055 <a class="code" href="inc-odb_8php.html#bbbb7d83cb4d809eae2b31b2a3b1f556" title="Interdit l&amp;#39;acces a un utilisateur qui n&amp;#39;est pas dans le tableau $tOK.">isAutorise</a>(array('Admin<span class="charliteral">','</span>Encadrant'));
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057 echo <span class="stringliteral">"\n&lt;!-- ======================[ Graphes ]======================== --&gt;\n"</span>;
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059 $tMois=array('<span class="charliteral">','</span>Janvier<span class="charliteral">','</span>F&amp;eacute;vrier<span class="charliteral">','</span>Mars<span class="charliteral">','</span>Avril<span class="charliteral">','</span>Mai<span class="charliteral">','</span>Juin<span class="charliteral">','</span>Juillet<span class="charliteral">','</span>Ao&amp;ucirc;t<span class="charliteral">','</span>Septembre<span class="charliteral">','</span>Octobre<span class="charliteral">','</span>Novembre<span class="charliteral">','</span>D&amp;eacute;cembre');
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061 <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>=<span class="stringliteral">"SELECT dayofmonth(maj) as jour, month(maj) as mois, count(*) as nombre\n"</span>
+<a name="l00062"></a>00062                 .<span class="stringliteral">"FROM odb_candidats\n"</span>
+<a name="l00063"></a>00063                 .<span class="stringliteral">"WHERE annee=$annee\n"</span>
+<a name="l00064"></a>00064                 .<span class="stringliteral">"GROUP BY mois, jour\n"</span>
+<a name="l00065"></a>00065                 .<span class="stringliteral">"ORDER BY maj asc"</span>
+<a name="l00066"></a>00066                 ;
+<a name="l00067"></a>00067                 <span class="comment">//echo $sql;</span>
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069 <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a> = mysql_query($sql) or die(mysql_error()); 
+<a name="l00070"></a>00070 <span class="keywordflow">while</span> ($row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)){
+<a name="l00071"></a>00071         <span class="keywordflow">foreach</span> (array('jour<span class="charliteral">','</span>mois<span class="charliteral">','</span>nombre') as $col)
+<a name="l00072"></a>00072                 $$col=$row[$col];
+<a name="l00073"></a>00073         <a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a>=str_pad(<a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a>,2,<span class="charliteral">'0'</span>,STR_PAD_LEFT);
+<a name="l00074"></a>00074         $tValues[<a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a>][<span class="stringliteral">"$jour"</span>]=$nombre;
+<a name="l00075"></a>00075 }
+<a name="l00076"></a>00076 <span class="keywordflow">foreach</span>($tValues as <a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a>=&gt;$t) {
+<a name="l00077"></a>00077         $sMois=$tMois[(int)<a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a>];
+<a name="l00078"></a>00078         <a class="code" href="resultats__ajournes__par__centre_8php.html#28034c8e7e61c01855a789a9215d8acd">$cle</a>=<span class="stringliteral">"$annee-$mois"</span>;
+<a name="l00079"></a>00079         <a class="code" href="resultats__ajournes__par__centre_8php.html#082ba331d3cc45e8443c96d1131d5599">$_SESSION</a>[$cle]['hauteur']=300;
+<a name="l00080"></a>00080         <a class="code" href="resultats__ajournes__par__centre_8php.html#082ba331d3cc45e8443c96d1131d5599">$_SESSION</a>[$cle]['largeur']=500;
+<a name="l00081"></a>00081         <a class="code" href="resultats__ajournes__par__centre_8php.html#082ba331d3cc45e8443c96d1131d5599">$_SESSION</a>[$cle]['titre']=<span class="stringliteral">"Suivi des saisies - $sMois $annee"</span>;
+<a name="l00082"></a>00082         <a class="code" href="resultats__ajournes__par__centre_8php.html#082ba331d3cc45e8443c96d1131d5599">$_SESSION</a>[$cle]['titreX']=<span class="stringliteral">"Jour ($sMois)"</span>;
+<a name="l00083"></a>00083         <a class="code" href="resultats__ajournes__par__centre_8php.html#082ba331d3cc45e8443c96d1131d5599">$_SESSION</a>[$cle]['titreY']=<span class="stringliteral">"Nombre de saisies total"</span>;
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085         <a class="code" href="resultats__ajournes__par__centre_8php.html#082ba331d3cc45e8443c96d1131d5599">$_SESSION</a>[$cle]['valeurs']=array_values($t);
+<a name="l00086"></a>00086         <a class="code" href="resultats__ajournes__par__centre_8php.html#082ba331d3cc45e8443c96d1131d5599">$_SESSION</a>[$cle]['labelX']=array_keys($t);
+<a name="l00087"></a>00087         echo <span class="stringliteral">"&lt;br/&gt;&lt;img src='"</span>.DIR_ODB_COMMUN.<span class="stringliteral">"inc-graphe.php?graphe=$cle' "</span>
+<a name="l00088"></a>00088                 . <span class="stringliteral">"title='Suivi quotidien des saisies $sMois $annee' alt='Graphe suivi des saisies $sMois $annee'/&gt;"</span>;
+<a name="l00089"></a>00089 }
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091 <span class="keywordflow">if</span>(<a class="code" href="inc-regles__gestion_8php.html#abf23b66cd362adaa508de5bfb22706a" title="l&amp;#39;utilisateur est il admin ?">isAdmin</a>()) {
+<a name="l00092"></a>00092         echo <span class="stringliteral">"&lt;br/&gt;&lt;br/&gt;\n&lt;!-- ======================[ Suppressions, modifs ]======================== --&gt;\n"</span>;
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094         $sql = <span class="stringliteral">"SELECT login, count(*) AS nombre\n"</span>
+<a name="l00095"></a>00095                                 .<span class="stringliteral">"FROM odb_candidats\n"</span>
+<a name="l00096"></a>00096                                 .<span class="stringliteral">"WHERE annee=$annee\n"</span> 
+<a name="l00097"></a>00097                                 .<span class="stringliteral">"GROUP BY login\n"</span>
+<a name="l00098"></a>00098                                 .<span class="stringliteral">"ORDER BY nombre"</span>
+<a name="l00099"></a>00099                                 ;
+<a name="l00100"></a>00100         <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a> = <a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>($sql,__FILE__,__LINE__);
+<a name="l00101"></a>00101         $max=0;
+<a name="l00102"></a>00102         $min=9999999;
+<a name="l00103"></a>00103         $total=0;
+<a name="l00104"></a>00104         <span class="keywordflow">while</span> ($row = mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)) {
+<a name="l00105"></a>00105                 <span class="keywordflow">foreach</span> (array('login<span class="charliteral">','</span>nombre') as $col)
+<a name="l00106"></a>00106                         $$col=$row[$col];
+<a name="l00107"></a>00107                 
+<a name="l00108"></a>00108                 $tSuivi[$login]['saisis']=$nombre;
+<a name="l00109"></a>00109                 <span class="keywordflow">if</span>($nombre&lt;=$min) $min=$nombre;
+<a name="l00110"></a>00110                 <span class="keywordflow">if</span>($nombre&gt;=$max) $max=$nombre;
+<a name="l00111"></a>00111                 $total+=$nombre;
+<a name="l00112"></a>00112         }
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114         $sql = <span class="stringliteral">"SELECT can.login, count(*) AS nombre\n"</span>
+<a name="l00115"></a>00115                                 .<span class="stringliteral">"FROM odb_candidats can, odb_histo_candidats hist\n"</span> 
+<a name="l00116"></a>00116                                 .<span class="stringliteral">"WHERE can.annee=$annee AND hist.annee=$annee AND can.id_saisie=hist.id_saisie\n"</span>
+<a name="l00117"></a>00117                                 .<span class="stringliteral">"GROUP BY can.login"</span>
+<a name="l00118"></a>00118                                 ;
+<a name="l00119"></a>00119         <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a> = <a class="code" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql.">odb_query</a>($sql,__FILE__,__LINE__);
+<a name="l00120"></a>00120         <span class="keywordflow">while</span> ($row = mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)) {
+<a name="l00121"></a>00121                 <span class="keywordflow">foreach</span> (array('login<span class="charliteral">','</span>nombre') as $col)
+<a name="l00122"></a>00122                         $$col=$row[$col];
+<a name="l00123"></a>00123                 $tSuivi[$login]['modifies']=$nombre;
+<a name="l00124"></a>00124         }
+<a name="l00125"></a>00125         <span class="comment">//echo '&lt;pre&gt;';print_r($tSuivi);echo'&lt;/pre&gt;';</span>
+<a name="l00126"></a>00126         <span class="comment">//asort($tSuivi);</span>
+<a name="l00127"></a>00127         $thead[]=<span class="stringliteral">"&lt;th&gt;Login&lt;/th&gt;&lt;th&gt;Saisies&lt;/th&gt;&lt;th&gt;Modifi&amp;eacute;s&lt;/th&gt;&lt;th&gt;Taux de modifications&lt;/th&gt;"</span>;
+<a name="l00128"></a>00128         <span class="keywordflow">foreach</span>($tSuivi as $login=&gt;$t) {
+<a name="l00129"></a>00129                 $login=ucwords($login);
+<a name="l00130"></a>00130                 $nbSaisis=(int)$t['saisis'];
+<a name="l00131"></a>00131                 $nbModif=$t['modifies'];
+<a name="l00132"></a>00132                 $tauxModif=round($nbModif/$nbSaisis,2);
+<a name="l00133"></a>00133                 <span class="keywordflow">if</span>($nbSaisis==$min) {
+<a name="l00134"></a>00134                         $style=<a class="code" href="odb__suivi_8php.html#d3d6fd7d3394da3152109ea425f9b8ae">STYLE_MIN</a>;
+<a name="l00135"></a>00135                         $td='th';
+<a name="l00136"></a>00136                 } elseif($nbSaisis==$max) {
+<a name="l00137"></a>00137                         $style=<a class="code" href="odb__suivi_8php.html#6fa48c0cc88d14113ae89326f99ae70d">STYLE_MAX</a>;
+<a name="l00138"></a>00138                         $td='th';
+<a name="l00139"></a>00139                 } <span class="keywordflow">else</span> {
+<a name="l00140"></a>00140                         $style='';
+<a name="l00141"></a>00141                         $td='td';
+<a name="l00142"></a>00142                 }
+<a name="l00143"></a>00143                 $tbody[]=<span class="stringliteral">"&lt;$td $style&gt;$login&lt;/td&gt;&lt;$td $style&gt;$nbSaisis&lt;/td&gt;&lt;$td $style&gt;$nbModif&lt;/td&gt;&lt;$td $style&gt;"</span>.afficheTaux($tauxModif,10).<span class="stringliteral">" "</span>.($tauxModif*100).<span class="stringliteral">"%&lt;/td&gt;"</span>;
+<a name="l00144"></a>00144         }
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146         echo <a class="code" href="inc-html_8php.html#5f91efa37c4c6e04e1e2792cc0c37600" title="Affiche une table html.">odb_html_table</a>(<span class="stringliteral">"Suivi g&amp;eacute;r&amp;eacute;ral des $total saisies $annee"</span>,$tbody,$thead,'<a class="code" href="inc-html_8php.html#fa7c9d548e547f5aa3b1a88df9ec970c" title="Affiche une vignette (icone de type de fichier).">vignette</a>-24.png');
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148         echo <span class="stringliteral">"&lt;br/&gt;\n&lt;!-- ======================[ Details quotidiens ]======================== --&gt;\n"</span>;
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150         $thead=array();$tbody=array();
+<a name="l00151"></a>00151         $thead[]=<span class="stringliteral">"&lt;th&gt;Jour&lt;/th&gt;&lt;th&gt;Mois&lt;/th&gt;&lt;th&gt;Login&lt;/th&gt;&lt;th&gt;Saisies&lt;/th&gt;"</span>;
+<a name="l00152"></a>00152 
+<a name="l00153"></a>00153         $sql=<span class="stringliteral">"SELECT dayofmonth(maj) as jour, month(maj) as mois, login, count(login) as nombre\n"</span>
+<a name="l00154"></a>00154                         .<span class="stringliteral">"FROM odb_candidats\n"</span>
+<a name="l00155"></a>00155                         .<span class="stringliteral">"WHERE annee=$annee\n"</span>
+<a name="l00156"></a>00156                         .<span class="stringliteral">"GROUP BY login, mois, jour\n"</span>
+<a name="l00157"></a>00157                         .<span class="stringliteral">"ORDER BY maj desc, nombre desc"</span>
+<a name="l00158"></a>00158                         ;
+<a name="l00159"></a>00159         <a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a> = mysql_query($sql) or die(mysql_error()); 
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161         <span class="keywordflow">while</span> ($row=mysql_fetch_array(<a class="code" href="inc-ezpdf_8php.html#112ef069ddc0454086e3d1e6d8d55d07">$result</a>)){
+<a name="l00162"></a>00162                 <span class="keywordflow">foreach</span> (array('jour<span class="charliteral">','</span>mois<span class="charliteral">','</span>login<span class="charliteral">','</span>nombre') as $col)
+<a name="l00163"></a>00163                         $$col=$row[$col];
+<a name="l00164"></a>00164                 $login=ucwords($login);
+<a name="l00165"></a>00165                 $sMois=$tMois[<a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a>];
+<a name="l00166"></a>00166 
+<a name="l00167"></a>00167                 <span class="comment">// on change de mois</span>
+<a name="l00168"></a>00168                 <span class="keywordflow">if</span>(<a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a>==$mois_old) {
+<a name="l00169"></a>00169                         $isNouveauMois=<span class="keyword">false</span>;
+<a name="l00170"></a>00170                 } <span class="keywordflow">else</span> {
+<a name="l00171"></a>00171                         $tbody[]=<span class="stringliteral">"&lt;th colspan=4&gt;&lt;center&gt;&lt;hr size=0/&gt;$sMois&lt;hr size=0/&gt;&lt;/center&gt;&lt;/th&gt;"</span>;
+<a name="l00172"></a>00172                         $isNouveauMois=<span class="keyword">true</span>;
+<a name="l00173"></a>00173                 }
+<a name="l00174"></a>00174                 
+<a name="l00175"></a>00175                 <span class="comment">// on change de jour</span>
+<a name="l00176"></a>00176                 <span class="keywordflow">if</span>(<a class="code" href="inc-pdf-attestations_8php.html#477477d68b3781b42c7fb933b20288af">$jour</a>==$jour_old) {
+<a name="l00177"></a>00177                         $sMois_aff='';
+<a name="l00178"></a>00178                         $jour_aff='';
+<a name="l00179"></a>00179                         $isNouveauJour=<span class="keyword">false</span>;
+<a name="l00180"></a>00180                 } <span class="keywordflow">else</span> {
+<a name="l00181"></a>00181                         <span class="keywordflow">if</span>($login_max!='') {
+<a name="l00182"></a>00182                                 <span class="keywordflow">if</span>($max&gt;1) $smax=<span class="charliteral">'s'</span>;<span class="keywordflow">else</span> $smax='';
+<a name="l00183"></a>00183                                 <span class="keywordflow">if</span>($min&gt;1) $smin=<span class="charliteral">'s'</span>;<span class="keywordflow">else</span> $smin='';
+<a name="l00184"></a>00184                                 $tbody[]=<span class="stringliteral">"&lt;td "</span>.STYLE_MAX.<span class="stringliteral">"&gt;Plus rapide&lt;/td&gt;&lt;th "</span>.<a class="code" href="odb__suivi_8php.html#6fa48c0cc88d14113ae89326f99ae70d">STYLE_MAX</a>.<span class="stringliteral">"&gt;$login_max ($max saisie$smax)&lt;/th&gt;&lt;td "</span>.<a class="code" href="odb__suivi_8php.html#d3d6fd7d3394da3152109ea425f9b8ae">STYLE_MIN</a>.<span class="stringliteral">"&gt;Moins rapide&lt;/td&gt;&lt;th "</span>.<a class="code" href="odb__suivi_8php.html#d3d6fd7d3394da3152109ea425f9b8ae">STYLE_MIN</a>.<span class="stringliteral">"&gt;$login_min ($min saisie$smin)&lt;/th&gt;"</span>;
+<a name="l00185"></a>00185                                 $tbody[]=<span class="stringliteral">"&lt;th colspan=4&gt;&lt;center&gt;&lt;hr size=0/&gt;&lt;/center&gt;&lt;/th&gt;"</span>;
+<a name="l00186"></a>00186                                 <span class="comment">//FIXME pourquoi ca ne s'affiche pas le premier jour du mois ? </span>
+<a name="l00187"></a>00187                         }
+<a name="l00188"></a>00188                         $max=0;
+<a name="l00189"></a>00189                         $min=9999;
+<a name="l00190"></a>00190                         $jour_aff=<a class="code" href="inc-pdf-attestations_8php.html#477477d68b3781b42c7fb933b20288af">$jour</a>;
+<a name="l00191"></a>00191                         $sMois_aff=$sMois;
+<a name="l00192"></a>00192                         $isNouveauJour=<span class="keyword">true</span>;
+<a name="l00193"></a>00193                 }
+<a name="l00194"></a>00194                 
+<a name="l00195"></a>00195                 <span class="keywordflow">if</span>($nombre&gt;=$max) {$max=$nombre;$login_max=$login;}
+<a name="l00196"></a>00196                 <span class="keywordflow">if</span>($nombre&lt;=$min) {$min=$nombre;$login_min=$login;}
+<a name="l00197"></a>00197                 $tbody[]=<span class="stringliteral">"&lt;td&gt;$jour_aff&lt;/td&gt;&lt;td&gt;$sMois_aff&lt;/td&gt;&lt;td&gt;$login&lt;/td&gt;&lt;td&gt;$nombre&lt;/td&gt;"</span>;
+<a name="l00198"></a>00198                 $jour_old=<a class="code" href="inc-pdf-attestations_8php.html#477477d68b3781b42c7fb933b20288af">$jour</a>;
+<a name="l00199"></a>00199                 $mois_old=<a class="code" href="inc-pdf-attestations_8php.html#c3dd350c90be7c45f992a6efde984c66">$mois</a>;
+<a name="l00200"></a>00200         }
+<a name="l00201"></a>00201 
+<a name="l00202"></a>00202         echo <a class="code" href="inc-html_8php.html#5f91efa37c4c6e04e1e2792cc0c37600" title="Affiche une table html.">odb_html_table</a>(<span class="stringliteral">"Suivi quotidien des saisies $annee"</span>,$tbody,$thead,'<a class="code" href="inc-html_8php.html#fa7c9d548e547f5aa3b1a88df9ec970c" title="Affiche une vignette (icone de type de fichier).">vignette</a>-24.png');
+<a name="l00203"></a>00203 }
+<a name="l00204"></a>00204 fin_page();
+<a name="l00205"></a>00205 exit;
+<a name="l00206"></a>00206 }
+<a name="l00207"></a>00207 ?&gt;
+</pre></div><hr size="1"><address style="text-align: right;"><small>Généré le Mon Mar 17 22:53:01 2008 pour Siou par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.3 </small></address>
+</body>
+</html>

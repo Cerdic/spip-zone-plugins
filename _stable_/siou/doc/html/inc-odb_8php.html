@@ -1,0 +1,376 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Siou: Référence du fichier odb_commun/inc-odb.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Généré par Doxygen 1.5.3 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Page&nbsp;principale</span></a></li>
+    <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+    <li><a href="dirs.html"><span>Répertoires</span></a></li>
+    <li>
+      <form action="search.php" method="get">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td><label>&nbsp;Rechercher&nbsp;</label></td>
+            <td><input type="text" name="query" value="" size="20" accesskey="s"/></td>
+          </tr>
+        </table>
+      </form>
+    </li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_d85a68ddeac050d85549308ca402191f.html">odb_commun</a></div>
+<h1>Référence du fichier inc-odb.php</h1>
+<p>
+<a href="inc-odb_8php-source.html">Aller au code source de ce fichier.</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Fonctions</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-odb_8php.html#9b3a021f05992ff16e374c2e0dfa1ef9">getBddConf</a> ($conf='')</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Recupere les informations de connection bdd du fichier de conf spip.  <a href="#9b3a021f05992ff16e374c2e0dfa1ef9"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-odb_8php.html#50e3b190a166aaf85cb237405cf56be2">getIdTableHumain</a> ($id_table)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">affiche un numero de table de facon lisible pour un humain  <a href="#50e3b190a166aaf85cb237405cf56be2"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-odb_8php.html#db56fd5dafef546c255b5c2668b3add6">getNomComplet</a> ($login)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-odb_8php.html#43f6ce2d81c74dfbf4c8ea6c54cf321b">getParametresODB</a> ($param='')</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Recupere les parametres ODB.  <a href="#43f6ce2d81c74dfbf4c8ea6c54cf321b"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-odb_8php.html#147d380870b3247e67b18fd9d7adf910">getStatutUtilisateur</a> ()</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Determine le type d'utilisateur.  <a href="#147d380870b3247e67b18fd9d7adf910"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-odb_8php.html#bbbb7d83cb4d809eae2b31b2a3b1f556">isAutorise</a> ($tOK)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Interdit l'acces a un utilisateur qui n'est pas dans le tableau $tOK.  <a href="#bbbb7d83cb4d809eae2b31b2a3b1f556"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="inc-odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88">odb_query</a> ($sql, $fichier, $ligne)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Execute une requete sql.  <a href="#cc73cdf19f49ae7162c99fd07a614e88"></a><br></td></tr>
+</table>
+<hr><h2>Documentation des fonctions</h2>
+<a class="anchor" name="9b3a021f05992ff16e374c2e0dfa1ef9"></a><!-- doxytag: member="inc-odb.php::getBddConf" ref="9b3a021f05992ff16e374c2e0dfa1ef9" args="($conf='')" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getBddConf           </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>conf</em> = <code>''</code>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Recupere les informations de connection bdd du fichier de conf spip. 
+<p>
+<dl compact><dt><b>Paramètres:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>$conf : (facultatif) : element de la configuration a recuperer : host, user, pass, bdd </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Renvoie:</b></dt><dd>array : host, user, pass, bdd (ou element si specifie) </dd></dl>
+
+<p>Définition à la ligne <a class="el" href="inc-odb_8php-source.html#l00104">104</a> du fichier <a class="el" href="inc-odb_8php-source.html">inc-odb.php</a>.</p>
+
+<p>Références <a class="el" href="resultats__ajournes__par__centre_8php-source.html#l00022">$cpt</a>, <a class="el" href="odb__affiche__csv_8php-source.html#l00014">$fichier</a>, <a class="el" href="inc-ezpdf_8php-source.html#l00013">$host</a>, <a class="el" href="inc-pdf-attestations_8php-source.html#l00004">$tBddConf</a>, et <a class="el" href="inc-ezpdf_8php-source.html#l00014">$user</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__ref_8php-source.html#l00029">exec_odb_ref()</a>.</p>
+
+<p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dynsection">
+<p><center><img src="inc-odb_8php_9b3a021f05992ff16e374c2e0dfa1ef9_icgraph.png" border="0" usemap="#inc-odb_8php_9b3a021f05992ff16e374c2e0dfa1ef9_icgraph_map" alt=""></center>
+<map name="inc-odb_8php_9b3a021f05992ff16e374c2e0dfa1ef9_icgraph_map">
+<area shape="rect" href="odb__ref_8php.html#f0b6f12f726293fcfdb8dd144b4156e1" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_ref" alt="" coords="156,5,263,32"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="50e3b190a166aaf85cb237405cf56be2"></a><!-- doxytag: member="inc-odb.php::getIdTableHumain" ref="50e3b190a166aaf85cb237405cf56be2" args="($id_table)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getIdTableHumain           </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>id_table</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+affiche un numero de table de facon lisible pour un humain 
+<p>
+<dl compact><dt><b>Paramètres:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>$id_table : numero de table recupere en base </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Renvoie:</b></dt><dd>string : numero de table </dd></dl>
+
+<p>Définition à la ligne <a class="el" href="inc-odb_8php-source.html#l00092">92</a> du fichier <a class="el" href="inc-odb_8php-source.html">inc-odb.php</a>.</p>
+
+<p>Références <a class="el" href="inc-pdf-convocation_8php-source.html#l00069">$id_table</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00307">afficherImpressions()</a>, <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00013">afficherNotes()</a>, <a class="el" href="odb__notes2_8php-source.html#l00045">exec_odb_notes()</a>, <a class="el" href="odb__param_8php-source.html#l00032">exec_odb_param()</a>, <a class="el" href="odb__saisie_8php-source.html#l00060">exec_odb_saisie()</a>, <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>, et <a class="el" href="inc-base_8php-source.html#l00182">getSeriesDansSalle()</a>.</p>
+
+<p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dynsection">
+<p><center><img src="inc-odb_8php_50e3b190a166aaf85cb237405cf56be2_icgraph.png" border="0" usemap="#inc-odb_8php_50e3b190a166aaf85cb237405cf56be2_icgraph_map" alt=""></center>
+<map name="inc-odb_8php_50e3b190a166aaf85cb237405cf56be2_icgraph_map">
+<area shape="rect" href="odb__notes_2exec_2inc&#45;traitements_8php.html#99a781952cafb10b8cb8a0adda4baa6d" title="Permet aux operateurs de saisie d&#39;acceder aux listes de resultat en fonction..." alt="" coords="193,5,340,32"><area shape="rect" href="odb__notes_2exec_2inc&#45;traitements_8php.html#33a267718e90ba67c7a694d64441663b" title="Affiche les notes d&#39;un candidat." alt="" coords="212,56,321,83"><area shape="rect" href="odb__notes2_8php.html#477841e21bacf8c8b922a082b668fb2d" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_notes" alt="" coords="204,107,329,133"><area shape="rect" href="odb__param_8php.html#21e2b776a90c950c642402aec61c3928" title="exec_odb_param" alt="" coords="201,157,332,184"><area shape="rect" href="odb__saisie_8php.html#67a2630322ffbcb7fb0e22fe529cff6f" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_saisie..." alt="" coords="205,208,328,235"><area shape="rect" href="odb__stats__siou_8php.html#0606558a56949a7488641f7e59c887ab" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_stats_siou..." alt="" coords="191,259,343,285"><area shape="rect" href="inc&#45;base_8php.html#087d0df256bb4583fa369b3d1d518db5" title="Recupere le nombre de candidats dans chaque serie pour une salle donnee." alt="" coords="193,309,340,336"><area shape="rect" href="odb__notes_8php.html#477841e21bacf8c8b922a082b668fb2d" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_notes" alt="" coords="393,31,519,57"><area shape="rect" href="odb__repartition_8php.html#ddea246a8e91ba341098ee91e0dfa1c2" title="Affiche la capacite de chaque centre." alt="" coords="393,309,519,336"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="db56fd5dafef546c255b5c2668b3add6"></a><!-- doxytag: member="inc-odb.php::getNomComplet" ref="db56fd5dafef546c255b5c2668b3add6" args="($login)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getNomComplet           </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>login</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Définition à la ligne <a class="el" href="inc-odb_8php-source.html#l00129">129</a> du fichier <a class="el" href="inc-odb_8php-source.html">inc-odb.php</a>.</p>
+
+<p>Références <a class="el" href="resultats__ajournes__par__centre_8php-source.html#l00031">$nom</a>, <a class="el" href="inc-ezpdf_8php-source.html#l00026">$result</a>, <a class="el" href="inc-pdf-attestations_8php-source.html#l00051">$sql</a>, et <a class="el" href="inc-odb_8php-source.html#l00078">odb_query()</a>.</p>
+
+<p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dynsection">
+<p><center><img src="inc-odb_8php_db56fd5dafef546c255b5c2668b3add6_cgraph.png" border="0" usemap="#inc-odb_8php_db56fd5dafef546c255b5c2668b3add6_cgraph_map" alt=""></center>
+<map name="inc-odb_8php_db56fd5dafef546c255b5c2668b3add6_cgraph_map">
+<area shape="rect" href="inc&#45;odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql." alt="" coords="185,5,273,32"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="43f6ce2d81c74dfbf4c8ea6c54cf321b"></a><!-- doxytag: member="inc-odb.php::getParametresODB" ref="43f6ce2d81c74dfbf4c8ea6c54cf321b" args="($param='')" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getParametresODB           </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>param</em> = <code>''</code>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Recupere les parametres ODB. 
+<p>
+<dl compact><dt><b>Paramètres:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>$param : parametre dont on cherche la valeur (facultatif) </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Renvoie:</b></dt><dd>mixed : tableau de parametres ou valeur </dd></dl>
+
+<p>Définition à la ligne <a class="el" href="inc-odb_8php-source.html#l00010">10</a> du fichier <a class="el" href="inc-odb_8php-source.html">inc-odb.php</a>.</p>
+
+<p>Références <a class="el" href="inc-ezpdf_8php-source.html#l00026">$result</a>, <a class="el" href="inc-pdf-attestations_8php-source.html#l00051">$sql</a>, <a class="el" href="inc-pdf-attestations_8php-source.html#l00009">$where</a>, et <a class="el" href="inc-odb_8php-source.html#l00078">odb_query()</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00013">afficherNotes()</a>, <a class="el" href="odb__notes_8php-source.html#l00068">exec_odb_notes()</a>, et <a class="el" href="odb__param_8php-source.html#l00032">exec_odb_param()</a>.</p>
+
+<p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dynsection">
+<p><center><img src="inc-odb_8php_43f6ce2d81c74dfbf4c8ea6c54cf321b_cgraph.png" border="0" usemap="#inc-odb_8php_43f6ce2d81c74dfbf4c8ea6c54cf321b_cgraph_map" alt=""></center>
+<map name="inc-odb_8php_43f6ce2d81c74dfbf4c8ea6c54cf321b_cgraph_map">
+<area shape="rect" href="inc&#45;odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql." alt="" coords="207,5,295,32"></map>
+</div>
+
+<p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dynsection">
+<p><center><img src="inc-odb_8php_43f6ce2d81c74dfbf4c8ea6c54cf321b_icgraph.png" border="0" usemap="#inc-odb_8php_43f6ce2d81c74dfbf4c8ea6c54cf321b_icgraph_map" alt=""></center>
+<map name="inc-odb_8php_43f6ce2d81c74dfbf4c8ea6c54cf321b_icgraph_map">
+<area shape="rect" href="odb__notes_2exec_2inc&#45;traitements_8php.html#33a267718e90ba67c7a694d64441663b" title="Affiche les notes d&#39;un candidat." alt="" coords="217,5,327,32"><area shape="rect" href="odb__notes_8php.html#477841e21bacf8c8b922a082b668fb2d" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_notes" alt="" coords="387,31,512,57"><area shape="rect" href="odb__param_8php.html#21e2b776a90c950c642402aec61c3928" title="exec_odb_param" alt="" coords="207,107,337,133"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="147d380870b3247e67b18fd9d7adf910"></a><!-- doxytag: member="inc-odb.php::getStatutUtilisateur" ref="147d380870b3247e67b18fd9d7adf910" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getStatutUtilisateur           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Determine le type d'utilisateur. 
+<p>
+<dl class="return" compact><dt><b>Renvoie:</b></dt><dd>string : 'Operateur', 'Encadrant', 'Admin' </dd></dl>
+
+<p>Définition à la ligne <a class="el" href="inc-odb_8php-source.html#l00036">36</a> du fichier <a class="el" href="inc-odb_8php-source.html">inc-odb.php</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__notes_8php-source.html#l00068">exec_odb_notes()</a>, <a class="el" href="odb__saisie_8php-source.html#l00060">exec_odb_saisie()</a>, <a class="el" href="inc-odb_8php-source.html#l00065">isAutorise()</a>, et <a class="el" href="inc-referentiel_8php-source.html#l00503">odb_introspection()</a>.</p>
+
+<p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dynsection">
+<p><center><img src="inc-odb_8php_147d380870b3247e67b18fd9d7adf910_icgraph.png" border="0" usemap="#inc-odb_8php_147d380870b3247e67b18fd9d7adf910_icgraph_map" alt=""></center>
+<map name="inc-odb_8php_147d380870b3247e67b18fd9d7adf910_icgraph_map">
+<area shape="rect" href="odb__notes_8php.html#477841e21bacf8c8b922a082b668fb2d" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_notes" alt="" coords="403,5,528,32"><area shape="rect" href="odb__saisie_8php.html#67a2630322ffbcb7fb0e22fe529cff6f" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_saisie..." alt="" coords="404,56,527,83"><area shape="rect" href="inc&#45;odb_8php.html#bbbb7d83cb4d809eae2b31b2a3b1f556" title="Interdit l&#39;acces a un utilisateur qui n&#39;est pas dans le tableau $tOK." alt="" coords="229,157,312,184"><area shape="rect" href="inc&#45;referentiel_8php.html#8a347b23cd689ac91a0c11390ae5a7e4" title="Introspection du referentiel pour l&#39;annee specifiee Consiste a verifier l&#39;integrite..." alt="" coords="204,107,337,133"><area shape="rect" href="odb__param_8php.html#21e2b776a90c950c642402aec61c3928" title="exec_odb_param" alt="" coords="400,157,531,184"><area shape="rect" href="odb__ref_8php.html#f0b6f12f726293fcfdb8dd144b4156e1" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_ref" alt="" coords="412,208,519,235"><area shape="rect" href="odb__repartition_8avecGeneriques_8php.html#b9758b82e8b610bcfeb6a980276cbb72" title="Repartition des candidats ODB." alt="" coords="388,107,543,133"><area shape="rect" href="odb__stats__siou_8php.html#0606558a56949a7488641f7e59c887ab" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_stats_siou..." alt="" coords="389,259,541,285"><area shape="rect" href="odb__suivi_8php.html#8f8bc33065238b34963709026e9adde6" title="exec_odb_suivi" alt="" coords="407,309,524,336"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="bbbb7d83cb4d809eae2b31b2a3b1f556"></a><!-- doxytag: member="inc-odb.php::isAutorise" ref="bbbb7d83cb4d809eae2b31b2a3b1f556" args="($tOK)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">isAutorise           </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>tOK</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Interdit l'acces a un utilisateur qui n'est pas dans le tableau $tOK. 
+<p>
+<dl compact><dt><b>Paramètres:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>array</em>&nbsp;</td><td>$tOK : tableau des types d'utilisateur autorises </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Renvoie:</b></dt><dd>boolean : true si autorise (sinon, die) </dd></dl>
+
+<p>Définition à la ligne <a class="el" href="inc-odb_8php-source.html#l00065">65</a> du fichier <a class="el" href="inc-odb_8php-source.html">inc-odb.php</a>.</p>
+
+<p>Références <a class="el" href="inc-pdf-table_8php-source.html#l00007">agrave</a>, <a class="el" href="inc-pdf-table_8php-source.html#l00007">eacute</a>, et <a class="el" href="inc-odb_8php-source.html#l00036">getStatutUtilisateur()</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__notes_8php-source.html#l00068">exec_odb_notes()</a>, <a class="el" href="odb__param_8php-source.html#l00032">exec_odb_param()</a>, <a class="el" href="odb__ref_8php-source.html#l00029">exec_odb_ref()</a>, <a class="el" href="odb__repartition_8avecGeneriques_8php-source.html#l00095">exec_odb_repartition()</a>, <a class="el" href="odb__saisie_8php-source.html#l00060">exec_odb_saisie()</a>, <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>, et <a class="el" href="odb__suivi_8php-source.html#l00026">exec_odb_suivi()</a>.</p>
+
+<p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dynsection">
+<p><center><img src="inc-odb_8php_bbbb7d83cb4d809eae2b31b2a3b1f556_cgraph.png" border="0" usemap="#inc-odb_8php_bbbb7d83cb4d809eae2b31b2a3b1f556_cgraph_map" alt=""></center>
+<map name="inc-odb_8php_bbbb7d83cb4d809eae2b31b2a3b1f556_cgraph_map">
+<area shape="rect" href="inc&#45;odb_8php.html#147d380870b3247e67b18fd9d7adf910" title="Determine le type d&#39;utilisateur." alt="" coords="139,5,288,32"></map>
+</div>
+
+<p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dynsection">
+<p><center><img src="inc-odb_8php_bbbb7d83cb4d809eae2b31b2a3b1f556_icgraph.png" border="0" usemap="#inc-odb_8php_bbbb7d83cb4d809eae2b31b2a3b1f556_icgraph_map" alt=""></center>
+<map name="inc-odb_8php_bbbb7d83cb4d809eae2b31b2a3b1f556_icgraph_map">
+<area shape="rect" href="odb__notes_8php.html#477841e21bacf8c8b922a082b668fb2d" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_notes" alt="" coords="155,5,280,32"><area shape="rect" href="odb__param_8php.html#21e2b776a90c950c642402aec61c3928" title="exec_odb_param" alt="" coords="152,56,283,83"><area shape="rect" href="odb__ref_8php.html#f0b6f12f726293fcfdb8dd144b4156e1" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_ref" alt="" coords="164,107,271,133"><area shape="rect" href="odb__repartition_8avecGeneriques_8php.html#b9758b82e8b610bcfeb6a980276cbb72" title="Repartition des candidats ODB." alt="" coords="140,157,295,184"><area shape="rect" href="odb__saisie_8php.html#67a2630322ffbcb7fb0e22fe529cff6f" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_saisie..." alt="" coords="156,208,279,235"><area shape="rect" href="odb__stats__siou_8php.html#0606558a56949a7488641f7e59c887ab" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_stats_siou..." alt="" coords="141,259,293,285"><area shape="rect" href="odb__suivi_8php.html#8f8bc33065238b34963709026e9adde6" title="exec_odb_suivi" alt="" coords="159,309,276,336"></map>
+</div>
+
+</div>
+</div><p>
+<a class="anchor" name="cc73cdf19f49ae7162c99fd07a614e88"></a><!-- doxytag: member="inc-odb.php::odb_query" ref="cc73cdf19f49ae7162c99fd07a614e88" args="($sql, $fichier, $ligne)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">odb_query           </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>sql</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>fichier</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>ligne</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Execute une requete sql. 
+<p>
+<dl compact><dt><b>Paramètres:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>$sql : code SQL a executer </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>$fichier : nom du fichier (par exemple, passer __FILE__) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>int</em>&nbsp;</td><td>$ligne : ligne (passer __LINE__) </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Renvoie:</b></dt><dd>resource : resultset correspondant </dd></dl>
+
+<p>Définition à la ligne <a class="el" href="inc-odb_8php-source.html#l00078">78</a> du fichier <a class="el" href="inc-odb_8php-source.html">inc-odb.php</a>.</p>
+
+<p>Références <a class="el" href="odb__affiche__csv_8php-source.html#l00014">$fichier</a>, <a class="el" href="inc-ezpdf_8php-source.html#l00026">$result</a>, et <a class="el" href="inc-pdf-attestations_8php-source.html#l00051">$sql</a>.</p>
+
+<p>Référencé par <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00652">afficherHistorique()</a>, <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00307">afficherImpressions()</a>, <a class="el" href="odb__notes_2exec_2inc-traitements_8php-source.html#l00013">afficherNotes()</a>, <a class="el" href="odb__repartition_8avecGeneriques_8php-source.html#l00029">capaciteCentres()</a>, <a class="el" href="odb__notes_8php-source.html#l00068">exec_odb_notes()</a>, <a class="el" href="odb__param_8php-source.html#l00032">exec_odb_param()</a>, <a class="el" href="odb__ref_8php-source.html#l00029">exec_odb_ref()</a>, <a class="el" href="odb__repartition_8avecGeneriques_8php-source.html#l00095">exec_odb_repartition()</a>, <a class="el" href="odb__requete_8php-source.html#l00022">exec_odb_requete()</a>, <a class="el" href="odb__saisie_8php-source.html#l00060">exec_odb_saisie()</a>, <a class="el" href="odb__statistiques_8php-source.html#l00022">exec_odb_statistiques()</a>, <a class="el" href="odb__stats__siou_8php-source.html#l00060">exec_odb_stats_siou()</a>, <a class="el" href="odb__suivi_8php-source.html#l00026">exec_odb_suivi()</a>, <a class="el" href="inc-referentiel_8php-source.html#l00465">formSelectQuery()</a>, <a class="el" href="inc-referentiel_8php-source.html#l00430">formSelectQueryRef()</a>, <a class="el" href="inc-base_8php-source.html#l00041">getCandidatsARepartir()</a>, <a class="el" href="inc-base_8php-source.html#l00009">getCapacite()</a>, <a class="el" href="inc-base_8php-source.html#l00073">getIdTableMax()</a>, <a class="el" href="inc-base_8php-source.html#l00244">getIdVilleEtablissement()</a>, <a class="el" href="odb__notes_2exec_2inc-bdd_8php-source.html#l00040">getJurys()</a>, <a class="el" href="inc-base_8php-source.html#l00236">getLibelleEtablissement()</a>, <a class="el" href="inc-base_8php-source.html#l00252">getLibelleVille()</a>, <a class="el" href="odb__notes_2exec_2inc-bdd_8php-source.html#l00010">getNbCandidats()</a>, <a class="el" href="inc-base_8php-source.html#l00162">getNbCandidatsARepartir()</a>, <a class="el" href="odb__notes_2exec_2inc-bdd_8php-source.html#l00021">getNbCandidatsNotes()</a>, <a class="el" href="inc-odb_8php-source.html#l00129">getNomComplet()</a>, <a class="el" href="inc-odb_8php-source.html#l00010">getParametresODB()</a>, <a class="el" href="inc-base_8php-source.html#l00089">getRangCandidatDansSalle()</a>, <a class="el" href="inc-referentiel_8php-source.html#l00083">getReferentiel()</a>, <a class="el" href="odb__notes_2exec_2inc-bdd_8php-source.html#l00095">getSeries()</a>, <a class="el" href="inc-base_8php-source.html#l00212">getSeriesDansCentre()</a>, <a class="el" href="inc-base_8php-source.html#l00182">getSeriesDansSalle()</a>, <a class="el" href="odb__notes_2exec_2inc-bdd_8php-source.html#l00078">getSeriesFromJury()</a>, <a class="el" href="inc-referentiel_8php-source.html#l00503">odb_introspection()</a>, <a class="el" href="inc-referentiel_8php-source.html#l00142">odb_maj_decisions()</a>, <a class="el" href="inc-base_8php-source.html#l00123">setRepartition()</a>, et <a class="el" href="inc-base_8php-source.html#l00134">setSynchroIdTableRepartition2Candidats()</a>.</p>
+
+<p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dynsection">
+<p><center><img src="inc-odb_8php_cc73cdf19f49ae7162c99fd07a614e88_icgraph.png" border="0" usemap="#inc-odb_8php_cc73cdf19f49ae7162c99fd07a614e88_icgraph_map" alt=""></center>
+<map name="inc-odb_8php_cc73cdf19f49ae7162c99fd07a614e88_icgraph_map">
+<area shape="rect" href="odb__notes_2exec_2inc&#45;traitements_8php.html#25aee0267595ba3fbc7413ba12e14b2e" title="Affiche l&#39;historique du candidat passé en param." alt="" coords="455,1952,591,1979"><area shape="rect" href="odb__notes_8php.html#477841e21bacf8c8b922a082b668fb2d" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_notes" alt="" coords="728,1800,853,1827"><area shape="rect" href="odb__notes_2exec_2inc&#45;traitements_8php.html#99a781952cafb10b8cb8a0adda4baa6d" title="Permet aux operateurs de saisie d&#39;acceder aux listes de resultat en fonction..." alt="" coords="449,1699,596,1725"><area shape="rect" href="odb__notes_2exec_2inc&#45;traitements_8php.html#33a267718e90ba67c7a694d64441663b" title="Affiche les notes d&#39;un candidat." alt="" coords="468,1597,577,1624"><area shape="rect" href="odb__repartition_8avecGeneriques_8php.html#ddea246a8e91ba341098ee91e0dfa1c2" title="Affiche la capacite de chaque centre." alt="" coords="728,508,853,535"><area shape="rect" href="odb__repartition_8avecGeneriques_8php.html#b9758b82e8b610bcfeb6a980276cbb72" title="Repartition des candidats ODB." alt="" coords="919,736,1073,763"><area shape="rect" href="odb__param_8php.html#21e2b776a90c950c642402aec61c3928" title="exec_odb_param" alt="" coords="457,1344,588,1371"><area shape="rect" href="odb__ref_8php.html#f0b6f12f726293fcfdb8dd144b4156e1" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_ref" alt="" coords="737,989,844,1016"><area shape="rect" href="odb__requete_8php.html#e6910fd90b6c90c11ddff04eb85023ee" title="exec_odb_requete" alt="" coords="169,432,308,459"><area shape="rect" href="odb__saisie_8php.html#67a2630322ffbcb7fb0e22fe529cff6f" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_saisie..." alt="" coords="935,1141,1057,1168"><area shape="rect" href="odb__statistiques_8php.html#5704db106a2f57c066729702057fbb75" title="exec_odb_statistiques" alt="" coords="441,989,604,1016"><area shape="rect" href="odb__stats__siou_8php.html#0606558a56949a7488641f7e59c887ab" title="exécuté automatiquement par le plugin au chargement de la page ?exec=odb_stats_siou..." alt="" coords="447,1800,599,1827"><area shape="rect" href="odb__suivi_8php.html#8f8bc33065238b34963709026e9adde6" title="exec_odb_suivi" alt="" coords="180,635,297,661"><area shape="rect" href="inc&#45;referentiel_8php.html#07bef630f993c827650782c7a4588b21" title="cree une liste SELECT a partir des resultats d&#39;une requete SQL" alt="" coords="456,888,589,915"><area shape="rect" href="inc&#45;referentiel_8php.html#c6883d9c334e278e5a3ca040f8b16cc2" title="cree une liste SELECT a partir des resultats d&#39;une requete SQL pour un referentiel..." alt="" coords="713,736,868,763"><area shape="rect" href="inc&#45;base_8php.html#ab9ba183925f5b59dcc76998488cb5ae" title="Recupere le tableau des candidats a repartir." alt="" coords="439,128,607,155"><area shape="rect" href="inc&#45;base_8php.html#3df289cb98e86548dd5a2ba1d612844f" title="Recupere le tableau de capacite d&#39;accueil d&#39;un centre de composition." alt="" coords="473,179,572,205"><area shape="rect" href="inc&#45;base_8php.html#9655e52be1c8d2424b01b145d69bbe3d" title="Recupere le plus grand id_table disponible pour le centre de composition." alt="" coords="183,280,295,307"><area shape="rect" href="inc&#45;base_8php.html#e94bb1db4a3bc1bc687818e3eec738b3" title="Recupere le rang (numero de salle et de table) d&#39;un candidat dans une salle." alt="" coords="424,229,621,256"><area shape="rect" href="inc&#45;base_8php.html#087d0df256bb4583fa369b3d1d518db5" title="Recupere le nombre de candidats dans chaque serie pour une salle donnee." alt="" coords="449,331,596,357"><area shape="rect" href="inc&#45;base_8php.html#e8fb167175d57674d351cad02b5d4036" title="getIdVilleEtablissement" alt="" coords="153,736,324,763"><area shape="rect" href="odb__notes_2exec_2inc&#45;bdd_8php.html#2bbd012fce7c005628269134b0046665" title="Recupere un tableau de jury." alt="" coords="201,1892,276,1919"><area shape="rect" href="inc&#45;base_8php.html#fb37de5c3982a219cab7a817311034a5" title="idEtablissement" alt="" coords="152,584,325,611"><area shape="rect" href="inc&#45;base_8php.html#d60db3aceb3728f5de5169c662d247aa" title="getLibelleVille" alt="" coords="185,685,292,712"><area shape="rect" href="odb__notes_2exec_2inc&#45;bdd_8php.html#000899dd9da7cf04c35abc6e440d6ed3" title="Recupere le nombre de candidats selon divers criteres." alt="" coords="176,1445,301,1472"><area shape="rect" href="inc&#45;base_8php.html#e1a122fdeec0454b3ac53c3adc2a6b0b" title="Recupere le nombre de candidats NON REPARTIS (sans id_table) pour un departement..." alt="" coords="145,533,332,560"><area shape="rect" href="odb__notes_2exec_2inc&#45;bdd_8php.html#2dde7f62ae89cb87ddcab5f9aaf737aa" title="getNbCandidatsNotes" alt="" coords="156,2104,321,2131"><area shape="rect" href="inc&#45;odb_8php.html#db56fd5dafef546c255b5c2668b3add6" title="getNomComplet" alt="" coords="173,1597,304,1624"><area shape="rect" href="inc&#45;odb_8php.html#43f6ce2d81c74dfbf4c8ea6c54cf321b" title="Recupere les parametres ODB." alt="" coords="164,1547,313,1573"><area shape="rect" href="inc&#45;referentiel_8php.html#8da6b5d71b8b85a4443092e825841479" title="getReferentiel" alt="" coords="183,1192,295,1219"><area shape="rect" href="odb__notes_2exec_2inc&#45;bdd_8php.html#68235e15b2e0c91db7f64dbed807d0ee" title="Recupere le tableau jury=&gt;serie de l&#39;annee." alt="" coords="197,1829,280,1856"><area shape="rect" href="inc&#45;base_8php.html#e650b2b60d956f431fe360f4c8f9190d" title="Recupere le nombre de candidats dans chaque serie pour un centre donne." alt="" coords="443,381,603,408"><area shape="rect" href="odb__notes_2exec_2inc&#45;bdd_8php.html#6c6066c6c35429378e06930dd848253c" title="Recupere le tableau des series (idSerie=&gt;serie) d&#39;un jury." alt="" coords="168,2053,309,2080"><area shape="rect" href="inc&#45;referentiel_8php.html#8a347b23cd689ac91a0c11390ae5a7e4" title="Introspection du referentiel pour l&#39;annee specifiee Consiste a verifier l&#39;integrite..." alt="" coords="172,888,305,915"><area shape="rect" href="inc&#45;referentiel_8php.html#38c3065b99469bad788c627a7b70360b" title="Met les decisions a jour." alt="" coords="169,1699,308,1725"><area shape="rect" href="inc&#45;base_8php.html#eafd2085176b2d14d9d1ccb06045c1cc" title="Cree le numero de table du candidat id_saisie." alt="" coords="467,27,579,53"><area shape="rect" href="inc&#45;base_8php.html#4d8032ee329b76b0283193796ff51c13" title="Synchronise les id_table de la table odb_repartition vers la table odb_candidats..." alt="" coords="383,77,663,104"><area shape="rect" href="odb__repartition_2exec_2inc&#45;traitements_8php.html#010c580ae6309b4804db56b0ee07e5f8" title="Répartir les candidats." alt="" coords="724,179,857,205"><area shape="rect" href="odb__repartition_8php.html#ddea246a8e91ba341098ee91e0dfa1c2" title="Affiche la capacite de chaque centre." alt="" coords="728,356,853,383"><area shape="rect" href="odb__repartition_8php.html#9dba294120f6b7ce91b9fec569ad7ef6" title="Ligne du formulaire de repartition." alt="" coords="440,635,605,661"><area shape="rect" href="odb__repartition_8php.html#b9758b82e8b610bcfeb6a980276cbb72" title="Repartition des candidats ODB." alt="" coords="713,584,868,611"><area shape="rect" href="inc&#45;referentiel_8php.html#c23eab81895f040f0ff6f3ee312a7f63" title="Cree les OPTIONS tirees du referentiel passe en parametre." alt="" coords="435,1091,611,1117"><area shape="rect" href="inc&#45;referentiel_8php.html#34801d7492d31569357873533e30d04d" title="isInReferentiel" alt="" coords="467,1243,579,1269"><area shape="rect" href="inc&#45;referentiel_8php.html#caa8fb22e017e5edd73e572b1c091189" title="formSelectRefInTR" alt="" coords="719,1091,863,1117"><area shape="rect" href="inc&#45;regles__gestion_8php.html#7b7e71083f065a8f45947cf013206a64" title="reglesGestion" alt="" coords="736,1243,845,1269"><area shape="rect" href="inc&#45;fichiers_8php.html#2153dd9ac414142bd968bd484f875abe" title="Lit et affiche le contenu d&#39;un fichier csv." alt="" coords="949,1243,1043,1269"><area shape="rect" href="inc&#45;fichiers_8php.html#3656c8f5a58718532bd18937ce8ad6d7" title="reprise de l&#39;import de fichier (process de verification apres upload)" alt="" coords="1123,1243,1237,1269"><area shape="rect" href="odb__import_8php.html#7bd675bee4f6b2cc8994b9c8a7d03039" title="exec_odb_import" alt="" coords="1287,1243,1417,1269"></map>
+</div>
+
+</div>
+</div><p>
+<hr size="1"><address style="text-align: right;"><small>Généré le Mon Mar 17 22:53:25 2008 pour Siou par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.3 </small></address>
+</body>
+</html>

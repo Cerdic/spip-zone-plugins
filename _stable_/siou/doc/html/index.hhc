@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML><HEAD></HEAD><BODY>
+<OBJECT type="text/site properties">
+<param name="FrameName" value="right">
+</OBJECT>
+<UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Liste des fichiers"><param name="Local" value="files.html"><param name="ImageNumber" value="1"></OBJECT>
+  <UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun/inc-ezpdf.php"><param name="Local" value="inc-ezpdf_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun/inc-graphe.php"><param name="Local" value="inc-graphe_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun/inc-html.php"><param name="Local" value="inc-html_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun/inc-image.php"><param name="Local" value="inc-image_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun/inc-image_manip.php"><param name="Local" value="inc-image__manip_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun/inc-odb.php"><param name="Local" value="inc-odb_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun/inc-pdf-attestations.php"><param name="Local" value="inc-pdf-attestations_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun/inc-pdf-convocation.php"><param name="Local" value="inc-pdf-convocation_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun/inc-pdf-resultats.php"><param name="Local" value="inc-pdf-resultats_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun/inc-pdf-table.php"><param name="Local" value="inc-pdf-table_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun/inc-pdf.php"><param name="Local" value="inc-pdf_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun/inc-referentiel.php"><param name="Local" value="inc-referentiel_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun/inc-regles_gestion.php"><param name="Local" value="inc-regles__gestion_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun/img_pack/vignettes/index.php"><param name="Local" value="odb__commun_2img__pack_2vignettes_2index_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_import/inc-odb_import.php"><param name="Local" value="inc-odb__import_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_import/exec/inc-fichiers.php"><param name="Local" value="inc-fichiers_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_import/exec/odb_affiche_csv.php"><param name="Local" value="odb__affiche__csv_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_import/exec/odb_import.php"><param name="Local" value="odb__import_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_notes/inc-odb_notes.php"><param name="Local" value="inc-odb__notes_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_notes/exec/inc-bdd.php"><param name="Local" value="odb__notes_2exec_2inc-bdd_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_notes/exec/inc-traitements.php"><param name="Local" value="odb__notes_2exec_2inc-traitements_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_notes/exec/odb_notes.php"><param name="Local" value="odb__notes_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_notes/exec/odb_notes2.php"><param name="Local" value="odb__notes2_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_parametrage/inc-odb_param.php"><param name="Local" value="inc-odb__param_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_parametrage/exec/odb_param.php"><param name="Local" value="odb__param_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_parametrage/exec/odb_param2.php"><param name="Local" value="odb__param2_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_referentiel/inc-odb_ref.php"><param name="Local" value="inc-odb__ref_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_referentiel/exec/odb_ref.php"><param name="Local" value="odb__ref_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_repartition/inc-odb_repartition.php"><param name="Local" value="inc-odb__repartition_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_repartition/exec/inc-base.php"><param name="Local" value="inc-base_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_repartition/exec/inc-traitements.php"><param name="Local" value="odb__repartition_2exec_2inc-traitements_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_repartition/exec/odb_repartition.avecGeneriques.php"><param name="Local" value="odb__repartition_8avecGeneriques_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_repartition/exec/odb_repartition.php"><param name="Local" value="odb__repartition_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_requete/inc-odb_requete.php"><param name="Local" value="inc-odb__requete_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_requete/exec/odb_requete.php"><param name="Local" value="odb__requete_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_requete/img_pack/inc-odb_statistiques.php"><param name="Local" value="odb__requete_2img__pack_2inc-odb__statistiques_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_saisie/inc-odb_saisie.php"><param name="Local" value="inc-odb__saisie_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_saisie/exec/inc-bdd.php"><param name="Local" value="odb__saisie_2exec_2inc-bdd_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_saisie/exec/odb_saisie.php"><param name="Local" value="odb__saisie_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_saisie/img_pack/vignettes/index.php"><param name="Local" value="odb__saisie_2img__pack_2vignettes_2index_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_statistiques_candidats/inc-odb_statistiques.php"><param name="Local" value="odb__statistiques__candidats_2inc-odb__statistiques_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_statistiques_candidats/exec/odb_statistiques.php"><param name="Local" value="odb__statistiques_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_statistiques_siou/inc-odb_stats_siou.php"><param name="Local" value="inc-odb__stats__siou_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_statistiques_siou/exec/odb_stats_siou.php"><param name="Local" value="odb__stats__siou_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_statistiques_siou/exec/resultats_ajournes_par_centre.php"><param name="Local" value="resultats__ajournes__par__centre_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_statistiques_siou/exec/resultats_par_centre.php"><param name="Local" value="resultats__par__centre_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_statistiques_siou/exec/resultats_refuses_par_centre.php"><param name="Local" value="resultats__refuses__par__centre_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_suivi/inc-odb_suivi.php"><param name="Local" value="inc-odb__suivi_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_suivi/exec/odb_suivi.php"><param name="Local" value="odb__suivi_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_suivi/img_pack/inc-odb_statistiques.php"><param name="Local" value="odb__suivi_2img__pack_2inc-odb__statistiques_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="siou_spip/file.php"><param name="Local" value="file_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="siou_spip/odb_fonctions.php"><param name="Local" value="odb__fonctions_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+  </UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Répertoires"><param name="Local" value="dirs.html"><param name="ImageNumber" value="1"></OBJECT>
+  <UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_commun"><param name="Local" value="dir_d85a68ddeac050d85549308ca402191f.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="img_pack"><param name="Local" value="dir_370a0933dcd8b1470a151198a52d3b40.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="vignettes"><param name="Local" value="dir_284629d1db0fe3f171e3eb82eab7d2f6.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="index.php"><param name="Local" value="odb__commun_2img__pack_2vignettes_2index_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-ezpdf.php"><param name="Local" value="inc-ezpdf_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-graphe.php"><param name="Local" value="inc-graphe_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-html.php"><param name="Local" value="inc-html_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-image.php"><param name="Local" value="inc-image_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-image_manip.php"><param name="Local" value="inc-image__manip_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-odb.php"><param name="Local" value="inc-odb_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-pdf-attestations.php"><param name="Local" value="inc-pdf-attestations_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-pdf-convocation.php"><param name="Local" value="inc-pdf-convocation_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-pdf-resultats.php"><param name="Local" value="inc-pdf-resultats_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-pdf-table.php"><param name="Local" value="inc-pdf-table_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-pdf.php"><param name="Local" value="inc-pdf_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-referentiel.php"><param name="Local" value="inc-referentiel_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-regles_gestion.php"><param name="Local" value="inc-regles__gestion_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_import"><param name="Local" value="dir_7775374b3effef0d603a991dbd5ed302.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="exec"><param name="Local" value="dir_fd5b1d203cfb8470930919f53448973f.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-fichiers.php"><param name="Local" value="inc-fichiers_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_affiche_csv.php"><param name="Local" value="odb__affiche__csv_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_import.php"><param name="Local" value="odb__import_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-odb_import.php"><param name="Local" value="inc-odb__import_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_notes"><param name="Local" value="dir_8304c97eecfdedd1018accbc24201d58.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="exec"><param name="Local" value="dir_944f8b8909d831464407f99f29c5403f.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-bdd.php"><param name="Local" value="odb__notes_2exec_2inc-bdd_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-traitements.php"><param name="Local" value="odb__notes_2exec_2inc-traitements_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_notes.php"><param name="Local" value="odb__notes_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_notes2.php"><param name="Local" value="odb__notes2_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-odb_notes.php"><param name="Local" value="inc-odb__notes_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_parametrage"><param name="Local" value="dir_15d152859d19c0522da63e6c810f0a75.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="exec"><param name="Local" value="dir_20e314df267b2b083f12ab456ba5ded6.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_param.php"><param name="Local" value="odb__param_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_param2.php"><param name="Local" value="odb__param2_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-odb_param.php"><param name="Local" value="inc-odb__param_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_referentiel"><param name="Local" value="dir_dc64cf9f1a122bc8ce2a3db8a9e8186d.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="exec"><param name="Local" value="dir_5ff68b244f73219e99073f0a29941c3d.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_ref.php"><param name="Local" value="odb__ref_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-odb_ref.php"><param name="Local" value="inc-odb__ref_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_repartition"><param name="Local" value="dir_815c5a1351c78a122efb88a2a7d5980d.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="exec"><param name="Local" value="dir_a9fe0185a7b497ba5d897d786e368dbb.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-base.php"><param name="Local" value="inc-base_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-traitements.php"><param name="Local" value="odb__repartition_2exec_2inc-traitements_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_repartition.avecGeneriques.php"><param name="Local" value="odb__repartition_8avecGeneriques_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_repartition.php"><param name="Local" value="odb__repartition_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-odb_repartition.php"><param name="Local" value="inc-odb__repartition_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_requete"><param name="Local" value="dir_8f8a72f71f81f6509d29a518489e3734.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="exec"><param name="Local" value="dir_fa9802888b9406aecc9425db68d538dc.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_requete.php"><param name="Local" value="odb__requete_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="img_pack"><param name="Local" value="dir_8a58631968c3d6fd0a99e030cca278e7.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-odb_statistiques.php"><param name="Local" value="odb__requete_2img__pack_2inc-odb__statistiques_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-odb_requete.php"><param name="Local" value="inc-odb__requete_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_saisie"><param name="Local" value="dir_ff2f189f9aeaff6fca973b045bafd454.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="exec"><param name="Local" value="dir_0d8566f30943fbf8c12a7678aa741d5f.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-bdd.php"><param name="Local" value="odb__saisie_2exec_2inc-bdd_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_saisie.php"><param name="Local" value="odb__saisie_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="img_pack"><param name="Local" value="dir_e77ceebfdd20fbc9e5edb31ea61952e4.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="vignettes"><param name="Local" value="dir_77645b9a0b366f6f55ab12a900c3e32a.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="index.php"><param name="Local" value="odb__saisie_2img__pack_2vignettes_2index_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-odb_saisie.php"><param name="Local" value="inc-odb__saisie_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_statistiques_candidats"><param name="Local" value="dir_1d805a50dd7ba2fb8c4d874954bb9223.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="exec"><param name="Local" value="dir_402a132145f9aa30f0984e4c32132c37.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_statistiques.php"><param name="Local" value="odb__statistiques_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-odb_statistiques.php"><param name="Local" value="odb__statistiques__candidats_2inc-odb__statistiques_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_statistiques_siou"><param name="Local" value="dir_89200f03b9e03e4bed23a73e0b0e62c1.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="exec"><param name="Local" value="dir_58a84f71e2ec18f26e0f9c4cd42b5552.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_stats_siou.php"><param name="Local" value="odb__stats__siou_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="resultats_ajournes_par_centre.php"><param name="Local" value="resultats__ajournes__par__centre_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="resultats_par_centre.php"><param name="Local" value="resultats__par__centre_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="resultats_refuses_par_centre.php"><param name="Local" value="resultats__refuses__par__centre_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-odb_stats_siou.php"><param name="Local" value="inc-odb__stats__siou_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_suivi"><param name="Local" value="dir_2c9be3c5abd5b387748c4428f45e6653.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="exec"><param name="Local" value="dir_876dc602ebabe8eeb60510dad127e25a.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_suivi.php"><param name="Local" value="odb__suivi_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="img_pack"><param name="Local" value="dir_6dba016b898ffb858542eac700f51938.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-odb_statistiques.php"><param name="Local" value="odb__suivi_2img__pack_2inc-odb__statistiques_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="inc-odb_suivi.php"><param name="Local" value="inc-odb__suivi_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="siou_spip"><param name="Local" value="dir_29c010956b06ed77ca68e3bf63b90184.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="file.php"><param name="Local" value="file_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="odb_fonctions.php"><param name="Local" value="odb__fonctions_8php.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  </UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Portée globale"><param name="Local" value="globals.html"><param name="ImageNumber" value="11"></OBJECT>
+</UL>

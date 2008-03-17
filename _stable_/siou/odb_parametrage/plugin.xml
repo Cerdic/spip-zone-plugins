@@ -1,0 +1,15 @@
+<plugin>
+   <nom>ODB : Param&egrave;tres</nom>
+   <auteur>Cedric PROTIERE - AUF - Février 2007</auteur>
+   <version>0.1</version>
+   <etat>dev</etat>
+   <description>Param&eacute;trage de SIOU</description>
+   <lien>http://www.officedubacbenin.bj</lien> <!-- URI de documentation -->
+   <icon>img_pack/logo_odb_150.png</icon>
+   <prefix>odb_param</prefix>
+   <pipeline>
+      <nom>ajouter_boutons</nom>
+      <action>ajouterBoutons</action>
+      <inclure>inc-odb_param.php</inclure>
+   </pipeline>
+</plugin>

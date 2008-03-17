@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Siou:  Fichier source de odb_import/exec/inc-fichiers.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Généré par Doxygen 1.5.3 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Page&nbsp;principale</span></a></li>
+    <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+    <li><a href="dirs.html"><span>Répertoires</span></a></li>
+    <li>
+      <form action="search.php" method="get">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td><label>&nbsp;Rechercher&nbsp;</label></td>
+            <td><input type="text" name="query" value="" size="20" accesskey="s"/></td>
+          </tr>
+        </table>
+      </form>
+    </li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_7775374b3effef0d603a991dbd5ed302.html">odb_import</a>&nbsp;&raquo&nbsp;<a class="el" href="dir_fd5b1d203cfb8470930919f53448973f.html">exec</a></div>
+<h1>inc-fichiers.php</h1><a href="inc-fichiers_8php.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 define(MAX_COLONNES_AFFICHEES,10); <span class="comment">// nb de colonnes affich&amp;eacute;es max</span>
+<a name="l00004"></a>00004 define(MAX_LIGNES_AFFICHEES,5); <span class="comment">// nb de colonnes affich&amp;eacute;es max</span>
+<a name="l00005"></a>00005 <span class="comment">//if(_DIR_PLUGIN_ODB_IMPORT==trim("_DIR_PLUGIN_ODB_IMPORT")) die("&lt;U&gt;/!&lt;/U&gt; Constante _DIR_PLUGIN_ODB_IMPORT doit être d&amp;eacute;finie pour appeler ".__FILE__);</span>
+<a name="l00006"></a><a class="code" href="inc-fichiers_8php.html#58f5fd0b9d70bc87295be959c7bc176a">00006</a> global <a class="code" href="inc-fichiers_8php.html#58f5fd0b9d70bc87295be959c7bc176a">$debug</a>;
+<a name="l00007"></a>00007 <span class="comment">// d&amp;eacute;compresse l'archive zip dans le r&amp;eacute;pertoire de destination (true si ok)</span>
+<a name="l00008"></a><a class="code" href="inc-fichiers_8php.html#693db2beb7305851d7653c58971efaf3">00008</a> function <a class="code" href="inc-fichiers_8php.html#693db2beb7305851d7653c58971efaf3">unzip</a>($archive,$destination) {
+<a name="l00009"></a>00009    global <a class="code" href="inc-fichiers_8php.html#58f5fd0b9d70bc87295be959c7bc176a">$debug</a>,<a class="code" href="odb__affiche__csv_8php.html#0a3ebee356c79fa7521c28283a372f76">$txt_debug</a>;
+<a name="l00010"></a>00010    <span class="keywordflow">if</span>($debug) {
+<a name="l00011"></a>00011       $txt_debug.= <span class="stringliteral">"=== unzip ===&lt;BR/&gt;Archive $archive&lt;BR&gt;destination $destination&lt;br/&gt;\n"</span>;
+<a name="l00012"></a>00012    }
+<a name="l00013"></a>00013    $zip = <span class="keyword">new</span> PclZip($archive);
+<a name="l00014"></a>00014    $ok = $zip-&gt;extract(
+<a name="l00015"></a>00015             PCLZIP_OPT_PATH, $destination,
+<a name="l00016"></a>00016             PCLZIP_OPT_REPLACE_NEWER);
+<a name="l00017"></a>00017    <span class="keywordflow">if</span> ($zip-&gt;error_code&lt;0) {
+<a name="l00018"></a>00018       debut_html();
+<a name="l00019"></a>00019       echo _TT('tradloader:donnees_incorrectes',
+<a name="l00020"></a>00020                array('erreur' =&gt; $zip-&gt;errorInfo()));
+<a name="l00021"></a>00021       fin_html();
+<a name="l00022"></a>00022       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00023"></a>00023    }
+<a name="l00024"></a>00024    <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00025"></a>00025 }
+<a name="l00026"></a>00026 
+<a name="l00033"></a><a class="code" href="inc-fichiers_8php.html#cc5c7108e3f0ae7b674e0c1f9c0b71f5">00033</a> function <a class="code" href="inc-fichiers_8php.html#cc5c7108e3f0ae7b674e0c1f9c0b71f5" title="Detecte l&amp;#39;extension d&amp;#39;un fichier (qui doit comporter un point).">detecte_extension</a> (<a class="code" href="odb__affiche__csv_8php.html#1cab83481bc861b32af8f093a199c35e">$fichier</a>) {
+<a name="l00034"></a>00034    $extension = substr(strrchr(<a class="code" href="odb__affiche__csv_8php.html#1cab83481bc861b32af8f093a199c35e">$fichier</a>, <span class="stringliteral">"."</span>), 1);
+<a name="l00035"></a>00035    <span class="keywordflow">return</span> strtolower($extension);
+<a name="l00036"></a>00036 }
+<a name="l00037"></a>00037 
+<a name="l00043"></a><a class="code" href="inc-fichiers_8php.html#70642c7444da1da8119078d46bb83b54">00043</a> function <a class="code" href="inc-fichiers_8php.html#70642c7444da1da8119078d46bb83b54" title="Vide un r&amp;eacute;pertoire de ses fichiers (pas ses sous-repertoires).">vide_repertoire</a>($rep) {
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045    <span class="keywordflow">if</span> ($handle = opendir($rep)) {
+<a name="l00046"></a>00046       <span class="comment">/* Ceci est la façon correcte de traverser un dossier. */</span>
+<a name="l00047"></a>00047       <span class="keywordflow">while</span> (<span class="keyword">false</span> !== (<a class="code" href="odb__affiche__csv_8php.html#1cab83481bc861b32af8f093a199c35e">$fichier</a> = readdir($handle))) {
+<a name="l00048"></a>00048          <span class="keywordflow">if</span>(<a class="code" href="odb__affiche__csv_8php.html#1cab83481bc861b32af8f093a199c35e">$fichier</a>!=<span class="stringliteral">"."</span> &amp;&amp; <a class="code" href="odb__affiche__csv_8php.html#1cab83481bc861b32af8f093a199c35e">$fichier</a>!=<span class="stringliteral">".."</span> &amp;&amp; <a class="code" href="odb__affiche__csv_8php.html#1cab83481bc861b32af8f093a199c35e">$fichier</a>!=<span class="stringliteral">"archives"</span>)
+<a name="l00049"></a>00049             <span class="keywordflow">if</span> (unlink($rep.<a class="code" href="odb__affiche__csv_8php.html#1cab83481bc861b32af8f093a199c35e">$fichier</a>))
+<a name="l00050"></a>00050                $deleted.= <span class="stringliteral">"Suppression du fichier temporaire &lt;I&gt;$fichier&lt;/I&gt; "</span>.OK.<span class="stringliteral">"&lt;br/&gt;\n"</span>;
+<a name="l00051"></a>00051             <span class="keywordflow">else</span>
+<a name="l00052"></a>00052                die(<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>.<span class="stringliteral">" - Suppression des fichiers temporaires impossible : $rep $fichier\n"</span>);
+<a name="l00053"></a>00053       }
+<a name="l00054"></a>00054       closedir($handle);
+<a name="l00055"></a>00055       <span class="keywordflow">return</span> $deleted;
+<a name="l00056"></a>00056    } <span class="keywordflow">else</span>
+<a name="l00057"></a>00057       die(<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>.<span class="stringliteral">" - Impossible d'ouvrir le r&amp;eacute;pertoire $rep\n"</span>);
+<a name="l00058"></a>00058    <span class="comment">/* php5</span>
+<a name="l00059"></a>00059 <span class="comment">      $files = scandir($rep);</span>
+<a name="l00060"></a>00060 <span class="comment">      foreach($files as $fichier) {</span>
+<a name="l00061"></a>00061 <span class="comment">         if($fichier!="." &amp;&amp; $fichier!=".." &amp;&amp; $fichier!="archives")</span>
+<a name="l00062"></a>00062 <span class="comment">            if (unlink($rep.$fichier)) $deleted.= "&lt;BR/&gt;Suppression du fichier temporaire &lt;I&gt;$fichier&lt;/I&gt; ".OK."&lt;br/&gt;\n";</span>
+<a name="l00063"></a>00063 <span class="comment">            else die(KO." - Suppression des fichiers temporaires impossible : $rep $fichier\n");</span>
+<a name="l00064"></a>00064 <span class="comment">      }</span>
+<a name="l00065"></a>00065 <span class="comment">   */</span>
+<a name="l00066"></a>00066 }
+<a name="l00067"></a>00067 
+<a name="l00080"></a><a class="code" href="inc-fichiers_8php.html#2153dd9ac414142bd968bd484f875abe">00080</a> function <a class="code" href="inc-fichiers_8php.html#2153dd9ac414142bd968bd484f875abe" title="Lit et affiche le contenu d&amp;#39;un fichier csv.">affiche_csv</a>(<a class="code" href="odb__affiche__csv_8php.html#1cab83481bc861b32af8f093a199c35e">$fichier</a>,$table,<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>,$tout_afficher=<span class="keyword">false</span>,$separateur=<span class="stringliteral">","</span>,$ligneDebutImport=1) {
+<a name="l00081"></a>00081    global <a class="code" href="inc-fichiers_8php.html#58f5fd0b9d70bc87295be959c7bc176a">$debug</a>, <a class="code" href="odb__affiche__csv_8php.html#0a3ebee356c79fa7521c28283a372f76">$txt_debug</a>, <a class="code" href="inc-referentiel_8php.html#32f56aa14be3aa7fa481441d26b8bca5">$odb_referentiel</a>,<a class="code" href="inc-referentiel_8php.html#b3984efda359cc31d6cfe267131a7ff9">$odb_mapping</a>;
+<a name="l00082"></a>00082    include_once(<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>.<span class="stringliteral">"inc-referentiel.php"</span>);
+<a name="l00083"></a>00083    include_once(<a class="code" href="odb__affiche__csv_8php.html#c24ff0f08fb134ed2d43c99826787bc2">DIR_ODB_COMMUN</a>.<span class="stringliteral">"inc-regles_gestion.php"</span>);
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085    <span class="keywordflow">if</span>($debug) {
+<a name="l00086"></a>00086       echo <span class="stringliteral">"&lt;div align='left'&gt;\n"</span>;
+<a name="l00087"></a>00087       echo <span class="stringliteral">"&lt;pre&gt;odb_referentiel "</span>;
+<a name="l00088"></a>00088       print_r($odb_referentiel);
+<a name="l00089"></a>00089       echo <span class="stringliteral">"&lt;/pre&gt;&lt;hr/&gt;"</span>;
+<a name="l00090"></a>00090       echo <span class="stringliteral">"&lt;pre&gt;odb_mapping "</span>;
+<a name="l00091"></a>00091       print_r($odb_mapping);
+<a name="l00092"></a>00092       echo <span class="stringliteral">"&lt;/pre&gt;&lt;hr/&gt;&lt;/div&gt;\n"</span>;
+<a name="l00093"></a>00093    }
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095    $str=<span class="stringliteral">""</span>;
+<a name="l00096"></a>00096    $tr_debug=<span class="stringliteral">""</span>;
+<a name="l00097"></a>00097    $row_titres=<span class="stringliteral">""</span>;
+<a name="l00098"></a>00098    $fatal=<span class="stringliteral">""</span>;
+<a name="l00099"></a>00099    <span class="keywordflow">if</span>(file_exists(<a class="code" href="odb__affiche__csv_8php.html#1cab83481bc861b32af8f093a199c35e">$fichier</a>)) {
+<a name="l00100"></a>00100       $nom_fichier = substr(strrchr(<a class="code" href="odb__affiche__csv_8php.html#1cab83481bc861b32af8f093a199c35e">$fichier</a>, <span class="stringliteral">"/"</span>), 1);
+<a name="l00101"></a>00101       $flag_lignes_depasse=<span class="keyword">false</span>;
+<a name="l00102"></a>00102       $flag_col_depasse=<span class="keyword">false</span>;
+<a name="l00103"></a>00103       <span class="keywordflow">if</span>($debug)
+<a name="l00104"></a>00104          $txt_debug .= <span class="stringliteral">"=== affiche_csv ===&lt;BR/&gt;Fichier CSV : $fichier&lt;BR&gt;\n"</span>;
+<a name="l00105"></a>00105       $row = -1;
+<a name="l00106"></a>00106       $handle = fopen(<a class="code" href="odb__affiche__csv_8php.html#1cab83481bc861b32af8f093a199c35e">$fichier</a>, <span class="stringliteral">"r"</span>);
+<a name="l00107"></a>00107       $str.=<span class="stringliteral">"&lt;div class='verdana2 spip_large'&gt;"</span>
+<a name="l00108"></a>00108             . <a class="code" href="inc-html_8php.html#fa7c9d548e547f5aa3b1a88df9ec970c" title="Affiche une vignette (icone de type de fichier).">vignette</a>('csv<span class="charliteral">','</span>Fichier')
+<a name="l00109"></a>00109             . <span class="stringliteral">"$nom_fichier&lt;/div&gt;\n"</span>
+<a name="l00110"></a>00110             ;
+<a name="l00111"></a>00111       $str .= <span class="stringliteral">"&lt;table class='spip'&gt;\n"</span>;
+<a name="l00112"></a>00112       $estPaire=0;
+<a name="l00113"></a>00113       <a class="code" href="odb__affiche__csv_8php.html#951141d6016cb38e14821d9cfa38929f">$tab_csv</a>[<span class="stringliteral">"sql"</span>][<span class="stringliteral">"debut"</span>]=<span class="stringliteral">"$table|$annee"</span>;
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115       <span class="keywordflow">while</span> ((<a class="code" href="inc-ezpdf_8php.html#6efc15b5a2314dd4b5aaa556a375c6d6">$data</a> = fgetcsv($handle, 1000, $separateur))) {
+<a name="l00116"></a>00116          $row++;
+<a name="l00117"></a>00117          $num = count(<a class="code" href="inc-ezpdf_8php.html#6efc15b5a2314dd4b5aaa556a375c6d6">$data</a>);
+<a name="l00118"></a>00118          <span class="keywordflow">if</span>($row&gt;MAX_LIGNES_AFFICHEES &amp;&amp; !$tout_afficher)
+<a name="l00119"></a>00119             $flag_lignes_depasse = <span class="keyword">true</span>;
+<a name="l00120"></a>00120          <span class="keywordflow">else</span> {
+<a name="l00121"></a>00121             <span class="keywordflow">if</span>($row==0) {
+<a name="l00122"></a>00122                $td=<span class="stringliteral">"TH"</span>;
+<a name="l00123"></a>00123                $col1=<span class="stringliteral">"No"</span>;
+<a name="l00124"></a>00124                $tr_class=<span class="stringliteral">"row_first"</span>;
+<a name="l00125"></a>00125             } <span class="keywordflow">else</span> {
+<a name="l00126"></a>00126                $td=<span class="stringliteral">"TD"</span>;
+<a name="l00127"></a>00127                $col1=$row;
+<a name="l00128"></a>00128                <span class="keywordflow">if</span>($estPaire==1)
+<a name="l00129"></a>00129                   $tr_class=<span class="stringliteral">"row_even"</span>;
+<a name="l00130"></a>00130                <span class="keywordflow">else</span>
+<a name="l00131"></a>00131                   $tr_class=<span class="stringliteral">"row_odd"</span>;
+<a name="l00132"></a>00132             }
+<a name="l00133"></a>00133             $estPaire=$estPaire=1-$estPaire;
+<a name="l00134"></a>00134             $str.= <span class="stringliteral">"   &lt;TR class='$tr_class'&gt;&lt;th class='spip'&gt;$col1&lt;/th&gt;"</span>;
+<a name="l00135"></a>00135          }
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137          <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>=<span class="stringliteral">""</span>;
+<a name="l00138"></a>00138          $col_dept=0;
+<a name="l00139"></a>00139          <span class="keywordflow">for</span> ($c=0; $c &lt; $num; $c++) {
+<a name="l00140"></a>00140             <span class="keywordflow">if</span>($tout_afficher)
+<a name="l00141"></a>00141                $valeur=trim(<a class="code" href="inc-ezpdf_8php.html#6efc15b5a2314dd4b5aaa556a375c6d6">$data</a>[$c]);
+<a name="l00142"></a>00142             <span class="keywordflow">else</span>
+<a name="l00143"></a>00143                $valeur=unicode2charset(charset2unicode(trim(<a class="code" href="inc-ezpdf_8php.html#6efc15b5a2314dd4b5aaa556a375c6d6">$data</a>[$c])));
+<a name="l00144"></a>00144             <span class="keywordflow">if</span>($c&gt;MAX_COLONNES_AFFICHEES-1 &amp;&amp; !$tout_afficher)
+<a name="l00145"></a>00145                $flag_col_depasse=<span class="keyword">true</span>;
+<a name="l00146"></a>00146             elseif(!$flag_lignes_depasse)
+<a name="l00147"></a>00147                $str.= <span class="stringliteral">"      &lt;$td class='spip'&gt;$valeur&lt;/$td&gt;\n"</span>;
+<a name="l00148"></a>00148             <span class="keywordflow">if</span>($row==0) {
+<a name="l00149"></a>00149                $type=<span class="stringliteral">"row_titre"</span>;
+<a name="l00150"></a>00150                $row_titre[$c]=$valeur;
+<a name="l00151"></a>00151                <span class="keywordflow">if</span>($row_titre[$c]==$odb_mapping[<span class="stringliteral">"departement"</span>])
+<a name="l00152"></a>00152                   $col_dept=$c;
+<a name="l00153"></a>00153             } <span class="keywordflow">else</span> {
+<a name="l00154"></a>00154                <span class="keywordflow">if</span>($col_dept==0)
+<a name="l00155"></a>00155                   $col_dept=19; <span class="comment">//TODO comprendre pk tjs nul</span>
+<a name="l00156"></a>00156                $champ=$row_titre[$c];
+<a name="l00157"></a>00157                <span class="comment">//$type=$odb_referentiel[$table][$champ];</span>
+<a name="l00158"></a>00158                <span class="keywordflow">if</span>($type==<span class="stringliteral">""</span>)
+<a name="l00159"></a>00159                   die(<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>.<span class="stringliteral">" - Champ &lt;b&gt;[$champ]&lt;/b&gt; inconnu, veuillez v&amp;eacute;rifier la ligne d'en-t&amp;ecirc;tes de votre fichier &lt;b&gt;csv&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Note : sans doutes avez-vous une ancienne version de fichier d'import, veuillez vous r&amp;eacute;f&amp;eacute;rer aux &lt;A HREF='"</span>.generer_url_ecrire('odb_ref').<span class="stringliteral">"&amp;fichier_type=$table'&gt;fichiers types&lt;/A&gt;&lt;/i&gt;\n"</span>);
+<a name="l00160"></a>00160                $txt_debug.=<span class="stringliteral">"[$row:$c] $champ=$type&lt;br/&gt;\n"</span>;
+<a name="l00161"></a>00161                <span class="comment">//echo "val $valeur - type $type - annee $annee - dept ".$data[$col_dept]." - n° ".$data[0];</span>
+<a name="l00162"></a>00162                <span class="comment">//$ref=(substr_count($odb_referentiel[$table][$champ],'ref')&gt;0)?substr($odb_referentiel[$table][$champ],3):$champ;</span>
+<a name="l00163"></a>00163                <span class="keywordflow">if</span>(strlen($aValRef[$champ][$valeur])&gt;0) {
+<a name="l00164"></a>00164                   <span class="comment">// on avait déjà récupéré cette valeur qui est bonne</span>
+<a name="l00165"></a>00165                   <span class="comment">//echo "==&amp;gt; [OK] $champ $valeur&lt;br/&gt;";</span>
+<a name="l00166"></a>00166                   $valeur=$aValRef[$champ][$valeur];
+<a name="l00167"></a>00167                } elseif($aErreurs[$champ][$valeur]) {
+<a name="l00168"></a>00168                   <span class="comment">// on avait déjà récupéré cette valeur qui est mauvaise</span>
+<a name="l00169"></a>00169                   <span class="comment">//echo "==&amp;gt; [KO] $champ $valeur&lt;br/&gt;";</span>
+<a name="l00170"></a>00170                   $fatal.=<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>
+<a name="l00171"></a>00171                        .<span class="stringliteral">" - Candidat #&lt;b&gt;"</span>.<a class="code" href="inc-ezpdf_8php.html#6efc15b5a2314dd4b5aaa556a375c6d6">$data</a>[0].<span class="stringliteral">"&lt;/b&gt; - Erreur d&amp;eacute;j&amp;agrave; rencontr&amp;eacute;e : &lt;b&gt;$champ&lt;/b&gt;[&lt;A HREF='#"</span>
+<a name="l00172"></a>00172                        .$champ.<span class="charliteral">'_'</span>.str_replace(<span class="charliteral">' '</span>,<span class="charliteral">'_'</span>,$valeur).<span class="stringliteral">"'&gt;$valeur&lt;/A&gt;]&lt;br/&gt;\n"</span>
+<a name="l00173"></a>00173                        ;
+<a name="l00174"></a>00174                } <span class="keywordflow">else</span> { <span class="comment">// c'est la premiere fois qu'on tombe sur cette valeur : on va lui appliquer les RG.</span>
+<a name="l00175"></a>00175                   <span class="keywordflow">if</span>(trim(<a class="code" href="inc-ezpdf_8php.html#6efc15b5a2314dd4b5aaa556a375c6d6">$data</a>[0])==<span class="stringliteral">""</span>) die (<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>.<span class="stringliteral">" - Votre fichier semble corrompu, veuillez v&amp;eacute;rifier les lignes de fin de fichier &lt;b&gt;dans un &amp;eacute;diteur de texte&lt;/b&gt; (comme &lt;a href='http://www.flos-freeware.ch/'&gt;Notepad2&lt;/a&gt;...)"</span>);
+<a name="l00176"></a>00176                   $retour=<a class="code" href="inc-regles__gestion_8php.html#7b7e71083f065a8f45947cf013206a64">reglesGestion</a>($table,$valeur,$champ,<a class="code" href="inc-ezpdf_8php.html#6efc15b5a2314dd4b5aaa556a375c6d6">$data</a>[$col_dept],<a class="code" href="inc-ezpdf_8php.html#6efc15b5a2314dd4b5aaa556a375c6d6">$data</a>[0]);
+<a name="l00177"></a>00177                   $oldValeur=$valeur;
+<a name="l00178"></a>00178                   $valeur=$retour[<span class="stringliteral">"valeur"</span>];
+<a name="l00179"></a>00179                   <span class="keywordflow">if</span>(strlen($retour['fatal'])&gt;0) {
+<a name="l00180"></a>00180                      <span class="comment">// la valeur recuperee est mauvaise</span>
+<a name="l00181"></a>00181                      $aErreurs[$champ][$valeur]=<span class="keyword">true</span>;
+<a name="l00182"></a>00182                      $fatal.=<span class="stringliteral">"&lt;A NAME='$champ"</span>.<span class="charliteral">'_'</span>.str_replace(<span class="charliteral">' '</span>,<span class="charliteral">'_'</span>,$valeur).<span class="stringliteral">"'&gt;&lt;/A&gt;"</span>
+<a name="l00183"></a>00183                              . $retour[<span class="stringliteral">"fatal"</span>]
+<a name="l00184"></a>00184                              ;
+<a name="l00185"></a>00185                   } <span class="keywordflow">else</span> <span class="comment">// la valeur recuperee est bonne</span>
+<a name="l00186"></a>00186                      $aValRef[$champ][$oldValeur]=$valeur;
+<a name="l00187"></a>00187                   $txt_debug.=$retour[<span class="stringliteral">"txt_debug"</span>];
+<a name="l00188"></a>00188                }
+<a name="l00189"></a>00189             }
+<a name="l00190"></a>00190 
+<a name="l00191"></a>00191             <span class="comment">//echo "VALEUR $valeur TYPE $type DEPT".$data[$col_dept];</span>
+<a name="l00192"></a>00192             <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>.=$valeur;
+<a name="l00193"></a>00193             <span class="keywordflow">if</span> ($c&lt;$num-1)
+<a name="l00194"></a>00194                <a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>.=<span class="stringliteral">","</span>; <span class="comment">//virgule de fin pour requete sql</span>
+<a name="l00195"></a>00195          }
+<a name="l00196"></a>00196 
+<a name="l00197"></a>00197          <span class="keywordflow">if</span>($row&gt;=$ligneDebutImport) {
+<a name="l00198"></a>00198             <a class="code" href="odb__affiche__csv_8php.html#951141d6016cb38e14821d9cfa38929f">$tab_csv</a>[<span class="stringliteral">"sql"</span>][$row].=<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>;
+<a name="l00199"></a>00199          }
+<a name="l00200"></a>00200          elseif($row==0) {
+<a name="l00201"></a>00201             <a class="code" href="odb__affiche__csv_8php.html#951141d6016cb38e14821d9cfa38929f">$tab_csv</a>[<span class="stringliteral">"sql"</span>][<span class="stringliteral">"titre"</span>]=<a class="code" href="inc-pdf-attestations_8php.html#047170d6020a882807665812a27e2525">$sql</a>;
+<a name="l00202"></a>00202          }
+<a name="l00203"></a>00203          <span class="comment">// affichage des "..." pour colonnes masqu&amp;eacute;es</span>
+<a name="l00204"></a>00204          <span class="keywordflow">if</span>($flag_col_depasse) {
+<a name="l00205"></a>00205             <span class="keywordflow">if</span>(!$flag_lignes_depasse) {
+<a name="l00206"></a>00206                $str.= <span class="stringliteral">"      &lt;$td class='spip'&gt;...&lt;/$td&gt;\n"</span>;
+<a name="l00207"></a>00207                $str.= <span class="stringliteral">"   &lt;/TR&gt;\n"</span>;
+<a name="l00208"></a>00208             }
+<a name="l00209"></a>00209          }
+<a name="l00210"></a>00210          <span class="comment">// affichage requete sql si debug</span>
+<a name="l00211"></a>00211          <span class="keywordflow">if</span>($debug) {
+<a name="l00212"></a>00212             <span class="keywordflow">if</span>($estPaire==1)
+<a name="l00213"></a>00213                $bgcolor=<span class="stringliteral">"#BBDDFF"</span>;
+<a name="l00214"></a>00214             <span class="keywordflow">else</span>
+<a name="l00215"></a>00215                $bgcolor=<span class="stringliteral">"white"</span>;
+<a name="l00216"></a>00216             $tr_debug.= <span class="stringliteral">"   &lt;TR&gt;\n      &lt;TD COLSPAN='$num' bgcolor='$bgcolor'&gt;$sql&lt;/TD&gt;\n&lt;/TR&gt;\n"</span>;
+<a name="l00217"></a>00217          }
+<a name="l00218"></a>00218       }
+<a name="l00219"></a>00219       <span class="keywordflow">if</span>($flag_lignes_depasse) {
+<a name="l00220"></a>00220          $str.=<span class="stringliteral">"&lt;TR class='row_first'&gt;\n"</span>;
+<a name="l00221"></a>00221          $str.=<span class="stringliteral">"&lt;TH COLSPAN='$num' align='center'&gt;...Affichage limit&amp;eacute; &amp;agrave; "</span>.MAX_LIGNES_AFFICHEES.<span class="stringliteral">" lignes sur $row...&lt;/TH&gt;"</span>;
+<a name="l00222"></a>00222       }
+<a name="l00223"></a>00223 
+<a name="l00224"></a>00224       $str.= <span class="stringliteral">"&lt;/TABLE&gt;\n"</span>;
+<a name="l00225"></a>00225       <span class="keywordflow">if</span>($flag_col_depass)
+<a name="l00226"></a>00226          $str.=<span class="stringliteral">"Colonnes : "</span>.MAX_COLONNES_AFFICHEES.<span class="stringliteral">"/"</span>.$num.<span class="stringliteral">" - "</span>;
+<a name="l00227"></a>00227       <span class="keywordflow">if</span>($flag_lignes_depass)
+<a name="l00228"></a>00228          $str.=<span class="stringliteral">"Lignes : "</span>.MAX_LIGNES_AFFICHEES.<span class="stringliteral">"/"</span>.($row).<span class="stringliteral">" - "</span>;
+<a name="l00229"></a>00229       <span class="keywordflow">if</span>($flag_col_depasse || $flag_lignes_depasse)
+<a name="l00230"></a>00230          $str.=<span class="stringliteral">"&lt;A HREF='"</span>._DIR_PLUGIN_ODB_IMPORT.<span class="stringliteral">"/exec/odb_affiche_csv.php?fic=$nom_fichier' TARGET='_BLANK'&gt;Voir la table compl&amp;egrave;te&lt;/A&gt;\n"</span>;
+<a name="l00231"></a>00231       $str.=<span class="stringliteral">"&lt;BR/&gt;&lt;BR/&gt;\n"</span>;
+<a name="l00232"></a>00232       fclose($handle);
+<a name="l00233"></a>00233       $txt_debug.=<span class="stringliteral">"&lt;TABLE class='spip'&gt;\n\t$tr_debug&lt;/TABLE&gt;\n"</span>;
+<a name="l00234"></a>00234    } <span class="keywordflow">else</span> {
+<a name="l00235"></a>00235       $txt_debug.=<span class="stringliteral">"Fichier [$fichier] introuvable"</span>;
+<a name="l00236"></a>00236       $str=<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>.<span class="stringliteral">" - Fichier &lt;I&gt;$fichier&lt;/I&gt; introuvable&lt;BR/&gt;\n"</span>;
+<a name="l00237"></a>00237    }
+<a name="l00238"></a>00238    <a class="code" href="odb__affiche__csv_8php.html#951141d6016cb38e14821d9cfa38929f">$tab_csv</a>[<span class="stringliteral">"html"</span>]=$str;
+<a name="l00239"></a>00239    <a class="code" href="odb__affiche__csv_8php.html#951141d6016cb38e14821d9cfa38929f">$tab_csv</a>[<span class="stringliteral">"fatal"</span>]=$fatal;
+<a name="l00240"></a>00240    <span class="keywordflow">return</span> <a class="code" href="odb__affiche__csv_8php.html#951141d6016cb38e14821d9cfa38929f">$tab_csv</a>;<span class="comment">// 14:05 12/02/2007 html et sql</span>
+<a name="l00241"></a>00241 }
+<a name="l00242"></a>00242 
+<a name="l00251"></a><a class="code" href="inc-fichiers_8php.html#3656c8f5a58718532bd18937ce8ad6d7">00251</a> function <a class="code" href="inc-fichiers_8php.html#3656c8f5a58718532bd18937ce8ad6d7" title="reprise de l&amp;#39;import de fichier (process de verification apres upload)">reprise_import</a>($uploaddir,$table,<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>) {
+<a name="l00252"></a>00252    global <a class="code" href="inc-fichiers_8php.html#58f5fd0b9d70bc87295be959c7bc176a">$debug</a>,<a class="code" href="odb__affiche__csv_8php.html#0a3ebee356c79fa7521c28283a372f76">$txt_debug</a>;
+<a name="l00253"></a>00253    $cpt_csv=0;
+<a name="l00254"></a>00254    <span class="keywordflow">if</span> ($handle = opendir($uploaddir)) {
+<a name="l00255"></a>00255       <span class="comment">/* Ceci est la façon correcte de traverser un dossier. */</span>
+<a name="l00256"></a>00256       <span class="keywordflow">while</span> (<span class="keyword">false</span> !== (<a class="code" href="odb__affiche__csv_8php.html#1cab83481bc861b32af8f093a199c35e">$fichier</a> = readdir($handle))) {
+<a name="l00257"></a>00257          $ext=<a class="code" href="inc-fichiers_8php.html#cc5c7108e3f0ae7b674e0c1f9c0b71f5" title="Detecte l&amp;#39;extension d&amp;#39;un fichier (qui doit comporter un point).">detecte_extension</a>(<a class="code" href="odb__affiche__csv_8php.html#1cab83481bc861b32af8f093a199c35e">$fichier</a>);
+<a name="l00258"></a>00258          <span class="keywordflow">if</span>($debug &amp;&amp; trim($ext!=<span class="stringliteral">""</span>))
+<a name="l00259"></a>00259             $txt_debug.= <span class="stringliteral">"&lt;br/&gt;"</span>.vignette($ext).<span class="stringliteral">"$fichier - "</span>.round(filesize(<span class="stringliteral">"$uploaddir/$fichier"</span>)/1024,1).<span class="stringliteral">"Ko&lt;br/&gt;\n"</span>;
+<a name="l00260"></a>00260          <span class="keywordflow">if</span>($ext==csv) {
+<a name="l00261"></a>00261             <a class="code" href="odb__affiche__csv_8php.html#951141d6016cb38e14821d9cfa38929f">$tab_csv</a> = <a class="code" href="inc-fichiers_8php.html#2153dd9ac414142bd968bd484f875abe" title="Lit et affiche le contenu d&amp;#39;un fichier csv.">affiche_csv</a>($uploaddir.<a class="code" href="odb__affiche__csv_8php.html#1cab83481bc861b32af8f093a199c35e">$fichier</a>,$table,<a class="code" href="inc-pdf-attestations_8php.html#b372e2dd50f4a592a1226a01290a2f4f">$annee</a>);
+<a name="l00262"></a>00262             $str.= <a class="code" href="odb__affiche__csv_8php.html#951141d6016cb38e14821d9cfa38929f">$tab_csv</a>[<span class="stringliteral">"html"</span>];
+<a name="l00263"></a>00263             $tab_sql[$fichier]=<a class="code" href="odb__affiche__csv_8php.html#951141d6016cb38e14821d9cfa38929f">$tab_csv</a>[<span class="stringliteral">"sql"</span>];
+<a name="l00264"></a>00264             <span class="keywordflow">if</span>(strlen(<a class="code" href="odb__affiche__csv_8php.html#951141d6016cb38e14821d9cfa38929f">$tab_csv</a>[<span class="stringliteral">"fatal"</span>])&gt;0) {
+<a name="l00265"></a>00265                $str.='&lt;small&gt;'.$tab_csv[<span class="stringliteral">"fatal"</span>].<span class="stringliteral">"&lt;/small&gt;&lt;hr height='1'/&gt;\n"</span>;
+<a name="l00266"></a>00266                $disabled=<span class="stringliteral">"disabled"</span>;
+<a name="l00267"></a>00267                $import_impossible=<span class="stringliteral">"&lt;b&gt;impossible&lt;/b&gt; : erreurs d&amp;eacute;tect&amp;eacute;es"</span>;
+<a name="l00268"></a>00268             } <span class="keywordflow">else</span> {
+<a name="l00269"></a>00269                $disabled='';
+<a name="l00270"></a>00270                $import_impossible='';
+<a name="l00271"></a>00271             }
+<a name="l00272"></a>00272             $cpt_csv++;
+<a name="l00273"></a>00273          }
+<a name="l00274"></a>00274       }
+<a name="l00275"></a>00275 
+<a name="l00276"></a>00276       closedir($handle);
+<a name="l00277"></a>00277    } <span class="keywordflow">else</span>
+<a name="l00278"></a>00278       die(<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>.<span class="stringliteral">" - Impossible d'ouvrir le r&amp;eacute;pertoire $uploaddir"</span>);
+<a name="l00279"></a>00279    <span class="keywordflow">if</span>($cpt_csv&gt;0) {
+<a name="l00280"></a>00280       <span class="keywordflow">if</span>($cpt_csv==1)
+<a name="l00281"></a>00281          $txt=<span class="stringliteral">"Import du fichier"</span>;
+<a name="l00282"></a>00282       elseif($cpt_csv&gt;1)
+<a name="l00283"></a>00283          $txt=<span class="stringliteral">"Import des &lt;b&gt;$cpt_csv&lt;/b&gt; fichiers"</span>;
+<a name="l00284"></a>00284       $str .= <span class="stringliteral">"&lt;form id='form_step2' enctype='multipart/form-data' action='"</span>.generer_url_ecrire('odb_import').<span class="stringliteral">"' method='post' class='forml spip_xx-small'&gt;\n"</span>;
+<a name="l00285"></a>00285       $str.=<span class="stringliteral">"$txt &lt;b&gt;csv&lt;/b&gt; de l'archive $import_impossible \n"</span>;
+<a name="l00286"></a>00286       $str.=<span class="stringliteral">"\t&lt;INPUT TYPE='submit' NAME='step3' VALUE='Importer' class='fondo' $disabled/&gt;\n"</span>;
+<a name="l00287"></a>00287       $cpt_fic=0;
+<a name="l00288"></a>00288       <span class="keywordflow">foreach</span>($tab_sql as $fic =&gt; $sql_tab) {
+<a name="l00289"></a>00289          $cpt_fic++;
+<a name="l00290"></a>00290          $str.= <span class="stringliteral">"\t&lt;INPUT TYPE='hidden' NAME='csvfile|"</span>.$cpt_fic.<span class="stringliteral">"[]' VALUE=\"$fic\"/&gt;\n"</span>;
+<a name="l00291"></a>00291          <span class="keywordflow">foreach</span>($sql_tab as $key =&gt; $sql_ligne)
+<a name="l00292"></a>00292             $str.=<span class="stringliteral">"\t&lt;INPUT TYPE='hidden' NAME='csvfile|"</span>.$cpt_fic.<span class="stringliteral">"[]' VALUE=\"$sql_ligne\"/&gt;\n"</span>;
+<a name="l00293"></a>00293       }
+<a name="l00294"></a>00294       $str.=<span class="stringliteral">"&lt;/form&gt;\n"</span>;
+<a name="l00295"></a>00295    } <span class="keywordflow">else</span>
+<a name="l00296"></a>00296       $str.=<a class="code" href="odb__ref_8php.html#e56b96c4dfcced36887ba02c496c40a3">KO</a>.' - Aucun fichier &lt;b&gt;csv&lt;/b&gt; détecté dans l\'archive. &lt;br/&gt;&lt;small&gt;Êtes-vous sûr(e) que l\'archive contient bien un fichier &lt;b&gt;csv&lt;/b&gt; et pas un fichier &lt;b&gt;xls&lt;/b&gt; par exemple ?&lt;/small&gt;';
+<a name="l00297"></a>00297 
+<a name="l00298"></a>00298    <span class="keywordflow">return</span> $str;
+<a name="l00299"></a>00299 }
+<a name="l00300"></a>00300 ?&gt;
+</pre></div><hr size="1"><address style="text-align: right;"><small>Généré le Mon Mar 17 22:53:00 2008 pour Siou par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.3 </small></address>
+</body>
+</html>

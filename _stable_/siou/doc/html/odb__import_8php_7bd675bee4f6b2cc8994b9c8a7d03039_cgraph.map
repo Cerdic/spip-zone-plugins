@@ -1,0 +1,15 @@
+<area shape="rect" href="$inc&#45;fichiers_8php.html#cc5c7108e3f0ae7b674e0c1f9c0b71f5" title="Detecte l&#39;extension d&#39;un fichier (qui doit comporter un point)." alt="" coords="379,81,517,108">
+<area shape="rect" href="$inc&#45;html_8php.html#8e011c8d22f485dcee8b90fa3ff656c7" title="Cree un champ SELECT contenant les annees de 2002 a annee en cours + 1." alt="" coords="188,5,321,32">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#ca269ae75f013c9730f590443481c7f9" title="odb_raccourcis" alt="" coords="197,107,312,133">
+<area shape="rect" href="$inc&#45;fichiers_8php.html#3656c8f5a58718532bd18937ce8ad6d7" title="reprise de l&#39;import de fichier (process de verification apres upload)" alt="" coords="197,157,312,184">
+<area shape="rect" href="$inc&#45;html_8php.html#fa7c9d548e547f5aa3b1a88df9ec970c" title="Affiche une vignette (icone de type de fichier)." alt="" coords="591,208,665,235">
+<area shape="rect" href="$inc&#45;fichiers_8php.html#693db2beb7305851d7653c58971efaf3" title="unzip" alt="" coords="228,259,281,285">
+<area shape="rect" href="$inc&#45;fichiers_8php.html#70642c7444da1da8119078d46bb83b54" title="Vide un r&eacute;pertoire de ses fichiers (pas ses sous&#45;repertoires)." alt="" coords="196,309,313,336">
+<area shape="rect" href="$inc&#45;html_8php.html#7be54cdf2beda343e02419f1ac46fa0c" title="Cree un champ OPTION dans un SELECT." alt="" coords="371,5,525,32">
+<area shape="rect" href="$inc&#45;fichiers_8php.html#2153dd9ac414142bd968bd484f875abe" title="Lit et affiche le contenu d&#39;un fichier csv." alt="" coords="401,157,495,184">
+<area shape="rect" href="$inc&#45;regles__gestion_8php.html#7b7e71083f065a8f45947cf013206a64" title="reglesGestion" alt="" coords="573,157,683,184">
+<area shape="rect" href="$inc&#45;regles__gestion_8php.html#abf23b66cd362adaa508de5bfb22706a" title="l&#39;utilisateur est il admin ?" alt="" coords="752,132,824,159">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#34801d7492d31569357873533e30d04d" title="isInReferentiel" alt="" coords="732,183,844,209">
+<area shape="rect" href="$inc&#45;referentiel_8php.html#8da6b5d71b8b85a4443092e825841479" title="getReferentiel" alt="" coords="904,157,1016,184">
+<area shape="rect" href="$inc&#45;html_8php.html#5b029790bb0355c3329199b4a8cdd8b8" title="Supprime les accents et enleve les espaces inutiles." alt="" coords="895,208,1025,235">
+<area shape="rect" href="$inc&#45;odb_8php.html#cc73cdf19f49ae7162c99fd07a614e88" title="Execute une requete sql." alt="" coords="1076,157,1164,184">

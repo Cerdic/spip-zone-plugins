@@ -1,0 +1,16 @@
+<plugin>
+   <nom>ODB : Referentiel</nom>
+   <auteur>Cedric PROTIERE - AUF - Janvier 2007</auteur>
+   <version>0.1</version>
+   <etat>test</etat>
+   <description>Gestion du référentiel de l'Office du Baccalauréat
+   </description>
+     	<lien>http://www.officedubacbenin.bj</lien> <!-- URI de documentation -->
+		<icon>img_pack/logo_odb_150.png</icon> 
+   <prefix>odb_ref</prefix>
+   <pipeline>
+      <nom>ajouter_boutons</nom>
+      <action>ajouterBoutons</action>
+      <inclure>inc-odb_ref.php</inclure>
+   </pipeline>
+</plugin>

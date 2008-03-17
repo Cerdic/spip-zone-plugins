@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Siou:  Fichier source de odb_commun/inc-image.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Généré par Doxygen 1.5.3 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Page&nbsp;principale</span></a></li>
+    <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+    <li><a href="dirs.html"><span>Répertoires</span></a></li>
+    <li>
+      <form action="search.php" method="get">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td><label>&nbsp;Rechercher&nbsp;</label></td>
+            <td><input type="text" name="query" value="" size="20" accesskey="s"/></td>
+          </tr>
+        </table>
+      </form>
+    </li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_d85a68ddeac050d85549308ca402191f.html">odb_commun</a></div>
+<h1>inc-image.php</h1><a href="inc-image_8php.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 header (<span class="stringliteral">"Content-type: image/png"</span>);
+<a name="l00003"></a><a class="code" href="inc-image_8php.html#354cbaf1d3ac02e1d550c110d5f288c3">00003</a> <a class="code" href="inc-image_8php.html#354cbaf1d3ac02e1d550c110d5f288c3">$texte</a>=$_GET['text'];
+<a name="l00004"></a><a class="code" href="inc-image_8php.html#f3a16c5f0dd7a74cf9acf6a49fff73a7">00004</a> <a class="code" href="inc-image_8php.html#f3a16c5f0dd7a74cf9acf6a49fff73a7">$x</a>=$_GET[<span class="charliteral">'x'</span>];
+<a name="l00005"></a><a class="code" href="inc-image_8php.html#77b973d137fb33212e018b042df6e3e7">00005</a> <a class="code" href="inc-image_8php.html#77b973d137fb33212e018b042df6e3e7">$y</a>=$_GET[<span class="charliteral">'y'</span>];
+<a name="l00006"></a><a class="code" href="inc-image_8php.html#36a493700c12c22c6380c8bcb40b4723">00006</a> <a class="code" href="inc-image_8php.html#36a493700c12c22c6380c8bcb40b4723">$taille</a>=$_GET['taille'];
+<a name="l00007"></a>00007 
+<a name="l00008"></a><a class="code" href="inc-image_8php.html#ac6146b4cdec66c94263ddb55afd5946">00008</a> <a class="code" href="inc-image_8php.html#ac6146b4cdec66c94263ddb55afd5946">$image</a> = imagecreate(<a class="code" href="inc-image_8php.html#f3a16c5f0dd7a74cf9acf6a49fff73a7">$x</a>,<a class="code" href="inc-image_8php.html#77b973d137fb33212e018b042df6e3e7">$y</a>);
+<a name="l00009"></a>00009 
+<a name="l00010"></a><a class="code" href="inc-image_8php.html#21af1e4997b7265ac0afd1efaddc8a67">00010</a> <a class="code" href="inc-image_8php.html#21af1e4997b7265ac0afd1efaddc8a67">$orange</a> = imagecolorallocate(<a class="code" href="inc-image_8php.html#ac6146b4cdec66c94263ddb55afd5946">$image</a>, 255, 128, 0); <span class="comment">// Le fond est orange (car c'est la premi�re couleur)</span>
+<a name="l00011"></a><a class="code" href="inc-image_8php.html#f7b107e485f857799465ae39f7309eef">00011</a> <a class="code" href="inc-image_8php.html#f7b107e485f857799465ae39f7309eef">$bleu</a> = imagecolorallocate(<a class="code" href="inc-image_8php.html#ac6146b4cdec66c94263ddb55afd5946">$image</a>, 0, 0, 255);
+<a name="l00012"></a><a class="code" href="inc-image_8php.html#011f852df3c3487d36e6894a5c96e1c3">00012</a> <a class="code" href="inc-image_8php.html#011f852df3c3487d36e6894a5c96e1c3">$bleuclair</a> = imagecolorallocate(<a class="code" href="inc-image_8php.html#ac6146b4cdec66c94263ddb55afd5946">$image</a>, 156, 227, 254);
+<a name="l00013"></a><a class="code" href="inc-image_8php.html#61fa6b8cde6f307cc0be265e06f059d8">00013</a> <a class="code" href="inc-image_8php.html#61fa6b8cde6f307cc0be265e06f059d8">$noir</a> = imagecolorallocate(<a class="code" href="inc-image_8php.html#ac6146b4cdec66c94263ddb55afd5946">$image</a>, 0, 0, 0);
+<a name="l00014"></a><a class="code" href="inc-image_8php.html#f939c1d1ea128829978226d574c4acf9">00014</a> <a class="code" href="inc-image_8php.html#f939c1d1ea128829978226d574c4acf9">$blanc</a> = imagecolorallocate(<a class="code" href="inc-image_8php.html#ac6146b4cdec66c94263ddb55afd5946">$image</a>, 255, 255, 255);
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 imagestringup(<a class="code" href="inc-image_8php.html#ac6146b4cdec66c94263ddb55afd5946">$image</a>, <a class="code" href="inc-image_8php.html#36a493700c12c22c6380c8bcb40b4723">$taille</a>, round(<a class="code" href="inc-image_8php.html#f3a16c5f0dd7a74cf9acf6a49fff73a7">$x</a>/3,0), <a class="code" href="inc-image_8php.html#77b973d137fb33212e018b042df6e3e7">$y</a>, <a class="code" href="inc-image_8php.html#354cbaf1d3ac02e1d550c110d5f288c3">$texte</a> , <a class="code" href="inc-image_8php.html#61fa6b8cde6f307cc0be265e06f059d8">$noir</a>);
+<a name="l00017"></a>00017 imagecolortransparent(<a class="code" href="inc-image_8php.html#ac6146b4cdec66c94263ddb55afd5946">$image</a>, <a class="code" href="inc-image_8php.html#21af1e4997b7265ac0afd1efaddc8a67">$orange</a>); <span class="comment">// On rend le fond orange transparent</span>
+<a name="l00018"></a>00018 imagepng(<a class="code" href="inc-image_8php.html#ac6146b4cdec66c94263ddb55afd5946">$image</a>);
+<a name="l00019"></a>00019 ?&gt;
+</pre></div><hr size="1"><address style="text-align: right;"><small>Généré le Mon Mar 17 22:52:59 2008 pour Siou par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.3 </small></address>
+</body>
+</html>
