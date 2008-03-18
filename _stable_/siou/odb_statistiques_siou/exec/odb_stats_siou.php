@@ -196,7 +196,7 @@ if($action!='') {
             $sql = "SELECT dep.departement , eta.etablissement , concat(salle,num_salle) salle , num_salle, ser.serie, $lastCol"
                  . ' FROM odb_candidats can , odb_ref_serie ser , odb_ref_etablissement eta , odb_ref_departement dep,'
                  . ' odb_repartition rep, odb_ref_salle sal'
-                 . " WHERE can.annee = $annee and rep.annee=$annee "
+                 . " WHERE can.annee = $annee and rep.annee=$annee and sal.annee=$annee "
                  . $and_departement.$and_centre
                  . ' AND can.serie = ser.id AND can.id_saisie=rep.id_saisie'
                  . ' AND rep.id_etablissement = eta.id AND eta.id_departement = dep.id and sal.id=rep.id_salle'
