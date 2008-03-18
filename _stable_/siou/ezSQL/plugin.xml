@@ -10,6 +10,6 @@
    <pipeline>
       <nom>ajouter_boutons</nom>
       <action>ajouterBoutons</action>
-      <inclure>inc-ezSQL.php</inclure>
+      <inclure>inc-ezsql.php</inclure>
    </pipeline>
 </plugin>

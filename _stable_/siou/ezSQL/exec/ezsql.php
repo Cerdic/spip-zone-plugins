@@ -1,22 +1,55 @@
 <?php
+/*
+ *      Copyright 2008 Ghislain VLAVONOU, Yannick EDAHE, Cedric PROTIERE
+ *      
+ *      This program is free software; you can redistribute it and/or modify
+ *      it under the terms of the GNU General Public License as published by
+ *      the Free Software Foundation; either version 3 of the License, or
+ *      (at your option) any later version.
+ *      
+ *      This program is distributed in the hope that it will be useful,
+ *      but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *      GNU General Public License for more details.
+ *      
+ *      You should have received a copy of the GNU General Public License
+ *      along with this program; if not, write to the Free Software
+ *      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ *      MA 02110-1301, USA.
+ */
 include_spip('inc/presentation');
 include_spip('inc/config');
 include_spip('inc/charsets');
-define('DIR_ODB_COMMUN',_DIR_PLUGINS."odb/odb_commun/");
-include_once(DIR_ODB_COMMUN.'inc-html.php');
-include_once(DIR_ODB_COMMUN."inc-referentiel.php");
-include_once(DIR_ODB_COMMUN."inc-odb.php");
 
 setlocale(LC_TIME, "fr_FR");
-
-global $debug, $txt_gauche, $txt_debug;
-$debug=false;
-
-$txt_gauche="";// texte boite de gauche
-$txt_="";// texte boite de droite
-$txt_debug=""; // texte debug
 define(OK,"<SPAN style='color:#3C3;font-weight:bold;'>[OK]</SPAN>");
 define(KO,"<SPAN style='color:#C33;font-weight:bold;'>[KO]</SPAN>");
+
+/** Execute une requete sql (copier coller de odb_query dans inc-odb.php du projet siou)
+ *
+ * @param string $sql : code SQL a executer
+ * @param string $fichier : nom du fichier (par exemple, passer __FILE__)
+ * @param int $ligne : ligne (passer __LINE__)
+ * @param string $obsc : texte a dissimuler (mot de passe, par exemple)
+ * @return resource : resultset correspondant
+ */
+function ez_query($sql,$fichier,$ligne,$obsc='****') {
+	$cherche='/plugins/';
+	if(substr_count($sql,'DECODE(')>0 && $obsc=='****') {
+		$tmp=stristr($sql,'decode(');
+		$tmp=substr($tmp,0,strpos($tmp,')'));
+		list($rien,$obsc)=explode(',',$tmp);
+		$obsc=trim(str_replace(array('\'','"'),'',$obsc));
+	}
+	$fichier=substr($fichier,strpos($fichier,$cherche));
+	$result = mysql_query($sql) or die("<div style='margin:5px;border:1px outset red;background-color:#ddf;'>"
+		."<div style='border:1px none red;background-color:#bbf;'>".KO." - Erreur dans la requete</div><pre>"
+		.wordwrap(str_replace($obsc,'****',$sql),65)
+		."</pre><small>$fichier<b>[$ligne]</b></small><br/><div style='border:1px none red;background-color:#bbf;'>"
+		.htmlentities(str_replace($obsc,'****',mysql_error()))."</div></div>");
+	//echo "<br/>$sql (<b>$fichier</b>:$ligne)";
+	return $result;
+}
 
 // exécuté automatiquement par le plugin au chargement de la page ?exec=odb_requete
 function exec_ezsql() {
@@ -80,11 +113,11 @@ function exec_ezsql() {
 	}
 	debut_gauche();
 	debut_boite_info();
-		$r = odb_query("SELECT DATABASE()",__FILE__,__LINE__);
+		$r = ez_query("SELECT DATABASE()",__FILE__,__LINE__);
 		$base = mysql_result($r,0);
 		echo "Base <b>$base</b><br/><small>".mysql_get_host_info()."<br/>\n".mysql_get_server_info()."<br/>\n</small>\n";
 		$sql="SHOW tables";
-		$result=odb_query($sql,__FILE__,__LINE__);
+		$result=ez_query($sql,__FILE__,__LINE__);
 		while($row=mysql_fetch_row($result)) {
 			$table=$row[0];
 			list($prefixe,$reste)=explode(strrchr($table,'_'),$table);
@@ -93,7 +126,7 @@ function exec_ezsql() {
 				$sTableEnCours=$table;
 				$table="<A class='table' HREF='".generer_url_ecrire('odb_requete')."&table=$table' style='color:#000;'><b>$table</b></a>";
 				$sql="SHOW columns from $nomTable";
-				$result2=odb_query($sql,__FILE__,__LINE__);
+				$result2=ez_query($sql,__FILE__,__LINE__);
 				$cpt=0;
 				while($row2=mysql_fetch_row($result2)) {
 					$table.= "<br/><span title='".$row2[1]."'>&nbsp;&nbsp;".$row2[0]."</span>\n";
@@ -126,7 +159,7 @@ function exec_ezsql() {
 		debut_boite_info();
 			echo odb_html_table("<A href='javascript:;' title='Ajouter la table $sTableEnCours' onclick=\"champ=document.forms['form_requete'].requete;champ.value+='$sTableEnCours';champ.focus();\">$sTableEnCours</A>",$tBody,"<th>Colonne</th><th>Type</th>");
 			$sql="SELECT count(*) from $sTableEnCours";
-			$result=odb_query($sql,__FILE__,__LINE__);
+			$result=ez_query($sql,__FILE__,__LINE__);
 			$nbRows=mysql_result($result,0,0);
 			$s=($nbRows>1)?'s':'';
 			echo "Contient <b>$nbRows</b> enregistrement$s<hr size=0/>\nCliquez sur un champ ci-dessus pour l'ajouter dans votre requ&ecirc;te";
@@ -147,7 +180,7 @@ function exec_ezsql() {
 	echo "</form>\n";
 
 	if ($isExecute){
-		$result = odb_query($sqlNormale,__FILE__,__LINE__);
+		$result = ez_query($sqlNormale,__FILE__,__LINE__);
 		if($isSelect) {
 			$nbLignes=mysql_num_rows($result);
 			
@@ -235,7 +268,7 @@ $(document).ready(function() {
 	});
 });
 FINSCRIPT;
-	echo putJavascript($jquery);
+	echo "<script type='text/javascript'><!--\n$jquery\n//-->\n</script>\n";
 	fin_page();
 	exit;
 }
