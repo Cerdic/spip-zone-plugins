@@ -17,6 +17,7 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
     
     Copyright 2007, 2008 Agence Universitaire de la Francophonie - http://auf.org
+    Auteur : Cedric PROTIERE - Proprietaire : AUF
 */
 session_start();
 include_spip('inc/presentation');
