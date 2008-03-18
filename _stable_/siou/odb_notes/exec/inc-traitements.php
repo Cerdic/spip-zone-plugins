@@ -35,7 +35,7 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 	. ' ORDER BY id_candidat';
 	if($deliberation==1)
 		$sql="SELECT id_anonyme id_candidat, id_matiere, matiere, note, coeff, type\n FROM odb_notes notes, odb_ref_matiere mat\n"
-		   . " WHERE annee=$annee and jury=$jury and id_serie=$id_serie and mat.id=notes.id_matiere and note is not null\n ORDER BY id_candidat"
+		   . " WHERE annee=$annee and jury=$jury and id_serie=$id_serie and mat.id=notes.id_matiere\n ORDER BY id_candidat"
 		   ;
 	else {
 		$sql2="SELECT count(*) FROM odb_notes where annee=$annee and jury=$jury and id_anonyme=id_table";
@@ -50,11 +50,11 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 			odb_maj_decisions($annee,$jury);//maj des decisions pour deliberation 1
 		}
 	}
-	echo "deliberation $deliberation : $sql";
+	//echo "deliberation $deliberation : $sql";
 	$result=odb_query($sql,__FILE__,__LINE__);
 	while($row=mysql_fetch_array($result)) {
 		foreach(array('id_candidat','id_matiere','matiere','note','coeff','type','prefixe','nom','prenoms') as $col) $$col=$row[$col];
-		while(substr_count($matiere,'  ')>0) $matiere=str_replace('  ',' ',$matiere);
+		while(substr_count($matiere,'  ')>0) $matiere=odb_propre($matiere);
 		if($deliberation!=1) {
 			$id_candidat=getIdTableHumain($id_candidat);
 			$tNom[$id_candidat]=stripslashes("$prefixe <b>".strtoupper($nom)."</b> ".ucwords(strtolower($prenoms)));
@@ -101,9 +101,9 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 						$matiere2.=$mot;
 					}
 					$matiere_aff="<span title=\"header=[Mati&egrave;re] body=[$matiere]\">$matiere2</span>";
-					$pdf_cols[getRewriteString("$type $id_matiere")]=html_entity_decode("\n$matiere2")." ($coeff)";
+					$pdf_cols[getRewriteString("$type $id_matiere")]=html_entity_decode(utf8_decode("\n$matiere2"))." ($coeff)";
 				} else {
-					$pdf_cols[getRewriteString("$type $id_matiere")]=html_entity_decode("\n$matiere")." ($coeff)";
+					$pdf_cols[getRewriteString("$type $id_matiere")]=html_entity_decode(utf8_decode("\n$matiere"))." ($coeff)";
 					$matiere_aff=$matiere;
 				}
 				if(!$isTypeDejaEcrit) {
@@ -268,7 +268,7 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 			$msgTmp="<b>$nbTmp</b> candidats";
 			if($nbTmp<=10) $msgTmp.=" :<br/>".implode(', ',$tTmp);
 			$msgNS.="<tr>\n\t<td>".
-			"<b><A HREF='".generer_url_ecrire('odb_notes')."&jury=$jury&serie=$serie&matiere=$matiere&id_matiere=$id_matiere&id_serie=$id_serie&step3=manuel'>$matiere</A></b>\n".
+			"<b><A HREF='".generer_url_ecrire('odb_notes')."&jury=$jury&serie=$serie&matiere=$matiere&id_matiere=$id_matiere&id_serie=$id_serie&type=Ecrit&step3=manuel'>$matiere</A></b>\n".
 			"</td>\n\t<td>$msgTmp</td>\n</tr>\n";
 		}
 		$msgNS.="</table>\n";

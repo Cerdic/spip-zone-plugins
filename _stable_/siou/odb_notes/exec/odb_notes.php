@@ -1,19 +1,19 @@
 <?php
 /*
-    This file is part of Siou.
+    This file is part of SIOU.
 
-    Siou is free software; you can redistribute it and/or modify
+    SIOU is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 3 of the License, or
     (at your option) any later version.
 
-    Siou is distributed in the hope that it will be useful,
+    SIOU is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Siou; if not, write to the Free Software
+    along with SIOU; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
     
     Copyright 2007, 2008 Agence Universitaire de la Francophonie - http://auf.org
@@ -127,9 +127,9 @@ function exec_odb_notes() {
 	foreach(array('jury','serie','id_serie') as $col)
 	    $$col=$_REQUEST[$col];
 	if($id_serie=='') {
-	    $id_serie=$tRefSerie[$serie];
+	    	$id_serie=$tRefSerie[$serie];
 	} elseif ($serie=='') {
-	    $serie=$tRefSerie[$id_serie];
+		$serie=$tRefSerie[$id_serie];
 	}
 	$isPleinEcran=false;
 	$titrePrincipal="Impressions pour le jury $jury s&eacute;rie $serie $annee";
@@ -221,7 +221,7 @@ function exec_odb_notes() {
 	}
 	$msg.="</TABLE>\n";
 	if($id_serie!='') {
-	    $msg.=afficherNotes($jury,$id_serie,$annee,'',$deliberation,true);
+	    $msg.=afficherNotes($jury,$id_serie,$annee,'',$deliberation,false);
 	    $msg.="Navigation rapide : <b><A HREF='".generer_url_ecrire('odb_notes')."&jury=$jury&serie=$serie'>mati&egrave;res du jury $jury, s&eacute;rie $serie</A></b>\n";
 	} else $msg.="Veuillez choisir une s&eacute;rie pour le jury $jury\n";
     } elseif(isset($_REQUEST['step3']) || isset($_REQUEST['step4'])) {
@@ -323,6 +323,7 @@ function exec_odb_notes() {
 				$sql="SELECT id_table id\n FROM odb_notes\n WHERE annee=$annee and id_matiere=$id_matiere and jury=$jury and id_serie=$id_serie and type='$type'";
 		}
 	}
+	//echo $sql;
 	$result=odb_query($sql,__FILE__,__LINE__);
 	while($row=mysql_fetch_array($result)) {
 		foreach(array('id','note','coeff') as $col) $$col=$row[$col];
@@ -340,6 +341,7 @@ function exec_odb_notes() {
 	foreach ($tNotes as $id_anonyme => $note) {
 		if(!$isSelected && $note=='') { // n'a pas deja ete selected
 			$selected='selected';
+			
 			$id_anonyme_selected=$id_anonyme;
 			$isSelected=true;
 		} else $selected='';
@@ -348,7 +350,8 @@ function exec_odb_notes() {
 			elseif($isEF) $aff_note=" (+$note)";
 			else $aff_note=" ($note/20)";
 		} else $aff_note='';
-		$selectNotes.="<OPTION $selected value='$id_anonyme'>$id_anonyme $tEf[$id_anonyme] $aff_note</OPTION>\n";
+		$id_anonyme_aff=getIdTableHumain($id_anonyme);
+		$selectNotes.="<OPTION $selected value='$id_anonyme'>$id_anonyme_aff $tEf[$id_anonyme] $aff_note</OPTION>\n";
 	}
 	$selectNotes.="</SELECT>\n";
 	if($isEF) {
@@ -625,6 +628,10 @@ function exec_odb_notes() {
 		    default:die(KO." - Deliberation $deliberation introuvable");
 		}
 		$nbCandidatsSerie=getNbCandidatsNotes($annee,$r_jury,$id_serie);
+		if($nbCandidatsSerie==0) {
+			if($isAdmin) die(KO." - Veuillez demander &agrave; <b>".getNomComplet(getParametresODB('login_anonymes'))."</b> d'<b><A HREF='".generer_url_ecrire('odb_param')."'>initialiser les notes sous anonymat $annee</A></b>");
+			die(KO." - Les notes anonymes ne sont pas encores pr&ecirc;tes pour le jury $r_jury en $annee");
+		}
 		foreach($tTypesDeliberation as $type) {
 		    if(count($tMatieres[$type])>0) {
 			$tdMatieres.="<table style='border:1px solid #aae;' class='spip' width='100%'>\n<tr style='text-align:right;background-color:#dde;margin-bottom:2px;padding:1px;border:1px solid #aae;'><th colspan=2>$type</th></tr>\n";
@@ -633,7 +640,10 @@ function exec_odb_notes() {
 			    else $style='font-weight:normal;';
 			    if($id_matiere<0) $style.='background-color:#ece;';
 			    $nbCandidatsMatiere=getNbCandidatsNotes($annee,$r_jury,$id_serie,$id_matiere);
-			    if($nbCandidatsMatiere!=$nbCandidatsSerie) $nbCandidatsMatiere="<b style='color:#f00;'>$nbCandidatsMatiere</b>";
+			    if($nbCandidatsMatiere==$nbCandidatsSerie) $couleur='#0a0';
+			    elseif($nbCandidatsMatiere==0) $couleur='#f00';
+			    else $couleur='rgb(200,'.(80+round(100*$nbCandidatsMatiere/$nbCandidatsSerie)).',0);';
+			    $nbCandidatsMatiere="<b style='color:$couleur;'>$nbCandidatsMatiere</b>";
 			    $tdMatieres.="<tr><td><INPUT type='submit' class='forml' name='step3' value=\"$matiere\" style='$style' ".
 			    "onClick=\"document.forms['form_notes'].type.value='$type';document.forms['form_notes'].id_matiere.value='$id_matiere';document.forms['form_notes'].matiere.value='".urlencode($matiere)."';\"/></td><td width=10>$nbCandidatsMatiere/$nbCandidatsSerie</td></tr>\n";
 			}

@@ -43,9 +43,9 @@ function getJurys($login,$statutUtilisateur,$annee) {
     if($statutUtilisateur=='Notes') {
             $sql='SELECT id_deliberation, deliberation deliberationCentre, jury1, jury2, jury3, jury4 '
             . 'from odb_ref_operateur ope, odb_ref_deliberation delib '
-            . "where ope.annee=$annee and delib.annee=$annee and delib.id=ope.id_deliberation "
+            . "where ope.annee=$annee and delib.id=ope.id_deliberation "
             . "and LCASE(operateur)='".substr($login,0,strlen($login)-1).'\'';
-            echo "<br/>$sql<br/>";
+            //echo "<br/>$sql<br/>";
             $result=odb_query($sql,__FILE__,__LINE__);
             $row=mysql_fetch_array($result);
             
