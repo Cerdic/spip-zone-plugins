@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'reglement_cheque' => 'Je choisis un mode de r&egrave;glement : par ch&egrave;que',
 'merci' => 'Merci',
 'merci_achat' => 'Notre boutique vous remercie de votre achat',
-'a_bientot' => 'Bonne navigation et à bientôt',
+'a_bientot' => 'Bonne navigation et à bient&ocirc;t',
 'erreur_paiement' => 'Erreur de paiement',
 'commentaire_erreur_paiement' => 'Nous vous informons que la procédure de paiement n\'a pas pu aboutir, veuillez vous renseigner aupr&egrave;s de votre &eacute;tablissement bancaire.',
 'commentaire_erreur_paiement_suite' => 'Bonne navigation et &agrave; bientôt',
@@ -95,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'identifiez_vous' => 'Identifiez-vous',
 'deja_compte' => 'J\'ai d&eacute;j&agrave; un compte',
 'mon_email' => 'Mon e-mail',
+'votre_email' => 'Votre e-mail',
 'err_emailmdp' => 'e-mail ou mot de passe incorrects',
 'champs_obligatoires' => 'Champs obligatoires',
 'erreurs_saisie' => 'Identifiez-vous : des erreurs dans votre saisie !',
@@ -104,7 +105,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'verifiez_email' => 'V&eacute;rifiez votre E-Mail',
 'creation_compte' => 'Cr&eacute;ation de mon compte',
 'message_creation_compte' => 'Je cr&eacute;&eacute; mon compte  pour pouvoir commander sur ce site Internet',
-'mes_adresses_livraison' => 'Mes adresses de livraison'
+'mes_adresses_livraison' => 'Mes adresses de livraison',
+'modifier_adresse_livraison' => 'Modifier une adresse de livraison',
+'libelle_adresse' => 'Libell&eacute; de l\'adresse',
+'mdp_oublie' => 'Mot de passe perdu ou oubli&eacute;',
+'mdp_oublie_message' => 'Inscrivez votre email pour recevoir votre mot de passe',
+'se_connecter' => 'Se connecter'
 
 
 

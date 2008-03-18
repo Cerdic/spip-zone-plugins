@@ -2,8 +2,8 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>Mon compte : mot de passe perdu ou oubli&eacute; - [(#NOM_SITE_SPIP|textebrut)]</title>
-<meta name="description" content="Mon compte : mot de passe perdu ou oubli&eacute;" />
+<title><:spipthelia:mdp_oublie:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="<:spipthelia:mdp_oublie:>" />
 <INCLURE{fond=inc-head}>
 </head>
 
@@ -14,7 +14,7 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Mon compte : mot de passe perdu ou oubli&eacute;</div>
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{moncompte}"><:spipthelia:mon_compte:></a> &gt; <:spipthelia:mdp_oublie:></div>
 	
 	<div id="conteneur">
 
@@ -23,26 +23,26 @@
 			[(#REM) Titre de la rubrique ]
 
 				<div class="titrePage">
-				<h1>Mon compte : mot de passe perdu ou oubli&eacute; </h1>
+				<h1><:spipthelia:mdp_oublie:></h1>
 				</div>
 
 			
 				[(#REM) Contenu de la page ]
 
 				<div class="sousTitrePage">
-				<h3>Inscrivez votre email pour recevoir votre mot de passe</h3>
+				<h3><:spipthelia:mdp_oublie_message:></h3>
 				</div>
 				
 			<form action="#URL_PAGE{mdpoublie}" method="post" name="formmdp" id="formmdp">
 			<input type="hidden" name="thelia_action" value="chmdp" />
-			<table width="775" border="0" cellspacing="0" cellpadding="5">
+			<table>
   				<tr>
-   					<td width="190" class="ligneTableau">Votre email</td>
-   					<td width="565" class="ligneTableau"><input name="email" type="text" class="zoneDeSaisie"/></td>
+   					<td class="ligneTableau"><:spipthelia:votre_email:></td>
+   					<td class="ligneTableau"><input name="email" type="text" class="zoneDeSaisie"/></td>
   				</tr>
 			</table>
 				<div class="boutonMonCompteContenu">
-				<input type="submit" value="Valider" />
+				<input type="submit" value="<:spipthelia:valider:>" />
 				</div>
 			</form>
 
