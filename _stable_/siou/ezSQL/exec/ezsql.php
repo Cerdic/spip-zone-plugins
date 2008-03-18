@@ -33,9 +33,9 @@ function exec_ezsql() {
 	$annee=date("Y");
 	$aide="Cliquez sur une des tables ou tapez une requ&ecirc;te ici puis cliquez sur le bouton [Ex&eacute;cuter]";	
 	
-	debut_page(_T('Requ&ecirc;tes SQL - Export CSV'), "", "");
+	debut_page(_T('ezSQL - Export CSV'), "", "");
 //	echo "<br /><br />";
-	gros_titre(_T('Requ&ecirc;tes SQL - Export CSV'));
+	gros_titre(_T('ezSQL - Export CSV'));
 	
 	if(isset($_REQUEST['table'])) {
 		$isExecute=true;
