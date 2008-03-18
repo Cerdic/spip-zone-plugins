@@ -141,6 +141,7 @@
 <p><:opconfig:expliq_posttraitement:></p>
 
 <p style="background:#fff; border: 1px dotted #000;">
+<input type="checkbox" name="Pipeline" value="yes"  [(#ENV{Pipeline}|=={yes}|?{checked="yes"})] /><:opconfig:post_pipeline:><br />
 <input type="checkbox" name="TitreMaj" value="yes"  [(#ENV{TitreMaj}|=={yes}|?{checked="yes"})] /><:opconfig:post_majuscule:><br />
 <input type="checkbox" name="AntiSpam" value="yes"  [(#ENV{AntiSpam}|=={yes}|?{checked="yes"})] /><:opconfig:post_antispam:><br />
 <:opconfig:post_taille_min:>&nbsp;<input type="text" name="TitreMin" value="#ENV{TitreMin}" size="2" />&nbsp;<:opconfig:post_char:><br />

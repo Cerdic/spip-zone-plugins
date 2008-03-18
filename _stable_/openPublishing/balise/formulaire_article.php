@@ -337,23 +337,56 @@ if($valider) {
 		);
 		$extra=serialize($extra);
 
+
+		// construction du tableau $champs pour les pipelines
+		$champs = array(
+			'surtitre' => $surtitre,
+			'titre' => $titre,
+			'soustitre' => $soustitre,
+			'descriptif' => $descriptif,
+			'nom_site' => $ps,
+			'url_site' => '',
+			'chapo' => $chapo,
+			'texte' => $texte,
+			'ps' => $sp,
+			'id_rubrique' => $rubriques,
+			'statut' => $statut,
+			'extra' => $extra
+		);
+		
+		// calcul la date
+		$champs['date'] = date('Y-m-d H:i:s');
+
+		// Envoyer autres aux plugins
+		if ($config['Pipeline'] == 'yes') {
+			$champs = pipeline('pre_edition',
+				array(
+					'args' => array(
+						'table' => 'spip_articles',
+						'id_objet' => $article
+					),
+					'data' => $champs
+				)
+			);
+		}
+
 		sql_update(
 			'spip_articles',
-			array(	"titre" => sql_quote($titre),
-				"id_rubrique" => sql_quote($rubrique),
-				"surtitre" => sql_quote($surtitre),
-				"soustitre" => sql_quote($soustitre),
-				"chapo" => sql_quote($chapo),
-				"descriptif" => sql_quote($descriptif),
-				"ps" => sql_quote($ps),
-				"texte" => sql_quote($texte),
-				"statut" => sql_quote($statut),
+			array(	"titre" => sql_quote($champs['titre']),
+				"id_rubrique" => sql_quote($champs['id_rubrique']),
+				"surtitre" => sql_quote($champs['surtitre']),
+				"soustitre" => sql_quote($champs['soustitre']),
+				"chapo" => sql_quote($champs['chapo']),
+				"descriptif" => sql_quote($champs['descriptif']),
+				"ps" => sql_quote($champs['ps']),
+				"texte" => sql_quote($champs['texte']),
+				"statut" => sql_quote($champs['statut']),
 				"lang" => sql_quote($lang),
 				"id_secteur" => sql_quote($id_secteur),
-				"date" => "NOW()",
-				"date_redac" => "NOW()",
-				"date_modif" => "NOW()",
-				"extra" => sql_quote($extra)),
+				"date" => sql_quote($champs['date']),
+				"date_redac" => sql_quote($champs['date']),
+				"date_modif" => sql_quote($champs['date']),
+				"extra" => sql_quote($champs['extra'])),
 			 array("id_article=".$article)
 		);
 
@@ -363,6 +396,19 @@ if($valider) {
 				'id_auteur' => $config['IDAuteur'],
 				'id_article' => $article)
 		);
+
+		// Envoyer autres aux plugins
+		if ($config['Pipeline'] == 'yes') {
+			pipeline('post_edition',
+				array(
+					'args' => array(
+						'table' => 'spip_articles',
+						'id_objet' => $article
+					),
+					'data' => $champs
+				)
+			);
+		}
 	}
 	
 	if ($flag_ok == 'ok') {
