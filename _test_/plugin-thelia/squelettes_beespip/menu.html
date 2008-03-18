@@ -173,22 +173,28 @@ include '#CHEMIN{beespip_inc_layer.php}';
     ?>
   </BOUCLE_rubriques>
 
-   <T_rubriquesthelia>
-<div class="rubriques">
-	<h2 class="menu-titre"><:boutique:></h2>
-	<ul>
-	<THELIA_rubriquesthelia type="RUBRIQUE" parent="0">
-		<li>
-			<a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}">THELIA-TITRE</a>
-			<ul>
-				<THELIA_sous_rubriques type="RUBRIQUE" parent="THELIA-ID">
-					<li><a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}">THELIA-TITRE</a></li>
-				</THELIA_sous_rubriques>
-			</ul>
-		</li>
-	</THELIA_rubriquesthelia>
-	</ul>
-</div>
+  <T_rubriquesthelia>
+	 <div class="blocarrondim" style="margin-left: auto;margin-right: auto;">
+             <div class="bamhaut"><div><div></div></div></div>
+                <div class="bamcontentwrap"><div class="bamcontent">
+               
+			<div style="text-align:center;"><:boutique:></div>
+			<ul class="pave">
+                	<THELIA_rubriquesthelia type="RUBRIQUE" parent="0">
+			<li>
+				<a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}">THELIA-TITRE</a>
+				<ul>
+					<THELIA_sous_rubriques type="RUBRIQUE" parent="THELIA-ID">
+						<li><a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}">THELIA-TITRE</a></li>
+					</THELIA_sous_rubriques>
+				</ul>
+			</li>
+			</THELIA_rubriquesthelia>
+		</div><!-- /bamcontent -->
+                </div><!-- /bamcontentwrap -->
+                <div class="bambas"><div><div></div></div></div>
+              </div><!-- /blocarrondim -->
+              <div class="cleaner">&nbsp;</div>
 </T_rubriquesthelia>
 <//T_rubriquesthelia>
 
