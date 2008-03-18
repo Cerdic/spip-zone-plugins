@@ -2,8 +2,8 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>Cr&eacute;ation de mon compte - [(#NOM_SITE_SPIP|textebrut)]</title>
-<meta name="description" content="Cr&eacute;ation de mon compte" />
+<title><:spipthelia:creation_compte:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="<:spipthelia:creation_compte:>" />
 <INCLURE{fond=inc-head}>
 </head>
 
@@ -14,7 +14,7 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Cr&eacute;ation de mon compte</div>
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:creation_compte:></div>
 		
 	<div id="conteneur">
 
@@ -25,99 +25,99 @@
 				[(#REM) Titre de la page ]
 
 				<div class="titrePage">
-				<h1>Cr&eacute;ation de mon compte </h1>
+				<h1><:spipthelia:creation_compte:></h1>
 				</div>
 				
 				[(#REM) Contenu de la page ]
 				
 				<div class="sousTitrePage">
-				<h3>Je cr&eacute;&eacute; mon compte  pour pouvoir commander sur ce site Internet : </h3>
+				<h3><:spipthelia:message_creation_compte:> : </h3>
 				</div>
 				
 
 			<form action="#URL_PAGE{nouveau}" method="post" name="nouveau" id="nouveau">
-			<input type="hidden" name="action" value="creercompte" />
+			<input type="hidden" name="thelia_action" value="creercompte" />
 
-			<table width="775" border="0" cellspacing="0" cellpadding="5">
+			<table>
 				<tr>
-    				<td width="190" class="ligneTableau">Civilit&eacute;*</td>
-				    <td width="565" class="ligneTableau">
+    				<td class="ligneTableau"><:spipthelia:civilite:>*</td>
+				    <td class="ligneTableau">
 					<select name="raison" size="1"  class="zoneDeSaisie">
-    				<option value="" selected="selected">Choisissez ...</option>
-   					<option value="1">Madame</option>
-   					<option value="2">Mademoiselle</option>
-    				<option value="3">Monsieur</option>
-    				</select>
+    						<option value="" selected="selected"><:spipthelia:choisissez:></option>
+   						<option value="1"><:spipthelia:madame:></option>
+   						<option value="2"><:spipthelia:mademoiselle:></option>
+    						<option value="3"><:spipthelia:monsieur:></option>
+    					</select>
 					</td>
 				</tr>
 				<tr>
-    				<td class="ligneTableau">Nom*</td>
+    				<td class="ligneTableau"><:spipthelia:nom:>*</td>
     				<td class="ligneTableau"><input type="text" name="nom" class="zoneDeSaisie" /></td>
 				</tr>
 				<tr>
-					<td class="ligneTableau">Pr&eacute;nom*</td>
+					<td class="ligneTableau"><:spipthelia:prenom:>*</td>
 					<td class="ligneTableau"><input type="text" name="prenom" class="zoneDeSaisie" /></td>
 				</tr>
 				<tr>
-					<td class="ligneTableau">Adresse*</td>
+					<td class="ligneTableau"><:spipthelia:adresse:>*</td>
 					<td class="ligneTableau"><input type="text" name="adresse1" class="zoneDeSaisie" /></td>
 				</tr>
 				<tr>
-					<td class="ligneTableau">Adresse (suite) </td>
+					<td class="ligneTableau"><:spipthelia:adresse_suite:></td>
 					<td class="ligneTableau"><input type="text" name="adresse2" class="zoneDeSaisie" /></td>
 				</tr>
 				<tr>
-					<td class="ligneTableau">Compl&eacute;ment d'adresse </td>
+					<td class="ligneTableau"><:spipthelia:complement_adresse:></td>
 					<td class="ligneTableau"><input type="text" name="adresse3" class="zoneDeSaisie" /></td>
 				</tr>
 				<tr>
-					<td class="ligneTableau">Code postal*</td>
+					<td class="ligneTableau"><:spipthelia:code_postal:>*</td>
 					<td class="ligneTableau"><input type="text" name="cpostal" class="zoneDeSaisie" /></td>
 				</tr>
 				<tr>
-					<td class="ligneTableau">Ville*</td>
+					<td class="ligneTableau"><:spipthelia:ville:>*</td>
 					<td class="ligneTableau"><input type="text" name="ville" class="zoneDeSaisie" /></td>
 				</tr>
 				<tr>
-					<td class="ligneTableau">Pays*</td>
+					<td class="ligneTableau"><:spipthelia:pays:>*</td>
 					<td class="ligneTableau">
 					<select name="pays" size="1"  class="zoneDeSaisie">
-					<option value="" selected="selected">Choisissez ...</option>
-					<THELIA_pays type="PAYS" zdefinie="1">           
-					<option value="#ID">#TITRE</option>
-					</THELIA_pays>
-    				</select>
+						<option value="" selected="selected"><:spipthelia:choisissez:></option>
+						<THELIA_pays type="PAYS" zdefinie="1">           
+						<option value="THELIA-ID">THELIA-TITRE</option>
+						</THELIA_pays>
+    					</select>
 					</td>
 				</tr>
 				<tr>
-    				<td class="ligneTableau">T&eacute;l&eacute;phone fixe* </td>
+    				<td class="ligneTableau"><:spipthelia:telephone_fixe:>* </td>
     				<td class="ligneTableau"><input type="text" name="telfixe" class="zoneDeSaisie" /></td>
 				</tr>
 				<tr>
-    				<td class="ligneTableau">T&eacute;l&eacute;phone portable </td>
+    				<td class="ligneTableau"><:spipthelia:telephone_portable:></td>
     				<td class="ligneTableau"><input type="text" name="telport" class="zoneDeSaisie" /></td>
 				</tr>
 				<tr>
-    				<td class="ligneTableau">Email*</td>
+    				<td class="ligneTableau"><:spipthelia:email:>*</td>
     				<td class="ligneTableau"><input type="text" name="email1" class="zoneDeSaisie" /></td>
 				</tr>
 				<tr>
-    				<td class="ligneTableau">Confirmation de votre email*</td>
+    				<td class="ligneTableau"><:spipthelia:confirmation_email:>*</td>
     				<td class="ligneTableau"><input type="text" name="email2" class="zoneDeSaisie" /></td>
 				</tr>
 				<tr>
-    				<td class="ligneTableau">Mot de passe* (6 caract&egrave;res minimum ) </td>
+    				<td class="ligneTableau"><:spipthelia:mdp:>* (<:spipthelia:mdp_caracteres_minimum:>) </td>
     				<td class="ligneTableau"><input  name="motdepasse1" type="password" class="zoneDeSaisie" /></td>
 				</tr>
 				<tr>
-    				<td class="ligneTableau">Confirmation de votre mot de passe*</td>
+    				<td class="ligneTableau"><:spipthelia:confirmation_mdp:>*</td>
     				<td class="ligneTableau"><input name="motdepasse2" type="password" class="zoneDeSaisie" /></td>
   				</tr>
 			</table>
 
-			<span class="commentaires">* Champs obligatoires</span>
+			<span class="commentaires">* <:spipthelia:champs_obligatoires:></span>
 				<div class="boutonMonCompteContenu">
-				<input type="submit" value="Valider" />
+				<input type="submit" value="<:spipthelia:valider:>" />
 				</div>
 			</form>
 		

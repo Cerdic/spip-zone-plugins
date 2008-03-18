@@ -110,7 +110,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'libelle_adresse' => 'Libell&eacute; de l\'adresse',
 'mdp_oublie' => 'Mot de passe perdu ou oubli&eacute;',
 'mdp_oublie_message' => 'Inscrivez votre email pour recevoir votre mot de passe',
-'se_connecter' => 'Se connecter'
+'se_connecter' => 'Se connecter',
+'se_deconnecter' => 'Se d&eacute:connecter',
+'felicitation_compte' => 'F&eacute;licitations, vous venez de terminer la cr&eacute;ation de votre compte !',
+'reglement_virement' => 'Je choisis un mode de r&egrave;glement : par virement',
+'reglement_virement_message' => 'Nous vous remercions de la confiance que vous nous accordez.<br />
+			Un email recapitulatif de votre commande vous a &eacute;t&eacute; envoy&eacute; &agrave; l\'adresse: THELIA-CLIENT_EMAIL.<br />
+			Votre commande sera valid&eacute;e par nos services &agrave; r&eacute;ception de votre paiement.<br /><br />
+			Ecrire ici les infos sur le r&eacute;glement par virement ...<br /><br />
+			'
 
 
 

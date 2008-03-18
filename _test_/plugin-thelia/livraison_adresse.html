@@ -2,19 +2,19 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>Mon compte : mes adresses de livraison - [(#NOM_SITE_SPIP|textebrut)]</title>
-<meta name="description" content="Mon compte : mes adresses de livraison" />
+<title><:spipthelia:mes_adresses_livraison:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="<:spipthelia:mes_adresses_livraison:>" />
 <INCLURE{fond=inc-head}>
 </head>
 
-<body class="page_panier">
+<body class="page_livraisonadresse">
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Mon compte : mes adresses de livraison</div>
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{moncompte}"><:spipthelia:mon_compte:></a> &gt; <:spipthelia:mes_adresses_livraison:></div>
 	
 	<div id="conteneur">
 
@@ -24,83 +24,81 @@
 				[(#REM) Titre de la rubrique ]
 
 				<div class="titrePage">
-				<h1>Mon compte : mes adresses de livraison </h1>
+				<h1><:spipthelia:mes_adresses_livraison:></h1>
 				</div>
 
 				[(#REM) Contenu de la page ]
 
-				<div class="sousTitrePage">
-				<h3>Mes adresses de livraison</h3>
-				</div>
-	
+				
 			<THELIA_adr type="ADRESSE" client="THELIA-CLIENT_ID">
 			
 				<div class="textePage">
 				THELIA-LIBELLE
 				</div>
 				
-			<a href="#URL_PAGE{livraison_modifier,adresse=THELIA-ID}">Modifier cette adresse<br />
-			</a><a href="THELIA-SUPPRURL">Supprimer cette adresse </a>
+			<a href="#URL_PAGE{livraison_modifier,adresse=THELIA-ID}"><:spipthelia:modifier_adresse:><br />
+			</a><a href="THELIA-SUPPRURL"><:spipthelia:supprimer_adresse:> </a>
 			</THELIA_adr>
 				
 				<div class="separation">
 				</div>
 
 				<div class="sousTitrePage">
-				<h3>Ajouter une nouvelle adresse de livraison</h3>
+				<h3><:spipthelia:ajouter_adresse_livraison:></h3>
 				</div>
 				
 			<form action="#URL_PAGE{adresse}" method="post" name="nouveau" id="nouveau">
           			  <input type="hidden" name="thelia_action" value="creerlivraison" />
-			<table width="775" border="0" cellspacing="0" cellpadding="5">
-  				<tr>
-    				<td width="190" class="ligneTableau">Lib&eacute;ll&eacute; de l'adresse* </td>
-    				<td width="565" class="ligneTableau"><input name="libelle" type="text" class="zoneDeSaisie"/></td>
+			<table>
+  				<tbody>
+				<tr>
+    				<td class="ligneTableau"><:spipthelia:libelle_adresse:>* </td>
+    				<td class="ligneTableau"><input name="libelle" type="text" class="zoneDeSaisie"/></td>
   				</tr>
 				<tr>
-   					<td class="ligneTableau">Civilit&eacute;*</td>
+   					<td class="ligneTableau"><:spipthelia:civilite:>*</td>
    					<td class="ligneTableau">
 					<select name="raison" size="1" class="zoneDeSaisie">
-                	<option value="" selected="selected">Choisissez ...</option>
-                	<option value="1">Madame</option>
-               		<option value="2">Mademoiselle</option>
-               		<option value="3">Monsieur</option>
-               		</select>
+                				<option value="" selected="selected"><:spipthelia:choisissez:></option>
+                				<option value="1"><:spipthelia:madame:></option>
+               					<option value="2"><:spipthelia:mademoiselle:></option>
+               					<option value="3"><:spipthelia:monsieur:></option>
+               				</select>
 					</td>
 				</tr>
 				<tr>
-					<td class="ligneTableau">Nom*</td>
+					<td class="ligneTableau"><:spipthelia:nom:>*</td>
 					<td class="ligneTableau"><input type="text" name="nom" class="zoneDeSaisie" /></td>
 				</tr>
   				<tr>
-  				  	<td class="ligneTableau">Pr&eacute;nom*</td>
+  				  	<td class="ligneTableau"><:spipthelia:prenom:>*</td>
   				  	<td class="ligneTableau"><input type="text" name="prenom" class="zoneDeSaisie" /></td>
 			  	</tr>
   				<tr>
-  				  	<td class="ligneTableau">Adresse*</td>
+  				  	<td class="ligneTableau"><:spipthelia:adresse:>*</td>
   				  	<td class="ligneTableau"><input type="text" name="adresse1" class="zoneDeSaisie" /></td>
 			  	</tr>
   				<tr>
-  				  	<td class="ligneTableau">Adresse (suite) </td>
+  				  	<td class="ligneTableau"><:spipthelia:adresse_suite:></td>
   				  	<td class="ligneTableau"><input type="text" name="adresse2" class="zoneDeSaisie" /></td>
 			  	</tr>
   				<tr>
-  				  	<td class="ligneTableau">Compl&eacute;ment d'adresse </td>
+  				  	<td class="ligneTableau"><:spipthelia:complement_adresse:></td>
  				  	<td class="ligneTableau"><input type="text" name="adresse3" class="zoneDeSaisie" /></td>
 			  	</tr>
   				<tr>
-  				  	<td class="ligneTableau">Code postal*</td>
+  				  	<td class="ligneTableau"><:spipthelia:code_postal:>*</td>
   				  	<td class="ligneTableau"><input type="text" name="cpostal" class="zoneDeSaisie" /></td>
 			  	</tr>
   				<tr>
-  				  	<td class="ligneTableau">Ville*</td>
+  				  	<td class="ligneTableau"><:spipthelia:ville:>*</td>
   				  	<td class="ligneTableau"><input type="text" name="ville" class="zoneDeSaisie" /></td>
 			  	</tr>
   				<tr>
-  				  	<td class="ligneTableau">Pays*</td>
+  				  	<td class="ligneTableau"><:spipthelia:pays:>*</td>
   				  	<td class="ligneTableau">
 				  	<select name="pays" size="1"  class="zoneDeSaisie">
-				  	<option value="" selected="selected">Choisissez ...</option>
+				  	<option value="" selected="selected"><:spipthelia:choisissez:></option>
 				  	<THELIA_pays type="PAYS" zdefinie="1">           
 				  	<option value="THELIA-ID">THELIA-TITRE</option>
 				  	</THELIA_pays>
@@ -108,13 +106,14 @@
 					</td>
 			  	</tr>
 				<tr>
-  				  	<td class="ligneTableau">T&eacute;l&eacute;phone * </td>
+  				  	<td class="ligneTableau"><:spipthelia:telephone:>* </td>
   				  	<td class="ligneTableau"><input type="text" name="tel" class="zoneDeSaisie" /></td>
 			  	</tr>
+				</tbody>
 			 </table>
 			 
 			 	<div class="boutonMonCompteContenu">
-				<input type="submit" value="Valider" />
+				<input type="submit" value="<:spipthelia:valider:>" />
 				</div>
 			</form>
 

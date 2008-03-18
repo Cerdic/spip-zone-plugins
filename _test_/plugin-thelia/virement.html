@@ -2,8 +2,8 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>Je choisis un mode de r&egrave;glement : par virement - [(#NOM_SITE_SPIP|textebrut)]</title>
-<meta name="description" content="Je choisis un mode de r&egrave;glement : par virement" />
+<title><:spipthelia:reglement_virement:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="<:spipthelia:reglement_virement:>" />
 <INCLURE{fond=inc-head}>
 </head>
 
@@ -14,7 +14,7 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Je choisis un mode de r&egrave;glement : par virement</div>		
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:reglement_virement:></div>		
 	
 	<div id="conteneur">
 
@@ -24,20 +24,16 @@
 			[(#REM) Titre de la rubrique ]
 
 			<div class="titrePage">
-				<h1>Je choisis un mode de r&egrave;glement : par virement  </h1>
+				<h1><:spipthelia:reglement_virement:>  </h1>
 			</div>
 				
 			[(#REM) contenu de la page ]
-	
-			Nous vous remercions de la confiance que vous nous accordez.<br />
-			Un email recapitulatif de votre commande vous a &eacute;t&eacute; envoy&eacute; &agrave; l'adresse: THELIA-CLIENT_EMAIL.<br />
-			Votre commande sera valid&eacute;e par nos services &agrave; r&eacute;ception de votre paiement.<br /><br />
-			Ecrire ici les infos sur le r&eacute;glement par virement ...<br /><br />
+			<:spipthelia:reglement_virement_message:>
 					
 			<THELIA_cmd type="COMMANDE" ref="THELIA-COMMANDE_REF">	
-			N&deg; DE COMMANDE : THELIA-REF <br />
-			DATE : THELIA-DATE<br />
-			TOTAL : THELIA-TOTCMDPORT &euro;<br />	
+			<:spipthelia:numero_commande:> : THELIA-REF <br />
+			<:spipthelia:date:> : THELIA-DATE<br />
+			<:spipthelia:total:> : THELIA-TOTCMDPORT &euro;<br />	
 			</THELIA_cmd>
 
 
