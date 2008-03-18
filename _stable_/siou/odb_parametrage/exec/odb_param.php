@@ -429,7 +429,7 @@ debut_droite();
                $msg.= "<table class='spip'>\n";
                foreach($tParam as $param=>$valeur) {
                   if($param=='code') $password=true;else $password=false;
-                  if(!is_array($valeur))
+                  if($param[0]!='_')
                   	$msg.= formInputTextTR(str_replace('_',' ',ucfirst($param)),"set|$param",$valeur,'','',$password);
                }
                $msg.= "</table>\n";
@@ -442,10 +442,11 @@ debut_droite();
 	       $sql="DELETE from odb_notes WHERE annee=$annee";
 	       odb_query($sql,__FILE__,__LINE__);
 	       $msg.=OK." - <b>".mysql_affected_rows()."</b> notes supprim&eacute;es<br/>";
+	       $code=$tParam['code'];
 	       $sql="insert into odb_notes (`id_table`,`id_anonyme`, `annee`, `id_serie`, `jury`, `id_matiere`, `type`, `coeff`)\n"
-		  . "(SELECT DECODE(id_anonyme,'toto'), DECODE(id_anonyme,'toto'), 2008, serie, jury, id_matiere, type, coeff\n"
+		  . "(SELECT DECODE(id_anonyme,'$code'), DECODE(id_anonyme,'$code'), 2008, serie, jury, id_matiere, type, coeff\n"
 		  . " FROM odb_repartition rep, odb_ref_examen exa, odb_candidats can\n"
-		  . " WHERE rep.annee=$annee and exa.annee=$annee and can.annee=$annee"
+		  . " WHERE rep.annee=$annee and exa.annee=$annee and can.annee=$annee and (type='Ecrit' OR type='Pratique')"
 		  . " and can.id_saisie=rep.id_saisie and can.serie=exa.id_serie and jury is not null)"
 		  ;
 	       odb_query($sql,__FILE__,__LINE__);
@@ -562,12 +563,12 @@ if($tab_auteur['login']==$tParam['login_anonymes']) {
       ;
    $title="G&eacute;n&eacute;rer les num&eacute;ros anonymes";
    echo "<tr class='tr_liste'>\n\t<td align='center'><input type='image' name='action' value='anonymiser' src='"._DIR_PLUGIN_ODB_PARAM."img_pack/anonymer.png' alt='$title' title=\"header=[$imgInfo Param&eacute;trage SIOU] body=[$title]\" onclick=\"return confirm('Ce processus va :\\n- generer de nouveaux numeros anonymes (remplace les anciens)\\n- crypter ces numeros avec le code (cf. `configuration de siou`)')\"/></td>"
-      . "<td>$title <input type='image' name='action' align='absmiddle' value='impression_anonymes' src='".DIR_ODB_COMMUN."img_pack/vignettes/pdf.png' alt='$title' title=\"header=[$imgInfo Param&eacute;trage SIOU] body=[Imprimer les num&eacute;ros anonymes (pdf)]\"/>Imprimer num&eacute;ros anonymes (crypt&eacute;)</td>\n"
+      . "<td>$title <input type='image' name='action' align='absmiddle' value='impression_anonymes' src='".DIR_ODB_COMMUN."img_pack/vignettes/pdf.png' alt='$title' title=\"header=[$imgInfo Param&eacute;trage SIOU] body=[Imprimer les num&eacute;ros anonymes (pdf)]\"/>Imprimer n&deg; anonymes</td>\n"
       . "</tr>\n"
       ;
    $title="Pr&eacute;paration de la saisie des notes anonyme";
-   echo "<tr class='tr_liste'>\n\t<td align='center'><input type='image' name='action' value='preparation_notes_anonymes' src='"._DIR_PLUGIN_ODB_PARAM."img_pack/jury.png' alt='$title' title=\"header=[$imgInfo Param&eacute;trage SIOU] body=[$title]\" onclick=\"return confirm('Ce processus va regenerer la liste des numeros anonymes\\nIl permet de preparer la saisie des notes sous anonymat\\n\\nLes anciens numeros anonymes seront remplaces pour $annee')\"/></td>"
-      . "<td>Pr&eacute;paration notes | <input type='image' name='action' align='absmiddle' value='deliberer' src='"._DIR_PLUGIN_ODB_PARAM."img_pack/jury.png' alt='$title' title=\"header=[$imgInfo Param&eacute;trage SIOU] body=[Gestion de la 1&egrave; d&eacute;lib&eacute;ration]\"/>Gestion 1<sup>&egrave;re</sup> d&eacute;lib&eacute;ration</td>\n"
+   echo "<tr class='tr_liste'>\n\t<td align='center'><input type='image' name='action' value='preparation_notes_anonymes' src='"._DIR_PLUGIN_ODB_PARAM."img_pack/jury.png' alt='$title' title=\"header=[$imgInfo Param&eacute;trage SIOU] body=[$title]\" onclick=\"return confirm('Ce processus va regenerer la liste des numeros anonymes\\nIl permet de preparer la saisie des notes sous anonymat\\n\\nATTENTION !\\n- Veuillez ENTRER LE BON MOT DE PASSE')\"/></td>"
+      . "<td>Initialisation notes | <input type='image' name='action' align='absmiddle' value='deliberer' src='"._DIR_PLUGIN_ODB_PARAM."img_pack/jury.png' alt='$title' title=\"header=[$imgInfo Param&eacute;trage SIOU] body=[Gestion de la 1&egrave; d&eacute;lib&eacute;ration]\"/>Gestion 1<sup>&egrave;re</sup> d&eacute;lib&eacute;ration</td>\n"
       . "</tr>\n"
       ;
 }
