@@ -34,7 +34,7 @@ if (defined('_SPIP19300')) {
 	}
 }
 
-function cs_introduction($type, $texte, $chapo, $descriptif, $id) {
+function cs_introduction($type, $texte, $chapo, $descriptif, $id, $lgr=false) {
 	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 	@define('_INTRODUCTION_LGR', 100);
 	$couper = $GLOBALS['cs_couper_intro'];
@@ -50,23 +50,23 @@ function cs_introduction($type, $texte, $chapo, $descriptif, $id) {
 				// pas de maths dans l'intro...
 				$texte = preg_replace(',<math>.*</math>,imsU', '', $texte);
 				// on coupe proprement...
-				$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($chapo."\n\n\n".$texte), round(500*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
+				$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($chapo."\n\n\n".$texte), $lgr?$lgr:round(500*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
 			}
 			$racc = 'article';
 			break;
 		case 'breves':
-			$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), round(300*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
+			$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), $lgr?$lgr:round(300*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
 			$racc = 'breve';
 			break;
 		case 'forums':
-			$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), round(600*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
+			$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), $lgr?$lgr:round(600*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
 			$racc = 'forum';
 			break;
 		case 'rubriques':
 			if (strlen($descriptif))
 				return propre($descriptif);
 			else
-				$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), round(600*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
+				$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), $lgr?$lgr:round(600*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
 			$racc = 'rubrique';
 			break;
 	}
@@ -96,6 +96,8 @@ if (!function_exists('balise_INTRODUCTION')) {
 		$_texte = champ_sql('texte', $p);
 		$_chapo = "''";
 		$_descriptif =  "''";
+		// longueur en parametre, ou valeur par defaut
+		if (($v = interprete_argument_balise(1,$p))!==NULL)	$_lgr = ', intval('.$v.')';
 		switch ($type) {
 			case 'articles':
 			  $_chapo = champ_sql('chapo', $p);
@@ -115,7 +117,7 @@ if (!function_exists('balise_INTRODUCTION')) {
 			  $_id = 0;
 			}
 	//	$p->code = "calcul_introduction('$type', $_texte, $_chapo, $_descriptif)";
-		$p->code = "cs_introduction('$type', $_texte, $_chapo, $_descriptif, $_id)";
+		$p->code = "cs_introduction('$type', $_texte, $_chapo, $_descriptif, $_id $_lgr)";
 	
 		#$p->interdire_scripts = true;
 		return $p;
