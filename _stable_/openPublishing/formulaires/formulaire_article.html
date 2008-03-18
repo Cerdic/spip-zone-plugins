@@ -2,16 +2,16 @@
 
 <form action="[(#ENV{url})]" method="post" name="formulaire_article" enctype="multipart/form-data">
 
-	<input type="hidden" name="article" value="[(#ENV**{article})]"  size="50">
+	<input type="hidden" name="id_article" value="[(#ENV**{id_article})]"  size="50">
 	<input type="hidden" name="url_site" value="[(#URL_SITE_SPIP)]"  size="50">
 
-	[(#ENV*{formulaire_previsu})]
+	[(#ENV*{formulaire_article_previsu})]
 
 	[<center><p style="color:red;"><b>(#ENV*{mess_error})</b></p></center>]
 
 	[(#CONFIG{op/Logo,''}|=={yes}?{[<p>
 	<fieldset><legend><b><:opconfig:logo_article:></b></legend>
-		<p>(#ENV**{article}|logo_article)</p>
+		<p>(#ENV**{id_article}|logo_article)</p>
 		<input name='sup_logo' type='submit' VALUE='<:opconfig:sup_logo:>' CLASS='spip_bouton'>
 	</fieldset>
 	</p>]})]
@@ -22,7 +22,7 @@
 
 	<p><:opconfig:expliq_balise:></p>
 
-	<BOUCLE_document(DOCUMENTS){ id_article = #ENV**{article} }>
+	<BOUCLE_document(DOCUMENTS){ id_article = #ENV**{id_article} }>
 		#SET{ratio_x,#LARGEUR|div{115}}
 		#SET{ratio_y,#HAUTEUR|div{115}}
 		#SET{ratio,#GET{ratio_x}|<={#GET{ratio_y}}|?{#GET{ratio_x},#GET{ratio_y}}}
@@ -49,9 +49,9 @@
 	<p>
 	<fieldset><legend><b><:opconfig:publie_rubrique:></b></legend>
 
-			<p><select name="rubrique" value="[(#ENV**{rubrique})]">
+			<p><select name="id_rubrique" value="[(#ENV**{id_rubrique})]">
 				<BOUCLE_rubrique(RUBRIQUES){openPublishing}{tout}>
-					[(#ENV**{rubrique}|selected_option{#ID_RUBRIQUE,#TITRE})]
+					[(#ENV**{id_rubrique}|selected_option{#ID_RUBRIQUE,#TITRE})]
 				</BOUCLE_rubrique>
 			</select></p>
 
@@ -146,15 +146,13 @@
 	[<p>(#ENV*{formulaire_motclefs})</p>]
 
 
-	[<p>(#ENV*{formulaire_tagopen})</p>]
-
-
 	[<p>(#ENV*{formulaire_documents})</p>]
 
 
 	[<p>(#ENV*{formulaire_agenda})</p>]
-		
 
+	#PIPELINE{pub_squelette,#ENV*}
+		
 	<p>
 	<fieldset><legend><b><:opconfig:identification:>&nbsp;[<:opconfig:optionel:>]</b></legend>
 		<:opconfig:votre_nom:>&nbsp;:&nbsp;

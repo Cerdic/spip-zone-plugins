@@ -44,98 +44,171 @@ $config = lire_config('op');
 // si l'auteur anonymous n'est pas dans la base, le plugin openpublishing doit être mal installé
 if(!$config['IDAuteur']) return _T('opconfig:erreur_die');
 
+/* récapitulatif des pipelines :
 
-// Les différentes actions que peut faire un utilisateur
-$previsualiser	= _request('previsualiser'); // demande la prévisualisation
-$valider	= _request('valider'); // demande la validation
-$sup_logo	= _request('sup_logo'); // demande la supression du logo
-$media		= _request('media'); // demande l'ajout de document
-$mots		= _request('mots'); // demande l'ajout de mot cle
-$agenda		= _request('agenda'); // demande la mise en agenda
-$abandonner	= _request('abandonner'); // demande l'abandon
-$tags		= _request('tags'); // demande des nouveaux mot dans tag machine
+pub_environnement
+-----------------
 
-// url et id de l'article
-$url_site = _request('url_site');
-$article = intval(stripslashes(_request('article')));
+ce pipeline permet aux plugins d'ajouter des variables d'environnement
 
-// données pour formulaire document
-$formulaire_documents 	= stripslashes(_request('formulaire_documents'));
-$doc 			= stripslashes(_request('doc'));
-$type_doc 		= stripslashes(_request('type'));
+pub_pre_validation
+------------------
 
-// données pour formulaire agenda
-$formulaire_agenda 	= stripslashes(_request('formulaire_agenda'));
-$annee 			= stripslashes(_request('annee'));
-$mois			= stripslashes(_request('mois'));
-$jour 			= stripslashes(_request('jour'));
-$heure 			= stripslashes(_request('heure'));
-$choix_agenda 		= stripslashes(_request('choix_agenda'));
+ce pipeline permet aux plugins d'effectuer des traitements avant la validation
+p.e : traitements typographiques sur le texte
 
-// données pour formulaire tagopen (plugin Tag machine)
-$formulaire_tagopen 	= stripslashes(_request('formulaire_tagopen'));
 
-// données pour formulaire motclefs
-$formulaire_motclefs 	= stripslashes(_request('formulaire_motclefs'));
-if (!empty($_POST["motschoix"])) { $motschoix=$_POST["motschoix"]; }
+pub_validation
+--------------
+	
+ce pipeline permet aux plugins d'effectuer une validation "alternative"
+p.e : pour passer ailleur que par la création d'un article (création d'un evenement p.e)
+IMPORTANT ; ne surtout pas oublier de mettre le flag_valider à true, sinon on embraye sur les autres types de validation
+IMPORTANT : tester le flag_valider, il ce peut qu'un autre plugin le mette à true avant :)
+IMPORTANT : tester sa variable action .. sinon le process se déroulera si on clique sur un autre bouton
 
-// donnée rubrique
-$rubrique		= intval(stripslashes(_request('rubrique')));
-if ($id_rubrique) { if (!$rubrique) { $rubrique=$id_rubrique;}}
 
-// donnée article
-$titre			= stripslashes(_request('titre'));
-$texte			= stripslashes(_request('texte'));
-$surtitre		= stripslashes(_request('surtitre'));
-$soustitre		= stripslashes(_request('soustitre'));
-$chapo			= stripslashes(_request('chapo'));
-$descriptif		= stripslashes(_request('descriptif'));
-$ps			= stripslashes(_request('ps'));
+pub_action
+----------
 
-// donnée identification
-$nom_inscription	= stripslashes(_request('nom_inscription'));
-$mail_inscription	= stripslashes(_request('mail_inscription'));
+ce pipeline permet aux plugins d'effectuer les traitements sur les variables.
+pourra contenir des manipulations de la base de donnée, etc ..
+IMPORTANT : toujours commencer par un test sur sa variable action !
 
-// le message d'erreur
-$mess_error		= stripslashes(_request('mess_error'));
+pub_squelette
+--------------
+ce pipeline permet aux plugins de calculer leur formulaire.
+IMPORTANT : toujours commencer par un test sur sa variable de configuration
+(p.e : activer ou pas cette fonctionnalité dans un fonds cfg)
+
+
+*/
+
+/* les clé de $variables correspondent aux "names" dans les formulaires HTML
+ celles-ci sont classée en deux catégorie plusieurs catégories
+ actions : les boutons input
+ type : un type pour un champ : 'texte'
+ champs_pri : les champs "principaux" du formulaire (ceux n'étant pas pris en compte par un formulaire auxilliaire
+ champs_aux : les champs "auxilliaires" d'un formulaire auxilliaires
+ flag_erreur : dans le process de pre_validation, si il est mis à true, alors il y a une erreur, retour au formulaire sans validation
+ flag_valider : dans le process de validation, si il est mis à true, alors validation et evite les autres process de validation
+*/
+
+$variables = array(
+	'actions' => array(),
+	'type' => array(),
+	'champs_pri' => array(),
+	'champs_aux' => array(),
+	'flag_erreur' => false,
+	'flag_valider' => false
+	);
+
+// definition des actions principales du formulaire
+$variables['actions']['previsualiser'] = '';
+$variables['actions']['valider'] = '';
+$variables['actions']['sup_logo'] = '';
+$variables['actions']['media'] = '';
+$variables['actions']['mots'] = '';
+$variables['actions']['abandonner'] = '';
+
+// definition des champs principaux du formulaire
+$variables['champs_pri']['id_article'] = '';
+$variables['champs_pri']['id_rubrique'] = '';
+$variables['champs_pri']['titre'] = '';
+$variables['champs_pri']['texte'] = '';
+$variables['champs_pri']['surtitre'] = '';
+$variables['champs_pri']['soustitre'] = '';
+$variables['champs_pri']['chapo'] = '';
+$variables['champs_pri']['descriptif'] = '';
+$variables['champs_pri']['ps'] = '';
+$variables['champs_pri']['nom_inscription'] = '';
+$variables['champs_pri']['mail_inscription'] = '';
+$variables['champs_pri']['mess_error'] = '';
+
+$variables['champs_aux']['url_site'] = _request('url_site');
+$variables['champs_aux']['doc'] = '';
+$variables['champs_aux']['type_doc'] = '';
+$variables['champs_aux']['choix_agenda'] = '';
+$variables['champs_aux']['annee'] = '';
+$variables['champs_aux']['mois'] = '';
+$variables['champs_aux']['jour'] = '';
+$variables['champs_aux']['heure'] = '';
+if (!empty($_POST["motschoix"])) $variables['champs_aux']['motschoix'] = $_POST["motschoix"];
+
+// définition des types(permet de faire passer ces champs par entities_html
+$variables['type']['titre'] = 'texte';
+$variables['type']['nom_inscription'] = 'texte';
+$variables['type']['mail_inscription'] = 'texte';
+$variables['type']['ps'] = 'texte';
+$variables['type']['descriptif'] = 'texte';
+$variables['type']['soustitre'] = 'texte';
+$variables['type']['surtitre'] = 'texte';
+$variables['type']['chapo'] = 'texte';
+
+// création pipeline variables d'environnement
+// ce pipeline permet aux plugins d'ajouter des actions et/ou des champs
+$variables = pipeline('pub_environnement', array(
+			'args'=>array('pub_ouverte'=>'pub_ouverte'),
+			'data'=>$variables
+			));
+
+// pour chacunes des actions, récupérer la valeur
+foreach ($variables['actions'] as $key => $action) {
+		$variables['actions'][$key] = _request($key);
+}
+
+ 
+// Pour chacuns des champs principaux ou auxilliaires, récupérer la valeur
+// Sauf si il a déjà été traité auparavant p.e :
+// - url_site : ne doit pas être traité par stripslashes
+foreach ($variables['champs_pri'] as $key => $champ) {
+		if (empty($champ)) $variables['champs_pri'][$key] = stripslashes(_request($key));
+}
+
+foreach ($variables['champs_aux'] as $key => $champ) {
+		if (empty($champ)) $variables['champs_aux'][$key] = stripslashes(_request($key));
+}
+
+// traitement particulier pour id_article et id_rubrique
+$variables['champs_pri']['id_article'] = intval($variables['champs_pri']['id_article']);
+$variables['champs_pri']['id_rubrique'] = intval($variables['champs_pri']['id_rubrique']);
+
 
 // déclarations de variables supplémentaires (pour la fonction ajout_document)
 $documents_actifs = array();
-$lang = _request('var_lang');	
-$nom = 'changer_lang';
+$lang = _request('var_lang');
 
 // remise à zero 
-$formulaire_previsu = '';
-$bouton= '';
-$mess_error = '';
-$erreur_document = 0;
+$variables['champs_pri']['formulaire_previsu'] = '';
+$variables['champs_pri']['bouton'] = '';
+$variables['champs_pri']['mess_error'] = '';
 
-// filtrage des zones de texte si elles sont emplies
-if ($titre) $titre = entites_html($titre);
-if ($nom_inscription) $nom_inscription = entites_html($nom_inscription);
-if ($mail_inscription) $mail_inscription = entites_html($mail_inscription);
-if ($group_name) $group_name = entites_html($group_name);
-if ($phone) $phone = entites_html($phone);
-if ($surtitre) $surtitre = entites_html($surtitre);
-if ($soustitre) $soustitre = entites_html($soustitre);
-if ($chapo) $chapo = entites_html($chapo);
-if ($descriptif) $descriptif = entites_html($descriptif);
-if ($ps) $ps = entites_html($ps);
 
-// Si l'utilisateur a cliqué sur le bouton "abandonner"
-if ($abandonner) {
+// filtrage par html_entities de toutes les variables typées texte
+foreach ($variables['champs_pri'] as $key => $champ) {
+	if ((!empty($champ)) && ($variables['type'][$key] == 'texte'))
+		$variables['champs_pri'][$key] = entites_html($champ);
+}
+
+foreach ($variables['champs_aux'] as $key => $champ) {
+	if ((!empty($champ)) && ($variables['type'][$key] == 'texte'))
+		$variables['champs_aux'][$key] = entites_html($champ);
+}
+
+// Action Abandonner
+if (!empty($variables['actions']['abandonner'])) {
 
 	// suppression des enregistrements éventuellement créé dans la table spip_mot_article
-	if($article)
+	if($variables['champs_pri']['id_article'])
 		sql_delete(
 			array('spip_mots_articles'),
-		 	array('id_article = '.sql_quote($article).' LIMIT 1')
+		 	array('id_article = '.sql_quote($variables['champs_pri']['id_article']).' LIMIT 1')
 		);
 	
 
 	// suppression du logo si il existe
 	if ($config['Logo'] == 'yes') {
-		$nom = 'arton' . intval($article);
+		$nom = 'arton' . $variables['champs_pri']['id_article'];
 		$formats_logos = Array('jpg' ,'png', 'gif', 'bmp', 'tif');
 	
 		foreach ($formats_logos as $format) {
@@ -145,98 +218,121 @@ if ($abandonner) {
 	}
 
 	// construction de la page de retour
-	$url_retour = $url_site . $config['UrlAbandon'] ;
+	$url_retour = $variables['champs_aux']['url_site'] . $config['UrlAbandon'] ;
 	$message = '<META HTTP-EQUIV="refresh" content="'.$config['TempsAtt'].'; url='.$url_retour.'">' . $config['TextAbandon'];
 	
 	return $message;
-}
+} // FIN action Abandonner
 
+
+
+// Gestion de l'identifiant
 // on demande un nouvel identifiant pour l'article si l'utilisateur clique sur l'un des boutons action
-if (($previsualiser) || ($media) || ($valider) || ($tags) || ($mots)) {
-	if (!$article) $article = op_request_new_id($config['IDAuteur']);
+$identifiant = false;
+
+foreach ($variables['actions'] as $key => $action) {
+	if (!empty($action)) $identifiant = true;
 }
 
-// Affichage des infos si l'auteur est identifié et s'il n'a pas modifié les champs identification
-$auteur_session = $GLOBALS['auteur_session'];
-if($auteur_session) {
-	if (!$nom_inscription) $nom_inscription = $auteur_session['nom'];
-	if (!$mail_inscription) $mail_inscription = $auteur_session['email'];
-}
-
-// l'auteur demande la suppression de son logo
-if ($sup_logo) {
-	$nom = 'arton' . intval($article);
-	$formats_logos = Array('jpg' ,'png', 'gif', 'bmp', 'tif');
-	
-	foreach ($formats_logos as $format) {
-		if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format)))
-			@unlink($d);
+if ($identifiant == true) {
+	if (!$variables['champs_pri']['id_article']) { // premier passage
+		$variables['champs_pri']['id_article'] = op_request_new_id($config['IDAuteur']);
+		// Affichage des infos si l'auteur est identifié et s'il n'a pas modifié les champs identification
+		$auteur_session = $GLOBALS['auteur_session'];
+		if($auteur_session) {
+			if (!$variables['champs_pri']['nom_inscription'])
+				$variables['champs_pri']['nom_inscription'] = $auteur_session['nom'];
+			if (!$variables['champs_pri']['mail_inscription'])
+				$variables['champs_pri']['mail_inscription'] = $auteur_session['email'];
+		}
 	}
 }
+// FIN gestion identifiant
+
 
 // l'auteur demande la publication de son article
-if($valider) {
+if(!empty($variables['actions']['valider'])) {
 	// vérification avant mise en Base de donnée
-	$flag_ok = 'ok';
-
+	
 	// récupération du statut par défaut de l'article
 	$statut = $config['StatutArt'];
-	$RubAgenda = $config['RubAgenda'];
-
+	
+	// création pipeline pre_validation
+	// ce pipeline permet aux plugins d'effectuer des traitements avant la validation
+	// p.e : traitement typographique sur le texte
+	$variables = pipeline('pub_pre_validation', array(
+				'args'=>array('pub_ouverte'=>'pub_ouverte'),
+				'data'=>$variables
+				));
 
 	// vérifications et traitements des champs texte
 	// Anti spam (remplace les @ par un texte aléatoire)
 	if ($config['AntiSpam'] == 'yes') {
-		$texte = antispam($texte);
-		$ps = antispam($ps);
-		$chapo = antispam($chapo);
-		$descriptif = antispam($descriptif);
-		$mail_inscription = antispam($mail_inscription);
+		$variables['champs_pri']['texte'] = antispam($variables['champs_pri']['texte']);
+		$variables['champs_pri']['ps'] = antispam($variables['champs_pri']['ps']);
+		$variables['champs_pri']['chapo'] = antispam($variables['champs_pri']['chapo']);
+		$variables['champs_pri']['descriptif'] = antispam($variables['champs_pri']['descriptif']);
+		$variables['champs_pri']['mail_inscription'] = antispam($variables['champs_pri']['mail_inscription']);
 	}
 
 	// pas de majuscule dans le titre d'un article
 	if ($config['TitreMaj'] != 'yes') {
- 		$titre = strtolower($titre);
+ 		$variables['champs_pri']['titre'] = strtolower($variables['champs_pri']['titre']);
 	}
 
 	// vérification taille du titre : si x caractère ou moins : erreur
-	if (strlen($titre) < $config['TitreMin']) {
-		$flag_ok = 'ko';
-		$mess_error = _T('opconfig:erreur_min_len') . $config['TitreMin'] . _T('opconfig:caracteres');
+	if (strlen($variables['champs_pri']['titre']) < $config['TitreMin']) {
+		$variables['flag_erreur'] = true;
+		$variables['champs_pri']['mess_error'] = _T('opconfig:erreur_min_len') . $config['TitreMin'] . _T('opconfig:caracteres');
 	}
-		
+	
+	// création pipeline validation
+	// ce pipeline permet aux plugins d'effectuer une validation "alternative"
+	// p.e : pour passer ailleur que par la création d'un article (création d'un evenement p.e)
+	// IMPORTANT ; ne surtout pas oublier de mettre le flag_valider à true, sinon on embraye sur les autres types de validation
+	// IMPORTANT : tester le flag_valider, il ce peut qu'un autre plugin le mette à true avant :)
+	// IMPORTANT : tester sa variable action .. sinon le process se déroulera si on clique sur un autre bouton
+	$variables = pipeline('pub_validation', array(
+				'args'=>array('pub_ouverte'=>'pub_ouverte'),
+				'data'=>$variables
+				));
 
-	// l'auteur demande une insertion dans l'agenda
-	if (($choix_agenda == "OK") && ($flag_ok == 'ok')) {
+	// SI l'auteur demande une insertion dans l'agenda
+	// ET que le flag_erreur et toujours à false
+	// ET que le flag_valider et toujouts à false
+	if (($variables['champs_aux']['choix_agenda'] == "OK")
+		&& (!$variables['flag_erreur'])
+		&& (!$variables['flag_valider'])	) {
+
+		$RubAgenda = $config['RubAgenda'];
 
 		// construction de la date complete
-		$tableau = split('[:]', $heure);
+		$tableau = split('[:]', $variables['champs_aux']['heure']);
 		$heure = $tableau[0];
 		$minute = $tableau[1];
 
-		$date_complete = date('Y-m-d H:i:s',mktime($heure, $minute, 0, $mois, $jour, $annee));
+		$date_complete = date('Y-m-d H:i:s',mktime($heure, $minute, 0, $variables['champs_aux']['mois'], $variables['champs_aux']['jour'], $variables['champs_aux']['annee']));
 
 		// calcul extra, l'identification est gérée dans les brèves agenda
 		$extra=array(
-  			"OP_pseudo"=>$nom_inscription,
-  			"OP_mail"=>$mail_inscription
+  			"OP_pseudo"=>$variables['champs_pri']['nom_inscription'],
+  			"OP_mail"=>$variables['champs_pri']['mail_inscription']
 		);
 		$extra=serialize($extra);
 
 		// Concatenation : le texte est composé du texte ET du chapo, descriptif, ps
-		$texte_agenda = $descriptif . $chapo . $texte . $ps;
+		$texte_agenda = $variables['champs_pri']['descriptif']
+				. $variables['champs_pri']['chapo']
+				. $variables['champs_pri']['texte']
+				. $variables['champs_pri']['ps'];
 
-		// construction lien URL désactivé
-		//$lien_url = $url_site . 'spip.php?article' . $article;
-		$lien_url = '';
-		
 		sql_insertq(
 			'spip_breves',
 			array(
 				"date_heure" => $date_complete,
-				"titre" => $titre,
+				"titre" => $variables['champs_pri']['titre'],
 				"texte" => $texte_agenda,
-				"lien_url" => $lien_url,
+				"lien_url" => '',
 				"statut" => $statut,
 				"id_rubrique" => $RubAgenda,
 				"extra" => $extra
@@ -249,13 +345,13 @@ if($valider) {
 			array('spip_breves')
 		));
 
-		$breve = $ret['id_breve'];
+		$id_breve = $ret['id_breve'];
 
 		// les mots clef liées le sont maintenant a la breve
 		$mots = sql_select (
 			array('id_mot'),
 			array('spip_mots_articles'),
-			array('id_article = '.sql_quote($article))
+			array('id_article = '.sql_quote($variables['champs_pri']['id_article']))
 			);
 
 		while ($mot = sql_fetch($mots)) {
@@ -263,7 +359,7 @@ if($valider) {
 				'spip_mots_breves',
 				array(
 					'id_mot' => $mot['id_mot'],
-					'id_breve' => $breve
+					'id_breve' => $id_breve
 				)
 			);
 		}
@@ -273,7 +369,7 @@ if($valider) {
 		$documents = sql_select (
 			array('id_document'),
 			array('spip_documents_articles'),
-			array('id_article = '.sql_quote($article))
+			array('id_article = '.sql_quote($variables['champs_pri']['id_article']))
 			);
 
 		while ($document = sql_fetch($documents)) {
@@ -281,27 +377,31 @@ if($valider) {
 				'spip_documents_breves',
 				array(
 					'id_document' => $document['id_document'],
-					'id_breve' => $breve
+					'id_breve' => $id_breve
 				)
 			);
 		}
 
 		sql_delete (
 			array('spip_documents_articles'),
-			array('id_article = '.sql_quote($article))
+			array('id_article = '.sql_quote($variables['champs_pri']['id_article']))
 		);
 
 		sql_delete (
 			array('spip_mots_articles'),
-			array('id_article = '.sql_quote($article))
+			array('id_article = '.sql_quote($variables['champs_pri']['id_article']))
 		);
 
 		sql_delete(
 			array('spip_articles'),
-			array('id_article = '.sql_quote($article).' LIMIT 1')
+			array('id_article = '.sql_quote($variables['champs_pri']['id_article']).' LIMIT 1')
 		);
+
+		$variables['flag_valider'] = true;
 	}
-	else if ($flag_ok== 'ok') { // soit il s'agit d'un article, soit d'une breve. Les deux à la fois ne sont pas possible
+
+	if (	(!$variables['flag_erreur']) // par défaut, c'est un article
+		&& (!$variables['flag_valider']) ) {
 
 		// préparation de la mise en base de donnée
 
@@ -309,7 +409,7 @@ if($valider) {
 		$row = sql_fetch(sql_select(
 			array('lang, id_secteur'),
 			array('spip_rubriques'),
-			array('id_rubrique='.sql_quote($rubrique))
+			array('id_rubrique='.sql_quote($variables['champs_pri']['id_rubrique']))
 			));
 		$id_secteur = $row['id_secteur'];
 		$lang_rub = $row['lang'];
@@ -332,24 +432,24 @@ if($valider) {
 
 		// calcul extra
 		$extra=array(
-  			"OP_pseudo"=>$nom_inscription,
-  			"OP_mail"=>$mail_inscription
+  			"OP_pseudo"=>$variables['champs_pri']['nom_inscription'],
+  			"OP_mail"=>$variables['champs_pri']['mail_inscription']
 		);
 		$extra=serialize($extra);
 
 
-		// construction du tableau $champs pour les pipelines
+		// construction du tableau $champs pour les pipelines pre_edition et post_edition
 		$champs = array(
-			'surtitre' => $surtitre,
-			'titre' => $titre,
-			'soustitre' => $soustitre,
-			'descriptif' => $descriptif,
-			'nom_site' => $ps,
+			'surtitre' => $variables['champs_pri']['surtitre'],
+			'titre' => $variables['champs_pri']['titre'],
+			'soustitre' => $variables['champs_pri']['soustitre'],
+			'descriptif' => $variables['champs_pri']['descriptif'],
+			'nom_site' => $variables['champs_pri']['ps'],
 			'url_site' => '',
-			'chapo' => $chapo,
-			'texte' => $texte,
-			'ps' => $sp,
-			'id_rubrique' => $rubriques,
+			'chapo' => $variables['champs_pri']['chapo'],
+			'texte' => $variables['champs_pri']['texte'],
+			'ps' => $variables['champs_pri']['ps'],
+			'id_rubrique' => $variables['champs_pri']['id_rubrique'],
 			'statut' => $statut,
 			'extra' => $extra
 		);
@@ -363,7 +463,7 @@ if($valider) {
 				array(
 					'args' => array(
 						'table' => 'spip_articles',
-						'id_objet' => $article
+						'id_objet' => $variables['champs_pri']['id_article']
 					),
 					'data' => $champs
 				)
@@ -387,14 +487,14 @@ if($valider) {
 				"date_redac" => sql_quote($champs['date']),
 				"date_modif" => sql_quote($champs['date']),
 				"extra" => sql_quote($champs['extra'])),
-			 array("id_article=".$article)
+			 array("id_article=".$variables['champs_pri']['id_article'])
 		);
 
 		sql_insertq(
 			'spip_auteurs_articles',
 			array(
 				'id_auteur' => $config['IDAuteur'],
-				'id_article' => $article)
+				'id_article' => $variables['champs_pri']['id_article'])
 		);
 
 		// Envoyer autres aux plugins
@@ -403,7 +503,7 @@ if($valider) {
 				array(
 					'args' => array(
 						'table' => 'spip_articles',
-						'id_objet' => $article
+						'id_objet' => $variables['champs_pri']['id_article']
 					),
 					'data' => $champs
 				)
@@ -411,14 +511,14 @@ if($valider) {
 		}
 	}
 	
-	if ($flag_ok == 'ok') {
+	if (!$variables['flag_erreur']) { // si pas d'erreur : on sort :)
 		// notification des admins
 		//include_spip('inc/mail');
 		//envoyer_mail("edd@riseup.net", "test", "ceci est un test de notification", $from = "", $headers = "");
 
 
 		// construction de la page de retour
-		$url_retour = $url_site . $config['UrlValidation'];
+		$url_retour = $variables['champs_aux']['url_site'] . $config['UrlValidation'];
 		$message = '<META HTTP-EQUIV="refresh" content="'.$config['TempsAtt'].'; url='.$url_retour.'">' . $config['TextValidation'];
 		$message = $message . $retour .'<br />';
 		return $message;
@@ -430,53 +530,71 @@ if($valider) {
 
 // statut de l'article : en préparation
 $statut="prepa";
+
+// création pipeline action
+// ce pipeline permet aux plugins d'effectuer les traitements sur les variables.
+// IMPORTANT : toujours commencer par un test sur sa variable action !
+// pourra contenir manipulation de la base de donnée, etc ..
+$variables = pipeline('pub_action', array(
+			'args'=>array('pub_ouverte'=>'pub_ouverte'),
+			'data'=>$variables
+			));
+
+
+// l'auteur demande la suppression de son logo
+if (!empty($variables['actions']['sup_logo'])) {
+	$nom = 'arton' . $variables['champs_pri']['id_article'];
+	$formats_logos = Array('jpg' ,'png', 'gif', 'bmp', 'tif');
 	
+	foreach ($formats_logos as $format) {
+		if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format)))
+			@unlink($d);
+	}
+}	
 
 // si l'auteur demande la prévisualisation
-if($previsualiser) {
+if(!empty($variables['actions']['previsualiser'])) {
 
 	// vérification taille du titre : si x caractère ou moins : erreur
-	if (strlen($titre) < $config['TitreMin']) {
-		$flag_ok = 'ko';
-		$mess_error = _T('opconfig:erreur_min_len') . $config['TitreMin'] . _T('opconfig:caracteres');
+	if (strlen($variables['champs_pri']['titre']) < $config['TitreMin']) {
+		$variables['flag_erreur'] = true;
+		$variables['champs_pri']['mess_error'] = _T('opconfig:erreur_min_len') . $config['TitreMin'] . _T('opconfig:caracteres');
 	}
 
-	if(!$erreur){
-		$bouton= _T('form_prop_confirmer_envoi');
-	}
+	// remplir $date_redac
 
 	// on rempli le formulaire de prévisualisation
-
-	$formulaire_previsu = inclure_balise_dynamique(
-	array('formulaires/formulaire_article_previsu', 0,
-		array(
-			'date_redac' => $date_redac,
-			'surtitre' => interdire_scripts(typo($surtitre)),
-			'soustitre' => interdire_scripts(typo($soustitre)),
-			'chapo' => propre($chapo),
-			'descriptif' => propre($descriptif),
-			'ps' => propre($ps),
-			'titre' => interdire_scripts(typo($titre)),
-			'texte' => propre($texte),
-			'erreur' => $erreur,
-			'nom_inscription' => interdire_scripts(typo($nom_inscription)),
-			'mail_inscription' => interdire_scripts(typo($mail_inscription))
-		)
-	), false);
+	$variables['champs_pri']['formulaire_article_previsu'] = 
+		inclure_balise_dynamique(
+			array('formulaires/formulaire_article_previsu', 0,
+				array(
+					'date_redac' => $date_redac,
+					'surtitre' => interdire_scripts(typo($variables['champs_pri']['surtitre'])),
+					'soustitre' => interdire_scripts(typo($variables['champs_pri']['soustitre'])),
+					'chapo' => propre($variables['champs_pri']['chapo']),
+					'descriptif' => propre($variables['champs_pri']['descriptif']),
+					'ps' => propre($variables['champs_pri']['ps']),
+					'titre' => interdire_scripts(typo($variables['champs_pri']['titre'])),
+					'texte' => propre($variables['champs_pri']['texte']),
+					'nom_inscription' => interdire_scripts(typo($variables['champs_pri']['nom_inscription'])),
+					'mail_inscription' => interdire_scripts(typo($variables['champs_pri']['mail_inscription']))
+				)
+			), false);
 }
-	
+
 // si l'auteur demande des mots-clefs
-if($mots) {
-	if ($motschoix){
-		foreach($motschoix as $mot){
+if(!empty($variables['actions']['mots'])) {
+	if (!empty($variables['champs_aux']['motschoix'])) {
+		foreach($variables['champs_aux']['motschoix'] as $mot){
 			//protection contre mots-clefs vide
-			$q = sql_fetch(sql_select(
+			$row = sql_fetch(sql_select(
 				array('titre'),
 				array('spip_mots'),
 				array('id_mot='.$mot.' LIMIT 1'))
 				);
 
 			$titremot = $row['titre'];
+
 			if (!(strcmp($titremot,"")==0)) {
 				if ($mot) {
 					// on lie l'article aux mots clefs choisis
@@ -484,7 +602,7 @@ if($mots) {
 						'spip_mots_articles',
 						array(
 							'id_mot' => $mot,
-							'id_article' => $article)
+							'id_article' => $variables['champs_pri']['id_article'])
 					);
 				}
 			}
@@ -492,19 +610,8 @@ if($mots) {
 	}
 }
 	
-// si l'auteur demande des mots-clés avec Tag machine
-if ($tags) {
-	include_spip('inc/tag-machine');
-	ajouter_liste_mots(_request('tags'),
-		$article,
-		$groupe_defaut = 'tags',
-		'articles',
-		'id_article',
-		true);
-}
-
 // si l'auteur ajoute un documents
-if($media) {
+if(!empty($variables['actions']['media'])) {
 
 	// compatibilité php < 4.1
 	if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
@@ -519,8 +626,7 @@ if($media) {
 	// Intercepter une erreur a l'envoi
 	if (check_upload_error($error)) {
 		echo $error;
-		$mess_error = _T('opconfig:erreur_upload');
-		$erreur_document = 1;
+		$variables['champs_pri']['mess_error'] = _T('opconfig:erreur_upload');
 	}
 	else {
 		// verification si extention OK
@@ -541,9 +647,9 @@ if($media) {
 
 			if ($type_doc == 'logo') { // reprise du code iconifier ... action/iconifer.php
 				// si le logo existe déjà : refus
-				if (!@file_exists( _DIR_LOGOS . 'arton'.$article . '.' . $type_ext)) {
+				if (!@file_exists( _DIR_LOGOS . 'arton'.$variables['champs_pri']['id_article']. '.' . $type_ext)) {
 					// placer le document arton$article dans IMG
-					$f =_DIR_LOGOS . 'arton'.$article . '.tmp'; // nom temporaire
+					$f =_DIR_LOGOS . 'arton'.$variables['champs_pri']['id_article']. '.tmp'; // nom temporaire
 					$source = deplacer_fichier_upload($tmp, $f); // on deplace le fichier temp ds le rep logo
 					$size = getimagesize($f);
 					$formats_logos = Array('jpg' ,'png', 'gif', 'bmp', 'tif');
@@ -553,7 +659,7 @@ if($media) {
 						if (_LOGO_MAX_SIZE > 0
 						AND $poids > _LOGO_MAX_SIZE*1024) {
 							@unlink ($f);
-							$mess_error = _T('info_logo_max_poids',
+							$variables['champs_pri']['mess_error'] = _T('info_logo_max_poids',
 								array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
 								'actuel' => taille_en_octets($poids)));
 						}
@@ -563,7 +669,7 @@ if($media) {
 						OR $size[1] > _LOGO_MAX_HEIGHT)) {
 							@unlink ($f);
 							//ERREUR
-							$mess_error = _T('info_logo_max_taille',
+							$variables['champs_pri']['mess_error'] = _T('info_logo_max_taille',
 									array(
 									'maxi' =>
 										_T('info_largeur_vignette',
@@ -575,27 +681,26 @@ if($media) {
 											'hauteur_vignette' => $size[1]))
 								));
 						}
-						@rename ($f, _DIR_LOGOS . 'arton'.$article . '.' . $type_ext);
+						@rename ($f, _DIR_LOGOS . 'arton'.$variables['champs_pri']['id_article']. '.' . $type_ext);
 					}
 					else {
 						@unlink ($f);
 	
 						// ERREUR
-						$mess_error = _T('info_logo_format_interdit',
+						$variables['champs_pri']['mess_error'] = _T('info_logo_format_interdit',
 									array('formats' => join(', ', $formats_logos)));
 					}
 				}
 				else  {
-					$mess_error = _T('opconfig:logo_existe_deja');
+					$variables['champs_pri']['mess_error'] = _T('opconfig:logo_existe_deja');
 				}
 			}
 			else {
-				inc_ajouter_documents_dist ($tmp, $fichier, "article", $article, $type_doc, $id_document, $documents_actifs);
+				inc_ajouter_documents_dist ($tmp, $fichier, "article", $variables['champs_pri']['id_article'], $type_doc, $id_document, $documents_actifs);
 			}
 		}
 		else { // sinon, erreur
-			$mess_error = _T('opconfig:erreur_extension');
-			$erreur_document = 1;
+			$variables['champs_pri']['mess_error'] = _T('opconfig:erreur_extension');
 		}
 	}
 }
@@ -603,91 +708,51 @@ if($media) {
 // cas d'un nouvel article ou re-affichage du formulaire
 if ($config['Agenda'] == 'yes') {
 	// Gestion de l'agenda
-	$formulaire_agenda = inclure_balise_dynamique(
-	array('formulaires/formulaire_agenda',	0,
-		array(
-			'annee' => $annee,
-			'mois' => $mois,
-			'jour' => $jour,
-			'heure' => $heure,
-			'choix_agenda' => $choix_agenda
-		)
-	), false);
+	$variables['champs_pri']['formulaire_agenda'] = 
+		inclure_balise_dynamique(
+			array('formulaires/formulaire_agenda',	0,
+				array(
+					'annee' => $variables['champs_aux']['annee'],
+					'mois' => $variables['champs_aux']['mois'],
+					'jour' => $variables['champs_aux']['jour'],
+					'heure' => $variables['champs_aux']['heure'],
+					'choix_agenda' => $variables['champs_aux']['choix_agenda']
+				)
+			), false);
 }
 
 // Gestion des documents
 if ($config['DocInc'] == 'yes') {
 
-	$bouton= 'Ajouter l\'image ou le document';
-
-	$formulaire_documents = inclure_balise_dynamique(
-	array('formulaires/formulaire_documents',	0,
-		array(
-			'id_article' => $article,
-			'bouton' => $bouton,
-		)
-	), false);
+	$variables['champs_pri']['bouton'] = 'Ajouter l\'image ou le document';
+	$variables['champs_pri']['formulaire_documents'] =
+		inclure_balise_dynamique(
+			array('formulaires/formulaire_documents', 0,
+				array(
+					'bouton' => $variables['champs_pri']['bouton']
+				)
+			), false);
 }
-
-// Gestion des mot-clefs avec tag machine
-if ($config['TagMachine'] == 'yes') {
-
-	$formulaire_tagopen = inclure_balise_dynamique(
-	array('formulaires/formulaire_tagopen',	0,
-		array(
-			'id_article' => $article,
-		)
-	), false);
-}
-
 
 // Gestion des mot-clefs
 if ($config['MotCle'] == 'yes') {
 
-	$bouton= "Ajouter les nouveaux mot-clefs";
-	$formulaire_motclefs = inclure_balise_dynamique(
-	array('formulaires/formulaire_motclefs', 0,
-		array(
-			'id_article' => $article,
-			'bouton' => $bouton,
-		)
-	), false);
+	$variables['champs_pri']['bouton'] = "Ajouter les nouveaux mot-clefs";
+	$variables['champs_pri']['formulaire_motclefs'] =
+		inclure_balise_dynamique(
+			array('formulaires/formulaire_motclefs', 0,
+				array(
+					'id_article' => $variables['champs_pri']['id_article'] ,
+					'bouton' => $variables['champs_pri']['bouton'] ,
+				)
+			), false);
 }
 
 // le bouton valider
-$bouton= _T('form_prop_confirmer_envoi');
+$variables['champs_pri']['bouton'] = _T('form_prop_confirmer_envoi');
 
-// et on remplit le formulaire avec tout ça
-return array('formulaires/formulaire_article', 0,
-	array(
-		'formulaire_documents' => $formulaire_documents,
-		'formulaire_previsu' => $formulaire_previsu,
-		'formulaire_agenda' => $formulaire_agenda,
-		'formulaire_tagopen' => $formulaire_tagopen,
-		'formulaire_motclefs' => $formulaire_motclefs,
-		'bouton' => $bouton,
-		'surtitre' => interdire_scripts(typo($surtitre)),
-		'descriptif' => $descriptif,
-		'chapo' => $chapo,
-		'article' => $article,
-		'soustitre' => interdire_scripts(typo($soustitre)),
-		'ps' => $ps,
-		'rubrique' => $rubrique,
-		'mess_error' => $mess_error,
-		'annee' => $annee,
-		'mois' => $mois,
-		'jour' => $jour,
-		'heure' => $heure,
-		'url' =>  $url,
-		'titre' => interdire_scripts(typo($titre)),
-		'texte' => $texte,
-		'nom_inscription' => $nom_inscription,
-		'mail_inscription' => $mail_inscription,
-		'group_name' => $group_name,
-		'phone' => $phone
-	));
+return array('formulaires/formulaire_article', 0, $variables['champs_pri']);
+
 }
-
-
 
 ?>

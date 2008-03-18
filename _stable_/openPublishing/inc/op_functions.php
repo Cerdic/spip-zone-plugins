@@ -3,6 +3,50 @@
 /* Ce fichier contient toutes les fonctions utilisé par la balise #FORMULAIRE_ARTICLE
  */
 
+// fonction recherchant des formulaires Publication ouverte appartenant à d'autres plugin
+function recherche_formulaire($env) {
+	$env = @unserialize($env);
+		
+	// pour chaque plugin, vérifier si il existe un fichier
+	// formulaire_nom_du_plugin.html dans le répertoire pub_ouverte/
+	$tab_balise = array();
+	foreach ($GLOBALS['plugins'] as $plugin) {
+		if (file_exists(_DIR_PLUGINS.$plugin.'/pub_ouverte/formulaire_'.$plugin.'.html')) {
+
+ 			// contenu du formulaire
+			$env['formulaire_'.$plugin] = inclure_balise_dynamique(
+				'pub_ouverte/formulaire_'.$plugin, // fond
+				0, // delai
+				array ( // environnement
+				 'test' => 'ceci est un test'
+				)
+			);
+			
+			return $env['formulaire_'.$plugin];
+			//array(
+			//	'formulaire_'.$plugin,
+				
+			// ajouter dans env le formulaire
+			$tab_env[] = inclure_balise_dynamique(
+			array('pub_ouverte/formulaire_'.$plugin,
+				0,
+				array( // le contexte du formulaire
+					'id_article' => $article,
+					'bouton' => $bouton,
+				)
+			), false);
+
+			//$bouton= 'Ajouter l\'image ou le document';
+			//$tab_balise[] = 
+			
+		}
+	}
+	
+
+	$env = @serialize($env);
+	return $env;
+}
+
 // fonction recherchant un éventuel logo pour affichage
 function logo_article($id_article) {
 	$nom = 'arton' . intval($id_article);
