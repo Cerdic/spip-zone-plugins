@@ -21,37 +21,12 @@ include_spip('inc/presentation');
 include_spip('inc/config');
 include_spip('inc/charsets');
 
+include('inc-traitements.php');
 setlocale(LC_TIME, "fr_FR");
 define(OK,"<SPAN style='color:#3C3;font-weight:bold;'>[OK]</SPAN>");
 define(KO,"<SPAN style='color:#C33;font-weight:bold;'>[KO]</SPAN>");
 
-/** Execute une requete sql (copier coller de odb_query dans inc-odb.php du projet siou)
- *
- * @param string $sql : code SQL a executer
- * @param string $fichier : nom du fichier (par exemple, passer __FILE__)
- * @param int $ligne : ligne (passer __LINE__)
- * @param string $obsc : texte a dissimuler (mot de passe, par exemple)
- * @return resource : resultset correspondant
- */
-function ez_query($sql,$fichier,$ligne,$obsc='****') {
-	$cherche='/plugins/';
-	if(substr_count($sql,'DECODE(')>0 && $obsc=='****') {
-		$tmp=stristr($sql,'decode(');
-		$tmp=substr($tmp,0,strpos($tmp,')'));
-		list($rien,$obsc)=explode(',',$tmp);
-		$obsc=trim(str_replace(array('\'','"'),'',$obsc));
-	}
-	$fichier=substr($fichier,strpos($fichier,$cherche));
-	$result = mysql_query($sql) or die("<div style='margin:5px;border:1px outset red;background-color:#ddf;'>"
-		."<div style='border:1px none red;background-color:#bbf;'>".KO." - Erreur dans la requete</div><pre>"
-		.wordwrap(str_replace($obsc,'****',$sql),65)
-		."</pre><small>$fichier<b>[$ligne]</b></small><br/><div style='border:1px none red;background-color:#bbf;'>"
-		.htmlentities(str_replace($obsc,'****',mysql_error()))."</div></div>");
-	//echo "<br/>$sql (<b>$fichier</b>:$ligne)";
-	return $result;
-}
-
-// exécuté automatiquement par le plugin au chargement de la page ?exec=odb_requete
+// exécuté automatiquement par le plugin au chargement de la page ?exec=ezsql
 function exec_ezsql() {
 	global $connect_statut, $connect_toutes_rubriques, $debug, $txt_gauche, $txt_droite, $txt_debug, $tab_referentiel, $odb_referentiel,$odb_mapping;
 
@@ -76,7 +51,7 @@ function exec_ezsql() {
 	$nomTable='resultat';
 	
 	if($isExecute) {
-		$sqlNormale=odb_propre($sqlNormale);
+		$sqlNormale=ez_propre($sqlNormale);
 		$sqlAff=str_replace('=',"<b style='color:#e70;'>=</b>",$sqlNormale);
 		foreach(array(')','distinct(','uncompress(','compress(','encode(','decode(') as $mot) {
 			// mots sans espace avant/apres => ne pas mettre n'importe quoi !
@@ -124,7 +99,7 @@ function exec_ezsql() {
 			if(substr_count($prefixe,'spip')>0) $prefixe='spip';
 			if((trim(strtolower($table)))==trim(strtolower($nomTable))) {
 				$sTableEnCours=$table;
-				$table="<A class='table' HREF='".generer_url_ecrire('odb_requete')."&table=$table' style='color:#000;'><b>$table</b></a>";
+				$table="<A class='table' HREF='".generer_url_ecrire('ezsql')."&table=$table' style='color:#000;'><b>$table</b></a>";
 				$sql="SHOW columns from $nomTable";
 				$result2=ez_query($sql,__FILE__,__LINE__);
 				$cpt=0;
@@ -144,7 +119,7 @@ function exec_ezsql() {
 					$cpt++;
 				}
 			} else
-				$table="<A class='table' HREF='".generer_url_ecrire('odb_requete')."&table=$table' style='color:#999;'>$table</A>";
+				$table="<A class='table' HREF='".generer_url_ecrire('ezsql')."&table=$table' style='color:#999;'>$table</A>";
 			$tTable[$prefixe][]=$table;
 		}
 		echo "<dl id='groupes'>\n";
@@ -157,7 +132,7 @@ function exec_ezsql() {
 	creer_colonne_droite();
 	if($isSelect) {
 		debut_boite_info();
-			echo odb_html_table("<A href='javascript:;' title='Ajouter la table $sTableEnCours' onclick=\"champ=document.forms['form_requete'].requete;champ.value+='$sTableEnCours';champ.focus();\">$sTableEnCours</A>",$tBody,"<th>Colonne</th><th>Type</th>");
+			echo ez_html_table("<A href='javascript:;' title='Ajouter la table $sTableEnCours' onclick=\"champ=document.forms['form_requete'].requete;champ.value+='$sTableEnCours';champ.focus();\">$sTableEnCours</A>",$tBody,"<th>Colonne</th><th>Type</th>");
 			$sql="SELECT count(*) from $sTableEnCours";
 			$result=ez_query($sql,__FILE__,__LINE__);
 			$nbRows=mysql_result($result,0,0);
@@ -170,13 +145,13 @@ function exec_ezsql() {
 
 	//echo "<IMG SRC='"._DIR_PLUGIN_EZSQL."/img_pack/logo_odb.png' alt='Office du bac' ALIGN='absmiddle'><br><br>\n";
 
-	echo "<form name='form_requete' method='POST' action='".generer_url_ecrire('odb_requete')."'>\n";
+	echo "<form name='form_requete' method='POST' action='".generer_url_ecrire('ezsql')."'>\n";
 	if($isExecute) echo "<small style='font-family:monospace;'>$sqlAff</small>\n";
 	echo "<textarea name='requete' cols=100 rows=5 class='forml' style='color:#555;'>\n"
 		.($sqlNormale)."</textarea>"
 		;
 	echo "<input name='submit' type='submit' value='Ex&eacute;cuter' class='fondo'>";
-	if($isExecute) echo "<input name='nom_requete' value='$nomFichier' style='border:1px dotted black;margin:1px;'/><input type='submit' name='enregistrer' value='Enregistrer cette requ&ecirc;te' class='fondo'/>\n";
+	//if($isExecute) echo "<input name='nom_requete' value='$nomFichier' style='border:1px dotted black;margin:1px;'/><input type='submit' name='enregistrer' value='Enregistrer cette requ&ecirc;te' class='fondo'/>\n";
 	echo "</form>\n";
 
 	if ($isExecute){
@@ -232,7 +207,7 @@ function exec_ezsql() {
 	}
 	fin_cadre_relief();
 	if($isExecute && $isSelect) 
-		echo '<br/>'.odb_html_table("Aper&ccedil;u de la requ&ecirc;te",$tbody,"<th><small>".join('</small></th><th><small>',array_slice($tCol,0,5))."</small></th>",'statistiques-24.gif');
+		echo '<br/>'.ez_html_table("Aper&ccedil;u de la requ&ecirc;te",$tbody,"<th><small>".join('</small></th><th><small>',array_slice($tCol,0,5))."</small></th>",'statistiques-24.gif');
 	
 	$aide=html_entity_decode($aide,ENT_COMPAT,'UTF-8');
 	$jquery= <<<FINSCRIPT
