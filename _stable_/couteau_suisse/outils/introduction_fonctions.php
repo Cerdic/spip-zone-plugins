@@ -34,7 +34,7 @@ if (defined('_SPIP19300')) {
 	}
 }
 
-function cs_introduction($type, $texte, $chapo, $descriptif, $id, $lgr=false) {
+function cs_introduction($type, $texte, $chapo, $descriptif, $id, $lgr=0) {
 	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 	@define('_INTRODUCTION_LGR', 100);
 	$couper = $GLOBALS['cs_couper_intro'];
@@ -43,8 +43,8 @@ function cs_introduction($type, $texte, $chapo, $descriptif, $id, $lgr=false) {
 			# si descriptif contient juste des espaces ca produit une intro vide, 
 			# c'est une fonctionnalite, pas un bug
 			if (strlen($descriptif))
-				return propre($descriptif);
-			else if (substr($chapo, 0, 1) == '=')	// article virtuel
+				return $lgr?propre($couper($descriptif, $lgr, _INTRODUCTION_CODE)):propre($descriptif);
+			elseif (substr($chapo, 0, 1) == '=')	// article virtuel
 				return '';
 			else {
 				// pas de maths dans l'intro...
