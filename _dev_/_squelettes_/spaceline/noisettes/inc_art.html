@@ -1,0 +1,14 @@
+<div id="left"><BOUCLE_cfg_art(ARTICLES){par date}{inverse}{0,#CONFIG{site_spaceline/art_combien}}>
+			<h1 style=" font-size: [(#CONFIG{police_spaceline/tailletitre})]px"><a href ="#URL_ARTICLE" style="color:[(#CONFIG{Squelettes Spaceline/hexvalpol})];">#TITRE</a> </h1>
+			<div>
+				<p style="color:[(#CONFIG{Squelettes Spaceline/hexvalpol})]; font-size: [(#CONFIG{police_spaceline/taillepol})]px; font-weight:[(#CONFIG{police_spaceline/bold})] "><br /> <br />
+#INTRODUCTION</p> <br />
+	</div>		
+
+				
+     [(#CONFIG{site_spaceline/bcl_com}|=={O}|?{'',' '})<INCLURE{fond=noisettes/inc_mini_cadrecom}{id_article}{id_rubrique}>]</BOUCLE_cfg_art>
+
+				
+       
+       
+			
