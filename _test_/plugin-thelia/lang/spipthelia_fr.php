@@ -63,9 +63,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'statut' => 'Statut',
 'modifier_informations' => 'modifier mes informations',
 'modifier_mdp' => 'Modifier mon mot de passe',
+'mdp' => 'Mot de passe',
 'mon_mdp' => 'Mon mot de passe',
 'nouveau_mdp' => 'Nouveau mot de passe',
 'confirmation_mdp' => 'Confirmation du mot de passe',
+'verifiez_mdp' => 'V&eacute;rifiez votre mot de passe. 6 caract&egrave;res  minimum',
 'modifier_coordonnees' => 'Modifier mes coordonn&eacute;es',
 'civilite' => 'Civilit&eacute;',
 'madame' => 'Madame',
@@ -85,7 +87,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'email' => 'E-mail',
 'confirmation_email' => 'Confirmation de votre e-mail',
 'valider' => 'Valider',
-'nouveau_client' => 'Je suis un nouveau client'
+'nouveau_client' => 'Je suis un nouveau client',
+'identifiez_vous' => 'Identifiez-vous',
+'deja_compte' => 'J\'ai d&eacute;j&agrave; un compte',
+'mon_email' => 'Mon e-mail',
+'err_emailmdp' => 'e-mail ou mot de passe incorrects',
+'champs_obligatoires' => 'Champs obligatoires',
+'erreurs_saisie' => 'Identifiez-vous : des erreurs dans votre saisie !',
+'message_erreur_saisie' => 'Relisez les informations que vous souhaitez  nous transmettre. Vous avez sans doute fait une erreur.',
+'obligatoire' => 'obligatoire',
+'compte_existe_deja' => 'Ce compte existe d&eacute;j&agrave;'
 
 
 

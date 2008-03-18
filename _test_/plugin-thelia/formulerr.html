@@ -2,8 +2,8 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>Identifiez-vous : des erreurs dans votre saisie ! - [(#NOM_SITE_SPIP|textebrut)]</title>
-<meta name="description" content="Identifiez-vous : des erreurs dans votre saisie !" />
+<title><:spipthelia:erreurs_saisie:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="<:spipthelia:erreurs_saisie:>" />
 <INCLURE{fond=inc-head}>
 </head>
 
@@ -14,7 +14,7 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Identifiez-vous : des erreurs dans votre saisie !</div>
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:erreurs_saisie:></div>
 	
 	<div id="conteneur">
 
@@ -27,13 +27,13 @@
 				[(#REM) Titre de la page ]
 
 				<div class="titrePage">
-				<h1>Identifiez-vous : des erreurs dans votre saisie !</h1>
+				<h1><:spipthelia:erreurs_saisie:></h1>
 				</div>
 				
 				[(#REM) Sous-titre de la page ]
 
 				<div class="sousTitrePage">
-					<h3>Relisez les informations que vous souhaitez  nous transmettre. Vous avez sans doute fait une erreur.  </h3>
+					<h3><:spipthelia:message_erreur_saisie:></h3>
 				</div>
 				
 				[(#REM) Contenu de la page ]
@@ -43,49 +43,49 @@
 				<table>
   				<tbody>
 					<tr>
-    					<td width="190" class="ligneTableau">Civilit&eacute; THELIA-RAISON[<span class="obligatoire">(obligatoire)</span>]</td>
-    					<td width="565" class="ligneTableau">
+    					<td class="ligneTableau"><:spipthelia:civilite:> THELIA-RAISON[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</td>
+    					<td class="ligneTableau">
 						<select name="raison" size="1"  class="zoneDeSaisie">
-						<option value="" selected="selected">Choisissez ...</option>
-						<option value="1" THELIA-RAISON1>Madame</option>
-						<option value="2" THELIA-RAISON2>Mademoiselle</option>
-						<option value="3" THELIA-RAISON3>Monsieur</option>
+						<option value="" selected="selected"><:spipthelia:choisissez:></option>
+						<option value="1" THELIA-RAISON1><:spipthelia:madame:></option>
+						<option value="2" THELIA-RAISON2><:spipthelia:mademoiselle:></option>
+						<option value="3" THELIA-RAISON3><:spipthelia:monsieur:></option>
 						</select>
 						</td>
 					</tr>
 					<tr>
-    					<td class="ligneTableau">Nom THELIA-NOM[<span class="obligatoire">(obligatoire)</span>]</td>
+    					<td class="ligneTableau"><:spipthelia:nom:> THELIA-NOM[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</td>
     					<td class="ligneTableau"><input type="text" name="nom" value="THELIA-NOM" class="zoneDeSaisie"/></td>
   					</tr>
   					<tr>
-    					<td class="ligneTableau">Pr&eacute;nom THELIA-PRENOM[<span class="obligatoire">(obligatoire)</span>]</td>
+    					<td class="ligneTableau"><:spipthelia:prenom:> THELIA-PRENOM[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</td>
     					<td class="ligneTableau"><input type="text" name="prenom" value="THELIA-PRENOM" class="zoneDeSaisie"/></td>
   					</tr>
   					<tr>
-    					<td class="ligneTableau">Adresse THELIA-ADRESSE1[<span class="obligatoire">(obligatoire)</span>]</td>
+    					<td class="ligneTableau"><:spipthelia:adresse:> THELIA-ADRESSE1[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</td>
     					<td class="ligneTableau"><input type="text" name="adresse1" value="THELIA-ADRESSE1"  class="zoneDeSaisie"/></td>
   					</tr>
   					<tr>
-    					<td class="ligneTableau">Adresse (suite) </td>
+    					<td class="ligneTableau"><:spipthelia:adresse_suite:></td>
     					<td class="ligneTableau"><input type="text" name="adresse2" value="THELIA-ADRESSE2"  class="zoneDeSaisie"/></td>
   					</tr>
   					<tr>
-    					<td class="ligneTableau">Compl&eacute;ment d'adresse</td>
+    					<td class="ligneTableau"><:spipthelia:complement_adresse:></td>
     					<td class="ligneTableau"><input type="text" name="adresse3" value="THELIA-ADRESSE3"  class="zoneDeSaisie"/></td>
   					</tr>
   					<tr>
-    					<td class="ligneTableau">Code postal THELIA-CPOSTAL[<span class="obligatoire">(obligatoire)</span>]</td>
+    					<td class="ligneTableau"><:spipthelia:code_postal:> THELIA-CPOSTAL[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</td>
     					<td class="ligneTableau"><input type="text" name="cpostal" value="THELIA-CPOSTAL"  class="zoneDeSaisie"/></td>
   					</tr>
   					<tr>
-    					<td class="ligneTableau">Ville THELIA-VILLE[<span class="obligatoire">(obligatoire)</span>] </td>
+    					<td class="ligneTableau"><:spipthelia:ville:> THELIA-VILLE[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>] </td>
     					<td class="ligneTableau"><input type="text" name="ville" value="THELIA-VILLE"  class="zoneDeSaisie"/></td>
   					</tr>
   					<tr>
-    					<td class="ligneTableau">Pays THELIA-PAYS[<span class="obligatoire">(obligatoire)</span>]</td>
+    					<td class="ligneTableau"><:spipthelia:pays:> THELIA-PAYS[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</td>
     					<td class="ligneTableau">
 						<select name="pays" size="1"  class="zoneDeSaisie">
-						<option value="" selected="selected">Choisissez ...</option>
+						<option value="" selected="selected"><:spipthelia:choisissez:></option>
 						<THELIA_pays type="PAYS" zdefinie="1">             
 						<option value="THELIA-ID"  THELIA-SELECTED>THELIA-TITRE</option>
     					</THELIA_pays>
@@ -93,33 +93,33 @@
 						</td>
  					</tr>
   					<tr>
-    					<td class="ligneTableau">Téléphone fixe THELIA-TELFIXE[<span class="obligatoire">(obligatoire)</span>]</td>
+    					<td class="ligneTableau"><:spipthelia:telephone_fixe:> THELIA-TELFIXE[<span class="obligatoire">(obligatoire)</span>]</td>
     					<td class="ligneTableau"><input type="text" name="telfixe" value="THELIA-TELFIXE"  class="zoneDeSaisie"/></td>
   					</tr>
   					<tr>
-    					<td class="ligneTableau">Téléphone portable</td>
+    					<td class="ligneTableau"><:spipthelia:telephone_portable:></td>
     					<td class="ligneTableau"><input type="text" name="telport" value="THELIA-TELPORT"  class="zoneDeSaisie"/></td>
   					</tr>
   					<tr>
-    					<td class="ligneTableau">E-mailTHELIA-EMAIL[<span class="obligatoire">(V&eacute;rifiez votre E-Mail)</span>]THELIA-EXISTE[<span class="obligatoire">(Ce compte existe déjà)</span>]</td>
+    					<td class="ligneTableau"><:spipthelia:email:> THELIA-EMAIL[<span class="obligatoire">(V&eacute;rifiez votre E-Mail)</span>]THELIA-EXISTE[<span class="obligatoire">(<:spipthelia:compte_existe_deja:>)</span>]</td>
     					<td class="ligneTableau"><input type="text" value="THELIA-EMAIL" name="email1"  class="zoneDeSaisie"/></td>
   					</tr>
   					<tr>
-						<td class="ligneTableau">Confirmation de votre email</td>
+						<td class="ligneTableau"><:spipthelia:confirmation_email:></td>
     					<td class="ligneTableau"><input type="text"  value="THELIA-EMAIL" name="email2"  class="zoneDeSaisie"/></td>
   					</tr>
   					<tr>
-   						 <td class="ligneTableau">Mot de passe THELIA-MOTDEPASSE[<span class="obligatoire">(V&eacute;rifiez votre mot de passe. 6 caract&egrave;res  minimum)</span>] </td>
+   						 <td class="ligneTableau"><:spipthelia:mdp:> THELIA-MOTDEPASSE[<span class="obligatoire">(<:spipthelia:verifiez_mdp:>)</span>] </td>
     					<td class="ligneTableau"><input  name="motdepasse1" type="password"  class="zoneDeSaisie"/></td>
   					</tr>
 					<tr>
-    					<td class="ligneTableau">Confirmation de votre mot de passe</td>
+    					<td class="ligneTableau"><:spipthelia:confirmation_mdp:></td>
     					<td class="ligneTableau"><input name="motdepasse2" type="password"  class="zoneDeSaisie"/></td>
   					</tr>
 				</tbody>
 				</table>
 					<div class="boutonMonCompteContenu">
-					<input type="submit" value="Valider" />
+					<input type="submit" value="<:spipthelia:valider:>" />
 					</div>
 			</form>
 			</div>
