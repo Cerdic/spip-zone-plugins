@@ -142,7 +142,9 @@ function exec_odb_requete() {
 	echo "<textarea name='requete' cols=100 rows=5 class='forml' style='color:#555;'>\n"
 		.($sqlNormale)."</textarea>"
 		;
-	echo "<input name='submit' type='submit' value='Ex&eacute;cuter' class='fondo'></form>\n";
+	echo "<input name='submit' type='submit' value='Ex&eacute;cuter' class='fondo'>";
+	if($isExecute) echo "<input name='nom_requete' value='$nomFichier' style='border:1px dotted black;margin:1px;'/><input type='submit' name='enregistrer' value='Enregistrer cette requ&ecirc;te' class='fondo'/>\n";
+	echo "</form>\n";
 
 	if ($isExecute){
 		$result = odb_query($sqlNormale,__FILE__,__LINE__);
