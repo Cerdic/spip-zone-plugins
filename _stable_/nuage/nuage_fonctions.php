@@ -83,4 +83,8 @@ function nuage_tri($nuage,$tri = 'poids'){
 		uasort($nuage,$f);
 	return $nuage;
 }
+function nuage_extrait($nuage,$nombre){
+	if (!is_array($nuage)) $nuage = unserialize($nuage);
+	return array_splice($nuage,$nombre);	
+}
 ?>
