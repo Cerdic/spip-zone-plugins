@@ -17,4 +17,10 @@ $GLOBALS['champs_extra']['articles']['OP_mail'] = "ligne|propre|mail du r&eacute
 $GLOBALS['champs_extra']['breves']['OP_pseudo'] = "ligne|propre|pseudonyme du r&eacute;dacteur";
 $GLOBALS['champs_extra']['breves']['OP_mail'] = "ligne|propre|mail du r&eacute;dacteur";
 
+// Declaration des pipelines
+$GLOBALS['spip_pipeline']['pub_squelette']='';
+$GLOBALS['spip_pipeline']['pub_environnement']='';
+$GLOBALS['spip_pipeline']['pub_action']='';
+$GLOBALS['spip_pipeline']['pub_pre_validation']='';
+$GLOBALS['spip_pipeline']['pub_validation']='';
 ?>
