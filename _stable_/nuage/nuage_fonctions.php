@@ -53,4 +53,34 @@ function filtre_nuage_dist($id_mot, $titre = '', $url = '', $poids = -1, $expose
 	return !empty($retour) ? $retour : '';
 }
 
+
+function nuage_tri_poids($a,$b){
+	return ($a['poids']==$b['poids'])?0:$a['poids']<$b['poids'];
+}
+function nuage_tri_hasard($a,$b){
+	return ($a['hasard']==$b['hasard'])?0:$a['hasard']<$b['hasard'];
+}
+
+function nuage_affiche($nuage){
+	if (!is_array($nuage)) $nuage = unserialize($nuage);
+	$out .= "";
+	foreach($nuage as $cle=>$vals){
+		$a = "<a rel='tag' href='".$vals['url']."' class='nuage".$vals['class'].($vals['expose']?' on':'')."'>";
+		$a = $a . $cle . "</a>";
+		$out .= "<dt>$a</dt> ";
+		$out .= "<dd class='frequence'>".$vals['poids']."</dd>";
+	}
+	return "<dl class='nuage'>$out</dl>";	
+}
+function nuage_tri($nuage,$tri = 'poids'){
+	if (!is_array($nuage)) $nuage = unserialize($nuage);
+	if ($tri == 'hasard') {
+		foreach($nuage as $cle=>$vals){
+			$nuage[$cle]['hasard'] = rand();
+		}
+	}
+	if (function_exists($f= "nuage_tri_$tri"))
+		uasort($nuage,$f);
+	return $nuage;
+}
 ?>
