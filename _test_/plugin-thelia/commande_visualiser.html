@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>Visualiser mes commandes - [(#NOM_SITE_SPIP|textebrut)]</title>
+<title><:spipthelia:visualiser_commandes:> - [(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
 <INCLURE{fond=inc-head}>
 </head>
@@ -14,7 +14,7 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Visualiser mes commandes</div>
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{moncompte}"><:spipthelia:mon_compte:></a> &gt; <:spipthelia:visualiser_commandes:></div>
 	
 	<div id="conteneur">
 
@@ -34,11 +34,11 @@
 			<table>
 			<thead>
 				<tr>
-					<th class="enteteTableau">N&deg; de la commande </td>
-    					<th class="enteteTableau">Date</td>
-    					<th class="enteteTableau">Montant</td>
-   					<th class="enteteTableau">Statut</td>
-   					<th class="enteteTableau">Voir la commande</td>
+					<th class="enteteTableau"><:spipthelia:numero_commande:></td>
+    					<th class="enteteTableau"><:spipthelia:date_commande:></td>
+    					<th class="enteteTableau"><:spipthelia:montant:></td>
+   					<th class="enteteTableau"><:spipthelia:statut:></td>
+   					<th class="enteteTableau"><:spipthelia:voir_commande:></td>
   				</tr>
 			</thead>
 			<tbody>
@@ -48,7 +48,7 @@
     					<td class="ligneTableau">THELIA-DATE</td>
     					<td class="ligneTableau"><span class="TexteColonne100">THELIA-TOTCMDPORT</span></td>
    					<td class="ligneTableau"><span class="TexteColonne100">THELIA-STATUT</span></td>
-   					<td class="ligneTableau"><a href="#URL_PAGE{commande_detail,commande=THELIA-REF}">Voir la commande</a></td>
+   					<td class="ligneTableau"><a href="#URL_PAGE{commande_detail,commande=THELIA-REF}"><:spipthelia:voir_commande:></a></td>
   				</tr>
 			</THELIA_cmd>
 			</tbody>

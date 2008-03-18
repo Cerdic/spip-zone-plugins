@@ -49,5 +49,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choix_paiement' => 'Je choisis un mode de paiement',
 'code_reduction' => 'Saisir votre code de réduction',
 'au_lieu_de' => 'au lieu de',
-'en_cours_de_reapprovisionnement' => 'en cours de r&eacute;approvisionnement');
+'en_cours_de_reapprovisionnement' => 'en cours de r&eacute;approvisionnement',
+'detail_commande' => 'D&eacute;tail de la commande',
+'numero_facture' => 'N&deg; de facture',
+'date_facture' => 'date',
+'produit_et_reference' => 'Produit et r&eacute;f&eacute;rence',
+'visualiser_pdf' => 'Visualiser la facture au format PDF',
+'retour' => 'Retour');
 ?>
