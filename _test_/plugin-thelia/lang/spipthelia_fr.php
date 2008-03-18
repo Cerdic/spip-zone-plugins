@@ -55,5 +55,37 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_facture' => 'date',
 'produit_et_reference' => 'Produit et r&eacute;f&eacute;rence',
 'visualiser_pdf' => 'Visualiser la facture au format PDF',
-'retour' => 'Retour');
+'retour' => 'Retour',
+'numero_commande' => 'N&deg; de la commande',
+'date_commande' => 'Date',
+'montant' => 'Montant',
+'voir_commande' => 'Voir la commande',
+'statut' => 'Statut',
+'modifier_informations' => 'modifier mes informations',
+'modifier_mdp' => 'Modifier mon mot de passe',
+'nouveau_mdp' => 'Nouveau mot de passe',
+'confirmation_mdp' => 'Confirmation du mot de passe',
+'modifier_coordonnees' => 'Modifier mes coordonn&eacute;es',
+'civilite' => 'Civilit&eacute;',
+'madame' => 'Madame',
+'mademoiselle' => 'Mademoiselle',
+'monsieur' => 'Monsieur',
+'nom' => 'Nom',
+'prenom' => 'Pr&eacute;nom',
+'adresse' => 'Adresse',
+'adresse_suite' => 'Adresse (suite)',
+'complement_adresse' => 'Compl&eacute;ment d\'adresse',
+'code_postal' => 'Code postal',
+'ville' => 'Ville',
+'pays' => 'Pays',
+'choisissez' => 'Choisissez ...',
+'telephone_fixe' => 'T&eacute;l&eacute;phone fixe',
+'telephone_portable' => 'T&eacute;l&eacute;phone portable',
+'email' => 'E-mail',
+'confirmation_email' => 'Confirmation de votre e-mail',
+'valider' => 'Valider'
+
+
+
+);
 ?>
