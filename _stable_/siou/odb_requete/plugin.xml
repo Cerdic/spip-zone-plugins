@@ -1,15 +1,15 @@
 <plugin>
-   <nom>ODB : Export CSV de requete SQL</nom>
+   <nom>ezSQL : requetes SQL et export CSV</nom>
    <auteur><ul><li>G. VLAVONOU</li><li>Y. EDAHE</li><li>C. PROTIERE</li></ul>ODB - Janvier 2008</auteur>
    <version>0.2</version>
    <etat>test</etat>
-   <description>Permet l'export CSV d'une requete SQL</description>
+   <description>Permet d'executer des requetes SQL, d'afficher la structure de la base et d'exporter le resultat d'un SELECT sous forme de fichier CSV</description>
    <lien>http://www.officedubacbenin.bj</lien> <!-- URI de documentation -->
    <icon>img_pack/logo_odb_150.png</icon>
-   <prefix>odb_requete</prefix>
+   <prefix>ezSQL</prefix>
    <pipeline>
       <nom>ajouter_boutons</nom>
       <action>ajouterBoutons</action>
-      <inclure>inc-odb_requete.php</inclure>
+      <inclure>inc-ezSQL.php</inclure>
    </pipeline>
 </plugin>

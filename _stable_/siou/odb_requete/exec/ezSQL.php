@@ -19,7 +19,7 @@ define(OK,"<SPAN style='color:#3C3;font-weight:bold;'>[OK]</SPAN>");
 define(KO,"<SPAN style='color:#C33;font-weight:bold;'>[KO]</SPAN>");
 
 // exécuté automatiquement par le plugin au chargement de la page ?exec=odb_requete
-function exec_odb_requete() {
+function exec_ezSQL() {
 	global $connect_statut, $connect_toutes_rubriques, $debug, $txt_gauche, $txt_droite, $txt_debug, $tab_referentiel, $odb_referentiel,$odb_mapping;
 
 	$annee=date("Y");
@@ -135,7 +135,7 @@ function exec_odb_requete() {
 	debut_droite();
 	debut_cadre_relief( "", false, "", $titre = _T('Requ&ecirc;te SQL'));
 
-	//echo "<IMG SRC='"._DIR_PLUGIN_ODB_REQUETE."/img_pack/logo_odb.png' alt='Office du bac' ALIGN='absmiddle'><br><br>\n";
+	//echo "<IMG SRC='"._DIR_PLUGIN_EZSQL."/img_pack/logo_odb.png' alt='Office du bac' ALIGN='absmiddle'><br><br>\n";
 
 	echo "<form name='form_requete' method='POST' action='".generer_url_ecrire('odb_requete')."'>\n";
 	if($isExecute) echo "<small style='font-family:monospace;'>$sqlAff</small>\n";
@@ -187,7 +187,7 @@ function exec_odb_requete() {
 		echo "<small>".htmlentities(mysql_info())."</small><br/>";
 		if($isSelect) {
 			echo "<A HREF='$destination$nomFichier'>"
-				."<IMG SRC='"._DIR_PLUGIN_ODB_REQUETE."/img_pack/csvimport-24.png' ALIGN='absmiddle'/>"
+				."<IMG SRC='"._DIR_PLUGIN_EZSQL."/img_pack/csvimport-24.png' ALIGN='absmiddle'/>"
 				." T&eacute;l&eacute;charger <b>$nomFichier</b> ($nbLignes lignes)</A>\n"
 				;
 		}
