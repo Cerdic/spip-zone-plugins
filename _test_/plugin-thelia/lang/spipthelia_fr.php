@@ -63,6 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'statut' => 'Statut',
 'modifier_informations' => 'modifier mes informations',
 'modifier_mdp' => 'Modifier mon mot de passe',
+'mon_mdp' => 'Mon mot de passe',
 'nouveau_mdp' => 'Nouveau mot de passe',
 'confirmation_mdp' => 'Confirmation du mot de passe',
 'modifier_coordonnees' => 'Modifier mes coordonn&eacute;es',
@@ -83,7 +84,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'telephone_portable' => 'T&eacute;l&eacute;phone portable',
 'email' => 'E-mail',
 'confirmation_email' => 'Confirmation de votre e-mail',
-'valider' => 'Valider'
+'valider' => 'Valider',
+'nouveau_client' => 'Je suis un nouveau client'
 
 
 
