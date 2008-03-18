@@ -1,0 +1,33 @@
+<div style="text-align:center;">
+[(#CONFIG{beespip_pos_date}|=={'entete'}|?{' ',''})
+  <INCLURE{fond=includes/inc_beespip_date}{lang}>
+]
+<div class="blocarrondis" style="margin-left: auto;margin-right: auto;">
+  <div class="bashaut"><div><div></div></div></div>
+  <div class="bascontentwrap"><div class="bascontent"> 
+    <ul class="serv">
+      <li><span class="cartouchemenu"><a href="#URL_SITE_SPIP/spip.php?page=sommaire-accueil" title="<:accueil_site:>"><:accueil_site:></a></span></li>
+        
+      <li><span class="cartouchemenu"><a href="#URL_SITE_SPIP/spip.php?page=sommaire-actu" title="<:beespip:actualites:>"><:beespip:actualites:></a></span></li>
+        
+      <li><span class="cartouchemenu"><a href="#URL_SITE_SPIP/spip.php?page=plan" title="<:plan_site:>"><:plan_site:></a></span></li>
+        
+      <li><span class="cartouchemenu"><a href="#URL_SITE_SPIP/ecrire/" title="<:beespip:espace_prive:>"><:beespip:espace_prive:></a></span></li>
+
+	<THELIA SI CONNECTE>
+		<li><span class="cartouchemenu"><a href="#URL_PAGE{moncompte}">mon compte</a></span></li>
+	</THELIA SI CONNECTE>
+ 	<T_PANIER>
+		<li><span class="cartouchemenu"><a href="#URL_PAGE{panier}">Votre panier contient THELIA-PANIER_NBART article(s).</a><span class="cartouchemenu"></li>
+	<THELIA_PANIER type="PANIER">
+	</THELIA_PANIER>
+	</T_PANIER>
+		<li><span class="cartouchemenu"><a href="#URL_PAGE{panier}">Votre panier est vide</a><span class="cartouchemenu"></li>
+	<//T_PANIER>
+
+</ul>
+  </div><!-- /bascontent -->
+  </div><!-- /bascontentwrap -->
+  <div class="basbas"><div><div></div></div></div>
+</div><!-- /blocarrondis -->
+</div>
