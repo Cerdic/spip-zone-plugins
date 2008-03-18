@@ -19,7 +19,7 @@ define(OK,"<SPAN style='color:#3C3;font-weight:bold;'>[OK]</SPAN>");
 define(KO,"<SPAN style='color:#C33;font-weight:bold;'>[KO]</SPAN>");
 
 // exécuté automatiquement par le plugin au chargement de la page ?exec=odb_requete
-function exec_ezSQL() {
+function exec_ezsql() {
 	global $connect_statut, $connect_toutes_rubriques, $debug, $txt_gauche, $txt_droite, $txt_debug, $tab_referentiel, $odb_referentiel,$odb_mapping;
 
 	$annee=date("Y");
