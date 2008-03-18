@@ -49,7 +49,7 @@ $sql = 'SELECT can.`id_table`, can.id_table_old, sex.`sexe`, pre.`prefixe`, can.
 
 //die($sql);
 $result=odb_query($sql,__FILE__,__LINE__);
-$pdf_dir='../contrib/ezpdf/';
+$pdf_dir='../odb_contrib/ezpdf/';
 include $pdf_dir.'class.ezpdf.php';	// inclusion du code de la bibliothque
 $pdf =& new Cezpdf('A4','portrait'); // 595.28 x 841.89
 $pdf->selectFont($pdf_dir.'fonts/Helvetica.afm');

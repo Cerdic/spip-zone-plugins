@@ -73,13 +73,23 @@ function isAutorise($tOK) {
  * @param string $sql : code SQL a executer
  * @param string $fichier : nom du fichier (par exemple, passer __FILE__)
  * @param int $ligne : ligne (passer __LINE__)
+ * @param string $obsc : texte a dissimuler (mot de passe, par exemple)
  * @return resource : resultset correspondant
  */
-function odb_query($sql,$fichier,$ligne) {
-	$cherche='plugins/';
-	//$pass=getParametresODB('code');
+function odb_query($sql,$fichier,$ligne,$obsc='****') {
+	$cherche='/plugins/';
+	if(substr_count($sql,'DECODE(')>0 && $obsc=='****') {
+		$tmp=stristr($sql,'decode(');
+		$tmp=substr($tmp,0,strpos($tmp,')'));
+		list($rien,$obsc)=explode(',',$tmp);
+		$obsc=trim(str_replace(array('\'','"'),'',$obsc));
+	}
 	$fichier=substr($fichier,strpos($fichier,$cherche));
-	$result = mysql_query($sql) or die("<div style='margin:5px;border:1px outset red;background-color:#ddf;'><div style='border:1px none red;background-color:#bbf;'>".KO." - Erreur dans la requete</div><pre>".wordwrap(str_replace($pass,'****',$sql))."</pre><small>$fichier<b>[$ligne]</b></small><br/><div style='border:1px none red;background-color:#bbf;'>".htmlentities(mysql_error())."</div></div>");
+	$result = mysql_query($sql) or die("<div style='margin:5px;border:1px outset red;background-color:#ddf;'>"
+		."<div style='border:1px none red;background-color:#bbf;'>".KO." - Erreur dans la requete</div><pre>"
+		.wordwrap(str_replace($obsc,'****',$sql),65)
+		."</pre><small>$fichier<b>[$ligne]</b></small><br/><div style='border:1px none red;background-color:#bbf;'>"
+		.htmlentities(str_replace($obsc,'****',mysql_error()))."</div></div>");
 	//echo "<br/>$sql (<b>$fichier</b>:$ligne)";
 	return $result;
 }
@@ -91,6 +101,7 @@ function odb_query($sql,$fichier,$ligne) {
  */
 function getIdTableHumain($id_table) {
 	$t=explode('-',$id_table);
+	if(count($t)==1) return $id_table;
 	$milieu=$t[1][0].(int)substr($t[1],1);
 	$id_table=$t[0]."-$milieu-".(int)$t[2];
 	return $id_table;

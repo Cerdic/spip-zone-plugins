@@ -248,6 +248,8 @@ foreach($tCandidats as $id_table=>$t1) {
 	}
 	
 	$tNotes[$id_table]['Ecrit']['total']['matiere']=html_entity_decode('Total des &eacute;preuves &eacute;crites');
+	$tNotes[$id_table]['Ecrit']['total']['note']=str_replace('.',',',round(
+		20*$tNotes[$id_table]['Ecrit']['total']['points']/$tNotes[$id_table]['Ecrit']['total']['sur'],2));
 	//echo"<pre>";print_r($tNotes[$id_table]['Ecrit']);die('</pre>');
 
 	if($deliberation==3) {
