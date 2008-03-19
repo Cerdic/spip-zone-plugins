@@ -27,6 +27,8 @@
 	[ rubrique="(#ENV{rubrique}|?{#ENV{rubrique},''})"]
 	[ id="(#ENV{id}|?{#ENV{id},''})"]>
 <div class="produits_thelia" [style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>	
+<form action="#URL_PAGE{panier,thelia_action=ajouter&amp;ref=THELIA-REF}" method="post" id="formAjouterTHELIA-ID">
+					
 	[(#ENV{photo}|=={non}|?{'',' '})<THELIA_images type="IMAGE" produit="THELIA-ID"[ hauteur="(#ENV{hauteur}|?{#ENV{hauteur},''})"][ largeur="(#ENV{largeur}|?{#ENV{largeur},'100'})"] num="1"><div style="float: left;"><img src="THELIA-IMAGE" /></div></THELIA_images> ]<p class="thelia_titre">THELIA-TITRE</p>
 	<div class="thelia_description">THELIA-DESCRIPTION</div>
 	<T_produitpromo>
@@ -36,15 +38,37 @@
 	</T_produitpromo>
 		<p class="thelia_prix">prix : THELIA-PRIX &euro;</p>
 	<//T_produitpromo>
+
+	<T_declinaisons>
+	<div class="declinaisonProduit">
+		<THELIA_declinaisons type="DECLINAISON" produit="THELIA-ID">
+			THELIA-TITRE : 
+				<select name="declinaisonTHELIA-ID" onChange="if ($(this).val()!='') $('form#formAjouterTHELIA-PRODUIT').find('.LIEN_commander').removeAttr('disabled'); else $('form#formAjouterTHELIA-PRODUIT').find('.LIEN_commander').attr('disabled','disabled');">
+					<option value=""><:spipthelia:votre_choix:></option>
+					<THELIA_decldisp type="DECLIDISP" declinaison="THELIA-ID">
+					<option value="THELIA-ID">THELIA-TITRE</option>
+					</THELIA_decldisp>
+				</select>		 		
+		</THELIA_declinaisons>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("form#formAjouterTHELIA-ID").find('.LIEN_commander').attr('disabled','disabled');
+		});
+	</script>
+	</T_declinaisons>
+	<//T_declinaisons>
+
 	<p class="thelia_panier">
 	<T_produitreappro>
 	<THELIA_produitreappro type="PRODUIT" ref="THELIA-REF" reappro="1">
 		<span class="thelia_reappro"><:spipthelia:en_cours_de_reapprovisionnement:></span>
 	</THELIA_produitreappro>
 	</T_produitreappro>
-		<a href="#URL_PAGE{panier,thelia_action=ajouter&ref=THELIA-REF}">ajouter au panier</a>
+		<input type="submit" class="LIEN_commander" value="<:spipthelia:ajouter_panier:>" />
 	<//T_produitreappro>
 	</p>
+</form>
 </div>
 </THELIA_produit>
 
