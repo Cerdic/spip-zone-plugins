@@ -25,11 +25,11 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
   <div id="centre2colschemin_[(#CONFIG{menu_vertical})]">
     <div class="colssup2">&nbsp;</div>
     <div class="colschemin"><span class="chemin"><BOUCLE_chemin(HIERARCHIE){id_article}>
-    	   &raquo;&nbsp;<:boutique:>&raquo;&nbsp;<THELIA_chemrub type="CHEMIN" rubrique="THELIA-RUBRIQUE_ID">
+    	   &raquo;&nbsp; <:spipthelia:boutique:> &raquo;&nbsp;<THELIA_chemrub type="CHEMIN" rubrique="THELIA-RUBRIQUE_ID">
 			<THELIA_rubdetchem type="RUBRIQUE" id="THELIA-ID">
-			&raquo;&nbsp;<a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-ID}" class="LIEN_chemin">THELIA-TITRE</a> 
+			 &raquo;&nbsp; <a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-ID}" class="LIEN_chemin">THELIA-TITRE</a> 
 			</THELIA_rubdetchem>
-			</THELIA_chemrub>&raquo;&nbsp;<a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-RUBRIQUE_ID}">THELIA-RUBRIQUE_NOM</a>&raquo;&nbsp;THELIA-TITRE</span></div>
+			</THELIA_chemrub> &raquo;&nbsp; <a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-RUBRIQUE_ID}">THELIA-RUBRIQUE_NOM</a> &raquo;&nbsp; THELIA-TITRE</span></div>
     <div class="cleanerchemin">&nbsp;</div>
   </div>      
 </div>
@@ -47,15 +47,9 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
   <div id="centre3cols_[(#CONFIG{menu_vertical})]">
   
     <div id="colprincipale"><div class="column-in">
-         			<div class="blocarrondi">
-                <div class="bahaut"><div><div></div></div></div>
-                <div class="bacontentwrap" style="vertical-align:middle;"><div class="bacontent" style="vertical-align:middle;">
-               <div class="#EDIT{titre} titre_article_contour" style="vertical-align:middle;"> THELIA-RUBRIQUE_NOM</div>
-                <div class="cleaner">&nbsp;</div></div><!-- /bacontent -->
-                </div><!-- /bacontentwrap -->
-                <div class="babas"><div><div></div></div></div>
-              </div><!-- /blocarrondi -->
-              <div class="espacebloc">&nbsp;</div>
+         			<div class="titre_article">THELIA-TITRE</div>
+               
+              		<div class="espacebloc">&nbsp;</div>
 
 				
 

@@ -1,0 +1,147 @@
+#CACHE{86400}
+<?php
+if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
+?>
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="#LANG">
+<head>
+<title>..: #NOM_SITE_SPIP <:spipthelia:recapitulatif_commande:> :..</title>
+<INCLURE{fond=includes/inc_beespip_head}{lang}>
+<INCLURE{fond=includes/inc_beespip_meta}{lang}>
+<INCLURE{fond=includes/inc_beespip_css}>
+</head>
+<body dir="#LANG_DIR">
+<div id="conteneur">
+
+[(#REM) Entete ]
+<INCLURE{fond=includes/inc_beespip_entete}{lang}>
+[(#CONFIG{menu_horizontal}|=={'oui'}|?{' ',''})
+  <INCLURE{fond=menuh}{lang}>
+]
+[(#REM) Affichage du chemin ]
+<div id="outercolonnechemin_[(#CONFIG{menu_vertical})]">
+  <div id="centre2colschemin_[(#CONFIG{menu_vertical})]">
+    <div class="colssup2">&nbsp;</div>
+    <div class="colschemin"><span class="chemin">
+    	   &raquo;&nbsp; <:spipthelia:boutique:> &raquo;&nbsp; <:spipthelia:recapitulatif_commande:></span></div>
+    <div class="cleanerchemin">&nbsp;</div>
+  </div>      
+</div>
+
+[(#REM) Definition de la partie principale en 3 colonnes ]
+<div id="outercolonne3cols_[(#CONFIG{menu_vertical})]">
+  [(#REM) Colonne de gauche ]
+  [(#CONFIG{menu_vertical}|=={'oui'}|?{' ',''})
+  <div id="gauche">
+    <INCLURE{fond=menu}{id_article}{lang}>
+  </div>
+  ]
+
+  [(#REM) Partie centrale ]
+  <div id="centre3cols_[(#CONFIG{menu_vertical})]">
+  
+    <div id="colprincipale"><div class="column-in">
+         			<div class="blocarrondi">
+                <div class="bahaut"><div><div></div></div></div>
+                <div class="bacontentwrap" style="vertical-align:middle;"><div class="bacontent" style="vertical-align:middle;">
+               <div class="titre_article_contour" style="vertical-align:middle;"><:spipthelia:recapitulatif_commande:></div>
+                <div class="cleaner">&nbsp;</div></div><!-- /bacontent -->
+                </div><!-- /bacontentwrap -->
+                <div class="babas"><div><div></div></div></div>
+              </div><!-- /blocarrondi -->
+              <div class="espacebloc">&nbsp;</div>
+[(#REM) Contenu de la page ]
+	
+			<form action="#URL_PAGE{commande}" id="formulaire" method="post">
+			<input type="hidden" name="thelia_action" value="codepromo" />
+			<table>
+            		<thead> 
+				<tr>
+    					<th class="enteteTableau"><:spipthelia:photo_produit:></th>
+    					<th class="enteteTableau"><:spipthelia:references_produits:></th>
+    					<th class="enteteTableau"><:spipthelia:prix_unitaire:></th>
+    					<th class="enteteTableau"><:spipthelia:quantite:></th>
+    					<th class="enteteTableau"><:spipthelia:total:></th>
+    				</tr>
+			</thead> 
+			<tbody>
+				<THELIA_panier type="PANIER">
+				<tr>
+					<td class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td>
+					<td class="ligneTableau">THELIA-TITRE - THELIA-REF</td>
+                			<td class="ligneTableau">THELIA-PRIXU &euro;</td>
+                    			<td class="ligneTableau">THELIA-QUANTITE</td>
+                    			<td class="ligneTableau">THELIA-TOTAL &euro;</td>
+				</tr>
+				</THELIA_panier>
+				<tr>
+					<td>&nbsp;</td>
+                		    	<td>&nbsp;</td>
+                		    	<td>&nbsp;</td>
+                		    	<td><:spipthelia:frais_livraison:></td>
+                    			<td>THELIA-PANIER_PORT &euro;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+                		    	<td>&nbsp;</td>
+                		    	<td>&nbsp;</td>
+                    			<td><:spipthelia:remise:> </td>
+                    			<td>THELIA-PANIER_REMISE &euro;</td>
+				</tr>
+			  	<tr>
+					<td class="footerTableau">&nbsp;</td>
+					<td class="footerTableau">&nbsp;</td>
+                		    	<td class="footerTableau">&nbsp;</td>
+                    			<td class="footerTableau"><:spipthelia:total:></td>
+                    			<td class="footerTableau">THELIA-PANIER_TOTPORT &euro;</td>
+				</tr>
+			</tbody>
+			</table>
+			<br />
+			<label for="code"><:spipthelia:code_reduction:></label>
+			<input id="code" name="code" type="text" class="zoneDeSaisie"/><input type="submit" value="<:valider:>" />
+			
+			</form>
+
+			<div class="separation">
+			</div>
+			
+			<div class="titrePage">
+				<h2><:spipthelia:choix_paiement:></h2>
+			</div>
+
+			[(#REM) contenu de la page ]
+			<table width="675" border="0" cellspacing="0" cellpadding="5">
+			   	<THELIA_PAIEMENT type="PAIEMENT">
+			 	<tr>
+				   	<td class="ligneTableau">THELIA-TITRE</td>
+               				<td class="ligneTableau"><a href="#URL_PAGE{commande,thelia_action=paiement&amp;type_paiement=THELIA-ID}"><:valider:></a></td>
+				</tr>
+
+			</THELIA_PAIEMENT>
+			</table>
+    </div></div>
+
+
+  </div><!-- id centre3cols-->
+  <div class="cleaner">&nbsp;</div>
+</div> <!-- id outercolonne3cols-->
+
+<INCLURE{fond=includes/inc_beespip_pied}{lang}>
+
+</div> <!-- id conteneur-->
+ 
+</body>
+</html>
+
+<//B_article_portfolio>
+<?php
+} else {
+?>
+<INCLURE{fond=reserve}{lang}>
+<?php
+}
+?>
+
+

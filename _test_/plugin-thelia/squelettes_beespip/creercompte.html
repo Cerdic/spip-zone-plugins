@@ -1,0 +1,172 @@
+#CACHE{86400}
+<?php
+if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
+?>
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="#LANG">
+<head>
+<title>..: #NOM_SITE_SPIP <:spipthelia:creation_compte:> :..</title>
+<INCLURE{fond=includes/inc_beespip_head}{lang}>
+<INCLURE{fond=includes/inc_beespip_meta}{lang}>
+<INCLURE{fond=includes/inc_beespip_css}>
+</head>
+<body dir="#LANG_DIR">
+<div id="conteneur">
+
+[(#REM) Entete ]
+<INCLURE{fond=includes/inc_beespip_entete}{lang}>
+[(#CONFIG{menu_horizontal}|=={'oui'}|?{' ',''})
+  <INCLURE{fond=menuh}{lang}>
+]
+[(#REM) Affichage du chemin ]
+<div id="outercolonnechemin_[(#CONFIG{menu_vertical})]">
+  <div id="centre2colschemin_[(#CONFIG{menu_vertical})]">
+    <div class="colssup2">&nbsp;</div>
+    <div class="colschemin"><span class="chemin">
+    	   &raquo;&nbsp; <:spipthelia:boutique:> &raquo;&nbsp; <:spipthelia:creation_compte:></span></div>
+    <div class="cleanerchemin">&nbsp;</div>
+  </div>      
+</div>
+
+[(#REM) Definition de la partie principale en 3 colonnes ]
+<div id="outercolonne3cols_[(#CONFIG{menu_vertical})]">
+  [(#REM) Colonne de gauche ]
+  [(#CONFIG{menu_vertical}|=={'oui'}|?{' ',''})
+  <div id="gauche">
+    <INCLURE{fond=menu}{id_article}{lang}>
+  </div>
+  ]
+
+  [(#REM) Partie centrale ]
+  <div id="centre3cols_[(#CONFIG{menu_vertical})]">
+  
+    <div id="colprincipale"><div class="column-in">
+         			<div class="blocarrondi">
+                <div class="bahaut"><div><div></div></div></div>
+                <div class="bacontentwrap" style="vertical-align:middle;"><div class="bacontent" style="vertical-align:middle;">
+               <div class="titre_article_contour" style="vertical-align:middle;"><:spipthelia:creation_compte:></div>
+                <div class="cleaner">&nbsp;</div></div><!-- /bacontent -->
+                </div><!-- /bacontentwrap -->
+                <div class="babas"><div><div></div></div></div>
+              </div><!-- /blocarrondi -->
+              <div class="espacebloc">&nbsp;</div>
+
+			[(#REM) Contenu de la page ]
+				
+			<div class="sousTitrePage">
+				<h3><:spipthelia:message_creation_compte:> : </h3>
+			</div>
+				
+
+			<form action="#URL_PAGE{nouveau}" method="post" name="nouveau" id="nouveau">
+			<input type="hidden" name="thelia_action" value="creercompte" />
+
+			<table>
+			<tbody>
+				<tr>
+    				<td class="ligneTableau"><:spipthelia:civilite:>*</td>
+				    <td class="ligneTableau">
+					<select name="raison" size="1"  class="zoneDeSaisie">
+    						<option value="" selected="selected"><:spipthelia:choisissez:></option>
+   						<option value="1"><:spipthelia:madame:></option>
+   						<option value="2"><:spipthelia:mademoiselle:></option>
+    						<option value="3"><:spipthelia:monsieur:></option>
+    					</select>
+					</td>
+				</tr>
+				<tr>
+    				<td class="ligneTableau"><:spipthelia:nom:>*</td>
+    				<td class="ligneTableau"><input type="text" name="nom" class="zoneDeSaisie" /></td>
+				</tr>
+				<tr>
+					<td class="ligneTableau"><:spipthelia:prenom:>*</td>
+					<td class="ligneTableau"><input type="text" name="prenom" class="zoneDeSaisie" /></td>
+				</tr>
+				<tr>
+					<td class="ligneTableau"><:spipthelia:adresse:>*</td>
+					<td class="ligneTableau"><input type="text" name="adresse1" class="zoneDeSaisie" /></td>
+				</tr>
+				<tr>
+					<td class="ligneTableau"><:spipthelia:adresse_suite:></td>
+					<td class="ligneTableau"><input type="text" name="adresse2" class="zoneDeSaisie" /></td>
+				</tr>
+				<tr>
+					<td class="ligneTableau"><:spipthelia:complement_adresse:></td>
+					<td class="ligneTableau"><input type="text" name="adresse3" class="zoneDeSaisie" /></td>
+				</tr>
+				<tr>
+					<td class="ligneTableau"><:spipthelia:code_postal:>*</td>
+					<td class="ligneTableau"><input type="text" name="cpostal" class="zoneDeSaisie" /></td>
+				</tr>
+				<tr>
+					<td class="ligneTableau"><:spipthelia:ville:>*</td>
+					<td class="ligneTableau"><input type="text" name="ville" class="zoneDeSaisie" /></td>
+				</tr>
+				<tr>
+					<td class="ligneTableau"><:spipthelia:pays:>*</td>
+					<td class="ligneTableau">
+					<select name="pays" size="1"  class="zoneDeSaisie">
+						<option value="" selected="selected"><:spipthelia:choisissez:></option>
+						<THELIA_pays type="PAYS" zdefinie="1">           
+						<option value="THELIA-ID">THELIA-TITRE</option>
+						</THELIA_pays>
+    					</select>
+					</td>
+				</tr>
+				<tr>
+    				<td class="ligneTableau"><:spipthelia:telephone_fixe:>* </td>
+    				<td class="ligneTableau"><input type="text" name="telfixe" class="zoneDeSaisie" /></td>
+				</tr>
+				<tr>
+    				<td class="ligneTableau"><:spipthelia:telephone_portable:></td>
+    				<td class="ligneTableau"><input type="text" name="telport" class="zoneDeSaisie" /></td>
+				</tr>
+				<tr>
+    				<td class="ligneTableau"><:spipthelia:email:>*</td>
+    				<td class="ligneTableau"><input type="text" name="email1" class="zoneDeSaisie" /></td>
+				</tr>
+				<tr>
+    				<td class="ligneTableau"><:spipthelia:confirmation_email:>*</td>
+    				<td class="ligneTableau"><input type="text" name="email2" class="zoneDeSaisie" /></td>
+				</tr>
+				<tr>
+    				<td class="ligneTableau"><:spipthelia:mdp:>* (<:spipthelia:mdp_caracteres_minimum:>) </td>
+    				<td class="ligneTableau"><input  name="motdepasse1" type="password" class="zoneDeSaisie" /></td>
+				</tr>
+				<tr>
+    				<td class="ligneTableau"><:spipthelia:confirmation_mdp:>*</td>
+    				<td class="ligneTableau"><input name="motdepasse2" type="password" class="zoneDeSaisie" /></td>
+  				</tr>
+			</tbody>
+			</table>
+
+			<span class="commentaires">* <:spipthelia:champs_obligatoires:></span>
+				<div class="boutonMonCompteContenu">
+				<input type="submit" value="<:spipthelia:valider:>" />
+				</div>
+			</form>
+    </div></div>
+
+
+  </div><!-- id centre3cols-->
+  <div class="cleaner">&nbsp;</div>
+</div> <!-- id outercolonne3cols-->
+
+<INCLURE{fond=includes/inc_beespip_pied}{lang}>
+
+</div> <!-- id conteneur-->
+ 
+</body>
+</html>
+
+<//B_article_portfolio>
+<?php
+} else {
+?>
+<INCLURE{fond=reserve}{lang}>
+<?php
+}
+?>
+
+

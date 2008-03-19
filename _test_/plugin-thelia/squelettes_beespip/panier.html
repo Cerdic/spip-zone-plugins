@@ -1,0 +1,135 @@
+#CACHE{86400}
+<?php
+if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
+?>
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="#LANG">
+<head>
+<title>..: #NOM_SITE_SPIP <:spipthelia:mon_panier:> :..</title>
+<INCLURE{fond=includes/inc_beespip_head}{lang}>
+<INCLURE{fond=includes/inc_beespip_meta}{lang}>
+<INCLURE{fond=includes/inc_beespip_css}>
+</head>
+<body dir="#LANG_DIR">
+<div id="conteneur">
+
+[(#REM) Entete ]
+<INCLURE{fond=includes/inc_beespip_entete}{lang}>
+[(#CONFIG{menu_horizontal}|=={'oui'}|?{' ',''})
+  <INCLURE{fond=menuh}{lang}>
+]
+[(#REM) Affichage du chemin ]
+<div id="outercolonnechemin_[(#CONFIG{menu_vertical})]">
+  <div id="centre2colschemin_[(#CONFIG{menu_vertical})]">
+    <div class="colssup2">&nbsp;</div>
+    <div class="colschemin"><span class="chemin">
+    	   &raquo;&nbsp; <:spipthelia:boutique:> &raquo;&nbsp; <:spipthelia:mon_panier:></span></div>
+    <div class="cleanerchemin">&nbsp;</div>
+  </div>      
+</div>
+
+[(#REM) Definition de la partie principale en 3 colonnes ]
+<div id="outercolonne3cols_[(#CONFIG{menu_vertical})]">
+  [(#REM) Colonne de gauche ]
+  [(#CONFIG{menu_vertical}|=={'oui'}|?{' ',''})
+  <div id="gauche">
+    <INCLURE{fond=menu}{id_article}{lang}>
+  </div>
+  ]
+
+  [(#REM) Partie centrale ]
+  <div id="centre3cols_[(#CONFIG{menu_vertical})]">
+  
+    <div id="colprincipale"><div class="column-in">
+         			<div class="blocarrondi">
+                <div class="bahaut"><div><div></div></div></div>
+                <div class="bacontentwrap" style="vertical-align:middle;"><div class="bacontent" style="vertical-align:middle;">
+               <div class="titre_article_contour" style="vertical-align:middle;"><:spipthelia:mon_panier:></div>
+                <div class="cleaner">&nbsp;</div></div><!-- /bacontent -->
+                </div><!-- /bacontentwrap -->
+                <div class="babas"><div><div></div></div></div>
+              </div><!-- /blocarrondi -->
+              <div class="espacebloc">&nbsp;</div>
+			[(#REM) Contenu du panier ]
+
+			<table id="panier">
+  			<thead> 
+				<tr>
+    					<th class="enteteTableau"><:spipthelia:photo_produit:></th>
+    					<th class="enteteTableau"><:spipthelia:references_produits:></th>
+    					<th class="enteteTableau"><:spipthelia:prix_unitaire:></th>
+    					<th class="enteteTableau"><:spipthelia:quantite:></th>
+    					<th class="enteteTableau"><:spipthelia:total_ttc:></th>
+    					<th class="enteteTableau"><:spipthelia:Vider:></th>
+				</tr>
+			</thead>
+
+			<tbody> 
+				<THELIA_CONTENU_PANIER type="PANIER">
+				<tr>
+					<td class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td>
+					<td class="ligneTableau">THELIA-REF<br/>THELIA-TITRE
+						<THELIA_decval type="DECVAL" article="THELIA-ARTICLE">
+							<br/>THELIA-DECLITITRE : THELIA-VALEUR
+						</THELIA_decval>
+					</td>
+					<td class="ligneTableau">THELIA-PRIXU &euro; </td>
+    					<td class="ligneTableau">
+					<form action="#URL_PAGE{panier, article=THELIA-ARTICLE}" method="post" name="formpanierTHELIA-ARTICLE" id="formpanierTHELIA-ARTICLE">
+                				<input type="hidden" name="article" value="THELIA-ARTICLE" />
+                				<input type="hidden" name="thelia_action" value="modifier" />
+                				<select name="quantite" size="1" class="zoneDeSaisie" onchange="document.formpanierTHELIA-ARTICLE.submit()">
+                				<THELIA_quantite type="QUANTITE" article="THELIA-ARTICLE" max="50">
+							<option value="THELIA-NUM" THELIA-SELECTED>THELIA-NUM</option>
+						</THELIA_quantite>
+						</select>
+					</form>
+					</td>
+					<td class="ligneTableau">THELIA-TOTAL &euro;</td>
+					<td class="ligneTableau"><a href="#URL_PAGE{panier,thelia_action=supprimer&thelia_article=THELIA-ARTICLE}"><:spipthelia:supprimer:></a></td>
+				</tr>
+  	  		</THELIA_CONTENU_PANIER>
+			
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td align="right"><:spipthelia:total_panier:> :</td>
+    					<td>THELIA-PANIER_TOTAL &euro;</td>
+					<td></td>
+    				</tr>
+			</tbody>
+			</table>
+			
+
+				<div class="boutonMonCompteContenu">
+				<a href="#URL_PAGE{adresse}"><:spipthelia:valider_panier:></a>
+				</div>
+				<div class="boutonMonCompteContenu">
+				<a href="#URL_SITE_SPIP"><:spipthelia:retour_boutique:></a>
+				</div>
+    </div></div>
+
+
+  </div><!-- id centre3cols-->
+  <div class="cleaner">&nbsp;</div>
+</div> <!-- id outercolonne3cols-->
+
+<INCLURE{fond=includes/inc_beespip_pied}{lang}>
+
+</div> <!-- id conteneur-->
+ 
+</body>
+</html>
+
+<//B_article_portfolio>
+<?php
+} else {
+?>
+<INCLURE{fond=reserve}{lang}>
+<?php
+}
+?>
+
+
