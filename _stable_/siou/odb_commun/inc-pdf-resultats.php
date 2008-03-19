@@ -75,6 +75,7 @@ $height=$pdf->ez['pageHeight'];
 $colonnes=array('id_table','sexe','prefixe','nom','prenoms','matiere','type','note','coeff','delib','moyenne','serie');
 while($row=mysql_fetch_array($result)) {
    foreach($colonnes as $col) $$col=utf8_decode(stripslashes($row[$col]));
+   $id_table=getIdTableHumain($id_table);
    if($sexe=='M') {
       $civ='M.';
       $e='';
