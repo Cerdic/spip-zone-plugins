@@ -83,6 +83,13 @@ function balise_DATE_DECES($p){
 }
 
 // -- Affiche la date de naissance --------------------------------------
+function balise_DATE_MARIAGE($p){
+	$p->code = "genea_date_evt(".champ_sql('id_individu',$p).", 'marr')";
+	$p->interdire_scripts = true;
+	return $p;
+}
+
+// -- Affiche la date de naissance --------------------------------------
 function balise_DATE_NAISSANCE($p){
 	$p->code = "genea_date_evt(".champ_sql('id_individu',$p).", 'birt')";
 	$p->interdire_scripts = true;

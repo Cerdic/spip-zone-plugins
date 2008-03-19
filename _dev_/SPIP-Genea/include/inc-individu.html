@@ -1,3 +1,14 @@
+[(#REM)
+	*********************************************************************
+	*
+	* Copyright (c) 2007-2008
+	* Xavier Burot
+	* fichier : inc-individu.html
+	*
+	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	*
+	*********************************************************************
+]
 <BOUCLE_individu(GENEA_INDIVIDUS){id_individu}>
-<a href="[(#URL_PAGE{genea_individus}|parametre_url{id_individu,#ID_INDIVIDU})]" class="spip_in">[(#CIVILITE|abreviation) ][(#PATRONYME) ][(#PRENOMS)]</a><small class='genea_date'>[ o (#DATE_NAISSANCE|affdate{'d/m/Y'})][(#DATE_NAISSANCE|?{' '})[(#DATE_DECES|?{' '}) &hellip; ]][ &dagger; (#DATE_DECES|affdate{'d/m/Y'})]</small>
+<a href="[(#URL_PAGE{genea_individus}|parametre_url{id_individu,#ID_INDIVIDU})]" class="spip_in">[(#CIVILITE|abreviation) ][(#PATRONYME) ][(#ENV{format_prenom}|=={court}|?{[(#PRENOMS|principal)],[(#PRENOMS)]})]</a><small class='genea_date'>[ o (#DATE_NAISSANCE|affdate{#ENV{format_date, 'd/m/Y'}})][(#DATE_NAISSANCE|?{' '})[(#DATE_DECES|?{' '}) &hellip; ]][ &dagger; (#DATE_DECES|affdate{#ENV{format_date, 'd/m/Y'}})]</small>
 </BOUCLE_individu>

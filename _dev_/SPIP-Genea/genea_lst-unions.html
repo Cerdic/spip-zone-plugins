@@ -1,0 +1,113 @@
+[(#REM)
+	*********************************************************************
+	*
+	* Copyright (c) 2008
+	* Xavier Burot
+	* fichier : genea_lst-unions.html
+	*
+	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	*
+	*********************************************************************
+]
+#CACHE{86400}
+<BOUCLE_genea_principal(GENEA){id_genea}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+   <title><:genea:liste_des_unions:>[ - (#TITRE|textebrut)] - [(#NOM_SITE_SPIP|textebrut)]</title>
+   <meta name="description" content="<:genea:desc_lst_individus:>" />
+   <INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_genea">
+<div id="page">
+
+   [(#REM) Entete de la page + titre du site ]
+   <INCLURE{fond=inc-entete}>
+
+   [(#REM) Fil d'Ariane ]
+   <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}{tout}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane> &gt; <:genea:liste_des_unions:></div>
+
+
+   <div id="conteneur">
+
+      [(#REM) Contenu principal : contenu de l'article ]
+      <div id="contenu">
+
+         <div class="cartouche">
+            #DEBUT_SURLIGNE
+            [(#LOGO_RUBRIQUE||image_reduire{200,200})]
+            [<p class="surtitre">(#TITRE_GENEA)</p>]
+            <h1 class="titre"><:genea:liste_des_unions:></h1>
+            <p class="soustitre"><:genea:soustitre_lst_unions:></p>
+            #FIN_SURLIGNE
+         </div>
+
+         <div class="chapo"><:genea:desc_lst_unions:></div>
+
+         <br class="nettoyeur" />
+
+         <div class="texte">
+			<B_unions>
+			<h3 class="spip">
+				[(#ENV{tri, epoux}|=={epoux}|?{<:genea:tri_par_epoux:>})]
+				[(#ENV{tri, epoux}|=={epouse}|?{<:genea:tri_par_epouse:>})]
+				[(#ENV{tri, epoux}|=={type}|?{<:genea:tri_par_type:>})]
+				[(#ENV{tri, epoux}|=={date}|?{<:genea:tri_par_date:>})]
+			</h3>
+			[(#ANCRE_PAGINATION)]
+			<table class="genea_tableau">
+				<thead>
+					<tr>
+						<td><a href="[(#SELFparametre_url{tri,epoux})]" alt="<:genea:tri_epoux:>"><:genea:epoux:></a></td>
+						<td><a href="[(#SELFparametre_url{tri,epouse})]" alt="<:genea:tri_epouse:>"><:genea:epouse:></a></td>
+						<td><a href="[(#SELFparametre_url{tri,type})]" alt="<:genea:tri_type:>"><:genea:type_union:></a></td>
+						<td><a href="[(#SELFparametre_url{tri,date})]" alt="<:genea:tri_date:>"><:genea:date_union:></a></td>
+					</tr>
+				</thead>
+				<tbody>
+				<BOUCLE_unions(GENEA_FAMILLES){id_genea}{par id_epoux}{id_epouse!=NULL}{pagination 20}>
+					<tr>
+						<td><INCLUDE{fond=include/inc-individu}{id_individu=#ID_EPOUX}{format_date='Y'}></td>
+						<td><INCLUDE{fond=include/inc-individu}{id_individu=#ID_EPOUSE}{format_date='Y'}></td>
+						<td>[(#TYPE_UNION|gtraduc)]</td>
+						<td>
+						<BOUCLE_evtepoux(GENEA_EVT genea_participes){id_individu=#ID_EPOUX}{type_evt='marr'}>
+							<BOUCLE_evtepouse(GENEA_EVT genea_participes){id_genea_evt}{id_individu=#ID_EPOUSE}>
+								[(#DATE_MARIAGE|affdate{'d/m/Y'})]
+							</BOUCLE_evtepouse>
+						</BOUCLE_evtepoux>
+						</td>
+					</tr>
+				</BOUCLE_unions>
+				</tbody>
+			</table>
+			[<p class="pagination">(#PAGINATION)</p>]
+			</B_unions>
+         </div>
+
+      </div><!-- fin contenu -->
+
+      [(#REM) Menu de navigation laterale ]
+      <div id="navigation">
+
+         [(#REM) Menu de navigation par rubriques ]
+         <INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+         [(#REM) Articles dans la meme rubrique ]
+         <INCLURE{fond=include/inc-genealogie}{id_genea}{small=oui}>
+
+      </div><!-- fin navigation -->
+
+   </div><!-- fin conteneur -->
+
+   [(#REM) Pied de page SPIP-Genea ]
+   <INCLURE{fond=include/inc-genea-pied}{id_genea}>
+
+   [(#REM) Pied de page ]
+   <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_genea_principal>

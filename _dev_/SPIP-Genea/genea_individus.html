@@ -34,17 +34,17 @@
 
 			<div class="cartouche">
 				#DEBUT_SURLIGNE
-				[(#LOGO_INDIVIDU||image_reduire{200,200})]
+				[(#LOGO_INDIVIDU||image_reduire{200,200}|inserer_attribut{class,'spip_logos genea_photos'})]
 				[<p class="surtitre">(#TITRE_GENEA)</p>]
-				<h1 class="titre">[<img src="(#CHEMIN{/img_pack/#SEXE.gif})" width='17' height='17' class="logo_spip" />][(#CIVILITE|gtraduc) ][(#PATRONYME) ][(#PRENOMS)]</h1>
-				[<p class="soustitre">[(#SEXE|!={f}|?{' '})<:genea:aliasm:>][(#SEXE|=={f}|?{' '})<:genea:aliasf:>] &#34;(#SURNOM)&#34;</p>]
+				<h1 class="titre">[<img src="(#CHEMIN{/img_pack/#SEXE.gif})" width='17' height='17' />][(#CIVILITE|gtraduc) ][(#PATRONYME) ][(#PRENOMS)]</h1>
+				[<p class="soustitre">[(#SEXE|!={f}|?{<:genea:aliasm:>,<:genea:aliasf:>' '})] &#34;(#SURNOM)&#34;</p>]
 				#FIN_SURLIGNE
 			</div>
 
 			#DEBUT_SURLIGNE
 			<div class="chapo">
 				<table>
-					[<tr><td valign="top" nowrap><:genea:sosa:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2" class="indivsosa">(#SOSA)</td></tr>]
+					[<tr><td valign="top" nowrap><:genea:sosa:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2" class="genea_sosa">(#SOSA)</td></tr>]
 					[<tr><td valign="top" nowrap><:genea:sexe:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#SEXE|gtraduc)</td></tr>]
 					[<tr><td valign="top" nowrap><:genea:filiation:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#TYPE_FILIATION|gtraduc)</td></tr>]
 					[<tr><td valign="top" nowrap><:genea:birt:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#DATE_NAISSANCE|affdate) [(#LIEU)]</td></tr>]
@@ -53,24 +53,19 @@
 
 				<br class="nettoyeur" />
 
-				<table class="spip">
-					<tr>
-						<td>Général</td>
-						<td>Les unions</td>
-						<td>L'arborescence</td>
-						<td>Les sources</td>
-					</tr>
-				</table>
 			</div>
+
+			<INCLUDE{fond=include/inc-menu_individu}{pg=#ENV{pg,general}}>
 
 			<br class="nettoyeur" />
 
+			[(#REM) Affichage des informations generales sur l'individu]
+			[(#ENV{pg,general}|=={general}|?{' '})
 			<div class="contre-encart">
 
 				<div class="texte">
 
 					<INCLUDE{fond=include/inc-ascendant}{id_famille}>
-
 					<INCLUDE{fond=include/inc-descendant}{id_individu}>
 
 				</div>
@@ -80,19 +75,28 @@
 
 			<div class="encart">
 				[(#REM) Liste des collateraux (freres et soeurs) ]
-				<B_collateraux>
-				<div class="forums">
-					<h2 class="menu-titre"><:genea:freres_soeurs:></h2>
-					<ul>
-						<BOUCLE_collateraux(GENEA_INDIVIDUS){id_famille}{id_individu!=#ID_INDIVIDU}{id_genea}{par position}>
-						<li><a href="[(#URL_PAGE{genea_individus}|parametre_url{id_individu,#ID_INDIVIDU})]" class="spip_in">[(#CIVILITE|abreviation) ][(#PATRONYME) ][(#PRENOMS)]</a><em>[ o (#DATE_NAISSANCE|affdate{'Y'})][(#DATE_NAISSANCE|?{' '})[(#DATE_DECES|?{' '}) &hellip; ]][ &dagger; (#DATE_DECES|affdate{'Y'})]</em></li>
-						</BOUCLE_collateraux>
-					</ul>
-				</div>
-				</B_collateraux>
+				<INCLUDE{fond=include/inc-encart-fratrie}{id_famille}{id_individu}{id_genea}>
 			</div><!-- fin encart -->
 
 			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+			]
+
+			[(#ENV{pg,general}|!={general}|?{' '})
+			<div class="contre-encart">
+
+				<div class="texte">
+					<h3 class="spip">#ENV{pg,general}</h3>
+
+				</div>
+				#FIN_SURLIGNE
+
+			</div><!-- fin contre-encart -->
+
+			<div class="encart">
+			</div><!-- fin encart -->
+
+			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#GENEA_NOTES)#FIN_SURLIGNE</div>]
+			]
 
 		</div><!-- fin contenu -->
 

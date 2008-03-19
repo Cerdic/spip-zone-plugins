@@ -80,15 +80,15 @@ function boucle_GENEA_SOURCES_dist($id_boucle, &$boucles) {
 function critere_conjoint($idb, &$boucles, $crit){
 	$op='';
 
-//	echo('bienvenue<br />');
+	echo('bienvenue<br />');
 
 	$boucle = &$boucles[$idb];
 	$params = $crit->param;
 	$type = array_shift($params);
 	$type = $type[0]->texte;
 
-//	echo "* ".serialize($params)."</br>";
-//	echo "* ".serialize($type)."</br>";
+	echo "* ".serialize($params)."</br>";
+	echo "* ".serialize($type)."</br>";
 
 	if(preg_match(',^(\w+)([<>=])([0-9]+)$,',$type,$r)){
 		$type=$r[1];
@@ -100,8 +100,8 @@ function critere_conjoint($idb, &$boucles, $crit){
 
 	$table = $boucle->id_table;
 	$q = '('. $table . '.id_epoux=' . $type .' OR ' . $table . '.id_epouse=' . $type . ')';
-//	echo $q;
-	$boucle->where[] = $q;
+	echo $q;
+//	$boucle->where[] = $q;
 //	$boucle->where[] = '('. $table . '.id_epoux=' . $op_val .' OR ' . $table . '.id_epouse=' . $op_val . ')';
 }
 

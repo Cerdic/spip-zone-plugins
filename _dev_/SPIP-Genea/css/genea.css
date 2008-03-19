@@ -1,0 +1,16 @@
+.genea_tableau {
+	width: 100%;
+}
+
+.genea_tableau thead {
+	text-align: center;
+	background: #EAFFEA;
+}
+
+.genea_sosa {
+	color:green;
+}
+
+.genea_photos {
+	border: 8px ridge #ff6600;
+}

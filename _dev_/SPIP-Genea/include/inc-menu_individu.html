@@ -1,0 +1,19 @@
+[(#REM)
+	*********************************************************************
+	*
+	* Copyright (c) 2007-2008
+	* Xavier Burot
+	* fichier : inc-menu-individu.html
+	*
+	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	*
+	*********************************************************************
+]
+<table class="spip">
+	<tr>
+		<td><a href="[(#SELF|parametre_url{pg,general})]"[(#ENV{pg}|=={general}|?{' '}) class="on"]><:genea:general:></a></td>
+		<td><a href="[(#SELF|parametre_url{pg,unions})]"[(#ENV{pg}|=={unions}|?{' '}) class="on"]><:genea:les_unions:></a></td>
+		<td><a href="[(#SELF|parametre_url{pg,arbres})]"[(#ENV{pg}|=={arbres}|?{' '}) class="on"]><:genea:l_arborescence:></a></td>
+		<td><a href="[(#SELF|parametre_url{pg,sources})]"[(#ENV{pg}|=={sources}|?{' '}) class="on"]><:genea:les_sources:></a></td>
+	</tr>
+</table>

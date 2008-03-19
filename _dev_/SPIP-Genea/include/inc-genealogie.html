@@ -10,7 +10,7 @@
 	*********************************************************************
 ]
 <BOUCLE_genea(GENEA){id_genea ?}{id_rubrique ?}>
-[(#ENV{small}|=={oui}|?{' ', ''})
+[(#ENV{small}|=={oui}|?{' '})
 <div class="breves">
 	<h2 class="menu-titre"><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
 	<ul>
@@ -30,7 +30,7 @@
 		<li><a href="[(#URL_PAGE{genea_lst-lieux}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{lieux}|?{' '}) class="on"]><:genea:liste_des_lieux:></a></li>
 	</ul>
 </div>]
-[(#ENV{small}|!={oui}|?{' ', ''})
+[(#ENV{small}|!={oui}|?{' '})
 <div class="liste-articles">
    <h2 class="invisible"><:genea:liste_des_pages_genealogiques:></h2>
    <ul>

@@ -13,23 +13,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return; // Securite
 
 global
-	$liste_filiation,
 	$liste_civilite,
+	$liste_filiation,
+	$liste_tye_union,
 	$liste_type_evt,
-	$liste_tye_union;
-
-// -- Liste des differents types de filiation --------------------------
-$liste_filiation = array(
-	"einc",
-	"eado",
-	"eadu",
-	"eleg",
-	"eile",
-	"elem",
-	"emon",
-	"enat",
-	"erec",
-	"etro");
+	$liste_type_liens;
 
 // -- Liste des differents types de civilite utilisable ----------------
 $liste_civilite = array(
@@ -38,6 +26,25 @@ $liste_civilite = array(
 	"mme",
 	"dr",
 	"sir");
+
+// -- Liste des differents types de filiation --------------------------
+$liste_filiation = array(
+	"einc",
+	"eado",
+	"eadu",
+	"eleg",
+	"elem",
+	"emon",
+	"enat",
+	"erec",
+	"etro");
+
+// -- Liste des type d'evenements --------------------------------------
+$liste_type_union = array(
+	"marr",
+	"pacs",
+	"ulib",
+	"conc");
 
 // -- Liste des type d'evenements --------------------------------------
 $liste_type_evt = array(
@@ -89,9 +96,11 @@ $liste_type_evt = array(
 	"divf");
 
 // -- Liste des type d'evenements --------------------------------------
-$liste_type_union = array(
-	"marr",
-	"pacs",
-	"ulib",
-	"conc");
+$liste_type_liens = array(
+	"ap",
+	"te",
+	"ec",
+	"pm",
+	"fa",
+	"am");
 ?>

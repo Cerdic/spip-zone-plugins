@@ -4,7 +4,7 @@
  *
  * Copyright (c) 2007-2008
  * Xavier BUROT
- * fichier : public/genea_balises
+ * fichier : public/genea_balises.php
  *
  * Ce programme est un logiciel libre distribue sous licence GNU/GPL
  *

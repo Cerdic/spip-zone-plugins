@@ -59,11 +59,11 @@
 				<tbody>
 				<BOUCLE_individus(GENEA_INDIVIDUS){id_genea}{patronyme ?}{par patronyme, prenoms}{pagination 20}>
 					<tr>
-						<td class="sosa">[(s (#SOSA))]</td>
-						<td class="logo_genea">[(#LOGO_INDIVIDU||image_reduire{17,17})]</td>
-						<td class="logo_genea"><img src="#CHEMIN{img_pack/#SEXE.gif}" width="17" height="17" /></td>
-						<td class="logo_genea">[(#LOGO_NOTE||image_reduire{17,17})]</td>
-						<td><a href="[(#URL_PAGE{genea_individus}|parametre_url{id_individu,#ID_INDIVIDU})]" class="spip_in">[(#CIVILITE|abreviation) ][(#PATRONYME|majuscule) ][(#PRENOMS|majuscule)]</a><em>[ o (#DATE_NAISSANCE|affdate{'Y'})][(#DATE_NAISSANCE|?{' '})[(#DATE_DECES|?{' '}) &hellip; ]][ &dagger; (#DATE_DECES|affdate{'Y'})]</em></td>
+						<td class="genea_sosa">[(s (#SOSA))]</td>
+						<td class="genea_logo">[(#LOGO_INDIVIDU||image_reduire{17,17})]</td>
+						<td class="genea_logo"><img src="#CHEMIN{img_pack/#SEXE.gif}" width="17" height="17" /></td>
+						<td class="genea_logo">[(#LOGO_NOTE||image_reduire{17,17})]</td>
+						<td><INCLUDE{fond=include/inc-individu}{id_individu}{format_date='Y'}></td>
 					</tr>
 				</BOUCLE_individus>
 				</tbody>
@@ -81,7 +81,7 @@
          <INCLURE{fond=inc-rubriques}{id_rubrique}>
 
          [(#REM) Articles dans la meme rubrique ]
-         <INCLURE{fond=include/inc-genealogie}{id_genea}{individus=1}{small=oui}>
+         <INCLURE{fond=include/inc-genealogie}{id_genea}{small=oui}>
 
       </div><!-- fin navigation -->
 

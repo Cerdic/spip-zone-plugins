@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'abt' => "Vers",
 'adop' => "Adoption",
+'af' => "Ami(e) de la famille",
 'affiche_liste_arbres' => "Liste des arbres",
 'affiche_voir_arbre' => "Visualiser un arbre",
 'aft' => "Apr&egrave;s",
@@ -14,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aliasi' => "Surnomm&eacute;",
 'aliasm' => "Surnomm&eacute;",
 'anul' => "Annulation ou nullit&eacute; du mariage",
+'ap' => "Acteur principal",
 'ascendance' => "Ascendance",
 'attente_no_vide' => "Arbre en attente avec individu",
 'attente_vide' => "Arbre en attente sans individu",
@@ -57,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'div' => "Divorce",
 'divf' => "Dossier de divorce",
 'dr' => "Docteur",
+'dr_court' => "Dr.",
 'dscr' => "Description physique",
 
 // E
@@ -79,10 +82,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'etro' => "Enfant trouv&eacute;",
 'even' => "&Eacute;v&egrave;nement",
 'evenement' => "&Eacute;v&egrave;nements",
-'export_arbre' => "Export vers un fichier GEDCOM",
+'export_gedcom' => "Export vers un fichier GEDCOM",
 
 // F
 'f' => "F&eacute;minin",
+'fa' => "Membre de la famille",
 'fact' => "Fait ou caract&eacute;ristique",
 'fam' => "Famille",
 'fcom' => "Premi&egrave;re communion",
@@ -93,17 +97,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fruc' => "fructidor",
 
 // G
+'general' => "G&eacute;n&eacute;rale",
 'germ' => "germinal",
 'grad' => "Dipl&ocirc;me ou certificat",
 
 // H
 'h' => "Masculin",
+'head_debut' => "Debut des ajouts du plugin SPIP-Genea",
+'head_fin' => "Fin des ajouts du plugin SPIP-Genea",
 
 // I
 'i' => "Inconnu",
 'idno' => "Identification externe",
 'immi' => "Immigration",
-'import_arbre' => "Import d'un fichier GEDCOM",
+'import_gedcom' => "Import d'un fichier GEDCOM",
 'indi' => 'Individu',
 'individus' => "individu(s)",
 'install_err' => "Erreur d'installation !!!<br />Les tables n&eacute;cessaires n'ont pas pu &ecirc;tre install&eacute;es.",
@@ -114,6 +121,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // K
 
 // L
+'l_arborescence' => "L'arborescence",
+'les_sources' => "Les sources",
+'les_unions' => "Les unions",
 'liste_des_lieux' => "Liste des lieux",
 'liste_des_individus' => "Liste des individus",
 'liste_de_longevite' => "Pyramides des &acirc;ges",
@@ -166,6 +176,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pere' => "P&egrave;re",
 'plac' => "",
 'pluv' => "pluvi&ocircse",
+'pm' => "Parrain/Marraine",
 'prai' => "prairal",
 'precision_' => "le",
 'precision__court' => "en",
@@ -209,6 +220,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_genea' => "Syndiquer un arbre g&eacute;n&eacute;alogique",
 
 // T
+'te' => "T&eacute;moin",
 'text_pied_1' => "Cet arbre est compos&eacute; de nombreuses personnes (<i>des ascendants, des descendants, des collat&eacute;raux, des conjoints, etc.</i>). Si vous reconnaissez un membre de votre famille dans les noms cit&eacute;s dans cet arbre g&eacute;n&eacute;alogique, n'h&eacute;sitez pas &agrave; ",
 'text_pied_2' => "nous contacter",
 'texte_en_attente' => "Les arbres contenus dans cette liste sont en attente d'affectation &agrave; une rubrique. Vous pouvez tout de m&ecirc;me cr&eacute;er et g&eacute;rer des individus mais ceux-ci ne seront pas visible dans la partie publique.",

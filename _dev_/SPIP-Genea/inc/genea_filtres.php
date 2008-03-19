@@ -44,4 +44,10 @@ function majuscule($texte){
 	}
 	return implode(' ', $tampon);
 }
+
+// -- Renvoi le premier prenom d'un individu ----------------------------
+function principal($texte){
+	$mots = explode(', ', $texte);
+	return $mots[0];
+}
 ?>

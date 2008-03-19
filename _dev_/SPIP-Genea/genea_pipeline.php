@@ -27,15 +27,14 @@ function genea_ajouter_boutons($boutons_admin){
 }
 
 function genea_calculer_rubriques($flux){
-	global $table_prefix;
-	$date_tmp = getdate();
+/*	$date_tmp = getdate();
 	// Publier et dater les rubriques qui ont un arbre genealogique
-	$r = spip_query("SELECT rub.id_rubrique AS id FROM ".$table_prefix."_rubriques AS rub, ".$table_prefix."_genea AS fille	WHERE rub.id_rubrique = fille.id_rubrique GROUP BY rub.id_rubrique");
+	$r = spip_query("SELECT rub.id_rubrique AS id FROM spip_rubriques AS rub, spip_genea AS fille	WHERE rub.id_rubrique = fille.id_rubrique GROUP BY rub.id_rubrique");
 //	AND rub.date_tmp <= fille.date_heure AND fille.statut='publie'
 	echo "Calculer rubrique";
 	print_r ($row);
 	while ($row = spip_fetch_array($r))
-		@spip_query("UPDATE " . $table_prefix . "_rubriques SET statut_tmp='publie', date_tmp='".strtotime(normaliser_date($date_tmp))."' WHERE id_rubrique=".$row['id']);
+		@spip_query("UPDATE spip_rubriques SET statut_tmp='publie', date_tmp='".strtotime(normaliser_date($date_tmp))."' WHERE id_rubrique=".$row['id']);*/
 	return $flux;
 }
 
@@ -83,4 +82,16 @@ function genea_affiche_milieu($flux){
 	}
 	return $flux;
 }
+
+function genea_insert_head($flux) {
+	$flux .= '
+
+<!-- '. _T('genea:head_debut') . ' -->
+<link rel="stylesheet" href="'.direction_css(compacte(find_in_path('css/genea.css'))).'" type="text/css" media="projection, screen, tv" />
+<!-- '. _T('genea:head_fin') . ' -->
+
+';
+	return $flux;
+}
+
 ?>
