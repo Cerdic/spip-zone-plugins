@@ -73,6 +73,16 @@ function spiplistes_header_prive ($flux) {
 	$(document).ready(function(){
 		$('#opt-lien-en-tete-courrier').click( function() { $(this).toggle_options('#div-lien-en-tete-courrier') } );
 		$('#opt-ajout-tampon-editeur').click( function() { $(this).toggle_options('#div-ajout-tampon-editeur') } );
+		$('#view-spiplistes-log').toggle(function(){
+			/* demander le journal systeme */
+			$.post('" . generer_action_auteur('spiplistes_lire_console', '') . "', function(data) {
+				$('#view-spiplistes-log-box').append(data);
+			});
+			$(this).html(\""._T('spiplistes:Masquer_les_journaux_SPIPLISTES')."\");
+		},function(){
+			$('#view-spiplistes-log-box').empty();
+			$(this).html(\""._T('spiplistes:Voir_les_journaux_SPIPLISTES')."\");
+		});
 	});
 //-->
 </script>

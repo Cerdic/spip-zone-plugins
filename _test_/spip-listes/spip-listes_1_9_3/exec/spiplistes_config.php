@@ -1,23 +1,26 @@
 <?php
 
+// exec/spiplistes_config.php
+
 /******************************************************************************************/
-/* SPIP-listes est un syst�e de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique G��ale GNU publi� par la Free Software Foundation            */
+/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribu�car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but sp�ifique. Reportez-vous �la Licence Publique G��ale GNU  */
-/* pour plus de d�ails.                                                                  */
+/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
+/* pour plus de détails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir re� une copie de la Licence Publique G��ale GNU                    */
-/* en m�e temps que ce programme ; si ce n'est pas le cas, �rivez �la                  */
+/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
+/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, �ats-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
+
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$
@@ -398,18 +401,11 @@ function exec_spiplistes_config () {
 		if(!__plugin_lire_key_in_serialized_meta('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)) {
 		// si syslog non activé, on visualise les journaux de spip
 			// lien sur logs ou affiche logs
-			$page_result .=
-				($voir_logs=="oui")
-				?
-					""
-					. "<a name='logs'></a>"
-					. debut_cadre_relief("", true, "", "Logs")
-					. "<div style='width:98%;overflow:auto'>"
-					. "<pre>".spiplistes_console_lit_log("spiplistes")."</pre>\n"
-					. "</div>\n"
-					. fin_cadre_relief(true)
-				:
-					"<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE,'voir_logs=oui#logs')."'>"._T('spiplistes:Voir_les_journaux_SPIPLISTES')."</a>\n"
+			$page_result .= ""
+				. "<a id='view-spiplistes-log' name='view-spiplistes-log' href='#view-spiplistes-log' class='verdana2'>"
+					. _T('spiplistes:Voir_les_journaux_SPIPLISTES')
+					. "</a>\n"
+				. "<div id='view-spiplistes-log-box'></div>\n"
 				;
 		}
 		$page_result .= ""
@@ -422,43 +418,4 @@ function exec_spiplistes_config () {
 	
 } // exec_config()
 
-function spiplistes_console_lit_log($logname){
-	$files = preg_files(defined('_DIR_TMP')?_DIR_TMP:_DIR_SESSION ,"$logname\.log(\.[0-9])?");
-	krsort($files);
-
-	$log = "";
-	foreach($files as $nom){
-		if (lire_fichier($nom,$contenu))
-			$log.=$contenu;
-	}
-	$contenu = explode("<br />",nl2br($contenu));
-	
-	$out = "";
-	$maxlines = 40;
-	while ($contenu && $maxlines--){
-		$out .= array_pop($contenu)."\n";
-	}
-	return $out;
-}
-
-
-/******************************************************************************************/
-/* SPIP-listes est un syst�e de gestion de listes d'abonn� et d'envoi d'information     */
-/* par email  pour SPIP.                                                                  */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
-/*                                                                                        */
-/* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique G��ale GNU publi� par la Free Software Foundation            */
-/* (version 2).                                                                           */
-/*                                                                                        */
-/* Ce programme est distribu�car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
-/* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but sp�ifique. Reportez-vous �la Licence Publique G��ale GNU  */
-/* pour plus de d�ails.                                                                  */
-/*                                                                                        */
-/* Vous devez avoir re� une copie de la Licence Publique G��ale GNU                    */
-/* en m�e temps que ce programme ; si ce n'est pas le cas, �rivez �la                  */
-/* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, �ats-Unis.                   */
-/******************************************************************************************/
 ?>

@@ -447,6 +447,7 @@ liste.",
 'vous_inscrire_auteur' => 'vous inscrire en tant qu\'auteur',
 'voir_discussion' => 'Voir la discussion',
 'Voir_les_journaux_SPIPLISTES' => "Voir les journaux SPIPLISTES",
+'Masquer_les_journaux_SPIPLISTES' => "Masquer les journaux SPIPLISTES",
 'Vides' => "Vides",
 'Valider_abonnement' => "Valider cet abonnement",
 
