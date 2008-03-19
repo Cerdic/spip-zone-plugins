@@ -75,7 +75,7 @@ function spiplistes_header_prive ($flux) {
 		$('#opt-ajout-tampon-editeur').click( function() { $(this).toggle_options('#div-ajout-tampon-editeur') } );
 		$('#view-spiplistes-log').toggle(function(){
 			/* demander le journal systeme */
-			$.post('" . generer_action_auteur('spiplistes_lire_console', '') . "', function(data) {
+			$.post('" . generer_url_action('spiplistes_lire_console', '') . "', function(data) {
 				$('#view-spiplistes-log-box').append(data);
 			});
 			$(this).html(\""._T('spiplistes:Masquer_les_journaux_SPIPLISTES')."\");
