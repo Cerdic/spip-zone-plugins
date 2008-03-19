@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'correction_num_id' => 'Correction des num&eacute;ros d\'identifications des auteurs',
 'composition_article' => 'Composition d\'un article',
 'choix_agenda' => 'Choix de la rubrique Agenda',
+'configuration' => 'Configuration Publication Ouverte',
 
 // D
 
@@ -35,33 +36,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'expliq_sup_table' => 'La version 0.4 du plugin "Publication Ouverte" n\'utilise plus les tables spip_op_config et spip_op_rubriques. Si votre ancienne version du plugin &eacute;tait la 0.3 ou la 0.2.2, il vous faut supprimer totalement ces tables et refaire la configuration de votre plugin :',
-
 'expliq_transfert_auteurs' => 'La version 0.4 du plugin "Publication Ouverte" n\'utilise plus la table spip_op_auteurs pour stocker les donn&eacute;es d\'identifications des r&eacute;dacteurs, mais utilise les champs "extras" de la table spip_articles. L\'option suivante va vous permettre de mettre &agrave; jour tous les articles ayant eu un r&eacute;dacteur s\'&eacute;tant identifi&eacute; via ce syst&egrave;me. Cela vous permettra de conserver les donn&eacute;es identifications de vos r&eacute;dacteurs et donc de supprimer la table spip_op_auteurs devenue obsol&eacute;te',
-
 'expliq_num_id' => 'La version 0.3 du plugin openPublishing utilisait par d&eacute;faut l\'auteur "anonymous" portant le num&eacute;ro d\'identification 999. Cela &eacute;tait une tr&agrave;s mauvaise id&eacute;e, car pour tout auteur cr&eacute;&eacute; par la suite, l\'identification automatique d&eacute;marait &agrave; partir du num&eacute;ro 1000 ce qui pouvais causer de multiples bugs dans l\'utilisation de spip. L\'outil ci-dessous va vous permettre, si vous &ecirc;tes dans ce cas, de supprimer l\'auteur portant l\'identification 999 (le fameux auteur anonymous) et de re-donner aux auteurs portant l\'identification 1000 ou plus leur v&eacute;ritable num&eacute;ro id.',
-
 'expliq_rubrique_op' => 'Lorsqu\'un r&eacute;dacteur utilise le formulaire de publication ouverte, Il poura choisir de ranger son article parmis les rubriques que vous lui proposez. Pour choisir ces rubriques, cochez les dans la liste ci-dessus.',
-
 'expliq_rubrique_squelette' => 'Dans votre squelette, pour lister toutes vos rubriques "Publication ouverte", vous pouvez utiliser le crit&eacute;re {openPublishing} dans une boucle RUBRIQUES',
-
 'expliq_auteur_anonyme' =>'L\'auteur "anonyme" est l\'auteur au nom du quel les r&eacute;dacteurs publieront leurs articles. Cr&eacute;ez cet auteur dans votre liste d\'auteur (remplissez uniquement le champ "Signature" et laissez son statut en "r&eacute;dacteur"), puis selectionnez le ci-dessous.',
-
 'expliq_auteur_squelette' => 'Afin de r&eacute;cup&eacute;rer les donn&eacute;es d\'identification du r&eacute;dacteur, vous pouvez utiliser dans une boucle ARTICLES la balise EXTRA avec le filtre OP_pseudo ou OP_mail.',
-
 'expliq_composition_article' => 'Un article peut &ecirc;tre compos&eacute; de plusieurs champs qui ne sont pas forc&eacute;ment utilis&eacute; par tous les sites. Vous pouvez donc activer ou pas les champs ci-dessous. L\'espace de r&eacute;daction ne proposera aux r&eacute;dacteurs que les champs coch&eacute;s (ainsi qu\'&eacute;videmment le titre et le texte de l\'article).',
-
 'expliq_options' => 'Ces options permettre d\'&eacute;tendre ou de restreindres les fonctionnalit&eacute;es du plugin "Publication Ouverte". Les options coch&eacute;es seront disponibles dans l\'espace de r&eacute;daction',
-
 'expliq_agenda' => 'Si vous cochez cette option, le plugin "Publication Ouverte" proposera aux r&eacute;dacteurs de publier leurs articles sous forme de "date" dans l\'agenda. Il s\'agit en r&eacute;alit&eacute; de publier le contenu de l\'article sous forme de br&egrave;ve dans une rubrique sp&eacute;cifique.',
-
 'expliq_statut' => 'Une fois que le r&eacute;dacteur a valid&eacute; son article, celui-ci apparaitra dans l\'espace priv&eacute;e de votre site avec le statut suivant :',
-
 'expliq_posttraitement' => 'Il s\'agit içi d\'effectuer des traitements de protection sur l\'article. Ces options s\'appliqueront apr&eacute;s la validation de l\'article par le r&eacute;dacteur.',
-
 'expliq_renvois' => 'Lorsqu\'un r&eacute;dacteur valide un article ou abandonne, le formulaire affiche un message et redirige le r&eacute;dacteur au bout de quelques secondes vers une autre page du site. Les options ci-dessous permettent de configurer cela. Attention, il faut indiquer des urls de type : « /spip.php?page=ma_page », le plugin compl&eacute;tera automatiquement l\'url.',
-
 'exemple_trois_auteurs' => 'Exemple avec trois auteurs :',
-
 'expliq_balise' => 'le code donn&eacute; en-dessous de votre image est a placer dans le texte de votre article si vous souhaitez inclure l\'image ou la vignette du document dans votre texte (right, center, left renseigne l\'alignement que prendra votre image  ou vignette).',
 
 // G
@@ -81,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'option_tagmachine' => 'Permettre aux r&eacute;dacteurs d\'utiliser le plugin tag-machine',
 'option_document' => 'Permettre aux r&eacute;dacteurs d\'inclure des documents dans l\'article',
 'option_logo' => 'Permettre aux r&eacute;dacteurs d\'inclure un logo &agrave; l\'article',
+'op_base_titre' => 'openPublishing : base de donn&eacute;e',
 
 // P
 'premiere_fois' => 'C\'est la premi&egrave;re fois que vous installez le plugin "Publication Ouverte" (anciennement openPublishing), et vous l\'utilisez pour la premi&egrave;re fois.',
@@ -122,7 +110,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_statut_op' => 'Statut des articles apr&egrave;s la r&eacute;daction',
 'titre_posttraitement' => 'Post-traitement des articles',
 'titre_renvois' => 'Gestion des renvois',
-'transfert_auteurs' => 'Mettre &agrave; jours les champs extra de la table spip_articles, a partir des informations de la table spip_op_auteurs.',
+'transfert_auteurs' => 'Mettre &agrave; jours les champs extra de la table spip_articles.',
+'transfert_auteurs_suite' => '(&agrave; partir des informations de la table spip_op_auteurs).',
 
 'transfert_auteurs_ok' => 'Si l\'op&eacute;ration c\'est bien d&eacute;roul&eacute;e, vous pouvez maintenant supprimer la table obsol&eacute;te.',
 

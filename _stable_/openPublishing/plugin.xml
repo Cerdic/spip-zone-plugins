@@ -22,9 +22,11 @@ _ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 		{{Procedure de d&#233;-installation : }} <br />
 		
 		{{Procedure de mise &agrave; jour : }} <br />
+		Pour passer de openPublishing 0.3 à Publication Ouverte :
+		Utilisez le liens "mise &#224; jour" ci-dessous, et suivez les instructions.
 		
 	</description>
-	<lien>[Documentation->http://edd.lautre.net/wiki], et [Configuration->.?exec=cfg&amp;cfg=op]</lien>
+	<lien>[Documentation->http://www.spip-contrib/PublicationOuverte], [Configuration->.?exec=cfg&amp;cfg=op], [mise &#224; jour->.?exec=op_base]</lien>
 	<prefix>op</prefix>
 	<options>
 		op_options.php
@@ -32,4 +34,5 @@ _ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	<fonctions>
 		op_fonctions.php
 	</fonctions>
+	<necessite id='cfg' version='[1.3.7;]' />
 </plugin>
