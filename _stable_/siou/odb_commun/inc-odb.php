@@ -137,10 +137,28 @@ function getBddConf($conf='') {
 	return $tBddConf;
 }
 
+/** Recupere le nom complet SPIP correspondant a l'identifiant SPIP $login 
+ */
 function getNomComplet($login) {
 	$sql="SELECT nom FROM spip_auteurs WHERE login='$login'";
 	$result=odb_query($sql,__FILE__,__LINE__);
 	$nom=mysql_result($result,0,0);
 	return $nom;
 }
+
+/** Leve l'anonymat pour le jury choisi
+ * 
+ * @param string $annee
+ * @param int jury
+ * @return boolean : true si l'anonymat a ete leve, false si rien n'a change en base
+ */
+function leveeAnonymat($annee, $jury) {
+	$sql="UPDATE odb_notes notes,odb_repartition rep SET notes.id_table=rep.id_table\n"
+	." WHERE notes.annee=$annee and rep.annee=$annee and rep.jury=$jury"
+	." AND notes.id_anonyme=DECODE(rep.id_anonyme,'".getParametresODB('code')."')";
+	odb_query($sql,__FILE__,__LINE__);
+	if(mysql_affected_rows()>0) return true;
+	else return false;
+}
+
 ?>

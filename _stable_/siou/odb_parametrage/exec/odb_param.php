@@ -54,11 +54,19 @@ if(isset($_POST['ok'])) {
 				$tTmp=explode('|',$key);
 				$jury=$tTmp[1];
 				$tDelib[$delib][$jury]=$jury;
+				if(leveeAnonymat($annee,$jury)) $tJurysOK[]=$jury;
 			}
 		}
 		$sql="REPLACE into odb_param (param, valeur) VALUES ('_delib".$delib."_$annee',COMPRESS('".serialize($tDelib[$delib])."'))";
 		//echo $sql;
 		odb_query($sql,__FILE__,__LINE__);
+		$msg.='<small>'.OK." - </b> Modifications enregistr&eacute;es pour la 1<sup>&egrave;re</sup> d&eacute;lib&eacute;ration $annee<br/>";
+		if(count($tJurysOK)>0) {
+			asort($tJurysOK);
+			$msg.=OK.' - Anonymat lev&eacute; pour les jurys '.join(', ',$tJurysOK)."</small><br/>\n";
+			odb_maj_decisions($annee);
+		}
+		$msg.="</small>\n";
 	}
 }
 
@@ -121,7 +129,7 @@ $centre=isset($_REQUEST['centre'])?$_REQUEST['centre']:0;
 $vider=isset($_REQUEST['vider'])?$_REQUEST['vider']:'';
 $reset=isset($_REQUEST['reset'])?$_REQUEST['reset']:'';
 $action=isset($_REQUEST['action'])?$_REQUEST['action']:'';
-$msg="Choisissez une action ci-dessous";
+if($msg=='') $msg="Choisissez une action ci-dessous";
 
 if($vider!='') {
    switch($vider) {
@@ -468,7 +476,7 @@ debut_droite();
             	$msg="<h1>Lev&eacute;e de l'anonymat</h1>\nCochez les jurys dont l'anonymat doit &ecirc;tre lev&eacute;.<br/>\nLes listes seront automatiquement disponibles dans l'espace de saisie des notes, accessible aux op&eacute;rateurs de saisie.";
             	if(is_array($tDelib)) {
 						$msg.=odb_table_matieres(array_keys($tDelib));
-						$msg.="<form name='form_delib' action='".generer_url_ecrire('odb_param')."' METHOD='POST'>\n";
+						$msg.="<form name='form_delib' action='".generer_url_ecrire('odb_param')."' METHOD='POST' onSubmit=\"return confirm('ATTENTION !\\n- Avez-vous entre le BON MOT DE PASSE ?\\n\\nCliquez sur [Annuler] et mettez le bon mot de passe si tel n\'est pas le cas');\">\n";
 						foreach($tDelib as $deliberation=>$tJurys) {
 							asort($tJurys);
 							$msg.="<A name='".getRewriteString($deliberation)."'></A>\n<h2>$deliberation</h2>\n".

@@ -228,7 +228,7 @@ function odb_maj_decisions($annee,$jury=0,$iPrecision=3,$deliberation=1) {
 		}
 		$sql="UPDATE odb_decisions notes $from_jury SET delib3='Reserve'\n where delib2='Reserve' and delib1='Admissible' $where_jury";
 		odb_query($sql,__FILE__,__LINE__);
-		//echo mysql_affected_rows()." lignes :<pre>$sql</pre>\n";
+		return mysql_affected_rows();
 
 	} else die(KO." - Deliberation inattendue : $deliberation");
 }
