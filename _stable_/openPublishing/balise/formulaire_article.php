@@ -46,19 +46,19 @@ if(!$config['IDAuteur']) return _T('opconfig:erreur_die');
 
 /* récapitulatif des pipelines :
 
-pub_environnement
+OP_environnement
 -----------------
 
 ce pipeline permet aux plugins d'ajouter des variables d'environnement
 
-pub_pre_validation
+OP_pre_validation
 ------------------
 
 ce pipeline permet aux plugins d'effectuer des traitements avant la validation
 p.e : traitements typographiques sur le texte
 
 
-pub_validation
+OP_validation
 --------------
 	
 ce pipeline permet aux plugins d'effectuer une validation "alternative"
@@ -68,14 +68,14 @@ IMPORTANT : tester le flag_valider, il ce peut qu'un autre plugin le mette à tr
 IMPORTANT : tester sa variable action .. sinon le process se déroulera si on clique sur un autre bouton
 
 
-pub_action
+OP_action
 ----------
 
 ce pipeline permet aux plugins d'effectuer les traitements sur les variables.
 pourra contenir des manipulations de la base de donnée, etc ..
 IMPORTANT : toujours commencer par un test sur sa variable action !
 
-pub_squelette
+OP_squelette
 --------------
 ce pipeline permet aux plugins de calculer leur formulaire.
 IMPORTANT : toujours commencer par un test sur sa variable de configuration
@@ -147,7 +147,7 @@ $variables['type']['chapo'] = 'texte';
 
 // création pipeline variables d'environnement
 // ce pipeline permet aux plugins d'ajouter des actions et/ou des champs
-$variables = pipeline('pub_environnement', array(
+$variables = pipeline('OP_environnement', array(
 			'args'=>array('pub_ouverte'=>'pub_ouverte'),
 			'data'=>$variables
 			));
@@ -197,6 +197,14 @@ foreach ($variables['champs_aux'] as $key => $champ) {
 
 // Action Abandonner
 if (!empty($variables['actions']['abandonner'])) {
+
+	// création pipeline abandon
+	// ce pipeline permet aux plugins d'ajouter traitement en cas d'abandon
+	// par exemple, supressions de la base de donnée des enregistrements temporaires
+	$variables = pipeline('OP_abandon', array(
+				'args'=>array('pub_ouverte'=>'pub_ouverte'),
+				'data'=>$variables
+				));
 
 	// suppression des enregistrements éventuellement créé dans la table spip_mot_article
 	if($variables['champs_pri']['id_article'])
@@ -260,7 +268,7 @@ if(!empty($variables['actions']['valider'])) {
 	// création pipeline pre_validation
 	// ce pipeline permet aux plugins d'effectuer des traitements avant la validation
 	// p.e : traitement typographique sur le texte
-	$variables = pipeline('pub_pre_validation', array(
+	$variables = pipeline('OP_pre_validation', array(
 				'args'=>array('pub_ouverte'=>'pub_ouverte'),
 				'data'=>$variables
 				));
@@ -292,7 +300,7 @@ if(!empty($variables['actions']['valider'])) {
 	// IMPORTANT ; ne surtout pas oublier de mettre le flag_valider à true, sinon on embraye sur les autres types de validation
 	// IMPORTANT : tester le flag_valider, il ce peut qu'un autre plugin le mette à true avant :)
 	// IMPORTANT : tester sa variable action .. sinon le process se déroulera si on clique sur un autre bouton
-	$variables = pipeline('pub_validation', array(
+	$variables = pipeline('OP_validation', array(
 				'args'=>array('pub_ouverte'=>'pub_ouverte'),
 				'data'=>$variables
 				));
@@ -535,7 +543,7 @@ $statut="prepa";
 // ce pipeline permet aux plugins d'effectuer les traitements sur les variables.
 // IMPORTANT : toujours commencer par un test sur sa variable action !
 // pourra contenir manipulation de la base de donnée, etc ..
-$variables = pipeline('pub_action', array(
+$variables = pipeline('OP_action', array(
 			'args'=>array('pub_ouverte'=>'pub_ouverte'),
 			'data'=>$variables
 			));

@@ -23,4 +23,6 @@ $GLOBALS['spip_pipeline']['OP_environnement']='';
 $GLOBALS['spip_pipeline']['OP_action']='';
 $GLOBALS['spip_pipeline']['OP_pre_validation']='';
 $GLOBALS['spip_pipeline']['OP_validation']='';
+$GLOBALS['spip_pipeline']['OP_abandon']='';
+
 ?>

@@ -31,5 +31,10 @@ function balise_AGENDA($p) {
 	return $p;
 }
 
+/* indispensable lorsque aucun plugin ne viens ce brancher. renvoie une chaine vide
+   ce n'est pas propre ... mais bon.*/
+function op_OP_squelette($flux) {
+	return '';
+}
 
 ?>
