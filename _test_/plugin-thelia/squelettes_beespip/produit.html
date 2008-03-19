@@ -25,7 +25,7 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
   <div id="centre2colschemin_[(#CONFIG{menu_vertical})]">
     <div class="colssup2">&nbsp;</div>
     <div class="colschemin"><span class="chemin"><BOUCLE_chemin(HIERARCHIE){id_article}>
-    	   &raquo;&nbsp; <:spipthelia:boutique:> &raquo;&nbsp;<THELIA_chemrub type="CHEMIN" rubrique="THELIA-RUBRIQUE_ID">
+    	   &raquo;&nbsp; <:spipthelia:boutique:> <THELIA_chemrub type="CHEMIN" rubrique="THELIA-RUBRIQUE_ID">
 			<THELIA_rubdetchem type="RUBRIQUE" id="THELIA-ID">
 			 &raquo;&nbsp; <a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-ID}" class="LIEN_chemin">THELIA-TITRE</a> 
 			</THELIA_rubdetchem>
@@ -51,16 +51,8 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
                
               		<div class="espacebloc">&nbsp;</div>
 
+		
 				
-
-			
-				[(#REM) Titre du produit ]
-
-				<div class="titrePage">
-				<h1>THELIA-TITRE</h1>
-				</div>
-
-			
 				[(#REM) Détail du produit ]
 
 				<div>
@@ -93,19 +85,20 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
 						<//T_caracteristique>
 						<T_declinaisons>
 						<div class="declinaisonProduit">
-							<THELIA_declinaisons type="DECLINAISON" produit="THELIA-ID">
-								THELIA-TITRE : <select name="declinaisonTHELIA-ID"  onChange="if ($(this).val()!='') $('form#formAjouter').find('.LIEN_commander').css('visibility','visible'); else $('form#formAjouter').find('.LIEN_commander').css('visibility','hidden');">
-									<option value=""><:spipthelia:votre_choix:></option>
-									<THELIA_decldisp type="DECLIDISP" declinaison="THELIA-ID">
-										<option value="THELIA-ID">THELIA-TITRE</option>
-									</THELIA_decldisp>
-								</select>		 		
-							</THELIA_declinaisons>
+						<THELIA_declinaisons type="DECLINAISON" produit="THELIA-ID">
+							THELIA-TITRE : 
+							<select name="declinaisonTHELIA-ID" onChange="if ($(this).val()!='') $('form#formAjouterTHELIA-PRODUIT').find('.LIEN_commander').removeAttr('disabled'); else $('form#formAjouterTHELIA-PRODUIT').find('.LIEN_commander').attr('disabled','disabled');">
+								<option value=""><:spipthelia:votre_choix:></option>
+								<THELIA_decldisp type="DECLIDISP" declinaison="THELIA-ID">
+								<option value="THELIA-ID">THELIA-TITRE</option>
+								</THELIA_decldisp>
+							</select>		 		
+						</THELIA_declinaisons>
 						</div>
 						<script type="text/javascript">
-							$(document).ready(function(){
-								$("form#formAjouter").find('.LIEN_commander').css('visibility','hidden');
-							});
+						$(document).ready(function(){
+							$("form#formAjouterTHELIA-ID").find('.LIEN_commander').attr('disabled','disabled');
+						});
 						</script>
 						</T_declinaisons>
 						<//T_declinaisons>

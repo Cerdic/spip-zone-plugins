@@ -175,30 +175,38 @@ include '#CHEMIN{beespip_inc_layer.php}';
 
 
 <T_rubriquesthelia>
-<div class="rubriques">
-<div class="button">
-<span class="buttonlabel">
-</span>
-<b>
-	<:spipthelia:boutique:>
-</a>
-</b>
-</div>
-
-<divclass="menu" style="display: block;">
-<THELIA_rubriquesthelia type="RUBRIQUE" parent="0">
-	<div class="menuItem">
-		<img longdesc="" alt="" title="" src="plugins/beespip/themes/jaune_beige/images-interface/puce.gif"/>
-			<a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}">THELIA-TITRE</a>
-			<ul>
-			<THELIA_sous_rubriques type="RUBRIQUE" parent="THELIA-ID">
-				<li><a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}">THELIA-TITRE</a></li>
-			</THELIA_sous_rubriques>
-			</ul>
+	<div class="button">
+	<?php echo bouton_block_visible2('rubthelia'); ?><b>
+		<a href="#"><:spipthelia:boutique:></a>
+	</b>
 	</div>
-</THELIA_rubriquesthelia>
-<div style="clear: both;"/>
-</div>
+
+	<div id="BeeLayer3" class="menu" style="display: block;">
+		<THELIA_rubriquesthelia type="RUBRIQUE" parent="0">
+		<div class="menuItem">
+			<img longdesc="" alt="" title="" src="plugins/beespip/themes/jaune_beige/images-interface/puce.gif"/>
+				<a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}">THELIA-TITRE</a>
+				<THELIA_sous_rubriques type="RUBRIQUE" parent="THELIA-ID">
+					</br><a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}">THELIA-TITRE</a>
+				</THELIA_sous_rubriques>
+			
+		</div>
+		</THELIA_rubriquesthelia>
+
+		[(#REM) afficher lesproduits sans rubrique ]
+		<THELIA_produitsthelia type="PRODUIT" rubrique="0" profondeur="1">
+		<div class="menuItem">
+			<img longdesc="" alt="" title="" src="plugins/beespip/themes/jaune_beige/images-interface/puce.gif"/>
+				<a href="#URL_PAGE{produit,ref=THELIA-REF}">THELIA-TITRE</a>
+				
+		</div>
+		</THELIA_produitsthelia>
+
+		<div style="clear: both;"/>
+	</div>
+
+
+
 </T_rubriquesthelia>
 <//T_rubriquesthelia>
 </div>
