@@ -117,8 +117,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'reglement_virement_message' => 'Nous vous remercions de la confiance que vous nous accordez.<br />
 			Un email recapitulatif de votre commande vous a &eacute;t&eacute; envoy&eacute; &agrave; l\'adresse: THELIA-CLIENT_EMAIL.<br />
 			Votre commande sera valid&eacute;e par nos services &agrave; r&eacute;ception de votre paiement.<br /><br />
-			Ecrire ici les infos sur le r&eacute;glement par virement ...<br /><br />
-			'
+			Ecrire ici les infos sur le r&eacute;glement par virement ...<br /><br />',
+'panier_vide' => 'Votre panier est vide',
+'panier_contient' => 'Votre panier contient THELIA-PANIER_NBART article(s).',
+'boutique' => 'Boutique',
+'site_realise_avec_spip' => 'Site r&eacute;alis&eacute; avec T&eacute;lia',
+'et' => 'et',
+'plugin_thelia' => 'avec le plugin Th&eacute;lia pour SPIP'
 
 
 
