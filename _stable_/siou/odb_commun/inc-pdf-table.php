@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_GET['reset'])) session_destroy();
+//if(isset($_GET['reset'])) session_destroy();
 //on rcupere le tableau  afficher, $data, dans la session
 //tableau de la forme $data[$num_row]=$row
 $pdfG=$_GET['pdf'];
