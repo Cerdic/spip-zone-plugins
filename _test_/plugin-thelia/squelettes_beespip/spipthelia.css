@@ -57,7 +57,7 @@
 }
 
 .contourImage {
-	border: 1px dashed #cccccc;
+	border: 1px solid #cccccc;
 	margin-bottom: 5px;
 	float: left;
 }
@@ -232,6 +232,7 @@ a.LIEN_pages:hover {
 #monCompte h3, #monPanier h3 {
 	color: white;
 	margin-bottom: 3px;
+	margin-top: 7px;
 }
 #monCompte input.LIEN_entete {
 	background: none;
@@ -304,4 +305,7 @@ a.LIEN_pages:hover {
 	padding-right: 0;
 	padding-bottom: 0;
 	padding-left: 0;
+}
+.titre-boutique-thelia {
+	color: #4c93b6;
 }

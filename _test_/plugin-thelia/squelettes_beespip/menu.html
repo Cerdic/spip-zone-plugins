@@ -173,18 +173,19 @@ include '#CHEMIN{beespip_inc_layer.php}';
     ?>
   </BOUCLE_rubriques>
 
-
+  
+</B_rubriques>
+<p />
 <T_rubriquesthelia>
 	<div class="button">
-	<?php echo bouton_block_visible2('rubthelia'); ?><b>
-		<a href="#"><:spipthelia:boutique:></a>
-	</b>
+		<?php echo bouton_block_visible2('rub#9999'); ?><b class="titre-boutique-thelia">
+			<:spipthelia:boutique:>
+		</b>
 	</div>
-
-	<div id="BeeLayer3" class="menu" style="display: block;">
+	<?php echo debut_block_visible2('rub#9999'); ?>
 		<THELIA_rubriquesthelia type="RUBRIQUE" parent="0">
 		<div class="menuItem">
-			<img longdesc="" alt="" title="" src="plugins/beespip/themes/jaune_beige/images-interface/puce.gif"/>
+			<img longdesc="" alt="" title="" src="#CHEMIN{themes}/[(#CONFIG{beespip_theme})]/images-interface/puce.gif"/>
 				<a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}">THELIA-TITRE</a>
 				<THELIA_sous_rubriques type="RUBRIQUE" parent="THELIA-ID">
 					</br><a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-ID}">THELIA-TITRE</a>
@@ -203,15 +204,14 @@ include '#CHEMIN{beespip_inc_layer.php}';
 		</THELIA_produitsthelia>
 
 		<div style="clear: both;"/>
+	<?php
+        echo fin_block2('rub#ID_RUBRIQUE');
+      	?>
 	</div>
-
-
-
 </T_rubriquesthelia>
 <//T_rubriquesthelia>
-</div>
-</B_rubriques>
-<p />
+
+<p/>
 
 <div style="text-align:center;">
                 <?php
