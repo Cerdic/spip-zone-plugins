@@ -1,54 +1,54 @@
 <?php
-
-/*
- * Plugin CFG pour SPIP
- * (c) toggg 2007, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
- *
- */
-
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier sur la zone **
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
-$GLOBALS['i18n_cfg_fr'] = array(
+	// C
+	'cfg' => 'CFG',
+	'choisir_module_a_configurer' => 'Choisissez le module &agrave; configurer.',
+	'config_enregistree' => 'Enregistrement de <b>@nom@</b> effectu&eacute;',
+	'config_supprimee' => 'Suppression de <b>@nom@</b> effectu&eacute;',
+	'configuration_modules' => 'Configuration des modules',
 
-// boutons validation
-'ok' => 'OK',
-'reset' => 'Effacer',
-'supprimer' => 'Supprimer',
+	// E
+	'erreur_enregistrement' => 'Une erreur est survenue lors de l\'enregistrement de <b>@nom@</b>',
+	'erreur_lecture' => 'Impossible de lire @nom@',
+	'erreur_open_w_fichier' => 'Impossible d\'ouvrir le fichier @fichier@ en &eacute;criture',
+	'erreur_suppression' => 'Une erreur est survenue lors de la suppression de <b>@nom@</b>',
+	'extraarticles' => 'Exemple de champ extra sur un article',
 
-// liens des fonds CFG
-'testsimple' => 'Exemple simple',
-'testclassic' => 'Exemple m&eacute;ta classique',
-'testmulti' => 'Exemple entr&eacute;es multiples',
-'testtable' => 'Exemple sur champs d\'une table sql',
-'testphp' => 'Exemple de stockage php',
-'testinclure' => 'Exemple d\'inclusion de squelette',
-'testcasier' => 'Exemple de casier',
-'testauteur' => 'Exemple sur champ extra/cfg de la table auteur',
-'extraarticles' => 'Exemple de champ extra sur un article',
+	// I
+	'id_manquant' => 'Identifiant manquant',
 
-// textes cfg
-// C
-'cfg' => 'CFG',
-'choisir_module_a_configurer' => 'Choisissez le module &#224; configurer.',
-'configuration_modules' => 'Configuration des modules',
-'config_enregistree' => 'Enregistrement de <b>@nom@</b> effectu&eacute;', 
-'config_supprimee' => 'Suppression de <b>@nom@</b> effectu&eacute;e',
-// E
-'erreur_lecture' => 'Impossible de lire @nom@',
-'erreur_enregistrement' => 'Une erreur est survenue lors de l\'enregistrement de <b>@nom@</b>',
-'erreur_open_w_fichier' => 'Impossible d\'ouvrir le fichier @fichier@ en &eacute;criture',
-'erreur_suppression' => 'Une erreur est survenue lors de la suppression de <b>@nom@</b>',
-// I
-'id_manquant' => 'Identifiant manquant',
-// N
-'nom_table_manquant' => 'Nom de la table SQL manquant',
-'nouveau' => 'Nouveau',
-// P
-'pas_de_changement' => 'Pas de changement dans <b>@nom@</b>',
-'pas_de_champs_dans' => 'Aucun champs trouv&eacute; dans @nom@'
+	// N
+	'nom_table_manquant' => 'Nom de la table SQL manquant',
+	'nouveau' => 'Nouveau',
 
+	// O
+	'ok' => 'OK',
+
+	// P
+	'pas_de_champs_dans' => 'Aucun champs trouv&eacute; dans @nom@',
+	'pas_de_changement' => 'Pas de changement dans <b>@nom@</b>',
+
+	// R
+	'reset' => 'Effacer',
+
+	// S
+	'supprimer' => 'Supprimer',
+
+	// T
+	'testauteur' => 'Exemple sur champ extra/cfg de la table auteur',
+	'testcasier' => 'Exemple de casier',
+	'testclassic' => 'Exemple m&eacute;ta classique',
+	'testinclure' => 'Exemple d\'inclusion de squelette',
+	'testmulti' => 'Exemple entr&eacute;es multiples',
+	'testphp' => 'Exemple de stockage php',
+	'testsimple' => 'Exemple simple',
+	'testtable' => 'Exemple sur champs d\'une table sql'
 );
 
 ?>
