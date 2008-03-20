@@ -1,471 +1,231 @@
 <?php
-#----------------------------------------------------------#
-#  Plugin  : spipbb - Licence : GPL                        #
-#  File    : spipbb_fr : fichier de langue                 #
-#  Authors : Chryjs, 2007 et als                           #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
-#  Contact : chryjs!@!free!.!fr                            #
-#----------------------------------------------------------#
-
-// This is a SPIP-forum module file  --  Ceci est un fichier module de SPIP-forum
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier sur la zone **
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// A
+	// A
+	'abo' => 'Abonnements&nbsp;',
+	'admbouger' => 'Bouger ce sujet',
+	'admbouger_forum' => 'Bouger ce forum',
+	'admclore' => 'Fermer ce sujet',
+	'admclore_forum' => 'Fermer ce forum',
+	'admeffacer' => 'Supprimer ce sujet',
+	'admeffacer_forum' => 'Supprimer ce forum',
+	'admfermer' => 'a ferm&amp;eacute; l\'article/forum&nbsp;:',
+	'admseparer' => 'Diviser ce sujet',
+	'admseparer_forum' => 'Diviser ce forum',
+	'admsurveiller' => 'Surveiller ce sujet',
+	'admsurveiller_forum' => 'Surveiller ce forum',
+	'aecrit' => 'a &amp;eacute;crit&nbsp;',
+	'annonce' => 'Annonce',
+	'anonyme' => 'Anonyme',
+	'article_forum' => '&nbsp;Article / Forum<br />',
+	'aucun' => 'aucun !',
+	'avatar' => 'Avatar',
 
-// Les menus d'admin
-'admin_cat_01_general' => 'Administration',
-'admin_cat_outils' => 'Outils',
-'admin_cat_spam' => 'Anti Spam',
-'admin_action_01_configuration' => 'Configuration',
-'admin_action_02_etat' => 'Etat des forums',
-'admin_action_effacer' => 'Messages rejet&eacute;s',
-'admin_action_fromphpbb' => 'Import de PhpBB',
-'admin_action_fromphorum' => 'Import de Phorum',
-'admin_action_gere_ban' => 'Gestion des bans',
-'admin_action_gestion' => 'Gestion',
-'admin_action_inscrits' => 'Membres',
-'admin_action_swconfig' => 'Configuration',
-'admin_action_swforum' => 'Posts marqu&eacute;s',
-'admin_action_swlog' => 'Log du spam',
-'admin_action_swwords' => 'Gestion des mots',
-'admin_action_ZZ_debug' => 'Debogage',
+	// B
+	'bio' => 'Petite biographie',
+	'bonjour' => 'Bonjour,',
 
-'admin_titre_page_spipbb_admin' => 'Gestion des forums',
-'admin_titre_page_spipbb_admin_anti_spam_config' => 'Configuration g&eacute;n&eacute;rale du filtrage du spam',
-'admin_titre_page_spipbb_admin_anti_spam_forum' => 'Posts marqu&eacute;s',
-'admin_titre_page_spipbb_admin_anti_spam_log' => 'Log du spam',
-'admin_titre_page_spipbb_admin_anti_spam_words' => 'Filtrage de mots',
-'admin_titre_page_spipbb_admin_debug' => 'Debogage',
-'admin_titre_page_spipbb_admin_etat' => 'SpipBB - Administration - R&eacute;capitulatif',
-'admin_titre_page_spipbb_admin_fromphpbb' => 'Import de PhpBB',
-'admin_titre_page_spipbb_admin_fromphorum' => 'Import de Phorum',
-'admin_titre_page_spipbb_admin_gere_ban' => 'Gestion du banissement',
-'admin_titre_page_spipbb_configuration' => 'Configuration de SpipBB',
-'admin_titre_page_spipbb_effacer' => 'Gestion des messages rejet&eacute;s',
-'admin_titre_page_spipbb_inscrits' => 'Gestion des membres',
+	// C
+	'categorie' => 'Cat&amp;eacute;gorie',
+	'champsobli' => 'Les champs marqu&amp;eacute;s d\'un * sont obligatoires.',
+	'citer' => 'Citer',
+	'click' => 'cliquez ici',
+	'connecte' => 'Une fois connect&amp;eacute;, vous pouvez modifer votre mot de passe ou vos informations personnelles &amp;agrave; l\'adresse&nbsp;',
+	'connexion' => 'Veuillez entrer votre nom d\'utilisateur et votre mot de passe pour vous connecter.',
+	'contact' => 'Contact',
+	'courrier' => '<p>Apr&amp;egrave;s l\'&amp;eacute;tape d\'enregistrement, votre identifiant personnel vous parviendra rapidement par courrier &amp;eacute;lectronique.</p>',
+	'credits' => 'R&amp;eacute;alis&amp;eacute; avec <a href=http://www.spip.net class=copyright>SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> par <a href=http://www.laprise.org/>James aka Klik&amp;eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> et <a href=http://www.missmopi.net/>Nad&amp;egrave;ge aka Miss Mopi</a> (logos de St&amp;eacute;phane)',
+	'credits_bis1' => 'GAFoSPIP v.&nbsp;',
+	'credits_bis2' => 'Ao&amp;ucirc;t 2005',
+	'credits_bis3' => 'Adapt&amp;eacute; pour, et, Inspir&amp;eacute; par, le traitement des Forums de&nbsp;:<br />',
+	'credits_bis4' => '(James, BoOz, Nikau et Miss Mopi).',
+	'creer_forum' => 'Cr&amp;eacute;er Nouveau Forum',
 
-// Interface d'admin
-'admin_afficher_bouton_alerte_abus' => 'Afficher les boutons alerte Abus',
-'admin_affichier_bouton_rss' => 'Afficher les boutons RSS',
-'admin_age_forum' => 'Age du forum Ans/mois',
-'admin_avatar_affiche' => 'Accepter et afficher les avatars (oui par d&eacute;faut en prem install)',
-'admin_avatar_taille_sujet' => 'Taille des avatars (en pixels) sur page sujets',
-'admin_avatar_taille_contact' => 'Taille des avatars (en pixels) sur page contact',
-'admin_avatar_taille_profil' => 'Taille des avatars (en pixels) sur page profil',
-'admin_average_posts'=> 'Moyenne de messages/jour',
-'admin_average_users' => 'Moyenne d\'inscriptions/jour',
-'admin_ban_user' => 'Gestion des login bannis',
-'admin_ban_user_info' => 'Vous pouvez bannir plusieurs utilisateurs en une fois en utilisant la combinaison CTRL ou MAJ avec la souris ou le clavier',
-'admin_ban_user_none' => 'Aucun utilisateur',
-'admin_unban_user_info' => 'Vous pouvez d&eacute;bannir plusieurs utilisateurs en une fois en utilisant la combinaison CTRL ou MAJ avec la souris ou le clavier',
-'admin_ban_ip' => 'Gestion des adresses IP bannies',
-'admin_ban_ip_info' => 'Pour sp&eacute;cifier plusieurs IP ou noms de serveurs diff&eacute;rents, s&eacute;parez-les par des virgules. Pour sp&eacute;cifier un intervalle d\'adresses IP, s&eacute;parez le d&eacute;but et la fin avec un trait d\'union (-), pour sp&eacute;cifier un joker, utilisez une &eacute;toile (*)',
-'admin_ban_ip_none' => 'Aucune adresse bannie',
-'admin_unban_ip_info' => 'Vous pouvez d&eacute;bannir plusieurs adresses en une fois en utilisant la combinaison CTRL ou MAJ avec la souris ou le clavier',
-'admin_ban_email' => 'Gestion des adresses email bannies',
-'admin_ban_email_info' => 'Pour sp&eacute;cifier plus d\'une adresse e-mail, s&eacute;parez-les par des virgules. Pour sp&eacute;cifier un joker pour le nom d\'utilisateur, utilisez * ; par exemple *@hotmail.com',
-'admin_ban_email_none' => 'Aucune adresse bannie',
-'admin_unban_email_info' => 'Vous pouvez d&eacute;bannir plusieurs adresses en une fois en utilisant la combinaison CTRL ou MAJ avec la souris ou le clavier',
-'admin_config_prerequis' => 'Pr&eacute;requis',
-'admin_config_spam_words' => 'Configuration de l\'anti-spam',
-'admin_config_spipbb' => 'Activation de SpipBB',
-'admin_config_spipbb_info' => 'Cliquer sur Oui pour activer SpipBB',
-'admin_config_tables_ok' => 'Table de SpipBB correctement install&eacute;e',
-'admin_date_ouverture' => 'Date d\'ouverture',
-'admin_form_action' => 'Action',
-'admin_form_creer_categorie' => 'Cr&eacute;er une cat&eacute;gorie',
-'admin_form_creer_forum' => 'Cr&eacute;er un forum',
-'admin_form_deplacer' => 'D&eacute;placer',
-'admin_form_descendre' => 'Descendre',
-'admin_form_editer' => 'Editer',
-'admin_form_messages' => '&nbsp;',
-'admin_form_monter' => 'Monter',
-'admin_form_sujets' => '&nbsp;',
-'admin_forums_affiche_membre_defaut' => 'Voulez-vous afficher les membres dans la liste de membres lorsqu\'il n\'ont pas fait de choix ?<br />[ Non par d&eacute;faut ]',
-'admin_forums_configuration' => 'Configuration de SpipBB',
-'admin_forums_configuration_avatar' => 'Gestion des avatars, r&eacute;glage g&eacute;n&eacute;ral',
-'admin_forums_configuration_options' => 'Options de SpipBB',
-'admin_forums_configuration_specifique' => '&Eacute;l&eacute;ments sp&eacute;cifiques',
-'admin_forums_log_level' => 'Choix du niveau de logs produites par SpipBB.<br />[ 3 (maximum)- Par d&eacute;faut ]',
-'admin_forums_log_level_0' => 'Pas de logs',
-'admin_forums_log_level_1' => 'Un peu de logs',
-'admin_forums_log_level_2' => 'Beaucoup de logs',
-'admin_forums_log_level_3' => 'Enorm&eacute;ment de logs',
+	// D
+	'dans_forum' => 'dans le forum',
+	'date' => 'Inscrit le',
+	'deja_enregistree' => 'Cette adresse email est d&amp;eacute;j&amp;agrave; enregistr&amp;eacute;e<p><a href=\'spip_pass.php3\'>[ Mot de passe oubli&amp;eacute; ]</a></p>',
+	'dernier' => '&amp;nbsp;Dernier<br />',
 
-//'admin_forums_titre' => 'Gestion des forums',
-'admin_id_mjsc' => 'N&deg;',
-'admin_infos' => 'SpipBB - Administration - R&eacute;capitulatif',
-'admin_interface' => 'Options de l\'interface',
-'admin_nombre_lignes_messages' =>'Nombre de lignes de messages',
-'admin_plugin_requis_erreur' => 'Plugin requis manquant',
-'admin_plugin_requis_ok' => 'Plugin requis install&eacute;',
-'admin_sous_titre' => 'Acc&egrave;der au panneau d\'administration des forums avec SpipBB',
-'admin_spipbb_release' => 'Version de SpipBB',
-'admin_spip_forums_erreur' => '<b>Erreur : Vous devez activer les forums publics SPIP</b>',
-'admin_spip_forums_ok' => 'Les forums publics sont bien activ&eacute;s dans SPIP',
-'admin_spip_mots_cles_erreur' => '<b>Erreur : Vous devez activer les mot-clefs de SPIP</b>',
-'admin_spip_mots_cles_ok' => 'Les mot-clefs sont bien activ&eacute;s dans SPIP',
-'admin_spip_mots_forums_erreur' => '<b>Erreur : Vous devez activer les mot-clefs associ&eacute;s aux forums</b>',
-'admin_spip_mots_forums_ok' => 'Les mot-clefs associ&eacute;s aux forums sont bien activ&eacute;s dans SPIP',
-'admin_statistique' => 'Information',
-'admin_surtitre' => 'G&eacute;rer les forums',
-'admin_temps_deplacement' => 'Temps requis avant d&eacute;placement par un admin',
-'admin_titre' => 'Administration SpipBB',
-'admin_total_posts' => 'Nombre total de messages',
-'admin_total_users' => 'Nombre de membres',
-'admin_total_users_online' =>'Membres en ligne',
-'admin_valeur' => 'Valeur',
+	// E
+	'ecrirea' => 'Ecrire Email &amp;agrave;',
+	'effacer' => 'Effacer',
+	'email' => 'E-mail',
+	'enregistrement' => 'Enregistrement',
+	'entree_biographie' => 'Courte biographie en quelques mots.',
+	'entree_infos_perso' => 'Qui &amp;ecirc;tes-vous ?',
+	'entree_nom_pseudo' => 'Votre nom',
+	'entree_nom_pseudo2' => '<b>Nom ou pseudo</b>&amp;nbsp;:',
+	'entree_nom_site' => 'Le nom de votre site',
+	'entree_url' => 'L\'adresse (URL) de votre site',
+	'envmp' => 'Envoyer un message priv&amp;eacute;',
+	'etplus' => '... et plus ...',
 
-'aecrit' => 'a &eacute;crit :',
-'alerter_abus' => 'Signaler ce message comme abusif/injurieux...', ## GAF 0.5
-'alerter_sujet' => 'Message abusif', ## GAF 0.5
-'alerter_texte' => 'Nous attirons votre attention sur le message suivant :', ## GAF 0.5
-'annonce' => 'Annonce',
-'annonce_dpt' => 'Annonce&nbsp;: ',
-'anonyme' => 'Anonyme',
-'auteur' => 'Auteur',
+	// F
+	'faq' => 'FAQ',
+	'ferme' => 'Cette discussion est ferm&amp;eacute;e',
+	'fil_alerte' => 'Il n\'est pas possible de s\'abonner &amp;agrave; ce fil',
+	'fil_annonce' => 'Transformer ce fil en Annonce',
+	'fil_deplace' => 'D&amp;eacute;placer ce fil',
+	'fil_sujet' => '&nbsp;Pied de fil / Sujet<br />',
+	'forum_deplace' => 'D&amp;eacute;plac&amp;eacute; depuis le Forum ...',
+	'forum_ferme' => 'Ce forum est d&amp;eacute;sactiv&amp;eacute;',
+	'forum_ferme_texte' => 'Ce forum est d&amp;eacute;sactiv&amp;eacute;. Vous ne pouvez plus y poster.',
+	'forum_ouvrir' => 'Ouvrir ce Forum',
+	'forum_selection' => 'dans le FORUM (article) &amp;agrave; s&amp;eacute;lectionner :',
+	'forum_vers' => 'Vers le Forum ...',
 
-// B
-'bouton_select_all' => 'Tout s&eacute;lectionner',
-'bouton_unselect_all' => 'Tout d&eacute;-s&eacute;lectionner',
+	// G
+	'gaf_titre' => 'GAFoSPIP<br />Gestion Alternative des Forums',
 
-//C
+	// H
+	'haut_page' => 'Haut de page',
 
-'champs_obligatoires'=>'Les champs marqu&eacute;s d\'une * sont obligatoires.',
-'chercher' => 'Chercher',
-'choix_mots_annonce' => 'Faire une annonce',
-'choix_mots_ferme' => 'Pour fermer un fil',
-'choix_mots_postit' => 'Mettre en postit',
-'choix_mots_selection' => 'Le groupe de mot doit contenir trois mot-clefs. Normalement, le plugin les a cr&eacute;&eacute; au moment de son installation. SpipBB utilise en g&eacute;n&eacute;ral les mots {ferme}, {annonce} et {postit}, mais vous pouvez en choisir d\'autres.',
-'choix_rubrique_selection' => 'S&eacute;lectionner un secteur qui sera la base de vos forums. Dedans, chaque sous-rubrique sera un groupe de forums, chaque article publi&eacute; ouvrira un forum.',
-'choix_squelettes' => 'Vous pouvez en choisir d\'autres, mais les fichiers qui remplacent groupeforum.html et filforum.html doivent exister !',
-'citer' => 'Citer',
-'col_avatar' => 'Avatar',
-'col_date_crea' => 'Date inscription',
-'col_marquer' => 'Marquer',
-'col_signature' => 'Signature',
-'config_choix_mots' => 'Choisir le groupe de mot-cl&eacute;s',
-'config_choix_rubrique' => 'Choisir la rubrique contenant les forums spipBB',
-'config_choix_squelettes' => 'Choisir les squelettes utilis&eacute;s',
-'config_spipbb' => 'Configuration de base de spipBB pour permettre le fonctionnement des forums avec ce plugin.',
-'contacter' => 'Contacter',
-'contacter_dpt' => 'Contacter&nbsp;: ',
+	// I
+	'icone_ferme' => 'Fermer',
+	'icone_gafospip' => 'GAFoSPIP/Gestion des Forums',
+	'identifiant' => 'Voici vos identifiants de connexion pour le site&nbsp;',
+	'info' => 'Informations',
+	'info_avertissement' => 'Avertissement',
+	'info_confirmer_passe' => 'Confirmer ce nouveau mot de passe&nbsp;:',
+	'info_icones' => 'Infos Ic&amp;ocirc;nes',
+	'info_non_modifiable' => 'ne peut pas &amp;ecirc;tre modifi&amp;eacute;',
+	'info_plus_cinq_car' => 'plus de 5 caract&amp;egrave;res',
+	'info_recommencer' => 'Veuillez recommencer.',
+	'info_reserve_admin' => 'Seuls les administrateurs peuvent modifier cette adresse.',
+	'item_login' => 'Login',
 
+	// L
+	'le' => 'Le',
+	'lieu' => 'Localisation',
+	'login' => 'Connexion',
+	'logout' => 'D&amp;eacute;connexion',
+	'luiecrire' => 'Lui &amp;eacute;crire',
 
-//D
-'dans_forum' => 'dans le forum',
-'deconnexion_' => 'D&eacute;connexion ',
-'dernier_membre' => 'Dernier membre enregistr&eacute; : ',
-'deplacer_confirmer' => 'Confirmer le d&eacute;placement',
-'deplacer_sujet_dpt' => 'D&eacute;placement de&nbsp;:',
-'deplacer_dans_dpt' => '&Agrave; deplacer dans le forum&nbsp;:',
-'deplacer_vide' => 'Pas d\'autre forum : d&eacute;placement impossible.',
-'diviser_confirmer' => 'Confirmer la s&eacute;paration des messages',
-'diviser_expliquer' => 'A l\'aide du formulaire ci-dessous, vous pourrez s&eacute;parer ce fil en deux, soit : en s&eacute;lectionnant les messages individuellement; soit en choissant le message &agrave; partir duquel il faut les diviser en deux.',
-'diviser_dans_dpt' => '&Agrave; mettre dans le forum&nbsp;:',
-'diviser_separer_choisis' => 'S&eacute;parer les messages s&eacute;lectionn&eacute;s',
-'diviser_separer_suite' => 'S&eacute;parer &agrave; partir du message s&eacute;lectionn&eacute;',
-'diviser_selection_dpt' => 'S&eacute;lection&nbsp;:',
-'diviser_vide' => 'Pas d\'autre forum : division impossible.',
+	// M
+	'maintenance' => 'N\'oubliez pas d\'enlever<br />"Fermeture pour maintenance",<br />sur les Forums concern&amp;eacute;s.',
+	'maintenance_ferme' => 'Ferm&amp;eacute; pour maintenance',
+	'membre' => 'Membre',
+	'membres_groupes' => 'Groupes d\'utilisateurs',
+	'membres_liste' => 'Liste des Membres',
+	'membres_profil' => 'Profil',
+	'message_date' => 'Post&amp;eacute; le&nbsp;',
+	'message_sujet' => 'Sujet&nbsp;',
+	'messages' => 'Messages',
+	'messages_derniers' => 'Derniers Messages',
+	'messages_non_lus_grand' => 'Pas de nouveaux messages',
+	'messages_nouveaux' => 'Nouveaux&amp;nbsp;messages',
+	'messages_pas_nouveaux' => 'Pas de nouveaux messages',
+	'messages_repondre' => 'Nouvelle r&amp;eacute;ponse',
+	'messages_verifier' => 'V&amp;eacute;rifier le message',
+	'messages_voir_dernier' => 'Voir le dernier message',
+	'moderateurs' => 'Mod&amp;eacute;rateur(s)',
+	'mp' => 'Message Priv&amp;eacute;',
 
-//E
+	// N
+	'no_message' => 'Aucun sujet ou message ne correspond &amp;agrave; vos crit&amp;egrave;res de recherche',
+	'nom' => 'Nom d\'utilisateur',
+	'non_valide' => '<h2 style=\'color:red\'>Adresse email non valide</h2>',
+	'nouveaux_messages' => 'Nouveaux messages',
 
-'ecrirea' => 'Ecrire un email &agrave;',
-'effacer' => 'Effacer',
-'email' => 'E-mail',
-'en_ligne' => 'Qui est en ligne ?',
-'en_reponse_a' => 'En r&eacute;ponse au message',
-'en_rep_sujet_' => '&nbsp;:::&nbsp;Sujet : ',
-'extra_avatar_saisie_url' => 'URL de votre avatar (http://... ...)', ## GAF 0.6
-'extra_avatar_saisie_url_info' => 'URL de l\'avatar du visiteur', ## GAF 0.6
-'extra_date_crea' => 'Date de premiere saisie profil SpipBB',
-'extra_date_crea_info' => 'Date de premiere saisie profil SpipBB',
-'extra_emploi' => 'Emploi',
-'extra_localisation' => 'Localisation',
-'extra_loisirs' => 'Loisirs',
-'extra_nom_aim'=>'Contacts chat (AIM)',
-'extra_nom_msnm'=>'Contacts chat (MSN Messenger)',
-'extra_nom_yahoo'=>'Contacts chat (Yahoo)',
-'extra_numero_icq'=>'Contacts chat (ICQ)',
-'extra_refus_suivi_thread' => '(refus suivi) Ne pas modifier !', ## GAF 0.6
-'extra_refus_suivi_thread_info' => 'Liste des threads pour lesquels on ne souhaite plus recevoir de notification',
-'extra_signature_saisie_texte' => 'Saisir ici le texte de votre signature', ## GAF 0.6+
-'extra_signature_saisie_texte_info' => 'Court texte de signature des messages',
-'extra_visible_annuaire' => 'Apparaitre dans la liste des Inscrits (public)', ## GAF 0.6
-'extra_visible_annuaire_info' => 'Permet de refuser l\'affichage dans l\'annuaire des inscrits en zone public',
+	// P
+	'page' => 'Page',
+	'pages_vues' => 'Pages vues',
+	'paramprofil' => 'Modifier vos param&amp;egrave;tres',
+	'pb_mysql' => 'Un probl&amp;egrave;me technique a interrompu votre inscription, veuillez re&amp;eacute;ssayer',
+	'poste_effac' => 'Posts effac&amp;eacute;s !',
+	'poste_efface' => 'Effacer Posts',
+	'poste_efface_lui' => 'Ce Sujet comprend @nbr_post@ Post(s). Effac&amp;eacute;s avec lui&nbsp;!
+',
+	'poste_refuse' => 'Posts refus&amp;eacute;s, &amp;agrave; effacer&nbsp;!',
+	'poste_reponse' => '&nbsp;Post / R&amp;eacute;ponse',
+	'poste_valide' => 'Post(s) &amp;agrave; valider ...',
+	'pour_maintenance' => '"</b><br />pour MAINTENANCE.<br />"',
+	'profil' => 'Profil de',
 
-//F
+	// R
+	'raison' => 'Pour en connaitre la raison',
+	'recherch' => 'Recherche',
+	'recherche_auteur' => 'Recherche par auteur',
+	'recherche_elargie' => 'Recherche &amp;eacute;largie',
+	'recherche_options' => 'Options de recherche',
+	'recherche_texte' => 'La recherche est effectu&amp;eacute;e dans les sujets et le corps des messages.
+Il n\'y a pas d\'op&amp;eacute;rateurs bool&amp;eacute;ens, l\'op&amp;eacute;rateur implicite &amp;eacute;tant grosso modo un OU logique.
+Les mots de moins de trois lettres sont ignor&amp;eacute;s.',
+	'recherche_titre' => 'Rechercher un sujet',
+	'reglement' => '<p>Les administrateurs et mod&amp;eacute;rateurs de ce forum s\'efforceront de supprimer ou &amp;eacute;diter tous les messages &amp;agrave; caract&amp;egrave;re r&amp;eacute;pr&amp;eacute;hensible aussi rapidement que possible. Toutefois, il leur est impossible de passer en revue tous les messages. Vous admettez donc que tous les messages post&amp;eacute;s sur ces forums expriment la vue et opinion de leurs auteurs respectifs, et non pas des administrateurs, ou mod&amp;eacute;rateurs, ou webmestres (except&amp;eacute; les messages post&amp;eacute;s par eux-m&amp;ecirc;me) et par cons&amp;eacute;quent ne peuvent pas &amp;ecirc;tre tenus pour responsables.</p>
 
-'fiche_contact' => 'Fiche Contact',
-'fil_annonce_annonce' => 'Transformer en Sujet-Annonce',
-'filtrer' => 'Filtrer',
-'forum' => 'Forums',
-'forum_dpt' => 'Forum&nbsp;: ',
-'forum_ferme' => 'Ce forum est ferm&eacute;',
-'forum_ferme_texte' => 'Ce forum est ferm&eacute;. Vous ne pouvez plus y poster.',
-'forum_maintenance' => 'Ce forum est ferm&eacute; pour maintenance', ## GAF 0.6
+<p>Vous consentez &amp;agrave; ne pas poster de messages injurieux, obsc&amp;egrave;nes, vulgaires, diffamatoires, mena&amp;ccedil;ants, sexuels ou tout autre message qui violerait les lois applicables. Le faire peut vous conduire &amp;agrave; &amp;ecirc;tre banni imm&amp;eacute;diatement de fa&amp;ccedil;on permanente (et votre fournisseur d\'acc&amp;egrave;s &amp;agrave; internet en sera inform&amp;eacute;). L\'adresse IP de chaque message est enregistr&amp;eacute;e afin d\'aider &amp;agrave; faire respecter ces conditions. Vous &amp;ecirc;tes d\'accord sur le fait que le webmestre, l\'administrateur et les mod&amp;eacute;rateurs de ce forum ont le droit de supprimer, &amp;eacute;diter, d&amp;eacute;placer ou verrouiller n\'importe quel sujet de discussion &amp;agrave; tout moment. En tant qu\'utilisateur, vous &amp;ecirc;tes d\'accord sur le fait que toutes les informations que vous donnerez ci-apr&amp;egrave;s seront stock&amp;eacute;es dans une base de donn&amp;eacute;es. Cependant, ces informations ne seront divulgu&amp;eacute;es &amp;agrave; aucune tierce personne ou soci&amp;eacute;t&amp;eacute; sans votre accord. Le webmestre, l\'administrateur, et les mod&amp;eacute;rateurs ne peuvent pas &amp;ecirc;tre tenus pour responsables si une tentative de piratage informatique conduit &amp;agrave; l\'acc&amp;egrave;s de ces donn&amp;eacute;es.</p>
 
-'fromphorum_base' => 'Nom de la base&nbsp;:',
-'fromphorum_choix_test' => 'R&eacute;aliser un import de test (choix par d&eacute;faut)&nbsp;:',
-'fromphorum_choix_test_titre' => 'Import &agrave; blanc ou r&eacute;el',
-'fromphorum_erreur_db_phpbb' => 'Impossible de se connecter &agrave; la base Phorum',
-'fromphorum_erreur_db_phpbb_config' => 'Impossible de lire la configuration dans la base Phorum',
-'fromphorum_erreur_db_spip' => 'Impossible de se connecter &agrave; la base SPIP',
-'fromphorum_erreur_forums' => 'Impossible de recuperer les forums',
-'fromphorum_fichier' => 'Fichier de configuration Phorum trouv&eacute;&nbsp;:',
-'fromphorum_host' => 'Nom/adresse du serveur',
-'fromphorum_login' => 'Identifiant&nbsp;:',
-'fromphorum_parametres_base' => 'Choisissez soit le chemin vers le fichier de configuration de Phorum, soit de renseigner les param&egrave;tres d\'acc&egrave;s &agrave; la base contenant les forums de Phorum&nbsp;:',
-'fromphorum_parametres_rubrique' => 'Choisissez la rubrique dans laquelle seront import&eacute;s les forums de Phorum',
-'fromphorum_parametres_titre' => 'Informations sur la base Phorum',
-'fromphorum_password' => 'Mot de passe&nbsp;:',
-'fromphorum_prefix' => 'Pr&eacute;fixe des tables&nbsp;:',
-'fromphorum_racine' => 'Chemin vers Phorum (avatars)&nbsp;:',
-'fromphorum_table' => 'Table de configuration Phorum trouv&eacute;e&nbsp;:',
-'fromphorum_titre' => 'Import d\'un forum Phorum',
-'fromphorum_titre_etape' => 'Import d\'un forum Phorum - &eacute;tape',
+<p>Ce forum utilise les cookies pour stocker des informations sur votre ordinateur. Ces cookies ne contiendront aucune information que vous aurez entr&amp;eacute; ci-apr&amp;egrave;s, ils servent uniquement &amp;agrave; am&amp;eacute;liorer le confort d\'utilisation. L\'adresse e-mail est uniquement utilis&amp;eacute;e afin de confirmer les d&amp;eacute;tails de votre enregistrement ainsi que votre mot de passe (et aussi pour vous envoyer un nouveau mot de passe dans la cas o&amp;ugrave; vous l\'oublieriez).</p><p>En vous enregistrant, vous vous portez garant du fait d\'&amp;ecirc;tre en accord avec le r&amp;egrave;glement ci-dessus.</p>',
+	'repondre' => 'R&amp;eacute;pondre',
+	'reponse' => 'En r&amp;eacute;ponse au message',
+	'reponses' => 'R&amp;eacute;ponses',
+	'resilier' => 'r&amp;eacute;silier',
+	'resilier_abo' => 'R&amp;eacute;silier l\'abonnement &amp;agrave; ce fil',
+	'resultat' => 'r&amp;eacute;sultats pour',
+	'retour' => 'Retour',
+	'retour_forum' => 'Retour &amp;agrave; l\'accueil du forum',
+	'retour_site' => 'Retour &amp;agrave; l\'accueil du site',
+	'revenir_haut' => 'Revenir en haut de la page',
+	'rubrique_secteur' => '&nbsp;Rubrique Secteur<br />',
 
-'fromphpbb_base' => 'Nom de la base&nbsp;:',
-'fromphpbb_choix_test' => 'R&eacute;aliser un import de test (choix par d&eacute;faut)&nbsp;:',
-'fromphpbb_choix_test_titre' => 'Import &agrave; blanc ou r&eacute;el',
-'fromphpbb_erreur_db_phpbb' => 'Impossible de se connecter &agrave; la base phpBB',
-'fromphpbb_erreur_db_phpbb_config' => 'Impossible de lire la configuration dans la base phpBB',
-'fromphpbb_erreur_db_spip' => 'Impossible de se connecter &agrave; la base SPIP',
-'fromphpbb_erreur_forums' => 'Impossible de recuperer les forums',
-'fromphpbb_fichier' => 'Fichier de configuration PhpBB trouv&eacute;&nbsp;:',
-'fromphpbb_host' => 'Nom/adresse du serveur',
-'fromphpbb_migre_categories' => 'Import des cat&eacute;gories',
-'fromphpbb_migre_categories_dans_rub_dpt' => 'Implantation des forums dans la rubrique&nbsp;:',
-'fromphpbb_migre_existe_dpt' => 'existe&nbsp;:',
-'fromphpbb_migre_categories_forum' => 'Forum',
-'fromphpbb_migre_categories_groupe' => 'Groupe',
-'fromphpbb_migre_categories_impossible' => 'Impossible de r&eacute;cup&eacute;rer les cat&eacute;gories',
-'fromphpbb_migre_categories_kw_ann_dpt' => 'Les annonces recevront le mot-clef&nbsp;:',
-'fromphpbb_migre_categories_kw_ferme_dpt' => 'Les sujets clos recevront le mot-clef&nbsp;:',
-'fromphpbb_migre_categories_kw_postit_dpt' => 'Les post its recevront le mot-clef&nbsp;:',
-'fromphpbb_migre_thread' => 'Import des topics et des posts',
-'fromphpbb_migre_thread_ajout' => 'Ajout thread',
-'fromphpbb_migre_thread_annonce' => 'Annonce',
-'fromphpbb_migre_thread_existe_dpt' => 'Forum existe&nbsp;:',
-'fromphpbb_migre_thread_ferme' => 'Ferm&eacute;',
-'fromphpbb_migre_thread_impossible_dpt' => 'Impossible de r&eacute;cup&eacute;rer les posts&nbsp;:',
-'fromphpbb_migre_thread_postit' => 'Post-it',
-'fromphpbb_migre_thread_total_dpt' => 'Nombre total de topics et de posts ajout&eacute;s&nbsp;:',
-'fromphpbb_migre_utilisateurs' => 'Import des utilisateurs',
-'fromphpbb_migre_utilisateurs_admin_restreint_add' => 'Ajout admin restreint',
-'fromphpbb_migre_utilisateurs_admin_restreint_already' => 'Deja admin restreint',
-'fromphpbb_migre_utilisateurs_impossible' => 'Impossible de r&eacute;cup&eacute;rer les utilisateurs',
-'fromphpbb_migre_utilisateurs_total_dpt' => 'Nombre total d\'utilisateurs ajout&eacute;s&nbsp;:',
-'fromphpbb_login' => 'Identifiant&nbsp;:',
-'fromphpbb_parametres_base' => 'Choisissez soit le chemin vers le fichier de configuration de phpBB, soit de renseigner les param&egrave;tres d\'acc&egrave;s &agrave; la base contenant les forums de phpBB&nbsp;:',
-'fromphpbb_parametres_rubrique' => 'Choisissez la rubrique dans laquelle seront import&eacute;s les forums de phpBB',
-'fromphpbb_parametres_titre' => 'Informations sur la base phpBB',
-'fromphpbb_password' => 'Mot de passe&nbsp;:',
-'fromphpbb_prefix' => 'Pr&eacute;fixe des tables&nbsp;:',
-'fromphpbb_racine' => 'Chemin vers phpBB (avatars)&nbsp;:',
-'fromphpbb_table' => 'Table de configuration PhpBB trouv&eacute;e&nbsp;:',
-'fromphpbb_titre' => 'Import d\'un forum PhpBB',
-'fromphpbb_titre_etape' => 'Import d\'un forum PhpBB - &eacute;tape',
+	// S
+	'sabonner' => 'S\'abonner &amp;agrave; ce fil',
+	'salon' => 'Salon ...',
+	'salon_ouvrir' => 'Ouvrir ce Salon',
+	'secteur' => 'Secteur ...',
+	'secteur_forum' => 'SECTEURS FORUMS',
+	'selection_efface' => 'Effacer la s&amp;eacute;lection ...',
+	'sinscrire' => 's\'enregistrer',
+	'site' => 'Site web',
+	'sousrub_salon' => '&nbsp;Sous-rubrique / Salon<br />',
+	'statut' => 'Statut',
+	'sujet' => 'Sujet&nbsp;',
+	'sujet_ajout' => 'Ajouter un sujet au forum :<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'sujet_annonce' => 'Sujet Annonce',
+	'sujet_auteur' => 'Auteur',
+	'sujet_clos_texte' => 'Ce sujet est clos, vous ne pouvez pas y poster.',
+	'sujet_clos_titre' => 'Sujet Clos',
+	'sujet_nombre' => 'Nombre de Sujets',
+	'sujet_nouveau' => 'Nouveau sujet',
+	'sujet_ouvrir' => 'Ouvrir ce Sujet',
+	'sujet_rejete' => 'Sujet rejet&amp;eacute;',
+	'sujet_valide' => 'Sujet &amp;agrave; valider',
+	'sujet_verifie' => 'V&amp;eacute;rifier ce sujet',
+	'sujet_visites' => 'Visites',
+	'sujets' => 'Sujets',
+	'sujets_aucun' => 'Pas de sujet dans ce forum pour l\'instant',
+	'sur' => '&nbsp;sur&nbsp;',
 
+	// T
+	'texte_login_precaution' => 'Attention&amp;nbsp;! Ceci est le login sous lequel vous &amp;ecirc;tes connect&amp;eacute; actuellement.
+	Utilisez ce formulaire avec pr&amp;eacute;caution...',
+	'texte_repondre' => 'R&amp;eacute;pondre &amp;agrave; :<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'titre_cadre_signature_obligatoire' => '<b>Signature</b> [Obligatoire]<br />',
+	'total_messages' => 'Total messages',
+	'tous_forums' => 'Tous les forums',
+	'tout_apropos' => 'Tout &amp;agrave; propos de',
+	'toutes_categories' => 'Toutes les cat&amp;eacute;gories',
 
-//G
+	// V
+	'visites_jour' => 'Visites aujourd\'hui',
+	'visites_mois' => 'Visites ce mois',
+	'visites_semaine' => 'Visites cette semaine',
+	'visiteurs_uniques' => 'Visiteurs uniques',
+	'voir' => 'VOIR',
+	'voir_evolution' => 'Voir l\'&amp;eacute;volution des visites',
+	'voir_message' => 'Voir ce message',
+	'voir_messages' => 'Voir&amp;nbsp;les&amp;nbsp;nouveaux&amp;nbsp;messages',
+	'voirprofil' => 'Voir le profil de',
 
-//H
-
-//I
-'info' => 'Informations',
-'info_annonce_ferme' => 'Etat Annonce / Fermer', ## 0.6
-'info_confirmer_passe' => 'Confirmer ce nouveau mot de passe&nbsp;:',
-'info_inscription_invalide' => 'Inscription impossible',
-'info_plus_cinq_car' => 'plus de 5 caract&egrave;res',
-'infos_refus_suivi_sujet' => 'Ne plus suivre les sujets',
-//'infos_suivi_forum_par_inscription' => '',
-'inscription' => 'Inscription',
-'inscrit_s' => 'Inscrits',
-
-'ip_informations' => 'Informations sur une adresse IP et un auteur',
-'ip_adresse_post' => 'Adresse IP de ce message',
-'ip_adresse_membres' => 'Membres ayant post&eacute; de cette adresse IP',
-'ip_adresse_autres' => 'Autres adresses IP &agrave; partir desquelles cet auteur a post&eacute;',
-
-//L
-
-'le' => 'Le',
-'liste_inscrits' => 'Liste des membres',
-'login' => 'Connexion',
-
-
-//M
-
-'membres_inscrits' => 'membres inscrits',
-'membres_les_plus_actifs' => 'Membres les plus actifs',
-'message' => 'Message',
-'message_s' => 'Messages',
-'messages' => 'R&eacute;ponses',
-'messages_dpt' => 'Messages&nbsp;:',
-'messages_derniers' => 'Derniers Messages',
-'message_s_dpt' => 'Messages&nbsp;: ',
-'messages_voir_dernier' => 'Voir le dernier message',
-'messages_voir_dernier_s' => 'Voir les derniers messages',
-'messages_supprimer_titre_dpt' => 'Pour les messages&nbsp;:',
-'messages_supprimer_tous' => 'les supprimer',
-'messages_laisser_nom' => 'laisser le nom',
-'messages_anonymes' => 'rendre anonymes',
-'moderateur_dpt' => 'Mod&eacute;rateur&nbsp;: ', ## GAF 0.6
-'moderateurs' => 'Mod&eacute;rateur(s)',
-'moderateurs_dpt' => 'Mod&eacute;rateurs&nbsp;: ', ## 0.5
-'modif_parametre' => 'Modifiez vos param&egrave;tres',
-'mot_' => 'mot',
-//'mot_groupe_moderation' => '',
-
-
-//N
-'no_message' => 'Aucun sujet ou message ne correspond &agrave; vos crit&egrave;res de recherche',
-'nom_util' => 'Nom d\'utilisateur',
-'non' => 'Non',
-
-//O
-'oui' => 'Oui',
-
-
-//P
-'pagine_page_' => ' .. page ',
-'pagine_post_s' => ' posts',
-'pagine_sujet_s' => ' sujets',
-'par_' => 'par ',
-'poster_date_' => 'Post&eacute; le : ',
-'poster_message' => 'Poster un message',
-'postit' => 'Postit',
-'postit_dpt' => 'Postit&nbsp;: ',
-'post_aucun_pt' => 'aucun&nbsp;!',
-'post_efface_lui' => 'Ce sujet comprend @$nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\n',
-'post_rejete' => 'Message rejet&eacute;',
-'post_verifier_sujet' => 'V&eacute;rifier ce sujet',
-'posts_effaces' => 'Messages effac&eacute;s&nbsp;!',
-'posts_refuses' => 'Messages refus&eacute;s, &agrave; effacer&nbsp;!',
-'post_titre' => '&nbsp;:::&nbsp;Titre : ',
-'previsualisation' => 'Pr&eacute;visualisation',
-'profil' => 'Profil',
-
-
-//R
-
-'raison_clic' => 'cliquez ici',
-'raison_texte' => 'Pour en connaitre la raison',
-'recherche' => 'Recherche',
-'recherche_elargie' => 'Recherche &eacute;largie',
-'reglement' => '<p>Les administrateurs et mod&eacute;rateurs de ce forum s\'efforceront de supprimer 
-				ou &eacute;diter tous les messages &agrave; caract&egrave;re r&eacute;pr&eacute;hensible 
-				aussi rapidement que possible. Toutefois, il leur est impossible de passer en revue tous 
-				les messages. Vous admettez donc que tous les messages post&eacute;s sur ces forums 
-				expriment la vue et opinion de leurs auteurs respectifs, et non pas des administrateurs, 
-				ou mod&eacute;rateurs, ou webmestres (except&eacute; les messages post&eacute;s par 
-				eux-m&ecirc;me) et par cons&eacute;quent ne peuvent pas &ecirc;tre tenus pour responsables.</p>
-				<p>Vous consentez &agrave; ne pas poster de messages injurieux, obsc&egrave;nes, 
-				vulgaires, diffamatoires, mena&ccedil;ants, sexuels ou tout autre message qui violerait 
-				les lois applicables. Le faire peut vous conduire &agrave; &ecirc;tre banni 
-				imm&eacute;diatement de fa&ccedil;on permanente (et votre fournisseur d\'acc&egrave;s 
-				&agrave; internet en sera inform&eacute;). L\'adresse IP de chaque message est 
-				enregistr&eacute;e afin d\'aider &agrave; faire respecter ces conditions. 
-				Vous &ecirc;tes d\'accord sur le fait que le webmestre, l\'administrateur 
-				et les mod&eacute;rateurs de ce forum ont le droit de supprimer, &eacute;diter, 
-				d&eacute;placer ou verrouiller n\'importe quel sujet de discussion &agrave; tout moment. 
-				En tant qu\'utilisateur, vous &ecirc;tes d\'accord sur le fait que toutes les informations 
-				que vous donnerez ci-apr&egrave;s seront stock&eacute;es dans une base de donn&eacute;es. 
-				Cependant, ces informations ne seront divulgu&eacute;es &agrave; aucune tierce personne 
-				ou soci&eacute;t&eacute; sans votre accord. Le webmestre, l\'administrateur, 
-				et les mod&eacute;rateurs ne peuvent pas &ecirc;tre tenus pour responsables si une 
-				tentative de piratage informatique conduit &agrave; l\'acc&egrave;s de ces donn&eacute;es.</p>
-				<p>Ce forum utilise les cookies pour stocker des informations sur votre ordinateur. 
-				Ces cookies ne contiendront aucune information que vous aurez entr&eacute; ci-apr&egrave;s, 
-				ils servent uniquement &agrave; am&eacute;liorer le confort d\'utilisation. 
-				L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;tails 
-				de votre enregistrement ainsi que votre mot de passe (et aussi pour vous envoyer un nouveau 
-				mot de passe dans la cas o&ugrave; vous l\'oublieriez).</p>
-				<p>En vous enregistrant, vous vous portez garant du fait d\'&ecirc;tre en accord avec le 
-				r&egrave;glement ci-dessus.</p>',
-'reponse_s_' => 'R&eacute;ponses',
-'resultat_s_pour_' => ' r&eacute;sultats pour ',
-'retour_forum' => 'Retour &agrave; l\'accueil du forum',
-
-
-//S
-
-'s_abonner_a' => 'RSS . S\'abonner &agrave; : ',
-'selection_efface'=> 'Effacer la s&eacute;lection .. ',
-'sign_tempo' => 'R&eacute;alis&eacute; avec <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
-'sinscrire'=> 'S\'inscrire',
-'site_propose' => 'Site propos&eacute; par @auteur_post@',
-'site_web' => 'Site web',
-'squelette_filforum' => 'Base de squelette pour les fils de discussions :',
-'squelette_groupeforum' => 'Base de squelette pour les groupes de discussions :',
-'statut' => 'Statut',
-'statut_admin' => 'Administrateur',
-'statut_redac' => 'R&eacute;dacteur',
-'statut_visit' => 'Membre',
-'sujet_auteur' => 'Auteur',
-'sujet_clos_texte' => 'Ce sujet est clos, vous ne pouvez pas y poster.',
-'sujet_clos_titre' => 'Sujet Clos',
-'sujet_dpt' => 'Sujet&nbsp;: ',
-'sujet_nouveau' => 'Nouveau sujet',
-'sujet_repondre' => 'R&eacute;pondre au sujet',
-'sujets' => 'Sujets',
-'sujet_s' => 'Sujets',
-'sujets_aucun' => 'Pas de sujet dans ce forum pour l\'instant',
-'supprimer' => 'Supprimer',
-
-'sw_admin_can_spam' => 'Les admins sont autoris&eacute;s',
-'sw_admin_no_spam' => 'Pas de spam',
-'sw_ban_ip_titre' => 'Bannir l\'IP en m&ecirc;me temps',
-'sw_config_exceptions' => 'Vous pouvez activer des exceptions pour des utilisateurs privil&eacute;gi&eacute;s ici. Ils pourront quand m&ecirc;me publier avec des mots bannis.',
-'sw_config_exceptions_titre' => 'Gestion des exceptions',
-'sw_config_generale' => 'Configuration actuelle du filtrage :',
-'sw_config_generale_titre' => 'Configuration g&eacute;n&eacute;rale du filtrage du spam',
-'sw_config_warning' => 'Vous pouvez choisir le texte du MP envoy&eacute; si vous activez cette option (maxi 255 caract&egrave;res).',
-'sw_config_warning_titre' => 'Configuration des avertissements par message priv&eacute;',
-'sw_disable_sw_titre' => '<strong>Active le filtrage</strong><br />Si vous devez vous passer du filtrage,<br />cliquez sur Non',
-'sw_modo_can_spam' => 'Les mod&eacute;rateurs sont autoris&eacute;s',
-'sw_nb_spam_ban_titre' => 'Nombre de spams avant banissement',
-'sw_pm_spam_warning_message' => 'Ceci est un avertissement. Vous avez essay&eacute; de poster un message analys&eacute; comme du spam sur ce site web. Merci d\'&eacute;viter de recommencer.',
-'sw_pm_spam_warning_titre' => 'Attention.',
-'sw_send_pm_warning' => '<strong>Envoie un MP &agrave; l\'utilisateur</strong><br />lorsqu\'il poste un message avec un mot interdit',
-'sw_spam_forum_titre' => 'Gestion des messages de spam',
-'sw_spam_titre' => 'Filtrage du spam',
-'sw_spam_words_action' => 'A partir de cette page, vous pouvez ajouter, &eacute;diter et supprimer des mots associ&eacute;s &agrave; du spam. Le caract&egrave;re (*) est accept&eacute; dans le mot. Par exemple&nbsp;: {{*tes*}} capturera {d&eacute;testable}, {{tes*}} capturera {tester}, {{*tes}} capturera {portes}.',
-'sw_spam_words_mass_add' => 'Copier-coller ou saisir vos mots dans cette zone. S&eacute;parer chaque mot par une virgule, deux points ou un retour &agrave; la ligne.',
-'sw_spam_words_titre' => 'Filtrage de mots',
-'sw_spam_words_url_add' => 'Saisir l\'URL d\'un fichier contenant une liste de mots format&eacute;e comme ci-dessus. Exemple&nbsp;: http://spipbb.spip-zone.info/plugins/spipBB/base/spamwordlist.csv .',
-'sw_warning_from_admin' => 'Choisir l\'admin auteur du message envoy&eacute;',
-'sw_warning_pm_message' => 'Texte du message priv&eacute;',
-'sw_warning_pm_titre' => 'Sujet du message priv&eacute;',
-'sw_word' => 'Mot',
-
-
-//T
-'title_sujet_ferme' => 'Fermer ce sujet',
-'titre_spipbb' => 'SpipBB',
-'total_membres' => 'Nous avons un total de ',
-'total_messages_membres' => 'Nos membres ont post&eacute; un total de ',
-'tous' => 'Tous',
-'tous_forums' => 'Tous les forums',
-
-
-//V
-'visible_annuaire_forum' => 'Apparaitre dans la liste des Inscrits', ## GAF 0.6
-'visites' => 'Vu',
-'votre_bio' => 'Courte biographie en quelques mots.',
-'votre_email' => 'Votre adresse email',
-'votre_nouveau_passe' => 'Nouveau mot de passe',
-'votre_signature' => 'Votre signature', ## GAF 0.6
-'votre_site' => 'Le nom de votre site',
-'votre_url_avatar' => 'URL de votre Avatar (http://...)', ## GAF 0.6
-'votre_url_site' => 'L\'adresse (URL) de votre site',
-'voir' => 'VOIR',
-
-//W
-'www' => 'WWW' // ne sert a rien sauf a finir
-
+	// W
+	'www' => 'WWW'
 );
 
 ?>

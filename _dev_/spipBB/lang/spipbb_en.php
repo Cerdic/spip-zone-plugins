@@ -1,346 +1,231 @@
 <?php
-#----------------------------------------------------------#
-#  Plugin  : spipbb - Licence : GPL                        #
-#  File    : spipbb_en : language file                     #
-#  Authors : Chryjs, 2007 et als                           #
-#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
-#  Contact : chryjs!@!free!.!fr                            #
-#----------------------------------------------------------#
-
-// This is a SPIP-forum module file  --  Ceci est un fichier module de SPIP-forum
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier sur la zone **
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// A
+	// A
+	'abo' => 'Subscription',
+	'admbouger' => 'Move this topic',
+	'admbouger_forum' => 'Move this forum',
+	'admclore' => 'Close this topic',
+	'admclore_forum' => 'Close this forum',
+	'admeffacer' => 'Delete this topic',
+	'admeffacer_forum' => 'Delete this forum',
+	'admfermer' => 'closed the article/forum:',
+	'admseparer' => 'Split this topic',
+	'admseparer_forum' => 'Split this forum',
+	'admsurveiller' => 'Watch this topic',
+	'admsurveiller_forum' => 'Watch this forum',
+	'aecrit' => 'wrote',
+	'annonce' => 'Announcement',
+	'anonyme' => 'Anonymous',
+	'article_forum' => '&nbsp;Article / Forum<br />',
+	'aucun' => 'none!',
+	'avatar' => 'Avatar',
 
-// Admin menus
-'admin_cat_01_general' => 'Administration',
-'admin_cat_outils' => 'Tools',
-'admin_cat_spam' => 'Spam Words',
-'admin_action_01_configuration' => 'Configure',
-'admin_action_02_etat' => 'Forums overview',
-'admin_action_fromphpbb' => 'Import from PhpBB',
-'admin_action_gestion' => 'Management',
-'admin_action_swconfig' => 'Configure',
-'admin_action_swforum' => 'Flagged posts',
-'admin_action_swlog' => 'Spam Log',
-'admin_action_swwords' => 'Manage Words',
-'admin_action_ZZ_debug' => 'Debug',
+	// B
+	'bio' => 'Short biography',
+	'bonjour' => 'Hello,',
 
-// Admin interface
-'admin_afficher_bouton_alerte_abus' => 'Show Abuse alert buttons',
-'admin_affichier_bouton_rss' => 'Show RSS buttons',
-'admin_age_forum' => 'Forum age Y/m',
-'admin_avatar_affiche' => 'Accept and shows the avatars (default is Yes after install)',
-'admin_avatar_taille_sujet' => 'Avatars\s size (in pixels) on the topics page',
-'admin_avatar_taille_contact' => 'Avatars\s size (in pixels) on the contact page',
-'admin_avatar_taille_profil' => 'Avatars\s size (in pixels) on the profile page',
-'admin_average_posts'=> 'Daily posts average',
-'admin_average_users' => 'Daily inscription average',
-'admin_config_prerequis' => 'Requirements',
-'admin_config_spam_words' => 'Anti-spam admin',
-'admin_config_spipbb' => 'Enable SpipBB',
-'admin_config_spipbb_info' => 'Choose Yes to enable SpipBB',
-'admin_config_tables_ok' => 'SpipBB database table: OK',
-'admin_date_ouverture' => 'Openning date',
-'admin_form_action' => 'Action',
-'admin_form_creer_categorie' => 'Create a category',
-'admin_form_creer_forum' => 'Create a forum',
-'admin_form_deplacer' => 'Move',
-'admin_form_descendre' => 'Down',
-'admin_form_editer' => 'Edit',
-'admin_form_messages' => '&nbsp;',
-'admin_form_monter' => 'Up',
-'admin_form_sujets' => '&nbsp;',
-'admin_forums_configuration' => 'Configure SpipBB',
-'admin_forums_configuration_specifique' => 'Specific items',
-'admin_forums_configuration_avatar' => 'General configuration of avatars',
-'admin_forums_titre' => 'Forums admin',
-'admin_infos' => 'SpipBB - Admin - Summary',
-'admin_interface' => 'Public interface options',
-'admin_nombre_lignes_messages' =>'Number of lines of messages',
-'admin_plugin_requis_erreur' => 'missing required Plugin',
-'admin_plugin_requis_ok' => 'required Plugin installed',
-'admin_sous_titre' => 'Go to the SpipBB forums admin panel',
-'admin_spipbb_release' => 'SpipBB relase',
-'admin_spip_forums_erreur' => '<b>Error: You must enable SPIP public forums.</b>',
-'admin_spip_forums_ok' => 'The SPIP public forums are enabled.',
-'admin_spip_mots_cles_erreur' => '<b>Error: You must enable SPIP keywords</b>',
-'admin_spip_mots_cles_ok' => 'SPIP Keywords are enabled',
-'admin_spip_mots_forums_erreur' => '<b>Error: You must enable the SPIP forum keywords </b>',
-'admin_spip_mots_forums_ok' => 'The SPIP forum keywords are enabled',
-'admin_statistique' => 'Information',
-'admin_surtitre' => 'Forums management',
-'admin_temps_deplacement' => 'Amount of time before an admin can move',
-'admin_titre' => 'SpipBB Admin',
-'admin_total_posts' => 'Total number of posts',
-'admin_total_users' => 'Number of members',
-'admin_total_users_online' =>'Online members',
-'admin_valeur' => 'Value',
+	// C
+	'categorie' => 'Category',
+	'champsobli' => 'Fields marked * are compulsory.',
+	'citer' => 'Cite',
+	'click' => 'Click here',
+	'connecte' => 'Once connected, you will be able to change your password and personnal information; at the address&nbsp;',
+	'connexion' => 'Please enter your login and password to be connected.',
+	'contact' => 'Contact',
+	'courrier' => 'After the registring phase, your login and password will reach you quickly by e-mail.</p>',
+	'credits' => 'Developed with <a href=http://www.spip.net class=copyright>SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> par <a href=http://www.laprise.org/>James aka Klik&amp;eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> et <a href=http://www.missmopi.net/>Nad&amp;egrave;ge aka Miss Mopi</a> (logos from St&amp;eacute;phane)',
+	'credits_bis1' => 'GAFoSPIP v.&nbsp;',
+	'credits_bis2' => 'August 2005',
+	'credits_bis3' => 'Adapted for inspired by the forums management of:<br />',
+	'credits_bis4' => '(James, BoOz, Nikau et Miss Mopi).',
+	'creer_forum' => 'Create a new Forum',
 
-'aecrit' => 'wrote',
-'alerter_abus' => 'Signaler ce message comme abusif/injurieux...', ## GAF 0.5
-'alerter_sujet' => 'Message abusif', ## GAF 0.5
-'alerter_texte' => 'Nous attirons votre attention sur le message suivant :', ## GAF 0.5
-'annonce' => 'Announcement',
-'annonce_dpt' => 'Announcement: ',
-'anonyme' => 'Anonymous',
-'auteur' => 'Author',
-'avatar_saisie_url' => 'Your avatar\'s URL (http://... ...)', ## GAF 0.6
+	// D
+	'dans_forum' => 'in the forum',
+	'date' => 'Subscribed the',
+	'deja_enregistree' => 'This email address is already registered<p><a href=\'spip_pass.php3\'>[ Forgotten password? ]</a></p>',
+	'dernier' => '&amp;nbsp;Last<br />',
 
-// B
+	// E
+	'ecrirea' => 'Write an Email to',
+	'effacer' => 'Delete',
+	'email' => 'E-mail',
+	'enregistrement' => 'Enrollment',
+	'entree_biographie' => 'Short biography in a few words',
+	'entree_infos_perso' => 'Who are you ?',
+	'entree_nom_pseudo' => 'Your name',
+	'entree_nom_pseudo2' => 'Name or nickname</b>&amp;nbsp;:',
+	'entree_nom_site' => 'Name of your site',
+	'entree_url' => 'Address (URL) of your site',
+	'envmp' => 'Send a private message',
+	'etplus' => '... and more ...',
 
-//C
-'champs_obligatoires'=>'Fields marked with an * are compulsory.',
-'chercher' => 'Search',
-'choix_mots_annonce' => 'Make an announce',
-'choix_mots_ferme' => 'To close a thread',
-'choix_mots_postit' => 'Set sticky',
-'choix_mots_selection' => 'This keyword group should at least contain 3 keywords. Usually, the plugin will create them while installing. SpipBB needs - in general - the {ferme} (closed), {annonce} (announce) and {postit} (postit) keywords, but you are allowed to choose another one.',
-'choix_rubrique_selection' => 'Select the section that will host the base of your forums. Inside, each sub-section will be a forum group, each published article will open a new forum.',
-'choix_squelettes' => 'You are allowed to used other skeletons, but the selected files replacing groupeforum.html and filforum.html must already exist!',
-'citer' => 'Quote',
-'config_choix_mots' => 'Choose the keyword group',
-'config_choix_rubrique' => 'Choose the section used by spipBB forums',
-'config_choix_squelettes' => 'Choose the skeletons',
-'config_spipbb' => 'Basic spipBB config in order to use the forums with this plugin.',
-'contacter' => 'Contact',
-'contacter_dpt' => 'Contact: ',
+	// F
+	'faq' => 'FAQ',
+	'ferme' => 'This discussion is closed',
+	'fil_alerte' => 'It is not possible to subscribe to this thread',
+	'fil_annonce' => 'Change this thread to an Announcement',
+	'fil_deplace' => 'Move this thread',
+	'fil_sujet' => '&nbsp;Foot of the thread / Subjet<br />',
+	'forum_deplace' => 'Moved from the Forum',
+	'forum_ferme' => 'This forum is disactivated',
+	'forum_ferme_texte' => 'This forum is disactivated. You can\'t post here.',
+	'forum_ouvrir' => 'Open this forum',
+	'forum_selection' => 'to select in the (article) FORUM:',
+	'forum_vers' => 'To the Forum ...',
 
-//D
-'dans_forum' => 'in the forum',
-'deconnexion_' => 'Logoff ',
-'deplacer_confirmer' => 'Confirm the move',
-'deplacer_sujet_dpt' => 'Moving of:',
-'deplacer_dans_dpt' => 'Move to forum:',
-'deplacer_vide' => 'Not any other forum left: moving this thread is impossible!',
-'diviser_confirmer' => 'Split topic control panel',
-'diviser_expliquer' => 'Using the form below you can split a topic in two, either by selecting the posts individually or by splitting at a selected post.',
-'diviser_dans_dpt' => 'Forum for new topic:',
-'diviser_separer_choisis' => 'Split selected posts',
-'diviser_separer_suite' => 'Split from selected posts',
-'diviser_selection_dpt' => 'Select:',
-'diviser_vide' => 'Not any other forum left: spliting this thread is impossible!',
+	// G
+	'gaf_titre' => 'GAFoSPIP<br />Alternative management of Forums',
 
-//E
-'email' => 'E-mail',
-'emploi' => 'Job',
-'en_ligne' => 'Who\'s online?',
-'en_reponse_a' => 'Answering the message',
-'en_rep_sujet_' => '&nbsp;:::&nbsp;Topic : ',
+	// H
+	'haut_page' => 'Top of page',
 
-//F
+	// I
+	'icone_ferme' => 'Close',
+	'icone_gafospip' => 'GAFoSPIP/Forum Management',
+	'identifiant' => 'Here is your login information for the site',
+	'info' => 'Information',
+	'info_avertissement' => 'Warning',
+	'info_confirmer_passe' => 'Confirm thi new password:',
+	'info_icones' => 'Icon information',
+	'info_non_modifiable' => 'Cannot be modified',
+	'info_plus_cinq_car' => 'more than 5 characters',
+	'info_recommencer' => 'Please begin again.',
+	'info_reserve_admin' => 'Only administrators can change this address',
+	'item_login' => '<Login',
 
-'fiche_contact' => 'Contact form',
-'forum' => 'Forums',
-'forum_dpt' => 'Forum: ',
-'forum_ferme' => 'This forum is disabled',
-'forum_ferme_texte' => 'This forum is disabled. You cannot post to it anymore.',
-'forum_maintenance' => 'Ce forum est ferm&eacute; pour maintenance', ## GAF 0.6
-'fromphpbb_base' => 'Database name:',
-'fromphpbb_choix_test' => 'Run a blank test import (default choice):',
-'fromphpbb_choix_test_titre' => 'Launch real or test import',
-'fromphpbb_erreur_db_phpbb_config' => 'Impossible to read config value in phpBB database',
-'fromphpbb_erreur_db_phpbb' => 'Impossible to connect to phpBB database',
-'fromphpbb_erreur_db_spip' => 'Impossible to connect to SPIP database',
-'fromphpbb_erreur_forums' => 'Impossible to transfer the forums',
-'fromphpbb_fichier' => 'PhpBB config file found:',
-'fromphpbb_host' => 'Server\'s name/IP address',
-'fromphpbb_login' => 'Login:',
-'fromphpbb_parametres_base' => 'Choose either the path to phpBB config file or to fill the phpBB database access parameters:',
-'fromphpbb_parametres_rubrique' => 'Choose the sector where the phpBB forums will be imported',
-'fromphpbb_parametres_titre' => 'Config access to phpBB database',
-'fromphpbb_password' => 'Password:',
-'fromphpbb_prefix' => 'Tables prefix:',
-'fromphpbb_racine' => 'Path to phpBB (avatars):',
-'fromphpbb_table' => 'PhpBB config table found:',
-'fromphpbb_titre' => 'Import from a PhpBB forum',
-'fromphpbb_titre_etape' => 'Import from a PhpBB forum - step',
+	// L
+	'le' => 'The',
+	'lieu' => 'Localisation',
+	'login' => 'Connection',
+	'logout' => 'Disconnect',
+	'luiecrire' => 'Write to',
 
-//G
+	// M
+	'maintenance' => 'Do not forget to remove <br />"Closed for maintenance",<br />from the Forums concerned.',
+	'maintenance_ferme' => 'Shut down for maintenance',
+	'membre' => 'Member',
+	'membres_groupes' => 'Users group',
+	'membres_liste' => 'List of Members',
+	'membres_profil' => 'Profile',
+	'message_date' => 'Posted the&nbsp;',
+	'message_sujet' => 'Subject&nbsp;',
+	'messages' => 'Messages',
+	'messages_derniers' => 'Last Messages',
+	'messages_non_lus_grand' => 'No new messages',
+	'messages_nouveaux' => 'New&amp;nbsp;messages',
+	'messages_pas_nouveaux' => 'No new messages',
+	'messages_repondre' => 'New reply',
+	'messages_verifier' => 'Check the message',
+	'messages_voir_dernier' => 'See the last message',
+	'moderateurs' => 'Moderator(s)',
+	'mp' => 'Private Message',
 
-//H
+	// N
+	'no_message' => 'No subject or message corresponds to your search criteria',
+	'nom' => 'Username',
+	'non_valide' => '<h2 style=\'color:red\'>Invalid address</h2>',
+	'nouveaux_messages' => 'New messages',
 
-//I
-'info' => 'Information',
-'info_confirmer_passe' => 'Confirm this new password:',
-'info_inscription_invalide' => 'Impossible to register',
-'info_plus_cinq_car' => 'more than 5 characters',
-//'infos_refus_suivi_sujet' => '',
-//'infos_suivi_forum_par_inscription' => '',
-'inscription' => 'Register',
-'inscrit_s' => 'Registered',
+	// P
+	'page' => 'Page',
+	'pages_vues' => 'Pages viewed',
+	'paramprofil' => 'Change your parameters',
+	'pb_mysql' => 'A technical problem interrupted your registration, please try again',
+	'poste_effac' => 'Posts deleted!',
+	'poste_efface' => 'Delete Posts',
+	'poste_efface_lui' => 'This subject contains @nbr_post@ Post(s). Deleted with it!
+',
+	'poste_refuse' => 'Refused posts, to be deleted!',
+	'poste_reponse' => '&nbsp;Post / Reply',
+	'poste_valide' => 'Post(s) to be validated ...',
+	'pour_maintenance' => '"</b><br />for MAINTENANCE.<br />"',
+	'profil' => 'Profile of',
 
-'ip_informations' => 'IP Informations',
-'ip_adresse_post' => 'IP address for this post',
-'ip_adresse_membres' => 'Users posting from this IP address',
-'ip_adresse_autres' => 'Other IP addresses this user has posted from',
+	// R
+	'raison' => 'To know the reason',
+	'recherch' => 'Search',
+	'recherche_auteur' => 'Search by author',
+	'recherche_elargie' => 'Wider search',
+	'recherche_options' => 'Search options',
+	'recherche_texte' => 'The search is carried out in the message subject and body.
+There are no boolean operators, the implicit operator is a logical \'OR\'.
+Words of less than three letters are ignored.',
+	'recherche_titre' => 'Search for a subject',
+	'reglement' => '<p>The administrators and moderators of this forum will attempt to edit or delete all messages of a reprehensible nature as quickly as possible. But they cannot see every message. You acknowledge therefore that the messages posted on this site express the opinions of their authors and not those of the administrators, moderators or webmasters (excepting their own messages). In consequence, the latter cannot be help responsible for the contents.</p>
 
+<p>You agree not to post injurious, vulgar, obscene, diffamatory, threatening, sexual messages, or any other message contravening laws in force. Doing so may lead you to being banned from the site immediately and permanently (with information being sent to your Internet provider). The posting IP address of each message is recorded in order to help enforce these conditions. You agree to the webmaster, administrator and moderator s of this forum having the right to delete, edit, move, or lock any discussion subject at any time. As a user, you agree to the information you give being stocked in a database. However, this information will not be passed to anyone else without your permission. The webmaster, administrator and moderators cannot be held responsible if an attempt to pirate the system allows an access to this information. </p>
 
-//L
-'liste_inscrits' => 'Member list',
-'localisation' => 'Localization',
-'login' => 'Connection',
-'loisirs' => 'Hobbies',
+<p>This forum uses cookies to stock information on your computer. These cookies do not contain any information which you have entered. Their only use is to make the forum more user-friendly. The email address you give is used only to confirm your login details and in order to send you a new password in the event of you losing the original one.</p><p>By registering, you indicate your agreement with the conditions given above.</p>',
+	'repondre' => 'Reply',
+	'reponse' => 'Replying to the message',
+	'reponses' => 'Replies',
+	'resilier' => 'Unsubscribe',
+	'resilier_abo' => 'Unsubscribe from this thread',
+	'resultat' => 'Results for',
+	'retour' => 'Return',
+	'retour_forum' => 'Return to main Forum page',
+	'retour_site' => 'Return to home page',
+	'revenir_haut' => 'Return to top of page',
+	'rubrique_secteur' => '&nbsp;Section Sector<br />',
 
-//M
+	// S
+	'sabonner' => 'Subscribe to this thread',
+	'salon' => 'Lounge ...',
+	'salon_ouvrir' => 'Open this lounge',
+	'secteur' => 'Sector ...',
+	'secteur_forum' => 'FORUM SECTORS',
+	'selection_efface' => 'Delete selection ...',
+	'sinscrire' => 'Register yourself',
+	'site' => 'Website',
+	'sousrub_salon' => '&nbsp;Sub-section / Lounge<br />',
+	'statut' => 'Status',
+	'sujet' => 'Subjet&nbsp;',
+	'sujet_ajout' => 'Add a subject to the forum:<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'sujet_annonce' => 'Subject of announcement',
+	'sujet_auteur' => 'Author',
+	'sujet_clos_texte' => 'This subject is closed, you cab\'t post here.',
+	'sujet_clos_titre' => 'Subject Closed',
+	'sujet_nombre' => 'Number of subjects',
+	'sujet_nouveau' => 'New subject',
+	'sujet_ouvrir' => 'Open this Subject',
+	'sujet_rejete' => 'Subject rejected',
+	'sujet_valide' => 'Subject to validate',
+	'sujet_verifie' => 'Check this subject',
+	'sujet_visites' => 'Visits',
+	'sujets' => 'Subjets',
+	'sujets_aucun' => 'There is no subject in this forum at present',
+	'sur' => '&nbsp;on&nbsp;',
 
-'membres_inscrits' => 'registered members',
-'membres_les_plus_actifs' => 'Most active members',
-'message' => 'Message',
-'messages' => 'Messages',
-'message_s' => 'Messages',
-'messages_derniers' => 'Latest Messages',
-'message_s_dpt' => 'Messages: ',
-'messages_voir_dernier' => 'Jump to the last message',
-'messages_voir_dernier_s' => 'Watch the last messages',
-'moderateur_dpt' => 'Moderator: ', ## GAF 0.6
-'moderateurs' => 'Moderator(s)',
-'moderateurs_dpt' => 'Moderators: ', ## 0.5
-'modif_parametre' => 'Change your parameters',
-'mot_' => 'Word',
-//'mot_groupe_moderation' => '',
+	// T
+	'texte_login_precaution' => 'Warning! This is the login with which you are connected at present.
+ Use this form with care...',
+	'texte_repondre' => 'Reply to:<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'titre_cadre_signature_obligatoire' => '<b>Signature</b> [Required]<br />',
+	'total_messages' => 'Total messages',
+	'tous_forums' => 'All forums',
+	'tout_apropos' => 'All about',
+	'toutes_categories' => 'All categories',
 
-//N
-'nom_AIM'=>'chat (AIM)',
-'no_message' => 'No message by that search criterium',
-'nom_MSNM'=>'chat (MSN Messenger)',
-'nom_util' => 'Member name',
-'nom_Yahoo'=>'chat (Yahoo)',
-'non' => 'No',
-'numero_icq'=>'chat (ICQ)',
+	// V
+	'visites_jour' => 'Today\'s visits',
+	'visites_mois' => 'This month\'s visits',
+	'visites_semaine' => 'This week\'s visits',
+	'visiteurs_uniques' => 'Unique visitors',
+	'voir' => 'SEE',
+	'voir_evolution' => 'See visits evolution',
+	'voir_message' => 'See this message',
+	'voir_messages' => 'Show&amp;nbsp;new&amp;nbsp;messages',
+	'voirprofil' => 'See the profile of',
 
-//O
-'oui' => 'Yes',
-
-//P
-'pagine_page_' => ' .. page ',
-'pagine_post_s' => ' posts',
-'pagine_sujet_s' => ' topics',
-'par_' => 'by ',
-'poster_date_' => 'Posted the: ',
-'poster_message' => 'Post a message',
-'postit' => 'Postit',
-'postit_dpt' => 'Postit: ',
-'post_titre' => '&nbsp;:::&nbsp;Title: ',
-'previsualisation' => 'Preview',
-'profil' => 'Profile',
-
-//R
-'raison_clic' => 'clic here',
-'raison_texte' => 'To know the cause',
-'recherche' => 'Search',
-'recherche_elargie' => 'Advanced search',
-'refus_suivi_thread' => '(don\'t remind) Do no modify!', ## GAF 0.6
-'reglement'=>'<p>The administrators and moderators of this forum will 
-	endeavour to delete or edit all the messages with offending content
-	as quickly as possible. However, it is impossible to check all the
-	messages.You do agree that all the messages posted to these forums 
-	reflect the opinions of their respective authors and not the 
-	opinions of the administrators, moderators or Webmasters who do not 
-	endorse them (except messages posted by themselves) and consequently 
-	cannot be held responsible or liable.</p>
-	<p>While we don\'t expect the language within the forums to be that 
-	of the vicarage tea party, anyone who indulges in, among other things, 
-	abusive, illegal, sexually or racially objectionable, defamatory or 
-	harassing language of any sort will find their messages deleted as 
-	soon as they are discovered. Offenders may find themselves permanently 
-	banned (and their ISP will be informed). The IP address of each 
-	message is recorded in order to uphold these regulations. You do 
-	agree that the Webmaster, the administrator and the moderators of 
-	this forum have the right to delete, edit, move or lock any topic 
-	of discussion at any moment. As a user, you do agree that the 
-	information you provide below will be stored in a database. 
-	However, this information will not be disclosed to any third party 
-	or company without your prior consent. The Webmaster, the 
-	administrator and the moderators will not be held liable if a 
-	hacking attempt succeeds in getting access to this data.</p>
-	<p>This forum will log information via cookies stored in your 
-	computer. These cookies will not contain any information that you 
-	have entered below, their only goal is to enhance the user 
-	experience.The e-mail address will be used only to confirm the 
-	details of your registration and your password (and also to send 
-	you a new password should you spipbbet yours).</p>
-	<p>By registering, you guarantee your agreement with the above 
-	regulations.</p>',
-'reponse_s_' => 'Replies',
-'resultat_s_pour_' => ' results for ',
-'retour_forum' => 'Back to the forum home',
-
-//S
-
-'s_abonner_a'=> 'RSS: subscribe to this thread',
-'signature_saisie_texte' => 'Fill your signature', ## GAF 0.6+
-'sign_tempo' => 'Build with <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
-'sinscrire'=> 'Register',
-'site_propose' => 'Proposed Website',
-'site_web' => 'Web site',
-'squelette_filforum' => 'Skeleton base for threads:',
-'squelette_groupeforum' => 'Skeleton base for forum groups:',
-'statut' => 'Status',
-'statut_admin' => 'Admin',
-'statut_redac' => 'Moderator',
-'statut_visit' => 'Member',
-'sujet_auteur' => 'Author',
-'sujet_clos_texte' => 'This topic is closed, you cannot post to it.',
-'sujet_clos_titre' => 'Topic closed',
-'sujet_dpt' => 'Topic: ',
-'sujet_nouveau' => 'New topic',
-'sujet_repondre' => 'Reply',
-'sujets' => 'Topics',
-'sujet_s' => 'Topics',
-'sujets_aucun' => 'No topics in this forum for the time being',
-
-'sw_admin_can_spam' => 'Allow admin to post spam words',
-'sw_admin_no_spam' => 'No spam',
-'sw_ban_ip_titre' => 'Ban IP as well?',
-'sw_config_exceptions_titre' => 'Exceptions',
-'sw_config_exceptions' => 'You can set exceptions for privileged members here. The members who meet these criteria will be permitted to post spam words.',
-'sw_config_generale' => 'Currently activated spam words:',
-'sw_config_generale_titre' => 'General spam filtering settings',
-'sw_config_warning' => 'Here you can define the text to PM your users if you choose to warn them via PM when they posts a spam word (max. 255 characters).',
-'sw_config_warning_titre' => 'Private message warning settings',
-'sw_disable_sw_titre' => '<strong>Enable Spam words filter</strong><br />If you need to bypass this filter,<br />then set this to "No".',
-'sw_modo_can_spam' => 'Allow moderators to post spam words',
-'sw_nb_spam_ban_titre' => 'Number of offenses before user is automatically banned',
-'sw_pm_spam_warning_message' => 'This is a warning. You have tried to post a word that is defined as spam on this website. Please stop.',
-'sw_pm_spam_warning_titre' => 'Warning.',
-'sw_send_pm_warning' => 'Send a PM to user to warn them when they submit a post that contains a spam word',
-'sw_spam_forum_titre' => 'Manage flagged posts',
-'sw_spam_titre' => 'Spam filtering',
-'sw_spam_words_action' => 'From this control panel you can add, edit, and remove spam words. Wildcards (*) are accepted in the word field. For example, *test* will match detestable, test* would match testing, *test would match detest.',
-'sw_spam_words_mass_add' => 'Paste or type your spam words lists into the text area. Separate each spam word by either a comma, semi-colon, or line-break',
-'sw_spam_words_titre' => 'Spam words filtering',
-'sw_spam_words_url_add' => 'Type the URL of file with a properly formatted word list. Example: http://spipbb.spip-zone.info/plugins/spipBB/base/spamwordlist.csv .',
-'sw_warning_from_admin' => 'Select the administrator that is listed as the Private Message sender',
-'sw_warning_pm_message' => 'Private message text',
-'sw_warning_pm_titre' => 'Private message subject',
-'sw_word' => 'Word',
-
-
-//T
-'titre_spipbb' => 'SpipBB',
-'total_membres' => 'We have a total of ',
-'total_messages_membres' => 'Our members posted a total of ',
-'tous' => 'All',
-'tous_forums' => 'All forums',
-
-//V
-'visible_annuaire' => 'Appear on the (public) member list', ## GAF 0.6
-'visible_annuaire_forum' => 'Appear on the member list', ## GAF 0.6
-'visites' => 'Views',
-'votre_bio' => 'Short birography.',
-'votre_email' => 'Your email',
-'votre_nouveau_passe' => 'New password',
-'votre_signature' => 'Your signature:', ## GAF 0.6
-'votre_site' => 'Your website\'s name',
-'votre_url_avatar' => 'Your avatar\'s URL(http://...)', ## GAF 0.6
-'votre_url_site' => 'Your websites\'s address (URL)',
-
-
-//W
-'www' => 'WWW' // unused (array end)
-
+	// W
+	'www' => 'WWW'
 );
 
 ?>
