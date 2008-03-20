@@ -1,40 +1,50 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// pour la contrib sedna
-// esto es un archivo de idioma SPIP para la contrib sedna
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier sur la zone **
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'aff_resume' => 'Mostrar os resumes',
-'afficher_sources' => 'Mostrar esta fonte',
-'annee' => 'Ano',
-'articles_recents_court' => 'Art&iacute;gos recentes',
-'connexion' => 'Conexi&oacute;n/Inscribirse',
-'deconnexion' => 'Desconexi&oacute;n',
-'deuxjours' => 'Dous d&iacute;as',
-'derniere_syndication' => '&Uacute;ltima sindicaci&oacute;n deste sitio efectuada',
-'liens' => 'art&iacute;go',
-'liens_pluriel' => 'art&iacute;gos',
-'masquer_resume' => 'Ocultar os resumes',
-'masquer_sources' => 'Ocultar esta fonte',
-'mois' => 'Mes',
-'pas_articles' => '&iexcl;Non hai art&iacute;gos neste per&iacute;odo!',
-'pas_synchro' => 'Non sincronizar',
-'preferences' => 'Preferencias',
-'semaine' => 'Semana',
-'sources' => 'Fluxos',
-'synchro' => 'Sincronizar',
-'synchro_titre' => 'Gardar no sitio a lista de artígos lidos',
-'syndication_fait' => 'Sindicaci&oacute;n efectuada',
-'syndication_ajour' => 'Actualizar agora',
-'derniere_syndication' => '&Uacute;ltima sindicaci&oacute;n:&nbsp;',
-'toutes' => 'Todos',
+	// A
+	'aff_resume' => 'Amosar os resumos',
+	'afficher_sources' => 'Amosar esta fonte',
+	'annee' => 'Ano',
+	'articles_recents_court' => 'Artigos recentes',
 
+	// C
+	'connexion' => 'Conexi&oacute;n',
 
-'probleme_de_syndication' => 'problema de sindicaci&oacute;n'
+	// D
+	'deconnexion' => 'Desconexi&oacute;n',
+	'derniere_syndication' => 'A &uacute;ltima sindicaci&oacute;n deste web foi efectuada',
+	'deuxjours' => 'Dous d&iacute;as',
 
+	// L
+	'liens' => 'artigo',
+	'liens_pluriel' => 'artigos',
+
+	// M
+	'masquer_resume' => 'Ocultar os resumos',
+	'masquer_sources' => 'Ocultar esta fonte',
+	'mois' => 'Mes',
+
+	// P
+	'pas_articles' => 'Non hai ning&uacute;n artigo deste per&iacute;odo&nbsp;!',
+	'pas_synchro' => 'Non sincronizar',
+	'preferences' => 'Preferencias',
+	'probleme_de_syndication' => 'Problema de sindicaci&oacute;n',
+
+	// S
+	'semaine' => 'Semana',
+	'sources' => 'Fontes',
+	'synchro' => 'Sincronizar',
+	'synchro_titre' => 'Rexistrar no web a lista dos artigos lidos',
+	'syndication_ajour' => 'Actualizar agora',
+	'syndication_fait' => 'A sindicaci&oacute;n foi efectuada',
+
+	// T
+	'toutes' => 'Todos'
 );
-
 
 ?>
