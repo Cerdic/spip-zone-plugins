@@ -1,21 +1,40 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier sur la zone **
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// A
 	'annuler' => 'Cancelar',
-	'editer_@type@_@id@' => 'Editar @type@ @id@ completamente',
-    'deja_modifie' => 'Ya modificado',
-    'donnees_mal_formatees' => 'Datos fuera de formato',
-    'editer' => 'Modificar',
-    'editer_tout' => 'Modificar todo',
-    'modifie_par_ailleurs' => 'Modificado por otra persona',
-    'non_autorise' => 'No autorizado',
-    'non_implemente' => 'No implementado',
-    'pas_de_modification' => 'Sin modificaciones',
-    'pas_de_valeur' => 'Sin valor',
-    'sauvegarder' => '&iquest;Guardar las modificaciones?',
-    'svp_copier_coller' => 'Lo lamentamos copie/pegue los cambios y vuelva a comenzar',
-    'veuillez_patienter'=>'Por favor, espere...'
-    );
+
+	// D
+	'deja_modifie' => 'Ya modificado',
+	'donnees_mal_formatees' => 'Datos mal formateados',
+
+	// E
+	'editer' => 'Editar',
+	'editer_@type@_@id@' => 'Editar @type@ @id@ entero',
+	'editer_tout' => 'Editar todo',
+
+	// M
+	'modifie_par_ailleurs' => 'Modificado por otro lado',
+
+	// N
+	'non_autorise' => 'No autorizado',
+	'non_implemente' => 'No implementado',
+
+	// P
+	'pas_de_modification' => 'No hay modificaciones',
+	'pas_de_valeur' => 'No hay valor',
+
+	// S
+	'sauvegarder' => '&iquest;Guardar las modificaciones?',
+	'svp_copier_coller' => 'Perdon, copia/pega tus cambios y vuelve a empezar',
+
+	// V
+	'veuillez_patienter' => 'Favor esperar...'
+);
+
 ?>
