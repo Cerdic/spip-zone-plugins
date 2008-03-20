@@ -4,7 +4,6 @@ include_spip('public/boucles');
 include_spip('base/echoppe');
 
 
-
 //global $tables_jointures;
 
 //$tables_jointures['spip_echoppe_categories'][] = 'spip_echoppe_categories_descriptions';

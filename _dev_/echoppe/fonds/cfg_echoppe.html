@@ -1,0 +1,22 @@
+#CACHE{0}
+<!-- titre=<:echoppe:confguration_d_echoppe:> -->
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+	<fieldset><legend><:echoppe:configuration_generale:></legend>
+		<:echoppe:taux_de_tva_par_defaut:>&nbsp;<input type="text" name="taux_de_tva_par_defaut" value="#CONFIG{echoppe/taux_de_tva_par_defaut, 6}" size="1" />&nbsp;%<br />
+		<:echoppe:nombre_de_chiffre_apres_la_virgule:>:&nbsp;<input type="text" name="nombre_chiffre_apres_virgule" value="[(#CONFIG{echoppe/nombre_chiffre_apres_virgule,2})]" size="1" />
+	</fieldset>
+	<br />
+	<fieldset><legend><:echoppe:les_produits:></legend>
+		<input type="checkbox" name="utiliser_date_mise_en_et_hors_ligne" [(#CONFIG{echoppe/utiliser_date_mise_en_et_hors_ligne,non}|=={oui}|?{CHECKED,})] /><:echoppe:utiliser_date_mise_et_retrait_en_ligne:>
+	</fieldset>
+	<br />
+	<fieldset><legend><:echoppe:les_depots:></legend>
+		<:echoppe:utiliser_le_depot_virtuel_fournisseur:>
+		<select name="utiliser_depot_fournisseur" >
+			<option value="non" [(#CONFIG{echoppe/utiliser_depot_fournisseur,non}|=={non}|?{SELECTED})] >non</option>
+			<option value="oui" [(#CONFIG{echoppe/utiliser_depot_fournisseur,non}|=={oui}|?{SELECTED})] >oui</option>
+		</select>
+	</fieldset>
+	<br />
+	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</form>
