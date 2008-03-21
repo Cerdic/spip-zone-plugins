@@ -58,21 +58,44 @@ function spip_thelia_appeler_moteur_thelia($texte)
 		case 'virement' : $securise=1; $pageret=1; $reset=1; break;
 	}
 	
-	//conflit sur la variable $page. 
 	global $page;
+	
+	//sauvegarde des variables qui vont être modifiées pour thélia
+	$sav_page = $page;
+	$sav_session_navig_lang = $_SESSION['navig']->lang;
+	$sav_request_lang = $_REQUEST['lang'];
+	$sav_request_action = $_REQUEST['action'];
+	$sav_request_page = $_REQUEST['page'];
+	$sav_request_article = $_REQUEST['article'];
+
+
+	//conflit sur la variable $page. 
 	$page = new stdclass;
 	$page = "";
 	
 	
+
 	include_once("classes/Navigation.class.php");
 	
 	session_start();
-	
-	//conflit entre spip et thélia sur le nommage des langues. on force provisoirement le français dans thélia.
+
+	//conflit entre spip et thélia sur la langue en session.
 	if ($_SESSION['navig']->lang != '') {
 		$_SESSION['navig']->lang=0;
 	}
 
+	//concordance des langues entre spip et thélia 
+	//modifiez éventuellement la liste si vous avez ajouté de nouvelles langues dans Thélia
+	
+
+	switch($_REQUEST['lang']) {
+		case 'fr' : $_REQUEST['lang'] = 1; break;
+		case 'en' : $_REQUEST['lang'] = 2; break;
+		case 'es' : $_REQUEST['lang'] = 3; break;
+		default: $_REQUEST['lang'] = 1; break;
+	}
+	
+	
 	//réaffectation des variables de thélia qui ont étées renommées dans les squelettes pour éviter les conflits avec spip
 	$_REQUEST['action'] = $_REQUEST['thelia_action'];
 	$_REQUEST['page'] = $_REQUEST['page_thelia'];
@@ -103,8 +126,19 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	$texte = remplacement_sortie_thelia($texte);
 
 	//au retour de thélia, on convertie en utf8 pour spip
-	return (unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8'));	
+	$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
 	
+
+	//on restaure les variables session et request modifiées pour les plugins suivants sur affichage final
+	$page = $sav_page;
+	$_SESSION['navig']->lang = $sav_session_navig_lang;
+	$_REQUEST['lang'] = $sav_request_lang;
+	$_REQUEST['action'] = $sav_request_action;
+	$_REQUEST['page'] = $sav_request_page;
+	$_REQUEST['article'] = $sav_request_article;
+
+	
+	return ($texte);	
 }
 
 function remplacement_sortie_thelia($in_thelia)

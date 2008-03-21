@@ -39,7 +39,7 @@
 				<h3><:spipthelia:deja_compte:></h3>
 				</div>
 				
-				<form action="#URL_PAGE{connexion}" method="post" name="connexion" id="connexion">
+				<form action="#URL_PAGE{connexion,lang=#LANG}" method="post" name="connexion" id="connexion">
             				<input type="hidden" name="thelia_action" value="connexion" />
 				
 				<table>
@@ -66,13 +66,13 @@
 				<h3><:spipthelia:nouveau_client:></h3>
 				</div>
 				
-				<form action="#URL_PAGE{nouveau}" method="post" name="nouveau" id="nouveau">
+				<form action="#URL_PAGE{nouveau,lang=#LANG}" method="post" name="nouveau" id="nouveau">
             				<input type="hidden" name="thelia_action" value="creercompte" />
 				
 				<table>
 				<tbody>
 					<tr>
-						<td class="ligneTableau">Civilit&eacute;*</td>
+						<td class="ligneTableau"><:spipthelia:civilite:>*</td>
 						<td class="ligneTableau">
 						<select name="raison" size="1" class="zoneDeSaisie">
             						<option value="" selected="selected"><:spipthelia:choisissez:></option>

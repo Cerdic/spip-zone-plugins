@@ -42,8 +42,10 @@
 			 	<a href="THELIA-" onclick="window.open('#URL_PAGE{imgpop,ref=THELIA-PRODUIT_REF&amp;id_image=THELIA-ID}', '', 'toolbar,width=600,height=840')">
 				<img src="THELIA-IMAGE"  alt="THELIA-PRODTITRE" title="THELIA-PRODTITRE" class="contourImage"  id="photozoom" /></a>		   
 				</THELIA_img>
-					<form action="#URL_PAGE{panier,thelia_action=ajouter&amp;ref=THELIA-REF}" method="post" id="formAjouter">
-					<div class="ficheProduit">
+					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" id="formAjouter">
+						<input type="hidden" name="thelia_action" value="ajouter" />
+                				<input type="hidden" name="ref" value="THELIA-REF" />
+                			<div class="ficheProduit">
 				 		<div class="chapoProduit">
 						THELIA-CHAPO
 						</div>

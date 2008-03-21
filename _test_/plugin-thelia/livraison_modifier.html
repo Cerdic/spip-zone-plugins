@@ -31,7 +31,7 @@
 			
 			[(#REM) Contenu de la page ]
 
-			<form action="#URL_PAGE{adresse}" method="post" name="modifier" id="modifier">
+			<form action="#URL_PAGE{adresse,lang=#LANG}" method="post" name="modifier" id="modifier">
 			<input type="hidden" name="thelia_action" value="modifierlivraison" />
 			<THELIA_adr type="ADRESSE" adresse="THELIA-ADRESSE_ID" client="THELIA-CLIENT_ID">
 			<input name="id" type="hidden" value="THELIA-ID" />

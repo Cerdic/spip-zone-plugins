@@ -123,7 +123,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'boutique' => 'Boutique',
 'site_realise_avec_spip' => 'Site r&eacute;alis&eacute; avec T&eacute;lia',
 'et' => 'et',
-'plugin_thelia' => 'avec le plugin Th&eacute;lia pour SPIP'
+'plugin_thelia' => 'avec le plugin Th&eacute;lia pour SPIP',
+'retour_boutique' => 'Continuer mes achats'
 
 
 
