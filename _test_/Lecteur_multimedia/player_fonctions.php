@@ -1,5 +1,11 @@
 <?php
 
+	// player_fonctions.php
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+
 if (!defined('_DIR_PLUGIN_PLAYER')){ // defini automatiquement par SPIP 1.9.2
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_PLAYER',(_DIR_PLUGINS.end($p)."/"));
@@ -10,8 +16,8 @@ function Player_head(){
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'soundmanager/soundmanager2.js"></script>';
 	$flux .= '<script type="text/javascript"><!--'."\n"
 	. 'var musicplayerurl="'._DIR_PLUGIN_PLAYER.'eraplayer_playlist.swf";'
-	. 'var image_play="'._DIR_PLUGIN_PLAYER.'playl.gif";'
-	. 'var image_pause="'._DIR_PLUGIN_PLAYER.'pausel.gif";'
+	. 'var image_play="'._DIR_PLUGIN_PLAYER_IMAGES.'playl.gif";'
+	. 'var image_pause="'._DIR_PLUGIN_PLAYER_IMAGES.'pausel.gif";'
 	. 'soundManager.url = "'._DIR_PLUGIN_PLAYER.'soundmanager/soundmanager2.swf";'
 	. 'soundManager.consoleOnly = true;'
   	. 'soundManager.debugMode = false;'
@@ -67,6 +73,76 @@ $titre = eregi_replace("_"," ", $titre );
 $titre = eregi_replace("'"," ",$titre );
 
 return $titre ;
+}
+
+// CP 20080321
+// balise à placer dans le modèle
+// donne la ligne FlashVars
+function balise_PLAYER_FLV_FLASHVVARS ($p) {
+	
+	static $player_flv_flashvars = null;
+
+	$id_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+	
+	// #PLAYER_FLV_FLASHVVARS hors boucle ? ne rien faire !
+	if (!$type = $p->boucles[$id_boucle]->type_requete) {
+		$p->code = "''";
+	} else {
+	// sinon, renvoyer les Flashvars sur une seule ligne
+
+		if(!$player_flv_flashvars) {
+		
+			$player_flv_lecteurs = unserialize(_PLAYER_FLV_LECTEURS);
+	
+			$player_config = unserialize($GLOBALS['meta'][_PLAYER_META_PREFERENCES]);
+			
+			include_spip('inc/player_flv_config');
+			// la grosse table commune à tous les profils
+			$player_flv_config = player_flv_config();
+	
+			$result = array();
+			$player_key = $player_config['player_key'];
+			
+			// n'envoyer que ce qui est nécessaire au profil configuré en admin
+			// mini demande beaucoup moins de variables que multi
+			foreach($player_flv_config as $key => $value) {
+				if(
+					in_array($player_key, explode(' ', $value['class']))
+					&& !empty($player_config['player_video_prefs'][$key])
+				) {
+					$result[] = $key."=".$player_config['player_video_prefs'][$key];
+				}
+			}
+			$player_flv_flashvars = implode('&amp;', $result);
+		}
+		
+		$p->code = "'$player_flv_flashvars'";
+	}
+	$p->interdire_scripts = true;
+	return($p);
+}
+
+
+// CP 20080321
+// balise à placer dans le modèle
+// donne le nom du fichier player flv demandé à la config
+function balise_PLAYER_FLV_PLAYER ($p) {
+
+	$id_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+	
+	// #PLAYER_FLV_PLAYER hors boucle ? ne rien faire !
+	if (!$type = $p->boucles[$id_boucle]->type_requete) {
+		$p->code = "''";
+	} else {
+	// sinon, renvoyer le nom du swf
+
+		$player_config = unserialize($GLOBALS['meta'][_PLAYER_META_PREFERENCES]);
+		$result = $player_config['player_video'];
+		
+		$p->code = "'$result'";
+	}
+	$p->interdire_scripts = true;
+	return($p);
 }
 
 ?>
