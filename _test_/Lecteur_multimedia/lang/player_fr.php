@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 	// lang/player_fr.php
 	
@@ -66,8 +66,10 @@ $GLOBALS['i18n_'._PLAYER_PREFIX.'_fr'] = array(
 , 'label_scrollbarcolor' => "Couleur de la barre de d&eacute;filement : "
 , 'label_scrollbarovercolor' => "Couleur de la barre de d&eacute;filement au survol : "
 , 'label_currentflvcolor' => "Couleur de la vid&eacute;o s&eacute;lectionn&eacute;e : "
-, 'label_onclick' => "URL de la destination au click sur la vid&eacute;o : "
+, 'label_onclick' => "Action click sur la vid&eacute;o ('none', 'playpause' ou URL de la destination) : "
 , 'label_onclicktarget' => "Cible de l'URL au click : "
+, 'label_ondoubleclick' => "Action double-click sur la vid&eacute;o ('none', 'fullscreen', 'playpause', ou URL &agrave; ouvrir) : "
+, 'label_ondoubleclicktarget' => "Cible de l'URL au double click sur la vid&eacute;o : "
 , 'label_playertimeout' => "D&eacute;lai en millisecondes avant que le lecteur se cache : "
 , 'label_videodelay' => "Dur&eacute;e d'affichage du titre au changement de vid&eacute;o : "
 , 'label_shortcut' => "Activer les raccourcis clavier"
@@ -78,8 +80,6 @@ $GLOBALS['i18n_'._PLAYER_PREFIX.'_fr'] = array(
 , 'label_scrollbarsize' => "Taille de la barre de d&eacute;filement : "
 , 'label_showtitlebackground' => "Affichage du fond du titre : "
 , 'label_playeralpha' => "Transparence du fond du lecteur : "
-, 'label_ondoubleclick' => "Action sur le double-click : "
-, 'label_ondoubleclicktarget' => "Cible de l'URL au double click sur la vid&eacute;o : "
 , 'label_showmouse' => "Affichage de la souris : "
 , 'label_top1' => "Image par dessus la vid&eacute;o : "
 , 'label_showiconplay' => "Afficher l'icone PLAY au milieu de la vid&eacute;o"

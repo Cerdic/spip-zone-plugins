@@ -355,6 +355,21 @@ function player_flv_config () {
 			, 'values' => array('_self', '_blank')
 			, 'default' => '_self'
 		  )
+		, 'ondoubleclick' // Action sur le double click: none, fullscreen, playpause, ou l'url à ouvrir.
+		  => array(
+			'type' => "text"
+		  	, 'class' => "maxi multi"
+			, 'label' => _T(_PLAYER_LANG."label_ondoubleclick")
+			, 'default' => 'fullscreen'
+		  )
+		, 'ondoubleclicktarget' // La cible de l'URL au double click sur la vidéo. Par défaut à _self. Pour ouvrir une nouvelle fenêtre, mettez _blank.
+		  => array(
+			'type' => "list"
+		  	, 'class' => "maxi multi"
+			, 'label' => _T(_PLAYER_LANG."label_ondoubleclicktarget")
+			, 'values' => array('_self', '_blank')
+			, 'default' => '_self'
+		  )
 		, 'playertimeout' // Le délai en milliseconde avant que le lecteur se cache (quand il est en mode autohide bien sûr. Par défaut à 1500.
 		  => array(
 			'type' => "int"
@@ -428,21 +443,6 @@ function player_flv_config () {
 			, 'label' => _T(_PLAYER_LANG."label_playeralpha")
 			, 'values' => array(0, 20, 40, 60, 80, 100)
 			, 'default' => '100'
-		  )
-		, 'ondoubleclick' // Action sur le double click: none, fullscreen, playpause, ou l'url à ouvrir.
-		  => array(
-			'type' => "text"
-		  	, 'class' => "maxi multi"
-			, 'label' => _T(_PLAYER_LANG."label_ondoubleclick")
-			, 'default' => 'fullscreen'
-		  )
-		, 'ondoubleclicktarget' // La cible de l'URL au double click sur la vidéo. Par défaut à _self. Pour ouvrir une nouvelle fenêtre, mettez _blank.
-		  => array(
-			'type' => "list"
-		  	, 'class' => "maxi multi"
-			, 'label' => _T(_PLAYER_LANG."label_ondoubleclicktarget")
-			, 'values' => array('_self', '_blank')
-			, 'default' => '_self'
 		  )
 		, 'showmouse' // Affichage de la souris : always, autohide, never.
 		  => array(
