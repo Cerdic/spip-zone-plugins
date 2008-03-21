@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 	// lang/lilo_fr.php
 	
