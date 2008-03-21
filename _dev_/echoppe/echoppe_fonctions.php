@@ -18,16 +18,16 @@ function generer_logo($nom_fichier){
 
 function calculer_prix_tvac($prix_htva, $taux_tva){
 	if ($taux_tva == 0){
-		$taux_tva = lire_config('echoppe/taux_de_tva_par_defaut');
+		$taux_tva = lire_config('echoppe/taux_de_tva_par_defaut',21);
 	}
-	$prix_ttc = $prix_htva + ($prix_htva * ($taux_tva/100));
-	$prix_ttc = round($prix_ttc, lire_config('echoppe/nombre_chiffre_apres_virgule'));
+	$prix_ttc = $prix_htva + ($prix_htva * ($taux_tva * 100));
+	$prix_ttc = round($prix_ttc, lire_config('echoppe/nombre_chiffre_apres_virgule',2));
 	return $prix_ttc;
 }
 
 function calculer_taux_tva($taux_tva){
 	if ($taux_tva == 0){
-		$taux_tva = lire_config('echoppe/taux_de_tva_par_defaut');
+		$taux_tva = lire_config('echoppe/taux_de_tva_par_defaut',21);
 	}
 	return $taux_tva;
 }
@@ -37,6 +37,20 @@ function vide_si_zero($_var){
 		$_var = ""; 
 	}
 	return $_var;
+}
+function calculer_url_achat($_var){
+	if (isset($_var)){
+		$url = generer_url_public('achat_produit','id_produit='.$_var);
+		return $url;
+	}
+	
+}
+function calculer_url_achat_rapide($_var){
+	if (isset($_var)){
+		$url = generer_url_action('ajouter_panier','id_produit='.$_var.'&nombre=1');
+		return $url;
+	}
+	
 }
 /*=============================BALISES===============================*/
 function balise_PRIX_TVAC($p){
@@ -70,6 +84,22 @@ function balise_LARGEUR($p){
 function balise_LONGUEUR($p){
 	$_longueur = champ_sql('longueur', $p);
 	$p->code = "vide_si_zero($_longueur)";
+	return $p;
+}
+function balise_URL_ACHAT($p){
+	$_id_produit = champ_sql('id_produit', $p);
+	$p->code = "calculer_url_achat($_id_produit)";
+	return $p;
+}
+function balise_URL_ACHAT_RAPIDE($p){
+	$_id_produit = champ_sql('id_produit', $p);
+	$p->code = "calculer_url_achat_rapide($_id_produit)";
+	return $p;
+}
+
+function balise_TOKEN_PANIIER($p){
+	$_token_panier = $GLOBALS['auteur_session']['echoppe']['token_panier'];
+	$p->code = "$_token_panier";
 	return $p;
 }
 ?>

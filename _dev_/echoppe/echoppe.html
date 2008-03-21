@@ -5,7 +5,8 @@
 	</head>
 	<body>
 	<h1>Démonstration des boucles d'echoppe.</h1><br />
-<h1 style="background:transparent url('[(#CHEMIN{'images/echoppe_blk_128.png'})]') no-repeat left center;padding-left:140px;height:128px"><:echoppe:echoppe:></h1>
+	<h1 style="background:transparent url('[(#CHEMIN{'images/echoppe_blk_128.png'})]') no-repeat left center;padding-left:140px;height:128px"><:echoppe:echoppe:></h1>
+	<em>Token du panier = #TOKEN_PANIER</em>
 <B_CategoriesALaRacine>
 <div >
 	<ul>
@@ -25,7 +26,10 @@
 						<br />
 						[(#MODELE{stock}{id_produit})] en stock.
 						<br />
-						[Hauteur : (#HAUTEUR)]
+						[Hauteur : (#HAUTEUR)<br />]
+						[Url d'achat : <a href="#URL_ACHAT">(#URL_ACHAT)</a><br />]
+						[Url d'achat rapide : <a href="#URL_ACHAT_RAPIDE">(#URL_ACHAT_RAPIDE)</a><br />]
+						
 					</li>
 					</BOUCLE_LesProduitsDeCetteCategorie>
 				</ul>
