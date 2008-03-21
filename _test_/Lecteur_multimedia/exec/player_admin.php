@@ -126,7 +126,7 @@ function exec_player_admin()
 	////////////////////////////////////
 	// configuration audio
 	$page_result .= ""
-		. player_affiche_config_form('config_fonctions')
+		. player_affiche_config_form('player_admin')
 		;
 
 	////////////////////////////////////
