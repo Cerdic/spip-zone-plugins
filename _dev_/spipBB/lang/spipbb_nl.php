@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aecrit' => 'heeft geschreven&nbsp;',
 	'annonce' => 'Aankondiging',
 	'anonyme' => 'Anoniem',
-	'article_forum' => '&nbsp;Artikel / Forum<br>',
+	'article_forum' => '&nbsp;Artikel / Forum<br />',
 	'aucun' => 'Geen enkel !',
 	'avatar' => '<NEW>Avatar',
 
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'credits' => 'Gebouwd met <a href=http://www.spip.net class=copyright>SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> door <a href=http://www.laprise.org/>James aka Klik&amp;eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> en <a href=http://www.missmopi.net/>Nad&amp;egrave;ge aka Miss Mopi</a> (logos de St&amp;eacute;phane)',
 	'credits_bis1' => 'GAFoSPIP v.&nbsp;',
 	'credits_bis2' => 'Augustus 2005',
-	'credits_bis3' => 'Aangepast voor en ge&iuml;nspireerd op de afhandeling van forums van&nbsp;:<br>',
+	'credits_bis3' => 'Aangepast voor en ge&iuml;nspireerd op de afhandeling van forums van&nbsp;:<br />',
 	'credits_bis4' => '(James, BoOz, Nikau en Miss Mopi).',
 	'creer_forum' => 'Nieuw forum aanmaken',
 
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dans_forum' => 'in het forum',
 	'date' => 'Ingeschreven op ',
 	'deja_enregistree' => 'Dit e-mailadres is reeds geregistreerd <p><a href=\'spip_pass.php3\'>[ Wachtwoord vergeten </a></p>',
-	'dernier' => '&amp;nbsp;Laatste<br>',
+	'dernier' => '&amp;nbsp;Laatste<br />',
 
 	// E
 	'ecrirea' => 'E-mail sturen aan',
@@ -72,7 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fil_alerte' => 'Het is niet mogelijk zich bij deze thread (draad) aan te sluiten',
 	'fil_annonce' => 'Deze thread in aankondiging omvormen',
 	'fil_deplace' => 'Deze thread verplaatsen',
-	'fil_sujet' => '&nbsp;Voet van de thread / Onderwerp<br>',
+	'fil_sujet' => '&nbsp;Voet van de thread / Onderwerp<br />',
 	'forum_deplace' => 'Verhuisd; van het forum ...',
 	'forum_ferme' => 'Dit forum werd inactief gezet',
 	'forum_ferme_texte' => 'Dit forum werd inactief gezet. Je kan er geen berichten meer posten.',
@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_vers' => 'Naar het forum ...',
 
 	// G
-	'gaf_titre' => 'GAFoSPIP<br>Alternatief beheer van de forums',
+	'gaf_titre' => 'GAFoSPIP<br />Alternatief beheer van de forums',
 
 	// H
 	'haut_page' => 'Bovenkant pagina',
@@ -108,7 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'luiecrire' => 'Hem/haar schrijven',
 
 	// M
-	'maintenance' => 'Vergeet niet <br>"Gesloten voor onderhoud" te verwijderen,<br>op de betrokken forums.',
+	'maintenance' => 'Vergeet niet <br />"Gesloten voor onderhoud" te verwijderen,<br />op de betrokken forums.',
 	'maintenance_ferme' => 'Gesloten voor onderhoud',
 	'membre' => 'Lid',
 	'membres_groupes' => 'Groepen gebruikers',
@@ -145,7 +145,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'poste_refuse' => 'Geweigerde berichten, te verwijderen&nbsp;!',
 	'poste_reponse' => '&nbsp;Bericht / Antwoord',
 	'poste_valide' => 'Bericht(en) voor goedkeuring ...',
-	'pour_maintenance' => '"</b><br>voor ONDERHOUD.<br>"',
+	'pour_maintenance' => '"</b><br />voor ONDERHOUD.<br />"',
 	'profil' => 'Profiel van',
 
 	// R
@@ -173,7 +173,7 @@ Les mots de moins de trois lettres sont ignor&amp;eacute;s.',
 	'retour_forum' => 'Terugkeren naar begin van het forum',
 	'retour_site' => 'Terugkeren naar begin van de site',
 	'revenir_haut' => 'Naar boven',
-	'rubrique_secteur' => '&nbsp;Rubriek sector<br>',
+	'rubrique_secteur' => '&nbsp;Rubriek sector<br />',
 
 	// S
 	'sabonner' => 'Zich abonneren op deze thread',
@@ -184,10 +184,10 @@ Les mots de moins de trois lettres sont ignor&amp;eacute;s.',
 	'selection_efface' => 'Selectie verwijderen ...',
 	'sinscrire' => 'inschrijven',
 	'site' => 'website',
-	'sousrub_salon' => '&nbsp;Subrubriek / Salon<br>',
+	'sousrub_salon' => '&nbsp;Subrubriek / Salon<br />',
 	'statut' => 'Status',
 	'sujet' => 'Onderwerp&nbsp;',
-	'sujet_ajout' => 'Onderwerp toevoegen aan forum:<br>&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'sujet_ajout' => 'Onderwerp toevoegen aan forum:<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
 	'sujet_annonce' => 'Aankondiging onderwerp',
 	'sujet_auteur' => 'Auteur',
 	'sujet_clos_texte' => 'Dit onderwerp is afgesloten, je kan er niet langer posten.',
@@ -206,8 +206,8 @@ Les mots de moins de trois lettres sont ignor&amp;eacute;s.',
 	// T
 	'texte_login_precaution' => 'Opgelet! Onder deze naam ben je momenteel ingelogd.
  Gebruik dit forumulier met zorg...',
-	'texte_repondre' => 'Antwoorden aan :<br>&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
-	'titre_cadre_signature_obligatoire' => '<B>Handtekening</B> [Verplicht]<BR>',
+	'texte_repondre' => 'Antwoorden aan :<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'titre_cadre_signature_obligatoire' => '<b>Handtekening</b> [Verplicht]<br />',
 	'total_messages' => 'Totaal aantal berichten',
 	'tous_forums' => 'Alle forums',
 	'tout_apropos' => 'Alles over',

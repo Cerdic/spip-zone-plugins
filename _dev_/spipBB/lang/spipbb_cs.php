@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aecrit' => 'napsal/a',
 	'annonce' => 'Ozn&aacute;men&iacute;',
 	'anonyme' => 'Anonym',
-	'article_forum' => '&nbsp;&#269;l&aacute;nek/diskusn&iacute; skupina<br>',
+	'article_forum' => '&nbsp;&#269;l&aacute;nek/diskusn&iacute; skupina<br />',
 	'aucun' => 'nic!',
 	'avatar' => 'Avatar',
 
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'credits' => 'Vytvo&#345;eno pomoc&iacute; <a href=http://www.spip.net class=copyright>syst&eacute;mu SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a>. Autor: <a href=http://www.laprise.org/>James alias Klik&amp;eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> a <a href=http://www.missmopi.net/>Nad&amp;egrave;ge alias Miss Mopi</a> (&#352;t&#283;p&aacute;nova loga)',
 	'credits_bis1' => 'GAFoSPIP v.&nbsp;',
 	'credits_bis2' => 'Ao&amp;ucirc;t 2005',
-	'credits_bis3' => 'Upraveno pro a inspirov&aacute;no zpracov&aacute;n&iacute;m diskusn&iacute;ch skupin:<br>',
+	'credits_bis3' => 'Upraveno pro a inspirov&aacute;no zpracov&aacute;n&iacute;m diskusn&iacute;ch skupin:<br />',
 	'credits_bis4' => '(James, BoOz, Nikau a Miss Mopi).',
 	'creer_forum' => 'Vytvo&#345;it novou diskusn&iacute; skupinu',
 
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dans_forum' => 'v diskusn&iacute; skupin&#283;',
 	'date' => 'P&#345;ihl&aacute;&#353;ka ze dne',
 	'deja_enregistree' => 'Tato elektronick&aacute; adresa je ji&#382; zaregistrov&aacute;na<p><a href=\'spip_pass.php3\'>[ Zapomenut&eacute; heslo ]</a></p>',
-	'dernier' => 'Posledn&iacute;<br>',
+	'dernier' => 'Posledn&iacute;<br />',
 
 	// E
 	'ecrirea' => 'Napsat e-mail pro',
@@ -72,7 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fil_alerte' => 'K t&eacute;to diskusi se nelze p&#345;ihl&aacute;sit',
 	'fil_annonce' => 'Zm&#283;nit diskusi na ozn&aacute;men&iacute;',
 	'fil_deplace' => 'P&#345;esunout diskusi',
-	'fil_sujet' => '&nbsp;T&eacute;ma diskuse/p&#345;edm&#283;t<br>',
+	'fil_sujet' => '&nbsp;T&eacute;ma diskuse/p&#345;edm&#283;t<br />',
 	'forum_deplace' => 'P&#345;esunuto z diskusn&iacute; skupiny ...',
 	'forum_ferme' => 'Tato diskusn&iacute; skupina je ukon&#269;ena',
 	'forum_ferme_texte' => 'Tato diskusn&iacute; skupina skon&#269;ila. Dal&#353;&iacute; p&#345;&iacute;sp&#283;vky do n&iacute; nelze zas&iacute;lat.',
@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_vers' => 'Do diskusp&iacute; skupiny ...',
 
 	// G
-	'gaf_titre' => 'GAFoSPIP<br>Alternativn&iacute; spr&aacute;va diskusn&iacute;ch skupin',
+	'gaf_titre' => 'GAFoSPIP<br />Alternativn&iacute; spr&aacute;va diskusn&iacute;ch skupin',
 
 	// H
 	'haut_page' => 'Na za&#269;&aacute;tek str&aacute;nky',
@@ -108,7 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'luiecrire' => 'Napsat mu/j&iacute;',
 
 	// M
-	'maintenance' => 'U dan&yacute;ch diskusn&iacute;ch skupin nezapome&#328;te zru&#353;it <br>"Uzav&#345;en&iacute; kv&#367;li &uacute;dr&#382;b&#283;"<br>.',
+	'maintenance' => 'U dan&yacute;ch diskusn&iacute;ch skupin nezapome&#328;te zru&#353;it <br />"Uzav&#345;en&iacute; kv&#367;li &uacute;dr&#382;b&#283;"<br />.',
 	'maintenance_ferme' => 'Uzav&#345;eno kv&#367;li &uacute;dr&#382;b&#283;',
 	'membre' => '&#268;len',
 	'membres_groupes' => 'Skupiny u&#382;ivatel&#367;',
@@ -145,7 +145,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'poste_refuse' => 'Odm&iacute;tnut&eacute; zpr&aacute;vy k odstran&#283;n&iacute;!',
 	'poste_reponse' => 'Zpr&aacute;vy/odpov&#283;di',
 	'poste_valide' => 'Zpr&aacute;vy ke schv&aacute;len&iacute; ...',
-	'pour_maintenance' => '"</b><br>z d&#367;vodu &uacute;dr&#382;by.<br>"',
+	'pour_maintenance' => '"</b><br />z d&#367;vodu &uacute;dr&#382;by.<br />"',
 	'profil' => 'Profil ',
 
 	// R
@@ -173,7 +173,7 @@ Slova obsahuj&iacute;c m&eacute;n&#283; ne&#382; t&#345;i p&iacute;smena se igno
 	'retour_forum' => 'Zp&#283;t na hlavn&iacute; str&aacute;nku diskusn&iacute; skupiny',
 	'retour_site' => 'Zp&#283;t na hlavn&iacute; str&aacute;nku webu',
 	'revenir_haut' => 'Zp&#283;t na za&#269;&aacute;tek str&aacute;nky',
-	'rubrique_secteur' => 'Sekce - oblast<br>',
+	'rubrique_secteur' => 'Sekce - oblast<br />',
 
 	// S
 	'sabonner' => 'P&#345;ihl&aacute;sit se k odb&#283;ru tohoto t&eacute;matu',
@@ -184,10 +184,10 @@ Slova obsahuj&iacute;c m&eacute;n&#283; ne&#382; t&#345;i p&iacute;smena se igno
 	'selection_efface' => 'Odstranit v&yacute;b&#283;r ...',
 	'sinscrire' => 'p&#345;ihl&aacute;sit se',
 	'site' => 'Web',
-	'sousrub_salon' => '&nbsp;Podsekce/sal&oacute;n<br>',
+	'sousrub_salon' => '&nbsp;Podsekce/sal&oacute;n<br />',
 	'statut' => 'Status',
 	'sujet' => 'P&#345;edm&#283;t&nbsp;',
-	'sujet_ajout' => 'P&#345;idat p&#345;edm&#283;t do diskusn&iacute; skupiny:<br>&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'sujet_ajout' => 'P&#345;idat p&#345;edm&#283;t do diskusn&iacute; skupiny:<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
 	'sujet_annonce' => 'P&#345;edm&#283;t - ozn&aacute;men&iacute;',
 	'sujet_auteur' => 'Autor',
 	'sujet_clos_texte' => 'Tento p&#345;edm&#283;t je ukon&#269;en. Dal&#353;&iacute; zpr&aacute;vy k n&#283;mu nem&#367;&#382;ete zas&iacute;lat.',
@@ -206,8 +206,8 @@ Slova obsahuj&iacute;c m&eacute;n&#283; ne&#382; t&#345;i p&iacute;smena se igno
 	// T
 	'texte_login_precaution' => 'POZOR! Pod t&iacute;mto u&#382;ivatelsk&yacute;m jm&eacute;nem jste pr&aacute;v&#283; p&#345;ihl&aacute;&#353;eni.
  Tento formul&aacute;&#345; pou&#382;&iacute;vejte s rozvahou...',
-	'texte_repondre' => 'Odpov&#283;d&#283;t na:<br>&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
-	'titre_cadre_signature_obligatoire' => '<B>Podpis</B> [povinn&yacute; &uacute;daj]<BR>',
+	'texte_repondre' => 'Odpov&#283;d&#283;t na:<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'titre_cadre_signature_obligatoire' => '<b>Podpis</b> [povinn&yacute; &uacute;daj]<br />',
 	'total_messages' => 'Zpr&aacute;vy celkem',
 	'tous_forums' => 'V&#353;echny diskusn&iacute; skupiny',
 	'tout_apropos' => 'V&#353;e ohledn&#283;',
