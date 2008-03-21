@@ -129,12 +129,12 @@ function jeux_affichage_final($flux) {
 function jeux_affiche_droite($flux){
 	if (in_array($flux['args']['exec'],array('articles_edit','breves_edit','rubriques_edit','mots_edit'))){
 	include_spip('exec/inc_boites_infos');	
-	$flux['data'] = boite_info_jeux_edit();
+	$flux['data'] .= boite_info_jeux_edit();
 	}
 	
 	if (in_array($flux['args']['exec'],array('auteur_infos'))){
-	include_spip('exec/inc_boites_infos');					
-	$r = boite_infos_spip_auteur($flux['args']['id_auteur']);
+	include_spip('exec/inc_boites_infos');			
+	$r = boite_infos_spip_auteur($flux['args']['id_auteur']);  
 	
 	}
 	
