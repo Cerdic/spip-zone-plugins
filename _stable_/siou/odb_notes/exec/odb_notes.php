@@ -24,8 +24,8 @@ include_spip('inc/presentation');
 include_spip('inc/config');
 include_spip('inc/charsets');
 
-define('DIR_ODB_COMMUN',_DIR_PLUGINS."odb/odb_commun/");
-define('DIR_ODB_CONTRIB',_DIR_PLUGINS."odb/odb_contrib/");
+define('DIR_ODB_COMMUN',_DIR_PLUGINS."siou/odb_commun/");
+define('DIR_ODB_CONTRIB',_DIR_PLUGINS."siou/odb_contrib/");
 include_once(DIR_ODB_COMMUN.'inc-odb.php');
 include_once(DIR_ODB_COMMUN.'inc-html.php');
 include_once(DIR_ODB_COMMUN.'inc-referentiel.php');
@@ -40,7 +40,6 @@ define('LIB_MATIERE_EF2','&Eacute;preuve Faculative 2');
 define('LIB_MATIERE_EPS','&Eacute;ducation Physique et Sportive');
 
 setlocale(LC_TIME, "fr_FR");
-
 global $debug, $PDF_A3_PAYSAGE, $PDF_A3_PORTRAIT;
 $debug=false;
 
@@ -267,7 +266,7 @@ function exec_odb_notes() {
 	$msg.="<TABLE class='spip' width='100%'>\n<tr class='row_even'>\n".
 	"<th>Jury $jury";
 	if($isOperateur) $msg.=" (Centre $deliberationCentre)";
-	$msg.="</th><th>S&eacute;rie $serie - $r_type</th><th style='text-align:right;'>Mati&egrave;re : $matiere</th></tr></table>\n";
+	$msg.="</th><th>S&eacute;rie $serie - $r_type</th><th style='text-align:right;'>Mati&egrave;re : ".($matiere)."</th></tr></table>\n";
 	$msg.="<A NAME='saisie'></A>\n<table class='spip' width='100%'>\n<tr>\n";
 	
 	$isEF=false;
@@ -714,8 +713,5 @@ function exec_odb_notes() {
     fin_cadre_relief();
     fin_page();
     exit;
-    
 }
 ?>
-
-
