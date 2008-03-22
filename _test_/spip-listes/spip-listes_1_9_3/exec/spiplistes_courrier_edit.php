@@ -172,7 +172,7 @@ function exec_spiplistes_courrier_edit(){
 		// Reprise du Formulaire adapté de abomailman () // MaZiaR - NetAktiv	// tech@netaktiv.com
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_insert-slide.gif', true)
 		. bouton_block_invisible(md5(_T('spiplistes:charger_patron')))
-		. "<a href=\"javascript:swap_couche('$compteur_block', '$spip_lang_rtl');\">"._T('spiplistes:Generer_le_contenu')."</a>\n"
+		. "<span class='verdana2 triangle_label' onclick=\"javascript:$('#triangle".$compteur_block."').click();\">"._T('spiplistes:Generer_le_contenu')."</span>\n"
 		. debut_block_invisible(md5(_T('spiplistes:charger_patron')))
 		// 
 		. "<div id='ajax-loader' align='right'><img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."ajax_indicator.gif' /></div>\n"

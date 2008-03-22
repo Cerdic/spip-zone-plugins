@@ -126,7 +126,7 @@ function exec_spiplistes_maintenance () {
 
 	$page_result = ""
 		. "<br /><br />\n"
-		//. spiplistes_gros_titre(_T('titre_admin_tech'), true)
+		. spiplistes_gros_titre(_T('titre_admin_tech'), '', true)
 		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
 		. debut_gauche($rubrique, true)
 		. __plugin_boite_meta_info(_SPIPLISTES_PREFIX, true)

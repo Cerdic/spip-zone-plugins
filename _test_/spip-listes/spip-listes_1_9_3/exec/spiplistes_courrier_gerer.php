@@ -277,7 +277,7 @@ function exec_spiplistes_courrier_gerer () {
 		}
 		
 		if($statut != _SPIPLISTES_STATUT_PUBLIE) {
-		// Le courrier peut-aªtre supprime s'il n'a pas ete publie
+		// Le courrier peut-etre supprime s'il n'a pas ete publie
 			$gros_bouton_supprimer = 
 				"<div style='margin-top:1ex;'>"
 				. icone (
@@ -293,7 +293,7 @@ function exec_spiplistes_courrier_gerer () {
 		}
 	
 		if($statut == _SPIPLISTES_STATUT_ENCOURS) {
-		// L'envoi d'un courrier en cours peut aªtre stoppe
+		// L'envoi d'un courrier en cours peut etre stoppe
 			$gros_bouton_arreter_envoi = 
 				icone (
 					_T('spiplistes:Arreter_envoi')
@@ -435,9 +435,9 @@ function exec_spiplistes_courrier_gerer () {
 			. debut_cadre_relief(spiplistes_items_get_item('icon', $statut), true)
 			. "<table width='100%'  border='0' cellspacing='0' cellpadding='0'>"
 			. "<tr>"
-			. "<td>".spiplistes_gros_titre($titre, spiplistes_items_get_item('puce', $statut), false)."</td>"
+			. "<td>".spiplistes_gros_titre($titre, spiplistes_items_get_item('puce', $statut), true)."</td>"
 			. "<td rowspan='2' style='vertical-align:top;width:90px;'>"
-				// si besoin, l'un de ces deux boutons apparaa®t
+				// si besoin, l'un de ces deux boutons apparait
 				. $gros_bouton_modifier
 				. $gros_bouton_arreter_envoi
 				."</td>"
@@ -456,9 +456,10 @@ function exec_spiplistes_courrier_gerer () {
 			// boite courrier au format html
 			. debut_cadre_couleur('', true)
 			. _T('spiplistes:version_html')
-			. "&nbsp;<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&id_liste=$id_liste&lire_base=oui&plein_ecran=oui")
-				."' title='"._T('spiplistes:Apercu_plein_ecran')."' target='_blank'>\n"
-			. "<img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."oeil-16.png' alt='' width:'16' height='16' border='0' /></a><br />\n"
+			. "&nbsp;<a href='"
+				. generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&id_liste=$id_liste&lire_base=oui&plein_ecran=oui")
+				. "' title='"._T('spiplistes:Apercu_plein_ecran')."' target='_blank'>\n"
+			. spiplistes_icone_oeil() . "</a><br />\n"
 			. "<iframe style='background-color:#fff;border:1px solid #000;'"
 				. " src='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&lire_base=oui")
 				."' width='100%' height='500'></iframe>\n"
@@ -467,9 +468,10 @@ function exec_spiplistes_courrier_gerer () {
 			// boite courrier au format texte seul
 			. debut_cadre_couleur('', true)
 			. _T('spiplistes:version_texte')
-			. "&nbsp;<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&id_liste=$id_liste&lire_base=oui&format=texte&plein_ecran=oui")."'"
-				. " title='"._T('spiplistes:Apercu_plein_ecran')." ($alt_message_texte)' target='_blank'>\n"
-			. "<img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."oeil-16.png' alt='' width:'16' height='16' border='0' /></a><br />\n"
+			. "&nbsp;<a href='"
+				. generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&id_liste=$id_liste&lire_base=oui&format=texte&plein_ecran=oui")
+				."' title='"._T('spiplistes:Apercu_plein_ecran')." ($alt_message_texte)' target='_blank'>\n"
+			. spiplistes_icone_oeil() . "</a><br />\n"
 			. "<textarea readonly='readonly' name='texte' rows='".(($spip_ecran == "large") ? 28 : 20)."' class='formo' cols='40' wrap='soft'>"
 			. spiplistes_version_texte(propre($message_texte))
 			. "</textarea>\n"
@@ -494,6 +496,10 @@ function exec_spiplistes_courrier_gerer () {
 	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
 
 } // end function exec_spiplistes_courrier_gerer ()
+
+function spiplistes_icone_oeil () {
+	return("<img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."oeil-16.png' alt='' width:'16' height='16' border='0' />");
+}
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */

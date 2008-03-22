@@ -1,5 +1,9 @@
 <?php
+
+// exec/spiplistes_courrier_previsu.php
 // _SPIPLISTES_EXEC_COURRIER_PREVUE
+
+
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -26,10 +30,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
 
-$charset = lire_meta('charset');
-header("Content-Type: text/html charset=$charset");
-
-
 // adapté de abomailman ()
 // MaZiaR - NetAktiv
 // tech@netaktiv.com
@@ -42,11 +42,15 @@ header("Content-Type: text/html charset=$charset");
 	
 	Utilisé par courrier_gerer et courrier_edit
 	
+	CP-20080322 : 
+	- ce script devrait plutot etre en action/ au lieur d'exec/ ?
+	- charset en previsu plein écran texte seul : Mozilla affiche parfois en iso ? parfois respecte UTF-8 !
 	CP-20071011
 */
 
-function exec_spiplistes_courrier_previsu(){
-spip_log("exec_spiplistes_courrier_previsu()");
+function exec_spiplistes_courrier_previsu () {
+spiplistes_log("exec_spiplistes_courrier_previsu()");
+	global $meta;
 
 	include_spip('inc/presentation');
 	include_spip('inc/distant');
@@ -65,7 +69,7 @@ spip_log("exec_spiplistes_courrier_previsu()");
 		$$key = intval($$key);
 	}
 
-	$charset = lire_meta('charset');
+	$charset = $meta['charset'];
 	
 	$texte_lien_courrier =
 		(__plugin_lire_key_in_serialized_meta('opt_lien_en_tete_courrier', _SPIPLISTES_META_PREFERENCES) == 'oui')

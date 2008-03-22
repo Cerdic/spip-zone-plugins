@@ -47,7 +47,8 @@ function exec_spiplistes_liste_gerer () {
 	include_spip('inc/spiplistes_dater_envoi');
 	include_spip('inc/spiplistes_naviguer_paniers');
 	
-	global $connect_statut
+	global $meta
+		, $connect_statut
 		, $connect_toutes_rubriques
 		, $connect_id_auteur
 		, $spip_lang_left,$spip_lang_right
@@ -279,7 +280,7 @@ function exec_spiplistes_liste_gerer () {
 	$id_mod_liste = spiplistes_mod_listes_get_id_auteur($id_liste);
 	$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
 
-	$titre_message = ($titre_message=='') ? $titre._T('spiplistes:_de_').lire_meta("nom_site") : $titre_message;
+	$titre_message = ($titre_message=='') ? $titre._T('spiplistes:_de_').$meta['nom_site'] : $titre_message;
 
 	$nb_abonnes = spiplistes_nb_abonnes_count ($id_liste);
 
@@ -413,7 +414,7 @@ function exec_spiplistes_liste_gerer () {
 	// --></script>"
 		;
 
-	$email_defaut = entites_html(lire_meta("email_webmaster"));
+	$email_defaut = entites_html($meta['email_webmaster']);
 	$email_envoi = (email_valide($email_envoi)) ? $email_envoi : $email_defaut ;
 
 	$page_result .= ""

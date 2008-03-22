@@ -30,7 +30,6 @@ function spiplistes_header_prive ($flux) {
 		_SPIPLISTES_EXEC_ABONNES_LISTE
 		, _SPIPLISTES_EXEC_COURRIER_EDIT
 		, _SPIPLISTES_EXEC_COURRIERS_LISTE
-		, _SPIPLISTES_EXEC_COURRIERS_LISTE
 		, _SPIPLISTES_EXEC_LISTES_LISTE
 		, _SPIPLISTES_EXEC_MAINTENANCE
 		, _SPIPLISTES_EXEC_CONFIGURE
@@ -53,6 +52,14 @@ function spiplistes_header_prive ($flux) {
 					. "<meta http-equiv='expires' content='0'>\n"
 					. "<meta http-equiv='pragma' content='no-cache' />\n"
 					. "<meta http-equiv='cache-control' content='no-cache' />\n"
+					. "
+<!-- SpipListes CSS -->
+<style type='text/css'>
+<!--
+.triangle_label { font-weight: bold; text-decoration: underline; cursor: pointer; }
+-->
+</style>
+"
 					;
 				break;
 			case _SPIPLISTES_EXEC_COURRIERS_LISTE:

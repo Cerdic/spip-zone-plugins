@@ -288,8 +288,9 @@ $spiplistes_items = array(
 		)
 	);
 
-	$spiplistes_version = lire_meta('spiplistes_version');
-	$spiplistes_base_version = lire_meta('spiplistes_base_version');
+	$spiplistes_version = $meta['spiplistes_version'];
+	$spiplistes_base_version = $meta['spiplistes_base_version'];
+
 	if(
 		($spiplistes_version && (__plugin_real_version_get(_SPIPLISTES_PREFIX) > $spiplistes_version))
 		||
