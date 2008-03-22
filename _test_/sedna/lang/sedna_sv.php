@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liens_pluriel' => 'inl&auml;gg',
 
 	// M
-	'masquer_resume' => 'G&amp;ouml;m sammanfattningarna',
+	'masquer_resume' => 'G&ouml;m sammanfattningarna',
 	'masquer_sources' => '<NEW>Hide this feed',
 	'mois' => 'Senaste m&aring;naden',
 
