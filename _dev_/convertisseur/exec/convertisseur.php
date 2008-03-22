@@ -4,6 +4,7 @@
 // Main 
 // ------------------------------
 function exec_convertisseur(){
+  include_spip("inc/vieilles_defs");
   include_spip("inc/presentation");
   global $spip_lang_right;
   
@@ -11,14 +12,14 @@ function exec_convertisseur(){
   $conv_out = "";
   $log      = "";
   $format   = "";  
-  
+
   // check rights (utile ?)
   global $connect_statut;
 	global $connect_toutes_rubriques;
   if ($connect_statut != '0minirezo') {    
-		debut_page(_T("convertisseur:convertir_titre"), "naviguer", "plugin");
+		echo debut_page(_T("convertisseur:convertir_titre"), "naviguer", "plugin");
 		echo _T('avis_non_acces_page');
-		fin_page();
+		echo fin_page();
 		exit;
 	}
    
@@ -283,19 +284,10 @@ function exec_convertisseur(){
   // format demandé par Jean Luc Girard
   // http://195.13.83.33/twiki/bin/view/FipDoc/QuarkTagsList
   // http://www.macworld.com/downloads/magazine/XPressTagsList.pdf   
-  $conv_formats['XTG_SPIP'] = array(
-      "pattern" => array(
-        'tag'    => "<([^>]*)>", 
-        'meta'   => "@([^:]*):",
-        'ul'     => "\n\=* ",  
-      ),
-      "replacement" => array(
-        'tag'   => "", 
-        'meta'   => "\n\n",  // ou "\n_ " ?
-        'ul'     => "\n-* ",   
-      )      
-  );
-  
+  // cf. extract/quark.php
+  $conv_formats['XTG_SPIP'] = 'quark';
+
+
   // Conversion SLA (Scribus) -> SPIP
   // SLA 1.2 http://docs.scribus.net/index.php?lang=en&sm=scribusfileformat&page=scribusfileformat
   // SLA 1.3 http://wiki.scribus.net/index.php/File_Format_for_Scribus_1.3.x 
@@ -327,8 +319,11 @@ function exec_convertisseur(){
 	// ---------------------------------------------------------------------------
 	if (isset($_POST['conv_in'])) {
 	   $conv_in = _request('conv_in');
-	   $convert_charset = _request('convert_charset');
-	  	   
+	   $convert_charset = (_request('convert_charset') == 'true');
+
+		$GLOBALS['auteur_session']['prefs']['convertisseur_cvcharset']
+		= $convert_charset;
+
 	   // upload ?
 	   $flag_upload = false; 
 	   if ($_FILES) {
@@ -345,20 +340,29 @@ function exec_convertisseur(){
         }
 	   }
 
+	// detection du format
      if (isset($_POST['format'])) {
         $conv_out = $conv_in;
-        $format = trim(strip_tags($_POST['format']));        
+        $format = trim(strip_tags($_POST['format']));
+
+		// on le memorise dans les prefs de l'auteur
+		// pour permettre de proposer le meme la prochaine fois
+		$GLOBALS['auteur_session']['prefs']['convertisseur_format'] = $format;
+
+
+		// S'agit-il d'un tableau de conversion ?
+		// si non, ca peut etre une fonction, par exemple un extracteur
         if (is_array($conv_formats[$format])) {  
          
          // convertir le charset ?
-         if ($flag_upload && $convert_charset=='true') {
+         if ($flag_upload && $convert_charset) {
               include_spip('inc/charsets');
     	        $conv_out = importer_charset($conv_out, $charset);
     	        $conv_in = importer_charset($conv_in, $charset);
 	        }	        
                    
           // fonctions pre traitement ?
-          if (is_array($conv_functions_pre[$format])) {
+         if (is_array($conv_functions_pre[$format])) {
               include_spip("inc/fonction_convertisseur");
               foreach($conv_functions_pre[$format] as $key=>$pattern)  {                         
                   $conv_out = $pattern($conv_out);
@@ -388,19 +392,27 @@ function exec_convertisseur(){
 			if (!$cv)
 	            $log = "<span style='color:red'>"._T("convertisseur:unknown_format")."</span>";
         }
+
+		// enregistrer les prefs de l'auteur
+		spip_query('UPDATE spip_auteurs SET prefs='
+			._q(serialize($GLOBALS['auteur_session']['prefs']))
+			.' WHERE id_auteur='.intval($GLOBALS['auteur_session']['id_auteur'])
+		);
+
+
      }	   
   }
   
   // ---------------------------------------------------------------------------
   // HTML output 
   // ---------------------------------------------------------------------------
-	debut_page(_T("convertisseur:convertir_titre"), "naviguer", "plugin");	
+	echo debut_page(_T("convertisseur:convertir_titre"), "naviguer", "plugin");	
   debut_gauche();
-	debut_boite_info();
+	echo debut_boite_info();
 	echo _T("convertisseur:convertir_desc");	
-	fin_boite_info();
+	echo fin_boite_info();
 	
-	debut_droite();
+	echo debut_droite();
 	echo $log;
 	echo "<form method='post' enctype='multipart/form-data'>\n";
 	if ($conv_out!="") {
@@ -413,29 +425,47 @@ function exec_convertisseur(){
 
 	echo "<h3>"._L("Votre texte &agrave; convertir :")."</h3>\n";
 
+
+	// format memorise pour avoir le selected dans le menu
+	if (!$format)
+		$format = $GLOBALS['auteur_session']['prefs']['convertisseur_format'];
+	echo "<p>";
+	echo _T("convertisseur:from");
+	echo "<select name='format'>\n";
+	foreach ($conv_formats as $k=>$val) {  
+		if ($format==$k)
+			$selected = " selected='selected'";
+		else
+			$selected = "";
+		echo "<option value='$k'$selected>"._T("convertisseur:$k")."</option>\n";
+	}
+	echo "</select></p>\n";
+
+
 	echo _L("Copiez-le ci-dessous :")."<br />\n";
 
 	$conv_in = entites_html(substr($conv_in,0,40000));
 	echo "<textarea name='conv_in' cols='65' rows='12'>$conv_in</textarea><br />\n";
-	echo _T("convertisseur:from");
-  echo "<select name='format'>\n"; 
-  foreach ($conv_formats as $k=>$val) {  
-      if ($format==$k) $selected = " selected='selected'";
-                  else $selected = "";
-      echo "<option value='$k'$selected>"._T("convertisseur:$k")."</option>\n";
-  }
-  echo "</select>\n";	
 
-	echo "<div align='right'>";
+
+	echo "<div style='float:$spip_lang_right;'>";
 	echo _L("ou choisissez un fichier :")."<br />\n";
-	echo "<input type='file' name='upload' /><br />\n";
-	echo "<input type='checkbox' value='true' name='convert_charset' />"._L("convertir en UTF-8")."\n";
+	echo "<input type='file' name='upload' /><br style='clear:both;' />\n";
 	echo "</div>\n";
 
-  echo "<input type='submit' value='". _T("convertisseur:convertir")."'>\n";   
+	echo "<h5>"._L('Options:')."</h5>\n";
+
+	$checked = $GLOBALS['auteur_session']['prefs']['convertisseur_cvcharset']
+		? ' checked="checked"'
+		: '';
+	echo "<label><input type='checkbox' value='true' name='convert_charset'$checked
+	/>"._L("convertir en UTF-8")."\n";
+	echo "</label>\n";
+
+  echo "<p style='float:right;'><input type='submit' value='". _T("convertisseur:convertir")."'></p>\n";   
   echo "</form>\n"; 
 
   
-  fin_page();
+  echo fin_page();
 }
 ?>
