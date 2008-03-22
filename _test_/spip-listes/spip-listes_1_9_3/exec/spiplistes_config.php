@@ -175,25 +175,30 @@ function exec_spiplistes_config () {
 // PAGE CONTENU
 ////////////////////////////////////
 
-	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+	$titre_page = _T('spiplistes:spip_listes');
+	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	$rubrique = "configuration";
+	$sous_rubrique = _SPIPLISTES_PREFIX;
 
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
+	
 	// la configuration spiplistes est réservée aux supers-admins 
 	if(!(($connect_statut == "0minirezo") && ($connect_toutes_rubriques))) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 
-	echo "<br /><br /><br />\n";
-	spiplistes_gros_titre(_T('titre_page_config_contenu'));
-	echo barre_onglets("configuration", "spiplistes");
-
-	debut_gauche();
-	__plugin_boite_meta_info(_SPIPLISTES_PREFIX);
-	creer_colonne_droite();
-	spiplistes_boite_autocron();
-	spiplistes_boite_info_spiplistes();
-	debut_droite("messagerie");
-
-	$page_result = "";
+	$page_result = ""
+		. "<br /><br /><br />\n"
+		. spiplistes_gros_titre(_T('titre_page_config_contenu'), '', true)
+		. barre_onglets($rubrique, _SPIPLISTES_PREFIX)
+		. debut_gauche(_SPIPLISTES_RUBRIQUE, true)
+		. __plugin_boite_meta_info(_SPIPLISTES_PREFIX, true)
+		. creer_colonne_droite(_SPIPLISTES_RUBRIQUE, true)
+		. spiplistes_boite_autocron(true)
+		. spiplistes_boite_info_spiplistes(true)
+		. debut_droite(_SPIPLISTES_RUBRIQUE, true)
+		;
 
 	//////////////////////////////////////////////////////
 	// Boite Mode d'inscription des visiteurs

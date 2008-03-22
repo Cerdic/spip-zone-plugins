@@ -31,21 +31,13 @@ include_spip('inc/presentation');
 	Les fonctions affichage et présentation dans l'esapce privé
 */
 
-
-	// SPIP < 193
-if(version_compare($GLOBALS['spip_version_code'],'1.9300','<')) { 
-	function spiplistes_gros_titre($titre, $ze_logo='', $aff=true) {
-		$r = gros_titre($titre, $ze_logo, $aff);
-		if(!$aff) return($r);
-	}
-}
-else {
-	// SPIP >= 193
-	function spiplistes_gros_titre($titre, $ze_logo='', $aff=true) {
+function spiplistes_gros_titre($titre, $ze_logo='', $return = false) {
+	if(version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {
 		$ze_logo = ""; // semble ne plus être utilisé dans exec/*
-		$r = gros_titre($titre, $ze_logo, $aff);
-		if(!$aff) return($r);
 	}
+	$aff = ($return == false);
+	$r = gros_titre($titre, $ze_logo, $aff);
+	if($return) return($r);
 }
 
 /*

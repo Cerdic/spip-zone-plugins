@@ -35,7 +35,7 @@ function spiplistes_ajouter_onglets ($flux) {
 		&& $connect_toutes_rubriques
 		&& ($flux['args'] == 'configuration')
 	) {
-		$flux['data']['spiplistes'] = new Bouton( 
+		$flux['data'][_SPIPLISTES_PREFIX] = new Bouton( 
 			_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png"
 			, _T("spiplistes:listes_de_diffusion_")
 			, generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)
