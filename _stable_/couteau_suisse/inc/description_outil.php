@@ -9,6 +9,20 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_VAR_OUTIL', cs_code_echappement("<!--  VAR-OUTIL -->\n", 'OUTIL'));
 
+// constantes utilisees dans la description des outils, sous forme @_CS_MACONSTANTE@
+
+@define('_CS_EXEMPLE_COULEURS', '<br /><span style="font-weight:normal; font-size:85%;"><span style="background-color:black; color:white;">black/noir</span>, <span style="background-color:red;">red/rouge</span>, <span style="background-color:maroon;">maroon/marron</span>, <span style="background-color:green;">green/vert</span>, <span style="background-color:olive;">olive/vert&nbsp;olive</span>, <span style="background-color:navy; color:white;">navy/bleu&nbsp;marine</span>, <span style="background-color:purple;">purple/violet</span>, <span style="background-color:gray;">gray/gris</span>, <span style="background-color:silver;">silver/argent</span>, <span style="background-color:chartreuse;">chartreuse/vert&nbsp;clair</span>, <span style="background-color:blue;">blue/bleu</span>, <span style="background-color:fuchsia;">fuchsia/fuchia</span>, <span style="background-color:aqua;">aqua/bleu&nbsp;clair</span>, <span style="background-color:white;">white/blanc</span>, <span style="background-color:azure;">azure/bleu&nbsp;azur</span>, <span style="background-color:bisque;">bisque/beige</span>, <span style="background-color:brown;">brown/brun</span>, <span style="background-color:blueviolet;">blueviolet/bleu&nbsp;violet</span>, <span style="background-color:chocolate;">chocolate/brun&nbsp;clair</span>, <span style="background-color:cornsilk;">cornsilk/rose&nbsp;clair</span>, <span style="background-color:darkgreen;">darkgreen/vert&nbsp;fonce</span>, <span style="background-color:darkorange;">darkorange/orange&nbsp;fonce</span>, <span style="background-color:darkorchid;">darkorchid/mauve&nbsp;fonce</span>, <span style="background-color:deepskyblue;">deepskyblue/bleu&nbsp;ciel</span>, <span style="background-color:gold;">gold/or</span>, <span style="background-color:ivory;">ivory/ivoire</span>, <span style="background-color:orange;">orange/orange</span>, <span style="background-color:lavender;">lavender/lavande</span>, <span style="background-color:pink;">pink/rose</span>, <span style="background-color:plum;">plum/prune</span>, <span style="background-color:salmon;">salmon/saumon</span>, <span style="background-color:snow;">snow/neige</span>, <span style="background-color:turquoise;">turquoise/turquoise</span>, <span style="background-color:wheat;">wheat/jaune&nbsp;paille</span>, <span style="background-color:yellow;">yellow/jaune</span></span><span style="font-size:50%;"><br />&nbsp;</span>');
+@define('_CS_EXEMPLE_COULEURS2', "\n-* <code>Lorem ipsum [rouge]dolor[/rouge] sit amet</code>\n-* <code>Lorem ipsum [red]dolor[/red] sit amet</code>.");
+@define('_CS_EXEMPLE_COULEURS3', "\n-* <code>Lorem ipsum [fond rouge]dolor[/fond rouge] sit amet</code>\n-* <code>Lorem ipsum [bg red]dolor[/bg red] sit amet</code>.");
+@define('_CS_ASTER', '<sup>(*)</sup>');
+@define('_CS_DIR_TMP', cs_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP));
+@define('_CS_FORUM_NOM', _T('forum_votre_nom'));
+@define('_CS_TRAVAUX_TITRE', '<i>'._T('info_travaux_titre').'</i>');
+@define('_CS_NOM_SITE', '<i>'.$GLOBALS['meta']['nom_site'].'</i>');
+@define('_CS_CHOIX', _T('desc:votre_choix'));
+
+// fin des constantes
+
 include_spip('inc/actions');
 include_spip('inc/texte');
 include_spip('inc/layer');
@@ -69,6 +83,16 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 	$ok_input_ .= $ok_input; $ok_valeur_ .= $ok_valeur;
 }
 
+function description_outil_input_callback($matches) {
+	return '<fieldset><legend>'._T('desc:label:'.$matches[3]).'</legend><div style="margin:0;">'.$matches[1].'</div></fieldset>';
+}
+function description_outil_const_callback($matches) {
+	return constant($matches[1]);
+}
+function description_outil_descrip_callback($matches) {
+	return _T("desc:$matches[1]:description$matches[2]");
+}
+
 // renvoie la description de $outil_ : toutes les %variables% ont ete remplacees par le code adequat
 function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	global $outils, $cs_variables, $metas_vars;
@@ -77,10 +101,13 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$index = $outil['index'];
 	// la description de base est a priori dans le fichier de langue
 	$descrip = isset($outil['description'])?$outil['description']:_T('desc:'.$outil['id'].':description');
-	// remplacement des puces
-	$descrip = str_replace('#PUCE', definir_puce(), $descrip);
-	// remplacement des zone input de format [[label->varable]]
+	// reconstitution d'une description eventuellement morcelee
+	// exemple : <:mon_outil:3:> est remplace par _T('desc:mon_outil:description3')
+	$descrip = preg_replace_callback(',<:([a-zA-Z_][a-zA-Z0-9_-]*):([0-9]+):>,', 'description_outil_descrip_callback', $descrip);
+	// remplacement des zone input de format [[label->variable]]
 	$descrip = preg_replace(',(\[\[([^][]*)->([^]]*)\]\]),msS', '<fieldset><legend>\\2</legend><div style="margin:0;">\\3</div></fieldset>', $descrip);
+	// remplacement des zone input de format [[tata %variable% toto]] en utilisant _T('desc:label:variable') comme label
+	$descrip = preg_replace_callback(',\[\[(([^][]*)%([a-zA-Z_][a-zA-Z0-9_]*)%([^]]*))\]\],msS', 'description_outil_input_callback', $descrip);
 	// remplacement des variables de format : %variable%
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $descrip, -1, PREG_SPLIT_DELIM_CAPTURE);
 
@@ -129,7 +156,11 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 //cs_log(" FIN : inc_description_outil_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvee(s)");
 	$res = preg_replace(',(<br />)?</fieldset><fieldset><legend></legend>,', '', $res);
 	$res = str_replace('</label></div><div style="margin:0;"><label><input type="checkbox"', '</label>&nbsp;<label><input type="checkbox"', $res);
-	
+	// remplacement des puces
+	$res = str_replace('@puce@', definir_puce(), $res);
+	// remplacement des constantes
+	$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 'description_outil_const_callback', $res);
+
 	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('desc:vars_modifiees').'&nbsp;&lt;</div>':'';
 	return cs_ajax_action_greffe("description_outil-$index", $res, $modif);
 }

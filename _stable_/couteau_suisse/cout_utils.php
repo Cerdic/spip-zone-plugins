@@ -332,7 +332,9 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 			// ici, on fait attention de ne pas melanger propre et typo
 			if(array_key_exists('typo', $precision) && array_key_exists('propre', $precision)) die(_T('desc:erreur:traitements'));
 			foreach($precision as $f=>$fonction)  {
+				// pas d'objet precis
 				if ($f===0)	$traitements_utilises[$b][$p][$f] = join("(", array_reverse($fonction)).'(';
+				// un objet precis
 				else {
 					$pre = isset($fonction['pre'])?join('(', $fonction['pre']).'(':'';
 					$post = isset($fonction['post'])?join('(', $fonction['post']).'(':'';

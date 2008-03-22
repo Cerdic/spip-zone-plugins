@@ -87,7 +87,7 @@ if($zap) {
 	// fonctions indispensables a l'execution
 	include_spip('cout_lancement');
 	// lancer l'initialisation du plugin. on force la compilation si cs=calcul
-	if(!$cs_exists) cs_log(" -- '$f_cs' introuvable !");
+	if(!$cs_exists) spip_log(" -- '$f_cs' introuvable !");
 	cs_initialisation(!$cs_exists || in_array('calcul', $GLOBALS['cs_params']));
 	cs_log("PUIS : cout_options, initialisation terminee");
 

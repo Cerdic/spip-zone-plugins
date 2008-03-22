@@ -352,6 +352,14 @@ add_outil( array(
 	'id' => 'class_spip',
 	'code:options' => "\$GLOBALS['class_spip']='%%style_p%%';\n\$GLOBALS['class_spip_plus']='%%style_h%%';\n%%racc_hr%%%%racc_h1%%%%racc_h2%%%%racc_i1%%%%racc_i2%%%%puce%%",
 	'categorie' => 'public',
+	'description' => 
+	// avant SPIP 1.93 : <hr/> seulement
+	// et apres : <hr/> + puce
+		(!defined('_SPIP19300')?'<:class_spip:1:>':'<:class_spip:2:>').
+	// des SPIP 1.91 : les intertitres
+		'<:class_spip:3:>'.
+	// des SPIP 1.93 : les italiques + les styles
+		(!defined('_SPIP19300')?'':'<:class_spip:4:>'),
 ));
 
 add_variable( array(
@@ -737,6 +745,7 @@ add_outil( array(
 	'categorie'	=> 'typo-corr',
 	'contrib'	=> 2206,
 	'code:options' => "%%glossaire_limite%%%%glossaire_groupes%%%%glossaire_js%%",
+//	'traitement:LIEU:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
 	// sans oublier les articles...
 	'traitement:TEXTE/articles:post_propre' => 'cs_glossaire',
