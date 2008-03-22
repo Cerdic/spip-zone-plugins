@@ -1,0 +1,37 @@
+<plugin>
+  <nom>jsMath</nom>
+  <auteur>[Vincent Beffara->vbeffara@ens-lyon.fr]</auteur>
+  <version>0.4</version>
+  <etat>test</etat>
+  <description>
+    Inclusion de fonctionnalit&eacute;s permettant l'utilisation de 
+    [jsMath->http://www.math.union.edu/~dpvc/jsmath/] dans SPIP. Tapez 
+    simplement les formules comme en TeX (entre dollars) et le 
+    syst&egrave;me se charge du reste. (Pour ins&eacute;rer un 
+    caract&egrave;re <html>$</html> dans un article, l'entourer de 
+    balises SPIP &lt;html&gt;.)
+
+    {{NB :}} vous devrez &eacute;galement installer jsMath 
+    lui-m&ecirc;me &agrave; un emplacement visible par SPIP (en gros, 
+    soit dans le r&eacute;pertoire squelettes/ soit &agrave; la racine 
+    du site).
+
+    [Configuration->.?exec=cfg&amp;cfg=jsMath] (si vous avez cfg, sinon 
+    le plugin utilisera des valeurs par d&eacute;faut raisonnables).
+  </description>
+  <prefix>jsMath</prefix>
+  <fonctions>jsMath.php</fonctions>
+
+  <pipeline><nom>pre_typo</nom></pipeline>
+  <pipeline><nom>insert_head</nom></pipeline>
+
+  <pipeline>
+    <nom>header_prive</nom>
+    <inclure>jsMath.php</inclure>
+  </pipeline>
+
+  <pipeline>
+    <nom>affiche_milieu</nom>
+    <inclure>jsMath.php</inclure>
+  </pipeline>
+</plugin>
