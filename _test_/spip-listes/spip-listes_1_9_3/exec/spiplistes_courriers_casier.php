@@ -1,5 +1,7 @@
 <?php
 
+// exec/spiplistes_courriers_casier.php
+
 /******************************************************************************************/
 /* SPIP-listes est un syst�e de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -158,30 +160,32 @@ function exec_spiplistes_courriers_casier () {
 // PAGE CONTENU
 ////////////////////////////////////
 
-	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+	$titre_page = _T('spiplistes:spip_listes');
+	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	$rubrique = _SPIPLISTES_PREFIX;
+	$sous_rubrique = "courrier_casier";
+
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
 	
 	// la gestion des courriers est réservée aux admins 
 	if($connect_statut != "0minirezo") {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
-	
-	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
-	
-	debut_gauche();
-	spiplistes_naviguer_paniers_courriers(_T('spiplistes:Aller_au_panier'));
-	spiplistes_boite_raccourcis();
-	spiplistes_boite_autocron();
-	spiplistes_boite_info_spiplistes();
-	creer_colonne_droite();
-	debut_droite("messagerie");
-	
-	// MODE HISTORIQUE: Historique des envois --------------------------------------
-	
+
+	$page_result = ""
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
+		. debut_gauche($rubrique, true)
+		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:Aller_au_panier'), true)
+		. creer_colonne_droite($rubrique, true)
+		. spiplistes_boite_raccourcis(true)
+		. spiplistes_boite_autocron(true)
+		. spiplistes_boite_info_spiplistes(true)
+		. debut_droite($rubrique, true)
+		;
+			
 	$icone = _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png';
 	
-	$page_result = ""
-		;	
-
 	$_skip_statut = "Sauter une table pour afficher chronos";
 
 	// Début de liste

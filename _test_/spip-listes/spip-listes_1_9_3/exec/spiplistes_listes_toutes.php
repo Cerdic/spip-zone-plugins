@@ -1,5 +1,7 @@
 <?php
 
+// exec/spiplistes_listes_toutes.php
+
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -80,26 +82,33 @@ function exec_spiplistes_listes_toutes(){
 // PAGE CONTENU
 ////////////////////////////////////
 
-	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+	$titre_page = _T('spiplistes:spip_listes');
+	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	$rubrique = _SPIPLISTES_PREFIX;
+	$sous_rubrique = "listes_toutes";
+
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
 	
 	// la gestion des abonnés est réservée aux admins 
 	if(!$flag_editable) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
-	
-	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
-	
-	debut_gauche();
-	spiplistes_naviguer_paniers_listes(_T('spiplistes:Aller_aux_listes'));
-	spiplistes_boite_raccourcis();
-	spiplistes_boite_autocron();
-	spiplistes_boite_info_spiplistes();
-	creer_colonne_droite();
-	debut_droite("messagerie");
+
+	$page_result = ""
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
+		. debut_gauche($rubrique, true)
+		. spiplistes_naviguer_paniers_listes(_T('spiplistes:Aller_aux_listes'), true)
+		. creer_colonne_droite($rubrique, true)
+		. spiplistes_boite_raccourcis(true)
+		. spiplistes_boite_autocron(true) 
+		. spiplistes_boite_info_spiplistes(true)
+		. debut_droite($rubrique, true)
+		;
 	
 	// MODE LISTES: afficher les listes --------------------------------------------
 	
-	$page_result = "";
+	$page_result .= "";
 	
 	foreach(array(_SPIPLISTES_PRIVATE_LIST, _SPIPLISTES_PUBLIC_LIST, _SPIPLISTES_MONTHLY_LIST, _SPIPLISTES_TRASH_LIST) as $statut) {
 		$page_result .= ""

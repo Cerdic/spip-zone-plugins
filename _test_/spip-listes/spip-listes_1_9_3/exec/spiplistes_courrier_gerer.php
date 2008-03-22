@@ -1,4 +1,7 @@
 <?php
+
+// exec/spiplistes_courrier_gerer.php
+
 // _SPIPLISTES_EXEC_COURRIER_GERER
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
@@ -399,29 +402,35 @@ function exec_spiplistes_courrier_gerer () {
 // PAGE CONTENU
 ////////////////////////////////////
 
-	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+	$titre_page = _T('spiplistes:spip_listes');
+	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	$rubrique = _SPIPLISTES_PREFIX;
+	$sous_rubrique = "courrier_gerer";
+
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
 
 	// la gestion des listes de courriers est reservee aux admins 
 	if($connect_statut != "0minirezo") {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
-	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
-
-	debut_gauche();
-	spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_:'), $id_courrier, false);
-	spiplistes_naviguer_paniers_courriers(_T('spiplistes:Aller_au_panier'));
-	spiplistes_boite_raccourcis();
-	spiplistes_boite_autocron();
-	spiplistes_boite_info_spiplistes();
-	creer_colonne_droite();
-	debut_droite("messagerie");
-
+	$page_result = ""
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
+		. debut_gauche($rubrique, true)
+		. spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_:'), $id_courrier, true)
+		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:Aller_au_panier'), true)
+		. creer_colonne_droite($rubrique, true)
+		. spiplistes_boite_raccourcis(true)
+		. spiplistes_boite_autocron(true)
+		. spiplistes_boite_info_spiplistes(true)
+		. debut_droite($rubrique, true)
+		;
 		
 	if($id_courrier > 0) {
 	/////////////////////
 	// construction du ventre
-		$page_result = ""
+		$page_result .= ""
 			. $message_erreur
 			. debut_cadre_relief(spiplistes_items_get_item('icon', $statut), true)
 			. "<table width='100%'  border='0' cellspacing='0' cellpadding='0'>"

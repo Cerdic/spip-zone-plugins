@@ -1,4 +1,7 @@
 <?php
+
+// exec/spiplistes_liste_edit.php
+
 // _SPIPLISTES_EXEC_LISTE_EDIT
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
@@ -110,23 +113,31 @@ function exec_spiplistes_liste_edit(){
 // PAGE CONTENU
 ////////////////////////////////////
 
-	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+	$titre_page = _T('spiplistes:spip_listes');
+	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	$rubrique = _SPIPLISTES_PREFIX;
+	$sous_rubrique = "liste_edit";
+
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
 
 	// la gestion des listes de courriers est réservée aux admins 
 	if(!$flag_editable) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
-	
-	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
 
-	debut_gauche();
-	spiplistes_boite_info_id(_T('spiplistes:liste_numero'), $id_liste, false);
-	spiplistes_naviguer_paniers_listes(_T('spiplistes:Aller_aux_listes'));
-	spiplistes_boite_raccourcis();
-	spiplistes_boite_info_spiplistes();
-	creer_colonne_droite();
-	debut_droite("messagerie");
-	
+	$page_result = ""
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
+		. debut_gauche($rubrique, true)
+		. spiplistes_boite_info_id(_T('spiplistes:liste_numero'), $id_liste, true)
+		. spiplistes_naviguer_paniers_listes(_T('spiplistes:Aller_aux_listes'), true)
+		. creer_colonne_droite($rubrique, true)
+		. spiplistes_boite_raccourcis(true)
+		//. spiplistes_boite_autocron(true) // ne pas géner l'édition
+		. spiplistes_boite_info_spiplistes(true)
+		. debut_droite($rubrique, true)
+		;
+
 	$titre = entites_html($titre);
 	$texte = entites_html($texte);
 	
@@ -136,7 +147,7 @@ function exec_spiplistes_liste_edit(){
 		: generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")
 		;
 
-	$page_result = ""
+	$page_result .= ""
 		. debut_cadre_formulaire("", true)
 		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
 		. "<tr width='100%'>"
@@ -150,7 +161,7 @@ function exec_spiplistes_liste_edit(){
 				? _T('spiplistes:Creer_une_liste_')
 				: _T('spiplistes:modifier_liste')
 			) . ":"
-		. spiplistes_gros_titre($titre, '', false)
+		. spiplistes_gros_titre($titre, '', true)
 		. "</td>"
 		. "</tr></table>"
 		. "<hr />"

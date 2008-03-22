@@ -171,7 +171,7 @@ function exec_spiplistes_abonne_edit () {
 			;
 	} 
 	
-	// Si pas d'adresse mail, ne pas permettre l'abonnement
+	// Si adresse mail, permettre l'abonnement
 	if(strlen($email)) {
 		$page_result .= ""
 			. "</td>"

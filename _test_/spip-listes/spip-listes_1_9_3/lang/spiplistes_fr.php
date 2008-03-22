@@ -376,7 +376,7 @@ et de recevoir les lettres d\'informations.',
 'Patron_du_tampon' => "Patron du tampon ",
 'Patron_de_pied_' => "Patron de pied ",
 'Patron_grand_' => "Grand patron ",
-'Pas_adresse_email' => "Pas d'adresse email",
+'Pas_adresse_email' => "Pas d&acute;adresse email",
 'Patron_manquant' => "Vous devez appliquer un grand patron avant de param&eacute;trer l'envoi de cette 
 liste.",
 

@@ -109,21 +109,26 @@ function exec_spiplistes_import_export(){
 // PAGE CONTENU
 ////////////////////////////////////
 
-	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+	$titre_page = _T('spiplistes:spip_listes');
+	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	$rubrique = _SPIPLISTES_PREFIX;
+	$sous_rubrique = "import_export";
+
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
 
 	// la gestion du courrier est réservée aux admins 
 	if ($connect_statut != "0minirezo") {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}       
 
-	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
-
-	debut_gauche();
-	spiplistes_boite_raccourcis();
-	creer_colonne_droite();
-	debut_droite("messagerie");
-
-	$page_result = "";
+	$page_result = ""
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
+		. debut_gauche($rubrique, true)
+		. creer_colonne_droite($rubrique, true)
+		. spiplistes_boite_raccourcis(true)
+		. debut_droite($rubrique, true)
+		;
 	
 	// importation
 	$flag_import_fichier_ok = (count($_FILES) && is_array($fichier_import = $_FILES['fichier_import']) && !$fichier_import['error']);

@@ -1,5 +1,8 @@
 <?php
+
+// exec/spiplistes_liste_gerer.php
 // _SPIPLISTES_EXEC_LISTE_GERER
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */
@@ -313,31 +316,38 @@ function exec_spiplistes_liste_gerer () {
 // PAGE CONTENU
 ////////////////////////////////////
 
-	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+	$titre_page = _T('spiplistes:spip_listes');
+	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	$rubrique = _SPIPLISTES_PREFIX;
+	$sous_rubrique = "liste_gerer";
+
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
 
 	// la gestion des listes de courriers est reservee aux admins 
 	if($connect_statut != "0minirezo") {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
-	
-	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
 
-	debut_gauche();
-	spiplistes_boite_info_id(_T('spiplistes:Liste_numero_:'), $id_liste, false);
-	spiplistes_naviguer_paniers_listes(_T('spiplistes:Aller_aux_listes'));
-	spiplistes_boite_patron($flag_editable, $id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_grand_patron'
-		, _SPIPLISTES_PATRONS_DIR, _T('spiplistes:Patron_grand_')
-		, ($patron ? $patron : "")
-		, $patron);
-	spiplistes_boite_patron($flag_editable, $id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_patron_pied'
-		, _SPIPLISTES_PATRONS_PIED_DIR, _T('spiplistes:Patron_de_pied_')
-		, (($ii = strlen($pied_page)) ? _T('taille_octets',array('taille'=>$ii)) : "")
-		, ($ii==0));
-	spiplistes_boite_raccourcis();
-	spiplistes_boite_autocron();
-	spiplistes_boite_info_spiplistes();
-	creer_colonne_droite();
-	debut_droite("messagerie");
+	$page_result = ""
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
+		. debut_gauche($rubrique, true)
+		. spiplistes_boite_info_id(_T('spiplistes:liste_numero'), $id_liste, true)
+		. spiplistes_naviguer_paniers_listes(_T('spiplistes:Aller_aux_listes'), true)
+		. spiplistes_boite_patron($flag_editable, $id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_grand_patron'
+			, _SPIPLISTES_PATRONS_DIR, _T('spiplistes:Patron_grand_')
+			, ($patron ? $patron : "")
+			, $patron, true)
+		. spiplistes_boite_patron($flag_editable, $id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_patron_pied'
+			, _SPIPLISTES_PATRONS_PIED_DIR, _T('spiplistes:Patron_de_pied_')
+			, (($ii = strlen($pied_page)) ? _T('taille_octets',array('taille'=>$ii)) : "")
+			, ($ii==0), true)
+		. creer_colonne_droite($rubrique, true)
+		. spiplistes_boite_raccourcis(true)
+		//. spiplistes_boite_autocron(true) // ne pas géner l'édition
+		. spiplistes_boite_info_spiplistes(true)
+		. debut_droite($rubrique, true)
+		;
 
 	changer_typo('','liste'.$id_liste);
 
@@ -360,7 +370,7 @@ function exec_spiplistes_liste_gerer () {
 		. debut_cadre_relief("", true)
 		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n"
 		. "<tr><td valign='top'>\n"
-		. spiplistes_gros_titre(spiplistes_bullet_titre_liste($titre, $statut, true)." ".$titre, '', false)
+		. spiplistes_gros_titre(spiplistes_bullet_titre_liste($titre, $statut, true)." ".$titre, '', true)
 		. "</td>"
 		. "<td rowspan='2'>"
 		// le gros bouton modifier si besoin

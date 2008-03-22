@@ -316,7 +316,10 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 			.	(
 				(strlen($row['email'])>3)
 				? "<a href='mailto:".$row['email']."'><img alt='' src='"._DIR_IMG_PACK."m_envoi_rtl.gif' /></a>"
-				: "<img alt='"._T('spiplistes:Pas_adresse_email')."' src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."puceoff.gif' />"
+				: "<img alt='"._T('spiplistes:Pas_adresse_email')."'"
+					// img ne prend pas de title (incorrect) mais mozilla n'affiche en bullet que pour title
+					. " title='"._T('spiplistes:Pas_adresse_email')."'"
+					. " src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."puceoff.gif' />"
 				)
 			. "</td>\n"
 			//

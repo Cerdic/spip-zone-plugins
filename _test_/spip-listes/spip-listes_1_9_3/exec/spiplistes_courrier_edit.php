@@ -1,5 +1,9 @@
 <?php
+
+// exec/spiplistes_courrier_edit.php
+
 // _SPIPLISTES_EXEC_COURRIER_EDIT
+
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -107,23 +111,31 @@ function exec_spiplistes_courrier_edit(){
 // PAGE CONTENU
 ////////////////////////////////////
 
-	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+	$titre_page = _T('spiplistes:spip_listes');
+	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	$rubrique = _SPIPLISTES_PREFIX;
+	$sous_rubrique = "courrier_edit";
+
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
 
 	if(!$flag_editable) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
-	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
-
-	debut_gauche();
-	spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_:'), $id_courrier, false);
-	spiplistes_naviguer_paniers_courriers(_T('spiplistes:Aller_au_panier'));
-	spiplistes_boite_raccourcis();
-	spiplistes_boite_info_spiplistes();
-	creer_colonne_droite();
-	debut_droite("messagerie");
-
 	$page_result = ""
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
+		. debut_gauche($rubrique, true)
+		. spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_:'), $id_courrier, true)
+		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:Aller_au_panier'), true)
+		. creer_colonne_droite($rubrique, true)
+		. spiplistes_boite_raccourcis(true)
+		//. spiplistes_boite_autocron(true) // ne pas géner l'édition
+		. spiplistes_boite_info_spiplistes(true)
+		. debut_droite($rubrique, true)
+		;
+
+	$page_result .= ""
 		// le bloc pour aperçu
 		. "<div id='apercu-courrier' style='clear:both;tex-align:center'></div>\n"
 		//
@@ -140,7 +152,7 @@ function exec_spiplistes_courrier_edit(){
 		. "<td><img src='"._DIR_IMG_PACK."/rien.gif' width='10'></td>\n"
 		. "<td width='100%'>"
 		. ($id_courrier ? _T('spiplistes:Modifier_un_courrier_:') : _T('spiplistes:Creer_un_courrier_:') )."<br />\n"
-		. spiplistes_gros_titre($titre, '', false)
+		. spiplistes_gros_titre($titre, '', true)
 		. "</td>\n"
 		. "</tr></table>\n"
 		. "<hr />\n"
