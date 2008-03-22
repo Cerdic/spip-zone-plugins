@@ -95,9 +95,11 @@ class cfg_formulaire
 	function charger(){
 		// lecture de la vue (fond cfg)
 		// il s'agit de recuperer le contenu du fichier
-		$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html');
-		if (!lire_fichier($fichier, $this->controldata)) {
-			$this->message .=  _T('cfg:erreur_lecture', array('nom' => $nom));
+		if ($this->vue) {
+			$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html');
+			if (!lire_fichier($fichier, $this->controldata)) {
+				$this->message .=  _T('cfg:erreur_lecture', array('nom' => $nom));
+			}
 		}
 		
 		// recherche et stockage des parametres de cfg 
@@ -200,6 +202,8 @@ class cfg_formulaire
 	 * 
 	 */	
 	function recuperer_noms_champs(){	
+		if (!$this->vue) return;
+		
 		// recherche d'au moins un champ de formulaire pour savoir si la vue est valide
 		$this->recuperer_fond();
 		if (!preg_match_all(
