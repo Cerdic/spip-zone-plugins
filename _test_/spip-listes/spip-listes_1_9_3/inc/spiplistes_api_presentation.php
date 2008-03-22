@@ -65,4 +65,20 @@ function spiplistes_onglets ($rubrique, $onglet, $return = false) {
 	else echo($result);
 } // end spiplistes_onglets()
 
+// CP:20080322 :
+function spiplistes_get_icone_auteur ($statut) {
+	switch($statut) {
+		case "0minirezo":
+			$logo = "redacteurs-admin-24.gif"; // jolie cravate
+			break;
+		case "5poubelle":
+			$logo = "redacteurs-poubelle-24.gif";
+			break;
+		default:
+			$logo = "redacteurs-24.gif";
+			break;
+	}
+	return($logo);
+}
+
 ?>

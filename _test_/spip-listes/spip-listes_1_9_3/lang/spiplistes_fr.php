@@ -85,12 +85,13 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 	diffusion list&eacute;es ci-dessous. Pour recevoir &agrave; nouveau le courrier 
 	de vos listes pr&eacute;f&eacute;r&eacute;es, choisissez un format de r&eacute;ception 
 	et validez ce formulaire. ",
-'Vous_etes_abonne_aux_listes_selectionnees' => "Vous &ecirc;tes abonn&eacute; aux listes s&eacute;lectionn&eacute;es ",
+'Vous_etes_abonne_aux_listes_selectionnees' => "Vous &ecirc;tes abonn&eacute; aux listes s&eacute;lectionn&eacute;es "
+, 'adresse_mail_obligatoire' => "Adresse mail manquante. Abonnement impossible."
 
 
 //B
 
-'bouton_listes' => 'Lettres d\'information',
+, 'bouton_listes' => 'Lettres d\'information',
 'bouton_modifier' => 'Modifier ce courrier',
 'Abonnements_aux_courriers' => "Abonnements aux courriers",
 

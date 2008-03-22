@@ -933,7 +933,7 @@ function spiplistes_boite_raccourcis ($return = false) {
 	
 	$result = ""
 		// Les raccourcis
-		. spiplistes_debut_raccourcis(_T('titre_cadre_raccourcis'), true)
+		. spiplistes_debut_raccourcis(_T('titre_cadre_raccourcis'), true, true)
 		. "<ul class='verdana2' style='list-style: none;padding:1ex;margin:0;'>\n"
 		. "<li>"
 		. icone_horizontale(

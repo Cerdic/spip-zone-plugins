@@ -192,12 +192,12 @@ function exec_spiplistes_config () {
 		. "<br /><br /><br />\n"
 		. spiplistes_gros_titre(_T('titre_page_config_contenu'), '', true)
 		. barre_onglets($rubrique, _SPIPLISTES_PREFIX)
-		. debut_gauche(_SPIPLISTES_RUBRIQUE, true)
+		. debut_gauche($rubrique, true)
 		. __plugin_boite_meta_info(_SPIPLISTES_PREFIX, true)
-		. creer_colonne_droite(_SPIPLISTES_RUBRIQUE, true)
+		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_autocron(true)
 		. spiplistes_boite_info_spiplistes(true)
-		. debut_droite(_SPIPLISTES_RUBRIQUE, true)
+		. debut_droite($rubrique, true)
 		;
 
 	//////////////////////////////////////////////////////
