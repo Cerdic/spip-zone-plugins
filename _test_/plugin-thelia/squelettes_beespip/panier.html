@@ -76,7 +76,7 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
 					</td>
 					<td class="ligneTableau">THELIA-PRIXU &euro; </td>
     					<td class="ligneTableau">
-					<form action="#URL_PAGE{panier, article=THELIA-ARTICLE}" method="post" name="formpanierTHELIA-ARTICLE" id="formpanierTHELIA-ARTICLE">
+					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" name="formpanierTHELIA-ARTICLE" id="formpanierTHELIA-ARTICLE">
                 				<input type="hidden" name="article" value="THELIA-ARTICLE" />
                 				<input type="hidden" name="thelia_action" value="modifier" />
                 				<select name="quantite" size="1" class="zoneDeSaisie" onchange="document.formpanierTHELIA-ARTICLE.submit()">

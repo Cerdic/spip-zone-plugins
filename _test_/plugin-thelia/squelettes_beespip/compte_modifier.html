@@ -89,7 +89,7 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
 			
 				[(#REM) formulaire "Modifier mes coordonnées" ]
 	
-				<form action="#URL_PAGE{compte_modifier}" method="post" name="modifier2" id="modifier2">
+				<form action="#URL_PAGE{compte_modifier,lang=#LANG}" method="post" name="modifier2" id="modifier2">
 				<input type="hidden" name="thelia_action" value="modifiercompte" /> 
 
 				<table>

@@ -53,7 +53,7 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
               <div class="espacebloc">&nbsp;</div>
 [(#REM) Contenu de la page ]
 	
-			<form action="#URL_PAGE{commande}" id="formulaire" method="post">
+			<form action="#URL_PAGE{commande,lang=#LANG}" id="formulaire" method="post">
 			<input type="hidden" name="thelia_action" value="codepromo" />
 			<table>
             		<thead> 
@@ -100,7 +100,7 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
 			</table>
 			<br />
 			<label for="code"><:spipthelia:code_reduction:></label>
-			<input id="code" name="code" type="text" class="zoneDeSaisie"/><input type="submit" value="<:valider:>" />
+			<input id="code" name="code" type="text" class="zoneDeSaisie"/><input type="submit" value="<:spipthelia:valider:>" />
 			
 			</form>
 
@@ -116,7 +116,7 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
 			   	<THELIA_PAIEMENT type="PAIEMENT">
 			 	<tr>
 				   	<td class="ligneTableau">THELIA-TITRE</td>
-               				<td class="ligneTableau"><a href="#URL_PAGE{commande,thelia_action=paiement&amp;type_paiement=THELIA-ID}"><:valider:></a></td>
+               				<td class="ligneTableau"><a href="#URL_PAGE{commande,thelia_action=paiement&amp;type_paiement=THELIA-ID}"><:spipthelia:valider:></a></td>
 				</tr>
 
 			</THELIA_PAIEMENT>

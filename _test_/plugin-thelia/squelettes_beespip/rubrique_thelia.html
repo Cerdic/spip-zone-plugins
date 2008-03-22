@@ -64,8 +64,10 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
 
 				<div class = "ListeProduitsPetits">
  				<THELIA_PROD type="PRODUIT" rubrique="THELIA-RUBRIQUE_ID" classement="inverse" num="12">
-					<form action="#URL_PAGE{panier,thelia_action=ajouter&amp;ref=THELIA-REF}" method="post" id="formAjouterTHELIA-ID">
-					<div class="produitPetit">
+					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" id="formAjouterTHELIA-ID">
+					<input type="hidden" name="thelia_action" value="ajouter" />
+                			<input type="hidden" name="ref" value="THELIA-REF" />
+                			<div class="produitPetit">
 					<a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique=THELIA-RUBRIQUE_ID}">
 					<THELIA_IMAGE type="IMAGE" num="1" produit="THELIA-ID" largeur="159">
  						<img src="THELIA-IMAGE"  alt="THELIA-PRODTITRE  " title="THELIA-PRODTITRE" class="contourImage" />
