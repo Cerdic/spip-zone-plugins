@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'connexion' => 'Introduza o seu nome de usuario e chave para conectarse.',
 	'contact' => 'Contacto',
 	'courrier' => '<p>Logo de pasar a etapa de rexistro, o seu identificador persoal seralle remitido rapidamente por correo electr&oacute;nico.</p>',
-	'credits' => 'Realizado con <a href=http://www.spip.net class=copyright>SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> por <a href=http://www.laprise.org/>James aka Klik&amp;eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> e <a href=http://www.missmopi.net/>Nad&amp;egrave;ge aka Miss Mopi</a> (logos de St&amp;eacute;phane)',
+	'credits' => 'Realizado con <a href=http://www.spip.net class=copyright>SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> por <a href=http://www.laprise.org/>James aka Klik&eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> e <a href=http://www.missmopi.net/>Nad&egrave;ge aka Miss Mopi</a> (logos de St&eacute;phane)',
 	'credits_bis1' => 'GAFoSPIP v.&nbsp;',
 	'credits_bis2' => 'Agosto 2005',
 	'credits_bis3' => 'Adaptado para, e, inspirado por, o tratamento dos foros de&nbsp;:<br />',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dans_forum' => 'no foro',
 	'date' => 'Inscrito o ',
 	'deja_enregistree' => 'Este enderezo de correo xa est&aacute; rexistrados<p><a href=\'spip_pass.php3\'>[ Chave obrigada ]</a></p>',
-	'dernier' => '&amp;Uacute;ltimo<br />',
+	'dernier' => '&Uacute;ltimo<br />',
 
 	// E
 	'ecrirea' => 'Escribir correo para',
@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_biographie' => 'Biograf&iacute;a curta en poucas verbas.',
 	'entree_infos_perso' => 'Quen &eacute; vostede?',
 	'entree_nom_pseudo' => 'O seu nome',
-	'entree_nom_pseudo2' => '<b>Apelidos ou pseudo</b>&amp;nbsp;:',
+	'entree_nom_pseudo2' => '<b>Apelidos ou pseudo</b>&nbsp;:',
 	'entree_nom_site' => 'O nome do seu web',
 	'entree_url' => 'O enderezo (URL) do seu web',
 	'envmp' => 'Enviar unha mensaxe privada',
@@ -72,7 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fil_alerte' => 'Non &eacute; posible subscribirse a este f&iacute;o',
 	'fil_annonce' => 'Transformar este f&iacute;o en anuncio',
 	'fil_deplace' => 'Mover este f&iacute;o',
-	'fil_sujet' => '&nbsp;P&amp;eacute; de f&amp;iacute;o / Asunto<br />',
+	'fil_sujet' => '&nbsp;P&eacute; de f&iacute;o / Asunto<br />',
 	'forum_deplace' => 'Mover para despois do foro ...',
 	'forum_ferme' => 'Este foro est&aacute; desactivado',
 	'forum_ferme_texte' => 'Este foro est&aacute; desactivado. Xa non se pode participar nel.',
@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_vers' => 'Verbo do foro ...',
 
 	// G
-	'gaf_titre' => 'GAFoSPIP<br />Xesti&amp;oacute; alternativa dos foros',
+	'gaf_titre' => 'GAFoSPIP<br />Xesti&oacute; alternativa dos foros',
 
 	// H
 	'haut_page' => 'Alto de p&aacute;xina',
@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info' => 'Informaci&oacute;ns',
 	'info_avertissement' => 'Aviso',
 	'info_confirmer_passe' => 'Confirmar esta nova chave&nbsp;:',
-	'info_icones' => 'Infos Ic&amp;ocirc;nes',
+	'info_icones' => 'Infos Ic&ocirc;nes',
 	'info_non_modifiable' => 'No se pode modificar;',
 	'info_plus_cinq_car' => 'm&aacute;is de 5 car&aacute;cteres',
 	'info_recommencer' => 'Volver comezar',
@@ -184,10 +184,10 @@ As palabras de menos de tres letras son ignoradas.',
 	'selection_efface' => 'Borrar a selecci&oacute;n ...',
 	'sinscrire' => 'Rexistrarse',
 	'site' => 'Web',
-	'sousrub_salon' => '&nbsp;Subtema / Sal&amp;oacute;n<br />',
+	'sousrub_salon' => '&nbsp;Subtema / Sal&oacute;n<br />',
 	'statut' => 'Estatuto',
 	'sujet' => 'Asunto&nbsp;',
-	'sujet_ajout' => 'Engadir un asunto ao foro :<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'sujet_ajout' => 'Engadir un asunto ao foro :<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Suxeito de anuncio',
 	'sujet_auteur' => 'Autor',
 	'sujet_clos_texte' => 'Este asunto est&aacute; pechado, xa non se pode publicar nel.',
@@ -204,9 +204,9 @@ As palabras de menos de tres letras son ignoradas.',
 	'sur' => '&nbsp;verbo de&nbsp;',
 
 	// T
-	'texte_login_precaution' => 'Atenci&oacute;n&amp;nbsp;! Este &eacute; o nome co que vostede est&aacute;  conectado actualmente.
+	'texte_login_precaution' => 'Atenci&oacute;n&nbsp;! Este &eacute; o nome co que vostede est&aacute;  conectado actualmente.
  Utilice este formulario con precauci&oacute;n...',
-	'texte_repondre' => 'Responder a :<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'texte_repondre' => 'Responder a :<br />&nbsp;&nbsp;..&nbsp;',
 	'titre_cadre_signature_obligatoire' => '<b>Sinatura</b> [Obrigada]<br />',
 	'total_messages' => 'Total de mensaxes',
 	'tous_forums' => 'Todos os foros',

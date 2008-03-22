@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'connexion' => 'Bonvolu tajpi vian salutnomon kaj vian pasvorton por ensaluti.',
 	'contact' => 'Kontakto',
 	'courrier' => '<p>Post la registri&#285;o, via persona salutnomo alvenos al vi retletere.</p>',
-	'credits' => 'Farita per <a href=http://www.spip.net class=copyright>SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> de <a href=http://www.laprise.org/>James aka Klik&amp;eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> kaj <a href=http://www.missmopi.net/>Nad&amp;egrave;ge aka Miss Mopi</a> (emblemo far de St&amp;eacute;phane)',
+	'credits' => 'Farita per <a href=http://www.spip.net class=copyright>SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> de <a href=http://www.laprise.org/>James aka Klik&eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> kaj <a href=http://www.missmopi.net/>Nad&egrave;ge aka Miss Mopi</a> (emblemo far de St&eacute;phane)',
 	'credits_bis1' => 'GAFoSPIP v.&nbsp;',
 	'credits_bis2' => 'A&#365;gusto 2005',
 	'credits_bis3' => 'Adaptita por, kaj, Inspirita de, la pritraktado de la forumoj de&nbsp;:<br />',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dans_forum' => 'en la forumo',
 	'date' => 'Registrita la',
 	'deja_enregistree' => 'Tiu retpo&#349;tadreso jam estas registrita <p><a href=\'spip_pass.php3\'>[Pasvorto forgesita ]</a></p>',
-	'dernier' => '&amp;nbsp;Lasta<br />',
+	'dernier' => '&nbsp;Lasta<br />',
 
 	// E
 	'ecrirea' => 'Skribi retleteron al',
@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_biographie' => 'Mallonga kelkvorta biografio.',
 	'entree_infos_perso' => 'Kiu vi estas ?',
 	'entree_nom_pseudo' => 'Via salutnomo',
-	'entree_nom_pseudo2' => '<b>Nomo a&#365; kromnomo</b>&amp;nbsp;:',
+	'entree_nom_pseudo2' => '<b>Nomo a&#365; kromnomo</b>&nbsp;:',
 	'entree_nom_site' => 'La nomo de via retejo',
 	'entree_url' => 'La retadreso (URL) de via retejo',
 	'envmp' => 'Sendi privatan mesa&#285;on al',
@@ -187,7 +187,7 @@ La vortoj longa malpli ol 3-literojn estas ignorataj.',
 	'sousrub_salon' => '&nbsp;Subrubriko / Salono<br />',
 	'statut' => 'Statuso',
 	'sujet' => 'Temo&nbsp;',
-	'sujet_ajout' => 'Aldoni temon en la forumon:<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'sujet_ajout' => 'Aldoni temon en la forumon:<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Temo-anonco',
 	'sujet_auteur' => 'A&#365;toro',
 	'sujet_clos_texte' => 'Tiu temo estas fermita, vi ne plu povas kontribui.',
@@ -204,9 +204,9 @@ La vortoj longa malpli ol 3-literojn estas ignorataj.',
 	'sur' => '&nbsp;sur&nbsp;',
 
 	// T
-	'texte_login_precaution' => 'Atentu&amp;nbsp;! Tio estas la salutnomo la&#365; kiu vi ensalutis.
+	'texte_login_precaution' => 'Atentu&nbsp;! Tio estas la salutnomo la&#365; kiu vi ensalutis.
 Singarde uzu tiun formularon...',
-	'texte_repondre' => 'Respondi al:<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'texte_repondre' => 'Respondi al:<br />&nbsp;&nbsp;..&nbsp;',
 	'titre_cadre_signature_obligatoire' => '<b>Subskribo</b> [Deviga]<br />',
 	'total_messages' => 'Mesa&#285;oj-totalo',
 	'tous_forums' => '&#264;iuj forumoj',
@@ -221,7 +221,7 @@ Singarde uzu tiun formularon...',
 	'voir' => 'VIDI',
 	'voir_evolution' => 'Vidi la vizit-evoluon',
 	'voir_message' => 'Vidi tiun mesa&#285;on',
-	'voir_messages' => 'Vidi&amp;nbsp;la&amp;nbsp;novajn&amp;nbsp;mesa&#285;ojn',
+	'voir_messages' => 'Vidi&nbsp;la&nbsp;novajn&nbsp;mesa&#285;ojn',
 	'voirprofil' => 'Vidi la profilon de',
 
 	// W

@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'connexion' => '&#1042;&#1087;&#1080;&#1096;&#1077;&#1090;&#1077; &#1087;&#1086;&#1090;&#1088;&#1077;&#1073;&#1080;&#1090;&#1077;&#1083;&#1089;&#1082;&#1086; &#1080;&#1084;&#1077; &#1080; &#1087;&#1072;&#1088;&#1086;&#1083;&#1072; &#1079;&#1072; &#1074;&#1088;&#1098;&#1079;&#1082;&#1072;.',
 	'contact' => '&#1050;&#1086;&#1085;&#1090;&#1072;&#1082;&#1090;',
 	'courrier' => '<p>&#1057;&#1083;&#1077;&#1076; &#1082;&#1072;&#1090;&#1086; &#1089;&#1077; &#1079;&#1072;&#1087;&#1080;&#1096;&#1077;&#1090;&#1077;, &#1097;&#1077; &#1087;&#1086;&#1083;&#1091;&#1095;&#1080;&#1090;&#1077; &#1083;&#1080;&#1095;&#1077;&#1085; &#1080;&#1076;&#1077;&#1085;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090;&#1086;&#1088; &#1079;&#1072; &#1076;&#1086;&#1089;&#1090;&#1098;&#1087; &#1087;&#1086; &#1077;&#1083;&#1077;&#1082;&#1090;&#1088;&#1086;&#1085;&#1085;&#1072; &#1087;&#1086;&#1097;&#1072;.</p>',
-	'credits' => '&#1053;&#1072;&#1087;&#1088;&#1072;&#1074;&#1077;&#1085;&#1086; &#1089; <a href=http://www.spip.net class=copyright>SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> &#1086;&#1090; <a href=http://www.laprise.org/>James aka Klik&amp;eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> et <a href=http://www.missmopi.net/>Nad&amp;egrave;ge aka Miss Mopi</a> (logos de St&amp;eacute;phane)',
+	'credits' => '&#1053;&#1072;&#1087;&#1088;&#1072;&#1074;&#1077;&#1085;&#1086; &#1089; <a href=http://www.spip.net class=copyright>SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> &#1086;&#1090; <a href=http://www.laprise.org/>James aka Klik&eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> et <a href=http://www.missmopi.net/>Nad&egrave;ge aka Miss Mopi</a> (logos de St&eacute;phane)',
 	'credits_bis1' => 'GAFoSPIP v.&nbsp;',
 	'credits_bis2' => '&#1040;&#1074;&#1075;&#1091;&#1089;&#1090; 2005',
 	'credits_bis3' => '&#1040;&#1076;&#1072;&#1087;&#1090;&#1080;&#1088;&#1072;&#1085; &#1086;&#1090;, &#1080;&#1085;&#1089;&#1087;&#1080;&#1088;&#1080;&#1088;&#1072;&#1085; &#1086;&#1090;, &#1088;&#1072;&#1079;&#1088;&#1072;&#1073;&#1086;&#1090;&#1082;&#1072; &#1085;&#1072; &#1092;&#1086;&#1088;&#1091;&#1084;&#1080;&#1090;&#1077;:<br />',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dans_forum' => '&#1074;&#1098;&#1090;&#1088;&#1077; &#1074;&#1098;&#1074; &#1092;&#1086;&#1088;&#1091;&#1084;&#1072;',
 	'date' => '&#1047;&#1072;&#1087;&#1080;&#1089;&#1072;&#1085; &#1085;&#1072;',
 	'deja_enregistree' => '&#1058;&#1086;&#1079;&#1080; &#1077;&#1083;&#1077;&#1082;&#1088;&#1086;&#1085;&#1077;&#1085; &#1072;&#1076;&#1088;&#1077;&#1089; &#1074;&#1077;&#1095;&#1077; &#1077; &#1079;&#1072;&#1087;&#1080;&#1089;&#1072;&#1085;<p><a href=\'spip_pass.php3\'>[ &#1047;&#1072;&#1073;&#1088;&#1072;&#1074;&#1077;&#1085;&#1072; &#1087;&#1072;&#1088;&#1086;&#1083;&#1072; ]</a></p>',
-	'dernier' => '&amp;nbsp;&#1055;&#1086;&#1089;&#1083;&#1077;&#1076;&#1077;&#1085;<br />',
+	'dernier' => '&nbsp;&#1055;&#1086;&#1089;&#1083;&#1077;&#1076;&#1077;&#1085;<br />',
 
 	// E
 	'ecrirea' => '&#1055;&#1080;&#1089;&#1072;&#1085;&#1077; &#1085;&#1072; &#1087;&#1080;&#1089;&#1084;&#1086; &#1085;&#1072;:',
@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_biographie' => '&#1041;&#1080;&#1086;&#1075;&#1088;&#1072;&#1092;&#1080;&#1103; &#1074; &#1085;&#1103;&#1082;&#1086;&#1083;&#1082;&#1086; &#1076;&#1091;&#1084;&#1080;.',
 	'entree_infos_perso' => '&#1050;&#1086;&#1081;/&#1082;&#1086;&#1103; &#1089;&#1090;&#1077; &#1074;&#1080;&#1077;?',
 	'entree_nom_pseudo' => '&#1042;&#1072;&#1096;&#1077;&#1090;&#1086; &#1080;&#1084;&#1077;',
-	'entree_nom_pseudo2' => '<b>&#1048;&#1084;&#1077; &#1080;&#1083;&#1080; &#1087;&#1089;&#1077;&#1074;&#1076;&#1086;&#1085;&#1080;&#1084;</b>&amp;nbsp;:',
+	'entree_nom_pseudo2' => '<b>&#1048;&#1084;&#1077; &#1080;&#1083;&#1080; &#1087;&#1089;&#1077;&#1074;&#1076;&#1086;&#1085;&#1080;&#1084;</b>&nbsp;:',
 	'entree_nom_site' => '&#1048;&#1084;&#1077; &#1085;&#1072; &#1042;&#1072;&#1096;&#1080;&#1103; &#1089;&#1072;&#1081;&#1090;',
 	'entree_url' => 'URL &#1085;&#1072; &#1042;&#1072;&#1096;&#1080;&#1103; &#1089;&#1072;&#1081;&#1090;',
 	'envmp' => '&#1048;&#1079;&#1087;&#1088;&#1072;&#1097;&#1072;&#1085;&#1077; &#1085;&#1072; &#1095;&#1072;&#1089;&#1090;&#1085;&#1086; &#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1077;;',
@@ -69,15 +69,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'faq' => '&#1063;&#1077;&#1089;&#1090;&#1086; &#1079;&#1072;&#1076;&#1072;&#1074;&#1072;&#1085;&#1080; &#1074;&#1098;&#1087;&#1088;&#1086;&#1089;&#1080;',
 	'ferme' => '&#1058;&#1072;&#1079;&#1080; &#1076;&#1080;&#1089;&#1082;&#1091;&#1089;&#1080;&#1103; &#1077; &#1079;&#1072;&#1090;&#1074;&#1086;&#1088;&#1077;&#1085;&#1072;',
-	'fil_alerte' => '<NEW>Il n\'est pas possible de s\'abonner &amp;agrave; ce fil',
+	'fil_alerte' => '<NEW>Il n\'est pas possible de s\'abonner &agrave; ce fil',
 	'fil_annonce' => '<NEW>Transformer ce fil en Annonce',
 	'fil_deplace' => '&#1055;&#1088;&#1077;&#1084;&#1077;&#1089;&#1090;&#1074;&#1072;&#1085;&#1077; &#1085;&#1072; &#1085;&#1080;&#1096;&#1082;&#1072;&#1090;&#1072; &#1085;&#1072; &#1088;&#1072;&#1079;&#1075;&#1086;&#1074;&#1086;&#1088;&#1072;',
 	'fil_sujet' => '<NEW>&nbsp;Pied de fil / Sujet<br />',
-	'forum_deplace' => '<NEW>D&amp;eacute;plac&amp;eacute; depuis le Forum ...',
+	'forum_deplace' => '<NEW>D&eacute;plac&eacute; depuis le Forum ...',
 	'forum_ferme' => '&#1060;&#1086;&#1088;&#1091;&#1084;&#1098;&#1090; &#1077; &#1076;&#1077;&#1072;&#1082;&#1090;&#1080;&#1074;&#1080;&#1088;&#1072;&#1085;',
 	'forum_ferme_texte' => '&#1058;&#1086;&#1079;&#1080; &#1092;&#1086;&#1088;&#1091;&#1084; &#1077; &#1076;&#1077;&#1072;&#1082;&#1090;&#1080;&#1074;&#1080;&#1088;&#1072;&#1085;. &#1053;&#1077; &#1084;&#1086;&#1078;&#1077;&#1090;&#1077; &#1076;&#1072; &#1087;&#1091;&#1073;&#1083;&#1080;&#1082;&#1091;&#1074;&#1072;&#1090;&#1077; &#1074; &#1085;&#1077;&#1075;&#1086;.',
 	'forum_ouvrir' => '&#1054;&#1090;&#1074;&#1072;&#1088;&#1103;&#1085;&#1077; &#1085;&#1072; &#1092;&#1086;&#1088;&#1091;&#1084;&#1072;',
-	'forum_selection' => '<NEW>dans le FORUM (article) &amp;agrave; s&amp;eacute;lectionner :',
+	'forum_selection' => '<NEW>dans le FORUM (article) &agrave; s&eacute;lectionner :',
 	'forum_vers' => '&#1050;&#1098;&#1084; &#1092;&#1086;&#1088;&#1091;&#1084;&#1072; ...',
 
 	// G
@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info' => '&#1048;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&#1103;',
 	'info_avertissement' => '&#1042;&#1085;&#1080;&#1084;&#1072;&#1085;&#1080;&#1077;',
 	'info_confirmer_passe' => '&#1055;&#1086;&#1090;&#1074;&#1098;&#1088;&#1078;&#1076;&#1072;&#1074;&#1072;&#1085;&#1077; &#1085;&#1072; &#1085;&#1086;&#1074;&#1072;&#1090;&#1072; &#1087;&#1072;&#1088;&#1086;&#1083;&#1072;:',
-	'info_icones' => '<NEW>Infos Ic&amp;ocirc;nes',
+	'info_icones' => '<NEW>Infos Ic&ocirc;nes',
 	'info_non_modifiable' => '&#1053;&#1077; &#1084;&#1086;&#1078;&#1077; &#1076;&#1072; &#1089;&#1077; &#1087;&#1088;&#1086;&#1084;&#1077;&#1085;&#1080;',
 	'info_plus_cinq_car' => '&#1087;&#1086;&#1074;&#1077;&#1095;&#1077; &#1086;&#1090; 5 &#1079;&#1085;&#1072;&#1082;&#1072;',
 	'info_recommencer' => '&#1047;&#1072;&#1087;&#1086;&#1095;&#1085;&#1077;&#1090;&#1077; &#1086;&#1090;&#1085;&#1072;&#1095;&#1072;&#1083;&#1086;.',
@@ -114,17 +114,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_groupes' => '&#1055;&#1086;&#1090;&#1088;&#1077;&#1073;&#1080;&#1090;&#1077;&#1083;&#1089;&#1082;&#1080; &#1075;&#1088;&#1091;&#1087;&#1080;',
 	'membres_liste' => '&#1057;&#1087;&#1080;&#1089;&#1098;&#1082; &#1089; &#1095;&#1083;&#1077;&#1085;&#1086;&#1074;&#1077;',
 	'membres_profil' => '&#1055;&#1088;&#1086;&#1092;&#1080;&#1083;',
-	'message_date' => '<NEW>Post&amp;eacute; le&nbsp;',
+	'message_date' => '<NEW>Post&eacute; le&nbsp;',
 	'message_sujet' => '&#1058;&#1077;&#1084;&#1072;&nbsp;',
 	'messages' => '&#1057;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1103;',
 	'messages_derniers' => '&#1053;&#1072;&#1081;-&#1085;&#1086;&#1074;&#1080;&#1090;&#1077; &#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1103;',
 	'messages_non_lus_grand' => '&#1053;&#1103;&#1084;&#1072; &#1085;&#1086;&#1074;&#1080; &#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1103;',
-	'messages_nouveaux' => '&#1053;&#1086;&#1074;&#1080;&amp;nbsp;&#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1103;',
+	'messages_nouveaux' => '&#1053;&#1086;&#1074;&#1080;&nbsp;&#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1103;',
 	'messages_pas_nouveaux' => '&#1053;&#1103;&#1084;&#1072; &#1085;&#1086;&#1074;&#1080; &#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1103;',
 	'messages_repondre' => '&#1053;&#1086;&#1074; &#1086;&#1090;&#1075;&#1086;&#1074;&#1086;&#1088;',
 	'messages_verifier' => '&#1055;&#1088;&#1077;&#1075;&#1083;&#1077;&#1076; &#1085;&#1072; &#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1077;&#1090;&#1086;',
 	'messages_voir_dernier' => '&#1055;&#1088;&#1077;&#1075;&#1083;&#1077;&#1076; &#1085;&#1072; &#1087;&#1086;&#1089;&#1083;&#1077;&#1076;&#1085;&#1086;&#1090;&#1086; &#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1077;',
-	'moderateurs' => '<NEW>Mod&amp;eacute;rateur(s)',
+	'moderateurs' => '<NEW>Mod&eacute;rateur(s)',
 	'mp' => '&#1063;&#1072;&#1089;&#1090;&#1085;&#1086; &#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1077;;',
 
 	// N
@@ -140,7 +140,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pb_mysql' => '&#1058;&#1077;&#1093;&#1085;&#1080;&#1095;&#1077;&#1089;&#1082;&#1080; &#1087;&#1088;&#1086;&#1073;&#1083;&#1077;&#1084; &#1077; &#1087;&#1088;&#1077;&#1082;&#1098;&#1089;&#1085;&#1072;&#1083; &#1079;&#1072;&#1087;&#1080;&#1089;&#1074;&#1072;&#1085;&#1077;&#1090;&#1086; &#1042;&#1080;, &#1086;&#1087;&#1080;&#1090;&#1072;&#1081;&#1090;&#1077; &#1086;&#1090;&#1085;&#1086;&#1074;&#1086;',
 	'poste_effac' => '&#1048;&#1079;&#1090;&#1088;&#1080;&#1090;&#1080; &#1087;&#1091;&#1073;&#1083;&#1080;&#1082;&#1072;&#1094;&#1080;&#1080; !',
 	'poste_efface' => '&#1048;&#1079;&#1090;&#1088;&#1080;&#1074;&#1072;&#1085;&#1077; &#1085;&#1072; &#1087;&#1091;&#1073;&#1083;&#1080;&#1082;&#1072;&#1094;&#1080;&#1080;',
-	'poste_efface_lui' => '<NEW>Ce Sujet comprend @nbr_post@ Post(s). Effac&amp;eacute;s avec lui&nbsp;!
+	'poste_efface_lui' => '<NEW>Ce Sujet comprend @nbr_post@ Post(s). Effac&eacute;s avec lui&nbsp;!
 ',
 	'poste_refuse' => '&#1054;&#1090;&#1093;&#1074;&#1098;&#1088;&#1083;&#1077;&#1085;&#1080; &#1087;&#1091;&#1073;&#1083;&#1080;&#1082;&#1072;&#1094;&#1080;&#1080;, &#1079;&#1072; &#1080;&#1079;&#1090;&#1088;&#1080;&#1074;&#1072;&#1085;&#1077;!',
 	'poste_reponse' => '&#1055;&#1091;&#1073;&#1083;&#1080;&#1082;&#1072;&#1094;&#1080;&#1103; / &#1086;&#1090;&#1075;&#1086;&#1074;&#1086;&#1088;',
@@ -154,20 +154,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'recherche_auteur' => '&#1058;&#1098;&#1088;&#1089;&#1077;&#1085;&#1077; &#1087;&#1086; &#1072;&#1074;&#1090;&#1086;&#1088;',
 	'recherche_elargie' => '&#1056;&#1072;&#1079;&#1096;&#1080;&#1088;&#1077;&#1085;&#1086; &#1090;&#1098;&#1088;&#1089;&#1077;&#1085;&#1077;',
 	'recherche_options' => '&#1054;&#1087;&#1094;&#1080;&#1080; &#1079;&#1072; &#1090;&#1098;&#1088;&#1089;&#1077;&#1085;&#1077;',
-	'recherche_texte' => '<NEW>La recherche est effectu&amp;eacute;e dans les sujets et le corps des messages.
-Il n\'y a pas d\'op&amp;eacute;rateurs bool&amp;eacute;ens, l\'op&amp;eacute;rateur implicite &amp;eacute;tant grosso modo un OU logique.
-Les mots de moins de trois lettres sont ignor&amp;eacute;s.',
+	'recherche_texte' => '<NEW>La recherche est effectu&eacute;e dans les sujets et le corps des messages.
+Il n\'y a pas d\'op&eacute;rateurs bool&eacute;ens, l\'op&eacute;rateur implicite &eacute;tant grosso modo un OU logique.
+Les mots de moins de trois lettres sont ignor&eacute;s.',
 	'recherche_titre' => '&#1058;&#1098;&#1088;&#1089;&#1077;&#1085;&#1077; &#1085;&#1072; &#1090;&#1077;&#1084;&#1072;',
-	'reglement' => '<NEW><p>Les administrateurs et mod&amp;eacute;rateurs de ce forum s\'efforceront de supprimer ou &amp;eacute;diter tous les messages &amp;agrave; caract&amp;egrave;re r&amp;eacute;pr&amp;eacute;hensible aussi rapidement que possible. Toutefois, il leur est impossible de passer en revue tous les messages. Vous admettez donc que tous les messages post&amp;eacute;s sur ces forums expriment la vue et opinion de leurs auteurs respectifs, et non pas des administrateurs, ou mod&amp;eacute;rateurs, ou webmestres (except&amp;eacute; les messages post&amp;eacute;s par eux-m&amp;ecirc;me) et par cons&amp;eacute;quent ne peuvent pas &amp;ecirc;tre tenus pour responsables.</p>
+	'reglement' => '<NEW><p>Les administrateurs et mod&eacute;rateurs de ce forum s\'efforceront de supprimer ou &eacute;diter tous les messages &agrave; caract&egrave;re r&eacute;pr&eacute;hensible aussi rapidement que possible. Toutefois, il leur est impossible de passer en revue tous les messages. Vous admettez donc que tous les messages post&eacute;s sur ces forums expriment la vue et opinion de leurs auteurs respectifs, et non pas des administrateurs, ou mod&eacute;rateurs, ou webmestres (except&eacute; les messages post&eacute;s par eux-m&ecirc;me) et par cons&eacute;quent ne peuvent pas &ecirc;tre tenus pour responsables.</p>
 
-<p>Vous consentez &amp;agrave; ne pas poster de messages injurieux, obsc&amp;egrave;nes, vulgaires, diffamatoires, mena&amp;ccedil;ants, sexuels ou tout autre message qui violerait les lois applicables. Le faire peut vous conduire &amp;agrave; &amp;ecirc;tre banni imm&amp;eacute;diatement de fa&amp;ccedil;on permanente (et votre fournisseur d\'acc&amp;egrave;s &amp;agrave; internet en sera inform&amp;eacute;). L\'adresse IP de chaque message est enregistr&amp;eacute;e afin d\'aider &amp;agrave; faire respecter ces conditions. Vous &amp;ecirc;tes d\'accord sur le fait que le webmestre, l\'administrateur et les mod&amp;eacute;rateurs de ce forum ont le droit de supprimer, &amp;eacute;diter, d&amp;eacute;placer ou verrouiller n\'importe quel sujet de discussion &amp;agrave; tout moment. En tant qu\'utilisateur, vous &amp;ecirc;tes d\'accord sur le fait que toutes les informations que vous donnerez ci-apr&amp;egrave;s seront stock&amp;eacute;es dans une base de donn&amp;eacute;es. Cependant, ces informations ne seront divulgu&amp;eacute;es &amp;agrave; aucune tierce personne ou soci&amp;eacute;t&amp;eacute; sans votre accord. Le webmestre, l\'administrateur, et les mod&amp;eacute;rateurs ne peuvent pas &amp;ecirc;tre tenus pour responsables si une tentative de piratage informatique conduit &amp;agrave; l\'acc&amp;egrave;s de ces donn&amp;eacute;es.</p>
+<p>Vous consentez &agrave; ne pas poster de messages injurieux, obsc&egrave;nes, vulgaires, diffamatoires, mena&ccedil;ants, sexuels ou tout autre message qui violerait les lois applicables. Le faire peut vous conduire &agrave; &ecirc;tre banni imm&eacute;diatement de fa&ccedil;on permanente (et votre fournisseur d\'acc&egrave;s &agrave; internet en sera inform&eacute;). L\'adresse IP de chaque message est enregistr&eacute;e afin d\'aider &agrave; faire respecter ces conditions. Vous &ecirc;tes d\'accord sur le fait que le webmestre, l\'administrateur et les mod&eacute;rateurs de ce forum ont le droit de supprimer, &eacute;diter, d&eacute;placer ou verrouiller n\'importe quel sujet de discussion &agrave; tout moment. En tant qu\'utilisateur, vous &ecirc;tes d\'accord sur le fait que toutes les informations que vous donnerez ci-apr&egrave;s seront stock&eacute;es dans une base de donn&eacute;es. Cependant, ces informations ne seront divulgu&eacute;es &agrave; aucune tierce personne ou soci&eacute;t&eacute; sans votre accord. Le webmestre, l\'administrateur, et les mod&eacute;rateurs ne peuvent pas &ecirc;tre tenus pour responsables si une tentative de piratage informatique conduit &agrave; l\'acc&egrave;s de ces donn&eacute;es.</p>
 
-<p>Ce forum utilise les cookies pour stocker des informations sur votre ordinateur. Ces cookies ne contiendront aucune information que vous aurez entr&amp;eacute; ci-apr&amp;egrave;s, ils servent uniquement &amp;agrave; am&amp;eacute;liorer le confort d\'utilisation. L\'adresse e-mail est uniquement utilis&amp;eacute;e afin de confirmer les d&amp;eacute;tails de votre enregistrement ainsi que votre mot de passe (et aussi pour vous envoyer un nouveau mot de passe dans la cas o&amp;ugrave; vous l\'oublieriez).</p><p>En vous enregistrant, vous vous portez garant du fait d\'&amp;ecirc;tre en accord avec le r&amp;egrave;glement ci-dessus.</p>',
+<p>Ce forum utilise les cookies pour stocker des informations sur votre ordinateur. Ces cookies ne contiendront aucune information que vous aurez entr&eacute; ci-apr&egrave;s, ils servent uniquement &agrave; am&eacute;liorer le confort d\'utilisation. L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;tails de votre enregistrement ainsi que votre mot de passe (et aussi pour vous envoyer un nouveau mot de passe dans la cas o&ugrave; vous l\'oublieriez).</p><p>En vous enregistrant, vous vous portez garant du fait d\'&ecirc;tre en accord avec le r&egrave;glement ci-dessus.</p>',
 	'repondre' => '&#1054;&#1090;&#1075;&#1086;&#1074;&#1086;&#1088;',
 	'reponse' => '&#1042; &#1086;&#1090;&#1075;&#1086;&#1074;&#1086;&#1088; &#1085;&#1072; &#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1077;&#1090;&#1086; ',
 	'reponses' => '&#1054;&#1090;&#1075;&#1086;&#1074;&#1086;&#1088;&#1080;',
-	'resilier' => '<NEW>r&amp;eacute;silier',
-	'resilier_abo' => '<NEW>R&amp;eacute;silier l\'abonnement &amp;agrave; ce fil',
+	'resilier' => '<NEW>r&eacute;silier',
+	'resilier_abo' => '<NEW>R&eacute;silier l\'abonnement &agrave; ce fil',
 	'resultat' => '&#1088;&#1077;&#1079;&#1091;&#1083;&#1090;&#1072;&#1090;&#1080; &#1079;&#1072;',
 	'retour' => '&#1054;&#1073;&#1088;&#1072;&#1090;&#1085;&#1086;',
 	'retour_forum' => '&#1042;&#1088;&#1098;&#1097;&#1072;&#1085;&#1077; &#1074; &#1085;&#1072;&#1095;&#1072;&#1083;&#1086;&#1090;&#1086; &#1085;&#1072; &#1092;&#1086;&#1088;&#1091;&#1084;&#1072;',
@@ -187,7 +187,7 @@ Les mots de moins de trois lettres sont ignor&amp;eacute;s.',
 	'sousrub_salon' => '&#1055;&#1086;&#1076;-&#1088;&#1091;&#1073;&#1088;&#1080;&#1082;&#1072; / &#1089;&#1090;&#1072;&#1103;<br />',
 	'statut' => '&#1057;&#1090;&#1072;&#1090;&#1091;&#1090;',
 	'sujet' => '&#1058;&#1077;&#1084;&#1072;',
-	'sujet_ajout' => '&#1044;&#1086;&#1073;&#1072;&#1074;&#1103;&#1085;&#1072; &#1085;&#1072; &#1090;&#1077;&#1084;&#1072; &#1074;&#1098;&#1074; &#1092;&#1086;&#1088;&#1091;&#1084;&#1072;:<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'sujet_ajout' => '&#1044;&#1086;&#1073;&#1072;&#1074;&#1103;&#1085;&#1072; &#1085;&#1072; &#1090;&#1077;&#1084;&#1072; &#1074;&#1098;&#1074; &#1092;&#1086;&#1088;&#1091;&#1084;&#1072;:<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => '<NEW>Sujet Annonce',
 	'sujet_auteur' => '&#1040;&#1074;&#1090;&#1086;&#1088;',
 	'sujet_clos_texte' => '&#1058;&#1077;&#1084;&#1072;&#1090;&#1072; &#1077; &#1087;&#1088;&#1080;&#1082;&#1083;&#1102;&#1095;&#1077;&#1085;&#1072;, &#1085;&#1077; &#1084;&#1086;&#1078;&#1077;&#1090;&#1077; &#1076;&#1072; &#1087;&#1091;&#1073;&#1083;&#1080;&#1082;&#1091;&#1074;&#1072;&#1090;&#1077;.',
@@ -204,9 +204,9 @@ Les mots de moins de trois lettres sont ignor&amp;eacute;s.',
 	'sur' => '&#1086;&#1090;&#1085;&#1086;&#1089;&#1085;&#1086;',
 
 	// T
-	'texte_login_precaution' => '&#1042;&#1085;&#1080;&#1084;&#1072;&#1085;&#1080;&#1077;&amp;nbsp;! &#1058;&#1086;&#1074;&#1072; &#1077; &#1080;&#1084;&#1077;&#1090;&#1086;, &#1089; &#1082;&#1086;&#1077;&#1090;&#1086; &#1089;&#1090;&#1077; &#1089;&#1077;  &#1089;&#1074;&#1098;&#1088;&#1079;&#1072;&#1083;&#1080; &#1074; &#1084;&#1086;&#1084;&#1077;&#1085;&#1090;&#1072;.
+	'texte_login_precaution' => '&#1042;&#1085;&#1080;&#1084;&#1072;&#1085;&#1080;&#1077;&nbsp;! &#1058;&#1086;&#1074;&#1072; &#1077; &#1080;&#1084;&#1077;&#1090;&#1086;, &#1089; &#1082;&#1086;&#1077;&#1090;&#1086; &#1089;&#1090;&#1077; &#1089;&#1077;  &#1089;&#1074;&#1098;&#1088;&#1079;&#1072;&#1083;&#1080; &#1074; &#1084;&#1086;&#1084;&#1077;&#1085;&#1090;&#1072;.
  &#1042;&#1085;&#1080;&#1084;&#1072;&#1090;&#1077;&#1083;&#1085;&#1086; &#1080;&#1079;&#1087;&#1086;&#1083;&#1079;&#1074;&#1072;&#1081;&#1090;&#1077; &#1092;&#1086;&#1088;&#1084;&#1091;&#1083;&#1103;&#1088;&#1072;...',
-	'texte_repondre' => '&#1054;&#1090;&#1075;&#1086;&#1074;&#1086;&#1088;:<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'texte_repondre' => '&#1054;&#1090;&#1075;&#1086;&#1074;&#1086;&#1088;:<br />&nbsp;&nbsp;..&nbsp;',
 	'titre_cadre_signature_obligatoire' => '<b>&#1055;&#1086;&#1076;&#1087;&#1080;&#1089;</b> [&#1047;&#1072;&#1076;&#1098;&#1083;&#1078;&#1080;&#1090;&#1077;&#1083;&#1077;&#1085;]<br />',
 	'total_messages' => '&#1054;&#1073;&#1097;&#1086; &#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1103;',
 	'tous_forums' => '&#1042;&#1089;&#1080;&#1095;&#1082;&#1080; &#1092;&#1086;&#1088;&#1091;&#1084;&#1080;',
@@ -221,7 +221,7 @@ Les mots de moins de trois lettres sont ignor&amp;eacute;s.',
 	'voir' => '&#1055;&#1056;&#1045;&#1043;&#1051;&#1045;&#1044;',
 	'voir_evolution' => '&#1055;&#1088;&#1077;&#1075;&#1083;&#1077;&#1076; &#1085;&#1072; &#1088;&#1072;&#1079;&#1074;&#1080;&#1090;&#1080;&#1077;&#1090;&#1086; &#1085;&#1072; &#1087;&#1086;&#1089;&#1077;&#1097;&#1077;&#1085;&#1080;&#1103;&#1090;&#1072;',
 	'voir_message' => '&#1055;&#1088;&#1077;&#1075;&#1083;&#1077;&#1076; &#1085;&#1072; &#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1077;&#1090;&#1086;',
-	'voir_messages' => '&#1055;&#1088;&#1077;&#1075;&#1083;&#1077;&#1076;&amp;nbsp;&#1085;&#1086;&#1074;&#1080;&#1090;&#1077;&amp;nbsp;&#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1103;',
+	'voir_messages' => '&#1055;&#1088;&#1077;&#1075;&#1083;&#1077;&#1076;&nbsp;&#1085;&#1086;&#1074;&#1080;&#1090;&#1077;&nbsp;&#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1103;',
 	'voirprofil' => '&#1055;&#1088;&#1077;&#1075;&#1083;&#1077;&#1076; &#1085;&#1072; &#1087;&#1088;&#1086;&#1092;&#1080;&#1083;&#1072; &#1085;&#1072; ',
 
 	// W

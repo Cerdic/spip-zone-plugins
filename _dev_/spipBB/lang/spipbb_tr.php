@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'connexion' => 'Ba&#287;lanmak i&ccedil;in kullan&#305;c&#305; isminizi ve &#351;ifrenizi giriniz.',
 	'contact' => '&#304;leti&#351;im',
 	'courrier' => '<p>Kay&#305;ttan sonra ki&#351;isel kullan&#305;c&#305; isminiz size e-posta ile g&ouml;nderilecektir.</p>',
-	'credits' => '<a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> <a href=http://www.laprise.org/>James aka Klik&amp;eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> ve <a href=http://www.missmopi.net/>Nad&amp;egrave;ge aka Miss Mopi</a> (St&amp;eacute;phane\'&#305;n logolar&#305;) taraf&#305;ndan <a href=http://www.spip.net class=copyright>SPIP</a> ile ger&ccedil;ekle&#351;tirilmi&#351;tir: 2004-2005<br/>',
+	'credits' => '<a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> <a href=http://www.laprise.org/>James aka Klik&eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> ve <a href=http://www.missmopi.net/>Nad&egrave;ge aka Miss Mopi</a> (St&eacute;phane\'&#305;n logolar&#305;) taraf&#305;ndan <a href=http://www.spip.net class=copyright>SPIP</a> ile ger&ccedil;ekle&#351;tirilmi&#351;tir: 2004-2005<br/>',
 	'credits_bis1' => 'GAFoSPIP v.&nbsp;',
 	'credits_bis2' => 'A&#287;ustos 2005',
 	'credits_bis3' => 'Hangi forum y&ouml;netiminden Uyarland&#305; ve Esinlenildi &nbsp;:<br />',
@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_biographie' => 'Bir ka&ccedil; s&ouml;zc&uuml;kle k&#305;sa ya&#351;am &ouml;yk&uuml;s&uuml;.',
 	'entree_infos_perso' => 'Kimsiniz ?',
 	'entree_nom_pseudo' => '&#304;sminiz',
-	'entree_nom_pseudo2' => '<b>&#304;sim veya takma isim</b>&amp;nbsp;:',
+	'entree_nom_pseudo2' => '<b>&#304;sim veya takma isim</b>&nbsp;:',
 	'entree_nom_site' => 'Sitenizin ismi',
 	'entree_url' => 'Sitenizin adresi (URL)',
 	'envmp' => '&Ouml;zel bir mesaj yolla',
@@ -140,7 +140,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pb_mysql' => 'Teknik bir sorun y&uuml;z&uuml;nden kayd&#305;n&#305;z yap&#305;lamad&#305;. L&uuml;tfen tekrar deneyiniz.',
 	'poste_effac' => '&#304;&#351;lenen g&ouml;nderiler',
 	'poste_efface' => 'G&ouml;nderileri Sil',
-	'poste_efface_lui' => 'Bu konuda @nbr_post@ g&ouml;nderi var. Effac&amp;eacute;s avec lui&nbsp;!
+	'poste_efface_lui' => 'Bu konuda @nbr_post@ g&ouml;nderi var. Effac&eacute;s avec lui&nbsp;!
 ',
 	'poste_refuse' => 'Reddedilen g&ouml;nderiler, silinecek&nbsp;!',
 	'poste_reponse' => 'G&ouml;nderi / Cevapla',
@@ -183,7 +183,7 @@ Boole operat&ouml;rleri yoktur, normal olarak mant&#305;ksal VEYA kullan&#305;l&
 	'sousrub_salon' => '&nbsp;Alt-b&ouml;l&uuml;m / Salon<br />',
 	'statut' => 'Durum',
 	'sujet' => 'Konu&nbsp;',
-	'sujet_ajout' => 'Foruma bir konu ekle :<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'sujet_ajout' => 'Foruma bir konu ekle :<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Duyuru Konusu',
 	'sujet_auteur' => 'Yazar',
 	'sujet_clos_texte' => 'Bu konu kapat&#305;lm&#305;&#351;. &#304;leti g&ouml;nderemezsiniz.',
@@ -200,9 +200,9 @@ Boole operat&ouml;rleri yoktur, normal olarak mant&#305;ksal VEYA kullan&#305;l&
 	'sur' => '&nbsp;&uuml;zerinde&nbsp;',
 
 	// T
-	'texte_login_precaution' => 'Dikkat&amp;nbsp;! Bu, &#351;u anda giri&#351; yapt&#305;&#287;&#305;n&#305;z isimdir.
+	'texte_login_precaution' => 'Dikkat&nbsp;! Bu, &#351;u anda giri&#351; yapt&#305;&#287;&#305;n&#305;z isimdir.
  Bu formu dikkatle kullan&#305;n&#305;z...',
-	'texte_repondre' => 'Cevapla  :<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'texte_repondre' => 'Cevapla  :<br />&nbsp;&nbsp;..&nbsp;',
 	'titre_cadre_signature_obligatoire' => '<b>&#304;mza</b> [Zorunlu]<br />',
 	'total_messages' => 'T&uuml;m iletiler',
 	'tous_forums' => 'T&uuml;m forumlar',
@@ -217,7 +217,7 @@ Boole operat&ouml;rleri yoktur, normal olarak mant&#305;ksal VEYA kullan&#305;l&
 	'voir' => 'G&Ouml;STER',
 	'voir_evolution' => 'Ziyaretlerin geli&#351;imini g&ouml;ster',
 	'voir_message' => 'Bu iletiyi g&ouml;ster',
-	'voir_messages' => 'Yeni&amp;nbsp;iletileri&amp;nbsp;g&ouml;ster',
+	'voir_messages' => 'Yeni&nbsp;iletileri&nbsp;g&ouml;ster',
 	'voirprofil' => '&#350;u ki&#351;inin profilini g&ouml;ster',
 
 	// W

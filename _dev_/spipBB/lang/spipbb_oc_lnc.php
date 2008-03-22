@@ -38,8 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'connecte' => 'Un c&ograve;p connectat/ada, pod&egrave;tz modificar v&ograve;stre mot de santa Clara o v&ograve;stras informacions personalas a l\'adrei&ccedil;a&nbsp;',
 	'connexion' => 'Volgatz picar v&ograve;stre nom d\'usanci&egrave;r e v&ograve;stre mot de santa Clara per vos connectar.',
 	'contact' => 'Contacte',
-	'courrier' => '<p>Apr&amp;egrave;s l\'&amp;eacute;tape d\'enregistrement, votre identifiant personnel vous parviendra rapidement par courrier &amp;eacute;lectronique.</p>',
-	'credits' => 'R&amp;ealizat amb <a href=http://www.spip.net class=copyright>SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> per <a href=http://www.laprise.org/>James aka Klik&amp;eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> et <a href=http://www.missmopi.net/>Nad&amp;egrave;ge aka Miss Mopi</a> (logos de St&amp;eacute;phane)',
+	'courrier' => '<p>Apr&egrave;s l\'&eacute;tape d\'enregistrement, votre identifiant personnel vous parviendra rapidement par courrier &eacute;lectronique.</p>',
+	'credits' => 'R&amp;ealizat amb <a href=http://www.spip.net class=copyright>SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> per <a href=http://www.laprise.org/>James aka Klik&eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> et <a href=http://www.missmopi.net/>Nad&egrave;ge aka Miss Mopi</a> (logos de St&eacute;phane)',
 	'credits_bis1' => 'GAFoSPIP v.&nbsp;',
 	'credits_bis2' => 'Agost de 2005',
 	'credits_bis3' => 'Adaptat per, e, Inspirat per, lo tractament dels forums de&nbsp;:<br />',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dans_forum' => 'dins lo forum',
 	'date' => 'Inscrich lo',
 	'deja_enregistree' => 'Aquela adrei&ccedil;a electronica es ja registrada <p><a href=\'spip_pass.php3\'>[ Mot de santa Clara Oblidat ]</a></p>',
-	'dernier' => '&amp;nbsp;Darri&egrave;r<br />',
+	'dernier' => '&nbsp;Darri&egrave;r<br />',
 
 	// E
 	'ecrirea' => 'Escriure un email a;',
@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_biographie' => 'Biografia corteta en qualques mots.',
 	'entree_infos_perso' => 'Qual s&egrave;tz?',
 	'entree_nom_pseudo' => 'V&ograve;stre nom',
-	'entree_nom_pseudo2' => 'Nom o chafre</b>&amp;nbsp;:',
+	'entree_nom_pseudo2' => 'Nom o chafre</b>&nbsp;:',
 	'entree_nom_site' => 'Lo nom de v&ograve;stre sit',
 	'entree_url' => 'L\'adrei&ccedil;a (URL) de v&ograve;stre sit',
 	'envmp' => 'Mandar un messatge privat',
@@ -95,7 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_confirmer_passe' => 'Confirmar aquel mot de santa Clara n&ograve;u&nbsp;:',
 	'info_icones' => 'Informacions Ic&ograve;nas',
 	'info_non_modifiable' => 'se p&ograve;t pas modificar',
-	'info_plus_cinq_car' => 'mai de 5 caract&amp;egrave;rs',
+	'info_plus_cinq_car' => 'mai de 5 caract&egrave;rs',
 	'info_recommencer' => 'Volgatz tornar comen&ccedil;ar.',
 	'info_reserve_admin' => 'Sonque los administrators p&ograve;don modificar aquela adrei&ccedil;a.',
 	'item_login' => 'Identificant',
@@ -136,8 +136,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'page' => 'Pagina',
 	'pages_vues' => 'Paginas vistas',
-	'paramprofil' => 'Modificar v&ograve;stres param&amp;egrave;tres',
-	'pb_mysql' => 'Un probl&amp;egrave;me tecnic interromp&egrave;t v&ograve;stra inscripcion, volgatz tornar ensajar',
+	'paramprofil' => 'Modificar v&ograve;stres param&egrave;tres',
+	'pb_mysql' => 'Un probl&egrave;me tecnic interromp&egrave;t v&ograve;stra inscripcion, volgatz tornar ensajar',
 	'poste_effac' => 'Messatges escafats !',
 	'poste_efface' => 'Escafar los messatges',
 	'poste_efface_lui' => 'Aquel subj&egrave;cte cap @nbr_post@ Messatges(s). Escafats amb el&nbsp;!
@@ -160,9 +160,9 @@ I a pas d\'operadors booleans, l\'operador implicit es a la gr&ograve;ssa un O l
 	'recherche_titre' => 'Recercar un subj&egrave;cte',
 	'reglement' => '<p>Los administrators e moderaires d\'aquel forum far&agrave;n lor possible per suprimir o editar totes los messatges qu\'an un caract&egrave;r repreensible tan l&egrave;u coma possible. Pasmens, lor es impossible d\'espepissar cada message. Admet&egrave;tz doncas que totes los messatges postats sus aqueles forums exprimisson lo vejaire de sos autors, e non pas lo dels administrators, o moderaires, o webm&egrave;stres (levat los messatges qu\'eles-meteisses post&egrave;ron) e per consequent que ne p&ograve;don pas &egrave;sser tenguts per responsables.</p>
 
-<p>Vos engatjats de postar pas de messatges injurioses, obsc&amp;egrave;ns, vulgars, difamat&ograve;ris, amena&ccedil;ants, sexuals ni cap d\'autre message que violari&aacute; las leis en vigor. O fagu&egrave;ssetz vos poiri&aacute; menar a &egrave;sser f&ograve;rabandit sulpic e de longa (e v&ograve;stre provesidor d\'acc&egrave;s internet ne seri&aacute; assabentat). L\'adrei&ccedil;a IP de cada messatge s\'enregistra, per fins d\'ajudar de far respectar aquelas condicions. Bailatz v&ograve;stre ac&ograve;rdi sul fach que lo webm&egrave;stre, l\'administrator e los moderaires d\'aquel forum an lo drech de suprimir, editar, despa&ccedil;ar o clavar quin subj&egrave;cte de  discussion que si&aacute; a cada moment. Coma usanci&egrave;rs, s&egrave;s d\'ac&ograve;rdi sul fach que totas las informacions que balharetz &ccedil;ai apr&egrave;p se servar&agrave;n dins una basa de donadas. Pasmens, aquelas informacions se divulgar&agrave;n pas a cap de persona o societat sens v&ograve;stre ac&ograve;rdi. Lo webm&egrave;stre, l\'administrator, e los moderaires p&ograve;don pas &egrave;sser tenguts per responsables en cap qu\'un piratatge informatic mene a l\'acc&amp;egrave;s a aquelas donadas.</p>
+<p>Vos engatjats de postar pas de messatges injurioses, obsc&egrave;ns, vulgars, difamat&ograve;ris, amena&ccedil;ants, sexuals ni cap d\'autre message que violari&aacute; las leis en vigor. O fagu&egrave;ssetz vos poiri&aacute; menar a &egrave;sser f&ograve;rabandit sulpic e de longa (e v&ograve;stre provesidor d\'acc&egrave;s internet ne seri&aacute; assabentat). L\'adrei&ccedil;a IP de cada messatge s\'enregistra, per fins d\'ajudar de far respectar aquelas condicions. Bailatz v&ograve;stre ac&ograve;rdi sul fach que lo webm&egrave;stre, l\'administrator e los moderaires d\'aquel forum an lo drech de suprimir, editar, despa&ccedil;ar o clavar quin subj&egrave;cte de  discussion que si&aacute; a cada moment. Coma usanci&egrave;rs, s&egrave;s d\'ac&ograve;rdi sul fach que totas las informacions que balharetz &ccedil;ai apr&egrave;p se servar&agrave;n dins una basa de donadas. Pasmens, aquelas informacions se divulgar&agrave;n pas a cap de persona o societat sens v&ograve;stre ac&ograve;rdi. Lo webm&egrave;stre, l\'administrator, e los moderaires p&ograve;don pas &egrave;sser tenguts per responsables en cap qu\'un piratatge informatic mene a l\'acc&egrave;s a aquelas donadas.</p>
 
-<p>Aquel forum emplega los cookies per servar d\'informacions sus v&ograve;stre ordenador. Los cookies caber&agrave;n pas cap d\'information qu\'aur&egrave;tz intrat &ccedil;ai apr&amp;egrave;p, servisson sonque per melhorar lo conf&ograve;rt d\'utilizacion. L\'adrei&ccedil;a eletronica es utilizada sonque per confirmar los detalhs de v&ograve;stre enregistrament e v&ograve;stre mot de santa Clara  (e tanben per vos mandar un mot de santa Clara n&ograve;u en cas que l\'oblidetz).</p><p>En vos enregistrar, vos portatz garent del fach d\'escriure en ac&ograve;rdi amb lo reglament &ccedil;ai subre.</p>',
+<p>Aquel forum emplega los cookies per servar d\'informacions sus v&ograve;stre ordenador. Los cookies caber&agrave;n pas cap d\'information qu\'aur&egrave;tz intrat &ccedil;ai apr&egrave;p, servisson sonque per melhorar lo conf&ograve;rt d\'utilizacion. L\'adrei&ccedil;a eletronica es utilizada sonque per confirmar los detalhs de v&ograve;stre enregistrament e v&ograve;stre mot de santa Clara  (e tanben per vos mandar un mot de santa Clara n&ograve;u en cas que l\'oblidetz).</p><p>En vos enregistrar, vos portatz garent del fach d\'escriure en ac&ograve;rdi amb lo reglament &ccedil;ai subre.</p>',
 	'repondre' => 'Respondre',
 	'reponse' => 'En responsa al messatge',
 	'reponses' => 'Responsas',
@@ -187,7 +187,7 @@ I a pas d\'operadors booleans, l\'operador implicit es a la gr&ograve;ssa un O l
 	'sousrub_salon' => '&nbsp;Sosrubrica / Salon<br />',
 	'statut' => 'Estatut',
 	'sujet' => 'Subj&egrave;cte&nbsp;',
-	'sujet_ajout' => 'Apondre un subj&egrave;cte al forum :<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'sujet_ajout' => 'Apondre un subj&egrave;cte al forum :<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Subj&egrave;cte Anonci',
 	'sujet_auteur' => 'Autor',
 	'sujet_clos_texte' => 'Aquel subj&egrave;cte es clavat, i pod&egrave;tz pas mai postar dess&uacute;s.',
@@ -204,8 +204,8 @@ I a pas d\'operadors booleans, l\'operador implicit es a la gr&ograve;ssa un O l
 	'sur' => '&nbsp;sus&nbsp;',
 
 	// T
-	'texte_login_precaution' => 'Atencion&amp;nbsp;! Aqu&ograve; es l\'identificant amb que s&egrave;tz ara connectat. Emplegatz aquel formulari amb precaucion...',
-	'texte_repondre' => 'Respondre a :<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'texte_login_precaution' => 'Atencion&nbsp;! Aqu&ograve; es l\'identificant amb que s&egrave;tz ara connectat. Emplegatz aquel formulari amb precaucion...',
+	'texte_repondre' => 'Respondre a :<br />&nbsp;&nbsp;..&nbsp;',
 	'titre_cadre_signature_obligatoire' => '<b>Signatura</b> [Obligat&ograve;ria]<br />',
 	'total_messages' => 'Total messatges',
 	'tous_forums' => 'Totes los forums',
@@ -220,7 +220,7 @@ I a pas d\'operadors booleans, l\'operador implicit es a la gr&ograve;ssa un O l
 	'voir' => 'VEIRE',
 	'voir_evolution' => 'Veire l\'evolucion de las vesitas',
 	'voir_message' => 'Veire aquel messatge',
-	'voir_messages' => 'Veire&amp;nbsp;los&amp;nbsp;messatges n&ograve;us',
+	'voir_messages' => 'Veire&nbsp;los&nbsp;messatges n&ograve;us',
 	'voirprofil' => 'Veire lo perfil de',
 
 	// W

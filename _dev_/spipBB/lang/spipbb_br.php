@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'connexion' => 'Skrivit ho anv-implijer hag ho ker-tremen a-benn gallout kennaska&ntilde;',
 	'contact' => 'Darempred',
 	'courrier' => '<p>Goude ma voc\'h enrollet e vo kaset buan ho titouro&ugrave; hiniennel dre bostel.</p>',
-	'credits' => 'Savet gant <a href=http://www.spip.net class=copyright>SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> gant <a href=http://www.laprise.org/>James aka Klik&amp;eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> ha <a href=http://www.missmopi.net/>Nad&amp;egrave;ge aka Miss Mopi</a> (logoio&ugrave; gant St&amp;eacute;phane)',
+	'credits' => 'Savet gant <a href=http://www.spip.net class=copyright>SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> gant <a href=http://www.laprise.org/>James aka Klik&eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> ha <a href=http://www.missmopi.net/>Nad&egrave;ge aka Miss Mopi</a> (logoio&ugrave; gant St&eacute;phane)',
 	'credits_bis1' => 'GAFoSPIP v.&nbsp;',
 	'credits_bis2' => 'Eost 2005',
 	'credits_bis3' => 'Savet evit, hag awenet gant, ober war-dro Foromo&ugrave;&nbsp;:<br />',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dans_forum' => 'er forom',
 	'date' => 'Enrollet d\'an',
 	'deja_enregistree' => 'C\'hoazh eo bet enrollet ar postel-ma&ntilde;<p><a href=\'spip_pass.php3\'>[ Ankouaet em eus ma c\'her-tremen ]</a></p>',
-	'dernier' => '&amp;nbsp;Diwezha&ntilde;<br />',
+	'dernier' => '&nbsp;Diwezha&ntilde;<br />',
 
 	// E
 	'ecrirea' => 'Skriva&ntilde; Postel da',
@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_biographie' => 'Buhezskrid berr-ha-berr',
 	'entree_infos_perso' => 'Piv oc\'h-hu ?',
 	'entree_nom_pseudo' => 'Ho anv',
-	'entree_nom_pseudo2' => '<b>Anv pe lesanv</b>&amp;nbsp;:',
+	'entree_nom_pseudo2' => '<b>Anv pe lesanv</b>&nbsp;:',
 	'entree_nom_site' => 'Anv ho lec\'hienn',
 	'entree_url' => 'Chomlec\'h (URL) ho lec\'hienn',
 	'envmp' => 'Kas ur gerig prevez',
@@ -187,7 +187,7 @@ Ne vez ket tennet kont ouzh ar gerio&ugrave; dindan 3 lizherenn.',
 	'sousrub_salon' => '&nbsp;Is-Rummad / Tachenn-Flapi&ntilde;<br />',
 	'statut' => 'Statud',
 	'sujet' => 'Sujed&nbsp;',
-	'sujet_ajout' => 'Ouzhpenna&ntilde; ur sujed d\'ar forom :<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'sujet_ajout' => 'Ouzhpenna&ntilde; ur sujed d\'ar forom :<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Sujed Kemenn',
 	'sujet_auteur' => 'Aozer',
 	'sujet_clos_texte' => 'Kloz eo ar sujed-ma&ntilde;, n\'hallit kas netra.',
@@ -204,9 +204,9 @@ Ne vez ket tennet kont ouzh ar gerio&ugrave; dindan 3 lizherenn.',
 	'sur' => '&nbsp;war&nbsp;',
 
 	// T
-	'texte_login_precaution' => 'Diwallit&amp;nbsp;! Al login implijet ganeoc\'h brema&ntilde; eo se.
+	'texte_login_precaution' => 'Diwallit&nbsp;! Al login implijet ganeoc\'h brema&ntilde; eo se.
  Diwalit gant implij ar furmskrid-ma&ntilde;...',
-	'texte_repondre' => '>Respont da :<br />&amp;nbsp;&amp;nbsp;..&amp;nbsp;',
+	'texte_repondre' => '>Respont da :<br />&nbsp;&nbsp;..&nbsp;',
 	'titre_cadre_signature_obligatoire' => '<b>Sinadur</b> [Rediet]<br />',
 	'total_messages' => 'Kemennadenno&ugrave; en holl',
 	'tous_forums' => 'An holl foromo&ugrave;',
@@ -221,7 +221,7 @@ Ne vez ket tennet kont ouzh ar gerio&ugrave; dindan 3 lizherenn.',
 	'voir' => 'GWELET',
 	'voir_evolution' => 'Gwelet emdroadur ar gweladenno&ugrave;',
 	'voir_message' => 'Gwelet ar c\'hemennadenn-ma&ntilde;',
-	'voir_messages' => 'Gwelet&amp;nbsp;ar&amp;nbsp;c\'hemennadenno&ugrave;&amp;nbsp;nevez',
+	'voir_messages' => 'Gwelet&nbsp;ar&nbsp;c\'hemennadenno&ugrave;&nbsp;nevez',
 	'voirprofil' => 'Gwelet Aelad',
 
 	// W
