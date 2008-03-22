@@ -5,11 +5,11 @@
     [de]cfg: Konfigurationsmotor
     </multi>
     </nom>
-    <auteur>bertrand Gugger [->http://toggg.com/]
+    <auteur>bertrand Gugger [->http://toggg.com/], Matthieu Marcillaud
 _ &#169; 2007 - <multi>[fr]Distribu&#233; sous licence[de]Vertrieb unter Lizenz</multi> GNU/LGPL
     </auteur>
     <version>
-    1.3.8
+    1.4.0
     </version>
     <etat>
     stable
@@ -50,8 +50,8 @@ _ La fonction correspondante {{lire_config($cfg='', $defaut=null, $serialize=fal
     </options>
 
     <pipeline>
-        <nom>ajouter_onglets</nom>
-        <action>ajouter_onglets</action>
+        <nom>ajouter_boutons</nom>
+        <action>ajouter_boutons</action>
         <inclure>cfg_pipeline.php</inclure>
     </pipeline>
     <pipeline>

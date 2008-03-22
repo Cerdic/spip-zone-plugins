@@ -1,3 +1,13 @@
+Todo :
+- ménage de printemps dans les fonctions de cfg pour se caler sur le même principe que l'api des formulaires : charger/vérifier/traiter (ça n'en est pas loin)
+- rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
+
+v1.4.0 (22 03 2008)
+- #FORMULAIRE_CFG{nom_du_cfg} fonctionnant avec la nouvelle API des formulaires dynamiques (1.9.3dev)
+- quelques changements dans les noms de fonctions, suppression des anciens #formulaire_cfg
+- théoriquement pas de rupture de compatibilité
+- déplacement de l'icone cfg dans le sous menu 'configuration' (et non dans l'onglet du meme nom)
+
 v1.3.8 (25.02.2008)
 - correction bug introduit en 1.3.7 (doublement des liens)
 

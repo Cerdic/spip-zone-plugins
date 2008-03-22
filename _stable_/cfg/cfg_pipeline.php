@@ -10,18 +10,17 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Ajoute le bouton d'amin aux webmestres
-function cfg_ajouter_onglets($flux) {
-	if ($flux['args'] == 'configuration'
-	AND autoriser('configurer')) {
-		// on voit le bouton dans la barre "configurer"
-		$flux['data']['cfg'] =
-			new Bouton(
-			_DIR_PLUGIN_CFG."cfg-22.png",  // icone
-			_T('cfg:CFG'),	// titre
-			generer_url_ecrire('cfg'),
-			NULL,
-			'cfg'
-			);
+function cfg_ajouter_boutons($flux) {
+	// si on est admin
+	if (autoriser('configurer','cfg')) {
+	  // on voit le bouton dans la barre "configuration"
+		$flux['configuration']->sousmenu['cfg']= new Bouton(
+		"../"._DIR_PLUGIN_CFG."cfg-22.png",  // icone
+		_T('cfg:CFG'),	// titre
+		generer_url_ecrire('cfg'),
+		NULL,
+		'cfg'
+		);
 	}
 	return $flux;
 }
@@ -47,13 +46,11 @@ function cfg_header_prive($flux){
 	// Ajout des css de cfg (uniquement balise arbo pour l'instant) dans le header prive
 	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_CFG.'css/cfg.css" type="text/css" media="all" />';
 
-	$cfg = cfg_charger_classe('cfg');
 	include_spip('inc/filtres');
-	$config = & new $cfg(
-		($nom = sinon(_request('cfg'), '')),
-		($vue = sinon(_request('cfg_vue'), $nom)),
-		($cfg_id = sinon(_request('cfg_id'),''))
-		);
+	include_spip('inc/cfg_formulaire');
+	$config = cfg_get_formulaire(
+				sinon(_request('cfg'), ''),
+				sinon(_request('cfg_id'),''));
 	
 	if ($config->head) 
 		$flux .= "\n".$config->head;

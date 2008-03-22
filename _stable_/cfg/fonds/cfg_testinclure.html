@@ -27,8 +27,8 @@ boucle sur 3 rubriques racine et inclusion des champs de formulaire par &lt;INCL
 <!-- boite=Test cfg -->
 
 #CACHE{0}
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
-
+<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
+#ACTION_FORMULAIRE{#SELF,cfg}
 <fieldset><legend><:cfg:boucles_et_inclusions:></legend>
 <BOUCLE_racine(RUBRIQUES){racine}{par num titre}{0,3}>
 

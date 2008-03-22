@@ -59,11 +59,11 @@ function icone_lien_cfg($dir) {
 include_spip('inc/cfg_formulaire');
 
 // la classe cfg represente une page de configuration
-class cfg_dist extends cfg_formulaire
+class cfg extends cfg_formulaire
 {
-	function cfg_dist($nom, $vue = '', $cfg_id = '', $opt = array())
+	function cfg($nom, $cfg_id = '', $opt = array())
 	{
-		parent::cfg_formulaire($nom, $vue, $cfg_id, $opt);
+		parent::cfg_formulaire($nom, $cfg_id, $opt);
 	}
 
 	function sortie($contexte = array())
@@ -214,7 +214,7 @@ class cfg_dist extends cfg_formulaire
 
 		echo gros_titre(sinon($this->titre, _T('cfg:configuration_modules')), '', false);
 
-		echo barre_onglets("configuration", "cfg");
+		//echo barre_onglets("configuration", "cfg");
 
 		echo $this->barre_onglets_cfg();
 
@@ -259,7 +259,6 @@ class cfg_dist extends cfg_formulaire
 		
 		// scruter les onglets affichables ainsi que l'onglet 'expose'
 		if ($l = liste_cfg()) {
-			$classe_cfg = cfg_charger_classe('cfg');
 			foreach($l as $fonds => $cfg) {
 				
 				if (!isset($onglets[$fonds])) 
@@ -270,7 +269,7 @@ class cfg_dist extends cfg_formulaire
 				// On va chercher la config cible
 				// et on regarde ses donnees pour faire l'onglet
 				// seulement si l'onglet doit etre affiche
-				$tmp = & new $classe_cfg($fonds, $fonds,'');
+				$tmp = & new cfg($fonds, '');
 
 				if ($tmp->_permise && $tmp->onglet=='oui') {
 					$args['afficher'] = true;

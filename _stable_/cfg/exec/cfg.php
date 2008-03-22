@@ -12,18 +12,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_cfg_dist($class = null)
 {
-	if (!$class || !class_exists($class)) 
-		$class = 'cfg';
-		
-	$cfg = cfg_charger_classe($class);
-
 	include_spip('inc/filtres');
-	$config = & new $cfg(
+	include_spip('inc/cfg');
+	$config = & new cfg(
 		($nom = sinon(_request('cfg'), '')),
-		($vue = sinon(_request('cfg_vue'), $nom)),
 		($cfg_id = sinon(_request('cfg_id'),''))
 		);
-
+	
 	// si le fond cfg demande une redirection, 
 	// (et provient de cette redirection), il est possible
 	// qu'il y ait un message a afficher
