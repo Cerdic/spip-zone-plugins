@@ -1,4 +1,6 @@
 <?php
+
+// exec/spiplistes_maintenance.php
 // _SPIPLISTES_EXEC_MAINTENANCE
 
 // From: paladin@quesaco.org
@@ -110,24 +112,30 @@ function exec_spiplistes_maintenance () {
 // PAGE CONTENU
 ////////////////////////////////////
 
-	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+	$titre_page = _T('spiplistes:spip_listes');
+	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	$rubrique = _SPIPLISTES_PREFIX;
+	$sous_rubrique = "maintenance";
+
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
 
 	if(!$flag_autorise) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 
-	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
-
-	echo "<br /><br />\n";
-	spiplistes_gros_titre(_T('titre_admin_tech'));
-
-	debut_gauche();
-	__plugin_boite_meta_info(_SPIPLISTES_PREFIX);
-	spiplistes_boite_raccourcis();
-	creer_colonne_droite();
-	debut_droite("messagerie");
-
-	$page_result = "";
+	$page_result = ""
+		. "<br /><br />\n"
+		//. spiplistes_gros_titre(_T('titre_admin_tech'), true)
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
+		. debut_gauche($rubrique, true)
+		. __plugin_boite_meta_info(_SPIPLISTES_PREFIX, true)
+		. creer_colonne_droite($rubrique, true)
+		. spiplistes_boite_raccourcis(true)
+		. spiplistes_boite_autocron(true) 
+		. spiplistes_boite_info_spiplistes(true)
+		. debut_droite($rubrique, true)
+		;
 	
 	if(count($msg_maintenance)) {
 		$page_result .= "<ul style='padding-left:2ex;margin-bottom:2em;'>";

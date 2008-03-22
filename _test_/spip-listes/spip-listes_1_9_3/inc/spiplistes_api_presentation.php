@@ -35,7 +35,7 @@ function spiplistes_gros_titre($titre, $ze_logo='', $return = false) {
 	if(version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {
 		$ze_logo = ""; // semble ne plus être utilisé dans exec/*
 	}
-	$aff = ($return == false);
+	$aff = ($return === false);
 	$r = gros_titre($titre, $ze_logo, $aff);
 	if($return) return($r);
 }
