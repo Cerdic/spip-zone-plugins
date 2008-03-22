@@ -6,11 +6,40 @@
 <!-- onglet=non -->
 
 #CACHE{0}
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
-<input type="hidden" name="id" class="cfg_id" value="#ENV{id}" />
 
-<label for='frm_documentation'>URL de documentation</label>
-<input type="text" name="url_documentation" id="frm_documentation" value="[(#ENV{url_documentation})]" class="fondl" />
 
-<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="fondl" />
-</form>
+[(#SET{bouton,[(#VAL{<:cfg_exemples:url_de_documentation_CFG:>})]})]
+
+[(#REM) Cacher le bouton de depliement si pas autoriser a modifier ]
+[(#VAL{modifier_article_[(#ENV{cfg_id})]}|autoriser|?{' ',''})
+	[(#SET{bouton,[(#GET{bouton}|bouton_block_depliable{1, cfg_exemples_articles})]})]
+]
+
+[(#REM) Icone en URL absolue, sinon elle disparait en cliquant sur valider
+		dans l'espace prive car le script charge spip.php
+ ]
+[(#VAL{[(#EVAL{_DIR_PLUGIN_CFG})]cfg-22.png}|url_absolue|debut_cadre_enfonce{1,'',[(#GET{bouton})]})]
+
+	[<a href="(#CONFIG{articles:[(#ENV{cfg_id})]/url_documentation})">
+		[(#CONFIG{article:[(#ENV{cfg_id})]/url_documentation})]
+	</a>]
+
+[(#VAL{0}|debut_block_depliable{cfg_exemples_articles})]
+
+	<div class="formulaire_spip formulaire_cfg" id="formulaire_cfg_#ENV{cfg_hash}">
+		<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
+		#ACTION_FORMULAIRE{#SELF,cfg}
+		<input type="hidden" name="id" class="cfg_id" value="#ENV{id}" />
+
+		<label for='frm_documentation'>URL de documentation</label>
+		<input type="text" name="url_documentation" id="frm_documentation" value="[(#ENV{url_documentation})]" class="fondl" />
+
+		<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="fondl" />
+		</form>
+	</div>
+
+[(#REM|fin_block)]
+[(#VAL{1}|fin_cadre_enfonce)]
+
+
+

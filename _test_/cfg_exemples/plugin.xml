@@ -5,7 +5,7 @@
 	<auteur>Matthieu Marcillaud
 _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<version_base>0.2</version_base>
 	<etat>
 	stable
@@ -33,6 +33,6 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	cfg_exemples
 	</prefix>
 	<chemin dir='' />
-	<necessite id='cfg' version='[1.1.1;]' />
+	<necessite id='cfg' version='[1.4;]' />
 
 </plugin>

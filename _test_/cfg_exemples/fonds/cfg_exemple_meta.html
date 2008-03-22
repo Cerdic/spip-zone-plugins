@@ -4,7 +4,8 @@
 <!-- onglet=non -->
 
 #CACHE{0}
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
+#ACTION_FORMULAIRE{#SELF,cfg}
 
 <label>Description</label>
 <textarea name="description" rows="4" cols="40" style="width:100%;">[(#ENV{description})]</textarea>

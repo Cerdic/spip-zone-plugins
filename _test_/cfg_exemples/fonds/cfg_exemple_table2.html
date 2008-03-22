@@ -1,0 +1,41 @@
+
+<!-- titre=Exemple stockage dans table -->
+<!-- autoriser=voir -->
+<!-- storage=table -->
+<!-- table=spip_cfg_exemples -->
+<!-- onglet=non -->
+[(#REM) autoriser la creation d'une nouvelle entree dans la table ]
+<!-- autoriser_absence_id=oui -->
+
+#CACHE{0}
+
+<div class="formulaire_spip formulaire_cfg">
+	<form method="post" action="#SELF">
+	<div>
+	[(#ENV{_cfg_}|form_hidden)]
+	#ACTION_FORMULAIRE{#SELF,cfg}
+	<input type="hidden" name="id_cfg_exemple" class="cfg_id" value="[(#ENV{id})]" />
+	
+	<label>Description</label>
+	<input type="text" name="description" value="[(#ENV{description})]" />
+
+	<br />
+	<label>Texte</label>
+	<textarea name="texte" rows="4" cols="40" style="width:100%;">[(#ENV{texte})]</textarea>
+
+	<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
+	<input type="reset" value="<:cfg:Reset:>" />
+	<input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" />
+	</div>
+	</form>
+</div>
+</div>
+
+<B_a>
+<table class='spip' border='1' width='90%'>
+<tr><th>id</th><th>description</th><th>texte</th></tr>
+<BOUCLE_a(CFG_EXEMPLES)>
+<tr><td>#ID_CFG_EXEMPLE</td><td>#DESCRIPTION*</td><td>#TEXTE*</td></tr>
+</BOUCLE_a>
+</table>
+</B_a>

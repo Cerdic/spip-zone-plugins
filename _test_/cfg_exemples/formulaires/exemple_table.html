@@ -1,0 +1,21 @@
+<div class="cfg_exemples_perso">
+Une boucle sur les champs de la table spip_cfg_exemples
+
+<form method="post" action="#SELF"><div>
+#ACTION_FORMULAIRE{#SELF}
+
+<fieldset>
+Selection de l'identifiant, vide pour un nouvelle entr&eacute;e.
+<label for="id">*<:cfg:id:></label>
+<select name="cfg_exemple_id" style="width:10em"; onChange="jQuery(this.form).submit()">
+	<option></option>
+	<BOUCLE_e(CFG_EXEMPLES)><option value="#ID_CFG_EXEMPLE"[ (#ID_CFG_EXEMPLE|=={[(#ENV{cfg_exemple_id})]}|?{' ',''})selected='selected' ]>#ID_CFG_EXEMPLE</option></BOUCLE_e>
+</select>
+<input type="submit" name="affiche" value="&gt;" />
+</fieldset>
+</div>
+</form>
+
+#FORMULAIRE_CFG{exemple_table2, #ENV{cfg_exemple_id}}
+
+</div>

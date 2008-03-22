@@ -5,8 +5,8 @@
 <!-- onglet=non -->
 
 #CACHE{0}
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
-
+<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
+#ACTION_FORMULAIRE{#SELF,cfg}
 <fieldset><legend><:cfg:champs_simples:></legend>
 <label>Type id</label>
 <input type="text" name="testid" value="#ENV{testid}" size="10" />

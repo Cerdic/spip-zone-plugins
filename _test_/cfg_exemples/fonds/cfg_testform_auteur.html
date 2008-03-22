@@ -8,7 +8,14 @@
 <!-- onglet=non -->
 
 #CACHE{0}
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<div class="cfg_exemples_perso">
+Si je suis loggu&eacute;, le formulaire s'affiche...
+[(#SESSION{login}|?{' '})
+
+
+<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
+#ACTION_FORMULAIRE{#SELF,cfg}
 <input type="hidden" name="id" class="cfg_id" value="#ENV{id}" />
 
 <fieldset><legend>Test par auteur...</legend>
@@ -24,3 +31,11 @@
 <input type="reset" value="<:cfg:Reset:>" />
 <input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" />
 </form>
+]
+
+
+Si afficher_toto = oui, TOTO s'affiche :
+[(#CONFIG{~[(#SESSION{login})]/afficher_toto}|=={oui}|?{' ',''})
+	<b>TOTO est là !</b>
+]		
+</div>
