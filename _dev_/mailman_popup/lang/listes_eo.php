@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirm' => 'Peto pri konfirmo estis sendita al &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&amp;nbsp;: vi jam estas registrita en la listo &lt;@liste@&gt;.',
+	'deja' => '&lt;@var_email@&gt;&nbsp;: vi jam estas registrita en la listo &lt;@liste@&gt;.',
 	'desabo' => 'Malaboni&#285;inta.',
 
 	// F
