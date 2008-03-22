@@ -60,8 +60,8 @@ if ( count($_POST)
 	function action_cs_spam(){
 		include_spip('inc/minipres');
 		$page = minipres(
-			_T('cout:lutte_spam'),
-			_T('cout:explique_spam')
+			_T('couteau:lutte_spam'),
+			_T('couteau:explique_spam')
 		);
 		// a partir de spip 1.9.2 ces fonctions ne font plus l'echo directement
 		if (defined('_SPIP19200')) echo $page;

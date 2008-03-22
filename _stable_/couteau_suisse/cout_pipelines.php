@@ -24,7 +24,7 @@ cs_log("couteau_suisse_install($action)");
 			if (_request('exec') == 'admin_plugin') {
 				if(!defined('_SPIP19300')) echo '<br/>';
 				echo debut_cadre_enfonce('', true),
-					icone_horizontale(_T('cout:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', false),
+					icone_horizontale(_T('couteau:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', false),
 					fin_cadre_enfonce(true);
 			}
 			return isset($GLOBALS['meta']['tweaks_actifs']);
@@ -54,7 +54,7 @@ cs_log("couteau_suisse_install($action)");
 function couteau_suisse_ajouter_onglets($flux){
 	// si on est admin...
 	if ($flux['args']=='configuration' && cout_autoriser())
-		$flux['data']['couteau_suisse']= new Bouton(find_in_path('img/couteau-24.gif'), _T('cout:titre'), generer_url_ecrire('admin_couteau_suisse'));
+		$flux['data']['couteau_suisse']= new Bouton(find_in_path('img/couteau-24.gif'), _T('couteau:titre'), generer_url_ecrire('admin_couteau_suisse'));
 	return $flux;
 }
 
@@ -64,7 +64,7 @@ function couteau_suisse_affiche_gauche($flux){
 /*
 	if (_request('exec') == 'admin_plugin')
 		$flux['data'] .= 
-			icone_horizontale(_T('cout:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', false);
+			icone_horizontale(_T('couteau:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', false);
 */
 	return $flux;
 }

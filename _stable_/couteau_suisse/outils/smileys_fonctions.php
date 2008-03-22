@@ -10,7 +10,7 @@ function balise_SMILEYS_dist($p) {
 	$smileys = unserialize($GLOBALS['meta']['cs_smileys']);
 	// valeurs par defaut
 	$nb_col = 8;
-	$titre = _T('cout:smileys_dispos');
+	$titre = _T('couteau:smileys_dispos');
 	$head = '';
 	$liens = false;
 	// traitement des arguments : [(#SMILEYS{arg1, arg2, ...})]

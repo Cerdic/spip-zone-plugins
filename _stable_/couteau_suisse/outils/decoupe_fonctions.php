@@ -48,7 +48,7 @@ function decouper_en_onglets_rempl($texte) {
 
 // fonction renvoyant l'image appellee dans img/decoupe
 function decoupe_image($fich, $help, $self, $off, $val, &$images, $double=false) {
-	$alt = _T('cout:'.$help);
+	$alt = _T('couteau:'.$help);
 	$alt = "title=\"$alt\" alt=\"$alt\"";
 	if ($off) {
 		$tmp = $images[$fich.'_off']." $alt />";
@@ -113,7 +113,7 @@ function decouper_en_pages_rempl($texte) {
 			$page = supprimer_tags(cs_safebalises(cs_introduire($pages[$i-1])));
 			$title = preg_split("/[\r\n]+/", trim($page), 2);
 			$title = attribut_html(/*propre*/(couper($title[0], _decoupe_NB_CARACTERES)));//.' (...)';
-			$title = _T('cout:page_lien', array('page' => $i, 'title' => $title));
+			$title = _T('couteau:page_lien', array('page' => $i, 'title' => $title));
 			$milieu[] = '<a href="' . parametre_url($self,'artpage',"{$i}-$num_pages") . "\" title=\"$title\">$i</a>";
 		}
 	}

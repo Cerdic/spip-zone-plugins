@@ -6,7 +6,7 @@ function Auteur_forum_affichage_final($flux){
 		$auteur = defined('_SPIP19300')?'session_nom':'auteur';
 		#	include_spip('inc/charsets');
 		// filtrer et remettre le tout dans le charset cible
-		$nom = unicode2charset(html2unicode(_T('cout:nom_forum')));
+		$nom = unicode2charset(html2unicode(_T('couteau:nom_forum')));
 		$nom = '"' . str_replace('"', '\"', $nom) . '"';
 		// code jQuery
 		$code =<<<jscode

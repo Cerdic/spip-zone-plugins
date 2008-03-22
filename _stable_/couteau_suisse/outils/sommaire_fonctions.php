@@ -17,7 +17,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	$self = nettoyer_uri();//self();//$GLOBALS['REQUEST_URI'];
 	// si on n'est pas en mode impression, on calcule l'image de retour au sommaire
 	if(!defined('_CS_PRINT')) {
-		$titre = _T('cout:sommaire_titre');
+		$titre = _T('couteau:sommaire_titre');
 		$haut = "<a title=\"$titre\" href=\"".$self."#outil_sommaire\" class=\"sommaire_ancre\">&nbsp;</a>";
 	} else $haut = '';
 	// traitement des titres <h3>
@@ -25,7 +25,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	$nbh3 += count($regs[0]);
 	$pos = 0; $sommaire = '';
 	// calcul de la page
-	$p = $page?_T('cout:sommaire_page', array('page'=>$page)):'';
+	$p = $page?_T('couteau:sommaire_page', array('page'=>$page)):'';
 	for($i=0;$i<count($regs[0]);$i++,$index++){
 		$ancre = " id=\"outil_sommaire_$index\">";
 		if (($pos2 = strpos($texte, $regs[0][$i], $pos))!==false) {
@@ -78,7 +78,7 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	// calcul du sommaire en recuperant le fond qui va bien
 	$fond = strpos($texte0, _sommaire_SANS_FOND)!==false ?2:1;
 	include_spip('public/assembler');
-	@define('_sommaire_TITRE', _T('cout:sommaire_titre'));
+	@define('_sommaire_TITRE', _T('couteau:sommaire_titre'));
 	$sommaire = recuperer_fond('fonds/sommaire'.$fond, array('sommaire'=>$sommaire, 'titre'=>_sommaire_TITRE));
 
 	// si on ne veut que le sommaire, on renvoie le sommaire
