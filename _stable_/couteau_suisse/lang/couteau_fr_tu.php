@@ -31,10 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'smileys_dispos' => 'Frimousses disponibles :',
-	'sommaire_page' => ',&amp;nbsp;p@page@',
-	'sommaire_page_long' => ',&amp;nbsp;page&amp;nbsp;@page@',
+	'sommaire_page' => ',&nbsp;p@page@',
+	'sommaire_page_long' => ',&nbsp;page&nbsp;@page@',
 	'sommaire_titre' => 'Sommaire',
-	'stats_auteur' => '@icon@ @nom@, le&amp;nbsp;@date@',
+	'stats_auteur' => '@icon@ @nom@, le&nbsp;@date@',
 
 	// T
 	'texte_formatspip' => 'TEXTE ORIGINAL AU FORMAT SPIP',

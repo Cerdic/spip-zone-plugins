@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'Waiting for confirmation',
 
 	// D
-	'derniers_connectes' => 'Last connected :',
+	'derniers_connectes' => 'Last connected:',
 
 	// E
 	'explique_spam' => 'Warning : you have used forbidden tags, characters or words. <br /><br />Start again!',
@@ -31,18 +31,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'smileys_dispos' => 'Available smileys:',
-	'sommaire_page' => ',&amp;nbsp;p@page@',
-	'sommaire_page_long' => ',&amp;nbsp;page&amp;nbsp;@page@',
-	'sommaire_titre' => 'Summary',
+	'sommaire_page' => ',&nbsp;p@page@',
+	'sommaire_page_long' => ',&nbsp;page&nbsp;@page@',
+	'sommaire_titre' => 'Table of content',
 	'stats_auteur' => '@icon@ @nom@, @date@',
 
 	// T
 	'texte_formatspip' => 'ORIGINAL TEXT IN SPIP FORMAT',
 	'textes_formatspip' => 'ORIGINAL TEXTS IN SPIP FORMAT',
-	'titre' => 'Swiss knife',
+	'titre' => 'Swiss Knife',
 
 	// V
-	'variable_vide' => '(Vide)'
+	'variable_vide' => '(Empty)'
 );
 
 ?>
