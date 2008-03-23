@@ -1,5 +1,5 @@
 /* spiplistes (private part) CSS Document */
-
+.spiplistes .triangle_label { font-weight: bold; text-decoration: underline; cursor: pointer; }
 table.spiplistes-abos {
 	font-size:80%;
 	border:1px solid gray;
