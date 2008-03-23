@@ -78,6 +78,17 @@ function bonbon_ajoute_mot ($titre,$id_groupe,$type){
 	if ($result) $result=spip_insert_id();
 	return $result;
 }
+//Ajoute des mots-clés (une liste de mots séparés par des virgules) dans un groupe de mots
+function bonbon_remplit_groupe_mots ($id_groupe,$type,$liste_mots) {
+	$tab_mots=explode(",",$liste_mots);
+	while (list($key2,$val2)=each($tab_mots)) {
+		if ($val2) {
+			$id_mot=bonbon_ajoute_mot ($val2,$id_groupe,$type);
+			echo "<p><i>$val2</i> est le mot-clé numéro $id_mot</p>";
+		}
+	}
+	return "";
+}
 //Ajoute un mot-clé à un article par défaut ou une rubrique si précisé
 function bonbon_lier_mot ($id_mot,$id_objet,$type_objet="article") {
 	$result=false;
@@ -194,6 +205,41 @@ function bonbon_enregistrement_seance ($date,$titre,$contenu,$id_auteur,$id_rubr
 	$result = spip_query($sql);
 	echo ("<!--auteur: $result-->\n");
 	return $id_contenu_seance;
+}
+function bonbon_enregistrement_devoir ($date,$fin_titre,$contenu,$id_auteur,$id_rubrique_cdt,$titre_seance,$id_seance,$no_devoir,$ps_seance,$surtitre_avec_docs="") {
+	$fleche="->";
+	//détermine la date au format de la base
+	$date_base_devoir = date ("Y-m-d H:i:s", mktime(0,0,0,substr($date,3,2),substr($date,0,2),substr($date,6,4)));
+	//insère le devoir avec titre, contenu, date et surtout un PS qui renvoie au contenu
+	$sql = "INSERT INTO spip_articles (titre, texte, id_rubrique, statut, date, ps, surtitre) 
+	VALUES ('".addslashes("Devoir à faire pour le $date$fin_titre")."','".addslashes($contenu)."','$id_rubrique_cdt', 'publie', '".addslashes($date_base_devoir)."','".addslashes("[Donné $titre_seance$fleche$id_seance]")."','".addslashes($surtitre_avec_docs)."')";
+	
+	$result = spip_query($sql);
+	$id_contenu_devoir=spip_insert_id();
+	echo ("<!--$result article n°$id_contenu_devoir-->\n");
+
+	//préparation de la chaîne à inclure dans le contenu:
+	$ps_seance .= "- [Devoir n°$no_devoir pour le $date$fleche$id_contenu_devoir]\n";
+	
+	// auteur
+	$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES (" . $id_auteur . ", " . $id_contenu_devoir . ")";
+	$result = spip_query($sql);
+	echo ("<!--auteur: $result-->\n");
+//retourne deux valeurs: [0] est l'id_contenu_devoir et [1] est la chaîne du PS de l'article.
+	return array ($id_contenu_devoir,$ps_seance);
+}
+function bonbon_ajout_devoirs_a_seance ($liste_devoirs,$id_seance) {
+//rajout des références aux devoirs dans le PS du contenu de la séance
+	$sql ="UPDATE spip_articles SET ps='".addslashes($liste_devoirs)."' WHERE id_article=$id_seance";
+	$result = spip_query($sql);
+	echo ("<!--update ps: $result-->\n");
+	return $result;
+}
+
+//récupère le contenu entre balises et renvoie un tableau du contenu
+function bonbon_recupere_balise($texte,$nombalise) {
+	preg_match_all ("/<$nombalise.*?>(.*?)<\/$nombalise>/s",$texte,$matches);
+	return $matches[1];
 }
 
 ?>

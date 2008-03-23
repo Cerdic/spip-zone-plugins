@@ -62,7 +62,7 @@ En cas de problème vous devrez réutiliser cette sauvegarde.<p>
 		- Chaque élement (classe, groupe, matière) est séparé du suivant par une virgule.
 		- les élements ne peuvent contenir de virgules ou de guillemets droits (type: "). Vous pouvez utiliser des guillemets français: «»
 		- veillez à ce qu'il n'y ait pas d'espace avant ou après les virgules qui séparent les éléments.
-		- Vérifiez que la liste des classes, des groupes, des matières sont bine commencés et finis par des guillemets.
+		- Vérifiez que la liste des classes, des groupes, des matières sont bien commencés et finis par des guillemets.
 
 
 ][(#SET{les_classes,
@@ -256,19 +256,27 @@ En cas de problème vous devrez réutiliser cette sauvegarde.<p>
 </BOUCLE_CONDITIONNELLE_Mise_a_jour_classe_ou_matiere>
 [(#SET{liste_des_mots_qui_existent,#GET{liste_des_mots_qui_existent}|bonbon_fusion_tableau{#ARRAY{#_Verifie_Mot:COMPTEUR_BOUCLE,#_Verifie_Mot:TITRE}}})]
 </BOUCLE_Verifie_Mot>
+[
+	(#REM) On prend les mots qui restent (qui n'existent pas encore) et on les crée
+
+][(#ID_GROUPE
+	|bonbon_remplit_groupe_mots{
+		#_Pour_Chaque_Groupe:TITRE,
+		[(#GET{virgule}|implode{[(#GET{tableau_mots}|array_diff{#GET{liste_des_mots_qui_existent}})]})]}
+)]
 <?php
 //On prend les mots qui restent (qui n'existent pas encore) et on les crée (pas trouvé comment faire le while en BOUCLES/BALISES...
 
-$mots_qui_restent='[(#GET{virgule}|implode{[(#GET{tableau_mots}|array_diff{#GET{liste_des_mots_qui_existent}})]})]';
-$id_groupe='[(#ID_GROUPE)]';
-$type='[(#_Pour_Chaque_Groupe:TITRE)]';
-$tab_mots_restants=explode(",",$mots_qui_restent);
-while (list($key2,$val2)=each($tab_mots_restants)) {
-	if ($val2) {
-		$id_mot=bonbon_ajoute_mot ($val2,$id_groupe,$type);
-		echo "<p><i>$val2</i> est le mot-clé numéro $id_mot</p>";
-	}
-}
+//$mots_qui_restent='[(#GET{virgule}|implode{[(#GET{tableau_mots}|array_diff{#GET{liste_des_mots_qui_existent}})]})]';
+//$id_groupe='[(#ID_GROUPE)]';
+//$type='[(#_Pour_Chaque_Groupe:TITRE)]';
+//$tab_mots_restants=explode(",",$mots_qui_restent);
+//while (list($key2,$val2)=each($tab_mots_restants)) {
+//	if ($val2) {
+//		$id_mot=bonbon_ajoute_mot ($val2,$id_groupe,$type);
+//		echo "<p><i>$val2</i> est le mot-clé numéro $id_mot</p>";
+//	}
+//}
 ?>
 </BOUCLE_Pour_Chaque_Groupe>[
 
@@ -291,7 +299,7 @@ while (list($key2,$val2)=each($tab_mots_restants)) {
 
 ]
 	<BOUCLE_Tous_les_Auteurs(AUTEURS)>
-		<BOUCLE_Article_jointure(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur}{surtitre="À propos d'un professeur"}>
+		<BOUCLE_Article_jointure(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur}{ps=id_auteur}>
 			<p>Le prof <strong>#NOM</strong> a bien un descriptif de ses classes et matières</p>
 		</BOUCLE_Article_jointure>
 			<BOUCLE_A_t_il_du_contenu(ARTICLES){titre_mot="Description de séance"}{id_auteur}{id_rubrique}{0,1}>
@@ -300,7 +308,8 @@ while (list($key2,$val2)=each($tab_mots_restants)) {
 		<//B_Article_jointure>
 		<BOUCLE_Les_Classes_et_les_matieres(MOTS){type IN "Classes","Matières"}>
 			<BOUCLE_Article_auteur_et_matiere(ARTICLES){id_rubrique}{id_auteur}{id_mot}{0,1}>
-				<BOUCLE_Article_fiche(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur}{surtitre="À propos d'un professeur"}>
+				<BOUCLE_Article_fiche(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur}{ps=id_auteur}>
+[(#REM) {ps="À propos d'un professeur"} a été viré car posait des soucis d'encodage]
 					<BOUCLE_Mot_lie_a_fiche(MOTS){id_article}{id_mot}>
 						<p>La #TYPE #TITRE est associée à #NOM</p>
 					</BOUCLE_Mot_lie_a_fiche>
@@ -346,9 +355,7 @@ Son {titre} doit {{toujours}} contenir l'expression «{Cahier de texte en-ligne}»
 
 	  {{Ne l'effacez pas}}. {{Ne la renommez pas}}. {{Ne modifiez pas son contenu}} sinon il ne fonctionnera plus correctement !"})&nbsp;nommée «Professeurs-classes-matières».] <strong>Ces sous-rubriques ont été créées pour gérer le cahier de texte de cette année scolaire. Ne les effacez pas, ne les renommez pas et laissez les dans la rubrique «Cahier de texte en-ligne» !</strong></p>
 
-]	<?php
-	copy("/plugins/bonbon/cahier-de-texte-rurbrique.html","rurbrique-".'[(#GET{id_rubrique_globale})]'.".html")
-	?>
+]	
 	<p><strong>Pour améliorer l'intégration du cahier de texte à votre site sous Spip vous pouvez renommer le fichier «cahier-de-texte-rubrique.html» livré dans le dossier /plugins/bonbon/ en «rubrique-#GET{id_rubrique_globale}.html»</strong></p>
 	<p><b>Ne rechargez pas la page</b>.<br/><br/>
 		<a href="./ecrire/?exec=mots_tous" title="Aller vérifier l'installation des groupes">Passez dans l'espace privé de SPIP</a> pour vérifier que les mots-clés et les rubriques sont bien installés.

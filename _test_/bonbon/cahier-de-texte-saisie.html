@@ -22,6 +22,7 @@ date_devoirx où x est un nombre= date du devoir n°x donné lors de la séance
 contenu_devoirx où x est un nombre= contenu du devoir n°x donné lors de la séance
 devoirs= nombre de devoirs-1 liés à la séance
 plusdate= rafficher le formulaire avec un champs devoirs+date en plus.
+moinsdate= retirer les dernier devoir (attention: sans confirmation)
 doc_seance_XXX= où XXX est un id_doc. quand on duplique une séance les docs d'id_documents=XXX où doc_seance_XXX est défini sont conservés, les autres enlevés.
 doc_devoirXXX_YYY= où YYY est un id_doc. XXX est le n° du devoir concerné (pas son ID). quand on duplique une séance les docs d'id_documents=YYY où doc_devoirXXX_YYY est défini sont conservés, les autres enlevés.
 liste_id_classes = la liste entre virgules (à exploder) des id_classe. Sous cette forme c'est plus pratique pour vérifier que d'autre séances pour ces classes n'existent pas.
@@ -203,6 +204,9 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 	};
 	if($_POST['plusdate']){
 		$devoirs++;
+	};
+	if($_POST['moinsdate']){
+		$devoirs--;
 	}; ?>[
 	(#REM) Hack pour conditionner une boucle (évite un if en php et donc que les boucles englobées par Conditionnelle_2 soient exécutées quand la condition n'est pas remplie)
 
@@ -380,8 +384,8 @@ if ($contenu_devoir[0]!="") {
 			<hr>
 			<div>
 				<h4 class="devoirs">Devoirs des<?php echo(" $classes_titre$groupe_titre&nbsp;:")?></h4>
-<?php //Pour chaque devoir:
- for ($count=0; $count<=$devoirs; $count++) {
+<?php //Pour chaque devoir qui a un contenu:
+ for ($count=0; ($count<=$devoirs and $contenu_devoir[$count]); $count++) {
 	$liste_docs_Devoir = $liste_des_listes_de_docs[$count]; ?>
 				<div class="devoirs"><h5 class="devoirs"><b>>></b>&nbsp;Devoir pour le <?php
 //On vérifie que la date en est bien une grâce à affdate... (ça a l'air de fonctionner).
@@ -480,91 +484,52 @@ if ($contenu_devoir[0]!="") {
 <?php
 
 //insertion de l'article du contenu du cours dans la base
-
-//On prépare la date:
-	$date_base_seance = date ("Y-m-d H:i:s", mktime(0,0,0,substr($date_seance,3,2),substr($date_seance,0,2),substr($date_seance,6,4)));
-
-//le contenu
-	$sql = "INSERT INTO spip_articles (titre, texte, id_rubrique, statut, date, surtitre) 
-	VALUES ('".addslashes($titre_contenu_seance)."','".addslashes($contenu_seance)."','$id_rub_cdt', 'publie', '".addslashes($date_base_seance)."','".addslashes($surtitre_avec_docs)."')";
-	
-	$result = spip_query($sql);
-	$id_contenu_seance=spip_insert_id();
-	echo ("<!--$result article n°$id_contenu_seance-->\n");
-	
-	// auteur
-	$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES (" . $id_auteur . ", " . $id_contenu_seance . ")";
-	$result = spip_query($sql);
-	echo ("<!--auteur: $result-->\n");
+	$id_contenu_seance = bonbon_enregistrement_seance ($date_seance,$titre_contenu_seance,$contenu_seance,$id_auteur,$id_rub_cdt,$surtitre_avec_docs);
+	if (!$id_contenu_seance) echo "<p>Un problème inconnu est survenu pendant l'enregistrement de la fiche $titre_contenu_seance...</p>";
 //ajout des mots-clés
 	//le mot-clé qui définit que c'est le contenu d'une séance
 	//d'abord on récupère son id:?>
-<BOUCLE_Dire_id_mot_contenu(MOTS){titre="Description de séance"}><?php $id_identif_contenu='[(#ID_MOT)]'?> </BOUCLE_Dire_id_mot_contenu>
+<BOUCLE_Dire_id_mot_contenu(MOTS){titre="Description de séance"}><?php $id_identif_contenu = '[(#ID_MOT)]'?> </BOUCLE_Dire_id_mot_contenu>
 [(#SET{liste_id_classes_tableau,[(#GET{virgule}|explode{#ENV{liste_id_classes}})]})]
 <?php	//Puis on associe le mot à l'article
-	$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_identif_contenu . ", " . $id_contenu_seance . ")";
-		$result = spip_query($sql);
-		echo ("<!--identifiant de l'article: $result-->\n");
+	$result = bonbon_lier_mot($id_identif_contenu,$id_contenu_seance);
+	echo ("<!--identifiant de l'article: $result-->\n");
 	//les classes
 	for ($count=0; $count<=$classes; $count++) {
-		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_classe[$count] . ", " . $id_contenu_seance . ")";
-		$result = spip_query($sql);
+		$result = bonbon_lier_mot($id_classe[$count],$id_contenu_seance);
 		echo ("<!--classe: $result-->\n");
 	} ?>[
 
 	(#REM) Vérification que la classe est liée à la rubrique de l'année et affectation si ce n'était pas le cas.
 	On crée aussi l'article support pour les matières de la classe
 
-]<BOUCLE_CLasses_de_env(MOTS){id_mot IN #GET{liste_id_classes_tableau}}><BOUCLE_Classe_liee_a_annee(RUBRIQUES){id_rubrique}{id_mot}> </BOUCLE_Classe_liee_a_annee> <?php
-	$sql = "INSERT INTO spip_mots_rubriques (id_mot, id_rubrique) VALUES (" . '[(#ID_MOT)]' . ", " . '[(#ID_RUBRIQUE)]' . ")";
-	$result = spip_query($sql);
-?>
-	<BOUCLE_Article_Classe_Present(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre=#_CLasses_de_env:TITRE}> </BOUCLE_Article_Classe_Present>
-<?php
-		$descriptif="Cet article décrit grâce à ses mots-clés, son auteur et son éventuel contenu la classe de ".'[(#_CLasses_de_env:TITRE|texte_script)]';
-		$sql = "INSERT INTO spip_articles (titre, id_rubrique, statut, date, surtitre, descriptif) 
-		VALUES ('".'[(#_CLasses_de_env:TITRE|texte_script)]'."','".'[(#GET{id_rubrique_pcm})]'."', 'publie', NOW(),'".addslashes("À propos d'une classe")."','".addslashes($descriptif)."')";
-		$result = spip_query($sql);
-		$id_article_classe['[(#_CLasses_de_env:ID_MOT|texte_script)]']=spip_insert_id();
-		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" .'[(#_CLasses_de_env:ID_MOT|texte_script)]' . ", " . $id_article_classe['[(#_CLasses_de_env:ID_MOT|texte_script)]'] . ")";
-		$result = spip_query($sql);
-		?>
-	<//B_Article_Classe_Present>
+]<BOUCLE_CLasses_de_env(MOTS){id_mot IN #GET{liste_id_classes_tableau}}><BOUCLE_Classe_liee_a_annee(RUBRIQUES){id_rubrique}{id_mot}> </BOUCLE_Classe_liee_a_annee>[
+<!--(#ID_MOT|bonbon_lier_mot{#ID_RUBRIQUE,"rubrique"}|?{' ',''})#TITRE a été rattaché au cahier de texte de l'année en cours-->
+	]<BOUCLE_Article_Classe_Present(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre=#_CLasses_de_env:TITRE}> </BOUCLE_Article_Classe_Present>[
+<!--(#_CLasses_de_env:TITRE|bonbon_creer_fiche_classe{#GET{id_rubrique_pcm},#_CLasses_de_env:ID_MOT}|?{' ',''})La fiche qui décrit la #_CLasses_de_env:TITRE est créée-->
+	]<//B_Article_Classe_Present>
 <//B_Classe_liee_a_annee></BOUCLE_CLasses_de_env>
 <?php
 	//le groupe éventuel:
 	if ($id_groupe!=0) {
-		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_groupe . ", " . $id_contenu_seance . ")";
-		$result = spip_query($sql);
+		$result = bonbon_lier_mot($id_groupe,$id_contenu_seance);
 		echo ("<!--groupe: $result-->\n");
 	}
 	//la matière:
-	$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_matiere . ", " . $id_contenu_seance . ")";
-	$result = spip_query($sql);
+	$result = bonbon_lier_mot($id_matiere,$id_contenu_seance);
 	echo ("<!--matière: $result-->\n<p>La séance est enregistrée...</p>\n"); ?>[
 
 	(#REM) Vérification que la matière est liée à la rubrique de l'année et affectation si ce n'était pas le cas.
 	On associe aussi la matière à l'article support des classes...
 
-]<BOUCLE_Matiere_liee_a_annee(MOTS){id_rubrique}{id_mot=#ENV{id_matiere}}> </BOUCLE_Matiere_liee_a_annee> <?php
-	$sql = "INSERT INTO spip_mots_rubriques (id_mot, id_rubrique) VALUES (" . '[(#ENV{id_matiere}|texte_script)]' . ", " . '[(#ID_RUBRIQUE)]' . ")";
-	$result = spip_query($sql);
-?>
-<//B_Matiere_liee_a_annee>
+]<BOUCLE_Matiere_liee_a_annee(MOTS){id_rubrique}{id_mot=#ENV{id_matiere}}> </BOUCLE_Matiere_liee_a_annee>[
+<!--(#ENV{id_matiere}|bonbon_lier_mot{#ID_RUBRIQUE,"rubrique"}|?{' ',''})#TITRE a été rattaché au cahier de texte de l'année en cours-->
+]<//B_Matiere_liee_a_annee>
 <BOUCLE_mot_des_classes(MOTS){id_mot IN #GET{liste_id_classes_tableau}}>
 	<BOUCLE_Verifie_association_a_article_classe(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre=#TITRE}>#SET{id_article_a_associer,#ID_ARTICLE}
-		<BOUCLE_Verifie_association_a_matiere(MOTS){id_article}{id_mot=#ENV{id_matiere}}> </BOUCLE_Verifie_association_a_matiere>
-	<?php
-		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES ('" . '[(#ENV{id_matiere}|texte_script)]' . "', " . '[(#GET{id_article_a_associer})]' . ")";
-		$result = spip_query($sql);
-	?>
-	<//B_Verifie_association_a_matiere></BOUCLE_Verifie_association_a_article_classe>
-	<?php
-		//j'ai remarqué que l'insertion sql faite qq secondes plus tôt des artciles classes peut ne pas être prise ne compte par les boucles. Le SQL qui suit est donc là par sécurité.
-		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES ('" . '[(#ENV{id_matiere}|texte_script)]' . "', " . $id_article_classe['[(#ID_MOT|texte_script)]'] . ")";
-		$result = spip_query($sql);
-	?>
-	<//B_Verifie_association_a_article_classe>
+		<BOUCLE_Verifie_association_a_matiere(MOTS){id_article}{id_mot=#ENV{id_matiere}}> </BOUCLE_Verifie_association_a_matiere>[
+<!--(#ENV{id_matiere}bonbon_lier_mot{#GET{id_article_a_associer}}|?{' ',''})#TITRE a été rattaché au cahier de texte de l'année en cours-->
+	]<//B_Verifie_association_a_matiere></BOUCLE_Verifie_association_a_article_classe><//B_Verifie_association_a_article_classe>
 </BOUCLE_mot_des_classes>
 
 <?php
@@ -575,8 +540,8 @@ if ($contenu_devoir[0]!="") {
 	//d'abord on récupère l'id du mot-clé qui désigne les devoirs:?>
 	<BOUCLE_Dire_id_mot_devoir(MOTS){titre="Devoirs à faire"}><?php $id_identif_devoir='[(#ID_MOT)]'?> </BOUCLE_Dire_id_mot_devoir>
 	<?php
-	//Puis pour chaque devoir:
-	for ($count=0; $count<=$devoirs; $count++) {
+	//Puis pour chaque devoir qui a un contenu:
+	for ($count=0; ($count<=$devoirs and $contenu_devoir[$count]); $count++) {
 		$liste_docs_Devoir = $liste_des_listes_de_docs[$count];
 		$surtitre_avec_docs="";?>[
 
@@ -595,56 +560,30 @@ if ($contenu_devoir[0]!="") {
 					 }//fin du if doc_devoirXXX_YYY ?>
 				<?php } //fin du if liste_docs_Devoir ?>
 		</BOUCLE_Documents_Devoir_enregistrement><?php
-		//détermine la date au format de la base
-		$date_base_devoir = date ("Y-m-d H:i:s", mktime(0,0,0,substr($date_devoir[$count],3,2),substr($date_devoir[$count],0,2),substr($date_devoir[$count],6,4)));
-		//insère le devoir avec titre, contenu, date et surtout un PS qui renvoie au contenu
-		$sql = "INSERT INTO spip_articles (titre, texte, id_rubrique, statut, date, ps, surtitre) 
-		VALUES ('".addslashes("Devoir à faire pour le $date_devoir[$count]$fragment_titre_devoir")."','".addslashes($contenu_devoir[$count])."','$id_rub_cdt', 'publie', '".addslashes($date_base_devoir)."','".addslashes("[Donné $titre_contenu_seance$fleche$id_contenu_seance]")."','".addslashes($surtitre_avec_docs)."')";
-		
-		$result = spip_query($sql);
-		$id_contenu_devoir[$count]=spip_insert_id();
-		echo ("<!--$result article n°$id_contenu_devoir[$count]-->\n");
-
-		
-		//devoir n°
-		$dev_no=$count+1;
-		//préparation de la chaîne à inclure dans le contenu:
-		$liste_devoirs_contenu .= "- [Devoir n°$dev_no pour le $date_devoir[$count]$fleche$id_contenu_devoir[$count]]\n";
-		
-		// auteur
-		$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES (" . $id_auteur . ", " . $id_contenu_devoir[$count] . ")";
-		$result = spip_query($sql);
-		echo ("<!--auteur: $result-->\n");
+		list ($id_contenu_devoir[$count],$liste_devoirs_contenu)=bonbon_enregistrement_devoir ($date_devoir[$count],$fragment_titre_devoir,$contenu_devoir[$count],$id_auteur,$id_rub_cdt,$titre_contenu_seance,$id_contenu_seance,$count+1,$liste_devoirs_contenu,$surtitre_avec_docs);
 		//ajout des mots-clés
-		//le mot-clé qui définit que c'est le contenu d'une séance
-		//Puis on associe le mot à l'article
-		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_identif_devoir . ", " . $id_contenu_devoir[$count] . ")";
-			$result = spip_query($sql);
-			echo ("<!--identifiant de l'article: $result-->\n");
+		//le mot-clé qui définit que c'est le contenu d'un devoir est associé à l'article
+		$result = bonbon_lier_mot($id_identif_devoir,$id_contenu_devoir[$count]);
+		echo ("<!--mot des devoirs: $result-->\n");
 		//les classes
 		for ($countc=0; $countc<=$classes; $countc++) {
-			$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_classe[$countc] . ", " . $id_contenu_devoir[$count] . ")";
-			$result = spip_query($sql);
+			$result = bonbon_lier_mot($id_classe[$countc],$id_contenu_devoir[$count]);
 			echo ("<!--classe: $result-->\n");
 		}
 		//le groupe éventuel:
 		if ($id_groupe!=0) {
-			$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_groupe . ", " . $id_contenu_devoir[$count] . ")";
-			$result = spip_query($sql);
+			$result = bonbon_lier_mot($id_groupe,$id_contenu_devoir[$count]);
 			echo ("<!--groupe: $result-->\n");
 		}
 		//la matière:
-		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_matiere . ", " . $id_contenu_devoir[$count] . ")";
-		$result = spip_query($sql);
-		echo ("<!--matière: $result-->\n<p>Enregistrement du devoir n°$dev_no</p>\n");
+		$result = bonbon_lier_mot($id_matiere,$id_contenu_devoir[$count]);
+		echo ("<!--matière: $result-->\n<p>Enregistrement du devoir n°".($count+1)."</p>\n");
 	}//fin du for chaque devoir
 	echo ("<p>Devoirs enregistrés...</p>\n");
 } //fin du if contenu_devoir
 
 //rajout des références aux devoirs dans le PS du contenu de la séance
-		$sql ="UPDATE spip_articles SET ps='".addslashes($liste_devoirs_contenu)."' WHERE id_article=$id_contenu_seance";
-		$result = spip_query($sql);
-		echo ("<!--update ps: $result-->\n");
+		$result = bonbon_ajout_devoirs_a_seance ($liste_devoirs_contenu, $id_contenu_seance);
 ?>
 			<p><strong>Ne revenez pas en arrière, mais choisissez&nbsp;:</strong></p>
 			<ul>
@@ -701,7 +640,8 @@ if ($contenu_devoir[0]!="") {
 
 	(#REM)On se met dans le contexte du prof grâce à son article-fiche
 
-]<BOUCLE_Fiche_du_prof(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur=#SESSION{id_auteur}}{surtitre="À propos d'un professeur"}{0,1}>
+]<BOUCLE_Fiche_du_prof(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur=#SESSION{id_auteur}}{ps=#SESSION{id_auteur}}{0,1}>
+[(#REM) {ps="À propos d'un professeur"} a été viré car posait des soucis d'encodage]
 	<B_ToutesLesClasses>
 		<fieldset>
 			<p class="infos">[(#TOTAL_BOUCLE|>{1}|?{"Seules vos classes sont affichées","Seule votre classe est affichée"})]. <a href="[(#URL_PAGE{cahier-de-texte-choix-classes-matieres}|parametre_url{id_auteur,#SESSION{id_auteur}})]#Classes" title="Rajouter et enlever des classes dans lesquelles on enseigne" onClick="javascript:window.open(this.href,'choix-doc', 'scrollbars=yes, resizable=yes, width=760, height=500'); return false;">Changer ses classes</a></p>
@@ -846,7 +786,11 @@ alt="AIDE"  title="De l'aide sur cet &eacute;l&eacute;ment" class='aide' /></a><
 		</B_Documents_Devoir_saisie>
 <?php }//fin du for count devoirs?>
 			<input type="hidden" name="devoirs" value="<?php echo $devoirs;?>">
-			<input type="Submit" value="Rajouter un devoir pour une autre date" name="plusdate">
+			<input style="float:right;" type="Submit" value="+ Rajouter un devoir pour une autre date" name="plusdate">
+<?php if ($devoirs) { ?>
+			<br>
+			<input style="float:right;" type="Submit" value="- Retirer le dernier devoir (pour le <?php if (!$date_devoir[$count]) echo date("d/m/Y"); else echo $date_devoir[$count];?>)" name="moinsdate">
+<?php } ?>
 			</fieldset>[
 (#REM) On ne parle de docs joints que si on est aps en train de dupliquer ou modifier une fiche.
 ][
@@ -881,19 +825,13 @@ alt="AIDE"  title="De l'aide sur cet &eacute;l&eacute;ment" class='aide' /></a><
 ][
 	(#SET{descriptif_rubrique,[(#GET{descriptif_rubrique}|concat{#GET{annee_scolaire},"\n\n{{Cette rubrique ne doit pas être renommée}}. Sinon, les enregistrements du cahier de texte de l'année en cours seront perdus"})]})
 ]<?php
-//Si la rubrique pour l'année en cours n'existe pas, on la crée !
-		$sql = "INSERT INTO spip_rubriques (titre, id_parent, descriptif , statut, date) 
-		VALUES ('[(#GET{annee_scolaire}|texte_script)]','[(#_Contexte_RubriqueCDT:ID_RUBRIQUE|texte_script)]','[(#GET{descriptif_rubrique}|texte_script)]', 'publie',NOW())";
-	
-		$result = spip_query($sql);
-		$id_rubrique=spip_insert_id();
-		$id_rub_cdt=$id_rubrique;
-		$sql = "INSERT INTO spip_rubriques (titre, id_parent, descriptif , statut, date) 
-		VALUES ('".addslashes("Professeurs-classes-matières")."', '$id_rubrique','".addslashes("Cette rubrique contient des données necessaires au fonctionnement du cahier de texte en ligne.\n\n  {{Ne l'effacez pas}}. {{Ne la renommez pas}}. {{Ne modifiez pas son contenu}} sinon il ne fonctionnera plus correctement !")."', 'publie',NOW())";
-		
-		$result = spip_query($sql);
-?>
-		les sous-rubriques «&nbsp;#GET{annee_scolaire}&nbsp;» et «&nbsp;Professeurs-classes-matières&nbsp;» ont été créées pour gérer le cahier de texte de cette année scolaire. Ne les effacez pas, ne les renommez pas et laissez les dans la rubrique Cahier de texte !
+//Si la rubrique pour l'année en cours n'existe pas, on la crée !?>
+[
+	(#SET{id_rub_annee_scolaire,#_Contexte_RubriqueCDT:ID_RUBRIQUE|bonbon_creer_sous_rubrique{#GET{annee_scolaire},#GET{descriptif_rubrique}}})
+	][<p>La sous-rubrique de l'année scolaire #GET{annee_rubrique} &nbsp;a été créée, c'est la rubrique n°(#GET{id_rub_annee_scolaire}).][ Elle contient une sous rubrique	n°(#GET{id_rub_annee_scolaire}|bonbon_creer_sous_rubrique{"Professeurs-classes-matières","Cette rubrique contient des données necessaires au fonctionnement du cahier de texte en ligne.
+
+
+	  {{Ne l'effacez pas}}. {{Ne la renommez pas}}. {{Ne modifiez pas son contenu}} sinon il ne fonctionnera plus correctement !"})&nbsp;nommée «Professeurs-classes-matières».] <strong>Ces sous-rubriques ont été créées pour gérer le cahier de texte de cette année scolaire. Ne les effacez pas, ne les renommez pas et laissez les dans la rubrique «Cahier de texte en-ligne» !</strong></p>
 		<a href="[(#SELF|parametre_url{var_mode,calcul})]" title="rafficher la page">Rafraichissez la page pour remplir une séance S.V.P.</a>
 	<//B_Verifie_RubriqueAnnee>
 </BOUCLE_Contexte_RubriqueCDT>

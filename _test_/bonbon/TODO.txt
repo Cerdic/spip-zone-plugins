@@ -6,6 +6,7 @@ BUGS:
 FONCTIONALITÉS:
 
 - pouvoir supprimer un devoir sur une séance dupliquée (ou même quand on a cliqué par hasard)
+- pouvoir supprimer un devoir sur une séance
 - prévoir un systême d'import automatisé d'articles (avec un genre de xml-typographique)
 - pouvoir choisir plusieurs groupes en même temps
 - afficher sur le coté (droite) de saisir une noisette avec le plan du cours, issu du plugin intertitres hiérarchisés, et offrir la possibilité de l'afficher dans une popup.
@@ -24,6 +25,6 @@ regroupement de classes) ? (utile ? même s'il y a la duplication de séance ?)
 - rajouter une mention des emplois du temps (mention légale) -> plus facile depuis l'apparition des fiches pour les classes.
 - une page agenda...
 - des messages privés visibles depuis l'interface du CDT.
-- automatiser le renommage de cahier-de-texte-rubrique.html (le mieux serait carrement d'automatiser la copie de cahier-de-texte-accueil.html)
+- automatiser le renommage de cahier-de-texte-rubrique.html
 - utiliser cfg (ou autre) pour configurer les mots-clés/rubriques
 - automatiser la mise en place des mots-clés et rubriques 

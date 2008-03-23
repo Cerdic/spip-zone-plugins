@@ -12,7 +12,7 @@ Ce qui a été fait avec «Bonbon !»
 		-* utilisation de {id_auteur ?} à la place de {id_auteur==#ENV{prof,.}} (merci BoOz).
 		-* utilisation de {titre_mot ?} pour les groupes ce qui élimine la dernière REGEXP. Donc il n'y a plus de REGEXP MySQL!
 		-* Une erreur de design dans le mélange du PHP et des boucles faisait que toutes la requêtes (même les inutiles) étaient exécutées quelque soit le contexte (en effet, le phraseur de SPIP transforme toutes les boucles de la page en html AVANT que le code php avec des if ne s'exécute.). C'est résolu soit grâce à l'utilisation de noisettes dont l'inculsion est conditionnée par une balise filtrée par un test. Soit par l'utilisation de boucles "fictives" conditionnelles. L'utilisation intensives de BOUCLES_CONDITIONNELLES évitent le php et donc permettent de mieux gérer le cache.
-		-* Début de déPHPisation (remplacement du PHP dans les squelettes au maxi, par des boucles/balises et éventuellement des fonctions définies dans le fichier idoine)
+		-* Début de déPHPisation (remplacement du PHP dans les squelettes au maxi, par des boucles/balises et éventuellement des fonctions définies dans le fichier idoine). Exemple: 0% de php dans le squelette d'installation du plugin ! :-)
 		-* Révision de toutes les valeurs de #CACHE (les pages rares sont mises en cache pour 30 jours, les listes de fiches pour 12h, les fiches pour une semaine) -> moins d'accès à la base de donnée.
 		-* Rajout des var_mode=calcul pour que l'affichage des profs soit rafraichi
 		-* Rajouts de fiches pour les classes et les profs qui servent grâce à des mots-clés de pseudo-jointures. Elles permettent d'éviter des requêtes sur l'ensemble des séances qui peuvent devenir grosses quand le nombre d'article est élevé.
@@ -45,7 +45,8 @@ Ce qui a été fait avec «Bonbon !»
 - Bonbon utilise la barre typographique de Spip (qui peut être la v2 si le plugin est installé) ! (merci Stephane)
 - Un tableau de bord sur la page d'accueil permet à chaque prof de savoir en un clin d'½il où il en est (dernières fiches publiées pour chaque classe et lien direct vers la saisie pour la classe concernée)... Très pratique pour savoir où on en est quand on a beaucoup de classes (et du retard... :-)). Ce tableau de bord affiche aussi les séances qui ont un problème de date.
 - limitation des la selection des séances à l'année en cours, à moins que ce ne soit explictement mentionné dans les paramètres GET.
-- réécriture complète de la page d'installation et de mise à jour qui était vraiment nulle.
+- réécriture complète de la page d'installation et de mise à jour qui était vraiment nulle. Désormais elle ne contient plus de PHP.
+- lors de la saisie, le premier devoir vide est le dernier (évite l'existance des dévoirs vides). On peut aussi retirer le dernier devoir entré.
 
 
 1.0 Première sortie de Bonbon
