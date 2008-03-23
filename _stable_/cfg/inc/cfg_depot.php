@@ -4,12 +4,12 @@ class cfg_depot{
 	
 	var $depot;
 	
-	function cfg_depot($depot='metapack', &$cfg, $opt=array()){
+	function cfg_depot($depot='metapack', &$cfg){
 		include_spip('inc/depot/'.$depot);
 		if (!class_exists($class = 'cfg_'.$depot))
 			die("CFG ne trouve pas le d&eacute;pot $depot");
 			
-		$this->depot = &new $class($cfg, $opt);
+		$this->depot = &new $class($cfg);
 	}
 	
 	function lire(){

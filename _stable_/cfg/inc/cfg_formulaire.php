@@ -52,10 +52,8 @@ class cfg_formulaire
 {
 // les parametres des formulaires cfg sont srockes dans cet objet
 	var $param;
-// l'objet de classe cfg_<storage> qui assure lecture/ecriture des config
-	var $sto = null;
-// les options de creation de cet objet
-	var $optsto = array();
+// l'objet de classe cfg_depot qui assure lecture/ecriture/effacement des config
+	var $depot = null;
 // le fond html utilise , en general pour config simple idem $nom
 	var $vue = '';
 // compte-rendu des mises a jour, vide == pas d'erreur
@@ -131,8 +129,8 @@ class cfg_formulaire
 		$classto = 'cfg_' . $this->param->depot;
 		//include_spip('inc/' . $classto);
 		include_spip('inc/cfg_depot');
-		$this->sto = new cfg_depot($this->param->depot, $this, $this->optsto);
-		$this->val = $this->sto->lire();
+		$this->depot = new cfg_depot($this->param->depot, $this);
+		$this->val = $this->depot->lire();
 		// stocker le fait que l'on a charge les valeurs
 		$this->charger = true;
 	}
@@ -310,7 +308,7 @@ class cfg_formulaire
 	{
 		// suppression ?
 		if ($supprimer) {
-			$ok = $this->sto->effacer();
+			$ok = $this->depot->effacer();
 			// dans le cas d'une suppression, il faut vider $this->val qui
 			// contient encore les valeurs du formulaire, sinon elles sont 
 			// passees dans le fond et le formulaire garde les informations
@@ -336,7 +334,7 @@ class cfg_formulaire
 		
 		// si elles ont changees, on modifie !
 		else {
-			$ok = $this->sto->ecrire();
+			$ok = $this->depot->ecrire();
 			$this->message .= ($msg = $ok 
 						? _T('cfg:config_enregistree', array('nom' => $this->nom_config())) 
 						: _T('cfg:erreur_enregistrement', array('nom' => $this->nom_config())));
