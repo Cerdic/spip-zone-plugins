@@ -28,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'composition_article' => 'Composition d\'un article',
 'choix_agenda' => 'Choix de la rubrique Agenda',
 'configuration' => 'Configuration Publication Ouverte',
+'caracteres' => ' caract&eacute;res',
 
 // D
 
@@ -50,6 +51,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'expliq_renvois' => 'Lorsqu\'un r&eacute;dacteur valide un article ou abandonne, le formulaire affiche un message et redirige le r&eacute;dacteur au bout de quelques secondes vers une autre page du site. Les options ci-dessous permettent de configurer cela. Attention, il faut indiquer des urls de type : « /spip.php?page=ma_page », le plugin compl&eacute;tera automatiquement l\'url.',
 'exemple_trois_auteurs' => 'Exemple avec trois auteurs :',
 'expliq_balise' => 'le code donn&eacute; en-dessous de votre image est a placer dans le texte de votre article si vous souhaitez inclure l\'image ou la vignette du document dans votre texte (right, center, left renseigne l\'alignement que prendra votre image  ou vignette).',
+'erreur_die' => 'veuillez verifier votre installation du plugin openPublishing',
+'erreur_protection' => 'tentative de modification d\'un article d&eacute;j&agrave; publi&eacute;',
+'erreur_min_len' => 'Attention, votre titre doit contenir au minimum ',
+'erreur_upload' => 'erreur d\'upload, le fichier temporaire est introuvable, il ce peut que vous tentiez d\'uploader un fichier trop volumineux. La taille maximale autoris&eacute;e est de 5 Mo',
+'erreur_extension' => 'erreur d\'upload. L\'extention de votre fichier n\'est pas autoris&eacute;e ...',
 
 // G
 'gestion_rubrique' => 'Gestion des rubriques',
@@ -123,6 +129,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'utiliser_ps' => 'Utiliser le champ Post-Scriptum',
 'utiliser_agenda' => 'utiliser la gestion Agenda du plugin "Publication Ouverte"',
 
+
+
+
 // V 0.2.2 / 0.3
 
 
@@ -146,7 +155,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 
 'configurer_op' => 'Configurer openPublishing',
-'caracteres' => ' caract&eacute;res',
 'champ_surtitre' => 'Le champ sur-titre',
 'champ_surtitre_oui' => 'sur-titre disponible',
 'champ_surtitre_non' => 'sur-titre non disponible',
@@ -182,11 +190,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'explication_article' => 'A FAIRE : placer ici des conseil de r&eacute;daction d\'article ...',
 'extensions_acceptees' => 'Les extensions de fichier accept&eacute;es sont :',
 'erreur_anonymous' => 'erreur, pas d\'auteur anonymous dans la base, publication impossible',
-'erreur_die' => 'veuillez verifiez votre installation du plugin openPublishing',
 'erreur_insertion' => 'erreur lors de l\'insertion de votre article dans la base de donn&eacute;e, veuillez contactez les responsables du site',
-'erreur_upload' => 'erreur d\'upload, le fichier temporaire est introuvable, il ce peut que vous tentiez d\'uploader un fichier trop volumineux. La taille maximale autoris&eacute;e est de 5 Mo',
-'erreur_min_len' => 'Attention, votre titre doit contenir au minimum ',
-'erreur_extension' => 'erreur d\'upload. L\'extention de votre fichier n\'est pas autoris&eacute;e ...',
+
 
 //G
 'gestion_agenda' => 'Gestion de l\'agenda',

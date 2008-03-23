@@ -3,13 +3,16 @@
 /* Test de sécurité */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/* Les includes de spip utilisé dans cette balise
+/* 
+ * Les includes de spip utilisé dans cette balise
  */
+
 include_spip('inc/ajouter_documents');
 include_spip('inc/iconifier');
 include_spip('inc/barre');
 
-/* Les includes propre au plugin
+/* 
+ * Les includes propre au plugin
  */
 
 if (version_compare($GLOBALS['spip_version_code'],'1.9300','<'))
@@ -35,64 +38,50 @@ function balise_FORMULAIRE_ARTICLE_stat($args, $filtres) {
 
 function balise_FORMULAIRE_ARTICLE_dyn() {
 
-// ces variables sont indispensables pour récuperer les documents joints
-global $_FILES, $_HTTP_POST_FILES;
+/*
+ * récuperation des données indispensables
+ * le global $_FILES : indispensables pour récuperer les documents joints
+ * la configuration de Publication Ouverte
+ */
 
-// récupération des données de configuration
+global $_FILES, $_HTTP_POST_FILES;
 $config = lire_config('op');
 
-// si l'auteur anonymous n'est pas dans la base, le plugin openpublishing doit être mal installé
+
+/*
+ * Premier test : si pas d'auteur "anonyme", on jette.
+ */
+
 if(!$config['IDAuteur']) return _T('opconfig:erreur_die');
 
-/* récapitulatif des pipelines :
+/*
+ * Si tentative d'attaquer un article déjà existant, on jette.
+ */
 
-OP_environnement
------------------
+if (isset($_GET['id_article'])) return _T('opconfig:erreur_protection');
 
-ce pipeline permet aux plugins d'ajouter des variables d'environnement
-
-OP_pre_validation
-------------------
-
-ce pipeline permet aux plugins d'effectuer des traitements avant la validation
-p.e : traitements typographiques sur le texte
-
-
-OP_validation
---------------
-	
-ce pipeline permet aux plugins d'effectuer une validation "alternative"
-p.e : pour passer ailleur que par la création d'un article (création d'un evenement p.e)
-IMPORTANT ; ne surtout pas oublier de mettre le flag_valider à true, sinon on embraye sur les autres types de validation
-IMPORTANT : tester le flag_valider, il ce peut qu'un autre plugin le mette à true avant :)
-IMPORTANT : tester sa variable action .. sinon le process se déroulera si on clique sur un autre bouton
-
-
-OP_action
-----------
-
-ce pipeline permet aux plugins d'effectuer les traitements sur les variables.
-pourra contenir des manipulations de la base de donnée, etc ..
-IMPORTANT : toujours commencer par un test sur sa variable action !
-
-OP_squelette
---------------
-ce pipeline permet aux plugins de calculer leur formulaire.
-IMPORTANT : toujours commencer par un test sur sa variable de configuration
-(p.e : activer ou pas cette fonctionnalité dans un fonds cfg)
-
-
-*/
-
-/* les clé de $variables correspondent aux "names" dans les formulaires HTML
- celles-ci sont classée en deux catégorie plusieurs catégories
- actions : les boutons input
- type : un type pour un champ : 'texte'
- champs_pri : les champs "principaux" du formulaire (ceux n'étant pas pris en compte par un formulaire auxilliaire
- champs_aux : les champs "auxilliaires" d'un formulaire auxilliaires
- flag_erreur : dans le process de pre_validation, si il est mis à true, alors il y a une erreur, retour au formulaire sans validation
- flag_valider : dans le process de validation, si il est mis à true, alors validation et evite les autres process de validation
-*/
+/*
+ *  récapitulatif des pipelines :
+ * ==============================
+ *
+ * (cf spip-contrib pour exemples d'utilisations et doc plus complete)
+ *
+ * OP_environnement : permet aux plugins d'ajouter des variables d'environnement
+ * OP_pre_validation : permet aux plugins d'effectuer des traitements avant la validation
+ * OP_validation : permet aux plugins d'effectuer une validation "alternative"
+ * OP_action : permet aux plugins d'effectuer les traitements sur les variables.
+ * OP_squelette : permet aux plugins de calculer leur formulaire.
+ *
+ *
+ * les clé de $variables correspondent aux "names" dans les formulaires HTML
+ * celles-ci sont classée en plusieurs catégories
+ * actions : les boutons input
+ * type : un type pour un champ : 'texte'
+ * champs_pri : les champs "principaux" du formulaire (ceux n'étant pas pris en compte par un formulaire auxilliaire
+ * champs_aux : les champs "auxilliaires" d'un formulaire auxilliaires
+ * flag_erreur : dans le process de pre_validation, si il est mis à true, alors il y a une erreur, retour au formulaire sans validation
+ * flag_valider : dans le process de validation, si il est mis à true, alors validation et evite les autres process de validation
+ */
 
 $variables = array(
 	'actions' => array(),
@@ -102,6 +91,11 @@ $variables = array(
 	'flag_erreur' => false,
 	'flag_valider' => false
 	);
+
+/*
+ * Definition des variables
+ * Les variables pré-remplies sont des cas particuliés
+ */
 
 // definition des actions principales du formulaire
 $variables['actions']['previsualiser'] = '';
