@@ -3,6 +3,10 @@ Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 - rendre les 'storage' independants de la class cfg_formulaire pour utiliser leur fonction lire/ecrire/effacer dans lire_config, ecrire_config, effacer_config
 
+v1.4.2 (23 03 2008)
+- deplacement des storage cfg (maintenant appeles 'depot') dans inc/depot/nom.php
+- renommage du depot 'classic' en 'meta', suppression du depot 'extrapack' au profit de tablepack + colonne
+
 v1.4.1 (23 03 2008)
 - deplacement des parametres de cfg dans une seule entree $this->param
 

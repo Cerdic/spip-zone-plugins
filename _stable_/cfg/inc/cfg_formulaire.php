@@ -22,6 +22,7 @@ class cfg_params{
 			'casier' => '', // sous tableau optionel du meta ou va etre stocke le fragment de config
 			'cfg_id' => '', // pour une config multiple , l'id courant
 			'descriptif' => '', // descriptif
+			'depot' => 'metapack', // (ancien 'storage') le depot utilise pour stocker les donnees, par defaut metapack: spip_meta serialise 
 			'fichier' => '', // pour storage php, c'est l'adresse du fichier (depuis la racine de spip), sinon ca prend /local/cfg/nom.php
 			'head' => '', // partie du fond cfg a inserer dans le head par le pipeline header_prive (todo insert_head?)
 			'icone' => '', // lien pour une icone
@@ -31,7 +32,6 @@ class cfg_params{
 			'onglet' => 'oui', // cfg doit-il afficher un lien vers le fond sous forme d'onglet dans la page ?exec=cfg
 			'presentation' => 'auto', // cfg doit-il encadrer le formulaire tout seul ?
 			'refus' => '', // en cas de refus d'autorisation, un message informatif [(#REM) refus=...]
-			'storage' => 'metapack', // le storage, par defaut metapack: spip_meta serialise
 			'table' => '', // nom de la table sql pour storage extra ou table
 		);
 		
@@ -127,10 +127,11 @@ class cfg_formulaire
 	    } 
 		
 		// creer le storage et lire les valeurs
-		$this->param->storage = strtolower(trim($this->param->storage));
-		$classto = 'cfg_' . $this->param->storage;
-		include_spip('inc/' . $classto);
-		$this->sto = new $classto($this, $this->optsto);
+		$this->param->depot = strtolower(trim($this->param->depot));
+		$classto = 'cfg_' . $this->param->depot;
+		//include_spip('inc/' . $classto);
+		include_spip('inc/cfg_depot');
+		$this->sto = new cfg_depot($this->param->depot, $this, $this->optsto);
 		$this->val = $this->sto->lire();
 		// stocker le fait que l'on a charge les valeurs
 		$this->charger = true;
@@ -184,7 +185,20 @@ class cfg_formulaire
 		// est-ce utile de tester ça ?
 		if (preg_match('/<!-- [a-z0-9_]\w+\*?=/', $this->fond_compile)) {
 			die('Un parametre CFG n\'a pas pu etre importe depuis '.$this->vue);
-		}	
+		}
+		
+		// pour compatibilite avec les anciennes versions (<1.4.1)
+		if (isset($this->param->storage)) 
+			$this->param->depot = $this->param->storage;
+		
+		//if ($this->param->depot == 'classic')
+		//	$this->param->depot = 'meta');
+			
+		if ($this->param->depot == 'extrapack'){
+			$this->param->depot = 'tablepack';
+			$this->param->colonne = 'extra';
+		}
+		
 	}
 	
 	// une fonction pour effacer les parametres du code html
@@ -296,7 +310,7 @@ class cfg_formulaire
 	{
 		// suppression ?
 		if ($supprimer) {
-			$ok = $this->sto->modifier($supprimer);
+			$ok = $this->sto->effacer();
 			// dans le cas d'une suppression, il faut vider $this->val qui
 			// contient encore les valeurs du formulaire, sinon elles sont 
 			// passees dans le fond et le formulaire garde les informations
@@ -322,7 +336,7 @@ class cfg_formulaire
 		
 		// si elles ont changees, on modifie !
 		else {
-			$ok = $this->sto->modifier();
+			$ok = $this->sto->ecrire();
 			$this->message .= ($msg = $ok 
 						? _T('cfg:config_enregistree', array('nom' => $this->nom_config())) 
 						: _T('cfg:erreur_enregistrement', array('nom' => $this->nom_config())));
