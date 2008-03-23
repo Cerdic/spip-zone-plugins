@@ -4,6 +4,7 @@
 // Serieuse refonte et integration au Couteau Suisse : Patrice Vanneufville
 // Doc : http://www.spip-contrib.net/?article2206
 
+include_spip('inc/charsets');
 charger_generer_url();  # pour generer_url_mot()
 
 // Compatibilite SPIP 1.91
@@ -36,6 +37,17 @@ function cs_retire_glossaire($texte) {
 }
 $GLOBALS['cs_introduire'][] = 'cs_retire_glossaire';
 
+// remplace les accents unicode par l'equivalent charset/unicode/html
+function glossaire_accents($regexpr) {
+	if (strpos($regexpr, '&')===false) return $regexpr;
+	return preg_replace_callback(",&#([0-9]+);,", 'glossaire_accents_callback', $regexpr);
+}
+
+function glossaire_accents_callback($matches) {
+	$u = unicode2charset($matches[0]);
+	$a = array_unique(array($u, htmlentities($u), $matches[0]));
+	return '(?:'.join('|', $a).')';
+}
 function glossaire_echappe_balises_callback($matches) {
  return cs_code_echappement($matches[1], 'GLOSS');
 }
@@ -58,16 +70,12 @@ function cs_rempl_glossaire($texte) {
 		$a = explode('/', $titre = extraire_multi($mot['titre']));
 		$id = $mot['id_mot'];
 		$les_mots = array();
-		foreach ($a as $m) {
-			$u = charset2unicode($m = trim($m));
-			// liste de toutes les formes possible du mot clef en question.
-			// normalement, y a pas besoin de : html_entity_decode($m)
-			$les_mots = array_merge($les_mots, array(
-				htmlentities($m), $u, unicode_to_utf_8($u), unicode2charset($u), $m));
-		}
+		foreach ($a as $m) $les_mots[] = charset2unicode($m = trim($m));
 		$les_mots = array_unique($les_mots);
+//print_r($les_mots);
 		array_walk($les_mots, 'cs_preg_quote');
-		$les_mots = join('|', $les_mots);
+		$les_mots = glossaire_accents(join('|', $les_mots));
+echo '<hr>==>',htmlentities($les_mots),'<hr>';
 		if(preg_match(",\W($les_mots)\W,i", $texte)) {
 			// prudence 1 : on protege TOUTES les balises contenant le mot en question
 			$texte = preg_replace_callback(",(<[^>]*($les_mots)[^>]*>),Umsi", 'glossaire_echappe_balises_callback', $texte);

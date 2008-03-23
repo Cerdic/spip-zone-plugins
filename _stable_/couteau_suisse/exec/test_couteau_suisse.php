@@ -140,13 +140,15 @@ function cs_les_tests() {
 	include_spip('public/parametrer');
 
 	// test de typo_exposants()
+	include_spip('inc/charsets');
 	$textes = array(
 		"Pr Paul, Dr Jules, Prs Pierre &amp; Paul, Drs Pierre &amp; Paul, Pr&eacute;-St-Gervais ou Dr&eacute;",
 		"Ste Lucie, St-Lucien, St.Patrick, St Patrick, st-jules, Sts Pierre &amp; Paul, STe Lucie",
 		"Bse Lucie, Bx-Lucien, Bx.Patrick, Bx Patrick, bx-jules, Bses Jeanne &amp; Julie",
-		"Iier, Iiers, Ière, 1ière, 1ères, 1ières",
-		"Ie IIème IIIe IVe Ve VIe VIIe VIIIe IXe Xe XIe XVe XXe XLe Lème LIe",
-		"Erreurs 2me, 3ème, 4ième, 5mes, 6èmes, 7ièmes",
+		"Iier, Iiers, I&#232;re, 1i&#232;re, 1&#232;res, 1i&#232;res",
+		unicode2charset("Iier, Iiers, I&#232;re, 1i&#232;re, 1&#232;res, 1i&#232;res"),
+		unicode2charset("Ie II&#232;me IIIe IVe Ve VIe VIIe VIIIe IXe Xe XIe XVe XXe XLe L&#232;me LIe"),
+		unicode2charset("Erreurs 2me, 3&#232;me, 4i&#232;me, 5mes, 6&#232;mes, 7i&#232;mes"),
 		"1er 1ers, 2e 2es, IIIe IIIes, ",
 		"3 ou 4 m², 3 ou 4 m2 et 2 m3.",
 		"Mlle, Mlles, Mme, Mmes et erreurs Melle, Melles",

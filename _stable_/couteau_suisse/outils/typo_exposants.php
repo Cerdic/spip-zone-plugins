@@ -3,6 +3,10 @@
 // serieuse refonte 2006 : Patrice Vanneufville
 // Toutes les infos sur : http://www.spip-contrib.net/?article1564
 
+include_spip('inc/charsets');
+// en principe, pas besoin de : caractere_utf_8(232)
+define('_TYPO_EGRAVE', '(?:'.unicode2charset('&#232;').'|&#232;|&egrave;)');
+
 // cette fonction ne fonctionne que pour le francais
 // elle n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function typo_exposants_fr($texte){
@@ -22,10 +26,10 @@ function typo_exposants_fr($texte){
 		'/\bm²\b/',
 
 		'/(\\b[1I])i?(ers?)\\b/',	// Erreurs ier, iers
-		'/(\\b[1I])(iè|è|i&egrave;|&egrave;)(res?)\\b/',	// Erreurs ère, ière, ères, ières
+		'/(\\b[1I])(i?'._TYPO_EGRAVE.')(res?)\\b/',	// Erreurs ère, ière, ères, ières
 		'/(\\b1)(r?es?)\\b/', // 1e(s), 1re(s)
 
-		'/(\\b[02-9IVX]+)(ième|ème|i&egrave;me|&egrave;me|me)(s?)\\b/', // Erreurs me, ème, ième, mes, èmes, ièmes
+		'/(\\b[02-9IVX]+)(me|i'._TYPO_EGRAVE.'me|'._TYPO_EGRAVE.'me)(s?)\\b/', // Erreurs me, ème, ième, mes, èmes, ièmes
 		'/\b([0-9IVX]+?)(es?)\b/', // 2e(s), IIIe(s)... (les 1(e?r?s?) ont deja ete remplaces)
 	);
 	$remplace = array(
