@@ -25,9 +25,9 @@ class cfg_metapack
 	function lire()
 	{
     	$val = lire_config($this->cfg->nom_config());
-    	if ($this->cfg->cfg_id) {
-    		$cles = explode('/', $this->cfg->cfg_id);
-			foreach ($this->cfg->champs_id as $i => $name) {
+    	if ($this->cfg->param->cfg_id) {
+    		$cles = explode('/', $this->cfg->param->cfg_id);
+			foreach ($this->cfg->param->champs_id as $i => $name) {
 				$val[$name] = $cles[$i];
 		    }
     	}
@@ -53,11 +53,11 @@ class cfg_metapack
 // modifier le fragment qui peut etre tout le meta
 	function modifier($supprimer = false)
 	{
-    	($base = lire_config($this->cfg->nom)) || ($base = array());
+    	($base = lire_config($this->cfg->param->nom)) || ($base = array());
     	$ici = &$base;
     	$this->_report = array();
-    	$ici = &$this->monte_arbre($ici, $this->cfg->casier);
-    	$ici = &$this->monte_arbre($ici, $this->cfg->cfg_id);
+    	$ici = &$this->monte_arbre($ici, $this->cfg->param->casier);
+    	$ici = &$this->monte_arbre($ici, $this->cfg->param->cfg_id);
 		foreach ($this->cfg->champs as $name => $def) {
 			if (isset($def['id'])) {
 				continue;
@@ -77,9 +77,9 @@ class cfg_metapack
 			}
 		}
 		if ($supprimer && !$base) {
-		    effacer_meta($this->cfg->nom);
+		    effacer_meta($this->cfg->param->nom);
 		} else {
-		    ecrire_meta($this->cfg->nom, serialize($base));
+		    ecrire_meta($this->cfg->param->nom, serialize($base));
 	    }
 	    if (defined('_COMPAT_CFG_192')) ecrire_metas();
 	    return true;

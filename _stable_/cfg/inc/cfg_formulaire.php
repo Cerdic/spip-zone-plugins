@@ -11,55 +11,61 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
+class cfg_params{
+	
+	function cfg_params($opt=array()){
+		
+		$defaut = array(
+			'afficher_messages' => true, // afficher ce compte rendu ?
+			'autoriser' => 'configurer',	// le "faire" de autoriser($faire), par defaut, autoriser_configurer_dist()	
+			'autoriser_absence_id' => 'non', // autoriser l'insertion de nouveau contenu dans une table sans donner d'identifiant ?
+			'casier' => '', // sous tableau optionel du meta ou va etre stocke le fragment de config
+			'cfg_id' => '', // pour une config multiple , l'id courant
+			'descriptif' => '', // descriptif
+			'fichier' => '', // pour storage php, c'est l'adresse du fichier (depuis la racine de spip), sinon ca prend /local/cfg/nom.php
+			'head' => '', // partie du fond cfg a inserer dans le head par le pipeline header_prive (todo insert_head?)
+			'icone' => '', // lien pour une icone
+			'liens' => array(), // liens optionnels sur des sous-config <!-- liens*=xxx -->
+			'liens_multi' => array(), // liens optionnels sur des sous-config pour des fonds utilisant un champ multiple  <!-- liens_multi*=xxx -->
+			'nom' => '', // le nom du meta (ou autre) ou va etre stocke la config concernee
+			'onglet' => 'oui', // cfg doit-il afficher un lien vers le fond sous forme d'onglet dans la page ?exec=cfg
+			'presentation' => 'auto', // cfg doit-il encadrer le formulaire tout seul ?
+			'refus' => '', // en cas de refus d'autorisation, un message informatif [(#REM) refus=...]
+			'storage' => 'metapack', // le storage, par defaut metapack: spip_meta serialise
+			'table' => '', // nom de la table sql pour storage extra ou table
+		);
+		
+		$opt = array_merge($defaut, $opt);
+		
+		// stockage dans $this->cle
+		foreach ($opt as $cle=>$val){
+			$this->$cle = $val;	
+		}	
+	}
+	
+	
+}
+
+
 // la classe cfg represente une page de configuration
 class cfg_formulaire
 {
-// le storage, par defaut metapack: spip_meta serialise
-	var $storage = 'metapack';
+// les parametres des formulaires cfg sont srockes dans cet objet
+	var $param;
 // l'objet de classe cfg_<storage> qui assure lecture/ecriture des config
 	var $sto = null;
 // les options de creation de cet objet
 	var $optsto = array();
-// le "faire" de autoriser($faire), par defaut, autoriser_configurer_dist()
-	var $autoriser = 'configurer';
-// en cas de refus, un message informatif [(#REM) refus=...]
-	var $refus = '';
-// partie du fond cfg a inserer dans le head par le pipeline header_prive (todo insert_head?)
-	var $head = '';
-// le nom du meta (ou autre) ou va etre stocke la config concernee
-	var $nom = '';
 // le fond html utilise , en general pour config simple idem $nom
 	var $vue = '';
-// pour une config multiple , l'id courant
-	var $cfg_id = '';
-// sous tableau optionel du meta ou va etre stocke le fragment de config
-// vide = a la "racine" du meta nomme $nom
-	var $casier = '';
-// descriptif
-	var $descriptif = '';
-// cfg doit-il encadrer le formulaire tout seul ?
-	var $presentation = 'auto';
-// cfg doit-il afficher un lien vers le fond sous forme d'onglet
-// dans la page ?exec=cfg
-	var $onglet = 'oui'; 
 // compte-rendu des mises a jour, vide == pas d'erreur
 	var $message = '';
-// afficher ce compte rendu ?
-	var $afficher_messages = true;
-// liens optionnels sur des sous-config <!-- liens*=xxx -->
-	var $liens = array();
-// liens optionnels sur des sous-config pour des fonds utilisant un champ multiple  <!-- liens_multi*=xxx -->
-	var $liens_multi = array();
 // les champs trouve dans le fond
 	var $champs = array();
 // les champs index
 	var $champs_id = array();
 // leurs valeurs
 	var $val = array();
-// nom de la table sql pour storage extra ou table
-	var $table = '';
-// autoriser l'insertion de nouveau contenu dans une table sans donner d'identifiant ?
-	var $autoriser_absence_id = 'non';
 // pour tracer les valeurs modifiees
 	var $log_modif = '';
 // stockage du fond compile par recuperer_fond()
@@ -76,13 +82,15 @@ class cfg_formulaire
 	 */
 	function cfg_formulaire($nom, $cfg_id = '', $opt = array())
 	{
-		$this->nom = $this->vue = $nom;
-		$this->cfg_id = $cfg_id;
+		$this->param = &new cfg_params();
+		$this->param->nom = $this->vue = $nom;
+		$this->param->cfg_id = $cfg_id;
+		
 		$this->base_url = generer_url_ecrire('');
 		foreach ($opt as $o=>$v) {
 			$this->$o = $v;
 		}
-	    		
+	    
 		// charger les donnees du fond demande
 		$this->charger();
 	}
@@ -115,12 +123,12 @@ class cfg_formulaire
 		 * 
 		 */
 		if (_request('_cfg_affiche')) {
-			$this->cfg_id = implode('/', array_map('_request', $this->champs_id));
+			$this->param->cfg_id = implode('/', array_map('_request', $this->champs_id));
 	    } 
 		
 		// creer le storage et lire les valeurs
-		$this->storage = strtolower(trim($this->storage));
-		$classto = 'cfg_' . $this->storage;
+		$this->param->storage = strtolower(trim($this->param->storage));
+		$classto = 'cfg_' . $this->param->storage;
 		include_spip('inc/' . $classto);
 		$this->sto = new $classto($this, $this->optsto);
 		$this->val = $this->sto->lire();
@@ -137,8 +145,9 @@ class cfg_formulaire
 	 */
 	function nom_config()
 	{
-	    return $this->nom . ($this->casier ? '/' . $this->casier : '') .
-	    		($this->cfg_id ? '/' . $this->cfg_id : '');
+	    return $this->param->nom . 
+	    		($this->param->casier ? '/' . $this->param->casier : '') .
+	    		($this->param->cfg_id ? '/' . $this->param->cfg_id : '');
 	}
 
 
@@ -174,8 +183,7 @@ class cfg_formulaire
 		// s'il en reste : il y a un probleme !
 		// est-ce utile de tester ça ?
 		if (preg_match('/<!-- [a-z0-9_]\w+\*?=/', $this->fond_compile)) {
-			die('erreur manque parametre externe: '
-				. htmlentities(var_export($this->cfg_param, true)));
+			die('Un parametre CFG n\'a pas pu etre importe depuis '.$this->vue);
 		}	
 	}
 	
@@ -266,7 +274,7 @@ class cfg_formulaire
 		if ($autoriser !== -1) return $autoriser;
 		
 		include_spip('inc/autoriser');
-		return $autoriser = autoriser($this->autoriser);
+		return $autoriser = autoriser($this->param->autoriser);
 	}
 
 	/*
@@ -353,11 +361,11 @@ class cfg_formulaire
 			
 			// lorsque c'est un champ de type multi que l'on modifie
 			// et si l'identifiant a change, il faut soit le copier, soit de deplacer
-			$this->new_id = implode('/', array_map('_request', $this->champs_id));
-			if ($this->new_id != $this->cfg_id && !_request('_cfg_copier')) {
+			$new_id = implode('/', array_map('_request', $this->champs_id));
+			if ($new_id != $this->param->cfg_id && !_request('_cfg_copier')) {
 				$this->modifier('supprimer');
 			}
-			$this->cfg_id = $this->new_id;
+			$this->param->cfg_id = $new_id;
 			
 			
 			$this->modifier();
@@ -392,7 +400,7 @@ class cfg_formulaire
 		// et on redirige le client, de maniere a charger la page
 		// avec la nouvelle config (ce qui permet par exemple a Autorite
 		// de controler d'eventuels conflits generes par les nouvelles autorisations)
-		if ($this->rediriger && $this->message) {
+		if ($this->param->rediriger && $this->message) {
 			include_spip('inc/meta');
 			ecrire_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur'], $this->message, 'non');
 			if (defined('_COMPAT_CFG_192')) ecrire_metas();
@@ -420,7 +428,7 @@ class cfg_formulaire
 		// ce qui mettrait de fausses valeurs dans l'environnement
 		if  (!_request('_cfg_ok') && !_request('_cfg_delete')) return $erreurs;
 		
-		// stoockage des nouvelles valeurs
+		// stockage des nouvelles valeurs
 		foreach ($this->champs as $name => $def) {
 			// enregistrement des valeurs postees
 			$oldval = $this->val[$name];
@@ -498,12 +506,12 @@ class cfg_formulaire
 	
 	function creer_hash_cfg(){
 		include_spip('inc/securiser_action');
-	    $arg = 'cfg0.0.0-' . $this->nom . '-' . $this->vue;
+	    $arg = 'cfg0.0.0-' . $this->param->nom . '-' . $this->vue;
 		return 
-			'?exec=cfg&cfg=' . $this->nom .
-			'?cfg=' . $this->nom .
+			'?exec=cfg&cfg=' . $this->param->nom .
+			//'?cfg=' . $this->param->nom . // inverser les 2 lignes si les formulaires ont action=#SELF, ca devrait suffire et etre mieux ?
 			'&cfg_vue=' . $this->vue .
-			'&cfg_id=' . $this->cfg_id .
+			'&cfg_id=' . $this->param->cfg_id .
 			'&base_url=' . $this->base_url .
 		    '&lang=' . $GLOBALS['spip_lang'] .
 		    '&arg=' . $arg .
@@ -515,16 +523,16 @@ class cfg_formulaire
 	 * commun avec celui de set_vue()
 	 * 
 	 * Parametres : 
-	 * - $regs[2] = 'param'
+	 * - $regs[2] = 'parametre'
 	 * - $regs[3] = '*' ou ''
 	 * - $regs[4] = 'valeur'
 	 * 
 	 * Lorsque des parametres sont passes dans le formulaire 
 	 * par <!-- param=valeur -->
-	 * stocker $this->param=valeur
+	 * stocker $this->param->parametre=valeur
 	 * 
 	 * Si <!-- param*=valeur -->
-	 * Stocker $this->param[]=valeur
+	 * Stocker $this->param->parametre[]=valeur
 	 * 
 	 */
 	function post_params($regs) {
@@ -533,9 +541,9 @@ class cfg_formulaire
 		$regs[4] = trim($regs[4]);
 		
 		if (empty($regs[3])) {
-		    $this->{$regs[2]} = $regs[4];
-		} elseif (is_array($this->{$regs[2]})) {
-		    $this->{$regs[2]}[] = $regs[4];
+		    $this->param->{$regs[2]} = $regs[4];
+		} elseif (is_array($this->param->{$regs[2]})) {
+		    $this->param->{$regs[2]}[] = $regs[4];
 		}
 		// plus besoin de garder ca
 		return '';

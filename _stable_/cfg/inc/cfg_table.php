@@ -20,7 +20,7 @@ class cfg_table
 		foreach ($opt as $o=>$v) {
 			$this->$o = $v;
 		}
-		$this->cfg->table || ($this->cfg->message = _T('cfg:nom_table_manquant'));
+		$this->cfg->param->table || ($this->cfg->message = _T('cfg:nom_table_manquant'));
 	}
 	
 
@@ -40,14 +40,14 @@ class cfg_table
 	{
 		// si cfg_id n'est pas present,
 		// pas la peine de continuer
- 		if (!$this->cfg->cfg_id) {
+ 		if (!$this->cfg->param->cfg_id) {
  			// ignorer cette erreur si le champ id est 'autoincrement'
- 			if (!$this->cfg->autoriser_absence_id == 'oui')
+ 			if (!$this->cfg->param->autoriser_absence_id == 'oui')
 				$this->cfg->message = _T('cfg:id_manquant');
 			return false;
 		}
 
-   		$cles = explode('/', $this->cfg->cfg_id);
+   		$cles = explode('/', $this->cfg->param->cfg_id);
     	$val = array();
     	// selection des champs du select
 		$select = array();
@@ -57,7 +57,7 @@ class cfg_table
 			}
 			$select[] = $name;
 	    }
-		$query = sql_select($select, $this->cfg->table, $this->where());
+		$query = sql_select($select, $this->cfg->param->table, $this->where());
 		($query = sql_fetch($query)) && ($val = $query);
 
 		foreach ($this->cfg->champs_id as $i => $name) {
@@ -70,7 +70,7 @@ class cfg_table
 // fabriquer un array WHERE depuis cfg_id
 	function where()
 	{
-   		$cles = explode('/', $this->cfg->cfg_id);
+   		$cles = explode('/', $this->cfg->param->cfg_id);
 		$where = array();
 		foreach ($this->cfg->champs_id as $i => $name) {
 			$where[] = $name . '=' 
@@ -85,7 +85,7 @@ class cfg_table
 
 		$this->cfg_id = $sep = '';
 		foreach ($this->cfg->champs_id as $name) {
-			$this->cfg_id .= $sep . _request($name);
+			$this->param->cfg_id .= $sep . _request($name);
 			$sep = '/';
 	    }
     	$base = $this->lire();
@@ -94,7 +94,7 @@ class cfg_table
 
     	if ($supprimer) {
 			return !$existe || 
-				sql_delete($this->cfg->table, $this->where() );
+				sql_delete($this->cfg->param->table, $this->where() );
 		}
 
 		$champs = array();
@@ -107,7 +107,7 @@ class cfg_table
 			
 		// update
 		if ($existe) {	
-		    return sql_updateq($this->cfg->table, $champs, $this->where() );
+		    return sql_updateq($this->cfg->param->table, $champs, $this->where() );
 	    }
 		
 		// sinon insert
@@ -122,7 +122,7 @@ class cfg_table
 				unset($champs[$name]);
 			}
 		}
-	    return sql_insertq($this->cfg->table, $champs);
+	    return sql_insertq($this->cfg->param->table, $champs);
 	}
 }
 ?>

@@ -20,8 +20,8 @@ class cfg_php
 		foreach ($opt as $o=>$v) {
 			$this->$o = $v;
 		}
-		$this->cfg->fichier || ($this->cfg->fichier =
-			_DIR_VAR . 'cfg/' . $this->cfg->nom . '.php');
+		$this->cfg->param->fichier || ($this->cfg->param->fichier =
+			_DIR_VAR . 'cfg/' . $this->cfg->param->nom . '.php');
 	}
 	
 // recuperer les valeurs, utilise la fonction commune lire_config() de cfg_options.php
@@ -29,17 +29,17 @@ class cfg_php
 	{
 		$cfg = null;
 
-    	@include $this->cfg->fichier;
+    	@include $this->cfg->param->fichier;
 
     	if (!$cfg) {
     		return array();
     	}
     	$this->_report = array();
-    	$cfg = &$this->monte_arbre($cfg, $this->cfg->nom);
-    	$cfg = &$this->monte_arbre($cfg, $this->cfg->casier);
-    	$cfg = &$this->monte_arbre($cfg, $this->cfg->cfg_id);
-    	if ($this->cfg->cfg_id) {
-    		$cles = explode('/', $this->cfg->cfg_id);
+    	$cfg = &$this->monte_arbre($cfg, $this->cfg->param->nom);
+    	$cfg = &$this->monte_arbre($cfg, $this->cfg->param->casier);
+    	$cfg = &$this->monte_arbre($cfg, $this->cfg->param->cfg_id);
+    	if ($this->cfg->param->cfg_id) {
+    		$cles = explode('/', $this->cfg->param->cfg_id);
 			foreach ($this->cfg->champs_id as $i => $name) {
 				$cfg[$name] = $cles[$i];
 		    }
@@ -67,15 +67,15 @@ class cfg_php
 	function modifier($supprimer = false)
 	{
 		$base = null;
-    	@include $this->cfg->fichier;
+    	@include $this->cfg->param->fichier;
     	if (!$base) {
     		$base = array();
     	}
 
     	$ici = &$base;
     	$this->_report = array();
-    	$ici = &$this->monte_arbre($ici, $this->cfg->casier);
-    	$ici = &$this->monte_arbre($ici, $this->cfg->cfg_id);
+    	$ici = &$this->monte_arbre($ici, $this->cfg->param->casier);
+    	$ici = &$this->monte_arbre($ici, $this->cfg->param->cfg_id);
 		foreach ($this->cfg->champs as $name => $def) {
 			if (isset($def['id'])) {
 				continue;
@@ -96,15 +96,15 @@ class cfg_php
 			}
 		}
 		if ($supprimer && !$base) {
-		    unlink($this->cfg->fichier);
+		    unlink($this->cfg->param->fichier);
 		} else {
-			if (!is_dir($dir = dirname($this->cfg->fichier))) {
+			if (!is_dir($dir = dirname($this->cfg->param->fichier))) {
 				mkdir($dir);
 			}
-			$fp = @fopen($this->cfg->fichier, "w");
+			$fp = @fopen($this->cfg->param->fichier, "w");
 			if ($fp === false) {
 				$this->cfg->message = 
-					_T('cfg:erreur_open_w_fichier', array('fichier'=> $this->cfg->fichier));
+					_T('cfg:erreur_open_w_fichier', array('fichier'=> $this->cfg->param->fichier));
 				return false;
 			}
 			$code = '<?php
@@ -114,7 +114,7 @@ class cfg_php
 * NE PAS EDITER MANUELLEMENT !
 ***************/
 
-$cfg["' . $this->cfg->nom . '"] = ' . var_export($base, true) . ';
+$cfg["' . $this->cfg->param->nom . '"] = ' . var_export($base, true) . ';
 ?>
 ';
 			fputs($fp, $code);

@@ -11,8 +11,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // cfg_extrapack retrouve et met a jour les donnees serialisees dans la colonne extra
-// d'une table "objet" $cfg->table, par défaut spip_auteurs
-// ici, $cfg->cfg_id est obligatoire ... peut-être mappé sur l'auteur courant (a voir)
+// d'une table "objet" $cfg->param->table, par défaut spip_auteurs
+// ici, $cfg->param->cfg_id est obligatoire ... peut-être mappé sur l'auteur courant (a voir)
 class cfg_tablepack
 {
 	function cfg_tablepack(&$cfg, $opt = array())
@@ -22,24 +22,24 @@ class cfg_tablepack
 		foreach ($opt as $o=>$v) {
 			$this->$o = $v;
 		}
-		$this->cfg->colonne || ($this->cfg->colonne = 'cfg'); // stockage dans quelle colonne de la table sql 
-		$this->cfg->table || ($this->cfg->table = 'spip_auteurs');
+		$this->cfg->param->colonne || ($this->cfg->param->colonne = 'cfg'); // stockage dans quelle colonne de la table sql 
+		$this->cfg->param->table || ($this->cfg->param->table = 'spip_auteurs');
 	}
 	
 // recuperer les valeurs, utilise la fonction commune lire_config() de cfg_options.php
 	function lire()
 	{
- 		if (!$this->cfg->cfg_id) {
+ 		if (!$this->cfg->param->cfg_id) {
 			$this->cfg->message = _T('cfg:id_manquant');
 			return false;
 		}
 
     	$val = lire_config(array(
-    		$this->cfg->table,
-    		$this->cfg->colonne,
+    		$this->cfg->param->table,
+    		$this->cfg->param->colonne,
     		'',
-    		$cles = explode('/', $this->cfg->cfg_id),
-    		$this->cfg->casier ? explode('/', $this->cfg->casier) : array()
+    		$cles = explode('/', $this->cfg->param->cfg_id),
+    		$this->cfg->param->casier ? explode('/', $this->cfg->param->casier) : array()
     	));
 
 		foreach ($this->cfg->champs_id as $i => $name) {
@@ -69,10 +69,10 @@ class cfg_tablepack
 	{
 		// retrouver les donnees racines
     	($base = lire_config($args = array(
-    		$this->cfg->table,
-    		$this->cfg->colonne,
+    		$this->cfg->param->table,
+    		$this->cfg->param->colonne,
     		'',
-    		$cles = explode('/', $this->cfg->cfg_id),
+    		$cles = explode('/', $this->cfg->param->cfg_id),
     		array()
     	))) || ($base = array());
     	

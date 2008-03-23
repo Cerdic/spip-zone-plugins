@@ -1,6 +1,10 @@
 Todo :
 - ménage de printemps dans les fonctions de cfg pour se caler sur le même principe que l'api des formulaires : charger/vérifier/traiter (ça n'en est pas loin)
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
+- rendre les 'storage' independants de la class cfg_formulaire pour utiliser leur fonction lire/ecrire/effacer dans lire_config, ecrire_config, effacer_config
+
+v1.4.1 (23 03 2008)
+- deplacement des parametres de cfg dans une seule entree $this->param
 
 v1.4.0 (22 03 2008)
 - #FORMULAIRE_CFG{nom_du_cfg} fonctionnant avec la nouvelle API des formulaires dynamiques (1.9.3dev)

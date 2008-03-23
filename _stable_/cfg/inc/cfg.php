@@ -71,17 +71,17 @@ class cfg extends cfg_formulaire
 		// appeler au prealable formulaire() car il recupere les <!-- machin=...->
 		// machin = titre, boite, descriptif ou autre ...
 		$formulaire = $this->formulaire($contexte);
-		($this->titre && $this->boite)
-		 ||	($this->titre && ($this->boite = $this->titre) && !($this->titre = ''))
-		 || $this->boite
-		 || ($this->boite = _T('icone_configuration_site') . ' ' . $this->nom);
+		($this->param->titre && $this->param->boite)
+		 ||	($this->param->titre && ($this->param->boite = $this->param->titre) && !($this->param->titre = ''))
+		 || $this->param->boite
+		 || ($this->param->boite = _T('icone_configuration_site') . ' ' . $this->nom);
 
 		if (!$this->autoriser()) {
 			include_spip('inc/minipres');
 			echo minipres(_T('info_acces_refuse'),
-				$this->refus
-					? $this->refus
-					: " (cfg {$config->nom} - {$config->vue} - {$config->cfg_id})"
+				$this->param->refus
+					? $this->param->refus
+					: " (cfg {$config->param->nom} - {$config->vue} - {$config->param->cfg_id})"
 				);
 			exit;
 		}
@@ -100,9 +100,9 @@ class cfg extends cfg_formulaire
 		else
 		// Mettre un cadre_trait_couleur autour du formulaire, sauf si demande
 		// express de ne pas le faire
-		if ($this->presentation == 'auto') {
+		if ($this->param->presentation == 'auto') {
 			$formulaire = 
-				debut_cadre_trait_couleur('', true, '', $this->boite)
+				debut_cadre_trait_couleur('', true, '', $this->param->boite)
 				.$formulaire
 				.fin_cadre_trait_couleur(true);
 		}
@@ -130,13 +130,13 @@ class cfg extends cfg_formulaire
 	{
 		$return = '';
 		// liens simples
-		foreach ($this->liens as $lien) {
+		foreach ($this->param->liens as $lien) {
 			$nom = _T($lien);
 			$lien =  array_pop(explode(':',$lien)); // ne garder que la derniere partie de la chaine de langue
 			$return .= ($l = $this->boite_liens($lien, $nom)) ? "<li>$l</li>\n" : "";
 		}
 		// liens multiples
-		foreach ($this->liens_multi as $lien) {
+		foreach ($this->param->liens_multi as $lien) {
 			$nom = _T($lien);
 			$lien =  array_pop(explode(':',$lien)); // ne garder que la derniere partie de la chaine de langue
 			$return .= ($l = $this->boite_liens_multi($lien, $nom)) ? "<li>$l</li>\n" : "";
@@ -208,11 +208,11 @@ class cfg extends cfg_formulaire
 		pipeline('exec_init',array('args'=>array('exec'=>'cfg'),'data'=>''));
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page($this->boite, 'cfg', $this->nom);
+		echo $commencer_page($this->param->boite, 'cfg', $this->param->nom);
 		
 		echo "<br /><br /><br />\n";
 
-		echo gros_titre(sinon($this->titre, _T('cfg:configuration_modules')), '', false);
+		echo gros_titre(sinon($this->param->titre, _T('cfg:configuration_modules')), '', false);
 
 		//echo barre_onglets("configuration", "cfg");
 
@@ -223,7 +223,7 @@ class cfg extends cfg_formulaire
 
 		if ($nom)
 			echo	debut_boite_info(true) .
-					propre($this->descriptif) .
+					propre($this->param->descriptif) .
 					fin_boite_info(true);
 
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'cfg'),'data'=>''));
@@ -231,7 +231,7 @@ class cfg extends cfg_formulaire
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'cfg'),'data'=>''));
 
 		echo
-			(($this->message && $this->afficher_messages)? 
+			(($this->message && $this->param->afficher_messages)? 
 				debut_boite_info(true) .
 				propre($this->message) .
 				fin_boite_info(true)
@@ -271,22 +271,22 @@ class cfg extends cfg_formulaire
 				// seulement si l'onglet doit etre affiche
 				$tmp = & new cfg($fonds, '');
 
-				if ($tmp->autoriser() && $tmp->onglet=='oui') {
+				if ($tmp->autoriser() && $tmp->param->onglet=='oui') {
 					$args['afficher'] = true;
 					$args['url'] = generer_url_ecrire(_request('exec'), 'cfg='.$fonds);
 					
 					$path = dirname(dirname($cfg));
 					
 					// titre
-					if ($tmp->titre)
-						$args['titre'] = $tmp->titre;
+					if ($tmp->param->titre)
+						$args['titre'] = $tmp->param->titre;
 					else
 						$args['titre'] = $fonds;
 						
 					// icone		
 					$args['icone'] = '';
-					if ($tmp->icone)
-						$args['icone'] = $path.'/'.$tmp->icone;
+					if ($tmp->param->icone)
+						$args['icone'] = $path.'/'.$tmp->param->icone;
 					else if (file_exists($path.'/plugin.xml'))
 						$args['icone'] = 'plugin-24.gif';
 					else
@@ -298,15 +298,16 @@ class cfg extends cfg_formulaire
 				
 				// rendre actif un parent si l'enfant est actif (onglet=nom_du_parent
 				// (/!\ ne pas le desactiver s'il a deja ete mis actif)
-				if ($tmp->autoriser() && $tmp->onglet && $tmp->onglet!='oui' && $tmp->onglet!='non'){
-					if (!isset($onglets[$tmp->onglet])) 
-						$onglets[$tmp->onglet]=array();
+				$o = $tmp->param->onglet;
+				if ($tmp->autoriser() && $o && $o!='oui' && $o!='non'){
+					if (!isset($onglets[$o])) 
+						$onglets[$o]=array();
 					
-					if (!isset($onglets[$tmp->onglet]['enfant_actif'])) 
-						$onglets[$tmp->onglet]['enfant_actif']=false;
+					if (!isset($onglets[$o]['enfant_actif'])) 
+						$onglets[$o]['enfant_actif']=false;
 						
-					$onglets[$tmp->onglet]['enfant_actif'] = 
-						($onglets[$tmp->onglet]['enfant_actif'] 
+					$onglets[$o]['enfant_actif'] = 
+						($onglets[$o]['enfant_actif'] 
 						|| $fonds == _request('cfg'));
 				}
 				

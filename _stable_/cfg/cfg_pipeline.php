@@ -52,8 +52,8 @@ function cfg_header_prive($flux){
 				sinon(_request('cfg'), ''),
 				sinon(_request('cfg_id'),''));
 	
-	if ($config->head) 
-		$flux .= "\n".$config->head;
+	if ($config->param->head) 
+		$flux .= "\n".$config->param->head;
 	
 	return $flux;
 }

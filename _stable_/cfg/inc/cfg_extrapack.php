@@ -19,7 +19,7 @@ class cfg_extrapack extends cfg_tablepack
 {
 	function cfg_extrapack(&$cfg, $opt = array())
 	{
-		$cfg->colonne = 'extra';
+		$cfg->param->colonne = 'extra';
 		parent::cfg_tablepack($cfg, $opt);
 	}
 }
