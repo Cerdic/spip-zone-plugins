@@ -192,7 +192,7 @@ class cfg_formulaire
 			$this->param->depot = $this->param->storage;
 		
 		if ($this->param->depot == 'classic')
-			$this->param->depot = 'meta');
+			$this->param->depot = 'meta';
 			
 		if ($this->param->depot == 'extrapack'){
 			$this->param->depot = 'tablepack';
