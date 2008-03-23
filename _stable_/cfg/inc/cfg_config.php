@@ -19,9 +19,53 @@
 // $serialize: defaut false contrairement a la balise
 // (en php on veut plutot un tableau, en squellette, du texte)
 function lire_config($cfg='', $def=null, $serialize=false) {
-	$params = cfg_analyse_param($cfg);
-	return cfg_lire_config($params['chemin'], $params['donnees'], $def, $serialize);
+	$lire = charger_fonction("lire_config","inc");
+	return $lire($cfg, $def, $serialize);
 }
+
+
+function inc_lire_config_dist($cfg='', $def=null, $serialize=false){
+	$param = charger_fonction("cfg_analyse_param","inc");
+	$params = $param($cfg);
+	
+	$chemin=$params['chemin']; 
+	$config=$params['donnees'];
+	
+	$cfg = explode('/',$chemin);
+
+	while ($x = array_shift($cfg)) {
+		if (is_string($config) && is_array($c = @unserialize($config))) {
+			$config = $c[$x];
+		} else {
+			if (is_string($config)) {
+				$config = null;
+			} else {
+				$config = $config[$x];
+			}
+		}
+	}
+
+	// transcodage vers le mode serialize
+	if ($serialize && is_array($config)) {
+		$ret = serialize($config);
+	} elseif (!$serialize && is_null($config) && !$def 
+			&& $serialize === '') // hack affreux pour le |in_array...
+	{
+		// pas de serialize requis et config vide, c'est qu'on veut un array()
+		// un truc de toggg que je ne sais pas a quoi ca sert.
+		// bon, ca sert si on fait un |in_array{#CONFIG{chose,'',''}}
+		$ret = array();
+	} elseif (!$serialize && ($c = @unserialize($config))) {
+	// transcodage vers le mode non serialize
+		$ret = $c;
+	} else {
+	// pas de transcodage
+		$ret = $config;
+	}
+	return is_null($ret) && $def ? $def : $ret;	
+}
+
+
 
 /*
  * 
@@ -33,7 +77,15 @@ function lire_config($cfg='', $def=null, $serialize=false) {
  * $serialise = true : serialise les donnees (choix par defaut)
  */
 function ecrire_config($cfg='', $valeur=null, $serialize=true){
-	$params = cfg_analyse_param($cfg);
+	$ecrire = charger_fonction("ecrire_config","inc");
+	return $ecrire($cfg, $def, $serialize);	
+}
+
+
+function inc_ecrire_config_dist($cfg='', $valeur=null, $serialize=true){
+	
+	$param = charger_fonction("cfg_analyse_param","inc");
+	$params = $param($cfg);
 	
 // 1) lecture
 	// on recupere toutes les informations depuis
@@ -163,7 +215,12 @@ function ecrire_config($cfg='', $valeur=null, $serialize=true){
  * permet de supprimer une config 
  */
 function effacer_config($cfg=''){
-	ecrire_config($cfg);		
+	$effacer = charger_fonction("effacer_config","inc");
+	return $effacer($cfg, $def, $serialize);	
+}
+
+function inc_effacer_config_dist($cfg=''){
+	return ecrire_config($cfg);	
 }
 
 
@@ -229,7 +286,7 @@ function get_table_id($table) {
  * ainsi que le chemin de la donnee
  * 
  */
-function cfg_analyse_param($cfg){
+function inc_cfg_analyse_param($cfg){
 
 	$params = array(
 		'storage' => 'meta',
@@ -381,45 +438,6 @@ function cfg_recuperer_donnees($params){
 	return $donnees;
 }
 
-
-/*
- * Lire une entree generale
- */
-function cfg_lire_config($chemin, $config, $def=null, $serialize=false){
-
-	$cfg = explode('/',$chemin);
-
-	while ($x = array_shift($cfg)) {
-		if (is_string($config) && is_array($c = @unserialize($config))) {
-			$config = $c[$x];
-		} else {
-			if (is_string($config)) {
-				$config = null;
-			} else {
-				$config = $config[$x];
-			}
-		}
-	}
-
-	// transcodage vers le mode serialize
-	if ($serialize && is_array($config)) {
-		$ret = serialize($config);
-	} elseif (!$serialize && is_null($config) && !$def 
-			&& $serialize === '') // hack affreux pour le |in_array...
-	{
-		// pas de serialize requis et config vide, c'est qu'on veut un array()
-		// un truc de toggg que je ne sais pas a quoi ca sert.
-		// bon, ca sert si on fait un |in_array{#CONFIG{chose,'',''}}
-		$ret = array();
-	} elseif (!$serialize && ($c = @unserialize($config))) {
-	// transcodage vers le mode non serialize
-		$ret = $c;
-	} else {
-	// pas de transcodage
-		$ret = $config;
-	}
-	return is_null($ret) && $def ? $def : $ret;	
-}
 
 
 ?>

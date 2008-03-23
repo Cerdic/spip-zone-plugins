@@ -301,39 +301,34 @@ class cfg_formulaire
 	}
 
 	
-	/*
-	 * Modifie ou supprime les donnees postees par le formulaire
-	 */
-	function modifier($supprimer = false)
-	{
-		// suppression ?
-		if ($supprimer) {
-			$ok = $this->depot->effacer();
-			// dans le cas d'une suppression, il faut vider $this->val qui
-			// contient encore les valeurs du formulaire, sinon elles sont 
-			// passees dans le fond et le formulaire garde les informations
-			// d'avant la suppression
-			if ($ok) {
-				$this->val = array();
-				$msg = _T('cfg:config_supprimee', array('nom' => $this->nom_config()));
-			} else {
-				$msg = _T('cfg:erreur_suppression', array('nom' => $this->nom_config()));
-			}
-			$this->message .= $msg;
-			$this->log($msg);
+	// Efface les donnees envoyees par le formulaire
+	function effacer(){
+		$ok = $this->depot->effacer();
+		// dans le cas d'une suppression, il faut vider $this->val qui
+		// contient encore les valeurs du formulaire, sinon elles sont 
+		// passees dans le fond et le formulaire garde les informations
+		// d'avant la suppression
+		if ($ok) {
+			$this->val = array();
+			$msg = _T('cfg:config_supprimee', array('nom' => $this->nom_config()));
+		} else {
+			$msg = _T('cfg:erreur_suppression', array('nom' => $this->nom_config()));
 		}
-		
+		$this->message .= $msg;
+		$this->log($msg);		
+	}
+	
+	
+	// Ecrit les donnees postees par le formulaire
+	function ecrire()
+	{	
 		// sinon verifier que le controle
 		// n'a pas retourne de message d'erreur
 		//
 		// /!\ cela implique d'avoir lance $this->verifier()
 		// a un moment donne (#FORMULAIRE_CFG le teste dans valider.php)
 		// $this->message sera vide systematiquement si verifier() n'est pas execute
-		else if ($this->message) {
-		}
-		
-		// si elles ont changees, on modifie !
-		else {
+		if (!$this->message) {
 			$ok = $this->depot->ecrire();
 			$this->message .= ($msg = $ok 
 						? _T('cfg:config_enregistree', array('nom' => $this->nom_config())) 
@@ -365,7 +360,7 @@ class cfg_formulaire
 			
 		// suppression
 		if ($supprimer) {
-			$this->modifier('supprimer');
+			$this->effacer();
 		
 		// sinon modification
 		// seulement si les types de valeurs attendus sont corrects
@@ -375,12 +370,11 @@ class cfg_formulaire
 			// et si l'identifiant a change, il faut soit le copier, soit de deplacer
 			$new_id = implode('/', array_map('_request', $this->champs_id));
 			if ($new_id != $this->param->cfg_id && !_request('_cfg_copier')) {
-				$this->modifier('supprimer');
+				$this->effacer();
 			}
 			$this->param->cfg_id = $new_id;
-			
-			
-			$this->modifier();
+
+			$this->ecrire();
 		}
 		
 		return true;		
@@ -398,7 +392,7 @@ class cfg_formulaire
 	function traiter()
 	{
 		if (!$this->charger) $this->charger();
-		if (!$this->controler) $this->verifier();
+		if (!$this->verifier) $this->verifier();
 		
 		// est on autorise ?
 		if (!$this->autoriser()) return;
@@ -453,7 +447,7 @@ class cfg_formulaire
 		    
 		    // tester la validite des champs
 		    // (TODO: scinder $erreurs et $this->message)
-		    if ($erreur = $this->controler_champ($name)) {
+		    if ($erreur = $this->verifier_champ($name)) {
 		    	$this->message .= $erreur."<br />\n";
 		    	$erreurs[$name] = $erreur;
 		    }
@@ -466,7 +460,7 @@ class cfg_formulaire
 		}
 
 		// stocker le fait que l'on a controle les valeurs
-		$this->controler = true;
+		$this->verifier = true;
 			
 	    return $erreurs;
 	}
@@ -481,7 +475,7 @@ class cfg_formulaire
 	// il faut pouvoir tester une plage de valeur par exemple, simplement
 	// une preg n'est pas ideale
 	// De plus, le multilinguisme n'est pas fait.
-	function controler_champ($name){
+	function verifier_champ($name){
 		$type = $this->champs[$name]['typ'];
 		if (!empty($type) && isset($this->types[$type])) {
 			$dtype = $this->types[$type];
