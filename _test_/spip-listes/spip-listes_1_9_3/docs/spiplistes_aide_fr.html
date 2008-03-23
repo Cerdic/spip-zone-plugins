@@ -72,6 +72,7 @@ img {
    <li><a href="#acces_gestion">Acc&eacute;der &agrave; la gestion du courrier</a></li>
    <li><a href="#casier_courriers">Le casier &agrave; courriers</a></li>
    <li><a href="#testeremail">Tester l'envoi du courrier</a></li>
+   <li><a href="#forcer_format">Forcer le format de r&eacute;ception pour un abonn&eacute;</a></li>
    <li><a href="#forcerliste">Forcer un abonnement pour une liste</a></li>
    <li><a href="#configureliste">Configurer une liste de diffusion</a></li>
    <li><a href="#temporiser">Temporiser un courrier, une liste de diffusion</a></li>
@@ -136,7 +137,7 @@ img {
 <p>Trois onglets apparaissent, ainsi qu'une bo&icirc;te de raccourcis. L'ensemble 
    vous permet de g&eacute;rer le courrier :</p>
 <p><img src="../img_docs/2007-09-05_181420.png" alt="Les onglets du plugin" width="487" height="43" /></p>
-<p><img src="../img_docs/2007-11-10_111124.png" alt="Les raccourcis du plugin" width="211" height="186" /></p>
+<p><img src="../img_docs/2008-03-23_210149.png" alt="Les raccourcis du plugin" width="210" height="219" /></p>
 <p>Le raccourci <strong>Maintenance technique</strong> n'est accessible qu'&agrave; 
    l'administrateur principal du site. Si vos listes de courriers deviennent trop 
    importantes, adressez-vous &agrave; lui, il pourra am&eacute;liorer la situation 
@@ -219,6 +220,32 @@ img {
    d'abonn&eacute;s contenant votre adresse email, testez un premier envoi par 
    l'envoi imm&eacute;diat, puis - si le test correspond &agrave; vos attentes 
    - modifiez la liste des abonn&eacute;s.</p>
+<h2><a name="forcer_format" id="forcer_format"></a>Forcer le format de r&eacute;ception 
+   pour un abonn&eacute;</h2>
+<p>Si un abonn&eacute; n'a pas d&eacute;fini sont format de r&eacute;ception de 
+   courriers, texte seul ou enrichi (html), aucun courrier ne peut lui &ecirc;tre 
+   envoy&eacute; via <strong>@spiplistes_name@</strong> (liste sur abonnement 
+   ou courrier simple).</p>
+<p>Pour forcer ce format de r&eacute;ception, affichez la page de suivi des abonnements 
+   :</p>
+<p><img src="../img_docs/2008-03-23_211201.png" alt="Bouton de suivi des abonnements" width="172" height="48" /></p>
+<p>En bas de page, la liste des auteurs appara&icirc;t : </p>
+<p><img src="../img_docs/2008-03-23_212426.png" alt="Page de suivi des abonnements" width="509" height="321" /></p>
+<p>La puce noire dans la colonne <strong>email</strong> indique que l'auteur ou 
+   le visiteur n'a pas pr&eacute;cis&eacute; son adresse de courrier &eacute;lectronique. 
+   Impossible de l'abonner !</p>
+<p>La colonne <strong>qt.</strong> indique le nombre de listes auxquelles l'abonn&eacute; 
+   est inscrit.</p>
+<p>La colonne <strong>Format</strong> pr&eacute;cise le format de r&eacute;ception 
+   actuel de l'abonn&eacute;.</p>
+<p>Vous pouvez modifier son format de r&eacute;ception en cliquant sur l'une des 
+   options pr&eacute;sentes dans la colonne <strong>Modifier</strong>.</p>
+<p>En cliquant sur le nom du compte, vous acc&eacute;dez &agrave; la page permettant 
+   de modifier son format de r&eacute;ception, mais &eacute;galement de suspendre 
+   temporairement son abonnement, de le d&eacute;sabonner de toutes les listes 
+   : </p>
+<p><img src="../img_docs/2008-03-23_213045.png" alt="Edition du compte abonné" width="492" height="282" /> 
+</p>
 <h2><a name="forcerliste" id="forcerliste"></a>Forcer un abonnement pour une liste</h2>
 <p>Lors de l'&eacute;dition d'une liste, vous pouvez forcer l'abonnement :</p>
 <ul>
@@ -274,7 +301,7 @@ img {
    le format de r&eacute;ception, voir le paragraphe <a href="#confirmerformatreception">Confirmer 
    le format de r&eacute;ception</a>.</p>
 <h2><a name="forcerabos" id="forcerabos"></a>Forcer tous les abonnements</h2>
-<p>Les super-administrateurs (<em>admins toutes rurbiques</em>) peuvent forcer 
+<p>Les super-administrateurs (<em>admins toutes rubriques</em>) peuvent forcer 
    les abonnements aux listes, au format html ou texte seul. Ils peuvent &eacute;galement 
    d&eacute;sactiver tous les abonnements. </p>
 <p>Forcer les abonnements ne veut pas dire <em>abonner</em> les comptes et donc 
