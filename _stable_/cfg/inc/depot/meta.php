@@ -11,9 +11,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // cfg_classic retrouve et met a jour les donnees a plat dans spip_meta
-class cfg_classic
+class cfg_meta
 {
-	function cfg_classic(&$cfg, $opt = array())
+	function cfg_meta(&$cfg, $opt = array())
 	{
 		$this->cfg = &$cfg;
 		foreach ($opt as $o=>$v) {
