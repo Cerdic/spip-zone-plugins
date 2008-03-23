@@ -50,19 +50,19 @@
          <div class="texte">
 			<B_unions>
 			<h3 class="spip">
-				[(#ENV{tri, epoux}|=={epoux}|?{<:genea:tri_par_epoux:>})]
-				[(#ENV{tri, epoux}|=={epouse}|?{<:genea:tri_par_epouse:>})]
-				[(#ENV{tri, epoux}|=={type}|?{<:genea:tri_par_type:>})]
-				[(#ENV{tri, epoux}|=={date}|?{<:genea:tri_par_date:>})]
+				[(#ENV{unions, 1}|=={1}|?{<:genea:tri_par_epoux:>})]
+				[(#ENV{unions, 1}|=={2}|?{<:genea:tri_par_epouse:>})]
+				[(#ENV{unions, 1}|=={3}|?{<:genea:tri_par_type:>})]
+				[(#ENV{unions, 1}|=={4}|?{<:genea:tri_par_date:>})]
 			</h3>
 			[(#ANCRE_PAGINATION)]
 			<table class="genea_tableau">
 				<thead>
 					<tr>
-						<td><a href="[(#SELFparametre_url{tri,epoux})]" alt="<:genea:tri_epoux:>"><:genea:epoux:></a></td>
-						<td><a href="[(#SELFparametre_url{tri,epouse})]" alt="<:genea:tri_epouse:>"><:genea:epouse:></a></td>
-						<td><a href="[(#SELFparametre_url{tri,type})]" alt="<:genea:tri_type:>"><:genea:type_union:></a></td>
-						<td><a href="[(#SELFparametre_url{tri,date})]" alt="<:genea:tri_date:>"><:genea:date_union:></a></td>
+						<td><a href="[(#SELFparametre_url{unions,1})]" alt="<:genea:tri_epoux:>"><:genea:epoux:></a></td>
+						<td><a href="[(#SELFparametre_url{unions,2})]" alt="<:genea:tri_epouse:>"><:genea:epouse:></a></td>
+						<td><a href="[(#SELFparametre_url{unions,3})]" alt="<:genea:tri_type:>"><:genea:type_union:></a></td>
+						<td><a href="[(#SELFparametre_url{unions,4})]" alt="<:genea:tri_date:>"><:genea:date_union:></a></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -95,7 +95,7 @@
          <INCLURE{fond=inc-rubriques}{id_rubrique}>
 
          [(#REM) Articles dans la meme rubrique ]
-         <INCLURE{fond=include/inc-genealogie}{id_genea}{small=oui}>
+         <INCLURE{fond=include/inc-genealogie}{id_genea}{unions=#ENV{unions,1}}{small=oui}>
 
       </div><!-- fin navigation -->
 

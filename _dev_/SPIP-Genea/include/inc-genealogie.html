@@ -22,6 +22,12 @@
 		</ul>]
 		<li><a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{individus}|?{' '}) class="on"]><:genea:liste_des_individus:></a></li>
 		<li><a href="[(#URL_PAGE{genea_lst-unions}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{unions}|?{' '}) class="on"]><:genea:liste_des_unions:></a></li>
+		[(#ENV{unions}|?{' '})<ul>
+			<li><a href="[(#URL_PAGE{genea_lst-unions}|parametre_url{id_genea,#ID_GENEA}|parametre_url{unions,1})]"[(#ENV{unions,1}|=={1}|?{' '}) class="on"]><:genea:tri_par_epoux:></a></li>
+			<li><a href="[(#URL_PAGE{genea_lst-unions}|parametre_url{id_genea,#ID_GENEA}|parametre_url{unions,2})]"[(#ENV{unions,1}|=={2}|?{' '}) class="on"]><:genea:tri_par_epouse:></a></li>
+			<li><a href="[(#URL_PAGE{genea_lst-unions}|parametre_url{id_genea,#ID_GENEA}|parametre_url{unions,3})]"[(#ENV{unions,1}|=={3}|?{' '}) class="on"]><:genea:tri_par_type:></a></li>
+			<li><a href="[(#URL_PAGE{genea_lst-unions}|parametre_url{id_genea,#ID_GENEA}|parametre_url{unions,4})]"[(#ENV{unions,1}|=={4}|?{' '}) class="on"]><:genea:tri_par_date:></a></li>
+		</ul>]
 		<li><a href="[(#URL_PAGE{genea_lst-longevite}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{longevite}|?{' '}) class="on"]><:genea:liste_de_longevite:></a></li>
 		[(#ENV{longevite}|?{' '})<ul>
 			<li><a href="[(#URL_PAGE{genea_lst-longevite}|parametre_url{id_genea,#ID_GENEA}|parametre_url{longevite,2})]"[(#ENV{longevite,1}|=={2}|?{' '}) class="on"]><:genea:lst_longevite_h:></a></li>

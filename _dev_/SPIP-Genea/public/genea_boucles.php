@@ -10,11 +10,11 @@
    *********************************************************************
 */
 
+// -- Definition des boucles utilisables --------------------------------
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/genea_base');
-
-// -- Definition des boucles utilisables --------------------------------
 
 //
 // <BOUCLE(GENEA)>
@@ -45,6 +45,13 @@ function boucle_GENEA_FAMILLES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] = 'spip_genea_familles';
+	if (isset($boucle->modificateur['criteres']['id_individu'])) {
+		$boucle->from[] = "spip_genea_individus AS indiv";
+		$where = array("'OR'",
+			array("'='", "'$id_table.id_epoux'", "'indiv.id_individu'"),
+			array("'='", "'$id_table.id_epouse'", "'indiv.id_individu'"));
+		$boucle->where[] = ($crit->not ? array("'NOT'", $where) : $where);
+	}
 	return calculer_boucle($id_boucle, $boucles);
 }
 
@@ -70,67 +77,68 @@ function boucle_GENEA_SOURCES_dist($id_boucle, &$boucles) {
 	return calculer_boucle($id_boucle, $boucles);
 }
 
-// -- Definition de criteres supplementaires ----------------------------
-
 //
-// {conjoint=id_individu} permet de retrouver la fiche famille d'une
-// personne et donc son conjoint et ses enfants.
+// <BOUCLE(FOR)>
+// Christian Lefebvre, Oct. 2005 - Distribué sous licence GPL
 //
-// A RETESTER
-function critere_conjoint($idb, &$boucles, $crit){
-	$op='';
+function boucle_FOR_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	//var_export($boucle);
+	if (count($boucle->separateur))
+	  $code_sep= ("'". ereg_replace("'","\'",join('',$boucle->separateur)) ."'");
+	else
+	  $code_sep="''";
 
-	echo('bienvenue<br />');
+	$debut=1;
+	$fin=null;
 
-	$boucle = &$boucles[$idb];
-	$params = $crit->param;
-	$type = array_shift($params);
-	$type = $type[0]->texte;
+	foreach($boucle->criteres as $critere) {
+	  if($critere->op!='=') continue;
+	  $val= calculer_liste($critere->param[1],
+						   array(), $boucles, $boucle->id_parent);
 
-	echo "* ".serialize($params)."</br>";
-	echo "* ".serialize($type)."</br>";
-
-	if(preg_match(',^(\w+)([<>=])([0-9]+)$,',$type,$r)){
-		$type=$r[1];
-		$op=$r[2];
-		$op_val=$r[3];
+	  switch($critere->param[0][0]->texte) {
+	  case 'debut': $debut= $val; break;
+	  case 'fin'  : $fin  = $val; break;
+	  }
 	}
 
-	echo "* $type - $op - $op_val<br />";
-
-	$table = $boucle->id_table;
-	$q = '('. $table . '.id_epoux=' . $type .' OR ' . $table . '.id_epouse=' . $type . ')';
-	echo $q;
-//	$boucle->where[] = $q;
-//	$boucle->where[] = '('. $table . '.id_epoux=' . $op_val .' OR ' . $table . '.id_epouse=' . $op_val . ')';
-}
-
-//
-// {importance xxx} permet de classer par importance un champ de la table
-//
-function critere_importance($idb, &$boucles, $crit){
-//	global $table_prefix;
-	$op='';
-	$boucle = &$boucles[$idb];
-	$params = $crit->param;
-	$type = array_shift($params);
-	$type = $type[0]->texte;
-	if(preg_match(',^(\w+)([<>=])([0-9]+)$,',$type,$r)){
-		$type=$r[1];
-		$op=$r[2];
-		$op_val=$r[3];
+	if($fin===null) {
+	  erreur_squelette("genea:zbug_fin_non_definie",
+					   $boucle->id_boucle);
 	}
-	$champ = $boucle->id_table . '.' . $type;
-	$boucle->select[] = 'COUNT('.$champ.') AS importance';
-	$boucles[$idb]->group[] = $champ;
-}
-//
-// -- Balise qui permet de lire le champ IMPORTANCE créé par {importance xxx}
-//
-function balise_IMPORTANCE_dist($p){
-	$p->code = '$Pile[$SP][\'importance\']';
-	$p->interdire_scripts = false;
-	return $p;
+	//echo "\nboucle_FOR($debut, $fin, $pas)\n";
+
+	if(count($boucle->order)==0) {
+		$pas=1;
+		$op1='<=';
+		$op2='+=';
+	} elseif($boucle->order[0]{0}=='!') {
+		$pas= substr($boucle->order[0], 1);
+		$op1='>=';
+		$op2='-=';
+		$zz=$debut;
+		$debut= $fin;
+		$fin= $zz;
+	} else {
+		$pas= $boucle->order[0];
+		$op1='<=';
+		$op2='+=';
+	}
+
+	$code=<<<CODE
+	\$code=array();
+	for(\$i=$debut; \$i$op1$fin; \$i$op2$pas) {
+	\$SP++;
+		\$Numrows['$id_boucle']['compteur_boucle']=\$i;
+		\$code[]=$boucle->return;
+	\$SP--;
+	}
+	\$t0= join($code_sep, \$code);
+	return \$t0;
+CODE;
+
+	return $code;
 }
 
 ?>

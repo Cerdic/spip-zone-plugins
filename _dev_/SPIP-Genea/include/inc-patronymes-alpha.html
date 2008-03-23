@@ -1,34 +1,11 @@
 <h3 class="spip"><:genea:lst_patronymes_alpha:></h3>
-<table class="spip" summary="">
+<table class="spip genea_tableau" summary="">
 	<thead>
 		<tr>
 			<td class="genea_i"><a href="#anchor-0" class="spip_in">?</a></td>
-			<td class="genea_i"><a href="#anchor-A" class="spip_in">A</a></td>
-			<td class="genea_i"><a href="#anchor-B" class="spip_in">B</a></td>
-			<td class="genea_i"><a href="#anchor-C" class="spip_in">C</a></td>
-			<td class="genea_i"><a href="#anchor-D" class="spip_in">D</a></td>
-			<td class="genea_i"><a href="#anchor-E" class="spip_in">E</a></td>
-			<td class="genea_i"><a href="#anchor-F" class="spip_in">F</a></td>
-			<td class="genea_i"><a href="#anchor-G" class="spip_in">G</a></td>
-			<td class="genea_i"><a href="#anchor-H" class="spip_in">H</a></td>
-			<td class="genea_i"><a href="#anchor-I" class="spip_in">I</a></td>
-			<td class="genea_i"><a href="#anchor-J" class="spip_in">J</a></td>
-			<td class="genea_i"><a href="#anchor-K" class="spip_in">K</a></td>
-			<td class="genea_i"><a href="#anchor-L" class="spip_in">L</a></td>
-			<td class="genea_i"><a href="#anchor-M" class="spip_in">M</a></td>
-			<td class="genea_i"><a href="#anchor-N" class="spip_in">N</a></td>
-			<td class="genea_i"><a href="#anchor-O" class="spip_in">O</a></td>
-			<td class="genea_i"><a href="#anchor-P" class="spip_in">P</a></td>
-			<td class="genea_i"><a href="#anchor-Q" class="spip_in">Q</a></td>
-			<td class="genea_i"><a href="#anchor-R" class="spip_in">R</a></td>
-			<td class="genea_i"><a href="#anchor-S" class="spip_in">S</a></td>
-			<td class="genea_i"><a href="#anchor-T" class="spip_in">T</a></td>
-			<td class="genea_i"><a href="#anchor-U" class="spip_in">U</a></td>
-			<td class="genea_i"><a href="#anchor-V" class="spip_in">V</a></td>
-			<td class="genea_i"><a href="#anchor-W" class="spip_in">W</a></td>
-			<td class="genea_i"><a href="#anchor-X" class="spip_in">X</a></td>
-			<td class="genea_i"><a href="#anchor-Y" class="spip_in">Y</a></td>
-			<td class="genea_i"><a href="#anchor-Z" class="spip_in">Z</a></td>
+		<BOUCLE_forinitial(FOR){debut=65}{fin=90}>
+			<td class="genea_i"><a href="#anchor-[(#COMPTEUR_BOUCLE|chr)]" class="spip_in">[(#COMPTEUR_BOUCLE|chr)]</a></td>
+		</BOUCLE_forinitial>
 		</tr>
 	</thead>
 	<tbody>
@@ -41,6 +18,19 @@
 			</BOUCLE_famille-lettre_0>
 			</td>
 		</tr>
+<!--
+< BOUCLE_forliste(FOR){debut=65}{fin=90}>
+< !-- Lettre [(# COMPTEUR_BOUCLE|chr)] -- >
+	<tr class="[(# COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})]">
+			<td colspan="2" class="genea_i"><a name="anchor-[(# COMPTEUR_BOUCLE|chr)]">[(# COMPTEUR_BOUCLE|chr)]</a></td>
+			<td colspan="25">
+			< BOUCLE_famille-lettre(GENEA_INDIVIDUS){id_genea}{patronyme IN ^[aA]}{importance patronyme} {par patronyme} {" "}>
+				[<a href="[(#URL_PAGE{genea_lst-individus}|parametre_url{id_genea,#ID_GENEA}|parametre_url{patronyme,#PATRONYME})]" class="spip_in">(#PATRONYME)</a> &#91;[(#IMPORTANCE)]&#93;]
+			< /BOUCLE_famille-lettre>
+			</td>
+		</tr>
+< /BOUCLE_forliste>
+-->
 <!-- Lettre A -->
 		<tr class="row_odd">
 			<td colspan="2" class="genea_i"><a name="anchor-A">A</a></td>

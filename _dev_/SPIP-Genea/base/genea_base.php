@@ -203,11 +203,26 @@ $tables_principales['spip_genea_doc_sources'] = array(
 $table_des_tables['genea_doc_sources'] = "genea_doc_sources";
 $table_primary['genea_doc_sources'] = "id_document";
 
+//
+// -- Definition des tables virtuelles ----------------------------------
+//
+
+// -- Definition de la table virtuel FOR --------------------------------
+// Christian Lefebvre, Oct. 2005 - Distribué sous licence GPL
+$tables_principales['spip_for'] = array('field' => array(
+	"debut" => "int",
+	"fin" => "int"), 'key' => array());
+$table_des_tables['for'] = 'for';
+
+//
 // -- Definition des jonctions de tables --------------------------------
+//
 $tables_jointures['spip_rubriques'][] = 'genea';
 $tables_jointures['spip_genea_individus'][] = 'genea';
 
+//
 // -- Definition des parametres de traitement ---------------------------
+//
 $table_des_traitements['DATE_EVT'][] = 'vider_date(%s)';
 $table_des_traitements['PATRONYME'][] = 'typo(majuscule(%s))';
 $table_des_traitements['PRENOMS'][] = 'typo(majuscule(%s))';

@@ -75,4 +75,14 @@ function balise_SOSA($p){
 	$p->interdire_scripts = true;
 	return $p;
 }
+
+//
+// -- Balise qui permet de lire le champ IMPORTANCE créé par {importance xxx}
+//
+function balise_IMPORTANCE_dist($p){
+	$p->code = '$Pile[$SP][\'importance\']';
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 ?>
