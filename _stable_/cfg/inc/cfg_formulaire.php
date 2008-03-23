@@ -22,8 +22,6 @@ class cfg_formulaire
 	var $optsto = array();
 // le "faire" de autoriser($faire), par defaut, autoriser_configurer_dist()
 	var $autoriser = 'configurer';
-// la config est-elle permise ?
-	var $_permise = false;
 // en cas de refus, un message informatif [(#REM) refus=...]
 	var $refus = '';
 // partie du fond cfg a inserer dans le head par le pipeline header_prive (todo insert_head?)
@@ -107,9 +105,6 @@ class cfg_formulaire
 			
 		// recherche et stockage des noms de champs de formulaire
 		$this->message .=  $this->recuperer_noms_champs();
-		
-		// est-ton autoriser a voir ce formulaire ?
-		$this->_permise = $this->autoriser();
 		
 		/*
 		 * Cas des champs multi, si des champs (Y)
@@ -386,7 +381,7 @@ class cfg_formulaire
 		if (!$this->controler) $this->verifier();
 		
 		// est on autorise ?
-		if (!$this->_permise) return;
+		if (!$this->autoriser()) return;
 
 		// enregistrer les modifs
 		if (!$this->enregistrer())
