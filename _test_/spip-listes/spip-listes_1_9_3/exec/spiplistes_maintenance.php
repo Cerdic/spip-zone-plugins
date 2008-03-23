@@ -225,7 +225,7 @@ function exec_spiplistes_maintenance () {
 		foreach($tous_les_statuts_courriers as $statut) {
 			if(spiplistes_courriers_casier_count($statut)) {
 				$titre = spiplistes_items_get_item('tab_t', $statut);
-				$page_result .= spiplistes_form_input_checkbox ('supprimer_courriers_'.$statut, $statut, $titre, true);
+				$page_result .= spiplistes_form_input_checkbox ('supprimer_courriers_'.$statut, $statut, $titre, false, true);
 			}
 		}
 		$page_result .= spiplistes_form_fieldset_fin(true);
@@ -258,7 +258,7 @@ function exec_spiplistes_maintenance () {
 			if($row['message_auto']=='oui') {
 				$titre = $row['titre'];
 				$id_liste = intval($row['id_liste']);
-				$page_result .= spiplistes_form_input_checkbox ('reset_liste_'.$id_liste, $id_liste, $titre, true);
+				$page_result .= spiplistes_form_input_checkbox ('reset_liste_'.$id_liste, $id_liste, $titre, false, true);
 			}
 		}
 		$page_result .= ""
@@ -289,7 +289,7 @@ function exec_spiplistes_maintenance () {
 		foreach($listes_array as $row) {
 			$titre = $row['titre'];
 			$id_liste = intval($row['id_liste']);
-			$page_result .= spiplistes_form_input_checkbox ('supprimer_liste_'.$id_liste, $id_liste, $titre, true);
+			$page_result .= spiplistes_form_input_checkbox ('supprimer_liste_'.$id_liste, $id_liste, $titre, false, true);
 		}
 		$page_result .= spiplistes_form_fieldset_fin(true);
 	}
@@ -316,7 +316,7 @@ function exec_spiplistes_maintenance () {
 			. spiplistes_form_fieldset_debut (
 				_T('spiplistes:suppression_', $objet).spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_abonnes_formats_desc", true)
 				, true) 
-			. spiplistes_form_input_checkbox ('confirmer_supprimer_formats', 'oui', _T('spiplistes:confirmer_supprimer_formats'), true)
+			. spiplistes_form_input_checkbox ('confirmer_supprimer_formats', 'oui', _T('spiplistes:confirmer_supprimer_formats'), false, true)
 			. spiplistes_form_fieldset_fin(true)
 			. spiplistes_form_bouton_valider('btn_supprimer_formats', _T('bouton_valider'), false, true)
 			. spiplistes_form_fin(true)

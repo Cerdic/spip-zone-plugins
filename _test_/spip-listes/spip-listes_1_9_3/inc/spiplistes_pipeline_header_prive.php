@@ -29,6 +29,7 @@ function spiplistes_header_prive ($flux) {
 <style type='text/css'>
 <!--
 .spiplistes fieldset { border:1px solid black; }
+.spiplistes .message-alerte { color:red; font-weight:bold; }
 -->
 </style>
 "

@@ -87,9 +87,10 @@ function exec_spiplistes_abonne_edit () {
 			foreach(explode(",", $sql_select) as $key) {
 				$$key = $row[$key];
 			}
-		}
-		else {
+			$format_id_auteur = spiplistes_format_abo_demande($id_auteur);
+		} else {
 			$id_auteur = 0;
+			$format_id_auteur = false;
 		}
 	}
 	$format_abo = spiplistes_format_abo_demande($id_auteur);
@@ -173,6 +174,11 @@ function exec_spiplistes_abonne_edit () {
 	
 	// Si adresse mail, permettre l'abonnement
 	if(strlen($email)) {
+		$message_alert_abo = 
+			(!$format_id_auteur)
+			? spiplistes_form_description_alert(_T('spiplistes:abonne_sans_format'), true)
+			: ""
+			;
 		$page_result .= ""
 			. "</td>"
 			. "<td>"
@@ -185,11 +191,12 @@ function exec_spiplistes_abonne_edit () {
 			. "</tr></table>\n"
 			. "<br />\n"
 			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png', true, '', _T('spiplistes:format_de_reception').":")
-			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT)."' method='post'>\n"
-			. "<p class='verdana2'>"._T('spiplistes:Format_de_reception_desc')."</p>\n"
+			. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT), 'post', true)
+			. spiplistes_form_description(_T('spiplistes:format_de_reception_desc'), true)
+			. $message_alert_abo
 			. debut_cadre_relief('', true)
 			. "<table width='100%'  border='0' cellspacing='0' cellpadding='0'><tr>"
-			. "<td class='verdana2'>"._T('spiplistes:format_de_reception').":</td>\n"
+			. "<td class='verdana2'>"._T('spiplistes:format_de_reception')."</td>\n"
 			. "<td>"
 			. "<input name='modif_abo' ".(($format_abo == 'html')? 'checked=checked)': '')." value='html' type='radio' id='f_html' />\n"
 			. "<label for='f_html' class='verdana2'>"._T('spiplistes:html')."</label>\n"
@@ -210,11 +217,9 @@ function exec_spiplistes_abonne_edit () {
 			. "<input name='modif_abo' ".(($format_abo == 'non')? 'checked=\"checked\")' : '')." value='non' type='radio' id='f_non' />"
 			. "<label for='f_non' class='verdana2'>"._T('spiplistes:Desabonner_definitif')."</label>\n"
 			. fin_cadre_relief(true)
-			. "<input type='hidden' name='id_auteur'  value=$id_auteur >\n"
-			//
-			// bouton validation
-			. "<div style='text-align:right;'><input type='submit' name='btn_confirmer_format' value='"._T('bouton_valider')."' class='fondo' /></div>\n"
-			. "</form>\n"
+			. "<input type='hidden' name='id_auteur' value=$id_auteur >\n"
+			. spiplistes_form_bouton_valider('btn_confirmer_format', _T('bouton_valider'), false, true)
+			. spiplistes_form_fin(true)
 			. fin_cadre_relief(true)
 			;
 	} else {

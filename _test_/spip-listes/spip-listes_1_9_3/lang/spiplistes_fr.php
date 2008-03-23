@@ -86,7 +86,9 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 	de vos listes pr&eacute;f&eacute;r&eacute;es, choisissez un format de r&eacute;ception 
 	et validez ce formulaire. "
 , 'adresse_mail_obligatoire' => "Adresse mail manquante. Abonnement impossible."
-
+, 'abonne_sans_format' => "Ce compte est actuellement d&eacute;sabonn&eacute;. Aucun format de courrier n'est 
+	d&eacute;fini. Il ne peut pas recevoir de courrier. D&eacute;finissez un format 
+	de r&eacute;ception pour ce compte afin de valider son abonnement."
 
 //B
 
@@ -222,7 +224,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'format_html' => 'Format html : ',
 'format_texte' => 'Format texte : ',
 'format_de_reception' => "Format de r&eacute;ception",
-'Format_de_reception_desc' => "Vous pouvez choisir un format global de r&eacute;ception des courriers pour 
+'format_de_reception_desc' => "Vous pouvez choisir un format global de r&eacute;ception des courriers pour 
    cet abonn&eacute;.<br /><br />
    Vous pouvez &eacute;galement d&eacute;sabonner temporairement ce contact. 
    Il reste inscrit dans les listes en tant que destinataire, mais les courriers 

@@ -156,17 +156,24 @@ function spiplistes_suspendre_abos($id_auteur) {
 // si id_auteur, celui-ci uniquement
 // sinon, 'tous' pour modifier globalement
 function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
-	$format = spiplistes_format_est_correct($format) ? $format : false;
-	if($id_auteur=='tous') {
+	if($format = (spiplistes_format_est_correct($format) ? $format : false)) {
+		$sql_query = "UPDATE spip_auteurs_elargis SET `spip_listes_format`='".$format."'";
 		$where = "";
+		if($id_auteur=='tous') {
+		}
+		else if(($id_auteur = intval($id_auteur)) > 0) {
+			if(!spiplistes_format_abo_demande($id_auteur)) {
+				$sql_query = "INSERT INTO spip_auteurs_elargis (id_auteur,`spip_listes_format`) VALUES ($id_auteur,'$format')";
+			} else {
+				$where = " WHERE id_auteur=$id_auteur LIMIT 1";
+			}
+		}
+		else {
+			return(false);
+		}
+		return(spip_query($sql_query." ".$where));
 	}
-	else if(($id = intval($id_auteur)) > 0) {
-		$where = " WHERE id_auteur=$id LIMIT 1";
-	}
-	else {
-		return(false);
-	}
-	return (spip_query("UPDATE spip_auteurs_elargis SET `spip_listes_format`='".$format."' $where"));
+	return(false);
 }
 
 function spiplistes_format_abo_demande($id_auteur) {

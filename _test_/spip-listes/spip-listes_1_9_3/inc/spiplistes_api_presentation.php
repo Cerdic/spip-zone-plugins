@@ -104,6 +104,20 @@ function spiplistes_form_bouton_valider ($name, $value, $reset = false, $return 
 }
 
 // CP-20080323
+function spiplistes_form_debut ($action = '#', $method = 'post', $return = false) {
+	$result = "<form action='".$action."' method='$method'>\n";
+	if($return) return($result);
+	else echo($result);
+}
+
+// CP-20080323
+function spiplistes_form_fin ($return = false) {
+	$result = "</form>\n";
+	if($return) return($result);
+	else echo($result);
+}
+
+// CP-20080323
 function spiplistes_form_fieldset_debut ($legend = "", $return = false) {
 	if(!empty($legend)) {
 		$legend = "<legend style='padding:0 1ex;'>".$legend."</legend>\n";
@@ -121,25 +135,11 @@ function spiplistes_form_fieldset_fin ($return = false) {
 }
 
 // CP-20080323
-function spiplistes_form_debut ($action = '#', $method = 'post', $return = false) {
-	$result = "<form action='".$action."' method='$method'>\n";
-	if($return) return($result);
-	else echo($result);
-}
-
-// CP-20080323
 function spiplistes_fieldset_legend_detail ($texte = '', $return = false) {
 	$result = "";
 	if(!empty($texte)) {
 		$result = " <span class='spiplistes-legend-stitre'>(".$texte.")</span>";
 	}
-	if($return) return($result);
-	else echo($result);
-}
-
-// CP-20080323
-function spiplistes_form_fin ($return = false) {
-	$result = "</form>\n";
 	if($return) return($result);
 	else echo($result);
 }
@@ -151,21 +151,27 @@ function spiplistes_form_description ($description, $return = false) {
 }
 
 // CP-20080323
-function spiplistes_form_message ($message, $return = false) {
+function spiplistes_form_description_alert ($description, $return = false) {
+	$result = spiplistes_form_message($description, $return, "message-alerte");
+	if($return) return($result);
+}
+
+// CP-20080323
+function spiplistes_form_message ($message, $return = false, $class = "") {
 	$result = "";
 	if(!empty($message)) {
-		$result = "<p class='verdana2'>".$message."</p>\n";
+		$result = "<p class='verdana2 $class'>".$message."</p>\n";
 	}
 	if($return) return($result);
 	else echo($result);
 }
 
 // CP-20080323
-function spiplistes_form_input_checkbox ($name, $value, $label, $return = false) {
+function spiplistes_form_input_checkbox ($name, $value, $label, $checked, $return = false) {
 	$result = ""
 		. "<div>"
 		. "<label>"
-		. "<input type='checkbox' id='$name' name='$name' value='$value' />"
+		. "<input type='checkbox' id='$name' name='$name' value='$value'".($checked ? "checked='checked'" : "")."/>"
 		. $label
 		. "</label>"
 		. "</div>\n"
@@ -173,5 +179,5 @@ function spiplistes_form_input_checkbox ($name, $value, $label, $return = false)
 	if($return) return($result);
 	else echo($result);
 }
-
+//
 ?>
