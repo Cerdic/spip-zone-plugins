@@ -38,6 +38,15 @@ function balise_FORMULAIRE_ARTICLE_stat($args, $filtres) {
 
 function balise_FORMULAIRE_ARTICLE_dyn() {
 
+/* RESTE A FAIRE
+ * - les notifications
+ * - l'insertion de documents distants
+ * - permettre le choix du processus de publication
+ */
+
+/* BUG A CORRIGER
+ */
+
 /*
  * récuperation des données indispensables
  * le global $_FILES : indispensables pour récuperer les documents joints
@@ -122,6 +131,8 @@ $variables['champs_pri']['mess_error'] = '';
 $variables['champs_aux']['url_site'] = _request('url_site');
 $variables['champs_aux']['doc'] = '';
 $variables['champs_aux']['type_doc'] = '';
+$variables['champs_aux']['titre_doc'] = '';
+$variables['champs_aux']['description_doc'] = '';
 $variables['champs_aux']['choix_agenda'] = '';
 $variables['champs_aux']['annee'] = '';
 $variables['champs_aux']['mois'] = '';
@@ -138,6 +149,8 @@ $variables['type']['descriptif'] = 'texte';
 $variables['type']['soustitre'] = 'texte';
 $variables['type']['surtitre'] = 'texte';
 $variables['type']['chapo'] = 'texte';
+$variables['type']['titre_doc'] = 'texte';
+$variables['type']['description_doc'] = 'texte';
 
 // création pipeline variables d'environnement
 // ce pipeline permet aux plugins d'ajouter des actions et/ou des champs
@@ -647,7 +660,7 @@ if(!empty($variables['actions']['media'])) {
 			));
 		if ($return['extension'] == $type_ext) {
 
-			if ($type_doc == 'logo') { // reprise du code iconifier ... action/iconifer.php
+			if ($variables['champs_aux']['type_doc'] == 'logo') { // reprise du code iconifier ... action/iconifer.php
 				// si le logo existe déjà : refus
 				if (!@file_exists( _DIR_LOGOS . 'arton'.$variables['champs_pri']['id_article']. '.' . $type_ext)) {
 					// placer le document arton$article dans IMG
@@ -698,7 +711,38 @@ if(!empty($variables['actions']['media'])) {
 				}
 			}
 			else {
-				inc_ajouter_documents_dist ($tmp, $fichier, "article", $variables['champs_pri']['id_article'], $type_doc, $id_document, $documents_actifs);
+
+				/*
+				 * remplacer par ajouter_un_document a la prochaine version de spip
+ 				 * ajouter_un_document();
+				 * inc/ajouter_documents.php
+				 */
+
+				inc_ajouter_documents_dist ($tmp,
+							 $fichier,
+							 "article",
+							 $variables['champs_pri']['id_article'],
+							 $variables['champs_aux']['type_doc'],
+							 $id_document,
+							 $documents_actifs);
+
+				// récupération de l'id
+				$ret = sql_fetch(sql_select(
+					array('MAX(id_document) as id_document'),
+					array('spip_documents')
+				));
+		
+				$id_document = $ret['id_document'];
+
+				// création champs dans la table documents
+				sql_update(
+					'spip_documents',
+					array(
+						'titre' => sql_quote($variables['champs_aux']['titre_doc']),
+						'descriptif' => sql_quote($variables['champs_aux']['description_doc'])
+					),
+					array('id_document = '.$id_document)
+				);
 			}
 		}
 		else { // sinon, erreur

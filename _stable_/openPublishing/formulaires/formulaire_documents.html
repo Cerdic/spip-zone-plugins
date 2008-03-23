@@ -7,10 +7,13 @@
 	<small>
 		<p>
 		<input name='doc' type='file' class='fondl' style='width: 100%;'><br>
-		<input type=radio name="type" value="vignette" checked>&nbsp;<:opconfig:image_inclusion:><br>
-		<input type=radio name="type" value="document">&nbsp;<:opconfig:document_inclusion:><br>
-		[(#CONFIG{op/Logo,''}|=={yes}?{<input type=radio name="type" value="logo">&nbsp;<:opconfig:logo_inclusion:><br />})]
+		<input type="radio" name="type_doc" value="vignette" checked>&nbsp;<:opconfig:image_inclusion:><br>
+		<input type="radio" name="type_doc" value="document">&nbsp;<:opconfig:document_inclusion:><br>
+		[(#CONFIG{op/Logo,''}|=={yes}?{<input type=radio name="type_doc" value="logo">&nbsp;<:opconfig:logo_inclusion:><br />})]
 		</p>
+		<p>
+		<input type="text" name="titre_doc"  size="30" /><br />
+		<textarea name="description_doc"></textarea><br />
 
 		<p>
 		<input name='media' type='submit' VALUE='#ENV*{bouton}' CLASS='spip_bouton'>

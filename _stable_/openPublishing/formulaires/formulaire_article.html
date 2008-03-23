@@ -28,14 +28,17 @@
 		#SET{ratio,#GET{ratio_x}|<={#GET{ratio_y}}|?{#GET{ratio_x},#GET{ratio_y}}}
 
 		<div style="float:left;">
-			[(#FICHIER|image_reduire_par{#GET{ratio}}|image_recadre{115,115,center})]
 			
 			<center>
+			[(#TITRE)<br />]
+			[(#DESCRIPTIF)<br />]
 			[(#MODE|=={vignette}|?{
+				[<a href="#URL_DOCUMENT">(#FICHIER|image_reduire_par{#GET{ratio}}|image_recadre{115,115,center})</a>]<br />
 				<<code>img</code>#ID_DOCUMENT<code>|left</code>><br />
 				<<code>img</code>#ID_DOCUMENT<code>|center</code>><br />
 				<<code>img</code>#ID_DOCUMENT<code>|right</code>><br />
 				,
+				[(#LOGO_DOCUMENT|#URL_DOCUMENT)]<br />
 				<<code>doc</code>#ID_DOCUMENT<code>|left</code>><br />
 				<<code>doc</code>#ID_DOCUMENT<code>|center</code>><br />
 				<<code>doc</code>#ID_DOCUMENT<code>|right</code>><br />
