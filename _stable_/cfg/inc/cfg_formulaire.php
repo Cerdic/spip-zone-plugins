@@ -185,8 +185,7 @@ class cfg_formulaire
 	// ce qui evite de dupliquer les tableaux 
 	// (si on utilisait recuperer_parametres() a la place)
 	function effacer_parametres(){
-			$this->fond_compile = preg_replace('/(<!-- ([a-z0-9_]\w+)(\*)?=)(.*?)-->/sim',
-								'', $this->fond_compile);		
+			$this->fond_compile = effacer_parametres_cfg($this->fond_compile);		
 	}
 	
 	/*
