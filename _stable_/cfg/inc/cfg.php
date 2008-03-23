@@ -76,7 +76,7 @@ class cfg extends cfg_formulaire
 		 || $this->boite
 		 || ($this->boite = _T('icone_configuration_site') . ' ' . $this->nom);
 
-		if (!$this->_permise || !$this->autoriser()) {
+		if (!$this->autoriser()) {
 			include_spip('inc/minipres');
 			echo minipres(_T('info_acces_refuse'),
 				$this->refus
@@ -271,7 +271,7 @@ class cfg extends cfg_formulaire
 				// seulement si l'onglet doit etre affiche
 				$tmp = & new cfg($fonds, '');
 
-				if ($tmp->_permise && $tmp->onglet=='oui') {
+				if ($tmp->autoriser() && $tmp->onglet=='oui') {
 					$args['afficher'] = true;
 					$args['url'] = generer_url_ecrire(_request('exec'), 'cfg='.$fonds);
 					
@@ -298,7 +298,7 @@ class cfg extends cfg_formulaire
 				
 				// rendre actif un parent si l'enfant est actif (onglet=nom_du_parent
 				// (/!\ ne pas le desactiver s'il a deja ete mis actif)
-				if ($tmp->_permise && $tmp->onglet && $tmp->onglet!='oui' && $tmp->onglet!='non'){
+				if ($tmp->autoriser() && $tmp->onglet && $tmp->onglet!='oui' && $tmp->onglet!='non'){
 					if (!isset($onglets[$tmp->onglet])) 
 						$onglets[$tmp->onglet]=array();
 					

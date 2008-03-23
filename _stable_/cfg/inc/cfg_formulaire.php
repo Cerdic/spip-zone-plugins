@@ -166,19 +166,17 @@ class cfg_formulaire
 		// pour compatibilite, recuperer l'ancien code #REM
 		$this->recuperer_parametres_rem();
 		
-		$this->rempar = array(array());
-		if (preg_match_all('/<!-- [a-z0-9_]\w+\*?=/i', $this->controldata, $this->rempar)) {
-			// il existe des champs <!-- param=valeur -->, on les stocke
-			$this->recuperer_fond();
-			$this->current_rempar = 0;
-			$this->fond_compile = preg_replace_callback('/(<!-- ([a-z0-9_]\w+)(\*)?=)(.*?)-->/sim',
-								array(&$this, 'post_params'), $this->fond_compile);
-			// s'il en reste : il y a un probleme !
-			if (preg_match('/<!-- [a-z0-9_]\w+\*?=/', $this->fond_compile)) {
-				die('erreur manque parametre externe: '
-					. htmlentities(var_export($this->rempar, true)));
-			}
-		}		
+		// il existe des champs <!-- param=valeur -->, on les stocke
+		$this->recuperer_fond();
+		$this->fond_compile = preg_replace_callback('/(<!-- ([a-z0-9_]\w+)(\*)?=)(.*?)-->/sim',
+							array(&$this, 'post_params'), $this->fond_compile);
+	
+		// s'il en reste : il y a un probleme !
+		// est-ce utile de tester ça ?
+		if (preg_match('/<!-- [a-z0-9_]\w+\*?=/', $this->fond_compile)) {
+			die('erreur manque parametre externe: '
+				. htmlentities(var_export($this->cfg_param, true)));
+		}	
 	}
 	
 	// une fonction pour effacer les parametres du code html
@@ -260,12 +258,15 @@ class cfg_formulaire
 	/*
 	 * Verifie les autorisations 
 	 * d'affichage du formulaire
-	 * (parametre autoriser=quoi)
+	 * (parametre autoriser=faire)
 	 */
 	function autoriser()
 	{
+		static $autoriser=-1;
+		if ($autoriser !== -1) return $autoriser;
+		
 		include_spip('inc/autoriser');
-		return autoriser($this->autoriser);
+		return $autoriser = autoriser($this->autoriser);
 	}
 
 	/*
@@ -527,13 +528,7 @@ class cfg_formulaire
 	 * 
 	 */
 	function post_params($regs) {
-		// a priori, eviter l'injection du motif
-		if (isset($this->rempar)) {
-			if (!isset($this->rempar[0][$this->current_rempar])
-				|| $regs[1] != $this->rempar[0][$this->current_rempar++]) {
-				die("erreur parametre interne: " . htmlentities(var_export($regs[1], true)));
-			}
-		}
+
 		// $regs[3] peut valoir '*' pour signaler un tableau
 		$regs[4] = trim($regs[4]);
 		
