@@ -130,7 +130,7 @@ function exec_spiplistes_liste_edit(){
 		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_info_id(_T('spiplistes:liste_numero'), $id_liste, true)
-		. spiplistes_naviguer_paniers_listes(_T('spiplistes:Aller_aux_listes'), true)
+		. spiplistes_naviguer_paniers_listes(_T('spiplistes:aller_aux_listes_'), true)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
 		//. spiplistes_boite_autocron(true) // ne pas géner l'édition

@@ -36,7 +36,7 @@ function spiplistes_auteur_abonnement () {
 			}
 			else {
 				return(	""
-					. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png", true, "", _T('spiplistes:Abonnements_aux_courriers'))
+					. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png", true, "", _T('spiplistes:abonnements_aux_courriers'))
 					. "<p class='verdana2'>"
 					. _T('spiplistes:Adresse_email_obligatoire')
 					. "</p>"
@@ -195,7 +195,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			$result .= ""
 				. "<!-- formulaire abonnement spiplistes -->\n" 
 				. "<a name='abonnement'></a>\n"
-				. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png", true, "", $bouton_block("abos_block")._T('spiplistes:Abonnements_aux_courriers').__plugin_aide("abo_fiche_auteur"))
+				. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png", true, "", $bouton_block("abos_block")._T('spiplistes:abonnements_aux_courriers').__plugin_aide("abo_fiche_auteur"))
 				. $debut_block("abos_block")
 				. "<form action='".generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur")."' method='post' style='margin-bottom:0;' name='abos_formulaire'>\n"
 				. debut_cadre_formulaire("", true)
@@ -203,7 +203,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				.	(
 						($abo_format!='html' && $abo_format!='texte')
 						? _T('spiplistes:Alert_abonnement_sans_format')
-						: _T('spiplistes:Vous_etes_abonne_aux_listes_selectionnees').":"
+						: _T('spiplistes:vous_etes_abonne_aux_listes_selectionnees_').":"
 					)
 				. "</p>\n"
 				//

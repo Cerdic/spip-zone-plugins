@@ -50,7 +50,7 @@ include_spip('inc/spiplistes_api_globales');
 */
 	
 function spiplistes_meleuse () {
-spiplistes_log("MEL: spiplistes_meleuse()", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 
 	include_spip('inc/meta');
 	include_spip('inc/texte');
@@ -158,7 +158,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", SPIPLISTES_LOG_DEBUG);
 					$titre_liste = $ro["titre"];
 					$id = $ro["id_liste"];
 					$email_envoi = $ro["email_envoi"];
-//spiplistes_log("MEL: "._T('spiplistes:envoi_listes').$titre_liste, SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("MEL: "._T('spiplistes:envoi_listes').$titre_liste, _SPIPLISTES_LOG_DEBUG);
 				}
 				else {
 					$str_log .= " [ERROR] ID_LISTE #id_liste MISSING"; 
@@ -236,13 +236,13 @@ spiplistes_log("MEL: spiplistes_meleuse()", SPIPLISTES_LOG_DEBUG);
 			$email_a_envoyer['html']->AddCustomHeader("Return-Path: ".$from); 	
 			$email_a_envoyer['html']->SMTPKeepAlive = true;
 		
-			spiplistes_log("MEL: "._T('spiplistes:email_reponse').$from."\n"._T('spiplistes:contacts')." : ".$total_abonnes, SPIPLISTES_LOG_DEBUG);
+			spiplistes_log("MEL: "._T('spiplistes:email_reponse').$from."\n"._T('spiplistes:contacts')." : ".$total_abonnes, _SPIPLISTES_LOG_DEBUG);
 			
 			if($total_abonnes) {
 		
 				$limit = intval($GLOBALS['meta']['spiplistes_lots']); // nombre de messages envoyes par boucles.	
 				
-				spiplistes_log("MEL: titre: $titre, total_abos: $total_abonnes, limit: $limit", SPIPLISTES_LOG_DEBUG);
+				spiplistes_log("MEL: titre: $titre, total_abos: $total_abonnes, limit: $limit", _SPIPLISTES_LOG_DEBUG);
 
 				if($is_a_test) {
 					$result_inscrits = spip_query("SELECT id_auteur,nom,email FROM spip_auteurs WHERE email="._q($email_test)." LIMIT 1");
@@ -257,16 +257,16 @@ spiplistes_log("MEL: spiplistes_meleuse()", SPIPLISTES_LOG_DEBUG);
 						FROM spip_auteurs AS a, spip_auteurs_courriers AS b 
 						WHERE a.id_auteur=b.id_auteur AND b.id_courrier=$id_courrier AND etat=$id_process"
 						);
-//spiplistes_log("MEL: marque le lot: $id_process", SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("MEL: marque le lot: $id_process", _SPIPLISTES_LOG_DEBUG);
 				}
 					
 				$liste_abonnes = spip_num_rows($result_inscrits);
-//spiplistes_log("MEL: nb destinataires: $liste_abonnes", SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("MEL: nb destinataires: $liste_abonnes", _SPIPLISTES_LOG_DEBUG);
 				if($liste_abonnes > 0) {
 		
 					// ne sert qu'a l affichage
 					$debut = $nb_emails_envoyes + $nb_emails_non_envoyes; 
-					spiplistes_log("MEL: envois effectues : ".$debut.", pas : ".$limit.", nb:".$liste_abonnes, SPIPLISTES_LOG_DEBUG);	
+					spiplistes_log("MEL: envois effectues : ".$debut.", pas : ".$limit.", nb:".$liste_abonnes, _SPIPLISTES_LOG_DEBUG);	
 
 					//envoyer le lot d'email selectionne
 					while ($row2 = spip_fetch_array($result_inscrits)) {
@@ -345,7 +345,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", SPIPLISTES_LOG_DEBUG);
 					// si c'est un test on repasse en redac
 					if($is_a_test) {
 						spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_REDAC."',email_test='',total_abonnes=0 WHERE id_courrier=$id_courrier");
-						spiplistes_log('MEL: repasse document en statut redac', SPIPLISTES_LOG_DEBUG);
+						spiplistes_log('MEL: repasse document en statut redac', _SPIPLISTES_LOG_DEBUG);
 					}
 					$email_a_envoyer['texte']->SmtpClose();
 					$email_a_envoyer['html']->SmtpClose();
@@ -353,7 +353,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", SPIPLISTES_LOG_DEBUG);
 			}
 			else {
 				//aucun destinataire connu pour ce message
-//spiplistes_log("MEL: "._T('spiplistes:erreur_sans_destinataire')."---"._T('spiplistes:envoi_annule'), SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("MEL: "._T('spiplistes:erreur_sans_destinataire')."---"._T('spiplistes:envoi_annule'), _SPIPLISTES_LOG_DEBUG);
 				spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_IGNORE."' WHERE id_courrier=$id_courrier LIMIT 1");
 				spiplistes_supprime_liste_envois($id_courrier);
 				$str_log .= " END #$id_courrier";
@@ -392,14 +392,14 @@ spiplistes_log("MEL: spiplistes_meleuse()", SPIPLISTES_LOG_DEBUG);
 	} // end if()
 	else {
 		$str_log .= " NO JOBS"; 
-		spiplistes_log("MEL: "._T('spiplistes:envoi_fini'), SPIPLISTES_LOG_DEBUG);
+		spiplistes_log("MEL: "._T('spiplistes:envoi_fini'), _SPIPLISTES_LOG_DEBUG);
 	}
 
 	spiplistes_log($str_log);
 
 	if(($ii = spiplistes_nb_courriers_en_cours()) > 0) {
 	// il en reste après la meleuse ? Signale au CRON tache non terminée
-		spiplistes_log("MEL: il reste des courriers a envoyer ($ii) !", SPIPLISTES_LOG_DEBUG);
+		spiplistes_log("MEL: il reste des courriers a envoyer ($ii) !", _SPIPLISTES_LOG_DEBUG);
 		$meleuse_statut = "-1";
 	}
 	

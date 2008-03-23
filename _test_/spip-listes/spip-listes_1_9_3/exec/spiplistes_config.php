@@ -363,7 +363,7 @@ function exec_spiplistes_config () {
 		. debut_cadre_relief("", true, "", _T('spiplistes:mode_simulation'))
    	. "<input type='checkbox' name='opt_simuler_envoi' value='oui' id='opt_simuler_envoi' "
 			. ((__plugin_lire_key_in_serialized_meta('opt_simuler_envoi', _SPIPLISTES_META_PREFERENCES) == "oui") ? "checked='checked'" : "") . " />\n"
-   	. "<label class='verdana2' for='opt_simuler_envoi'>"._T('spiplistes:Simuler_les_envois')."</label>\n"
+   	. "<label class='verdana2' for='opt_simuler_envoi'>"._T('spiplistes:simuler_les_envois')."</label>\n"
 		. fin_cadre_relief(true)
 		//
 		// Boutons de reinit/reset/validation

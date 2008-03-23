@@ -823,14 +823,14 @@ function spiplistes_boite_autocron ($return = false) {
 	// le CRON n'a rien a faire. Pas de boite autocron
 		if($return) return($result);
 		else {
-spiplistes_log("AUTOCRON no jobs ! $ii", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("AUTOCRON no jobs ! $ii", _SPIPLISTES_LOG_DEBUG);
 			echo($result);
 			return;
 		}
 	}
 	
 	$n = spiplistes_nb_grand_total_courriers();
-spiplistes_log("AUTOCRON nb courriers prets envoi $n", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("AUTOCRON nb courriers prets envoi $n", _SPIPLISTES_LOG_DEBUG);
 
 	if($n > 0) {
 		$result .= ""

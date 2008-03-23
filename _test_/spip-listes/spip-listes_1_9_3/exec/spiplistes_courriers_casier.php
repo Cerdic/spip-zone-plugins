@@ -109,7 +109,7 @@ function exec_spiplistes_courriers_casier () {
 	include_spip('inc/spiplistes_api_presentation');
 	include_spip('inc/spiplistes_naviguer_paniers');
 
-	spiplistes_log("spiplistes_afficher_pile_messages()2 <<", SPIPLISTES_LOG_DEBUG); 	
+	spiplistes_log("spiplistes_afficher_pile_messages()2 <<", _SPIPLISTES_LOG_DEBUG); 	
 
 	global $connect_statut
 		, $connect_toutes_rubriques
@@ -176,7 +176,7 @@ function exec_spiplistes_courriers_casier () {
 	$page_result = ""
 		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
 		. debut_gauche($rubrique, true)
-		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:Aller_au_panier'), true)
+		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:aller_au_panier_'), true)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron(true)

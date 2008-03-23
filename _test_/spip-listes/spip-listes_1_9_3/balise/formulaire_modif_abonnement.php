@@ -18,7 +18,7 @@ function balise_FORMULAIRE_MODIF_ABONNEMENT ($p) {
 
 function balise_FORMULAIRE_MODIF_ABONNEMENT_stat ($args, $filtres) {
 
-spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_stat () <<", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_stat () <<", _SPIPLISTES_LOG_DEBUG);
 
 	if(!$args[0]) {
 		$args[0]='formulaire_modif_abonnement';
@@ -28,7 +28,7 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_stat () <<", SPIPLISTES_LOG_D
 
 function balise_FORMULAIRE_MODIF_ABONNEMENT_dyn ($formulaire) {
 
-spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<", _SPIPLISTES_LOG_DEBUG);
 
 	include_spip ("inc/meta");
 	include_spip ("inc/session");

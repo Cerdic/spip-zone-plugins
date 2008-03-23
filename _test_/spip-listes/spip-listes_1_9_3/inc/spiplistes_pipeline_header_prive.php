@@ -24,6 +24,14 @@ function spiplistes_header_prive ($flux) {
 	$flux .= ""
 		. "\n\n<!-- PLUGIN SPIPLISTES GADGETS v.: ".__plugin_real_version_get(_SPIPLISTES_PREFIX)." -->\n"
 		. "<script src='".url_absolue(find_in_path('javascript/spiplistes_gadgets.js'))."' type='text/javascript'></script>\n"
+		. "
+<!-- SpipListes CSS -->
+<style type='text/css'>
+<!--
+.spiplistes fieldset { border:1px solid black; }
+-->
+</style>
+"
 	;
 
 	if(in_array($exec, array(
@@ -85,7 +93,7 @@ function spiplistes_header_prive ($flux) {
 			$.post('" . generer_url_action('spiplistes_lire_console', '') . "', function(data) {
 				$('#view-spiplistes-log-box').append(data);
 			});
-			$(this).html(\""._T('spiplistes:Masquer_les_journaux_SPIPLISTES')."\");
+			$(this).html(\""._T('spiplistes:masquer_les_journaux_SPIPLISTES')."\");
 		},function(){
 			$('#view-spiplistes-log-box').empty();
 			$(this).html(\""._T('spiplistes:Voir_les_journaux_SPIPLISTES')."\");

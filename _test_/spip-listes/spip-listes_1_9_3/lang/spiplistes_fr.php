@@ -8,7 +8,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 //_ 
 '_aide' => '<p>SPIP-Listes permet d\'envoyer un courrier ou des courriers automatiques &agrave; des abonn&eacute;s.</p> <p>Vous pouvez &eacute;crire un texte simple, composer votre courrier en HTML ou appliquer un "patron" &agrave; votre courrier</p>
 <p>Via un formulaire d\'inscription public, les abonn&eacute;s d&eacute;finissent eux-m&ecirc;mes leur statut d\'abonnement, les listes auxquelles ils s\'abonnent et le format
-dans lequel ils souhaitent recevoir les courriers (HTML/texte). </p><p>Tout courrier sera traduit automatiquement en format texte pour les abonn&eacute;s qui en ont fait la demande.</p><p><b>Note :</b><br />L\'envoi des mails peut prendre quelques minutes : les lots partent peu &agrave; peu quand les utilisateurs parcourent le site public. Vous pouvez aussi provoquer manuellement l\'envoi des lots en cliquant sur le lien "suivi des envois" pendant un envoi.</p>',
+dans lequel ils souhaitent recevoir les courriers (HTML/texte). </p><p>Tout courrier sera traduit automatiquement en format texte pour les abonn&eacute;s qui en ont fait la demande.</p><p><strong>Note :</strong><br />L\'envoi des mails peut prendre quelques minutes : les lots partent peu &agrave; peu quand les utilisateurs parcourent le site public. Vous pouvez aussi provoquer manuellement l\'envoi des lots en cliquant sur le lien "suivi des envois" pendant un envoi.</p>',
 '_aide_import' => "Vous pouvez importer ici une liste d'abonn&eacute;s &agrave; partir de votre 
    ordinateur.<br />
 Cette liste d'abonn&eacute;s doit &ecirc;tre au format texte seul, une ligne 
@@ -30,20 +30,20 @@ Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent
 'abonnement_cdt' => '<a href=\'http://bloog.net/spip-listes/\'>SPIP-Listes</a>' ,
 'abonnement_change_format'=>'Vous pouvez changer de format de r&eacute;ception ou vous d&eacute;sabonner : ',
 'abonnement_mail' => 'Pour modifier votre abonnement, veuillez vous rendre &agrave; l\'adresse suivante',
-'abonnement_mail_passcookie' => '(ceci est un message automatique)
-Pour modifier votre abonnement &agrave; la lettre d\'information de ce site :
-@nom_site_spip@ (@adresse_site@)
-
-Veuillez vous rendre &agrave; l\'adresse suivante :
-
-@adresse_site@/spip.php?page=abonnement&d=@cookie@
-
-Vous pourrez alors confirmer la modification de votre abonnement.',
+'abonnement_mail_passcookie' => "(ceci est un message automatique)
+	Pour modifier votre abonnement &agrave; la lettre d\'information de ce site :
+	@nom_site_spip@ (@adresse_site@)
+	
+	Veuillez vous rendre &agrave; l\'adresse suivante :
+	
+	@adresse_site@/spip.php?page=abonnement&d=@cookie@
+	
+	Vous pourrez alors confirmer la modification de votre abonnement.",
 'abonnement_modifie'=>'Vos modifications sont prises en compte',
 'abonnement_nouveau_format'=>'Votre format de r&eacute;ception est d&eacute;sormais : ',
 'abonnement_titre_mail'=>'Modifier votre abonnement',
 'abonnement_texte_mail'=>'Indiquez ci-dessous l\'adresse email sous laquelle vous vous &ecirc;tes pr&eacute;c&eacute;demment enregistr&eacute;. 
-Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modification de votre abonnement.',
+	Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modification de votre abonnement.',
 'abonner' => 's\'abonner',
 'abonnes_liste_int' => 'Abonn&eacute;s aux listes internes : ',
 'abonnes_liste_pub' => 'Abonn&eacute;s aux listes publiques : ',
@@ -58,7 +58,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'aff_envoye' => 'Courriers envoy&eacute;s',
 'aff_lettre_auto' => 'Lettres des nouveaut&eacute;s envoy&eacute;es',
 'alerte_edit' => 'Le formulaire ci-dessous permet de modifier le texte d\'un courrier. Vous pouvez choisir de commencer par importer un patron pour g&eacute;n&eacute;rer le contenu de votre message.',
-'alerte_modif' => '<b>Apr&egrave;s l\'affichage de votre courrier, vous pourrez en modifier le contenu</b>',
+'alerte_modif' => '<strong>Apr&egrave;s l\'affichage de votre courrier, vous pourrez en modifier le contenu</strong>',
 'annuler_envoi' => 'Annuler l\'envoi',
 'article_entier' => 'Lire l\'article entier',
 'abonnes_titre' => 'Abonn&eacute;s',
@@ -69,11 +69,11 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'aucun' => "aucun",
 'Apercu_plein_ecran' => "Aper&ccedil;u plein &eacute;cran dans une nouvelle fen&ecirc;tre",
 'Apercu' => "Aper&ccedil;u",
-'Generer_Apercu' => "G&eacute;n&eacute;rer et Aper&ccedil;u",
-'Aller_au_panier' => "Aller au panier ",
-'Aller_aux_listes' => "Aller aux listes ",
-'Annulation_chrono_' => "Annulation du chrono pour ",
-'Abonner_format_html' => "Abonner au format HTML",
+'generer_Apercu' => "G&eacute;n&eacute;rer et Aper&ccedil;u",
+'aller_au_panier_' => "Aller au panier ",
+'aller_aux_listes_' => "Aller aux listes "
+, 'annulation_chrono_' => "Annulation du chrono pour "
+, 'Abonner_format_html' => "Abonner au format HTML",
 'Abonner_format_texte' => "Abonner au format texte",
 'Attention_suppression_liste' => "Attention ! Vous demandez la suppression d'une liste de diffusion. Les abonn&eacute;s 
 seront retir&eacute;s de cette liste de diffusion automatiquement. ",
@@ -84,16 +84,15 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Alert_abonnement_sans_format' => "Votre abonnement est suspendu. Vous ne recevrez pas les courriers des listes de 
 	diffusion list&eacute;es ci-dessous. Pour recevoir &agrave; nouveau le courrier 
 	de vos listes pr&eacute;f&eacute;r&eacute;es, choisissez un format de r&eacute;ception 
-	et validez ce formulaire. ",
-'Vous_etes_abonne_aux_listes_selectionnees' => "Vous &ecirc;tes abonn&eacute; aux listes s&eacute;lectionn&eacute;es "
+	et validez ce formulaire. "
 , 'adresse_mail_obligatoire' => "Adresse mail manquante. Abonnement impossible."
 
 
 //B
 
-, 'bouton_listes' => 'Lettres d\'information',
-'bouton_modifier' => 'Modifier ce courrier',
-'Abonnements_aux_courriers' => "Abonnements aux courriers",
+, 'bouton_listes' => 'Lettres d\'information'
+, 'bouton_modifier' => 'Modifier ce courrier'
+, 'abonnements_aux_courriers' => "Abonnements aux courriers",
 
 //C
 'calcul_patron' => 'Calcul avec le patron version texte',
@@ -122,18 +121,16 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Console_syslog_texte' => "Activer les journaux syst&egrave;mes (syslog)",
 'Casier_a_courriers' => "Casier &agrave; courriers",
 'Courriers_en_cours_de_redaction' => 'Courriers en cours de r&eacute;daction',
-'Courriers_prets_a_etre_envoye' => "Courriers pr&ecirc;ts &agrave; &ecirc;tre envoy&eacute;",
-'Courriers_publies' => "Courriers publi&eacute;s",
-'Courriers_auto_publies' => "Courriers automatiques publi&eacute;s",
+'Courriers_prets_a_etre_envoye' => "Courriers pr&ecirc;ts &agrave; &ecirc;tre envoy&eacute;"
+, 'Courriers_publies' => "Courriers publi&eacute;s"
+, 'Courriers_auto_publies' => "Courriers automatiques publi&eacute;s",
 'Courriers_stope' => "Courriers stopp&eacute;s en cours d'envoi",
 'Courriers_vides' => "Courriers annul&eacute;s (vides)",
 'Courriers_sans_destinataire' => "Courriers sans destinataire (liste vide)",
 'Courriers_sans_liste' => "Courriers sans abonn&eacute;s (liste manquante)",
 'Ce_courrier_ne_sera_envoye_qu_une_fois' => "Ce courrier ne sera envoy&eacute; qu'une fois.",
-'Conseil_sauvegarder_casier' => "<strong>Conseil</strong>: faire une sauvegarde de la base avant de confirmer la suppression 
-   dans le casier &agrave; courriers. L'annulation est impossible ici.",
-'Conseil_sauvegarder_listes' => "<strong>Conseil</strong>: faire une sauvegarde de la base avant de confirmer la suppression 
-   des listes. L'annulation est impossible ici.",
+'conseil_sauvegarder_avant' => "<strong>Conseil</strong>: faire une sauvegarde de la base avant de confirmer la suppression 
+   @objet@. L'annulation est impossible ici.",
 'Choisir_un_patron' => "Choisir un patron ",
 'Courrier_edit_desc' => 'Vous pouvez choisir de g&eacute;n&eacute;rer automatiquement le contenu du courrier
 	ou r&eacute;diger simplement votre courrier dans la bo&icirc;te <strong>texte du courrier</strong>.',
@@ -145,17 +142,20 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Confirmez_requete' => "Veuillez confirmer la requ&ecirc;te.",
 'Confirmez_envoi_liste' => "Vous avez demand&eacute; l'envoi imm&eacute;diat de cette liste 
 	de diffusion.<br />
-	Svp, veuillez confirmer votre demande.",
+	Svp, veuillez confirmer votre demande."
+, 'confirmer_supprimer_formats' => "Supprimer les formats de r&eacute;ception des abonn&eacute;s."
 
 
 //D
-'_de_' => " de ",
-'dans_jours' => 'dans',
+, 'des_formats' => "des formats"
+, 'des_listes' => "des listes"
+, '_de_' => " de "
+, 'dans_jours' => 'dans',
 'definir_squel' => 'Choisir le mod&egrave;le de courrier &agrave; pr&eacute;visualiser',
-'definir_squel_choix' => 'A la r&eacute;daction d\'un nouveau courrier, SPIP-Listes vous permet de charger un patron. En appuyant sur un bouton, vous chargez dans le corps du courrier le contenu d\'un des squelettes du repertoire <b>/patrons</b> (situ&eacute; &agrave; la racine de votre site Spip). <p><b>Vous pouvez &eacute;diter et modifier ces squelettes selon vos go&ucirc;ts.</b></p> <ul><li>Ces squelettes peuvent contenir du code HTML classique</li>
-<li>Ce squelette peut contenir des boucles Spip</li>
-<li>Apr&egrave;s le chargement du patron, vous pourrez re-&eacute;diter le courrier avant envoi (pour ajouter du texte)</li>
-</ul><p>La fonction "charger un patron" permet donc d\'utiliser des gabarits HTML personnalis&eacute;s pour vos courriers ou de cr&eacute;er des lettres d\'information th&eacute;matiques dont le contenu est d&eacute;fini gr&acirc;ce aux boucles Spip.</p><p>Attention : ce squelette ne doit pas contenir de balises body, head ou html mais juste du code HTML ou des boucles Spip.</p>',
+'definir_squel_choix' => 'A la r&eacute;daction d\'un nouveau courrier, SPIP-Listes vous permet de charger un patron. En appuyant sur un bouton, vous chargez dans le corps du courrier le contenu d\'un des squelettes du repertoire <strong>/patrons</strong> (situ&eacute; &agrave; la racine de votre site Spip). <p><strong>Vous pouvez &eacute;diter et modifier ces squelettes selon vos go&ucirc;ts.</strong></p> <ul><li>Ces squelettes peuvent contenir du code HTML classique</li>
+	<li>Ce squelette peut contenir des boucles Spip</li>
+	<li>Apr&egrave;s le chargement du patron, vous pourrez re-&eacute;diter le courrier avant envoi (pour ajouter du texte)</li>
+	</ul><p>La fonction "charger un patron" permet donc d\'utiliser des gabarits HTML personnalis&eacute;s pour vos courriers ou de cr&eacute;er des lettres d\'information th&eacute;matiques dont le contenu est d&eacute;fini gr&acirc;ce aux boucles Spip.</p><p>Attention : ce squelette ne doit pas contenir de balises body, head ou html mais juste du code HTML ou des boucles Spip.</p>',
 'definir_squel_texte' => 'Si vous disposez des codes d\'acc&egrave;s au FTP, vous pouvez ajouter des squelettes SPIP dans le r&eacute;pertoire /patrons (&agrave; la racine de votre site Spip).',
 'dernier_envoi'=>'Dernier envoi il y a',
 'devenir_redac'=>'devenir r&eacute;dacteur pour ce site',
@@ -243,7 +243,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 
 //G
 'Generer_le_contenu' => "G&eacute;n&eacute;rer le contenu",
-'Maintenance_des_listes' => "Maintenance des listes",
 
 //H
 'Historique_des_envois' => 'Historique des envois',
@@ -255,15 +254,14 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'info_nouv_texte' => 'Prochain envoi des nouveaut&eacute;s dans @proch@ jours',
 'inscription_mail_forum' => 'Voici vos identifiants pour vous connecter au site @nom_site_spip@ (@adresse_site@)',
 'inscription_mail_redac' => 'Voici vos identifiants pour vous connecter au site @nom_site_spip@ (@adresse_site@) et &agrave; l\'interface de r&eacute;daction (@adresse_site@/ecrire)',
-'inscription_visiteurs' => 'L\'abonnement vous permet d\'acc&eacute;der aux parties du site en acc&egrave;s restreint,
-d\'intervenir sur les forums r&eacute;serv&eacute;s aux visiteurs enregistr&eacute;s et de recevoir les lettres d\'informations.' ,
-
-'inscription_redacteurs' =>'L\'espace de r&eacute;daction de ce site est ouvert aux visiteurs apr&egrave;s inscription.
-Une fois enregistr&eacute;, vous pourrez consulter les articles en cours de r&eacute;daction, proposer des articles
-et participer &agrave; tous les forums.  L\'inscription permet &eacute;galement d\'acc&eacute;der aux parties du site en acc&egrave;s restreint
-et de recevoir les lettres d\'informations.',
-'import_export' => 'Import / Export',
-'Introduction_du_courrier_' => "Introduction &agrave; votre courrier, avant le contenu issu du site ",
+'inscription_visiteurs' => 'L&acute;abonnement vous permet d&acute;acc&eacute;der aux parties du site en acc&egrave;s restreint,
+	d&acute;intervenir sur les forums r&eacute;serv&eacute;s aux visiteurs enregistr&eacute;s et de recevoir les lettres d&acute;informations.'
+, 'inscription_redacteurs' =>'L\'espace de r&eacute;daction de ce site est ouvert aux visiteurs apr&egrave;s inscription.
+	Une fois enregistr&eacute;, vous pourrez consulter les articles en cours de r&eacute;daction, proposer des articles
+	et participer &agrave; tous les forums.  L\'inscription permet &eacute;galement d\'acc&eacute;der aux parties du site en acc&egrave;s restreint
+	et de recevoir les lettres d\'informations.'
+, 'import_export' => 'Import / Export'
+, 'introduction_du_courrier_' => "Introduction &agrave; votre courrier, avant le contenu issu du site ",
 
 //J
 'jour' => 'jour',
@@ -291,9 +289,10 @@ et de recevoir les lettres d\'informations.',
 //M
 'mail_format' => 'Vous &ecirc;tes abonn&eacute; &agrave; la lettre d\'information du site @nom_site_spip@ en format',
 'mail_non' => 'Vous n\'&ecirc;tes pas abonn&eacute; &agrave; la lettre d\'information du site @nom_site_spip@',
+'maintenance_objet' => "Maintenance @objet@",
 'message_arch' => 'Courrier archiv&eacute;',
 'messages_auto' => 'Courriers automatiques',
-'messages_auto_texte' => '<p>Par d&eacute;faut, le squelette des nouveaut&eacute;s permet d\'envoyer automatiquement la liste des articles et br&egrave;ves publi&eacute;s sur le site depuis le dernier envoi automatique. </p><p>vous pouvez personnaliser le message en d&eacute;finissant l\'adresse d\'un logo et d\'une image de fond pour les titres de parties en &eacute;ditant le fichier nomm&eacute; <b>"nouveautes.html"</b> (situ&eacute; &agrave; dans le rep&eacute;rtoire /dist).</p>',
+'messages_auto_texte' => '<p>Par d&eacute;faut, le squelette des nouveaut&eacute;s permet d\'envoyer automatiquement la liste des articles et br&egrave;ves publi&eacute;s sur le site depuis le dernier envoi automatique. </p><p>vous pouvez personnaliser le message en d&eacute;finissant l\'adresse d\'un logo et d\'une image de fond pour les titres de parties en &eacute;ditant le fichier nomm&eacute; <strong>"nouveautes.html"</strong> (situ&eacute; &agrave; dans le rep&eacute;rtoire /dist).</p>',
 'message_redac' => 'En cours de r&eacute;daction et pr&ecirc;t &agrave; l\'envoi',
 'message_en_cours' => 'Courrier en cours d\'envoi',
 'message_type' => 'Courrier &eacute;lectronique',
@@ -315,18 +314,17 @@ et de recevoir les lettres d\'informations.',
 'messages_non_lus_grand' => 'Pas de nouveaux messages',
 'messages_repondre' => 'Nouvelle R&eacute;ponse',
 'messages_voir_dernier' => 'Voir le dernier message',
-'methode_envoi' => 'M&eacute;thode d\'envoi',
-'mettre_a_jour' => '<h3>SPIP-listes va mettre a jour</h3>',
-'moderateurs' => 'Mod&eacute;rateur(s)',
+'methode_envoi' => 'M&eacute;thode d\'envoi'
+, 'mettre_a_jour' => '<h3>SPIP-listes va mettre &agrave; jour</h3>'
+, 'moderateurs' => 'Mod&eacute;rateur(s)',
 'modifier' => 'Modifier',
 'mis_a_jour' => 'Mis &agrave; jour',
 'Modifier_un_courrier_:' => "Modifier un courrier :",
 'Modifier_ce_courrier' => "Modifier ce courrier",
 'mode_simulation' => "Mode simulation",
 'mode_simulation_info' => "Le mode simulation est activ&eacute;. La m&eacute;leuse fait semblant d'envoyer le courrier. 
-	En r&eacute;alit&eacute;, aucun courrier n'est exp&eacute;di&eacute;.",
-'Simuler_les_envois' => "Simuler les envois de courriers",
-'Mode_suspendre_trieuse' => "Suspendre le traitement des envois des listes de diffusion",
+	En r&eacute;alit&eacute;, aucun courrier n'est exp&eacute;di&eacute;."
+, 'Mode_suspendre_trieuse' => "Suspendre le traitement des envois des listes de diffusion",
 'Suspendre_le_tri_des_listes' => "Cette option vous permet - en cas d'engorgement - de suspendre le traitement des 
 	listes de diffusion programm&eacute;es et de red&eacute;finir les param&egrave;tres 
 	d'envoi. D&eacute;sactivez ensuite cette option pour reprendre le traitement des 
@@ -337,8 +335,6 @@ et de recevoir les lettres d\'informations.',
 	reprendre les exp&eacute;ditions en cours. ",
 'meleuse_suspendue' => "Meleuse suspendue",
 'meleuse_suspendue_info' => "L'envoi des courriers en attente d'exp&eacute;dition est suspendu.",
-'trieuse_suspendue' => "Trieuse suspendue",
-'trieuse_suspendue_info' => "Le traitement des listes de diffusion programm&eacute;es est suspendu.",
 'Meleuse_reactivee' => "M&egrave;leuse r&eacute;activ&eacute;e",
 
 //n
@@ -352,7 +348,6 @@ et de recevoir les lettres d\'informations.',
 'nouveaux_messages' => 'Nouveaux messages',
 'Nouvelle_liste_de_diffusion' => 'Cr&eacute;er une nouvelle liste de diffusion',
 'numero' => 'N&nbsp;',
-'Nettoyage_du_casier' => "Nettoyage du casier",
 'nb_abos' => "qt.",
 
 //P
@@ -369,11 +364,12 @@ et de recevoir les lettres d\'informations.',
 	vos abonn&eacute;s.",
 'Periodicite_:' => "P&eacute;riodicit&eacute; : ",
 'Prets_a_envoi' => "Pr&ecirc;ts &agrave; l'envoi",
-'Publies' => "Publi&eacute;s",
-'Pas_de_liste' => "Pas de liste",
-'aucune_liste_publique' => "Aucune liste de diffusion publique disponible.",
-'Pas_de_liste_en_auto' => "Pas de liste en envoi programm&eacute;s (chrono)",
-'Patron_du_tampon' => "Patron du tampon ",
+'Publies' => "Publi&eacute;s"
+, 'pas_de_liste' => "Pas de liste"
+, 'pas_de_format' => "Aucun format de r&eacute;ception d&eacute;fini pour les abonn&eacute;s."
+, 'aucune_liste_publique' => "Aucune liste de diffusion publique disponible."
+, 'pas_de_liste_en_auto' => "Pas de liste en envoi programm&eacute;s (chrono)"
+, 'Patron_du_tampon' => "Patron du tampon ",
 'Patron_de_pied_' => "Patron de pied ",
 'Patron_grand_' => "Grand patron ",
 'Pas_adresse_email' => "Pas d&acute;adresse email",
@@ -388,10 +384,11 @@ liste.",
 'reponse_plur' => 'r&eacute;ponses',
 'reponse_sing' => 'r&eacute;ponse',
 'retour' => 'Adresse email du gestionnaire de la liste (reply-to)',
-'Resultat_import' => "R&eacute;sultat import",
+'Resultat_import' => "R&eacute;sultat import"
+, 'retablir' => "R&eacute;tablir"
 
 //S
-'smtp' => 'Utiliser SMTP',
+, 'smtp' => 'Utiliser SMTP',
 'spip_ident' => 'Requiert une identification',
 'smtp_hote' => 'H&ocirc;te',
 'smtp_port' => 'Port',
@@ -400,7 +397,7 @@ liste.",
 'Suivi_des_abonnements' => 'Suivi des abonnements',
 'sujet_nouveau' => 'Nouveau sujet',
 'sujet_auteur' => 'Auteur',
-'sujet_courrier' => '<b>Sujet du courrier</b> [obligatoire]',
+'sujet_courrier' => '<strong>Sujet du courrier</strong> [obligatoire]',
 'sujet_courrier_auto' => 'Sujet du courrier automatique : ',
 'sujet_visites' => 'Visites',
 'sujets' => 'Sujets',
@@ -417,57 +414,60 @@ liste.",
 'Sans_destinataire' => "Sans destinataire",
 'Sans_abonnement' => "Sans abonnement",
 'Supprimer_ce_contact' => "Supprimer ce contact",
-'Supprimer_du_casier_les' => "Supprimer du casier les...",
-'Suppression_de' => "Suppression de",
-'Supprimer_les_listes' => "Supprimer les listes",
-'Supprimer_la_liste' => "Supprimer la liste...",
+'Suppression_de' => "Suppression de"
+, 'suppression_' => "Suppression @objet@"
+, 'Supprimer_les_listes' => "Supprimer les listes"
+, 'Supprimer_la_liste' => "Supprimer la liste...",
 'Suspendre_abonnements' => "Suspendre les abonnements pour ce compte",
 'separateur_de_champ_' => "S&eacute;parateur de champ ",
 'separateur_tabulation' => "tabulation (<code>\\t</code>)",
 'separateur_semicolon' => "point-virgule (<code>;</code>)",
-'simulation_desactive' => "Mode simulation d&eacute;sactiv&eacute;.",
+'simulation_desactive' => "Mode simulation d&eacute;sactiv&eacute;."
+, 'simuler_les_envois' => "Simuler les envois de courriers"
 
  //T
-'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',
-'texte_courrier' => '<b>Texte du courrier</b> (HTML autoris&eacute;)',
+, 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',
+'texte_courrier' => '<strong>Texte du courrier</strong> (HTML autoris&eacute;)',
 'texte_contenu_pied' => '<br />(Message ajout&eacute; en bas de chaque email au moment de l\'envoi)<br />',
 'texte_lettre_information' => 'Voici la lettre d\'information de ',
-'texte_pied' => '<p><b>Texte du pied de page</b>',
-'Tous_les' => 'Tous les',
-'Total' => "Total ",
-'Trieuse_reactivee' => "Trieuse r&eacute;activ&eacute;e",
+'texte_pied' => '<p><strong>Texte du pied de page</strong>',
+'Tous_les' => 'Tous les'
+, 'total' => "Total "
+, 'Trieuse_reactivee' => "Trieuse r&eacute;activ&eacute;e"
+, 'trieuse_suspendue' => "Trieuse suspendue"
+, 'trieuse_suspendue_info' => "Le traitement des listes de diffusion programm&eacute;es est suspendu."
 
 //U
-'Utilisez_formulaire' => "Utilisez le formulaire ci-contre pour activer/d&eacute;activer cette option.",
+, 'Utilisez_formulaire' => "Utilisez le formulaire ci-contre pour activer/d&eacute;activer cette option.",
 
 //V
-'version_html' => '<b>Version HTML</b>',
-'version_texte' => '<b>Version texte</b>',
+'version_html' => '<strong>Version HTML</strong>',
+'version_texte' => '<strong>Version texte</strong>',
 'voir' => 'voir',
 'vous_pouvez_egalement' => 'Vous pouvez &eacute;galement',
 'vous_inscrire_auteur' => 'vous inscrire en tant qu\'auteur',
 'voir_discussion' => 'Voir la discussion',
 'Voir_les_journaux_SPIPLISTES' => "Voir les journaux SPIPLISTES",
-'Masquer_les_journaux_SPIPLISTES' => "Masquer les journaux SPIPLISTES",
-'Vides' => "Vides",
-'Valider_abonnement' => "Valider cet abonnement",
+'masquer_les_journaux_SPIPLISTES' => "Masquer les journaux SPIPLISTES"
+, 'Vides' => "Vides",
+'Valider_abonnement' => "Valider cet abonnement"
+, 'vous_etes_abonne_aux_listes_selectionnees_' => "Vous &ecirc;tes abonn&eacute; aux listes s&eacute;lectionn&eacute;es "
 
-// ====================== spip_listes.php3 ======================
-'abon' => 'LES ABONNES',
+, 'abon' => 'LES ABONNES',
 'abon_ajouter' => 'AJOUTER UN ABONNE &nbsp; ',
 'abonees' => 'tous les abonn&eacute;s',
 'abonne_listes' => 'Ce contact est abonn&eacute; aux listes suivantes',
 'abonne_aucune_liste' => 'Abonn&eacute;s &agrave; aucune liste',
 'Abonnes_listes_mensuelles' => 'Abonn&eacute;s aux listes mensuelles ',
-'abonnement_simple' => '<b>Abonnement simple : </b><br /><i>Les abonn&eacute;s re&ccedil;oivent un message de confirmation apr&egrave;s leur abonnement</i>',
-'abonnement_code_acces' => '<b>Abonnement avec codes d\'acc&egrave;s : </b><br /><i>Les abonn&eacute;s re&ccedil;oivent en plus un login et un mot de passe qui leur permettront de s\'identifier sur le site. </i>',
-'abonnement_newsletter' => '<b>Abonnement &agrave; la lettre d\'information</b>',
+'abonnement_simple' => '<strong>Abonnement simple : </strong><br /><i>Les abonn&eacute;s re&ccedil;oivent un message de confirmation apr&egrave;s leur abonnement</i>',
+'abonnement_code_acces' => '<strong>Abonnement avec codes d\'acc&egrave;s : </strong><br /><i>Les abonn&eacute;s re&ccedil;oivent en plus un login et un mot de passe qui leur permettront de s\'identifier sur le site. </i>',
+'abonnement_newsletter' => '<strong>Abonnement &agrave; la lettre d\'information</strong>',
 'acces_a_la_page' => 'Vous n\'avez pas acc&egrave;s &agrave; cette page.',
 'adresse_deja_inclus' => 'Adresse d&eacute;j&agrave; connue',
-'autorisation_inscription' => 'SPIP-listes vient d\'activer l\'autorisation de s\'inscrire aux visiteurs du site',
+'autorisation_inscription' => 'SPIP-listes vient d\'activer l\'autorisation de s\'inscrire aux visiteurs du site'
 
-'choisir' => 'Choisir',
-'Choisir_cette_liste' => 'Choisir cette liste',
+, 'choisir' => 'Choisir'
+, 'Choisir_cette_liste' => 'Choisir cette liste',
 'confirme_envoi' => 'Veuillez confirmer l\'envoi',
 'Charger_un_patron' => "Charger un patron",
 
@@ -502,7 +502,7 @@ liste.",
 
 'importer' => 'Importer une liste d\'abonn&eacute;s',
 'importer_fichier' => 'Importer un fichier',
-'importer_fichier_txt' => '<p><b>Votre liste d\'abonn&eacute;s doit &ecirc;tre un fichier simple (texte) qui ne comporte qu\'une adresse e-mail par ligne</b></p>',
+'importer_fichier_txt' => '<p><strong>Votre liste d\'abonn&eacute;s doit &ecirc;tre un fichier simple (texte) qui ne comporte qu\'une adresse e-mail par ligne</strong></p>',
 'importer_preciser' => '<p>Pr&eacute;cisez les listes et le format correspondant &agrave; votre import d\'abonn&eacute;s</p>',
 'inconnu' => 'n\'est plus abonn&eacute; &agrave; la liste',
 
@@ -613,49 +613,24 @@ liste.",
 
 'non_courrier' => 'Pas / plus de courrier &agrave; envoyer',
 'non_html' => 'Votre logiciel de messagerie ne peut apparemment pas afficher correctement la version graphique (HTML) de cet e-mail',
-'sans_adresse' => 'Mail non envoy&eacute; -> Veuillez d&eacute;finir une adresse de r&eacute;ponse',
-
-
-
-// ====================== inc_import_patron.php3 ======================
-
-'confirmer' => 'Confirmer',
-
-'lettre_info' => 'La lettre d\'information du site',
-
-'patron_detecte' => '<p><strong>Patron d&eacute;tect&eacute; pour la version texte</strong><p>',
-
-'patron_erreur' => 'Le patron sp&eacute;cifi&eacute; ne donne pas de r&eacute;sulat avec les param&egrave;tres choisis',
-
-
-
-// ====================== listes.html ======================
-
-'abonees_titre' => 'Abonn&eacute;s',
-
-
-// ====================== inc-presentation.php3 ======================
-
-'listes_emails' => 'Lettres d\'information',
-
-
-// ====================== mes-options.php3 ======================
-
-
-'options' => 'radio|brut|Format :|Html,Texte,D&eacute;sabonnement|html,texte,non',
-
-// ====================== mes-options.php3 ======================
-
-'bonjour' => 'Bonjour,',
-
-'inscription_response' => 'Vous &ecirc;tes abonn&eacute; &agrave; la liste d\'information du site ',
-'inscription_responses' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site ',
-'inscription_liste' => 'Vous avez choisi de recevoir les courriers adress&eacute;s &agrave; la liste suivante : ',
-'inscription_listes' => 'Vous avez choisi de recevoir les courriers adress&eacute;s aux listes suivantes : ',
-'inscription_format' => ' en format ',
-
-'info_1_liste' => '1 liste',
-'info_liste_2' => 'listes'
+'sans_adresse' => 'Mail non envoy&eacute; -> Veuillez d&eacute;finir une adresse de r&eacute;ponse'
+, 'confirmer' => 'Confirmer'
+, 'lettre_info' => 'La lettre d\'information du site'
+, 'patron_detecte' => '<p><strong>Patron d&eacute;tect&eacute; pour la version texte</strong><p>'
+, 'patron_erreur' => 'Le patron sp&eacute;cifi&eacute; ne donne pas de r&eacute;sulat avec les param&egrave;tres choisis'
+, 'abonees_titre' => 'Abonn&eacute;s'
+, 'listes_emails' => 'Lettres d\'information'
+, 'options' => 'radio|brut|Format :|Html,Texte,D&eacute;sabonnement|html,texte,non'
+, 'bonjour' => 'Bonjour,'
+, 'inscription_response' => 'Vous &ecirc;tes abonn&eacute; &agrave; la liste d\'information du site '
+, 'inscription_responses' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site '
+, 'inscription_liste' => 'Vous avez choisi de recevoir les courriers adress&eacute;s &agrave; la liste suivante : '
+, 'inscription_listes' => 'Vous avez choisi de recevoir les courriers adress&eacute;s aux listes suivantes : '
+, 'inscription_format' => ' en format '
+, 'info_1_liste' => '1 liste'
+, 'info_liste_2' => 'listes'
+, 'info_1_abonne' => '1 abonn&eacute;'
+, 'info_abonnes' => 'abonn&eacute;s'
 
 );
 

@@ -127,7 +127,7 @@ function exec_spiplistes_courrier_edit(){
 		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_:'), $id_courrier, true)
-		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:Aller_au_panier'), true)
+		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:aller_au_panier_'), true)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
 		//. spiplistes_boite_autocron(true) // ne pas géner l'édition
@@ -227,16 +227,16 @@ function exec_spiplistes_courrier_edit(){
 	$page_result .= ""
 		. "</select><br />\n"
 		// texte introduction
-		. "<label class='verdana2' style='display:block;' for='text_area'>"._T('spiplistes:Introduction_du_courrier_').":</label>\n"
+		. "<label class='verdana2' style='display:block;' for='text_area'>"._T('spiplistes:introduction_du_courrier_').":</label>\n"
 		. afficher_barre('document.formulaire_courrier_edit.message')
 		. "<textarea id='text_area' name='message' ".$GLOBALS['browser_caret']." rows='5' cols='40' wrap='soft' style='width:100%;'>\n"
 		. "</textarea>\n"
 		//
 		. "<p class='verdana2'>\n"
-			. _T('spiplistes:Cliquez_Generer_desc', array('titre_bouton'=>_T('spiplistes:Generer_Apercu'), 'titre_champ_texte'=>_T('spiplistes:texte_courrier')))
+			. _T('spiplistes:Cliquez_Generer_desc', array('titre_bouton'=>_T('spiplistes:generer_Apercu'), 'titre_champ_texte'=>_T('spiplistes:texte_courrier')))
 			. "</p>\n"
 		. "<p class='verdana2' style='text-align:right;'>\n"
-		. "<input type='submit' name='Valider' value='"._T('spiplistes:Generer_Apercu')."' class='fondo' /></p>\n"
+		. "<input type='submit' name='Valider' value='"._T('spiplistes:generer_Apercu')."' class='fondo' /></p>\n"
 		. fin_block() // fin_block_invisible
 		. fin_cadre_relief(true)
 		. "<br />\n"

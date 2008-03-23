@@ -21,7 +21,7 @@ include_spip('inc/spiplistes_api');
 
 function spiplistes_install ($action) {
 
-//spiplistes_log("spiplistes_install() <<", SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("spiplistes_install() <<", _SPIPLISTES_LOG_DEBUG);
 
 	switch($action) {
 		case 'test':
@@ -74,7 +74,7 @@ function spiplistes_install ($action) {
 
 function spiplistes_base_creer () {
 
-//spiplistes_log("spiplistes_base_creer() <<", SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("spiplistes_base_creer() <<", _SPIPLISTES_LOG_DEBUG);
 
 	// demande à SPIP de créer les tables (base/create.php)
 	include_spip('base/create');
@@ -152,7 +152,7 @@ function spiplistes_activer_inscription_visiteurs () {
 
 function spiplistes_vider_tables () {
 
-//spiplistes_log("spiplistes_vider_tables() <<", SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("spiplistes_vider_tables() <<", _SPIPLISTES_LOG_DEBUG);
 
 	include_spip('base/abstract_sql');
 	

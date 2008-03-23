@@ -49,7 +49,7 @@ function cron_spiplistes_cron ($last_time) {
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_api_courrier');
 
-spiplistes_log("CRON: cron_spiplistes_cron() <<", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("CRON: cron_spiplistes_cron() <<", _SPIPLISTES_LOG_DEBUG);
 		
 	$current_time = time();
 
@@ -74,7 +74,7 @@ spiplistes_log("CRON: cron_spiplistes_cron() <<", SPIPLISTES_LOG_DEBUG);
 	
 	$nb_listes = spip_num_rows($listes_privees_et_publiques);
 	
-spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
+spiplistes_log("CRON: nb listes ok: ".$nb_listes, _SPIPLISTES_LOG_DEBUG);
 
 	if($opt_suspendre_trieuse == 'oui') {
 		spiplistes_log("TRI: SUSPEND MODE !!!");
@@ -89,7 +89,7 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
 
 	while($row = spip_fetch_array($listes_privees_et_publiques)) {
 	
-//spiplistes_log("CRON: job id_liste: ".$row['id_liste'], SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("CRON: job id_liste: ".$row['id_liste'], _SPIPLISTES_LOG_DEBUG);
 		// initalise les variables
 		foreach(explode(",", $sql_select) as $key) {
 			$$key = $row[$key];
@@ -101,8 +101,8 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
 		// demande id_auteur de la liste pour la signer
 		$id_auteur = spiplistes_mod_listes_get_id_auteur($id_liste);
 		
-//spiplistes_log("CRON: la liste $id_liste demande un envoi", SPIPLISTES_LOG_DEBUG);
-//spiplistes_log("CRON: lang == $lang", SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("CRON: la liste $id_liste demande un envoi", _SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("CRON: lang == $lang", _SPIPLISTES_LOG_DEBUG);
 
 		/////////////////////////////
 		// Tampon date d'envoi (dans maj)
@@ -121,7 +121,7 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
 			$sql_set = "date='',maj=NOW(),message_auto='non'";
 		}
 		if($sql_set) {
-//spiplistes_log("CRON: sql_set == $sql_set", SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("CRON: sql_set == $sql_set", _SPIPLISTES_LOG_DEBUG);
 			spip_query("UPDATE spip_listes SET $sql_set WHERE id_liste=$id_liste LIMIT 1"); 
 		}
 
@@ -133,7 +133,7 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
 		$texte = recuperer_fond('patrons/'.$patron, $contexte_patron);
 		$titre = ($titre_message =="") ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
 		
-//spiplistes_log("CRON: Titre => $titre", SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("CRON: Titre => $titre", _SPIPLISTES_LOG_DEBUG);
 
 		$taille_courrier_ok = (spiplistes_strlen(spiplistes_version_texte($texte)) > 10);
 
@@ -144,7 +144,7 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
 			$statut = _SPIPLISTES_STATUT_ENCOURS;
 		}
 		else {
-//spiplistes_log("CRON: courrier vide !!", SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("CRON: courrier vide !!", _SPIPLISTES_LOG_DEBUG);
 			$date_debut_envoi = "date_debut_envoi=NOW()";
 			$date_fin_envoi = "date_fin_envoi=NOW()";
 			$statut = _SPIPLISTES_STATUT_VIDE;
@@ -164,18 +164,18 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, SPIPLISTES_LOG_DEBUG);
 		if($taille_courrier_ok) {
 			$id_courrier = spip_insert_id();
 			spiplistes_remplir_liste_envois($id_courrier, $id_liste);
-spiplistes_log("CRON: remplir courrier $id_courrier, liste : $id_liste", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("CRON: remplir courrier $id_courrier, liste : $id_liste", _SPIPLISTES_LOG_DEBUG);
 		} 
 		else {
 			// contenu du courrier vide
-spiplistes_log("CRON: envoi mail nouveautes : courrier vide", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("CRON: envoi mail nouveautes : courrier vide", _SPIPLISTES_LOG_DEBUG);
 		} 
 	}// fin traitement des listes
 	
 	/////////////////////////////
 	// Si panier courriers des encours plein, appelle meleuse
 	if (spiplistes_nb_courriers_en_cours()){
-		spiplistes_log("CRON: appel meleuse", SPIPLISTES_LOG_DEBUG);
+		spiplistes_log("CRON: appel meleuse", _SPIPLISTES_LOG_DEBUG);
 		include_spip('inc/spiplistes_meleuse');
 		return(spiplistes_meleuse());
 	}
@@ -186,7 +186,7 @@ spiplistes_log("CRON: envoi mail nouveautes : courrier vide", SPIPLISTES_LOG_DEB
 
 function genie_spiplistes_cron ($last_time) {
 	include_spip('inc/spiplistes_api_globales');
-spiplistes_log("CRON: genie_spiplistes_cron() <<", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("CRON: genie_spiplistes_cron() <<", _SPIPLISTES_LOG_DEBUG);
 	cron_spiplistes_cron ($last_time);
 }
 

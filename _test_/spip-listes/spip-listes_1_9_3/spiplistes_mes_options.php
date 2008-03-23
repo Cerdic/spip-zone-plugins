@@ -26,7 +26,7 @@ define('_SIGNALER_ECHOS', false); // horrible
 // mode debug dans le log, peut-être augmenté pour avoir tous
 // les messages dans spip.log (par exemple)
 // voir doc php
-define("SPIPLISTES_LOG_DEBUG", LOG_DEBUG);
+define("_SPIPLISTES_LOG_DEBUG", LOG_DEBUG);
 
 define("_DIR_PLUGIN_SPIPLISTES_IMG_PACK", _DIR_PLUGIN_SPIPLISTES."img_pack/");
 

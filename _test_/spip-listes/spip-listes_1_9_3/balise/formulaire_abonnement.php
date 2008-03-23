@@ -18,7 +18,7 @@ include_spip('inc/spiplistes_api');
 
 function balise_FORMULAIRE_ABONNEMENT ($p) {
 
-spiplistes_log("balise_FORMULAIRE_ABONNEMENT() << ", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("balise_FORMULAIRE_ABONNEMENT() << ", _SPIPLISTES_LOG_DEBUG);
 
 	return calculer_balise_dynamique($p, 'FORMULAIRE_ABONNEMENT', array('id_liste'));
 }
@@ -32,7 +32,7 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT() << ", SPIPLISTES_LOG_DEBUG);
 
 function balise_FORMULAIRE_ABONNEMENT_stat($args, $filtres) {
 
-spiplistes_log("balise_FORMULAIRE_ABONNEMENT_stat() << ", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("balise_FORMULAIRE_ABONNEMENT_stat() << ", _SPIPLISTES_LOG_DEBUG);
 
 	if(!$args[1]) {
 		$args[1]='formulaire_abonnement';
@@ -40,7 +40,7 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_stat() << ", SPIPLISTES_LOG_DEBUG);
 	// cherche appel de liste en arguments
 	preg_match_all("/liste([0-9]+)/x", $args[1], $matches);
 	if($id_liste=intval($matches[1][0])) {
-spiplistes_log("balise_FORMULAIRE_ABONNEMENT_stat() UNE SEULE LISTE DEMANDEE ", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("balise_FORMULAIRE_ABONNEMENT_stat() UNE SEULE LISTE DEMANDEE ", _SPIPLISTES_LOG_DEBUG);
 		$args[1]='formulaire_abonnement_une_liste';
 		$args[0]=$id_liste;
 	}
@@ -57,7 +57,7 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_stat() UNE SEULE LISTE DEMANDEE ", 
 
 function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 
-spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn() << ", SPIPLISTES_LOG_DEBUG);
+spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn() << ", _SPIPLISTES_LOG_DEBUG);
 
 	include_spip ("inc/meta");
 	include_spip ("inc/session");
@@ -149,7 +149,7 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn() << ", SPIPLISTES_LOG_DEBUG);
 			formulaire_inscription($mail_inscription_, (($type=="redac") ? 'redac' : 'forum'), $acces_membres, $formulaire);
 	}
 	else {
-		spiplistes_log(_T('pass_erreur')." acces visiteurs non autorises", SPIPLISTES_LOG_DEBUG);
+		spiplistes_log(_T('pass_erreur')." acces visiteurs non autorises", _SPIPLISTES_LOG_DEBUG);
 	}
 	
 
@@ -218,7 +218,7 @@ function formulaire_inscription($mail_inscription_, $type, $acces_membres, $form
 		
 	if ($mail_valide && $nom_inscription_) {
 	
-spiplistes_log("### : ->".$mail_inscription_, SPIPLISTES_LOG_DEBUG);
+spiplistes_log("### : ->".$mail_inscription_, _SPIPLISTES_LOG_DEBUG);
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE email="._q($mail_inscription_));
 	
 		//echo "<div class='reponse_formulaire'>";
@@ -288,7 +288,7 @@ spiplistes_log("### : ->".$mail_inscription_, SPIPLISTES_LOG_DEBUG);
 					spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, cookie_oubli) "
 					. "VALUES ("._q($nom_inscription_).","._q($mail_inscription_).","._q($login_).","._q($mdpass).","._q($statut).","._q($htpass).","._q($cookie).")"
 					);
-spiplistes_log("insert inscription : ->".$mail_inscription_, SPIPLISTES_LOG_DEBUG);
+spiplistes_log("insert inscription : ->".$mail_inscription_, _SPIPLISTES_LOG_DEBUG);
 				$id_abo = spip_insert_id();
 			}
 				spip_query("INSERT INTO spip_auteurs_elargis (id_auteur,`spip_listes_format`) VALUES ("._q($id_abo).","._q($type_abo).")");		
@@ -386,7 +386,7 @@ spiplistes_log("insert inscription : ->".$mail_inscription_, SPIPLISTES_LOG_DEBU
 		if($abonne_existant != 'oui') {
 		
 			if (envoyer_mail($mail_inscription_, "[$nom_site_spip] "._T('spiplistes:form_forum_identifiants'), $message)) {
-spiplistes_log("inscription : ->".$mail_inscription_, SPIPLISTES_LOG_DEBUG);
+spiplistes_log("inscription : ->".$mail_inscription_, _SPIPLISTES_LOG_DEBUG);
 				if($acces_membres == 'oui') {
 					$reponse_formulaire =_T('form_forum_identifiant_mail');
 				}
