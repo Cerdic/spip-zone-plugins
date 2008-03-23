@@ -14,7 +14,8 @@ function do_quark($c) {
 	$c = preg_replace(",\r\n?,", "\n", $c);
 
 	$x = '';
-	$c = preg_split(",@(.*?[:>]),ms", $c, -1, PREG_SPLIT_DELIM_CAPTURE);
+	$c = preg_split(",@([^<>]*?[:>]),ms", $c, -1, PREG_SPLIT_DELIM_CAPTURE);
+
 
 	$d = array(); // on va le remplir
 	unset($c[0]); // ignore le premier terme
@@ -34,7 +35,12 @@ function do_quark($c) {
 		}
 	}
 
-	$c = (join("\n\n", $d));
+	$c = (join("\n\n", array_map('nettoyage_xtag', $d)));
+
+	return $c;
+}
+
+function nettoyage_xtag($c) {
 
 	// fines, insecables
 	$c = str_replace('<\\!s>', '~', $c);
@@ -68,7 +74,6 @@ function do_quark($c) {
 
 	return $c;
 }
-
 
 function extracteur_quark($fichier, &$charset) {
 	if (lire_fichier($fichier, $texte)) {

@@ -114,6 +114,9 @@ function exec_convertisseur(){
 			$out = array();
 			foreach ($conv_textes as $f => $conv_in) {
 				$out[$f] = conversion_format($conv_in, $format);
+				if ($id_rubrique = intval(_request('id_parent')))
+					$id_article = inserer_conversion($out[$f], $id_rubrique, $f);
+					$article[$f] = $id_article;
 			}
 
 		}
@@ -140,6 +143,9 @@ function exec_convertisseur(){
 		foreach ($out as $f => $texte) {
 			if ($f) echo "<h2>".basename($f)."</h2>\n";
 			echo "<textarea name='conv_out' cols='65' rows='12'>".entites_html($texte)."</textarea><br />\n";
+
+			if (isset($article[$f]))
+				echo "<div>article ".$article[$f].": <a href='".generer_url_ecrire('articles_edit', 'id_article='.$article[$f])."'>&#233;diter</a></div>\n";
 		}
 
 		echo "</div>\n";
@@ -172,8 +178,12 @@ function exec_convertisseur(){
 
 	echo "<div style='float:$spip_lang_right;'>";
 	echo _L("ou choisissez un fichier :")."<br />\n";
-	echo "<input type='file' name='upload' /><br style='clear:both;' />\n";
+	echo "<input type='file' name='upload' />\n";
 	echo "</div>\n";
+
+	echo "<br style='clear:both;' />\n";
+
+	echo "<p align='right'><small>Il est possible de convertir plusieurs fichiers en une seule fois, en les regroupant dans une archive ZIP</small></p>\n";
 
 	echo "<h5>"._L('Options:')."</h5>\n";
 
@@ -183,6 +193,16 @@ function exec_convertisseur(){
 	echo "<label><input type='checkbox' value='true' name='convert_charset'$checked
 	/>"._L("convertir en UTF-8")."\n";
 	echo "</label>\n";
+
+
+	// Ajouter sous forme d'article dans la rubrique
+	if (
+	function_exists('charger_fonction')
+	AND $chercher_rubrique = charger_fonction('chercher_rubrique', 'inc', true)) {
+		echo "<p/><div><label>Choisissez une rubrique si vous voulez insérer le résultat de la conversion dans un nouvel article sur le site :";
+		echo $chercher_rubrique(null,'rubrique');
+		echo "</label></div>\n";
+	}
 
   echo "<p style='float:right;'><input type='submit' value='". _T("convertisseur:convertir")."'></p>\n";   
   echo "</form>\n"; 

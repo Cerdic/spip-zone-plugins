@@ -377,4 +377,65 @@ function accepte_fichier_upload2($f) {
 		return true;
 }
 
+function inserer_conversion($texte, $id_rubrique, $f=null) {
+	global $log;
+
+	$id_rubrique = intval($id_rubrique);
+	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+
+	// Verifier que la rubrique existe et qu'on a le droit d'y ecrire
+	if (!$t = sql_fetsel('id_rubrique', 'spip_rubriques', 'id_rubrique='.$id_rubrique)) {
+		$log = "erreur la rubrique n'existe pas";
+		return false;
+	}
+
+	// Si $f (chargement zip), on cherche un article du meme $f
+	// (valeur stockée dans le PS)
+	// dans la meme rubrique,
+	// avec le statut prepa, qui nous appartient, et... on l'ecrase
+	$ps = 'Conversion depuis '.basename($f);
+	$s = spip_query("SELECT a.id_article
+		FROM spip_articles AS a,
+		spip_auteurs_articles AS aut
+		WHERE id_rubrique=$id_rubrique
+		AND ps=".sql_quote($ps)."
+		AND aut.id_article=a.id_article
+		AND aut.id_auteur=".$id_auteur
+		);
+	if ($t = spip_fetch_array($s)) {
+		$id_article = $t['id_article'];
+	} else {
+		$id_article = sql_insertq('spip_articles',
+			array(
+			'titre' => $ps,
+			'statut' => 'prepa',
+			'id_rubrique' => $id_rubrique,
+			'ps' => $ps
+			)
+		);
+		sql_insertq('spip_auteurs_articles',
+			array(
+			'id_article' => $id_article,
+			'id_auteur' => $id_auteur
+			)
+		);
+	}
+
+	// en cas d'echec de l'insertion
+	if (!$id_article) {
+		$log = "erreur insertion d'article";
+		return;
+	}
+
+	spip_query("UPDATE spip_articles
+		SET texte="._q($texte).",
+		date=NOW(),
+		date_modif=NOW()
+		WHERE id_article=$id_article"
+	);
+
+	return $id_article;
+}
+
+
 ?>
