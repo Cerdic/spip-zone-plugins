@@ -1,0 +1,81 @@
+#HTTP_HEADER{Content-Type:Text/html}
+#CACHE{0}
+
+
+
+<?php
+	
+	if(!($auteur_session['statut'] == "0minirezo")) {echo "reservé aux admins"; return ;}
+
+	
+	$result = spip_query("select a.libelle, a.id_abonnement , count(b.id_abonnement) as 'n' from spip_abonnements a, spip_auteurs_elargis_abonnements b , spip_auteurs_elargis c 
+	where a.id_abonnement = b.id_abonnement 
+	and c.id = b.id_auteur_elargi
+	and c.statut_paiement = 'ok'
+	and b.validite <> '0000-00-00 00:00:00' 
+	 and YEAR(b.date) = YEAR('[(#ENV{date_liste})]') 
+		 and MONTH(b.date) = MONTH('[(#ENV{date_liste})]') 
+	group by b.id_abonnement");
+
+	echo "<table class='cadre-r'>";	 
+
+		echo "<tr style='height:60px'>" ;
+	echo "<th colspan='6'> [(#ENV{date_liste}|nom_mois)] 	[(#ENV{date_liste}|annee)]</th>";
+	
+	 $query_n = spip_query ( "select b.id_abonnement from spip_abonnements a, spip_auteurs_elargis_abonnements b , spip_auteurs_elargis c 
+	where a.id_abonnement = b.id_abonnement 
+	and c.id = b.id_auteur_elargi
+	and c.statut_paiement = 'ok'
+	and b.validite <> '0000-00-00 00:00:00' 
+	 and YEAR(b.date) = YEAR('[(#ENV{date_liste})]') 
+		 and MONTH(b.date) = MONTH('[(#ENV{date_liste})]')
+		" );
+		
+		$n = spip_num_rows($query_n);
+	
+		echo "<th colspan='2'> <strong> $n </strong></th>";	
+
+	
+	echo "</tr>" ; 
+	
+	
+	while ($row = spip_fetch_array($result)){
+	
+	echo "<tr style='height:50px'>" ;
+	echo "<th colspan='7'>".$row['libelle']."</th><th>".$row['n']."</th>";
+	echo "</tr>" ; 	
+	
+	$id_abonnement = $row['id_abonnement'];
+
+
+	echo "<tr>" ;
+	echo "<th>Prenom</th><th>Nom</th><th>adresse</th><th>code postal</th><th>Ville</th><th>pays</th><th>date</th><th>expire</th>";
+	echo "</tr>" ; 
+
+		$result_detail = spip_query("select a.*, b.date , b.validite from spip_auteurs_elargis a, spip_auteurs_elargis_abonnements b , spip_auteurs_elargis c
+		 where a.id = b.id_auteur_elargi and b.id_abonnement = $id_abonnement
+		 and c.id = b.id_auteur_elargi
+		 and c.statut_paiement = 'ok'
+		 and YEAR(b.date) = YEAR('[(#ENV{date_liste})]') 
+		 and MONTH(b.date) = MONTH('[(#ENV{date_liste})]') 
+		 ORDER BY b.date desc"); // et abo ok
+	
+		while ($row_detail = spip_fetch_array($result_detail)){
+		echo "<tr>" ;
+		echo "<td>".$row_detail['prenom']."</td><td><a href=\"./?exec=editer_adherent&id=".$row_detail['id_auteur']."\">".$row_detail['nom_famille']."</a></td>";
+		echo "<td>".$row_detail['adresse']."</td><td>".$row_detail['code_postal']."</td><td>".$row_detail['ville']."</td><td>".$row_detail['pays']."</td>";
+		echo "<td>".jour($row_detail['date'])."/".mois($row_detail['date'])."/".annee($row_detail['date'])."</td>";
+		echo "<td>".jour($row_detail['validite'])."/".mois($row_detail['validite'])."/".annee($row_detail['validite'])."</td>";
+		echo "</tr>" ;
+		}
+	
+		
+	}
+	
+	echo "<tr>" ;
+	echo "<th colspan='8'>  </th>";
+	echo "</tr>" ; 
+	echo "</table>" ; 
+
+
+	?>

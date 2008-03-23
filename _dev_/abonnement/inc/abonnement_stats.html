@@ -44,63 +44,303 @@ $().ready(function() {
 		#INCLURE{fond=inc/menu_inscription2}	
 	]
 	
-	<div class="legend">
-		
-		<img src="#CHEMIN{'images/admin-12.gif'}" title="<:inscription2:fiche_adherent:>"> Admin<br/>
-		<img src="#CHEMIN{'images/redac-12.gif'}" title="<:inscription2:fiche_adherent:>"> Auteur<br/>
-		<img src="#CHEMIN{'images/adherent-12.gif'}" title="<:inscription2:fiche_adherent:>"> Adherent<br/>
-		<img src="#CHEMIN{'images/aconf-12.gif'}" title="<:inscription2:fiche_adherent:>"> A confirmer<br/>
-		<img src="#CHEMIN{'images/defaut-12.gif'}" title="<:inscription2:fiche_adherent:>"> Autre<br/>
-		
-	</div>
+	<div>
 	
-</div>	
 
-<div id="principal" style="margin-left:25%">
-	<h2><strong>Abonnements</strong></h2>
-        
-	
-	<table class="cadre-r">
+<table>
 	<tr style="background-color : #E0E0E0 ;">
 	<td>Libelle</td>
-	<td>Nombre d'abonn&eacute;s</td><td>Montant</td>
+	<td>Nombre d'abonn&eacute;s</td><td>Montant (euros)</td>
 		
 	</tr>
 	
 	<?php
-	$result = spip_query("select a.libelle , count(b.id_abonnement) as 'n' , sum(b.montant) as 'pognon' from spip_abonnements a, spip_auteurs_elargis_abonnements b where a.id_abonnement = b.id_abonnement and b.validite <> '0000-00-00 00:00:00' group by b.id_abonnement");
+	
+	$total_abonnes = 0 ;
+	$total_montant = 0 ;
+	
+	$result = spip_query("select a.libelle , count(b.id_abonnement) as 'n' , sum(b.montant) as 'pognon' from spip_abonnements a, spip_auteurs_elargis_abonnements b , spip_auteurs_elargis c 
+	where c.id = b.id_auteur_elargi 
+	and c.statut_paiement = 'ok' 
+	and   a.id_abonnement = b.id_abonnement 
+	and b.validite <> '0000-00-00 00:00:00' group by b.id_abonnement");
 	while ($row = spip_fetch_array($result)){
 	echo "<tr><td>".$row['libelle']."</td>";
 	echo "<td>".$row['n']."</td>";
 	echo "<td>".$row['pognon']."</td></tr>";
+	$total_abonnes = $total_abonnes + $row['n'] ;
+	$total_montant = $total_montant + $row['pognon'] ;
+	
 	}
 	
+		echo "<tr><td><strong>Total</strong></td><td>".$total_abonnes."</td><td>".$total_montant."</td></tr>";
+
 	?>
 	</table>	
 
+<h2><strong>Num&eacute;ros payants</strong></h2>
 
 
-<table class="cadre-r" style="margin-top:10px">
+	<?php
+
+	$query = spip_query ( "
+	SELECT distinct(a.id) 
+	FROM `spip_auteurs_elargis` a,  spip_auteurs_elargis_articles b
+	WHERE 
+	a.id = b.id_auteur_elargi
+	and b.statut_paiement = 'ok'
+	" );
+	
+	$n = spip_num_rows($query);
+
+	echo "<p><strong>Nombre d'acheteurs diff&eacute;rents : $n </strong></p>";
+		
+?>
+
+<style>
+.center td{
+text-align:center;
+}
+</style>
+
+<table class="center" style="margin-top:10px;text-align:center;font-size:10px">
 	<tr style="background-color : #E0E0E0 ;">
 	<td>Num&eacute;ro</td>
-	<td>Diffusion payée</td><td>Montant</td>
+	<td>Diffusion payée</td><td>Montant (euros)</td>
 		
 	</tr>
 	
 	<?php
+	$total_abonnes = 0 ;
+	$total_montant = 0 ;
+	
+	
 	$result = spip_query("select a.titre , count(b.id_article) as 'n' , sum(b.montant) as 'pognon' from spip_articles a, spip_auteurs_elargis_articles b where a.id_article = b.id_article and b.statut_paiement = 'ok' group by b.id_article order by b.id_article desc");
 	while ($row = spip_fetch_array($result)){
 	echo "<tr><td>".$row['titre']."</td>";
 	echo "<td>".$row['n']."</td>";
 	echo "<td>".$row['pognon']."</td></tr>";
+	$total_abonnes = $total_abonnes + $row['n'] ;
+	$total_montant = $total_montant + $row['pognon'] ;
+	
 	}
+	
+	echo "<tr><td><strong>Total</strong></td><td>".$total_abonnes."</td><td>".$total_montant."</td></tr>";
+
 	
 	?>
 	</table>
 	
 
-</div>
+	
+	</div>
 
+	
+</div>	
+
+<div id="principal" style="margin-left:25%">
+  
+
+  
+    
+    <style>
+    .ab{
+    text-align:center;
+    padding:0px 0px 5px 10px;
+    }
+    
+   
+    </style>
+    
+    <div class="ab"> 
+     <?php 
+     
+     
+    // TOTAUX
+	$query = spip_query ( "
+	SELECT a.id 
+	FROM `spip_auteurs_elargis` a , `spip_auteurs_elargis_abonnements` b 
+	WHERE 
+	a.id = b.id_auteur_elargi
+	and a.statut_paiement='ok'
+	and b.validite > CURRENT_DATE
+	" );
+	
+	$n = spip_num_rows($query);
+
+	echo "<span>Nombre d'abonn&eacute;s &agrave; jour : <strong> $n </strong></span>";
+	
+	 // TOTAUX
+	$query = spip_query ( "
+	SELECT a.id 
+	FROM `spip_auteurs_elargis` a, `spip_auteurs_elargis_abonnements` b , spip_abonnements c
+	WHERE 
+	a.id = b.id_auteur_elargi
+	and c.id_abonnement = b.id_abonnement
+	and a.statut_paiement='ok'
+	and c.id_abonnement IN (5,6,7,8)
+	and b.validite > CURRENT_DATE
+	" );
+	
+	$n = spip_num_rows($query);
+
+	echo "<span>Nombre d'abonn&eacute;s PAPIER &agrave; jour : <strong> $n </strong></span>";
+
+    
+    // Echus
+	$query = spip_query ( "
+	SELECT a.id_auteur FROM spip_auteurs_elargis a,  spip_auteurs_elargis_abonnements c
+	WHERE
+	a.id = c.id_auteur_elargi
+	and c.validite <> '0000-00-00 00:00:00' 
+	and c.validite < NOW()
+	" );
+	
+	$n = spip_num_rows($query);
+
+	echo "<span>Nombre d'abonn&eacute;s &eacute;chus : <strong> $n </strong></span>";
+	
+    
+     
+    // relance
+	/*
+	$validite = "DATE_ADD(CURRENT_DATE, INTERVAL 0 DAY)" ;
+	
+	$query = spip_query("
+		SELECT a.id_auteur, c.email 
+		FROM spip_auteurs_elargis a, spip_auteurs_elargis_abonnements b, spip_auteurs c
+		WHERE
+		a.id = b.id_auteur_elargi
+		and a.id_auteur = c.id_auteur
+		and b.validite <> '0000-00-00 00:00:00'
+		and b.validite < $validite
+		");
+	
+	$n = spip_num_rows($query);
+	
+	echo "<span>Nombre d'abonn&eacute;s relance : <strong>".$n." </strong></span>";	
+ */
+
+
+// inscrits
+$query = spip_query ( "SELECT COUNT(a.id) as n FROM `spip_auteurs_elargis` a WHERE 1" );
+	$row=spip_fetch_array($query);
+
+	echo "<span>Nombre d'inscrits : ".$row['n']." </sspan>";			
+
+?>
+
+     </div> 
+
+
+
+	
+		
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+	
+	$("a.date_liste").click(function(e){
+	
+	e.preventDefault();
+	$("#tableau").load('../?page=liste_abonnes&date_liste=' + this.rel );
+	
+	});
+	
+	
+	
+	});
+	</script>
+	
+	
+	<div style="margin:10px">
+	<?php
+	$result = spip_query("select date, MONTH(date) as mois, YEAR(date) as annee from spip_auteurs_elargis_abonnements where validite <> '0000-00-00 00:00:00' group by MONTHNAME(date) order by date desc");
+	
+	while ($row = spip_fetch_array($result)){
+		//var_dump($row);		
+		echo "<a class='date_liste' href='#' rel='".$row['date'] ."'>".$row['mois'] ."/" .$row['annee'] ."</a> | ";
+	}
+	?>
+	</div>
+	
+	<div id="tableau">
+
+	
+	<?php
+	$result = spip_query("select a.libelle, a.id_abonnement , count(b.id_abonnement) as 'n' from spip_abonnements a, spip_auteurs_elargis_abonnements b , spip_auteurs_elargis c 
+	where a.id_abonnement = b.id_abonnement 
+	and c.id = b.id_auteur_elargi
+	and c.statut_paiement = 'ok'
+	and b.validite <> '0000-00-00 00:00:00' 
+	and YEAR(b.date) = YEAR(CURRENT_DATE()) 
+		 and MONTH(b.date) = MONTH(CURRENT_DATE()) 
+	group by b.id_abonnement");
+
+	echo "<table  class='cadre-r'>";	
+	echo "<tr style='height:60px'>" ;
+	echo "<th colspan='6'> [(#DATE|nom_mois)] 	[(#DATE|annee)]</th>";
+	
+	 $query_n = spip_query ( "SELECT a.id , b.date
+		FROM `spip_auteurs_elargis` a, spip_auteurs_elargis_abonnements b 
+		WHERE 
+		a.id = b.id_auteur_elargi	
+		and b.validite > CURRENT_DATE
+		and b.date > DATE_ADD(CURRENT_DATE, INTERVAL -7 DAY)
+		" );
+		
+		$n = spip_num_rows($query_n);
+	
+		echo "<th colspan='2'>Nouveaux abonn&eacute;s depuis 7 jours : <strong> $n </strong></th>";	
+
+	
+	echo "</tr>" ; 
+	
+	while ($row = spip_fetch_array($result)){
+	echo "<tr style='height:50px'>" ;
+	echo "<th colspan='7'>".$row['libelle']."</th><th>".$row['n']."</th>";
+	echo "</tr>" ; 	
+	
+	$id_abonnement = $row['id_abonnement'];
+
+
+	echo "<tr>" ;
+	echo "<th>Prenom</th><th>Nom</th><th>adresse</th><th>code postal</th><th>Ville</th><th>pays</th><th>date</th><th>expire</th>";
+	echo "</tr>" ; 
+
+		$result_detail = spip_query("select a.*, b.date , b.validite from spip_auteurs_elargis a, spip_auteurs_elargis_abonnements b, spip_auteurs_elargis c
+		 where a.id = b.id_auteur_elargi and b.id_abonnement = $id_abonnement
+		 and c.id = b.id_auteur_elargi
+		 and c.statut_paiement = 'ok'
+		 and YEAR(b.date) = YEAR(CURRENT_DATE()) 
+		 and MONTH(b.date) = MONTH(CURRENT_DATE()) 
+		 ORDER BY b.date desc");
+	
+		while ($row_detail = spip_fetch_array($result_detail)){
+		echo "<tr>" ;
+		echo "<td>".$row_detail['prenom']."</td><td><a href=\"./?exec=editer_adherent&id=".$row_detail['id_auteur']."\">".$row_detail['nom_famille']."</a></td>";
+		echo "<td>".$row_detail['adresse']."</td><td>".$row_detail['code_postal']."</td><td>".$row_detail['ville']."</td><td>".$row_detail['pays']."</td>";
+		echo "<td>".jour($row_detail['date'])."/".mois($row_detail['date'])."/".annee($row_detail['date'])."</td>";
+		echo "<td>".jour($row_detail['validite'])."/".mois($row_detail['validite'])."/".annee($row_detail['validite'])."</td>";
+		echo "</tr>" ;
+		}
+	
+		
+	}
+	
+	echo "<tr>" ;
+	echo "<th colspan='8'>  </th>";
+	echo "</tr>" ; 
+	echo "</table>" ; 
+
+
+	?>
+	</div>
+
+	
+
+</div>
+<br />
 </div>
 
 
