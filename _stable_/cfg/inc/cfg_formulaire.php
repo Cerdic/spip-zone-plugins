@@ -270,24 +270,28 @@ class cfg_formulaire_dist{
 	// Efface les donnees envoyees par le formulaire
 	function effacer(){
 		$ok = $this->depot->effacer();
+		$msg = array();
 		// dans le cas d'une suppression, il faut vider $this->val qui
 		// contient encore les valeurs du formulaire, sinon elles sont 
 		// passees dans le fond et le formulaire garde les informations
 		// d'avant la suppression
 		if ($ok) {
 			$this->val = array();
-			$msg = _T('cfg:config_supprimee', array('nom' => $this->nom_config()));
+			$msg[] = _T('cfg:config_supprimee', array('nom' => $this->nom_config()));
 		} else {
-			$msg = _T('cfg:erreur_suppression', array('nom' => $this->nom_config()));
+			$msg[] = _T('cfg:erreur_suppression', array('nom' => $this->nom_config()));
 		}
-		$this->message .= $msg;
-		$this->log($msg);		
+		
+		$this->log($msg);	
+		
+		return array($ok,$msg);	
 	}
 	
 	
 	// Ecrit les donnees postees par le formulaire
 	function ecrire()
 	{	
+		$msg = array();
 		// sinon verifier que le controle
 		// n'a pas retourne de message d'erreur
 		//
@@ -296,14 +300,13 @@ class cfg_formulaire_dist{
 		// $this->message sera vide systematiquement si verifier() n'est pas execute
 		if (!$this->message) {
 			$ok = $this->depot->ecrire();
-			$this->message .= ($msg = $ok 
+			$msg = $ok 
 						? _T('cfg:config_enregistree', array('nom' => $this->nom_config())) 
-						: _T('cfg:erreur_enregistrement', array('nom' => $this->nom_config())));
+						: _T('cfg:erreur_enregistrement', array('nom' => $this->nom_config()));
 			$this->log($msg . ' ' . $this->log_modif);
 		}
 
-		// pipeline 'cfg_post_edition'
-		$this->message = pipeline('cfg_post_edition',array('args'=>array('nom_config'=>$this->nom_config()),'data'=>$this->message));
+		return array($ok, $msg);
 	}
 
 
@@ -323,10 +326,11 @@ class cfg_formulaire_dist{
 	
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$securiser_action();
-			
+
 		// suppression
 		if ($supprimer) {
-			$this->effacer();
+			list($ok,$msg) = $this->effacer();
+			$this->message .= $msg;
 		
 		// sinon modification
 		// seulement si les types de valeurs attendus sont corrects
@@ -340,8 +344,12 @@ class cfg_formulaire_dist{
 			}
 			$this->param->cfg_id = $new_id;
 
-			$this->ecrire();
+			list($ok,$msg) = $this->ecrire();
+			$this->message .= $msg;
 		}
+
+		// pipeline 'cfg_post_edition'
+		$this->message = pipeline('cfg_post_edition',array('args'=>array('nom_config'=>$this->nom_config()),'data'=>$this->message));
 		
 		return true;		
 	}
@@ -420,7 +428,7 @@ class cfg_formulaire_dist{
 	    }
 		
 		// si pas de changement, pas la peine de continuer
-		if (!$this->log_modif) {
+		if (!$this->log_modif && !_request('_cfg_delete')) {
 			$this->message .= _T('cfg:pas_de_changement', array('nom' => $this->nom_config()));
 			$erreurs['message_erreur'] = _T('cfg:pas_de_changement', array('nom' => $this->nom_config()));
 		}

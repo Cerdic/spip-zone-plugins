@@ -27,7 +27,7 @@ class cfg_metapack
     	$val = lire_config($this->cfg->nom_config());
     	if ($this->cfg->param->cfg_id) {
     		$cles = explode('/', $this->cfg->param->cfg_id);
-			foreach ($this->cfg->param->champs_id as $i => $name) {
+			foreach ($this->cfg->champs_id as $i => $name) {
 				$val[$name] = $cles[$i];
 		    }
     	}

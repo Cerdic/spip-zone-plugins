@@ -268,8 +268,8 @@ class cfg_dist
 				// On va chercher la config cible
 				// et on regarde ses donnees pour faire l'onglet
 				// seulement si l'onglet doit etre affiche
-				$cfg = cfg_charger_classe('cfg','inc');
-				$tmp = & new $cfg($fonds, '');
+				$_cfg = cfg_charger_classe('cfg','inc');
+				$tmp = & new $_cfg($fonds, '');
 
 				if ($tmp->form->autoriser() && $tmp->form->param->onglet=='oui') {
 					$args['afficher'] = true;
