@@ -13,8 +13,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_cfg_dist($class = null)
 {
 	include_spip('inc/filtres');
-	include_spip('inc/cfg');
-	$config = & new cfg(
+
+	$cfg = cfg_charger_classe('cfg','inc');
+	$config = & new $cfg(
 		($nom = sinon(_request('cfg'), '')),
 		($cfg_id = sinon(_request('cfg_id'),''))
 		);
@@ -22,16 +23,16 @@ function exec_cfg_dist($class = null)
 	// si le fond cfg demande une redirection, 
 	// (et provient de cette redirection), il est possible
 	// qu'il y ait un message a afficher
-	if ($config->rediriger 
+	if ($config->form->param->rediriger 
 		&& $message = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]) 
 	{
 		include_spip('inc/meta');
 		effacer_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur']);
 		if (defined('_COMPAT_CFG_192')) ecrire_metas();
-		$config->message = $message;
+		$config->form->message = $message;
 	}
 
-	$config->traiter();
+	$config->form->traiter();
 	
 	echo $config->sortie();
 

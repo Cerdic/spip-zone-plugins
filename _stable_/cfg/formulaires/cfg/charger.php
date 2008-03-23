@@ -13,8 +13,8 @@ function formulaires_cfg_charger_dist($cfg="", $cfg_id=""){
 
 	// ici, on a le nom du fond cfg... 
 	// on recupere donc les parametres du formulaire.	
-	include_spip('inc/cfg_formulaire');
-	$config = cfg_get_formulaire($cfg, $cfg_id);
+	$cfg_formulaire = cfg_charger_classe('cfg_formulaire','inc');
+	$config = &new $cfg_formulaire($cfg, $cfg_id);
 
 	$valeurs = array(
 		'_cfg_fond' => 'fonds/cfg_'.$cfg,

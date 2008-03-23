@@ -11,45 +11,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-class cfg_params{
-	
-	function cfg_params($opt=array()){
-		
-		$defaut = array(
-			'afficher_messages' => true, // afficher ce compte rendu ?
-			'autoriser' => 'configurer',	// le "faire" de autoriser($faire), par defaut, autoriser_configurer_dist()	
-			'autoriser_absence_id' => 'non', // autoriser l'insertion de nouveau contenu dans une table sans donner d'identifiant ?
-			'casier' => '', // sous tableau optionel du meta ou va etre stocke le fragment de config
-			'cfg_id' => '', // pour une config multiple , l'id courant
-			'descriptif' => '', // descriptif
-			'depot' => 'metapack', // (ancien 'storage') le depot utilise pour stocker les donnees, par defaut metapack: spip_meta serialise 
-			'fichier' => '', // pour storage php, c'est l'adresse du fichier (depuis la racine de spip), sinon ca prend /local/cfg/nom.php
-			'head' => '', // partie du fond cfg a inserer dans le head par le pipeline header_prive (todo insert_head?)
-			'icone' => '', // lien pour une icone
-			'liens' => array(), // liens optionnels sur des sous-config <!-- liens*=xxx -->
-			'liens_multi' => array(), // liens optionnels sur des sous-config pour des fonds utilisant un champ multiple  <!-- liens_multi*=xxx -->
-			'nom' => '', // le nom du meta (ou autre) ou va etre stocke la config concernee
-			'onglet' => 'oui', // cfg doit-il afficher un lien vers le fond sous forme d'onglet dans la page ?exec=cfg
-			'presentation' => 'auto', // cfg doit-il encadrer le formulaire tout seul ?
-			'refus' => '', // en cas de refus d'autorisation, un message informatif [(#REM) refus=...]
-			'table' => '', // nom de la table sql pour storage extra ou table
-		);
-		
-		$opt = array_merge($defaut, $opt);
-		
-		// stockage dans $this->cle
-		foreach ($opt as $cle=>$val){
-			$this->$cle = $val;	
-		}	
-	}
-	
-	
-}
-
 
 // la classe cfg represente une page de configuration
-class cfg_formulaire
-{
+class cfg_formulaire_dist{
+
 // les parametres des formulaires cfg sont srockes dans cet objet
 	var $param;
 // l'objet de classe cfg_depot qui assure lecture/ecriture/effacement des config
@@ -78,9 +43,10 @@ class cfg_formulaire
 	/*
 	 * Constructeur de la classe
 	 */
-	function cfg_formulaire($nom, $cfg_id = '', $opt = array())
+	function cfg_formulaire_dist($nom, $cfg_id = '', $opt = array())
 	{
-		$this->param = &new cfg_params();
+		$cfg_params = cfg_charger_classe("cfg_params");
+		$this->param = &new $cfg_params();
 		$this->param->nom = $this->vue = $nom;
 		$this->param->cfg_id = $cfg_id;
 		
@@ -128,8 +94,8 @@ class cfg_formulaire
 		$this->param->depot = strtolower(trim($this->param->depot));
 		$classto = 'cfg_' . $this->param->depot;
 		//include_spip('inc/' . $classto);
-		include_spip('inc/cfg_depot');
-		$this->depot = new cfg_depot($this->param->depot, $this);
+		$cfg_depot = cfg_charger_classe('cfg_depot','inc');
+		$this->depot = new $cfg_depot($this->param->depot, $this);
 		$this->val = $this->depot->lire();
 		// stocker le fait que l'on a charge les valeurs
 		$this->charger = true;
@@ -556,8 +522,4 @@ class cfg_formulaire
 	}
 }
 
-
-function cfg_get_formulaire($cfg, $cfg_id=""){
-	return new cfg_formulaire($cfg, $cfg_id);
-}
 ?>

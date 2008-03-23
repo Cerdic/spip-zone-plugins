@@ -8,8 +8,8 @@
 function formulaires_cfg_modifier_dist($cfg="", $cfg_id=""){
 	// enregistrer les modifications de cfg
 
-	include_spip('inc/cfg_formulaire');
-	$config = cfg_get_formulaire($cfg, $cfg_id);
+	$cfg_formulaire = cfg_charger_classe('cfg_formulaire','inc');
+	$config = &new $cfg_formulaire($cfg, $cfg_id);
 	
 	if ($config->autoriser()){
 		$config->traiter();
