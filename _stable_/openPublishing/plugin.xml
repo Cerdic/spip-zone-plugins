@@ -3,27 +3,33 @@
 	<version>0.4</version>
 	<etat>stable</etat>
 	<auteur>Collectif Indymedia Lille
-_ [contact->mailto:imc.lille@no-log.org]
-_ [site->http://lille.indymedia.org]
-_ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
+		- [contact->mailto:imc.lille@no-log.org]
+		- [site->http://lille.indymedia.org]
+		- &#169; 2007-2008 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<description>
 		{{Plugin Publication Ouverte pour site Spip.}} <br />
 		{anciennement plugin openPublishing}<br />
-		{{Ce plugin fourni :}} <br />
-		<ul>
-		<li>un formulaire de publication <code>#FORMULAIRE_ARTICLE{#SELF}</code></li>
-		<li>une nouvelle balise<code>#AGENDA</code> (donne le num&#233;ro de votre rubrique agenda).</li>
-		</ul>
-				
-		{{Procedure d'installation :}} <br />
+		
+		<p>Le plugin "Publication Ouverte" a pour but de fournir une interface de publication d’article publique et anonyme permettant &#224; n'importe quel visiteur d’un site spip de publier un article sans aucune authentification. Cette m&#233;thode de gestion/cr&#233;ation de contenu est appel&#233; "Publication ouverte" (ou open-publishing en anglais). La publication ouverte est principalement pratiqu&#233; par le r&#233;seau indym&#233;dia, ainsi que de nombreux autres sites d’informations alternatives.</p>
 		
 		
-		{{Procedure de d&#233;-installation : }} <br />
+		{{Principe de fonctionnement}}
 		
-		{{Procedure de mise &agrave; jour : }} <br />
-		Pour passer de openPublishing 0.3 à Publication Ouverte :
-		Utilisez le liens "mise &#224; jour" ci-dessous, et suivez les instructions.
+		<p>Le plugin "Publication Ouverte" fourni un formulaire accessible par les visiteurs d’un site SPIP, qu’ils soient ou non enregistr&#233; comme auteur. Ce formulaire permet d’&#233;crire un article sans devoir poss&#233;der un compte sur le site en question. Pour cela, tous les articles &#233;crits via ce formulaire serons attribu&#233; &#224; un auteur par d&#233;faut, commun&#233;ment appel&#233; auteur "anonyme". Il est aussi fortement conseill&#233; de d&#233;sactiver le stockage des IP de SPIP.</p>
+		
+		
+		{{Procedure de mise &#224; jour : }}
+		
+		<p>Pour passer de openPublishing 0.3 &#224; Publication Ouverte, utilisez le lien "mise &#224; jour" ci-dessous, et suivez les instructions.</p>
+	
+		{{Documentation compl&#232;te : }}
+		
+		<p>Pour obtenir une documentation compl&#232;te sur le fonctionnement et la configuration de ce plugin, utilisez le lien "Documentation" ci-dessous.</p>
+	
+		{{Interface de configuration : }}
+		
+		<p>Pour configurer le fonctionnement du plugin Publication Ouverte, utilisez le lien "Configuration" ci-dessous.</p>
 		
 	</description>
 	<lien>[Documentation->http://www.spip-contrib/PublicationOuverte], [Configuration->.?exec=cfg&amp;cfg=op], [mise &#224; jour->.?exec=op_base]</lien>
