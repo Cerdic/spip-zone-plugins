@@ -69,7 +69,6 @@ class cfg_formulaire_dist{
 			'param' => &$this->param
 		);	
 		
-		$this->base_url = generer_url_ecrire('');
 		foreach ($opt as $o=>$v) {
 			$this->$o = $v;
 		}
@@ -77,6 +76,9 @@ class cfg_formulaire_dist{
 		// charger les donnees du fond demande
 		$this->charger();
 	}
+	
+	
+	
 	
 	// pre-analyser le formulaire
 	// c'est a dire recuperer les parametres CFG 
@@ -125,6 +127,145 @@ class cfg_formulaire_dist{
 		
 		return $ok;
 	}
+
+
+
+
+	/*
+	 * Doit controler la validite des valeurs transmises
+	 * (le stockage de ces valeurs devrait etre ailleurs qu'ici)
+	 * 
+	 * Verifie les valeurs postees.
+	 * - stocke les valeurs qui ont changees dans $this->val[$nom_champ] = 'nouvelle_valeur'
+	 * - verifie que les types de valeurs attendus sont corrects ($this->types)
+	 * 
+	 * retourne les messages d'erreur
+	 */
+	function verifier() {
+
+		if ($this->messages['erreurs'] || $this->messages['message_erreur'] || !$this->autoriser()) 
+				return false;
+		
+		// si on a pas poste de formulaire, pas la peine de controler
+		// ce qui mettrait de fausses valeurs dans l'environnement
+		if  (!_request('_cfg_ok') && !_request('_cfg_delete')) return true;
+		
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$securiser_action();
+		
+		// stockage des nouvelles valeurs
+		foreach ($this->champs as $name => $def) {
+			// enregistrement des valeurs postees
+			$oldval = $this->val[$name];
+		    $this->val[$name] = _request($name);
+		    
+		    // tracer les modifications
+		    if ($oldval != $this->val[$name]) {
+		    	$this->log_modif .= $name . ':' . var_export($oldval, true) . '/' . var_export($this->val[$name], true) .', ';
+		    }
+		}
+		   
+		// tester la validite des champs
+		foreach ($this->champs as $name => $def) {		    
+		    if ($erreur = $this->verifier_champ($name)) {
+		    	$this->messages['erreurs'][$name] = $erreur;
+		    }
+	    }
+		
+		// si pas de changement, pas la peine de continuer
+		if (!$this->log_modif && !_request('_cfg_delete')) {
+			$this->messages['message_erreur'][] = _T('cfg:pas_de_changement', array('nom' => $this->nom_config()));
+		}
+
+		// stocker le fait que l'on a controle les valeurs
+		$this->verifier = true;
+	    return !($this->messages['erreurs'] || $this->messages['message_erreur']);
+	}
+	
+	
+	// verification du type de valeur attendue
+	// cela est defini par un nom de class css (class="type_idnum")
+	// 'idnum' etant defini dans $this->types['idnum']...
+	// si le nom du champ possede une traduction, il sera traduit.
+	//
+	// API a revoir, les controles sont trop sommaire,
+	// il faut pouvoir tester une plage de valeur par exemple, simplement
+	// une preg n'est pas ideale
+	// De plus, le multilinguisme n'est pas fait.
+	function verifier_champ($name){
+		$type = $this->champs[$name]['typ'];
+		if (!empty($type) && isset($this->types[$type])) {
+			$dtype = $this->types[$type];
+			if (!preg_match($dtype[0], $this->val[$name])) {
+				// erreur
+				return $name . '&nbsp;:' . $dtype[1];
+			}
+		}
+		// pas d'erreur ou pas de test
+		return;
+	}
+
+
+
+
+	
+	/*
+	 * Gere le traitement du formulaire.
+	 * 
+	 * Si le chargement ou le controle n'ont pas ete fait,
+	 * la fonction s'en occupe.
+	 * 
+	 */
+	function traiter()
+	{
+		if (!$this->verifier) $this->verifier();
+		
+		if ($this->messages['erreurs'] || $this->messages['message_erreur'] || !$this->autoriser()) 
+				return false;
+	
+		if  (!_request('_cfg_ok') &&  !_request('_cfg_delete')) return false;
+		
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$securiser_action();
+	
+		// suppression
+		if (_request('_cfg_delete')) {
+			$this->effacer();
+		
+		// sinon modification (seulement si les types de valeurs attendus sont corrects)
+		} elseif (!($this->messages['message_erreur'] OR $this->messages['erreurs'])) {
+			
+			// lorsque c'est un champ de type multi que l'on modifie 
+			// et si l'identifiant a change,  il faut soit le copier, soit de deplacer
+			$new_id = implode('/', array_map('_request', $this->champs_id));
+			if ($new_id != $this->param->cfg_id && !_request('_cfg_copier')) {
+				$this->effacer();
+			}
+			$this->param->cfg_id = $new_id;
+
+			// ecriture
+			$this->ecrire();
+		}
+
+		// pipeline 'cfg_post_edition'
+		$this->messages = pipeline('cfg_post_edition',array('args'=>array('nom_config'=>$this->nom_config()),'data'=>$this->messages));
+		
+
+		// Si le fond du formulaire demande expressement une redirection
+		// par <!-- rediriger=1 -->, on stocke le message dans une meta
+		// et on redirige le client, de maniere a charger la page
+		// avec la nouvelle config (ce qui permet par exemple a Autorite
+		// de controler d'eventuels conflits generes par les nouvelles autorisations)
+		if ($this->param->rediriger && $this->messages) {
+			include_spip('inc/meta');
+			ecrire_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur'], serialize($this->messages), 'non');
+			if (defined('_COMPAT_CFG_192')) ecrire_metas();
+			include_spip('inc/headers');
+			redirige_par_entete(parametre_url(self(),null,null,'&'));
+		}
+	}
+
+
 
 
 	/*
@@ -190,12 +331,15 @@ class cfg_formulaire_dist{
 		
 	}
 	
+	
 	// une fonction pour effacer les parametres du code html
 	// ce qui evite de dupliquer les tableaux 
 	// (si on utilisait recuperer_parametres() a la place)
 	function effacer_parametres(){
 			$this->fond_compile = effacer_parametres_cfg($this->fond_compile);		
 	}
+	
+	
 	
 	/*
 	 * 
@@ -283,6 +427,7 @@ class cfg_formulaire_dist{
 		return $autoriser;
 	}
 
+
 	/*
 	 * Log le message passe en parametre
 	 * $this->log('message');
@@ -325,138 +470,6 @@ class cfg_formulaire_dist{
 	}
 
 
-	
-	/*
-	 * Gere le traitement du formulaire.
-	 * 
-	 * Si le chargement ou le controle n'ont pas ete fait,
-	 * la fonction s'en occupe.
-	 * 
-	 */
-	function traiter()
-	{
-		if (!$this->charger) $this->charger();
-		if (!$this->verifier) $this->verifier();
-
-		if (!$this->autoriser()) return;
-	
-		if  (!_request('_cfg_ok') &&  !_request('_cfg_delete')) return false;
-		
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$securiser_action();
-	
-		// suppression
-		if (_request('_cfg_delete')) {
-			$this->effacer();
-		
-		// sinon modification (seulement si les types de valeurs attendus sont corrects)
-		} elseif (!($this->messages['message_erreur'] OR $this->messages['erreurs'])) {
-			
-			// lorsque c'est un champ de type multi que l'on modifie 
-			// et si l'identifiant a change,  il faut soit le copier, soit de deplacer
-			$new_id = implode('/', array_map('_request', $this->champs_id));
-			if ($new_id != $this->param->cfg_id && !_request('_cfg_copier')) {
-				$this->effacer();
-			}
-			$this->param->cfg_id = $new_id;
-
-			// ecriture
-			$this->ecrire();
-		}
-
-		// pipeline 'cfg_post_edition'
-		$this->messages = pipeline('cfg_post_edition',array('args'=>array('nom_config'=>$this->nom_config()),'data'=>$this->messages));
-		
-
-		// Si le fond du formulaire demande expressement une redirection
-		// par <!-- rediriger=1 -->, on stocke le message dans une meta
-		// et on redirige le client, de maniere a charger la page
-		// avec la nouvelle config (ce qui permet par exemple a Autorite
-		// de controler d'eventuels conflits generes par les nouvelles autorisations)
-		if ($this->param->rediriger && $this->messages) {
-			include_spip('inc/meta');
-			ecrire_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur'], serialize($this->messages), 'non');
-			if (defined('_COMPAT_CFG_192')) ecrire_metas();
-			include_spip('inc/headers');
-			redirige_par_entete(parametre_url(self(),null,null,'&'));
-		}
-	}
-
-	/*
-	 * Doit controler la validite des valeurs transmises
-	 * (le stockage de ces valeurs devrait etre ailleurs qu'ici)
-	 * 
-	 * Verifie les valeurs postees.
-	 * - stocke les valeurs qui ont changees dans $this->val[$nom_champ] = 'nouvelle_valeur'
-	 * - verifie que les types de valeurs attendus sont corrects ($this->types)
-	 * 
-	 * retourne les messages d'erreur
-	 */
-	function verifier() {
-
-		if ($this->messages['erreurs'] || $this->messages['message_erreur'] || !$this->autoriser()) 
-				return false;
-		
-		// si on a pas poste de formulaire, pas la peine de controler
-		// ce qui mettrait de fausses valeurs dans l'environnement
-		if  (!_request('_cfg_ok') && !_request('_cfg_delete')) return true;
-		
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$securiser_action();
-		
-		// stockage des nouvelles valeurs
-		foreach ($this->champs as $name => $def) {
-			// enregistrement des valeurs postees
-			$oldval = $this->val[$name];
-		    $this->val[$name] = _request($name);
-		    
-		    // tracer les modifications
-		    if ($oldval != $this->val[$name]) {
-		    	$this->log_modif .= $name . ':' . var_export($oldval, true) . '/' . var_export($this->val[$name], true) .', ';
-		    }
-		}
-		   
-		// tester la validite des champs
-		foreach ($this->champs as $name => $def) {		    
-		    if ($erreur = $this->verifier_champ($name)) {
-		    	$this->messages['erreurs'][$name] = $erreur;
-		    }
-	    }
-		
-		// si pas de changement, pas la peine de continuer
-		if (!$this->log_modif && !_request('_cfg_delete')) {
-			$this->messages['message_erreur'][] = _T('cfg:pas_de_changement', array('nom' => $this->nom_config()));
-		}
-
-		// stocker le fait que l'on a controle les valeurs
-		$this->verifier = true;
-	    return !($this->messages['erreurs'] || $this->messages['message_erreur']);
-	}
-	
-	
-	// verification du type de valeur attendue
-	// cela est defini par un nom de class css (class="type_idnum")
-	// 'idnum' etant defini dans $this->types['idnum']...
-	// si le nom du champ possede une traduction, il sera traduit.
-	//
-	// API a revoir, les controles sont trop sommaire,
-	// il faut pouvoir tester une plage de valeur par exemple, simplement
-	// une preg n'est pas ideale
-	// De plus, le multilinguisme n'est pas fait.
-	function verifier_champ($name){
-		$type = $this->champs[$name]['typ'];
-		if (!empty($type) && isset($this->types[$type])) {
-			$dtype = $this->types[$type];
-			if (!preg_match($dtype[0], $this->val[$name])) {
-				// erreur
-				return $name . '&nbsp;:' . $dtype[1];
-			}
-		}
-		// pas d'erreur ou pas de test
-		return;
-	}
-
-
 
 	/*
 	 * Fabriquer les balises des champs d'apres un modele fonds/cfg_<driver>.html
@@ -482,12 +495,8 @@ class cfg_formulaire_dist{
 		include_spip('inc/securiser_action');
 	    $arg = 'cfg0.0.0-' . $this->param->nom . '-' . $this->vue;
 		return 
-			'?exec=cfg&cfg=' . $this->param->nom .
-			//'?cfg=' . $this->param->nom . // inverser les 2 lignes si les formulaires ont action=#SELF, ca devrait suffire et etre mieux ?
-			'&cfg_vue=' . $this->vue .
+			'?cfg=' . $this->vue .
 			'&cfg_id=' . $this->param->cfg_id .
-			'&base_url=' . $this->base_url .
-		    '&lang=' . $GLOBALS['spip_lang'] .
 		    '&arg=' . $arg .
 		    '&hash=' .  calculer_action_auteur('-' . $arg);		
 	}

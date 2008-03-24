@@ -67,9 +67,7 @@ class cfg_dist
 
 	function sortie($contexte = array())
 	{
-		// appeler au prealable formulaire() car il recupere les <!-- machin=...->
-		// machin = titre, boite, descriptif ou autre ...
-		$formulaire = $this->form->formulaire($contexte);
+
 		($this->form->param->titre && $this->form->param->boite)
 		 ||	($this->form->param->titre && ($this->form->param->boite = $this->form->param->titre) && !($this->form->param->titre = ''))
 		 || $this->form->param->boite
@@ -89,8 +87,9 @@ class cfg_dist
 
 		$debut = $this->debut_page();
 
-		// Page appellee sans formulaire valable
-		if (!$formulaire) {
+		
+		if (!$formulaire = $this->form->formulaire($contexte)) {
+			// Page appellee sans formulaire valable
 			$formulaire = 
 			"<img src='"._DIR_PLUGIN_CFG.'cfg.png'."' style='float:right' alt='' />\n";
 			$formulaire .= "<h3>" . _T("cfg:choisir_module_a_configurer") . "</h3>";;
@@ -185,7 +184,7 @@ class cfg_dist
 			}
 		}
 		// On ajoute un bouton 'nouveau'
-		return    "<form method='post' action='$this->form->base_url'><div>\n"
+		return    "<form method='get' action='".generer_url_ecrire('')."'><div>\n"
 				. "<h4>$nom</h4>\n"
 				. "<input type='hidden' name='exec' value='cfg' />\n"
 				. "<input type='hidden' name='cfg' value='$lien' />\n"
