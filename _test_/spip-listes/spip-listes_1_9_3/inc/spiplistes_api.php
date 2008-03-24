@@ -246,10 +246,7 @@ function spiplistes_desabonner_des_listes($id_auteur, $ids_liste) {
 /* retourne l'id auteur depuis l'email */
 function spiplistes_idauteur_depuis_email ($email) {
 	if($email = email_valide($email)) {
-		$sql_select = "id_auteur";
-		$sql_from = "spip_auteurs";
-		$sql_where = "email='$email' AND statut<>'5poubelle'";
-		if($result = sql_select($sql_select, $sql_from, $sql_where, "", "", 1)) {
+		if($result = spiplistes_sql_select_simple ("id_auteur", "spip_auteurs", "email='$email' AND statut<>'5poubelle'")) {
 			$row = spip_fetch_array($result);
 			return($row['id_auteur']);
 		}
@@ -257,6 +254,11 @@ function spiplistes_idauteur_depuis_email ($email) {
 	return(false);
 }
 
+// CP-20080324 : renvoie le premier élément sql demandé
+function spiplistes_sql_select_simple ($sql_select, $sql_table, $sql_where = "", $only_first = true) {
+	$only_first = $only_first ? 1 : "";
+	return(sql_select($sql_select, $sql_table, $sql_where, "", "", $only_first));
+}
 
 /*
  * validation de l'inscription d'un id_auteur

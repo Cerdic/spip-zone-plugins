@@ -28,8 +28,7 @@ function spiplistes_auteur_abonnement () {
 
 	$id_auteur = intval(_request('id_auteur'));
 	if($id_auteur > 0) {
-		$sql_query = "SELECT email,statut FROM spip_auteurs WHERE id_auteur=$id_auteur LIMIT 1";
-		$sql_result = spip_query($sql_query);
+		$sql_result = spiplistes_sql_select_simple("email,statut", "spip_auteurs", "id_auteur=$id_auteur", true);
 		if($row = spip_fetch_array($sql_result)) {
 			if(strlen($auteur_email = $row['email']) > 3) {
 				return(spiplistes_auteur_abonnement_details ($id_auteur, $row['statut'], $auteur_email));
@@ -96,8 +95,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				$abo_ajoute = array();
 				$abo_retire = array();
 				$auteur_current_list = array(); // liste des abonnements de id_auteur
-				$sql_query = "SELECT id_liste FROM spip_auteurs_listes WHERE id_auteur=$id_auteur";
-				$sql_result = spip_query($sql_query);
+				$sql_result = spiplistes_sql_select_simple ("id_liste", "spip_auteurs_listes", "id_auteur=$id_auteur", false);
 				while ($row = spip_fetch_array($sql_result)) {
 					$auteur_current_list[] = $row['id_liste'];
 				}
