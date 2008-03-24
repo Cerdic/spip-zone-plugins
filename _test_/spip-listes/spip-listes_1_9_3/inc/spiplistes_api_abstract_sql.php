@@ -42,7 +42,7 @@ function spilistes_sql_select (
 	if($select && $from) {
 		if(spiplistes_spip_est_inferieur_193()) {
 			include_spip ("inc/utils");
-			spip_query(
+			$sql_query =
 				_spiplistes_sql_select($select)
 				. _spiplistes_sql_from($from)
 				. _spiplistes_sql_where($where)
@@ -51,6 +51,8 @@ function spilistes_sql_select (
 				. _spiplistes_sql_having($having)
 				. _spiplistes_sql_limit($limit)
 				, $serveur
+				;
+			spip_query($sql_query);
 		} else {
 			include_spip ("base/abstract_sql");
 			sql_select(
