@@ -31,7 +31,7 @@ function formulaires_cfg_charger_dist($cfg="", $cfg_id=""){
 			$valeurs[$nom] = $val;	
 		}
 	}
-	
+
 	// return $valeurs; // retourner simplement les valeurs
 	return array(true,$valeurs); // forcer l'etat editable du formulaire et retourner les valeurs
 

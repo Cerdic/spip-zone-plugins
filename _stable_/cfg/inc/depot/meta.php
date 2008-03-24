@@ -38,7 +38,7 @@ class cfg_depot_meta
 
 
 	// ecrit chaque enregistrement de meta pour chaque champ
-	function ecrire($supprimer = false)
+	function ecrire()
 	{
 		foreach ($this->champs as $name => $def) {
 			ecrire_meta($name, $this->val[$name]);
@@ -57,6 +57,13 @@ class cfg_depot_meta
 	    }
 	    if (defined('_COMPAT_CFG_192')) ecrire_metas();
 	    return true;			
+	}
+	
+	
+	
+	function charger_args($args){
+		$this->champs = array($args=>true);
+		return true;	
 	}
 }
 ?>

@@ -9,6 +9,41 @@
  */
 
 
+// charge le depot qui va bien en fonction de l'argument demande
+// exemples : 
+// meta::description
+// metapack::prefixe_plugin
+// metapack::prefixe/casier/champ
+// tablepack::auteur@extra:8/prefixe/casier/champ
+// tablepack::~login@extra/prefixe/casier/champ
+//
+// en l'absence du nom de depot (gauche des ::) cette fonction prendra comme suit :
+// ~ en premier caractere : tablepack
+// : present avant un / : tablepack
+// sinon metapack
+function cfg_charger_depot(&$args){
+	list($depot,$args) = explode('::',$args,2);
+	
+	// si un seul argument, il faut trouver le depot
+	if (!$args) {
+		$args = $depot;
+		if ($args[0] == '~'){
+			$depot = 'tablepack';	
+		} elseif (
+			(list($head, $body) = explode('/',$args,2)) &&
+			(strpos($head,':') !== false)) {
+				$depot = 'tablepack';
+		} else {
+			$depot = 'metapack';	
+		}
+	}
+	
+	$d = cfg_charger_classe('cfg_depot');
+	$depot = new $d($depot);
+	$depot->charger_args($args);
+	return $depot;
+}
+
 // lire_config() permet de recuperer une config depuis le php
 // memes arguments que la balise (forcement)
 // $cfg: la config, lire_config('montruc') est un tableau
@@ -25,6 +60,10 @@ function lire_config($cfg='', $def=null, $serialize=false) {
 
 
 function inc_lire_config_dist($cfg='', $def=null, $serialize=false){
+	$depot = cfg_charger_depot($cfg);
+	if ($depot->nom == 'meta')
+		return $depot->lire_config();
+	
 	$param = charger_fonction("cfg_analyse_param","inc");
 	$params = $param($cfg);
 	
@@ -78,12 +117,15 @@ function inc_lire_config_dist($cfg='', $def=null, $serialize=false){
  */
 function ecrire_config($cfg='', $valeur=null, $serialize=true){
 	$ecrire = charger_fonction("ecrire_config","inc");
-	return $ecrire($cfg, $def, $serialize);	
+	return $ecrire($cfg, $valeur, $serialize);	
 }
 
 
 function inc_ecrire_config_dist($cfg='', $valeur=null, $serialize=true){
-	
+	$depot = cfg_charger_depot($cfg);
+	if ($depot->nom == 'meta')
+		return $depot->ecrire_config($valeur);
+			
 	$param = charger_fonction("cfg_analyse_param","inc");
 	$params = $param($cfg);
 	
@@ -216,10 +258,14 @@ function inc_ecrire_config_dist($cfg='', $valeur=null, $serialize=true){
  */
 function effacer_config($cfg=''){
 	$effacer = charger_fonction("effacer_config","inc");
-	return $effacer($cfg, $def, $serialize);	
+	return $effacer($cfg);	
 }
 
 function inc_effacer_config_dist($cfg=''){
+	$depot = cfg_charger_depot($cfg);
+	if ($depot->nom == 'meta')
+		return $depot->effacer_config();
+	
 	return ecrire_config($cfg);	
 }
 

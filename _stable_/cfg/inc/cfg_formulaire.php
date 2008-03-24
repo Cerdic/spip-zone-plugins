@@ -82,11 +82,14 @@ class cfg_formulaire_dist{
 	// c'est a dire recuperer les parametres CFG 
 	// et les noms des champs du formulaire	
 	function charger(){
+		$ok = true;
+		
 		// lecture de la vue (fond cfg)
 		// il s'agit de recuperer le contenu du fichier
 		if ($this->vue) {
 			$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html');
 			if (!lire_fichier($fichier, $this->controldata)) {
+				$ok = false;
 				$this->messages['message_erreur'][] =  _T('cfg:erreur_lecture', array('nom' => $nom));
 			}
 		}
@@ -95,8 +98,10 @@ class cfg_formulaire_dist{
 		$this->recuperer_parametres();
 			
 		// recherche et stockage des noms de champs de formulaire
-		if ($err = $this->recuperer_noms_champs())
+		if ($err = $this->recuperer_noms_champs()){
+			$ok = false;
 			$this->messages['message_erreur'][] = $err;
+		}
 		
 		/*
 		 * Cas des champs multi, si des champs (Y)
@@ -117,8 +122,8 @@ class cfg_formulaire_dist{
 		$cfg_depot = cfg_charger_classe('cfg_depot','inc');
 		$this->depot = new $cfg_depot($this->param->depot, $this, $this->params);
 		$this->val = $this->depot->lire();
-		// stocker le fait que l'on a charge les valeurs
-		$this->charger = true;
+		
+		return $ok;
 	}
 
 
@@ -272,7 +277,10 @@ class cfg_formulaire_dist{
 		if ($autoriser !== -1) return $autoriser;
 		
 		include_spip('inc/autoriser');
-		return $autoriser = autoriser($this->param->autoriser);
+		if (!$autoriser = autoriser($this->param->autoriser)){
+			$this->messages['message_refus'] = $this->param->refus;
+		}
+		return $autoriser;
 	}
 
 	/*
@@ -329,7 +337,7 @@ class cfg_formulaire_dist{
 	{
 		if (!$this->charger) $this->charger();
 		if (!$this->verifier) $this->verifier();
-		
+
 		if (!$this->autoriser()) return;
 	
 		if  (!_request('_cfg_ok') &&  !_request('_cfg_delete')) return false;
@@ -385,13 +393,16 @@ class cfg_formulaire_dist{
 	 * retourne les messages d'erreur
 	 */
 	function verifier() {
-	    $erreurs = array('message_ok'=>array(),'message_erreur'=>array(),'erreurs'=>array());
-	    
-		if (!$this->charger) $this->charger();
+
+		if ($this->messages['erreurs'] || $this->messages['message_erreur'] || !$this->autoriser()) 
+				return false;
 		
 		// si on a pas poste de formulaire, pas la peine de controler
 		// ce qui mettrait de fausses valeurs dans l'environnement
-		if  (!_request('_cfg_ok') && !_request('_cfg_delete')) return $erreurs;
+		if  (!_request('_cfg_ok') && !_request('_cfg_delete')) return true;
+		
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$securiser_action();
 		
 		// stockage des nouvelles valeurs
 		foreach ($this->champs as $name => $def) {
@@ -403,24 +414,23 @@ class cfg_formulaire_dist{
 		    if ($oldval != $this->val[$name]) {
 		    	$this->log_modif .= $name . ':' . var_export($oldval, true) . '/' . var_export($this->val[$name], true) .', ';
 		    }
-		    
-		    // tester la validite des champs
+		}
+		   
+		// tester la validite des champs
+		foreach ($this->champs as $name => $def) {		    
 		    if ($erreur = $this->verifier_champ($name)) {
-		    	$erreurs['erreurs'][$name] = $erreur;
+		    	$this->messages['erreurs'][$name] = $erreur;
 		    }
 	    }
 		
 		// si pas de changement, pas la peine de continuer
 		if (!$this->log_modif && !_request('_cfg_delete')) {
-			$erreurs['message_erreur'][] = _T('cfg:pas_de_changement', array('nom' => $this->nom_config()));
+			$this->messages['message_erreur'][] = _T('cfg:pas_de_changement', array('nom' => $this->nom_config()));
 		}
 
 		// stocker le fait que l'on a controle les valeurs
 		$this->verifier = true;
-		
-		$this->messages = array_merge($this->messages, $erreurs);
-
-	    return $erreurs;
+	    return !($this->messages['erreurs'] || $this->messages['message_erreur']);
 	}
 	
 	

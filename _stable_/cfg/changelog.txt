@@ -5,7 +5,7 @@ Todo :
 
 v1.4.4 (24 03 2008)
 - naissance de l'indépendance du depot 'meta'
-- 
+- lire/ecrire/effacer_config utilisent le depot meta
 
 v1.4.3 (23 03 2008)
 - permettre la surcharge de lire_config, ecrire_config et effacer_config (a travers les fonctions inc_lire_config_dist())
