@@ -7,6 +7,8 @@
 // $LastChangedDate$
 
 include_spip("inc/plugin_globales_lib");
+include_spip('base/abstract_sql');
+include_spip('inc/spiplistes_api_abstract_sql');
 
 define("_SPIPLISTES_PREFIX", "spiplistes");
 
@@ -106,6 +108,7 @@ define("_SPIPLISTES_ACTION_CHANGER_STATUT_ABONNE", _SPIPLISTES_ACTION_PREFIX."ch
 
 // les formats d'envoi autorisés, ou non pour pseudo-désabonné
 define("_SPIPLISTES_FORMATS_ALLOWED", "html;texte;non");
+define("_SPIPLISTES_FORMAT_DEFAULT", "html");
 
 define("_SPIPLISTES_META_PREFERENCES", 'spiplistes_preferences');
 
@@ -124,11 +127,25 @@ function balise_MELEUSE_CRON($p) {
 
 
 function calcul_DATE_MODIF_SITE() {
-   $date_art=spip_query("SELECT date,titre FROM spip_articles WHERE statut='publie' ORDER BY date DESC LIMIT 0,1");
+	$sql_select = "date,titre";
+	$sql_from = "spip_articles";
+	$sql_where = "statut='publie'";
+	$sql_groupby = "";
+	$sql_orderby = "date DESC";
+	$sql_limit = "1";
+	$sql_having = "";
+   $date_art=sql_select($sql_select, $sql_from, $sql_where, $sql_groupby, $sql_orderby, $sql_limit, $sql_having);
    $date_art=spip_fetch_array($date_art);
    $date_art= $date_art['date'];
    
-   $date_bre=spip_query("SELECT date_heure,titre FROM spip_breves WHERE statut='publie' ORDER BY date_heure DESC LIMIT 0,1");
+	$sql_select = "date_heure,titre";
+	$sql_from = "spip_breves";
+	$sql_where = "statut='publie'";
+	$sql_groupby = "";
+	$sql_orderby = "date_heure DESC";
+	$sql_limit = "1";
+	$sql_having = "";
+   $date_bre=sql_select($sql_select, $sql_from, $sql_where, $sql_groupby, $sql_orderby, $sql_limit, $sql_having);
    $date_bre=spip_fetch_array($date_bre);
    $date_bre= $date_bre['date_heure'];
    
@@ -142,9 +159,16 @@ function balise_DATE_MODIF_SITE($p) {
    return $p;
 }
 
-
+// exemple d'utilisation de la balise: patrons/nouveautes_forum.html
 function calcul_DATE_MODIF_FORUM() {
-   $date_f=spip_query("SELECT date_heure,titre FROM spip_forum WHERE statut='publie' ORDER BY date_heure DESC LIMIT 0,1");
+	$sql_select = "date_heure,titre";
+	$sql_from = "spip_forum";
+	$sql_where = "statut='publie'";
+	$sql_groupby = "";
+	$sql_orderby = "date_heure DESC";
+	$sql_limit = "1";
+	$sql_having = "";
+   $date_f=sql_select($sql_select, $sql_from, $sql_where, $sql_groupby, $sql_orderby, $sql_limit, $sql_having);
    $date_f=spip_fetch_array($date_f);
    $date_f= $date_f['date_heure'];
    

@@ -33,6 +33,9 @@ include_spip ("inc/filtres");    /* email_valide() */
 include_spip ("inc/acces");      /* creer_uniqid() */
 include_spip('inc/charsets');
 
+include_spip('base/abstract_sql');
+
+include_spip('inc/spiplistes_api_abstract_sql');
 include_spip('inc/plugin_globales_lib');
 include_spip('inc/spiplistes_api_globales');
 
@@ -123,15 +126,9 @@ function spiplistes_listes_items_get ($keys, $where=false, $limit=false) {
 	return(__table_items_get('spip_listes', $keys, $where, $limit));
 }
 
-//taille d'une chaine sans saut de lignes ni espaces ni punct
-function spiplistes_strlen($out){
-	$out = preg_replace("/([[:space:]]|[[:punct:]])+/", "", $out);
-	return (strlen($out));
-}
-
 // desabonner des listes (CP-20071016)
 // $listes_statuts : array (statuts des listes,..)
-function spiplistes_desabonner_listes_statut ($id_auteur, $listes_statuts) {
+function spiplistes_listes_desabonner_statut ($id_auteur, $listes_statuts) {
 	if(($id_auteur = intval($id_auteur)) && count($listes_statuts)) {
 		$sql_where = " statut='" . implode("' OR statut='", $listes_statuts) . "'";
 		$sql_query = "SELECT id_liste FROM spip_listes WHERE $sql_where";
@@ -150,6 +147,44 @@ function spiplistes_desabonner_listes_statut ($id_auteur, $listes_statuts) {
 	return(false);
 }
 
+// CP-20080324 : abonner un id_auteur à une id_liste
+function spiplistes_listes_abonner ($id_auteur, $id_liste) {
+	if(
+		(($id_auteur = intval($id_auteur)) > 0) 
+		&& (($id_liste = intval($id_lste)) > 0)
+	) {
+		$sql_table = "spip_auteurs_listes";
+		$sql_champs = array('id_auteur' => $id_auteur, 'id_liste' => $id_liste);
+		return(
+			spiplistes_listes_deabonner($id_auteur, $id_liste)
+			&& sql_insertq($sql_table, $sql_champs)
+		);
+	}
+	return(false);
+}
+
+// CP-20080324 : desabonner un id_auteur d'une id_liste
+function spiplistes_listes_desabonner ($id_auteur, $id_liste) {
+	if(
+		(($id_auteur = intval($id_auteur)) > 0) 
+		&& (($id_liste = intval($id_lste)) > 0)
+	) {
+		$sql_table = "spip_auteurs_listes";
+		$sql_where = array('id_auteur' => $id_auteur, 'id_liste' => $id_liste);
+		return(
+			sql_delete($sql_table, $sql_where)
+		);
+	}
+	return(false);
+}
+
+//taille d'une chaine sans saut de lignes ni espaces ni punct
+function spiplistes_strlen($out){
+	$out = preg_replace("/([[:space:]]|[[:punct:]])+/", "", $out);
+	return (strlen($out));
+}
+
+
 // suspend les abonnements d'un compte
 function spiplistes_suspendre_abos($id_auteur) {
 	return(spiplistes_format_abo_modifier($id_auteur));
@@ -157,24 +192,26 @@ function spiplistes_suspendre_abos($id_auteur) {
 
 // modifier le format abonné
 // si id_auteur, celui-ci uniquement
-// sinon, 'tous' pour modifier globalement
+// sinon, 'tous' pour modifier globalement (uniquement ceux ayant déjà un format)
 function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
 	if($format = (spiplistes_format_est_correct($format) ? $format : false)) {
-		$sql_query = "UPDATE spip_auteurs_elargis SET `spip_listes_format`='".$format."'";
-		$where = "";
+		$sql_table = "spip_auteurs_elargis";
+		$sql_champs = array('`spip_listes_format`' => $format);
 		if($id_auteur=='tous') {
+			$sql_where = "";
 		}
 		else if(($id_auteur = intval($id_auteur)) > 0) {
 			if(!spiplistes_format_abo_demande($id_auteur)) {
-				$sql_query = "INSERT INTO spip_auteurs_elargis (id_auteur,`spip_listes_format`) VALUES ($id_auteur,'$format')";
+				$sql_champs['id_auteur'] = $id_auteur;
+				return(sql_insertq($sql_table, $sql_champs));
 			} else {
-				$where = " WHERE id_auteur=$id_auteur LIMIT 1";
+				$sql_where = "id_auteur=$id_auteur LIMIT 1"; 
 			}
 		}
 		else {
 			return(false);
 		}
-		return(spip_query($sql_query." ".$where));
+		return(sql_updateq($sql_table, $sql_champs, $sql_where));
 	}
 	return(false);
 }

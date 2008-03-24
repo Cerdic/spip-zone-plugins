@@ -79,7 +79,7 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<", _SPIPLISTES_LOG_D
 			// confirme les modifications ?
 			if($confirm == 'oui') {
 				// désabonne l'auteur
-				spiplistes_desabonner_listes_statut($id_auteur, array(_SPIPLISTES_PUBLIC_LIST, _SPIPLISTES_PRIVATE_LIST,_SPIPLISTES_MONTHLY_LIST));
+				spiplistes_listes_desabonner_statut($id_auteur, array(_SPIPLISTES_PUBLIC_LIST, _SPIPLISTES_PRIVATE_LIST,_SPIPLISTES_MONTHLY_LIST));
 	
 				if(is_array($list) && count($list)) {	
 					// on abonne l'auteur aux listes choisies

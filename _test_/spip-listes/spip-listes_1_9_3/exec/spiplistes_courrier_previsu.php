@@ -93,7 +93,6 @@ spiplistes_log("exec_spiplistes_courrier_previsu(), _SPIPLISTES_LOG_DEBUG");
 	if($lire_base) {
 		// prendre le courrier enregistré dans la base
 		$sql_select = 'texte,titre' . (($format=='texte') ? ',message_texte' : '');
-		//if($id_courrier && ($row=spip_fetch_array(spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 0,1")))) {
 		if($id_courrier && ($row=spip_fetch_array(sql_select($sql_select, "spip_courriers", "id_courrier=$id_courrier", "", "", "1")))) {
 			foreach(explode(",", $sql_select) as $key) {
 				$$key = propre($row[$key]);

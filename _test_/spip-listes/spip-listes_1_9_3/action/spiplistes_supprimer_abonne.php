@@ -1,5 +1,6 @@
 <?php
-// SPIP-Listes
+
+// action/spiplistes_supprimer_abonne.php
 
 // _SPIPLISTES_ACTION_SUPPRIMER_ABONNER
 
@@ -11,6 +12,8 @@
 	Supprime l'auteur (visiteur) demandé
 	retourne sur redirect si précisé
 */
+
+// CP-20080324: ce script de SPIP-Listes-V n'est pas encore utilisé. A conserver
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -37,14 +40,17 @@ function action_spiplistes_supprimer_abonne_dist () {
 		
 		if ($row = spip_fetch_array($result)) {
 		
-			$id_auteur = $row['id_auteur'];
+			$id_auteur = intval($row['id_auteur']);
 			$statut = $row['statut'];
 
-			if($statut=='6forum') {
+			if(
+				($id_auteur > 0)
+				&& ($statut=='6forum') 
+			) {
 				spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur=$id_auteur");
 				//spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur=$id_auteur");
 				spip_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur=$id_auteur LIMIT 1");
-				spip_query("DELETE FROM `spip_auteurs_elargis` WHERE id_auteur=$id_auteur LIMIT 1");
+				spiplistes_format_abo_modifier($id_auteur, 'non');
 
 				// garde une petite trace...
 				spiplistes_log("ID_AUTEUR #$id_auteur deleted by ID_AUTEUR #$connect_id_auteur");
