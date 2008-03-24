@@ -50,6 +50,7 @@ function spiplistes_auteur_abonnement () {
 function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $email) {
 	
 	include_spip("inc/spiplistes_api");
+	include_spip("inc/spiplistes_api_presentation");
 
 	global $connect_statut
 		, $connect_toutes_rubriques

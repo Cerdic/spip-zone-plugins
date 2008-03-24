@@ -94,7 +94,7 @@ function exec_spiplistes_courrier_gerer () {
 				//////////////////////////////////////////////////////
 				// demande d'envoi a  mail de test (formulaire local)
 					if(email_valide($email_test)) {
-						if(spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE email='$email_test' LIMIT 1"))==0) {
+						if(!spiplistes_idauteur_depuis_email($email)) {
 						// verifie si l'adresse est connue des auteurs
 							// si inconnue, refuse d'envoyer
 							$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_Adresse_email_inconnue'), true);

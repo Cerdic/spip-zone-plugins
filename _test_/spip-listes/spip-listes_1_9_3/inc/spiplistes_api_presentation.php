@@ -31,6 +31,33 @@ include_spip('inc/presentation');
 	Les fonctions affichage et présentation dans l'espace privé
 */
 
+// retourne la puce qui va bien 
+function spiplistes_bullet_titre_liste ($titre, $statut, $return=false, $id=false) {
+	$result = $img = "";
+	$img = spiplistes_items_get_item('puce', $statut);
+	$alt = spiplistes_items_get_item('alt', $statut);
+	if($img) {
+		$result = "<img src='$img' alt='$alt' ".(!empty($id) ? "id='$id'" : "")." border='0' />\n";
+	}
+	if($return) return($result);
+	else echo($result);
+}
+
+// renvoie un élément de définition courriers/listes (icone, puce, alternate text, etc.)
+// voir spsiplites_mes_options, tableau $spiplistes_items
+function spiplistes_items_get_item($item, $statut) {
+	global $spiplistes_items;
+
+	if(isset($spiplistes_items[$statut]) 
+		&& isset($spiplistes_items[$statut][$item])
+	) {
+		return ($spiplistes_items[$statut][$item]);
+	}
+	else {
+		return($spiplistes_items['default'][$item]);
+	}
+}
+
 function spiplistes_gros_titre($titre, $ze_logo='', $return = false) {
 	if(!spiplistes_spip_est_inferieur_193()) {
 		$ze_logo = ""; // semble ne plus être utilisé dans exec/*
