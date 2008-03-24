@@ -1,0 +1,32 @@
+#HTTP_HEADER{Content-Type: text/html}
+#CACHE{0}
+
+<style type="text/css">
+#TB_window{
+background:#000000 ;
+}
+
+#TB_ajaxContent{
+background-color:#000000 ;
+height:auto;
+}
+</style>
+
+<script type="text/javascript">
+/*
+$(document).ready(function(){
+
+$("div.flash").hover(function(){
+//alert("hop");
+});
+
+});
+*/
+</script>
+
+<div id="video">
+<div style="margin:10px 0px;text-align:right;" class="flash">
+<a id="large" href="spip.php?page=embed_video&id_document=#ID_DOCUMENT&largeur=425&hauteur=355&height=500&width=600" class="thickbox">+ large</a>
+</div>
+[(#MODELE{emb}{id_document}{largeur=#ENV{largeur,255}}{hauteur=#ENV{hauteur,213}}{autostart=true})]
+</div>
