@@ -34,6 +34,8 @@ function a2a_install($action){
 		case 'uninstall':
 			$sql_supprimer_table = "DROP TABLE `spip_article_articles`";
 			spip_query($sql_supprimer_table);
+			effacer_meta('version_a2a');
+			ecrire_metas();
 		break;
 	}
 }
