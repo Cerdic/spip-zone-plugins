@@ -20,6 +20,7 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, �ats-Unis.                   */
 /******************************************************************************************/
+
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$
@@ -39,9 +40,8 @@ include_spip('inc/spiplistes_api_abstract_sql');
 function spiplistes_afficher_pile_messages() {
 
 	$sql_select = "id_liste,titre,date,maj,periode,patron,statut";
-//	$list = spip_query ("SELECT $sql_select FROM spip_listes WHERE message_auto='oui' AND date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE));
-	$list = spilistes_sql_select($sql_select, 'spip_listes', "message_auto='oui' AND date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE));
-	
+	$list = sql_select($sql_select, 'spip_listes', "message_auto='oui' AND date > 0");
+
 	if (spip_num_rows($list) == 0) {
 		return (false); 
 	}
@@ -107,11 +107,10 @@ function exec_spiplistes_courriers_casier () {
 	include_spip ('inc/mots');
 	include_spip ('inc/documents');
 	
+	include_spip('inc/spiplistes_api_globales');
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_api_presentation');
 	include_spip('inc/spiplistes_naviguer_paniers');
-
-	spiplistes_log("spiplistes_afficher_pile_messages()2 <<", _SPIPLISTES_LOG_DEBUG); 	
 
 	global $connect_statut
 		, $connect_toutes_rubriques
