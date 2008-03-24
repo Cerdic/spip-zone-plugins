@@ -220,6 +220,7 @@ function player_form_fin_form () {
 
 /***********************************************/
 function player_petite_boite_info () {
+	include_spip('inc/plugin');
 	$info = plugin_get_infos(_DIR_PLUGIN_PLAYER);
 	$titre = _T(_PLAYER_LANG.'player_nom');
 	$result = ""
