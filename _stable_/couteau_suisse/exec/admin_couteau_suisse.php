@@ -418,7 +418,7 @@ echo '</div>';
 	sort($contribs);
 	$aide = '';
 	if(isset($GLOBALS['cs_installer'])) foreach(array_keys($GLOBALS['cs_installer']) as $pack)
-		$aide .= "\n_ " . _T('desc:pour', array('pack'=>"{[{$pack}->" . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
+		$aide .= "\n_ " . _T('desc:du_pack', array('pack'=>"{[{$pack}|"._T('desc:installe_pack').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
 	$aide = _T('desc:help', array(
 		'reset' => generer_url_ecrire($exec,'cmd=resetall'),
 		'hide' => generer_url_ecrire($exec,'cmd=showall'),
@@ -426,7 +426,7 @@ echo '</div>';
 		'distant' => '<span class="cs_version"><br/>Version distante...</span>',
 		'contribs' => join('', $contribs),
 		'install' => $aide,
-		'pack' => '['._T('desc:pack').'->'.generer_url_ecrire($exec,'cmd=pack#cs_infos').']',
+		'pack' => '['._T('desc:pack').'|'._T('desc:alt_pack').'->'.generer_url_ecrire($exec,'cmd=pack#cs_infos').']',
 	));
 	echo debut_boite_info(true), propre($aide), fin_boite_info(true);
 	$aide = cs_aide_raccourcis();
