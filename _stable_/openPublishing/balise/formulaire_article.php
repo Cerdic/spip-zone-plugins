@@ -7,8 +7,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Les includes de spip utilisé dans cette balise
  */
 
-include_spip('inc/ajouter_documents');
-include_spip('inc/iconifier');
+include_spip('inc/ajouter_documents'); // pour l'ajout de documents
+include_spip('inc/iconifier'); // pour les logos
 include_spip('inc/barre');
 
 /* 
@@ -40,7 +40,6 @@ function balise_FORMULAIRE_ARTICLE_dyn() {
 
 /* RESTE A FAIRE
  * - les notifications
- * - l'insertion de documents distants
  * - permettre le choix du processus de publication
  */
 
@@ -525,14 +524,22 @@ if(!empty($variables['actions']['valider'])) {
 				)
 			);
 		}
+		
+		// notification
+		if (($config['Notification'] == "yes") && (!$variables['flag_erreur'])) {
+			include_spip('inc/mail');
+			include_spip('inc/notifications');
+
+			if (($config['StatutArt'] == "prop") ||  ($config['StatutArt'] == "redac")) {
+				notifier_proposition_article($variables['champs_pri']['id_article']);
+			}
+			if ($config['StatutArt'] == "valid") {
+				notifier_publication_article($variables['champs_pri']['id_article']);
+			}
+		}
 	}
 	
 	if (!$variables['flag_erreur']) { // si pas d'erreur : on sort :)
-		// notification des admins
-		//include_spip('inc/mail');
-		//envoyer_mail("edd@riseup.net", "test", "ceci est un test de notification", $from = "", $headers = "");
-
-
 		// construction de la page de retour
 		$url_retour = $variables['champs_aux']['url_site'] . $config['UrlValidation'];
 		$message = '<META HTTP-EQUIV="refresh" content="'.$config['TempsAtt'].'; url='.$url_retour.'">' . $config['TextValidation'];

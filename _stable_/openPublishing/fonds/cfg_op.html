@@ -130,7 +130,9 @@
 <option value="valid" [(#ENV{StatutArt}|=={valid}|?{selected="selected"})]><:opconfig:statut_valide:></option>
 </select>
 </p>
-
+<p>
+<input type="checkbox" name="Notification" value="yes"  [(#ENV{Notification}|=={yes}|?{checked="yes"})] /><:opconfig:post_notification:><br />
+</p>
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 </fieldset>
 

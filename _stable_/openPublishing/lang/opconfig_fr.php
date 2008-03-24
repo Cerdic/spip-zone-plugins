@@ -93,7 +93,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'post_antispam' => 'Protection anti-spam sur les adresses mails',
 'post_char' => 'caract&egrave;res',
 'post_taille_min' => 'Taille minimal du titre :',
-'post_pipeline' => 'Activez/desactivez l\'interactivit&eacute;e avec les autres plugins (cf. documentation sur spip-contrib)',
+'post_pipeline' => 'Activer/desactiver l\'interactivit&eacute;e avec les autres plugins (cf. documentation sur spip-contrib)',
+'post_notification' => 'Activer la notification mail lors de la publicaiton des articles (vous devez avoir activ&eacute; "Suivi de l\'activit&eacute; &eacute;ditoriale" dans votre configuration SPIP)',
 
 // R
 'rien_a_faire' => 'Vous n\'avez rien &agrave; faire (r&eacute;jouissez vous !), ne touchez surtout pas aux options ci-dessous, celles ci concernent les personnes ayant install&eacute;es une version du plugin openPublishing, et mettant à jour leur plugin.',
