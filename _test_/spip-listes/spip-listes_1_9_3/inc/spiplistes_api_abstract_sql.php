@@ -50,15 +50,15 @@ function spilistes_sql_select (
 				. _spiplistes_sql_orderby($orderby)
 				. _spiplistes_sql_having($having)
 				. _spiplistes_sql_limit($limit)
-				, $serveur
 				;
-			spip_query($sql_query);
+			return(spip_query($sql_query, $serveur));
 		} else {
 			include_spip ("base/abstract_sql");
-			sql_select(
-				$select, $from, $where,
-				$groupby, $orderby, $limit, $having,
-				$serveur, $option
+			return(sql_select(
+					$select, $from, $where,
+					$groupby, $orderby, $limit, $having,
+					$serveur, $option
+				)
 			);
 		}
 	}

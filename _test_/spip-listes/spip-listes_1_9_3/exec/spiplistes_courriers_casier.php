@@ -34,12 +34,14 @@ include_spip('inc/spiplistes_api');
 include_spip('inc/spiplistes_api_courrier');
 include_spip('inc/plugin');
 include_spip('inc/spiplistes_lister_courriers_listes');
+include_spip('inc/spiplistes_api_abstract_sql');
 
 function spiplistes_afficher_pile_messages() {
 
 	$sql_select = "id_liste,titre,date,maj,periode,patron,statut";
-	$list = spip_query ("SELECT $sql_select FROM spip_listes WHERE message_auto='oui' AND date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE));
-
+//	$list = spip_query ("SELECT $sql_select FROM spip_listes WHERE message_auto='oui' AND date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE));
+	$list = spilistes_sql_select($sql_select, 'spip_listes', "message_auto='oui' AND date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE));
+	
 	if (spip_num_rows($list) == 0) {
 		return (false); 
 	}
