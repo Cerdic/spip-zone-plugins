@@ -1,0 +1,10 @@
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
+<B_Recherche>
+	<ul>
+<BOUCLE_Recherche(ARTICLES){recherche}{id_article != #ID_ARTICLE_ORIG}>
+	[<li><a href="[(#EVAL{a2a_lier_article}|generer_url_action{id_article=#ID_ARTICLE&amp;id_article_orig=#ID_ARTICLE_ORIG})]" >(#TITRE)</a></li>]
+</BOUCLE_Recherche>
+	</ul>
+</B_Recherche>
+	<:a2a:pas_de_resultat:>
+<//B_Recherche>

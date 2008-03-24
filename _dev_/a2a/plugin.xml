@@ -1,0 +1,36 @@
+<plugin>
+    <!-- Nom du plugin -->
+    <nom>A2A</nom>
+
+    <!-- Auteur du plugin -->
+    <auteur>crowf00t</auteur>
+    <version>0.1</version>
+    <etat>dev</etat>
+    <icon></icon>
+    <description>Petit plugin qui permet de lier un article &agrave; un ou plusieurs autre(s)</description>
+    <!-- URI de documentation -->
+    <lien>http://www.spip-contrib.net/</lien>
+
+    <!-- précise le prefixe utilisé pour toutes les fonctions du plugin, en général le nom du plugin -->
+    <prefix>a2a</prefix>
+
+    <!-- précise le fichier à charger à chaque recalcul, partie publique -->
+    <fonctions>a2a_fonction.php</fonctions>
+    <!-- précise le fichier à charger à chaque appel de la page, partie publique -->
+    <options>a2a_option.php</options>
+
+    <!-- Chemin du fichier d'installation et de mise à jour -->
+    <install>base/a2a_upgrade.php</install>
+
+    <!--pipeline, surcharge de fonction à des moments précis de la génération d'une page spip -->
+	<pipeline> 
+			<nom>affiche_milieu</nom> 
+			<action>affiche_milieu</action> 
+			<inclure>a2a_pipeline.php</inclure>
+	</pipeline> 
+	<pipeline> 
+			<nom>header_prive</nom> 
+			<action>header_prive</action> 
+			<inclure>a2a_pipeline.php</inclure>
+	</pipeline>
+</plugin>
