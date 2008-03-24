@@ -71,8 +71,7 @@ class cfg_formulaire_dist{
 		
 		foreach ($opt as $o=>$v) {
 			$this->$o = $v;
-		}
-	    
+		}    
 		// charger les donnees du fond demande
 		$this->charger();
 	}
@@ -95,16 +94,16 @@ class cfg_formulaire_dist{
 				$this->messages['message_erreur'][] =  _T('cfg:erreur_lecture', array('nom' => $nom));
 			}
 		}
-		
+
 		// recherche et stockage des parametres de cfg 
 		$this->recuperer_parametres();
-			
+
 		// recherche et stockage des noms de champs de formulaire
 		if ($err = $this->recuperer_noms_champs()){
 			$ok = false;
 			$this->messages['message_erreur'][] = $err;
 		}
-		
+
 		/*
 		 * Cas des champs multi, si des champs (Y)
 		 * sont declares id par la classe cfg_id,
@@ -116,15 +115,14 @@ class cfg_formulaire_dist{
 		if (_request('_cfg_affiche')) {
 			$this->param->cfg_id = implode('/', array_map('_request', $this->champs_id));
 	    } 
-		
+			
 		// creer le storage et lire les valeurs
 		$this->param->depot = strtolower(trim($this->param->depot));
 		$classto = 'cfg_' . $this->param->depot;
 		//include_spip('inc/' . $classto);
 		$cfg_depot = cfg_charger_classe('cfg_depot','inc');
 		$this->depot = new $cfg_depot($this->param->depot, $this, $this->params);
-		$this->val = $this->depot->lire();
-		
+		$this->val = $this->depot->lire();			
 		return $ok;
 	}
 
@@ -302,21 +300,20 @@ class cfg_formulaire_dist{
 	// si la fonction est appelee 2 fois, les parametres identiques ne seront pas copies
 	// sauf si le parametre est un tableau (<!-- param*=valeur -->), les valeurs seront dupliquees
 	function recuperer_parametres(){
-		
+	
 		// pour compatibilite, recuperer l'ancien code #REM
-		$this->recuperer_parametres_rem();
+		$this->recuperer_parametres_rem();	
 		
-		// il existe des champs <!-- param=valeur -->, on les stocke
 		$this->recuperer_fond();
 		$this->fond_compile = preg_replace_callback('/(<!-- ([a-z0-9_]\w+)(\*)?=)(.*?)-->/sim',
 							array(&$this, 'post_params'), $this->fond_compile);
-	
+
 		// s'il en reste : il y a un probleme !
 		// est-ce utile de tester ça ?
 		if (preg_match('/<!-- [a-z0-9_]\w+\*?=/', $this->fond_compile)) {
 			die('Un parametre CFG n\'a pas pu etre importe depuis '.$this->vue);
 		}
-		
+
 		// pour compatibilite avec les anciennes versions (<1.4.1)
 		if (isset($this->param->storage)) 
 			$this->param->depot = $this->param->storage;
@@ -350,7 +347,7 @@ class cfg_formulaire_dist{
 	 */	
 	function recuperer_noms_champs(){	
 		if (!$this->vue) return;
-		
+
 		// recherche d'au moins un champ de formulaire pour savoir si la vue est valide
 		$this->recuperer_fond();
 		if (!preg_match_all(
@@ -400,7 +397,6 @@ class cfg_formulaire_dist{
 			// sinon, ceux qui utilisent les fonds CFG avec l'API des formulaires dynamiques
 			// et mettent des [(#ENV**{editable}|?{' '}) ... ] ne verraient pas leurs variables
 			// dans l'environnement vu que CFG ne pourrait pas lire les champs du formulaire
-			$contexte['editable'] = "oui";
 			$this->fond_compile = recuperer_fond(
 					'fonds/cfg_' . $this->vue,
 					$this->val 

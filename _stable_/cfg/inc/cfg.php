@@ -65,51 +65,9 @@ class cfg_dist
 		$this->form = &new $cfg_formulaire($nom, $cfg_id, $opt);
 	}
 
-	function sortie($contexte = array())
-	{
-
-		($this->form->param->titre && $this->form->param->boite)
-		 ||	($this->form->param->titre && ($this->form->param->boite = $this->form->param->titre) && !($this->form->param->titre = ''))
-		 || $this->form->param->boite
-		 || ($this->form->param->boite = _T('icone_configuration_site') . ' ' . $this->form->nom);
-
-		if (!$this->form->autoriser()) {
-			include_spip('inc/minipres');
-			echo minipres(_T('info_acces_refuse'),
-				$this->form->param->refus
-					? $this->form->param->refus
-					: " (cfg {$config->form->param->nom} - {$config->form->vue} - {$config->form->param->cfg_id})"
-				);
-			exit;
-		}
-
-		include_spip("inc/presentation");
-
-		$debut = $this->debut_page();
-
-		
-		if (!$formulaire = $this->form->formulaire($contexte)) {
-			// Page appellee sans formulaire valable
-			$formulaire = 
-			"<img src='"._DIR_PLUGIN_CFG.'cfg.png'."' style='float:right' alt='' />\n";
-			$formulaire .= "<h3>" . _T("cfg:choisir_module_a_configurer") . "</h3>";;
-		}
-		
-		else
-		// Mettre un cadre_trait_couleur autour du formulaire, sauf si demande
-		// express de ne pas le faire
-		if ($this->form->param->presentation == 'auto') {
-			$formulaire = 
-				debut_cadre_trait_couleur('', true, '', $this->form->param->boite)
-				.$formulaire
-				.fin_cadre_trait_couleur(true);
-		}
-
-		return
-			$debut
-			. $formulaire
-			. $this->fin_page();
-	}
+	function autoriser()  {return $this->form->autoriser(); }
+	function formulaire() {return $this->form->formulaire();	}
+	
 
 
 	/*
@@ -196,57 +154,6 @@ class cfg_dist
 	
 	}
 	
-	
-	
-	function debut_page()
-	{
-		include_spip('inc/presentation');
-		$nom = _request('cfg'); // this->xxx
-
-		pipeline('exec_init',array('args'=>array('exec'=>'cfg'),'data'=>''));
-
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page($this->form->param->boite, 'cfg', $this->form->param->nom);
-		
-		echo "<br /><br /><br />\n";
-
-		echo gros_titre(sinon($this->form->param->titre, _T('cfg:configuration_modules')), '', false);
-
-		//echo barre_onglets("configuration", "cfg");
-
-		echo $this->barre_onglets_cfg();
-
-
-		echo debut_gauche('', true);
-
-		if ($nom)
-			echo	debut_boite_info(true) .
-					propre($this->form->param->descriptif) .
-					fin_boite_info(true);
-
-		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'cfg'),'data'=>''));
-		echo creer_colonne_droite('', true);
-		echo pipeline('affiche_droite',array('args'=>array('exec'=>'cfg'),'data'=>''));
-
-		$m = $this->form->messages;
-		$messages = array();
-		if (count($m['message_ok'])) $messages[] = join('<br />', $m['message_ok']);
-		if (count($m['message_erreur'])) $messages[] = join('<br />', $m['message_erreur']);
-		if (count($m['erreurs'])) $messages[] = join('<br />', $m['erreurs']);
-		$messages = trim(join('<br />', $messages));
-
-		echo
-			(($messages && $this->form->param->afficher_messages)? 
-				debut_boite_info(true) .
-				propre($messages) .
-				fin_boite_info(true)
-			: '') .
-		
-			$this->lier() .
-		
-			debut_droite("", true);
-	}
-
 
 	/*
 	 * Affiche la liste des onglets de CFG
@@ -265,7 +172,7 @@ class cfg_dist
 		// scruter les onglets affichables ainsi que l'onglet 'expose'
 		if ($l = liste_cfg()) {
 			foreach($l as $fonds => $cfg) {
-				
+
 				if (!isset($onglets[$fonds])) 
 					$onglets[$fonds] = array();
 				$args = array();
@@ -275,20 +182,20 @@ class cfg_dist
 				// et on regarde ses donnees pour faire l'onglet
 				// seulement si l'onglet doit etre affiche
 				$_cfg = cfg_charger_classe('cfg','inc');
-				$tmp = & new $_cfg($fonds, '');
+				$tmp = new $_cfg($fonds);
 
-				if ($tmp->form->autoriser() && $tmp->form->param->onglet=='oui') {
+				if ($tmp->autoriser() && $tmp->form->param->onglet=='oui') {
 					$args['afficher'] = true;
 					$args['url'] = generer_url_ecrire(_request('exec'), 'cfg='.$fonds);
 					
 					$path = dirname(dirname($cfg));
-					
+	
 					// titre
 					if ($tmp->form->param->titre)
 						$args['titre'] = $tmp->form->param->titre;
 					else
 						$args['titre'] = $fonds;
-						
+
 					// icone		
 					$args['icone'] = '';
 					if ($tmp->form->param->icone)
@@ -305,7 +212,7 @@ class cfg_dist
 				// rendre actif un parent si l'enfant est actif (onglet=nom_du_parent
 				// (/!\ ne pas le desactiver s'il a deja ete mis actif)
 				$o = $tmp->form->param->onglet;
-				if ($tmp->form->autoriser() && $o && $o!='oui' && $o!='non'){
+				if ($tmp->autoriser() && $o && $o!='oui' && $o!='non'){
 					if (!isset($onglets[$o])) 
 						$onglets[$o]=array();
 					
@@ -347,11 +254,7 @@ class cfg_dist
 		return $res;
 	}
 	
-	
-	function fin_page()
-	{
-		return fin_gauche() . fin_page();
-	}
+
 }
 
 ?>
