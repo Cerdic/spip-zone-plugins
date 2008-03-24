@@ -13,10 +13,10 @@ function formulaires_cfg_modifier_dist($cfg="", $cfg_id=""){
 	
 	if ($config->autoriser()){
 		$config->traiter();
-		$message = $config->message;	
-	} else
-		$message = $config->refus;	
-	
+		$message = join('<br />',$config->messages['message_ok']);	
+	} else {
+		$message = $config->refus;
+	}
 	//return $message; // retourner simplement un message, le formulaire ne sera pas resoumis
 	return array(true,$message); // forcer l'etat editable du formulaire et retourner le message
 }

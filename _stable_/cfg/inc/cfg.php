@@ -229,10 +229,17 @@ class cfg_dist
 		echo creer_colonne_droite('', true);
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'cfg'),'data'=>''));
 
+		$m = $this->form->messages;
+		$messages = array();
+		if (count($m['message_ok'])) $messages[] = join('<br />', $m['message_ok']);
+		if (count($m['message_erreur'])) $messages[] = join('<br />', $m['message_erreur']);
+		if (count($m['erreurs'])) $messages[] = join('<br />', $m['erreurs']);
+		$messages = trim(join('<br />', $messages));
+
 		echo
-			(($this->form->message && $this->form->param->afficher_messages)? 
+			(($messages && $this->form->param->afficher_messages)? 
 				debut_boite_info(true) .
-				propre($this->form->message) .
+				propre($messages) .
 				fin_boite_info(true)
 			: '') .
 		

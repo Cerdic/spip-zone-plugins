@@ -7,6 +7,7 @@ Todo :
 v1.4.3 (23 03 2008)
 - permettre la surcharge de lire_config, ecrire_config et effacer_config (a travers les fonctions inc_lire_config_dist())
 - permettre la surcharge des classes 'cfg','cfg_formulaire','cfg_params','cfg_depot'.
+- uniformiser un peu les messages d'erreur entre cfg et les formulaires dynamiques
 
 v1.4.2 (23 03 2008)
 - deplacement des storage cfg (maintenant appeles 'depot') dans inc/depot/nom.php

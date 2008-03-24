@@ -24,12 +24,11 @@ function exec_cfg_dist($class = null)
 	// (et provient de cette redirection), il est possible
 	// qu'il y ait un message a afficher
 	if ($config->form->param->rediriger 
-		&& $message = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]) 
-	{
-		include_spip('inc/meta');
-		effacer_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur']);
-		if (defined('_COMPAT_CFG_192')) ecrire_metas();
-		$config->form->message = $message;
+		&& $messages = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]){
+			include_spip('inc/meta');
+			effacer_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur']);
+			if (defined('_COMPAT_CFG_192')) ecrire_metas();
+			$config->form->messages = unserialize($messages);
 	}
 
 	$config->form->traiter();

@@ -21,8 +21,8 @@ class cfg_formulaire_dist{
 	var $depot = null;
 // le fond html utilise , en general pour config simple idem $nom
 	var $vue = '';
-// compte-rendu des mises a jour, vide == pas d'erreur
-	var $message = '';
+// compte-rendu des mises a jour
+	var $messages = array('message_ok'=>array(), 'message_erreur'=>array(), 'erreurs'=>array());
 // les champs trouve dans le fond
 	var $champs = array();
 // les champs index
@@ -68,7 +68,7 @@ class cfg_formulaire_dist{
 		if ($this->vue) {
 			$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html');
 			if (!lire_fichier($fichier, $this->controldata)) {
-				$this->message .=  _T('cfg:erreur_lecture', array('nom' => $nom));
+				$this->messages['message_erreur'][] =  _T('cfg:erreur_lecture', array('nom' => $nom));
 			}
 		}
 		
@@ -76,7 +76,8 @@ class cfg_formulaire_dist{
 		$this->recuperer_parametres();
 			
 		// recherche et stockage des noms de champs de formulaire
-		$this->message .=  $this->recuperer_noms_champs();
+		if ($err = $this->recuperer_noms_champs())
+			$this->messages['message_erreur'][] = $err;
 		
 		/*
 		 * Cas des champs multi, si des champs (Y)
@@ -268,93 +269,35 @@ class cfg_formulaire_dist{
 
 	
 	// Efface les donnees envoyees par le formulaire
+	//
+	// dans le cas d'une suppression, il faut vider $this->val qui
+	// contient encore les valeurs du formulaire, sinon elles sont 
+	// passees dans le fond et le formulaire garde les informations
+	// d'avant la suppression	
 	function effacer(){
-		$ok = $this->depot->effacer();
-		$msg = array();
-		// dans le cas d'une suppression, il faut vider $this->val qui
-		// contient encore les valeurs du formulaire, sinon elles sont 
-		// passees dans le fond et le formulaire garde les informations
-		// d'avant la suppression
-		if ($ok) {
+		if ($this->depot->effacer()) {
 			$this->val = array();
-			$msg[] = _T('cfg:config_supprimee', array('nom' => $this->nom_config()));
+			$this->messages['message_ok'][] = $msg = _T('cfg:config_supprimee', array('nom' => $this->nom_config()));
 		} else {
-			$msg[] = _T('cfg:erreur_suppression', array('nom' => $this->nom_config()));
+			$this->messages['message_erreur'][] = $msg = _T('cfg:erreur_suppression', array('nom' => $this->nom_config()));
 		}
-		
 		$this->log($msg);	
-		
-		return array($ok,$msg);	
+		return $msg;	
 	}
 	
 	
 	// Ecrit les donnees postees par le formulaire
-	function ecrire()
-	{	
-		$msg = array();
-		// sinon verifier que le controle
-		// n'a pas retourne de message d'erreur
-		//
-		// /!\ cela implique d'avoir lance $this->verifier()
-		// a un moment donne (#FORMULAIRE_CFG le teste dans valider.php)
-		// $this->message sera vide systematiquement si verifier() n'est pas execute
-		if (!$this->message) {
-			$ok = $this->depot->ecrire();
-			$msg = $ok 
-						? _T('cfg:config_enregistree', array('nom' => $this->nom_config())) 
-						: _T('cfg:erreur_enregistrement', array('nom' => $this->nom_config()));
-			$this->log($msg . ' ' . $this->log_modif);
+	function ecrire() {
+		if ($this->depot->ecrire()){
+			$this->messages['message_ok'][] = $msg = _T('cfg:config_enregistree', array('nom' => $this->nom_config()));
+		} else {
+			$this->messages['message_erreur'][] = $msg =  _T('cfg:erreur_enregistrement', array('nom' => $this->nom_config()));
 		}
-
-		return array($ok, $msg);
+		$this->log($msg . ' ' . $this->log_modif);
+		return $msg;
 	}
 
 
-	/*
-	 * Enregistre les changements proposes
-	 * si l'on est bien authentifie (action)
-	 */
-	function enregistrer(){
-
-		// enregistrement ou suppression ?
-		$enregistrer = $supprimer = false;
-		if  (!_request('_cfg_ok') &&  !_request('_cfg_delete')) 
-			return false;
-	
-		if  ((!$supprimer = _request('_cfg_delete')) && $this->message)
-			return false;
-	
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$securiser_action();
-
-		// suppression
-		if ($supprimer) {
-			list($ok,$msg) = $this->effacer();
-			$this->message .= $msg;
-		
-		// sinon modification
-		// seulement si les types de valeurs attendus sont corrects
-		} elseif (!$this->message) {
-			
-			// lorsque c'est un champ de type multi que l'on modifie
-			// et si l'identifiant a change, il faut soit le copier, soit de deplacer
-			$new_id = implode('/', array_map('_request', $this->champs_id));
-			if ($new_id != $this->param->cfg_id && !_request('_cfg_copier')) {
-				$this->effacer();
-			}
-			$this->param->cfg_id = $new_id;
-
-			list($ok,$msg) = $this->ecrire();
-			$this->message .= $msg;
-		}
-
-		// pipeline 'cfg_post_edition'
-		$this->message = pipeline('cfg_post_edition',array('args'=>array('nom_config'=>$this->nom_config()),'data'=>$this->message));
-		
-		return true;		
-	}
-	
-	
 	
 	/*
 	 * Gere le traitement du formulaire.
@@ -368,21 +311,44 @@ class cfg_formulaire_dist{
 		if (!$this->charger) $this->charger();
 		if (!$this->verifier) $this->verifier();
 		
-		// est on autorise ?
 		if (!$this->autoriser()) return;
-
-		// enregistrer les modifs
-		if (!$this->enregistrer())
-			return;
+	
+		if  (!_request('_cfg_ok') &&  !_request('_cfg_delete')) return false;
+		
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$securiser_action();
+	
+		// suppression
+		if (_request('_cfg_delete')) {
+			$this->effacer();
+		
+		// sinon modification (seulement si les types de valeurs attendus sont corrects)
+		} elseif (!($this->messages['message_erreur'] OR $this->messages['erreurs'])) {
 			
+			// lorsque c'est un champ de type multi que l'on modifie 
+			// et si l'identifiant a change,  il faut soit le copier, soit de deplacer
+			$new_id = implode('/', array_map('_request', $this->champs_id));
+			if ($new_id != $this->param->cfg_id && !_request('_cfg_copier')) {
+				$this->effacer();
+			}
+			$this->param->cfg_id = $new_id;
+
+			// ecriture
+			$this->ecrire();
+		}
+
+		// pipeline 'cfg_post_edition'
+		$this->messages = pipeline('cfg_post_edition',array('args'=>array('nom_config'=>$this->nom_config()),'data'=>$this->messages));
+		
+
 		// Si le fond du formulaire demande expressement une redirection
 		// par <!-- rediriger=1 -->, on stocke le message dans une meta
 		// et on redirige le client, de maniere a charger la page
 		// avec la nouvelle config (ce qui permet par exemple a Autorite
 		// de controler d'eventuels conflits generes par les nouvelles autorisations)
-		if ($this->param->rediriger && $this->message) {
+		if ($this->param->rediriger && $this->messages) {
 			include_spip('inc/meta');
-			ecrire_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur'], $this->message, 'non');
+			ecrire_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur'], serialize($this->messages), 'non');
 			if (defined('_COMPAT_CFG_192')) ecrire_metas();
 			include_spip('inc/headers');
 			redirige_par_entete(parametre_url(self(),null,null,'&'));
@@ -400,7 +366,7 @@ class cfg_formulaire_dist{
 	 * retourne les messages d'erreur
 	 */
 	function verifier() {
-	    $erreurs = array();
+	    $erreurs = array('message_ok'=>array(),'message_erreur'=>array(),'erreurs'=>array());
 	    
 		if (!$this->charger) $this->charger();
 		
@@ -420,22 +386,21 @@ class cfg_formulaire_dist{
 		    }
 		    
 		    // tester la validite des champs
-		    // (TODO: scinder $erreurs et $this->message)
 		    if ($erreur = $this->verifier_champ($name)) {
-		    	$this->message .= $erreur."<br />\n";
-		    	$erreurs[$name] = $erreur;
+		    	$erreurs['erreurs'][$name] = $erreur;
 		    }
 	    }
 		
 		// si pas de changement, pas la peine de continuer
 		if (!$this->log_modif && !_request('_cfg_delete')) {
-			$this->message .= _T('cfg:pas_de_changement', array('nom' => $this->nom_config()));
-			$erreurs['message_erreur'] = _T('cfg:pas_de_changement', array('nom' => $this->nom_config()));
+			$erreurs['message_erreur'][] = _T('cfg:pas_de_changement', array('nom' => $this->nom_config()));
 		}
 
 		// stocker le fait que l'on a controle les valeurs
 		$this->verifier = true;
-			
+		
+		$this->messages = array_merge($this->messages, $erreurs);
+
 	    return $erreurs;
 	}
 	
