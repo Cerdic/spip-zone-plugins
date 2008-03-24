@@ -5,22 +5,22 @@
 
 
 /******************************************************************************************/
-/* SPIP-listes est un systï¿½me de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Gï¿½nï¿½rale GNU publiï¿½e par la Free Software Foundation            */
+/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribuï¿½ car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spï¿½cifique. Reportez-vous ï¿½ la Licence Publique Gï¿½nï¿½rale GNU  */
-/* pour plus de dï¿½tails.                                                                  */
+/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
+/* pour plus de détails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reï¿½u une copie de la Licence Publique Gï¿½nï¿½rale GNU                    */
-/* en mï¿½me temps que ce programme ; si ce n'est pas le cas, ï¿½crivez ï¿½ la                  */
+/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
+/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½tats-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
 // $LastChangedRevision$
 // $LastChangedBy$
@@ -30,21 +30,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
 
-// adaptÃ© de abomailman ()
+// adapté de abomailman ()
 // MaZiaR - NetAktiv
 // tech@netaktiv.com
 
 /*
-	Affiche prÃ©visu d'un courrier
-	- en plein ï¿½cran si demandï¿½
+	Affiche prévisu d'un courrier
+	- en plein écran si demandé
 	- sinon pour import iframe
-	- format html ou texte seul, si demandï¿½
+	- format html ou texte seul, si demandé
 	
-	Utilisï¿½ par courrier_gerer et courrier_edit
+	Utilisé par courrier_gerer et courrier_edit
 	
 	CP-20080322 : 
 	- ce script devrait plutot etre en action/ au lieur d'exec/ ?
-	- charset en previsu plein ï¿½cran texte seul : Mozilla affiche parfois en iso ? parfois respecte UTF-8 !
+	- charset en previsu plein écran texte seul : Mozilla affiche parfois en iso ? parfois respecte UTF-8 !
 	CP-20071011
 */
 
@@ -89,9 +89,9 @@ spiplistes_log("exec_spiplistes_courrier_previsu()");
 		;
 	
 	if($lire_base) {
-		// prendre le courrier enregistrï¿½ dans la base
+		// prendre le courrier enregistré dans la base
 		$sql_select = 'texte,titre' . (($format=='texte') ? ',message_texte' : '');
-		if($id_courrier && ($row=sql_fetch(sql_select("$sql_select","spip_courriers","id_courrier=$id_courrier LIMIT 0,1")))) {
+		if($id_courrier && ($row=spip_fetch_array(spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 0,1")))) {
 			foreach(explode(",", $sql_select) as $key) {
 				$$key = propre($row[$key]);
 			}
@@ -109,7 +109,7 @@ spiplistes_log("exec_spiplistes_courrier_previsu()");
 				
 					header("Content-Type: text/plain charset=$charset");
 					
-					// forcer IE ï¿½ afficher en ligne. 
+					// forcer IE à afficher en ligne. 
 					header("Content-Disposition: inline; filename=spiplistes-previsu.txt");
 
 					$message_texte = 
@@ -145,7 +145,7 @@ spiplistes_log("exec_spiplistes_courrier_previsu()");
 		}
 	}
 	else {
-		// gï¿½nï¿½rer le contenu (ï¿½diteur)
+		// générer le contenu (éditeur)
 		include_spip('public/assembler');
 		$contexte_template = array(
 			'date' => trim ($date)
@@ -209,21 +209,21 @@ spiplistes_log("exec_spiplistes_courrier_previsu()");
 }	
 
 /******************************************************************************************/
-/* SPIP-listes est un systï¿½me de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Gï¿½nï¿½rale GNU publiï¿½e par la Free Software Foundation            */
+/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribuï¿½ car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spï¿½cifique. Reportez-vous ï¿½ la Licence Publique Gï¿½nï¿½rale GNU  */
-/* pour plus de dï¿½tails.                                                                  */
+/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
+/* pour plus de détails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reï¿½u une copie de la Licence Publique Gï¿½nï¿½rale GNU                    */
-/* en mï¿½me temps que ce programme ; si ce n'est pas le cas, ï¿½crivez ï¿½ la                  */
+/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
+/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½tats-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
 ?>
