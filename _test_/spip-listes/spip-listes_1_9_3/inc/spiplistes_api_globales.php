@@ -36,12 +36,20 @@ function spiplistes_log($texte, $level = LOG_WARNING) {
 		__syslog_trace($texte, $level);
 	}
 	else if($level < LOG_DEBUG) {
-		// Taille du log SPIP trop courte
+		// Taille du log SPIP trop courte en 192
 		// Ne pas envoyer si DEBUG sinon tronque sans cesse
+		// En 193, modifier $taille_des_logs
 		spip_log($texte, _SPIPLISTES_PREFIX);
 	}
 }
 
-
+// CP-20080324
+function spiplistes_spip_est_inferieur_193 () {
+	static $is_inf;
+	if($is_inf===NULL) {
+		$is_inf = version_compare($GLOBALS['spip_version_code'],'1.9300','<');
+	}
+	return($is_inf);
+}
 
 ?>

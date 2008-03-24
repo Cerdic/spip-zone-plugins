@@ -8,7 +8,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if(version_compare($GLOBALS['spip_version_code'],'1.9300','<')) { 
+if(spiplistes_spip_est_inferieur_193()) { 
 	return(false);
 }
 

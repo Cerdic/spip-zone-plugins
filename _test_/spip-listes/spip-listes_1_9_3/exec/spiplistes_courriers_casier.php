@@ -36,7 +36,7 @@ include_spip('inc/plugin');
 include_spip('inc/spiplistes_lister_courriers_listes');
 
 function spiplistes_afficher_pile_messages() {
-	
+
 	$sql_select = "id_liste,titre,date,maj,periode,patron,statut";
 	$list = spip_query ("SELECT $sql_select FROM spip_listes WHERE message_auto='oui' AND date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE));
 

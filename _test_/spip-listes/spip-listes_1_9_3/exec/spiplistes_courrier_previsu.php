@@ -49,7 +49,7 @@ include_spip('inc/spiplistes_api_globales');
 */
 
 function exec_spiplistes_courrier_previsu () {
-spiplistes_log("exec_spiplistes_courrier_previsu()");
+spiplistes_log("exec_spiplistes_courrier_previsu(), _SPIPLISTES_LOG_DEBUG");
 	global $meta;
 
 	include_spip('inc/presentation');
