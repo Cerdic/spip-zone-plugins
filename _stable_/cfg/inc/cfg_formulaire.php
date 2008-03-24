@@ -39,16 +39,35 @@ class cfg_formulaire_dist{
 		  'id' => array('#^[a-z_]\w*$#i', 'lettre ou &#095; suivie de lettres, chiffres ou &#095;'),
 		  'idnum' => array('#^\d+$#', 'chiffres', 'intval'),
 		  'pwd' => array('#^.{5}#', 'minimum 5 caract&egrave;res;'));
-	
+
+// Alias pour passer facilement les parametres aux classes appelees
+	var $params = array();
+
 	/*
 	 * Constructeur de la classe
 	 */
 	function cfg_formulaire_dist($nom, $cfg_id = '', $opt = array())
 	{
+		// definition de l'alias params
+		$this->params = array(
+			'champs' => &$this->champs, 
+			'champs_id' => &$this->champs_id,
+			'val' => &$this->val,
+			'param' => &$this->param
+		);
+			
 		$cfg_params = cfg_charger_classe("cfg_params");
 		$this->param = &new $cfg_params();
 		$this->param->nom = $this->vue = $nom;
 		$this->param->cfg_id = $cfg_id;
+		
+		// definition de l'alias params
+		$this->params = array(
+			'champs' => &$this->champs, 
+			'champs_id' => &$this->champs_id,
+			'val' => &$this->val,
+			'param' => &$this->param
+		);	
 		
 		$this->base_url = generer_url_ecrire('');
 		foreach ($opt as $o=>$v) {
@@ -96,7 +115,7 @@ class cfg_formulaire_dist{
 		$classto = 'cfg_' . $this->param->depot;
 		//include_spip('inc/' . $classto);
 		$cfg_depot = cfg_charger_classe('cfg_depot','inc');
-		$this->depot = new $cfg_depot($this->param->depot, $this);
+		$this->depot = new $cfg_depot($this->param->depot, $this, $this->params);
 		$this->val = $this->depot->lire();
 		// stocker le fait que l'on a charge les valeurs
 		$this->charger = true;
@@ -275,7 +294,7 @@ class cfg_formulaire_dist{
 	// passees dans le fond et le formulaire garde les informations
 	// d'avant la suppression	
 	function effacer(){
-		if ($this->depot->effacer()) {
+		if ($this->depot->effacer($this->params)) {
 			$this->val = array();
 			$this->messages['message_ok'][] = $msg = _T('cfg:config_supprimee', array('nom' => $this->nom_config()));
 		} else {
@@ -288,7 +307,7 @@ class cfg_formulaire_dist{
 	
 	// Ecrit les donnees postees par le formulaire
 	function ecrire() {
-		if ($this->depot->ecrire()){
+		if ($this->depot->ecrire($this->params)){
 			$this->messages['message_ok'][] = $msg = _T('cfg:config_enregistree', array('nom' => $this->nom_config()));
 		} else {
 			$this->messages['message_erreur'][] = $msg =  _T('cfg:erreur_enregistrement', array('nom' => $this->nom_config()));

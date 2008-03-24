@@ -3,6 +3,9 @@ Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 - rendre les 'storage' independants de la class cfg_formulaire pour utiliser leur fonction lire/ecrire/effacer dans lire_config, ecrire_config, effacer_config
 
+v1.4.4 (24 03 2008)
+- naissance de l'indépendance du depot 'meta'
+- 
 
 v1.4.3 (23 03 2008)
 - permettre la surcharge de lire_config, ecrire_config et effacer_config (a travers les fonctions inc_lire_config_dist())

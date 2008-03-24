@@ -11,38 +11,52 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // cfg_classic retrouve et met a jour les donnees a plat dans spip_meta
-class cfg_meta
+class cfg_depot_meta
 {
-	function cfg_meta(&$cfg, $opt = array())
+	var $champs = array();
+	var $champs_id = array();
+	var $val = array();
+	var $param = array();
+	
+	function cfg_depot_meta(&$params=array())
 	{
 		$this->cfg = &$cfg;
-		foreach ($opt as $o=>$v) {
-			$this->$o = $v;
-		}
+		foreach ($params as $o=>&$v) {
+			$this->$o = &$v;
+		}	
 	}
 	
-// recuperer les valeurs, utilise la fonction commune lire_config() de cfg_options.php
+	// recuperer les valeurs.
 	function lire()
 	{
     	$val = array();
-		foreach ($this->cfg->champs as $name => $def) {
-			$val[$name] = lire_config($name);
+		foreach ($this->champs as $name => $def) {
+			$val[$name] = lire_meta($name);
 	    }
 	    return $val;
 	}
 
-	// modifier chaque enregistrement de meta pour chaque champ
-	function modifier($supprimer = false)
+
+	// ecrit chaque enregistrement de meta pour chaque champ
+	function ecrire($supprimer = false)
 	{
-		foreach ($this->cfg->champs as $name => $def) {
-			if ($supprimer || !$this->cfg->val[$name]) {
-			    effacer_meta($name);
-			} else {
-			    ecrire_meta($name, $this->cfg->val[$name]);
-			}
+		foreach ($this->champs as $name => $def) {
+			ecrire_meta($name, $this->val[$name]);
 	    }
 	    if (defined('_COMPAT_CFG_192')) ecrire_metas();
 	    return true;
+	}
+	
+	
+	// supprime chaque enregistrement de meta pour chaque champ
+	function effacer(){
+		foreach ($this->champs as $name => $def) {
+			if (!$this->val[$name]) {
+			    effacer_meta($name);
+			}
+	    }
+	    if (defined('_COMPAT_CFG_192')) ecrire_metas();
+	    return true;			
 	}
 }
 ?>
