@@ -52,6 +52,7 @@ function exec_spiplistes_courrier_previsu () {
 spiplistes_log("exec_spiplistes_courrier_previsu(), _SPIPLISTES_LOG_DEBUG");
 	global $meta;
 
+	include_spip('base/abstract_sql');
 	include_spip('inc/presentation');
 	include_spip('inc/distant');
 	include_spip('inc/urls');
@@ -60,6 +61,7 @@ spiplistes_log("exec_spiplistes_courrier_previsu(), _SPIPLISTES_LOG_DEBUG");
 	include_spip('inc/lang');
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_api_courrier');
+	include_spip('inc/spiplistes_api_abstract_sql');
 	
 	foreach(array('patron', 'titre', 'message', 'Confirmer', 'date', 'id_rubrique', 'id_rubrique', 'id_mot', 'id_courrier', 'id_liste'
 		, 'lire_base', 'format', 'plein_ecran') as $key) {
@@ -91,7 +93,8 @@ spiplistes_log("exec_spiplistes_courrier_previsu(), _SPIPLISTES_LOG_DEBUG");
 	if($lire_base) {
 		// prendre le courrier enregistré dans la base
 		$sql_select = 'texte,titre' . (($format=='texte') ? ',message_texte' : '');
-		if($id_courrier && ($row=spip_fetch_array(spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 0,1")))) {
+		//if($id_courrier && ($row=spip_fetch_array(spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 0,1")))) {
+		if($id_courrier && ($row=spip_fetch_array(sql_select($sql_select, "spip_courriers", "id_courrier=$id_courrier", "", "", "1")))) {
 			foreach(explode(",", $sql_select) as $key) {
 				$$key = propre($row[$key]);
 			}
