@@ -50,10 +50,12 @@ function balise_FORMULAIRE_ARTICLE_dyn() {
 /*
  * récuperation des données indispensables
  * le global $_FILES : indispensables pour récuperer les documents joints
+ * le global $auteur_session : pour savoir si l'auteur est loggué ou pas
  * la configuration de Publication Ouverte
  */
 
 global $_FILES, $_HTTP_POST_FILES;
+global $auteur_session;
 $config = lire_config('op');
 
 
@@ -134,6 +136,7 @@ $variables['champs_aux']['type_doc'] = '';
 $variables['champs_aux']['titre_doc'] = '';
 $variables['champs_aux']['description_doc'] = '';
 $variables['champs_aux']['choix_agenda'] = '';
+$variables['champs_aux']['choix_AuteurSpip'] = '';
 $variables['champs_aux']['annee'] = '';
 $variables['champs_aux']['mois'] = '';
 $variables['champs_aux']['jour'] = '';
@@ -505,12 +508,23 @@ if(!empty($variables['actions']['valider'])) {
 			 array("id_article=".$variables['champs_pri']['id_article'])
 		);
 
-		sql_insertq(
-			'spip_auteurs_articles',
-			array(
-				'id_auteur' => $config['IDAuteur'],
-				'id_article' => $variables['champs_pri']['id_article'])
-		);
+		// si auteur SPIP, attribuer l'article à l'auteur et non à "anonyme"
+		if ($variables['champs_aux']['choix_AuteurSpip'] == 'OK') {
+			sql_insertq(
+				'spip_auteurs_articles',
+				array(
+					'id_auteur' => $auteur_session['id_auteur'],
+					'id_article' => $variables['champs_pri']['id_article'])
+			);
+		}
+		else {
+			sql_insertq(
+				'spip_auteurs_articles',
+				array(
+					'id_auteur' => $config['IDAuteur'],
+					'id_article' => $variables['champs_pri']['id_article'])
+			);
+		}
 
 		// Envoyer autres aux plugins
 		if ($config['Pipeline'] == 'yes') {
@@ -555,6 +569,12 @@ $variables = pipeline('OP_action', array(
 			'data'=>$variables
 			));
 
+
+// l'auteur est identifié et à coché la case Auteur SPIP
+if ($variables['champs_aux']['choix_AuteurSpip'] == 'OK') {
+	$variables['champs_pri']['nom_inscription'] = $auteur_session['nom'];
+	$variables['champs_pri']['mail_inscription'] = $auteur_session['email'];
+}
 
 // l'auteur demande la suppression de son logo
 if (!empty($variables['actions']['sup_logo'])) {
@@ -770,12 +790,11 @@ if ($config['Agenda'] == 'yes') {
 // Gestion des documents
 if ($config['DocInc'] == 'yes') {
 
-	$variables['champs_pri']['bouton'] = 'Ajouter l\'image ou le document';
 	$variables['champs_pri']['formulaire_documents'] =
 		inclure_balise_dynamique(
 			array('formulaires/formulaire_documents', 0,
 				array(
-					'bouton' => $variables['champs_pri']['bouton']
+					'bouton' => 'Ajouter l\'image ou le document'
 				)
 			), false);
 }
@@ -783,20 +802,37 @@ if ($config['DocInc'] == 'yes') {
 // Gestion des mot-clefs
 if ($config['MotCle'] == 'yes') {
 
-	$variables['champs_pri']['bouton'] = "Ajouter les nouveaux mot-clefs";
 	$variables['champs_pri']['formulaire_motclefs'] =
 		inclure_balise_dynamique(
 			array('formulaires/formulaire_motclefs', 0,
 				array(
 					'id_article' => $variables['champs_pri']['id_article'] ,
-					'bouton' => $variables['champs_pri']['bouton'] ,
+					'bouton' => "Ajouter les nouveaux mot-clefs"
 				)
 			), false);
 }
 
+if ($config['AuteurSpip'] == 'yes') {
+
+	// si l'utilisateur est loggé
+	if ($auteur_session) {
+		
+		$variables['champs_pri']['formulaire_auteurspip'] =
+			inclure_balise_dynamique(
+				array('formulaires/formulaire_auteurspip', 0,
+					array(
+						'choix_AuteurSpip' => $variables['champs_aux']['choix_AuteurSpip']
+					)
+				), false);
+	}
+}
+
+
+
 // le bouton valider
 $variables['champs_pri']['bouton'] = _T('form_prop_confirmer_envoi');
 
+// Envoi de toutes les variables principales au formulaire principale
 return array('formulaires/formulaire_article', 0, $variables['champs_pri']);
 
 }

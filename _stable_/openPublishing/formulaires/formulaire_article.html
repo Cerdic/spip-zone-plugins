@@ -64,13 +64,8 @@
 	[(#CONFIG{op/SurTitre,''}|=={yes}?{
 	<p>
 	<fieldset><legend><b><:opconfig:publie_surtitre:>&nbsp;(<:opconfig:optionel:>)</b></legend>
-		<table>
-		<tr><td valign="top" width="50%">
-			<p><input type="text" name="surtitre" value="[(#ENV**{surtitre})]"  size="40" maxlength="80"></p>
-		</td><td valign="top" width="50%">
-			<p><:opconfig:explication_surtitre:></p>
-		</td></tr>
-		</table>
+		<p><input type="text" name="surtitre" value="[(#ENV**{surtitre})]"  size="40" maxlength="80"></p>
+		<p><:opconfig:explication_surtitre:></p>
 	</fieldset>
 	</p>
 	})]
@@ -84,13 +79,8 @@
 	[(#CONFIG{op/SousTitre,''}|=={yes}?{
 	<p>
 	<fieldset><legend><b><:opconfig:publie_soustitre:>&nbsp;(<:opconfig:optionel:>)</b></legend>
-	<table>
-	<tr><td valign="top" width="50%">
 		<p><input type="text" name="soustitre" value="[(#ENV**{soustitre})]"  size="40" maxlength="80"></p>
-	</td><td valign="top" width="50%">
 		<p><:opconfig:explication_soustitre:></p>
-	</td></tr>
-	</table>
 	</fieldset>
 	</p>
 	})]
@@ -98,13 +88,8 @@
 	[(#CONFIG{op/Descriptif,''}|=={yes}?{
 	<p>
 	<fieldset><legend><b><:opconfig:publie_descriptif:>&nbsp;(<:opconfig:optionel:>)</b></legend>
-	<table>
-	<tr><td valign="top" width="50%">
 		<p><textarea cols="35" rows="5" name="descriptif">[(#ENV**{descriptif})]</textarea></p>
-	</td><td valign="top" width="50%">
 		<p><:opconfig:explication_descriptif:></p>
-	</td></tr>
-	</table>
 	</fieldset>
 	</p>
 	})]
@@ -113,13 +98,8 @@
 	[(#CONFIG{op/Chapo,''}|=={yes}?{
 	<p>
 	<fieldset><legend><b><:opconfig:publie_chapo:>&nbsp;(<:opconfig:optionel:>)</b></legend>
-	<table>
-	<tr><td valign="top" width="50%">
 		<p><textarea cols="35" rows="5" name="chapo">[(#ENV**{chapo})]</textarea></p>
-	</td><td valign="top" width="50%">
 		<p><:opconfig:explication_chapo:></p>
-	</td></tr>
-	</table>
 	</fieldset>
 	</p>
 	})]
@@ -134,13 +114,8 @@
 	[(#CONFIG{op/PostScriptum,''}|=={yes}?{
 	<p>
 	<fieldset><legend><b><:opconfig:publie_ps:>&nbsp;(<:opconfig:optionel:>)</b></legend>
-	<table>
-	<tr><td valign="top" width="50%">
 		<p><textarea cols="35" rows="5" name="ps">[(#ENV**{ps})]</textarea></p>
-	</td><td valign="top" width="50%">
 		<p><:opconfig:explication_ps:></p>
-	</td></tr>
-	</table>
 	</fieldset>
 	</p>
 	})]
@@ -158,10 +133,15 @@
 		
 	<p>
 	<fieldset><legend><b><:opconfig:identification:>&nbsp;[<:opconfig:optionel:>]</b></legend>
+		<p>
 		<:opconfig:votre_nom:>&nbsp;:&nbsp;
 		<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="15"><br />
 		<:opconfig:votre_mail:>&nbsp;:&nbsp;
 		<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="15"><br />
+		</p>
+
+		[(#ENV*{formulaire_auteurspip})]
+
 	</fieldset>
 	</p>
 

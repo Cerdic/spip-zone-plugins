@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choix_agenda' => 'Choix de la rubrique Agenda',
 'configuration' => 'Configuration Publication Ouverte',
 'caracteres' => ' caract&eacute;res',
+'choix_auteur_spip' => 'Publier en mon nom.',
 
 // D
 
@@ -56,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_min_len' => 'Attention, votre titre doit contenir au minimum ',
 'erreur_upload' => 'erreur d\'upload, le fichier temporaire est introuvable, il ce peut que vous tentiez d\'uploader un fichier trop volumineux. La taille maximale autoris&eacute;e est de 5 Mo',
 'erreur_extension' => 'erreur d\'upload. L\'extention de votre fichier n\'est pas autoris&eacute;e ...',
+'expliq_spip_auteur' => 'Vous &ecirc;tes actuellement logg&eacute;. Si vous voulez publier cet article en votre nom, cochez la case ci-dessous (vous n\'avez alors pas besoin de remplir les champs "pseudo" et "mail")',
 
 // G
 'gestion_rubrique' => 'Gestion des rubriques',
@@ -74,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'option_tagmachine' => 'Permettre aux r&eacute;dacteurs d\'utiliser le plugin tag-machine',
 'option_document' => 'Permettre aux r&eacute;dacteurs d\'inclure des documents dans l\'article',
 'option_logo' => 'Permettre aux r&eacute;dacteurs d\'inclure un logo &agrave; l\'article',
+'option_auteur_spip' => 'Permettre aux r&eacute;dacteurs enregistr&eacute;s en tant que "auteur Spip" de publier les articles en leur nom.',
 'op_base_titre' => 'openPublishing : base de donn&eacute;e',
 
 // P

@@ -101,6 +101,11 @@ function checkbox_agenda($choix_agenda) {
 	return "<input type='checkbox' name='choix_agenda' value='OK' '$checked' />&nbsp;"._T('opconfig:publier_agenda')."<br />";
 }
 
+function checkbox_AuteurSpip($choix_AuteurSpip) {
+	$checked = '';
+	if ($choix_AuteurSpip == "OK") $checked = "CHECKED";
+	return "<input type='checkbox' name='choix_AuteurSpip' value='OK' '$checked' />&nbsp;"._T('opconfig:choix_auteur_spip')."<br />";
+}
 // pour garder la valeur lors d'un rechargement de page
 
 function select_annee($annee) {
@@ -230,7 +235,6 @@ function select_heure($heure) {
 }
 
 // fonction qui demande à la base un nouvel id_article
-
 function op_request_new_id($connect_id_auteur)
 {
 	$statut_nouv='prepa';
@@ -256,14 +260,6 @@ function op_request_new_id($connect_id_auteur)
 		array('id_article = '.sql_quote($article).' LIMIT 1')
 	);
 
-	sql_insertq(
-		'spip_auteurs_articles',
-		array(
-			'id_auteur' => $connect_id_auteur,
-			'id_article' => $article
-		)
-	);
-	
 	// lors de la demande d'un nouvel id article, il faut supprimer les relations éventuelles avec la table mots_articles
 	sql_delete(
 		'spip_mots_articles',
