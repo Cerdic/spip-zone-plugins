@@ -75,7 +75,7 @@ function cs_rempl_glossaire($texte) {
 //print_r($les_mots);
 		array_walk($les_mots, 'cs_preg_quote');
 		$les_mots = glossaire_accents(join('|', $les_mots));
-echo '<hr>==>',htmlentities($les_mots),'<hr>';
+//echo '<hr>==>',htmlentities($les_mots),'<hr>';
 		if(preg_match(",\W($les_mots)\W,i", $texte)) {
 			// prudence 1 : on protege TOUTES les balises contenant le mot en question
 			$texte = preg_replace_callback(",(<[^>]*($les_mots)[^>]*>),Umsi", 'glossaire_echappe_balises_callback', $texte);
