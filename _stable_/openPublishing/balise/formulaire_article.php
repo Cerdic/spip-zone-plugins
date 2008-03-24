@@ -8,7 +8,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 
 include_spip('inc/ajouter_documents'); // pour l'ajout de documents
-include_spip('inc/iconifier'); // pour les logos
 include_spip('inc/barre');
 
 /* 
@@ -37,11 +36,6 @@ function balise_FORMULAIRE_ARTICLE_stat($args, $filtres) {
 
 
 function balise_FORMULAIRE_ARTICLE_dyn() {
-
-/* RESTE A FAIRE
- * - les notifications
- * - permettre le choix du processus de publication
- */
 
 /*
  * récuperation des données indispensables
@@ -149,22 +143,30 @@ $variables['type']['chapo'] = 'texte';
 $variables['type']['titre_doc'] = 'texte';
 $variables['type']['description_doc'] = 'texte';
 
-// création pipeline variables d'environnement
-// ce pipeline permet aux plugins d'ajouter des actions et/ou des champs
+/*
+ * création pipeline variables d'environnement
+ * ce pipeline permet aux plugins d'ajouter des actions et/ou des champs
+ */
+
 $variables = pipeline('OP_environnement', array(
 			'args'=>array('pub_ouverte'=>'pub_ouverte'),
 			'data'=>$variables
 			));
 
-// pour chacunes des actions, récupérer la valeur
+/*
+ * Récuperation des valeurs pour toutes les actions
+ */
+
 foreach ($variables['actions'] as $key => $action) {
 		$variables['actions'][$key] = _request($key);
 }
 
- 
-// Pour chacuns des champs principaux ou auxilliaires, récupérer la valeur
-// Sauf si il a déjà été traité auparavant p.e :
-// - url_site : ne doit pas être traité par stripslashes
+/*
+ * Pour chacuns des champs principaux ou auxilliaires, récupérer la valeur
+ * Sauf si il a déjà été traité auparavant p.e :
+ * - url_site : ne doit pas être traité par stripslashes
+ */
+
 foreach ($variables['champs_pri'] as $key => $champ) {
 		if (empty($champ)) $variables['champs_pri'][$key] = stripslashes(_request($key));
 }
@@ -199,12 +201,16 @@ foreach ($variables['champs_aux'] as $key => $champ) {
 		$variables['champs_aux'][$key] = entites_html($champ);
 }
 
+
 // Action Abandonner
 if (!empty($variables['actions']['abandonner'])) {
 
-	// création pipeline abandon
-	// ce pipeline permet aux plugins d'ajouter traitement en cas d'abandon
-	// par exemple, supressions de la base de donnée des enregistrements temporaires
+	/*
+	 * création pipeline abandon
+	 * ce pipeline permet aux plugins d'ajouter traitement en cas d'abandon
+	 * par exemple, supressions de la base de donnée des enregistrements temporaires
+	 */
+
 	$variables = pipeline('OP_abandon', array(
 				'args'=>array('pub_ouverte'=>'pub_ouverte'),
 				'data'=>$variables
@@ -238,8 +244,12 @@ if (!empty($variables['actions']['abandonner'])) {
 
 
 
-// Gestion de l'identifiant
-// on demande un nouvel identifiant pour l'article si l'utilisateur clique sur l'un des boutons action
+
+/*
+ * Gestion de l'identifiant
+ * on demande un nouvel identifiant pour l'article si l'utilisateur clique sur l'un des boutons action
+ */
+
 $identifiant = false;
 
 foreach ($variables['actions'] as $key => $action) {
@@ -254,16 +264,22 @@ if ($identifiant == true) {
 // FIN gestion identifiant
 
 
+
+
 // l'auteur demande la publication de son article
+// Action Abandonner
 if(!empty($variables['actions']['valider'])) {
 	// vérification avant mise en Base de donnée
 	
 	// récupération du statut par défaut de l'article
 	$statut = $config['StatutArt'];
 	
-	// création pipeline pre_validation
-	// ce pipeline permet aux plugins d'effectuer des traitements avant la validation
-	// p.e : traitement typographique sur le texte
+	/*
+	 * création pipeline pre_validation
+	 * ce pipeline permet aux plugins d'effectuer des traitements avant la validation
+	 * p.e : traitement typographique sur le texte
+	 */
+
 	$variables = pipeline('OP_pre_validation', array(
 				'args'=>array('pub_ouverte'=>'pub_ouverte'),
 				'data'=>$variables
@@ -290,12 +306,15 @@ if(!empty($variables['actions']['valider'])) {
 		$variables['champs_pri']['mess_error'] = _T('opconfig:erreur_min_len') . $config['TitreMin'] . _T('opconfig:caracteres');
 	}
 	
-	// création pipeline validation
-	// ce pipeline permet aux plugins d'effectuer une validation "alternative"
-	// p.e : pour passer ailleur que par la création d'un article (création d'un evenement p.e)
-	// IMPORTANT ; ne surtout pas oublier de mettre le flag_valider à true, sinon on embraye sur les autres types de validation
-	// IMPORTANT : tester le flag_valider, il ce peut qu'un autre plugin le mette à true avant :)
-	// IMPORTANT : tester sa variable action .. sinon le process se déroulera si on clique sur un autre bouton
+	/*
+	 * création pipeline validation
+	 * ce pipeline permet aux plugins d'effectuer une validation "alternative"
+	 * p.e : pour passer ailleur que par la création d'un article (création d'un evenement p.e)
+	 * IMPORTANT ; ne surtout pas oublier de mettre le flag_valider à true, sinon on embraye sur les autres types de validation
+	 * IMPORTANT : tester le flag_valider, il ce peut qu'un autre plugin le mette à true avant :)
+	 * IMPORTANT : tester sa variable action .. sinon le process se déroulera si on clique sur un autre bouton
+	 */
+
 	$variables = pipeline('OP_validation', array(
 				'args'=>array('pub_ouverte'=>'pub_ouverte'),
 				'data'=>$variables
@@ -546,18 +565,24 @@ if(!empty($variables['actions']['valider'])) {
 		$message = $message . $retour .'<br />';
 		return $message;
 	}
-}
+}// FIN Action valider
+
 
 // si l'auteur ne valide pas ou entre pour la première fois, ou bien on effectue une action
+
 
 
 // statut de l'article : en préparation
 $statut="prepa";
 
-// création pipeline action
-// ce pipeline permet aux plugins d'effectuer les traitements sur les variables.
-// IMPORTANT : toujours commencer par un test sur sa variable action !
-// pourra contenir manipulation de la base de donnée, etc ..
+
+/*
+ * création pipeline action
+ * ce pipeline permet aux plugins d'effectuer les traitements sur les variables.
+ * IMPORTANT : toujours commencer par un test sur sa variable action !
+ * pourra contenir manipulation de la base de donnée, etc ..
+ */
+
 $variables = pipeline('OP_action', array(
 			'args'=>array('pub_ouverte'=>'pub_ouverte'),
 			'data'=>$variables
@@ -590,8 +615,7 @@ if(!empty($variables['actions']['previsualiser'])) {
 		$variables['champs_pri']['mess_error'] = _T('opconfig:erreur_min_len') . $config['TitreMin'] . _T('opconfig:caracteres');
 	}
 
-	// remplir $date_redac
-
+	
 	// on rempli le formulaire de prévisualisation
 	$variables['champs_pri']['formulaire_article_previsu'] = 
 		inclure_balise_dynamique(
@@ -687,6 +711,8 @@ if(!empty($variables['actions']['media'])) {
 		if ($return['extension'] == $type_ext) {
 
 			if ($variables['champs_aux']['type_doc'] == 'logo') { // reprise du code iconifier ... action/iconifer.php
+				include_spip('inc/iconifier'); // pour les logos
+
 				// si le logo existe déjà : refus
 				if (!@file_exists( _DIR_LOGOS . 'arton'.$variables['champs_pri']['id_article']. '.' . $type_ext)) {
 					// placer le document arton$article dans IMG
