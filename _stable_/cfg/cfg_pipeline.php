@@ -16,11 +16,7 @@ function cfg_ajouter_boutons($flux) {
 	  // on voit le bouton dans la barre "configuration"
 		$flux['configuration']->sousmenu['cfg']= new Bouton(
 		"../"._DIR_PLUGIN_CFG."cfg-22.png",  // icone
-		_T('cfg:CFG'),	// titre
-		generer_url_ecrire('cfg'),
-		NULL,
-		'cfg'
-		);
+		_T('cfg:CFG'));
 	}
 	return $flux;
 }
