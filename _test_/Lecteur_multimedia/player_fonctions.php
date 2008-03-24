@@ -22,6 +22,7 @@ function Player_head(){
 	. 'soundManager.consoleOnly = true;'
   	. 'soundManager.debugMode = false;'
   	. 'soundManager.nullURL = "'._DIR_PLUGIN_PLAYER.'soundmanager/null.mp3";'
+	. 'var videoNullUrl = "'._DIR_PLUGIN_PLAYER.'null.flv";'
 	. "//--></script>\n";
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'javascript/jscroller.js"></script>';
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>';

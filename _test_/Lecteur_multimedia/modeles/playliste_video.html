@@ -1,0 +1,162 @@
+[(#REM)
+
+	Modele pour <doc> modifié pour le plugin Lecteur Flash pour MP3
+	http://spip-zone.info/spip.php?article18
+	
+	afficher une playliste
+	
+
+]
+
+<div>
+ <script type="text/javascript">
+        	var myListener = new Object();
+        	
+        	/**
+        	 * Initialisation
+        	 */
+        	myListener.onInit = function()
+        	{
+        		
+        	};
+        	/**
+        	 * onClick event on the video
+        	 */
+        	myListener.onClick = function()
+        	{
+        		var total = document.getElementById("info_click").innerHTML;
+        		document.getElementById("info_click").innerHTML = Number(total)+1;
+        	};
+        	/**
+        	 * onKeyUp event on the video
+        	 */
+        	myListener.onKeyUp = function(pKey)
+        	{
+        		document.getElementById("info_key").innerHTML = pKey;
+        	};
+        	/**
+        	 * onComplete event
+        	 */
+        	myListener.onFinished = function()
+        	{
+        		video_next();
+        	};
+        	/**
+        	 * Update
+        	 */
+        	myListener.onUpdate = function()
+        	{
+        		document.getElementById("info_playing").innerHTML = this.isPlaying;
+            	document.getElementById("info_url").innerHTML = this.url;
+            	document.getElementById("info_volume").innerHTML = this.volume;
+            	document.getElementById("info_position").innerHTML = this.position;
+            	document.getElementById("info_duration").innerHTML = this.duration;
+            	// prevoir un preload de la prochaine video
+        		document.getElementById("info_buffer").innerHTML = this.bufferLength + "/" + this.bufferTime;
+            	document.getElementById("info_bytes").innerHTML = this.bytesLoaded + "/" + this.bytesTotal + " (" + this.bytesPercent + "%)";
+            	
+            	var timer = this.bytesPercent ;
+            	
+            	$("#loading").css({width:Math.round(timer) +"%"});
+            	
+            	var isPlaying = (this.isPlaying == "true");
+            	isVideoPlaying = "true" ;
+           		document.getElementById("playerplay").style.display = (isPlaying)?"none":"block";
+           		document.getElementById("playerpause").style.display = (isPlaying)?"block":"none";
+           		
+            	var timer2 = this.position / this.duration * 100 ;
+            	$("#position").css({width:Math.round(timer2) +"%"});
+                   
+        	};
+        	
+        	function getFlashObject()
+        	{
+        		return document.getElementById("myFlash");
+        	}
+                        
+        </script>
+        <!--[if IE]>
+		<script type="text/javascript" event="FSCommand(command,args)" for="myFlash">
+		eval(args);
+		</script>
+		<![endif]-->
+		<style type="text/css">
+
+		.radiobox, #player{
+		width:320px;
+		}
+		
+		#scrollbar {
+		clear:none;
+		}
+#player .timeline a:hover {
+			background-image: url(#CHEMIN{images/control_slider_blue.png});
+		}
+		#player .play {
+			background-image: url(#CHEMIN{images/control_play.png});
+		}
+		#player .play:hover {
+			background-image: url(#CHEMIN{images/control_play_blue.png});
+		}
+		#player .next {
+			background-image: url(#CHEMIN{images/control_end.png});
+		}
+		#player .next:hover {
+			background-image: url(#CHEMIN{images/control_end_blue.png});
+		}
+		#player .prev {
+			background-image: url(#CHEMIN{images/control_start.png});
+		}
+		#player .prev:hover {
+			background-image: url(#CHEMIN{images/control_start_blue.png});
+		}
+		#player .pause {
+			background-image: url(#CHEMIN{images/control_pause.png});
+			display: none;
+		}
+		#player .pause:hover {
+			background-image: url(#CHEMIN{images/control_pause_blue.png});
+		}
+		#player .stop {
+			background-image: url(#CHEMIN{images/control_stop.png});
+		}
+		#player .stop:hover {
+			background-image: url(#CHEMIN{images/control_stop_blue.png});
+		}
+		</style>
+<B_doc>
+#ANCRE_PAGINATION
+<div class="radiobox">
+
+<object id="myFlash" type="application/x-shockwave-flash" data="#CHEMIN{player_flv_js.swf}" width="320" height="240">
+			<param name="movie" value="#CHEMIN{player_flv_js.swf}" />
+			<param name="AllowScriptAccess" value="always" />
+			<param name="FlashVars" value="listener=myListener&amp;interval=500&amp;useHandCursor=0&amp;bgcolor=fd9f00&amp;buffer=9" />
+			<p>Texte alternatif</p>
+</object>
+		
+		<div id="player">
+			<div id="playerplay" class="button play"><a href="javascript:video_play(0)" >PLAY</a></div>
+			<div id="playerpause" class="button pause"><a href="javascript:video_pause()">PAUSE</a></div>
+			<div id="playerprev" class="button prev"><a href="javascript:video_prev()">PRECEDANT</a></div>
+			<div id="playernext" class="button next"><a href="javascript:video_next()">SUIVANT</a></div>
+
+			<div id="playerstop" class="button stop"><a href="javascript:video_stop()">STOP</a></div>
+		</div>
+
+
+
+<div id="scrollbar">
+<div id="loading"></div>
+<div id="position"></div>
+</div>
+
+<ul class="playliste">
+<BOUCLE_doc (DOCUMENTS) {id_article ?} {extension==flv} {fichier == (flv$)} {!par date}{pagination 15}{0,100}>
+<li class="play_"><a href="[(#FICHIER|replace{"\?key=(.)*$",""})]" type="#TYPE" rel="video">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{50})]})]</a></li>
+</BOUCLE_doc>
+</ul>
+[<div class="playliste_pagination">(#PAGINATION)</div>]
+</B_doc>
+
+</div>

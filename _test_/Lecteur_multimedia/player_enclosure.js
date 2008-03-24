@@ -11,10 +11,18 @@
 var track_index = 0;
 var playa='';
 
+live_track = 'stop' ; 
+live_video = 'stop' ; 
+isVideoPlaying = 'false' ; 
+videoPause = false ;     
+
 //tableau des mp3 de la page
 mp3Array = new Array();
-titles = new Array();
+mp3Titles = new Array();
 
+flvArray = new Array();
+flvTitles = new Array();
+	
 function Player_init(url_player) {
 
 soundManager.onload = function() {
@@ -35,9 +43,7 @@ soundManager.defaultOptions.volume = 80;    // set global default volume
 }
 */
 
-var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
-
-	live_track = 'stop' ;         
+var aff= $("a[@rel='enclosure'][@href$=mp3]").size(); 
 
 	//$("body").css({background:"#FF0000"});
 	// preparer un plan B si flash < 8
@@ -52,7 +58,7 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 		function(i) {	 
 				// we store mp3 links in an array
 				mp3Array.push(this.href);
-				titles.push($(this).html());
+				mp3Titles.push($(this).html());
 
 				//demarrer le lecteur lors d'un click
 				$(this).click(
@@ -75,6 +81,25 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 		}
 	);
 
+
+	$("a[@rel='video']").each(
+		function(i) {	 
+				// we store swf links in an array
+				flvArray.push(this.href);
+				flvTitles.push($(this).html());
+
+				//demarrer le lecteur lors d'un click
+				$(this).click(
+		             function(e)
+		             {
+		                e.preventDefault();
+		                video_play(i);	
+						// $("#now_playing").html($(this).html());                
+		             }
+		         );
+		        
+		}
+	);
 
 	// toggle play / pause
 	// toggle play / pause
@@ -115,15 +140,34 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 	// chopper les coordonnées du clic dans la barre de progression
 	$("#scrollbar").click(function(e){
 	var x = Math.round((e.pageX - this.offsetLeft) / $(this).width() * 100);
+     if(live_track !== 'stop'){
      var mySound = soundManager.getSoundById('son_' + track_index);
      var newposition = Math.round(mySound.durationEstimate * x / 100) ;
      soundManager.setPosition('son_' + track_index , newposition) ;
+     }
+     // pareil pour les videos
+     if(isVideoPlaying){
+     var position = Math.round(myListener.duration * x / 100) ;
+     getFlashObject().SetVariable("method:setPosition", position);
+     }
      /*console.log( mySound.position + 'hop' + newposition + ' ' + x +'%');*/
   	 });
 
   	 $("#now_playing").change(function(){
   	      	 scroller_init();
 	 });
+	 
+	 // taille player video
+	 /*  $("#myFlash").toggle(function(){
+	  this.width = 2 * this.width ;
+	  this.height = 2 * this.height ;
+	  }
+	  ,function(){
+	  this.width =  this.width / 2 ;
+	  this.height = this.height / 2 ;
+	 }); */
+	 
+	 
 });
 
 
@@ -185,7 +229,7 @@ function player_play(i){
 	  
 	  	//$("span#now_playing").html(i+"("+mp3Array[i]+")"+track_index);
 	  	//$("span#now_playing").append("son_"+i.id3.artist);
-		file1 = titles[track_index];
+		file1 = mp3Titles[track_index];
 		file1 = file1.replace(/(%20)/g,' ');
 		file1 = file1.substr(0,90);
 		file1 = file1.replace(/(.mp3)/g,' ');
@@ -294,46 +338,60 @@ function unLoad(i){
 	}
 
 
+	// lecteur video
+	// doc : http://flv-player.net/players/js/documentation/
+
+
+ function video_play(i){
+
+	track_index = i ;
+	live_video = i ;
+	
+			if (!videoPause) {
+			video_stop();
+  	 		getFlashObject().SetVariable("method:setUrl", flvArray[i]);
+  	 		}          
+     		getFlashObject().SetVariable("method:play", "");
+     		videoPause = false ; 
+     		$(".playliste li:eq("+i+")").addClass("play_on");
+
+ }
+
+function video_pause()
+            {
+                if(videoPause){ videoPause = false } else { videoPause = true }
+                getFlashObject().SetVariable("method:pause", "");
+            }
+
+function video_next()
+	{	
+		track_index++;
+		video_play(track_index);
+		
+	}
 	
 	
-//player one pix	
-
-var ap_instances = new Array();
-
-function ap_stopAll(playerID) {
-	for(var i = 0;i<ap_instances.length;i++) {
-		try {
-			if(ap_instances[i] != playerID) document.getElementById("audioplayer" + ap_instances[i].toString()).SetVariable("closePlayer", 1);
-			else document.getElementById("audioplayer" + ap_instances[i].toString()).SetVariable("closePlayer", 0);
-		} catch( errorObject ) {
-			// stop any errors
-		}
+	function video_prev()
+	{	
+		track_index--;	
+		video_play(track_index);
+		
 	}
-}
-
-function ap_registerPlayers() {
-	var objectID;
-	var objectTags = document.getElementsByTagName("object");
-	for(var i=0;i<objectTags.length;i++) {
-		objectID = objectTags[i].id;
-		if(objectID.indexOf("audioplayer") == 0) {
-			ap_instances[i] = objectID.substring(11, objectID.length);
-		}
+	
+	function video_stop()
+	{	
+   	 $(".playliste li.play_on").removeClass("play_on");
+	 getFlashObject().SetVariable("method:stop", "");
+	 getFlashObject().SetVariable("method:setUrl", videoNullUrl);          
+     getFlashObject().SetVariable("method:play", "");
+     getFlashObject().SetVariable("method:stop", "");
+     getFlashObject().SetVariable("method:setPosition", 0);
 	}
-}
-
-var ap_clearID = setInterval( ap_registerPlayers, 100 );
 
 
-function play() {
-    document.monFlash.SetVariable("player:jsPlay", "");
-}
-function pause() {
-    document.monFlash.SetVariable("player:jsPause", "");
-}
-function stop() {
-    document.monFlash.SetVariable("player:jsStop", "");
-}
-function volume(n) {
-    document.monFlash.SetVariable("player:jsVolume", n);
-}
+	function video_setVolume()
+            {
+            	var volume = document.getElementById("inputVolume").value;
+            	getFlashObject().SetVariable("method:setVolume", volume);
+            }
+   
