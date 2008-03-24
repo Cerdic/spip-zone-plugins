@@ -19,10 +19,9 @@ function exec_test_couteau_suisse() {
 cs_log("D&eacute;but : exec_test_couteau_suisse()");
 	global $connect_statut, $connect_toutes_rubriques;
 
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
-		echo _T('avis_non_acces_page');
-		fin_page();
+	if (!cout_autoriser()) {
+		include_spip('inc/minipres');
+		echo defined('_SPIP19100')?minipres( _T('avis_non_acces_page')):minipres();
 		exit;
 	}
 
@@ -36,9 +35,8 @@ cs_log("D&eacute;but : exec_test_couteau_suisse()");
 		echo $commencer_page(_T('desc:titre_tests'), "configuration", 'couteau_suisse');
 	}
 
-	echo "<br /><br /><br />";
-	gros_titre(_T('desc:titre_tests'));
-	echo '<div style="width:98%; text-align:left; margin:0 auto">';
+	echo '<br /><br /><br />', gros_titre(_T('desc:titre_tests'), '', false), 
+		'<div style="width:98%; text-align:left; margin:0 auto">';
 	// et hop, on lance les tests !
 	cs_les_tests();
 	echo '</div>';
@@ -51,10 +49,10 @@ cs_log(" FIN : exec_test_couteau_suisse()");
 // $textes est un tableau de chaines
 function cs_test_fun(&$textes, $fonction) {
 	$a = array();
-	if (!function_exists($fonction)) return array('erreur' => "$fonction() introuvable, outil non activ&eacute; !");
+	if (!function_exists($fonction)) return array('erreur' => "$fonction() introuvable : outil non activ&eacute; !");
 	foreach ($textes as $i=>$t) {
 		$b = $fonction($t);
-		$a["\$texte[$i]"] = htmlentities($t);
+		$a["\$texte[$i]"] = htmlentities($t, ENT_QUOTES, $GLOBALS['meta']['charset']);
 //		$a["\$resultat[$i]"] = htmlentities($b);
 		$a["\$previsu[$i]"] = str_replace("\n",'\n', $b);
 	}
@@ -64,12 +62,12 @@ function cs_test_fun(&$textes, $fonction) {
 // affiche un cadre de titre $titre base sur les donnees de $array
 function test_outil($array, $titre) {
 	global $icone;
-	static $i;
-	debut_cadre_trait_couleur($icone,'','',++$i.". $titre");
+	static $i; $i++;
+	echo "<a id=$i></a>",debut_cadre_trait_couleur($icone,true,'',"$i. $titre");
 	foreach($array as $s=>$v) if(is_array($v))
 			foreach($v as $s2=>$v2) echo "\n<b>{$s}[$s2]</b> = ".trim($v2)."<br />";
 		else echo "\n<b>$s</b> = ".trim($v)."<br />";
-	fin_cadre_trait_couleur();
+	echo fin_cadre_trait_couleur(true);
 }
 
 // affiche un text en rouge
@@ -142,13 +140,14 @@ function cs_les_tests() {
 	// test de typo_exposants()
 	include_spip('inc/charsets');
 	$textes = array(
-		"Pr Paul, Dr Jules, Prs Pierre &amp; Paul, Drs Pierre &amp; Paul, Pr&eacute;-St-Gervais ou Dr&eacute;",
-		"Ste Lucie, St-Lucien, St.Patrick, St Patrick, st-jules, Sts Pierre &amp; Paul, STe Lucie",
-		"Bse Lucie, Bx-Lucien, Bx.Patrick, Bx Patrick, bx-jules, Bses Jeanne &amp; Julie",
-		"Iier, Iiers, I&#232;re, 1i&#232;re, 1&#232;res, 1i&#232;res",
-		unicode2charset("Iier, Iiers, I&#232;re, 1i&#232;re, 1&#232;res, 1i&#232;res"),
-		unicode2charset("Ie II&#232;me IIIe IVe Ve VIe VIIe VIIIe IXe Xe XIe XVe XXe XLe L&#232;me LIe"),
-		unicode2charset("Erreurs 2me, 3&#232;me, 4i&#232;me, 5mes, 6&#232;mes, 7i&#232;mes"),
+		"Pr Paul, Dr Jules, Prs Pierre &amp; Paul, Drs Pierre &amp; Paul. Surveiller : Pr&eacute;-St-Gervais ou Dr&eacute;",
+		"Ste Lucie, St-Lucien, St.Patrick, St Patrick, st-jules (laisser?), Sts Pierre &amp; Paul, STe Lucie (laisser?)",
+		"Bse Lucie, Bx-Lucien, Bx.Patrick, Bx Patrick, bx-jules (laisser?), Bses Jeanne &amp; Julie",
+		"Ier, Iers, Iier, Iiers, Ire (laisser?), Ires (laisser?), I&#232;re, 1i&#232;re, 1&#232;res, 1i&#232;res",
+		unicode2charset("Accents : I&#232;re, 1i&#232;re, 1&#232;res, 1i&#232;res"),
+		unicode2charset("Ie II&#232;me IIIe IVe Ve VIe VIIe VIIIe IXe Xe XIe XVe XXe"),
+		unicode2charset("Erreurs de typo : 2me, 3&#232;me, 4i&#232;me, 5mes, 6&#232;mes, 7i&#232;mes"),
+		unicode2charset("Cas probl&#233;matique du L (50) : XLe XL&#232;me XLi&#232;me L&#232;me LIe"),
 		"1er 1ers, 2e 2es, IIIe IIIes, ",
 		"3 ou 4 m², 3 ou 4 m2 et 2 m3.",
 		"Mlle, Mlles, Mme, Mmes et erreurs Melle, Melles",
@@ -156,7 +155,7 @@ function cs_les_tests() {
 		'avant [Mon 1er lien->www.monlien.com] apres le "test"!',
 		'on est pass&eacute; du 7e au 15e rang, pas du 17e au 5e ou du 7e au 3e !',
 	);
-	test_outil(cs_test_fun($textes, 'typo_exposants'), 'Test sur : typo_exposants()');
+	test_outil(cs_test_fun($textes, 'typo_exposants'), 'Test sur : typo_exposants() - Charset du site : '.$GLOBALS['meta']['charset']);
 
 	// test de typo_guillemets()
 	$textes = array(
