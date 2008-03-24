@@ -52,7 +52,7 @@ function cs_test_fun(&$textes, $fonction) {
 	if (!function_exists($fonction)) return array('erreur' => "$fonction() introuvable : outil non activ&eacute; !");
 	foreach ($textes as $i=>$t) {
 		$b = $fonction($t);
-		$a["\$texte[$i]"] = htmlentities($t, ENT_QUOTES, $GLOBALS['meta']['charset']);
+		$a["\$texte[$i]"] = htmlentities($t, ENT_COMPAT, $GLOBALS['meta']['charset']);
 //		$a["\$resultat[$i]"] = htmlentities($b);
 		$a["\$previsu[$i]"] = str_replace("\n",'\n', $b);
 	}

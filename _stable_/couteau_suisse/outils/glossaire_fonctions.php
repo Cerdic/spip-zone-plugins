@@ -45,7 +45,7 @@ function glossaire_accents($regexpr) {
 
 function glossaire_accents_callback($matches) {
 	$u = unicode2charset($matches[0]);
-	$a = array_unique(array($u, htmlentities($u), $matches[0]));
+	$a = array_unique(array($u, htmlentities($u, ENT_QUOTES, $GLOBALS['meta']['charset']), $matches[0]));
 	return '(?:'.join('|', $a).')';
 }
 function glossaire_echappe_balises_callback($matches) {
