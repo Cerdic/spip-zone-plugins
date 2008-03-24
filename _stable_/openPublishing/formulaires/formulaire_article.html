@@ -1,4 +1,4 @@
-#CACHE{86400}
+#CACHE{0}
 
 <form action="[(#ENV{url})]" method="post" name="formulaire_article" enctype="multipart/form-data">
 
@@ -134,9 +134,9 @@
 	<p>
 	<fieldset><legend><b><:opconfig:identification:>&nbsp;[<:opconfig:optionel:>]</b></legend>
 		<p>
-		<:opconfig:votre_nom:>&nbsp;:&nbsp;
+		<:opconfig:votre_nom:><br />
 		<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="15"><br />
-		<:opconfig:votre_mail:>&nbsp;:&nbsp;
+		<:opconfig:votre_mail:><br />
 		<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="15"><br />
 		</p>
 

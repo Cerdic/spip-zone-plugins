@@ -35,6 +35,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'documents_lies' => 'Les documents attach&eacute;s &agrave; votre article',
 'description_plugin' => 'Le plugin <b>Publication Ouverte</b> permet la publication d\'articles par les visiteurs de votre site depuis l\'espace publique, sans qu\'il soit n&eacute;cessaire de s\'identifier. Les options ci-dessous permettent d\'adapter le fonctionnement du plugin &agrave; votre site.',
+'document_inclusion' => 'Document (le fichier apparaitra sous forme de vignette cliquable)',
+'document_explique' => 'Cette option permet de charger des documents provenant de votre ordinateur et de les lier &agrave; votre article. Si vous choississez l\'option "image", vous pourrez alors inclure votre image directement dans le texte de votre article. Si vous choisissez l\'option "document", vous pourrez alors inclure votre document sous forme de vignette cliquable directement dans le texte de votre article.',
+'document_distant' => 'OU incluez un document distant',
+'expliq_document_distant' => 'Un document distant est un document pr&eacute;sent sur un autre serveur, qui sera li&eacute; &agrave; votre article, mais sans &ecirc;tre dupliqu&eacute;',
+'description_document' => 'D&eacute;crivez votre document',
+'descriptif_doc' => 'Descriptif',
 
 // E
 'expliq_sup_table' => 'La version 0.4 du plugin "Publication Ouverte" n\'utilise plus les tables spip_op_config et spip_op_rubriques. Si votre ancienne version du plugin &eacute;tait la 0.3 ou la 0.2.2, il vous faut supprimer totalement ces tables et refaire la configuration de votre plugin :',
@@ -76,7 +82,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'option_tagmachine' => 'Permettre aux r&eacute;dacteurs d\'utiliser le plugin tag-machine',
 'option_document' => 'Permettre aux r&eacute;dacteurs d\'inclure des documents dans l\'article',
 'option_logo' => 'Permettre aux r&eacute;dacteurs d\'inclure un logo &agrave; l\'article',
-'option_auteur_spip' => 'Permettre aux r&eacute;dacteurs enregistr&eacute;s en tant que "auteur Spip" de publier les articles en leur nom.',
+'option_auteur_spip' => 'Permettre aux r&eacute;dacteurs enregistr&eacute;s en tant que "auteur Spip" de publier les articles en leur nom',
+'option_doc_distant' => 'Permettre aux r&eacute;dacteurs d\'inclure des documents distants',
 'op_base_titre' => 'openPublishing : base de donn&eacute;e',
 
 // P
@@ -119,10 +126,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_statut_op' => 'Statut des articles apr&egrave;s la r&eacute;daction',
 'titre_posttraitement' => 'Post-traitement des articles',
 'titre_renvois' => 'Gestion des renvois',
+'titre_doc' => 'Titre',
 'transfert_auteurs' => 'Mettre &agrave; jours les champs extra de la table spip_articles.',
 'transfert_auteurs_suite' => '(&agrave; partir des informations de la table spip_op_auteurs).',
-
+'telecharger_document' => 'T&eacute;l&eacute;chargez votre document',
 'transfert_auteurs_ok' => 'Si l\'op&eacute;ration c\'est bien d&eacute;roul&eacute;e, vous pouvez maintenant supprimer la table obsol&eacute;te.',
+'type_document' => 'Le type de votre document',
 
 // U
 'utiliser_surtitre' => 'Utiliser le champ Sur-titre',
@@ -176,8 +185,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'document_joint' => 'Joindre un document ou une image',
-'document_inclusion' => 'Document (le fichier apparaitra sous forme de lien sous l\'article)',
-'document_explique' => 'Cette option permet de charger des documents provenant de votre ordinateur et de les lier &agrave; votre article. Si vous choississez l\'option "image", vous pourrez alors inclure votre image directement dans le texte de votre article. Si vous choisissez l\'option "document", vous pourrez alors inclure votre document sous forme de vignette cliquable directement dans le texte de votre article.',
 'deja_base' => ' est d&eacute;j&agrave; dans la base.',
 'deinstaller' => 'D&eacute;sinstaller l\'openPublishing',
 
@@ -320,7 +327,6 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'suprimmer_op' => 'Supprimer openPublishing',
 
 // T
-'telecharger_document' => 'T&eacute;l&eacute;chargez votre document',
 'titre_minuscule' => 'Post-traitement du titre',
 'titre_impo_minuscule' => 'Les titres sont impos&eacute;s en minuscule',
 'titre_non_minuscule' => 'Les titres peuvent utiliser des majuscules',

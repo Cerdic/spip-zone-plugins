@@ -44,20 +44,14 @@ function balise_FORMULAIRE_ARTICLE_dyn() {
  * - permettre le choix du processus de publication
  */
 
-/* BUG A CORRIGER
- */
-
 /*
  * récuperation des données indispensables
  * le global $_FILES : indispensables pour récuperer les documents joints
- * le global $auteur_session : pour savoir si l'auteur est loggué ou pas
  * la configuration de Publication Ouverte
  */
 
 global $_FILES, $_HTTP_POST_FILES;
-global $auteur_session;
 $config = lire_config('op');
-
 
 /*
  * Premier test : si pas d'auteur "anonyme", on jette.
@@ -135,6 +129,7 @@ $variables['champs_aux']['doc'] = '';
 $variables['champs_aux']['type_doc'] = '';
 $variables['champs_aux']['titre_doc'] = '';
 $variables['champs_aux']['description_doc'] = '';
+$variables['champs_aux']['url_doc'] = _request('url_doc');
 $variables['champs_aux']['choix_agenda'] = '';
 $variables['champs_aux']['choix_AuteurSpip'] = '';
 $variables['champs_aux']['annee'] = '';
@@ -255,14 +250,6 @@ foreach ($variables['actions'] as $key => $action) {
 if ($identifiant == true) {
 	if (!$variables['champs_pri']['id_article']) { // premier passage
 		$variables['champs_pri']['id_article'] = op_request_new_id($config['IDAuteur']);
-		// Affichage des infos si l'auteur est identifié et s'il n'a pas modifié les champs identification
-		$auteur_session = $GLOBALS['auteur_session'];
-		if($auteur_session) {
-			if (!$variables['champs_pri']['nom_inscription'])
-				$variables['champs_pri']['nom_inscription'] = $auteur_session['nom'];
-			if (!$variables['champs_pri']['mail_inscription'])
-				$variables['champs_pri']['mail_inscription'] = $auteur_session['email'];
-		}
 	}
 }
 // FIN gestion identifiant
@@ -513,7 +500,7 @@ if(!empty($variables['actions']['valider'])) {
 			sql_insertq(
 				'spip_auteurs_articles',
 				array(
-					'id_auteur' => $auteur_session['id_auteur'],
+					'id_auteur' => $GLOBALS['auteur_session']['id_auteur'],
 					'id_article' => $variables['champs_pri']['id_article'])
 			);
 		}
@@ -572,8 +559,8 @@ $variables = pipeline('OP_action', array(
 
 // l'auteur est identifié et à coché la case Auteur SPIP
 if ($variables['champs_aux']['choix_AuteurSpip'] == 'OK') {
-	$variables['champs_pri']['nom_inscription'] = $auteur_session['nom'];
-	$variables['champs_pri']['mail_inscription'] = $auteur_session['email'];
+	$variables['champs_pri']['nom_inscription'] = $GLOBALS['auteur_session']['nom'];
+	$variables['champs_pri']['mail_inscription'] = $GLOBALS['auteur_session']['email'];
 }
 
 // l'auteur demande la suppression de son logo
@@ -648,22 +635,33 @@ if(!empty($variables['actions']['mots'])) {
 // si l'auteur ajoute un documents
 if(!empty($variables['actions']['media'])) {
 
-	// compatibilité php < 4.1
-	if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
-		
-	// récupération des variables
-	$fichier = $_FILES['doc']['name'];
-	$size = $_FILES['doc']['size'];
-	$tmp = $_FILES['doc']['tmp_name'];
-	$type = $_FILES['doc']['type'];
-	$error = $_FILES['doc']['error'];
+	// ce n'est pas un document distant
+	if (empty($variables['champs_aux']['url_doc'])) {
+		// compatibilité php < 4.1
+		if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
+			
+		// récupération des variables
+		$fichier = $_FILES['doc']['name'];
+		$size = $_FILES['doc']['size'];
+		$tmp = $_FILES['doc']['tmp_name'];
+		$type = $_FILES['doc']['type'];
+		$error = $_FILES['doc']['error'];
+	}
 
 	// Intercepter une erreur a l'envoi
 	if (check_upload_error($error)) {
-		echo $error;
 		$variables['champs_pri']['mess_error'] = _T('opconfig:erreur_upload');
 	}
 	else {
+
+		if (empty($variables['champs_aux']['url_doc'])) {
+			$mode = $variables['champs_aux']['type_doc'];
+		}
+		else {
+			$tmp = $variables['champs_aux']['url_doc'];// fichier
+			$mode = 'distant';
+		}
+
 		// verification si extention OK
 		$tableau = split('[.]', $fichier);
 		$type_ext = $tableau[1];
@@ -678,6 +676,7 @@ if(!empty($variables['actions']['media'])) {
 			array('spip_types_documents'),
 			array('extension = '.sql_quote($type_ext))
 			));
+
 		if ($return['extension'] == $type_ext) {
 
 			if ($variables['champs_aux']['type_doc'] == 'logo') { // reprise du code iconifier ... action/iconifer.php
@@ -742,7 +741,7 @@ if(!empty($variables['actions']['media'])) {
 							 $fichier,
 							 "article",
 							 $variables['champs_pri']['id_article'],
-							 $variables['champs_aux']['type_doc'],
+							 $mode,
 							 $id_document,
 							 $documents_actifs);
 
@@ -815,7 +814,7 @@ if ($config['MotCle'] == 'yes') {
 if ($config['AuteurSpip'] == 'yes') {
 
 	// si l'utilisateur est loggé
-	if ($auteur_session) {
+	if ($GLOBALS['auteur_session']) {
 		
 		$variables['champs_pri']['formulaire_auteurspip'] =
 			inclure_balise_dynamique(
