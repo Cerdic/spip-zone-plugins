@@ -100,7 +100,8 @@ function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html'
 	}
 
 	// traitement normal
-	if (!$squel) { 
+	if (!isset($squel) OR (isset($squel) AND !$squel) )
+	{
 		// On selectionne, dans l'ordre :
 		// fond=10
 		$f = "$fond=$id_rubrique";

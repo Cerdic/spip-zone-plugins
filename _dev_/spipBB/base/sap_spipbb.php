@@ -72,19 +72,19 @@ $GLOBALS['champs_sap_spipbb'] = array(
 	 	"extra_proposes" => "tous,6forum"
 	),
 	"Numero_ICQ" => array(
-		"info" => _T('spipbb:extra_numero_ICQ'),
+		"info" => _T('spipbb:extra_numero_icq'),
 	 	"sql" => "VARCHAR(14) NOT NULL",
 	 	"filtres_recup" => "corriger_caracteres",
 	 	#"form_milieu" => "text",
-	 	"extra" => "ligne|propre|"._T('spipbb:extra_numero_ICQ'),
+	 	"extra" => "ligne|propre|"._T('spipbb:extra_numero_icq'),
 	 	"extra_proposes" => "tous,6forum"
 	),
 	"Nom_AIM" => array(
-		"info" => _T('spipbb:extra_nom_AIM'),
+		"info" => _T('spipbb:extra_nom_aim'),
 	 	"sql" => "VARCHAR(128) NOT NULL",
 	 	"filtres_recup" => "corriger_caracteres",
 	 	#"form_milieu" => "text",
-	 	"extra" => "ligne|propre|"._T('spipbb:extra_nom_AIM'),
+	 	"extra" => "ligne|propre|"._T('spipbb:extra_nom_aim'),
 	 	"extra_proposes" => "tous,6forum"
 	),
 	"Nom_Yahoo" => array(
@@ -96,11 +96,11 @@ $GLOBALS['champs_sap_spipbb'] = array(
 	 	"extra_proposes" => "tous,6forum"
 	),
 	"Nom_MSNM" => array(
-		"info" => _T('spipbb:extra_nom_MSNM'),
+		"info" => _T('spipbb:extra_nom_msnm'),
 	 	"sql" => "VARCHAR(128) NOT NULL",
 	 	"filtres_recup" => "corriger_caracteres",
 	 	#"form_milieu" => "text",
-	 	"extra" => "ligne|propre|"._T('spipbb:extra_nom_MSNM'),
+	 	"extra" => "ligne|propre|"._T('spipbb:extra_nom_msnm'),
 	 	"extra_proposes" => "tous,6forum"
 	),
 	"refus_suivi_thread" => array(

@@ -100,8 +100,7 @@ function exec_spipbb_admin_fromphpbb()
 	$id_rubrique = $row['id_rubrique'];
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('spipbb:fromphpbb_titre'), "configuration", 'spipbb');
-//	echo $commencer_page(_T('spipbb:admin_titre_page_'._request('exec')), "forum", "spipbb_admin", '');
+	echo $commencer_page(_T('spipbb:admin_titre_page_spipbb_admin_migre',array('nom_base','PhpBB')), "configuration", "spipbb");
 
 	if (!$row
 	   OR !autoriser('creerarticledans','rubrique',$GLOBALS['spipbb']['id_secteur'])) {
@@ -161,6 +160,7 @@ function spipbb_fromphpbb_formulaire($conf=array())
 					$conf['table_prefix'] = $table_prefix;
 					$phpbb_conf[]=$conf;
 					$contexte = array(
+						'import_fichier'=> _T('spipbb:import_fichier',array('nom_base','PhpBB')),
 						'filename'=>$conf['filename'],
 						'key'=>$radio,
 						);
@@ -209,6 +209,7 @@ function spipbb_fromphpbb_formulaire($conf=array())
 					$script_path=sql_fetsel("config_value",$table_config,"config_name='script_path'");
 					//echo $phpbbversion['config_value'];script_path
 					$contexte = array(
+						'import_table'=> _T('spipbb:import_table',array('nom_base','PhpBB')),
 						'avatar_path'=>$script_path['config_value']."/".$avatar_path['config_value'],
 						'tablename'=>$table_config,
 						'key'=>$radio,
@@ -230,6 +231,12 @@ function spipbb_fromphpbb_formulaire($conf=array())
 	$choix_rubrique = editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider);
 
 	$contexte = array(
+			'import_titre'=> _T('spipbb:import_titre',array('nom_base','PhpBB')),
+			'import_racine'=> _T('spipbb:import_racine',array('nom_base','PhpBB')),
+			'import_parametres_rubrique'=> _T('spipbb:import_parametres_rubrique',array('nom_base','PhpBB')),
+			'import_parametres_titre'=> _T('spipbb:import_parametres_titre',array('nom_base','PhpBB')),
+			'import_parametres_base'=> _T('spipbb:import_parametres_base',array('nom_base','PhpBB')),
+
 			'lien_action' => generer_action_auteur('spipbb_fromphpbb',$id_rubrique,$retour) ,
 			'exec_script' => 'spipbb_fromphpbb',
 			'phpbb_liste_fichiers' => $liste_fichiers,

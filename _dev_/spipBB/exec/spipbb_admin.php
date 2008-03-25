@@ -121,7 +121,6 @@ function exec_spipbb_admin() {
 
 		debut_cadre_relief();
 
-		#echo "<span class='verdana2'>"._T('spipbb:salon')."</span>";
 		echo gros_titre(typo($titre_salon),'',false);
 		echo "<span class='arial2'>".propre($desc_salon)."</span>";
 		fin_cadre_relief();
@@ -141,7 +140,7 @@ function exec_spipbb_admin() {
 		#
 		if($id_parent_salon=='0' AND ($connect_toutes_rubriques OR acces_restreint_rubrique($id_salon))) {
 			echo "<div style='float:left; padding:2px;'>";
-			icone(_L('creer_salon'), generer_url_ecrire("spipbb_rubriques_edit", "id_parent=".$id_salon."&new=oui"), "rubrique-24.gif","creer.gif");
+			icone(_T('spipbb:creer_categorie'), generer_url_ecrire("spipbb_rubriques_edit", "id_parent=".$id_salon."&new=oui"), "rubrique-24.gif","creer.gif");
 			echo "</div>";
 
 		}

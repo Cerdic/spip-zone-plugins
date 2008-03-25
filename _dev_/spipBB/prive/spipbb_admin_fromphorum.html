@@ -7,17 +7,17 @@
 
 [(#ENV{lien_action}|form_hidden)]
 
-[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:fromphorum_titre:>})]
+[(#REM|debut_cadre_trait_couleur{1,'xxx',#ENV{import_titre}})]
 [(#REM) ------------------------ Configuration generale ------------------------ ]
 
 <fieldset>
-<legend><:spipbb:fromphorum_parametres_rubrique:></legend>
+<legend>#ENV{import_parametres_rubrique}</legend>
 #ENV*{choix_rubrique}
 </fieldset>
 
 <fieldset>
-<legend><:spipbb:fromphorum_parametres_titre:></legend>
-<:spipbb:fromphorum_parametres_base:>
+<legend>#ENV{import_parametres_titre}</legend>
+#ENV{import_parametres_base}
 <div><table border='1' cellspacing='1' cellpadding='3' width="100%">
 #ENV*{phorum_liste_fichiers}
 </table>
@@ -25,13 +25,13 @@
 <table border='0' cellspacing='1' cellpadding='3' width="100%">
 <tr style='border:none'>
 	<td style='text-align:right'>
-		<label for='phpbb_host'><:spipbb:fromphorum_host:></label>
+		<label for='phorum_host'><:spipbb:import_host:></label>
 	</td>
 	<td>
 		<input type='text' id='phorum_host' name='phorum_host' value='localhost' />
 	</td>
 	<td rowspan='6'>
-		<input type='radio' name='fromphorum_source' value='#ENV{radio_checked}' 
+		<input type='radio' name='fromphorum_source' value='#ENV{radio_checked}'
 		id='fromphorum_source_#ENV{radio_checked}'
 		[checked='(#ENV{radio_checked}|=={0}|?{checked})'] />
 	</td>
@@ -46,7 +46,7 @@
 </tr>
 <tr>
 	<td style='text-align:right'>
-		<label for='phorum_pass'><:spipbb:fromphorum_password:></label>
+		<label for='phorum_pass'><:spipbb:import_login:></label>
 	</td>
 	<td>
 		<input type='password' id='phorum_pass' name='phorum_pass' value='' /><br />
@@ -62,7 +62,7 @@
 </tr>
 <tr>
 	<td style='text-align:right'>
-		<label for='phorum_prefix'><:spipbb:fromphorum_prefix:></label>
+		<label for='phorum_prefix'><:spipbb:import_prefix:></label>
 	</td>
 	<td>
 		<input type='text' id='phorum_prefix' name='phorum_prefix' value='phorum_' /><br />
@@ -70,7 +70,7 @@
 </tr>
 <tr>
 	<td style='text-align:right'>
-		<label for='phorum_root'><:spipbb:fromphorum_racine:></label>
+		<label for='phorum_root'><:spipbb:import_password:></label>
 	</td>
 	<td>
 		<input type='text' id='phorum_root' name='phorum_root' value='' />
@@ -81,10 +81,10 @@
 </fieldset>
 
 <fieldset>
-<legend><:spipbb:fromphorum_choix_test_titre:></legend>
+<legend><:spipbb:import_choix_test_titre:></legend>
 <div><table border='0' cellspacing='1' cellpadding='3' width="100%">
 <tr>
-	<td align='left' class='verdana2'><:spipbb:fromphorum_choix_test:></td>
+	<td align='left' class='verdana2'><:spipbb:import_choix_test:></td>
 	<td align='left' class='verdana2'>
 		<input type='radio' name='phorum_test' value='oui' id='phorum_test_1' [ checked="(#ENV{phorum_test}|=={'oui'}|?{checked})"] /> <label for='phorum_test_1'><:oui:></label>
 		&nbsp;

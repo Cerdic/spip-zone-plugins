@@ -4,7 +4,7 @@
 [(#REM) Ce fichier est inclus a chaque etape de la boucle exec/spip_admin_fromphorum tables ]
 <tr>
 	<td colspan='2'>
-		<:spipbb:fromphorum_table:> #ENV{tablename}
+		#ENV{import_table} #ENV{tablename}
 	</td>
 	<td>
 		<input type='hidden' name='fromphorum_table_#ENV{key}' value='#ENV{tablename}' />

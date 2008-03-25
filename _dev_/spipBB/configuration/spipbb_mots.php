@@ -79,16 +79,13 @@ function configuration_spipbb_mots_dist() {
 /*
  * Presentation
 	$res = debut_cadre_trait_couleur("mot-cle-24.gif", true, "", _T('info_mots_cles'))
-	. ajax_action_post('configurer', 'mots', 'configuration','',$res) 
+	. ajax_action_post('configurer', 'mots', 'configuration','',$res)
 	. fin_cadre_trait_couleur(true);
 
 	return ajax_action_greffe('configurer-mots', '', $res);
 */
 
-	//debut_cadre_relief("", true, "", "<label for='articles_mots'>"._T('spipbb:admin_mots')."</label>")
-	//fin_cadre_relief(true);
-
-	$res = debut_cadre_trait_couleur("mot-cle-24.gif", true, "", _T('info_mots_cles')) 
+	$res = debut_cadre_trait_couleur("mot-cle-24.gif", true, "", _T('info_mots_cles'))
 			. $res
 			. fin_cadre_trait_couleur(true);
 

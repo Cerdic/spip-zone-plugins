@@ -152,7 +152,8 @@ function spipbb_donnees_auteur($id) {
 				# on extrait champs gaf que si support : extra
 				if($type_support=='extra') {
 					foreach($liste_chps as $c) {
-						$infos[$c]=$chps_extra[$c];
+						if (isset($chps_extra[$c]))
+							$infos[$c]=$chps_extra[$c];
 					}
 				}
 				if (!is_array($chps_extra)) spipbb_log("ERREUR chps_extra no array : ".gettype($chps_extra).":v:".$v,1,__FILE__);
@@ -241,7 +242,7 @@ function spipbb_afficher_signature_post($id_auteur)
 {
 	#recup de statut et extra/avatar
 	$infos = spipbb_donnees_auteur($id_auteur);
-	if($infos['signature_post']!='') {
+	if(isset($infos['signature_post']) AND $infos['signature_post']!='') {
 		return propre($infos['signature_post']);
 	}
 	return;
@@ -280,7 +281,7 @@ function afficher_signature_post($id_auteur)
 function afficher_champ_spipbb($id_auteur,$champ)
 {
 	$infos = spipbb_donnees_auteur($id_auteur);
-	if($ch=$infos[$champ]) {
+	if(isset($infos[$champ]) AND $ch=$infos[$champ]) {
 		return $ch;
 	}
 	return;

@@ -14,15 +14,22 @@ spipbb_log('included',2,__FILE__);
 function spipbb_is_configured() {
 	# pas de spipbb
 	if(!isset($GLOBALS['meta']['spipbb'])) return false;
+	if(!isset($GLOBALS['spipbb'])) $GLOBALS['spipbb']=@unserialize($GLOBALS['meta']['spipbb']);
 	# desactivation de spipbb
 	if($GLOBALS['spipbb']['configure']=='non') return false;
 	# prem. vers. spipbb chrys -> maj
 	if(empty($GLOBALS['spipbb']['version'])) return false;
 	# les metas suivant DOIVENT etre =='oui' pour le minimum de config
 	if($GLOBALS['spipbb']['config_id_secteur']=='non'
-		OR $GLOBALS['spipbb']['config_groupe_mots']=='non' 
+		OR $GLOBALS['spipbb']['config_groupe_mots']=='non'
 		OR $GLOBALS['spipbb']['config_mot_cles']=='non') return false;
 	# nouvelle version -> maj
+	if (!isset($GLOBALS['spipbb_plug_version']))
+	{
+		if (!function_exists('plugin_get_infos')) include_spip('inc/plugin');
+		$infos=plugin_get_infos(_DIR_PLUGIN_SPIPBB);
+		$GLOBALS['spipbb_plug_version'] = $infos['version'];
+	}
 	if(version_compare(substr($GLOBALS['spipbb']['version'],0,5),$GLOBALS['spipbb_plug_version'],'<')) return false; // _SPIPBB version sur 0.4.5 == 5 char
 	# sinon
 	return true;
@@ -33,7 +40,7 @@ function spipbb_is_configured() {
 // [fr] Verifie que les rubriques et les articles sont bien numerotes et les
 // [fr] renumerote si besoin
 // ------------------------------------------------------------------------------
-## h. 28/11 function utile sur exec/spipbb_admin .. spipbb_forum, action/ spipbb_move 
+## h. 28/11 function utile sur exec/spipbb_admin .. spipbb_forum, action/ spipbb_move
 function spipbb_renumerote()
 {
 	$id_secteur = $GLOBALS['spipbb']['id_secteur'];
@@ -89,7 +96,7 @@ function print_r_html($var,$return_data=false)
     $data = str_replace( "\n","<br />\n", $data);
 
     if (!$return_data)
-        echo $data;   
+        echo $data;
     else
         return $data;
 }
@@ -161,7 +168,7 @@ function auth_deplace_connecte() {
 // verif si sujet de type "annonce" (lier a ce mot)
 //
 function verif_sujet_annonce($id_sujet) {
-	$req=spip_query("SELECT id_forum FROM spip_mots_forum 
+	$req=spip_query("SELECT id_forum FROM spip_mots_forum
 					WHERE id_mot=".$GLOBALS['spipbb']['id_mot_annonce']." AND id_forum=$id_sujet");
 	$res=sql_count($req);
 	if($res) { return true; }
@@ -170,7 +177,7 @@ function verif_sujet_annonce($id_sujet) {
 # verif si forum de type "annonce" (lier a ce mot)
 #
 function verif_forum_annonce($id_article) {
-	$req=spip_query("SELECT id_article FROM spip_mots_articles 
+	$req=spip_query("SELECT id_article FROM spip_mots_articles
 					WHERE id_mot=".$GLOBALS['spipbb']['id_mot_annonce']." AND id_article=$id_article");
 	if(sql_count($req)) {
 		return true;
@@ -183,7 +190,7 @@ function verif_forum_annonce($id_article) {
 //
 function tranches_liste_forum($encours, $retour_gaf, $nligne) {
 	$fixlimit = $GLOBALS['spipbb']['fixlimit'];
-	
+
 	$fract=ceil($nligne/$fixlimit);
 	for ($i=0; $i<$fract; $i++) {
 		$debaff=($i*$fixlimit)+1;
@@ -206,7 +213,7 @@ function tranches_liste_forum($encours, $retour_gaf, $nligne) {
 # au cas ou, ... car plus utiliser sur fonction signature_spipbb()
 function verifier_infos_plugin($item) {
 	if (!function_exists('plugin_get_infos')) include_spip('inc/plugin');
-	
+
 	$info_plugin = plugin_get_infos('spipbb');
 	return $info_plugin[$item];
 }

@@ -128,6 +128,7 @@ function icone_statut_post($statut_post) {
 
 //
 // form bouton 'ferme' / 'libere'
+// appel exec/spipbb_forum.php ;; mode == 'ferme' // 'maintenance', 'libere', 'libere_maintenance'
 function formulaire_bouton_libereferme($id_forum, $mode, $src_img) {
 	global $connect_id_auteur;
 	echo "<div style='float:right; padding:3px;'>";
@@ -156,6 +157,8 @@ function formulaire_bouton_ferlibsujet($id_sujet, $mode, $src_img) {
 	echo "</form></div>";
 }
 
+// appel exec/spipbb_sujet.php
+// mode == annonce / desannonce
 function bouton_formulaire_annonce($id_sujet, $mode, $src_img) {
 	global $connect_id_auteur;
 	echo "<div style='float:right; padding:3px;'>\n";
@@ -170,6 +173,8 @@ function bouton_formulaire_annonce($id_sujet, $mode, $src_img) {
 
 }
 
+// appel exec/spipbb_forum.php
+// mode == annonce / desannonce
 function bouton_formulaire_forum_annonce($id_article, $mode, $src_img) {
 	global $connect_id_auteur;
 	echo "<div style='float:right; padding:3px;'>\n";

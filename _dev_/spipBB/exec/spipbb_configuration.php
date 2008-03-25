@@ -33,7 +33,7 @@ spipbb_log('included',2,__FILE__);
 include_spip('inc/spipbb_init'); // + spipbb_util + spipbb_presentation + spipbb_menus_gauche
 
 # requis de cet exec
-include_spip('inc/spipbb_inc_config'); 
+include_spip('inc/spipbb_inc_config');
 include_spip('inc/spipbb_inc_metas');
 
 // ------------------------------------------------------------------------------
@@ -133,7 +133,7 @@ function spipbb_admin_configuration() {
 		$GLOBALS['spipbb']['configure']='non';
 		spipbb_save_metas();
 	}
-	$contexte = array( 
+	$contexte = array(
 			'lien_action' => generer_action_auteur('spipbb_admin_reconfig', 'save',generer_url_ecrire('spipbb_configuration')), // generer_url_action ?
 			'exec_script' => 'spipbb_admin_reconfig',
 			'etat_tables' => $etat_tables ,
@@ -185,11 +185,11 @@ function spipbb_config_support_auteurs()
 	#$options_sap = array('extra','table','autre');
 	$options_sap = array('extra','table');
 
-	$res = debut_cadre_trait_couleur("",true,"",_L('Gestion champs auteurs suppl&eacute;mentaires'));	
+	$res = debut_cadre_trait_couleur("",true,"",_T('spipbb:config_champs_auteurs_plus'));
 	$res.= "<table width='100%' cellpadding='2' cellspacing='0' border='0' align='center' class='verdana2'>\n";
 
 	# les champs, infos
-	$res.= "<tr><td colspan='3'>"._L('Les champs n&eacute;cessaires &agrave; SpipBB')."</td></tr>\n";
+	$res.= "<tr><td colspan='3'>". _T('spipbb:config_champs_requis') . "</td></tr>\n";
 	$res.= "<tr><td colspan='3'>";
 	foreach($GLOBALS['champs_sap_spipbb'] as $champ => $def) {
 		$res.= "<b>".$champ."</b>, ".$def['info']."<br />";
@@ -198,9 +198,9 @@ function spipbb_config_support_auteurs()
 	$res.= "<tr><td colspan='3'>&nbsp;</td></tr>\n";
 
 	# mode d exploitation
-	$res.= "<tr><td colspan='3'>"._L('Quel support utiliser pour les champs suppl.');
+	$res.= "<tr><td colspan='3'>". _T('spipbb:config_orig_extra');
 	$res.= "</td></tr>\n";
-	$res.= "<tr><td>"._L('Infos champs EXTRA ou autre table, table auteurs_profils.').
+	$res.= "<tr><td>". _T('spipbb:config_orig_extra_info') .
 		"</td><td width='5%'></td><td width='25%'>\n";
 
 	# choix du mode
@@ -232,16 +232,16 @@ function spipbb_config_champs_supp() {
 	foreach($GLOBALS['champs_sap_spipbb'] as $k => $v) { $definis[]=$k; }
 	$montre = array_diff($definis,$requis);
 
-	$res = debut_cadre_trait_couleur("",true,"",_L('Afficher ces champs dans les skel'));
+	$res = debut_cadre_trait_couleur("",true,"",_T('spipbb:config_affiche_extra'));
 	$res.= "<table width='100%' cellpadding='2' cellspacing='0' border='0' align='center' class='verdana2'>\n";
 
 	foreach($montre as $chp) {
 		# champs X
-		$res.= "<tr><td valign='top'>"._L('Afficher le champ : '.$chp.'<br />'
+		$res.= "<tr><td valign='top'>"._T('spipbb:config_affiche_champ_extra',array('nom_champ',$chp)).'<br />'
 			. $GLOBALS['champs_sap_spipbb'][$chp]['info'])
 			. "</td><td width='5%'> </td><td width='25%'>\n";
 		foreach($options_a as $val) {
-			$param=($GLOBALS['spipbb']['affiche_'.$chp])? $GLOBALS['spipbb']['affiche_'.$chp]:'oui'; 
+			$param=($GLOBALS['spipbb']['affiche_'.$chp])? $GLOBALS['spipbb']['affiche_'.$chp]:'oui';
 			$aff_checked = ($param==$val) ? 'checked=\"checked\"' : '' ;
 			$res.= "<input type='radio' name='affiche_$chp' value='".$val."' ".$aff_checked." />&nbsp;"._L($val)."&nbsp;&nbsp;&nbsp;";
 		}

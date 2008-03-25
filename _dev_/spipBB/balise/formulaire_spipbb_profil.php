@@ -33,6 +33,7 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 
 	# detail infos sur auteur
 	$auteur=spipbb_donnees_auteur($id_auteur_session);
+	$echec=""; #initialisation
 
 	# chps spip passer dans le formulaire
 	$new_pass = _request('new_pass');

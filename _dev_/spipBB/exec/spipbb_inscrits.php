@@ -260,7 +260,7 @@ function exec_spipbb_inscrits() {
 				"<a href='#' class='afftxt' id='"
 				. $r['id_auteur']."'><p id='p".$r['id_auteur']
 				. "' class='hidesign'>".$infos['signature']."</p>"
-				. http_img_pack('fiche-perso-24.gif','ico'," border='0' valign='absmiddle'",_L('Signature'))
+				. http_img_pack('fiche-perso-24.gif','ico'," border='0' valign='absmiddle'",_T('spipbb:signature'))
 				. "</a>";
 		}
 

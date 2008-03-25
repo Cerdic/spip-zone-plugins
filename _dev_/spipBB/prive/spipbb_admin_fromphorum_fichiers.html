@@ -4,7 +4,7 @@
 [(#REM) Ce fichier est inclus a chaque etape de la boucle exec/spip_admin_fromphorum ]
 <tr>
 	<td colspan='2'>
-		<:spipbb:fromphorum_fichier:> #ENV{filename}
+		#ENV{import_fichier} #ENV{filename}
 	</td>
 	<td>
 		<input type='hidden' name='fromphorum_filename_#ENV{key}' value='#ENV{filename}' />

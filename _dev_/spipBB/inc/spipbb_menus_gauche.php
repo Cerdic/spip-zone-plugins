@@ -300,7 +300,7 @@ function posts_proposes_attente_moderation() {
 	if($nbrprop) {
 		$aff.= "<br />"
 			. "\n<div class='bandeau_rubriques' style='z-index: 1;'>"
-			. bandeau_titre_boite2(_L('poste_valide'),"gaf_p_prop.gif",'','',false)
+			. bandeau_titre_boite2(_T('spipbb:poste_valide'),"gaf_p_prop.gif",'','',false)
 			. "<div class='plan-articles'>";
 
 		while($row = sql_fetch($result))
@@ -414,9 +414,9 @@ function alerte_maintenance() {
 				$aff = "<br />"
 					. debut_cadre_trait_couleur("../"._DIR_IMG_SPIPBB."gaf_verrou2.gif",true,"",_T('spipbb:maintenance'))
 					. "<div class='verdana3'><b>".$row['nom']."</b></div>\n"
-					. "<div class='verdana2'>"._T('spipbb:admfermer')."<br />\n"
+					. "<div class='verdana2'>"._T('spipbb:maintenance_fermer')."<br />\n"
 					. "<b><a href='".generer_url_ecrire("gaf_forum","id_article=".$art_mt)."'>"
-					. $row2['titre']."</a></b><br />"._T('spipbb:pour_maintenance')."<br />".$datime."</div>\n"
+					. $row2['titre']."</a></b><br />"._T('spipbb:maintenance_pour')."<br />".$datime."</div>\n"
 					. fin_cadre_trait_couleur(true);
 			}
 		}

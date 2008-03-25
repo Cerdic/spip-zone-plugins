@@ -92,7 +92,7 @@ function exec_spipbb_admin_fromphorum()
 	$id_rubrique = $row['id_rubrique'];
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('spipbb:admin_titre_page_'._request('exec')), "forum", "spipbb_admin", '');
+	echo $commencer_page(_T('spipbb:admin_titre_page_spipbb_admin_migre',array('nom_base','Phorum')), "configuration", "spipbb");
 
 	if (!$row
 	   OR !autoriser('creerarticledans','rubrique',$GLOBALS['spipbb']['id_secteur'])) {
@@ -145,6 +145,7 @@ function spipbb_fromphorum_formulaire($conf=array())
 					$conf['table_prefix'] = $PHORUM['DBCONFIG']['table_prefix']."_";
 					$phorum_conf[]=$conf;
 					$contexte = array(
+						'import_fichier'=> _T('spipbb:import_fichier',array('nom_base','Phorum')),
 						'filename'=>$conf['filename'],
 						'key'=>$radio,
 						);
@@ -192,6 +193,7 @@ function spipbb_fromphorum_formulaire($conf=array())
 
 				if ($phorumversion) {
 					$contexte = array(
+						'import_table'=> _T('spipbb:import_table',array('nom_base','Phorum')),
 						'tablename'=>$table_config,
 						'key'=>$radio,
 						);
@@ -212,6 +214,12 @@ function spipbb_fromphorum_formulaire($conf=array())
 	$choix_rubrique = editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider);
 
 	$contexte = array(
+			'import_titre'=> _T('spipbb:import_titre',array('nom_base','Phorum')),
+			'import_racine'=> _T('spipbb:import_racine',array('nom_base','Phorum')),
+			'import_parametres_rubrique'=> _T('spipbb:import_parametres_rubrique',array('nom_base','Phorum')),
+			'import_parametres_titre'=> _T('spipbb:import_parametres_titre',array('nom_base','Phorum')),
+			'import_parametres_base'=> _T('spipbb:import_parametres_base',array('nom_base','Phorum')),
+
 			'lien_action' => generer_action_auteur('spipbb_fromphorum',$id_rubrique,$retour) ,
 			'exec_script' => 'spipbb_fromphorum',
 			'phorum_liste_fichiers' => $liste_fichiers,

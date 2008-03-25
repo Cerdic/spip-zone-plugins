@@ -60,7 +60,7 @@ function exec_spipbb_admin_debug() {
 
 	echo debut_gauche('',true);
 		spipbb_menus_gauche(_request('exec'));
-		
+
 	echo creer_colonne_droite('', true);
 
 	echo debut_droite('',true);
@@ -72,7 +72,7 @@ function exec_spipbb_admin_debug() {
 
 	# pied page exec
 	bouton_retour_haut();
-	
+
 	echo fin_gauche(), fin_page();
 } // exec_spipbb_admin_debug
 
@@ -82,7 +82,7 @@ function exec_spipbb_admin_debug() {
 function spipbb_show_debug()
 {
 	#$loc_meta = @unserialize($GLOBALS['meta']['spipbb']);
-	$res = debut_cadre_trait_couleur('',true,'xxx',_L('SpipBB METAs'));
+	$res = debut_cadre_trait_couleur('',true,'xxx',_T('spipbb:admin_debug_metas'));
 	#$res.= "<fieldset style='border:1px solid #000;'><legend>SPIPBB META</legend>";
 	#$res.= print_r_html($GLOBALS['spipbb'],true);
 	$res.= affiche_metas_spipbb($GLOBALS['spipbb']);
@@ -137,7 +137,7 @@ function spipbb_show_log($log_name="spipbb")
 		$log=$new_log;
 		$log=array_reverse($log);
 		$content=join("<br />\n",$log);
-		$res .= debut_cadre_trait_couleur('',true,'xxx',_L($log_name.' LOGs'));
+		$res .= debut_cadre_trait_couleur('',true,'xxx',_T('spipbb:admin_debug_log',array('log_name',$log_name)));
 		$res .= "<div style='overflow:auto; width:100%; height: 50em; font-size:80%;border: 1px dashed #ada095;padding:2px;margin:2px;'>";
 		$res .= $content;
 		$res .= "</div>";

@@ -36,7 +36,7 @@ function spipbb_auteur_infos($id_auteur=0) {
 
 
 	#$aff.= debut_cadre_relief(_DIR_PLUGIN_GAF."img_pack/gaf_ico-24.gif",true);
-	$aff.=debut_cadre_enfonce(_DIR_PLUGIN_SPIPBB."img_pack/gaf_ico-24.gif", true, "", $bouton._L("Champs SPIPBB"));
+	$aff.=debut_cadre_enfonce(_DIR_PLUGIN_SPIPBB."img_pack/gaf_ico-24.gif", true, "", $bouton._T('spipbb:config_champs_auteur'));
 
 	$aff.= $debut_block("spipbb_$id_auteur",true);
 
