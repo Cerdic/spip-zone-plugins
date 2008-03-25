@@ -19,27 +19,15 @@ function exec_cfg_dist($class = null)
 		($nom = sinon(_request('cfg'), '')),
 		($cfg_id = sinon(_request('cfg_id'),''))
 		);
+	// si le fond cfg avait demande une redirection... il faut restaurer les messages
+	$this->restaurer_messages();
 	
-	// si le fond cfg demande une redirection, 
-	// (et provient de cette redirection), il est possible
-	// qu'il y ait un message a afficher
-	if ($config->form->param->rediriger 
-		&& $messages = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]){
-			include_spip('inc/meta');
-			effacer_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur']);
-			if (defined('_COMPAT_CFG_192')) ecrire_metas();
-			$config->form->messages = unserialize($messages);
-	}
-
-	$config->form->traiter();
+	// traitements du formulaire poste
+	$config->traiter();
 	
-	afficher_page_cfg($config);
-
-	return;
-}
-
-
-function afficher_page_cfg(&$config){
+	//
+	// affichages
+	//
 	include_spip("inc/presentation");
 
 	if (!$config->autoriser()) {
@@ -75,20 +63,7 @@ function afficher_page_cfg(&$config){
 	echo debut_droite("", true);
 	
 	// centre de la page	
-	if (!$formulaire = $config->formulaire()) {
-		// Page appellee sans formulaire valable
-		echo "<img src='"._DIR_PLUGIN_CFG.'cfg.png'."' style='float:right' alt='' />\n";
-		echo "<h3>" . _T("cfg:choisir_module_a_configurer") . "</h3>";
-	} else {
-		// Mettre un cadre_trait_couleur autour du formulaire, sauf si demande express de ne pas le faire
-		if ($config->form->param->presentation == 'auto') {
-			echo debut_cadre_trait_couleur('', true, '', $boite);
-			echo $formulaire;
-			echo fin_cadre_trait_couleur(true);
-		} else {
-			echo $formulaire;
-		}
-	}
+	echo $config->formulaire();
 	
 	// pied
 	echo fin_gauche() . fin_page();

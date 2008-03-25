@@ -66,7 +66,7 @@ class cfg_dist
 	}
 
 	function autoriser()  {return $this->form->autoriser(); }
-	function formulaire() {return $this->form->formulaire();	}
+	function traiter()  {return $this->form->traiter();}
 	
 	function get_titre(){ return $config->form->param->titre;}
 	function get_nom()  { return $config->form->param->nom;}
@@ -286,6 +286,42 @@ class cfg_dist
 		
 		if ($messages = trim(join('<br />', $messages))) {
 			return debut_boite_info(true) . propre($messages) . fin_boite_info(true);
+		}
+	}
+	
+	// affichage du formulaire (ou a defaut du texte 'choisir le module a configurer')
+	function formulaire() {
+		$retour = "";	
+		if (!$formulaire = $config->form->formulaire()) {
+			// Page appellee sans formulaire valable
+			$retour .= "<img src='"._DIR_PLUGIN_CFG.'cfg.png'."' style='float:right' alt='' />\n";
+			$retour .=  "<h3>" . _T("cfg:choisir_module_a_configurer") . "</h3>";
+		} else {
+			// Mettre un cadre_trait_couleur autour du formulaire, sauf si demande express de ne pas le faire
+			if ($config->form->param->presentation == 'auto') {
+				$retour .= debut_cadre_trait_couleur('', true, '', $boite);
+				$retour .= $formulaire;
+				$retour .= fin_cadre_trait_couleur(true);
+			} else {
+				$retour .= $formulaire;
+			}
+		}
+		return $retour;
+	}
+	
+	
+	// restaure des messages serialises dans une meta 'cfg_message_{id_auteur}'
+	//
+	// si le formulaire cfg avait demande une redirection... 
+	// (et provient de cette redirection), il est possible
+	// qu'il y ait un message a afficher	
+	function restaurer_messages(){
+		if ($config->form->param->rediriger 
+			&& $messages = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]){
+				include_spip('inc/meta');
+				effacer_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur']);
+				if (defined('_COMPAT_CFG_192')) ecrire_metas();
+				$config->form->messages = unserialize($messages);
 		}
 	}
 }
