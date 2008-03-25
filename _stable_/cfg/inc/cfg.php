@@ -68,8 +68,8 @@ class cfg_dist
 	function autoriser()  {return $this->form->autoriser(); }
 	function traiter()  {return $this->form->traiter();}
 	
-	function get_titre(){ return $config->form->param->titre;}
-	function get_nom()  { return $config->form->param->nom;}
+	function get_titre(){ return $this->form->param->titre;}
+	function get_nom()  { return $this->form->param->nom;}
 	function get_boite(){ 
 		if (!(($titre = $this->form->param->titre) && ($boite = $this->form->param->boite))){
 			$boite=($titre)?$titre: _T('icone_configuration_site') . ' ' . $this->form->param->nom;
@@ -274,7 +274,7 @@ class cfg_dist
 		return minipres(_T('info_acces_refuse'), 
 			$this->form->param->refus 
 				? $this->form->param->refus 
-				: " (cfg {$this->form->param->nom} - {$config->form->vue} - {$config->form->param->cfg_id})");
+				: " (cfg {$this->form->param->nom} - {$this->form->vue} - {$this->form->param->cfg_id})");
 	}
 	
 	// afficher les messages de cfg
@@ -298,7 +298,7 @@ class cfg_dist
 			$retour .=  "<h3>" . _T("cfg:choisir_module_a_configurer") . "</h3>";
 		} else {
 			// Mettre un cadre_trait_couleur autour du formulaire, sauf si demande express de ne pas le faire
-			if ($config->form->param->presentation == 'auto') {
+			if ($this->form->param->presentation == 'auto') {
 				$retour .= debut_cadre_trait_couleur('', true, '', $boite);
 				$retour .= $formulaire;
 				$retour .= fin_cadre_trait_couleur(true);
@@ -316,12 +316,12 @@ class cfg_dist
 	// (et provient de cette redirection), il est possible
 	// qu'il y ait un message a afficher	
 	function restaurer_messages(){
-		if ($config->form->param->rediriger 
+		if ($this->form->param->rediriger 
 			&& $messages = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]){
 				include_spip('inc/meta');
 				effacer_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur']);
 				if (defined('_COMPAT_CFG_192')) ecrire_metas();
-				$config->form->messages = unserialize($messages);
+				$this->form->messages = unserialize($messages);
 		}
 	}
 }
