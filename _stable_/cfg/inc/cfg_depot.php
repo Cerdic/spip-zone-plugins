@@ -5,7 +5,7 @@ class cfg_depot_dist{
 	var $nom;
 	var $depot;
 	
-	function cfg_depot_dist($depot='metapack', &$cfg=null, &$params=array()){
+	function cfg_depot_dist($depot='metapack', &$cfg=false, &$params=array()){
 		include_spip('inc/depot/'.$depot);
 		
 		if (class_exists($class = 'cfg_depot_'.$depot)) {
