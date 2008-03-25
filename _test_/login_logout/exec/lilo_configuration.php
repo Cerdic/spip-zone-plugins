@@ -59,6 +59,7 @@ function exec_lilo_configuration () {
 		, $connect_toutes_rubriques
 		, $spip_lang_left
 		, $spip_lang_right
+		, $spip_pipeline
 		;
 
 	include_spip('inc/presentation');
@@ -90,7 +91,10 @@ function exec_lilo_configuration () {
 	$rubrique = "configuration";
 	
 	$message_gauche = $message_erreur = "";
-	 
+	
+	if(!strstr($spip_pipeline['insert_head'], "jQuery")) {
+		$message_erreur = "<h2 class='lilo-js-alert'>"._T('forum_titre_erreur')." <small>"._T(_LILO_LANG.'jquery_manquant_public')."</small></h2>\n";
+	}
 	
 	////////////////////////////////////
 	// valider la configuration
@@ -152,6 +156,12 @@ function exec_lilo_configuration () {
 	// Boite principale des réglages
 	$page_result .= ""
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_LILO_IMG_PACK."administration-24.png", true, "", _T(_LILO_LANG."configuration_login_logout"))
+		. "<script type='text/javascript'><!-- \n"
+			. "if (!window.jQuery) document.write(\""
+			. "<h2 class='lilo-js-alert'>"._T('forum_titre_erreur')." <small>"._T(_LILO_LANG.'jquery_manquant_prive')."</small></h2>"
+			. "\");\n"
+			. "//--></script>\n"
+		. "<div id='lilo_bloc_configuration' style='display:none;'>\n"
 		. debut_cadre_trait_couleur('', true, '', '')
 		. lilo_form_description('configuration_login_logout_desc')
 		. $message_erreur
@@ -258,6 +268,7 @@ function exec_lilo_configuration () {
 	// fin du formulaire
 	$page_result .= ""
 		. lilo_form_fin_form()
+		. "</div>\n"
 		. fin_cadre_trait_couleur(true)
 		;
 	
@@ -276,13 +287,13 @@ function lilo_form_input_text ($nom_champ, $label_champ, $value) {
 }
 
 /***********************************************/
-function lilo_form_debut_form ($nom_form, $ancre = '') {
+function lilo_form_debut_form ($nom_form, $ancre = '', $style = "") {
 	global $spip_lang_left;
 	if(empty($ancre)) {
 		$ancre = $nom_form;
 	}
 	$page_result = ""
-		. "<div style='text-align: $spip_lang_left;' class='verdana2'>\n"
+		. "<div style='text-align: $spip_lang_left; $style' class='verdana2'>\n"
 		. "<form name='$nom_form' id='$nom_form' method='post' action='".$_SERVER['REQUEST_URI']."#$ancre'>\n"
 		;
 	return($page_result);

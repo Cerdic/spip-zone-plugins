@@ -31,11 +31,14 @@
 	.formulaire_login label { color:##ENV{couleur_foncee,3874b0}; }
 	.spip_bouton input { float: #LANG_RIGHT; background-color: ##ENV{couleur_foncee,3874b0}; }
 	#bloc_session_remember { text-align:#LANG_LEFT}
+	.lilo-js-alert { background-color:red; color:yellow; line-height:1.4em; padding:1em }
+	.lilo-js-alert small { font-weight:normal }
 -->
 </style>
 <script language="JavaScript" type="text/JavaScript">
 jQuery().ready(function(){
 	$('#var_login_id').focus();
+	$('.lilo-js-alert').hide();
 });
 </script>
 </head>
@@ -43,6 +46,7 @@ jQuery().ready(function(){
 
 <div id='buste'>
 	<h1 class="spip">#NOM_SITE_SPIP<br /><small><:login_acces_prive:></small></h1>
+	<h2 class="lilo-js-alert"><:forum_titre_erreur:> <small><:lilo:jquery_manquant:></small></h2>
 	<div id='ventre'>
 		#MENU_LANG_ECRIRE
 		<div class="formulaire_spip formulaire_login">

@@ -97,9 +97,16 @@ fieldset { border:1px solid gray; margin-top:0.5em; }
 .lilo-screen li.tc, .lilo-screen .bc {left:25px; }
 .lilo-screen li.tr, .lilo-screen .br {right:0; }
 ul.meta-info-liste p { display:inline; } /* supprimes les <p> ajoute's aux infos par 193 */
-
+.lilo-js-alert { background-color:red; color:yellow; line-height:1.4em; padding:1em; font-size:120% }
+.lilo-js-alert small { font-weight:normal }
 -->
 </style>
+<script language='JavaScript' type='text/JavaScript'>
+jQuery().ready(function(){
+	/* ne présente le formulaire que si jQuery présent */
+	$('#lilo_bloc_configuration').show();
+});
+</script>
 "
 		;
 	}

@@ -14,7 +14,7 @@ $GLOBALS['i18n_'._LILO_PREFIX.'_fr'] = array(
 , 'configuration_login_logout_desc' => "
 	Les modifications apportées ici sont activées immédiatement.
 	Il est inutile de vider le cache pour valider la configuration, sauf à l'installation du plugin 
-	et à l'insertion de la balise #STATUT_PUBLIC)."
+	et à l'insertion de la balise #STATUT_PUBLIC."
 
 , 'configurer_login_prive' => "Page login"
 , 'configurer_login_prive_desc' => "La page login est appelée pour accéder à l'espace privé."
@@ -57,6 +57,13 @@ $GLOBALS['i18n_'._LILO_PREFIX.'_fr'] = array(
 , 'configurer_statut_couleur_0c0' => "Vert"
 , 'configurer_statut_couleur_00f' => "Bleu"
 , 'configurer_statut_couleur_666' => "Gris"
+
+, 'jquery_manquant' => "jQuery n&acute;est pas activ&eacute;.<br />
+	Svp, contactez le responsable du site en lui signalant cette erreur. "
+, 'jquery_manquant_prive' => "Vous devez activer jQuery pour configurer ce plugin."
+, 'jquery_manquant_public' => "jQuery n&acute;est pas activ&eacute; dans l'espace public.
+	Vous ne pourrez pas vous connecter en utilisant la page de login.
+	Vous devez activer jQuery pour utiliser ce plugin."
 
 ); //
 
