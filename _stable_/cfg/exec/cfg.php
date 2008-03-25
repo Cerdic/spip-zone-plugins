@@ -20,7 +20,7 @@ function exec_cfg_dist($class = null)
 		($cfg_id = sinon(_request('cfg_id'),''))
 		);
 	// si le fond cfg avait demande une redirection... il faut restaurer les messages
-	$this->restaurer_messages();
+	$config->restaurer_messages();
 	
 	// traitements du formulaire poste
 	$config->traiter();

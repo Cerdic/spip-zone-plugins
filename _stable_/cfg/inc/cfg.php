@@ -279,7 +279,7 @@ class cfg_dist
 	
 	// afficher les messages de cfg
 	function messages(){
-		$m = $config->form->messages; $messages = array();
+		$m = $this->form->messages; $messages = array();
 		if (count($m['message_ok'])) 		$messages[] = join('<br />', $m['message_ok']);
 		if (count($m['message_erreur'])) 	$messages[] = join('<br />', $m['message_erreur']);
 		if (count($m['erreurs'])) 			$messages[] = join('<br />', $m['erreurs']);
@@ -292,7 +292,7 @@ class cfg_dist
 	// affichage du formulaire (ou a defaut du texte 'choisir le module a configurer')
 	function formulaire() {
 		$retour = "";	
-		if (!$formulaire = $config->form->formulaire()) {
+		if (!$formulaire = $this->form->formulaire()) {
 			// Page appellee sans formulaire valable
 			$retour .= "<img src='"._DIR_PLUGIN_CFG.'cfg.png'."' style='float:right' alt='' />\n";
 			$retour .=  "<h3>" . _T("cfg:choisir_module_a_configurer") . "</h3>";
