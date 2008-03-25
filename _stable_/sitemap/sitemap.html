@@ -3,7 +3,7 @@
 [(#REM|affiche_xml{#CHARSET})]
 <urlset xmlns="http://www.google.com/schemas/sitemap/0.84">
 	[(#REM|reduit_priorite)]
-	<BOUCLE_secteurs(RUBRIQUES) {racine}{id_secteur>1}>
+	<BOUCLE_secteurs(RUBRIQUES) {racine}>
 		[(#REM|descend_niveau)][(#REM|reduit_priorite)][(#REM|descend_niveau)]
 		<?php if ('#CHEMIN{breve.html}'){?>
 			<BOUCLE_breves(BREVES) {id_rubrique}>
