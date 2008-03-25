@@ -6,44 +6,40 @@
 	<body>
 	<h1>Démonstration des boucles d'echoppe.</h1><br />
 	<h1 style="background:transparent url('[(#CHEMIN{'images/echoppe_blk_128.png'})]') no-repeat left center;padding-left:140px;height:128px"><:echoppe:echoppe:></h1>
-	<em>Token du panier = #TOKEN_PANIER</em>
-<B_CategoriesALaRacine>
-<div >
-	<ul>
-		
-		
-		<BOUCLE_CategoriesALaRacine(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){par num titre}{id_secteur = 0}{lang = ""}>
-		<li>[<strong>(#TITRE|supprimer_numero)</strong>]<br />
-			<div style="border: 1px #CCC doted;">[<small>(#DESCRIPTIF|couper{100})</small>]
-			[(#TEXTE)]</div>
-			<B_LesProduitsDeCetteCategorie>
-				<ul>
-					<BOUCLE_LesProduitsDeCetteCategorie(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits spip_echoppe_categories_produits){statut = publie}{par num titre}{id_categorie}{lang=""}{"<hr />"}>
-					<li>
-						[<em>(#TITRE|supprimer_numero)</em><br />]
-						[(#LOGO_PRODUIT||image_reduire{100})<br />]
-						Prix HTVA : #PRIX_BASE_HTVA  &euro; (#PRIX_TVAC &euro; TTC) - La tva est de #TAUX_TVA %
-						<br />
-						[(#MODELE{stock}{id_produit})] en stock.
-						<br />
-						[Hauteur : (#HAUTEUR)<br />]
-						[Url d'achat : <a href="#URL_ACHAT">(#URL_ACHAT)</a><br />]
-						[Url d'achat rapide : <a href="#URL_ACHAT_RAPIDE">(#URL_ACHAT_RAPIDE)</a><br />]
-						
-					</li>
-					</BOUCLE_LesProduitsDeCetteCategorie>
-				</ul>
-			</B_LesProduitsDeCetteCategorie>
-			
-			
-
-		</li>
-		</BOUCLE_CategoriesALaRacine>
-		
-		
-	</ul>
-</div>
-</B_CategoriesALaRacine>
+	<em>Token du panier = #SESSION{echoppe_token_panier}</em><br />
+	<em>Token du client = #SESSION{echoppe_token_client}</em><br />
+	
+	<B_CategoriesALaRacine>
+	<div >
+		<ul>
+			<BOUCLE_CategoriesALaRacine(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){par num titre}{id_secteur = 0}{lang = ""}>
+			<li>[<strong>(#TITRE|supprimer_numero)</strong>]<br />
+				<div style="border: 1px #CCC doted;">[<small>(#DESCRIPTIF|couper{100})</small>]
+				[(#TEXTE)]</div>
+				<B_LesProduitsDeCetteCategorie>
+					<ul>
+						<BOUCLE_LesProduitsDeCetteCategorie(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits spip_echoppe_categories_produits){statut = publie}{par num titre}{id_categorie}{lang=""}{"<hr />"}>
+						<li>
+							[<em>(#TITRE|supprimer_numero)</em><br />]
+							[(#LOGO_PRODUIT||image_reduire{100})<br />]
+							Prix HTVA : #PRIX_BASE_HTVA  &euro; (#PRIX_TVAC &euro; TTC) - La tva est de #TAUX_TVA %
+							<br />
+							[(#MODELE{stock}{id_produit})] en stock.
+							<br />
+							[Hauteur : (#HAUTEUR)<br />]
+							[Url d'achat : <a href="#URL_ACHAT">(#URL_ACHAT)</a><br />]
+							[Url d'achat rapide : <a href="#URL_ACHAT_RAPIDE">(#URL_ACHAT_RAPIDE)</a><br />]
+							
+						</li>
+						</BOUCLE_LesProduitsDeCetteCategorie>
+					</ul>
+				</B_LesProduitsDeCetteCategorie>
+			</li>
+			</BOUCLE_CategoriesALaRacine>
+		</ul>
+	</div>
+	</B_CategoriesALaRacine>
+	
 <hr />
 
 	</body>

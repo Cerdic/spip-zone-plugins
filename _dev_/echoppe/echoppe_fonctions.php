@@ -20,7 +20,7 @@ function calculer_prix_tvac($prix_htva, $taux_tva){
 	if ($taux_tva == 0){
 		$taux_tva = lire_config('echoppe/taux_de_tva_par_defaut',21);
 	}
-	$prix_ttc = $prix_htva + ($prix_htva * ($taux_tva * 100));
+	$prix_ttc = $prix_htva + ($prix_htva * ($taux_tva / 100));
 	$prix_ttc = round($prix_ttc, lire_config('echoppe/nombre_chiffre_apres_virgule',2));
 	return $prix_ttc;
 }
@@ -102,4 +102,11 @@ function balise_TOKEN_PANIIER($p){
 	$p->code = "$_token_panier";
 	return $p;
 }
+/*
+ * function balise_TOKEN_PANIIER($p){
+	$_token_panier = $GLOBALS['auteur_session']['echoppe']['token_panier'];
+	$p->code = "$_token_panier";
+	return $p;
+}
+* */
 ?>

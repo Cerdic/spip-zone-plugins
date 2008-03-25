@@ -24,6 +24,33 @@ function action_echoppe_sauver_produit(){
 	$ref_produit = _request('ref_produit');
 	$prix_base_htva = _request('prix_base_htva');
 	
+	$tva = str_replace(" ","",$tva);
+	$tva = str_replace(".","",$tva);
+	$tva = str_replace(",",".",$tva);
+	
+	$prix_base_htva = str_replace(" ","",$prix_base_htva);
+	$prix_base_htva = str_replace(".","",$prix_base_htva);
+	$prix_base_htva = str_replace(",",".",$prix_base_htva);
+	
+	
+	$poids = str_replace(" ","",$poids);
+	$poids = str_replace(".","",$poids);
+	$poids = str_replace(",",".",$poids);
+	
+	$largeur = str_replace(" ","",$largeur);
+	$largeur = str_replace(".","",$largeur);
+	$largeur = str_replace(",",".",$largeur);
+	
+	$longueur = str_replace(" ","",$longueur);
+	$longueur = str_replace(".","",$longueur);
+	$longueur = str_replace(",",".",$longueur);
+	
+	
+	$hauteur = str_replace(" ","",$hauteur);
+	$hauteur = str_replace(".","",$hauteur);
+	$hauteur = str_replace(",",".",$hauteur);
+	
+	
 	//echo $new.'<---';
 	
 	switch ($new){
