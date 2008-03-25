@@ -1,6 +1,41 @@
 <?php
 
 
+function ligne_xtag($style, $contenu) {
+	$style = trim(nettoyage_xtag($style));
+	$contenu = trim(nettoyage_xtag($contenu));
+
+	if (!strlen($contenu)) return '';
+
+	switch(true) {
+		case preg_match(',\bSURTITRE\b,i', $style):
+			return "<ins class='surtitre'>\n$contenu\n</ins>\n\n";
+
+		case preg_match(',\bSOUSTITRE\b,i', $style):
+			return "<ins class='soustitre'>\n$contenu\n</ins>\n\n";
+	
+		case preg_match(',\bTITRE\b,i', $style):
+			return "<ins class='titre'>\n$contenu\n</ins>\n\n";
+
+		case preg_match(',\bNOTES\b,i', $style):
+			return "[[<>\n$contenu\n]]\n\n";
+
+		case preg_match(',\b(TEXTE|LETTRINE)\b,i', $style):
+			return "$contenu\n\n";
+
+		case preg_match(',\b(CHAP(EAU|O))\b,i', $style):
+			return "<ins class='chapo'>\n$contenu\n</ins>\n\n";
+
+		case preg_match(',\bINTER(TITRE)?\b,i', $style):
+			return "{{{ $contenu }}}\n\n";
+
+		case $style === '$':
+			return "{{{ $contenu }}}\n\n";
+
+	}
+
+	return "@@$style\n\n$contenu\n\n";
+}
  
 function do_quark($c) {
 
@@ -17,7 +52,7 @@ function do_quark($c) {
 	$c = preg_split(",@([^<>]*?[:>]),ms", $c, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 
-	$d = array(); // on va le remplir
+	$d = '';
 	unset($c[0]); // ignore le premier terme
 	foreach ($c as $cpt => $chaine) {
 		switch ($cpt%2) {
@@ -30,14 +65,14 @@ function do_quark($c) {
 
 			case 0:	// valeur
 				if (isset($var) AND strlen($chaine))
-					$d[] = trim('* '.$var."\n\n".$chaine);
+					$d .= ligne_xtag($var,$chaine);
 				break;
 		}
 	}
 
 	$c = (join("\n\n", array_map('nettoyage_xtag', $d)));
 
-	return $c;
+	return $d;
 }
 
 function nettoyage_xtag($c) {
@@ -45,6 +80,7 @@ function nettoyage_xtag($c) {
 	// fines, insecables
 	$c = str_replace('<\\!s>', '~', $c);
 	$c = str_replace('<\\!f>', '~', $c);
+	$c = str_replace('<\\n>', '~', $c);
 
 
 	// un <parastyle...> = un paragraphe

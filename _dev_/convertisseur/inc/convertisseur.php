@@ -427,8 +427,24 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 		return;
 	}
 
+	// Si on a repere des <ins class='titre'> etc, les inserer
+	// dans les bons champs ; note : on choisi <ins> pour eviter les erreurs
+	// avec <div> qui est plus courant
+	$c = array('texte' => $texte);
+	foreach (array('surtitre', 'titre', 'soustitre', 'chapo') as $champ) {
+		if (preg_match(",<ins class='$champ'>(.*?)</ins>\n*,ims", $texte, $r)
+		AND strlen($x = trim($r[1]))) {
+			$c[$champ] = $x;
+			$c['texte'] = substr_replace($c['texte'], '', strpos($c['texte'], $r[0]), strlen($r[0]));
+		}
+	}
+
+	$r = '';
+	foreach ($c as $var => $val)
+		$r .= "$var="._q(trim($val)).', ';
+
 	spip_query("UPDATE spip_articles
-		SET texte="._q($texte).",
+		SET $r
 		date=NOW(),
 		date_modif=NOW()
 		WHERE id_article=$id_article"

@@ -200,7 +200,7 @@ function exec_convertisseur(){
 	function_exists('charger_fonction')
 	AND $chercher_rubrique = charger_fonction('chercher_rubrique', 'inc', true)) {
 		echo "<p/><div><label>Choisissez une rubrique si vous voulez insérer le résultat de la conversion dans un nouvel article sur le site :";
-		echo $chercher_rubrique(null,'rubrique');
+		echo $chercher_rubrique(null,'rubrique',null);
 		echo "</label></div>\n";
 	}
 
