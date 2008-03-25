@@ -16,7 +16,7 @@ _ &bull; [De tout le plugin->@reset@]
 		."<p>Version locale : @version@@distant@<br/>@pack@</p>"
 		."<p>Liens de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p>"
 		."<p>R&eacute;initialisations :
-_ &bull; [Des outils cach&eacute;s|Revenir &agrave; l'apparence innitiale de cette page->@hide@]
+_ &bull; [Des outils cach&eacute;s|Revenir &agrave; l'apparence initiale de cette page->@hide@]
 _ &bull; [De tout le plugin|Revenir &agrave; l'&eacute;tat initial du plugin->@reset@]@install@
 </p>",
 	'du_pack' => '&bull; du pack @pack@',
