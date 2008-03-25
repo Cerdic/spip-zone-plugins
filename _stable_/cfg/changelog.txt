@@ -4,7 +4,7 @@ Todo :
 - rendre les 'storage' independants de la class cfg_formulaire pour utiliser leur fonction lire/ecrire/effacer dans lire_config, ecrire_config, effacer_config
 
 v1.4.5 (25 03 2008)
-- deplacement d'une partie des affichages dans l'exec plutot que dans la classe cfg
+- deplacement des affichages dans l'exec plutot que dans la classe cfg
 - correction bug en 1.9.2 (il ne faut pas passer "editable" dans le contexte d'un recuperer_fond() !)
 
 v1.4.4 (24 03 2008)

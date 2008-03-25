@@ -68,7 +68,14 @@ class cfg_dist
 	function autoriser()  {return $this->form->autoriser(); }
 	function formulaire() {return $this->form->formulaire();	}
 	
-
+	function get_titre(){ return $config->form->param->titre;}
+	function get_nom()  { return $config->form->param->nom;}
+	function get_boite(){ 
+		if (!(($titre = $this->form->param->titre) && ($boite = $this->form->param->boite))){
+			$boite=($titre)?$titre: _T('icone_configuration_site') . ' ' . $this->form->param->nom;
+		}
+		return $boite;
+	}
 
 	/*
 	 * Affiche la boite d'info
@@ -166,7 +173,7 @@ class cfg_dist
 	 * le parent n'a pas 'onglet=non' sinon rien ne sera expose...
 	 * 
 	 */
-	function barre_onglets_cfg(){
+	function barre_onglets(){
 		$onglets = array();
 		
 		// scruter les onglets affichables ainsi que l'onglet 'expose'
@@ -255,6 +262,32 @@ class cfg_dist
 	}
 	
 
+	// affiche le descriptif du formulaire
+	function descriptif(){
+		if ($d = $this->form->param->descriptif)
+			return debut_boite_info(true) . propre($d) . fin_boite_info(true);	
+	}
+	
+	// affiche le message en cas d'acces interdit
+	function acces_refuse(){
+		include_spip('inc/minipres');
+		return minipres(_T('info_acces_refuse'), 
+			$this->form->param->refus 
+				? $this->form->param->refus 
+				: " (cfg {$this->form->param->nom} - {$config->form->vue} - {$config->form->param->cfg_id})");
+	}
+	
+	// afficher les messages de cfg
+	function messages(){
+		$m = $config->form->messages; $messages = array();
+		if (count($m['message_ok'])) 		$messages[] = join('<br />', $m['message_ok']);
+		if (count($m['message_erreur'])) 	$messages[] = join('<br />', $m['message_erreur']);
+		if (count($m['erreurs'])) 			$messages[] = join('<br />', $m['erreurs']);
+		
+		if ($messages = trim(join('<br />', $messages))) {
+			return debut_boite_info(true) . propre($messages) . fin_boite_info(true);
+		}
+	}
 }
 
 ?>

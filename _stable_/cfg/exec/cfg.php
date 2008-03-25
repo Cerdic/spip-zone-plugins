@@ -41,55 +41,38 @@ function exec_cfg_dist($class = null)
 
 function afficher_page_cfg(&$config){
 	include_spip("inc/presentation");
-	
-	$titre 		= $config->form->param->titre;
-	$boite 		= $config->form->param->boite;
-	$descriptif = $config->form->param->descriptif;
-	$nom   		= $config->form->param->nom;
-	$refus   	= $config->form->param->refus;
-		
-	
-	if (!($titre && $boite)){
-		$boite=($titre)?$titre: _T('icone_configuration_site') . ' ' . $config->form->nom;
-	}
 
 	if (!$config->autoriser()) {
-		include_spip('inc/minipres');
-		echo minipres(_T('info_acces_refuse'), $refus ? $refus : " (cfg {$nom} - {$config->form->vue} - {$config->form->param->cfg_id})");
+		echo $config->acces_refuse();
 		exit;
 	}
 
 	pipeline('exec_init',array('args'=>array('exec'=>'cfg'),'data'=>''));
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page($boite, 'cfg', $nom);
+	echo $commencer_page($config->get_boite(), 'cfg', $config->get_nom());
 	echo "<br /><br /><br />\n";
 
-	echo gros_titre(sinon($titre, _T('cfg:configuration_modules')), '', false);	
-	echo $config->barre_onglets_cfg();
+	echo gros_titre(sinon($config->get_titre(), _T('cfg:configuration_modules')), '', false);	
+	echo $config->barre_onglets();
 	
 	// colonne gauche
 	echo debut_gauche('', true);
 
 	// si un formulaire cfg est demande
-	if ($descriptif) echo debut_boite_info(true) . propre($descriptif) . fin_boite_info(true);
+	echo $config->descriptif();
 	
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'cfg'),'data'=>''));
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'cfg'),'data'=>''));
 		
 	// affichage des messages envoyes par cfg
-	$m = $config->form->messages; $messages = array();
-	if (count($m['message_ok'])) 		$messages[] = join('<br />', $m['message_ok']);
-	if (count($m['message_erreur'])) 	$messages[] = join('<br />', $m['message_erreur']);
-	if (count($m['erreurs'])) 			$messages[] = join('<br />', $m['erreurs']);
-	
-	if ($messages = trim(join('<br />', $messages))) {
-		echo debut_boite_info(true) . propre($messages) . fin_boite_info(true);
-	}
+	echo $config->messages();
 
 	// affichage des liens
-	echo $config->lier() . debut_droite("", true);
+	echo $config->lier();
+	
+	echo debut_droite("", true);
 	
 	// centre de la page	
 	if (!$formulaire = $config->formulaire()) {
