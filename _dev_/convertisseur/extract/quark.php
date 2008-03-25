@@ -75,8 +75,30 @@ function nettoyage_xtag($c) {
 	return $c;
 }
 
+// pas specifique a quark : fonction nommee ainsi pour eventuelle integration
+// a inc/charsets
+function quark_bom_detect($t) {
+	foreach (array(
+		chr(0x00).chr(0x00).chr(0xFE).chr(0xFF) => 'UTF-32BE',
+		chr(0xFF).chr(0xFE).chr(0x00).chr(0x00) => 'UTF-32LE',
+		chr(0xFE).chr(0xFF) => 'UTF-16BE',
+		chr(0xFF).chr(0xFE) => 'UTF-16LE',
+		chr(0xEF).chr(0xBB).chr(0xBF) => 'utf-8'
+	) as $bom => $charset)
+		if (strpos($t, $bom)===0)
+			return $charset;
+}
+
+
+
 function extracteur_quark($fichier, &$charset) {
 	if (lire_fichier($fichier, $texte)) {
+
+		if ($c = quark_bom_detect($texte)
+		AND $c != 'utf-8'
+		AND init_mb_string())
+			$texte = mb_convert_encoding($texte, 'utf-8', $c);
+
 		if (is_utf8($texte))
 			$charset = 'utf-8';
 
