@@ -6,7 +6,7 @@
 
 		<INCLURE(session.php){fond=inc_teteforum}{id_article}>
 
-		<p class="space_20"></p>
+		<p class="space_10"></p>
 
 		[(#REM) On regarde si le forum n'est pas ferme ]
 		#SET{forumferme,0}
@@ -20,7 +20,7 @@
 		[(#MODELE{chemin_hierarchie}{id_article}{encours=#ENV{id_article}})]
 
 		<p class="space_10"></p>
-        
+
 		[(#SET{affbouton,[(#GET{forumferme}|=={1}|?{' ',
 			<ul class="actionforum">
 				<li class="poster">
@@ -30,9 +30,9 @@
 		})]
 		})]
 		#GET{affbouton}
-	   
+
 		<div class="titre_actif #EDIT{titre}">[(#TITRE|supprimer_numero)]</div>
-		
+
 		<p class="space_5"></p>
 
 
@@ -40,29 +40,29 @@
 [(#MODELE{moderateurs_ligne}{id_article})]
 
 		<table class="spipforum" id="article_forum">
-			<tr> 
+			<tr>
 				<th colspan="2"><:spipbb:sujet_s:></th>
 				<th><:spipbb:message_s:></th>
 				<th><:spipbb:auteur:></th>
 				<th><:spipbb:visites:></th>
 				<th><:spipbb:messages_derniers:></th>
 			</tr>
-			
+
 			[(#REM) message art ferme|maintenance ]
 			[(#GET{forumferme}|=={1}|?{' ',''})
 				<tr class="forum_clos"><td colspan='6'>
 				[(#GET{maintenance}|=={1}|?{<:spipbb:forum_maintenance:>,<:spipbb:forum_ferme:>})]
 				</td></tr>
 			]
-			
-			
+
+
 		<BOUCLE_message_annonce(FORUMS){id_article}{id_mot=#CONFIG{spipbb/id_mot_annonce}}{!par date_thread}{doublons ann}>
 
 			<!-- C est forcement un pied de discussion -->
 			#SET{id_fo_ann,#ID_FORUM}
-			
+
 			<!-- BEGIN topicrow -->
-			<tr class="ligne_annonce"> 
+			<tr class="ligne_annonce">
 				<td class="etatsujet sujetannonce"><span><:spipbb:annonce:></span>&nbsp;</td>
 				<td class="titreforum" id="forum#ID_FORUM">
 					<span><:spipbb:annonce_dpt:></span>
@@ -102,7 +102,7 @@
 						</BOUCLE_auteurpar>
 						</B_auteurpar>
 							[(#NOM|sinon{<:spipbb:anonyme:>})]
-						<//B_auteurpar> 
+						<//B_auteurpar>
 						<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_fo_ann}})]#forum#ID_FORUM" class="adermsg" title="<:spipbb:messages_voir_dernier:>">
 						&nbsp;<span>(<:spipbb:messages_voir_dernier:>)</span>
 						</a>
@@ -115,9 +115,9 @@
 
 			<!-- C est forcement un pied de discussion -->
 			#SET{id_fo_ann,#ID_FORUM}
-			
+
 			<!-- BEGIN topicrow -->
-			<tr class="ligne_postit"> 
+			<tr class="ligne_postit">
 				<td class="etatsujet sujetpostit"><span><:spipbb:postit:></span>&nbsp;</td>
 				<td class="titreforum" id="forum#ID_FORUM">
 					<span><:spipbb:postit_dpt:></span>
@@ -157,7 +157,7 @@
 						</BOUCLE_auteurparp>
 						</B_auteurparp>
 							[(#NOM|sinon{<:spipbb:anonyme:>})]
-						<//B_auteurparp> 
+						<//B_auteurparp>
 						<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_fo_ann}})]#forum#ID_FORUM" class="adermsg" title="<:spipbb:messages_voir_dernier:>">
 						&nbsp;<span>(<:spipbb:messages_voir_dernier:>)</span>
 						</a>
@@ -166,26 +166,26 @@
 			</tr>
 		</BOUCLE_message_postit>
 
-		<BOUCLE_messages(FORUMS){id_article}{plat}{!par date_thread}{pagination 20}> 
-		
+		<BOUCLE_messages(FORUMS){id_article}{plat}{!par date_thread}{pagination 20}>
+
 		<!-- sujets ...................... -->
 		<BOUCLE_sujet(FORUMS){id_thread}{doublons ann}>
 			#SET{thread_clos,non}
 			#SET{id_forum,#ID_FORUM}
-			
-				<BOUCLE_reponsesalt(FORUMS){id_thread}{plat}> 
+
+				<BOUCLE_reponsesalt(FORUMS){id_thread}{plat}>
 					<BOUCLE_reponse_fermealt(FORUMS){id_forum}{titre_mot=ferme}>
 						#SET{thread_clos,#ID_FORUM}
 					</BOUCLE_reponse_fermealt>
 				</BOUCLE_reponsesalt>
-			
-			
+
+
 			[(#REM) test type icone ligne ]
 			[(#SET{aff_ico_thread,[(#GET{thread_clos}|=={non}|?{
 			<td class='etatsujet post'><span>&nbsp;,<td class='etatsujet postferme'><span>&nbsp;
 			})]
 			})]
-			
+
 			<tr class="ligne_sujet">
 				[(#REM) affiche icone ligne ]
 				[(#GET{aff_ico_thread})]
@@ -230,17 +230,17 @@
 						</BOUCLE_auteurpr>
 						</B_auteurpr>
 							[(#NOM|sinon{<:spipbb:anonyme:>})]
-						<//B_auteurpr> 
-						
+						<//B_auteurpr>
+
 						<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_forum}})]#forum#ID_FORUM" class="adermsg" title="<:spipbb:messages_voir_dernier:>">
 							&nbsp;<span>(<:spipbb:messages_voir_dernier:>)</span>
 						</a>
 					</BOUCLE_dernier_message> - <//B_dernier_message>
 				</td>
 			</tr>
-			
 
-			
+
+
 			</BOUCLE_sujet>
 			</BOUCLE_messages>
 			<tr class="pagination">
@@ -252,7 +252,7 @@
 			</tr>
 			</B_messages>
 
-			<tr class="sans_sujet"> 
+			<tr class="sans_sujet">
 				<td colspan="6"><:spipbb:sujets_aucun:></td>
 			</tr>
 
@@ -260,10 +260,10 @@
 		</table><!--Fin tableau -->
 
 		<p class="space_10"></p>
-		
+
 		[(#REM) bouton ou pas si forum ferme ]
 		#GET{affbouton}
-		
+
 		<p class="space_5"></p>
 
 		[(#REM) ligne chemin ]

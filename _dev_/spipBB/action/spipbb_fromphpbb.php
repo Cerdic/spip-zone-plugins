@@ -53,7 +53,7 @@ function action_spipbb_fromphpbb()
 	$id_rubrique = intval($arg);
 	if (empty($id_rubrique))
 	{
-		minipres( _T('spipbb:fromphpbb_titre'), "<strong>"._T('avis_non_acces_page')."</strong>" );
+		minipres( _T('spipbb:admin_titre_page_spipbb_admin_migre',array('nom_base','PhpBB')), "<strong>"._T('avis_non_acces_page')."</strong>" );
 		exit;
 	}
 
@@ -99,7 +99,7 @@ function action_spipbb_fromphpbb()
 	$time = array_sum(explode(' ', microtime())) - $time_start;
 	$corps .= "\n<!-- Elapsed: $time secondes -->";
 
-	echo minipres(_T("spipbb:fromphpbb_titre_etape")." $step",$corps);
+	echo minipres(_T('spipbb:import_titre_etape',array('nom_base','PhpBB'))." $step",$corps);
 
 	exit;
 } // action_spipbb_fromphpbb
@@ -111,7 +111,7 @@ function select_phpbb_db()
 {
 	global $spipbb_fromphpbb;
 	mysql_select_db($spipbb_fromphpbb['phpdb'],$spipbb_fromphpbb['phpbb_connect'])
-		or die(_T('spipbb:fromphpbb_erreur_db_phpbb'));
+		or die(_T('spipbb:migre_erreur_db',array('nom_base','PhpBB')));
 } // select_phpbb_db
 
 // ------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ function select_spip_db() {
 //	global $connexions;
 	$f = _FILE_CONNECT ;
 	if ($f AND is_readable($f)) include($f);
-	else die(_T('spipbb:fromphpbb_erreur_db_spip'));
+	else die(_T('spipbb:migre_erreur_db_spip'));
 	// mysql_select_db($connexions[0]['db'],$connexions[0]['link']) ;
 } // select_spip_db
 
@@ -151,20 +151,20 @@ function item($item,$enveloppe) {
 // ------------------------------------------------------------------------------
 function bbcode_to_raccourcis_spip($texte) {
 	$bbcode = array(
-	"[list]", "[*]", "[/list]", 
-	"[img]", "[/img]", 
-	"[b]", "[/b]", 
-	"[u]", "[/u]", 
+	"[list]", "[*]", "[/list]",
+	"[img]", "[/img]",
+	"[b]", "[/b]",
+	"[u]", "[/u]",
 	"[i]", "[/i]",
 	'[/size]', '[/color]',
 	"[code]", "[/code]",
 	"[/quote]");
 
 	$spipcode = array(
-	"", "-", "", 
-	"<img>", "</img>", 
-	"{{", "}}", 
-	"{_", "_}", 
+	"", "-", "",
+	"<img>", "</img>",
+	"{{", "}}",
+	"{_", "_}",
 	"{", "}",
 	'', '',
 	"<code>", "</code>",
@@ -291,7 +291,7 @@ function fromphpbb_init_metas($spiprubid=0)
 	$spipbb_fromphpbb['spiproot'] = _DIR_RACINE;
 	$spipbb_fromphpbb['phpbb_connect'] =
 		@mysql_connect($spipbb_fromphpbb['phpbb_host'],$spipbb_fromphpbb['phpbb_login'],$spipbb_fromphpbb['phpbb_pass']) or
-			die(_T('spipbb:fromphpbb_erreur_db_phpbb'));
+			die(_T('spipbb:migre_erreur_db_phpbb',array('nom_base','PhpBB')));
 	select_phpbb_db();
 	$result = @mysql_query("SELECT config_value FROM ".$spipbb_fromphpbb['PR'].
 			"config WHERE config_name='default_lang'") or
@@ -304,7 +304,7 @@ function fromphpbb_init_metas($spiprubid=0)
 	// recuperation du secteur ou seront implantes les forums
 	select_spip_db();
 	$result = sql_select('id_secteur','spip_rubriques', "id_rubrique='".$spipbb_fromphpbb['spiprubid']."'");
-	$row = sql_fetch($result) or die(_T('spipbb:fromphpbb_erreur_db_spip'));
+	$row = sql_fetch($result) or die(_T('spipbb:migre_erreur_db_spip'));
 	$spipbb_fromphpbb['spip_id_secteur'] = $row['id_secteur'];
 
 	$spipbb_fromphpbb['go'] = ( _request('phpbb_test') != 'oui' );
@@ -325,7 +325,7 @@ function fromppbb_load_metas($spiprubid)
 		// rappel de connexion
 		$spipbb_fromphpbb['phpbb_connect'] =
 		@mysql_connect($spipbb_fromphpbb['phpbb_host'],$spipbb_fromphpbb['phpbb_login'],$spipbb_fromphpbb['phpbb_pass']) or
-			die(_T('spipbb:fromphpbb_erreur_db_phpbb'));
+			die(_T('spipbb:migre_erreur_db',array('nom_base','PhpBB')));
 	}
 	else
 	{
@@ -390,7 +390,7 @@ function migre_categories_forums() {
 
 	$result = mysql_query("SELECT * FROM ".$spipbb_fromphpbb['PR']."categories",$spipbb_fromphpbb['phpbb_connect']) or
 		die(_T('spipbb:fromphpbb_migre_categories_impossible'));
-	// cat_id   	  cat_title   	  cat_order 
+	// cat_id   	  cat_title   	  cat_order
 	$spiprub = 0;
 	select_spip_db();
 
@@ -429,18 +429,18 @@ function migre_categories_forums() {
 			$spipbb_fromphpbb['spiprub_from_catid'][$row['cat_id']] = $verif;
 		} // empty(verif)
 	}
-	
+
 	//
 	// transfert des forums
 	// 1 forum = 1 article dans la rubrique categorie
 	//
 	select_phpbb_db();
 	$result = mysql_query("SELECT * FROM ".$spipbb_fromphpbb['PR']."forums",$spipbb_fromphpbb['phpbb_connect']) or
-		die(_T('spipbb:fromphpbb_erreur_forums'));
+		die(_T('spipbb:import_erreur_forums'));
 
 	$spipart=0;
 	select_spip_db();
-	
+
 	while ($row = mysql_fetch_assoc($result)) {
 		$rub = $spipbb_fromphpbb['spiprub_from_catid'][$row['cat_id']];
 		$titre = $row['forum_order'] . ". " . fromphpbb_convert($row['forum_name']);
@@ -535,7 +535,7 @@ function migre_utilisateurs() {
 			$nom = addslashes($row['username']);
 			$email = $row['user_email'];
 			$pass = $row['user_password'];
-			$site = $row['user_website']; 
+			$site = $row['user_website'];
 			if ( (!preg_match(',^https?://[^.]+\.[^.]+.*/.*$,', $site)) ) { $site = ""; } // on vire les url non conformes
 			$user_lang = $row['user_lang'];
 			$user_lang = $user_lang ? $user_lang : $spipbb_fromphpbb['spip_lang'] ;

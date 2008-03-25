@@ -52,7 +52,7 @@ function action_spipbb_fromphorum()
 	$id_rubrique = intval($arg);
 	if (empty($id_rubrique))
 	{
-		minipres( _T('spipbb:fromphorum_titre'), "<strong>"._T('avis_non_acces_page')."</strong>" );
+		minipres( _T('spipbb:admin_titre_page_spipbb_admin_migre',array('nom_base','Phorum')), "<strong>"._T('avis_non_acces_page')."</strong>" );
 		exit;
 	}
 
@@ -98,7 +98,7 @@ function action_spipbb_fromphorum()
 	$time = array_sum(explode(' ', microtime())) - $time_start;
 	$corps .= "\n<!-- Elapsed: $time secondes -->";
 
-	echo minipres(_T("spipbb:fromphorum_titre_etape")." $step",$corps);
+	echo minipres(_T('spipbb:import_titre_etape',array('nom_base','Phorum'))." $step",$corps);
 
 	exit;
 } // action_spipbb_fromphorum
@@ -110,7 +110,7 @@ function select_phorum_db()
 {
 	global $spipbb_fromphorum;
 	mysql_select_db($spipbb_fromphorum['phorumdb'],$spipbb_fromphorum['phorum_connect'])
-		or die(_T('spipbb:fromphorum_erreur_db_phorum').":select_phorum_db");
+		or die(_T('spipbb:migre_erreur_db',array('nom_base','Phorum')).":select_phorum_db");
 } // select_phorum_db
 
 // ------------------------------------------------------------------------------
@@ -120,7 +120,7 @@ function select_spip_db() {
 //	global $connexions;
 	$f = _FILE_CONNECT ;
 	if ($f AND is_readable($f)) include($f);
-	else die(_T('spipbb:fromphorum_erreur_db_spip'));
+	else die(_T('spipbb:migre_erreur_db_spip'));
 	// mysql_select_db($connexions[0]['db'],$connexions[0]['link']) ;
 } // select_spip_db
 
@@ -149,20 +149,20 @@ function item($item,$enveloppe) {
 // ------------------------------------------------------------------------------
 function bbcode_to_raccourcis_spip($texte) {
 	$bbcode = array(
-	"[list]", "[*]", "[/list]", 
-	"[img]", "[/img]", 
-	"[b]", "[/b]", 
-	"[u]", "[/u]", 
+	"[list]", "[*]", "[/list]",
+	"[img]", "[/img]",
+	"[b]", "[/b]",
+	"[u]", "[/u]",
 	"[i]", "[/i]",
 	'[/size]', '[/color]',
 	"[code]", "[/code]",
 	"[/quote]");
 
 	$spipcode = array(
-	"", "-", "", 
-	"<img>", "</img>", 
-	"{{", "}}", 
-	"{_", "_}", 
+	"", "-", "",
+	"<img>", "</img>",
+	"{{", "}}",
+	"{_", "_}",
 	"{", "}",
 	'', '',
 	"<code>", "</code>",
@@ -289,7 +289,7 @@ function fromphorum_init_metas($spiprubid)
 	if (empty($spipbb_fromphorum['phorum_host'])) $spipbb_fromphorum['phorum_host']="localhost";
 	$spipbb_fromphorum['spiproot'] = _DIR_RACINE;
 	$spipbb_fromphorum['phorum_connect'] = @mysql_connect($spipbb_fromphorum['phorum_host'],$spipbb_fromphorum['phorum_login'],$spipbb_fromphorum['phorum_pass']) or
-			die(_T('spipbb:fromphorum_erreur_db_phorum').":fromphorum_init_metas");
+			die(_T('spipbb:migre_erreur_db',array('nom_base','Phporum')).":fromphorum_init_metas");
 
 	select_phorum_db();
 	$spipbb_fromphorum['phorum_lang'] = $spipbb_fromphorum['phorum_lang'] ? $spipbb_fromphorum['phorum_lang'] :
@@ -298,7 +298,7 @@ function fromphorum_init_metas($spiprubid)
 	// recuperation du secteur ou seront implantes les forums
 	select_spip_db();
 	$result = sql_select('id_secteur','spip_rubriques', "id_rubrique='".$spipbb_fromphorum['spiprubid']."'");
-	$row = sql_fetch($result) or die(_T('spipbb:fromphorum_erreur_db_spip'));
+	$row = sql_fetch($result) or die(_T('spipbb:migre_erreur_db_spip'));
 	$spipbb_fromphorum['spip_id_secteur'] = $row['id_secteur'];
 
 	$spipbb_fromphorum['go'] = ( _request('phorum_test') != 'oui' );
@@ -320,7 +320,7 @@ function fromphorum_load_metas($spiprubid)
 		// rappel de connexion
 		$spipbb_fromphorum['phorum_connect'] =
 		@mysql_connect($spipbb_fromphorum['phorum_host'],$spipbb_fromphorum['phorum_login'],$spipbb_fromphorum['phorum_pass']) or
-			die(_T('spipbb:fromphorum_erreur_db_phorum').":fromphorum_load_metas");
+			die(_T('spipbb:migre_erreur_db',array('nom_base','Phorum')).":fromphorum_load_metas");
 	}
 	else
 	{
@@ -426,14 +426,14 @@ function migre_categories_forums() {
 			$spipbb_fromphorum['spiprub_from_catid'][$row['cat_id']] = $verif;
 		} // empty(verif)
 	}
-	
+
 	//
 	// transfert des forums
 	// 1 forum = 1 article dans la rubrique categorie
 	//
 	select_phorum_db();
 	$result = mysql_query("SELECT * FROM ".$spipbb_fromphorum['PR']."forums WHERE folder_flag=0",$spipbb_fromphorum['phorum_connect']) or
-		die(_T('spipbb:fromphorum_erreur_forums'));
+		die(_T('spipbb:import_erreur_forums'));
 
 	$spipart=0;
 	select_spip_db();
@@ -446,7 +446,7 @@ function migre_categories_forums() {
 		$date = date("Y-m-d H:i:s");
 		// verifier que ce forum n existe pas deja
 		// on peut avoir des forums dans la racine avec phorum --> palliatif (a ameliorer)
-		if (empty($rub) or intval($rub)==0 ) $rub=$spipbb_fromphorum['spiprubid']; 
+		if (empty($rub) or intval($rub)==0 ) $rub=$spipbb_fromphorum['spiprubid'];
 		$verif = sql_getfetsel("id_article","spip_articles","titre='$titre' AND id_rubrique=$rub");
 		if (empty($verif)) {
 			if ($spipbb_fromphorum['go']) {
@@ -657,7 +657,7 @@ function migre_threads() {
 	global $spipbb_fromphorum;
 
 	$res .= "<p>Import des topics et des posts</p>";
-	
+
 	select_phorum_db();
 	$query = "SELECT * FROM ".$spipbb_fromphorum['PR']."messages ".
 		" ORDER BY message_id";
@@ -698,7 +698,7 @@ function migre_threads() {
 		else {
 			$id_auteur = $spipbb_fromphorum['spip_auteur_from_user_id'][$poster_id];
 		}
-		
+
 		$username = fromphorum_convert($row['author']);
 		if ($username != '') {
 			$auteur = $username;

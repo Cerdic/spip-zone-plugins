@@ -75,13 +75,12 @@ function action_spipbb_admin_reconfig()
 			$reconf=true;
 		}
 		if ((strlen($spipbb_id_secteur=_request('spipbb_id_secteur')))
-			and intval($spipbb_id_secteur)!=$GLOBALS['spipbb']['id_secteur']) {
+			and intval($spipbb_id_secteur)<>intval($GLOBALS['spipbb']['id_secteur'])) {
 			$GLOBALS['spipbb']['id_secteur']=intval($spipbb_id_secteur);
 			$reconf=true;
 		}
-
 		if ((strlen($id_groupe_mot=_request('id_groupe_mot')))
-				and intval($id_groupe_mot)!=$GLOBALS['spipbb']['id_groupe_mot']) {
+				and intval($id_groupe_mot)<>intval($GLOBALS['spipbb']['id_groupe_mot'])) {
 
 			# solution boiteuse (au 1/12/07) ; peut etre revoir l_ensemble !
 			# Mais il est important de conserver la correspondance article/post
@@ -125,7 +124,7 @@ function action_spipbb_admin_reconfig()
 				$reconf=true;
 		}
 		if ((strlen($id_mot_ferme=_request('id_mot_ferme')))
-			and intval($id_mot_ferme)!=$GLOBALS['spipbb']['id_mot_ferme']) {
+			and intval($id_mot_ferme)<>intval($GLOBALS['spipbb']['id_mot_ferme'])) {
 
 			#on memorise le precedent mot
 			$id_ferme_premodif = $GLOBALS['spipbb']['id_mot_ferme'];
@@ -134,7 +133,7 @@ function action_spipbb_admin_reconfig()
 			$reconf=true;
 		}
 		if ((strlen($id_mot_annonce=_request('id_mot_annonce')))
-			and intval($id_mot_annonce)!=$GLOBALS['spipbb']['id_mot_annonce']) {
+			and intval($id_mot_annonce)<>intval($GLOBALS['spipbb']['id_mot_annonce'])) {
 
 			#on memorise le precedent mot
 			$id_annonce_premodif = $GLOBALS['spipbb']['id_mot_annonce'];
@@ -143,7 +142,7 @@ function action_spipbb_admin_reconfig()
 			$reconf=true;
 		}
 		if ((strlen($id_mot_postit=_request('id_mot_postit')))
-			and intval($id_mot_postit)!=$GLOBALS['spipbb']['id_mot_postit']) {
+			and intval($id_mot_postit)<>intval($GLOBALS['spipbb']['id_mot_postit'])) {
 			$GLOBALS['spipbb']['id_mot_postit']=intval($id_mot_postit);
 			$reconf=true;
 		}
@@ -163,12 +162,12 @@ function action_spipbb_admin_reconfig()
 			$reconf=true;
 		}
 		if ((strlen($sw_nb_spam_ban=_request('sw_nb_spam_ban')))
-			and intval($sw_nb_spam_ban)!=$GLOBALS['spipbb']['sw_nb_spam_ban']) {
+			and intval($sw_nb_spam_ban)<>intval($GLOBALS['spipbb']['sw_nb_spam_ban'])) {
 			$GLOBALS['spipbb']['sw_nb_spam_ban']=intval($sw_nb_spam_ban);
 			$reconf=true;
 		}
 		if ((strlen($sw_ban_ip=_request('sw_ban_ip')))
-			and intval($sw_ban_ip)!=$GLOBALS['spipbb']['sw_ban_ip']) {
+			and intval($sw_ban_ip)<>intval($GLOBALS['spipbb']['sw_ban_ip'])) {
 			$GLOBALS['spipbb']['sw_ban_ip']=intval($sw_ban_ip);
 			$reconf=true;
 		}
@@ -205,13 +204,13 @@ function action_spipbb_admin_reconfig()
 		# ajouts gafospip / scoty
 		# nombre lignes dans divers tableau de presentation
 		if ((strlen($fixlimit=_request('fixlimit')))
-			and intval($fixlimit)!=$GLOBALS['spipbb']['fixlimit']) {
+			and intval($fixlimit)<>intval($GLOBALS['spipbb']['fixlimit'])) {
 			$GLOBALS['spipbb']['fixlimit']=intval($fixlimit);
 			$reconf=true;
 		}
 		# temps avant deplacement d_un thread
 		if ((strlen($lockmaint=_request('lockmaint')))
-			and intval($lockmaint)!=$GLOBALS['spipbb']['lockmaint']) {
+			and intval($lockmaint)<>intval($GLOBALS['spipbb']['lockmaint'])) {
 			$GLOBALS['spipbb']['lockmaint']=intval($lockmaint);
 			$reconf=true;
 		}
@@ -296,7 +295,7 @@ function action_spipbb_admin_reconfig()
 		$champs_optionnels = array_diff($champs_definis,$champs_requis);
 		# on creer l_entree dans spipbb metas
 		foreach ($champs_optionnels as $champ_a_valider) {
-			$tbl_conf['affiche_'.$chx]=_request('affiche_'.$chx); # oui/non
+			$tbl_conf['affiche_'.$champ_a_valider]=_request('affiche_'.$champ_a_valider); # oui/non
 			if (($affiche_champ=_request('affiche_'.$champ_a_valider))
 				and $affiche_champ!=$GLOBALS['spipbb']['affiche_'.$champ_a_valider]) {
 				$GLOBALS['spipbb']['affiche_'.$champ_a_valider]=$affiche_champ;
@@ -315,19 +314,19 @@ function action_spipbb_admin_reconfig()
 		$taille_image_maxi = '200';
 		# sur page sujet
 		if ((strlen($taille_avatar_suj=_request('taille_avatar_suj')))
-			and intval($taille_avatar_suj)!=$GLOBALS['spipbb']['taille_avatar_suj']) {
+			and intval($taille_avatar_suj)<>intval($GLOBALS['spipbb']['taille_avatar_suj'])) {
 			$GLOBALS['spipbb']['taille_avatar_suj']=(intval($taille_avatar_suj)>$taille_image_maxi) ? $taille_image_maxi : intval($taille_avatar_suj);
 			$reconf=true;
 		}
 		# sur page contact
 		if ((strlen($taille_avatar_cont=_request('taille_avatar_cont')))
-			and intval($taille_avatar_cont)!=$GLOBALS['spipbb']['taille_avatar_cont']) {
+			and intval($taille_avatar_cont)<>intval($GLOBALS['spipbb']['taille_avatar_cont'])) {
 			$GLOBALS['spipbb']['taille_avatar_cont']=(intval($taille_avatar_cont)>$taille_image_maxi) ? $taille_image_maxi : intval($taille_avatar_cont);
 			$reconf=true;
 		}
 		# sur page profile
 		if ((strlen($taille_avatar_prof=_request('taille_avatar_prof')))
-			and intval($taille_avatar_prof)!=$GLOBALS['spipbb']['taille_avatar_prof']) {
+			and intval($taille_avatar_prof)<>intval($GLOBALS['spipbb']['taille_avatar_prof'])) {
 			$GLOBALS['spipbb']['taille_avatar_prof']=(intval($taille_avatar_prof)>$taille_image_maxi) ? $taille_image_maxi : intval($taille_avatar_prof);
 			$reconf=true;
 		}
@@ -355,7 +354,7 @@ function action_spipbb_admin_reconfig()
 		# c: 27/12/7
 		# on peut parametrer le niveau de log de spipbb compris entre 0 et 3 ( _SPIPBB_LOG_LEVEL par defaut )
 		if ((strlen($log_level=_request('log_level')))
-			and intval($log_level)!=$GLOBALS['spipbb']['log_level']) {
+			and intval($log_level)<>intval($GLOBALS['spipbb']['log_level'])) {
 			$log_level=intval($log_level);
 			$GLOBALS['spipbb']['log_level']=($log_level>3) ? _SPIPBB_LOG_LEVEL : ( ($log_level<0) ? _SPIPBB_LOG_LEVEL : $log_level ) ;
 			$reconf=true;

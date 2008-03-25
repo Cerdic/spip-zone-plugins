@@ -34,7 +34,7 @@
 		#SET{aff_localisation,#CONFIG{'spipbb/affiche_localisation'}}
 		[(#GET{aff_localisation}|=={oui}|?{' ',''})
 		<tr>
-			<td><:spipbb:localisation:></td>
+			<td><:spipbb:extra_localisation:></td>
 			<td>#SPIPBB{localisation}</td>
 		</tr>]
 		[<tr>
@@ -44,14 +44,14 @@
 		#SET{aff_emploi,#CONFIG{'spipbb/affiche_emploi'}}
 		[(#GET{aff_emploi}|=={oui}|?{' ',''})
 		<tr>
-			<td><:spipbb:emploi:></td>
+			<td><:spipbb:extra_emploi:></td>
 			<td>#SPIPBB{emploi}</td>
 		</tr>
 		]
 		#SET{aff_loisirs,#CONFIG{'spipbb/affiche_loisirs'}}
 		[(#GET{aff_loisirs}|=={oui}|?{' ',''})
 		<tr>
-			<td><:spipbb:loisirs:></td>
+			<td><:spipbb:extra_loisirs:></td>
 			<td>#SPIPBB{loisirs}</td>
 		</tr>
 		]

@@ -83,7 +83,7 @@ function spipbb_maintenance($id_article)
 
 
 //+---------------------------------------------+
-//Filtre : Nombre de messages 
+//Filtre : Nombre de messages
 //base : BoOz Email:booz@bloog.net
 //Compte le nombre de messages d'un auteur
 //Appel dans squellette : [(#ID_AUTEUR|spipbb_nb_messages)]
@@ -124,7 +124,7 @@ function spipbb_nb_messages_groupe($id_bidon){
 	while ($row = sql_fetch($result_auteurs) AND $compte++<10) {
 		# 1/12/07 fct spipbb_auteur_infos() change de nom :
 		$infos = spipbb_donnees_auteur($row['id_auteur']);
-		if( $infos['annuaire_forum']!='non') {
+		if( isset($infos['annuaire_forum'])  AND $infos['annuaire_forum']!='non') {
 			// Peut apparaitre dans la liste
 			$aut_nb[]=$row['auteur']."(".$row['total'].")";
 		}
@@ -136,9 +136,9 @@ function spipbb_nb_messages_groupe($id_bidon){
 //+----------------------------------+
 //Filtre :  citation
 //Base : BoOz
-//Modif scoty  29/10/06 .. -> spip 1.9.1/2 
-//Affiche le texte à citer    
-//+-------------------------------------+ 
+//Modif scoty  29/10/06 .. -> spip 1.9.1/2
+//Affiche le texte à citer
+//+-------------------------------------+
 function barre_forum_citer($texte, $lan, $rows, $cols, $lang='')
 {
 	if (!$premiere_passe = rawurldecode(_request('retour_forum'))) {
