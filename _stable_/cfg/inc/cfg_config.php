@@ -67,8 +67,10 @@ function inc_lire_config_dist($cfg='', $def=null, $serialize=false){
 
 	// Toute la suite est temporaire, le temps que tous les
 	// depots fonctionnent avec la nouvelle API
-	list($cfg,$args) = explode('::',$cfg,2);
-	if ($args) $cfg=$args; 
+	if (!is_array($cfg)) {
+		list($cfg,$args) = explode('::',$cfg,2);
+		if ($args) $cfg=$args; 
+	}
 	
 	$param = charger_fonction("cfg_analyse_param","inc");
 	$params = $param($cfg);
@@ -135,8 +137,10 @@ function inc_ecrire_config_dist($cfg='', $valeur=null, $serialize=true){
 
 	// Toute la suite est temporaire, le temps que tous les
 	// depots fonctionnent avec la nouvelle API
-	list($cfg,$args) = explode('::',$cfg,2);
-	if ($args) $cfg=$args;
+	if (!is_array($cfg)) {
+		list($cfg,$args) = explode('::',$cfg,2);
+		if ($args) $cfg=$args; 
+	}
 		
 	$param = charger_fonction("cfg_analyse_param","inc");
 	$params = $param($cfg);
@@ -344,7 +348,7 @@ function get_table_id($table) {
  * ainsi que le chemin de la donnee
  * 
  */
-function inc_cfg_analyse_param($cfg){
+function inc_cfg_analyse_param_dist(&$cfg){
 
 	$params = array(
 		'storage' => 'meta',
@@ -356,7 +360,7 @@ function inc_cfg_analyse_param($cfg){
 			'colonne' => ''
 		)
 	);
-	
+
 	/*
 	 * On peut passer une chaine
 	 * ou directement un tableau array($table, $colonne, $nom_colonne_id, $id, $chemin_cfg)

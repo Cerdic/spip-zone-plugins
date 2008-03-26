@@ -3,6 +3,11 @@ Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 - rendre les 'storage' independants de la class cfg_formulaire pour utiliser leur fonction lire/ecrire/effacer dans lire_config, ecrire_config, effacer_config
 
+v1.4.7 (26 03 2008)
+- corrections bugs sur les champs multiples et les tables
+- renommages de variables et doc
+- retour de 'cfg_id' dans #ENV 
+
 v1.4.6 (26 03 2008)
 - deplacement des affichages dans l'exec plutot que dans la classe cfg (fin)
 - correction bug sur le chargement des depots dans les fonctions lire_config qui transformaient un array en "array"

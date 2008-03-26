@@ -17,9 +17,35 @@ class cfg_depot_dist{
 	var $nom;
 	var $depot;
 	
+	//
+	// Constructeur de la classe
+	// 'depot' est le nom du fichier php stocke dans /inc/depot/{depot}.php
+	// qui contient une classe 'cfg_depot_{depot}' ou 'cfg_depot_{depot}_dist'
+	//
+	// $params est un tableau de parametres passes a la classe cfg_depot_{depot} qui peut contenir :
+	// 'champs' => array(
+	//		'nom'=>array(
+	//			'balise' => 'select|textarea|input', // nom de la balise
+	//			'type' => 'checkbox|hidden|text...', // type d'un input 
+	//			'tableau' => bool, // est-ce un champ tableau name="champ[]" ?
+	//			'type_verif' => 'xx', // classe css commencant par type_xx
+	//			'cfg' => 'xx',   // classe css commencant par css_xx
+	//			'id' => y, // cle du tableau 'champs_id' (emplacement qui possede ce champ)
+	//		),
+	// 'champs_id' => array(
+	//		cle => 'nom' // nom d'un champ de type id
+	//		),
+	//	'param' => array(
+	//		'parametre_cfg' => 'valeur' // les parametres <!-- param=valeur --> passes dans les formulaires cfg
+	//		),
+	//	'val' => array(
+	//		'nom' => 'valeur' // les valeurs des champs sont stockes dedans
+	//		)
+	//	);
+	//
+	//
 	function cfg_depot_dist($depot='metapack', &$cfg=false, $params=array()){
 		include_spip('inc/depot/'.$depot);
-		
 		if (class_exists($class = 'cfg_depot_'.$depot)) {
 			$this->depot = &new $class($params);
 		} elseif (class_exists($class = 'cfg_'.$depot)) {

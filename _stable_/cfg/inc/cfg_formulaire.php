@@ -35,9 +35,10 @@ class cfg_formulaire_dist{
 	var $controldata ='';
 // stockage du fond compile par recuperer_fond()
 	var $fond_compile = '';
-// configuration des types
+// configuration des verifications a faire en fonction des types de champs,
+// donnes par une class css 'type_{nom}'
 //TODO traductions
-	var $types = array(
+	var $verifier_champs_types = array(
 		  'id' => array('#^[a-z_]\w*$#i', 'lettre ou &#095; suivie de lettres, chiffres ou &#095;'),
 		  'idnum' => array('#^\d+$#', 'chiffres', 'intval'),
 		  'pwd' => array('#^.{5}#', 'minimum 5 caract&egrave;res;'));
@@ -99,14 +100,13 @@ class cfg_formulaire_dist{
 			$this->messages['message_erreur'][] = $err;
 		}
 
-		/*
-		 * Cas des champs multi, si des champs (Y)
-		 * sont declares id par la classe cfg_id,
-		 * <input type='x' name='Yn' class='cfg_id'>
-		 * on les ajoute dans le chemin pour retrouver les donnees
-		 * #CONFIG{.../y1/y2/y3/...}
-		 * 
-		 */
+		//
+		// Cas des champs multi, si des champs (Y)
+		// sont declares id par la classe cfg_id,
+		// <input type='x' name='Yn' class='cfg_id'>
+		// on les ajoute dans le chemin pour retrouver les donnees
+		// #CONFIG{.../y1/y2/y3/...}
+		// 
 		if (_request('_cfg_affiche')) {
 			$this->param->cfg_id = implode('/', array_map('_request', $this->champs_id));
 	    } 
@@ -127,7 +127,7 @@ class cfg_formulaire_dist{
 	 * 
 	 * Verifie les valeurs postees.
 	 * - stocke les valeurs qui ont changees dans $this->val[$nom_champ] = 'nouvelle_valeur'
-	 * - verifie que les types de valeurs attendus sont corrects ($this->types)
+	 * - verifie que les types de valeurs attendus sont corrects ($this->verifier_champs_types)
 	 * 
 	 * retourne les messages d'erreur
 	 */
@@ -174,7 +174,7 @@ class cfg_formulaire_dist{
 	
 	// verification du type de valeur attendue
 	// cela est defini par un nom de class css (class="type_idnum")
-	// 'idnum' etant defini dans $this->types['idnum']...
+	// 'idnum' etant defini dans $this->vefifier_champs_types['idnum']...
 	// si le nom du champ possede une traduction, il sera traduit.
 	//
 	// API a revoir, les controles sont trop sommaire,
@@ -182,9 +182,9 @@ class cfg_formulaire_dist{
 	// une preg n'est pas ideale
 	// De plus, le multilinguisme n'est pas fait.
 	function verifier_champ($name){
-		$type = $this->champs[$name]['typ'];
-		if (!empty($type) && isset($this->types[$type])) {
-			$dtype = $this->types[$type];
+		$type_verif = $this->champs[$name]['type_verif'];
+		if (!empty($type_verif) && isset($this->verifier_champs_types[$type_verif])) {
+			$dtype = $this->verifier_champs_types[$type_verif];
 			if (!preg_match($dtype[0], $this->val[$name])) {
 				// erreur
 				return $name . '&nbsp;:' . $dtype[1];
@@ -228,7 +228,10 @@ class cfg_formulaire_dist{
 			// et si l'identifiant a change,  il faut soit le copier, soit de deplacer
 			$new_id = implode('/', array_map('_request', $this->champs_id));
 			if ($new_id != $this->param->cfg_id && !_request('_cfg_copier')) {
+				// et ne pas perdre les valeurs suite a l'effacement dans ce cas precis
+				$vals = $this->val;
 				$this->effacer();
+				$this->val = $vals;
 			}
 			$this->param->cfg_id = $new_id;
 
@@ -272,11 +275,11 @@ class cfg_formulaire_dist{
 
 
 
-	/*
-	 * Recherche et stockage
-	 * des parametres #REM passes a CFG
-	 * (DEPRECIE)
-	 */
+	//
+	// Recherche et stockage
+	// des parametres #REM passes a CFG
+	// (DEPRECIE)
+	//
 	function recuperer_parametres_rem(){
 		// cas de #REM (deprecie)
 		preg_replace_callback('/(\[\(#REM\) ([a-z0-9_]\w+)(\*)?=)(.*?)\]/sim',
@@ -329,13 +332,12 @@ class cfg_formulaire_dist{
 	
 	
 	
-	/*
-	 * 
-	 * Recherche et stockage
-	 * des noms des champs (y) du formulaire
-	 * <input type="x" name="y"... />
-	 * 
-	 */	
+	// 
+	// Recherche  des noms des champs (y) du formulaire
+	// <input type="x" name="y"... />
+	// stockes dans le tableau $this->champs
+	// a l'exception des noms par _cfg_, reserves a ce plugin
+	// 
 	function recuperer_noms_champs(){	
 		if (!$this->vue) return;
 
@@ -347,30 +349,26 @@ class cfg_formulaire_dist{
 			return _T('cfg:pas_de_champs_dans', array('nom' => $this->vue));
 		}
 		
-		// stockage des champs trouves dans $this->champs
 		foreach ($matches as $regs) {
-			if (substr($regs[3], 0, 5) == '_cfg_') {
-				continue;
-			}
-		    if (!empty($regs[1])) {
-		    	$regs[2] = strtolower($regs[1]);
-			    if ($regs[2] == 'select' && !empty($regs[7])) {
-			    	$regs[2] = 'selmul';
-			    }
-		    }
-		    $this->champs[$regs[3]] =
-		    	array('inp' => $regs[2], 'typ' => '', 'array' => !empty($regs[4]));
-		    if (!empty($regs[5])) {
-		    	$this->champs[$regs[3]]['typ'] = $regs[5];
-		    }
-		    if (!empty($regs[6])) {
-		    	$this->champs[$regs[3]]['cfg'] = $regs[6];
-		    	if ($regs[6] == 'id') {
-			    	$this->champs[$regs[3]]['id'] = count($this->champs_id);
-		    		$this->champs_id[] = $regs[3];
-		    	}
-		    }
+			$name = $regs[3];
+			if (substr($name, 0, 5) == '_cfg_') continue;
+
+			$this->champs[$name] = array('balise' => $regs[1]); 
+			// input type
+		    if ($regs[2]) $this->champs[$name]['type'] = $regs[2];
+		    // champs tableau[]
+			if ($regs[4]) $this->champs[$name]['tableau'] = true;
+			// classes css type_xx (le seul reelement utilise... et encore, cette api est a revoir !)
+			if ($regs[5]) $this->champs[$name]['type_verif'] = $regs[5];
+			// classes css cfg_xx 
+			if ($regs[6]) $this->champs[$name]['cfg'] = $regs[6];
+			// si classe cfg_id => id a renseigner
+			if ($regs[6] == 'id') {
+				$this->champs[$name]['id'] = count($this->champs_id);
+				$this->champs_id[] = $name;	
+			} 
 	    }
+
 	    return '';
 	}	 
 	 
@@ -388,6 +386,9 @@ class cfg_formulaire_dist{
 			// sinon, ceux qui utilisent les fonds CFG avec l'API des formulaires dynamiques
 			// et mettent des [(#ENV**{editable}|?{' '}) ... ] ne verraient pas leurs variables
 			// dans l'environnement vu que CFG ne pourrait pas lire les champs du formulaire
+			#if (!isset($contexte['editable'])) $contexte['editable'] = true; // plante 1.9.2 !!
+			// passer cfg_id...
+			if (!isset($contexte['cfg_id']) && $this->param->cfg_id) $contexte['cfg_id'] = $this->param->cfg_id;
 			$this->fond_compile = recuperer_fond(
 					'fonds/cfg_' . $this->vue,
 					$this->val 
