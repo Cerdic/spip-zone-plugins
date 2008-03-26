@@ -1,0 +1,21 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Traductions rubriques 1.9.2d
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Stephane Laurent (Bill)
+	</auteur>
+	<lien></lien>
+	<version>
+	  1.9.2d
+	</version>
+	<etat>
+	  stable
+	</etat>
+	<description>
+	  Gestion de liens de traduction sur les rubriques.
+	</description>
+	<prefix> 
+	  tradrub
+	</prefix>
+</plugin>
