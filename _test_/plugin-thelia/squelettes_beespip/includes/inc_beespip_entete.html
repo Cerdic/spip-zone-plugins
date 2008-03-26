@@ -12,7 +12,7 @@ Existe aussi dans le fichier 'includes/inc_beespip_pied.html' ]
   <div class="cleaner"><img src="#CHEMIN{themes/}[(#CONFIG{beespip_theme})]/images-interface/transp.gif" style="height:1px;width:750px;border: 0;" alt="" /></div>
   <div id="entetegauche">
 	<div id="monCompte">
-				<h3>Mon compte</h3>
+				<h3><:spipthelia:mon_compte:></h3>
 				<THELIA SI NON CONNECTE>
 				<div class="blocMonCompte">
 				<form action="#SELF" method="post" id="connex" >
@@ -34,15 +34,15 @@ Existe aussi dans le fichier 'includes/inc_beespip_pied.html' ]
 				
 				<THELIA SI CONNECTE>
 				<div class="menuMonCompte cas-connecte">
-					Bonjour THELIA-CLIENT_PRENOM THELIA-CLIENT_NOM<br/>
+					<:spipthelia:bonjour:> THELIA-CLIENT_PRENOM THELIA-CLIENT_NOM<br/>
 					<a href="#URL_PAGE{moncompte}" class="LIEN_entete"><:spipthelia:mon_compte:></a> - 
-					<a href="THELIA-URLDECONNEXION" class="LIEN_entete"><:spipthelia:se_deconnecter:></a>				
+					<a href="#URL_PAGE{sommaire, thelia_action=deconnexion}" class="LIEN_entete"><:spipthelia:se_deconnecter:></a>				
 				</div>
 				</THELIA SI CONNECTE>
 			</div>
 			
 	  	  <div id="monPanier">
-		  		<h3>Mes achats</h3>
+		  		<h3><:spipthelia:mes_achats:></h3>
 		  		<T_PANIER>
 				<a href="#URL_PAGE{panier}" class="LIEN_entete"><:spipthelia:panier_contient:></a>
 				<THELIA_PANIER type="PANIER">
