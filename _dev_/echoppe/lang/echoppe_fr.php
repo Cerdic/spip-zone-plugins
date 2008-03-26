@@ -81,6 +81,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // L
 'langue_editee' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
 'largeur' => 'Largeur',
+'le_panier' => 'Le panier',
+'le_panier_est_vide' => 'Le panier est vide',
 'les_categories' => 'Les cat&eacute;gories',
 'les_depots' => 'Les d&eacute;p&ocirc;ts',
 'les_options_du_produit' => 'Les options de ce produit',

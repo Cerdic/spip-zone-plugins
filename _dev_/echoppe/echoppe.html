@@ -1,46 +1,87 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<title>Test d'&Eacute;choppe</title>
-	</head>
-	<body>
+[(#REM)
+	Un cache plus court, pour la boucle syndic_articles
+]#CACHE{3600}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Contenu principal : derniers articles publies ]
+	<div class="hfeed" id="conteneur">
+	<div id="contenu">
+		
+		<div class="cartouche">
+			<h1 class="invisible">#NOM_SITE_SPIP</h1>
+		</div>
+		
+		[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
 	<h1>Démonstration des boucles d'echoppe.</h1><br />
 	<h1 style="background:transparent url('[(#CHEMIN{'images/echoppe_blk_128.png'})]') no-repeat left center;padding-left:140px;height:128px"><:echoppe:echoppe:></h1>
 	<em>Token du panier = #SESSION{echoppe_token_panier}</em><br />
 	<em>Token du client = #SESSION{echoppe_token_client}</em><br />
 	
-	<B_CategoriesALaRacine>
-	<div >
-		<ul>
-			<BOUCLE_CategoriesALaRacine(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){par num titre}{id_secteur = 0}{lang = ""}>
-			<li>[<strong>(#TITRE|supprimer_numero)</strong>]<br />
-				<div style="border: 1px #CCC doted;">[<small>(#DESCRIPTIF|couper{100})</small>]
-				[(#TEXTE)]</div>
-				<B_LesProduitsDeCetteCategorie>
-					<ul>
-						<BOUCLE_LesProduitsDeCetteCategorie(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits spip_echoppe_categories_produits){statut = publie}{par num titre}{id_categorie}{lang=""}{"<hr />"}>
-						<li>
-							[<em>(#TITRE|supprimer_numero)</em><br />]
-							[(#LOGO_PRODUIT||image_reduire{100})<br />]
-							Prix HTVA : #PRIX_BASE_HTVA  &euro; (#PRIX_TVAC &euro; TTC) - La tva est de #TAUX_TVA %
-							<br />
-							[(#MODELE{stock}{id_produit})] en stock.
-							<br />
-							[Hauteur : (#HAUTEUR)<br />]
-							[Url d'achat : <a href="#URL_ACHAT">(#URL_ACHAT)</a><br />]
-							[Url d'achat rapide : <a href="#URL_ACHAT_RAPIDE">(#URL_ACHAT_RAPIDE)</a><br />]
-							
-						</li>
-						</BOUCLE_LesProduitsDeCetteCategorie>
-					</ul>
-				</B_LesProduitsDeCetteCategorie>
-			</li>
-			</BOUCLE_CategoriesALaRacine>
-		</ul>
-	</div>
-	</B_CategoriesALaRacine>
+		<B_CategoriesALaRacine>
+		<div >
+			<ul>
+				<BOUCLE_CategoriesALaRacine(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){par num titre}{id_secteur = 0}{lang = ""}>
+				<li>[<strong>(#TITRE|supprimer_numero)</strong>]<br />
+					<div style="border: 1px #CCC doted;">[<small>(#DESCRIPTIF|couper{100})</small>]
+					[(#TEXTE)]</div>
+					<B_LesProduitsDeCetteCategorie>
+						<ul>
+							<BOUCLE_LesProduitsDeCetteCategorie(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits spip_echoppe_categories_produits){statut = publie}{par num titre}{id_categorie}{lang=""}{"<hr />"}>
+							<li>
+								[<em>(#TITRE|supprimer_numero)</em><br />]
+								[(#LOGO_PRODUIT||image_reduire{100})<br />]
+								Prix HTVA : #PRIX_BASE_HTVA  &euro; (#PRIX_TVAC &euro; TTC) - La tva est de #TAUX_TVA %
+								<br />
+								[(#MODELE{stock}{id_produit})] en stock.
+								<br />
+								[Hauteur : (#HAUTEUR)<br />]
+								[Url d'achat : <a href="#URL_ACHAT">(#URL_ACHAT)</a><br />]
+								[Url d'achat rapide : <a href="#URL_ACHAT_RAPIDE">(#URL_ACHAT_RAPIDE)</a><br />]
+								
+							</li>
+							</BOUCLE_LesProduitsDeCetteCategorie>
+						</ul>
+					</B_LesProduitsDeCetteCategorie>
+				</li>
+				</BOUCLE_CategoriesALaRacine>
+			</ul>
+		</div>
+		</B_CategoriesALaRacine>
 	
-<hr />
-
-	</body>
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+	
+	[(#REM) Menu de navigation laterale ]
+	<div id="navigation">
+		
+		[(#REM) Menu de navigation par rubriques ]
+		<INCLURE{fond=inc-rubriques}>
+		
+	</div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale ]
+	<div id="extra">
+		
+		[(#REM) Inscription au site ]
+		#FORMULAIRE_INSCRIPTION
+		
+	</div><!--#extra-->
+	
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+	
+</div><!--#page-->
+</body>
 </html>

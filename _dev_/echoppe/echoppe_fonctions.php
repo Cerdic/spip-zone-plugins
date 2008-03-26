@@ -40,14 +40,14 @@ function vide_si_zero($_var){
 }
 function calculer_url_achat($_var){
 	if (isset($_var)){
-		$url = generer_url_public('achat_produit','id_produit='.$_var);
+		$url = generer_url_public('echoppe_achat_produit','id_produit='.$_var);
 		return $url;
 	}
 	
 }
 function calculer_url_achat_rapide($_var){
 	if (isset($_var)){
-		$url = generer_url_action('ajouter_panier','id_produit='.$_var.'&nombre=1');
+		$url = generer_url_action('echoppe_ajouter_panier','id_produit='.$_var.'&quantite=1');
 		return $url;
 	}
 	

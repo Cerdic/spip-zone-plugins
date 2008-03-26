@@ -1,6 +1,6 @@
 <?php
 	include_spip('base/echoppe');
-	
+	include_spip('inc/session');
 	if (strlen(session_get('echoppe_token_panier')) < 10){
 		
 		$test_existance_token = 0;
