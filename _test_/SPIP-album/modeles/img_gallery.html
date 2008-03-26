@@ -26,7 +26,7 @@
 			<dl>
 				<dt id="affiche_photo" style="background:url('#CHEMIN{img_pack/loading.gif}') no-repeat center 50%; width:#GET{taille}; height:#GET{taille};">
 					<a href="[(#FICHIER|image_watermark|extraire_attribut{src})]" rel="imagebox-gallery"[ title="(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})"]>
-						[<span id="grande_photo">(#FICHIER|image_reduire{#GET{taille},#GET{taille}}|inserer_attribut{title,<:album:clic_photo:>})</span>]
+						[<span id="grande_photo">(#FICHIER|image_reduire{#GET{taille},#GET{taille}}|inserer_attribut{title,<:album:clic_photo:>}|inserer_attribut{alt,''})</span>]
 					</a>
 				</dt>
 				<dt id="titre_photo" class="#EDIT{titre} spip_doc_titre">[(#TITRE|supprimer_numero|sinon{[(#FICHIER)]})]</dt>
