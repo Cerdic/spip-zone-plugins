@@ -19,6 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ascendance' => "Ascendance",
 'attente_no_vide' => "Arbre en attente avec individu",
 'attente_vide' => "Arbre en attente sans individu",
+'aucun_ascendant' => "Aucun ascendant",
+'aucun_descendant' => "Aucun descendant",
 
 // B
 'bapl' => "Bapt&ecirc;me de l'Eglise des Mormons",
@@ -244,12 +246,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'vent' => "vent&ocirc;se",
 
 // W
-'will' => "Testament"
+'will' => "Testament",
 
 // X
 
 // Y
 
 // Z
+'zbug_fin_non_definie' => "Limite de fin non d&eacute;finie",
+'zbug_initial_non conforme' => "Initiale ins&eacute;r&eacute;e non conforme",
+'zbug_manque_parametre_initial' => "Absence d'initiale de tri"
 );
 ?>
