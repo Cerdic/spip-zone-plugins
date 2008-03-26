@@ -58,12 +58,19 @@ function exec_cfg_dist($class = null)
 	echo $config->messages();
 
 	// affichage des liens
-	echo $config->lier();
+	if ($s = $config->liens()) echo debut_boite_info(true) . $s . fin_boite_info(true);
+	if ($s = $config->liens_multi()) echo debut_boite_info(true) . $s . fin_boite_info(true);
 	
 	echo debut_droite("", true);
 	
 	// centre de la page	
-	echo $config->formulaire();
+	if ($config->get_presentation() == 'auto') {
+		echo debut_cadre_trait_couleur('', true, '', $config->get_boite());
+		echo $config->formulaire();
+		echo fin_cadre_trait_couleur(true);
+	} else {
+		echo $config->formulaire();
+	}
 	
 	// pied
 	echo fin_gauche() . fin_page();

@@ -18,7 +18,10 @@ class cfg_depot_meta
 	var $val = array();
 	var $param = array();
 	
-	function cfg_depot_meta(&$params=array())
+	// version du depot
+	var $version = 2;
+	
+	function cfg_depot_meta($params=array())
 	{
 		$this->cfg = &$cfg;
 		foreach ($params as $o=>&$v) {
@@ -33,7 +36,7 @@ class cfg_depot_meta
 		foreach ($this->champs as $name => $def) {
 			$val[$name] = lire_meta($name);
 	    }
-	    return $val;
+	    return array(true, $val);
 	}
 
 
@@ -44,7 +47,7 @@ class cfg_depot_meta
 			ecrire_meta($name, $this->val[$name]);
 	    }
 	    if (defined('_COMPAT_CFG_192')) ecrire_metas();
-	    return true;
+	    return array(true, $this->val);
 	}
 	
 	
@@ -56,7 +59,7 @@ class cfg_depot_meta
 			}
 	    }
 	    if (defined('_COMPAT_CFG_192')) ecrire_metas();
-	    return true;			
+	    return array(true, $this->val);			
 	}
 	
 	

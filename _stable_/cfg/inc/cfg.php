@@ -76,7 +76,11 @@ class cfg_dist
 		}
 		return $boite;
 	}
-
+	// pour pouvoir tester si la presentation des formulaires doit etre appliquee ou non
+	// m'est avis que ca devrait virer cette 'presentation=auto'...
+	// c'est comme 'rediriger', il n'y a que le plugin 'autorite' qui l'utilise
+	function get_presentation() { return $this->form->param->presentation;	}
+	
 	/*
 	 * Affiche la boite d'info
 	 * des liens vers les autres fonds CFG
@@ -89,32 +93,25 @@ class cfg_dist
 	 * pour utiliser la chaine de langue de prefixe_plugin
 	 * 
 	 */	
-	function lier()
+	function liens()
 	{
 		$return = '';
 		// liens simples
 		foreach ($this->form->param->liens as $lien) {
 			$nom = _T($lien);
 			$lien =  array_pop(explode(':',$lien)); // ne garder que la derniere partie de la chaine de langue
-			$return .= ($l = $this->boite_liens($lien, $nom)) ? "<li>$l</li>\n" : "";
+			$return .= ($l = $this->generer_lien($lien, $nom)) ? "<li>$l</li>\n" : "";
 		}
-		// liens multiples
-		foreach ($this->form->param->liens_multi as $lien) {
-			$nom = _T($lien);
-			$lien =  array_pop(explode(':',$lien)); // ne garder que la derniere partie de la chaine de langue
-			$return .= ($l = $this->boite_liens_multi($lien, $nom)) ? "<li>$l</li>\n" : "";
-		}		
-		return ($return)?
-			debut_boite_info(true) . "<ul>$return</ul>" . fin_boite_info(true)
-			:'';
+		return ($return)?"<ul>$return</ul>":'';
 	}
+
 
 	/*
 	 * Affiche un lien vers le fond dont le nom ($lien)
 	 * est passe en parametre
 	 * a condition que le fichier fonds/cfg_$lien.html existe
 	 */
-	function boite_liens($lien, $nom='')
+	function generer_lien($lien, $nom='')
 	{
 		// nom est une chaine, pas une cle de tableau.
 		if (empty($nom) OR !is_string($nom)) $nom = $lien;
@@ -134,7 +131,17 @@ class cfg_dist
 	 * a condition que le fichier fonds/cfg_$lien.html existe
 	 * 
 	 */
-	function boite_liens_multi($lien, $nom=''){
+	function liens_multi(){
+		// liens multiples
+		foreach ($this->form->param->liens_multi as $lien) {
+			$nom = _T($lien);
+			$lien =  array_pop(explode(':',$lien)); // ne garder que la derniere partie de la chaine de langue
+			$return .= ($l = $this->generer_lien_multi($lien, $nom)) ? "<li>$l</li>\n" : "";
+		}
+		return ($return)?"<ul>$return</ul>":'';
+	}
+	
+	function generer_lien_multi($lien, $nom=''){
 		// nom est une chaine, pas une cle de tableau.
 		if (empty($nom) OR !is_string($nom)) $nom = $lien;
 		if (!find_in_path('fonds/cfg_'.$lien.'.html')) return "";
@@ -198,9 +205,7 @@ class cfg_dist
 					$path = dirname(dirname($cfg));
 	
 					// titre
-					if ($tmp->form->param->titre)
-						$args['titre'] = $tmp->form->param->titre;
-					else
+					if (!$args['titre'] = $tmp->form->param->titre)
 						$args['titre'] = $fonds;
 
 					// icone		
@@ -297,19 +302,13 @@ class cfg_dist
 			$retour .= "<img src='"._DIR_PLUGIN_CFG.'cfg.png'."' style='float:right' alt='' />\n";
 			$retour .=  "<h3>" . _T("cfg:choisir_module_a_configurer") . "</h3>";
 		} else {
-			// Mettre un cadre_trait_couleur autour du formulaire, sauf si demande express de ne pas le faire
-			if ($this->form->param->presentation == 'auto') {
-				$retour .= debut_cadre_trait_couleur('', true, '', $boite);
-				$retour .= $formulaire;
-				$retour .= fin_cadre_trait_couleur(true);
-			} else {
-				$retour .= $formulaire;
-			}
+			$retour .= $formulaire;
 		}
 		return $retour;
 	}
 	
-	
+		
+		
 	// restaure des messages serialises dans une meta 'cfg_message_{id_auteur}'
 	//
 	// si le formulaire cfg avait demande une redirection... 

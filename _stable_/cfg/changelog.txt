@@ -3,6 +3,12 @@ Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 - rendre les 'storage' independants de la class cfg_formulaire pour utiliser leur fonction lire/ecrire/effacer dans lire_config, ecrire_config, effacer_config
 
+v1.4.6 (26 03 2008)
+- deplacement des affichages dans l'exec plutot que dans la classe cfg (fin)
+- correction bug sur le chargement des depots dans les fonctions lire_config qui transformaient un array en "array"
+- API pour les fichiers de depots lire(), ecrire() et effacer() qui retournent array($ok, array("nom"=>"val"))
+(ancienne api toujours fonctionnelle [lire() et modifier($supprimer)], les depots autres que 'meta' seront portes vers la nouvelle api)
+
 v1.4.5 (25 03 2008)
 - deplacement des affichages dans l'exec plutot que dans la classe cfg
 - correction bug en 1.9.2 (il ne faut pas passer "editable" dans le contexte d'un recuperer_fond() !)

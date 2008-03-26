@@ -9,7 +9,6 @@ plugin de configuration cfg
 
 <!-- titre=<multi>[fr]Champs extra articles[en]Article's extra data</multi>-->
 
-
 <!-- liens*=cfg:testclassic -->
 <!-- liens*=cfg:testsimple -->
 <!-- liens*=cfg:testcasier -->
@@ -20,13 +19,15 @@ plugin de configuration cfg
 <!-- liens*=cfg:testphp -->
 <!-- liens*=cfg:testtable -->
 
-
-<!-- depot=extrapack -->
+<!-- depot=tablepack -->
 <!-- table=spip_articles -->
+<!-- colonne=extra -->
+
 <!-- onglet=non -->
 
 #CACHE{0}
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
 
 <fieldset>
 <label for="id">*<:cfg:id:></label>

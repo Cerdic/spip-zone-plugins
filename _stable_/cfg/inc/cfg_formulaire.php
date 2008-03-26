@@ -31,6 +31,8 @@ class cfg_formulaire_dist{
 	var $val = array();
 // pour tracer les valeurs modifiees
 	var $log_modif = '';
+// contenu du fichier de formulaire
+	var $controldata ='';
 // stockage du fond compile par recuperer_fond()
 	var $fond_compile = '';
 // configuration des types
@@ -48,13 +50,6 @@ class cfg_formulaire_dist{
 	 */
 	function cfg_formulaire_dist($nom, $cfg_id = '', $opt = array())
 	{
-		// definition de l'alias params
-		$this->params = array(
-			'champs' => &$this->champs, 
-			'champs_id' => &$this->champs_id,
-			'val' => &$this->val,
-			'param' => &$this->param
-		);
 			
 		$cfg_params = cfg_charger_classe("cfg_params");
 		$this->param = &new $cfg_params();
@@ -115,18 +110,15 @@ class cfg_formulaire_dist{
 		if (_request('_cfg_affiche')) {
 			$this->param->cfg_id = implode('/', array_map('_request', $this->champs_id));
 	    } 
-			
+	    
 		// creer le storage et lire les valeurs
 		$this->param->depot = strtolower(trim($this->param->depot));
 		$classto = 'cfg_' . $this->param->depot;
-		//include_spip('inc/' . $classto);
 		$cfg_depot = cfg_charger_classe('cfg_depot','inc');
 		$this->depot = new $cfg_depot($this->param->depot, $this, $this->params);
-		$this->val = $this->depot->lire();			
+		$ok &= $this->lire();
 		return $ok;
 	}
-
-
 
 
 	/*
@@ -143,14 +135,14 @@ class cfg_formulaire_dist{
 
 		if ($this->messages['erreurs'] || $this->messages['message_erreur'] || !$this->autoriser()) 
 				return false;
-		
+
 		// si on a pas poste de formulaire, pas la peine de controler
 		// ce qui mettrait de fausses valeurs dans l'environnement
 		if  (!_request('_cfg_ok') && !_request('_cfg_delete')) return true;
 		
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$securiser_action();
-		
+				
 		// stockage des nouvelles valeurs
 		foreach ($this->champs as $name => $def) {
 			// enregistrement des valeurs postees
@@ -161,20 +153,19 @@ class cfg_formulaire_dist{
 		    if ($oldval != $this->val[$name]) {
 		    	$this->log_modif .= $name . ':' . var_export($oldval, true) . '/' . var_export($this->val[$name], true) .', ';
 		    }
-		}
-		   
+		}		   
 		// tester la validite des champs
 		foreach ($this->champs as $name => $def) {		    
 		    if ($erreur = $this->verifier_champ($name)) {
 		    	$this->messages['erreurs'][$name] = $erreur;
 		    }
-	    }
-		
+	    }	
+	    	
 		// si pas de changement, pas la peine de continuer
 		if (!$this->log_modif && !_request('_cfg_delete')) {
 			$this->messages['message_erreur'][] = _T('cfg:pas_de_changement', array('nom' => $this->nom_config()));
 		}
-
+		
 		// stocker le fait que l'on a controle les valeurs
 		$this->verifier = true;
 	    return !($this->messages['erreurs'] || $this->messages['message_erreur']);
@@ -403,6 +394,7 @@ class cfg_formulaire_dist{
 						? array_merge($contexte, $this->val) 
 						: $contexte);
 		}
+		return $this->fond_compile;
 	}
 	
 	
@@ -434,29 +426,25 @@ class cfg_formulaire_dist{
 		|| ($qui = $GLOBALS['ip']);
 		spip_log('cfg (' . $this->nom_config() . ') par ' . $qui . ': ' . $message);
 	}
-
 	
-	// Efface les donnees envoyees par le formulaire
-	//
-	// dans le cas d'une suppression, il faut vider $this->val qui
-	// contient encore les valeurs du formulaire, sinon elles sont 
-	// passees dans le fond et le formulaire garde les informations
-	// d'avant la suppression	
-	function effacer(){
-		if ($this->depot->effacer($this->params)) {
-			$this->val = array();
-			$this->messages['message_ok'][] = $msg = _T('cfg:config_supprimee', array('nom' => $this->nom_config()));
+	
+	// lit les donnees depuis le depot
+	function lire(){
+		list ($ok, $val) = $this->depot->lire($this->params);
+		if ($ok) {
+			$this->val = $val;	
 		} else {
-			$this->messages['message_erreur'][] = $msg = _T('cfg:erreur_suppression', array('nom' => $this->nom_config()));
+			$this->messages['message_erreur'][] = _T('cfg:erreur_lecture', array('nom' => $this->nom_config()));
 		}
-		$this->log($msg);	
-		return $msg;	
+		return $ok;
 	}
 	
 	
-	// Ecrit les donnees postees par le formulaire
+	// Ecrit les donnees dans le depot
 	function ecrire() {
-		if ($this->depot->ecrire($this->params)){
+		list ($ok, $val) = $this->depot->ecrire($this->params);
+		if ($ok){
+			$this->val = $val;
 			$this->messages['message_ok'][] = $msg = _T('cfg:config_enregistree', array('nom' => $this->nom_config()));
 		} else {
 			$this->messages['message_erreur'][] = $msg =  _T('cfg:erreur_enregistrement', array('nom' => $this->nom_config()));
@@ -466,12 +454,30 @@ class cfg_formulaire_dist{
 	}
 
 
+	// Efface les donnees dans le depot
+	//
+	// dans le cas d'une suppression, il faut vider $this->val qui
+	// contient encore les valeurs du formulaire, sinon elles sont 
+	// passees dans le fond et le formulaire garde les informations
+	// d'avant la suppression	
+	function effacer(){
+		list ($ok, $val) = $this->depot->effacer($this->params);
+		if ($ok) {
+			$this->val = $val;
+			$this->messages['message_ok'][] = $msg = _T('cfg:config_supprimee', array('nom' => $this->nom_config()));
+		} else {
+			$this->messages['message_erreur'][] = $msg = _T('cfg:erreur_suppression', array('nom' => $this->nom_config()));
+		}
+		$this->log($msg);	
+		return $msg;	
+	}
+	
 
-	/*
-	 * Fabriquer les balises des champs d'apres un modele fonds/cfg_<driver>.html
-	 * $contexte est un tableau (nom=>valeur)
-	 * qui sera enrichi puis passe a recuperer_fond
-	 */
+	//
+	// Fabriquer les balises des champs d'apres un modele fonds/cfg_<driver>.html
+	// $contexte est un tableau (nom=>valeur)
+	// qui sera enrichi puis passe a recuperer_fond
+	//
 	function formulaire($contexte = array())
 	{
 		if (!find_in_path('fonds/cfg_' . $this->vue . '.html'))
@@ -487,6 +493,7 @@ class cfg_formulaire_dist{
 	}
 	
 	
+	//
 	function creer_hash_cfg(){
 		include_spip('inc/securiser_action');
 	    $arg = 'cfg0.0.0-' . $this->param->nom . '-' . $this->vue;

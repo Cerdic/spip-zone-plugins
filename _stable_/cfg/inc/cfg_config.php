@@ -21,7 +21,7 @@
 // ~ en premier caractere : tablepack
 // : present avant un / : tablepack
 // sinon metapack
-function cfg_charger_depot(&$args){
+function cfg_charger_depot($args){
 	list($depot,$args) = explode('::',$args,2);
 	
 	// si un seul argument, il faut trouver le depot
@@ -60,13 +60,19 @@ function lire_config($cfg='', $def=null, $serialize=false) {
 
 
 function inc_lire_config_dist($cfg='', $def=null, $serialize=false){
+
 	$depot = cfg_charger_depot($cfg);
 	if ($depot->nom == 'meta')
 		return $depot->lire_config();
+
+	// Toute la suite est temporaire, le temps que tous les
+	// depots fonctionnent avec la nouvelle API
+	list($cfg,$args) = explode('::',$cfg,2);
+	if ($args) $cfg=$args; 
 	
 	$param = charger_fonction("cfg_analyse_param","inc");
 	$params = $param($cfg);
-	
+
 	$chemin=$params['chemin']; 
 	$config=$params['donnees'];
 	
@@ -101,6 +107,7 @@ function inc_lire_config_dist($cfg='', $def=null, $serialize=false){
 	// pas de transcodage
 		$ret = $config;
 	}
+	
 	return is_null($ret) && $def ? $def : $ret;	
 }
 
@@ -125,7 +132,12 @@ function inc_ecrire_config_dist($cfg='', $valeur=null, $serialize=true){
 	$depot = cfg_charger_depot($cfg);
 	if ($depot->nom == 'meta')
 		return $depot->ecrire_config($valeur);
-			
+
+	// Toute la suite est temporaire, le temps que tous les
+	// depots fonctionnent avec la nouvelle API
+	list($cfg,$args) = explode('::',$cfg,2);
+	if ($args) $cfg=$args;
+		
 	$param = charger_fonction("cfg_analyse_param","inc");
 	$params = $param($cfg);
 	
@@ -420,6 +432,7 @@ function inc_cfg_analyse_param($cfg){
 	 * Sinon, on a passe a cfg directement un tableau
 	 */
 	} elseif ($cfg) {
+
 		// on peut aussi comme cfg_tablepack donner directement table et le reste
 		list($table, $colonne, $colid, $id, $cfg) = array_pad($cfg, 5, '');
 		if ($table && !$colid) {
@@ -438,13 +451,14 @@ function inc_cfg_analyse_param($cfg){
 			$params['table']['id'][$c] = $id[$n];
 		}
 		$params['table']['colonne'] = $colonne;
-		$params['chemin'] = implode('/', $cfg);		
+		$params['chemin'] = implode('/', $cfg);	
 	} 
 	
 	/*
 	 * On recupere les donnees (racine du chemin) 
 	 * qui serviront a trouver la valeur du chemin demande
 	 */
+	
 	$params['donnees'] = cfg_recuperer_donnees($params);
 	return $params;
 }
@@ -454,14 +468,16 @@ function inc_cfg_analyse_param($cfg){
  * Recuperer les donnees en fonction du storage
  */
 function cfg_recuperer_donnees($params){
+
 	switch ($params['storage']) {
 		case 'table':
 		case 'auteur':
 			// recuperer la valeur du champ de la table sql
 			$where = array();
 			foreach ($params['table']['id'] as $nom => $id) {
-				$where[] = $nom . '=' . (is_numeric($id) ? intval($id) : sql_quote($id));
+				$where[] = $nom . '=' . sql_quote($id);
 			}
+
 			// verifier que la colonne existe
 			$col = sql_showtable($params['table']['nom']);
 			if (!array_key_exists($params['table']['colonne'], $col['field'])) {
