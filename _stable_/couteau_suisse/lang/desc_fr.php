@@ -417,7 +417,11 @@ _ Merci de votre compr&eacute;hension.",
 
 // ---------------------------------------------------------------------------
 	'spam:nom' => 'Lutte contre le SPAM',
-	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.',
+	'spam:description' => "Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.
+
+Listez ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par des espaces. [[%spam_mots%]]
+@_CS_ASTER@Pour sp&eacute;cifier un mot entier, mettez-le entre paranth&egrave;ses. Pour une expression avec des espaces, placez-la entre guillemets.",
+	'label:spam_mots' => 'S&eacute;quences interdites :',
 
 // ---------------------------------------------------------------------------
 	'liens_en_clair:nom' => 'Liens en clair',

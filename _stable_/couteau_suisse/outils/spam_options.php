@@ -11,22 +11,48 @@ function spam_installe() {
 	 ATTENTION :
 	  	ce sont des portions de texte, sans delimitateur particulier : 
 		si vous mettez 'asses' alors 'tasses' sera un mot interdit aussi !
+		les parentheses servent de delimitateurs de mots : '(asses)'
 	*/
-	$spam_mots = array(
+	$spam_mots = array_merge(array(
 		// des liens en dur ou simili...
 		'<a href=', '</a>',
 		'[url=', '[/url]',
 		'[link=', '[/link]',
 		// certains mots...
-		'gorgeous', 'nurses', 'sensored', 'sucking', 'erotic', 'swallowing', 'horny', 'naked',
-		'schoolgirl', 'blowjobs', 'lesbian', 'orgasms', 'superbabes', 'shaving', 'nasty', 'humping', 
-		'beauties', 'tortured', 'gagged', 'pumping', 'hardcore', 'upskirt', 'miniskirt', 'biracial',
-		'climaxing', 'bondage', 'ejakulation', 'fucking',
-	);
-	array_walk($spam_mots, 'cs_preg_quote');
-
+		// 'ejakulation', 'fucking', '(asses)',
+		
+	), defined('_spam_MOTS')?spam_liste_mots(_spam_MOTS):array());
+	array_walk($spam_mots, 'spam_walk');
 	ecrire_meta('cs_spam_mots', ',(' . join('|', $spam_mots) . '),i');
 	ecrire_metas();
+}
+
+// protege les expressions en vue d'une regexpr
+// repere les mots entiers entre parentheses
+function spam_walk(&$item) {
+	if(preg_match(',^\((.+)\)$,', $item, $reg))
+		$item = '\b'.preg_quote($reg[1], ',').'\b';
+	else $item = preg_quote($item, ',');
+}
+
+// retourne un tableau de mots ou d'expressions a partir d'un texte
+function spam_liste_mots($texte) {
+	$texte = filtrer_entites(trim($texte));
+	$split = explode('"', $texte);
+	$c = count($split);
+	$split2 = array();
+	for($i=0; $i<$c; $i++) if (($s = trim($split[$i])) != ""){
+		if (($i & 1) && ($i != $c-1)) {
+			// on touche pas au texte entre deux ""
+			$split2[] = $s;
+		} else {
+			// on rassemble tous les separateurs : ,;.|\s\t\n
+			$temp = preg_replace("/[,;\.\|\s\t\n\r]+/", "\t", $s);
+			$temp = str_replace("+"," ", $temp);
+			$split2 = array_merge($split2, explode("\t", $temp));
+		}
+	}
+	return array_unique($split2);
 }
 
 // traitement anti-spam uniquement si $_POST est rempli et si l'espace n'est pas prive

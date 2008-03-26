@@ -262,8 +262,16 @@ add_outil( array(
 	'version-max' => '1.9299',
 ));
 
+add_variable( array(
+	'nom' => 'spam_mots',
+	'format' => 'chaine',
+	'lignes' => 8,
+	'defaut' => '"sucking blowjobs superbabes ejakulation fucking (asses)"',
+	'code' => "define('_spam_MOTS', %s);",
+));
 add_outil( array(
 	'id' => 'spam',
+	'code:options' => '%%spam_mots%%',
 	'categorie' => 'admin',
 ));
 
