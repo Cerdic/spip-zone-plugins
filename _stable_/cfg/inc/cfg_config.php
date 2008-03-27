@@ -284,22 +284,6 @@ function inc_effacer_config_dist($cfg=''){
 	
 	return ecrire_config($cfg);	
 }
-
-// se positionner dans le tableau arborescent
-	function & monte_arbre(&$base, $chemin)
-	{
-		if (!$chemin) {
-			return $base;
-		}
-		foreach (explode('/', $chemin) as $chunk) {
-			if (!isset($base[$chunk])) {
-				$base[$chunk] = array();
-			}
-	    	$this->_report[] = array(&$base, $chunk);
-	    	$base = &$base[$chunk];
-		}
-		return $base;
-	}
 	
 //
 // Se positionner dans le tableau arborescent
