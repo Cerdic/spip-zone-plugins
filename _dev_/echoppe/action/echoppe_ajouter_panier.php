@@ -23,10 +23,11 @@ function action_echoppe_ajouter_panier(){
 		$res_insert_produit_panier = spip_query($sql_insert_produit_panier);
 	}else{
 		$sql_maj_produit_panier = "UPDATE spip_echoppe_paniers SET quantite = '".$contexte['quantite']."', configuration = '".$contexte['configuration']."', statut = '".$contexte['statut_panier']."' WHERE id_panier = '".$contexte['id_panier']."' AND token_panier = '".$contexte['token_panier']."'; ";
+		$res_maj_produit_panier = spip_query($sql_maj_produit_panier);
 	}
 	
-	
 	redirige_par_entete($contexte['redirect']);
+	
 }
 
 ?>

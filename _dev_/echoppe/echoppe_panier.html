@@ -7,6 +7,12 @@
 <title>[(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
 <INCLURE{fond=inc-head}>
+<style type="text/css">
+div.formulaire_panier table.panier{
+	width: 100%;
+}
+
+</style>
 </head>
 
 <body class="page_sommaire">
@@ -25,27 +31,34 @@
 		
 		[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
 		<h1><:echoppe:le_panier:></h1>
-		<B_LePanier>
-			<table >
-				<tr>
-					<td><:titre:></td>
-					<td><:quantite:></td>
-				</tr>
-		<BOUCLE_LePanier(SPIP_ECHOPPE_PANIERS){token_panier = #SESSION{echoppe_token_panier}}>
-			<tr>
-				<td>
-					<BOUCLE_Produit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS){id_produit = #ID_PRODUIT}>#TITRE</BOUCLE_Produit>
-				</td>
-				<td>
-					#QUANTITE
-				</td>
-				
+<div class="formulaire_panier">
+	
+	<B_LePanier>
+		<table class="panier" >
+			<tr class="titre_panier">
+				<td class = "panier_ref"><:echoppe:ref:></td>
+				<td class = "panier_titre"><:echoppe:titre_produit:></td>
+				<td class = "panier_prix_ttc"><:echoppe:prix_ttc:></td>
+				<td class = "panier_quantite"><:echoppe:quantite:></td>
 			</tr>
-		</BOUCLE_LePanier>
-			</table>
-		</B_LePanier>
+	<BOUCLE_LePanier(SPIP_ECHOPPE_PANIERS){id_panier?}{token_panier = #SESSION{echoppe_token_panier}}>
+			<tr>
+				<BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits){id_produit}>
+					<td class = "panier_ref">#REF_PRODUIT</td>
+					<td class = "panier_titre">#TITRE</td>
+					<td class = "panier_prix_ttc">#PRIX_TVAC&nbsp;&euro;</td>
+					<td class = "panier_quantite">#QUANTITE</td>
+					<td class = "panier_modifier"><a href="#SELF&amp;id_panier=#ID_PANIER"><:echoppe:editer:></a></td>
+					<td class = "panier_supprimer"><a href="[(#EVAL{echoppe_supprimer_element_panier}|generer_url_action{id_panier=#ID_PANIER})]"><:echoppe:supprimer:></a></td>
+				</BOUCLE_LeProduit>
+			</tr>
+	</BOUCLE_LePanier>
+		</table>
+	</B_LePanier>
 		<:echoppe:le_panier_est_vide:>
-		<//B_LePanier>
+	<//B_LePanier>
+	
+</div>
 		
 		
 	</div><!--#contenu-->
