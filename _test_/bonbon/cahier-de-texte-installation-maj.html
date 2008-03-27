@@ -129,7 +129,9 @@ En cas de problème vous devrez réutiliser cette sauvegarde.<p>
 <h2>Création d'une sous rubrique pour les fiches des profs et des classes</h2>
 		[		<p>(#ID_RUBRIQUE|bonbon_creer_sous_rubrique{"Professeurs-classes-matières","Cette rubrique contient des données necessaires au fonctionnement du cahier de texte en ligne.
 
-		  {{Ne l'effacez pas}}. {{Ne la renommez pas}}. {{Ne modifiez pas son contenu}} sinon il ne fonctionnera plus correctement !"}|?{"La rubrique «Professeurs-classes-matières» pour l'année est créée.","Un problème technique est survenu lors de la création de la rubrique «Professeurs-classes-matières» !"})</p>]	
+		  {{Ne l'effacez pas}}. {{Ne la renommez pas}}. {{Ne modifiez pas son contenu}} sinon il ne fonctionnera plus correctement !"}|?{"La rubrique «Professeurs-classes-matières» pour l'année est créée.","Un problème technique est survenu lors de la création de la rubrique «Professeurs-classes-matières» !"})</p>]
+			<BOUCLE_Rubrique_profs_classes_matieres_naissante(RUBRIQUES){id_parent}{titre="Professeurs-classes-matières"}>[(#SET{id_rubrique_pcm,#ID_RUBRIQUE})]
+			</BOUCLE_Rubrique_profs_classes_matieres_naissante>	
 		<//B_Rubrique_profs_classes_matieres>
 	</BOUCLE_AnneeScol>
 </BOUCLE_Contexte_RubriqueCDT>
@@ -245,7 +247,7 @@ En cas de problème vous devrez réutiliser cette sauvegarde.<p>
 				<BOUCLE_Les_deux_mots_attaches(ARTICLES){id_article}{id_mot=#_Verifie_Mot:ID_MOT}{titre_mot=#_Pour_Chaque_Classe_Avec_Article:TITRE}>
 					<p>La matière #_Verifie_Mot:TITRE est enseignée en #TITRE (présente dans la fiche de la classe).</p>
 				</BOUCLE_Les_deux_mots_attaches>
-					<BOUCLE_Article_de_cette_matiere_et_classe(ARTICLES){id_mot=#_Verifie_Mot:ID_MOT}{titre_mot=#_Pour_Chaque_Classe_Avec_Article:TITRE}{0,1}>
+					<BOUCLE_Article_de_cette_matiere_et_classe(ARTICLES){id_rubrique=#GET{id_rubrique}}{id_mot=#_Verifie_Mot:ID_MOT}{titre_mot=#_Pour_Chaque_Classe_Avec_Article:TITRE}{0,1}>
 		[<p>(#_Verifie_Mot:ID_MOT|bonbon_lier_mot{#_Pour_Chaque_Classe_Avec_Article:ID_ARTICLE}|?{' ',''})La matière #_Verifie_Mot:TITRE a été mise dans la fiche de la #_Pour_Chaque_Classe_Avec_Article:TITRE car cette classe a au moins une séance dans cette matière.</p>
 ]
 					</BOUCLE_Article_de_cette_matiere_et_classe>
