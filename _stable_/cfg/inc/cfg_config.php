@@ -23,7 +23,7 @@
 // sinon metapack
 function cfg_charger_depot($args){
 	list($depot,$args) = explode('::',$args,2);
-	
+
 	// si un seul argument, il faut trouver le depot
 	if (!$args) {
 		$args = $depot;
@@ -37,7 +37,7 @@ function cfg_charger_depot($args){
 			$depot = 'metapack';	
 		}
 	}
-	
+
 	$d = cfg_charger_classe('cfg_depot');
 	$depot = new $d($depot);
 	$depot->charger_args($args);
@@ -62,7 +62,7 @@ function lire_config($cfg='', $def=null, $serialize=false) {
 function inc_lire_config_dist($cfg='', $def=null, $serialize=false){
 
 	$depot = cfg_charger_depot($cfg);
-	if ($depot->nom == 'meta')
+	if ($depot->version > 1)
 		return $depot->lire_config();
 
 	// Toute la suite est temporaire, le temps que tous les
@@ -132,7 +132,7 @@ function ecrire_config($cfg='', $valeur=null, $serialize=true){
 
 function inc_ecrire_config_dist($cfg='', $valeur=null, $serialize=true){
 	$depot = cfg_charger_depot($cfg);
-	if ($depot->nom == 'meta')
+	if ($depot->version > 1)
 		return $depot->ecrire_config($valeur);
 
 	// Toute la suite est temporaire, le temps que tous les
@@ -279,16 +279,39 @@ function effacer_config($cfg=''){
 
 function inc_effacer_config_dist($cfg=''){
 	$depot = cfg_charger_depot($cfg);
-	if ($depot->nom == 'meta')
+	if ($depot->version > 1)
 		return $depot->effacer_config();
 	
 	return ecrire_config($cfg);	
 }
 
-
-/*
- *  se positionner dans le tableau arborescent
- */
+// se positionner dans le tableau arborescent
+	function & monte_arbre(&$base, $chemin)
+	{
+		if (!$chemin) {
+			return $base;
+		}
+		foreach (explode('/', $chemin) as $chunk) {
+			if (!isset($base[$chunk])) {
+				$base[$chunk] = array();
+			}
+	    	$this->_report[] = array(&$base, $chunk);
+	    	$base = &$base[$chunk];
+		}
+		return $base;
+	}
+	
+//
+// Se positionner dans le tableau arborescent
+// 
+// $base est le contenu de la racine d'une lecture de cfg... 
+// Par exemple, si on lit 'metapack::nom/mon/casier/champ'
+// $base est le contenu de la meta 'nom'
+//
+// $chemin est l'endroit ou il faut se positionner dans le tableau
+// $chemin sera 'mon/casier' pour l'exemple precedent.
+// Si cette arborescence n'existe pas, elle sera cree.
+// 
 function &cfg_monte_arbre(&$base, $chemin){
 	if (!$chemin) {
 		return $base;

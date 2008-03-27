@@ -1,6 +1,6 @@
 <?php
 
-function formulaires_cfg_valider_dist($cfg="", $cfg_id=""){
+function formulaires_cfg_verifier_dist($cfg="", $cfg_id=""){
 	
 	$cfg_formulaire = cfg_charger_classe('cfg_formulaire','inc');
 	$config = &new $cfg_formulaire($cfg, $cfg_id);

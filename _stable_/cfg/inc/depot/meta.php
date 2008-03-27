@@ -10,7 +10,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// cfg_classic retrouve et met a jour les donnees a plat dans spip_meta
+// cfg_meta retrouve et met a jour les donnees a plat dans spip_meta
 class cfg_depot_meta
 {
 	var $champs = array();
@@ -23,7 +23,6 @@ class cfg_depot_meta
 	
 	function cfg_depot_meta($params=array())
 	{
-		$this->cfg = &$cfg;
 		foreach ($params as $o=>&$v) {
 			$this->$o = &$v;
 		}	
@@ -63,7 +62,8 @@ class cfg_depot_meta
 	}
 	
 	
-	
+	// charger les arguments de lire_config(meta::nom)
+	// $args = 'nom'; ici 
 	function charger_args($args){
 		$this->champs = array($args=>true);
 		return true;	

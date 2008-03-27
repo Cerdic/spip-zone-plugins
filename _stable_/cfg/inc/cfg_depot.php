@@ -45,6 +45,11 @@ class cfg_depot_dist{
 	//
 	//
 	function cfg_depot_dist($depot='metapack', &$cfg=false, $params=array()){
+		if (!isset($params['param'])) {
+			$p = cfg_charger_classe('cfg_params');
+			$params['param'] = new $p;
+		}
+		
 		include_spip('inc/depot/'.$depot);
 		if (class_exists($class = 'cfg_depot_'.$depot)) {
 			$this->depot = &new $class($params);
@@ -54,6 +59,7 @@ class cfg_depot_dist{
 			die("CFG ne trouve pas le d&eacute;pot $depot");
 		}
 		
+		$this->version = $this->depot->version;
 		$this->nom = $depot;
 	}
 	
