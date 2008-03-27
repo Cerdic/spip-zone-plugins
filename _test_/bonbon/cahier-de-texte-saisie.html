@@ -357,8 +357,8 @@ if ($id_groupe!=0) { $groupe_titre .= " (";?>
 			<h3 class="titre"><?php echo $titre_contenu_seance?></h3>
 			<div class="texte">
 				<?php
-//On vérifie que la date en est bien une grâce à affdate... (ça a l'air de fonctionner).
-	if (!affdate($date_seance)) echo "<p class=\"on\">Attention, la date de cette séance n'est pas correcte&nbsp;: date&nbsp;= \"$date_seance\"</p>"; echo propre($contenu_seance);?>
+//On vérifie que la date en est bien une grâce à bonbon_verifie_date... (ça a l'air de fonctionner).
+	if (!bonbon_verifie_date($date_seance)) echo "<p class=\"on\">Attention, la date de cette séance n'est pas correcte&nbsp;: date&nbsp;= \"$date_seance\"</p>"; echo propre($contenu_seance);?>
 			</div>[
 
 (#REM) Si la séance est dupliquée/Modifiée, on affiche les documents qui sont liés à la séance...
@@ -388,8 +388,8 @@ if ($contenu_devoir[0]!="") {
  for ($count=0; ($count<=$devoirs and $contenu_devoir[$count]); $count++) {
 	$liste_docs_Devoir = $liste_des_listes_de_docs[$count]; ?>
 				<div class="devoirs"><h5 class="devoirs"><b>>></b>&nbsp;Devoir pour le <?php
-//On vérifie que la date en est bien une grâce à affdate... (ça a l'air de fonctionner).
-	if (!affdate($date_devoir[$count])) {echo "<span class=\"on\">Attention, la date de ce devoir n'est pas correcte&nbsp;: date&nbsp;= \"$date_devoir[$count]\"</span>";} else { echo $date_devoir[$count];}?>&nbsp;:</h5>
+//On vérifie que la date en est bien une grâce à bonbon_verifie_date... (ça a l'air de fonctionner).
+	if (!bonbon_verifie_date($date_devoir[$count])) {echo "<span class=\"on\">Attention, la date de ce devoir n'est pas correcte&nbsp;: date&nbsp;= \"$date_devoir[$count]\"</span>";} else { echo $date_devoir[$count];}?>&nbsp;:</h5>
 				<span><?php echo propre($contenu_devoir[$count]);?></span>[
 
 (#REM) Si la fiche est dupliquée/Modifiée, on affiche les documents qui sont liés au devoir...

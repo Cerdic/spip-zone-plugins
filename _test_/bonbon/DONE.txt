@@ -46,7 +46,7 @@ Ce qui a été fait avec «Bonbon !»
 - Un tableau de bord sur la page d'accueil permet à chaque prof de savoir en un clin d'½il où il en est (dernières fiches publiées pour chaque classe et lien direct vers la saisie pour la classe concernée)... Très pratique pour savoir où on en est quand on a beaucoup de classes (et du retard... :-)). Ce tableau de bord affiche aussi les séances qui ont un problème de date.
 - limitation des la selection des séances à l'année en cours, à moins que ce ne soit explictement mentionné dans les paramètres GET.
 - réécriture complète de la page d'installation et de mise à jour qui était vraiment nulle. Désormais elle ne contient plus de PHP.
-- lors de la saisie, le premier devoir vide est le dernier (évite l'existance des dévoirs vides). On peut aussi retirer le dernier devoir entré.
+- lors de la saisie, le premier devoir vide est le dernier (évite l'existance des dévoirs vides,évite aussi l'affichage des devoirs vides...). On peut aussi retirer le dernier devoir entré.
 
 
 1.0 Première sortie de Bonbon

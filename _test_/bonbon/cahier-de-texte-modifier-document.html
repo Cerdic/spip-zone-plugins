@@ -19,7 +19,7 @@ if ($_POST['modif_doc']) {
 		$message .="<p class=\"avertissement\">Le titre du document «&nbsp;". '[(#ENV{ancien_titre}|textebrut)]'."&nbsp;» été modifié en «&nbsp;<em>".'[(#ENV{titre}|textebrut)]'."</em>&nbsp;»</p>";
 	}// fin du if post titre egale nacien titre
 	if ($_POST['date_document']!=$_POST['ancienne_date']) {
-		if (affdate($_POST['date_document'])) {
+		if (bonbon_verifie_date($_POST['date_document'])) {
 			$date_base_doc = date ("Y-m-d H:i:s", mktime(0,0,0,substr($_POST['date_document'],3,2),substr($_POST['date_document'],0,2),substr($_POST['date_document'],6,4)));
 			//on met le titre modifié dans la base:
 			$sql ="UPDATE spip_documents SET date='".addslashes($date_base_doc)."' WHERE id_document=".$_GET['id_document'];
@@ -29,7 +29,7 @@ if ($_POST['modif_doc']) {
 		}//fin du if affadate
 		else {
 		$message .="<p class=\"avertissement\">La date «&nbsp;<em>".'[(#ENV{date_document}|textebrut)]'."</em>&nbsp;» que vous avez proposée semble incorrecte, recommencez S.V.P.</p>";
-		}//fin du else affdate
+		}//fin du else bonbon_verifie_date
 	}// fin du if post titre egale nacien titre
 }// fin du if modif_doc
 

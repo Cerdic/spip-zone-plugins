@@ -201,7 +201,7 @@ En cas de problème vous devrez réutiliser cette sauvegarde.<p>
 		</BOUCLE_On_verifie_si_une_classe_est_liee>
 			<BOUCLE_Y_a_t_il_du_contenu_lie(ARTICLES){id_rubrique=#GET{id_rubrique}}{id_mot}{0,1}>
 				[
-		<p>(#ID_MOT|bonbon_lier_mot{#ID_RUBRIQUE,"rubrique"}|?{' ',''})#TITRE a été rattaché au cahier de texte de l'année (#_CONDITIONNELLE_Mise_a_jour_classe_ou_matiere:TITRE)</p>]
+		<p>(#ID_MOT|bonbon_lier_mot{#ID_RUBRIQUE,"rubrique"}|?{' ',''})#_Verifie_Mot:TITRE a été rattaché au cahier de texte de l'année</p>]
 			</BOUCLE_Y_a_t_il_du_contenu_lie>
 		<p>Pas de contenu lié à #_Verifie_Mot:TITRE dans le cahier de texte de l'année.</p>
 			<//B_Y_a_t_il_du_contenu_lie>
@@ -299,17 +299,18 @@ En cas de problème vous devrez réutiliser cette sauvegarde.<p>
 
 ]
 	<BOUCLE_Tous_les_Auteurs(AUTEURS)>
-		<BOUCLE_Article_jointure(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur}{ps=id_auteur}>
+		<BOUCLE_Article_jointure(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur}{ps=#ID_AUTEUR}{0,1}>
 			<p>Le prof <strong>#NOM</strong> a bien un descriptif de ses classes et matières</p>
 		</BOUCLE_Article_jointure>
+		</B_Article_jointure>
 			<BOUCLE_A_t_il_du_contenu(ARTICLES){titre_mot="Description de séance"}{id_auteur}{id_rubrique}{0,1}>
 		[<p>#NOM a déjà entré des séances dans le cahier de texte, (#NOM|bonbon_creer_fiche_prof{#ID_AUTEUR,#GET{id_rubrique_pcm}}|?{"sa fiche a été créée.","mais sa fiche n'a pu être créée (problème technique)."})</p>]
 			</BOUCLE_A_t_il_du_contenu>
 		<//B_Article_jointure>
 		<BOUCLE_Les_Classes_et_les_matieres(MOTS){type IN "Classes","Matières"}>
 			<BOUCLE_Article_auteur_et_matiere(ARTICLES){id_rubrique}{id_auteur}{id_mot}{0,1}>
-				<BOUCLE_Article_fiche(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur}{ps=id_auteur}>
-[(#REM) {ps="À propos d'un professeur"} a été viré car posait des soucis d'encodage]
+				<BOUCLE_Article_fiche(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur}{ps=#ID_AUTEUR}{0,1}>
+[(#REM) {surtitre="À propos d'un professeur"} a été viré car posait des soucis d'encodage]
 					<BOUCLE_Mot_lie_a_fiche(MOTS){id_article}{id_mot}>
 						<p>La #TYPE #TITRE est associée à #NOM</p>
 					</BOUCLE_Mot_lie_a_fiche>

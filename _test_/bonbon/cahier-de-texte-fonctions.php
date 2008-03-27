@@ -52,6 +52,18 @@ function bonbon_annee_scolaire ($date,$date_debut=false,$mois_de_debut_annee=9) 
 		if ($date_debut) $nom_rub_annee=mktime(0,0,0,$mois_de_debut_annee,1,$num_annee_1);
 		return $nom_rub_annee;
 }
+//Ce filtre vérifie qu'une date est au format jj/mm/aaaa
+function bonbon_verifie_date($p_text) {
+	$l_ok=true;
+	if (!preg_match('/\s*(\d+)[\s\/]+(\d+)[\s\/]+(\d{4})\s*$/',$p_text,$l_val)) {
+		$l_ok=false;
+	} else if (!checkdate($l_val[2],$l_val[1],$l_val[3])) {
+		$l_ok=false;
+	} else if (mktime(0,0,0,$l_val[1],$l_val[2],$l_val[3])<bonbon_annee_scolaire (date("d/m/Y"),true)) {
+		$l_ok=false;
+	}
+	return($l_ok);
+} 
 //Ce filtre rend les tableaux fusionnés
 function bonbon_fusion_tableau($tab,$autretab) {
  $final=array_merge((array)$tab,(array)$autretab);
@@ -59,6 +71,7 @@ function bonbon_fusion_tableau($tab,$autretab) {
 }
 
 //Quelques fonctions pour que Bonbon manipule la base de données:
+//ajouter un groupe
 function bonbon_ajoute_groupe ($nom_groupe){
 	$result=false;
 	$sql = "INSERT INTO spip_groupes_mots (titre,articles, breves,rubriques, syndic, minirezo, comite, forum) 
@@ -206,6 +219,7 @@ function bonbon_enregistrement_seance ($date,$titre,$contenu,$id_auteur,$id_rubr
 	echo ("<!--auteur: $result-->\n");
 	return $id_contenu_seance;
 }
+//enregistre un devoir
 function bonbon_enregistrement_devoir ($date,$fin_titre,$contenu,$id_auteur,$id_rubrique_cdt,$titre_seance,$id_seance,$no_devoir,$ps_seance,$surtitre_avec_docs="") {
 	$fleche="->";
 	//détermine la date au format de la base
@@ -228,13 +242,16 @@ function bonbon_enregistrement_devoir ($date,$fin_titre,$contenu,$id_auteur,$id_
 //retourne deux valeurs: [0] est l'id_contenu_devoir et [1] est la chaîne du PS de l'article.
 	return array ($id_contenu_devoir,$ps_seance);
 }
-function bonbon_ajout_devoirs_a_seance ($liste_devoirs,$id_seance) {
 //rajout des références aux devoirs dans le PS du contenu de la séance
+function bonbon_ajout_devoirs_a_seance ($liste_devoirs,$id_seance) {
 	$sql ="UPDATE spip_articles SET ps='".addslashes($liste_devoirs)."' WHERE id_article=$id_seance";
 	$result = spip_query($sql);
 	echo ("<!--update ps: $result-->\n");
 	return $result;
 }
+
+
+
 
 //récupère le contenu entre balises et renvoie un tableau du contenu
 function bonbon_recupere_balise($texte,$nombalise) {

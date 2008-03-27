@@ -76,7 +76,7 @@ Deux conditions à remplir:
 ][(#SET{liste_des_devoirs,[(#GET{virgule}|explode{[(#PS*|bonbon_matches_id_article)]})]})]
 		<B_Trouve_Infos_Devoirs_id_article>
 			<br clear="right"><div class="devoirs"#GET{margin}>
-		<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){id_article IN #GET{liste_des_devoirs}}>
+		<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){id_article IN #GET{liste_des_devoirs}}{texte!=#NOOP}>
 				<div class="texte"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez sur ce texte pour modifier le texte de ce devoir"]>[
 (#REM) Si c'est une séance écrite par le prof qui visite il peut rajouter des docs au devoir
 ]
