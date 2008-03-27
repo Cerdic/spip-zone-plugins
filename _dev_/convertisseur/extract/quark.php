@@ -70,8 +70,6 @@ function do_quark($c) {
 		}
 	}
 
-	$c = (join("\n\n", array_map('nettoyage_xtag', $d)));
-
 	return $d;
 }
 

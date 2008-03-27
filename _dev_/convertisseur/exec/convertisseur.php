@@ -81,7 +81,7 @@ function exec_convertisseur(){
 				// fichier simple
 				else
 				if (lire_fichier('../tmp/convertisseur.tmp', $tmp))
-					$conv_textes[] = $tmp;
+					$conv_textes[$file['name']] = $tmp;
 
 			}
 		}
