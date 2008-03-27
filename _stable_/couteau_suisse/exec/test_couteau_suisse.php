@@ -151,9 +151,10 @@ function cs_les_tests() {
 		"1er 1ers, 2e 2es, IIIe IIIes, ",
 		"3 ou 4 m², 3 ou 4 m2 et 2 m3.",
 		"Mlle, Mlles, Mme, Mmes et erreurs Melle, Melles",
-		'avant <a href="www.monlien.com" title="Mon 1er titre" target="_blank">Mon 1er lien</a> apres le "test"!',
-		'avant [Mon 1er lien->www.monlien.com] apres le "test"!',
-		'on est pass&eacute; du 7e au 15e rang, pas du 17e au 5e ou du 7e au 3e !',
+		'avant <a href="www.mon-1er-lien.com" title="Mon 1er titre">Mon 1er lien</a> et <img src="image.jpg" alt="logo 6e" title="Cliquez!">',
+		'avant [Mon 1er lien->www.mon-1er-lien.com] apres le "test"!',
+		'on est pass&eacute; du 7e au 15e rang, pas du 17e au 5e, des 7es aux 3emes !',
+		'on est pass&eacute; du 7eme au 15&#232;me rang, pas du 17ieme au 5&egrave;me',
 	);
 	test_outil(cs_test_fun($textes, 'typo_exposants'), 'Test sur : typo_exposants() - Charset du site : '.$GLOBALS['meta']['charset']);
 

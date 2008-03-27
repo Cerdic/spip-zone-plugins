@@ -5,51 +5,45 @@
 
 include_spip('inc/charsets');
 // en principe, pas besoin de : caractere_utf_8(232)
-define('_TYPO_EGRAVE', '(?:'.unicode2charset('&#232;').'|&#232;|&egrave;)');
+define('_TYPO_EGRAVE', unicode2charset('&#232;').'|&#232;|&egrave;');
+define('_TYPO_Msup', 'M<sup class="typo_exposants">\\1</sup>');
+define('_TYPO_Psup', '\\1<sup class="typo_exposants">\\2</sup>');
+define('_TYPO_Dsup', _TYPO_Psup.'\\3');
 
 // cette fonction ne fonctionne que pour le francais
 // elle n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function typo_exposants_fr($texte){
-	$sup='<sup class="typo_exposants">';
-	$fin='</sup>';
 	$trouve = array(
-		'/(\\bM)e?(lles?)\\b/',		// Mlle(s), Mme(s) et erreurs Melle(s)
-		'/(\\bM)(mes?)\\b/',
-
-		'/(\\bM)(gr)\\b/',		// Mgr
+		'/\bMe?(lles?)\b/',		// Mlle(s), Mme(s) et erreurs Melle(s)
+		'/\bM(mes?)\b/',
+		'/\bM(gr)\b/',		// Mgr
 
 		'/\b(D|P)(rs?)([\s\.-])/',	// Dr(s), Pr(s) suivis d'un espace d'un point ou d'un tiret
 		'/\b(S)(te?s?)([\s\.-])/',  // St(e)(s) suivis d'un espace d'un point ou d'un tiret
 		'/\b(B)(x|se|ses)([\s\.-])/',  // Bx, Bse(s) suivis d'un espace d'un point ou d'un tiret
 
-		'/(\\bm)(2|3)\\b/',	 // m2, m3, m²
+		'/\bm(2|3)\b/',	 // m2, m3, m²
 		'/\bm²\b/',
 
 		'/(\\b[1I])i?(ers?)\\b/',	// Erreurs ier, iers
-		'/(\\b[1I])(i?'._TYPO_EGRAVE.')(res?)\\b/',	// Erreurs ère, ière, ères, ières
+		'/(\\b[1I])i?(?:'._TYPO_EGRAVE.')(res?)\\b/',	// Erreurs ère, ière, ères, ières
 		'/(\\b1)(r?es?)\\b/', // 1e(s), 1re(s)
 
-		'/(\\b[02-9IVX]+)(me|i'._TYPO_EGRAVE.'me|'._TYPO_EGRAVE.'me)(s?)\\b/', // Erreurs me, ème, ième, mes, èmes, ièmes
-		'/\b([0-9IVX]+?)(es?)\b/', // 2e(s), IIIe(s)... (les 1(e?r?s?) ont deja ete remplaces)
+		'/(\\b[0-9IVX]+)i?(?:e|'._TYPO_EGRAVE.')?me(s?)\\b/', // Erreurs me, eme, ème, ième + pluriels
+		'/\b([0-9IVX]+)(es?)\b/', // 2e(s), IIIe(s)... (les 1(e?r?s?) ont deja ete remplaces)
 	);
 	$remplace = array(
-		"M$sup\\2$fin",		// Mlle(s), Mme(s)
-		"M$sup\\2$fin",
-		"M$sup\\2$fin",
+		_TYPO_Msup, _TYPO_Msup, _TYPO_Msup,		// Mlle(s), Mme(s)
 
-		"\\1$sup\\2$fin\\3",	// Dr(s), Pr(s), St(e)(s), Bx, Bse(s)
-		"\\1$sup\\2$fin\\3",
-		"\\1$sup\\2$fin\\3",
+		_TYPO_Dsup, _TYPO_Dsup, _TYPO_Dsup,	// Dr(s), Pr(s), St(e)(s), Bx, Bse(s)
 
-		"m$sup\\2$fin",	// m2, m3, m²
-		"m{$sup}2$fin",
+		'm<sup class="typo_exposants">\\1</sup>',	// m2, m3, m²
+		'm<sup class="typo_exposants">2</sup>',
 
-		"\\1$sup\\2$fin", // Corrige 1er(s), 1re(s)
-		"\\1$sup\\3$fin",
-		"\\1$sup\\2$fin", // 1e(s), 1re(s)
+		_TYPO_Psup, _TYPO_Psup, _TYPO_Psup, // 1er et Cie
 
-		"\\1{$sup}e\\3$fin", // Corrige 2e(s), IIIe(s)...
-		"\\1$sup\\2$fin", // 2e(s), IIIe(s)...
+		'\\1<sup class="typo_exposants">e\\2</sup>', // Erreurs me, eme, ème, ième + pluriels
+		_TYPO_Psup, // 2e(s), IIIe(s)...
 	);
 
 	return preg_replace($trouve, $remplace, $texte);
@@ -61,9 +55,9 @@ function typo_exposants_echappe_balises_callback($matches) {
 
 function typo_exposants($texte){
 	if (!$lang = $GLOBALS['lang_objet']) $lang = $GLOBALS['spip_lang'];
-	// prudence : on protege les balises <a>
-	if (strpos($texte, '<a ')!==false) 
-		$texte = preg_replace_callback('/(<a [^>]+>)/Ums', 'typo_exposants_echappe_balises_callback', $texte);
+	// prudence : on protege les balises <a> et <img>
+	if (strpos($texte, '<')!==false) 
+		$texte = preg_replace_callback('/(<(a|img) [^>]+>)/Ums', 'typo_exposants_echappe_balises_callback', $texte);
 	switch (lang_typo($lang)) {
 		case 'fr':
 			$texte = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_exposants_fr', $texte);
