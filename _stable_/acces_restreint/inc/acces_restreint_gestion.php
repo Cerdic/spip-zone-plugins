@@ -361,7 +361,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				$message_ajouter_zone = "";
 				$out .= "</td>\n<td>";
 
-				$out .= "<select name='nouv_zone' size='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" style='width: 180px; ' class='fondl'>";
+				$out .= "<select name='nouv_zone' size='1' onchange=\"\$('#valider_groupe_$id_groupe').css('visibility','visible');\" style='width: 180px; ' class='fondl'>";
 
 				$out .= "\n<option value='x' style='font-variant: small-caps;'>"._T("accesrestreint:selectionner_une_zone")."</option>";
 				while($row = spip_fetch_array($result)) {
