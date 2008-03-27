@@ -38,7 +38,7 @@ function toggle_preview(barre, strchamp) {
 		$(champ).css("height",parseInt($(champ).css("height"))/2+"px");
 		$("#article_preview"+barre).css("height",$(champ).css("height"));
 		$("#article_preview"+barre).show();
-		MajPreview(barre,strchamp);
+		MajPreview(barre,String(strchamp));
 	} else {
 		$(champ).css("height",parseInt($(champ).css("height"))*2+"px");
 		$("#article_preview"+barre).hide();
@@ -212,7 +212,7 @@ function barre_searchreplace(chercher,remplacer, rec_tout, rec_case, rec_entier,
 	champ.value = champ.value.replace(re, remplacer);
 	champ.scrollTop = selTop;
 	champ.focus();
-	MajPreview(barre, champ.id);
+	MajPreview(barre, String(champ.id));
 }
 
 
@@ -236,7 +236,7 @@ function barre_capitales(champ,majuscules,barre) {
 			}
 			txtarea.focus();
 			theSelection = '';
-			MajPreview(barre, txtarea.id);
+			MajPreview(barre, String(txtarea.id));
 			return;
 		}
 	}
@@ -270,7 +270,7 @@ function barre_2Majuscules(champ, barre) {
 	champ.setSelectionRange(oldSelStart,oldSelEnd);
 	champ.scrollTop = selTop;
 	champ.focus();
-	MajPreview(barre, champ.id);
+	MajPreview(barre, String(champ.id));
 }
 
 function barre_2Minuscules(champ, barre) {
@@ -292,7 +292,7 @@ function barre_2Minuscules(champ, barre) {
 	champ.setSelectionRange(oldSelStart,oldSelEnd);
 	champ.scrollTop = selTop;
 	champ.focus();
-	MajPreview(barre, champ.id);
+	MajPreview(barre, String(champ.id));
 }
 
 
@@ -353,7 +353,7 @@ function mozWrap(txtarea, ouvre, ferme, barre)
 	window.setSelectionRange(txtarea, selDeb, selFin);
 	txtarea.scrollTop = selTop;
 	txtarea.focus();
-	MajPreview(barre, txtarea.id);
+	MajPreview(barre, String(txtarea.id));
 	return;
 }
 

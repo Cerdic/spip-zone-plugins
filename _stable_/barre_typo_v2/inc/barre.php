@@ -124,7 +124,7 @@ _T('bartypenr:barre_gestion_cr_chercher')
 <input type="checkbox" name="rec_case" id="rec_case'.$num_barre.'" value="yes" />
 <label for="rec_case'.$num_barre.'">'._T('bartypenr:barre_gestion_cr_casse').'</label><br />
    <input type="button" value="'._T('bartypenr:barre_gestion_cr_chercher').'" class="fondo"
-  onclick="javascript:barre_search(document.formulaire.barre_chercher.value, document.formulaire.rec_entier.checked, document.formulaire.rec_case.checked,'.$num_barre.');" /> 
+  onclick="javascript:barre_search(document.getElementById(\'barre_chercher'.$num_barre.'\').value, document.getElementById(\'rec_entier'.$num_barre.'\').checked, document.getElementById(\'rec_case'.$num_barre.'\').checked, '.$champ.');" /> 
 </td><td><label for="barre_remplacer'.$num_barre.'">'
 ._T('bartypenr:barre_gestion_cr_remplacer')
 .'</label> <input type="text" name="barre_remplacer" id="barre_remplacer'.$num_barre.'" value="" size="12" maxlength="255" /><br />
@@ -133,9 +133,9 @@ _T('bartypenr:barre_gestion_cr_chercher')
 <input type="checkbox" name="rec_entier" id="rec_entier'.$num_barre.'" value="yes" />
 <label for="rec_entier'.$num_barre.'">'._T('bartypenr:barre_gestion_cr_entier').'</label><br />
    <input type="button" value="'._T('bartypenr:barre_gestion_cr_remplacer').'" class="fondo"
-  onclick="javascript:barre_searchreplace(document.formulaire.barre_chercher'.$num_barre.'.value, document.formulaire.barre_remplacer'.$num_barre.'.value, document.formulaire.rec_tout'.$num_barre.'.checked, document.formulaire.rec_case'.$num_barre.'.checked, document.formulaire.rec_entier'.$num_barre.'.checked,'.$champ.','.$num_barre.');" /> 
+  onclick="javascript:barre_searchreplace(document.getElementById(\'barre_chercher'.$num_barre.'\').value, document.getElementById(\'barre_remplacer'.$num_barre.'\').value, document.getElementById(\'rec_tout'.$num_barre.'\').checked, document.getElementById(\'rec_case'.$num_barre.'\').checked, document.getElementById(\'rec_entier'.$num_barre.'\').checked,'.$champ.','.$num_barre.');" /> 
 </td>
-<td>'._T('bartypenr:barre_gestion_cr_changercasse').' :'. RaccourcisMajusculesMinuscules($champ, $champhelp, $num_barre).'
+<td>'._T('bartypenr:barre_gestion_cr_changercasse').'&nbsp;: '. RaccourcisMajusculesMinuscules($champ, $champhelp, $num_barre).'
 </td>
 </tr></table>';
 
@@ -159,7 +159,7 @@ _T('bartypenr:barre_gestion_anc_nom')
 .'</i></label> <br />
       <input type="text" name="ancre_nom" id="ancre_nom'.$num_barre.'" />
 	  
-	<input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_ancre(\'[\', \'<-\', \']\', document.formulaire.ancre_nom'.$num_barre.'.value, '.$champ.','.$num_barre.');" />
+	<input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_ancre(\'[\', \'<-\', \']\', document.getElementById(\'ancre_nom'.$num_barre.'\').value, '.$champ.','.$num_barre.');" />
     </td>
 	<td style="width:auto;"><strong>'.
 _T('bartypenr:barre_gestion_anc_pointer')
@@ -170,7 +170,7 @@ _T('bartypenr:barre_gestion_anc_cible')
 	<label for="ancre_bulle'.$num_barre.'"><i>'.
 _T('bartypenr:barre_gestion_anc_bulle')
 .'</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle'.$num_barre.'" />
-	<input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', document.formulaire.ancre_cible'.$num_barre.'.value, document.formulaire.ancre_bulle'.$num_barre.'.value, '.$champ.', '.$num_barre.');" /> 
+	<input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', document.getElementById(\'ancre_cible'.$num_barre.'\').value, document.getElementById(\'ancre_bulle'.$num_barre.'\').value, '.$champ.', '.$num_barre.');" /> 
 </td>
   </tr> 
 </table>';
@@ -432,19 +432,6 @@ $(document).ready(function(){';
 // expliciter les 3 arguments pour avoir xhtml strict
 
 // http://doc.spip.org/@afficher_textarea_barre
-/*function afficher_textarea_barre($texte, $forum=false, $form='document.formulaire')
-{
-	global $spip_display, $spip_ecran;
-
-	$rows = ($spip_ecran == "large") ? 28 : 15;
-
-	return (($spip_display == 4) ? '' : afficher_barre($form.'.texte', $forum))
-	. "<textarea name='texte' id='texte' "
-	. $GLOBALS['browser_caret']
-	. " rows='$rows' class='formo' cols='40'>"
-	. entites_html($texte)
-	. "</textarea>\n";
-}*/
 function afficher_textarea_barre($texte, $forum=false, $form='')
 {
 	global $spip_display, $spip_ecran;
