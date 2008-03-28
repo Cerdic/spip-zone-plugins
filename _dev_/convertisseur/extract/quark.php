@@ -48,6 +48,9 @@ function do_quark($c) {
 	// transformer les sauts de ligne du fichier original
 	$c = preg_replace(",\r\n?,", "\n", $c);
 
+	// transformer les tags contenant un @
+	$c = preg_replace(',(<[^<>]*)@,ms', '\1-', $c);
+
 	$x = '';
 	$c = preg_split(",@([^<>]*?[:>]),ms", $c, -1, PREG_SPLIT_DELIM_CAPTURE);
 

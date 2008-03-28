@@ -6,6 +6,27 @@
 
 
 
+function nettoyer_format($t) {
+
+	// resserrer les {}
+	$t = preg_replace('/{([.,])/', '\1{', $t);
+	$t = preg_replace('/}([.,])/', '\1}', $t);
+	$t = preg_replace(',([^{]){ ,', '\1 {', $t);
+	$t = preg_replace(', }([^}]),', '} \1', $t);
+
+	$t = preg_replace(", +~,", '~', $t);
+	$t = preg_replace(",~ +,", '~', $t);
+	$t = preg_replace("/{([?!., ]?)}/", '\1', $t);
+
+	## attention ici a l'utf8
+	$t = str_replace('~»', '»', $t);
+	$t = str_replace('«~', '«', $t);
+	$c = str_replace ('–', '--', $c);
+
+	return $t;
+}
+
+
 	// -----------------------------------------------------------------------
 	// Definition des regex pour les Conversions 
 	// -----------------------------------------------------------------------

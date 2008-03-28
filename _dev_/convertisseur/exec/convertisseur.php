@@ -72,7 +72,8 @@ function exec_convertisseur(){
 						);
 						// lire les fichiers temporaires
 						foreach (glob(_tmp_dir.'*') as $f) {
-							if (lire_fichier($f, $tmp))
+							if (lire_fichier($f, $tmp)
+							AND strlen(trim($tmp)))
 								$conv_textes[$f] = $tmp;
 						}
 					}
@@ -113,7 +114,8 @@ function exec_convertisseur(){
 			// Traitement et conversion de chaque texte soumis, dans un tableau
 			$out = array();
 			foreach ($conv_textes as $f => $conv_in) {
-				$out[$f] = conversion_format($conv_in, $format);
+				$tmp = conversion_format($conv_in, $format);
+				$out[$f] = nettoyer_format($tmp);
 				if ($id_rubrique = intval(_request('id_parent')))
 					$id_article = inserer_conversion($out[$f], $id_rubrique, $f);
 					$article[$f] = $id_article;
