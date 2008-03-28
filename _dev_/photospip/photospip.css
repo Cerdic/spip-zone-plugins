@@ -1,0 +1,136 @@
+#image_container{
+	position:relative;
+}
+
+button.revenir_version{
+	position:absolute;
+	top :50%;
+	margin-top:-12px;
+	right:22px;
+	cursor :hand;
+	display:none;
+	border:none;
+	background-color:transparent;
+}
+
+button.delete_version{
+	position:absolute;
+	top :50%;
+	margin-top:-12px;
+	right:2px;
+	cursor :hand;
+	display:none;
+	border:none;
+	background-color:transparent;
+}
+
+.params_filtre{
+	margin: 10px;
+	padding :5px;
+	border:1px solid #ccc;
+	width:60%;
+}
+
+#image-container{
+	margin:0 0 20px 0;
+	text-align:center;
+}
+
+#versions{
+	border:1px solid #ccc;
+	padding :0 5px 7px 5px;
+	font-size:11px;
+	width:336px;
+	float:right;
+	text-align:left;
+}
+
+#versions h3{
+	padding:5px;
+	background:#86B900 url(../../squelettes/images/menu-bg.gif) repeat-x scroll left top;
+	color:#fff;
+	font-weight:normal;
+	margin:0 -5px 10px -5px;
+}
+
+.version{
+	position:relative;
+	float:left;
+	border:1px solid #ccc;
+	width:80px;
+	margin:1px;
+	height:80px;
+	text-align:center;
+}
+
+.version label{
+	border:none;
+	line-height:80px;
+	cursor:inherit;
+	display:inline;
+}
+
+button{
+	cursor:pointer;	
+}
+.version label img{
+	vertical-align:middle;
+}
+.waiting{
+	color:#86B900;
+}
+input{
+	border:1px solid #86B900;
+	padding:2px;
+}
+.spip_bouton input{
+	margin:3px;
+}
+.cache {
+	display:block;
+}
+#container-1 h3{
+	margin:20px 0;
+}
+.help{
+	width:30%;
+	border:1px solid #ccc;
+	padding:5px;
+	margin:0 10px 20px 0;
+	float:right;
+	background : transparent url(images/ico-aide.png) no-repeat right top;
+	font-size:11px;
+}
+.waiting{
+	width:60%;
+	margin:40px auto;
+	position:absolute;
+	color:#000;
+	top:20px;
+	left:40px;
+}
+.disabled{
+	background-color:red;
+}
+
+.clear{
+	clear:both;
+}
+
+label{
+	color:#86B900;
+	cursor:pointer;
+	border-bottom:1px dotted #86B900;
+}
+
+.nocache{
+	color:#000;
+	border:none;
+}
+
+.warning{
+	margin:5px;
+	padding:3px 3px 3px 12px;
+	border:1px solid #86B900;
+	background:#d4f384 url(images/ico-warning.png) left center no-repeat;
+}

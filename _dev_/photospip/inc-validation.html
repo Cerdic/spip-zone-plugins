@@ -1,0 +1,10 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type:text/html}
+[(#SET{photospip,pasok})]
+<BOUCLE_interd(DOCUMENTS_INTERS){id_document}> </BOUCLE_interd>
+[(#TOTAL_BOUCLE|>={#CONFIG{photospip/limite_version}}|?{#SET{photospip,ok},#SET{photospip,pasok}})]
+</B_interd>
+
+<input type="radio" name="validation" class="nocache" value="tester" id="tester3" checked="checked" /><label for="tester3" class="nocache"><:photospip:tester:></label><br class="nettoyeur" />
+[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer3" /><label for="appliquer3" class="nocache"><:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span>})]<br class="nettoyeur" />
+<input type="submit" name="valider" value="<:photospip:valider:>" /> 
