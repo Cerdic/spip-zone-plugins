@@ -7,6 +7,10 @@ function exec_convertisseur(){
 
 	include_spip("inc/vieilles_defs");
 	define('_SIGNALER_ECHOS', false); // on sait qu'on est vieux-code
+	if (!function_exists('sql_quote')) {
+	  function sql_quote($q) { return _q($q); }
+	}
+
 	
 	include_spip("inc/presentation");
 	include_spip('inc/convertisseur');
