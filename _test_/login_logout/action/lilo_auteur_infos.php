@@ -73,7 +73,6 @@ function action_lilo_auteur_infos_dist () {
 			}
 
 			// lire la config du plugin
-			//include_spip('inc/utils');
 			include_spip('inc/plugin_globales_lib');
 			$config = __plugin_lire_key_in_serialized_meta('config', _LILO_META_PREFERENCES);
 
@@ -98,7 +97,8 @@ function action_lilo_auteur_infos_dist () {
 		foreach(split(',', $sql_select) as $key) {
 			$result .= $$key . _LILO_AJAX_RESULT_SEPARATOR;
 		}
-		//spip_log("action result: $result", 'lilo');
+		//include_spip('inc/utils');
+		//spip_log("LOGIN ACTION result: $result", 'lilo');
 		
 		echo($result);
 		return (true);

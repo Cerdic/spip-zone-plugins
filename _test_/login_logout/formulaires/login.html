@@ -11,6 +11,56 @@
 
 ]-->
 <div id='lilo-panel'>
+<script type='text/JavaScript'>
+jQuery().ready(function(){
+	var alea_actuel = '', alea_futur = '';
+	var qstring = window.location.search;
+	var page_login = (qstring.length && (qstring.search(/page=login/)>0));
+
+	$('#var_login_id').blur(function(){
+		if($(this).val().length) {
+			$.ajax({
+				type: 'post'
+				, url: $('#lilo_url_action').val()
+				, data: {var_login: $('#var_login_id').val(), url: $('input[@name=url]').val()}
+				, success: function(data) {
+					var result = data.split(':');
+					var id_auteur = result[0];
+					alea_actuel = result[1];
+					alea_futur = result[2];
+					var logo_src = result[3];
+					$('input[@name=session_password_md5]').val(alea_actuel);
+					$('input[@name=next_session_password_md5]').val(alea_futur);
+					// change logo uniquement si OK et page login
+					if(page_login && logo_src.length) {
+						$('img.lilo-logo').attr({ src: logo_src, alt: 'Logo auteur' });
+					}
+					return true;
+				}
+				, error: function(xmlhttprequest, type, e) {
+					if(lilo_config['login_identifiant_inconnu']) {
+						alert(lilo_config['login_identifiant_inconnu']);
+					}
+				}
+			}); // end $.ajax
+		} // end if
+	}); // end blur
+	
+	$('#lilo_login').submit( function() {
+		if (
+			(this.session_password.value.length > 0)
+			&& (this.var_login.value.length > 0)
+			) {
+			this.session_password_md5.value = calcMD5(alea_actuel + this.session_password.value);
+			this.next_session_password_md5.value = calcMD5(alea_futur + this.session_password.value);
+			this.session_login_hidden.value = this.var_login.value;
+			this.session_password.value = ""; 
+			return(true);
+			}
+		return(false);
+	}); // end submit
+});
+</script>
 
 [(#ENV{echec_cookie})
 <fieldset class="reponse_formulaire">

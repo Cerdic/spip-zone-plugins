@@ -74,7 +74,11 @@ function lilo_insert_head ($flux) {
 		if(!isset($config[$key]) || !$config[$key] || empty($config[$key])) $config[$key] = $value;
 		$lilo_js_insert_head .= "'".preg_replace(',(lilo_),','',$key)."':'".$config[$key]."',";
 	}
-	$lilo_js_insert_head = " jQuery().ready(function(){ var lilo_config = { " . rtrim($lilo_js_insert_head, ",") . " };";
+	$lilo_js_insert_head = ""; /*
+		//" jQuery().ready(function(){ "
+		. "var lilo_config = { " . rtrim($lilo_js_insert_head, ",") . " }; "
+		//. "});"; // fin ready
+		;*/
 
 	if($page == 'login') {
 	
@@ -104,54 +108,6 @@ function lilo_insert_head ($flux) {
 				#lilo-statut-public { display:none; }
 			}
 		"; // end $lilo_css_insert_head
-
-		$lilo_js_insert_head .= 
-		// Javascript
-		"
-			var alea_actuel = '', alea_futur = '';
-			$('#var_login_id').blur(function(){
-				if($(this).val().length) {
-					$.ajax({
-						type: 'post'
-						, url: $('#lilo_url_action').val()
-						, data: {var_login: $('#var_login_id').val(), url: $('input[@name=url]').val()}
-						, success: function(data) {
-							var result = data.split('" . _LILO_AJAX_RESULT_SEPARATOR . "');
-							var id_auteur = result[0];
-							alea_actuel = result[1];
-							alea_futur = result[2];
-							var logo_src = result[3];
-							$('input[@name=session_password_md5]').val(alea_actuel);
-							$('input[@name=next_session_password_md5]').val(alea_futur);
-							/* change logo uniquement si OK et page login */
-							if((login_voir_logo=='oui') && (logo_src.length)) {
-								$('img.lilo-logo').attr({ src: logo_src, alt: 'Logo auteur' });
-							}
-							return true;
-						}
-						, error: function(xmlhttprequest, type, e) {
-							if(lilo_config['login_identifiant_inconnu']) {
-								alert(lilo_config['login_identifiant_inconnu']);
-							}
-						}
-					}); /* end $.ajax */
-				} /* end if */
-			}); /* end blur */
-			
-			$('#lilo_login').submit( function() {
-				if (
-					(this.session_password.value.length > 0)
-					&& (this.var_login.value.length > 0)
-					) {
-					this.session_password_md5.value = calcMD5(alea_actuel + this.session_password.value);
-					this.next_session_password_md5.value = calcMD5(alea_futur + this.session_password.value);
-					this.session_login_hidden.value = this.var_login.value;
-					this.session_password.value = ''; 
-					return(true);
-					}
-				return(false);
-			}); /* end submit */
-		"; // end $lilo_js_insert_head
 		
 	} // end if($page == 'login')
 	
@@ -226,20 +182,22 @@ function lilo_insert_head ($flux) {
 		$lilo_js_insert_head .= 
 		// Javascript
 		"
+		jQuery().ready(function(){
 			$('#lilo-ventre').hide();
 			$('#lilo-statut-public').hover(function(){
 				$('#lilo-ventre').show('slow');
 			 },function(){
 				$('#lilo-ventre').hide('slow');
 			});
+		});
 		"; // end $lilo_js_insert_head
-		
+
 	} // end else
 	
-	$lilo_js_insert_head .= "});"; // fin de jQuery().ready(function(){
-	
 	$lilo_css_insert_head = lilo_envelopper_script(compacte_css($lilo_css_insert_head), 'css');
-	$lilo_js_insert_head = lilo_envelopper_script(compacte_js($lilo_js_insert_head), 'js');
+	if(!empty($lilo_js_insert_head)) {
+		$lilo_js_insert_head = lilo_envelopper_script(compacte_js($lilo_js_insert_head), 'js');
+	}
 		
 	// compacter un peu plus
 	$lilo_js_insert_head = lilo_compacter_script($lilo_js_insert_head);
@@ -253,6 +211,7 @@ function lilo_insert_head ($flux) {
 } // end lilo_insert_head()
 
 function lilo_envelopper_script ($s, $type) {
+	if(empty($s)) return($s);
 	switch($type) {
 		case 'css':
 			$s = "
@@ -282,7 +241,9 @@ function lilo_envelopper_script ($s, $type) {
 
 // complément des deux 'compacte'. supprimer les espaces en trop.
 function lilo_compacter_script ($s) {
-	$s = preg_replace('=[[:space:]]+=', ' ', $s);
+	if(!empty($s)) {
+		$s = preg_replace('=[[:space:]]+=', ' ', $s);
+	}
 	return($s);
 }
 
