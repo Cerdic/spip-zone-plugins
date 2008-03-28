@@ -53,7 +53,7 @@ function glossaire_echappe_balises_callback($matches) {
 }
 function glossaire_echappe_mot_callback($matches) {
  global $gloss_id;
- return $matches[1].cs_code_echappement("@@GLOSS$matches[2]#{$gloss_id}@@", 'GLOSS').$matches[3];
+ return "$matches[1]@@GLOSS".cs_code_echappement($matches[2], 'GLOSS')."#{$gloss_id}@@$matches[3]";
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|a
@@ -83,7 +83,7 @@ function cs_rempl_glossaire($texte) {
 //echo '<hr>==>',htmlentities($les_mots),'<hr>';
 		if(preg_match(",\W($les_mots)\W,i", $texte)) {
 			// prudence 1 : on protege TOUTES les balises contenant le mot en question
-			$texte = preg_replace_callback(",(<[^>]*($les_mots)[^>]*>),Umsi", 'glossaire_echappe_balises_callback', $texte);
+			$texte = preg_replace_callback(",(<[a-z][^>]*($les_mots)[^>]*>),Umsi", 'glossaire_echappe_balises_callback', $texte);
 			// prudence 2 : on neutralise le mot si on trouve un accent html juste avant ou apres
 			$texte = preg_replace_callback(",(&($accents);($les_mots)),i", 'glossaire_echappe_balises_callback', $texte);
 			$texte = preg_replace_callback(",(($les_mots)&($accents);),i", 'glossaire_echappe_balises_callback', $texte);
