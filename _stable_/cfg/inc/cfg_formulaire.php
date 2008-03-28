@@ -394,7 +394,6 @@ class cfg_formulaire_dist{
 				$contexte['cfg_id'] = $this->param->cfg_id;
 			}
 			$val = $this->val ? array_merge($contexte, $this->val) : $contexte;
-			recuperer_fond('fonds/cfg_' . $this->vue);
 			$this->fond_compile = recuperer_fond('fonds/cfg_' . $this->vue, $val);
 		}
 		return $this->fond_compile;
