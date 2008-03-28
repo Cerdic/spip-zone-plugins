@@ -90,6 +90,7 @@ function nettoyage_xtag($c) {
 	// les zitaliques
 	$c = preg_replace ('/<cTypeface:Italic>(.*?)<cTypeface:>/ims', '{\1}', $c);
 	$c = preg_replace ('/<I>(.*?)<[$]>/ms', '{\1}', $c);
+	$c = preg_replace ('/<I>(.*?)<I>/ms', '{\1}', $c);
 
 	// supprimer un sale petit tiret
 	$c = str_replace("&#173;", '', $c);
@@ -100,9 +101,6 @@ function nettoyage_xtag($c) {
 	// paras simples
 	$c = preg_replace(",\n+,", "\n\n", $c);
 
-	// espaces multiples
-	$c = preg_replace(",  +,", " ", $c);
-
 	// co case = majuscules
 	$c = preg_replace('/<Ko[(]"case","cpsp"[)]>([^<>]+)/imse', 'mb_strtoupper("\1")', $c);
 
@@ -111,6 +109,10 @@ function nettoyage_xtag($c) {
 
 	// insecables zarbis
 	$c = str_replace (' >', '~', $c);
+
+	// espaces multiples
+	$c = preg_replace(",  +,", " ", $c);
+
 
 	return $c;
 }
