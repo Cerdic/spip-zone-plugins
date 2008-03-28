@@ -2,8 +2,7 @@
 // ---------------------------------------------------------
 //  Ma lettre
 //
-//  version:  0.86 (version megalis(postmoe), autochmemin,clean)
-//  date:     2007.03.17
+//  version:  0.86 
 //  author:   erational <http://www.erational.org>
 //  licence:  GPL
 // ---------------------------------------------------------
@@ -67,21 +66,21 @@ function exec_malettre(){
 
   // main ------------------------------------------------------
   
-	debut_page(_T('malettre:ma_lettre'));	  
+	echo debut_page(_T('malettre:ma_lettre'));	  
  
 	if ($connect_statut == "0minirezo" && $connect_toutes_rubriques) {	  // admin restreint (connect_toutes_rubriques si admin)
 		$page = "malettre";	
 
     debut_gauche();
-    debut_boite_info();
+    echo debut_boite_info();
     echo "Cette page permet de cr&eacute;er une lettre sur mesure en choisissant vos articles. <br/><br/>";
     echo "<p><a href='?exec=malettre'>Ecrire une lettre</a></p>";
     echo "<p><a href='?exec=malettre&amp;action=letter_compose&amp;option=load'>Charger la derni&egrave;re lettre</a></p>";
     echo "<p><a href='?exec=malettre_archive'>G&eacute;rer les archives</a></p>";
     if (function_exists(lire_config)) echo "<p><a href='?exec=cfg&cfg=malettre'>Configurer</a></p>";  
-    fin_boite_info();
+    echo fin_boite_info();
     
-    debut_droite();
+    echo debut_droite();
     
     // list last articles
 		$titre = "titre";
@@ -220,7 +219,7 @@ function exec_malettre(){
               
 							echo "<h4>Apercu</h4>\n";
 							echo "Sujet: <input type='text' size='55' name='lettre_title' value=\"".$lettre_title."\" /><br />\n";
-              echo "<iframe width='600' height='500' src='$path_archive_full/.malettre.html?nocache='.time().'></iframe>\n";
+              echo "<iframe width=\"600\" height=\"500\" src=\"$path_archive_full/.malettre.html?nocache=".time()."\"></iframe>\n";
 							echo "<h4>Le source HTML</h4>\n";
 							echo "<textarea cols='70' rows='20'>$sourceHTML</textarea>";
 							echo "<h4>Version Texte</h4>\n";
@@ -388,6 +387,8 @@ function exec_malettre(){
 	}	else { 
 		echo "<strong>Vous n'avez pas acc&egrave;s &agrave; cette page.</strong>"; 
 	}
+	
+	echo fin_page();
 }
 
 ?>
