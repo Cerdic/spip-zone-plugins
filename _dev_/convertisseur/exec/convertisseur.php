@@ -4,7 +4,10 @@
 // Main 
 // ------------------------------
 function exec_convertisseur(){
+
 	include_spip("inc/vieilles_defs");
+	define('_SIGNALER_ECHOS', false); // on sait qu'on est vieux-code
+	
 	include_spip("inc/presentation");
 	include_spip('inc/convertisseur');
 
