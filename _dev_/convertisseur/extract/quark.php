@@ -103,6 +103,9 @@ function nettoyage_xtag($c) {
 	// espaces multiples
 	$c = preg_replace(",  +,", " ", $c);
 
+	// co case = majuscules
+	$c = preg_replace('/<Ko[(]"case","cpsp"[)]>([^<>]+)/imse', 'mb_strtoupper("\1")', $c);
+
 	// virer tous les tags restants
 	$c = strip_tags($c);
 
