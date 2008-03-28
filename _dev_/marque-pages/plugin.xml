@@ -12,13 +12,17 @@
 		dev
 	</etat>
 	<description>
-		Des outils pour d&eacute;velopper un syst&egrave;me de marque-pages en ligne, du style Scuttle.
-		<br />N&eacute;cessite les plugins crayons, tag-machine et balise session.
+Des outils pour d&eacute;velopper un syst&egrave;me de marque-pages en ligne, du style Scuttle.
+
+N&eacute;cessite les plugins crayons et tag-machine.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 		marquepages
 	</prefix>
+	<icon>
+		images/marquepages.png
+	</icon>
 	<options> 
 		marquepages_options.php
 	</options>
