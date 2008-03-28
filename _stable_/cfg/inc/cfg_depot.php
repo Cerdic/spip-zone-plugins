@@ -75,6 +75,7 @@ class cfg_depot_dist{
 		$r = $this->depot->lire();
 		if ($this->depot->version>1) return $r; // array($ok, $val)
 		else return array(true, $r);
+
 	}
 		
 	function ecrire($params = array()){
@@ -89,28 +90,57 @@ class cfg_depot_dist{
 		else return array($this->depot->modifier(true), array());
 	}	
 	
-	function lire_config(){
+	function lire_config($def=null, $serialize=false){
 		list($ok, $s) = $this->depot->lire();
-		if ($ok && ($nom = $this->nom_champ()))
-			return $s[$nom];
-			
-		return null;
+		if ($ok && ($nom = $this->nom_champ())) {
+			$config = $s[$nom];
+		} elseif ($ok) {
+			$config = $s;	
+		} 
+		
+		// transcodage vers le mode serialize
+		if ($serialize && is_array($config)) {
+			$retour = serialize($config);
+		} elseif (!$serialize && is_null($config) && !$def 
+				&& $serialize === '') // hack affreux pour le |in_array...
+		{
+			// pas de serialize requis et config vide, c'est qu'on veut un array()
+			// un truc de toggg que je ne sais pas a quoi ca sert.
+			// bon, ca sert si on fait un |in_array{#CONFIG{chose,'',''}}
+			$retour = array();
+		} elseif (!$serialize && ($c = @unserialize($config))) {
+		// transcodage vers le mode non serialize
+			$retour = $c;
+		} else {
+		// pas de transcodage
+			$retour = $config;
+		}
+		
+		return is_null($retour) && $def ? $def : $retour;	
+		return $retour;
 	}
 	
-	function ecrire_config($valeur){
-		if ($nom = $this->nom_champ())
+	
+	
+	function ecrire_config($valeur, $serialize=true){
+		if ($nom = $this->nom_champ()) {
 			$this->depot->val = array($nom=>$valeur);
-		
-		list($ok, $s) =  $this->depot->ecrire();
+		} else {
+			$this->depot->val = $valeur;
+		}
+		list($ok, $s) =  $this->depot->ecrire($serialize);
 		return $ok;	
 	}
 	
 	function effacer_config(){
 		if ($nom = $this->nom_champ()){
 			$this->depot->val[$nom] = false;
-			list($ok, $s) =  $this->depot->effacer();
-			return $ok;	
+		} else {
+			$this->depot->val = null;	
 		}
+		list($ok, $s) =  $this->depot->effacer();
+		return $ok;	
+
 	}	
 	
 	function nom_champ(){

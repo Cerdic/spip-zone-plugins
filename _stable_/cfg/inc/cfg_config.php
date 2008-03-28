@@ -63,7 +63,7 @@ function inc_lire_config_dist($cfg='', $def=null, $serialize=false){
 
 	$depot = cfg_charger_depot($cfg);
 	if ($depot->version > 1)
-		return $depot->lire_config();
+		return $depot->lire_config($def, $serialize);
 
 	// Toute la suite est temporaire, le temps que tous les
 	// depots fonctionnent avec la nouvelle API
@@ -133,7 +133,7 @@ function ecrire_config($cfg='', $valeur=null, $serialize=true){
 function inc_ecrire_config_dist($cfg='', $valeur=null, $serialize=true){
 	$depot = cfg_charger_depot($cfg);
 	if ($depot->version > 1)
-		return $depot->ecrire_config($valeur);
+		return $depot->ecrire_config($valeur, $serialize);
 
 	// Toute la suite est temporaire, le temps que tous les
 	// depots fonctionnent avec la nouvelle API

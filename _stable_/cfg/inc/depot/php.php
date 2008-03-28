@@ -18,6 +18,8 @@ class cfg_depot_php
 	var $val = array();
 	var $param = array();
 	
+	var $_arbre = array();
+	
 	// version du depot
 	var $version = 2;
 	
@@ -56,9 +58,10 @@ class cfg_depot_php
     	if (!$cfg OR !is_array($cfg)) 
     		return array(true, array()); 
 
-    	$cfg = &cfg_monte_arbre($cfg, $this->param->nom);
-    	$cfg = &cfg_monte_arbre($cfg, $this->param->casier);
-    	$cfg = &cfg_monte_arbre($cfg, $this->param->cfg_id);
+    	$cfg = &$this->monte_arbre($cfg, $this->param->nom);
+    	$cfg = &$this->monte_arbre($cfg, $this->param->casier);
+    	$cfg = &$this->monte_arbre($cfg, $this->param->cfg_id);
+    	// utile ??
     	if ($this->param->cfg_id) {
     		$cles = explode('/', $this->param->cfg_id);
 			foreach ($this->champs_id as $i => $name) {
@@ -83,9 +86,9 @@ class cfg_depot_php
     	}
 
     	$ici = &$base;
-    	$ici = &cfg_monte_arbre($ici, $this->param->nom);
-    	$ici = &cfg_monte_arbre($ici, $this->param->casier);
-    	$ici = &cfg_monte_arbre($ici, $this->param->cfg_id);
+    	$ici = &$this->monte_arbre($ici, $this->param->nom);
+    	$ici = &$this->monte_arbre($ici, $this->param->casier);
+    	$ici = &$this->monte_arbre($ici, $this->param->cfg_id);
 		foreach ($this->champs as $name => $def) {
 			if (isset($def['id'])) {
 				continue;
@@ -119,19 +122,24 @@ class cfg_depot_php
     		$base = $cfg;	
     	}
 
+		$this->_arbre = array();
     	$ici = &$base;
-    	$ici = &cfg_monte_arbre($ici, $this->param->nom);
-    	$ici = &cfg_monte_arbre($ici, $this->param->casier);
-    	$ici = &cfg_monte_arbre($ici, $this->param->cfg_id);	
+    	$ici = &$this->monte_arbre($ici, $this->param->nom);
+    	$ici = &$this->monte_arbre($ici, $this->param->casier);
+    	$ici = &$this->monte_arbre($ici, $this->param->cfg_id);	
     	
+    	// effacer les champs
     	foreach ($this->champs as $name => $def) {
-			if (isset($def['id'])) {
-				continue;
+			if (isset($def['id'])) continue;
+			unset($ici[$name]);
+		}
+		
+		// supprimer les dossiers vides
+		for ($i = count($this->_arbre); $i--; ) {
+			if ($this->_arbre[$i][0][$this->_arbre[$i][1]]) {
+				break;
 			}
-			
-			if ($supprimer) {
-				unset($ici[$name]);
-			}
+			unset($this->_arbre[$i][0][$this->_arbre[$i][1]]);
 		}
 		
 		return array($this->ecrire_fichier($base), $ici);
@@ -174,6 +182,25 @@ $cfg = ' . var_export($contenu, true) . ';
 		$this->champs = array($champ=>true);
 		$this->param->casier = implode('/',$arbre);
 		return true;	
+	}
+	
+	
+	// se positionner dans le tableau arborescent
+	function & monte_arbre(&$base, $chemin){
+		if (!$chemin) {
+			return $base;
+		}
+		if (!is_array($chemin)) {
+			$chemin = explode('/', $chemin);
+		}
+		foreach ($chemin as $dossier) {
+			if (!isset($base[$dossier])) {
+				$base[$dossier] = array();
+			}
+	    	$this->_arbre[] = array(&$base, $dossier);
+	    	$base = &$base[$dossier];
+		}
+		return $base;
 	}
 }
 

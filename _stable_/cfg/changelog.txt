@@ -3,6 +3,9 @@ Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 - rendre les 'storage' independants de la class cfg_formulaire pour utiliser leur fonction lire/ecrire/effacer dans lire_config, ecrire_config, effacer_config
 
+v1.4.9 (28 03 2008)
+- depot 'metapack' en nouvelle api
+
 v1.4.8 (27 03 2008)
 - depot 'php' en nouvelle api (on commence par le plus simple !)
 - suivi svn pour api formulaires : charger/verifier/traiter

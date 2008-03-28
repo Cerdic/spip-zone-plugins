@@ -294,7 +294,7 @@ class cfg_formulaire_dist{
 	// si la fonction est appelee 2 fois, les parametres identiques ne seront pas copies
 	// sauf si le parametre est un tableau (<!-- param*=valeur -->), les valeurs seront dupliquees
 	function recuperer_parametres(){
-	
+
 		// pour compatibilite, recuperer l'ancien code #REM
 		$this->recuperer_parametres_rem();	
 		
@@ -379,21 +379,23 @@ class cfg_formulaire_dist{
 	 * 
 	 */
 	function recuperer_fond($contexte = array(), $forcer = false){
+
 		if (!$this->fond_compile OR $forcer){
 			include_spip('inc/presentation'); // offrir les fonctions d'espace prive
 			include_spip('public/assembler');
+			
 			// rendre editable systematiquement
 			// sinon, ceux qui utilisent les fonds CFG avec l'API des formulaires dynamiques
 			// et mettent des [(#ENV**{editable}|?{' '}) ... ] ne verraient pas leurs variables
 			// dans l'environnement vu que CFG ne pourrait pas lire les champs du formulaire
 			#if (!isset($contexte['editable'])) $contexte['editable'] = true; // plante 1.9.2 !!
 			// passer cfg_id...
-			if (!isset($contexte['cfg_id']) && $this->param->cfg_id) $contexte['cfg_id'] = $this->param->cfg_id;
-			$this->fond_compile = recuperer_fond(
-					'fonds/cfg_' . $this->vue,
-					$this->val 
-						? array_merge($contexte, $this->val) 
-						: $contexte);
+			if (!isset($contexte['cfg_id']) && $this->param->cfg_id) {
+				$contexte['cfg_id'] = $this->param->cfg_id;
+			}
+			$val = $this->val ? array_merge($contexte, $this->val) : $contexte;
+			recuperer_fond('fonds/cfg_' . $this->vue);
+			$this->fond_compile = recuperer_fond('fonds/cfg_' . $this->vue, $val);
 		}
 		return $this->fond_compile;
 	}
