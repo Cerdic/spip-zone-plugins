@@ -11,6 +11,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
+include_spip('inc/spiplistes_api_courrier');
 
 function exec_spiplistes_maintenance () {
 
@@ -64,13 +65,13 @@ function exec_spiplistes_maintenance () {
 				if(_request("supprimer_courriers_$statut")) {
 					if($statut == _SPIPLISTES_STATUT_ENCOURS) {
 						// supprime d'abord de la queue d'envoi
-						sql_delete("spip_auteurs_courriers", "id_courrier IN (SELECT id_courrier FROM spip_courriers WHERE statut='$statut')");
+						spiplistes_supprime_courrier_du_spool('statut', $statut);
 						spiplistes_log("RESET spool ID_COURRIER #$id_courrier by ID_AUTEUR #$connect_id_auteur");
 					}
 					// supprime le courrier
 					$msg = 
 						(
-							sql_delete("spip_courriers", "statut='$statut'")
+							spiplistes_supprime_courrier('statut', $statut)
 						) 
 						? $msg_ok 
 						: $msg_bad
@@ -347,7 +348,6 @@ function exec_spiplistes_maintenance () {
 // retourne un tableau des listes
 function spiplistes_listes_select ($sql_select, $sql_where = "") {
 	$result = array();
-	spiplistes_log($sql_select);
 	if(!empty($sql_select) && ($r = sql_select($sql_select, "spip_listes", $sql_where))) {
 		while($row = spip_fetch_array($r)) {
 			$result[] = $row;

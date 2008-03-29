@@ -267,5 +267,23 @@ function spiplistes_supprime_liste_envois ($id_courrier) {
 	return($result);
 }
 
+// CP-20080329
+function spiplistes_supprime_courrier_du_spool ($sql_where_key, $sql_where_value) {
+	if(spiplistes_spip_est_inferieur_193()) { 
+		$result = sql_delete("spip_auteurs_courriers"
+			, "id_courrier IN (SELECT id_courrier FROM spip_courriers WHERE $sql_where_key='$sql_where_value')");	
+	} else {
+		// Sur les précieux conseils de MM :
+		$selection =
+			sql_select("id_courrier", "spip_courriers", $sql_where_key."=".sql_quote($sql_where_value),'','','','','',false);
+		$result = sql_delete("spip_auteurs_courriers", "id_courrier IN ($selection)");
+	}
+	return($result);
+}
+
+// CP-20080329
+function spiplistes_supprime_courrier ($sql_where_key, $sql_where_value) {
+	return(sql_delete("spip_courriers", $sql_where_key."=".sql_quote($sql_where_value)));
+}
 
 ?>
