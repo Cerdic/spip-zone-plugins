@@ -42,7 +42,7 @@ function spiplistes_afficher_pile_messages() {
 	$sql_select = "id_liste,titre,date,maj,periode,patron,statut";
 	$list = sql_select($sql_select, 'spip_listes', "message_auto='oui' AND date > 0");
 
-	if (spip_num_rows($list) == 0) {
+	if (sql_count($list) == 0) {
 		return (false); 
 	}
 	

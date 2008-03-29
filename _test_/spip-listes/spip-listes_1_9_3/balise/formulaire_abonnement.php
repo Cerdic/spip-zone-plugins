@@ -278,7 +278,7 @@ spiplistes_log("### : ->".$mail_inscription_, _SPIPLISTES_LOG_DEBUG);
 		// inscription d'un abonné
 		if(!empty($login_)) {
 			$sql_result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login=$login LIMIT 1");
-			if(spip_num_rows($sql_result)) {
+			if(sql_count($sql_result)) {
 				while($row = spip_fetch_array($sql_result)) {
 				}
 			}
@@ -432,7 +432,7 @@ function test_login2($mail) {
 		if ($i) $login = $login_base.$i;
 		else $login = $login_base;
 		$result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login="._q($login));
-		if (!spip_num_rows($result)) break;
+		if (!sql_count($result)) break;
 	}
 
 	return $login;

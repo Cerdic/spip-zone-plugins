@@ -81,7 +81,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 
 	$sql_result = spip_query($sql_query);
 
-	$nb_courriers = spip_num_rows($sql_result);
+	$nb_courriers = sql_count($sql_result);
 	
 	// si meleuse suspendue, signale en log 
 	if($opt_suspendre_meleuse == 'oui') {
@@ -260,7 +260,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 //spiplistes_log("MEL: marque le lot: $id_process", _SPIPLISTES_LOG_DEBUG);
 				}
 					
-				$liste_abonnes = spip_num_rows($result_inscrits);
+				$liste_abonnes = sql_count($result_inscrits);
 //spiplistes_log("MEL: nb destinataires: $liste_abonnes", _SPIPLISTES_LOG_DEBUG);
 				if($liste_abonnes > 0) {
 		

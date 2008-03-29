@@ -75,7 +75,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 		$sql_result = spip_query($sql_query);
 		
 		// si liste disponible, affiche formulaire
-		if($sql_result && spip_num_rows($sql_result)) {
+		if($sql_result && sql_count($sql_result)) {
 			
 			// récupère la liste des listes
 			$listes = array();

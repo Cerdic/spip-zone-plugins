@@ -133,7 +133,7 @@ function spiplistes_MaJ_auteur_elargi($id_auteur, $format) {
 function spiplistes_auteur_elargi_existe($id_auteur) {
 	$query = "SELECT 1 FROM spip_auteurs_elargis WHERE id_auteur="._q($id_auteur);
 	$result = spip_query($query);
-	if (spip_num_rows($result) == 0) { return False; }
+	if (sql_count($result) == 0) { return False; }
 	else { return True; }
 }
 

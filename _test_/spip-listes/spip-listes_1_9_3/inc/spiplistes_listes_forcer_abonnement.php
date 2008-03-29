@@ -43,7 +43,7 @@ spiplistes_log("# $sql_query");
 		
 		if($sql_result = spip_query($sql_query)) {
 		
-			spiplistes_log($nb = spip_num_rows($sql_result)." AUTEURS ($statut) ADDED TO LISTE $id_liste BY ID_AUTEUR #$connect_id_auteur");
+			spiplistes_log($nb = sql_count($sql_result)." AUTEURS ($statut) ADDED TO LISTE $id_liste BY ID_AUTEUR #$connect_id_auteur");
 
 			$sql_values = "";
 

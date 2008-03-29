@@ -22,7 +22,7 @@ function exec_spiplistes_autocron () {
 
 	$sql_result = spip_query("SELECT id_courrier,total_abonnes,nb_emails_envoyes FROM spip_courriers WHERE statut='"._SPIPLISTES_STATUT_ENCOURS."' LIMIT 1");
 
-	if(spip_num_rows($sql_result) > 0 ){
+	if(sql_count($sql_result) > 0 ){
 
 		$row = spip_fetch_array($sql_result);	
 

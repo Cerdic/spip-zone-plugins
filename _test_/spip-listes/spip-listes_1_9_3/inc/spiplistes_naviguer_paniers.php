@@ -30,7 +30,7 @@ function spiplistes_naviguer_paniers ($titre, $element, $les_statuts, $return = 
 	}
 	$sql_query = "SELECT statut,COUNT(id_liste) AS n FROM $sql_from GROUP BY statut";
 	$sql_result = spip_query($sql_query);
-	if(spip_num_rows($sql_result)) {
+	if(sql_count($sql_result)) {
 		$les_statuts = array_fill_keys(explode(";", $les_statuts), 0);
 		while($row = spip_fetch_array($sql_result)) {
 			$key = $row['statut'];

@@ -87,7 +87,7 @@ function inc_determiner_non_auteurs_liste($type, $id, $cond_les_auteurs, $order)
 {
 	$cond = '';
 	$res = determiner_auteurs_objet($type, $id, $cond_les_auteurs);
-	if (spip_num_rows($res)<200){ // probleme de performance au dela, on ne filtre plus
+	if (sql_count($res)<200){ // probleme de performance au dela, on ne filtre plus
 		while ($row = spip_fetch_array($res))
 			$cond .= ",".$row['id_auteur'];
 	}

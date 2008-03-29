@@ -93,7 +93,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 	$resultat_aff = spip_query("SELECT $sql_select FROM $sql_from WHERE $sql_where ORDER BY $sql_order DESC LIMIT $position,$pas");
 	
 	//////////////////////
-	if (($nb_ = @spip_num_rows($resultat_aff)) > 0) {
+	if (($nb_ = @sql_count($resultat_aff)) > 0) {
 		
 		// titre du tableau
 		$en_liste = ""

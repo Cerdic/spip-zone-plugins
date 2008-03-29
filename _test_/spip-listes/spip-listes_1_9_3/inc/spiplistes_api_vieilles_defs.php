@@ -28,12 +28,6 @@ if(!function_exists('debut_page')) {
 	}
 }
 
-if(!function_exists('spip_num_rows')) {
-	function spip_num_rows ($r) {
-		return sql_count($r);
-	}
-}
-
 if(!function_exists('spip_insert_id')) {
 	function spip_insert_id () {
 		return mysql_insert_id();

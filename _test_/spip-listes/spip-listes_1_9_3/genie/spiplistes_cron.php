@@ -72,7 +72,7 @@ spiplistes_log("CRON: cron_spiplistes_cron() <<", _SPIPLISTES_LOG_DEBUG);
 		
 	$listes_privees_et_publiques = spip_query ($sql_query);
 	
-	$nb_listes = spip_num_rows($listes_privees_et_publiques);
+	$nb_listes = sql_count($listes_privees_et_publiques);
 	
 spiplistes_log("CRON: nb listes ok: ".$nb_listes, _SPIPLISTES_LOG_DEBUG);
 

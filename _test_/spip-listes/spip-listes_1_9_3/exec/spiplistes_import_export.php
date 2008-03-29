@@ -83,7 +83,7 @@ function exec_spiplistes_import_export(){
 			}
 		}
 		$sql_result = spip_query($sql_query);
-		$nb_inscrits = spip_num_rows($sql_result);
+		$nb_inscrits = sql_count($sql_result);
 		
 		$str_export = "# ".__plugin_html_signature(true, false)."\n"
 			. "# "._T('spiplistes:membres_liste')."\n"
@@ -157,7 +157,7 @@ function exec_spiplistes_import_export(){
 	}
 	$list = spip_query ("SELECT id_liste,titre,texte FROM spip_listes 
 		WHERE statut = '"._SPIPLISTES_PUBLIC_LIST."' OR statut = '"._SPIPLISTES_PRIVATE_LIST."' OR statut = '"._SPIPLISTES_MONTHLY_LIST."' ");
-	$nb_listes = spip_num_rows($list);
+	$nb_listes = sql_count($list);
 	
 	if(!$nb_listes) {
 		$page_result .= __boite_alerte(_T('spiplistes:Pas_de_liste_pour_import'), true);
@@ -219,7 +219,7 @@ function exec_spiplistes_import_export(){
 		OR statut = '"._SPIPLISTES_PRIVATE_LIST."' 
 		OR statut = '"._SPIPLISTES_MONTHLY_LIST."'";
 	$list = spip_query($sql_query);
-	$nb_listes = spip_num_rows($list);
+	$nb_listes = sql_count($list);
 	if ($nb_listes > 0) {
 		$page_result .= ""
 			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'listes_out-24.png', true, "", _T('spiplistes:Exporter'))

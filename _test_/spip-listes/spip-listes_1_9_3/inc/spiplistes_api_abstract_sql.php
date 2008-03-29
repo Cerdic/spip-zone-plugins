@@ -7,6 +7,8 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+// CP-2080329: ajout de sql_fetsel() et sql_getfetsel()
+// Documentation: http://www.spip.net/ecrire/?exec=articles&id_article=3683
 
 /*
  * Plugin CFG pour SPIP
@@ -192,8 +194,44 @@ function compat_spiplistes_defs_dist() {
 		
 		'sql_showtable' => '($table, $serveur=\'\') {
 			return spip_abstract_showtable($table, \'mysql\', true);
-		}'
+		}',
 		
+		// n'existe pas en 1.9.2
+		// on cree la requete directement
+		'sql_fetsel' => 
+			'(
+				$select = array(), $from = array(), $where = array()
+				, $groupby = array(), $orderby = array(), $limit = \'\'
+				, $having = array(), $serveur = \'\', $option = true
+			) {
+				return sql_fetch(sql_select($select, $from, $where
+					, $groupby, $orderby, $limit, $having, $serveur, $option!==false), $serveur, $option!==false);
+			}',
+		
+		// n'existe pas en 1.9.2
+		// on cree la requete directement
+		# Retourne l'unique champ demande dans une requete Select a resultat unique
+		'sql_getfetsel' => 
+			'(
+				$select, $from = array(), $where = array()
+				, $groupby = array(), $orderby = array(), $limit = \'\'
+				, $having = array(), $serveur = \'\', $option = true
+			) {
+				$r = sql_fetch(sql_select($select, $from, $where
+					,$groupby, $orderby, $limit, $having, $serveur, $option!==false), $serveur, $option!==false);
+				return $r ? $r[$select] : NULL;
+			}',
+				
+
+		// n'existe pas en 1.9.2
+		// on cree la requete directement
+		# Nombre de ligne dans le résultat
+		'sql_count' => 
+			'(
+				$res, $serveur=\'\', $option=true
+			) {
+				if($res) return mysql_num_rows($res);
+			}'
 
 		/*
 		'sql_count' => 

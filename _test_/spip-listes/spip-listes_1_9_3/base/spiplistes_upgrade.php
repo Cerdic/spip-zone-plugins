@@ -136,7 +136,7 @@ function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version,
 			
 			//Migrer des listes anciennes // a deplacer dans une en fonction
 			$resultat_aff = spip_query("SELECT * FROM spip_articles WHERE statut='liste' OR statut='inact' OR statut='poublist'");
-			if(@spip_num_rows($resultat_aff) > 0){
+			if(@sql_count($resultat_aff) > 0){
 				echo _T('spiplistes:mettre_a_jour');
 				while ($row = spip_fetch_array($resultat_aff)) {
 					$id_article=$row['id_article'];
@@ -304,7 +304,7 @@ function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version,
 		GROUP BY email
 		");
 		
-		$nb_inscrits = spip_num_rows($result);
+		$nb_inscrits = sql_count($result);
 		echo $nb_inscrits ;
 		
 		while($res = spip_fetch_array($result)){
