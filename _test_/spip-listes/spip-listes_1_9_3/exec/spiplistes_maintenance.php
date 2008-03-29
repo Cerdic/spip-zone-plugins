@@ -46,10 +46,15 @@ function exec_spiplistes_maintenance () {
 			, _SPIPLISTES_STATUT_VIDE, _SPIPLISTES_STATUT_IGNORE, _SPIPLISTES_STATUT_STOPE, _SPIPLISTES_STATUT_ERREUR);
 
 	$msg_maintenance = array();
+	
+	$sql_formats_where = explode(";", _SPIPLISTES_FORMATS_ALLOWED);
+	foreach($sql_formats_where as $key => $value) {
+		$sql_formats_where[$key] = sql_quote($value);
+	}
 	$sql_formats_where = ""
-		. "`spip_listes_format`='"
-		. implode("' OR `spip_listes_format`='", explode(";", _SPIPLISTES_FORMATS_ALLOWED))
-		. "'";
+		. "`spip_listes_format`="
+		. implode(" OR `spip_listes_format`=", $sql_formats_where)
+		;
 	
 	/////////////////
 	// Faire ce qui est demandé par le formulaire
@@ -114,12 +119,12 @@ function exec_spiplistes_maintenance () {
 				if(_request("supprimer_liste_$id_liste")) {
 					$msg =
 						(
-						// supprime la liste 
-						spip_query("DELETE FROM spip_listes WHERE id_liste='$id_liste' LIMIT 1")
-						// de la table des abonnés
-						&& spip_query("DELETE FROM spip_auteurs_listes WHERE id_liste='$id_liste'")
-						// de la table des modérateurs (pas de LIMIT, si plusieurs modérateurs)
-						&& spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_liste='$id_liste'")
+							// supprime la liste 
+							sql_delete("spip_listes", "id_liste=".sql_quote($id_liste)." LIMIT 1")
+							// de la table des abonne's
+							&& sql_delete("spip_auteurs_listes", "id_liste=".sql_quote($id_liste))
+							// de la table des mode'rateurs (pas de LIMIT, si plusieurs mode'rateurs)
+							&& sql_delete("spip_auteurs_mod_listes", "id_liste=".sql_quote($id_liste))
 						)
 						?	$msg_ok
 						:	$msg_bad
@@ -134,8 +139,8 @@ function exec_spiplistes_maintenance () {
 		if($btn_supprimer_formats && $confirmer_supprimer_formats) {
 			$msg =
 				(
-				// vider la table des formats connus de spiplistes
-				spip_query("DELETE FROM spip_auteurs_elargis WHERE $sql_formats_where")
+					// vider la table des formats connus de spiplistes
+					sql_delete("spip_auteurs_elargis", $sql_formats_where)
 				)
 				?	$msg_ok
 				:	$msg_bad
@@ -163,13 +168,8 @@ function exec_spiplistes_maintenance () {
 	}
 	
 	// compter les formats (les abonnes ayant de'fini un format)
-	$sql_query = "
-		SELECT COUNT(id) as n 
-		FROM spip_auteurs_elargis
-		WHERE $sql_formats_where
-		";
-	$row = spip_fetch_array(spip_query($sql_query));
-	$nb_abonnes_formats = $row['n'];
+	$nb_abonnes_formats = sql_fetsel("COUNT(id) as n", "spip_auteurs_elargis", $sql_formats_where);
+	$nb_abonnes_formats = $nb_abonnes_formats['n'];
 	$nb_abonnes_formats_desc = 
 					($nb_abonnes_formats==1)
 					? _T('spiplistes:info_1_abonne')
