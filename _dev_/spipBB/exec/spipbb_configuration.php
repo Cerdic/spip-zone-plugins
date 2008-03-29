@@ -238,7 +238,7 @@ function spipbb_config_champs_supp() {
 	foreach($montre as $chp) {
 		# champs X
 		$res.= "<tr><td valign='top'>"._T('spipbb:config_affiche_champ_extra',array('nom_champ',$chp)).'<br />'
-			. $GLOBALS['champs_sap_spipbb'][$chp]['info'])
+			. $GLOBALS['champs_sap_spipbb'][$chp]['info']
 			. "</td><td width='5%'> </td><td width='25%'>\n";
 		foreach($options_a as $val) {
 			$param=($GLOBALS['spipbb']['affiche_'.$chp])? $GLOBALS['spipbb']['affiche_'.$chp]:'oui';
