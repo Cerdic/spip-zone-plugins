@@ -3,6 +3,16 @@ Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 - rendre les 'storage' independants de la class cfg_formulaire pour utiliser leur fonction lire/ecrire/effacer dans lire_config, ecrire_config, effacer_config
 
+v1.4.10 (29 03 2008)
+- corrections bugs sur : #CONFIG et |in_array{#CONFIG{nom,'',''}} (preferer #CONFIG{nom/,#ARRAY})
+- ecrire_config() n'a plus le parametre 'serialize', 
+par defaut : ecrire_config('nom',$valeur) ne serialise pas (comme une meta classique)
+alors que : ecrire_config('nom/',$valeur) ou ecrire_config('nom/champ',$valeur) va serialiser dans spip_meta 
+- si l'on passe le nom du depot, c'est lui qui gere la serialisation ou non des donnees :
+ecrire_config('meta::nom',$valeur) ne serialise pas
+ecrire_config('metapack::nom',$valeur) serialise (pas besoin du /)
+
+
 v1.4.9 (28 03 2008)
 - depot 'metapack' en nouvelle api
 

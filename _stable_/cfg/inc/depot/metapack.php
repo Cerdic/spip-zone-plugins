@@ -35,7 +35,11 @@ class cfg_depot_metapack
 	// recuperer les valeurs.
 	function lire()
 	{
-	    $val = unserialize($GLOBALS['meta'][$this->param->nom]);
+		if (!isset($GLOBALS['meta'][$this->param->nom])) 
+			$val = null;
+	    else 
+	    	$val = unserialize($GLOBALS['meta'][$this->param->nom]);
+	    	
     	$val = &cfg_monte_arbre($val, $this->param->casier);
     	$val = &cfg_monte_arbre($val, $this->param->cfg_id);
     	
@@ -56,13 +60,14 @@ class cfg_depot_metapack
 			}
 			$val = $_val;
     	}
+
 	    return array(true, $val);
 	}
 
 
 	// ecrit chaque enregistrement de meta pour chaque champ
 	// pour ecrire une meta normale, on peut passer serialize a false
-	function ecrire($serialize=true)
+	function ecrire()
 	{
   		// si pas de champs : on ecrit directement (ecrire_meta(metapack::nom,$val))...
   		if (!$this->champs){
@@ -81,7 +86,7 @@ class cfg_depot_metapack
 			$ici[$name] = $this->val[$name];
 		}
 
-		ecrire_meta($this->param->nom, $serialize ? serialize($base) : $base);
+		ecrire_meta($this->param->nom, serialize($base));
 		if (defined('_COMPAT_CFG_192')) ecrire_metas();
 		return array(true, $ici);
 	}

@@ -32,9 +32,14 @@ class cfg_depot_meta
 	function lire()
 	{
     	$val = array();
-		foreach ($this->champs as $name => $def) {
-			$val[$name] = lire_meta($name);
-	    }
+    	if ($this->champs) {
+			foreach ($this->champs as $name => $def) {
+				$val[$name] = $GLOBALS['meta'][$name];
+			}
+		// si pas d'argument, retourner comme le core serialize($GLOBALS['meta'])
+		} else {
+			$val = serialize($GLOBALS['meta']);
+		}
 	    return array(true, $val);
 	}
 
@@ -65,7 +70,7 @@ class cfg_depot_meta
 	// charger les arguments de lire_config(meta::nom)
 	// $args = 'nom'; ici 
 	function charger_args($args){
-		$this->champs = array($args=>true);
+		if ($args) $this->champs = array($args=>true);
 		return true;	
 	}
 }

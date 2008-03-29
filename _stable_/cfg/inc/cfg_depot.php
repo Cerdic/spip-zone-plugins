@@ -90,45 +90,24 @@ class cfg_depot_dist{
 		else return array($this->depot->modifier(true), array());
 	}	
 	
-	function lire_config($def=null, $serialize=false){
+	function lire_config(){
 		list($ok, $s) = $this->depot->lire();
 		if ($ok && ($nom = $this->nom_champ())) {
-			$config = $s[$nom];
+			return $s[$nom];
 		} elseif ($ok) {
-			$config = $s;	
+			return $s;	
 		} 
-		
-		// transcodage vers le mode serialize
-		if ($serialize && is_array($config)) {
-			$retour = serialize($config);
-		} elseif (!$serialize && is_null($config) && !$def 
-				&& $serialize === '') // hack affreux pour le |in_array...
-		{
-			// pas de serialize requis et config vide, c'est qu'on veut un array()
-			// un truc de toggg que je ne sais pas a quoi ca sert.
-			// bon, ca sert si on fait un |in_array{#CONFIG{chose,'',''}}
-			$retour = array();
-		} elseif (!$serialize && ($c = @unserialize($config))) {
-		// transcodage vers le mode non serialize
-			$retour = $c;
-		} else {
-		// pas de transcodage
-			$retour = $config;
-		}
-		
-		return is_null($retour) && $def ? $def : $retour;	
-		return $retour;
 	}
 	
 	
 	
-	function ecrire_config($valeur, $serialize=true){
+	function ecrire_config($valeur){
 		if ($nom = $this->nom_champ()) {
 			$this->depot->val = array($nom=>$valeur);
 		} else {
 			$this->depot->val = $valeur;
 		}
-		list($ok, $s) =  $this->depot->ecrire($serialize);
+		list($ok, $s) =  $this->depot->ecrire();
 		return $ok;	
 	}
 	

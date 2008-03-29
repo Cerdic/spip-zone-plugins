@@ -34,7 +34,10 @@ function cfg_charger_depot($args){
 			(strpos($head,':') !== false)) {
 				$depot = 'tablepack';
 		} else {
-			$depot = 'metapack';	
+			if (count(explode('/',$args))>1)
+				$depot = 'metapack';
+			else 
+				$depot = 'meta';
 		}
 	}
 
@@ -59,11 +62,15 @@ function lire_config($cfg='', $def=null, $serialize=false) {
 }
 
 
-function inc_lire_config_dist($cfg='', $def=null, $serialize=false){
+function inc_lire_config_dist($cfg='', $def=null, $serialize=false){ // supprimer serialize
 
 	$depot = cfg_charger_depot($cfg);
-	if ($depot->version > 1)
-		return $depot->lire_config($def, $serialize);
+	if ($depot->version > 1) {
+		$r = $depot->lire_config();
+//echo "\n- $cfg : r:"; var_dump($r); echo "\n- $cfg : def:"; var_dump($def); echo "<br />";
+		if (is_null($r)) return $def;
+		return $r;
+	}
 
 	// Toute la suite est temporaire, le temps que tous les
 	// depots fonctionnent avec la nouvelle API
@@ -130,10 +137,11 @@ function ecrire_config($cfg='', $valeur=null, $serialize=true){
 }
 
 
-function inc_ecrire_config_dist($cfg='', $valeur=null, $serialize=true){
+function inc_ecrire_config_dist($cfg='', $valeur=null, $serialize=true){ // supprimer $serialize ensuite
 	$depot = cfg_charger_depot($cfg);
-	if ($depot->version > 1)
-		return $depot->ecrire_config($valeur, $serialize);
+	if ($depot->version > 1) {
+		return $depot->ecrire_config($valeur);
+	}
 
 	// Toute la suite est temporaire, le temps que tous les
 	// depots fonctionnent avec la nouvelle API
@@ -279,8 +287,9 @@ function effacer_config($cfg=''){
 
 function inc_effacer_config_dist($cfg=''){
 	$depot = cfg_charger_depot($cfg);
-	if ($depot->version > 1)
+	if ($depot->version > 1) {
 		return $depot->effacer_config();
+	}
 	
 	return ecrire_config($cfg);	
 }
