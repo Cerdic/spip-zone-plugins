@@ -7,11 +7,11 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-// Ce formulaire est appelé quand balise FORMULAIRE_ABONNEMENT avec un argument (listeN, ou N == id_liste)
+// Ce formulaire est appele quand balise FORMULAIRE_ABONNEMENT avec un argument (listeN, ou N == id_liste)
 
 ][(#REM)
 	================================
-	texte d'inscription en tant que rédacteur
+	texte d'inscription en tant que redacteur
 
 ][(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
 <fieldset>
@@ -38,10 +38,8 @@
 </fieldset>
 ]
 
-
-<a name="spip-listes"></a>
 [(#ENV{mode_login}|?{' ',''})
-	<form action="#SELF#spip-listes" method="post" class="lettre">
+	<form action="#SELF#spip-listes" method="post" class="lettre" id="spip-listes">
 ]
 		<BOUCLE_liste(LISTES) {statut IN 'liste', 'pub_mois'} {id_liste=#ENV{id_liste}}>
 			<fieldset style="margin-bottom:1em;">
@@ -62,7 +60,7 @@
 			<div style="margin-top:5px"><label for="mail_inscription_" style="font-weight:bold;"><:form_pet_votre_email:></label></div>
 			<input type="text" class="forml" style="width:12em;clear:both;" name="mail_inscription_" id="mail_inscription_" value="" size="30" />
 			<div>
-			<input name="desabo" id="suppl_abo_oui" value="non" checked type="radio" />
+			<input name="desabo" id="suppl_abo_oui" value="non" checked="checked" type="radio" />
 			<label for="suppl_abo_oui"><:spiplistes:abonnement_0:></label>
 			</div>
 			<div>
