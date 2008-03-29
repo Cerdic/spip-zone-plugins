@@ -2,12 +2,18 @@
 
 include_spip('public/boucles');
 include_spip('base/echoppe');
+include_spip('inc/session');
 
 
 //global $tables_jointures;
 
 //$tables_jointures['spip_echoppe_categories'][] = 'spip_echoppe_categories_descriptions';
 //$tables_jointures['spip_echoppe_categories_produits'][] = 'spip_echoppe_produits';
+
+function generer_url_validation_panier(){
+	return "?page=echoppe_panier";
+	
+}
 
 function generer_logo($nom_fichier){
 	
@@ -47,7 +53,7 @@ function calculer_url_achat($_var){
 }
 function calculer_url_achat_rapide($_var){
 	if (isset($_var)){
-		$url = generer_url_action('echoppe_ajouter_panier','id_produit='.$_var.'&quantite=1');
+		$url = generer_url_action('echoppe_ajouter_panier','id_produit='.$_var.'&quantite=1&achat_rapide=oui');
 		return $url;
 	}
 	
@@ -96,17 +102,21 @@ function balise_URL_ACHAT_RAPIDE($p){
 	$p->code = "calculer_url_achat_rapide($_id_produit)";
 	return $p;
 }
-
-function balise_TOKEN_PANIIER($p){
-	$_token_panier = $GLOBALS['auteur_session']['echoppe']['token_panier'];
-	$p->code = "$_token_panier";
-	return $p;
-}
 /*
- * function balise_TOKEN_PANIIER($p){
-	$_token_panier = $GLOBALS['auteur_session']['echoppe']['token_panier'];
+function balise_TOKEN_PANIIER($p){
+	$_token_panier = session_get('echoppe_token_panier');
 	$p->code = "$_token_panier";
 	return $p;
 }
-* */
+function balise_TOKEN_CLIENT($p){
+	$_token_panier = session_get('echoppe_token_client');
+	$p->code = "$_token_panier";
+	return $p;
+}
+function balise_URL_VALIDATION_PANIER($p){
+	$_token_panier = session_get('echoppe_token_panier');
+	$p->code = "$_token_panier";
+	return $p;
+}
+*/
 ?>

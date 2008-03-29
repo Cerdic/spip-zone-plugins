@@ -74,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'info_depot' => 'G&eacute;rer vos d&eacute;p&ocirc;ts ici.',
+'info_paniers' => 'G&eacute;rer les paniers de vos clients',
 'ignorer_date_de_retrait_de_vente' => 'Ignorer la date de retrait de la vente',
 'ignorer_date_mise_en_vente' => 'Ignorer la date de mise en vente',
 'impossible_copier_dans'=>'Impossible de copier le fichier dans ',
@@ -157,9 +158,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'utiliser_date_mise_et_retrait_en_ligne' => 'Utiliser les dates de mise en et hors ligne',
 
 // V
+'valider_le_panier' => 'Valider le panier',
 'ville_du_depot' => 'Ville',
 'visualisation_d_un_depot' => 'Visualisation d\'un d&eacute;p&ocirc;t',
 'visualisation_d_un_produit' => 'Visualisation de',
+'visualisation_des_paniers' => 'Visualisation des paniers',
 
 // X
 'xxx' => 'xxx'

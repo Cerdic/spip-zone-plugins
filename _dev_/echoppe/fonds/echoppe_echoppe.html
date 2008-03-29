@@ -2,13 +2,15 @@
 <B_CatsALaRacine>
 <div >
 	<ul>
-		<BOUCLE_CatsALaRacine(SPIP_ECHOPPE_CATEGORIES SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS){id_parent = 0}{par num titre}{lang = ""}>
-		<li class="cadre-sous_rub" style="width: 40%;margin: 10px 0px 0px 10px;">
-		
-		<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">#TITRE</a></strong>
-		[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
-		
-		</li>
+		<BOUCLE_CatsALaRacine(SPIP_ECHOPPE_CATEGORIES){id_parent = 0}>
+			<BOUCLE_Detail(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS){id_categorie}{lang = ""}>
+				<li class="cadre-sous_rub" style="width: 40%;margin: 10px 0px 0px 10px;">
+				
+				<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">#TITRE</a></strong>
+				[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
+				
+				</li>
+			</BOUCLE_Detail>
 		</BOUCLE_CatsALaRacine>
 	</ul>
 </div>

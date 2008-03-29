@@ -1,5 +1,11 @@
 <div class="formulaire_panier">
-	
+	[(#ENV{editer_produit}|=={oui}|?{' ',''})
+		<form action="spip.php" method="post">
+		<input type="hidden" name="action" value="echoppe_ajouter_panier" />
+		
+		<input type="hidden" name="id_panier" value="#ID_PANIER" />
+		
+	]
 	<B_LePanier>
 		<table class="panier" >
 			<tr class="titre_panier">
@@ -10,17 +16,24 @@
 			</tr>
 	<BOUCLE_LePanier(SPIP_ECHOPPE_PANIERS){id_panier?}{token_panier = #SESSION{echoppe_token_panier}}>
 			<tr>
-				<BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS SPIP_ECHOPPE_PRODUITS){id_produit}>
+				<BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits){id_produit}>
 					<td class = "panier_ref">#REF_PRODUIT</td>
 					<td class = "panier_titre">#TITRE</td>
 					<td class = "panier_prix_ttc">#PRIX_TVAC&nbsp;&euro;</td>
-					<td class = "panier_quantite">#QUANTITE</td>
-					<td class = "panier_modifier"><a href="#SELF&amp;id_panier=#ID_PANIER"><:echoppe:editer:></a></td>
-					<td class = "panier_supprimer"><a href="[(#EVAL{echoppe_supprimer_element_panier}|generer_url_action{id_panier=#ID_PANIER})]"><:echoppe:supprimer:></a></td>
+					<td class = "panier_quantite">
+						[(#ENV{editer_produit}|=={oui}|?{'',' '})#QUANTITE]
+						[(#ENV{editer_produit}|=={oui}|?{' ',''})<input type="text" value="#QUANTITE" name="quantite" size="2" />]
+					</td>
+					[(#ENV{editer_produit}|=={oui}|?{'',' '})<td class = "panier_modifier"><a href="[(#EVAL{echoppe_panier}|generer_url_public{editer_produit=oui&id_panier=#ID_PANIER})]"><:echoppe:editer:></a></td>]
+					[(#ENV{editer_produit}|=={oui}|?{' ',''})<td class = "panier_supprimer"><a href="[(#EVAL{echoppe_supprimer_element_panier}|generer_url_action{id_panier=#ID_PANIER})]"><:echoppe:supprimer:></a></td>]
+					
 				</BOUCLE_LeProduit>
 			</tr>
 	</BOUCLE_LePanier>
 		</table>
+		<hr />
+		[(#ENV{editer_produit}|=={oui}|?{' ',''})<input type="submit" /></form><a href="[(#EVAL{echoppe_panier}|generer_url_public)]"><:echoppe:retour_au_panier:></a>]
+		[(#ENV{editer_produit}|=={oui}|?{'',' '})<a href="#URL_VALIDATION_PANIER"><:echoppe:valider_le_panier:></a>]
 	</B_LePanier>
 		<:echoppe:le_panier_est_vide:>
 	<//B_LePanier>

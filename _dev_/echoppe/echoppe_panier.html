@@ -31,34 +31,8 @@ div.formulaire_panier table.panier{
 		
 		[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
 		<h1><:echoppe:le_panier:></h1>
-<div class="formulaire_panier">
-	
-	<B_LePanier>
-		<table class="panier" >
-			<tr class="titre_panier">
-				<td class = "panier_ref"><:echoppe:ref:></td>
-				<td class = "panier_titre"><:echoppe:titre_produit:></td>
-				<td class = "panier_prix_ttc"><:echoppe:prix_ttc:></td>
-				<td class = "panier_quantite"><:echoppe:quantite:></td>
-			</tr>
-	<BOUCLE_LePanier(SPIP_ECHOPPE_PANIERS){id_panier?}{token_panier = #SESSION{echoppe_token_panier}}>
-			<tr>
-				<BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits){id_produit}>
-					<td class = "panier_ref">#REF_PRODUIT</td>
-					<td class = "panier_titre">#TITRE</td>
-					<td class = "panier_prix_ttc">#PRIX_TVAC&nbsp;&euro;</td>
-					<td class = "panier_quantite">#QUANTITE</td>
-					<td class = "panier_modifier"><a href="#SELF&amp;id_panier=#ID_PANIER"><:echoppe:editer:></a></td>
-					<td class = "panier_supprimer"><a href="[(#EVAL{echoppe_supprimer_element_panier}|generer_url_action{id_panier=#ID_PANIER})]"><:echoppe:supprimer:></a></td>
-				</BOUCLE_LeProduit>
-			</tr>
-	</BOUCLE_LePanier>
-		</table>
-	</B_LePanier>
-		<:echoppe:le_panier_est_vide:>
-	<//B_LePanier>
-	
-</div>
+		<br />
+		#FORMULAIRE_PANIER
 		
 		
 	</div><!--#contenu-->
