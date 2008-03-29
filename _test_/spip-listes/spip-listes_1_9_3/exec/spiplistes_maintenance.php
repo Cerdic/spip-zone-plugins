@@ -83,7 +83,7 @@ function exec_spiplistes_maintenance () {
 			}
 		}
 		
-		// les listes en chronos
+		// les listes en chronos à repasser en non-chrono
 		if($btn_reset_listes) {
 			foreach(spiplistes_listes_items_get("titre,id_liste") as $row) {
 				$titre = $row['titre'];
@@ -150,7 +150,7 @@ function exec_spiplistes_maintenance () {
 						? _T('spiplistes:info_1_liste')
 						: "$nb_listes "._T('spiplistes:info_liste_2')
 						;
-	$listes_array = spiplistes_listes_items_get("id_liste,titre,message_auto");
+	$listes_array = spiplistes_listes_items_get("id_liste,statut,titre,message_auto");
 	// listes auto (crhono) comptées à part
 	$nb_listes_auto = 0;
 	foreach($listes_array as $row) {
@@ -240,7 +240,7 @@ function exec_spiplistes_maintenance () {
 		;
 
 	/////////////////////////////////////////
-	// boite de maintenance des listes : date des listes remises à zéro (supprimer les chronos)
+	// boite de maintenance des listes : la date des listes sont remises à zéro (supprimer les chronos)
 	$objet = array('objet' => _T('spiplistes:des_listes'));
 	$page_result .= ""
 		. debut_cadre_trait_couleur("administration-24.gif", true, "", _T('spiplistes:maintenance_objet', $objet))
@@ -249,16 +249,18 @@ function exec_spiplistes_maintenance () {
 	if($nb_listes_auto) {
 		$page_result .= ""
 			. spiplistes_form_debut ($maintenance_url_action, 'post', true)
+			. "<p class='verdana2'>"._T('spiplistes:suppression_chronos_desc')."</p>\n"
 			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 			. spiplistes_form_fieldset_debut (
-				_T('spiplistes:suppression_', $objet).spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_listes_auto / $nb_listes_desc", true)
+				_T('spiplistes:suppression_chronos_', $objet).spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_listes_auto / $nb_listes_desc", true)
 				, true)
 		;
 		foreach($listes_array as $row) {
 			if($row['message_auto']=='oui') {
 				$titre = $row['titre'];
+				$statut = "";
 				$id_liste = intval($row['id_liste']);
-				$page_result .= spiplistes_form_input_checkbox ('reset_liste_'.$id_liste, $id_liste, $titre, false, true);
+				$page_result .= spiplistes_form_input_checkbox ('reset_liste_'.$id_liste, $id_liste, $statut.$titre, false, true);
 			}
 		}
 		$page_result .= ""
@@ -277,28 +279,31 @@ function exec_spiplistes_maintenance () {
 		// supprimer les listes
 	$page_result .= ""
 		. debut_cadre_relief("", true, "", _T('spiplistes:Supprimer_les_listes'))
-		. spiplistes_form_debut ($maintenance_url_action, 'post', true)
-		. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 		;
 	if($nb_listes) {
 		$page_result .= ""
+			. spiplistes_form_debut ($maintenance_url_action, 'post', true)
+			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 			. spiplistes_form_fieldset_debut (
 				_T('spiplistes:suppression_', $objet).spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_listes_desc", true)
 				, true)
 			;
 		foreach($listes_array as $row) {
-			$titre = $row['titre'];
 			$id_liste = intval($row['id_liste']);
-			$page_result .= spiplistes_form_input_checkbox ('supprimer_liste_'.$id_liste, $id_liste, $titre, false, true);
+			$titre = $row['titre'];
+			$statut = "<img src='".spiplistes_items_get_item("puce", $row['statut'])."' alt='".spiplistes_items_get_item("alt", $row['statut'])."' width='9' height='9' style='margin: 0 0.25ex' />";
+			$page_result .= spiplistes_form_input_checkbox ('supprimer_liste_'.$id_liste, $id_liste, $statut.$titre, false, true);
 		}
-		$page_result .= spiplistes_form_fieldset_fin(true);
+		$page_result .= ""
+			. spiplistes_form_fieldset_fin(true)
+			. spiplistes_form_bouton_valider ('btn_supprimer_listes', _T('bouton_valider'), false, true)
+			. spiplistes_form_fin(true)
+			;
 	}
 	else {
 		$page_result .= spiplistes_form_message(_T('spiplistes:pas_de_liste'), true);
 	}
 	$page_result .= ""
-		. spiplistes_form_bouton_valider ('btn_supprimer_listes', _T('bouton_valider'), false, true)
-		. spiplistes_form_fin(true)
 		. fin_cadre_relief(true)
 		. fin_cadre_trait_couleur(true)
 		;

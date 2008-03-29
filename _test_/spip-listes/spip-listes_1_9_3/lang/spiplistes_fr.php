@@ -367,10 +367,10 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Periodicite_:' => "P&eacute;riodicit&eacute; : ",
 'Prets_a_envoi' => "Pr&ecirc;ts &agrave; l'envoi",
 'Publies' => "Publi&eacute;s"
-, 'pas_de_liste' => "Pas de liste"
+, 'pas_de_liste' => "Aucune liste de type envoi non programm&eacute;."
 , 'pas_de_format' => "Aucun format de r&eacute;ception d&eacute;fini pour les abonn&eacute;s."
 , 'aucune_liste_publique' => "Aucune liste de diffusion publique disponible."
-, 'pas_de_liste_en_auto' => "Pas de liste en envoi programm&eacute;s (chrono)"
+, 'pas_de_liste_en_auto' => "Aucune liste de type envoi programm&eacute; (chrono)."
 , 'Patron_du_tampon' => "Patron du tampon ",
 'Patron_de_pied_' => "Patron de pied ",
 'Patron_grand_' => "Grand patron ",
@@ -418,6 +418,9 @@ liste.",
 'Supprimer_ce_contact' => "Supprimer ce contact",
 'Suppression_de' => "Suppression de"
 , 'suppression_' => "Suppression @objet@"
+, 'suppression_chronos_' => "Supprimer les envois programm&eacute;s (chrono) "
+, 'suppression_chronos_desc' => "Si vous supprimez son chrono, la liste n'est pas supprim&eacute;e, sa p&eacute;riodicit&eacute; 
+	est annul&eacute;e. "
 , 'Supprimer_les_listes' => "Supprimer les listes"
 , 'Supprimer_la_liste' => "Supprimer la liste...",
 'Suspendre_abonnements' => "Suspendre les abonnements pour ce compte",
