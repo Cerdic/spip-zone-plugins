@@ -64,22 +64,15 @@ function balise_CONFIG($p) {
 
 	// cas particulier historique : |in_array{#CONFIG{toto,'',''}}
 	// a remplacer par  |in_array{#CONFIG{toto/,#ARRAY}} ou |in_array{#CONFIG{toto,#ARRAY,''}}
-//echo "** $arg : $sinon + $serialize **<br />";
-	if (($sinon === "''") AND ($serialize === "''")){
+	if (($sinon === "''") AND ($serialize === "''") AND (false === strpos('::',$arg))){
 		$sinon = "array()";
 		$arg = "'metapack::".substr($arg,1);
 	}
-//echo "*** $arg : $sinon + $serialize **<br />";	
-	//$_serialize = substr($serialize,1,-1);
-	//if (!$_serialize){echo "***** unserialise $arg **<br />";	
-	//	$p->code = '@unserialize(lire_config(' . $arg . ',' . 
-	//		($sinon && $sinon != "''" ? "serialize($sinon)" : 'null') . ',' . 
-	//		($serialize ? $serialize : 'true') . '))'; // supprimer serialize quand tous les depots seront en version 2
-	//} else {
-		$p->code = 'lire_config(' . $arg . ',' . 
-			($sinon && $sinon != "''" ? $sinon : 'null') . ',' . 
-			($serialize ? $serialize : 'true') . ')';		// supprimer serialize quand tous les depots seront en version 2
-	//}
+
+	$p->code = 'lire_config(' . $arg . ',' . 
+		($sinon && $sinon != "''" ? $sinon : 'null') . ',' . 
+		($serialize ? $serialize : 'true') . ')';		// supprimer serialize quand tous les depots seront en version 2
+
 	return $p;
 }
 
