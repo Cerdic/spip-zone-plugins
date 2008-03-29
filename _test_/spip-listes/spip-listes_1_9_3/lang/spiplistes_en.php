@@ -12,6 +12,7 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 
 // A
 'abo_1_lettre' => 'Newsletter',
+'abonne_une_seule_liste_publique' => "Subscription to the only one list ",
 'abonnement_0' => 'Subscription',
 'abonnement'=>'You would like to change your subscription to the newsletter',
 'abonnement_bouton'=>'Change your subscription',
