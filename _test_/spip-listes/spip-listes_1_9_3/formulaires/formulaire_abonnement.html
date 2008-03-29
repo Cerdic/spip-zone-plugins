@@ -8,7 +8,7 @@
 
 ][(#REM) 
 	================================
-	mot de passe oublié 
+	mot de passe oublie
 
 ][(#ENV{oubli_pass}|=={oui}|?{' ',''})
 	<h2><:pass_mot_oublie:></h2>
@@ -33,7 +33,7 @@
 <div class="formulaire_spip formulaire_inscription">
 [(#REM) 
 	================================
-	texte d'inscription en tant que rédacteur
+	texte d'inscription en tant que redacteur
 
 ][(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
 <fieldset>
@@ -63,16 +63,15 @@
 [<span style="color:red">(#ENV*{reponse_formulaire})</span>]
 
 [(#ENV{mode_login}|?{' ',''})
-	<form action="#SELF#spiplistes" method="post">
+	<form action="#SELF#spiplistes" method="post" id="spip-listes">
 ][(#REM) 
 	================================
 	liste des listes
 
 ]
-		<a name="spip-listes"></a>
 		[(#REM) 
 			================================
-			Si une seule liste en paramètre de la balise, ne liste que celle-ci
+			Si une seule liste en parametre de la balise, ne liste que celle-ci
 		]
 		<BOUCLE_liste(LISTES) {statut IN 'liste', 'pub_mois'} {id_liste=#ENV{liste}} {0,(#ENV{mode_login}|?{1,0})}>
 			[<fieldset style="margin-bottom:1em;">
@@ -83,7 +82,7 @@
 		
 		[(#REM) 
 			================================
-			Sinon liste complète des publiques
+			Sinon liste complete des publiques
 		]
 		<B_listes>
 			<fieldset>
@@ -134,7 +133,7 @@
 				<input type="text" class="forml" style="width:12em;clear:both;" name="mail_inscription_" value="" size="30" /></label>
 			</div>
 			<div>
-				<label><input name="desabo" id="suppl_abo_oui" value="non" checked type="radio" /><:spiplistes:abonnement_0:></label>
+				<label><input name="desabo" id="suppl_abo_oui" value="non" checked="checked" type="radio" /><:spiplistes:abonnement_0:></label>
 			</div>
 			[(#ENV{d}|?{' ',''})
 			<div>
