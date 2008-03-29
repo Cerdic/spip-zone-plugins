@@ -419,8 +419,9 @@ liste.",
 'Suppression_de' => "Suppression de"
 , 'suppression_' => "Suppression @objet@"
 , 'suppression_chronos_' => "Supprimer les envois programm&eacute;s (chrono) "
-, 'suppression_chronos_desc' => "Si vous supprimez son chrono, la liste n'est pas supprim&eacute;e, sa p&eacute;riodicit&eacute; 
-	est annul&eacute;e. "
+, 'suppression_chronos_desc' => "Si vous supprimez son chrono, la liste n'est pas supprim&eacute;e. Sa p&eacute;riodicit&eacute; 
+	est conserv&eacute;e mais l'envoi est suspendu. Pour r&eacute;activer le chrono, il faut lui red&eacute;finir une date de premier 
+	envoi. "
 , 'Supprimer_les_listes' => "Supprimer les listes"
 , 'Supprimer_la_liste' => "Supprimer la liste...",
 'Suspendre_abonnements' => "Suspendre les abonnements pour ce compte",

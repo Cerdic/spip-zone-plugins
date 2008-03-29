@@ -119,13 +119,6 @@ function spiplistes_listes_count ($statut='toutes') {
 	return(__table_items_count('spip_listes', 'id_liste', $where));
 }
 
-// CP-20071009
-function spiplistes_listes_items_get ($keys, $where=false, $limit=false) {
-	$where = $where ? " WHERE $where" : "";
-	$limit = $limit ? " LIMIT $limit" : "";
-	return(__table_items_get('spip_listes', $keys, $where, $limit));
-}
-
 // desabonner des listes (CP-20071016)
 // $listes_statuts : array (statuts des listes,..)
 function spiplistes_listes_desabonner_statut ($id_auteur, $listes_statuts) {

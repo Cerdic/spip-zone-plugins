@@ -63,16 +63,14 @@ function exec_spiplistes_maintenance () {
 			foreach($tous_les_statuts_courriers as $statut) {
 				if(_request("supprimer_courriers_$statut")) {
 					if($statut == _SPIPLISTES_STATUT_ENCOURS) {
-						// supprime de la queue d'envoi
-						spip_query("DELETE FROM spip_auteurs_courriers
-							WHERE id_courrier IN 
-							(SELECT id_courrier FROM spip_courriers WHERE statut='$statut')
-							");
+						// supprime d'abord de la queue d'envoi
+						sql_delete("spip_auteurs_courriers", "id_courrier IN (SELECT id_courrier FROM spip_courriers WHERE statut='$statut')");
 						spiplistes_log("RESET spool ID_COURRIER #$id_courrier by ID_AUTEUR #$connect_id_auteur");
 					}
+					// supprime le courrier
 					$msg = 
 						(
-							spip_query("DELETE FROM spip_courriers WHERE statut='$statut'")
+							sql_delete("spip_courriers", "statut='$statut'")
 						) 
 						? $msg_ok 
 						: $msg_bad
@@ -84,20 +82,24 @@ function exec_spiplistes_maintenance () {
 		}
 		
 		// les listes en chronos à repasser en non-chrono
+		// en realite', conserve le statut mais supprime la date d'envoi
+		// ainsi, la trieuse ne preparera pas le courrier
 		if($btn_reset_listes) {
-			foreach(spiplistes_listes_items_get("titre,id_liste") as $row) {
-				$titre = $row['titre'];
+			foreach(spiplistes_listes_select("id_liste", "message_auto='oui'") as $row) {
 				$id_liste = intval($row['id_liste']);
+				$sql_table = "spip_listes";
+				$sql_champs = array('message_auto' => 'non', 'date' => '');
+				$sql_where = "id_liste=$id_liste";
 				if(_request("reset_liste_$id_liste")) {
 					$msg =
 						(
 						// reset liste 
-						spip_query("UPDATE spip_listes SET message_auto='non',date='' WHERE id_liste=$id_liste LIMIT 1")
+							sql_updateq($sql_table, $sql_champs, $sql_where)
 						)
 						?	$msg_ok
 						:	$msg_bad
 						;
-					$msg_maintenance[] = _T('spiplistes:annulation_chrono_')." : ".$titre."... : ".$msg.$msg_end;
+					$msg_maintenance[] = _T('spiplistes:annulation_chrono_')." : ID_LISTE #$id_liste : ".$msg.$msg_end;
 					spiplistes_log("RESET liste ID_LISTE #$id_liste by ID_AUTEUR #$connect_id_auteur");
 				}
 			}
@@ -105,7 +107,7 @@ function exec_spiplistes_maintenance () {
 		
 		// les listes (global)
 		if($btn_supprimer_listes) {
-			foreach(spiplistes_listes_items_get("titre,id_liste") as $row) {
+			foreach(spiplistes_listes_select("id_liste,titre") as $row) {
 				$titre = $row['titre'];
 				$id_liste = intval($row['id_liste']);
 				if(_request("supprimer_liste_$id_liste")) {
@@ -150,8 +152,8 @@ function exec_spiplistes_maintenance () {
 						? _T('spiplistes:info_1_liste')
 						: "$nb_listes "._T('spiplistes:info_liste_2')
 						;
-	$listes_array = spiplistes_listes_items_get("id_liste,statut,titre,message_auto");
-	// listes auto (crhono) comptées à part
+	$listes_array = spiplistes_listes_select("id_liste,statut,titre,message_auto");
+	// listes auto (crhono) compte'es à part
 	$nb_listes_auto = 0;
 	foreach($listes_array as $row) {
 		if($row['message_auto']=='oui') {
@@ -159,7 +161,7 @@ function exec_spiplistes_maintenance () {
 		}
 	}
 	
-	// compter les formats (les abonnes ayant défini un format)
+	// compter les formats (les abonnes ayant de'fini un format)
 	$sql_query = "
 		SELECT COUNT(id) as n 
 		FROM spip_auteurs_elargis
@@ -180,7 +182,7 @@ function exec_spiplistes_maintenance () {
 ////////////////////////////////////
 
 	$titre_page = _T('spiplistes:spip_listes');
-	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	// Permet entre autres d'ajouter les classes a' la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "maintenance";
 
@@ -338,4 +340,21 @@ function exec_spiplistes_maintenance () {
 	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
 	
 } // exec_spiplistes_maintenance()
+
+/******************************/
+
+// CP-20080329: demande la liste des listes
+// retourne un tableau des listes
+function spiplistes_listes_select ($sql_select, $sql_where = "") {
+	$result = array();
+	spiplistes_log($sql_select);
+	if(!empty($sql_select) && ($r = sql_select($sql_select, "spip_listes", $sql_where))) {
+		while($row = spip_fetch_array($r)) {
+			$result[] = $row;
+		}
+	}
+	return($result);
+}
+
+//
 ?>
