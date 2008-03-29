@@ -29,7 +29,7 @@ charger_generer_url();*/
 global $titre, $ze_logo_genea;
 
 $titre = _T('genea:titre');
-$ze_logo_genea = url_absolue(find_in_path('/img_pack/arbre-24.png'));
+$ze_logo_genea = url_absolue(find_in_path('/images/arbre-24.png'));
 
 
 // -- Fonction d'apppel de la partie d'administration des arbres
@@ -273,8 +273,8 @@ function genea_raccourcis($id_genea=0){
 		icone_horizontale(_T('genea:creer_arbre'), parametre_url(generer_url_ecrire("genea_naviguer"),"action","creer"), $ze_logo_genea, "creer.gif");
 		if ($id_genea>0) {
 			icone_horizontale(_T('genea:creer_sosa'), generer_url_ecrire("genea_cree_sosa"), $ze_logo_genea, "");
-			icone_horizontale(_T('genea:import_arbre'), generer_url_ecrire("genea_import"), $ze_logo_genea, url_absolue(find_in_path('/img_pack/communicate.gif')));
-			icone_horizontale(_T('genea:export_arbre'), generer_url_ecrire("genea_export"), $ze_logo_genea, url_absolue(find_in_path('/img_pack/communicate.gif')));
+			icone_horizontale(_T('genea:import_arbre'), generer_url_ecrire("genea_import"), $ze_logo_genea, url_absolue(find_in_path('/images/communicate.gif')));
+			icone_horizontale(_T('genea:export_arbre'), generer_url_ecrire("genea_export"), $ze_logo_genea, url_absolue(find_in_path('/images/communicate.gif')));
 			icone_horizontale(_T('genea:supprimer_arbre'), parametre_url(parametre_url(generer_url_ecrire("genea_naviguer"), "action", "efface"), "id_genea", $id_genea), $ze_logo_genea, "supprimer.gif");
 		}
 	fin_raccourcis();
