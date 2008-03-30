@@ -3,6 +3,11 @@ Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 - rendre les 'storage' independants de la class cfg_formulaire pour utiliser leur fonction lire/ecrire/effacer dans lire_config, ecrire_config, effacer_config
 
+v1.4.11 (30 03 2008)
+- corrections bugs sur 'cfg_id' modifie parfois a tord par new_id, 
+- rangements dans les classes depots, et retour de messages depuis les depots possible
+- depot 'tablepack' en nouvelle api
+
 v1.4.10 (29 03 2008)
 - corrections bugs sur : #CONFIG et |in_array{#CONFIG{nom,'',''}} (preferer #CONFIG{nom/,#ARRAY})
 - ecrire_config() n'a plus le parametre 'serialize', 

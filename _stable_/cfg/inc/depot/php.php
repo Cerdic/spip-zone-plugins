@@ -17,6 +17,7 @@ class cfg_depot_php
 	var $champs_id = array();
 	var $val = array();
 	var $param = array();
+	var $messages = array('message_ok'=>array(), 'message_erreur'=>array(), 'erreurs'=>array());
 	
 	var $_arbre = array();
 	
@@ -47,48 +48,49 @@ class cfg_depot_php
 	}
 	
 	
-	// recuperer les valeurs.
-	function lire() {
+	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
+	function charger(){
 		$fichier = $this->get_fichier();
 
 		// inclut une variable $cfg
-    	if (!@include $fichier) 
-    		return array(true, array()); // le fichier peut ne pas exister, ce n'est pas une erreur
-    	
-    	if (!$cfg OR !is_array($cfg)) 
-    		return array(true, array()); 
+    	if (!@include $fichier) {
+    		$this->_base = array();
+    	} elseif (!$cfg OR !is_array($cfg)) {
+    		$this->_base = array();
+    	} else {
+    		$this->_base = $cfg;	
+    	}
 
-    	$cfg = &$this->monte_arbre($cfg, $this->param->nom);
-    	$cfg = &$this->monte_arbre($cfg, $this->param->casier);
-    	$cfg = &$this->monte_arbre($cfg, $this->param->cfg_id);
+    	$this->_ici = &$this->_base;
+    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param->nom);
+    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param->casier);
+    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param->cfg_id);	
+    	return true;
+	}
+	
+	// recuperer les valeurs.
+	function lire() {
+		if (!$this->charger()){
+			return array(false, $this->val);	
+		}
+		
     	// utile ??
     	if ($this->param->cfg_id) {
     		$cles = explode('/', $this->param->cfg_id);
 			foreach ($this->champs_id as $i => $name) {
-				$cfg[$name] = $cles[$i];
+				$this->_ici[$name] = $cles[$i];
 		    }
     	}
-	    return array(true, $cfg);
+	    return array(true, $this->_ici);
 	}
 
 
 	// ecrit chaque enregistrement pour chaque champ
 	function ecrire() {
-		$fichier = $this->get_fichier();
-
-		// inclut une variable $cfg
-    	if (!@include $fichier) {
-    		$base = array();
-    	} elseif (!$cfg OR !is_array($cfg)) {
-    		$base = array();
-    	} else {
-    		$base = $cfg;	
-    	}
-
-    	$ici = &$base;
-    	$ici = &$this->monte_arbre($ici, $this->param->nom);
-    	$ici = &$this->monte_arbre($ici, $this->param->casier);
-    	$ici = &$this->monte_arbre($ici, $this->param->cfg_id);
+		if (!$this->charger()){
+			return array(false, $this->val);	
+		}
+		
 		foreach ($this->champs as $name => $def) {
 			if (isset($def['id'])) {
 				continue;
@@ -96,42 +98,29 @@ class cfg_depot_php
 
 			// applique une fonction sur le champ, si demande ?
 			// ... necessite de passer $this->types... API a revoir pour la validation de champs
-			$ici[$name] = isset($def['type_verif']) && ($cnv = $this->types[$def['type_verif']][2]) ?
+			$this->_ici[$name] = isset($def['type_verif']) && ($cnv = $this->types[$def['type_verif']][2]) ?
 				$cnv($this->val[$name]) : $this->val[$name];
 	    }
 
-		if (!$this->ecrire_fichier($base)){
+		if (!$this->ecrire_fichier($this->_base)){
 			return array(false, $this->val);
 		}
 		
-		return array(true, $ici);
+		return array(true, $this->_ici);
 	
 	}
 	
 	
 	// supprime chaque enregistrement pour chaque champ
 	function effacer(){
-		$fichier = $this->get_fichier();
-
-		// inclut une variable $cfg
-    	if (!@include $fichier) {
-    		$base = array();
-    	} elseif (!$cfg OR !is_array($cfg)) {
-    		$base = array();
-    	} else {
-    		$base = $cfg;	
-    	}
-
-		$this->_arbre = array();
-    	$ici = &$base;
-    	$ici = &$this->monte_arbre($ici, $this->param->nom);
-    	$ici = &$this->monte_arbre($ici, $this->param->casier);
-    	$ici = &$this->monte_arbre($ici, $this->param->cfg_id);	
+		if (!$this->charger()){
+			return array(false, $this->val);	
+		}
     	
     	// effacer les champs
     	foreach ($this->champs as $name => $def) {
 			if (isset($def['id'])) continue;
-			unset($ici[$name]);
+			unset($this->_ici[$name]);
 		}
 		
 		// supprimer les dossiers vides
@@ -142,7 +131,7 @@ class cfg_depot_php
 			unset($this->_arbre[$i][0][$this->_arbre[$i][1]]);
 		}
 		
-		return array($this->ecrire_fichier($base), $ici);
+		return array($this->ecrire_fichier($this->_base), $this->_ici);
 	}
 	
 	

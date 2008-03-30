@@ -19,6 +19,7 @@ class cfg_depot_metapack
 	var $champs_id = array();
 	var $val = array();
 	var $param = array();
+	var $messages = array('message_ok'=>array(), 'message_erreur'=>array(), 'erreurs'=>array());
 	
 	var $_arbre = array();
 	
@@ -32,41 +33,48 @@ class cfg_depot_metapack
 		}	
 	}
 	
+
+	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
+	function charger(){
+		$this->_base = @unserialize($GLOBALS['meta'][$this->param->nom]);
+		$this->_arbre = array();
+		$this->_ici = &$this->_base;
+    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param->casier);
+    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param->cfg_id);
+    	return true;	
+	}
+	
 	// recuperer les valeurs.
 	function lire()
 	{
-		if (!isset($GLOBALS['meta'][$this->param->nom])) 
-			$val = null;
-	    else 
-	    	$val = unserialize($GLOBALS['meta'][$this->param->nom]);
-	    	
-    	$val = &cfg_monte_arbre($val, $this->param->casier);
-    	$val = &cfg_monte_arbre($val, $this->param->cfg_id);
+		if (!$this->charger()){
+			return array(false, $this->val);	
+		}
+		$ici = &$this->_ici;
     	
         // utile ??
     	if ($this->param->cfg_id) {
     		$cles = explode('/', $this->param->cfg_id);
 			foreach ($this->champs_id as $i => $name) {
-				$val[$name] = $cles[$i];
+				$ici[$name] = $cles[$i];
 		    }
     	}
     	
     	// s'il y a des champs demandes, les retourner... sinon, retourner la base
     	// (cas de lire_config('metapack::nom') tout court)
     	if (count($this->champs)){
-    		$_val = array();
+    		$val = array();
 			foreach ($this->champs as $name => $def) {
-				$_val[$name] = $val[$name];
+				$val[$name] = $ici[$name];
 			}
-			$val = $_val;
+			$ici = $val;
     	}
 
-	    return array(true, $val);
+	    return array(true, $ici);
 	}
 
 
-	// ecrit chaque enregistrement de meta pour chaque champ
-	// pour ecrire une meta normale, on peut passer serialize a false
+	// ecrit une meta pour tous les champs
 	function ecrire()
 	{
   		// si pas de champs : on ecrit directement (ecrire_meta(metapack::nom,$val))...
@@ -76,17 +84,17 @@ class cfg_depot_metapack
   			return array(true, $this->val);
   		}
   		
-	    $base = unserialize($GLOBALS['meta'][$this->param->nom]);
-		$ici = &$base;
-		$ici = &$this->monte_arbre($ici, $this->param->casier);
-		$ici = &$this->monte_arbre($ici, $this->param->cfg_id);
+		if (!$this->charger()){
+			return array(false, $this->val);	
+		}
+		$ici = &$this->_ici;
 		
 		foreach ($this->champs as $name => $def) {
 			if (isset($def['id'])) continue;
 			$ici[$name] = $this->val[$name];
 		}
 
-		ecrire_meta($this->param->nom, serialize($base));
+		ecrire_meta($this->param->nom, serialize($this->_base));
 		if (defined('_COMPAT_CFG_192')) ecrire_metas();
 		return array(true, $ici);
 	}
@@ -101,11 +109,10 @@ class cfg_depot_metapack
   			return array(true, array());
   		}
   		
-	    $base = unserialize($GLOBALS['meta'][$this->param->nom]);
-	    $this->_arbre = array();
-		$ici = &$base;
-		$ici = &$this->monte_arbre($ici, $this->param->casier);
-		$ici = &$this->monte_arbre($ici, $this->param->cfg_id);
+		if (!$this->charger()){
+			return array(false, $this->val);	
+		}
+		$ici = &$this->_ici;
 
 		// supprimer les champs
 		foreach ($this->champs as $name => $def) {
@@ -138,8 +145,7 @@ class cfg_depot_metapack
 	function charger_args($args){
 		$args = explode('/',$args);
 		$this->param->nom = array_shift($args);
-		$champ = array_pop($args);
-		if ($champ) {
+		if ($champ = array_pop($args)) {
 			$this->champs = array($champ=>true);
 		}
 		$this->param->casier = implode('/',$args);

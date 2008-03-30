@@ -61,6 +61,7 @@ class cfg_formulaire_dist{
 		$this->params = array(
 			'champs' => &$this->champs, 
 			'champs_id' => &$this->champs_id,
+			'messages' => &$this->messages,
 			'val' => &$this->val,
 			'param' => &$this->param
 		);	
@@ -142,7 +143,7 @@ class cfg_formulaire_dist{
 		
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$securiser_action();
-				
+
 		// stockage des nouvelles valeurs
 		foreach ($this->champs as $name => $def) {
 			// enregistrement des valeurs postees
@@ -223,17 +224,19 @@ class cfg_formulaire_dist{
 		
 		// sinon modification (seulement si les types de valeurs attendus sont corrects)
 		} elseif (!($this->messages['message_erreur'] OR $this->messages['erreurs'])) {
-			
+	
 			// lorsque c'est un champ de type multi que l'on modifie 
 			// et si l'identifiant a change,  il faut soit le copier, soit de deplacer
-			$new_id = implode('/', array_map('_request', $this->champs_id));
-			if ($new_id != $this->param->cfg_id && !_request('_cfg_copier')) {
-				// et ne pas perdre les valeurs suite a l'effacement dans ce cas precis
-				$vals = $this->val;
-				$this->effacer();
-				$this->val = $vals;
+			if ($this->champs_id) {
+				$new_id = implode('/', array_map('_request', $this->champs_id));
+				if ($new_id != $this->param->cfg_id && !_request('_cfg_copier')) {
+					// et ne pas perdre les valeurs suite a l'effacement dans ce cas precis
+					$vals = $this->val;
+					$this->effacer();
+					$this->val = $vals;
+				}
+				$this->param->cfg_id = $new_id;
 			}
-			$this->param->cfg_id = $new_id;
 
 			// ecriture
 			$this->ecrire();
@@ -393,6 +396,11 @@ class cfg_formulaire_dist{
 			if (!isset($contexte['cfg_id']) && $this->param->cfg_id) {
 				$contexte['cfg_id'] = $this->param->cfg_id;
 			}
+			// passer id aussi
+			if (!isset($contexte['id']) && $this->param->cfg_id) {
+				$contexte['id'] = $this->param->cfg_id;
+			}			
+			
 			$val = $this->val ? array_merge($contexte, $this->val) : $contexte;
 			$this->fond_compile = recuperer_fond('fonds/cfg_' . $this->vue, $val);
 		}
@@ -432,7 +440,8 @@ class cfg_formulaire_dist{
 	
 	// lit les donnees depuis le depot
 	function lire(){
-		list ($ok, $val) = $this->depot->lire($this->params);
+		list ($ok, $val, $messages) = $this->depot->lire($this->params);
+		if ($messages) $this->messages = $messages;
 		if ($ok) {
 			$this->val = $val;	
 		} else {
@@ -444,7 +453,8 @@ class cfg_formulaire_dist{
 	
 	// Ecrit les donnees dans le depot
 	function ecrire() {
-		list ($ok, $val) = $this->depot->ecrire($this->params);
+		list ($ok, $val, $messages) = $this->depot->ecrire($this->params);
+		if ($messages) $this->messages = $messages;
 		if ($ok){
 			$this->val = $val;
 			$this->messages['message_ok'][] = $msg = _T('cfg:config_enregistree', array('nom' => $this->nom_config()));
@@ -463,7 +473,8 @@ class cfg_formulaire_dist{
 	// passees dans le fond et le formulaire garde les informations
 	// d'avant la suppression	
 	function effacer(){
-		list ($ok, $val) = $this->depot->effacer($this->params);
+		list ($ok, $val, $messages) = $this->depot->effacer($this->params);
+		if ($messages) $this->messages = $messages;
 		if ($ok) {
 			$this->val = $val;
 			$this->messages['message_ok'][] = $msg = _T('cfg:config_supprimee', array('nom' => $this->nom_config()));

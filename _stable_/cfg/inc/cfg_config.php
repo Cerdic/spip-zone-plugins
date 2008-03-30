@@ -432,7 +432,7 @@ function inc_cfg_analyse_param_dist(&$cfg){
 			//  quand la prise en compte de la colonne 'cfg' lors des restaurations de dump sera au point
 			$colonne = (count($table_colonne)>1)?array_pop($table_colonne):'extra';
 			// retrouver la table
-			list($table, $colid) = get_table_id($table_colonne[0]);			
+			list($table, $colid) = get_table_id($table_colonne[0]);
 			$params['storage'] = 'table';
 
 			$params['table']['nom'] = $table;

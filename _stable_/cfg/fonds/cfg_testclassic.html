@@ -21,6 +21,7 @@
 <!-- depot=meta -->
 <!-- onglet=non -->
 
+<!-- cfg_id=#SESSION{id_auteur} -->
 #CACHE{0}
 
 
@@ -33,7 +34,6 @@
 
 <fieldset>
 <legend><:cfg:storage_classic:></legend>
-
 		<label>Email webmaster</label>
 		<input type="text" name="email_webmaster" value="#ENV{email_webmaster}" size="30" />
 		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{email_webmaster})</span>]

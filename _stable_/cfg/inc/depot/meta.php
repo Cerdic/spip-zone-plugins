@@ -17,6 +17,7 @@ class cfg_depot_meta
 	var $champs_id = array();
 	var $val = array();
 	var $param = array();
+	var $messages = array('message_ok'=>array(), 'message_erreur'=>array(), 'erreurs'=>array());
 	
 	// version du depot
 	var $version = 2;
