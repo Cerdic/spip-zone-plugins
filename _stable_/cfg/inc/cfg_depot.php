@@ -60,8 +60,8 @@ class cfg_depot_dist{
 	
 	// ajoute les parametres transmis dans l'objet du depot
 	function add_params($params){
-		foreach ($params as $o=>&$v) {
-			$this->depot->$o = &$v;
+		foreach ($params as $o=>$v) {
+			$this->depot->$o = $v;
 		}	
 	}
 	

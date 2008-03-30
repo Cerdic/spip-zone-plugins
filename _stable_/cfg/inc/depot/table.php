@@ -32,8 +32,8 @@ class cfg_depot_table
 	
 	function cfg_depot_table($params=array())
 	{
-		foreach ($params as $o=>&$v) {
-			$this->$o = &$v;
+		foreach ($params as $o=>$v) {
+			$this->$o = $v;
 		}
 		
 		if (!$this->param->table) {
@@ -95,7 +95,7 @@ class cfg_depot_table
 	{
 		// charger
 		if (!$this->charger()){
-			return array(false, $this->val);	
+			return array(false, $this->val, $this->messages);	
 		}
 
         // utile ??
@@ -123,7 +123,7 @@ class cfg_depot_table
 	{
 		// charger
 		if (!$this->charger()){
-			return array(false, $this->val);	
+			return array(false, $this->val, $this->messages);	
 		}
 
 		if ($this->champs){
@@ -155,7 +155,7 @@ class cfg_depot_table
 	function effacer(){
 		// charger
 		if (!$this->charger()){
-			return array(false, $this->val);	
+			return array(false, $this->val, $this->messages);	
 		}
 		
 		$ok = !$this->_existe || sql_delete($this->param->table, $this->_where );	

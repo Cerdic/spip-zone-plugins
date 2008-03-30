@@ -26,8 +26,8 @@ class cfg_depot_php
 	
 	
 	function cfg_depot_php($params=array()) {
-		foreach ($params as $o=>&$v) {
-			$this->$o = &$v;
+		foreach ($params as $o=>$v) {
+			$this->$o = $v;
 		}
 	}
 	

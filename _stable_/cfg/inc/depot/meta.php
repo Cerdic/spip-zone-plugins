@@ -24,8 +24,8 @@ class cfg_depot_meta
 	
 	function cfg_depot_meta($params=array())
 	{
-		foreach ($params as $o=>&$v) {
-			$this->$o = &$v;
+		foreach ($params as $o=>$v) {
+			$this->$o = $v;
 		}	
 	}
 	

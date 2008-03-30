@@ -33,8 +33,8 @@ class cfg_depot_tablepack
 	
 	function cfg_depot_tablepack($params=array())
 	{
-		foreach ($params as $o=>&$v) {
-			$this->$o = &$v;
+		foreach ($params as $o=>$v) {
+			$this->$o = $v;
 		}	
 
 		if (!$this->param->colonne)	$this->param->colonne = 'cfg'; 
@@ -83,7 +83,7 @@ class cfg_depot_tablepack
 	{
 		// charger
 		if (!$this->charger()){
-			return array(false, $this->val);	
+			return array(false, $this->val, $this->messages);	
 		}
 		$ici = &$this->_ici;
 
@@ -112,7 +112,7 @@ class cfg_depot_tablepack
 	{
 		// charger
 		if (!$this->charger()){
-			return array(false, $this->val);	
+			return array(false, $this->val, $this->messages);	
 		}
 		$ici = &$this->_ici;
 		
@@ -134,7 +134,7 @@ class cfg_depot_tablepack
 	function effacer(){
 		// charger
 		if (!$this->charger()){
-			return array(false, $this->val);	
+			return array(false, $this->val, $this->messages);	
 		}
 		$ici = &$this->_ici;
 		

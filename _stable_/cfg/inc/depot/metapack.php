@@ -28,8 +28,8 @@ class cfg_depot_metapack
 	
 	function cfg_depot_metapack($params=array())
 	{
-		foreach ($params as $o=>&$v) {
-			$this->$o = &$v;
+		foreach ($params as $o=>$v) {
+			$this->$o = $v;
 		}	
 	}
 	
