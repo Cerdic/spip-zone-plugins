@@ -241,19 +241,6 @@ function spiplistes_format_abo_demande($id_auteur) {
 	return($result);
 }
 
-/* desabonnement de certaines listes uniquement */
-function spiplistes_desabonner_des_listes($id_auteur, $ids_liste) {
-	if(!is_array($ids_liste)) {
-		$ids_liste = array($ids_liste);
-	}
-	$query = "";
-	while ( list(,$val) = each($ids_liste) ) {
-		$query .= "DELETE FROM spip_autheur_listes WHERE id_auteur=".
-			_q($id_auteur)." AND id_liste="._q($id_liste).";";
-	}
-	__exec_multi_queries($query);
-}
-
 
 /* retourne l'id auteur depuis l'email */
 function spiplistes_idauteur_depuis_email ($email) {
