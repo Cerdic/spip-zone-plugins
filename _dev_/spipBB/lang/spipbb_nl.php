@@ -1,7 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -114,8 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_groupes' => 'Groepen gebruikers',
 	'membres_liste' => 'Ledenlijst',
 	'membres_profil' => 'Profiel',
-	'message_date' => 'Gepost op',
-	'message_sujet' => 'Onderwerp&nbsp;',
 	'messages' => 'Berichten',
 	'messages_derniers' => 'Laatste berichten',
 	'messages_non_lus_grand' => 'Geen nieuwe berichten',
@@ -124,14 +123,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_repondre' => 'Nieuw antwoord',
 	'messages_verifier' => 'Bericht nalezen',
 	'messages_voir_dernier' => 'Laatste bericht bekijken',
+	'message_date' => 'Gepost op',
+	'message_sujet' => 'Onderwerp&nbsp;',
 	'moderateurs' => 'Moderator(s)',
 	'mp' => 'Priv&eacute; bericht',
 
 	// N
-	'no_message' => 'Geen onderwerp of bericht komt overeen met je zoekopdracht',
 	'nom' => 'Gebruikersnaam',
 	'non_valide' => '<h2 style=\'color:red\'>Ongeldig e-mailadres</h2>',
 	'nouveaux_messages' => 'Nieuwe berichten',
+	'no_message' => 'Geen onderwerp of bericht komt overeen met je zoekopdracht',
 
 	// P
 	'page' => 'Pagina',
@@ -187,6 +188,8 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 	'sousrub_salon' => '&nbsp;Subrubriek / Salon<br />',
 	'statut' => 'Status',
 	'sujet' => 'Onderwerp&nbsp;',
+	'sujets' => 'Onderwerpen',
+	'sujets_aucun' => 'Momenteel geen onderwerp in dit forum',
 	'sujet_ajout' => 'Onderwerp toevoegen aan forum:<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Aankondiging onderwerp',
 	'sujet_auteur' => 'Auteur',
@@ -199,8 +202,6 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 	'sujet_valide' => 'Onderwerp ter goedkeuring',
 	'sujet_verifie' => 'Dit onderwerp nalezen',
 	'sujet_visites' => 'Bezoeken',
-	'sujets' => 'Onderwerpen',
-	'sujets_aucun' => 'Momenteel geen onderwerp in dit forum',
 	'sur' => '&nbsp;op&nbsp;',
 
 	// T
@@ -210,8 +211,8 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 	'titre_cadre_signature_obligatoire' => '<b>Handtekening</b> [Verplicht]<br />',
 	'total_messages' => 'Totaal aantal berichten',
 	'tous_forums' => 'Alle forums',
-	'tout_apropos' => 'Alles over',
 	'toutes_categories' => 'Alle categorieen',
+	'tout_apropos' => 'Alles over',
 
 	// V
 	'visites_jour' => 'Bezoeken vandaag',
@@ -219,10 +220,10 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 	'visites_semaine' => 'Bezoeken deze week',
 	'visiteurs_uniques' => 'Unieke bezoekers',
 	'voir' => 'BEKIJKEN',
+	'voirprofil' => 'Profiel bekijken van',
 	'voir_evolution' => 'Evolutie van de site bekijken',
 	'voir_message' => 'Dit bericht bekijken',
 	'voir_messages' => 'Nieuwe berichten bekijken',
-	'voirprofil' => 'Profiel bekijken van',
 
 	// W
 	'www' => 'WWW'

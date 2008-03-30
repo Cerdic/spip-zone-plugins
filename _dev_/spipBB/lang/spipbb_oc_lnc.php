@@ -1,7 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -114,8 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_groupes' => 'Grops d\'usanci&egrave;rs',
 	'membres_liste' => 'Lista dels Membres',
 	'membres_profil' => 'Perfil',
-	'message_date' => 'Postat lo&nbsp;',
-	'message_sujet' => 'Subj&egrave;cte&nbsp;',
 	'messages' => 'Messatges',
 	'messages_derniers' => 'Darri&egrave;rs Messatges',
 	'messages_non_lus_grand' => 'Pas de messatges n&ograve;us',
@@ -124,14 +123,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_repondre' => 'respondre',
 	'messages_verifier' => 'Verificar lo messatge',
 	'messages_voir_dernier' => 'Veire le darri&egrave;r messatge',
+	'message_date' => 'Postat lo&nbsp;',
+	'message_sujet' => 'Subj&egrave;cte&nbsp;',
 	'moderateurs' => 'Moderaire(s)',
 	'mp' => 'Messatge Privat',
 
 	// N
-	'no_message' => 'Cap de subj&egrave;cte o messatge corespond pas a v&ograve;stres crit&egrave;ris de rec&egrave;rca',
 	'nom' => 'Nom d\'usanci&egrave;r',
 	'non_valide' => '<h2 style=\'color:red\'>Adrei&ccedil;a electronica non valida</h2>',
 	'nouveaux_messages' => 'Messatges n&ograve;us',
+	'no_message' => 'Cap de subj&egrave;cte o messatge corespond pas a v&ograve;stres crit&egrave;ris de rec&egrave;rca',
 
 	// P
 	'page' => 'Pagina',
@@ -187,6 +188,8 @@ I a pas d\'operadors booleans, l\'operador implicit es a la gr&ograve;ssa un O l
 	'sousrub_salon' => '&nbsp;Sosrubrica / Salon<br />',
 	'statut' => 'Estatut',
 	'sujet' => 'Subj&egrave;cte&nbsp;',
+	'sujets' => 'Subj&egrave;ctes',
+	'sujets_aucun' => 'Pas cap de subj&egrave;ctes encara dins aquel forum',
 	'sujet_ajout' => 'Apondre un subj&egrave;cte al forum :<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Subj&egrave;cte Anonci',
 	'sujet_auteur' => 'Autor',
@@ -199,8 +202,6 @@ I a pas d\'operadors booleans, l\'operador implicit es a la gr&ograve;ssa un O l
 	'sujet_valide' => 'Subj&egrave;cte de validar',
 	'sujet_verifie' => 'Verificar aquel subj&egrave;cte',
 	'sujet_visites' => 'Vesitas',
-	'sujets' => 'Subj&egrave;ctes',
-	'sujets_aucun' => 'Pas cap de subj&egrave;ctes encara dins aquel forum',
 	'sur' => '&nbsp;sus&nbsp;',
 
 	// T
@@ -209,8 +210,8 @@ I a pas d\'operadors booleans, l\'operador implicit es a la gr&ograve;ssa un O l
 	'titre_cadre_signature_obligatoire' => '<b>Signatura</b> [Obligat&ograve;ria]<br />',
 	'total_messages' => 'Total messatges',
 	'tous_forums' => 'Totes los forums',
-	'tout_apropos' => 'Tot a prepaus de',
 	'toutes_categories' => 'Totas las categorias',
+	'tout_apropos' => 'Tot a prepaus de',
 
 	// V
 	'visites_jour' => 'Vesitas u&egrave;i',
@@ -218,10 +219,10 @@ I a pas d\'operadors booleans, l\'operador implicit es a la gr&ograve;ssa un O l
 	'visites_semaine' => 'Vesitas aquesta setmana',
 	'visiteurs_uniques' => 'Vesitaires unencs',
 	'voir' => 'VEIRE',
+	'voirprofil' => 'Veire lo perfil de',
 	'voir_evolution' => 'Veire l\'evolucion de las vesitas',
 	'voir_message' => 'Veire aquel messatge',
 	'voir_messages' => 'Veire&nbsp;los&nbsp;messatges n&ograve;us',
-	'voirprofil' => 'Veire lo perfil de',
 
 	// W
 	'www' => 'WWW'

@@ -1,7 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -114,8 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_groupes' => 'Gruppi di utenti',
 	'membres_liste' => 'Elenco dei membri',
 	'membres_profil' => 'Profilo',
-	'message_date' => 'Postato il&nbsp;',
-	'message_sujet' => 'Argomento&nbsp;',
 	'messages' => 'Messaggi',
 	'messages_derniers' => 'Messaggi Recenti',
 	'messages_non_lus_grand' => 'Nessun nuovo messaggio',
@@ -124,14 +123,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_repondre' => 'Nuova risposta',
 	'messages_verifier' => 'Verifica il messaggio',
 	'messages_voir_dernier' => 'Vedi l\'ultimo messaggio',
+	'message_date' => 'Postato il&nbsp;',
+	'message_sujet' => 'Argomento&nbsp;',
 	'moderateurs' => 'Moderatore/i',
 	'mp' => 'Messaggio Privato',
 
 	// N
-	'no_message' => 'Non &egrave; stato trovato alcun argomento o messaggio corrispondente ai criteri di ricerca inseriti',
 	'nom' => 'Nome dell\'utente',
 	'non_valide' => '<h2 style=\'color:red\'>Indirizzo email non valido</h2>',
 	'nouveaux_messages' => 'Nuovi messaggi',
+	'no_message' => 'Non &egrave; stato trovato alcun argomento o messaggio corrispondente ai criteri di ricerca inseriti',
 
 	// P
 	'page' => 'Pagina',
@@ -187,6 +188,8 @@ Le parole di lunghezza inferiore ai tre caratteri sono ignorate.',
 	'sousrub_salon' => '&nbsp;Sotto-rubrica / Stanza<br />',
 	'statut' => 'Status',
 	'sujet' => 'Argomento&nbsp;',
+	'sujets' => 'Argomenti',
+	'sujets_aucun' => 'Nessuna discussione in questo forum attualmente',
 	'sujet_ajout' => 'Aggiungi un argomento al forum:<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Argomento Annuncio',
 	'sujet_auteur' => 'Autore',
@@ -199,8 +202,6 @@ Le parole di lunghezza inferiore ai tre caratteri sono ignorate.',
 	'sujet_valide' => 'Argomento da convalidare',
 	'sujet_verifie' => 'Verifica questo argomento',
 	'sujet_visites' => 'Visite',
-	'sujets' => 'Argomenti',
-	'sujets_aucun' => 'Nessuna discussione in questo forum attualmente',
 	'sur' => '&nbsp;su&nbsp;',
 
 	// T
@@ -210,8 +211,8 @@ Le parole di lunghezza inferiore ai tre caratteri sono ignorate.',
 	'titre_cadre_signature_obligatoire' => '<b>Firma</b> [Obbligatoria]<br />',
 	'total_messages' => 'Messaggi totali',
 	'tous_forums' => 'Tutti i forum',
-	'tout_apropos' => 'Tutto su',
 	'toutes_categories' => 'Tutte le categorie',
+	'tout_apropos' => 'Tutto su',
 
 	// V
 	'visites_jour' => 'Visite di oggi',
@@ -219,10 +220,10 @@ Le parole di lunghezza inferiore ai tre caratteri sono ignorate.',
 	'visites_semaine' => 'Visite di questa settimana',
 	'visiteurs_uniques' => 'Visitatori unici',
 	'voir' => 'VEDI',
+	'voirprofil' => 'Vedi il profilo di',
 	'voir_evolution' => 'Vedi l\'evoluzione delle visite',
 	'voir_message' => 'Vedi questo messaggio',
 	'voir_messages' => 'Vedi&nbsp;i&nbsp;nuovi&nbsp;messaggi',
-	'voirprofil' => 'Vedi il profilo di',
 
 	// W
 	'www' => 'WWW'

@@ -1,7 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// Fichier source, a modifier sur svn://zone.spip.org/spip-zone/_plugins_/_dev_/spipBB
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -114,8 +113,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_groupes' => 'Groupes d\'utilisateurs',
 	'membres_liste' => 'Liste des Membres',
 	'membres_profil' => 'Profil',
-	'message_date' => 'Post&eacute; le&nbsp;',
-	'message_sujet' => 'Sujet&nbsp;',
 	'messages' => 'Messages',
 	'messages_derniers' => 'Derniers Messages',
 	'messages_non_lus_grand' => 'Pas de nouveaux messages',
@@ -124,14 +121,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_repondre' => 'Nouvelle r&eacute;ponse',
 	'messages_verifier' => 'V&eacute;rifier le message',
 	'messages_voir_dernier' => 'Voir le dernier message',
+	'message_date' => 'Post&eacute; le&nbsp;',
+	'message_sujet' => 'Sujet&nbsp;',
 	'moderateurs' => 'Mod&eacute;rateur(s)',
 	'mp' => 'Message Priv&eacute;',
 
 	// N
-	'no_message' => 'Aucun sujet ou message ne correspond &agrave; vos crit&egrave;res de recherche',
 	'nom' => 'Nom d\'utilisateur',
 	'non_valide' => '<h2 style=\'color:red\'>Adresse email non valide</h2>',
 	'nouveaux_messages' => 'Nouveaux messages',
+	'no_message' => 'Aucun sujet ou message ne correspond &agrave; vos crit&egrave;res de recherche',
 
 	// P
 	'page' => 'Page',
@@ -187,6 +186,8 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 	'sousrub_salon' => '&nbsp;Sous-rubrique / Salon<br />',
 	'statut' => 'Statut',
 	'sujet' => 'Sujet&nbsp;',
+	'sujets' => 'Sujets',
+	'sujets_aucun' => 'Pas de sujet dans ce forum pour l\'instant',
 	'sujet_ajout' => 'Ajouter un sujet au forum :<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Sujet Annonce',
 	'sujet_auteur' => 'Auteur',
@@ -199,8 +200,6 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 	'sujet_valide' => 'Sujet &agrave; valider',
 	'sujet_verifie' => 'V&eacute;rifier ce sujet',
 	'sujet_visites' => 'Visites',
-	'sujets' => 'Sujets',
-	'sujets_aucun' => 'Pas de sujet dans ce forum pour l\'instant',
 	'sur' => '&nbsp;sur&nbsp;',
 
 	// T
@@ -210,8 +209,8 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 	'titre_cadre_signature_obligatoire' => '<b>Signature</b> [Obligatoire]<br />',
 	'total_messages' => 'Total messages',
 	'tous_forums' => 'Tous les forums',
-	'tout_apropos' => 'Tout &agrave; propos de',
 	'toutes_categories' => 'Toutes les cat&eacute;gories',
+	'tout_apropos' => 'Tout &agrave; propos de',
 
 	// V
 	'visites_jour' => 'Visites aujourd\'hui',
@@ -219,10 +218,10 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 	'visites_semaine' => 'Visites cette semaine',
 	'visiteurs_uniques' => 'Visiteurs uniques',
 	'voir' => 'VOIR',
+	'voirprofil' => 'Voir le profil de',
 	'voir_evolution' => 'Voir l\'&eacute;volution des visites',
 	'voir_message' => 'Voir ce message',
 	'voir_messages' => 'Voir&nbsp;les&nbsp;nouveaux&nbsp;messages',
-	'voirprofil' => 'Voir le profil de',
 
 	// W
 	'www' => 'WWW'

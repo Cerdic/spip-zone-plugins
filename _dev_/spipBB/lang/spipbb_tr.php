@@ -1,7 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -114,8 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_groupes' => 'Kullan&#305;c&#305; gruplar&#305;',
 	'membres_liste' => '&Uuml;ye listesi',
 	'membres_profil' => 'Profil',
-	'message_date' => 'G&ouml;nderildi&#287;i tarih&nbsp;',
-	'message_sujet' => 'Konu&nbsp;',
 	'messages' => '&#304;letiler',
 	'messages_derniers' => 'Son iletiler',
 	'messages_non_lus_grand' => 'Yeni ileti yok',
@@ -124,14 +123,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_repondre' => 'Yeni cevap',
 	'messages_verifier' => '&#304;letiyi kontrol et',
 	'messages_voir_dernier' => 'Son iletiyi g&ouml;ster',
+	'message_date' => 'G&ouml;nderildi&#287;i tarih&nbsp;',
+	'message_sujet' => 'Konu&nbsp;',
 	'moderateurs' => 'Moderat&ouml;r(ler)',
 	'mp' => '&Ouml;zel &#304;leti',
 
 	// N
-	'no_message' => 'Arama kriterlerinize uyan bir ileti veya konu yok',
 	'nom' => 'Kullan&#305;c&#305; ismi',
 	'non_valide' => '<h2 style=\'color:red\'>Ge&ccedil;ersiz e-posta adresi</h2>',
 	'nouveaux_messages' => 'Yeni iletiler',
+	'no_message' => 'Arama kriterlerinize uyan bir ileti veya konu yok',
 
 	// P
 	'page' => 'Sayfa',
@@ -183,6 +184,8 @@ Boole operat&ouml;rleri yoktur, normal olarak mant&#305;ksal VEYA kullan&#305;l&
 	'sousrub_salon' => '&nbsp;Alt-b&ouml;l&uuml;m / Salon<br />',
 	'statut' => 'Durum',
 	'sujet' => 'Konu&nbsp;',
+	'sujets' => 'KOnular',
+	'sujets_aucun' => '&#350;u anda bu forumda konu yok',
 	'sujet_ajout' => 'Foruma bir konu ekle :<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Duyuru Konusu',
 	'sujet_auteur' => 'Yazar',
@@ -195,8 +198,6 @@ Boole operat&ouml;rleri yoktur, normal olarak mant&#305;ksal VEYA kullan&#305;l&
 	'sujet_valide' => 'Onaylanacak konu',
 	'sujet_verifie' => 'Konuyu kontrol et',
 	'sujet_visites' => 'Ziyaret',
-	'sujets' => 'KOnular',
-	'sujets_aucun' => '&#350;u anda bu forumda konu yok',
 	'sur' => '&nbsp;&uuml;zerinde&nbsp;',
 
 	// T
@@ -206,8 +207,8 @@ Boole operat&ouml;rleri yoktur, normal olarak mant&#305;ksal VEYA kullan&#305;l&
 	'titre_cadre_signature_obligatoire' => '<b>&#304;mza</b> [Zorunlu]<br />',
 	'total_messages' => 'T&uuml;m iletiler',
 	'tous_forums' => 'T&uuml;m forumlar',
-	'tout_apropos' => 'Hakk&#305;nda her&#351;ey',
 	'toutes_categories' => 'T&uuml;m kategoriler',
+	'tout_apropos' => 'Hakk&#305;nda her&#351;ey',
 
 	// V
 	'visites_jour' => 'Bu g&uuml;nk&uuml; ziyaretler',
@@ -215,10 +216,10 @@ Boole operat&ouml;rleri yoktur, normal olarak mant&#305;ksal VEYA kullan&#305;l&
 	'visites_semaine' => 'Bu haftaki ziyaretler',
 	'visiteurs_uniques' => 'Tek ("unique") ziyaret&ccedil;iler',
 	'voir' => 'G&Ouml;STER',
+	'voirprofil' => '&#350;u ki&#351;inin profilini g&ouml;ster',
 	'voir_evolution' => 'Ziyaretlerin geli&#351;imini g&ouml;ster',
 	'voir_message' => 'Bu iletiyi g&ouml;ster',
 	'voir_messages' => 'Yeni&nbsp;iletileri&nbsp;g&ouml;ster',
-	'voirprofil' => '&#350;u ki&#351;inin profilini g&ouml;ster',
 
 	// W
 	'www' => 'WWW'

@@ -1,7 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -49,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'dans_forum' => 'in the forum',
 	'date' => 'Subscribed the',
-	'deja_enregistree' => 'This email address is already registered<p><a href=\'spip_pass.php3\'>[ Forgotten password? ]</a></p>',
+	'deja_enregistree' => 'This email address is already registered<p><a href=\'spip.php?action=pass\'>[ Forgotten password? ]</a></p>',
 	'dernier' => '&nbsp;Last<br />',
 
 	// E
@@ -114,8 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_groupes' => 'Users group',
 	'membres_liste' => 'List of Members',
 	'membres_profil' => 'Profile',
-	'message_date' => 'Posted the&nbsp;',
-	'message_sujet' => 'Subject&nbsp;',
 	'messages' => 'Messages',
 	'messages_derniers' => 'Last Messages',
 	'messages_non_lus_grand' => 'No new messages',
@@ -124,14 +123,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_repondre' => 'New reply',
 	'messages_verifier' => 'Check the message',
 	'messages_voir_dernier' => 'See the last message',
+	'message_date' => 'Posted the&nbsp;',
+	'message_sujet' => 'Subject&nbsp;',
 	'moderateurs' => 'Moderator(s)',
 	'mp' => 'Private Message',
 
 	// N
-	'no_message' => 'No subject or message corresponds to your search criteria',
 	'nom' => 'Username',
 	'non_valide' => '<h2 style=\'color:red\'>Invalid address</h2>',
 	'nouveaux_messages' => 'New messages',
+	'no_message' => 'No subject or message corresponds to your search criteria',
 
 	// P
 	'page' => 'Page',
@@ -187,6 +188,8 @@ Words of less than three letters are ignored.',
 	'sousrub_salon' => '&nbsp;Sub-section / Lounge<br />',
 	'statut' => 'Status',
 	'sujet' => 'Subjet&nbsp;',
+	'sujets' => 'Subjets',
+	'sujets_aucun' => 'There is no subject in this forum at present',
 	'sujet_ajout' => 'Add a subject to the forum:<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Subject of announcement',
 	'sujet_auteur' => 'Author',
@@ -199,8 +202,6 @@ Words of less than three letters are ignored.',
 	'sujet_valide' => 'Subject to validate',
 	'sujet_verifie' => 'Check this subject',
 	'sujet_visites' => 'Visits',
-	'sujets' => 'Subjets',
-	'sujets_aucun' => 'There is no subject in this forum at present',
 	'sur' => '&nbsp;on&nbsp;',
 
 	// T
@@ -210,8 +211,8 @@ Words of less than three letters are ignored.',
 	'titre_cadre_signature_obligatoire' => '<b>Signature</b> [Required]<br />',
 	'total_messages' => 'Total messages',
 	'tous_forums' => 'All forums',
-	'tout_apropos' => 'All about',
 	'toutes_categories' => 'All categories',
+	'tout_apropos' => 'All about',
 
 	// V
 	'visites_jour' => 'Today\'s visits',
@@ -219,10 +220,10 @@ Words of less than three letters are ignored.',
 	'visites_semaine' => 'This week\'s visits',
 	'visiteurs_uniques' => 'Unique visitors',
 	'voir' => 'SEE',
+	'voirprofil' => 'See the profile of',
 	'voir_evolution' => 'See visits evolution',
 	'voir_message' => 'See this message',
 	'voir_messages' => 'Show&nbsp;new&nbsp;messages',
-	'voirprofil' => 'See the profile of',
 
 	// W
 	'www' => 'WWW'

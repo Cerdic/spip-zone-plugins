@@ -1,7 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -114,8 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_groupes' => 'Skupiny u&#382;ivatel&#367;',
 	'membres_liste' => 'Seznamy &#269;len&#367;',
 	'membres_profil' => 'Profil',
-	'message_date' => 'Odesl&aacute;no dne&nbsp;',
-	'message_sujet' => 'P&#345;edm&#283;t&nbsp;',
 	'messages' => 'Zpr&aacute;vy',
 	'messages_derniers' => 'Posledn&iacute; zpr&aacute;vy',
 	'messages_non_lus_grand' => '&#381;&aacute;dn&eacute; nov&eacute; zpr&aacute;vy',
@@ -124,14 +123,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_repondre' => 'Nov&aacute; odpov&#283;&#271;',
 	'messages_verifier' => 'Zkontrolovat zpr&aacute;vu',
 	'messages_voir_dernier' => 'Zobrazit posledn&iacute; zpr&aacute;vu',
+	'message_date' => 'Odesl&aacute;no dne&nbsp;',
+	'message_sujet' => 'P&#345;edm&#283;t&nbsp;',
 	'moderateurs' => 'Moder&aacute;tor/moder&aacute;to&#345;i',
 	'mp' => 'Soukrom&aacute; zpr&aacute;va',
 
 	// N
-	'no_message' => 'Vyhled&aacute;vac&iacute;m krit&eacute;ri&iacute;m nedopov&iacute;d&aacute; &#382;&aacute;dn&yacute; p&#345;edm&#283;t, resp. zpr&aacute;va.',
 	'nom' => 'U&#382;ivatelsk&eacute; jm&eacute;no',
 	'non_valide' => '<h2 style=\'color:red\'>Neplatn&yacute; e-mail</h2>',
 	'nouveaux_messages' => 'Nov&eacute; zpr&aacute;vy',
+	'no_message' => 'Vyhled&aacute;vac&iacute;m krit&eacute;ri&iacute;m nedopov&iacute;d&aacute; &#382;&aacute;dn&yacute; p&#345;edm&#283;t, resp. zpr&aacute;va.',
 
 	// P
 	'page' => 'Strana',
@@ -187,6 +188,8 @@ Slova obsahuj&iacute;c m&eacute;n&#283; ne&#382; t&#345;i p&iacute;smena se igno
 	'sousrub_salon' => '&nbsp;Podsekce/sal&oacute;n<br />',
 	'statut' => 'Status',
 	'sujet' => 'P&#345;edm&#283;t&nbsp;',
+	'sujets' => 'P&#345;edm&#283;ty',
+	'sujets_aucun' => 'V t&eacute;to diskusn&iacute; skupin&#283; prozat&iacute;m neexistuje &#382;&aacute;dn&yacute; p&#345;edm&#283;t',
 	'sujet_ajout' => 'P&#345;idat p&#345;edm&#283;t do diskusn&iacute; skupiny:<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'P&#345;edm&#283;t - ozn&aacute;men&iacute;',
 	'sujet_auteur' => 'Autor',
@@ -199,8 +202,6 @@ Slova obsahuj&iacute;c m&eacute;n&#283; ne&#382; t&#345;i p&iacute;smena se igno
 	'sujet_valide' => 'P&#345;edm&#283;t ke schv&aacute;len&iacute;',
 	'sujet_verifie' => 'Zkontrolovat p&#345;edm&#283;t',
 	'sujet_visites' => 'N&aacute;v&#353;t&#283;vy',
-	'sujets' => 'P&#345;edm&#283;ty',
-	'sujets_aucun' => 'V t&eacute;to diskusn&iacute; skupin&#283; prozat&iacute;m neexistuje &#382;&aacute;dn&yacute; p&#345;edm&#283;t',
 	'sur' => '&nbsp;o/z&nbsp;',
 
 	// T
@@ -210,8 +211,8 @@ Slova obsahuj&iacute;c m&eacute;n&#283; ne&#382; t&#345;i p&iacute;smena se igno
 	'titre_cadre_signature_obligatoire' => '<b>Podpis</b> [povinn&yacute; &uacute;daj]<br />',
 	'total_messages' => 'Zpr&aacute;vy celkem',
 	'tous_forums' => 'V&#353;echny diskusn&iacute; skupiny',
-	'tout_apropos' => 'V&#353;e ohledn&#283;',
 	'toutes_categories' => 'V&#353;echny kategorie',
+	'tout_apropos' => 'V&#353;e ohledn&#283;',
 
 	// V
 	'visites_jour' => 'Dne&#353;n&iacute; n&aacute;v&#353;t&#283;vnost',
@@ -219,10 +220,10 @@ Slova obsahuj&iacute;c m&eacute;n&#283; ne&#382; t&#345;i p&iacute;smena se igno
 	'visites_semaine' => 'N&aacute;v&#353;t&#283;vy tento t&yacute;den',
 	'visiteurs_uniques' => 'Jedine&#269;n&iacute; n&aacute;v&#353;t&#283;vn&iacute;ci',
 	'voir' => 'ZOBRAZIT',
+	'voirprofil' => 'Zobrazit profil:',
 	'voir_evolution' => 'Zobrazit v&yacute;voj n&aacute;v&#353;t&#283;vnosti',
 	'voir_message' => 'Zobrazit zpr&aacute;vu',
 	'voir_messages' => 'Zobrazit nov&eacute; zpr&aacute;vy',
-	'voirprofil' => 'Zobrazit profil:',
 
 	// W
 	'www' => 'WWW'

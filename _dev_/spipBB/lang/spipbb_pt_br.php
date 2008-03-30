@@ -1,7 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -114,8 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_groupes' => 'Grupos de usu&aacute;rios',
 	'membres_liste' => 'Lista de Membros',
 	'membres_profil' => 'Perfil',
-	'message_date' => 'Postado em&nbsp;',
-	'message_sujet' => 'Assunto&nbsp;',
 	'messages' => 'Mensagens',
 	'messages_derniers' => '&Uacute;ltimas mensagens',
 	'messages_non_lus_grand' => 'N&atilde;o h&aacute; novas mensagens',
@@ -124,14 +123,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_repondre' => 'Nova resposta',
 	'messages_verifier' => 'Verificar a mensagem',
 	'messages_voir_dernier' => 'Ver a &uacute;ltima mensagem',
+	'message_date' => 'Postado em&nbsp;',
+	'message_sujet' => 'Assunto&nbsp;',
 	'moderateurs' => 'Moderador(es)',
 	'mp' => 'Mensagem privada',
 
 	// N
-	'no_message' => 'Nenhum assunto ou mensagem corresponde aos seus crit&eacute;rios de busca',
 	'nom' => 'Nome do usu&aacute;rio',
 	'non_valide' => '<h2 style=\'color:red\'>Endere&ccedil;o de e-mail inv&aacute;lido</h2>',
 	'nouveaux_messages' => 'Novas mensagens',
+	'no_message' => 'Nenhum assunto ou mensagem corresponde aos seus crit&eacute;rios de busca',
 
 	// P
 	'page' => 'P&aacute;gina',
@@ -189,6 +190,8 @@ As palavras com menos de tr&ecirc;s letras s&atilde;o ignoradas.',
 	'sousrub_salon' => '&nbsp;Subse&ccedil;&atilde;o / Sal&atilde;o<br />',
 	'statut' => 'Status',
 	'sujet' => 'Assunto&nbsp;',
+	'sujets' => 'Assuntos',
+	'sujets_aucun' => 'No momento n&atilde;o h&aacute; assuntos neste f&oacute;rum',
 	'sujet_ajout' => 'Adicionar um assunto ao f&oacute;rum:<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Assunto Aviso',
 	'sujet_auteur' => 'Autor',
@@ -201,8 +204,6 @@ As palavras com menos de tr&ecirc;s letras s&atilde;o ignoradas.',
 	'sujet_valide' => 'Assunto para validar',
 	'sujet_verifie' => 'Verificar este assunto',
 	'sujet_visites' => 'Visitas',
-	'sujets' => 'Assuntos',
-	'sujets_aucun' => 'No momento n&atilde;o h&aacute; assuntos neste f&oacute;rum',
 	'sur' => '&nbsp;em&nbsp;',
 
 	// T
@@ -212,8 +213,8 @@ Use este formul&aacute;rio com cuidado...',
 	'titre_cadre_signature_obligatoire' => '<b>Assinatura</b> [obrigat&oacute;rio]<br />',
 	'total_messages' => 'Total mensagens',
 	'tous_forums' => 'Todos os f&oacute;runs',
-	'tout_apropos' => 'Tudo sobre',
 	'toutes_categories' => 'Todas as categorias',
+	'tout_apropos' => 'Tudo sobre',
 
 	// V
 	'visites_jour' => 'Visitas hoje',
@@ -221,10 +222,10 @@ Use este formul&aacute;rio com cuidado...',
 	'visites_semaine' => 'Visitas esta semana',
 	'visiteurs_uniques' => 'Visitantes &uacute;nicos',
 	'voir' => 'VER',
+	'voirprofil' => 'Ver o perfil de',
 	'voir_evolution' => 'Ver a evolu&ccedil;&atilde;o das visitas',
 	'voir_message' => 'Ver esta mensagem',
 	'voir_messages' => 'Ver&nbsp;as&nbsp;novas&nbsp;mensagens',
-	'voirprofil' => 'Ver o perfil de',
 
 	// W
 	'www' => 'WWW'

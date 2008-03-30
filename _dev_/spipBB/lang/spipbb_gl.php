@@ -1,7 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -114,8 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_groupes' => 'Grupos de usuarios',
 	'membres_liste' => 'Lista de membros',
 	'membres_profil' => 'Perfil',
-	'message_date' => 'Remitido o&nbsp;',
-	'message_sujet' => 'Asunto&nbsp;',
 	'messages' => 'Mensaxes',
 	'messages_derniers' => '&Uacute;ltimas mensaxes',
 	'messages_non_lus_grand' => 'Non hai novas mensaxes',
@@ -124,14 +123,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_repondre' => 'Nova resposta',
 	'messages_verifier' => 'Verificar a mensaxe',
 	'messages_voir_dernier' => 'Ver a &uacute;ltima mensaxe',
+	'message_date' => 'Remitido o&nbsp;',
+	'message_sujet' => 'Asunto&nbsp;',
 	'moderateurs' => 'Moderador(es/as)',
 	'mp' => 'Mensaxe Privada;',
 
 	// N
-	'no_message' => 'Non hai ning&uacute;n asunto ou mensaxe que corresponda co criterio de procura introducido',
 	'nom' => 'Nome de usuario',
 	'non_valide' => '<h2 style=\'color:red\'>O enderezo de correo non &eacute; v&aacute;lido</h2>',
 	'nouveaux_messages' => 'Novas mensaxes',
+	'no_message' => 'Non hai ning&uacute;n asunto ou mensaxe que corresponda co criterio de procura introducido',
 
 	// P
 	'page' => 'P&aacute;xina',
@@ -187,6 +188,8 @@ As palabras de menos de tres letras son ignoradas.',
 	'sousrub_salon' => '&nbsp;Subtema / Sal&oacute;n<br />',
 	'statut' => 'Estatuto',
 	'sujet' => 'Asunto&nbsp;',
+	'sujets' => 'Asuntos',
+	'sujets_aucun' => 'Non hai ning&uacute;n asunto neste foro neste intre',
 	'sujet_ajout' => 'Engadir un asunto ao foro :<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Suxeito de anuncio',
 	'sujet_auteur' => 'Autor',
@@ -199,8 +202,6 @@ As palabras de menos de tres letras son ignoradas.',
 	'sujet_valide' => 'Asunto proposto para validaci&oacute;n',
 	'sujet_verifie' => 'Comprobar este asunto',
 	'sujet_visites' => 'Visitas',
-	'sujets' => 'Asuntos',
-	'sujets_aucun' => 'Non hai ning&uacute;n asunto neste foro neste intre',
 	'sur' => '&nbsp;verbo de&nbsp;',
 
 	// T
@@ -210,8 +211,8 @@ As palabras de menos de tres letras son ignoradas.',
 	'titre_cadre_signature_obligatoire' => '<b>Sinatura</b> [Obrigada]<br />',
 	'total_messages' => 'Total de mensaxes',
 	'tous_forums' => 'Todos os foros',
-	'tout_apropos' => 'Todo por proposta de',
 	'toutes_categories' => 'Todas as categor&iacute;as',
+	'tout_apropos' => 'Todo por proposta de',
 
 	// V
 	'visites_jour' => 'Visitas de hoxe',
@@ -219,10 +220,10 @@ As palabras de menos de tres letras son ignoradas.',
 	'visites_semaine' => 'Visitas desta semana',
 	'visiteurs_uniques' => 'Visitantes &uacute;nicos',
 	'voir' => 'VER',
+	'voirprofil' => 'Ver o perfil de',
 	'voir_evolution' => 'Ver a evoluci&oacute;n das visitas',
 	'voir_message' => 'Ver esta mensaxe',
 	'voir_messages' => 'Ver as mensaxes novas',
-	'voirprofil' => 'Ver o perfil de',
 
 	// W
 	'www' => 'WWW'

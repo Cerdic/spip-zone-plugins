@@ -1,7 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -114,8 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_groupes' => 'Nutzergruppe',
 	'membres_liste' => 'Mitgliedsliste',
 	'membres_profil' => 'Profil',
-	'message_date' => 'Gepostet am',
-	'message_sujet' => 'Thema',
 	'messages' => 'Nachrichten',
 	'messages_derniers' => 'Letzte Nachrichten',
 	'messages_non_lus_grand' => 'Keine neuen Nachrichten',
@@ -124,14 +123,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_repondre' => 'Neue Antwort',
 	'messages_verifier' => 'Nachricht pr&uuml;fen',
 	'messages_voir_dernier' => 'Letzte Nachricht anzeigen',
+	'message_date' => 'Gepostet am',
+	'message_sujet' => 'Thema',
 	'moderateurs' => 'Moderator(en)',
 	'mp' => 'Private Nachricht',
 
 	// N
-	'no_message' => 'Keine Nachricht oder Thema entspricht ihrem Suchbegriff',
 	'nom' => 'Benutzername',
 	'non_valide' => '<h2 style=\'color:red\'>ung&uuml;ltige E-Maisl Adresse</h2>',
 	'nouveaux_messages' => 'Neue Nachrichten',
+	'no_message' => 'Keine Nachricht oder Thema entspricht ihrem Suchbegriff',
 
 	// P
 	'page' => 'Seite',
@@ -187,6 +188,8 @@ Worte mit weniger als drei Buchstaben werden ignoriert.',
 	'sousrub_salon' => 'Unterrubrik / Raum<br />',
 	'statut' => 'Status',
 	'sujet' => 'Thema',
+	'sujets' => 'Themen',
+	'sujets_aucun' => 'Dieses Forum hat noch keine Themen',
 	'sujet_ajout' => 'Neues Thema im Forum anlegen:<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Angek&uuml;ndigtes Thema',
 	'sujet_auteur' => 'Autor',
@@ -199,8 +202,6 @@ Worte mit weniger als drei Buchstaben werden ignoriert.',
 	'sujet_valide' => 'Themen &uuml;berpr&uuml;fen',
 	'sujet_verifie' => 'Dieses Thema &uuml;berpr&uuml;fen',
 	'sujet_visites' => 'Besuche',
-	'sujets' => 'Themen',
-	'sujets_aucun' => 'Dieses Forum hat noch keine Themen',
 	'sur' => '&nbsp;&uuml;ber&nbsp;',
 
 	// T
@@ -210,8 +211,8 @@ Worte mit weniger als drei Buchstaben werden ignoriert.',
 	'titre_cadre_signature_obligatoire' => '<b>Unterschrift</b> [obligatorisch]<br />',
 	'total_messages' => 'Beitr&auml;ge insgesamt',
 	'tous_forums' => 'Alle Foren',
-	'tout_apropos' => 'Alles &uuml;ber',
 	'toutes_categories' => 'Alle Kategorien',
+	'tout_apropos' => 'Alles &uuml;ber',
 
 	// V
 	'visites_jour' => 'Besuche von heute',
@@ -219,10 +220,10 @@ Worte mit weniger als drei Buchstaben werden ignoriert.',
 	'visites_semaine' => 'Besuche in dieser Woche',
 	'visiteurs_uniques' => 'Eindeutige Besucher',
 	'voir' => 'ANZEIGEN',
+	'voirprofil' => 'Anzeige des Profils von',
 	'voir_evolution' => 'Entwicklung der Besuche anzeigen',
 	'voir_message' => 'Diesen Beitrag anzeigen',
 	'voir_messages' => 'Neue&nbsp;Beitr&auml;&uuml;ge&nbsp;anzeigen',
-	'voirprofil' => 'Anzeige des Profils von',
 
 	// W
 	'www' => 'WWW'

@@ -1,7 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -114,8 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_groupes' => 'Grupuri de utilizatori',
 	'membres_liste' => 'Lista membrilor',
 	'membres_profil' => 'Profil',
-	'message_date' => 'Trimis la data&nbsp;',
-	'message_sujet' => 'Subiect&nbsp;',
 	'messages' => 'Mesaje',
 	'messages_derniers' => 'Ultimele mesaje',
 	'messages_non_lus_grand' => 'Nu exist&#259; mesaje noi',
@@ -124,14 +123,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_repondre' => 'Un nou r&#259;spuns',
 	'messages_verifier' => 'Verifica&#355;i mesajul',
 	'messages_voir_dernier' => 'Vede&#355;i ultimul mesaj',
+	'message_date' => 'Trimis la data&nbsp;',
+	'message_sujet' => 'Subiect&nbsp;',
 	'moderateurs' => 'Moderator(i)',
 	'mp' => 'Mesaj personal',
 
 	// N
-	'no_message' => 'Nici un subiect sau mesaj nu corespunde criteriilor de c&#259;utare indicate',
 	'nom' => 'Nume de utilizator',
 	'non_valide' => '<h2 style=\'color:red\'>Adres&#259; email invalid&#259;</h2>',
 	'nouveaux_messages' => 'Mesaje noi',
+	'no_message' => 'Nici un subiect sau mesaj nu corespunde criteriilor de c&#259;utare indicate',
 
 	// P
 	'page' => 'Pagina',
@@ -185,6 +186,8 @@ Cuvintele de mai pu&#355;in de trei litere sunt ignorate.',
 	'sousrub_salon' => '&nbsp;Sub-rubric&#259; / Salon<br />',
 	'statut' => 'Statut',
 	'sujet' => 'Subiect&nbsp;',
+	'sujets' => 'Subiecte',
+	'sujets_aucun' => 'Nici un subiect disponibil, pentru moment, &icirc;n acest forum ',
 	'sujet_ajout' => 'Ad&#259;uga&#355;i un subiect la forum:<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Subiect Anun&#355;',
 	'sujet_auteur' => 'Autor',
@@ -197,8 +200,6 @@ Cuvintele de mai pu&#355;in de trei litere sunt ignorate.',
 	'sujet_valide' => 'Subiect acceptat',
 	'sujet_verifie' => 'Verifica&#355;i acest subiect',
 	'sujet_visites' => 'Vizite',
-	'sujets' => 'Subiecte',
-	'sujets_aucun' => 'Nici un subiect disponibil, pentru moment, &icirc;n acest forum ',
 	'sur' => '&nbsp;pe&nbsp;',
 
 	// T
@@ -208,8 +209,8 @@ Utiliza&#355;i formularul cu precau&#355;ie...',
 	'titre_cadre_signature_obligatoire' => '<b>Semn&#259;tura</b> [Obligatorie]<br />',
 	'total_messages' => 'Total mesaje',
 	'tous_forums' => 'Toate forum-urile',
-	'tout_apropos' => 'Totul &icirc;n leg&#259;tur&#259; cu ',
 	'toutes_categories' => 'Toate categoriile',
+	'tout_apropos' => 'Totul &icirc;n leg&#259;tur&#259; cu ',
 
 	// V
 	'visites_jour' => 'Vizite ast&#259;zi',
@@ -217,10 +218,10 @@ Utiliza&#355;i formularul cu precau&#355;ie...',
 	'visites_semaine' => 'Vizitele acestei s&#259;pt&#259;m&acirc;ni',
 	'visiteurs_uniques' => 'Vizitatori unici',
 	'voir' => 'VEDE&#354;I',
+	'voirprofil' => 'Vede&#355;i profilul lui',
 	'voir_evolution' => 'Vede&#355;i evolu&#355;ia vizitelor',
 	'voir_message' => 'Vede&#355;i mesajul',
 	'voir_messages' => 'Vede&#355;i mesajele noi',
-	'voirprofil' => 'Vede&#355;i profilul lui',
 
 	// W
 	'www' => 'WWW'

@@ -1,7 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -114,8 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_groupes' => 'Strollad implijerien',
 	'membres_liste' => 'Listenn an Izili',
 	'membres_profil' => 'Aelad',
-	'message_date' => '<MODIF>Kaset d\'an&nbsp;',
-	'message_sujet' => 'Sujed',
 	'messages' => 'Kemennadenno&ugrave;',
 	'messages_derniers' => 'Kemennadenno&ugrave; diwezha&ntilde;',
 	'messages_non_lus_grand' => 'Kemennadenn nevez ebet',
@@ -124,14 +123,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_repondre' => '<MODIF>Respont nevez',
 	'messages_verifier' => '<MODIF>Gwiria&ntilde; ar c\'hemennadenn',
 	'messages_voir_dernier' => 'Gwelet ar c\'hemennadenn ziwezha&ntilde;',
+	'message_date' => '<MODIF>Kaset d\'an&nbsp;',
+	'message_sujet' => 'Sujed',
 	'moderateurs' => '<MODIF>Kasour(ien)',
 	'mp' => '<MODIF>Gerig Prevez',
 
 	// N
-	'no_message' => '<MODIF>N\'eus sujed na kemennadenn ebet o klota&ntilde; gant ar pezh emaoc\'h o klask',
 	'nom' => 'Anv implijer',
 	'non_valide' => '<h2 style=\'color:red\'>Postel direizh</h2>',
 	'nouveaux_messages' => 'Kemennadenno&ugrave; nevez',
+	'no_message' => '<MODIF>N\'eus sujed na kemennadenn ebet o klota&ntilde; gant ar pezh emaoc\'h o klask',
 
 	// P
 	'page' => 'Pajenn',
@@ -187,6 +188,8 @@ Ne vez ket tennet kont ouzh ar gerio&ugrave; dindan 3 lizherenn.',
 	'sousrub_salon' => '&nbsp;Is-Rummad / Tachenn-Flapi&ntilde;<br />',
 	'statut' => 'Statud',
 	'sujet' => 'Sujed&nbsp;',
+	'sujets' => 'Sujedo&ugrave;',
+	'sujets_aucun' => 'Sujed ebet er forom evit poent',
 	'sujet_ajout' => '<MODIF>Ouzhpenna&ntilde; ur sujed d\'ar forom :<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Sujed Kemenn',
 	'sujet_auteur' => 'Skridaozer',
@@ -199,8 +202,6 @@ Ne vez ket tennet kont ouzh ar gerio&ugrave; dindan 3 lizherenn.',
 	'sujet_valide' => '<MODIF>Sujed da asanti&ntilde;',
 	'sujet_verifie' => '<MODIF>Gwiria&ntilde; ar sujed-ma&ntilde;',
 	'sujet_visites' => 'Gweladenno&ugrave;',
-	'sujets' => 'Sujedo&ugrave;',
-	'sujets_aucun' => 'Sujed ebet er forom evit poent',
 	'sur' => '&nbsp;war&nbsp;',
 
 	// T
@@ -210,8 +211,8 @@ Ne vez ket tennet kont ouzh ar gerio&ugrave; dindan 3 lizherenn.',
 	'titre_cadre_signature_obligatoire' => '<b>Sinadur</b> [Rediet]<br />',
 	'total_messages' => 'Kemennadenno&ugrave; en holl',
 	'tous_forums' => 'An holl foromo&ugrave;',
-	'tout_apropos' => '<MODIF>Pep tra diwar-benn',
 	'toutes_categories' => '<MODIF>An holl rummado&ugrave;',
+	'tout_apropos' => '<MODIF>Pep tra diwar-benn',
 
 	// V
 	'visites_jour' => 'Gweladenno&ugrave; hiziv',
@@ -219,10 +220,10 @@ Ne vez ket tennet kont ouzh ar gerio&ugrave; dindan 3 lizherenn.',
 	'visites_semaine' => 'Gweladenno&ugrave; ar sizhun-ma&ntilde;',
 	'visiteurs_uniques' => 'Gweladennerien unel',
 	'voir' => 'GWELET',
+	'voirprofil' => 'Gwelet Aelad',
 	'voir_evolution' => '<MODIF>Gwelet emdroadur ar gweladenno&ugrave;',
 	'voir_message' => 'Gwelet ar c\'hemennadenn-ma&ntilde;',
 	'voir_messages' => '<MODIF>Gwelet&nbsp;ar&nbsp;c\'hemennadenno&ugrave;&nbsp;nevez',
-	'voirprofil' => 'Gwelet Aelad',
 
 	// W
 	'www' => 'WWW'

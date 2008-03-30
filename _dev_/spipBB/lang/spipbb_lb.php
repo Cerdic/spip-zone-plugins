@@ -1,7 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -114,8 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_groupes' => 'Benotzer-Gruppen',
 	'membres_liste' => 'Members-L&euml;scht',
 	'membres_profil' => 'Profil',
-	'message_date' => 'Gesch&eacute;ckt den&nbsp;',
-	'message_sujet' => 'Sujet&nbsp;',
 	'messages' => 'Messagen',
 	'messages_derniers' => 'L&auml;scht Messagen',
 	'messages_non_lus_grand' => 'Keng nei Messagen',
@@ -124,14 +123,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_repondre' => 'Nei &Auml;ntwert',
 	'messages_verifier' => 'De Message kontroll&eacute;ieren',
 	'messages_voir_dernier' => 'Dee l&auml;schten Message weisen',
+	'message_date' => 'Gesch&eacute;ckt den&nbsp;',
+	'message_sujet' => 'Sujet&nbsp;',
 	'moderateurs' => 'Moderator(en)',
 	'mp' => 'Private Message',
 
 	// N
-	'no_message' => 'Et entspr&euml;cht kee Sujet oder Message &auml;rer Sich',
 	'nom' => 'Benotzer-Numm',
 	'non_valide' => '<h2 style=\'color:red\'>Falsch Email-Adress</h2>',
 	'nouveaux_messages' => 'Nei Messagen',
+	'no_message' => 'Et entspr&euml;cht kee Sujet oder Message &auml;rer Sich',
 
 	// P
 	'page' => 'S&auml;it',
@@ -187,6 +188,8 @@ Wierder mat manner w&eacute;i 3 Buchstawen ginn ignor&eacute;iert.',
 	'sousrub_salon' => '&nbsp;&Euml;nner-Rubrik / Salon<br />',
 	'statut' => 'Status',
 	'sujet' => 'Sujet&nbsp;',
+	'sujets' => 'Sujet\'en',
+	'sujets_aucun' => 'Momentan kee Sujet an d&euml;sem Forum',
 	'sujet_ajout' => 'E Sujet beim Forum derb&auml;i setzen:<br />&nbsp;&nbsp;..&nbsp;',
 	'sujet_annonce' => 'Sujet Annonce',
 	'sujet_auteur' => 'Auteur',
@@ -199,8 +202,6 @@ Wierder mat manner w&eacute;i 3 Buchstawen ginn ignor&eacute;iert.',
 	'sujet_valide' => 'Sujet ze valid&eacute;ieren',
 	'sujet_verifie' => 'Kontroll&eacute;iert d&euml;se Sujet',
 	'sujet_visites' => 'Visiten',
-	'sujets' => 'Sujet\'en',
-	'sujets_aucun' => 'Momentan kee Sujet an d&euml;sem Forum',
 	'sur' => '&nbsp;iwer&nbsp;',
 
 	// T
@@ -210,8 +211,8 @@ Benotzt d&euml;sen Formulaire mat Virsiicht...',
 	'titre_cadre_signature_obligatoire' => '<b>&Euml;nnerschr&euml;ft</b> [Obligator&euml;sch]<br />',
 	'total_messages' => 'Total Messagen',
 	'tous_forums' => 'All d\'Forum\'en',
-	'tout_apropos' => 'Alles iwer',
 	'toutes_categories' => 'All Kategorien',
+	'tout_apropos' => 'Alles iwer',
 
 	// V
 	'visites_jour' => 'Visiten haut',
@@ -219,10 +220,10 @@ Benotzt d&euml;sen Formulaire mat Virsiicht...',
 	'visites_semaine' => 'Visiten d&euml;s Woch',
 	'visiteurs_uniques' => 'Eenzel Visiteuren',
 	'voir' => 'KUCKEN',
+	'voirprofil' => 'Profil weisen vun',
 	'voir_evolution' => 'D\'Evolutioun vun de Visiten weisen',
 	'voir_message' => 'D&euml;se Message weisen',
 	'voir_messages' => 'D&eacute;i&nbsp;nei&nbsp;Messagen&nbsp;weisen',
-	'voirprofil' => 'Profil weisen vun',
 
 	// W
 	'www' => 'WWW'
