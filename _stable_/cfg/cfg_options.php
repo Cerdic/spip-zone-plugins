@@ -70,8 +70,7 @@ function balise_CONFIG($p) {
 	}
 
 	$p->code = 'lire_config(' . $arg . ',' . 
-		($sinon && $sinon != "''" ? $sinon : 'null') . ',' . 
-		($serialize ? $serialize : 'true') . ')';		// supprimer serialize quand tous les depots seront en version 2
+		($sinon && $sinon != "''" ? $sinon : 'null') . ')';	
 
 	return $p;
 }
