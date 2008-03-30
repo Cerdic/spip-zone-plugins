@@ -160,7 +160,7 @@ function spiplistes_listes_abonner ($id_auteur, $id_liste) {
 function spiplistes_listes_desabonner ($id_auteur, $id_liste) {
 	if(
 		(($id_auteur = intval($id_auteur)) > 0) 
-		&& (($id_liste = intval($id_lste)) > 0)
+		&& (($id_liste = intval($id_liste)) > 0)
 	) {
 		$sql_table = "spip_auteurs_listes";
 		$sql_where = array('id_auteur' => $id_auteur, 'id_liste' => $id_liste);
@@ -189,7 +189,7 @@ function spiplistes_strlen($out){
 
 
 // suspend les abonnements d'un compte
-function spiplistes_suspendre_abos($id_auteur) {
+function spiplistes_format_abo_suspendre ($id_auteur) {
 	return(spiplistes_format_abo_modifier($id_auteur));
 }
 
@@ -224,13 +224,19 @@ function spiplistes_format_abo_demande($id_auteur) {
 	$id_auteur = intval($id_auteur);
 	$result = false;
 	if($id_auteur > 0) {
+		/**/
 		if(spiplistes_spip_est_inferieur_193()) {
 			$result = sql_getfetsel("`spip_listes_format`", "spip_auteurs_elargis", "id_auteur=".sql_quote($id_auteur));
 		} else {
 			$result = sql_fetsel("`spip_listes_format`", "spip_auteurs_elargis", "id_auteur=".sql_quote($id_auteur));
 			$result = $result['spip_listes_format'];
 		}
+		/**/
+		/* Code à valider. Si ok, supprimer ci-dessus.
+		$GLOBALS['mysql_rappel_nom_base'] = false;
+		$result = sql_getfetsel("spip_listes_format", "spip_auteurs_elargis", "id_auteur=".sql_quote($id_auteur));
 		$result = spiplistes_format_est_correct($result) ? $result : false;
+		/**/
 	}
 	return($result);
 }

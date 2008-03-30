@@ -208,8 +208,8 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 					. "<label>\n"
 					. "<input name='abos_set[]' type='checkbox' value='$id_liste' title=\"$label\" $checked />\n"
 					. spiplistes_bullet_titre_liste('puce', $value['statut'], '', true)
-					. "<span class='titre'>".propre($value['titre'])."</span> \n"
-					. "<span class='description'>".propre($value['texte'])." </span>\n"
+					. "<span class='titre'>".typo($value['titre'])."</span> \n"
+					. "<span class='description'>".typo($value['texte'])." </span>\n"
 					. "<span class='periodicite'>($prochain_envoi)</span>\n"
 					. "</label></li>\n"
 					;
