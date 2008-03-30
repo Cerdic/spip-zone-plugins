@@ -1,14 +1,15 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aff_resume' => 'Visualizza i riassunti',
 	'afficher_sources' => 'Visualizza il sorgente',
+	'aff_resume' => 'Visualizza i riassunti',
 	'annee' => 'Anno',
 	'articles_recents_court' => 'Articoli recenti',
 
