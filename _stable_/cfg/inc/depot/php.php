@@ -182,13 +182,18 @@ $cfg = ' . var_export($contenu, true) . ';
 		if (!is_array($chemin)) {
 			$chemin = explode('/', $chemin);
 		}
+		if (!is_array($base)) {
+			$base = array();
+		}
+		
 		foreach ($chemin as $dossier) {
 			if (!isset($base[$dossier])) {
 				$base[$dossier] = array();
 			}
-	    	$this->_arbre[] = array(&$base, $dossier);
-	    	$base = &$base[$dossier];
+			$this->_arbre[] = array(&$base, $dossier);
+			$base = &$base[$dossier];
 		}
+		
 		return $base;
 	}
 }

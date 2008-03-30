@@ -15,7 +15,7 @@
 // metapack::prefixe_plugin
 // metapack::prefixe/casier/champ
 // tablepack::auteur@extra:8/prefixe/casier/champ
-// tablepack::~login@extra/prefixe/casier/champ
+// tablepack::~id_auteur@extra/prefixe/casier/champ
 //
 // en l'absence du nom de depot (gauche des ::) cette fonction prendra comme suit :
 // ~ en premier caractere : tablepack
@@ -68,15 +68,15 @@ function inc_lire_config_dist($cfg='', $def=null){
 
 
 
-/*
- * 
- * ecrire_config($chemin, $valeur) 
- * permet d'enregistrer une configuration
- * 
- */
+//
+// 
+// ecrire_config($chemin, $valeur) 
+// permet d'enregistrer une configuration
+// 
+//
 function ecrire_config($cfg='', $valeur=null){
 	$ecrire = charger_fonction("ecrire_config","inc");
-	return $ecrire($cfg, $valeur, $serialize);	
+	return $ecrire($cfg, $valeur);	
 }
 
 function inc_ecrire_config_dist($cfg='', $valeur=null){ // supprimer $serialize ensuite
@@ -85,10 +85,10 @@ function inc_ecrire_config_dist($cfg='', $valeur=null){ // supprimer $serialize 
 }
 
 
-/*
- * effacer_config($chemin) 
- * permet de supprimer une config 
- */
+//
+// effacer_config($chemin) 
+// permet de supprimer une config 
+//
 function effacer_config($cfg=''){
 	$effacer = charger_fonction("effacer_config","inc");
 	return $effacer($cfg);	

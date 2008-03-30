@@ -66,7 +66,7 @@ function balise_CONFIG($p) {
 	// a remplacer par  |in_array{#CONFIG{toto/,#ARRAY}} ou |in_array{#CONFIG{toto,#ARRAY,''}}
 	if (($sinon === "''") AND ($serialize === "''") AND (false === strpos('::',$arg))){
 		$sinon = "array()";
-		$arg = "'metapack::".substr($arg,1);
+		$arg = "'metapack::'.".$arg;
 	}
 
 	$p->code = 'lire_config(' . $arg . ',' . 

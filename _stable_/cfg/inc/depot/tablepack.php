@@ -161,16 +161,16 @@ class cfg_depot_tablepack
 	
 	
 	// charger les arguments
-	// lire_config(tablepack::table->colonne:id/nom/casier/champ
-	// lire_config(tablepack::~id_auteur->colonne/chemin/champ
-	// lire_config(tablepack::~->colonne/chemin/champ
+	// lire_config(tablepack::table@colonne:id/nom/casier/champ
+	// lire_config(tablepack::~id_auteur@colonne/chemin/champ
+	// lire_config(tablepack::~@colonne/chemin/champ
 	function charger_args($args){
 		$args = explode('/',$args);
 		// cas ~id_auteur/
 		if ($args[0][0] == '~'){
 			$table = 'spip_auteurs';
 			$colid = array('id_auteur');
-			list($auteur, $colonne) = explode('->',array_shift($args));
+			list($auteur, $colonne) = explode('@',array_shift($args));
 			if (count($auteur)>1){
 				$id = substr($auteur,1);
 			} else {
@@ -212,20 +212,18 @@ class cfg_depot_tablepack
 		if (!is_array($chemin)) {
 			$chemin = explode('/', $chemin);
 		}
-		
-		if ($chemin){
-			if (!is_array($base)) {
-				$base = array();
-			}
-			
-			foreach ($chemin as $dossier) {
-				if (!isset($base[$dossier])) {
-					$base[$dossier] = array();
-				}
-				$this->_arbre[] = array(&$base, $dossier);
-				$base = &$base[$dossier];
-			}
+		if (!is_array($base)) {
+			$base = array();
 		}
+		
+		foreach ($chemin as $dossier) {
+			if (!isset($base[$dossier])) {
+				$base[$dossier] = array();
+			}
+			$this->_arbre[] = array(&$base, $dossier);
+			$base = &$base[$dossier];
+		}
+		
 		return $base;
 	}
 	

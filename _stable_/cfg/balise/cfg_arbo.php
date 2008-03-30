@@ -66,6 +66,8 @@ function affiche_arborescence($cfg='') {
 				// --></script>\n";
 				
 	$tableau = lire_config($cfg);
+	if ($c = @unserialize($tableau)) $tableau = $c;
+	
 	if (empty($cfg)) $cfg = 'spip_meta';
 	// parcours des donnees
 	$sortie .= 
