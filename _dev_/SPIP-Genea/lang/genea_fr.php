@@ -124,6 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // L
 'l_arborescence' => "L'arborescence",
+'lang_gedcom' => "FRENCH",
 'les_sources' => "Les sources",
 'les_unions' => "Les unions",
 'liste_des_lieux' => "Liste des lieux",

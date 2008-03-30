@@ -29,7 +29,7 @@ global
    $tables_genea;
 
 // -- Numero de version de la base installee ----------------------------
-$GLOBALS['version_base_genea'] = "1.01";
+$GLOBALS['version_base_genea'] = "1.02";
 
 // -- Liste des differentes tables utilisees par le plugin --------------
 $tables_genea = array(
@@ -46,7 +46,8 @@ $tables_genea = array(
 // -- Definition de la table genea --------------------------------------
 $spip_genea =  array(
      "id_genea" => "BIGINT(21) NOT NULL AUTO_INCREMENT",
-     "id_rubrique" => "BIGINT(21) DEFAULT '0' NOT NULL");
+     "id_rubrique" => "BIGINT(21) DEFAULT '0' NOT NULL",
+	 "nom_gedcom" => "VARCHAR(128) NOT NULL");
 
 $spip_genea_key = array(
    "PRIMARY KEY" => "id_genea, id_rubrique",
@@ -64,6 +65,8 @@ $spip_genea_individus = array(
 	"id_individu" => "BIGINT(21) NOT NULL AUTO_INCREMENT",
 	"patronyme" => "VARCHAR(255) NOT NULL",
 	"prenoms" => "VARCHAR(255) NOT NULL",
+	"suffixe" => "VARCHAR(255) NOT NULL",
+	"particule" => "VARCHAR(10) NOT NULL",
 	"surnom" => "VARCHAR(255) NOT NULL",
 	"sexe" => "ENUM('i', 'h', 'f') DEFAULT 'i' NOT NULL",
 	"civilite" => "VARCHAR(4) NOT NULL",
