@@ -7,6 +7,7 @@ Todo :
 v1.5.0 (30 03 2008)
 - nettoyages, suppression de la gestion de l'ancienne api des depots
 - retour du fonctionnement en php4 casse pendant la migration des depots
+- correction petit bug si $GLOBALS['meta']['nom'] est un array()
 
 v1.4.12 (30 03 2008)
 - depot 'table', c'etait le dernier...

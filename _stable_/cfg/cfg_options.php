@@ -63,7 +63,8 @@ function balise_CONFIG($p) {
 	$serialize = sinon(interprete_argument_balise(3,$p),"'true'");
 
 	// cas particulier historique : |in_array{#CONFIG{toto,'',''}}
-	// a remplacer par  |in_array{#CONFIG{toto/,#ARRAY}} ou |in_array{#CONFIG{toto,#ARRAY,''}}
+	// a remplacer par  |in_array{#CONFIG{toto/,#ARRAY}}
+	// il sert aussi a lire $GLOBALS['meta']['param'] qui serait un array()...
 	if (($sinon === "''") AND ($serialize === "''") AND (false === strpos('::',$arg))){
 		$sinon = "array()";
 		$arg = "'metapack::'.".$arg;

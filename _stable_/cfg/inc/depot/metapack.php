@@ -36,7 +36,8 @@ class cfg_depot_metapack
 
 	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
 	function charger(){
-		$this->_base = @unserialize($GLOBALS['meta'][$this->param->nom]);
+		
+		$this->_base = is_array($c = $GLOBALS['meta'][$this->param->nom]) ? $c : @unserialize($c);
 		$this->_arbre = array();
 		$this->_ici = &$this->_base;
     	$this->_ici = &$this->monte_arbre($this->_ici, $this->param->casier);
