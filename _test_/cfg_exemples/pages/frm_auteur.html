@@ -1,14 +1,14 @@
 <h1>Formulaire pour champs extra</h1>
 
-<h2>Colonne 'extra' sur la table 'auteur' et formulaire personnalisé : <a href="#EVAL{_DIR_PLUGIN_CFG_EXEMPLES}fonds/cfg_testform_auteur.html">fonds/cfg_testform_auteur.html</a></h2>
+<h2>Colonne 'extra' sur la table 'auteur' : <a href="#EVAL{_DIR_PLUGIN_CFG_EXEMPLES}fonds/cfg_testform_auteur.html">fonds/cfg_testform_auteur.html</a></h2>
 
 <p>
 <b>Code :</b><br />
-<code>[(&#035;CFG_ARBO{~[(&#035;SESSION{login})]})]</code><br />
+<code>[(&#035;CFG_ARBO{~[(&#035;SESSION{id_auteur})@extra]})]</code><br />
 <code>&#035;FORMULAIRE_CFG{testform_auteur,&#035;SESSION{id_auteur},formulaires/cfg_exemple_auteur}</code>
 </p>
 
-[(#CFG_ARBO{~[(#SESSION{login})]})]
+[(#CFG_ARBO{~[(#SESSION{id_auteur})@extra]})]
 
 #FORMULAIRE_CFG{testform_auteur,#SESSION{id_auteur}}
 		

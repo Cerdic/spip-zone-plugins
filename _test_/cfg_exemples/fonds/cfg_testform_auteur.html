@@ -11,7 +11,7 @@
 
 <div class="cfg_exemples_perso">
 Si je suis loggu&eacute;, le formulaire s'affiche...
-[(#SESSION{login}|?{' '})
+[(#SESSION{id_auteur}|?{' '})
 
 
 <form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
@@ -35,7 +35,7 @@ Si je suis loggu&eacute;, le formulaire s'affiche...
 
 
 Si afficher_toto = oui, TOTO s'affiche :
-[(#CONFIG{~[(#SESSION{login})]/afficher_toto}|=={oui}|?{' ',''})
+[(#CONFIG{~[(#SESSION{id_auteur})]@extra/testform_auteur/afficher_toto}|=={oui}|?{' ',''})
 	<b>TOTO est là !</b>
 ]		
 </div>
