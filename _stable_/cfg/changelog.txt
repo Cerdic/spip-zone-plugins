@@ -1,7 +1,12 @@
 Todo :
-- ménage de printemps dans les fonctions de cfg pour se caler sur le même principe que l'api des formulaires : charger/vérifier/traiter (ça n'en est pas loin)
+- faire une api claire pour les verifications des champs (classe css type_*)
+- faire une api pour permettre certains ajouts js (classe css 'cfg_pipette'? 'cfg_date'?)
+- gerer les input type 'file'
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
-- rendre les 'storage' independants de la class cfg_formulaire pour utiliser leur fonction lire/ecrire/effacer dans lire_config, ecrire_config, effacer_config
+
+v1.5.0 (30 03 2008)
+- nettoyages, suppression de la gestion de l'ancienne api des depots
+- retour du fonctionnement en php4 casse pendant la migration des depots
 
 v1.4.12 (30 03 2008)
 - depot 'table', c'etait le dernier...

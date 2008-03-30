@@ -7,9 +7,6 @@
 // version 2 (fonctions)
 // - charger_args
 // - lire, ecrire, effacer
-//
-// version 1 (fonctions)
-// - lire, modifier, modifier(true)
 
 
 class cfg_depot_dist{
@@ -44,7 +41,7 @@ class cfg_depot_dist{
 	//	);
 	//
 	//
-	function cfg_depot_dist($depot='metapack', &$cfg=false, $params=array()){
+	function cfg_depot_dist($depot='metapack', $params=array()){
 		if (!isset($params['param'])) {
 			$p = cfg_charger_classe('cfg_params');
 			$params['param'] = new $p;
@@ -53,8 +50,6 @@ class cfg_depot_dist{
 		include_spip('inc/depot/'.$depot);
 		if (class_exists($class = 'cfg_depot_'.$depot)) {
 			$this->depot = &new $class($params);
-		} elseif (class_exists($class = 'cfg_'.$depot)) {
-			$this->depot = &new $class($cfg);
 		} else {
 			die("CFG ne trouve pas le d&eacute;pot $depot");
 		}
@@ -72,22 +67,17 @@ class cfg_depot_dist{
 	
 	function lire($params = array()){
 		$this->add_params($params);
-		$r = $this->depot->lire();
-		if ($this->depot->version>1) return $r; // array($ok, $val)
-		else return array(true, $r);
-
+		return $this->depot->lire(); // array($ok, $val, $messages)
 	}
 		
 	function ecrire($params = array()){
 		$this->add_params($params);
-		if ($this->depot->version>1) return $this->depot->ecrire(); // array($ok, $val)
-		else return array($this->depot->modifier(false), $this->depot->val);
+		return $this->depot->ecrire(); // array($ok, $val, $messages)
 	}
 	
 	function effacer($params = array()){
 		$this->add_params($params);
-		if ($this->depot->version>1) return $this->depot->effacer(); // array($ok, $val)
-		else return array($this->depot->modifier(true), array());
+		return $this->depot->effacer(); // array($ok, $val, $messages)
 	}	
 	
 	function lire_config(){
@@ -98,8 +88,6 @@ class cfg_depot_dist{
 			return $s;	
 		} 
 	}
-	
-	
 	
 	function ecrire_config($valeur){
 		if ($nom = $this->nom_champ()) {

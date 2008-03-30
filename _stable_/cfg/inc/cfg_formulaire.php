@@ -116,7 +116,7 @@ class cfg_formulaire_dist{
 		$this->param->depot = strtolower(trim($this->param->depot));
 		$classto = 'cfg_' . $this->param->depot;
 		$cfg_depot = cfg_charger_classe('cfg_depot','inc');
-		$this->depot = new $cfg_depot($this->param->depot, $this, $this->params);
+		$this->depot = new $cfg_depot($this->param->depot, $this->params);
 		$ok &= $this->lire();
 		return $ok;
 	}
