@@ -1,7 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -9,9 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg' => 'CFG',
 	'choisir_module_a_configurer' => 'Choisis le module &agrave; configurer.',
+	'configuration_modules' => 'Configuration des modules',
 	'config_enregistree' => 'Enregistrement de <b>@nom@</b> effectu&eacute;',
 	'config_supprimee' => 'Suppression de <b>@nom@</b> effectu&eacute;',
-	'configuration_modules' => 'Configuration des modules',
 
 	// E
 	'erreur_enregistrement' => 'Une erreur est survenue lors de l\'enregistrement de <b>@nom@</b>',
