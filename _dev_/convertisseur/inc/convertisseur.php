@@ -426,11 +426,17 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 	if ($t = spip_fetch_array($s)) {
 		$id_article = $t['id_article'];
 	} else {
+		// regler id_secteur
+		$q = sql_fetsel('id_secteur', 'spip_rubriques',
+			'id_rubrique='.intval($id_rubrique)
+		);
+
 		$id_article = sql_insertq('spip_articles',
 			array(
 			'titre' => $ps,
 			'statut' => 'prepa',
 			'id_rubrique' => $id_rubrique,
+			'id_secteur' => $q['id_secteur'],
 			'ps' => $ps
 			)
 		);

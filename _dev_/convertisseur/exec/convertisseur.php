@@ -45,14 +45,12 @@ function exec_convertisseur(){
 		$conv_textes = array();
 
 		// upload ?
-		if (!count($_FILES)) {
-			$conv_textes[] = _request('conv_in');
-		}
-		else {
+		if (count($_FILES)) {
 			include_spip('inc/getdocument');
 			include_spip('inc/pclzip');
 			include_spip('inc/invalideur');  # pour purger_repertoire()
-			foreach ($_FILES as $file) {
+			foreach ($_FILES as $file)
+			if ($file['size']) {
 				chdir('..'); ## dirty
 				$a = deplacer_fichier_upload($file['tmp_name'],
 					'tmp/convertisseur.tmp');
@@ -94,6 +92,10 @@ function exec_convertisseur(){
 			}
 		}
 
+		// Pas de fichier : on regarde le POST
+		if (!count($conv_textes))
+			$conv_textes[] = _request('conv_in');
+
 		// convertir le charset ?
 		$convert_charset = (_request('convert_charset') == 'true');
 		$GLOBALS['auteur_session']['prefs']['convertisseur_cvcharset'] = $convert_charset;
@@ -129,6 +131,8 @@ function exec_convertisseur(){
 			}
 
 		}
+
+
 	} // fin action
 
 
