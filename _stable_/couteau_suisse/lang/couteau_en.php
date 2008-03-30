@@ -1,7 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -37,8 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'stats_auteur' => '@icon@ @nom@, @date@',
 
 	// T
-	'texte_formatspip' => 'ORIGINAL TEXT IN SPIP FORMAT',
 	'textes_formatspip' => 'ORIGINAL TEXTS IN SPIP FORMAT',
+	'texte_formatspip' => 'ORIGINAL TEXT IN SPIP FORMAT',
 	'titre' => 'Swiss Knife',
 
 	// V
