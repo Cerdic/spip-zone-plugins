@@ -224,7 +224,12 @@ function spiplistes_format_abo_demande($id_auteur) {
 	$id_auteur = intval($id_auteur);
 	$result = false;
 	if($id_auteur > 0) {
-		$result = sql_getfetsel("`spip_listes_format`", "spip_auteurs_elargis", "id_auteur=".sql_quote($id_auteur));
+		if(spiplistes_spip_est_inferieur_193()) {
+			$result = sql_getfetsel("`spip_listes_format`", "spip_auteurs_elargis", "id_auteur=".sql_quote($id_auteur));
+		} else {
+			$result = sql_fetsel("`spip_listes_format`", "spip_auteurs_elargis", "id_auteur=".sql_quote($id_auteur));
+			$result = $result['spip_listes_format'];
+		}
 		$result = spiplistes_format_est_correct($result) ? $result : false;
 	}
 	return($result);

@@ -40,7 +40,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	// 'date': date d'envoi souhaitee
 	// 'maj': date d'envoi du courrier mis a  jour par cron.
 	
-
 function cron_spiplistes_cron ($last_time) {
 	
 	include_spip('inc/utils');
@@ -48,6 +47,7 @@ function cron_spiplistes_cron ($last_time) {
 	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_api_courrier');
+	include_spip('inc/spiplistes_api_abstract_sql');
 
 spiplistes_log("CRON: cron_spiplistes_cron() <<", _SPIPLISTES_LOG_DEBUG);
 		

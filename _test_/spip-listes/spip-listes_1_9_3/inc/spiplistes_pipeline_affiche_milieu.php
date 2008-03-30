@@ -161,7 +161,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			
 			// récupère le format d'abonnement de id_auteur
 			$abo_format = spiplistes_format_abo_demande($id_auteur);
-
+		
 			// récupère la liste où auteur est abonné
 			$auteur_abos_current_list = spiplistes_listes_abonnements_auteur($id_auteur);
 			
