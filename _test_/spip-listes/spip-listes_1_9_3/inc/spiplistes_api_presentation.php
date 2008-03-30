@@ -32,12 +32,17 @@ include_spip('inc/presentation');
 */
 
 // retourne la puce qui va bien 
-function spiplistes_bullet_titre_liste ($titre, $statut, $return=false, $id=false) {
-	$result = $img = "";
-	$img = spiplistes_items_get_item('puce', $statut);
+function spiplistes_bullet_titre_liste ($type, $statut, $id=false, $return=false) {
+	$result = $img = $taille = "";
+	switch($type) {
+		case 'puce':
+			$taille = "width='9' height='9'";
+			break;
+	}
+	$img = spiplistes_items_get_item($type, $statut);
 	$alt = spiplistes_items_get_item('alt', $statut);
 	if($img) {
-		$result = "<img src='$img' alt='$alt' ".(!empty($id) ? "id='$id'" : "")." border='0' />\n";
+		$result = "<img src='$img' alt='".$alt."' ".(!empty($id) ? "id='$id'" : "")." $taille border='0' />\n";
 	}
 	if($return) return($result);
 	else echo($result);

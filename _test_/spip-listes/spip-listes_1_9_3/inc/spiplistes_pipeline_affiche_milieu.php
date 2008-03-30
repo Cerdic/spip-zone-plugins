@@ -28,8 +28,7 @@ function spiplistes_auteur_abonnement () {
 
 	$id_auteur = intval(_request('id_auteur'));
 	if($id_auteur > 0) {
-		$sql_result = spiplistes_sql_select_simple("email,statut", "spip_auteurs", "id_auteur=$id_auteur", true);
-		if($row = spip_fetch_array($sql_result)) {
+		if($row = sql_fetsel("email,statut", "spip_auteurs", "id_auteur=$id_auteur")) {
 			if(strlen($auteur_email = $row['email']) > 3) {
 				return(spiplistes_auteur_abonnement_details ($id_auteur, $row['statut'], $auteur_email));
 			}
@@ -94,16 +93,13 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				$abos_set = _request('abos_set');
 				$abo_ajoute = array();
 				$abo_retire = array();
-				$auteur_current_list = array(); // liste des abonnements de id_auteur
-				$sql_result = spiplistes_sql_select_simple ("id_liste", "spip_auteurs_listes", "id_auteur=$id_auteur", false);
-				while ($row = spip_fetch_array($sql_result)) {
-					$auteur_current_list[] = $row['id_liste'];
-				}
+				// liste des abonnements de id_auteur
+				$auteur_abos_current_list = spiplistes_listes_abonnements_auteur($id_auteur);
 				// ajoute/retire les abonnements désirés
 				if(count($abos_set)) {
 					// Abonnements ?
 					foreach($abos_set as $value) {
-						if(!in_array($value, $auteur_current_list)) {
+						if(!in_array($value, $auteur_abos_current_list)) {
 							$abo_ajoute[] = $value;
 						}
 					}
@@ -119,7 +115,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 						}
 					}
 					// Désabonnements ?
-					foreach($auteur_current_list as $value) {
+					foreach($auteur_abos_current_list as $value) {
 						if(!in_array($value, $abos_set)) {
 							$abo_retire[] = $value;
 						}
@@ -164,23 +160,10 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			}
 			
 			// récupère le format d'abonnement de id_auteur
-			$abo_format = "";
-			$sql_query = "SELECT `spip_listes_format` FROM spip_auteurs_elargis WHERE id_auteur=$id_auteur";
-			if($sql_result = spip_query($sql_query)) {
-				$row = spip_fetch_array($sql_result);
-				$abo_format = $row['spip_listes_format'];
-				if(!spiplistes_format_est_correct($abo_format)) {
-					$abo_format = "";
-				}
-			}
-			
+			$abo_format = spiplistes_format_abo_demande($id_auteur);
+
 			// récupère la liste où auteur est abonné
-			$sql_query = "SELECT id_liste FROM spip_auteurs_listes WHERE id_auteur=$id_auteur";
-			$sql_result = spip_query($sql_query);
-			$auteur_current_list = array(); 
-			while ($row = spip_fetch_array($sql_result)) {
-				$auteur_current_list[] = $row['id_liste'];
-			}
+			$auteur_abos_current_list = spiplistes_listes_abonnements_auteur($id_auteur);
 			
 			if(_request('btn_abonnements_valider')) {
 				$bouton_block = "bouton_block_visible";
@@ -211,11 +194,12 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				;
 			foreach($listes as $key=>$value) {
 				$id_liste = $value['id_liste'];
-				$checked = in_array($id_liste, $auteur_current_list) ? "checked='checked'" : "";
-				$label = in_array($id_liste, $auteur_current_list) ? "spiplistes:Arreter_abonnement_a" : "spiplistes:Abonner_a";
-				$label = _T($label)." ".$value['titre'];
+				$auteur_est_abonne = in_array($id_liste, $auteur_abos_current_list);
+				$checked = $auteur_est_abonne ? "checked='checked'" : "";
+				$label = $auteur_est_abonne ? "Arreter_abonnement_a" : "Abonner_a";
+				$label = _T("spiplistes:".$label)." ".$value['titre'];
 				$prochain_envoi = 
-					($value['date'] != _SPIPLISTES_ZERO_TIME_DATE)
+					($value['date'] > 0)
 					? _T('spiplistes:Prochain_envoi_').": <span style='font-weight:bold;'>".affdate_heure($value['date'])."</span>"
 					: _T('spiplistes:envoi_non_programme')
 					;
@@ -223,8 +207,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 					. "<li>\n"
 					. "<label>\n"
 					. "<input name='abos_set[]' type='checkbox' value='$id_liste' title=\"$label\" $checked />\n"
-					. "<img src='".spiplistes_items_get_item("puce", $value['statut'])."'"
-						. " alt=\"".spiplistes_items_get_item("alt", $value['statut'])."\" border='0' />\n"
+					. spiplistes_bullet_titre_liste('puce', $value['statut'], '', true)
 					. "<span class='titre'>".propre($value['titre'])."</span> \n"
 					. "<span class='description'>".propre($value['texte'])." </span>\n"
 					. "<span class='periodicite'>($prochain_envoi)</span>\n"

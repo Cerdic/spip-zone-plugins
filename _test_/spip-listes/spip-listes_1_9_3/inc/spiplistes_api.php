@@ -171,6 +171,16 @@ function spiplistes_listes_desabonner ($id_auteur, $id_liste) {
 	return(false);
 }
 
+// CP-20080330 : renvoie la liste des abonnements pour id_auteur
+function spiplistes_listes_abonnements_auteur ($id_auteur) {
+	$result = array();
+	$sql_result = sql_select ("id_liste", "spip_auteurs_listes", "id_auteur=".sql_quote($id_auteur));
+	while ($row = spip_fetch_array($sql_result)) {
+		$result[] = $row['id_liste'];
+	}
+	return($result);
+}
+
 //taille d'une chaine sans saut de lignes ni espaces ni punct
 function spiplistes_strlen($out){
 	$out = preg_replace("/([[:space:]]|[[:punct:]])+/", "", $out);
@@ -209,15 +219,13 @@ function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
 	return(false);
 }
 
+// renvoie le format d'abonnement d'un auteur
 function spiplistes_format_abo_demande($id_auteur) {
 	$id_auteur = intval($id_auteur);
 	$result = false;
 	if($id_auteur > 0) {
-		$sql_query = "SELECT `spip_listes_format` FROM spip_auteurs_elargis WHERE id_auteur=$id_auteur LIMIT 1";
-		if($row = spip_fetch_array(spip_query($sql_query))) {
-			$result = $row['spip_listes_format'];
-			$result = spiplistes_format_est_correct($result) ? $result : false;
-		}
+		$result = sql_getfetsel("`spip_listes_format`", "spip_auteurs_elargis", "id_auteur=".sql_quote($id_auteur));
+		$result = spiplistes_format_est_correct($result) ? $result : false;
 	}
 	return($result);
 }

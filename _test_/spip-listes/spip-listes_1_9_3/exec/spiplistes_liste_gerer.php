@@ -371,7 +371,7 @@ function exec_spiplistes_liste_gerer () {
 		. debut_cadre_relief("", true)
 		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n"
 		. "<tr><td valign='top'>\n"
-		. spiplistes_gros_titre(spiplistes_bullet_titre_liste($titre, $statut, true)." ".$titre, '', true)
+		. spiplistes_gros_titre(spiplistes_bullet_titre_liste('puce', $statut, '', true)." ".$titre, '', true)
 		. "</td>"
 		. "<td rowspan='2'>"
 		// le gros bouton modifier si besoin
@@ -432,7 +432,7 @@ function exec_spiplistes_liste_gerer () {
 			: ""
 			)
 		. "<span class='verdana2'>". _T('spiplistes:Cette_liste_est')." : "
-		. 	spiplistes_bullet_titre_liste($titre, $statut, true, 'img_statut')."</span>\n"
+		. 	spiplistes_bullet_titre_liste('puce', $statut, 'img_statut', true)."</span>\n"
 		.	(
 			($flag_editable)
 			? ""

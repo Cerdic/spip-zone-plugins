@@ -219,13 +219,14 @@ function compat_spiplistes_defs_dist() {
 			) {
 				$r = sql_fetch(sql_select($select, $from, $where
 					,$groupby, $orderby, $limit, $having, $serveur, $option!==false), $serveur, $option!==false);
+				$select = trim($select, "`");
 				return $r ? $r[$select] : NULL;
 			}',
 				
 
 		// n'existe pas en 1.9.2
 		// on cree la requete directement
-		# Nombre de ligne dans le résultat
+		# Nombre de lignes dans le résultat
 		'sql_count' => 
 			'(
 				$res, $serveur=\'\', $option=true
