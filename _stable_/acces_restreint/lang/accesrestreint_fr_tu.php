@@ -1,6 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier sur svn://zone.spip.org/spip-zone/_plugins_/_stable_/acces_restreint/
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -25,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_supprimer_zone' => 'Supprimer cette zone',
 	'info_ajouter_zones' => 'Ajouter toutes les zones',
 	'info_auteurs_lies_zone' => 'Les auteurs ayant acc&egrave;s &agrave; cette zone',
-	'info_page' => 'Cette page vous permet de g&eacute;rer les zones d\'acc&egrave;s restreint de votre site',
+	'info_page' => 'Cette page te permets de g&eacute;rer les zones d\'acc&egrave;s restreint de ton site',
 	'info_retirer_zone' => 'Enlever de la zone',
 	'info_retirer_zones' => 'Enlever de toutes les zones',
 
@@ -51,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'voir_toutes' => 'Voir toutes les zones',
 
 	// Z
-	'zone_numero' => 'ZONE NUM&Eacute;RO&nbsp;:',
+	'zone_numero' => 'ZONE NUM&Egrave;RO&nbsp;:',
 	'zone_restreinte_espace_prive' => 'Restreindre l\'acc&egrave;s &agrave; cette zone dans l\'espace priv&eacute;',
 	'zone_restreinte_publique' => 'Restreindre l\'acc&egrave;s &agrave; cette zone dans la partie publique'
 );
