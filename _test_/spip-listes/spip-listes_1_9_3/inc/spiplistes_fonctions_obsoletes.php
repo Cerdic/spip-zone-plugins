@@ -152,4 +152,32 @@ function spiplistes_desabonner_des_listes($id_auteur, $ids_liste) {
 
 
 
+/* validation des inscriptions depuis cookie_oubli */
+function spiplistes_valide_listes_depuis_cookie($cookie) {
+  // better query, but works only whith mysql>=4 :( 
+  $query_mysql4 = "UPDATE spip_auteurs_listes, spip_auteurs".
+	" SET spip_auteurs_listes.statut = 'valide',".
+	" spip_auteurs.cookie_oubli = ''".
+	" WHERE spip_auteurs.cookie_oubli="._q($cookie).
+	" AND spip_auteurs_listes.id_auteur = spip_auteurs.id_auteur".
+	" AND spip_auteurs.statut<>'5poubelle'";
+
+  // standard queries  (works with mysql3)
+  $id_auteur = spiplistes_idauteur_depuis_cookie_oubli($cookie);
+  $queries = "UPDATE spip_auteurs_listes SET".
+	" statut = 'valide'".
+	" WHERE id_auteur = ".$id_auteur.";";
+  $queries .= "UPDATE spip_auteurs SET".
+	  " cookie_oubli = ''".
+	  " WHERE id_auteur = ".$id_auteur.";";
+
+  //echo '<!-- validation = '.$query.' -->'."\n";
+  $res = __exec_multi_queries($queries);
+  if (! $res) {
+	echo "Validation impossible !";
+	exit();
+  }
+}
+
+
 ?>
