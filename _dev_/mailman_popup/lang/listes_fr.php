@@ -1,7 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
-// ** ne pas modifier sur la zone **
+// Fichier source, a modifier sur svn://zone.spip.org/spip-zone/_plugins_/_dev_/mailman_popup
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
