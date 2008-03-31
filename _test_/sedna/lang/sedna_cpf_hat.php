@@ -39,8 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'semaine' => 'Sem&egrave;n',
 	'sources' => 'Tout sous',
-	'synchro' => '<NEW>Synchroniser',
-	'synchro' => 'Senkwonize',
 	'synchro' => 'Senkwonize',
 	'synchro_titre' => 'Enskri sou sit sa-a lali atik yo ki pli li',
 	'syndication_ajour' => 'Rafr&egrave;chi imedyatman',
