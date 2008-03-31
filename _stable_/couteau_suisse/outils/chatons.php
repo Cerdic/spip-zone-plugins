@@ -39,9 +39,9 @@ function chatons_installe() {
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
-// si cette fonction n'existe pas, le plugin cherche alors  _T('couteau-desc:un_outil:aide');
+// si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function chatons_raccourcis() {
-	return _T('couteau-desc:chatons:aide', array('liste' => $GLOBALS['meta']['cs_chatons_racc']));
+	return _T('couteauprive:chatons:aide', array('liste' => $GLOBALS['meta']['cs_chatons_racc']));
 }
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
@@ -53,7 +53,7 @@ function chatons_BarreTypo($tr) {
 	$res = '';
 	for ($i=0; $i<$max; $i++)
 		$res .= "<a href=\"javascript:barre_inserer('{$chatons[0][$i]}',@@champ@@)\">{$chatons[1][$i]}</a>";
-	return $tr.'<tr><td><@@span@@>'._T('couteau-desc:chatons:nom')."</span>&nbsp;$res</td></tr>";
+	return $tr.'<tr><td><@@span@@>'._T('couteauprive:chatons:nom')."</span>&nbsp;$res</td></tr>";
 }
 
 ?>

@@ -172,7 +172,7 @@ function couteau_suisse_BT_toolbox($params) {
 function couteau_suisse_BT_gadgets($params) {
 	global $cs_metas_pipelines;
 	if (!isset($cs_metas_pipelines['BT_toolbox'])) return $params;
-	$params['flux'] .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['couteau_suisse']."','');", _DIR_PLUGIN_COUTEAU_SUISSE."/img/couteau-24.gif", _T('couteau-desc:raccourcis_barre'), $params['help']);
+	$params['flux'] .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['couteau_suisse']."','');", _DIR_PLUGIN_COUTEAU_SUISSE."/img/couteau-24.gif", _T('couteauprive:raccourcis_barre'), $params['help']);
 	return $params;
 }
 

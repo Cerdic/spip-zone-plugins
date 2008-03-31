@@ -86,9 +86,9 @@ cs_log("decoration_installe()");
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
-// si cette fonction n'existe pas, le plugin cherche alors  _T('couteau-desc:un_outil:aide');
+// si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function decoration_raccourcis() {
-	return _T('couteau-desc:decoration:aide', array('liste' => $GLOBALS['meta']['cs_decoration_racc']));
+	return _T('couteauprive:decoration:aide', array('liste' => $GLOBALS['meta']['cs_decoration_racc']));
 }
 
 function decoration_callback($matches) {
@@ -139,7 +139,7 @@ decoration_installe();
 	foreach($balises[4] as $v)
 		$res[] = "<a href=\"javascript:barre_raccourci$v[1],@@champ@@)\"><span class=\"cs_BT\">$v[0]</span></a>";
 	$res = join(' ', $res); 
-	return $tr.'<tr><td><p style="margin:0; line-height:1.8em;">'._T('couteau-desc:decoration:nom')."&nbsp;$res</p></td></tr>";
+	return $tr.'<tr><td><p style="margin:0; line-height:1.8em;">'._T('couteauprive:decoration:nom')."&nbsp;$res</p></td></tr>";
 }
 
 ?>

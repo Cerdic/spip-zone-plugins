@@ -107,7 +107,7 @@ add_outil( array(
 add_variable( array(
 	'nom' => 'paragrapher',
 	'format' => 'nombre',
-	'radio' => array(1 => 'item_oui', 0 => 'item_non', -1 => 'couteau-desc:par_defaut'),
+	'radio' => array(1 => 'item_oui', 0 => 'item_non', -1 => 'couteauprive:par_defaut'),
 	'defaut' => "-1",
 	'code:%s>=0' => "\$GLOBALS['toujours_paragrapher']=%s;",
 ));
@@ -187,8 +187,8 @@ define('_CS_PROPRE_QS', defined('_SPIP19300')?'propres_qs':'propres-qs');
 add_variable( array(
 	'nom' => 'radio_type_urls3',
 	'format' => 'chaine',
-	'radio' => array('page' => 'couteau-desc:page', 'html' => 'couteau-desc:html', 'propres' => 'couteau-desc:propres', 'propres2' => 'couteau-desc:propres2',
-			'standard' => 'couteau-desc:standard', _CS_PROPRE_QS => 'couteau-desc:propres-qs' ),
+	'radio' => array('page' => 'couteauprive:page', 'html' => 'couteauprive:html', 'propres' => 'couteauprive:propres', 'propres2' => 'couteauprive:propres2',
+			'standard' => 'couteauprive:standard', _CS_PROPRE_QS => 'couteauprive:propres-qs' ),
 	'radio/ligne' => 4,
 	'defaut' => "'page'",
 	'code' => "\$GLOBALS['type_urls']=%s;\n",
@@ -205,11 +205,11 @@ add_outil( array(
 	'categorie' => 'admin',
 ));
 
-	// ici on a besoin de trois boutons radio : _T('couteau-desc:js_jamais'), _T('couteau-desc:js_defaut') et _T('couteau-desc:js_toujours')
+	// ici on a besoin de trois boutons radio : _T('couteauprive:js_jamais'), _T('couteauprive:js_defaut') et _T('couteauprive:js_toujours')
 add_variable( array(
 	'nom' => 'radio_filtrer_javascript3',
 	'format' => 'nombre',
-	'radio' => array(-1 => 'couteau-desc:js_jamais', 0 => 'couteau-desc:js_defaut', 1 => 'couteau-desc:js_toujours'),
+	'radio' => array(-1 => 'couteauprive:js_jamais', 0 => 'couteauprive:js_defaut', 1 => 'couteauprive:js_toujours'),
 	'defaut' => 0,
 	// si la variable est non nulle, on code...
 	'code:%s' => "\$GLOBALS['filtrer_javascript']=%s;",
@@ -244,11 +244,11 @@ add_outil( array(
 	'pipeline:affichage_final' => 'Auteur_forum_affichage_final',
 ));
 
-	// ici on a besoin de trois boutons radio : _T('couteau-desc:par_defaut'), _T('couteau-desc:sf_amont') et _T('couteau-desc:sf_tous')
+	// ici on a besoin de trois boutons radio : _T('couteauprive:par_defaut'), _T('couteauprive:sf_amont') et _T('couteauprive:sf_tous')
 add_variable( array(
 	'nom' => 'radio_suivi_forums3',
 	'format' => 'chaine',
-	'radio' => array('defaut' => 'couteau-desc:par_defaut', '_SUIVI_FORUMS_REPONSES' => 'couteau-desc:sf_amont', '_SUIVI_FORUM_THREAD' => 'couteau-desc:sf_tous'),
+	'radio' => array('defaut' => 'couteauprive:par_defaut', '_SUIVI_FORUMS_REPONSES' => 'couteauprive:sf_amont', '_SUIVI_FORUM_THREAD' => 'couteauprive:sf_tous'),
 	'defaut' => '"defaut"',
 	// si la variable est differente de 'defaut' alors on codera le define
 	'code:%s!=="defaut"' => "define(%s, true);",
@@ -373,21 +373,21 @@ add_outil( array(
 add_variable( array(
 	'nom' => 'admin_travaux',
 	'format' => 'nombre',
-	'radio' => array(0 => 'couteau-desc:tous', 1 => 'couteau-desc:sauf_admin'),
+	'radio' => array(0 => 'couteauprive:tous', 1 => 'couteauprive:sauf_admin'),
 	'defaut' => 0,
 	'code' => "define('_en_travaux_ADMIN', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'message_travaux',
 	'format' => 'chaine',
-	'defaut' => "_T('couteau-desc:prochainement')",
+	'defaut' => "_T('couteauprive:prochainement')",
 	'lignes' => 3,
 	'code' => "define('_en_travaux_MESSAGE', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'titre_travaux',
 	'format' => 'nombre',
-	'radio' => array(1 => 'couteau-desc:travaux_titre', 0 => 'couteau-desc:travaux_nom_site'),
+	'radio' => array(1 => 'couteauprive:travaux_titre', 0 => 'couteauprive:travaux_nom_site'),
 	'defaut' => 1,
 	'code:%s' => "define('_en_travaux_TITRE', %s);",
 ));
@@ -400,19 +400,19 @@ add_outil( array(
 
 add_variable( array(
 	'nom' => 'cs_rss',
-	'check' => 'couteau-desc:cs_rss',
+	'check' => 'couteauprive:cs_rss',
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_CS', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'format_spip',
-	'check' => 'couteau-desc:format_spip',
+	'check' => 'couteauprive:format_spip',
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_ARTICLES', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'stat_auteurs',
-	'check' => 'couteau-desc:stat_auteurs',
+	'check' => 'couteauprive:stat_auteurs',
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_AUTEURS', %s);\n",
 ));
@@ -445,12 +445,12 @@ add_variable( array(
 	'nom' => 'auteurs_6',	'check' => 'info_visiteurs',	'defaut' => 0,	'code:%s' => "'6forum',",
 ));
 add_variable( array(
-	'nom' => 'auteurs_n',	'check' => 'couteau-desc:nouveaux',	'defaut' => 0,	'code:%s' => "'nouveau',",
+	'nom' => 'auteurs_n',	'check' => 'couteauprive:nouveaux',	'defaut' => 0,	'code:%s' => "'nouveau',",
 ));
 add_variable( array(
 	'nom' => 'auteurs_tout_voir',
 	'format' => 'nombre',
-	'radio' => array(1 => 'couteau-desc:statuts_tous', 0 => 'couteau-desc:statuts_spip'),
+	'radio' => array(1 => 'couteauprive:statuts_tous', 0 => 'couteauprive:statuts_spip'),
 	'radio/ligne' => 1,
 	'defaut' => 0,
 //	'code:!%s' => "@define('AUTEURS_DEFAUT', join(\$temp_auteurs,','));",
@@ -629,7 +629,7 @@ add_variable( array(
 add_variable( array(
 	'nom' => 'set_couleurs',
 	'format' => 'nombre',
-	'radio' => array(0 => 'couteau-desc:toutes_couleurs', 1 => 'couteau-desc:certaines_couleurs'),
+	'radio' => array(0 => 'couteauprive:toutes_couleurs', 1 => 'couteauprive:certaines_couleurs'),
 	'radio/ligne' => 1,
 	'defaut' => 0,
 	'code' => "define('_COULEURS_SET', %s);\n",
@@ -686,7 +686,7 @@ add_variable( array(
 add_variable( array(
 	'nom' => 'liens_orphelins',
 	'format' => 'nombre',
-	'radio' => array(-1 => 'item_non', 0 => 'couteau-desc:basique', 1 => 'couteau-desc:etendu'),
+	'radio' => array(-1 => 'item_non', 0 => 'couteauprive:basique', 1 => 'couteauprive:etendu'),
 	'defaut' => 0,
 	'code' => '$GLOBALS["liens_orphelins"]=%s;',
 ));
@@ -743,7 +743,7 @@ add_variable( array(
 ));
 add_variable( array(
 	'nom' => 'glossaire_js',
-	'radio' => array(0 => 'couteau-desc:glossaire_css', 1 => 'couteau-desc:glossaire_js'),
+	'radio' => array(0 => 'couteauprive:glossaire_css', 1 => 'couteauprive:glossaire_js'),
 	'format' => 'nombre',
 	'defaut' => 1,
 	'code:%s' => "define('_GLOSSAIRE_JS', %s);",

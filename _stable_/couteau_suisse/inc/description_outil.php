@@ -19,7 +19,7 @@ define('_VAR_OUTIL', cs_code_echappement("<!--  VAR-OUTIL -->\n", 'OUTIL'));
 @define('_CS_FORUM_NOM', _T('forum_votre_nom'));
 @define('_CS_TRAVAUX_TITRE', '<i>'._T('info_travaux_titre').'</i>');
 @define('_CS_NOM_SITE', '<i>'.$GLOBALS['meta']['nom_site'].'</i>');
-@define('_CS_CHOIX', _T('couteau-desc:votre_choix'));
+@define('_CS_CHOIX', _T('couteauprive:votre_choix'));
 
 // fin des constantes
 
@@ -62,7 +62,7 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 			.($valeur?'<b>':'')._T($cs_variable['check']).($valeur?'</b>':'').'</label>';
 
 		$ok_input .= _VAR_OUTIL;
-		$ok_valeur = $label._T($cs_variable['check'])._T($valeur?'couteau-desc:2pts_oui':'couteau-desc:2pts_non');
+		$ok_valeur = $label._T($cs_variable['check'])._T($valeur?'couteauprive:2pts_oui':'couteauprive:2pts_non');
 	}
 	// ... ou un textarea ... ou une case input
 	else {
@@ -78,19 +78,19 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 				:"<html><textarea rows='$lignes' name='HIDDENCSVAR__$variable' $width>"
 					. htmlspecialchars($valeur) . '</textarea></html>'
 			) . _VAR_OUTIL;
-		$ok_valeur = $label.'<html>'.(strlen($valeur)?nl2br(echapper_tags($valeur)):'&nbsp;'._T('couteau-desc:variable_vide')).'</html>';
+		$ok_valeur = $label.'<html>'.(strlen($valeur)?nl2br(echapper_tags($valeur)):'&nbsp;'._T('couteauprive:variable_vide')).'</html>';
 	}
 	$ok_input_ .= $ok_input; $ok_valeur_ .= $ok_valeur;
 }
 
 function description_outil_input_callback($matches) {
-	return '<fieldset><legend>'._T('couteau-desc:label:'.$matches[3]).'</legend><div style="margin:0;">'.$matches[1].'</div></fieldset>';
+	return '<fieldset><legend>'._T('couteauprive:label:'.$matches[3]).'</legend><div style="margin:0;">'.$matches[1].'</div></fieldset>';
 }
 function description_outil_const_callback($matches) {
 	return constant($matches[1]);
 }
 function description_outil_descrip_callback($matches) {
-	return _T("couteau-desc:$matches[1]:description$matches[2]");
+	return _T("couteauprive:$matches[1]:description$matches[2]");
 }
 
 // renvoie la description de $outil_ : toutes les %variables% ont ete remplacees par le code adequat
@@ -100,13 +100,13 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$actif = $outil['actif'];
 	$index = $outil['index'];
 	// la description de base est a priori dans le fichier de langue
-	$descrip = isset($outil['description'])?$outil['description']:_T('couteau-desc:'.$outil['id'].':description');
+	$descrip = isset($outil['description'])?$outil['description']:_T('couteauprive:'.$outil['id'].':description');
 	// reconstitution d'une description eventuellement morcelee
-	// exemple : <:mon_outil:3:> est remplace par _T('couteau-desc:mon_outil:description3')
+	// exemple : <:mon_outil:3:> est remplace par _T('couteauprive:mon_outil:description3')
 	$descrip = preg_replace_callback(',<:([a-zA-Z_][a-zA-Z0-9_-]*):([0-9]+):>,', 'description_outil_descrip_callback', $descrip);
 	// remplacement des zone input de format [[label->variable]]
 	$descrip = preg_replace(',(\[\[([^][]*)->([^]]*)\]\]),msS', '<fieldset><legend>\\2</legend><div style="margin:0;">\\3</div></fieldset>', $descrip);
-	// remplacement des zone input de format [[tata %variable% toto]] en utilisant _T('couteau-desc:label:variable') comme label
+	// remplacement des zone input de format [[tata %variable% toto]] en utilisant _T('couteauprive:label:variable') comme label
 	$descrip = preg_replace_callback(',\[\[(([^][]*)%([a-zA-Z_][a-zA-Z0-9_]*)%([^]]*))\]\],msS', 'description_outil_input_callback', $descrip);
 	// remplacement des variables de format : %variable%
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $descrip, -1, PREG_SPLIT_DELIM_CAPTURE);
@@ -134,11 +134,11 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	// bouton 'Modifier' : en dessous du texte s'il y a plusieurs variables, a la place de _VAR_OUTIL s'il n'y en a qu'une.
 	// attention : on ne peut pas modifier les variables si l'outil est inactif
 	if ($actif) {
-		$bouton = "<input type='submit' class='fondo' value=\"".($c>1?_T('couteau-desc:modifier_vars', array('nb'=>$c)):_T('bouton_modifier'))."\" />";
+		$bouton = "<input type='submit' class='fondo' value=\"".($c>1?_T('couteauprive:modifier_vars', array('nb'=>$c)):_T('bouton_modifier'))."\" />";
 		if($c>1) $ok_input .= "<div style=\"margin-top: 0; text-align: right;\">$bouton</div>";
 			else $ok_input = str_replace(_VAR_OUTIL, $bouton, $ok_input);
 	} else
-		$ok_input = $ok_valeur . '<div style="margin-top: 0; text-align: right;">'._T('couteau-desc:validez_page').' <span class="fondo" style="cursor:pointer; padding:0.2em;" onclick="submit_general('.$index.')">'._T('bouton_valider').'</span></div>';
+		$ok_input = $ok_valeur . '<div style="margin-top: 0; text-align: right;">'._T('couteauprive:validez_page').' <span class="fondo" style="cursor:pointer; padding:0.2em;" onclick="submit_general('.$index.')">'._T('bouton_valider').'</span></div>';
 	// nettoyage...
 	$ok_input = str_replace(_VAR_OUTIL, '', $ok_input);
 	// HIDDENCSVAR__ pour eviter d'avoir deux inputs du meme nom...
@@ -161,7 +161,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	// remplacement des constantes
 	$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 'description_outil_const_callback', $res);
 
-	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('couteau-desc:vars_modifiees').'&nbsp;&lt;</div>':'';
+	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('couteauprive:vars_modifiees').'&nbsp;&lt;</div>':'';
 	return cs_ajax_action_greffe("description_outil-$index", $res, $modif);
 }
 ?>

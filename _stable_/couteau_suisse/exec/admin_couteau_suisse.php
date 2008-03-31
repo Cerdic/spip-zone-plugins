@@ -106,10 +106,10 @@ function set_categ(id) {
 }
 function outils_toggle() {
 	if(cs_selected.length>1) {
-		msg=\""._T('couteau-desc:permuter_outils')."\";
+		msg=\""._T('couteauprive:permuter_outils')."\";
 		msg=msg.replace(/@nb@/, cs_selected.length);
 	} else {
-		msg=\""._T('couteau-desc:permuter_outil')."\";
+		msg=\""._T('couteauprive:permuter_outil')."\";
 		msg=msg.replace(/@text@/, jQuery('a.outil_on').text());
 	}
 	if (!confirm(msg)) return false;
@@ -375,10 +375,10 @@ verif_plugin();
 //		verif_outils();
 
 	if(defined('_SPIP19100'))
-  		debut_page(_T('couteau-desc:titre'), 'configuration', 'couteau_suisse');
+  		debut_page(_T('couteauprive:titre'), 'configuration', 'couteau_suisse');
   	else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('couteau-desc:titre'), "configuration", 'couteau_suisse');
+		echo $commencer_page(_T('couteauprive:titre'), "configuration", 'couteau_suisse');
 	}
 	// pour la  version du plugin
 	include_spip('inc/plugin');
@@ -397,7 +397,7 @@ verif_plugin();
 
 	cs_admin_styles_et_js($cs_version);
 	echo "<br /><br /><br />";
-	gros_titre(_T('couteau-desc:titre'), '', false);
+	gros_titre(_T('couteauprive:titre'), '', false);
 	echo barre_onglets("configuration", 'couteau_suisse');
 echo '<div style="font-size:85%"><p style="color:red;">Ancienne interface : <a href="', generer_url_ecrire('admin_couteau_suisse_old'), '">par ici</a></p>';
 // verification d'une base venant de SPIP 1.8
@@ -418,15 +418,15 @@ echo '</div>';
 	sort($contribs);
 	$aide = '';
 	if(isset($GLOBALS['cs_installer'])) foreach(array_keys($GLOBALS['cs_installer']) as $pack)
-		$aide .= "\n_ " . _T('couteau-desc:du_pack', array('pack'=>"{[{$pack}|"._T('couteau-desc:installe_pack').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
-	$aide = _T('couteau-desc:help', array(
+		$aide .= "\n_ " . _T('couteauprive:du_pack', array('pack'=>"{[{$pack}|"._T('couteauprive:installe_pack').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
+	$aide = _T('couteauprive:help', array(
 		'reset' => generer_url_ecrire($exec,'cmd=resetall'),
 		'hide' => generer_url_ecrire($exec,'cmd=showall'),
 		'version' => $cs_version,
 		'distant' => '<span class="cs_version"><br/>Version distante...</span>',
 		'contribs' => join('', $contribs),
 		'install' => $aide,
-		'pack' => '['._T('couteau-desc:pack').'|'._T('couteau-desc:alt_pack').'->'.generer_url_ecrire($exec,'cmd=pack#cs_infos').']',
+		'pack' => '['._T('couteauprive:pack').'|'._T('couteauprive:alt_pack').'->'.generer_url_ecrire($exec,'cmd=pack#cs_infos').']',
 	));
 	echo debut_boite_info(true), propre($aide), fin_boite_info(true);
 	$aide = cs_aide_raccourcis();
@@ -443,8 +443,8 @@ echo '</div>';
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
 	cs_compat_boite('debut_droite');
 
-	echo debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('couteau-desc:liste_outils')),
-		_T('couteau-desc:presente_outils2'),
+	echo debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('couteauprive:liste_outils')),
+		_T('couteauprive:presente_outils2'),
 		"\n<table border='0' cellspacing='0' cellpadding='5' style='width:100%;'><tr><td class='sansserif'>";
 
 	include_spip('inc/cs_outils');
@@ -455,9 +455,9 @@ echo '</div>';
 		'<script type="text/javascript"><!--
 var cs_descripted = "', $afficher_outil, '";
 document.write("<style>#csjs{display:none;}</style>");
-//--></script><div id="csjs" style="color:red;"><br/>', _T('couteau-desc:erreur:js'),'</div>
-<noscript><style>#csjs{display:none;}</style><div style="color:red;"><br/>', _T('couteau-desc:erreur:nojs'),
-$_GET['modif']=='oui'?'<br/>'._T('couteau-desc:vars_modifiees').'.':'','</div></noscript>',
+//--></script><div id="csjs" style="color:red;"><br/>', _T('couteauprive:erreur:js'),'</div>
+<noscript><style>#csjs{display:none;}</style><div style="color:red;"><br/>', _T('couteauprive:erreur:nojs'),
+$_GET['modif']=='oui'?'<br/>'._T('couteauprive:vars_modifiees').'.':'','</div></noscript>',
 		'</div>',
 		"</td></tr></table>\n",
 		fin_cadre_trait_couleur(true),
@@ -468,9 +468,9 @@ cs_log(" FIN : exec_admin_couteau_suisse()");
 }
 
 function cs_boite_rss($force) {
-	echo debut_boite_info(true), '<p><b>'._T('couteau-desc:rss_titre').'</b></p><div class="cs_boite_rss"><p>Attente RSS...</p><noscript>D&eacute;sactiv&eacute; !</noscript></div>'
-		/*.'<div style="text-align: right; font-size: 87%;"><a title="'._T('couteau-desc:desactiver_rss').'" href="'
-		.generer_url_ecrire(_request('exec'),'cmd=toggle&outil=rss_couteau_suisse').'">'._T('couteau-desc:supprimer_cadre').'</a></div>'*/
+	echo debut_boite_info(true), '<p><b>'._T('couteauprive:rss_titre').'</b></p><div class="cs_boite_rss"><p>Attente RSS...</p><noscript>D&eacute;sactiv&eacute; !</noscript></div>'
+		/*.'<div style="text-align: right; font-size: 87%;"><a title="'._T('couteauprive:desactiver_rss').'" href="'
+		.generer_url_ecrire(_request('exec'),'cmd=toggle&outil=rss_couteau_suisse').'">'._T('couteauprive:supprimer_cadre').'</a></div>'*/
 		, fin_boite_info(true);
 }
 

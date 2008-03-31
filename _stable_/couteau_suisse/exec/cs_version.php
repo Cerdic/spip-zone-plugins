@@ -41,6 +41,6 @@ function exec_cs_version_dist() {
 	}
 	if (!$distant) ajax_retour('');
 	include_spip('inc/texte');
-	ajax_retour(ptobr(propre($distant==$version?_T('couteau-desc:a_jour'):($distant?_T('couteau-desc:distant', array('version' => $distant)):''))));
+	ajax_retour(ptobr(propre($distant==$version?_T('couteauprive:a_jour'):($distant?_T('couteauprive:distant', array('version' => $distant)):''))));
 }
 ?>

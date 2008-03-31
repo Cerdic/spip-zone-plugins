@@ -209,20 +209,20 @@ verif_plugin();
 	}
 
 	if(defined('_SPIP19100'))
-  		debut_page(_T('couteau-desc:titre'), 'configuration', 'couteau_suisse');
+  		debut_page(_T('couteauprive:titre'), 'configuration', 'couteau_suisse');
   	else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('couteau-desc:titre'), "configuration", 'couteau_suisse');
+		echo $commencer_page(_T('couteauprive:titre'), "configuration", 'couteau_suisse');
 	}
 
 	cs_admin_styles_et_js();
 	echo "<br /><br /><br />";
-	gros_titre(_T('couteau-desc:titre'), '', false);
+	gros_titre(_T('couteauprive:titre'), '', false);
 	echo barre_onglets("configuration", 'couteau_suisse');
 
 	cs_compat_boite('debut_gauche');
 	echo debut_boite_info(true),
-		propre(_T('couteau-desc:help0', array('reset' => generer_url_ecrire($exec,'cmd=resetall')))),
+		propre(_T('couteauprive:help0', array('reset' => generer_url_ecrire($exec,'cmd=resetall')))),
 		fin_boite_info(true);
 	$aide_racc = cs_aide_raccourcis();
 	if(strlen($aide_racc))
@@ -236,13 +236,13 @@ verif_plugin();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
 	cs_compat_boite('debut_droite');
 
-	echo debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('couteau-desc:liste_outils'));
+	echo debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('couteauprive:liste_outils'));
 
 	$valider = "\n<div style='text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider1' value='"._T('bouton_valider')."' class='fondo' onclick='document.forms.submitform.submit()' /></div>";
-	echo _T('couteau-desc:presente_outils', array('triangle'=>'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" />')), $valider;
+	echo _T('couteauprive:presente_outils', array('triangle'=>'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" />')), $valider;
 	echo "\n<table border='0' cellspacing='0' cellpadding='5' ><tr><td class='sansserif'>";
-	foreach($temp = $outils as $outil) $categ[_T('couteau-desc:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
+	foreach($temp = $outils as $outil) $categ[_T('couteauprive:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
 
 	$js = ''; $marge = '0';
 	$description_outil = charger_fonction('description_outil', 'inc');
@@ -255,8 +255,8 @@ verif_plugin();
 		$ss = "<input type='checkbox' class='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
 //		$ss .= $actif?" checked='checked'":"";
 		$ss .= " onclick='categ_outil.apply(this,[\"$i\", [".join(', ', $basics).'], '.count($basics)."])' />";
-		$ss .= "<label for='label_{$i}_categ' style='display:none'>"._T('couteau-desc:activer_outil')."</label>";
-		preg_match(',([0-9]+)\.?\s*(.*),', _T('couteau-desc:'.$c), $reg);
+		$ss .= "<label for='label_{$i}_categ' style='display:none'>"._T('couteauprive:activer_outil')."</label>";
+		preg_match(',([0-9]+)\.?\s*(.*),', _T('couteauprive:'.$c), $reg);
 		echo "<form style='margin-top:$marge; margin-left:2em;'>$ss&nbsp;<b>$reg[2]</b></form>\n", $s;
 		$marge = '.8em';
 	}
@@ -291,7 +291,7 @@ function ligne_outil($outil, &$js, $afficher, $description_outil){
 	$actif = $outil['actif'];
 	$erreur_version = cs_version_erreur($outil);
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
-	$titre_etat = _T('couteau-desc:'.($actif?'':'in').'actif');
+	$titre_etat = _T('couteauprive:'.($actif?'':'in').'actif');
 	$nb_var = intval($outil['nb_variables']);
 	$index = intval($outil['index']);
 	$pliage_id = 'plie_'.$outil_id;
@@ -303,7 +303,7 @@ function ligne_outil($outil, &$js, $afficher, $description_outil){
 	$p .= $actif?" checked='checked'":"";
 	$p .= $erreur_version?" disabled='disabled'":"";
 	$p .= " onclick='outilchange.apply(this,[$index])'";
-	$p .= "/> <label for='label_$id_input' style='display:none'>"._T('couteau-desc:activer_outil')."</label>";
+	$p .= "/> <label for='label_$id_input' style='display:none'>"._T('couteauprive:activer_outil')."</label>";
 	$js .= "Outils[$index] = Array(\"$inc\", $nb_var);\n";
 	// compatibilite SPIP < v1.93
 	if(function_exists('bouton_block_depliable'))
@@ -319,9 +319,9 @@ function ligne_outil($outil, &$js, $afficher, $description_outil){
 	$p .= "\n<div class='detail_outil'>";
 	// horrible : ça prends plus de temps qu'avant, mais ca va bientot disparaitre !!
 	$p .= cs_initialisation_d_un_outil($outil['id'], $description_outil, false);
-	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T(defined('_SPIP19100')?'couteau-desc:jquery1':'couteau-desc:jquery2') . '</p>';
+	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T(defined('_SPIP19100')?'couteauprive:jquery1':'couteauprive:jquery2') . '</p>';
 	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
-	if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('couteau-desc:contrib', array('id'=>$outil['contrib'])) . '</p>';
+	if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('couteauprive:contrib', array('id'=>$outil['contrib'])) . '</p>';
 	$s .= propre($p) . detail_outil($outil['id']) . '</div>';
 
 	$s .= fin_block();

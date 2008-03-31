@@ -31,9 +31,9 @@ function filets_sep_installe() {
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
-// si cette fonction n'existe pas, le plugin cherche alors  _T('couteau-desc:un_outil:aide');
+// si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function filets_sep_raccourcis() {
-	return _T('couteau-desc:filets_sep:aide', array('liste' => $GLOBALS['meta']['cs_filets_sep_racc']));
+	return _T('couteauprive:filets_sep:aide', array('liste' => $GLOBALS['meta']['cs_filets_sep_racc']));
 }
 
 // Fonction pour generer des filets de separation selon les balises presentes dans le texte fourni.
@@ -72,7 +72,7 @@ function filets_sep_BarreTypo($tr) {
 	for ($i=0; $i<$max; $i++)
 		$res[] = "<a title=\"{$filets[0][$i]}\" href=\"javascript:barre_inserer('\\n\\n{$filets[0][$i]}\\n\\n',@@champ@@)\"><span class=\"cs_BT\">{$filets[0][$i]}</span></a>";
 	$res = join(' ', $res);
-	return $tr.'<tr><td><p style="margin:0; line-height:1.8em;">'._T('couteau-desc:filets_sep:nom')."&nbsp;$res</p></td></tr>";
+	return $tr.'<tr><td><p style="margin:0; line-height:1.8em;">'._T('couteauprive:filets_sep:nom')."&nbsp;$res</p></td></tr>";
 }
 
 ?>
