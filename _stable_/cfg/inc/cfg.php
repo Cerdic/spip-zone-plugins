@@ -156,7 +156,7 @@ class cfg_dist
 			}
 		}
 		// On ajoute un bouton 'nouveau'
-		return    "<form method='get' action='".generer_url_ecrire('')."'><div>\n"
+		return    "<form method='post' action='".generer_url_ecrire('')."'><div>\n"
 				. "<h4>$nom</h4>\n"
 				. "<input type='hidden' name='exec' value='cfg' />\n"
 				. "<input type='hidden' name='cfg' value='$lien' />\n"

@@ -1,8 +1,12 @@
 Todo :
-- faire une api claire pour les verifications des champs (classe css type_*)
 - faire une api pour permettre certains ajouts js (classe css 'cfg_pipette'? 'cfg_date'?)
 - gerer les input type 'file'
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
+
+v1.5.1 (31 03 2008)
+- premiers jets d'api pour les verifications de types de champs
+- corrections bugs sur #ENV{cfg_id} dans les parametres <!-- param=valeur --> mal raffraichis
+
 
 v1.5.0 (30 03 2008)
 - nettoyages, suppression de la gestion de l'ancienne api des depots

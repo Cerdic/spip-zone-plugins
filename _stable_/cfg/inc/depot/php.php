@@ -90,17 +90,6 @@ class cfg_depot_php
 		if (!$this->charger()){
 			return array(false, $this->val);	
 		}
-		
-		foreach ($this->champs as $name => $def) {
-			if (isset($def['id'])) {
-				continue;
-			}
-
-			// applique une fonction sur le champ, si demande ?
-			// ... necessite de passer $this->types... API a revoir pour la validation de champs
-			$this->_ici[$name] = isset($def['type_verif']) && ($cnv = $this->types[$def['type_verif']][2]) ?
-				$cnv($this->val[$name]) : $this->val[$name];
-	    }
 
 		if (!$this->ecrire_fichier($this->_base)){
 			return array(false, $this->val);

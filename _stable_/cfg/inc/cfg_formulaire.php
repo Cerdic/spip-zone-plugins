@@ -35,13 +35,8 @@ class cfg_formulaire_dist{
 	var $controldata ='';
 // stockage du fond compile par recuperer_fond()
 	var $fond_compile = '';
-// configuration des verifications a faire en fonction des types de champs,
-// donnes par une class css 'type_{nom}'
-//TODO traductions
-	var $verifier_champs_types = array(
-		  'id' => array('#^[a-z_]\w*$#i', 'lettre ou &#095; suivie de lettres, chiffres ou &#095;'),
-		  'idnum' => array('#^\d+$#', 'chiffres', 'intval'),
-		  'pwd' => array('#^.{5}#', 'minimum 5 caract&egrave;res;'));
+// y a t-il des extensions (classes css 'type_{nom}' ou 'cfg_{nom}' sur champs) a traiter ?
+	var $extensions = array();
 
 // Alias pour passer facilement les parametres aux classes appelees
 	var $params = array();
@@ -100,24 +95,18 @@ class cfg_formulaire_dist{
 			$ok = false;
 			$this->messages['message_erreur'][] = $err;
 		}
-
-		//
-		// Cas des champs multi, si des champs (Y)
-		// sont declares id par la classe cfg_id,
-		// <input type='x' name='Yn' class='cfg_id'>
-		// on les ajoute dans le chemin pour retrouver les donnees
-		// #CONFIG{.../y1/y2/y3/...}
-		// 
-		if (_request('_cfg_affiche')) {
-			$this->param->cfg_id = implode('/', array_map('_request', $this->champs_id));
-	    } 
 	    
+		// charger les champs particuliers si existants
+		$this->actionner_extensions('charger');	  
+		  
 		// creer le storage et lire les valeurs
 		$this->param->depot = strtolower(trim($this->param->depot));
-		$classto = 'cfg_' . $this->param->depot;
 		$cfg_depot = cfg_charger_classe('cfg_depot','inc');
 		$this->depot = new $cfg_depot($this->param->depot, $this->params);
 		$ok &= $this->lire();
+		
+
+
 		return $ok;
 	}
 
@@ -154,49 +143,21 @@ class cfg_formulaire_dist{
 		    if ($oldval != $this->val[$name]) {
 		    	$this->log_modif .= $name . ':' . var_export($oldval, true) . '/' . var_export($this->val[$name], true) .', ';
 		    }
-		}		   
-		// tester la validite des champs
-		foreach ($this->champs as $name => $def) {		    
-		    if ($erreur = $this->verifier_champ($name)) {
-		    	$this->messages['erreurs'][$name] = $erreur;
-		    }
-	    }	
-	    	
+		}
+	    
 		// si pas de changement, pas la peine de continuer
 		if (!$this->log_modif && !_request('_cfg_delete')) {
 			$this->messages['message_erreur'][] = _T('cfg:pas_de_changement', array('nom' => $this->nom_config()));
 		}
+		
+		// verifier la validite des champs
+		$this->actionner_extensions('verifier');
 		
 		// stocker le fait que l'on a controle les valeurs
 		$this->verifier = true;
 	    return !($this->messages['erreurs'] || $this->messages['message_erreur']);
 	}
 	
-	
-	// verification du type de valeur attendue
-	// cela est defini par un nom de class css (class="type_idnum")
-	// 'idnum' etant defini dans $this->vefifier_champs_types['idnum']...
-	// si le nom du champ possede une traduction, il sera traduit.
-	//
-	// API a revoir, les controles sont trop sommaire,
-	// il faut pouvoir tester une plage de valeur par exemple, simplement
-	// une preg n'est pas ideale
-	// De plus, le multilinguisme n'est pas fait.
-	function verifier_champ($name){
-		$type_verif = $this->champs[$name]['type_verif'];
-		if (!empty($type_verif) && isset($this->verifier_champs_types[$type_verif])) {
-			$dtype = $this->verifier_champs_types[$type_verif];
-			if (!preg_match($dtype[0], $this->val[$name])) {
-				// erreur
-				return $name . '&nbsp;:' . $dtype[1];
-			}
-		}
-		// pas d'erreur ou pas de test
-		return;
-	}
-
-
-
 
 	
 	/*
@@ -224,20 +185,10 @@ class cfg_formulaire_dist{
 		
 		// sinon modification (seulement si les types de valeurs attendus sont corrects)
 		} elseif (!($this->messages['message_erreur'] OR $this->messages['erreurs'])) {
-	
-			// lorsque c'est un champ de type multi que l'on modifie 
-			// et si l'identifiant a change,  il faut soit le copier, soit de deplacer
-			if ($this->champs_id) {
-				$new_id = implode('/', array_map('_request', $this->champs_id));
-				if ($new_id != $this->param->cfg_id && !_request('_cfg_copier')) {
-					// et ne pas perdre les valeurs suite a l'effacement dans ce cas precis
-					$vals = $this->val;
-					$this->effacer();
-					$this->val = $vals;
-				}
-				$this->param->cfg_id = $new_id;
-			}
 
+			// traiter les champs speciaux
+			$this->actionner_extensions('pre_traiter');
+		
 			// ecriture
 			$this->ecrire();
 		}
@@ -361,20 +312,39 @@ class cfg_formulaire_dist{
 		    if ($regs[2]) $this->champs[$name]['type'] = $regs[2];
 		    // champs tableau[]
 			if ($regs[4]) $this->champs[$name]['tableau'] = true;
-			// classes css type_xx (le seul reelement utilise... et encore, cette api est a revoir !)
-			if ($regs[5]) $this->champs[$name]['type_verif'] = $regs[5];
+
+			//
+			// Extensions et validations des champs
+			//
+			
+			// classes css type_xx
+			if ($regs[5]) {
+				$this->champs[$name]['type_verif'] = $regs[5];
+				$this->ajouter_extension('type_'.$regs[5], $name);
+			}		
 			// classes css cfg_xx 
-			if ($regs[6]) $this->champs[$name]['cfg'] = $regs[6];
-			// si classe cfg_id => id a renseigner
-			if ($regs[6] == 'id') {
-				$this->champs[$name]['id'] = count($this->champs_id);
-				$this->champs_id[] = $name;	
-			} 
+			if ($regs[6]) {
+				$this->champs[$name]['cfg'] = $regs[6];
+				$this->ajouter_extension('cfg_'.$regs[6], $name);
+			}
+			// cas particulier automatique : type file => type de verification : fichier
+			if (($regs[2] == 'file') AND (!$this->champs[$name]['cfg'])){
+				$this->champs[$name]['cfg'] = 'fichier';
+				$this->ajouter_extension('cfg_fichier', $name);	
+			}
 	    }
 
 	    return '';
 	}	 
-	 
+	
+	// ajoute une extension (classe cfg_xx ou type_xx) 
+	// ce qui dit a cfg d'executer des fonctions particulieres
+	// si elles existent : ex: cfg_traiter_cfg_xx()
+	// lors de l'appel de 'actionner_extensions($faire)'
+	function ajouter_extension($ext, $nom){
+		if (!is_array($this->extensions[$ext])) $this->extensions[$ext] = array();
+		$this->extensions[$ext][] = $nom;	
+	}
 	
 	/*
 	 * 
@@ -392,6 +362,7 @@ class cfg_formulaire_dist{
 			// et mettent des [(#ENV**{editable}|?{' '}) ... ] ne verraient pas leurs variables
 			// dans l'environnement vu que CFG ne pourrait pas lire les champs du formulaire
 			#if (!isset($contexte['editable'])) $contexte['editable'] = true; // plante 1.9.2 !!
+			
 			// passer cfg_id...
 			if (!isset($contexte['cfg_id']) && $this->param->cfg_id) {
 				$contexte['cfg_id'] = $this->param->cfg_id;
@@ -501,7 +472,8 @@ class cfg_formulaire_dist{
 		// recuperer le fond avec le contexte
 		// forcer le calcul.
 		$this->recuperer_fond($contexte, true);
-		$this->effacer_parametres(); // pour enlever les <!-- param=valeur --> ... sans dedoubler le contenu lorsque ce sont des tableau (param*=valeur)
+		$this->recuperer_parametres();
+		//$this->effacer_parametres(); // pour enlever les <!-- param=valeur --> ... sans dedoubler le contenu lorsque ce sont des tableau (param*=valeur)
 		return $this->fond_compile;
 	}
 	
@@ -517,23 +489,69 @@ class cfg_formulaire_dist{
 		    '&hash=' .  calculer_action_auteur('-' . $arg);		
 	}
 	
-	/* 
-	 * callback pour interpreter les parametres objets du formulaire
-	 * commun avec celui de set_vue()
-	 * 
-	 * Parametres : 
-	 * - $regs[2] = 'parametre'
-	 * - $regs[3] = '*' ou ''
-	 * - $regs[4] = 'valeur'
-	 * 
-	 * Lorsque des parametres sont passes dans le formulaire 
-	 * par <!-- param=valeur -->
-	 * stocker $this->param->parametre=valeur
-	 * 
-	 * Si <!-- param*=valeur -->
-	 * Stocker $this->param->parametre[]=valeur
-	 * 
-	 */
+	
+	//
+	// charge des actions sur les champs particuliers
+	// notifies par 'type_XX' ou 'cfg_YY' sur les classes css
+	//
+	// 3 actions sont faites : charger, verifier, pre_traiter
+	// Ces types sont definis dans des fichiers /cfg/classes/type_XX.php ou cfg_XX.php
+	// qui contiennent des fonctions cfg_{action}_type_XX() auquelles
+	// on passe $this->params et qui retournent ce tableau, modifie ou non
+	//
+	function actionner_extensions($action){
+
+		if ($this->extensions) {
+			foreach ($this->extensions as $type => $champs){
+				// si un fichier de ce type existe, on lance la fonction 
+				// demandee pour chaque champs possedant la classe css en question
+				if (include_spip('cfg/classes/'.$type)) {
+					$cfg = (strpos($type,'cfg')!==false);
+					foreach ($champs as $champ){
+						if (function_exists($f = 'cfg_' . $action . '_' . $type)){ // absence possible normale
+							if ($cfg){
+								// de type 'cfg_' : artillerie lourde
+								// on passe la classe
+								$f($champ, $this);
+							} else {
+								// de type : 'type_' : nom et valeur suffisent
+								// retour : 
+								// - chaine = erreur...
+								// - tableau(ok, valeur);
+								if ($res = $f($champ, $this->val[$champ])){
+									if (is_array($res)){
+										list($ok, $this->val[$champ]) = $res;
+									} else {
+										$this->messages['erreurs'][$champ] = $res;	
+									}
+								}
+							}
+						}
+					}
+				}	
+			}
+		}
+	}
+	
+
+	
+	// 
+	//callback pour interpreter les parametres objets du formulaire
+	// commun avec celui de set_vue()
+	// 
+	// Parametres : 
+	// - $regs[2] = 'parametre'
+	// - $regs[3] = '*' ou ''
+	// - $regs[4] = 'valeur'
+	// 
+	// Lorsque des parametres sont passes dans le formulaire 
+	// par <!-- param=valeur -->
+	// stocker $this->param->parametre=valeur
+	// 
+	// Si <!-- param*=valeur -->
+	// Stocker $this->param->parametre[]=valeur
+	// 
+	//
 	function post_params($regs) {
 
 		// $regs[3] peut valoir '*' pour signaler un tableau
