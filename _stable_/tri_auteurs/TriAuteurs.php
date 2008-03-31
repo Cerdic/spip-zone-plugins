@@ -33,7 +33,7 @@ function TriAuteurs_affiche_droite($arguments) {
 	$select = array('id_rubrique');
 	$where = array("id_article="._request('id_article'));
 	
-	$rez =  spip_abstract_fetch(spip_abstract_select($select,$from,$where));
+	$rez =  sql_fetch(sql_select($select,$from,$where));
 
 	$id_rubrique = $rez['id_rubrique'];
 	
@@ -44,10 +44,10 @@ function TriAuteurs_affiche_droite($arguments) {
 	  //Installation
 	  if(!lire_meta('TriAuteurs:installe')) {
 		$res = spip_query("SHOW COLUMNS FROM `".$table_pref."_auteurs_articles` LIKE 'rang'");
-		if(!spip_fetch_array($res)) {
+		if(!sql_fetch($res)) {
 		  spip_query("ALTER TABLE `".$table_pref."_auteurs_articles` ADD `rang` BIGINT NOT NULL DEFAULT 0;");
 		}
-		spip_free_result($res);
+		sql_free($res);
 		ecrire_meta('TriAuteurs:installe',true);
 		ecrire_metas();
 	  }
@@ -68,10 +68,10 @@ function TriAuteurs_boite_tri_auteurs($id_article) {
   $where = array('lien.id_auteur=auteurs.id_auteur',"lien.id_article=$id_article");
   $order = array('lien.rang');
 
-  $rez = spip_abstract_select($select,$from,$where,'',$order);
+  $rez = sql_select($select,$from,$where,'',$order);
   $to_ret = '';
 
-  if(spip_abstract_count($rez) > 1) {
+  if(sql_count($rez) > 1) {
 	
 	
 	$to_ret .= '<div>&nbsp;</div>';
@@ -84,7 +84,7 @@ function TriAuteurs_boite_tri_auteurs($id_article) {
 	
 	$to_ret .= '<div class="plan-articles" id="liste_tri_auteurs_cont">';
 	$to_ret .= '<div id="liste_tri_auteurs">';
-	while($row = spip_abstract_fetch($rez)) {
+	while($row = sql_fetch($rez)) {
 	  $to_ret .= '<div id="auteur_'.$row['id_auteur'].'">';
 	  $to_ret .= $row['nom'].'</div>';
 	}

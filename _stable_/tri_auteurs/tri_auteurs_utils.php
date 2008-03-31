@@ -37,13 +37,13 @@ function TriAuteurs_verifier_auteur($id_article) {
   
   $where = array("id_auteur = $connect_id_auteur", "id_article = $id_article");
   
-  $result = spip_abstract_select($select,$from,$where);
+  $result = sql_select($select,$from,$where);
   
-  if (spip_abstract_count($result) > 0) {
-	spip_abstract_free($result);
+  if (sql_count($result) > 0) {
+	sql_free($result);
 	return true;
   }
-  spip_abstract_free($result);
+  sql_free($result);
   return false;
 }
 ?>
