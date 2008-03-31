@@ -104,8 +104,6 @@ class cfg_formulaire_dist{
 		$cfg_depot = cfg_charger_classe('cfg_depot','inc');
 		$this->depot = new $cfg_depot($this->param->depot, $this->params);
 		$ok &= $this->lire();
-		
-
 
 		return $ok;
 	}
@@ -150,7 +148,18 @@ class cfg_formulaire_dist{
 			$this->messages['message_erreur'][] = _T('cfg:pas_de_changement', array('nom' => $this->nom_config()));
 		}
 		
-		// verifier la validite des champs
+		// charger une eventuelle fonction cfg_{vue}_verifier()
+		// vue etant le nom du fichier : fonds/cfg_{vue}.html
+		// la fonction (qui peut etre mise dans fonds/cfg_{vue}_fonctions.php)
+		// retourne un array() sur le meme modele que /formulaires/x/verifier.php() de spip
+		if (function_exists($f = 'cfg_'.$this->vue.'_verifier') && ($err = $f())){
+			if ($err['message_erreur']) $this->messages['message_erreur'][] = $err['message_erreur'];
+			if ($err['message_ok']) 	$this->messages['message_ok'][] = $err['message_ok'];
+			unset($err['message_erreur'], $err['message_ok']);
+			if ($err) $this->messages['erreurs'] = $err;
+		}
+		
+		// verifier la validite des champs speciaux (cfg_xx, type_xx)
 		$this->actionner_extensions('verifier');
 		
 		// stocker le fait que l'on a controle les valeurs
@@ -172,7 +181,7 @@ class cfg_formulaire_dist{
 		if (!$this->verifier) $this->verifier();
 		
 		if ($this->messages['erreurs'] || $this->messages['message_erreur'] || !$this->autoriser()) 
-				return false;
+			return false;
 	
 		if  (!_request('_cfg_ok') &&  !_request('_cfg_delete')) return false;
 		
@@ -183,8 +192,8 @@ class cfg_formulaire_dist{
 		if (_request('_cfg_delete')) {
 			$this->effacer();
 		
-		// sinon modification (seulement si les types de valeurs attendus sont corrects)
-		} elseif (!($this->messages['message_erreur'] OR $this->messages['erreurs'])) {
+		// sinon modification
+		} else {
 
 			// traiter les champs speciaux
 			$this->actionner_extensions('pre_traiter');

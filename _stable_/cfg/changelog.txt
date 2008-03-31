@@ -3,10 +3,15 @@ Todo :
 - gerer les input type 'file'
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 
+v1.5.2 (31 03 2008)
+- sur les verifications des champs, en plus de verifier les champs de type 'cfg_xx' ou 'type_xx',
+chercher une fonction 'cfg_{vue}_verifier()' fonctionnant exactement pareil que la fonction homologue
+sur la nouvelle api des formulaires dynamiques de spip. Cette fonction peut etre placee dans un fichier
+fonds/cfg_{vue}_fonctions.php
+
 v1.5.1 (31 03 2008)
 - premiers jets d'api pour les verifications de types de champs
 - corrections bugs sur #ENV{cfg_id} dans les parametres <!-- param=valeur --> mal raffraichis
-
 
 v1.5.0 (30 03 2008)
 - nettoyages, suppression de la gestion de l'ancienne api des depots
