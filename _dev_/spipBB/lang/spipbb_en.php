@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'dans_forum' => 'in the forum',
 	'date' => 'Subscribed the',
-	'deja_enregistree' => 'This email address is already registered<p><a href=\'spip.php?action=pass\'>[ Forgotten password? ]</a></p>',
+	'deja_enregistree' => '<MODIF>This email address is already registered<p><a href=\'spip.php?action=pass\'>[ Forgotten password? ]</a></p>',
 	'dernier' => '&nbsp;Last<br />',
 
 	// E
