@@ -61,13 +61,13 @@ $force = false;
 		}
 	} else {
 		include_spip('cout_fonctions');
-		$p = '<span style="color: red;">'._T('desc:erreur:probleme', array('pb'=>cs_lien(_CS_RSS_SOURCE,_T('desc:erreur:distant')))).'</span>';
+		$p = '<span style="color: red;">'._T('couteau-desc:erreur:probleme', array('pb'=>cs_lien(_CS_RSS_SOURCE,_T('couteau-desc:erreur:distant')))).'</span>';
 	}
 	include_spip('inc/filtres');
 	$du = affdate_heure(date('Y-m-d H:i:s',time()));
 	$p = '<ul style="list-style-type:none; padding:0; margin:0; ">'.$p
 		.'</ul><p class="spip_xx-small"><b>'
-		._T('desc:edition')."</b><br/>$du</p>";
+		._T('couteau-desc:edition')."</b><br/>$du</p>";
 	if($c) ecrire_fichier(_DIR_RSS_TMP, $p);
 	
 	ajax_retour($p);

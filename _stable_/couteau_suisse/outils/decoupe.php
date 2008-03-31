@@ -26,16 +26,16 @@ function decoupe_installe() {
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
-// si cette fonction n'existe pas, le plugin cherche alors  _T('desc:un_outil:aide');
+// si cette fonction n'existe pas, le plugin cherche alors  _T('couteau-desc:un_outil:aide');
 function decoupe_raccourcis() {
 	$compat = defined('_decoupe_COMPATIBILITE')
-		?_T('desc:decoupe:aide2', array('sep' => '<b>'._decoupe_COMPATIBILITE.'</b>')):'';
-	return _T('desc:decoupe:aide', array('sep' => '<b>'._decoupe_SEPARATEUR.'</b>')).$compat;
+		?_T('couteau-desc:decoupe:aide2', array('sep' => '<b>'._decoupe_COMPATIBILITE.'</b>')):'';
+	return _T('couteau-desc:decoupe:aide', array('sep' => '<b>'._decoupe_SEPARATEUR.'</b>')).$compat;
 }
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
 function decoupe_BarreTypo($tr) {
-	return $tr.'<tr><td>'._T('desc:decoupe:nom').' (en projet)</td></tr>';
+	return $tr.'<tr><td>'._T('couteau-desc:decoupe:nom').' (en projet)</td></tr>';
 }
 
 function decoupe_nettoyer_raccourcis($texte) {

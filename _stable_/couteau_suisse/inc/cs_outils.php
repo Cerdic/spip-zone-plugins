@@ -24,7 +24,7 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	global $outils, $metas_outils;
 	$outil = &$outils[$outil_];
 	if (!isset($outil['categorie'])) $outil['categorie'] = 'divers';
-	if (!isset($outil['nom'])) $outil['nom'] = _T('desc:'.$outil['id'].':nom');
+	if (!isset($outil['nom'])) $outil['nom'] = _T('couteau-desc:'.$outil['id'].':nom');
 	if (isset($outil['code:jq'])) $outil['jquery']='oui';
 	$outil['actif'] = isset($metas_outils[$outil['id']])?$metas_outils[$outil['id']]['actif']:0;
 	// Si Spip est trop ancien ou trop recent...
@@ -42,15 +42,15 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 function cs_description_pack() {
 	if(!isset($GLOBALS['cs_pack_actuel'])) return '';
 	return _DIV_CS_INFOS . debut_cadre_relief('', true)
-		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' style='border:0;' alt='-' />&nbsp;" . _T('desc:pack') . '</h3>'
-		. propre(_T('desc:descrip_pack') . "\n\n" . _T('desc:contrib', array('id'=>2552)))
+		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' style='border:0;' alt='-' />&nbsp;" . _T('couteau-desc:pack') . '</h3>'
+		. propre(_T('couteau-desc:descrip_pack') . "\n\n" . _T('couteau-desc:contrib', array('id'=>2552)))
 		. '<br/><textarea rows=30 cols=200 style="width:520px; font-size:90%;">'.htmlentities($GLOBALS[cs_pack_actuel], ENT_QUOTES, $GLOBALS['meta']['charset']).'</textarea>'
 		. fin_cadre_relief(true) . '</div>';
 }
 
 // renvoie (pour la nouvelle interface) la description d'un outil
 function description_outil2($outil_id) {
-	if(!strlen($outil_id)) return _DIV_CS_INFOS . _T('desc:cliquezlesoutils') . '</div>';
+	if(!strlen($outil_id)) return _DIV_CS_INFOS . _T('couteau-desc:cliquezlesoutils') . '</div>';
 	global $outils, $metas_vars, $metas_outils;
 	include_spip('cout_utils');
 	// remplir $outils (et aussi $cs_variables qu'on n'utilise pas ici);
@@ -66,26 +66,26 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$outil = $outils[$outil_id]; unset($outils);
 	$actif = $outil['actif'];
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
-	$titre_etat = _T('desc:'.($actif?'actif':'inactif'));
+	$titre_etat = _T('couteau-desc:'.($actif?'actif':'inactif'));
 	$nb_var = intval($outil['nb_variables']);
 	
 	$s .= "<h3 class='titrem'><img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;" . $outil['nom'] . '</h3>';
 	$s .= '<div style="text-align:right; font-size:85%; margin-bottom:0.8em;">';
 	if ($nb_var)
-		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=reset&outil='.$outil_id).'" title="' . _T('desc:par_defaut') . '">' . _T('desc:par_defaut') . '</a>&nbsp;|&nbsp;';
+		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=reset&outil='.$outil_id).'" title="' . _T('couteau-desc:par_defaut') . '">' . _T('couteau-desc:par_defaut') . '</a>&nbsp;|&nbsp;';
 	if (!$actif)
-		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=hide&outil='.$outil_id).'" title="' . _T('desc:neplusafficher') . '">' . _T('desc:neplusafficher') . '</a>&nbsp;|&nbsp;';
+		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=hide&outil='.$outil_id).'" title="' . _T('couteau-desc:neplusafficher') . '">' . _T('couteau-desc:neplusafficher') . '</a>&nbsp;|&nbsp;';
 	$act = $actif?'des':'';
-	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=toggle&outil='.$outil_id).'" title="'._T("desc:{$act}activer_outil").'">'._T("desc:{$act}activer")."</a></div>";
+	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=toggle&outil='.$outil_id).'" title="'._T("couteau-desc:{$act}activer_outil").'">'._T("couteau-desc:{$act}activer")."</a></div>";
 	include_spip('inc/texte');
 	$s .= propre($descrip);
 
 	$serial = serialize(array_keys($outil));
 	if (preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
-		$p .=  _T('desc:balise_etoilee', array('bal' => '#'.join('*, #', array_unique($regs[1])).'*'));	
-	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T(defined('_SPIP19100')?'desc:jquery1':'desc:jquery2') . '</p>';
+		$p .=  _T('couteau-desc:balise_etoilee', array('bal' => '#'.join('*, #', array_unique($regs[1])).'*'));	
+	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T(defined('_SPIP19100')?'couteau-desc:jquery1':'couteau-desc:jquery2') . '</p>';
 	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
-	if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('desc:contrib', array('id'=>$outil['contrib'])) . '</p>';
+	if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('couteau-desc:contrib', array('id'=>$outil['contrib'])) . '</p>';
 	$s .= propre($p);
 	$s .= detail_outil($outil_id);
 
@@ -97,7 +97,7 @@ function liste_outils() {
 	global $outils;
 	$id = 0;
 	$metas_caches = isset($GLOBALS['meta']['tweaks_caches'])?unserialize($GLOBALS['meta']['tweaks_caches']):array();
-	foreach($outils as $outil) $categ[_T('desc:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
+	foreach($outils as $outil) $categ[_T('couteau-desc:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
 	$result_actifs = $result_inactifs = '';
 	foreach($categ as $c=>$i) {
 		$s_actifs = $s_inactifs = array();
@@ -114,7 +114,7 @@ function liste_outils() {
 document.write('<span class=\"light'+cs_Titre('sous_liste_$id')+'\">');
 //--></script><noscript><span class='light cs_hidden'></noscript>" 
 				." (".count(${$temp}).")</span>";
-			preg_match(',([0-9]+)\.?\s*(.*),', _T('desc:'.$c), $reg);
+			preg_match(',([0-9]+)\.?\s*(.*),', _T('couteau-desc:'.$c), $reg);
 			$titre = "<div class='titrem categorie'>$reg[2]$titre</div>";
 			$href = generer_url_ecrire(_request('exec'),"cmd=descrip&outil=");
 			foreach(${$temp} as $j=>$v)
@@ -130,20 +130,20 @@ document.write('<div id=\"sous_liste_$id\" class=\"'+cs_Categorie('sous_liste_$i
 
 	$fieldset = '<fieldset style="width:92%; margin:0; padding:0.6em;" class="cadre-trait-couleur liste_outils"><legend style="font-weight:bold; color:';
 	return '<div id="cs_outils" class="cs_outils">'
-	. '<div class="cs_liste cs_inactifs">' . $fieldset . 'red;">' . _T('desc:inactifs') . '</legend>'
+	. '<div class="cs_liste cs_inactifs">' . $fieldset . 'red;">' . _T('couteau-desc:inactifs') . '</legend>'
 	. $results_inactifs . '</fieldset></div>'
 	. '<form id="csform" name="csform" method="post" action="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
 	. '<input type="hidden" value="test" name="cs_selection" id="cs_selection"/>'
 	. '<div class="cs_toggle"><div style="display:none;">'
-	. '<a id="cs_toggle_a" title="'._T('desc:permuter').'" href="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
+	. '<a id="cs_toggle_a" title="'._T('couteau-desc:permuter').'" href="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
 	. '<img alt="<->" src="'.find_in_path('img/permute.gif').'"/></a>'
 	. '<p id="cs_toggle_p">(0)</p>'
-	. '<a id="cs_reset_a" title="'._T('desc:resetselection').'" href="#">'
+	. '<a id="cs_reset_a" title="'._T('couteau-desc:resetselection').'" href="#">'
 	. '<img alt="X" class="class_png" src="'.find_in_path('img/nosel.gif').'"/></a>'
 	.	'</div></div></form>'
-	. '<div class="cs_liste cs_actifs">' . $fieldset . '#22BB22;">' . _T('desc:actifs') . '</legend>'
+	. '<div class="cs_liste cs_actifs">' . $fieldset . '#22BB22;">' . _T('couteau-desc:actifs') . '</legend>'
 	. $results_actifs . '</fieldset>'
-	. '<div style="text-align: right;"><a id="cs_tous_a" title="'._T('desc:selectiontous').'" href="#">'._T('desc:maj_tous').'</a></div>'
+	. '<div style="text-align: right;"><a id="cs_tous_a" title="'._T('couteau-desc:selectiontous').'" href="#">'._T('couteau-desc:maj_tous').'</a></div>'
 	. '</div></div>';
 }
 
@@ -152,22 +152,22 @@ function detail_outil($outil_id) {
 	global $outils;
 	$outil = &$outils[$outil_id];
 	$hr = '<!hr style="margin:6pt 0 0 0;"/><div style="font-size:85%; margin-top:0.8em; border-top:solid 1px;">';
-	if (cs_version_erreur($outil)) return $hr . _T('desc:erreur:version') . '</div>';
+	if (cs_version_erreur($outil)) return $hr . _T('couteau-desc:erreur:version') . '</div>';
 	$details = array();
-	if ($erreur_version) $details[] = _T('desc:erreur:version');
+	if ($erreur_version) $details[] = _T('couteau-desc:erreur:version');
 	$a = array();
 	foreach(array('options', 'fonctions', 'js', 'jq', 'css') as $in)
-		if(isset($outil['code:'.$in])) $a[] = _T('desc:code_'.$in);
-	if(count($a)) $details[] = _T('desc:detail_inline') . ' ' . join(', ', $a);
+		if(isset($outil['code:'.$in])) $a[] = _T('couteau-desc:code_'.$in);
+	if(count($a)) $details[] = _T('couteau-desc:detail_inline') . ' ' . join(', ', $a);
 	$a = array();
 	foreach(array('.php', '_options.php', '_fonctions.php', '.js', '.js.html', '.css', '.css.html') as $ext)
 		if (find_in_path('outils/'.($temp=$outil_id.$ext))) $a[] = $temp;
-	if(count($a)) $details[] = _T('desc:detail_fichiers') . ' ' . join(', ', $a);
+	if(count($a)) $details[] = _T('couteau-desc:detail_fichiers') . ' ' . join(', ', $a);
 	$serial = serialize(array_keys($outil));
 	if (preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
-		$details[] =  _T('desc:detail_traitements') . ' #' . join(', #', array_unique($regs[1]));	
+		$details[] =  _T('couteau-desc:detail_traitements') . ' #' . join(', #', array_unique($regs[1]));	
 	if (preg_match_all(',(pipeline|pipelinecode):([a-z_]+),', serialize(array_keys($outil)), $regs, PREG_PATTERN_ORDER))
-		$details[] = _T('desc:detail_pipelines') . ' ' . join(', ', array_unique($regs[2]));	
+		$details[] = _T('couteau-desc:detail_pipelines') . ' ' . join(', ', array_unique($regs[2]));	
 	if(count($details)) return $hr . join('<br />', $details) . '</div>';
 	return '';
 }
