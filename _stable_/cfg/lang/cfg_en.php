@@ -11,8 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg' => 'CFG',
 	'choisir_module_a_configurer' => 'Choose the module to configure.',
 	'configuration_modules' => 'Module configuration',
-	'config_enregistree' => '<B>@nom@</b> has been saved',
-	'config_supprimee' => '<B>@nom@</b> has been deleted',
+	'config_enregistree' => '<b>@nom@</b> has been saved',
+	'config_supprimee' => '<b>@nom@</b> has been deleted',
 
 	// E
 	'erreur_enregistrement' => 'An error occurred while saving <b>@nom@</b>',
