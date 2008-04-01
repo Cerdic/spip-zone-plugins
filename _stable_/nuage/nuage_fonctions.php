@@ -55,10 +55,10 @@ function filtre_nuage_dist($id_mot, $titre = '', $url = '', $poids = -1, $expose
 
 
 function nuage_tri_poids($a,$b){
-	return ($a['poids']==$b['poids'])?0:$a['poids']<$b['poids'];
+	return (intval($a['poids'])==intval($b['poids']))?0:intval($a['poids'])<intval($b['poids'])?1:-1;
 }
 function nuage_tri_hasard($a,$b){
-	return ($a['hasard']==$b['hasard'])?0:$a['hasard']<$b['hasard'];
+	return (intval($a['hasard'])==intval($b['hasard']))?0:intval($a['hasard'])<intval($b['hasard'])?1:-1;
 }
 
 function nuage_affiche($nuage){
