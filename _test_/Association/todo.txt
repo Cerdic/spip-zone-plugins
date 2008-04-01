@@ -1,6 +1,3 @@
-*** Bugs ***
-- Charset dans le pdf Adhérents
-
 *** Mise en forme ***
 
 ==Compatibilite XHTML==
@@ -12,18 +9,17 @@ A faire
 Passer tout le code en UTF-8 plutot qu'en entites HTML ?
 
 == Indenter le code ==
-Il serait plus propre d'homogeneiser l'indentation du code.
-Utiliser l'indentation de SPIP serait le mieux selon moi.
+- Il serait plus propre d'homogeneiser l'indentation du code.
+- Utiliser l'indentation de SPIP serait le mieux selon moi.
 
 == Visualisation de source ==
-Mettre des \n en fin de ligne dans les echo, ou sortir le code HTML du code
+- Mettre des \n en fin de ligne dans les echo, ou sortir le code HTML du code
 source PHP, afin d'avoir un code lisible en sortie.
 
 *** Gestion comptable  ***
 
 == Gestion des droits==
-
-Declarer le comptable et lui donner l'acces exclusif en validation des ecritures
+- Declarer le comptable et lui donner l'acces exclusif en validation des ecritures
 
 == Comptes ==
 - Ajouter une fonction de transfert de compte à compte (opération diverse)
@@ -31,37 +27,18 @@ Declarer le comptable et lui donner l'acces exclusif en validation des ecritures
 
 *** Gros Travaux ***
 
-Renommage des champs (valeur, code, libelle, intitule)
-Evacuation des champs inutilisés
-
 == Internationalisation ==
 En cours.
 - Activites OK
 - Adherents OK
 - Prêts OK
 
-==Requetes SQL==
-- Utiliser la fonction _q($variable) plutot que les addslashes (spip 1.9.2)
-		En cours
-
-- Il faudrait egalement faire un _q sur tous les elements recuperes de $_POST
-		ou _$GET ou $_REQUEST, afin d'eviter les erreurs SQL generes avec les
-		apostrophes dans les noms, prenoms, etc (et pas seulement dans les
-		commentaires)
-
 == Templates==
+- Formulaires Don, Achat
+- Module de paiement
 
 *** Architecture ***
 
-== Spip_listes 1.9.2 ==
-Ajouter l'inscription aux listes de diffusion
-
-== Inscription2 ==
-Renommer le fichier spip_asso_adherents en spip_auteurs_elargis pour se conformer à la modularité spip
-Renommer les champs communs
-Construire une routine à l'install: créer la table ou ajouter les champs supplémentaires
-Mettre à jour toutes les requêtes
-Mettre à jour les boucles
 
 *** Suggestions ***
 
