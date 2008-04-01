@@ -1,4 +1,76 @@
 <?php
+///////////////Fonction pour afficher les icones en fonction du sexe du candidat
+function siou_icone_spip($id_saisie, $annee) {
+		$query =  "SELECT sex.sexe as sexe"
+				. " FROM odb_candidats can"
+				. " LEFT JOIN odb_ref_sexe sex on sex.id=can.sexe"
+				. " WHERE id_saisie=$id_saisie AND annee=$annee"
+          		;
+        $result = spip_query($query);
+        if ($row = spip_fetch_array($result)) {
+		$genre=$row['sexe'];
+			if($genre=="M"){
+			$icone="IMG/tete.png";
+			}else{
+			$icone="IMG/teta.png";	
+			}
+		}
+		return $icone;
+}
+
+function balise_ICONE($p) {
+   $annee=champ_sql('annee',$p);
+   $id_saisie=champ_sql('id_saisie',$p);
+	$p->code = "siou_icone_spip($id_saisie, $annee)";
+	$p->statut = 'html';
+	return $p;
+}
+
+
+///////////////Fonction pour acceder à une variable d'url
+function env($env,$par='') {
+	 $env = str_replace('&quot;','"',$env);
+	  if($par) {
+        $env = unserialize($env);
+        return entites_html($env[$par]);
+	  }
+	 return $env;
+}
+
+///////////////#ID_TABLE
+/** affiche un numero de table de facon lisible pour un humain
+ * 
+ * @param string $id_table : numéro de table récupéré en base
+ * @return string : numero de table
+ */
+function getIdTableHumain($id_table) {
+	$t=explode('-',$id_table);
+	$milieu=$t[1][0].(int)substr($t[1],1);
+	$id_table=$t[0]."-$milieu-".(int)$t[2];
+	return $id_table;
+}
+
+function siou_spip_id_table($id_saisie, $annee) {
+		$query =  "SELECT id_table"
+				. " FROM odb_candidats"
+				. " WHERE id_saisie=$id_saisie AND annee=$annee"
+          		;
+        $result = spip_query($query);
+        if ($row = spip_fetch_array($result)) {
+		$id_table=$row['id_table'];
+		$id_table=getIdTableHumain($id_table);
+		}
+		return $id_table;
+}
+
+function balise_ID_TABLE($p) {
+   $annee=champ_sql('annee',$p);
+   $id_saisie=champ_sql('id_saisie',$p);
+	$p->code = "siou_spip_id_table($id_saisie, $annee)";
+	$p->statut = 'html';
+	return $p;
+}
+
 ///////////// #CANDIDAT
 function siou_spip_candidat($id_saisie, $annee) {
    $query = "SELECT sex.sexe, pre.prefixe, nom,  prenoms"
@@ -169,6 +241,7 @@ function siou_spip_resultat($id_table, $annee) {
       elseif(in_array(strtolower($delib2),array('passable','abien','bien','tbien'))) $delib=$delib2;
       else $delib=$delib1;
       if($delib=='Reserve') $delib="<b>$delib</b>";
+      //if($delib3=='' && $delib2=='' && $delib1=='') $delib=' ';
       return $delib;
    } else return "En cours";
 }
