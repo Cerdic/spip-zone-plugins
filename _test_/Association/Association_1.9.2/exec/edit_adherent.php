@@ -23,7 +23,7 @@
 		
 		$id_auteur= $_GET['id'];
 		$indexation = lire_config('association/indexation');
-		$query = spip_query( "SELECT * FROM spip_asso_adherents INNER JOIN spip_auteurs_elargis ON spip_asso_adherents.id_auteur=spip_auteurs_elargis.id_auteur WHERE spip_asso_adherents.id_auteur='$id_auteur' ");
+		$query = spip_query( "SELECT * FROM spip_auteurs_elargis WHERE id_auteur='$id_auteur' ");
 		while ($data = spip_fetch_array($query)) { 
 			$id_adherent=$data['id_adherent'];
 			$id_asso=$data['id_asso'];
@@ -32,10 +32,7 @@
 			$statut_interne=$data['statut_interne'];
 			$categorie=$data['categorie'];
 			$validite=$data['validite'];
-			$utilisateur1=$data['utilisateur1'];
-			$utilisateur2=$data['utilisateur2'];
-			$utilisateur3=$data['utilisateur3'];
-			$utilisateur4=$data['utilisateur4'];
+			$commentaire=$data['commentaire'];
 		}
 		$action='modifie';
 		
@@ -62,13 +59,11 @@
 		
 		debut_droite();
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_liste_actifs'));
+		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_modifier_membre'));
 		
 		echo '<form action="'.$url_action_adherents.'" method="post">';	
-		
-		echo '<fieldset><legend>'._T('asso:adherent_titre_modifier_membre').'</legend>';
 		if (lire_config('association/indexation')=="id_asso"){
-			echo	'<label for="id_asso"><strong>N&deg; d\'adh&eacute;rent :</strong></label>';
+			echo '<label for="id_asso"><strong>N&deg; d\'adh&eacute;rent :</strong></label>';
 			echo '<input name="id_asso" value="'.$id_asso.'" type="text" id="id_asso" class="formo" />';
 		}
 		echo '<label for="categorie"><strong>'._T('asso:adherent_libelle_categorie').' :</strong></label>';
@@ -80,29 +75,18 @@
 			echo '> '.$var['libelle'].'</option>';
 		}
 		echo '</select>';
-		echo	'<label for="validite"><strong>'._T('asso:adherent_libelle_validite').' :</strong></label>';
+		echo '<label for="validite"><strong>'._T('asso:adherent_libelle_validite').' :</strong></label>';
 		echo '<input name="validite" value="'.$validite.'" type="text" id="validite" class="formo" />';
-		echo	'<label for="statut_interne"><strong>'._T('asso:adherent_libelle_statut').' :</strong></label>';
-		echo '<select name ="statut_interne" id="statut_interne" class="formo">';
+		echo '<label for="statut_interne"><strong>'._T('asso:adherent_libelle_statut').' :</strong></label>';
+		echo '<select name ="statut_interne" id="statut_interne" class="formo" />';
 		foreach (array(ok,echu,relance,sorti,lire_config('inscription2/statut_interne')) as $var) {
 			echo '<option value="'.$var.'"';
 			if ($statut_interne==$var) {echo ' selected="selected"';}
 			echo '> '._T('asso:adherent_entete_statut_'.$var).'</option>';
 		}
 		echo '</select>';
-		echo '</fieldset>';
-		
-		echo '<fieldset><legend>'._T('asso:adherent_titre_donnees_complementaires').'</legend>';
-		echo	'<label for="utilisateur1"><strong>'._T('asso:adherent_libelle_utilisateur1').' :</strong></label>';
-		echo '<input name="utilisateur1" type="text" value="'.$utilisateur1.'" type="text" id="utilisateur1" class="formo" />';
-		echo	'<label for="utilisateur2"><strong>'._T('asso:adherent_libelle_utilisateur2').' :</strong></label>';
-		echo '<input name="utilisateur2" type="text" value="'.$utilisateur2.'" type="text" id="utilisateur2" class="formo" />';
-		echo	'<label for="utilisateur3"><strong>'._T('asso:adherent_libelle_utilisateur3').' :</strong></label>';
-		echo '<input name="utilisateur3" type="text" value="'.$utilisateur3.'" type="text" id="utilisateur3" class="formo" />';
-		echo	'<label for="utilisateur4"><strong>'._T('asso:adherent_libelle_utilisateur4').' :</strong></label>';
-		echo '<input name="utilisateur4" type="text" value="'.$utilisateur4.'" type="text" id="utilisateur4" class="formo" />';
-		echo '</fieldset>';
-		
+		echo '<label for="commentaire"><strong>'._T('asso:adherent_libelle_remarques').' :</strong></label>';
+		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';		
 		echo '<input name="id" type="hidden" value="'.$id_auteur.'" >';		
 		echo '<input name="action" type="hidden" value="'.$action.'">';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
