@@ -1,0 +1,77 @@
+<div class="spip_forms">
+<fieldset>
+<legend>Formulaire d'inscription</legend>
+<form action="#" method="POST">
+<input name="id_evenement" type="hidden" value="[(#ENV{id_evenement})]" />
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="nom"><:asso:activite_libelle_nomcomplet:> :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<input name="nom" type="text" id="nom" size="40" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="id_adherent"><:asso:activite_libelle_adherent:> :</label>
+		</span>
+		<input name="id_adherent" type="text" id="id_adherent" size="40" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="email"><:asso:activite_libelle_email:> :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<input name="email" type="text" id="email" size="40" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="adresse"><:asso:activite_libelle_adresse_complete:> :</label>
+		</span>
+		<textarea name="adresse" type="text" id="adresse" rows="2" cols="30" /></textarea>
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="telephone"><:asso:activite_libelle_telephone:> :</label>
+		</span>
+		<input name="telephone" type="text" id="telephone" size="40" />
+	</div>
+	<p class='spip_form_label'><:asso:activite_libelle_accompagne_de:> :</p>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="membres"><:asso:activite_libelle_membres:> :</label>
+		</span>
+		<input name="membres" type="text" id="membres" size="40" />
+	</div>	
+		<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="non_membres"><:asso:activite_libelle_non_membres:> :</label>
+		</span>
+		<input name="non_membres" type="text" id="non_membres" size="40" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="inscrits"><:asso:activite_libelle_nombre_inscrit:> :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<input name="inscrits" type="text" id="inscrits" size="40" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="montant"><:asso:activite_libelle_montant_inscription:> :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<input name="montant" type="text" id="montant" size="40" />
+	</div>	
+	<div class="spip_form_champs">
+		<span class='spip_form_label'>
+			<label for="commentaire"><:asso:activite_libelle_commentaires:> :</label>
+		</span>
+		<textarea name="commentaire" id="commentaire" rows="10" cols="30" /></textarea>
+	</div>
+	<div>
+		<input type="submit" name="bouton" class="spip_bouton" value="Soumettre" />
+		<input type="reset" class="spip_bouton" value="Effacer" />
+	</div>
+</form>
+</fieldset>
+</div>

@@ -1,0 +1,39 @@
+<div class="spip_forms">
+<h1>Votre adh&eacute;sion est enregistr&eacute;e</h1>
+
+
+
+<div style="padding:5px;width:500px">
+	<dl>
+		<dt>
+		Votre adresse
+		<dt>
+		<dd>
+		[(#ENV{sexe}|=={M}|?{'Monsieur','Madame'} )][ (#ENV{prenom})][ (#ENV{nom})]
+		<dd>
+		<dd>
+		[ (#ENV{adresse})]
+		</dd>
+		<dd>
+		[ (#ENV{cp})][ (#ENV{ville})]
+		</dd>
+	</dl>
+	
+	[ <dl>
+		<dt>
+		Votre abonnement
+		<dt>
+		<dd>
+		(#ENV{categorie})][ (#ENV{valeur}) Euros
+		</dd>
+	</dl>
+	]
+	
+	
+</div>
+
+	<div style="height:40px;margin:20px;float:right;font-size:1.5em;clear:both;padding:5px;width:500px">
+	<a href="#URL_SITE">Retour</a>
+	</div>
+	
+</div>
