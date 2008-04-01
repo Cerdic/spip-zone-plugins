@@ -127,16 +127,22 @@ function exec_spiplistes_liste_gerer () {
 		if($flag_editable) {
 //spiplistes_log("LISTE MODIF: flag_editable <<", _SPIPLISTES_LOG_DEBUG);
 		
-			$sql_query = "";
-
-			// Recupa¨re les donnees de la liste courante pour optimiser l'update
+			// Recupere les donnees de la liste courante pour optimiser l'update
 			$sql_select = "statut,titre,date,lang";
-			if($row = spip_fetch_array(spip_query("SELECT $sql_select FROM spip_listes WHERE id_liste=$id_liste LIMIT 1"))) {
+			$sql_result = sql_select($sql_select, "spip_listes", "id_liste=".sql_quote($id_liste), "", "", "1");
+			if($row = sql_fetch($sql_result)) {
 				foreach(explode(",", $sql_select) as $key) {
 					$current_liste[$key] = $row[$key];
 				}
 			}
 			
+			///////////////////////////////////
+			// Les modifications (sql_upadteq)
+			// A noter, ne pas préparer les valeurs par sql_quote()
+			//  sql_upadteq() s'en occupe
+			
+			$sql_champs = array();
+
 			// Retour de l'editeur ?
 			if($btn_liste_edit) {
 				$titre = corriger_caracteres($titre);
@@ -144,19 +150,20 @@ function exec_spiplistes_liste_gerer () {
 				if(empty($titre)) {
 					$titre = filtrer_entites(_T('spiplistes:Nouvelle_liste_de_diffusion'));
 				}
-				$sql_query .= "titre="._q($titre).",texte="._q($texte).",";
+				$sql_champs['titre'] = $titre;
+				$sql_champs['texte'] = $texte;
 			}
 			
 			// Modifier le grand patron ?
 			if($btn_grand_patron && $patron) {
-				$sql_query .= "patron="._q($patron).",";
+				$sql_champs['patron'] = $patron;
 			}
 			
 			// Modifier patron de pied ?
 			if($btn_patron_pied && $patron) {
 //spiplistes_log("LISTE MODIF: de la liste <<$id_liste $patron", _SPIPLISTES_LOG_DEBUG);
 				$pied_page = spiplistes_pied_page_html_get($patron);
-				$sql_query .= "pied_page="._q($pied_page).",";
+				$sql_champs['pied_page'] = $pied_page;
 			}
 			
 			// Modifier diffusion ?
@@ -164,7 +171,7 @@ function exec_spiplistes_liste_gerer () {
 //spiplistes_log("LISTE MODIF: btn_modifier_diffusion <<$statut", _SPIPLISTES_LOG_DEBUG);
 				// Modifier le statut ?
 				if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS)) && ($statut!=$current_liste['statut'])) {
-					$sql_query .= "statut='$statut',";
+					$sql_champs['statut'] = $statut;
 					// si la liste passe en privee, retire les invites
 					if($statut == _SPIPLISTES_PRIVATE_LIST) {
 						$auteur_statut = '6forum';
@@ -176,30 +183,28 @@ function exec_spiplistes_liste_gerer () {
 				// Modifier la langue ?
 				if(!empty($lang) && ($lang!=$current_liste['lang'])) {
 //spiplistes_log("LISTE MODIF: btn_modifier_diffusion $lang", _SPIPLISTES_LOG_DEBUG);
-					$sql_query .= "lang='$lang',";
+					$sql_champs['lang'] = $lang;
 				}
 			}
 			
 			// Modifier l'adresse email de reponse ?
 			if($btn_modifier_replyto && email_valide($email_envoi) && ($email_envoi!=$current_liste['email_envoi'])) {
-				$sql_query .= "email_envoi="._q($email_envoi).",";
+				$sql_champs['email_envoi'] = $email_envoi;
 			}
 
+			////////////////////////////////////
 			// Modifier message_auto ?
 			if($btn_modifier_courrier_auto) {
 //spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto <<", _SPIPLISTES_LOG_DEBUG);
-				$sql_query = "";
 				$titre_message = $titre_message ; // attention propre -> <p>
-//spiplistes_log("LISTE MODIF: envoyer_maintenant".($envoyer_maintenant ? "oui" : "non"), _SPIPLISTES_LOG_DEBUG);
-//spiplistes_log("LISTE MODIF: message_auto: $message_auto", _SPIPLISTES_LOG_DEBUG);
-//spiplistes_log("LISTE MODIF: auto_mois: $auto_mois", _SPIPLISTES_LOG_DEBUG);
-			if(
+				if(
 					($message_auto == 'oui')
 					&& ($envoyer_maintenant
 						|| ($envoyer_quand = spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute)) 
 						|| $auto_mois)
 					) {
-					$sql_query .= "message_auto='oui',titre_message="._q($titre_message).",";
+					$sql_champs['message_auto'] = 'oui';
+					$sql_champs['titre_message'] = $titre_message;
 
 					if(time() > strtotime($envoyer_quand)) {
 					// envoi dans le passe est considere comme envoyer maintenant
@@ -223,33 +228,36 @@ function exec_spiplistes_liste_gerer () {
 							. fin_cadre_couleur(true)
 							;
 						if($date_depuis){
-						$sql_query .= "maj='$date_depuis',periode=$periode,";
+							$sql_champs['maj'] = $date_depuis;
+							$sql_champs['periode'] = $periode;
 						}
 						$date_prevue = __mysql_date_time(time());
 						
 					}
 					else if($envoyer_quand) {
-							$sql_query .= "date='$envoyer_quand',periode=$periode,";
+						$sql_champs['date'] = $envoyer_quand;
+						$sql_champs['periode'] = $periode;
 					}
-					if($auto_mois) {
-//spiplistes_log("LISTE MODIF: message_auto: $message_auto", _SPIPLISTES_LOG_DEBUG);
-						$sql_query .= "statut='"._SPIPLISTES_MONTHLY_LIST."',";
-					}else{
-						$sql_query .= "statut='inact',";
-					}
+					
+					$sql_champs['statut'] = 
+						($auto_mois)
+						? _SPIPLISTES_MONTHLY_LIST
+						: _SPIPLISTES_PRIVATE_LIST
+						;
 				}
 				else if($message_auto == 'non') {
-					$sql_query .= "message_auto='non',titre_message='',date='',periode=0,";
+					$sql_champs['message_auto'] = 'non';
+					$sql_champs['titre_message'] = '';
+					$sql_champs['date'] = '';
+					$sql_champs['periode'] = 0;
 				}
 			} // end if($btn_modifier_courrier_auto)
 			
-			// Enregistre les modifs
-			if(!empty($sql_query)) {
-				$sql_query = rtrim($sql_query,",");
-				$sql_query = "UPDATE spip_listes SET $sql_query WHERE id_liste=$id_liste LIMIT 1";
-				$sql_result = spip_query($sql_query);
+			// Enregistre les modifs pour cette liste
+			if(count($sql_champs)) {
+				$sql_result = sql_updateq("spip_listes", $sql_champs, "id_liste=".sql_quote($id_liste)." LIMIT 1");
 			}
-
+			
 			// Forcer les abonnements
 			if($btn_valider_forcer_abos && $forcer_abo && in_array($forcer_abo, array('tous', 'auteurs', '6forum', 'aucun'))) {
 				include_spip("inc/spiplistes_listes_forcer_abonnement");
@@ -390,6 +398,7 @@ function exec_spiplistes_liste_gerer () {
 	// Modifier le statut de la liste
 	//
 	$page_result .= ""
+	// en javascript !
 		. "
 	<script type='text/javascript'><!--
 	var alerter_modif_statut = false;
