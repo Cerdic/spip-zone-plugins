@@ -52,15 +52,15 @@
 			echo '</tr>';
 			echo '<tr>';
 			echo '<td><font color="blue"><strong>Entr&eacute;es :</strong></td>';
-			echo '<td style="text-align:right;">'.number_format($somme_recettes, 2, ',', ' ').' &euro; </td>';
+			echo '<td style="text-align:right;">'.association_nbrefr($somme_recettes).' &euro; </td>';
 			echo '</tr>';
 			echo '<tr>';
 			echo '<td><font color="blue"><strong>Sorties :</strong></td>';
-			echo '<td style="text-align:right;">'.number_format($somme_depenses, 2, ',', ' ').' &euro;</td>';
+			echo '<td style="text-align:right;">'.association_nbrefr($somme_depenses).' &euro;</td>';
 			echo '</tr>';
 			echo '<tr>';
 			echo '<td><font color="#9F1C30"><strong>Solde :</strong></td>';
-			echo '<td class="impair" style="text-align:right;">'.number_format($solde, 2, ',', ' ').' &euro;</td>';
+			echo '<td class="impair" style="text-align:right;">'.association_nbrefr($solde).' &euro;</td>';
 			echo '</tr>';
 			echo '</table>';
 		}
@@ -114,10 +114,9 @@
 	echo '<td style="text-align:right;"><strong>Date</strong></td>';
 	echo '<td><strong>Compte</strong></td>';
 	echo '<td><strong>Justification</strong></td>';
-	echo '<td style="text-align:right;"><strong>Recette</strong></td>';
-	echo '<td style="text-align:right;"><strong>D&eacute;pense</strong></td>';
-		echo '<td><strong>Financier</strong></td>';
-	echo '<td colspan="3" style="text-align:center;"><strong>Action</strong></td>';
+	echo '<td style="text-align:right;"><strong>Montant</strong></td>';
+	echo '<td><strong>Financier</strong></td>';
+	echo '<td colspan="3" style="text-align:center;"><strong>&nbsp;</strong></td>';
 	echo '</tr>';
 
 	$max_par_page=30;
@@ -139,8 +138,7 @@
 		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_datefr($data['date']).'</td>';
 		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['imputation'].'</td>';
 		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['justification'].'</td>';
-		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($data['recette'], 2, ',', ' ').'</td>';
-		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($data['depense'], 2, ',', ' ').'</td>';
+		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_nbrefr($data['recette']-$data['depense']).'</td>';
 		echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['journal'].'</td>';
 		if($data['valide']=='oui') {echo '<td class ='.$class.' colspan=3 style="border-top: 1px solid #CCCCCC;">&nbsp;</td>';}
 		else {

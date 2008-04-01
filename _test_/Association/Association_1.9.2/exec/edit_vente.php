@@ -23,7 +23,7 @@
 		$id_vente= $_REQUEST['id'];		
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		
-		$query = spip_query ("SELECT * FROM spip_asso_ventes INNER JOIN spip_asso_comptes ON id_vente=id_journal WHERE id_vente=$id_vente AND imputation='vente' " );	
+		$query = spip_query ("SELECT * FROM spip_asso_ventes INNER JOIN spip_asso_comptes ON id_vente=id_journal WHERE id_vente=$id_vente AND imputation='".lire_config('association/pc_ventes')."' ");	
 		while ($data = spip_fetch_array($query)) {
 			$date_vente=$data['date_vente'];
 			$article=$data['article'];
@@ -45,7 +45,12 @@
 		debut_gauche();
 		
 		debut_boite_info();
-		echo association_date_du_jour();	
+		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:vente_libelle_numero').'<br />';
+		echo '<span class="spip_xx-large">';
+		echo $id_vente;
+		echo '</span></div>';
+		echo '<br /><div>'.association_date_du_jour().'</div>';	
+		
 		fin_boite_info();	
 		
 		debut_raccourcis();
@@ -54,7 +59,7 @@
 		
 		debut_droite();
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('Mise &agrave; jour des ventes'));
+		debut_cadre_relief(  "", false, "", $titre = _T('Mise &agrave; jour des ventes').' '.$action);
 		
 		echo '<form method="post" action="'.$url_action_ventes.'">';	
 		echo '<label for="date_vente"><strong>Date (AAAA-MM-JJ) :</strong></label>';
