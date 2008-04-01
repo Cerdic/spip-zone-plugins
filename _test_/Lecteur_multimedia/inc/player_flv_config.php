@@ -221,7 +221,7 @@ function player_flv_config () {
 		  	'type' => "boolean"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_showswitchsubtitles")
-			, 'default' => '1'
+			, 'default' => '0'
 		  )
 		, 'loop' // 1 pour boucler
 		  => array(
