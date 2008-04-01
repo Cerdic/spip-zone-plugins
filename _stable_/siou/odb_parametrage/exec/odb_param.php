@@ -364,12 +364,13 @@ debut_droite();
             case 'impression_anonymes':
                if($tab_auteur['login']!=$tParam['login_anonymes']) die(KO." - Vous n'&ecirc;tes pas autoris&eacute;(e) &agrave; ex&eacute;cuter cette action");
             	$msg='';
-            	$sql="SELECT dep.departement, eta.etablissement centre, ser.serie, rep.id_table, decode(id_anonyme,'".$tParam['code']."') id_anonyme, jury "
+            	$_SESSION = array();
+              	$sql="SELECT dep.departement, eta.etablissement centre, ser.serie, rep.id_table, decode(id_anonyme,'".$tParam['code']."') id_anonyme, jury "
             		. "from odb_repartition rep, odb_ref_etablissement eta, odb_ref_departement dep, odb_candidats can, odb_ref_serie ser "
             		. "where can.id_saisie=rep.id_saisie and can.annee=$annee and can.serie=ser.id and rep.id_etablissement=eta.id and eta.id_departement=dep.id and rep.annee=$annee "
             		. 'order by dep.departement, centre, id_table';
             	//echo ($sql);
-            	$result=odb_query($sql,__FILE__,__LINE__);
+            	$result=mysql_query($sql) or die(KO." - Erreur dans la requete $sql<br/>".mysql_error());
             	while($row=mysql_fetch_array($result)) {
             		foreach(array('departement','centre','serie','id_table','id_anonyme','jury') as $col) $$col=utf8_decode($row[$col]);
             		$id_table=getIdTableHumain($id_table);
@@ -396,31 +397,44 @@ debut_droite();
 		            					'id_table'=>$id_table,
 		            					'id_anonyme'=>$id_anonyme,
 		            					'jury'=>$jury
-		            				);
+		               				);
 		            			}
 		            		}
+							//YEDA 25 Mars 2008
+							// Appel de pdf-inc-requete au lieu de pdf-inc-table
+							//le parametre  $centre est envoyer aussi comme variable dans l'url, c'est par lui
+							//que la ou les requetes à exécuter est reconnue.
+							// Chaque requete est suivi d'un titre, d'un pied de page et des colonnes de résultats qui peuvent variées
+							$requete="SELECT ser.serie, rep.id_table, decode(id_anonyme,'".$tParam['code']."') id_anonyme, rep.jury "
+							. "from odb_repartition rep, odb_ref_etablissement eta, odb_ref_departement dep, odb_candidats can, odb_ref_serie ser "
+							. "where can.id_saisie=rep.id_saisie and rep.jury=$jury and can.annee=$annee and rep.annee=$annee and can.serie=ser.id and rep.id_etablissement=eta.id and eta.etablissement='$centre' and eta.id_departement=dep.id "
+							. "order by ser.serie";
+						    $_SESSION['requete'][$centre][]=$requete;
+						    $_SESSION['pied'][$centre][]=html_entity_decode("Num&eacute;ros anonymes $centre ($departement)");
+						    $_SESSION['titre'][$centre][]=html_entity_decode("Num&eacute;ros anonymes &agrave; l'examen du Bac - Centre de composition <b>$centre</b> ($departement) JURY:$jury");
+						    $_SESSION['cols'][$centre][]=array(
+							'serie'=>'Serie',
+							'id_table'=>'Num table',
+							'id_anonyme'=>'Num anonyme',
+							'jury'=>'Jury'
+						  	);
+            			////////////////////
 	            		}
+	            		/*
+	            		echo "////////////////////////////////";
+	            		print_r($_SESSION['requete'][$centre]);
+	            		echo "////////////////////////////////";
+            			*/
             			$msg.="<tr><th colspan=3>Il y a $cpt candidats dans ce centre</th></tr>\n";
             			$msg.="</table>\n";
 		         		$nom_pdf=getRewriteString("$action|$departement|$centre");
-		               $_SESSION['pied'][$nom_pdf]=html_entity_decode("Num&eacute;ros anonymes $centre ($departement)");
-		               $_SESSION['titre'][$nom_pdf]=html_entity_decode("Num&eacute;ros anonymes &agrave; l'examen du Bac - Centre de composition <b>$centre</b> ($departement)");
-		               $_SESSION['cols'][$nom_pdf]=array(
-		               	//'departement'=>'Departement',
-		               	//'centre'=>'Centre de composition',
-		               	'serie'=>'Serie',
-		               	'id_table'=>'Num table',
-		               	'id_anonyme'=>'Num anonyme',
-		               	'jury'=>'Jury'
-		               );
-		               $_SESSION['format'][$nom_pdf]=array('taille'=>'A4', 'orientation'=>'portrait');
-		               $_SESSION['encryption'][$nom_pdf]=array('user'=>$tParam['code'],'owner'=>$tParam['code'],'action'=>array('print'));
-							$_SESSION['data'][$nom_pdf]=$pdf[$departement][$centre];
-		               $tmp1="<A HREF='../plugins/odb/odb_commun/inc-pdf-table.php?pdf=$nom_pdf'>";
-		               $tmp2="<b>$centre</b> : exporter <b>$cpt</b> num&eacute;ros anonymes</A>";
-		               $lien_pdf=$tmp1.vignette('pdf',"Exporter $cpt num&eacute;ros anonymes de $centre ($departement) en PDF").$tmp2;
-		               $msg.=$lien_pdf;
-		               $msg_pdf.="<tr><td colspan=2>".$tmp1.$tmp2."</td></tr>\n";
+		                $tmp1="<A HREF='../plugins/odb/odb_commun/inc-pdf-requete.php?pdf=$nom_pdf&param=$centre'>";
+		                $tmp2="<b>$centre</b> : exporter <b>$cpt</b> num&eacute;ros anonymes</A>";
+		                $lien_pdf=$tmp1.vignette('pdf',"Exporter $cpt num&eacute;ros anonymes de $centre ($departement) en PDF").$tmp2;
+		                $msg.=$lien_pdf;
+		                $msg_pdf.="<tr><td colspan=2>".$tmp1.$tmp2."</td></tr>\n";
+						$_SESSION['encryption'][$centre]=array('user'=>$tParam['code'],'owner'=>$tParam['code'],'action'=>array('print'));
+						$_SESSION['format'][$centre]=array('taille'=>'A4', 'orientation'=>'portrait');
             		}
             	}
             	$msg.="<hr size=1/><A HREF='".generer_url_ecrire('odb_param')."&reset'>Finaliser cette action</a>\n";
@@ -430,7 +444,7 @@ debut_droite();
             		. $msg
             		;
             	break;
-            ///////////////////////////////////////////////////////////////////////
+            	///////////////////////////////////////////////////////////////////////
             case 'configurer':
                if($tab_auteur['login']!=$tParam['login_anonymes']) die(KO." - Vous n'&ecirc;tes pas autoris&eacute;(e) &agrave; ex&eacute;cuter cette action");
                $msg= "<form name='form_param' action='".generer_url_ecrire('odb_param')."' METHOD='POST'>\n";
