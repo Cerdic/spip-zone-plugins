@@ -20,6 +20,14 @@
 	
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function player_array_set_key_from_value () {
+	$result = array();
+	foreach(func_get_args() as $value) {
+		$result[$value] = $value;
+	}
+	return($result);
+}
+
 function player_flv_config () {
 
 	// la grosse table commune à tous les profils
@@ -50,7 +58,7 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "mini normal maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_buffer")
-			, 'values' => array(5, 10, 20, 30, 60)
+			, 'values' => player_array_set_key_from_value(5, 10, 20, 30, 60)
 			, 'default' => '5'
 		  )
 		, 'buffermessage' // Le message de la mémoire tampon. Par défaut à Buffering _n_, _n_ indiquant le pourcentage.
@@ -72,7 +80,7 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "normal maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_titlesize")
-			, 'values' => array(10, 20, 30)
+			, 'values' => player_array_set_key_from_value(10, 20, 30)
 			, 'default' => '20'
 		  )
 		, 'titlecolor' // La couleur du titre. Par défaut à ffffff.
@@ -87,7 +95,7 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "normal maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_margin")
-			, 'values' => array(0, 8, 16, 24, 32)
+			, 'values' => player_array_set_key_from_value(0, 1, 2, 4, 8, 16, 24, 32)
 			, 'default' => '8'
 		  )
 		, 'srt' // 1 pour utiliser les sous-titres SRT (le fichier doit être au même endroit que la vidéo et avoir le même nom que le fichier vidéo mais avec l'extension .srt)
@@ -102,7 +110,7 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_srtsize")
-			, 'values' => array(8, 9, 10, 11, 12, 13, 14)
+			, 'values' => player_array_set_key_from_value(8, 9, 10, 11, 12, 13, 14)
 			, 'default' => '11'
 		  )
 		, 'srtcolor' // La couleur du texte des sous-titres
@@ -166,7 +174,9 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "normal maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_showtime")
-			, 'values' => array('0' => _T(_PLAYER_LANG."label_showtime_0"), '1' => _T(_PLAYER_LANG."label_showtime_1"), '2' => _T(_PLAYER_LANG."label_showtime_2"))
+			, 'values' => array('0' => _T(_PLAYER_LANG."label_showtime_0")
+					, '1' => _T(_PLAYER_LANG."label_showtime_1")
+					, '2' => _T(_PLAYER_LANG."label_showtime_2"))
 			, 'default' => '0'
 		  )
 		, 'showprevious' // 1 pour afficher le bouton PREVIOUS.
@@ -188,7 +198,7 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "multi"
 			, 'label' => _T(_PLAYER_LANG."label_showopen")
-			, 'values' => array(0, 1, 2)
+			, 'values' => player_array_set_key_from_value(0, 1, 2)
 			, 'default' => '0'
 		  )
 		, 'showplayer' // Affichage de la barre des boutons : autohide, always ou never
@@ -196,7 +206,7 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_showplayer")
-			, 'values' => array('autohide', 'always', 'never')
+			, 'values' => player_array_set_key_from_value('autohide', 'always', 'never')
 			, 'default' => 'autohide'
 		  )
 		, 'showfullscreen' // 1 pour afficher le bouton pour le plein écran (nécessite Flash Player 9.0.16.60 ou supérieur)
@@ -225,14 +235,16 @@ function player_flv_config () {
 			'type' => "int"
 		  	, 'class' => "mini normal maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_width")
-			, 'default' => '320'
+//			, 'default' => '320'
+			, 'default' => ''
 		  )
 		, 'height' // Forcer la hauteur du lecteur
 		  => array(
 			'type' => "int"
 		  	, 'class' => "mini normal maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_height")
-			, 'default' => '240'
+//			, 'default' => '240'
+			, 'default' => ''
 		  )
 		, 'startimage' // Les images de titre séparées par des |
 		  => array(
@@ -352,7 +364,7 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_onclicktarget")
-			, 'values' => array('_self', '_blank')
+			, 'values' => player_array_set_key_from_value('_self', '_blank')
 			, 'default' => '_self'
 		  )
 		, 'ondoubleclick' // Action sur le double click: none, fullscreen, playpause, ou l'url à ouvrir.
@@ -367,7 +379,7 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_ondoubleclicktarget")
-			, 'values' => array('_self', '_blank')
+			, 'values' => player_array_set_key_from_value('_self', '_blank')
 			, 'default' => '_self'
 		  )
 		, 'playertimeout' // Le délai en milliseconde avant que le lecteur se cache (quand il est en mode autohide bien sûr. Par défaut à 1500.
@@ -396,7 +408,7 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_volume")
-			, 'values' => array(0, 25, 50, 100, 150, 175, 200)
+			, 'values' => player_array_set_key_from_value(0, 25, 50, 100, 150, 175, 200)
 			, 'default' => '100'
 		  )
 		, 'videobgcolor' // La couleur du fond de la vidéo quand il n'y a pas de vidéo.
@@ -425,7 +437,7 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "multi"
 			, 'label' => _T(_PLAYER_LANG."label_scrollbarsize")
-			, 'values' => array(4, 8, 16)
+			, 'values' => player_array_set_key_from_value(4, 8, 16)
 			, 'default' => '4'
 		  )
 		, 'showtitlebackground' // Affichage du fond du titre: auto, always ou never
@@ -433,7 +445,7 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_showtitlebackground")
-			, 'values' => array('auto', 'always', 'never')
+			, 'values' => player_array_set_key_from_value('auto', 'always', 'never')
 			, 'default' => 'auto'
 		  )
 		, 'playeralpha' // La transparence du fond du lecteur entre 0 et 100.
@@ -441,7 +453,7 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "multi"
 			, 'label' => _T(_PLAYER_LANG."label_playeralpha")
-			, 'values' => array(0, 20, 40, 60, 80, 100)
+			, 'values' => player_array_set_key_from_value(0, 20, 40, 60, 80, 100)
 			, 'default' => '100'
 		  )
 		, 'showmouse' // Affichage de la souris : always, autohide, never.
@@ -449,7 +461,7 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_showmouse")
-			, 'values' => array('always', 'autohide', 'never')
+			, 'values' => player_array_set_key_from_value('always', 'autohide', 'never')
 			, 'default' => 'autohide'
 		  )
 		, 'top1' // Charger une image par dessus la vidéo et la placer à une coordonnée x et y (par exemple url|x|y)
@@ -485,7 +497,7 @@ function player_flv_config () {
 			'type' => "list"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_iconplaybgalpha")
-			, 'values' => array(0, 20, 40, 60, 80, 100)
+			, 'values' => player_array_set_key_from_value(0, 20, 40, 60, 80, 100)
 			, 'default' => '100'
 		  )
 		, 'showtitleandstartimage' // 1 pour afficher le titre et l'image de départ en même temps.

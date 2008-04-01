@@ -162,9 +162,10 @@ function exec_player_admin()
 				break;
 			case 'list':
 				$player_flv_options = "<label title='$key'>".$value['label']."<select name='$key' class='fondl'>\n";
-				foreach($value['values'] as $v1) {
+				foreach($value['values'] as $k1 => $v1) {
+					// si la clé n'est pas une chaine, prendre $v1 pour valeur de option
 					$ii = (is_string($v1) ? _T(_PLAYER_LANG.$v1) : $v1);
-					$player_flv_options .= "<option value='$v1'".(($$key == $v1) ? " selected='selected'" : "").">$ii</option>\n";
+					$player_flv_options .= "<option value='$k1'".(($$key == $k1) ? " selected='selected'" : "").">$ii</option>\n";
 				}
 				$player_flv_options .= "</select></label>\n";
 				break;
