@@ -16,8 +16,13 @@
 		$annee = $split[0]; 
 		$mois = $split[1]; 
 		$jour = $split[2]; 
-	return $jour.'/'.$mois.'/'.$annee; 
+		return $jour.'/'.$mois.'/'.$annee; 
 	} 
+	
+	function association_nbrefr($montant) {
+		$montant = number_format($montant, 2, ',', ' ');
+		return $montant;
+	}
 
 	//Affichage du message indiquant la date 
 	function association_date_du_jour($heure=false) {
