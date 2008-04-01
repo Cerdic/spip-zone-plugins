@@ -1,0 +1,15 @@
+<plugin>
+   <nom>ODB : Synchronisation des bases de donnees</nom>
+   <auteur>Ghislain VLAVONOU - ODB - Mars 2008</auteur>
+   <version>0.1</version>
+   <etat>dev</etat>
+   <description>Synchronisation des bases de donnees</description>
+   <lien>http://www.officedubacbenin.bj</lien> <!-- URI de documentation -->
+   <icon>img_pack/logo_odb_150.png</icon>
+   <prefix>odb_synchro</prefix>
+   <pipeline>
+      <nom>ajouter_boutons</nom>
+      <action>ajouterBoutons</action>
+      <inclure>inc-odb_synchro.php</inclure>
+   </pipeline>
+</plugin>
