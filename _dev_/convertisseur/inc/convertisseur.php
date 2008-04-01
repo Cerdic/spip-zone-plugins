@@ -13,15 +13,24 @@ function nettoyer_format($t) {
 	$t = preg_replace('/}([.,])/', '\1}', $t);
 	$t = preg_replace(',([^{]){ ,', '\1 {', $t);
 	$t = preg_replace(', }([^}]),', '} \1', $t);
+	$t = preg_replace(',} {,', ' ', $t);
 
 	$t = preg_replace(", +~,", '~', $t);
 	$t = preg_replace(",~ +,", '~', $t);
 	$t = preg_replace("/{([?!., ]?)}/", '\1', $t);
 
-	## attention ici a l'utf8
-	$t = str_replace('~»', '»', $t);
-	$t = str_replace('«~', '«', $t);
-	$c = str_replace ('–', '--', $c);
+#$a = '«';
+#for($i=0;$i<strlen($a); $i++)
+#	echo ord($a[$i]).'-';exit;
+
+	## attention ici c'est de l'utf8
+	$t = str_replace("~\xc2\xbb", "\xc2\xbb", $t);  # guillemet >>
+	$t = str_replace("\xc2\xab~", "\xc2\xab", $t);  # <<
+	$t = str_replace ("\xe2\x80\x93", '--', $t); # tiret long
+
+	// supprimer les insecables sauf dans les nombres,
+	// parce que ca prend le chou (?)
+	$t = preg_replace(",(\D)~(\D),", '\1 \2', $t);
 
 	return $t;
 }

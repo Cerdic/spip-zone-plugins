@@ -91,6 +91,7 @@ function nettoyage_xtag($c) {
 	$c = preg_replace ('/<cTypeface:Italic>(.*?)<cTypeface:>/ims', '{\1}', $c);
 	$c = preg_replace ('/<I>(.*?)<[$]>/ms', '{\1}', $c);
 	$c = preg_replace ('/<I>(.*?)<I>/ms', '{\1}', $c);
+	$c = preg_replace ('/<I>(.*?)(\n|$)/ms', '{\1}', $c);
 
 	// supprimer un sale petit tiret
 	$c = str_replace("&#173;", '', $c);
