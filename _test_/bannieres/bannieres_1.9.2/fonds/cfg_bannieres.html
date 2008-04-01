@@ -1,0 +1,29 @@
+[(#REM) titre=Banni&egrave;res]
+[(#REM) icone=img_pack/bannieres.png]
+[(#REM) descriptif=<h4>Configuration du plugin Banni&eacute;res</h4>]
+
+<!-- descriptif=Cette zone permet de configurer les variables de base du plugin.-->
+
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+	<br />
+
+	<!-- Options du plugin -->
+	<fieldset>
+	<legend><:ban:config_legende:></legend>
+	<label for="hauteur"><strong><:ban:config_libelle_hauteur:></strong> <:ban:config_libelle_pixels:></label>
+	<input type="text" name="hauteur" [value="(#ENV{hauteur})"] id="hauteur" class='formo'/>
+	<label for="largeur"><strong><:ban:config_libelle_largeur:></strong> <:ban:config_libelle_pixels:></label>
+	<input type="text" name="largeur" [value="(#ENV{largeur})"] id="largeur" class='formo'/>
+	<label for="formats"><strong><:ban:config_libelle_formats:></strong> <:ban:config_libelle_separes:></label>
+	<input type="text" name="formats" [value="(#ENV{formats})"] id="formats" class='formo'/>
+	</fieldset>
+
+	<div><input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" /></div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+</form>
+
+

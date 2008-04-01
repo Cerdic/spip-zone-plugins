@@ -1,0 +1,33 @@
+<plugin>
+	<nom>Banni&egrave;res 1.9.2</nom>
+	<auteur>												<!-- Auteur du plugin -->
+	Fran&ccedil;ois de Montlivault 
+	</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+		Gestion de banni&egrave;res
+	</description>
+	<prefix>bannieres</prefix>	
+	<install>base/bannieres_gestion.php</install>
+	<lien>
+      
+    </lien>
+    <icon>bannieres.png</icon>
+
+    <fonctions>bannieres_fonctions.php</fonctions>  <!-- fichier charge a chaque recalul de page (espace public) -->
+	<!--<options>bannieres_options.php</options>-->		 <!-- fichier charge a chaque hit -->
+
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>inc_bannieres.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_prive</action>		
+		<inclure>bannieres_fonctions.php</inclure>
+	</pipeline>
+</plugin>
