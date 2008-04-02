@@ -1,0 +1,30 @@
+<plugin>
+	<nom>
+image-cycle
+	</nom>
+	<auteur>
+    christophe vallois
+	</auteur>
+	<version>
+		0.0.1
+	</version>
+	<etat>
+		test
+	</etat>
+	<description>
+Affiche al&eacute;atoirement 5 images tir&eacute;es de l'ensemble des images du site et les affiches dans un encadr&eacute; avec un le javascript Plugin cycle<br/>
+ <h4>[Configuration->.?exec=cfg&amp;cfg=imagecycle]</h4>
+	</description>
+	<icon>
+	images/logo-cycle.png
+	</icon>
+	<lien>
+	http://www.spip-contrib.net/Une-image-aleatoire-en-page-d
+	</lien>
+	<prefix>
+	imagecycle
+	</prefix>
+	
+
+
+</plugin>

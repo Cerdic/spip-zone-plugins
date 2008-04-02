@@ -1,0 +1,87 @@
+[(#REM) descriptif=
+<h4><legend>Configuration du plugin image cycle</legend></h4>
+
+]
+
+[(#REM) titre=image cycle]
+[(#REM) icone=images/logo-cycle.png]
+<!-- nom=imagecycle -->
+
+<!-- liens*=imagecycle -->
+<!-- liens*=imagecyclebis -->
+<!-- liens*=imagecyclemodele -->
+
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset><legend><:imagecycle:legende:></legend>
+<p><:imagecycle:paraimage:><br/>
+<label for="largeur"><:imagecycle:largeur:></label>
+<input type="text" name="largeur"  id="largeur"  value="[(#CONFIG{imagecycle/largeur}|sinon{150})]" />
+</p>
+
+<p>
+<label for="hauteur"><:imagecycle:hauteur:></label>
+<input type="text" name="hauteur"  	id="hauteur" value="[(#CONFIG{imagecycle/hauteur}|sinon{150})]" />
+</p>
+
+<p>
+<label for="largeurcadre"><:imagecycle:largeurcadre:></label>
+<input type="text" name="largeurcadre"  id="largeurcadre"  value="[(#CONFIG{imagecycle/largeurcadre}|sinon{180})]" />
+</p>
+
+<p>
+<label for="hauteurcadre"><:imagecycle:hauteurcadre:></label>
+<input type="text" name="hauteurcadre" 	id="hauteurcadre" value="[(#CONFIG{imagecycle/hauteurcadre}|sinon{180})]" />
+</p>
+
+
+<p>
+<label for="couleur"><:imagecycle:couleur:></label>
+<input type="text" name="couleur"  id="couleur" value="[(#CONFIG{imagecycle/couleur}|sinon{#eee})]" />
+</p>
+
+<p><:imagecycle:paraanim:><br/>
+<label for="duree"><:imagecycle:duree:></label>
+<input type="text" name="duree" 	id="duree"  value="[(#CONFIG{imagecycle/duree})]" />
+</p>
+
+<p>
+<label for="vitesse"><:imagecycle:vitesse:></label>
+<input type="text" name="vitesse"  	id="vitesse"  value="[(#CONFIG{imagecycle/vitesse})]" />
+</p>
+
+<p>
+<label for="effet"><:imagecycle:effet:></label>
+<select name="effet" id="effet">
+
+	<option value="fade" [(#CONFIG{imagecycle/effet}|=={"fade"}|?{selected="selected",})]>fade</option>	
+	<option value="shuffle" [(#CONFIG{imagecycle/effet}|=={"shuffle"}|?{selected="selected",})]>shuffle</option>
+	<option value="fadeZoom" [(#CONFIG{imagecycle/effet}|=={"fadeZoom"}|?{selected="selected",})]>fadeZoom</option>
+	<option value="scrollUp" [(#CONFIG{imagecycle/effet}|=={"scrollUp"}|?{selected="selected",})]>scrollUp</option>
+	<option value="scrollDown" [(#CONFIG{imagecycle/effet}|=={"scrollDown"}|?{selected="selected",})]>scrollDown</option>
+	<option value="scrollLeft" [(#CONFIG{imagecycle/effet}|=={"scrollLeft"}|?{selected="selected",})]>scrollLeft</option>
+	<option value="scrollRight" [(#CONFIG{imagecycle/effet}|=={"scrollRight"}|?{selected="selected",})]>scrollRight</option>
+	<option value="scrollHorz" [(#CONFIG{imagecycle/effet}|=={"scrollHorz"}|?{selected="selected",})]>scrollHorz</option>
+	<option value="scrollVert" [(#CONFIG{imagecycle/effet}|=={"scrollVert"}|?{selected="selected",})]>scrollVert</option>
+	<option value="slideX" [(#CONFIG{imagecycle/effet}|=={"slideX"}|?{selected="selected",})]>slideX</option>
+	<option value="slideY" [(#CONFIG{imagecycle/effet}|=={"slideY"}|?{selected="selected",})]>slideY</option>
+	<option value="turnUp" [(#CONFIG{imagecycle/effet}|=={"turnUp"}|?{selected="selected",})]>turnUp</option>
+	<option value="turnDown" [(#CONFIG{imagecycle/effet}|=={"turnDown"}|?{selected="selected",})]>turnDown</option>
+	<option value="turnLeft" [(#CONFIG{imagecycle/effet}|=={"turnLeft"}|?{selected="selected",})]>turnLeft</option>
+	<option value="turnRight" [(#CONFIG{imagecycle/effet}|=={"turnRight"}|?{selected="selected",})]>turnRight</option>
+	<option value="zoom" [(#CONFIG{imagecycle/effet}|=={"zoom"}|?{selected="selected",})]>zoom</option>
+ 
+</select>
+</p>
+
+</fieldset>
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:ok:>"  />
+<input type="reset" value="<:reset:>"  />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>"  />
+</div>
+</form>
+

@@ -1,0 +1,83 @@
+<!-- titre=Mon squelette - options 2 -->
+
+<!-- nom=imagecycle -->
+
+
+<!-- onglet=imagecycle -->
+<!-- liens*=imagecycle -->
+<!-- liens*=imagecyclebis -->
+<!-- liens*=imagecyclemodele -->
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset><legend><:imagecycle:legende:></legend>
+<p><:imagecycle:paraimage:><br/>
+<label for="largeurbis"><:imagecycle:largeur:></label>
+<input type="text" name="largeurbis"  id="largeurbis"  value="[(#CONFIG{imagecycle/largeurbis}|sinon{150})]" />
+</p>
+
+<p>
+<label for="hauteurbis"><:imagecycle:hauteur:></label>
+<input type="text" name="hauteurbis"  	id="hauteur" value="[(#CONFIG{imagecycle/hauteurbis}|sinon{150})]" />
+</p>
+
+<p>
+<label for="largeurcadrebis"><:imagecycle:largeurcadre:></label>
+<input type="text" name="largeurcadrebis"  id="largeurcadrebis"  value="[(#CONFIG{imagecycle/largeurcadrebis}|sinon{180})]" />
+</p>
+
+<p>
+<label for="hauteurcadrebis"><:imagecycle:hauteurcadre:></label>
+<input type="text" name="hauteurcadrebis" 	id="hauteurcadrebis" value="[(#CONFIG{imagecycle/hauteurcadrebis}|sinon{180})]" />
+</p>
+
+
+<p>
+<label for="couleurbis"><:imagecycle:couleur:></label>
+<input type="text" name="couleurbis"  id="couleur" value="[(#CONFIG{imagecycle/couleurbis}|sinon{#eee})]" />
+</p>
+
+<p><:imagecycle:paraanim:><br/>
+<label for="dureebis"><:imagecycle:duree:></label>
+<input type="text" name="dureebis" 	id="dureebis"  value="[(#CONFIG{imagecycle/dureebis})]" />
+</p>
+
+<p>
+<label for="vitessebis"><:imagecycle:vitesse:></label>
+<input type="text" name="vitessebis"  	id="vitessebis"  value="[(#CONFIG{imagecycle/vitessebis})]" />
+</p>
+
+<p>
+<label for="effetbis"><:imagecycle:effet:></label>
+<select name="effetbis" id="effetbis">
+
+	<option value="fade" [(#CONFIG{imagecycle/effetbis}|=={"fade"}|?{selected="selected",})]>fade</option>	
+	<option value="shuffle" [(#CONFIG{imagecycle/effetbis}|=={"shuffle"}|?{selected="selected",})]>shuffle</option>
+	<option value="fadeZoom" [(#CONFIG{imagecycle/effetbis}|=={"fadeZoom"}|?{selected="selected",})]>fadeZoom</option>
+	<option value="scrollUp" [(#CONFIG{imagecycle/effetbis}|=={"scrollUp"}|?{selected="selected",})]>scrollUp</option>
+	<option value="scrollDown" [(#CONFIG{imagecycle/effetbis}|=={"scrollDown"}|?{selected="selected",})]>scrollDown</option>
+	<option value="scrollLeft" [(#CONFIG{imagecycle/effetbis}|=={"scrollLeft"}|?{selected="selected",})]>scrollLeft</option>
+	<option value="scrollRight" [(#CONFIG{imagecycle/effetbis}|=={"scrollRight"}|?{selected="selected",})]>scrollRight</option>
+	<option value="scrollHorz" [(#CONFIG{imagecycle/effetbis}|=={"scrollHorz"}|?{selected="selected",})]>scrollHorz</option>
+	<option value="scrollVert" [(#CONFIG{imagecycle/effetbis}|=={"scrollVert"}|?{selected="selected",})]>scrollVert</option>
+	<option value="slideX" [(#CONFIG{imagecycle/effetbis}|=={"slideX"}|?{selected="selected",})]>slideX</option>
+	<option value="slideY" [(#CONFIG{imagecycle/effetbis}|=={"slideY"}|?{selected="selected",})]>slideY</option>
+	<option value="turnUp" [(#CONFIG{imagecycle/effetbis}|=={"turnUp"}|?{selected="selected",})]>turnUp</option>
+	<option value="turnDown" [(#CONFIG{imagecycle/effetbis}|=={"turnDown"}|?{selected="selected",})]>turnDown</option>
+	<option value="turnLeft" [(#CONFIG{imagecycle/effetbis}|=={"turnLeft"}|?{selected="selected",})]>turnLeft</option>
+	<option value="turnRight" [(#CONFIG{imagecycle/effetbis}|=={"turnRight"}|?{selected="selected",})]>turnRight</option>
+	<option value="zoom" [(#CONFIG{imagecycle/effetbis}|=={"zoom"}|?{selected="selected",})]>zoom</option>
+ 
+</select>
+</p>
+
+</fieldset>
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:ok:>"  />
+<input type="reset" value="<:reset:>"  />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>"  />
+</div>
+</form>
+

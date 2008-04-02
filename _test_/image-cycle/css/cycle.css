@@ -1,0 +1,14 @@
+.cycle {  
+    
+    padding: 0;  
+    margin:  0;  
+} 
+ 
+.cycle img {  
+    padding: 15px;  
+    border:  1px solid #ccc;  
+      
+    top:  0; 
+    left: 0 
+} 
+

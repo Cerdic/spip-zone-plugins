@@ -1,0 +1,62 @@
+<B_docuImg>
+
+[(#REM) Image aléatoire ]
+[(#REM) Appel Javascript supplementaire ]
+<script language="javascript" src="plugins/image-cycle/scripts/jquery.cycle.all.pack.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="plugins/image-cycle/css/cycle.css" type="text/css" media="screen" />
+<style>
+.cycle
+{
+[width: (#CONFIG{imagecycle/largeurcadrebis})px !important;]
+[height: (#CONFIG{imagecycle/hauteurcadrebis})px !important;]
+}
+
+.cycle img
+{
+[width: (#CONFIG{imagecycle/largeurbis})px !important;]
+[height: (#CONFIG{imagecycle/hauteurbis})px !important;]
+[background-color: (#CONFIG{imagecycle/couleurbis});]
+}
+
+</style>
+
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function() {
+	
+	// Plugin Cycle Image au hasard
+   $('#listecycle').cycle({ 
+		fx:    '[(#CONFIG{imagecycle/effetbis})]',
+		speed: [(#CONFIG{imagecycle/vitessebis})], 
+		timeout: [(#CONFIG{imagecycle/dureebis})],
+		
+	});
+
+
+});
+
+-->
+</script>
+
+
+
+		
+		
+		<div id="listecycle">	
+		<BOUCLE_docuImg(DOCUMENTS){id_article>0}{par hasard}{extension==jpg|png|gif}{0,5}>
+		<div class="cycle">
+		[<a href="#URL_DOCUMENT" type="#MIME_TYPE">(#LOGO_DOCUMENT||image_reduire{[(#CONFIG{imagecycle/largeurbis})],0})</a>]	
+			<BOUCLE_chercheLienArticle(SPIP_DOCUMENTS_ARTICLES){id_document}>
+			#SET{current_id_art, #ID_ARTICLE}
+			</BOUCLE_chercheLienArticle>
+			<BOUCLE_lienArticle(ARTICLES){id_article=#GET{current_id_art}}{0,5}>
+			</BOUCLE_lienArticle>    
+		</div>
+		</BOUCLE_docuImg>
+		</div><!-- fin listeImgAlea -->
+		</B_docuImg>
+
+
+
+
