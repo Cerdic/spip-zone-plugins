@@ -1,0 +1,31 @@
+<script type="text/javascript">
+	
+	$(document).ready(
+		function()
+		{
+			$('#dock').Fisheye(
+				{
+					maxWidth: 35,
+					items: 'a',
+					itemsText: 'span',
+					container: '.dock-container',
+					itemWidth: 50,
+					proximity: 40,
+					
+					
+				}
+			)
+		}
+	);
+
+</script>
+
+	<div class="dock" id="dock">
+		<div class="dock-container">
+			<a class="dock-item" href="http://www.cemea-hn.fr"><img src="#CHEMIN{menu_dock/images/region.png}" alt="Site régional" /><span>Site régional</span></a>
+			<a class="dock-item" href="http://www.cemea-hn.fr/stagiaire"><img src="#CHEMIN{menu_dock/images/stagiaires.png}" alt="Site anciens stagaires" /><span>Anciens stagiaires</span></a> 
+			<a class="dock-item" href="http://www.cemea-hn.fr/militant"><img src="#CHEMIN{menu_dock/images/militant.png}" alt="Site interne" /><span>Site interne</span></a>
+			<a class="dock-item" href="http://www.cemea.asso.fr"><img src="#CHEMIN{menu_dock/images/national.png}" alt="Site national" /><span>Site national</span></a>
+		</div>
+	</div>
+

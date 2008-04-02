@@ -1,0 +1,28 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	menu dock
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	 par christophe vallois
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<icon>images/demo.png</icon>
+	<etat>
+	test
+	</etat>
+	<description>
+    menu dock style McOsX avec la class #magnifier
+	inclure la noisette menudock dans votre squelette 
+	</description>
+	<lien></lien>
+	<prefix>
+	menudock
+	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>menudock_pipelines.php</inclure>
+	</pipeline>
+	
+</plugin>
