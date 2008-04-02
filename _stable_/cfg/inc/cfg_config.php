@@ -54,14 +54,15 @@ function cfg_charger_depot($args){
 // comme la balise pour ~, ~id_auteur ou table:id
 // $def: un defaut optionnel
 
-function lire_config($cfg='', $def=null) {
+// $unserialize est mis par l'histoire, et affecte le depot 'meta' 
+function lire_config($cfg='', $def=null, $unserialize=true) {
 	$lire = charger_fonction("lire_config","inc");
-	return $lire($cfg, $def);
+	return $lire($cfg, $def, $unserialize);
 }
 
-function inc_lire_config_dist($cfg='', $def=null){ 
+function inc_lire_config_dist($cfg='', $def=null, $unserialize=true){ 
 	$depot = cfg_charger_depot($cfg);
-	$r = $depot->lire_config();
+	$r = $depot->lire_config($unserialize);
 	if (is_null($r)) return $def;
 	return $r;
 }

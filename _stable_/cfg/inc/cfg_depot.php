@@ -80,8 +80,8 @@ class cfg_depot_dist{
 		return $this->depot->effacer(); // array($ok, $val, $messages)
 	}	
 	
-	function lire_config(){
-		list($ok, $s) = $this->depot->lire();
+	function lire_config($unserialize=true){
+		list($ok, $s) = $this->depot->lire($unserialize);
 		if ($ok && ($nom = $this->nom_champ())) {
 			return $s[$nom];
 		} elseif ($ok) {

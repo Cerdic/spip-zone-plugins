@@ -38,11 +38,11 @@ function effacer_parametres_cfg($texte){
 // ('cfg' sera prochainement la colonne par defaut) de spip_auteurs
 // cree pour l'occasion. 
 //   ~ tout court veut dire l'auteur connecte,
-//   ~duchmol celui de login "duchmol", ~123 celui d'id 123
+//   ~123 celui de l'auteur 123
 
 // Pour utiliser une autre colonne que 'cfg', il faut renseigner @colonne
 //   ~@extra/champ ou 
-//   ~login@prefs/champ
+//   ~id_auteur@prefs/champ
 //
 // Pour recuperer des valeurs d'une table particuliere,
 // il faut utiliser 'table:id/champ' ou 'table@colonne:id/champ'
@@ -53,25 +53,29 @@ function effacer_parametres_cfg($texte){
 // on peut croiser plusieurs id comme spip_auteurs_articles:6:123
 // (mais il n'y a pas d'extra dans spip_auteurs_articles ...)
 // Le 2eme argument de la balise est la valeur defaut comme pour la dist
+//
+// pour histoire
 // Le 3eme argument permet de controler la serialisation du resultat
+// (mais ne sert que pour le depot 'meta') qui ne doit pas deserialiser tout le temps
+// même si c'est possible lorsqu'on le demande avec #CONFIG...
 //
 function balise_CONFIG($p) {
 	if (!$arg = interprete_argument_balise(1,$p)) {
 		$arg = "''";
 	}
 	$sinon = interprete_argument_balise(2,$p);
-	$serialize = sinon(interprete_argument_balise(3,$p),"'true'");
+	$unserialize = sinon(interprete_argument_balise(3,$p),"false");
 
 	// cas particulier historique : |in_array{#CONFIG{toto,'',''}}
 	// a remplacer par  |in_array{#CONFIG{toto/,#ARRAY}}
 	// il sert aussi a lire $GLOBALS['meta']['param'] qui serait un array()...
-	if (($sinon === "''") AND ($serialize === "''") AND (false === strpos('::',$arg))){
+	if (($sinon === "''") AND ($unserialize === "''") AND (false === strpos('::',$arg))){
 		$sinon = "array()";
+		$unserialize = true;
 		$arg = "'metapack::'.".$arg;
 	}
-
 	$p->code = 'lire_config(' . $arg . ',' . 
-		($sinon && $sinon != "''" ? $sinon : 'null') . ')';	
+		($sinon && $sinon != "''" ? $sinon : 'null') . ',' . $unserialize . ')';	
 
 	return $p;
 }

@@ -30,12 +30,19 @@ class cfg_depot_meta
 	}
 	
 	// recuperer les valeurs.
-	function lire()
+	// unserialize : si la valeur est deserialisable, elle est retournee deserialisee
+	// permet a #CONFIG d'obtenir une valeur non deserialisee...
+	function lire($unserialize=true)
 	{
     	$val = array();
     	if ($this->champs) {
 			foreach ($this->champs as $name => $def) {
-				$val[$name] = $GLOBALS['meta'][$name];
+				// pour compat cfg, si la meta est deserialisable, la retourner deserialisee
+				if ($unserialize && ($a = @unserialize($GLOBALS['meta'][$name])))
+					$val[$name] = $a;
+				else {
+					$val[$name] = $GLOBALS['meta'][$name];
+				}
 			}
 		// si pas d'argument, retourner comme le core serialize($GLOBALS['meta'])
 		} else {
