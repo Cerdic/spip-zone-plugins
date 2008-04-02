@@ -114,6 +114,54 @@ function compat_cfg_defs_dist() {
 					$id = \'\', 
 					$serveur);
 			}',
+		
+		'sql_fetsel' =>
+			'(
+				$select = array(), 
+				$from = array(), 
+				$where = array(),
+				$groupby = array(), 
+				$orderby = array(), 
+				$limit = \'\', 
+				$having = array(),
+				$serveur=\'\'
+			) {
+				return sql_fetch(sql_select(
+					$select, 
+					$from, 
+					$where,
+					$groupby, 
+					$orderby, 
+					$limit, 
+					$having,
+					$serveur				
+				));
+			}',	
+			
+		'sql_getfetsel' =>
+			'(
+				$select, 
+				$from = array(), 
+				$where = array(),
+				$groupby = array(), 
+				$orderby = array(), 
+				$limit = \'\', 
+				$having = array(),
+				$serveur=\'\'
+			) {
+				$r = sql_fetsel(
+					$select, 
+					$from, 
+					$where,
+					$groupby, 
+					$orderby, 
+					$limit, 
+					$having,
+					$serveur				
+				);
+				return $r ? $r[$select] : NULL;
+			}',			
+			
 			
 		// n'existe pas en 1.9.2
 		// on cree la requete directement

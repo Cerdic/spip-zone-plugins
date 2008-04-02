@@ -68,7 +68,10 @@ class cfg_formulaire_dist{
 		$this->charger();
 	}
 	
-	
+	// retourne true en cas d'erreur...
+	function erreurs(){
+		return $this->messages['erreurs'] || $this->messages['message_erreur'];
+	}
 	
 	
 	// pre-analyser le formulaire
@@ -97,7 +100,7 @@ class cfg_formulaire_dist{
 		}
 	    
 		// charger les champs particuliers si existants
-		$this->actionner_extensions('charger');	  
+		$this->actionner_extensions('pre_charger');	  
 		  
 		// creer le storage et lire les valeurs
 		$this->param->depot = strtolower(trim($this->param->depot));
@@ -105,6 +108,9 @@ class cfg_formulaire_dist{
 		$this->depot = new $cfg_depot($this->param->depot, $this->params);
 		$ok &= $this->lire();
 
+		// charger les champs particuliers si existants
+		$this->actionner_extensions('charger');
+		
 		return $ok;
 	}
 
@@ -121,7 +127,7 @@ class cfg_formulaire_dist{
 	 */
 	function verifier() {
 
-		if ($this->messages['erreurs'] || $this->messages['message_erreur'] || !$this->autoriser()) 
+		if ($this->erreurs() || !$this->autoriser()) 
 				return false;
 
 		// si on a pas poste de formulaire, pas la peine de controler
@@ -131,6 +137,9 @@ class cfg_formulaire_dist{
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$securiser_action();
 
+		// actions par champs speciaux, avant les tests des nouvelles valeurs
+		$this->actionner_extensions('pre_verifier');
+		
 		// stockage des nouvelles valeurs
 		foreach ($this->champs as $name => $def) {
 			// enregistrement des valeurs postees
@@ -146,6 +155,7 @@ class cfg_formulaire_dist{
 		// si pas de changement, pas la peine de continuer
 		if (!$this->log_modif && !_request('_cfg_delete')) {
 			$this->messages['message_erreur'][] = _T('cfg:pas_de_changement', array('nom' => $this->nom_config()));
+			return false;
 		}
 		
 		// charger une eventuelle fonction cfg_{vue}_verifier()
@@ -164,7 +174,7 @@ class cfg_formulaire_dist{
 		
 		// stocker le fait que l'on a controle les valeurs
 		$this->verifier = true;
-	    return !($this->messages['erreurs'] || $this->messages['message_erreur']);
+	    return !$this->erreurs();
 	}
 	
 
@@ -180,25 +190,24 @@ class cfg_formulaire_dist{
 	{
 		if (!$this->verifier) $this->verifier();
 		
-		if ($this->messages['erreurs'] || $this->messages['message_erreur'] || !$this->autoriser()) 
-			return false;
+		if ($this->erreurs() || !$this->autoriser()) return false;
 	
-		if  (!_request('_cfg_ok') &&  !_request('_cfg_delete')) return false;
+		if (!_request('_cfg_ok') && !_request('_cfg_delete')) return false;
 		
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$securiser_action();
-	
+		
+		// traiter les champs speciaux
+		$this->actionner_extensions('pre_traiter');	
+		
+		if ($this->erreurs()) return false;		
+			
 		// suppression
 		if (_request('_cfg_delete')) {
 			$this->effacer();
 		
 		// sinon modification
 		} else {
-
-			// traiter les champs speciaux
-			$this->actionner_extensions('pre_traiter');
-		
-			// ecriture
 			$this->ecrire();
 		}
 
@@ -307,7 +316,7 @@ class cfg_formulaire_dist{
 		// recherche d'au moins un champ de formulaire pour savoir si la vue est valide
 		$this->recuperer_fond();
 		if (!preg_match_all(
-		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio|hidden)") name="(\w+)(\[\])?"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?( multiple=)?[^>]*?>#ims',
+		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio|hidden|file)") name="(\w+)(\[\])?"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?( multiple=)?[^>]*?>#ims',
 						$this->fond_compile, $matches, PREG_SET_ORDER)) {
 			return _T('cfg:pas_de_champs_dans', array('nom' => $this->vue));
 		}

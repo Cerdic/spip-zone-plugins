@@ -10,7 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // apres que le parseur a trouve les champs
-function cfg_charger_cfg_id($nom, &$cfg){
+function cfg_pre_charger_cfg_id($nom, &$cfg){
 
 	// id a renseigner
 	$cfg->champs[$nom]['id'] = count($cfg->champs_id);

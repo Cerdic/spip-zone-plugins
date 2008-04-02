@@ -76,6 +76,17 @@ function balise_CONFIG($p) {
 	return $p;
 }
 
+function balise_CFG_CHEMIN($p) {
+	if (!$arg = interprete_argument_balise(1,$p)) {
+		$arg = "''";
+	}
+	$sinon = interprete_argument_balise(2,$p);
+	
+	$p->code = '($l = lire_config(' . $arg . ',' . 
+		($sinon && $sinon != "''" ? $sinon : 'null') . ')) ? _DIR_IMG . $l : null';		
+	
+	return $p;
+}
 // signaler le pipeline de notification
 $GLOBALS['spip_pipeline']['cfg_post_edition'] = "";
 

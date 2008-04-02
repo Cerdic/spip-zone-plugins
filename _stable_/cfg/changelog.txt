@@ -1,7 +1,12 @@
 Todo :
 - faire une api pour permettre certains ajouts js (classe css 'cfg_pipette'? 'cfg_date'?)
-- gerer les input type 'file'
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
+
+v1.6.0 (02 04 2008)
+- introduire la prise en compte des <input type='file'... 
+qui met automatiquement un type 'cfg_fichier' sur le champ. 
+Celui-ci va stocker le fichier dans IMG/config/{vue}/{champ}.ext,
+et son adresse peut etre appelee par #CFG_CHEMIN{nom/champ}
 
 v1.5.2 (31 03 2008)
 - sur les verifications des champs, en plus de verifier les champs de type 'cfg_xx' ou 'type_xx',
