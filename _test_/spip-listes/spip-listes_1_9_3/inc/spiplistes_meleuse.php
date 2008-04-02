@@ -104,7 +104,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 		// prépare le tampon editeur
 		if($opt_ajout_tampon_editeur && !empty($tampon_patron)) {
 			$tampon_html = spiplistes_tampon_html_get($tampon_patron);
-			$tampon_texte = spiplistes_tampon_texte_get($tampon_patron, $tampon_html);
+			$tampon_texte = spiplistes_courrier_tampon_texte($tampon_patron, $tampon_html);
 		}
 		else {
 			$tampon_html = $tampon_texte = "";
@@ -184,9 +184,9 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 		
 			////////////////////////////////////		  
 			// Prepare la version texte
-			$objet_texte = spiplistes_version_texte($objet_html);
-			$page_texte = ($message_texte !='') ? $message_texte : spiplistes_version_texte($page_html);
-			$pied_page_texte = spiplistes_version_texte($pied_page_html);
+			$objet_texte = spiplistes_courrier_version_texte($objet_html);
+			$page_texte = ($message_texte !='') ? $message_texte : spiplistes_courrier_version_texte($page_html);
+			$pied_page_texte = spiplistes_courrier_version_texte($pied_page_html);
 			
 			////////////////////////////////////		  
 			// Ajoute lien tete de courrier
@@ -355,7 +355,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 				//aucun destinataire connu pour ce message
 //spiplistes_log("MEL: "._T('spiplistes:erreur_sans_destinataire')."---"._T('spiplistes:envoi_annule'), _SPIPLISTES_LOG_DEBUG);
 				spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_IGNORE."' WHERE id_courrier=$id_courrier LIMIT 1");
-				spiplistes_supprime_liste_envois($id_courrier);
+				spiplistes_courrier_supprimer_envois('id_courrier', $id_courrier);
 				$str_log .= " END #$id_courrier";
 				// 
 				break;
@@ -381,7 +381,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 				else {
 					$statut = ($type=_SPIPLISTES_TYPE_NEWSLETTER) ? _SPIPLISTES_STATUT_PUBLIE : _SPIPLISTES_STATUT_AUTO;
 					$sql_update .= "statut='$statut',date_fin_envoi=NOW(),";
-					spiplistes_supprime_liste_envois($id_courrier);
+					spiplistes_courrier_supprimer_envois('id_courrier', $id_courrier);
 					$str_log .= " END #$id_courrier";
 					$meleuse_statut = "1";
 				}

@@ -72,11 +72,11 @@ function spiplistes_upgrade () {
 		// Commenter, ca aide ! ;-) (CP-20071016)
 			// Ne modifie pas le schéma. Ajoute juste une légende sur les tables
 			spip_query("ALTER TABLE spip_listes COMMENT 'Listes de diffusion'");
-			spip_query("ALTER TABLE spip_courriers COMMENT 'Paniers des courriers'");
+			spip_query("ALTER TABLE spip_courriers COMMENT 'Panier des courriers'");
 			spip_query("ALTER TABLE spip_auteurs_courriers COMMENT 'Queue des envois de courriers'");
 			spip_query("ALTER TABLE spip_auteurs_mod_listes COMMENT 'Moderateurs des listes de diffusion'");
 			spip_query("ALTER TABLE spip_auteurs_listes COMMENT 'Carnet des abonnements'");
-			spip_query("ALTER TABLE spip_auteurs_elargis COMMENT 'Preferences des auteurs'");
+			spip_query("ALTER TABLE spip_auteurs_elargis COMMENT 'Preferences des auteurs/abonnés'");
 			$spiplistes_current_version_base = 1.98008;
 		}
 

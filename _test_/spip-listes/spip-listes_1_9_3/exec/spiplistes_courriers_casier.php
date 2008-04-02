@@ -135,9 +135,9 @@ function exec_spiplistes_courriers_casier () {
 		) {
 		spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_ENCOURS."' WHERE id_courrier=$id_courrier LIMIT 1");
 		if($id_liste > 0) {
-			spiplistes_supprime_liste_envois($id_courrier);
+			spiplistes_courrier_supprimer_envois('id_courrier', $id_courrier);
 			// passe le courrier à la méleuse
-			spiplistes_remplir_liste_envois($id_courrier,$id_liste);
+			spiplistes_courrier_remplir_envois($id_courrier,$id_liste);
 			spiplistes_log("SEND ID_COURRIER #$id_courrier ON ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur");
 		}
 	}

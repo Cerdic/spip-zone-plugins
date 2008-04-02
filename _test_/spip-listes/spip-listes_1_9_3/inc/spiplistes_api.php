@@ -220,15 +220,16 @@ function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
 }
 
 // renvoie le format d'abonnement d'un auteur
-function spiplistes_format_abo_demande($id_auteur) {
+function spiplistes_format_abo_demande ($id_auteur) {
 	$id_auteur = intval($id_auteur);
 	$result = false;
+	$sql_where = "id_auteur=".sql_quote($id_auteur);
 	if($id_auteur > 0) {
 		/**/
 		if(spiplistes_spip_est_inferieur_193()) {
-			$result = sql_getfetsel("`spip_listes_format`", "spip_auteurs_elargis", "id_auteur=".sql_quote($id_auteur));
+			$result = sql_getfetsel("`spip_listes_format`", "spip_auteurs_elargis", $sql_where);
 		} else {
-			$result = sql_fetsel("`spip_listes_format`", "spip_auteurs_elargis", "id_auteur=".sql_quote($id_auteur));
+			$result = sql_fetsel("`spip_listes_format`", "spip_auteurs_elargis", $sql_where);
 			$result = $result['spip_listes_format'];
 		}
 		/**/
@@ -467,7 +468,7 @@ function spiplistes_boite_patron ($flag_editable, $id_liste, $exec_retour, $nom_
 
 //function spiplistes_texte_propre($texte)
 // passe propre() sur un texte puis nettoie les trucs rajoutes par spip sur du html
-// 	Remplace spiplistes_propre() qui est à supprimer après vérif.
+// 	Remplace spiplistes_courrier_propre() qui est à supprimer après vérif.
 function spiplistes_texte_propre($texte){
 	$temp_style = ereg("<style[^>]*>[^<]*</style>", $texte, $style_reg);
 	if (isset($style_reg[0])) 
@@ -575,7 +576,7 @@ function spiplistes_lien_courrier_texte_get ($lien_patron, $lien_html, $url_cour
 		$result = recuperer_fond($f, $contexte_patron);
 	}
 	if(!$result) {
-		$result = spiplistes_version_texte($lien_html);
+		$result = spiplistes_courrier_version_texte($lien_html);
 	}
 	return($result);
 }

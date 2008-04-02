@@ -116,8 +116,8 @@ spiplistes_log("exec_spiplistes_courrier_previsu(), _SPIPLISTES_LOG_DEBUG");
 
 					$message_texte = 
 						empty($message_texte) 
-						? spiplistes_version_texte($texte_html) 
-						: spiplistes_version_texte($texte_lien_courrier).$message_texte.spiplistes_version_texte($pied_page).spiplistes_version_texte($texte_editeur)
+						? spiplistes_courrier_version_texte($texte_html) 
+						: spiplistes_courrier_version_texte($texte_lien_courrier).$message_texte.spiplistes_courrier_version_texte($pied_page).spiplistes_courrier_version_texte($texte_editeur)
 						;
 					echo($message_texte);
 					exit(0);

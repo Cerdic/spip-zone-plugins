@@ -149,9 +149,9 @@ function exec_spiplistes_courrier_gerer () {
 				) {
 				$change_statut = _SPIPLISTES_STATUT_ENCOURS;
 				spip_query("UPDATE spip_courriers SET statut='$change_statut' WHERE id_courrier=$id_courrier LIMIT 1");
-				spiplistes_supprime_liste_envois($id_courrier);
+				spiplistes_courrier_supprimer_envois('id_courrier', $id_courrier);
 				// passe le courrier a  la meleuse
-				spiplistes_remplir_liste_envois($id_courrier,$id_liste);
+				spiplistes_courrier_remplir_envois($id_courrier,$id_liste);
 				spiplistes_log("SEND ID_COURRIER #$id_courrier ON ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur");
 			}
 	
@@ -207,13 +207,13 @@ function exec_spiplistes_courrier_gerer () {
 
 			if($change_statut == _SPIPLISTES_STATUT_READY) {
 				$titre = $titre ; // pas de propre ici, ca fait un <p> </p>
-				$texte = spiplistes_propre($texte);
+				$texte = spiplistes_courrier_propre($texte);
 				spip_query("UPDATE spip_courriers SET titre="._q($titre).",texte="._q($texte).",statut='$change_statut' WHERE id_courrier=$id_courrier LIMIT 1");
 				spiplistes_log("ID_COURRIER #$id_courrier MODIFIED TO $change_statut BY ID_AUTEUR #$connect_id_auteur");
 				$statut = $change_statut;
 			}
 			else if($change_statut == _SPIPLISTES_STATUT_STOPE){
-				spiplistes_supprime_liste_envois($id_courrier);
+				spiplistes_courrier_supprimer_envois('id_courrier', $id_courrier);
 				spiplistes_log("ID_COURRIER #$id_courrier CANCELLED BY ID_AUTEUR #$connect_id_auteur");
 			}
 			/* futur
@@ -232,14 +232,14 @@ function exec_spiplistes_courrier_gerer () {
 					, _SPIPLISTES_STATUT_STOPE
 					))
 				) {
-				$texte = spiplistes_propre($texte);
+				$texte = spiplistes_courrier_propre($texte);
 			}
 			if(!empty($message_texte)){
 				$alt_message_texte = _T('spiplistes:calcul_patron');
 			}
 			else{
 				$alt_message_texte = _T('spiplistes:calcul_html');
-				$message_texte = spiplistes_version_texte($texte);
+				$message_texte = spiplistes_courrier_version_texte($texte);
 			}
 			// construit la boite de selection destinataire
 			$boite_selection_destinataire = (($statut==_SPIPLISTES_STATUT_REDAC) || ($statut==_SPIPLISTES_STATUT_READY))
@@ -473,7 +473,7 @@ function exec_spiplistes_courrier_gerer () {
 				."' title='"._T('spiplistes:Apercu_plein_ecran')." ($alt_message_texte)' target='_blank'>\n"
 			. spiplistes_icone_oeil() . "</a><br />\n"
 			. "<textarea readonly='readonly' name='texte' rows='".(($spip_ecran == "large") ? 28 : 20)."' class='formo' cols='40' wrap='soft'>"
-			. spiplistes_version_texte(propre($message_texte))
+			. spiplistes_courrier_version_texte(propre($message_texte))
 			. "</textarea>\n"
 			. fin_cadre_couleur(true)
 			//

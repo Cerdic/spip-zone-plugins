@@ -28,7 +28,7 @@ function spiplistes_listes_forcer_abonnement ($id_liste, $statut) {
 		$sql_where = " (statut='6forum' OR statut='1comite' OR statut='0minirezo')";
 	}
 	if($statut=="auteurs") {
-		$sql_where = " (statut='1comite' OR statut='0minirezo')";
+		$sql_where = " (statut=".sql_quote('1comite')." OR statut=".sql_quote('0minirezo').")";
 	}
 	else if(in_array($statut, array('6forum', '1comite', '0minirezo'))) {
 		$sql_where = " statut='$statut'";

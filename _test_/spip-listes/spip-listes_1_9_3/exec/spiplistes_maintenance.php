@@ -70,13 +70,13 @@ function exec_spiplistes_maintenance () {
 				if(_request("supprimer_courriers_$statut")) {
 					if($statut == _SPIPLISTES_STATUT_ENCOURS) {
 						// supprime d'abord de la queue d'envoi
-						spiplistes_supprime_courrier_du_spool('statut', $statut);
+						spiplistes_courrier_supprimer_envois('statut', $statut);
 						spiplistes_log("RESET spool ID_COURRIER #$id_courrier by ID_AUTEUR #$connect_id_auteur");
 					}
 					// supprime le courrier
 					$msg = 
 						(
-							spiplistes_supprime_courrier('statut', $statut)
+							spiplistes_courrier_supprimer('statut', $statut)
 						) 
 						? $msg_ok 
 						: $msg_bad

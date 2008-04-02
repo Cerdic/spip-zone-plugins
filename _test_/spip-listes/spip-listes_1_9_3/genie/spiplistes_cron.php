@@ -135,7 +135,7 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, _SPIPLISTES_LOG_DEBUG);
 		
 //spiplistes_log("CRON: Titre => $titre", _SPIPLISTES_LOG_DEBUG);
 
-		$taille_courrier_ok = (spiplistes_strlen(spiplistes_version_texte($texte)) > 10);
+		$taille_courrier_ok = (spiplistes_strlen(spiplistes_courrier_version_texte($texte)) > 10);
 
 		if($taille_courrier_ok) {
 			include_spip('inc/filtres');
@@ -163,7 +163,7 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, _SPIPLISTES_LOG_DEBUG);
 		// Ajoute les abonnés dans la queue (spip_auteurs_courriers)
 		if($taille_courrier_ok) {
 			$id_courrier = spip_insert_id();
-			spiplistes_remplir_liste_envois($id_courrier, $id_liste);
+			spiplistes_courrier_remplir_envois($id_courrier, $id_liste);
 spiplistes_log("CRON: remplir courrier $id_courrier, liste : $id_liste", _SPIPLISTES_LOG_DEBUG);
 		} 
 		else {
