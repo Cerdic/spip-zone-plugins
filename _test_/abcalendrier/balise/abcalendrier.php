@@ -12,7 +12,7 @@ l'asterisco serve a inserire l'html
 */
 function balise_ABCALENDRIER($p) {
    return calculer_balise_dynamique($p,ABCALENDRIER,array('prec_mois','prec_annee','moise_annee_curr','suiv_mois','suiv_annee','abcal_table','event_table'));
-       
+
 }
 
 function balise_ABCALENDRIER_dyn() {
@@ -36,13 +36,13 @@ function balise_ABCALENDRIER_dyn() {
    $Y = $calendrier_annee;
    } else {$Y = intval(date('Y', $cal_day));}
    //echo "$Y $M $D";
-   
+
    $events = array();
    $events = crea_eventi($Y,$M,$D);
-   
+
    //calcolo la stringa del mese del calendario
    $mes = $months [$M];
-   
+
    //calcolo mese e anno precedente e successivo
    if ($M==1){
       $calendrier_mois_moins=12;
@@ -120,7 +120,7 @@ function balise_ABCALENDRIER_dyn() {
         else $Mi = $M;
         // list_starting_day
         if ( (intval(date('m', time()))==$M) AND (intval(date('Y', time()))==$Y) )$s_d=$D;
-        else $s_d=1;       
+        else $s_d=1;
         for ($i=$s_d;$i<32;$i++)
         {
          if($i<10) $i='0'.$i;
@@ -153,7 +153,7 @@ function balise_ABCALENDRIER_dyn() {
           <td align="center" valign="top" style="font-size:80%;">
           '._T('abcalendrier:aucun_evenement').'</td>
         </tr>
-      </table>'; 
+      </table>';
    }
    return array('formulaires/abcalendrier', 0,
    array(
@@ -181,6 +181,13 @@ function mkdate($month, $day, $year)
 function crea_eventi($Y,$M,$D)
 {
   include_spip('inc/filtres');
+  include_spip('urls/standard');//senza questo non trova generer_url_article() quando la pagina è in cache
+  /*
+  include_spip('inc/urls');
+  include_spip('urls/propres');
+  urls\html.php
+  urls\page.php
+  */
   $my_q="SELECT articles.id_article, articles.date_redac, articles.titre, articles.lang
    FROM spip_mots_articles AS `L1`, spip_mots AS `L2`, spip_articles AS `articles`
    WHERE (L2.titre = 'mini-calendrier')
@@ -194,7 +201,7 @@ function crea_eventi($Y,$M,$D)
        // REQUETE
        $result = spip_query($my_q);
        while($article=mysql_fetch_assoc($result))
-       {      
+       {
          $date = ereg_replace("^([0-9]{4})-([0-9]{2})-([0-9]{2}).*$", "\\1\\2\\3", $article['date_redac']);
          if ($date > date("Ymd", mkdate($M, $D - 31, $Y)) && $date < date("Ymd", mkdate($M, $D + 31, $Y))) {
             if (!isset($events[$date])) {
@@ -216,7 +223,7 @@ function crea_eventi($Y,$M,$D)
    GROUP BY breves.id_breve ORDER BY breves.evento";
           $result = spip_query($my_q);
           while($article=mysql_fetch_assoc($result))
-          {      
+          {
             $date = ereg_replace("^([0-9]{4})-([0-9]{2})-([0-9]{2}).*$", "\\1\\2\\3", $article['evento']);
             if ($date > date("Ymd", mkdate($M, $D - 31, $Y)) && $date < date("Ymd", mkdate($M, $D + 31, $Y))) {
                if (!isset($events[$date])) {
