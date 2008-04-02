@@ -1,13 +1,13 @@
 <?php
 
 
-function definitions_mots($texte) {
+function definitions_mots($texte, $id_groupe_mot = '') {
 
-
-			
-					
-					$result = spip_query("SELECT * from spip_mots WHERE texte!=\"\" OR descriptif!=\"\"");
-					
+					if ($id_groupe_mot == '')
+						$result = spip_query("SELECT * from spip_mots WHERE texte!=\"\" OR descriptif!=\"\"");
+					else
+						$result = spip_query("SELECT * from spip_mots WHERE id_groupe=\"".$id_groupe_mot."\" AND (texte!=\"\" OR descriptif!=\"\")");
+								
 					while( $row = spip_fetch_array($result))
 					{
 					
