@@ -438,7 +438,7 @@
 				$inserts[] = "("._q($id_donnee).","._q($champ).","._q($val[$champ]).")";
 			}
 		}
-		else if ($val) {
+		else if (is_array($val) OR strlen($val)) {
 			// Choix multiples : enregistrer chaque valeur separement
 			if (is_array($val))
 				foreach ($val as $v){
