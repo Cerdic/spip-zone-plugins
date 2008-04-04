@@ -117,7 +117,7 @@ if(substr_count($key,'stats_')>0) {
 $etablissement_txt=$_REQUEST['etablissement_txt'];
 if($action!='') {
    $msg="";
-   $tActionsAutoriseesEncadrants=array('etat_candidats_par_etablissement_et_par_serie');
+   $tActionsAutoriseesEncadrants=array('etat_candidats_par_etablissement_avec_num_table','etat_candidats_par_etablissement_et_par_serie','liste_d_inscription_des_candidats','liste_d_inscription_des_candidats_affichage','impression_des_convocations');
    if(in_array($action,$tActionsAutoriseesEncadrants))
    	isAutorise(array('Admin','Encadrant'));
    else
@@ -288,6 +288,7 @@ if($action!='') {
                $id_departement=$departement;
                $departement=$tab_referentiel['departement'][$id_departement];
                $etablissement=$tab_referentiel['etablissement'][$id_departement][$etablissement];
+               $etablissement=utf8_decode($etablissement);
                $prefixe=strtolower($tab_referentiel['prefixe'][$prefixe]);
                $serie=$tab_referentiel['serie'][$serie];
                $nom=strtoupper($nom);
@@ -331,7 +332,7 @@ if($action!='') {
                $pdf[$departement][$etablissement][$cpt_pdf]['Num_table']=$id_table;
                $pdf[$departement][$etablissement][$cpt_pdf]['Num_table_old']=$id_table_old;
                $pdf[$departement][$etablissement][$cpt_pdf]['Candidat']=utf8_decode($nom);
-               $pdf[$departement][$etablissement][$cpt_pdf]['Date_naissance']=supprimeAccents($ddn,false);
+               $pdf[$departement][$etablissement][$cpt_pdf]['Date_naissance']=utf8_decode($ddn);
                $pdf[$departement][$etablissement][$cpt_pdf]['Serie']=$serie;
                $pdf[$departement][$etablissement][$cpt_pdf]['LV1']=utf8_decode($lv1);
                $pdf[$departement][$etablissement][$cpt_pdf]['LV2']=utf8_decode($lv2);
@@ -399,6 +400,165 @@ if($action!='') {
                }
             }
          break;
+         
+                 ///////////////////////////////////////////////////////////////////////////////////////////
+         // VLAV et YEDA 10/03/2008 ajout du bouton pour la liste des candidats avec numero de table sans num de saisie
+         case 'etat_candidats_par_etablissement_avec_num_table': // détail pour établissement     
+            $where="";
+            if($stats_departement>0) $where="\n AND can.departement=$stats_departement ";
+            if($stats_centre>0) $where.="\n AND rep.id_etablissement=$stats_centre ";
+            if($stats_etablissement>0) $where.="\n AND can.etablissement=$stats_etablissement ";
+            
+				$sql = "SELECT can.id_table , can.id_saisie , serie , prefixe , nom , prenoms , sexe , ne_le , ne_en , ne_vers , ldn , lv1 , lv2 , eps , ef1 , ef2 , can.departement , can.etablissement , rep.id_etablissement centre "
+					  . "\n FROM odb_candidats can "
+					  . "\n LEFT JOIN odb_repartition rep on can.id_saisie = rep.id_saisie "
+					  . "\n AND rep.annee = $annee "
+					  . "\n LEFT JOIN odb_ref_etablissement cen on cen.id = rep.id_etablissement "
+					  . "\n LEFT JOIN odb_ref_departement dep on dep.id = cen.id_departement "
+					  . "\n WHERE can.annee = $annee "
+					  . $where
+					  . "\n ORDER BY etablissement , serie , nom , prenoms"
+					  ;
+            //echo "<pre>$sql</pre>";
+            $annee_stats=$annee;
+            $result=odb_query($sql,__FILE__,__LINE__);
+            $nb_rows=mysql_num_rows($result);
+            $pdf_cols=array('id_table'=>'Num table',
+            					 'Candidat'=>'Candidat',
+                            'Date_naissance'=>'Date et lieu de naissance',
+                            'Serie'=>'Serie',
+                            'LV1'=>'LV1',
+                            'LV2'=>'LV2',
+                            'EPS'=>'EPS',
+                            'Ep_fac_1'=>'Ep. fac. 1',
+                            'Ep_fac_2'=>'Ep. fac. 2',
+                            'Centre'=>'Centre',
+                           );
+				$pdf_cols_id=array('Num_saisie'=>'Num saisie');
+				$isNumTableOld=false;// si passe a vrai on affiche la colonne NumTableOld
+            while($row=mysql_fetch_array($result)) {
+               foreach(array('id_table','id_table_old','id_saisie','serie','prefixe','nom','prenoms','sexe','ne_le','ne_en','ne_vers','ldn','lv1','lv2','eps','ef1','ef2','departement','etablissement','centre') as $champ)
+                  $$champ=stripslashes($row[$champ]);
+               if($id_table!='0') {
+               	$id_table=getIdTableHumain($id_table);
+						$isNumTable=true;
+						if($id_table_old!='') $isNumTableOld=true;
+					}
+               $id_departement=$departement;
+               $departement=$tab_referentiel['departement'][$id_departement];
+               $etablissement=$tab_referentiel['etablissement'][$id_departement][$etablissement];
+               $etablissement=utf8_decode($etablissement);
+               $prefixe=strtolower($tab_referentiel['prefixe'][$prefixe]);
+               $serie=$tab_referentiel['serie'][$serie];
+               $nom=strtoupper($nom);
+               $prenoms=ucwords(strtolower($prenoms));
+               $sexe=$tab_referentiel['sexe'][$sexe];
+               $sexe=$sexe=='M'?'M.':'Mlle';
+               $nom="$sexe $prefixe <b>$nom</b> $prenoms";
+               if($ne_en>0) $ddn="En $ne_en";
+               elseif($ne_vers>0) $ddn="Vers $ne_vers";
+               else {
+                  $tDate=explode('-',$ne_le);
+                  $annee=$tDate[0];
+                  $mois=$tDate[1];
+                  $jour=$tDate[2];
+                  $ddn="$jour/$mois/$annee";
+               }
+               $ddn.=" $ldn";
+               $lv1=$tab_referentiel['lv'][$lv1];
+               $lv2=$tab_referentiel['lv'][$lv2];
+               $ef1=$tab_referentiel['ef'][$ef1];
+               $ef2=$tab_referentiel['ef'][$ef2];
+               $eps=$tab_referentiel['eps'][$eps];
+               if(!is_array($tab_centres[$centre])) {
+                  if(isset($tab_referentiel['etablissement'][$id_departement][$centre])) {
+                     $tab_centres['centre'][$centre]=$tab_referentiel['etablissement'][$id_departement][$centre];
+                     $tab_centres['departement'][$centre]=$departement;
+                  }
+                  else foreach($tab_referentiel['etablissement'] as $id_dept=>$tab)
+                     if(isset($tab[$centre])) {
+                        $tab_centres['centre'][$centre]=$tab[$centre];
+                        $tab_centres['departement'][$centre]=$tab_referentiel['departement'][$id_dept];
+                     }
+               }
+               $departement_centre=$tab_centres['departement'][$centre];
+               $centre=$tab_centres['centre'][$centre];
+               if($etablissement!=$etablissement_old) $cpt_pdf=0;
+               else $cpt_pdf++;
+
+               foreach(array('id_table','nom','ddn','lv1','lv2','eps','ef1','ef2','centre') as $var)
+                  $tab_can[$departement][$etablissement][$serie][$id_saisie][$var]=stripslashes($$var);
+               $pdf[$departement][$etablissement][$cpt_pdf]['id_table']=$id_table;
+               $pdf[$departement][$etablissement][$cpt_pdf]['Num_table_old']=$id_table_old;
+               $pdf[$departement][$etablissement][$cpt_pdf]['Candidat']=utf8_decode($nom);
+               $pdf[$departement][$etablissement][$cpt_pdf]['Date_naissance']=utf8_decode($ddn);
+               $pdf[$departement][$etablissement][$cpt_pdf]['Serie']=$serie;
+               $pdf[$departement][$etablissement][$cpt_pdf]['LV1']=utf8_decode($lv1);
+               $pdf[$departement][$etablissement][$cpt_pdf]['LV2']=utf8_decode($lv2);
+               $pdf[$departement][$etablissement][$cpt_pdf]['EPS']=utf8_decode($eps);
+               $pdf[$departement][$etablissement][$cpt_pdf]['Ep_fac_1']=utf8_decode($ef1);
+               $pdf[$departement][$etablissement][$cpt_pdf]['Ep_fac_2']=utf8_decode($ef2);
+               $pdf[$departement][$etablissement][$cpt_pdf]['Centre']=utf8_decode($centre);
+               $etablissement_old=$etablissement;
+            }
+				if($isNumTableOld) $pdf_cols_id=array_merge($pdf_cols,array('Num_table_old'=>'Ancien num table'));
+
+            $msg="";
+            if(is_array($tab_can)) ksort($tab_can);
+            else die(KO." - Veuillez commencer par la r&eacute;partition des candidats $annee");
+
+            foreach($tab_can as $departement=>$tab1) {
+               //departement
+               ksort($tab1);
+               if($stats_centre>0)
+                  if(isset($tab1[$etablissement_txt])) {
+                     $tab_tmp[$etablissement_txt]=$tab1[$etablissement_txt];
+                     unset($tab1);
+                     $tab1=$tab_tmp;
+                  }
+
+               foreach($tab1 as $etablissement=>$tab2) {
+                  //Etablissement
+                  ksort($tab2);
+                  foreach($tab2 as $serie=>$tab3) {
+                     $srcFond=texte90(" $departement - $etablissement - $serie ",5,30,400,'src');
+                     $nbCandidats=count($tab3);
+                     if($nbCandidats>10) $imgFond=texte90(" $departement - $etablissement - $serie ",5,30,400);
+                     else $imgFond='';
+                     $msg.="<h1>$departement</h1>\n"
+                         . "<h2>&Eacute;tablissement : $etablissement</h2>\n"
+                         . "<h3>S&eacute;rie $serie - $nbCandidats candidat(e)s</h3>\n"
+                         . "<table class='spip' width='100%' border=0 cellpadding=1 cellspacing=0 style='border: 1px solid gray;'>\n"
+                         . "<tr><th background='$srcFond' rowspan=".($nbCandidats+1)." valign='top' width='30'>$imgFond</th>\n"
+                         ;
+                         //Num de saisie enleve
+                     foreach(array('id Table','Candidat','Date et lieu de naissance','LV1','LV2','EPS','Epr. Fac. 1','Epr. Fac. 2','Centre<br/>de composition') as $col)
+                        $msg.="\t<th><small>$col</small></th>\n";
+                     $msg.="</tr>\n";
+                     foreach($tab3 as $id_table=>$tab) {
+                        $msg.="<tr class='tr_liste'>\n\t";
+                        
+                        foreach($tab as $key=>$col)
+                           if($key!='id_saisie')
+                              $msg.="\t<td><small>$col</small></td>\n";
+                        $msg.="\t<td>&nbsp;</td>\n</tr>\n";
+                     }
+                     $msg.="</table>\n";
+                     $nom_pdf=getRewriteString("$departement|$etablissement");
+                     $_SESSION['data'][$nom_pdf]=$pdf[$departement][$etablissement];
+                     $_SESSION['pied'][$nom_pdf]="Candidats $etablissement ($departement)";
+                     $_SESSION['titre'][$nom_pdf]=html_entity_decode("Liste d'inscription des candidats &agrave; l'examen du Bac - Session unique de juin ".date("Y")." - Etablissement : $etablissement");
+                     $_SESSION['cols'][$nom_pdf]=$pdf_cols;
+                     $_SESSION['options'][$nom_pdf]=$PDF_A3_PAYSAGE;
+                     $tmp1="<A HREF='../plugins/odb/odb_commun/inc-pdf-table.php?pdf=$nom_pdf'>";
+                     $tmp2=" G&eacute;n&eacute;rer la liste de l'&eacute;tablissement <b>$etablissement</b> en PDF</A>";
+                     $msg.=$tmp1.vignette('pdf',"G&eacute;n&eacute;rer la liste de $etablissement en PDF").$tmp2;
+                     $lien_pdf[$nom_pdf]=$tmp1.$tmp2;
+                  }
+               }
+            }
+         break;
+         
          ///////////////////////////////////////////////////////////////////////////////////////////
          case 'liste_d_inscription_des_candidats_affichage':
             $where="";
@@ -470,6 +630,7 @@ if($action!='') {
                }
                $departement_centre=$tab_centres['departement'][$centre];
                $centre=$tab_centres['centre'][$centre];
+               $centre=utf8_decode($centre);
                if($centre!=$centre_old) $cpt_pdf=0;
                else $cpt_pdf++;
                foreach(array('id_saisie','nom','ddn','lv1','lv2','eps','ef1','ef2','etablissement') as $var)
@@ -477,7 +638,7 @@ if($action!='') {
                $pdf[$departement_centre][$centre][$cpt_pdf]['Num_table']=$id_table;
                $pdf[$departement_centre][$centre][$cpt_pdf]['Num_tableOld']=$id_table_old;
                $pdf[$departement_centre][$centre][$cpt_pdf]['Candidat']=utf8_decode($nom);
-               $pdf[$departement_centre][$centre][$cpt_pdf]['Date_naissance']=supprimeAccents($ddn,false);
+               $pdf[$departement_centre][$centre][$cpt_pdf]['Date_naissance']=utf8_decode($ddn);
                $pdf[$departement_centre][$centre][$cpt_pdf]['Serie']=$serie;
                $pdf[$departement_centre][$centre][$cpt_pdf]['LV1']=utf8_decode($lv1);
                $pdf[$departement_centre][$centre][$cpt_pdf]['LV2']=utf8_decode($lv2);
@@ -627,6 +788,7 @@ if($action!='') {
                }
                $departement_centre=$tab_centres['departement'][$centre];
                $centre=$tab_centres['centre'][$centre];
+               $centre=utf8_decode($centre);
                if($centre!=$centre_old) $cpt_pdf=0;
                else $cpt_pdf++;
                foreach(array('id_saisie','nom','ddn','lv1','lv2','eps','ef1','ef2','etablissement') as $var)
@@ -634,7 +796,7 @@ if($action!='') {
                $pdf[$departement_centre][$centre][$cpt_pdf]['Num_table']=$id_table;
                $pdf[$departement_centre][$centre][$cpt_pdf]['Num_tableOld']=$id_table_old;
                $pdf[$departement_centre][$centre][$cpt_pdf]['Candidat']=utf8_decode($nom);
-               $pdf[$departement_centre][$centre][$cpt_pdf]['Date_naissance']=supprimeAccents($ddn,false);
+               $pdf[$departement_centre][$centre][$cpt_pdf]['Date_naissance']=utf8_decode($ddn);
                $pdf[$departement_centre][$centre][$cpt_pdf]['Serie']=$serie;
                $pdf[$departement_centre][$centre][$cpt_pdf]['LV1']=utf8_decode($lv1);
                $pdf[$departement_centre][$centre][$cpt_pdf]['LV2']=utf8_decode($lv2);
@@ -1889,6 +2051,7 @@ if($action!='') {
 $nb_rows=mysql_affected_rows();
 if($nb_rows>0) $gauche.="<hr size=1/><b>$nb_rows</b> enregistrements sont concern&eacute;s";
 if(!in_array($action,array(
+	'etat_candidats_par_etablissement_avec_num_table',
 	'liste_d_inscription_des_candidats',
 	'liste_d_inscription_des_candidats_affichage',
 	'etat_repartition_des_candidats_par_departement_centre_serie',
@@ -1940,10 +2103,30 @@ echo "<input type='hidden' name='etablissement_txt' value='$etablissement_txt'/>
 echo "<table border=0 cellspacing=0 cellpadding=1 width='100%' class='spip'>\n";
 echo "<tr>\n\t<th>Action</th><td>$inputAnnee $inputDepartement $inputCentre $inputEtablissement $inputSerie</td>\n</tr>\n";
 $title="&Eacute;tat d&eacute;tail des candidats par &eacute;tablissement et par s&eacute;rie";
+echo "<tr class='tr_liste'>\n\t<td align='center'><input type='image' name='action' value='etat_candidats_par_etablissement_avec_num_table' src='"._DIR_PLUGIN_ODB_STATS_SIOU."img_pack/liste_etablissement.png' alt=\"$title\" title=\"header=[$imgInfo Statistiques SIOU] body=[$title] fade=[on] fadespeed=[0.08]\"/></td>"
+   . "<td>Listes des candidats de chaque &eacute;tablissement <b>pour communiquer les num&eacute;ros de table</b></td>\n"
+   . "</tr>\n"
+   ;
+$title="&Eacute;tat d&eacute;tail des candidats par &eacute;tablissement et par s&eacute;rie";
 echo "<tr class='tr_liste'>\n\t<td align='center'><input type='image' name='action' value='etat_candidats_par_etablissement_et_par_serie' src='"._DIR_PLUGIN_ODB_STATS_SIOU."img_pack/liste_etablissement.png' alt=\"$title\" title=\"header=[$imgInfo Statistiques SIOU] body=[$title] fade=[on] fadespeed=[0.08]\"/></td>"
    . "<td>Listes des candidats de chaque &eacute;tablissement pour le <b>collationnement</b></td>\n"
    . "</tr>\n"
    ;
+$title="Liste d'inscription des candidats (affichage)";
+echo "<tr class='tr_liste'>\n\t<td align='center'><input type='image' name='action' value='liste_d_inscription_des_candidats_affichage' src='"._DIR_PLUGIN_ODB_STATS_SIOU."img_pack/liste_affichage.png' alt=\"$title\" title=\"header=[$imgInfo Statistiques SIOU] body=[$title] fade=[on] fadespeed=[0.08]\"/></td>"
+	. "<td>Listes &agrave; envoyer dans les centres de composition <b>pour affichage</b></td>\n"
+	. "</tr>\n"
+	;
+$title="Liste d'inscription des candidats (&eacute;margement)";
+echo "<tr class='tr_liste'>\n\t<td align='center'><input type='image' name='action' value='liste_d_inscription_des_candidats' src='"._DIR_PLUGIN_ODB_STATS_SIOU."img_pack/signature.png' alt=\"$title\" title=\"header=[$imgInfo Statistiques SIOU] body=[$title] fade=[on] fadespeed=[0.08]\"/></td>"
+	. "<td>Listes &agrave; envoyer dans les centres de composition <b>pour &eacute;margement</b></td>\n"
+	. "</tr>\n"
+	;
+$title="Impression des convocations";
+echo "<tr class='tr_liste'>\n\t<td align='center'><input type='image' name='action' value='impression_des_convocations' src='"._DIR_PLUGIN_ODB_STATS_SIOU."img_pack/convocation.png' alt=\"$title\" title=\"header=[$imgInfo Statistiques SIOU] body=[$title] fade=[on] fadespeed=[0.08]\"/></td>"
+	. "<td>G&eacute;n&eacute;ration des convocations au format <b>pdf</b> par &eacute;tablissement et par s&eacute;rie</td>\n"
+	. "</tr>\n"
+	;
 if(isAdmin()) {
 	$title="&Eacute;tat r&eacute;partition des candidats";
 	echo "<tr class='tr_liste'>\n\t<td align='center'><input type='image' name='action' value='etat_repartition' src='"._DIR_PLUGIN_ODB_STATS_SIOU."img_pack/dispo.png' alt=\"$title\" title=\"header=[$imgInfo Statistiques SIOU] body=[$title] fade=[on] fadespeed=[0.08]\"/></td>"
@@ -1955,24 +2138,9 @@ if(isAdmin()) {
 		. "<td>Nombre de candidats par salle et par s&eacute;rie <b>pour la pr&eacute;paration des enveloppes</b></td>\n"
 		. "</tr>\n"
 		;
-	$title="Liste d'inscription des candidats (affichage)";
-	echo "<tr class='tr_liste'>\n\t<td align='center'><input type='image' name='action' value='liste_d_inscription_des_candidats_affichage' src='"._DIR_PLUGIN_ODB_STATS_SIOU."img_pack/liste_affichage.png' alt=\"$title\" title=\"header=[$imgInfo Statistiques SIOU] body=[$title] fade=[on] fadespeed=[0.08]\"/></td>"
-		. "<td>Listes &agrave; envoyer dans les centres de composition <b>pour affichage</b></td>\n"
-		. "</tr>\n"
-		;
-	$title="Liste d'inscription des candidats (&eacute;margement)";
-	echo "<tr class='tr_liste'>\n\t<td align='center'><input type='image' name='action' value='liste_d_inscription_des_candidats' src='"._DIR_PLUGIN_ODB_STATS_SIOU."img_pack/signature.png' alt=\"$title\" title=\"header=[$imgInfo Statistiques SIOU] body=[$title] fade=[on] fadespeed=[0.08]\"/></td>"
-		. "<td>Listes &agrave; envoyer dans les centres de composition <b>pour &eacute;margement</b></td>\n"
-		. "</tr>\n"
-		;
 	$title="&Eacute;tat r&eacute;partition des candidats inscrits par d&eacute;partement, centre, s&eacute;rie";
 	echo "<tr class='tr_liste'>\n\t<td align='center'><input type='image' name='action' value='etat_repartition_des_candidats_par_departement_centre_serie' src='"._DIR_PLUGIN_ODB_STATS_SIOU."img_pack/repartir_logo.png' alt=\"$title\" title=\"header=[$imgInfo Statistiques SIOU] body=[$title] fade=[on] fadespeed=[0.08]\"/></td>"
 		. "<td>Tableau synth&eacute;tique de la r&eacute;partition | <input type='image' align='absmiddle' name='action' value='etat_repartition_des_candidats_inscrits_par_serie_et_departement' src='"._DIR_PLUGIN_ODB_STATS_SIOU."img_pack/repartir_logo.png' alt=\"$title\" title=\"header=[$imgInfo Statistiques SIOU] body=[$title] fade=[on] fadespeed=[0.08]\"/>par genre</td>\n"
-		. "</tr>\n"
-		;
-	$title="Impression des convocations";
-	echo "<tr class='tr_liste'>\n\t<td align='center'><input type='image' name='action' value='impression_des_convocations' src='"._DIR_PLUGIN_ODB_STATS_SIOU."img_pack/convocation.png' alt=\"$title\" title=\"header=[$imgInfo Statistiques SIOU] body=[$title] fade=[on] fadespeed=[0.08]\"/></td>"
-		. "<td>G&eacute;n&eacute;ration des convocations au format <b>pdf</b> par &eacute;tablissement et par s&eacute;rie</td>\n"
 		. "</tr>\n"
 		;
 	$title="Pr&eacute;paration des jurys";
