@@ -290,8 +290,9 @@ class cfg_dist
 		if (count($m['erreurs'])) 			$messages[] = join('<br />', $m['erreurs']);
 		
 		if ($messages = trim(join('<br />', $messages))) {
-			return debut_boite_info(true) . propre($messages) . fin_boite_info(true);
+			return propre($messages);
 		}
+		return '';
 	}
 	
 	// affichage du formulaire (ou a defaut du texte 'choisir le module a configurer')

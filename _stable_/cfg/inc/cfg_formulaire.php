@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // la classe cfg represente une page de configuration
 class cfg_formulaire_dist{
 
-// les parametres des formulaires cfg sont srockes dans cet objet
+// les parametres des formulaires cfg sont stockes dans cet objet
 	var $param;
 // l'objet de classe cfg_depot qui assure lecture/ecriture/effacement des config
 	var $depot = null;
@@ -41,9 +41,9 @@ class cfg_formulaire_dist{
 // Alias pour passer facilement les parametres aux classes appelees
 	var $params = array();
 
-	/*
-	 * Constructeur de la classe
-	 */
+	//
+	// Constructeur de la classe
+	//
 	function cfg_formulaire_dist($nom, $cfg_id = '', $opt = array())
 	{
 			
@@ -80,16 +80,17 @@ class cfg_formulaire_dist{
 	function charger(){
 		$ok = true;
 		
+		// si pas de fichier, rien a charger
+		if (!$this->vue) return false;
+		
 		// lecture de la vue (fond cfg)
 		// il s'agit de recuperer le contenu du fichier
-		if ($this->vue) {
-			$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html');
-			if (!lire_fichier($fichier, $this->controldata)) {
-				$ok = false;
-				$this->messages['message_erreur'][] =  _T('cfg:erreur_lecture', array('nom' => $nom));
-			}
+		$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html');
+		if (!lire_fichier($fichier, $this->controldata)) {
+			$ok = false;
+			$this->messages['message_erreur'][] =  _T('cfg:erreur_lecture', array('nom' => $nom));
 		}
-
+		
 		// recherche et stockage des parametres de cfg 
 		$this->recuperer_parametres();
 
@@ -115,16 +116,15 @@ class cfg_formulaire_dist{
 	}
 
 
-	/*
-	 * Doit controler la validite des valeurs transmises
-	 * (le stockage de ces valeurs devrait etre ailleurs qu'ici)
-	 * 
-	 * Verifie les valeurs postees.
-	 * - stocke les valeurs qui ont changees dans $this->val[$nom_champ] = 'nouvelle_valeur'
-	 * - verifie que les types de valeurs attendus sont corrects ($this->verifier_champs_types)
-	 * 
-	 * retourne les messages d'erreur
-	 */
+	//
+	// Doit controler la validite des valeurs transmises
+	// 
+	// Verifie les valeurs postees.
+	// - stocke les valeurs qui ont changees dans $this->val[$nom_champ] = 'nouvelle_valeur'
+	// - verifie que les types de valeurs attendus sont corrects ($this->verifier_champs_types)
+	// 
+	// retourne les messages d'erreur
+	//
 	function verifier() {
 
 		if ($this->erreurs() || !$this->autoriser()) 
@@ -179,13 +179,13 @@ class cfg_formulaire_dist{
 	
 
 	
-	/*
-	 * Gere le traitement du formulaire.
-	 * 
-	 * Si le chargement ou le controle n'ont pas ete fait,
-	 * la fonction s'en occupe.
-	 * 
-	 */
+	//
+	// Gere le traitement du formulaire.
+	// 
+	// Si le chargement ou le controle n'ont pas ete fait,
+	// la fonction s'en occupe.
+	// 
+	//
 	function traiter()
 	{
 		if (!$this->verifier) $this->verifier();
@@ -232,12 +232,11 @@ class cfg_formulaire_dist{
 
 
 
-	/*
-	 * Determine l'arborescence ou CFG doit chercher les valeurs deja enregistrees
-	 * si nom=toto, casier=chose/truc, cfg_id=2, 
-	 * cfg cherchera dans #CONFIG{toto/chose/truc/2}
-	 * 
-	 */
+	//
+	// Determine l'arborescence ou CFG doit chercher les valeurs deja enregistrees
+	// si nom=toto, casier=chose/truc, cfg_id=2, 
+	// cfg cherchera dans #CONFIG{toto/chose/truc/2}
+	// 
 	function nom_config()
 	{
 	    return $this->param->nom . 

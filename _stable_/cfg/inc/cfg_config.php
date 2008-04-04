@@ -80,7 +80,7 @@ function ecrire_config($cfg='', $valeur=null){
 	return $ecrire($cfg, $valeur);	
 }
 
-function inc_ecrire_config_dist($cfg='', $valeur=null){ // supprimer $serialize ensuite
+function inc_ecrire_config_dist($cfg='', $valeur=null){ 
 	$depot = cfg_charger_depot($cfg);
 	return $depot->ecrire_config($valeur);
 }

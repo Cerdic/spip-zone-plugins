@@ -2,6 +2,9 @@ Todo :
 - faire une api pour permettre certains ajouts js (classe css 'cfg_pipette'? 'cfg_date'?)
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 
+v1.6.2 (04 04 2008)
+- eviter double INSERT HEAD sous 1.9.2
+
 v1.6.1 (02 04 2008)
 - retrouver le fonctionnement d'avant v1.4.10 sur #CONFIG{meta} ET lire_config{meta}.
 Cette derniere deserialise une meta de spip par defaut, contrairement a la premiere.

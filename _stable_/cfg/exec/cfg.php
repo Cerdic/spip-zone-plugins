@@ -55,7 +55,7 @@ function exec_cfg_dist($class = null)
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'cfg'),'data'=>''));
 		
 	// affichage des messages envoyes par cfg
-	echo $config->messages();
+	if ($s = $config->messages()) echo debut_boite_info(true) . $s . fin_boite_info(true);
 
 	// affichage des liens
 	if ($s = $config->liens()) echo debut_boite_info(true) . $s . fin_boite_info(true);
@@ -71,7 +71,7 @@ function exec_cfg_dist($class = null)
 	} else {
 		echo $config->formulaire();
 	}
-	
+
 	// pied
 	echo fin_gauche() . fin_page();
 }
