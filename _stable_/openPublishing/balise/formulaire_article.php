@@ -589,8 +589,8 @@ $variables = pipeline('OP_action', array(
 			));
 
 
-// l'auteur est identifié et à coché la case Auteur SPIP
-if ($variables['champs_aux']['choix_AuteurSpip'] == 'OK') {
+// l'auteur est identifié et à coché la case Auteur SPIP (si la case est cochée, alors publication sous anonyme)
+if ($variables['champs_aux']['choix_AuteurSpip'] != 'OK') {
 	$variables['champs_pri']['nom_inscription'] = $GLOBALS['auteur_session']['nom'];
 	$variables['champs_pri']['mail_inscription'] = $GLOBALS['auteur_session']['email'];
 }

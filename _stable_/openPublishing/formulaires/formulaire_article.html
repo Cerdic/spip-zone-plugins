@@ -130,20 +130,21 @@
 	[<p>(#ENV*{formulaire_agenda})</p>]
 
 	#PIPELINE{OP_squelette,#ENV*}
-		
+
+	[(#CONFIG{op/Authentification,''}|=={yes}?{		
 	<p>
-	<fieldset><legend><b><:opconfig:identification:>&nbsp;[<:opconfig:optionel:>]</b></legend>
+	<fieldset><legend><b><:opconfig:identification:>&nbsp;(<:opconfig:optionel:>)</b></legend>
 		<p>
 		<:opconfig:votre_nom:> : <br />
 		<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="15"><br />
 		<:opconfig:votre_mail:> : <br />
 		<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="15"><br />
 		</p>
-
-		[(#ENV*{formulaire_auteurspip})]
-
 	</fieldset>
 	</p>
+	})]
+
+	[(#ENV*{formulaire_auteurspip})]
 
 	<p>
 		<input type="submit" name="previsualiser" class="spip_bouton" value="<:opconfig:previsualiser:>" />
