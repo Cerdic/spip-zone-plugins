@@ -81,18 +81,17 @@ class cfg_dist
 	// c'est comme 'rediriger', il n'y a que le plugin 'autorite' qui l'utilise
 	function get_presentation() { return $this->form->param->presentation;	}
 	
-	/*
-	 * Affiche la boite d'info
-	 * des liens vers les autres fonds CFG
-	 * definis par la variable liens
-	 * <!-- liens*=moncfg -->
-	 * s'il y a une chaine de langue 'moncfg', le texte sera traduit
-	 * 
-	 * Ou
-	 * <!-- liens*=prefixe_plugin:moncfg -->
-	 * pour utiliser la chaine de langue de prefixe_plugin
-	 * 
-	 */	
+	//
+	// Affiche la boite d'info
+	// des liens vers les autres fonds CFG
+	// definis par la variable liens
+	// <!-- liens*=moncfg -->
+	// s'il y a une chaine de langue 'moncfg', le texte sera traduit
+	// 
+	// Ou
+	// <!-- liens*=prefixe_plugin:moncfg -->
+	// pour utiliser la chaine de langue de prefixe_plugin
+	// 
 	function liens()
 	{
 		$return = '';
@@ -106,11 +105,11 @@ class cfg_dist
 	}
 
 
-	/*
-	 * Affiche un lien vers le fond dont le nom ($lien)
-	 * est passe en parametre
-	 * a condition que le fichier fonds/cfg_$lien.html existe
-	 */
+	//
+	// Affiche un lien vers le fond dont le nom ($lien)
+	// est passe en parametre
+	// a condition que le fichier fonds/cfg_$lien.html existe
+	//
 	function generer_lien($lien, $nom='')
 	{
 		// nom est une chaine, pas une cle de tableau.
@@ -125,12 +124,11 @@ class cfg_dist
 	}
 	
 	
-	/*
-	 * Les liens multi sont appelles par 
-	 * liens_multi*=nom_du_fond
-	 * a condition que le fichier fonds/cfg_$lien.html existe
-	 * 
-	 */
+	//
+	// Les liens multi sont appelles par 
+	// liens_multi*=nom_du_fond
+	// a condition que le fichier fonds/cfg_$lien.html existe
+	// 
 	function liens_multi(){
 		// liens multiples
 		foreach ($this->form->param->liens_multi as $lien) {
@@ -169,17 +167,16 @@ class cfg_dist
 	}
 	
 
-	/*
-	 * Affiche la liste des onglets de CFG
-	 * 
-	 * Recupere les fonds CFG et analyse ceux-ci
-	 * - si onglet=oui : affiche l'onglet (valeur par defaut)
-	 * - si onglet=non : n'affiche pas l'onglet
-	 * - si onglet=fond_cfg_parent : n'affiche pas l'onglet, mais 'exposera' 
-	 * l'element parent indique (sous entendu que
-	 * le parent n'a pas 'onglet=non' sinon rien ne sera expose...
-	 * 
-	 */
+	//
+	// Affiche la liste des onglets de CFG
+	// 
+	// Recupere les fonds CFG et analyse ceux-ci
+	// - si onglet=oui : affiche l'onglet (valeur par defaut)
+	// - si onglet=non : n'affiche pas l'onglet
+	// - si onglet=fond_cfg_parent : n'affiche pas l'onglet, mais 'exposera' 
+	// l'element parent indique (sous entendu que
+	// le parent n'a pas 'onglet=non' sinon rien ne sera expose...
+	// 
 	function barre_onglets(){
 		$onglets = array();
 		
@@ -306,23 +303,6 @@ class cfg_dist
 			$retour .= $formulaire;
 		}
 		return $retour;
-	}
-	
-		
-		
-	// restaure des messages serialises dans une meta 'cfg_message_{id_auteur}'
-	//
-	// si le formulaire cfg avait demande une redirection... 
-	// (et provient de cette redirection), il est possible
-	// qu'il y ait un message a afficher	
-	function restaurer_messages(){
-		if ($this->form->param->rediriger 
-			&& $messages = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]){
-				include_spip('inc/meta');
-				effacer_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur']);
-				if (defined('_COMPAT_CFG_192')) ecrire_metas();
-				$this->form->messages = unserialize($messages);
-		}
 	}
 }
 

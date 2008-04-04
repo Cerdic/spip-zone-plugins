@@ -214,19 +214,8 @@ class cfg_formulaire_dist{
 		// pipeline 'cfg_post_edition'
 		$this->messages = pipeline('cfg_post_edition',array('args'=>array('nom_config'=>$this->nom_config()),'data'=>$this->messages));
 		
-
-		// Si le fond du formulaire demande expressement une redirection
-		// par <!-- rediriger=1 -->, on stocke le message dans une meta
-		// et on redirige le client, de maniere a charger la page
-		// avec la nouvelle config (ce qui permet par exemple a Autorite
-		// de controler d'eventuels conflits generes par les nouvelles autorisations)
-		if ($this->param->rediriger && $this->messages) {
-			include_spip('inc/meta');
-			ecrire_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur'], serialize($this->messages), 'non');
-			if (defined('_COMPAT_CFG_192')) ecrire_metas();
-			include_spip('inc/headers');
-			redirige_par_entete(parametre_url(self(),null,null,'&'));
-		}
+		// traiter les champs speciaux
+		$this->actionner_extensions('post_traiter');	
 	}
 
 
@@ -291,6 +280,17 @@ class cfg_formulaire_dist{
 			$this->param->colonne = 'extra';
 		}
 		
+		// definir les parametres qui sont a traiter comme des extensions
+		// il faut que le parametre ne soit pas vide et qu'un fichier 
+		// /cfg/params/{param}.php existe
+		$this->extensions_parametres = array();
+		foreach ($this->param as $nom=>$val){
+			if ($val){
+				if (find_in_path('cfg/params/'.$nom.'.php')){
+					$this->extensions_parametres[] = $nom;
+				}	
+			}	
+		}
 	}
 	
 	
@@ -510,11 +510,20 @@ class cfg_formulaire_dist{
 	//
 	// charge des actions sur les champs particuliers
 	// notifies par 'type_XX' ou 'cfg_YY' sur les classes css
+	// s'ils existent dans /cfg/classes/
 	//
-	// 3 actions sont faites : charger, verifier, pre_traiter
-	// Ces types sont definis dans des fichiers /cfg/classes/type_XX.php ou cfg_XX.php
-	// qui contiennent des fonctions cfg_{action}_type_XX() auquelles
-	// on passe $this->params et qui retournent ce tableau, modifie ou non
+	// charge ensuite des actions sur les parametres particuliers presents
+	// s'ils existent dans /cfg/params/
+	//
+	// les actions possibles sont :
+	// - pre_charger, charger, 
+	// - pre_verifier, verifier, 
+	// - pre_traiter, post_traiter
+	//
+	// Apres avoir inclu le fichier,
+	// CFG recherche une eventuelle fonction :
+	// cfg_{action}_{objet}() et l'execute.
+	// Objet pouvant etre : 'type_XX', 'cfg_XX' ou 'param_XX'
 	//
 	function actionner_extensions($action){
 
@@ -528,7 +537,7 @@ class cfg_formulaire_dist{
 						if (function_exists($f = 'cfg_' . $action . '_' . $type)){ // absence possible normale
 							if ($cfg){
 								// de type 'cfg_' : artillerie lourde
-								// on passe la classe
+								// on passe le nom du champ et la classe
 								$f($champ, $this);
 							} else {
 								// de type : 'type_' : nom et valeur suffisent
@@ -546,6 +555,17 @@ class cfg_formulaire_dist{
 						}
 					}
 				}	
+			}
+		}
+		if ($this->extensions_parametres){
+			foreach ($this->extensions_parametres as $param){
+				if (include_spip('cfg/params/'.$param)) {
+					if (function_exists($f = 'cfg_' . $action . '_param_' . $param)){ // absence possible normale
+						// artillerie lourde on passe
+						// la valeur et la classe
+						$f($this->param->$param, $this);						
+					}
+				}
 			}
 		}
 	}

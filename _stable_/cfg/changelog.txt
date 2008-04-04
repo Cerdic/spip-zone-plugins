@@ -1,6 +1,9 @@
 Todo :
-- faire une api pour permettre certains ajouts js (classe css 'cfg_pipette'? 'cfg_date'?)
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
+
+v1.6.3 (04 04 2008)
+- utiliser les points d'entrees de cfg pour definir des actions sur les parametres
+et application avec le parametre 'rediriger'
 
 v1.6.2 (04 04 2008)
 - eviter double INSERT HEAD sous 1.9.2

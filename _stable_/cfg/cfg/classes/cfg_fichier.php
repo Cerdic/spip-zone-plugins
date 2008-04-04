@@ -22,6 +22,7 @@ function cfg_pre_verifier_cfg_fichier($nom, &$cfg){
 	} else {
 		set_request($nom, '<OLD>'.	$cfg->val[$nom]);
 	}
+	return $cfg;
 }
 
 
