@@ -18,6 +18,8 @@
     
     Copyright 2007, 2008 - Ghislain VLAVONOU, Yannick EDAHE, Cedric PROTIERE
 */
+
+
 include_spip('inc/presentation');
 include_spip('inc/config');
 include_spip('inc/charsets');
@@ -210,7 +212,7 @@ function exec_ezsql() {
 	if($isExecute && $isSelect) 
 		echo '<br/>'.ez_html_table("Aper&ccedil;u de la requ&ecirc;te",$tbody,"<th><small>".join('</small></th><th><small>',array_slice($tCol,0,5))."</small></th>",'statistiques-24.gif');
 	
-	$aide=html_entity_decode($aide,ENT_COMPAT,'UTF-8');
+	$aide=html_entity_decode_utf8($aide,ENT_COMPAT,'UTF-8');
 	$jquery= <<<FINSCRIPT
 
 $(document).ready(function() {
