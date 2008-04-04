@@ -368,7 +368,7 @@ debut_droite();
               	$sql="SELECT dep.departement, eta.etablissement centre, ser.serie, rep.id_table, decode(id_anonyme,'".$tParam['code']."') id_anonyme, jury "
             		. "from odb_repartition rep, odb_ref_etablissement eta, odb_ref_departement dep, odb_candidats can, odb_ref_serie ser "
             		. "where can.id_saisie=rep.id_saisie and can.annee=$annee and can.serie=ser.id and rep.id_etablissement=eta.id and eta.id_departement=dep.id and rep.annee=$annee "
-            		. 'order by dep.departement, centre, id_table';
+            		. "order by dep.departement, centre, id_table";
             	//echo ($sql);
             	$result=mysql_query($sql) or die(KO." - Erreur dans la requete $sql<br/>".mysql_error());
             	while($row=mysql_fetch_array($result)) {
@@ -381,10 +381,11 @@ debut_droite();
             	foreach($tPdf as $departement=>$t1) {
             		$msg.="<hr size='1'/>\n<A NAME='".getRewriteString($departement)."'></a>\n<h1>$departement</h1>\n";
             		$msg_pdf.="<tr class='tr_liste'><th><h2>$departement</h2></th><th><A HREF='#".getRewriteString($departement)."'>d&eacute;tail</a></th></tr>\n";
-            		foreach($t1 as $centre=>$t2) {
+                  		foreach($t1 as $centre=>$t2) {
             			$msg.="<h2>$centre</h2>\n";
             			$cpt=0;
-            			$msg.="<table class='spip'>\n<tr><th>#</th><th>S&eacute;rie</th><th>Num&eacute;ro table</th><th>Num&eacute;ro anonyme</th><th>Jury</th></tr>";
+            			$msg.="<table class='spip'>\n<tr><th>#</th><th>S&eacute;rie</th><th>Num&eacute;ro table</th><th>Num&eacute;ro anonyme</th><th>Jury</th></tr>";      
+            			ksort($t2);
             			foreach($t2 as $jury=>$t3) {
             				foreach($t3 as $serie=>$t4) {
 	            				foreach($t4 as $id_table=>$id_anonyme) {
@@ -406,12 +407,16 @@ debut_droite();
 							//que la ou les requetes à exécuter est reconnue.
 							// Chaque requete est suivi d'un titre, d'un pied de page et des colonnes de résultats qui peuvent variées
 							$requete="SELECT ser.serie, rep.id_table, decode(id_anonyme,'".$tParam['code']."') id_anonyme, rep.jury "
-							. "from odb_repartition rep, odb_ref_etablissement eta, odb_ref_departement dep, odb_candidats can, odb_ref_serie ser "
-							. "where can.id_saisie=rep.id_saisie and rep.jury=$jury and can.annee=$annee and rep.annee=$annee and can.serie=ser.id and rep.id_etablissement=eta.id and eta.etablissement='$centre' and eta.id_departement=dep.id "
-							. "order by ser.serie";
+							. "from odb_repartition rep, odb_ref_etablissement eta, odb_ref_departement dep, odb_candidats can, odb_ref_serie ser ";
+							$where="where can.id_saisie=rep.id_saisie and can.annee=$annee and rep.annee=$annee and can.serie=ser.id and rep.id_etablissement=eta.id and eta.etablissement='$centre' and eta.id_departement=dep.id ";
+							$order="order by ser.serie";
+							if($jury!=''){
+								$where=$where." and rep.jury=$jury "; 
+							}
+							$requete=$requete.$where.$order;							
 						    $_SESSION['requete'][$centre][]=$requete;
 						    $_SESSION['pied'][$centre][]=html_entity_decode("Num&eacute;ros anonymes $centre ($departement)");
-						    $_SESSION['titre'][$centre][]=html_entity_decode("Num&eacute;ros anonymes &agrave; l'examen du Bac - Centre de composition <b>$centre</b> ($departement) JURY:$jury");
+						    $_SESSION['titre'][$centre][]=html_entity_decode("Num&eacute;ros anonymes &agrave; l'examen du Bac - Centre de composition <b>$centre</b> ($departement) - Jury $jury");
 						    $_SESSION['cols'][$centre][]=array(
 							'serie'=>'Serie',
 							'id_table'=>'Num table',
