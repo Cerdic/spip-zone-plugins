@@ -50,9 +50,9 @@ if(!is_array($format)) $format=array('taille'=>'A3', 'orientation'=>'landscape')
 $infos=$_SESSION['infos'][$param];	// informations du fichier pdf (titre, auteur, date creation...)
 if(!is_array($infos)) $infos=array('Title'=>$title,'Author'=>'SIS/DOB via SIOU','CreationDate'=>date("d/m/Y"));
 $encryption=$_SESSION['encryption'][$param];	// protection par mot de passe 
-echo"<pre>";
-print_r($_SESSION);
-die('</pre>');
+//echo"<pre>";
+//print_r($_SESSION);
+//die('</pre>');
 $post=$_SESSION['post'][$param];		// texte a afficher a la fin du document pdf
 $options=$_SESSION['options'][$param];	// options (facultatives) du tableau 
 if(!is_array($option))
@@ -73,22 +73,22 @@ if($debug) {
 	die(OK.' - fin du debug');
 }
 
-$pdf_dir='contrib/ezpdf/';
+$pdf_dir='../odb_contrib/ezpdf/';
 include $pdf_dir.'class.ezpdf.php';	// inclusion du code de la bibliothque
 $pdf =& new Cezpdf($format['taille'],$format['orientation']);
 $pdf->selectFont($pdf_dir.'fonts/Helvetica');
-$pdf->ezStartPageNumbers(12, 12, 8, 'right', "$pied - Page {PAGENUM}/{TOTALPAGENUM} - SIS/DOB");
 $pdf->addInfo($infos);
 
 // make the table
 // YEDA 25 Mars 2008 : Ajout de la découpe suivant les centres
-for($i=0;$i<($num-1);$i++){
+for($i=0;$i<($num);$i++){
 $mondata=$data[$i];
 $title=$_SESSION['titre'][$param][$i];	// titre au-dessus du tableau
 $pied=$_SESSION['pied'][$param][$i];		// pied de page, rpt en bas de chaque page
 if($pied=='') $pied=$title;
 $cols=$_SESSION['cols'][$param][$i];		// colonnes  inclure dans la table
 $pdf->ezTable($mondata,$cols,$title,$options);
+$pdf->ezStartPageNumbers(12, 12, 8, 'right', "$pied - Page {PAGENUM}/{TOTALPAGENUM} - SIS/DOB");
 $pdf->ezNewPage();
 }
 
@@ -107,7 +107,7 @@ if (isset($d) && $d){
    echo trim($pdfcode);
    echo '</body></html>';
 } else {
-   if(is_array($encryption)) $pdf->setEncryption($encryption['user'], $encryption['owner'], $encryption['action']);
+ //  if(is_array($encryption)) $pdf->setEncryption($encryption['user'], $encryption['owner'], $encryption['action']);
   // $pdf->ezStream();
 
 
