@@ -82,10 +82,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'option_motclef' => 'Permettre aux r&eacute;dacteurs de choisir les mots clefs',
 'option_tagmachine' => 'Permettre aux r&eacute;dacteurs d\'utiliser le plugin tag-machine',
 'option_document' => 'Permettre aux r&eacute;dacteurs d\'inclure des documents dans l\'article',
-'option_logo' => 'Permettre aux r&eacute;dacteurs d\'inclure un logo &agrave; l\'article',
+'option_logo' => '... de type "logo"',
 'option_auteur_spip' => 'Permettre aux r&eacute;dacteurs enregistr&eacute;s en tant que "auteur Spip" de publier les articles en leur nom',
 'option_doc_distant' => 'Permettre aux r&eacute;dacteurs d\'inclure des documents distants',
 'option_authentification' => 'Permettre aux r&eacute;dacteurs de s\'identifier (mail et pseudo).',
+'option_docimage' => '... de type "document"',
+'option_docdocument' => '... de type "image"',
+'option_docauto' => 'imposer un type de document automatiquement (image, document ou logo).',
 'op_base_titre' => 'openPublishing : base de donn&eacute;e',
 
 // P

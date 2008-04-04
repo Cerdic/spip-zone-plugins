@@ -179,6 +179,10 @@ foreach ($variables['champs_aux'] as $key => $champ) {
 $variables['champs_pri']['id_article'] = intval($variables['champs_pri']['id_article']);
 $variables['champs_pri']['id_rubrique'] = intval($variables['champs_pri']['id_rubrique']);
 
+// traitement particulier pour un type de document automatique
+if ($config['DocIncAuto'] == 'yes') {
+	$variables['champs_aux']['type_doc'] = $config['DocAuto'];
+}
 
 // déclarations de variables supplémentaires (pour la fonction ajout_document)
 $documents_actifs = array();

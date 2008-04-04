@@ -19,11 +19,12 @@
 		<:opconfig:descriptif_doc:> : <br /><textarea name="description_doc"></textarea><br />
 		</p>
 
-		<p><b><:opconfig:type_document:></b></p>
-		<input type="radio" name="type_doc" value="vignette" checked>&nbsp;<:opconfig:image_inclusion:><br>
-		<input type="radio" name="type_doc" value="document">&nbsp;<:opconfig:document_inclusion:><br>
-		[(#CONFIG{op/Logo,''}|=={yes}?{<input type="radio" name="type_doc" value="logo">&nbsp;<:opconfig:logo_inclusion:><br />})]
-
+		[(#CONFIG{op/DocIncAuto,''}|!=={'yes'}?{
+			<p><b><:opconfig:type_document:></b></p>
+			[(#CONFIG{op/DocImage,''}|=={yes}?{<input type="radio" name="type_doc" value="vignette" checked>&nbsp;<:opconfig:image_inclusion:><br>})]
+			[(#CONFIG{op/DocDocument,''}|=={yes}?{<input type="radio" name="type_doc" value="document">&nbsp;<:opconfig:document_inclusion:><br>})]
+			[(#CONFIG{op/Logo,''}|=={yes}?{<input type="radio" name="type_doc" value="logo">&nbsp;<:opconfig:logo_inclusion:><br />})]
+		})]
 		<p>
 		<input name='media' type='submit' VALUE='#ENV*{bouton}' CLASS='spip_bouton'>
 		</p>
