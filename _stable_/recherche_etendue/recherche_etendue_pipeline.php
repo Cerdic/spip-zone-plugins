@@ -11,15 +11,15 @@ function RechercheEtendue_reconfig_indexation($reactive_rub = false,$reactive_se
 	$in_sec = calcul_mysql_in('id_secteur',$liste_sec_no_index,'NOT');
 	if (count($liste_rub_no_index))
 		$in .= "AND $in_rub";
-	if (count($liste_sec_no_index))
-		$in .= "AND $in_sec";
 
 	// mettre a jour les criteres d'indexation
 	$INDEX_critere_indexation = array();
 	if (isset($GLOBALS['meta']['INDEX_critere_indexation']))
 		$INDEX_critere_indexation = unserialize($GLOBALS['meta']['INDEX_critere_indexation']);
-	$INDEX_critere_indexation['spip_articles']="statut='publie'$in";
 	$INDEX_critere_indexation['spip_breves']="statut='publie'$in";
+	if (count($liste_sec_no_index))
+		$in .= " AND $in_sec";
+	$INDEX_critere_indexation['spip_articles']="statut='publie'$in";
 	$INDEX_critere_indexation['spip_rubriques']="statut='publie'$in";
 	$INDEX_critere_indexation['spip_syndic']="statut='publie'$in";
 	ecrire_meta('INDEX_critere_indexation',serialize($INDEX_critere_indexation));
