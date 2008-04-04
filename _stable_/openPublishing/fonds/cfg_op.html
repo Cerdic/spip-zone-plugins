@@ -104,7 +104,7 @@
 <p><:opconfig:expliq_groupes:></p>
 <p style="background:#fff; border: 1px dotted #000;">
 <BOUCLE_groupe(GROUPES_MOTS){par titre}>
-<input type="checkbox" name="groupe_#ID_GROUPE" value="openPublishing" [(#ENV{op_groupe_#ID_GROUPE}|=={openPublishing}|?{checked="yes"})]/>#TITRE<br />
+<input type="checkbox" name="groupe_#ID_GROUPE" value="openPublishing" [(#ENV{groupe_#ID_GROUPE}|=={openPublishing}|?{checked="yes"})]/>#TITRE<br />
 </BOUCLE_groupe>
 </p>
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
