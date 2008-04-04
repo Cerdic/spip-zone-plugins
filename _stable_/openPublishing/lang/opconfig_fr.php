@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_upload' => 'erreur d\'upload, le fichier temporaire est introuvable, il ce peut que vous tentiez d\'uploader un fichier trop volumineux. La taille maximale autoris&eacute;e est de 5 Mo',
 'erreur_extension' => 'erreur d\'upload. L\'extention de votre fichier n\'est pas autoris&eacute;e ...',
 'expliq_spip_auteur' => 'Vous &ecirc;tes actuellement logg&eacute;. Si vous voulez publier cet article de mani&egrave;re anonyme, cochez la case ci-dessous.',
+'expliq_groupes' => 'Si vous avez activ&eacute; l\'option "permettre aux r&eacute;dacteurs de choisir leurs mots-clés", vous pouvez alors choisir les différents groupes de mot-cl&eacute;s qui leur serons propos&eacute;s. Cochez ou d&eacute;cochez les groupes de mots-cl&eacute;s i-dessous.',
 
 // G
 'gestion_rubrique' => 'Gestion des rubriques',
@@ -129,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_posttraitement' => 'Post-traitement des articles',
 'titre_renvois' => 'Gestion des renvois',
 'titre_doc' => 'Titre',
+'titre_groupes' => 'Choix des groupes de mot-cl&eacute;s a utiliser',
 'transfert_auteurs' => 'Mettre &agrave; jours les champs extra de la table spip_articles.',
 'transfert_auteurs_suite' => '(&agrave; partir des informations de la table spip_op_auteurs).',
 'telecharger_document' => 'T&eacute;l&eacute;chargez votre document',

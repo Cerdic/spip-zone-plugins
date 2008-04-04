@@ -6,7 +6,7 @@
 	<p><:opconfig:motclefs_explique2:></p>
 
 	<select name='motschoix[]' multiple size='20'>
-	<BOUCLE_groupes(GROUPES_MOTS)>
+	<BOUCLE_groupes(GROUPES_MOTS){openKey}>
 		<option value="">[(#TITRE|majuscules)]</option>
 		<BOUCLE_mots(MOTS){par titre}{id_groupe}>
 			<option value="#ID_MOT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#TITRE</option>

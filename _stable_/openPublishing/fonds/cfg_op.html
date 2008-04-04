@@ -98,6 +98,21 @@
 <a href="#haut"><:opconfig:revenir_haut:></a>
 <br /><br />
 
+
+<a name="groupes"></a>
+<fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_groupes:></b></legend>
+<p><:opconfig:expliq_groupes:></p>
+<p style="background:#fff; border: 1px dotted #000;">
+<BOUCLE_groupe(GROUPES_MOTS){par titre}>
+<input type="checkbox" name="groupe_#ID_GROUPE" value="openPublishing" [(#ENV{op_groupe_#ID_GROUPE}|=={openPublishing}|?{checked="yes"})]/>#TITRE<br />
+</BOUCLE_groupe>
+</p>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</fieldset>
+
+<a href="#haut"><:opconfig:revenir_haut:></a>
+<br /><br />
+
 <a name="agenda"></a>
 <fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_agenda_op:></b></legend>
 <p><:opconfig:expliq_agenda:></p>

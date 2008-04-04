@@ -21,6 +21,27 @@ function critere_openPublishing($idb, &$boucles, $crit) {
 	$boucle->where[] = array("'IN'", "'$id_rubrique'","'($list)'");
 }
 
+// {openKey}
+function critere_openKey($idb, &$boucles, $crit) {
+	
+        $boucle = &$boucles[$idb];
+	$id_table = $boucle->id_table;
+
+	$id_groupe = $id_table.'.id_groupe';
+
+	$list = '';
+	foreach (lire_config('op') as $key => $val) {
+		if ((substr($key,0,7)) == "groupe_") {
+			if ($val == "openPublishing") {
+				$op_rub = substr($key,7);
+				$list .= $op_rub .',';
+			}
+		}
+	}
+	$list = substr($list,0,strlen($list)-1);
+	$boucle->where[] = array("'IN'", "'$id_groupe'","'($list)'");
+}
+
 function return_agenda() {
 	$config = lire_config('op');
 	return $config["RubAgenda"];
