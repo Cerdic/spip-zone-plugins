@@ -512,15 +512,34 @@ if(!empty($variables['actions']['valider'])) {
 				"extra" => sql_quote($champs['extra'])),
 			 array("id_article=".$variables['champs_pri']['id_article'])
 		);
-
-		// si auteur SPIP, attribuer l'article à l'auteur et non à "anonyme"
-		if ($variables['champs_aux']['choix_AuteurSpip'] == 'OK') {
-			sql_insertq(
-				'spip_auteurs_articles',
-				array(
-					'id_auteur' => $GLOBALS['auteur_session']['id_auteur'],
-					'id_article' => $variables['champs_pri']['id_article'])
-			);
+		if ($config['AuteurSpip'] == 'yes') {
+			// si auteur SPIP, attribuer l'article à l'auteur et non à "anonyme"
+			if ($variables['champs_aux']['choix_AuteurSpip'] != 'OK') {
+				if (empty($GLOBALS['auteur_session'])) {
+					sql_insertq(
+						'spip_auteurs_articles',
+						array(
+							'id_auteur' => $config['IDAuteur'],
+							'id_article' => $variables['champs_pri']['id_article'])
+					);
+				}
+				else {
+					sql_insertq(
+						'spip_auteurs_articles',
+						array(
+							'id_auteur' => $GLOBALS['auteur_session']['id_auteur'],
+							'id_article' => $variables['champs_pri']['id_article'])
+					);
+				}
+			}
+			else {
+				sql_insertq(
+					'spip_auteurs_articles',
+					array(
+						'id_auteur' => $config['IDAuteur'],
+						'id_article' => $variables['champs_pri']['id_article'])
+				);
+			}
 		}
 		else {
 			sql_insertq(
