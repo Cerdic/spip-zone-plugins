@@ -8,7 +8,6 @@
  *
  */
 
-if (!defined('_DIR_LIB')) define('_DIR_LIB', _DIR_RACINE . 'lib/');
 
 function cfg_charger_param_selecteur_couleur($valeur, &$cfg){
 	// si la librairie fabtastic est installee,

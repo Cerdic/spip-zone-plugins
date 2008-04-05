@@ -36,7 +36,7 @@ function cfg_pre_traiter_cfg_fichier($nom, &$cfg){
 	if (_request('_cfg_delete')){
 		$supprimer_fichier = _COMPAT_CFG_192 ? 'cfg_supprimer_fichier' : 'supprimer_fichier';
 		if (!$supprimer_fichier(get_spip_doc($cfg->val[$nom]))) {
-			$cfg->messages['erreurs'][$nom] = 'Impossible de supprimer le fichier...';		
+			$cfg->messages['erreurs'][$nom] = _T('cfg:erreur_suppression_fichier', array('fichier', get_spip_doc($cfg->val[$nom])));		
 		}
 	// ajout ou modification
 	} else {
@@ -45,10 +45,10 @@ function cfg_pre_traiter_cfg_fichier($nom, &$cfg){
 			// suppression de l'ancien fichier
 			$supprimer_fichier = _COMPAT_CFG_192 ? 'cfg_supprimer_fichier' : 'supprimer_fichier';
 			if ($cfg->val[$nom] && !$supprimer_fichier(get_spip_doc($cfg->val[$nom]))) {
-				$cfg->messages['erreurs'][$nom] = 'Impossible de supprimer l\'ancien fichier...';	
+				$cfg->messages['erreurs'][$nom] = _T('cfg:erreur_suppression_fichier', array('fichier', get_spip_doc($cfg->val[$nom])));	
 			} else {
 				if (!$fichier = cfg_ajoute_un_document($f['tmp_name'],$f['name'],$nom, 'config/'.$cfg->vue)){
-					$cfg->messages['erreurs'][$nom] = 'erreur de copie du fichier a son emplacement definitif';	
+					$cfg->messages['erreurs'][$nom] = _T('cfg:erreur_copie_fichier', array('fichier', 'config/'.$cfg->vue . '/' . $f['name']);	
 				} else {
 					$cfg->val[$nom] = set_spip_doc($fichier);
 				}

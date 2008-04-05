@@ -9,7 +9,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function cfg_verifier_type_idnum($nom, $val){
 	if (!is_numeric($val)){
-		return _T('erreur_identifiant_chiffres', array('champ'=>$nom));
+		return _T('cfg:erreur_type_idnum', array('champ'=>$nom));
 	}
 }
 

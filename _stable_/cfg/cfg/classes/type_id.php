@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function cfg_verifier_type_id($nom, $val){
 	if (!preg_match('#^[a-z_]\w*$#', $val)){
-		return _T('erreur_id_commence_par_lettre_ou_souligne', array('champ'=>$nom));
+		return _T('cfg:erreur_type_id', array('champ'=>$nom));
 	}
 }
 
