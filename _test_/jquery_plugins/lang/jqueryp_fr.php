@@ -40,6 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	'easing' => 'Easing',
 	'easing_description' => ' ',
+	
+	'farbtastic' => 'Farbtastic',
+	'farbtastic_description' => 'Une pipette pour les couleurs',
 		
 	'syncheight' => 'SyncHeight',
 	'syncheight_description' => 'Harmoniser la hauteur de colonnes',

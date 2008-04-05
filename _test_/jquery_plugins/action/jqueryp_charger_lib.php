@@ -71,13 +71,12 @@ function jqueryp_telecharge_librairie($source, $dest, $dir){
 	include_spip('inc/distant');
 	include_spip('inc/flock');
 	
-	// dir racine car dans prive !!!
-	$_dir = _DIR_RACINE . _DIR_LIB . $dir;
+	$_dir = _DIR_LIB . $dir;
 	
 	// creer le repertoire si absent
 	if (!is_dir($_dir)
 		AND !sous_repertoire($_dir)){
-		spip_log("Echec installation : Impossible de creer le repertoire $dir dans " . _DIR_LIB, 'jquery_plugins');
+		spip_log("Echec installation : Impossible de creer le repertoire $dir dans " . joli_repertoire(_DIR_LIB), 'jquery_plugins');
 		return false;
 	// recuperer le fichier
 	} else {

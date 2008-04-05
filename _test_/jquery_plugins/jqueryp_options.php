@@ -1,5 +1,5 @@
 <?php
-if (!defined('_DIR_LIB')) define('_DIR_LIB', 'lib/');
+if (!defined('_DIR_LIB')) define('_DIR_LIB', _DIR_RACINE . 'lib/');
 	
 
 /* liste des plugins de jquery */
@@ -32,7 +32,12 @@ $GLOBALS['jquery_plugins'] = array(
 		)
 	),
 		
-	
+	// farbtastic (color picker)
+	'farbtastic' => array(
+		'dir' => 'farbtastic12/farbtastic',
+		'url' => 'http://acko.net/dev/farbtastic',
+		'install' => 'http://acko.net/files/farbtastic/farbtastic12.zip'
+	),
 	
 		
 	//syncHeight

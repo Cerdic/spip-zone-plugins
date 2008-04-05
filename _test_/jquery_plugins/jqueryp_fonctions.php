@@ -180,7 +180,7 @@ function jqueryp_bouton_telechargement($id_jquery_plugin){
 	$j = $jquery_plugins[$id_jquery_plugin];
 
 	// deja present ?  texte du bouton :  "mettre a jour", sinon "telecharger"
-	if (is_dir(_DIR_RACINE . _DIR_LIB . $j['dir'])){
+	if (is_dir(_DIR_LIB . $j['dir'])){
 		$quoi='update';
 	} else {
 		$quoi='install';
@@ -261,7 +261,7 @@ function jqueryp_liste_plugins($type, $groupe=''){
 			
 			foreach ($plugs as $nom=>$extension){
 				// eliminer les plugins non installes
-				if (!is_dir($dir = _DIR_RACINE . _DIR_LIB . $extension['dir'])){
+				if (!is_dir($dir = _DIR_LIB . $extension['dir'])){
 					unset($plugs[$nom]);
 				// trouver les fichiers js et creer leurs alias	
 				} else {
@@ -279,7 +279,7 @@ function jqueryp_liste_plugins($type, $groupe=''){
 							// g4 : .pack .min .ext ...
 							if (!in_array($g[4],$exclus)){
 								$plugs[$nom]['files'][$nom . '.' . $g[3] . $g[4]] 
-									= _DIR_LIB . $extension['dir'] . '/' . $f;
+									= str_replace(_DIR_RACINE, '', _DIR_LIB) . $extension['dir'] . '/' . $f;
 							}
 						}
 					}
@@ -321,13 +321,13 @@ function jqueryp_liste_themes($type, $groupe=''){
 			foreach ($plugs as $nom=>$extension){
 				// eliminer les plugins non installes
 				// eliminer les plugins dans themes
-				if ((!is_dir($dir = _DIR_RACINE . _DIR_LIB . $extension['dir']))
+				if ((!is_dir($dir = _DIR_LIB . $extension['dir']))
 					OR (!isset($extension['themes']))) {
 						unset($plugs[$nom]);
 				} else {
 					// mettre la bonne adresse
 					foreach ($extension['themes'] as $t=>$dir) {
-						$plugs[$nom]['themes'][$t] = _DIR_LIB . $extension['dir'] . '/' . $dir;
+						$plugs[$nom]['themes'][$t] = str_replace(_DIR_RACINE,'', _DIR_LIB) . $extension['dir'] . '/' . $dir;
 					}
 				}
 			}
