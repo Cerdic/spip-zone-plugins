@@ -6,8 +6,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_mettre_a_jour'=>'Mettre &agrave; jour',
-	
+	'bouton_mettre_a_jour' => 'Mettre &agrave; jour',
+
 	// C
 	'cfg' => 'CFG',
 	'choisir_module_a_configurer' => 'Choisissez le module &agrave; configurer.',
@@ -20,21 +20,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_enregistrement' => 'Une erreur est survenue lors de l\'enregistrement de <b>@nom@</b>',
 	'erreur_lecture' => 'Impossible de lire @nom@',
 	'erreur_open_w_fichier' => 'Impossible d\'ouvrir le fichier @fichier@ en &eacute;criture',
-	'erreur_type_id' => 'Le champ @champ@ doit commencer par une lettre ou un soulign&eacute;',
-	'erreur_type_idnum' => 'Le champ @champ@ doit &ecirc;tre numerique',
-	'erreur_type_pwd'=> 'Le champ @champ@ doit avoir plus de 5 caract&egrave;res',
 	'erreur_suppression' => 'Une erreur est survenue lors de la suppression de <b>@nom@</b>',
 	'erreur_suppression_fichier' => 'Impossible de supprimer le fichier @fichier@.',
+	'erreur_type_id' => 'Le champ @champ@ doit commencer par une lettre ou un soulign&eacute;',
+	'erreur_type_idnum' => 'Le champ @champ@ doit &ecirc;tre numerique',
+	'erreur_type_pwd' => 'Le champ @champ@ doit avoir plus de 5 caract&egrave;res',
 	'extraarticles' => 'Exemple de champ extra sur un article',
 
 	// I
 	'id_manquant' => 'Identifiant manquant',
 	'installation_librairies' => 'T&eacute;l&eacute;chargement de librairies',
 	'installation_liste_libs' => 'Liste des librairies',
-	'installer_lib_192' => 'Pour installer une librairie, d&eacute;compressez manuellement le zip et copiez son contenu dans le dossier @dir@.',
 	'installer_dossier_lib' => 'Vous devez creer un dossier @dir@ &agrave; la racine de votre SPIP ayant des permissions d\'ecriture.',
+	'installer_lib_192' => 'Pour installer une librairie, d&eacute;compressez manuellement le zip et copiez son contenu dans le dossier @dir@.',
 
-	
 	// L
 	'lib_farbtastic' => 'Farbtastic',
 	'lib_farbtastic_description' => 'Offre une pipette pour s&eacute;lectionner des couleurs',
@@ -65,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'testphp' => 'Exemple de stockage php',
 	'testsimple' => 'Exemple simple',
 	'testtable' => 'Exemple sur champs d\'une table sql'
-	
 );
 
 ?>
