@@ -1,6 +1,12 @@
 Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 
+v1.6.4 (04 04 2008)
+- les classes css des champs sont toutes analysees. Elles doivent etre placees juste apres name="...".
+- si une classe css 'cfg_couleur' est presente et si la librairie 'farbtastic' est installee,
+une pipette sera proposee pour selectionner la couleur. exemple :
+<input type="text" name="liens" class="fondl cfg_couleur" value="[(#ENV{liens}|sinon{#467AA7})]" size="7" />
+
 v1.6.3 (04 04 2008)
 - utiliser les points d'entrees de cfg pour definir des actions sur les parametres
 et application avec le parametre 'rediriger'

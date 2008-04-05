@@ -285,11 +285,7 @@ class cfg_formulaire_dist{
 		// /cfg/params/{param}.php existe
 		$this->extensions_parametres = array();
 		foreach ($this->param as $nom=>$val){
-			if ($val){
-				if (find_in_path('cfg/params/'.$nom.'.php')){
-					$this->extensions_parametres[] = $nom;
-				}	
-			}	
+			if ($val) $this->ajouter_extension_parametre($nom);		
 		}
 	}
 	
@@ -315,7 +311,8 @@ class cfg_formulaire_dist{
 		// recherche d'au moins un champ de formulaire pour savoir si la vue est valide
 		$this->recuperer_fond();
 		if (!preg_match_all(
-		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio|hidden|file)") name="(\w+)(\[\])?"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?( multiple=)?[^>]*?>#ims',
+		/*  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio|hidden|file)") name="(\w+)(\[\])?"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?( multiple=)?[^>]*?>#ims', */
+		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio|hidden|file)") name="(\w+)(\[\])?"(?: class="([^"]*)")?( multiple=)?[^>]*?>#ims',
 						$this->fond_compile, $matches, PREG_SET_ORDER)) {
 			return _T('cfg:pas_de_champs_dans', array('nom' => $this->vue));
 		}
@@ -332,23 +329,31 @@ class cfg_formulaire_dist{
 
 			//
 			// Extensions et validations des champs
+			// via les classes css
 			//
-			
-			// classes css type_xx
+			// attention : ordre important : <balise (type="xx")? name="xx" class="xx" multiple="xx" />
+			//
 			if ($regs[5]) {
-				$this->champs[$name]['type_verif'] = $regs[5];
-				$this->ajouter_extension('type_'.$regs[5], $name);
-			}		
-			// classes css cfg_xx 
-			if ($regs[6]) {
-				$this->champs[$name]['cfg'] = $regs[6];
-				$this->ajouter_extension('cfg_'.$regs[6], $name);
+				$tcss = explode(' ',trim($regs[5]));
+				foreach($tcss as $css){
+					// classes css type_xx
+					if (substr($css,0,5)=='type_') {
+						$this->ajouter_extension($css, $name);
+					// classes css cfg_xx
+					} elseif (substr($css,0,4)=='cfg_') {
+						$this->champs[$name]['cfg'] = substr($css,4); // juste 'id' si classe = cfg_id
+						$this->ajouter_extension($css, $name);
+					}
+				}
 			}
-			// cas particulier automatique : type file => type de verification : fichier
+			
+			// cas particulier automatiques : 
+			// * input type file => type de verification : fichier
 			if (($regs[2] == 'file') AND (!$this->champs[$name]['cfg'])){
 				$this->champs[$name]['cfg'] = 'fichier';
 				$this->ajouter_extension('cfg_fichier', $name);	
 			}
+			
 	    }
 
 	    return '';
@@ -363,11 +368,23 @@ class cfg_formulaire_dist{
 		$this->extensions[$ext][] = $nom;	
 	}
 	
-	/*
-	 * 
-	 * Compiler le fond CFG si ce n'est pas fait
-	 * 
-	 */
+	// ajoute une extension sur un parametre
+	// seulement si un fichier sur ce parametre existe
+	function ajouter_extension_parametre($param){
+		if (in_array($param, $this->extensions_parametres))
+			return true;
+		
+		if (find_in_path('cfg/params/'.$param.'.php')){
+			$this->extensions_parametres[] = $param;
+			return true;
+		}
+		return false;
+	}
+	
+	
+	// 
+	// Compiler le fond CFG si ce n'est pas fait
+	// 
 	function recuperer_fond($contexte = array(), $forcer = false){
 
 		if (!$this->fond_compile OR $forcer){
@@ -396,11 +413,11 @@ class cfg_formulaire_dist{
 	}
 	
 	
-	/*
-	 * Verifie les autorisations 
-	 * d'affichage du formulaire
-	 * (parametre autoriser=faire)
-	 */
+	//
+	// Verifie les autorisations 
+	// d'affichage du formulaire
+	// (parametre autoriser=faire)
+	//
 	function autoriser()
 	{
 		static $autoriser=-1;
@@ -414,10 +431,10 @@ class cfg_formulaire_dist{
 	}
 
 
-	/*
-	 * Log le message passe en parametre
-	 * $this->log('message');
-	 */
+	//
+	// Log le message passe en parametre
+	// $this->log('message');
+	//
 	function log($message)
 	{
 		($GLOBALS['auteur_session'] && ($qui = $GLOBALS['auteur_session']['login']))

@@ -25,7 +25,6 @@ class cfg_depot_dist{
 	//			'balise' => 'select|textarea|input', // nom de la balise
 	//			'type' => 'checkbox|hidden|text...', // type d'un input 
 	//			'tableau' => bool, // est-ce un champ tableau name="champ[]" ?
-	//			'type_verif' => 'xx', // classe css commencant par type_xx
 	//			'cfg' => 'xx',   // classe css commencant par css_xx
 	//			'id' => y, // cle du tableau 'champs_id' (emplacement qui possede ce champ)
 	//		),
