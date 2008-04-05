@@ -404,7 +404,17 @@ class cfg_formulaire_dist{
 			// passer id aussi
 			if (!isset($contexte['id']) && $this->param->cfg_id) {
 				$contexte['id'] = $this->param->cfg_id;
-			}			
+			}
+			// passer 'message_ok', 'message_erreur', 'erreurs'	
+			if (!isset($contexte['message_ok']) && $this->messages['message_ok']) {
+				$contexte['message_ok'] = join('<br />',$this->messages['message_ok']);
+			}
+			if (!isset($contexte['message_erreur']) && $this->messages['message_erreur']) {
+				$contexte['message_erreur'] = join('<br />',$this->messages['message_erreur']);
+			}
+			if (!isset($contexte['erreurs']) && $this->messages['erreurs']) {
+				$contexte['erreurs'] = $this->messages['erreurs'];
+			}
 			
 			$val = $this->val ? array_merge($contexte, $this->val) : $contexte;
 			$this->fond_compile = recuperer_fond('fonds/cfg_' . $this->vue, $val);

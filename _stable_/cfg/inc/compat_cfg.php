@@ -12,6 +12,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_COMPAT_CFG_192', true);
 
 
+if (version_compare($GLOBALS['spip_version_code'], '11302', '<')
+	&& !function_exists('balise_ACTION_FORMULAIRE_dist')) {
+		function balise_ACTION_FORMULAIRE_dist($p){
+			$p->code="''";
+			$p->interdire_scripts = false;
+			return $p;
+		}
+}
+
 /* fichier de compatibilite vers spip 1.9.2 */
 if (version_compare($GLOBALS['spip_version_code'], '1.9300', '<')
 	AND $f = charger_fonction('compat_cfg', 'inc'))

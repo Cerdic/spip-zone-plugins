@@ -267,7 +267,7 @@ class cfg_dist
 	// affiche le descriptif du formulaire
 	function descriptif(){
 		if ($d = $this->form->param->descriptif)
-			return debut_boite_info(true) . propre($d) . fin_boite_info(true);	
+			return propre($d);	
 	}
 	
 	// affiche le message en cas d'acces interdit

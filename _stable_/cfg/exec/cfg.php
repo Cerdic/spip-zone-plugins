@@ -46,7 +46,7 @@ function exec_cfg_dist($class = null)
 	echo debut_gauche('', true);
 
 	// si un formulaire cfg est demande
-	echo $config->descriptif();
+	if ($s = $config->descriptif()) echo debut_boite_info(true) . $s . fin_boite_info(true);
 	
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'cfg'),'data'=>''));
 	echo creer_colonne_droite('', true);
