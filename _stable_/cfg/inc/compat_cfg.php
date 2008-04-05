@@ -12,7 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_COMPAT_CFG_192', true);
 
 
-if (version_compare($GLOBALS['spip_version_code'], '11302', '<')
+if (version_compare($GLOBALS['spip_version_code'], '11216', '<')
 	&& !function_exists('balise_ACTION_FORMULAIRE_dist')) {
 		function balise_ACTION_FORMULAIRE_dist($p){
 			$p->code="''";
