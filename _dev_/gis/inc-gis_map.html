@@ -49,7 +49,7 @@
 			</BOUCLE_kml_rub>
 			<//B_kml_art>
 			//leemo-lo documento dos marcadores
-       			$.get('[(#URL_PAGE{rss-gis})]', {[id_rubrique:(#ID_RUBRIQUE)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)][, limit:(#ENV{limit, 50})]}, function(xml[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]){
+       			$.get('[(#URL_PAGE{rss-gis})]', {[id_rubrique:(#ID_RUBRIQUE), ][id_mot:(#ID_MOT), ][id_auteur:(#ID_AUTEUR), ][recherche:(#RECHERCHE), ][id_article:(#ID_ARTICLE), ][limit:(#ENV{limit, 50})]}, function(xml[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]){
     				//xml almacena en un objeto xml los datos recogidos del documento leido
     				var idmap="[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]";
     				$("item", xml[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]).each(function(item[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]){
