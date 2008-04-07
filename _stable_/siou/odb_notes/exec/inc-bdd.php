@@ -34,10 +34,12 @@ function getNbCandidatsNotes($annee,$jury,$id_serie,$id_matiere=0,$type='') {
     return $nb;
 }
 
-function getNbCandidatsEPS($annee,$jury,$id_serie) {
+function getNbCandidatsEPS($annee,$jury,$id_serie=0) {
+	if($id_serie>0) $where=" and can.serie=$id_serie";
+	else $where='';
 	$sql="SELECT count(*) FROM odb_candidats can, odb_decisions decis, odb_repartition rep, odb_ref_eps eps\n"
 		."WHERE can.annee=$annee and decis.annee=$annee and rep.annee=$annee and can.id_table=rep.id_table and can.id_table=decis.id_table"
-		." and can.serie=$id_serie and rep.jury=$jury and can.eps=eps.id and eps.eps='Apte' and decis.delib1='Admissible'"
+		." $where and rep.jury=$jury and can.eps=eps.id and eps.eps='Apte' and decis.delib1='Admissible'"
 		;
     $result=odb_query($sql,__FILE__,__LINE__);
     if(mysql_num_rows($result)>0)
@@ -46,17 +48,65 @@ function getNbCandidatsEPS($annee,$jury,$id_serie) {
 	return $nb;	
 }
 
-function getNbCandidatsEF($annee,$jury,$id_serie,$id_matiere) {
-	$ef=-($id_matiere);
+function getNbCandidatsEF($annee,$jury,$id_matiere,$id_serie=0) {
+	$where='';
+	if($id_serie>0) $where.=" and can.serie=$id_serie";
+	$ef=abs($id_matiere);
 	$sql="SELECT count(*) FROM odb_candidats can, odb_decisions decis, odb_repartition rep\n"
 		."WHERE can.annee=$annee and decis.annee=$annee and rep.annee=$annee and can.id_table=rep.id_table and can.id_table=decis.id_table"
-		." and can.serie=$id_serie and rep.jury=$jury and can.ef$ef<>0 and decis.delib1='Admissible'"
+		." $where and rep.jury=$jury and can.ef$ef<>0 and decis.delib1='Admissible'"
 		;
     $result=odb_query($sql,__FILE__,__LINE__);
     if(mysql_num_rows($result)>0)
         $nb=mysql_result($result,0,0);
     else $nb=0;
 	return $nb;	
+}
+
+/** Recupere le nombre de notes saisies pour un type donne */
+function getNbNotesSaisiesType($annee,$type,$jury) {
+	$sql="SELECT count(*) from odb_notes where annee=$annee and jury=$jury and type='$type' and note IS NOT NULL";
+	$result=odb_query($sql,__FILE__,__LINE__);
+	$nb=mysql_result($result,0,0);
+	if($nb>0) return $nb;
+	else return 0;
+}
+
+/** Recupere le nombre de notes a saisir pour un type donne */
+function getNbNotesASaisirType($annee,$type,$jury,$id_serie=0) {
+	if($id_serie>0) {
+		$where_notes=" and notes.id_serie=$id_serie";
+		$where_can=" and can.serie=$id_serie";
+		$where_exa=" and exa.id_serie=$id_serie";
+	}
+	if($id_matiere>0) $where_notes.=" and notes.id_matiere=$id_matiere";
+	switch($type) {
+		case 'Ecrit':
+		case 'Pratique': 
+			$sql="SELECT count(*) from odb_notes notes where annee=$annee and jury=$jury and type='$type' $where_notes";
+			$result=odb_query($sql,__FILE__,__LINE__);
+			$nb=mysql_result($result,0,0);
+			break;
+		case 'Divers':
+			$nb=getNbCandidatsEPS($annee,$jury,$id_serie)+getNbCandidatsEF($annee,$jury,1,$id_serie)+getNbCandidatsEF($annee,$jury,2,$id_serie);
+			break;
+		case 'Oral':
+			// le nombre de notes a saisir est le nombre de candidats devant passer l'oral du jury FOIS le nombre de matieres d'oral pour cette serie
+			$sql="SELECT count(*) from odb_candidats can, odb_decisions decis\n"
+				." where can.annee=$annee and decis.annee=$annee and can.id_table=decis.id_table $where_can and (decis.delib2='Oral' or decis.delib2='Reserve')"
+				;
+			$result=odb_query($sql,__FILE__,__LINE__);
+			$nb=mysql_result($result,0,0);
+			$sql="SELECT count(*) FROM odb_ref_examen exa where type='$type' and annee=$annee $where_exa";
+			$result=odb_query($sql,__FILE__,__LINE__);
+			$nbMatieres=mysql_result($result,0,0);
+			$nb*=$nbMatieres; 
+			break;
+		default:die(KO." - type $type inconnu");
+	}
+	//echo "$type : $sql<br/>";
+	if($nb>0) return $nb;
+	else return 0;
 }
 
 

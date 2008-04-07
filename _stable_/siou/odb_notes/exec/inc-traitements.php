@@ -683,9 +683,11 @@ function afficherHistorique($id,$annee) {
  */
 function guessDeliberation($annee,$jury,$tParam) {
     if(isset($tParam["_delib1_$annee"][$jury])) {
-	$deliberation=2;
+    	if(getNbNotesASaisirType($annee,'Divers',$jury)<>getNbNotesSaisiesType($annee,'Divers',$jury))
+			$deliberation=2;
+		else $deliberation=3;
     } else {
-	$deliberation=1;
+		$deliberation=1;
     }
     //echo "$annee|$jury|".$tParam["_delib1_$annee"][$jury];
     return $deliberation;

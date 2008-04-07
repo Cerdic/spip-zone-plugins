@@ -321,7 +321,7 @@ function exec_odb_notes() {
 				;
 				break;
 			case 'Oral':
-				$sql = "SELECT rep.jury, dep.departement, eta.etablissement centre, ser.serie, rep.id_table, DECODE(rep.id_anonyme,'$pass') id_anonyme, notes.note, exa.coeff\n"
+				$sql = "SELECT rep.jury, dep.departement, eta.etablissement centre, ser.serie, rep.id_table id, DECODE(rep.id_anonyme,'$pass') id_anonyme, notes.note, exa.coeff\n"
 				. " from odb_ref_examen exa, odb_candidats can, odb_ref_etablissement eta, odb_ref_serie ser, odb_ref_departement dep, odb_decisions decis, odb_repartition rep\n left join odb_notes notes on (rep.id_table=notes.id_table and notes.annee=$annee and notes.id_matiere=$id_matiere and notes.type='$type') \n"
 				. " where exa.id_matiere=$id_matiere and exa.annee=$annee and exa.id_serie=$id_serie and exa.type='$type'\n"
 				. " and eta.id=rep.id_etablissement and dep.id= eta.id_departement and ser.id=can.serie "
@@ -410,165 +410,7 @@ function exec_odb_notes() {
 	$msg.="</form>\n";
 
 	$msg.="</tr>\n</table>\n";
-	/////
-	
-	/*
-	foreach(array('Ecrit','Pratique','Oral','Divers') as $type) {
-	    ${"is$type"}=false;
-	    if($id_matiere>0) {
-		if ($type=='Oral') {
-		    $sql = "SELECT rep.jury, dep.departement, eta.etablissement centre, ser.serie, rep.id_table, DECODE(rep.id_anonyme,'$pass') id_anonyme, notes.note, exa.coeff\n"
-		    . " from odb_ref_examen exa, odb_candidats can, odb_ref_etablissement eta, odb_ref_serie ser, odb_ref_departement dep, odb_decisions decis, odb_repartition rep\n left join odb_notes notes on (rep.id_table=notes.id_table and notes.annee=$annee and notes.id_matiere=$id_matiere and notes.type='$type') \n"
-		    . " where exa.id_matiere=$id_matiere and exa.annee=$annee and exa.id_serie=$id_serie and exa.type='$type'\n"
-		    . " and eta.id=rep.id_etablissement and dep.id= eta.id_departement and ser.id=can.serie "
-		    . " and can.id_saisie=rep.id_saisie AND can.annee=$annee and rep.annee=$annee and can.serie=$id_serie and rep.jury=$jury\n"
-		    . " and decis.id_table=rep.id_table and decis.annee=$annee and decis.delib1='Admissible' and (decis.delib2='Oral' or decis.delib2='Reserve')\n"
-		    . " ORDER BY jury, departement, centre, ser.serie, id_anonyme, duree, examen";
-		    //echo "<pre>$sql</pre>\n";
-		} else
-		$sql = "SELECT rep.jury, dep.departement, eta.etablissement centre, ser.serie, rep.id_table, DECODE(rep.id_anonyme,'$pass') id_anonyme, notes.note, exa.coeff\n"
-		. " from odb_ref_examen exa, odb_candidats can, odb_ref_etablissement eta, odb_ref_serie ser, odb_ref_departement dep, odb_repartition rep\n left join odb_notes notes on (rep.id_table=notes.id_table and notes.annee=$annee and notes.id_matiere=$id_matiere and notes.type='$type') \n"
-		. " where exa.id_matiere=$id_matiere and exa.annee=$annee and exa.id_serie=$id_serie and exa.type='$type'\n"
-		. " and eta.id=rep.id_etablissement and dep.id= eta.id_departement and ser.id=can.serie "
-		. " and can.id_saisie=rep.id_saisie AND can.annee=$annee and rep.annee=$annee and can.serie=$id_serie and rep.jury=$jury\n"
-		. " ORDER BY jury, departement, centre, ser.serie, id_anonyme, duree, examen"
-		;
-	    } elseif($id_matiere<0) {
-		if($type=='Divers') {
-		    switch($id_matiere) {
-			case ID_MATIERE_EF1:
-			    $champ='ef.ef,';
-			    $from="odb_ref_ef ef, odb_decisions decis,";
-			    $where="and can.ef1 = ef.id and decis.id_table=rep.id_table and decis.delib1='Admissible' and decis.annee=$annee";
-			    break;
-			case ID_MATIERE_EF2:
-			    $champ='ef.ef,';
-			    $from="odb_ref_ef ef, odb_decisions decis,";
-			    $where="and can.ef2 = ef.id and decis.id_table=rep.id_table and decis.delib1='Admissible' and decis.annee=$annee";
-			    break;
-			case ID_MATIERE_EPS:
-			    $champ='eps.eps,';
-			    $from="odb_ref_eps eps, odb_decisions decis,";
-			    $where="and can.eps=eps.id and eps.eps='Apte' and decis.id_table=rep.id_table and decis.delib1='Admissible' and decis.annee=$annee";
-			    break;
-			default: die(KO." - Cas impr&eacute;vu : id_matiere=$id_matiere dans les divers");
-		    }
-		    $sql = "SELECT $champ rep.jury, dep.departement, eta.etablissement centre, ser.serie, rep.id_table, DECODE(rep.id_anonyme,'$pass') id_anonyme, notes.note, 1 coeff\n"
-		    . " from $from odb_candidats can, odb_ref_etablissement eta, odb_ref_serie ser, odb_ref_departement dep, odb_repartition rep\n".
-		    "  left join odb_notes notes on (rep.id_table=notes.id_table and notes.annee=$annee and notes.id_matiere=$id_matiere and notes.type='$type') \n"
-		    . " where can.serie=$id_serie $where \n"
-		    . " and eta.id=rep.id_etablissement and dep.id= eta.id_departement and ser.id=can.serie "
-		    . " and can.id_saisie=rep.id_saisie AND can.annee=$annee and rep.annee=$annee and can.serie=$id_serie and rep.jury=$jury\n".
-		    " ORDER BY jury, departement, centre, ser.serie, id_anonyme";
-		    //echo "<pre>$sql</pre>";
-		} else $sql="SELECT 1 from odb_param where 1=0";
-	    } else die(KO.' - Matiere introuvable');
-	    $result=odb_query($sql,__FILE__,__LINE__);
-	    //echo "<hr/>$type<br/><pre>$sql</pre><br/>";
-	    while($row=mysql_fetch_array($result)) {
-		foreach(array('ef','id_anonyme','id_table','note','coeff') as $col) {
-		    $$col=$row[$col];
-		}
-		$id_table=getIdTableHumain($id_table);
-		if($type=='Oral' || $type=='Divers') {
-		    $id=$id_table;
-		    $tIdAnonyme[$id_table]=$id_anonyme;
-		}
-		else $id=$id_anonyme;
-		${"is$type"}=true;
-		${"t$type"}[$id]=$note;
-		if($id_matiere==ID_MATIERE_EF1 || $id_matiere==ID_MATIERE_EF2) {
-		    $tCoeff[$type]=0;
-		    $tEf[$id]=$ef;
-		    $isEf=true;
-		}
-		else {
-		    $tCoeff[$type]=$coeff;
-		    $isEf=false;
-		}
-	    }
-	    if(${"is$type"}) {
-		$msg.="\t<th>$type ";
-		if($isEf) {
-		    $msg.='(bonus)';
-		}
-		else {
-		    $msg.="(coeff $tCoeff[$type])";
-		}
-		$msg.="</th>\n";
-	    }
-	    //print_r(${"t$type"});
-	}
-	$msg.="</tr>\n<tr>\n";
-	$cpt=0;
-	foreach(array('Ecrit','Pratique','Oral','Divers') as $type) {
-	    //$cpt++;echo "<br/>$type $cpt";
-	    if(${"is$type"}) {
-		$isSelected=false;
-		${"select$type"}="<SELECT name='id_anonyme' class='fondo' onChange=\"document.forms['form_$type'].note.value='';document.forms['form_$type'].note.focus();\">".
-		"<OPTION value=''>-=[Candidat]=-</OPTION>";
-		foreach (${"t$type"} as $id_anonyme => $note) {
-		    if(!$isSelected && $note=='') { // n'a pas deja ete selected
-			$selected='selected';
-			$id_anonyme_selected[$type]=$id_anonyme;
-			$isSelected=true;
-		    } else $selected='';
-		    if($note!='') {
-			if($note<0) $aff_note=' -&gt; N/C &lt;- ';
-			elseif($isEf) $aff_note=" (+$note)";
-			else $aff_note=" ($note/20)";
-		    }	else $aff_note='';
-		    ${"select$type"}.="<OPTION $selected value='$id_anonyme'>$id_anonyme $tEf[$id_anonyme] $aff_note</OPTION>\n";
-		}
-		${"select$type"}.="</SELECT>\n";
-		if($isEf) {
-		    $inputNote="<INPUT name='note' size=2 maxlength=2 onKeyUp=\"if(isNaN(parseInt(this.value))) this.value='';if(this.value>5) {alert('Un candidat ne peut avoir plus de 5 points de bonus par EF, veuillez saisir cette note de nouveau');this.value='';}document.forms['form_$type'].note_coeff.value='+'+this.value\" value='$note_selected[$type]' class='fondo'/>\n";
-		    $inputNoteCoeff="<INPUT name='note_coeff' size=2 maxlength=2 value='+".((int)$note_selected[$type])."' style='text-align:right;border:0px;none;#fff;' onFocus='blur();'/>\n";
-		} else {
-		    $inputNote="<INPUT name='note' size=2 maxlength=2 onKeyUp=\"if(this.value!='-' && isNaN(parseInt(this.value))) this.value='';if(this.value>20) {alert('Un candidat ne peut avoir plus de 20/20, veuillez saisir cette note de nouveau');this.value='';}document.forms['form_$type'].note_coeff.value=this.value*$tCoeff[$type]\" value='$note_selected[$type]' class='fondo'/>\n";
-		    $inputNoteCoeff="<INPUT name='note_coeff' size=2 maxlength=3 value='".((int)$note_selected[$type]*$tCoeff[$type])."' style='text-align:right;border:0px;none;#fff;' onFocus='blur();'/>\n";
-		}
-		$msg.="\t<td style='vertical-align:top;'>".
-		"<form name='form_$type' class='spip_xx-small' method='post' action='".generer_url_ecrire('odb_notes')."' ".
-		"onSubmit=\"if(document.forms['form_$type'].id_anonyme.value=='') {alert('Veuillez choisir le candidat dont vous souhaitez modifier la note ($type)\\navant de valider');return false;} else if(document.forms['form_$type'].note.value=='-') {document.forms['form_$type'].note.value='-1';return true;} else if(document.forms['form_$type'].note.value=='') {alert('Veuillez saisir une note dans le champ adequat');document.forms['form_$type'].note.focus();return false;} else if(isNaN(document.forms['form_$type'].note_coeff.value)) {alert('Veuillez saisir une note correcte ($type)\\navant de valider');return false;document.forms['form_$type'].note_coeff.value='';document.forms['form_$type'].note_coeff.focus();} ".($type!='Divers'?"else if(document.forms['form_$type'].note.value=='0' || document.forms['form_$type'].note.value=='00' || document.forms['form_$type'].note.value=='0.') {return confirm('Vous avez mis 0 au candidat en $type, ce qui est eliminatoire\\nEtes-vous sur(e) de vous ?');}":'')."\">\n".
-		"<table class='spip' width='90%'>\n<tr>\n".
-		"\t<td>Candidat</td>\n\t<td>".${"select$type"}."</td>\n".
-		"\t<td rowspan=2><INPUT TYPE='submit' name='step4' value='Ok\n$type' class='fondo'/></td>\n</tr>\n".
-		"<tr>\n\t<td>Note</td>\n\t<td>$inputNote".($isEf?'':'<small>/20</small>').$inputNoteCoeff.($isEf?'':"<small>/".($tCoeff[$type]*20)."</small>")."</td>\n".
-		"</tr>\n</table>\n";
-		//"<tr>\n\t<td colspan=2><INPUT TYPE='submit' name='step4' value='Enregistrer $type' class='forml'/></td>\n</tr>\n</table>\n";
-		${"t$type"}=array_reverse(${"t$type"},true);
-		$msg.="<br/>Notes $type (ordre invers&eacute;)<br/>\n".
-		"<table class='spip' width='90%'>\n<tr><th>Candidat</th><th>".($isEf?'Bonus':'Note <small>/20</small>')."</th><th>".($isEf?'&Eacute;p. Fac.':"Note <small>/".(20*$tCoeff[$type])."</small>")."</th>\n</tr>\n";
-		foreach (${"t$type"} as $id_anonyme => $note) {
-		    if($note!='') {
-			if($note<0) {
-			    $note='<span style="color:#f00;font-weight:bold;" title="Non Connue">N/C</span>';
-			    $note_coeff='';
-			} else {
-			    $noteReelle=$note;
-			    if($isEf) {
-				$note="+<b>$note</b>";
-				$note_coeff=$tEf[$id_anonyme];
-			    } else {
-				$note_coeff=($note*$tCoeff[$type])."/".(20*$tCoeff[$type]);
-				$note="<b>$note</b><small>/20</small>";
-			    }
-			}
-			$msg.="<tr><td>".
-			"<A href=\"javascript:;\" onclick=\"leForm=document.forms['form_$type'];leForm.id_anonyme.value='$id_anonyme';leForm.note.value='$noteReelle';leForm.note.select();\" title='Modifier la note du candidat $id_anonyme'>"
-			."$id_anonyme</A></td><td>$note</td><td><small>$note_coeff</small></td></tr>\n";
-		    }
-		}
-		$msg.="</table>\n</td>\n";
-		$exec=$_REQUEST['exec'];
-		$coeff=$tCoeff[$type];
-		foreach(array('matiere','id_matiere','jury','serie','id_serie','type','coeff') as $var)
-		    $msg.="<input type='hidden' name='$var' value='".$$var."'/>\n";
-		$msg.="</form>\n";
-	    }
-	}
-	$msg.="</tr>\n</table>\n";*/
+
     } else {
 	//////////////////////////////////////////////// step 1 + step 2 : formulaire d'acces aux notes
 	$msgTmp='';
@@ -643,15 +485,18 @@ function exec_odb_notes() {
 			die(KO." - Les notes anonymes ne sont pas encores pr&ecirc;tes pour le jury $r_jury en $annee");
 		}
 		foreach($tTypesDeliberation as $type) {
-		    if(count($tMatieres[$type])>0) {
-				$nbCandidatsSerie=getNbCandidatsNotes($annee,$r_jury,$id_serie,0,$type);
+			$nbMatieres=count($tMatieres[$type]);
+		    if($nbMatieres>0) {
+		    	if($type!='Divers') {
+		    		$nbCandidatsSerie=getNbNotesASaisirType($annee,$type,$r_jury,$id_serie)/$nbMatieres;
+				}
 				$tdMatieres.="<table style='border:1px solid #aae;' class='spip' width='100%'>\n<tr style='text-align:right;background-color:#dde;margin-bottom:2px;padding:1px;border:1px solid #aae;'><th colspan=2>$type</th></tr>\n";
 				foreach($tMatieres[$type] as $id_matiere=>$matiere) {
 					if($type=='Divers') {
 						if($id_matiere==ID_MATIERE_EPS) {
 							$nbCandidatsSerie=getNbCandidatsEPS($annee,$r_jury,$id_serie);
 						} else {
-							$nbCandidatsSerie=getNbCandidatsEF($annee,$r_jury,$id_serie,$id_matiere);
+							$nbCandidatsSerie=getNbCandidatsEF($annee,$r_jury,$id_matiere,$id_serie);
 						}
 					} 
 					if($nbCandidatsSerie>0) {
