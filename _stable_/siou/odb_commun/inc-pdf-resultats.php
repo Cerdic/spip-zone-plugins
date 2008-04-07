@@ -75,6 +75,7 @@ $height=$pdf->ez['pageHeight'];
 $colonnes=array('id_table','sexe','prefixe','nom','prenoms','matiere','type','note','coeff','delib','moyenne','serie');
 while($row=mysql_fetch_array($result)) {
    foreach($colonnes as $col) $$col=utf8_decode(stripslashes($row[$col]));
+   $moyenne=str_replace('.',',',round($moyenne,2));
    $id_table=getIdTableHumain($id_table);
    if($sexe=='M') {
       $civ='M.';
@@ -113,11 +114,13 @@ while($row=mysql_fetch_array($result)) {
    $tCandidats[$id_table]['candidat']=$candidat;
    $tCandidats[$id_table]['e']=$e;
    $tCandidats[$id_table]['serie']=$serie;
+   $tCandidats[$id_table]['moyenne']=$moyenne;
 }
 
 foreach($tCandidats as $id_table=>$t1) {
 	$e=$t1['e'];
 	$serie=$t1['serie'];
+	$moyenne=$t1['moyenne'];
 	if($tAbsent[$id_table] && $deliberation==1) { 
 		if($tPresent[$id_table]) $delib='Absent'.$e;
 		else $delib='Abandon';
@@ -263,6 +266,8 @@ foreach($tCandidats as $id_table=>$t1) {
 	if(is_array($tNotes[$id_table]['Pratique'])) {
 		$tNotes[$id_table]['Pratique']['total']['matiere']=html_entity_decode('Total des &eacute;preuves pratiques');
 		$pdf->ezSetDy(20);
+		$tNotes[$id_table]['Pratique']['total']['note']=str_replace('.',',',round(
+			20*$tNotes[$id_table]['Pratique']['total']['points']/$tNotes[$id_table]['Pratique']['total']['sur'],2));
 		foreach($tNotes[$id_table]['Pratique']['total'] as $k=>$v) $tNotes[$id_table]['Pratique']['total'][$k]="<b>$v</b>";
 		$pdf->ezTable($tNotes[$id_table]['Pratique'],$cols,html_entity_decode('&Eacute;preuves pratiques du <b>premier groupe</b>'),$options);
 	}
@@ -274,12 +279,18 @@ foreach($tCandidats as $id_table=>$t1) {
 	if(is_array($tNotes[$id_table]['Divers'])) {
 		//$pdf->ezSetDy(-10);
 		$tNotes[$id_table]['Divers']['total']['matiere']=html_entity_decode('Total du 1er groupe</b>');
+		$tNotes[$id_table]['Divers']['total']['note']=str_replace('.',',',round(
+			20*$tNotes[$id_table]['Divers']['total']['points']/$tNotes[$id_table]['Divers']['total']['sur'],2));
 		foreach($tNotes[$id_table]['Divers']['total'] as $k=>$v) $tNotes[$id_table]['Divers']['total'][$k]="<b>$v</b>";
 		$pdf->ezTable($tNotes[$id_table]['Divers'],$cols,html_entity_decode(' '),$options);
 	}
 	
 	if(is_array($tNotes[$id_table]['Oral'])) {
 		$pdf->ezSetDy(-10);
+		$tNotes[$id_table]['Oral']['total']['note']=str_replace('.',',',round(
+			20*$tNotes[$id_table]['Oral']['total']['points']/$tNotes[$id_table]['Oral']['total']['sur'],2));
+		$tNotes[$id_table]['Oral']['total2']['note']=str_replace('.',',',round(
+			20*$tNotes[$id_table]['Oral']['total2']['points']/$tNotes[$id_table]['Oral']['total2']['sur'],2));
 		foreach($tNotes[$id_table]['Oral']['total'] as $k=>$v) $tNotes[$id_table]['Oral']['total'][$k]="<b>$v</b>";
 		foreach($tNotes[$id_table]['Oral']['total2'] as $k=>$v) $tNotes[$id_table]['Oral']['total2'][$k]="<b>$v</b>";
 		$pdf->ezTable($tNotes[$id_table]['Oral'],$cols,html_entity_decode('&Eacute;preuves orales du <b>deuxi&egrave;me groupe</b>'),$options);
@@ -299,6 +310,7 @@ foreach($tCandidats as $id_table=>$t1) {
    	$delib=ucfirst(str_replace('abien','Assez bien',str_replace('tbien','Tr&egrave;s bien',strtolower($delib))));
    	$data[]=array('param'=>'Mention','valeur'=>html_entity_decode("<b>$delib</b>"));
    }
+	$data[]=array('param'=>'Moyenne','valeur'=>html_entity_decode("<b>$moyenne</b>/20"));
    $options=array(
    	//'xPos'=>'left',
    	//'xOrientation'=>'right',
