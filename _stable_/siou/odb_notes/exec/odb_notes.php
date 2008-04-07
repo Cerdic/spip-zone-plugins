@@ -247,6 +247,7 @@ function exec_odb_notes() {
 		      "\t(SELECT id_table, id_anonyme, annee, id_matiere, note, type, coeff, operateur, maj from odb_notes \n"
 		     ."\twhere $typeId='$id' and annee=$annee and id_matiere=$id_matiere and type='$type' and note is not null)";
 		if(in_array($type,array('Pratique','Ecrit'))) {
+			// CPRO - dans ces cas : les notes sont pré-alimentées (pour garantir l'anonymat) => on fait un UPDATE (plus rapide qu'un REPLACE je crois)
 			$sql="UPDATE odb_notes SET note=$note, operateur='".$GLOBALS['auteur_session']['login']."', maj=NOW()\n"
 			."WHERE $typeId='$id' and annee=$annee and id_matiere=$id_matiere and type='$type'";
 		} else {
