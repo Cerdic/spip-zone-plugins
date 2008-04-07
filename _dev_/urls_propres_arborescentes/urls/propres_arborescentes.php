@@ -390,9 +390,9 @@ function generer_url_document($id_document, $args='', $ancre='') {
   return $url;
 }
 
-// retrouve le fond et les parametres d'une URL propre
-// http://doc.spip.org/@urls_propres_dist
-function urls_gasteroprod_dist(&$fond, $url) {
+// retrouve le fond et les parametres d'une URL propre arborescente
+// http://doc.spip.org/@urls_propres_arborescentes_dist
+function urls_propres_arborescentes_dist(&$fond, $url) {
   global $contexte;
   $id_objet = $type = 0;
 
