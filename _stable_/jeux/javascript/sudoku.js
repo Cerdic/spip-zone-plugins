@@ -1,4 +1,4 @@
-// code commun avec le sudoku
+// code commun avec les mots-croises
 if(sens_grille==undefined) {
 
 	// deplacement dans la grille

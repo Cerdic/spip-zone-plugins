@@ -32,7 +32,7 @@ function jeux_pre($chaine, $indexJeux){
 		foreach($liste as $jeu) $header .= jeux_stylesheet($jeu) . "\n";
 		foreach($liste as $jeu) $header .= jeux_javascript($jeu) . "\n";
 		$header = htmlentities(preg_replace(",\n+,", "||", trim($header)));
-		$header = jeux_rem('JEUX-HEAD', count($liste), $header);
+		$header = jeux_rem('JEUX-HEAD', count($liste), base64_encode($header));
 	} else $header = '';
 //
 	return $texteAvant . $header
@@ -117,7 +117,7 @@ function jeux_affichage_final($flux) {
 	preg_match_all(",<!-- JEUX-HEAD-#[0-9]+ '([^>]*)' -->,", $flux, $matches, PREG_SET_ORDER);
 	if(!count($matches)) return $flux;
 	$liste = array();
-	foreach ($matches as $val) $liste = array_merge($liste, explode('||', $val[1]));
+	foreach ($matches as $val) $liste = array_merge($liste, explode('||', base64_decode($val[1])));
 	$liste = array_unique($liste);
 	$header = _JEUX_HEAD2
 		. html_entity_decode(join("\n",$liste));

@@ -81,7 +81,7 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
 					._T('jeux:ligne_n',Array('n'=>$ligne)).';'
 					._T('jeux:colonne_n',Array('n'=>$colonne)).'</label>'
 					. '<input type="text" maxlength="1" '
-					. ((isset($GLOBALS[$name]) and $GLOBALS[$name]!='')? 'value="'.$GLOBALS[$name]:'')
+					. ((isset($_POST[$name]) and $_POST[$name]!='')? 'value="'.$_POST[$name]:'')
 					.'" name="'.$name.'" id="'.$name.'" />'
 					. "</td>\n" ;
 			}
@@ -105,6 +105,8 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
 // dechiffre le code source de la grille
 function calcul_tableau_sudoku($texte){
 	$texte = preg_replace(",\s*[\r\n]+\s*,", "\n", trim($texte));
+	// arggh les raccourcis SPIP... TODO : voir pkoi (1.93)
+	$texte = str_replace('&mdash;', '--', $texte); 
 	$tableau = split("\n", $texte);	
 	$hauteur = count($tableau);
 	foreach ($tableau as $i=>$valeur) {
@@ -152,7 +154,7 @@ function sudoku_validite($tableau_sudoku, $solution, $indexJeux) {
     $vides=0;
     foreach($tableau_sudoku as $ligne => $contenu_ligne) {
         foreach ($contenu_ligne as $colonne => $cellule) {
-			$input = trim($GLOBALS['GR'.$indexJeux.'x'.($colonne+1).'x'.($ligne+1)]);
+			$input = trim(_request('GR'.$indexJeux.'x'.($colonne+1).'x'.($ligne+1)));
 			if ($input=='' && $cellule=='-') $vides++;
 			if ($input!='' && $cellule=='-') $tableau_sudoku[$ligne][$colonne] = $input;
 		}
@@ -162,7 +164,7 @@ function sudoku_validite($tableau_sudoku, $solution, $indexJeux) {
 
 // renvoie la validite et le nombre de cases vides
 function calcul_erreurs_sudoku($tableau_sudoku, $solution, $indexJeux) {
-	if ($GLOBALS["bouton_envoi_$indexJeux"] == '') return '';
+	if (_request("bouton_envoi_$indexJeux") == '') return '';
 	else {
 	  list($valide, $nbr_vides) = sudoku_validite($tableau_sudoku, $solution, $indexJeux); 
 	  return '<p class="jeux_erreur">'
@@ -195,6 +197,6 @@ function jeux_sudoku($texte, $indexJeux) {
 			. calcul_erreurs_sudoku($sudoku, $solution, $indexJeux)
 			. affichage_sudoku($sudoku, $indexJeux)
 	// solution
-			. (($GLOBALS['affiche_solution_'.$indexJeux][0] == 1)? affichage_sudoku($solution, $indexJeux, true) : '');
+			. (($_POST['affiche_solution_'.$indexJeux][0] == 1)? affichage_sudoku($solution, $indexJeux, true) : '');
 }
 ?>
