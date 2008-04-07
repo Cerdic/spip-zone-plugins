@@ -47,44 +47,20 @@ pagination_zone();
 // --></script>
 
 
-<script type="text/javascript">
-(function($){
-	$(function(){
-		$("a.annotate_document").click(function(){
-			$.carto.annotate_window.idCsv = this.id.match(/\d+/);
-			$.carto.annotate_window.showAnnotatePanel(4);
-		})
-	});
-})(jQuery)
-
-</script>
-
-
-
 		#FORMULAIRE_UPLOAD{auteur,upload_annotation}
 
 
 <script type='text/javascript'><!--
 if (window.jQuery && jQuery.fn.ajaxForm) {
 	window.jQuery(function() {
-		//options
-		//-url (string)
-		//-callback (function)
-		var options = {
-			url: '#URL_PAGE{annotation_mini_formulaire_upload}',
-			callback: function() {
-				load_zone_documents(); // recharge la partie du milieu
-				// si on reattache les evenements, remettre les crayons
-				if (window.cQuery)
-					cQuery(".crayon:lt(1000)",this).initcrayon();
-			}
-		};
-	
-		jQuery('#annotate_window .formulaire_upload')
-		.upload_attach(options)
-		// et la pagination
-		.each(function() {
+		var bind_pagination = function() {
 			var self = this;
+      //bind click
+		  $("a.annotate_document",self).click(function(){
+  			$.carto.annotate_window.idCsv = this.id.match(/\d+/);
+  			$.carto.annotate_window.showAnnotatePanel(4);
+  		});
+
 			$('.pagination a',self)
 			.click(function(){
 				var r = ($(this).attr('href')||'').match(/[?&;]debut_docs=([0-9]+)/);
@@ -101,12 +77,32 @@ if (window.jQuery && jQuery.fn.ajaxForm) {
 						.html(
 							$('<iframe>').html(c).find('.formulaire_upload').html()
 						).
-						upload_attach(options);
+						upload_attach(options).
+            each(bind_pagination);
 					}
 				);
 				return false;
-			});
-		});
+			});    
+    };
+		//options
+		//-url (string)
+		//-callback (function)
+    var options = {
+			url: '#URL_PAGE{annotation_mini_formulaire_upload}',
+			callback: function() {
+				load_zone_documents(); // recharge la partie du milieu
+        //la pagination
+        $(this).each(bind_pagination);
+        // si on reattache les evenements, remettre les crayons
+				if (window.cQuery)
+					cQuery(".crayon:lt(1000)",this).initcrayon();
+			}
+		};
+	
+		jQuery('#annotate_window .formulaire_upload')
+		.upload_attach(options)
+		// et la pagination
+		.each(bind_pagination);
 	});
 }
 // --></script>

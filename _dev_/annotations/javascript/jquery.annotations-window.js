@@ -52,7 +52,7 @@
 					h = $(window).height();
 					$("#annotate_window").width(w*0.8);
 					$("#annotate_window").height('auto');
-					$("#annotate_window").css({marginLeft:"-"+(w*0.4)+24+"px",top:(h-h*.8)/2+"px"});
+					$("#annotate_window").css({marginLeft:"-"+(w*0.4+24)+"px",top:(h-h*.8)/2+"px"});
 					$("#annotate_window div.image_container").width(w*0.8);
 					$("#annotate_window div.image_container").height('auto');
 					//set up post data

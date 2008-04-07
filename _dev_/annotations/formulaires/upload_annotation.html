@@ -29,9 +29,9 @@
 	[(#GET{logo}|extraire_attribut{width}|>{78}|?{
 		[(#SET{logo,[(#GET{logo}|image_reduire{140,140}|image_recadre{78,78})]
 	})]})]
-	<a href="#" class="annotate_document" id="annotate_document#ID_DOCUMENT">#GET{logo}</a>
+	<a href="#" class="annotate_document" id="annotate_document#ID_DOCUMENT">[(#GET{logo}|liens_absolus)]</a>
 		[<br />(#DATE|affdate_court)]
-		<br /><a href="#URL_DOCUMENT"><:annotations:download:></a>
+		<br /><a href="[(#URL_DOCUMENT|url_absolue)]"><:annotations:download:></a>
 	</div>
 	<div style='float:#LANG_RIGHT;width:60%;'>
 		<div style='float:#LANG_RIGHT;width:10px;'>
