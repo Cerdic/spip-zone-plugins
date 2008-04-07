@@ -60,6 +60,10 @@ if (window.jQuery && jQuery.fn.ajaxForm) {
   			$.carto.annotate_window.idCsv = this.id.match(/\d+/);
   			$.carto.annotate_window.showAnnotatePanel(4);
   		});
+  		// si on reattache les evenements, remettre les crayons
+			if (window.cQuery)
+			   cQuery(".crayon:lt(1000)",this).initcrayon();
+
 
 			$('.pagination a',self)
 			.click(function(){
@@ -71,7 +75,14 @@ if (window.jQuery && jQuery.fn.ajaxForm) {
 				$.get(
 					'#URL_PAGE{annotation_mini_formulaire_upload}&debut_docs='+r,
 					function(c) {
-						$(self)
+						//avoid a bug when script are loaded with <script> in the <head>
+						//jQuery insert them in the parent window
+						//Since we want only the .formualaire upload element
+						//we can inject it alone without the head
+						var body = c.match(/<body>(?:.|\s)*?<\/body>/i);
+            if(body) c = body[0]; 
+            
+            $(self)
 						.removeClass('ajaxloading')
 						.css({'opacity': 1.0})
 						.html(
@@ -91,11 +102,8 @@ if (window.jQuery && jQuery.fn.ajaxForm) {
 			url: '#URL_PAGE{annotation_mini_formulaire_upload}',
 			callback: function() {
 				load_zone_documents(); // recharge la partie du milieu
-        //la pagination
+        //la pagination, les crayons, les evenements
         $(this).each(bind_pagination);
-        // si on reattache les evenements, remettre les crayons
-				if (window.cQuery)
-					cQuery(".crayon:lt(1000)",this).initcrayon();
 			}
 		};
 	
