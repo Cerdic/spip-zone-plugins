@@ -24,8 +24,8 @@ include_spip('inc/presentation');
 include_spip('inc/config');
 include_spip('inc/charsets');
 
-define('DIR_ODB_COMMUN',_DIR_PLUGINS."siou/odb_commun/");
-define('DIR_ODB_CONTRIB',_DIR_PLUGINS."siou/odb_contrib/");
+define('DIR_ODB_COMMUN',_DIR_PLUGINS."odb/odb_commun/");
+define('DIR_ODB_CONTRIB',_DIR_PLUGINS."odb/odb_contrib/");
 include_once(DIR_ODB_COMMUN.'inc-odb.php');
 include_once(DIR_ODB_COMMUN.'inc-html.php');
 include_once(DIR_ODB_COMMUN.'inc-referentiel.php');
@@ -246,8 +246,16 @@ function exec_odb_notes() {
 		$sql1="INSERT into odb_histo_notes (id_table, id_anonyme, annee, id_matiere, note, type, coeff, operateur, maj)  \n".
 		      "\t(SELECT id_table, id_anonyme, annee, id_matiere, note, type, coeff, operateur, maj from odb_notes \n"
 		     ."\twhere $typeId='$id' and annee=$annee and id_matiere=$id_matiere and type='$type' and note is not null)";
-		$sql="UPDATE odb_notes SET note=$note, operateur='".$GLOBALS['auteur_session']['login']."', maj=NOW()\n"
-		    ."WHERE $typeId='$id' and annee=$annee and id_matiere=$id_matiere and type='$type'";
+		if(in_array($type,array('Pratique','Ecrit'))) {
+			$sql="UPDATE odb_notes SET note=$note, operateur='".$GLOBALS['auteur_session']['login']."', maj=NOW()\n"
+			."WHERE $typeId='$id' and annee=$annee and id_matiere=$id_matiere and type='$type'";
+		} else {
+			$id_table=$id;
+			$id_anonyme=getIdAnonyme($annee,$id_table);
+			$sql="REPLACE into odb_notes (id_table,id_anonyme,annee,jury,id_serie,id_matiere,note,type,coeff,operateur,maj) VALUES\n"
+				."\t('$id_table','$id_anonyme',$annee,$jury,$id_serie,$id_matiere,$note,'$type',$coeff,'".$GLOBALS['auteur_session']['login']."',NOW())";
+		}
+		
 		//echo "<pre>$sql</pre>";
 		if($note!='') {
 			if($note>20)
@@ -258,6 +266,7 @@ function exec_odb_notes() {
 				odb_query($sql1,__FILE__,__LINE__);
 				odb_query($sql,__FILE__,__LINE__);
 				//echo "<pre>$sql</pre>";
+				$id=getIdTableHumain($id);
 				$msg.='<small>'.OK." - Le candidat <b>$id</b> a eu ".($coeff==0?"+<b>$note</b>":"<b>$note</b><small>/20</small> <small>(soit ".($note*$coeff).'/'.(20*$coeff).")</small>")." en <b>$matiere</b> <small>($type)</small></small><br/>\n";
 			}
 		}
@@ -301,12 +310,12 @@ function exec_odb_notes() {
 						break;
 					default: die(KO." - Cas impr&eacute;vu : id_matiere=$id_matiere dans les divers");
 				}
-				$sql = "SELECT $champ rep.jury, dep.departement, eta.etablissement centre, ser.serie, rep.id_table, DECODE(rep.id_anonyme,'$pass') id_anonyme, notes.note, 1 coeff\n"
+				$sql = "SELECT $champ rep.jury, dep.departement, eta.etablissement centre, ser.serie, rep.id_table id, DECODE(rep.id_anonyme,'$pass') id_anonyme, notes.note, 1 coeff\n"
 				. " from $from odb_candidats can, odb_ref_etablissement eta, odb_ref_serie ser, odb_ref_departement dep, odb_repartition rep\n"
 				. " left join odb_notes notes on (rep.id_table=notes.id_table and notes.annee=$annee and notes.id_matiere=$id_matiere and notes.type='$type') \n"
 				. " where can.serie=$id_serie $where \n"
 				. " and eta.id=rep.id_etablissement and dep.id= eta.id_departement and ser.id=can.serie "
-				. " and can.id_saisie=rep.id_saisie AND can.annee=$annee and rep.annee=$annee and can.serie=$id_serie and rep.jury=$jury\n"
+				. " and can.id_saisie=rep.id_saisie AND can.annee=$annee and rep.annee=$annee and rep.jury=$jury\n"
 				. " ORDER BY jury, departement, centre, ser.serie, id_anonyme"
 				;
 				break;
@@ -390,7 +399,7 @@ function exec_odb_notes() {
 			}
 			$msg.="<tr><td>".
 			"<A href=\"javascript:;\" onclick=\"leForm=document.forms['form_$type'];leForm.id_anonyme.value='$id_anonyme';leForm.note.value='$noteReelle';leForm.note.select();\" title='Modifier la note du candidat $id_anonyme'>"
-			."$id_anonyme</A></td><td>$note</td><td><small>$note_coeff</small></td></tr>\n";
+			.getIdTableHumain($id_anonyme)."</A></td><td>$note</td><td><small>$note_coeff</small></td></tr>\n";
 		}
 	}
 	$msg.="</table>\n</td>\n";
@@ -634,20 +643,31 @@ function exec_odb_notes() {
 		}
 		foreach($tTypesDeliberation as $type) {
 		    if(count($tMatieres[$type])>0) {
-			$tdMatieres.="<table style='border:1px solid #aae;' class='spip' width='100%'>\n<tr style='text-align:right;background-color:#dde;margin-bottom:2px;padding:1px;border:1px solid #aae;'><th colspan=2>$type</th></tr>\n";
-			foreach($tMatieres[$type] as $id_matiere=>$matiere) {
-			    if($matiere==$r_matiere) $style='font-weight:bold;';
-			    else $style='font-weight:normal;';
-			    if($id_matiere<0) $style.='background-color:#ece;';
-			    $nbCandidatsMatiere=getNbCandidatsNotes($annee,$r_jury,$id_serie,$id_matiere);
-			    if($nbCandidatsMatiere==$nbCandidatsSerie) $couleur='#0a0';
-			    elseif($nbCandidatsMatiere==0) $couleur='#f00';
-			    else $couleur='rgb(200,'.(80+round(100*$nbCandidatsMatiere/$nbCandidatsSerie)).',0);';
-			    $nbCandidatsMatiere="<b style='color:$couleur;'>$nbCandidatsMatiere</b>";
-			    $tdMatieres.="<tr><td><INPUT type='submit' class='forml' name='step3' value=\"$matiere\" style='$style' ".
-			    "onClick=\"document.forms['form_notes'].type.value='$type';document.forms['form_notes'].id_matiere.value='$id_matiere';document.forms['form_notes'].matiere.value='".urlencode($matiere)."';\"/></td><td width=10>$nbCandidatsMatiere/$nbCandidatsSerie</td></tr>\n";
-			}
-			$tdMatieres.="</table>\n";
+				$nbCandidatsSerie=getNbCandidatsNotes($annee,$r_jury,$id_serie,0,$type);
+				$tdMatieres.="<table style='border:1px solid #aae;' class='spip' width='100%'>\n<tr style='text-align:right;background-color:#dde;margin-bottom:2px;padding:1px;border:1px solid #aae;'><th colspan=2>$type</th></tr>\n";
+				foreach($tMatieres[$type] as $id_matiere=>$matiere) {
+					if($type=='Divers') {
+						if($id_matiere==ID_MATIERE_EPS) {
+							$nbCandidatsSerie=getNbCandidatsEPS($annee,$r_jury,$id_serie);
+						} else {
+							$nbCandidatsSerie=getNbCandidatsEF($annee,$r_jury,$id_serie,$id_matiere);
+						}
+					} 
+					if($nbCandidatsSerie>0) {
+						if($matiere==$r_matiere) $style='font-weight:bold;';
+						else $style='font-weight:normal;';
+						if($id_matiere<0) $style.='background-color:#ece;';
+						$nbCandidatsMatiere=getNbCandidatsNotes($annee,$r_jury,$id_serie,$id_matiere);
+						//echo "$id_matiere : $nbCandidatsMatiere<br/>";
+						if($nbCandidatsMatiere==$nbCandidatsSerie) $couleur='#0a0';
+						elseif($nbCandidatsMatiere==0) $couleur='#f00';
+						else $couleur='rgb(200,'.(80+round(100*$nbCandidatsMatiere/$nbCandidatsSerie)).',0);';
+						$nbCandidatsMatiere="<b style='color:$couleur;'>$nbCandidatsMatiere</b>";
+						$tdMatieres.="<tr><td><INPUT type='submit' class='forml' name='step3' value=\"$matiere\" style='$style' ".
+						"onClick=\"document.forms['form_notes'].type.value='$type';document.forms['form_notes'].id_matiere.value='$id_matiere';document.forms['form_notes'].matiere.value='".urlencode($matiere)."';\"/></td><td width=10>$nbCandidatsMatiere/$nbCandidatsSerie</td></tr>\n";
+					} else $tdMatieres.="<tr><td colspan=2>Aucun candidat ne passe <b>$matiere</b></td></tr>";
+				}
+				$tdMatieres.="</table>\n";
 		    }
 		}
 	    } else $tdMatieres="Veuillez choisir une s&eacute;rie";

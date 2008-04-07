@@ -18,16 +18,47 @@ function getNbCandidats($annee,$jury=0,$type='') {
     return $nbCandidats;
 }
 
-function getNbCandidatsNotes($annee,$jury,$id_serie,$id_matiere=0) {
+/** Recupere le nombre notes saisies pour un jury / une serie (/ une matiere)
+ *
+ */
+function getNbCandidatsNotes($annee,$jury,$id_serie,$id_matiere=0,$type='') {
     $where='';
-    if($id_matiere>0) $where="AND id_matiere=$id_matiere and note is not null";
+    if($id_matiere!=0) $where.=" AND id_matiere=$id_matiere and note is not null";
+    if($type!='') $where.=" AND type='$type'";
     $sql="SELECT count(*) nb, id_matiere FROM odb_notes WHERE annee=$annee and jury=$jury and id_serie=$id_serie $where GROUP BY id_matiere LIMIT 0,1";
     $result=odb_query($sql,__FILE__,__LINE__);
     if(mysql_num_rows($result)>0)
         $nb=mysql_result($result,0,0);
     else $nb=0;
+    if($type=='Divers' && $id_matiere!=0) die(KO." - Veuillez utiliser les fonctions getNbCandidatsEPS et getNbCandidatsEF");
     return $nb;
 }
+
+function getNbCandidatsEPS($annee,$jury,$id_serie) {
+	$sql="SELECT count(*) FROM odb_candidats can, odb_decisions decis, odb_repartition rep, odb_ref_eps eps\n"
+		."WHERE can.annee=$annee and decis.annee=$annee and rep.annee=$annee and can.id_table=rep.id_table and can.id_table=decis.id_table"
+		." and can.serie=$id_serie and rep.jury=$jury and can.eps=eps.id and eps.eps='Apte' and decis.delib1='Admissible'"
+		;
+    $result=odb_query($sql,__FILE__,__LINE__);
+    if(mysql_num_rows($result)>0)
+        $nb=mysql_result($result,0,0);
+    else $nb=0;
+	return $nb;	
+}
+
+function getNbCandidatsEF($annee,$jury,$id_serie,$id_matiere) {
+	$ef=-($id_matiere);
+	$sql="SELECT count(*) FROM odb_candidats can, odb_decisions decis, odb_repartition rep\n"
+		."WHERE can.annee=$annee and decis.annee=$annee and rep.annee=$annee and can.id_table=rep.id_table and can.id_table=decis.id_table"
+		." and can.serie=$id_serie and rep.jury=$jury and can.ef$ef<>0 and decis.delib1='Admissible'"
+		;
+    $result=odb_query($sql,__FILE__,__LINE__);
+    if(mysql_num_rows($result)>0)
+        $nb=mysql_result($result,0,0);
+    else $nb=0;
+	return $nb;	
+}
+
 
 /** Recupere un tableau de jury
  *
@@ -101,5 +132,12 @@ function getSeries($annee) {
         $tSeries[$jury][]=$row['serie'];
     }
     return $tSeries;
+}
+
+function getIdAnonyme($annee, $id_table) {
+	$sql="SELECT id_anonyme from odb_notes where id_table='$id_table' and annee=$annee limit 0,1";
+	$result=odb_query($sql,__FILE__,__LINE__);
+	$id_anonyme=mysql_result($result,0,0);
+	return $id_anonyme;
 }
 ?>
