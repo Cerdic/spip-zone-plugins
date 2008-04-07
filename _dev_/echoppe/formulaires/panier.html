@@ -2,7 +2,6 @@
 	[(#ENV{editer_produit}|=={oui}|?{' ',''})
 		<form action="spip.php" method="post">
 		<input type="hidden" name="action" value="echoppe_ajouter_panier" />
-		
 		<input type="hidden" name="id_panier" value="#ID_PANIER" />
 		
 	]
@@ -32,7 +31,7 @@
 	</BOUCLE_LePanier>
 		</table>
 		<hr />
-		[(#ENV{editer_produit}|=={oui}|?{' ',''})<input type="submit" /></form><a href="[(#EVAL{echoppe_panier}|generer_url_public)]"><:echoppe:retour_au_panier:></a>]
+		[(#ENV{editer_produit}|=={oui}|?{' ',''})<input type="submit" /></form><a href="#URL_PANIER"><:echoppe:retour_au_panier:></a>]
 		[(#ENV{editer_produit}|=={oui}|?{'',' '})<a href="#URL_VALIDATION_PANIER"><:echoppe:valider_le_panier:></a>]
 	</B_LePanier>
 		<:echoppe:le_panier_est_vide:>

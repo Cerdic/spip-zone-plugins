@@ -17,7 +17,7 @@
 		
 		
 		<b><:echoppe:quantite_minimum:></b>&nbsp;<input type="text" name="quantite_mini" value="[(#QUANTITE_MINI|sinon{1})]" />&nbsp;<:echoppe:unites:><br /><br />
-		<b><:echoppe:tva:></b>&nbsp;<input type="text" name="tva" value="#TVA" />&nbsp;%
+		<b><:echoppe:tva:></b>&nbsp;<input type="text" name="tva" value="[(#TVA|sinon{#CONFIG{echoppe/taux_de_tva_par_defaut, 6}})]" />&nbsp;%
 		<hr/>
 		<input type="submit" class="fondo" />
 	</div>

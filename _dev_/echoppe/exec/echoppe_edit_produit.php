@@ -50,7 +50,7 @@ function exec_echoppe_edit_produit(){
 	
 	($contexte['id_categorie'] > 0)?$raccourcis .= icone_horizontale(_T('echoppe:retour_a_la_categorie'), generer_url_ecrire("echoppe_categorie","id_categorie=".$contexte['id_categorie']."&lang=".$contexte['lang_categorie']), _DIR_PLUGIN_ECHOPPE."images/retour.png","", false)."<hr />":$raccourcis=$raccourcis;
 	($contexte['id_produit'] > 0)?$raccourcis .= icone_horizontale(_T('echoppe:retour_au_produit'), generer_url_ecrire("echoppe_produit","id_produit=".$contexte['id_produit']."&lang=".$contexte['lang_produit']), _DIR_PLUGIN_ECHOPPE."images/retour.png","", false)."<hr />":$raccourcis=$raccourcis;	
-	$raccourcis .= '<hr />';
+	//$raccourcis .= '<hr />';
 	$raccourcis .= icone_horizontale(_T('echoppe:gerer_les_depots'), generer_url_ecrire("echoppe_gerer_depots",""), _DIR_PLUGIN_ECHOPPE."images/go-home.png","", false);
 	$raccourcis .= "<hr />";
 	$raccourcis .= icone_horizontale(_T('echoppe:gerer_echoppe'), generer_url_ecrire("echoppe",""), _DIR_PLUGIN_ECHOPPE."images/echoppe_blk_24.png","", false);

@@ -138,6 +138,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_au_produit' => 'Retour au produit',
 
 // S
+'squelette_du_panier' => 'Squelette du panier',
 'stock_dans_le_depot' => 'Stock dans le d&eacute;p&ocirc;t',
 'stock_total' => 'Stock TOTAL',
 

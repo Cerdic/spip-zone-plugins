@@ -75,7 +75,7 @@
 			<option value="#ID_DEPOT">#TITRE</option>
 		</BOUCLE_LesDepots>
 		</B_LesDepots>
-			<option value="-1"><:echoppe:chez_le_fournisseur:></option>
+			[(#CONFIG{echoppe/utiliser_depot_fournisseur,non}|=={non}|?{'',' '})<option value="-1"><:echoppe:chez_le_fournisseur:></option>]
 		</select>
 	</form>
 	<br />

@@ -46,14 +46,16 @@ function vide_si_zero($_var){
 }
 function calculer_url_achat($_var){
 	if (isset($_var)){
-		$url = generer_url_public('echoppe_achat_produit','id_produit='.$_var);
+		$_page = lire_config('echoppe/squelette_panier','echoppe_panier');
+		$url_result = generer_url_public($_page,'id_produit='.$_var);
+		$url = generer_url_action('echoppe_ajouter_panier','id_produit='.$_var.'&quantite=1&achat_rapide=oui&redirect='.$url_result);
 		return $url;
 	}
 	
 }
 function calculer_url_achat_rapide($_var){
 	if (isset($_var)){
-		$url = generer_url_action('echoppe_ajouter_panier','id_produit='.$_var.'&quantite=1&achat_rapide=oui');
+		$url = generer_url_action('echoppe_ajouter_panier','id_produit='.$_var.'&quantite=1&achat_rapide=oui&redirect='.$_SELF);
 		return $url;
 	}
 	
@@ -102,6 +104,12 @@ function balise_URL_ACHAT_RAPIDE($p){
 	$p->code = "calculer_url_achat_rapide($_id_produit)";
 	return $p;
 }
+function generer_URL_PANIER($p){
+	$_page = lire_config('echoppe/squelette_panier','echoppe_panier');
+	$_url = generer_url_public($_page);
+	return $_url;
+}
+
 /*
 function balise_TOKEN_PANIIER($p){
 	$_token_panier = session_get('echoppe_token_panier');
