@@ -48,7 +48,7 @@ function cfg_pre_traiter_cfg_fichier($nom, &$cfg){
 				$cfg->messages['erreurs'][$nom] = _T('cfg:erreur_suppression_fichier', array('fichier'=>get_spip_doc($cfg->val[$nom])));	
 			} else {
 				if (!$fichier = cfg_ajoute_un_document($f['tmp_name'],$f['name'],$nom, 'config/'.$cfg->vue)){
-					$cfg->messages['erreurs'][$nom] = _T('cfg:erreur_copie_fichier', array('fichier'=>'config/'.$cfg->vue . '/' . $f['name']);	
+					$cfg->messages['erreurs'][$nom] = _T('cfg:erreur_copie_fichier', array('fichier'=>'config/'.$cfg->vue . '/' . $f['name']));	
 				} else {
 					$cfg->val[$nom] = set_spip_doc($fichier);
 				}
