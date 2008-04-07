@@ -10,7 +10,7 @@
 
 
 function cfg_charger_param_selecteur_couleur($valeur, &$cfg){
-	// si la librairie fabtastic est installee,
+	// si la librairie farbtastic est installee,
 	// on la charge dans le header prive
 	$dir_lib = _DIR_LIB . 'farbtastic12/farbtastic/';
 	if (file_exists($lib = $dir_lib.'farbtastic.js')) {

@@ -1,6 +1,9 @@
 Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 
+v1.7.1 (07 04 2008)
+- correction bug sur effacer_config(metapack::xx)
+
 v1.7.0 (05 04 2008)
 - installation de librairies via la page ?exec=cfg_install_libs, presque automatique en 1.9.3
 - les librairies installables sont definies dans une globale $cfg_libs (cf. cfg_options.php)

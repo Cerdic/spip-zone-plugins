@@ -36,7 +36,6 @@ class cfg_depot_metapack
 
 	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
 	function charger(){
-		
 		$this->_base = is_array($c = $GLOBALS['meta'][$this->param->nom]) ? $c : @unserialize($c);
 		$this->_arbre = array();
 		$this->_ici = &$this->_base;
@@ -129,10 +128,10 @@ class cfg_depot_metapack
 			unset($this->_arbre[$i][0][$this->_arbre[$i][1]]);
 		}
 		
-		if (!$base) {
+		if (!$this->_base) {
 		    effacer_meta($this->param->nom);
 		} else {
-		    ecrire_meta($this->param->nom, serialize($base));
+		    ecrire_meta($this->param->nom, serialize($this->_base));
 	    }		
 		if (defined('_COMPAT_CFG_192')) ecrire_metas();
 		
