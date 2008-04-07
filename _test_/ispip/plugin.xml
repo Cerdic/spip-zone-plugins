@@ -21,7 +21,7 @@
 	<a href="?exec=cfg&amp;cfg=ispip">Configuration de iSPIP (n&eacute;cessite CFG)</a>.
 	</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/plugin-iSPIP</lien> <!-- URI de documentation -->
 	<fonctions>ispip_fonctions.php</fonctions>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
