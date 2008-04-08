@@ -36,7 +36,7 @@ $GLOBALS['jquery_plugins'] = array(
 	'farbtastic' => array(
 		'dir' => 'farbtastic12/farbtastic',
 		'url' => 'http://acko.net/dev/farbtastic',
-		'install' => 'http://acko.net/files/farbtastic/farbtastic12.zip'
+		'install' => 'http://acko.net/files/farbtastic_/farbtastic12.zip'
 	),
 	
 		
