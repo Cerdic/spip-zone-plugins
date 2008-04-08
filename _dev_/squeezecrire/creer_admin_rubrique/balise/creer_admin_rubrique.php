@@ -29,10 +29,10 @@ function balise_creer_admin_rubrique_dyn() {
 	$statut= "0minirezo";
 	$date= date("Y-m-j H:i:s");
 	
-	// des valeurs en dûr à personnaliser par cfg par la suite
-	$secteur= "2";
-	$rubrique_parent= "2";
-	$statut_article= "publie";
+	// secteur dans lequel on va créer la rubrique et statut de l'article
+	$secteur= lire_config('creer_admin_rubrique/secteur');
+	$rubrique_parent= lire_config('creer_admin_rubrique/secteur');
+	$statut_article= lire_config('creer_admin_rubrique/statut_article');
 	
 	$valider= _request('valider');
 	
