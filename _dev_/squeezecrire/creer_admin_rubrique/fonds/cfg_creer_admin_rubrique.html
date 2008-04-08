@@ -1,5 +1,5 @@
 <!-- titre= Formulaire creer admin rubrique -->
-<!-- descriptif= Ce plugin permet de cr&eacute; er depuis l'espace public 1 rubrique, 1 auteur admininstrateur de la rubrique et un article dans la rubrique. -->
+<!-- descriptif= Ce plugin permet de cr&eacute;er depuis l'espace public 1 rubrique, 1 auteur admininstrateur de la rubrique et un article dans la rubrique. -->
 
 #CACHE{0}
 
@@ -20,8 +20,8 @@
 	<p>Statut de l'article cr&eacute;&eacute; :</p>
 	<select name="statut_article" id="statut_article">
 		<option value="publie"[ selected="(#ENV{statut_article}|=={publie}|?{selected})"]>Puli&eacute;</option>
-		<option value="prop"[ selected="(#ENV{statut_article}|=={publie}|?{selected})"]>Propos&eacute; à la publication</option>
-		<option value="prepa"[ selected="(#ENV{statut_article}|=={publie}|?{selected})"]>En cours de r&eacute;daction</option>
+		<option value="prop"[ selected="(#ENV{statut_article}|=={prop}|?{selected})"]>Propos&eacute; à la publication</option>
+		<option value="prepa"[ selected="(#ENV{statut_article}|=={prepa}|?{selected})"]>En cours de r&eacute;daction</option>
 	</select>
 </fieldset>
 
