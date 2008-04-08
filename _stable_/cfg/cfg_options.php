@@ -38,7 +38,7 @@ $GLOBALS['cfg_libs'] = array(
 		'description' => _T('cfg:lib_farbtastic_description'), // description
 		'dir' => 'farbtastic12/farbtastic', // repertoire une fois decompresse ou se trouvent les js
 		'url' => 'http://acko.net/dev/farbtastic', // url de la documentation
-		'install' => 'http://acko.net/files/farbtastic/farbtastic12.zip' // adresse du zip a telecharger
+		'install' => 'http://acko.net/files/farbtastic_/farbtastic12.zip' // adresse du zip a telecharger
 	)
 );
 
