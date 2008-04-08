@@ -24,16 +24,30 @@ function balise_creer_admin_rubrique_dyn() {
 	
 	//$login= _request('login');
 	$login= $nom_auteur;
-	$pass= md5(_request('pass'));
 	
-	$statut= "0minirezo";
-	$date= date("Y-m-j H:i:s");
+	// recuperation des données de cfg
+	$pass_cfg = lire_config('creer_admin_rubrique/pass_cfg');
+	if ($pass_cfg){
+		if ($pass_cfg == 0){
+			$pass= md5(_request('pass'));
+		}
+		if ($pass_cfg == 1){
+			$pass= md5(lire_config('creer_admin_rubrique/pass'));
+		}
+	}
+	else {
+		$pass= md5(_request('pass'));
+	}
 	
 	// secteur dans lequel on va créer la rubrique et statut de l'article
 	$secteur= lire_config('creer_admin_rubrique/secteur');
 	$rubrique_parent= lire_config('creer_admin_rubrique/secteur');
 	$statut_article= lire_config('creer_admin_rubrique/statut_article');
+
 	
+	$statut= "0minirezo";
+	$date= date("Y-m-j H:i:s");
+		
 	$valider= _request('valider');
 	
 	
@@ -84,7 +98,7 @@ function balise_creer_admin_rubrique_dyn() {
 			$erreur = "Une rubrique portant ce nom existe deja";
 			spip_log("[plugin creer_admin_rubrique] ERREUR rubrique existe deja id : $id_rubrique");
 		}
-		else{
+		else {
 			spip_query("INSERT INTO spip_rubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) VALUES ('', '$rubrique_parent', "._q($nom_auteur).", '$secteur', 'publie', '$date')" );
 			$id_rubrique = mysql_insert_id();
 			spip_log("[plugin creer_admin_rubrique] OK ajoute rubrique id : $id_rubrique");
