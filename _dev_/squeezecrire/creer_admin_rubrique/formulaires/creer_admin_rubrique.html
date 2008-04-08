@@ -1,0 +1,33 @@
+#CACHE{0}
+<form action="#creer_admin_rubrique" method="post" id="creer_admin_rubrique" class="formulaire_spip formulaire_article">
+	[<div class="erreur">(#ENV*{erreur})</div>]
+	[<div class="erreur">(#ENV*{retour})</div>]
+	<fieldset>
+		<legend>Informations de l'auteur</legend>
+		<p>
+			<label for="nom">Nom</label><br />
+			<input type="text" name="nom" id="nom" value="[(#ENV*{nom})]" size="50" />
+		</p>
+		<p>
+			<label for="prenom">Prénom</label><br />
+			<input type="text" name="prenom" id="prenom" value="[(#ENV*{prenom})]" size="50" />
+		</p>
+		<p>
+			<label for="email">eMail</label><br />
+			<input type="text" id="email" name="email" value="[(#ENV**{email})]" size="50" />
+		</p>
+		[(#REM)
+		<p>
+			<label for="login">Login</label><br />
+			<input type="text" name="login" id="login" value="[(#ENV*{login})]" size="50" />
+		</p>
+		]
+		<p>
+			<label for="pass">Mot de passe</label><br />
+			<input type="password" id="pass" name="pass">[(#ENV*{descriptif})]</textarea>
+		</p>
+	</fieldset>
+	<div class="spip_bouton">
+		<input type="submit" name="valider" value="Valider" />
+	</div>
+</form>

@@ -1,0 +1,21 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	creer admin rubrique
+	</nom>
+	<auteur><!-- Auteur du plugin -->
+	Bruno Bergot
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Formulaire qui permet de creer : rubrique+auteur admin rubrique
+	</description>
+	<prefix>
+	creer_admin_rubrique
+	</prefix>
+	<chemin dir='' />
+</plugin>
