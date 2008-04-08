@@ -409,14 +409,20 @@ debut_droite();
 							$requete="SELECT ser.serie, rep.id_table, decode(id_anonyme,'".$tParam['code']."') id_anonyme, rep.jury "
 							. "from odb_repartition rep, odb_ref_etablissement eta, odb_ref_departement dep, odb_candidats can, odb_ref_serie ser ";
 							$where="where can.id_saisie=rep.id_saisie and can.annee=$annee and rep.annee=$annee and can.serie=ser.id and rep.id_etablissement=eta.id and eta.etablissement='$centre' and eta.id_departement=dep.id ";
-							$order="order by ser.serie";
+							$order="order by ser.serie, rep.id_table";
 							if($jury!=''){
-								$where=$where." and rep.jury=$jury "; 
+								$where=$where." and rep.jury=$jury ";
+							}else{
+								$where=$where." and rep.jury IS NULL ";	
 							}
 							$requete=$requete.$where.$order;							
 						    $_SESSION['requete'][$centre][]=$requete;
 						    $_SESSION['pied'][$centre][]=html_entity_decode("Num&eacute;ros anonymes $centre ($departement)");
-						    $_SESSION['titre'][$centre][]=html_entity_decode("Num&eacute;ros anonymes &agrave; l'examen du Bac - Centre de composition <b>$centre</b> ($departement) - Jury $jury");
+						    if($jury!=''){
+						    	$_SESSION['titre'][$centre][]=html_entity_decode("Num&eacute;ros anonymes &agrave; l'examen du Bac - Centre de composition <b>$centre</b> ($departement) - Jury $jury");
+							}else{
+								$_SESSION['titre'][$centre][]=html_entity_decode("Num&eacute;ros anonymes &agrave; l'examen du Bac - Centre de composition <b>$centre</b> ($departement) - Sans jury ");
+							}
 						    $_SESSION['cols'][$centre][]=array(
 							'serie'=>'Serie',
 							'id_table'=>'Num table',
@@ -427,7 +433,7 @@ debut_droite();
 	            		}
 	            		/*
 	            		echo "////////////////////////////////";
-	            		print_r($_SESSION['requete'][$centre]);
+	            		print_r($_SESSION['requete']);
 	            		echo "////////////////////////////////";
             			*/
             			$msg.="<tr><th colspan=3>Il y a $cpt candidats dans ce centre</th></tr>\n";
