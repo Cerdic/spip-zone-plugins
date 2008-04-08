@@ -9,9 +9,6 @@ function Toggle()
 	// If the _Textarea DIV is visible, switch to FCKeditor.
 	if ( $("textarea[@name=texte]").css("display") != 'none' )
 	{
-		//oEditor.SetHTML( eTextarea.value ) ;
-		oEditor.SetHTML( $("textarea[@name=texte]").val() ) ;
-		
 		// Switch the DIVs display.
 		$("textarea[@name=texte]").css("display", "none");
 		$("#fckeditor_switch").css("display", "none");
@@ -24,6 +21,8 @@ function Toggle()
 			if ( oEditor.EditMode == FCK_EDITMODE_WYSIWYG )
 				oEditor.MakeEditable() ;
 		}
+		
+		oEditor.SetHTML( $("textarea[@name=texte]").val() ) ;
 	}
 	else
 	{
