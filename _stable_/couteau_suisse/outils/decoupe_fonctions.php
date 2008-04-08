@@ -23,7 +23,7 @@ function onglets_callback($matches) {
 	foreach ($pages as $p) {
 		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $p, 2);
 		$t = array(trim(textebrut(nettoyer_raccourcis_typo($t[0]))), cs_safebalises($t[1]));
-		if(strlen($t[0].$t[1])) $contenus[] = _onglets_CONTENU.$t[0]."</a></h2>\n\n".$t[1].'</div>';
+		if(strlen($t[0].$t[1])) $contenus[] = _onglets_CONTENU.$t[0]."</a></h2><div>\n".$t[1]."\n</div></div>";
 	}
 	return _onglets_DEBUT.join('', $contenus).'</div>'._onglets_FIN;
 }
