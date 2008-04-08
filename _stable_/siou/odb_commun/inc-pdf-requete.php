@@ -81,7 +81,7 @@ $pdf->addInfo($infos);
 
 // make the table
 // YEDA 25 Mars 2008 : Ajout de la découpe suivant les centres
-for($i=0;$i<($num);$i++){
+for($i=0;$i<$num;$i++){
 $mondata=$data[$i];
 $title=$_SESSION['titre'][$param][$i];	// titre au-dessus du tableau
 $pied=$_SESSION['pied'][$param][$i];		// pied de page, rpt en bas de chaque page
@@ -107,7 +107,7 @@ if (isset($d) && $d){
    echo trim($pdfcode);
    echo '</body></html>';
 } else {
- //  if(is_array($encryption)) $pdf->setEncryption($encryption['user'], $encryption['owner'], $encryption['action']);
+  if(is_array($encryption)) $pdf->setEncryption($encryption['user'], $encryption['owner'], $encryption['action']);
   // $pdf->ezStream();
 
 
