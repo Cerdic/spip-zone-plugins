@@ -19,6 +19,20 @@
     Copyright 2007, 2008 - Ghislain VLAVONOU, Yannick EDAHE, Cedric PROTIERE
 */
 
+if(!function_exists('str_ireplace')){
+  function str_ireplace($search,$replace,$subject){
+    $token = chr(1);
+    $haystack = strtolower($subject);
+    $needle = strtolower($search);
+    while (($pos=strpos($haystack,$needle))!==FALSE){
+      $subject = substr_replace($subject,$token,$pos,strlen($search));
+      $haystack = substr_replace($haystack,$token,$pos,strlen($search));
+    }
+    $subject = str_replace($token,$replace,$subject);
+    return $subject;
+  }
+}
+
 
 include_spip('inc/presentation');
 include_spip('inc/config');
