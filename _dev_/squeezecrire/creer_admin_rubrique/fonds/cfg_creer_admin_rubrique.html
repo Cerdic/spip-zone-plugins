@@ -3,7 +3,38 @@
 
 #CACHE{0}
 
+<script type="text/javascript">
+//<![CDATA[
+	$(document).ready(function() {
+		[(#ENV{pass_cfg}|!={1}|?{$("#bloc_pass").hide();})]
+		$("input[@name='pass_cfg']").change(function() {
+			if ($("input[@name='pass_cfg']:checked").val() == 1)
+				$("#bloc_pass").show();
+			else
+				$("#bloc_pass").hide();
+			$(this).blur();
+		});	
+	});
+//]]>
+</script>
+
 <form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset>
+	<legend>Mot de passe des auteurs cr&eacute;&eacute;s :</legend>
+	<p>
+		<input type="radio" name="pass_cfg" id="pass_libre" value="0"[ (#ENV{pass_cfg}|=={0}|?{checked="checked",''})] class="fondl"/>
+		<label for="pass_libre">Mot de passe d&eacute;fini par les utilisateurs</label>
+	</p>
+	<p>
+		<input type="radio" name="pass_cfg" id="pass_cfg" value="1"[ (#ENV{pass_cfg}|=={1}|?{checked="checked",''})] class="fondl"/>
+		<label for="pass_cfg">D&eacute;finir un mot de passe pour les auteurs</label>
+	</p>
+	<p id="bloc_pass">
+		<label for="pass">Mot de passe par d&eacute;faut : </label>
+		<input type="text" name="pass" id="pass"[ value="(#ENV{pass})"] class="fondl"/>
+	</p>
+</fieldset>
 
 <fieldset>
 	<legend>Rubrique</legend>
