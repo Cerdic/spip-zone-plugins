@@ -4,6 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/abstract_sql');
 
+
 function balise_creer_admin_rubrique ($p) {
 	return calculer_balise_dynamique($p,'creer_admin_rubrique', array());
 }
@@ -15,14 +16,14 @@ function balise_creer_admin_rubrique_stat($args, $filtres) {
 function balise_creer_admin_rubrique_dyn() {
 	
 	//recuperation des champs
-	$nom= ucwords(strtolower(stripslashes(_request('nom'))));
-	$prenom= ucfirst(strtolower(stripslashes(_request('prenom'))));
+	$nom= stripslashes(_request('nom'));
+	$prenom= stripslashes(_request('prenom'));
 	$nom_auteur= $nom." ".$prenom;
 	
 	$email= stripslashes(_request('email'));
 	
 	//$login= _request('login');
-	$login= strtolower($nom_auteur);
+	$login= $nom_auteur;
 	$pass= md5(_request('pass'));
 	
 	$statut= "0minirezo";
