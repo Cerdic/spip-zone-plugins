@@ -28,6 +28,14 @@
 	else
 		fix_absolute_IE6 = function() {};
 	
+	var ff_resize = function(){
+    $("div.jqmOverlay").height($(window).height());
+  };
+  
+  var ff_scroll = function(){
+    $("div.jqmOverlay").css("top",$(document).scrollTop()+"px");
+  };
+	
 	$.carto.annotate_window = {
 		//store the csv id being imported, needs to be visible from outside
 		idCsv: 0,
@@ -55,10 +63,18 @@
 					$("#annotate_window").css({marginLeft:"-"+(w*0.4+24)+"px",top:(h-h*.8)/2+"px"});
 					$("#annotate_window div.image_container").width(w*0.8);
 					$("#annotate_window div.image_container").height('auto');
+           
 					//set up post data
 				  postData = data.postData;
 					//show panel
 					$("#annotate_window").jqmShow();
+          //workaround caret bug in ff - when there's a position:fixed element, the caret does not show
+          if($.browser.mozilla) {
+            $("div.jqmOverlay").css("position","absolute");
+            $(window).unbind("resize",ff_resize).resize(ff_resize);
+            $(window).unbind("scroll",ff_scroll).scroll(ff_scroll);
+          }
+
 					annotate_window.showAnnotatePanel(1);
 					hash.o.unbind("click");
 					annotate_window.annotate_fill_summary_panel(function(p){
@@ -227,7 +243,7 @@
 					$("#annotate_point_text").val(''),
 					$("#annotate_point_x").text(''),
 					$("#annotate_point_y").text('')
-					//bind click on the map
+          //bind click on the map
 					$("#map_annotate").unbind().click(function(event){
 						var xy = carto.get_xy_coord($(this),event);
 						$("#annotate_point_x").text(xy.x);
