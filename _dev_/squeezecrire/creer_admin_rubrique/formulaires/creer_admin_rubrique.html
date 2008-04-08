@@ -22,10 +22,13 @@
 			<input type="text" name="login" id="login" value="[(#ENV*{login})]" size="50" />
 		</p>
 		]
+		
+		[(#CONFIG{creer_admin_rubrique/pass_cfg}|!={1}|?{' ',''})
 		<p>
 			<label for="pass">Mot de passe</label><br />
-			<input type="password" id="pass" name="pass">[(#ENV*{descriptif})]</textarea>
-		</p>
+			<input type="password" id="pass" name="pass" />
+		</p>]
+		
 	</fieldset>
 	<div class="spip_bouton">
 		<input type="submit" name="valider" value="Valider" />
