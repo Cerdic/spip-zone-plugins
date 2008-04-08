@@ -12,7 +12,8 @@
 	dev
 	</etat>
 	<description>
-	Formulaire qui permet de creer : rubrique+auteur admin rubrique
+		<p>Formulaire qui permet de cr&eacute;er de l'espace public : 1 rubrique, 1 auteur admininstrateur de la rubrique et un article dans la rubrique.</p>
+		<p>S'ins&egrave;re dans les squelettes &agrave; l'aide de la balise #CREER_ADMIN_RUBRIQUE</p>
 	</description>
 	<prefix>
 	creer_admin_rubrique
