@@ -105,7 +105,7 @@ function exec_mots_tous_dist()
 
 		$groupe = sql_fetsel("COUNT(*) AS n", "spip_mots", "id_groupe=$id_groupe");
 		$groupe = $groupe['n'];
-
+		
 		echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
 
 		// Preliminaire: confirmation de suppression d'un mot lie a qqch
