@@ -1,0 +1,31 @@
+<!-- titre= Formulaire creer admin rubrique -->
+<!-- descriptif= Ce plugin permet de cr&eacute; er depuis l'espace public 1 rubrique, 1 auteur admininstrateur de la rubrique et un article dans la rubrique. -->
+
+#CACHE{0}
+
+<form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset>
+	<legend>Rubrique</legend>
+	<p>Secteur qui recevra les rubriques cr&eacute;es :</p>
+	<select name="secteur" id="secteur" class="formo" size="5">
+		<BOUCLE_secteurs(RUBRIQUES){racine}{par titre}>
+		<option value="#ID_RUBRIQUE"[ selected="(#ENV{secteur}|=={#ID_RUBRIQUE}|?{selected})"]>#TITRE</option>
+		</BOUCLE_secteurs>
+	</select>
+</fieldset>
+
+<fieldset>
+	<legend>Article</legend>
+	<p>Statut de l'article cr&eacute;&eacute; :</p>
+	<select name="statut_article" id="statut_article">
+		<option value="publie"[ selected="(#ENV{statut_article}|=={publie}|?{selected})"]>Puli&eacute;</option>
+		<option value="prop"[ selected="(#ENV{statut_article}|=={publie}|?{selected})"]>Propos&eacute; à la publication</option>
+		<option value="prepa"[ selected="(#ENV{statut_article}|=={publie}|?{selected})"]>En cours de r&eacute;daction</option>
+	</select>
+</fieldset>
+
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+
+</form>
