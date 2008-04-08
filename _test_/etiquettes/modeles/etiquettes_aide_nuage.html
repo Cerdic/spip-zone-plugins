@@ -1,0 +1,56 @@
+[(#CONFIG{multi_articles}|=={oui}|?{' '})#SET{lang,#ENV{lang}}]
+#SET{expose,#ARRAY}<BOUCLE_expose(MOTS){id_article}>[(#SET{expose,[(#GET{expose}|push{#ID_MOT})]})]</BOUCLE_expose>
+#SET{frequences,#ARRAY}
+#SET{max_frequence,0}
+
+[(#REM)
+	On calcule la vraie fréquence des mots en additionant
+	sur les différentes tables (faut pas hésiter à en rajouter)
+]
+
+<BOUCLE_frequence_articles(MOTS){frequence articles}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
+#SET{max_la,#MAX_FREQUENCE}
+</BOUCLE_frequence_articles>
+#SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
+</B_frequence_articles>
+
+<BOUCLE_frequence_auteurs(MOTS){frequence auteurs}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
+#SET{max_la,#MAX_FREQUENCE}
+</BOUCLE_frequence_auteurs>
+#SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
+</B_frequence_auteurs>
+
+<BOUCLE_frequence_forum(MOTS){frequence forum}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
+#SET{max_la,#MAX_FREQUENCE}
+</BOUCLE_frequence_forum>
+#SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
+</B_frequence_forum>
+
+<BOUCLE_frequence_documents(MOTS){frequence documents}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
+#SET{max_la,#MAX_FREQUENCE}
+</BOUCLE_frequence_documents>
+#SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
+</B_frequence_documents>
+
+<BOUCLE_tous_les_mots(MOTS){tous}{type ?}{doublons auteur}>
+</BOUCLE_tous_les_mots>
+
+[(#REM) Et maintenant qu'on a enregistré les fréquences, on affiche le nuage ]
+<B_mots>
+<ul class="nuage">
+	<BOUCLE_mots(MOTS){tous}{!doublons auteur}{type ?}{par #ENV{tri,titre}}{0,40}>
+	[(#SET{score,[(#GET{frequences}|table_valeur{#TITRE*,0}|div{#GET{max_frequence}})]})]
+	[(#GET{score}|>={0}|?{' '})
+		[(#SET{score,[(#GET{score}|plus{0.900001})]})]
+		[(#SET{unite,[(#GET{score}|floor)]})]
+		[(#SET{decimale,[(#GET{score}|moins{#GET{unite}}|mult{10}|floor)]})]
+		<li>
+			<span style="font-size: #GET{unite}[.(#GET{decimale})]em;">#TITRE</span>
+		</li>
+	]</BOUCLE_mots>
+</ul>
+</B_mots>

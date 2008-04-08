@@ -140,20 +140,23 @@ function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide, $remplacer
 			
 			// On récupère les tags
 			$etiquettes = trim(_request("etiquettes-$groupe-$type_objet-$id_objet"));
-			// On utilise la tag-machine avec les paramètres
+			// On utilise la tag-machine avec les millions de paramètres
 			include_spip('inc/tag-machine');
 			ajouter_liste_mots($etiquettes,$id_objet,$groupe,$type_objet,$cle_objet,$remplacer);
-			// Si modifier, on renvoie la liste tel quel, ça évite une requête pour rien
+			
+			// Si on a modifié, on renvoie la liste tel quel, ça évite une requête pour rien
 			if ($remplacer)
 				$etiquettes = entites_html($etiquettes);
+			// Sinon c'est un formulaire d'ajout donc il apparaît toujours vide
 			else $etiquettes = "";
 			
 		}
 		else{
 			
+			// Pour l'ajout c'est vide
 			$etiquettes = "";
 			
-			// Si on modifie, les tags prennent ceux liés à l'objet
+			// Mais si on modifie, le champ est rempli avec les tags liés à l'objet
 			if ($remplacer){
 				
 				$reponse = sql_select(
@@ -182,7 +185,6 @@ function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide, $remplacer
 		}
 		
 	}
-	//return "groupe : $groupe<br/>id_groupe : $id_groupe<br/>aide : $aide<br/>remplacer : ".$remplacer."<br/>id_objet : $id_objet<br/>type_objet : $type_objet<br/>proposer_login : ".$proposer_login;
 	
 	// On provoque enfin l'affichage
     return array(

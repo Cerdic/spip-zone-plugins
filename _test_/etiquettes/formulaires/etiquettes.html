@@ -2,7 +2,7 @@
 
 [(#REM) S'il y a proposition du login, il y a donc erreur d'autorisation et on affiche erreur et login]
 [(#ENV*{proposer_login}|?{' '})
-<div class="formulaire_spip"  id="form-etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}">
+<div class="formulaire_spip formulaire_etiquettes"  id="form-etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}">
 	<form action="#ENV{self}#form-etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}" method="post">
 		<fieldset>
 			<legend>[(#ENV*{remplacer}|?{<:etiquettes:modifier_etiquettes:>,<:etiquettes:ajouter_etiquettes:>})]</legend>
@@ -21,7 +21,7 @@
 
 [(#REM) S'il n'y a pas d'erreur d'autorisation on affiche le formulaire]
 [(#ENV*{erreur_autorisation}|?{'',' '})
-<div class="formulaire_spip"  id="form-etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}">
+<div class="formulaire_spip formulaire_etiquettes"  id="form-etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}">
 	
 	<form action="#ENV{self}#form-etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}" method="post">
 		<fieldset>
@@ -41,7 +41,12 @@
 					name="etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}"
 					value="#ENV*{etiquettes}"
 				/>
+				<label for="etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}">
+					<:etiquettes:explication:>
+				</label>
 			</p>
+			
+			
 			
 			<p class="spip_bouton">
 				<input type="submit"
