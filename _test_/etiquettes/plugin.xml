@@ -1,0 +1,41 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+		&Eacute;tiquettes
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 		RastaPopoulos - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+		0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+		dev
+	</etat>
+	<description>
+Le plugin &Eacute;tiquettes permet de cr&eacute;er facilement des formulaire pour ajouter des mots-cl&eacute;s "&agrave; la vol&eacute;e" sur n'importe quel &eacute;l&eacute;ment les acceptant (articles, forums, etc, et plus encore si vous avez le plugin Mots Partout ou si vous savez programmer).
+
+Il propose donc une balise avec param&egrave;tres qui va g&eacute;n&eacute;rer un champ de texte pour taper les mots-clés, et &eacute;ventuellement une aide qui pourra &ecirc;tre de diff&eacute;rente sorte suivant les plugins disponibles :
+-* * Aucune aide
+-* * Une liste de quelques dizaines de mots au hasard
+-* * Un nuage des mots les plus fr&eacute;quents
+_ (si vous avez le plugin Nuage)
+-* * Une liste d&eacute;roulante qui s'actualise en fonction de ce que vous tapez
+_ (si vous avez le plugin S&eacute;lecteur g&eacute;n&eacute;rique)
+
+Il existe deux versions de la balise : une qui va g&eacute;n&eacute;rer un formulaire complet avec le bouton d'envoi et le traitement de ce formulaire ; et une qui ne va g&eacute;n&eacute;rer que la portion de HTML du champ texte et de l'aide, afin que vous puissiez l'ins&eacute;rer dans un de vos formulaires personnels.
+
+Dans ce second cas, ce sera alors &agrave; vous de traiter le r&eacute;sultat du champ texte. Il vous faudra donc conna&icirc;ttre le plugin Tag-Machine.
+	</description>
+	<lien>http://www.spip-contrib.net/Etiquettes</lien> <!-- URI de documentation -->
+	<prefix> 
+		etiquettes
+	</prefix>
+	<icon>
+		images/etiquettes.png
+	</icon>
+	<options>etiquettes_options.php</options>
+	<fonctions>etiquettes_fonctions.php</fonctions>
+	
+	<!-- Les etiquettes nécessite les plugins suivant -->
+	<necessite id='tagmachine' version="[0.1;]" />
+</plugin>
