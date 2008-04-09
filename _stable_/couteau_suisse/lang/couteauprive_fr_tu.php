@@ -17,7 +17,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actifs' => 'Outils actifs :',
 	'activer' => 'Activer',
 	'activer_outil' => 'Activer l\'outil',
-	'admin' => '1. Administration',
 	'alt_pack' => 'Voir les param&egrave;tres de configuration en cours',
 	'auteurs:description' => 'Cet outil configure l\'apparence de [la page des auteurs->./?exec=auteurs], en partie priv&eacute;e.
 
@@ -34,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'balise_etoilee' => '{{Attention}} : V&eacute;rifie bien l\'utilisation faite par tes squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outil ne s\'appliqueront pas sur : @bal@.',
 	'basique' => 'Basique',
 	'blocs:aide' => 'Blocs D&eacute;pliables : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => 'Te permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles.
+	'blocs:description' => '<MODIF>Te permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles.
 
 @puce@ {{Dans les textes SPIP}} : les r&eacute;dacteurs ont &agrave; disposition les  nouvelles balises &lt;bloc&gt; (ou &lt;invisible&gt;) et &lt;visible&gt; &agrave; utiliser dans leurs textes comme ceci : 
 
@@ -68,13 +67,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 _ Cet outil remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouve dans le r&eacute;pertoire plugins/couteau_suisse/img/chatons.',
 	'chatons:nom' => 'Chatons',
 	'class_spip:description1' => 'Tu peux ici d&eacute;finir certains raccourcis de SPIP. Une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut.[[%racc_hr%]]',
-	'class_spip:description2' => '@puce@ {{Les raccourcis de SPIP}}.
+	'class_spip:description2' => '<MODIF>@puce@ {{Les raccourcis de SPIP}}.
 
 Tu peux ici d&eacute;finir certains raccourcis de SPIP. Une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut.[[%racc_hr%]][[%puce%]]',
-	'class_spip:description3' => '
+	'class_spip:description3' => '<MODIF>
 
 SPIP utilise habituellement la balise &lt;h3&gt; pour les intertitres. Choisis ici un autre remplacement :[[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '
+	'class_spip:description4' => '<MODIF>
 
 SPIP a choisi d\'utiliser la balise &lt;i> pour transcrire les italiques. Mais &lt;em> aurait pu &eacute;galement convenir. &Agrave; toi de voir :[[%racc_i1%]][[->%racc_i2%]]
 Note : en modifiant le remplacement des raccourcis d\'italiques, le style {{2.}} sp&eacute;cifi&eacute; plus haut ne sera pas appliqu&eacute;.
@@ -134,7 +133,7 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour tes articles}.'
 	'desactiver_flash:nom' => 'D&eacute;sactive les objets flash',
 	'desactiver_outil' => 'D&eacute;sactiver l\'outil',
 	'desactiver_rss' => 'D&eacute;sactiver les &laquo; R&eacute;visions du Couteau Suisse &raquo;',
-	'descrip_pack' => 'Ton "Pack de configuration actuelle" rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
+	'descrip_pack' => '<MODIF>Ton "Pack de configuration actuelle" rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
 
 Ce code PHP peut prendre place dans le fichier /config/mes_options.php et ajoutera un lien de r&eacute;initialisation sur cette page "du pack {Pack Actuel}". Bien s&ucirc;r il t\'est possible de changer son nom ci-dessous.
 
@@ -144,7 +143,6 @@ Si tu r&eacute;initialises le plugin en cliquant sur un pack, le Couteau Suisse 
 	'detail_pipelines' => 'Pipelines :',
 	'detail_traitements' => 'Traitements :',
 	'distant' => 'Nouvelle version : [@version@->http://files.spip.org/spip-zone/couteau_suisse.zip]',
-	'divers' => '6. Divers',
 	'dossier_squelettes:description' => 'Modifie le dossier du squelette utilis&eacute;. Par exemple : "squelettes/monsquelette". Tu peux inscrire plusieurs dossiers en les s&eacute;parant par les deux points <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. En laissant vide la case qui suit (ou en tapant "dist"), c\'est le squelette original "dist" fourni par SPIP qui sera utilis&eacute;.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Dossier du squelette',
 	'du_pack' => '• du pack @pack@',
@@ -333,7 +331,6 @@ _ Merci de ta compr&eacute;hension.',
 	'propres' => 'propres@_CS_ASTER@',
 	'propres-qs' => 'propres-qs',
 	'propres2' => 'propres2@_CS_ASTER@',
-	'public' => '4. Affichage public',
 	'pucesli:description' => 'Remplace les puces &laquo;-&raquo; (tiret simple) des articles par des listes not&eacute;es &laquo;-*&raquo; (traduites en HTML par : &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) et dont le style peut &ecirc;tre personnalis&eacute; par css.',
 	'pucesli:nom' => 'Belles puces',
 
@@ -380,7 +377,6 @@ Ce sommaire peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et ong
 Listes ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par des espaces. [[%spam_mots%]]
 @_CS_ASTER@Pour sp&eacute;cifier un mot entier, mets-le entre paranth&egrave;ses. Pour une expression avec des espaces, place-la entre guillemets.',
 	'spam:nom' => 'Lutte contre le SPAM',
-	'spip' => '5. Balises, filtres, crit&egrave;res',
 	'spip_cache:description' => '@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[%radio_desactive_cache3%]]@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]@puce@ Si la balise #CACHE n\'est pas trouv&eacute;e dans tes squelettes locaux, SPIP consid&egrave;re par d&eacute;faut que le cache d\'une page a une dur&eacute;e de vie de 24 heures avant de la recalculer. Afin de mieux g&eacute;rer la charge de ton serveur, tu peux ici modifier cette valeur.[[%duree_cache% heures]]@puce@ Si tu as plusieurs sites en mutualisation, tu peux sp&eacute;cifier ici la valeur par d&eacute;faut prise en compte par tous les sites locaux (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:nom' => 'SPIP et le cache…',
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d\'ouvrir les liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target="_blank"} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'&eacute;tendre au maximum cette fonctionnalit&eacute;.[[%radio_target_blank3%]]
@@ -426,8 +422,6 @@ Plus d\'infos : [->http://www.spip.net/fr_article765.html]
 @puce@ {{Uniquement si tu utilises le format {page} ci-dessus}}, alors il t\'est possible de choisir le script d\'appel &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il te faut absolument cr&eacute;er le fichier correspondant dans la racine de SPIP, &agrave; l\'image de celui qui existe d&eacute;j&agrave; : {index.php}.
 [[%spip_script%]]',
 	'type_urls:nom' => 'Format des URLs',
-	'typo-corr' => '2. Am&eacute;liorations des textes',
-	'typo-racc' => '3. Raccourcis typographiques',
 	'typo_exposants:description' => 'Textes fran&ccedil;ais : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
 _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l\'Imprimerie nationale telles qu\'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l\'Imprimerie nationale, Paris, 2002).',
 	'typo_exposants:nom' => 'Exposants typographiques',

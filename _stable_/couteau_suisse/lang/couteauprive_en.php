@@ -17,7 +17,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actifs' => 'Activated tools:',
 	'activer' => 'Activate',
 	'activer_outil' => 'Activate the tool',
-	'admin' => '1. Administration',
 	'alt_pack' => 'See the current configuration parameters',
 	'auteurs:description' => 'This tool configures the appearance of [the authors\' page->./?exec=auteurs], in the private area.
 
@@ -34,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'balise_etoilee' => '<NEW>{{Attention}} : V&eacute;rifiez bien l\'utilisation faite par vos squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outil ne s\'appliqueront pas sur : @bal@.',
 	'basique' => 'Basic',
 	'blocs:aide' => 'Folding blocks: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) and <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => 'Allows you to create blocks where clicking on the title makes the contents visible or invisible.
+	'blocs:description' => '<MODIF>Allows you to create blocks where clicking on the title makes the contents visible or invisible.
 
 @puce@ {{In SPIP texts}}: authors can use the tags &lt;bloc&gt; (or &lt;invisible&gt;) and &lt;visible&gt; in this way: 
 
@@ -68,13 +67,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 _ Cet outil remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouve dans le r&eacute;pertoire plugins/couteau_suisse/img/chatons.',
 	'chatons:nom' => 'Smileys',
 	'class_spip:description1' => 'Here you can define some SPIP shortcuts. An empty value is equivalent to using the default.[[%racc_hr%]]',
-	'class_spip:description2' => '@puce@ {{SPIP shortcuts}}.
+	'class_spip:description2' => '<MODIF>@puce@ {{SPIP shortcuts}}.
 
 Here you can define some SPIP shortcuts. An empty value is equivalent to using the default.[[%racc_hr%]][[%puce%]]',
-	'class_spip:description3' => '<NEW>
+	'class_spip:description3' => '<MODIF>
 
 SPIP utilise habituellement la balise &lt;h3&gt; pour les intertitres. Choisissez ici un autre remplacement :[[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '<NEW>
+	'class_spip:description4' => '<MODIF>
 
 SPIP a choisi d\'utiliser la balise &lt;i> pour transcrire les italiques. Mais &lt;em> aurait pu &eacute;galement convenir. &Agrave; vous de voir :[[%racc_i1%]][[->%racc_i2%]]
 Notez : en modifiant le remplacement des raccourcis d\'italiques, le style {{2.}} sp&eacute;cifi&eacute; plus haut ne sera pas appliqu&eacute;.
@@ -134,7 +133,7 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.'
 	'desactiver_flash:nom' => 'Deactivate flash objects',
 	'desactiver_outil' => 'Deactivate this tool',
 	'desactiver_rss' => 'Deactivate &laquo;Swiss Knife updates&raquo;',
-	'descrip_pack' => '<NEW>Votre "Pack de configuration actuelle" rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
+	'descrip_pack' => '<MODIF>Votre "Pack de configuration actuelle" rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
 
 Ce code PHP peut prendre place dans le fichier /config/mes_options.php et ajoutera un lien de r&eacute;initialisation sur cette page "du pack {Pack Actuel}". Bien s&ucirc;r il vous est possible de changer son nom ci-dessous.
 
@@ -144,7 +143,6 @@ Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suiss
 	'detail_pipelines' => 'Pipelines:',
 	'detail_traitements' => 'Treatment:',
 	'distant' => 'New version: [@version@->http://files.spip.org/spip-zone/couteau_suisse.zip]',
-	'divers' => '6. Miscellaneous',
 	'dossier_squelettes:description' => '<NEW>Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. Vous pouvez inscrire plusieurs dossiers en les s&eacute;parant par les deux points <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. En laissant vide la case qui suit (ou en tapant &quot;dist&quot;), c\'est le squelette original &quot;dist&quot; fourni par SPIP qui sera utilis&eacute;.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Template directory',
 	'du_pack' => '• of the pack @pack@',
@@ -334,7 +332,6 @@ _ Thank you for your understanding.',
 	'propres' => 'propres@_CS_ASTER@',
 	'propres-qs' => 'propres-qs',
 	'propres2' => 'propres2@_CS_ASTER@',
-	'public' => '4. Public display',
 	'pucesli:description' => '<NEW>Remplace les puces &laquo;-&raquo; (tiret simple) des articles par des listes not&eacute;es &laquo;-*&raquo; (traduites en HTML par : &lt;ul>&lt;li>&hellip;&lt;/li>&lt;/ul>) et dont le style peut &ecirc;tre personnalis&eacute; par css.',
 	'pucesli:nom' => 'Beautiful bullets',
 
@@ -381,7 +378,6 @@ Ce sommaire peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et ong
 Listez ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par des espaces. [[%spam_mots%]]
 @_CS_ASTER@Pour sp&eacute;cifier un mot entier, mettez-le entre paranth&egrave;ses. Pour une expression avec des espaces, placez-la entre guillemets.',
 	'spam:nom' => 'Fight against SPAM',
-	'spip' => '5. Tags, filters, criteria',
 	'spip_cache:description' => '<NEW>@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[%radio_desactive_cache3%]]@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]@puce@ Si la balise #CACHE n\'est pas trouv&eacute;e dans vos squelettes locaux, SPIP consid&egrave;re par d&eacute;faut que le cache d\'une page a une dur&eacute;e de vie de 24 heures avant de la recalculer. Afin de mieux g&eacute;rer la charge de votre serveur, vous pouvez ici modifier cette valeur.[[%duree_cache% heures]]@puce@ Si vous avez plusieurs sites en mutualisation, vous pouvez sp&eacute;cifier ici la valeur par d&eacute;faut prise en compte par tous les sites locaux (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:nom' => 'SPIP and the cache',
 	'SPIP_liens:description' => '@puce@ By default, all links on the site open in the current window. But it can be useful to open external links in a new window, i.e. adding {target="_blank"} to all link tags bearing one of the SPIP classes {spip_out}, {spip_url} or {spip_glossaire}. It is sometimes necessary to add one of these classes to the links in the site\'s templates (html files) in order make this functionality wholly effective.[[%radio_target_blank3%]]
@@ -426,8 +422,6 @@ Plus d\'infos : [->http://www.spip.net/fr_article765.html]
 @puce@ {{Uniquement si vous utilisez le format {page} ci-dessus}}, alors il vous est possible de choisir le script d\'appel &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de SPIP, &agrave; l\'image de celui qui existe d&eacute;j&agrave; : {index.php}.
 [[%spip_script%]]',
 	'type_urls:nom' => 'Format of URLs',
-	'typo-corr' => '2. Improvements for text',
-	'typo-racc' => '3. Typographical shortcuts',
 	'typo_exposants:description' => '<NEW>Textes fran&ccedil;ais : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
 _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l\'Imprimerie nationale telles qu\'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l\'Imprimerie nationale, Paris, 2002).',
 	'typo_exposants:nom' => 'Superscript',
