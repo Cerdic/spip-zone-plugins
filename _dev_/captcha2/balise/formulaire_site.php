@@ -48,7 +48,7 @@ function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 
 	if ($nom = _request('nom_site')) {
 	  // Captcha
-	  if (_request('captcha2')!=$_SESSION['captcha2'])         // surcharge plugin
+	  if (_request('captcha2')!==$_SESSION['captcha2'])        // surcharge plugin
 	    $message_erreur = _T("captcha2:erreur_captcha");       // surcharge plugin
 
 		// Tester le nom du site
