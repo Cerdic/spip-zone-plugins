@@ -25,21 +25,4 @@ function init_auth_openid() {
 	return new Auth_OpenID_Consumer($store);
 }
 
-
-
-function openidGetScheme() {
-    $scheme = 'http';
-    if (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] == 'on') {
-        $scheme .= 's';
-    }
-    return $scheme;
-}
-
-function openidGetReturnTo() {
-    return sprintf("%s://%s:%s%s/finish_auth.php",
-                   openidGetScheme(), $_SERVER['SERVER_NAME'],
-                   $_SERVER['SERVER_PORT'],
-                   dirname($_SERVER['PHP_SELF']));
-}
-
 ?>
