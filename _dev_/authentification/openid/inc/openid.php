@@ -6,7 +6,8 @@
 function init_auth_openid() {
 
 	$cwd = getcwd();
-	chdir(dirname(dirname(__FILE__)));
+	//chdir(dirname(dirname(__FILE__)));
+	chdir(realpath(_DIR_OPENID_LIB));
 	require_once "Auth/OpenID/Consumer.php";
 	require_once "Auth/OpenID/FileStore.php";
 	chdir($cwd);
@@ -25,5 +26,20 @@ function init_auth_openid() {
 }
 
 
+
+function openidGetScheme() {
+    $scheme = 'http';
+    if (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] == 'on') {
+        $scheme .= 's';
+    }
+    return $scheme;
+}
+
+function openidGetReturnTo() {
+    return sprintf("%s://%s:%s%s/finish_auth.php",
+                   openidGetScheme(), $_SERVER['SERVER_NAME'],
+                   $_SERVER['SERVER_PORT'],
+                   dirname($_SERVER['PHP_SELF']));
+}
 
 ?>
