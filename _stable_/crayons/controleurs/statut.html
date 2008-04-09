@@ -11,13 +11,13 @@
 <BOUCLE_a(ARTICLES){id_article}{statut==.}>
 #SET{id,#STATUT}
 <select class="crayon-active" name="#ENV{name_statut}"
- style="width:#ENV{largeur}px;" />
+ style="width:#ENV{largeur}px;">
 	<option value="publie"[
-		(#GET{id}|=={publie}?{selected})]>publi&#233;</option>
+		(#GET{id}|=={publie}?{selected})="selected"]>publi&#233;</option>
 	<option value="prop"[
-		(#GET{id}|=={prop}?{selected})]>propos&#233;</option>
+		(#GET{id}|=={prop}?{selected})="selected"]>propos&#233;</option>
 	<option value="prepa"[
-		(#GET{id}|=={prepa}?{selected})]>en pr&#233;paration</option>
+		(#GET{id}|=={prepa}?{selected})="selected"]>en pr&#233;paration</option>
 </select>
 
 </BOUCLE_a>

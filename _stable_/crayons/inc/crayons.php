@@ -127,6 +127,7 @@ function document_fichier_revision($id, $data, $type, $ref) {
 			// dans l'ancienne ligne spip_documents
 			include_spip('inc/modifier');
 			modifier_contenu('document', $id,
+				# 'champs' inutile a partir de SPIP 11348
 				array('champs' => array_keys($new)),
 				$new);
 
@@ -333,6 +334,7 @@ function _U($texte)
     return unicode2charset(html2unicode(_T($texte)));
 }
 
+// wdgcfg = widget config :-)
 function wdgcfg() {
 	$php = function_exists('crayons_config') ? crayons_config() : array();
 	include_spip('inc/meta');
@@ -355,26 +357,15 @@ function wdgcfg() {
 }
 
 function &crayons_get_table($table, &$nom_table) {
-	static $catab = array('tables_principales',	'tables_auxiliaires');
 	static $return = array();
 	static $noms = array();
 	if (!isset($return[$table])) {
 		$return[$table] = $noms[$table] = '';
-		include_spip('base/serial');
-		include_spip('base/auxiliaires');
-		include_spip('public/parametrer');
-		$try = array('spip_'.table_objet($table), 'spip_' . $table . 's', $table . 's', 'spip_' . $table, $table);
-		foreach ($catab as $i=>$categ) {
-			// 1ere possibilite : c'est connu de SPIP
-			foreach ($try as $nom) {
-				if (isset($GLOBALS[$categ][$nom])) {
-					$noms[$table] = $nom;
-					$return[$table] = & $GLOBALS[$categ][$nom];
-					break 2;
-				}
-			}
-			// seconde possibilite : regarder directement la base
-			if (function_exists('sql_showtable'))
+
+			$try = array('spip_'.table_objet($table), 'spip_' . $table . 's', $table . 's', 'spip_' . $table, $table);
+
+		// premiere possibilite (1.9.3) : regarder directement la base
+		if (function_exists('sql_showtable')) {
 			foreach ($try as $nom) {
 				if ($q = sql_showtable($nom)) {
 					$noms[$table] = $nom;
@@ -382,6 +373,24 @@ function &crayons_get_table($table, &$nom_table) {
 				}
 			}
 		}
+
+		// seconde, une heuristique 1.9.2
+		if (!isset($return[$table])) {
+			include_spip('base/serial');
+			include_spip('base/auxiliaires');
+			include_spip('public/parametrer');
+			foreach(array('tables_principales', 'tables_auxiliaires') as $categ)
+			{
+				foreach ($try as $nom) {
+					if (isset($GLOBALS[$categ][$nom])) {
+						$noms[$table] = $nom;
+						$return[$table] = & $GLOBALS[$categ][$nom];
+						break 2;
+					}
+				}
+			}
+		}
+
 	}
 
 	$nom_table = $noms[$table];
