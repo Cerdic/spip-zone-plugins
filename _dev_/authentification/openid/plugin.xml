@@ -13,7 +13,7 @@
         </multi>
    </auteur>
    <version>
-        0.5
+        0.7
    </version>
    <etat>
       dev
@@ -31,9 +31,13 @@
         <br />{This plugin contains the [JainRain->http://www.openidenabled.com/openid/libraries/php] PHP OpenID libraries version 1.2.2.}
        </multi>
    </description>
+   <options>openid_options.php</options>
    <lien>
 	[Documentation sur spip-contrib->http://www.spip-contrib.net/Plugin-d-authentification-OpenID]
    </lien> <!-- URI de documentation -->
+    <!-- spip en version 193 mini -->
+	<necessite id='spip' version='[11408;]' />   
+	<necessite id="lib:php-openid-2.0.1" src="http://openidenabled.com/files/php-openid/packages/php-openid-2.0.1.zip" />
    <prefix>
         AuthOpenID
    </prefix>

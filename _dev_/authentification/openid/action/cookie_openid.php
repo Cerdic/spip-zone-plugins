@@ -45,34 +45,25 @@ include_spip('inc/cookie');
 // de recopier pas mal du code de action_cookie_dist pour faire marcher le truc
 
 function action_cookie_openid() {
-        global
-	    $auteur_session,
-	    $change_session,
-	    $cookie_admin,
-	    $cookie_session,
- 	    $essai_auth_http,
-	    $essai_login,
-	    $ignore_auth_http,
-	    $retour,
-	    $session_login,
-	    $session_login_hidden,
-	    $session_password,
-	    $session_password_md5,
-	    $session_remember,
-	    $spip_admin,
-	    $test_echec_cookie,
-	    $url,
-	    $hash,
-	    $var_lang,
-	    $var_lang_ecrire;
 
+	// La cible de notre operation de connexion
+	$url = _request('url');
+	$redirect = isset($url) ? $url : _DIR_RESTREINT_ABS;
+	$redirect_echec = _request('url_echec');
+	if (!isset($redirect_echec)) {
+		if (strpos($redirect,_DIR_RESTREINT_ABS)!==false)
+			$redirect_echec = generer_url_public('login','',true);
+		else
+			$redirect_echec = $redirect;
+	}
+	
 	// Recupération session (à comprendre ??)
 	session_start();
-	$redirect = ($url ? $url : _DIR_RESTREINT_ABS);
+
 	// Complete the authentication process using the server's response.
 	include_spip('inc/openid');
 	$consumer = init_auth_openid();
-	$response = $consumer->complete($_GET);
+	$response = $consumer->complete(generer_url_action("cookie_openid"));
 
 	if ($response->status == Auth_OpenID_CANCEL) {
 	    // This means the authentication was cancelled.
@@ -87,23 +78,19 @@ function action_cookie_openid() {
 	    $esc_identity = htmlspecialchars($openid, ENT_QUOTES);
 	    spip_log("[auth_openid] Successful OpenID auth of $openid");
 
-	    // Maintenant, il faut récupérer le username correspondant à cet OpenID
-            $result = spip_query("SELECT login FROM spip_auteurs WHERE url_site=" . spip_abstract_quote($esc_identity) . " AND statut<>'5poubelle'"); 
-            $row = spip_fetch_array($result);
-	    if (!$row) {
-		spip_log("[auth_openid] No user here has this OpenID");
-		$redirect = generer_url_public("login","var_erreur=openid&openid_error=" . _T('authopenid:utilisateur_inconnu'),'&');
+	    // Maintenant, il faut recuperer les donnees de l'auteur correspondant a cet OpenID
+	    $row_auteur = sql_fetsel('*','spip_auteurs',array('url_site = '.sql_quote($esc_identity), "statut<>".sql_quote('5poubelle')));
+	    if (!$row_auteur) {
+			spip_log("[auth_openid] No user here has this OpenID");
+			$redirect = generer_url_public("login","var_erreur=openid&openid_error=" . _T('authopenid:utilisateur_inconnu'),'&');
 	    } else {
-		// On récupère les données de l'utilisateur dans $row_auteur:
-         	$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($row['login']) . " AND statut<>'5poubelle'"); 
-        	$row_auteur = spip_fetch_array($result);
-
+/*		
 		// Je ne sais pas à quoi cela sert, mais c'est dans action_cookie_dist:
 	        if ($row_auteur['statut'] == 'nouveau') {
        	         include_spip('inc/auth');
        	         $row_auteur['statut'] = acces_statut($row_auteur['id_auteur'], $row_auteur['statut'], $row_auteur['bio']);
        		 }
-
+*/
                 spip_log("[auth_openid] OpenID login de " . $row_auteur['login'] . " vers $redirect");
 
                 if ($row_auteur['statut'] == '0minirezo')
@@ -120,7 +107,7 @@ function action_cookie_openid() {
                 $prefs = ($row_auteur['prefs']) ? unserialize($row_auteur['prefs']) : array();
                 $prefs['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
 
-     	spip_query("UPDATE spip_auteurs SET prefs = " . spip_abstract_quote(serialize($prefs)) . " WHERE id_auteur = " . $row_auteur['id_auteur']);
+		sql_updateq('spip_auteurs',array('prefs'=>serialize($prefs)), 'id_auteur = '.$row_auteur['id_auteur']);
 
 		// cookie d'admin ?
 		if ($cookie_admin == "non") {
@@ -139,6 +126,10 @@ function action_cookie_openid() {
 		 }
 	}
 	}
+	
+	// Redirection finale
+	redirige_par_entete($redirect, true);
+/*
 	// Redirection
 	// Sous Apache, les cookies avec une redirection fonctionnent
 	// Sinon, on fait un refresh HTTP
@@ -153,6 +144,7 @@ function action_cookie_openid() {
 	        echo "</head>\n";
 	        echo "<body><a href='".$redirect."'>"._T('navigateur_pas_redirige')."</a></body></html>";
 		}
+*/
 }
 
 ?>
