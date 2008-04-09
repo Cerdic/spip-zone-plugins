@@ -242,7 +242,7 @@ verif_plugin();
 		. "<input type='submit' name='Valider1' value='"._T('bouton_valider')."' class='fondo' onclick='document.forms.submitform.submit()' /></div>";
 	echo _T('couteauprive:presente_outils', array('triangle'=>'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" />')), $valider;
 	echo "\n<table border='0' cellspacing='0' cellpadding='5' ><tr><td class='sansserif'>";
-	foreach($temp = $outils as $outil) $categ[_T('couteauprive:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
+	foreach($temp = $outils as $outil) $categ[_T('couteauprive:categ:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
 
 	$js = ''; $marge = '0';
 	$description_outil = charger_fonction('description_outil', 'inc');

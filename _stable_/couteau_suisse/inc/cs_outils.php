@@ -97,7 +97,7 @@ function liste_outils() {
 	global $outils;
 	$id = 0;
 	$metas_caches = isset($GLOBALS['meta']['tweaks_caches'])?unserialize($GLOBALS['meta']['tweaks_caches']):array();
-	foreach($outils as $outil) $categ[_T('couteauprive:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
+	foreach($outils as $outil) $categ[_T('couteauprive:categ:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
 	$result_actifs = $result_inactifs = '';
 	foreach($categ as $c=>$i) {
 		$s_actifs = $s_inactifs = array();
