@@ -276,7 +276,7 @@ $.fn.activatecrayon = function(percent) {
       .keypress(function(e){
         e.cancelBubble = true;
       })
-      .find(".crayon-active[@type!=file]")
+      .find("textarea.crayon-active,input.crayon-active[@type=text]")
         .each(function(n){
           // focus pour commencer a taper son texte directement dans le champ
           // on essaie de positionner la selection (la saisie) au niveau du clic
