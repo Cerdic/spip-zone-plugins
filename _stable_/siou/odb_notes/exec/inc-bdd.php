@@ -18,7 +18,7 @@ function getNbCandidats($annee,$jury=0,$type='') {
     return $nbCandidats;
 }
 
-/** Recupere le nombre notes saisies pour un jury / une serie (/ une matiere)
+/** Recupere le nombre notes SAISIES pour un jury / une serie (/ une matiere / un type)
  *
  */
 function getNbCandidatsNotes($annee,$jury,$id_serie,$id_matiere=0,$type='') {
@@ -30,7 +30,8 @@ function getNbCandidatsNotes($annee,$jury,$id_serie,$id_matiere=0,$type='') {
     if(mysql_num_rows($result)>0)
         $nb=mysql_result($result,0,0);
     else $nb=0;
-    if($type=='Divers' && $id_matiere!=0) die(KO." - Veuillez utiliser les fonctions getNbCandidatsEPS et getNbCandidatsEF");
+    //if($type=='Divers' && $id_matiere!=0) die(KO." - Veuillez utiliser les fonctions getNbCandidatsEPS et getNbCandidatsEF");
+    //echo "$type : $nb : $sql<br/>";
     return $nb;
 }
 
@@ -69,6 +70,7 @@ function getNbNotesSaisiesType($annee,$type,$jury) {
 	$result=odb_query($sql,__FILE__,__LINE__);
 	$nb=mysql_result($result,0,0);
 	if($nb>0) return $nb;
+	//echo "$type : $nb - $sql<br/>";
 	else return 0;
 }
 
@@ -104,7 +106,7 @@ function getNbNotesASaisirType($annee,$type,$jury,$id_serie=0) {
 			break;
 		default:die(KO." - type $type inconnu");
 	}
-	//echo "$type : $sql<br/>";
+	//echo "$type : $nb/$nbMatieres : $sql<br/>";
 	if($nb>0) return $nb;
 	else return 0;
 }

@@ -82,6 +82,9 @@ function exec_odb_notes() {
     $imgInfo="<img src='".DIR_ODB_CONTRIB."boxover/info.gif' style='vertical-align:middle'>";
     
     $r_jury=$_REQUEST['jury'];
+    if($r_jury>0)
+    	$deliberation=guessDeliberation($annee, $r_jury, $tParam);
+    else $deliberation=0;
     
     debut_page(_T('Saisie des notes'), "", "");
     echo "<br />\n";
@@ -153,11 +156,9 @@ function exec_odb_notes() {
 	"<input type='hidden' name='imprimer' value='auto'/>\n</FORM>\n";
 	$msg.="<tr><th colspan=2>Retour aux <A HREF='".generer_url_ecrire('odb_notes')."&jury=$jury&annee=$annee&resultats'>r&eacute;sultats</A></th></tr>\n";
 	$msg.="</TABLE>\n";
-	if(isset($tParam["_delib1_$annee"][$r_jury])) {
-	    $deliberation=2;
+	if($deliberation>1) {
 	    $msg.=afficherImpressions($jury,$serie,$annee,$tSeries);
 	} else {
-	    $deliberation=1;
 	    $msg.="Vous n'avez pas acc&egrave;s aux impressions du jury $jury, veuillez choisir un autre jury svp.";
 	}
     } elseif(isset($_REQUEST['historique'])) {
@@ -206,22 +207,24 @@ function exec_odb_notes() {
 	"<input type='hidden' name='resultats' value='auto'/>\n</FORM>\n";
 	if(isset($tParam["_delib1_$annee"][$r_jury])) {
 	    if(isset($_REQUEST['total'])) {
-		$deliberation=0;
-		if($id_serie!='') $extra="<hr size=1/><A HREF='".generer_url_ecrire('odb_notes')."&jury=$jury&serie=$serie&resultats'><b>Filtrer les notes</b> &agrave; la d&eacute;lib&eacute;ration en cours</A>\n";
+			$delib_aff=0;
+			if($id_serie!='') 
+				$extra="<hr size=1/><A HREF='".generer_url_ecrire('odb_notes')."&jury=$jury&serie=$serie&resultats'><b>Filtrer les notes</b> &agrave; la d&eacute;lib&eacute;ration en cours</A>\n";
 	    } else {
-		$nbCandidatsOral=getNbCandidats($annee,$r_jury,'Oral');
-		if($nbCandidatsOral>1) $deliberation=3;
-		else $deliberation=2;
-		if($id_serie!='') $extra="<hr size=1/><A HREF='".generer_url_ecrire('odb_notes')."&jury=$jury&serie=$serie&resultats&total'>Afficher <b>toutes</b> les notes</A>\n";
+			$nbCandidatsOral=getNbNotesSaisiesType($annee,'Oral',$r_jury);
+			if($nbCandidatsOral>0) $delib_aff=3;
+			else $delib_aff=2;
+			if($id_serie!='') 
+				$extra="<hr size=1/><A HREF='".generer_url_ecrire('odb_notes')."&jury=$jury&serie=$serie&resultats&total'>Afficher <b>toutes</b> les notes</A>\n";
 	    }
 	    //include_once(DIR_ODB_COMMUN.'inc-html.php');
 	    $msg.="<tr><td>".vignette('pdf')."</td><td colspan='2'>Vous &ecirc;tes autoris&eacute;(e) &agrave; <b><A HREF='".generer_url_ecrire('odb_notes')."&jury=$r_jury&serie=$serie&annee=$annee&imprimer'>acc&eacute;der aux impressions PDF</A></b><br/><b>Note :</b> acc&eacute;dez &agrave; ce module si les r&eacute;sultats vous semblent incorrects$extra</td></tr>\n";
 	} else {
-	    $deliberation=1;
+	    $delib_aff=1;
 	}
 	$msg.="</TABLE>\n";
 	if($id_serie!='') {
-	    $msg.=afficherNotes($jury,$id_serie,$annee,'',$deliberation,false);
+	    $msg.=afficherNotes($jury,$id_serie,$annee,'',$delib_aff,false);
 	    $msg.="Navigation rapide : <b><A HREF='".generer_url_ecrire('odb_notes')."&jury=$jury&serie=$serie'>mati&egrave;res du jury $jury, s&eacute;rie $serie</A></b>\n";
 	} else $msg.="Veuillez choisir une s&eacute;rie pour le jury $jury\n";
     } elseif(isset($_REQUEST['step3']) || isset($_REQUEST['step4'])) {
@@ -231,7 +234,6 @@ function exec_odb_notes() {
 	//print_r($_REQUEST);
 	$r_type=$type;
 	$msg='';
-	$deliberation=guessDeliberation($annee, $jury, $tParam);
 	
 	$gauche.="<br/><br/>\nNavigation rapide\n<ul class='tout-site'>\n<li class='sec'><A class='titre' href='".generer_url_ecrire('odb_notes')."&jury=$jury&serie=$serie&id_serie=$id_serie&step2=manuel'>Mati&egrave;re</A></li>\n".
 	"<li class='sec'><A class='titre' href='".generer_url_ecrire('odb_notes')."&jury=$jury&serie=$serie&id_serie=$id_serie&resultats=manuel'>R&eacute;sultats jury $jury</A></li>\n".
@@ -241,7 +243,6 @@ function exec_odb_notes() {
 	if(isset($_REQUEST['step4'])) {
 		//////////////////////step 4 : ajout/modification d'une note
 		$id=$id_anonyme;
-		$deliberation=guessDeliberation($annee,$jury,$tParam);
 		$typeId=($deliberation==1)?'id_anonyme':'id_table';
 		$sql1="INSERT into odb_histo_notes (id_table, id_anonyme, annee, id_matiere, note, type, coeff, operateur, maj)  \n".
 		      "\t(SELECT id_table, id_anonyme, annee, id_matiere, note, type, coeff, operateur, maj from odb_notes \n"
@@ -503,7 +504,7 @@ function exec_odb_notes() {
 						if($matiere==$r_matiere) $style='font-weight:bold;';
 						else $style='font-weight:normal;';
 						if($id_matiere<0) $style.='background-color:#ece;';
-						$nbCandidatsMatiere=getNbCandidatsNotes($annee,$r_jury,$id_serie,$id_matiere);
+						$nbCandidatsMatiere=getNbCandidatsNotes($annee,$r_jury,$id_serie,$id_matiere,$type);
 						//echo "$id_matiere : $nbCandidatsMatiere<br/>";
 						if($nbCandidatsMatiere==$nbCandidatsSerie) $couleur='#0a0';
 						elseif($nbCandidatsMatiere==0) $couleur='#f00';

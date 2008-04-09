@@ -19,13 +19,18 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 		$serie=$tRefSerie[$id_serie];
 	}
 	
+	for ($i=1; $i<=$deliberation; $i++)	{
+		odb_maj_decisions($annee,$jury,$iPrecision,$i);
+	}
+	
+	
 	$identifiant='notes.id_table';
 	$nbCanTotal=getNbCandidats($annee,$jury);
 	if($deliberation==2) {
 		$where.=" and rep.id_table in (select id_table from odb_decisions where annee=$annee and delib1='Admissible')";
 	}
 	if($deliberation==3) {
-	$where.=" and rep.id_table in (select id_table from odb_decisions where annee=$annee and delib1='Admissible' and (delib2='Oral' or delib2='Reserve'))";
+		$where.=" and rep.id_table in (select id_table from odb_decisions where annee=$annee and delib1='Admissible' and (delib2='Oral' or delib2='Reserve'))";
 	}
 	$sql = "SELECT dep.departement, eta.etablissement centre, rep.jury, pre.prefixe, can.nom, can.prenoms, can.serie, $identifiant id_candidat, id_matiere, matiere, note, coeff, type"
 	. " FROM $from odb_notes notes, odb_ref_matiere mat, odb_ref_serie ser, odb_repartition rep, odb_ref_departement dep, odb_ref_etablissement eta, odb_candidats can"
@@ -37,19 +42,7 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 		$sql="SELECT id_anonyme id_candidat, id_matiere, matiere, note, coeff, type\n FROM odb_notes notes, odb_ref_matiere mat\n"
 		   . " WHERE annee=$annee and jury=$jury and id_serie=$id_serie and mat.id=notes.id_matiere\n ORDER BY id_candidat"
 		   ;
-	else {
-		$sql2="SELECT count(*) FROM odb_notes where annee=$annee and jury=$jury and id_anonyme=id_table";
-		$result=odb_query($sql2,__FILE__,__LINE__);
-		$nb=mysql_result($result,0,0);
-		if($nb>0) {
-			$sql2="UPDATE odb_notes notes,odb_repartition rep SET notes.id_table=rep.id_table\n"
-				." WHERE notes.annee=$annee and rep.annee=$annee and rep.jury=$jury"
-				." AND notes.id_anonyme=DECODE(rep.id_anonyme,'".getParametresODB('code')."')";
-			odb_query($sql2,__FILE__,__LINE__);
-			echo OK." - Anonymat lev&eacute; pour le jury $jury";
-			odb_maj_decisions($annee,$jury);//maj des decisions pour deliberation 1
-		}
-	}
+
 	//echo "deliberation $deliberation : $sql";
 	$result=odb_query($sql,__FILE__,__LINE__);
 	while($row=mysql_fetch_array($result)) {
@@ -232,7 +225,7 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 	}
 	$nbCan=count($tNotes);
 	$cpt++;
-	$lignes[$cpt++]="<th colspan='$cptCol'>$nbCan candidats sur $nbCanTotal (encore ".($nbCanTotal-$nbCan).")</th>\n";
+	$lignes[$cpt++]="<th colspan='$cptCol'>$nbCan candidats sur $nbCanTotal ".$deliberation==1?"(encore ".($nbCanTotal-$nbCan).")":''."</th>\n";
 	$str=odb_html_table("R&eacute;sultats des candidats du jury $jury dans la s&eacute;rie $serie",$lignes,'','petition-24.gif');
 	$nom_pdf=getRewriteString("Resultats Jury $jury-Serie $serie");
 	$_SESSION['data'][$nom_pdf]=$pdf;
@@ -305,6 +298,8 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
  * @return string
  */
 function afficherImpressions($jury,$serie,$annee,$tSeries,$iPrecision=3) {
+	$tParam=getParametresODB();
+	$deliberation=guessDeliberation($annee, $jury, $tParam);
 	odb_maj_decisions($annee,$jury,$iPrecision,1);
 	$msg="<TABLE class='spip'/>";
 	$msg.="<tr><td colspan=3><hr size=1/><b>1<sup>&egrave;re</sup></b> d&eacute;lib&eacute;ration<hr size=1/></td></tr>\n";
@@ -414,68 +409,120 @@ function afficherImpressions($jury,$serie,$annee,$tSeries,$iPrecision=3) {
 	"<td><input type='submit' value='Non\nadmissibles\n1e deliberation' class='fondo' /></td></form></tr>\n";
 
 	////////////////////// deliberation 2
-	$msg.="<tr><td colspan=3><hr size=1/><b>2<sup>&egrave;me</sup></b> d&eacute;lib&eacute;ration<hr size=1/></td></tr>\n";
-	// On verifie si les notes d'EPS et EF sont toutes bien saisies
-	$sql="SELECT count(*) nb from odb_candidats can, odb_repartition rep, odb_ref_eps eps, odb_decisions decis\n".
-	"WHERE can.id_saisie=rep.id_saisie and can.annee=$annee and rep.annee=$annee and decis.annee=$annee and rep.id_table=decis.id_table\n".
-	" and can.eps=eps.id and eps.eps='Apte' and rep.jury=$jury and decis.delib1='Admissible'";
-	$result=odb_query($sql,__FILE__,__LINE__);
-	$row=mysql_fetch_array($result);
-	$nbEpsTheorie=$row['nb'];
-	//echo "nbEpsTheorie : $nbEpsTheorie<pre>$sql</pre>";
-	$sql="SELECT count(*) nb from odb_notes notes, odb_candidats can, odb_repartition rep, odb_ref_eps eps, odb_decisions decis\n".
-	"WHERE can.id_saisie=rep.id_saisie and can.annee=$annee and rep.annee=$annee and notes.annee=$annee and decis.annee=$annee and rep.id_table=decis.id_table\n".
-	" and can.eps=eps.id and eps.eps='Apte' and notes.id_table=can.id_table and rep.jury=$jury\n".
-	" and decis.delib1='Admissible' and notes.id_matiere=".ID_MATIERE_EPS;
-	$result=odb_query($sql,__FILE__,__LINE__);
-	$row=mysql_fetch_array($result);
-	$nbEpsPratique=$row['nb'];
-	//echo "nbEpsPratique : $nbEpsPratique<pre>$sql</pre>";
+	if($deliberation>1) {
+		$msg.="<tr><td colspan=3><hr size=1/><b>2<sup>&egrave;me</sup></b> d&eacute;lib&eacute;ration<hr size=1/></td></tr>\n";
+		// On verifie si les notes d'EPS et EF sont toutes bien saisies
+		$nbNotesASaisir=getNbNotesASaisirType($annee,'Divers',$jury);
+		$nbNotesSaisies=getNbNotesSaisiesType($annee,'Divers',$jury);
+		$sTmp='<br/>Pour les candidats absents, <b>saisissez 0</b>.';
+		if($nbNotesSaisies<$nbNotesASaisir) $msg.="<tr><td colspan=3 style='color:#f00;'>Veuillez saisir toutes les notes d'EPS et EF du jury $jury $sTmp</td></tr>\n";
+		else {
+			odb_maj_decisions($annee,$jury,$iPrecision,2);
+			$sql="SELECT decis.id_table, sex.sexe, pre.prefixe, nom, prenoms, eta.etablissement, can.serie idSerie, decis.delib2 delib\n".
+			"FROM odb_ref_sexe sex, odb_ref_etablissement eta, odb_decisions decis, odb_repartition rep, odb_candidats can\n".
+			"left join odb_ref_prefixe pre on pre.id=can.prefixe\n".
+			"WHERE rep.id_table=decis.id_table and can.id_table=decis.id_table and can.sexe=sex.id and can.etablissement=eta.id\n".
+			" and decis.delib1='Admissible' and can.annee=$annee and decis.annee=$annee and rep.annee=$annee and rep.jury=$jury\n".
+			"ORDER BY nom, prenoms";
+			//echo $sql;
+			$result=odb_query($sql,__FILE__,__LINE__);
+			$cpt=0;
+			while($row=mysql_fetch_array($result)) {
+				$cpt++;
+				foreach(array('id_table','sexe','prefixe','nom','prenoms','etablissement','idSerie','delib') as $col) $$col=$row[$col];
+				$id_table=getIdTableHumain($id_table);
+				$nom=$prefixe." <b>$nom</b>";
+				if($sexe=='F') $sexe='Mlle'; else $sexe='M.';
+				if(in_array(strtolower($delib),array('passable','abien','bien','tbien'))) $cle='Admis';
+				else $cle=$delib;
+				$tDelib[$cle][$idSerie][$cpt]['id_table']=$id_table;
+				$tDelib[$cle][$idSerie][$cpt]['candidat']=utf8_decode("$sexe $nom $prenoms");
+				$tDelib[$cle][$idSerie][$cpt]['etablissement']=utf8_decode($etablissement);
+				$tDelib[$cle][$idSerie][$cpt]['delib']=utf8_decode($delib);
+			}
 
-	$sql="SELECT count(*) nb from odb_candidats can, odb_repartition rep, odb_ref_ef ef, odb_decisions decis\n".
-	"WHERE can.id_saisie=rep.id_saisie and can.annee=$annee and rep.annee=$annee and decis.annee=$annee and rep.id_table=decis.id_table\n".
-	" and can.ef1=ef.id and rep.jury=$jury and decis.delib1='Admissible'";
-	$result=odb_query($sql,__FILE__,__LINE__);
-	$row=mysql_fetch_array($result);
-	$nbEf1Theorie=$row['nb'];
-	//echo "nbEf1Theorie : $nbEf1Theorie<pre>$sql</pre>";
-	$sql="SELECT count(*) nb from odb_notes notes, odb_candidats can, odb_repartition rep, odb_ref_ef ef, odb_decisions decis\n".
-	"WHERE can.id_saisie=rep.id_saisie and can.annee=$annee and rep.annee=$annee and notes.annee=$annee and decis.annee=$annee and rep.id_table=decis.id_table\n".
-	" and can.ef1=ef.id and notes.id_table=can.id_table and rep.jury=$jury and decis.delib1='Admissible' and notes.id_matiere=".ID_MATIERE_EF1;
-	$result=odb_query($sql,__FILE__,__LINE__);
-	$row=mysql_fetch_array($result);
-	$nbEf1Pratique=$row['nb'];
-	//echo "nbEf1Pratique : $nbEf1Pratique<pre>$sql</pre>";
+			foreach($tSeries as $iIdSerie=>$sSerie) {
+				$nom_pdf=getRewriteString("Deliberation 2 - Resultats Jury $jury-Serie $sSerie");
+				$_SESSION['cols'][$nom_pdf]=array('id_table'=>html_entity_decode('Num&eacute;ro table'),'candidat'=>'Candidat','etablissement'=>html_entity_decode('&Eacute;tablissement'));
+				$_SESSION['format'][$nom_pdf]=array('taille'=>'A3','orientation'=>'portrait');
+				$_SESSION['options'][$nom_pdf]=$PDF_A3_PORTRAIT;
+				$_SESSION['data'][$nom_pdf]=$tDelib['Oral'][$iIdSerie];
+				$_SESSION['pied'][$nom_pdf]=html_entity_decode("Liste des admissibles (2&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
+				$_SESSION['titre'][$nom_pdf]=html_entity_decode("Autoris&eacute;s aux &eacute;preuves orales (2&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
+				$_SESSION['post'][$nom_pdf]=html_entity_decode("Le pr&eacute;sident du jury,");
+				$tmp1="<A HREF='../plugins/odb/odb_commun/inc-pdf-table.php?pdf=$nom_pdf' target='_BLANK'>";
+				$tmp2=" <b>2<sup>&egrave;re</sup> d&eacute;lib&eacute;ration - Oral</b><br/>Jury $jury s&eacute;rie <b>$sSerie</b></A><br/><br/>";
+				$lien=$tmp1.$tmp2;
+				$msg.="<tr><td>".vignette('pdf',"2&deg; d&eacute;lib&eacute;ration jury $jury s&eacute;rie $sSerie")."</td><td colspan=2>$lien</td></tr>\n";
+			}
+			unset($tDelib['Admissible']);
+			if(is_array($tDelib['Reserve'])) {
+				$tReserve=array();
+				foreach($tDelib['Reserve'] as $iIdSerie=>$tTmp) $tReserve=array_merge($tReserve,$tTmp);
+				unset($tDelib['Reserve']);
+				ksort($tReserve);
+				$nom_pdf=getRewriteString("Deliberation 2 - Cas reserves Jury $jury");
+				$_SESSION['cols'][$nom_pdf]=array('id_table'=>html_entity_decode('Num&eacute;ro table'),'candidat'=>'Candidat','etablissement'=>html_entity_decode('&Eacute;tablissement'));
+				$_SESSION['format'][$nom_pdf]=array('taille'=>'A3','orientation'=>'portrait');
+				$_SESSION['options'][$nom_pdf]=$PDF_A3_PORTRAIT;
+				$_SESSION['data'][$nom_pdf]=$tReserve;
+				$_SESSION['pied'][$nom_pdf]=html_entity_decode("Cas r&eacute;serv&eacute;s (2&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury");
+				$_SESSION['titre'][$nom_pdf]=html_entity_decode("Cas r&eacute;serv&eacute;s (2&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury");
+				$_SESSION['post'][$nom_pdf]=html_entity_decode("Le pr&eacute;sident du jury,");
+				$tmp1="<A HREF='../plugins/odb/odb_commun/inc-pdf-table.php?pdf=$nom_pdf' target='_BLANK'>";
+				$tmp2=" <b>2<sup>&egrave;re</sup> d&eacute;lib&eacute;ration</b> Cas r&eacute;serv&eacute;s<br/>Jury $jury</A><br/><br/>";
+				$lien=$tmp1.$tmp2;
+				$msg.="<tr><td>".vignette('pdf',"2&deg; d&eacute;lib&eacute;ration - Cas reserv&eacute;s - jury $jury")."</td><td colspan=2>$lien</td></tr>\n";
+			}
+			foreach($tSeries as $iIdSerie=>$sSerie) {
+				$nom_pdf=getRewriteString("Deliberation 2 - Admis Jury $jury-Serie $sSerie");
+				$_SESSION['cols'][$nom_pdf]=array('id_table'=>html_entity_decode('Num&eacute;ro table'),'candidat'=>'Candidat','delib'=>'Mention','etablissement'=>html_entity_decode('&Eacute;tablissement'));
+				$_SESSION['format'][$nom_pdf]=array('taille'=>'A3','orientation'=>'portrait');
+				$_SESSION['options'][$nom_pdf]=$PDF_A3_PORTRAIT;
+				//echo"tDelib<pre>";print_r($tDelib);echo"</pre>";
+				$_SESSION['data'][$nom_pdf]=$tDelib['Admis'][$iIdSerie];
+				$_SESSION['pied'][$nom_pdf]=html_entity_decode("Admis 1&deg; groupe (2&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
+				$_SESSION['titre'][$nom_pdf]=html_entity_decode("Admis 1&deg; groupe (2&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
+				$_SESSION['post'][$nom_pdf]=html_entity_decode("Le pr&eacute;sident du jury,");
+				$tmp1="<A HREF='../plugins/odb/odb_commun/inc-pdf-table.php?pdf=$nom_pdf' target='_BLANK'>";
+				$tmp2="<b>Admis 1&deg; groupe</b><br/>Jury $jury s&eacute;rie <b>$sSerie</b></A><br/><br/>";
+				$lien=$tmp1.$tmp2;
+				$msg.="<tr><td>".vignette('pdf',"Admis 1&deg; groupe - Jury $jury s&eacute;rie $sSerie")."</td><td colspan=2>$lien</td></tr>\n";
+			}
+			$verif="onSubmit=\"if(document.forms['form_jury_admis1'].nom_jury.value=='' || document.forms['form_jury_admis1'].nom_jury.value=='Nom')\n".
+			" {alert('Veuillez saisir le nom du president du jury');return false;}\n".
+			"if(document.forms['form_jury_admis1'].lieu_jury.value=='' || document.forms['form_jury_admis1'].lieu_jury.value=='Lieu')\n".
+			" {alert('Veuillez saisir la ville du centre de deliberation');return false;}\n".
+			"if(!bon_format_date(document.forms['form_jury_admis1'].date_jury.value))\n".
+			" {alert('Veuillez saisir une date de deliberation correcte');return false;}\n".
+			"return true;\"";
+			$msg.="<tr><td>".vignette('pdf',"Admis 1er groupe jury $jury")."</td>\n".
+			"<form name='form_jury_admis1' action='../plugins/odb/odb_commun/inc-pdf-resultats.php' $verif method='POST'>\n".
+			"<input type='hidden' name='jury' value='$jury'/>\n".
+			"<input type='hidden' name='deliberation' value='2'/>\n".
+			"<input type='hidden' name='annee' value='$annee'/>\n".
+			"<input type='hidden' name='exec' value='odb_notes'/>\n".
+			"<td><small><label for='nom_jury'>Pr&eacute;sident du jury</label></small><br/>\n<input name='nom_jury' class='fondo' size=10 value='Nom' onFocus=\"this.value=''\"/><br/>\n".
+			"<small><label for='lieu_jury'>Ville de d&eacute;lib&eacute;ration</label></small><br/><input name='lieu_jury' class='fondo' size=10 value='Lieu' onFocus=\"this.value=''\"/><br/>\n".
+			"<small><label for='date_jury'>Date de d&eacute;lib&eacute;ration</label></small><br/><input name='date_jury' class='fondo' size=10 value='$aujourdhui' onFocus=\"this.select();\"/></td>\n".
+			"<td><input type='submit' value='Admis\n1er groupe' class='fondo' /></td></form></tr>\n";
+		}
+	}
+	////////////////////// deliberation 3
+		if($deliberation>2) {
+		odb_maj_decisions($annee,$jury,$iPrecision,3);
+		$msg.="<tr><td colspan=3><hr size=1/><b>3<sup>&egrave;me</sup></b> d&eacute;lib&eacute;ration<hr size=1/></td></tr>\n";
 
-	$sql="SELECT count(*) nb from odb_candidats can, odb_repartition rep, odb_ref_ef ef, odb_decisions decis\n".
-	"WHERE can.id_saisie=rep.id_saisie and can.annee=$annee and rep.annee=$annee and decis.annee=$annee and rep.id_table=decis.id_table\n".
-	" and can.ef2=ef.id and rep.jury=$jury and decis.delib1='Admissible'";
-	$result=odb_query($sql,__FILE__,__LINE__);
-	$row=mysql_fetch_array($result);
-	$nbEf2Theorie=$row['nb'];
-	//echo "nbEf2Theorie : $nbEf2Theorie<pre>$sql</pre>";
-	$sql="SELECT count(*) nb from odb_notes notes, odb_candidats can, odb_repartition rep, odb_ref_ef ef, odb_decisions decis\n".
-	"WHERE can.id_saisie=rep.id_saisie and can.annee=$annee and rep.annee=$annee and notes.annee=$annee and decis.annee=$annee and rep.id_table=decis.id_table\n".
-	" and can.ef2=ef.id and notes.id_table=can.id_table and rep.jury=$jury and decis.delib1='Admissible' and notes.id_matiere=".ID_MATIERE_EF2;
-	$result=odb_query($sql,__FILE__,__LINE__);
-	$row=mysql_fetch_array($result);
-	$nbEf2Pratique=$row['nb'];
-	//echo "nbEf2Pratique : $nbEf2Pratique<pre>$sql</pre>";
-	$sTmp='<br/>Pour les candidats absents, <b>saisissez 0</b>.';
-	if($nbEpsPratique<$nbEpsTheorie) $msg.="<tr><td colspan=3 style='color:#f00;'>Veuillez saisir toutes les notes d'<b>EPS</b> du jury $jury $sTmp</td></tr>\n";
-	elseif($nbEf1Pratique<$nbEf1Theorie) $msg.="<tr><td colspan=3 style='color:#f00;'>Veuillez saisir toutes les notes d'<b>EF1</b> du jury $jury $sTmp</td></tr>\n";
-	elseif($nbEf2Pratique<$nbEf2Theorie) $msg.="<tr><td colspan=3 style='color:#f00;'>Veuillez saisir toutes les notes d'<b>EF2</b> du jury $jury $sTmp</td></tr>\n";
-	else {
-		odb_maj_decisions($annee,$jury,$iPrecision,2);
-		$sql="SELECT decis.id_table, sex.sexe, pre.prefixe, nom, prenoms, eta.etablissement, can.serie idSerie, decis.delib2 delib\n".
+		$sql="SELECT decis.id_table, sex.sexe, pre.prefixe, nom, prenoms, eta.etablissement, can.serie idSerie, decis.delib3 delib\n".
 		"FROM odb_ref_sexe sex, odb_ref_etablissement eta, odb_decisions decis, odb_repartition rep, odb_candidats can\n".
 		"left join odb_ref_prefixe pre on pre.id=can.prefixe\n".
 		"WHERE rep.id_table=decis.id_table and can.id_table=decis.id_table and can.sexe=sex.id and can.etablissement=eta.id\n".
-		" and decis.delib1='Admissible' and can.annee=$annee and decis.annee=$annee and rep.annee=$annee and rep.jury=$jury\n".
+		" and decis.delib1='Admissible' and (decis.delib2='Oral' or decis.delib2='Reserve') and can.annee=$annee and decis.annee=$annee and rep.annee=$annee and rep.jury=$jury\n".
 		"ORDER BY nom, prenoms";
 		//echo $sql;
 		$result=odb_query($sql,__FILE__,__LINE__);
 		$cpt=0;
+		$tDelib=array();
 		while($row=mysql_fetch_array($result)) {
 			$cpt++;
 			foreach(array('id_table','sexe','prefixe','nom','prenoms','etablissement','idSerie','delib') as $col) $$col=$row[$col];
@@ -489,154 +536,63 @@ function afficherImpressions($jury,$serie,$annee,$tSeries,$iPrecision=3) {
 			$tDelib[$cle][$idSerie][$cpt]['etablissement']=utf8_decode($etablissement);
 			$tDelib[$cle][$idSerie][$cpt]['delib']=utf8_decode($delib);
 		}
-
-		foreach($tSeries as $iIdSerie=>$sSerie) {
-			$nom_pdf=getRewriteString("Deliberation 2 - Resultats Jury $jury-Serie $sSerie");
-			$_SESSION['cols'][$nom_pdf]=array('id_table'=>html_entity_decode('Num&eacute;ro table'),'candidat'=>'Candidat','etablissement'=>html_entity_decode('&Eacute;tablissement'));
-			$_SESSION['format'][$nom_pdf]=array('taille'=>'A3','orientation'=>'portrait');
-			$_SESSION['options'][$nom_pdf]=$PDF_A3_PORTRAIT;
-			$_SESSION['data'][$nom_pdf]=$tDelib['Oral'][$iIdSerie];
-			$_SESSION['pied'][$nom_pdf]=html_entity_decode("Liste des admissibles (2&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
-			$_SESSION['titre'][$nom_pdf]=html_entity_decode("Autoris&eacute;s aux &eacute;preuves orales (2&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
-			$_SESSION['post'][$nom_pdf]=html_entity_decode("Le pr&eacute;sident du jury,");
-			$tmp1="<A HREF='../plugins/odb/odb_commun/inc-pdf-table.php?pdf=$nom_pdf' target='_BLANK'>";
-			$tmp2=" <b>2<sup>&egrave;re</sup> d&eacute;lib&eacute;ration - Oral</b><br/>Jury $jury s&eacute;rie <b>$sSerie</b></A><br/><br/>";
-			$lien=$tmp1.$tmp2;
-			$msg.="<tr><td>".vignette('pdf',"2&deg; d&eacute;lib&eacute;ration jury $jury s&eacute;rie $sSerie")."</td><td colspan=2>$lien</td></tr>\n";
-		}
-		unset($tDelib['Admissible']);
+		//echo"<pre>";print_r($tDelib);echo"</pre>";
 		if(is_array($tDelib['Reserve'])) {
 			$tReserve=array();
 			foreach($tDelib['Reserve'] as $iIdSerie=>$tTmp) $tReserve=array_merge($tReserve,$tTmp);
 			unset($tDelib['Reserve']);
 			ksort($tReserve);
-			$nom_pdf=getRewriteString("Deliberation 2 - Cas reserves Jury $jury");
+			$nom_pdf=getRewriteString("Deliberation 2 - Cas reserves Jury $jury-Serie $sSerie");
 			$_SESSION['cols'][$nom_pdf]=array('id_table'=>html_entity_decode('Num&eacute;ro table'),'candidat'=>'Candidat','etablissement'=>html_entity_decode('&Eacute;tablissement'));
 			$_SESSION['format'][$nom_pdf]=array('taille'=>'A3','orientation'=>'portrait');
 			$_SESSION['options'][$nom_pdf]=$PDF_A3_PORTRAIT;
 			$_SESSION['data'][$nom_pdf]=$tReserve;
-			$_SESSION['pied'][$nom_pdf]=html_entity_decode("Cas r&eacute;serv&eacute;s (2&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury");
-			$_SESSION['titre'][$nom_pdf]=html_entity_decode("Cas r&eacute;serv&eacute;s (2&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury");
+			$_SESSION['pied'][$nom_pdf]=html_entity_decode("Cas r&eacute;serv&eacute;s (3&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
+			$_SESSION['titre'][$nom_pdf]=html_entity_decode("Cas r&eacute;serv&eacute;s (3&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
 			$_SESSION['post'][$nom_pdf]=html_entity_decode("Le pr&eacute;sident du jury,");
 			$tmp1="<A HREF='../plugins/odb/odb_commun/inc-pdf-table.php?pdf=$nom_pdf' target='_BLANK'>";
-			$tmp2=" <b>2<sup>&egrave;re</sup> d&eacute;lib&eacute;ration</b> Cas r&eacute;serv&eacute;s<br/>Jury $jury</A><br/><br/>";
+			$tmp2=" <b>3<sup>&egrave;re</sup> d&eacute;lib&eacute;ration</b> Cas r&eacute;serv&eacute;s<br/>Jury $jury s&eacute;rie <b>$sSerie</b></A><br/><br/>";
 			$lien=$tmp1.$tmp2;
-			$msg.="<tr><td>".vignette('pdf',"2&deg; d&eacute;lib&eacute;ration - Cas reserv&eacute;s - jury $jury")."</td><td colspan=2>$lien</td></tr>\n";
+			$msg.="<tr><td>".vignette('pdf',"3&deg; d&eacute;lib&eacute;ration - Cas reserv&eacute;s - jury $jury s&eacute;rie $sSerie")."</td><td colspan=2>$lien</td></tr>\n";
 		}
+		reset($tSeries);
 		foreach($tSeries as $iIdSerie=>$sSerie) {
-			$nom_pdf=getRewriteString("Deliberation 2 - Admis Jury $jury-Serie $sSerie");
+			$nom_pdf=getRewriteString("Deliberation 3 - Admis Jury $jury-Serie $sSerie");
 			$_SESSION['cols'][$nom_pdf]=array('id_table'=>html_entity_decode('Num&eacute;ro table'),'candidat'=>'Candidat','delib'=>'Mention','etablissement'=>html_entity_decode('&Eacute;tablissement'));
 			$_SESSION['format'][$nom_pdf]=array('taille'=>'A3','orientation'=>'portrait');
 			$_SESSION['options'][$nom_pdf]=$PDF_A3_PORTRAIT;
 			//echo"tDelib<pre>";print_r($tDelib);echo"</pre>";
 			$_SESSION['data'][$nom_pdf]=$tDelib['Admis'][$iIdSerie];
-			$_SESSION['pied'][$nom_pdf]=html_entity_decode("Admis 1&deg; groupe (2&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
-			$_SESSION['titre'][$nom_pdf]=html_entity_decode("Admis 1&deg; groupe (2&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
+			$_SESSION['pied'][$nom_pdf]=html_entity_decode("Admis 2&deg; groupe (3&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
+			$_SESSION['titre'][$nom_pdf]=html_entity_decode("Admis 2&deg; groupe (3&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
 			$_SESSION['post'][$nom_pdf]=html_entity_decode("Le pr&eacute;sident du jury,");
 			$tmp1="<A HREF='../plugins/odb/odb_commun/inc-pdf-table.php?pdf=$nom_pdf' target='_BLANK'>";
-			$tmp2="<b>Admis 1&deg; groupe</b><br/>Jury $jury s&eacute;rie <b>$sSerie</b></A><br/><br/>";
+			$tmp2="<b>Admis 2&deg; groupe</b><br/>Jury $jury s&eacute;rie <b>$sSerie</b></A><br/><br/>";
 			$lien=$tmp1.$tmp2;
-			$msg.="<tr><td>".vignette('pdf',"Admis 1&deg; groupe - Jury $jury s&eacute;rie $sSerie")."</td><td colspan=2>$lien</td></tr>\n";
+			$msg.="<tr><td>".vignette('pdf',"Admis 2&deg; groupe - Jury $jury s&eacute;rie $sSerie")."</td><td colspan=2>$lien</td></tr>\n";
 		}
-		$verif="onSubmit=\"if(document.forms['form_jury_admis1'].nom_jury.value=='' || document.forms['form_jury_admis1'].nom_jury.value=='Nom')\n".
-		" {alert('Veuillez saisir le nom du president du jury');return false;}\n".
-		"if(document.forms['form_jury_admis1'].lieu_jury.value=='' || document.forms['form_jury_admis1'].lieu_jury.value=='Lieu')\n".
-		" {alert('Veuillez saisir la ville du centre de deliberation');return false;}\n".
-		"if(!bon_format_date(document.forms['form_jury_admis1'].date_jury.value))\n".
-		" {alert('Veuillez saisir une date de deliberation correcte');return false;}\n".
-		"return true;\"";
-		$msg.="<tr><td>".vignette('pdf',"Admis 1er groupe jury $jury")."</td>\n".
-		"<form name='form_jury_admis1' action='../plugins/odb/odb_commun/inc-pdf-resultats.php' $verif method='POST'>\n".
-		"<input type='hidden' name='jury' value='$jury'/>\n".
-		"<input type='hidden' name='deliberation' value='2'/>\n".
-		"<input type='hidden' name='annee' value='$annee'/>\n".
-		"<input type='hidden' name='exec' value='odb_notes'/>\n".
-		"<td><small><label for='nom_jury'>Pr&eacute;sident du jury</label></small><br/>\n<input name='nom_jury' class='fondo' size=10 value='Nom' onFocus=\"this.value=''\"/><br/>\n".
-		"<small><label for='lieu_jury'>Ville de d&eacute;lib&eacute;ration</label></small><br/><input name='lieu_jury' class='fondo' size=10 value='Lieu' onFocus=\"this.value=''\"/><br/>\n".
-		"<small><label for='date_jury'>Date de d&eacute;lib&eacute;ration</label></small><br/><input name='date_jury' class='fondo' size=10 value='$aujourdhui' onFocus=\"this.select();\"/></td>\n".
-		"<td><input type='submit' value='Admis\n1er groupe' class='fondo' /></td></form></tr>\n";
+		if(is_array($tDelib['Admis'])) {
+			$verif="onSubmit=\"if(document.forms['form_jury_admis2'].nom_jury.value=='' || document.forms['form_jury_admis2'].nom_jury.value=='Nom')\n".
+			" {alert('Veuillez saisir le nom du president du jury');return false;}\n".
+			"if(document.forms['form_jury_admis2'].lieu_jury.value=='' || document.forms['form_jury_admis2'].lieu_jury.value=='Lieu')\n".
+			" {alert('Veuillez saisir la ville du centre de deliberation');return false;}\n".
+			"if(!bon_format_date(document.forms['form_jury_admis2'].date_jury.value))\n".
+			" {alert('Veuillez saisir une date de deliberation correcte');return false;}\n".
+			"return true;\"";
+			$msg.="<tr><td>".vignette('pdf',"Admis 2e groupe jury $jury")."</td>\n".
+			"<form name='form_jury_admis2' action='../plugins/odb/odb_commun/inc-pdf-resultats.php' $verif method='POST'>\n".
+			"<input type='hidden' name='jury' value='$jury'/>\n".
+			"<input type='hidden' name='deliberation' value='3'/>\n".
+			"<input type='hidden' name='annee' value='$annee'/>\n".
+			"<input type='hidden' name='exec' value='odb_notes'/>\n".
+			"<td><small><label for='nom_jury'>Pr&eacute;sident du jury</label></small><br/>\n<input name='nom_jury' class='fondo' size=10 value='Nom' onFocus=\"this.value=''\"/><br/>\n".
+			"<small><label for='lieu_jury'>Ville de d&eacute;lib&eacute;ration</label></small><br/><input name='lieu_jury' class='fondo' size=10 value='Lieu' onFocus=\"this.value=''\"/><br/>\n".
+			"<small><label for='date_jury'>Date de d&eacute;lib&eacute;ration</label></small><br/><input name='date_jury' class='fondo' size=10 value='$aujourdhui' onFocus=\"this.select();\"/></td>\n".
+			"<td><input type='submit' value='Admis\n2e groupe' class='fondo' /></td></form></tr>\n";
+		}
 	}
-	////////////////////// deliberation 3
-	odb_maj_decisions($annee,$jury,$iPrecision,3);
-	$msg.="<tr><td colspan=3><hr size=1/><b>3<sup>&egrave;me</sup></b> d&eacute;lib&eacute;ration<hr size=1/></td></tr>\n";
-
-	$sql="SELECT decis.id_table, sex.sexe, pre.prefixe, nom, prenoms, eta.etablissement, can.serie idSerie, decis.delib3 delib\n".
-	"FROM odb_ref_sexe sex, odb_ref_etablissement eta, odb_decisions decis, odb_repartition rep, odb_candidats can\n".
-	"left join odb_ref_prefixe pre on pre.id=can.prefixe\n".
-	"WHERE rep.id_table=decis.id_table and can.id_table=decis.id_table and can.sexe=sex.id and can.etablissement=eta.id\n".
-	" and decis.delib1='Admissible' and (decis.delib2='Oral' or decis.delib2='Reserve') and can.annee=$annee and decis.annee=$annee and rep.annee=$annee and rep.jury=$jury\n".
-	"ORDER BY nom, prenoms";
-	//echo $sql;
-	$result=odb_query($sql,__FILE__,__LINE__);
-	$cpt=0;
-	$tDelib=array();
-	while($row=mysql_fetch_array($result)) {
-		$cpt++;
-		foreach(array('id_table','sexe','prefixe','nom','prenoms','etablissement','idSerie','delib') as $col) $$col=$row[$col];
-		$id_table=getIdTableHumain($id_table);
-		$nom=$prefixe." <b>$nom</b>";
-		if($sexe=='F') $sexe='Mlle'; else $sexe='M.';
-		if(in_array(strtolower($delib),array('passable','abien','bien','tbien'))) $cle='Admis';
-		else $cle=$delib;
-		$tDelib[$cle][$idSerie][$cpt]['id_table']=$id_table;
-		$tDelib[$cle][$idSerie][$cpt]['candidat']=utf8_decode("$sexe $nom $prenoms");
-		$tDelib[$cle][$idSerie][$cpt]['etablissement']=utf8_decode($etablissement);
-		$tDelib[$cle][$idSerie][$cpt]['delib']=utf8_decode($delib);
-	}
-	//echo"<pre>";print_r($tDelib);echo"</pre>";
-	if(is_array($tDelib['Reserve'])) {
-		$tReserve=array();
-		foreach($tDelib['Reserve'] as $iIdSerie=>$tTmp) $tReserve=array_merge($tReserve,$tTmp);
-		unset($tDelib['Reserve']);
-		ksort($tReserve);
-		$nom_pdf=getRewriteString("Deliberation 2 - Cas reserves Jury $jury-Serie $sSerie");
-		$_SESSION['cols'][$nom_pdf]=array('id_table'=>html_entity_decode('Num&eacute;ro table'),'candidat'=>'Candidat','etablissement'=>html_entity_decode('&Eacute;tablissement'));
-		$_SESSION['format'][$nom_pdf]=array('taille'=>'A3','orientation'=>'portrait');
-		$_SESSION['options'][$nom_pdf]=$PDF_A3_PORTRAIT;
-		$_SESSION['data'][$nom_pdf]=$tReserve;
-		$_SESSION['pied'][$nom_pdf]=html_entity_decode("Cas r&eacute;serv&eacute;s (3&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
-		$_SESSION['titre'][$nom_pdf]=html_entity_decode("Cas r&eacute;serv&eacute;s (3&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
-		$_SESSION['post'][$nom_pdf]=html_entity_decode("Le pr&eacute;sident du jury,");
-		$tmp1="<A HREF='../plugins/odb/odb_commun/inc-pdf-table.php?pdf=$nom_pdf' target='_BLANK'>";
-		$tmp2=" <b>3<sup>&egrave;re</sup> d&eacute;lib&eacute;ration</b> Cas r&eacute;serv&eacute;s<br/>Jury $jury s&eacute;rie <b>$sSerie</b></A><br/><br/>";
-		$lien=$tmp1.$tmp2;
-		$msg.="<tr><td>".vignette('pdf',"3&deg; d&eacute;lib&eacute;ration - Cas reserv&eacute;s - jury $jury s&eacute;rie $sSerie")."</td><td colspan=2>$lien</td></tr>\n";
-	}
-	reset($tSeries);
-	foreach($tSeries as $iIdSerie=>$sSerie) {
-		$nom_pdf=getRewriteString("Deliberation 3 - Admis Jury $jury-Serie $sSerie");
-		$_SESSION['cols'][$nom_pdf]=array('id_table'=>html_entity_decode('Num&eacute;ro table'),'candidat'=>'Candidat','delib'=>'Mention','etablissement'=>html_entity_decode('&Eacute;tablissement'));
-		$_SESSION['format'][$nom_pdf]=array('taille'=>'A3','orientation'=>'portrait');
-		$_SESSION['options'][$nom_pdf]=$PDF_A3_PORTRAIT;
-		//echo"tDelib<pre>";print_r($tDelib);echo"</pre>";
-		$_SESSION['data'][$nom_pdf]=$tDelib['Admis'][$iIdSerie];
-		$_SESSION['pied'][$nom_pdf]=html_entity_decode("Admis 2&deg; groupe (3&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
-		$_SESSION['titre'][$nom_pdf]=html_entity_decode("Admis 2&deg; groupe (3&deg; d&eacute;lib&eacute;ration) - ann&eacute;e $annee - jury $jury - s&eacute;rie $sSerie");
-		$_SESSION['post'][$nom_pdf]=html_entity_decode("Le pr&eacute;sident du jury,");
-		$tmp1="<A HREF='../plugins/odb/odb_commun/inc-pdf-table.php?pdf=$nom_pdf' target='_BLANK'>";
-		$tmp2="<b>Admis 2&deg; groupe</b><br/>Jury $jury s&eacute;rie <b>$sSerie</b></A><br/><br/>";
-		$lien=$tmp1.$tmp2;
-		$msg.="<tr><td>".vignette('pdf',"Admis 2&deg; groupe - Jury $jury s&eacute;rie $sSerie")."</td><td colspan=2>$lien</td></tr>\n";
-	}
-	if(is_array($tDelib['Admis'])) {
-		$verif="onSubmit=\"if(document.forms['form_jury_admis2'].nom_jury.value=='' || document.forms['form_jury_admis2'].nom_jury.value=='Nom')\n".
-		" {alert('Veuillez saisir le nom du president du jury');return false;}\n".
-		"if(document.forms['form_jury_admis2'].lieu_jury.value=='' || document.forms['form_jury_admis2'].lieu_jury.value=='Lieu')\n".
-		" {alert('Veuillez saisir la ville du centre de deliberation');return false;}\n".
-		"if(!bon_format_date(document.forms['form_jury_admis2'].date_jury.value))\n".
-		" {alert('Veuillez saisir une date de deliberation correcte');return false;}\n".
-		"return true;\"";
-		$msg.="<tr><td>".vignette('pdf',"Admis 2e groupe jury $jury")."</td>\n".
-		"<form name='form_jury_admis2' action='../plugins/odb/odb_commun/inc-pdf-resultats.php' $verif method='POST'>\n".
-		"<input type='hidden' name='jury' value='$jury'/>\n".
-		"<input type='hidden' name='deliberation' value='3'/>\n".
-		"<input type='hidden' name='annee' value='$annee'/>\n".
-		"<input type='hidden' name='exec' value='odb_notes'/>\n".
-		"<td><small><label for='nom_jury'>Pr&eacute;sident du jury</label></small><br/>\n<input name='nom_jury' class='fondo' size=10 value='Nom' onFocus=\"this.value=''\"/><br/>\n".
-		"<small><label for='lieu_jury'>Ville de d&eacute;lib&eacute;ration</label></small><br/><input name='lieu_jury' class='fondo' size=10 value='Lieu' onFocus=\"this.value=''\"/><br/>\n".
-		"<small><label for='date_jury'>Date de d&eacute;lib&eacute;ration</label></small><br/><input name='date_jury' class='fondo' size=10 value='$aujourdhui' onFocus=\"this.select();\"/></td>\n".
-		"<td><input type='submit' value='Admis\n2e groupe' class='fondo' /></td></form></tr>\n";
-	}
+	
+	
 	$msg.="</table>\n";
 	return $msg;
 }
