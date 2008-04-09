@@ -37,9 +37,10 @@ function cs_initialisation($forcer=false) {
 	global $cs_metas_pipelines, $metas_outils;
 	$rand = sprintf('[#%04x] ', rand());
 	static $deja_passe_ici;
+	$mysql=function_exists('mysql_get_client_info')?' - MYSQL v'.mysql_get_client_info():'';
 	if (!intval($deja_passe_ici))
 		cs_log("#### 1er PASSAGE $rand################################# - \$forcer = ".intval($forcer)
-			. "\n{$rand}version PHP courante : ".phpversion()." - Versions SPIP (base/code) : {$GLOBALS['spip_version']}/{$GLOBALS['spip_version_code']}");
+			. "\n{$rand}PHP v".phpversion()."$mysql - base SPIP v$GLOBALS[spip_version] - code SPIP v$GLOBALS[spip_version_code]");
 	$deja_passe_ici++;
 	// si les metas ne sont pas lus, on les lit
 cs_log("{$rand}cs_initialisation($forcer) : Passage #$deja_passe_ici");
