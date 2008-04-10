@@ -322,7 +322,7 @@ if(isset($_REQUEST["step2"])) {
 		$isNouveau=true; // insertion d'un nouveau candidat
 		$identifiant='id_saisie';
 	} elseif(!is_numeric($id)) {//numero de table
-   	$id=getIdTableHumain($id);
+   	//$id=getIdTableHumain($id);
    	$identifiant='id_table';
    } else {
    	$identifiant='id_saisie'; //champ
