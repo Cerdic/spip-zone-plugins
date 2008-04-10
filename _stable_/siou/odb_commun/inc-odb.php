@@ -187,7 +187,7 @@ function odb_maj_decisions($annee,$jury=0,$iPrecision=3,$deliberation=1) {
 		$tSql[]="UPDATE odb_decisions notes $from_jury SET notes.delib1 = 'Ajourne' WHERE 0<=moyenne and moyenne < 5 $where_jury and notes.annee=$annee";
 		$tSql[]="UPDATE odb_decisions notes $from_jury SET notes.delib1 = 'Refuse' WHERE 5<=moyenne and moyenne < 9 $where_jury and notes.annee=$annee";
 		$tSql[]="UPDATE odb_decisions notes $from_jury SET notes.delib1 = 'Admissible' WHERE moyenne >= 9 $where_jury and notes.annee=$annee";
-		//TODO rendre parametrable : on refuse les candidats ayant eu un 0 et moins de 10
+		//TODO rendre parametrable : on refuse les candidats ayant eu un 0 et moins de 10 en Ecrit ou en Pratique (il est donc possible d'avoir 0 en Divers ou en Oral)
 		$tSql[]="update odb_decisions decis, odb_notes notes $from_jury\n SET delib1='Refuse'\n".
 		"WHERE decis.delib1 = 'Admissible' AND decis.id_table = notes.id_table\n AND notes.note=0 AND notes.type!='Divers' AND notes.type!='Oral' AND moyenne<10\n".
 		" AND decis.annee=$annee AND notes.annee=$annee $where_jury";
@@ -223,7 +223,8 @@ function odb_maj_decisions($annee,$jury=0,$iPrecision=3,$deliberation=1) {
 			//echo mysql_affected_rows()." lignes :<pre>$sql</pre>\n";
 		}
 	} elseif ($deliberation==3) {
-		$sql="SELECT notes.id_table, note, id_matiere, notes.coeff\n from odb_notes notes, odb_decisions decis $from_jury\n where decis.id_table=notes.id_table and delib2='Oral' and delib3='-' and notes.type='Oral' $where_jury";
+		$sql="SELECT notes.id_table, note, id_matiere, notes.coeff\n from odb_notes notes, odb_decisions decis $from_jury\n"
+			." where decis.id_table=notes.id_table and delib2='Oral' and delib3='-' and notes.type='Oral' $where_jury";
 		//die("<pre>$sql");
 		$result=odb_query($sql,__FILE__,__LINE__);
 		$tCR=array();
@@ -257,6 +258,8 @@ function odb_maj_decisions($annee,$jury=0,$iPrecision=3,$deliberation=1) {
 			}
 		}
 		$sql="UPDATE odb_decisions notes $from_jury SET delib3='Reserve'\n where delib2='Reserve' and delib1='Admissible' $where_jury";
+		odb_query($sql,__FILE__,__LINE__);
+		$sql="UPDATE odb_decisions notes $from_jury SET delib3='Refuse' WHERE delib3='Passable' AND ROUND(moyenne,2)<10 $where_jury";
 		odb_query($sql,__FILE__,__LINE__);
 		return mysql_affected_rows();
 
