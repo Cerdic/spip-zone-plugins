@@ -1,29 +1,60 @@
 <script type="text/javascript" src="#CHEMIN{javascript/md5_inscription2.js}"></script>
+<script type="text/javascript" src="#CHEMIN{lib/jquery-validate/jquery.validate.js}"></script>
+<script type="text/javascript">
+jQuery().ready(function() {
+	// validate signup form on keyup and submit
+	jQuery("#validation").validate({
+		event: "keyup",
+		errorPlacement: function(error, element) {
+			error.appendTo( element.parent("div") ).after("");
+		},
+		rules: {
+			pass1: {
+				required: true,
+				minLength: 5
+			},
+			pass2: {
+				required: true,
+				minlength: 5,
+				equalTo: "#pass1"
+			}
+		},
+		messages: {
+			pass1: {
+				required: "Inscrivez un mot de passe",
+				minlength: "Votre mot de passe doit comporter au moins 5 caract&egrave;res"
+			},
+			pass2: {
+				required: "Inscrivez un mot de passe",
+				minlength: "Votre mot de passe doit comporter au moins 5 caract&egrave;res",
+				equalTo: "Veuillez entrer le m&ecirc;me mot de passe que pr&eacute;c&eacute;demment."
+			}
+		}
+	});
+});
+
+</script>
+
+
 <script type="text/javascript">
 <!--
   function cryptage() {
-    if(document.password.pass1.value == document.password.pass2.value){
-		str = document.password.pass1.value;
-		document.password.pass.value = MD5(str);
-		document.password.pass2.value = '';
-		document.password.pass1.value = '';
-	}else{
-		document.password.pass1.value = '';
-		document.password.pass2.value = '';
-	}
-  }
+		str = jQuery('#pass1').val();
+		valfinale = MD5(str);
+		jQuery('#pass').val(valfinale);
+}
 // -->
 </script>
 
-<form name='password' method='post' action="#SELF" class="formulaire_spip" >
-	<p><label for="pass1"><:pass_choix_pass:></label>
-	<input type='password' class="forml" name='pass1' id='pass1'></p>
+<form id="validation" method="post" action="#SELF" class="formulaire_spip">
+	<div><label for="pass1"><:pass_choix_pass:></label>
+	<input type='password' class="forml" name='pass1' id='pass1' /></div>
 	
-	<p><label for="pass2"><:inscription2:redemande_password:></label>
-	<input type='password' class="forml" name='' id='pass2'>
-	<input type='password' name='pass' id='pass' style="display:none;"></p>
+	<div><label for="pass2"><:inscription2:redemande_password:></label>
+	<input type='password' class="forml" name='pass2' id='pass2' />
+	<input type='hidden' name='pass' id='pass' value="" /></div>
 	
 	<p class="spip_bouton">
-		<input onClick="cryptage();" type="submit" value="<:bouton_valider:>" />
+		<input type="submit" onclick="cryptage()" value="<:bouton_valider:>" />
 	</p>
 </form>
