@@ -331,7 +331,7 @@ function exec_odb_notes() {
 				. " ORDER BY jury, departement, centre, ser.serie, id_anonyme, duree, examen";
 				break;
 			default:
-				$sql="SELECT id_table id\n FROM odb_notes\n WHERE annee=$annee and id_matiere=$id_matiere and jury=$jury and id_serie=$id_serie and type='$type'";
+				$sql="SELECT id_table id, note, coeff\n FROM odb_notes\n WHERE annee=$annee and id_matiere=$id_matiere and jury=$jury and id_serie=$id_serie and type='$type'";
 		}
 	}
 	//echo $sql;
