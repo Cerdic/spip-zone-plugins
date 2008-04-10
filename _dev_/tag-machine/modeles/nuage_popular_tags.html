@@ -49,7 +49,7 @@
 		[(#SET{unite,[(#GET{score}|floor)]})]
 		[(#SET{decimale,[(#GET{score}|moins{#GET{unite}}|mult{10}|floor)]})]
 		<li>
-			<span style="font-size: #GET{unite}[.(#GET{decimale})]em;">#TITRE</span>
+			<span style="font-size: #GET{unite}[.(#GET{decimale})]em;">#TITRE*</span>
 		</li>
 	]</BOUCLE_mots>
 </ul>
