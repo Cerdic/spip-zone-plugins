@@ -1,0 +1,52 @@
+<script type='text/javascript' src='#CHEMIN{javascript/iutil.js}'></script>
+<script type='text/javascript' src='#CHEMIN{javascript/iautocompleter.js}'></script>
+<style type="text/css" media="all">@import "#CHEMIN{css/etiquettes.css}";</style>
+<script  type="text/javascript">
+<!--
+	var appliquer_selecteur_cherche_mot = function() {
+
+		// chercher l'input de saisie
+		var input = jQuery('#etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}');
+
+		// ne pas reappliquer si on vient seulement de charger les suggestions
+		if (!input || input.autoCFG) return;
+
+		// attacher l'autocompleter
+		jQuery(input)
+			.Autocomplete({
+				'source': '[(#URL_PAGE{etiquettes_selecteur}|parametre_url{groupe,#ENV{groupe},&})]'+'&cle_objet=#ENV{cle_objet}&#ENV{cle_objet}=#ENV{id_objet}',
+				'delay': 200,
+				'autofill': false,
+				'helperClass': "autocompleter",
+				'selectClass': "selectAutocompleter",
+				'minchars': 2,
+				'mustMatch': true,
+				'inputWidth': true,
+				'cacheLength': 20,
+				'multiple' : true,
+				'multipleSeparator' : " ",
+				'fx' : {type: "fade", duration: 400},
+				'onShow' :
+					function(suggestionBox, suggestionIframe) {
+						
+					},
+				'onSelect':
+					function(li) {
+						if (li.id > 0) {
+							jQuery(input)
+								.end();
+						}
+						if ((li.value.indexOf(' ') != -1) || (li.value.indexOf(',') != -1) || (li.value.indexOf('"') != -1)){
+							li.value = "&quot;"+li.value+"&quot;";
+						}
+						return li;
+					}
+			});
+		jQuery('.autocompleter, .selectAutocompleter').css('opacity',0.7);
+		
+	}
+	
+	jQuery(document).ready(appliquer_selecteur_cherche_mot);
+	onAjaxLoad(function(){setTimeout(appliquer_selecteur_cherche_mot, 200);});
+// -->
+</script>

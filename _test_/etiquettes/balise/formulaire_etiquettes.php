@@ -86,13 +86,13 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 						)
 					), '');
 		}else{
-			// sinon l'objet vient du contexte donc pas de vérification de l'objet
+			// sinon on prend du contexte
 			$id_objet = intval($args[0]);
 			$type_objet = $pilpil->boucles[$pilpil->id_boucle]->id_table;
 			$cle_objet = id_table_objet($type_objet);
 			
 			// mais on vérifie si la balise est effectivement dans un contexte
-			if($id_objet <= 0)
+			if(!$type_objet OR $id_objet <= 0)
 				return erreur_squelette(
 					_T('zbug_champ_hors_boucle',
 						array (
@@ -172,10 +172,13 @@ function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide, $remplacer
 				);
 				while ($mot = sql_fetch($reponse)){
 				
+					// S'il y a des espaces ou virgules on entoure de guillemets
 					if (strcspn($mot['titre'], ' ,"') != strlen($mot['titre']))
 						$etiquettes .= " &quot;".entites_html($mot['titre'])."&quot;";
+					// Sinon on renvoie tel quel
 					else
-						$etiquettes .= entites_html($mot['titre']);
+						$etiquettes .= " ".entites_html($mot['titre']);
+					// Enfin en vire les éventuels espaces en trop
 					$etiquettes = trim($etiquettes);
 				
 				}
@@ -201,6 +204,7 @@ function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide, $remplacer
 			'aide' => $aide,
 			'remplacer' => $remplacer,
 			'type_objet' => $type_objet,
+			'cle_objet' => $cle_objet,
 			'id_objet' => $id_objet,
 			'proposer_login' => $proposer_login,
 			'etiquettes' => $etiquettes

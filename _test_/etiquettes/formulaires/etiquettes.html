@@ -46,7 +46,9 @@
 				</label>
 			</p>
 			
-			
+			[(#ENV{aide}|=={ajax}|?{' '})
+				<INCLURE{fond=fonds/etiquettes_aide_ajax}{groupe=#ENV{groupe}}{type_objet=#ENV{type_objet}}{cle_objet=#ENV{cle_objet}}{id_objet=#ENV{id_objet}}>
+			]
 			
 			<p class="spip_bouton">
 				<input type="submit"

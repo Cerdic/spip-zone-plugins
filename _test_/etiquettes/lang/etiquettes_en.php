@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'se_deconnecter' => 'You can log out by clicking here.',
 
 'zbug_et_parametre_manquant' => ' and you have not specified, in the parameters, the object which must be linked.<br/>=&gt; Read the doc !',
-'zbug_objet_existe_pas' => 'The object (@type@, @id@) specified in the parameters of @champ@ does not exist.',
+'zbug_objet_existe_pas' => 'The object (@type@, @id@), specified for @champ@, does not exist.',
 'zbug_pas_de_table_mots' => 'You choose linking tags to an object of type "@type@" but a table "mots_@type@" doesn\'t exist.'
 
 );
