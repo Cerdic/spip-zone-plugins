@@ -56,7 +56,9 @@ function Indexation_recherche_sql($recherche) {
 	return $points;
 }
 
-if ($GLOBALS['spip_version'] >= 11172)
+if ($GLOBALS['spip_version'] >= 11268)
+	include_spip('inc/prepare_recherche_11268');
+elseif ($GLOBALS['spip_version'] >= 11172)
 	include_spip('inc/prepare_recherche_11172');
 else
 	include_spip('inc/prepare_recherche_11171');
