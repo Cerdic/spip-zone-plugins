@@ -161,4 +161,105 @@ function leveeAnonymat($annee, $jury) {
 	else return false;
 }
 
+/**
+ * Met les decisions a jour
+ *
+ * @param int $annee
+ * @param int $jury : jury dont il faut mettre les decicions a jour (tous par defaut)
+ * @param int $iPrecision : precision de la moyenne (1 par defaut)
+ * @param $deliberation : numero de la deliberation qu'on veut mettre a jour (les deliberations precedentes doivent avoir ete mises a jour)
+ */
+function odb_maj_decisions($annee,$jury=0,$iPrecision=3,$deliberation=1) {
+	if($jury>0) {
+		$from_jury=", odb_repartition rep";
+		$where_jury=" AND rep.id_table=notes.id_table and rep.annee = $annee and rep.jury=$jury";
+	}
+	if($deliberation==1) {
+		// supprime les notes d'eps des candidats dispenses (logiquement pour corrrection des cas reserves)
+		$tSql[]="DELETE from odb_notes notes using odb_notes notes, odb_candidats can, odb_ref_eps eps\n".
+		" where can.id_table=notes.id_table and can.annee=$annee and notes.annee=$annee and can.eps=eps.id and eps.eps!='Apte' and notes.id_matiere=-3";
+		$tSql[]="UPDATE odb_notes notes $from_jury SET notes.note='0' WHERE type='Divers' and note<0 $where_jury and notes.annee=$annee";
+		$tSql[]="REPLACE INTO odb_decisions( id_table, id_anonyme,`annee` , `moyenne` , coeff, `delib1` ) (\n".
+		"SELECT notes.id_table, notes.id_anonyme, notes.annee, if(min(note)<0,-1,ROUND(sum( coeff * note ) / sum( coeff ),$iPrecision)) moy,sum( coeff ) coeff , null \n".
+		"FROM odb_notes notes $from_jury\n WHERE notes.annee = $annee and notes.type!='Divers' AND notes.type!='Oral' $where_jury\n GROUP BY notes.id_table, notes.annee \n);";
+		$tSql[]="UPDATE odb_decisions notes $from_jury SET notes.moyenne = ROUND(moyenne,1) where moyenne<9 $where_jury and notes.annee=$annee";
+		$tSql[]="UPDATE odb_decisions notes $from_jury SET notes.delib1 = 'Absent' WHERE moyenne = -1 $where_jury and notes.annee=$annee";
+		$tSql[]="UPDATE odb_decisions notes $from_jury SET notes.delib1 = 'Ajourne' WHERE 0<=moyenne and moyenne < 5 $where_jury and notes.annee=$annee";
+		$tSql[]="UPDATE odb_decisions notes $from_jury SET notes.delib1 = 'Refuse' WHERE 5<=moyenne and moyenne < 9 $where_jury and notes.annee=$annee";
+		$tSql[]="UPDATE odb_decisions notes $from_jury SET notes.delib1 = 'Admissible' WHERE moyenne >= 9 $where_jury and notes.annee=$annee";
+		//TODO rendre parametrable : on refuse les candidats ayant eu un 0 et moins de 10
+		$tSql[]="update odb_decisions decis, odb_notes notes $from_jury\n SET delib1='Refuse'\n".
+		"WHERE decis.delib1 = 'Admissible' AND decis.id_table = notes.id_table\n AND notes.note=0 AND notes.type!='Divers' AND notes.type!='Oral' AND moyenne<10\n".
+		" AND decis.annee=$annee AND notes.annee=$annee $where_jury";
+		foreach($tSql as $sql) {
+			//echo "<pre>$sql</pre>\n";
+			odb_query($sql,__FILE__,__LINE__);
+		}
+	} elseif($deliberation==2) {
+		$sql="SELECT notes.id_table, note, id_matiere from odb_notes notes, odb_decisions decis $from_jury where decis.id_table=notes.id_table and delib2='' and notes.type='Divers' $where_jury";
+		$result=odb_query($sql,__FILE__,__LINE__);
+		while($row=mysql_fetch_array($result)) {
+			foreach(array('id_matiere','id_table','note') as $col) $$col=$row[$col];
+			$tNote[$id_table]+=$note;
+			if($id_matiere==-3) $tEps[$id_table]=true;
+		}
+		if(is_array($tNote)) {
+			foreach($tNote as $id_table=>$points) {
+				if($tEps[$id_table]) $sql="UPDATE odb_decisions notes SET moyenne=ROUND((moyenne*coeff+$points)/(coeff+1),$iPrecision), coeff=coeff+1 where notes.id_table='$id_table'";
+				else $sql="UPDATE odb_decisions notes SET moyenne=ROUND(moyenne+$points/coeff,$iPrecision) where notes.id_table='$id_table'";
+				//echo "<br/>$sql";
+				odb_query($sql,__FILE__,__LINE__);
+			}
+		}
+		$tSql[]="UPDATE odb_decisions decis, odb_notes notes $from_jury SET decis.delib2 = 'Reserve'\n".
+		" WHERE notes.id_table = decis.id_table $where_jury\n and decis.annee=$annee and notes.annee=$annee and notes.id_matiere=-3 and notes.note=0";
+		$tSql[]="UPDATE odb_decisions notes $from_jury SET notes.delib2 = 'Oral'\n WHERE moyenne >= 9 and moyenne<10 AND notes.delib2!='Reserve' $where_jury and notes.annee=$annee";
+		$tSql[]="UPDATE odb_decisions notes $from_jury SET notes.delib2 = 'Passable'\n WHERE moyenne >= 10 and moyenne<12 AND notes.delib2!='Reserve' $where_jury and notes.annee=$annee";
+		$tSql[]="UPDATE odb_decisions notes $from_jury SET notes.delib2 = 'ABien'\n WHERE moyenne >= 12 and moyenne<14 AND notes.delib2!='Reserve' $where_jury and notes.annee=$annee";
+		$tSql[]="UPDATE odb_decisions notes $from_jury SET notes.delib2 = 'Bien'\n WHERE moyenne >= 14 and moyenne<16 AND notes.delib2!='Reserve' $where_jury and notes.annee=$annee";
+		$tSql[]="UPDATE odb_decisions notes $from_jury SET notes.delib2 = 'TBien'\n WHERE moyenne >= 16 AND notes.delib2!='Reserve' $where_jury and notes.annee=$annee";
+		foreach($tSql as $sql) {
+			odb_query($sql,__FILE__,__LINE__);
+			//echo mysql_affected_rows()." lignes :<pre>$sql</pre>\n";
+		}
+	} elseif ($deliberation==3) {
+		$sql="SELECT notes.id_table, note, id_matiere, notes.coeff\n from odb_notes notes, odb_decisions decis $from_jury\n where decis.id_table=notes.id_table and delib2='Oral' and delib3='-' and notes.type='Oral' $where_jury";
+		//die("<pre>$sql");
+		$result=odb_query($sql,__FILE__,__LINE__);
+		$tCR=array();
+		while($row=mysql_fetch_array($result)) {
+			foreach(array('coeff','id_table','note') as $col) $$col=$row[$col];
+			if($note<=0) {
+				$tCR[$id_table]=true; // cas reserve
+				$tNote[$id_table]+=0;
+				$tCoeff[$id_table]+=$coeff;
+				//echo "$id_table $note/20 $coeff - $tCoeff[$id_table] -  RESERVE<br/>";
+			} else {
+				$tCoeff[$id_table]+=$coeff;
+				$tNote[$id_table]+=(int)$note*$coeff;
+				//echo "$id_table $note/20 $coeff<br/>";
+			}
+			
+			//echo "$id_table $note/20 $coeff - $tCoeff[$id_table]<br/>";
+		}
+		if(is_array($tNote)) {
+			foreach($tNote as $id_table=>$points) {
+				$coeff=$tCoeff[$id_table];
+				if($tCR[$id_table]) {
+					$sql="UPDATE odb_decisions notes SET delib3='Reserve', moyenne=ROUND((moyenne*coeff+$points)/(coeff+$coeff),$iPrecision), coeff=coeff+$coeff\n where notes.id_table='$id_table'";
+					//echo "$id_table RESERVE<br/>";
+				} else {
+					$sql="UPDATE odb_decisions notes SET delib3='Passable', moyenne=ROUND((moyenne*coeff+$points)/(coeff+$coeff),$iPrecision), coeff=coeff+$coeff\n where notes.id_table='$id_table'";
+				}
+				//echo "<br/>$sql";
+				odb_query($sql,__FILE__,__LINE__);
+				
+			}
+		}
+		$sql="UPDATE odb_decisions notes $from_jury SET delib3='Reserve'\n where delib2='Reserve' and delib1='Admissible' $where_jury";
+		odb_query($sql,__FILE__,__LINE__);
+		return mysql_affected_rows();
+
+	} else die(KO." - Deliberation inattendue : $deliberation");
+}
 ?>
