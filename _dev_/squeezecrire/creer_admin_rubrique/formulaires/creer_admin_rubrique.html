@@ -16,7 +16,7 @@
 			<label for="email">eMail</label><br />
 			<input type="text" id="email" name="email" value="[(#ENV**{email})]" size="50" />
 		</p>
-		[(#REM)
+		[(#CONFIG{creer_admin_rubrique/login_cfg}|!={1}|?{' ',''})
 		<p>
 			<label for="login">Login</label><br />
 			<input type="text" name="login" id="login" value="[(#ENV*{login})]" size="50" />
