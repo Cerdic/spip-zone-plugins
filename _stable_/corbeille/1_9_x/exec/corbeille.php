@@ -6,31 +6,23 @@ include(dirname(__FILE__).'/../inc_param.php');
 
 //
 // Corbeille
-/** 
- *exec_corbeille() function principale d'Ã©xÃ©cution de l'administration du plugin
- */ 
+
 function exec_corbeille(){
-  global $type_doc;
-  global $type_act;
   global $connect_statut;
-  global $operation;
-  global $debut;
-  global $effacer; //array des id des objets Ã  effacer
+
+  include_spip("inc/vieilles_defs");
   include_spip("inc/presentation");
-  //charge les paramÃ©tres de conf
+  //charge les paramêtres de conf
   global $corbeille_param;
 
 
 	$js='
 <script type="text/javascript">
 <!--
-function checkAll() {  // (un)check all checkboxes by erational.org
-   var flag = document.corb.checkmaster.checked;
-   var ElNum = document.corb.elements.length;
-   for (var i=0;i<ElNum;i++){ // scan form elements to get checkbox
-       if (document.corb.elements[i].type=="checkbox")
-                    document.corb.elements[i].checked = flag;
-   }
+function checkAll() {  // (de)coche en un clic
+   var flag = jQuery("input#poubelle_check").attr("checked");
+   if (!flag) flag=false;
+   jQuery("input.poubelle").attr("checked", flag);   
 }
 
 -->
@@ -39,23 +31,30 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 
 	echo $js;
 
-	debut_page(_T('corbeille:corbeille'));
+	echo debut_page(_T('corbeille:corbeille'));
 
 	if ($connect_statut == "0minirezo") {
 		$page = "corbeille";	
 
+    // requete
+		$operation = _request('operation');
+    $type_act = _request('type_act');
+    $effacer = _request('effacer'); //array des id des objets à  effacer
+    $type_doc = _request('type_doc');
+
+    $debut = _request('debut');
 		if (empty($debut)) $debut = 0;
-		//si type_act non nul tous les lments effaable le sont. 
+		//si type_act non nul tous les éléments effaçable le sont. 
 		if (! empty($type_act)) {
-			//pour chacun des objets declars dans inc_param la fonction effacement est appelle
+			//pour chacun des objets declarés dans inc_param la fonction effacement est appellée
 			foreach($corbeille_param as $key => $objet) {
-				Corbeille_effacement($key); //indique l'objet Ã  vider
+				Corbeille_effacement($key); //indique l'objet à  vider
 			}
 			$debut=0;$type_act=0;
 		}
-		//si un type_doc est spcifi alors recherche des lments
-		if (! empty($type_doc)) {
-			//charge les paramtres propre  l'objet demand (breves, articles, auteurs, ...)
+		//si un type_doc est spécifié alors recherche des éléments
+    if (! empty($type_doc)) {
+			//charge les parametres propre à l'objet demandé (breves, articles, auteurs, ...)
 			$statut = $corbeille_param[$type_doc]["statut"];
 			$titre = $corbeille_param[$type_doc]["titre"];
 			$table = $corbeille_param[$type_doc]["table"];
@@ -69,13 +68,13 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 	    
       $log_efface = "";            
       if ($operation == "effacer") {
-	      //suppression des documents demands
+	      //suppression des documents demandés
 	      $log_efface = "<div style='background:#eee;border:1px solid #999;padding:5px;margin:0 0 5px 0' class='verdana2'>";
         $log_efface .= _T("corbeille:doc_effaces");
 				if (count($effacer) == 0) $log_efface .= _T("corbeille:aucun");
 				else {
 					$log_efface .= "<ul>";
-					//rappelle les lments supprims
+					//rappelle les éléments supprimés
 					foreach($effacer as $i => $id_doc) {
 						$req2 = "SELECT $titre FROM $table WHERE $id=$id_doc";
 						$result2 = spip_query($req2);
@@ -84,7 +83,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 						$log_efface .= "</li>\n";
 					}
 					$log_efface .= "</ul>";
-					//supprime les objets selectionnÃ©s
+					//supprime les objets selectionnês
 					Corbeille_effacement($type_doc, $effacer);
 				}
 				$log_efface .= "</div>\n";
@@ -142,7 +141,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 					echo "<input type='hidden' name='type_doc' value='$type_doc' />\n";
 					echo "<table style='text-align:center;border:0px;width:100%;background:none;' CELLPADDING=3 CELLSPACING=0 WIDTH=100%>";
 					echo "<tr>";
-					echo "<td style='text-align:left;'><input type='checkbox' value='0' name='checkmaster' onclick='checkAll();' /></td>";
+					echo "<td style='text-align:left;'><input type='checkbox' name='poubelle_check' id='poubelle_check' onclick='checkAll();' /></td>";
 					echo "<td style='text-align:left;'>"._T("corbeille:titre")."</td>";
 					echo "<td style='text-align:left;'>"._T("corbeille:parution")."</td>";
 					echo "</tr>\n\n";
@@ -162,7 +161,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 						$compteur++;
 
 						echo "<tr style='background:$couleur;'>";
-						echo "<td style='width:5%;'><input type='checkbox' name='effacer[]' value='$id_document'' /></td>";
+						echo "<td style='width:5%;'><input type='checkbox' name='effacer[]' value='$id_document' class='poubelle' /></td>";
 						echo "<td class='verdana2' style='width:70%;'>";
 						if (! empty($page_voir)) {
                 			echo "<a href='".generer_url_ecrire($page_voir[0],$page_voir[1]."=$id_document")."'>".typo($titreE)."</a>";
@@ -184,17 +183,17 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 			} else { // empty doc: affichage simple	
 			   // HTML output
 			   debut_gauche();	
-      	 debut_boite_info();
+      	 echo debut_boite_info();
          echo propre(_T('corbeille:readme'));  	
-      	 fin_boite_info();
+      	 echo fin_boite_info();
       	
          echo "<br />";
-         debut_boite_info();
+         echo debut_boite_info();
          $page = "corbeille";
          Corbeille_affiche($page);
-         fin_boite_info();
+         echo fin_boite_info();
         	
-         debut_droite();
+         echo debut_droite();
          gros_titre(_T('corbeille:corbeille'));
          echo "<p>"._T('corbeille:choix_doc')."</p>";
         			   
