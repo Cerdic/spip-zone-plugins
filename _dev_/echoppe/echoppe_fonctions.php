@@ -44,18 +44,24 @@ function vide_si_zero($_var){
 	}
 	return $_var;
 }
+function zero_si_vide($_var){
+	if ($_var == ""){
+		$_var = 0; 
+	}
+	return $_var;
+}
 function calculer_url_achat($_var){
 	if (isset($_var)){
 		$_page = lire_config('echoppe/squelette_panier','echoppe_panier');
 		$url_result = generer_url_public($_page,'id_produit='.$_var);
-		$url = generer_url_action('echoppe_ajouter_panier','id_produit='.$_var.'&quantite=1&achat_rapide=oui&redirect='.$url_result);
+		$url = generer_url_action('echoppe_ajouter_panier','id_produit='.$_var.'&quantite=1&achat_rapide=non');
 		return $url;
 	}
 	
 }
 function calculer_url_achat_rapide($_var){
 	if (isset($_var)){
-		$url = generer_url_action('echoppe_ajouter_panier','id_produit='.$_var.'&quantite=1&achat_rapide=oui&redirect='.$_SELF);
+		$url = generer_url_action('echoppe_ajouter_panier','id_produit='.$_var.'&quantite=1&achat_rapide=oui');
 		return $url;
 	}
 	
@@ -110,21 +116,13 @@ function generer_URL_PANIER($p){
 	return $_url;
 }
 
-/*
-function balise_TOKEN_PANIIER($p){
-	$_token_panier = session_get('echoppe_token_panier');
-	$p->code = "$_token_panier";
+function balise_TOTAL_ITEM_PANIER($p){
+	$_sql = "SELECT id_produit FROM spip_echoppe_paniers WHERE token_panier='".session_get('echoppe_token_panier')."' AND token_client = '".session_get('echoppe_token_client')."' ;";
+	$_res = spip_query($_sql);
+	$_quantite = spip_num_rows($_res);
+	$p->code = "zero_si_vide($_quantite)";
+	$p->interdire_scripts = false;
 	return $p;
 }
-function balise_TOKEN_CLIENT($p){
-	$_token_panier = session_get('echoppe_token_client');
-	$p->code = "$_token_panier";
-	return $p;
-}
-function balise_URL_VALIDATION_PANIER($p){
-	$_token_panier = session_get('echoppe_token_panier');
-	$p->code = "$_token_panier";
-	return $p;
-}
-*/
+
 ?>

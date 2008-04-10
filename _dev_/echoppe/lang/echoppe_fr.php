@@ -121,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pays_du_depot' => 'Pays',
 'prepa' => 'en pr&eacute;paration',
 'prix_base' => 'Prix de base HTVA',
+'prix_ttc' => 'Prix TTC',
 'propose' => 'propos&eacute;',
 'poids' => 'Poids',
 'publie' => 'publi&eacute;',
@@ -129,12 +130,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Q
 'quantite_minimum' => 'Quantit&eacute; minimum',
+'quantite' => 'Quantit&eacute;',
 
 // R
 'reference_interne' => 'Num&eacute;ro de r&eacute;f&eacute;rence',
 'remettre_a_zero' => 'Remettre &agrave; z&eacute;ro',
 'retour' => 'Retour',
 'retour_a_la_categorie' => 'Retour &agrave; la cat&eacute;gorie',
+'retour_au_panier' => 'Retour au panier',
 'retour_au_produit' => 'Retour au produit',
 
 // S
@@ -160,6 +163,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // V
 'valider_le_panier' => 'Valider le panier',
+'valider_mon_panier' => 'Valider mon panier',
 'ville_du_depot' => 'Ville',
 'visualisation_d_un_depot' => 'Visualisation d\'un d&eacute;p&ocirc;t',
 'visualisation_d_un_produit' => 'Visualisation de',
