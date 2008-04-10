@@ -201,6 +201,8 @@ L\'&eacute;quipe de @nom_site@',
 'chainelettre' => '(compos&eacute;e uniquement de lettres)',
 'email_valide' => 'Veuillez ins&eacute;rer un email valide',
 'email_obligatoire' => 'Le champ email est obligatoire',
+'pass_minimum' => 'Votre mot de passe doit comporter au moins 5 caract&egrave;res',
+'pass_egal' => 'Veuillez entrer le m&ecirc;me mot de passe que pr&eacute;c&eacute;demment.',
 
 // Change_pass
 'pass_indiquez_cidessous' => 'Indiquez ci-dessous l\'adresse email sous laquelle vous
