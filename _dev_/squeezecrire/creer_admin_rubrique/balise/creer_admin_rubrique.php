@@ -21,23 +21,21 @@ function balise_creer_admin_rubrique_dyn() {
 	$nom_auteur= $nom." ".$prenom;
 	
 	$email= stripslashes(_request('email'));
+	$login= _request('login');
+	$pass= md5(_request('pass'));
 	
-	//$login= _request('login');
-	$login= $nom_auteur;
-	
-	// recuperation des données de cfg
+	// recuperation des données login de cfg
+	$login_cfg = lire_config('creer_admin_rubrique/login_cfg');
+	if ($login_cfg == 1){
+		$login= $nom_auteur;
+	}
+
+	// recuperation des données pass de cfg
 	$pass_cfg = lire_config('creer_admin_rubrique/pass_cfg');
-	if ($pass_cfg){
-		if ($pass_cfg == 0){
-			$pass= md5(_request('pass'));
-		}
-		if ($pass_cfg == 1){
-			$pass= md5(lire_config('creer_admin_rubrique/pass'));
-		}
+	if ($pass_cfg == 1){
+		$pass= md5(lire_config('creer_admin_rubrique/pass'));
 	}
-	else {
-		$pass= md5(_request('pass'));
-	}
+
 	
 	// secteur dans lequel on va créer la rubrique et statut de l'article
 	$secteur= lire_config('creer_admin_rubrique/secteur');
