@@ -34,7 +34,7 @@ $(function(){
 */
 //--></script>
 
-[(#VAL|debut_cadre_formulaire{1})]
+
 <fieldset dir="#LANG_DIR">
   <ol>
     <li>
@@ -54,11 +54,11 @@ $(function(){
   <div style='text-align: right'><input class='fondo' type='submit' value='<:bouton_valider:>' /></div>
   
 </fieldset> 
-[(#VAL{1}|fin_cadre_formulaire)]
 
-<br />
 
-[(#VAL|debut_cadre_formulaire{1})]
+<hr />
+
+
 <fieldset dir="#LANG_DIR">
   <ol>
     <li>
@@ -71,9 +71,9 @@ $(function(){
 		<label><input type='checkbox' name='syndic' value='oui'[ (#ENV{syndic}|=={oui}) checked='checked'] id='syndic' /><:item_mots_cles_association_sites:></label>
 		</fieldset>
     </li>
-[(#CONFIG{config_precise_groupes}|=={oui}|?{' '}
-|sinon{[(#ENV{unseul}|=={oui}|?{' '}
-|sinon{[(#ENV{obligatoire}|=={oui}|?{' ',''})]})]})
+[(#CONFIG{config_precise_groupes}|=={oui}
+|ou{[(#ENV{unseul}|=={oui})]}
+|ou{[(#ENV{obligatoire}|=={oui})]})
     <li>
 		<fieldset>
 		<label><input type='checkbox' name='unseul' value='oui'[ (#ENV{unseul}|=={oui}) checked='checked'] id='unseul' /><:info_selection_un_seul_mot_cle:></label>
@@ -81,9 +81,9 @@ $(function(){
 		</fieldset>
     </li>
 ]
-[(#CONFIG{config_precise_groupes}|=={non}
-|?{[(#ENV{unseul}|=={non}
-|?{[(#ENV{obligatoire}|=={non}|?{' '})]})]})
+[(#CONFIG{config_precise_groupes}|=={oui}
+|ou{[(#ENV{unseul}|=={oui})]}
+|ou{[(#ENV{obligatoire}|=={oui})]}|?{'',' '})
 	<input type='hidden' name='unseul' value='non' />
 	<input type='hidden' name='obligatoire' value='non' />
 ]
@@ -93,14 +93,14 @@ $(function(){
 		<legend><:info_qui_attribue_mot_cle:></legend>
 		<label><input type='checkbox' name='acces_minirezo' value='oui'[ (#ENV{minirezo}|=={oui}) checked='checked'] id='acces_minirezo' /><:bouton_checkbox_qui_attribue_mot_cle_administrateurs:></label>
 		<label><input type='checkbox' name='acces_comite' value='oui'[ (#ENV{comite}|=={oui}) checked='checked'] id='acces_comite' /><:bouton_checkbox_qui_attribue_mot_cle_redacteurs:></label>
-[(#CONFIG{forums_publics}|!={non}
-|?{[(#CONFIG{mots_cles_forums}|=={oui}|?{' '}
-	|sinon{[(#ENV{forum}|=={oui}|?{' '})]})]})
+[(#CONFIG{mots_cles_forums}|=={oui}
+|ou{[(#ENV{forum}|=={oui})]}
+|et{[(#CONFIG{forums_publics}|!={non})]})
 		<label><input type='checkbox' name='acces_forum' value='oui'[ (#ENV{forum}|=={oui}) checked='checked'] id='acces_forum' /><:bouton_checkbox_qui_attribue_mot_cle_visiteurs:></label>
 ]
-[(#CONFIG{forums_publics}|=={non}
-|?{[(#CONFIG{mots_cles_forums}|!={oui}
-|?{[(#ENV{forum}|!={oui}|?{' '})]})]})
+[(#CONFIG{mots_cles_forums}|=={oui}
+|ou{[(#ENV{forum}|=={oui})]}
+|et{[(#CONFIG{forums_publics}|!={non})]}|?{'',' '})
 		<input type='hidden' name='acces_forum' value='non' />
 ]
 		</fieldset>
@@ -119,4 +119,4 @@ $(function(){
   <div style='text-align: right'><input class='fondo' type='submit' value='<:bouton_valider:>' /></div>
   
 </fieldset> 
-[(#VAL{1}|fin_cadre_formulaire)]
+

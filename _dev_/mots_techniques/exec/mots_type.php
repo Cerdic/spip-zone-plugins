@@ -62,39 +62,26 @@ function exec_mots_type_dist()
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	echo debut_droite('', true);
 
-	$type = entites_html(rawurldecode($type));
+	echo debut_cadre_formulaire("", true);
+	echo groupemots_edit_presentation($row['titre']);	
+	$editer_groupemots = charger_fonction('editer_groupemots', 'inc');
+	echo $editer_groupemots($id_groupe, $row);
+	echo fin_cadre_formulaire(true);
 
-	$contexte = $row;
-	
-	include_spip('public/assembler');
-
-	$form = debut_cadre_relief($technique==''?"groupe-mot-24.gif":"mot-technique-24.png", true)
-		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
-		. "<tr>"
-		. "<td  align='right' valign='top'><br />"
-		. icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif")
-		. "</td>"
-		. "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n"
-		. "<td style='width: 100%' valign='top'>"
-		  . "<span class='verdana1 spip_x-small'><b>". _T('titre_groupe_mots') . "</b></span><br />"
-		  . gros_titre($titre,'',false)
-		. aide("motsgroupes")
-		. "<div class='verdana1'>"
-			. recuperer_fond("prive/editer/groupe_mots", $contexte)		
-		. "</div>"	
-		. "</td></tr></table>"
-		. fin_cadre_relief(true);
+	echo pipeline('affiche_milieu', array('args' => array('exec' => 'mots_type', 'id_groupe' => $id_groupe), 'data'=>''));
+	echo fin_gauche(), fin_page();
 		
-	echo redirige_action_auteur('instituer_groupe_mots', $id_groupe, "mots_tous", "id_groupe=$id_groupe", $form),
-	pipeline('affiche_milieu',
-		array('args' => array(
-			'exec' => 'mots_type',
-			'id_groupe' => $id_groupe
-		),
-		'data'=>'')
-	),
-	fin_gauche(),
-	fin_page();
 	}
 }
+
+function groupemots_edit_presentation($titre=''){
+	global $spip_lang_right;
+	
+	return
+		icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous"), "mot-cle-24.gif", "rien.gif", $spip_lang_right) .
+	 	_T('titre_groupe_mots') .
+		gros_titre($titre,'',false) . 
+		"<hr />\n";	
+}
+
 ?>
