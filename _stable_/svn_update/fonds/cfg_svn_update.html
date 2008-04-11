@@ -1,0 +1,26 @@
+<!-- titre=Configuration de svn update -->
+<!-- autoriser=0minirezo -->
+<!-- boite=Informations -->
+<!-- descriptif=<p>
+    Un utilisateur (par defaut, l’administrateur numero 1) est autorisé à faire une mise à jour SVN du site ou de tout autre répertoire.</p>
+    <p> Pour cela il doit se rendre sur la page [svn update->/ecrire/?exec=svn_update] et sélectionner les éléments à mettre à jour. </p>
+-->
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
+
+    <p>
+        #SET{selected,#CONFIG{svn_update/administrateurs,'',''}}
+        <label for="administrateurs">Listes des administrateurs autorisés (seuls les admin spip sont listés)</label>        
+        <select name="administrateurs[]" id="administrateurs" multiple="multiple"/>
+            <BOUCLE_administrateurs(AUTEURS) {statut=0minirezo} {tout}>
+                <option value="#ID_AUTEUR" [(#ID_AUTEUR|in_array{#GET{selected}}|?{' selected="selected"'})]>#NOM</option>
+            </BOUCLE_administrateurs>
+        </select>
+    </p>
+
+
+    <input type="submit" name="_cfg_ok" value="<:OK:>" />
+    <input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+
+
+</form>

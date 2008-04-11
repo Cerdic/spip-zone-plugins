@@ -7,7 +7,7 @@
 _ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
-	0.2
+	0.3
 	</version>
 	<etat>
 	stable
@@ -16,8 +16,7 @@ _ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
 	Un utilisateur (par defaut, l'administrateur numero 1) est autoris&#233; &#224; faire une mise &#224; jour SVN du site ou de tout autre r&#233;pertoire. Pour cela il doit se rendre sur la page [ecrire/?exec=svn_update->./?exec=svn_update] et s&#233;lectionner les &#233;l&#233;ments &#224; mettre &#224; jour.
 
 La configuration se fait &#224; deux emplacements :
-- dans <code>ecrire/mes_options.php</code>, on indique la liste des administrateurs autoris&#233;s &#224; proc&#233;der aux mises &#224; jour, par exemple avec :
-_ <code>define('_SVN_UPDATE_AUTEURS', '1:3');</code>
+- dans [le gestionnaire cfg->?exec=cfg&cfg=svn_update], on indique la liste des administrateurs autoris&#233;s &#224; proc&#233;der aux mises &#224; jour
 - Dans le fichier <code>svn_update_list.txt</code> (&#224; recopier dans son r&#233;pertoire personnel de squelettes), on indique la liste des r&#233;pertoires concern&#233;s, en donnant pour chacun une ligne :
 _ <code>source destination [revision] [user]</code>
 _ Par exemple :
@@ -27,4 +26,8 @@ _ <code>svn://zone.spip.org/spip-zone/_squelettes_/sedna sedna</code>
 	<prefix>
 	svn_update
 	</prefix>
+	
+	<options>
+	    svn_update_options.php
+	</options>
 </plugin>
