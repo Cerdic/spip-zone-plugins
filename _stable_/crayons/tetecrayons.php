@@ -171,7 +171,9 @@ function balise_EDIT($p) {
 		$type = "$distant:$type";
 
 	// le compilateur 1.9.2 ne calcule pas primary pour les tables secondaires
+	// il peut aussi arriver une table sans primary (par ex: une vue)
 	if (!($primary = $p->boucles[$i_boucle]->primary)) {
+		include_spip('inc/vieilles_defs'); # 1.9.2 pour trouver_def_table
 		list($nom, $desc) = trouver_def_table(
 			$p->boucles[$i_boucle]->type_requete, $p->boucles[$i_boucle]);
 		$primary = $desc['key']['PRIMARY KEY'];
