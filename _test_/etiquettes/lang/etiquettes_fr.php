@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'zbug_et_parametre_manquant' => ' et vous n\'avez pas sp&eacute;cifi&eacute; d\'objet &agrave; lier en param&egrave;tre.<br/>=&gt; Lisez la doc !', 
 'zbug_objet_existe_pas' => 'L\'objet (@type@, @id@), sp&eacute;cifi&eacute; pour la balise @champ@, n\'existe pas.',
+'zbug_objet_mal_forme' => 'L\'objet (@objet@), sp&eacute;cifi&eacute; pour la balise @champ@, est mal form&eacute;.<br/>=&gt; Lisez la doc !',
 'zbug_pas_de_table_mots' => 'Vous avez choisi de lier les &eacute;tiquettes à un objet de type "@type@" mais il n\'existe pas de table "mots_@type@".'
 
 );

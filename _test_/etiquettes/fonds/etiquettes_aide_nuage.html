@@ -1,5 +1,4 @@
-[(#CONFIG{multi_articles}|=={oui}|?{' '})#SET{lang,#ENV{lang}}]
-#SET{expose,#ARRAY}<BOUCLE_expose(MOTS){id_article}>[(#SET{expose,[(#GET{expose}|push{#ID_MOT})]})]</BOUCLE_expose>
+
 #SET{frequences,#ARRAY}
 #SET{max_frequence,0}
 
@@ -36,21 +35,26 @@
 #SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
 </B_frequence_documents>
 
-<BOUCLE_tous_les_mots(MOTS){tous}{type ?}{doublons auteur}>
+<BOUCLE_frequence_evenements(MOTS){frequence evenements}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
+#SET{max_la,#MAX_FREQUENCE}
+</BOUCLE_frequence_evenements>
+#SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
+</B_frequence_evenements>
+
+<BOUCLE_tous_les_mots(MOTS){tous}{type ?}{doublons bla}>
 </BOUCLE_tous_les_mots>
 
 [(#REM) Et maintenant qu'on a enregistré les fréquences, on affiche le nuage ]
 <B_mots>
-<ul class="nuage">
-	<BOUCLE_mots(MOTS){tous}{!doublons auteur}{type ?}{par #ENV{tri,titre}}{0,40}>
+<div id="popularTags">
+	<BOUCLE_mots(MOTS){tous}{!doublons bla}{type ?}{par #ENV{tri,titre}}{0,30}>
 	[(#SET{score,[(#GET{frequences}|table_valeur{#TITRE*,0}|div{#GET{max_frequence}})]})]
 	[(#GET{score}|>={0}|?{' '})
 		[(#SET{score,[(#GET{score}|plus{0.900001})]})]
 		[(#SET{unite,[(#GET{score}|floor)]})]
 		[(#SET{decimale,[(#GET{score}|moins{#GET{unite}}|mult{10}|floor)]})]
-		<li>
-			<span style="font-size: #GET{unite}[.(#GET{decimale})]em;">#TITRE</span>
-		</li>
+		<span style="font-size: #GET{unite}[.(#GET{decimale})]em;">#TITRE</span>
 	]</BOUCLE_mots>
-</ul>
+</div>
 </B_mots>

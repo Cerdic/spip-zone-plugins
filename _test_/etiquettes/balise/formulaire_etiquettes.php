@@ -8,7 +8,7 @@
 #                                                                                                      #
 #  Définition de la balise #FORMULAIRE_ETIQUETTES                                                      #
 #  Rappel d'utilisation :                                                                              #
-#  #FORMULAIRE_ETIQUETTES{groupe_de_mots?, aide?, remplacer?, type_objet?, id_objet?, proposer_login?} #
+#  #FORMULAIRE_ETIQUETTES{groupe_de_mots?, remplacer?, type-id?, proposer_login?, forcer_aide?} #
 #------------------------------------------------------------------------------------------------------#
 
 // Sécurité
@@ -16,18 +16,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_FORMULAIRE_ETIQUETTES($p) {
 	
-    global $pilpil;
-    $pilpil = $p;
-    return calculer_balise_dynamique($p, 'FORMULAIRE_ETIQUETTES', array($p->boucles[$p->id_boucle]->primary));
+    return calculer_balise_dynamique(
+    	$p,
+    	'FORMULAIRE_ETIQUETTES',
+    	array(
+    		'type_boucle',
+    		$p->boucles[$p->id_boucle]->primary
+    	)
+    );
     
 }
 
 function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 	
-    global $pilpil, $tables_jointures;
+    global $tables_jointures;
 	
 	// initialisation du groupe de mots-clés
-		$groupe = $args[1] ? $args[1] : "tags";
+		$groupe = $args[2] ? $args[2] : "tags";
 	
 		// On récupère l'id du groupe de mots
 		$reponse = sql_fetsel(
@@ -43,36 +48,55 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 		else
 			$id_groupe = sql_insertq('spip_groupes_mots', array('titre' => $groupe));
 	
-	// initialisation du type d'aide
-		$aide = strtolower($args[2]);
-		if (!strlen($aide) OR !in_array($aide, array("normal", "nuage", "ajax", "aucun", "aucune", "rien")))
-			$aide = "normal";
-		if ($aide = "nuage" AND !defined('_DIR_PLUGIN_NUAGE'))
-			$aide = "normal";
-		if ($aide = "ajax" AND !defined('_DIR_PLUGIN_SELECTEURGENERIQUE'))
-			$aide = "normal";
-	
 	// initialisation du mode d'ajout des mots-clés
 		// si on met rien ou n'importe quoi ça donne true
 		$remplacer = !(strtolower($args[3]) == "false");
 	
 	// initialisation de la proposition de login en cas de mauvaise autorisation
 		// si on met rien ou n'importe quoi, ça donne false
-		$proposer_login = (strtolower($args[6]) == "true");
+		$proposer_login = (strtolower($args[5]) == "true");
+	
+	// initialisation du type d'aide
+		$aide = strtolower($args[6]);
+		if (!strlen($aide) OR !in_array($aide, array("nuage", "ajax", "aucun", "aucune", "rien"))){
+			$aide_nuage = true;
+			$aide_ajax = true;
+		}
+		else{
+			$aide_nuage = ($aide == "nuage");
+			$aide_ajax = ($aide == "ajax");
+		}
+		// on teste ensuite si les plugins sont bien présents
+		$aide_nuage &= defined('_DIR_PLUGIN_NUAGE');
+		$aide_ajax &= defined('_DIR_PLUGIN_SELECTEURGENERIQUE');
 	
 	// initialisation de l'objet à lier
-		if ($args[4] AND $args[5]){
-			// ici on a précisé explicitement un objet
-			// il faut donc vérifier s'il existe bien
+		if ($args[4]){
+			// ici on a mis explicitement un objet
+			$objet = preg_replace("/^(.*)-([0-9]+)$/","$1@$2",$args[4]);
+			// si c'est mal formé on s'arrête
+			if ($objet == $args[4])
+				return erreur_squelette(
+					_T('etiquettes:zbug_objet_mal_forme',
+						array (
+							'champ' => '#FORMULAIRE_ETIQUETTES',
+							'objet' => $objet
+						)
+					), '');
+			list($type_objet, $id_objet) = explode('@', $objet);
+			
+			// on précise
+			$id_objet = intval($id_objet);
+			$type_objet = strtolower($type_objet);
 			include_spip('base/connect_sql');
-			$type_objet = preg_replace(',^spip_|s$,', '', $args[4]);
+			$type_objet = preg_replace(',^spip_|s$,', '', $type_objet);
 			$type_objet = table_objet_sql($type_objet);
 			$type_objet = preg_replace(',^spip_,', '', $type_objet);
 			$cle_objet = id_table_objet($type_objet);
-			$id_objet = intval($args[5]);
 			
+			// il faut vérifier s'il existe bien cet objet
 			$reponse = sql_fetsel(
-				'*',
+				$cle_objet,
 				'spip_'.$type_objet,
 				$cle_objet.'='.$id_objet
 			);
@@ -87,8 +111,9 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 					), '');
 		}else{
 			// sinon on prend du contexte
-			$id_objet = intval($args[0]);
-			$type_objet = $pilpil->boucles[$pilpil->id_boucle]->id_table;
+			include_spip('base/connect_sql');
+			$type_objet = $args[0];
+			$id_objet = intval($args[1]);
 			$cle_objet = id_table_objet($type_objet);
 			
 			// mais on vérifie si la balise est effectivement dans un contexte
@@ -111,11 +136,11 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 					)
 				), '');
     
-    return $args = array($groupe, $id_groupe, $aide, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login);
+    return $args = array($groupe, $id_groupe, $aide_nuage, $aide_ajax, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login);
 	
 }
 
-function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login) {
+function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide_nuage, $aide_ajax, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login) {
 	
 	include_spip('inc/autoriser');
 	include_spip('inc/filtres');
@@ -201,7 +226,8 @@ function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide, $remplacer
 			'erreur_autorisation' => $erreur_autorisation,
 			'proposer_login' => $proposer_login, 
 			'groupe' => $groupe,
-			'aide' => $aide,
+			'aide_nuage' => $aide_nuage,
+			'aide_ajax' => $aide_ajax,
 			'remplacer' => $remplacer,
 			'type_objet' => $type_objet,
 			'cle_objet' => $cle_objet,

@@ -1,6 +1,3 @@
-<script type='text/javascript' src='#CHEMIN{javascript/iutil.js}'></script>
-<script type='text/javascript' src='#CHEMIN{javascript/iautocompleter.js}'></script>
-<style type="text/css" media="all">@import "#CHEMIN{css/etiquettes.css}";</style>
 <script  type="text/javascript">
 <!--
 	var appliquer_selecteur_cherche_mot = function() {
@@ -14,7 +11,7 @@
 		// attacher l'autocompleter
 		jQuery(input)
 			.Autocomplete({
-				'source': '[(#URL_PAGE{etiquettes_selecteur}|parametre_url{groupe,#ENV{groupe},&})]'+'&cle_objet=#ENV{cle_objet}&#ENV{cle_objet}=#ENV{id_objet}',
+				'source': '[(#URL_PAGE{etiquettes_selecteur}|parametre_url{groupe,#ENV{groupe},&})]',
 				'delay': 200,
 				'autofill': false,
 				'helperClass': "autocompleter",
