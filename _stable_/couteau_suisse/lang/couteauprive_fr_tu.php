@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'balise_etoilee' => '{{Attention}} : V&eacute;rifie bien l\'utilisation faite par tes squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outil ne s\'appliqueront pas sur : @bal@.',
 	'basique' => 'Basique',
 	'blocs:aide' => 'Blocs D&eacute;pliables : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Te permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles.
+	'blocs:description' => 'Te permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles.
 
 @puce@ {{Dans les textes SPIP}} : les r&eacute;dacteurs ont &agrave; disposition les  nouvelles balises &lt;bloc&gt; (ou &lt;invisible&gt;) et &lt;visible&gt; &agrave; utiliser dans leurs textes comme ceci : 
 
@@ -61,19 +61,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'caches' => 'Outils cach&eacute;s :',
+	'categ:admin' => '1. Administration',
+	'categ:divers' => '6. Divers',
+	'categ:public' => '4. Affichage public',
+	'categ:spip' => '5. Balises, filtres, crit&egrave;res',
+	'categ:typo-corr' => '2. Am&eacute;liorations des textes',
+	'categ:typo-racc' => '3. Raccourcis typographiques',
 	'certaines_couleurs' => 'Seules les balises d&eacute;finies ci-dessous@_CS_ASTER@ :',
 	'chatons:aide' => 'Chatons : @liste@',
 	'chatons:description' => 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <code>:nom</code>.
 _ Cet outil remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouve dans le r&eacute;pertoire plugins/couteau_suisse/img/chatons.',
 	'chatons:nom' => 'Chatons',
 	'class_spip:description1' => 'Tu peux ici d&eacute;finir certains raccourcis de SPIP. Une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut.[[%racc_hr%]]',
-	'class_spip:description2' => '<MODIF>@puce@ {{Les raccourcis de SPIP}}.
+	'class_spip:description2' => '@puce@ {{Les raccourcis de SPIP}}.
 
 Tu peux ici d&eacute;finir certains raccourcis de SPIP. Une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut.[[%racc_hr%]][[%puce%]]',
-	'class_spip:description3' => '<MODIF>
+	'class_spip:description3' => '
 
 SPIP utilise habituellement la balise &lt;h3&gt; pour les intertitres. Choisis ici un autre remplacement :[[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '<MODIF>
+	'class_spip:description4' => '
 
 SPIP a choisi d\'utiliser la balise &lt;i> pour transcrire les italiques. Mais &lt;em> aurait pu &eacute;galement convenir. &Agrave; toi de voir :[[%racc_i1%]][[->%racc_i2%]]
 Note : en modifiant le remplacement des raccourcis d\'italiques, le style {{2.}} sp&eacute;cifi&eacute; plus haut ne sera pas appliqu&eacute;.
@@ -133,7 +139,7 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour tes articles}.'
 	'desactiver_flash:nom' => 'D&eacute;sactive les objets flash',
 	'desactiver_outil' => 'D&eacute;sactiver l\'outil',
 	'desactiver_rss' => 'D&eacute;sactiver les &laquo; R&eacute;visions du Couteau Suisse &raquo;',
-	'descrip_pack' => '<MODIF>Ton "Pack de configuration actuelle" rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
+	'descrip_pack' => 'Ton "Pack de configuration actuelle" rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
 
 Ce code PHP peut prendre place dans le fichier /config/mes_options.php et ajoutera un lien de r&eacute;initialisation sur cette page "du pack {Pack Actuel}". Bien s&ucirc;r il t\'est possible de changer son nom ci-dessous.
 

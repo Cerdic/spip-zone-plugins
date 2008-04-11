@@ -30,10 +30,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_jour' => 'Your version is up to date.',
 
 	// B
-	'balise_etoilee' => '<NEW>{{Attention}} : V&eacute;rifiez bien l\'utilisation faite par vos squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outil ne s\'appliqueront pas sur : @bal@.',
+	'balise_etoilee' => '{{N.B.}} : Check the use made in your templates of starred tags. This tool will not apply its treatment to the following tag(s): @bal@.',
 	'basique' => 'Basic',
 	'blocs:aide' => 'Folding blocks: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) and <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Allows you to create blocks where clicking on the title makes the contents visible or invisible.
+	'blocs:description' => 'Allows you to create blocks where clicking on the title makes the contents visible or invisible.
 
 @puce@ {{In SPIP texts}}: authors can use the tags &lt;bloc&gt; (or &lt;invisible&gt;) and &lt;visible&gt; in this way: 
 
@@ -53,14 +53,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  #BLOC_FIN</code></quote>
 ',
 	'blocs:nom' => 'Folding Blocks',
-	'boites_privees:description' => '<NEW>Toutes les bo&icirc;tes d&eacute;crites ci-dessous apparaissent dans la partie priv&eacute;e.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
-- {{Les r&eacute;visions du Couteau Suisse}} : un cadre sur la pr&eacute;sente page de configuration, indiquant les derni&egrave;res modifications apport&eacute;es au code du plugin ([Source->@_CS_RSS_SOURCE@]).
-- {{Les articles au format SPIP}} : un cadre repliable suppl&eacute;mentaire pour vos articles afin de conna&icirc;tre le code source utilis&eacute; par leurs auteurs.
-- {{Les auteurs en stat}} : un cadre suppl&eacute;mentaires sur [la page des auteurs->./?exec=auteurs] indiquant les 10 derniers connect&eacute;s et les inscriptions non confirm&eacute;es. Seuls les administrateurs voient ces informations.',
+	'boites_privees:description' => 'All the boxes described below appear in the editing area.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
+- {{Swiss Knife updates}}: a box on this configuration page showing the last changes made to the code of the plugin ([Source->@_CS_RSS_SOURCE@]).
+- {{Articles in SPIP format}}: an extra folding box for your articles showing the source code used by their authors.
+- {{Author stats}}: an extra box on [the authors\' page->./?exec=auteurs] showing the last 10 connected authors and unconfirmed registrations. Only administrators can view this information.',
 	'boites_privees:nom' => 'Private boxes',
 
 	// C
 	'caches' => 'Hidden tools:',
+	'categ:admin' => '1. Administration',
+	'categ:divers' => '6. Miscellaneous',
+	'categ:public' => '4. Public site',
+	'categ:spip' => '5. Tags, filters, criteria',
+	'categ:typo-corr' => '2. Text improvements',
+	'categ:typo-racc' => '3. Typographical shortcuts',
 	'certaines_couleurs' => 'Only the tags defined below @_CS_ASTER@:',
 	'chatons:aide' => 'Smileys: @liste@',
 	'chatons:description' => '<NEW>Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <code>:nom</code>.

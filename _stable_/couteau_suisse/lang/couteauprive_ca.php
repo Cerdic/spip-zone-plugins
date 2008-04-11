@@ -61,6 +61,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'caches' => 'Eines amagades:',
+	'categ:admin' => '1. Administraci&oacute;',
+	'categ:divers' => '<NEW>6. Divers',
+	'categ:public' => '<NEW>4. Affichage public',
+	'categ:spip' => '<NEW>5. Balises, filtres, crit&egrave;res',
+	'categ:typo-corr' => '<NEW>2. Am&eacute;liorations des textes',
+	'categ:typo-racc' => '<NEW>3. Raccourcis typographiques',
 	'certaines_couleurs' => 'Nom&eacute;s les etiquetes definides m&eacute;s avall@_CS_ASTER@ :',
 	'chatons:aide' => 'Emoticones: @liste@',
 	'chatons:description' => 'Insereix imatges (o emoticones pels {xats}) en tots els textos on apareix una cadena del tipus <code>:nom</code>.
