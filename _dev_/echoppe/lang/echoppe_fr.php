@@ -74,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'info_depot' => 'G&eacute;rer vos d&eacute;p&ocirc;ts ici.',
-'info_paniers' => 'G&eacute;rer les paniers de vos clients',
+'info_paniers' => 'G&eacute;rez les paniers de vos clients',
 'ignorer_date_de_retrait_de_vente' => 'Ignorer la date de retrait de la vente',
 'ignorer_date_mise_en_vente' => 'Ignorer la date de mise en vente',
 'impossible_copier_dans'=>'Impossible de copier le fichier dans ',
@@ -107,8 +107,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
-'pas_d_options_pour_le_produit' => 'Pas d\'option pour ce produit',
+'paniers_en_attente' => 'Paniers temporair',
+'paniers_paye' => 'Paniers pay&eacute;',
+'paniers_reserve' => 'Paniers r&eacute;serv&eacute;',
+'paniers_traite' => 'Paniers trait&eacute;',
+'paniers_valide' => 'Paniers valid&eacute;',
 'par_defaut' => 'Par d&eacute;faut',
+'pas_d_options_pour_le_produit' => 'Pas d\'option pour ce produit',
 'pas_de_depot_ici' => 'Pas de d&eacute;p&ocirc;t ici.',
 'pas_de_categorie_ici' => 'Pas de cat&eacute;gorie ici.',
 'pas_de_num_de_ref' => 'Aucune',

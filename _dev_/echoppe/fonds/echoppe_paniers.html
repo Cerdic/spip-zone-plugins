@@ -1,3 +1,53 @@
-<BOUCLE_LesPaniers(SPIP_ECHOPPE_PANIERS)>
+<B_LesPanierstemporaire>
+	<h2><:echoppe:paniers_en_attente:></h2>
+	#PAGINATION
+<BOUCLE_LesPanierstemporaire(SPIP_ECHOPPE_PANIERS){statut = temporaire}{pagination}>
+	<a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{id_panier=#ID_PANIER, &})]">[(#TOKEN_PANIER|unique)]</a>
+</BOUCLE_LesPanierstemporaire>
+	#PAGINATION
 	
-</BOUCLE_LesPaniers>
+</B_LesPanierstemporaire>
+
+<hr />
+<h2><:echoppe:paniers_reserve:></h2>
+<B_LesPaniersreserve>
+
+	#PAGINATION
+<BOUCLE_LesPaniersreserve(SPIP_ECHOPPE_PANIERS){statut = reserve}{pagination}>
+	<a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{id_panier=#ID_PANIER, &})]">[(#TOKEN_PANIER|unique)]</a>
+</BOUCLE_LesPaniersreserve>
+	#PAGINATION
+</B_LesPaniersreserve>
+
+<hr />
+<h2><:echoppe:paniers_valide:></h2>
+<B_LesPaniersvalide>
+
+	#PAGINATION
+<BOUCLE_LesPaniersvalide(SPIP_ECHOPPE_PANIERS){statut = valide}{pagination}>
+	<a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{id_panier=#ID_PANIER, &})]">[(#TOKEN_PANIER|unique)]</a>
+</BOUCLE_LesPaniersreserve>
+	#PAGINATION
+</B_LesPaniersvalide>
+
+<hr />
+<h2><:echoppe:paniers_paye:></h2>
+<B_LesPanierspaye>
+
+	#PAGINATION
+<BOUCLE_LesPanierspaye(SPIP_ECHOPPE_PANIERS){statut = paye}{pagination}>
+	<a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{id_panier=#ID_PANIER, &})]">[(#TOKEN_PANIER|unique)]</a>
+</BOUCLE_LesPanierspaye>
+	#PAGINATION
+</B_LesPanierspaye>
+
+<hr />
+<h2><:echoppe:paniers_traite:></h2>
+<B_LesPanierstraite>
+
+	#PAGINATION
+<BOUCLE_LesPanierstraite(SPIP_ECHOPPE_PANIERS){statut = traite}{pagination}>
+	<a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{id_panier=#ID_PANIER, &})]">[(#TOKEN_PANIER|unique)]</a>
+</BOUCLE_LesPanierstraite>
+	#PAGINATION
+</B_LesPanierstraite>
