@@ -33,9 +33,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'balise_etoilee' => '{{Atenci&oacute;}} : Verifiqueu b&eacute; l\'&uacute;s que fan els vostres esquelets de les etiquetes amb estrelles. Els tractaments d\'aquesta eina no s\'aplicaran a: @bal@.',
 	'basique' => 'B&agrave;sic',
 	'blocs:aide' => 'Blocs Desplegables: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (&agrave;lies: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) i <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Us permet crear blocs que, amb el t&iacute;tol clicable, els pot tornar visibles o invisibles.
+	'blocs:description' => 'Us permet crear blocs que, amb el t&iacute;tol clicable, els pot tornar visibles o invisibles.
 
-@puce@ {{En els textos SPIP}}: els redactors tenen a la seva disposici&oacute; les noves etiquetes &lt;bloc&gt; (o &lt;invisible&gt;) i &lt;visible&gt; per utilitzar en el seus textos com aqu&iacute;: 
+@puce@ {{En els textos SPIP}}: els redactors tenen disponibles les noves etiquetes &lt;bloc&gt; (o &lt;invisible&gt;) i &lt;visible&gt; a utilitzar en el seus textos d\'aquesta manera: 
 
 <quote><code>
 <bloc>
@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  </bloc>
 </code></quote>
 
-@puce@ {{En els esquelets}} : teniu a la vostra disposici&oacute; les noves etiquetes #BLOC_TITRE, #BLOC_DEBUT i #BLOC_FIN per utilitzar d\'aquesta manera: 
+@puce@ {{En els esquelets}}: teniu disponibles les noves etiquetes #BLOC_TITRE, #BLOC_DEBUT i #BLOC_FIN per utilitzar d\'aquesta manera: 
 <quote><code> #BLOC_TITRE
  El meu t&iacute;tol
  #BLOC_DEBUT
@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ',
 	'blocs:nom' => 'Blocs Desplegables',
 	'boites_privees:description' => 'Tots els quadres descrits m&eacute;s avall apareixen a la part privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
-- {{Les revisions del Couteau Suisse}} : un quadre a la p&agrave;gina actual de configuraci&oacute;, indicant les &uacute;ltimes modificacions aportades al codi del plugin ([Font->@_CS_RSS_SOURCE@]).
+- {{Les revisions del Ganivet Su&iacute;s}} : un quadre a la p&agrave;gina actual de configuraci&oacute;, indicant les &uacute;ltimes modificacions aportades al codi del plugin ([Font->@_CS_RSS_SOURCE@]).
 - {{Els articles en format SPIP}}: un quadre plegable suplementari pels vostres articles per tal de con&egrave;ixer el codi font utilitzat pels seus autors.
 - {{Els autors en estat}}: un quadre suplementari a [la p&agrave;gina d\'autors->./?exec=auteurs] que indica els 10 &uacute;ltims connectats i les inscripcions no confirmades. Aquestes informacions nom&eacute;s les veuen els administradors. ',
 	'boites_privees:nom' => 'Requadres privats',
@@ -62,29 +62,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'caches' => 'Eines amagades:',
 	'categ:admin' => '1. Administraci&oacute;',
-	'categ:divers' => '<NEW>6. Divers',
-	'categ:public' => '<NEW>4. Affichage public',
-	'categ:spip' => '<NEW>5. Balises, filtres, crit&egrave;res',
-	'categ:typo-corr' => '<NEW>2. Am&eacute;liorations des textes',
-	'categ:typo-racc' => '<NEW>3. Raccourcis typographiques',
+	'categ:divers' => '6. Divers',
+	'categ:public' => '4. Visualitzaci&oacute; p&uacute;blica',
+	'categ:spip' => '5. Etiquetes, filtres, criteris',
+	'categ:typo-corr' => '2. Millora dels textos',
+	'categ:typo-racc' => '3. Dreceres tipogr&agrave;fiques',
 	'certaines_couleurs' => 'Nom&eacute;s les etiquetes definides m&eacute;s avall@_CS_ASTER@ :',
 	'chatons:aide' => 'Emoticones: @liste@',
 	'chatons:description' => 'Insereix imatges (o emoticones pels {xats}) en tots els textos on apareix una cadena del tipus <code>:nom</code>.
 _ Aquesta eina substitueix aquestes dreceres per les imatges del mateix nom que troba a dins del directori  plugins/couteau_suisse/img/emoticones.',
 	'chatons:nom' => 'Emoticones',
 	'class_spip:description1' => 'Aqu&iacute; podeu definir algunes dreceres d\'SPIP. Un valor buit equival a utilitzar el valor per defecte.[[%racc_hr%]]',
-	'class_spip:description2' => '<MODIF>@puce@ {{Les dreceres d\'SPIP}}.
+	'class_spip:description2' => '@puce@ {{Les dreceres d\'SPIP}}.
 
 Aqu&iacute; podeu definir algunes dreceres d\'SPIP. Un valor buit equival a fer servir el valor per defecte.[[%racc_hr%]][[%puce%]]',
-	'class_spip:description3' => '<MODIF>
+	'class_spip:description3' => '
 
 SPIP utilitza habitualment l\'etiqueta &lt;h3&gt; pels subt&iacute;tols. Escolliu aqu&iacute; un altre empla&ccedil;ament:[[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '<MODIF>
+	'class_spip:description4' => '
 
 SPIP ha escollit utilitzar l\'etiqueta &lt;i> per transcriure les it&agrave;liques. Per&ograve; &lt;em> tamb&eacute; hauria pogut anar b&eacute;. Vosaltres decidiu:[[%racc_i1%]][[->%racc_i2%]]
 Tingueu present: modificant la substituci&oacute; de les dreceres it&agrave;liques, l\'estil {{2.}} especificat m&eacute;s amunt no s\'aplicar&agrave;.
 
-@puce@ {{Els estils d\'SPIP}}. Fins a la versi&oacute; 1.92 d\'SPIP, les dreceres tipogr&agrave;fiques produ&iuml;en etiquetes sistem&agrave;ticament de l\'estil "spip". Per exemple: <code><p class="spip"></code>. Aqu&iacute; podeu definir l\'estil d\'aquestes etiquetes en funci&oacute; dels vostres fulls d\'estil. Una casella buida significa que no s\'aplicar&agrave; cap estil en particular.<blockquote style=\'margin:0 2em;\'>
+@puce@ {{Els estils d\'SPIP}}. Fins a la versi&oacute; 1.92 d\'SPIP, les dreceres tipogr&agrave;fiques produ&iuml;en etiquetes sistem&agrave;ticament ornamentades de l\'estil "spip". Per exemple: <code><p class="spip"></code>. Aqu&iacute; podeu definir l\'estil d\'aquestes etiquetes en funci&oacute; dels vostres fulls d\'estil. Una casella buida significa que no s\'aplicar&agrave; cap estil en particular.<blockquote style=\'margin:0 2em;\'>
 _ {{1.}} Etiquetes &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; i les llistes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_p%]]
 _ {{2.}} Etiquetes &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; i &lt;blockquote&gt; :[[%style_h%]]
 
@@ -109,7 +109,7 @@ Dos exemples id&egrave;ntics per canviar el color del text:@_CS_EXEMPLE_COULEURS
 @_CS_ASTER@El format d\'aquestes etiquetes personalitzades ha de llistar colors existents o definir parelles &laquo;balise=couleur&raquo;, separats tots per comes. Exemples: &laquo;gris, vermell&raquo;, &laquo;flux=groc, fort=vermell&raquo;, &laquo;baix=#99CC11, alt=marr&oacute;&raquo; o fins i tot    &laquo;gris=#DDDDCC, vermell=#EE3300&raquo;. Pel primer i l\'&uacute;ltim exemple, les etiquetes autoritzades s&oacute;n: <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si els fons s&oacute;n permesos).',
 	'couleurs:nom' => 'Tot en colors',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]text[/coul]</b>, <b>[bg&nbsp;coul]text[/coul]</b>',
-	'cs_rss' => 'Les revisions del Couteau Suisse',
+	'cs_rss' => 'Les revisions del Ganivet Su&iacute;s',
 
 	// D
 	'decoration:aide' => 'Decoraci&oacute;: <b>&lt;etiqueta&gt;test&lt;/etiqueta&gt;</b>, amb <b>etiqueta</b> = @liste@',
@@ -138,8 +138,8 @@ _ Aquesta eina es pot completar amb {Un sumari pels vostres articles}.',
 	'desactiver_flash:description' => 'Suprimeix els objectes flash de les p&agrave;gines del vostre lloc i les substitueix pel contingut alternatiu associat.',
 	'desactiver_flash:nom' => 'Desactiva els objectes flash',
 	'desactiver_outil' => 'Desactivar l\'eina',
-	'desactiver_rss' => 'Desactivar les &laquo;Revisions del Couteau Suisse&raquo;',
-	'descrip_pack' => '<MODIF>El vostre "Paquet de configuraci&oacute; actual" reuneix el conjunt dels par&agrave;metres de configuraci&oacute; en curs pel que fa al Couteau Suisse: l\'activaci&oacute; d\'eines i el valor de les seves eventuals variables.
+	'desactiver_rss' => 'Desactivar les &laquo;Revisions del Ganivet Su&iacute;s&raquo;',
+	'descrip_pack' => 'El vostre "Paquet de configuraci&oacute; actual" reuneix el conjunt dels par&agrave;metres de configuraci&oacute; en curs pel que fa al Ganivet Su&iacute;s: l\'activaci&oacute; d\'eines i el valor de les seves eventuals variables.
 
 Aquest codi PHP es pot posar a dins del fitxer /config/mes_options.php i afegir&agrave; un enlla&ccedil; de tornar a iniciar en aquesta p&agrave;gina "del paquet {Paquet Actual}". Amb tota seguretat, podeu canviar el seu nom m&eacute;s avall.
 
@@ -191,7 +191,7 @@ Atenci&oacute;: a dins dels f&ograve;rums, peticions, flux sindicats, etc., la g
 	'forum_lgrmaxi:nom' => 'Mida dels f&ograve;rums',
 	'f_jQuery:description' => 'Impedeix la instal&middot;laci&oacute; de {jQuery} a la part p&uacute;blica per tal d\'economitzar una mica de &laquo;temps m&agrave;quina&raquo;. Aquesta llibreria ([->http://jquery.com/]) aporta nombroses comoditats a la programaci&oacute; de Javascript i pot ser utilitzat per certs plugins. SPIP l\'utilitza a la seva part privada.
 
-Atenci&oacute;: certes eines del Couteau Suisse necessiten les funcions de {jQuery}. ',
+Atenci&oacute;: certes eines del Ganivet Su&iacute;s necessiten les funcions de {jQuery}. ',
 	'f_jQuery:nom' => 'Desactiva jQuery',
 
 	// G
@@ -298,9 +298,9 @@ _ • {B&agrave;sic}: s&oacute;n substitu&iuml;ts els enlla&ccedil;os del tipus {<
 _ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del tipus {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} o {<html>news:mesnews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'URLs bonics',
-	'liste_outils' => 'Llista d\'eines del Couteau Suisse',
+	'liste_outils' => 'Llista d\'eines del Ganivet Su&iacute;s',
 	'log_couteau_suisse:description' => 'Inscrit de nombroses informacions pel que fa al funcionament del plugin \'El Ganivet Su&iacute;s\' en els fitxers spip.log que es poden trobar en el directori: @_CS_DIR_TMP@',
-	'log_couteau_suisse:nom' => 'Registre detallat del Couteau Suisse',
+	'log_couteau_suisse:nom' => 'Registre detallat del Ganivet Su&iacute;s',
 
 	// M
 	'mailcrypt:description' => 'Amaga tots els enlla&ccedil;os de correus presents als vostres textos substituint-los per un enlla&ccedil; Javascript que permet malgrat tot activar la missatgeria del lector. Aquesta eina antispam impedeix que els robots recullin les adreces electr&ograve;niques deixades visibles als f&ograve;rums o a les etiquetes dels vostres esquelets.',
@@ -331,7 +331,7 @@ _ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del t
 	'permuter_outils' => 'Canviar les @nb@ eines en negreta?',
 	'pipelines' => 'Pipelines utilitzades:',
 	'presente_outils' => 'Aquesta interf&iacute;cie &eacute;s antiga.<br /><br />Si trobeu problemes en l\'&uacute;s de la <a href=\'./?exec=admin_couteau_suisse\'>nouvelle interface</a>, no dubte en explicar-ho al f&ograve;rum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
-	'presente_outils2' => 'Aquesta p&agrave;gina llista les funcionalitats del plugin posades a la vostra disposici&oacute;.<br /><br />Fent un clic al damunt del nom de les eines que hi ha m&eacute;s avall, seleccioneu aquells que podreu canviar l\'estat amb l\'ajuda del bot&oacute; central: les eines activades seran desactivades i <i>viceversa</i>. A cada clic, la descripci&oacute; apareix a sota de les llistes. Les categories s&oacute;n  plegables i les eines poden estar amagades. El doble clic permet canviar r&agrave;pidament una eina.<br /><br />Per un primer &uacute;s, es recomana activar les eines una a una, per evitar que apareguin algunes incompatibilitats amb el vostre esquelet, amb SPIP o amb altres plugins.<br /><br />Nota: la simple c&agrave;rrega d\'aquesta p&agrave;gina torna a compilar el conjunt d\'eines del Couteau Suisse.',
+	'presente_outils2' => 'Aquesta p&agrave;gina llista les funcionalitats del plugin posades a la vostra disposici&oacute;.<br /><br />Fent un clic al damunt del nom de les eines que hi ha m&eacute;s avall, seleccioneu aquells que podreu canviar l\'estat amb l\'ajuda del bot&oacute; central: les eines activades seran desactivades i <i>viceversa</i>. A cada clic, la descripci&oacute; apareix a sota de les llistes. Les categories s&oacute;n  plegables i les eines poden estar amagades. El doble clic permet canviar r&agrave;pidament una eina.<br /><br />Per un primer &uacute;s, es recomana activar les eines una a una, per evitar que apareguin algunes incompatibilitats amb el vostre esquelet, amb SPIP o amb altres plugins.<br /><br />Nota: la simple c&agrave;rrega d\'aquesta p&agrave;gina torna a compilar el conjunt d\'eines del Ganivet Su&iacute;s.',
 	'prochainement' => 'Aquest lloc es restablir&agrave; ben aviat.
 _ Gr&agrave;cies per la vostra comprensi&oacute;.',
 	'propres' => 'propres@_CS_ASTER@',
@@ -341,8 +341,8 @@ _ Gr&agrave;cies per la vostra comprensi&oacute;.',
 	'pucesli:nom' => 'Car&agrave;cters bonics',
 
 	// R
-	'raccourcis' => 'Dreceres tipogr&agrave;fiques actives del Couteau Suisse&nbsp;:',
-	'raccourcis_barre' => 'Les dreceres tipogr&agrave;fiques del Couteau Suisse',
+	'raccourcis' => 'Dreceres tipogr&agrave;fiques actives del Ganivet Su&iacute;s:',
+	'raccourcis_barre' => 'Les dreceres tipogr&agrave;fiques del Ganivet Su&iacute;s',
 	'reserve_admin' => 'Acc&eacute;s reservat als administradors.',
 	'resetselection' => 'Reiniciar la selecci&oacute;',
 	'rss_titre' => '&laquo;El Ganivet Su&iacute;s&raquo; en desenvolupament:',
