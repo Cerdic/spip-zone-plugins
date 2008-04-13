@@ -9,6 +9,10 @@
 	Syndication et pr&eacute;sentaion automatique de la Gazette SPIP.
 
 	La Gazette SPIP est un journal en &#171;&nbsp;papier&nbsp;&#187; distribu&eacute; au format &eacute;lectronique PDF.
+	
+	pour afficher la noisette de téléchargement sur votre site ajouter dans votre squelette :
+	
+	<code>#PIPELINE{boussole}</code>
 
 	Plugin distribu&eacute; sous licence GNU/GPL.
 	Les documents propos&eacute;s en t&eacute;l&eacute;chargement sont distribu&eacute;s sous licence Art Libre.
