@@ -46,16 +46,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'Titl',
 	'titre_ajouter_zone' => 'Tizhout an dchenn',
-	'titre_table' => '<NEW>Toutes les zones d\'acc&egrave;s',
-	'titre_zones_acces' => '<NEW>Zones d\'acc&egrave;s restreint',
+	'titre_table' => 'An holl dachenno&ugrave;',
+	'titre_zones_acces' => 'Tachenn bevennet he zone',
 
 	// V
-	'voir_toutes' => '<NEW>Voir toutes les zones',
+	'voir_toutes' => 'Gwelet an holl dachenno&ugrave;',
 
 	// Z
-	'zone_numero' => '<NEW>ZONE NUM&Egrave;RO&nbsp;:',
-	'zone_restreinte_espace_prive' => '<NEW>Restreindre l\'acc&egrave;s &agrave; cette zone dans l\'espace priv&eacute;',
-	'zone_restreinte_publique' => '<NEW>Restreindre l\'acc&egrave;s &agrave; cette zone dans la partie publique'
+	'zone_numero' => 'TAHCENN NIVERENN&nbsp;:',
+	'zone_restreinte_espace_prive' => 'Bevenni&ntilde; an done d\'an dachenn-ma&ntilde; el lodenn brevez',
+	'zone_restreinte_publique' => 'Bevenni&ntilde; an done d\'an dachenn-ma&ntilde; el lodenn foran'
 );
 
 ?>
