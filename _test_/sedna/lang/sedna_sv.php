@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'afficher_sources' => '<NEW>Show this feed',
+	'afficher_sources' => 'Visa denna syndikering',
 	'aff_resume' => 'Visa sammanfattningarna',
 	'annee' => 'Senaste &aring;ret',
 	'articles_recents_court' => 'De senaste artiklarna',
@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deconnexion' => 'Logga ut',
-	'derniere_syndication' => '<NEW>Last syndication of this feed performed',
+	'derniere_syndication' => 'Den senaste syndikeringen genomf&ouml;rdes',
 	'deuxjours' => 'Senaste tv&aring; dagarna',
 
 	// L
@@ -27,22 +27,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'masquer_resume' => 'G&ouml;m sammanfattningarna',
-	'masquer_sources' => '<NEW>Hide this feed',
+	'masquer_sources' => 'G&ouml;m den h&auml;r syndikeringen',
 	'mois' => 'Senaste m&aring;naden',
 
 	// P
 	'pas_articles' => 'Det finns inga artiklar under denna period.',
-	'pas_synchro' => '<NEW>Do not synchronize',
+	'pas_synchro' => 'Synkronisera inte',
 	'preferences' => 'Inst&auml;llningar',
-	'probleme_de_syndication' => '<NEW>Syndication problem',
+	'probleme_de_syndication' => 'Syndikeringsproblem',
 
 	// S
 	'semaine' => 'Senaste veckan',
-	'sources' => '<NEW>Feeds',
+	'sources' => 'Syndikeringsk&auml;llor',
 	'synchro' => 'Synkronisera',
 	'synchro_titre' => 'Spara listan &ouml;ver l&auml;sta meddelanden p&aring; webbplatsen',
 	'syndication_ajour' => 'Uppdatera nu',
-	'syndication_fait' => '<NEW>Syndication done',
+	'syndication_fait' => 'Syndikeringen klar',
 
 	// T
 	'toutes' => 'Alla'
