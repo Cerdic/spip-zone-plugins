@@ -318,7 +318,7 @@ function exec_odb_notes() {
 				. " where can.serie=$id_serie $where \n"
 				. " and eta.id=rep.id_etablissement and dep.id= eta.id_departement and ser.id=can.serie "
 				. " and can.id_saisie=rep.id_saisie AND can.annee=$annee and rep.annee=$annee and rep.jury=$jury\n"
-				. " ORDER BY jury, departement, centre, ser.serie, id_anonyme"
+				. " ORDER BY jury, departement, centre, ser.serie, can.id_table"
 				;
 				break;
 			case 'Oral':
@@ -328,7 +328,7 @@ function exec_odb_notes() {
 				. " and eta.id=rep.id_etablissement and dep.id= eta.id_departement and ser.id=can.serie "
 				. " and can.id_saisie=rep.id_saisie AND can.annee=$annee and rep.annee=$annee and can.serie=$id_serie and rep.jury=$jury\n"
 				. " and decis.id_table=rep.id_table and decis.annee=$annee and decis.delib1='Admissible' and (decis.delib2='Oral' or decis.delib2='Reserve')\n"
-				. " ORDER BY jury, departement, centre, ser.serie, id_anonyme, duree, examen";
+				. " ORDER BY jury, departement, centre, ser.serie, can.id_table, duree, examen";
 				break;
 			default:
 				$sql="SELECT id_table id, note, coeff\n FROM odb_notes\n WHERE annee=$annee and id_matiere=$id_matiere and jury=$jury and id_serie=$id_serie and type='$type'";
@@ -500,6 +500,11 @@ function exec_odb_notes() {
 							$nbCandidatsSerie=getNbCandidatsEF($annee,$r_jury,$id_matiere,$id_serie);
 						}
 					} 
+					//YEDA 11 Avril 2008, ajout du conpte des candidats de l'oral
+					if($type=='Oral'){
+						$nbCandidatsSerie=getNbCandidatsORAL($annee,$r_jury,$id_matiere,$id_serie);	
+					}
+					/////
 					if($nbCandidatsSerie>0) {
 						if($matiere==$r_matiere) $style='font-weight:bold;';
 						else $style='font-weight:normal;';
