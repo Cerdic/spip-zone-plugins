@@ -15,9 +15,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'article_inexistant' => ':: <i>Article inexistant</i> ::',
 'aucun' => '&nbsp;Aucun&nbsp;',
 'aucun_article_visite' => 'Aucun Article visit&eacute; &agrave; cette heure',
-'aucun_auteur_en_ligne' => 'Ici, personne ne bouge depuis 15 mn !<br />A part toi !',
+'aucun_auteur_en_ligne' => 'Ici, personne ne bouge depuis 15 mn !<br />&Agrave; part toi !',
 'aucune_moment' => 'Aucune pour l\'instant !',
-'auteurs_en_ligne' => 'y\'a pas 15 mn, étaient en ligne :',
+'auteurs_en_ligne' => '&eacute;taient en ligne les deni&egrave;res 15 min :',
 
 // B
 'bargraph_trimestre_popup' => 'Bargraph trimestre en Popup',
@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'configuration_commune' => 'Configuration commune', ## 1.53
 'configuration_perso' => 'Configuration personnelle de : @nom@', ## 1.53
 'conf_nbl_art' => 'Nombre de lignes par tranche, du tableau des articles visit&eacute;s du jour.', ## 1.53
-'conf_nbl_aut' => 'Nombre d\'auteurs affich&eacute;s dans le tableau 
+'conf_nbl_aut' => 'Nombre d\'auteurs affich&eacute;s dans le tableau
 					"Derni&egrave;res Connexions".', ## 1.53
 'conf_nbl_mensuel' => 'Nombre de mois affich&eacute;s dans le tableau des visites mensuelles (jauges).', ## 1.53
 'conf_nbl_topgen' => 'Page TopTen. Transformez le tableau "Topten g&eacute;n&eacute;ral" en Top-15, 20..<br />
@@ -35,30 +35,30 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 						Entrez le nombre d\'articles &agrave; afficher.', ## 1.53
 'conf_nbl_topsem' => 'Page TopTen. Transformez le tableau "Topten sur 8 jours" en Top-15, 20..<br />
 						Entrez le nombre d\'articles &agrave; afficher.', ## 1.53
-'conf_ordon_milieu' => 'Changez l\'ordre d\'affichage des blocs de la colonne du milieu 
+'conf_ordon_milieu' => 'Changez l\'ordre d\'affichage des blocs de la colonne du milieu
 						sur la page principale : "Activit&eacute du jour".<br />
 						- tableau des articles : <b>1</b><br />
 						- tableau des rubriques : <b>2</b><br />
 						- tableau des visites sur 8 jours : <b>3</b><br />
 						- liste des liens entrants : <b>4</b><br />
-						Entrez les num&eacute;ros de blocs s&eacute;par&eacute; par une virgule 
+						Entrez les num&eacute;ros de blocs s&eacute;par&eacute; par une virgule
 						(ex. : 1,2,3,4).', ## 1.53
 
 // D
 'date_jour_maxi_vis' => 'Le @date_max@ : @visites_max@ vis.',
-'depuis_date_visites_pg' => 'Depuis @heure@ @date@, @nb_visite@ Visites 
-							sur @nb_articles@ articles 
+'depuis_date_visites_pg' => 'Depuis @heure@ @date@, @nb_visite@ Visites
+							sur @nb_articles@ articles
 							(voir Pr&eacute;visions).', ## 1.53
-'depuis_date_visites_prev' => 'Depuis @heure@ @date@, @nb_visite@ visites 
+'depuis_date_visites_prev' => 'Depuis @heure@ @date@, @nb_visite@ visites
 							sur @nb_articles@ articles.', ## 1.53
 'depuis_le_prim_jour' => 'Depuis le <b>@prim_jour_stats@</b>',
 'dernieres_connections' => 'Derni&egrave;res Connexions*',
 'info_dernieres_connections' => '*Les 20 derni&egrave;res connexions parmis les "Auteurs" du site', ## 1.53 modif
 
 // E
-'entete_tableau_art_jour' => '<b>@nb_art_visites_jour@ Articles visit&eacute;s</b>, 
+'entete_tableau_art_jour' => '<b>@nb_art_visites_jour@ Articles visit&eacute;s</b>,
 								ou "point&eacute;s"<b> @aff_date_now@</b>',
-'entete_tableau_art_hier' => '<b>@nb_art_visites_jour@ Articles visit&eacute;s</b>, 
+'entete_tableau_art_hier' => '<b>@nb_art_visites_jour@ Articles visit&eacute;s</b>,
 								ou "point&eacute;s", <b>hier @aff_date_now@</b>',
 'entete_tableau_mois' => '<i><b>Pour info ... en chiffres !</b></i><br />Les visites sur @nb_mois@ mois.',
 
@@ -100,7 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nombre_art' => 'Nbre Art.',
 'nombre_visites_' => 'Nombre de Visites ..',
 'numero_' => 'num&eacute;ro : &nbsp;',
-'numero_court' => 'n°',
+'numero_court' => 'N&deg;',
 
 // O
 'onglet_actijour_hier' => 'Hier', ## 1.53
@@ -123,7 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'popularite' => 'Popul.',
 
 //R
-'repartition_visites_secteurs' => 'Visites par Secteurs/rubriques du jour 
+'repartition_visites_secteurs' => 'Visites par Secteurs/rubriques du jour
 												(pages articles vues)', ## 1.53
 
 // S
