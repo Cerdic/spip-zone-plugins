@@ -87,4 +87,8 @@ function nuage_extrait($nuage,$nombre){
 	if (!is_array($nuage)) $nuage = unserialize($nuage);
 	return array_splice($nuage,$nombre);	
 }
+
+//la gestion du critere {frequence} 
+include_spip('frequence_fonctions'); 
+
 ?>
