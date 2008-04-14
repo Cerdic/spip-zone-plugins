@@ -6,7 +6,7 @@ $tBddConf=getBddConf();
 mysql_connect($tBddConf['host'], $tBddConf['user'], $tBddConf['pass']) or die('Connection impossible<br/>'.mysql_error());
 mysql_select_db($tBddConf['bdd']) or die('Base inaccessible<br/>'.mysql_error());
 
-$where='';
+$where=''; 
 $pdfG='resultats_';
 $deliberation=$_REQUEST['deliberation'];
 if($deliberation==3) {
@@ -104,17 +104,27 @@ while($row=mysql_fetch_array($result)) {
    if(!$isFacultatif) {
 	   $tNotes[$id_table][$type][$matiere]['type']=$type;
 	   $tNotes[$id_table][$type][$matiere]['matiere']=$matiere;
-	   $tNotes[$id_table][$type][$matiere]['coeff']=($coeff==0?'-':$coeff);
-	   $tNotes[$id_table][$type][$matiere]['sur']=($coeff==0?'-':20*$coeff);
-	   $tTotal[$id_table][$type]['coeff']+=$tNotes[$id_table][$type][$matiere]['coeff'];
-	   $tTotal[$id_table][$type]['sur']+=$tNotes[$id_table][$type][$matiere]['sur'];
+	   if($matiere=='Epreuve Facultative 1' || $matiere=='Epreuve Facultative 2'){
+	   $tNotes[$id_table][$type][$matiere]['coeff']='-';
+   		}else{
+   		$tNotes[$id_table][$type][$matiere]['coeff']=($coeff==0?'-':$coeff);
+   		}
+   		if($matiere=='Epreuve Facultative 1' || $matiere=='Epreuve Facultative 2'){
+	   $tNotes[$id_table][$type][$matiere]['sur']='-';
+   		}else{
+   		$tNotes[$id_table][$type][$matiere]['sur']=($coeff==0?'-':20*$coeff);
+   		}
+	   	$tTotal[$id_table][$type]['coeff']+=$tNotes[$id_table][$type][$matiere]['coeff'];
+	 	$tTotal[$id_table][$type]['sur']+=$tNotes[$id_table][$type][$matiere]['sur'];
+	   	
    }
-   
+    
    $tCandidats[$id_table]['delib']=$delib;
    $tCandidats[$id_table]['candidat']=$candidat;
    $tCandidats[$id_table]['e']=$e;
    $tCandidats[$id_table]['serie']=$serie;
    $tCandidats[$id_table]['moyenne']=$moyenne;
+   
 }
 
 foreach($tCandidats as $id_table=>$t1) {
