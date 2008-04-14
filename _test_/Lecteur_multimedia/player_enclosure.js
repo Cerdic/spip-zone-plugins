@@ -35,13 +35,11 @@ soundManager.onload = function() {
 
 $(document).ready(function(){
 
+lecteur_multimedia_init();
 
-/*
-soundManager.onload = function() {
-// soundManager is initialised, ready to use. Create a sound for this demo page.
-soundManager.defaultOptions.volume = 80;    // set global default volume
-}
-*/
+});
+
+function lecteur_multimedia_init(){
 
 var aff= $("a[@rel='enclosure'][@href$=mp3]").size(); 
 
@@ -150,25 +148,15 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
      var position = Math.round(myListener.duration * x / 100) ;
      getFlashObject().SetVariable("method:setPosition", position);
      }
-     /*console.log( mySound.position + 'hop' + newposition + ' ' + x +'%');*/
+
   	 });
 
   	 $("#now_playing").change(function(){
   	      	 scroller_init();
 	 });
 	 
-	 // taille player video
-	 /*  $("#myFlash").toggle(function(){
-	  this.width = 2 * this.width ;
-	  this.height = 2 * this.height ;
-	  }
-	  ,function(){
-	  this.width =  this.width / 2 ;
-	  this.height = this.height / 2 ;
-	 }); */
 	 
-	 
-});
+}
 
 
 // .play() plugin jquery
