@@ -12,6 +12,7 @@ function clevermail_install($action) {
 			  VALUES
 			  ('CM_MAIL_FROM', '".$GLOBALS['meta']['email_webmaster']."'),
 			  ('CM_MAIL_ADMIN', '".$GLOBALS['meta']['email_webmaster']."'),
+			  ('CM_MAIL_RETURN', '".$GLOBALS['meta']['email_webmaster']."'),
 			  ('CM_SEND_NUMBER', '50');");
 			ecrire_meta('clevermail_base_version','0.1');
 			ecrire_metas();
