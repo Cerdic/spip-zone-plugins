@@ -52,7 +52,7 @@ function action_spipbb_fromphorum()
 	$id_rubrique = intval($arg);
 	if (empty($id_rubrique))
 	{
-		minipres( _T('spipbb:admin_titre_page_spipbb_admin_migre',array('nom_base','Phorum')), "<strong>"._T('avis_non_acces_page')."</strong>" );
+		minipres( _T('spipbb:admin_titre_page_spipbb_admin_migre',array('nom_base'=>'Phorum')), "<strong>"._T('avis_non_acces_page')."</strong>" );
 		exit;
 	}
 
@@ -98,7 +98,7 @@ function action_spipbb_fromphorum()
 	$time = array_sum(explode(' ', microtime())) - $time_start;
 	$corps .= "\n<!-- Elapsed: $time secondes -->";
 
-	echo minipres(_T('spipbb:import_titre_etape',array('nom_base','Phorum'))." $step",$corps);
+	echo minipres(_T('spipbb:import_titre_etape',array('nom_base'=>'Phorum'))." $step",$corps);
 
 	exit;
 } // action_spipbb_fromphorum
@@ -110,7 +110,7 @@ function select_phorum_db()
 {
 	global $spipbb_fromphorum;
 	mysql_select_db($spipbb_fromphorum['phorumdb'],$spipbb_fromphorum['phorum_connect'])
-		or die(_T('spipbb:migre_erreur_db',array('nom_base','Phorum')).":select_phorum_db");
+		or die(_T('spipbb:migre_erreur_db',array('nom_base'=>'Phorum')).":select_phorum_db");
 } // select_phorum_db
 
 // ------------------------------------------------------------------------------
@@ -289,7 +289,7 @@ function fromphorum_init_metas($spiprubid)
 	if (empty($spipbb_fromphorum['phorum_host'])) $spipbb_fromphorum['phorum_host']="localhost";
 	$spipbb_fromphorum['spiproot'] = _DIR_RACINE;
 	$spipbb_fromphorum['phorum_connect'] = @mysql_connect($spipbb_fromphorum['phorum_host'],$spipbb_fromphorum['phorum_login'],$spipbb_fromphorum['phorum_pass']) or
-			die(_T('spipbb:migre_erreur_db',array('nom_base','Phporum')).":fromphorum_init_metas");
+			die(_T('spipbb:migre_erreur_db',array('nom_base'=>'Phorum')).":fromphorum_init_metas");
 
 	select_phorum_db();
 	$spipbb_fromphorum['phorum_lang'] = $spipbb_fromphorum['phorum_lang'] ? $spipbb_fromphorum['phorum_lang'] :
@@ -320,7 +320,7 @@ function fromphorum_load_metas($spiprubid)
 		// rappel de connexion
 		$spipbb_fromphorum['phorum_connect'] =
 		@mysql_connect($spipbb_fromphorum['phorum_host'],$spipbb_fromphorum['phorum_login'],$spipbb_fromphorum['phorum_pass']) or
-			die(_T('spipbb:migre_erreur_db',array('nom_base','Phorum')).":fromphorum_load_metas");
+			die(_T('spipbb:migre_erreur_db',array('nom_base'=>'Phorum')).":fromphorum_load_metas");
 	}
 	else
 	{

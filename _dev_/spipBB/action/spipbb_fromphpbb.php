@@ -53,7 +53,7 @@ function action_spipbb_fromphpbb()
 	$id_rubrique = intval($arg);
 	if (empty($id_rubrique))
 	{
-		minipres( _T('spipbb:admin_titre_page_spipbb_admin_migre',array('nom_base','PhpBB')), "<strong>"._T('avis_non_acces_page')."</strong>" );
+		minipres( _T('spipbb:admin_titre_page_spipbb_admin_migre',array('nom_base'=>'PhpBB')), "<strong>"._T('avis_non_acces_page')."</strong>" );
 		exit;
 	}
 
@@ -99,7 +99,7 @@ function action_spipbb_fromphpbb()
 	$time = array_sum(explode(' ', microtime())) - $time_start;
 	$corps .= "\n<!-- Elapsed: $time secondes -->";
 
-	echo minipres(_T('spipbb:import_titre_etape',array('nom_base','PhpBB'))." $step",$corps);
+	echo minipres(_T('spipbb:import_titre_etape',array('nom_base'=>'PhpBB'))." $step",$corps);
 
 	exit;
 } // action_spipbb_fromphpbb
@@ -111,7 +111,7 @@ function select_phpbb_db()
 {
 	global $spipbb_fromphpbb;
 	mysql_select_db($spipbb_fromphpbb['phpdb'],$spipbb_fromphpbb['phpbb_connect'])
-		or die(_T('spipbb:migre_erreur_db',array('nom_base','PhpBB')));
+		or die(_T('spipbb:migre_erreur_db',array('nom_base'=>'PhpBB')));
 } // select_phpbb_db
 
 // ------------------------------------------------------------------------------
@@ -291,7 +291,7 @@ function fromphpbb_init_metas($spiprubid=0)
 	$spipbb_fromphpbb['spiproot'] = _DIR_RACINE;
 	$spipbb_fromphpbb['phpbb_connect'] =
 		@mysql_connect($spipbb_fromphpbb['phpbb_host'],$spipbb_fromphpbb['phpbb_login'],$spipbb_fromphpbb['phpbb_pass']) or
-			die(_T('spipbb:migre_erreur_db_phpbb',array('nom_base','PhpBB')));
+			die(_T('spipbb:migre_erreur_db_phpbb',array('nom_base'=>'PhpBB')));
 	select_phpbb_db();
 	$result = @mysql_query("SELECT config_value FROM ".$spipbb_fromphpbb['PR'].
 			"config WHERE config_name='default_lang'") or
@@ -325,7 +325,7 @@ function fromppbb_load_metas($spiprubid)
 		// rappel de connexion
 		$spipbb_fromphpbb['phpbb_connect'] =
 		@mysql_connect($spipbb_fromphpbb['phpbb_host'],$spipbb_fromphpbb['phpbb_login'],$spipbb_fromphpbb['phpbb_pass']) or
-			die(_T('spipbb:migre_erreur_db',array('nom_base','PhpBB')));
+			die(_T('spipbb:migre_erreur_db',array('nom_base'=>'PhpBB')));
 	}
 	else
 	{

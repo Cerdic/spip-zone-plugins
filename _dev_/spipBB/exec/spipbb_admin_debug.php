@@ -137,7 +137,7 @@ function spipbb_show_log($log_name="spipbb")
 		$log=$new_log;
 		$log=array_reverse($log);
 		$content=join("<br />\n",$log);
-		$res .= debut_cadre_trait_couleur('',true,'xxx',_T('spipbb:admin_debug_log',array('log_name',$log_name)));
+		$res .= debut_cadre_trait_couleur('',true,'xxx',_T('spipbb:admin_debug_log',array('log_name'=>$log_name)));
 		$res .= "<div style='overflow:auto; width:100%; height: 50em; font-size:80%;border: 1px dashed #ada095;padding:2px;margin:2px;'>";
 		$res .= $content;
 		$res .= "</div>";

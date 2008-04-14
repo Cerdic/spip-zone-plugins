@@ -76,7 +76,7 @@ function signature_spipbb_admin() {
 
 	// si on doit mettre a jour lien vers le zip et le numero de version, sinon message "ok"
 	$maj = version_compare($version_distant,$GLOBALS['spipbb_plug_version'],">") ?
-		"<a href='"._URL_SPIPBB_PLUGIN_ZIP."'>"._T('spipbb:sign_maj',array($version_distant))."</a>"
+		"<a href='"._URL_SPIPBB_PLUGIN_ZIP."'>"._T('spipbb:sign_maj',array('version'=>$version_distant))."</a>"
 		:
 		_T('spipbb:sign_ok') ;
 
