@@ -21,7 +21,7 @@ function getNbCandidats($annee,$jury=0,$type='') {
 /** Recupere le nombre notes SAISIES pour un jury / une serie (/ une matiere / un type)
  *
  */
-function getNbCandidatsNotes($annee,$jury,$id_serie,$id_matiere=0,$type='') {
+function getNbCandidatsNotes($annee,$jury,$id_serie,$id_matiere=0,$type=''){
     $where='';
     if($id_matiere!=0) $where.=" AND id_matiere=$id_matiere and note is not null";
     if($type!='') $where.=" AND type='$type'";
@@ -56,6 +56,21 @@ function getNbCandidatsEF($annee,$jury,$id_matiere,$id_serie=0) {
 	$sql="SELECT count(*) FROM odb_candidats can, odb_decisions decis, odb_repartition rep\n"
 		."WHERE can.annee=$annee and decis.annee=$annee and rep.annee=$annee and can.id_table=rep.id_table and can.id_table=decis.id_table"
 		." $where and rep.jury=$jury and can.ef$ef<>0 and decis.delib1='Admissible'"
+		;
+    $result=odb_query($sql,__FILE__,__LINE__);
+    if(mysql_num_rows($result)>0)
+        $nb=mysql_result($result,0,0);
+    else $nb=0;
+	return $nb;	
+}
+//YEDA ET VLAV, Ajout de la fonction getNbCandidatsORAL pour compter les candidats devant aller à l'Oral
+function getNbCandidatsORAL($annee,$jury,$id_matiere,$id_serie=0) {
+	$where='';
+	if($id_serie>0) $where.=" and can.serie=$id_serie";
+	$oral=abs($id_matiere);
+	$sql="SELECT count(*) FROM odb_candidats can, odb_decisions decis, odb_repartition rep\n"
+		."WHERE can.annee=$annee and decis.annee=$annee and rep.annee=$annee and can.id_table=rep.id_table and can.id_table=decis.id_table"
+		." $where and rep.jury=$jury and decis.delib1='Admissible' and decis.delib2='Oral'"
 		;
     $result=odb_query($sql,__FILE__,__LINE__);
     if(mysql_num_rows($result)>0)
