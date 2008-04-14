@@ -79,7 +79,8 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 			//echo "$type<pre>";print_r($t1);echo "</pre>\n";
 			foreach($t1 as $matiere=>$t2) {
 				$coeff=$t2['coeff'];
-				$diviseurSerie+=$coeff;
+				if($type=='Divers' && $t2['id_matiere']!=ID_MATIERE_EPS) {
+				} else {$diviseurSerie+=$coeff;}
 				$id_matiere=$t2['id_matiere'];
 				$style='';
 				if(strlen($matiere)>10) {
@@ -107,7 +108,7 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 				// on mets N/S aux candidats sans note
 				foreach($tNotes as $id=>$tN1) {
 					if($tN1[$type][$matiere]=='') {
-						if($type!='Divers') {
+						if($type!='Divers'){
 							$tNotes[$id][$type][$matiere]='N/S';
 							$tNS[$type][$matiere][$id]=$id_matiere;
 						} else $tNotes[$id][$type][$matiere]='';
@@ -137,6 +138,8 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 		} else $id_aff=$id;
 		$lignes[$cpt]="\t<th>$id_aff</th>\n";
 		if($deliberation!=1) $lignes[$cpt].="\t<th>$tNom[$id]</th>\n";
+		$isAbsent=false;
+		$isAbsentVrai=false;
 		foreach(array('Pratique','Ecrit','Divers','Oral') as $type) {
 			$t2=$t1[$type];
 			if(count($t2)>0) {
@@ -145,37 +148,55 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 				foreach($t2 as $matiere=>$note) {
 					$id_matiere=$tMatieres[$type][$matiere]['id_matiere'];
 					$coeff=$tMatieres[$type][$matiere]['coeff'];
-					if($note<0) {
+					///////////////////////////
+					if($note<0 && ($type=='Ecrit' || $type=='Pratique')){
 						$note_aff='<span style="color:#f00;font-weight:bold;">N/C</span>';
 						$suite='<br/>N\'a pas compos&eacute;';
 						$diviseur[$id]-=$coeff;
 						$tNbNC[$matiere][]=$id;
-					} elseif($note=='N/S') {
+						$isAbsent=true;
+					}elseif($note=='N/S' && $type=='Ecrit') {
 						$note_aff='<span style="color:#00f;font-weight:bold;">N/S</span>';
 						$suite='<br/>Non saisi';
 						$diviseur[$id]-=$coeff;
 						$tNbNS[$matiere][]=$id;
-					} elseif($note=='') {
+					}elseif($note=='N/S' && $type=='Oral') {
+						$diviseur[$id]-=$coeff;
+						$note_aff='';
+					}elseif(($note=='' || $note>=0) && $type=='Divers' && $id_matiere!=ID_MATIERE_EPS) {
+						$note_aff=$note;
+						$suite="<br/><b>+ $note</b>";
+					//	$diviseur[$id]-=$coeff;
+					}elseif($note=='') {
 						$note_aff='&nbsp;';
 						if($id_matiere==ID_MATIERE_EPS) $isDispense[$id]=true;
+						if($id_matiere==ID_MATIERE_EF1 || $id_matiere==ID_MATIERE_EF2 || $type=='Oral') $isAbsEF=true;
 						$diviseur[$id]-=$coeff;
-					} elseif($note==0 && $type!='Divers') {
+					}elseif($note==0 && $type!='Divers') {
 						$note_aff='<span style="color:#f00;font-weight:bold;">0</span>';
 						$suite="<br/><b>$note</b>/20 <small>soit ".($note*$coeff)."/".(20*$coeff)."</small>";
 						$tNb0[$id][]=$matiere;
 						$isCasReserve=true;
-					} else {
-						if($note==0 && $id_matiere==ID_MATIERE_EPS) {
-							$isCasReserve=true;
+					}elseif($note==0 && $id_matiere==ID_MATIERE_EPS) {
+							//$isCasReserve=true;
 							$isAbsEps=true;
 							$diviseur[$id]-=$coeff;
-						}
-						$note_aff=$note;
-						$total[$id]+=(int)$coeff*(int)$note;
-						if($coeff==0) $total[$id]+=(int)$note; // bonus EF
-						$suite="<br/><b>$note</b>/20 <small>soit ".($note*$coeff)."/".(20*$coeff)."</small>";
+					}elseif($note<0 && ($id_matiere==ID_MATIERE_EF1 || $id_matiere==ID_MATIERE_EF2)) {
+						$isAbsEF=true;
+					}else{
+					$note_aff=$note;
 					}
+					if($type=='Divers' && ($id_matiere!=ID_MATIERE_EPS)){
+						$total[$id]+=(int)$note; // bonus EF
+					}else{
+						$total[$id]+=(int)$coeff*(int)$note;
+					}
+					
+						$suite="<br/><b>$note</b>/20 <small>soit ".($note*$coeff)."/".(20*$coeff)."</small>";
 					$lignes[$cpt].="\t<td style='cursor:help;' title=\"header=[Candidat $id] body=[<b>$matiere</b> ($type)$suite]\">$note_aff</td>\n";
+					if($isAbsent==true){
+						$isAbsentVrai=$isAbsent;
+					}
 				}
 			}
 		}
@@ -183,30 +204,25 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 			$moy=-1;
 			$moy_aff='Absent';
 			$style="color:#f00;";
-			$isAbsent=true;
+			$isAbsentVrai=true;
 		} else {
 			$moy=round($total[$id]/($diviseur[$id]),$iPrecision);
-			if($diviseur[$id]!=$diviseurSerie) {
-				if($diviseur[$id]==($diviseurSerie-1) && ($isDispense[$id] || $isAbsEps))
-					$isAbsent=false;
-				else $isAbsent=true;
-			} else $isAbsent=false;
 			if($moy<5) {
 				$style="color:#f00;font-weight:bold;";
 				$moy_aff="Ajourn&eacute; ($moy)";
-			} elseif($moy<9) {
+			} elseif(($moy<9) || ($moy>9 && $moy<10 && $deliberation==3) ||($moy>9 && $moy<10 && deliberation==0)) {
 				$style="color:#f00;";
 				$moy_aff="Refus&eacute; ($moy)";
-			} else {
+			}else{
 				$moy_aff="$moy";
-				if($isAbsent) $style='color:#c80;';
+				if($isAbsentVrai) $style='color:#c80;';
 				elseif($isCasReserve && ($moy<10 || $isAbsEps)) {
 					$style='color:#369;';
 					$moy_aff="<b>Cas r&eacute;serv&eacute;</b> ($moy)";
 				}
 				else $style='';
 			}
-			if($isAbsent) {
+			if($isAbsentVrai) {
 				$moy_aff="Absent ($moy)";
 				$style.='font-weight:bold;';
 			}
