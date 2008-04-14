@@ -2,9 +2,7 @@
 
 include_spip('inc/vieilles_defs');
 include_spip('inc/svn_update');
-
-# fichier source
-define('_SVN_UPDATE_FILE', find_in_path('svn_update_list.txt'));
+include_spip('inc/cfg_config');
 
 # securite
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -33,11 +31,7 @@ function exec_svn_update() {
 	debut_gauche();
 	debut_droite();
 
-	if (!defined('_SVN_UPDATE_FILE')
-	OR !file_exists(_SVN_UPDATE_FILE)) {
-		die ("Fichier de configuration "._SVN_UPDATE_FILE." absent");
-	}
-	$config = file(_SVN_UPDATE_FILE);
+	$config = explode("\n",lire_config('svn_update/file'));
 
 	$dirs_ok = array();
 	foreach ($config as $l) {

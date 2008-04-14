@@ -18,9 +18,18 @@
         </select>
     </p>
 
+    <p>
+        <label for="file">Listes des repertoires à synchroniser</label>
+	<pre>
+		source destination [revision] [user]
+		Par exemple :
+		svn://zone.spip.org/spip-zone/_squelettes_/sedna sedna
+	</pre>
+        <textarea name="file" id="file">#ENV{file}</textarea>
+    </p>
 
-    <input type="submit" name="_cfg_ok" value="<:OK:>" />
-    <input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
-
-
+    <p>
+	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+    	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+    </p>
 </form>
