@@ -13,7 +13,6 @@
 	- autoplay : true|false,false
 	- autoload : true|false,true
 	- repeat : true|false,false
-	
 	- align : left|center|right,center
 	
 ]
@@ -44,7 +43,7 @@
 ]
 [(#ENV{article}|?{' ',''}) 
   [(#SET{objet_spip,id_article})]
-  [(#SET{objet_val,[(#ENV{article})]})]
+  [(#SET{objet_val,#ENV{article}})]
 ]
 [(#GET{objet_spip}|?{'',' '}) 
   [(#SET{objet_spip,id_article})]
@@ -59,7 +58,6 @@
 [(#SET{autoload,#ENV{autoload,#CONFIG{xspf/butautoload}|sinon{true}}})]
 
 [(#SET{align,#ENV{align,center}})]
-
 <noscript><p>D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia </p></noscript>
 <!-- alternetive texte pour ceux qui ont le js desactive -->
 
@@ -71,15 +69,15 @@
 
 <script type="text/javascript">
 // <![CDATA[
-	var s1 = new SWFObject("#CHEMIN{swf/musicplayer.swf}","buttonplayer","#GET{width}","#GET{height}","7");
-	s1.addParam("wmode","#GET{wmode}");
-	s1.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3,'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
-	s1.addVariable("autoload","#GET{autoload}");
-	s1.addVariable("autoplay","#GET{autoplay}");
-	s1.addVariable("repeat_playlist","#GET{repeat}");
+	var s#ENV{id} = new SWFObject("#CHEMIN{swf/musicplayer.swf}","buttonplayer#ENV{id}","#GET{width}","#GET{height}","7");
+	s#ENV{id}.addParam("wmode","#GET{wmode}");
+	s#ENV{id}.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3,'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
+	s#ENV{id}.addVariable("autoload","#GET{autoload}");
+	s#ENV{id}.addVariable("autoplay","#GET{autoplay}");
+	s#ENV{id}.addVariable("repeat_playlist","#GET{repeat}");
 	
 	$(document).ready(function() {
-		s1.write("buttonplayer[(#GET{objet_spip})]#ENV{id}");
+		s#ENV{id}.write("buttonplayer[(#GET{objet_spip})]#ENV{id}");
 	});
 // ]]>
 </script>
