@@ -3,9 +3,6 @@
 include_spip('inc/vieilles_defs');
 include_spip('inc/svn_update');
 
-# redefinissables dans ecrire/mes_options ; si on veut en mettre
-# plusieurs separer par des deux-points
-define('_SVN_UPDATE_AUTEURS', '1');
 # fichier source
 define('_SVN_UPDATE_FILE', find_in_path('svn_update_list.txt'));
 
