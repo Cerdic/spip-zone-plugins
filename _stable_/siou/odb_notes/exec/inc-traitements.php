@@ -79,8 +79,8 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 			//echo "$type<pre>";print_r($t1);echo "</pre>\n";
 			foreach($t1 as $matiere=>$t2) {
 				$coeff=$t2['coeff'];
-				if($type=='Divers' && $t2['id_matiere']!=ID_MATIERE_EPS) {
-				} else {$diviseurSerie+=$coeff;}
+				if(!($type=='Divers' && $t2['id_matiere']!=ID_MATIERE_EPS)) 
+					$diviseurSerie+=$coeff;
 				$id_matiere=$t2['id_matiere'];
 				$style='';
 				if(strlen($matiere)>10) {
@@ -210,7 +210,7 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 			if($moy<5) {
 				$style="color:#f00;font-weight:bold;";
 				$moy_aff="Ajourn&eacute; ($moy)";
-			} elseif(($moy<9) || ($moy>9 && $moy<10 && $deliberation==3) ||($moy>9 && $moy<10 && deliberation==0)) {
+			} elseif(($moy<9) || ($moy<10 && $deliberation==3) ||($moy>=9 && $moy<10 && $deliberation==0)) {
 				$style="color:#f00;";
 				$moy_aff="Refus&eacute; ($moy)";
 			}else{
