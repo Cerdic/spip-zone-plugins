@@ -1,6 +1,6 @@
 <?php
 
-//intégration des fonctions necessaires de SPIP 1.9.3
+//intÃ©gration des fonctions necessaires de SPIP 1.9.3
 if($GLOBALS['spip_version'] < 1.93)
 	include_spip('193_fonctions');
 
