@@ -232,27 +232,4 @@ function spipbb_fromphorum_formulaire($conf=array())
 	return $res;
 } // spipbb_fromphorum_formulaire
 
-// ------------------------------------------------------------------------------
-// Fonction supprimee en SVN... a remplacer ?
-// etait dans : inc/editer_article
-// ------------------------------------------------------------------------------
-
-if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_EDITER_ARTRUB,'>')) {
-if (!function_exists('')) {
-function editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider)
-{
-	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
-
-	$opt = $chercher_rubrique($id_rubrique, 'article', $config['restreint']);
-
-	$msg = _T('titre_cadre_interieur_rubrique') .
-	  ((preg_match('/^<input[^>]*hidden[^<]*$/', $opt)) ? '' : $aider("artrub"));
-
-	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
-	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";
-	else $logo = "rubrique-24.gif";
-
-	return debut_cadre_couleur($logo, true, "", $msg) . $opt .fin_cadre_couleur(true);
-} } } // editer_article_rubrique
-
 ?>

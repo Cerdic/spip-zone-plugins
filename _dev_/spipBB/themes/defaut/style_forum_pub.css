@@ -9,6 +9,14 @@ coul 6 #ffffff (bordure table et cellules)
 police par defaut des tableau : voir table.spipforum
 */
 
+body {
+background-color:#efefef;
+}
+#principal_forum {
+padding: 50px;
+text-align: center;
+}
+
 /* ** style pour tableau, par leur id - dimensions ** */
 #rubrique_forum {}
 #article_forum {}
@@ -40,6 +48,7 @@ font-family: Verdana, Arial, Helvetica, sans-serif;
 /*background-color:#eeeeee;  coul 4 */
 border: 2px solid #ffffff; /* coul 6 */
 text-align:left;
+background-color :#efefef;
 }
 
 table.spipforum th {
@@ -48,7 +57,7 @@ border: 1px solid #ffffff; /* coul 6 */
 background-color: #496B8D; /* coul 1 */
 color:#ffffff;
 }
-table.spipforum td { vertical-align:top; }
+table.spipforum td { vertical-align:middle; }
 
 /* diverses lignes */
 tr.inter {
@@ -75,7 +84,7 @@ border: 1px solid #ffffff; /* coul 6 */
 background-color:#BBC6D2; /*coul 3 */
 font-size: 13px;
 font-weight : bold;
-color: #ffffff; 
+color: #ffffff;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 text-align:center;
 }
@@ -213,13 +222,13 @@ background-color:#ffffff; /* coul 6 */
 
 
 /* CLASS SPIP
- ** formulaire_forum 
- ** formulaire_ecrire_auteur 
+ ** formulaire_forum
+ ** formulaire_ecrire_auteur
  ** formulaire_inscription
  ** formulaire_gaf_profil
-  
+
  .. redeclaration de class spip proposées ici a titre d'exemple,
-	à reporter dans votre feuille principale (ou pas !) 
+	à reporter dans votre feuille principale (ou pas !)
 */
 .formulaire_spip {
 width:auto; margin:0px; /* v.0.6 */
@@ -236,8 +245,8 @@ font-family: Verdana, Arial, Helvetica, sans-serif;
 	padding:2px;
 }
 .formulaire_spip fieldset { border:1px solid #496B8D; /* coul 1 */ }
-.formulaire_spip legend { 
-	font-weight: bold; 
+.formulaire_spip legend {
+	font-weight: bold;
 	padding: 3px;
 	background-color: transparent;
 }
@@ -303,7 +312,7 @@ background-image:url(img/bout_rech.png);/*bout_rech.gif*/
 background-position:0px;
 }
 
-#action_for { 
+#action_for {
 clear:both;
 margin:5px 0px; /* v.0.6 */
 padding:2px 0px;
@@ -410,7 +419,7 @@ li.repondre a { background-image: url(img/repondre.png); }/*repondre.gif*/
 
 /* bouton 'citer' (td date_sujet ; voirsujet.html ) */
 .bout_citer, .bout_citer a {
-float:right; 
+float:right;
 width:60px; /* +/- largeur icone */
 height:20px; /* +/- hauteur icone */
 }
@@ -422,7 +431,7 @@ background-position:top right;
 .bout_citer a:hover, .bout_admin a:hover { text-decoration: none; }
 
 .bout_admin, .bout_admin a {
-float:right; 
+float:right;
 width:30px; /* +/- largeur icone */
 height:20px; /* +/- hauteur icone */
 }
@@ -489,14 +498,14 @@ p.erreur {
 
 /* Bloc de login ( --> formulaire_login ) */
 div.login {
-	width: 99%; 
+	width: 99%;
 	margin-top: 10px;
 	padding:5px;
 	background-color:#A4B3C3; /* coul 2*/
 	vertical-align:top;
 	font-size: 11px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-} 
+}
 div.login p.login {
 	margin:0;
 	padding:2px;
@@ -545,7 +554,7 @@ div.alerte_ferme p { font-size: 11px; color: #000000; font-weight:normal; }
 /* modif GAF v.0.5, v.0.6 */
 #bouton_rss a, #bouton_retour a {
 	background-color:#C3CCD0; /* coul 3*/
-	border:1px solid #4C788B; /* coul 1*/	
+	border:1px solid #4C788B; /* coul 1*/
 	font-size: 10px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	float:left;
@@ -584,7 +593,7 @@ p.signature { /* v.0.6 */
 }
 
 
-/* p supporte par IE et Gecko 
+/* p supporte par IE et Gecko
 p.space_5, p.space_10, p.space_20 {
 	display:block;
 	margin: 0;

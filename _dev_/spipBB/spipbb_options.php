@@ -34,7 +34,7 @@ include_spip('base/sap_spipbb');
 define('_SUIVI_FORUM_THREAD', "1");
 
 
-# h. GAF 
+# h. GAF
 # definir repertoire des smileys ;
 # permet un repert perso de remplacement : mes_smileys/
 #
@@ -65,7 +65,7 @@ function test_inscription($mode, $mail, $nom, $id=0)
 	if (!$r = email_valide($mail)) return _T('info_email_invalide');
 
 	// Controle de la ban_list
-	if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_SQL,'<')) {
+	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_SQL,'<')) {
 		include_spip('inc/spipbb_192'); // SPIP 1.9.2
 	}
 
@@ -93,7 +93,7 @@ function test_inscription($mode, $mail, $nom, $id=0)
 	} // Fin du bloc traitement specifique spipbb
 
 	return array('email' => $r, 'nom' => $nom, 'bio' => $mode);
-}
+} // test_inscription
 
 
 # h.22/05/07 GAF 0.4 spip 1.9.2
@@ -118,7 +118,7 @@ if(function_exists('lire_config')) {
 
 	if (is_array($spipbb_meta) AND
 		$spipbb_meta['configure'] == 'oui' ) {
-			
+
 		if (lire_config('spipbb/support_auteurs')=='extra') {
 			# champs a creer
 			if (!is_array($GLOBALS['champs_extra'])) {
@@ -127,7 +127,7 @@ if(function_exists('lire_config')) {
 			foreach($GLOBALS['champs_sap_spipbb'] as $k =>$v) {
 				$GLOBALS['champs_extra']['auteurs'][$k]=$v['extra'];
 			}
-			
+
 			# champs affiches
 			if (!is_array($GLOBALS['champs_extra_proposes'])) {
 				$GLOBALS['champs_extra_proposes'] = Array ();
@@ -146,9 +146,16 @@ if(function_exists('lire_config')) {
 			}
 		}
 	} // spipbb actif
-	
+
 } else {
 	spip_log("SpipBB : Debug spipbb_options.php : Pas de lire_config");
 }
+
+// autorisations pour spipbb
+function spipbb_autoriser() {
+	return function_exists('autoriser')
+	?autoriser('configurer', 'plugins')
+	:$GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"];
+} // spipbb_autoriser
 
 ?>

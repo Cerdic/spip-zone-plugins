@@ -33,6 +33,11 @@ function spipbb_install($action)
 	switch ($action)
 	{
 		case 'test' :
+			// Affichage ici du cadre sous la sous la partie plugins de Spip (affiche_gauche n'y est pas activte)
+			if(!defined('_SPIP19300')) echo '<br/>';
+			echo debut_cadre_enfonce('', true),
+				icone_horizontale(_T('spipbb:titre_spipbb'), generer_url_ecrire('spipbb_configuration'), find_in_path('img_pack/spipbb-24.png'), '', false),
+				fin_cadre_enfonce(true);
 			return isset($GLOBALS['meta']['spipbb']) ;
 			break;
 		case 'install' :

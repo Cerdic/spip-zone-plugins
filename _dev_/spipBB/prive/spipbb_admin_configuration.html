@@ -14,15 +14,7 @@
 <legend><:spipbb:admin_config_prerequis:></legend>
 <p>
 <label>
-	<ul>
-	#ENV*{etat_spip}
-	</ul>
-	<ul>
-	#ENV*{etat_plugins}
-	</ul>
-	<ul>
-	#ENV*{etat_tables}
-	</ul>
+	#ENV*{etat_general}
 </label>
 </p>
 </fieldset>
@@ -164,7 +156,7 @@
 <label>
 </select>
 <table cellpadding='3' cellspacing='1' border='1' width='100%'>
-<tr>	
+<tr>
 	<td><:spipbb:squelette_groupeforum:></td>
 	<td><input type="text" name="squelette_groupeforum" value="[(#ENV{squelette_groupeforum})]" size='20' />
 	</td>
@@ -178,7 +170,7 @@
 <label>
 </fieldset>
 
-<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:valider:>" class="fondo" /></div>
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:bouton_valider:>" class="fondo" /></div>
 
 [(#REM|sinon{1}|fin_cadre_trait_couleur)]
 
@@ -202,7 +194,7 @@
 </tr>
 </table>
 
-<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:valider:>" class="fondo" /></div>
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:bouton_valider:>" class="fondo" /></div>
 
 [(#REM|sinon{1}|fin_cadre_trait_couleur)]
 
@@ -228,7 +220,7 @@
 </tr>
 </table>
 
-<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:valider:>" class="fondo" /></div>
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:bouton_valider:>" class="fondo" /></div>
 
 [(#REM|sinon{1}|fin_cadre_trait_couleur)]
 
@@ -265,7 +257,7 @@
 </tr>
 </table>
 
-<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:valider:>" class="fondo" /></div>
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:bouton_valider:>" class="fondo" /></div>
 
 [(#REM|sinon{1}|fin_cadre_trait_couleur)]
 
@@ -297,15 +289,19 @@
 </tr>
 </table>
 
-<?php //fin spipbb active == oui
-} ?>
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:bouton_valider:>" class="fondo" /></div>
 
-[(#REM) ------------------------ DERNIER BOUTON OK ------------------------ ]
-<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:valider:>" class="fondo" /></div>
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+#ENV*{config_support_auteurs}
+#ENV*{config_champs_supp}
+
+<?php //fin spipbb active == oui
+} else { ?>
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:bouton_valider:>" class="fondo" /></div>
+<?php } ?>
 
 <?php //fin spipbb prerequis == oui
 } ?>
 
-[(#REM|sinon{1}|fin_cadre_trait_couleur)]
-
-<!-- pas de /FORM ici en attendant integration des outils gaf:  /form -->
+</form>

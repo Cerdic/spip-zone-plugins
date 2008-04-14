@@ -24,7 +24,7 @@ if (!defined("_INC_SPIPBB_COMMON")) include_spip('inc/spipbb_common');
 spipbb_log("included",3,__FILE__);
 
 global $spip_version_code;
-if (version_compare(substr($spip_version_code,0,6),_SPIPBB_REV_STYLISER,'<')){
+if (version_compare($spip_version_code,_SPIPBB_REV_STYLISER,'<')){
 	include_spip('public/styliser192'); // SPIP 1.9.2
 } else { // SPIP 1.9.3
 

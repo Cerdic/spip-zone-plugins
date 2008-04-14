@@ -32,7 +32,7 @@ function spipbb_ajouter_boutons($boutons_admin) {
 		"../"._DIR_PLUGIN_SPIPBB."img_pack/spipbb-24.png",  // icone
 		_T('spipbb:titre_spipbb')	// titre
 		);
-## h. un seul bouton suffit !! 
+## h. un seul bouton suffit !!
 		/*
 		$boutons_admin['configuration']->sousmenu["spipbb_admin_configuration"]= new Bouton(
 		"../"._DIR_PLUGIN_SPIPBB."/img_pack/spipbb-24.png",  // icone
@@ -72,7 +72,7 @@ function spipbb_affiche_droite($flux)
 		$r = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=".$flux['args']['id_rubrique']);
 		$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
 		if ( !spipbb_is_configured()
-			OR ($GLOBALS['spipbb']['configure']!='oui') 
+			OR ($GLOBALS['spipbb']['configure']!='oui')
 			OR (empty($GLOBALS['spipbb']['id_secteur'])) ) {
 		// [fr] configuration pas terminee -> lien vers la config
 			$url_lien = generer_url_ecrire('spipbb_configuration',"") ;
@@ -125,5 +125,15 @@ function spipbb_taches_generales_cron($taches_generales){
 	$taches_generales['statvisites'] = _SPIPBB_DELAIS_CRON ;
 	return $taches_generales;
 } // spipbb_taches_generales_cron
+
+#
+# Onglet dans la page de configuration
+#
+function spipbb_ajouter_onglets($flux){
+	// si on est admin...
+	if ($flux['args']=='configuration' && spipbb_autoriser())
+		$flux['data']['spipbb']= new Bouton(find_in_path('img_pack/spipbb-24.png'), _T('spipbb:titre_spipbb'), generer_url_ecrire('spipbb_configuration'));
+	return $flux;
+}
 
 ?>

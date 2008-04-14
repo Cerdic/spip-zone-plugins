@@ -129,7 +129,7 @@ $table_des_tables['ban_liste'] = 'ban_liste';
 
 // c: 27/12/7 corrige le bug auteurs_rubriques table SQL inconnue en 1.9.2
 // je ne suis pas sûr que ce soit très bien de faire cela...
-if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_TABLE_AUTRUB,'<')) {
+if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_TABLE_AUTRUB,'<')) {
 	$table_des_tables['auteurs_rubriques'] = 'auteurs_rubriques';
 }
 

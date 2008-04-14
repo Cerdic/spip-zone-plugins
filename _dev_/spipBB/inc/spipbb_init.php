@@ -1,7 +1,24 @@
 <?php
-/*
-|
-*/
+#----------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                        #
+#  File    : inc/spipbb_init                               #
+#  Authors : Scoty, 2007 et als                            #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  Contact : chryjs!@!free!.!fr                            #
+#----------------------------------------------------------#
+
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -15,11 +32,11 @@ $GLOBALS['spipbb_plug_version'] = $infos['version'];
 
 # recup des metas
 // c: 18/12/7 normalement ce n'est pas utile !! car deja initialise ailleurs !
-$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
+// $GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']); # init juste apres dans inc/spipbb_util spipbb_is_configured
 
 #
 # inclure fonctions communes (exec/ .. action/ )...
-# controle config. ... Charge conversion 192 
+# controle config. ... Charge conversion 192
 #
 include_spip('inc/spipbb_util');
 
@@ -33,18 +50,9 @@ if(!spipbb_is_configured() AND _request('exec')!="spipbb_configuration") {
 }
 
 #
-# inclure fonctions communes a tous exec 
+# inclure fonctions communes a tous exec
 #
 include_spip('inc/spipbb_presentation');
 include_spip('inc/spipbb_menus_gauche');
-
-
-
-# Def. repertoire icones back
-	if (!defined("_DIR_IMG_SPIPBB")) {
-		define('_DIR_IMG_SPIPBB', _DIR_PLUGIN_SPIPBB.'/img_pack/');
-	}
-
-
 
 ?>

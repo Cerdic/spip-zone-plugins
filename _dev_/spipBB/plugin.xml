@@ -15,7 +15,7 @@ _ &#169; 2006 - <multi>
 </multi>
 	</auteur>
 	<version>
-		0.4.5
+		0.4.8.0
 	</version>
 	<etat>
 		dev
@@ -29,6 +29,10 @@ Boards such as phpBB. In this sector, the sub-sectors, are forum
  groups, the articles are forums, and each post in the forum
  of such articles will start a new thread.
 
+{{Please check :}}
+-* &bull;[help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
+-* &bull;[the documentation on Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+
 _ {{The development of Spipbb plugin is in progress. Use it at your
  own risks :)}}
 
@@ -40,6 +44,10 @@ _ [Access to the admin panel-> .?exec=spipbb_configuration]
  &laquo;Bulletin Board&raquo; tels que phpBB. Dans ce secteur, les
  sous-rubriques sont des groupes de forums, les articles des forums,
  chaque message dans le forum d'un article y d&eacute;marre un thread.
+
+{{Consultez :}}
+-* &bull;[l'aide et support sur spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
+-* &bull;[la documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
 _ {{Plugin spipbb en cours de developpement. Vous l'utilisez &agrave;
  vos risques et p&eacute;rils}}
@@ -76,6 +84,10 @@ _ [Acc&egrave;s au
 	</pipeline>
 	<pipeline>
 		<nom>taches_generales_cron</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
 		<inclure>spipbb_pipelines.php</inclure>
 	</pipeline>
 	<chemin dir='' />

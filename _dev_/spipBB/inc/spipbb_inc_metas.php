@@ -39,38 +39,38 @@ function spipbb_init_metas()
 {
 	// priorite a la config de spipbb
 	$old_meta = @unserialize($GLOBALS['meta']['spipbb']); // recupere de vieilles metas
-	
+
 	// chargement de la config de gafospip le vrai !!
 	if (!is_array($old_meta)) $old_meta=spipbb_import_gafospip_metas();
-	
-	unset($spipbb_meta);
-	
-	$spipbb_meta=array();
-	
-	$spipbb_meta['configure'] = $old_meta['configure'] ? $old_meta['configure'] :'non';
-	$spipbb_meta['version']= $GLOBALS['spipbb_plug_version'];
-	$spipbb_meta['id_secteur'] = $old_meta['id_secteur'] ? $old_meta['id_secteur'] : 0;
-	$spipbb_meta['config_id_secteur'] = $old_meta['config_id_secteur'] ? $old_meta['config_id_secteur'] : 'non';
 
-	$spipbb_meta['squelette_groupeforum']= $old_meta['squelette_groupeforum'] ? $old_meta['squelette_groupeforum'] : "groupeforum";
-	$spipbb_meta['squelette_filforum']= $old_meta['squelette_filforum'] ? $old_meta['squelette_filforum'] : "filforum";
-	if ( find_in_path("groupeforum.html") AND find_in_path("filforum.html") )
+	unset($spipbb_meta);
+
+	$spipbb_meta=array();
+
+	$spipbb_meta['configure'] = isset($old_meta['configure']) ? $old_meta['configure'] :'non';
+	$spipbb_meta['version']= $GLOBALS['spipbb_plug_version'];
+	$spipbb_meta['id_secteur'] = isset($old_meta['id_secteur']) ? $old_meta['id_secteur'] : 0;
+	$spipbb_meta['config_id_secteur'] = isset($old_meta['config_id_secteur']) ? $old_meta['config_id_secteur'] : 'non';
+
+	$spipbb_meta['squelette_groupeforum']= isset($old_meta['squelette_groupeforum']) ? $old_meta['squelette_groupeforum'] : "groupeforum";
+	$spipbb_meta['squelette_filforum']= isset($old_meta['squelette_filforum']) ? $old_meta['squelette_filforum'] : "filforum";
+	if ( find_in_path($spipbb_meta['squelette_groupeforum'].".html") AND find_in_path($spipbb_meta['squelette_filforum'].".html") )
 		$spipbb_meta['config_squelette'] = 'oui';
-	else 
+	else
 		$spipbb_meta['config_squelette'] = 'non';
 
 	// les mots cles specifiques
-	$spipbb_meta['id_groupe_mot'] = $old_meta['id_groupe_mot'] ? $old_meta['id_groupe_mot'] : 0;
-	$spipbb_meta['config_groupe_mots'] = $old_meta['config_groupe_mots'] ? $old_meta['config_groupe_mots'] : 'non';
-	$spipbb_meta['id_mot_ferme'] = $old_meta['id_mot_ferme'] ? $old_meta['id_mot_ferme'] : 0;
-	$spipbb_meta['id_mot_annonce'] = $old_meta['id_mot_annonce'] ? $old_meta['id_mot_annonce'] : 0;
-	$spipbb_meta['id_mot_postit'] = $old_meta['id_mot_postit'] ? $old_meta['id_mot_postit'] : 0;
-	$spipbb_meta['config_mot_cles'] = $old_meta['config_mot_cles'] ? $old_meta['config_mot_cles'] : 'non';
+	$spipbb_meta['id_groupe_mot'] = isset($old_meta['id_groupe_mot']) ? $old_meta['id_groupe_mot'] : 0;
+	$spipbb_meta['config_groupe_mots'] = isset($old_meta['config_groupe_mots']) ? $old_meta['config_groupe_mots'] : 'non';
+	$spipbb_meta['id_mot_ferme'] = isset($old_meta['id_mot_ferme']) ? $old_meta['id_mot_ferme'] : 0;
+	$spipbb_meta['id_mot_annonce'] = isset($old_meta['id_mot_annonce']) ? $old_meta['id_mot_annonce'] : 0;
+	$spipbb_meta['id_mot_postit'] = isset($old_meta['id_mot_postit']) ? $old_meta['id_mot_postit'] : 0;
+	$spipbb_meta['config_mot_cles'] = isset($old_meta['config_mot_cles']) ? $old_meta['config_mot_cles'] : 'non';
 
 	// gafospip
 	#stockage des champs supplementaires
-	$spipbb_meta['support_auteurs'] = $old_meta['support_auteurs'] ? $old_meta['support_auteurs'] : 'extra'; //$options_sap = array('extra','table');
-	$spipbb_meta['table_support'] = $old_meta['table_support'] ? $old_meta['table_support'] : '';
+	$spipbb_meta['support_auteurs'] = isset($old_meta['support_auteurs']) ? $old_meta['support_auteurs'] : 'extra'; //$options_sap = array('extra','table');
+	$spipbb_meta['table_support'] = isset($old_meta['table_support']) ? $old_meta['table_support'] : '';
 	#champs supplementaires auteurs
 	$champs_requis = array('date_crea_spipbb','avatar','annuaire_forum','refus_suivi_thread');
 	$champs_definis=array();
@@ -79,45 +79,45 @@ function spipbb_init_metas()
 	}
 	$champs_optionnels = array_diff($champs_definis,$champs_requis);
 	foreach ($champs_optionnels as $champ_a_valider) {
-		$spipbb_meta['affiche_'.$champ_a_valider]=$old_meta['affiche_'.$champ_a_valider] ? $old_meta['affiche_'.$champ_a_valider] : 'oui';
+		$spipbb_meta['affiche_'.$champ_a_valider]=isset($old_meta['affiche_'.$champ_a_valider]) ? $old_meta['affiche_'.$champ_a_valider] : 'oui';
 	}
 	# autres parametres
-	$spipbb_meta['fixlimit'] = $old_meta['fixlimit'] ? $old_meta['fixlimit'] : 10;
-	$spipbb_meta['lockmaint'] = $old_meta['lockmaint'] ? $old_meta['lockmaint'] : 600;
-	$spipbb_meta['affiche_bouton_abus'] = $old_meta['affiche_bouton_abus'] ? $old_meta['affiche_bouton_abus'] : 'non';
-	$spipbb_meta['affiche_bouton_rss'] = $old_meta['affiche_bouton_rss'] ? $old_meta['affiche_bouton_rss'] : 'un';
-	$spipbb_meta['affiche_avatar'] = $old_meta['affiche_avatar'] ? $old_meta['affiche_avatar'] : 'oui';
-	$spipbb_meta['taille_avatar_suj'] = $old_meta['taille_avatar_suj'] ? $old_meta['taille_avatar_suj'] : 50;
-	$spipbb_meta['taille_avatar_cont'] = $old_meta['taille_avatar_cont'] ? $old_meta['taille_avatar_cont'] : 80;
-	$spipbb_meta['taille_avatar_prof'] = $old_meta['taille_avatar_prof'] ? $old_meta['taille_avatar_prof'] : 80;
-	$spipbb_meta['affiche_bouton_abus'] = $old_meta['affiche_bouton_abus'] ? $old_meta['affiche_bouton_abus'] : 'non';
-	$spipbb_meta['affiche_bouton_rss'] = $old_meta['affiche_bouton_rss'] ? $old_meta['affiche_bouton_rss'] : 'un';
-	$spipbb_meta['affiche_membre_defaut'] = $old_meta['affiche_membre_defaut'] ? $old_meta['affiche_membre_defaut'] : 'non'; // c: 27/12/7 par defaut non pour respecter demande Scoty
-	$spipbb_meta['log_level'] = $old_meta['log_level'] ? $old_meta['log_level'] : _SPIPBB_LOG_LEVEL; // c: 27/12/7 par defaut le niveau de log est a 3 (voir inc/spipbb_common
+	$spipbb_meta['fixlimit'] = isset($old_meta['fixlimit']) ? $old_meta['fixlimit'] : 10;
+	$spipbb_meta['lockmaint'] = isset($old_meta['lockmaint']) ? $old_meta['lockmaint'] : 600;
+	$spipbb_meta['affiche_bouton_abus'] = isset($old_meta['affiche_bouton_abus']) ? $old_meta['affiche_bouton_abus'] : 'non';
+	$spipbb_meta['affiche_bouton_rss'] = isset($old_meta['affiche_bouton_rss']) ? $old_meta['affiche_bouton_rss'] : 'un';
+	$spipbb_meta['affiche_avatar'] = isset($old_meta['affiche_avatar']) ? $old_meta['affiche_avatar'] : 'oui';
+	$spipbb_meta['taille_avatar_suj'] = isset($old_meta['taille_avatar_suj']) ? $old_meta['taille_avatar_suj'] : 50;
+	$spipbb_meta['taille_avatar_cont'] = isset($old_meta['taille_avatar_cont']) ? $old_meta['taille_avatar_cont'] : 80;
+	$spipbb_meta['taille_avatar_prof'] = isset($old_meta['taille_avatar_prof']) ? $old_meta['taille_avatar_prof'] : 80;
+	$spipbb_meta['affiche_bouton_abus'] = isset($old_meta['affiche_bouton_abus']) ? $old_meta['affiche_bouton_abus'] : 'non';
+	$spipbb_meta['affiche_bouton_rss'] = isset($old_meta['affiche_bouton_rss']) ? $old_meta['affiche_bouton_rss'] : 'un';
+	$spipbb_meta['affiche_membre_defaut'] = isset($old_meta['affiche_membre_defaut']) ? $old_meta['affiche_membre_defaut'] : 'non'; // c: 27/12/7 par defaut non pour respecter demande Scoty
+	$spipbb_meta['log_level'] = isset($old_meta['log_level']) ? $old_meta['log_level'] : _SPIPBB_LOG_LEVEL; // c: 27/12/7 par defaut le niveau de log est a 3 (voir inc/spipbb_common
 	// chemin icones et smileys ?
 
 	// spam words
-	$spipbb_meta['config_spam_words'] = $old_meta['config_spam_words'] ? $old_meta['config_spam_words'] : 'non';
-	$spipbb_meta['sw_nb_spam_ban'] = $old_meta['sw_nb_spam_ban'] ? $old_meta['sw_nb_spam_ban'] : 3;
-	$spipbb_meta['sw_ban_ip'] = $old_meta['sw_ban_ip'] ? $old_meta['sw_ban_ip'] : "non";
-	$spipbb_meta['sw_admin_can_spam'] = $old_meta['sw_admin_can_spam'] ? $old_meta['sw_admin_can_spam'] : "non";
-	$spipbb_meta['sw_modo_can_spam'] = $old_meta['sw_modo_can_spam'] ? $old_meta['sw_modo_can_spam'] : "non";
-	$spipbb_meta['sw_send_pm_warning'] = $old_meta['sw_send_pm_warning'] ? $old_meta['sw_send_pm_warning'] : "non";
-	$spipbb_meta['sw_warning_from_admin'] = $old_meta['sw_warning_from_admin'] ? $old_meta['sw_warning_from_admin'] : 1; // id_auteur
-	$spipbb_meta['sw_warning_pm_titre'] = $old_meta['sw_warning_pm_titre'] ? $old_meta['sw_warning_pm_titre'] : _T('spipbb:sw_pm_spam_warning_titre');
-	$spipbb_meta['sw_warning_pm_message'] = $old_meta['sw_warning_pm_message'] ? $old_meta['sw_warning_pm_message'] : _T('spipbb:sw_pm_spam_warning_message');
+	$spipbb_meta['config_spam_words'] = isset($old_meta['config_spam_words']) ? $old_meta['config_spam_words'] : 'non';
+	$spipbb_meta['sw_nb_spam_ban'] = isset($old_meta['sw_nb_spam_ban']) ? $old_meta['sw_nb_spam_ban'] : 3;
+	$spipbb_meta['sw_ban_ip'] = isset($old_meta['sw_ban_ip']) ? $old_meta['sw_ban_ip'] : "non";
+	$spipbb_meta['sw_admin_can_spam'] = isset($old_meta['sw_admin_can_spam']) ? $old_meta['sw_admin_can_spam'] : "non";
+	$spipbb_meta['sw_modo_can_spam'] = isset($old_meta['sw_modo_can_spam']) ? $old_meta['sw_modo_can_spam'] : "non";
+	$spipbb_meta['sw_send_pm_warning'] = isset($old_meta['sw_send_pm_warning']) ? $old_meta['sw_send_pm_warning'] : "non";
+	$spipbb_meta['sw_warning_from_admin'] = isset($old_meta['sw_warning_from_admin']) ? $old_meta['sw_warning_from_admin'] : 1; // id_auteur
+	$spipbb_meta['sw_warning_pm_titre'] = isset($old_meta['sw_warning_pm_titre']) ? $old_meta['sw_warning_pm_titre'] : _T('spipbb:sw_pm_spam_warning_titre');
+	$spipbb_meta['sw_warning_pm_message'] = isset($old_meta['sw_warning_pm_message']) ? $old_meta['sw_warning_pm_message'] : _T('spipbb:sw_pm_spam_warning_message');
 
 	// [fr] Nettoyage des traces [en] remove old metas
 	spipbb_delete_metas();
-	
+
 	// Ecrire metas
 	include_spip('inc/meta');
 	ecrire_meta('spipbb', serialize($spipbb_meta));
 	if (defined('_INC_SPIPBB_192')) ecrire_metas(); // Code 192
-	
+
 	// Redef. GLOBALS
 	$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
-	
+
 	spipbb_log('END '.$GLOBALS['meta']['spipbb'],3,"init_metas");
 } // spipbb_init_metas
 
@@ -134,7 +134,7 @@ function spipbb_import_gafospip_metas()
 		#$spipbb_meta['id_groupe_mot']=$tbl_conf['groupe']; # num groupe
 		$spipbb_meta['fixlimit']=$tbl_conf['fixlimit']; # n lignes
 		$spipbb_meta['lockmaint']=$tbl_conf['lockmaint']=intval(_request('lockmaint')); # n secondes
-		
+
 		## h. 1/12/07
 		# ceci repond a gafosip 0.6 -> il ne sera pas publie a priori !!
 		# donc on zap ceci :
@@ -195,11 +195,11 @@ function spipbb_save_metas()
 {
 	$GLOBALS['spipbb']['config_id_secteur'] = empty($GLOBALS['spipbb']['id_secteur']) ? 'non' : 'oui';
 	$GLOBALS['spipbb']['config_groupe_mots'] = empty($GLOBALS['spipbb']['id_groupe_mot']) ? 'non' : 'oui';
-	$GLOBALS['spipbb']['config_mot_cles'] = ( 
+	$GLOBALS['spipbb']['config_mot_cles'] = (
 			empty($GLOBALS['spipbb']['id_mot_ferme']) or
-			empty($GLOBALS['spipbb']['id_mot_annonce']) or 
+			empty($GLOBALS['spipbb']['id_mot_annonce']) or
 			empty($GLOBALS['spipbb']['id_mot_postit']) ) ? 'non' : 'oui';
-	if ( find_in_path($GLOBALS['spipbb']['squelette_groupeforum']) AND 
+	if ( find_in_path($GLOBALS['spipbb']['squelette_groupeforum']) AND
 		find_in_path($GLOBALS['spipbb']['squelette_filforum']) )
 		$GLOBALS['spipbb']['config_squelette'] = 'oui';
 
@@ -217,12 +217,12 @@ function spipbb_save_metas()
 function spipbb_upgrade_metas($installed_version='',$version_code='') {
 
 	if($installed_version=='') {
-		$installed_version=='0.0.0';
+		$installed_version=='0.0.0.0';
 	}
 
-	if ( version_compare(substr($installed_version,0,5),$version_code,'<' ) ) { // 0.4.5 == 5 char _SPIPBB
+	if ( version_compare($installed_version,$version_code,'<' ) ) {
 		spipbb_init_metas();
-	} 
+	}
 	// else si on fait des changements apres la 0.3.0
 
 	spipbb_log("OK from:$installed_version:to:$version_code",3,"spipbb_upgrade_metas");

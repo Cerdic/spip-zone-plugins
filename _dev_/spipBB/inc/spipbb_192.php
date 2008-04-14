@@ -44,7 +44,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (defined("_INC_SPIPBB_192")) return; else define("_INC_SPIPBB_192", true);
 
-if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_SQL,'>=')) {
+if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_SQL,'>=')) {
 	// On ne devrait pas etre la
 	spipbb_log('included : ERROR wrong release',1,__FILE__);
 	return;
@@ -151,7 +151,7 @@ function spip_mysql_query($query, $serveur='')
 // from req/mysql.php 193 // apparus en SVN 9932 -> version_code 1.9259/1.9260
 #------------------------------------------------------------#
 if (!function_exists('trace_query_start')
-AND (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_REQSQL,'<')) ) {
+AND (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_REQSQL,'<')) ) {
 function trace_query_start()
 {
 	static $trace = '?';
@@ -170,7 +170,7 @@ function trace_query_start()
 // from req/mysql.php 193 idem trace_query_start
 #------------------------------------------------------------#
 if (!function_exists('trace_query_end')
-AND (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_REQSQL,'<'))) {
+AND (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_REQSQL,'<'))) {
 function trace_query_end($query, $start, $result, $err)
 {
 	global $tableau_des_erreurs;
@@ -190,7 +190,7 @@ function trace_query_end($query, $start, $result, $err)
 // from req/mysql.php 193
 #------------------------------------------------------------#
 if (!function_exists('trace_query_chrono')
-AND (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_REQSQL,'<'))) {
+AND (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_REQSQL,'<'))) {
 function trace_query_chrono($m1, $m2, $query, $result)
 {
 	static $tt = 0, $nb=0;

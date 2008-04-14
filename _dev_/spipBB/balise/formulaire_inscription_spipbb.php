@@ -36,8 +36,8 @@ function balise_FORMULAIRE_INSCRIPTION_SPIPBB ($p) {
 // http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_stat
 function balise_FORMULAIRE_INSCRIPTION_SPIPBB_stat($args, $filtres) {
 	list($mode, $id, $focus) = $args;
-	if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_REQSQL,'<')) {
-		if(!$mode) $mode = $GLOBALS['meta']['accepter_inscriptions'] == 'oui' ? 'redac' : ''; 
+	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_REQSQL,'<')) {
+		if(!$mode) $mode = $GLOBALS['meta']['accepter_inscriptions'] == 'oui' ? 'redac' : '';
 		if (!test_mode_inscription($mode))
 			return '';
 		else return array($mode, $focus, $id);
@@ -56,7 +56,7 @@ function balise_FORMULAIRE_INSCRIPTION_SPIPBB_stat($args, $filtres) {
 // http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_dyn
 function balise_FORMULAIRE_INSCRIPTION_SPIPBB_dyn($mode, $focus, $id=0) {
 
-	if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_REQSQL,'<')) {
+	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_REQSQL,'<')) {
 		if (!test_mode_inscription($mode)) return _T('pass_rien_a_faire_ici');
 	} else {
 		if (!tester_config($id, $mode)) return _T('pass_rien_a_faire_ici');
@@ -64,13 +64,13 @@ function balise_FORMULAIRE_INSCRIPTION_SPIPBB_dyn($mode, $focus, $id=0) {
 
 	$nom = _request('nom_inscription');
 	$mail = _request('mail_inscription');
-	
+
 	if ($mail) {
 		$commentaire = message_inscription($mail, $nom, $mode, $id);
 		if (is_array($commentaire)) {
 			if (function_exists('envoyer_inscription'))
 				$f = 'envoyer_inscription';
-			else 
+			else
 				$f = 'envoyer_inscription_dist';
 			$commentaire = $f($commentaire, $nom, $mode, $id);
 		}
@@ -80,7 +80,7 @@ function balise_FORMULAIRE_INSCRIPTION_SPIPBB_dyn($mode, $focus, $id=0) {
 
 	// #ENV*{message} doit etre non vide lorsque tout s'est bien passe
 	// #ENV*{commentaire} doit etre non vide pour afficher le formulaire
-	// et il indique si on s'inscrit a l'espace public ou prive 
+	// et il indique si on s'inscrit a l'espace public ou prive
 	// ou donne un message d'erreur aux appels suivants si pb
 
 	return array("formulaires/inscription_spipbb", $GLOBALS['delais'],
@@ -100,7 +100,7 @@ function balise_FORMULAIRE_INSCRIPTION_SPIPBB_dyn($mode, $focus, $id=0) {
 // et donner des infos supplementaires
 // Std: controler que le nom (qui sert a calculer le login) est plausible
 // et que l'adresse est valide (et on la normalise)
-// Retour: une chaine message d'erreur 
+// Retour: une chaine message d'erreur
 // ou un tableau avec au minimum email, nom, mode (redac / forum)
 
 // http://doc.spip.org/@test_inscription_dist
@@ -114,7 +114,7 @@ function test_inscription_dist($mode, $mail, $nom, $id=0) {
 	return array('email' => $r, 'nom' => $nom, 'bio' => $mode);
 }
 
-// cree un nouvel utilisateur et renvoie un message d'impossibilite 
+// cree un nouvel utilisateur et renvoie un message d'impossibilite
 // ou le tableau representant la ligne SQL le decrivant.
 // $mode = 'forum' ou 'redac' selon ce a quoi on s'inscrit
 // $id = une id_rubrique eventuelle (?)
@@ -123,7 +123,7 @@ function message_inscription($mail, $nom, $mode, $id=0) {
 
 	if (function_exists('test_inscription'))
 		$f = 'test_inscription';
-	else 
+	else
 		$f = 'test_inscription_dist';
 	$declaration = $f($mode, $mail, $nom, $id);
 
@@ -133,8 +133,8 @@ function message_inscription($mail, $nom, $mode, $id=0) {
 	$row = sql_select("statut, id_auteur, login, email", "spip_auteurs", "email=" . sql_quote($declaration['email']));
 	$row = sql_fetch($row);
 
-	if (!$row) 
-		// il n'existe pas, creer les identifiants  
+	if (!$row)
+		// il n'existe pas, creer les identifiants
 		return inscription_nouveau($declaration);
 	if (($row['statut'] == '5poubelle') AND !$declaration['pass'])
 		// irrecuperable
@@ -176,14 +176,14 @@ function inscription_nouveau($declaration)
 // http://doc.spip.org/@envoyer_inscription_dist
 function envoyer_inscription_dist($ids, $nom, $mode, $id) {
 
-	if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_REQSQL,'<')) {
+	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_REQSQL,'<')) {
 		include_spip('inc/mail'); // pour nettoyer_titre_email
 	}
 
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
-	
+
 	$message = _T('form_forum_message_auto')."\n\n"
 	  . _T('form_forum_bonjour', array('nom'=>$nom))."\n\n"
 	  . _T((($mode == 'forum')  ?
@@ -242,7 +242,7 @@ function creer_pass_pour_auteur($id_auteur) {
 	$htpass = generer_htpass($pass);
 	sql_updateq('spip_auteurs', array('pass'=>$mdpass, 'htpass'=>$htpass),"id_auteur = ".intval($id_auteur));
 	ecrire_acces();
-	
+
 	return $pass;
 }
 

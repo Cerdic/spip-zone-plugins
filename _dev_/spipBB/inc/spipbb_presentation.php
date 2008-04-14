@@ -1,15 +1,17 @@
 <?php
-/*
-+-------------------------------------------+
-| GAFoSPIP v. 0.5 - 21/08/07 - spip 1.9.2
-+-------------------------------------------+
-| Gestion Alternative des Forums SPIP
-+-------------------------------------------+
-| Hugues AROUX - SCOTY @ koakidi.com
-+-------------------------------------------+
-| qq fonctions de mise en forme, boutons ...
-+-------------------------------------------+
-*/
+#----------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                        #
+#  File    : inc/spipbb_init                               #
+#  Authors : Hugues AROUX - SCOTY @ koakidi.com et als     #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  Contact : chryjs!@!free!.!fr                            #
+#                                                          #
+# qq fonctions de mise en forme, boutons ...               #
+#                                                          #
+#----------------------------------------------------------#
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common');
 spipbb_log("included",3,__FILE__);
 
 include_spip("inc/filtres");
@@ -24,40 +26,81 @@ function debut_bloc_couleur($coul_bloc) {
 
 function debut_bloc_gricont() {
 	global $couleur_foncee;
-	echo "<div style='padding:2px; background-color:#efefef; 
-			border:2px solid $couleur_foncee; -moz-border-radius:5px; 
+	echo "<div style='padding:2px; background-color:#efefef;
+			border:2px solid $couleur_foncee; -moz-border-radius:5px;
 			text-align:center;'>\n";
 }
 
 function debut_ligne_foncee($retrait) {
 	global $couleur_foncee;
 	echo "<div style='background-color:".$couleur_foncee."; padding:3px;
-			margin-left:".$retrait."px; -moz-border-radius:7px; 
+			margin-left:".$retrait."px; -moz-border-radius:7px;
 			color:#ffffff;' class='verdana3'>\n";
 }
 
 function debut_ligne_claire($retrait) {
 	global $couleur_claire;
 	echo "<div style='background-color:".$couleur_claire."; padding:3px;
-			margin-left:".$retrait."px; -moz-border-radius:7px;' class='verdana3'>\n";	
+			margin-left:".$retrait."px; -moz-border-radius:7px;' class='verdana3'>\n";
 }
 
 function debut_ligne_grise($retrait) {
 	echo "<div style='background-color:#efefef; padding:3px;
-			margin-left:".$retrait."px; -moz-border-radius:7px;' class='verdana3'>\n";	
+			margin-left:".$retrait."px; -moz-border-radius:7px;' class='verdana3'>\n";
 }
 
 
 function fin_bloc() { echo "</div>\n"; }
 
+function spipbb_svn_revision() {
+	$version="";
+	if ($svn_revision = version_svn_courante(_DIR_PLUGIN_SPIPBB)) {
+		$version = ' ' . (($svn_revision < 0) ? '<!--SVN -->':'')
+		. "[<a href='".str_replace('@rev_num@',abs($svn_revision),_URL_SPIPBB_SVN_CHANGESET)
+		. "' onclick=\"window.open(this.href); return false;\">"
+		. abs($svn_revision) . "</a>]";
+	}
+	return $version;
+}
 
 function signature_spipbb() {
 	$aff = "<br />"
 		. debut_boite_info(true)
-		. _T('spipbb:sign_tempo')." [".$GLOBALS['spipbb_plug_version']."] "
+		. _T('spipbb:sign_tempo')." ".$GLOBALS['spipbb_plug_version'].spipbb_svn_revision()
 		. fin_boite_info(true);
 	return $aff;
-}
+} // signature_spipbb
+
+function signature_spipbb_admin() {
+	$version_distant = spipbb_version_distant();
+
+	// si on doit mettre a jour lien vers le zip et le numero de version, sinon message "ok"
+	$maj = version_compare($version_distant,$GLOBALS['spipbb_plug_version'],">") ?
+		"<a href='"._URL_SPIPBB_PLUGIN_ZIP."'>"._T('spipbb:sign_maj',array($version_distant))."</a>"
+		:
+		_T('spipbb:sign_ok') ;
+
+	$reinit="";
+	if (spipbb_is_configured()) $reinit=propre(_T('spipbb:sign_reinit',array('plugin'=>generer_url_ecrire('spipbb_configuration','cmd=resetall'))));
+
+	$aff = debut_boite_info(true) .
+		propre(_T('spipbb:sign_admin', array(
+		'version' => $GLOBALS['spipbb_plug_version'].spipbb_svn_revision(),
+		'distant' => $maj,
+		'reinit' => $reinit,
+		) ) ).
+		fin_boite_info(true);
+	return $aff;
+} // signature_spipbb_admin
+
+// Donne la version en cours sur SVN (a partir de plugin.xml)
+function spipbb_version_distant() {
+	include_spip('inc/distant');
+	$distant = recuperer_page(_URL_SPIPBB_PLUGIN_XML);
+	$version='';
+	if ($distant) $version = preg_match(',<version>[\s\n]*([0-9.]+)[\s\n]*</version>,ims', $distant, $regs)?$regs[1]:'';
+	return $version;
+} // spipbb_version_distant
 
 //
 // bouton retour haut de page
@@ -85,18 +128,18 @@ function bouton_ecrire_post($id_article, $id_sujet, $id_citer="") {
 	}
 	else
 		{ $icone="gaf_sujet.gif"; $texte_icone=_T('spipbb:sujet_nouveau'); $ico_sup="creer.gif"; }
-	
-	
+
+
 	$url = generer_url_ecrire("spipbb_formpost","forum=".$id_article."&sujet=".$id_sujet.$citer_sujet);
-	
+
 	echo "
 		<div style='float:right; margin-left:3px;' title='$texte_icone' class='icone36' >\n
-		<a href=\"".$url."\" 
-		target=\"redige_post\" 
-		onclick=\"javascript:window.open(this.href, 'redige_post', 
+		<a href=\"".$url."\"
+		target=\"redige_post\"
+		onclick=\"javascript:window.open(this.href, 'redige_post',
 		'width=650, height=550, menubar=no, scrollbars=yes'); return false;\"\n>
 		<img src='"._DIR_IMG_PACK.$ico_sup."' align='absmiddle' border='0'
-		style='background-image:url(\""._DIR_IMG_SPIPBB.$icone."\"); background-repeat:no-repeat; 
+		style='background-image:url(\""._DIR_IMG_SPIPBB.$icone."\"); background-repeat:no-repeat;
 			background-position:center;' width='24' height='24' />\n
 		</a>
 		</div>\n";
@@ -166,7 +209,7 @@ function bouton_formulaire_annonce($id_sujet, $mode, $src_img) {
 	echo "<input type='hidden' name='redirect' value='".generer_url_ecrire("spipbb_sujet", "id_sujet=".$id_sujet)."' />\n";
 	echo "<input type='hidden' name='hash' value='".calculer_action_auteur("spipbb_action-sujetannonce-".$id_sujet)."' />\n";
 	echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";
-	echo "<input type='hidden' name='id_mot_annonce' value='".$GLOBALS['spipbb']['id_mot_annonce']."' />\n";	
+	echo "<input type='hidden' name='id_mot_annonce' value='".$GLOBALS['spipbb']['id_mot_annonce']."' />\n";
 	echo "<input type='hidden' name='mode' value='".$mode."' />\n";
 	echo "<input type='image' src='".$src_img."' title='"._T('spipbb:fil_annonce_'.$mode)."' />\n";
 	echo "</form></div>\n";
@@ -182,7 +225,7 @@ function bouton_formulaire_forum_annonce($id_article, $mode, $src_img) {
 	echo "<input type='hidden' name='redirect' value='".generer_url_ecrire("spipbb_forum", "id_article=".$id_article)."' />\n";
 	echo "<input type='hidden' name='hash' value='".calculer_action_auteur("spipbb_action-forumannonce-".$id_article)."' />\n";
 	echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";
-	echo "<input type='hidden' name='id_mot_annonce' value='".$GLOBALS['spipbb']['id_mot_annonce']."' />\n";	
+	echo "<input type='hidden' name='id_mot_annonce' value='".$GLOBALS['spipbb']['id_mot_annonce']."' />\n";
 	echo "<input type='hidden' name='mode' value='".$mode."' />\n";
 	echo "<input type='image' src='".$src_img."' title='"._T('spipbb:forum_annonce_'.$mode)."' />\n";
 	echo "</form></div>\n";
@@ -190,7 +233,7 @@ function bouton_formulaire_forum_annonce($id_article, $mode, $src_img) {
 }
 
 # h. 28/11
-# bouton monter/descendre .. : ordonner art/rub  
+# bouton monter/descendre .. : ordonner art/rub
 #
 function bouton_ordonne_forum($id_forum,$redirect) {
 	return bouton_ordonne_objet('article',$id_forum,$redirect);
@@ -214,7 +257,7 @@ function bouton_ordonne_objet($objet,$id_objet,$redirect) {
 
 //
 // url dernier post dans la bonne tranche
-// 
+//
 function url_post_tranche($id_post, $id_sujet, $compt_rang="") {
 	$fixlimit = $GLOBALS['spipbb']['fixlimit'];
 
@@ -243,7 +286,7 @@ function url_post_tranche($id_post, $id_sujet, $compt_rang="") {
 #
 function bloc_info_etat($type_ferme, $obj='',$annonce='') {
 	global $couleur_foncee;
-	
+
 	$aff='';
 	if($obj=='sujet') {
 		$leg_ferme = _T('spipbb:sujet_ferme');
@@ -253,25 +296,25 @@ function bloc_info_etat($type_ferme, $obj='',$annonce='') {
 		$leg_ferme = _T('spipbb:forum_ferme');
 		$leg_titre = _T('spipbb:info_ferme');
 	}
-	
+
 	if($obj) {
 		$aff.="<div class='verdana2'>".$leg_titre."</div>\n";
 	}
-		
+
 	if ($type_ferme=="ferme") {
 		$aff.= "<span class='verdana3' style='color:$couleur_foncee; font-weight:bold;'>\n"
 			. "<img src='"._DIR_IMG_SPIPBB."gaf_verrou1.gif' align='absmiddle' />"
 			. $leg_ferme
 			. "</span>\n";
 	}
-	
+
 	if ($type_ferme=="maintenance") {
 		$aff.= "<div class='verdana3' style='color:#B23232; font-weight:bold;'>\n"
 			. "<img src='"._DIR_IMG_SPIPBB."gaf_verrou2.gif' align='absmiddle' />\n"
 			. _T('spipbb:maintenance_ferme')
 			. "</div>\n";
 	}
-	
+
 	if($annonce) {
 		if($obj) {
 			$aff.="<span class='verdana3' style='color:$couleur_foncee; font-weight:bold;'>\n";
@@ -279,7 +322,7 @@ function bloc_info_etat($type_ferme, $obj='',$annonce='') {
 		$aff.="<img src='"._DIR_IMG_SPIPBB."gaf_annonce.gif' align='absmiddle' title='"._T('spipbb:'.$obj.'_annonce')."' />";
 		if($obj) {
 			$aff.= _T('spipbb:'.$obj.'_annonce') . "</span>\n";
-		}	
+		}
 	}
 	echo $aff;
 }
@@ -327,7 +370,7 @@ function branche_rubriques($id) {
 }
 
 function branche_articles($id) {
-	// lister rubriques 
+	// lister rubriques
 	$a = branche_rubriques($id);
 	// ajout rub $id
 	$a[]=$id;
@@ -462,5 +505,27 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 }
 */
 
+// ------------------------------------------------------------------------------
+// Fonction supprimee en SVN... a remplacer ?
+// etait dans : inc/editer_article
+// ------------------------------------------------------------------------------
+
+if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_EDITER_ARTRUB,'>')) {
+if (!function_exists('editer_article_rubrique')) {
+function editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider)
+{
+	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
+
+	$opt = $chercher_rubrique($id_rubrique, 'article', $config['restreint']);
+
+	$msg = _T('titre_cadre_interieur_rubrique') .
+	  ((preg_match('/^<input[^>]*hidden[^<]*$/', $opt)) ? '' : $aider("artrub"));
+
+	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
+	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";
+	else $logo = "rubrique-24.gif";
+
+	return debut_cadre_couleur($logo, true, "", $msg) . $opt .fin_cadre_couleur(true);
+} } } // editer_article_rubrique
 
 ?>

@@ -52,14 +52,27 @@ define('_SPIPBB_IMPORT_TEST','oui'); // Par defaut import a blanc
 if (!defined('_DIR_PLUGIN_SPIPBB')) {
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_SPIPBB',(_DIR_PLUGINS.end($p))."/");
-	spipbb_log('_DIR_PLUGIN_SPIPBB undef redef:'._DIR_PLUGIN_SPIPBB,1,__FILE__);
+	spipbb_log('_DIR_PLUGIN_SPIPBB 1.9.1 redef:'._DIR_PLUGIN_SPIPBB,1,__FILE__);
+}
+# Def. repertoire icones back
+if (!defined("_DIR_IMG_SPIPBB")) {
+	define('_DIR_IMG_SPIPBB', _DIR_PLUGIN_SPIPBB.'/img_pack/');
 }
 
 // [fr] Plugin ecrit pour spip rev 1.9.3 -> fournir les fonctions requises pour spip 1.9.2
 // [en] Plugin written for spip rev 1.9.3 -> provide required functions for spip 1.9.2
-if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_SQL,'<')) {
+if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_SQL,'<')) {
 	include_spip('inc/spipbb_192'); // SPIP 1.9.2
 }
+
+if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP19300', true);
+else @define('_SPIP19200', true);
+
+// Pour la verifciation d'une nouvelle version
+define('_URL_SPIPBB_PLUGIN_XML', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/_dev_/spipBB/plugin.xml?format=txt');
+define('_URL_SPIPBB_PLUGIN_ZIP','http://files.spip.org/spip-zone/plugin-spipBB.zip');
+define('_URL_SPIPBB_SVN_CHANGESET','http://zone.spip.org/trac/spip-zone/changeset/@rev_num@/_plugins_/_dev_/spipBB/');
+
 
 //----------------------------------------------------------------------------
 // [fr] Genere une trace pour spipbb sauf si on ne veut pas de log

@@ -1,4 +1,15 @@
-﻿2008-03-03  chryjs  <chryjs!@!free!.!fr>
+﻿2008-04-14  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.6 [FAIT] Utiliser les descriptions des mots cles (ajoutees dans lang/... mot_...)
+ * 0.4.7 [FAIT] Problemes titres _T et _L // traductions à revoir corriger finir + en outre spipbb est maintenant gere par spip-trad
+ * 0.4.8 Amelioration de l'interface prive de configuration + meilleur controle de version
+ * inc_teteforum inc_piedforum sont maintenant aussi des "coquilles vides" pour simplifier l'integration
+ * les "squelettes coquilles" ont maintenant un style et des proprietes paratagees et un id specifique, le tout reporte dans la css cf discussionhttp://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=634
+ * ajout du danois (merci a tom@mir.dk et a scoty)
+ * ajouts en espagnol (merci a philippebessiere@free.fr)
+
+
+2008-03-03  chryjs  <chryjs!@!free!.!fr>
 
  * Palliatif pour le probleme de unserialize... qui n'arrive pas a reconstruire un tableau stocke avec serialize !... probleme de conversion dans les requetes virtuelles sql ?
 

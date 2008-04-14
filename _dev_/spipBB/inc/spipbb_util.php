@@ -1,7 +1,28 @@
 <?php
-/*
-| diverses fonction communes : sur exec_ et/ou action_
-*/
+#----------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                        #
+#  File    : inc/spipbb_init                               #
+#  Authors : Scoty, 2007 et als                            #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  Contact : chryjs!@!free!.!fr                            #
+#                                                          #
+# diverses fonction communes : sur exec_ et/ou action_     #
+#                                                          #
+#----------------------------------------------------------#
+
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common');
@@ -13,6 +34,7 @@ spipbb_log('included',2,__FILE__);
 //----------------------------------------------------------------------------
 function spipbb_is_configured() {
 	# pas de spipbb
+	if (!isset($GLOBALS['spipbb'])) $GLOBALS['spipbb']=array();
 	if(!isset($GLOBALS['meta']['spipbb'])) return false;
 	if(!isset($GLOBALS['spipbb'])) $GLOBALS['spipbb']=@unserialize($GLOBALS['meta']['spipbb']);
 	# desactivation de spipbb
@@ -30,7 +52,7 @@ function spipbb_is_configured() {
 		$infos=plugin_get_infos(_DIR_PLUGIN_SPIPBB);
 		$GLOBALS['spipbb_plug_version'] = $infos['version'];
 	}
-	if(version_compare(substr($GLOBALS['spipbb']['version'],0,5),$GLOBALS['spipbb_plug_version'],'<')) return false; // _SPIPBB version sur 0.4.5 == 5 char
+	if(version_compare($GLOBALS['spipbb']['version'],$GLOBALS['spipbb_plug_version'],'<')) return false; // _SPIPBB version sur 0.4.5 == 5 char
 	# sinon
 	return true;
 } // spipbb_is_configured

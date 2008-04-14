@@ -29,13 +29,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/spipbb_common');
 spipbb_log('included',2,__FILE__);
 
-// reaffichage du formulaire d'une option de configuration 
-// apres sa modification par appel du script action/configurer 
+// reaffichage du formulaire d'une option de configuration
+// apres sa modification par appel du script action/configurer
 // redirigeant ici.
 
 function exec_spipbb_configurer_dist()
 {
-	if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_AJAXCONFIG,'>=')) {
+	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_AJAXCONFIG,'>=')) {
 		$configuration = charger_fonction(_request('configuration'), 'configuration', true);
 		ajax_retour($configuration ? $configuration() : 'configure quoi?');
 	}

@@ -162,7 +162,7 @@ function import_init_metas($origine,$spiprubid=0)
 // etait dans : inc/editer_article
 // ------------------------------------------------------------------------------
 
-if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_EDITER_ARTRUB,'>')) {
+if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_EDITER_ARTRUB,'>')) {
 if (!function_exists('')) {
 function editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider)
 {

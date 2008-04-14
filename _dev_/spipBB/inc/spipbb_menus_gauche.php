@@ -468,7 +468,7 @@ function spipbb_admin_gauche($script,$modules) {
 			$affichage.= recuperer_fond("prive/spipbb_bloc_admin_menu",$contexte);
 
 		}
-		$affichage .= fin_boite_info(true)."<br />\n";
+		$affichage .= fin_boite_info(true)."\n";
 	}
 	$affichage.= "\n";
 

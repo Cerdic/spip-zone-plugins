@@ -90,7 +90,7 @@ function configuration_spipbb_mots_dist() {
 			. fin_cadre_trait_couleur(true);
 
 
-	if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_AJAXCONFIG,'>=')) {
+	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_AJAXCONFIG,'>=')) {
 		$res = ajax_action_post('configurer', 'mots', 'configuration','',$res) ;
 		return ajax_action_greffe('configurer-mots','', $res); // creer action
 	}

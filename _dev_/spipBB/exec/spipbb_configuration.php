@@ -53,6 +53,7 @@ function exec_spipbb_configuration() {
 		echo fin_page();
 		exit;
 	}
+	$cmd=_request('cmd');
 
 	# cas install
 	if(!spipbb_is_configured()) {
@@ -60,15 +61,27 @@ function exec_spipbb_configuration() {
 		spipbb_upgrade_tables($GLOBALS['spipbb']['version']);
 	}
 
+	if ($cmd=='resetall') {
+		spipbb_log('Reset all',1,__FILE__);
+		spipbb_delete_metas();
+		spipbb_init_metas();
+	}
+
 	#
 	# affichage
 	#
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('spipbb:admin_titre_page_'._request('exec')), "configuration", "spipbb_configuration");
+	echo barre_onglets("configuration", 'spipbb_configuration');
+
 	echo "<a name='haut_page'></a>";
 
 	echo debut_gauche('',true);
 	spipbb_menus_gauche(_request('exec'));
+
+	echo creer_colonne_droite('',true);
+	// Explication + aide + lien téléchargement
+	echo signature_spipbb_admin(); // dans inc/spipbb_presentation
 
 	echo debut_droite('',true);
 
@@ -99,33 +112,29 @@ function spipbb_admin_configuration() {
 
 	$prerequis=true;
 
-	$etat_tables=$etat_spip=$etat_plugins="";
-
-	# verif etat des tables spipbb (pures)
-	$check_tables = spipbb_check_tables();
-	while (list($table,$etat) = each($check_tables)) {
-			$etat_tables.="<li>$table : ";
-			$etat_tables.= ($etat) ? _T('spipbb:admin_config_tables_ok') : _T('spipbb:admin_config_tables_erreur');
-			$etat_tables.="</li>";
-		# h. ne sert pas !?! ..
-		#if (!$etat) $GLOBALS['spipbb']['config_tables']='non';
-			$prerequis = ($prerequis AND $etat);
-	}
-	# verif etat spip config (mots sur article/forum)
-	$check_spip = spipbb_check_spip_config();
-	while (list($spip_s,$elem_conf) = each($check_spip)) {
-			$etat_spip.="<li>$spip_s : ";
-			$etat_spip.= $elem_conf['message'];
-			$etat_spip.="</li>";
-			$prerequis = ($prerequis AND $elem_conf['etat']);
-	}
 	# verif etat de presence plugins-requis
-	$check_plugins = spipbb_check_plugins_config();
-	while (list($plug,$etat) = each($check_plugins)) {
-			$etat_plugins.="<li>$plug : ";
-			$etat_plugins.= ($etat) ? _T('spipbb:admin_plugin_requis_ok') : _T('spipbb:admin_plugin_requis_erreur');
-			$etat_plugins.="</li>";
-			$prerequis = ($prerequis AND $etat);
+	list($ok_plugins,$etat_plugins) = spipbb_check_plugins_config(); // inc/spipbb_inc_config
+	$prerequis = ($prerequis AND $ok_plugins);
+	$etat_general=$etat_plugins;
+	if ($ok_plugins) {
+		# verif etat des tables spipbb (pures)
+		list($ok_tables,$etat_tables) = spipbb_check_tables();
+		$prerequis = ($prerequis AND $ok_tables);
+		if ($ok_tables) {
+			$etat_general.="<br />".$etat_tables;
+			# verif etat spip config (mots sur article/forum)
+			list($ok_spip, $etat_spip) = spipbb_check_spip_config();
+			$prerequis = ($prerequis AND $ok_spip);
+			if ($ok_spip) {
+				$etat_general.="<br />".$etat_spip;
+			}
+			else {
+				$etat_general=$etat_spip;
+			}
+		}
+		else {
+			$etat_general=$etat_tables;
+		}
 	}
 
 	if (!$prerequis) {
@@ -133,12 +142,19 @@ function spipbb_admin_configuration() {
 		$GLOBALS['spipbb']['configure']='non';
 		spipbb_save_metas();
 	}
+
+	if($GLOBALS['spipbb']['configure']=='oui') {
+		$spipbb_config_support_auteurs= spipbb_config_support_auteurs();
+		$spipbb_config_champs_supp = spipbb_config_champs_supp();
+	} else {
+		$spipbb_config_support_auteurs = "";
+		$spipbb_config_champs_supp = "";
+	}
+
 	$contexte = array(
 			'lien_action' => generer_action_auteur('spipbb_admin_reconfig', 'save',generer_url_ecrire('spipbb_configuration')), // generer_url_action ?
 			'exec_script' => 'spipbb_admin_reconfig',
-			'etat_tables' => $etat_tables ,
-			'etat_plugins' => $etat_plugins,
-			'etat_spip' => $etat_spip ,
+			'etat_general' => $etat_general ,
 			'prerequis' => $prerequis ? 'oui':'non',
 			'config_spipbb' => $GLOBALS['spipbb']['configure'],
 			'spipbb_id_secteur' => $GLOBALS['spipbb']['id_secteur'] ,
@@ -158,16 +174,11 @@ function spipbb_admin_configuration() {
 			'taille_avatar_prof' => $GLOBALS['spipbb']['taille_avatar_prof'],
 			'affiche_membre_defaut' => $GLOBALS['spipbb']['affiche_membre_defaut'],
 			'log_level' => $GLOBALS['spipbb']['log_level'],
+			'config_support_auteurs' => $spipbb_config_support_auteurs,
+			'config_champs_supp' => $spipbb_config_champs_supp,
 			);
 	$res = recuperer_fond("prive/spipbb_admin_configuration",$contexte) ;
 	spipbb_log('END',3,"spipbb_configuration()");
-
-	if($GLOBALS['spipbb']['configure']=='oui') {
-		$res.= spipbb_config_support_auteurs();
-		$res.= spipbb_config_champs_supp();
-	}
-
-	$res .= "</form>"; //temporaire mais necessaire
 
 	return $res;
 
@@ -213,7 +224,7 @@ function spipbb_config_support_auteurs()
 
 	$res.= "<tr><td colspan='3'>&nbsp;</td></tr>\n";
 	$res.= "</table>\n";
-	$res.= "<div align='right'><input type='submit' name='_spipbb_ok' value='"._T('valider')."' class='fondo' /></div>\n";
+	$res.= "<div align='right'><input type='submit' name='_spipbb_ok' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
 
 	$res.= fin_cadre_trait_couleur(true);
 	return $res;
@@ -237,7 +248,7 @@ function spipbb_config_champs_supp() {
 
 	foreach($montre as $chp) {
 		# champs X
-		$res.= "<tr><td valign='top'>"._T('spipbb:config_affiche_champ_extra',array('nom_champ',$chp)).'<br />'
+		$res.= "<tr><td valign='top'>"._T('spipbb:config_affiche_champ_extra',array('nom_champ'=>$chp)).'<br />'
 			. $GLOBALS['champs_sap_spipbb'][$chp]['info']
 			. "</td><td width='5%'> </td><td width='25%'>\n";
 		foreach($options_a as $val) {
@@ -251,11 +262,12 @@ function spipbb_config_champs_supp() {
 
 	$res.= "<tr><td colspan='3'>&nbsp;</td></tr>\n"
 		. "</table>\n"
-		. "<div align='right'><input type='submit' name='_spipbb_ok' value='"._T('valider')."' class='fondo' /></div>\n";
+		. "<div align='right'><input type='submit' name='_spipbb_ok' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
 	$res.= fin_cadre_trait_couleur(true);
 
 	return $res;
 }
+
 
 
 ?>

@@ -374,7 +374,7 @@ function action_spipbb_admin_reconfig()
 			$mots_preced=array();
 
 			# gafospip ? (passe juste en premiere install !!)
-			if( $id_groupe_premodif=='non' AND strlen($GLOBALS['meta']['gaf_install']) )
+			if( isset($id_groupe_premodif) AND $id_groupe_premodif=='non' AND strlen($GLOBALS['meta']['gaf_install']) )
 			{
 				$gaf_install = @unserialize($GLOBALS['meta']['gaf_install']);
 				$id_groupe_preced = $gaf_install['groupe'];
@@ -391,7 +391,7 @@ function action_spipbb_admin_reconfig()
 				recreer_jointures_mots($GLOBALS['spipbb']['id_mot_annonce'], $GLOBALS['spipbb']['id_mot_ferme'], $mots_preced, $mots_base);
 			}
 			# si antecedent non gafospip (sinon rien a faire)
-			elseif(is_int($id_groupe_premodif) AND $id_groupe_premodif>0)
+			elseif(isset($id_groupe_premodif) AND is_int($id_groupe_premodif) AND $id_groupe_premodif>0)
 			{
 				$mots_preced['annonce']=$id_annonce_premodif;
 				$mots_preced['ferme']=$id_ferme_premodif;

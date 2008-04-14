@@ -29,50 +29,40 @@ spipbb_log("included",2,__FILE__);
 // controle config de SPIP
 //----------------------------------------------------------------------------
 function spipbb_check_spip_config() {
-	$res=array();
 	// Les forums de SPIP sont ils actives ????????
+	// en fait ce n'est pas obligatoire puisqu'il ne doivent letre que pour les articles geres.
+	// Donc uniquement generer un avertissement. Et pas de blocage.
 	if ( $GLOBALS['meta']['forums_publics']!='non' ) {
-		$res['forums_publics']= array( 'etat'=>true, 'message'=>_T('spipbb:admin_spip_forums_ok'));
-		$resultat=_T('spipbb:admin_spip_forums_ok');
+		$resultat="<li>"._T('spipbb:admin_spip_forums_ok')."</li>";
 	} else {
-		$res['forums_publics']= array( 'etat'=>false,
-										'message'=>_T('spipbb:admin_spip_forums_erreur')
-										//'message' => spipbb_
-										);
-		$resultat=_T('spipbb:admin_spip_forums_erreur');
+		$resultat="<li>".propre(_T('spipbb:admin_spip_forums_warn',
+					array('config_contenu'=>generer_url_ecrire('config_contenu','#configurer-participants') ) ) )."</li>"; //id configurer-participants
 	}
 
 	// utiliser mot cles
+	// de meme si les mots cles ne sont pas actives ce n est pas un probleme
+	// (a part dans les squelettes public a verifier)
+	// On ne pourra pas avoir de ferme/annonce/postits...
+
 	// mots_cles_forums articles_mots + mots_cles_forums
 	if ( $GLOBALS['meta']['articles_mots']=='oui' ) {
-		$res['articles_mots']= array( 'etat'=>true,
-										'message'=>_T('spipbb:admin_spip_mots_cles_ok')
-
-										);
-		$resultat=_T('spipbb:admin_spip_mots_cles_ok');
+		$resultat .= "<li>" . _T('spipbb:admin_spip_mots_cles_ok')."</li>";
 	}
 	else {
-		//c: 11/1/8 Pret pour la configuration :
-		//$spipbb_mots = charger_fonction('spipbb_mots', 'configuration');
-		//$config_mots = $spipbb_mots();
-
-		$res['articles_mots']= array( 'etat'=>false,
-										'message'=>_T('spipbb:admin_spip_mots_cles_erreur')
-										//'message'=> $config_mots,
-										);
-		$resultat=_T('spipbb:admin_spip_mots_cles_erreur');
+		$resultat .= "<li>" . propre(_T('spipbb:admin_spip_mots_cles_warn',
+					array('configuration'=>generer_url_ecrire('configuration','#configurer-mots') ) ) )."</li>"; //id='configurer-mots'
 	}
-	$resultat.="<br />";
 	if ( $GLOBALS['meta']['mots_cles_forums']=='oui' ) {
-		$resultat.=_T('spipbb:admin_spip_mots_forums_ok');
-		$res['mots_cles_forums']= array( 'etat'=>true, 'message'=>_T('spipbb:admin_spip_mots_forums_ok'));
+		$resultat .= "<li>". _T('spipbb:admin_spip_mots_forums_ok')."</li>";
 	}
 	else {
-		$res['mots_cles_forums']= array( 'etat'=>false, 'message'=>_T('spipbb:admin_spip_mots_forums_erreur'));
-		$resultat.=_T('spipbb:admin_spip_mots_forums_erreur');
+		$resultat .= "<li>" .propre(_T('spipbb:admin_spip_mots_forums_warn',
+					array('configuration'=>generer_url_ecrire('configuration','#access-o') ) ) )."</li>"; //id=access-o
 	}
-	return $res;
-	//return $resultat;
+
+	$resultat = _T('spipbb:admin_spip_config_forums')."<ul>".$resultat."</ul>";
+
+	return array( true, $resultat );
 } // spipbb_check_spip_config
 
 
@@ -81,29 +71,33 @@ function spipbb_check_spip_config() {
 //----------------------------------------------------------------------------
 function spipbb_check_plugins_config() {
 	$resultat="";
-	$res=array();
+	$ok=0;
+	//$res=array();
 	$tab_plugins_installes = unserialize($GLOBALS['meta']['plugin']);
 	if(!is_array($tab_plugins_installes['CFG'])) {
-		$resultat.= "<li>"._T('spipbb:admin_plugin_requis_erreur')." CFG</li>";
-		$res['CFG']=false;
+		$resultat.= "<li>".propre(_T('spipbb:admin_plugin_requis_erreur_cfg'))."</li>";
+		//$res['CFG']=false;
+		$ok++;
 	} else {
-		$resultat.= "<li>"._T('spipbb:admin_plugin_requis_ok')." CFG</li>";
+		$resultat.= "<li>".propre(_T('spipbb:admin_plugin_requis_ok_cfg'))."</li>";
 		$res['CFG']=true;
 	}
 
 	// Le plugin balise_session n'est plus necessaire depuis SPIP 1.945
-	if (version_compare(substr($GLOBALS['spip_version_code'],0,6),_SPIPBB_REV_BALISE_SESSION,'<')) {
+	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_BALISE_SESSION,'<')) {
 		if (!is_array($tab_plugins_installes['BALISESESSION'])) {
-			$resultat.= "<li>"._T('spipbb:admin_plugin_requis_erreur')." BALISESESSION</li>";
-			$res['BALISESESSION']=false;
+			$resultat.= "<li>".propre(_T('spipbb:admin_plugin_requis_erreur_balisesession'))."</li>";
+			//$res['BALISESESSION']=false;
+			$ok++;
 		} else {
-			$resultat.= "<li>"._T('spipbb:admin_plugin_requis_ok')." BALISESESSION</li>";
-			$res['BALISESESSION']=true;
+			$resultat.= "<li>".propre(_T('spipbb:admin_plugin_requis_ok_balisesession'))."</li>";
+			//$res['BALISESESSION']=true;
 		}
 	}
-	if ($resultat) $resultat="<ul>".$resultat."</ul>";
-	return $res;
-	//return $resultat;
+	if (0==$ok) $resultat = _T('spipbb:admin_plugin_requis_ok')."<ul>".$resultat."</ul>";
+	else $resultat = http_img_pack('warning.gif', _T('info_avertissement'),"style='width: 48px; height: 48px; float: right;margin: 10px;'") .
+					( ($ok>=2) ? _T('spipbb:admin_plugin_requis_erreur_s') : _T('spipbb:admin_plugin_requis_erreur') ) ."<ul>".$resultat."</ul>";
+	return array( ($ok==0), $resultat );
 } // spipbb_check_plugins_config
 
 
@@ -116,13 +110,30 @@ function spipbb_check_tables()
 	global $tables_spipbb,$tables_principales;
 	include_spip('base/spipbb');
 	reset($tables_spipbb);
-	$res=array();
+	//$res=array();
+	$ok=true;
+	$res="";
+	$resok="";
 	while ( list(,$une_table) = each($tables_spipbb) )
 	{
-		$res[$une_table]=spipbb_check_une_table($une_table,$tables_principales);
+		//$res[$une_table]=
+		if ( spipbb_check_une_table($une_table,$tables_principales) )
+		{
+			$resok.= $une_table.", ";
+		}
+		else
+		{
+			$res.= $une_table.", ";
+			$ok=false;
+		}
 	}
+	if ($ok) $res = propre(_T('spipbb:admin_config_tables_ok',array('tables_ok'=>substr($resok,0,-2))));
+	else $res = http_img_pack('warning.gif', _T('info_avertissement'),"style='width: 48px; height: 48px; float: right;margin: 10px;'") .
+				propre(_T('spipbb:admin_config_tables_erreur',array('tables_ok'=>substr($resok,0,-2),'tables_erreur'=>substr($res,0,-2))));
+
+	$res = _T('spipbb:admin_config_tables')."<ul><li>".$res."</li></ul>";
 	spipbb_log('END',2,__FILE__.":spipbb_check_tables()");
-	return $res;
+	return array($ok, $res);
 } // spipbb_check_tables
 
 

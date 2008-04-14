@@ -10,11 +10,11 @@ Interface Privée - Membres:
 -* 0.5 Passage de l'ensemble de la configuration sur le modèle SPIP (en utilisant Ajax)
 
 Interface Privée - Import PhpBB :
--* 0.4 Lors de l'arret de la migration en cours en cas de retour sur la page config afficher etape+ situation + bouton reinit
 -* 0.5 Import phpBB : test mot de passe / authentification d'un auteur importe non. phpbb2 : php.md5($pass) spip: php.md5($alea.$pass) donc ?creer? un inc/auth_phpbb.php avec un login qui fait update au premier login (pour la conversion) + mettre ident avec 'source'=phpbb avant
 -* 0.5 Import phpBB : import des Messages Perso ? Option de depart ? A priori pas compatibles
 -* 0.5 Import phpBB : Si pas Iniset, realisation par etapes de la partie 2 et 3 ? Precalcul a l'avance
 -* 0.5 Import phpBB : Mettre en option l'import des auteurs (remplacer l'id par le nom dans les messages)
+-* 0.6 Lors de l'arret de la migration en cours en cas de retour sur la page config afficher etape+ situation + bouton reinit
 
 Interface publique - Générale :
 -* 0.5 j'ai un doute sur la fonctionnalité "ne plus suivre les sujets" page profil publique
@@ -23,10 +23,10 @@ Interface publique - Générale :
 -* 0.5 Parametres et donnees specifiques à renseigner lors de l'inscription (possible avec le formulaire dédié)
 -* 0.5 Reporte : Gestion avatar : a ameliorer + téléchargement (droits ?) : c'est possible en 1.9.3 voir balise SPIPBB_AVATAR mais pas simple en 192
 -* 0.5 Liste des membres affichage cf http://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=516#forum517
+-* 0.5 Modeles et fonds - cf : http://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=634
 
 Bugs et autres elements non finis :
--* 0.4.6 Utiliser les descriptions des mots cles (ajoutees dans lang/... mot_...)
--* 0.4.7 Problemes titres _T et _L // traductions à revoir corriger finir
+-* 0.4.9 Correction des bugs (inscription+activation principalement)
 -* 0.5 Bug dans le move (ordre de priorites) d'un forum des fois ça ne fonctionne pas... (valider les cas et corriger)
 -* 0.5 mot cles ferme, postit, annonce : bug -> ils ne doivent s'appliquer qu'au message principal du thread
 -* 0.5 Pouvoir configurer l'ordre de presentation des menus d'admins (par le webmaster)
