@@ -31,7 +31,7 @@
 		})]
 		#GET{affbouton}
 
-		<div class="titre_actif #EDIT{titre}">[(#TITRE|supprimer_numero)]</div>
+		<div class="[(#EDIT{titre}) ]titre_actif">[(#TITRE|supprimer_numero)]</div>
 
 		<p class="space_5"></p>
 
@@ -139,7 +139,7 @@
 				</td>
 				<td class="nbr_post">
 					<?php $tot_visites=0; ?>
-					<BOUCLE_vues_p(VISITES_FORUMS){id_forum}><?php $tot_visites+=#VISITES; ?></BOUCLE_vues_p>
+					<BOUCLE_vues_p(VISITES_FORUMS){id_forum}><?php $tot_visites+=#VISITES;?></BOUCLE_vues_p>
 					<?php echo $tot_visites; ?>
 				</td>
 				<td class="dernier_msg">
@@ -192,7 +192,7 @@
 				</span>
 				</td>
 				<td class="titreforum" id="forum#ID_FORUM">
-					<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ID_FORUM})]">#TITRE</a>
+					<div class="[(#EDIT{titre})]"><a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ID_FORUM})]">#TITRE</a></div>
 				</td>
 				<td class="nbr_post">
 					<BOUCLE_reponses(FORUMS){id_thread}{plat}{exclus}></BOUCLE_reponses>

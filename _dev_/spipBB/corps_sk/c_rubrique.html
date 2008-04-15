@@ -1,4 +1,4 @@
-#CACHE{0}
+#CACHE{3600}
 [(#REM) Plugin SpipBB - Licence GPL]
 [(#REM) Squelette : SpipBB Team + scoty]
 
@@ -28,56 +28,10 @@
 			<th><:spipbb:message_s:></th>
 			<th><:spipbb:messages_derniers:></th>
 		</tr>
-<!-- essai h.12/11/07 .. forums du secteur (racine) -->
+<!-- essai h.12/11/07 .. forums du secteur (racine) c:15/4/8 a condition qu'on soit dans le secteur non ? !-->
 		<BOUCLE_forum_secteur(ARTICLES){id_rubrique}{par num titre}>
 				<tr class="ligne_forum">
-
-			<BOUCLE_etat1(ARTICLES){id_article}{id_mot=#GET{id_mot_ferme}}>
-				<td class="etatforum forumferme"><span>&nbsp;
-			</BOUCLE_etat1>
-			</B_etat1>
-				<td class="etatforum forumouvert"><span>&nbsp;
-			<//B_etat1>
-				</span>
-				</td>
-				<td class="titreforum">
-					[<a href="#URL_ARTICLE" class="titre">(#TITRE|supprimer_numero)</a>]
-					[<br /><div class="#EDIT{introduction}">(#INTRODUCTION)</div>] [(#REM) chryjs (15/11/07) etait DESCRIPTIF pas par defaut]
-
-[(#REM) v.0.5 affichage moderateurs ]
-[(#MODELE{moderateurs_ligne}{id_article}{id_rubrique})]
-
-				</td>
-
-			<BOUCLE_sujets1(FORUMS){id_article}{doublons sujets1}></BOUCLE_sujets1>
-				<td class="nbr_sujet">#TOTAL_BOUCLE</td>
-			<//B_sujets1>
-
-			<BOUCLE_messages1(FORUMS){id_article}{plat}{doublons sujets1}></BOUCLE_messages1>
-				<td class="nbr_post">#TOTAL_BOUCLE</td>
-			<//B_messages1>
-
-				<td class="dernier_msg">
-			<BOUCLE_dernier_message1(FORUMS){id_article}{plat}{!par date}{0,1}>
-				[(#DATE|affdate{'d/m/Y'})] [ - (#DATE|heures)]:[(#DATE|minutes)<br	/>]
-				<:spipbb:par_:>
-				[(#REM) c.23/12/7 on passe par la page profile]
-				<BOUCLE_auteurp1(AUTEURS){id_auteur}{tout}>
-					<a
-					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
-					 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#_primale:ID_RUBRIQUE})]"
-					]
-					>#NOM</a>
-				</BOUCLE_auteurp1>
-				</B_auteurp1>
-					[(#NOM|sinon{<:spipbb:anonyme:>})]
-				<//B_auteurp1>
-				<BOUCLE_papa1(FORUMS){id_thread}>#SET{idfo,#ID_FORUM}</BOUCLE_papa1>
-				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{idfo}})]#forum#ID_FORUM" class="adermsg" title="<:spipbb:messages_voir_dernier:>">&nbsp;
-				<span>(<:spipbb:messages_voir_dernier:>)</span></a>
-			</BOUCLE_dernier_message1> - <//B_dernier_message1>
-				</td>
-
+[(#MODELE{ligne_voir_forum}{id_article}{id_rub_primale=#_primale:ID_RUBRIQUE})]
 			</tr>
 		</BOUCLE_forum_secteur>
 
@@ -85,63 +39,16 @@
 	[(#REM) chryjs 19/12/7 supprime doublon : B_categories ]
 	<BOUCLE_categories(RUBRIQUES){id_parent}{par num titre}>
 		<tr class="inter salon">
-			<td colspan="5"><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></td>
+			<td colspan="5"[ class="(#EDIT{titre})"]><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></td>
 		</tr>
 
 		[(#REM) Afficher table par rubrique ou toute si racine ]
 		#SET{display,#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'display',#ENV{id_rubrique}|=={#GET{secteur}}|?{'display','none'}}}
 
 		<BOUCLE_forums(ARTICLES){id_rubrique}{par num titre}>
-
 		<tr class="ligne_forum" style="display:#GET{display};">
-
-			<BOUCLE_etat(ARTICLES){id_article}{id_mot=#GET{id_mot_ferme}}>
-				<td class="etatforum forumferme"><span>&nbsp;
-			</BOUCLE_etat>
-			</B_etat>
-				<td class="etatforum forumouvert"><span>&nbsp;
-			<//B_etat>
-				</span>
-				</td>
-				<td class="titreforum">
-					[<a href="#URL_ARTICLE" class="titre">(#TITRE|supprimer_numero)</a>]
-					[<br /><div class="#EDIT{introduction}">(#INTRODUCTION)</div>] [(#REM) chryjs (15/11/07) etait DESCRIPTIF pas par defaut]
-
-[(#REM) v.0.5 affichage moderateurs ]
-[(#MODELE{moderateurs_ligne}{id_article}{id_rubrique})]
-
-				</td>
-
-			<BOUCLE_sujets(FORUMS){id_article}{doublons sujets}></BOUCLE_sujets>
-				<td class="nbr_sujet">#TOTAL_BOUCLE</td>
-			<//B_sujets>
-
-			<BOUCLE_messages(FORUMS){id_article}{plat}{doublons sujets}></BOUCLE_messages>
-				<td class="nbr_post">#TOTAL_BOUCLE</td>
-			<//B_messages>
-
-				<td class="dernier_msg">
-			<BOUCLE_dernier_message(FORUMS){id_article}{plat}{!par date}{0,1}>
-				[(#DATE|affdate{'d/m/Y'})] [ - (#DATE|heures)]:[(#DATE|minutes)<br	/>]
-				<:spipbb:par_:>[(#REM) c.23/12/7 on passe par la page profile]
-				<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
-					<a
-					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
-					 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#_primale:ID_RUBRIQUE})]"
-					]
-					>#NOM</a>
-				</BOUCLE_auteurp>
-				</B_auteurp>
-					[(#NOM|sinon{<:spipbb:anonyme:>})]
-				<//B_auteurp>
-				<BOUCLE_papa(FORUMS){id_thread}>#SET{idfo,#ID_FORUM}</BOUCLE_papa>
-				<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{idfo}})]#forum#ID_FORUM" class="adermsg" title="<:spipbb:messages_voir_dernier:>">&nbsp;
-				<span>(<:spipbb:messages_voir_dernier:>)</span></a>
-			</BOUCLE_dernier_message> - <//B_dernier_message>
-				</td>
-
-			</tr>
-
+[(#MODELE{ligne_voir_forum}{id_article}{id_rub_primale=#_primale:ID_RUBRIQUE})]
+		</tr>
 		</BOUCLE_forums>
 	</BOUCLE_categories>
 

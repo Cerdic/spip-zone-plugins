@@ -15,7 +15,7 @@
 	#SET{admin,#SESSION{id_auteur}|is_modo{#ID_ARTICLE}}
 
 	[
-	(#REM) determiner si le forum ferme / sujet ferme  
+	(#REM) determiner si le forum ferme / sujet ferme
 	]
 	#SET{forumferme,0}
 	#SET{sujetferme,0}
@@ -78,7 +78,7 @@
 						[(#NOM|sinon{<:spipbb:anonyme:>})]
 					<//B_auteurpc2>
 					</span>
-					<span class="text_titre"><:spipbb:post_titre:>#TITRE</span>
+					<span class="[(#EDIT{titre}) ]text_titre"><:spipbb:post_titre:>#TITRE</span>
 				</td>
 			</tr>
 			<tr class="ligne_sujet">
@@ -122,7 +122,7 @@
 
 
 	[(#REM) affichage commun, tout type situation voirsujet ]
-	
+
 	[
 	(#REM) bouton nouveau_sujet/repondre ou pas ?
 	]
@@ -149,7 +149,7 @@
 		</li>
 	</ul>
 
-	<div class="titre_actif">#TITRE</div>
+	<div class="[(#EDIT{titre}) ]titre_actif">#TITRE</div>
 
 	<p class="space_10"></p>
 
@@ -181,7 +181,7 @@
 					[(#NOM|sinon{<:spipbb:anonyme:>})]
 				<//B_auteurp>
 				</span>
-				<span class="text_titre"><:spipbb:en_rep_sujet_:>#TITRE</span>
+				<span class="[(#EDIT{titre}) ]text_titre"><:spipbb:en_rep_sujet_:>#TITRE</span>
 			</td>
 		</tr>
 		<tr class="ligne_sujet">
@@ -261,21 +261,21 @@
 					<BOUCLE_modo3(AUTEURS){id_article}{id_auteur}>
 					[(#REM) set id_auteur modo , en attendant reglage sur admin restreint ]
 					#SET{modo,#ID_AUTEUR}
-					</BOUCLE_modo3>	
+					</BOUCLE_modo3>
 
 				</B_auteurpr>
 					[(#NOM|sinon{<:spipbb:anonyme:>})]
 				<//B_auteurpr>
 				</span>
-				<span class="text_titre"><:spipbb:post_titre:>#TITRE</span>
+				<span class="[(#EDIT{titre}) ]text_titre"><:spipbb:post_titre:>#TITRE</span>
 			</td>
 		</tr>
 		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
 			<td class="aff_avatar" rowspan="2">
 				[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_suj'}})]
-				
+
 				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:spipbb:moderateur:>"></p>]
-				
+
 				[(#REM) bouton alerter abus ... ! ]
 				[(#CONFIG{'spipbb/affiche_bouton_abus'}|=={'oui'}|?{' ',''})
 				<div class="bouton_alerter">

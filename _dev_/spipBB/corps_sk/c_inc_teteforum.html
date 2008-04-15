@@ -4,10 +4,10 @@
 <BOUCLE_article(ARTICLES){id_article}>
 	<!-- affichage dans article -->
 	<BOUCLE_secteur(HIERARCHIE){id_article}{0,1}>
-		<div class="titre">
+		<div class="[(#EDIT{titre}) ]titre">
 			<a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|majuscules)]</a>
 		</div>
-		[<div class="descript">(#DESCRIPTIF|sinon{"&nbsp;"})</div>]
+		[<div class="[(#EDIT{descriptif}) ]descript">(#DESCRIPTIF|sinon{"&nbsp;"})</div>]
 
 		#SET{sector,#ID_RUBRIQUE}
 
@@ -16,10 +16,10 @@
 
 <BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
 		<!-- affichage dans rubrique -->
-		<div class="titre">
+		<div class="[(#EDIT{titre}) ]titre">
 			<a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|majuscules)]</a>
 		</div>
-		[<div class="descript">(#DESCRIPTIF|sinon{"&nbsp;"})</div>]
+		[<div class="[(#EDIT{descriptif}) ]descript">(#DESCRIPTIF|sinon{"&nbsp;"})</div>]
 
 		#SET{sector,#ID_RUBRIQUE}
 

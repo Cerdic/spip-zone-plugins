@@ -1,4 +1,12 @@
-﻿2008-04-14  chryjs  <chryjs!@!free!.!fr>
+﻿2008-04-15  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.8.2 : Quelques corrections de langue
+ * Les éléments titre, descriptif, texte sont maintenant éditables partout avec crayons+autorite
+ * Uniformisation des entete pour categories (rubrique) et forums (article) utilsant toutes #DESCRIPTIF au lieu d'un mélange.
+ * c_rubrique fait maintenant appel au modele ligne_voir_forum pour afficher chaque ligne du tableau des forums
+
+
+2008-04-14  chryjs  <chryjs!@!free!.!fr>
 
  * 0.4.6 [FAIT] Utiliser les descriptions des mots cles (ajoutees dans lang/... mot_...)
  * 0.4.7 [FAIT] Problemes titres _T et _L // traductions à revoir corriger finir + en outre spipbb est maintenant gere par spip-trad
