@@ -62,6 +62,6 @@ _ From SPIP 1.9.2, restricted areas can be found in the private area and/or in t
 		<inclure>inc/acces_restreint.php</inclure>
 	</pipeline>
 	<chemin dir='' />
-	<necessite id="compat9919" version="[1.9.3.1;]" />
+	<necessite id="compat" version="[1.9.3.2;]" />
 	<necessite id="SPIP" version='[1.9300;]' />
 </plugin>
