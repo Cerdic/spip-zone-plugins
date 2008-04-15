@@ -2,7 +2,7 @@
 	/**
 	* Plugin Association
 	*
-	* Copyright (c) 2007
+	* Copyright (c) 2007-2008
 	* Bernard Blazin & François de Montlivault
 	* http://www.plugandspip.com 
 	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
@@ -27,6 +27,7 @@
 		$article=$_POST['article'];
 		$code=$_POST['code'];
 		$acheteur=$_POST['acheteur'];
+		$id_acheteur=$_POST['id_acheteur'];
 		$quantite=$_POST['quantite'];
 		$date_envoi=$_POST['date_envoi'];
 		$frais_envoi=$_POST['frais_envoi'];
@@ -38,7 +39,7 @@
 		
 		//AJOUT VENTE
 		if ($action=="ajoute"){
-			spip_query( "INSERT INTO spip_asso_ventes (date_vente, article, code, acheteur, quantite, date_envoi, frais_envoi, don, prix_vente, commentaire) VALUES ("._q($date_vente).", "._q($article).", "._q($code).", "._q($acheteur).", "._q($quantite).", "._q($date_envoi).", "._q($frais_envoi).", "._q($don).", "._q($recette).", "._q($commentaire)." )");
+			spip_query( "INSERT INTO spip_asso_ventes (date_vente, article, code, acheteur, id_acheteur, quantite, date_envoi, frais_envoi, don, prix_vente, commentaire) VALUES ("._q($date_vente).", "._q($article).", "._q($code).", "._q($acheteur).", "._q($id_acheteur).", "._q($quantite).", "._q($date_envoi).", "._q($frais_envoi).", "._q($don).", "._q($recette).", "._q($commentaire)." )");
 			$query=spip_query( "SELECT MAX(id_vente) AS id_vente FROM spip_asso_ventes");
 			while ($data = spip_fetch_array($query)) {
 				$id_vente=$data['id_vente'];
@@ -55,13 +56,13 @@
 		
 		//MODIFICATION VENTE
 		if ($action=="modifie"){
-			spip_query( "UPDATE spip_asso_ventes SET date_vente="._q($date_vente).", article="._q($article).", code="._q($code).", acheteur="._q($acheteur).", quantite="._q($quantite).", date_envoi="._q($date_envoi).", frais_envoi="._q($frais_envoi).", don="._q($don).", prix_vente="._q($prix_vente).", commentaire="._q($commentaire)." WHERE id_vente='$id_vente' " );
+			spip_query( "UPDATE spip_asso_ventes SET date_vente="._q($date_vente).", article="._q($article).", code="._q($code).", acheteur="._q($acheteur).", id_acheteur="._q($id_acheteur).", quantite="._q($quantite).", date_envoi="._q($date_envoi).", frais_envoi="._q($frais_envoi).", don="._q($don).", prix_vente="._q($prix_vente).", commentaire="._q($commentaire)." WHERE id_vente='$id_vente' " );
 			spip_query( "UPDATE spip_asso_comptes SET date="._q($date_vente).", journal="._q($journal).",recette="._q($prix_vente).", depense="._q($frais_envoi).", justification="._q($justification)." WHERE id_journal=$id_vente AND imputation=".lire_config('association/pc_ventes') );
 			header ('location:'.$url_retour);
 			exit;
 		}
 		
-		//SUPPRESSION PROVISOIRE ADHERENT	
+		//SUPPRESSION PROVISOIRE VENTES
 		if (isset($_POST['delete'])) {
 		
 			$delete_tab=(isset($_POST["delete"])) ? $_POST["delete"]:array();
@@ -100,7 +101,7 @@
 			fin_page();
 		}
 		
-		//  SUPPRESSION DEFINITIVE ADHERENTS	
+		//  SUPPRESSION DEFINITIVE VENTES	
 		if (isset($_POST['drop'])) {
 			
 			$url_retour = $_SERVER["HTTP_REFERER"];

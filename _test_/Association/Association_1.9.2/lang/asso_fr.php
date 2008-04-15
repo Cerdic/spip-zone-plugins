@@ -59,6 +59,7 @@
 			'bouton_envoyer' => 'Envoyer',
 			'bouton_soumettre' => 'Soumettre',
 			'bouton_supprimer' => 'Supprimer',
+			'bouton_impression' => 'Impression',
 	
 	'categories_de_cotisations' => 'Cat&eacute;gories de cotisations',
 	'configuration' => 'Configuration',
@@ -109,32 +110,12 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_nom' => 'Nom',
 	'adherent_libelle_prenom' => 'Pr&eacute;nom',
 	'adherent_libelle_sexe' => 'Civilit&eacute;',
-	'adherent_libelle_date_naissance' => 'Date de naissance',
 	'adherent_libelle_categorie' => 'Cat&eacute;gorie',
 	'adherent_libelle_fonction' => 'Fonction',
-	'adherent_libelle_email' => 'Email',
-	'adherent_libelle_adresse' => 'Adresse',
-	'adherent_libelle_rue' => 'Rue',
-	'adherent_libelle_num_rue' => 'N&deg;',
-	'adherent_libelle_ville' => 'Ville',
-	'adherent_libelle_codepostal' => 'Code Postal',
-	'adherent_libelle_portable' => 'Portable',
-	'adherent_libelle_telephone' => 'T&eacute;l&eacute;phone',
-	'adherent_libelle_profession' => 'Profession',
-	'adherent_libelle_societe' => 'Soci&eacute;t&eacute;',
-	'adherent_libelle_secteur' => 'Secteur',
-	'adherent_libelle_accord' => 'Accord de publication',
-	'adherent_libelle_utilisateur1' => 'Utilisateur 1',
-	'adherent_libelle_utilisateur2' => 'Utilisateur 2',
-	'adherent_libelle_utilisateur3' => 'Utilisateur 3',
-	'adherent_libelle_utilisateur4' => 'Utilisateur 4',
 	'adherent_libelle_validite' => 'Validit&eacute;',
 	'adherent_libelle_date_validite' => 'Date limite de validit&eacute;',
 	'adherent_libelle_remarques' => 'Remarques',
-	'adherent_libelle_identifiant' => 'Identifiant',
-	'adherent_libelle_visiteur_spip' => 'Visiteur SPIP',
 	'adherent_libelle_statut' => 'Statut de cotisation',
-	'adherent_libelle_categorie_choix' => 'Choisissez une cat&eacute;gorie de cotisation',
 
 	'adherent_libelle_statut_ok' => '&Agrave; jour',
 	'adherent_libelle_statut_echu' => '&Agrave &eacute;ch&eacute;ance',
@@ -190,20 +171,21 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_label_modifier_membre' => 'Modifier membre',
 	'adherent_label_voir_membre' => 'Voir le membre',
 
-		# Message
-			'adherent_message_ajout_adherent' => '@prenom@ @nom@ a &eacute;t&eacute; ajout&eacute; dans le fichier',
-			'adherent_message_ajout_adherent_suite' => 'et enregistr&eacute; comme visiteur',
-			'adherent_message_email_invalide' => 'L\'email n\'est pas valide !',
-			'adherent_message_maj_adherent' => 'Les donn&eacute;es de @prenom@ @nom@ ont &eacute;t&eacute; mises &agrave; jour !',
-			'adherent_message_confirmer_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer les membres',
-			'adherent_message_suppression_faite' => 'Suppression effectu&eacute;e !',
+	# Message
+	'adherent_message_ajout_adherent' => '@prenom@ @nom@ a &eacute;t&eacute; ajout&eacute; dans le fichier',
+	'adherent_message_ajout_adherent_suite' => 'et enregistr&eacute; comme visiteur',
+	'adherent_message_email_invalide' => 'L\'email n\'est pas valide !',
+	'adherent_message_maj_adherent' => 'Les donn&eacute;es de @prenom@ @nom@ ont &eacute;t&eacute; mises &agrave; jour !',
+	'adherent_message_confirmer_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer les membres',
+	'adherent_message_suppression_faite' => 'Suppression effectu&eacute;e !',
+	
+	# Liste
+	'adherent_liste_legende' => 'En bleu : Relanc&eacute;<br />En rose : A &eacute;ch&eacute;ance<br />En vert : A jour<br>En brun : D&eacute;sactiv&eacute;<br />En jaune paille : Prospect',
+	'adherent_liste_nombre_adherents' => 'Nombre d\'adh&eacute;rents : @total@',
+	'adherent_liste_total_cotisations' => 'Total des cotisations : @total@ &euro;',
+	
+	# ACTIVITES
 		
-		# Liste
-			'adherent_liste_legende' => 'En bleu : Relanc&eacute;<br />En rose : A &eacute;ch&eacute;ance<br />En vert : A jour<br>En brun : D&eacute;sactiv&eacute;<br />En jaune paille : Prospect',
-			'adherent_liste_nombre_adherents' => 'Nombre d\'adh&eacute;rents : @total@',
-			'adherent_liste_total_cotisations' => 'Total des cotisations : @total@ &euro;',
-		
-	# Activites
 		# Titres
 	'activite_titre_action_sur_inscriptions' => 'Action sur les inscriptions',
 	'activite_titre_mise_a_jour_inscriptions' => 'Mise &agrave; jour des inscriptions',
@@ -302,7 +284,16 @@ Commentaire: @commentaire@
 	'date_du_jour' => 'Nous sommes le '.date('d/m/Y'),
 	'date_du_jour_heure' => 'Nous sommes le '.date('d/m/Y').' et il est '.date('H:i'),
 	
-	# Ressources
+	# VENTES
+		
+		#Entetes
+			'vente_entete_id' => 'ID',
+			'vente_entete_date' => 'Date',
+			'vente_entete_article' => 'Article',
+			'vente_entete_quantites' => 'Quantit&eacute;',
+			'vente_entete_date_envoi' => 'Date d\'envoi',
+			
+	# RESSOURCES
 		
 		#Messages
 		'ressources_info' => 'Vous pouvez g&eacute;rer ici les diff&eacute;rentes ressources pr&ecirc;t&eacute;es aux membres (livres, mat&eacute;riels, ...)<br />La puce indique la disponibilit&eacute; des diff&eacute;rentes ressources',
