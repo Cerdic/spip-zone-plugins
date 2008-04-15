@@ -11,12 +11,18 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("img.panorama#ID_DOCUMENT").panorama({
-	                [auto_start: (#ENV{auto_start}|sinon{''}),]
+	                
+			[viewport_width: (#ENV{viewport_width}|sinon{''}),]
+                        [auto_start: (#ENV{auto_start}|sinon{''}),]
                         [start_position: (#ENV{start_position}|sinon{''}),]
                         [speed: (#ENV{speed}|sinon{''}),]
                         [direction: (#ENV{direction}|sinon{''}),]
                         [control_display: (#ENV{control_display}|sinon{''}),]
                         [mode_360: (#ENV{mode_360}|sinon{''}),]
+                      	[mode_360: 0(#ENV{boucler}|=={0}|?{' ',''}),]
+                      	[mode_360: 0(#ENV{boucler}|=={'non'}|?{' ',''}),]
+                      	[viewport_width: (#ENV{largeur}|sinon{''}),]
+			close_foo: 0
                       
 	         });
 	});
