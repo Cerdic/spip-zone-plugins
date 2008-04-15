@@ -1,225 +1,26 @@
-<BOUCLE_document (DOCUMENTS) {id_document}>
+<BOUCLE_document (DOCUMENTS) {id_document}{doublons}>
 [(#REM)
 
 	Modele pour <img|panorama>
 
 ]
-<div class="zone_js_div[(#ID_DOCUMENT)] document_panorama" style="position: relative; top: 0px; left: 0px; overflow: hidden; width: [(#ENV{largeur}|?{#ENV{largeur}, 400})]px; height: auto !important; height: [(#HAUTEUR)]px; min-height: [(#HAUTEUR)]px; z-index: 0;">
-	<div class="zone_aller_gauche_js_div[(#ID_DOCUMENT)]" style="position: absolute; margin-top: [(#HAUTEUR|div{2}|moins{35})]px; padding-left: 10px; width: 70px; height: 70px; z-index: 99;">
-		<a href="#">
-			<img id="aller_gauche[(#ID_DOCUMENT)]" src="#CHEMIN{aller_gauche.png}" class="format_png" alt="fleche gauche" title="vers la gauche" width="70px" height="67px" />
-
-		</a>
-	</div>
-	<div class="zone_aller_droite_js_div[(#ID_DOCUMENT)]" style="position: absolute; margin-top: [(#HAUTEUR|div{2}|moins{35})]px; padding-left: [(#ENV{largeur}|?{#ENV{largeur}, 400}|moins{80})]px; width: 70px; height: 70px; z-index: 98;">
-		<a href="#">
-			<img id="aller_droite[(#ID_DOCUMENT)]" src="#CHEMIN{aller_droite.png}" class="format_png" alt="fleche droite" title="vers la droite" width="70px" height="67px" />
-		</a>
-	</div>
-	<div class="zone_attente_js_div[(#ID_DOCUMENT)]" style="position: absolute; margin-top: 100px; margin-left: 50px; z-index: 0; font-size: 12px;">
-
-			Chargement en cours...
-	</div>
-	<div class="zone_image_js_div[(#ID_DOCUMENT)]" style="position: relative; top: 0px; left: 0px; width: [(#ENV{largeur}|?{#ENV{largeur}, 400})]px; height: [(#HAUTEUR)]px; overflow: hidden; z-index: 30;">
-	<div class="tableau_image_js_div[(#ID_DOCUMENT)]" style="position: relative; top: 0px; left: 0px; z-index: 40;">
-	<table border="0" cellpadding="0" cellspacing="0">
-	  <tr>	
-		<td><img id="image1[(#ID_DOCUMENT)]" src="#URL_DOCUMENT" alt="image 1 du panorama" height="[(#HAUTEUR)]px" width="[(#LARGEUR)]px"/></td>
-
-					<td><img id="image2[(#ID_DOCUMENT)]" src="#URL_DOCUMENT" alt="image 2 du panorama" height="[(#HAUTEUR)]px" width="[(#LARGEUR)]px"/></td>
-			  </tr>
-	</table>
-	</div>
-	
-	</div>
-</div>
 
 
-
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>
+[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>]<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"] alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"] class="panorama#ID_DOCUMENT" />[(#ENV{lien}|?{</a>})]</span>
 <script type="text/javascript">
-	
-<!--
-	var mode_auto[(#ID_DOCUMENT)];
-	var panorama[(#ID_DOCUMENT)] = [(#ENV{boucler}|=={0}|?{0, [(#ENV{boucler}|=={non}|?{0, 1})]})];
-	var largeur_image[(#ID_DOCUMENT)] = [(#LARGEUR)];
-	var refresh[(#ID_DOCUMENT)], arret[(#ID_DOCUMENT)];
-	function initpanorama[(#ID_DOCUMENT)]()
-	{
-		
-		mode_auto[(#ID_DOCUMENT)]  = 1;
-		deplace_droite_auto[(#ID_DOCUMENT)]();	
-				
-	}
-	function deplace_gauche[(#ID_DOCUMENT)]() 
-	{
-			clearTimeout(refresh[(#ID_DOCUMENT)]);
-			mode_auto[(#ID_DOCUMENT)] =0;
-			var val_left = $(".tableau_image_js_div[(#ID_DOCUMENT)]:last").css("left");
-			val_left = parseInt(val_left);
-	
-			if (val_left >= 0)
-			{
-				if (panorama[(#ID_DOCUMENT)] == 1)
-				{
-					$(".tableau_image_js_div[(#ID_DOCUMENT)]:last").css("left", "-"+largeur_image[(#ID_DOCUMENT)]+"px");
-				}
-			}
-			else
-			{
-				val_left = parseInt(val_left) + 5;
-				$(".tableau_image_js_div[(#ID_DOCUMENT)]:last").css("left", val_left+"px");
-			}
-			refresh[(#ID_DOCUMENT)] = setTimeout("deplace_gauche[(#ID_DOCUMENT)]()",5);
-	}
-	function deplace_droite[(#ID_DOCUMENT)]() 
-	{
-			
-			clearTimeout(refresh[(#ID_DOCUMENT)]);
-			mode_auto[(#ID_DOCUMENT)] =0;
-			var val_left = $(".tableau_image_js_div[(#ID_DOCUMENT)]:last").css("left");
-			val_left = parseInt(val_left);
-			if (panorama[(#ID_DOCUMENT)] == 1)
-			{
-				
-				if (val_left <= -largeur_image[(#ID_DOCUMENT)])
-				{
-					$(".tableau_image_js_div[(#ID_DOCUMENT)]:last").css("left", 5);
-				}
-				else
-				{
-					val_left = val_left - 5;
-					$(".tableau_image_js_div[(#ID_DOCUMENT)]:last").css("left", val_left+"px");
-				}
-			}
-			else
-			{
-				if (val_left  > -largeur_image[(#ID_DOCUMENT)]+[(#ENV{largeur}|?{#ENV{largeur}, 400})])
-				{
-					val_left = val_left - 5;
-					$(".tableau_image_js_div[(#ID_DOCUMENT)]:last").css("left", val_left+"px");
-				}
-
-			}
-			refresh[(#ID_DOCUMENT)] = setTimeout("deplace_droite[(#ID_DOCUMENT)]()",5);
-		
-
-	}
-	function deplace_gauche_auto[(#ID_DOCUMENT)]() 
-	{
-		
-		clearTimeout(refresh[(#ID_DOCUMENT)]);
-		if (mode_auto[(#ID_DOCUMENT)]  == 1)
-		{	
-			var val_left = $(".tableau_image_js_div[(#ID_DOCUMENT)]:last").css("left");
-			val_left = parseInt(val_left);
-	
-			if (val_left >= 0)
-			{
-				if (panorama[(#ID_DOCUMENT)] == 1)
-				{
-					$(".tableau_image_js_div[(#ID_DOCUMENT)]:last").css("left", "-"+largeur_image[(#ID_DOCUMENT)]+"px");
-					refresh[(#ID_DOCUMENT)] = setTimeout("deplace_gauche_auto[(#ID_DOCUMENT)]()",50);
-				}
-				else
-				{
-					refresh[(#ID_DOCUMENT)] = setTimeout("deplace_droite_auto[(#ID_DOCUMENT)]()",50);
-				}
-			}
-			else
-			{
-				val_left = val_left + 1;
-				$("#tableau_image_js_div[(#ID_DOCUMENT)]:last").css("left", val_left+"px");
-				refresh[(#ID_DOCUMENT)] = setTimeout("deplace_gauche_auto[(#ID_DOCUMENT)]()",50);
-			}
-			
-		
-		}
-	}
-
-	function deplace_droite_auto[(#ID_DOCUMENT)]() 
-	{
-		clearTimeout(refresh[(#ID_DOCUMENT)]);
-		if (mode_auto[(#ID_DOCUMENT)]  == 1)
-		{	
-			var val_left = $(".tableau_image_js_div[(#ID_DOCUMENT)]:last").css("left");
-			val_left = parseInt(val_left);
-	
-
-			if (panorama[(#ID_DOCUMENT)] == 1)
-			{
-				if (val_left <= -largeur_image[(#ID_DOCUMENT)])
-				{
-					
-					$(".tableau_image_js_div[(#ID_DOCUMENT)]:last").css("left", 0);
-					
-						
-					
-				}
-				else
-				{
-						val_left = val_left - 1;
-					$(".tableau_image_js_div[(#ID_DOCUMENT)]:last").css("left", val_left+"px");
-
-				}
-				refresh[(#ID_DOCUMENT)] = setTimeout("deplace_droite_auto[(#ID_DOCUMENT)]()",50);
-			}
-			else
-			{
-			if (val_left <= -largeur_image[(#ID_DOCUMENT)]+[(#ENV{largeur}|?{#ENV{largeur}, 400})])
-				{
-					
-					refresh[(#ID_DOCUMENT)] = setTimeout("deplace_gauche_auto[(#ID_DOCUMENT)]()",50);
-						
-					
-				}
-				else
-				{
-					val_left = val_left - 1;
-					$(".tableau_image_js_div[(#ID_DOCUMENT)]:last").css("left", val_left+"px");
-					refresh[(#ID_DOCUMENT)] = setTimeout("deplace_droite_auto[(#ID_DOCUMENT)]()",50);
-				}
-
-			}
-			
-		
-		}
-	}
-
-	 jQuery(document).ready(function(){
-		
-			initpanorama[(#ID_DOCUMENT)]();
-			$(".zone_aller_droite_js_div[(#ID_DOCUMENT)]:last a").bind('click',
-				function() {
-					return false;
-			});$(".zone_aller_droite_js_div[(#ID_DOCUMENT)]:last a").bind('mouseover',
-				function() {
-					deplace_droite[(#ID_DOCUMENT)]();
-					return false;
-			});
-			$(".zone_aller_gauche_js_div[(#ID_DOCUMENT)]:last a").bind('mouseover',
-				function() {
-					deplace_gauche[(#ID_DOCUMENT)]();
-					return false;
-			});
-			$(".zone_aller_gauche_js_div[(#ID_DOCUMENT)]:last a").bind('click',
-				function() {
-					return false;
-			});$(".zone_aller_droite_js_div[(#ID_DOCUMENT)]:last a").bind('mouseout',
-				function() {
-					clearTimeout(refresh[(#ID_DOCUMENT)]);
-					return false;
-			});
-			$(".zone_aller_gauche_js_div[(#ID_DOCUMENT)]:last a").bind('mouseout',
-				function() {
-					clearTimeout(refresh[(#ID_DOCUMENT)]);
-					return false;
-			});
-
+	$(document).ready(function(){
+		$("img.panorama#ID_DOCUMENT").panorama({
+	                [auto_start: (#ENV{auto_start}|sinon{''}),]
+                        [start_position: (#ENV{start_position}|sinon{''}),]
+                        [speed: (#ENV{speed}|sinon{''}),]
+                        [direction: (#ENV{direction}|sinon{''}),]
+                        [control_display: (#ENV{control_display}|sinon{''}),]
+                        [mode_360: (#ENV{mode_360}|sinon{''}),]
+                      
+	         });
 	});
-	
-	-->
-	</script>
-
+</script>
 
 
 </BOUCLE_document>

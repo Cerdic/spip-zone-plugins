@@ -51,7 +51,7 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 <embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs)] width='#GET{largeur}' height='#GET{hauteur}'></embed></object>
 
 ][(#INCLUS|=={image}|?{' '})
-[(#INCLURE{fond=modeles/img_panorama}{id_document}{align=#ENV{align}}{embed=oui}{lien=#ENV{lien}}{largeur=#ENV{largeur}}{boucler=#ENV{boucler}}{lien_class=#ENV{lien_class}})]
+[(#INCLURE{fond=modeles/img_panorama}{id_document}{auto_start=#ENV{auto_start}}{start_position=#ENV{start_position}}{start_position=#ENV{start_position}}{speed=#ENV{speed}}{direction=#ENV{direction}}{control_display=#ENV{control_display}}{mode_360=#ENV{mode_360}}{embed=oui}{lien=#ENV{lien}}{lien_class=#ENV{lien_class}})]
 ]
 ][(#INCLUS|=={embed}|?{' '})[(#ENV{controls,''}|?{'',' '})
 [<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF)</div>]</div>

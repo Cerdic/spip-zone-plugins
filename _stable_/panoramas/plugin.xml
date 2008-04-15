@@ -5,26 +5,25 @@
 	<auteur>	<!-- Auteur du plugin -->
 	Arnault PACHOT 
  	[OpenStudio->http://www.openstudio.fr]
-_ &#169; 2007 - Licence GPL
+_ &#169; 2008 - Licence GPL
 	</auteur>
 	<version>
-	2.0
+	3.0
 	</version>
 	<etat>
 	stable
 	</etat>
 	<description>
-	Ce plugin permet d'afficher des panoramas dans vos articles sans necessiter l'installation d'un plugin de la part du visiteur.
+		Ce plugin permet la cr&eacute;ation de visites virtuelles accessibles.
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Panoramas-360o</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
-
 	</options>
-	
-	
-	
-	
-
+	<pipeline>
+  		<nom>insert_head</nom>
+  		<action>insertion_in_head</action>
+  		<inclure>panoramas_define_head.php</inclure>
+ 	</pipeline>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
