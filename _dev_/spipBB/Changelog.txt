@@ -4,6 +4,7 @@
  * Les éléments titre, descriptif, texte sont maintenant éditables partout avec crayons+autorite
  * Uniformisation des entete pour categories (rubrique) et forums (article) utilsant toutes #DESCRIPTIF au lieu d'un mélange.
  * c_rubrique fait maintenant appel au modele ligne_voir_forum pour afficher chaque ligne du tableau des forums
+ * 0.4.8.3 : finalement #DESCRIPTIF étant optionnel, il vaut utiliser #TEXTE tout betement...
 
 
 2008-04-14  chryjs  <chryjs!@!free!.!fr>
