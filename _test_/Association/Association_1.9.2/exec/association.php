@@ -85,7 +85,7 @@
 		fin_page();
 		
 		//Petite routine pour mettre à jour les statuts de cotisation "échu"
-		spip_query("UPDATE spip_asso_adherents a INNER JOIN spip_auteurs_elargis b on a.id_auteur=b.id_auteur SET statut_interne='echu'  WHERE statut_interne = 'ok' AND validite < CURRENT_DATE() ");
+		spip_query("UPDATE spip_auteurs_elargis SET statut_interne='echu'  WHERE statut_interne = 'ok' AND validite < CURRENT_DATE() ");
 
 	}
 ?>

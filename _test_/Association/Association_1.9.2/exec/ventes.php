@@ -85,6 +85,7 @@
 		echo '<td><strong>Article</strong></td>';
 		echo '<td><strong>Code</strong></td>';
 		echo '<td><strong>Acheteur</strong></td>';
+		echo '<td><strong>Membre</strong></td>';
 		echo '<td style="text-align:right"><strong>Qt&eacute;</strong></td>';
 		echo '<td style="text-align:right"><strong>Montant</strong></td>';
 		echo '<td colspan="2" style="text-align:center"><strong>&nbsp;</strong></td>';
@@ -100,6 +101,7 @@
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['article'].'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['code'].'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['acheteur'].'</td>';
+			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['id_acheteur'].'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.$data['quantite'].'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">'.association_nbrefr($data['quantite']*$data['prix_vente']).'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Mettre &agrave; jour la vente"></a>';

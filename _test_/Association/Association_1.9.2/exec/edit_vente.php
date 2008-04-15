@@ -2,7 +2,7 @@
 	/**
 	* Plugin Association
 	*
-	* Copyright (c) 2007
+	* Copyright (c) 2007-2008
 	* Bernard Blazin & François de Montlivault
 	* http://www.plugandspip.com 
 	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
@@ -29,6 +29,7 @@
 			$article=$data['article'];
 			$code=$data['code'];
 			$acheteur=$data['acheteur'];
+			$id_acheteur=$data['id_acheteur'];
 			$quantite=$data['quantite'];
 			$prix_vente=$data['prix_vente'];
 			$journal=$data['journal'];
@@ -65,11 +66,13 @@
 		echo '<label for="date_vente"><strong>Date (AAAA-MM-JJ) :</strong></label>';
 		echo '<input name="date_vente" type="text" value="'.$date_vente.'" id="date_vente" class="formo" />';
 		echo '<label for="article"><strong>Article :</strong></label>';
-		echo '<input name="article"  type="text" size="40" value="'.$article.'" id="article" class="formo" />';
+		echo '<input name="article"  type="text" value="'.$article.'" id="article" class="formo" />';
 		echo '<label for="code"><strong>Code de l\'article :</strong></label>';
 		echo '<input name="code"  type="text" value="'.$code.'" id="code" class="formo" />';
 		echo '<label for="acheteur"><strong>Nom de l\'acheteur :</strong></label>';
-		echo '<input name="acheteur" type="text" size="40" value="'.$acheteur.'" id="acheteur" class="formo" />';
+		echo '<input name="acheteur" type="text" value="'.$acheteur.'" id="acheteur" class="formo" />';
+		echo '<label for="id_acheteur"><strong>N&deg; de membre :</strong></label>';
+		echo '<input name="id_acheteur" type="text" value="'.$id_acheteur.'" id="id_acheteur" class="formo" />';
 		echo '<label for="quantite"><strong>Quantit&eacute; achet&eacute;e :</strong></label>';
 		echo '<input name="quantite"  type="text" value="'.$quantite.'" id="quantite" class="formo" />';
 		echo '<label for="prix_vente"><strong>Prix de vente(en &euro;) :</strong></label>';
