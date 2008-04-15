@@ -47,8 +47,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'Activaci&oacute; d\'SpipBB',
 	'admin_config_spipbb_info' => 'Feu clic damunt de Si per activar SpipBB',
 	'admin_config_tables' => 'Configuraci&oacute; de les taules d\'SpipBB',
-	'admin_config_tables_erreur' => '<MODIF>Problema amb les taules d\'SpipBB: @tables_erreur@ s&oacute;n incorrectes (les taules @tables_ok@ semblen correctes).
- Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] o el [suport a spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+	'admin_config_tables_erreur' => 'Problema amb les taules d\'SpipBB: @tables_erreur@ s&oacute;n incorrectes (les taules @tables_ok@ semblen correctes).
+Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] o el [suport a spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'Les taules d\'SpipBB estan instal&middot;lades correctament (@tables_ok@)',
 	'admin_date_ouverture' => 'Data d\'obertura',
 	'admin_debug_log' => 'Fitxer de registre @log_name@',
@@ -310,14 +310,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'moderateurs_dpt' => 'Moderadors: ',
 	'moderateur_dpt' => 'Moderador: ',
 	'modif_parametre' => 'Modifiqueu els vostres par&agrave;metres',
-	'mot_annonce' => '<MODIF>Av&iacute;s
- _ Un av&iacute;s est&agrave; situat a sobre del f&ograve;rum a totes les p&agrave;gines.',
-	'mot_ferme' => '<MODIF>Tancat
- -* Quan un article-f&ograve;rum t&eacute; la seva paraula clau, nom&eacute;s els moderadors poden afegir-hi missatges.
- -* Quan un assumpte del f&ograve;rum est&agrave; tancat, nom&eacute;s els moderadors poden afegir-hi respostes.',
+	'mot_annonce' => 'Av&iacute;s
+_ Un av&iacute;s est&agrave; situat a sobre del f&ograve;rum a totes les p&agrave;gines.',
+	'mot_ferme' => 'Tancat
+-* Quan un article-f&ograve;rum t&eacute; la seva paraula clau, nom&eacute;s els moderadors poden afegir-hi missatges.
+-* Quan un assumpte del f&ograve;rum est&agrave; tancat, nom&eacute;s els moderadors poden afegir-hi respostes.',
 	'mot_groupe_moderation' => 'Grup de paraules clau utilitzat per la moderaci&oacute; d\'SpipBB',
-	'mot_postit' => '<MODIF>Post-it
- _ Un post-it est&agrave; situat a sota dels anuncis, abans dels missatges ordinaris. Apareix nom&eacute;s una vegada a la llista.',
+	'mot_postit' => 'Post-it
+_ Un post-it est&agrave; situat a sota dels anuncis, abans dels missatges ordinaris. Apareix nom&eacute;s una vegada a la llista.',
 
 	// N
 	'nom_util' => 'Nom d\'usuari',
@@ -333,17 +333,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pagine_sujet_s' => 'assumptes',
 	'par_' => 'per ',
 	'plugin_auteur' => 'La SpipBB Team: [veure la llista de col&middot;laboradors a Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => '<MODIF>El plugin SpipBB permet:
- -* Gestionar de manera centralitzada els f&ograve;rums d\'SPIP (interf&iacute;cie privada),
- -* Utilitzar un sector com a base d\'un grup de f&ograve;rums com els &laquo;Bulletin Board&raquo; tals com phpBB. En aquest sector, les subseccions s&oacute;n grups de f&ograve;rums, els articles f&ograve;rums, cada missatge al f&ograve;rum d\'un article hi inicia una cadena.
+	'plugin_description' => 'El plugin SpipBB permet:
+-* Gestionar de manera centralitzada els f&ograve;rums d\'SPIP (interf&iacute;cie privada),
+-* Utilitzar un sector com a base d\'un grup de f&ograve;rums com els &laquo;Bulletin Board&raquo; tals com phpBB. En aquest sector, les subseccions s&oacute;n grups de f&ograve;rums, els articles f&ograve;rums, cada missatge al f&ograve;rum d\'un article hi inicia una cadena.
 
- {{Consulteu:}}
- -* •[l\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
- -* •[La documentaci&oacute; a Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+{{Consulteu:}}
+-* •[l\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
+-* •[La documentaci&oacute; a Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
- _ {{Plugin spipbb en curs de desenvolupament. Utilitzeu-los assumint-ne els riscs i els perills}}
+_ {{Plugin spipbb en curs de desenvolupament. Utilitzeu-los assumint-ne els riscs i els perills}}
 
- _ [Acc&eacute;s al panell d\'administraci&oacute;-> .?exec=spipbb_configuration]',
+_ [Acc&eacute;s al panell d\'administraci&oacute;-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribu&iuml;t sota llic&egrave;ncia GPL',
 	'plugin_lien' => '[Consultar la documentaci&oacute; del plugin a Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
 	'plugin_nom' => 'SpipBB: Gesti&oacute; dels f&ograve;rums d\'SPIP',
@@ -371,7 +371,7 @@ nbr_post@ missatge(s). Esborrats amb ell!\\n',
 	'recherche' => 'Cerca',
 	'recherche_elargie' => 'Cerca ampliada',
 	'redige_post' => 'Escriure missatge',
-	'reglement' => '<MODIF>Els administradors i moderadors d\'aquest f&ograve;rum s\'esfor&ccedil;aran en suprimir o editar tots els missatges que tinguin car&agrave;cter censurable tan r&agrave;pidament com els sigui possible. No obstant, els &eacute;s impossible revisar tots i cadascun dels missatges. Per tant, admeteu que tots els missatges enviats a aquests f&ograve;rums expressen el punt de vista i la opini&oacute; dels seus autors respectius i no la dels administradors, moderadors o webmestres (excepte quan els missatges siguin enviats per ells mateixos) i, per tant, no se\'ls pot considerar responsables. </p>
+	'reglement' => 'Els administradors i moderadors d\'aquest f&ograve;rum s\'esfor&ccedil;aran en suprimir o editar tots els missatges que tinguin car&agrave;cter censurable tan r&agrave;pidament com els sigui possible. No obstant, els &eacute;s impossible revisar tots i cadascun dels missatges. Per tant, admeteu que tots els missatges enviats a aquests f&ograve;rums expressen el punt de vista i la opini&oacute; dels seus autors respectius i no la dels administradors, moderadors o webmestres (excepte quan els missatges siguin enviats per ells mateixos) i, per tant, no se\'ls pot considerar responsables. </p>
 <p>Consentiu a no enviar missatges insultants, obscens, vulgars, difamatoris, amena&ccedil;adors, sexuals o qualsevol altre tipus de missatge que pugui violar les lleis en vigor. Fer-ho us pot portar a ser expulsat immediatament i de forma permanent (i el vostre prove&iuml;dor d\'acc&eacute;s a Internet en ser&agrave; informat). L\'adre&ccedil;a IP de cada missatge s\'enregistra per tal d\'ajudar a fer respectar aquestes condicions. Esteu d\'acord en que el webmestre, l\'administrador i els moderadors d\'aquest f&ograve;rum tenen el dret de suprimir, editar, despla&ccedil;ar o bloquejar qualsevol fil de discussi&oacute; en qualsevol moment.
  Com a usuari, esteu d\'acord en que totes les informacions que donareu aqu&iacute; siguin emmagatzemades en una base de dades. No obstant, aquestes informacions no seran divulgades a terceres persones o a societats sense el vostre consentiment. El webmestre, l\'administrador i els moderadors no podran ser considerats responsables si un intent de pirateria inform&agrave;tica tingu&eacute;s com a conseq&uuml;&egrave;ncia l\'acc&eacute;s a aquestes dades.</p>
 <p>Aquest f&ograve;rum utilitza les galetes per emmagatzemar informacions en el vostre ordinador. Aquestes galetes no contenen cap informaci&oacute; que vosaltres entreu a partir d\'ara. Serveixen, &uacute;nicament, per millorar el confort en la navegaci&oacute;. L\'adre&ccedil;a de correu nom&eacute;s s\'utilitza per confirmar els detalls del vostre registre i la contrasenya (i tamb&eacute; per enviar-vos una nova contrasenya en cas de p&egrave;rdua o oblit).</p>
@@ -385,12 +385,12 @@ nbr_post@ missatge(s). Esborrats amb ell!\\n',
 	'secteur_forum' => 'ARREL',
 	'selection_efface' => 'Esborrar la selecci&oacute;...',
 	'signature' => 'Signatura',
-	'sign_admin' => '<MODIF>{{Aquesta p&agrave;gina nom&eacute;s est&agrave; disponible pels responsables del lloc.}}<p>D&oacute;na acc&eacute;s a la configuraci&oacute; del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; aix&iacute; com a la gesti&oacute; dels f&ograve;rums del lloc Web.</p><p>Versi&oacute;: @version@ @distant@</p><p>Consulteu:
- _ • [La documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/?article2460]
- _ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
+	'sign_admin' => '{{Aquesta p&agrave;gina nom&eacute;s est&agrave; disponible pels responsables del lloc.}}<p>D&oacute;na acc&eacute;s a la configuraci&oacute; del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; aix&iacute; com a la gesti&oacute; dels f&ograve;rums del lloc Web.</p><p>Versi&oacute;: @version@ @distant@</p><p>Consulteu:
+_ • [La documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/?article2460]
+_ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />La versi&oacute; m&eacute;s recent disponible: @version@',
 	'sign_ok' => 'actualitzat.',
-	'sign_reinit' => '<MODIF><p>Reiniciar:
+	'sign_reinit' => '<p>Arrencar de nou:
  _ • [tot el plugin->@plugin@]</p>',
 	'sign_tempo' => 'Realitzat amb <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'sinscrire' => 'Registrar-se',

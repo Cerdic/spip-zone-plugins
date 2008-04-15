@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'Enable SpipBB',
 	'admin_config_spipbb_info' => 'Choose Yes to enable SpipBB',
 	'admin_config_tables' => 'Configuration of SpipBB tables',
-	'admin_config_tables_erreur' => '<MODIF>Problem with SpipBB tables: @tables_erreur@ are incorrect (the tables @tables_ok@ seem to be OK).
+	'admin_config_tables_erreur' => 'Problem with SpipBB tables: @tables_erreur@ are incorrect (the tables @tables_ok@ seem to be OK).
  Consult the [documentation on Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] or [support on spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'The SpipBB database tables are installed correctly (@tables_ok@)',
 	'admin_date_ouverture' => 'Openning date',
@@ -310,13 +310,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'moderateurs_dpt' => 'Moderators: ',
 	'moderateur_dpt' => 'Moderator: ',
 	'modif_parametre' => 'Change your parameters',
-	'mot_annonce' => '<MODIF>Announcement
+	'mot_annonce' => 'Announcement
  _ An announcement is placed at the head of the forum on all pages.',
-	'mot_ferme' => '<MODIF>Closed
+	'mot_ferme' => 'Closed
  -* when an article-forum uses this keyword, only moderators can post messages.
  -* when a forum topic is closed, only the moderators will be able to post messages.',
 	'mot_groupe_moderation' => 'Keywords group used for SpipBB moderation',
-	'mot_postit' => '<MODIF>Post-it
+	'mot_postit' => 'Post-it
  _ A post-it is placed underneath announcements, before ordinary messages. It only appears once in the list.',
 
 	// N
@@ -333,15 +333,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pagine_sujet_s' => ' topics',
 	'par_' => 'by ',
 	'plugin_auteur' => 'The SpipBB Team: [See the list of contributors on Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => '<MODIF>The SpipBB plugin provides the following features:
+	'plugin_description' => 'The SpipBB plugin provides the following features:
 -* centralizes the forum management in SPIP (in the private area),
--* use a sector of the site as a set of forum, "Bulletin Board" style, such as phpBB. In this sector, the sub-sections will represent forum groups and articles dedicated forums where threads are made of messages posted to that article.
+-* turns a sector of the site into a forum, "Bulletin Board" style, similar to phpBB. In this sector, subsections are used as forum groups and articles dedicated forums where threads are made of messages posted to that article.
 
 {{Please check:}}
 -* [help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* [the documentation from Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* [the documentation on Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
-_ {{The SpipBB plugin is still under development. Use at your own risks.}}
+_ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
 ',
 	'plugin_licence' => 'Distributed under the GPL licence',
 	'plugin_lien' => '[See the documentation of the plugin from Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
@@ -369,7 +369,7 @@ _ {{The SpipBB plugin is still under development. Use at your own risks.}}
 	'recherche' => 'Search',
 	'recherche_elargie' => 'Advanced search',
 	'redige_post' => 'Write a topic',
-	'reglement' => '<MODIF><p>The administrators and moderators of this forum will 
+	'reglement' => '<p>The administrators and moderators of this forum will 
  endeavour to delete or edit all the messages with offending content
  as quickly as possible. However, it is impossible to check all the
  messages.You agree that all the messages posted to these forums 
@@ -406,12 +406,12 @@ _ {{The SpipBB plugin is still under development. Use at your own risks.}}
 	'secteur_forum' => 'ROOT',
 	'selection_efface' => 'Deleted the selection... ',
 	'signature' => 'Signature',
-	'sign_admin' => '<MODIF>{{This page can only be seen by the site owner.}}<p>It provides access to the plugin configuration of &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; and the forum management of your site.</p><p>Version : @version@ @distant@</p><p>See&nbsp;:
+	'sign_admin' => '{{This page can only be seen by the site owner.}}<p>It provides access to the plugin configuration of &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; and the forum management of your site.</p><p>Version : @version@ @distant@</p><p>See&nbsp;:
 _ • [The documentation of Spip-Contrib->http://www.spip-contrib.net/?article2460]
 _ • [The help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />update available: @version@',
 	'sign_ok' => 'up to date',
-	'sign_reinit' => '<MODIF><p>Reset:
+	'sign_reinit' => '<p>Reset:
  _ • [the whole plugin->@plugin@]</p>',
 	'sign_tempo' => 'Build with <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'sinscrire' => 'Register',
