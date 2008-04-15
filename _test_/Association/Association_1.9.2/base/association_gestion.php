@@ -11,7 +11,7 @@
 	**/
 	
 	//version actuelle du plugin à changer en cas de maj
-	$GLOBALS['association_version'] = 0.62;	
+	$GLOBALS['association_version'] = 0.64;	
 		
 	function association_verifier_base(){			
 		$version_base = $GLOBALS['association_version'];
@@ -64,7 +64,21 @@
 			if ($current_version<0.62){
 				spip_query("ALTER TABLE spip_asso_plan ADD actif TEXT NOT NULL AFTER commentaires");
 				ecrire_meta('asso_base_version',$current_version=0.62);
-			}	
+			}
+			
+			if ($current_version<0.63){
+				spip_query("ALTER TABLE spip_asso_ventes ADD id_acheteur BINGINT(20) NOT NULL AFTER acheteur");
+				ecrire_meta('asso_base_version',$current_version=0.63);
+			}
+			
+			if ($current_version<0.64){
+				$query=spip_query("SELECT * FROM spip_auteurs_elargis");
+				if(!$query) {echo 'Installer les plugins cfg et Inscription2 avant d\'installer ce plugin!!!';exit;}
+				spip_query("ALTER TABLE spip_auteurs_elargis ADD validite date NOT NULL default '0000-00-00', ADD montant float NOT NULL default '0', ADD 
+date date NOT NULL default '0000-00-00' ");
+				ecrire_meta('asso_base_version',$current_version=0.64);
+			}
+					
 			ecrire_metas();
 		}
 	}
