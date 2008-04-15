@@ -324,7 +324,7 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me@s
 	// P
 	'pack' => 'Current configuration',
 	'page' => 'page',
-	'paragrapher2:description' => '<NEW>La fonction SPIP <code>paragrapher()</code> ins&egrave;re des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont d&eacute;pourvus de paragraphes. Afin de g&eacute;rer plus finement vos styles et vos mises en page, vous avez la possibilit&eacute; d\'uniformiser l\'aspect des textes de votre site.[[%paragrapher%]]',
+	'paragrapher2:description' => 'The SPIP function <code>paragrapher()</code> inserts the tags &lt;p&gt; and &lt;/p&gt; around all texts which do not have paragraphs. In order to have a finer control over your styles and layout, you can give a uniform look to your texts throughout the site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Insert paragraphs',
 	'par_defaut' => 'By default',
 	'permuter' => 'Switch the tools in bold type',
@@ -332,7 +332,7 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me@s
 	'permuter_outils' => 'Switch the @nb@ tools in bold type?',
 	'pipelines' => 'Entry points used:',
 	'presente_outils' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\'./?exec=admin_couteau_suisse\'>the new interface</a>, please let us know in the forum of <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
-	'presente_outils2' => '<NEW>Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition.<br /><br />En cliquant sur le nom des outils ci-dessous, vous s&eacute;lectionnez ceux dont vous pourrez permuter l\'&eacute;tat &agrave; l\'aide du bouton central : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>. &Agrave; chaque clic, la description apparait au-dessous des listes. Les cat&eacute;gories sont repliables et les outils peuvent &ecirc;tre cach&eacute;s. Le double-clic permet de permuter rapidement un outil.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d\'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d\'autres plugins.<br /><br />Note : le simple chargement de cette page recompile l\'ensemble des outils du Couteau Suisse.',
+	'presente_outils2' => 'This page lists the functionalties which the plugin makes available to you.<br /><br />By clicking on the names of the tools below, you choose the ones which you can then switch on/off using the central button: active tools will be disabled and <i>vice versa</i>. When you click, the tools description is shown above the list. The tool categories are collapsible to hide the tools they contain. A double-click allows you to directly switch a tool on/off.<br /><br />For first use, it is recommended to activate tools one by one, thus reavealing any incompatibilites with your templates, with SPIP or with other plugins.<br /><br />N.B.: simply loading this page recompiles all the Swiss Knife tools.',
 	'prochainement' => 'This site will be back online soon.
 _ Thank you for your understanding.',
 	'propres' => 'propres@_CS_ASTER@',
@@ -362,20 +362,20 @@ _ Thank you for your understanding.',
 _ A tag is available for displaying a table of smileys in templates: #SMILEYS.
 _ Images : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smileys',
-	'sommaire:description' => '<NEW>Construit un sommaire pour vos articles afin d’acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
+	'sommaire:description' => 'Builds a summary of your articles in order to access the main headings quickly (HTML tags &lt;h3>A Subtitle&lt;/h3> or SPIP subtitle shortcuts in the form: <code>{{{My subtitle}}}</code>).
 
-@puce@ Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caract&egrave;res]]
+@puce@ You can define the maximum number of characters of the subtitles used to make the summary:[[%lgr_sommaire% caract&egrave;res]]
 
-@puce@ Vous pouvez aussi fixer le comportement du plugin concernant la cr&eacute;ation du sommaire: 
-_ • Syst&eacute;matique pour chaque article (une balise <code>[!sommaire]</code> plac&eacute;e n’importe o&ugrave; &agrave; l’int&eacute;rieur du texte de l’article cr&eacute;era une exception).
-_ • Uniquement pour les articles contenant la balise <code>[sommaire]</code>.
+@puce@ You can also determine the way in which the plugin constructs the summary: 
+_ • Systematically, for each article (a tag <code>[!sommaire]</code> placed anywhere within the text of the article will make an exception to the rule).
+_ • Only for articles containing the <code>[sommaire]</code> tag.
 
 [[%auto_sommaire%]]
 
-@puce@ Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d\'article automatiquement. Mais vous avez la possibilt&eacute; de placer ce sommaire ailleurs dans votre squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE que vous pouvez activer ici :
+@puce@ By default, the Swiss Knife inserts the summary at the top of the article. But you can place it elsewhere, if you wish, by using the #CS_SOMMAIRE tag, which you can activate here:
 [[%balise_sommaire%]]
 
-Ce sommaire peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et onglets}.',
+The summary can be used in conjunction with : {Division into pages and tabs}.',
 	'sommaire:nom' => 'A summary for your articles',
 	'sommaire_avec' => 'An article with summary: <b>@racc@</b>',
 	'sommaire_sans' => 'An article without summary: <b>@racc@</b>',
@@ -384,7 +384,7 @@ Ce sommaire peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et ong
 List here the sequences you wish to prohibit@_CS_ASTER@ separating them with spaces. [[%spam_mots%]]
 @_CS_ASTER@To specify a whole word, place it in brackets. Expressions containing spaces should be placed with inverted commas.',
 	'spam:nom' => 'Fight against SPAM',
-	'spip_cache:description' => '<NEW>@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[%radio_desactive_cache3%]]@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]@puce@ Si la balise #CACHE n\'est pas trouv&eacute;e dans vos squelettes locaux, SPIP consid&egrave;re par d&eacute;faut que le cache d\'une page a une dur&eacute;e de vie de 24 heures avant de la recalculer. Afin de mieux g&eacute;rer la charge de votre serveur, vous pouvez ici modifier cette valeur.[[%duree_cache% heures]]@puce@ Si vous avez plusieurs sites en mutualisation, vous pouvez sp&eacute;cifier ici la valeur par d&eacute;faut prise en compte par tous les sites locaux (SPIP 1.93).[[%duree_cache_mutu% heures]]',
+	'spip_cache:description' => '@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily, in order to see the effect of changes immediately.[[%radio_desactive_cache3%]]@puce@ The cache occupies disk space and SPIP can limit the amount of space taken up. Leaving empty or putting 0 means that no quota will be applied.[[%quota_cache% Mo]]@puce@ If the  #CACHE tag is not found in a template, then, by default, SPIP caches a page for 24 hours before recalculating it. You can modify this default here.[[%duree_cache% heures]]@puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:nom' => 'SPIP and the cache',
 	'SPIP_liens:description' => '@puce@ By default, all links on the site open in the current window. But it can be useful to open external links in a new window, i.e. adding {target="_blank"} to all link tags bearing one of the SPIP classes {spip_out}, {spip_url} or {spip_glossaire}. It is sometimes necessary to add one of these classes to the links in the site\'s templates (html files) in order make this functionality wholly effective.[[%radio_target_blank3%]]
 
@@ -413,20 +413,20 @@ _ Do not forget to check that the variable used (here, "a_text") is defined in t
 	'toutmulti:nom' => 'Multilingual blocks',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'type_urls:description' => '<NEW>@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'acc&egrave;s aux pages de votre site :
+	'type_urls:description' => '@puce@ SPIP offers a choice between several types of URLs for your site:
 <div style="font-size:90%; margin:0 2em;">
-- {{page}} : la valeur par d&eacute;faut pour SPIP v1.9x : <code>/spip.php?article123</code>.
-- {{html}} : les liens ont la forme des pages html classiques : <code>/article123.html</code>.
-- {{propre}} : les liens sont calcul&eacute;s gr&acirc;ce au titre: <code>/Mon-titre-d-article</code>.
-- {{propres2}} : l\'extension \'.html\' est ajout&eacute;e aux adresses g&eacute;n&eacute;r&eacute;es : <code>/Mon-titre-d-article.html</code>.
-- {{standard}} : URLs utilis&eacute;es par SPIP v1.8 et pr&eacute;c&eacute;dentes : <code>article.php3?id_article=123</code>
-- {{propres-qs}} : ce syst&egrave;me fonctionne en "Query-String", c\'est-&agrave;-dire sans utilisation de .htaccess ; les liens sont de la forme : <code>/?Mon-titre-d-article</code>.</div>
+- {{page}} : the default type for SPIP v1.9x : <code>/spip.php?article123</code>.
+- {{html}} : URLs take the form of classic html pages: <code>/article123.html</code>.
+- {{propre}} : URLs are constructed using the title of the object: <code>/Mon-titre-d-article</code>.
+- {{propres2}} : the extension \'.html\' is added to the URLs generated: <code>/Mon-titre-d-article.html</code>.
+- {{standard}} : the URLs used by SPIP v1.8 and earlier: <code>article.php3?id_article=123</code>
+- {{propres-qs}} : this system functions using a "Query-String", in other words, without using the .htaccess file. The URLs are of the form: <code>/?Mon-titre-d-article</code>.</div>
 
-Plus d\'infos : [->http://www.spip.net/fr_article765.html]
+Plus d\'infos : [->http://www.spip.net/en_article3588.html]
 [[%radio_type_urls3%]]
-<p style=\'font-size:85%\'>@_CS_ASTER@pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier "htaccess.txt" du r&eacute;pertoire de base du site SPIP sous le sous le nom ".htaccess" (attention &agrave; ne pas &eacute;craser d\'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en "sous-r&eacute;pertoire", vous devrez aussi &eacute;diter la ligne "RewriteBase" ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</p>
+<p style=\'font-size:85%\'>@_CS_ASTER@to use the types {html}, {propre} or {propre2}, copy the file "htaccess.txt" from the root directory of the SPIP site to a file (also at the root) named ".htaccess" (be careful not to overwrite any existing configuration if there already is a file of this name). If your site is in a subdirectory, you may need to edit the line "RewriteBase" in the file in order for the defined URLs to direct requests to the SPIP files.</p>
 
-@puce@ {{Uniquement si vous utilisez le format {page} ci-dessus}}, alors il vous est possible de choisir le script d\'appel &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de SPIP, &agrave; l\'image de celui qui existe d&eacute;j&agrave; : {index.php}.
+@puce@ {{Only if you are using the type  {page} described above}} can you choose the displayed calling script for SPIP. By default, SPIP shows {spip.php}, but {index.php} (format : <code>/index.php?article123</code>) or an empty value (format : <code>/?article123</code>) are also possible. To use any other value, you need to create the corresponding file at the root of your site with the same contents as are found in the file {index.php}.
 [[%spip_script%]]',
 	'type_urls:nom' => 'Format of URLs',
 	'typo_exposants:description' => 'Text in French: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected:  ({<acronym>2&egrave;me</acronym>} and  {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
