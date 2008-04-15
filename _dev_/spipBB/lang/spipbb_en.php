@@ -46,7 +46,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spam_words' => 'Anti-spam admin',
 	'admin_config_spipbb' => 'Enable SpipBB',
 	'admin_config_spipbb_info' => 'Choose Yes to enable SpipBB',
-	'admin_config_tables_ok' => 'SpipBB database table: OK',
+	'admin_config_tables' => 'Configuration of SpipBB tables',
+	'admin_config_tables_erreur' => '<MODIF>Problem with SpipBB tables: @tables_erreur@ are incorrect (the tables @tables_ok@ seem to be OK).
+ Consult the [documentation on Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] or [support on spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+	'admin_config_tables_ok' => 'The SpipBB database tables are installed correctly (@tables_ok@)',
 	'admin_date_ouverture' => 'Openning date',
 	'admin_debug_log' => 'Log file @log_name@',
 	'admin_debug_metas' => 'SpipBB METAs',
@@ -72,16 +75,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_infos' => 'SpipBB - Admin - Summary',
 	'admin_interface' => 'Public interface options',
 	'admin_nombre_lignes_messages' => 'Number of lines of messages',
-	'admin_plugin_requis_erreur' => 'missing required Plugin',
-	'admin_plugin_requis_ok' => 'required Plugin installed',
+	'admin_plugin_requis_erreur' => 'The following required plugin is missing. Activate it!',
+	'admin_plugin_requis_erreur_balisesession' => 'Install le "Balise SESSION" plugin  and activate it! [Documentation here->http://www.spip-contrib.net/?article1224], [ZIP file here->http://files.spip.org/spip-zone/balise_session.zip].',
+	'admin_plugin_requis_erreur_cfg' => 'Install the CFG plugin and activate it![Documentation here->http://www.spip-contrib.net/?article1605], [Zip file here->http://files.spip.org/spip-zone/cfg.zip].',
+	'admin_plugin_requis_erreur_s' => 'The following required plugins are missing. Activate them!',
+	'admin_plugin_requis_ok' => 'Installed and activated plugin(s):',
+	'admin_plugin_requis_ok_balisession' => '[The BALISE_SESSION plugin->http://www.spip-contrib.net/?article1224]: provides information about connected visitors.',
+	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605] : provides tags and functions.',
 	'admin_sous_titre' => 'Go to the SpipBB forums admin panel',
 	'admin_spipbb_release' => 'SpipBB relase',
-	'admin_spip_forums_erreur' => 'Error: You must enable SPIP public forums.</b>',
-	'admin_spip_forums_ok' => 'The SPIP public forums are enabled.',
-	'admin_spip_mots_cles_erreur' => 'Error: You must enable SPIP keywords</b>',
-	'admin_spip_mots_cles_ok' => 'SPIP Keywords are enabled',
-	'admin_spip_mots_forums_erreur' => '<b>Error: You must enable the SPIP forum keywords </b>',
-	'admin_spip_mots_forums_ok' => 'The SPIP forum keywords are enabled',
+	'admin_spip_config_forums' => 'SPIP configuration:',
+	'admin_spip_forums_ok' => 'The public forums are enabled.',
+	'admin_spip_forums_warn' => '<p>{{Beware}} : By default, Your forums are not activated. The recommended setting is to use the automatic activation ([see here->@config_contenu@]).</p><p>Otherwise, you will have to activate them article by article.</p>',
+	'admin_spip_mots_cles_ok' => 'Keywords are enabled',
+	'admin_spip_mots_cles_warn' => '<p>{{Beware}} : The keywords are not activated in SPIP, you won\'t be able to use them for the advanced features.</p><p>It is recommended to activate them. ([see here->@configuration@]).</p>',
+	'admin_spip_mots_forums_ok' => 'Forum keywords are enabled',
+	'admin_spip_mots_forums_warn' => '<p>{{Beware}} : The keywords for public forums are not activated in SPIP, you won\'t be able to use them for the relevant advanced features.</p><p>It is recommended to activate them. ([see here->@configuration@]).</p>',
 	'admin_statistique' => 'Information',
 	'admin_surtitre' => 'Forums management',
 	'admin_temps_deplacement' => 'Amount of time before an admin can move',
@@ -301,10 +310,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'moderateurs_dpt' => 'Moderators: ',
 	'moderateur_dpt' => 'Moderator: ',
 	'modif_parametre' => 'Change your parameters',
-	'mot_annonce' => 'Announce',
-	'mot_ferme' => 'Closed',
+	'mot_annonce' => '<MODIF>Announcement
+ _ An announcement is placed at the head of the forum on all pages.',
+	'mot_ferme' => '<MODIF>Closed
+ -* when an article-forum uses this keyword, only moderators can post messages.
+ -* when a forum topic is closed, only the moderators will be able to post messages.',
 	'mot_groupe_moderation' => 'Keywords group used for SpipBB moderation',
-	'mot_postit' => 'Postit',
+	'mot_postit' => '<MODIF>Post-it
+ _ A post-it is placed underneath announcements, before ordinary messages. It only appears once in the list.',
 
 	// N
 	'nom_util' => 'Member name',
@@ -319,6 +332,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pagine_post_s' => ' posts',
 	'pagine_sujet_s' => ' topics',
 	'par_' => 'by ',
+	'plugin_auteur' => 'The SpipBB Team: [See the list of contributors on Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
+	'plugin_description' => '<MODIF>The SpipBB plugin provides the following features:
+-* centralizes the forum management in SPIP (in the private area),
+-* use a sector of the site as a set of forum, "Bulletin Board" style, such as phpBB. In this sector, the sub-sections will represent forum groups and articles dedicated forums where threads are made of messages posted to that article.
+
+{{Please check:}}
+-* [help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
+-* [the documentation from Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+
+_ {{The SpipBB plugin is still under development. Use at your own risks.}}
+',
+	'plugin_licence' => 'Distributed under the GPL licence',
+	'plugin_lien' => '[See the documentation of the plugin from Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_nom' => 'SpipBB: Management of SPIP forums',
 	'poster_date_' => 'Posted the: ',
 	'poster_message' => 'Post a topic',
 	'poste_valide' => 'Post(s) to check...',
@@ -342,37 +369,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'recherche' => 'Search',
 	'recherche_elargie' => 'Advanced search',
 	'redige_post' => 'Write a topic',
-	'reglement' => '<p>The administrators and moderators of this forum will 
-	endeavour to delete or edit all the messages with offending content
-	as quickly as possible. However, it is impossible to check all the
-	messages.You do agree that all the messages posted to these forums 
-	reflect the opinions of their respective authors and not the 
-	opinions of the administrators, moderators or Webmasters who do not 
-	endorse them (except messages posted by themselves) and consequently 
-	cannot be held responsible or liable.</p>
-	<p>While we don\'t expect the language within the forums to be that 
-	of the vicarage tea party, anyone who indulges in, among other things, 
-	abusive, illegal, sexually or racially objectionable, defamatory or 
-	harassing language of any sort will find their messages deleted as 
-	soon as they are discovered. Offenders may find themselves permanently 
-	banned (and their ISP will be informed). The IP address of each 
-	message is recorded in order to uphold these regulations. You do 
-	agree that the Webmaster, the administrator and the moderators of 
-	this forum have the right to delete, edit, move or lock any topic 
-	of discussion at any moment. As a user, you do agree that the 
-	information you provide below will be stored in a database. 
-	However, this information will not be disclosed to any third party 
-	or company without your prior consent. The Webmaster, the 
-	administrator and the moderators will not be held liable if a 
-	hacking attempt succeeds in getting access to this data.</p>
-	<p>This forum will log information via cookies stored in your 
-	computer. These cookies will not contain any information that you 
-	have entered below, their only goal is to enhance the user 
-	experience.The e-mail address will be used only to confirm the 
-	details of your registration and your password (and also to send 
-	you a new password should you spipbbet yours).</p>
-	<p>By registering, you guarantee your agreement with the above 
-	regulations.</p>',
+	'reglement' => '<MODIF><p>The administrators and moderators of this forum will 
+ endeavour to delete or edit all the messages with offending content
+ as quickly as possible. However, it is impossible to check all the
+ messages.You agree that all the messages posted to these forums 
+ reflect the opinions of their respective authors and not the 
+ opinions of the administrators, moderators or Webmasters (except the messages they post themselves) and consequently 
+ cannot be held responsible or liable.</p>
+ <p>You agree not to post messages containing
+ abusive, illegal, sexually or racially objectionable, defamatory or 
+ harassing language of any sort. Offenders may find themselves permanently 
+ banned (and their ISP informed). The IP address of each 
+ message is recorded in order to help uphold these regulations. You 
+ agree that the Webmaster, the administrator and the moderators of 
+ this forum have the right to delete, edit, move or lock any topic 
+ of discussion at any moment. As a user, you agree that the 
+ information you provide below will be stored in a database. 
+ However, this information will not be disclosed to any third party 
+ or company without your prior consent. The Webmaster, the 
+ administrator and the moderators cannot be held liable if a 
+ hacking attempt succeeds in accessing this data.</p>
+ <p>This forum will log information via cookies stored in your 
+ computer. These cookies will not contain any information that you 
+ have entered below, their only goal is to enhance the user 
+ experience.The e-mail address will be used only to confirm the 
+ details of your registration and your password (and also to send 
+ you a new password should you forget yours).</p>
+ <p>By registering, you guarantee your agreement with the above 
+ regulations.</p>',
 	'repondre' => 'Reply',
 	'reponse_s_' => 'Replies',
 	'resultat_s_pour_' => ' results for ',
@@ -382,6 +406,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'secteur_forum' => 'ROOT',
 	'selection_efface' => 'Deleted the selection... ',
 	'signature' => 'Signature',
+	'sign_admin' => '<MODIF>{{This page can only be seen by the site owner.}}<p>It provides access to the plugin configuration of &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; and the forum management of your site.</p><p>Version : @version@ @distant@</p><p>See&nbsp;:
+_ • [The documentation of Spip-Contrib->http://www.spip-contrib.net/?article2460]
+_ • [The help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
+	'sign_maj' => '<br />update available: @version@',
+	'sign_ok' => 'up to date',
+	'sign_reinit' => '<MODIF><p>Reset:
+ _ • [the whole plugin->@plugin@]</p>',
 	'sign_tempo' => 'Build with <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'sinscrire' => 'Register',
 	'site_propose' => 'Proposed Website',
@@ -416,12 +447,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sw_config_generale_titre' => 'General spam filtering settings',
 	'sw_config_warning' => 'Here you can define the text to PM your users if you choose to warn them via PM when they posts a spam word (max. 255 characters).',
 	'sw_config_warning_titre' => 'Private message warning settings',
-	'sw_disable_sw_titre' => '<strong>Enable Spam words filter</strong><br />If you need to bypass this filter,<br />then set this to "No".',
+	'sw_disable_sw_titre' => '<strong>Enable Spam words filter</strong><br />If you need to do without this filter,<br />then click "No".',
 	'sw_modo_can_spam' => 'Allow moderators to post spam words',
 	'sw_nb_spam_ban_titre' => 'Number of offenses before user is automatically banned',
 	'sw_pm_spam_warning_message' => 'This is a warning. You have tried to post a word that is defined as spam on this website. Please stop.',
 	'sw_pm_spam_warning_titre' => 'Warning.',
-	'sw_send_pm_warning' => 'Send a PM to user to warn them when they submit a post that contains a spam word',
+	'sw_send_pm_warning' => '<strong>Send a PM to the user</strong> to warn them when they submit a post containing a prohibited word',
 	'sw_spam_forum_titre' => 'Manage flagged posts',
 	'sw_spam_titre' => 'Spam filtering',
 	'sw_spam_words_action' => 'From this control panel you can add, edit, and remove spam words. Wildcards (*) are accepted in the word field. For example, *test* will match detestable, test* would match testing, *test would match detest.',
@@ -457,10 +488,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'votre_signature' => 'Your signature:',
 	'votre_site' => 'Your website\'s name',
 	'votre_url_avatar' => 'Your avatar\'s URL(http://...)',
-	'votre_url_site' => 'Your websites\'s address (URL)',
-
-	// W
-	'www' => 'WWW'
+	'votre_url_site' => 'Your websites\'s address (URL)'
 );
 
 ?>

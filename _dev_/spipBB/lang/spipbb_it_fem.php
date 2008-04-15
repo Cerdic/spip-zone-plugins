@@ -90,10 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tous_forums' => 'Tutti i forum',
 
 	// V
-	'voir' => 'VEDI',
-
-	// W
-	'www' => 'WWW'
+	'voir' => 'VEDI'
 );
 
 ?>
