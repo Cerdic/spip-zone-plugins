@@ -2,18 +2,18 @@
 	
 /* Trois ou quatre balises pour creer des blocs depliables : 
 
-#BLOC_TITRE{fragment} / fragment si ajax, pas de fragment sinon /
+#BLOC_TITRE{fragment}     / fragment si ajax, pas de fragment sinon /
 Mon titre
-#BLOC_RESUME           / facultatif /
-Mon rŽsumŽ qui disparait si on clique
+#BLOC_RESUME              / facultatif /
+Mon resume qui disparait si on clique
 #BLOC_DEBUT
-Mon bloc dŽpliable        / qui est aussi l'emplacement pour l'Ajax si le fragment est donnŽ /
+Mon bloc depliable        / qui est aussi l'emplacement pour l'Ajax si le fragment est donne /
 #BLOC_FIN
 
 */
 
 function balise_BLOC_TITRE($p) {
-	global  $bloc_stade; /* 2= ajax; 1= titre pas d'ajax */
+	global  $bloc_stade; /* 2 = ajax; 1 = titre pas d'ajax */
 	
 	if (($nom = interprete_argument_balise(1,$p))!==NULL){
 		$ajax=' blocs_ajax ';
@@ -23,9 +23,7 @@ function balise_BLOC_TITRE($p) {
 		$ajax="";
 		$bloc_stade[]=1;
 	}
-	/* $p->code = "'<div class=\"cs_blocs\"><h4 class=\"blocs_titre blocs_replie blocs_click $ajax\"><a href=\"'.".$nom.".'\">' ."; */
 	$p->code=" '<div class=\"cs_blocs\"><h4 class=\"blocs_titre blocs_replie blocs_click $ajax\"><a href=\"'.".$nom.".'\">' ";
-//	die($p->code);
 	return $p;
 }
 
@@ -37,7 +35,7 @@ function balise_BLOC_RESUME($p) {
 	if($stade<1 || $stade>2)
 		die("erreur de compilation #BLOC_RESUME sans #BLOC_TITRE_($stade)");
 	$p->code = "'</a></h4><div class=\"blocs_resume\">'";
-	$bloc_stade[$k]=3;	/* 3= resume */
+	$bloc_stade[$k]=3;	/* 3 = resume */
 	
 	return $p;
 }
@@ -47,8 +45,8 @@ function balise_BLOC_DEBUT($p) {
 	$k=count($bloc_stade)-1;
 	$stade=$bloc_stade[$k];
 
-	if($stade == 3)	/* on arrive de rŽsumŽ, fermer la div rŽsumŽ seulement */
-		$p->code = "'</DIV><div class=\"blocs_invisible blocs_destination\">'";
+	if($stade == 3)	/* on arrive du resume, fermer la div resume seulement */
+		$p->code = "'</div><div class=\"blocs_invisible blocs_destination\">'";
 	else	{
 		if($stade<1 || $stade>2)
 					/* on DOIT arriver de titre */

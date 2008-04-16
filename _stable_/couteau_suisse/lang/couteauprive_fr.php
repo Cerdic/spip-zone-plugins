@@ -44,12 +44,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 </code></quote>
 
 @puce@ {{Dans les squelettes}} : vous avez &agrave; votre disposition les  nouvelles balises #BLOC_TITRE, #BLOC_DEBUT et #BLOC_FIN &agrave; utiliser comme ceci : 
-<quote><code> #BLOC_TITRE({URL})
+<quote><code> #BLOC_TITRE ou #BLOC_TITRE{mon_URL}
  Mon titre
- #BLOC_RESUME(facultatif)
-	le résumé du bloc suivant
+ #BLOC_RESUME    (facultatif)
+ une version resumee du bloc suivant
  #BLOC_DEBUT
- Mon bloc depliable (qui contiendra l\'URL pointée si nécessaire)
+ Mon bloc depliable (qui contiendra l\'URL pointee si necessaire)
  #BLOC_FIN</code></quote>
 ',
 	'blocs:nom' => 'Blocs D&eacute;pliables',
