@@ -171,6 +171,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dernier_membre' => 'Ultimul membru &icirc;nregistrat',
 	'diviser' => 'Diviza&#355;i',
 	'diviser_confirmer' => 'Confirma&#355;i separarea mesajelor',
+	'diviser_dans_dpt' => 'De pus &icirc;n forum&nbsp;:',
 
 	// E
 	'ecrirea' => '<MODIF>Scrie&#355;i mail lui',
