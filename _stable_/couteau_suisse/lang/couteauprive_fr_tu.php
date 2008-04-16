@@ -48,6 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @puce@ {{Dans les squelettes}} : tu as &agrave; ta disposition les  nouvelles balises #BLOC_TITRE, #BLOC_DEBUT et #BLOC_FIN &agrave; utiliser comme ceci : 
 <quote><code> #BLOC_TITRE
  Mon titre
+ #BLOC_RESUME (facultatif)
+ Mon resume (facultatif)
  #BLOC_DEBUT
  Mon bloc depliable
  #BLOC_FIN</code></quote>

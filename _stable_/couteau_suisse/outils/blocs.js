@@ -1,11 +1,24 @@
-if (window.jQuery) jQuery(function(){
+ /* if (window.jQuery) */
+ jQuery(function(){
 	// clic sur un outil
-	jQuery('h4.blocs_titre').click( function() {
+	jQuery('.blocs_resume').prev().toggleClass('blocs_click').click(function()	{
+		jQuery(this).toggleClass('blocs_replie')
+		.next().toggleClass('blocs_invisible')
+		.next().toggleClass('blocs_invisible');
+		return false;
+		});
+		
+	 jQuery('h4.blocs_click').click( function() {
 		jQuery(this).toggleClass('blocs_replie')
 		.next().toggleClass('blocs_invisible');
 		// annulation du clic
 		return false;
-	});
+		});
+		
+	jQuery('h4.blocs_ajax').click(function(){
+		var k=jQuery(this).children().attr("href");
+		jQuery(this).parent().children(".blocs_destination").load(k);	
+		});
 });
 
 // un JS actif replie les blocs invisibles
