@@ -241,17 +241,16 @@ function compat_cfg_defs_dist() {
 		
 		'sql_showtable' => '($table, $serveur=\'\') {
 			return spip_abstract_showtable($table, \'mysql\', true);
-		}'
+		}',
 		
 
-		/*
 		'sql_count' => 
 			'(
 				$res, 
 				$serveur=\'\'
 			) {
 				return spip_mysql_count($res);
-			}'
+			}',
 		
 		
 		'sql_selectdb' => 
@@ -261,10 +260,8 @@ function compat_cfg_defs_dist() {
 			) {
 				$GLOBALS[\'spip_mysql_db\'] = mysql_select_db($res);
 				return $GLOBALS[\'spip_mysql_db\'];
-			}',	
-		
-		
-		*/
+			}'
+
 	);
 	return $defs;
 }
