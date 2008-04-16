@@ -35,8 +35,8 @@ spipbb_log('included',2,__FILE__);
 function spipbb_is_configured() {
 	# pas de spipbb
 	if (!isset($GLOBALS['spipbb'])) $GLOBALS['spipbb']=array();
-	if(!isset($GLOBALS['meta']['spipbb'])) return false;
-	if(!isset($GLOBALS['spipbb'])) $GLOBALS['spipbb']=@unserialize($GLOBALS['meta']['spipbb']);
+	if (!isset($GLOBALS['meta']['spipbb'])) return false;
+	if(!$GLOBALS['spipbb']) $GLOBALS['spipbb']=@unserialize($GLOBALS['meta']['spipbb']);
 	# desactivation de spipbb
 	if($GLOBALS['spipbb']['configure']=='non') return false;
 	# prem. vers. spipbb chrys -> maj
