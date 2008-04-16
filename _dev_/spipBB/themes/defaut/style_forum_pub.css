@@ -224,6 +224,14 @@ border:1px solid #496B8D; /* coul 1 */
 background-color:#ffffff; /* coul 6 */
 }
 
+tr.tri td {
+font-size:0.8em;
+text-align:right;
+}
+tr.tri select { width:auto;}
+
+tr.tri input.spip_bouton {font-size:1em;
+}
 
 /* CLASS SPIP
  ** formulaire_forum
@@ -275,7 +283,7 @@ table.spip_barre { }
 }
 .formulaire_spip .spip_barre a:hover img {}
 div.spip_bouton { }
-div.spip_bouton input {
+div.spip_bouton input, input.spip_bouton {
 	background-color: #A4B3C3; /* coul 2 */
 	border-top:2px solid #d3d3d3; /* coul 5 */
 	border-left:2px solid #d3d3d3; /* coul 5 */

@@ -251,10 +251,11 @@ function spipbb_config_champs_supp() {
 		$res.= "<tr><td valign='top'>"._T('spipbb:config_affiche_champ_extra',array('nom_champ'=>$chp)).'<br />'
 			. $GLOBALS['champs_sap_spipbb'][$chp]['info']
 			. "</td><td width='5%'> </td><td width='25%'>\n";
+		$chp_low=strtolower($chp); // on passe en minuscules pour que #CONFIG puisse y avoir acces
 		foreach($options_a as $val) {
-			$param=($GLOBALS['spipbb']['affiche_'.$chp])? $GLOBALS['spipbb']['affiche_'.$chp]:'oui';
+			$param=($GLOBALS['spipbb']['affiche_'.$chp_low])? $GLOBALS['spipbb']['affiche_'.$chp_low]:'oui';
 			$aff_checked = ($param==$val) ? 'checked=\"checked\"' : '' ;
-			$res.= "<input type='radio' name='affiche_$chp' value='".$val."' ".$aff_checked." />&nbsp;"._L($val)."&nbsp;&nbsp;&nbsp;";
+			$res.= "<input type='radio' name='affiche_$chp_low' value='".$val."' ".$aff_checked." />&nbsp;"._L($val)."&nbsp;&nbsp;&nbsp;";
 		}
 			$res.= "</td></tr>\n"
 			. "<tr><td colspan='3'>&nbsp;</td></tr>\n";

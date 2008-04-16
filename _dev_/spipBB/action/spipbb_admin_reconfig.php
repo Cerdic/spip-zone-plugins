@@ -286,7 +286,7 @@ function action_spipbb_admin_reconfig()
 		# Proposer choix affichage (oui/non) des champs suppl. dans la config
 		#
 		$champs_requis = array('date_crea_spipbb','avatar','annuaire_forum','refus_suivi_thread');
-		$champs_definis=array();
+		$champs_definis = array();
 		# on collecte les champs declarer dans globale champs_sap_spipbb
 		foreach ($GLOBALS['champs_sap_spipbb'] as $champ => $params) {
 			$champs_definis[]=$champ;
@@ -295,8 +295,9 @@ function action_spipbb_admin_reconfig()
 		$champs_optionnels = array_diff($champs_definis,$champs_requis);
 		# on creer l_entree dans spipbb metas
 		foreach ($champs_optionnels as $champ_a_valider) {
+			$champ_a_valider=strtolower($champ_a_valider);
 			$tbl_conf['affiche_'.$champ_a_valider]=_request('affiche_'.$champ_a_valider); # oui/non
-			if (($affiche_champ=_request('affiche_'.$champ_a_valider))
+			if (($affiche_champ = _request('affiche_'.$champ_a_valider))
 				and $affiche_champ!=$GLOBALS['spipbb']['affiche_'.$champ_a_valider]) {
 				$GLOBALS['spipbb']['affiche_'.$champ_a_valider]=$affiche_champ;
 				$reconf=true;

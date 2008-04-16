@@ -43,6 +43,11 @@ function spipbb_init_metas()
 	// chargement de la config de gafospip le vrai !!
 	if (!is_array($old_meta)) $old_meta=spipbb_import_gafospip_metas();
 
+	reset($old_meta);
+	while (list($k,$v)=each($old_meta)) {
+		$old_meta[$k]=strtolower($v); // tout est en minuscules maintenant.
+	}
+
 	unset($spipbb_meta);
 
 	$spipbb_meta=array();
@@ -79,6 +84,7 @@ function spipbb_init_metas()
 	}
 	$champs_optionnels = array_diff($champs_definis,$champs_requis);
 	foreach ($champs_optionnels as $champ_a_valider) {
+		$champ_a_valider=strtolower($champ_a_valider);
 		$spipbb_meta['affiche_'.$champ_a_valider]=isset($old_meta['affiche_'.$champ_a_valider]) ? $old_meta['affiche_'.$champ_a_valider] : 'oui';
 	}
 	# autres parametres
@@ -133,7 +139,7 @@ function spipbb_import_gafospip_metas()
 		# on le recuperera plus tard (dans admin_reconfig)
 		#$spipbb_meta['id_groupe_mot']=$tbl_conf['groupe']; # num groupe
 		$spipbb_meta['fixlimit']=$tbl_conf['fixlimit']; # n lignes
-		$spipbb_meta['lockmaint']=$tbl_conf['lockmaint']=intval(_request('lockmaint')); # n secondes
+		$spipbb_meta['lockmaint']=$tbl_conf['lockmaint']; # n secondes
 
 		## h. 1/12/07
 		# ceci repond a gafosip 0.6 -> il ne sera pas publie a priori !!

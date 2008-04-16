@@ -5,8 +5,8 @@
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
 <table class="spipforum" id="profile-auteur">
 <tr class="inter">
-	<td>Avatar</td>
-	<td>Tout &agrave; propos de #NOM</td>
+	<td><:spipbb:avatar:></td>
+	<td><:spipbb:a_propos_auteur_dpt:>#NOM</td>
 </tr>
 <tr>
 	<td style="height:#CONFIG{'spipbb/taille_avatar_prof'}px">
@@ -16,19 +16,17 @@
 		<table width="100%" border='0' cellspacing='0' cellpadding='0' style='border:0'>
 		[<tr>
 			<td>
-			Inscrit le :
+			<:spipbb:inscrit_le_dpt:>
 			</td>
 			<td>
 				(#SPIPBB{date_crea_spipbb})
 			</td>
 		</tr>]
 		[<tr>
-			<td>
-			Messages :
-			</td>
+			<td><:spipbb:message_s_dpt:></td>
 			<td>
 			(#ID_AUTEUR|spipbb_nb_messages)<br />
-			<a href="[(#URL_PAGE{liste_messages}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]">Trouver tous les messages de #NOM</a>
+			<a href="[(#URL_PAGE{liste_messages}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]"><:spipbb:trouver_messages_auteur_dpt:>#NOM</a>
 			</td>
 		</tr>]
 		#SET{aff_localisation,#CONFIG{'spipbb/affiche_localisation'}}
@@ -75,32 +73,32 @@
 				<span>&nbsp;</span></a>
 			</td>
 		</tr>]
-		#SET{aff_Nom_MSNM,#CONFIG{'spipbb/affiche_Nom_MSNM'}}
-		[(#GET{aff_Nom_MSNM}|=={oui}|?{' ',''})
+		#SET{aff_nom_msnm,#CONFIG{'spipbb/affiche_nom_msnm'}}
+		[(#GET{aff_nom_msnm|=={oui}|?{' ',''})
 		<tr>
 			<td><:spipbb:extra_nom_msnm:></td>
-			<td>#SPIPBB{Nom_MSNM}</td>
+			<td>#SPIPBB{nom_msnm}</td>
 		</tr>
 		]
-		#SET{aff_Nom_Yahoo,#CONFIG{'spipbb/affiche_Nom_Yahoo'}}
-		[(#GET{aff_Nom_Yahoo}|=={oui}|?{' ',''})
+		#SET{aff_nom_yahoo,#CONFIG{'spipbb/affiche_nom_yahoo'}}
+		[(#GET{aff_nom_yahoo}|=={oui}|?{' ',''})
 		<tr>
 			<td><:spipbb:extra_nom_yahoo:></td>
-			<td>#SPIPBB{Nom_Yahoo}</td>
+			<td>#SPIPBB{nom_yahoo}</td>
 		</tr>
 		]
-		#SET{aff_Nom_AIM,#CONFIG{'spipbb/affiche_Nom_AIM'}}
-		[(#GET{aff_Nom_AIM}|=={oui}|?{' ',''})
+		#SET{aff_nom_aim,#CONFIG{'spipbb/affiche_nom_aim'}}
+		[(#GET{aff_nom_aim}|=={oui}|?{' ',''})
 		<tr>
 			<td><:spipbb:extra_nom_aim:></td>
-			<td>#SPIPBB{Nom_AIM}</td>
+			<td>#SPIPBB{nom_aim}</td>
 		</tr>
 		]
-		#SET{aff_Numero_ICQ,#CONFIG{'spipbb/affiche_Numero_ICQ'}}
-		[(#GET{aff_Numero_ICQ}|=={oui}|?{' ',''})
+		#SET{aff_numero_icq,#CONFIG{'spipbb/affiche_numero_icq'}}
+		[(#GET{aff_numero_icq}|=={oui}|?{' ',''})
 		<tr>
 			<td><:spipbb:extra_numero_icq:></td>
-			<td>#SPIPBB{Numero_ICQ}</td>
+			<td>#SPIPBB{numero_icq}</td>
 		</tr>
 		]
 		</table>

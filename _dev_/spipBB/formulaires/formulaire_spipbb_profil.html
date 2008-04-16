@@ -54,6 +54,16 @@
 		</p>
 	]
 
+	[
+	(#REM) h. 11/11/07 .. autres support de champs ... a voir ulterieurement !!
+	Ne pas passer ca sur  "support_auteur"
+	Laisse ici pour memo/infos/reflexo...]
+	[(#REM) support : autre -> appel modele adapte ]
+	#SET{support,#CONFIG{'spipbb/support_auteurs'}}
+	[(#GET{support}|=={autre}|?{'',' '})
+	[(#INCLURE{fond=modeles/form_profil_#GET{support}}{id_auteur}{statut=#SESSION{statut}})]
+	]
+
 	[(#SET{check,[(#SPIPBB{annuaire_forum}|=={''}|?{'non',#SPIPBB{annuaire_forum}})]})]
 	<br />
 	<p><:spipbb:visible_annuaire_forum:>
@@ -92,18 +102,6 @@
 	</B_suivi_forum>
 		<p><:spipbb:infos_suivi_forum_par_inscription:></p>
 	<//B_suivi_forum>
-
-	[
-	(#REM) h. 11/11/07 .. autres support de champs ... a voir ulterieurement !!
-	Ne pas passer ca sur  "support_auteur"
-	Laisse ici pour memo/infos/reflexo...
-	[(#REM) support : autre -> appel modele adapte ]
-	#SET{support,#CONFIG{'spipbb/support_auteurs'}}
-	[(#GET{support}|=={autre}|?{' ',''})
-	[(#INCLURE{fond=modeles/form_profil_#GET{support}}{id_auteur}{statut=#SESSION{statut}})]
-	]
-
-	]
 
 	<br />
 	<p><label for="new_pass"><:spipbb:votre_nouveau_passe:></label>

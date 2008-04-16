@@ -6,13 +6,14 @@
 if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common');
 spipbb_log("included",3,__FILE__);
 #
-# Les lignes qui suivent servent à definir 
+# Les lignes qui suivent servent à definir
 # les champs extra et/ou leur equivalent en table.
 #
 
 # def des champs supplementaire pour ce plugin
 # nom de variable generique : champs_sap_[prefix_plugin]
 # sur champ de type radio, mettre valeur par defaut en premier !
+# attention a reseter en minuscules pour les declarations
 
 $GLOBALS['champs_sap_spipbb'] = array(
 	"date_crea_spipbb" => array(
@@ -47,7 +48,7 @@ $GLOBALS['champs_sap_spipbb'] = array(
 	 	"extra" => "radio|brut|"._T('spipbb:extra_visible_annuaire')."|"._T('non').","._T('oui')."|non,oui",
 	 	"extra_proposes" => "tous,6forum"
 	),
-	"Localisation" => array(
+	"localisation" => array(
 		"info" => _T('spipbb:extra_localisation'),
 	 	"sql" => "VARCHAR(255) NOT NULL",
 	 	"filtres_recup" => "corriger_caracteres",
@@ -55,7 +56,7 @@ $GLOBALS['champs_sap_spipbb'] = array(
 	 	"extra" => "ligne|propre|"._T('spipbb:extra_localisation'),
 	 	"extra_proposes" => "tous,6forum"
 	),
-	"Emploi" => array(
+	"emploi" => array(
 		"info" => _T('spipbb:extra_emploi'),
 	 	"sql" => "VARCHAR(255) NOT NULL",
 	 	"filtres_recup" => "corriger_caracteres",
@@ -63,7 +64,7 @@ $GLOBALS['champs_sap_spipbb'] = array(
 	 	"extra" => "ligne|propre|"._T('spipbb:extra_emploi'),
 	 	"extra_proposes" => "tous,6forum"
 	),
-	"Loisirs" => array(
+	"loisirs" => array(
 		"info" => _T('spipbb:extra_loisirs'),
 	 	"sql" => "VARCHAR(255) NOT NULL",
 	 	"filtres_recup" => "corriger_caracteres",
@@ -71,7 +72,7 @@ $GLOBALS['champs_sap_spipbb'] = array(
 	 	"extra" => "ligne|propre|"._T('spipbb:extra_loisirs'),
 	 	"extra_proposes" => "tous,6forum"
 	),
-	"Numero_ICQ" => array(
+	"numero_icq" => array(
 		"info" => _T('spipbb:extra_numero_icq'),
 	 	"sql" => "VARCHAR(14) NOT NULL",
 	 	"filtres_recup" => "corriger_caracteres",
@@ -79,7 +80,7 @@ $GLOBALS['champs_sap_spipbb'] = array(
 	 	"extra" => "ligne|propre|"._T('spipbb:extra_numero_icq'),
 	 	"extra_proposes" => "tous,6forum"
 	),
-	"Nom_AIM" => array(
+	"nom_aim" => array(
 		"info" => _T('spipbb:extra_nom_aim'),
 	 	"sql" => "VARCHAR(128) NOT NULL",
 	 	"filtres_recup" => "corriger_caracteres",
@@ -87,7 +88,7 @@ $GLOBALS['champs_sap_spipbb'] = array(
 	 	"extra" => "ligne|propre|"._T('spipbb:extra_nom_aim'),
 	 	"extra_proposes" => "tous,6forum"
 	),
-	"Nom_Yahoo" => array(
+	"nom_yahoo" => array(
 		"info" => _T('spipbb:extra_nom_yahoo'),
 	 	"sql" => "VARCHAR(128) NOT NULL",
 	 	"filtres_recup" => "corriger_caracteres",
@@ -95,7 +96,7 @@ $GLOBALS['champs_sap_spipbb'] = array(
 	 	"extra" => "ligne|propre|"._T('spipbb:extra_nom_yahoo'),
 	 	"extra_proposes" => "tous,6forum"
 	),
-	"Nom_MSNM" => array(
+	"nom_msnm" => array(
 		"info" => _T('spipbb:extra_nom_msnm'),
 	 	"sql" => "VARCHAR(128) NOT NULL",
 	 	"filtres_recup" => "corriger_caracteres",

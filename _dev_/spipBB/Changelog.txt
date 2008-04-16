@@ -3,6 +3,7 @@
  * 0.4.8.4 : traductions +
  * corrections sur la balise FORMULAIRE_AUTEUR_SPIPBB dont la lecture était très bugguée
  * amélioration de la notification qui devrait donner enfin la bonne url de page dans les forums spipbb
+ * 0.4.8.5  : Liste des membres affichage cf http://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=516#forum517
 
 
 2008-04-15  chryjs  <chryjs!@!free!.!fr>
