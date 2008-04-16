@@ -1,4 +1,11 @@
-﻿2008-04-15  chryjs  <chryjs!@!free!.!fr>
+﻿2008-04-16  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.8.4 : traductions +
+ * corrections sur la balise FORMULAIRE_AUTEUR_SPIPBB dont la lecture était très bugguée
+ * amélioration de la notification qui devrait donner enfin la bonne url de page dans les forums spipbb
+
+
+2008-04-15  chryjs  <chryjs!@!free!.!fr>
 
  * 0.4.8.2 : Quelques corrections de langue
  * Les éléments titre, descriptif, texte sont maintenant éditables partout avec crayons+autorite

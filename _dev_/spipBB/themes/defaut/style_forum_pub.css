@@ -58,6 +58,8 @@ background-color: #496B8D; /* coul 1 */
 color:#ffffff;
 }
 table.spipforum td { vertical-align:middle; }
+.tforum {text-align:left;}
+.tsujet, .tmessage, .tdern {text-align:center;}
 
 /* diverses lignes */
 tr.inter {
@@ -127,6 +129,8 @@ td.etatsujet span, td.etatforum span { display: none; }
 
 td.titreforum {}
 td.titreforum a.titre{ font-weight:bold; font-size:1.1em; color:#496B8D; } /* coul 1 */
+.titrelien, .titretexte {margin:0;padding:0;border:0;}
+.titretexte {font-size:0.8em;}
 
 td.nbr_sujet { min-width:10%; text-align:center; }
 td.nbr_post { min-width:10%; text-align:center; background-color:#d3d3d3; } /* coul 5 */
@@ -227,8 +231,8 @@ background-color:#ffffff; /* coul 6 */
  ** formulaire_inscription
  ** formulaire_gaf_profil
 
- .. redeclaration de class spip proposées ici a titre d'exemple,
-	à reporter dans votre feuille principale (ou pas !)
+ .. redeclaration de class spip proposÃ©es ici a titre d'exemple,
+	Ã  reporter dans votre feuille principale (ou pas !)
 */
 .formulaire_spip {
 width:auto; margin:0px; /* v.0.6 */
@@ -355,8 +359,9 @@ a.adermsg:hover { text-decoration: none; }
 /*  icone modo */
 td.aff_avatar p.modo {
 	margin-top:5px;
+	position:relative; left:50%; margin-left:-10px; /*pseudo centrage*/
 	height:20px; /* +/- hauteur icone */
-	background-image: url(img/modo-24.png);
+	background-image: url(img/modo-24.png); /*18x18px*/
 	background-repeat: no-repeat;
 	background-position:top left;
 }
@@ -364,13 +369,13 @@ td.aff_avatar p.modo {
 /* ligne moderateurs */
 /* GAF v.0.5, modif v.0.6 */
 .modo_ligne {
-	margin:4px 0 4px 0;
+	margin:2px 0 2px 0;
 	padding: 0px 24px;
 	background-image: url(img/modo-24.png);
 	background-repeat: no-repeat;
 	background-position:0px 0px;
 	color:#4C788B; /* coul 1 */
-	font-size: 10px;
+	font-size: 10px; /* en absolu a cause de l'image */
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	text-align:left;
 }

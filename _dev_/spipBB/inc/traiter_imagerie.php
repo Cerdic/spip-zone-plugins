@@ -146,7 +146,7 @@ function spipbb_donnees_auteur($id) {
 				$v=stripslashes($v);
 				if (empty($v)) $chps_extra = array();
 					else  if (!($chps_extra = unserialize($v))) {
-						spipbb_log("ERREUR unserialize : ".gettype($v).":v:".$v.":",1,__FILE__);
+						spipbb_log("ERREUR unserialize : v(".gettype($v)."):".$v.":",1,__FILE__);
 						$chps_extra = array();
 					}
 				# on extrait champs gaf que si support : extra

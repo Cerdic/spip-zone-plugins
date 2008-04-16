@@ -31,8 +31,6 @@ include_spip('base/spipbb'); // requis pour la mutualisation et les boucles avec
 #
 include_spip('base/sap_spipbb');
 
-define('_SUIVI_FORUM_THREAD', "1");
-
 
 # h. GAF
 # definir repertoire des smileys ;
@@ -105,7 +103,8 @@ function test_inscription($mode, $mail, $nom, $id=0)
 # sauf sur threads refuses (voir profil -> refus_suivi_thread)
 #
 
-
+define('_SUIVI_FORUM_THREAD', true);
+#define('_SUIVI_FORUMS_REPONSES', true);
 
 #
 # Definition de tous les extras possibles (voir base/sap_spipbb.php)
