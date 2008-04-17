@@ -33,7 +33,7 @@ les mots cl&eacute;s.
 	</multi>
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
-	mots_techniques_mes_options.php
+	mots_techniques_options.php
 	</options>
 	<fonctions> <!-- fichier charge a chaque recalcul -->
 	mots_techniques_fonctions.php
