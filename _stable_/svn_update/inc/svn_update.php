@@ -22,7 +22,7 @@
 
 		// Checkout ?
 		if (!file_exists($entries = "$dest/.svn/entries")) {
-			$command = "checkout $src/ $dest/";
+			$command[] = "checkout $src/ $dest/";
 		}
 
 		else {
@@ -41,23 +41,34 @@
 
 			// Switch ?
 			if ($old_src != $src) {
-				$command = "switch --relocate $old_src/ $src/ $dest/";
+				$command[] = "switch --relocate $old_src/ $src/ $dest/";
 			}
 			
 			// Update
 			else {
 				if ($rev)
-					$command = "update --revision $rev $dest/";
+					$command[] = "update --revision $rev $dest/";
 				else
-					$command = "update $dest/";
+					$command[] = "update $dest/";
 			}
 		}
 
+        //execute les commandes svn
 		if ($command) {
-			$command = _SVN_COMMAND." $user ".$command;
-			$out = array();
-			exec($command,$out);
-			array_unshift($out, $command);
+		    //tableaux de résultat
+            $out = array();   
+            $out_local = array();
+		    //parcours les commandes demandées
+    		foreach ($command as $cmd ) {
+    		    //redéfini la commande complétement    		 
+    			$cmd = _SVN_COMMAND." $user ".$cmd;
+    			//execute la commande et sauve le resultat dans local_out
+			    exec($cmd,$local_out);
+			    //rappelle la commande executée
+			    array_unshift($local_out, $cmd);			    
+			    //empile le resultat local à la sortie finale
+			    $out = $out + $local_out;
+            }
 			return $out;
 		}
 
