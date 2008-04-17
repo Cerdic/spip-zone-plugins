@@ -297,18 +297,18 @@ function exec_odb_notes() {
 						$isEF=true;
 						$champ='ef.ef,';
 						$from="odb_ref_ef ef, odb_decisions decis,";
-						$where="and can.ef1 = ef.id and decis.id_table=rep.id_table and decis.delib1='Admissible' and decis.annee=$annee";
+						$where="and can.ef1 = ef.id and decis.id_table=rep.id_table and (decis.delib1='Admissible' || decis.delib1='Reserve') and decis.annee=$annee";
 						break;
 					case ID_MATIERE_EF2:
 						$isEF=true;
 						$champ='ef.ef,';
 						$from="odb_ref_ef ef, odb_decisions decis,";
-						$where="and can.ef2 = ef.id and decis.id_table=rep.id_table and decis.delib1='Admissible' and decis.annee=$annee";
+						$where="and can.ef2 = ef.id and decis.id_table=rep.id_table and (decis.delib1='Admissible' || decis.delib1='Reserve') and decis.annee=$annee";
 						break;
 					case ID_MATIERE_EPS:
 						$champ='eps.eps,';
 						$from="odb_ref_eps eps, odb_decisions decis,";
-						$where="and can.eps=eps.id and eps.eps='Apte' and decis.id_table=rep.id_table and decis.delib1='Admissible' and decis.annee=$annee";
+						$where="and can.eps=eps.id and eps.eps='Apte' and decis.id_table=rep.id_table and (decis.delib1='Admissible' || decis.delib1='Reserve') and decis.annee=$annee";
 						break;
 					default: die(KO." - Cas impr&eacute;vu : id_matiere=$id_matiere dans les divers");
 				}
@@ -327,7 +327,7 @@ function exec_odb_notes() {
 				. " where exa.id_matiere=$id_matiere and exa.annee=$annee and exa.id_serie=$id_serie and exa.type='$type'\n"
 				. " and eta.id=rep.id_etablissement and dep.id= eta.id_departement and ser.id=can.serie "
 				. " and can.id_saisie=rep.id_saisie AND can.annee=$annee and rep.annee=$annee and can.serie=$id_serie and rep.jury=$jury\n"
-				. " and decis.id_table=rep.id_table and decis.annee=$annee and decis.delib1='Admissible' and (decis.delib2='Oral' or decis.delib2='Reserve')\n"
+				. " and decis.id_table=rep.id_table and decis.annee=$annee and (decis.delib1='Admissible' || decis.delib1='Reserve') and (decis.delib2='Oral')\n"
 				. " ORDER BY jury, departement, centre, ser.serie, can.id_table, duree, examen";
 				break;
 			default:
