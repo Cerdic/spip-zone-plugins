@@ -1,4 +1,9 @@
-﻿2008-04-16  chryjs  <chryjs!@!free!.!fr>
+﻿2008-04-17  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.9 Correction des bugs (inscription+activation principalement) : en 1.9.2 mode==forum en 1.9.3 mode==6forum il faut les gérer séparément
+
+
+2008-04-16  chryjs  <chryjs!@!free!.!fr>
 
  * 0.4.8.4 : traductions +
  * corrections sur la balise FORMULAIRE_AUTEUR_SPIPBB dont la lecture était très bugguée

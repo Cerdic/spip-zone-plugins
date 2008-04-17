@@ -26,7 +26,6 @@ Interface publique - Générale :
 -* 0.4.8 [FAIT] Modeles et fonds - cf : http://spipbb.spip-zone.info/spip.php?page=voirsujet&id_forum=634
 
 Bugs et autres elements non finis :
--* 0.4.9 Correction des bugs (inscription+activation principalement)
 -* 0.5 Bug dans le move (ordre de priorites) d'un forum des fois ça ne fonctionne pas... (valider les cas et corriger)
 -* 0.5 mot cles ferme, postit, annonce : bug -> ils ne doivent s'appliquer qu'au message principal du thread
 -* 0.5 Pouvoir configurer l'ordre de presentation des menus d'admins (par le webmaster)

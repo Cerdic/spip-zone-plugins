@@ -32,16 +32,19 @@ function balise_FORMULAIRE_INSCRIPTION_SPIPBB ($p) {
 // args[1] indique la rubrique eventuelle de proposition
 // args[2] indique le focus eventuel
 // [(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]
+// attention en 1.9.3 mode=6forum en 1.9.2 mode=forum !!!!
 
 // http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_stat
 function balise_FORMULAIRE_INSCRIPTION_SPIPBB_stat($args, $filtres) {
 	list($mode, $id, $focus) = $args;
 	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_REQSQL,'<')) {
+		$mode='forum';
 		if(!$mode) $mode = $GLOBALS['meta']['accepter_inscriptions'] == 'oui' ? 'redac' : '';
 		if (!test_mode_inscription($mode))
 			return '';
 		else return array($mode, $focus, $id);
 	} else {
+		$mode='6forum';
 		$mode = tester_config($id, $mode);
 		return $mode ? array($mode, $focus, $id) : '';
 	}
@@ -55,10 +58,11 @@ function balise_FORMULAIRE_INSCRIPTION_SPIPBB_stat($args, $filtres) {
 
 // http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_dyn
 function balise_FORMULAIRE_INSCRIPTION_SPIPBB_dyn($mode, $focus, $id=0) {
-
 	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_REQSQL,'<')) {
+		$mode='forum';
 		if (!test_mode_inscription($mode)) return _T('pass_rien_a_faire_ici');
 	} else {
+		$mode='6forum';
 		if (!tester_config($id, $mode)) return _T('pass_rien_a_faire_ici');
 	}
 
@@ -248,7 +252,6 @@ function creer_pass_pour_auteur($id_auteur) {
 
 // SPIP 192
 function test_mode_inscription($mode) {
-
 	return (($mode == 'redac' AND $GLOBALS['meta']['accepter_inscriptions'] == 'oui')
 		OR ($mode == 'forum'
 		AND ($GLOBALS['meta']['accepter_visiteurs'] == 'oui'
