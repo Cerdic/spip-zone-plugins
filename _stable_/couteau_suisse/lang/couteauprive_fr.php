@@ -329,7 +329,7 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	'paragrapher2:nom' => 'Paragrapher',
 	'par_defaut' => 'Par d&eacute;faut',
 	'outils_permuter_gras1' => 'Permuter les outils en gras',
-	'outil_permuter' => 'Permuter l\'outil : \\u00ab @text@ \\u00bb ?',
+	'outil_permuter' => "Permuter l'outil : &laquo; @text@ &raquo; ?",
 	'outils_permuter_gras2' => 'Permuter les @nb@ outils en gras ?',
 	'pipelines' => 'Pipelines utilis&eacute;s&nbsp;:',
 	'outil_intro_old' => 'Cette interface est ancienne.<br /><br />Si rencontrez des probl&egrave;mes dans l\'utilisation de la <a href=\'./?exec=admin_couteau_suisse\'>nouvelle interface</a>, n\'h&eacute;sitez pas &agrave; nous en faire part sur le forum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',

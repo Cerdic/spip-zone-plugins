@@ -108,10 +108,10 @@ function set_categ(id) {
 }
 function outils_toggle() {
 	if(cs_selected.length>1) {
-		msg=\""._T('couteauprive:outils_permuter_gras2')."\";
+		msg=\"".unicode_to_javascript(addslashes(html2unicode(_T('couteauprive:outils_permuter_gras2'))))."\";
 		msg=msg.replace(/@nb@/, cs_selected.length);
 	} else {
-		msg=\""._T('couteauprive:outil_permuter')."\";
+		msg=\"".unicode_to_javascript(addslashes(html2unicode(_T('couteauprive:outil_permuter'))))."\";
 		msg=msg.replace(/@text@/, jQuery('a.outil_on').text());
 	}
 	if (!confirm(msg)) return false;
