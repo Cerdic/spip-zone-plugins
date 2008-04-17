@@ -4,7 +4,7 @@
 	<auteur>	<!-- Auteur du plugin -->
 	Joseph et toutes les bonnes volont&eacute;es - 2007
 	</auteur>
-	<version>0.3</version>
+	<version>0.3.1</version>
 	<version_base>0.2</version_base>
 	<etat>
 	test
@@ -17,9 +17,6 @@ _ Le d&eacute;veloppement s'est bas&eacute; sur la version 1.9.3 dev SVN 11460 d
 - Sur la page exec/mots_type ajout d'une case à cocher mots techniques. 
 Si elle est coch&eacute;e, alors la valeur 'oui' sera mise dans le champs 
 technique sinon le champs technique restera vide.
-- Par d&eacute;faut, tous les groupes de mots cl&eacute;s cr&eacute;&eacute;s via l'interface de 
-gestion des groupes de mots cl&eacute;s auront la valeur 'oui' inscrite dans le 
-champs affiche_formulaire.
 - Les plugins pourront rajouter des groupes de mots-cl&eacute;s avec une autre 
 valeur dans le champs technique. Ce sera au plugin de d&eacute;finir les autorisations du groupe de mots-cl&eacute;s, 
 en fonction de chaque usage.

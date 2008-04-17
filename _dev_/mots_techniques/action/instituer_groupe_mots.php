@@ -44,37 +44,39 @@ function action_instituer_groupe_mots_post($id_groupe)
 	$texte = _request('texte');
 	$unseul = _request('unseul');
 	$technique = _request('technique');
-	$affiche_formulaire = _request('affiche_formulaire');
 
 	if ($id_groupe < 0){
-		sql_delete("spip_groupes_mots", "id_groupe=" . (0- $id_groupe));
+		if (autoriser('modifier','groupemots',0-$id_groupe)) {
+			sql_delete("spip_groupes_mots", "id_groupe=" . (0- $id_groupe));
+		}
 	} else {
 		$change_type = (corriger_caracteres($change_type));
 		$texte = (corriger_caracteres($texte));
 		$descriptif = (corriger_caracteres($descriptif));
 
 		if ($id_groupe) {	// modif groupe
-			sql_updateq("spip_mots", array("type" => $change_type), "id_groupe=$id_groupe");
-			
-			sql_updateq("spip_groupes_mots", array("titre" => $change_type, "texte" => $texte, "descriptif" => $descriptif, "unseul" => $unseul, "obligatoire"  => $obligatoire, "articles"  => $articles, "breves" => $breves, "rubriques" => $rubriques,  "syndic" => $syndic,	"minirezo" => $acces_minirezo, "comite" => $acces_comite, "forum" => $acces_forum, "technique" => $technique, "affiche_formulaire" => $affiche_formulaire), "id_groupe=$id_groupe");
-
+			if (autoriser('modifier','groupemots',$id_groupe)) {
+				sql_updateq("spip_mots", array("type" => $change_type), "id_groupe=$id_groupe");
+				sql_updateq("spip_groupes_mots", array("titre" => $change_type, "texte" => $texte, "descriptif" => $descriptif, "unseul" => $unseul, "obligatoire"  => $obligatoire, "articles"  => $articles, "breves" => $breves, "rubriques" => $rubriques,  "syndic" => $syndic,	"minirezo" => $acces_minirezo, "comite" => $acces_comite, "forum" => $acces_forum, "technique" => $technique), "id_groupe=$id_groupe");
+			}
 		} else {	//spip_log("creation groupe");
-		  sql_insertq('spip_groupes_mots', array(
-			'titre' => $change_type,
-			'texte' => $texte,
-			'descriptif' => $descriptif,
-			'unseul' => $unseul,
-			'obligatoire' => $obligatoire,
-			'articles' => $articles,
-			'breves' => $breves,
-			'rubriques' => $rubriques,
-			'syndic' => $syndic,
-			'minirezo' => $acces_minirezo,
-			'comite' => $acces_comite,
-			'forum' => $acces_forum,
-			'technique' => $technique,
-			'affiche_formulaire' => $affiche_formulaire
-			));
+			if (autoriser('creer','groupemots')) {
+			  sql_insertq('spip_groupes_mots', array(
+				'titre' => $change_type,
+				'texte' => $texte,
+				'descriptif' => $descriptif,
+				'unseul' => $unseul,
+				'obligatoire' => $obligatoire,
+				'articles' => $articles,
+				'breves' => $breves,
+				'rubriques' => $rubriques,
+				'syndic' => $syndic,
+				'minirezo' => $acces_minirezo,
+				'comite' => $acces_comite,
+				'forum' => $acces_forum,
+				'technique' => $technique,
+				));
+			}
 		}
 	}
 }
@@ -96,8 +98,7 @@ function action_instituer_groupe_mots_get($table)
 		'minirezo' =>  'oui',
 		'comite' =>  'non',
 		'forum' => 'non',
-		'technique' => '',
-		'affiche_formulaire' => 'oui')) ;
+		'technique' => '')) ;
         redirige_par_entete(parametre_url(urldecode(_request('redirect')),
 					  'id_groupe', $id_groupe, '&'));
 }

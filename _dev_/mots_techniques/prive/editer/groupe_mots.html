@@ -106,13 +106,19 @@ $(function(){
 		</fieldset>
     </li>
 
+[(#ENV{technique}|=={''}
+|ou{[(#ENV{technique}|=={oui})]})
     <li>
 		<fieldset>
 		<legend><:motstechniques:info_mots_cles_techniques:></legend>
 		<label><input type='checkbox' name='technique' value='oui'[ (#ENV{technique}|=={oui}) checked='checked'] id='technique' /><:motstechniques:bouton_mots_cles_techniques:></label>
-		<input type='hidden' name='affiche_formulaire' value='oui' />
 		</fieldset>
-    </li>   
+    </li> 
+]
+[(#ENV{technique}|=={''}
+|ou{[(#ENV{technique}|=={oui})]}|?{'',' '}) 
+	<input type='hidden' name='technique' value='[(#ENV{technique})]' />
+] 
   </ol>
 
 
