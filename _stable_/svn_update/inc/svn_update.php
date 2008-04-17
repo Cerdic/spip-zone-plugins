@@ -22,6 +22,7 @@
 
 		// Checkout ?
 		if (!file_exists($entries = "$dest/.svn/entries")) {
+		    $command[] = "export --force $src/ $dest/";
 			$command[] = "checkout $src/ $dest/";
 		}
 
