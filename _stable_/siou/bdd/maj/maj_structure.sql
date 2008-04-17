@@ -40,3 +40,8 @@ UPDATE odb_param SET param='_delib1_2007' where param='_delib1';
 -- odb_notes
 ALTER TABLE `odb_notes` ADD `id_serie` SMALLINT NOT NULL AFTER `annee` ,
 ADD `jury` SMALLINT NOT NULL AFTER `id_serie` ;
+
+-- ==================== Modif4
+-- odb_decisions
+ ALTER TABLE `odb_decisions` CHANGE `delib2` `delib2` ENUM( '', 'Oral', 'Refuse', 'Reserve', 'Passable', 'Abien', 'Bien', 'TBien' ) 
+ CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL  
