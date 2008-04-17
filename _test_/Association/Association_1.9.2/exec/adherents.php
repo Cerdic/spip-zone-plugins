@@ -116,7 +116,7 @@
 		echo '<form method="post" action="'.$url_adherent.'">';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 		echo '<select name ="filtre" class="fondl" onchange="form.submit()">';
-		foreach (array(defaut,ok,echu,relance,sorti,lire_config('inscription2/statut_interne')) as $statut) {
+		foreach (array(defaut,ok,echu,relance,sorti,prospect) as $statut) {
 			echo '<option value="'.$statut.'"';
 			if ($filtre==$statut) {echo ' selected="selected"';}
 			echo '> '._T('asso:adherent_entete_statut_'.$statut).'</option>';
@@ -149,7 +149,7 @@
 		
 		if (empty($debut)) { $debut=0; }
 		if (!empty($lettre)) {$critere2="AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";}
-		$query = spip_query ( "SELECT * FROM spip_auteurs_elargis b LEFT JOIN spip_asso_adherents c ON b.id_auteur=c.id_auteur LEFT JOIN spip_auteurs a ON a.id_auteur=b.id_auteur WHERE $critere ".$critere2." ORDER BY nom_famille LIMIT $debut,$max_par_page" );
+		$query = spip_query ( "SELECT * FROM spip_auteurs_elargis a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur WHERE $critere ".$critere2." ORDER BY nom_famille LIMIT $debut,$max_par_page" );
 		while ($data = spip_fetch_array($query)) {	
 			$id_adherent=$data['id_adherent'];
 			
