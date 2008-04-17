@@ -4,8 +4,8 @@
  * Insetar google maps en SPIP
  *
  * Autores :
- * Horacio Gonz‡lez, Berio Molina
- * (c) 2007 - Distribu’do baixo licencia GNU/GPL
+ * Horacio Gonzalez, Berio Molina
+ * (c) 2007 - Distribudo baixo licencia GNU/GPL
  *
  */
 
@@ -54,7 +54,7 @@ function inc_geomap_config(){
 			"<div id='cadroFormulario' style='border:1px solid #000;margin-top:30px;padding:10px;tex-align:center;'>\n"
 			. "<p>"._T('geomap:default_geoloc')."</p>"
 			. "<div id='formMap' name='formMap' style='width: 470px; height: 350px;margin:10px auto;'></div>"
-			. $geomap_append_moveend_map('formMap','form_lat','form_lonx',$glat,$glonx,'form_zoom',$gzoom,false);
+			. $geomap_append_moveend_map('formMap','form_lat','form_lonx',$glat,$glonx,'form_zoom',$gzoom,true);
 		
 			$out .= '<input type="text" name="form_lat" id="form_lat" value="'.$glat.'" />
 			<input type="text" name="form_lonx" id="form_lonx" value="'.$glonx.'" />

@@ -4,8 +4,8 @@
  * Insetar google maps en SPIP
  *
  * Autores :
- * Horacio Gonz‡lez, Berio Molina
- * (c) 2007 - Distribu’do baixo licencia GNU/GPL
+ * Horacio Gonzalez, Berio Molina
+ * (c) 2007 - Distribudo baixo licencia GNU/GPL
  *
  */
 
@@ -49,17 +49,34 @@ function inc_geomap_append_moveend_map_dist($target_id,$target_lat_id,$target_lo
 				formMap.setCenter(new GLatLng(lat,long), ".$view_zoom.", G_MAP_TYPE);
 				geocoder = new GClientGeocoder();"
 	. ($Marker?"
-				point = new GPoint(long,lat);
-				formMap.addOverlay(new GMarker(point));":"")
-  ."				
+				point = new GPoint(parseFloat(long),parseFloat(lat));
+				marker = new GMarker(point,{draggable:true});
+				formMap.addOverlay(marker);
+				GEvent.addListener(marker, 'dragend', function(){
+					var center = marker.getPoint();
+  					jQuery('#$target_lat_id').val(center.lat());
+					jQuery('#$target_long_id').val(center.lng());
+				});":"")
+  ."
 				GEvent.addListener(formMap, 'moveend', function() {
+					formMap.clearOverlays();
   					var center = formMap.getCenter();
-  					$('#$target_lat_id').val(center.lat());
-					$('#$target_long_id').val(center.lng());
+  					jQuery('#$target_lat_id').val(center.lat());
+					jQuery('#$target_long_id').val(center.lng());
+					var point = new GLatLng(parseFloat(center.lat()), parseFloat(center.lng()));
+					marker = new GMarker(point,{draggable:true}); 
+					formMap.addOverlay(marker);
+					GEvent.addListener(marker, 'dragend', function(){
+						var center = marker.getPoint();
+	  					jQuery('#$target_lat_id').val(center.lat());
+						jQuery('#$target_long_id').val(center.lng());
+					});
 				});
 "
   . ($target_zoom_id?"
-				GEvent.addListener(formMap, 'zoomend', function(oldlevel, newlevel){ $('#$target_zoom_id').val(newlevel);});":"")
+				GEvent.addListener(formMap, 'zoomend', function(oldlevel, newlevel){
+					$('#$target_zoom_id').val(newlevel);}
+				);":"")
 	."		} else {
 				alert('Sorry, the Google Maps API is not compatible with this browser');
 			}
