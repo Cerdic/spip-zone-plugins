@@ -40,7 +40,7 @@ function getNbCandidatsEPS($annee,$jury,$id_serie=0) {
 	else $where='';
 	$sql="SELECT count(*) FROM odb_candidats can, odb_decisions decis, odb_repartition rep, odb_ref_eps eps\n"
 		."WHERE can.annee=$annee and decis.annee=$annee and rep.annee=$annee and can.id_table=rep.id_table and can.id_table=decis.id_table"
-		." $where and rep.jury=$jury and can.eps=eps.id and eps.eps='Apte' and decis.delib1='Admissible'"
+		." $where and rep.jury=$jury and can.eps=eps.id and eps.eps='Apte' and (decis.delib1='Admissible' || decis.delib1='Reserve')"
 		;
     $result=odb_query($sql,__FILE__,__LINE__);
     if(mysql_num_rows($result)>0)
@@ -55,7 +55,7 @@ function getNbCandidatsEF($annee,$jury,$id_matiere,$id_serie=0) {
 	$ef=abs($id_matiere);
 	$sql="SELECT count(*) FROM odb_candidats can, odb_decisions decis, odb_repartition rep\n"
 		."WHERE can.annee=$annee and decis.annee=$annee and rep.annee=$annee and can.id_table=rep.id_table and can.id_table=decis.id_table"
-		." $where and rep.jury=$jury and can.ef$ef<>0 and decis.delib1='Admissible'"
+		." $where and rep.jury=$jury and can.ef$ef<>0 and (decis.delib1='Admissible' || decis.delib1='Reserve')"
 		;
     $result=odb_query($sql,__FILE__,__LINE__);
     if(mysql_num_rows($result)>0)
@@ -70,7 +70,7 @@ function getNbCandidatsORAL($annee,$jury,$id_matiere,$id_serie=0) {
 	$oral=abs($id_matiere);
 	$sql="SELECT count(*) FROM odb_candidats can, odb_decisions decis, odb_repartition rep\n"
 		."WHERE can.annee=$annee and decis.annee=$annee and rep.annee=$annee and can.id_table=rep.id_table and can.id_table=decis.id_table"
-		." $where and rep.jury=$jury and decis.delib1='Admissible' and decis.delib2='Oral'"
+		." $where and rep.jury=$jury and (decis.delib1='Admissible' || decis.delib1='Reserve') and (decis.delib2='Oral')"
 		;
     $result=odb_query($sql,__FILE__,__LINE__);
     if(mysql_num_rows($result)>0)
@@ -110,7 +110,7 @@ function getNbNotesASaisirType($annee,$type,$jury,$id_serie=0) {
 		case 'Oral':
 			// le nombre de notes a saisir est le nombre de candidats devant passer l'oral du jury FOIS le nombre de matieres d'oral pour cette serie
 			$sql="SELECT count(*) from odb_candidats can, odb_decisions decis\n"
-				." where can.annee=$annee and decis.annee=$annee and can.id_table=decis.id_table $where_can and (decis.delib2='Oral' or decis.delib2='Reserve')"
+				." where can.annee=$annee and decis.annee=$annee and can.id_table=decis.id_table $where_can and (decis.delib2='Oral')"
 				;
 			$result=odb_query($sql,__FILE__,__LINE__);
 			$nb=mysql_result($result,0,0);
