@@ -423,7 +423,7 @@ echo '</div>';
 		'reset' => generer_url_ecrire($exec,'cmd=resetall'),
 		'hide' => generer_url_ecrire($exec,'cmd=showall'),
 		'version' => $cs_version,
-		'distant' => '<span class="cs_version"><br/>Version distante...</span>',
+		'distant' => '<br/><span class="cs_version">'._L('Version distante...').'</span>',
 		'contribs' => join('', $contribs),
 		'install' => $aide,
 		'pack' => '['._T('couteauprive:pack').'|'._T('couteauprive:alt_pack').'->'.generer_url_ecrire($exec,'cmd=pack#cs_infos').']',
