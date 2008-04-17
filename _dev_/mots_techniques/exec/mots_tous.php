@@ -49,12 +49,20 @@ function exec_mots_tous_dist()
 	echo "<br /><br />";
 
 //
-// On boucle d'abord sur les groupes de mots (non techniques ou technique='oui')
+// On boucle d'abord sur les groupes de mots 
+// On affiche tous les mots ici, meme technique='titi',
+// c'est a autoriser de proposer ou non un affichage du groupe de mot
 //
 
-	$result = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "technique='oui' OR technique='' ", "", "technique, multi");
+	$result = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "", "", "multi");
 
 	while ($row_groupes = sql_fetch($result)) {
+		
+		// si pas le droit de voir, on passe...
+		if (!autoriser('voir','groupemots', $row_groupes['id_groupe'])) {
+			continue;
+		}
+			
 		$id_groupe = $row_groupes['id_groupe'];
 		$titre_groupe = typo($row_groupes['titre']);
 		$descriptif = $row_groupes['descriptif'];
@@ -73,7 +81,14 @@ function exec_mots_tous_dist()
 		// Afficher le titre du groupe
 		echo "<a id='mots_tous-$id_groupe'></a>";
 
-		echo debut_cadre_enfonce($technique=='oui'?"mot-technique-24.png":"groupe-mot-24.gif", true, '', $titre_groupe);
+		// icone du mot
+		if ($technique)
+			$icone = (($s = get_icone("mot-technique", $technique, 24)) ? $s : "groupe-mot-24.gif");
+		else 
+			$icone = "groupe-mot-24.gif";
+		
+		echo debut_cadre_enfonce($icone, true, '', $titre_groupe);
+		
 		// Affichage des options du groupe (types d'elements, permissions...)
 		$res = '';
 		if ($articles == "oui") $res .= "> "._T('info_articles_2')." &nbsp;&nbsp;";
@@ -111,10 +126,9 @@ function exec_mots_tous_dist()
 		// Preliminaire: confirmation de suppression d'un mot lie a qqch
 		// (cf fin de afficher_groupe_mots_boucle executee a l'appel precedent)
 		if ($conf_mot  AND $son_groupe==$id_groupe) {
-			include_spip('inc/grouper_mots');
 			echo confirmer_mot($conf_mot, $id_groupe, $groupe);
 		}
-		if ($groupe) {
+		if ($groupe && autoriser('voirmots','groupemots',$id_groupe)) {
 		  	$grouper_mots = charger_fonction('grouper_mots', 'inc');
 			echo $grouper_mots($id_groupe, $groupe);
 		}
@@ -177,6 +191,8 @@ function confirmer_mot ($conf_mot, $son_groupe, $total)
 		$texte_lie .= _T('info_nombre_rubriques', array('nb_rubriques' => $nr))." ";
 	}
 
+	include_spip('inc/grouper_mots');
+	
 	return debut_boite_info(true)
 	. "<div class='serif'>"
 	. _T('info_delet_mots_cles', array('titre_mot' => $titre_mot, 'type_mot' => $type_mot, 'texte_lie' => $texte_lie))

@@ -39,13 +39,18 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 
 	$row = sql_fetsel("*", "spip_mots", "id_mot=$id_mot");
 	if ($row) {
-		$id_mot = $row['id_mot'];
-		$titre_mot = $row['titre'];
-		$descriptif = $row['descriptif'];
-		$texte = $row['texte'];
-		$extra = $row['extra'];
-		$id_groupe = $row['id_groupe'];
-		$onfocus ='';
+		if (!autoriser('voir', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))) {
+			include_spip('inc/minipres');
+			echo minipres();	
+			exit;
+		} else {
+			$titre_mot = $row['titre'];
+			$descriptif = $row['descriptif'];
+			$texte = $row['texte'];
+			$extra = $row['extra'];
+			$id_groupe = $row['id_groupe'];
+			$onfocus ='';
+		}
 	 } else {
 		if (!$new OR !autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))) {
 			include_spip('inc/minipres');
@@ -231,12 +236,18 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 // http://doc.spip.org/@determine_groupe_mots
 function determine_groupe_mots($table, $id_groupe) {
 
-	$q = sql_select('id_groupe, titre, technique', 'spip_groupes_mots', ($table ? "$table='oui' AND" : '') . " (technique='' OR technique='oui')", '', 'titre');
-
-	if (sql_count($q)>1) {
-
+	$q = sql_select('id_groupe, titre, technique', 'spip_groupes_mots', ($table ? "$table='oui'" : '') , '', 'titre');
+	$groupes = array();
+	while ($row = sql_fetch($q)){
+		if (autoriser('creermots','groupemots',$row['id_groupe'])){
+			$groupes[] = $row;
+		}
+	}
+	if (!$groupes) return ""; // erreur plutot imprevue !
+	
+	if (count($groupes)>1) {
 		$res = " &nbsp; <select name='id_groupe' id='id_groupe' class='fondl'>\n";
-		while ($row = sql_fetch($q)){
+		foreach ($groupes as $row){
 			$groupe = $row['id_groupe'];
 			$titre_groupe = texte_backend(supprimer_tags(typo($row['titre'])));
 			$res .=  "<option".mySel($groupe, $id_groupe).">$titre_groupe</option>\n";
@@ -245,7 +256,7 @@ function determine_groupe_mots($table, $id_groupe) {
 	} else {
 	  // pas de menu si un seul groupe 
 	  // (et on est sur qu'il y en a un grace au redirect preventif)
-		$row = sql_fetch($q);
+		$row = $groupes[0];
 		$res = $row['titre']
 		. "<br /><input type='hidden' name='id_groupe' id='id_groupe' value='".$row['id_groupe']."' />";
 	}

@@ -10,12 +10,10 @@ $spip_mots = array(
 		"id_groupe"	=> "bigint(21) NOT NULL",
 		"type"	=> "text DEFAULT '' NOT NULL",
 		"extra"	=> "longtext NULL",
-#		"url_propre" => "VARCHAR(255) DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP");
 
 $spip_mots_key = array(
 		"PRIMARY KEY"	=> "id_mot",
-#		"KEY url_propre"	=> "url_propre"
 );
 // ajout de la jointure pour {technique=...} sur boucle MOT
 $spip_mots_join = array(
@@ -37,8 +35,7 @@ $spip_groupes_mots = array(
 		"comite"	=> "varchar(3) DEFAULT '' NOT NULL",
 		"forum"	=> "varchar(3) DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP",
-		"technique"	=> "text DEFAULT '' NOT NULL",
-		"affiche_formulaire"	=> "varchar(3) DEFAULT 'oui'");
+		"technique"	=> "text DEFAULT '' NOT NULL");
 
 $spip_groupes_mots_key = array(
 		"PRIMARY KEY"	=> "id_groupe");
