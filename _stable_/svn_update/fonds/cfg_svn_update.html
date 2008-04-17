@@ -5,31 +5,43 @@
     Un utilisateur (par defaut, l’administrateur numero 1) est autorisé à faire une mise à jour SVN du site ou de tout autre répertoire.</p>
     <p> Pour cela il doit se rendre sur la page [svn update->/ecrire/?exec=svn_update] et sélectionner les éléments à mettre à jour. </p>
 -->
+<!-- head= [(#INCLURE{fond=/fonds/svn_update.css})] -->
+<form id="svn_update" name="svn_update" method="post" action="#SELF">
 
-<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
+    [(#ENV{_cfg_}|form_hidden)]
 
-    <p>
-        #SET{selected,#CONFIG{svn_update/administrateurs,'',''}}
-        <label for="administrateurs">Listes des administrateurs autorisés (seuls les admin spip sont listés)</label>        
-        <select name="administrateurs[]" id="administrateurs" multiple="multiple"/>
-            <BOUCLE_administrateurs(AUTEURS) {statut=0minirezo} {tout}>
-                <option value="#ID_AUTEUR" [(#ID_AUTEUR|in_array{#GET{selected}}|?{' selected="selected"'})]>#NOM</option>
-            </BOUCLE_administrateurs>
-        </select>
-    </p>
+    <fieldset>
+        <legend> Administrateur SVN</legend>
+        <p>
+            #SET{selected,#CONFIG{svn_update/administrateurs,'',''}}
+            <label for="administrateurs">Selectionnez parmi les comptes suivants ceux qui seront autorisés à gérer les mises à jour SVN</label>        
 
-    <p>
-        <label for="file">Listes des repertoires à synchroniser</label>
-	<pre>
-		source destination [revision] [user]
-		Par exemple :
-		svn://zone.spip.org/spip-zone/_squelettes_/sedna sedna
-	</pre>
-        <textarea name="file" id="file">#ENV{file}</textarea>
-    </p>
+            <p class="information"> Si aucun compte n'est selectionné, seul le compte d'identifiant 1 est autorisé</p>
+            
+            <select name="administrateurs[]" id="administrateurs" multiple="multiple"/>
+                <BOUCLE_administrateurs(AUTEURS) {statut=0minirezo} {tout}>
+                    <option value="#ID_AUTEUR" [(#ID_AUTEUR|in_array{#GET{selected}}|?{' selected="selected"'})]>#NOM</option>
+                </BOUCLE_administrateurs>
+            </select>
+        </p>
 
-    <p>
-	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+    </fieldset>
+
+    <fieldset>
+        <legend> Répertoires à administrer</legend>
+        <p>
+            <label for="file">Saisissez les repertoires à traiter</label>
+	        <pre>
+                source destination [revision] [user]
+                Par exemple :
+                svn://zone.spip.org/spip-zone/_squelettes_/sedna sedna
+	        </pre>
+            <textarea name="file" id="file">#ENV{file}</textarea>
+        </p>
+    </fieldset>
+
+    <p class="soumettre">
+    	<input type="submit" name="_cfg_ok" value="<:OK:>" />
     	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
     </p>
 </form>
