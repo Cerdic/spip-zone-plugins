@@ -6,6 +6,8 @@
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
 
+@define('_URL_CONTRIB', 'http://www.spip-contrib.net/?article');
+
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip("inc/presentation");
@@ -106,10 +108,10 @@ function set_categ(id) {
 }
 function outils_toggle() {
 	if(cs_selected.length>1) {
-		msg=\""._T('couteauprive:permuter_outils')."\";
+		msg=\""._T('couteauprive:outils_permuter_gras2')."\";
 		msg=msg.replace(/@nb@/, cs_selected.length);
 	} else {
-		msg=\""._T('couteauprive:permuter_outil')."\";
+		msg=\""._T('couteauprive:outil_permuter')."\";
 		msg=msg.replace(/@text@/, jQuery('a.outil_on').text());
 	}
 	if (!confirm(msg)) return false;
@@ -418,15 +420,15 @@ echo '</div>';
 	sort($contribs);
 	$aide = '';
 	if(isset($GLOBALS['cs_installer'])) foreach(array_keys($GLOBALS['cs_installer']) as $pack)
-		$aide .= "\n_ " . _T('couteauprive:du_pack', array('pack'=>"{[{$pack}|"._T('couteauprive:installe_pack').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
+		$aide .= "\n_ " . _T('couteauprive:pack_du', array('pack'=>"{[{$pack}|"._T('couteauprive:pack_installe').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
 	$aide = _T('couteauprive:help', array(
 		'reset' => generer_url_ecrire($exec,'cmd=resetall'),
 		'hide' => generer_url_ecrire($exec,'cmd=showall'),
 		'version' => $cs_version,
-		'distant' => '<br/><span class="cs_version">'._L('Version distante...').'</span>',
+		'distant' => '<br/><span class="cs_version">'._T('version_distante').'</span>',
 		'contribs' => join('', $contribs),
 		'install' => $aide,
-		'pack' => '['._T('couteauprive:pack').'|'._T('couteauprive:alt_pack').'->'.generer_url_ecrire($exec,'cmd=pack#cs_infos').']',
+		'pack' => '['._T('couteauprive:pack_titre').'|'._T('couteauprive:pack_alt').'->'.generer_url_ecrire($exec,'cmd=pack#cs_infos').']',
 	));
 	echo debut_boite_info(true), propre($aide), fin_boite_info(true);
 	$aide = cs_aide_raccourcis();
@@ -443,8 +445,8 @@ echo '</div>';
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
 	cs_compat_boite('debut_droite');
 
-	echo debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('couteauprive:liste_outils')),
-		_T('couteauprive:presente_outils2'),
+	echo debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('couteauprive:outils_liste')),
+		_T('couteauprive:outil_intro'),
 		"\n<table border='0' cellspacing='0' cellpadding='5' style='width:100%;'><tr><td class='sansserif'>";
 
 	include_spip('inc/cs_outils');
@@ -468,8 +470,8 @@ cs_log(" FIN : exec_admin_couteau_suisse()");
 }
 
 function cs_boite_rss($force) {
-	echo debut_boite_info(true), '<p><b>'._T('couteauprive:rss_titre').'</b></p><div class="cs_boite_rss"><p>Attente RSS...</p><noscript>D&eacute;sactiv&eacute; !</noscript></div>'
-		/*.'<div style="text-align: right; font-size: 87%;"><a title="'._T('couteauprive:desactiver_rss').'" href="'
+	echo debut_boite_info(true), '<p><b>'._T('couteauprive:rss_titre').'</b></p><div class="cs_boite_rss"><p>'._T('couteauprive:rss_attente').'</p><noscript>'._T('couteauprive:outil_inactif').' !</noscript></div>'
+		/*.'<div style="text-align: right; font-size: 87%;"><a title="'._T('couteauprive:rss_desactiver').'" href="'
 		.generer_url_ecrire(_request('exec'),'cmd=toggle&outil=rss_couteau_suisse').'">'._T('couteauprive:supprimer_cadre').'</a></div>'*/
 		, fin_boite_info(true);
 }

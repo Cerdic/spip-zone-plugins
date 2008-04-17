@@ -202,15 +202,15 @@ function cs_aide_pipelines() {
 	foreach (array_keys($cs_metas_pipelines) as $pipe) {
 		// stockage de la liste des pipelines et du nombre d'outils actifs concernes
 		$nb=0; foreach($outils as $outil) if($outil['actif'] && isset($outil['pipeline:'.$pipe])) $nb++;
-		if ($nb) $aide[] = _T('couteauprive:nb_outil'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb));
+		if ($nb) $aide[] = _T('couteauprive:outil_nb'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb));
 	}
 	// nombre d'outils actifs
 	$nb=0; foreach($metas_outils as $o) if($o['actif']) $nb++;
 	// nombre d'outils caches
 	$ca = isset($GLOBALS['meta']['tweaks_caches'])?count(unserialize($GLOBALS['meta']['tweaks_caches'])):0;
 	return '<p><b>' . _T('couteauprive:pipelines') . '</b> '.count($aide).'</p><p style="margin-left:1em;">' . join("<br/>", $aide) . '</p>'
-		. '<p><b>' . _T('couteauprive:actifs') . "</b> $nb</p>"
-		. '<p><b>' . _T('couteauprive:caches') . "</b> $ca</p>";
+		. '<p><b>' . _T('couteauprive:outils_actifs') . "</b> $nb</p>"
+		. '<p><b>' . _T('couteauprive:outils_caches') . "</b> $ca</p>";
 }
 
 // met en forme le fichier $f en vue d'un insertion en head

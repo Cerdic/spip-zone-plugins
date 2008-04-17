@@ -38,6 +38,8 @@ $metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['
 
 // rss
 @define('_CS_RSS_SOURCE', 'http://zone.spip.org/trac/spip-zone/log/_plugins_/_stable_/couteau_suisse?format=rss&mode=stop_on_copy&limit=20');
+// doc
+define('_URL_CONTRIB', 'http://www.spip-contrib.net/?article');
 
 // chemin du fichier de fonctions
 define('_COUT_FONCTIONS_PHP', find_in_path('cout_fonctions.php'));

@@ -12,6 +12,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 @define('_DIV_CS_INFOS', '<div id="cs_infos" class="cs_infos">');
+@define('_URL_CONTRIB', 'http://www.spip-contrib.net/?article');
 
 // TODO : revoir tout ca avec la syntaxe de <necessite>
 function cs_version_erreur($outil) {
@@ -42,8 +43,8 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 function cs_description_pack() {
 	if(!isset($GLOBALS['cs_pack_actuel'])) return '';
 	return _DIV_CS_INFOS . debut_cadre_relief('', true)
-		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' style='border:0;' alt='-' />&nbsp;" . _T('couteauprive:pack') . '</h3>'
-		. propre(_T('couteauprive:descrip_pack') . "\n\n" . _T('couteauprive:contrib', array('id'=>2552)))
+		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' style='border:0;' alt='-' />&nbsp;" . _T('couteauprive:pack_titre') . '</h3>'
+		. propre(_T('couteauprive:pack_descrip') . "\n\n" . _T('couteauprive:contrib', array('url'=>'[->'._URL_CONTRIB.'2552]')))
 		. '<br/><textarea rows=30 cols=200 style="width:520px; font-size:90%;">'.htmlentities($GLOBALS[cs_pack_actuel], ENT_QUOTES, $GLOBALS['meta']['charset']).'</textarea>'
 		. fin_cadre_relief(true) . '</div>';
 }
@@ -66,7 +67,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$outil = $outils[$outil_id]; unset($outils);
 	$actif = $outil['actif'];
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
-	$titre_etat = _T('couteauprive:'.($actif?'actif':'inactif'));
+	$titre_etat = _T('couteauprive:outil_'.($actif?'actif':'inactif'));
 	$nb_var = intval($outil['nb_variables']);
 	
 	$s .= "<h3 class='titrem'><img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;" . $outil['nom'] . '</h3>';
@@ -74,18 +75,18 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	if ($nb_var)
 		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=reset&outil='.$outil_id).'" title="' . _T('couteauprive:par_defaut') . '">' . _T('couteauprive:par_defaut') . '</a>&nbsp;|&nbsp;';
 	if (!$actif)
-		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=hide&outil='.$outil_id).'" title="' . _T('couteauprive:neplusafficher') . '">' . _T('couteauprive:neplusafficher') . '</a>&nbsp;|&nbsp;';
+		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=hide&outil='.$outil_id).'" title="' . _T('couteauprive:outil_cacher') . '">' . _T('couteauprive:outil_cacher') . '</a>&nbsp;|&nbsp;';
 	$act = $actif?'des':'';
-	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=toggle&outil='.$outil_id).'" title="'._T("couteauprive:{$act}activer_outil").'">'._T("couteauprive:{$act}activer")."</a></div>";
+	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=toggle&outil='.$outil_id).'" title="'._T("couteauprive:outil_{$act}activer_le").'">'._T("couteauprive:outil_{$act}activer")."</a></div>";
 	include_spip('inc/texte');
 	$s .= propre($descrip);
 
 	$serial = serialize(array_keys($outil));
 	if (preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
-		$p .=  _T('couteauprive:balise_etoilee', array('bal' => '#'.join('*, #', array_unique($regs[1])).'*'));	
-	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T(defined('_SPIP19100')?'couteauprive:jquery1':'couteauprive:jquery2') . '</p>';
+		$p .=  _T('couteauprive:detail_balise_etoilee', array('bal' => '#'.join('*, #', array_unique($regs[1])).'*'));	
+	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T(defined('_SPIP19100')?'couteauprive:detail_jquery1':'couteauprive:detail_jquery2') . '</p>';
 	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
-	if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('couteauprive:contrib', array('id'=>$outil['contrib'])) . '</p>';
+	if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('couteauprive:contrib', array('url'=>'[->'._URL_CONTRIB.$outil['contrib'].']')) . '</p>';
 	$s .= propre($p);
 	$s .= detail_outil($outil_id);
 
@@ -130,20 +131,20 @@ document.write('<div id=\"sous_liste_$id\" class=\"'+cs_Categorie('sous_liste_$i
 
 	$fieldset = '<fieldset style="width:92%; margin:0; padding:0.6em;" class="cadre-trait-couleur liste_outils"><legend style="font-weight:bold; color:';
 	return '<div id="cs_outils" class="cs_outils">'
-	. '<div class="cs_liste cs_inactifs">' . $fieldset . 'red;">' . _T('couteauprive:inactifs') . '</legend>'
+	. '<div class="cs_liste cs_inactifs">' . $fieldset . 'red;">' . _T('couteauprive:outils_inactifs') . '</legend>'
 	. $results_inactifs . '</fieldset></div>'
 	. '<form id="csform" name="csform" method="post" action="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
 	. '<input type="hidden" value="test" name="cs_selection" id="cs_selection"/>'
 	. '<div class="cs_toggle"><div style="display:none;">'
-	. '<a id="cs_toggle_a" title="'._T('couteauprive:permuter').'" href="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
+	. '<a id="cs_toggle_a" title="'._T('couteauprive:outils_permuter_gras1').'" href="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
 	. '<img alt="<->" src="'.find_in_path('img/permute.gif').'"/></a>'
 	. '<p id="cs_toggle_p">(0)</p>'
-	. '<a id="cs_reset_a" title="'._T('couteauprive:resetselection').'" href="#">'
-	. '<img alt="X" class="class_png" src="'.find_in_path('img/nosel.gif').'"/></a>'
+	. '<a id="cs_reset_a" title="'._T('couteauprive:outils_resetselection').'" href="#">'
+	. '&nbsp;<img alt="X" class="class_png" src="'.find_in_path('img/nosel.gif').'"/>&nbsp;</a>'
 	.	'</div></div></form>'
-	. '<div class="cs_liste cs_actifs">' . $fieldset . '#22BB22;">' . _T('couteauprive:actifs') . '</legend>'
+	. '<div class="cs_liste cs_actifs">' . $fieldset . '#22BB22;">' . _T('couteauprive:outils_actifs') . '</legend>'
 	. $results_actifs . '</fieldset>'
-	. '<div style="text-align: right;"><a id="cs_tous_a" title="'._T('couteauprive:selectiontous').'" href="#">'._T('couteauprive:maj_tous').'</a></div>'
+	. '<div style="text-align: right;"><a id="cs_tous_a" title="'._T('couteauprive:outils_selectionactifs').'" href="#">'._T('couteauprive:outils_selectiontous').'</a></div>'
 	. '</div></div>';
 }
 

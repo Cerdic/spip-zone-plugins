@@ -236,11 +236,11 @@ verif_plugin();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
 	cs_compat_boite('debut_droite');
 
-	echo debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('couteauprive:liste_outils'));
+	echo debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('couteauprive:outils_liste'));
 
 	$valider = "\n<div style='text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider1' value='"._T('bouton_valider')."' class='fondo' onclick='document.forms.submitform.submit()' /></div>";
-	echo _T('couteauprive:presente_outils', array('triangle'=>'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" />')), $valider;
+	echo _T('couteauprive:outil_intro_old', array('triangle'=>'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" />')), $valider;
 	echo "\n<table border='0' cellspacing='0' cellpadding='5' ><tr><td class='sansserif'>";
 	foreach($temp = $outils as $outil) $categ[_T('couteauprive:categ:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
 
@@ -291,7 +291,7 @@ function ligne_outil($outil, &$js, $afficher, $description_outil){
 	$actif = $outil['actif'];
 	$erreur_version = cs_version_erreur($outil);
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
-	$titre_etat = _T('couteauprive:'.($actif?'':'in').'actif');
+	$titre_etat = _T('couteauprive:outil_'.($actif?'':'in').'actif');
 	$nb_var = intval($outil['nb_variables']);
 	$index = intval($outil['index']);
 	$pliage_id = 'plie_'.$outil_id;
@@ -319,7 +319,7 @@ function ligne_outil($outil, &$js, $afficher, $description_outil){
 	$p .= "\n<div class='detail_outil'>";
 	// horrible : ça prends plus de temps qu'avant, mais ca va bientot disparaitre !!
 	$p .= cs_initialisation_d_un_outil($outil['id'], $description_outil, false);
-	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T(defined('_SPIP19100')?'couteauprive:jquery1':'couteauprive:jquery2') . '</p>';
+	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T(defined('_SPIP19100')?'couteauprive:detail_jquery1':'couteauprive:detail_jquery2') . '</p>';
 	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
 	if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('couteauprive:contrib', array('id'=>$outil['contrib'])) . '</p>';
 	$s .= propre($p) . detail_outil($outil['id']) . '</div>';

@@ -187,8 +187,8 @@ define('_CS_PROPRE_QS', defined('_SPIP19300')?'propres_qs':'propres-qs');
 add_variable( array(
 	'nom' => 'radio_type_urls3',
 	'format' => 'chaine',
-	'radio' => array('page' => 'couteauprive:page', 'html' => 'couteauprive:html', 'propres' => 'couteauprive:propres', 'propres2' => 'couteauprive:propres2',
-			'standard' => 'couteauprive:standard', _CS_PROPRE_QS => 'couteauprive:propres-qs' ),
+	'radio' => array('page' => 'couteauprive:url_page', 'html' => 'couteauprive:url_html', 'propres' => 'couteauprive:url_propres', 'propres2' => 'couteauprive:url_propres2',
+			'standard' => 'couteauprive:url_standard', _CS_PROPRE_QS => 'couteauprive:url_propres-qs' ),
 	'radio/ligne' => 4,
 	'defaut' => "'page'",
 	'code' => "\$GLOBALS['type_urls']=%s;\n",
@@ -266,7 +266,7 @@ add_variable( array(
 	'nom' => 'spam_mots',
 	'format' => 'chaine',
 	'lignes' => 8,
-	'defaut' => '"sucking blowjobs superbabes ejakulation fucking (asses)"',
+	'defaut' => '"sucking blowjob superbabe ejakulation fucking (asses)"',
 	'code' => "define('_spam_MOTS', %s);",
 ));
 add_outil( array(
@@ -380,7 +380,7 @@ add_variable( array(
 add_variable( array(
 	'nom' => 'message_travaux',
 	'format' => 'chaine',
-	'defaut' => "_T('couteauprive:prochainement')",
+	'defaut' => "_T('couteauprive:travaux_prochainement')",
 	'lignes' => 3,
 	'code' => "define('_en_travaux_MESSAGE', %s);\n",
 ));
