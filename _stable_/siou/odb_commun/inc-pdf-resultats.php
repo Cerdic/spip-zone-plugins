@@ -11,12 +11,12 @@ $pdfG='resultats_';
 $deliberation=$_REQUEST['deliberation'];
 if($deliberation==3) {
 	$isAdmis=true;
-	$andDelib = " and delib1='Admissible' and delib2 = 'Oral' and delib3 = 'Passable'";
+	$andDelib = " and delib1='Admissible' and (delib2 = 'Oral' OR delib2='Reserve') and (delib3 = 'Passable' or delib2='Reserve')";
 	$titre="Admis 2&deg; groupe";
 	$pdfG.=getRewriteString("repeches");
 } elseif($deliberation==2) {
 	$isAdmis=true;
-	$andDelib = " and delib1='Admissible' and delib2 != 'Oral' and delib2 != 'Reserve'";
+	$andDelib = " and delib1='Admissible' and delib2 != 'Oral' and delib2 != 'Reserve' and delib2!='Refuse'";
 	$titre="Admis 1&deg; groupe";
 	$pdfG.=getRewriteString("admis");
 }
