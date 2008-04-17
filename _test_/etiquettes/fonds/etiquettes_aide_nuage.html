@@ -4,7 +4,9 @@
 
 [(#REM)
 	On calcule la vraie fréquence des mots en additionant
-	sur les différentes tables (faut pas hésiter à en rajouter)
+	sur les différentes tables
+	Si vous avez modifié SPIP pour pouvoir mettre des mots sur une
+	nouvelle table, il faut rajouter une boucle ici
 ]
 
 <BOUCLE_frequence_articles(MOTS){frequence articles}{type ?}>
@@ -13,13 +15,6 @@
 </BOUCLE_frequence_articles>
 #SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
 </B_frequence_articles>
-
-<BOUCLE_frequence_auteurs(MOTS){frequence auteurs}{type ?}>
-#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
-#SET{max_la,#MAX_FREQUENCE}
-</BOUCLE_frequence_auteurs>
-#SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
-</B_frequence_auteurs>
 
 <BOUCLE_frequence_forum(MOTS){frequence forum}{type ?}>
 #SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
@@ -35,26 +30,56 @@
 #SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
 </B_frequence_documents>
 
-<BOUCLE_frequence_evenements(MOTS){frequence evenements}{type ?}>
+<BOUCLE_frequence_syndic(MOTS){frequence syndic}{type ?}>
 #SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
 #SET{max_la,#MAX_FREQUENCE}
-</BOUCLE_frequence_evenements>
+</BOUCLE_frequence_syndic>
 #SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
-</B_frequence_evenements>
+</B_frequence_syndic>
 
-<BOUCLE_tous_les_mots(MOTS){tous}{type ?}{doublons bla}>
-</BOUCLE_tous_les_mots>
+<BOUCLE_frequence_breves(MOTS){frequence breves}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
+#SET{max_la,#MAX_FREQUENCE}
+</BOUCLE_frequence_breves>
+#SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
+</B_frequence_breves>
+
+<BOUCLE_frequence_rubriques(MOTS){frequence rubriques}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
+#SET{max_la,#MAX_FREQUENCE}
+</BOUCLE_frequence_rubriques>
+#SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
+</B_frequence_rubriques>
 
 [(#REM) Et maintenant qu'on a enregistré les fréquences, on affiche le nuage ]
 <B_mots>
-<div id="popularTags">
-	<BOUCLE_mots(MOTS){tous}{!doublons bla}{type ?}{par #ENV{tri,titre}}{0,30}>
+<ul id="popular_tags-#ENV{type}-#ENV{type_objet}-#ENV{id_objet}" class="popular_tags nuage">
+	<BOUCLE_mots(MOTS){tous}{type ?}{par #ENV{tri,titre}}{0,30}>
 	[(#SET{score,[(#GET{frequences}|table_valeur{#TITRE*,0}|div{#GET{max_frequence}})]})]
 	[(#GET{score}|>={0}|?{' '})
 		[(#SET{score,[(#GET{score}|plus{0.900001})]})]
 		[(#SET{unite,[(#GET{score}|floor)]})]
 		[(#SET{decimale,[(#GET{score}|moins{#GET{unite}}|mult{10}|floor)]})]
-		<span style="font-size: #GET{unite}[.(#GET{decimale})]em;">#TITRE</span>
+		<li><span style="font-size: #GET{unite}[.(#GET{decimale})]em;">#TITRE*</span></li>
 	]</BOUCLE_mots>
-</div>
+</ul>
 </B_mots>
+
+[(#REM) On utilise le javascript pour ce nuage précis ]
+<script  type="text/javascript">
+<!--
+var appliquer_etiquettes_aide_nuage_#ENV{type}_#ENV{type_objet}_#ENV{id_objet} = function(){
+	appliquer_etiquettes_aide_nuage(
+		'#etiquettes-#ENV{type}-#ENV{type_objet}-#ENV{id_objet}',
+		'#popular_tags-#ENV{type}-#ENV{type_objet}-#ENV{id_objet}'
+	);
+}
+// on applique avec un timeout pour laisser la page s'afficher
+$(function(){
+	setTimeout(appliquer_etiquettes_aide_nuage_#ENV{type}_#ENV{type_objet}_#ENV{id_objet}, 200);
+});
+onAjaxLoad(function(){
+	setTimeout(appliquer_etiquettes_aide_nuage_#ENV{type}_#ENV{type_objet}_#ENV{id_objet}, 200);
+});
+// -->
+</script>

@@ -39,7 +39,4 @@ Dans ce second cas, ce sera alors &agrave; vous de traiter le r&eacute;sultat du
 		<nom>affichage_final</nom>
 		<inclure>etiquettes_pipelines.php</inclure>
 	</pipeline>
-	
-	<!-- Les etiquettes nécessite les plugins suivant -->
-	<necessite id='tagmachine' version="[0.1;]" />
 </plugin>

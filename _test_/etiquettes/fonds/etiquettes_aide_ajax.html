@@ -33,10 +33,6 @@
 							jQuery(input)
 								.end();
 						}
-						if ((li.value.indexOf(' ') != -1) || (li.value.indexOf(',') != -1) || (li.value.indexOf('"') != -1)){
-							li.value = "&quot;"+li.value+"&quot;";
-						}
-						return li;
 					}
 			});
 		jQuery('.autocompleter, .selectAutocompleter').css('opacity',0.7);

@@ -46,7 +46,13 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 			$id_groupe = intval($reponse['id_groupe']);
 		// Sinon il faut créer le groupe
 		else
-			$id_groupe = sql_insertq('spip_groupes_mots', array('titre' => $groupe));
+			$id_groupe = sql_insertq(
+				'spip_groupes_mots',
+				array(
+					'titre' => $groupe, 
+					'minirezo' => 'oui',
+				)
+			);
 	
 	// initialisation du mode d'ajout des mots-clés
 		// si on met rien ou n'importe quoi ça donne true
@@ -142,6 +148,8 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 
 function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide_nuage, $aide_ajax, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login) {
 	
+	global $tables_jointures;
+	
 	include_spip('inc/autoriser');
 	include_spip('inc/filtres');
 	
@@ -158,6 +166,7 @@ function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide_nuage, $aid
 	}
 	else{
 		
+		$erreur_autorisation = false;
 		$proposer_login &= false;
 		
 		// si on vient du formulaire validé on le traite
@@ -174,6 +183,16 @@ function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide_nuage, $aid
 				$etiquettes = entites_html($etiquettes);
 			// Sinon c'est un formulaire d'ajout donc il apparaît toujours vide
 			else $etiquettes = "";
+			
+			// On dit qu'il faut recalculer tout vu qu'on a changé
+			include_spip ("inc/invalideur");
+			suivre_invalideur("1");
+			
+			// Relance la page
+			include_spip('inc/headers');
+			redirige_par_entete(
+				self()
+			);
 			
 		}
 		else{

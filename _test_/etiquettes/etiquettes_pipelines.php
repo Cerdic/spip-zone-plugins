@@ -14,16 +14,28 @@ function etiquettes_affichage_final($page){
 	
 	$iutil = find_in_path('javascript/iutil.js');
 	$iautocompleter = find_in_path('javascript/iautocompleter.js');
+	$etiquettes = find_in_path('javascript/etiquettes.js');
 	$css = find_in_path('css/etiquettes.css');
 	
 	$incHead = <<<EOS
-		<link rel="stylesheet" type="text/css" media="all" href="$css" />
+	
+	<link rel="stylesheet" type="text/css" media="all" href="$css" />
+		
 EOS;
 	
-	if (strpos($page, 'appliquer_selecteur_cherche_mot')){
+	if ($aide_ajax = strpos($page, 'appliquer_selecteur_cherche_mot')){
 		$incHead .= <<<EOS
-			<script type='text/javascript' src='$iutil'></script>
-			<script type='text/javascript' src='$iautocompleter'></script>
+		
+	<script type='text/javascript' src='$iutil'></script>
+	<script type='text/javascript' src='$iautocompleter'></script>
+			
+EOS;
+	}
+	if($aide_ajax OR strpos($page, 'id="popular_tags')){
+		$incHead .= <<<EOS
+		
+	<script type='text/javascript' src='$etiquettes'></script>
+			
 EOS;
 	}
 	

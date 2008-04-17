@@ -47,11 +47,24 @@
 			</p>
 			
 			[(#ENV{aide_ajax}|?{' '})
-				<INCLURE{fond=fonds/etiquettes_aide_ajax}{groupe=#ENV{groupe}}{type_objet=#ENV{type_objet}}{id_objet=#ENV{id_objet}}>
+				<script  type="text/javascript">
+				<!--
+				var appliquer_selecteur_#ENV{groupe}_#ENV{type_objet}_#ENV{id_objet} = function(){
+					appliquer_selecteur_cherche_mot(
+						'#ENV{groupe}',
+						'#ENV{type_objet}',
+						#ENV{id_objet},
+						'[(#URL_PAGE{etiquettes_selecteur}|parametre_url{groupe,#ENV{groupe},&})]'
+					);
+				}
+				jQuery(document).ready(appliquer_selecteur_#ENV{groupe}_#ENV{type_objet}_#ENV{id_objet});
+				onAjaxLoad(function(){setTimeout(appliquer_selecteur_#ENV{groupe}_#ENV{type_objet}_#ENV{id_objet}, 200);});
+				// -->
+				</script>
 			]
 			
 			[(#ENV{aide_nuage}|?{' '})
-				<INCLURE{fond=fonds/etiquettes_aide_nuage}{type=#ENV{groupe}}{type_objet=#ENV{type_objet}}{id_objet=#ENV{id_objet}}>
+				<INCLURE{fond=fonds/etiquettes_aide_nuage}{type=#ENV{groupe}}{type_objet}{id_objet}>
 			]
 			
 			<p class="spip_bouton">

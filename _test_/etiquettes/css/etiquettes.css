@@ -1,3 +1,6 @@
+
+/* Partie pour le sélécteur générique */
+
 .autocompleter
 {
 	border: 1px solid #8B6F92;
@@ -22,3 +25,13 @@
 	font-style:italic;
 	color: black;
 }
+
+/* Partie pour le nuage d'aide */
+
+.popular_tags {
+	line-height:1.2em ;
+	overflow:auto;
+}
+.popular_tags span { background-color: #F4F8F8; cursor: pointer; margin:2px }
+.popular_tags span.selected { color:#eee; background-color: #8B6F92; }
+.popular_tags span.auto { background-color: #ccffcc; }
