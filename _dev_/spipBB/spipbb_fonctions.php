@@ -115,10 +115,10 @@ function spipbb_nb_messages($id_auteur){
 function spipbb_nb_messages_groupe($id_bidon){
 	$aut_nb = array();
 	$result_auteurs = sql_select('id_auteur, auteur, COUNT(auteur) AS total','spip_forum',
-							array("statut='publie'","id_auteur>0") , // WHERE
+							"statut='publie' AND id_auteur>0" , // WHERE
 							"auteur", // GROUPBY
-							array("total desc"), // ORDERBY
-							"100" // LIMIT
+							"total desc", // ORDERBY
+							"10" // LIMIT
 							);
 	$compte = 0;
 	while ($row = sql_fetch($result_auteurs) AND $compte++<10) {

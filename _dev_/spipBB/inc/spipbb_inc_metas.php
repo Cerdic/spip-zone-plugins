@@ -88,7 +88,7 @@ function spipbb_init_metas()
 		$spipbb_meta['affiche_'.$champ_a_valider]=isset($old_meta['affiche_'.$champ_a_valider]) ? $old_meta['affiche_'.$champ_a_valider] : 'oui';
 	}
 	# autres parametres
-	$spipbb_meta['fixlimit'] = isset($old_meta['fixlimit']) ? $old_meta['fixlimit'] : 10;
+	$spipbb_meta['fixlimit'] = isset($old_meta['fixlimit']) ? $old_meta['fixlimit'] : 30;
 	$spipbb_meta['lockmaint'] = isset($old_meta['lockmaint']) ? $old_meta['lockmaint'] : 600;
 	$spipbb_meta['affiche_bouton_abus'] = isset($old_meta['affiche_bouton_abus']) ? $old_meta['affiche_bouton_abus'] : 'non';
 	$spipbb_meta['affiche_bouton_rss'] = isset($old_meta['affiche_bouton_rss']) ? $old_meta['affiche_bouton_rss'] : 'un';

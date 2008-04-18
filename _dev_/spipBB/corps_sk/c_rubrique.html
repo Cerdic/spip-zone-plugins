@@ -57,16 +57,16 @@
 
 </BOUCLE_rubrique_principal>
 
-	[(#MODELE{bloc_informations}{id_rubrique})]
+[(#MODELE{bloc_informations}{id_rubrique})]
 
-		<INCLURE(session.php){fond=inc_piedforum}{id_rubrique=#ENV{id_rubrique}}>
+<INCLURE(session.php){fond=inc_piedforum}{id_rubrique=#ENV{id_rubrique}}>
 
-		[(#REM) si visiteur non identifie : form login ]
-		[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]
-		#LOGIN_PUBLIC
-		[(#SESSION{id_auteur}|=={''}|?{' ',''})
-		&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
-		</div>
-		]
+	[(#REM) si visiteur non identifie : form login ]
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]
+	#LOGIN_PUBLIC
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})
+	&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+	</div>
+	]
 
 </BOUCLE_primale>

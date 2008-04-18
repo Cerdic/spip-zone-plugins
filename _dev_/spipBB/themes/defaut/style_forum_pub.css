@@ -130,7 +130,8 @@ td.etatsujet span, td.etatforum span { display: none; }
 td.titreforum {}
 td.titreforum a.titre{ font-weight:bold; font-size:1.1em; color:#496B8D; } /* coul 1 */
 .titrelien, .titretexte {margin:0;padding:0;border:0;}
-.titretexte {font-size:0.8em;}
+.titretexte {font-size:0.9em;}
+.titretexte p {margin:3px}
 
 td.nbr_sujet { min-width:10%; text-align:center; }
 td.nbr_post { min-width:10%; text-align:center; background-color:#d3d3d3; } /* coul 5 */

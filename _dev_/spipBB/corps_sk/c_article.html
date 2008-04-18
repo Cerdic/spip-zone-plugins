@@ -166,7 +166,7 @@
 			</tr>
 		</BOUCLE_message_postit>
 
-		<BOUCLE_messages(FORUMS){id_article}{plat}{!par date_thread}{pagination 20}>
+		<BOUCLE_messages(FORUMS){id_article}{plat}{!par date_thread}{pagination #CONFIG{spipbb/fixlimit}}>
 
 		<!-- sujets ...................... -->
 		<BOUCLE_sujet(FORUMS){id_thread}{doublons ann}>

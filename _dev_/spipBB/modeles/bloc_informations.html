@@ -1,9 +1,9 @@
-#CACHE{60}
+#CACHE{3600}
 [(#REM) Plugin SpipBB - Licence GPL]
 [(#REM) Bloc d'informations a afficher en bas de page]
 
 <BOUCLE_forum_principal(RUBRIQUES){id_rubrique=#CONFIG{spipbb/id_secteur}}>
-<p class="space_10"></p>
+<p class="space_5"></p>
 <table summary="bloc_informations" class="spipforum">
 		<tbody[ id="salon(#ID_RUBRIQUE)"]>
 		<tr>
@@ -18,9 +18,9 @@
 			<BOUCLE_rub_main(RUBRIQUES){id_rubrique}>
 				<BOUCLE_sous_rub(RUBRIQUES){id_parent}>
 					<BOUCLE_forum(ARTICLES){id_rubrique}>
-					<BOUCLE_sujets(FORUMS){id_article}>
-					<BOUCLE_posts(FORUMS){id_thread}{plat}></BOUCLE_posts><?php $total_messages+=#TOTAL_BOUCLE ?><//B_posts>
-					</BOUCLE_sujets><//B_threads>
+						<BOUCLE_sujets(FORUMS){id_article}>
+							<BOUCLE_posts(FORUMS){id_thread}{plat}></BOUCLE_posts><?php $total_messages+=#TOTAL_BOUCLE ?><//B_posts>
+						</BOUCLE_sujets>
 					</BOUCLE_forum>
 					<BOUCLE_sous_sous_rub(BOUCLE_sous_rub)></BOUCLE_sous_sous_rub>
 				</BOUCLE_sous_rub>
@@ -36,7 +36,7 @@
 				[(#TOTAL_AUTEURS_EN_LIGNE{'5 MINUTE'}) <:spipbb:membres_en_ligne:><br />]
 			</td>
 		</tr>
-		<tr>
+		[<tr>
 			<th colspan="2"><:spipbb:membres_les_plus_actifs:></th>
 		</tr>
 		<tr class="ligne_forum">
@@ -44,10 +44,9 @@
 				<span>&nbsp;</span>
 			</td>
 			<td class="dernmsg">
-				[(#ID_RUBRIQUE|spipbb_nb_messages_groupe)]
+				(#ID_RUBRIQUE|spipbb_nb_messages_groupe)
 			</td>
-		</tr>
+		</tr>]
 		</tbody>
 </table>
 </BOUCLE_forum_principal>
-

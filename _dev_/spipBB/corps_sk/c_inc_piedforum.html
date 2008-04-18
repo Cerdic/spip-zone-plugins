@@ -17,7 +17,8 @@ si vous souhaitez reafficher les menu "fonctions" (voir inc_teteforum - div id '
 </BOUCLE_rubrique>
 
 </div>
-
+[(#REM) c: 17/4/8 il vaut mieux choisir où on le place...]
+[(#FORMULAIRE_ADMIN)]
 
 [(#REM) bouton RSS : non/un/tout ]
 #SET{aff_rss,#CONFIG{'spipbb/affiche_bouton_rss'}}
@@ -30,13 +31,13 @@ si vous souhaitez reafficher les menu "fonctions" (voir inc_teteforum - div id '
 ]
 
 
-[(#REM)  Bloc des fonctions (voir : inc_teteforum) ou autres ... + siganture ... optionel ]	
+[(#REM)  Bloc des fonctions (voir : inc_teteforum) ou autres ... + siganture ... optionel ]
 <div id="action_for_pied" >
 
 	<:spipbb:sign_tempo:> [(#REM) en 1.9.3 PLUGIN{SPIPBB,version}]
 
 </div>
 
-	
-[(#REM) lignes suivantes � conserver !]
+
+[(#REM) lignes suivantes à conserver !]
 <div style="clear:both;"></div>
