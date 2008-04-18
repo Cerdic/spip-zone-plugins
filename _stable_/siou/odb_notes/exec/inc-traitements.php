@@ -232,7 +232,7 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 			if($moy<5) {
 				$style="color:#3c9;font-weight:bold;";
 				$moy_aff="Ajourn&eacute; ($moy)";
-			}elseif(((($moy<9) || ($moy<10 && $deliberation==3) ||($moy>=9 && $moy<10 && $deliberation==0)) && !$isCasReserve) || ($moy<9 && $isCasReserve)){
+			}elseif(((($moy<9) || ($moy<10 && $deliberation==3) ||($moy>=9 && $moy<10 && $deliberation==0)) && !$isCasReserve) || ($moy<10 && $isCasReserve)){
 				$style="color:#f00;";
 				$moy_aff="Refus&eacute; ($moy)";
 			}else{
@@ -242,7 +242,7 @@ function afficherNotes($jury, $id_serie, $annee=0, $where='', $deliberation=1, $
 					$moy_aff=" $moy";
 				}
 				if($isAbsentVrai) $style='color:#c80;';
-				elseif(($isCasReserve && $moy>=9) || ($isAbsEpsVrai) || ($isCasReserve && $deliberation==0)) {
+				elseif(($isCasReserve && $moy>=10) || ($isAbsEpsVrai) || ($isCasReserve && $deliberation==0)) {
 					$style='color:#369;';
 					$moy_aff="<b>Cas r&eacute;serv&eacute;</b> ($moy)";
 				}
