@@ -49,7 +49,7 @@ function glossaire_accents_callback($matches) {
 	return '(?:'.join('|', $a).')';
 }
 function glossaire_echappe_balises_callback($matches) {
- return cs_code_echappement($matches[1], 'GLOSS');
+ return cs_code_echappement($matches[0], 'GLOSS');
 }
 function glossaire_echappe_mot_callback($matches) {
  global $gloss_id;
@@ -67,7 +67,7 @@ function cs_rempl_glossaire($texte) {
 	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
 	// protection des liens SPIP
 	if (strpos($texte, '[')!==false) 
-		$texte = preg_replace_callback(',(\[([^][]*)->(>?)([^]]*)\]),msS', 'glossaire_echappe_balises_callback', $texte);
+		$texte = preg_replace_callback(',\[[^][]*->>?[^]]*\],msS', 'glossaire_echappe_balises_callback', $texte);
 	
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
 	while($mot = $fetch($r)) if ($mot['id_mot']<>$GLOBALS['id_mot']) {
@@ -81,12 +81,18 @@ function cs_rempl_glossaire($texte) {
 		array_walk($les_mots, 'cs_preg_quote');
 		$les_mots = glossaire_accents(join('|', $les_mots));
 //echo '<hr>==>',htmlentities($les_mots),'<hr>';
-		if(preg_match(",\W($les_mots)\W,i", $texte)) {
-			// prudence 1 : on protege TOUTES les balises contenant le mot en question
-			$texte = preg_replace_callback(",(<[a-z][^>]*($les_mots)[^>]*>),Umsi", 'glossaire_echappe_balises_callback', $texte);
-			// prudence 2 : on neutralise le mot si on trouve un accent html juste avant ou apres
-			$texte = preg_replace_callback(",(&($accents);($les_mots)),i", 'glossaire_echappe_balises_callback', $texte);
-			$texte = preg_replace_callback(",(($les_mots)&($accents);),i", 'glossaire_echappe_balises_callback', $texte);
+		if(preg_match(",\W(?:$les_mots)\W,i", $texte)) {
+			// prudence 1 : on protege TOUTES les balises HTML comprenant le mot
+			if (strpos($texte, '<')!==false) {
+				$texte = preg_replace_callback(",<[^>]*(?:$les_mots)[^>]*>,Ui", 'glossaire_echappe_balises_callback', $texte);
+			}
+			// prudence 2 : en iso-8859-1, (\W) comprend les accents, mais pas en utf-8... Donc on passe en unicode
+			if($GLOBALS['meta']['charset'] != 'iso-8859-1') $texte = charset2unicode($texte);
+			// prudence 3 : on neutralise le mot si on trouve un accent (HTML ou unicode) juste avant ou apres
+			if (strpos($texte, '&')!==false) {
+				$texte = preg_replace_callback(",&(?:$accents);(?:$les_mots),i", 'glossaire_echappe_balises_callback', $texte);
+				$texte = preg_replace_callback(",(?:$les_mots)&(?:$accents);,i", 'glossaire_echappe_balises_callback', $texte);
+			}
 			// on y va !
 			$lien = generer_url_mot($gloss_id);
 			$mem = $GLOBALS['toujours_paragrapher'];
@@ -112,7 +118,7 @@ function cs_glossaire($texte) {
 }
 
 // liste des accents (sans casse)
-function cs_glossaire_accents() { return '#(19[2-9]|2[023][0-9]|21[0-46-9]|24[0-689]|25[0-4]|33[89]|35[23]|376)||a(acute|circ|elig|grave|ring|tilde|uml)|ccedil|e(acute|circ|grave|th|uml)|i(acute|circ|grave|uml)|ntilde|o(acute|circ|elig|grave|slash|tilde|uml)|s(caron|zlig)|thorn|u(acute|circ|grave|uml)|y(acute|uml)';
+function cs_glossaire_accents() { return '#(19[2-9]|2[023][0-9]|21[0-46-9]|24[0-689]|25[0-4]|33[89]|35[23]|376)||a(?:acute|circ|elig|grave|ring|tilde|uml)|ccedil|e(?:acute|circ|grave|th|uml)|i(?:acute|circ|grave|uml)|ntilde|o(?:acute|circ|elig|grave|slash|tilde|uml)|s(?:caron|zlig)|thorn|u(?:acute|circ|grave|uml)|y(?:acute|uml)';
 }
 
 ?>
