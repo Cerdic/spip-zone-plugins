@@ -1,7 +1,7 @@
 <plugin>
   <nom>jsMath</nom>
   <auteur>[Vincent Beffara->vbeffara@ens-lyon.fr]</auteur>
-  <version>0.4</version>
+  <version>0.5+3.5</version>
   <etat>test</etat>
   <description>
     Inclusion de fonctionnalit&eacute;s permettant l'utilisation de 
@@ -11,10 +11,13 @@
     caract&egrave;re <html>$</html> dans un article, l'entourer de 
     balises SPIP &lt;html&gt;.)
 
-    {{NB :}} vous devrez &eacute;galement installer jsMath 
-    lui-m&ecirc;me &agrave; un emplacement visible par SPIP (en gros, 
-    soit dans le r&eacute;pertoire squelettes/ soit &agrave; la racine 
-    du site).
+    {{NB :}} Le plugin contient la partie javascript de la librairie 
+    jsMath (dans le sous-r&eacute;pertoire apel&eacute; jsMath), telle 
+    qu'elle est distribu&eacute;e. Cela permet de la mettre &agrave; 
+    jour facilement en m&ecirc;me temps que le plugin. Par contre, il 
+    vous appartient, si vous estimez que votre site le n&eacute;cessite, 
+    d'installer les polices Computer Modern dans le 
+    sous-r&eacute;pertoire fonts.
 
     [Configuration->.?exec=cfg&amp;cfg=jsMath] (si vous avez cfg, sinon 
     le plugin utilisera des valeurs par d&eacute;faut raisonnables).
