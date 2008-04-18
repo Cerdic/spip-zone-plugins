@@ -13,6 +13,17 @@
 
 include_spip('inc/forms');
 
+if (!function_exists('afficher_rubrique')) {
+// fonction de SPIP 1.9.2 présente dans inc/presentation, ayant disparue en 1.9.3
+	function afficher_rubriques($titre_table, $requete) {
+		global $options;
+		$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
+		$largeurs = array('12','', '');
+		$styles = array('', 'arial2', 'arial11');
+		return affiche_tranche_bandeau($requete, "rubrique-24.gif", "#999999", "white", $tmp_var, $titre_table, false, $largeurs, $styles, 'afficher_rubriques_boucle');
+	}
+}
+
 function forms_inserer_crayons($out){
 	$out = pipeline('affichage_final', "</head>".$out);
 	$out = str_replace("</head>","",$out);
