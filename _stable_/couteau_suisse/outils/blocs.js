@@ -17,7 +17,8 @@
 		
 	jQuery('h4.blocs_ajax').click(function(){
 		var k=jQuery(this).children().attr("href");
-		jQuery(this).parent().children(".blocs_destination").load(k);	
+		jQuery(this).removeClass('blocs_ajax')
+		.parent().children(".blocs_destination").load(k);	
 		});
 });
 
