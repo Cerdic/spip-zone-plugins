@@ -18,12 +18,14 @@ _ &#169; 2008 - Licence GPL
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Panoramas-360o</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
+		panoramas_mes_options.php
 	</options>
 	<pipeline>
   		<nom>insert_head</nom>
   		<action>insertion_in_head</action>
   		<inclure>panoramas_define_head.php</inclure>
  	</pipeline>
+	<install>base/panoramas_upgrade.php</install>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
