@@ -191,7 +191,7 @@ if($jury>0) {
 		"WHERE decis.delib1 = 'Admissible' AND decis.id_table=notes.id_table\n AND notes.note=0 AND notes.type!='Divers' AND notes.type!='Oral' AND moyenne<9\n".
 		" AND decis.annee=$annee AND notes.annee=$annee  AND rep.id_table=notes.id_table and rep.annee=$annee and rep.jury=$jury";
 		$tSql[]="update odb_decisions decis, odb_notes notes, odb_repartition rep\n SET delib1='Reserve'\n".
-		"WHERE decis.delib1 = 'Admissible' AND decis.id_table = notes.id_table\n AND notes.note=0 AND notes.type!='Divers' AND notes.type!='Oral' AND moyenne>=9 \n".
+		"WHERE decis.delib1 = 'Admissible' AND decis.id_table = notes.id_table\n AND notes.note=0 AND notes.type!='Divers' AND notes.type!='Oral' AND moyenne>=10 \n".
 		" AND decis.annee=$annee AND notes.annee=$annee  AND rep.id_table=notes.id_table and rep.annee=$annee and rep.jury=$jury";
 		foreach($tSql as $sql) {
 			//echo "<pre>$sql</pre>\n";
