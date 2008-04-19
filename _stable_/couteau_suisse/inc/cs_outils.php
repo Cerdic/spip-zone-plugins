@@ -51,7 +51,7 @@ function cs_description_pack() {
 
 // renvoie (pour la nouvelle interface) la description d'un outil
 function description_outil2($outil_id) {
-	if(!strlen($outil_id)) return _DIV_CS_INFOS . _T('couteauprive:cliquezlesoutils') . '</div>';
+	if(!strlen($outil_id)) return _DIV_CS_INFOS . _T('couteauprive:outils_cliquez') . '</div>';
 	global $outils, $metas_vars, $metas_outils;
 	include_spip('cout_utils');
 	// remplir $outils (et aussi $cs_variables qu'on n'utilise pas ici);

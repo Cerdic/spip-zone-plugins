@@ -91,7 +91,7 @@ _ {{2.}} Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :[
 
 Notez : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les styles standards associ&eacute;s &agrave; ces balises.</blockquote>',
 	'class_spip:nom' => 'SPIP et ses raccourcis&hellip;',
-	'cliquezlesoutils' => 'Cliquez sur le nom des outils ci-dessus pour afficher ici leur description.',
+	'outils_cliquez' => 'Cliquez sur le nom des outils ci-dessus pour afficher ici leur description.',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Fonctions',
 	'code_jq' => 'jQuery',
