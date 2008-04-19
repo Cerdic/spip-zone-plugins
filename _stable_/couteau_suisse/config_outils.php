@@ -400,7 +400,7 @@ add_outil( array(
 
 add_variable( array(
 	'nom' => 'cs_rss',
-	'check' => 'couteauprive:cs_rss',
+	'check' => 'couteauprive:rss_var',
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_CS', %s);\n",
 ));
