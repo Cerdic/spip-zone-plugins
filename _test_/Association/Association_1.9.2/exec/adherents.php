@@ -2,7 +2,7 @@
 	/**
 	* Plugin Association
 	*
-	* Copyright (c) 2007
+	* Copyright (c) 2007-2008
 	* Bernard Blazin & François de Montlivault
 	* http://www.plugandspip.com 
 	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
@@ -99,7 +99,7 @@
 		//Filtre ID
 		if ( isset ($_POST['id'])) {
 			$id=$_POST['id'];
-			$critere="id_adherent='$id'";
+			$critere="id_auteur='$id'";
 			if ($indexation=="id_asso") { $critere="id_asso='$id'"; }
 		}
 		
@@ -164,11 +164,11 @@
 			echo '<tr> ';
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>';
 			if ($indexation=="id_asso") { echo $data["id_asso"];}
-			else { echo $data["id_adherent"];}
+			else { echo $data["id_auteur"];}
 			echo '</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ="'.$class.'">';
 			
-			if ( !empty ($data['a.id_auteur'])) {
+			if ( !empty ($data['id_auteur'])) {
 				echo'<img src="/IMG/auton'.$data['id_auteur'].'.jpg" alt="&nbsp;" width="60" height= "60" title="'.$data["nom_famille"].' '.$data["prenom"].'">';
 			}
 			echo '</td>';

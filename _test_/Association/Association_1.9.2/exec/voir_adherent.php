@@ -27,7 +27,6 @@
 		$indexation = lire_config('association/indexation');
 		$query = spip_query( "SELECT * FROM spip_auteurs_elargis WHERE id_auteur='$id_auteur' ");
 			while ($data = spip_fetch_array($query)) { 
-			$id_adherent=$data['id_adherent'];
 			$id_asso=$data['id_asso'];
 			$nom_famille=$data['nom_famille'];
 			$prenom=$data['prenom'];
@@ -43,7 +42,7 @@
 		debut_boite_info();
 		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:adherent_libelle_numero').'<br />';
 		echo '<span class="spip_xx-large">';
-		if($indexation=="id_asso"){echo $id_asso;} else {echo $id_adherent;}
+		if($indexation=="id_asso"){echo $id_asso;} else {echo $id_auteur;}
 		echo '</span></div>';
 		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$nom_famille.' '.$prenom.'</div>';
 		echo '<br /><div style="text-align:center;">'.association_date_du_jour().'</div>';	
@@ -93,7 +92,7 @@
 			echo '<td><strong>'._T('asso:adherent_entete_statut').'</strong></td>';
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
-			$critere='id_adherent='.$id_adherent;
+			$critere='id_adherent='.$id_auteur;
 			if($indexation=='id_asso'){$critere='id_adherent='._q($id_asso);} 
 			$query = spip_query ("SELECT * FROM spip_asso_activites WHERE ".$critere." ORDER BY date DESC" );			
 			while ($data = spip_fetch_array($query)) {
@@ -128,7 +127,7 @@
 			echo '<td><strong>'._T('asso:vente_entete_date_envoi').'</strong></td>';
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
-			$critere='id_acheteur='.$id_adherent;
+			$critere='id_acheteur='.$id_auteur;
 			if($indexation=='id_asso'){$critere='id_acheteur='._q($id_asso);} 
 			$query = spip_query ("SELECT * FROM spip_asso_ventes WHERE ".$critere." ORDER BY date_vente DESC" );			
 			while ($data = spip_fetch_array($query)) {
@@ -162,7 +161,7 @@
 			echo '<td style="text-align:right;"><strong>'._T('asso:pret_entete_date_retour').'</strong></td>';
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
-			if($indexation=='id_asso'){$critere='id_emprunteur='._q($id_asso);} else {$critere='id_emprunteur='._q($id_adherent);}
+			if($indexation=='id_asso'){$critere='id_emprunteur='._q($id_asso);} else {$critere='id_emprunteur='._q($id_auteur);}
 			$query = spip_query ("SELECT * FROM spip_asso_prets LEFT JOIN spip_asso_ressources ON spip_asso_prets.id_ressource=spip_asso_ressources.id_ressource WHERE ".$critere." ORDER BY id_pret DESC" );			
 			while ($data = spip_fetch_array($query)) {
 				echo '<tr style="background-color: #EEEEEE;">';

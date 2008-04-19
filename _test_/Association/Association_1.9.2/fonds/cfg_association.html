@@ -121,8 +121,8 @@
 		</p>
 		<p>
 		<label for="indexation"><strong><:asso:config_libelle_indexation:></strong></label>
-		<input type="radio" name="indexation" value="id_adherent" [(#ENV{indexation}|=={id_adherent}|?{checked="checked"})] id="indexation" /><:asso:config_libelle_id_adherent:>
-		<input type="radio" name="indexation" value="id_asso" [(#ENV{indexation}|=={id_asso}|?{checked="checkted"})] id="indexation" /><:asso:config_libelle_id_asso:> <br />
+		<input type="radio" name="indexation" value="id_auteur" [(#ENV{indexation}|=={id_auteur}|?{checked="checked"})] id="indexation" /><:asso:config_libelle_id_adherent:> (id_auteur)
+		<input type="radio" name="indexation" value="id_asso" [(#ENV{indexation}|=={id_asso}|?{checked="checkted"})] id="indexation" /><:asso:config_libelle_id_asso:> (id_asso)<br />
 		</p>
 	</fieldset>
 
