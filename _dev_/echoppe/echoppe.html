@@ -1,6 +1,6 @@
 [(#REM)
 	Un cache plus court, pour la boucle syndic_articles
-]#CACHE{3600}
+]#CACHE{0}
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
@@ -46,7 +46,7 @@
 								[(#LOGO_PRODUIT||image_reduire{100})<br />]
 								Prix HTVA : #PRIX_BASE_HTVA  &euro; (#PRIX_TVAC &euro; TTC) - La tva est de #TAUX_TVA %
 								<br />
-								[(#MODELE{stock}{id_produit})] en stock.
+								#TOTAL_STOCK en stock.
 								<br />
 								[Hauteur : (#HAUTEUR)<br />]
 								[Url d'achat : <a href="#URL_ACHAT">(#URL_ACHAT)</a><br />]

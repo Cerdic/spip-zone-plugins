@@ -35,6 +35,13 @@
 	<br class="nettoyeur" />
 </div>]
 
+[(#CONFIG{inscription2/numero_tva_livraison}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/numero_tva_livraison_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="numero_tva_livraison"><:echoppe:numero_tva_livraison:></label>
+	<input type="text" class="forml" name="numero_tva_livraison" id="numero_tva_livraison" value="#ENV{numero_tva_livraison}"/>
+	<br class="nettoyeur" />
+</div>]
+
 [(#CONFIG{inscription2/adresse_livraison}|=={on}|?{' ', ''})
 <div class="textarea[ (#CONFIG{inscription2/adresse_livraison_obligatoire}|=={on}|?{obligatoire})]">
 	<label for="adresse_livraison"><:echoppe:adresse_livraison:></label>

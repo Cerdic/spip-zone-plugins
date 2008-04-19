@@ -1,0 +1,10 @@
+-----------------------------------------------------------------------
+<BOUCLE_LePanier(SPIP_ECHOPPE_PANIERS){id_panier?}{token_panier = #SESSION{echoppe_token_panier}}>
+<BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits){id_produit}>
+#TITRE	#PRIX_TVAC €	#QUANTITE
+</BOUCLE_LeProduit>
+</BOUCLE_LePanier>
+-----------------------------------------------------------------------
+<:echoppe:total:>	#TOTAL_PANIER_TVAC € TVAC
+					#TOTAL_PANIER_HTVA € HTVA
+

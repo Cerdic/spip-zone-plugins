@@ -85,6 +85,30 @@
 </td>
 </tr><tr>
 <td>
+	<strong><:echoppe:numero_tva_livraison:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="numero_tva_livraison" [checked="(#CONFIG{inscription2/numero_tva_livraison}?{checked})"] onclick="showoblig(this)" id="numero_tva_livraison" />
+	</label>
+	<label style="[(#CONFIG{inscription2/numero_tva_livraison}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="numero_tva_livraison_obligatoire" [checked="(#CONFIG{inscription2/numero_tva_livraison_obligatoire}?{checked})"] id="numero_tva_livraison_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="numero_tva_livraison_fiche_mod" onclick = "enadis(this,numero_tva_livraison_fiche)" [checked="(#CONFIG{inscription2/numero_tva_livraison_fiche_mod}?{checked})"] id="numero_tva_livraison_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="numero_tva_livraison_fiche" [checked="(#CONFIG{inscription2/numero_tva_livraison_fiche}?{checked})"] id="numero_tva_livraison_fiche" [disabled ="(#CONFIG{inscription2/numero_tva_livraison_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="numero_tva_livraison_table" [checked="(#CONFIG{inscription2/numero_tva_livraison_table}?{checked})"] id="numero_tva_livraison_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
 	<strong><:echoppe:adresse_livraison:></strong>
 </td><td>
 	<label>

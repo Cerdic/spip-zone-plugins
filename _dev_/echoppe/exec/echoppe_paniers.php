@@ -20,10 +20,9 @@ function exec_echoppe_paniers(){
 	echo recuperer_fond('fonds/echoppe_info_paniers',$contexte);
 	echo fin_boite_info();
 	
-	$raccourcis .= icone_horizontale(_T('echoppe:nouveau_produit'), generer_url_ecrire("echoppe_edit_produit","new=oui&id_categorie="._request('id_categorie')), _DIR_PLUGIN_ECHOPPE."images/produit-24.png","creer.gif", false);
-	$raccourcis .= '<hr />';
+
 	$raccourcis .= icone_horizontale(_T('echoppe:gerer_les_depots'), generer_url_ecrire("echoppe_gerer_depots",""), _DIR_PLUGIN_ECHOPPE."images/go-home.png","", false);
-	$raccourcis .= "<hr />";
+	$raccourcis .= icone_horizontale(_T('echoppe:gerer_les_paniers'), generer_url_ecrire("echoppe_paniers"), _DIR_PLUGIN_ECHOPPE."images/panier.png","", false);
 	$raccourcis .= icone_horizontale(_T('echoppe:gerer_echoppe'), generer_url_ecrire("echoppe",""), _DIR_PLUGIN_ECHOPPE."images/echoppe_blk_24.png","", false);
 	echo bloc_des_raccourcis($raccourcis);
 	

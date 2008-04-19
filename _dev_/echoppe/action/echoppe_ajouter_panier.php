@@ -51,7 +51,7 @@ function action_echoppe_ajouter_panier(){
 	}
 	
 	
-	spip_log('Mise à jour du panier','echoppe');
+	spip_log('Mise à jour du panier : '.serialize($contexte),'echoppe');
 	redirige_par_entete($contexte['redirect']);
 	
 }

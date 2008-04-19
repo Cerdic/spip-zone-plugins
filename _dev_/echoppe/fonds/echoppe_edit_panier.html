@@ -1,0 +1,45 @@
+[(#CHEMIN{images/panier.png}|debut_cadre_trait_couleur{0,"",<:echoppe:visualisation_d_un_panier:>,"",panier})]
+	[(#SET{'total_panier_prive',0})]
+	<B_LePanier>
+	<table style="width: 100%;">
+		<tr>
+			<td colspan="6" ><:echoppe:token_panier:> : #TOKEN_PANIER</td>
+		</tr>
+		<tr class="tableau_panier">
+			<td><:echoppe:titre_produit:></td>
+			<td><:echoppe:prix_produit:></td>
+			<td><:echoppe:quantite:></td>
+			<td><:echoppe:total_produit:></td>
+		</tr>
+	<BOUCLE_LePanier(spip_echoppe_paniers){token_panier = #TOKEN_PANIER}>
+		<tr>
+			
+			<BOUCLE_Leproduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits){id_produit = #ID_PRODUIT}>
+			<td>#TITRE</td><td>#PRIX_BASE_HTVA</td><td>#QUANTITE</td><td>#PRIX_TVAC</td>
+			
+			[(#SET{'total_panier_prive',#GET{'total_panier_prive'}|plus{#PRIX_TVAC|mult{#QUANTITE}}})]
+			</BOUCLE_Leproduit>
+			
+			#SET{'statut_panier',#STATUT}
+		</tr>
+	</BOUCLE_LePanier>
+	</table>
+	<hr />
+	<:echoppe:produit_dans_ce_panier:>: <strong>#TOTAL_BOUCLE</strong> <br />
+	<:echoppe:montant_total_du_panier:>: <strong>#GET{'total_panier_prive'} &euro;</strong>
+	<form action="[(#EVAL{echoppe_maj_panier}|generer_url_action{token_panier=#TOKEN_PANIER})]" method="post">
+		<:echoppe:statut_du_panier:>: 
+		<select name="echoppe_statut_panier">
+			<option value="temporaire" [(#GET{'statut_panier'}|=={temporaire}|?{selected,})] ><:echoppe:temporaire:></option>
+			<option value="reserve" [(#GET{'statut_panier'}|=={reserve}|?{selected,})] ><:echoppe:reserve:></option>
+			<option value="valide" [(#GET{'statut_panier'}|=={valide}|?{selected,})] ><:echoppe:valide:></option>
+			<option value="paye" [(#GET{'statut_panier'}|=={paye}|?{selected,})] ><:echoppe:paye:></option>
+			<option value="traite" [(#GET{'statut_panier'}|=={traite}|?{selected,})] ><:echoppe:traite:></option>
+			<option value="evnoye" [(#GET{'statut_panier'}|=={evnoye}|?{selected,})] ><:echoppe:evnoye:></option>
+		</select>
+		<input type="hidden" name="redirect" value="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER})]" />
+		<input type="hidden" name="token_panier" value="#TOKEN_PANIER" />
+		<input type="submit" value="<:echoppe:mettre_le_panier_a_jour:>" />
+	</form>
+	</B_LePanier>
+[(#EVAL{1}|fin_cadre_trait_couleur)]

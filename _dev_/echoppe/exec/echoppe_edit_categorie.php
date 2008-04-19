@@ -51,6 +51,8 @@ function exec_echoppe_edit_categorie(){
 	($contexte['new'] != 'oui' && $contexte['id_categorie'] > 0)?$raccourcis .= icone_horizontale(_T('echoppe:retour_a_la_categorie'), generer_url_ecrire("echoppe_categorie","id_categorie=".$contexte['id_categorie']."&lang=".$contexte['lang_categorie']), _DIR_PLUGIN_ECHOPPE."images/retour.png","", false)."<hr />":$raccourcis=$raccourcis;	
 	$raccourcis .= icone_horizontale(_T('echoppe:gerer_les_depots'), generer_url_ecrire("echoppe_gerer_depots",""), _DIR_PLUGIN_ECHOPPE."images/go-home.png","", false);
 	$raccourcis .= "<hr />";
+	$raccourcis .= icone_horizontale(_T('echoppe:gerer_les_paniers'), generer_url_ecrire("echoppe_paniers"), _DIR_PLUGIN_ECHOPPE."images/panier.png","", false);
+	$raccourcis .= '<hr />';
 	$raccourcis .= icone_horizontale(_T('echoppe:gerer_echoppe'), generer_url_ecrire("echoppe",""), _DIR_PLUGIN_ECHOPPE."images/echoppe_blk_24.png","", false);
 	echo bloc_des_raccourcis($raccourcis);
 	

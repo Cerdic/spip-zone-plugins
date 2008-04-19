@@ -23,6 +23,7 @@ function exec_echoppe(){
 	
 	
 	$raccourcis .= icone_horizontale(_T('echoppe:creer_nouvelle_categorie'), generer_url_ecrire("echoppe_edit_categorie","new=oui&id_parent=0"), _DIR_PLUGIN_ECHOPPE."images/categorie-24.png","creer.gif", false);
+	$raccourcis .= icone_horizontale(_T('echoppe:gerer_les_paniers'), generer_url_ecrire("echoppe_paniers"), _DIR_PLUGIN_ECHOPPE."images/panier.png","", false);
 	
 	echo bloc_des_raccourcis($raccourcis);
 		

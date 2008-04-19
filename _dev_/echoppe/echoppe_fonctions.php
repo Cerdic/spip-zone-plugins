@@ -22,6 +22,10 @@ function generer_logo($nom_fichier){
 	
 }
 
+function generer_url_inscription(){
+	return "";
+}
+
 function calculer_prix_tvac($prix_htva, $taux_tva){
 	if ($taux_tva == 0){
 		$taux_tva = lire_config('echoppe/taux_de_tva_par_defaut',21);
@@ -65,6 +69,15 @@ function calculer_url_achat_rapide($_var){
 		return $url;
 	}
 	
+}
+function calculer_stock($_id_produit){
+	$_sql_stock = "SELECT quantite FROM spip_echoppe_stock_produits WHERE id_produit = '$_id_produit';";
+	$_res_stock = spip_query($_sql_stock);
+	while($_la_quantite = spip_fetch_array($_res_stock)){
+		$_quantite = $_quantite + $_la_quantite['quantite'];
+	}
+	$_quantite = zero_si_vide($_quantite);
+	return $_quantite;
 }
 /*=============================BALISES===============================*/
 function balise_PRIX_TVAC($p){
@@ -110,6 +123,7 @@ function balise_URL_ACHAT_RAPIDE($p){
 	$p->code = "calculer_url_achat_rapide($_id_produit)";
 	return $p;
 }
+
 function generer_URL_PANIER($p){
 	$_page = lire_config('echoppe/squelette_panier','echoppe_panier');
 	$_url = generer_url_public($_page);
@@ -125,4 +139,44 @@ function balise_TOTAL_ITEM_PANIER($p){
 	return $p;
 }
 
+function balise_TOTAL_STOCK($p){
+	$_id_produit = champ_sql('id_produit', $p);
+	$p->code = "calculer_stock($_id_produit)";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+function balise_TOTAL_PANIER_HTVA($p){
+	$_sql = "SELECT id_produit, quantite FROM spip_echoppe_paniers WHERE token_panier='".session_get('echoppe_token_panier')."' AND token_client = '".session_get('echoppe_token_client')."' ;";
+	$_res = spip_query($_sql);
+	//echo $_sql;
+	$total_panier = 0;
+	while ($_produit = spip_fetch_array($_res)){
+		$_sql_le_produit = "SELECT prix_base_htva FROM spip_echoppe_produits WHERE id_produit = '".$_produit['id_produit']."';";
+		//echo $_sql_le_produit;
+		$_res_le_produit = spip_query($_sql_le_produit);
+		$_le_produit = spip_fetch_array($_res_le_produit);
+		$total_panier = $total_panier + ($_produit['quantite'] * $_le_produit['prix_base_htva']);
+	}
+	$p->code = "zero_si_vide($total_panier)";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+function balise_TOTAL_PANIER_TVAC($p){
+	$_sql = "SELECT id_produit, quantite FROM spip_echoppe_paniers WHERE token_panier='".session_get('echoppe_token_panier')."' AND token_client = '".session_get('echoppe_token_client')."' ;";
+	$_res = spip_query($_sql);
+	//echo $_sql;
+	$total_panier = 0;
+	while ($_produit = spip_fetch_array($_res)){
+		$_sql_le_produit = "SELECT prix_base_htva FROM spip_echoppe_produits WHERE id_produit = '".$_produit['id_produit']."';";
+		//echo $_sql_le_produit;
+		$_res_le_produit = spip_query($_sql_le_produit);
+		$_le_produit = spip_fetch_array($_res_le_produit);
+		$total_panier = $total_panier + ($_produit['quantite'] * calculer_prix_tvac($_le_produit['prix_base_htva'], 0));
+	}
+	$p->code = "zero_si_vide($total_panier)";
+	$p->interdire_scripts = false;
+	return $p;
+}
 ?>

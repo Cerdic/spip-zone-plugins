@@ -40,9 +40,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description_du_depot' => 'Description',
 'detail_du_stock' => 'D&eacute;tail du stock',
 'derniere_modification' => 'Derni&egrave;re modification',
+'duree_de_vie_des_paniers_temporaires' => 'Dur&eacute;e de vie des paniers temporaires',
 
 // E
 'echoppe'=>'Echoppe',
+'echoppe_info_panier' => 'Gestion du panier',
 'editer'=>'Editer',
 'editer_categorie' => 'Editer la cat&eacute;gorie',
 'editer_version'=>'Editer la version',
@@ -54,7 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'edition_donnees_globales' => '&Eacute;dition des donn&eacute;es globales',
 'elements_a_utiliser_dans_les_produits' => '&Eacute;l&eacute;ments &agrave; utiliser dans les produits',
 'email_du_depot' => 'E-Mail',
+'email_pour_confirmation_panier' => 'Email des destinataires qui recevront les paniers valid&eacute;s',
 'en_stock' => 'en stock',
+'erreur_de_validation_panier_vous_devez_etre_loge' => 'Erreur de validation. Vous devez &ecirc;tes enregistr&eacute; pour valider votre panier.',
 'etat_des_stocks' => '&Eacute;tat des stocks',
 'etat_du_produit' => '&Eacute;tat du produit',
 'euro' => '&euro;',
@@ -67,17 +71,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // G
 'gerer_echoppe' => 'G&eacute;rer Echoppe',
 'gerer_les_depots' => 'G&eacute;rer les d&eacute;p&ocirc;ts',
+'gerer_les_paniers' => 'G&eacute;rer les paniers',
 'gramme_racourcci' => 'gr.',
 
 // H
 'hauteur' => 'Hauteur',
 
 // I
+'inconnu' => 'inconnu',
 'info_depot' => 'G&eacute;rer vos d&eacute;p&ocirc;ts ici.',
 'info_paniers' => 'G&eacute;rez les paniers de vos clients',
 'ignorer_date_de_retrait_de_vente' => 'Ignorer la date de retrait de la vente',
 'ignorer_date_mise_en_vente' => 'Ignorer la date de mise en vente',
 'impossible_copier_dans'=>'Impossible de copier le fichier dans ',
+
+//J
+'jours' => 'jours',
+'0_pour_ne_rien_effacer' => 'Mettre 0 pour ne rien &eacute;ffacer',
+
 
 // L
 'langue_editee' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
@@ -96,10 +107,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 'mettre_a_jour' => 'Mettre &agrave; jour',
+'mettre_le_panier_a_jour' => 'Mettre le panier &agrave; jour',
+'montant_total_du_panier' => 'Montant total du panier',
 
 // N
 'nom_de_la_nouvelle_option' => 'Nom de la nouvelle option',
 'numero_du_depot' => 'Num&eacute;ro',
+'numero_tva_livraison' => 'Num&eacute;ro de TVA',
 'nombre_de_chiffre_apres_la_virgule' => 'Nombre maximum de chiffre apr&egrave;s la virgule',
 'nouveau_depot' => 'Nouveau d&eacute;p&ocirc;t',
 'nouveau_produit' => 'Cr&eacute;er un produit',
@@ -107,12 +121,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
-'paniers_en_attente' => 'Paniers temporair',
-'paniers_paye' => 'Paniers pay&eacute;',
-'paniers_reserve' => 'Paniers r&eacute;serv&eacute;',
-'paniers_traite' => 'Paniers trait&eacute;',
-'paniers_valide' => 'Paniers valid&eacute;',
+'panier' => 'Panier',
+'paniers_en_attente' => 'Paniers temporaires',
+'paniers_paye' => 'Paniers pay&eacute;s',
+'paniers_reserve' => 'Paniers r&eacute;serv&eacute;s',
+'paniers_traite' => 'Paniers trait&eacute;s',
+'paniers_valide' => 'Paniers valid&eacute;s',
+'paniers_envoye' => 'Paniers envoy&eacute;s',
 'par_defaut' => 'Par d&eacute;faut',
+'produit_dans_ce_panier' => 'Nombre de produit(s) dans ce panier',
 'pas_d_options_pour_le_produit' => 'Pas d\'option pour ce produit',
 'pas_de_depot_ici' => 'Pas de d&eacute;p&ocirc;t ici.',
 'pas_de_categorie_ici' => 'Pas de cat&eacute;gorie ici.',
@@ -128,6 +145,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'prix_base' => 'Prix de base HTVA',
 'prix_ttc' => 'Prix TTC',
 'propose' => 'propos&eacute;',
+'pour_vous_inscrire_cliquez_ici' => 'Pour vous inscrire, cliquez ici.',
 'poids' => 'Poids',
 'publie' => 'publi&eacute;',
 'poubelle' => '&agrave; la poubelle',
@@ -146,7 +164,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_au_produit' => 'Retour au produit',
 
 // S
+'separer_par_des_v_pour_en_mettre_plusieurs' => 'S&eacute;parez chaque email par des virgules \',\' pour en indiquer plusieurs',
 'squelette_du_panier' => 'Squelette du panier',
+'statut_du_panier' => 'Statut du panier',
 'stock_dans_le_depot' => 'Stock dans le d&eacute;p&ocirc;t',
 'stock_total' => 'Stock TOTAL',
 
@@ -171,6 +191,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'valider_mon_panier' => 'Valider mon panier',
 'ville_du_depot' => 'Ville',
 'visualisation_d_un_depot' => 'Visualisation d\'un d&eacute;p&ocirc;t',
+'visualisation_d_un_panier' => 'Visualisation d\'un panier',
 'visualisation_d_un_produit' => 'Visualisation de',
 'visualisation_des_paniers' => 'Visualisation des paniers',
 

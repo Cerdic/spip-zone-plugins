@@ -79,3 +79,7 @@ A.afficher_detail_stock {
 	text-align: right;
 }
 
+tr.tableau_panier td {
+	background: #DDD;
+	font-weight: bold;
+}
