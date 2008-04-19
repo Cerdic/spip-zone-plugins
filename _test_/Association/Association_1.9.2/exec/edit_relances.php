@@ -2,8 +2,8 @@
 	/**
 	* Plugin Association
 	*
-	* Copyright (c) 2007
-	* Bernard Blazin & FranÃ§ois de Montlivault
+	* Copyright (c) 2007-2008
+	* Bernard Blazin & François de Montlivault
 	* http://www.plugandspip.com 
 	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	* Pour plus de details voir le fichier COPYING.txt.
@@ -18,7 +18,7 @@
 		debut_page(_T('Gestion pour Association'), "", "");
 		
 		$url_asso = generer_url_ecrire('association');
-		$url_action_relances = generer_url_ecrire('action_relances');
+		$url_action_relances = generer_url_ecrire('action_relances','action=confirm');
 		$url_edit_relances = generer_url_ecrire('edit_relances');
 		$url_edit_labels = generer_url_ecrire('edit_labels');
 		$indexation = lire_config('association/indexation');
@@ -41,6 +41,7 @@
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('Tous les membres &agrave; relancer'));
 		
+		echo '<form method="post" action="'.$url_action_relances.'">';
 		
 		//MESSAGE
 		echo '<fieldset>';
@@ -58,21 +59,18 @@
 		echo '<table width="100%">';
 		echo '<tr>';
 		echo '<td style="text-align:right;">';
-		echo '<form method="post" action="#">';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 		echo '<select name ="statut_interne" class="fondl" onchange="form.submit()">';
-		foreach (array(ok,echu,relance,sorti,lire_config('inscription2/statut_interne')) as $var) {
+		foreach (array(ok,echu,relance,sorti,prospect) as $var) {
 			echo '<option value="'.$var.'"';
 			if ($var==$statut) {echo ' selected="selected"';}
 			echo '> '._T('asso:adherent_entete_statut_'.$var).'</option>';
 		}
 		echo '</select>';
-		echo '</form>';
 		echo '</td></tr>';
 		echo '</table>';
 		
 		//TABLEAU
-		echo '<form method="post" action="'.$url_action_relances.'">';
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr bgcolor="#DBE1C5">';
 		echo '<td><strong>';
@@ -80,16 +78,15 @@
 		else { echo _T('asso:adherent_libelle_id_adherent');} 
 		echo '</strong></td>';
 		echo '<td><strong>Nom</strong></td>';
-		echo '<td><strong>Pr&eacute;nom</strong></td>';
 		echo '<td><strong>T&eacute;l&eacute;phone</strong></td>';
 		echo '<td><strong>Portable</strong></td>';
 		echo '<td><strong>Validit&eacute;</strong></td>';
 		echo '<td><strong>Env</strong></td>';
 		echo '</tr>';
-		$query = spip_query ( "SELECT * FROM spip_auteurs_elargis LEFT JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur LEFT JOIN spip_auteurs ON spip_auteurs.id_auteur=spip_auteurs_elargis.id_auteur WHERE email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti' ORDER by nom_famille" );
+		$query = spip_query ( "SELECT * FROM spip_auteurs_elargis a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur WHERE email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti' ORDER by nom_famille" );
 		while ($data = spip_fetch_array($query)) {
-			$id_adherent=$data['id'];
-			
+			$id_auteur=$data['id_auteur'];
+			$email=$data["email"];
 			switch($data['statut_interne']) {
 				case "echu": $class= "impair"; break;
 				case "ok": $class="valide"; break;
@@ -100,24 +97,21 @@
 			echo '<tr> ';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:right">';
 			if ($indexation=="id_asso") { echo $data["id_asso"];}
-			else { echo $data["id_adherent"];}
+			else { echo $data["a.id_auteur"];}
 			echo '</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data["nom_famille"].'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['prenom'].'</td>';
+			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data["nom_famille"].' '.$data['prenom'].'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['telephone'].'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['mobile'].'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.association_datefr($data['validite']).'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center;">';
-			echo '<input name="id_adherent[]" type="checkbox" value="'.$data['id_adherent'].'" checked >';
-			echo '<input name="id_asso[]" type="checkbox" value="'.$data['id_asso'].'" checked >';
+			echo '<input name="id[]" type="checkbox" value="'.$id_auteur.'" checked="checked" >';
 			echo '<input name="statut[]" type="hidden" value="'.$statut_interne.'">';
-			echo '<input name="email[]" type="hidden" value="'.$data["email"].'">';
-			echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
+			echo '<input name="email[]" type="hidden" value="'.$email.'">';
 			echo '</td>';
 			echo '</tr>';
 		}
 		echo '</table>';
-		
+		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		echo '<div style="float:right;"><input name="submit" type="submit" value="';
 		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
 		else {echo _T('asso:bouton_envoyer');}
