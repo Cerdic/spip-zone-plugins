@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sommaire_page_long' => ',&nbsp;page&nbsp;@page@',
 	'sommaire_titre' => 'Sommaire',
 	'stats_auteur' => '@icon@ @nom@, le&nbsp;@date@',
+	'stats_date' => '@jour@/@mois@/@annee@&nbsp;&agrave;&nbsp;@h@h@m@',
 
 	// T
 	'textes_formatspip' => 'TEXTES ORIGINAUX AU FORMAT SPIP',
