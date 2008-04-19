@@ -18,13 +18,13 @@
 		global $connect_statut, $connect_toutes_rubriques;
 		
 		debut_page(_T('ban:gestion_bannieres'), "", "");
-
+		
 		
 		// LES URL'S
 		$url_upload=generer_url_ecrire('upload');
 		$url_action_bannieres=generer_url_ecrire('action_bannieres');
 		$url_retour = $_SERVER['HTTP_REFERER'];
-
+		
 		debut_gauche();
 		
 		debut_boite_info();
@@ -40,7 +40,9 @@
 		debut_cadre_relief ( "../"._DIR_PLUGIN_BANNIERES."/img_pack/bannieres.png", false, "", $titre = 'FICHE BANNIERE');
 		
 		$action=$_GET['action'];
+		$incorrect=$_GET['incorrect'];
 		$id_banniere= $_GET['id'];
+		$err_tab=(isset($_GET["message"])) ? $_GET["message"]:array();
 		
 		$query = spip_query( "SELECT * FROM spip_bannieres where id_banniere='$id_banniere' " );
 		
@@ -75,7 +77,10 @@
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea><br />';
 		echo '<label for="image"><strong>';
 		if($action=="modifie"){ echo 'Modifier la banni&egrave;re';} else {echo 'Charger la banni&egrave;re';}
-		echo '</strong> :';
+		echo '</strong> : ';
+		for ( $i=0 ; $i ; $i++ ) {
+			if($err_tab[$i]){ echo '<span style="color:red">'.$err_tab[$i].'</span><br />';}
+		}
 		echo '<input type=file name="image" id="image" class="formo" />';
 		echo '<label for="alt"><strong>Texte alternatif :</strong>';
 		echo '<input type=text name="alt" value="'.$alt.'" id="alt" class="formo" />';
