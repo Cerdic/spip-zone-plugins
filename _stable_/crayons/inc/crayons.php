@@ -360,9 +360,7 @@ function &crayons_get_table($table, &$nom_table) {
 	static $return = array();
 	static $noms = array();
 	if (!isset($return[$table])) {
-		$return[$table] = $noms[$table] = '';
-
-			$try = array('spip_'.table_objet($table), 'spip_' . $table . 's', $table . 's', 'spip_' . $table, $table);
+		$try = array('spip_'.table_objet($table), 'spip_' . $table . 's', $table . 's', 'spip_' . $table, $table);
 
 		// premiere possibilite (1.9.3) : regarder directement la base
 		if (function_exists('sql_showtable')) {
