@@ -1643,11 +1643,14 @@ if($action!='') {
          	odb_maj_decisions($annee,0,3,1);
          	odb_maj_decisions($annee,0,3,2);
          	odb_maj_decisions($annee,0,3,3);
-         	$sql="SELECT commentaire, id_matiere1, id_matiere2, id_matiere3, id_matiere4, serie, coeff1, coeff2, coeff3, coeff4 from odb_ref_ecole ecole, odb_ref_serie ser where ecole='$ecole' and ser.id=ecole.id_serie ORDER BY serie";
+         	$sql="SELECT commentaire, id_matiere1, id_matiere2, id_matiere3, id_matiere4, serie, coeff1, coeff2, coeff3, coeff4, coeff_bac from odb_ref_ecole ecole, odb_ref_serie ser where ecole='$ecole' and ser.id=ecole.id_serie ORDER BY serie";
          	$result=odb_query($sql,__FILE__,__LINE__);
-	         $colonnes=array('commentaire','id_matiere1','id_matiere2','id_matiere3','id_matiere4',"serie","coeff1",'coeff2','coeff3','coeff4');
+	         $colonnes=array('commentaire','id_matiere1','id_matiere2','id_matiere3','id_matiere4',"serie","coeff1",'coeff2','coeff3','coeff4','coeff_bac');
 				while($row=mysql_fetch_array($result)) {
 					foreach($colonnes as $col) $$col=$row[$col];
+					//CPRO : le bac aussi a son coeff
+					$tMatieres[$serie][0]['matiere']="Moyenne du bac";
+					$tMatieres[$serie][0]['coeff']=$coeff_bac;
 					for($i=1;$i<=4;$i++) {
 						if($commentaire!='') $sCommentaire=$commentaire;
 						$id_matiere=(int)${"id_matiere$i"};

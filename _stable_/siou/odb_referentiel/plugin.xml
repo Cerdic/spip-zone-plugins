@@ -1,8 +1,8 @@
 <plugin>
    <nom>ODB : Referentiel</nom>
    <auteur>Cedric PROTIERE - AUF - Janvier 2007</auteur>
-   <version>0.1</version>
-   <etat>test</etat>
+   <version>0.2</version>
+   <etat>stable</etat>
    <description>Gestion du référentiel de l'Office du Baccalauréat
    </description>
      	<lien>http://www.officedubacbenin.bj</lien> <!-- URI de documentation -->

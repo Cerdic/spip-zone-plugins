@@ -1,8 +1,8 @@
 <plugin>
    <nom>ODB : Statistiques g&eacute;n&eacute;rales SIOU</nom>
    <auteur>Cedric PROTIERE - AUF - Février 2007</auteur>
-   <version>0.1</version>
-   <etat>dev</etat>
+   <version>0.2</version>
+   <etat>stable</etat>
    <description>Diverses statistiques sur SIOU</description>
    <lien>http://www.officedubacbenin.bj</lien> <!-- URI de documentation -->
    <icon>img_pack/logo_odb_150.png</icon>
