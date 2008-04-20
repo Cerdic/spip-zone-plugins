@@ -9,8 +9,10 @@ function abcalendrier_insert_head($flux){
 }
 
 function abcalendrier_body_prive($flux) {
+   if(isset($flux['args']['exec']))
    $exec =  $flux['args']['exec'];
-   print_r($flux);
+   else $exec='';
+//   print_r($flux);
    if ($exec=='breves_voir'){
       $id_breve = $flux['args']['id_breve'];
       $row = spip_fetch_array(spip_query("SELECT * FROM spip_breves WHERE id_breve=$id_breve"));
@@ -20,8 +22,9 @@ function abcalendrier_body_prive($flux) {
 
 /*pipeline_aggiunta form evento alla amministraz privata*/
 function abcalendrier_affiche_milieu($flux) {
+   if(isset($flux['args']['exec']))
    $exec =  $flux['args']['exec'];
-   //   print_r($flux);die;
+   else $exec='';
    if ($exec=='breves_voir'){
       $id_breve = $flux['args']['id_breve'];
       $row = spip_fetch_array(spip_query("SELECT * FROM spip_breves WHERE id_breve=$id_breve"));
@@ -44,19 +47,6 @@ function abcalendrier_affiche_milieu($flux) {
    return $flux;
 }
 
-
-/**/
-
-
-/***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
- *                                                                         *
- *  Copyright (c) 2001-2007                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
