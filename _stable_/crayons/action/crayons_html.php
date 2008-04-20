@@ -250,18 +250,6 @@ class Crayon {
 					. ' name="content_'.$this->key.'_'.$champ.'" id="'.$id.'">'
 					. entites_html($val)
 					. "</textarea>\n";
-
-					// petit truc crado pour mettre la barre typo si demandee
-					// pour faire propre il faudra reprogrammer la bt en jquery
-					$meta_crayon = unserialize($GLOBALS['meta']['crayons']);
-					if ($meta_crayon['barretypo']) {
-						include_spip('inc/barre');
-						$input = "<span style='width:100%; height:20px;'>"
-							. afficher_barre("document.getElementById('$id')")
-							. '</span>'
-							. $input;
-					}
-
 					break;
 				case 'ligne':
 				default:
@@ -280,6 +268,19 @@ class Crayon {
 			foreach ($attrs as $attr=>$val) {
 				$input = inserer_attribut($input, $attr, $val);
 			}
+
+			// petit truc crado pour mettre la barre typo si demandee
+			// pour faire propre il faudra reprogrammer la bt en jquery
+			$meta_crayon = unserialize($GLOBALS['meta']['crayons']);
+			if ($meta_crayon['barretypo']
+			AND $type == 'texte') {
+				include_spip('inc/barre');
+				$input = "<div style='width:100%;height:23px;'>"
+					. afficher_barre("document.getElementById('$id')")
+					. '</div>'
+					. $input;
+			}
+
 			$return .= $input;
 		}
 		return $return;
