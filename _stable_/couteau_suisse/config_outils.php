@@ -575,7 +575,7 @@ add_outil( array(
 	'contrib'	=> 2443,
 	'jquery'	=> 'oui',
 	'code:options' => "%%radio_target_blank3%%\n%%url_glossaire_externe2%%",
-	'code:jq' => 'if (%%radio_target_blank3%%) { jQuery("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }',
+	'code:jq_init' => 'if (%%radio_target_blank3%%) { jQuery("a.spip_out,a.spip_url,a.spip_glossaire",this).attr("target", "_blank"); }',
 ));
 
 //-----------------------------------------------------------------------------//
@@ -762,6 +762,8 @@ add_outil( array(
 	// Precaution pour les articles virtuels
 	'traitement:CHAPO:pre_propre' => 'nettoyer_chapo',
 	'code:css' =>  'a.cs_glossaire:after {display:none;}',
+	// fonction glossaire_init() codee dans blocs.js : executee lors du chargement de la page et a chaque hit ajax
+	'code:jq_init' => 'glossaire_init.apply(this);',
 ));
 
 // attention : mailcrypt doit etre place apres liens_orphelins
@@ -774,7 +776,7 @@ add_outil( array(
 	'pipelinecode:post_propre' => "if(strpos(\$flux, '@')!==false) \$flux=cs_echappe_balises('', 'mailcrypt', \$flux);",
 	'code:js' => "function lancerlien(a,b){ x='ma'+'ilto'+':'+a+'@'+b; return x; }",
 	// jQuery pour remplacer l'arobase image par l'arobase texte
-	'code:jq' => "jQuery('span.spancrypt').after('<span class=\"cryptOK\">&#6'+'4;<\/span>'); jQuery('span.spancrypt').remove();",
+	'code:jq_init' => "jQuery('span.spancrypt', this).attr('class','cryptOK').html('&#6'+'4;');",
 	'code:css' => 'span.spancrypt {background:transparent url(' . url_absolue(find_in_path('img/mailcrypt/leure.gif'))
 		. ') no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none;}',
 	'traitement:EMAIL' => 'mailcrypt',
@@ -793,6 +795,8 @@ add_outil( array(
 	'id' => 'blocs',
 	'categorie'	=> 'typo-racc',
 	'contrib' => 2583,
+	// fonction blocs_init() codee dans blocs.js : executee lors du chargement de la page et a chaque hit ajax
+	'code:jq_init' => 'blocs_init.apply(this);',
 	'jquery'	=> 'oui',
 	'pipeline:pre_typo' => 'blocs_pre_typo',
 	'pipeline:BT_toolbox' => 'blocs_BarreTypo',

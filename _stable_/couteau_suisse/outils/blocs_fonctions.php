@@ -13,13 +13,15 @@ Mon bloc depliable        / qui est aussi l'emplacement pour l'Ajax si le fragme
 */
 
 function balise_BLOC_TITRE($p) {
+	// statut binaire : bit1=ajax bit2=titre bit3=resume bit4=debut
+	
 	global  $bloc_stade; /* 2 = ajax; 1 = titre pas d'ajax */
 	
 	if (($nom = interprete_argument_balise(1,$p))!==NULL){
 		$ajax=' blocs_ajax ';
 		$bloc_stade[]=2;
 	} else {
-		$nom="'#'";
+		$nom="'javascript:;'";
 		$ajax="";
 		$bloc_stade[]=1;
 	}

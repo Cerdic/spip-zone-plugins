@@ -217,9 +217,9 @@ function cs_aide_pipelines() {
 function cs_insert_header($f, $type) {
 	if ($type=='css') {
 		include_spip('inc/filtres');
-		return '<link rel="stylesheet" href="'.url_absolue(direction_css($f)).'" type="text/css" media="projection, screen" />'."\n";
+		return '<link rel="stylesheet" href="'.url_absolue(direction_css($f)).'" type="text/css" media="projection, screen" />';
 	} elseif ($type=='js')
-		return '<script type="text/javascript" src="'.url_absolue($f).'"></script>'."\n";
+		return '<script type="text/javascript" src="'.url_absolue($f).'"></script>';
 }
 // sauve la configuration dans un fichier tmp/couteau-suisse/config.php
 function cs_sauve_configuration() {
@@ -262,7 +262,7 @@ function cs_initialise_includes() {
 	// liste des pipelines utilises
 	$traitements_utilises = array();
 	// variables temporaires
-	$temp_css = $temp_js = $temp_jq = $temp_filtre_imprimer = array();
+	$temp_css = $temp_js = $temp_jq = $temp_jq_init = $temp_filtre_imprimer = array();
 	// pour la fonction inclure_page()
 	include_spip('public/assembler');
 	// inclure d'office outils/cout_fonctions.php
@@ -305,6 +305,7 @@ function cs_initialise_includes() {
 			if (isset($outil['code:fonctions'])) $infos_pipelines['code_fonctions'][] = $outil['code:fonctions'];
 			if (isset($outil['code:css'])) $temp_css[] = cs_parse_code_js($outil['code:css']);
 			if (isset($outil['code:js'])) $temp_js[] = cs_parse_code_js($outil['code:js']);
+			if (isset($outil['code:jq_init'])) $temp_jq_init[] = cs_parse_code_js($outil['code:jq_init']);
 			if (isset($outil['code:jq'])) $temp_jq[] = cs_parse_code_js($outil['code:jq']);
 			// recherche d'un fichier monoutil_options.php ou monoutil_fonctions.php pour l'inserer dans le code
 			if ($temp=cs_lire_fichier_php("outils/{$inc}_options.php")) 
@@ -321,11 +322,15 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	if (count($temp_css))
 		$cs_metas_pipelines['header'][] = "<style type=\"text/css\">\n"
 			.compacte_css(join("\n", $temp_css))."\n</style>";
+	if (count($temp_jq_init)) {
+		$temp_js[] = "var cs_init = function() {\n".join("\n", $temp_jq_init)."\n}\nif(typeof onAjaxLoad=='function') onAjaxLoad(cs_init);";
+		$temp_jq[] = "cs_init();";
+	}
 	if (count($temp_jq))
 		$temp_js[] = "if (window.jQuery) jQuery(document).ready(function(){\n".join("\n", $temp_jq)."\n});";
 	if (count($temp_js))
 		$cs_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
-			.compacte_js(join("\n", $temp_js))."\n// --></script>";
+			./*compacte_js*/(join("\n", $temp_js))."\n// --></script>\n";
 	// mise en code des traitements trouves
 	foreach($traitements_utilises as $b=>$balise) {
 		foreach($balise as $p=>$precision) {
