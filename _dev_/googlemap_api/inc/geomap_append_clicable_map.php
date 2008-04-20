@@ -53,6 +53,9 @@ function inc_geomap_append_clicable_map_dist($target_id,$target_lat_id,$target_l
 					if(point){
 						marker = new GMarker(point,{draggable:true}); 
 						formMap.addOverlay(marker);
+						var center = marker.getPoint();
+						jQuery('#$target_lat_id').val(center.lat());
+						jQuery('#$target_long_id').val(center.lng());
 						GEvent.addListener(marker, 'dragend', function(){
 							var center = marker.getPoint();
 		  					jQuery('#$target_lat_id').val(center.lat());
