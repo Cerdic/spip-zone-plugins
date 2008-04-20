@@ -5,8 +5,9 @@
 	//<![CDATA[
 	URLbase = "[(#CHEMIN{plugins}|url_absolue)]";
 	//var numero = 1;
-	var map[(#ENV{id_carte_gis}|?{#ENV{id_carte_gis},Spip})];
-	var markerManager[(#ENV{id_carte_gis}|?{#ENV{id_carte_gis},Spip})];
+	[(#SET{id_carte_gis,#ENV{id_carte_gis,'Spip'}})]
+	var map[(#GET{id_carte_gis})];
+	var markerManager[(#GET{id_carte_gis})];
 	<BOUCLE_centrado(GIS){id_article?}{id_rubrique ?}{0,1}>
 	#SET{latitude,#ENV{latit,#LAT}}
 	#SET{lonxitude,#ENV{lonxit,#LONX}}
@@ -20,29 +21,29 @@
 	[(#ENV{type}|=={'hybride'}|?{#SET{type,G_HYBRID_MAP},''})]
 	[(#ENV{type}|=={''}|?{#SET{type,G_SATELLITE_MAP},''})]
 	
-	function load[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]() {
+	function load[(#GET{id_carte_gis})]() {
 		if (GBrowserIsCompatible()) {
 			// facelo mapa
-			map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})] = new GMap2(document.getElementById("map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]"));
-			[(#GET{control}|=={'custom'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new mapTypeControl());})]
-			[(#GET{control}|=={'custom'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new mapZoomControl());})]
-			[(#GET{control}|=={'custom'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new mapMoveControl());})]
-			[(#GET{control}|=={'small'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new GSmallMapControl());})]
-			[(#GET{control}|=={'small'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new GMapTypeControl());})]
-			[(#GET{control}|=={'large'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new GLargeMapControl());})]
-			[(#GET{control}|=={'large'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new GMapTypeControl());})]
-			[(#ENV{rounded}|=={'true'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new cornerControl());})]
-			map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{zoom,#CONFIG**{geomap_default_zoom,0}}, #GET{type});
-			centermap[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})] = map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].getCenter();
-			map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].enableDoubleClickZoom();
-			map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].enableContinuousZoom();
-			markerManager[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})] = new GMarkerManager(map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]);
+			map[(#GET{id_carte_gis})] = new GMap2(document.getElementById("map[(#GET{id_carte_gis})]"));
+			[(#GET{control}|=={'custom'}|?{map[(#GET{id_carte_gis})].addControl(new mapTypeControl());})]
+			[(#GET{control}|=={'custom'}|?{map[(#GET{id_carte_gis})].addControl(new mapZoomControl());})]
+			[(#GET{control}|=={'custom'}|?{map[(#GET{id_carte_gis})].addControl(new mapMoveControl());})]
+			[(#GET{control}|=={'small'}|?{map[(#GET{id_carte_gis})].addControl(new GSmallMapControl());})]
+			[(#GET{control}|=={'small'}|?{map[(#GET{id_carte_gis})].addControl(new GMapTypeControl());})]
+			[(#GET{control}|=={'large'}|?{map[(#GET{id_carte_gis})].addControl(new GLargeMapControl());})]
+			[(#GET{control}|=={'large'}|?{map[(#GET{id_carte_gis})].addControl(new GMapTypeControl());})]
+			[(#ENV{rounded}|=={'true'}|?{map[(#GET{id_carte_gis})].addControl(new cornerControl());})]
+			map[(#GET{id_carte_gis})].setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{zoom,#CONFIG**{geomap_default_zoom,0}}, #GET{type});
+			centermap[(#GET{id_carte_gis})] = map[(#GET{id_carte_gis})].getCenter();
+			map[(#GET{id_carte_gis})].enableDoubleClickZoom();
+			map[(#GET{id_carte_gis})].enableContinuousZoom();
+			markerManager[(#GET{id_carte_gis})] = new GMarkerManager(map[(#GET{id_carte_gis})]);
 			
 			// Chargement KML si attache a l'article
 			<BOUCLE_kml_art(documents){id_article}{0,1}{extension=kml}>
 			[(#ENV{id_article}|=={''}|?{'',
 			var kml = new GGeoXml("[(#URL_DOCUMENT|url_absolue)]");
-			map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addOverlay(kml)
+			map[(#GET{id_carte_gis})].addOverlay(kml)
 			})]
 			</BOUCLE_kml_art>
 			
@@ -50,24 +51,24 @@
 			<BOUCLE_kml_rub(documents){id_rubrique}{0,1}{extension=kml}>
 			[(#ENV{id_rubrique}|=={''}|?{'',
 			var kml = new GGeoXml("[(#URL_DOCUMENT|url_absolue)]");
-			map[(#ENV{id_carte_gis})].addOverlay(kml)
+			map[(#GET{id_carte_gis})].addOverlay(kml)
 			})]
 			</BOUCLE_kml_rub>
 			<//B_kml_art>
 			
 			//leemo-lo documento dos marcadores
-       			$.get('[(#URL_PAGE{rss-gis})]', {[limit:(#ENV{limit, 50})][, id_rubrique:(#ID_RUBRIQUE)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)]}, function(xml[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]){
+       			$.get('[(#URL_PAGE{rss-gis})]', {[limit:(#ENV{limit, 50})][, id_rubrique:(#ID_RUBRIQUE)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)]}, function(xml[(#GET{id_carte_gis})]){
     				//xml almacena en un objeto xml los datos recogidos del documento leido
-    				$("item", xml[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]).each(function(item[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]){
-    					var xmlItem[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})] = xml[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].documentElement.getElementsByTagName("item")[item[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]];
-    					agregarMarcador(xmlItem[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})],[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})],0,17,markerManager[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]);
+    				$("item", xml[(#GET{id_carte_gis})]).each(function(item[(#GET{id_carte_gis})]){
+    					var xmlItem[(#GET{id_carte_gis})] = xml[(#GET{id_carte_gis})].documentElement.getElementsByTagName("item")[item[(#GET{id_carte_gis})]];
+    					agregarMarcador(xmlItem[(#GET{id_carte_gis})],[(#GET{id_carte_gis})],0,17,markerManager[(#GET{id_carte_gis})]);
 					});
-					markerManager[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].refresh();
+					markerManager[(#GET{id_carte_gis})].refresh();
    				});
    			}
 		}
 		$(document).ready(function(){
-			load[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]();
+			load[(#GET{id_carte_gis})]();
 		})
 	//]]>
 	</script>
