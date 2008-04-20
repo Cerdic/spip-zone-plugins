@@ -180,7 +180,7 @@ function exec_odb_ref() {
          }
       } elseif ($champ=='ecole') {
          $colspan="><small>Action</small></TD><TD colspan=3 ";
-         $sql="SELECT ecole.id, ecole, commentaire, id_serie, id_matiere1, id_matiere2, id_matiere3, id_matiere4, coeff1, coeff2, coeff3, coeff4, serie\n".
+         $sql="SELECT ecole.id, ecole, commentaire, id_serie, id_matiere1, id_matiere2, id_matiere3, id_matiere4, coeff1, coeff2, coeff3, coeff4, serie, coeff_bac\n".
          " from odb_ref_ecole ecole\n".
          " left join odb_ref_serie serie on ecole.id_serie=serie.id\n".
          " ORDER BY ecole, serie";
@@ -192,17 +192,20 @@ function exec_odb_ref() {
          $trTitre="<tr><th>#".ucwords($champ)."</th><th>".ucwords($champ)."</th><th>S&eacute;rie</th><th>Mati&egrave;re</th><th>Coeff</th></tr>\n";
          //echo $trTitre;
          while($row=mysql_fetch_array($result)) {
-            foreach(array('id','ecole','commentaire','id_serie','serie','id_matiere1','id_matiere2','id_matiere3','id_matiere4','coeff1','coeff2','coeff3','coeff4') as $col)
+            foreach(array('id','ecole','commentaire','id_serie','serie','id_matiere1','id_matiere2','id_matiere3','id_matiere4','coeff1','coeff2','coeff3','coeff4','coeff_bac') as $col)
             	$$col=$row[$col];
             $textCommentaire="<TEXTAREA COLS=80 ROWS=2 class='fondo' name='set|commentaire|$id'>$commentaire</TEXTAREA>\n";
             echo "<tr><td colspan=7><hr size=1/></td></tr>\n";
             if($ecole!=$old_ecole) {
-            	echo "<tr><th colspan=2 style='color:#f00;'>$ecole</th><td colspan=3>$textCommentaire</td></tr>\n";
+            	echo "<tr><th colspan=2 style='color:#f00;'>$ecole</th>\n"
+            		."<td colspan=3><label for='set|commentaire|$id'>Description / commentaire <b>$ecole</b></label><br/>$textCommentaire</td></tr>\n"
+            		;
             	echo $trTitre;
             }
+            // CPRO : le premier input permet de definir le coeff du bac
             $selectSerie="<SELECT class='fondo' NAME='set|id_serie|$id'>".formOptionsRefInSelect('serie',$id_serie)."</SELECT>\n";
-            $selectMatieres='';
-            $inputCoeffs='';
+            $selectMatieres="<label for='set|coeff_bac|$id'>Coeff. bac pour <b>$ecole</b> s&eacute;rie $serie</label><br/>";
+            $inputCoeffs="<input name='set|coeff_bac|$id' value='$coeff_bac' class='fondo' SIZE=2 MAXLENGTH=2/><br/>";
             for ($i=1;$i<5;$i++) {
             	$inputCoeffs.="<INPUT CLASS='fondo' NAME='set|coeff$i|$id' VALUE='".${"coeff$i"}."' SIZE=2 MAXLENGTH=2/><br/>\n";
             	if($id_serie==0) 

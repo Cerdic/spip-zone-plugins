@@ -45,3 +45,7 @@ ADD `jury` SMALLINT NOT NULL AFTER `id_serie` ;
 -- odb_decisions
  ALTER TABLE `odb_decisions` CHANGE `delib2` `delib2` ENUM( '', 'Oral', 'Refuse', 'Reserve', 'Passable', 'Abien', 'Bien', 'TBien' ) 
  CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL  
+ 
+-- ==================== Modif5
+-- odb_ref_ecole : ajout du coefficient du bac pour chaque ecole/serie
+ ALTER TABLE `odb_ref_ecole` ADD `coeff_bac` TINYINT NOT NULL DEFAULT '0' COMMENT 'Coefficient du bac';
