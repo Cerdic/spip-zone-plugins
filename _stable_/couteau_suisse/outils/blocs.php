@@ -23,7 +23,7 @@ function blocs_callback($matches) {
 		$div = ' class="blocs_invisible"';
 	}
 	$b = strlen($matches[2])?" cs_bloc$matches[2]":''; 
-	return "<div class='cs_blocs$b'><h4 class='blocs_titre$h'><a href='javascript:;'>$t[0]</a></h4><div$div>\n$t[1]\n</div></div>";
+	return "<div class='cs_blocs$b'><h4 class='blocs_titre$h blocs_click'><a href='javascript:;'>$t[0]</a></h4><div$div>\n$t[1]\n</div></div>";
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
