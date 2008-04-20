@@ -136,7 +136,7 @@ function ez_query($sql,$fichier,$ligne,$obsc='****') {
 		$obsc=trim(str_replace(array('\'','"'),'',$obsc));
 	}
 	$fichier=substr($fichier,strpos($fichier,$cherche));
-	$result = mysql_query($sql) or die("<div style='margin:5px;border:1px outset red;background-color:#ddf;'>"
+	$result = spip_query($sql) or die("<div style='margin:5px;border:1px outset red;background-color:#ddf;'>"
 		."<div style='border:1px none red;background-color:#bbf;'>".KO." - Erreur dans la requete</div><pre>"
 		.wordwrap(str_replace($obsc,'****',$sql),65)
 		."</pre><small>$fichier<b>[$ligne]</b></small><br/><div style='border:1px none red;background-color:#bbf;'>"
@@ -191,10 +191,10 @@ function code2utf($num)
     return '';
 }
 
-/**
-* Fonction recuperer sur php.net pour realiser la meme fonction que str_ireplace
-*/
 if(!function_exists('str_ireplace')){
+	/**
+	* Fonction recuperee sur php.net pour realiser la meme fonction que str_ireplace
+	*/
   function str_ireplace($search,$replace,$subject){
     $token = chr(1);
     $haystack = strtolower($subject);
@@ -207,12 +207,11 @@ if(!function_exists('str_ireplace')){
     return $subject;
   }
 
-/**
-* Fonction recuperer sur php.net pour realiser la meme fonction que fputcsv
-*/
 if (!function_exists('fputcsv'))
 {
- 
+	/**
+	* Fonction recuperee sur php.net pour realiser la meme fonction que fputcsv
+	*/
   function fputcsv(&$handle, $fields = array(), $delimiter = ';', $enclosure = '"')
   {
     $str = '';

@@ -35,12 +35,26 @@ function exec_ezsql() {
 	global $connect_statut, $connect_toutes_rubriques, $debug, $txt_gauche, $txt_droite, $txt_debug, $tab_referentiel, $odb_referentiel,$odb_mapping;
 
 	$annee=date("Y");
-	$aide="Cliquez sur une des tables ou tapez une requ&ecirc;te ici puis cliquez sur le bouton [Ex&eacute;cuter]";	
+	$aide="Cliquez sur une des tables &agrave; gauche (vous pouvez commencer par cliquer sur \"spip\" par exemple) ou tapez une requ&ecirc;te ici puis cliquez sur le bouton [Ex&eacute;cuter]";	
+	$requeteExemple="SELECT *\\n FROM spip_articles\\n LIMIT 0,10";
+	$aideEnregistrer=html_entity_decode_utf8("Nom de la requête");
+	
+	//FIXME normalement ca devrait etre dans le script d'installation automatique du plugin. Mais je comprends pas comment ca marche :(
+	//cf http://www.spip-contrib.net/Plugin-xml 
+	$sql="CREATE TABLE IF NOT EXISTS `ez_sql` (\n"
+		."`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,\n"
+		."`nomRequete` VARCHAR( 64 ) NOT NULL ,\n"
+		."`requete` TEXT NOT NULL ,\n"
+		."`login` VARCHAR( 64 ) NOT NULL\n"
+		.") COMMENT = 'Requetes ezSQL';"
+		;
+	ez_query($sql,__FILE__,__LINE__);
 	
 	debut_page(_T('ezSQL - Export CSV'), "", "");
 //	echo "<br /><br />";
 	gros_titre(_T('ezSQL - Export CSV'));
-	
+//	print_r($_POST);
+
 	if(isset($_REQUEST['table'])) {
 		$isExecute=true;
 		$sqlNormale="SELECT *\n FROM ".$_REQUEST['table']."\n LIMIT 0,30";
@@ -53,6 +67,15 @@ function exec_ezsql() {
 		$sqlNormale=$aide;
 	}
 	$nomTable='resultat';
+	
+	if(isset($_REQUEST['enregistrer'])) {
+		$nomRequete=$_REQUEST['nomRequete'];
+		ez_query("DELETE FROM ez_sql WHERE nomRequete='$nomRequete'",__FILE__,__LINE__);
+		if(isset($_REQUEST['public'])) $login='*';
+		else $login=$GLOBALS['auteur_session']['login'];
+		$sql="INSERT INTO ez_sql(nomRequete,requete,login) VALUES ('$nomRequete','$sqlNormale','$login')";
+		ez_query($sql,__FILE__,__LINE__);
+	}
 	
 	if($isExecute) {
 		$sqlNormale=ez_propre($sqlNormale);
@@ -99,7 +122,9 @@ function exec_ezsql() {
 		$result=ez_query($sql,__FILE__,__LINE__);
 		while($row=mysql_fetch_row($result)) {
 			$table=$row[0];
-			list($prefixe,$reste)=explode(strrchr($table,'_'),$table);
+			if(substr_count($table,'_')>0)
+				list($prefixe,$reste)=explode(strrchr($table,'_'),$table);
+			else $prefixe=$table;
 			if(substr_count($prefixe,'spip')>0) $prefixe='spip';
 			if((trim(strtolower($table)))==trim(strtolower($nomTable))) {
 				$sTableEnCours=$table;
@@ -119,14 +144,14 @@ function exec_ezsql() {
 						default:
 							$html="style='cursor:pointer;border-bottom:1px dotted #000;' title='Cl&eacute; $row2[3]'";
 					}
-					$tBody[$cpt]="<td><span onclick=\"champ=document.forms['form_requete'].requete;champ.value+='$row2[0], ';champ.focus();\" $html>".$row2[0]."</span></td><td>".$row2[1]."</td><td>".$row2[3]."</td>";
+					$tBody[$cpt]="<td><span onclick=\"champ=document.forms['formRequete'].requete;champ.value+='$row2[0], ';champ.focus();\" $html>".$row2[0]."</span></td><td>".$row2[1]."</td><td>".$row2[3]."</td>";
 					$cpt++;
 				}
 			} else
 				$table="<A class='table' HREF='".generer_url_ecrire('ezsql')."&table=$table' style='color:#999;'>$table</A>";
 			$tTable[$prefixe][]=$table;
 		}
-		echo "<dl id='groupes'>\n";
+		echo "<dl id='groupes'>\n<div style='background-color:#ddd;padding:2px;'>Cliquez sur un groupe de tables ci-dessous (par exemple <b>spip</b>)</div>\n";
 		foreach($tTable as $prefixe=>$t1) {
 			echo "<br/>\n\t<dt style='font-weight:bold;font-size:12px;cursor:help;'>$prefixe</dt>\n";
 			echo "\t<dd style='border:dotted 1px black;background-color:#ddd;'>".join('<br/>',$t1)."</dd>\n";
@@ -136,7 +161,7 @@ function exec_ezsql() {
 	creer_colonne_droite();
 	if($isSelect) {
 		debut_boite_info();
-			echo ez_html_table("<A href='javascript:;' title='Ajouter la table $sTableEnCours' onclick=\"champ=document.forms['form_requete'].requete;champ.value+='$sTableEnCours';champ.focus();\">$sTableEnCours</A>",$tBody,"<th>Colonne</th><th>Type</th>");
+			echo ez_html_table("<A href='javascript:;' title='Ajouter la table $sTableEnCours' onclick=\"champ=document.forms['formRequete'].requete;champ.value+='$sTableEnCours';champ.focus();\">$sTableEnCours</A>",$tBody,"<th>Colonne</th><th>Type</th>");
 			$sql="SELECT count(*) from $sTableEnCours";
 			$result=ez_query($sql,__FILE__,__LINE__);
 			$nbRows=mysql_result($result,0,0);
@@ -145,17 +170,37 @@ function exec_ezsql() {
 		fin_boite_info();
 	}
 	debut_droite();
-	debut_cadre_relief( "", false, "", $titre = _T('Requ&ecirc;te SQL'));
+	$result=ez_query("SELECT nomRequete, requete from ez_sql WHERE login='*' OR login='".$GLOBALS['auteur_session']['login']."'",__FILE__,__LINE__);
+	$nb=spip_num_rows($result);
+	if($nb>0) {	
+		$selectHistorique="<SELECT NAME='historique'>\n"
+			."<OPTION VALUE=''>-=[Historique]=-</OPTION>\n";
+		while($row=mysql_fetch_array($result)) {
+			foreach(array('nomRequete','requete') as $col) $$col=addslashes($row[$col]);
+			//if($nomRequete==$_REQUEST['nomRequete']) $selected='SELECTED';
+			//else $selected='';
+			$selectHistorique.="<OPTION value='".$requete."' $selected>$nomRequete</OPTION>\n";
+			echo $requete;
+		}
+		$selectHistorique.="</SELECT>\n";
+	} else $selectHistorique='';
+	debut_cadre_relief( "", false, "", $titre = _T("Requ&ecirc;te SQL $selectHistorique"));
 
 	//echo "<IMG SRC='"._DIR_PLUGIN_EZSQL."/img_pack/logo_odb.png' alt='Office du bac' ALIGN='absmiddle'><br><br>\n";
 
-	echo "<form name='form_requete' method='POST' action='".generer_url_ecrire('ezsql')."'>\n";
+	echo "<form name='formRequete' method='POST' action='".generer_url_ecrire('ezsql')."'>\n";
 	if($isExecute) echo "<small style='font-family:monospace;'>$sqlAff</small>\n";
 	echo "<textarea name='requete' cols=100 rows=5 class='forml' style='color:#555;'>\n"
 		.($sqlNormale)."</textarea>"
 		;
-	echo "<input name='submit' type='submit' value='Ex&eacute;cuter' class='fondo'>";
-	//if($isExecute) echo "<input name='nom_requete' value='$nomFichier' style='border:1px dotted black;margin:1px;'/><input type='submit' name='enregistrer' value='Enregistrer cette requ&ecirc;te' class='fondo'/>\n";
+	echo "<input name='executer' type='submit' value='Ex&eacute;cuter' class='fondo'>";
+	if($isExecute) {
+		echo "<fieldset><legend>Enregistrer cette requ&ecirc;te (historique)</legend><small>"
+			."<label for='nomRequete'>$aideEnregistrer</label> <input name='nomRequete' value='$nomRequete' class='fondo'\"/>\n"
+			."<br/><label for='public'>Requ&ecirc;te publique (tous les auteurs peuvent la voir)</label> <input type='checkbox' name='public' checked><br/>\n"
+			."<input type='submit' name='enregistrer' value='Enregistrer cette requ&ecirc;te' class='fondo' onClick=\"if(document.forms['formRequete'].nomRequete.value=='') {alert('Veuillez specifier un nom pour enregistrer cette requete');return false;}\"/></small></fieldset>\n"
+			;
+	}
 	echo "</form>\n";
 
 	if ($isExecute){
@@ -212,8 +257,8 @@ function exec_ezsql() {
 	fin_cadre_relief();
 	if($isExecute && $isSelect) 
 		echo '<br/>'.ez_html_table("Aper&ccedil;u de la requ&ecirc;te",$tbody,"<th><small>".join('</small></th><th><small>',array_slice($tCol,0,5))."</small></th>",'statistiques-24.gif');
-	
-	$aide=html_entity_decode_utf8($aide,ENT_COMPAT,'UTF-8');
+	$aide=html_entity_decode_utf8($aide);
+
 	$jquery= <<<FINSCRIPT
 
 $(document).ready(function() {
@@ -237,6 +282,20 @@ $(document).ready(function() {
 		if(this.value=='') {
 			this.value='$aide';
 			this.blur();
+		}
+	});
+	
+	$("select[@name=historique]").change(function() {
+		forml=document.forms['formRequete'];
+		forml.requete.value=this.value;
+		forml.nomRequete.value='';
+	});
+	
+	$("form[@name=formRequete]").submit(function() {
+		if(this.requete.value=='$aide') {
+			alert('Veuillez saisir une requete valide, par exemple :\\n\\n$requeteExemple');
+			this.requete.value='$requeteExemple';
+			return false;
 		}
 	});
 
