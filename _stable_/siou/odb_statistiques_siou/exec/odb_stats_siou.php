@@ -1670,7 +1670,7 @@ if($action!='') {
 	         		"and ecole='$ecole' and decis.delib1='Admissible' and decis.delib2!='Oral' and decis.delib2!='Reserve'\n".
 	         		"and sex.id=can.sexe\n".
 	         		"order by id_table";
-			         echo "<pre>".htmlspecialchars($sql)."</pre>\n";
+			      //   echo "<pre>".htmlspecialchars($sql)."</pre>\n";
 	         	$result=odb_query($sql,__FILE__,__LINE__);
 	         	$colonnes=array('id_table','sexe','prefixe','nom','prenoms',"moyenne$i","coeff$i",'serie','moyenne_bac','mention');
 					while($row=mysql_fetch_array($result)) {
