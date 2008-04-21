@@ -1,0 +1,19 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+        test arbo
+	</nom>
+	<auteur>Distribu&#233; sous licence GNU/GPL</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+    test
+	</etat>
+	<description>
+	    Gestion d arborescence intervallaire
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>
+	sql_arbo
+	</prefix>
+</plugin>
