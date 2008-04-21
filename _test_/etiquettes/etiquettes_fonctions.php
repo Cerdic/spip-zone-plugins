@@ -16,4 +16,12 @@ function etiquettes_position_quot($valeur){
 	
 }
 
+function ajouter_etiquettes($texte, $id, $groupe_defaut='tags', $type, $id_type, $clear){
+	
+	include_spip('inc/tag-machine');
+	$clear = ($clear == "true");
+	ajouter_liste_mots($texte, $id, $groupe_defaut, $type, $id_type, $clear);
+	
+}
+
 ?>
