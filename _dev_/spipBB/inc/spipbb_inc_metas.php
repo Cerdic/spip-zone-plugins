@@ -100,6 +100,9 @@ function spipbb_init_metas()
 	$spipbb_meta['affiche_bouton_rss'] = isset($old_meta['affiche_bouton_rss']) ? $old_meta['affiche_bouton_rss'] : 'un';
 	$spipbb_meta['affiche_membre_defaut'] = isset($old_meta['affiche_membre_defaut']) ? $old_meta['affiche_membre_defaut'] : 'non'; // c: 27/12/7 par defaut non pour respecter demande Scoty
 	$spipbb_meta['log_level'] = isset($old_meta['log_level']) ? $old_meta['log_level'] : _SPIPBB_LOG_LEVEL; // c: 27/12/7 par defaut le niveau de log est a 3 (voir inc/spipbb_common
+	$spipbb_meta['derniere_verif'] = isset($old_meta['derniere_verif']) ? $old_meta['derniere_verif'] : 0; // pas de date de verification par defaut
+	$spipbb_meta['version_distant'] = isset($old_meta['version_distant']) ? $old_meta['version_distant'] : '0'; // pas de date de version distante par defaut
+
 	// chemin icones et smileys ?
 
 	// spam words

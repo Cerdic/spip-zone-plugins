@@ -2,6 +2,7 @@
 
  * correction requete sur statut auteur : table spip classique !
  * order by doit etre un array !
+ * 0.4.9.3 Nouvelles metas pour la verification de version de mise à jour avec délais de rafraichissement !
 
 
 2008-04-17  chryjs  <chryjs!@!free!.!fr>

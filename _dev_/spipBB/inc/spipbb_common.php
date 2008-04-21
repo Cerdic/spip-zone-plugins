@@ -70,6 +70,7 @@ else @define('_SPIP19200', true);
 
 // Pour la verifciation d'une nouvelle version
 define('_URL_SPIPBB_PLUGIN_XML', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/_dev_/spipBB/plugin.xml?format=txt');
+define('_URL_CHECK_DELAY',3600); // Delais entre 2 verifications (1h)
 define('_URL_SPIPBB_PLUGIN_ZIP','http://files.spip.org/spip-zone/plugin-spipBB.zip');
 define('_URL_SPIPBB_SVN_CHANGESET','http://zone.spip.org/trac/spip-zone/changeset/@rev_num@/_plugins_/_dev_/spipBB/');
 

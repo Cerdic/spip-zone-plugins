@@ -72,7 +72,13 @@ function signature_spipbb() {
 } // signature_spipbb
 
 function signature_spipbb_admin() {
-	$version_distant = spipbb_version_distant();
+	if ( (!isset($GLOBALS['spipbb']['derniere_verif']) OR !isset($GLOBALS['spipbb']['version_distant'])) OR (time()-$GLOBALS['spipbb']['derniere_verif']>_URL_CHECK_DELAY)) {
+		$GLOBALS['spipbb']['version_distant']= $version_distant = spipbb_version_distant();
+		$GLOBALS['spipbb']['derniere_verif'] = time();
+		spipbb_save_metas();
+	} else {
+		$version_distant = $GLOBALS['spipbb']['version_distant'];
+	}
 
 	// si on doit mettre a jour lien vers le zip et le numero de version, sinon message "ok"
 	$maj = version_compare($version_distant,$GLOBALS['spipbb_plug_version'],">") ?
