@@ -130,6 +130,8 @@ function sql_arbre_get_feuilles($table ='', $serveur='', $option=true) {
  *
  *  Fait un sql_insertq dans l'abre
  *
+ *  \param $parent : tableau de clefs id (id du parent)et champ (nom du champ de la clef)
+ *  \param $bord : droit ou gauche indique le coté d'insertion, droit par defaut
  *  \param $table table à traiter
  *  \param $serveur serveur sollicité
  *  \param $option peut avoir 3 valeurs 
@@ -139,10 +141,12 @@ function sql_arbre_get_feuilles($table ='', $serveur='', $option=true) {
  *
  *  \return ressource une ressource à traiter par un sql_fetch
  */
-function sql_arbre_set_feuille($table ='',$parent = array(), $couples= array(),  $serveur='', $option=true) {
+function sql_arbre_set_feuille($table ='',$parent = array(),$bord = 'droit', $couples= array(),  $serveur='', $option=true) {
 
     $champ_parent = $parent['champ'];    
     $id_parent = $parent['id'];
+    
+    print_r($parent);
 
     //recherche les bords du parent
     $bordures = sql_fetsel(
@@ -151,7 +155,7 @@ function sql_arbre_set_feuille($table ='',$parent = array(), $couples= array(), 
             'bord_droit'
         ),
         $table,
-        $parent,
+        $parent['champ'].'='.$parent['id'],
         '',
         '',
         '',
@@ -159,13 +163,26 @@ function sql_arbre_set_feuille($table ='',$parent = array(), $couples= array(), 
         $serveur
     );
 
+    print_r($bordures);
+
+    if ($bord=='aine' || $bord=='droit') {
+        $bordure = $bordures['bord_droit'];
+        $champ =  'bord_droit';
+    }
+
+    if ($bord=='cadet' || $bord=='gauche') {
+        $bordure = $bordures['bord_gauche'] + 1;
+        $champ =  'bord_gauche';
+    }
+
+
     //mise à jour bord droit
     sql_update(
         $table,
         array(
             'bord_droit' => 'bord_droit + 2'
         ),
-        "bord_droit >= ".$bordures['bord_droit'],
+        "bord_droit >= ".$bordure,
         '',
         $serveur
     );
@@ -176,14 +193,14 @@ function sql_arbre_set_feuille($table ='',$parent = array(), $couples= array(), 
         array(
             'bord_gauche' => 'bord_gauche + 2'
         ),
-        "bord_gauche >= ".$bordures['bord_droit'],
+        "bord_gauche >= ".$bordure,
         '',
         $serveur
     );
     
     $bords =array(
-        'bord_gauche' => $bordures['bord_droit'],
-        'bord_droit' => $bordures['bord_droit']+1 
+        'bord_gauche' => $bordure,
+        'bord_droit' => $bordure +1 
     );
     
     $couples = array_merge($couples,$bords);
