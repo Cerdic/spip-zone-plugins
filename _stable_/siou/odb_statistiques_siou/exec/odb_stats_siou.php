@@ -1662,7 +1662,7 @@ if($action!='') {
 				}
          	$msg="<h1>Classement $ecole $annee</h1>\n";
 				for($i=1;$i<=4;$i++) {
-         		$sql ="select can.id_table, sex.sexe, pre.prefixe, nom, prenoms, note*ecole.coeff$i moyenne$i, ecole.coeff$i, ser.serie, decis.moyenne moyenne_bac, decis.delib2 mention\n".
+         		$sql ="select can.id_table, sex.sexe, pre.prefixe, nom, prenoms, note*ecole.coeff$i moyenne$i, ecole.coeff$i coeff$i, coeff_bac, ser.serie, decis.moyenne moyenne_bac, decis.delib2 mention\n".
 	         		"from odb_ref_serie ser, odb_ref_ecole ecole, odb_ref_sexe sex, odb_notes notes, odb_decisions decis, odb_candidats can\n".
 	         		"left join odb_ref_prefixe pre on can.prefixe=pre.id\n".
 	         		"where notes.id_table=can.id_table and notes.id_table=decis.id_table and notes.annee=$annee and can.annee=$annee and decis.annee=$annee\n".
@@ -1670,7 +1670,7 @@ if($action!='') {
 	         		"and ecole='$ecole' and decis.delib1='Admissible' and decis.delib2!='Oral' and decis.delib2!='Reserve'\n".
 	         		"and sex.id=can.sexe\n".
 	         		"order by id_table";
-			         //echo "<pre>".htmlspecialchars($sql)."</pre>\n";
+			         echo "<pre>".htmlspecialchars($sql)."</pre>\n";
 	         	$result=odb_query($sql,__FILE__,__LINE__);
 	         	$colonnes=array('id_table','sexe','prefixe','nom','prenoms',"moyenne$i","coeff$i",'serie','moyenne_bac','mention');
 					while($row=mysql_fetch_array($result)) {
@@ -1680,11 +1680,13 @@ if($action!='') {
 						$tCan[$id_table]['candidat']="$civilite $prefixe <b>$nom</b> $prenoms";
 						$tCan[$id_table]['total']+=$row["moyenne$i"];
 						$tCan[$id_table]['coeff']+=$row["coeff$i"];
+						$tCan[$id_table]['moyenne_bac']=$row["moyenne_bac"];
+						$tCan[$id_table]['coeff_bac']=$row["coeff_bac"];
 					}
          	}
-         	
          	foreach($tCan as $id_table=>$t1) {
          		$t1['moyenne']=round($t1['total']/$t1['coeff'],2);
+         		$t1['moyenne']=round((($t1['moyenne']*(1-$t1['coeff_bac']))+($t1['moyenne_bac']*$t1['coeff_bac'])),2);
          		$cle=str_pad(100*$t1['moyenne'],4,'0',STR_PAD_LEFT)."_$id_table";
          		if($t1['moyenne']>=8) $tClassement[$cle]=$t1;
          	}
