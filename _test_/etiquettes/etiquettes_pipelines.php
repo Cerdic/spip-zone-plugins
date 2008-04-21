@@ -7,9 +7,29 @@
 #  Documentation : http://www.spip-contrib.net/Plugin-Etiquettes  #
 #-----------------------------------------------------------------#
 
+function etiquettes_insert_head($flux){
+
+	$iutil = find_in_path('javascript/iutil.js');
+	$iautocompleter = find_in_path('javascript/iautocompleter.js');
+	$etiquettes = find_in_path('javascript/etiquettes.js');
+	$css = find_in_path('css/etiquettes.css');
+	
+	$flux .= <<<EOS
+	
+	<link rel="stylesheet" type="text/css" media="all" href="$css" />
+	<script type='text/javascript' src='$iutil'></script>
+	<script type='text/javascript' src='$iautocompleter'></script>
+	<script type='text/javascript' src='$etiquettes'></script>
+		
+EOS;
+	
+	return $flux;
+
+}
+
 function etiquettes_affichage_final($page){
 	
-	if (!strpos($page, 'formulaire_etiquettes'))
+	if (!stripos($page, '_etiquettes'))
 		return $page;
 	
 	$iutil = find_in_path('javascript/iutil.js');

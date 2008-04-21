@@ -11,10 +11,10 @@
 
 
 // Applique le sélecteur avec les paramètres sur un input précis
-function appliquer_selecteur_cherche_mot(groupe, type_objet, id_objet, url_source) {
+function appliquer_selecteur_cherche_mot(input, url_source) {
 	
 	// chercher l'input de saisie
-	var input = jQuery('#etiquettes-'+groupe+'-'+type_objet+'-'+id_objet);
+	var input = jQuery(input);
 
 	// ne pas reappliquer si on vient seulement de charger les suggestions
 	if (!input || input.autoCFG) return;
@@ -94,7 +94,7 @@ function appliquer_etiquettes_aide_nuage(input, nuage){
 	
 	// quand on tapote dans le input
 	input
-		.keydown(function(){
+		.keyup(function(){
 			// ça cherche si chaque mot tapé est dans le nuage
 			// et si oui ça le sélectionne
 			nuage.removeClass("selected");
@@ -105,12 +105,9 @@ function appliquer_etiquettes_aide_nuage(input, nuage){
 				});
 			});
 		})
-		.keypress(function(event){
-			
-		});
 	
 	// Au démarrage on cherche les mots déjà là
-	input.keydown();
+	input.keyup();
 	
 }
 

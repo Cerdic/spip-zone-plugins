@@ -6,10 +6,10 @@
  		RastaPopoulos - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-		0.1
+		0.2
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-		dev
+		test
 	</etat>
 	<description>
 Le plugin &Eacute;tiquettes permet de cr&eacute;er facilement des formulaire pour ajouter des mots-cl&eacute;s "&agrave; la vol&eacute;e" sur n'importe quel &eacute;l&eacute;ment les acceptant (articles, forums, etc, et plus encore si vous avez le plugin Mots Partout ou si vous savez programmer).
@@ -36,7 +36,7 @@ Dans ce second cas, ce sera alors &agrave; vous de traiter le r&eacute;sultat du
 	<fonctions>etiquettes_fonctions.php</fonctions>
 	
 	<pipeline>
-		<nom>affichage_final</nom>
+		<nom>insert_head</nom>
 		<inclure>etiquettes_pipelines.php</inclure>
 	</pipeline>
 </plugin>

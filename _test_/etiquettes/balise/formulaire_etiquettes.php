@@ -56,21 +56,25 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 	
 	// initialisation du mode d'ajout des mots-clés
 		// si on met rien ou n'importe quoi ça donne true
+		// donc en mode "remplacer"
 		$remplacer = !(strtolower($args[3]) == "false");
 	
 	// initialisation de la proposition de login en cas de mauvaise autorisation
 		// si on met rien ou n'importe quoi, ça donne false
+		// donc renvoie du vide si pas autorisé
 		$proposer_login = (strtolower($args[5]) == "true");
 	
 	// initialisation du type d'aide
 		$aide = strtolower($args[6]);
-		if (!strlen($aide) OR !in_array($aide, array("nuage", "ajax", "aucun", "aucune", "rien"))){
+		if (!strlen($aide) OR !in_array($aide, array("nuage", "ajax", "liste", "aucun", "aucune", "rien"))){
 			$aide_nuage = true;
 			$aide_ajax = true;
+			$aide_liste = false;
 		}
 		else{
 			$aide_nuage = ($aide == "nuage");
 			$aide_ajax = ($aide == "ajax");
+			$aide_liste = ($aide == "liste");
 		}
 		// on teste ensuite si les plugins sont bien présents
 		$aide_nuage &= defined('_DIR_PLUGIN_NUAGE');
@@ -142,11 +146,11 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 					)
 				), '');
     
-    return $args = array($groupe, $id_groupe, $aide_nuage, $aide_ajax, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login);
+    return $args = array($groupe, $id_groupe, $aide_nuage, $aide_ajax, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login);
 	
 }
 
-function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide_nuage, $aide_ajax, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login) {
+function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide_nuage, $aide_ajax, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login) {
 	
 	global $tables_jointures;
 	
@@ -239,7 +243,6 @@ function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide_nuage, $aid
         0, 
         array(
         	'self' => str_replace('&amp;', '&', self()),
-        	'redirect' => str_replace('&amp;', '&', $redirect),
         	'message_ok' => $message_ok,
 			'message_erreur' => $message_erreur,
 			'erreur_autorisation' => $erreur_autorisation,
@@ -247,11 +250,11 @@ function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide_nuage, $aid
 			'groupe' => $groupe,
 			'aide_nuage' => $aide_nuage,
 			'aide_ajax' => $aide_ajax,
+			'aide_liste' => $aide_liste,
 			'remplacer' => $remplacer,
 			'type_objet' => $type_objet,
 			'cle_objet' => $cle_objet,
 			'id_objet' => $id_objet,
-			'proposer_login' => $proposer_login,
 			'etiquettes' => $etiquettes
         )
     );

@@ -53,7 +53,7 @@
 
 [(#REM) Et maintenant qu'on a enregistré les fréquences, on affiche le nuage ]
 <B_mots>
-<ul id="popular_tags-#ENV{type}-#ENV{type_objet}-#ENV{id_objet}" class="popular_tags nuage">
+<ul id="popular_tags-#ENV{type}[-(#ENV{type_objet})][-(#ENV{id_objet})]" class="popular_tags nuage">
 	<BOUCLE_mots(MOTS){tous}{type ?}{par #ENV{tri,titre}}{0,30}>
 	[(#SET{score,[(#GET{frequences}|table_valeur{#TITRE*,0}|div{#GET{max_frequence}})]})]
 	[(#GET{score}|>={0}|?{' '})
@@ -68,18 +68,18 @@
 [(#REM) On utilise le javascript pour ce nuage précis ]
 <script  type="text/javascript">
 <!--
-var appliquer_etiquettes_aide_nuage_#ENV{type}_#ENV{type_objet}_#ENV{id_objet} = function(){
+var appliquer_etiquettes_aide_nuage_#ENV{type}[_(#ENV{type_objet})][_(#ENV{id_objet})] = function(){
 	appliquer_etiquettes_aide_nuage(
-		'#etiquettes-#ENV{type}-#ENV{type_objet}-#ENV{id_objet}',
-		'#popular_tags-#ENV{type}-#ENV{type_objet}-#ENV{id_objet}'
+		'#etiquettes-#ENV{type}[-(#ENV{type_objet})][-(#ENV{id_objet})]',
+		'#popular_tags-#ENV{type}[-(#ENV{type_objet})][-(#ENV{id_objet})]'
 	);
 }
 // on applique avec un timeout pour laisser la page s'afficher
 $(function(){
-	setTimeout(appliquer_etiquettes_aide_nuage_#ENV{type}_#ENV{type_objet}_#ENV{id_objet}, 200);
+	setTimeout(appliquer_etiquettes_aide_nuage_#ENV{type}[_(#ENV{type_objet})][_(#ENV{id_objet})], 200);
 });
 onAjaxLoad(function(){
-	setTimeout(appliquer_etiquettes_aide_nuage_#ENV{type}_#ENV{type_objet}_#ENV{id_objet}, 200);
+	setTimeout(appliquer_etiquettes_aide_nuage_#ENV{type}[_(#ENV{type_objet})][_(#ENV{id_objet})], 200);
 });
 // -->
 </script>

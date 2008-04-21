@@ -19,8 +19,11 @@
 </div>
 ]
 
-[(#REM) S'il n'y a pas d'erreur d'autorisation on affiche le formulaire]
+[(#REM) S'il n'y a pas d'erreur d'autorisation on affiche le formulaire ]
 [(#ENV*{erreur_autorisation}|?{'',' '})
+
+[(#REM) Si on ne veut que le champ ]
+[(#ENV*{uniquement_champ}|?{'', ' '})
 <div class="formulaire_spip formulaire_etiquettes"  id="form-etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}">
 	
 	<form action="#ENV{self}#form-etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}" method="post">
@@ -35,13 +38,16 @@
 				(#ENV*{message_ok})
 			</p>]
 			
-			<p>
+]
+			
+			[(#REM) S'il y a la liste on masque le input ]
+			<p[ (#ENV{aide_liste}|?{style="display:none;"})]>
 				<input type="text" class="forml"
-					id="etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}"
-					name="etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}"
+					id="etiquettes-#ENV{groupe}[-(#ENV{type_objet})][-(#ENV{id_objet})]"
+					name="[(#ENV{nom_champ}|sinon{etiquettes-[(#ENV{groupe})][-(#ENV{type_objet})][-(#ENV{id_objet})]})]"
 					value="#ENV*{etiquettes}"
 				/>
-				<label for="etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}">
+				<label for="etiquettes-#ENV{groupe}[-(#ENV{type_objet})][-(#ENV{id_objet})]">
 					<:etiquettes:explication:>
 				</label>
 			</p>
@@ -51,9 +57,7 @@
 				<!--
 				var appliquer_selecteur_#ENV{groupe}_#ENV{type_objet}_#ENV{id_objet} = function(){
 					appliquer_selecteur_cherche_mot(
-						'#ENV{groupe}',
-						'#ENV{type_objet}',
-						#ENV{id_objet},
+						'#etiquettes-#ENV{groupe}[-(#ENV{type_objet})][-(#ENV{id_objet})]',
 						'[(#URL_PAGE{etiquettes_selecteur}|parametre_url{groupe,#ENV{groupe},&})]'
 					);
 				}
@@ -67,6 +71,12 @@
 				<INCLURE{fond=fonds/etiquettes_aide_nuage}{type=#ENV{groupe}}{type_objet}{id_objet}>
 			]
 			
+			[(#ENV{aide_liste}|?{' '})
+				<INCLURE{fond=fonds/etiquettes_aide_liste}{type=#ENV{groupe}}{type_objet}{id_objet}>
+			]
+			
+[(#REM) Si on ne veut que le champ ]
+[(#ENV*{uniquement_champ}|?{'', ' '})			
 			<p class="spip_bouton">
 				<input type="submit"
 					name="valider_etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}"
@@ -78,4 +88,5 @@
 	</form>
 	
 </div>
+]
 ]

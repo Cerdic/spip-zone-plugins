@@ -342,10 +342,7 @@ class Tag {
 		if ($this->id_mot){
 			sql_delete(
 				"spip_mots_$nom_objet",
-				array(
-					array('=', 'id_mot', $this->id_mot),
-					array('=', $id_objet, $id)
-				)
+				"id_mot = ".intval($this->id_mot)." and ".$id_objet." = ".intval($id)
 			);
 		}
 		
@@ -450,13 +447,10 @@ class ListeTags {
 				}
 				if ($result) sql_free($result);
 				
-				spip_log("Enleve les mots: ".join(',',$mots_a_effacer));
+				spip_log("Enleve les mots: (".join(',',$mots_a_effacer).") à (".$id_objet.", ".intval($id).")");
 				sql_delete(
 					"spip_mots_$nom_objet",
-					array(
-						array('=', $id_objet, $id),
-						"id_mot IN (".join(',',$mots_a_effacer).")"
-					)
+					$id_objet." = ".intval($id)." and id_mot in (".join(',', $mots_a_effacer).")"
 				);
 			}
 			
@@ -531,15 +525,15 @@ class ListeTags {
 		include_spip('base/abstract_sql');
 		
 		$s = sql_select(
-			'id_groupe',
+			array('id_groupe', 'titre'),
 			'spip_groupes_mots',
 			array(array('=', 'titre', 'tags'))
 		);
 		
 		if ($t=sql_fetch($s))
-			return $this->groupe_defaut = $t['id_groupe'];
+			return $this->id_groupe = $t['id_groupe'];
 		else {
-			return $this->groupe_defaut =  sql_insertq(
+			return $this->id_groupe =  sql_insertq(
 				'spip_groupes_mots',
 				array(
 					'titre' => 'tags'

@@ -1,0 +1,28 @@
+
+[(#REM) Et maintenant qu'on a enregistré les fréquences, on affiche le nuage ]
+<B_mots>
+<ul id="popular_tags-#ENV{type}[-(#ENV{type_objet})][-(#ENV{id_objet})]" class="popular_tags">
+	<BOUCLE_mots(MOTS){tous}{type ?}{par #ENV{tri,titre}}>
+		<li><span>#TITRE*</span></li>
+	</BOUCLE_mots>
+</ul>
+</B_mots>
+
+[(#REM) On utilise le javascript pour cette liste précise ]
+<script  type="text/javascript">
+<!--
+var appliquer_etiquettes_aide_nuage_#ENV{type}[_(#ENV{type_objet})][_(#ENV{id_objet})] = function(){
+	appliquer_etiquettes_aide_nuage(
+		'#etiquettes-#ENV{type}[-(#ENV{type_objet})][-(#ENV{id_objet})]',
+		'#popular_tags-#ENV{type}[-(#ENV{type_objet})][-(#ENV{id_objet})]'
+	);
+}
+// on applique avec un timeout pour laisser la page s'afficher
+$(function(){
+	setTimeout(appliquer_etiquettes_aide_nuage_#ENV{type}[_(#ENV{type_objet})][_(#ENV{id_objet})], 200);
+});
+onAjaxLoad(function(){
+	setTimeout(appliquer_etiquettes_aide_nuage_#ENV{type}[_(#ENV{type_objet})][_(#ENV{id_objet})], 200);
+});
+// -->
+</script>
