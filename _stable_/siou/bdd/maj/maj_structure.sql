@@ -48,4 +48,6 @@ ADD `jury` SMALLINT NOT NULL AFTER `id_serie` ;
  
 -- ==================== Modif5
 -- odb_ref_ecole : ajout du coefficient du bac pour chaque ecole/serie
- ALTER TABLE `odb_ref_ecole` ADD `coeff_bac` TINYINT NOT NULL DEFAULT '0' COMMENT 'Coefficient du bac';
+ --ALTER TABLE `odb_ref_ecole` ADD `coeff_bac` TINYINT NOT NULL DEFAULT '0' COMMENT 'Coefficient du bac';
+ --Remplacé par
+  ALTER TABLE `odb_ref_ecole` CHANGE `coeff_bac` `coeff_bac` DECIMAL( 3, 2 ) NOT NULL DEFAULT '0' COMMENT 'Coefficient du bac';
