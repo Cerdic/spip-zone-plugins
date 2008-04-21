@@ -21,7 +21,8 @@ La configuration se fait dans [le gestionnaire cfg->?exec=cfg&amp;cfg=svn_update
 - pour d&#233;clarer la liste des r&#233;pertoires concern&#233;s, en donnant pour chacun une ligne :
 _ <code>source destination [revision] [user]</code>
 _ Par exemple :
-_ <code>svn://zone.spip.org/spip-zone/_squelettes_/sedna sedna</code>
+_ <code>svn://zone.spip.org/spip-zone/_squelettes_/sedna squelettes/sedna</code>
+_ <code>svn://zone.spip.org/spip-zone/_plugins_/_stable_/cfg plugins/cfg</code>
 	</description>
 	<lien>http://www.spip-contrib.net/SVN-Update-Notes</lien> <!-- URI de documentation -->
 	<prefix>

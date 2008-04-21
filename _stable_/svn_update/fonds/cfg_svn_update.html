@@ -3,7 +3,7 @@
 <!-- boite=Informations -->
 <!-- descriptif=<p>
     Un utilisateur (par defaut, l’administrateur numero 1) est autorisé à faire une mise à jour SVN du site ou de tout autre répertoire.</p>
-    <p> Pour cela il doit se rendre sur la page [svn update->/ecrire/?exec=svn_update] et sélectionner les éléments à mettre à jour. </p>
+    <p> Pour cela il doit se rendre sur la page [svn update->?exec=svn_update] et sélectionner les éléments à mettre à jour. </p>
 -->
 <!-- head= [(#INCLURE{fond=/fonds/svn_update.css})] -->
 <form id="svn_update" name="svn_update" method="post" action="#SELF">
@@ -30,12 +30,19 @@
     <fieldset>
         <legend> Répertoires à administrer</legend>
         <p>
-            <label for="file">Saisissez les repertoires à traiter</label>
+            <label for="file">Saisissez les repertoires à traiter</label>        
 	        <pre>
                 source destination [revision] [user]
                 Par exemple :
-                svn://zone.spip.org/spip-zone/_squelettes_/sedna sedna
+                svn://zone.spip.org/spip-zone/_squelettes_/sedna squelettes/sedna
+                svn://zone.spip.org/spip-zone/_plugins_/_stable_/cfg plugins/cfg
 	        </pre>
+	        <ul>
+	            <li>Source : chemin du dépot (svn://zone.spip.org/spip-zone/_squelettes_/sedna) </li>
+	            <li>destination : chemin local par rapport à la racine du site (squelettes/sedna) </li>
+	            <li>[revision] : version à telecharger (optionnel)</li>
+	            <li>[user] : nom d'utilisateur (optionnel) depends si une authentification coté depot svn est requis</li>
+	        </ul>
             <textarea name="file" id="file">#ENV{file}</textarea>
         </p>
     </fieldset>
