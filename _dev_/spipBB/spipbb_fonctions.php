@@ -114,9 +114,9 @@ function spipbb_nb_messages($id_auteur){
 // Calcule le nombre de messages par auteur et les classes par ordre decroissant
 function spipbb_nb_messages_groupe($id_bidon){
 	$aut_nb = array();
-	$result_auteurs = sql_select('id_auteur, auteur, COUNT(auteur) AS total','spip_forum',
-							"statut='publie' AND id_auteur>0" , // WHERE
-							"auteur", // GROUPBY
+	$result_auteurs = sql_select('sf.id_auteur, sa.nom AS auteur, COUNT(sa.nom) AS total','spip_forum AS sf, spip_auteurs AS sa',
+							"sf.statut='publie' AND sf.id_auteur>0 AND sf.id_auteur=sa.id_auteur AND sa.statut!='5poubelle' " , // WHERE
+							"sf.id_auteur", // GROUPBY
 							array("total desc"), // ORDERBY
 							"10" // LIMIT
 							);
@@ -124,7 +124,10 @@ function spipbb_nb_messages_groupe($id_bidon){
 	while ($row = sql_fetch($result_auteurs) AND $compte++<10) {
 		# 1/12/07 fct spipbb_auteur_infos() change de nom :
 		$infos = spipbb_donnees_auteur($row['id_auteur']);
-		if( isset($infos['annuaire_forum'])  AND $infos['annuaire_forum']!='non') {
+		if ( ( isset($infos['annuaire_forum'])  AND $infos['annuaire_forum']!='non')
+				OR
+				( $GLOBALS['spipbb']['affiche_membre_defaut']=='oui' AND !isset($infos['annuaire_forum']) ) )
+		 {
 			// Peut apparaitre dans la liste
 			$aut_nb[]=$row['auteur']."(".$row['total'].")";
 		}
