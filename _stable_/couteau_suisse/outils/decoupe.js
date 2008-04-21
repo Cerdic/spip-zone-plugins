@@ -27,7 +27,9 @@ if (window.jQuery) jQuery(document).ready(function() {
 	jQuery('h2.onglets_titre').click(function(e) {
 		var contenu = '#' + this.id;
 		contenu = contenu.replace(/titre/,'contenu');
-		jQuery(this).parent().parent().find('.selected').removeClass('selected');
+		var bloc = jQuery(this).parent().parent();
+		bloc.children('.selected').removeClass('selected');
+		bloc.children('.onglets_liste').children('.selected').removeClass('selected');
 		jQuery(contenu).addClass('selected');
 		jQuery(this).addClass('selected');
 		return false;
