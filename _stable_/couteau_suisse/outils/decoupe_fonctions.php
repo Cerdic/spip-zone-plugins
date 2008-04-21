@@ -8,18 +8,21 @@ define('_onglets_DEBUT', '<div class="onglets_bloc_initial">');
 $GLOBALS['cs_introduire'][] = 'decoupe_nettoyer_raccourcis';
 
 function onglets_callback($matches) {
-	$matches[1] = preg_replace(','.preg_quote(_decoupe_SEPARATEUR,',').'\s+,', _decoupe_SEPARATEUR, $matches[1]);
+	// cas des onglets imbriques
+	$matches[2] = preg_replace_callback(',<onglets([0-9]*)>(.*?)</onglets\1>,ms', 'onglets_callback', $matches[2]);
+	// nettoyage apres les separateurs
+	$matches[2] = preg_replace(','.preg_quote(_decoupe_SEPARATEUR,',').'\s+,', _decoupe_SEPARATEUR, $matches[2]);
 	// au cas ou on ne veuille pas d'onglets, on remplace les '++++' par un filet et on entoure d'une classe.
 	if (defined('_CS_PRINT')) {
 		@define(_decoupe_FILET, '<p style="border-bottom:1px dashed #666; padding:0; margin:1em 20%; font-size:4pt;" >&nbsp; &nbsp;</p>');
-		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $matches[1], 2);
+		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $matches[2], 2);
 		$texte = preg_replace(','.preg_quote(_decoupe_SEPARATEUR, ',').'(.*?)(\n\n|\r\n\r\n|\r\r),ms', _decoupe_FILET."<h4>$1</h4>\n\n", $t[1]);
 		// on sait jamais...
 		str_replace(_decoupe_SEPARATEUR, _decoupe_FILET, $texte);
 		return '<div class="onglets_print"><h4>' . textebrut($t[0]) . "</h4>\n$texte</div>";
 	}
 	$onglets = $contenus = array();
-	$pages = explode(_decoupe_SEPARATEUR, $matches[1]);
+	$pages = explode(_decoupe_SEPARATEUR, $matches[2]);
 	foreach ($pages as $p) {
 		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $p, 2);
 		$t = array(trim(textebrut(nettoyer_raccourcis_typo($t[0]))), cs_safebalises($t[1]));
@@ -43,7 +46,7 @@ function decouper_en_onglets_rempl($texte) {
 		$texte = preg_replace(',\s*<onglet\|titre=([^>]*)>\s*,', "\n\n++++\\1\n\n", $texte);
 	}
 	// il faut un callback pour analyser l'interieur du texte
-	return preg_replace_callback(',<onglets>(.*?)</onglets>,ms', 'onglets_callback', $texte);
+	return preg_replace_callback(',<onglets([0-9]*)>(.*?)</onglets\1>,ms', 'onglets_callback', $texte);
 }
 
 // fonction renvoyant l'image appellee dans img/decoupe
