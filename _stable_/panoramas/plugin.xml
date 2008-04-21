@@ -11,7 +11,7 @@ _ &#169; 2008 - Licence GPL
 	3.0
 	</version>
 	<etat>
-	stable
+	dev
 	</etat>
 	<description>
 		Ce plugin permet la cr&eacute;ation de visites virtuelles accessibles.
@@ -20,11 +20,19 @@ _ &#169; 2008 - Licence GPL
 	<options> <!-- fichier charge a chaque hit -->
 		panoramas_mes_options.php
 	</options>
+	<fonctions> 
+		panoramas_mes_fonctions.php
+	</fonctions>
 	<pipeline>
   		<nom>insert_head</nom>
   		<action>insertion_in_head</action>
-  		<inclure>panoramas_define_head.php</inclure>
+  		<inclure>panoramas_pipelines.php</inclure>
  	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouter_boutons</action>
+		<inclure>panoramas_pipelines.php</inclure>
+	</pipeline>
 	<install>base/panoramas_upgrade.php</install>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::

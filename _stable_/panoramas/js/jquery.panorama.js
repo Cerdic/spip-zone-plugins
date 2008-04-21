@@ -46,7 +46,9 @@
 				panorama_animate(panoramaContainer, elemWidth, settings);
 				return false;
 			});
-
+			panoramaViewport.bind('click', function() {
+				$(panoramaContainer).stop();
+			});
 			panoramaViewport.find('a.panorama-control-right').bind('click', function() {
 				$(panoramaContainer).stop();
 				settings.direction = 'left';

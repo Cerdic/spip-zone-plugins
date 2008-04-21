@@ -1,0 +1,39 @@
+#CACHE{0}
+<B_visitesvirtuelles>
+<div class='liste'>
+<div style='position: relative;'>
+	<div style='position: absolute; top: -12px; left: 3px;'><img src='#CHEMIN{img_pack/panoramas.png}' alt="" /></div>
+	<div style='background-color: #ENV{couleur_claire}; color: black; padding: 3px; padding-left: 30px; border-bottom: 1px solid #444444;' class='verdana2'>
+	<b><:panoramas:toutes_visitesvirtuelles:></b>
+	</div>
+</div>
+<table width='100%' cellpadding='5' cellspacing='0' border='0'>
+[<tr style='background-color: #dddddd;'>
+<td class="arial1" style='border-bottom: 1px solid #444444;' colspan="10">
+<div class='pagination'>(#PAGINATION)</div>
+</td>
+</tr>]
+<BOUCLE_visitesvirtuelles(VISITES_VIRTUELLES){pagination 10}>
+<tr class='tr_liste'>
+<td class="arial11">
+<B_lieux>
+<BOUCLE_lieux(VISITES_VIRTUELLES_LIEUX){id_visite}>
+</BOUCLE_lieux{id_visite}>
+<img src='#CHEMIN{images/puce-verte-breve.gif}' width='7' height='7' border='0' alt='puce'>&nbsp;&nbsp;
+</B_lieux>
+<img src='#CHEMIN{images/puce-orange-breve.gif}' width='7' height='7' border='0' alt='puce'>&nbsp;&nbsp;
+<//B_lieux>
+</td>
+<td class="arial11">
+	<span class='#EDIT{titre}'>#TITRE</span>
+</td>
+<td class="arial1">
+<a href="?exec=visitesvirtuelles_edit&id_visite=#ID_VISITE&retour=#SELF"><img src='#CHEMIN{img_pack/visitevirtuelle_edit.png}' width='32' height='24' border='0' alt='<:panoramas:editer:>'></a>
+</td>
+</tr>
+</BOUCLE_visitesvirtuelles>
+</table></div>
+</B_visitesvirtuelles>
+<p><:panoramas:pas_de_visite:></p>
+<//B_visitesvirtuelles>
+&nbsp;<br/>
