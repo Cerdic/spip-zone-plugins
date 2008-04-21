@@ -16,14 +16,24 @@ function blocs_raccourcis() {
 
 function blocs_callback($matches) {
 	$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $matches[3], 2);
-	if ($matches[1]=='visible')
-		$h = $div = '';
-	else {
+	// un resume facultatif
+	if(preg_match(',<resume>(.*)</resume>\s?(.*)$,ms', $t[1], $res))
+		{ $t[1] = $res[2]; $res = $res[1]; } else $res = '';
+	// types de blocs : bloc|invisible|visible
+	if ($matches[1]=='visible') {
+		$h = $d = '';
+		$r = ' blocs_invisible';
+	} else {
 		$h = ' blocs_replie';
-		$div = ' class="blocs_invisible"';
+		$d = ' blocs_invisible';
+		$r = '';
 	}
+
+	// blocs numerotes
 	$b = strlen($matches[2])?" cs_bloc$matches[2]":''; 
-	return "<div class='cs_blocs$b'><h4 class='blocs_titre$h blocs_click'><a href='javascript:;'>$t[0]</a></h4><div$div>\n$t[1]\n</div></div>";
+	return "<div class='cs_blocs$b'><h4 class='blocs_titre$h blocs_click'><a href='javascript:;'>$t[0]</a></h4>"
+		.(strlen($res)?"<div class='blocs_resume$r'>\n$res\n</div>":"")
+		."<div class='blocs_destination$d'>\n$t[1]\n</div></div>";
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
