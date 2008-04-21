@@ -214,7 +214,7 @@ function ban_user($id_auteur)
 // ------------------------------------------------------------------------------
 function check_spam($id_auteur,$login,$id_forum,$id_article,$message, &$titre)
 {
-	$is_spammer = sql_fetsel('id_auteur, statut', 'spip_auteurs_spipbb', "id_auteur=$id_auteur");
+	$is_spammer = sql_fetsel('id_auteur, statut', 'spip_auteurs', "id_auteur=$id_auteur");
 	if ( $id_auteur==1 AND $GLOBALS['spipbb']['sw_admin_can_spam']=="oui" ) return;
 	if ( $is_spammer['statut']=="0minirezo" AND $GLOBALS['spipbb']['sw_modo_can_spam']=="oui" ) return;
 

@@ -1,10 +1,17 @@
-﻿2008-04-17  chryjs  <chryjs!@!free!.!fr>
+﻿2008-04-21  chryjs  <chryjs!@!free!.!fr>
+
+ * correction requete sur statut auteur : table spip classique !
+ * order by doit etre un array !
+
+
+2008-04-17  chryjs  <chryjs!@!free!.!fr>
 
  * 0.4.9 Correction des bugs (inscription+activation principalement) : en 1.9.2 mode==forum en 1.9.3 mode==6forum il faut les gérer séparément
  * 0.4.9.1 : correction style pour #TEXTE dans groupeforum,
  * traductions manquantes,
  * corrections sur membres les plus actifs
  * nombre de lignes de message dans filforum depend de fixlimit (dans la configuration)
+ * 0.4.9.2 : correction adresse du fichier de spam
 
 2008-04-16  chryjs  <chryjs!@!free!.!fr>
 

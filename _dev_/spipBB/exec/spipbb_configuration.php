@@ -85,6 +85,9 @@ function exec_spipbb_configuration() {
 
 	echo debut_droite('',true);
 
+	//$spipbb_param_tech = charger_fonction('spipbb_param_tech', 'configuration');
+	//echo $spipbb_param_tech();
+
 	# install ou maj
 	echo spipbb_admin_configuration();
 

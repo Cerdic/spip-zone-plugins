@@ -52,10 +52,3 @@ Documentation
 -* Chaque fonctionnalité est soumise a config
 -* documenter pourquoi membre_liste peut etre vide si les auteurs n ont pas demande la parution
 
-Traduction
-==========
-
-Gros soucis lors de l'initialisation avec trad-lang
-- on est revenu à la version de http://zone.spip.org/trac/spip-zone/browser/_squelettes_/forum_spipBB/dev/ecrire/lang/phpbb_fr.php?rev=5365 !! soit d'il y a 2 ans.
-au lieu de http://zone.spip.org/trac/spip-zone/browser/_plugins_/_dev_/spipBB/lang/spipbb_fr.php?rev=18012
-Revision des messages
