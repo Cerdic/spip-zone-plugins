@@ -1667,7 +1667,7 @@ if($action!='') {
 	         		"left join odb_ref_prefixe pre on can.prefixe=pre.id\n".
 	         		"where notes.id_table=can.id_table and notes.id_table=decis.id_table and notes.annee=$annee and can.annee=$annee and decis.annee=$annee\n".
 	         		"and ser.id=ecole.id_serie and can.serie=ser.id and notes.id_matiere=ecole.id_matiere$i and notes.type='Ecrit' \n".
-	         		"and ecole='$ecole' and decis.delib1='Admissible' and decis.delib2!='Oral' and decis.delib2!='Reserve'\n".
+	         		"and ecole='$ecole' and decis.delib1='Admissible' and decis.delib2!='Oral' and decis.delib2!='Reserve' and decis.delib2!='Refuse'\n".
 	         		"and sex.id=can.sexe\n".
 	         		"order by id_table";
 			      //   echo "<pre>".htmlspecialchars($sql)."</pre>\n";
@@ -1724,6 +1724,7 @@ if($action!='') {
          	$msg.="</table>\n";
 	       $nom_pdf=getRewriteString("Classement $ecole $annee");
          	$_SESSION['data'][$nom_pdf]=$pdf;
+         	print_r($_SESSION['data']);
          	//echo"<pre>";print_r($pdf['National']);die('</pre>');
          	//$_SESSION['pied'][$nom_pdf]="Classement $departement $annee $titre2";
          	$_SESSION['titre'][$nom_pdf]=html_entity_decode("Classement $ecole $annee");
