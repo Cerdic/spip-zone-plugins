@@ -33,21 +33,8 @@
 					<p><label for="mp_description"><:marquepages:description:></label></p>
 					<p><input type="text" class="forml" id="mp_description" name="mp_description" value="#ENV{mp_description}" /></p>
 					
-					<p><label for="mp_etiquettes"><:tagmachine:etiquettes:></label></p>
-					<p><input type="text" class="forml" id="tags" name="mp_etiquettes" value="#ENV{mp_etiquettes}" /></p>
-					
-					[(#REM)
-						La liste des tags, dans des gentils <span>
-						Idealement le addtag(this) serait ajoute par
-						la fonction loadpopular ci-dessous
-					]
-					<div id='popularTags'>
-					<div><:tagmachine:etiquettes_populaires:></div>
-					[(#MODELE{nuage_popular_tags}{type=tags})]
-					</div>
-					
-					[(#REM) Code partiellement copie du genial scuttle ]
-					<script type="text/javascript" src="#CHEMIN{javascript/popular_tags.js}"></script>
+					<p><label><:etiquettes:etiquettes:></label></p>
+					#CHAMP_ETIQUETTES{tags, mp_etiquettes, aucun}
 					
 					<p class="spip_bouton"><input type="submit" name="mp_valider" value="<:bouton_valider:>" /></p>
 				]

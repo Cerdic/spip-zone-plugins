@@ -16,29 +16,8 @@
 	<p><input type="text" class="crayon-active" id="texte" name="#ENV{name_texte}" style="width:#ENV{largeur}px;" value="[(#TEXTE**|entites_html)]" /></p>
 	
 	<p><label for="tags"><:marquepages:etiquettes:></label></p>
-	<p><input type="text" class="crayon-active" id="tags" name="#ENV{name_tags}" autocomplete="on" style="width:#ENV{largeur}px; font-size:10px;"
-		value="<BOUCLE_m(MOTS){type=tags}{id_forum}{" "}>[(#TITRE*|strcspn{' ,"'}|=={[(#TITRE*|strlen)]}|?{'',&quot;})][(#TITRE*|entites_html)][(#TITRE*|strcspn{' ,"'}|=={[(#TITRE*|strlen)]}|?{'',&quot;})]</BOUCLE_m>" />
-	</p>
-	
-	[(#REM)
-
-		La liste des tags, dans des gentils <span>
-		Idealement le addtag(this) serait ajoute par
-		la fonction loadpopular ci-dessous
-
-	]
-	<style type='text/css'>@import url("#CHEMIN{css/popular_tags.css}");</style>
-	<div id='popularTags' style="font-size:10px;">
-	<div><:tagmachine:etiquettes_populaires:></div>
-	[(#MODELE{nuage_popular_tags}{type=tags})]
-	</div>
-	
-	[(#REM)
-
-		Code partiellement copie du genial scuttle ; 
-
-	]
-	<script type="text/javascript" src="#CHEMIN{javascript/popular_tags.js}"></script>
+	<input type="hidden" disabled="disabled" name="#ENV{name_tags}" />
+	#CHAMP_ETIQUETTES{tags, #ENV{name_tags}}
 
 </fieldset>
 </BOUCLE_marquepage>

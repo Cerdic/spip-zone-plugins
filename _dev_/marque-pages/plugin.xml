@@ -33,4 +33,6 @@ N&eacute;cessite les plugins crayons et tag-machine.
 		<nom>insert_head</nom> 
 		<inclure>marquepages_pipelines.php</inclure>
 	</pipeline>
+	
+	<necessite id='etiquettes' version='[0.2;)' />
 </plugin>
