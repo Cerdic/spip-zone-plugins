@@ -762,7 +762,7 @@ add_outil( array(
 	// Precaution pour les articles virtuels
 	'traitement:CHAPO:pre_propre' => 'nettoyer_chapo',
 	'code:css' =>  'a.cs_glossaire:after {display:none;}',
-	// fonction glossaire_init() codee dans blocs.js : executee lors du chargement de la page et a chaque hit ajax
+	// fonction glossaire_init() codee dans glossaire.js : executee lors du chargement de la page et a chaque hit ajax
 	'code:jq_init' => 'glossaire_init.apply(this);',
 ));
 

@@ -324,7 +324,7 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 			.compacte_css(join("\n", $temp_css))."\n</style>";
 	if (count($temp_jq_init)) {
 		$temp_js[] = "var cs_init = function() {\n".join("\n", $temp_jq_init)."\n}\nif(typeof onAjaxLoad=='function') onAjaxLoad(cs_init);";
-		$temp_jq[] = "cs_init();";
+		$temp_jq[] = "cs_init.apply(document);";
 	}
 	if (count($temp_jq))
 		$temp_js[] = "if (window.jQuery) jQuery(document).ready(function(){\n".join("\n", $temp_jq)."\n});";
