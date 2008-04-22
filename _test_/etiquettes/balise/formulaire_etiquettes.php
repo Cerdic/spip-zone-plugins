@@ -8,7 +8,7 @@
 #                                                                                                      #
 #  Définition de la balise #FORMULAIRE_ETIQUETTES                                                      #
 #  Rappel d'utilisation :                                                                              #
-#  #FORMULAIRE_ETIQUETTES{groupe_de_mots?, remplacer?, type-id?, proposer_login?, forcer_aide?} #
+#  #FORMULAIRE_ETIQUETTES{groupe_de_mots?, remplacer?, type-id?, forcer_aide?, proposer_login?} #
 #------------------------------------------------------------------------------------------------------#
 
 // Sécurité
@@ -62,10 +62,10 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 	// initialisation de la proposition de login en cas de mauvaise autorisation
 		// si on met rien ou n'importe quoi, ça donne false
 		// donc renvoie du vide si pas autorisé
-		$proposer_login = (strtolower($args[5]) == "true");
+		$proposer_login = (strtolower($args[6]) == "true");
 	
 	// initialisation du type d'aide
-		$aide = strtolower($args[6]);
+		$aide = strtolower($args[5]);
 		if (!strlen($aide) OR !in_array($aide, array("nuage", "ajax", "liste", "aucun", "aucune", "rien"))){
 			$aide_nuage = true;
 			$aide_ajax = true;
