@@ -15,7 +15,7 @@
 	<p><label for="texte"><:marquepages:description:></label></p>
 	<p><input type="text" class="crayon-active" id="texte" name="#ENV{name_texte}" style="width:#ENV{largeur}px;" value="[(#TEXTE**|entites_html)]" /></p>
 	
-	<p><label for="tags"><:marquepages:etiquettes:></label></p>
+	<p><label for="tags"><:etiquettes:etiquettes:></label></p>
 	<input type="hidden" disabled="disabled" name="#ENV{name_tags}" />
 	#CHAMP_ETIQUETTES{tags, #ENV{name_tags}}
 
