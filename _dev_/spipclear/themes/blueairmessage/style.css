@@ -1,0 +1,20 @@
+
+/* 
+	Theme Name: Blue Air Message
+	Description: Dotclear 2 Theme
+	Version: 2.0
+	Author: David Yim
+	Author URI: http://aerial-type.com/
+	
+	Licence: Public
+
+	Compatibility : tested successfully under browsers : IE6, IE7, Firefox, Safari, and Opera
+	W3C Compliant.
+
+	(david, march 14, 2008)
+*/
+
+@import url(style.general.css);
+@import url(style.post.css);
+@import url(style.gallery.css);
+

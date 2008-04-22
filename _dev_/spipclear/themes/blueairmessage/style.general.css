@@ -1,0 +1,473 @@
+
+body, #page, #top, #menu, #wrapper, #main, #content, #sidebar, #footer {
+margin : 0;
+padding : 0;
+}
+body {
+padding : 0 0 50px 0;
+color : #333;
+background : #181818;
+text-align : center;
+font : 0.8em 'Lucida Grande', Arial, Sans-Serif;
+line-height : 1.6em;
+text-align : left;
+}
+h1, h2, h3, h4, h5, h6 {
+font-weight : bold;
+margin : 0;
+padding : 0;
+font-family : 'Helvetica Neue', Arial, Sans-Serif;
+letter-spacing : -1px;
+}
+p {
+margin : 0;
+padding : 0 0 20px 0;
+}
+a, a:link, a:visited {
+color : #3388cc;
+text-decoration : underline;
+}
+a:hover {
+text-decoration : none;
+}
+code {
+font-family : Monospace, 'Courier New', Courier;
+}
+pre {
+width : 405px;
+padding : 20px;
+height : auto;
+overflow : auto;
+font-family : Monospace, 'Courier new', Courier;
+background : #f8f8f8;
+border : 1px dotted #dadada;
+border-width : 1px 0;
+}
+abbr, acronym {
+border-bottom : 1px dashed;
+cursor : help;
+}
+em, q {
+font-style : italic;
+}
+#page {
+position : relative;
+width : 788px;
+margin : 0 auto;
+padding : 0;
+text-align : left;
+background : #fff url('img/page2.png') repeat-y top center;
+}
+#wrapper {
+width : 780px;
+margin : 0 auto;
+border-top : 4px solid #0e0e0e;
+}
+#top {
+width : 780px;
+margin : 0 auto;
+height : 65px;
+background : #181818 url('img/top_bg.png') repeat-x left top;
+border-bottom : 2px solid #0e0e0e;
+}
+#top_img {
+width : 780px;
+margin : 0 auto;
+height : 150px;
+background : url('img/header_img.jpg') no-repeat center bottom;
+border : 1px solid #ddd;
+border-width : 1px 0;
+}
+#top h1 {
+margin : 0;
+padding : 13px 0 0 40px;
+font-size : 1.75em;
+}
+#top h1 a {
+text-decoration : none;
+color : #fff;
+}
+#top h1 a:hover {
+color : #0091ff;
+}
+#blogdesc {
+padding : 0 0 0 40px;
+font-size : 0.85em;
+color : #ddd;
+}
+#prelude {
+padding : 0;
+position : absolute;
+top : 5px;
+right : 30px;
+text-transform : lowercase;
+font-size : 0.85em;
+color : #333;
+}
+#prelude a {
+color : #333;
+text-decoration : none;
+}
+#prelude a:hover {
+text-decoration : underline;
+}
+#menu {
+display : block;
+width : 780px;
+margin : 0 auto;
+height : 35px;
+background : #141414 url('img/menu_bg.png') repeat-x left top;
+border-top : 3px solid #0e0e0e;
+border-bottom : 1px solid #222;
+}
+#menu ul {
+margin : 0;
+padding : 0 25px;
+font-size : 11px;
+font-weight : bold;
+font-family : 'Helvetica Neue', Arial, Sans-Serif;
+text-transform : uppercase;
+line-height : 35px;
+}
+#menu ul li {
+display : inline;
+}
+#menu li {
+display : block;
+width : 90px;
+height : 35px;
+float : left;
+margin : 0;
+overflow : hidden;
+border-right : 1px solid #222;
+border-left : 1px solid #111;
+text-align : center;
+}
+#menu li a {
+display : block;
+float : left;
+width : 100%;
+height : 100%;
+text-decoration : none;
+color : #fff;
+}
+#menu li a:active, #menu li a:focus {
+color : #0091ff;
+background : #181818;
+border-top : 1px solid #000;
+}
+#menu li#rss {
+width : 40px;
+float : right;
+margin-right : 229px;
+border-right : 1px solid #111;
+}
+#menu li#rss a, #menu li#rss a:visited {
+background : url('img/menu_rss2.png') no-repeat center 8px;
+line-height : 38px;
+text-align : left;
+text-indent : -1000em;
+}
+#menu li#rss a:active, #menu li#rss a:focus {
+background : #181818 url('img/menu_rss2.png') no-repeat center 8px;
+border-top : 1px solid #000;
+}
+#main {
+width : 525px;
+float : left;
+}
+#content {
+padding : 40px;
+}
+.post {
+margin : 0 0 40px 0;
+padding : 0 0 15px 0;
+background : url('img/divider.png') no-repeat bottom center;
+}
+.day-date {
+margin : 1px 15px 0 0;
+padding : 3px 10px 0 10px;
+display : block;
+float : left;
+width : 25px;
+text-align : center;
+line-height : 12px;
+text-transform : uppercase;
+border-right : 1px solid;
+font-size : 1.4em;
+font-weight : bold;
+color : #aaa;
+}
+.day-date-month {
+display : block;
+font-size : 0.65em;
+color : #555;
+}
+.day-date-year {
+display : block;
+font-size : 0.5em;
+color : #555;
+}
+.post-title {
+font-size : 1.6em;
+}
+.post-title a, .post-title a:visited {
+color : #444;
+text-decoration : none;
+}
+.post-info {
+font-size : 0.85em;
+padding-left : 60px;
+}
+.post-info a {
+text-decoration : none;
+border-bottom : 1px dotted;
+}
+.post-info .comment_count {
+padding-left : 18px;
+background : url('img/comment.png') no-repeat left 1px;
+}
+.post-excerpt p, .post-content p {
+text-align : justify;
+}
+.read-it {
+padding-left : 20px;
+background : url('img/arrow-read-it.png') no-repeat left 9px;
+text-transform : uppercase;
+}
+.read-it a, .read-it a:visited {
+color : #333;
+font-size : 0.75em;
+text-decoration : none;
+border-bottom : 1px dotted;
+}
+.pagination {
+font-size : 0.85em;
+text-align : center;
+clear : both;
+}
+#content-info {
+margin : 0 0 25px 0;
+padding : 0 0 15px 0;
+border-bottom : 1px dotted #ccc;
+}
+#content-info h2 {
+font-size : 1.5em;
+}
+#content-info p {
+padding : 5px 0 0 0;
+font-size : 0.85em;
+}
+#content-info a {
+color : #333;
+text-decoration : none;
+border-bottom : 1px dotted;
+}
+.content-inner h3 {
+font-size : 1.2em;
+background : #f8f8f8;
+}
+.content-inner ul {
+padding : 0 0 25px 0;
+border-top : 1px solid #eee;
+}
+.content-inner li {
+padding : 3px 0;
+display : block;
+border-bottom : 1px solid #eee;
+}
+.dc-archive-month #navlinks {
+text-align : center;
+text-transform : uppercase;
+font-size : 0.9em;
+}
+.dc-archive-month #content-info h2 {
+text-align : center;
+padding-top : 15px;
+text-transform : uppercase;
+}
+.dc-archive-month .content-inner .post-title {
+font-size : 1.25em;
+}
+.dc-archive-month .content-inner .post-info {
+border-bottom : 1px dotted #ccc;
+margin : 0 0 10px 0;
+padding : 0 0 10px 0;
+}
+.dc-tags .content-inner ul {
+border : none;
+}
+.dc-tags .content-inner li {
+padding : 0;
+display : inline;
+border : none;
+}
+#sidebar {
+width : 254px;
+margin : 0 1px 0 0;
+padding : 35px 0;
+float : right;
+clear : none !important ;
+clear : left;
+font-size : 0.85em;
+}
+#sidebar a {
+color : #555;
+}
+#sidebar #blognav div, #sidebar #blogextra div {
+margin : 0 20px 20px 20px;
+padding : 0;
+border-bottom : 1px dotted #ccc;
+}
+#sidebar h2 {
+font-size : 1.3em;
+margin : 0 10px 5px 10px;
+padding-left : 12px;
+background : url('img/bullet.png') no-repeat left 6px;
+}
+#sidebar h3 {
+letter-spacing : 0;
+padding : 0 10px;
+margin : 0;
+font-size : 1.15em;
+}
+#sidebar div p {
+margin : 0;
+padding : 0 10px 20px 10px;
+}
+#sidebar div ul {
+margin : 0;
+padding : 0 20px 20px 20px;
+}
+#sidebar li {
+list-style-position : inside;
+}
+#sidebar div#search {
+position : absolute;
+display : block;
+margin : 0;
+padding : 0;
+width : 220px;
+height : 33px;
+top : 224px;
+right : 12px;
+border : none;
+background : url('img/search2.png') no-repeat 10px top;
+}
+#search h2 {
+display : none;
+}
+#search fieldset {
+border : none;
+margin : 0;
+padding : 0;
+}
+#search p {
+margin : 0;
+padding : 0;
+height : 33px;
+}
+#search #q {
+float : left;
+width : 135px;
+margin : 4px 0 0 0;
+padding : 5px 10px 5px 30px;
+border : none;
+background : transparent;
+color : #fff;
+font-size : 1.1em;
+font-family : 'Helvetica Neue', Arial, Sans-Serif;
+}
+#search .submit {
+display : none;
+}
+#sidebar .tags li {
+display : inline;
+}
+#sidebar .tags strong a {
+text-transform : uppercase;
+font-size : 0.95em;
+text-decoration : none;
+border-bottom : 1px dotted;
+}
+.tag0 {
+font-size : 75%;
+}
+.tag10 {
+font-size : 80%;
+}
+.tag20 {
+font-size : 90%;
+}
+.tag30 {
+font-size : 100%;
+}
+.tag40 {
+font-size : 110%;
+}
+.tag50 {
+font-size : 120%;
+}
+.tag60 {
+font-size : 140%;
+}
+.tag70 {
+font-size : 150%;
+}
+.tag80 {
+font-size : 160%;
+}
+.tag90 {
+font-size : 170%;
+}
+.tag100 {
+font-size : 180%;
+}
+#sidebar #calendar table {
+width : 90%;
+margin : 0 auto;
+text-align : center;
+}
+#sidebar #calendar caption {
+margin : 10px 0;
+padding : 0 4px 0 0;
+font-weight : bold;
+font-size : 1.1em;
+text-transform : uppercase;
+}
+#sidebar #calendar caption a {
+text-decoration : none;
+font-weight : normal;
+}
+#sidebar #calendar table td {
+padding-top : 3px;
+border-top : 1px dotted #ccc;
+}
+#sidebar #calendar table td a {
+background : #ccc;
+color : #fff;
+padding : 4px 8px;
+}
+#sidebar .syndicate li {
+list-style : none;
+padding-left : 25px;
+background : url('img/rss.png') no-repeat left center;
+}
+#footer {
+width : 788px;
+height : 55px;
+margin : 0 auto;
+font-size : 0.85em;
+color : #ccc;
+background : #181818 url('img/footer2.png') no-repeat center top;
+clear : both;
+}
+#footer a {
+color : #ccc;
+text-decoration : none;
+border-bottom : 1px dotted;
+}
+#footer p {
+padding : 30px;
+text-align : center;
+}

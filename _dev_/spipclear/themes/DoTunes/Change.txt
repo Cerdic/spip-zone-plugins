@@ -1,0 +1,15 @@
+v1.0.6 :  DC2 beta 7. Utilisation des fichiers html standards. Modification en-tête html suite aux changements du validateur W3C. Ajout du bouton Envoyer lors de la prévisualisation du commentaire, modifications du fichier style.css.
+
+v1.0.5 : Dotclear Beta 5.1.
+
+v1.0.4 : DC2 beta 3. Modification des fichiers .html.
+
+v1.0.3 : Modifs code pour post.odd.
+
+v1.0.2 : Ajout de quelques clearers. Background dans comment-form input. Ajout de sidebarend dans post.html, j'étais sûr de l'avoir déjà modifié…
+Modifications de toutes les images. Les billets pairs/impairs fonctionnent correctement sous IE. Taille des billets 600px.
+Utilisation obligatoire de topnav en premier.
+
+v1.0.1 : DC2 beta 2
+
+v1.0 : DC2 beta 1

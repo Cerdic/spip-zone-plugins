@@ -1,0 +1,79 @@
+/* ***** BEGIN LICENSE BLOCK *****
+#
+# This is part of Aorakits, a set of themes for DotClear. 
+# Copyright (c) 2006 Kozlika and contributors. All rights
+# reserved.
+#
+ * ***** END LICENSE BLOCK *****
+ 
+ 
+ STRUCTURE POUR DEUX COLONNES, SIDEBAR A DROITE, LARGEUR FIXE
+ 
+ 
+ --------------------------------------------------------------
+	AVANT TOUTE CHOSE
+	remise à zéro de toutes les marges des grands blocs pour que 
+	tous les navigateurs calculent depuis le même point de départ 
+--------------------------------------------------------------- */
+html, body, #page, #top, #prelude, #wrapper, #footer,
+#main, #content,
+#sidebar, #blognav, #blogextra {
+	margin : 0;
+	padding : 0;
+	}
+
+/* --------------------------------------------------------------
+	CENTRAGE DE LA PAGE DANS LA FENETRE DU NAVIGATEUR.
+	(supprimer ces lignes si on ne veut pas centrer)
+	Note : on peut remplacer la valeur (ici 0) des marges au-dessus 
+	et en dessous de la page par la valeur de son choix (px ou em).
+--------------------------------------------------------------- */
+body {
+	text-align : center;
+	}
+#page {
+	margin : 0 auto;
+	text-align : left;
+	}
+	
+
+/* -------------------------------------------------------------
+	STRUCTURE FIXE - 2 COLONNES - SIDEBAR A DROITE
+	Vous pouvez modifier 760px par la valeur de votre choix.
+	Vous pouvez modifier 200px par la valeur de votre choix
+	et 210px par votre nouvelle valeur +10px
+--------------------------------------------------------------- */
+#page {
+	width : 760px;
+    }
+#top {
+	height : 100px; /* a modifier par la valeur de votre choix */
+	}
+#top h1 {
+	margin : 0;
+	padding : 0;
+	height : 100px; /* idem que pour #top */
+	}
+#wrapper {
+	margin : 0 10px;
+	}
+#main {
+	width : 100%;
+	margin : 0 -200px 0 0;
+	float : left;
+	}
+#content {
+	margin : 0 210px 0 0;
+	padding : 10px;
+	}
+#footer {
+	clear : both;
+	text-align:center;
+	height : 30px;
+	}
+#sidebar {
+	width : 200px;
+	float : right;
+	}
+#blognav, #blogextra {}
+	

@@ -1,0 +1,616 @@
+
+* { margin: 0; padding: 0; border: 0; outline:none }
+
+html {
+
+	background: #303030 url(./img/body_x.jpg) repeat-x 0 0;
+}
+
+body {
+	background: url(./img/content_repeat.jpg) repeat-y 50% 0;
+	font: 80% Arial,sans-serif;
+	color: #464646;
+}
+
+
+/* Common styles
+-------------------------------------------------------- */
+ul { list-style: none; }
+ul li { list-style: none; }
+
+a:link, a:visited { color: #ffa101; text-decoration: none; }
+a:hover { color:#ffa101; font-weight: bold; }
+pre { overflow: auto; width: 100%; height: auto; }
+.left { float: left; }
+.right { float: right; }
+
+
+/* Page
+-------------------------------------------------------- */
+#page {
+
+	width: 100%;
+	background: url(./img/body.jpg) no-repeat 50% 0;
+}
+
+
+/* Header
+-------------------------------------------------------- */
+#top {
+
+	width: 926px;
+	height: 177px;
+	margin: 0 auto 0 auto;
+	background: url(./img/header.jpg) no-repeat 0 0;
+}
+	#top h1 { text-indent: -9999px; }
+
+	#top a { position: absolute; margin: 100px 0 0 330px; }
+/* Wrapper
+-------------------------------------------------------- */
+#wrapper {
+
+/*	background: url(./img/content_repeat.jpg) repeat-y 50% 0;*/
+	width: 926px;
+	margin: 0 auto 0 auto;
+	background: url(./img/content_rep.jpg) repeat-y 50% 0;
+}
+
+#main {
+	
+	width: 926px;
+	margin: 0 auto 0 auto;
+	min-height: 326px;
+	height: auto !important;
+	height: 326px;
+	background: url(./img/content_top.jpg) no-repeat 0 0;
+}
+
+#content {
+
+	float: left;
+	width: 510px;
+	padding: 0 0 0 96px;
+}
+
+#sidebar {
+
+	width: 197px;
+	margin: 0 0 0 609px;
+}
+
+hr.both {
+
+	clear: both;
+	visibility: hidden;
+}
+
+/* Sidebar
+-------------------------------------------------------- */
+#sidebar h2 {
+	color: #ffffff;
+	font-size: 1em;
+	font-weight: bold;
+	background: url(./img/nav.jpg) no-repeat 0 0;
+	padding: 5px 8px;
+	margin: 0 0 10px 0;
+}
+#sidebar h3 { color: #565656; padding: 4px 8px 0 8px; font-size: 1em; }
+
+#sidebar a:link, #sidebar a:visited { text-decoration: none; }
+#sidebar a:hover { font-weight: bold; }
+#blogextra a:link, #blogextra a:visited { text-decoration: none; }
+#blogextra a:hover { font-weight: bold; }
+
+#sidebar ul, #blogextra li { padding: 0 0 4px 0; }
+#sidebar li, #blogextra li {
+	padding: 3px 4px 3px 20px;
+}
+#sidebar p, #blogextra p { padding: 0 0 4px 10px; }
+
+	#search fieldset p { padding-left: 8px; }
+	#search #q {
+		color: #666666;
+		width: 180px;
+		border: 1px solid #CDCDCD;
+		padding: 1px 2px;
+		font-size: 1em;
+	}
+	#search .submit {
+		color: #ffa101;
+		background: #FFF;
+		font-size: 1em;
+		font-weight: bold;
+		text-transform: uppercase;
+		border: 1px solid #FFF;
+		cursor: pointer;
+	}
+	#search .submit:hover { background: #ffa101; color: #FFF; }
+
+#search, #sidebar .selected, #sidebar .categories, #sidebar .syndicate,
+#sidebar .langs, #sidebar .tags, #sidebar .links, #sidebar .text { padding: 0 0 10px 0; }
+
+#topnav {
+	color: #005D99;
+	font-size: 0.9em;
+	background: #F5F5F5;
+	border: 1px solid #CDCDCD;
+	border-width: 1px 0;
+	padding: 5px 5px 5px 8px;
+	margin: 0 0 20px 0;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+	#sidebar #topnav ul { margin: 0; padding: 0; }
+	#sidebar #topnav li {
+		display: inline;
+		background: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	#sidebar .syndicate li {
+		margin: 0 4px 0 11px;
+		padding: 5px 4px 5px 10px;
+	}
+
+	#sidebar .categories li {
+
+		margin: 0 10px 10px 10px;
+		padding: 0 0 4px 0;
+		text-indent: 0;
+		color: #565656;
+		text-indent: 15px;
+		border-bottom: 1px dotted #ffa101;
+		background: url(./img/li.jpg) no-repeat 0 5px;
+	}
+		#sidebar .categories li a { margin: 0; padding: 0; text-indent: 0; }
+	
+	#sidebar .tags ul {
+		margin: 5px 5px 10px 10px;
+		padding: 0;
+		font-size: 110%;
+	}
+		#sidebar .tags ul li {
+			display: inline;
+			background: none;
+			margin: 0;
+			padding: 0;
+			font-size: 0.9em;
+		}
+			#sidebar .tags ul li a:link, #sidebar .tags ul li a:visited { color: #333; /*#005D99;*/ }
+			
+		#sidebar .tags p strong a:link, #sidebar .tags p strong a:visited { padding: 0 0 0 5px; }
+		#sidebar .tags p strong a:hover {}
+
+
+.tag0 { font-size: 75%; }
+.tag10 { font-size: 80%; }
+.tag20 { font-size: 90%; }
+.tag30 { font-size: 100%; }
+.tag40 { font-size: 110%; }
+.tag50 { font-size: 120%; }
+.tag60 { font-size: 140%; }
+.tag70 { font-size: 150%; }
+.tag80 { font-size: 160%; }
+.tag90 { font-size: 170%; }
+.tag100 { font-size: 180%; }
+
+
+/* Post-content
+-------------------------------------------------------- */
+.post-content, .post-excerpt {
+
+	margin: 10px 30px 10px 15px;
+	text-align: justify;
+	line-height: 1.5em;
+}
+
+.post-content p, .post-excerpt p { padding: 4px 0; }
+
+.post-content strong, .post-excerpt strong { font-size: 0.9em; }
+.post-content acronym, .post-excerpt acronym { cursor: help; border-bottom: 1px dashed #666; }
+
+.post-content pre, .post-excerpt pre {
+	font: 1.1em 'courier new', courier, monospace;
+	background: #F5F5F5;
+	padding: 10px 5px;
+	margin: 6px 0;
+}
+
+.post-content h3, .post-excerpt h3 { padding: 4px 0; font-size: 1.2em; color: #666; }
+.post-content h4, .post-excerpt h4 { padding: 4px 0; font-size: 1.1em; color: #666; }
+.post-content h5, .post-excerpt h5 { padding: 4px 0; font-size: 1.0em; color: #666; }
+
+.post-content ul, .post-excerpt ul { padding: 4px 0; margin: 0; }
+	.post-content ul li, .post-excerpt ul li {
+		padding: 1px 0 1px 10px;
+	}
+.post-content ol, .post-excerpt ol { padding: 4px 0; margin: 0 0 0 28px; }
+	.post-content ol li, .post-excerpt ol li { padding: 1px 0; }
+
+.post-content blockquote, .post-excerpt blockquote { border-left: 4px solid #CDCDCD; margin: 4px 0 4px 5px; padding: 0 5px; }
+.post-content blockquote em, .post-excerpt blockquote em {}
+
+/* Classes
+-------------------------------------------------------- */
+.day-date {
+	color: #5E9E14;
+	font-weight: bold;
+	background: #F5F5F5;
+	border: 1px solid #CDCDCD;
+	border-width: 1px 0;
+	text-align: right;
+	padding: 5px 10px;
+	margin: 0 0 10px 0;
+	clear: left;
+}
+
+a.feed {}
+
+.post { color: #000; }
+
+.post-title { 
+
+	width: 510px;
+	height: 35px;
+	background: url(./img/content_title.jpg) no-repeat 0 0;
+	font-size: 1em;
+	text-indent: 60px;
+	line-height: 27px;
+}
+	.post-title a:link, .post-title a:visited { color: #464646; font-weight: bold; }
+	.post-title a:hover { color: #ffa101; }
+
+.post-info { margin: 0 30px 0 6px; padding: 0 0 5px 10px; font-size: 0.8em; color: #949293; background: url(./img/dotted.jpg) no-repeat 0 100%; }
+
+	.post-info a { font-weight: bold; }
+	
+.post-tags {
+	position: relative;
+	border: 0;
+	overflow: hidden;
+	height: 1%;
+}
+	.post-tags:after{
+		content:'[DO NOT LEAVE IT IS NOT REAL]';
+		display: block;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+	.post-tags li { float: left; margin: 0 5px 0 0; }
+		.post-tags li a:link, .post-tags li a:visited {
+			color: #000000;
+			display: block;
+			float: left;
+			text-decoration: none;
+			padding: 2px 0 2px 10;
+			white-space: nowrap;
+		}
+		.post-tags li a:hover { font-weight: bold; }
+
+.post-info-co {
+	
+	margin: 0 30px 20px 6px;
+	padding: 10px 0 0 0;
+	text-align: right;
+}
+	.post-info-co a:link, .post-info-co a:visited {
+		text-decoration: none;
+		padding: 2px 10px 2px 0;
+	}
+	.post-info-co a:hover { font-weight: bold; }
+
+.read-it {
+
+	margin: 0 0 0 15px;
+	font-weight: bold;
+	padding: 0 0 10px 0;
+}
+	.read-it a:link, .read-it a:visited, .read-it a:active { color: #2c231c; text-decoration: none; }
+	.read-it a:hover { color: #ffa101; font-weight: bold; }
+	
+#attachments {
+	clear: left;
+	border: 1px solid #E8E8E8;
+	border-width: 1px 0;
+	background: #FBFBFB;
+	padding: 5px;
+	margin: 4px 0 6px 0;
+}
+	#attachments * { color: #3C8FD1; }
+	#attachments h3 { font-size: 1.2em; }
+	#attachments ul { padding: 4px 0; }
+	#attachments li {
+		margin: 0 0 0.6em 0;
+		padding: 2px 10px 2px 10px;
+	}
+	#attachments li em {}
+	#attachments li div {}
+	#attachments li object {
+	   display: inline;
+	   margin: 0;
+	   padding: 0;
+	   vertical-align: bottom;
+	}
+
+.footnotes {
+	border: 1px solid #E8E8E8;
+	padding: 5px 0;
+	margin: 6px 0 25px 0;
+}
+	.footnotes h4 {
+		color: #005D99;
+		background: #FBFBFB;
+		border-bottom: 1px solid #E8E8E8;
+		padding: 2px 10px 2px 10px;
+		margin: 0 0 6px 0;
+		font-style: italic;
+	}
+	.footnotes p { padding: 4px 10px; }
+
+
+/* Archives
+-------------------------------------------------------- */
+#content-info {
+
+	width: 510px;
+	margin: 0 0 20px 0;
+	font-size: 1em;
+	text-indent: 20px;
+}
+.content-inner { padding-bottom: 20px; }
+
+.content-inner h3 {
+
+	width: 510px;
+	height: 35px;
+	background: url(./img/content_title.jpg) no-repeat 0 0;
+	font-size: 1em;
+	text-indent: 60px;
+	line-height: 27px;
+}
+
+#content-info h2 { font-size: 1em; color: #666666; }
+#content-info p { padding: 4px 0; font-size: 1em; }
+
+#content-info p a.feed:link, #content-info p a.feed:visited {
+	padding: 4px 0 4px 0;
+}
+#content-info p a.feed:hover {}
+
+.content-inner .day-date { text-align: left; }
+.content-inner .post-title { padding: 4px 0; margin: 0 0 0 10px; }
+.content-inner .post-info { margin: 4px 0 20px 10px; }
+
+.content-inner ul { padding: 4px 0; margin: 0 0 0 10px; }
+	.content-inner ul li {
+		padding: 1px 0 1px 0;
+		font-size: 1em;
+		line-height: 1.3;
+	}
+
+.content-inner h2 {
+
+	height: auto;
+	margin: 0;
+	padding: 0;
+	line-height: 10px;
+	background: none;
+	text-indent: 10px;
+}
+
+/* Tags - Page des tags
+-------------------------------------------------------- */
+
+.content-inner ul.tags {
+
+	margin: 10px 30px 10px 15px;
+}
+	.content-inner ul.tags:after{
+		content:'[DO NOT LEAVE IT IS NOT REAL]';
+		display: block;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+	.content-inner ul.tags li {
+		/* display: inline; */
+		display: block;
+		float: left;
+		margin: 4px;
+		height: 18px;
+		line-height: 18px;
+		background: none;
+	}
+		.content-inner ul.tags li a:link, .content-inner ul.tags li a:visited {
+			color: #fea200;
+			text-decoration: none;
+			white-space: nowrap;
+		}
+		.content-inner ul.tags li a:hover { font-weight: bold; }
+
+
+
+/* Commentaires
+-------------------------------------------------------- */
+#comments, #pings { padding-top: 10px; }
+#pr, .message { margin: 0 30px 0 15px; }
+	#comments h3, #pings h3, #comments-feed, #pr h3 {
+		
+		text-indent: 15px;
+		font-size: 1em;
+		color: #fea200;
+	}
+	#pr h3 { color: #5E9E14; margin: 30px 0 8px 0; }
+	
+	#comments-feed { text-align: right; font-weight: bold; margin: 30px 30px 8px 0; }
+		#comments-feed a:link, #comments-feed a:visited {
+			font-size: 0.8em;
+			text-decoration: none;
+			padding: 3px 0 3px 10px;
+		}
+		#comments-feed a:hover { font-weight: bold; }
+
+#comments dl { margin: 0 30px 0 30px;}
+#comments dt, #pings dt {
+
+	padding: 10px 0 5px 0;
+}
+	#comments dt a:link, #comments dt a:visited { color: #333333; text-decoration: none; }
+	#comments dt a:hover { font-weight: bold; }
+	#pings dt a:link, #pings dt a:visited { color: #3C8FD1; text-decoration: none; }
+	#pings dt a:hover { font-weight: bold; }
+
+	#comments dd, #pings dd, dd.comment-preview {
+	
+		border-left: 1px solid #E8E8E8;
+		margin: 0 0 20px 5px;
+		padding: 0 10px 0 10px;
+		font-size: 1.0em;
+		line-height: 1.4;
+	}
+	#comments dd *, #pings dd *, dd.comment-preview * { padding: 5px 0; font-size: 1em; }
+
+	#comments dt.me a:link, #comments dt.me a:visited, #comments dt.me a:hover { color: #5E9E14; }
+	#comments dd.me { border-left: 4px solid #5E9E14; }
+
+	.comment-number, .ping-number {
+		color: #333333;
+		font-weight: bold;
+	}
+
+#ping-url {
+
+	margin: 5px 30px 10px 30px;
+}
+
+
+.error {
+	border: 2px solid red;
+	padding: 10px 5px;
+	margin: 20px 0 0 0;
+	background: #FFCCCC;
+	font-weight: bold;
+}
+
+.message {}
+
+.pagination {
+	clear: left;
+	border: 1px solid #CDCDCD;
+	border-width: 1px 0;
+	background: #F5F5F5;
+	padding: 5px;
+	margin: 0 0 30px 0;
+	text-align: center;
+	color: #565656;
+	font-weight: bold;
+}
+	.pagination a:link, .pagination a:visited { color: #db7803; text-decoration: none; }
+	.pagination a:hover { font-weight: bold; }
+
+#navlinks {
+
+	margin: 20px 30px 20px 20px;
+	padding: 5px;
+	text-align: center;
+	color: #fea200;
+	font-weight: bold;
+}
+	#navlinks a:link, #navlinks a:visited { color: #565656; text-decoration: none; }
+	#navlinks a:hover { color: #666666; font-weight: bold; }
+
+/* Forms
+-------------------------------------------------------- */
+label { cursor: pointer; }
+
+#comment-form { padding-top: 10px; }
+
+#comment-form h3 {
+
+	margin: 20px 0 10px 0;
+	text-indent: 15px;
+	font-size: 1em;
+	color: #fea200;
+}
+
+#comment-form fieldset p { padding: 5px 0; /*margin: 0 0 0 30%;*/ }
+#comment-form fieldset p.field { padding: 5px 0; width: auto; margin: 0; clear: left; }
+#comment-form p.form-help { width: 60%; margin: 0 0 0 30%; font-style: italic; }
+
+#comment-form p label { width: auto; }
+#comment-form p.field label {
+	font-weight: bold;
+	display: block;
+	padding: 0 4px 4px 0;
+	width: 29%;
+	float: left;
+	text-align: right;
+}
+#comment-form input, #comment-form textarea {
+	font: 1em Arial,sans-serif;
+	color: #000000;
+	border: 1px solid #CDCDCD;
+	padding: 1px 2px;
+	font-size: 1em;	
+	width: 60%;
+}
+
+#comment-form input#c_remember {
+	width: auto;
+	border: 0;
+	margin: 0 5px 0 140px;
+}
+#comment-form input.preview { margin-left: 134px; }
+#comment-form input.preview, #comment-form input.submit {
+	width: auto;
+	color: #fea200;
+	background: #FFF;
+	font-size: 1em;
+	font-weight: bold;
+	text-transform: uppercase;
+	border: 1px solid #FFF;
+}
+#comment-form input.preview:hover, #comment-form input.submit:hover { background: #fea200; color: #FFF; }
+
+
+/* Footer
+-------------------------------------------------------- */
+#footer {
+	width: 100%;
+	height: 105px;
+	background: url(./img/footer_out.jpg) no-repeat 50% 0;
+}
+	#footer div {
+	
+		width: 926px;
+		height: 97px;
+		margin: 0 auto 0 auto;
+		background: url(./img/footer_in.jpg) no-repeat 0 0;	
+	}
+	
+	#footer p.links {
+	
+		position: absolute;
+		width: 500px;
+		margin: 42px 0 0 100px;
+		color: #565656;
+		padding: 0 16px 6px 0;
+		font-size: 0.9em;
+		line-height: 15px;
+		text-align: center;
+	}
+		#footer p a:link, #footer p a:visited { color: #db7803; text-decoration: none; }
+		#footer p a:hover { font-weight: bold; }
+			
+	#footer p.top {
+
+		position: absolute;
+		width: 25px;
+		height: 25px;
+		margin: 26px 0 0 698px;
+	}
+		#footer p.top a { display: block; width: 100%; height: 100%; text-decoration: none; }
+		#footer p.top a span { visibility: hidden; }

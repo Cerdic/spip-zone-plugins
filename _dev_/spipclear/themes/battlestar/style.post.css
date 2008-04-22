@@ -1,0 +1,246 @@
+
+.dc-post #main {
+padding-bottom : 0;
+}
+.dc-post #navlinks {
+margin : 0 0 40px 0;
+padding : 5px 0;
+font-size : 0.9em;
+color : #aaa;
+text-align : center;
+background : #ddd;
+border-bottom : 1px solid #fff;
+}
+.dc-post #navlinks a {
+font-size : 0.9em;
+color : #333;
+text-decoration : none;
+}
+.dc-post .post-title {
+font-size : 2.2em;
+padding : 0 10px 5px 10px;
+}
+
+.title-tags {
+float : left;
+font-size : 1em;
+margin : 12px 10px 0 10px;
+letter-spacing : 0;
+}
+
+.post-tags {
+margin : 0;
+padding : 10px 0;
+font-size : 0.9em;
+}
+.post-tags li {
+margin : 0 5px 0 0;
+padding : 0;
+display : inline;
+}
+.post-tags li a {
+text-decoration : none;
+border-bottom : 1px dotted;
+background : #efefef;
+}
+.post-content h3, .post-excerpt h3 {
+font-size : 1.5em;
+}
+.post-content h4, .post-excerpt h4 {
+font-size : 1.4em;
+}
+.post-content h5, .post-excerpt h5 {
+font-size : 1.25em;
+}
+.post-content pre {
+width : 600px;
+padding : 20px;
+}
+.post-content blockquote, .post-excerpt blockquote {
+margin : 20px;
+padding : 0 0 0 40px;
+font-style : italic;
+background : url('img/blockquote.png') no-repeat left top;
+}
+.footnotes {
+margin : 20px 0 0 0;
+padding : 0 20px 10px 20px;
+font-size : 0.9em;
+border-top : 2px solid #444;
+}
+.footnotes h4 {
+font-size : 1.2em;
+padding : 0 0 0 0;
+}
+#attachments {
+background : #ddd;
+margin : 20px 10px 20px 10px;
+padding : 0 20px 10px 20px;
+font-size : 0.9em;
+border-bottom : 1px solid #fff;
+}
+#attachments h3 {
+margin : 0;
+padding : 10px 0 0 0;
+}
+#attachments ul {
+padding : 0;
+}
+#attachments li {
+list-style : none;
+}
+#attachments li a {
+text-decoration : none;
+border-bottom : 1px dotted;
+}
+#comments-pings {
+padding : 25px 0;
+background : url('img/sidebar_bg.png') repeat;
+}
+#comments, #pings {
+width : 700px;
+margin : 0 auto;
+padding : 25px 0;
+font-size : 0.9em;
+color : #fff;
+}
+#comments h3, #pings h3 {
+margin : 0 0 15px 0;
+padding : 0 0 5px 10px;
+font-size : 1.5em;
+letter-spacing : -1px;
+text-transform : capitalize;
+}
+#comments dt, #pings dt {
+padding : 15px 0 10px 10px;
+font-weight : bold;
+border-top : 1px dotted #333;
+color : #888;
+position : relative;
+text-transform : uppercase;
+}
+#comments dt a, #pings dt a {
+color : #fff;
+}
+#comments dt a.comment-number, #pings dt a.ping-number {
+margin : 5px 0 0 0;
+padding : 0 20px 5px 10px;
+font-size : 2.4em;
+color : #fff;
+position : absolute;
+right : 0;
+}
+#comments dd, #pings dd {
+padding : 0 100px 20px 10px;
+}
+#comments ul {
+padding : 0 0 0 20px;
+margin : 0;
+line-height : 1.4em;
+}
+#comments ul li {
+padding : 5px 0;
+list-style-type : disc;
+}
+#comments ol {
+margin : 0 0 0 25px;
+padding : 5px 0;
+list-style-type : decimal;
+}
+#comments ol ol li {
+list-style-type : lower-latin;
+}
+#comments ol li {
+padding : 5px 0;
+list-style-type : decimal;
+}
+#comments pre {
+width : 500px;
+margin : 0 0 10px 0;
+padding : 10px !important ;
+padding : 10px 10px 40px 10px;
+background : #111;
+border : 1px solid #222;
+}
+#comment-form {
+width : 700px;
+margin : 0 auto;
+padding : 50px 0;
+font-size : 0.9em;
+clear : both;
+color : #fff;
+}
+#comment-form fieldset {
+margin : 0;
+padding : 0;
+border : none;
+}
+#comment-form h3 {
+margin : 0 0 20px 0;
+padding : 0 0 20px 10px;
+font-size : 1.5em;
+letter-spacing : -1px;
+border-bottom : 1px dotted #333;
+}
+#comment-form p.field {
+margin : 0 0 0 10px;
+}
+#comment-form p.field input, #comment-form p.field textarea {
+padding : 1px 4px;
+display : block;
+width : 468px;
+border : 1px solid #ccc;
+border-width : 2px 1px 1px 2px;
+background : #fff;
+font-family : 'Lucida Grande', Tahoma, Verdana, Arial, Sans-Serif;
+font-size : 1.1em;
+}
+#comment-form #c_remember {
+margin : 0 10px 10px 10px;
+padding : 0;
+}
+#comment-form .form-help {
+padding : 0 0 10px 10px;
+}
+#comment-form .preview, #comment-form .submit {
+text-transform : uppercase;
+margin : 10px 0 20px 10px;
+font-size : 1em;
+cursor : pointer;
+}
+#ping-url {
+width : 670px;
+margin : 0 auto;
+padding : 0 0 10px 0;
+text-decoration : underline;
+color : #fff;
+}
+#comments-feed {
+width : 670px;
+margin : 0 auto;
+}
+#comments-feed a {
+color : orange;
+text-decoration : none;
+border-bottom : 1px dotted;
+}
+.error {
+text-align : center;
+clear : left;
+margin : 0 0 20px 0;
+padding : 10px;
+font-size : 0.9em;
+color : red;
+font-weight : bold;
+text-transform : uppercase;
+}
+.message {
+text-align : center;
+clear : left;
+margin : 0 0 20px 0;
+padding : 10px;
+font-size : 0.9em;
+color : green;
+font-weight : bold;
+text-transform : uppercase;
+}

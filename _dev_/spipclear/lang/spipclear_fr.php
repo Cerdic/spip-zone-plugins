@@ -87,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'selection' => '&agrave; retenir',
 'site_comment' => 'site',
 'syndication' => 'Syndication',
+'selectionner_theme' => 'Cliquez pour s&eacute;lectionner ce th&ecirc;me',
 
 //T
 'texte_erreur1' => 'La recherche de',
@@ -96,9 +97,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'trackbacks' => 'trackbacks', // Non utilise
 'trackbacks_pour_faire' => 'Pour faire un trackback sur ce billet', // Non utilise
 'trackbacks_fermes' => 'Les trackbacks pour ce billet sont ferm&eacute;s.', // Non utilise
+'themes_installes'=> 'Les th&egrave;mes install&eacute;s sur ce spip: ',
 
 //U
 'un_seul_mot' => 'un seul mot', // Oubli
+
+// V
+'voir_capture'=> 'Afficher la capture d\'&eacute;cran',
 
 );
 

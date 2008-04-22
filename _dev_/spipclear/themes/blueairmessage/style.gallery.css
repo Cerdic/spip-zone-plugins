@@ -1,0 +1,64 @@
+
+.gallery-category {
+display : block;
+margin : 0 0 20px 0;
+padding : 2px 5px;
+clear : both;
+font-size : 1.25em;
+background : #efefef;
+}
+
+.gallery-album {
+width : 210px;
+float : right;
+clear : right;
+position : relative;
+margin : 0 5px 20px 0;
+padding : 0;
+background : url('img/album_shadow.png') no-repeat right bottom;
+}
+
+.gallery-albumodd {
+width : 210px;
+float : left;
+clear : left;
+position : relative;
+margin : 0 0 20px 5px;
+padding : 0;
+background : url('img/album_shadow.png') no-repeat right bottom;
+}
+
+.gallery-albumodd .post, .gallery-album .post {
+margin : 0;
+padding : 0;
+background : none;
+}
+
+.gallery-date {
+padding : 0;
+font-size : 0.85em;
+}
+
+.gallery-albumodd .post-title, .gallery-album .post-title {
+display : block;
+width : 140px;
+font-size : 1.25em;
+}
+
+.gallery-albumodd .post-info, .gallery-album .post-info {
+padding : 0 0 10px 0;
+width : 140px;
+}
+
+.gallery-albumodd .post-info .comment_count, .gallery-album .post-info .comment_count {
+display : block;
+background : url('img/comment.png') no-repeat left 6px;
+}
+
+.gallery-albumodd img, .gallery-album img {
+position : absolute;
+right : 7px;
+bottom : 7px;
+margin : 10px 0 0 0;
+padding : 0;
+}

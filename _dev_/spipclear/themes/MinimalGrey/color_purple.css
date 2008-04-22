@@ -1,0 +1,16 @@
+/*
+	VIOLET
+*/
+
+/*couleur des liens */
+a{color:#969;}
+/*couleurs des titres et des liens survolés*/
+h1,h2,h3,h4,h5,h6,label,.post-title a,a:hover{color:#C9C;}
+/*icones colorées*/
+#sidebar li a{
+	padding-left:16px;
+	background:transparent url(images/bullet_purple.png) no-repeat left center;}
+.post-tags li a,.tags strong a{
+	padding:0px 0px 2px 18px;
+	background:transparent url(images/tag_purple.png) no-repeat left center;}
+	

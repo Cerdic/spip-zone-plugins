@@ -1,0 +1,93 @@
+
+/* 
+	Theme Name: Grid Seven
+	Description: Grid-Based-Compact-Magazine-Style Dotclear 2 Theme.
+	Version: 1.1
+	Author: David Yim
+	Author URI: http://davidyim.fr/
+
+	Compatibility : tested successfully under browsers : IE6, IE7, Firefox (version 2.0.0.11), Safari (public beta 3), and Opera (version 9.24)
+	W3C Compliant.
+
+	Thanks to : Khoi Vinh, Wilson Miner and Eston Bond for inspiration.
+	           (david, december 09, 2007)
+*/
+
+@media projection, screen {
+.ui-tabs-hide {
+display : none;
+}
+}
+@media print {
+.ui-tabs-nav {
+display : none;
+}
+}
+.ui-tabs-nav, .ui-tabs-panel {
+font-family : Helvetica, Arial, sans-serif;
+}
+.ui-tabs-nav {
+list-style : none;
+margin : 0;
+padding : 0;
+display : block;
+width : 240px;
+height : 26px;
+border-top : 1px solid #ccc;
+border-bottom : 1px solid #ccc;
+position : absolute;
+right : 0;
+top : 0;
+}
+.ui-tabs-nav:after {
+display : block;
+clear : both;
+content : " ";
+}
+.ui-tabs-nav li {
+display : block;
+width : 240px;
+float : left;
+margin : 0;
+padding : 5px 0 6px 0;
+font-size : 0.85em;
+position : absolute;
+}
+.ui-tabs-nav a, .ui-tabs-nav a span {
+display : block;
+padding : 0;
+}
+.ui-tabs-nav a, .ui-tabs-nav a:visited {
+margin : 0;
+padding : 0;
+font-weight : bold;
+text-align : left;
+text-decoration : none;
+color : #aaa;
+white-space : nowrap;
+outline : 0;
+}
+.ui-tabs-nav .ui-tabs-selected a, .ui-tabs-nav .ui-tabs-selected a:visited {
+position : relative;
+top : 0;
+z-index : 2;
+margin : 0;
+padding : 0;
+color : #666;
+display : none;
+border : none;
+}
+.ui-tabs-nav a:hover, .ui-tabs-nav a:focus, .ui-tabs-nav a:active, .ui-tabs-nav .ui-tabs-unselect a:hover, .ui-tabs-nav .ui-tabs-unselect a:focus, .ui-tabs-nav .ui-tabs-unselect a:active {
+cursor : pointer;
+}
+.ui-tabs-panel {
+margin : 0;
+padding : 0;
+background : #f8f8f6;
+}
+* html .ui-tabs-nav {
+display : inline-block;
+}
+*:first-child + html .ui-tabs-nav {
+display : inline-block;
+}

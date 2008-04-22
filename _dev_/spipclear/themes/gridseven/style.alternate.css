@@ -1,0 +1,97 @@
+
+/* 
+	Theme Name: Grid Seven
+	Description: Grid-Based-Compact-Magazine-Style Dotclear 2 Theme.
+	Version: 1.1
+	Author: David Yim
+	Author URI: http://davidyim.fr/
+
+	Compatibility : tested successfully under browsers : IE6, IE7, Firefox (version 2.0.0.11), Safari (public beta 3), and Opera (version 9.24)
+	W3C Compliant.
+
+	Thanks to : Khoi Vinh, Wilson Miner and Eston Bond for inspiration.
+	           (david, december 09, 2007)
+*/
+
+@import url(style.general.css);
+
+/* NOTES : permet l'affichage des billets de facon uniforme lorsque la pagination est activee */
+
+.postoddfirst {
+margin : 0;
+padding : 0;
+position : relative;
+border-top : 1px solid #ccc;
+}
+.postoddfirst .post-date {
+display : block;
+width : 100px;
+position : absolute;
+left : 0;
+padding : 20px 0 10px;
+font-size : 0.85em;
+font-weight : bold;
+color : #444;
+border-bottom : 1px solid #ccc;
+}
+.postoddfirst .post-date span {
+display : block;
+text-align : center;
+}
+.postoddfirst .post-date .day-date {
+font-size : 2em;
+}
+.postoddfirst .post-date .month-date {
+font-size : 1.6em;
+}
+.postoddfirst .post-date .year-date {
+font-size : 1em;
+}
+.postoddfirst .post-title {
+margin : 0 0 0 120px;
+padding : 20px 0 10px;
+}
+.postoddfirst .post-title a, .postodd .post-title a:visited {
+font-size : 1.4em;
+color : #444;
+}
+.postoddfirst .post-info {
+margin : 0 0 0 120px;
+font-size : 0.85em;
+font-weight : bold;
+}
+.postoddfirst .post-content {
+margin : 0 0 0 120px;
+padding : 0;
+}
+.postoddfirst .post-info-co {
+width : 100px;
+position : absolute;
+top : 95px;
+left : 0;
+text-align : right;
+}
+.postoddfirst .post-info-co a {
+width : 100px;
+margin : 0;
+padding : 5px 0;
+float : left;
+border-bottom : 1px solid #ccc;
+color : #333;
+font-size : 0.85em;
+text-decoration : none;
+}
+.postoddfirst .post-info-co a.comment_count, .postoddfirst .post-info-co a.ping_count, .postoddfirst .post-info-co a.attach_count {
+padding-left : 0;
+background : transparent;
+}
+.postoddfirst .read-it {
+margin : 0 0 0 120px;
+float : none;
+}
+.postoddfirst:after {
+display : none;
+}
+#latest-post, #main a.go-to-top, #featured {
+display : none;
+} 

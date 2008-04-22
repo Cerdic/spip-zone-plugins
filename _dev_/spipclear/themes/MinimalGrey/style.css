@@ -1,0 +1,179 @@
+/* -------------------------------------------------------- 
+	Minimal Grey
+	design css jibHaine	( http://www.jibhaine.fr )
+	Licence Creative Commons (by-nc)
+-------------------------------------------------------- */
+@import url(perso.css);
+
+/* polices générale et RAZ des marges*/
+*{
+	font-family:Arial,Helvetica, sans-serif;
+	font-size:13px;
+	font-weight:400;
+	color:#000;
+	border:0;
+	margin:0;
+	padding:0;
+}
+
+
+/*positionnement sidebar et post */
+	#main{
+		float:left;
+		width:470px;
+	}
+	#sidebar {
+		float:right;
+		width:220px;
+		text-align:left;
+	}
+	
+	/* si la sidebar est placée en bas, on la coupe en deux
+	#blognav{float:right;}
+	#blogextra{float:left;}
+	*/
+	/***************** CLASSES GENERALES **************************************/
+	/*champs de texte*/
+	input[type=text],textarea,select{border:1px solid #666;background:#EEE;padding:1px;}
+	/*boutons*/
+	input[type=submit],input[type=reset]{border:1px solid #666;background:#999;color:#CCC;}
+	input[type=submit]:hover,input[type=reset]:hover{background:#666;color:#FFF;}
+	li{list-style-type:none;}
+	q { font-style:italic;}
+	blockquote, pre {border:#666 solid 1px;background:#EEE;padding:5px;margin:5px;  }
+	code, pre ,.code{font-family:'Courier New', Courier, monospace;overflow:auto;}
+
+h1{font-size:24px}
+h2{font-size:22px}
+h3{font-size:20px}
+h4{font-size:18px}
+h5{font-size:16px}
+h6{font-size:15px}
+h1,h2,h3,h4,h5,h6{
+margin-top:5px;
+letter-spacing:1px;
+}
+	
+	
+	/****************** POSITIONNEMENT DIVS **********************************/
+	#page{width:780px;margin:0 auto;position:relative;}
+	/****** HEADER ******/
+	#top{
+		width:700px;height:198px;
+		padding:59px 40px 0px 40px;
+		background:transparent url(images/head_all.png) no-repeat 0 0;
+		}
+		/*fond header (img perso)*/
+		#top h1 {
+		display:block;width:700px;height:200px;overflow:hidden;margin:0;
+		}
+		/* png coins arrondis */
+		#top h1 span {
+		display:block;width:700px;height:200px;
+		background:transparent url(images/head_inner.png) no-repeat 0 0;}
+		/*titre*/
+		#top h1 span a{position:absolute;top:25px;right:40px;color:#fff;font-size:12px;text-decoration:none;}
+		/*liens 'aller a' */
+		#prelude{
+			font-size:12px;
+			position:absolute;
+			top:25px;left:40px;
+			color:#333;}
+			#prelude a{color:#333;font-size:12px;}
+			#prelude a:hover{color:#999;}
+	/******  FOOTER *****/
+	#footer{
+		width:700px;height:45px;
+		padding:55px 40px 0px 40px;
+		background:transparent url(images/footer.png) no-repeat top left;
+		}
+		#footer p, #footer a{color:#FFF;text-align:center;font-size:12px;}
+	/****** WRAPPER *****/
+	#wrapper{
+		padding:0px 40px;overflow:auto;height:100%;
+		background:transparent url(images/page_fond.png) repeat-y top left;
+
+	}
+	/********************* CONTENT *************/
+	#content-info{}
+	#content-info h2, #content-info p{text-align:center;}
+	#content-info h2{font-size:20px;}
+	
+	/****** NAVLINKS **********/
+	 #navlinks,.pagination{color:#FFF;display:block;text-align:center;clear:both;position:relative;margin:5px 0px;}
+	 .next {position:absolute;top:0;right:0;clear:both;}
+	 .prev{position:absolute;top:0;left:0;clear:both;}
+	
+	
+	/****************** ICONES **********************************/
+	.post-info{padding:0px 0px 2px 18px;background:transparent url(images/time.png) no-repeat left center;color:#666;}
+	.comment_count{padding:0px 0px 2px 18px;background:transparent url(images/comment.png) no-repeat left center;}
+	.ping_count{padding:0px 0px 2px 18px;background:transparent url(images/link.png) no-repeat left center;}
+	.attach_count{padding:0px 0px 2px 18px;background:transparent url(images/package.png) no-repeat left center;}
+	.feed, .feed:hover, #sidebar .feed{padding:3px 0px 3px 18px;background:transparent url(images/feed.png) no-repeat left center;}
+	
+	/*****POST********/
+	.post, #content-info, #comments,#comment-form,#pings{margin-bottom:20px;}
+	.post-tags li{display:inline;}
+	.post-content, .post-excerpt{text-align:justify;margin:5px 0px;}
+	.content .post{margin:10px 0px;}
+	.content .odd{margin:10px 0px;}
+	.content .first{margin:0px 0px 10px 0px;}
+	/********** Position TEXTES ************/
+	.read-it{text-align:right;}
+	
+	
+	/***********TEXTES DIVERS*************/
+	.post-title, .post-title a, #comments h3, #footnotes h4, #comment-form h3, #pings h3{font-size:24px;text-decoration:none;}
+	.post-title h2 ,#sidebar h2{font-size:18px;}
+	.error{padding:2px 0px 2px 18px;background:transparent url(images/bullet_error.png) no-repeat left center;color:#B00;font-weight:bold;}
+	.message{padding:2px 0px 2px 18px;background:transparent url(images/bullet_disk.png) no-repeat left center;color:#0B0;font-weight:bold;}
+	
+
+ .post-info,.post-info a,.post-tags a, .post-info-co a{	font-size:12px;}
+ 
+ 
+ /********COMMENTS ET PINGS ***********/
+ .comment-number,.ping-number{text-decoration:none;font-size:24px;float:left;}
+ #comments dd, #pings dd{margin-bottom:5px;}
+ #comments dt, #pings dt{color:#999;font-size:12px;margin-top:5px;}
+ .me a{font-weight:bold;} .me  .comment-number, .me .ping-number{}
+ #comments-feed{text-align:center;}
+ #ping-url{margin:15px 0px;}
+ 
+ /***************FORMULAIRE COMMENTAIRES**************/
+ #comment-form fieldset { }
+.field {display:block;margin:4px 0px;clear:both;overflow:auto;width:100%;}
+.field label {margin:4px 0px;width:150px;float:left;}
+.field input , .field textarea {width:310px;float:right;}
+
+	/******SIDEBAR**********/
+	/* tout le contenu de la sidebar*/
+	#sidebar *{text-align:left;line-height:24px;}
+	/*titres sidebar*/
+	#sidebar h2,#search label{font-size:17px;}
+	#sidebar h3{font-size:16px;}
+	#topnav li{display:inline;}
+	#topnav ul li a, #sidebar .tags ul li a{padding:0px;background:none;}
+	/********* Tags **************/
+	.tag0 { font-size: 75%; }
+	.tag10 { font-size: 80%; }
+	.tag20 { font-size: 90%; }
+	.tag30 { font-size: 100%; }
+	.tag40 { font-size: 110%; }
+	.tag50 { font-size: 120%; }
+	.tag60 { font-size: 140%; }
+	.tag70 { font-size: 150%; }
+	.tag80 { font-size: 160%; }
+	.tag90 { font-size: 170%; }
+	.tag100 { font-size: 180%; }
+	.tags li{display:inline;}
+	
+	/* trucs a cacher */
+	.day-date,#prelude{display:none;}
+	
+	/*supprimez les lignes suivante's pour afficher la sidebar dans la page post*/
+	.dc-post #sidebar{display:none;overflow:hidden;}
+	.dc-post #main{width:700px;display:block;}
+	.dc-post #wrapper{overflow:hidden;}
+	.field input , .field textarea {width:530px;}

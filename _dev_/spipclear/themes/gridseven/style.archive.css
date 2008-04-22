@@ -1,0 +1,785 @@
+
+/* 
+	Theme Name: Grid Seven
+	Description: Grid-Based-Compact-Magazine-Style Dotclear 2 Theme.
+	Version: 1.1
+	Author: David Yim
+	Author URI: http://davidyim.fr/
+
+	Compatibility : tested successfully under browsers : IE6, IE7, Firefox (version 2.0.0.11), Safari (public beta 3), and Opera (version 9.24)
+	W3C Compliant.
+
+	Thanks to : Khoi Vinh, Wilson Miner and Eston Bond for inspiration.
+	           (david, december 09, 2007)
+*/
+
+.content-inner .archive-explorer-year {
+width : 100%;
+margin : 0 0 20px 0;
+float : left;
+}
+.content-inner .archive-explorer-year h3 {
+margin : 0;
+padding : 0 0 20px 0;
+font-size : 1.4em;
+text-align : left;
+border-bottom : 1px solid #ccc;
+color : #666;
+}
+.content-inner .archive-explorer-month {
+width : 500px;
+height : 120px;
+margin : 20px 0;
+padding : 0;
+position : relative;
+background : url('img/archive_bg.gif') no-repeat left top;
+border-bottom : 1px solid #ccc;
+}
+.content-inner .archive-explorer-month ul {
+margin : 0;
+padding : 0;
+}
+.content-inner .archive-explorer-month li {
+display : block;
+width : 0;
+height : 100%;
+position : absolute;
+left : 0;
+top : 0;
+margin : 0;
+padding : 0;
+}
+.content-inner .archive-explorer-month li a {
+display : block;
+margin : 0;
+padding : 5px 0 0 0;
+width : 30px;
+height : 20px;
+position : absolute;
+bottom : 5px;
+text-align : center;
+text-transform : uppercase;
+font-size : 0.85em;
+font-weight : bold;
+text-decoration : none;
+background : #f8f8f6;
+}
+.content-inner .archive-explorer-month a:hover {
+text-decoration : underline;
+}
+
+/* please, do not remove this ;) */
+
+.content-inner .archive-explorer-month li.month-01 a {
+left : 0;
+}
+.content-inner .archive-explorer-month li.month-02 a {
+left : 40px;
+}
+.content-inner .archive-explorer-month li.month-03 a {
+left : 80px;
+}
+.content-inner .archive-explorer-month li.month-04 a {
+left : 120px;
+}
+.content-inner .archive-explorer-month li.month-05 a {
+left : 160px;
+}
+.content-inner .archive-explorer-month li.month-06 a {
+left : 200px;
+}
+.content-inner .archive-explorer-month li.month-07 a {
+left : 240px;
+}
+.content-inner .archive-explorer-month li.month-08 a {
+left : 280px;
+}
+.content-inner .archive-explorer-month li.month-09 a {
+left : 320px;
+}
+.content-inner .archive-explorer-month li.month-10 a {
+left : 360px;
+}
+.content-inner .archive-explorer-month li.month-11 a {
+left : 400px;
+}
+.content-inner .archive-explorer-month li.month-12 a {
+left : 440px;
+}
+
+/* This is how it works ;) */
+
+.content-inner li a.posts1 {
+border-top : 1px solid #6699cc;
+}
+.content-inner li a.posts2 {
+border-top : 2px solid #6699cc;
+}
+.content-inner li a.posts3 {
+border-top : 3px solid #6699cc;
+}
+.content-inner li a.posts4 {
+border-top : 4px solid #6699cc;
+}
+.content-inner li a.posts5 {
+border-top : 5px solid #6699cc;
+}
+.content-inner li a.posts6 {
+border-top : 6px solid #6699cc;
+}
+.content-inner li a.posts7 {
+border-top : 7px solid #6699cc;
+}
+.content-inner li a.posts8 {
+border-top : 8px solid #6699cc;
+}
+.content-inner li a.posts9 {
+border-top : 9px solid #6699cc;
+}
+.content-inner li a.posts10 {
+border-top : 10px solid #6699cc;
+}
+.content-inner li a.posts11 {
+border-top : 11px solid #6699cc;
+}
+.content-inner li a.posts12 {
+border-top : 12px solid #6699cc;
+}
+.content-inner li a.posts13 {
+border-top : 13px solid #6699cc;
+}
+.content-inner li a.posts14 {
+border-top : 14px solid #6699cc;
+}
+.content-inner li a.posts15 {
+border-top : 15px solid #6699cc;
+}
+.content-inner li a.posts16 {
+border-top : 16px solid #6699cc;
+}
+.content-inner li a.posts17 {
+border-top : 17px solid #6699cc;
+}
+.content-inner li a.posts18 {
+border-top : 18px solid #6699cc;
+}
+.content-inner li a.posts19 {
+border-top : 19px solid #6699cc;
+}
+.content-inner li a.posts20 {
+border-top : 20px solid #6699cc;
+}
+.content-inner li a.posts21 {
+border-top : 21px solid #6699cc;
+}
+.content-inner li a.posts22 {
+border-top : 22px solid #6699cc;
+}
+.content-inner li a.posts23 {
+border-top : 23px solid #6699cc;
+}
+.content-inner li a.posts24 {
+border-top : 24px solid #6699cc;
+}
+.content-inner li a.posts25 {
+border-top : 25px solid #6699cc;
+}
+.content-inner li a.posts26 {
+border-top : 26px solid #6699cc;
+}
+.content-inner li a.posts27 {
+border-top : 27px solid #6699cc;
+}
+.content-inner li a.posts28 {
+border-top : 28px solid #6699cc;
+}
+.content-inner li a.posts29 {
+border-top : 29px solid #6699cc;
+}
+.content-inner li a.posts30 {
+border-top : 30px solid #6699cc;
+}
+.content-inner li a.posts31 {
+border-top : 31px solid #6699cc;
+}
+.content-inner li a.posts32 {
+border-top : 32px solid #6699cc;
+}
+.content-inner li a.posts33 {
+border-top : 33px solid #6699cc;
+}
+.content-inner li a.posts34 {
+border-top : 34px solid #6699cc;
+}
+.content-inner li a.posts35 {
+border-top : 35px solid #6699cc;
+}
+.content-inner li a.posts36 {
+border-top : 36px solid #6699cc;
+}
+.content-inner li a.posts37 {
+border-top : 37px solid #6699cc;
+}
+.content-inner li a.posts38 {
+border-top : 38px solid #6699cc;
+}
+.content-inner li a.posts39 {
+border-top : 39px solid #6699cc;
+}
+.content-inner li a.posts40 {
+border-top : 40px solid #6699cc;
+}
+.content-inner li a.posts41 {
+border-top : 41px solid #6699cc;
+}
+.content-inner li a.posts42 {
+border-top : 42px solid #6699cc;
+}
+.content-inner li a.posts43 {
+border-top : 43px solid #6699cc;
+}
+.content-inner li a.posts44 {
+border-top : 44px solid #6699cc;
+}
+.content-inner li a.posts45 {
+border-top : 45px solid #6699cc;
+}
+.content-inner li a.posts46 {
+border-top : 46px solid #6699cc;
+}
+.content-inner li a.posts47 {
+border-top : 47px solid #6699cc;
+}
+.content-inner li a.posts48 {
+border-top : 48px solid #6699cc;
+}
+.content-inner li a.posts49 {
+border-top : 49px solid #6699cc;
+}
+.content-inner li a.posts50 {
+border-top : 50px solid #6699cc;
+}
+.content-inner li a.posts51 {
+border-top : 51px solid #6699cc;
+}
+.content-inner li a.posts52 {
+border-top : 52px solid #6699cc;
+}
+.content-inner li a.posts53 {
+border-top : 53px solid #6699cc;
+}
+.content-inner li a.posts54 {
+border-top : 54px solid #6699cc;
+}
+.content-inner li a.posts55 {
+border-top : 55px solid #6699cc;
+}
+.content-inner li a.posts56 {
+border-top : 56px solid #6699cc;
+}
+.content-inner li a.posts57 {
+border-top : 57px solid #6699cc;
+}
+.content-inner li a.posts58 {
+border-top : 58px solid #6699cc;
+}
+.content-inner li a.posts59 {
+border-top : 59px solid #6699cc;
+}
+.content-inner li a.posts60 {
+border-top : 60px solid #6699cc;
+}
+.content-inner li a.posts61 {
+border-top : 61px solid #6699cc;
+}
+.content-inner li a.posts62 {
+border-top : 62px solid #6699cc;
+}
+.content-inner li a.posts63 {
+border-top : 63px solid #6699cc;
+}
+.content-inner li a.posts64 {
+border-top : 64px solid #6699cc;
+}
+.content-inner li a.posts65 {
+border-top : 65px solid #6699cc;
+}
+.content-inner li a.posts66 {
+border-top : 66px solid #6699cc;
+}
+.content-inner li a.posts67 {
+border-top : 67px solid #6699cc;
+}
+.content-inner li a.posts68 {
+border-top : 68px solid #6699cc;
+}
+.content-inner li a.posts69 {
+border-top : 69px solid #6699cc;
+}
+.content-inner li a.posts70 {
+border-top : 70px solid #6699cc;
+}
+.content-inner li a.posts71 {
+border-top : 71px solid #6699cc;
+}
+.content-inner li a.posts72 {
+border-top : 72px solid #6699cc;
+}
+.content-inner li a.posts73 {
+border-top : 73px solid #6699cc;
+}
+.content-inner li a.posts74 {
+border-top : 74px solid #6699cc;
+}
+.content-inner li a.posts75 {
+border-top : 75px solid #6699cc;
+}
+.content-inner li a.posts76 {
+border-top : 76px solid #6699cc;
+}
+.content-inner li a.posts77 {
+border-top : 77px solid #6699cc;
+}
+.content-inner li a.posts78 {
+border-top : 78px solid #6699cc;
+}
+.content-inner li a.posts79 {
+border-top : 79px solid #6699cc;
+}
+.content-inner li a.posts80 {
+border-top : 80px solid #6699cc;
+}
+.content-inner li a.posts81 {
+border-top : 81px solid #6699cc;
+}
+.content-inner li a.posts82 {
+border-top : 82px solid #6699cc;
+}
+.content-inner li a.posts83 {
+border-top : 83px solid #6699cc;
+}
+.content-inner li a.posts84 {
+border-top : 84px solid #6699cc;
+}
+.content-inner li a.posts85 {
+border-top : 85px solid #6699cc;
+}
+.content-inner li a.posts86 {
+border-top : 86px solid #6699cc;
+}
+.content-inner li a.posts87 {
+border-top : 87px solid #6699cc;
+}
+.content-inner li a.posts88 {
+border-top : 88px solid #6699cc;
+}
+.content-inner li a.posts89 {
+border-top : 89px solid #6699cc;
+}
+.content-inner li a.posts90 {
+border-top : 90px solid #6699cc;
+}
+.content-inner li a.posts91 {
+border-top : 91px solid #6699cc;
+}
+.content-inner li a.posts92 {
+border-top : 92px solid #6699cc;
+}
+.content-inner li a.posts93 {
+border-top : 93px solid #6699cc;
+}
+.content-inner li a.posts94 {
+border-top : 94px solid #6699cc;
+}
+.content-inner li a.posts95 {
+border-top : 95px solid #6699cc;
+}
+.content-inner li a.posts96 {
+border-top : 96px solid #6699cc;
+}
+.content-inner li a.posts97 {
+border-top : 97px solid #6699cc;
+}
+.content-inner li a.posts98 {
+border-top : 98px solid #6699cc;
+}
+.content-inner li a.posts99 {
+border-top : 99px solid #6699cc;
+}
+.content-inner li a.posts100 {
+border-top : 100px solid #6699cc;
+}
+
+/* Sidebar ARCHIVES-NAV */
+
+#archive-nav h2 {
+margin : 0 0 20px 0;
+}
+#archive-nav h3 {
+font-size : 1.2em;
+margin : 0 0 10px 0;
+border-bottom : 1px solid #ccc;
+text-decoration : none;
+}
+#archive-nav li {
+background : #eee;
+display : block;
+width : 240px;
+height : 20px;
+margin : 0 0 5px 0;
+padding : 0;
+}
+#archive-nav li a {
+display : block;
+width : 40px;
+height : 15px;
+padding : 5px 0 0 0;
+text-transform : uppercase;
+font-weight : bold;
+font-size : 1em;
+background : #f8f8f6;
+}
+
+/* Once again, not for fun, just for.. for real, i don't know... yes! maybe for fun! 2pixels per posts. */
+
+#archive-nav li a.posts1 {
+border-right : 2px solid #6699cc;
+}
+#archive-nav li a.posts2 {
+border-right : 4px solid #6699cc;
+}
+#archive-nav li a.posts3 {
+border-right : 6px solid #6699cc;
+}
+#archive-nav li a.posts4 {
+border-right : 8px solid #6699cc;
+}
+#archive-nav li a.posts5 {
+border-right : 10px solid #6699cc;
+}
+#archive-nav li a.posts6 {
+border-right : 12px solid #6699cc;
+}
+#archive-nav li a.posts7 {
+border-right : 14px solid #6699cc;
+}
+#archive-nav li a.posts8 {
+border-right : 16px solid #6699cc;
+}
+#archive-nav li a.posts9 {
+border-right : 18px solid #6699cc;
+}
+#archive-nav li a.posts10 {
+border-right : 20px solid #6699cc;
+}
+#archive-nav li a.posts11 {
+border-right : 22px solid #6699cc;
+}
+#archive-nav li a.posts12 {
+border-right : 24px solid #6699cc;
+}
+#archive-nav li a.posts13 {
+border-right : 26px solid #6699cc;
+}
+#archive-nav li a.posts14 {
+border-right : 28px solid #6699cc;
+}
+#archive-nav li a.posts15 {
+border-right : 30px solid #6699cc;
+}
+#archive-nav li a.posts16 {
+border-right : 32px solid #6699cc;
+}
+#archive-nav li a.posts17 {
+border-right : 34px solid #6699cc;
+}
+#archive-nav li a.posts18 {
+border-right : 36px solid #6699cc;
+}
+#archive-nav li a.posts19 {
+border-right : 38px solid #6699cc;
+}
+#archive-nav li a.posts20 {
+border-right : 40px solid #6699cc;
+}
+#archive-nav li a.posts21 {
+border-right : 42px solid #6699cc;
+}
+#archive-nav li a.posts22 {
+border-right : 44px solid #6699cc;
+}
+#archive-nav li a.posts23 {
+border-right : 46px solid #6699cc;
+}
+#archive-nav li a.posts24 {
+border-right : 48px solid #6699cc;
+}
+#archive-nav li a.posts25 {
+border-right : 50px solid #6699cc;
+}
+#archive-nav li a.posts26 {
+border-right : 52px solid #6699cc;
+}
+#archive-nav li a.posts27 {
+border-right : 54px solid #6699cc;
+}
+#archive-nav li a.posts28 {
+border-right : 56px solid #6699cc;
+}
+#archive-nav li a.posts29 {
+border-right : 58px solid #6699cc;
+}
+#archive-nav li a.posts30 {
+border-right : 60px solid #6699cc;
+}
+#archive-nav li a.posts31 {
+border-right : 62px solid #6699cc;
+}
+#archive-nav li a.posts32 {
+border-right : 64px solid #6699cc;
+}
+#archive-nav li a.posts33 {
+border-right : 66px solid #6699cc;
+}
+#archive-nav li a.posts34 {
+border-right : 68px solid #6699cc;
+}
+#archive-nav li a.posts35 {
+border-right : 70px solid #6699cc;
+}
+#archive-nav li a.posts36 {
+border-right : 72px solid #6699cc;
+}
+#archive-nav li a.posts37 {
+border-right : 74px solid #6699cc;
+}
+#archive-nav li a.posts38 {
+border-right : 76px solid #6699cc;
+}
+#archive-nav li a.posts39 {
+border-right : 78px solid #6699cc;
+}
+#archive-nav li a.posts40 {
+border-right : 80px solid #6699cc;
+}
+#archive-nav li a.posts41 {
+border-right : 82px solid #6699cc;
+}
+#archive-nav li a.posts42 {
+border-right : 84px solid #6699cc;
+}
+#archive-nav li a.posts43 {
+border-right : 86px solid #6699cc;
+}
+#archive-nav li a.posts44 {
+border-right : 88px solid #6699cc;
+}
+#archive-nav li a.posts45 {
+border-right : 90px solid #6699cc;
+}
+#archive-nav li a.posts46 {
+border-right : 92px solid #6699cc;
+}
+#archive-nav li a.posts47 {
+border-right : 94px solid #6699cc;
+}
+#archive-nav li a.posts48 {
+border-right : 96px solid #6699cc;
+}
+#archive-nav li a.posts49 {
+border-right : 98px solid #6699cc;
+}
+#archive-nav li a.posts50 {
+border-right : 100px solid #6699cc;
+}
+#archive-nav li a.posts51 {
+border-right : 102px solid #6699cc;
+}
+#archive-nav li a.posts52 {
+border-right : 104px solid #6699cc;
+}
+#archive-nav li a.posts53 {
+border-right : 106px solid #6699cc;
+}
+#archive-nav li a.posts54 {
+border-right : 108px solid #6699cc;
+}
+#archive-nav li a.posts55 {
+border-right : 110px solid #6699cc;
+}
+#archive-nav li a.posts56 {
+border-right : 112px solid #6699cc;
+}
+#archive-nav li a.posts57 {
+border-right : 114px solid #6699cc;
+}
+#archive-nav li a.posts58 {
+border-right : 116px solid #6699cc;
+}
+#archive-nav li a.posts59 {
+border-right : 118px solid #6699cc;
+}
+#archive-nav li a.posts60 {
+border-right : 120px solid #6699cc;
+}
+#archive-nav li a.posts61 {
+border-right : 122px solid #6699cc;
+}
+#archive-nav li a.posts62 {
+border-right : 124px solid #6699cc;
+}
+#archive-nav li a.posts63 {
+border-right : 126px solid #6699cc;
+}
+#archive-nav li a.posts64 {
+border-right : 128px solid #6699cc;
+}
+#archive-nav li a.posts65 {
+border-right : 130px solid #6699cc;
+}
+#archive-nav li a.posts66 {
+border-right : 132px solid #6699cc;
+}
+#archive-nav li a.posts67 {
+border-right : 134px solid #6699cc;
+}
+#archive-nav li a.posts68 {
+border-right : 136px solid #6699cc;
+}
+#archive-nav li a.posts69 {
+border-right : 138px solid #6699cc;
+}
+#archive-nav li a.posts70 {
+border-right : 140px solid #6699cc;
+}
+#archive-nav li a.posts71 {
+border-right : 142px solid #6699cc;
+}
+#archive-nav li a.posts72 {
+border-right : 144px solid #6699cc;
+}
+#archive-nav li a.posts73 {
+border-right : 146px solid #6699cc;
+}
+#archive-nav li a.posts74 {
+border-right : 148px solid #6699cc;
+}
+#archive-nav li a.posts75 {
+border-right : 150px solid #6699cc;
+}
+#archive-nav li a.posts76 {
+border-right : 152px solid #6699cc;
+}
+#archive-nav li a.posts77 {
+border-right : 154px solid #6699cc;
+}
+#archive-nav li a.posts78 {
+border-right : 156px solid #6699cc;
+}
+#archive-nav li a.posts79 {
+border-right : 158px solid #6699cc;
+}
+#archive-nav li a.posts80 {
+border-right : 160px solid #6699cc;
+}
+#archive-nav li a.posts81 {
+border-right : 162px solid #6699cc;
+}
+#archive-nav li a.posts82 {
+border-right : 164px solid #6699cc;
+}
+#archive-nav li a.posts83 {
+border-right : 166px solid #6699cc;
+}
+#archive-nav li a.posts84 {
+border-right : 168px solid #6699cc;
+}
+#archive-nav li a.posts85 {
+border-right : 170px solid #6699cc;
+}
+#archive-nav li a.posts86 {
+border-right : 172px solid #6699cc;
+}
+#archive-nav li a.posts87 {
+border-right : 174px solid #6699cc;
+}
+#archive-nav li a.posts88 {
+border-right : 176px solid #6699cc;
+}
+#archive-nav li a.posts89 {
+border-right : 178px solid #6699cc;
+}
+#archive-nav li a.posts90 {
+border-right : 180px solid #6699cc;
+}
+#archive-nav li a.posts91 {
+border-right : 182px solid #6699cc;
+}
+#archive-nav li a.posts91 {
+border-right : 184px solid #6699cc;
+}
+#archive-nav li a.posts92 {
+border-right : 186px solid #6699cc;
+}
+#archive-nav li a.posts93 {
+border-right : 188px solid #6699cc;
+}
+#archive-nav li a.posts94 {
+border-right : 190px solid #6699cc;
+}
+#archive-nav li a.posts95 {
+border-right : 192px solid #6699cc;
+}
+#archive-nav li a.posts96 {
+border-right : 194px solid #6699cc;
+}
+#archive-nav li a.posts97 {
+border-right : 196px solid #6699cc;
+}
+#archive-nav li a.posts98 {
+border-right : 198px solid #6699cc;
+}
+#archive-nav li a.posts99 {
+border-right : 200px solid #6699cc;
+}
+#archive-nav li a.posts100 {
+border-right : 202px solid #6699cc;
+}
+
+/* Archives posts results */
+
+h2#archive-date-year {
+margin : 0 0 20px 0;
+padding : 5px 20px;
+font-size : 1.4em;
+color : #444;
+background : #e8e8e6;
+}
+.post-archive {
+margin : 0;
+padding : 20px 0;
+width : 240px;
+float : right;
+clear : right;
+border-top : 1px solid #ccc;
+}
+.post-archiveodd {
+margin : 0;
+padding : 20px 0;
+width : 240px;
+float : left;
+clear : left;
+border-top : 1px solid #ccc;
+}
+.post-archive .post-title a, .post-archiveodd .post-title a {
+color : #444;
+}
+.post-archive .post-info, .post-archiveodd .post-info {
+padding : 0;
+color : #6699cc;
+font-size : 0.85em;
+font-weight : bold;
+}
+
+/* pppfffiiiouuuu!!! */
+

@@ -1,0 +1,20 @@
+
+/* 
+	Theme Name: Grid Seven
+	Description: Grid-Based-Compact-Magazine-Style Dotclear 2 Theme.
+	Version: 1.1
+	Author: David Yim
+	Author URI: http://davidyim.fr/
+
+	Compatibility : tested successfully under browsers : IE6, IE7, Firefox (version 2.0.0.11), Safari (public beta 3), and Opera (version 9.24)
+	W3C Compliant.
+
+	Thanks to : Khoi Vinh, Wilson Miner and Eston Bond for inspiration.
+	           (david, december 09, 2007)
+*/
+
+@import url(style.css);
+
+#wrapper {
+font-size : 120%;
+}

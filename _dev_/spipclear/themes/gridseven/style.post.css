@@ -1,0 +1,382 @@
+
+/* 
+	Theme Name: Grid Seven
+	Description: Grid-Based-Compact-Magazine-Style Dotclear 2 Theme.
+	Version: 1.1
+	Author: David Yim
+	Author URI: http://davidyim.fr/
+
+	Compatibility : tested successfully under browsers : IE6, IE7, Firefox (version 2.0.0.11), Safari (public beta 3), and Opera (version 9.24)
+	W3C Compliant.
+
+	Thanks to : Khoi Vinh, Wilson Miner and Eston Bond for inspiration.
+	           (david, december 09, 2007)
+*/
+
+.post .post-title {
+font-size : 2em;
+margin-bottom : 5px;
+color : #444;
+}
+.post .post-info {
+margin : 0 0 5px 0;
+padding : 0 0 5px 25px;
+font-size : 0.85em;
+background : url('img/icon_time.png') no-repeat left 2px;
+}
+.post .post-tags {
+margin : 0 0 10px 0;
+padding-left : 25px;
+background : url('img/icon_tag.png') no-repeat left center;
+}
+.post .post-tags li {
+display : inline;
+font-size : 0.85em;
+}
+.post-content ul, .post-excerpt ul {
+padding : 0 0 0 20px;
+margin : 0;
+line-height : 1.4em;
+}
+.post-content ul li, .post-excerpt ul li {
+padding : 5px 0;
+list-style-type : disc;
+}
+.post-content ol, .post-excerpt ol {
+margin : 0 0 0 25px;
+padding : 5px 0;
+list-style-type : decimal;
+}
+.post-content ol ol li, .post-excerpt ol li {
+list-style-type : lower-latin;
+}
+.post-content ol li, .post-excerpt ol li {
+padding : 5px 0;
+list-style-type : decimal;
+}
+.post-content h3, .post-excerpt h3 {
+padding : 5px 0;
+font-size : 1.4em;
+}
+.post-content h4, .post-excerpt h4 {
+padding : 5px 0;
+font-size : 1.2em;
+}
+.post-content h5, .post-excerpt h5 {
+padding : 5px 0;
+font-size : 1em;
+}
+.post-content pre {
+width : 455px;
+margin : 20px 0;
+padding : 20px !important;
+padding : 20px 20px 40px 20px;
+}
+.post-content blockquote, .post-excerpt blockquote {
+width : 250px;
+margin : 20px 0 0 0;
+padding : 0 20px 0 25px;
+font-style : italic;
+font-size : 1em;
+font-family : georgia, 'times new roman', times, serif;
+float : right;
+}
+
+.post-content blockquote p, .post-excerpt blockquote p {
+text-align : center;
+}
+.post-content blockquote p:before, .post-excerpt blockquote p:before {
+content : '____.';
+color : #f8f8f6;
+background : url('img/blockquote_before.png') no-repeat left top;
+}
+.post-content blockquote p:after, .post-excerpt blockquote p:after {
+content : '____.';
+color : #f8f8f6;
+background : url('img/blockquote_after.png') no-repeat right top;
+}
+.footnotes {
+margin : 10px 0 0 0;
+font-size : 0.85em;
+border : none;
+border : 1px solid #ddd;
+border-width : 1px 0;
+}
+.footnotes h4 {
+padding : 10px 0 5px 15px;
+font-size : 1.2em;
+font-weight : bold;
+}
+.footnotes p {
+padding : 0 15px 10px 15px;
+}
+#attachments {
+margin : 20px 0 0 0;
+padding : 20px 20px 20px 100px;
+font-size : 0.85em;
+border : none;
+background : #e8e8e6 url('img/attachments_bg.png') no-repeat 20px 20px;
+}
+#attachments h3 {
+padding : 10px 0 5px 5px;
+font-size : 1.1em;
+font-weight : bold;
+}
+#attachments ul {
+padding : 0 15px 20px 5px;
+}
+#attachments li a {
+color : #333;
+text-decoration : none;
+border-bottom : 1px dotted;
+}
+#attachments li a:hover {
+border-bottom : 1px solid;
+}
+
+/* Comments, Comment-form, Pings */
+
+#comments, #comment-form, #pings {
+margin : 80px 0 0 0;
+padding : 20px 0 0 0;
+font-size : 0.85em;
+}
+#comments h3, #pings h3 {
+font-size : 1.1em;
+margin : 0 0 20px 0;
+padding : 0 0 10px 25px;
+color : #666;
+background : url('img/icon_comments.png') no-repeat left 3px;
+text-decoration : underline;
+text-transform : uppercase;
+}
+
+/* Comments */
+
+#comments dt {
+padding : 20px 0 10px 0;
+font-weight : bold;
+font-size : 1em;
+border-top : 1px solid #ddd;
+position : relative;
+}
+#comments img.gravatar_img {
+width : 50px;
+height : 50px;
+display : block;
+float : left;
+margin : 0 20px 0 0;
+padding : 2px;
+background : #fff;
+border : 1px solid #ccc;
+color : #fff;
+font-size : 1%;
+}
+#comments dd {
+margin : 0 0 0 75px;
+padding : 0;
+font-size : 1em;
+margin-bottom : 25px;
+}
+#comments ul {
+padding : 0 0 0 20px;
+margin : 0;
+line-height : 1.4em;
+}
+#comments ul li {
+padding : 5px 0;
+list-style-type : disc;
+}
+
+#comments ol {
+margin : 0 0 0 25px;
+padding : 5px 0;
+list-style-type : decimal;
+}
+#comments ol ol li {
+list-style-type : lower-latin;
+}
+#comments ol li {
+padding : 5px 0;
+list-style-type : decimal;
+}
+#comments pre {
+width : 375px;
+margin : 0 0 10px 0;
+padding : 10px !important;
+padding : 10px 10px 40px 10px;
+}
+
+#comments q {
+padding-left : 30px;
+font-family : Georgia, 'Times New Roman', Times;
+background : url('img/blockquote_before.png') no-repeat left top;
+}
+#comments q:after {
+padding-right : 30px;
+background : url('img/blockquote_after.png') no-repeat right top;
+}
+
+/* Comment-form */
+
+#comment-form h3 {
+font-size : 1.1em;
+margin : 0;
+padding : 0 0 40px 25px;
+background : url('img/icon_addcomment.png') no-repeat left 1px;
+color : #666;
+text-transform : uppercase;
+text-decoration : underline;
+}
+#comment-form h3.personnal-informations {
+font-size : 1em;
+margin : 0;
+padding : 5px 0 0 117px;
+color : #666;
+background : url('img/grid-line200.png') no-repeat 0 13px;
+text-transform : uppercase;
+text-decoration : none;
+}
+#comment-form h3.your-comment {
+font-size : 1em;
+margin : 40px 0 0;
+padding : 5px 0 0 117px;
+color : #666;
+background : url('img/grid-line200.png') no-repeat 0 13px;
+text-transform : uppercase;
+text-decoration : none;
+}
+#comment-form p.field {
+margin : 0;
+padding : 10px 0;
+border-top : 1px solid #fff;
+border-bottom : 1px solid #cdcdcd;
+}
+#comment-form p.field label {
+width : 100px;
+padding : 0;
+text-align : left;
+line-height : 1em;
+color : #666;
+position : absolute;
+}
+#comment-form p.field input, #comment-form p.field textarea {
+width : 389px;
+border : 1px solid #bbb;
+border-width : 1px 0 0 1px;
+margin : 0 0 0 100px;
+padding : 5px;
+background : #fff;
+font-family : Monospace, 'Courier New', Courier;
+font-size : 1em;
+line-height : 1.2em;
+}
+#comment-form p.form-help {
+margin : 20px 0 0 100px;
+padding : 10px 20px 10px 20px;
+background : #e8e8e6;
+}
+#comment-form input#c_remember {
+margin : 20px 0 0 100px;
+padding : 0;
+}
+#comment-form input.preview {
+margin : 10px 0 20px 100px;
+padding : 5px;
+color : #eee;
+font-size : 0.9em;
+text-transform : uppercase;
+background : #444;
+color : #fff;
+}
+#comment-form input.submit {
+display : none;
+}
+#comment-form input.preview:hover, #comment-form input.preview:focus, #comment-form input.preview:active {
+background : #6699cc;
+}
+
+/* Preview */
+
+div#pr {
+margin : 0 0 30px 0;
+padding : 0;
+}
+#pr h3 {
+width : 390px;
+margin : 0;
+padding : 10px 0 0 10px;
+font-size : 1em;
+text-decoration : underline;
+background : #e8e8e6;
+}
+#pr dl {
+width : 400px;
+}
+#pr dd {
+margin : 0;
+padding : 5px 10px;
+background : #e8e8e6;
+}
+#pr input.submit {
+display : block;
+margin : 10px 20px 0 0;
+padding : 5px;
+color : #eee;
+font-size : 0.9em;
+text-transform : uppercase;
+background : #444;
+color : #fff;
+}
+#pr input.submit:hover, #pr input.submit:focus, #pr input.submit:active {
+background : #6699cc;
+}
+
+/* Message Error/Success */
+
+p.error {
+margin : 0;
+padding : 10px 10px 10px 50px;
+color : red;
+background : #e8e8e6 url('img/icon_error.png') no-repeat 20px center;
+font-size : 0.9em;
+}
+p.message {
+margin : 0;
+padding : 10px 10px 10px 50px;
+color : green;
+background : #e8e8e6 url('img/icon_message.png') no-repeat 20px center;
+font-size : 0.9em;
+}
+
+/* Pings */
+
+#pings dt {
+padding : 15px 0 10px 0;
+font-weight : bold;
+font-size : 1em;
+border-top : 1px solid #ddd;
+position : relative;
+}
+#pings dd {
+margin : 0;
+padding : 0;
+font-size : 1em;
+}
+
+/* Pings Adds/Links */
+
+p#ping-url {
+margin : 20px 0 -5px 0;
+padding : 10px 10px 0 30px;
+font-size : 0.85em;
+background : #e8e8e6 url('img/icon_ping-url.png') no-repeat 6px 10px;
+}
+p#comments-feed {
+padding : 10px 10px 10px 30px;
+font-size : 0.85em;
+background : #e8e8e6 url('img/icon_syndicate.gif') no-repeat 10px center;
+}
+p#comments-feed a {
+color : #333;
+}

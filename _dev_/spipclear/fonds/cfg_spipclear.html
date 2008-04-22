@@ -11,7 +11,7 @@ Configuration du plugin SpipClear.
 #CACHE{0}
 
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
-
+<input class="fondo" style="float:right;" type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
 <fieldset><legend><:spipclear:legend_layout:></legend>
 	<p><:spipclear:info_navigation:></p>
 	<p>
@@ -51,16 +51,21 @@ Configuration du plugin SpipClear.
 					$("#bloc_nom_theme").hide();
 				$(this).blur();
 			});	
+        $(".theme").click(function() {
+            $("input[@name='nom_theme']").val($(this).attr("id"));
+            return false;
+        });
 		});
 	//]]>
 	</script>
-	<p id="bloc_nom_theme">
+	<div id="bloc_nom_theme">
 		<label><:spipclear:label_nom_theme:><br />
 			<input type="text" name="nom_theme" value="[(#ENV{nom_theme})]" size="32" />
 		</label>
-	</p>
+    <p><:spipclear:themes_installes:></p>
+    [(#ENV{nom_theme}|lister_themes)]
+	</div>
 </fieldset>
 
-<input class="fondo" style="float:right;" type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
 </form>
 

@@ -1,0 +1,395 @@
+/* Feuille de style vierge comportant les principales balises d'un 
+blog realise avec dotclear - Etablie par Kozlika pour la dcTeam
+le 7 janvier 2007. 
+
+Licence : domaine public 
+
+Custom By Azork
+MAJ du 11 Janvier 2008
+*/
+
+
+/* -----------------------------------------------------------------
+	1. STRUCTURE
+------------------------------------------------------------------ */
+@import url(layout.css);
+
+
+/* ------------------------------------------------------------
+	2. BALISES HTML PAR DEFAUT
+------------------------------------------------------------- */
+
+body { 
+	color: #000;
+	background: #F5F5F5;
+	font: .7em/1.5em Tahoma, Geneva, Verdana, Arial, Sans-serif;
+	text-align: center;
+	}
+ 
+h1 { font-size: 2em; }
+h2 { font-size: 1.7em; font-family: Verdana, Times, Serif; margin: 1em 0; }
+h3 { font-size: 1.5em; margin: 1em 0; color:#FF6347; }
+h4 { font-size: 1em; margin: 20px 0 10px; font-weight: Bold; }
+h5 { font-size: .9em; }
+h6 { font-size: .7em; }
+
+p { }
+img { }
+sup { }
+abbr, acronym { }
+
+blockquote, q {
+	display: block;
+	background: #E6E6FA;
+	padding: 1em;
+	margin: 1em 0;
+	font: Normal 1.2em Georgia, Tahoma, Arial, Serif;
+	text-align: justify;
+	color: #454545;
+	}
+blockquote { }
+cite { }
+
+ul { }
+ol { }
+dl { }
+
+form { }
+fieldset { border: none; }
+input { }
+label { }
+
+a { }
+a:link { color: #577fa7;  text-decoration: none;}
+a:visited { color: #577fa7; text-decoration: none; }
+a:hover { color: #577fa7; text-decoration: underline; }
+a:focus { }
+a[hreflang]:after { }
+a img { border: 0; }
+ 
+code, pre { background: #F8F8FF; color: #778899; border: 1px dashed #778899; display: block; width: 475px; margin: 10px auto; padding: 10px 5px; font-family: Courier, Times, Monospace; overflow: hidden; }
+pre { }
+ 
+hr { }
+ 
+/* ------------------------------------------------------------
+	3. PAGE
+------------------------------------------------------------- */
+ 
+#page { 
+	margin: 20px auto;
+	padding: 5px;
+	border: 1px solid #cccccc;
+	background: #FFF;
+	position: relative;
+	}
+ 
+/* ------------------------------------------------------------
+	4. HAUT DE PAGE
+------------------------------------------------------------- */
+
+#top { 
+	background: transparent url("img/top_title.gif") no-repeat top left;
+	font-size: 110%;
+	letter-spacing: 1px;
+	}
+#top h1 { }
+#top h1 a {
+	display: block;
+	padding: 40px 0 10px 20px;
+	color: #FFF;
+	font-family : "Lucida grande", "Gill sans", Arial, Sans-serif;
+	outline: none;
+	text-decoration: none;
+	}
+#prelude { border-bottom: 1px solid #F5F5F5; background: #FFF; color: #eeeeee; padding: 5px; }
+#prelude a { color: #999; }
+#prelude a:hover { color: #ccc; text-decoration: none; }
+
+
+/* ------------------------------------------------------------
+	5. WRAPPER MAIN CONTENT
+------------------------------------------------------------- */
+
+#wrapper { }
+#main { }
+#content { }
+
+#content-info { padding: 20px 0; color: #606060; }
+#content-info h2 { color: #c1c1c1; text-transform: Capitalize; }
+#content-info p { color: #606060; }
+
+.content-inner ul { list-style: none outside; background: #f5fbff; margin: 5px 0; padding: 10px; border: 1px solid #eeeeee; }
+.dc-tags .content-inner ul li { display: inline; font-size: 110%; }
+.dc-archive .content-inner ul li { display: inline; font-size: 1.3em; padding-right: 10px; white-space: normal; }
+.dc-archive-month .content-inner h2 { font-size: 110%; font-weight: Bold; background: none; border: 0; margin: 5px 0; padding: 5px 0 5px 20px; background: transparent url(img/puce_b.png) no-repeat 0 7px; }
+
+.pagination { clear: both; color: #333; }
+#navlinks { color: #333; }
+
+
+/* ------------------------------------------------------------
+	6. BILLETS
+------------------------------------------------------------- */
+
+.post { }
+.post.first { }
+.post.odd { }
+
+.day-date { color: #ccc; text-transform: Capitalize; }
+
+.post-title { font: 1.6em Tahoma, Geneva, Verdana, Arial, Sans-serif; background: #ecf5ff; color: #577fa7; border-top: 1px solid #c2d2e8; margin: 0 0 30px 70px; padding: 5px; }
+.post-title a:link, .post-title a:visited { color: #577fa7; }
+.post-title a:hover { color: #6f96bd; }
+
+.post-info { text-align: center; color: #FFF; font-weight: Bold; width: 65px; height: 59px; float: left; margin: -2px 0 0 -3px; padding: 0; background: transparent url(img/day-date.png) no-repeat left top; }
+
+.dc-post #content .author { margin: 10px 0; padding: 10px 0 5px 20px; border-top: 1px dotted #ccc; font: normal .9em Verdana; background: transparent url(img/user_edit.png) no-repeat 0 7px; text-transform: Capitalize; }
+
+.post-tags { margin:0; padding:0; }
+.post-tags ul { margin:0; padding:0; }
+.post-tags li { font-weight: Bold; display: inline; margin:0; background: transparent url(img/tag_orange.png) no-repeat 0 50%; padding: 3px 0 3px 20px; list-style: none outside; }
+.post-tags li a:link, .post-tags li a:visited { color: #94bce4; }
+.post-tags li a:hover { color: #aaccee; }
+
+.post-excerpt { font: normal 10pt Verdana, Arial, Sans-serif; }
+.post-content { font: normal 10pt Verdana, Arial, Sans-serif; }
+
+.read-it { background: transparent url(img/readmore-left.png) no-repeat top left; }
+.read-it a:link, .read-it a:visited { color: #577fa7; font-weight: Bold; display: block; width: 100px; margin-left: 20px; padding: 5px; background: #ecf5ff url(img/readmore-right.png) no-repeat top right; }
+.read-it a:hover { color: #6f96bd; text-decoration : none; }
+
+.footnotes { }
+.footnotes h4 { }
+
+.post-info-co { float: left; width: 70%; color: #fcb279; padding-bottom: 10px; }
+.post-info-co2 { float: right; text-align:right; width: 30%; font-weight: Bold; color: #fcb279; padding-bottom: 10px; }
+.post-info-co a:link, .post-info-co a:visited { color: #ff8811; }
+.post-info-co a:hover { color: #ffbb33; }
+
+.comment_count { background: transparent url(img/page.png) no-repeat 0 50%; padding: 3px 0 3px 20px; }
+.ping_count { background: transparent url(img/page_link.png) no-repeat 0 50%; padding: 3px 0 3px 20px; }
+.attach_count { background: transparent url(img/page_attach.png) no-repeat 0 50%; padding: 3px 0 3px 20px; }
+.cat_name { background: transparent url(img/page_copy.png) no-repeat 0 50%; padding: 3px 0 3px 20px; }
+
+#attachments { background: #ffecaa; border: 1px solid #f0ba8f; margin:0; padding:0; }
+#attachments h3 { font-size: 100%; color: #222; background: #ffe68a; margin: 1px 1px 0px 1px; padding: 5px;}
+#attachments ul { background: #fed856; margin: 0px 1px 1px 1px; padding: 5px; list-style: none outside; }
+#attachments ul li { display: inline; background: transparent url(img/page_attach.png) no-repeat 0 50%; padding: 3px 10px 3px 20px; }
+#attachments li.audio { display: block; width: 205px; padding: 10px 0; text-align: center; background: none; }
+#attachments li.package { }
+#attachments li.text { border: 0px; }
+
+
+/* ------------------------------------------------------------
+	7. COMMENTAIRES, PINGS
+------------------------------------------------------------- */
+
+#comments { margin: 10px 0; }
+#pings { }
+#pr { }
+#comment-form { margin: 10px 0; }
+
+#comments h3 { }
+#pings h3 { }
+#pr h3 { }
+#comment-form h3 { }
+
+#comments dl { }
+#comments dt { color: #333; font: Bold 8pt Verdana, Arial, Sans-serif; margin:0; padding:0; text-transform: Capitalize; }
+#comments dt .comment-number { border-bottom: 1px solid #eeeeee; text-align: center; color: #305678; width: 65px; float: left; margin: 0 0 0 10px; padding: 3px 10px 2px 0; background : transparent url(img/comment_num.png) no-repeat left top; }
+#comments dd { font: normal 10pt Verdana, Arial, Sans-serif; background: #f5fbff; margin: 5px 0 10px 0; padding: 10px; border: 1px solid #eeeeee; }
+#comments dd .comment-date { color: #999; font: normal 8pt Tahoma, Verdana, Arial, Sans-serif; text-transform: Capitalize; }
+#comments .first { }
+#comments .odd { }
+#comments .me { }
+
+#pings dl { }
+#pings dt { color: #333; font: Bold 10pt Verdana, Arial, Sans-serif; text-transform: Capitalize; }
+#pings dt .comment-number { border-bottom: 1px solid #eeeeee; text-align: center; color: #305678; width: 65px; float: left; margin:0; padding: 5px 10px 0 0; background: #b7d3ef url(img/comment_num.png) no-repeat left top; }
+#pings dd { font: normal 10pt Verdana, Arial, Sans-serif; background: #f5fbff; margin: 5px 0 10px 0; padding: 10px; border: 1px solid #eeeeee; }
+#pings .first { }
+#pings .odd { }
+#pings .me { }
+
+#pr dl { }
+#pr dd { color: #f5f5f5; background: #FA8072; padding: 10px; border: 1px solid #FF6347; margin:0; font: normal 10pt Verdana, Arial, Sans-serif; }
+
+
+#comment-form fieldset { background: #f5fbff; margin: 5px 0; padding: 10px; border: 1px solid #eeeeee; }
+.field { }
+.field label { }
+.field input#c_name { margin: 0 0 0 32px; }
+.field input#c_mail { margin: 0 0 0 40px; }
+.field input#c_site { margin: 0 0 0 11px; }
+.field textarea#c_content { width: 480px; }
+
+#comment-form input[type=submit] { }
+#comment-form input[type=reset] { }
+
+.form-help { }
+
+#ping-url { }
+#comments-feed { }
+
+
+/* ------------------------------------------------------------
+	8. SIDEBAR
+------------------------------------------------------------- */
+
+#sidebar { color: #333; padding:0; margin:0; }
+#blognav { margin:0; padding: 5px 0; }
+#blogextra { margin:0; padding: 5px 0; }
+
+#sidebar h2 {
+	font-size: 1em;
+	font-weight: Bold;
+	margin: 0 0 10px 0;
+	padding: 5px 0;
+	color: #305678;
+	border-bottom: 1px solid #92b0cb;
+	}
+#sidebar h3 { 
+	color: #222;
+	font-size: 1em;
+	margin:0;
+	padding: 5px 0;
+	border-bottom: 1px solid #E6E6FA;
+	}
+#sidebar ul { margin:0; padding:0; list-style: none outside; }
+#sidebar li { border-bottom: 1px dashed #E6E6FA; margin:0; padding: 5px 0; }
+#sidebar li a:link, #sidebar li a:visited { font-weight: Bold; color: #577fa7; }
+
+/* boites du menu des widgets livres avec Dotclear */
+#search h2 { display: none; }
+#search form { background: #f5fbff; margin: 5px 0; padding: 10px; border: 1px solid #eeeeee; text-align: center; }
+#search input[type=text] { } /* ou #search #q */
+#search input[type=submit] { } /* ou #search .submit */
+
+#topnav { border-bottom: 1px solid #eeeeee; font-weight: Bold; margin:0; padding: 10px 0; }
+#topnav ul { margin: 0; padding: 0; }
+#topnav ul li { background: transparent url(img/puce_a.png) no-repeat 0 50%; padding-left: 15px; border:0; display: inline; }
+
+.topnav-arch { }
+.topnav-home { }
+
+.selected { background: #f5fbff; margin: 5px 0; padding: 10px; border: 1px solid #eeeeee; }
+.langs { background: #f5fbff; margin: 5px 0; padding: 10px; border: 1px solid #eeeeee; }
+.langs li { display: inline; text-transform: Uppercase; }
+.categories { background: #f5fbff; margin: 5px 0; padding: 10px; border: 1px solid #eeeeee; }
+.syndicate { background: #f5fbff; margin: 5px 0; padding: 10px; border: 1px solid #eeeeee; }
+.lastposts { background: #f5fbff; margin: 5px 0; padding: 10px; border: 1px solid #eeeeee; }
+.lastcomments { background: #f5fbff; margin: 5px 0; padding: 10px; border: 1px solid #eeeeee; }
+.text { background: #f5fbff; margin: 5px 0; padding: 10px; border: 1px solid #eeeeee; }
+.links { background: #f5fbff; margin: 5px 0; padding: 10px; border: 1px solid #eeeeee; }
+.tags { background: #f5fbff; margin: 5px 0; padding: 10px; border: 1px solid #eeeeee; }
+
+
+/* ------------------------------------------------------------
+	9. FOOTER
+------------------------------------------------------------- */
+
+#footer { height: 60px; border-top: 1px dotted #cccccc; margin:0; padding: 0; }
+#footer p { font: normal 1em "Trebuchet Ms"; margin: 5px 0; padding: 10px; color: #999; }
+#footer p a:link, #footer p a:visited { color: #999; text-decoration: none; }
+#footer p a:hover { color: #999; text-decoration: none; }
+
+/* ------------------------------------------------------------
+	10. CLASSES COMMUNES
+------------------------------------------------------------- */
+
+/* class sur les liens rss (on peut y placer l'icone
+feed.png a piocher dans le theme par defaut par ex.) */
+
+.feed { 
+	padding: 3px 0 3px 20px;
+	background : transparent url(img/rss.png) no-repeat left center;
+	 }
+
+
+/* tags dans le sidebar et dans la page les regroupant
+(exemple ici pour un nuage) */
+.dc-tags #content ul li, .dc-tags #content ul li a {
+	display : inline;
+	width : auto;
+	padding-left : 0;
+	padding-right : 4px;
+	line-height : 1.5em;
+	background: transparent;
+}
+
+.dc-tags #content ul li a:hover {
+	background-image: none;
+}
+
+.tags ul li { 
+	display: inline;
+	width: auto;
+	padding: 5px;
+}
+#sidebar .tags ul li { border:0; padding-right:10px; white-space:normal; }
+
+.dc-tags .tag0 { }
+.dc-tags .tag10 { }
+.dc-tags .tag20 { }
+.dc-tags .tag30 { }
+.dc-tags .tag40 { }
+.dc-tags .tag50 { }
+.dc-tags .tag60 { }
+.dc-tags .tag70 { }
+.dc-tags .tag80 { font-weight: Bold; color: #606060; font-size: 110%; }
+.dc-tags .tag90 { font-weight: Bold; font-size: 120%; }
+.dc-tags .tag100 { font-weight: Bold; color: #FF6347; font-size: 130%; }
+
+
+/* messages d'erreur */
+.error {
+	color: #de0000;
+	padding: 0.5em 0;
+	}
+.error ul {
+	padding-left: 20px;
+	}
+.error li {
+	}
+	
+/* exemples de ceux que j'ajoute souvent */
+.left { float: left; margin-right: 1em; }
+.right { float: right; margin-left: 1em; }
+.center { margin-left: auto; margin-right: auto; }
+.left-text { text-align: left; }
+.right-text { text-align: right; }
+.center-text { text-align: center; }
+.little-text { font-size: .8em;}
+.little-upper-text { font-size: .8em; text-transform: Uppercase; }
+.day { width: 100%; margin: 5px 0 0 0; padding:0; float: left; font-size: 1.35em; }
+.month { color: #F8F8FF; width: 100%; margin: 0 0 -3px 0; padding:0; float: left; font: Bold italic 13pt Georgia; text-transform: Capitalize; }
+.year { color: #F8F8FF; font-size: 75%; width: 100%; margin:0; padding:0; float: left; }
+
+
+/* ------------------------------------------------------------
+	11. PAGES SPECIFIQUES
+	j'indique le marqueur du body, a completer pour cibler 
+	plus precisement (cf l'exemple ci-dessus pour les tags)
+------------------------------------------------------------- */
+
+.dc-home { }
+.dc-post { }
+.dc-categories { }
+.dc-category .post-info-co { width: 100%; }
+.dc-archive .content-inner { text-transform: Capitalize; }
+.dc-archive-month { }
+.dc-tags { }
+.dc-tag { }
+.dc-404 { }
+.dc-search { }
+
+
+/* ---------------------------------------------------
+  12. ET POUR FINIR NE PAS OUBLIER LES CLEARERS
+	ici ceux le plus souvent necessaires
+--------------------------------------------------- */
+.post, .post-content, .footnotes, .attachments, 
+.post-info-co, #comments, #footer {
+    clear: both;
+    }

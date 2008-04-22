@@ -1,0 +1,29 @@
+/**********************
+* Plug-in specifiques *
+**********************/
+
+#sidebar #tribunelibreformulaire input {
+    width: 200px;
+    padding: 0px;
+    margin: 5px 0;
+    }
+
+#sidebar #tribunelibreformulaire input.submit  {
+    width: auto;
+    margin: 0 0 2px 0;
+    padding: 2px;
+    }
+
+#sidebar #calendar table {
+	margin: 0 auto 5px auto;
+	text-align: center;
+    }
+	
+#sidebar #calendar table td {
+    background: #c7c7c7;
+	}
+
+#sidebar #calendar table td a:link, #sidebar #calendar table td a:visited {
+    display: block;
+    background: #eef5ff;
+    }

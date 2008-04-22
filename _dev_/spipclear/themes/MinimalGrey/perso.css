@@ -1,0 +1,11 @@
+/*--------------------------------------------------------------------------------
+Minimal Grey by jibHaine (http://www.jibhaine.fr )  
+#  EDITEZ CE FICHIER POUR PERSONNALISER LE THEME    #
+-------------------------------------------------------- -------------------------*/
+/* changez le color_green par la couleur désirée parmi (green, blue, pink, purple, red, orange)*/
+@import url(color_green.css);
+
+/* image du fond de la page */
+body{background:#333 url(images/fond3.gif) fixed center center;}
+/*image de fond du header*/
+#top h1{background:transparent url(images/coccinelle.jpg) no-repeat center center;}

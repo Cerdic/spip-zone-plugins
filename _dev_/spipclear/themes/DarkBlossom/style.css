@@ -1,0 +1,341 @@
+/* ------------------------------------------------------------
+Thème DarkBlossom by jibHaine 
+Structure du css : Kozlika
+Icones : Avi Alkalay
+------------------------------------------------------------ */
+
+
+
+
+/* ------------------------------------------------------------
+	BALISES HTML PAR DEFAUT
+------------------------------------------------------------- */
+*{
+	margin:0;padding:0;
+	border:none;color:#CCC;
+	font-family:'Trebuchet Ms',Arial,Helvetica,sans-serif;
+	font-size:12px;font-weight:400;
+}
+body{background:#333 ;background: url(images/fond_page.gif);}
+ 
+h1 { font-size:24px;}
+h2,.post-title a { font-size:16px;}
+h3 { font-size:15px;}
+h4 { font-size:14px;}
+h5 { font-size:13px;}
+h6 { font-size:12px;}
+h1,h2,h3,h4,h5,h6, .post-title a{font-weight:400;}
+
+p { }
+img { }
+sup { }
+abbr, acronym { }
+
+blockquote, q { }
+blockquote { }
+cite { }
+
+ul {list-style-type:none;}
+ol {margin-left:20px;}
+.post dl {margin-left:20px;}
+
+form { }
+input,textarea,option,select{color:#000;background:#CCC; }
+input:hover{background:#999;}
+a {color:#999;text-decoration:none;}
+a:link { }
+a:visited { }
+a:hover {color:#ccc;text-decoration:underline;}
+a:focus { }
+a[hreflang]:after { }
+a img { }
+blockquote{
+	background:#444;margin:5px 0px;padding:5px;
+}
+code, pre {background:#222;}
+pre{overflow:auto;padding:5px;font-family:monospace;font-size:14px;margin:5px 0px;}
+hr {border:none;width:270px;height:21px;background:transparent url(images/hr.png) no-repeat 15px 0px;}
+ 
+/* ------------------------------------------------------------
+	3. PAGE
+------------------------------------------------------------- */
+ 
+#page {
+	width:464px;
+	padding:0px 18px;
+	margin:0 auto;
+	position:relative;
+	height:100%;
+	background:#333 url(); 
+	background:transparent url(images/mep_fond.png) repeat-y center center !important; 
+	background:transparent url(images/mep_fond.gif) repeat-y center center;
+} 
+/* ------------------------------------------------------------
+	4. HAUT DE PAGE
+------------------------------------------------------------- */
+
+#top {
+	width:464px;
+	height:212px;
+	margin:0 auto;
+	background:url(images/mep_header.jpg) no-repeat top right;}
+#top h1 {position:absolute;top:150px;left:30px;}
+#top h1 a { font-size:24px;}
+#top h1 a:hover { text-decoration:none}
+#prelude {position:absolute;top:5px;left:30px;margin:0 auto;color:#333;}
+#prelude a { }
+
+
+/* ------------------------------------------------------------
+	5. WRAPPER MAIN CONTENT
+------------------------------------------------------------- */
+
+#wrapper {
+	overflow:auto;height:auto;
+	background:url(images/mep_wrapper.jpg) no-repeat top right;
+	}
+#main { width:285px;float:left;padding-left:10px;padding-right:14px;background:url(images/mep_wrapper.jpg) no-repeat top 292px;}
+#sidebar{ width:145px;float:right;padding-right:10px;
+	background:url(images/mep_wrapper.jpg) no-repeat top -12px;}
+#content { }
+
+#content-info {text-align:center;}
+#content-info h2 { }
+#content-info p { }
+
+.content-inner { }
+
+.pagination,#navlinks ,.post-info-co{text-align:center; }
+
+
+/* ------------------------------------------------------------
+	6. BILLETS
+------------------------------------------------------------- */
+
+.post,#attachments ,#notes,#comments,#comment-form{padding-bottom:80px;background:url(images/post_bas.png) no-repeat bottom center; }
+.post.first { }
+.post.odd { }
+
+.day-date ,.read-it { text-align:right;}
+.post-title, .post-title a {font-size:20px;text-decoration:none; }
+.post-date,.day-date {color:#666;}
+.post-tags li{ display:inline;}
+.post-excerpt ,
+.post-content {text-align:justify;margin:5px 0px;}
+
+
+
+.footnotes { }
+.footnotes h4 { }
+.post-info-co a{display:block;margin:0 auto;text-align:left;}
+.post-info-co a,.post-tags li a, .tags strong a, .permalink, .post-category, .post-author{padding:2px 2px 2px 18px;}
+.comment_count { background:url(images/ico_comment.gif) no-repeat left center;}
+.ping_count {background:url(images/ico_ping.gif) no-repeat left center;}
+.attach_count {background:url(images/ico_attach.gif) no-repeat left center;}
+.post-tags li a, .tags strong a{background:url(images/ico_tag.gif) no-repeat left center;}
+.permalink{background:url(images/ico_attach.gif) no-repeat left center;} 
+.post-category{background:url(images/ico_post.gif) no-repeat left center;}
+.post-author{background:url(images/ico_user.gif) no-repeat left center;}
+
+#attachments { }
+#attachments h3 { }
+#attachments ul { }
+#attachments ul li { }
+#attachments li.audio { }
+#attachments li.package { }
+#attachments li.text { }
+
+
+
+/* ------------------------------------------------------------
+	7. COMMENTAIRES, PINGS
+------------------------------------------------------------- */
+
+#comments { }
+#pings { }
+#pr { }
+#comment-form { }
+
+#comments h3 { }
+#pings h3 { }
+#pr h3 { }
+#comment-form h3 { }
+
+#comments dl , #pings dl { }
+#comments dt , #pings dt {color:#666;background:url(images/hr.png) no-repeat 15px 0px;padding-top:26px;margin-top:5px; }
+#comments dd , #pings dd {text-align:justify }
+#comments dt.first,#pings dt.first{background:none;padding-top:0px;margin-top:0px; }
+#comments .odd { }
+#comments .me { }
+
+#pings dl { }
+#pings dt { }
+#pings dd { }
+#pings .first { }
+#pings .odd { }
+#pings .me { }
+
+#pr dl { }
+#pr dd { }
+
+#comment-form .field label{display:block;}
+#comment-form input.submit, #comment-form input.preview{
+background-color:transparent;
+background-image:url(images/bouton.png);
+background-position:center;
+background-repeat:no-repeat;
+color:#FFF;
+margin:5px 0px;
+min-height:28px;
+min-width:140px;width:140px;
+padding:0px 20px;
+}
+input.preview:hover,
+input.submit:hover {color:#CCC}
+#c_site, #c_mail, #c_name{
+margin:5px 0px;
+width:230px;
+height:16px;
+background:#CCC url(images/com_input.png) no-repeat;
+padding:2px 10px;
+}
+textarea{
+margin:5px 0px;
+width:230px;
+height:120px;
+background:#CCC url(images/com_textarea.png) no-repeat;
+padding:10px;
+}
+.form-help { }
+
+#ping-url { }
+#comments-feed{ padding:5px 40px;}
+
+
+/* ------------------------------------------------------------
+	8. SIDEBAR
+------------------------------------------------------------- */
+
+#sidebar {text-align:right;padding-top:200px; }
+#blognav { }
+#blogextra { }
+
+#sidebar h2 {border-bottom:1px #999 dashed;margin:5px 0px;}
+#sidebar h3 { }
+#sidebar ul { }
+#sidebar li { }
+
+/* boites du menu des widgets livres avec Dotclear */
+#search { position:absolute;width:270px;bottom:5px;right:30px;}
+#search form { }
+#search h2 {display:none; }
+#search #q  {/* champ de recherche */
+	background:#999 url(images/search_champ.png) no-repeat; 
+	color:#000;
+	width:112px;
+	height:20px;
+	padding:5px 25px;
+	margin-right:70px;
+	} 
+#search .submit {/* bouton */
+        background:#999 url(images/search_bouton.png) no-repeat;
+	width:60px;color:#FFF;
+	height:30px;position:absolute;bottom:0;right:12px;
+}
+#topnav {color:#333; }
+.topnav-arch { }
+.topnav-home span{color:#333; }
+
+.selected { }
+.lang { }
+.categories { }
+.syndicate { }
+.lastposts { }
+.lastcomments { }
+.text { }
+.links { }
+
+.dc-category #content-info,.dc-tag #content-info, #comments-feed  {
+background:url(images/big_rss.png) no-repeat;
+padding-left:36px;min-height:72px;height:72px;}
+.tags ul { }
+.tags li { }
+/* a completer separement ou globalement pour le sidebar et la page 
+spécifique des tags avec les differentes class des tags en fonction 
+de leur frequence - voir 9/ classes communes */
+
+
+/* ------------------------------------------------------------
+	9. FOOTER
+------------------------------------------------------------- */
+
+#footer {}
+#footer p { padding:4px 12px;}
+
+
+/* ------------------------------------------------------------
+	10. CLASSES COMMUNES
+------------------------------------------------------------- */
+
+
+/* tags dans le sidebar et dans la page les regroupant
+(exemple ici pour un nuage) */
+.dc-tags #content ul li, .dc-tags #content ul li a, 
+.tags ul li, .tags ul li a {
+	display : inline;
+	width : auto;
+	padding-left : 0;
+	padding-right : 4px;
+	background : transparent;
+	line-height : 1.5em;
+}
+.tags ul li a:hover {
+	background-image :none;
+}
+.dc-tags .tag0, .tags .tag0 { font-size: 85%; }
+.dc-tags .tag10, .tags .tag10 { font-size: 90%; }
+.dc-tags .tag20, .tags .tag20 { font-size: 95%; }
+.dc-tags .tag30, .tags .tag30 { font-size: 100%; }
+.dc-tags .tag40, .tags .tag40 { font-size: 105%; }
+.dc-tags .tag50, .tags .tag50 { font-size: 110%; }
+.dc-tags .tag60, .tags .tag60 { font-size: 115%; }
+.dc-tags .tag70, .tags .tag70 { font-size: 120%; }
+.dc-tags .tag80, .tags .tag80 { font-size: 125%; }
+.dc-tags .tag90, .tags .tag90 { font-size: 130%; }
+.dc-tags .tag100, .tags .tag100 { font-size: 135%; }
+
+/* messages d'erreur */
+.error {
+	border : 1px solid #c44;
+	background : #df0;
+	padding : 0.5em;
+	}
+.error ul {
+	padding-left : 20px;
+	}
+.error li {
+	list-style : square;
+	}
+	
+/* exemples de ceux que j'ajoute souvent */
+.left { float: left; margin-right : 1em; }
+.right { float: right; margin-left : 1em; }
+.center { margin-left : auto; margin-right : auto; }
+.left-text { text-align : left; }
+.right-text { text-align : right; }
+.center-text { text-align : center; }
+.little-text { font-size : .8em;}
+.little-upper-text { font-size : .8em; text-transform : uppercase; }
+
+
+/* ------------------------------------------------------------
+		ARCHIVES
+--------------------------------------------------- */
+
+.dc-archive #content ul {margin:10px; }
+.dc-archive #content h3{padding-top:80px;background:url(images/post_bas.png) no-repeat top center;text-align:center;font-size:20px;}
+
+.post, .post-content, .footnotes, .attachments, 
+.post-info-co, #comments, #footer {
+    clear:both;
+    }

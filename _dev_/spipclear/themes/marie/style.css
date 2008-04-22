@@ -1,0 +1,758 @@
+/* ********************************************
+Theme BOCCANEGRA for DotClear 2, 
+by Kozlika
+******************************************** */
+
+/* Plan de la feuille de style
+------------------------------
+    1. Structure
+    2. Balises html
+    3. Elements communs
+        3.1. les liens
+        3-2. la page
+        3-3. le haut (top, prelude)
+        3-4. le main : billets
+        3-5. le main : commentaires
+        3-6. formulaires
+        3-7. le sidebar
+        3-8. le pied de page (footer)
+        3-9. les navigations
+        3-10. classes communes
+    4. Specificites
+*/
+
+/* ==============================================================
+        1. STRUCTURE
+   ============================================================= */
+
+
+body, html {
+    margin : 0;
+    padding : 0;
+    text-align : center;
+    }
+#page {
+    position : relative;
+    max-width : 1160px;
+    margin : 0 auto;
+    padding : 30px 40px 0 40px;
+    text-align : left;
+    }
+#top {
+    margin : 0;
+    padding : 0;
+    height : 94px;
+    text-align : center;
+    }
+#prelude {
+    margin : 0 0 0 150px;
+    text-align : right;
+    padding : 2px 2em;
+    font-size : 0.86em;
+    position : absolute;
+    top : 0;
+    right : 0;
+    }
+#wrapper {
+    width : 100%;
+    margin : 0;
+    padding : 0;
+    }
+#main {
+    width : 100%;
+    margin : 0 0 0 -360px;
+    padding : 0;
+    float : right;
+    }
+#content {
+    margin : 0 0 0 360px;
+    padding : 20px 30px 0 30px;
+    }
+#sidebar {
+    width : 300px;
+    margin : 140px 0 8px 0;
+    padding : 30px 0 0 0;
+    float : left;
+    }
+#blognav {
+    width : 143px;
+    float : right;
+    margin : 0;
+    padding : 0 0 1em 0;
+    }
+#blogextra {
+    width : 143px;
+    margin : 0;
+    padding : 0 0 1em 0;
+    float : left;
+    }
+#blogextra div {
+    padding-left : 7px;
+}
+#wrapper:after {
+    content : '[ne pas supprimer, merci http://www.fu2k.org/alex/css/onetruelayout/]';
+    display : block;
+    height : 1px;
+    clear : both;
+    visibility : hidden;
+    }
+#wrapper {
+    display:inline-block;
+    }
+/*\*/
+* html #wrapper
+	{
+	height: 1%;
+	}
+#wrapper
+	{
+	display: block;
+	}
+/* */
+#footer {
+    clear : both;
+    	margin : -3px 0 0 0;
+	text-align:center;
+	padding : 8px 30px 4px 30px;
+	border-top : 2px solid #ccc;
+	}
+#footer p {
+	line-height : 150%;
+	margin : 6px 30px;
+    }
+    
+/* ==============================================================
+        2. BALISES HTML
+/*  ============================================================= */
+
+body, html {
+    background : #fff url(img/linef.png);
+    color : #53464b;
+    font-size : small;
+	font-family: "Trebuchet MS", "Lucida Sans", "Lucida Sans Unicode", "Lucida", Verdana, "Bitstream Vera Sans", sans-serif;
+    }
+
+h1 {font-size : 2em; }
+h2 { font-size : 1.33em; margin : 0; }
+h3 { font-size : 1.25em; margin : 1.5em 0 0 0; }
+h4 { font-size : 1.1em; margin : 1.5em 0 0 0; }
+h5 { font-size : 0.9em; margin : 1.5em 0 0 0; }
+h6 { font-size : 0.8em; margin : 1.5em 0 0 0; }
+
+p { margin : 1em 0 0 0; }
+
+img { border : none; }
+
+q, cite, .post blockquote { 
+	font-style : italic; 
+	background : whitesmoke; 
+	}
+
+acronym {
+    cursor : help;
+    }
+form { 
+    display : block; 
+    margin : 0; 
+    padding : 0; 
+    }
+code, pre { 
+    font-family : "Courier New",monospace; 
+    font-size : 1.1em;
+    color : #000;
+    }
+pre {
+    background : #fff;
+	margin : 1em 2em;
+	padding : 0.5em 1em;
+	text-align:left;
+	white-space:normal;
+	border : 1px solid #e3e3e3;
+		/* cache pour IE 5 Mac qui sait pas faire - Ne pas supprimer cette ligne  \*/
+		white-space:pre;
+		width: 90%;
+		overflow : auto;
+		/* Fin hack Ne pas supprimer cette ligne */
+}
+
+/* ==============================================================
+        3.1. LES LIENS (regles generales)
+/*  ============================================================= */
+a {
+	text-decoration : none;
+	}
+a:link {
+	color:maroon; 
+	}
+a:visited {
+	color:maroon; 
+	}
+a:hover, a:focus {
+	color:maroon; 
+	background:#e7e7e7;
+	}
+a[hreflang]:after {
+	content: "\0000a0[" attr(hreflang) "]";
+	color : #666;
+	background : transparent;
+	}
+a.feed {
+	background: transparent url(img/feed.png) no-repeat left center;
+	padding-left: 18px;
+}
+
+/* ==============================================================
+        3.2 LA PAGE
+   ============================================================= */
+   
+#page {
+    background :transparent url(img/filet-top.png) repeat-x 0 121px;
+    border-right : 2px solid #ccc;
+    }
+#wrapper {
+    background : transparent;
+    }
+
+/* ==============================================================
+        3.3 LE HAUT (top, prelude - syndicate: voir dans sidebar)
+   ============================================================= */
+
+#top {
+    text-align : left;
+    background : transparent;
+    }
+#top h1 {
+    margin : 0;
+    padding : 0 0 0 360px;
+    height : 90px;
+    background : transparent;
+    text-align : center;
+	font-family:"century gothic", "gill sans", sans-serif;
+    }
+#top h1 a {
+    display : block;
+    margin : 0;
+    padding : 32px 0 0 0;
+    height : 60px;
+    text-transform : uppercase;
+    font-weight : normal;
+    }
+#top h1 a:hover {
+    color : #999;
+    background : transparent;
+	}
+#prelude {
+    background : transparent;
+    font-size : 0.86em;
+    }
+#prelude a, #sidebar .syndicate a {
+	}
+.prelude a:hover {
+    color : maroon;
+	}
+#sidebar .syndicate a:hover {
+    color : maroon;
+	background: transparent url(img/feed.png) no-repeat left center;
+	}
+#sidebar a {color : #666; }
+#sidebar .syndicate a {color:#666; }
+
+/* ============================================================
+        3.4. LE MAIN, les billets
+============================================================= */
+
+#main {
+    background : transparent;
+    }
+#content {
+    line-height : 140%;
+    background : #fff;
+    border-left : 1px solid #e3e3e3;
+    border-bottom : 1px solid #e3e3e3;
+    border-right : 1px solid #e3e3e3;
+    }
+.post-title a:link, .post-title a:visited {
+    font-weight : bold;
+    color : #015979;
+	}
+.post-title a:hover {
+    color : maroon;
+    background : transparent;
+	}
+
+/* ============================================================
+        4. CLASSES COMMUNES
+============================================================= */
+
+/* A dispo pour billets */
+.petit {
+	font-size:0.9em;
+	}
+.center {
+	text-align : center;
+	}
+.right {
+	text-align : right;
+	}
+.left {
+	text-align : left;
+	}
+
+/* navigation */
+.pagination {
+    margin : 20px -30px 0 -30px;
+    text-align : right;
+    padding : 2px 0 4px 0;
+    background : whitesmoke;
+    border-top : 1px solid #e6e6e6;
+    border-right : 16px solid whitesmoke;
+    }
+.pagination a { color : #800000; }
+
+#navlinks {
+    font-size : 0.86em;
+    margin : -20px -30px 30px -30px;
+    padding : 2px 0;
+    text-align : center;
+    letter-spacing :7px;
+    background : whitesmoke;
+    border-bottom : 1px solid #ccc;
+    }
+#navlinks a {
+    color : maroon;
+    letter-spacing : 0px;
+    }
+#content h2 { font-weight : normal; }
+
+/* tags */
+#tags, ul.tags {
+	list-style: none;
+	display: block;
+	padding: 0;
+}
+#tags li, ul.tags li {
+	display: inline;
+	margin: 0 0.2em 0 0;
+	padding: 0;
+}
+
+.post-tags {
+	list-style: none;
+	display: block;
+	margin: 0 0 0.8em 0;
+	padding: 0;
+	font-size : 0.86em;
+}
+.post-tags li {
+	display: inline;
+	margin: 0 0.6em 0 0;
+	padding: 0 0 0 14px;
+	background: transparent url(img/tag.png) no-repeat left center;
+}
+.post-tags li:after {
+	content: ',';
+}
+.post-tags li:last-child:after {
+	content: '';
+}
+
+.tag0 { font-size: 90%; }
+.tag10 { font-size: 95%; }
+.tag20 { font-size: 100%; }
+.tag30 { font-size: 105%; }
+.tag40 { font-size: 110%; }
+.tag50 { font-size: 120%; }
+.tag60 { font-size: 125%; }
+.tag70 { font-size: 130%; }
+.tag80 { font-size: 135%; }
+.tag90 { font-size: 140%; }
+.tag100 { font-size: 150%; }
+
+
+/* =================================================================
+        5. LES BILLETS
+/* ============================================================= */
+
+.post {
+    margin : 0;
+	padding-bottom : 3em;
+	}
+.day-date {
+    text-align : center;
+    text-transform : uppercase;
+    color : #888;
+    margin : 0 0 1em 0;
+    font-size:0.86em;
+	}
+.post-title {
+	font-size : 3em;
+	font-family : times, "times new roman", georgia, serif;
+	line-height : 0.9;
+	text-align : left;
+	font-style : italic;
+	}
+.post h3, .post h4, .post h5, .post h6 {
+	font-weight : normal;
+	margin-top : 2em;
+	text-transform : uppercase;
+	text-align : left;
+	}
+.post-info {
+	margin : 0.25em 0;
+	color : #9a9a9a;
+	font-size : 0.9em;
+	}
+.post-chapo {
+	margin : 1em 0;
+	text-align : justify;
+	}
+.post-content {
+	text-align : justify;
+	margin-top : 0.5em;
+	}
+.post-content p, .post-chapo p {
+	margin-top : 1em;
+	line-height : 140%;
+	}
+.post-info-co {
+	margin-top:0.5em;
+    text-align : right;
+    font-size : 0.86em;
+	}
+.post-info-co a { 
+    border-bottom : 1px solid #800000;
+    margin-left : 8px;
+    }
+.post blockquote {
+	margin:2em;
+	padding:0 2em 0 1em;
+	border-left : 4px solid #ddd;
+	}
+.footnotes {
+	font-size:0.9em;
+	text-align : left;
+	}
+.footnotes, .footnotes p {
+	margin-top : 1em; text-indent : 0;
+	}
+.post-content ul {
+    margin : 1em 0 1em 1em;
+    padding : 0;
+    list-style-type : none;
+    }
+.post-content ul ul {
+    margin : 0.5em 0 0.5em 1em;
+    padding : 0;
+    list-style-type : none;
+    }
+
+.post-content ul li {
+    padding : 0 0 0 13px;
+    background : transparent url(img/ulb.png) no-repeat 0 0.5em;
+    }
+.post-content ul ul li {
+    padding : 0 0 0 13px;
+    background : transparent url(img/ululb.png) no-repeat 0 0.5em;
+    }
+.post-content ol, .post-content ol ol {
+    margin : 1em 0;
+    padding : 0 0 0 2em;
+    }
+.post-content ol ol {
+    margin : 0.5em 0;
+    list-style-type : lower-alpha;
+    padding : 0 0 0 2em;
+    }
+
+
+/* =================================================================
+        6. COMMENTAIRES, TRACKBACKS
+            (voir aussi formulaires en 8)
+/* ============================================================= */
+
+#co, #tb {
+    margin : 0 0 1.33em 0;
+    padding : 12px 0 0 0;
+	text-align : left;
+	font-family:"century gothic", "gill sans", sans-serif;
+	font-size : 1.15em;
+    font-weight : normal;
+    border-top : 2px solid maroon;
+    color : maroon;
+	}
+#comments dd, #comments dt, #comments dl, #content form, #pings dd, #pings dt, #pings dl { 
+    padding : 4px 16px; 
+    margin : 0;
+    border : none; 
+    }
+#comments dt, #content form, #pings dt { 
+    margin-top : 2em;	
+    font-family:"century gothic", "gill sans", sans-serif;	
+    font-size : 0.92em;
+    border:none;
+    }
+#comments dt .comment-number, #pings dt .comment-number {
+    font-size : 2em; 
+    }
+#comments dt .comment-number:hover {
+    color : maroon;
+    }
+#comments dt {
+    margin-bottom : 0;
+    }
+#comments dd, #pings dd {
+    border-top : 1px solid #ccc;
+    padding-bottom : 12px;
+    }
+#comments dd p, #pings dd p { margin-top : 0.5em;}
+
+#comments dd, #comments dt, #comments dl, #content form { 
+    background : whitesmoke;
+    }
+#pings dd, #pings dt, #pings dl {
+    background : whitesmoke;
+    }
+
+#content form { 
+    margin-bottom : 2em; 
+    padding-top : 1em; 
+    margin-top :1em; 
+    }
+form h3 {
+    margin : 0 0 1em 0;
+    padding : 0;
+    }
+
+/* =================================================================
+        7. SIDEBAR
+/* ============================================================= */
+
+#sidebar {
+    font-size : 0.86em;
+    background : whitesmoke;
+    border-right : 1px solid #e3e3e3;
+    border-left : 1px solid #e3e3e3;
+    border-bottom : 3px solid #ccc;
+    }
+#sidebar h2 {
+    font-family:"century gothic", "gill sans", sans-serif;
+    text-transform : uppercase;
+	font-size : 1.33em;
+	margin-top:1.5em;
+	margin-bottom:0.5em;
+	color : #a9a9a9;
+	padding : 0 0 0 14px;
+	background : transparent url(img/icobar.png) no-repeat 0 0.33em;
+	}
+#sidebar h3 {
+	font-weight : normal;
+	margin-top: 0.5em;
+	margin-bottom:0.33em;
+	color : #9a9a9a;
+	font-size : 1.1em;
+	}
+#sidebar ul {
+	list-style:none;
+	margin : 0 0 1em 0;
+	padding:0 4px 0 0;
+	}
+#sidebar li {
+	margin :0;
+	padding : 0 0 3px 0;
+	text-indent : 0;
+	}
+.langs ul li { display : inline; padding-right : 4px; }
+#search {
+	margin-top:2em;
+	}
+/* retour accueil, archives */
+#topnav {
+	font-size : 1.2em;
+	margin-top:1.5em;
+	margin-bottom:0;
+    padding : 2px 0;
+    margin-left : 0;
+    }
+#topnav li {
+    line-height : 180%;
+    margin : 0;
+    padding : 0 0 0 12px;
+    border-bottom : 1px solid #b0ead8;
+    background : transparent url(img/iconav.png) no-repeat 0% 50%;
+    }
+#topnav span { display : none; }
+#sidebar a:hover, #sidebar a:focus {
+	background:#b0ead8;
+	}
+#sidebar .text { line-height : 140%; padding-right : 1em;}
+#sidebar .text a { border-bottom : 1px solid #800000; }
+
+
+/* =================================================================
+        8. FORMULAIRES (recherche et depot commentaire)
+            interactions (messages d'erreur)
+/* ============================================================= */
+
+fieldset {
+	display : block;
+	border : none;
+	margin : 0 0 0.5em 0;
+	padding : 0;
+	}
+fieldset p {
+	margin-bottom : 1em;
+	}
+.form-help {
+	margin : 1em 0;
+	}
+input, textarea {
+	font-family : Verdana,Arial,Geneva,Helvetica,sans-serif;
+	font-size : 1em;
+	border-width : 1px;
+	border-color : #9a9a9a;
+	}
+input[type], textarea[name] {
+	background : #eee;
+	}
+input[type=submit], input[type=reset] {
+	background : #ccc;
+	color : #000;
+	}
+input[type=submit]:hover {
+	background : #ccc;
+	color : maroon;
+	}
+textarea {
+	width : 95%;
+	}
+p.field {
+	margin : 1em 0 0 0;
+	}
+p.field label {
+    clear:left;
+	display : block;
+	font-weight : bold;
+	font-size : 1em;
+	width : 13em;
+	float : left;
+	color : #666;
+	}
+.form-help {
+	}
+#comment-form {
+	}
+input.preview {
+	}
+input.submit {
+	}
+#c_nom {
+	}
+#c_mail {
+	}
+#c_site {
+    margin-bottom : 1em;
+	}
+#c_content {
+	}
+#c_remember {
+	}
+
+
+/* Error messages
+-------------------------------------------------------- */
+.error {
+	border : 1px solid #c00;
+	background : #fee;
+	padding : 0.5em;
+	}
+.error ul {
+	padding-left : 20px;
+	}
+.error li {
+	list-style : square;
+	}
+	
+/* =================================================================
+        8. PAGES SPECIFIQUES
+            archives, categories
+/* ============================================================= */
+
+#content-info {
+    font-size : 0.92em;
+	font-family:"century gothic", "gill sans", sans-serif;
+    margin : -20px -30px 40px -30px;
+    padding : 8px 20px;
+    text-align : center;
+    background : whitesmoke;
+    color : maroon;
+    border-bottom : 1px solid #ccc;
+    }
+#content-info h2  {
+    font-size : 1.15em;
+    text-transform : uppercase;
+    }
+#content-info p#navlinks {
+    margin : -8px -20px 30px -20px;
+    }
+/* ---------------- Archives ------------- */
+.dc-archive-month .arch-title {
+    font-size : 1.33em;
+    margin-bottom : 0;
+    padding-left : 14px;
+    background : transparent url(img/icopost.png) no-repeat 0 0.4em;
+    }
+.dc-archive-month ul.arch-post {
+    list-style-type : none;
+    }
+.dc-archive-month #content li { 
+    display : inline; 
+    }
+.dc-archive-month #content .arch-info { 
+    display : block; 
+    }
+.dc-archive-month #content .arch-info-co {
+    text-align : left;
+}
+.dc-archive-month #content .arch-tag {
+	padding: 0 0 0 20px;
+	background: transparent url(img/tag.png) no-repeat 8px center;
+    }
+/* ---------------- Cat�gories, Tag ------------- */
+.dc-category .post h2, .dc-tag .post h2 {
+    font-size : 1.5em;
+    margin-bottom : 0;
+    padding-left : 14px;
+    background : transparent url(img/icopost.png) no-repeat 0 0.25em;
+    }
+.dc-category .post { padding-bottom : 2em; }
+/* ---------------- Tags page -------------------- */
+.dc-tags #content ul { line-height : 200%; 	font-family:"century gothic", "gill sans", sans-serif;
+ }
+ 
+.dc-tags #content ul li { padding-right : 14px;  /*   background : transparent url(img/icopost.png) no-repeat 0 0.4em; */ }
+.dc-tags .tag0 { font-size: 100%; }
+.dc-tags .tag10 { font-size: 120%; }
+.dc-tags .tag20 { font-size: 135%; }
+.dc-tags .tag30 { font-size: 150%; }
+.dc-tags .tag40 { font-size: 165%; }
+.dc-tags .tag50 { font-size: 180%; }
+.dc-tags .tag60 { font-size: 195%; }
+.dc-tags .tag70 { font-size: 210%; }
+.dc-tags .tag80 { font-size: 225%; }
+.dc-tags .tag90 { font-size: 250%; }
+.dc-tags .tag100 { font-size: 270%; }
+
+
+/* Syndicate dans le bandeau */
+#sidebar .syndicate { position : absolute; top : 24px; left : 40px; width : 293px; height : 240px; background : whitesmoke  url(img/multi.png) no-repeat 0px 20px; padding-top : 3px; margin : 0; z-index : 100;    border-top : 3px solid #ccc;
+border-left : 1px solid #e3e3e3; border-right : 1px solid #e3e3e3;}
+
+
+#sidebar .syndicate ul { margin : 0; padding : 0;}
+#sidebar .syndicate ul li { display : inline; padding : 2px 16px;  }
+#sidebar .syndicate h2 { display:none; }
+
+/* clearers */
+.post, .post-content, .footnotes, .attachments, .post-info-co, #comments {
+    clear:both;
+    }

@@ -1,0 +1,153 @@
+
+/* 
+	Theme Name: Grid Seven
+	Description: Grid-Based-Compact-Magazine-Style Dotclear 2 Theme.
+	Version: 1.1
+	Author: David Yim
+	Author URI: http://davidyim.fr/
+
+	Compatibility : tested successfully under browsers : IE6, IE7, Firefox (version 2.0.0.11), Safari (public beta 3), and Opera (version 9.24)
+	W3C Compliant.
+
+	Thanks to : Khoi Vinh, Wilson Miner and Eston Bond for inspiration.
+	           (david, december 09, 2007)
+*/
+
+#contact-form {
+width : 480px;
+margin : 0;
+padding : 20px 0;
+font-size : 0.85em;
+}
+#contact-form #contact-pr {
+margin : 20px 0 40px 0;
+padding : 20px 0 20px 0;
+border-top : 1px dashed #aaa;
+border-bottom : 1px dashed #aaa;
+}
+#contact-form #contact-pr h3 {
+font-size : 1em;
+padding : 20px 0 10px 20px;
+color : #444;
+text-decoration : underline;
+background : #e8e8e6;
+}
+#contact-form #contact-pr p {
+padding : 0 0 0 20px;
+background : #e8e8e6;
+}
+#contact-form #contact-pr input#Contact_send {
+margin : 10px 0 0 0;
+padding : 5px;
+color : #eee;
+font-size : 0.9em;
+text-transform : uppercase;
+background : #444;
+color : #fff;
+}
+#contact-form h3.personnal-informations {
+font-size : 1em;
+padding : 5px 0 0 100px;
+color : #666;
+background : url('img/grid-line200.png') no-repeat -17px 13px;
+text-transform : uppercase;
+}
+#contact-form h3.message-informations {
+font-size : 1em;
+margin : 30px 0 0 0;
+padding : 5px 0 0 100px;
+color : #666;
+background : url('img/grid-line150.png') no-repeat -10px 13px;
+text-transform : uppercase;
+}
+#contact-form h3.more-informations {
+font-size : 1em;
+margin : 30px 0 0 0;
+padding : 5px 0 0 100px;
+color : #666;
+background : url('img/grid-line250.png') no-repeat -10px 13px;
+text-transform : uppercase;
+}
+#contact-form h3.message-security {
+font-size : 1em;
+margin : 30px 0 0 0;
+padding : 5px 0 0 100px;
+color : #666;
+background : url('img/grid-line100.png') no-repeat -10px 13px;
+text-transform : uppercase;
+}
+#contact-form ol.field li {
+max-width : 480px;
+margin : 0 0 0 0;
+padding : 10px 0 10px 0;
+border-bottom : 1px solid #cdcdcd;
+border-top : 1px solid #fff;
+}
+#contact-form ol.field li.field-name, #contact-form ol.field li.field-subject, #contact-form ol.field li.field-additionnal {
+border-top : none;
+}
+#contact-form ol.field li label {
+width : 100px;
+padding : 0;
+display : block;
+float : left;
+text-transform : uppercase;
+color : #666;
+font-weight : bold;
+font-size : 0.9em;
+position : absolute;
+}
+#contact-form ol.field li textarea, #contact-form ol.field li input {
+width : 369px;
+border : 1px solid #bcbcbc;
+border-width : 1px 0 0 1px;
+margin : 0 0 0 100px;
+padding : 5px;
+background : #fff;
+font-size : 1em;
+line-height : 1.2em;
+}
+#contact-form ol.field li textarea:focus, #contact-form ol.field li input:focus {
+border-color : #888;
+}
+#contact-form ol li.field-antispam label {
+position : relative;
+}
+#contact-form li.field-antispam img {
+float : left;
+margin : 0 10px 0 0;
+}
+#contact-form li.field-antispam input#Contact_antispam {
+width : 88px;
+margin : 0;
+padding : 3px 5px 5px 5px;
+border : 1px solid #ccc;
+background : #fff;
+font-family : Helvetica, Arial, sans-serif;
+font-size : 1.1em;
+color : #444;
+}
+#contact-form p.field-preview-submit {
+margin : 40px 0 0 100px;
+}
+#contact-form p.field-preview-submit input#Contact_preview {
+margin : 0;
+padding : 5px;
+color : #eee;
+font-size : 0.9em;
+text-transform : uppercase;
+background : #444;
+color : #fff;
+}
+#contact-form p.field-preview-submit input#Contact_send {
+margin : 0;
+padding : 5px;
+color : #eee;
+font-size : 0.9em;
+text-transform : uppercase;
+background : #444;
+color : #fff;
+}
+#contact-form p.field-preview-submit input#Contact_send:hover, #contact-form p.field-preview-submit input#Contact_preview:hover {
+background : #6699cc;
+}

@@ -1,0 +1,30 @@
+#page {
+	width:780px;
+	margin: 0 auto;
+	padding: 0;
+}
+#title {
+	height: 51px;
+}
+#wrapper {
+	margin: 0 -22px 0 0;
+}
+.menu li a {
+	display: block;
+	float: left;
+	height: 48px;
+}
+.menu li a.last_menu,
+.menu li a.last_menu_off {
+	padding-right:35px;
+	height: 80px;
+}
+#content {
+	width:500px !important;
+}
+#footer .footer_content {
+	border-top: none;
+}
+#footer {
+	margin-bottom: 0;
+}
