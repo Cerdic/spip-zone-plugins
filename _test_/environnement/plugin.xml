@@ -1,0 +1,24 @@
+<plugin>
+        <nom>Différenciation des différents environnement (Dev, Test, Recette, Prod)</nom>
+        <icon>img/env_big.png</icon>
+        <auteur>
+        	[Julien Redondo->mailto:julien@nouveauxterritoires.fr] - [NouveauxTerritoires->http://www.nouveauxterritoires.fr]
+ 			<br/><br/>
+ 			- Copyright &#169; 2008 NouveauxTerritoires
+ 			<br/>
+ 			Distribu&eacute; sous licence [GNU/GPL v2->http://www.gnu.org/copyleft/gpl.html]
+ 		</auteur>
+        <version>0.2</version>
+        <etat>dev</etat>
+        <description>
+        	Permet d'afficher une différenciation graphique en fonction de l'environement sélectionné.
+        	Permet aussi de gérer les autorisations d'accès à l'application.
+			<h4><a href="?exec=cfg&amp;cfg=env">Configuration</a></h4>
+        </description>
+        <prefix>env</prefix>
+		<necessite id='cfg' version='[1.7.0;]' />
+		<chemin dir='' type='prive' />
+		
+		<install>base/env_installer.php</install>
+		<options>env_options.php</options>
+</plugin>

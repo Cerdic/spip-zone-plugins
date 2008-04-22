@@ -1,0 +1,11 @@
+[(#REM) DEBUT DIFFERENCIATION DES ENVIRONNEMENT]
+
+[(#CONFIG{env/environnement}|!= {'PROD'}|?{' '})
+
+	#SET{env,#CONFIG{env/environnement}}
+	<div style="z-index:100; position: absolute; top:2px; left:40px">	
+		[(#GET{env}|unique|image_typo{police=Stencil.ttf,taille=30,couleur=000000,largeur=200,align=center,padding=10}|image_aplatir{gif,ff0000}|image_rotation{-37})] 
+	</div>
+]
+[(#REM) FIN DIFFERENCIATION DES ENVIRONNEMENT]
+

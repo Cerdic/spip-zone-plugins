@@ -1,0 +1,118 @@
+[(#REM) titre=Gestion des environnements]
+[(#REM) boite=Les différents environnements]
+[(#REM) icone=img/env.png]
+
+
+[(#SET{logo, <img src='#DOSSIER_SQUELETTE/../img/env_big.png' alt='' style="float:#LANG_RIGHT;" /> })]
+
+<!-- descriptif= 
+	[(#GET{logo})] Ce plugin permet de différencier les différents environnements en affichant dans le frontoffice une étiquette permettant de les différencier facilement.<br/><br/>
+	il permet aussi de configurer les accès au site depuis l'adresse IP de l'utilisateur connecté.
+-->
+#CACHE{0}
+
+<div id="container-1">
+	
+	<div id="fragment-1">
+		<form name="environnement" method="post" action="#SELF">
+
+			<div>[(#ENV{_cfg_}|form_hidden)]</div>
+	
+			<fieldset>
+				<legend>
+					<:env:configuration:>
+				</legend>
+				<div>
+					<label>
+						<input type="radio" name="environnement" value="DEV" [(#CONFIG{env/environnement} == {DEV}|?{'checked="checked"',''})] onClick="inputenable('addressip', true);inputenable('banniesip', false);">
+						<:env:dev:>
+					</label>
+					<br>
+					<label>
+						<input type="radio" name="environnement" value="TEST" [(#CONFIG{env/environnement} == {TEST}|?{'checked="checked"',''})] onClick="inputenable('addressip', true);inputenable('banniesip', false);">
+						<:env:test:>
+					</label>
+					<br/>
+					<label>
+						<input type="radio" name="environnement" value="RECETTE" [(#CONFIG{env/environnement} == {RECETTE}|?{'checked="checked"',''})] onClick="inputenable('addressip', true);inputenable('banniesip', false);">
+						<:env:recette:>
+					</label>
+					<br/>
+					<label>
+						<input type="radio" name="environnement" value="PROD" [(#CONFIG{env/environnement} == {PROD}|?{'checked="checked"',''})] onClick="inputenable('addressip', false);inputenable('banniesip', true);">
+						<:env:prod:>
+					</label>
+					<br/>
+					
+				</div>
+		
+			</fieldset>
+			
+			
+			<fieldset>
+				<legend>
+					<:env:autorisations:>
+				</legend>
+				<div>
+					<br/>
+					<label>
+						<:env:addressip:>
+						<input type="text" name="addressip" id="addressip" value="#CONFIG{env/addressip}" size="60"
+						<?php
+							if (lire_config('env/environnement') == 'PROD') {
+								echo ' readonly="readonly" ';
+							}
+						?>
+						>
+						<br/>
+						<span style="font-size:8pt; color: gray">(<:env:address_description:>)</span>
+					</label>
+					<br/><br/>
+					<label>
+						<:env:redirection:>
+						<input type="text" name="redirection" id="redirection" value="#CONFIG{env/redirection}" size="60">
+					</label>
+					<br/><br/>
+					<label>
+						<:env:banniesip:>
+						<input type="text" name="banniesip" id="banniesip" value="#CONFIG{env/banniesip}" size="60"
+						<?php
+							if (lire_config('env/environnement') != 'PROD') {
+								echo ' readonly="readonly" ';
+							}
+						?>
+						>
+						<br/>
+						<span style="font-size:8pt; color: gray">(<:env:address_description:>)</span>
+					</label>
+					<br/>
+				</div>
+		
+			</fieldset>
+			
+
+			<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+			<br/>
+		</form>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+	function inputenable(id,state) {
+ 		var divObj = null;
+  		if (document.getElementById) {
+  			divObj = document.getElementById(id);
+ 		} else if(document.all) {
+  			divObj = document.all(id);
+ 		} else if (document.layers) {
+  			divObj = document.layers[id];
+ 		}
+ 		if(state && divObj) {
+  			divObj.removeAttribute("readonly");
+ 		} else if(divObj) {
+  			divObj.setAttribute("readonly","readonly");
+ 		}
+	}
+</script>
