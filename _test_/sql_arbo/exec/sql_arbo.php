@@ -2,6 +2,8 @@
 
 include_spip('base/abstract_sql');
 include_spip('base/abstract_arbre');
+include_spip('inc/vieilles_defs'); 
+
 
 # securite
 if (!defined("_ECRIRE_INC_VERSION")) return;

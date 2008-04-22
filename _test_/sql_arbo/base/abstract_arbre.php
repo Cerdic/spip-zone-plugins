@@ -9,7 +9,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *  Il est possible de :
  *      -* créer une table de type autojointure en table intervallaire
  *      -* de rechercher des feuilles et noeud
+ *  
+ *  Convention de nommage :
+ *      feuille :   element pour le quel bord_droit - bord_gauche = 1
+ *      noeud :     element contenant des feuilles ou bien bord_droit - bord_gauche > 1
+ *      racine :    element n'ayant pas de parent    
+ *      element : n'importe quel enregistrement (feuille ou noeud)
  */
+ 
  
  
 /*! \brief Convertir une table de type autojointure en intervallaire
@@ -148,20 +155,7 @@ function sql_arbre_get_feuilles($table ='', $serveur='', $option=true) {
 function sql_arbre_set_feuille($table ='',$parent = array(),$bord = 'droit', $couples= array(),  $serveur='', $option=true) {
 
     //recherche les bords du parent
-    $bordures = sql_fetsel(
-        array(
-            'bord_gauche',
-            'bord_droit'
-        ),
-        $table,
-        $parent['champ'].'='.$parent['id'],
-        '',
-        '',
-        '',
-        '',
-        $serveur
-    );
-
+    $bordures = sql_arbre_get_bord($table,$parent,$bord,$couples,$serveur,$option);
 
     //si bordure droite, alors le bord droit du parent devient le bord gauche de l'enfant
     if ($bord=='aine' || $bord=='droit') {
@@ -175,7 +169,7 @@ function sql_arbre_set_feuille($table ='',$parent = array(),$bord = 'droit', $co
 
 
     //mise à jour bord droit
-    sql_update(
+    $toto = sql_update(
         $table,
         array(
             'bord_droit' => 'bord_droit + 2'
@@ -185,8 +179,10 @@ function sql_arbre_set_feuille($table ='',$parent = array(),$bord = 'droit', $co
         $serveur
     );
 
+    print_r($toto."-droit".$bordure);
+
     //mise à jour gauche
-    sql_update(
+    $toto = sql_update(
         $table,
         array(
             'bord_gauche' => 'bord_gauche + 2'
@@ -195,6 +191,8 @@ function sql_arbre_set_feuille($table ='',$parent = array(),$bord = 'droit', $co
         '',
         $serveur
     );
+    
+    print_r($toto."-gauche".$bordure);
     
     //defini les bordures de l'element à inserer
     $bords = array(
@@ -213,5 +211,30 @@ function sql_arbre_set_feuille($table ='',$parent = array(),$bord = 'droit', $co
 
 }
 
+function sql_arbre_get_bord($table ='',$element = array(),$bord = 'droit', $couples= array(),  $serveur='', $option=true) {
+
+    //recherche les bords de l'element
+    return sql_fetsel(
+        array(
+            'bord_gauche',
+            'bord_droit'
+        ),
+        $table,
+        $element['champ'].'='.$element['id'],
+        '',
+        '',
+        '',
+        '',
+        $serveur
+    );
+
+
+}
+
+function sql_arbre_delete_feuille($table ='',$feuille = array(),$bord = 'droit', $couples= array(),  $serveur='', $option=true) {
+
+
+
+}
 
 ?>
