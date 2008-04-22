@@ -52,17 +52,33 @@
 				</label>
 			</p>
 			
+			[(#REM) Si on est dans un crayon on ajoute la bonne classe ]
+			<script type="text/javascript">
+			<!--
+			function crayon_etiquettes_#ENV{groupe}[_(#ENV{type_objet})][_(#ENV{id_objet})](){
+				var input = $('#etiquettes-#ENV{groupe}[-(#ENV{type_objet})][-(#ENV{id_objet})]');
+				var crayon = input.parents('.crayon-html');
+				if (crayon.length > 0)
+					input
+						.addClass("crayon-active");
+			}
+			$(function(){
+				setTimeout("crayon_etiquettes_#ENV{groupe}[_(#ENV{type_objet})][_(#ENV{id_objet})]()", 100);
+			});
+			// -->
+			</script>
+			
 			[(#ENV{aide_ajax}|?{' '})
 				<script  type="text/javascript">
 				<!--
-				var appliquer_selecteur_#ENV{groupe}_#ENV{type_objet}_#ENV{id_objet} = function(){
+				var appliquer_selecteur_#ENV{groupe}[_(#ENV{type_objet})][_(#ENV{id_objet})] = function(){
 					appliquer_selecteur_cherche_mot(
 						'#etiquettes-#ENV{groupe}[-(#ENV{type_objet})][-(#ENV{id_objet})]',
 						'[(#URL_PAGE{etiquettes_selecteur}|parametre_url{groupe,#ENV{groupe},&})]'
 					);
 				}
-				jQuery(document).ready(appliquer_selecteur_#ENV{groupe}_#ENV{type_objet}_#ENV{id_objet});
-				onAjaxLoad(function(){setTimeout(appliquer_selecteur_#ENV{groupe}_#ENV{type_objet}_#ENV{id_objet}, 200);});
+				jQuery(document).ready(appliquer_selecteur_#ENV{groupe}[_(#ENV{type_objet})][_(#ENV{id_objet})]);
+				onAjaxLoad(function(){setTimeout(appliquer_selecteur_#ENV{groupe}[_(#ENV{type_objet})][_(#ENV{id_objet})], 200);});
 				// -->
 				</script>
 			]
