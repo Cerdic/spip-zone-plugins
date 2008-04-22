@@ -410,13 +410,19 @@ $.fn.initcrayon = function(){
   return this;
 };
 
-/* une fonction pour initialiser les crayons dynamiquement */
+/*
+  une fonction pour initialiser les crayons dynamiquement
+  on prend les 100 premiers et on rejoue a intervalles
+  reguliers pour recuperer les suivants, ainsi que les nouveaux
+  crayons arrives par la suite (en ajax par exemple)
+*/
 $.fn.initcrayons = function(){
   this
-  .find('.crayon')
-  .not('.crayon-autorise')
+  .find('.crayon:not(.crayon-init):lt(100)')
+  .addClass('crayon-init')
   .filter(configCrayons.droits)
   .initcrayon();
+  setTimeout(function(){$('body').initcrayons();}, 500);
 };
 
 // demarrage
@@ -434,14 +440,9 @@ $.fn.crayonsstart = function() {
     });
   }
 
-  // on limite l'init auto aux 1000 premiers crayons
-  // setTimeout sert a passer en execution asynchrone pour confort d'affichage
+  // demarrer les crayons
   if ((typeof crayons_init_dynamique == 'undefined') || (crayons_init_dynamique==false))
-    setTimeout(function(){
-      $(".crayon:lt(1000)")
-      .filter(configCrayons.droits)
-      .initcrayon();
-    }, 300);
+    $('body').initcrayons();
 
   // un clic en dehors ferme tous les crayons ouverts ?
   if (configCrayons.cfg.clickhide)
