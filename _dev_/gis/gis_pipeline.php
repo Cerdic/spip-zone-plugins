@@ -21,11 +21,29 @@ function gis_gismot($flux){
 
 function gis_insertar_maparticle($flux){
 	if (_request('exec')=='articles'){
-		include_spip('inc/parte_privada');
-		$flux['data'] .= gis_cambiar_coord($flux['arg']['id_article']);
+		//on teste si cfg est actif
+		if (function_exists(lire_config)) {
+			$arracfgrubriques_gis=lire_config("gis/rubriques_gis",' ');
+			global $id_article;
+			if ($id_article!=''){
+				//on cherche la rubrique de l'article
+				$s = spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_article");
+				$row = spip_fetch_array($s);
+				$id_rubrique = $row['id_rubrique'];
+				//et si la rubrique est dans l'arrayrub
+				if (in_array($id_rubrique, $arracfgrubriques_gis)) {
+					include_spip('inc/parte_privada');
+					$flux['data'].= gis_cambiar_coord($flux['arg']['id_article']);
+				}
+			}
+		}else {
+			include_spip('inc/parte_privada');
+			$flux['data'].= gis_cambiar_coord($flux['arg']['id_article']);	 
+		}
 	}
 	return $flux;
 }
+
 
 // --------------------------------
 // inserta no head da parte PRIVADA

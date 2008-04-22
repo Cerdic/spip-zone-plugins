@@ -1,0 +1,34 @@
+#CACHE{0}
+<form method="post">
+	[(#ENV{_cfg_}|form_hidden)]
+	[(#REM) descriptif=
+	<h4>Configuration du plugin GIS</h4>
+	Choisissez dans quelles rubriques activer le plugin.
+	]
+
+	[(#REM) titre=GIS]
+	
+	#SET{wichrub,#CONFIG{gis/rubriques_gis,'',''}}
+	<fieldset>
+		<legend>D&eacute;finir la port&eacute;e de GIS</legend>
+		<label>Choisissez la ou les rubriques &agrave; utiliser :</label>
+		<select name="rubriques_gis[]" multiple="multiple" size="9">
+			<option value=""[ (#GET{wichrub}|?{'',' '})selected="selected"]>Aucune</option>
+			<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+			<option value="#ID_RUBRIQUE"[ (#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>
+			Secteur #ID_RUBRIQUE : #TITRE
+			</option>
+			<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+			<option value="#ID_RUBRIQUE"[ (#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>
+			&rarr; Rubrique #ID_RUBRIQUE : #TITRE
+			</option>
+			<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+			</BOUCLE_rubriques>
+			</BOUCLE_secteurs>
+		</select>
+	</fieldset>
+
+	<input type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+	<input type="reset" value="<:Reset:>" class="fondo" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+</form>
