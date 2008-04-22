@@ -12,12 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ':&nbsp;yes',
 
 	// A
-	'acces_admin' => 'Administrators\' access :',
-	'actif' => 'Activated tool',
-	'actifs' => 'Activated tools:',
-	'activer' => 'Activate',
-	'activer_outil' => 'Activate the tool',
-	'alt_pack' => 'See the current configuration parameters',
+	'acces_admin' => 'Administrators\' access:',
 	'auteurs:description' => 'This tool configures the appearance of [the authors\' page->./?exec=auteurs], in the private area.
 
 @puce@ Define here the maximum number of authors to display in the central frame of the author\'s page. Beyond this number page numbering will be triggered.[[%max_auteurs_page%]]
@@ -27,13 +22,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs:nom' => 'Authors page',
 	'auteur_forum:description' => 'Request all authors of public messages to fill in (with at least one letter!) the field "@_CS_FORUM_NOM@" in order to avoid completely anonymous messages.',
 	'auteur_forum:nom' => 'No anonymous forums',
-	'a_jour' => 'Your version is up to date.',
 
 	// B
-	'balise_etoilee' => '{{N.B.}} : Check the use made in your templates of starred tags. This tool will not apply its treatment to the following tag(s): @bal@.',
 	'basique' => 'Basic',
 	'blocs:aide' => 'Folding blocks: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) and <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Allows you to create blocks where clicking on the title makes the contents visible or invisible.
+	'blocs:description' => 'Allows you to create blocks which show/hide when you click on the title.
 
 @puce@ {{In SPIP texts}}: authors can use the tags &lt;bloc&gt; (or &lt;invisible&gt;) and &lt;visible&gt; in this way: 
 
@@ -48,8 +41,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @puce@ {{In templates}}: you can use the tags #BLOC_TITRE, #BLOC_DEBUT and #BLOC_FIN in this way: 
 <quote><code> #BLOC_TITRE
  My title
+ #BLOC_RESUME    (optional)
+ a summary of the following block
  #BLOC_DEBUT
- My folding block
+ My collapsible block (which can be loaded by an AJAX URL, if needed)
  #BLOC_FIN</code></quote>
 ',
 	'blocs:nom' => 'Folding Blocks',
@@ -60,7 +55,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'boites_privees:nom' => 'Private boxes',
 
 	// C
-	'caches' => 'Hidden tools:',
 	'categ:admin' => '1. Administration',
 	'categ:divers' => '6. Miscellaneous',
 	'categ:public' => '4. Public site',
@@ -90,13 +84,12 @@ _ {{2.}} Tags &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; and &lt;blockquote&gt; :[[%
 
 N.B.: by changing the second parameter you will lose any standard styles associated with these tags.</blockquote>',
 	'class_spip:nom' => 'SPIP and its shortcuts...',
-	'cliquezlesoutils' => 'Click on the names of the tools above in order to show their description.',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Functions',
 	'code_jq' => 'jQuery',
 	'code_js' => 'Javascript',
 	'code_options' => 'Options',
-	'contrib' => 'More information: [->http://www.spip-contrib.net/?article@id@]',
+	'contrib' => 'More information: @url@',
 	'couleurs:aide' => 'Text colouring: <b>[coul]text[/coul]</b>@fond@ with <b>coul</b> = @liste@',
 	'couleurs:description' => 'Provide shortcuts to add colours in any text of the site (articles, news items, titles, forums, ...)
 
@@ -109,7 +102,6 @@ In the same way, to change the font if the following option allows:@_CS_EXEMPLE_
 @_CS_ASTER@The format of this personalised tags have to be of existing colours or define pairs &laquo;tag=colour&raquo;, separated by comas. Examples : &laquo;grey, red&raquo;, &laquo;smooth=yellow, strong=red&raquo;, &laquo;low=#99CC11, high=brown&raquo; but also &laquo;grey=#DDDDCC, red=#EE3300&raquo;. For the first and last example, the allowed tags are: <code>[grey]</code> et <code>[red]</code> (<code>[fond grey]</code> et <code>[fond red]</code> if the backgrounds are allowed).',
 	'couleurs:nom' => 'Coloured text',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]text[/coul]</b>, <b>[bg&nbsp;coul]text[/coul]</b>',
-	'cs_rss' => 'Swiss Knife updates',
 
 	// D
 	'decoration:aide' => 'D&eacute;coration: <b>&lt;tag&gt;test&lt;/tag&gt;</b>, with<b>tag</b> = @liste@',
@@ -134,27 +126,19 @@ _ If you use this separator between  &lt;onglets&gt; and &lt;/onglets&gt; tags, 
 _ In templates you can use the tags #ONGLETS_DEBUT, #ONGLETS_TITRE and #ONGLETS_FIN.
 _ This tool may be combined with {A summary for your articles}.',
 	'decoupe:nom' => 'Division in pages and tabs',
-	'desactiver' => 'Deactivate',
 	'desactiver_flash:description' => 'Deletes the flash objects from your site and replaces them by the associated alternative content.',
 	'desactiver_flash:nom' => 'Deactivate flash objects',
-	'desactiver_outil' => 'Deactivate this tool',
-	'desactiver_rss' => 'Deactivate &laquo;Swiss Knife updates&raquo;',
-	'descrip_pack' => 'Your "Current configuration pack" brings together all the parameters activated for the Swiss Knife plugin. It remembers both whether a tool is activated or not and, if so, what options have been chosen.
-
-This PHP code may be placed in the /config/mes_options.php file. It will place a reset link on the page of the "pack {Current Pack}". Of course, you can change its name below.
-
-If you reset the plugin by clicking on a pack, the Swiss Knife will reconfigure itself according to the values defined in that pack.',
+	'detail_balise_etoilee' => '{{N.B.}} : Check the use made in your templates of starred tags. This tool will not apply its treatment to the following tag(s): @bal@.',
 	'detail_fichiers' => 'Files:',
 	'detail_inline' => 'Inline code:',
+	'detail_jquery1' => '{{N.B.}}: this tool requires the {jQuery} plugin in order to function with this version of SPIP.',
+	'detail_jquery2' => 'This tool requires the {jQuery} library.',
 	'detail_pipelines' => 'Pipelines:',
 	'detail_traitements' => 'Treatment:',
-	'distant' => 'New version: [@version@->http://files.spip.org/spip-zone/couteau_suisse.zip]',
 	'dossier_squelettes:description' => 'Changes which template directory to use. For example: "squelettes/mytemplate". You can register several directories by separating them with a colon <html>":"</html>. If you leave the following box empty (or type "dist" in it), then the default "dist" template, supplied with SPIP, will be used.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Template directory',
-	'du_pack' => '• of the pack @pack@',
 
 	// E
-	'edition' => 'RSS feed updated:',
 	'effaces' => 'Deleted',
 	'en_travaux:description' => 'Makes it possible to display a customised message on the public site during maintenance work.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
@@ -211,16 +195,12 @@ _ • [Whole plugin|Reset to the original state of the plugin->@reset@]@install@
 	'help0' => '{{This page is only accessible to main site administrators.}}<p>It gives access to additional functions of  &laquo;{{The&nbsp;Swiss&nbsp;Knife}}&raquo;.</p><p>Documentation link:<br/>• [The&nbsp;Swiss&nbsp;Knife->http://www.spip-contrib.net/?article2166]</p><p>Reset :
 _ • [the whole plugin->@reset@]
 </p>',
-	'html' => 'html@_CS_ASTER@',
 
 	// I
-	'inactif' => 'Inactive tool',
-	'inactifs' => 'Inactive tools:',
 	'insertions:description' => 'N.B.: tool in development!! [[%insertions%]]',
 	'insertions:nom' => 'Auto-correct',
 	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between &lt;head&gt; et &lt;/head&gt;. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
 	'insert_head:nom' => '#INSERT_HEAD tag',
-	'installe_pack' => 'Installation of a configuration pack',
 	'introduction:description' => 'This tag can be used in templates to generate short summaries of articles, new items, etc.</p>
 <p>{{Beware}} : If you have another plugin defining the fonction {balise_INTRODUCTION()} or you have defined it in your templates, you will get a compilation error.</p>
 @puce@ You can specify (as a percentage of the default value) the lenght of the text generated by the tag #INTRODUCTION. A null value, or a value equal to 100 will not modify anything and return the defaults: : 500 characters for the articles, 300 for the news items and 600 for forums and sections.
@@ -233,8 +213,6 @@ _ • [the whole plugin->@reset@]
 	'introduction:nom' => '#INTRODUCTION tag',
 
 	// J
-	'jquery1' => '{{N.B.}}: this tool requires the {jQuery} plugin in order to function with this version of SPIP.',
-	'jquery2' => 'This tool uses the {jQuery} library.',
 	'js_defaut' => 'Default',
 	'js_jamais' => 'Never',
 	'js_toujours' => 'Always',
@@ -299,20 +277,15 @@ _ • {Basic}: links such as {<html>http://spip.net</html>} (whatever protocol) an
 _ • {Extended}: additionally links such as these are also replaced:  {<html>me@spip.net</html>}, {<html>mailto:myaddress</html>} ou {<html>news:mynews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'Fine URLs',
-	'liste_outils' => 'List of tools of the Swiss Knife',
 	'log_couteau_suisse:description' => 'Logs a lot of information about the functioning of "The Swiss Knife" to the spip.log files. They can be found in the @_CS_DIR_TMP@ directory.',
 	'log_couteau_suisse:nom' => 'Detailed log for the Swiss Knife',
 
 	// M
 	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
 	'mailcrypt:nom' => 'MailCrypt',
-	'maj_tous' => 'ALL',
 	'modifier_vars' => 'Change these @nb@ parameters',
 
 	// N
-	'nb_outil' => '@pipe@ : @nb@ tool',
-	'nb_outils' => '@pipe@ : @nb@ tools',
-	'neplusafficher' => 'No longer show',
 	'nouveaux' => 'New',
 	'no_IP:description' => 'Deactivates, in order to preserve confidentiality, the mechanism which records the IP addresses of visitors to your site. SPIP will thus no longer record any IP addresses, neither temporarily at the time of the visits (used for managing statistics or for spip.log), nor in the forums (source of posts).',
 	'no_IP:nom' => 'No IP recording',
@@ -320,24 +293,42 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me@s
 	// O
 	'orientation:description' => '3 new criteria for your templates: <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Ideal for sorting photos according to their format (carre = square; paysage = landscape).',
 	'orientation:nom' => 'Picture orientation',
+	'outils_actifs' => 'Activated tools:',
+	'outils_caches' => 'Hidden tools:',
+	'outils_inactifs' => 'Inactive tools:',
+	'outils_liste' => 'List of tools of the Swiss Knife',
+	'outils_permuter_gras1' => 'Switch the tools in bold type',
+	'outils_permuter_gras2' => 'Switch the @nb@ tools in bold type?',
+	'outils_resetselection' => 'Reset the selection',
+	'outils_selectionactifs' => 'Select all the active tools',
+	'outils_selectiontous' => 'ALL',
+	'outil_actif' => 'Activated tool',
+	'outil_activer' => 'Activate',
+	'outil_activer_le' => 'Activate the tool',
+	'outil_cacher' => 'No longer show',
+	'outil_desactiver' => 'Deactivate',
+	'outil_desactiver_le' => 'Deactivate this tool',
+	'outil_inactif' => 'Inactive tool',
+	'outil_intro' => 'This page lists the functionalties which the plugin makes available to you.<br /><br />By clicking on the names of the tools below, you choose the ones which you can then switch on/off using the central button: active tools will be disabled and <i>vice versa</i>. When you click, the tools description is shown above the list. The tool categories are collapsible to hide the tools they contain. A double-click allows you to directly switch a tool on/off.<br /><br />For first use, it is recommended to activate tools one by one, thus reavealing any incompatibilites with your templates, with SPIP or with other plugins.<br /><br />N.B.: simply loading this page recompiles all the Swiss Knife tools.',
+	'outil_intro_old' => '<MODIF>This is the old interface.<br /><br />If you have difficulties in using <a href=\\\'./?exec=admin_couteau_suisse\\\'>the new interface</a>, please let us know in the forum of <a href=\\\'http://www.spip-contrib.net/?article2166\\\'>Spip-Contrib</a>.',
+	'outil_nb' => '@pipe@ : @nb@ tool',
+	'outil_nbs' => '@pipe@ : @nb@ tools',
+	'outil_permuter' => 'Switch the tool: &laquo; @text@ &raquo; ?',
 
 	// P
-	'pack' => 'Current configuration',
-	'page' => 'page',
+	'pack_alt' => 'See the current configuration parameters',
+	'pack_descrip' => 'Your "Current configuration pack" brings together all the parameters activated for the Swiss Knife plugin. It remembers both whether a tool is activated or not and, if so, what options have been chosen.
+
+This PHP code may be placed in the /config/mes_options.php file. It will place a reset link on the page of the "pack {Current Pack}". Of course, you can change its name below.
+
+If you reset the plugin by clicking on a pack, the Swiss Knife will reconfigure itself according to the values defined in that pack.',
+	'pack_du' => '• of the pack @pack@',
+	'pack_installe' => 'Installation of a configuration pack',
+	'pack_titre' => 'Current configuration',
 	'paragrapher2:description' => 'The SPIP function <code>paragrapher()</code> inserts the tags &lt;p&gt; and &lt;/p&gt; around all texts which do not have paragraphs. In order to have a finer control over your styles and layout, you can give a uniform look to your texts throughout the site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Insert paragraphs',
 	'par_defaut' => 'By default',
-	'permuter' => 'Switch the tools in bold type',
-	'permuter_outil' => 'Switch the tool : \\u00ab @text@ \\u00bb ?',
-	'permuter_outils' => 'Switch the @nb@ tools in bold type?',
 	'pipelines' => 'Entry points used:',
-	'presente_outils' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\'./?exec=admin_couteau_suisse\'>the new interface</a>, please let us know in the forum of <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
-	'presente_outils2' => 'This page lists the functionalties which the plugin makes available to you.<br /><br />By clicking on the names of the tools below, you choose the ones which you can then switch on/off using the central button: active tools will be disabled and <i>vice versa</i>. When you click, the tools description is shown above the list. The tool categories are collapsible to hide the tools they contain. A double-click allows you to directly switch a tool on/off.<br /><br />For first use, it is recommended to activate tools one by one, thus reavealing any incompatibilites with your templates, with SPIP or with other plugins.<br /><br />N.B.: simply loading this page recompiles all the Swiss Knife tools.',
-	'prochainement' => 'This site will be back online soon.
-_ Thank you for your understanding.',
-	'propres' => 'propres@_CS_ASTER@',
-	'propres-qs' => 'propres-qs',
-	'propres2' => 'propres2@_CS_ASTER@',
 	'pucesli:description' => 'Replaces bullets &laquo;-&raquo; (simple dash) in articles with ordered lists &laquo;-*&raquo; (transformed into  &lt;ul>&lt;li>…&lt;/li>&lt;/ul> in HTML) whose style may be customised using CSS.',
 	'pucesli:nom' => 'Beautiful bullets',
 
@@ -345,12 +336,13 @@ _ Thank you for your understanding.',
 	'raccourcis' => 'Active Swiss Knife typographical shortcuts:',
 	'raccourcis_barre' => 'The Swiss Knife\'s typographical shorcuts',
 	'reserve_admin' => 'Access restricted to administrators',
-	'resetselection' => 'Reset the selection',
+	'rss_attente' => 'Awaiting RSS...',
+	'rss_desactiver' => 'Deactivate &laquo;Swiss Knife updates&raquo;',
+	'rss_edition' => 'RSS feed updated:',
 	'rss_titre' => 'Development of the &laquo;The Swiss Knife&raquo;:',
 
 	// S
 	'sauf_admin' => 'All, except administrators',
-	'selectiontous' => 'Select all the active tools',
 	'set_options:description' => 'Preselects the type of interface (simplified or advanced) for all editors, both existing and future ones. At the same time the button offering the choice between the two interfaces is also removed.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Type of private interface',
 	'sf_amont' => 'Upstream',
@@ -390,7 +382,6 @@ List here the sequences you wish to prohibit@_CS_ASTER@ separating them with spa
 
 @puce@ SPIP provides the shortcut <code>[?word]</code> to link words to their definition. By default (or if you leave the box below empty), wikipedia.org is used as the external glossary. You may choose another address. <br />Test link: [?SPIP][[%url_glossaire_externe2%]]',
 	'SPIP_liens:nom' => 'SPIP and external links',
-	'standard' => 'standard',
 	'statuts_spip' => 'Only the following SPIP status:',
 	'statuts_tous' => 'Every status',
 	'stat_auteurs' => 'Authors in statistics',
@@ -412,6 +403,8 @@ flux)</code>.
 _ Do not forget to check that the variable used (here, "a_text") is defined in the language files.',
 	'toutmulti:nom' => 'Multilingual blocks',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
+	'travaux_prochainement' => 'This site will be back online soon.
+_ Thank you for your understanding.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
 	'type_urls:description' => '@puce@ SPIP offers a choice between several types of URLs for your site:
 <div style="font-size:90%; margin:0 2em;">
@@ -433,10 +426,21 @@ Plus d\'infos : [->http://www.spip.net/en_article3588.html]
 _ The rendered abbreviations correspond to those of the Imprimerie nationale given in the {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, Presses de l\'Imprimerie nationale, Paris, 2002).',
 	'typo_exposants:nom' => 'Superscript',
 
+	// U
+	'url_html' => 'html@_CS_ASTER@',
+	'url_page' => 'page',
+	'url_propres' => 'propres@_CS_ASTER@',
+	'url_propres-qs' => 'propres-qs',
+	'url_propres2' => 'propres2@_CS_ASTER@',
+	'url_standard' => 'standard',
+
 	// V
 	'validez_page' => 'To access modifications:',
 	'variable_vide' => '(Empty)',
 	'vars_modifiees' => 'The data has been modified',
+	'version_a_jour' => 'Your version is up to date.',
+	'version_distante' => 'Distant version...',
+	'version_nouvelle' => 'New version: @version@',
 	'verstexte:description' => '2 filters for your templates which make it possible to produce lighter pages.
 _ version_texte : extracts the text content of an HTML page (includes only a few very basic tags).
 _ version_plein_texte : extracts the text content from an html to render full text.',

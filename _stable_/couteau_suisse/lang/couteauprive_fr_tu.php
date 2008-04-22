@@ -13,11 +13,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'acces_admin' => 'Acc&egrave;s administrateurs :',
-	'actif' => 'Outil actif',
-	'actifs' => 'Outils actifs :',
-	'activer' => 'Activer',
-	'activer_outil' => 'Activer l\'outil',
-	'alt_pack' => 'Voir les param&egrave;tres de configuration en cours',
 	'auteurs:description' => 'Cet outil configure l\'apparence de [la page des auteurs->./?exec=auteurs], en partie priv&eacute;e.
 
 @puce@ D&eacute;finis ici le nombre maximal d\'auteurs &agrave; afficher sur le cadre central de la page des auteurs. Au-del&agrave;, une pagination est mise en place.[[%max_auteurs_page%]]
@@ -27,13 +22,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs:nom' => 'Page des auteurs',
 	'auteur_forum:description' => 'Incite tous les auteurs de messages publics &agrave; remplir (d\'au moins d\'une lettre !) le champ &laquo;@_CS_FORUM_NOM@&raquo; afin d\'&eacute;viter les contributions totalement anonymes.',
 	'auteur_forum:nom' => 'Pas de forums anonymes',
-	'a_jour' => 'Ta version est &agrave; jour.',
 
 	// B
-	'balise_etoilee' => '{{Attention}} : V&eacute;rifie bien l\'utilisation faite par tes squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outil ne s\'appliqueront pas sur : @bal@.',
 	'basique' => 'Basique',
 	'blocs:aide' => 'Blocs D&eacute;pliables : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Te permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles.
+	'blocs:description' => 'Te permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles.
 
 @puce@ {{Dans les textes SPIP}} : les r&eacute;dacteurs ont &agrave; disposition les  nouvelles balises &lt;bloc&gt; (ou &lt;invisible&gt;) et &lt;visible&gt; &agrave; utiliser dans leurs textes comme ceci : 
 
@@ -46,10 +39,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 </code></quote>
 
 @puce@ {{Dans les squelettes}} : tu as &agrave; ta disposition les  nouvelles balises #BLOC_TITRE, #BLOC_DEBUT et #BLOC_FIN &agrave; utiliser comme ceci : 
-<quote><code> #BLOC_TITRE
+<quote><code> #BLOC_TITRE{mon_URL}
  Mon titre
+ #BLOC_RESUME (facultatif)
+ une version resumee du bloc suivant
  #BLOC_DEBUT
- Mon bloc depliable
+ Mon bloc depliable (qui contiendra l\'URL pointee si necessaire)
  #BLOC_FIN</code></quote>
 ',
 	'blocs:nom' => 'Blocs D&eacute;pliables',
@@ -60,7 +55,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'boites_privees:nom' => 'Bo&icirc;tes priv&eacute;es',
 
 	// C
-	'caches' => 'Outils cach&eacute;s :',
 	'categ:admin' => '1. Administration',
 	'categ:divers' => '6. Divers',
 	'categ:public' => '4. Affichage public',
@@ -90,13 +84,12 @@ _ {{2.}} Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :[
 
 Note : en modifiant ce deuxi&egrave;me param&egrave;tre, tu perds alors les styles standards associ&eacute;s &agrave; ces balises.</blockquote>',
 	'class_spip:nom' => 'SPIP et ses raccourcis…',
-	'cliquezlesoutils' => 'Clique sur le nom des outils ci-dessus pour afficher ici leur description.',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Fonctions',
 	'code_jq' => 'jQuery',
 	'code_js' => 'Javascript',
 	'code_options' => 'Options',
-	'contrib' => 'Plus d\'infos : [->http://www.spip-contrib.net/?article@id@]',
+	'contrib' => 'Plus d\'infos : @url@',
 	'couleurs:aide' => 'Mise en couleurs : <b>[coul]texte[/coul]</b>@fond@ avec <b>coul</b> = @liste@',
 	'couleurs:description' => 'Permet d\'appliquer facilement des couleurs &agrave; tous les textes du site (articles, br&egrave;ves, titres, forum, …) en utilisant des balises en raccourcis.
 
@@ -109,7 +102,6 @@ Idem pour changer le fond, si l\'option ci-dessous le permet :@_CS_EXEMPLE_COULE
 @_CS_ASTER@Le format de ces balises personnalis&eacute;es doit lister des couleurs existantes ou d&eacute;finir des couples &laquo;balise=couleur&raquo;, le tout s&eacute;par&eacute; par des virgules. Exemples : &laquo;gris, rouge&raquo;, &laquo;faible=jaune, fort=rouge&raquo;, &laquo;bas=#99CC11, haut=brown&raquo; ou encore &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Pour le premier et le dernier exemple, les balises autoris&eacute;es sont : <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si les fonds sont permis).',
 	'couleurs:nom' => 'Tout en couleurs',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]texte[/coul]</b>, <b>[bg&nbsp;coul]texte[/coul]</b>',
-	'cs_rss' => 'Les r&eacute;visions du Couteau Suisse',
 
 	// D
 	'decoration:aide' => 'D&eacute;coration&nbsp;: <b>&lt;balise&gt;test&lt;/balise&gt;</b>, avec <b>balise</b> = @liste@',
@@ -134,27 +126,19 @@ _ Si tu utilises ce s&eacute;parateur &agrave; l\'int&eacute;rieur des balises &
 _ Dans les squelettes : tu as &agrave; ta disposition les nouvelles balises #ONGLETS_DEBUT, #ONGLETS_TITRE et #ONGLETS_FIN.
 _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour tes articles}.',
 	'decoupe:nom' => 'D&eacute;coupe en pages et onglets',
-	'desactiver' => 'D&eacute;sactiver',
 	'desactiver_flash:description' => 'Supprime les objets flash des pages de ton site et les remplace par le contenu alternatif associ&eacute;.',
 	'desactiver_flash:nom' => 'D&eacute;sactive les objets flash',
-	'desactiver_outil' => 'D&eacute;sactiver l\'outil',
-	'desactiver_rss' => 'D&eacute;sactiver les &laquo; R&eacute;visions du Couteau Suisse &raquo;',
-	'descrip_pack' => 'Ton "Pack de configuration actuelle" rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
-
-Ce code PHP peut prendre place dans le fichier /config/mes_options.php et ajoutera un lien de r&eacute;initialisation sur cette page "du pack {Pack Actuel}". Bien s&ucirc;r il t\'est possible de changer son nom ci-dessous.
-
-Si tu r&eacute;initialises le plugin en cliquant sur un pack, le Couteau Suisse se reconfigurera automatiquement en fonction des param&egrave;tres pr&eacute;d&eacute;finis dans le pack.',
+	'detail_balise_etoilee' => '{{Attention}} : V&eacute;rifie bien l\'utilisation faite par tes squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outil ne s\'appliqueront pas sur : @bal@.',
 	'detail_fichiers' => 'Fichiers :',
 	'detail_inline' => 'Code inline :',
+	'detail_jquery1' => '{{Attention}} : cet outil n&eacute;cessite le plugin {jQuery} pour fonctionner avec cette version de SPIP.',
+	'detail_jquery2' => 'Cet outil n&eacute;cessite la librairie {jQuery}.',
 	'detail_pipelines' => 'Pipelines :',
 	'detail_traitements' => 'Traitements :',
-	'distant' => 'Nouvelle version : [@version@->http://files.spip.org/spip-zone/couteau_suisse.zip]',
 	'dossier_squelettes:description' => 'Modifie le dossier du squelette utilis&eacute;. Par exemple : "squelettes/monsquelette". Tu peux inscrire plusieurs dossiers en les s&eacute;parant par les deux points <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. En laissant vide la case qui suit (ou en tapant "dist"), c\'est le squelette original "dist" fourni par SPIP qui sera utilis&eacute;.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Dossier du squelette',
-	'du_pack' => '• du pack @pack@',
 
 	// E
-	'edition' => 'Flux RSS mis &agrave; jour le :',
 	'effaces' => 'Effac&eacute;s',
 	'en_travaux:description' => 'Permet d\'afficher un message personalisable pendant une phase de maintenance sur tout le site public.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
@@ -210,16 +194,12 @@ _ • [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@reset
 	'help0' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Lien de documentation :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p><p>R&eacute;initialisation :
 _ • [De tout le plugin->@reset@]
 </p>',
-	'html' => 'html@_CS_ASTER@',
 
 	// I
-	'inactif' => 'Outil inactif',
-	'inactifs' => 'Outil inactifs :',
 	'insertions:description' => 'ATTENTION : outil en cours de d&eacute;veloppement !! [[%insertions%]]',
 	'insertions:nom' => 'Corrections automatiques',
 	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du javascript (.js) ou des feuilles de style (.css).',
 	'insert_head:nom' => 'Balise #INSERT_HEAD',
-	'installe_pack' => 'Mise en place d\'un pack de configuration',
 	'introduction:description' => 'Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc..</p>
 <p>{{Attention}} : Avant d\'activer cette fonctionnalit&eacute;, v&eacute;rifiez bien qu\'aucune fonction {balise_INTRODUCTION()} n\'existe d&eacute;j&agrave; dans votre squelette ou vos plugins, la surcharge produirait alors une erreur de compilation.</p>
 @puce@ Tu peux pr&eacute;ciser (en pourcentage par rapport &agrave; la valeur utilis&eacute;e par d&eacute;faut) la longueur du texte renvoy&eacute; par balise #INTRODUCTION. Une valeur nulle ou &eacute;gale &agrave; 100 ne modifie pas l\'aspect de l\'introduction et utilise donc les valeurs par d&eacute;faut suivantes : 500 caract&egrave;res pour les articles, 300 pour les br&egrave;ves et 600 pour les forums ou les rubriques.
@@ -232,8 +212,6 @@ _ • [De tout le plugin->@reset@]
 	'introduction:nom' => 'Balise #INTRODUCTION',
 
 	// J
-	'jquery1' => '{{Attention}} : cet outil n&eacute;cessite le plugin {jQuery} pour fonctionner avec cette version de SPIP.',
-	'jquery2' => 'Cet outil  utilise la librairie {jQuery}.',
 	'js_defaut' => 'D&eacute;faut',
 	'js_jamais' => 'Jamais',
 	'js_toujours' => 'Toujours',
@@ -298,20 +276,15 @@ _ • {Basique} : sont remplac&eacute;s les liens du type {<html>http://spip.net</
 _ • {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'Belles URLs',
-	'liste_outils' => 'Liste des outils du Couteau Suisse',
 	'log_couteau_suisse:description' => 'Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin \'Le Couteau Suisse\' dans les fichiers spip.log que l\'on peut trouver dans le r&eacute;pertoire : @_CS_DIR_TMP@',
 	'log_couteau_suisse:nom' => 'Log d&eacute;taill&eacute; du Couteau Suisse',
 
 	// M
 	'mailcrypt:description' => 'Masque tous les liens de courriels pr&eacute;sents dans tes textes en les rempla&ccedil;ant par un lien Javascript permettant quand m&ecirc;me d\'activer la messagerie du lecteur. Cet outil antispam tente d\'emp&ecirc;cher les robots de collecter les adresses &eacute;lectroniques laiss&eacute;es en clair dans les forums ou dans les balises de tes squelettes.',
 	'mailcrypt:nom' => 'MailCrypt',
-	'maj_tous' => 'TOUS',
 	'modifier_vars' => 'Modifier ces @nb@ param&egrave;tres',
 
 	// N
-	'nb_outil' => '@pipe@ : @nb@ outil',
-	'nb_outils' => '@pipe@ : @nb@ outils',
-	'neplusafficher' => 'Ne plus afficher',
 	'nouveaux' => 'Nouveaux',
 	'no_IP:description' => 'D&eacute;sactive le m&eacute;canisme d\'enregistrement automatique des adresses IP des visiteurs de ton site par soucis de confidentialit&eacute; : SPIP ne conservera alors plus aucun num&eacute;ro IP, ni temporairement lors des visites (pour g&eacute;rer les statistiques ou alimenter spip.log), ni dans les forums (responsabilit&eacute;).',
 	'no_IP:nom' => 'Pas de stockage IP',
@@ -319,24 +292,42 @@ _ • {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi
 	// O
 	'orientation:description' => '3 nouveaux crit&egrave;res pour tes squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.',
 	'orientation:nom' => 'Orientation des images',
+	'outils_actifs' => 'Outils actifs :',
+	'outils_caches' => 'Outils cach&eacute;s :',
+	'outils_inactifs' => 'Outil inactifs :',
+	'outils_liste' => 'Liste des outils du Couteau Suisse',
+	'outils_permuter_gras1' => 'Permuter les outils en gras',
+	'outils_permuter_gras2' => 'Permuter les @nb@ outils en gras ?',
+	'outils_resetselection' => 'R&eacute;initialiser la s&eacute;lection',
+	'outils_selectionactifs' => 'S&eacute;lectionner tous les outils actifs',
+	'outils_selectiontous' => 'TOUS',
+	'outil_actif' => 'Outil actif',
+	'outil_activer' => 'Activer',
+	'outil_activer_le' => 'Activer l\'outil',
+	'outil_cacher' => 'Ne plus afficher',
+	'outil_desactiver' => 'D&eacute;sactiver',
+	'outil_desactiver_le' => 'D&eacute;sactiver l\'outil',
+	'outil_inactif' => 'Outil inactif',
+	'outil_intro' => 'Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; ta disposition.<br /><br />En cliquant sur le nom des outils ci-dessous, tu s&eacute;lectionnes ceux dont tu pourras permuter l\'&eacute;tat &agrave; l\'aide du bouton central : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>. &Agrave; chaque clic, la description apparait au-dessous des listes. Les cat&eacute;gories sont repliables et les outils peuvent &ecirc;tre cach&eacute;s. Le double-clic permet de permuter rapidement un outil.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d\'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d\'autres plugins.<br /><br />Note : le simple chargement de cette page recompile l\'ensemble des outils du Couteau Suisse.',
+	'outil_intro_old' => '<MODIF>Cette interface est ancienne.<br /><br />Si tu rencontres des probl&egrave;mes dans l\'utilisation de la <a href=\'./?exec=admin_couteau_suisse\'>nouvelle interface</a>, n\'h&eacute;site pas &agrave; nous en faire part sur le forum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
+	'outil_nb' => '@pipe@ : @nb@ outil',
+	'outil_nbs' => '@pipe@ : @nb@ outils',
+	'outil_permuter' => 'Permuter l\'outil : &laquo; @text@ &raquo; ?',
 
 	// P
-	'pack' => 'Configuration Actuelle',
-	'page' => 'page',
+	'pack_alt' => 'Voir les param&egrave;tres de configuration en cours',
+	'pack_descrip' => 'Ton "Pack de configuration actuelle" rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
+
+Ce code PHP peut prendre place dans le fichier /config/mes_options.php et ajoutera un lien de r&eacute;initialisation sur cette page "du pack {Pack Actuel}". Bien s&ucirc;r il t\'est possible de changer son nom ci-dessous.
+
+Si tu r&eacute;initialises le plugin en cliquant sur un pack, le Couteau Suisse se reconfigurera automatiquement en fonction des param&egrave;tres pr&eacute;d&eacute;finis dans le pack.',
+	'pack_du' => '• du pack @pack@',
+	'pack_installe' => 'Mise en place d\'un pack de configuration',
+	'pack_titre' => 'Configuration Actuelle',
 	'paragrapher2:description' => 'La fonction SPIP <code>paragrapher()</code> ins&egrave;re des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont d&eacute;pourvus de paragraphes. Afin de g&eacute;rer plus finement tes styles et vos mises en page, tu as la possibilit&eacute; d\'uniformiser l\'aspect des textes de ton site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paragrapher',
 	'par_defaut' => 'Par d&eacute;faut',
-	'permuter' => 'Permuter les outils en gras',
-	'permuter_outil' => 'Permuter l\'outil : \\u00ab @text@ \\u00bb ?',
-	'permuter_outils' => 'Permuter les @nb@ outils en gras ?',
 	'pipelines' => 'Pipelines utilis&eacute;s&nbsp;:',
-	'presente_outils' => 'Cette interface est ancienne.<br /><br />Si tu rencontres des probl&egrave;mes dans l\'utilisation de la <a href=\'./?exec=admin_couteau_suisse\'>nouvelle interface</a>, n\'h&eacute;sites pas &agrave; nous en faire part sur le forum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
-	'presente_outils2' => 'Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; ta disposition.<br /><br />En cliquant sur le nom des outils ci-dessous, Tu s&eacute;lectionnes ceux dont tu pourras permuter l\'&eacute;tat &agrave; l\'aide du bouton central : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>. &Agrave; chaque clic, la description apparait au-dessous des listes. Les cat&eacute;gories sont repliables et les outils peuvent &ecirc;tre cach&eacute;s. Le double-clic permet de permuter rapidement un outil.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d\'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec ton squelette, avec SPIP ou avec d\'autres plugins.<br /><br />Note : le simple chargement de cette page recompile l\'ensemble des outils du Couteau Suisse.',
-	'prochainement' => 'Ce site sera r&eacute;tabli tr&egrave;s prochainement.
-_ Merci de ta compr&eacute;hension.',
-	'propres' => 'propres@_CS_ASTER@',
-	'propres-qs' => 'propres-qs',
-	'propres2' => 'propres2@_CS_ASTER@',
 	'pucesli:description' => 'Remplace les puces &laquo;-&raquo; (tiret simple) des articles par des listes not&eacute;es &laquo;-*&raquo; (traduites en HTML par : &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) et dont le style peut &ecirc;tre personnalis&eacute; par css.',
 	'pucesli:nom' => 'Belles puces',
 
@@ -344,12 +335,13 @@ _ Merci de ta compr&eacute;hension.',
 	'raccourcis' => 'Raccourcis typographiques actifs du Couteau Suisse&nbsp;:',
 	'raccourcis_barre' => 'Les raccourcis typographiques du Couteau Suisse',
 	'reserve_admin' => 'Acc&egrave;s r&eacute;serv&eacute; aux administrateurs.',
-	'resetselection' => 'R&eacute;initialiser la s&eacute;lection',
+	'rss_attente' => 'Attente RSS...',
+	'rss_desactiver' => 'D&eacute;sactiver les &laquo; R&eacute;visions du Couteau Suisse &raquo;',
+	'rss_edition' => 'Flux RSS mis &agrave; jour le :',
 	'rss_titre' => '&laquo;&nbsp;Le Couteau Suisse&nbsp;&raquo; en d&eacute;veloppement :',
 
 	// S
 	'sauf_admin' => 'Tous, sauf les administrateurs',
-	'selectiontous' => 'S&eacute;lectionner tous les outils actifs',
 	'set_options:description' => 'S&eacute;lectionne d\'office le type d’interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Type d\'interface priv&eacute;e',
 	'sf_amont' => 'En amont',
@@ -389,7 +381,6 @@ Listes ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par
 
 @puce@ SPIP permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si tu laisses vide la case ci-dessous), le glossaire externe renvoie vers l’encyclop&eacute;die libre wikipedia.org. &Agrave; toi de choisir l\'adresse &agrave; utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]',
 	'SPIP_liens:nom' => 'SPIP et les liens… externes',
-	'standard' => 'standard',
 	'statuts_spip' => 'Uniquement les statuts SPIP suivants :',
 	'statuts_tous' => 'Tous les statuts',
 	'stat_auteurs' => 'Les auteurs en stat',
@@ -411,6 +402,8 @@ flux)</code>.
 _ N\'oublies pas de v&eacute;rifier que \'un_texte\' est bien d&eacute;fini dans les fichiers de langue.',
 	'toutmulti:nom' => 'Blocs multilingues',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
+	'travaux_prochainement' => 'Ce site sera r&eacute;tabli tr&egrave;s prochainement.
+_ Merci de votre compr&eacute;hension.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
 	'type_urls:description' => '@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'acc&egrave;s aux pages de ton site :
 <div style="font-size:90%; margin:0 2em;">
@@ -432,10 +425,21 @@ Plus d\'infos : [->http://www.spip.net/fr_article765.html]
 _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l\'Imprimerie nationale telles qu\'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l\'Imprimerie nationale, Paris, 2002).',
 	'typo_exposants:nom' => 'Exposants typographiques',
 
+	// U
+	'url_html' => 'html@_CS_ASTER@',
+	'url_page' => 'page',
+	'url_propres' => 'propres@_CS_ASTER@',
+	'url_propres-qs' => 'propres-qs',
+	'url_propres2' => 'propres2@_CS_ASTER@',
+	'url_standard' => 'standard',
+
 	// V
 	'validez_page' => 'Pour acc&eacute;der aux modifications :',
 	'variable_vide' => '(Vide)',
 	'vars_modifiees' => 'Les donn&eacute;es ont bien &eacute;t&eacute; modifi&eacute;es',
+	'version_a_jour' => 'Ta version est &agrave; jour.',
+	'version_distante' => 'Version distante...',
+	'version_nouvelle' => 'Nouvelle version : @version@',
 	'verstexte:description' => '2 filtres pour tes squelettes, permettant de produire des pages plus l&eacute;g&egrave;res.
 _ version_texte : extrait le contenu texte d\'une page html &agrave; l\'exclusion de quelques balises &eacute;l&eacute;mentaires.
 _ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du texte plein.',
