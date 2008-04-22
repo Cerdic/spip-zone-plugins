@@ -95,7 +95,7 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom) {
 }
 
 function abrirVentana(identificador) {
-	mapSpip.closeInfoWindow();
+	map1.closeInfoWindow();
 	marcadores[identificador].openInfoWindowHtml(contidosHTML[identificador]);
 	//enbebemos o flash player do son
 	var fo = new FlashObject( URLbase + "/img_pack/musicplayer.swf?autoplay=true&song_url=" + URLsons[identificador], "player_x", "17", "17", "6", "#FFFFFF");
