@@ -1685,8 +1685,8 @@ if($action!='') {
 					}
          	}
          	foreach($tCan as $id_table=>$t1) {
-         		$t1['moyenne']=round($t1['total']/$t1['coeff'],2);
-         		$t1['moyenne']=round((($t1['moyenne']*(1-$t1['coeff_bac']))+($t1['moyenne_bac']*$t1['coeff_bac'])),2);
+         		$t1['moyenne_matiere']=round($t1['total']/$t1['coeff'],2);
+         		$t1['moyenne']=round((($t1['moyenne_matiere']*(1-$t1['coeff_bac']))+($t1['moyenne_bac']*$t1['coeff_bac'])),2);
          		$cle=str_pad(100*$t1['moyenne'],4,'0',STR_PAD_LEFT)."_$id_table";
          		if($t1['moyenne']>=8) $tClassement[$cle]=$t1;
          	}
@@ -1703,7 +1703,7 @@ if($action!='') {
          		$msg.="</table>\n";
          	}
          	//echo"<pre>";print_r($tClassement);echo"</pre>";
-         	$colonnes2=array('id_table','candidat','moyenne','serie','moyenne_bac','mention');
+         	$colonnes2=array('id_table','candidat','moyenne','serie','moyenne_matiere','moyenne_bac','mention');
          	$msg.="<table class='spip'>\n<tr>\n\t<th>#</th>\n";
          	foreach($colonnes2 as $col) $msg.="\t<th>".str_replace('_',' ',ucfirst($col))."</th>\n";
          	$msg.="</tr>\n";
@@ -1724,7 +1724,6 @@ if($action!='') {
          	$msg.="</table>\n";
 	       $nom_pdf=getRewriteString("Classement $ecole $annee");
          	$_SESSION['data'][$nom_pdf]=$pdf;
-         	print_r($_SESSION['data']);
          	//echo"<pre>";print_r($pdf['National']);die('</pre>');
          	//$_SESSION['pied'][$nom_pdf]="Classement $departement $annee $titre2";
          	$_SESSION['titre'][$nom_pdf]=html_entity_decode("Classement $ecole $annee");
