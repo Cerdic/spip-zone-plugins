@@ -1,4 +1,8 @@
 <?php
+
+# securite
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /*! \file abstract_arbre.php
  *  \brief Abstraction pour manipuler des tables en tant qu'arbres  intervallaire
  *
@@ -143,11 +147,6 @@ function sql_arbre_get_feuilles($table ='', $serveur='', $option=true) {
  */
 function sql_arbre_set_feuille($table ='',$parent = array(),$bord = 'droit', $couples= array(),  $serveur='', $option=true) {
 
-    $champ_parent = $parent['champ'];    
-    $id_parent = $parent['id'];
-    
-    print_r($parent);
-
     //recherche les bords du parent
     $bordures = sql_fetsel(
         array(
@@ -163,16 +162,15 @@ function sql_arbre_set_feuille($table ='',$parent = array(),$bord = 'droit', $co
         $serveur
     );
 
-    print_r($bordures);
 
+    //si bordure droite, alors le bord droit du parent devient le bord gauche de l'enfant
     if ($bord=='aine' || $bord=='droit') {
         $bordure = $bordures['bord_droit'];
-        $champ =  'bord_droit';
     }
 
+    //si bordure gauche, alors le bord gauche suit le bord gauche du parent
     if ($bord=='cadet' || $bord=='gauche') {
         $bordure = $bordures['bord_gauche'] + 1;
-        $champ =  'bord_gauche';
     }
 
 
@@ -198,23 +196,22 @@ function sql_arbre_set_feuille($table ='',$parent = array(),$bord = 'droit', $co
         $serveur
     );
     
-    $bords =array(
+    //defini les bordures de l'element à inserer
+    $bords = array(
         'bord_gauche' => $bordure,
         'bord_droit' => $bordure +1 
     );
     
     $couples = array_merge($couples,$bords);
     
-    sql_insertq(
+    return sql_insertq(
         $table,
         $couples,
         '',
         $serveur
     );
 
-    return $bordures;
 }
-
 
 
 ?>

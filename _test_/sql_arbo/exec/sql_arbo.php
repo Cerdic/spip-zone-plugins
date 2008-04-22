@@ -1,8 +1,5 @@
 <?php
 
-include_spip('inc/vieilles_defs');
-include_spip('inc/svn_update');
-include_spip('inc/cfg_config');
 include_spip('base/abstract_sql');
 include_spip('base/abstract_arbre');
 
