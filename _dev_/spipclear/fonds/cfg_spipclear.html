@@ -55,6 +55,11 @@ Configuration du plugin SpipClear.
             $("input[@name='nom_theme']").val($(this).attr("id"));
             return false;
         });
+        $(".mini_capture").click(function() {
+            var src_capt = $(this).children("img").attr("src");
+            $("#visionneuse").html('<img src="' + src_capt + '"/>');
+            return false;
+        });
 		});
 	//]]>
 	</script>
@@ -62,8 +67,11 @@ Configuration du plugin SpipClear.
 		<label><:spipclear:label_nom_theme:><br />
 			<input type="text" name="nom_theme" value="[(#ENV{nom_theme})]" size="32" />
 		</label>
+    [(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
     <p><:spipclear:themes_installes:></p>
+    <p id="visionneuse" style="float:right; width: 250px;">[<img src="(#CHEMIN{[(#GET{chemin_theme})]screenshot.jpg})" />]</p>
     [(#ENV{nom_theme}|lister_themes)]
+    
 	</div>
 </fieldset>
 

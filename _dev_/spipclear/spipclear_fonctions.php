@@ -37,11 +37,11 @@
                     if ($f == 'screenshot.jpg') $capture = true;
                 }
                 if ($nom_theme) {
-                    $htm .= '<div id="'.$nom_theme.'" class="theme" style="line-height: 52px;">';
+                    $htm .= '<div style="line-height: 52px;">';
                     if ($capture) {
-                        $htm .= '<a href="'._DIR_PLUGIN_SPIPCLEAR.'themes/'.$rt.'/screenshot.jpg" title="<:spipclear:voir_capture:>"><img src="'._DIR_PLUGIN_SPIPCLEAR.'themes/'.$rt.'/screenshot.jpg" style="width: 48px; height: 42px; vertical-align: middle;" /></a> ';
+                        $htm .= '<a href="#" class="mini_capture" title="<:spipclear:voir_capture:>"><img src="'._DIR_PLUGIN_SPIPCLEAR.'themes/'.$rt.'/screenshot.jpg" style="width: 48px; height: 42px; vertical-align: middle;" /></a> ';
                     }
-                    $htm .= '<a href="#" title="<:spipclear:selectionner_theme:>">'.$nom_theme.'</a></div>'."\r\n";
+                    $htm .= '<a id="'.$nom_theme.'" class="theme" href="#" title="<:spipclear:selectionner_theme:>">'.$nom_theme.'</a></div>'."\r\n";
                 }
             }
         }

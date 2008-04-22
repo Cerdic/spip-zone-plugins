@@ -97,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'trackbacks' => 'trackbacks', // Non utilise
 'trackbacks_pour_faire' => 'Pour faire un trackback sur ce billet', // Non utilise
 'trackbacks_fermes' => 'Les trackbacks pour ce billet sont ferm&eacute;s.', // Non utilise
-'themes_installes'=> 'Les th&egrave;mes install&eacute;s sur ce spip: ',
+'themes_installes'=> '<strong>Les th&egrave;mes install&eacute;s sur ce spip</strong>: (cliquez sur un l\'icone d\'un th&egrave;me pour le pr&eacute;visualiser, cliquez sur son nom pour le s&eacute;lectionner)',
 
 //U
 'un_seul_mot' => 'un seul mot', // Oubli
