@@ -3,11 +3,16 @@ var gloss_dt = null;
 var gloss_dd = null;
 
 // compatibilite Ajax : ajouter "this" a "jQuery" pour mieux localiser les actions
+// et tagger avec cs_done pour eviter de binder plrs fois le meme bloc
 function glossaire_init() {
   if(jQuery('span.gl_js', this).length) {
-	if(!jQuery('#glossOverDiv').length)
+	if(!jQuery('#glossOverDiv').length) {
 		jQuery('body').append('<div id="glossOverDiv" style="position:absolute; display:none; visibility: hidden;"><span class="gl_dl"><span class="gl_dt">TITRE</span><span class="gl_dd">Definition</span></span></div>');
-	jQuery('span.gl_mot', this).hover(
+		gloss_el = document.getElementById('glossOverDiv');
+		gloss_dt = gloss_el.firstChild.firstChild;
+		gloss_dd = gloss_el.firstChild.lastChild;
+	}
+	jQuery('span.gl_mot', this).not('.cs_done').addClass('cs_done').hover(
 		function(e) {
 			// cas du surligneur (SPIP 1.93)
 			if(this.firstChild.className=="spip_surligne") {
@@ -30,8 +35,5 @@ function glossaire_init() {
 			gloss_el.style.visibility = 'hidden';
 		}
 	);
-	gloss_el = document.getElementById('glossOverDiv');
-	gloss_dt = gloss_el.firstChild.firstChild;
-	gloss_dd = gloss_el.firstChild.lastChild;
   }
 }

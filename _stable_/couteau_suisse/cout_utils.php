@@ -41,11 +41,6 @@ function cs_ajax_action_greffe($idom, $corps, $br='<br />')	{
 	return _request('var_ajaxcharset') ? "$br$corps"	: "\n<div id='$idom'>$corps\n</div>\n";
 }
 
-// declaration de la fonction initialisant jQuery
-define('_CS_INIT_FUNCTION', defined('_SPIP19300')?"var cs_init = function() {\n"
-	:"// histoire de pas revisiter 'document' a chaque clic ajax... (bug ajaxCallbak.js ?)
-var cs_init_document = false;\nvar cs_init = function() {\nif(this==document){if(cs_init_document) return; cs_init_document=true;}\n");
-
 function cs_suppr_metas_var($meta, $new = false) {
  global $metas_vars;
  if (!isset($metas_vars[$meta])) return;
@@ -328,7 +323,7 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		$cs_metas_pipelines['header'][] = "<style type=\"text/css\">\n"
 			.compacte_css(join("\n", $temp_css))."\n</style>";
 	if (count($temp_jq_init)) {
-		$temp_js[] = _CS_INIT_FUNCTION.join("\n", $temp_jq_init)."\n}\nif(typeof onAjaxLoad=='function') onAjaxLoad(cs_init);";
+		$temp_js[] = "var cs_init = function() {\n".join("\n", $temp_jq_init)."\n}\nif(typeof onAjaxLoad=='function') onAjaxLoad(cs_init);";
 		$temp_jq[] = "cs_init.apply(document);";
 	}
 	if (count($temp_jq))
