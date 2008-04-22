@@ -133,6 +133,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_supprimer_formulaire_reponses' => 'Des donn&eacute;es sont associ&eacute;es &agrave; ce formulaire. Voulez-vous vraiment le supprimer ?',
 
 	// L
+	'lien_apercu' => 'Aper&ccedil;u',
+	'lien_champ' => 'Champs',
+	'lien_propriete' => 'Propri&eacute;t&eacute;s',
 	'lien_retirer_donnee_liante' => 'Retirer le lien',
 	'lien_retirer_donnee_liee' => 'Retirer le lien',
 	'lier_articles' => 'Permettre d\'associer les donn&eacute;es aux articles',

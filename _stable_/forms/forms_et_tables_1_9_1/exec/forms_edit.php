@@ -289,9 +289,9 @@ function exec_forms_edit(){
 			echo Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour,$prefixei18n);
 		echo "<div id='barre_onglets'>";
 		echo debut_onglet();
-		echo onglet(_L("Aper&ccedil;u"),ancre_url(self(),"resume"),'','resume');
-		echo onglet(_L("Propri&eacute;t&eacute;s"),ancre_url(self(),"proprietes"),'','proprietes');
-		echo onglet(_L("Champs"),ancre_url(self(),"champs"),'','champs');
+		echo onglet(_T('forms:lien_apercu'),ancre_url(self(),"resume"),'','resume');
+		echo onglet(_T('forms:lien_propriete'),ancre_url(self(),"proprietes"),'','proprietes');
+		echo onglet(_T('forms:lien_champ'),ancre_url(self(),"champs"),'','champs');
 		echo fin_onglet();
 		echo "</div>";
 	}
