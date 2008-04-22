@@ -107,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_titre_page_spipbb_configuration' => 'SpipBB configuration',
 	'admin_titre_page_spipbb_effacer' => 'Admin blocked posts',
 	'admin_titre_page_spipbb_inscrits' => 'Members admin',
+	'admin_titre_page_spipbb_sujet' => 'Edit a thread',
 	'admin_total_posts' => 'Total number of posts',
 	'admin_total_users' => 'Number of members',
 	'admin_total_users_online' => 'Online members',
@@ -123,6 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'anonyme' => 'Anonymous',
 	'auteur' => 'Author',
 	'avatar' => 'Avatar',
+	'a_propos_auteur_dpt' => 'Everything about:',
 
 	// B
 	'bouton_select_all' => 'Select all',
@@ -142,7 +144,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'col_date_crea' => 'Registration date',
 	'col_marquer' => 'Mark',
 	'col_signature' => 'Signature',
-	'config_affiche_champ_extra' => 'Show the field: @nom_champ@',
+	'config_affiche_champ_extra' => 'Show the field: <b>@nom_champ@</b>',
 	'config_affiche_extra' => 'Show below field in the templates',
 	'config_champs_auteur' => 'SPIPBB Fields',
 	'config_champs_auteurs_plus' => 'Author extra fields admin',
@@ -276,6 +278,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_inscription_invalide' => 'Impossible to register',
 	'info_plus_cinq_car' => 'more than 5 characters',
 	'inscription' => 'Register',
+	'inscrit_le' => 'Registrered on',
+	'inscrit_le_dpt' => 'Registrered on',
 	'inscrit_s' => 'Registered',
 	'ip_adresse_autres' => 'Other IP addresses this user has posted from',
 	'ip_adresse_membres' => 'Users posting from this IP address',
@@ -325,6 +329,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'no_message' => 'No message by that search criterium',
 
 	// O
+	'ordre_croissant' => 'Increasing',
+	'ordre_decroissant' => 'Decreasing',
+	'ordre_dpt' => 'Order:',
 	'oui' => 'Yes',
 
 	// P
@@ -405,6 +412,7 @@ _ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
 	// S
 	'secteur_forum' => 'ROOT',
 	'selection_efface' => 'Deleted the selection... ',
+	'selection_tri_dpt' => 'Choose the sorting method:',
 	'signature' => 'Signature',
 	'sign_admin' => '{{This page can only be seen by the site owner.}}<p>It provides access to the plugin configuration of &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; and the forum management of your site.</p><p>Version : @version@ @distant@</p><p>See&nbsp;:
 _ • [The documentation of Spip-Contrib->http://www.spip-contrib.net/?article2460]
@@ -458,7 +466,7 @@ _ • [The help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info
 	'sw_spam_words_action' => 'From this control panel you can add, edit, and remove spam words. Wildcards (*) are accepted in the word field. For example, *test* will match detestable, test* would match testing, *test would match detest.',
 	'sw_spam_words_mass_add' => 'Paste or type your spam words lists into the text area. Separate each spam word by either a comma, semi-colon, or line-break',
 	'sw_spam_words_titre' => 'Spam words filtering',
-	'sw_spam_words_url_add' => 'Type the URL of file with a properly formatted word list. Example: http://spipbb.spip-zone.info/plugins/spipBB/base/spamwordlist.csv .',
+	'sw_spam_words_url_add' => '<MODIF>Type the URL of file with a properly formatted word list. Example: http://spipbb.spip-zone.info/plugins/spipBB/base/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'Select the administrator that is listed as the Private Message sender',
 	'sw_warning_pm_message' => 'Private message text',
 	'sw_warning_pm_titre' => 'Private message subject',
@@ -477,6 +485,8 @@ _ • [The help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info
 	'total_messages_membres' => 'Our members posted a total of ',
 	'tous' => 'All',
 	'tous_forums' => 'All forums',
+	'trier' => 'Sort',
+	'trouver_messages_auteur_dpt' => 'Find all messages from:',
 
 	// V
 	'visible_annuaire_forum' => 'Appear on the member list',

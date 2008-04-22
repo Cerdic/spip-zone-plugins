@@ -107,6 +107,7 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'admin_titre_page_spipbb_configuration' => 'Configuraci&oacute; d\'SpipBB',
 	'admin_titre_page_spipbb_effacer' => 'Gesti&oacute; dels missatges rebutjats ',
 	'admin_titre_page_spipbb_inscrits' => 'Gesti&oacute; dels membres',
+	'admin_titre_page_spipbb_sujet' => 'Edici&oacute; d\'un fil',
 	'admin_total_posts' => 'N&uacute;mero total de missatges',
 	'admin_total_users' => 'N&uacute;mero de membres',
 	'admin_total_users_online' => 'Membres en l&iacute;nia',
@@ -123,6 +124,7 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'anonyme' => 'An&ograve;nim',
 	'auteur' => 'Autor',
 	'avatar' => 'Avatar',
+	'a_propos_auteur_dpt' => 'Tot respecte a:',
 
 	// B
 	'bouton_select_all' => 'Seleccionar-ho tot',
@@ -142,7 +144,7 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'col_date_crea' => 'Data registre',
 	'col_marquer' => 'Marcar',
 	'col_signature' => 'Signatura',
-	'config_affiche_champ_extra' => 'Mostrar el camp: @nom_champ@',
+	'config_affiche_champ_extra' => 'Mostrar el camp: <b>@nom_champ@</b>',
 	'config_affiche_extra' => 'Mostrar aquests camps a dins dels esquelets',
 	'config_champs_auteur' => 'Camps SPIPBB',
 	'config_champs_auteurs_plus' => 'Gesti&oacute; camps autors suplementaris',
@@ -276,6 +278,8 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'info_inscription_invalide' => 'Registre impossible',
 	'info_plus_cinq_car' => 'm&eacute;s de 5 car&agrave;cters',
 	'inscription' => 'Registre',
+	'inscrit_le' => 'Inscrit el',
+	'inscrit_le_dpt' => 'Inscrit el:',
 	'inscrit_s' => 'Inscrits',
 	'ip_adresse_autres' => 'Altres adreces IP a partir de les que aquest autor ha escrit missatges',
 	'ip_adresse_membres' => 'Membres que han enviat des d\'aquesta adre&ccedil;a IP',
@@ -325,6 +329,9 @@ _ Un post-it est&agrave; situat a sota dels anuncis, abans dels missatges ordina
 	'no_message' => 'Cap assumpte o missatge respon als vostres criteris de cerca',
 
 	// O
+	'ordre_croissant' => 'Creixent',
+	'ordre_decroissant' => 'Decreixent',
+	'ordre_dpt' => 'Ordre:',
 	'oui' => 'Si',
 
 	// P
@@ -384,6 +391,7 @@ nbr_post@ missatge(s). Esborrats amb ell!\\n',
 	// S
 	'secteur_forum' => 'ARREL',
 	'selection_efface' => 'Esborrar la selecci&oacute;...',
+	'selection_tri_dpt' => 'Seleccionar el m&egrave;tode d\'ordenaci&oacute;:',
 	'signature' => 'Signatura',
 	'sign_admin' => '{{Aquesta p&agrave;gina nom&eacute;s est&agrave; disponible pels responsables del lloc.}}<p>D&oacute;na acc&eacute;s a la configuraci&oacute; del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; aix&iacute; com a la gesti&oacute; dels f&ograve;rums del lloc Web.</p><p>Versi&oacute;: @version@ @distant@</p><p>Consulteu:
 _ • [La documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/?article2460]
@@ -437,7 +445,7 @@ _ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.spip-zone.info/spi
 	'sw_spam_words_action' => 'A partir d\'aquesta p&agrave;gina, podeu afegir, editar i suprimir paraules associades al correu brossa. El car&agrave;cter (*) s\'accepta a dins de la paraula. Per exemple: {{*tes*}} capturar&agrave; {detestable}, {{tes*}} capturar&agrave; {testar}, {{*tes}} capturar&agrave; {portes}.',
 	'sw_spam_words_mass_add' => 'Copiar-enganxar o introduir les vostres paraules a aquesta zona. Separar cada paraula per una coma, dos punts o un punt i apart. ',
 	'sw_spam_words_titre' => 'Filtratge de paraules',
-	'sw_spam_words_url_add' => 'Introduir el URL d\'un fitxer que contingui una llista de paraules formatada com m&eacute;s avall. Exemple: http://spipbb.spip-zone.info/plugins/spipBB/base/spamwordlist.csv .',
+	'sw_spam_words_url_add' => '<MODIF>Introduir el URL d\'un fitxer que contingui una llista de paraules formatada com m&eacute;s avall. Exemple: http://spipbb.spip-zone.info/plugins/spipBB/base/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'Escollir l\'admin autor del missatge enviat',
 	'sw_warning_pm_message' => 'Text del missatge privat',
 	'sw_warning_pm_titre' => 'Assumpte del missatge privat',
@@ -456,6 +464,8 @@ _ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.spip-zone.info/spi
 	'total_messages_membres' => 'Els nostres membres han enviat un total de ',
 	'tous' => 'Tots',
 	'tous_forums' => 'Tots els f&ograve;rums',
+	'trier' => 'Ordenar',
+	'trouver_messages_auteur_dpt' => 'Trobar tots els missatges de:',
 
 	// V
 	'visible_annuaire_forum' => 'Apar&egrave;ixer a la llista dels Inscrits',

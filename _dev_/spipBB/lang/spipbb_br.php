@@ -8,10 +8,32 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'admin_action_01_configuration' => 'Ardremmezi&ntilde;',
+	'admin_action_02_etat' => 'Stad ar foromo&ugrave;',
+	'admin_action_effacer' => 'Kemennadenno&ugrave; nac\'het',
+	'admin_action_fromphorum' => 'Emporzha&ntilde; phorum',
+	'admin_action_fromphpbb' => 'Emporzha&ntilde; phpBB',
+	'admin_action_gere_ban' => 'Mera&ntilde;s ar re skarzhet',
+	'admin_action_gestion' => 'Mera&ntilde;s',
+	'admin_action_inscrits' => 'Izili',
+	'admin_action_swconfig' => 'Ardremmezi&ntilde;',
+	'admin_action_swforum' => 'Kemennadenno&ugrave; merket',
+	'admin_action_swlog' => 'Danevell ar spam',
+	'admin_action_swwords' => 'Mera&ntilde;s ar gerio&ugrave;',
+	'admin_action_ZZ_debug' => 'Kempenn',
+	'admin_afficher_bouton_alerte_abus' => 'Diskouez an nozelenno&ugrave;-diwall Re Bell',
+	'admin_affichier_bouton_rss' => 'Diskouez an nozelenno&ugrave; RSS',
+	'admin_age_forum' => 'Oad ar forom bloavezhio&ugrave;/mizvezhio&ugrave;',
+	'admin_avatar_affiche' => 'Degemer ha diskouez ar skeudennigo&ugrave; (ya dre ziouer evit ar staliadenn genta&ntilde;)',
+	'admin_avatar_taille_contact' => 'Ment ar skeudennigo&ugrave; (e pikselo&ugrave;) war bajenn an darempredo&ugrave;',
+	'admin_avatar_taille_profil' => 'Ment an avatario&ugrave; (pikselo&ugrave;) war ar bajenn-emginnig',
+	'admin_avatar_taille_sujet' => 'Ment ar skeudennigo&ugrave; (pikselo&ugrave;) war bajenn ar sujedo&ugrave;',
+	'admin_average_posts' => 'Keidenn ar c\'hemennadenno&ugrave; bemdez',
 	'aecrit' => '<MODIF>en deus skrivet&nbsp;',
 	'annonce' => 'Kemenn',
 	'anonyme' => 'Disanv',
 	'avatar' => 'Avatar',
+	'a_propos_auteur_dpt' => 'Pep tra diwar-benn :',
 
 	// C
 	'citer' => 'Menegi&ntilde;',

@@ -126,8 +126,8 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 
 	// B
 	'bouton_select_all' => 'Tout s&eacute;lectionner',
-	'bouton_unselect_all' => 'Tout d&eacute;-s&eacute;lectionner',
 	'bouton_speciaux_sur_skels' => 'Configurer les boutons sp&eacute;cifiques sur les squelettes publics',
+	'bouton_unselect_all' => 'Tout d&eacute;-s&eacute;lectionner',
 
 	// C
 	'champs_obligatoires' => 'Les champs marqu&eacute;s d\'une * sont obligatoires.',
@@ -277,9 +277,9 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 	'info_inscription_invalide' => 'Inscription impossible',
 	'info_plus_cinq_car' => 'plus de 5 caract&egrave;res',
 	'inscription' => 'Inscription',
-	'inscrit_s' => 'Inscrits',
 	'inscrit_le' => 'Inscrit le',
 	'inscrit_le_dpt' => 'Inscrit le :',
+	'inscrit_s' => 'Inscrits',
 	'ip_adresse_autres' => 'Autres adresses IP &agrave; partir desquelles cet auteur a post&eacute;',
 	'ip_adresse_membres' => 'Membres ayant post&eacute; de cette adresse IP',
 	'ip_adresse_post' => 'Adresse IP de ce message',
@@ -328,10 +328,10 @@ _ Un postit est situé en dessous des annonces, avant les messages ordinaires. Il
 	'no_message' => 'Aucun sujet ou message ne correspond &agrave; vos crit&egrave;res de recherche',
 
 	// O
-	'oui' => 'Oui',
-	'ordre_dpt' => 'Ordre&nbsp;:',
 	'ordre_croissant' => 'Croissant',
 	'ordre_decroissant' => 'D&eacute;croissant',
+	'ordre_dpt' => 'Ordre&nbsp;:',
+	'oui' => 'Oui',
 
 	// P
 	'pagine_page_' => ' .. page ',
@@ -413,8 +413,8 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
 
 	// S
 	'secteur_forum' => 'RACINE',
-	'selection_tri_dpt' => 'S&eacute;lectionner la m&eacute;thode de tri&nbsp;:',
 	'selection_efface' => 'Effacer la s&eacute;lection .. ',
+	'selection_tri_dpt' => 'S&eacute;lectionner la m&eacute;thode de tri&nbsp;:',
 	'signature' => 'Signature',
 	'sign_admin' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s &agrave; la configuration du plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ainsi qu\'&agrave; la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consultez&nbsp;:
 _ &bull; [La documentation sur Spip-Contrib->http://www.spip-contrib.net/?article2460]
@@ -487,8 +487,8 @@ _ &bull; [de tout le plugin->@plugin@]</p>',
 	'total_messages_membres' => 'Nos membres ont post&eacute; un total de ',
 	'tous' => 'Tous',
 	'tous_forums' => 'Tous les forums',
-	'trouver_messages_auteur_dpt' => 'Trouver tous les messages de :',
 	'trier' => 'Trier',
+	'trouver_messages_auteur_dpt' => 'Trouver tous les messages de :',
 
 	// V
 	'visible_annuaire_forum' => 'Apparaitre dans la liste des Inscrits',
