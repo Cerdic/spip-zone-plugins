@@ -8,8 +8,8 @@
  			<br/>
  			Distribu&eacute; sous licence [GNU/GPL v2->http://www.gnu.org/copyleft/gpl.html]
  		</auteur>
-        <version>0.2</version>
-        <etat>dev</etat>
+        <version>0.3</version>
+        <etat>test</etat>
         <description>
         	Permet d'afficher une différenciation graphique en fonction de l'environement sélectionné.
         	Permet aussi de gérer les autorisations d'accès à l'application.

@@ -25,19 +25,21 @@
 	
 	$environnement = lire_config('env/environnement');
 	
-	if (! $find && $environnement != 'PROD') {
-		header('Location:'.$redirection);
-	} else if ( $environnement == 'PROD') {
-		// on interdit donc certainnes adresses
-		$banniesipConf = lire_config('env/banniesip');
-		$banniesips = explode(',', $banniesipConf);
-		foreach ($banniesips as $cle => $valeur) {
-			if (trim($valeur) == trim($addressC)) {
-				header('Location:'.$redirection);
+	if ($environnement != 'NON') {
+	
+		if (! $find && $environnement != 'PROD') {
+			header('Location:'.$redirection);
+		} else if ( $environnement == 'PROD') {
+			// on interdit donc certainnes adresses
+			$banniesipConf = lire_config('env/banniesip');
+			$banniesips = explode(',', $banniesipConf);
+			foreach ($banniesips as $cle => $valeur) {
+				if (trim($valeur) == trim($addressC)) {
+					header('Location:'.$redirection);
+				}
 			}
 		}
 	}
-	
 	
 	
 ?>

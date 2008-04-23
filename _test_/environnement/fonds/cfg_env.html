@@ -24,6 +24,11 @@
 				</legend>
 				<div>
 					<label>
+						<input type="radio" name="environnement" value="NON" [(#CONFIG{env/environnement} == {NON}|?{'checked="checked"',''})] onClick="inputenable('addressip', false);inputenable('banniesip', false);">
+						<:env:non_conf:>
+					</label>
+					<br>
+					<label>
 						<input type="radio" name="environnement" value="DEV" [(#CONFIG{env/environnement} == {DEV}|?{'checked="checked"',''})] onClick="inputenable('addressip', true);inputenable('banniesip', false);">
 						<:env:dev:>
 					</label>

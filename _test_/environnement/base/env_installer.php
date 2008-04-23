@@ -1,8 +1,7 @@
 <?php
 
 function env_verifier_base() {			
-	ecrire_config('env/environnement','DEV');
-	ecrire_config('env/addressip','192.168.50.254,82.235.225.240');
+	ecrire_config('env/environnement','NON');
 	ecrire_config('env/redirection','http://www.nouveauxterritoires.fr');
 }
 
