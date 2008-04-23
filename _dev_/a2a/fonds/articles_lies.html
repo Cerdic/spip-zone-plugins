@@ -8,7 +8,7 @@
 			<BOUCLE_LesLie(SPIP_ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}>
 					
 				<BOUCLE_lesArticlesLies(ARTICLES){id_article = #ID_ARTICLE_LIE}>
-					<li><a href="#URL_ARTICLE">#TITRE</a>&nbsp;<a href="[(#EVAL{supprimer_lien_a2a}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&redirect=ecrire/#SELF})]"><img src="[(#CHEMIN{images/dialog-cancel.png})]" alt="supprimer le lien logo" /><:a2a:supprimer_le_lien:></a></li>
+					<li><a href="#URL_ARTICLE">#TITRE</a>&nbsp;<a href="[(#EVAL{supprimer_lien_a2a}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&redirect=ecrire/#SELF})]"><img src="[(#CHEMIN{images/croix-rouge.gif})]" alt="supprimer le lien logo" /><:a2a:supprimer_le_lien:></a></li>
 				</BOUCLE_lesArticlesLies>
 					
 			</BOUCLE_LesLie>
