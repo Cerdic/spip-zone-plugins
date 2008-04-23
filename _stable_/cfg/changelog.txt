@@ -1,6 +1,11 @@
 Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 
+v1.7.3 (23 04 2008)
+- correction compat sql_showtable() sur 1.9.2 (fil)
+- suivi svn pour les formulaires dynamiques (necessitent 'action')
+(les formululaires #FORMULAIRE_CFG fonctionnent maintenant aussi dans le prive)
+
 v1.7.2 (16 04 2008)
 - mettre sql_count() et sql_selectdb() dans les fonctions de compatibilite
 ceci pour d'autres plugins souhaitant eventuellement les utiliser en 1.9.2

@@ -21,7 +21,7 @@ function formulaires_cfg_charger_dist($cfg="", $cfg_id=""){
 		'_cfg_nom' => $cfg,
 		'id' => $cfg_id,
 		// passer aussi les arguments spécifiques a cfg
-		'_cfg_' => $config->creer_hash_cfg()
+		'_cfg_' => $config->creer_hash_cfg('cfg') // passer action=cfg pour avoir un hash formulaire correct
 	);
 
 	// il faut passer les noms des champs (input et consoeurs) de CFG dans l'environnement

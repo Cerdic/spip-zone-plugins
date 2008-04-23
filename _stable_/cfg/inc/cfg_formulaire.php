@@ -523,14 +523,14 @@ class cfg_formulaire_dist{
 	
 	
 	//
-	function creer_hash_cfg(){
+	function creer_hash_cfg($action=''){
 		include_spip('inc/securiser_action');
 	    $arg = 'cfg0.0.0-' . $this->param->nom . '-' . $this->vue;
 		return 
 			'?cfg=' . $this->vue .
 			'&cfg_id=' . $this->param->cfg_id .
 		    '&arg=' . $arg .
-		    '&hash=' .  calculer_action_auteur('-' . $arg);		
+		    '&hash=' .  calculer_action_auteur($action . '-' . $arg);		
 	}
 	
 	
