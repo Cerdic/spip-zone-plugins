@@ -1,10 +1,10 @@
 #CACHE{0}
-<B_visitesvirtuelles>
+<B_lieux>
 <div class='liste'>
 <div style='position: relative;'>
 	<div style='position: absolute; top: -12px; left: 3px;'><img src='#CHEMIN{img_pack/panoramas.png}' alt="" /></div>
 	<div style='background-color: #ENV{couleur_claire}; color: black; padding: 3px; padding-left: 30px; border-bottom: 1px solid #444444;' class='verdana2'>
-	<b><:panoramas:toutes_visitesvirtuelles:></b>
+	<b><:panoramas:tous_lieux:></b>
 	</div>
 </div>
 <table width='100%' cellpadding='5' cellspacing='0' border='0'>
@@ -13,30 +13,30 @@
 <div class='pagination'>(#PAGINATION)</div>
 </td>
 </tr>]
-<BOUCLE_visitesvirtuelles(VISITES_VIRTUELLES){pagination 10}>
+<BOUCLE_lieux(VISITES_VIRTUELLES_LIEUX){id_visite}{pagination 10}>
 <tr class='tr_liste'>
 <td class="arial11">
-<B_lieux>
-<BOUCLE_lieux(VISITES_VIRTUELLES_LIEUX){id_visite}>
-</BOUCLE_lieux{id_visite}>
+<B_interactions>
+<BOUCLE_interactions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
+</BOUCLE_interactions>
 <img src='#CHEMIN{images/puce-verte-breve.gif}' width='7' height='7' border='0' alt='puce'>&nbsp;&nbsp;
-</B_lieux>
+</B_interactions>
 <img src='#CHEMIN{images/puce-orange-breve.gif}' width='7' height='7' border='0' alt='puce'>&nbsp;&nbsp;
-<//B_lieux>
+<//B_interactions>
 </td>
 <td class="arial11">
 	<span class='#EDIT{titre}'>#TITRE</span>
 </td>
 <td class="arial1">
-<a href="?exec=visitesvirtuelles_edit&id_visite=#ID_VISITE&retour=#SELF"><img src='#CHEMIN{img_pack/planet_costea_bogdan_r.png}' width='80' height='76' border='0' alt='<:panoramas:editer:>' /></a>
+<a href="?exec=lieux_edit&id_lieu=#ID_LIEU&retour=#SELF"><img src='#CHEMIN{img_pack/house_gabrielle_nowicki_.png}' width='80' height='64' border='0' alt='<:panoramas:editer:>' /></a>
 </td>
 <td class="arial1">
-<a href="?exec=lieux_tous&id_visite=#ID_VISITE&retour=#SELF"><img src='#CHEMIN{img_pack/house_gabrielle_nowicki_.png}' width='80' height='64' border='0' alt='<:panoramas:editer:>' /></a>
+<a href="?exec=interactions_toutes&id_lieu=#ID_LIEU&retour=#SELF"><img src='#CHEMIN{img_pack/engrenagem_01.png}' width='80' height='113' border='0' alt='<:panoramas:editer:>' /></a>
 </td>
 </tr>
-</BOUCLE_visitesvirtuelles>
+</BOUCLE_lieux>
 </table></div>
-</B_visitesvirtuelles>
-<p><:panoramas:pas_de_visite:></p>
-<//B_visitesvirtuelles>
+</B_lieux>
+<p><:panoramas:pas_de_lieu:></p>
+<//B_lieux>
 &nbsp;<br/>
