@@ -718,6 +718,26 @@ function afficherImpressions($jury,$serie,$annee,$tSeries,$iPrecision=3) {
 			"<small><label for='date_jury'>Date de d&eacute;lib&eacute;ration</label></small><br/><input name='date_jury' class='fondo' size=10 value='$aujourdhui' onFocus=\"this.select();\"/></td>\n".
 			"<td><input type='submit' value='Admis\n2e groupe' class='fondo' /></td></form></tr>\n";
 		}
+		// relve des refuse 2eme groupe
+		if(is_array($tDelib['Refuse'])) {
+			$verif="onSubmit=\"if(document.forms['form_jury_refus2'].nom_jury.value=='' || document.forms['form_jury_refus2'].nom_jury.value=='Nom')\n".
+			" {alert('Veuillez saisir le nom du president du jury');return false;}\n".
+			"if(document.forms['form_jury_refus2'].lieu_jury.value=='' || document.forms['form_jury_refus2'].lieu_jury.value=='Lieu')\n".
+			" {alert('Veuillez saisir la ville du centre de deliberation');return false;}\n".
+			"if(!bon_format_date(document.forms['form_jury_refus2'].date_jury.value))\n".
+			" {alert('Veuillez saisir une date de deliberation correcte');return false;}\n".
+			"return true;\"";
+			$msg.="<tr><td>".vignette('pdf',"Refus&eacute;s 2e groupe jury $jury")."</td>\n".
+			"<form name='form_jury_refus2' action='../plugins/odb/odb_commun/inc-pdf-resultats.php?refuse=true' $verif method='POST'>\n".
+			"<input type='hidden' name='jury' value='$jury'/>\n".
+			"<input type='hidden' name='deliberation' value='3'/>\n".
+			"<input type='hidden' name='annee' value='$annee'/>\n".
+			"<input type='hidden' name='exec' value='odb_notes'/>\n".
+			"<td><small><label for='nom_jury'>Pr&eacute;sident du jury</label></small><br/>\n<input name='nom_jury' class='fondo' size=10 value='Nom' onFocus=\"this.value=''\"/><br/>\n".
+			"<small><label for='lieu_jury'>Ville de d&eacute;lib&eacute;ration</label></small><br/><input name='lieu_jury' class='fondo' size=10 value='Lieu' onFocus=\"this.value=''\"/><br/>\n".
+			"<small><label for='date_jury'>Date de d&eacute;lib&eacute;ration</label></small><br/><input name='date_jury' class='fondo' size=10 value='$aujourdhui' onFocus=\"this.select();\"/></td>\n".
+			"<td><input type='submit' value='Refus&eacute;s\n2e groupe' class='fondo' /></td></form></tr>\n";
+		}
 	}
 	
 	$msg.="</table>\n";
