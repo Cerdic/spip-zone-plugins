@@ -2,12 +2,78 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_PREG_CRAYON', ',crayon\b[^<>\'"]+?\b((\w+)-(\w+)-(\d+(?:-\w+)?))\b,');
+define('_PREG_CRAYON', ',crayon\b[^<>\'"]+?\b((\w+)-(\w+)-(\w+(?:-\w+)?))\b,');
 
 // Compatibilite pour 1.92 : on a besoin de sql_fetch
 if ($GLOBALS['spip_version_code'] < '1.93' AND $f = charger_fonction('compat_crayons', 'inc'))
 	$f('sql_fetch');
 
+// Autoriser les crayons sur les tables non SPIP ?
+// Par defaut : oui (pour les admins complets, si autoriser_defaut_dist()) ;
+// mettre a false en cas de mutualisation par prefixe de table,
+// sinon on ne peut pas garantir que les sites sont hermetiques
+define('_CRAYONS_TABLES_EXTERNES', true);
+
+// Autorisations non prevues par le core
+include_spip('inc/autoriser');
+
+// table spip_meta, non ; sauf quelques-uns qu'on teste autoriser(configurer)
+// Attention sur les SPIP < 11515 inc/autoriser passe seulement
+// intval($id) alors qu'ici la cle est une chaine...
+if (!function_exists('autoriser_meta_modifier_dist')) {
+	function autoriser_meta_modifier_dist($faire, $type, $id, $qui, $opt) {
+		if (in_array("$id", array(
+			'nom_site', 'descriptif_site', 'email_webmaster'
+		)))
+			return autoriser('configurer', null, null, $qui);
+		else
+			return false;
+	}
+}
+
+// table spip_messages, la c'est tout simplement non (peut mieux faire,
+// mais c'est a voir dans le core ou dans autorite)
+if (!function_exists('autoriser_message_modifier_dist')) {
+	function autoriser_message_modifier_dist($faire, $type, $id, $qui, $opt) {
+		return false;
+	}
+}
+
+// Autoriser l'usage des crayons ?
+function autoriser_crayonner_dist($faire, $type, $id, $qui, $opt) {
+	// Le type pouvant etre une table, verifier les autoriser('modifier')
+	// correspondant ; ils demandent le nom de l'objet: spip_articles => article
+	// ex: spip_articles => 'article'
+	$type = preg_replace(',^spip_(.*?)s?$,', '\1', $type);
+	if (strlen($GLOBALS['table_prefix']))
+		$type = preg_replace(',^'.$GLOBALS['table_prefix'].'_(.*?)s?$,', '\1', $type);
+
+	// Tables non SPIP ? Si elles sont interdites il faut regarder
+	// quelle table on appelle, et verifier si elle est "interne"
+	if (!_CRAYONS_TABLES_EXTERNES) {
+		include_spip('base/serial');
+		include_spip('base/auxiliaires');
+		include_spip('public/parametrer');
+		if (!isset($GLOBALS['tables_principales']['spip_'.table_objet($type)])
+		AND !isset($GLOBALS['tables_auxiliaires']['spip_'.table_objet($type)]))
+			return false;
+	}
+
+	// Traduire le modele en liste de champs
+	if (isset($opt['modele']))
+		$opt['champ'] = $opt['modele'];
+
+	// Pour un auteur, si le champ est statut ou email, signaler l'option
+	// ad hoc (cf. inc/autoriser)
+	if ($type == 'auteur'
+	AND in_array($opt['champ'], array('statut', 'email')))
+		$opt[$opt['champ']] = true;
+
+	return (
+		autoriser('voir', $type, $id, $qui, $opt)
+		AND autoriser('modifier', $type, $id, $qui, $opt)
+	);
+}
 
 // Si un logo est demande, on renvoie la date dudit logo (permettra de gerer
 // un "modifie par ailleurs" si la date a change, rien de plus)

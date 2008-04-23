@@ -21,7 +21,10 @@ function post_crayons() {
           foreach (explode(',', $_POST['fields_'.$crayon]) as $field) {
             // cas particulier d'un envoi de fichier
             if (isset($_FILES['content_'.$crayon.'_'.$field])) {
-                $content[$field] = $_FILES['content_'.$crayon.'_'.$field];
+            	if ($_FILES['content_'.$crayon.'_'.$field]['size']>0)
+            		$content[$field] = $_FILES['content_'.$crayon.'_'.$field];
+            	else
+            		unset($name);
             } else {
             	$content[$field] = $_POST['content_'.$crayon.'_'.$field];
             	// Compatibilite charset autre que utf8 ; en effet on recoit
@@ -36,7 +39,8 @@ function post_crayons() {
 
         // Si les donnees POSTees ne correspondent pas a leur md5,
         // il faut les traiter
-        if (md5(serialize($content)) <> $_POST['md5_'.$crayon]) {
+        if (isset($name)
+        AND md5(serialize($content)) != $_POST['md5_'.$crayon]) {
             if (!isset($_POST['secu_'.$crayon])
             OR verif_secu($name, $_POST['secu_'.$crayon])) {
                 $results[] = array($name, $content, $_POST['md5_'.$crayon], $crayon);
@@ -66,9 +70,8 @@ function crayons_store() {
 	if (!is_array($postees)) {
 		$return['$erreur'] = _U('crayons:donnees_mal_formatees');
 	} else {
-		include_spip('inc/autoriser');
-
-		foreach ($postees as $postee) {
+		foreach ($postees as $postee)
+		if ($postee[2] !== false) {
 			$name = $postee[0];
 			$content = $postee[1];
 
@@ -76,7 +79,7 @@ function crayons_store() {
 				list(,$crayon,$type,$modele,$id) = $regs;
 				$wid = $postee[3];
 
-				if (!autoriser('modifier', $type, $id, NULL, array('modele'=>$modele))) {
+				if (!autoriser('crayonner', $type, $id, NULL, array('modele'=>$modele))) {
 					$return['$erreur'] =
 						"$type $id: " . _U('crayons:non_autorise');
 				} else {
@@ -118,59 +121,61 @@ function crayons_store() {
 	// et regrouper les mises a jour par type/id
 	foreach ($modifs as $modif) {
 		list($type, $modele, $id, $content, $wid) = $modif;
-		if (!isset($updates[$type])) {
-			// MODELE
-			$fun = '';
-			if (function_exists($f = $type.'_'. $modele . "_revision")
-			OR function_exists($f = $modele . "_revision")
-			OR function_exists($f = $type . "_revision"))
-				$fun = $f;
-			else switch($type) {
-				case 'article':
-				    $fun = 'crayons_update_article';
-				    break;
-				case 'breve':
-				    include_spip('action/editer_breve');
-				    $fun = 'revisions_breves';
-				    break;
-				case 'forum':
-				    include_spip('inc/forum');
-				    $fun = 'enregistre_et_modifie_forum';
-				    break;
-				case 'rubrique':
-				    include_spip('action/editer_rubrique');
-				    $fun = 'revisions_rubriques';
-				    break;
-				case 'syndic':
-				case 'site':
-				    include_spip('action/editer_site');
-				    $fun = 'revisions_sites';
-				    break;
-				// cas geres de la maniere la plus standard
-				case 'auteur':
-				case 'document':
-				case 'mot':
-				case 'signature':
-				case 'petition':
-				default:
-				    include_spip('inc/modifier');
-				    $fun = 'revision_'.$type;
-				    break;
-			}
-			if (!$fun or !function_exists($fun)) {
-				    $fun = 'crayons_update';
+
+		// MODELE
+		$fun = '';
+		if (function_exists($f = $type.'_'. $modele . "_revision")
+		OR function_exists($f = $modele . "_revision")
+		OR function_exists($f = $type . "_revision"))
+			$fun = $f;
+		else switch($type) {
+			case 'article':
+				$fun = 'crayons_update_article';
+				break;
+			case 'breve':
+				include_spip('action/editer_breve');
+				$fun = 'revisions_breves';
+				break;
+			case 'forum':
+				include_spip('inc/forum');
+				$fun = 'enregistre_et_modifie_forum';
+				break;
+			case 'rubrique':
+				include_spip('action/editer_rubrique');
+				$fun = 'revisions_rubriques';
+				break;
+			case 'syndic':
+			case 'site':
+				include_spip('action/editer_site');
+				$fun = 'revisions_sites';
+				break;
+			// cas geres de la maniere la plus standard
+			case 'auteur':
+			case 'document':
+			case 'mot':
+			case 'signature':
+			case 'petition':
+			default:
+				include_spip('inc/modifier');
+				$fun = 'revision_'.$type;
+				break;
+		}
+		if (!$fun or !function_exists($fun)) {
+				$fun = 'crayons_update';
 //			    $return['$erreur'] = "$type: " . _U('crayons:non_implemente');
 //			    break;
-			}
-			$updates[$type] = array('fun'=>$fun, 'ids'=>array());
 		}
-		if (!isset($updates[$type]['ids'][$id])) {
-			$updates[$type]['ids'][$id] = array('wdg'=>array(), 'chval'=>array());
+
+		if (!isset($updates[$type][$fun])) {
+			$updates[$type][$fun] = array();
+		}
+		if (!isset($updates[$type][$fun][$id])) {
+			$updates[$type][$fun][$id] = array('wdg'=>array(), 'chval'=>array());
 		}
 		// pour reaffecter le retour d'erreur sql au cas ou
-		$updates[$type]['ids'][$id]['wdg'][] = $wid;
+		$updates[$type][$fun][$id]['wdg'][] = $wid;
 		foreach ($content as $champtable => $val) {
-			$updates[$type]['ids'][$id]['chval'][$champtable] = $val;
+			$updates[$type][$fun][$id]['chval'][$champtable] = $val;
 		}
 	}
 
@@ -179,12 +184,14 @@ function crayons_store() {
 	    return $return;
 
 	// hop ! mises à jour table par table et id par id
-	foreach ($updates as $type => $idschamps) {
-		foreach ($idschamps['ids'] as $id => $champsvaleurs) {
+	foreach ($updates as $type => $idschamps)
+	foreach ($idschamps as $fun => $ids) {
+		foreach ($ids as $id => $champsvaleurs) {
 	        // Enregistrer dans la base
 	        // $updok = ... quand on aura un retour
 	        // -- revisions_articles($id_article, $c) --
-	        $idschamps['fun']($id, $champsvaleurs['chval'], $type, $champsvaleurs['wdg']);
+	        spip_log("$fun($id ...)", 'crayons');
+	        $fun($id, $champsvaleurs['chval'], $type, $champsvaleurs['wdg']);
 	    }
 	}
 

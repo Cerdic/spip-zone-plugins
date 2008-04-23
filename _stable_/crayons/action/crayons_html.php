@@ -8,8 +8,9 @@ function affiche_controleur($class, $c=null) {
 	if (preg_match(_PREG_CRAYON, $class, $regs)) {
 		list(,$nomcrayon,$type,$champ,$id) = $regs;
 		$regs[] = $class;
-		include_spip('inc/autoriser');
-		if (!autoriser('modifier',$type, $id, NULL, array('champ'=>$champ))) {
+
+		// A-t-on le droit de crayonner ?
+		if (!autoriser('crayonner',$type, $id, NULL, array('modele'=>$champ))) {
 			$return['$erreur'] = "$type $id: " . _U('crayons:non_autorise');
 		} else {
 			$f = charger_fonction($type.'_'.$champ, 'controleurs', true)
