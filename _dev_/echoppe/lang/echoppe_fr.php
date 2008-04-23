@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ajouter_une_option' => 'Ajouter une option',
 
 // C
+'c_est_termine_vorte_panier_a_bien_ete_enregistre_et_est_en_cours_de_traiment' => 'C\'est fini. Votre panier &aacute; bien &eacute;&eacute; valid&eacutre;. Notre &eacute;quipe le traite dans les plus bref d&eacute;lais.',
 'categorie_numero' => 'Cat&eacute;gorie num&eacute;ro :',
 'centimetre_racourcci' => 'cm.',
 'chemin_categorie' => 'Chemin de la cat&eacute;gorie',
@@ -129,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'paniers_valide' => 'Paniers valid&eacute;s',
 'paniers_envoye' => 'Paniers envoy&eacute;s',
 'par_defaut' => 'Par d&eacute;faut',
+'payer_le_panier' => 'Payer le panier',
 'produit_dans_ce_panier' => 'Nombre de produit(s) dans ce panier',
 'pas_d_options_pour_le_produit' => 'Pas d\'option pour ce produit',
 'pas_de_depot_ici' => 'Pas de d&eacute;p&ocirc;t ici.',

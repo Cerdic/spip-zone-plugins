@@ -17,24 +17,30 @@ function balise_FORMULAIRE_PANIER_dyn($id_panier, $formulaire) {
 	$contexte['editer_produit'] = _request('editer_produit');
 	$contexte['formulaire'] = "formulaires/panier"; 
 	$contexte['valider_panier'] = _request('valider_panier');
-	$contexte['paiment_panier'] = _request('paiement_panier');
+	$contexte['paiement_panier'] = _request('paiement_panier');
 	$contexte['visualisation_panier'] = _request('paiement_panier');
 	$contexte['message'] = "";
 	
 	if ($contexte['valider_panier'] == "oui"){
-		if (!(empty($GLOBALS['auteur_session']))){
-			$contexte['formulaire'] = "formulaires/panier_validation";
-		}else{
-			$contexte['formulaire'] = "formulaires/panier_inscription";
-		}
+		$contexte['formulaire'] = "formulaires/panier_inscription";
 	}
 	
 	if ($contexte['paiement_panier'] == "oui"){
-		$corps_mail = recuperer_fond('fonds/echoppe_mail_virement', array("echoppe_token_panier"=>session_get('echoppe_token_panier'),"echoppe_token_client"=>session_get('echoppe_token_client') ));
-		
+		$contexte['formulaire'] = "formulaires/panier_paiement";
 	}
 	
+	if ($contexte['finaliser_paiement'] == "oui"){
+		$contexte['mail_corps'] = recuperer_fond('fonds/echoppe_mail_virement', array("echoppe_token_panier"=>session_get('echoppe_token_panier'),"echoppe_token_client"=>session_get('echoppe_token_client') ));
+		$contexte['mail_to'] = $GLOBALS['auteur_session']['email'];
+		if (lire_config('echoppe/email_pour_confirmation_panier') != ""){
+			$contexte['mail_to'] .= ','.lire_config('echoppe/email_pour_confirmation_panier');
+		}
+		mail($contexte['mail_to'],_T('echoppe:validation_de_votre_panier'),$contexte['mail_corps']);
+		spip_log('Evois du mail de confirmation','echoppe');
+		$contexte['formulaire'] = "formulaires/panier_fin";
+	}
 	
+	//var_dump($contexte);
 	return array($contexte['formulaire'],0,$contexte);
 	
 }

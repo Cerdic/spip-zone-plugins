@@ -1,8 +1,10 @@
 <div class="formulaire_panier">
-	<div class="echoppe_etape_0"><:echoppe:editer_le_panier:></div>
-	<div class="echoppe_etape_1"><:echoppe:enregistrement_et_connexion:></div>
-	<div class="echoppe_etape_2"><:echoppe:paiement:></div>
-	<div class="echoppe_etape_3"><:echoppe:fin:></div>
+	<div class="echoppe_etapes">
+		<div class="echoppe_etape_0_ok"><:echoppe:editer_le_panier:></div>
+		<div class="echoppe_etape_1"><:echoppe:enregistrement_et_connexion:></div>
+		<div class="echoppe_etape_2"><:echoppe:paiement:></div>
+		<div class="echoppe_etape_3"><:echoppe:fin:></div>
+	</div>
 	<B_LePanier>
 		[(#ENV{editer_produit}|=={oui}|?{' ',''})
 			<form action="spip.php" method="post">
@@ -47,7 +49,7 @@
 		[(#ENV{editer_produit}|=={oui}|?{'',' '})
 			<form action="#SELF" method="post">
 				<input type="hidden" name="valider_panier" value="oui" />
-				<input type="submit" value="<:echoppe:valider_mon_panier:>" class="bouton1"/>
+				<input type="submit" value="<:echoppe:valider_mon_panier:>" class="valider"/>
 			</form>
 		]
 		
