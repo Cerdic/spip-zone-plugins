@@ -240,6 +240,7 @@ function compat_cfg_defs_dist() {
 			}',
 		
 		'sql_showtable' => '($table, $serveur=\'\') {
+			include_spip("base/abstract_sql");
 			return spip_abstract_showtable($table, \'mysql\', true);
 		}',
 		
