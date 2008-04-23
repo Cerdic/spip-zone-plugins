@@ -15,7 +15,7 @@ function pack_cQuery($chemin) {
 	OR _request('debug_crayons'))
 		return $flux;
 
-	include_spip('inc/class.JavaScriptPacker');
+	include_spip('lib/JavaScriptPacker/class.JavaScriptPacker');
 	$packer = new JavaScriptPacker($flux, 0, true, false);
 
 	// en cas d'echec (?) renvoyer l'original
