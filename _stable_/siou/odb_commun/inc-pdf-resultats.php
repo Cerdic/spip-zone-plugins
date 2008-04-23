@@ -9,12 +9,17 @@ mysql_select_db($tBddConf['bdd']) or die('Base inaccessible<br/>'.mysql_error())
 $where=''; 
 $pdfG='resultats_';
 $deliberation=$_REQUEST['deliberation'];
-if($deliberation==3) {
+if($deliberation==3 and !$_REQUEST['refuse']) {
 	$isAdmis=true;
 	$andDelib = " and delib1='Admissible' and (delib2 = 'Oral' OR delib2='Reserve') and (delib3 = 'Passable' or delib2='Reserve')";
 	$titre="Admis 2&deg; groupe";
 	$pdfG.=getRewriteString("repeches");
-} elseif($deliberation==2) {
+}elseif($deliberation==3 and $_REQUEST['refuse']){ 
+	$isAdmis=false;
+	$andDelib = " and delib1='Admissible' and (delib2 = 'Oral' OR delib2='Reserve') and (delib3 = 'Refuse')";
+	$titre="Refus&eacute;s 2&deg; groupe";
+	$pdfG.=getRewriteString("non admis");
+}elseif($deliberation==2) {
 	$isAdmis=true;
 	$andDelib = " and delib1='Admissible' and delib2 != 'Oral' and delib2 != 'Reserve' and delib2!='Refuse'";
 	$titre="Admis 1&deg; groupe";
