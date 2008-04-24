@@ -23,6 +23,7 @@ function balise_creer_admin_rubrique_dyn() {
 	$email= stripslashes(_request('email'));
 	$login= _request('login');
 	$pass= md5(_request('pass'));
+	$titre_article= stripslashes(_request('titre_article'));
 	
 	// recuperation des données login de cfg
 	$login_cfg = lire_config('creer_admin_rubrique/login_cfg');
@@ -34,6 +35,12 @@ function balise_creer_admin_rubrique_dyn() {
 	$pass_cfg = lire_config('creer_admin_rubrique/pass_cfg');
 	if ($pass_cfg == 1){
 		$pass= md5(lire_config('creer_admin_rubrique/pass'));
+	}
+	
+	// recuperation des données article de cfg
+	$titre_article_cfg = lire_config('creer_admin_rubrique/titre_article_cfg');
+	if ($titre_article_cfg == 1){
+		$titre_article= $nom_auteur;
 	}
 
 	
@@ -56,6 +63,12 @@ function balise_creer_admin_rubrique_dyn() {
 
 	if (!$id_auteur_session || $id_auteur_statut != "0minirezo") {
 		return;
+	}
+	
+	if(lire_config('creer_admin_rubrique/webmestres')){
+		if (!in_array($id_auteur_session, explode(':', _ID_WEBMESTRES))){
+			return;
+		}
 	}
 
 	if($valider){
@@ -109,14 +122,13 @@ function balise_creer_admin_rubrique_dyn() {
 			spip_query("INSERT INTO spip_auteurs_rubriques (id_auteur, id_rubrique) VALUES ('$id_auteur', '$id_rubrique')");
 			spip_log("[plugin creer_admin_rubrique] OK lier auteur - rubrique : $id_auteur - $id_rubrique");
 			
-			$retour= "Informations enregistr&eacute;es";
-			
-			$sql = spip_query("SELECT id_article FROM spip_articles WHERE id_rubrique = '$id_rubrique' AND titre = '$nom_auteur' LIMIT 1");
+			$sql = spip_query("SELECT id_article FROM spip_articles WHERE id_rubrique = '$id_rubrique' AND titre = '$titre_article' LIMIT 1");
 			if (spip_num_rows($sql) < 1) {
-				spip_query("INSERT INTO spip_articles (id_article, id_rubrique, id_secteur, titre, date, statut ) VALUES ('', '$id_rubrique', '$secteur', "._q($nom_auteur).", '$date', '$statut_article')");
+				spip_query("INSERT INTO spip_articles (id_article, id_rubrique, id_secteur, titre, date, statut ) VALUES ('', '$id_rubrique', '$secteur', "._q($titre_article).", '$date', '$statut_article')");
 				$id_article = mysql_insert_id();
 				spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ('$id_auteur', '$id_article')");
 				spip_log("[plugin creer_admin_rubrique] OK ajoute article : $id_article");
+				$retour= "Informations enregistr&eacute;es";
 			}
 			else {
 				$erreur = "Erreur lors de la creation de l'article";

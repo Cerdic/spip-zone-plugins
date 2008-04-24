@@ -29,6 +29,12 @@
 			<input type="password" id="pass" name="pass" />
 		</p>]
 		
+		[(#CONFIG{creer_admin_rubrique/titre_article_cfg}|!={1}|?{' ',''})
+		<p>
+			<label for="titre_article">Titre de l'article</label><br />
+			<input type="text" id="titre_article" name="titre_article" />
+		</p>]
+		
 	</fieldset>
 	<div class="spip_bouton">
 		<input type="submit" name="valider" value="Valider" />

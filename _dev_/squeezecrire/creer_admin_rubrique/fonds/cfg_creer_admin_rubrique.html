@@ -59,12 +59,34 @@
 
 <fieldset>
 	<legend>Article</legend>
+	<p>Titre des articles :</p>
+	<p>
+		<input type="radio" name="titre_article_cfg" id="titre_article_libre" value="0"[ (#ENV{titre_article_cfg}|=={0}|?{checked="checked",''})] class="fondl"/>
+		<label for="titre_article_libre">Titre d&eacute;fini par les utilisateurs</label>
+	</p>
+	<p>
+		<input type="radio" name="titre_article_cfg" id="titre_article_cfg" value="1"[ (#ENV{titre_article_cfg}|=={1}|?{checked="checked",''})] class="fondl"/>
+		<label for="titre_article_cfg">Titre = Nom Prénom de l'auteur</label>
+	</p>
+
 	<p>Statut de l'article cr&eacute;&eacute; :</p>
 	<select name="statut_article" id="statut_article">
 		<option value="publie"[ selected="(#ENV{statut_article}|=={publie}|?{selected})"]>Puli&eacute;</option>
 		<option value="prop"[ selected="(#ENV{statut_article}|=={prop}|?{selected})"]>Propos&eacute; à la publication</option>
 		<option value="prepa"[ selected="(#ENV{statut_article}|=={prepa}|?{selected})"]>En cours de r&eacute;daction</option>
 	</select>
+</fieldset>
+
+<fieldset>
+	<legend>Autorisations</legend>
+	<p>
+		<input type="radio" name="webmestres" id="webmestres" value="1"[ (#ENV{webmestres}|=={1}|?{checked="checked",''})] class="fondl"/>
+		<label for="webmestres">Limiter l'affichage du formulaire aux webmestres du site</label>
+	</p>
+	<p>
+		<input type="radio" name="webmestres" id="admins" value="0"[ (#ENV{webmestres}|=={0}|?{checked="checked",''})] class="fondl"/>
+		<label for="admins">Afficher le formulaire pour tous les administrateurs du site</label>
+	</p>
 </fieldset>
 
 <input style="float:#LANG_RIGHT;" type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
