@@ -276,7 +276,7 @@ class Crayon {
 			if ($meta_crayon['barretypo']
 			AND $type == 'texte') {
 				include_spip('inc/barre');
-				$input = "<div style='width:100%;height:23px;'>"
+				$input = "<div style='width:".$this->largeur."px;height:23px;'>"
 					. afficher_barre("document.getElementById('$id')")
 					. '</div>'
 					. $input;
