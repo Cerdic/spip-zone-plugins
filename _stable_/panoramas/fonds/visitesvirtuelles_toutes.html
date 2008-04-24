@@ -15,7 +15,7 @@
 </tr>]
 <BOUCLE_visitesvirtuelles(VISITES_VIRTUELLES){pagination 10}>
 <tr class='tr_liste'>
-<td class="arial11">
+<td class="arial12">
 <B_lieux>
 <BOUCLE_lieux(VISITES_VIRTUELLES_LIEUX){id_visite}>
 </BOUCLE_lieux{id_visite}>
@@ -24,14 +24,14 @@
 <img src='#CHEMIN{images/puce-orange-breve.gif}' width='7' height='7' border='0' alt='puce'>&nbsp;&nbsp;
 <//B_lieux>
 </td>
-<td class="arial11">
+<td class="arial12">
 	<span class='#EDIT{titre}'>#TITRE</span>
 </td>
-<td class="arial1">
-<a href="?exec=visitesvirtuelles_edit&id_visite=#ID_VISITE&retour=#SELF"><img src='#CHEMIN{img_pack/planet_costea_bogdan_r.png}' width='80' height='76' border='0' alt='<:panoramas:editer:>' /></a>
+<td class="arial12">
+<a href="?exec=visitesvirtuelles_edit&id_visite=#ID_VISITE&retour=#SELF"><:panoramas:parametres:></a>
 </td>
-<td class="arial1">
-<a href="?exec=lieux_tous&id_visite=#ID_VISITE&retour=#SELF"><img src='#CHEMIN{img_pack/house_gabrielle_nowicki_.png}' width='80' height='64' border='0' alt='<:panoramas:editer:>' /></a>
+<td class="arial12">
+<a href="?exec=lieux_tous&id_visite=#ID_VISITE&retour=#SELF"><:panoramas:lieux_associes:></a>
 </td>
 </tr>
 </BOUCLE_visitesvirtuelles>
