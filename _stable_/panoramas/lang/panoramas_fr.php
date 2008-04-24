@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pas_d_interaction' => 'Pas d\'interaction',
 'visite_numero' => 'Visite num&eacute;ro',
 'lieu_numero' => 'Lieu num&eacute;ro',
-'interaction_numero' => 'Interaction num&eacute;ro'
+'interaction_numero' => 'Interaction num&eacute;ro',
+'previsualisation' => 'Pr&eacute;visualisation'
 );
 ?>

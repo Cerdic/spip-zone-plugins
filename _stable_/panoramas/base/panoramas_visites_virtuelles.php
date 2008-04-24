@@ -15,6 +15,7 @@ $visites_virtuelles = array(
 		"descriptif"	=> "text NOT NULL",
 		"largeur"	=> "int(21) NOT NULL",
 		"hauteur"	=> "int(21) NOT NULL",
+		"id_lieu_depart"	=> "bigint(21) NOT NULL",
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP"
 		);
