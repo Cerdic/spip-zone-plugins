@@ -3,12 +3,14 @@ function panoramas_insertion_in_head($flux)
 {
 	return "<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.js\"></script>
 	".$flux."<link rel=\"stylesheet\" type=\"text/css\" href=\""._DIR_PLUGIN_PANORAMAS."css/jquery.panorama.css\" />
+	<link rel=\"stylesheet\" type=\"text/css\" href=\""._DIR_PLUGIN_PANORAMAS."css/thickbox.css\" />
 	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.panorama.js\"></script>";
 }
 function panoramas_insertion_in_header_prive($flux)
 {
 	return "<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.js\"></script>
 	".$flux."<link rel=\"stylesheet\" type=\"text/css\" href=\""._DIR_PLUGIN_PANORAMAS."css/jquery.panorama.css\" />
+	<link rel=\"stylesheet\" type=\"text/css\" href=\""._DIR_PLUGIN_PANORAMAS."css/thickbox.css\" />
 	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.panorama.js\"></script>";
 }
 	

@@ -5,6 +5,7 @@
 	margin: 0;
 	padding: 0;
 	text-align: left;
+	border: 20px solid #414141;
 }
 .panorama-container {
 	position: relative;
@@ -97,14 +98,11 @@
 .panorama-title {
  	position: absolute; 
 	right: 0;
-	width: 20px; 
-	height: 200px;
 	top: 0; 
+	color: white;
 	font-size: 16px; 
-	font-family: Arial;
+	font-family: Verdana;
 	background: gray;
-	writing-mode: tb-rl;
-	filter: flipv fliph;
 	padding: 3px;
 	filter: alpha(opacity=50);
 	opacity: .5;
