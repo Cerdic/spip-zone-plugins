@@ -19,7 +19,8 @@
         	<br/> 
         		- &lt;INCLURE&#123;fond=environnement&#125;&gt;
         	<br/><br/>
-        	Le plugin permet aussi de gérer les autorisations d'accès à l'application en fonction des adresses IP des clients, que c soir sur le backOffice ou le frontOffice.
+        	Le plugin permet aussi de g&eacute;rer les autorisations d'acc&egrave;s à l'application en 
+        	fonction des adresses IP des clients, que ce soit sur le backOffice ou le frontOffice.
 			<h4><a href="?exec=cfg&amp;cfg=env">Configuration</a></h4>
         </description>
         <prefix>env</prefix>
