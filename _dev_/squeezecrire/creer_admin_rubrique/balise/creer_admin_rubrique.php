@@ -113,7 +113,7 @@ function balise_creer_admin_rubrique_dyn() {
 			
 			$sql = spip_query("SELECT id_article FROM spip_articles WHERE id_rubrique = '$id_rubrique' AND titre = '$nom_auteur' LIMIT 1");
 			if (spip_num_rows($sql) < 1) {
-				spip_query("INSERT INTO spip_articles (id_article, id_rubrique, id_secteur, titre, date, statut ) VALUES ('', '$id_rubrique', '$id_secteur', "._q($nom_auteur).", '$date', '$statut_article')");
+				spip_query("INSERT INTO spip_articles (id_article, id_rubrique, id_secteur, titre, date, statut ) VALUES ('', '$id_rubrique', '$secteur', "._q($nom_auteur).", '$date', '$statut_article')");
 				$id_article = mysql_insert_id();
 				spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ('$id_auteur', '$id_article')");
 				spip_log("[plugin creer_admin_rubrique] OK ajoute article : $id_article");
