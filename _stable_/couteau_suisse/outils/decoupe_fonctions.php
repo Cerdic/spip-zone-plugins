@@ -33,12 +33,6 @@ function onglets_callback($matches) {
 
 // fonction appellee sur les parties du texte non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_onglets_rempl($texte) {
-	// surcharge possible de _decoupe_SEPARATEUR par _decoupe_COMPATIBILITE
-	$rempl = preg_quote(_decoupe_SEPARATEUR,',')
-		. (defined('_decoupe_COMPATIBILITE')?'|'.preg_quote(_decoupe_COMPATIBILITE,','):'');
-	$texte = preg_replace(",\s*($rempl)\s*,", "\n\n"._decoupe_SEPARATEUR."\n\n", $texte);
-	// si pas de balise, on sort
-	if (strpos($texte, '<')===false) return $texte;
 	// compatibilite avec la syntaxe de Pierre Troll
 	if (strpos($texte, '<onglet|')!==false) {
 		$texte = str_replace('<onglet|fin>', '</onglets>', $texte);
@@ -64,6 +58,7 @@ function decoupe_image($fich, $help, $self, $off, $val, &$images, $double=false)
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_pages_rempl($texte) {
+	// si pas de separateur, on sort
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
 
 	// au cas ou on ne veuille pas de decoupe, on remplace les '++++' par un filet.
@@ -151,19 +146,29 @@ function decoupe_notes_orphelines(&$texte) {
 	$GLOBALS['les_notes'] = trim($notes);
 }
 
-// ici on est en pre_propre, tests d'installation requis
+// ici on est en pre_propre, tests de compatibilite requis
 function cs_onglets($texte){
+	// surcharge possible de _decoupe_SEPARATEUR par _decoupe_COMPATIBILITE
+	$rempl = ',\s*('
+		. preg_quote(_decoupe_SEPARATEUR,',')
+		. (defined('_decoupe_COMPATIBILITE')?'|'.preg_quote(_decoupe_COMPATIBILITE,','):'')
+		. ')\s*,';
+	// mise au clair des separateurs : pour les onglets ET la decoupe en page
+	$texte = preg_replace($rempl, "\n\n"._decoupe_SEPARATEUR."\n\n", $texte);
+	// si pas d'onglets, on sort
+	if (strpos($texte, '<onglet')===false) return $texte;
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_onglets_rempl', $texte);
+}
+
+// ici on est en post_propre, tests de compatibilite non requis
+function cs_decoupe($texte){
+	// si pas de separateur, on sort
+	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
 	// verification des metas qui stockent les liens d'image
 	if (!isset($GLOBALS['meta']['cs_decoupe'])) {
 		include_spip('outils/decoupe');
 		decoupe_installe();
 	}
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_onglets_rempl', $texte);
-}
-
-// ici on est en post_propre, tests d'installation non requis
-function cs_decoupe($texte){
-	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|table', 'decouper_en_pages_rempl', $texte);
 }
 
