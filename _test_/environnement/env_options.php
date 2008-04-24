@@ -13,17 +13,11 @@
 	
 	$redirection = lire_config('env/redirection');
 	
-	$find = false;
-	foreach ($addressips as $cle => $valeur) {
-		//echo $valeur,'  ',$addressC,'<br>';
-		if (trim($valeur) == trim($addressC)) {
-			// on a trouve l'adresse, on ne fait rien
-			$find = true;
-			break;
-		}
-	}
+	$find = matchAddress($addressips,$addressC);
 	
 	$environnement = lire_config('env/environnement');
+	
+	
 	
 	if ($environnement != 'NON') {
 	
@@ -33,13 +27,37 @@
 			// on interdit donc certainnes adresses
 			$banniesipConf = lire_config('env/banniesip');
 			$banniesips = explode(',', $banniesipConf);
-			foreach ($banniesips as $cle => $valeur) {
-				if (trim($valeur) == trim($addressC)) {
-					header('Location:'.$redirection);
-				}
+			
+			if (matchAddress($banniesips,$addressC)) {
+				header('Location:'.$redirection);
 			}
 		}
 	}
 	
 	
+	
+	function matchAddress($addressips,$addressC) {
+	
+		foreach ($addressips as $cle => $valeur) {
+			//echo $valeur,'  ',$addressC,'<br>';
+			if (trim($valeur) == trim($addressC)) {
+				// on a trouve l'adresse, on ne fait rien
+				return true;
+			}
+			
+			// on regarde si l'adresse IP contientun caractère Joker (dans notre cas x)
+			//echo "l'adresse : ", $valeur;
+			if (strripos($valeur, 'x')) {
+				// on a trouvé un caractère joker.
+				$pattern = "^".str_ireplace('x', '[0-9]*', $valeur)."$";
+				//echo "<br/>the pattern : ", $pattern, " avec value : ", $addressC;
+				
+				if (eregi($pattern,$addressC, $regs)) {
+					// la regexp matche l'adresse, on ne fait rien
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 ?>

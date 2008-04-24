@@ -2,17 +2,24 @@
         <nom>Différenciation des différents environnement (Dev, Test, Recette, Prod)</nom>
         <icon>img/env_big.png</icon>
         <auteur>
-        	[Julien Redondo->mailto:julien@nouveauxterritoires.fr] - [NouveauxTerritoires->http://www.nouveauxterritoires.fr]
+        	[Julien Redondo->mailto:julien@nouveauxterritoires.fr] - [Boris Humbert->mailto:boris@nouveauxterritoires.fr] 
+        	<br/>
+        	[NouveauxTerritoires->http://www.nouveauxterritoires.fr]
  			<br/><br/>
  			- Copyright &#169; 2008 NouveauxTerritoires
  			<br/>
  			Distribu&eacute; sous licence [GNU/GPL v2->http://www.gnu.org/copyleft/gpl.html]
  		</auteur>
-        <version>0.3</version>
+        <version>0.4</version>
         <etat>test</etat>
         <description>
-        	Permet d'afficher une différenciation graphique en fonction de l'environement sélectionné.
-        	Permet aussi de gérer les autorisations d'accès à l'application.
+        	Permet d'afficher une différenciation graphique en fonction de l'environement sélectionné dans le frontOffice.
+        	<br/>
+        	Pour cela, il faut donc que vous ajoutiez ce code dans un de vos squelettes :
+        	<br/> 
+        		- &lt;INCLURE&#123;fond=environnement&#125;&gt;
+        	</br><br/>
+        	Le plugin permet aussi de gérer les autorisations d'accès à l'application en fonction des adresses IP des clients, que c soir sur le backOffice ou le frontOffice.
 			<h4><a href="?exec=cfg&amp;cfg=env">Configuration</a></h4>
         </description>
         <prefix>env</prefix>

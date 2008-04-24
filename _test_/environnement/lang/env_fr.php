@@ -13,7 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'addressip' => 'Liste des adresses IP autorisées (Toutes les autres sont interdites !!) pour les personnes autorisées à voir ce site',
 'address_description' => 'Les adresses sont séparées par des virgules',
 'banniesip' => 'Liste des ip bannies du site (uniquement pour l\'environnement de PRODUCTION)',
-'non_conf' => 'Environnement NON CONFIGURE'
+'non_conf' => 'Environnement NON CONFIGURE',
+'address_joker' => 'Vous pouvez remplacer un nombre par le caractère joker \'x\' (192.168.100.x)'
 );
 
 ?>
