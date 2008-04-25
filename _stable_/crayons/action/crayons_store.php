@@ -230,6 +230,8 @@ function vues_dist($type, $modele, $id, $content){
   OR find_in_path( ($fond = 'vues/' . $type) .'.html')) {
 		$contexte = array(
 		    'id_' . $type => $id,
+		    'crayon_type' => $type,
+			'crayon_modele' => $modele,
 		    'champ' => $modele,
 		    'class' => _request('class'),
 		    'self' => _request('self'),

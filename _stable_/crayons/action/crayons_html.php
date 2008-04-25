@@ -217,6 +217,8 @@ class Crayon {
 	function fond($contexte = array()) {
 		include_spip('inc/filtres');
 		$contexte['id_' . $this->type] = $this->id;
+		$contexte['crayon_type'] = $this->type;
+		$contexte['crayon_modele'] = $this->modele;
 		$contexte['lang'] = $GLOBALS['spip_lang'];
 		$contexte['key'] = $this->key;
 		$contexte['largeur'] = $this->largeur;
