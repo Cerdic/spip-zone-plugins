@@ -75,9 +75,9 @@
 		}
 		
 		//On vérifie les dimensions et taille de l'image 
-        if(($infos_img[0] > $width_max) {$width_err="Banni&egrave;re trop large !";}
-		if(($infos_img[1] > $height_max) {$height_err="Banni&egrave;re trop haute !";}
-		if(($ext IN lire_config('bannieres/formats'))) {$ext_err="Mauvais format d'image !";}
+        if($infos_img[0] > $width_max) { $width_err="Banni&egrave;re trop large !"; }
+		if($infos_img[1] > $height_max) {$height_err="Banni&egrave;re trop haute !";}
+		if($ext IN lire_config('bannieres/formats')) {$ext_err="Mauvais format d'image !";}
 		$errors = array($width_err,$height_err, $ext_err);
 		if ($width_err || $height_err || $ext_err) {
 			header ('location:'.$url_edit_banniere.'&messages='.$errors);
