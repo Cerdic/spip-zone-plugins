@@ -40,7 +40,7 @@
     un certain temps ... avec la configuration PHP par d&eacute;faut, 
     c'est trop, mais on ne sait jamais) vous pouvez essayer ce lien : 
     [Installer les 
-    fontes->..?action=charger&plugin=jsMath-fonts-1.3&depot=http://images.math.cnrs.fr/files/&dest_path=plugins/jsMath].
+    fontes->..?action=charger&amp;plugin=jsMath-fonts-1.3&amp;depot=http://images.math.cnrs.fr/files/&amp;dest_path=plugins/jsMath].
 
     {{Configuration}}
 
