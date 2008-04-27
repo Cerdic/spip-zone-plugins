@@ -33,7 +33,13 @@ if(typeof TB_chemin_animation == 'undefined') { TB_chemin_animation = 'circle_an
 
 function TB_image() {
 	var t = this.title || this.name ;
-	TB_show(t,this.href,'image');
+	var longdesc = $('img[@longdesc]', this).attr('longdesc');
+
+	if (longdesc)
+		TB_show(t,longdesc);
+	else
+		TB_show(t,this.href,'image');
+
 	return false;
 }
 
@@ -48,7 +54,6 @@ function TB_init(root) {
 				(this.type && this.type.match(/^image[\/](jpeg|gif|png)$/i))
 				|| (this.href && this.href.match(/\.(jpeg|jpg|png|gif)$/i))
 			) {
-
 				// we store image links in an array (for a gallery)
 				imageArray.push ([
 					this.href,

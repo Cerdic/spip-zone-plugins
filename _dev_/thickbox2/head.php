@@ -2,15 +2,14 @@
 
 function ThickBox1_insert_head($flux){
 
-// on ajoute la class thickbox aux liens de type="image/xxx"
+	// on ajoute la class thickbox aux liens de type="image/xxx"
 
-// TODO: ne charger thickbox.js et thickbox.css que si 
-// jQuery("a.thickbox,a[@type='image/jpeg'],...").size() > 0)
-// var_dump(isset($GLOBALS["spip_pipeline"]["insert_js"]));
-if(!isset($GLOBALS["spip_pipeline"]["insert_js"]))
+	// TODO: ne charger thickbox.js et thickbox.css que si 
+	// jQuery("a.thickbox,a[@type='image/jpeg'],...").size() > 0)
+	if(!$GLOBALS["spip_pipeline"]["insert_js"])
+		$flux = ThickBox1_header_prive($flux);
 
-$flux = ThickBox1_header_prive($flux);
-return $flux;
+	return $flux;
 }
 
 function ThickBox1_header_prive($flux) {
