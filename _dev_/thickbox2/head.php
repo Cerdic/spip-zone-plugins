@@ -78,7 +78,7 @@ if(typeof onAjaxLoad == "function") onAjaxLoad(init_f);
 
 // Demarrage : on charge et execute les scripts de thickbox en asynchrone
 // ce qui permet a la page de s\'afficher plus tot
-jQuery(document).ready(function(){setTimeout(init_f,200)});
+jQuery(document).ready(function(){setTimeout(init_f.apply(document),200)});
 // --></script>';
 
 	return $flux;
@@ -88,9 +88,8 @@ function ThickBox1_verifie_js_necessaire($flux) {
 
 //var_dump($flux["page"]);
 $page = $flux["page"]["texte"];
-$necessaire = preg_match(",<a[^>]+type\s*=\s*['\"]image/(?:jpeg|png|gif)['\"],iUs",$page) ||
-              preg_match(",<a[^>]+class\s*=\s*['\"].*\bthickbox\b.*['\"],iUs",$page);
-
+//cherche <a> avec un type image ou une class thickbox
+$necessaire = preg_match(",<a[^>]+(?:(type)|class)\s*=\s*['\"](?(1)image/(?:jpeg|png|gif)|[^>'\"]*\bthickbox\b[^>'\"]*)['\"],iUs",$page); 
 $flux["data"]["ThickBox1"] = $necessaire;
 
 return $flux;
