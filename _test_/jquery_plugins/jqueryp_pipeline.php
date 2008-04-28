@@ -35,6 +35,7 @@ function _jqueryp_insert_jquery_plugins($flux = null){
  * cf. http://doc.spip.org/@f_jQuery
  */
 function jqueryp_jquery_plugins($flux) {
+	chemin('jqueryp_fonctions.php','',1); // inclure les fonctions
 	$flux = array_unique(array_merge($flux,(array)jqueryp_liste_plugins('actifs')));
 	return $flux;
 }
