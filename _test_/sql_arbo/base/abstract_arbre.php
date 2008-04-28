@@ -17,6 +17,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *      element : n'importe quel enregistrement (feuille ou noeud)
  */
  
+/*
+ * Normaliser les écritures des arguments 
+ * sql_[get|set]_detail($table,[$id_noeud],$champs,[arguments_complémentaire],$serveur,$option) {}
+ * $table : table à traiter
+ * $id_noeud : noeud de reference (parent ou noeud en fonction de la nature de la fonction)
+ * $champs : tableau déclarant les noms du champ parent, et clef primaire
+ * arguments complémentaire necessaire à la fonction
+ * $serveur, $options : argument issu de l'api sql_*
+ *
+ *
+ */
  
  
 /*! \brief Convertir une table de type autojointure en intervallaire
@@ -25,12 +36,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *  Il n'y a pas de notion d'ordre dans une fratrie, les noeuds sont remplis dans l'ordre de lecture de la base
  *
  *  \param $table table à convertir, nom de table complet
- *  \param $champ_noeud nom du champ contenant l'index de table en général id_objet
- *  \param $champ_parent nom du champ contenant l'index de l'element parent
+ *  \param $id_noeud identifiant du noeud de départ
+ *  \param $champs ['noeud'] nom du champ contenant l'index de table en général id_objet,  ['parent'] nom du champ contenant l'index de l'element parent
  *
  *  \return booleen retourne un controle sur le nombre d'elements traités
  */
-function sql_arbre_convertir($table, $id_noeud, $champs = array()) {
+function sql_arbre_convertir($table, $id_noeud, $champs = array(),$serveur='',$option=true) {
 
     // test la presence des noms des champs
     if(!isset($champs['noeud']) || !isset($champs['parent']) ) {
@@ -42,15 +53,15 @@ function sql_arbre_convertir($table, $id_noeud, $champs = array()) {
     sql_alter('TABLE '.$table.' ADD bord_droit INT');
         
     //formatage intervallaire
-    $bord_gauche = sql_arbre_convertir_noeud(1,$id_noeud,$table,$champs);
+    $bord_gauche = sql_arbre_convertir_noeud($table,$id_noeud,$champs,1);
 
     //controle la conversion
     //bord_gauche = 2 * nb d'element dans la table + 1
-    $nb_element = sql_countsel(
+    $nb_elements = sql_countsel(
         $table
     );
     
-    if ($nb_element * 2 == $bord_gauche - 1) {
+    if ($nb_elements * 2 == $bord_gauche - 1) {
         return true;
     } else {
         return false;
@@ -66,13 +77,12 @@ function sql_arbre_convertir($table, $id_noeud, $champs = array()) {
  *  \param $bord_gauche valeur du premier bord gauche à donner
  *  \param $id_noeud identifiant du noeud à traiter
  *  \param $table
- *  \param $champ_noeud
- *  \param $champ_parent
+ *  \param $champs tableau demandant 2 lignes ['parent'] et ['noeud'], indique les noms des clefs
  *
  *  \return int retourne la valeur du prochain bord gauche à donner, pour le noeud frere par exemple
  */
-function sql_arbre_convertir_noeud($bord_gauche,$id_noeud,$table,$champs = array()) {
-    
+function sql_arbre_convertir_noeud($table,$id_noeud,$champs = array(),$bord_gauche,$serveur='',$option=true) {
+        
     //on sauve le bord gauche du noeud en cours
     $bord_gauche_noeud = $bord_gauche;
     
@@ -89,7 +99,7 @@ function sql_arbre_convertir_noeud($bord_gauche,$id_noeud,$table,$champs = array
     //parcours les enfants
     while($fils = sql_fetch($ressource)) {
         $id_fils = $fils[$champs['noeud']];
-        $bord_gauche = sql_arbre_convertir_noeud($bord_gauche,$id_fils,$table,$champs);
+        $bord_gauche = sql_arbre_convertir_noeud($table,$id_fils,$champs,$bord_gauche);
     }
     
     //insert les bordures du du noeud
