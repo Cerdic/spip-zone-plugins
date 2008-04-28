@@ -109,7 +109,7 @@ spiplistes_log("exec_spiplistes_courrier_previsu(), _SPIPLISTES_LOG_DEBUG");
 					
 				if($format=="texte") {
 				
-					header("Content-Type: text/plain charset=$charset");
+					header("Content-Type: text/plain ; charset=$charset");
 					
 					// forcer IE à afficher en ligne. 
 					header("Content-Disposition: inline; filename=spiplistes-previsu.txt");
