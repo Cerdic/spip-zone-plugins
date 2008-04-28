@@ -29,9 +29,22 @@ function tags_revision($id_objet, $colonnes, $type_objet){
 
 	// Pour l'instant on ne fait rien ! On essaye pas de mettre à jour
 	// automatiquement, on fait ça à la main dans la vue.
-	// Cette fonction permet de ne pas avoir d'erreur SQL car sinon les crayons
-	// tentent de mettre la colonne "tags" à jour alors qu'elle n'existe pas.
-	return;
+	// return;
+	
+	// S'il n'y a rien a modifier...
+	if (!isset($colonnes['tags'])) return false;
+	
+	// On va chercher la bonne table et clé
+	include_spip('base/connect_sql');
+	$type_objet = strtolower($type_objet);
+	$type_objet = preg_replace(',^spip_|s$,', '', $type_objet);
+	$type_objet = table_objet($type_objet);
+	$cle_objet = id_table_objet($type_objet);
+	
+	// On met à jour les tags
+	include_spip('inc/tag-machine');
+	ajouter_mots($colonnes['tags'], $id_objet, 'tags', $type_objet, $cle_objet, true);
+	return true;
 
 }
 
