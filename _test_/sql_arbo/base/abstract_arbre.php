@@ -168,7 +168,7 @@ function sql_arbre_get_feuilles($table ='', $serveur='', $option=true) {
  *
  *  \return ressource une ressource à traiter par un sql_fetch
  */
-function sql_arbre_get_arbre($table ='', $element = array(), $inclu = true, $complet = true, $serveur='', $option=true) {
+function sql_arbre_get_arbre($table ='', $element = NULL, $inclu = true, $complet = true, $serveur='', $option=true) {
 
     if (isset($element)) {
         bordures = sql_arbre_get_bord($table, $element, $serveur, $option)
@@ -180,10 +180,10 @@ function sql_arbre_get_arbre($table ='', $element = array(), $inclu = true, $com
         }
     }
     
-    if (isset($complet)) {
-        $select = "*";
-    } else {
+    if (($complet == false) && (isset($element)))  {
         $select = $element['champ'];    
+    } else {
+        $select = "*";
     }
     
     return sql_select(
