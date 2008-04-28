@@ -11,14 +11,16 @@
 	}
 	
 	function tac_fo() {
-		document.images['rerien'].src = rerienim.src;	
-		document.re.recherche.value = "";
-		document.re.recherche.focus();
+		document.images['rerien'].src = rerienim.src;
+		var re = document.getElementById('re');
+		re.recherche.value = "";
+		re.recherche.focus();
 	}
 	
-	function tac_ok() {	
-		if (document.re.recherche.value > "") {
-			if (document.re.recherche.value == "recherche") { return; }
+	function tac_ok() {
+		var re = document.getElementById('re');
+		if (re.recherche.value > "") {
+			if (re.recherche.value == "recherche") { return; }
 			document.images['rerien'].src = reok.src;
 		}
 		else {

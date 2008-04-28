@@ -1,6 +1,8 @@
 <div id="recherche-style">
 	<form action="spip.php?page=recherche" id="re" method="get" class="noajax">
-		<div><img src="#CHEMIN{formulaires/rere.gif}" onclick="javascript:document.re.recherche.focus();" alt="loupe" style="width:18px;height:18px;border:0;vertical-align:bottom;" class="refond" /><input name="recherche"  type="text" id="recherche" value="[(#RECHERCHE|sinon{recherche})]" class="rech" onkeypress="javascript:tac_ok()" onchange="javascript:tac_ok();" onfocus="if (document.re.recherche.value == 'recherche') document.re.recherche.value='';" onblur="if (document.re.recherche.value=='') document.re.recherche.value='recherche';" /><img src="#CHEMIN{formulaires/rerien.gif}" onclick="javascript:tac_fo();" alt="rerien" style="width:18px;height:18px;border:0;vertical-align:bottom;" class="refond" />
+		<div><img src="#CHEMIN{formulaires/rere.gif}"
+onclick="javascript:getElementById('re').recherche.focus();" alt="loupe" style="width:18px;height:18px;border:0;vertical-align:bottom;" class="refond" /><input name="recherche"  type="text" id="recherche" value="[(#RECHERCHE|sinon{recherche})]" class="rech" onkeypress="javascript:tac_ok()" onchange="javascript:tac_ok();" onfocus="if
+(getElementById('re').recherche.value == 'recherche') getElementById('re').recherche.value='';" onblur="if (getElementById('re').recherche.value=='') getElementById('re').recherche.value='recherche';" /><img src="#CHEMIN{formulaires/rerien.gif}" onclick="javascript:tac_fo();" alt="rerien" style="width:18px;height:18px;border:0;vertical-align:bottom;" class="refond" />
 		<input value='recherche' name='page' type='hidden' /></div>
 	</form>
 </div>
