@@ -21,9 +21,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	'installation_librairies' => 'Installation de librairies',
 	
+	'jqueryp' => 'Activer des plugins JQuery',
 	'jquery_plugins' => 'jQuery Plugins',
-	'jqueryp_installer_plugins' => 'Installer des plugins jQuery',
-	
+	'jqueryp_installer_plugins' => 'Installer ou mettre &agrave; jour des plugins JQuery',
+		
 	'liste_plugins' => 'Liste des plugins',
 	
 	'ok' => 'OK',

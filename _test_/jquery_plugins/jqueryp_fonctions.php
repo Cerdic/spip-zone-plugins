@@ -411,14 +411,5 @@ function jqueryp_liste_plugins_dispo_groupe($groupe = ''){
 	return $_plugins[$_groupe]['files'];
 }
 
-/* 
- * Pipeline 'jquery_plugins' pour SPIP = 1.9.3 : ajouter simplement
- * les scripts a inserer au tableau de scripts passe dans le flux
- * cf. http://doc.spip.org/@f_jQuery
- */
-function jqueryp_jquery_plugins($flux) {
-	$flux = array_unique(array_merge($flux,(array)jqueryp_liste_plugins('actifs')));
-	return $flux;
-}
 
 ?>
