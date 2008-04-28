@@ -32,7 +32,7 @@ var init_f = function() {
 }
 //onAjaxLoad is defined in private area only
 if(typeof onAjaxLoad == "function") onAjaxLoad(init_f);
-jQuery(document).ready(init_f);
+if (window.jQuery) jQuery(document).ready(init_f);
 // --></script>';
 
 return $flux;
