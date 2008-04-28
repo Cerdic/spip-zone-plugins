@@ -38,8 +38,14 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
     <fonctions>jqueryp_fonctions.php</fonctions>
     <options>jqueryp_options.php</options>
 	<chemin dir='' />
+	<!-- pour SPIP < 1.9.3 -->
 	<pipeline>
 		<nom>insert_jquery_plugins</nom>
+		<inclure>jqueryp_pipeline.php</inclure>
+	</pipeline>
+	<!-- pour SPIP = 1.9.3 -->
+	<pipeline>
+		<nom>jquery_plugins</nom>
 		<inclure>jqueryp_pipeline.php</inclure>
 	</pipeline>
 
