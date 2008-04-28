@@ -152,6 +152,55 @@ function sql_arbre_get_feuilles($table ='', $serveur='', $option=true) {
     );
 }
 
+/*! \brief Obtenir un arbre
+ *
+ *  Retourne une ressource qui contient tous les elements d'un arbre
+ *
+ *  \param $table table à traiter
+ *  \param $element tableau(champ,id) identifie la racine du sous arbre à retourner
+ *  \param $inclu précise si on inclu la racine du sous arbre
+ *  \param $complet retourne toutes les infos du sous arbre ou non
+ *  \param $serveur serveur sollicité
+ *  \param $option peut avoir 3 valeurs 
+ *      - true -> executer la requete, 
+ *      - false -> ne pas l'executer mais la retourner, 
+ *      - 'continue' -> ne pas echouer en cas de serveur sql indisponible
+ *
+ *  \return ressource une ressource à traiter par un sql_fetch
+ */
+function sql_arbre_get_arbre($table ='', $element = array(), $inclu = true, $complet = true, $serveur='', $option=true) {
+
+    if (isset($element)) {
+        bordures = sql_arbre_get_bord($table, $element, $serveur, $option)
+        
+        if ($inclu=true) {
+            $where="bord_gauche>=".$bordures['bord_gauche']." AND bord_droit<=".$bordures['bord_droit'];
+        } else {
+            $where="bord_gauche>".$bordures['bord_gauche']." AND bord_droit<".$bordures['bord_droit'];
+        }
+    }
+    
+    if (isset($complet)) {
+        $select = "*";
+    } else {
+        $select = $element['champ'];    
+    }
+    
+    return sql_select(
+        $select,
+        $table,
+        $where,
+        '',
+        '',
+        '',
+        '',
+        $serveur,
+        $option        
+    );
+}
+
+
+
 
 /*! \brief Inserer une feuille
  *
@@ -227,7 +276,7 @@ function sql_arbre_set_feuille($table ='',$parent = array(),$bord = 'droit', $co
 
 }
 
-function sql_arbre_get_bord($table ='',$element = array(),$bord = 'droit', $couples= array(),  $serveur='', $option=true) {
+function sql_arbre_get_bord($table ='',$element = array(), $serveur='', $option=true) {
 
     //recherche les bords de l'element
     return sql_fetsel(
