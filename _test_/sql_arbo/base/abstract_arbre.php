@@ -26,17 +26,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  *  \param $table table à convertir, nom de table complet
  *  \param $champ_noeud nom du champ contenant l'index de table en général id_objet
- *  \param $champ_parent nom du champs contenant l'index de l'element parent
+ *  \param $champ_parent nom du champ contenant l'index de l'element parent
  *
  *  \return booleen retourne un controle sur le nombre d'elements traités
  */
-function sql_arbre_convertir($table, $champ_noeud, $champ_parent) {
+function sql_arbre_convertir($table, $id_noeud, $champs = array()) {
+
+    // test la presence des noms des champs
+    if(!isset($champs['noeud']) || !isset($champs['parent']) ) {
+        return false;
+    }
+    
     //création des champs necessaires
     sql_alter('TABLE '.$table.' ADD bord_gauche INT');
     sql_alter('TABLE '.$table.' ADD bord_droit INT');
         
     //formatage intervallaire
-    $bord_gauche = sql_arbre_convertir_noeud(1,0,'spip_autojointure','FAM_ID','FAM_PERE');
+    $bord_gauche = sql_arbre_convertir_noeud(1,$id_noeud,$table,$champs);
 
     //controle la conversion
     //bord_gauche = 2 * nb d'element dans la table + 1
@@ -54,7 +60,7 @@ function sql_arbre_convertir($table, $champ_noeud, $champ_parent) {
 
 
 
-/*! \brief Defini les bords d'un noeud et de sa descendande
+/*! \brief Defini les bords d'un noeud et de sa descendance
  *
  *
  *  \param $bord_gauche valeur du premier bord gauche à donner
@@ -65,7 +71,7 @@ function sql_arbre_convertir($table, $champ_noeud, $champ_parent) {
  *
  *  \return int retourne la valeur du prochain bord gauche à donner, pour le noeud frere par exemple
  */
-function sql_arbre_convertir_noeud($bord_gauche,$id_noeud,$table,$champ_noeud,$champ_parent) {
+function sql_arbre_convertir_noeud($bord_gauche,$id_noeud,$table,$champs = array()) {
     
     //on sauve le bord gauche du noeud en cours
     $bord_gauche_noeud = $bord_gauche;
@@ -75,15 +81,15 @@ function sql_arbre_convertir_noeud($bord_gauche,$id_noeud,$table,$champ_noeud,$c
 
     //recherche des enfants immédiats
     $ressource = sql_select(
-        $champ_noeud,
+        $champs['noeud'],
         $table,
-        "$champ_parent = $id_noeud"
+        $champs['parent']." = ".$id_noeud
     );
       
     //parcours les enfants
     while($fils = sql_fetch($ressource)) {
-        $id_fils = $fils[$champ_noeud];
-        $bord_gauche = sql_arbre_convertir_noeud($bord_gauche,$id_fils,$table,$champ_noeud,$champ_parent);
+        $id_fils = $fils[$champs['noeud']];
+        $bord_gauche = sql_arbre_convertir_noeud($bord_gauche,$id_fils,$table,$champs);
     }
     
     //insert les bordures du du noeud
@@ -93,7 +99,7 @@ function sql_arbre_convertir_noeud($bord_gauche,$id_noeud,$table,$champ_noeud,$c
             'bord_gauche' => $bord_gauche_noeud,
             'bord_droit' => $bord_gauche
         ),
-        "$champ_noeud = $id_noeud"
+        $champs['noeud']." = ".$id_noeud
     );
     
     //le prochain bord_gauche

@@ -35,7 +35,10 @@ function exec_sql_arbo() {
     if (!is_null($table) && !is_null($id_noeud) && !is_null($champ_noeud) && !is_null($champ_parent)) {
         echo "<h1>Conversion autojointure -> intervallaire</h1>";
         
-        echo sql_arbre_convertir($table, $champ_noeud, $id_noeud, $champ_parent);
+        $champs['parent'] = $champ_parent;
+        $champs['noeud'] = $champ_noeud;
+        
+        echo sql_arbre_convertir($table, $id_noeud, $champs);
         
         echo "<h1>Obtenir toutes les feuilles</h1>";
         
