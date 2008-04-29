@@ -155,6 +155,7 @@ function sql_arbre_get_feuilles($table ='', $serveur='', $option=true) {
 /*! \brief Obtenir un arbre
  *
  *  Retourne une ressource qui contient tous les elements d'un arbre
+ *  http://sql.developpez.com/arborescence/#L2.5
  *
  *  \param $table table à traiter
  *  \param $element tableau(champ,id) identifie la racine du sous arbre à retourner
@@ -200,6 +201,108 @@ function sql_arbre_get_arbre($table ='', $element = NULL, $inclu = true, $comple
 }
 
 
+
+
+
+/*! \brief Obtenir l'arbre complémentaire
+ *
+ *  Retourne une ressource qui contient tous les elements d'un arbre
+ *  http://sql.developpez.com/arborescence/#L2.6
+ *
+ *  \param $table table à traiter
+ *  \param $element tableau(champ,id) identifie la racine du sous arbre à retourner
+ *  \param $inclu précise si on inclu la racine du sous arbre
+ *  \param $complet retourne toutes les infos du sous arbre ou non
+ *  \param $serveur serveur sollicité
+ *  \param $option peut avoir 3 valeurs 
+ *      - true -> executer la requete, 
+ *      - false -> ne pas l'executer mais la retourner, 
+ *      - 'continue' -> ne pas echouer en cas de serveur sql indisponible
+ *
+ *  \return ressource une ressource à traiter par un sql_fetch
+ */
+function sql_arbre_get_arbre_complementaire($table ='', $element = NULL, $inclu = false, $complet = true, $serveur='', $option=true) {
+
+    if (isset($element)) {
+        bordures = sql_arbre_get_bord($table, $element, $serveur, $option)
+        
+        if ($inclu=true) {
+            $where="bord_gauche<=".$bordures['bord_gauche']." OR bord_droit>=".$bordures['bord_droit'];
+        } else {
+            $where="bord_gauche<".$bordures['bord_gauche']." OR bord_droit>".$bordures['bord_droit'];
+        }
+    }
+    
+    if (($complet == false) && (isset($element)))  {
+        $select = $element['champ'];    
+    } else {
+        $select = "*";
+    }
+    
+    return sql_select(
+        $select,
+        $table,
+        $where,
+        '',
+        '',
+        '',
+        '',
+        $serveur,
+        $option        
+    );
+}
+
+
+/*! \brief Obtenir une hierarchie
+ *
+ *  Retourne une ressource qui contient la hierarchie d'un élement
+ *  http://sql.developpez.com/arborescence/#L2.7
+ *
+ *  \param $table table à traiter
+ *  \param $element tableau(champ,id) identifie la racine du sous arbre à retourner
+ *  \param $inclu précise si on inclu la racine du sous arbre
+ *  \param $complet retourne toutes les infos du sous arbre ou non
+ *  \param $serveur serveur sollicité
+ *  \param $option peut avoir 3 valeurs 
+ *      - true -> executer la requete, 
+ *      - false -> ne pas l'executer mais la retourner, 
+ *      - 'continue' -> ne pas echouer en cas de serveur sql indisponible
+ *
+ *  \return ressource une ressource à traiter par un sql_fetch
+ */
+function sql_arbre_get_hierarchie($table ='', $element = NULL, $inclu = true, $complet = true, $serveur='', $option=true) {
+
+    if (isset($element)) {
+        bordures = sql_arbre_get_bord($table, $element, $serveur, $option)
+        
+        if ($inclu=true) {
+            $where="bord_gauche>=".$bordures['bord_gauche']." AND bord_droit<=".$bordures['bord_droit'];
+        } else {
+            $where="bord_gauche>".$bordures['bord_gauche']." AND bord_droit<".$bordures['bord_droit'];
+        }
+    } else {
+        return false;
+    }
+    
+    if (($complet == false) && (isset($element)))  {
+        $select = $element['champ'];    
+    } else {
+        $select = "*";
+    }
+    
+    return sql_select(
+        $select,
+        $table,
+        $where,
+        '',
+        '',
+        '',
+        '',
+        $serveur,
+        $option        
+    );
+
+}
 
 
 /*! \brief Inserer une feuille
