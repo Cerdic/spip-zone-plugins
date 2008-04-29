@@ -35,7 +35,7 @@ x) Mettre pour la page article d'une rubrique en acces restreint
 
 HTML ici
 
-</BOUCLE_article_principal></BOUCLE_article_principal>
+</BOUCLE_article_principal>
 		[(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''}) <INCLURE{fond=article_restreint}{id_article}> ] 
 		[(#ID_ARTICLE|AccesRestreint_article_restreint|?{'',' '}) Cette page n'existe pas ] 
 <//B_article_principal>
@@ -45,6 +45,10 @@ x) Relooker la page article_restreint.html
 
 x) Rendez-vous sur la page spip.php?page=_abonnement_ pour utiliser le plugin
 
+x) Afficher en rouge dans une liste le titre d'un article protégé si l'usager est déconnecté
+<BOUCLE_articles(ARTICLES){tout_voir} {pagination}>
+<h3 class="titre" <BOUCLE_restreint2(ZONES_RUBRIQUES){id_rubrique}>style="background-color:red"</BOUCLE_restreint2> ><a href="#URL_ARTICLE">#TITRE</a></h3>
+</BOUCLE_articles>
 
 TODO :
 
