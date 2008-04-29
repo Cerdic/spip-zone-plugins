@@ -1,24 +1,21 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Google analytics
+	Spiigle analytics
 	</nom>
-	<auteur> <!-- Auteur du plugin -->
+	<auteur>	<!-- Auteur du plugin -->
 	Phil
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
-	stable
+	dev
 	</etat>
 	<description>
-	Ajoute le script Google analytics dans l'espace public en ins&eacute;rant le code perso de google analytics dans l'espace
- priv&eacute;
- <h4>[Configuration->.?exec=cfg&amp;cfg=googleanalytics]</h4>
+	Ajoute le script Google analytics dans l'espace public en ins&eacute;rant le code perso de google analytics dans l'espace priv&eacute;
 	</description>
-	<icon>ga.png</icon>
 	<lien>
-		[Documentation->http://www.spip-contrib.net/?article2495]
+	si vous avez cfg: [Configuration->.?exec=cfg&cfg=googleanalytics]
     </lien>
 	<prefix>
 	googleanalytics
