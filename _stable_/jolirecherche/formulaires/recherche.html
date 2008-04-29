@@ -3,6 +3,8 @@
 		<div><img src="#CHEMIN{formulaires/rere.gif}"
 onclick="javascript:getElementById('re').recherche.focus();" alt="loupe" style="width:18px;height:18px;border:0;vertical-align:bottom;" class="refond" /><input name="recherche"  type="text" id="recherche" value="[(#RECHERCHE|sinon{recherche})]" class="rech" onkeypress="javascript:tac_ok()" onchange="javascript:tac_ok();" onfocus="if
 (getElementById('re').recherche.value == 'recherche') getElementById('re').recherche.value='';" onblur="if (getElementById('re').recherche.value=='') getElementById('re').recherche.value='recherche';" /><img src="#CHEMIN{formulaires/rerien.gif}" onclick="javascript:tac_fo();" alt="rerien" style="width:18px;height:18px;border:0;vertical-align:bottom;" class="refond" />
-		<input value='recherche' name='page' type='hidden' /></div>
+		<input value='recherche' name='page' type='hidden' />
+		[<input type="image" style="vertical-align:middle" src="(#CHEMIN{jolirecherche_ok.gif})" />]
+		</div>
 	</form>
 </div>
