@@ -1,0 +1,25 @@
+<div class="formulaire_spip formulaire_nabaztag">
+<a id="formulaire_nabaztag" name="formulaire_nabaztag"></a>
+
+
+<form action="#SELF#formulaire_nabaztag" method="post">
+
+
+[(#REM) Sinon, formulaire normal ]
+
+<fieldset>
+<legend><:nabaztag:envoyer_message:></legend>
+<p><label for="email_message_nabaztag"><:nabaztag:form_pet_votre_email:></label>
+<input type="text" class="forml" name="email_message_nabaztag" id="email_message_nabaztag" value="#ENV{mail}" size="30" /></p>
+<p><label for="sujet_message_nabaztag"><:nabaztag:form_prop_sujet:></label>
+<input type="text" class="forml" name="sujet_message_nabaztag" id="sujet_message_nabaztag" value="#ENV{sujet}" size="30" /></p>
+<p><label for="texte_message_nabaztag"><:nabaztag:info_texte_message:></label>
+<textarea class="forml" name="texte_message_nabaztag" id="texte_message_nabaztag" rows="10" cols="40">#ENV{texte}</textarea></p>
+
+[<p class="spip_bouton"><input type="submit" name="valide" value="(#ENV{bouton})" /></p>]
+</fieldset>
+
+</form>
+
+
+</div>

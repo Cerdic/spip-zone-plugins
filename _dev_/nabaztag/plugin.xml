@@ -1,0 +1,29 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Nabaztag
+	</nom>
+	<auteur> <!-- Auteur du plugin -->
+	jsb
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	permet de configurer l'envoi de mel à son lapin
+ <h4>[Configuration->.?exec=cfg&amp;cfg=nabaztag]</h4>
+	</description>
+	<icon>icon.png</icon>
+	<lien>
+		[Documentation->http://www.webjsb.net]
+    </lien>
+	<prefix>
+	nabaztag
+	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+</plugin>

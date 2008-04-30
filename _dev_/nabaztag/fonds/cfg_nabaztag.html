@@ -1,0 +1,45 @@
+[(#REM) descriptif=
+<h4>Configuration du plugin Nabaztag</h4>
+Ici vous pouvez indiquer vos identifiants.<br />
+<br />
+]
+
+[(#REM) titre=Nabaztag]
+[(#REM) icone=icon.png]
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset><legend><:nabaztag:legende:></legend>
+<p>
+<label for="_nabzserial_id"><:nabaztag:serial:></label>
+<input type="text" name="idSerial" class="type_txt" id="_nabzserial_id" size="60"
+	value="#ENV{idSerial}" /></p>
+
+<p><label for="_nabztoken_id"><:nabaztag:token:></label>
+
+	<input type="text" name="idToken" class="type_txt" id="_nabztoken_id" size="60"
+	value="#ENV{idToken}" /></p>
+
+<p><label for="_nabzname_id"><:nabaztag:name:></label>
+
+	<input type="text" name="idName" class="type_txt" id="_nabzname_id" size="60"
+	value="#ENV{idName}" /></p>
+
+<label><:nabaztag:voix:> : <select name="idVoix" tabindex="4">
+	<option value="">Pas de voix</option>
+	<option value="julie22k" [(#CONFIG{nabaztag/idVoix}|=={julie22k}|?{selected="selected",''})]>julie</option>
+	<option value="claire22s" [(#CONFIG{nabaztag/idVoix}|=={claire22s}|?{selected="selected",''})]>claire</option>
+	<option value="caroline22k" [(#CONFIG{nabaztag/idVoix}|=={caroline22k}|?{selected="selected",''})]>caroline</option>
+	<option value="bruno22k" [(#CONFIG{nabaztag/idVoix}|=={bruno22k}|?{selected="selected",''})]>bruno</option>
+</select></label>
+</fieldset>
+
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:ok:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</form>
+
