@@ -263,7 +263,7 @@ function exec_spiplistes_courrier_gerer () {
 	if($flag_editable) {
 		
 		if(($statut == _SPIPLISTES_STATUT_REDAC) || ($statut == _SPIPLISTES_STATUT_READY)) {
-		// Le courrier peut-aªtre modifie si en preparation 
+		// Le courrier peut-etre modifie si en preparation 
 			$gros_bouton_modifier = 
 				icone (
 					_T('spiplistes:Modifier_ce_courrier') // legende bouton

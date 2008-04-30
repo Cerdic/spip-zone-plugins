@@ -22,7 +22,8 @@ include_spip('inc/spiplistes_api');
 	$email_test: adresse email de test
 	$id_liste: id de la liste choisie
 */
-function spiplistes_destiner_envoi ($id_courrier, $id_liste, $flag_editable, $statut, $type, $nom_bouton_validation, $email_test = "") {
+function spiplistes_destiner_envoi ($id_courrier, $id_liste, $flag_editable
+	, $statut, $type, $nom_bouton_validation, $email_test = "") {
 
 	include_spip('inc/presentation');
 	include_spip('inc/texte');
@@ -74,9 +75,18 @@ function spiplistes_destiner_envoi ($id_courrier, $id_liste, $flag_editable, $st
 			// propose les listes
 				. "<select class='verdana2' name='id_liste' onchange='document.getElementById(\"destlist\").checked=true;' >\n"
 				;
-			$sql_query = "SELECT * FROM spip_listes WHERE statut='"._SPIPLISTES_PUBLIC_LIST."' OR statut='"._SPIPLISTES_PRIVATE_LIST."'";
-			$sql_result = spip_query ($sql_query);
-			while($row = spip_fetch_array($sql_result)) {
+			foreach(
+				spiplistes_listes_lister(
+					array('id_liste', 'titre') 
+					, array(
+						_SPIPLISTES_PRIVATE_LIST
+						, _SPIPLISTES_PUBLIC_LIST
+						, _SPIPLISTES_DAILY_LIST
+						, _SPIPLISTES_WEEKLY_LIST
+						, _SPIPLISTES_MONTHLY_LIST
+						, _SPIPLISTES_YEARLY_LIST
+					) 
+				) as $row) {
 				$checked = ($id_liste == $row['id_liste']) ? "checked='checked'" : "";
 				$masque .= "<option value='" . $row['id_liste'] . "' $checked>" . $row['titre'] . "</option>\n";
 			}

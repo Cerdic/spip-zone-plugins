@@ -119,6 +119,31 @@ function spiplistes_listes_count ($statut='toutes') {
 	return(__table_items_count('spip_listes', 'id_liste', $where));
 }
 
+// CP-2080430: renvoie tableau liste des listes
+function spiplistes_listes_lister ($select = "*", $where = "") {
+	if($where) {
+		// spip_mysql_select() join AND par défaut
+		// Il faut un OR !
+		// Construit la requete...
+		if(is_array($where)) {
+			$where = implode(" OR statut=", array_map("sql_quote", $where));
+		} else {
+			$where = sql_quote($where);
+		}
+		$where = "statut=".$where;
+	}
+	if($select
+		&& ($sql_result = sql_select($select, "spip_listes", $where))
+	) {
+		$result = array();
+		while($row = sql_fetch($sql_result)) {
+			$result[] = $row;
+		}
+		return($result);
+	}
+	return(NULL);
+}
+
 // desabonner des listes (CP-20071016)
 // $listes_statuts : array (statuts des listes,..)
 function spiplistes_listes_desabonner_statut ($id_auteur, $listes_statuts) {
