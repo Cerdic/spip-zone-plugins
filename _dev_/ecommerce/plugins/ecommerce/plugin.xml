@@ -7,6 +7,9 @@
 _ [mon site->http://www.autodelta.fr]
 	</auteur>
 	<description>Ma boutique en ligne, Il est distribu&#233; sous licence GNU/GPL</description>
+	<lien>
+		[Documentation sur ->http://autodelta.free.fr/spip.php?article47]
+		    </lien>
 	<prefix> 
 	ecommerce
 	</prefix>
