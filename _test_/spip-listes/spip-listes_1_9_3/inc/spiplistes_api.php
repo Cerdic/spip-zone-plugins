@@ -246,18 +246,11 @@ function spiplistes_format_abo_demande ($id_auteur) {
 /* retourne l'id auteur depuis l'email */
 function spiplistes_idauteur_depuis_email ($email) {
 	if($email = email_valide($email)) {
-		if($result = spiplistes_sql_select_simple ("id_auteur", "spip_auteurs", "email='$email' AND statut<>'5poubelle'")) {
-			$row = spip_fetch_array($result);
-			return($row['id_auteur']);
-		}
+		return(sql_getfetsel("id_auteur", "spip_auteurs"
+			, "email=".sql_quote($email)." AND statut<>".sql_quote("5poubelle"))
+		);
 	}
 	return(false);
-}
-
-// CP-20080324 : renvoie le premier élément sql demandé
-function spiplistes_sql_select_simple ($sql_select, $sql_table, $sql_where = "", $only_first = true) {
-	$only_first = $only_first ? 1 : "";
-	return(sql_select($sql_select, $sql_table, $sql_where, "", "", $only_first));
 }
 
 /*
