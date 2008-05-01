@@ -49,7 +49,8 @@ include_spip('inc/spiplistes_api_globales');
 
 */
 	
-function spiplistes_meleuse () {
+function spiplistes_meleuse () { 
+//return(0);
 spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 
 	include_spip('inc/meta');
@@ -356,7 +357,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 				//aucun destinataire connu pour ce message
 //spiplistes_log("MEL: "._T('spiplistes:erreur_sans_destinataire')."---"._T('spiplistes:envoi_annule'), _SPIPLISTES_LOG_DEBUG);
 				spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_IGNORE."' WHERE id_courrier=$id_courrier LIMIT 1");
-				spiplistes_courrier_supprimer_envois('id_courrier', $id_courrier);
+				spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 				$str_log .= " END #$id_courrier";
 				// 
 				break;
@@ -375,14 +376,14 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 
 				///////////////////////
 				// si courrier pas terminé, redemande la main au CRON, sinon nettoyage.
-				if($t = spiplistes_nb_courriers_en_cours($id_courrier)) {
+				if($t = spiplistes_courriers_en_cours_count($id_courrier)) {
 					$str_log .= " LEFT $t"; 
 					$meleuse_statut = "-1";
 				}
 				else {
 					$statut = ($type=_SPIPLISTES_TYPE_NEWSLETTER) ? _SPIPLISTES_STATUT_PUBLIE : _SPIPLISTES_STATUT_AUTO;
 					$sql_update .= "statut='$statut',date_fin_envoi=NOW(),";
-					spiplistes_courrier_supprimer_envois('id_courrier', $id_courrier);
+					spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 					$str_log .= " END #$id_courrier";
 					$meleuse_statut = "1";
 				}
@@ -398,7 +399,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 
 	spiplistes_log($str_log);
 
-	if(($ii = spiplistes_nb_courriers_en_cours()) > 0) {
+	if(($ii = spiplistes_courriers_en_cours_count()) > 0) {
 	// il en reste après la meleuse ? Signale au CRON tache non terminée
 		spiplistes_log("MEL: il reste des courriers a envoyer ($ii) !", _SPIPLISTES_LOG_DEBUG);
 		$meleuse_statut = "-1";

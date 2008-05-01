@@ -119,50 +119,63 @@ function exec_spiplistes_courriers_casier () {
 		;
 
 	///////////////////////////
-	// initialise les variables postées par formulaire
+	// initialise les variables postées par formulaire (formulaire gerer)
 	foreach(array(
-		'btn_confirmer_envoi', 'id_courrier', 'id_liste' // (formulaire gerer) confirmer envoi
+		'btn_confirmer_envoi', 'id_courrier', 'id_liste'
 		, 'statut'
+		, 'btn_supprimer_courrier'
+		, 'btn_arreter_envoi'
 		) as $key) {
 		$$key = _request($key);
 	}
-	foreach(array('id_courrier','id_liste') as $key) {
+	foreach(array('id_courrier', 'id_liste'
+		, 'btn_supprimer_courrier', 'btn_arreter_envoi'
+		) as $key) {
 		$$key = intval($$key);
 	}
+	
+	$flag_modifiable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur));
 
+	// confirmer l'envoi d'un courrier
 	if($btn_confirmer_envoi 
-		&& ($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur))
-		) {
-		spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_ENCOURS."' WHERE id_courrier=$id_courrier LIMIT 1");
+		&& $flag_modifiable
+	) {
+		sql_update(
+			'spip_courriers'
+			, array(
+				'statut' => sql_quote(_SPIPLISTES_STATUT_ENCOURS)
+			)
+			, "id_courrier=".sql_quote($id_courrier)." LIMIT 1"
+		);
 		if($id_liste > 0) {
-			spiplistes_courrier_supprimer_envois('id_courrier', $id_courrier);
-			// passe le courrier à la méleuse
-			spiplistes_courrier_remplir_queue_envois($id_courrier,$id_liste);
+			spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
+			// passe le courrier a la meleuse
+			spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste);
 			spiplistes_log("SEND ID_COURRIER #$id_courrier ON ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur");
 		}
 	}
 
-	// à sécuriser ($connect_toutes_rubriques || $connect_id_auteur == id_auteur)
-	// pour le moment CP-20080501, n'est pas activé
-	if ($detruire_courrier = intval(_request('detruire_courrier'))) {
-		sql_delete("spip_courriers", "id_courrier=".sql_quote($detruire_courrier));
-		// supprime de la queue d'envois
-		sql_delete("spip_auteurs_courriers", "id_courrier=".sql_quote($detruire_courrier));
+	// supprimer un courrier des cases
+	if($btn_supprimer_courrier
+		&& $flag_modifiable
+	) {
+		sql_delete("spip_courriers", "id_courrier=".sql_quote($btn_supprimer_courrier)." LIMIT 1");
+		spiplistes_courrier_supprimer_queue_envois('id_courrier', $btn_supprimer_courrier);
 	}
 	
-	// à sécuriser ($connect_toutes_rubriques || $connect_id_auteur == id_auteur)
-	if ($arreter_courrier = intval(_request('btn_arreter_envoi'))) {
-		// demande arreter envoi du courrier encour
+	// arreter un courrier en cours d'envoi
+	if($btn_arreter_envoi
+		&& $flag_modifiable
+	) {
 		sql_update(
 			'spip_courriers'
 			, array(
 				'statut' => sql_quote(_SPIPLISTES_STATUT_STOPE)
 				, 'date_fin_envoi' => "NOW()"
 			)
-			, "id_courrier=".sql_quote($arreter_courrier)." LIMIT 1"
+			, "id_courrier=".sql_quote($btn_arreter_envoi)." LIMIT 1"
 		);
-		// supprime de la queue d'envois
-		sql_delete("spip_auteurs_courriers", "id_courrier=".sql_quote($arreter_courrier));
+		spiplistes_courrier_supprimer_queue_envois('id_courrier', $btn_arreter_envoi);
 	}
 
 ////////////////////////////////////

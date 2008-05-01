@@ -297,7 +297,7 @@ spiplistes_log("ERREUR spiplistes_courrier_remplir_queue_envois($id_courrier, $i
 
 
 // CP-20080329
-function spiplistes_courrier_supprimer_envois ($sql_where_key, $sql_where_value) {
+function spiplistes_courrier_supprimer_queue_envois ($sql_where_key, $sql_where_value) {
 	$sql_where = $sql_where_key."=".sql_quote($sql_where_value);
 	switch($sql_where_key) {
 		case 'id_courrier':

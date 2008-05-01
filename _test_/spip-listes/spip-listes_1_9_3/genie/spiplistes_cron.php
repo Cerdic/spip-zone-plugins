@@ -1,5 +1,7 @@
 <?php
+
 // genie/spiplistes_cron.php
+
 /******************************************************************************************/
 /* SPIP-listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email  pour SPIP.                                                                  */
@@ -93,22 +95,17 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, _SPIPLISTES_LOG_DEBUG);
 
 	while($row = sql_fetch($listes_privees_et_publiques)) {
 	
-//spiplistes_log("CRON: job id_liste: ".$row['id_liste'], _SPIPLISTES_LOG_DEBUG);
 		// initalise les variables
 		foreach(explode(",", $sql_select) as $key) {
 			$$key = $row[$key];
 		}
 		$id_liste = intval($id_liste);
 		$periode = intval($periode);
-		$dernier_envoi = $maj ;
+		$dernier_envoi = $maj;
 	
 		// demande id_auteur de la liste pour la signer
 		$id_auteur = spiplistes_mod_listes_get_id_auteur($id_liste);
 		
-//spiplistes_log("CRON: la liste $id_liste demande un envoi", _SPIPLISTES_LOG_DEBUG);
-//spiplistes_log("CRON: lang == $lang", _SPIPLISTES_LOG_DEBUG);
-
-		/////////////////////////////
 		// Tampon date prochain envoi (dans 'date') et d'envoi (dans 'maj')
 		$sql_set = $next_time = false;
 		if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_OK))) {
@@ -177,18 +174,25 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, _SPIPLISTES_LOG_DEBUG);
 		
 		/////////////////////////////
 		// Place le courrier dans le casier
-	
-		$sql_query = "INSERT INTO spip_courriers (titre,date,statut,type,id_auteur,id_liste,date_debut_envoi,date_fin_envoi,texte) 
-			VALUES ("._q($titre).", NOW(),'$statut','"._SPIPLISTES_TYPE_LISTEAUTO."'
-			, $id_auteur, $id_liste, $date_debut_envoi, $date_fin_envoi,"._q($texte).")";
-		$result = spip_query($sql_query);
-//spiplistes_log($sql_query);
+		sql_insert(
+			'spip_courriers'
+			, array(
+				'titre' => sql_quote($titre)
+				, 'date' => 'NOW()'
+				, 'statut' => sql_quote($statut)
+				, 'type' => sql_quote(_SPIPLISTES_TYPE_LISTEAUTO)
+				, 'id_auteur' => sql_quote($id_auteur)
+				, 'id_liste' => sql_quote($id_liste)
+				, 'date_debut_envoi' => sql_quote($date_debut_envoi)
+				, 'date_fin_envoi' => sql_quote($date_fin_envoi)
+				, 'texte' => sql_quote($texte)
+			)
+		);
 
 		/////////////////////////////
 		// Ajoute les abonnés dans la queue (spip_auteurs_courriers)
 		if($taille_courrier_ok) {
 			$id_courrier = spip_insert_id();
-spiplistes_log("CRON: remplir la queue", _SPIPLISTES_LOG_DEBUG);
 			spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste);
 		} 
 		else {
@@ -199,8 +203,8 @@ spiplistes_log("CRON: envoi mail nouveautes : courrier vide", _SPIPLISTES_LOG_DE
 	
 	/////////////////////////////
 	// Si panier courriers des encours plein, 
-	// ou si queue en attenate, appelle meleuse
-	if (spiplistes_nb_courriers_en_cours() 
+	// ou si queue en attente, appelle meleuse
+	if (spiplistes_courriers_en_cours_count() 
 		|| spiplistes_courriers_en_queue_count()){
 		spiplistes_log("CRON: appel meleuse", _SPIPLISTES_LOG_DEBUG);
 		include_spip('inc/spiplistes_meleuse');
@@ -213,7 +217,7 @@ spiplistes_log("CRON: envoi mail nouveautes : courrier vide", _SPIPLISTES_LOG_DE
 
 function genie_spiplistes_cron ($last_time) {
 	include_spip('inc/spiplistes_api_globales');
-spiplistes_log("CRON: genie_spiplistes_cron() <<", _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("CRON: genie_spiplistes_cron() 193", _SPIPLISTES_LOG_DEBUG);
 	cron_spiplistes_cron ($last_time);
 }
 

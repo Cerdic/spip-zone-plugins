@@ -149,7 +149,7 @@ function exec_spiplistes_courrier_gerer () {
 				) {
 				$change_statut = _SPIPLISTES_STATUT_ENCOURS;
 				spip_query("UPDATE spip_courriers SET statut='$change_statut' WHERE id_courrier=$id_courrier LIMIT 1");
-				spiplistes_courrier_supprimer_envois('id_courrier', $id_courrier);
+				spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 				// passe le courrier a  la meleuse
 				spiplistes_courrier_remplir_queue_envois($id_courrier,$id_liste);
 				spiplistes_log("SEND ID_COURRIER #$id_courrier ON ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur");
@@ -213,7 +213,7 @@ function exec_spiplistes_courrier_gerer () {
 				$statut = $change_statut;
 			}
 			else if($change_statut == _SPIPLISTES_STATUT_STOPE){
-				spiplistes_courrier_supprimer_envois('id_courrier', $id_courrier);
+				spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 				spiplistes_log("ID_COURRIER #$id_courrier CANCELLED BY ID_AUTEUR #$connect_id_auteur");
 			}
 			/* futur

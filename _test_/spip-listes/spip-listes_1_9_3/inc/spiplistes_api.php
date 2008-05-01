@@ -79,7 +79,7 @@ function spiplistes_singulier_pluriel_str_get ($var, $str_sing, $str_plur, $retu
 	return($result);
 }
 
-function spiplistes_nb_courriers_en_cours($id_courrier = 0) {
+function spiplistes_courriers_en_cours_count($id_courrier = 0) {
 	if($id_courrier) {
 		$n =
 			(($row = spip_fetch_array(spip_query(
@@ -751,7 +751,7 @@ spiplistes_log("AUTOCRON nb courriers prets envoi $n", _SPIPLISTES_LOG_DEBUG);
 			. "<div style='padding : 10px;text-align:center'><img alt='' src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_distribution-48.gif' /></div>"
 			. "<div id='meleuse'>"
 			.	(
-					($total = spiplistes_nb_courriers_en_cours())
+					($total = spiplistes_courriers_en_cours_count())
 					?	""
 						. "<p align='center' id='envoi_statut'>"._T('spiplistes:envoi_en_cours')." "
 						. "<strong id='envois_restants'>$n</strong>/<span id='envois_total'>$total</span> (<span id='envois_restant_pourcent'>"

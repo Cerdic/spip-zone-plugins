@@ -78,14 +78,7 @@ function spiplistes_destiner_envoi ($id_courrier, $id_liste, $flag_editable
 			foreach(
 				spiplistes_listes_lister(
 					array('id_liste', 'titre') 
-					, array(
-						_SPIPLISTES_PRIVATE_LIST
-						, _SPIPLISTES_PUBLIC_LIST
-						, _SPIPLISTES_DAILY_LIST
-						, _SPIPLISTES_WEEKLY_LIST
-						, _SPIPLISTES_MONTHLY_LIST
-						, _SPIPLISTES_YEARLY_LIST
-					) 
+					, explode(";", _SPIPLISTES_LISTES_STATUTS_OK)
 				) as $row) {
 				$checked = ($id_liste == $row['id_liste']) ? "checked='checked'" : "";
 				$masque .= "<option value='" . $row['id_liste'] . "' $checked>" . $row['titre'] . "</option>\n";
