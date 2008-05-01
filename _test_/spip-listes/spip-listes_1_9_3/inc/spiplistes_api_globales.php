@@ -35,7 +35,7 @@ function spiplistes_log($texte, $level = LOG_WARNING) {
 	) {
 		__syslog_trace($texte, $level);
 	}
-	else if($level < LOG_DEBUG) {
+	else if($level <= LOG_DEBUG) {
 		// Taille du log SPIP trop courte en 192
 		// Ne pas envoyer si DEBUG sinon tronque sans cesse
 		// En 193, modifier $taille_des_logs

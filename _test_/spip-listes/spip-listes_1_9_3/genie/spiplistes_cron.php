@@ -49,8 +49,6 @@ function cron_spiplistes_cron ($last_time) {
 	include_spip('inc/spiplistes_api_courrier');
 	include_spip('inc/spiplistes_api_abstract_sql');
 
-spiplistes_log("CRON: cron_spiplistes_cron() <<", _SPIPLISTES_LOG_DEBUG);
-		
 	$current_time = time();
 
 	// initialise les options
