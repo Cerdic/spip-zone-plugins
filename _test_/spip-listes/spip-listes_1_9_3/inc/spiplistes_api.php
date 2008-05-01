@@ -149,7 +149,7 @@ function spiplistes_listes_supprimer_liste ($id_liste) {
 	);
 }
 
-// CP-2080430: renvoie tableau liste des listes
+// CP-20080430: renvoie tableau liste des listes
 function spiplistes_listes_lister ($select = "*", $where = "") {
 	if($where) {
 		// spip_mysql_select() join AND par défaut
@@ -372,14 +372,12 @@ function spiplistes_courrier_id_auteur_get ($id_courrier) {
 }
 
 // renvoie ID du moderateur de la liste
-function spiplistes_mod_listes_get_id_auteur($id_liste) {
-	$result = false;
+function spiplistes_mod_listes_get_id_auteur ($id_liste) {
 	$id_liste = intval($id_liste);
-	if($id_liste>0) {
-		$result = spip_query("SELECT id_auteur FROM spip_auteurs_mod_listes WHERE id_liste=$id_liste LIMIT 1");
-		$result = (($row = spip_fetch_array($result)) && ($row['id_auteur'] > 0)) ? $row['id_auteur'] : false;
+	if($id_liste > 0) {
+		return(sql_getfetsel('id_auteur', 'spip_auteurs_mod_listes', "id_liste=".sql_quote($id_liste)." LIMIT 1"));
 	}
-	return($result);
+	return(0);
 }
 
 // boite information avec juste titre et id

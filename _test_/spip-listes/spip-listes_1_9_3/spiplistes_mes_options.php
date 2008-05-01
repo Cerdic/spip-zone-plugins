@@ -76,7 +76,6 @@ define("_SPIPLISTES_LISTES_STATUTS_OK",
 	. ";" . _SPIPLISTES_WEEKLY_LIST
 	. ";" . _SPIPLISTES_MONTHLY_LIST
 	. ";" . _SPIPLISTES_YEARLY_LIST
-	. ";"._SPIPLISTES_TRASH_LIST
 	);
 
 // statuts des listes tels qu'affichées en liste 

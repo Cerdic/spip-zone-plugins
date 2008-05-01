@@ -39,11 +39,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	// - si periode < 0, repasse la liste en dormeuse
 
 	// Precision sur la table spip_listes:
-	// 'date': date d'envoi souhaitee
-	// 'maj': date d'envoi du courrier mis a  jour par cron.
+	// 'date': date d'envoi souhaitee (prochain envoi)
+	// 'maj': date d'envoi du courrier mis a' jour par cron.
 	
+/*
+	renvoie:
+	- nul, si la tache n'a pas a etre effectuee
+	- positif, si la tache a ete effectuee
+	- negatif, si la tache doit etre poursuivie ou recommencee
+
+*/
+
 function cron_spiplistes_cron ($last_time) { 
-	
+
 	include_spip('inc/utils');
 	include_spip('inc/spiplistes_api_globales');
 	include_spip('base/spiplistes_tables');
@@ -61,16 +69,14 @@ function cron_spiplistes_cron ($last_time) {
 	}
 
 	$sql_select = "id_liste,titre,titre_message,date,maj,message_auto,periode,lang,patron,statut";
+	$sql_where = "statut=".implode(" OR statut=", array_map("sql_quote", explode(";", _SPIPLISTES_LISTES_STATUTS_OK)));
 
-	// demande les listes auto valides
+	// demande les listes auto a' envoyer (date <= maintenant)
 	$sql_where = "message_auto='oui'
 			AND (date > 0) 
-			AND (
-				statut=".sql_quote(_SPIPLISTES_PUBLIC_LIST)."
-				OR statut=".sql_quote(_SPIPLISTES_PRIVATE_LIST)." 
-				OR statut=".sql_quote(_SPIPLISTES_MONTHLY_LIST)."
-				)
-			AND (date BETWEEN 0 AND NOW())"
+			AND (date BETWEEN 0 AND NOW())
+			AND (".$sql_where.")
+			"
 		;
 	$listes_privees_et_publiques = sql_select(
 		explode(',', $sql_select)
@@ -78,14 +84,14 @@ function cron_spiplistes_cron ($last_time) {
 		, $sql_where
 		);
 	
-	$nb_listes = sql_count($listes_privees_et_publiques);
+	$nb_listes_ok = sql_count($listes_privees_et_publiques);
 	
-spiplistes_log("CRON: nb listes ok: ".$nb_listes, _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("CRON: nb listes ok: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 
 	if($opt_suspendre_trieuse == 'oui') {
 		spiplistes_log("TRI: SUSPEND MODE !!!");
-		if($nb_listes) {
-			return(0 - $nb_listes);
+		if($nb_listes_ok) {
+			return(0 - $nb_listes_ok);
 		}
 		else {
 			include_spip('inc/spiplistes_meleuse');
@@ -93,113 +99,116 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, _SPIPLISTES_LOG_DEBUG);
 		}
 	}
 
-	while($row = sql_fetch($listes_privees_et_publiques)) {
-	
-		// initalise les variables
-		foreach(explode(",", $sql_select) as $key) {
-			$$key = $row[$key];
-		}
-		$id_liste = intval($id_liste);
-		$periode = intval($periode);
-		$dernier_envoi = $maj;
-	
-		// demande id_auteur de la liste pour la signer
-		$id_auteur = spiplistes_mod_listes_get_id_auteur($id_liste);
+	if($nb_listes_ok > 0) {
+		while($row = sql_fetch($listes_privees_et_publiques)) {
+		//while(false) {
 		
-		// Tampon date prochain envoi (dans 'date') et d'envoi (dans 'maj')
-		$sql_set = $next_time = false;
-		if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_OK))) {
-			switch($statut) {
-				case _SPIPLISTES_YEARLY_LIST:
-					$next_time = mktime(0, 0, 0, date("m"), date("j"), date("Y")+1);
-					break;
-				case _SPIPLISTES_MONTHLY_LIST:
-					$next_time = mktime(0, 0, 0, date("m")+1, date("j"), date("Y"));
-					break;
-				case _SPIPLISTES_WEEKLY_LIST:
-					$next_time = mktime(0, 0, 0, date("m"), date("j")+7, date("Y"));
-					break;
-				case _SPIPLISTES_DAILY_LIST:
-					$next_time = mktime(0, 0, 0, date("m"), date("j")+1, date("Y"));
-					break;
-				default:
-					$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote("non"));
-					break;
+			// initalise les variables
+			foreach(explode(",", $sql_select) as $key) {
+				$$key = $row[$key];
 			}
-		}
-		else if($periode) {
-			$next_time = time() + (_SPIPLISTES_TIME_1_DAY * $periode);
-		}
-		else {
-			// pas de période ? c'est un envoyer_maintenant.
-			// Applique le tampon date d'envoi et repasse la liste en auto non
-			$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote("non"));
-		}
-		if($next_time || count($sql_set)) {
-			if($next_time) {
-				$sql_set = array('date' => sql_quote(normaliser_date($next_time)));
+			$id_liste = intval($id_liste);
+			$periode = intval($periode);
+			$dernier_envoi = $maj;
+		
+			// demande id_auteur de la liste pour la signer
+			$id_auteur = spiplistes_mod_listes_get_id_auteur($id_liste);
+			
+			// Tampon date prochain envoi (dans 'date') et d'envoi (dans 'maj')
+			$sql_set = $next_time = false;
+			if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_OK))) {
+				switch($statut) {
+					case _SPIPLISTES_YEARLY_LIST:
+						$next_time = mktime(0, 0, 0, date("m"), date("j"), date("Y")+1);
+						break;
+					case _SPIPLISTES_MONTHLY_LIST:
+						$next_time = mktime(0, 0, 0, date("m")+1, date("j"), date("Y"));
+						break;
+					case _SPIPLISTES_WEEKLY_LIST:
+						$next_time = mktime(0, 0, 0, date("m"), date("j")+7, date("Y"));
+						break;
+					case _SPIPLISTES_DAILY_LIST:
+						$next_time = mktime(0, 0, 0, date("m"), date("j")+1, date("Y"));
+						break;
+					default:
+						$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote("non"));
+						break;
+				}
 			}
-			$sql_set['maj'] = 'NOW()';
-			sql_update('spip_listes'
-				, $sql_set
-				, "id_liste=".sql_quote($id_liste)." LIMIT 1"
-				);
-		}
-
-
-		/////////////////////////////
-		// preparation du courrier à placer dans le panier
-		// en cas de période, la date est dans le passé pour avoir les elements publies depuis cette date
-		include_spip('public/assembler');
-		$contexte_patron = array('date' => $dernier_envoi, 'patron'=>$patron, 'lang'=>$lang);
-		$texte = recuperer_fond('patrons/'.$patron, $contexte_patron);
-		$titre = ($titre_message =="") ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
-		
-//spiplistes_log("CRON: Titre => $titre", _SPIPLISTES_LOG_DEBUG);
-
-		$taille_courrier_ok = (spiplistes_strlen(spiplistes_courrier_version_texte($texte)) > 10);
-
-		if($taille_courrier_ok) {
-			include_spip('inc/filtres');
-			$texte = liens_absolus($texte);
-			$date_debut_envoi = $date_fin_envoi = "''";
-			$statut = _SPIPLISTES_STATUT_ENCOURS;
-		}
-		else {
-//spiplistes_log("CRON: courrier vide !!", _SPIPLISTES_LOG_DEBUG);
-			$date_debut_envoi = "date_debut_envoi=NOW()";
-			$date_fin_envoi = "date_fin_envoi=NOW()";
-			$statut = _SPIPLISTES_STATUT_VIDE;
-		}
-		
-		/////////////////////////////
-		// Place le courrier dans le casier
-		sql_insert(
-			'spip_courriers'
-			, array(
-				'titre' => sql_quote($titre)
-				, 'date' => 'NOW()'
-				, 'statut' => sql_quote($statut)
-				, 'type' => sql_quote(_SPIPLISTES_TYPE_LISTEAUTO)
-				, 'id_auteur' => sql_quote($id_auteur)
-				, 'id_liste' => sql_quote($id_liste)
-				, 'date_debut_envoi' => sql_quote($date_debut_envoi)
-				, 'date_fin_envoi' => sql_quote($date_fin_envoi)
-				, 'texte' => sql_quote($texte)
-			)
-		);
-
-		/////////////////////////////
-		// Ajoute les abonnés dans la queue (spip_auteurs_courriers)
-		if($taille_courrier_ok) {
-			$id_courrier = spip_insert_id();
-			spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste);
-		} 
-		else {
-			// contenu du courrier vide
-spiplistes_log("CRON: envoi mail nouveautes : courrier vide", _SPIPLISTES_LOG_DEBUG);
-		} 
-	}// end while // fin traitement des listes
+			else if($periode) {
+				$next_time = time() + (_SPIPLISTES_TIME_1_DAY * $periode);
+			}
+			else {
+				// pas de période ? c'est un envoyer_maintenant.
+				// Applique le tampon date d'envoi et repasse la liste en auto non
+				$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote("non"));
+			}
+			if($next_time || count($sql_set)) {
+				if($next_time) {
+					$sql_set = array('date' => sql_quote(normaliser_date($next_time)));
+				}
+				$sql_set['maj'] = 'NOW()';
+				sql_update('spip_listes'
+					, $sql_set
+					, "id_liste=".sql_quote($id_liste)." LIMIT 1"
+					);
+			}
+	
+	
+			/////////////////////////////
+			// preparation du courrier à placer dans le panier
+			// en cas de période, la date est dans le passé pour avoir les elements publies depuis cette date
+			include_spip('public/assembler');
+			$contexte_patron = array('date' => $dernier_envoi, 'patron'=>$patron, 'lang'=>$lang);
+			$texte = recuperer_fond('patrons/'.$patron, $contexte_patron);
+			$titre = ($titre_message =="") ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
+			
+	//spiplistes_log("CRON: Titre => $titre", _SPIPLISTES_LOG_DEBUG);
+	
+			$taille_courrier_ok = (spiplistes_strlen(spiplistes_courrier_version_texte($texte)) > 10);
+	
+			if($taille_courrier_ok) {
+				include_spip('inc/filtres');
+				$texte = liens_absolus($texte);
+				$date_debut_envoi = $date_fin_envoi = "''";
+				$statut = _SPIPLISTES_STATUT_ENCOURS;
+			}
+			else {
+	//spiplistes_log("CRON: courrier vide !!", _SPIPLISTES_LOG_DEBUG);
+				$date_debut_envoi = "date_debut_envoi=NOW()";
+				$date_fin_envoi = "date_fin_envoi=NOW()";
+				$statut = _SPIPLISTES_STATUT_VIDE;
+			}
+			
+			/////////////////////////////
+			// Place le courrier dans le casier
+			sql_insert(
+				'spip_courriers'
+				, array(
+					'titre' => sql_quote($titre)
+					, 'date' => 'NOW()'
+					, 'statut' => sql_quote($statut)
+					, 'type' => sql_quote(_SPIPLISTES_TYPE_LISTEAUTO)
+					, 'id_auteur' => sql_quote($id_auteur)
+					, 'id_liste' => sql_quote($id_liste)
+					, 'date_debut_envoi' => $date_debut_envoi
+					, 'date_fin_envoi' => $date_fin_envoi
+					, 'texte' => sql_quote($texte)
+				)
+			);
+	
+			/////////////////////////////
+			// Ajoute les abonnés dans la queue (spip_auteurs_courriers)
+			if($taille_courrier_ok) {
+				$id_courrier = spip_insert_id();
+				spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste);
+			} 
+			else {
+				// contenu du courrier vide
+	spiplistes_log("CRON: envoi mail nouveautes : courrier vide", _SPIPLISTES_LOG_DEBUG);
+			} 
+		}// end while // fin traitement des listes
+	}	
 	
 	/////////////////////////////
 	// Si panier courriers des encours plein, 

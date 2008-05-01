@@ -50,7 +50,7 @@ include_spip('inc/spiplistes_api_globales');
 */
 	
 function spiplistes_meleuse () { 
-//return(0);
+
 spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 
 	include_spip('inc/meta');

@@ -272,13 +272,14 @@ spiplistes_log("ERREUR spiplistes_courrier_remplir_queue_envois($id_courrier, $i
 		}
 		
 		// Compter le nombre de destinaires
-		$row = sql_fetch(
+		$row = sql_fetch(sql_select(
 			"COUNT(id_auteur) AS n"
 			, "spip_auteurs_courriers"
 			, "id_courrier=".sql_quote($id_courrier)." AND statut=".sql_quote('a_envoyer')
-			);
+			)
+		);
 		
-		if($row) {
+		if($row && $row['n']) {
 			if(!sql_updateq('spip_courriers'
 				, array('total_abonnes' => sql_quote($row['n']))
 				, "id_courrier="._q($id_courrier)

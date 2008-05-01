@@ -240,7 +240,7 @@ function compat_spiplistes_defs_dist() {
 			'(
 				$res, $serveur=\'\', $option=true
 			) {
-				if($res) return mysql_num_rows($res);
+				return ($res ? mysql_num_rows($res) : 0);
 			}'
 
 		/*
