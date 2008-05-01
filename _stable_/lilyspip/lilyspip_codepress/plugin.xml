@@ -8,10 +8,10 @@ _ Codepress : Fernando M.A.d.S. and Michael Hurni - Distribu&eacute; sous licenc
 _ Lilypond css for Codepress : Valentin Villenave
 	</auteur>
 	<version> <!-- Version du plugin -->
-	1.2
+	1.3
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	test
+	stable
 	</etat>
 	<description>
 	Ins&eacute;rer des notations musicales en utilisant Lilypond : http://lilypond.org/web/index

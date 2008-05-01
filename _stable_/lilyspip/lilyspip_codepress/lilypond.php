@@ -115,10 +115,10 @@ function lilyspip_genere_image($tex) {
 
 
 
-// echapper les caracteres que typo() veut marabouter
+// convertir les caracteres que typo() a marabouté
 function caracteres_alt($texte) {
-	foreach (array(';', '{', '}', ':',"?", '!', '"', '\'', '<', '>') as $bug)
-		$texte = str_replace($bug, "&#".ord($bug).";", $texte);
+	//foreach ('&#8217;' as $bug)
+	$texte = str_replace('&#8217;', "'" , $texte);
 	return $texte;
 }
 
@@ -133,9 +133,9 @@ function lilyspip_pre_propre($letexte) {
 	preg_match_all("|<lilypond>(.*?)</lilypond>|s", $letexte, $regs, PREG_SET_ORDER);
 
 	foreach ($regs as $lily) {
-		$mid = lilyspip_genere_midi($lily[1]);
+		$mid = lilyspip_genere_midi(caracteres_alt($lily[1]));
 		if ($mid == "") $aendtag = ""; else $aendtag = "</a>";
-		$img = "\n<div class=\"lilypond\" >".$mid.lilyspip_genere_image($lily[1]).$aendtag."</div>\n";
+		$img = "\n<div class=\"lilypond\" >".$mid.lilyspip_genere_image(caracteres_alt($lily[1])).$aendtag."</div>\n";
 		
 		$letexte = str_replace($lily[0], $img, $letexte);
 	}		
