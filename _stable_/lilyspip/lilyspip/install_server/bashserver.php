@@ -14,7 +14,7 @@
 // Necessite l'installation de lilypond et ImageMagick
 $convert_bin = "/usr/bin/convert";
 $script="/home/script/lilypond.sh";
-$lilypond_version = "2.10.15";
+$lilypond_version = "2.10.33";
 
 // Cache du serveur
 $cache_dir = "CACHE/lilyspip";
@@ -33,7 +33,7 @@ function lilypond_enhance($texte,$code_format) {
 	global $lilypond_version;
 	
 	if ($code_format=="test"){//Pour afficher la version dans les parametres du Plugin
-	$textem = "\version \"$lilypond_version\"
+	$textem = "\\"."version \"$lilypond_version\"
 	\header {}
 	\paper {
 		ragged-right = ##t
@@ -45,8 +45,7 @@ function lilypond_enhance($texte,$code_format) {
 	}
 	
 	else {// Correction pour supprimer le bas de page et centrer l'image
-	
-	$textem = "\version \"$lilypond_version\"
+	$textem = "\\"."version \"$lilypond_version\"
 	\header {
 		tagline= \"\"
 	}

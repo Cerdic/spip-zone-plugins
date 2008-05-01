@@ -8,7 +8,7 @@
 * Installation PHP non sécurisée *
 **********************************
 
-Installer Lilypond en utilisant le script d’installation : http://lilypond.org/web/install/
+Installer Lilypond en utilisant le script d'installation : http://lilypond.org/web/install/
 
 	$ sudo ./lilypond-2.10.11-1.linux-x86.sh
 	Password:
@@ -32,7 +32,7 @@ Installer Lilypond en utilisant le script d’installation : http://lilypond.org/w
 	For license and warranty information, consult
 	/usr/local/lilypond/license/README
 
-Puis ImageMagick s’il n’est pas déjà installé : http://www.imagemagick.org/script/install-source.php#unix
+Puis ImageMagick s'il n'est pas déjà installé : http://www.imagemagick.org/script/install-source.php#unix
 disponible aussi dans les dépots Ubuntu).
 
 Copier le fichier "server.php" dans le dossier du serveur Web et adapter les variables
@@ -42,7 +42,7 @@ globales :
 	$lilypond_bin = "/usr/local/bin/lilypond" ;
 	$lilypond_version = "2.10.11" ;
 
-Créer le dossier "CACHE/lilyserv/" à la racine du dossier Web.
+Créer le dossier "CACHE/lilyspip/" au même niveau que le fichier bashserver.php.
 
 Lilypond et exécuté en mode sécurisé (mode safe) mais il peut boucler indéfiniment.
 
@@ -52,14 +52,14 @@ Lilypond et exécuté en mode sécurisé (mode safe) mais il peut boucler indéfinime
 * Installation du serveur en utilisant un script bash (recommandée) *
 *********************************************************************
 
-Cette installation utilise la commande bash "ulimit -t" pour limiter la durée d’exécution
+Cette installation utilise la commande bash "ulimit -t" pour limiter la durée d'exécution
 de Lilypond.
 
-La procédure d’installation de Lilypond et ImageMagick est identique à celle du chapitre
+La procédure d'installation de Lilypond et ImageMagick est identique à celle du chapitre
 précédent.
 
 Copier dans un dossier extérieur au serveur Web (par exemple /home/script/) le script
-"lilypond.sh" puis l’adapter si nécessaire :
+"lilypond.sh" puis l'adapter si nécessaire :
 
 	#!/bin/sh
 	ulimit -t 60
@@ -75,10 +75,10 @@ globales :
 	$script="/home/script/lilypond.sh" ; //chemin du script bash
 	$lilypond_version = "2.10.11" ;
 
-Créer le dossier "CACHE/lilyserv/" à la racine du dossier Web.
+Créer le dossier "CACHE/lilysip/" au même niveau que le fichier bashserver.php.
 
 Si PHP est utilisé en safe mode, les fonctions comme exec() et toutes celles qui
-permettent l’exécution en ligne de commande refuseront d’exécuter des programmes qui
+permettent l'exécution en ligne de commande refuseront d'exécuter des programmes qui
 ne sont pas dans le dossier safe_mode_exec_dir.
 
 
@@ -87,19 +87,19 @@ ne sont pas dans le dossier safe_mode_exec_dir.
 * Installation du serveur en mode jail en utilisant un script bash *
 ********************************************************************
 
-Cette installation permettant d’utiliser toutes les fonctionnalités de Lilypond (include ...)
-n’a pas été testée.
+Cette installation permettant d'utiliser toutes les fonctionnalités de Lilypond (include ...)
+n'a pas été testée.
 
 La commande à utiliser est :
 
 	-j,--jail=user,group,jail,dir
 
-Elle permet de spécifier l’utilisateur disposant de droits restreints, le groupe et le dossier
-d’exécution de Lilypond (cf. http://lilypond.org/doc/v2.11/Documentation/user/lilypond/Invoking-lilypond).
+Elle permet de spécifier l'utilisateur disposant de droits restreints, le groupe et le dossier
+d'exécution de Lilypond (cf. http://lilypond.org/doc/v2.11/Documentation/user/lilypond/Invoking-lilypond).
 
-Pour pouvoir utiliser le mode jail il est nécessaire d’exécuter Lilypond avec sudo sans mot
+Pour pouvoir utiliser le mode jail il est nécessaire d'exécuter Lilypond avec sudo sans mot
 de passe en ajoutant dans le fichier "/etc/sudoers" :
 
 	utilisateur ALL=NOPASSWD:/home/script/lilyspip.sh
 
-où l’utilisateur est "apache" ou "nobody" suivant la version.
+où l'utilisateur est "apache" ou "nobody" suivant la version.
