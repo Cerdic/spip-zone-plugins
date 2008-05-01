@@ -31,7 +31,7 @@ function exec_visitesvirtuelles_toutes_dist()
 		echo "<div align='right'>";
 		$link=generer_url_ecrire('visitesvirtuelles_edit', 'new=oui');
 		$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
-		icone(_T("panoramas:icone_creer_visitevirtuelle"), $link, "../"._DIR_PLUGIN_PANORAMAS. "img_pack/logo_panoramas.png", "creer.gif");
+		icone(_T("panoramas:icone_creer_visitevirtuelle"), $link, "../"._DIR_PLUGIN_PANORAMAS. "img_pack/planet_costea_bogdan_r.png", "creer.gif");
 		echo "</div>";
 	}
 	

@@ -7,7 +7,7 @@ function Panoramas_visitevirtuelle_confirme_suppression($id_visite,$nb_lieux,$re
 	global $spip_lang_right;
 	$out = "<div class='verdana3'>";
 	if ($nb_lieux){
-			$out .= "<p><strong>"._T("panoramas:attention")."</strong> ";
+			$out .= "<p><strong>"._T("panoramas:attention_visite")."</strong> ";
 			$out .= _T("panoramas:info_supprimer_visite")."</p>\n";
 	}
 	else{
@@ -41,6 +41,7 @@ function exec_visitesvirtuelles_edit(){
 	$id_visite = intval(_request('id_visite'));
 	
 	$new = _request('new');
+	
 	$supp_visite = intval(_request('supp_visite'));
 	$supp_rejet = _request('supp_rejet');
 	$titre = _request('titre');
@@ -61,7 +62,7 @@ function exec_visitesvirtuelles_edit(){
 		if ($row = spip_fetch_array(spip_query("SELECT COUNT(*) AS num FROM spip_visites_virtuelles_lieux WHERE id_visite="._q($id_visite))))
 			$nb_lieux = $row['num'];
 
-
+	
 	$redirect = generer_url_ecrire('visitesvirtuelles_edit',(intval($id_visite)?"id_visite=$id_visite":""));
 	if ($retour) 
 		$redirect = parametre_url($redirect,"retour",urlencode($retour));
@@ -75,32 +76,13 @@ function exec_visitesvirtuelles_edit(){
 			$id_visite = $row['id_visite'];
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
+			$largeur = $row['largeur'];
+			$hauteur = $row['hauteur'];
+			$id_lieu_depart = $row['id_lieu_depart'];
 		}
 		$focus = "";
 		$action_link = generer_action_auteur("visitesvirtuelles_edit","$id_visite",urlencode($redirect));
 	}
-
-	$ajax_charset = _request('var_ajaxcharset');
-	$bloc = _request('bloc');
-	if ($ajax_charset && $bloc=='dummy') {
-		ajax_retour("");
-	}
-	if ($ajax_charset && $bloc=='apercu') {
-		include_spip('public/assembler');
-		$GLOBALS['var_mode']='calcul';
-		$apercu = recuperer_fond('modeles/visitevirtuelle',array('id_visite'=>$id_visite,'var_mode'=>'calcul'));
-		ajax_retour($apercu);
-	}
-	if ($ajax_charset && $bloc=='resume') {
-		include_spip('public/assembler');
-		$GLOBALS['var_mode']='calcul';
-		$apercu = recuperer_fond('modeles/visitevirtuelle',array('id_visite'=>$id_visite,'var_mode'=>'calcul'));
-		ajax_retour(contenu_boite_resume($id_visite, $row, $apercu));
-	}
-	if ($ajax_charset && $bloc=='proprietes') {
-		ajax_retour(boite_proprietes($id_visite, $row, $focus, $action_link, $redirect));
-	}
-	$bloc = explode("-",$bloc);
 		
 	
 	debut_page("&laquo; $titre &raquo;", "documents", "visitesvirtuelles","");
@@ -119,10 +101,9 @@ function exec_visitesvirtuelles_edit(){
 	// gauche raccourcis ---------------------------------------------------------------
 	debut_gauche();
 	
-	echo "<br /><br />\n";
 	debut_boite_info();
 	if ($id_visite>0)
-		echo "<div align='center' style='font-size:3em;font-weight:bold;'>$id_visite</div>\n";
+		echo "<div class=\"verdana1 spip_xx-small\" style=\"font-weight: bold; text-align: center; text-transform: uppercase;\">"._T("panoramas:visite_numero")."<div align='center' style='font-size:3em;font-weight:bold;'>$id_visite</div></div>\n";
 	if ($retour) {
 		icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_PANORAMAS."img_pack/logo_panoramas.png", "rien.gif",'right');
 	}
@@ -151,40 +132,90 @@ function exec_visitesvirtuelles_edit(){
 	
 		if ($supp_visite && $supp_rejet==NULL)
 			echo Panoramas_visitevirtuelle_confirme_suppression($id_visite,$nb_lieux,$redirect,$retour);
-		echo "<div id='barre_onglets'>";
-		echo debut_onglet();
-		echo onglet(_L("Aper&ccedil;u"),ancre_url(self(),"resume"),'','resume');
-		echo onglet(_L("Propri&eacute;t&eacute;s"),ancre_url(self(),"proprietes"),'','proprietes');
-		echo onglet(_L("Lieux"),ancre_url(self(),"champs"),'','champs');
-		echo fin_onglet();
-		echo "</div>";
+		
 	}
 
 	$out = "";
-	if ($id_visite){
-		$out .= "<div id='resume' name='resume'>";
-		include_spip('public/assembler');
-		$GLOBALS['var_mode']='calcul';
-		$out .= recuperer_fond('modeles/visitevirtuelle',array('id_visite'=>$id_visite,'var_mode'=>'calcul'));
-		$out .= "</div>";
-	}
-
+	
 	// centre proprietes ---------------------------------------------------------------
-	$out .= "<div id='proprietes' name='proprietes'>";
-	$out .= Panoramas_boite_proprietes($id_visite, $row, $focus, $action_link, $redirect);
+	$out .= "<div id='proprietes'>";
+	$out .= Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $action_link, $redirect);
 	$out .= "</div>";
 
-	// edition des lieux ---------------------------------------------------------------
-	$out .= "<div id='Lieux' name='lieux'>";
-	//$out .= "Panoramas_zone_edition_lieux($id_visite, $champ_visible, $nouveau_champ,$redirect)";
-	$out .= "</div>\n";
-
 	echo $out;
+
+	
+	
 
 	if ($GLOBALS['spip_version_code']>=1.9203)
 		echo fin_gauche();
 	echo fin_page();
 }
+
+//
+// Edition des visites virtuelles
+//
+function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $action_link, $redirect) {
+	
+
+	$out = "";
+	$out .= "<p>";
+	$out .= Panoramas_debut_cadre_formulaire('',true);
+
+	$action_link_noredir = parametre_url($action_link,'redirect','');
+	$out .= "<div class='verdana2'>";
+	$out .= "<form class='ajaxAction' method='POST' action='$action_link_noredir'" .
+		" style='border: 0px; margin: 0px;'>" .
+		form_hidden($action_link_noredir) .
+		"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
+		"<input type='hidden' name='idtarget' value='proprietes' />" ;
+
+	$titre = entites_html($row['titre']);
+	$descriptif = entites_html($row['descriptif']);
+	$largeur = intval($row['largeur']);	
+	$hauteur = intval($row['hauteur']);	
+	$id_lieu_depart = intval($row['id_lieu_depart']);	
+
+
+	$out .= "<strong><label for='titre_visite'>"._T("panoramas:titre_visite")."</label></strong> "._T('info_obligatoire_02');
+	$out .= "<br />";
+	$out .= "<input type='text' name='titre' id='titre_visite' class='formo $focus' ".
+		"value=\"".$titre."\" size='40' /><br />\n";
+
+	$out .= "<strong><label for='desc_visite'>"._T('info_descriptif')."</label></strong>";
+	$out .= "<br />";
+	$out .= "<textarea name='descriptif' id='desc_visite' class='forml' rows='4' cols='40' wrap='soft'>";
+	$out .= $descriptif;
+	$out .= "</textarea><br />\n";
+
+	$out .= "<strong><label for='largeur_visite'>"._T("panoramas:largeur")."</label></strong> ";
+	$out .= "<input type='text' name='largeur' id='largeur_visite' class='formo $focus' ".
+		"value=\"".$largeur."\" size='5' /><br />\n";
+	
+	$out .= "<strong><label for='hauteur_visite'>"._T("panoramas:hauteur")."</label></strong> ";
+	$out .= "<input type='text' name='hauteur' id='hauteur_visite' class='formo $focus' ".
+		"value=\"".$hauteur."\" size='5' /><br />\n";
+
+
+	$out .= "<strong><label for='id_lieu_depart_visite'>"._T("panoramas:id_lieu_depart")."</label></strong> ";
+	$out .= "<input type='text' name='id_lieu_depart' id='id_lieu_depart_visite' class='formo $focus' ".
+		"value=\"".$id_lieu_depart."\" size='5' /><br />\n";
+	
+	$out .= "<div style='text-align:right'>";
+	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
+
+	$out .= "</form>";
+	$out .= "</div>";
+	
+
+	$out .= Panoramas_fin_cadre_formulaire(true);
+	$out .= "</p>";
+	return $out;
+
+
+}
+
+
 
 
 ?>

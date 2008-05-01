@@ -9,6 +9,9 @@ if (!include_spip('inc/autoriser'))
 function Visitesvirtuelles_update($id_visite){
 	$titre = _request('titre');
 	$descriptif = _request('descriptif');
+	$largeur = intval(_request('largeur'));
+	$hauteur = intval(_request('hauteur'));
+	$id_lieu_depart = intval(_request('id_lieu_depart'));
 	
 	//
 	// Modifications des donnees de base de la visite virtuelle
@@ -23,8 +26,11 @@ function Visitesvirtuelles_update($id_visite){
 	if (intval($id_visite) && $titre) {
 		$query = "UPDATE spip_visites_virtuelles SET ".
 			"titre="._q($titre).", ".
-			"descriptif="._q($descriptif).
-			"WHERE id_visite="._q($id_visite);
+			"descriptif="._q($descriptif).", ".
+			"id_lieu_depart="._q($id_lieu_depart).", ".
+			"largeur="._q($largeur).", ".
+			"hauteur="._q($hauteur).
+		" WHERE id_visite="._q($id_visite);
 		$result = spip_query($query);
 	}
 	// lecture
@@ -33,6 +39,9 @@ function Visitesvirtuelles_update($id_visite){
 		$id_visite = $row['id_visite'];
 		$titre = $row['titre'];
 		$descriptif = $row['descriptif'];
+		$largeur = $row['largeur'];
+		$hauteur = $row['hauteur'];
+		$id_lieu_depart = $row['id_lieu_depart'];
 	}
 
 	return array($id_visite);
@@ -51,6 +60,7 @@ function action_visitesvirtuelles_edit(){
 	if (verifier_action_auteur("visitesvirtuelles_edit-$arg",$hash,$id_auteur)==TRUE) {
 		$arg=explode("-",$arg);
 		$id_visite = $arg[0];
+		$id_lieu = $arg[1];
 		if ((intval($id_visite) && autoriser('modifier','visitevirtuelle',$id_visite))
 			|| (($id_visite=='new') && (autoriser('creer','visitevirtuelle'))) ) {
 			list($id_visite) = Visitesvirtuelles_update($id_visite);

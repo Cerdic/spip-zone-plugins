@@ -3,12 +3,25 @@
 	<BOUCLE_photo(DOCUMENTS){id_document=#ID_PHOTO}>
 		<img src="#URL_DOCUMENT" class="panorama#ID_LIEU" width="#LARGEUR" height="#HAUTEUR" 
 	</BOUCLE_photo>
-	 alt="#TITRE" />
+	 alt="#TITRE" usemap="map#ID_LIEU" />
+	<B_interactions>
+	<map id="map#ID_LIEU" name="map#ID_LIEU"> 
+		<BOUCLE_interactions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
+			<area shape="rect" coords="#X1,#X2,#Y1,#Y2"
+				[(#ID_ARTICLE_CIBLE|>{0}|?{' ',''}) href="#URL_PAGE{article,id_article=#ID_ARTICLE_CIBLE}"]
+				<BOUCLE_documentpointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}> href="#URL_DOCUMENT" class="thickbox"</BOUCLE_documentpointe>
+			 alt="#TITRE" />
+		</BOUCLE_interactions>
+		
+	</map>
+	</B_interactions>
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("img.panorama#ID_LIEU").panorama({
 	                auto_start: 0,
-			start_position: 1527
+			start_position: 1527[,
+			mode_360: (#BOUCLER|=={'oui'}|?{1,0})]
+
 	         });
 	});
 	</script>
