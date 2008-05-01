@@ -68,14 +68,20 @@ define("_SPIPLISTES_MONTHLY_LIST", "pub_mois");
 define("_SPIPLISTES_YEARLY_LIST", "pub_an");
 define("_SPIPLISTES_TRASH_LIST", "poublist");
 
-// statuts des listes tels qu'affichées en liste 
-define("_SPIPLISTES_LISTES_STATUTS", 
+// les statuts des listes, valides
+define("_SPIPLISTES_LISTES_STATUTS_OK", 
 	_SPIPLISTES_PRIVATE_LIST
 	. ";" . _SPIPLISTES_PUBLIC_LIST
 	. ";" . _SPIPLISTES_DAILY_LIST
 	. ";" . _SPIPLISTES_WEEKLY_LIST
 	. ";" . _SPIPLISTES_MONTHLY_LIST
 	. ";" . _SPIPLISTES_YEARLY_LIST
+	. ";"._SPIPLISTES_TRASH_LIST
+	);
+
+// statuts des listes tels qu'affichées en liste 
+define("_SPIPLISTES_LISTES_STATUTS_TOUS", 
+	_SPIPLISTES_LISTES_STATUTS_OK
 	. ";"._SPIPLISTES_TRASH_LIST
 	);
 

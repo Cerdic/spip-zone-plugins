@@ -72,7 +72,7 @@ function spiplistes_naviguer_paniers ($titre, $element, $les_statuts, $return = 
 
 function spiplistes_naviguer_paniers_listes ($titre = '', $return = false) {
 
-	$result = spiplistes_naviguer_paniers ($titre, 'listes', _SPIPLISTES_LISTES_STATUTS, true);
+	$result = spiplistes_naviguer_paniers ($titre, 'listes', _SPIPLISTES_LISTES_STATUTS_TOUS, true);
 
 	if($return) return($result);
 	else echo($result);

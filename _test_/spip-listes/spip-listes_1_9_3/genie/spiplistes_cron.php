@@ -61,12 +61,13 @@ function cron_spiplistes_cron ($last_time) {
 	$sql_select = "id_liste,titre,titre_message,date,maj,message_auto,periode,lang,patron,statut";
 
 	// demande les listes auto valides
-		//old: AND (date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE).") 
 	$sql_where = "message_auto='oui'
 			AND (date > 0) 
-			AND (statut='"._SPIPLISTES_PUBLIC_LIST."' 
-				OR statut='"._SPIPLISTES_PRIVATE_LIST."' 
-				OR statut='"._SPIPLISTES_MONTHLY_LIST."')
+			AND (
+				statut=".sql_quote(_SPIPLISTES_PUBLIC_LIST)."
+				OR statut=".sql_quote(_SPIPLISTES_PRIVATE_LIST)." 
+				OR statut=".sql_quote(_SPIPLISTES_MONTHLY_LIST)."
+				)
 			AND (date BETWEEN 0 AND NOW())"
 		;
 	$listes_privees_et_publiques = sql_select(
@@ -108,18 +109,26 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, _SPIPLISTES_LOG_DEBUG);
 //spiplistes_log("CRON: lang == $lang", _SPIPLISTES_LOG_DEBUG);
 
 		/////////////////////////////
-		// Tampon date d'envoi (dans maj)
+		// Tampon date prochain envoi (dans 'date') et d'envoi (dans 'maj')
 		$sql_set = $next_time = false;
-		if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS))) {
+		if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_OK))) {
 			switch($statut) {
+				case _SPIPLISTES_YEARLY_LIST:
+					$next_time = mktime(0, 0, 0, date("m"), date("j"), date("Y")+1);
+					break;
 				case _SPIPLISTES_MONTHLY_LIST:
-					$next_time = mktime(0, 0, 0, date("m")+1, 1, date("Y"));
+					$next_time = mktime(0, 0, 0, date("m")+1, date("j"), date("Y"));
+					break;
+				case _SPIPLISTES_WEEKLY_LIST:
+					$next_time = mktime(0, 0, 0, date("m"), date("j")+7, date("Y"));
+					break;
+				case _SPIPLISTES_DAILY_LIST:
+					$next_time = mktime(0, 0, 0, date("m"), date("j")+1, date("Y"));
 					break;
 				default:
 					$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote("non"));
 					break;
 			}
-spiplistes_log("CRON: envoyer mois ################# $statut");
 		}
 		else if($periode) {
 			$next_time = time() + (_SPIPLISTES_TIME_1_DAY * $periode);
@@ -127,7 +136,6 @@ spiplistes_log("CRON: envoyer mois ################# $statut");
 		else {
 			// pas de période ? c'est un envoyer_maintenant.
 			// Applique le tampon date d'envoi et repasse la liste en auto non
-spiplistes_log("CRON: envoyer maintenant #################");
 			$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote("non"));
 		}
 		if($next_time || count($sql_set)) {

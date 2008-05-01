@@ -170,7 +170,7 @@ function exec_spiplistes_liste_gerer () {
 			if($btn_modifier_diffusion) {
 //spiplistes_log("LISTE MODIF: btn_modifier_diffusion <<$statut", _SPIPLISTES_LOG_DEBUG);
 				// Modifier le statut ?
-				if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS)) && ($statut!=$current_liste['statut'])) {
+				if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_TOUS)) && ($statut!=$current_liste['statut'])) {
 					$sql_champs['statut'] = $statut;
 					// si la liste passe en privee, retire les invites
 					if($statut == _SPIPLISTES_PRIVATE_LIST) {
