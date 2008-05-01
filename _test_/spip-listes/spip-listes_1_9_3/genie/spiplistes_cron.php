@@ -40,7 +40,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	// 'date': date d'envoi souhaitee
 	// 'maj': date d'envoi du courrier mis a  jour par cron.
 	
-function cron_spiplistes_cron ($last_time) {
+function cron_spiplistes_cron ($last_time) { 
 	
 	include_spip('inc/utils');
 	include_spip('inc/spiplistes_api_globales');
@@ -61,14 +61,19 @@ function cron_spiplistes_cron ($last_time) {
 	$sql_select = "id_liste,titre,titre_message,date,maj,message_auto,periode,lang,patron,statut";
 
 	// demande les listes auto valides
-	$sql_query = "SELECT $sql_select FROM spip_listes 
-		WHERE message_auto='oui'
-			AND (date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE).") 
-			AND (statut='"._SPIPLISTES_PUBLIC_LIST."' OR statut='"._SPIPLISTES_PRIVATE_LIST."' OR statut='"._SPIPLISTES_MONTHLY_LIST."')
+		//old: AND (date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE).") 
+	$sql_where = "message_auto='oui'
+			AND (date > 0) 
+			AND (statut='"._SPIPLISTES_PUBLIC_LIST."' 
+				OR statut='"._SPIPLISTES_PRIVATE_LIST."' 
+				OR statut='"._SPIPLISTES_MONTHLY_LIST."')
 			AND (date BETWEEN 0 AND NOW())"
 		;
-		
-	$listes_privees_et_publiques = spip_query ($sql_query);
+	$listes_privees_et_publiques = sql_select(
+		explode(',', $sql_select)
+		, 'spip_listes'
+		, $sql_where
+		);
 	
 	$nb_listes = sql_count($listes_privees_et_publiques);
 	
@@ -85,7 +90,7 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, _SPIPLISTES_LOG_DEBUG);
 		}
 	}
 
-	while($row = spip_fetch_array($listes_privees_et_publiques)) {
+	while($row = sql_fetch($listes_privees_et_publiques)) {
 	
 //spiplistes_log("CRON: job id_liste: ".$row['id_liste'], _SPIPLISTES_LOG_DEBUG);
 		// initalise les variables
@@ -104,24 +109,38 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, _SPIPLISTES_LOG_DEBUG);
 
 		/////////////////////////////
 		// Tampon date d'envoi (dans maj)
-		$sql_set = "";
-		if($statut == _SPIPLISTES_MONTHLY_LIST) {
-			$next_time = mktime(0, 0, 0, date("m")+1, 1, date("Y"));
-			$sql_set = "date='" . __mysql_date_time($next_time) . "',maj=NOW()";
+		$sql_set = $next_time = false;
+		if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS))) {
+			switch($statut) {
+				case _SPIPLISTES_MONTHLY_LIST:
+					$next_time = mktime(0, 0, 0, date("m")+1, 1, date("Y"));
+					break;
+				default:
+					$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote("non"));
+					break;
+			}
+spiplistes_log("CRON: envoyer mois ################# $statut");
 		}
 		else if($periode) {
 			$next_time = time() + (_SPIPLISTES_TIME_1_DAY * $periode);
-			$sql_set = "date='" . __mysql_date_time($next_time) . "',maj=NOW()";
 		}
 		else {
-		// pas de période ? c'est un envoyer_maintenant.
-		// Applique le tampon date d'envoi et repasse la liste en auto non
-			$sql_set = "date='',maj=NOW(),message_auto='non'";
+			// pas de période ? c'est un envoyer_maintenant.
+			// Applique le tampon date d'envoi et repasse la liste en auto non
+spiplistes_log("CRON: envoyer maintenant #################");
+			$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote("non"));
 		}
-		if($sql_set) {
-//spiplistes_log("CRON: sql_set == $sql_set", _SPIPLISTES_LOG_DEBUG);
-			spip_query("UPDATE spip_listes SET $sql_set WHERE id_liste=$id_liste LIMIT 1"); 
+		if($next_time || count($sql_set)) {
+			if($next_time) {
+				$sql_set = array('date' => sql_quote(normaliser_date($next_time)));
+			}
+			$sql_set['maj'] = 'NOW()';
+			sql_update('spip_listes'
+				, $sql_set
+				, "id_liste=".sql_quote($id_liste)." LIMIT 1"
+				);
 		}
+
 
 		/////////////////////////////
 		// preparation du courrier à placer dans le panier
@@ -161,18 +180,20 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes, _SPIPLISTES_LOG_DEBUG);
 		// Ajoute les abonnés dans la queue (spip_auteurs_courriers)
 		if($taille_courrier_ok) {
 			$id_courrier = spip_insert_id();
-			spiplistes_courrier_remplir_envois($id_courrier, $id_liste);
-spiplistes_log("CRON: remplir courrier $id_courrier, liste : $id_liste", _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("CRON: remplir la queue", _SPIPLISTES_LOG_DEBUG);
+			spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste);
 		} 
 		else {
 			// contenu du courrier vide
 spiplistes_log("CRON: envoi mail nouveautes : courrier vide", _SPIPLISTES_LOG_DEBUG);
 		} 
-	}// fin traitement des listes
+	}// end while // fin traitement des listes
 	
 	/////////////////////////////
-	// Si panier courriers des encours plein, appelle meleuse
-	if (spiplistes_nb_courriers_en_cours()){
+	// Si panier courriers des encours plein, 
+	// ou si queue en attenate, appelle meleuse
+	if (spiplistes_nb_courriers_en_cours() 
+		|| spiplistes_courriers_en_queue_count()){
 		spiplistes_log("CRON: appel meleuse", _SPIPLISTES_LOG_DEBUG);
 		include_spip('inc/spiplistes_meleuse');
 		return(spiplistes_meleuse());

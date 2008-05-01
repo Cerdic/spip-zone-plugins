@@ -176,6 +176,15 @@ function compat_spiplistes_defs_dist() {
 			
 		
 		// n'existe pas en 1.9.2
+		'sql_insert' => 
+			'(
+				$table, $champs
+			) {
+				$query = "INSERT INTO $table (".implode(",", array_keys($champs)).") VALUES (".implode(",", $champs).")";
+				return sql_query($query);
+			}',
+
+		// n'existe pas en 1.9.2
 		// on cree la requete directement
 		'sql_insertq' => 
 			'(

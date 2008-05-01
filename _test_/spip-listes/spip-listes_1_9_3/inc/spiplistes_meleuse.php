@@ -146,6 +146,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 			} 
 			else if($id_liste > 0) {
 			// courrier à destination des abonnés d'une liste
+				$total_abonnes = spiplistes_nb_abonnes_count($id_liste);
 				$str_log .= " to: ID_LISTE #$id_liste ($total_abonnes users)"; 
 	
 				$pied_page_html = spiplistes_pied_de_page_liste($id_liste);

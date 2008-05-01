@@ -107,6 +107,15 @@ function spiplistes_nb_courriers_en_cours($id_courrier = 0) {
 	return($n);
 }
 
+// CP-20080501
+function spiplistes_courriers_en_queue_count () {
+	// demande le nombre de courriers dans la queue
+	// avec etat vide (si etat non vide, 
+	// c'est que la meleuse est en train de l'envoyer)
+	$n = sql_fetsel("COUNT(id_auteur) AS n", "spip_auteurs_courriers", "etat=''");
+	return($n['n']);
+}
+
 // CP-20071009
 function spiplistes_courriers_casier_count ($statut='tous') {
 	$where = ($statut!='tous') ? " WHERE statut='$statut'" : "";

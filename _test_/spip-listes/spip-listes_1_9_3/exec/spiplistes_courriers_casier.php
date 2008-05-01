@@ -137,24 +137,32 @@ function exec_spiplistes_courriers_casier () {
 		if($id_liste > 0) {
 			spiplistes_courrier_supprimer_envois('id_courrier', $id_courrier);
 			// passe le courrier à la méleuse
-			spiplistes_courrier_remplir_envois($id_courrier,$id_liste);
+			spiplistes_courrier_remplir_queue_envois($id_courrier,$id_liste);
 			spiplistes_log("SEND ID_COURRIER #$id_courrier ON ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur");
 		}
 	}
 
 	// à sécuriser ($connect_toutes_rubriques || $connect_id_auteur == id_auteur)
-	if ($detruire_message = intval(_request('detruire_message'))) {
-		spip_query("DELETE FROM spip_courriers WHERE id_courrier="._q($detruire_message));
+	// pour le moment CP-20080501, n'est pas activé
+	if ($detruire_courrier = intval(_request('detruire_courrier'))) {
+		sql_delete("spip_courriers", "id_courrier=".sql_quote($detruire_courrier));
 		// supprime de la queue d'envois
-		spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier=$detruire_message");
+		sql_delete("spip_auteurs_courriers", "id_courrier=".sql_quote($detruire_courrier));
 	}
 	
 	// à sécuriser ($connect_toutes_rubriques || $connect_id_auteur == id_auteur)
-	if ($btn_arreter_envoi = intval(_request('btn_arreter_envoi'))) {
+	if ($arreter_courrier = intval(_request('btn_arreter_envoi'))) {
 		// demande arreter envoi du courrier encour
-		spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_STOPE."',date_fin_envoi=NOW() WHERE id_courrier=$btn_arreter_envoi LIMIT 1");
+		sql_update(
+			'spip_courriers'
+			, array(
+				'statut' => sql_quote(_SPIPLISTES_STATUT_STOPE)
+				, 'date_fin_envoi' => "NOW()"
+			)
+			, "id_courrier=".sql_quote($arreter_courrier)." LIMIT 1"
+		);
 		// supprime de la queue d'envois
-		spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier=$btn_arreter_envoi");
+		sql_delete("spip_auteurs_courriers", "id_courrier=".sql_quote($arreter_courrier));
 	}
 
 ////////////////////////////////////
