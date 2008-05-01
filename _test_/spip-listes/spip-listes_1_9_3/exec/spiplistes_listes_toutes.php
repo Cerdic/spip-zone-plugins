@@ -55,25 +55,23 @@ function exec_spiplistes_listes_toutes(){
 		}
 
 		// envoyer maintenant demandé par _SPIPLISTES_EXEC_LISTE_GERER
-		if($btn_confirmer_envoi_maintenant) {
-			$sql_values .= "date=NOW(),periode=$periode,message_auto='oui',titre_message="._q($titre_message).",";
+		if($btn_confirmer_envoi_maintenant && $id_liste) {
+			$array_set = array(
+				'date' => 'NOW()'
+				, 'periode' => sql_quote($periode)
+				, 'message_auto' => sql_quote("oui")
+				, 'titre_message' => sql_quote($titre_message)
+			);
 			if($auto_mois == 'oui') {
-				$sql_values .= "statut='"._SPIPLISTES_MONTHLY_LIST."',";
+				$array_set['statut'] = sql_quote(_SPIPLISTES_MONTHLY_LIST);
 			}
-			$sql_values = rtrim($sql_values,",");
-			$sql_query = "UPDATE spip_listes SET $sql_values WHERE id_liste=$id_liste LIMIT 1";
-			$sql_result = spip_query($sql_query);
+			spiplistes_listes_modifier_liste($id_liste, $array_set);
 		}
-		
 
 		// suppression demandée par _SPIPLISTES_EXEC_LISTE_GERER
-		if($btn_supprimer_liste_confirme && $id_liste) {
-			$sql_query = "DELETE FROM spip_listes WHERE id_liste=$id_liste LIMIT 1";
-			$sql_result = spip_query($sql_query);
-			$sql_query = "DELETE FROM spip_auteurs_mod_listes WHERE id_liste=$id_liste";
-			$sql_result = spip_query($sql_query);
-			$sql_query = "DELETE FROM spip_auteurs_listes WHERE id_liste=$id_liste";
-			$sql_result = spip_query($sql_query);
+		if($btn_supprimer_liste_confirme 
+			&& $id_liste
+			&& spiplistes_listes_supprimer_liste($id_liste)) {
 			spiplistes_log("ID_LISTE #$id_liste DELETED BY ID_AUTEUR #$connect_id_auteur");
 		}
 	}

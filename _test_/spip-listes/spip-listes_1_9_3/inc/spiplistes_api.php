@@ -128,6 +128,27 @@ function spiplistes_listes_count ($statut='toutes') {
 	return(__table_items_count('spip_listes', 'id_liste', $where));
 }
 
+// CP-20080501
+function spiplistes_listes_modifier_liste ($id_liste, $array_set) {
+	return(
+		sql_update(
+			'spip_listes'
+			, $array_set
+			, "id_liste=".sql_quote($id_liste)." LIMIT 1"
+		)
+	);
+}
+
+// CP-20080501
+function spiplistes_listes_supprimer_liste ($id_liste) {
+	$id_liste = "id_liste=".sql_quote($id_liste);
+	return(
+		sql_delete('spip_listes', $id_liste." LIMIT 1")
+		&& sql_delete('spip_auteurs_mod_listes', $id_liste)
+		&& sql_delete('spip_auteurs_listes', $id_liste)
+	);
+}
+
 // CP-2080430: renvoie tableau liste des listes
 function spiplistes_listes_lister ($select = "*", $where = "") {
 	if($where) {
