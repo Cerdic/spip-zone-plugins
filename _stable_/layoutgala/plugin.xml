@@ -5,16 +5,16 @@
 	<auteur><!-- Auteur du plugin -->
 [Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_]
 
-&#169; 2007 - Distribu&#233; sous licence GNU/GPL
+&#169; 2008 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
-	0.9
+	0.9.1
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
-Permet de choisir un agencement parmis les 40 de LayoutGala.
+Permet de choisir un agencement parmis les 40 de [LayoutGala->http://blog.html.it/layoutgala/].
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
@@ -25,6 +25,7 @@ Permet de choisir un agencement parmis les 40 de LayoutGala.
 	<prefix> 
 	LayoutGala
 	</prefix>
+	<options>layoutgala_options.php</options>
 	<icon>
 	img_pack/layoutgala.png
 	</icon>
