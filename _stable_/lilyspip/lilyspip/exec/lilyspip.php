@@ -1,6 +1,10 @@
 
 <?php
 
+// Compatibilites
+if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP19300', 1);
+if (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) @define('_SPIP19200', 1);
+else @define('_SPIP19100', 1);  
 
 
 // compatibilite spip 1.9 de Patrice  VANNEUFVILLE
