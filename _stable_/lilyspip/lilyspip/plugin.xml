@@ -32,7 +32,7 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 	<!-- Le parametre action est facultatif : en son absence la fonction appelee sera le prefixe suivi du nom du pipeline
 	ex : template_affichage_final()
 	Le parametre inclure est egalement facultatif, si la fonction est deja chargee en memoire (car presente dans le fichier options par exemple)	-->
-	
+	<options>lilyspip_options.php</options>
 	 <pipeline>
 
 	<nom>ajouter_boutons</nom>
