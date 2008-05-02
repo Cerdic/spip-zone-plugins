@@ -26,15 +26,16 @@ spipbb_log('included',2,__FILE__);
 
 function balise_FORMULAIRE_TRI_PROFIL ($p) {
 	spipbb_log('main',2,__FILE__);
-	return calculer_balise_dynamique($p, 'FORMULAIRE_TRI_PROFIL', array());
+	return calculer_balise_dynamique($p, 'FORMULAIRE_TRI_PROFIL', array('id_rubrique'));
 }
 
-function balise_FORMULAIRE_TRI_PROFIL_dyn() {
+function balise_FORMULAIRE_TRI_PROFIL_dyn($id_rubrique) {
 	spipbb_log('dyn',2,__FILE__);
 
 	return array("formulaires/tri_profil", 0,
 			array('mode' => _request('mode'),
 				'ordre' => _request('ordre'),
+				'id_rubrique' => $id_rubrique,
 				'self' => self()
 			)
 		);

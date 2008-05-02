@@ -1,11 +1,13 @@
 #CACHE{3600}
 
 [(#REM) c: 21/4/8 pour debogage eventuel. A supprimer
-<!-- {id_auteur=#ENV{id_auteur}} {id_rubrique=#ENV{id_rubrique}} {id_article=#ENV{id_article}}-->]
+<!-- c_profile {id_auteur=#ENV{id_auteur}} {id_rubrique=#ENV{id_rubrique}} {id_article=#ENV{id_article}}-->]
 
 [(#REM) c: 23/12/7 petite manip pour recuperer eventuellement la rubrique]
 #SET{id_rubrique,#ENV{id_rubrique}}
 <BOUCLE_selart(ARTICLES){id_article=#ENV{id_article}}>#SET{id_rubrique,#ID_RUBRIQUE}</BOUCLE_selart>
+[(#REM) Au cas ou le numero de rubrique serait vide ou invalide...]
+<BOUCLE_rub_sel(RUBRIQUES){id_rubrique=#GET{id_rubrique}}></BOUCLE_rub_sel></B_rub_sel>#SET{id_rubrique,#CONFIG{'spipbb/id_secteur'}}<//B_rub_sel>
 
 [(#REM) c: 23/12/7 petite manip pour recuperer eventuellement l'identifiant auteur]
 #SET{id_auteur,#ENV{id_auteur}}

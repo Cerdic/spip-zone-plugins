@@ -1,12 +1,12 @@
 <plugin>
-	<nom>
+<nom>
 	<multi>
 		[en]SpipBB: Management of SPIP forums
 		[fr]SpipBB : Gestion des forums de SPIP
 		[ca]SpipBB: Gesti&oacute; dels f&ograve;rums d'SPIP
 	</multi>
-	</nom>
-	<auteur>
+</nom>
+<auteur>
 		[<multi>[en]The SpipBB Team: see the contributors' list on Spip-contrib
 [ca]La SpipBB Team: veure la llista de col&middot;laboradors a Spip-contrib
 [fr]La SpipBB Team : voir la liste des contributeurs sur Spip-contrib</multi>
@@ -16,13 +16,11 @@ _ &#169; 2006 - <multi>
 [fr]Distribu&eacute; sous licence GPL
 [ca]Distribu&iuml;t sota llic&egrave;ncia GPL
 </multi>
-	</auteur>
-<version>0.4.9.5</version>
-	<etat>
-		dev
-	</etat>
-	<description>
-		<multi>
+</auteur>
+<version>0.4.9.6</version>
+<etat>dev</etat>
+<description>
+	<multi>
 [en]The SpipBB plugin provides the following features:
 -* centralizes the forum management in SPIP (in the private area),
 -* turns a sector of the site into a forum, "Bulletin Board" style, similar to phpBB. In this sector, subsections are used as forum groups and articles dedicated forums where threads are made of messages posted to that article.
@@ -58,43 +56,43 @@ _ [Access to the admin panel-> .?exec=spipbb_configuration]
 _ {{Plugin spipbb en cours de developpement. Vous l'utilisez &agrave; vos risques et p&eacute;rils}}
 
 _ [Acc&egrave;s au panneau d'administration-> .?exec=spipbb_configuration]
-		</multi>
-	</description>
-	<lien>[<multi>[en]See the documentation of the plugin from Spip-contrib
+	</multi>
+</description>
+<lien>[<multi>[en]See the documentation of the plugin from Spip-contrib
 [ca]Consultar la documentaci&oacute; del plugin a Spip-contrib
 [fr]Consulter la documentation du plugin sur Spip-contrib</multi>
 ->http://www.spip-contrib.net/SpipBB-le-forum]</lien> <!-- [fr] URI de documentation [en] documentation URI -->
-	<icon>img_pack/spipbb-48.png</icon> <!-- [fr] icone du plugin [en] plugin icon -->
-	<fonctions>spipbb_fonctions.php</fonctions>
-	<options>spipbb_options.php</options>
-	<install>base/spipbb_upgrade.php</install>
-	<prefix>spipbb</prefix>
+<icon>img_pack/spipbb-48.png</icon> <!-- [fr] icone du plugin [en] plugin icon -->
+<fonctions>spipbb_fonctions.php</fonctions>
+<options>spipbb_options.php</options>
+<install>base/spipbb_upgrade.php</install>
+<prefix>spipbb</prefix>
+<pipeline>
+	<nom>affiche_droite</nom> <!-- [fr]point d entree [en] entry point -->
+	<action>affiche_droite</action> <!-- [fr] spipbb fonction [en] spipbb function -->
+	<inclure>spipbb_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>affiche_milieu</nom>
+	<inclure>spipbb_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>ajouter_boutons</nom>
+	<action>ajouter_boutons</action>
+	<inclure>spipbb_pipelines.php</inclure>
+</pipeline>
 	<pipeline>
-		<nom>affiche_droite</nom> <!-- [fr]point d entree [en] entry point -->
-		<action>affiche_droite</action> <!-- [fr] spipbb fonction [en] spipbb function -->
-		<inclure>spipbb_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>affiche_milieu</nom>
-		<inclure>spipbb_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouter_boutons</action>
-		<inclure>spipbb_pipelines.php</inclure>
-	</pipeline>
-		<pipeline>
-		<nom>header_prive</nom>
-		<inclure>spipbb_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>taches_generales_cron</nom>
-		<inclure>spipbb_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<inclure>spipbb_pipelines.php</inclure>
-	</pipeline>
-	<chemin dir='' />
-	<necessite id="cfg" version="[1.0.0;]" />
+	<nom>header_prive</nom>
+	<inclure>spipbb_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>taches_generales_cron</nom>
+	<inclure>spipbb_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>ajouter_onglets</nom>
+	<inclure>spipbb_pipelines.php</inclure>
+</pipeline>
+<chemin dir='' />
+<necessite id="cfg" version="[1.0.0;]" />
 </plugin>

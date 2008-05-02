@@ -12,7 +12,12 @@
 <body id='profile'>
 <div id='principal_forum'>
 
-<INCLURE{fond=corps_sk/c_profile}{id_auteur=#ENV{id_auteur}}{id_rubrique=#ENV{id_rubrique}}{id_article=#ENV{id_article}}>
+[(#REM) c: 2/5/8 Pour permettre le chargement de c_profile dans tous les cas !]
+#SET{id_auteur,#ENV{id_auteur}|sinon{0}}
+#SET{id_rubrique,#ENV{id_rubrique}|sinon{0}}
+#SET{id_article,#ENV{id_article}|sinon{0}}
+
+<INCLURE{fond=corps_sk/c_profile}{id_auteur=#GET{id_auteur}}{id_rubrique=#GET{id_rubrique}}{id_article=#GET{id_article}}>
 
 </div> <!-- /principal_forum -->
 </body>
