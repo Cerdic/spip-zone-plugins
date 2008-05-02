@@ -161,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pagine_page_' => '.. side ',
-	'pagine_post_s' => 'Indlæg',
+	'pagine_post_s' => '<MODIF>Indlæg',
 	'pagine_sujet_s' => 'emner',
 	'par_' => 'af',
 	'poster_date_' => 'Skrevet den: ',

@@ -47,8 +47,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'Activation de SpipBB',
 	'admin_config_spipbb_info' => 'Cliquer sur Oui pour activer SpipBB',
 	'admin_config_tables' => 'Configuration des tables de SpipBB',
-	'admin_config_tables_erreur' => '<MODIF>Probl&egrave;me avec les tables de SpipBB : @tables_erreur@ sont incorrectes (les tables @tables_ok@ semblent correctes).
- Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] ou le [support sur spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+	'admin_config_tables_erreur' => 'Probl&egrave;me avec les tables de SpipBB : @tables_erreur@ sont incorrectes (les tables @tables_ok@ semblent correctes).
+Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] ou le [support sur spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'Table de SpipBB correctement install&eacute;e',
 	'admin_date_ouverture' => 'Date d\'ouverture',
 	'admin_debug_log' => 'Fichier de log @log_name@',
@@ -107,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_titre_page_spipbb_configuration' => 'Configuration de SpipBB',
 	'admin_titre_page_spipbb_effacer' => 'Gestion des messages rejet&eacute;s',
 	'admin_titre_page_spipbb_inscrits' => 'Gestion des membres',
+	'admin_titre_page_spipbb_sujet' => '&Eacute;dition d\'un fil',
 	'admin_total_posts' => 'Nombre total de messages',
 	'admin_total_users' => 'Nombre de membres',
 	'admin_total_users_online' => 'Membres en ligne',
@@ -123,9 +124,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'anonyme' => 'Anonyme',
 	'auteur' => 'Auteur',
 	'avatar' => 'Avatar',
+	'a_propos_auteur_dpt' => 'Tout &agrave; propos de :',
 
 	// B
 	'bouton_select_all' => 'Tout s&eacute;lectionner',
+	'bouton_speciaux_sur_skels' => 'Configurer les boutons sp&eacute;cifiques sur les squelettes publics',
 	'bouton_unselect_all' => 'Tout d&eacute;-s&eacute;lectionner',
 
 	// C
@@ -142,7 +145,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'col_date_crea' => 'Date inscription',
 	'col_marquer' => 'Marquer',
 	'col_signature' => 'Signature',
-	'config_affiche_champ_extra' => '<MODIF>Afficher le champ : @nom_champ@',
+	'config_affiche_champ_extra' => 'Afficher le champ : @nom_champ@',
 	'config_affiche_extra' => 'Afficher ces champs dans les squelettes',
 	'config_champs_auteur' => 'Champs SPIPBB',
 	'config_champs_auteurs_plus' => 'Gestion champs auteurs suppl&eacute;mentaires',
@@ -276,91 +279,97 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_inscription_invalide' => 'Inscription impossible',
 	'info_plus_cinq_car' => 'plus de 5 caract&egrave;res',
 	'inscription' => 'Inscription',
+	'inscrit_le' => 'Inscrit le',
+	'inscrit_le_dpt' => 'Inscrit le :',
 	'inscrit_s' => 'Inscrits',
 	'ip_adresse_autres' => 'Autres adresses IP &agrave; partir desquelles cet auteur a post&eacute;',
-	'ip_adresse_membres' => '<NEW>Membres ayant post&eacute; de cette adresse IP',
-	'ip_adresse_post' => '<NEW>Adresse IP de ce message',
-	'ip_informations' => '<NEW>Informations sur une adresse IP et un auteur',
+	'ip_adresse_membres' => 'Membres ayant post&eacute; de cette adresse IP',
+	'ip_adresse_post' => 'Adresse IP de ce message',
+	'ip_informations' => 'Informations sur une adresse IP et un auteur',
 
 	// L
 	'le' => 'Le',
-	'liste_des_messages' => '<NEW>Liste des messages',
-	'liste_inscrits' => '<NEW>Liste des membres',
+	'liste_des_messages' => 'Liste des messages',
+	'liste_inscrits' => 'Liste des membres',
 	'login' => 'Connexion',
 
 	// M
-	'maintenance' => '<MODIF>N\'oublie pas d\'enlever<br />"Fermeture pour maintenance",<br />sur les Forums concern&eacute;s.',
-	'maintenance_fermer' => '<NEW>a ferm&eacute; l\'article/forum :',
-	'maintenance_pour' => '<NEW>pour MAINTENANCE.',
-	'membres_inscrits' => '<NEW>membres inscrits',
-	'membres_les_plus_actifs' => '<NEW>Membres les plus actifs',
-	'message' => '<NEW>Message',
-	'messages' => '<MODIF>Messages',
-	'messages_anonymes' => '<NEW>rendre anonymes',
+	'maintenance' => 'Maintenance',
+	'maintenance_fermer' => 'a ferm&eacute; l\'article/forum :',
+	'maintenance_pour' => 'pour MAINTENANCE.',
+	'membres_inscrits' => 'membres inscrits',
+	'membres_les_plus_actifs' => 'Membres les plus actifs',
+	'message' => 'Message',
+	'messages' => 'Messages',
+	'messages_anonymes' => 'rendre anonymes',
 	'messages_derniers' => 'Derniers Messages',
-	'messages_laisser_nom' => '<NEW>laisser le nom',
-	'messages_supprimer_titre_dpt' => '<NEW>Pour les messages&nbsp;:',
-	'messages_supprimer_tous' => '<NEW>les supprimer',
+	'messages_laisser_nom' => 'laisser le nom',
+	'messages_supprimer_titre_dpt' => 'Pour les messages&nbsp;:',
+	'messages_supprimer_tous' => 'les supprimer',
 	'messages_voir_dernier' => 'Voir le dernier message',
-	'messages_voir_dernier_s' => '<NEW>Voir les derniers messages',
-	'message_s' => '<NEW>Messages',
-	'message_s_dpt' => '<NEW>Messages&nbsp;: ',
-	'moderateur' => '<NEW>Mod&eacute;rateur',
+	'messages_voir_dernier_s' => 'Voir les derniers messages',
+	'message_s' => '>Messages',
+	'message_s_dpt' => 'Messages&nbsp;: ',
+	'moderateur' => 'Mod&eacute;rateur',
 	'moderateurs' => 'Mod&eacute;rateur(s)',
-	'moderateurs_dpt' => '<NEW>Mod&eacute;rateurs&nbsp;: ',
-	'moderateur_dpt' => '<NEW>Mod&eacute;rateur&nbsp;: ',
-	'modif_parametre' => '<NEW>Modifiez vos param&egrave;tres',
-	'mot_annonce' => '<MODIF>Annonce
-	_ Une annonce est situ&eacute;e en t&ecirc;te de forum sur toutes les pages.',
-	'mot_ferme' => '<MODIF>Ferm&eacute;
-	-* Lorsqu\'un article-forum a ce mot-clef, seul les mod&eacute;rateurs peuvent y ajouter des messages.
-	-* Lorsqu\'un sujet de forum est ferm&ecute;, seuls les mod&eacute;rateurs peuvent y ajouter des r&eacute;ponses.',
-	'mot_groupe_moderation' => '<NEW>Goupe de mot-clefs utilis&eacute; pour la mod&eacute;ration de SpipBB',
-	'mot_postit' => '<MODIF>Postit
-	_ Un postit est situé en dessous des annonces, avant les messages ordinaires. Il n\'appara&icirc;t qu\'une seule fois dans la liste.',
+	'moderateurs_dpt' => 'Mod&eacute;rateurs&nbsp;: ',
+	'moderateur_dpt' => 'Mod&eacute;rateur&nbsp;: ',
+	'modif_parametre' => 'Modifie tes param&egrave;tres',
+	'mot_annonce' => 'Annonce
+_ Une annonce est situ&eacute;e en t&ecirc;te de forum sur toutes les pages.',
+	'mot_ferme' => 'Ferm&eacute;
+-* Lorsqu\'un article-forum a ce mot-clef, seul les mod&eacute;rateurs peuvent y ajouter des messages.
+-* Lorsqu\'un sujet de forum est ferm&amp;ecute;, seuls les mod&eacute;rateurs peuvent y ajouter des r&eacute;ponses.',
+	'mot_groupe_moderation' => 'Goupe de mot-clefs utilis&eacute; pour la mod&eacute;ration de SpipBB',
+	'mot_postit' => 'Postit
+ _ Un postit est situ&eacute; en dessous des annonces, avant les messages ordinaires. Il n\'appara&icirc;t qu\'une seule fois dans la liste.',
 
 	// N
-	'nom_util' => '<NEW>Nom d\'utilisateur',
-	'non' => '<NEW>Non',
+	'nom_util' => 'Nom d\'utilisateur',
+	'non' => 'Non',
 	'no_message' => 'Aucun sujet ou message ne correspond &agrave; tes crit&egrave;res de recherche',
 
 	// O
-	'oui' => '<NEW>Oui',
+	'ordre_croissant' => 'Croissant',
+	'ordre_decroissant' => 'D&eacute;croissant',
+	'ordre_dpt' => 'Ordre&nbsp;:',
+	'oui' => 'Oui',
 
 	// P
-	'pagine_page_' => '<NEW> .. page ',
-	'pagine_post_s' => '<NEW> posts',
-	'pagine_sujet_s' => '<NEW> sujets',
-	'par_' => '<NEW>par ',
-	'plugin_auteur' => '<NEW>La SpipBB Team : [voir la liste des contributeurs sur Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => '<MODIF>Le plugin SpipBB permet :
-	-* De g&eacute;rer de fa&ccedil;on centralis&eacute;e les forums de SPIP (interface priv&eacute;e),
-	-* D\'utiliser un secteur comme base d\'un groupe de forums comme les &laquo;Bulletin Board&raquo; tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d\'un article y d&eacute;marre un thread.
+	'pagine_page_' => ' .. page ',
+	'pagine_post_s' => '<MODIF> posts',
+	'pagine_sujet_s' => ' sujets',
+	'par_' => 'par ',
+	'plugin_auteur' => 'La SpipBB Team : [voir la liste des contributeurs sur Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
+	'plugin_description' => 'Le plugin SpipBB permet :
+-* De g&eacute;rer de fa&ccedil;on centralis&eacute;e les forums de SPIP (interface priv&eacute;e),
+-* D\'utiliser un secteur comme base d\'un groupe de forums comme les &laquo;Bulletin Board&raquo; tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d\'un article y d&eacute;marre un thread.
 
-	{{Consultez :}}
-	-* &bull;[l\'aide et support sur spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
-	-* &bull;[La documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+{{Consulte :}}
+-* •[l\'aide et support sur spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
+-* •[La documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
-	_ {{Plugin spipbb en cours de developpement. Vous l\'utilisez &agrave; vos risques et p&eacute;rils}}
+_ {{Plugin spipbb en cours de d&eacute;veloppement. Tu l\'utilises &agrave; vos risques et p&eacute;rils}}
 
-	_ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
-	'plugin_licence' => '<NEW>Distribu&eacute; sous licence GPL',
-	'plugin_lien' => '<NEW>[Consulter la documentation du plugin sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
-	'plugin_nom' => '<NEW>SpipBB : Gestion des forums de SPIP',
-	'poster_date_' => '<NEW>Post&eacute; le : ',
-	'poster_message' => '<NEW>Poster un message',
+_ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
+	'plugin_licence' => 'Distribu&eacute; sous licence GPL',
+	'plugin_lien' => '[Consulter la documentation du plugin sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_nom' => 'SpipBB : Gestion des forums de SPIP',
+	'poster_date_' => 'Post&eacute; le : ',
+	'poster_message' => 'Poste ton message',
 	'poste_valide' => 'Post(s) &agrave; valider ...',
 	'postit' => '<NEW>Postit',
 	'postit_dpt' => '<NEW>Postit&nbsp;: ',
 	'posts_effaces' => '<NEW>Messages effac&eacute;s&nbsp;!',
 	'posts_refuses' => '<NEW>Messages refus&eacute;s, &agrave; effacer&nbsp;!',
-	'post_aucun_pt' => '<NEW>aucun&nbsp;!',
-	'post_efface_lui' => '<NEW>Ce sujet comprend @$nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\\n',
-	'post_ip' => '<NEW>Messages post&eacute; &agrave; partie de l\'adresse IP',
-	'post_propose' => '<NEW>Message propos&eacute;',
-	'post_rejete' => '<NEW>Message rejet&eacute;',
+	'post_aucun_pt' => 'aucun&nbsp;!',
+	'post_efface_lui' => 'Ce sujet comprend @
+nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\\n',
+	'post_ip' => 'Messages post&eacute; &agrave; partie de l\'adresse IP',
+	'post_propose' => 'Message propos&eacute;',
+	'post_rejete' => 'Message rejet&eacute;',
 	'post_titre' => '<NEW>&nbsp;:::&nbsp;Titre : ',
-	'post_verifier_sujet' => '<NEW>V&eacute;rifier ce sujet',
+	'post_verifier_sujet' => 'V&eacute;rifier ce sujet',
 	'previsualisation' => '<NEW>Pr&eacute;visualisation',
 	'profil' => '<MODIF>Profil de',
 
@@ -383,6 +392,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'secteur_forum' => '<MODIF>SECTEURS FORUMS',
 	'selection_efface' => '<MODIF>Effacer la s&eacute;lection ...',
+	'selection_tri_dpt' => '<NEW>S&eacute;lectionner la m&eacute;thode de tri&nbsp;:',
 	'signature' => '<NEW>Signature',
 	'sign_admin' => '<MODIF>{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s &agrave; la configuration du plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ainsi qu\'&agrave; la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consultez&nbsp;:
 	_ &bull; [La documentation sur Spip-Contrib->http://www.spip-contrib.net/?article2460]
@@ -455,6 +465,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'total_messages_membres' => '<NEW>Nos membres ont post&eacute; un total de ',
 	'tous' => '<NEW>Tous',
 	'tous_forums' => 'Tous les forums',
+	'trier' => '<NEW>Trier',
+	'trouver_messages_auteur_dpt' => '<NEW>Trouver tous les messages de :',
 
 	// V
 	'visible_annuaire_forum' => '<NEW>Apparaitre dans la liste des Inscrits',

@@ -128,6 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_select_all' => 'Select all',
+	'bouton_speciaux_sur_skels' => 'Configure specific buttons on the public templates',
 	'bouton_unselect_all' => 'Deselect all',
 
 	// C
@@ -336,7 +337,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pagine_page_' => ' .. page ',
-	'pagine_post_s' => ' posts',
+	'pagine_post_' => ' reply',
+	'pagine_post_s' => ' replies',
 	'pagine_sujet_s' => ' topics',
 	'par_' => 'by ',
 	'plugin_auteur' => 'The SpipBB Team: [See the list of contributors on Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
@@ -466,7 +468,7 @@ _ • [The help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info
 	'sw_spam_words_action' => 'From this control panel you can add, edit, and remove spam words. Wildcards (*) are accepted in the word field. For example, *test* will match detestable, test* would match testing, *test would match detest.',
 	'sw_spam_words_mass_add' => 'Paste or type your spam words lists into the text area. Separate each spam word by either a comma, semi-colon, or line-break',
 	'sw_spam_words_titre' => 'Spam words filtering',
-	'sw_spam_words_url_add' => '<MODIF>Type the URL of file with a properly formatted word list. Example: http://spipbb.spip-zone.info/plugins/spipBB/base/spamwordlist.csv .',
+	'sw_spam_words_url_add' => 'Type the URL of file with a word list formatted in the style above. Example: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'Select the administrator that is listed as the Private Message sender',
 	'sw_warning_pm_message' => 'Private message text',
 	'sw_warning_pm_titre' => 'Private message subject',

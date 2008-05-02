@@ -128,6 +128,7 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 
 	// B
 	'bouton_select_all' => 'Seleccionar-ho tot',
+	'bouton_speciaux_sur_skels' => 'Configurar els botons espec&iacute;fics als esquelets p&uacute;blics',
 	'bouton_unselect_all' => 'Treure la selecci&oacute; de tot',
 
 	// C
@@ -336,7 +337,7 @@ _ Un post-it est&agrave; situat a sota dels anuncis, abans dels missatges ordina
 
 	// P
 	'pagine_page_' => ' .. p&agrave;gina',
-	'pagine_post_s' => ' missatges',
+	'pagine_post_s' => '<MODIF> missatges',
 	'pagine_sujet_s' => 'assumptes',
 	'par_' => 'per ',
 	'plugin_auteur' => 'La SpipBB Team: [veure la llista de col&middot;laboradors a Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
@@ -445,7 +446,7 @@ _ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.spip-zone.info/spi
 	'sw_spam_words_action' => 'A partir d\'aquesta p&agrave;gina, podeu afegir, editar i suprimir paraules associades al correu brossa. El car&agrave;cter (*) s\'accepta a dins de la paraula. Per exemple: {{*tes*}} capturar&agrave; {detestable}, {{tes*}} capturar&agrave; {testar}, {{*tes}} capturar&agrave; {portes}.',
 	'sw_spam_words_mass_add' => 'Copiar-enganxar o introduir les vostres paraules a aquesta zona. Separar cada paraula per una coma, dos punts o un punt i apart. ',
 	'sw_spam_words_titre' => 'Filtratge de paraules',
-	'sw_spam_words_url_add' => '<MODIF>Introduir el URL d\'un fitxer que contingui una llista de paraules formatada com m&eacute;s avall. Exemple: http://spipbb.spip-zone.info/plugins/spipBB/base/spamwordlist.csv .',
+	'sw_spam_words_url_add' => 'Introduir el URL d\'un fitxer que contingui una llista de paraules formatada com m&eacute;s avall. Exemple: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'Escollir l\'admin autor del missatge enviat',
 	'sw_warning_pm_message' => 'Text del missatge privat',
 	'sw_warning_pm_titre' => 'Assumpte del missatge privat',
