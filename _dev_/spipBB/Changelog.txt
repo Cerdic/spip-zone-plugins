@@ -1,4 +1,9 @@
-﻿2008-04-21  chryjs  <chryjs!@!free!.!fr>
+﻿2008-05-02  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.9.5 correction présentation signatures... + ajout d'une chaine manquante en langue de reference : fr
+
+
+2008-04-21  chryjs  <chryjs!@!free!.!fr>
 
  * correction requete sur statut auteur : table spip classique !
  * order by doit etre un array !
