@@ -124,7 +124,6 @@ function test_inscription_dist($mode, $mail, $nom, $id=0) {
 // $id = une id_rubrique eventuelle (?)
 // http://doc.spip.org/@message_inscription
 function message_inscription($mail, $nom, $mode, $id=0) {
-
 	if (function_exists('test_inscription'))
 		$f = 'test_inscription';
 	else
@@ -166,6 +165,11 @@ function inscription_nouveau($declaration)
 	$declaration['statut'] = 'nouveau';
 
 	$n = sql_insertq('spip_auteurs', $declaration);
+	// c: 2/8/5 BUG de la librairie de compat de CFG en 1.9.2
+	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_SQL,'<')) {
+		$row=sql_fetsel('id_auteur','spip_auteurs',"login="._q($declaration['login']));
+		$n=$row['id_auteur'];
+	}
 
 	$declaration['id_auteur'] = $n;
 
@@ -179,7 +183,6 @@ function inscription_nouveau($declaration)
 
 // http://doc.spip.org/@envoyer_inscription_dist
 function envoyer_inscription_dist($ids, $nom, $mode, $id) {
-
 	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_REQSQL,'<')) {
 		include_spip('inc/mail'); // pour nettoyer_titre_email
 	}

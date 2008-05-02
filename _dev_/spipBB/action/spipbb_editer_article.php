@@ -144,7 +144,7 @@ function revisions_articles ($id_article, $c=false) {
 	if ($r) {
 		// c: 10/2/8 compat pg_sql
 		//sql_query("UPDATE spip_articles SET date_modif=NOW() WHERE id_article="._q($id_article));
-		sql_updateq("spip_articles",array('date_modif'=>"NOW()"),"id_article="._q($id_article));
+		@sql_updateq("spip_articles",array('date_modif'=>"NOW()"),"id_article="._q($id_article));
 	}
 
 	return ''; // pas d'erreur
@@ -237,7 +237,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 
 	// c: 10/2/8 compat pg_sql
 	//sql_query("UPDATE spip_articles SET ".join(', ',$update)." WHERE id_article=$id_article");
-	sql_updateq("spip_articles", $update, "id_article=$id_article");
+	@sql_updateq("spip_articles", $update, "id_article=$id_article");
 
 	// Si on a deplace l'article
 	// - propager les secteurs
@@ -260,7 +260,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 			if ($langue_new != $langue_old)
 				// c: 10/2/8 compat pg_sql
 				//sql_query("UPDATE spip_articles SET lang='$langue_new' WHERE id_article=$id_article");
-				sql_updateq("spip_articles",array('lang'=>$langue_new),"id_article=$id_article");
+				@sql_updateq("spip_articles",array('lang'=>$langue_new),"id_article=$id_article");
 		}
 	}
 
@@ -340,13 +340,13 @@ function article_referent ($id_article, $c) {
 	if ($id_lier == 0) {
 		// c: 10/2/8 compat pg_sql
 		//sql_query("UPDATE spip_articles SET id_trad = $lier_trad WHERE id_article IN ($lier_trad, $id_article)");
-		sql_updateq("spip_articles",array('id_trad'=> $lier_trad),"id_article IN ($lier_trad, $id_article)");
+		@sql_updateq("spip_articles",array('id_trad'=> $lier_trad),"id_article IN ($lier_trad, $id_article)");
 	}
 	// sinon on ajouter notre article dans le groupe
 	else {
 		// c: 10/2/8 compat pg_sql
 		//sql_query("UPDATE spip_articles SET id_trad = $id_lier WHERE id_article = $id_article");
-		sql_updateq("spip_articles",array('id_trad' => $id_lier),"id_article = $id_article");
+		@sql_updateq("spip_articles",array('id_trad' => $id_lier),"id_article = $id_article");
 	}
 
 	return ''; // pas d'erreur

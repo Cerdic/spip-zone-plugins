@@ -2,6 +2,7 @@
 
  * 0.4.9.5 correction présentation signatures... + ajout d'une chaine manquante en langue de reference : fr
  * 0.4.9.6 correction page de tri des membres doit etre dans une rubrique !  + page du profil membre doit gerer les erreurs ou id inconnus
+ * 0.4.9.7 correction de contournement du BUG de CFG sur sql_updateq (le retour n'est pas l'insert id) => Le login envoyé est maintenant valide en 1.9.2
 
 
 2008-04-21  chryjs  <chryjs!@!free!.!fr>

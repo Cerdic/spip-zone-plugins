@@ -33,7 +33,7 @@ function spipbb_preg_quote($str, $delimiter)
 {
 	$text = preg_quote($str);
 	$text = str_replace($delimiter, '\\' . $delimiter, $text);
-	
+
 	return $text;
 } // spipbb_preg_quote
 
@@ -49,7 +49,7 @@ function inc_forum_insert($force_statut = NULL) {
 	// [fr] Si Spipbb ou le filtrage ne sont pas actifs->traitement classique
 	if ( !spipbb_is_configured()
 		or $GLOBALS['spipbb']['configure']!='oui'
-		or $GLOBALS['spipbb']['config_spam_words']!='oui' ) 
+		or $GLOBALS['spipbb']['config_spam_words']!='oui' )
 		return inc_forum_insert_dist($force_statut);
 
 	$id_article = intval(_request('id_article'));
@@ -134,11 +134,11 @@ function warn_user($id_auteur=0)
 
 	if (is_array($is_spammer) and !empty($is_spammer['id_auteur']) )
 	{
-		$res=sql_updateq('spip_auteurs_spipbb', array( 
+		@sql_updateq('spip_auteurs_spipbb', array(
 					'user_spam_warnings' => $is_spammer['user_spam_warnings']+1),
 				"id_auteur=$id_auteur");
 	} else {
-		$res=sql_insertq('spip_auteurs_spipbb', array( 
+		@sql_insertq('spip_auteurs_spipbb', array(
 					'id_auteur'	=> $id_auteur,
 					'user_spam_warnings' => 1)
 			);

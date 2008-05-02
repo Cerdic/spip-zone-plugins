@@ -45,14 +45,14 @@ function balise_CALC_STATS_FORUMS_dyn($id_forum)
 	if (empty($id_forum)) return '';
 	$row = sql_fetsel('visites','spip_visites_forums',"id_forum=$id_forum");
 	if (is_array($row) and (!empty($row['visites'])) ) {
-		$r = sql_updateq( "spip_visites_forums", array(
+		@sql_updateq( "spip_visites_forums", array(
 					'date'	=>	date("Y-m-d"),
 					'visites' =>	$row['visites']+1
 					),
 				"id_forum=$id_forum");
 	}
 	else {
-		$spip_id = sql_insertq('spip_visites_forums', array(
+		@sql_insertq('spip_visites_forums', array(
 						'id_forum' => $id_forum,
 						'date' => date("Y-m-d"),
 						'visites' => "1" )

@@ -55,12 +55,12 @@ function exec_spipbb_inscrits() {
 		case 'nom' : // detacher les messages des auteurs a supprimer
 			// c: 7/2/8 compat multibases
 			//$forumq=sql_query("UPDATE spip_forums SET id_auteur=0 WHERE ($list_id_del)");
-			$forumq=sql_updateq("spip_forums", "id_auteur=0", $list_id_del);
+			@sql_updateq("spip_forums", "id_auteur=0", $list_id_del);
 			break;
 		case 'anonymes' : // detacher et rendre anonyme tous les messages de tous les auteurs a supprimer
 			// c: 7/2/8 compat pg_sql
 			//$forumq=sql_query("UPDATE spip_forums SET id_auteur=0,auteur='Anonyme' WHERE ($list_id_del)");
-			$forumq=sql_updateq("spip_forums","id_auteur=0,auteur='Anonyme'",$list_id_del);
+			@sql_updateq("spip_forums","id_auteur=0,auteur='Anonyme'",$list_id_del);
 			break;
 		case 'tous' : // effacer tous les messages de tous les auteurs a supprimer
 			// il faut traiter les messages principaux séparément des threads
@@ -75,22 +75,22 @@ function exec_spipbb_inscrits() {
 					// on decale le premier enfant comme nouveau pere
 					// c: 7/2/8 compat pg_sql
 					//$upd_fils = sql_query ("UPDATE spip_forums SET id_parent=0 WHERE id_forum=".$row_fils['id_forum']);
-					$upd_fils = sql_updateq("spip_forums",array('id_parent'=>0),"id_forum=".$row_fils['id_forum']);
+					@sql_updateq("spip_forums",array('id_parent'=>0),"id_forum=".$row_fils['id_forum']);
 					// on lui rattache les eventuels autres enfants
 					// c: 7/2/8 compat pg_sql
 					//$upd_thread = sql_query ("UPDATE spip_forums SET id_parent=".$row_fils['id_forum']." WHERE id_parent=".$row['id_forum']);
-					$upd_thread = sql_updateq("spip_forums",array('id_parent'=>$row_fils['id_forum']),"id_parent=".$row['id_forum']);
+					@sql_updateq("spip_forums",array('id_parent'=>$row_fils['id_forum']),"id_parent=".$row['id_forum']);
 				}
 			}
 			// maintenant on peut tout effacer
 			// c: 7/2/8 compat pg_sql
 			//$forumq=sql_query("UPDATE spip_forums SET statut='5poubelle' WHERE ($list_id_del)");
-			$forumq=sql_updateq("spip_forums",array('statut'=>'5poubelle'),$list_id_del);
+			@sql_updateq("spip_forums",array('statut'=>'5poubelle'),$list_id_del);
 			break;
 		} // switch traitement des messages dans les forums
 		// c: 7/2/8 compat pg_sql
 		//$delq=sql_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE ($list_id_del)");
-		$delq=sql_updateq("spip_auteurs",array('statut'=>'5poubelle'),$list_id_del);
+		@sql_updateq("spip_auteurs",array('statut'=>'5poubelle'),$list_id_del);
 	}
 
 	$vl=intval(_request('vl'));
