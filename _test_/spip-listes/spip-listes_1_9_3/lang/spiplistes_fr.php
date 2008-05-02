@@ -28,9 +28,9 @@ Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent
 'abonnement'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information',
 'abonnement_bouton'=>'Modifier votre abonnement',
 'abonnement_cdt' => '<a href=\'http://bloog.net/spip-listes/\'>SPIP-Listes</a>' ,
-'abonnement_change_format'=>'Vous pouvez changer de format de r&eacute;ception ou vous d&eacute;sabonner : ',
-'abonnement_mail' => 'Pour modifier votre abonnement, veuillez vous rendre &agrave; l\'adresse suivante',
-'abonnement_mail_passcookie' => "(ceci est un message automatique)
+'abonnement_change_format'=>'Vous pouvez changer de format de r&eacute;ception ou vous d&eacute;sabonner : '
+, 'abonnement_mail_text' => 'Pour modifier votre abonnement, veuillez vous rendre &agrave; l\'adresse suivante : '
+, 'abonnement_mail_passcookie' => "(ceci est un message automatique)
 	Pour modifier votre abonnement &agrave; la lettre d\'information de ce site :
 	@nom_site_spip@ (@adresse_site@)
 	
@@ -103,9 +103,10 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Cette_liste_est' => 'Cette liste est',
 'charger_patron' => 'Choisir un patron pour le courrier',
 'charger_le_patron' => 'G&eacute;n&eacute;rer le courrier',
-'choix_defini' => 'Pas de choix d&eacute;finis.\n',
-'Configuration' => 'Configuration',
-'courriers' => 'Courriers',
+'choix_defini' => 'Pas de choix d&eacute;finis.\n'
+, 'Configuration' => 'Configuration'
+, 'Cliquez_ici_pour_modifier_votre_abonnement' => "Cliquez ici pour modifier votre abonnement"
+, 'courriers' => 'Courriers',
 'chercher_un_auteur' => "Chercher un auteur",
 'Courrier_numero_:' => "Courrier num&eacute;ro :",
 'Creer_un_courrier_:' => "Cr&eacute;er un courrier :",

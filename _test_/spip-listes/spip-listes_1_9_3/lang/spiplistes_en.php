@@ -18,7 +18,7 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 'abonnement_bouton'=>'Change your subscription',
 'abonnement_cdt' => '<a href=\'http://bloog.net/spip-listes/\'>SPIP-Lists</a>' ,
 'abonnement_change_format'=>'You can change the format in which you will receive the newsletter or subscribe: ',
-'abonnement_mail' => 'To change your subscription, please visit the following webpage: ',
+'abonnement_mail_text' => 'To change your subscription, please visit the following webpage: ',
 'abonnement_mail_passcookie' => '(this is an automatically generated e-mail)
 To change your subscription to the newsletter of this site:
 @nom_site_spip@ (@adresse_site@)

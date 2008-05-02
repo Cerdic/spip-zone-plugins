@@ -88,7 +88,7 @@ function spiplistes_destiner_envoi ($id_courrier, $id_liste, $flag_editable
 				. "</li>"
 				. "</ul>"
 				. "<div style='text-align:right;'>"
-				. "<input type='submit' name='$nom_bouton_validation' value=\""._T('bouton_changer')."\" class='fondo' /></div>\n"
+				. "<input type='submit' name='$nom_bouton_validation' value=\""._T('bouton_valider')."\" class='fondo' /></div>\n"
 				;
 		
 		// enveloppe dans un formulaire

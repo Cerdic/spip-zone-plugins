@@ -202,8 +202,8 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 
 			////////////////////////////////////		  
 			// La petite ligne du renvoi du cookie pour modifier son abonnement
-			$pied_rappel_html = _T('spiplistes:abonnement_mail');
-			$pied_rappel_texte = html_entity_decode($pied_rappel_html);
+			$pied_rappel_html = _T('spiplistes:Cliquez_ici_pour_modifier_votre_abonnement');
+			$pied_rappel_texte = _T('spiplistes:abonnement_mail_text');
 			
 			if($GLOBALS['meta']['spiplistes_charset_envoi'] != $GLOBALS['meta']['charset']){
 				include_spip('inc/charsets');

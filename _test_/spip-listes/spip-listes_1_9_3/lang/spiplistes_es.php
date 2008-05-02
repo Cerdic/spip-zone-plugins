@@ -17,7 +17,7 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 'abonnement_bouton'=>'Modificar',
 'abonnement_cdt'=>'<a href=\'http://bloog.net\'>SPIP-Listes</a>' ,
 'abonnement_change_format'=>'Puedes cambiar las boletines informativos y el formato en el que recibes las novedades y los mensajes, o darte de baja. ',
-'abonnement_mail'=>'Para modificar tu inscripci&oacute;n, cliquea en este enlace',
+'abonnement_mail_text'=>'Para modificar tu inscripci&oacute;n, cliquea en este enlace',
 'abonnement_modifie'=>'Los cambios se han guardado',
 'abonnement_nouveau_format'=>'Tu nuevo formato para recibir nuestras novedades e informaciones: ',
 'abonnement_titre_mail'=>'Modificar tu inscripci&oacute;n',
