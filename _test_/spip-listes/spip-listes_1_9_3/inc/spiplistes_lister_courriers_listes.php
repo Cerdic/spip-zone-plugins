@@ -77,10 +77,10 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 			break;
 		case 'listes':
 			if (
-			// pour lister les listes programmées dans un futur 
-				 (($statut == _SPIPLISTES_PRIVATE_LIST) || ($statut == _SPIPLISTES_PUBLIC_LIST)) 
+				// pour lister les listes programmées dans un futur 
+				in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_OK)) 
 				&& ($apres_maintenant == true)
-				) {
+			) {
 				$clause_where.= " AND (maj NOT BETWEEN 0 AND NOW())";
 			}
 			$sql_select = "id_liste,titre,date,patron,maj ";

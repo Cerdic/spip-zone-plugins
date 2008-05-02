@@ -191,7 +191,7 @@ function exec_spiplistes_abonne_edit () {
 			. "</tr></table>\n"
 			. "<br />\n"
 			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png', true, '', _T('spiplistes:format_de_reception').":")
-			. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT), 'post', true)
+			. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT), true)
 			. spiplistes_form_description(_T('spiplistes:format_de_reception_desc'), true)
 			. $message_alert_abo
 			. debut_cadre_relief('', true)

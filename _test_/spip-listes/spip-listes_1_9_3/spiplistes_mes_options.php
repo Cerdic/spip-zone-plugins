@@ -62,26 +62,35 @@ define("_SPIPLISTES_TYPE_LISTEAUTO", "auto");
 // champ 'statut' de 'spip_listes' varchar(10)
 define("_SPIPLISTES_PUBLIC_LIST", "liste");
 define("_SPIPLISTES_PRIVATE_LIST", "inact");
-define("_SPIPLISTES_DAILY_LIST", "pub_jour");
-define("_SPIPLISTES_WEEKLY_LIST", "pub_7jours");
-define("_SPIPLISTES_MONTHLY_LIST", "pub_mois");
+define("_SPIPLISTES_DAILY_LIST", "pub_jour"); // periode = nb jours
+define("_SPIPLISTES_HEBDO_LIST", "pub_hebdo");
+define("_SPIPLISTES_WEEKLY_LIST", "pub_7jours"); // debut de semaine
+define("_SPIPLISTES_MENSUEL_LIST", "pub_mensul"); // mensuelle
+define("_SPIPLISTES_MONTHLY_LIST", "pub_mois"); // debut de mois
 define("_SPIPLISTES_YEARLY_LIST", "pub_an");
 define("_SPIPLISTES_TRASH_LIST", "poublist");
 
-// les statuts des listes, valides
+// les statuts de périodique
+define("_SPIPLISTES_LISTES_STATUTS_PERIODIQUES", 
+	_SPIPLISTES_DAILY_LIST
+	. ";" . _SPIPLISTES_HEBDO_LIST
+	. ";" . _SPIPLISTES_WEEKLY_LIST
+	. ";" . _SPIPLISTES_MENSUEL_LIST
+	. ";" . _SPIPLISTES_MONTHLY_LIST
+	. ";" . _SPIPLISTES_YEARLY_LIST
+	);
+
+// les statuts des listes publiées
 define("_SPIPLISTES_LISTES_STATUTS_OK", 
 	_SPIPLISTES_PRIVATE_LIST
 	. ";" . _SPIPLISTES_PUBLIC_LIST
-	. ";" . _SPIPLISTES_DAILY_LIST
-	. ";" . _SPIPLISTES_WEEKLY_LIST
-	. ";" . _SPIPLISTES_MONTHLY_LIST
-	. ";" . _SPIPLISTES_YEARLY_LIST
+	. ";" . _SPIPLISTES_LISTES_STATUTS_PERIODIQUES
 	);
 
 // statuts des listes tels qu'affichées en liste 
 define("_SPIPLISTES_LISTES_STATUTS_TOUS", 
 	_SPIPLISTES_LISTES_STATUTS_OK
-	. ";"._SPIPLISTES_TRASH_LIST
+	. ";" . _SPIPLISTES_TRASH_LIST
 	);
 
 // statuts des courriers tels qu'affichés en liste 
@@ -303,6 +312,14 @@ $spiplistes_items = array(
 		, 'tab_t' => _T('spiplistes:Listes_diffusion_publique')
 		, 'desc' => _T('spiplistes:Listes_diffusion_publique_desc')
 		)
+	, _SPIPLISTES_WEEKLY_LIST => array(
+		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-bleue.gif"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'
+		, 'alt' => _T('spiplistes:Liste_hebdo')
+		, 'nav_t' => _T('spiplistes:Publiques_hebdos')
+		, 'tab_t' => _T('spiplistes:Listes_diffusion_hebdo')
+		, 'desc' => _T('spiplistes:Listes_diffusion_hebdo_desc')
+		)
 	, _SPIPLISTES_MONTHLY_LIST => array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-bleue.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'
@@ -310,6 +327,14 @@ $spiplistes_items = array(
 		, 'nav_t' => _T('spiplistes:Publiques_mensuelles')
 		, 'tab_t' => _T('spiplistes:Listes_diffusion_mensuelle')
 		, 'desc' => _T('spiplistes:Listes_diffusion_mensuelle_desc')
+		)
+	, _SPIPLISTES_YEARLY_LIST => array(
+		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-bleue.gif"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'
+		, 'alt' => _T('spiplistes:Liste_annuelle')
+		, 'nav_t' => _T('spiplistes:Publiques_annuelles')
+		, 'tab_t' => _T('spiplistes:Listes_diffusion_annuelle')
+		, 'desc' => _T('spiplistes:Listes_diffusion_annuelle_desc')
 		)
 	, _SPIPLISTES_TRASH_LIST => array(
 		'puce' => _DIR_IMG_PACK."puce-poubelle.gif"
@@ -329,6 +354,10 @@ $spiplistes_items = array(
 		, 'desc' => null
 		)
 	);
+	
+	$spiplistes_items[_SPIPLISTES_DAILY_LIST] = $spiplistes_items[_SPIPLISTES_PUBLIC_LIST];
+	$spiplistes_items[_SPIPLISTES_HEBDO_LIST] = $spiplistes_items[_SPIPLISTES_WEEKLY_LIST];
+	$spiplistes_items[_SPIPLISTES_MENSUEL_LIST] = $spiplistes_items[_SPIPLISTES_MONTHLY_LIST];
 
 	$spiplistes_version = $meta['spiplistes_version'];
 	$spiplistes_base_version = $meta['spiplistes_base_version'];

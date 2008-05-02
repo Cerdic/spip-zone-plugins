@@ -3,22 +3,22 @@
 // exec/spiplistes_courriers_casier.php
 
 /******************************************************************************************/
-/* SPIP-listes est un syst�e de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique G��ale GNU publi� par la Free Software Foundation            */
+/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribu�car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but sp�ifique. Reportez-vous �la Licence Publique G��ale GNU  */
-/* pour plus de d�ails.                                                                  */
+/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
+/* pour plus de détails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir re� une copie de la Licence Publique G��ale GNU                    */
-/* en m�e temps que ce programme ; si ce n'est pas le cas, �rivez �la                  */
+/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
+/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, �ats-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
 
 // $LastChangedRevision$
@@ -66,7 +66,7 @@ function spiplistes_afficher_pile_messages() {
 		$proch = round((strtotime($date) - time()) / _SPIPLISTES_TIME_1_DAY);
 		$date_dernier = date(_T('spiplistes:format_date'), strtotime($maj)) ;
 		$periodicite = 
-			($statut = _SPIPLISTES_MONTHLY_LIST)
+			($statut == _SPIPLISTES_MONTHLY_LIST)
 			? _T('spiplistes:Liste_mensuelle')
 			: _T('spiplistes:Tous_les')." $periode "._T('spiplistes:jours')
 			;
@@ -256,22 +256,21 @@ function exec_spiplistes_courriers_casier () {
 } // exec_spip_listes()
 
 /******************************************************************************************/
-/* SPIP-listes est un syst�e de gestion de listes d'abonn� et d'envoi d'information     */
-/* par email  pour SPIP.                                                                  */
+/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique G��ale GNU publi� par la Free Software Foundation            */
+/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribu�car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but sp�ifique. Reportez-vous �la Licence Publique G��ale GNU  */
-/* pour plus de d�ails.                                                                  */
+/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
+/* pour plus de détails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir re� une copie de la Licence Publique G��ale GNU                    */
-/* en m�e temps que ce programme ; si ce n'est pas le cas, �rivez �la                  */
+/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
+/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, �ats-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
 ?>

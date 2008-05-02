@@ -220,7 +220,7 @@ function exec_spiplistes_maintenance () {
 	$objet = array('objet' => _T('spiplistes:des_courriers'));
 	$page_result .= ""
 		. debut_cadre_trait_couleur("administration-24.gif", true, "", _T('spiplistes:maintenance_objet', $objet))
-		. spiplistes_form_debut ($maintenance_url_action, 'post', true)
+		. spiplistes_form_debut ($maintenance_url_action, true)
 		. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 		;
 	if(spiplistes_courriers_casier_count()) {
@@ -251,7 +251,7 @@ function exec_spiplistes_maintenance () {
 		;
 	if($nb_listes_auto) {
 		$page_result .= ""
-			. spiplistes_form_debut ($maintenance_url_action, 'post', true)
+			. spiplistes_form_debut ($maintenance_url_action, true)
 			. "<p class='verdana2'>"._T('spiplistes:suppression_chronos_desc')."</p>\n"
 			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 			. spiplistes_form_fieldset_debut (
@@ -285,7 +285,7 @@ function exec_spiplistes_maintenance () {
 		;
 	if($nb_listes) {
 		$page_result .= ""
-			. spiplistes_form_debut ($maintenance_url_action, 'post', true)
+			. spiplistes_form_debut ($maintenance_url_action, true)
 			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 			. spiplistes_form_fieldset_debut (
 				_T('spiplistes:suppression_', $objet).spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_listes_desc", true)
@@ -319,7 +319,7 @@ function exec_spiplistes_maintenance () {
 		;
 	if($nb_abonnes_formats > 0) {
 		$page_result .= ""
-			. spiplistes_form_debut ($maintenance_url_action, 'post', true)
+			. spiplistes_form_debut ($maintenance_url_action, true)
 			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 			. spiplistes_form_fieldset_debut (
 				_T('spiplistes:suppression_', $objet).spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_abonnes_formats_desc", true)

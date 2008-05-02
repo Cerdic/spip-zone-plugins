@@ -108,7 +108,7 @@ function exec_spiplistes_listes_toutes(){
 	
 	$page_result .= "";
 	
-	foreach(array(_SPIPLISTES_PRIVATE_LIST, _SPIPLISTES_PUBLIC_LIST, _SPIPLISTES_MONTHLY_LIST, _SPIPLISTES_TRASH_LIST) as $statut) {
+	foreach(explode(";", _SPIPLISTES_LISTES_STATUTS_TOUS) as $statut) {
 		$page_result .= ""
 			. spiplistes_lister_courriers_listes(
 				spiplistes_items_get_item("tab_t", $statut)

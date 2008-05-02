@@ -25,7 +25,7 @@ function spiplistes_dater_envoi($id, $flag, $statut, $date_debut_envoi, $btn_nom
 	if ($flag && (
 			(($statut == 'encour') || ($statut == 'redac') || ($statut == 'ready'))	// courrier ?
 			|| ( // liste valide ?
-				($statut == _SPIPLISTES_PRIVATE_LIST) || ($statut == _SPIPLISTES_PUBLIC_LIST) || ($statut == _SPIPLISTES_MONTHLY_LIST)
+				in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_OK))
 				) 
 		&& ($options == 'avancees'))
 		) {

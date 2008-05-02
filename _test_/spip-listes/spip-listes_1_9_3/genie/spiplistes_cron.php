@@ -109,6 +109,7 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 			}
 			$id_liste = intval($id_liste);
 			$periode = intval($periode);
+			$envoyer_quand = $date;
 			$dernier_envoi = $maj;
 		
 			// demande id_auteur de la liste pour la signer
@@ -116,19 +117,27 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 			
 			// Tampon date prochain envoi (dans 'date') et d'envoi (dans 'maj')
 			$sql_set = $next_time = false;
-			if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_OK))) {
+			if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_PERIODIQUES))) {
+				$_time = strtotime($envoyer_quand);
+				$_heure = date("H", $_time);
+				$_minute = date("i", $_time);
+				$_mois = date("m", $_time);
+				$_jour = date("j", $_time);
+				$_an = date("Y"); // la date est forcée par celle du système (eviter erreurs)
 				switch($statut) {
 					case _SPIPLISTES_YEARLY_LIST:
-						$next_time = mktime(0, 0, 0, date("m"), date("j"), date("Y")+1);
+						$next_time = mktime($_heure, $_minute, 0, $_mois, $_jour, $_an+1);
 						break;
+					case _SPIPLISTES_MENSUEL_LIST:
 					case _SPIPLISTES_MONTHLY_LIST:
-						$next_time = mktime(0, 0, 0, date("m")+1, date("j"), date("Y"));
+						$next_time = mktime($_heure, $_minute, 0, $_mois+1, $_jour, $_an);
 						break;
+					case _SPIPLISTES_HEBDO_LIST:
 					case _SPIPLISTES_WEEKLY_LIST:
-						$next_time = mktime(0, 0, 0, date("m"), date("j")+7, date("Y"));
+						$next_time = mktime($_heure, $_minute, 0, $_mois, $_jour+7, $_an);
 						break;
 					case _SPIPLISTES_DAILY_LIST:
-						$next_time = mktime(0, 0, 0, date("m"), date("j")+1, date("Y"));
+						$next_time = mktime($_heure, $_minute, 0, $_mois, $_jour+$periode, $_an);
 						break;
 					default:
 						$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote("non"));
@@ -145,6 +154,7 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 			}
 			if($next_time || count($sql_set)) {
 				if($next_time) {
+					// prochaine date d'envoi dans 'date'
 					$sql_set = array('date' => sql_quote(normaliser_date($next_time)));
 				}
 				$sql_set['maj'] = 'NOW()';

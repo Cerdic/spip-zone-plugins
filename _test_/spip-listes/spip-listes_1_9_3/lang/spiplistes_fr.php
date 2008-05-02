@@ -49,7 +49,8 @@ Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent
 'abonnes_liste_pub' => 'Abonn&eacute;s aux listes publiques : ',
 'actualiser' => 'Actualiser',
 'a_destination' => '&agrave; destination de ',
-'adresse' => 'Indiquez ici l\'adresse &agrave; utiliser pour les retours de mails (&agrave; d&eacute;faut, l\'adresse du webmestre sera utilis&eacute;e comme adresse de retour) :',
+'adresse' => 'Indiquez ici l\'adresse &agrave; utiliser pour les r&eacute;ponses de mails 
+	(&agrave; d&eacute;faut, l\'adresse du webmestre sera utilis&eacute;e comme adresse de r&eacute;ponse) :',
 'adresse_envoi' => 'Adresse d\'envoi par d&eacute;faut',
 'adresses_importees' => 'Adresses import&eacute;es',
 'adresse_smtp' => 'adresse email du <i>sender</i> SMTP',
@@ -209,9 +210,10 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'editeur_rcs' => "N&deg; RCS ",
 'editeur_siret' => "N&deg; SIRET ",
 'editeur_url' => "URL du site de l'&eacute;diteur ",
-'editeur_logo' => "URL du logotype de l'&eacute;diteur ",
-'En_debut_de_mois' => "En d&eacute;but de mois",
-'envoi_non_programme' => "Envoi non programm&eacute;",
+'editeur_logo' => "URL du logotype de l'&eacute;diteur "
+, 'en_debut_de_semaine' => "en d&eacute;but de semaine"
+, 'en_debut_de_mois' => "en d&eacute;but de mois"
+, 'envoi_non_programme' => "Envoi non programm&eacute;",
 
 //F
 'faq' => 'FAQ',
@@ -438,6 +440,9 @@ liste.",
 'texte_lettre_information' => 'Voici la lettre d\'information de ',
 'texte_pied' => '<p><strong>Texte du pied de page</strong>',
 'Tous_les' => 'Tous les'
+, 'Toutes_les_semaines' => "Toutes les semaines"
+, 'Tous_les_mois' => "Tous les mois, "
+, 'Tous_les_ans' => "Tous les ans"
 , 'total' => "Total "
 , 'Trieuse_reactivee' => "Trieuse r&eacute;activ&eacute;e"
 , 'trieuse_suspendue' => "Trieuse suspendue"
@@ -517,12 +522,20 @@ liste.",
 'listes_internes' => 'Listes de diffusion internes<br /><i>Au moment de l\'envoi d\'un courrier, ces listes sont propos&eacute;es parmi les destinataires</i>',
 'listes_poubelle' => 'Vos listes de diffusion &agrave; la poubelle',
 'lock' => 'Lock actif : ',
-'Liste_numero_:' => 'Liste num&eacute;ro :',
-'Liste_mensuelle' => "Liste mensuelle",
-'Listes_diffusion_mensuelle' => "Listes publiques mensuelles",
-'Listes_diffusion_mensuelle_desc' => "L'abonnement &agrave; ces listes &agrave; p&eacute;riodicit&eacute; mensuelle 
-	est propos&eacute; sur le site public.",
-'Listes_diffusion_publique' => 'Listes de diffusion publiques',
+'Liste_numero_:' => 'Liste num&eacute;ro :'
+, 'Liste_hebdo' => "Liste hebdomadaire"
+, 'Listes_diffusion_hebdo' => "Listes publiques hebdomadaires"
+, 'Listes_diffusion_hebdo_desc' => "L'abonnement &agrave; ces listes &agrave; p&eacute;riodicit&eacute; hebdomadaire 
+	est propos&eacute; sur le site public."
+, 'Liste_mensuelle' => "Liste mensuelle"
+, 'Listes_diffusion_mensuelle' => "Listes publiques mensuelles"
+, 'Listes_diffusion_mensuelle_desc' => "L'abonnement &agrave; ces listes &agrave; p&eacute;riodicit&eacute; mensuelle 
+	est propos&eacute; sur le site public."
+, 'Liste_annuelle' => "Liste annuelle"
+, 'Listes_diffusion_annuelle' => "Listes publiques annuelles"
+, 'Listes_diffusion_annuelle_desc' => "L'abonnement &agrave; ces listes &agrave; p&eacute;riodicit&eacute; annuelle 
+	est propos&eacute; sur le site public."
+, 'Listes_diffusion_publique' => 'Listes de diffusion publiques',
 'Listes_diffusion_publique_desc' => 'La page du site public propose l\'inscription &agrave; ces listes.',
 'Listes_diffusion_interne' => 'Listes de diffusion internes',
 'Listes_diffusion_interne_desc' => 'Au moment de l\'envoi d\'un courrier, ces listes sont propos&eacute;es parmi les destinataires.',
@@ -541,7 +554,7 @@ liste.",
 'nb_abonnes' => 'Dans les listes : ',
 'nb_inscrits' => 'Dans le site :  ',
 'nb_listes' => 'Incriptions dans toutes les listes : ',
-'Pas_de_courrier_auto_programme' => 'Il n\'y a pas de courrier automatique programm&eacute; pour cette liste.',
+'Pas_de_courrier_auto_programme' => 'Il n\'y a pas de courrier automatique planifi&eacute; pour cette liste.',
 'nouvelle_abonne' => 'L\'abonn&eacute; suivant a &eacute;t&eacute; ajout&eacute; la liste',
 
 'pas_acces' => 'Vous n\'avez pas acc&egrave;s &agrave; cette page.',

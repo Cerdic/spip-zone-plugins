@@ -136,7 +136,7 @@ function spiplistes_form_bouton_valider ($name, $value, $reset = false, $return 
 }
 
 // CP-20080323
-function spiplistes_form_debut ($action = '#', $method = 'post', $return = false) {
+function spiplistes_form_debut ($action = '#', $return = false, $method = 'post') {
 	$result = "<form action='".$action."' method='$method'>\n";
 	if($return) return($result);
 	else echo($result);
@@ -198,18 +198,33 @@ function spiplistes_form_message ($message, $return = false, $class = "") {
 	else echo($result);
 }
 
-// CP-20080323
-function spiplistes_form_input_checkbox ($name, $value, $label, $checked, $return = false) {
+// CP-20080502
+function spiplistes_form_input_item ($type, $name, $value, $label, $checked, $return = false, $div = true, $id = false) {
 	$result = ""
-		. "<div>"
 		. "<label>"
-		. "<input type='checkbox' id='$name' name='$name' value='$value'".($checked ? "checked='checked'" : "")."/>"
+		. "<input type='$type' id='".($id ? $id : $name)."' name='$name' value='$value'".($checked ? "checked='checked'" : "")."/>"
 		. $label
-		. "</label>"
-		. "</div>\n"
+		. "</label>\n"
 		;
+	if($div) {
+		$result = "<div>\n".$result."</div>\n";
+	}
 	if($return) return($result);
 	else echo($result);
+}
+
+// CP-20080323
+function spiplistes_form_input_checkbox ($name, $value, $label, $checked, $return = false, $div = true) {
+	$result = spiplistes_form_input_item('checkbox', $name, $value, $label, $checked, $return, $div);
+	if($return) return($result);
+}
+
+// CP-20080502
+function spiplistes_form_input_radio ($name, $value, $label, $checked, $return = false, $div = true) {
+	static $id;
+	$id++;
+	$result = spiplistes_form_input_item('radio', $name, $value, $label, $checked, $return, $div, $name."_".$id);
+	if($return) return($result);
 }
 
 // From SPIP-Listes-V: CP:20070923
