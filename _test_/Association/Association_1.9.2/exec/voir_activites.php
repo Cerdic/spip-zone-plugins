@@ -9,7 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	include_spip('inc/presentation');
+
 	include_spip ('inc/navigation_modules');
 	
 	function exec_voir_activites(){
@@ -54,7 +54,7 @@
 		
 		debut_raccourcis();
 		icone_horizontale(_T('asso:activite_bouton_ajouter_inscription'), $url_ajout_activite.'&id='.$id_evenement, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/panier_in.gif','rien.gif' );
-		icone_horizontale(_T('asso:activite_bouton_imprimer'), $url_pdf_activite, _DIR_PLUGIN_ASSOCIATION."/img_pack/print-24.png","rien.gif");	
+		icone_horizontale(_T('asso:activite_bouton_voir_liste_inscriptions'), $url_pdf_activite, _DIR_PLUGIN_ASSOCIATION."/img_pack/print-24.png","rien.gif");	
 		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
 		fin_raccourcis();
 		
@@ -90,16 +90,14 @@
 		echo '<form action="'.$url_action_activites.'" method="POST">';
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr bgcolor="#DBE1C5">';
-		echo '<td style="text-align:right"><strong>'._T('asso:activite_entete_id').'</strong></td>';
-		echo '<td><strong>'._T('asso:activite_entete_date').'</strong></td>';
-		echo '<td><strong>'._T('asso:activite_entete_nom').'</strong></td>';
-		echo '<td><strong>'._T('asso:activite_entete_adherent').'</strong></td>';
-		echo '<td style="text-align:right"><strong>'._T('asso:activite_entete_inscrits').'</strong></td>';
-		echo '<td style="text-align:right"><strong>'._T('asso:activite_entete_montant').'</strong></td>';
-		echo '<td><strong>'._T('asso:activite_entete_commentaire').'</strong></td>';
-		echo '<td colspan="3" style="text-align:center"><strong>'._T('asso:activite_entete_action').'</strong></td>';
+		echo '<th><strong>'._T('asso:activite_entete_id').'</strong></th>';
+		echo '<th><strong>'._T('asso:activite_entete_date').'</strong></th>';
+		echo '<th><strong>'._T('asso:activite_entete_nom').'</strong></th>';
+		echo '<th><strong>'._T('asso:activite_entete_adherent').'</strong></th>';
+		echo '<th><strong>'._T('asso:activite_entete_inscrits').'</strong></th>';
+		echo '<th><strong>'._T('asso:activite_entete_montant').'</strong></th>';
+		echo '<th colspan="3"><strong>'._T('asso:activite_entete_action').'</strong></th>';
 		echo '</tr>';
-
 		$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_evenement='$id_evenement' AND statut like '$statut'  ORDER by id_activite") ;
 	 
 		while ($data = spip_fetch_array($query)) {
@@ -108,20 +106,20 @@
 			else { $class="pair"; }
 			
 			echo '<tr> ';
-			echo '<td class ='.$class.' style="text-align:right">'.$data['id_activite'].'</td>';
-			echo '<td class ='.$class.' style="text-align:right">'.association_datefr($data['date']).'</td>';
-			echo '<td class ='.$class.'>';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>'.$data['id_activite'].'</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>'.association_datefr($data['date']).'</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
 			if(empty($data['email'])) { echo $data['nom']; }
 			else { echo '<a href="mailto:'.$data['email'].'">'.$data['nom'].'</a>'; }
 			echo '</td>';
-			echo '<td class ='.$class.' style="text-align:right">'.$data['id_adherent'].'</td>';
-			echo '<td class ='.$class.' style="text-align:right">'.$data['inscrits'].'</td>';
-			echo '<td class ='.$class.' style="text-align:right">'.number_format($data['montant'], 2, ',', ' ').'</td>';
-			echo '<td class ='.$class.'>'.$data['commentaire'].'</td>';
-			echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:activite_bouton_maj_inscription').'"></a>';
-					echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_ajout_participation.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:activite_bouton_ajouter_inscription').'"></a>';
-			echo '<td class ='.$class.' style="text-align:center"><input name="delete[]" type="checkbox" value='.$data['id_activite'].'></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>'.$data['id_adherent'].'</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>'.$data['inscrits'].'</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>'.number_format($data['montant'], 2, ',', ' ').'</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;" class ='.$class.'><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:activite_bouton_maj_inscription').'"></a>';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;" class ='.$class.'><a href="'.$url_ajout_participation.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:activite_bouton_ajouter_inscription').'"></a>';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:center;" class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id_activite'].'></td>';
 			echo '</tr>';
+			if ($data['commentaire']) {	echo '<tr><td colspan=10 style="text-align:justify;" class ='.$class.'>'.$data['commentaire'].'</td></tr>'; }
 		}     
 		echo '</table>';
 
