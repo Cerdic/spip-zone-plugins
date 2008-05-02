@@ -77,7 +77,7 @@ class PDF_Table extends FPDF{
 		//Ajoute une colonne au tableau
 		if($field==-1)
 			$field=count($this->aCols);
-		$this->aCols[]=array('f'=>$field,'c'=>$caption,'w'=>$width,'a'=>$align);
+		$this->aCols[]=array('f'=>$field,'c'=>html_entity_decode($caption),'w'=>$width,'a'=>$align);
 	}
 
 	function Table($query,$prop=array()){

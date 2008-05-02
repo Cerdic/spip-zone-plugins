@@ -110,6 +110,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_nom' => 'Nom',
 	'adherent_libelle_prenom' => 'Pr&eacute;nom',
 	'adherent_libelle_sexe' => 'Civilit&eacute;',
+	'adherent_libelle_ville' => 'Ville',
 	'adherent_libelle_categorie' => 'Cat&eacute;gorie',
 	'adherent_libelle_fonction' => 'Fonction',
 	'adherent_libelle_validite' => 'Validit&eacute;',
@@ -121,7 +122,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_statut_echu' => '&Agrave &eacute;ch&eacute;ance',
 	'adherent_libelle_statut_relance' => 'Relanc&eacute;',
 	'adherent_libelle_statut_sorti' => 'D&eacute;sactiv&eacute;',
-	'adherent_libelle_statut_'.lire_config('inscription2/statut_interne') => 'Prospect',
+	'adherent_libelle_statut_prospect' => 'Prospect',
 	
 
 	'adherent_libelle_oui' => 'oui',
@@ -181,7 +182,12 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	
 	# Liste
 	'adherent_liste_legende' => 'En bleu : Relanc&eacute;<br />En rose : A &eacute;ch&eacute;ance<br />En vert : A jour<br>En brun : D&eacute;sactiv&eacute;<br />En jaune paille : Prospect',
-	'adherent_liste_nombre_adherents' => 'Nombre d\'adh&eacute;rents : @total@',
+	'adherent_liste_nombre' => 'Nombre de membres',
+	'adherent_liste_nombre_ok' => 'A jour : ',
+	'adherent_liste_nombre_echu' => 'Echus : ',
+	'adherent_liste_nombre_relance' => 'Relanc&eacute;s : ',
+	'adherent_liste_nombre_prospect' => 'Prospects : ',
+	'adherent_liste_nombre_total' => 'TOTAL : ',
 	'adherent_liste_total_cotisations' => 'Total des cotisations : @total@ &euro;',
 	
 	# ACTIVITES

@@ -13,8 +13,7 @@ if(!class_exists('FPDF'))
 {
 define('FPDF_VERSION','1.53');
 
-class FPDF
-{
+class FPDF {
 //Private properties
 var $page;               //current page number
 var $n;                  //current object number
@@ -75,8 +74,7 @@ var $PDFVersion;         //PDF version number
 *                               Public methods                                 *
 *                                                                              *
 *******************************************************************************/
-function FPDF($orientation='P',$unit='mm',$format='A4')
-{
+function FPDF($orientation='P',$unit='mm',$format='A4') {
 	//Some checks
 	$this->_dochecks();
 	//Initialization of properties
@@ -103,10 +101,22 @@ function FPDF($orientation='P',$unit='mm',$format='A4')
 	$this->ColorFlag=false;
 	$this->ws=0;
 	//Standard fonts
-	$this->CoreFonts=array('courier'=>'Courier','courierB'=>'Courier-Bold','courierI'=>'Courier-Oblique','courierBI'=>'Courier-BoldOblique',
-		'helvetica'=>'Helvetica','helveticaB'=>'Helvetica-Bold','helveticaI'=>'Helvetica-Oblique','helveticaBI'=>'Helvetica-BoldOblique',
-		'times'=>'Times-Roman','timesB'=>'Times-Bold','timesI'=>'Times-Italic','timesBI'=>'Times-BoldItalic',
-		'symbol'=>'Symbol','zapfdingbats'=>'ZapfDingbats');
+	$this->CoreFonts=array(
+		'courier'=>'Courier',
+		'courierB'=>'Courier-Bold',
+		'courierI'=>'Courier-Oblique',
+		'courierBI'=>'Courier-BoldOblique',
+		'helvetica'=>'Helvetica',
+		'helveticaB'=>'Helvetica-Bold',
+		'helveticaI'=>'Helvetica-Oblique',
+		'helveticaBI'=>'Helvetica-BoldOblique',
+		'times'=>'Times-Roman',
+		'timesB'=>'Times-Bold',
+		'timesI'=>'Times-Italic',
+		'timesBI'=>'Times-BoldItalic',
+		'symbol'=>'Symbol',
+		'zapfdingbats'=>'ZapfDingbats'
+	);
 	//Scale factor
 	if($unit=='pt')
 		$this->k=1;
@@ -180,29 +190,26 @@ function FPDF($orientation='P',$unit='mm',$format='A4')
 	$this->PDFVersion='1.3';
 }
 
-function SetMargins($left,$top,$right=-1)
-{
-	//Set left, top and right margins
-	$this->lMargin=$left;
-	$this->tMargin=$top;
-	if($right==-1)
-		$right=$left;
-	$this->rMargin=$right;
-}
+	function SetMargins($left,$top,$right=-1) {
+		//Set left, top and right margins
+		$this->lMargin=$left;
+		$this->tMargin=$top;
+		if($right==-1)
+			$right=$left;
+		$this->rMargin=$right;
+	}
 
-function SetLeftMargin($margin)
-{
-	//Set left margin
-	$this->lMargin=$margin;
-	if($this->page>0 && $this->x<$margin)
-		$this->x=$margin;
-}
+	function SetLeftMargin($margin 
+		//Set left margin
+		$this->lMargin=$margin;
+		if($this->page>0 && $this->x<$margin)
+			$this->x=$margin;
+	}
 
-function SetTopMargin($margin)
-{
-	//Set top margin
-	$this->tMargin=$margin;
-}
+	function SetTopMargin($margin) {
+		//Set top margin
+		$this->tMargin=$margin;
+	}
 
 function SetRightMargin($margin)
 {
@@ -372,21 +379,18 @@ function AddPage($orientation='')
 	$this->ColorFlag=$cf;
 }
 
-function Header()
-{
-	//To be implemented in your own inherited class
-}
+	function Header() {
+		//To be implemented in your own inherited class
+	}
 
-function Footer()
-{
-	//To be implemented in your own inherited class
-}
+	function Footer() {
+		//To be implemented in your own inherited class
+	}
 
-function PageNo()
-{
-	//Get current page number
-	return $this->page;
-}
+	function PageNo() {
+		//Get current page number
+		return $this->page;
+	}
 
 function SetDrawColor($r,$g=-1,$b=-1)
 {
@@ -613,11 +617,10 @@ function Text($x,$y,$txt)
 	$this->_out($s);
 }
 
-function AcceptPageBreak()
-{
-	//Accept automatic page break or not
-	return $this->AutoPageBreak;
-}
+	function AcceptPageBreak() {
+		//Accept automatic page break or not
+		return $this->AutoPageBreak;
+	}
 
 function Cell($w,$h=0,$txt='',$border=0,$ln=0,$align='',$fill=0,$link='')
 {
