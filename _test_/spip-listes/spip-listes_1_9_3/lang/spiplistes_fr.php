@@ -214,7 +214,9 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'editeur_logo' => "URL du logotype de l'&eacute;diteur "
 , 'en_debut_de_semaine' => "en d&eacute;but de semaine"
 , 'en_debut_de_mois' => "en d&eacute;but de mois"
-, 'envoi_non_programme' => "Envoi non programm&eacute;",
+, 'envoi_non_programme' => "Envoi non programm&eacute;"
+, 'editer_fiche_abonne' => "Editer la fiche de l'abonn&eacute;"
+,
 
 //F
 'faq' => 'FAQ',

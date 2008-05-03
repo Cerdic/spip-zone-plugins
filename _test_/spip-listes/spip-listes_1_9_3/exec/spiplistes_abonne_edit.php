@@ -168,7 +168,7 @@ function exec_spiplistes_abonne_edit () {
 			. "<span class='verdana3'>"
 			. (strlen($email) ? _T('email_2')."<strong><a href='mailto:$email'>$email</a></strong><br />\n" : "")
 			. (strlen($nom_site) ? _T('info_site_2')."<strong><a href='$url_site'>$nom_site</a></strong>" : "")
-			. "</span>\n"
+			. "</span><br />\n"
 			;
 	} 
 	
@@ -225,7 +225,9 @@ function exec_spiplistes_abonne_edit () {
 	} else {
 		$page_result .= ""
 			. "</td><td></td></tr></table>\n"
-			. _T('spiplistes:adresse_mail_obligatoire')
+			. "<p>"._T('spiplistes:adresse_mail_obligatoire')."</p>\n"
+			. "<p><a href='".generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&edit=oui")."'>"
+				._T('spiplistes:editer_fiche_abonne')."</a></p>\n"
 			;
 	}
 	
