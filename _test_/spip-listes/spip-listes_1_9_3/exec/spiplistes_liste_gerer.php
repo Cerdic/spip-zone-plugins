@@ -194,47 +194,35 @@ function exec_spiplistes_liste_gerer () {
 			////////////////////////////////////
 			// Modifier message_auto ?
 			if($btn_modifier_courrier_auto) {
-				if(
-					($message_auto == 'oui')
-					&& ($envoyer_maintenant
-						|| ($envoyer_quand = spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute)) 
-						)
-				) {
+			
+				$envoyer_quand = spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute);
+			
+				if(time() > strtotime($envoyer_quand)) {
+				// envoi dans le passe est considere comme envoyer maintenant
+					$envoyer_maintenant = true;
+					$date_depuis = $envoyer_quand;
+					$envoyer_quand = false;
+				}
+				
+				if($envoyer_maintenant) {
+					$boite_pour_confirmer_envoi_maintenant = ""
+						. debut_cadre_couleur('', true)
+						// formulaire de confirmation envoi
+						. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE), true)
+						. "<p style='text-align:center;font-weight:bold;' class='verdana2'>". _T('spiplistes:Confirmez_envoi_liste')	. "</p>"
+						. "<input type='hidden' name='id_liste' value='$id_liste' />"
+						. spiplistes_form_bouton_valider('btn_confirmer_envoi_maintenant', _T('bouton_valider'), false, true)
+						. spiplistes_form_fin(true)
+						. fin_cadre_couleur(true)
+						;
+					$date_prevue = normaliser_date(time());
+				}
+
+				if($message_auto == 'oui') {
+				
 					$sql_champs['message_auto'] = 'oui';
 					$sql_champs['titre_message'] = $titre_message;
-
-					if(time() > strtotime($envoyer_quand)) {
-					// envoi dans le passe est considere comme envoyer maintenant
-						$envoyer_maintenant = true;
-						$date_depuis = $envoyer_quand;
-						$envoyer_quand = false;
-					}
-					
-					if($envoyer_maintenant) {
-						$boite_pour_confirmer_envoi_maintenant = ""
-							. debut_cadre_couleur('', true)
-							// formulaire de confirmation envoi
-							. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE)."' method='post'>"
-							. "<p style='text-align:center;font-weight:bold;' class='verdana2'>". _T('spiplistes:Confirmez_envoi_liste')	. "</p>"
-							. "<input type='hidden' name='id_liste' value='$id_liste' />"
-							. "<input type='hidden' name='periode' value='$periode' />"
-							. "<input type='hidden' name='auto_mois' value='$auto_mois' />"
-							. "<input type='hidden' name='titre_message' value=\"$titre_message\" />"
-							. "<div style='text-align:right;'><input type='submit' name='btn_confirmer_envoi_maintenant' value='"._T('spiplistes:Envoyer_ce_courrier')."' class='fondo' /></div>\n"
-							. "</form>"
-							. fin_cadre_couleur(true)
-							;
-						if($date_depuis){
-							$sql_champs['maj'] = $date_depuis;
-							$sql_champs['periode'] = $periode;
-						}
-						$date_prevue = __mysql_date_time(time());
-						
-					}
-					else if($envoyer_quand) {
-						$sql_champs['date'] = $envoyer_quand;
-						$sql_champs['periode'] = $periode;
-					}
+					$sql_champs['date'] = $envoyer_quand;					
 					
 					switch($auto_chrono) {
 						case 'auto_jour':
@@ -270,13 +258,12 @@ function exec_spiplistes_liste_gerer () {
 							break;
 						case 'auto_an':
 							$sql_champs['statut'] = _SPIPLISTES_YEARLY_LIST;
-							$sql_champs['periode'] = $periode;
+							$sql_champs['periode'] = 0;
 							break;
 					}
 				}
 				else if($message_auto == 'non') {
 					$sql_champs['message_auto'] = 'non';
-					$sql_champs['titre_message'] = '';
 					$sql_champs['date'] = '';
 					$sql_champs['periode'] = 0;
 				}
@@ -284,7 +271,7 @@ function exec_spiplistes_liste_gerer () {
 			
 			// Enregistre les modifs pour cette liste
 			if(count($sql_champs)) {
-				$sql_result = sql_updateq("spip_listes", $sql_champs, "id_liste=".sql_quote($id_liste)." LIMIT 1");
+				sql_updateq("spip_listes", $sql_champs, "id_liste=".sql_quote($id_liste)." LIMIT 1");
 			}
 			
 			// Forcer les abonnements
@@ -627,7 +614,7 @@ function exec_spiplistes_liste_gerer () {
 				;
 		}
 	}
-	$date_debut_envoi = (!empty($date_prevue) ? $date_prevue : (($date && intval($date)) ? $date : __mysql_date_time(time())));
+	$date_debut_envoi = (!empty($date_prevue) ? $date_prevue : (($date && intval($date)) ? $date : normaliser_date(time())));
 
 	$page_result .= ""
 		. "</tr>\n"

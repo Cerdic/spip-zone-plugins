@@ -32,7 +32,7 @@ function spiplistes_dater_envoi($id, $flag, $statut, $date_debut_envoi, $btn_nom
 
 		if(!$date_valide) {
 			// propose une date par défaut
-			$date_debut_envoi = __mysql_date_time(time());
+			$date_debut_envoi = normaliser_date(time());
 		}
 
 		if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?", $date_debut_envoi, $regs)) {

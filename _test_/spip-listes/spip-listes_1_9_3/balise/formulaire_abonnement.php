@@ -99,8 +99,8 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn() << ", _SPIPLISTES_LOG_DEBUG);
 					$erreur = _T('pass_erreur_acces_refuse');
 				else {
 					$cookie = creer_uniqid();
-					spip_query("UPDATE spip_auteurs SET cookie_oubli = "._q($cookie)." WHERE email ="._q($email_oubli)." LIMIT 1");
-	
+					spiplistes_auteurs_cookie_oubli_updateq($cookie, $email_oubli);
+					
 					$nom_site_spip = lire_meta("nom_site");
 					$adresse_site = lire_meta("adresse_site");
 	
@@ -243,8 +243,8 @@ spiplistes_log("### : ->".$mail_inscription_, _SPIPLISTES_LOG_DEBUG);
 			// envoyer le cookie de relance modif abonnement
 
 			$cookie = creer_uniqid();
-			spip_query("UPDATE spip_auteurs SET cookie_oubli = "._q($cookie)." WHERE email ="._q($mail_inscription_));
-
+			spiplistes_auteurs_cookie_oubli_updateq($cookie, $mail_inscription_);
+			
 			$message = _T('spiplistes:abonnement_mail_passcookie', array('nom_site_spip' => $nomsite, 'adresse_site' => $urlsite, 'cookie' => $cookie));
 				if (envoyer_mail($mail_inscription_, "[$nomsite] "._T('spiplistes:abonnement_titre_mail'), $message)){
 					$reponse_formulaire =_T('spiplistes:pass_recevoir_mail');

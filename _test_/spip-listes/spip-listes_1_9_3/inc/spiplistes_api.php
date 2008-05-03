@@ -899,6 +899,17 @@ function spiplistes_ecrire_metas() {
 	return(__ecrire_metas());
 }
 
+// CP-20080503
+// soit update cookie du cookie transmis
+// soit update cookie de l'email transmis
+function spiplistes_auteurs_cookie_oubli_updateq ($cookie_oubli, $where, $where_is_cookie = false) {
+	if(is_string($where)) {
+		$where = (($where_is_cookie) ? "cookie_oubli" : "email")
+			. "=" . sql_quote($where) . " LIMIT 1";
+	}
+	return(sql_update('spip_auteurs', array('cookie_oubli' => sql_quote($cookie_oubli)), $where));
+}
+
 // charge les vieilles def nécessaires si besoin
 if(!spiplistes_spip_est_inferieur_193()) { 
 	include_spip("inc/spiplistes_api_vieilles_defs");

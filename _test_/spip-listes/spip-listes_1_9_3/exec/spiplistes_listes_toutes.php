@@ -46,25 +46,19 @@ function exec_spiplistes_listes_toutes(){
 		// initialise les variables postées par le formulaire
 		foreach(array(
 			'btn_supprimer_liste_confirme', 'id_liste' // _SPIPLISTES_EXEC_LISTE_GERER
-			, 'btn_confirmer_envoi_maintenant', 'periode', 'auto_mois', 'titre_message'
+			, 'btn_confirmer_envoi_maintenant', 'titre_message'
 			) as $key) {
 			$$key = _request($key);
 		}
-		foreach(array('id_liste', 'periode') as $key) {
+		foreach(array('id_liste') as $key) {
 			$$key = intval($$key);
 		}
 
 		// envoyer maintenant demandé par _SPIPLISTES_EXEC_LISTE_GERER
-		if($btn_confirmer_envoi_maintenant && $id_liste) {
+		if($btn_confirmer_envoi_maintenant && ($id_liste > 0)) {
 			$array_set = array(
 				'date' => 'NOW()'
-				, 'periode' => sql_quote($periode)
-				, 'message_auto' => sql_quote("oui")
-				, 'titre_message' => sql_quote($titre_message)
 			);
-			if($auto_mois == 'oui') {
-				$array_set['statut'] = sql_quote(_SPIPLISTES_MONTHLY_LIST);
-			}
 			spiplistes_listes_modifier_liste($id_liste, $array_set);
 		}
 

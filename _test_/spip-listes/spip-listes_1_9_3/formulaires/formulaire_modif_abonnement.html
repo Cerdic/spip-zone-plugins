@@ -19,7 +19,7 @@
 ]<B_liste>
 	<:spiplistes:listes_de_diffusion_:>:
 	<ul>
-	<BOUCLE_liste(LISTES) {statut IN 'liste', 'pub_mois'} {id_liste=#ENV{liste}}>
+	<BOUCLE_liste(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {id_liste=#ENV{liste}}>
 		<li><span style='font-weight:bold;'>#TITRE</span>[ (#TEXTE)]</li>
 		</BOUCLE_liste>
 	</ul>
@@ -41,7 +41,7 @@
 	<fieldset>
 	<legend style="color:#000000">[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:abo_listes:>})]</legend>
 	<ul style='width:350px;list-style-type:none'>
-<BOUCLE_listes(LISTES) {statut IN 'liste', 'pub_mois'} {0,(#ENV{formulaire_affiche}|?{100,0})}>
+<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {0,(#ENV{formulaire_affiche}|?{100,0})}>
 				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
 				<li style="margin-bottom:3px">
 				<input type="checkbox" name="list&#91;&#93;" checked="checked"  value="#ID_LISTE" /><a href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>				
@@ -49,7 +49,7 @@
 				<BOUCLE_inscription(AUTEURS){tous} {id_liste} {id_auteur=#ENV{id_auteur}}></BOUCLE_inscription>
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<li style="margin-bottom:3px">
-					<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ''''''''''',''})checked="checked"] value="#ID_LISTE" />
+					<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ''''''''''''',''})checked="checked"] value="#ID_LISTE" />
 					<a title='<:spiplistes:infos_liste:>' href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>
 				</li>]
 </BOUCLE_listes>

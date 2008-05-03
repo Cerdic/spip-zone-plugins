@@ -73,7 +73,7 @@
 			================================
 			Si une seule liste en parametre de la balise, ne liste que celle-ci
 		]
-		<BOUCLE_liste(LISTES) {statut IN 'liste', 'pub_mois'} {id_liste=#ENV{liste}} {0,(#ENV{mode_login}|?{1,0})}>
+		<BOUCLE_liste(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {id_liste=#ENV{liste}} {0,(#ENV{mode_login}|?{1,0})}>
 			[<fieldset style="margin-bottom:1em;">
 			[<legend style="font-weight:bold;">(#TITRE)</legend>]
 			(#TEXTE)
@@ -90,7 +90,7 @@
 				<:spiplistes:abo_1_lettre:></legend>
 				,<:spiplistes:abo_listes:></legend>})]
 			
-		<BOUCLE_listes(LISTES) {statut IN 'liste', 'pub_mois'} {0,(#ENV{mode_login}|?{100,0})}>
+		<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {0,(#ENV{mode_login}|?{100,0})}>
 				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
 				<input type="hidden" name="list&#91;&#93;"  checked="checked" value="#ID_LISTE" />
 				<:spiplistes:abonne_une_seule_liste_publique:>: <strong>#TITRE</strong> [- <em>(#TEXTE|textebrut|couper{80})</em>]

@@ -238,7 +238,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 			$email_a_envoyer['html']->AddCustomHeader("Return-Path: ".$from); 	
 			$email_a_envoyer['html']->SMTPKeepAlive = true;
 		
-			spiplistes_log("MEL: "._T('spiplistes:email_reponse').$from."\n"._T('spiplistes:contacts')." : ".$total_abonnes, _SPIPLISTES_LOG_DEBUG);
+			spiplistes_log("MEL: Reply-to: ".$from."\n");
 			
 			if($total_abonnes) {
 		
@@ -290,7 +290,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 		
 						if(($format_abo=='html') || ($format_abo=='texte')) {
 							$cookie = creer_uniqid();
-							spip_query("UPDATE spip_auteurs SET cookie_oubli ="._q($cookie)." WHERE email ="._q($email)." LIMIT 1");				
+							spiplistes_auteurs_cookie_oubli_updateq($cookie, $email);
 		
 							if ($is_from_valide) {
 								$_url = generer_url_public('abonnement','d='.$cookie);

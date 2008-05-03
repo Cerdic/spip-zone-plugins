@@ -110,7 +110,9 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<", _SPIPLISTES_LOG_D
 				}
 				
 				// detruire le cookie perso
-				spip_query("UPDATE spip_auteurs SET cookie_oubli='' WHERE cookie_oubli ="._q($d));
+				//spip_query("UPDATE spip_auteurs SET cookie_oubli='' WHERE cookie_oubli ="._q($d));
+				spiplistes_auteurs_cookie_oubli_updateq('', $d, $true);
+				
 				$d = '';
 				$modif_affiche = '1';
 			} // end if($confirm == 'oui')
@@ -134,7 +136,7 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<", _SPIPLISTES_LOG_D
 				}
 				else {
 					$cookie = creer_uniqid();
-					spip_query("UPDATE spip_auteurs SET cookie_oubli = "._q($cookie)." WHERE email ="._q($email_desabo)." LIMIT 1");
+					spiplistes_auteurs_cookie_oubli_updateq($cookie, $email_desabo);
 					
 					$message = _T('spiplistes:abonnement_mail_passcookie', array('nom_site_spip' => $nomsite, 'adresse_site' => $urlsite, 'cookie' => $cookie));
 					
