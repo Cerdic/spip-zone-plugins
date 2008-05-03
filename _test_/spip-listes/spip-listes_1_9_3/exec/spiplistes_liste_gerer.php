@@ -108,7 +108,7 @@ function exec_spiplistes_liste_gerer () {
 				VALUES ('"._SPIPLISTES_PRIVATE_LIST."','".$GLOBALS['spip_lang']."',"._q($titre).","._q($texte).","._q($pied_page).")");
 			$id_liste = spip_insert_id();
 			//Auteur de la liste (moderateur)
-			spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_liste = "._q($id_liste));
+			spiplistes_mod_listes_delete("id_liste".sql_quote($id_liste));
 			spip_query("INSERT INTO spip_auteurs_mod_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
 			//abonne le moderateur a  sa liste
 			spip_query("DELETE FROM spip_auteurs_listes WHERE id_liste = "._q($id_liste));

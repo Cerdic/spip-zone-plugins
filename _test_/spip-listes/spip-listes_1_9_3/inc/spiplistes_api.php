@@ -144,7 +144,7 @@ function spiplistes_listes_supprimer_liste ($id_liste) {
 	$id_liste = "id_liste=".sql_quote($id_liste);
 	return(
 		sql_delete('spip_listes', $id_liste." LIMIT 1")
-		&& sql_delete('spip_auteurs_mod_listes', $id_liste)
+		&& spiplistes_mod_listes_delete($id_liste)
 		&& sql_delete('spip_auteurs_listes', $id_liste)
 	);
 }
@@ -378,6 +378,11 @@ function spiplistes_mod_listes_get_id_auteur ($id_liste) {
 		return(sql_getfetsel('id_auteur', 'spip_auteurs_mod_listes', "id_liste=".sql_quote($id_liste)." LIMIT 1"));
 	}
 	return(0);
+}
+
+// CP-20080503: supprime une liste dans table des modérateurs
+function spiplistes_mod_listes_delete ($where) {
+	return(sql_delete('spip_auteurs_mod_listes', $where));	
 }
 
 // boite information avec juste titre et id
