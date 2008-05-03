@@ -77,7 +77,6 @@ img {
    <li><a href="#configureliste">Configurer une liste de diffusion</a></li>
    <li><a href="#replyto">Adresse email de retour (reply-to)</a></li>
    <li><a href="#temporiser">Planifier un courrier, une liste de diffusion</a></li>
-   <li><a href="#diffmensuelle">Mensualiser une liste de diffusion</a></li>
    <li><a href="#abo_fiche_auteur">Abonnement par la fiche auteur</a></li>
    <li><a href="#abo_fiche_auteur">Abonnement par la page des listes</a></li>
    <li><a href="#forcerabos">Forcer tous les abonnements</a></li>
@@ -106,7 +105,7 @@ img {
 <p>Cette page vous permet de configurer :</p>
 <ul>
    <li>Le mode d'inscription des visiteurs ;</li>
-   <li>Le mode de transfert du courrier, la taille du paquet d'envoi, le code 
+   <li>Le mode de transfert du courrier, la taille du paquet d'envois, le code 
       des caract&egrave;res utilis&eacute;s pour l'envoi.</li>
 </ul>
 <p>Vous pouvez &eacute;galement <a href="#forcerabos">forcer ici tous les abonnements</a>.</p>
@@ -123,7 +122,7 @@ img {
 <p class="avertissement">N&#8217;installez pas <strong>@spiplistes_name@</strong> 
    en production sans l&#8217;avoir test&eacute; et valid&eacute; correctement.</p>
 <p class="avertissement"><strong>@spiplistes_name@</strong> est diffus&eacute; 
-   gratuitement sous license GNU/GPL, sans aucune garantie de bon fonctionnement. 
+   gratuitement sous licence GNU/GPL, sans aucune garantie de bon fonctionnement. 
    Vous &ecirc;tes seul responsable de l&#8217;installation et de la mise en &#339;uvre 
    de <strong>@spiplistes_name@</strong> sur votre site.</p>
 <h2><a name="acces_gestion" id="acces_gestion"></a>Acc&eacute;der &agrave; la 
@@ -158,7 +157,7 @@ img {
          <li>Courriers directs.</li>
       </ul>
    </li>
-   <li>Les courriers non-envoy&eacute;s : 
+   <li>Les courriers non envoy&eacute;s : 
       <ul>
          <li>Courriers vides, en g&eacute;n&eacute;ral g&eacute;n&eacute;r&eacute; 
             par un patron mais donc le r&eacute;sultat ne donne rien :</li>
@@ -169,9 +168,15 @@ img {
    </li>
 </ul>
 <h2><a name="configureliste" id="configureliste"></a>Configurer une liste de diffusion<a name="diffusion" id="diffusion"></a></h2>
-<p>La diffusion : une liste peut &ecirc;tre priv&eacute;e (internet) ou publique. 
+<p>La diffusion : une liste peut &ecirc;tre priv&eacute;e (interne) ou publique. 
    L'inscription &agrave; une liste priv&eacute;e n'est pas visible dans l'espace 
    public.</p>
+<p>Si vous transformez une liste p&eacute;riodique en liste publique, elle conserve 
+   ses abonn&eacute;s, mais perd sa date de publication. Il vous faut programmer 
+   &agrave; nouveau un envoi automatique.</p>
+<p>Si vous transformez une liste p&eacute;riodique en liste priv&eacute;e, elle 
+   perd &eacute;galement sa date de publication, mais aussi ses abonn&eacute;s 
+   <em>invit&eacute;s</em>. </p>
 <h2><a name="replyto" id="replyto"></a>Adresse email de retour</h2>
 <p>Le champ de r&eacute;ponse (reply-to) est transmis lors de la diffusion. Il 
    correspond &agrave; l'adresse email de retour. Lorsque votre correspondant 
@@ -183,34 +188,32 @@ img {
    une date pr&eacute;cise. Il suffit d'indiquer la date d'envoi souhait&eacute; 
    dans le formulaire du courrier concern&eacute;.</p>
 <p><img src="../img_docs/2007-09-05_184833.png" width="493" height="66" alt="" /></p>
-<p>Mais les courriers ne peuvent pas &ecirc;tre param&eacute;tr&eacute;s pour 
-   &ecirc;tre envoy&eacute;s p&eacute;riodiquement. Si vous voulez qu'un courrier 
-   puisse &ecirc;tre envoy&eacute; tous les 3 jours ou tous les mois, vous devez 
-   le transformer en patron et cr&eacute;er une liste de diffusion.</p>
+<p>Les courriers ne peuvent pas &ecirc;tre param&eacute;tr&eacute;s pour &ecirc;tre 
+   envoy&eacute;s p&eacute;riodiquement. Si vous voulez qu'un courrier puisse 
+   &ecirc;tre envoy&eacute; tous les 3 jours ou tous les mois, vous devez le transformer 
+   en patron et cr&eacute;er une liste de diffusion.</p>
+<p>Lorsqu'une liste de diffusion publique est correctement param&eacute;tr&eacute;e 
+   (s&eacute;lection des patrons, liste d'abonn&eacute;s), vous pouvez choisir 
+   pour elle une diffusion p&eacute;riodique en jours, hebdomadaire, mensuelle 
+   ou annuelle.</p>
 <p>Vous pouvez param&eacute;trer l'exp&eacute;dition d'une liste de diffusion 
-   en lui d&eacute;finissant une date de premier envoi, puis une p&eacute;riode 
-   de diffusion &agrave; exprimer en jours.</p>
-<p><img src="../img_docs/2007-11-10_112459.png" width="493" height="337" alt="" /></p>
-<p>En s&eacute;lectionnant <strong>En d&eacute;but de mois</strong>, votre liste 
-   de diffusion devient mensuelle.</p>
+   en lui d&eacute;finissant :</p>
+<ul>
+   <li>un titre de diffusion, le sujet, &agrave; ne pas confondre avec le titre 
+      de la liste de diffusion ;</li>
+   <li>un rythme de diffusion, en jours, hebdomadaire, mensuel ou annuel ;</li>
+   <li>une date de premier envoi.</li>
+</ul>
+<p>Le courrier est g&eacute;n&eacute;r&eacute; &agrave; partir des patrons pr&eacute;cis&eacute;s 
+   &agrave; la date planifi&eacute;e.</p>
+<p><img src="../img_docs/2008-05-03_043359.png" width="492" height="514" alt="" /></p>
+<p>Dans l'exemple ci-dessus, le courrier sera envoy&eacute; toutes les semaines, 
+   le lundi, &agrave; partir du 30 juin 2008. A noter qu'il est inutile de calculer 
+   la date pr&eacute;cis&eacute;ment. Si vous validez dans cet exemple le 31 juin, 
+   qui est un mardi, la date sera automatiquement corrig&eacute;e pour le 30 juin 
+   2008, qui est un lundi.</p>
 <p>Si le bouton <strong>Envoyer maintenant</strong> est gris&eacute;, c'est que 
    la liste ne contient aucun abonn&eacute;.</p>
-<h2><a name="diffmensuelle" id="diffmensuelle"></a>Mensualiser une liste de diffusion</h2>
-<p>Lorsqu'une liste de diffusion publique est correctement param&eacute;tr&eacute;e 
-   (s&eacute;lection d'un patron, liste d'abonn&eacute;s), vous pouvez choisir 
-   pour elle une diffusion p&eacute;riodique mensuelle.</p>
-<p><img src="../img_docs/2007-09-05_182302.png" width="477" height="128" border="1" alt="" /></p>
-<p>La liste sera g&eacute;n&eacute;r&eacute;e &agrave; partir du patron. Le courrier 
-   sera exp&eacute;di&eacute; le 1<sup>er</sup> de chaque mois.</p>
-<p>Choisissez bien la date de d&eacute;part du premier envoi. Si vous conservez 
-   la date en cours, un premier envoi sera effectu&eacute; &agrave; cette date, 
-   le prochain aura lieu le 1<sup>er</sup> du mois suivant.</p>
-<p>Si vous transformez une liste p&eacute;riodique en liste publique, elle conserve 
-   ses abonn&eacute;s, mais perd sa date de publication. Il vous faut programmer 
-   &agrave; nouveau un envoi automatique.</p>
-<p>Si vous transformez une liste p&eacute;riodique en liste priv&eacute;e, elle 
-   perd &eacute;galement sa date de publication, mais aussi ses abonn&eacute;s 
-   <em>invit&eacute;s</em>. </p>
 <h2><a name="testeremail" id="testeremail"></a>Tester l'envoi du courrier</h2>
 <p>Lorsque vous avez termin&eacute; la r&eacute;daction de votre courrier, vous 
    pouvez l'envoyer en test &agrave; un correspond ou vous-m&ecirc;me, en compl&eacute;tant 
@@ -225,7 +228,7 @@ img {
    - modifiez la liste des abonn&eacute;s.</p>
 <h2><a name="forcer_format" id="forcer_format"></a>Forcer le format de r&eacute;ception 
    pour un abonn&eacute;</h2>
-<p>Si un abonn&eacute; n'a pas d&eacute;fini sont format de r&eacute;ception de 
+<p>Si un abonn&eacute; n'a pas d&eacute;fini son format de r&eacute;ception de 
    courriers, texte seul ou enrichi (html), aucun courrier ne peut lui &ecirc;tre 
    envoy&eacute; via <strong>@spiplistes_name@</strong> (liste sur abonnement 
    ou courrier simple).</p>
@@ -237,7 +240,7 @@ img {
 <p>La puce noire dans la colonne <strong>email</strong> indique que l'auteur ou 
    le visiteur n'a pas pr&eacute;cis&eacute; son adresse de courrier &eacute;lectronique. 
    Impossible de l'abonner !</p>
-<p>La colonne <strong>qt.</strong> indique le nombre de listes auxquelles l'abonn&eacute; 
+<p>La colonne <strong>qt.</strong> indique le nombre de listes auquelles l'abonn&eacute; 
    est inscrit.</p>
 <p>La colonne <strong>Format</strong> pr&eacute;cise le format de r&eacute;ception 
    actuel de l'abonn&eacute;.</p>
@@ -338,7 +341,7 @@ img {
 <p><img src="../img_docs/2007-09-29_194942.png" alt="Cliquez sur la case &agrave; cocher pour d&eacute;sactiver le plugin" width="458" height="47" /></p>
 <h2><a name="desinstallerv" id="desinstallerv"></a>D&eacute;sinstaller <strong>@spiplistes_name@</strong></h2>
 <p>Pour d&eacute;sinstaller <strong>@spiplistes_name@</strong>, rendez-vous dans 
-   l'interface de gestion des plugins et cliquez sur l'icone spip-pack (carton 
+   l'interface de gestion des plugins et cliquez sur l'ic&ocirc;ne spip-pack (carton 
    ouvert) qui se trouve &agrave; droite de la ligne concernant <strong>@spiplistes_name@</strong>. 
    Une confirmation vous est demand&eacute;e (Effacer TOUT), confirmez.</p>
 <p><img src="../img_docs/2007-09-29_195046.png" alt="Cliquez sur le lien pour confirmer la d&eacute;sinstallation" width="456" height="57" /></p>
