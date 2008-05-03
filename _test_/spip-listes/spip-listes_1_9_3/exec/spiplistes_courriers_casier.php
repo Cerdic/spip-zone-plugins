@@ -65,11 +65,28 @@ function spiplistes_afficher_pile_messages() {
 	
 		$proch = round((strtotime($date) - time()) / _SPIPLISTES_TIME_1_DAY);
 		$date_dernier = date(_T('spiplistes:format_date'), strtotime($maj)) ;
-		$periodicite = 
-			($statut == _SPIPLISTES_MONTHLY_LIST)
-			? _T('spiplistes:Liste_mensuelle')
-			: _T('spiplistes:Tous_les')." $periode "._T('spiplistes:jours')
-			;
+		switch($statut) {
+			case _SPIPLISTES_HEBDO_LIST:
+			case _SPIPLISTES_WEEKLY_LIST:
+				$periodicite = _T('spiplistes:Liste_hebdo');
+				break;
+			case _SPIPLISTES_MENSUEL_LIST:
+			case _SPIPLISTES_MONTHLY_LIST:
+				$periodicite = _T('spiplistes:Liste_mensuelle');
+				break;
+			case _SPIPLISTES_YEARLY_LIST:
+				$periodicite = _T('spiplistes:Liste_annuelle');
+				break;
+			case _SPIPLISTES_DAILY_LIST:
+				if($periode) {
+					$periodicite = _T('spiplistes:Tous_les')." $periode "._T('spiplistes:jours');
+				} else {
+					$periodicite = _T('spiplistes:Listes_autre');
+				}
+				break;
+			default:
+				$periodicite = _T('spiplistes:envoi_manuel');
+		}
 	
 		$out .= ""
 			. "<tr " . (($ii++ % 2) ? "class='row-even'" : "") . ">\n"

@@ -506,9 +506,10 @@ liste.",
 'envoyer_a' => 'Envoi vers ',
 'erreur' => 'Erreur',
 'erreur_import' => 'Le fichier d\'import pr&eacute;sente une erreur &agrave; la ligne ',
-'Erreur_courrier_titre_vide' => "Erreur: votre courrier n'a pas de titre.",
+'Erreur_courrier_titre_vide' => "Erreur: votre courrier n'a pas de titre."
+, 'envoi_manuel' => "Envoi manuel"
 
-'format_date' => 'Y/m/d',
+, 'format_date' => 'Y/m/d',
 'format_aucun' => "Aucun",
 
 'html' => 'HTML',
@@ -525,6 +526,7 @@ liste.",
 'listes_poubelle' => 'Vos listes de diffusion &agrave; la poubelle',
 'lock' => 'Lock actif : ',
 'Liste_numero_:' => 'Liste num&eacute;ro :'
+, 'Listes_autre' => "Autre pr&eacute;riodicit&eacute;"
 , 'Listes_autre_periode' => "Listes publiques autre pr&eacute;riodicit&eacute;"
 , 'Listes_diffusion_prive' => "Listes priv&eacute;es"
 , 'Liste_hebdo' => "Liste hebdomadaire"
