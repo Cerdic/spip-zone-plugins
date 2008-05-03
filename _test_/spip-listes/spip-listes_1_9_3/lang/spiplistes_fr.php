@@ -472,7 +472,6 @@ liste.",
 'abonees' => 'tous les abonn&eacute;s',
 'abonne_listes' => 'Ce contact est abonn&eacute; aux listes suivantes',
 'abonne_aucune_liste' => 'Abonn&eacute;s &agrave; aucune liste',
-'Abonnes_listes_mensuelles' => 'Abonn&eacute;s aux listes mensuelles ',
 'abonnement_simple' => '<strong>Abonnement simple : </strong><br /><i>Les abonn&eacute;s re&ccedil;oivent un message de confirmation apr&egrave;s leur abonnement</i>',
 'abonnement_code_acces' => '<strong>Abonnement avec codes d\'acc&egrave;s : </strong><br /><i>Les abonn&eacute;s re&ccedil;oivent en plus un login et un mot de passe qui leur permettront de s\'identifier sur le site. </i>',
 'abonnement_newsletter' => '<strong>Abonnement &agrave; la lettre d\'information</strong>',
@@ -526,6 +525,8 @@ liste.",
 'listes_poubelle' => 'Vos listes de diffusion &agrave; la poubelle',
 'lock' => 'Lock actif : ',
 'Liste_numero_:' => 'Liste num&eacute;ro :'
+, 'Listes_autre_periode' => "Listes publiques autre pr&eacute;riodicit&eacute;"
+, 'Listes_diffusion_prive' => "Listes priv&eacute;es"
 , 'Liste_hebdo' => "Liste hebdomadaire"
 , 'Listes_diffusion_hebdo' => "Listes publiques hebdomadaires"
 , 'Listes_diffusion_hebdo_desc' => "L'abonnement &agrave; ces listes &agrave; p&eacute;riodicit&eacute; hebdomadaire 

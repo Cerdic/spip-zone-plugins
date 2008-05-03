@@ -71,7 +71,7 @@ function exec_spiplistes_abonne_edit () {
 				spiplistes_format_abo_modifier($id_auteur, 'non');
 				break;
 			case 'non':
-				spiplistes_listes_desabonner_statut($id_auteur, array(_SPIPLISTES_PUBLIC_LIST, _SPIPLISTES_PRIVATE_LIST,_SPIPLISTES_MONTHLY_LIST));
+				spiplistes_listes_desabonner_statut($id_auteur, explode(";", _SPIPLISTES_LISTES_STATUTS_TOUS));
 				break;
 			}
 	}

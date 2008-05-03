@@ -178,7 +178,7 @@ function spiplistes_listes_lister ($select = "*", $where = "") {
 // $listes_statuts : array (statuts des listes,..)
 function spiplistes_listes_desabonner_statut ($id_auteur, $listes_statuts) {
 	if(($id_auteur = intval($id_auteur)) && count($listes_statuts)) {
-		$sql_where = " statut='" . implode("' OR statut='", $listes_statuts) . "'";
+		$sql_where = "statut=".implode(" OR statut=", array_map("sql_quote", $listes_statuts));
 		$sql_query = "SELECT id_liste FROM spip_listes WHERE $sql_where";
 		$sql_result = spip_query ($sql_query);
 		$listes = array();

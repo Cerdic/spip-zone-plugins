@@ -86,7 +86,7 @@ function exec_spiplistes_abonnes_tous () {
 		  'SELECT listes.statut, COUNT(abonnements.id_auteur)
 			FROM spip_listes AS listes LEFT JOIN spip_auteurs_listes AS abonnements USING (id_liste)
 			GROUP BY listes.statut');
-		$nb_abonnes_listes = array('liste'=>0, 'inact'=>0);
+		$nb_abonnes_listes = array();
 		while ($row = spip_fetch_array($result_pile, SPIP_NUM)) {
 			$nb_abonnes_listes[$row[0]] = intval($row[1]);
 		}
@@ -141,23 +141,40 @@ function exec_spiplistes_abonnes_tous () {
 	$page_result .= ""
 		. debut_cadre_trait_couleur("forum-interne-24.gif", true)
 		. bandeau_titre_boite2(_T('spiplistes:abonnes_titre'), "", "", "black", false)
-		. "<div class='verdana2' style='position:relative;margin:1ex;height:5em;'>"
+		. "<div class='verdana2' style='position:relative;margin:1ex;height:8em;'>"
 		// bloc de gauche. Répartition des abonnés.
 		. "<div style='position:absolute;top:0;left:0;width:250px;' id='info_abo'>"
 		. "<p style='margin:0;'>"._T('spiplistes:repartition_abonnes')." : </p>"
 		. "<ul style='margin:0;padding:0 1ex;list-style: none;'>"
-		// Total des abonnés qui ont un format html ou texte
-		//. "<li>- "._T('spiplistes:nbre_abonnes') . ($nb_abonnes_par_format['html'] + $nb_abonnes_par_format['texte']) . "</li>"
-		// Total des abonnés listes publiques
-		. "<li>- "._T('spiplistes:abonnes_liste_pub') . $nb_abonnes_listes[_SPIPLISTES_PUBLIC_LIST] . "</li>"
+
 		// Total des abonnés listes privées (internes)
-		. "<li>- "._T('spiplistes:abonnes_liste_int') . $nb_abonnes_listes[_SPIPLISTES_PRIVATE_LIST] . "</li>"
-		// Total des abonnés listes périodiques (chronos mensuels)
-	 	. "<li>- ". _T('spiplistes:Abonnes_listes_mensuelles') . ": ". $nb_abonnes_listes[_SPIPLISTES_MONTHLY_LIST] . "</li>"
+		. "<li>- "._T('spiplistes:Listes_diffusion_prive') . ": "
+			. (0 + $nb_abonnes_listes[_SPIPLISTES_PRIVATE_LIST])
+			. "</li>"
+		// Total des abonnés listes périodiques (hebdomadaires)
+	 	. "<li>- ". _T('spiplistes:Listes_diffusion_hebdo') . ": "
+			. (0 + $nb_abonnes_listes[_SPIPLISTES_HEBDO_LIST] 
+				+ $nb_abonnes_listes[_SPIPLISTES_WEEKLY_LIST])
+			. "</li>"
+		// Total des abonnés listes périodiques (mensuels)
+	 	. "<li>- ". _T('spiplistes:Listes_diffusion_mensuelle') . ": "
+			. (0 + $nb_abonnes_listes[_SPIPLISTES_MENSUEL_LIST] 
+				+ $nb_abonnes_listes[_SPIPLISTES_MONTHLY_LIST])
+			. "</li>"
+		// Total des abonnés listes périodiques (annuelles)
+	 	. "<li>- ". _T('spiplistes:Listes_diffusion_annuelle') . ": "
+			. (0 + $nb_abonnes_listes[_SPIPLISTES_YEARLY_LIST])
+			. "</li>"
+		// Total des abonnés listes périodiques (periode ou envoi manuel)
+	 	. "<li>- ". _T('spiplistes:Listes_autre_periode') . ": "
+			. (0 + $nb_abonnes_listes[_SPIPLISTES_PUBLIC_LIST] 
+				+ $nb_abonnes_listes[_SPIPLISTES_DAILY_LIST])
+			. "</li>"
 		// Total des non abonnés
 	 	. "<li>- ". _T('spiplistes:abonne_aucune_liste') . ": ".$nb_abonnes_a_rien. "</li>"
 		. "</ul>"
 		. "</div>\n"
+
 		// bloc de droite. Répartition des formats.
 		. "<div style='position:absolute;top:0;right:0;width:180px;' id='info_fmt'>\n"
 		. "<p style='margin:0;'>"._T('spiplistes:repartition_formats')." : </p>\n"
