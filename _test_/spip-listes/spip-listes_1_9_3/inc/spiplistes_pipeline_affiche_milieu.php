@@ -58,17 +58,22 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 	
 	$result = "";
 
-	$flag_editable = 1; //(email_valide($email)!==false);
-	
+	$flag_editable = (
+		(($connect_statut == '0minirezo') && $connect_toutes_rubriques)
+		|| ($connect_id_auteur == $id_auteur)
+		);
+
 	if($flag_editable) {
 		
 		// récupère la liste des abonnements disponibles
-		$sql_where = " statut='"._SPIPLISTES_PUBLIC_LIST."' OR statut='"._SPIPLISTES_MONTHLY_LIST."'" .
-			(
-			(($auteur_statut == '1comite') || ($auteur_statut == '0minirezo')) 
-			? " OR statut='"._SPIPLISTES_PRIVATE_LIST."'"
-			: ""
-			);
+		$sql_where = "statut="
+			. implode(" OR statut=", array_map("sql_quote", explode(";", _SPIPLISTES_LISTES_STATUTS_PERIODIQUES)))
+			. " OR statut=".sql_quote(_SPIPLISTES_PUBLIC_LIST);
+		// les auteurs ont droit aux listes privées (internes)
+		if(($auteur_statut == '1comite') || ($auteur_statut == '0minirezo')) {
+			$sql_where .= " OR statut=".sql_quote(_SPIPLISTES_PRIVATE_LIST);
+		}
+
 		$sql_query = "SELECT id_liste,titre,texte,date,statut FROM spip_listes WHERE $sql_where ORDER BY titre ASC";
 
 		$sql_result = spip_query($sql_query);
@@ -178,6 +183,26 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				. "<!-- formulaire abonnement spiplistes -->\n" 
 				. "<a name='abonnement'></a>\n"
 				. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png", true, "", $bouton_block("abos_block")._T('spiplistes:abonnements_aux_courriers').__plugin_aide("abo_fiche_auteur"))
+				. "<div class='verdana2'>"
+				;
+			if($n = count($auteur_abos_current_list)) {
+				$result .= spiplistes_singulier_pluriel_str_get(
+					$n
+					, _T('spiplistes:info_liste_1')
+					, _T('spiplistes:info_liste_2'))
+					. ". "
+					. _T('spiplistes:format_de_reception')." : "
+						.	(
+							(in_array($abo_format, array('html', 'texte')))
+							? _T('spiplistes:'.$abo_format)
+							: "&lt;"._T('spiplistes:aucun')."&gt;"
+							)
+					;
+			} else {
+				$result .= _T('spiplistes:Sans_abonnement');
+			}
+			$result .= ""
+				. "</div>\n"
 				. $debut_block("abos_block")
 				. "<form action='".generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur")."' method='post' style='margin-bottom:0;' name='abos_formulaire'>\n"
 				. debut_cadre_formulaire("", true)

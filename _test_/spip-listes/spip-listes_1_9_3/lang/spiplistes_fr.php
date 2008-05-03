@@ -651,6 +651,7 @@ liste.",
 , 'inscription_listes' => 'Vous avez choisi de recevoir les courriers adress&eacute;s aux listes suivantes : '
 , 'inscription_format' => ' en format '
 , 'info_1_liste' => '1 liste'
+, 'info_liste_1' => 'liste'
 , 'info_liste_2' => 'listes'
 , 'info_1_abonne' => '1 abonn&eacute;'
 , 'info_abonnes' => 'abonn&eacute;s'
