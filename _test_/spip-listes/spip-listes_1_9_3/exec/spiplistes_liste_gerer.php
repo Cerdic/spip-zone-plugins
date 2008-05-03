@@ -291,7 +291,7 @@ function exec_spiplistes_liste_gerer () {
 			if($btn_valider_forcer_abos && $forcer_abo && in_array($forcer_abo, array('tous', 'auteurs', '6forum', 'aucun'))) {
 				include_spip("inc/spiplistes_listes_forcer_abonnement");
 				if(spiplistes_listes_forcer_abonnement ($id_liste, $forcer_abo) ===  false) {
-					$page_result .= __boite_alerte(_T('spiplistes:Forcer_abonnement_erreur', true));
+					$page_result .= __boite_alerte(_T('spiplistes:Forcer_abonnement_erreur'), true);
 				}
 			}
 			
@@ -557,21 +557,19 @@ function exec_spiplistes_liste_gerer () {
 		// Formulaire planifier un courrier automatique
 	$page_result .= ""
 		. "<a name='form-programmer' id='form-programmer'></a>\n"
-		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.png", true, '', _T('spiplistes:messages_auto').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "temporiser"))
-		.	(
-				(empty($patron))
-				? __boite_alerte(_T('spiplistes:Patron_manquant', true))
-				: ""
-			)
+		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.png", true, '', _T('spiplistes:messages_auto')
+			. __plugin_aide(_SPIPLISTES_EXEC_AIDE, "temporiser"))
+		;
+	if(empty($patron)) {
+		$page_result .= __boite_alerte(_T('spiplistes:Patron_manquant'), true);
+	}
+	$page_result .= ""
 		. "<br />\n"
 		. $boite_pour_confirmer_envoi_maintenant
 		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste")."#form-programmer", true)
 		. "<table border='0' cellspacing='1' cellpadding='3' width='100%'>\n"
 		. "<tr><td align='$spip_lang_left' class='verdana2'>\n"
 		;
-	if(empty($patron)) {
-		$page_result .= "<div class='verdana2'>"._T('spiplistes:Patron_manquant')."</div>\n";
-	}
 	if ($message_auto != "oui")
 		$page_result .= "<div class='verdana2'>"._T('spiplistes:Pas_de_courrier_auto_programme')."</div>\n";
 	else {
@@ -733,12 +731,6 @@ function exec_spiplistes_liste_gerer () {
 		// Liste des abonnes
 		// Appliquer les modifications sur les abonnes
 		. "<a name='auteurs'></a>"
-	/*
-	echo $editer_auteurs('liste', $id_liste, $flag_editable, _request('cherche_auteur'), _request('ids'), 
-		_T('spiplistes:liste_des_abonnes'),
-		'listes',
-		_SPIPLISTES_EXEC_ABONNE_EDIT);
-*/
 		. $editer_auteurs(
 			'liste'	// $type
 			, $id_liste // $id
@@ -746,8 +738,6 @@ function exec_spiplistes_liste_gerer () {
 			, _request('cherche_auteur') //$cherche_auteur
 			, _request('ids')	// $ids
 			, _T('spiplistes:abon') // $titre_boite
-			//, 'listes' // $script_edit_objet
-			//, 'abonne_edit'
 			)
 		;
 		

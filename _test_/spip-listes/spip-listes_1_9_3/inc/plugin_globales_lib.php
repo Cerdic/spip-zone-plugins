@@ -18,6 +18,7 @@ if(defined("_PGL_PLUGIN_GLOBALES_LIB") && _PGL_PLUGIN_GLOBALES_LIB) return;
 define("_PGL_PLUGIN_GLOBALES_LIB", 20080224.2026); //date.heure
 
 // HISTORY:
+// CP-20080503: revision __boite_alerte()
 // CP-20080224: ajout de __lire_meta()
 // CP-20071231: __plugin_current_version_base_get complète par lecture plugin.xml si vb manquant dans meta
 // CP-20071224: ajout de __plugin_current_svnrevision_get() et modif __plugin_html_signature()
@@ -397,11 +398,11 @@ if(!function_exists("__boite_alerte")) {
 	// Renvoie ou affiche une boite d'alerte
 	function __boite_alerte ($message, $return = false) {
 		$result = ""
-			. debut_cadre_enfonce('', true)
+			. debut_boite_alerte()
 			.  http_img_pack("warning.gif", _T('info_avertissement'), 
-					 "style='width: 48px; height: 48px; float: right;margin: 5px;'")
-			. "<strong>$message</strong>\n"
-			. fin_cadre_enfonce(true)
+					 "style='width:48px;height:48px;float:right;margin:5px;'")
+			. "<span class='message-alerte'>$message</span>\n"
+			. fin_boite_alerte()
 			. "\n<br />"
 			;
 		if($return) return($result);
