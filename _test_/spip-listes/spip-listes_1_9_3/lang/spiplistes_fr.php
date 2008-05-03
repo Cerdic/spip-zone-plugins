@@ -555,8 +555,9 @@ liste.",
 'nb_abonnes' => 'Dans les listes : ',
 'nb_inscrits' => 'Dans le site :  ',
 'nb_listes' => 'Incriptions dans toutes les listes : ',
-'Pas_de_courrier_auto_programme' => 'Il n\'y a pas de courrier automatique planifi&eacute; pour cette liste.',
-'nouvelle_abonne' => 'L\'abonn&eacute; suivant a &eacute;t&eacute; ajout&eacute; la liste',
+'Pas_de_courrier_auto_programme' => 'Il n\'y a pas de courrier automatique planifi&eacute; pour cette liste.'
+, 'Pas_de_periodicite' => "Pas de p&eacute;riodicit&eacute;."
+, 'nouvelle_abonne' => 'L\'abonn&eacute; suivant a &eacute;t&eacute; ajout&eacute; la liste',
 
 'pas_acces' => 'Vous n\'avez pas acc&egrave;s &agrave; cette page.',
 'plus_abonne' => ' n\'est plus abonn&eacute; &agrave; la liste ',

@@ -551,7 +551,6 @@ function exec_spiplistes_liste_gerer () {
 		$page_result .= __boite_alerte(_T('spiplistes:Patron_manquant'), true);
 	}
 	$page_result .= ""
-		. "<br />\n"
 		. $boite_pour_confirmer_envoi_maintenant
 		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste")."#form-programmer", true)
 		. "<table border='0' cellspacing='1' cellpadding='3' width='100%'>\n"
@@ -579,7 +578,7 @@ function exec_spiplistes_liste_gerer () {
 				)
 			.	(
 					(!in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_PERIODIQUES)))
-					? "<strong>"._T('spiplistes:Pas_de_periodicite')."</strong><br />"
+					? " <strong>"._T('spiplistes:Pas_de_periodicite')."</strong><br />"
 						._T('spiplistes:Ce_courrier_ne_sera_envoye_qu_une_fois')
 					: ""
 				)

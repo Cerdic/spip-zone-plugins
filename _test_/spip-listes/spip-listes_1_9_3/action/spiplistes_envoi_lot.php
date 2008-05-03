@@ -10,6 +10,7 @@ include_spip('inc/spiplistes_api_globales');
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
+include_spip('inc/spiplistes_api');
 function action_spiplistes_envoi_lot_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
