@@ -13,7 +13,8 @@
 
 include_spip('inc/forms');
 
-if (!function_exists('afficher_rubrique')) {
+
+if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {
 // fonction de SPIP 1.9.2 présente dans inc/presentation, ayant disparue en 1.9.3
 	function afficher_rubriques($titre_table, $requete) {
 		global $options;
