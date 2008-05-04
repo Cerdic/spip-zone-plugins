@@ -201,7 +201,7 @@ function spiplistes_form_message ($message, $return = false, $class = "") {
 // CP-20080502
 function spiplistes_form_input_item ($type, $name, $value, $label, $checked, $return = false, $div = true, $id = false) {
 	$result = ""
-		. "<label>"
+		. "<label class='verdana2'>"
 		. "<input type='$type' id='".($id ? $id : $name)."' name='$name' value='$value'".($checked ? "checked='checked'" : "")."/>"
 		. $label
 		. "</label>\n"
