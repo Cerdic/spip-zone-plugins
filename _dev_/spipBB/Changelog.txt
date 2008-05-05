@@ -1,4 +1,9 @@
-﻿2008-05-02  chryjs  <chryjs!@!free!.!fr>
+﻿2008-05-05  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.4.9.8 correction cosmétique sur trad FR + probleme de order by sans array
+
+
+2008-05-02  chryjs  <chryjs!@!free!.!fr>
 
  * 0.4.9.5 correction présentation signatures... + ajout d'une chaine manquante en langue de reference : fr
  * 0.4.9.6 correction page de tri des membres doit etre dans une rubrique !  + page du profil membre doit gerer les erreurs ou id inconnus

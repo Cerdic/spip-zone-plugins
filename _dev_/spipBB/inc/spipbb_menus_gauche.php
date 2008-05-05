@@ -255,7 +255,7 @@ function rubriques_admin_restreint($connect_id_auteur) {
 					array("spip_rubriques AS R","spip_auteurs_rubriques AS A"), // from
 					"A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique", // where
 					"", //groupby
-					"titre" ); // orderby
+					array("titre") ); // orderby
 
 	$rubs = array();
 	while ($r = sql_fetch($q)) {
