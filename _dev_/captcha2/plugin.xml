@@ -8,7 +8,7 @@
 _ &#169; 2007-2008 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-	0.12
+	0.14
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	dev
@@ -17,7 +17,14 @@ _ &#169; 2007-2008 - Distribu&#233; sous licence GNU/GPL
 	<description>
    Surcharge les formulaires de SPIP en leur ajoutant des [Captchas->http://fr.wikipedia.org/wiki/Captcha] pour limiter le spam
    
-Pour l'instant seuls {{#FORMULAIRE_FORUM}},{{#FORMULAIRE_SITE}} sont disponibles. Les autres formulaires &agrave; venir bientot ....
+Formulaires disponibles:
+-* #FORMULAIRE_FORUM
+-* #FORMULAIRE_SITE
+-* #FORMULAIRE_INSCRIPTION
+
+Les autres formulaires &agrave; venir bientot ....
+
+{{Avertissement:}} Utiliser les captchas limite l'accessibilt&eacute; de votre site
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Captcha2</lien> <!-- URI de documentation -->
 	
