@@ -6,7 +6,7 @@
 	include_spip('base/abstract_sql');
 	
 	//verifier qu'on a bien cfg
-	if(!function_exists('lire_config')) die("Installez cfg voyons !");
+	if(!function_exists('lire_config')) return;
 	
 	#define('_SIGNALER_ECHOS', false); // horrible
 	
@@ -50,7 +50,7 @@
 	$tables_principales['spip_auteurs_elargis']  =	array('field' => &$spip_auteurs_elargis, 'key' => &$spip_auteurs_elargis_key);
 	$tables_principales['spip_geo_pays']  =	array('field' => &$spip_geo_pays, 'key' => &$spip_geo_pays_key);
 	
-	// surcharger auteur session, desactivé car ca pete en 193
+	// surcharger auteur session, desactivï¿½ car ca pete en 193
 	/*
 	if(is_array($var_user) and isset($GLOBALS['auteur_session']['id_auteur'])){
 		$id = $GLOBALS['auteur_session']['id_auteur'];
