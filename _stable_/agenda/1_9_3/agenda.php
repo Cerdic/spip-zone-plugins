@@ -1,16 +1,14 @@
 <?php
 
 function Agenda_ajouter_onglets($flux) {
-  if($flux['args']=='calendrier')
-  {
+	if($flux['args']=='calendrier'){
 		$flux['data']['evenements']= new Bouton(
-																 '../'._DIR_PLUGIN_AGENDA.'/img_pack/agenda-24.png', _T('agenda:evenements'),
-																generer_url_ecrire("calendrier","type=semaine"));
-	
+														 '../'._DIR_PLUGIN_AGENDA.'/img_pack/agenda-24.png', _T('agenda:evenements'),
+														generer_url_ecrire("calendrier","type=semaine"));
 		$flux['data']['editorial']= new Bouton(
-															 'cal-rv.png', _T('agenda:activite_editoriale'),
-																 generer_url_ecrire("calendrier","mode=editorial&type=semaine"));
-  }
+													 'cal-rv.png', _T('agenda:activite_editoriale'),
+													 generer_url_ecrire("calendrier","mode=editorial&type=semaine"));
+	}
 	return $flux;
 }
 function Agenda_header_prive($flux) {
@@ -23,8 +21,6 @@ function Agenda_header_prive($flux) {
 	if ($exec == 'articles'){
 		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_AGENDA . '/img_pack/agenda_articles.css" type="text/css" />'. "\n";
 	}
-
-
 	return $flux;
 }
 
@@ -73,8 +69,6 @@ function Agenda_rendu_boite($titre,$descriptif,$lieu,$type='ics'){
 function Agenda_rendu_evenement($flux) {
 	global $couleur_claire;
 	$evenement = $flux['args']['evenement'];
-
-	
 	$url = $evenement['URL']; 
 	$texte = Agenda_rendu_boite($evenement['SUMMARY'],$evenement['DESCRIPTION'],$evenement['LOCATION'],$flux['args']['type']);
 	if (is_string($url))

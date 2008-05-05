@@ -33,7 +33,6 @@ function boucle_EVENEMENTS_dist($id_boucle, &$boucles) {
 				$boucle->group[] = $boucle->id_table . '.' . $boucle->primary;  
 			}
 	}
-
 	return calculer_boucle($id_boucle, $boucles); 
 }
 

@@ -8,7 +8,7 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 	$out .= "<div class='agenda-visu-evenement'>";
 
 	if ($id_evenement!=NULL){
-		$res = spip_query("SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement="._q($id_evenement));
+		$res = sql_select("evenements.*","spip_evenements AS evenements","evenements.id_evenement="._q($id_evenement));
 		if ($row = sql_fetch($res)){
 			if (!isset($neweven)){
 				$fid_evenement=$row['id_evenement'];
@@ -22,7 +22,7 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 				$fid_evenement_source=$row['id_evenement_source'];
 			}
 	 	}
-		$res2 = spip_query("SELECT articles.* FROM spip_articles AS articles LEFT JOIN spip_evenements AS J ON J.id_article=articles.id_article WHERE J.id_evenement="._q($id_evenement));
+		$res2 = sql_select("articles.*","spip_articles AS articles LEFT JOIN spip_evenements AS J ON J.id_article=articles.id_article","J.id_evenement="._q($id_evenement));
 		if ($row2 = sql_fetch($res2)){
 			$out .= "<div class='article-evenement'>";
 			$out .= "<a href='".generer_url_ecrire('articles',"id_article=".$row2['id_article'])."'>";
@@ -62,8 +62,6 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 		$out .= _T('agenda:evenement_date_du'); 
 		$out .= " ".affdate_jourcourt(date("Y-m-d H:i",$fstdatedeb))." ";
 
-
-
 		if ($fhoraire=='oui')
 			$out .= _T('agenda:evenement_date_a_immediat'); 
 			$out .= " ".date("H:i",$fstdatedeb);
@@ -85,14 +83,14 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 		$out .= "</div><div class='descriptif-visu'>$fdescriptif &nbsp;</div>\n";
 
 		$out .=  "<div class='agenda_mots_cles'>";
-		$res = spip_query("SELECT * FROM spip_groupes_mots WHERE evenements='oui' ORDER BY titre");
+		$res = sql_select("*","spip_groupes_mots","evenements='oui' ORDER BY titre");
 		$sep = "";
 		while ($row = sql_fetch($res)){
 			$id_groupe = $row['id_groupe'];
 			$row2 = sql_fetch(
-						spip_query("SELECT mots.titre FROM spip_mots_evenements AS mots_evenements
-								LEFT JOIN spip_mots AS mots ON mots.id_mot=mots_evenements.id_mot 
-								WHERE mots.id_groupe="._q($id_groupe).
+						sql_select("mots.titre","spip_mots_evenements AS mots_evenements
+								LEFT JOIN spip_mots AS mots ON mots.id_mot=mots_evenements.id_mot",
+								"mots.id_groupe="._q($id_groupe).
 								" AND mots_evenements.id_evenement="._q($id_evenement)));
 			if ($row2){
 				$out .= $sep . supprimer_numero($row['titre'])."&nbsp;:&nbsp;".supprimer_numero($row2['titre']);
@@ -100,7 +98,6 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 			}
 		}
 		$out .= "</div>\n";
-		
 
 		$url = parametre_url(self(),'annee','');
 		$url = parametre_url($url,'mois','');
@@ -108,7 +105,7 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 
 		$out .= "<div class='repetitions-calendrier'>";
 		$id_source = $fid_evenement_source?$fid_evenement_source:$id_evenement;
-		$res2 = spip_query("SELECT * FROM spip_evenements WHERE id_evenement="._q($id_source)." OR id_evenement_source="._q($id_source)." ORDER BY date_debut");
+		$res2 = sql_select("*","spip_evenements","id_evenement="._q($id_source)." OR id_evenement_source="._q($id_source)." ORDER BY date_debut");
 		if (sql_count($res2)>1){
 			$out .= _T('agenda:evenement_autres_occurences');
 			while($row2 = sql_fetch($res2)){
@@ -121,7 +118,7 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 		$out .= "</div>";
 	
 		if ($fid_evenement_source!=0){
-			$res2 = spip_query("SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement="._q($fid_evenement_source));
+			$res2 = sql_select("evenements.*","spip_evenements AS evenements","evenements.id_evenement="._q($fid_evenement_source));
 			if ($row2 = sql_fetch($res2)){
 				$url = parametre_url($url,'id_evenement',$row2['id_evenement']);
 			  $out .= "<div class='edition-bouton'>";

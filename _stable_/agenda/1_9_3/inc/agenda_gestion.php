@@ -36,8 +36,7 @@ function Agenda_afficher_date_evenement($date_debut, $date_fin, $horaire){
 		if ($h)
 			$s .= " ".date("H:i",$date_fin);
 	}
-	else
-	{ // tout different
+	else{ // tout different
 		$s = affdate($d);
 		if ($h)
 			$s .= " ".date("(H:i)",$date_debut);
@@ -55,8 +54,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 
 	$les_evenements = array();
 
-	$result = spip_query( "SELECT * FROM spip_evenements AS evenements "
-	. "WHERE evenements.id_article="._q($id_article)
+	$result = sql_select( "*","spip_evenements AS evenements", "evenements.id_article="._q($id_article)
 	. " AND evenements.id_evenement_source=0"
 	. " GROUP BY evenements.id_evenement ORDER BY evenements.date_debut");
 
@@ -85,7 +83,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 			$s = Agenda_afficher_date_evenement($date_debut,$date_fin, $horaire);
 			$s_rep = "";
 			$count_rep = 0;
-			$res2 = spip_query("SELECT * FROM spip_evenements WHERE id_evenement_source="._q($id_evenement)." ORDER BY date_debut");
+			$res2 = sql_select("*","spip_evenements","id_evenement_source="._q($id_evenement)." ORDER BY date_debut");
 			while ($row2 = sql_fetch($res2)){
 				$s_rep .= Agenda_afficher_date_evenement(strtotime($row2['date_debut']),strtotime($row2['date_fin']),$row2['horaire'])."<br/>";
 				$count_rep++;
@@ -182,7 +180,7 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 				$out .=  "<span class='verdana1'><strong>"._T('agenda:titre_cadre_ajouter_evenement')."&nbsp; </strong></span>\n";
 				// recuperer le titre de l'article pour le mettre par defaut sur l'evenement
 				$titre_defaut = "";
-				$res = spip_query("SELECT titre FROM spip_articles where id_article="._q($id_article));
+				$res = sql_select("titre","spip_articles","id_article="._q($id_article));
 				if ($row = sql_fetch($res))
 					$titre_defaut = $row['titre'];
 
@@ -237,7 +235,6 @@ function Agenda_formulaire_article($id_article, $flag_editable, $script){
 	if ($flag_editable)
 		$out .= Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenements, $flag_editable, $script);
 
-
 	$out .= fin_cadre_enfonce(true);
 	$out .= "</div>";
 	return $out;
@@ -262,7 +259,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	$fstdatefin=$fstdatedeb+60*60;
 
 	if ($id_evenement!=NULL){
-		$res = spip_query("SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement="._q($id_evenement));
+		$res = sql_select("evenements.*","spip_evenements AS evenements","evenements.id_evenement="._q($id_evenement));
 		if ($row = sql_fetch($res)){
 			if (!$neweven){
 				$fid_evenement=$row['id_evenement'];
@@ -286,7 +283,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 
 	$ajouter_id_article = _request('ajouter_id_article');
 	if ($ajouter_id_article && !_request('id_article')){
-		$res2 = spip_query("SELECT * FROM spip_articles AS articles WHERE id_article="._q($ajouter_id_article));
+		$res2 = sql_select("*","spip_articles AS articles","id_article="._q($ajouter_id_article));
 		if ($row2 = sql_fetch($res2)){
 			$out .= "<div class='article-evenement'>";
 			$out .= "<a href='".generer_url_ecrire('articles',"id_article=".$row2['id_article'])."'>";
@@ -360,16 +357,17 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	// MOTS CLES : chaque groupe de mot cle attribuable a un evenement agenda
 	// donne un select
 	$out .=  "<div class='agenda_mots_cles'>";
-	$res = spip_query("SELECT * FROM spip_groupes_mots WHERE evenements='oui' ORDER BY titre");
+	$res = sql_select("*","spip_groupes_mots","evenements='oui' ORDER BY titre");
 	while ($row = sql_fetch($res)){
 		$id_groupe = $row['id_groupe'];
 		$multiple = ($row['unseul']=='oui')?"size='4'":"multiple='multiple' size='4'";
 
 		$id_mot_select = array();
 		if ($id_evenement){
-			$res2 = spip_query("SELECT mots_evenements.id_mot FROM spip_mots_evenements AS mots_evenements
-								LEFT JOIN spip_mots AS mots ON mots.id_mot=mots_evenements.id_mot
-								WHERE mots.id_groupe="._q($id_groupe)." AND mots_evenements.id_evenement="._q($id_evenement));
+			$res2 = sql_select("mots_evenements.id_mot",
+						"spip_mots_evenements AS mots_evenements
+						LEFT JOIN spip_mots AS mots ON mots.id_mot=mots_evenements.id_mot",
+						"mots.id_groupe="._q($id_groupe)." AND mots_evenements.id_evenement="._q($id_evenement));
 			while ($row2 = sql_fetch($res2))
 				$id_mot_select[] = $row2['id_mot'];
 		}
@@ -379,7 +377,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 		$select .= "<select name='evenement_groupe_mot_select_{$id_groupe}[]' class='fondl verdana1 agenda_mot_cle_select' $multiple>\n";
 		$select .= "\n<option value='x' style='font-variant: small-caps;' >".supprimer_numero($row['titre'])."</option>";
 
-		$res2= spip_query("SELECT * FROM spip_mots WHERE id_groupe="._q($id_groupe)." ORDER BY titre");
+		$res2= sql_select("*","spip_mots","id_groupe="._q($id_groupe)." ORDER BY titre");
 		while ($row2 = sql_fetch($res2)){
 			$id_mot = $row2['id_mot'];
 			$titre = typo($row2['titre']);
@@ -395,7 +393,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	$dates = "";
 	if ($id_evenement!=NULL){
 		$dates = array();
-		$res = spip_query("SELECT date_debut FROM spip_evenements WHERE id_evenement_source="._q($id_evenement));
+		$res = sql_select("date_debut","spip_evenements","id_evenement_source="._q($id_evenement));
 		while ($row=sql_fetch($res)){
 			$dates[] = date('m/d/Y',strtotime($row['date_debut']));
 		}
@@ -422,6 +420,4 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	$out .=  "</div>\n";
 	return $out;
 }
-
-
 ?>

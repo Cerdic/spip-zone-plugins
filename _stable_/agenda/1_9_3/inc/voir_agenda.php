@@ -27,7 +27,7 @@ function inc_voir_agenda($flag_editable){
 			$stamp=time();
 		}
 		else { // date de l'evenement
-			$res = spip_query("SELECT date_debut FROM spip_evenements WHERE id_evenement="._q($id_evenement));
+			$res = sql_select("date_debut","spip_evenements","id_evenement="._q($id_evenement));
 			if ($row = sql_fetch($res))
 				$stamp=strtotime($row['date_debut']);
 			else 
@@ -61,12 +61,12 @@ function inc_voir_agenda($flag_editable){
 	$datefin=date('Y-m-d H:i:s',$ts_fin+24*60*60);
 
 	// tous les evenements
-	$res = spip_query("SELECT * 
-							FROM spip_evenements AS evenements
-						 WHERE ((evenements.date_debut>='$datestart' AND evenements.date_debut<='$datefin') 
-						 		OR (evenements.date_fin>='$datestart' AND evenements.date_fin<='$datefin')
-						 		OR (evenements.date_debut<'$datestart' AND evenements.date_fin>'$datefin'))
-						 ORDER BY evenements.date_debut;");
+	$res = sql_select("*", 
+			"spip_evenements AS evenements",
+			"((evenements.date_debut>='$datestart' AND evenements.date_debut<='$datefin') 
+				OR (evenements.date_fin>='$datestart' AND evenements.date_fin<='$datefin')
+				OR (evenements.date_debut<'$datestart' AND evenements.date_fin>'$datefin'))
+				ORDER BY evenements.date_debut;");
  	$urlbase=parametre_url($urlbase,'neweven','');
 	$urlbase=parametre_url($urlbase,'annee',$annee);
 	$urlbase=parametre_url($urlbase,'mois',$mois);
@@ -90,10 +90,10 @@ function inc_voir_agenda($flag_editable){
 			$texte.="<hr />" . wordwrap(entites_html($row['descriptif'],ENT_QUOTES),15, "<br />\n");
 		if (strlen($texte)==0) $texte=_L("(sans objet)");
 
-		if ($concerne)	$categorie = $categorie_concerne;
-		else						$categorie = $categorie_info;
-		if ($is_evt) 		$categorie = $categorie['evenement'];
-		else 						$categorie = $categorie['plage'];
+		if ($concerne) $categorie = $categorie_concerne;
+		else $categorie = $categorie_info;
+		if ($is_evt) $categorie = $categorie['evenement'];
+		else $categorie = $categorie['plage'];
 		if ($id_evenement==$row['id_evenement'])
 			$categorie.='-selection';
 
@@ -187,8 +187,7 @@ if (!function_exists('http_calendrier_aide_mess')) {
 	}
 }
 
-function http_calendrier_semainesh($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt)
-{
+function http_calendrier_semainesh($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt){
 	global $spip_ecran;
 	if (!isset($spip_ecran)) $spip_ecran = 'large';
 
@@ -196,8 +195,7 @@ function http_calendrier_semainesh($annee, $mois, $jour, $echelle, $partie_cal, 
 	$init = $jour+1-($init ? $init : 7);
 	$sd = '';
 
-	if (is_array($evt))
-	  {
+	if (is_array($evt)){
 		  list($sansduree, $evenements, $premier_jour, $dernier_jour) = $evt;
 		  if ($sansduree)
 		    foreach($sansduree as $d => $r) 

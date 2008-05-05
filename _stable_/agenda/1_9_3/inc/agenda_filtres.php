@@ -37,7 +37,6 @@ function Agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', 
 		$ts_startday1 = mktime(0, 0, 0, date("m",$ts_startday1), 
 		date("d",$ts_startday1), date("Y",$ts_startday1)); // et remise a zero de l'heure	
 	}
-
 	// toujours retourner vide pour qu'il ne se passe rien
 	return "";
 }

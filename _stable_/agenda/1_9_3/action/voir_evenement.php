@@ -4,8 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip("inc/agenda_gestion");
 include_spip("inc/editer_evenement");
 
-function action_voir_evenement_dist()
-{
+function action_voir_evenement_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
 

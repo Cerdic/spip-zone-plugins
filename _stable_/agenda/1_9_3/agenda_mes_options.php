@@ -17,26 +17,22 @@ $exceptions_des_tables['evenements']['id_parent']='id_evenement_source';
 
 function genie_agenda_nettoyer_base($t){
 	# les evenements lies a un article inexistant
-	$res = spip_query("SELECT evenements.id_evenement,evenements.id_article
-		      FROM spip_evenements AS evenements
-		        LEFT JOIN spip_articles AS articles
-		          ON evenements.id_article=articles.id_article
-		       WHERE articles.id_article IS NULL");
+	$res = sql_select("evenements.id_evenement,evenements.id_article","spip_evenements AS evenements
+			LEFT JOIN spip_articles AS articles
+			ON evenements.id_article=articles.id_article","articles.id_article IS NULL");
 	while ($row = sql_fetch($res))
-		spip_query("DELETE FROM spip_evenements
-		WHERE id_evenement=".$row['id_evenement']
+		sql_delete("spip_evenements","id_evenement=".$row['id_evenement']
 		." AND id_article=".$row['id_article']);
 
 	# les liens de mots affectes a des evenements effaces
-	$res = spip_query("SELECT mots_evenements.id_mot,mots_evenements.id_evenement 
-		        FROM spip_mots_evenements AS mots_evenements
-		        LEFT JOIN spip_evenements AS evenements
-		          ON mots_evenements.id_evenement=evenements.id_evenement
-		       WHERE evenements.id_evenement IS NULL");
+	$res = sql_select("mots_evenements.id_mot,mots_evenements.id_evenement",
+			"spip_mots_evenements AS mots_evenements
+			LEFT JOIN spip_evenements AS evenements
+			ON mots_evenements.id_evenement=evenements.id_evenement",
+			"evenements.id_evenement IS NULL");
 
 	while ($row = sql_fetch($res))
-		spip_query("DELETE FROM spip_mots_evenements
-		WHERE id_mot=".$row['id_mot']
+		sql_delete("spip_mots_evenements","id_mot=".$row['id_mot']
 		." AND id_evenement=".$row['id_evenement']);
 
 	return 1;
@@ -47,8 +43,7 @@ function Agenda_taches_generales_cron($taches_generales){
 	return $taches_generales;
 }
 
-function exec_calendrier()
-{
+function exec_calendrier(){
 	$mode = _request('mode');
 	$type = _request('type');
 	if ($mode=='editorial'){
@@ -90,6 +85,4 @@ function exec_calendrier()
 		$var_f();
 	}
 }
-
-
 ?>
