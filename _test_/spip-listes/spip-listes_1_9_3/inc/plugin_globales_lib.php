@@ -146,11 +146,15 @@ if(!function_exists('__plugin_current_svnrevision_get')) {
 						if(is_dir($dir_plugin_sub = $dir_plugin."/".$file) && ($dh_s = opendir($dir_plugin_sub))) {
 							while (($file = readdir($dh_s)) !== false) {
 								if($file[0] == ".") continue;
-								if(preg_match('=\.('._PGL_SVN_LIRE_EXTENSIONS.')$=i', $file)) $script_files[] = $dir_plugin_sub."/".$file;
+								if(preg_match('=\.('._PGL_SVN_LIRE_EXTENSIONS.')$=i', $file)) {
+									$script_files[] = $dir_plugin_sub."/".$file;
+								}
 							}
 							closedir($dh_s);
 						}
-						else if(preg_match('=\.('._PGL_SVN_LIRE_EXTENSIONS.')$=i', $file)) $script_files[] = $dir_plugin."/".$file;
+						else if(preg_match('=\.('._PGL_SVN_LIRE_EXTENSIONS.')$=i', $file)) {
+							$script_files[] = $dir_plugin."/".$file;
+						}
 					}
 					closedir($dh);
 				}
@@ -337,8 +341,8 @@ if(!function_exists('__plugin_html_signature')) {
 		}
 		$result = ""
 			. $nom
-			. $version
-			. $base_version
+			. " " . $version
+			. " " . $base_version
 			;
 		if($html) {
 			$result = "<p class='verdana1 spip_xx-small' style='font-weight:bold;'>$result</p>\n";

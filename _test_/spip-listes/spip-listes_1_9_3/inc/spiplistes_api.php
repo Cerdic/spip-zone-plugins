@@ -236,6 +236,11 @@ function spiplistes_listes_abonnements_auteur ($id_auteur) {
 	return($result);
 }
 
+// CP-20080505 : renvoie array sql_where des listes publiees
+function spiplistes_listes_sql_where ($listes) {
+	return("statut=".implode(" OR statut=", array_map("sql_quote", explode(";", $listes))));
+}
+
 //taille d'une chaine sans saut de lignes ni espaces ni punct
 function spiplistes_strlen($out){
 	$out = preg_replace("/([[:space:]]|[[:punct:]])+/", "", $out);

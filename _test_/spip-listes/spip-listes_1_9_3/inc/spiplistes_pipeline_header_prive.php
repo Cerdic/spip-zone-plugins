@@ -68,7 +68,7 @@ function spiplistes_header_prive ($flux) {
 			case _SPIPLISTES_EXEC_CONFIGURE:
 				$flux .= "
 <!-- SpipListes JS -->
-<script language='JavaScript' type='text/JavaScript'>
+<script type='text/JavaScript'>
 <!--
 	jQuery.fn.toggle_options = function(div_options) {
 			if($(this).attr('checked')) {

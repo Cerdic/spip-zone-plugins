@@ -15,22 +15,23 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 	if(is_readable($filename)) {
 		// récupère les logins et mails existants pour éviter les doublons
 		$current_logins = array();
-		$sql_query = "SELECT login FROM spip_auteurs";
-		$sql_result = spip_query($sql_query);
+		$current_emails = array();
+		$sql_result = sql_select(array('login', 'email'), "spip_auteurs");
 		while($row = spip_fetch_array($sql_result)) {
 			$current_logins[] = strtolower($row['login']);
+			$current_emails[] = strtolower($row['email']);
 		}
 		//
 		$new_entries = file($filename);
 		$ii = count($new_entries);
-		$new_abonne = 0;
+		$new_abonne = $bad_login = $bad_email = 0;
 		$statut = "6forum";
 		for($jj=0; $jj<$ii; $jj++) {
 			$nouvelle_entree = trim($new_entries[$jj]);
 			if(!empty($nouvelle_entree) && !ereg("^[/#]", $nouvelle_entree)) {
 				list($email, $login, $nom) = explode($separateur, $nouvelle_entree);
 				$email = strtolower(trim($email));
-				if(email_valide($email)) {
+				if(($email = email_valide($email)) && !in_array($email, $current_emails)) {
 					$login = strtolower(trim($login));
 					if(empty($login)) {
 						$login = substr($email, 0, strpos($email, "@"));
@@ -39,18 +40,35 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 						if(empty($nom)) {
 							$nom = ucfirst($login);
 						}
-						$pass = creer_pass_aleatoire(8, $email);
-						$mdpass = md5($pass);
-						$htpass = generer_htpass($pass);
-						$cookie_oubli = creer_uniqid();
+
 						$result .= "<li class='verdana2'><strong>+</strong> <a href='mailto:$email'>$login</a> $email ($nom)</li>\n";
-						$sql_query = "INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, cookie_oubli) 
-							VALUES ("._q($nom).","._q($email).","._q($login).","._q($mdpass).","._q($statut).","._q($htpass).","._q($cookie_oubli).")";
-						spip_query($sql_query);
+
+						// ajoute l'invite' dans la table des auteurs
+						$pass = creer_pass_aleatoire(8, $email);
+						sql_insertq(
+							"spip_auteurs"
+							, array(
+								  'nom' => $nom
+								, 'email' => $email
+								, 'login' => $login
+								, 'pass' => md5($pass)
+								, 'statut' => $statut
+								, 'htpass' => generer_htpass($pass)
+								, 'cookie_oubli' => creer_uniqid()
+							)
+						);
+						
 						$id_auteur = spip_insert_id();
-						// ajoute le format de réception pour ce nouveau compte
-						$sql_query = "INSERT INTO spip_auteurs_elargis (id_auteur,`spip_listes_format`) VALUES  ("._q($id_auteur).","._q($format_abo).")";
-						spip_query($sql_query);
+						
+						// le format de reception
+						sql_insertq(
+							"spip_auteurs_elargis"
+							, array(
+								'id_auteur' => $id_auteur
+								, '`spip_listes_format`' => $format_abo
+							)
+						);
+						
 						// abonne le comptes aux listes
 						if(is_array($abos_liste) && count($abos_liste)) {
 							$sql_values = "";
@@ -59,11 +77,16 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 							}
 							$sql_values = rtrim($sql_values, ",");
 							if(!empty($sql_values)) {
-								$sql_query = "INSERT INTO spip_auteurs_listes (id_auteur,id_liste,date_inscription) VALUES ".$sql_values;
-								spip_query($sql_query);
+								$sql_query = "INSERT INTO spip_auteurs_listes (id_auteur,id_liste,date_inscription) 
+									VALUES ".$sql_values;
+								sql_query($sql_query);
 							}
 						}
+					} else {
+						$bad_login++;
 					}
+				} else {
+					$bad_email++;
 				}
 			}
 		}
@@ -72,6 +95,12 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 		}
 		else {
 			$result = "<br />&lt;none&gt;\n";
+		}
+		if($bad_login) {
+			$result .= "<br />"._T('pass_erreur')." login: $bad_login\n";
+		}
+		if($bad_email) {
+			$result .= "<br />"._T('pass_erreur')." email: $bad_email\n";
 		}
 		$result = "<strong>$realname</strong>\n" . $result;
 	}

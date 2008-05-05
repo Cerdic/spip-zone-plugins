@@ -47,63 +47,74 @@ function exec_spiplistes_import_export(){
 		$$key = _request($key);
 	}
 
-	switch($separateur) {
-		case 'sc':
-			$separateur = ";";
-			break;
-		case 'tab':
-		default:
-			$separateur = "\t";
-			break;
-	}
+	$separateur = (($separateur == 'tab') ? "\t" : ";");
 	
-	// generation du fichier export ?
-	if ($btn_valider_export && $export_id && ($connect_statut == "0minirezo")) {
-		if (intval($export_id)>0) {
-		// exportation d'une liste ID ? 
-			$sql_query = 
-				"SELECT a.email,a.nom,a.login FROM spip_auteurs AS a, spip_auteurs_listes AS l 
-				WHERE l.id_liste = "._q($export_id)." AND a.id_auteur=l.id_auteur AND a.statut!='5poubelle' "
+	$flag_autorise = (
+			($connect_statut == "0minirezo") && $connect_toutes_rubriques
+		);
+
+	if($flag_autorise) {
+	
+		// generation du fichier export ?
+		if($btn_valider_export && $export_id) {
+		
+			$sql_select = array('a.email', 'a.nom', 'a.login');
+			$sql_from = array('spip_auteurs AS a');
+			$sql_where = array("a.statut!=".sql_quote('5poubelle'));
+			if(($id_liste = intval($export_id)) > 0) {
+			// exportation d'une liste ID ? 
+				$sql_from[] = "spip_auteurs_listes AS l";
+				$sql_where[] = "l.id_liste=".sql_quote($id_liste);
+				$sql_where[] = "a.id_auteur=l.id_auteur";
+			}
+			else {
+			// autre type de liste
+				if($export_id == "sans_abonnement") {
+					if(spiplistes_spip_est_inferieur_193()) {
+						$sql_where[] = "a.id_auteur NOT IN (SELECT id_auteur FROM spip_auteurs_listes GROUP BY id_auteur)";
+					} else {
+						$selection = sql_select("id_auteur", "spip_auteurs_listes", '','id_auteur','','','','',false);
+						$sql_where[] = "a.id_auteur NOT IN ($selection)";
+					}
+				} 
+				else if($export_id == "desabo") {
+					$sql_from[] = "spip_auteurs_elargis AS f";
+					$sql_where[] = "a.id_auteur=f.id_auteur";
+					$sql_where[] = "f.`spip_listes_format`=".sql_quote('non');
+				}
+			}
+
+			$sql_result = sql_select(
+				array('a.email', 'a.nom', 'a.login')
+				, $sql_from
+				, $sql_where
+				);
+
+			$nb_inscrits = sql_count($sql_result);
+			
+			$str_export = ""
+				. "# ".__plugin_html_signature(_SPIPLISTES_PREFIX, true, false)."\n"
+				. "# "._T('spiplistes:membres_liste')."\n"
+				. "# liste id: $export_id\n"
+				. "# ".$GLOBALS['meta']['nom_site']."\n"
+				. "# ".$GLOBALS['meta']['adresse_site']."\n"
+				. "# date: ".date("Y-m-d")."\n"
+				. "# nb abos: ".$nb_inscrits."\n\n"
+				. "#\n"
+				. "# 'email'".$separateur."'login'".$separateur."'nom'\n\n"
 				;
-		}
-		else {
-		// autre type de liste
-			if($export_id == "sans_abonnement") {
-				$sql_query = 
-					"SELECT a.email, a.nom, a.login FROM spip_auteurs AS a
-					WHERE a.statut!='5poubelle' AND a.id_auteur NOT IN (SELECT l.id_auteur FROM spip_auteurs_listes AS l)";
+			
+			while($row = sql_fetch($sql_result)) {
+				$str_export .= $row['email'].$separateur.$row['login'].$separateur.$row['nom']."\n";
 			}
-			if($export_id == "desabo") {
-				$sql_query = 
-					"SELECT a.email,a.nom,a.login,f.`spip_listes_format` FROM spip_auteurs AS a, spip_auteurs_elargis AS f 
-					WHERE a.id_auteur=f.id_auteur 
-					AND a.statut!='5poubelle' 
-					AND f.`spip_listes_format`='non' "
-					;
-			}
+			// envoie le fichier
+			header("Content-type: text/plain");
+			header("Content-Disposition: attachment; filename=\"export_liste_$export_id-".date("Y-m-d").".txt\"");
+			echo ($str_export);
+			exit;
 		}
-		$sql_result = spip_query($sql_query);
-		$nb_inscrits = sql_count($sql_result);
-		
-		$str_export = "# ".__plugin_html_signature(true, false)."\n"
-			. "# "._T('spiplistes:membres_liste')."\n"
-			. "# liste id: $export_id\n"
-			. "# ".$GLOBALS['meta']['nom_site']."\n"
-			. "# ".$GLOBALS['meta']['adresse_site']."\n"
-			. "# date: ".date("Y-m-d")."\n"
-			. "# nb abos: ".$nb_inscrits."\n\n"
-			;
-		
-		while($row = spip_fetch_array($sql_result)) {
-			$str_export .= $row['email'].$separateur.$row['login'].$separateur.$row['nom']."\n";
-		}
-		// envoie le fichier
-		header("Content-type: text/plain");
-		header("Content-Disposition: attachment; filename=\"export_liste_$export_id-".date("Y-m-d").".txt\"");
-		echo ($str_export);
-		exit;
+		// fin de generation du fichier export
 	}
-	// fin de generation du fichier export
 
 ////////////////////////////////////
 // PAGE CONTENU
@@ -118,7 +129,7 @@ function exec_spiplistes_import_export(){
 	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
 
 	// la gestion du courrier est réservée aux admins 
-	if ($connect_statut != "0minirezo") {
+	if (!$flag_autorise) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}       
 
@@ -131,11 +142,13 @@ function exec_spiplistes_import_export(){
 		;
 	
 	// importation
-	$flag_import_fichier_ok = (count($_FILES) && is_array($fichier_import = $_FILES['fichier_import']) && !$fichier_import['error']);
+	$flag_import_fichier_ok = 
+		(count($_FILES) && is_array($fichier_import = $_FILES['fichier_import']) 
+		&& !$fichier_import['error']);
 
 	if($btn_valider_import && $flag_import_fichier_ok) {
 		if(!($abos_liste && is_array($abos_liste) && count($abos_liste))) {
-		// A oublié de sélectionner une liste de destination
+		// A oublie' de selectionner une liste de destination
 			$page_result .= __boite_alerte(_T('spiplistes:Selectionnez_une_liste_pour_import'), true);
 		}
 	}
@@ -155,9 +168,20 @@ function exec_spiplistes_import_export(){
 				;
 		}
 	}
-	$list = spip_query ("SELECT id_liste,titre,texte FROM spip_listes 
-		WHERE statut = '"._SPIPLISTES_PUBLIC_LIST."' OR statut = '"._SPIPLISTES_PRIVATE_LIST."' OR statut = '"._SPIPLISTES_MONTHLY_LIST."' ");
+
+	$list = sql_select(
+		array('id_liste','titre','texte')
+		, 'spip_listes'
+		, spiplistes_listes_sql_where(_SPIPLISTES_LISTES_STATUTS_OK));
+
 	$nb_listes = sql_count($list);
+	
+	if($nb_listes) {
+		$listes_array = array();
+		while($row = sql_fetch($list)) {
+			$listes_array[] = $row;
+		}
+	}
 	
 	if(!$nb_listes) {
 		$page_result .= __boite_alerte(_T('spiplistes:Pas_de_liste_pour_import'), true);
@@ -171,7 +195,7 @@ function exec_spiplistes_import_export(){
 			;
 		// liste des listes
 		$ii = 0;
-		while($row = spip_fetch_array($list)) {
+		foreach($listes_array as $row) {
 			$id_liste = $row['id_liste'] ;
 			$titre = $row['titre'] ;
 			$checked = ($nb_listes == 1) ? "checked='checked'" : "";
@@ -192,9 +216,15 @@ function exec_spiplistes_import_export(){
 			// Sélection du format de réception
 			. debut_cadre_relief("", true, "", _T('spiplistes:Format_de_reception'))
 			. "<ul style='padding-left:0;list-style:none;' class='verdana2'>\n"
-			. "<li><input name='format_abo' value='html' checked='checked' type='radio' id='fhtml'><label for='fhtml'>"._T('spiplistes:html')."</label></li>"
-			. "<li><input name='format_abo' value='texte' type='radio' id='ftexte'><label for='ftexte'>"._T('spiplistes:texte')."</label></li>"
-			. "<li><input name='format_abo' value='non' type='radio' id='fhtml'><label for='fnon'>"._T('spiplistes:desabonnement')."</label></li>"
+			. "<li>"
+				. spiplistes_form_input_radio('format_abo', 'html', _T('spiplistes:html'), true, true, false)
+				. "</li>\n"
+			. "<li>"
+				. spiplistes_form_input_radio('format_abo', 'texte', _T('spiplistes:texte'), false, true, false)
+				. "</li>\n"
+			. "<li>"
+				. spiplistes_form_input_radio('format_abo', 'non', _T('spiplistes:desabonnement'), false, true, false)
+				. "</li>\n"
 			. "</ul>"
 			. fin_cadre_relief(true)
 			//
@@ -202,11 +232,11 @@ function exec_spiplistes_import_export(){
 			. debut_cadre_relief("", true, "", _T('spiplistes:importer_fichier'))
 			. "<input type='file' size='40' name='fichier_import' />"
 			//
-			. fieldset_separateur('i')
+			. spiplistes_fieldset_separateur($separateur)
 			//
 			. fin_cadre_relief(true)
-			. "<div style='text-align:right;'><input type='submit' name='btn_valider_import' value='"._T('bouton_valider')."' class='fondo' onclick='Soumettre()' /></div>\n"
-			. "</form>\n"
+			. spiplistes_form_bouton_valider('btn_valider_import', _T('bouton_valider'), false, true)
+			. spiplistes_form_fin(true)
 			;
 	} // end else
 	$page_result .= fin_cadre_trait_couleur(true);
@@ -214,47 +244,41 @@ function exec_spiplistes_import_export(){
 
 	// export //(original from erational.org)
 	// formulaire d'export
-	$sql_query = "SELECT id_liste,titre FROM spip_listes 
-		WHERE statut = '"._SPIPLISTES_PUBLIC_LIST."' 
-		OR statut = '"._SPIPLISTES_PRIVATE_LIST."' 
-		OR statut = '"._SPIPLISTES_MONTHLY_LIST."'";
-	$list = spip_query($sql_query);
-	$nb_listes = sql_count($list);
+
 	if ($nb_listes > 0) {
 		$page_result .= ""
 			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'listes_out-24.png', true, "", _T('spiplistes:Exporter'))
 			// exportation par listes
+			. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT), true)
 			. debut_cadre_relief("", true, "", _T('spiplistes:Exporter_une_liste_d_abonnes'))
-			. "<form action='" . generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT) . "' method='post' name='retour_export'>\n"
 			;
-		while($row = spip_fetch_array($list)) {
-			$id_liste = $row['id_liste'] ;
-			$titre = $row['titre'];
-			$checked = ($nb_listes==1) ? " checked='checked'" : "";
+		$ii = 1;
+		foreach($listes_array as $row) {
+			$id_liste = intval($row['id_liste']);
 			$page_result .= ""
-				. "<div class='verdana2'>\n"
-				. "<input type='radio' name='export_id' id='export_id_$id_liste' value='$id_liste' $checked />\n"
-				. "<label for='export_id_$id_liste'><strong>$titre</strong> <em>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</em></label>\n"
-				. "</div>\n"
+				. "<li style='padding:4px;background-color:#".(($ii++ % 2) ? "fff" : "ccc").";'>"
+				. spiplistes_form_input_radio('export_id', $id_liste
+					, "<strong>".$row['titre']."</strong> <em>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</em>"
+					, ($nb_listes==1), true, false)
+				. "</li>\n"
 				;
 		}
 		$page_result .= ""
 			. fin_cadre_relief(true)
+			. "<!-- fin de liste export -->\n"
 			//
 			// exportation autres
 			. debut_cadre_relief("", true, "", _T('spiplistes:Exporter_une_liste_de_non_abonnes'))
 			. "<div class='verdana2'>\n"
-			. "<input id='sansliste' type='radio' name='export_id' value='sans_abonnement' />\n"
-			. "<label for='sansliste'>"._T('spiplistes:abonne_aucune_liste')."</label>"."<br />\n"
-			. "<input id='desabonnes' type='radio' name='export_id' value='desabo' />\n"
-			. "<label for='desabonnes'>"._T('spiplistes:desabonnes')."</label>\n"
+			. spiplistes_form_input_radio('export_id', 'sans_abonnement', _T('spiplistes:abonne_aucune_liste'), false, true, false)
+			. spiplistes_form_input_radio('export_id', 'desabo', _T('spiplistes:desabonnes'), false, true, false)
 			. "</div>"
 			. fin_cadre_relief(true)
 			//
-			. fieldset_separateur('e')
+			. spiplistes_fieldset_separateur($separateur)
 			//
-			. "<div style='text-align:right;'><input type='submit' name='btn_valider_export' class='fondo' value='"._T('bouton_valider')."' /></div>\n"
-			. "</form>\n"
+			. spiplistes_form_bouton_valider('btn_valider_export', _T('bouton_valider'), false, true)
+			. spiplistes_form_fin(true)
 			. fin_cadre_trait_couleur(true)
 			;
 	}
@@ -264,13 +288,14 @@ function exec_spiplistes_import_export(){
 	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
 }
 
-function fieldset_separateur ($id)  {
+function spiplistes_fieldset_separateur ($sep)  {
+	$checked = ($sep==";");
 	return(""
 		. "<fieldset class='verdana2'><legend>"._T('spiplistes:separateur_de_champ_').":</legend>"
-		. "<input type='radio' name='separateur' value='tab' id='separateur_tab_$id' checked='checked' />\n"
-		. "<label for='separateur_tab_$id'>"._T('spiplistes:separateur_tabulation')."</label>&nbsp;\n"
-		. "<input type='radio' name='separateur' value='sc' id='separateur_sc_$id' />\n"
-		. "<label for='separateur_sc_$id'>"._T('spiplistes:separateur_semicolon')."</label>\n"
+		. spiplistes_form_input_radio('separateur', 'tab'
+			, _T('spiplistes:separateur_tabulation'), $checked, true, false)
+		. spiplistes_form_input_radio('separateur', 'sc'
+			, _T('spiplistes:separateur_semicolon'), !$checked, true, false)
 		. "</fieldset>\n"
 		);
 	}
