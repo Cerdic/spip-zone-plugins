@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2007                                                *
+ *  Copyright (c) 2001-2008                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -13,10 +13,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
-include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@action_instituer_groupe_mots_dist
-function action_instituer_groupe_mots()
+function action_instituer_groupe_mots_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
@@ -25,43 +24,53 @@ function action_instituer_groupe_mots()
 	  action_instituer_groupe_mots_get($arg);
 	elseif (!preg_match(",^(-?\d+)$,", $arg, $r)) {
 		 spip_log("action_instituer_groupe_mots_dist $arg pas compris");
-	} else action_instituer_groupe_mots_post($r);
+	} else action_instituer_groupe_mots_post($r[1]);
 }
 
 
 // http://doc.spip.org/@action_instituer_groupe_mots_post
-function action_instituer_groupe_mots_post($r)
+function action_instituer_groupe_mots_post($id_groupe)
 {
-//	global $messages, $acces_comite, $acces_forum, $acces_minirezo, $new, $articles, $breves, $change_type, $descriptif, $id_groupe, $obligatoire, $rubriques, $syndic, $texte, $unseul;
-	$id_groupe = intval($r[1]);
+	$acces_comite = _request('acces_comite');
+	$acces_forum = _request('acces_forum');
+	$acces_minirezo = _request('acces_minirezo');
+	$change_type = _request('change_type');
+	$descriptif = _request('descriptif');
+	$obligatoire = _request('obligatoire');
+	$texte = _request('texte');
+	$unseul = _request('unseul');
+	$id_parent= _request('id_parent'); //YOANN
 
 	if ($id_groupe < 0){
-		spip_query("DELETE FROM spip_groupes_mots WHERE id_groupe=" . (0- $id_groupe));
+		sql_delete("spip_groupes_mots", "id_groupe=" . (0- $id_groupe));
 	} else {
-		$change_type = (corriger_caracteres($GLOBALS['change_type']));
-		$texte = (corriger_caracteres($GLOBALS['texte']));
-		$descriptif = (corriger_caracteres($GLOBALS['descriptif']));
-		$obligatoire=$GLOBALS['obligatoire'] ? 'oui' : 'non';
-		$unseul=$GLOBALS['unseul'] ? 'oui' : 'non';
-		$id_parent=$GLOBALS['id_parent']; //YOANN
-		$acces_comite=$GLOBALS['acces_comite'] ? 'oui' : 'non';
-		$acces_forum=$GLOBALS['acces_forum'] ? 'oui' : 'non';
-		$acces_minirezo=$GLOBALS['acces_minirezo'] ? 'oui' : 'non';
+		$change_type = (corriger_caracteres($change_type));
+		$texte = (corriger_caracteres($texte));
+		$descriptif = (corriger_caracteres($descriptif));
+
+		$valeurs = array(
+			"titre" =>$change_type,
+			"texte"=>$texte,
+			"descriptif"=>$descriptif,
+			"unseul"=>$unseul,
+			"obligatoire"=>$obligatoire,
+			"minirezo"=>$acces_minirezo,
+			"comite"=>$acces_comite,
+			"forum"=>$acces_forum,
+			"id_parent"=>$id_parent);
 
 		$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));	
-		foreach($tables_installees as $chose => $m) { 
-			$q.=", ".$chose."="._q($GLOBALS[$chose] ? 'oui' : 'non');
-			$q1.=", ".$chose; 
-			$q2.=", "._q($GLOBALS[$chose] ? 'oui' : 'non'); 
-		}
-		if ($id_groupe) {	// modif groupe
-			spip_query("UPDATE spip_mots SET type=" . _q($change_type) . " WHERE id_groupe=$id_groupe");
-			spip_query("UPDATE spip_groupes_mots SET titre=" . _q($change_type) . ",id_parent="._q($id_parent).", texte=" . _q($texte) . ", descriptif=" . _q($descriptif) . ", unseul=" . _q($unseul) . ", obligatoire=" . _q($obligatoire)
-			.$q.", minirezo="._q($acces_minirezo).", comite="._q($acces_comite).", forum="._q($acces_forum)
-			." WHERE id_groupe=".$id_groupe);
+		foreach($tables_installees as $chose => $m) {
+	  		$valeurs[$chose] = ((_request($chose)) ? 'oui' : 'non');
+	 	}
 
-		} else {	// creation groupe
-		  spip_abstract_insert('spip_groupes_mots', "(titre,id_parent, texte, descriptif, unseul,  obligatoire".$q1.", minirezo, comite, forum)", "(" . _q($change_type) . ", "._q($id_parent).", " . _q($texte) . ", " . _q($descriptif) . ", " . _q($unseul) . ", " . _q($obligatoire) . $q2. ", " . _q($acces_minirezo) . ",  " . _q($acces_comite) . ", " . _q($acces_forum) . " )");
+		if ($id_groupe) {	// modif groupe
+			sql_updateq("spip_mots", array("type" => $change_type), "id_groupe=$id_groupe");
+
+			sql_updateq("spip_groupes_mots", $valeurs);
+
+		} else {	//spip_log("creation groupe");
+		  sql_insertq('spip_groupes_mots', $valeurs);
 		}
 	}
 }
@@ -72,13 +81,20 @@ function action_instituer_groupe_mots_get($table)
 {
 	$titre = _T('info_mot_sans_groupe');
 
-	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));	
-	foreach($tables_installees as $chose => $m) { 
-		$q1.=", ".$chose; 
-		$q2.=", '"._q(($table==$chose) ? 'oui' : 'non'); 
+	$valeurs = array(
+		'titre' => $titre,
+		'unseul' => 'non',
+		'obligatoire' => 'non',
+		'minirezo' =>  'oui',
+		'comite' =>  'non',
+		'forum' => 'non');
+
+	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
+	foreach($tables_installees as $chose => $m) {
+		$valeurs[$chose] = (($table==$chose) ? 'oui' : 'non');
 	}
-	$id_groupe = spip_abstract_insert("spip_groupes_mots", "(titre, unseul, obligatoire".$q1.", minirezo, comite, forum)", "(" . _q($titre) . ", 'non',  'non'".$q2.", 'oui', 'non', 'non'" . ")");
-//YOANN : pas de gestion de l'arborescence a ce niveau 
+	$id_groupe = sql_insertq("spip_groupes_mots", $valeurs) ;		
+	//YOANN : pas de gestion de l'arborescence a ce niveau 
 
         redirige_par_entete(parametre_url(urldecode(_request('redirect')),
 					  'id_groupe', $id_groupe, '&'));
