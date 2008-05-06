@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2007                                                *
+ *  Copyright (c) 2001-2008                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -18,7 +18,7 @@ include_spip('inc/actions');
 // http://doc.spip.org/@exec_mots_tous_dist
 function exec_mots_tous_dist()
 {
-	global $conf_mot, $spip_lang, $spip_lang_right, $son_groupe;
+	global $spip_lang, $spip_lang_left, $spip_lang_right, $son_groupe, $conf_mot;
 
 ///////////////////
 //MODIFICATION
@@ -28,7 +28,8 @@ function exec_mots_tous_dist()
 //	$choses= array('articles', 'breves', 'rubriques', 'syndic');
 // - ceux du plugin
 //	include(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
-	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));	
+	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
+	
 	if (!$tables_installees){
 	  $tables_installees=array("articles"=>true,"rubriques"=>true,"breves"=>true,"syndic"=>true);
 	  ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
@@ -38,12 +39,13 @@ function exec_mots_tous_dist()
 	foreach($tables_installees as $chose => $m) { $choses[]= $chose; }
 ///////////////////
 
-	$conf_mot = intval($conf_mot);
+	$conf_mot = intval(_request('conf_mot'));
+	$son_groupe = intval(_request('son_groupe'));
 
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_mots_tous'), "naviguer", "mots");
-	debut_gauche();
+	echo debut_gauche('', true);
 
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
@@ -55,11 +57,11 @@ function exec_mots_tous_dist()
 	}
 
 
-	creer_colonne_droite();
+	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
-	debut_droite();
+	echo debut_droite('', true);
 
-	gros_titre(_T('titre_mots_tous'));
+	echo gros_titre(_T('titre_mots_tous'),'', false);
 	if (autoriser('creer','groupemots')) {
 	  echo typo(_T('info_creation_mots_cles')) . aide ("mots") ;
 	}
@@ -91,9 +93,9 @@ function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
     $tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
 	foreach($tables_installees as $chose => $m) { $choses[]= $chose; }
 
-    $result_groupes = spip_query($q="SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots where id_parent=".$id_groupe." ORDER BY multi");
+    $result_groupes = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "id_parent=".$id_groupe, "","multi");
 
-	while ($row_groupes = spip_fetch_array($result_groupes)) {
+	while ($row_groupes = sql_fetch($result_groupes)) {
 		$id_groupe = $row_groupes['id_groupe'];
 		$id_parent= $row_groupes['id_parent'];
 		$titre_groupe = typo($row_groupes['titre']);
@@ -104,7 +106,8 @@ function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
 ///////////////////
 //MODIFICATION
 ///////////////////
-/*		$articles = $row_groupes['articles'];
+/*		
+		$articles = $row_groupes['articles'];
 		$breves = $row_groupes['breves'];
 		$rubriques = $row_groupes['rubriques'];
 		$syndic = $row_groupes['syndic'];
@@ -117,8 +120,7 @@ function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
 		// Afficher le titre du groupe
 		echo "<a id='mots_tous-$id_groupe'></a>";
 
-
-		debut_cadre_enfonce("groupe-mot-24.gif",false, '', $titre_groupe);
+		echo debut_cadre_enfonce("groupe-mot-24.gif", true, '', $titre_groupe);
 		
 		//YOANN
 		//TODO Ajaxiser la partie ouverture et fermeture  ci dessous
@@ -162,12 +164,12 @@ function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
 		if ($acces_forum == "oui") $res .= "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
 
  		echo "<span class='verdana1 spip_x-small'>", $res, "</span>";
-		if ($descriptif) {
+		if (strlen($descriptif)) {
 			echo "<div style='border: 1px dashed #aaaaaa;' class='verdana1 spip_small'>", "<b>",_T('info_descriptif'),"</b> ", propre($descriptif), "&nbsp; </div>";
 		}
 
 		if (strlen($texte)>0){
-			echo "<span class='verdana1 spip_small'>", propre($texte), "</span>";
+			echo "<div class='verdana1 spip_small'>", propre($texte), "</div>";
 		}
 
 		//
@@ -179,7 +181,7 @@ function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
 
 		echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
 
-		// Preliminaire: confirmation de suppression d'un mot lie à qqch
+		// Preliminaire: confirmation de suppression d'un mot lie a qqch
 		// (cf fin de afficher_groupe_mots_boucle executee a l'appel precedent)
 		if ($conf_mot  AND $son_groupe==$id_groupe) {
 			include_spip('inc/grouper_mots');
@@ -196,23 +198,23 @@ function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
 			echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 			echo "<tr>";
 			echo "<td>";
-			icone(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");
+			echo icone_inline(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif", $spip_lang_left);
 			echo "</td>";
 			echo "\n<td id='editer_mot-$id_groupe-supprimer'",
 			  (!$groupe ? '' : " style='visibility: hidden'"),
 			  ">";
-			icone(_T('icone_supprimer_groupe_mots'), redirige_action_auteur('instituer_groupe_mots', "-$id_groupe", "mots_tous"), "groupe-mot-24.gif", "supprimer.gif");
+			echo icone_inline(_T('icone_supprimer_groupe_mots'), redirige_action_auteur('instituer_groupe_mots', "-$id_groupe", "mots_tous"), "groupe-mot-24.gif", "supprimer.gif", $spip_lang_left);
 			echo "</td>";
 
 			// YOANN on permet d'ajouter un sous groupe a n'importe quel groupe
 			echo "<td>";
-			icone(_T('motspartout:icone_creation_sous_groupe_mots'), generer_url_ecrire("mots_type","new=oui&id_parent=".$id_groupe), "groupe-mot-24.gif", "edit.gif");
+			echo icone_inline(_T('motspartout:icone_creation_sous_groupe_mots'), generer_url_ecrire("mots_type","new=oui&id_parent=".$id_groupe), "groupe-mot-24.gif", "edit.gif");
 			echo "</td>";
 			//FIN YOANN
 
 			echo "<td>";
 			echo "<div align='$spip_lang_right'>";
-			icone(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous', "#mots_tous-$id_groupe")), "mot-cle-24.gif", "creer.gif");
+			echo icone_inline(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous', "#mots_tous-$id_groupe")), "mot-cle-24.gif", "creer.gif", $spip_lang_right);
 			echo "</div>";
 			echo "</td></tr></table>";
 		}
@@ -221,7 +223,7 @@ function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
 
 		if($id_parent==0) echo "</div>"; //YOANN fin du div qui permet de fermer ouvrir un bloc
 
-		fin_cadre_enfonce();
+		echo fin_cadre_enfonce(true);
 
 	}
 
