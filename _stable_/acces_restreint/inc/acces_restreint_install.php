@@ -5,6 +5,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	include_spip('inc/meta');
+	include_spip('inc/vieilles_defs');
 	function AccesRestreint_upgrade($nom_meta_base_version,$version_cible){
 		$current_version = 0.0;
 		if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )

@@ -4,6 +4,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/vieilles_defs');
+
 // Liste des zones a laquelle appartient le visiteur, au format '1,2,3'
 // Cette fonction est appelee a chaque hit et peut etre completee (pipeline)
 function AccesRestreint_liste_zones_autorisees($zones='', $id_auteur=NULL) {
