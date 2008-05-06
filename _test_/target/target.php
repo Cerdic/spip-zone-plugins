@@ -10,10 +10,10 @@
  * © 2006 - Distribue sous licence GNU/GPL
  * Dernière mise à jour: 18 juillet 2006
  */
-	function target_affichage_final($texte) {
-		$texte = str_replace('spip_out', 'spip_out" target="_blank"', $texte);
-		$texte = str_replace('rel="directory"', 'class="spip_out" target="_blank"', $texte);
-		$texte = str_replace('spip_glossaire', 'spip_glossaire" target="_blank"', $texte);
+	function target_affichage_final($texte) {		
+    $texte = str_replace('spip_out"', 'spip_out" target="_blank"', $texte);
+		$texte = str_replace('rel="directory"', 'rel="directory" class="spip_out" target="_blank"', $texte);
+		$texte = str_replace('spip_glossaire"', 'spip_glossaire" target="_blank"', $texte);		
 		return $texte;
 	}
 	
