@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2007                                                *
+ *  Copyright (c) 2001-2008                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -17,8 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_mots_type_dist
 function exec_mots_type_dist()
 {
-	global $connect_statut, $descriptif, $id_groupe, $new, $options, $texte, $titre,$id_parent; //YOANN Rajout du id_parent
-	//YOANN : dans la chasse aux globales je n'ai rien fait ici 
+	$id_groupe= intval(_request('id_groupe'));
 
 ///////////////////
 //MODIFICATION
@@ -31,35 +30,27 @@ function exec_mots_type_dist()
   }
 ///////////////////
 
-  if ($new == "oui") {
+	if (!$id_groupe) {
+
 	  $id_groupe = 0;
-	  $type = filtrer_entites(_T('titre_nouveau_groupe'));
+	  $type = $titre = filtrer_entites(_T('titre_nouveau_groupe'));
 	  $onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 	  $ancien_type = '';
 	  $unseul = 'non';
 	  $obligatoire = 'non';
-///////////////////
-//MODIFICATION
-///////////////////
-/*	$articles = 'oui';
-	$breves = 'oui';
-	$rubriques = 'non';
-	$syndic = 'oui';
-*/
-///////////////////
+	  $articles = 'oui';
+	  $breves = 'oui';
+	  $rubriques = 'non';
+	  $syndic = 'oui';
 	  $acces_minirezo = 'oui';
 	  $acces_comite = 'oui';
 	  $acces_forum = 'non';
+	  $row = array();
 	} else {
-		$id_groupe= intval($id_groupe);
-		$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
 
-///////////////////
-//MODIFICATION
-///////////////////
-//	while($row = spip_fetch_array($result_groupes)) {
-	if($row = spip_fetch_array($result_groupes)) {
-///////////////////
+		$result_groupes = sql_select("*", "spip_groupes_mots", "id_groupe=$id_groupe");
+
+		if ($row = sql_fetch($result_groupes)) {
 			$id_groupe = $row['id_groupe'];
 			$type = $row['titre'];
 			$id_parent=$row['id_parent']; //YOANN
@@ -68,15 +59,10 @@ function exec_mots_type_dist()
 			$texte = $row['texte'];
 			$unseul = $row['unseul'];
 			$obligatoire = $row['obligatoire'];
-///////////////////
-//MODIFICATION
-///////////////////
-/*		$articles = $row['articles'];
-		$breves = $row['breves'];
-		$rubriques = $row['rubriques'];
-		$syndic = $row['syndic'];
-*/
-///////////////////
+			$articles = $row['articles'];
+			$breves = $row['breves'];
+			$rubriques = $row['rubriques'];
+			$syndic = $row['syndic'];
 			$acces_minirezo = $row['minirezo'];
 			$acces_comite = $row['comite'];
 			$acces_forum = $row['forum'];
@@ -84,30 +70,30 @@ function exec_mots_type_dist()
 		}
 	}
 
-	pipeline('exec_init',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
+	if (($id_groupe AND !$row) OR
+	    !autoriser($id_groupe?'modifier' : 'creer', 'groupemots', $id_groupe)) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
+
+	pipeline('exec_init',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("&laquo; $titre &raquo;", "naviguer", "mots");
 	
-	debut_gauche();
+	echo debut_gauche('', true);
 
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
-	creer_colonne_droite();
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
-	debut_droite();
-
-	if ($connect_statut != "0minirezo") {
-		echo "<h3>"._T('avis_non_acces_page')."</h3>";
-		exit;
-	}
-
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
+	echo creer_colonne_droite('', true);
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
+	echo debut_droite('', true);
 
 	$type = entites_html(rawurldecode($type));
 
-	$res = debut_cadre_relief("groupe-mot-24.gif", true)
+	$res = debut_cadre_relief("", true)
 	. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
 	. "<tr>"
-	. "<td  align='right' valign='top'>"
-	. icone(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif",'', false)
+	. "<td  align='right' valign='top'><br />"
+	. icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "groupe-mot-24.gif", "rien.gif")
 	. "</td>"
 	. "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n"
 	. "<td style='width: 100%' valign='top'>"
@@ -116,47 +102,36 @@ function exec_mots_type_dist()
 	. aide("motsgroupes")
 	. "<div class='verdana1'>"
 	. debut_cadre_formulaire('',true)
-	. "<b>"._T('info_changer_nom_groupe')."</b><br />\n"
-	. "<input type='text' size='40' class='formo' name='change_type' value=\"$type\" $onfocus />\n";
+	. "<label for='change_type'><b>"._T('info_changer_nom_groupe')."</b></label><br />\n"
+	. "<input type='text' size='40' class='formo' name='change_type' id='change_type' value=\"$type\" $onfocus />\n";
 		
-	if ($options == 'avancees' OR $descriptif) {
-			$res .= "<br /><b>"._T('texte_descriptif_rapide')
-			. "</b><br />"
-			. "<textarea name='descriptif' class='forml' rows='4' cols='40'>"
-			. entites_html($descriptif)
-			. "</textarea>\n";
-	} else
-			$res .= "<input type='hidden' name='descriptif' value=\"$descriptif\" />";
+	$res .= "<br /><label for='descriptif'><b>"._T('texte_descriptif_rapide')
+	  . "</b></label><br />"
+	  . "<textarea name='descriptif' id='descriptif' class='forml' rows='4' cols='40'>"
+	  . entites_html($descriptif)
+	  . "</textarea>\n";
 
-	if ($options == 'avancees' OR $texte) {
-			$res .= "<br /><b>"._T('info_texte_explicatif')."</b><br />";
-			$res .= "<textarea name='texte' rows='8' class='forml' cols='40'>";
-			$res .= entites_html($texte);
-			$res .= "</textarea>\n";
-	} else
-		  $res .= "<input type='hidden' name='texte' value=\"$texte\" />";
+	$res .= "<br /><label for='texte'><b>"._T('info_texte_explicatif')."</b></label><br />";
+	$res .= "<textarea name='texte' id='texte' rows='8' class='forml' cols='40'>";
+	$res .= entites_html($texte);
+	$res .= "</textarea>\n";
 
 	//YOANN
-    	$res .= "<input type='hidden' name='id_parent' value=\"$id_parent\" />";
-    	//FIN YOANN
+    	$res .= "<input type='hidden' name='id_parent' id='id_parent' value=\"$id_parent\" />";
+   	//FIN YOANN
 
-	$res .= "<div align='right'><input type='submit' class='fondo' value='"
+	$res .= "<div style='text-align: right'><input type='submit' class='fondo' value='"
 	. _T('bouton_valider')
 	. "' /></div>"
 	. fin_cadre_formulaire(true)
 	. "</div>"
-	. "</td></tr></table>"
-	. fin_cadre_relief(true)
 	. "<br />\n<div class='verdana1'>"
 	. debut_cadre_formulaire('',true)
 	. "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>"
-	. "<b>"._T('info_mots_cles_association')."</b>"
-	. "<br />";
-		
-///////////////////
-//MODIFICATION
-///////////////////
+	. "<b>"._T('info_mots_cles_association')."</b>";
 /*		
+	//les affectations possibles dependent de la liste définie dans la table de mots_partout 
+	. "<br />";
 	$checked =  ($articles == "oui") ? "checked='checked'" : ''; 
 	$res .= "<input type='checkbox' name='articles' value='oui' $checked id='articles' /> <label for='articles'>"._T('item_mots_cles_association_articles')."</label><br />";
 	$activer_breves = $GLOBALS['meta']["activer_breves"];
@@ -173,10 +148,8 @@ function exec_mots_type_dist()
 	$res .= "<input type='checkbox' name='rubriques' value='oui' $checked id='rubriques' /> <label for='rubriques'>"._T('item_mots_cles_association_rubriques')."</label><br />";
 
 	$checked = ($syndic == "oui") ? "checked='checked'" : ''; 
-	$res .= "<input type='checkbox' name='syndic' value='oui' $checked id='syndic' /> <label for='syndic'>"._T('item_mots_cles_association_sites')."</label>"
-	.  "</div>";
-
-	*/			
+	$res .= "<input type='checkbox' name='syndic' value='oui' $checked id='syndic' /> <label for='syndic'>"._T('item_mots_cles_association_sites')."</label>";
+*/	
 	foreach($tables_installees as $chose => $m) {
 		if ($chose!='forum'){
 			if ($row[$chose] == "oui") $checked = "checked";
@@ -184,7 +157,8 @@ function exec_mots_type_dist()
 			$res .= "<br/><input type='checkbox' name='$chose' value='oui' $checked id='$chose'> <label for='$chose'>"._T('motspartout:item_mots_cles_association_'.$chose)."</label>";
 		}
 	}
-///////////////		
+	$res .= "</div>";
+
 	if ($GLOBALS['meta']["config_precise_groupes"] == "oui" OR $unseul == "oui" OR $obligatoire == "oui"){
 		$res .= "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>";
 
@@ -223,18 +197,25 @@ function exec_mots_type_dist()
 		$res .= "<input type='hidden' name='acces_forum' value='non' />";
 	}
 			
-	$res .= "<br /></div><div align='right'><input type='submit' class='fondo' value='"
+	$res .= "<br /></div><div style='text-align: right'><input type='submit' class='fondo' value='"
 	. _T('bouton_valider')
 	. "' /></div>"
 	.  fin_cadre_formulaire(true)
-	. "</div>";
-	
-	//$res .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
-	
+	. "</div>"
+	. "</td></tr></table>"
+	. fin_cadre_relief(true)
+	;
 
 	echo redirige_action_auteur('instituer_groupe_mots', $id_groupe, "mots_tous", "id_groupe=$id_groupe", $res),
-		pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>'')), fin_gauche(),
-		fin_page();
+	pipeline('affiche_milieu',
+		array('args' => array(
+			'exec' => 'mots_type',
+			'id_groupe' => $id_groupe
+		),
+		'data'=>'')
+	),
+	fin_gauche(),
+	fin_page();
+	}
 }
-
 ?>
