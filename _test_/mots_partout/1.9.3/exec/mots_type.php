@@ -18,6 +18,7 @@ include_spip('inc/presentation');
 function exec_mots_type_dist()
 {
 	$id_groupe= intval(_request('id_groupe'));
+	$id_parent= intval(_request('id_parent'));
 
 ///////////////////
 //MODIFICATION
