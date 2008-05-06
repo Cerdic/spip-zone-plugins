@@ -72,6 +72,9 @@ function compat_crayons_defs_dist() {
 		return spip_fetch_array($res);
 	}';
 
+	// Contourner un bug du plugin CFG
+	include_spip('base/abstract_sql');
+
 	return $defs;
 }
 

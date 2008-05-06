@@ -251,6 +251,7 @@ class Crayon {
 					$id = uniqid('wid');
 					$input = '<textarea style="width:100%;" class="crayon-active"'
 					. ' name="content_'.$this->key.'_'.$champ.'" id="'.$id.'">'
+					. "\n"
 					. entites_html($val)
 					. "</textarea>\n";
 					break;
