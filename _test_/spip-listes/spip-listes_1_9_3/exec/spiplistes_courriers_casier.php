@@ -157,13 +157,14 @@ function exec_spiplistes_courriers_casier () {
 	if($btn_confirmer_envoi 
 		&& $flag_modifiable
 	) {
-		sql_update(
+		$r = sql_update(
 			'spip_courriers'
 			, array(
 				'statut' => sql_quote(_SPIPLISTES_STATUT_ENCOURS)
 			)
 			, "id_courrier=".sql_quote($id_courrier)." LIMIT 1"
 		);
+spiplistes_log("TEST envoi direct :".($r ? "ok" : "erreur"), _SPIPLISTES_LOG_DEBUG);
 		if($id_liste > 0) {
 			spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 			// passe le courrier a la meleuse

@@ -152,7 +152,7 @@ function spiplistes_activer_inscription_visiteurs () {
 
 function spiplistes_vider_tables () {
 
-//spiplistes_log("spiplistes_vider_tables() <<", _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("spiplistes_vider_tables() <<", _SPIPLISTES_LOG_DEBUG);
 
 	include_spip('base/abstract_sql');
 	
