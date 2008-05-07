@@ -36,9 +36,9 @@ function action_instituer_groupe_mots_post($id_groupe)
 	$acces_minirezo = _request('acces_minirezo');
 	$change_type = _request('change_type');
 	$descriptif = _request('descriptif');
-	$obligatoire = _request('obligatoire');
+	$obligatoire = ((_request('obligatoire')) ? 'oui' : 'non');
 	$texte = _request('texte');
-	$unseul = _request('unseul');
+	$unseul = ((_request('unseul')) ? 'oui' : 'non');
 	$id_parent= _request('id_parent'); //YOANN
 
 	if ($id_groupe < 0){
