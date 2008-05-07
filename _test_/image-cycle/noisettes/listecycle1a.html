@@ -1,0 +1,46 @@
+<B_documg>
+
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function() {
+	
+	// Plugin Cycle Image au hasard
+   $('#listecycle1').cycle({ 
+		fx:    '[(#CONFIG{imagecycle/effet})]',
+		speed: [(#CONFIG{imagecycle/vitesse})], 
+		timeout: [(#CONFIG{imagecycle/duree})],
+		
+	});
+
+
+});
+
+-->
+</script>
+		
+	<div id="listecycle1">
+		
+		<BOUCLE_documg(DOCUMENTS){id_article>0}{par hasard}{extension==jpg|png|gif}{0,(#CONFIG{imagecycle/nombre})}>
+				
+		<div class="cycle">
+			
+			<BOUCLE_chercheLienArticl(SPIP_DOCUMENTS_ARTICLES){id_document}>
+			#SET{current_id_art, #ID_ARTICLE}
+			</BOUCLE_chercheLienArticl>
+			<BOUCLE_lienArticl(ARTICLES){id_article=#GET{current_id_art}}{0,(#CONFIG{imagecycle/nombre})}>
+		
+				[(#CONFIG{imagecycle/renvart}|?{' ',''})
+				[<a href="#URL_ARTICLE">(#LOGO_DOCUMENT||image_reduire{[(#CONFIG{imagecycle/largeur})],0})</a>]
+				]
+				
+				[(#CONFIG{imagecycle/renvdoc}|?{' ',''})
+				[<a href="#URL_DOCUMENT" type="#MIME_TYPE">(#LOGO_DOCUMENT||image_reduire{[(#CONFIG{imagecycle/largeur})],0})</a>]
+				]
+			
+			</BOUCLE_lienArticl>    
+		</div>
+		</BOUCLE_documg>
+		
+	</div>
+		
+</B_documg>

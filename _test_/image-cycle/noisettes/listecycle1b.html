@@ -1,0 +1,46 @@
+<B_docart>
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function() {
+	
+	// Plugin Cycle Image au hasard
+   $('#listecycle').cycle({ 
+		fx:    '[(#CONFIG{imagecycle/effetbis})]',
+		speed: [(#CONFIG{imagecycle/vitessebis})], 
+		timeout: [(#CONFIG{imagecycle/dureebis})]
+		
+	});
+
+
+});
+
+-->
+</script>		
+
+	<div id="listecycle1">
+		
+		<BOUCLE_docart(DOCUMENTS){id_article=(#CONFIG{imagecycle/idarticle})}{extension==jpg|png|gif}{0,(#CONFIG{imagecycle/nombre})}>
+				
+		<div class="cycle">
+			
+			<BOUCLE_chercheLienArticle(SPIP_DOCUMENTS_ARTICLES){id_document}>
+			#SET{current_id_art, #ID_ARTICLE}
+			</BOUCLE_chercheLienArticle>
+			<BOUCLE_lienArticle(ARTICLES){id_article=#GET{current_id_art}}{0,(#CONFIG{imagecycle/nombre})}>
+			
+				[(#CONFIG{imagecycle/renvart}|?{' ',''})
+				[<a href="#URL_ARTICLE">(#LOGO_DOCUMENT||image_reduire{[(#CONFIG{imagecycle/largeur})],0})</a>]
+				]
+				
+				[(#CONFIG{imagecycle/renvdoc}|?{' ',''})
+				[<a href="#URL_DOCUMENT" type="#MIME_TYPE">(#LOGO_DOCUMENT||image_reduire{[(#CONFIG{imagecycle/largeur})],0})</a>]
+				]
+			
+			</BOUCLE_lienArticle>    
+		</div>
+		</BOUCLE_docart>
+		
+	</div>
+	
+	
+</B_docart>

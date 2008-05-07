@@ -1,55 +1,97 @@
-[(#REM) descriptif=
-<h4><legend>Configuration du plugin image cycle</legend></h4>
 
-]
+<!-- titre=image cycle -->
+<!-- icone=css/images/background.png -->
 
-[(#REM) titre=image cycle]
-[(#REM) icone=images/logo-cycle.png]
+<!-- descriptif= <:imagecycle:description:> -->
+
 <!-- nom=imagecycle -->
-
 <!-- liens*=imagecycle -->
 <!-- liens*=imagecyclebis -->
-<!-- liens*=imagecyclemodele -->
+
 
 #CACHE{0}
 
-<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+<fieldset><legend><:imagecycle:origineimage:></legend>
 
-<fieldset><legend><:imagecycle:legende:></legend>
-<p><:imagecycle:paraimage:><br/>
+<p>
+<label><input type="checkbox" name="aleatoire" [checked="(#ENV{aleatoire})"] /><:imagecycle:aleatoire:></label>
+</p>
+
+<p>
+<label><input type="checkbox" name="article" [checked="(#ENV{article})"] /><:imagecycle:article:></label>
+</p>
+
+<p>
+<label><:imagecycle:idarticle:> :</label>
+   <select name="idarticle" style="width:250px;">
+     <option value="" style="width:250px;">Racine</option>
+  	 <BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+  	    <option value="" style="font-weight: bold; width:250px;"><strong>rubrique : #TITRE</strong></option>
+  			<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
+  	        <option value="#ID_ARTICLE" [(#CONFIG{imagecycle/idarticle}|=={#ID_ARTICLE}|?{selected="selected",''})]>&nbsp;&nbsp;#ID_ARTICLE . #TITRE</option>
+  			</BOUCLE_articles_racine>
+  			<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+  			   <option value="" style="font-weight: bold; width:250px;">&nbsp;&nbsp;rubrique #ID_RUBRIQUE : #TITRE</option>
+  				 <BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
+  				    <option value="#ID_ARTICLE" [(#CONFIG{imagecycle/idarticle}|=={#ID_ARTICLE}|?{selected="selected",''})]>&nbsp;&nbsp;&nbsp;&nbsp;#ID_ARTICLE . #TITRE</option>
+  				 </BOUCLE_articles>
+  				 <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+  			</BOUCLE_rubriques>
+  	 </BOUCLE_secteurs>
+   </select>
+</p>
+
+<p>
+	<label><input type="checkbox" name="renvart" [checked="(#ENV{renvart})"] /><:imagecycle:renvart:></label>
+</p>
+
+<p>
+	<label><input type="checkbox" name="renvdoc" [checked="(#ENV{renvdoc})"] /><:imagecycle:renvdoc:></label>
+</p>
+
+<p>
+<label for="nombre"><:imagecycle:nombre:></label>
+<input type="text" name="nombre"  id="nombre"  value="[(#CONFIG{imagecycle/nombre}|sinon{5})]" class="forml" style="width:4em;display:inline"/>
+</p>
+
+   
+</fieldset>   
+   
+
+<fieldset><legend><:imagecycle:paraimage:></legend>
+<p><strong><:imagecycle:tailleimage:></strong></p>
 <label for="largeur"><:imagecycle:largeur:></label>
-<input type="text" name="largeur"  id="largeur"  value="[(#CONFIG{imagecycle/largeur}|sinon{150})]" />
-</p>
-
-<p>
+<input type="text" name="largeur"  id="largeur"  value="[(#CONFIG{imagecycle/largeur}|sinon{150})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>px</i>&nbsp;&nbsp;
 <label for="hauteur"><:imagecycle:hauteur:></label>
-<input type="text" name="hauteur"  	id="hauteur" value="[(#CONFIG{imagecycle/hauteur}|sinon{150})]" />
+<input type="text" name="hauteur"  	id="hauteur" value="[(#CONFIG{imagecycle/hauteur}|sinon{150})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>px</i>&nbsp;&nbsp;
+<p><label><input type="checkbox" name="taillefixe" [checked="(#ENV{taillefixe})"] /><:imagecycle:taillefixe:></label></p>
+
+
+<p><strong><:imagecycle:taillecadre:></strong></p>
+<label for="largeurcadre"><:imagecycle:largeur:></label>
+<input type="text" name="largeurcadre"  id="largeurcadre"  value="[(#CONFIG{imagecycle/largeurcadre}|sinon{182})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>px</i>&nbsp;&nbsp;
+<label for="hauteurcadre"><:imagecycle:hauteur:></label>
+<input type="text" name="hauteurcadre" 	id="hauteurcadre" value="[(#CONFIG{imagecycle/hauteurcadre}|sinon{182})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>px</i>&nbsp;&nbsp;
+
+
+<p><p><strong><:imagecycle:couleurcadre:></strong></p>
+<label for="couleurbis"><:imagecycle:fond:></label>
+<input type="text" name="couleurbis" class="cfg_couleur" size="7" id="couleurbis" value="[(#CONFIG{imagecycle/couleurbis}|sinon{#eee})]" />
+<label for="couleurbis"><:imagecycle:cadre:></label>
+<input type="text" name="cadrebis" class="cfg_couleur" size="7" id="cadrebis" value="[(#CONFIG{imagecycle/cadrebis}|sinon{#eee})]" />
+
+
+</fieldset>
+
+<fieldset><legend><:imagecycle:paraanim:></legend>
+<p>
+<label for="dureebis"><:imagecycle:duree:></label>
+<input type="text" name="dureebis" 	id="dureebis"  value="[(#CONFIG{imagecycle/dureebis})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>ms</i>&nbsp;&nbsp;
 </p>
 
 <p>
-<label for="largeurcadre"><:imagecycle:largeurcadre:></label>
-<input type="text" name="largeurcadre"  id="largeurcadre"  value="[(#CONFIG{imagecycle/largeurcadre}|sinon{180})]" />
-</p>
-
-<p>
-<label for="hauteurcadre"><:imagecycle:hauteurcadre:></label>
-<input type="text" name="hauteurcadre" 	id="hauteurcadre" value="[(#CONFIG{imagecycle/hauteurcadre}|sinon{180})]" />
-</p>
-
-
-<p>
-<label for="couleur"><:imagecycle:couleur:></label>
-<input type="text" name="couleur"  id="couleur" value="[(#CONFIG{imagecycle/couleur}|sinon{#eee})]" />
-</p>
-
-<p><:imagecycle:paraanim:><br/>
-<label for="duree"><:imagecycle:duree:></label>
-<input type="text" name="duree" 	id="duree"  value="[(#CONFIG{imagecycle/duree})]" />
-</p>
-
-<p>
-<label for="vitesse"><:imagecycle:vitesse:></label>
-<input type="text" name="vitesse"  	id="vitesse"  value="[(#CONFIG{imagecycle/vitesse})]" />
+<label for="vitessebis"><:imagecycle:vitesse:></label>
+<input type="text" name="vitessebis"  	id="vitessebis"  value="[(#CONFIG{imagecycle/vitessebis})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>ms</i>&nbsp;&nbsp;
 </p>
 
 <p>
