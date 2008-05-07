@@ -66,9 +66,9 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 	if($flag_editable) {
 		
 		// récupère la liste des abonnements disponibles
-		$sql_where = "statut="
-			. implode(" OR statut=", array_map("sql_quote", explode(";", _SPIPLISTES_LISTES_STATUTS_PERIODIQUES)))
+		$sql_where = spiplistes_listes_sql_where(_SPIPLISTES_LISTES_STATUTS_PERIODIQUES)
 			. " OR statut=".sql_quote(_SPIPLISTES_PUBLIC_LIST);
+			
 		// les auteurs ont droit aux listes privées (internes)
 		if(($auteur_statut == '1comite') || ($auteur_statut == '0minirezo')) {
 			$sql_where .= " OR statut=".sql_quote(_SPIPLISTES_PRIVATE_LIST);

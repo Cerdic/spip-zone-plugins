@@ -69,13 +69,12 @@ function cron_spiplistes_cron ($last_time) {
 	}
 
 	$sql_select = "id_liste,titre,titre_message,date,maj,message_auto,periode,lang,patron,statut";
-	$sql_where = "statut=".implode(" OR statut=", array_map("sql_quote", explode(";", _SPIPLISTES_LISTES_STATUTS_OK)));
 
 	// demande les listes auto a' envoyer (date <= maintenant)
 	$sql_where = "message_auto='oui'
 			AND (date > 0) 
 			AND (date BETWEEN 0 AND NOW())
-			AND (".$sql_where.")
+			AND (".spiplistes_listes_sql_where(_SPIPLISTES_LISTES_STATUTS_OK).")
 			"
 		;
 	$listes_privees_et_publiques = sql_select(
