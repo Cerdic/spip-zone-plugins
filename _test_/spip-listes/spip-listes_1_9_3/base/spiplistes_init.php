@@ -156,11 +156,11 @@ spiplistes_log("spiplistes_vider_tables() <<", _SPIPLISTES_LOG_DEBUG);
 
 	include_spip('base/abstract_sql');
 	
-	spip_query("DROP TABLE spip_courriers");
-	spip_query("DROP TABLE spip_listes");
-	spip_query("DROP TABLE spip_auteurs_courriers");
-	spip_query("DROP TABLE spip_auteurs_listes");
-	spip_query("DROP TABLE spip_auteurs_mod_listes");
+	$r = sql_drop_table(
+		"spip_listes, spip_courriers, spip_auteurs_courriers, spip_auteurs_listes, spip_auteurs_mod_listes"
+		, true);
+spiplistes_log("sql_drop_table ".($r ? "ok" : "error"), _SPIPLISTES_LOG_DEBUG);
+	
 	// ne supprime pas spip_auteurs_elargis. Ca peut servir ;-?
 	effacer_meta('spiplistes_version');
 	effacer_meta('spiplistes_base_version');
@@ -169,6 +169,7 @@ spiplistes_log("spiplistes_vider_tables() <<", _SPIPLISTES_LOG_DEBUG);
 	effacer_meta('abonnement_config');
 	effacer_meta(_SPIPLISTES_META_PREFERENCES);
 	spiplistes_ecrire_metas();
+	
 	return(true);
 }
 

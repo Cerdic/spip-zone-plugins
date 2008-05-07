@@ -7,6 +7,7 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+// CP-20080507: ajout de sql_drop_table()
 // CP-2080329: ajout de sql_fetsel() et sql_getfetsel()
 // Documentation: http://www.spip.net/ecrire/?exec=articles&id_article=3683
 
@@ -88,6 +89,14 @@ function compat_spiplistes_defs_dist() {
 						. \' WHERE \'
 						. implode(\' AND \', $where);
 				return spip_query_db($query);
+			}',
+			
+		// n'existe pas en 1.9.2
+		'sql_drop_table' =>
+			// $table = string, du style "table1,table2,..."
+			'($table, $exist=\'\') {
+				if ($exist) $exist =" IF EXISTS";
+				return spip_query_db("DROP TABLE$exist $table");
 			}',
 			
 		// sql_quote : _q directement
