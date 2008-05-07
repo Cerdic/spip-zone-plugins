@@ -145,7 +145,7 @@ function spiplistes_activer_inscription_visiteurs () {
 		ecrire_meta("accepter_visiteurs", $accepter_visiteurs);
 		spiplistes_ecrire_metas();
 		echo "<br />"._T('spiplistes:autorisation_inscription');
-		spiplistes_log("spiplistes ACTIVE accepter visiteur");
+		spiplistes_log("ACTIVER accepter visiteur");
 	}
 	return(true);
 }
@@ -156,10 +156,9 @@ spiplistes_log("spiplistes_vider_tables() <<", _SPIPLISTES_LOG_DEBUG);
 
 	include_spip('base/abstract_sql');
 	
-	$r = sql_drop_table(
+	sql_drop_table(
 		"spip_listes, spip_courriers, spip_auteurs_courriers, spip_auteurs_listes, spip_auteurs_mod_listes"
 		, true);
-spiplistes_log("sql_drop_table ".($r ? "ok" : "error"), _SPIPLISTES_LOG_DEBUG);
 	
 	// ne supprime pas spip_auteurs_elargis. Ca peut servir ;-?
 	effacer_meta('spiplistes_version');
