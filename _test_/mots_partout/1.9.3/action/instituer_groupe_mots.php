@@ -67,7 +67,7 @@ function action_instituer_groupe_mots_post($id_groupe)
 		if ($id_groupe) {	// modif groupe
 			sql_updateq("spip_mots", array("type" => $change_type), "id_groupe=$id_groupe");
 
-			sql_updateq("spip_groupes_mots", $valeurs);
+			sql_updateq("spip_groupes_mots", $valeurs, "id_groupe=$id_groupe");
 
 		} else {	//spip_log("creation groupe");
 		  sql_insertq('spip_groupes_mots', $valeurs);
