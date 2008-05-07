@@ -130,27 +130,7 @@ function exec_mots_type_dist()
 	. debut_cadre_formulaire('',true)
 	. "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>"
 	. "<b>"._T('info_mots_cles_association')."</b>";
-/*		
-	//les affectations possibles dependent de la liste définie dans la table de mots_partout 
-	. "<br />";
-	$checked =  ($articles == "oui") ? "checked='checked'" : ''; 
-	$res .= "<input type='checkbox' name='articles' value='oui' $checked id='articles' /> <label for='articles'>"._T('item_mots_cles_association_articles')."</label><br />";
-	$activer_breves = $GLOBALS['meta']["activer_breves"];
 
-	if ($activer_breves != "non"){
-		$checked =  ($breves == "oui") ? "checked='checked'" : '';
-			
-		$res .= "<input type='checkbox' name='breves' value='oui' $checked id='breves' /> <label for='breves'>"._T('item_mots_cles_association_breves')."</label><br />";
-	} else {
-		$res .= "<input type='hidden' name='breves' value='non' />";
-	}
-	$checked = ($rubriques == "oui") ? "checked='checked'" : '';	
-
-	$res .= "<input type='checkbox' name='rubriques' value='oui' $checked id='rubriques' /> <label for='rubriques'>"._T('item_mots_cles_association_rubriques')."</label><br />";
-
-	$checked = ($syndic == "oui") ? "checked='checked'" : ''; 
-	$res .= "<input type='checkbox' name='syndic' value='oui' $checked id='syndic' /> <label for='syndic'>"._T('item_mots_cles_association_sites')."</label>";
-*/	
 	foreach($tables_installees as $chose => $m) {
 		if ($chose!='forum'){
 			if ($row[$chose] == "oui") $checked = "checked";
