@@ -35,7 +35,16 @@ function spiplistes_install ($action) {
 				&& spip_mysql_showtable("spip_auteurs_elargis")
 				&& spip_mysql_showtable("spip_listes")
 				);
-			spiplistes_log("spiplistes TEST: ".($result ? "OK" : "NO"));
+			if(
+				!spiplistes_spip_est_inferieur_193() 
+				&& (_request('action')=='desinstaller_plugin')
+			) {
+				// dans action/desinstaller_plugin.php
+				// pour réellement désinstaller le plugin dans les metas et cache
+				// SPIP 192 attend false, 193 true
+				$result = !$result;
+			}
+			spiplistes_log("TEST: ".($result ? "TRUE" : "FALSE"), _SPIPLISTES_LOG_DEBUG);
 			return($result);
 			break;
 		case 'install':
@@ -63,7 +72,7 @@ function spiplistes_install ($action) {
 		case 'uninstall':
 			// est appellé lorsque "Effacer tout" dans exec=admin_plugin
 			$result = spiplistes_vider_tables();
-			spiplistes_log("spiplistes UNINSTALL: ".($result ? "OK" : "NO"));
+			spiplistes_log("UNINSTALL: ".($result ? "TRUE" : "FALSE"));
 			return($result);
 			break;
 		default:
@@ -82,7 +91,7 @@ function spiplistes_base_creer () {
 	include_spip('base/db_mysql');
 	include_spip('base/spiplistes_tables');
 	creer_base();
-	spiplistes_log("spiplistes INSTALL: database creation");
+	spiplistes_log("INSTALL: database creation");
 
 	ecrire_meta('spiplistes_version', __plugin_real_version_get(_SPIPLISTES_PREFIX));
 
