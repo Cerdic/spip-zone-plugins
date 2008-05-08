@@ -44,17 +44,12 @@ function confirm(msg,callback) {
 	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{'',' '})
 		#INCLURE{fond=inc/menu_inscription2}	
 	]
-
-	
-	
 	<div class="legend">
-		
 		<img src="#CHEMIN{'images/admin-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:admin:><br />
 		<img src="#CHEMIN{'images/redac-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:auteur:><br />
 		<img src="#CHEMIN{'images/adherent-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:adherent:><br />
 		<img src="#CHEMIN{'images/aconf-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:a_confirmer:><br />
 		<img src="#CHEMIN{'images/defaut-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:autre:><br />
-		
 	</div>
 	
 </div>	
@@ -141,12 +136,12 @@ function confirm(msg,callback) {
 	
 	//supprimer un auteur
 	if(!empty($id) and $act=='sup'){
-		$row = spip_fetch_array(sql_select("statut","spip_auteurs","id_auteur='$id'"));
+		$row = sql_fetch(sql_select("statut","spip_auteurs","id_auteur='$id'"));
 		
 		if($row['statut'] !='0minirezo' and $row['statut'] !='1commite')
 			sql_delete("spip_auteurs","id_auteur='$id'");
 
-		spip_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur='$id'");
+		sql_updateq("spip_auteurs",array('statut'=>'5poubelle'),"id_auteur='$id'");
 		sql_delete("spip_auteurs_elargis","id_auteur='$id'");
                 
                 if(defined('_DIR_PLUGIN_ACCESRESTREINT'))
@@ -168,10 +163,9 @@ function confirm(msg,callback) {
 	}
 
 	$lettre = array();
-		$qlettre = spip_query(
-	'select distinct upper(left(a.nom,1)) l, count(*) from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur group by l order by l');
+		$qlettre = spip_query('select distinct upper(left(a.nom,1)) l, count(*) from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur group by l order by l');
 		$count = 0;
-		while ($rlettre = spip_fetch_array($qlettre, SPIP_NUM)) {
+		while ($rlettre = sql_fetch($qlettre)) {
 			$lettre[$rlettre[0]] = $count;
 			$count += intval($rlettre[1]);
 		}
@@ -263,7 +257,7 @@ function confirm(msg,callback) {
 	$query = spip_query ($query);
 		
 	$i=0;
-	while ($data = spip_fetch_array($query)) {	
+	while ($data = sql_fetch($query)) {	
 		
 		//switch statut
 		if($i%2 == 0){
@@ -334,8 +328,8 @@ function confirm(msg,callback) {
 		}
 		//abonnement
 		if(defined('_DIR_PLUGIN_ABONNEMENT')){
-		$abonnement = spip_fetch_array(spip_query("select a.libelle, b.validite from `spip_abonnements` a join `spip_auteurs_elargis_abonnements` b where a.id_abonnement=b.id_abonnement and b.id_auteur_elargi='$id'" ));
-		$au_numero = spip_fetch_array(spip_query("select count(id_article) as 'n' from `spip_auteurs_elargis_articles` a where a.id_auteur_elargi='$id'" ));
+		$abonnement = sql_fetch(spip_query("select a.libelle, b.validite from `spip_abonnements` a join `spip_auteurs_elargis_abonnements` b where a.id_abonnement=b.id_abonnement and b.id_auteur_elargi='$id'" ));
+		$au_numero = sql_fetch(spip_query("select count(id_article) as 'n' from `spip_auteurs_elargis_articles` a where a.id_auteur_elargi='$id'" ));
 		if($abonnement["libelle"] =="" AND $au_numero["n"] > 0){
 		 $libelle = "achat au numero" ;
 		 $validite = $au_numero["n"] ;
@@ -370,7 +364,7 @@ function confirm(msg,callback) {
 	<div id="pagination">
 	<?php	
 	$query = spip_query("SELECT COUNT(*) FROM spip_auteurs a, spip_auteurs_elargis b WHERE a.id_auteur = b.id_auteur AND $critere");
-	$query = spip_fetch_array($query);
+	$query = sql_fetch($query);
 	$nombre_selection = $query['COUNT(*)'];
 	$pages=intval($nombre_selection/$max_par_page) + 1;
 
