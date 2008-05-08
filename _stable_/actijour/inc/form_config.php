@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| ACTIVITE DU JOUR v. 1.53 - 12/2007 - SPIP 1.9.2
+| ACTIVITE DU JOUR v. 1.55 - 05/2007 - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifie KOAK2.0 strict, mais si !
@@ -37,27 +37,27 @@ function formulaire_configuration_acjr() {
 		. "<table width='100%' cellpadding='2' cellspacing='0' border='0' class='table_conf'>"
 		. "<tr><td class='col_info'>"._T('acjr:conf_nbl_art')."</td>"
 		. "<td class='col_val'>"
-		. "<input type='text' name='nbl_art' value='".$GLOBALS['actijour']['nbl_art']."' size='4' />"
+		. "<input type='text' name='nbl_art' value='".$GLOBALS['actijour']['nbl_art']."' size='4' class='fondl' />"
 		. "</td></tr>"
 		. "<tr><td class='col_info'>"._T('acjr:conf_nbl_aut')."</td>"
 		. "<td class='col_val'>"
-		. "<input type='text' name='nbl_aut' value='".$GLOBALS['actijour']['nbl_aut']."' size='4' />"
+		. "<input type='text' name='nbl_aut' value='".$GLOBALS['actijour']['nbl_aut']."' size='4' class='fondl' />"
 		. "</td></tr>"
 		. "<tr><td class='col_info'>"._T('acjr:conf_nbl_mensuel')."</td>"
 		. "<td class='col_val'>"
-		. "<input type='text' name='nbl_mensuel' value='".$GLOBALS['actijour']['nbl_mensuel']."' size='4' />"
+		. "<input type='text' name='nbl_mensuel' value='".$GLOBALS['actijour']['nbl_mensuel']."' size='4' class='fondl' />"
 		. "</td></tr>"
 		. "<tr><td class='col_info'>"._T('acjr:conf_nbl_topsem')."</td>"
 		. "<td class='col_val'>"
-		. "<input type='text' name='nbl_topsem' value='".$GLOBALS['actijour']['nbl_topsem']."' size='4' />"
+		. "<input type='text' name='nbl_topsem' value='".$GLOBALS['actijour']['nbl_topsem']."' size='4' class='fondl' />"
 		. "</td></tr>"
 		. "<tr><td class='col_info'>"._T('acjr:conf_nbl_topmois')."</td>"
 		. "<td class='col_val'>"
-		. "<input type='text' name='nbl_topmois' value='".$GLOBALS['actijour']['nbl_topmois']."' size='4' />"
+		. "<input type='text' name='nbl_topmois' value='".$GLOBALS['actijour']['nbl_topmois']."' size='4' class='fondl' />"
 		. "</td></tr>"
 		. "<tr><td class='col_info'>"._T('acjr:conf_nbl_topgen')."</td>"
 		. "<td class='col_val'>"
-		. "<input type='text' name='nbl_topgen' value='".$GLOBALS['actijour']['nbl_topgen']."' size='4' />"
+		. "<input type='text' name='nbl_topgen' value='".$GLOBALS['actijour']['nbl_topgen']."' size='4' class='fondl' />"
 		. "</td></tr>"
 		. "</table>"
 		. fin_cadre_trait_couleur(true);
@@ -70,7 +70,7 @@ function formulaire_configuration_acjr() {
 		. "<tr><td class='col_info'>"._T('acjr:conf_ordon_milieu')."</td>"
 		. "<td class='col_val'>"
 		. "<input type='hidden' name='id_admin' value='$connect_id_auteur' />"
-		. "<input type='text' name='ordon_pg_m' value='".$ordon_pg_m."' size='8' />"
+		. "<input type='text' name='ordon_pg_m' value='".$ordon_pg_m."' size='8' class='fondl' />"
 		. "</td></tr>"
 		. "</table>"
 		. fin_cadre_trait_couleur(true);

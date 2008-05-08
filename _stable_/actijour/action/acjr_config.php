@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| ACTIVITE DU JOUR v. 1.53 - 12/2007 - SPIP 1.9.2
+| ACTIVITE DU JOUR v. 1.55 - 05/2007 - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifie KOAK2.0 strict, mais si !

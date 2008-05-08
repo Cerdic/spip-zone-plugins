@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| ACTIVITE DU JOUR v. 1.53 - 12/2007 - SPIP 1.9.2
+| ACTIVITE DU JOUR v. 1.55 - 05/2007 - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifie KOAK2.0 strict, mais si !
@@ -17,10 +17,12 @@ function initialise_metas_actijour($old_vers=''){
 	if($old_vers) {
 		foreach($GLOBALS['actijour'] as $k => $v) {
 			# corriger version
-			if($k=='version')
+			if($k=='version') {
 				$metas[$k]=$GLOBALS['actijour_plug_version'];
-			else
+			}
+			else {
 				$metas[$k]=$v;
+			}
 		}
 	}
 	else {
@@ -48,32 +50,65 @@ function initialise_metas_actijour($old_vers=''){
 function tranches_liste_art($encours,$nligne,$fl) {
 	$exec = _request("exec");
 	$fract=ceil($nligne/$fl);
+	
+	$gt=12; // nombre de tranches par ligne ::: modifiable a loisir !!
+	$lgt=1;
+	
 	$aff='';
 	for ($i=0; $i<$fract; $i++) {
+		# retour ligne affichee
+		if(($i+1)==$lgt*$gt) { $br = "<br />"; $lgt++; }
+		else { $br =''; }
+		
 		$debaff=($i*$fl)+1;
 		$f_aff=($i*$fl)+$fl;
 		$liais=$i*$fl;
 		if ($f_aff<$nligne) { $finaff=$f_aff; $sep = " | "; }
 		else { $finaff=$nligne; $sep = ""; }
+		
+		# recolle parametres :
+		$params='';
+		# statut : actijour_connect
+		if($st=_request('st')) { $params.='&st='.$st; }
+		
+		# affiche
 		if ($debaff==$encours) {
 			$aff.= "<b>$debaff - $finaff</b> $sep";
 		}
 		else {
-			$aff.= "<a href='".generer_url_ecrire($exec,"vl=".$liais)."'>"
-				.$debaff." - ".$finaff."</a> ".$sep;
+			if(($i+1)==$fract) {
+				$aff.= "<a href='".generer_url_ecrire($exec,"vl=".$liais).$params."'>"
+					.$debaff." - ".$finaff."</a> ".$sep;				
+			}
+			else {
+				$aff.= "<a href='".generer_url_ecrire($exec,"vl=".$liais).$params."'>"
+					.$debaff."</a> ".$sep;
+			}
 		}
 	}
 	return $aff;
 }
 
 # affiche le logo actijour + gros titre
-function entete_page($titre) {
-	echo "<div style='float:left; margin-right:5px; min-height:70px;'>"; 
-	echo "<img src='"._DIR_PLUGIN_ACTIJOUR."/img_pack/acjr_48.gif' alt='acjr' />";
-	echo "</div>";
-	gros_titre($titre);
-	echo "<span class='verdana2'>".date('d/m/Y H:i')."</span>";
-	echo "<div style='clear:both;'></div>";
+function entete_page() {
+	$q=spip_query("SELECT DATE_FORMAT(NOW(),'%d/%m/%Y %H:%i') as date_serveur");
+	$r=spip_fetch_array($q);
+	$datetime_sql=$r['date_serveur'];
+
+	$aff.= "<div style='float:left; margin-right:5px; min-height:55px;'>" 
+		. "<img src='"._DIR_IMG_ACJR."acjr_48.gif' alt='acjr' />"
+		. "</div>";
+	$aff.= gros_titre(_T('acjr:titre_actijour'),'',false);
+	$aff.= "<div style='clear:both;'></div>"
+		. "<div class='cell_info verdana2'>"
+		. "<img src='"._DIR_IMG_ACJR."icon_php.png' align='absmiddle' title='"._T('acjr:date_serveur_php')."' />\n"
+		. date('d/m/Y H:i')."<br />"
+		. "<img src='"._DIR_IMG_ACJR."icon_mysql.png' align='absmiddle' title='"._T('acjr:date_serveur_mysql')."' />\n"
+		. $datetime_sql
+		. "</div>"
+		. "<p class='space_10'></p>";
+	
+	return $aff;
 }
 
 # bouton retour haut de page
@@ -89,11 +124,12 @@ function bouton_retour_haut() {
 # generer liste des onglets
 function onglets_actijour($actif) {
 	# script => icone
-	$pages=array('actijour_pg'=>_DIR_PLUGIN_ACTIJOUR."img_pack/activ_jour.gif",
-				'actijour_hier'=>_DIR_PLUGIN_ACTIJOUR."img_pack/activ_hier.gif",
-				'actijour_top'=>"article-24.gif",
-				'actijour_prev'=>_DIR_PLUGIN_ACTIJOUR."img_pack/acjr_prev.gif",
-				'actijour_conf'=>''
+	$pages=array('actijour_pg' => _DIR_IMG_ACJR."activ_jour.gif",
+				'actijour_hier' => _DIR_IMG_ACJR."activ_hier.gif",
+				'actijour_top' => "article-24.gif",
+				'actijour_prev' => _DIR_IMG_ACJR."acjr_prev.gif",
+				'actijour_connect' => "annonce.gif",
+				'actijour_conf' => '' // icone : laisser vide !
 				);
 	$res='';
 	foreach($pages as $exec => $icone) {

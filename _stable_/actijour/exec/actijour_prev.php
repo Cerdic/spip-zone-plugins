@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| ACTIVITE DU JOUR v. 1.53 - 12/2007 - SPIP 1.9.2
+| ACTIVITE DU JOUR v. 1.55 - 05/2007 - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifie KOAK2.0 strict, mais si !
@@ -50,7 +50,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 
 
 debut_gauche();
-	entete_page(_T('acjr:titre_actijour'));
+	echo entete_page();
 	
 	echo "<p class='space_10'></p>";
 	debut_boite_info();

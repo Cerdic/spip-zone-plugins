@@ -1,6 +1,6 @@
 /*
 +--------------------------------------------+
-| ACTIVITE DU JOUR v. 1.53 - 12/2007 - SPIP 1.9.2
+| ACTIVITE DU JOUR v. 1.55 - 05/2007 - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifie KOAK2.0 strict, mais si !
@@ -104,13 +104,14 @@ tr.legend_topten {
 tr.legend_topten td { text-align:center; }
 
 /* ****** page config ******* */
-.table_config {
+.table_conf {
 	font-family:Verdana;
-	font-size:11px;
+	font-size:12px;
 }
 td.col_info {
 	width:80%;
 	padding:5px;
+	padding-bottom:10px;
 }
 td.col_val {
 	width:20%;

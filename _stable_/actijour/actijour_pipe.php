@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| ACTIVITE DU JOUR v. 1.53 - 12/2007 - SPIP 1.9.2
+| ACTIVITE DU JOUR v. 1.55 - 05/2007 - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifie KOAK2.0 strict, mais si !
@@ -26,7 +26,7 @@ define('_DIR_PLUGIN_ACTIJOUR',(_DIR_PLUGINS.end($p)));
 		return $boutons_admin;
 	}
 
-	# style + css
+	# style + js
 	function actijour_header_prive($flux) {
 		$exec = _request('exec');
 		if(ereg('^(actijour_).*',$exec)) {

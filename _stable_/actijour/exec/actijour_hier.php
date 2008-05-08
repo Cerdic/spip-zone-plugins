@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| ACTIVITE DU JOUR v. 1.53 - 12/2007 - SPIP 1.9.2
+| ACTIVITE DU JOUR v. 1.55 - 05/2007 - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifie KOAK2.0 strict, mais si !
@@ -32,28 +32,39 @@ include_spip("inc/requetes_stats");
 include_spip('inc/affiche_blocs');
 
 
-	# date jour courte sql spip
-	$date_hier = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d")-1, date("Y")));
+
+	# date jour a afficher
+	if(_request('annee')) {
+		$date_jour=_request('annee')."-"._request('mois')."-"._request('jour');	
+	}
+	if(!$date_jour) {
+		$date_jour = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d")-1, date("Y")));
+	}
 	#$aff_date_hier = date('d/m/y', mktime(0, 0, 0, date("m"), date("d")-1, date("Y")));
 	
 
 	# tbl articles vistes hier 
-	$tbl_art_jour = articles_visites_jour($date_hier);
+	$tbl_art_jour = articles_visites_jour($date_jour);
 
 	# derniere maj visites articles
-	$date_maj_art = derniere_maj_articles($date_hier);
+	$date_maj_art = derniere_maj_articles($date_jour);
 		
 	# nbre articles visites hier
 	$nb_art_visites_jour = count($tbl_art_jour);
 	
 	# total visites hier
-	$gj = global_jour($date_hier);
+	$gj = global_jour($date_jour);
 	$global_jour = $gj['visites'];
 	$date_globaljour = $gj['date'];
 	
 	# nbr posts hier sur vos forum
-	$nbr_post_jour = nombre_posts_forum($date_hier);
+	$nbr_post_jour = nombre_posts_forum($date_jour);
 
+
+	# premiere annee de stat
+	$prim_jour_stats = prim_jour_stats();
+	$tbl_pjs=recup_date($prim_jour_stats);
+	$prim_an_stats = $tbl_pjs[0];
 
 		
 #
@@ -73,7 +84,19 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 
 
 debut_gauche();
-	entete_page(_T('acjr:titre_actijour'));
+	echo entete_page();
+	
+/*---------------------------------------------------------------------------*\
+selecteur date d affichage
+\*---------------------------------------------------------------------------*/
+	echo formulaire_periode($date_jour,_request('exec'),$prim_an_stats);
+
+
+
+
+
+creer_colonne_droite();
+echo "<br /><br /><br />";
 
 /*---------------------------------------------------------------------------*\
 nombre visites hier
@@ -81,8 +104,14 @@ nombre visites hier
 	debut_cadre_relief("statistiques-24.gif");
 		echo "<span class='verdana3 bold'>"._T('acjr:nombre_visites_')."</span>\n";
 		echo "<div class='cell_info alter-fond'>"
-			._T('acjr:global_vis_hier', array('global_jour'=>$global_jour))."</div>\n";
+			._T('acjr:global_vis_jour', array('global_jour'=>$global_jour))."</div>\n";
 	fin_cadre_relief();
+
+
+/*---------------------------------------------------------------------------*\
+Affichage articles creer/modifier ce jour ((h.30/04/08)
+\*---------------------------------------------------------------------------*/
+	echo articles_creer_modifer_jour($date_jour);
 
 
 /*---------------------------------------------------------------------------*\
@@ -92,16 +121,16 @@ nombre de message forum public (identif. GAFoSPIP/SPIPBB)
 
 
 /*---------------------------------------------------------------------------*\
-signatures petitions aujourd'hui
-\*---------------------------------------------------------------------------*/
-	echo signatures_petitions_jour($date_hier);
-
-
-/*---------------------------------------------------------------------------*\
 Telechargement de fichiers du jour (via DW2)
 \*---------------------------------------------------------------------------*/
-	echo telechargement_dw2_jour($date_hier);
+	echo telechargement_dw2_jour($date_jour);
 	
+
+/*---------------------------------------------------------------------------*\
+signatures petitions aujourd'hui
+\*---------------------------------------------------------------------------*/
+	echo signatures_petitions_jour($date_jour);
+
 
 /*---------------------------------------------------------------------------*\
 scoty signe son mefait
@@ -122,13 +151,13 @@ Onglets pages sup.
 /*---------------------------------------------------------------------------*\
 Lister Articles du jour
 \*---------------------------------------------------------------------------*/
-	echo liste_articles_jour($date_hier,$nb_art_visites_jour,$date_maj_art);
+	echo liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art);
 
 
 /*---------------------------------------------------------------------------*\
 Visites du jour par secteur/rubrique
 \*---------------------------------------------------------------------------*/
-	echo tableau_visites_rubriques($date_hier);
+	echo tableau_visites_rubriques($date_jour);
 
 
 /*---------------------------------------------------------------------------*\

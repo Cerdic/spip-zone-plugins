@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| ACTIVITE DU JOUR v. 1.53 - 12/2007 - SPIP 1.9.2
+| ACTIVITE DU JOUR v. 1.55 - 05/2007 - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifie KOAK2.0 strict, mais si !
@@ -26,6 +26,7 @@ function bloc_stats_generales(
 		if($prev=intval($prev_visites[1])) {
 			$prev = "&nbsp;+ ".$prev;
 		}
+		else { $prev=''; }
 	}
 
 	$aff='';
@@ -80,13 +81,13 @@ function bloc_stats_generales(
 contribution de jean-marc.viglino@ign.fr - 20/11/06
 Derniere visite des "auteurs".
 \*---------------------------------------------------------------------------*/
-function auteurs_date_passage() {
+function auteurs_visite_jour() {
 	global $couleur_claire,$connect_id_auteur;
 	$nb_auteurs=$GLOBALS['actijour']['nbl_aut'];
 	
 	$q=spip_query("SELECT id_auteur, nom, DATE_FORMAT(en_ligne,'%d/%m/%y %H:%i') AS vu, statut 
 			FROM spip_auteurs 
-			WHERE statut IN ('0minirezo', '1comite') 
+			WHERE statut IN ('0minirezo', '1comite') AND DATE_FORMAT(en_ligne,'%Y-%m-%d') = CURDATE() 
 			ORDER BY en_ligne DESC 
 			LIMIT 0,$nb_auteurs"
 			);
@@ -96,13 +97,13 @@ function auteurs_date_passage() {
 	$aff.= debut_cadre_relief("annonce.gif",true);
 	
 	$aff.="<table align='center' border='0' cellpadding='2' cellspacing='0' width='100%'>\n"
-		. "<tr><td colspan='2' class='cart_titre verdana3 bold'>"._T('acjr:dernieres_connections')
+		. "<tr><td colspan='2' class='cart_titre verdana3 bold'>"._T('acjr:auteurs_connections')
 		. "</td></tr>";
 	
 	while ($row = spip_fetch_array($q)) {
         $ifond = $ifond ^ 1;
-        $couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
-    	if($row['id_auteur']!=$connect_id_auteur) {
+        $couleur = ($ifond) ? $couleur_claire : '#FFFFFF';
+    	#if($row['id_auteur']!=$connect_id_auteur) {// .. 05/05 on affiche tout le monde !
 		$aff.= "<tr bgcolor='$couleur'>"
 			. "<td width='5%' rowspan='2' style='vertical-align:top;'>\n"
 			. bonhomme_statut($row)."</td>\n"
@@ -114,37 +115,150 @@ function auteurs_date_passage() {
 			. "<tr bgcolor='$couleur'><td width='95%'>\n"
 			. "<div align='right' class='verdana1'>".$row['vu']."</div>\n"
 			. "</td></tr>\n";
-		}
+		#}
     }
     $aff.= "</table>\n\n";
 
-	// nombre d_auteurs depuis 15 mn
-    $qcc=spip_query("SELECT COUNT(DISTINCT id_auteur) AS nb, statut 
-			FROM spip_auteurs 
-			WHERE en_ligne > DATE_SUB( NOW(), INTERVAL 15 MINUTE) 
-			AND statut IN ('0minirezo', '1comite', '6forum')
-			AND id_auteur != $connect_id_auteur 
-			GROUP BY statut"
-			);
-	if(spip_num_rows($qcc)) {
-		$aff.= "<div class='cell_info'>"._T("acjr:auteurs_en_ligne")."<br />\n";
-		While ($row = spip_fetch_array($qcc)) {
-			if($row['statut'] == '0minirezo') { $stat=_T('acjr:abrv_administrateur'); }
-			elseif ($row['statut']=='1comite') { $stat=_T('acjr:abrv_redacteur'); }
-			elseif ($row['statut']=='6forum') { $stat=_T('acjr:abrv_visiteur'); }
-			$aff.= $row['nb']." $stat<br />\n";
-		}
-		$aff.= "</div>\n";	
-	}
-	else {
-		$aff.= "<div class='cell_info'>"._T("acjr:aucun_auteur_en_ligne")."</div>\n";
-	}
-	$aff.= "\n<br /><div class='verdana1'>"._T('acjr:info_dernieres_connections')."</div>\n";
+	$aff.= "\n<br /><div class='verdana1'>"._T('acjr:info_dernieres_connections',array('nb_aut'=>$nb_auteurs))."</div>\n";
+	
 	$aff.= fin_cadre_relief(true);
 	
 	return $aff;
-} // auteurs_date_passage
+} // auteurs_visite_jour
 
+
+
+/*---------------------------------------------------------------------------*\
+h..25/04/08
+Date derniere visite de tous user-spip".
+\*---------------------------------------------------------------------------*/
+function tous_auteurs_date_passage() {
+	global $couleur_claire,$connect_id_auteur;
+	
+	// fixer le nombre de ligne du tableau (tranche)
+	$fl=$GLOBALS['actijour']['nbl_aut'];
+
+	// recup $vl dans URL
+	$dl=intval(_request('vl'));
+	$dl=($dl+0);
+	// valeur de tranche affichée
+	$nba1 = $dl+1;
+	
+	$p_st=_request('st');
+	if(!$p_st) {
+		$where_st = "statut IN ('0minirezo','1comite','6forum')";
+		$p_st='tous';
+	}
+	else {
+		$where_st = "statut = "._q($p_st);
+	}
+
+	$q=spip_query("SELECT SQL_CALC_FOUND_ROWS id_auteur, statut, nom,
+						DATE_FORMAT(en_ligne,'%d/%m/%y %H:%i') AS vu "
+				."FROM spip_auteurs "
+				."WHERE $where_st "
+				."ORDER BY en_ligne DESC,nom "
+				."LIMIT $dl,$fl"
+				);
+				
+    // recup nombre total d'entrees
+	$nl= spip_query("SELECT FOUND_ROWS()");
+	$found = @spip_fetch_array($nl);
+	$nb_auteurs = $found['FOUND_ROWS()'];
+	
+	$ifond = 0;
+
+	$aff='';
+	
+	# onglet select statut
+	$lst_statut = array('tous','0minirezo','1comite','6forum');
+	$script = _request('exec');
+	
+	$aff.=debut_onglet();
+	foreach($lst_statut as $statut) {
+		$aff.= onglet(_T('acjr:onglet_connect_'.$statut),
+			generer_url_ecrire($script,'st='.($statut=='tous'?'':$statut)),
+			$statut,
+			($p_st==$statut?$statut:''),'');
+	}
+	$aff.=fin_onglet();
+
+
+	# tableau
+	#
+	$aff.= debut_cadre_relief("annonce.gif",true);
+	
+	$aff.="<table align='center' border='0' cellpadding='2' cellspacing='0' width='100%'>\n"
+		. "<tr><td colspan='3' class='verdana3 bold'>"._T('acjr:tous_date_connections')
+		. "</td></tr>";
+    # Tranches
+	$aff.="<tr><td colspan='3' class='verdana3 bold'>";
+	$aff.= "<div align='center' class='iconeoff verdana2 bold' style='clear:both;'>\n"
+		. tranches_liste_art($nba1,$nb_auteurs,$fl)
+		. "\n</div>\n";
+	$aff.="</td></tr>";
+
+	while ($row = spip_fetch_array($q)) {
+        $ifond = $ifond ^ 1;
+        $couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
+    	
+		$aff.= "<tr bgcolor='$couleur'>"
+			. "<td width='5%'>\n"
+			. bonhomme_statut($row)."</td>\n"
+			. "<td width='75%'>"
+			. "<a class='verdana2 bold' href='".generer_url_ecrire("auteur_infos","id_auteur=".$row['id_auteur'])."'>"
+			. entites_html($row['nom'])."</a>\n"
+			."<td width='20%'>\n"
+			. "<div align='right' class='verdana1'>".$row['vu']."</div>\n"
+			. "</td></tr>\n";
+		
+    }
+    $aff.= "</table>\n\n";
+
+	$aff.= fin_cadre_relief(true);
+
+	return $aff;
+} // tous_auteurs_date_passage
+
+
+/******************************************************************************\
+ * nombre auteurs (statuts std spip) connectes depuis 15 mn
+\******************************************************************************/ 
+function nbr_auteurs_enligne() {
+	global $couleur_claire,$connect_id_auteur;
+	$aff='';
+	$aff.= debut_cadre_relief("annonce.gif",true);
+// nombre d_auteurs depuis 15 mn ()
+# inc/auth.php update-set en_ligne => NOW() : "moment" de session !
+# voir ecrire/action:logout.php
+# spip update-set 'en_ligne' datetime -15 mn au logout de session !!??!!
+# aff' nbr corresp aux auteurs affiches par spip en bandeau sup !
+
+    $q=spip_query("SELECT COUNT(DISTINCT id_auteur) AS nb, statut ".
+			"FROM spip_auteurs ".
+			"WHERE en_ligne > DATE_SUB( NOW(), INTERVAL 15 MINUTE) ".
+			"AND statut IN ('0minirezo', '1comite', '6forum') ". // limite statuts spip (autres!)
+			"AND id_auteur != $connect_id_auteur ".
+			"GROUP BY statut"
+			);
+	
+	if(spip_num_rows($q)) {
+		$aff.= _T("acjr:auteurs_en_ligne")."<br />\n";
+		While($r=spip_fetch_array($q)) {
+			if($r['statut'] == '0minirezo') { $stat=_T('acjr:abrv_administrateur'); }
+			elseif ($r['statut']=='1comite') { $stat=_T('acjr:abrv_redacteur'); }
+			elseif ($r['statut']=='6forum') { $stat=_T('acjr:abrv_visiteur'); }
+			$aff.= $r['nb']." $stat<br />\n";
+		}
+	
+	}
+	else {
+		$aff.= _T("acjr:aucun_auteur_en_ligne")."\n";
+	}
+	$aff.= fin_cadre_relief(true);
+	
+	return $aff;
+}
 
 /*---------------------------------------------------------------------------*\
  Lister Articles du jour.
@@ -184,7 +298,9 @@ function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art,$prev
 	
 	// texte entete
 	if(empty($date_maj_art)) {
-		$date_maj_art = date('d/m/y H:i');
+		# La date du jour passé en 1er arg (jour, hier ...)
+		$tbdate = recup_date($date_jour);
+		$date_maj_art = date('d/m/y',mktime(0,0,0,$tbdate[1],$tbdate[2],$tbdate[0]));
 	}
 	$aff.= "<div class='verdana3'>"
 		. _T('acjr:entete_tableau_art_jour', array(
@@ -219,7 +335,7 @@ function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art,$prev
 			$visites_a = $row['visites'];
 			$visites_j = $row['visites_j'];			
 			$id_art = $row['id_article'];
-			$trt_art = $row['titre'];
+			$titre = $row['titre'];
 			$etat = $row['statut'];			
 			// round sur popularité
 			$pop = round($row['popularite']);
@@ -231,11 +347,11 @@ function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art,$prev
 	
 			$aff.= "<tr bgcolor='$couleur'><td width='7%'>\n"
 				. "<div align='right' class='verdana2'>"
-				. affiche_lien_graph($id_art, $trt_art, $etat, 'spip')
+				. affiche_lien_graph($id_art, $titre, $etat, 'spip')
 				. "</div>\n</td>"
 				. "<td width='65%'>\n"
 				. "<div align='left' class='verdana1' style='margin-left:5px;'><b>"
-				. affiche_lien_graph($id_art, $trt_art, $etat)
+				. affiche_lien_graph($id_art, $titre, $etat)
 				. "</b></div></td>\n"
 				. "<td width='9%'>\n"
 				. "<div align='center' class='verdana2'><b>$visites_j</b></div></td>\n"
@@ -589,11 +705,11 @@ function topten_articles_periode($periode) {
 	. "<tr><td colspan='5' class='cart_titre_bold verdana3'>"._T('acjr:top_ten_article_'.$periode.'_j')
 	. "</td></tr>";
 	
-	$aff.="<tr class='legend_topten'><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td></tr>";
+	$aff.="<tr class='legend_topten'><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td></tr>\n";
 	
 	while ($row = spip_fetch_array($q)) {
 		$ifond = $ifond ^ 1;
-		$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
+		$couleur = ($ifond) ? $couleur_claire : '#FFFFFF';
 		
 		$aff.= "<tr bgcolor='$couleur'><td width='7%'>\n"
 			. "<div align='right' class='verdana2'>"
@@ -603,11 +719,11 @@ function topten_articles_periode($periode) {
 			. affiche_lien_graph($row['id_article'],$row['titre'],$row['statut'])
 			. "</b></div></td>\n"
 			. "<td width='6%'>\n<div align='right' class='verdana1' style='margin-right:3px;'><b>"
-			. $row['volume']."</b></div></td>"
+			. $row['volume']."</b></div></td>\n"
 			. "<td width='7%'>\n<div align='right' class='verdana1' style='margin-right:3px;'><b>"
-			. $row['picvis']."</b></div>\n</td>"
+			. $row['picvis']."</b></div>\n</td>\n"
 			. "<td width='10%'>\n<div align='right' class='verdana1' style='margin-right:3px;'><b>"
-			. $row['visites']."</b></div>\n</td></tr>\n";
+			. $row['visites']."</b></div>\n</td>\n</tr>\n";
 	}
 	$aff.= "</table>";
 	$aff.= fin_cadre_relief(true);
@@ -640,7 +756,7 @@ function topten_articles_global() {
 	
 	while ($row = spip_fetch_array($q)) {
 		$ifond = $ifond ^ 1;
-		$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
+		$couleur = ($ifond) ? $couleur_claire : '#FFFFFF';
 		$aff.="<tr bgcolor='$couleur'><td width='7%'>\n"
 			. "<div align='right' class='verdana2'>"
 			. affiche_lien_graph($row['id_article'],$row['titre'],$row['statut'],'spip')
@@ -670,7 +786,7 @@ function signatures_petitions_jour($date) {
 				GROUP BY ss.id_article"
 				);
 
-	$aff = debut_cadre_relief("suivi-petition-24.gif",true)
+	$aff = debut_cadre_relief("",true)
 		. "<div class='bouton_droite icone36'>\n"
 		. "<a href='".generer_url_ecrire("controle_petition")."' title='"
 		. _T('acjr:voir_suivi_petitions')."'>\n"
@@ -698,11 +814,116 @@ function signatures_petitions_jour($date) {
 
 
 /*---------------------------------------------------------------------------*\
+* articles creer/modifer, d un jour donne.. h.26/04/08
+* double affichage :
+	aff_det => affiche tableau complet -> page actijour_art
+	!aff_det => encart dans actijour_pg.
+\*---------------------------------------------------------------------------*/
+function articles_creer_modifer_jour($date_jour,$aff_det=false) {
+	global $couleur_foncee,$couleur_claire;
+	
+	$tbl_jour=recup_date($date_jour);
+	$deb_jour=date('YmdHis',mktime(0,0,0,$tbl_jour[1],$tbl_jour[2],$tbl_jour[0]));
+	$fin_jour=date('YmdHis',mktime(0,0,0,$tbl_jour[1],$tbl_jour[2]+1,$tbl_jour[0]));
+	
+	$jour=date('d/m/Y',mktime(0,0,0,$tbl_jour[1],$tbl_jour[2],$tbl_jour[0]));
+    
+	$aff="";
+    
+	#
+	$q=spip_query("SELECT id_article, titre, statut, id_rubrique, 
+						DATE_FORMAT(date,'%d/%m/%Y %H:%i') as f_date, 
+						DATE_FORMAT(maj,'%d/%m/%Y %H:%i') as f_maj, 
+						DATE_FORMAT(date_redac,'%d/%m/%Y %H:%i') as f_date_redac, 
+						DATE_FORMAT(date_modif,'%d/%m/%Y %H:%i') as f_date_modif "
+	            ."FROM spip_articles "
+				."WHERE maj > $deb_jour AND maj < $fin_jour "
+				."ORDER BY maj DESC"
+				);
+	$nb_art=spip_num_rows($q);
+	
+	if($aff_det) {
+		# tableau de page actijour_art
+		
+		$aff.= debut_cadre_relief("",true)
+			. "<div class='cell_huit_p'>"._T('acjr:articles_modifies_crees_jour',array('jour'=>$jour))."</div>";
+		
+		if($nb_art) {
+			$ifond = 0;
+			
+			$aff.= "<table align='center' border='0' cellpadding='2' cellspacing='0' width='100%'>\n"
+			. "<tr bgcolor='$couleur_foncee' class='head_tbl'>\n"
+			. "<td width='7%'>"._T('acjr:numero_court')."</td>\n"
+			. "<td width='50%'>"._T('acjr:titre_article')."</td>\n"
+			. "<td width=25%>"._T('acjr:date_maj')."</td>\n"
+			. "</tr>\n";
+			
+			while($r=spip_fetch_array($q)) {
+				$ifond = $ifond ^ 1;
+				$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
+				$url_art=generer_url_ecrire('articles','id_article='.$r['id_article']);
+				
+				$aff.= "<tr bgcolor='$couleur'>"
+				. "<td width='7%'>\n"
+				. "<div align='right' class='verdana2'>"
+				. $r['id_article']
+				. "</div>\n</td>"
+				. "<td width='50%'>\n"
+				. "<div class='verdana3' style='margin-left:5px;'><a href='".$url_art."'>"
+				. http_img_pack("puce-".puce_statut($r['statut']).".gif",'ico','','')."&nbsp;&nbsp;"
+				. entites_html(supprimer_numero($r['titre']))
+				. "</a></div>\n"
+				. "</td>\n"
+				. "<td width='25%'>\n"
+				. "<div align='center' class='verdana2'><b>".$r['f_maj']."</b></div></td>\n"
+				. "</tr>\n"
+				. "<tr bgcolor='$couleur'><td colspan='3'>"
+				. "<div align='right' class='verdana1'>"
+						._T('acjr:date_publication_dpt').$r['f_date']."<br />"
+						._T('acjr:date_redaction_dpt').$r['f_date_redac']."</div>\n"
+				. "</tr>\n"
+				;
+  			}
+            $aff.="</table>";
+		}
+		else {
+			$aff.=_T('acjr:aucun_article_cree');
+		}
+		$aff.=fin_cadre_relief(true);
+ 	}
+	else {
+		# encart sur actijour_pg
+		$url=generer_url_ecrire('actijour_art','d='.$date_jour);
+		$icone=http_img_pack('article-24.gif','ico','','');
+
+		$aff.= debut_cadre_relief('',true);
+		$aff.= "<div class='bouton_droite icone36'>\n"
+				. "<a href='".$url."' title='"._T('acjr:voir_details')."'>\n"
+				. $icone."</a>\n"
+				. "</div>\n";
+		$aff.="<span class='arial2 bold'>"._T('acjr:articles_crees_modifies')."</span><br />";
+		#
+		if($nb_art) {
+			$aff.= http_img_pack(_DIR_IMG_ACJR."mini_art.png",'ico','','')."&nbsp;".$nb_art;
+		}
+		else { $aff.= _T('acjr:aucun'); }
+		
+		$aff.="<div class='nettoyeur'></div>";
+		$aff.= fin_cadre_relief(true);
+
+	}
+    
+	return $aff;
+} // articles_creer_modifer_jour
+
+
+
+/*---------------------------------------------------------------------------*\
 nombre de message forum public (identif. GAFoSPIP/SPIPBB)
 \*---------------------------------------------------------------------------*/
 function activite_forum_site($nbr_post_jour) {
 
-	$pluged= unserialize($GLOBALS['meta']['plugin']);
+	$pluged = unserialize($GLOBALS['meta']['plugin']);
 	
 	if(is_array($pluged['GAF'])) {
 		$icone = "<img src='"._DIR_PLUGINS.$pluged['GAF']['dir']."/img_pack/gaf_ico-24.gif' border='0'>";
@@ -718,19 +939,24 @@ function activite_forum_site($nbr_post_jour) {
 		$icone = http_img_pack('suivi-forum-24.gif','ico','','');
 		$url = generer_url_ecrire("controle_forum");
 	}
-	$aff= debut_cadre_relief("forum-public-24.gif",true);
+	
+	$aff= debut_cadre_relief('',true);
 	$aff.= "<div class='bouton_droite icone36'>\n"
-				. "<a href='".$url."' title='"
-				. ($plugin ? _T('acjr:voir_plugin').$plugin : _T('acjr:voir_suivi_forums'))."'>\n"
-				. $icone."</a>\n"
-				. "</div>\n<br />";
+		. "<a href='".$url."' title='"
+		. ($plugin ? _T('acjr:voir_plugin').$plugin : _T('acjr:voir_suivi_forums'))."'>\n"
+		. $icone."</a>\n"
+		. "</div>\n"
+		. "<span class='bold'>"._T('acjr:forums')."</span><br />"
+		;
 				
 	// nbr posts du jour sur vos forum
 	if($nbr_post_jour) { $aff.= $nbr_post_jour."&nbsp;"; }
 	else { $aff.= _T('acjr:aucun'); }
-	if($nbr_post_jour>1) { $ps=_T('acjr:s'); }
-	$aff.= _T('acjr:message', array('ps' =>$ps));
 	
+	if($nbr_post_jour>1) { $aff.= _T('acjr:messages'); }
+	else { $aff.= _T('acjr:message'); }
+	
+	$aff.="<div class='nettoyeur'></div>";
 	$aff.= fin_cadre_relief(true);
 	
 	return $aff;
@@ -764,9 +990,45 @@ function telechargement_dw2_jour($date) {
 		if($r['tot']) { $aff.= $r['tot']; }
 		else { $aff.= _T('acjr:aucun'); }
 		
+		$aff.="<div class='nettoyeur'></div>";
 		$aff.= fin_cadre_relief(true);
 	}
 	return $aff;
 }
+
+
+/*---------------------------------------------------------------------------*\
+ formulaire choix date affichee sur page actijour_hier
+\*---------------------------------------------------------------------------*/
+function formulaire_periode($date_jour,$retour,$prim_an_stats) {
+	include_spip('inc/date');
+
+	$date=recup_date($date_jour);
+	
+	$aff=debut_boite_info(true)
+		. "<form action ='".generer_url_ecrire($retour)."' method='post'>"
+		. "<div style='padding:3px;' align='center' ><b>"
+		. _T('acjr:jour_affiche_dpt')."</b><br /><br />"
+		
+		. afficher_jour($date[2], "name='jour' size='1' class='fondl' ", true)
+		. afficher_mois($date[1], "name='mois' size='1' class='fondl' ", true)."<br /><br />"
+		. acjr_afficher_annee($date[0], "name='annee' size='1' class='fondl' ",$prim_an_stats)."<br /><br />"
+
+		. "<input type='submit' class='fondo' value='". _T('acjr:text_bouton_afficher')."' />"
+		. "</div>"
+		. "</form>"
+		. fin_boite_info(true);
+
+	return $aff;
+}
+
+function acjr_afficher_annee($annee, $attributs, $debut=1996) {
+	$res = ($annee > 1996) ? '' : my_sel($annee,$annee,$annee);
+	for ($i=$debut; $i <= date("Y"); $i++) { // hack h. : for ($i=$debut; $i < date("Y")+3; $i++) {
+		$res .= my_sel($i,$i,$annee);
+	}
+	return "<select $attributs>\n$res</select>\n";
+}
+
 
 ?>

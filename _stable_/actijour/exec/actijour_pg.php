@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| ACTIVITE DU JOUR v. 1.53 - 12/2007 - SPIP 1.9.2
+| ACTIVITE DU JOUR v. 1.55 - 05/2007 - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifie KOAK2.0 strict, mais si !
@@ -109,7 +109,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 
 
 debut_gauche();
-	entete_page(_T('acjr:titre_actijour'));
+	echo entete_page();
 
 /*---------------------------------------------------------------------------*\
 Elements de stats generales : visites, pages, global, moyenne gen.
@@ -127,20 +127,20 @@ Elements de stats generales : visites, pages, global, moyenne gen.
 /*---------------------------------------------------------------------------*\
 ouvrir popup stats-spip d'un article choisi ( par son num spip )
 \*---------------------------------------------------------------------------*/
-	debut_cadre_enfonce(_DIR_PLUGIN_ACTIJOUR."/img_pack/activ_jour.gif");
-	echo "\n<span class='verdana3 bold'>"._T('acjr:afficher_stats_art')."</span><br />\n";
-	echo "<form action='".generer_url_ecrire("actijour_graph")."' method='post' id='graph' onsubmit=\"actijourpop('graph');\">\n";
-	echo "<br />"._T('acjr:numero_');
-	echo "<input type='text' name='id_article' size='4' maxlength='10'>&nbsp;&nbsp;\n";
-	echo "<input type='submit' value='"._T('acjr:voir')."' class='fondo'>\n";
-	echo "</form>\n";
-	fin_cadre_enfonce();
+	debut_cadre_couleur(_DIR_IMG_ACJR."activ_jour.gif");
+	echo "\n<span class='verdana3 bold'>"._T('acjr:afficher_stats_art')."</span>\n"
+	. "<form action='".generer_url_ecrire("actijour_graph")."' method='post' id='graph' onsubmit=\"actijourpop('graph');\">\n"
+	. _T('acjr:numero_')
+	. "<input type='text' name='id_article' size='4' maxlength='10' class='fondl'>&nbsp;&nbsp;\n"
+	. "<input type='submit' value='"._T('acjr:voir')."' class='fondo'>\n"
+	. "</form>\n";
+	fin_cadre_couleur();
 
  
 /*---------------------------------------------------------------------------*\
 ouvrir popup du bargraph-spip : visites du trimestre 
 \*---------------------------------------------------------------------------*/
-	debut_cadre_enfonce("");
+	debut_cadre_couleur("");
 	echo "<div class='bouton_droite'>".
 		"<a href=\"".generer_url_ecrire("actijour_graph")."\" target=\"graph_article\" 
 		onclick=\"javascript:window.open(this.href, 'graph_article', 
@@ -148,32 +148,21 @@ ouvrir popup du bargraph-spip : visites du trimestre
 		title=\""._T('acjr:bargraph_trimestre_popup')."\">\n".
 		http_img_pack('cal-mois.gif','ico','','')."\n</a>\n</div>\n";
 	echo "<span class='verdana3'>"._T('acjr:graph_trimestre')."</span>";
-	fin_cadre_enfonce();
+	fin_cadre_couleur();
 
 
 
 /*---------------------------------------------------------------------------*\
-contribution de jean-marc.viglino@ign.fr - 20/11/06
-Derniere visite des "auteurs".
+base contribution de jean-marc.viglino@ign.fr - 20/11/06
+Modif 05/05/08 .. -> les connectes du jour !
 \*---------------------------------------------------------------------------*/
-	echo auteurs_date_passage();
+	echo auteurs_visite_jour();
 
+/*---------------------------------------------------------------------------*\
+  nombre auteurs connectes depuis 15mn - 22/04/08
+\*---------------------------------------------------------------------------*/
+	echo nbr_auteurs_enligne();
 
-/*
-# pas de date d'enreg. 
-# 'maj' est modifie a chaque passage de l_auteur
-debut_cadre_relief("");
-	echo "Nouveaux inscrits<br />";
-	foreach($nouveaux_inscrits as $id => $ta) {
-		echo "<a href='".generer_url_ecrire("auteurs_edit", "id_auteur=".$id)."'>";
-		if($ta[2]=="0minirezo") { $ico_auteur="admin-12.gif"; $statut="Admin"; }
-		elseif($ta[2]=="1comite") { $ico_auteur="redac-12.gif"; $statut="Redacteur"; }
-		else { $ico_auteur="visit-12.gif"; $statut="Visiteur"; }
-		echo "<img src='"._DIR_IMG_PACK.$ico_auteur."' title='".$statut."' />&nbsp;";
-		echo $ta[1]." - ".$ta[0]."</a><br />";
-	}
-fin_cadre_relief();
-*/
 
 // Listage des Pages Rubrique
 # plus de reference : arret de spip_visites_temp
@@ -184,12 +173,18 @@ fin_cadre_relief();
 
 
 creer_colonne_droite();
+echo "<p class='space_20'></p>";
 
 /*---------------------------------------------------------------------------*\
 visites mensuelles du site en chiffres (jauge) sur n mois (18)
 \*---------------------------------------------------------------------------*/
 	echo visites_mensuelles_chiffres($global_jour);
 
+
+/*---------------------------------------------------------------------------*\
+Affichage articles creer/modifier ce jour ((h.30/04/08)
+\*---------------------------------------------------------------------------*/
+	echo articles_creer_modifer_jour($date_auj);
 
 
 /*---------------------------------------------------------------------------*\
@@ -199,15 +194,15 @@ nombre de message forum public (identif. GAFoSPIP/SPIPBB)
 
 
 /*---------------------------------------------------------------------------*\
-signatures petitions aujourd'hui
-\*---------------------------------------------------------------------------*/
-	echo signatures_petitions_jour($date_auj);
-
-
-/*---------------------------------------------------------------------------*\
 Telechargement de fichiers du jour (via DW2)
 \*---------------------------------------------------------------------------*/
 	echo telechargement_dw2_jour($date_auj);
+
+
+/*---------------------------------------------------------------------------*\
+signatures petitions aujourd'hui
+\*---------------------------------------------------------------------------*/
+	echo signatures_petitions_jour($date_auj);
 
 
 /*---------------------------------------------------------------------------*\
@@ -239,13 +234,14 @@ scoty signe son mefait
 debut_droite();
 
 
-
 /*---------------------------------------------------------------------------*\
 Onglets pages sup.
 \*---------------------------------------------------------------------------*/
 	echo onglets_actijour(_request('exec'));
 
 
+
+$m=array();
 /*---------------------------------------------------------------------------*\
 Lister Articles du jour
 \*---------------------------------------------------------------------------*/
@@ -266,14 +262,14 @@ Affichage des referers du jour (orig. spip inc/statistiques)
 \*---------------------------------------------------------------------------*/
 	$m[4] = liste_referers_jour('jour');
 
-#
-# affichage des blocs ordonnes $m
-#
-$ordon_admin=$GLOBALS['actijour']['admin-'.$connect_id_auteur]['ordon_pg_m'];
-if(!$ordon_admin) { $ordon_admin='1,2,3,4'; }
-foreach(explode(',',$ordon_admin) as $bloc) {
-	echo $m[$bloc];
-}
+	#
+	# affichage des blocs ordonnes $m
+	#
+	$ordon_admin=$GLOBALS['actijour']['admin-'.$connect_id_auteur]['ordon_pg_m'];
+	if(!$ordon_admin) { $ordon_admin='1,2,3,4'; }
+	foreach(explode(',',$ordon_admin) as $bloc) {
+		echo $m[$bloc];
+	}
 
 
 # retour haut de page
