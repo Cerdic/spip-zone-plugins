@@ -28,9 +28,9 @@ function spiplistes_auteur_abonnement () {
 
 	$id_auteur = intval(_request('id_auteur'));
 	if($id_auteur > 0) {
-		if($row = sql_fetsel("email,statut", "spip_auteurs", "id_auteur=$id_auteur")) {
+		if($row = sql_fetsel("email,statut", "spip_auteurs", "id_auteur=".sql_quote($id_auteur)." LIMIT 1")) {
 			if(strlen($auteur_email = $row['email']) > 3) {
-				return(spiplistes_auteur_abonnement_details ($id_auteur, $row['statut'], $auteur_email));
+				return(spiplistes_auteur_abonnement_details($id_auteur, $row['statut'], $auteur_email));
 			}
 			else {
 				return(	""
@@ -74,16 +74,20 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			$sql_where .= " OR statut=".sql_quote(_SPIPLISTES_PRIVATE_LIST);
 		}
 
-		$sql_query = "SELECT id_liste,titre,texte,date,statut FROM spip_listes WHERE $sql_where ORDER BY titre ASC";
-
-		$sql_result = spip_query($sql_query);
+		$sql_result = sql_select(
+			array('id_liste','titre','texte','date','statut')
+			, "spip_listes"
+			, $sql_where
+			, ''
+			, "titre ASC"
+			);
 		
 		// si liste disponible, affiche formulaire
 		if($sql_result && sql_count($sql_result)) {
 			
 			// récupère la liste des listes
 			$listes = array();
-			while($row = spip_fetch_array($sql_result)) {
+			while($row = sql_fetch($sql_result)) {
 				$listes[] = array(
 					'id_liste' => $row['id_liste']
 					, 'titre' => $row['titre']
@@ -127,8 +131,9 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 					}
 					if(count($abo_retire)) {
 						foreach($abo_retire as $value) {
-							$sql_query = "DELETE FROM spip_auteurs_listes WHERE id_auteur=$id_auteur AND id_liste="._q($value);
-							if(!spip_query($sql_query)) {
+							if(!sql_delete("spip_auteurs_listes"
+								, "id_auteur=".sql_quote($id_auteur)." AND id_liste=".sql_quote($value)
+								)) {
 								$result .= __boite_alerte(_T('spiplistes:Erreur_sur_la_base'), true);
 							}
 						}
@@ -136,10 +141,10 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				}
 				// désabonne de tout
 				else {
-					$sql_query ="DELETE FROM spip_auteurs_listes WHERE id_auteur=$id_auteur";
-					if(!spip_query($sql_query)) {
+					if(!sql_delete("spip_auteurs_listes", "id_auteur=".sql_quote($id_auteur))) {
 						$result .= __boite_alerte(_T('spiplistes:Erreur_sur_la_base'), true);
 					}
+					spiplistes_log("#### enleve tout de ".$id_auteur);
 				}
 			} // end if
 			
@@ -149,10 +154,12 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 					$abo_format = "";
 				}
 				else {
-					$sql_query = "SELECT COUNT(id_auteur) AS c FROM spip_auteurs_elargis WHERE id_auteur=$id_auteur LIMIT 1";
+					$sql_query = "SELECT COUNT(id_auteur) AS c 
+						FROM spip_auteurs_elargis WHERE id_auteur=$id_auteur LIMIT 1";
 					if(($row = spip_fetch_array(spip_query($sql_query)))
 						&& $row['c'] ) {
-						$sql_query = "UPDATE spip_auteurs_elargis SET `spip_listes_format`="._q($abo_format)." WHERE id_auteur=$id_auteur";
+						$sql_query = "UPDATE spip_auteurs_elargis SET `spip_listes_format`="._q($abo_format)." 
+						WHERE id_auteur=$id_auteur";
 					}
 					else {
 						$sql_query = "INSERT INTO spip_auteurs_elargis (id_auteur,`spip_listes_format`) 
