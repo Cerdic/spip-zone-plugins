@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2007                                                *
+ *  Copyright (c) 2001-2008                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -32,7 +32,6 @@ function action_instituer_groupe_mots_dist()
 // http://doc.spip.org/@action_instituer_groupe_mots_post
 function action_instituer_groupe_mots_post($id_groupe)
 {
-
 	$evenements = _request('evenements');
 	$pim_agenda = _request('pim_agenda');
 	$acces_comite = _request('acces_comite');
