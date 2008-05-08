@@ -153,7 +153,7 @@ function exec_spiplistes_maintenance () {
 	}
 	
 	// compter les listes
-	$nb_listes = spiplistes_listes_count();
+	$nb_listes = spiplistes_listes_compter();
 	$nb_listes_desc = 
 						($nb_listes==1)
 						? _T('spiplistes:info_1_liste')

@@ -36,12 +36,13 @@ function action_spiplistes_changer_statut_abonne_dist () {
 				}
 			}
 		}
-		// CP-20080324: l'abonnement par action/ actuellement pas utilisé par le formualire abonnes_tous.
+		// CP-20080324: l'abonnement par action/ actuellement pas utilisé par le formulaire abonnes_tous.
 		// A voir si on conserve 
 		/**/
 		if ($action=='listeabo') {
 			//abonne un auteur, force en _SPIPLISTES_FORMAT_DEFAULT si pas de format
-			if ($id_auteur && ($id_liste = intval($arg[2])) 
+			if ($id_auteur 
+				&& (($id_liste = intval($arg[2])) > 0)
 				&& autoriser('abonnerauteur', 'liste', $id_liste, NULL, array('id_auteur'=>$id_auteur))
 				) {
 				spiplistes_listes_abonner($id_auteur, $id_liste);

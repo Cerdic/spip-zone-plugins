@@ -101,7 +101,6 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			if(_request('btn_abonnements_valider')) {
 				$abos_set = _request('abos_set');
 				$abo_ajoute = array();
-				$abo_retire = array();
 				// liste des abonnements de id_auteur
 				$auteur_abos_current_list = spiplistes_listes_abonnements_auteur($id_auteur);
 				// ajoute/retire les abonnements désirés
@@ -113,34 +112,18 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 						}
 					}
 					if(count($abo_ajoute)) {
-						$sql_valeurs = "";
-						foreach($abo_ajoute as $value) {
-							$sql_valeurs .= " ($id_auteur, $value),";
-						}
-						$sql_valeurs = rtrim($sql_valeurs, ",");
-						if(sql_insert("spip_auteurs_listes", "(id_auteur, id_liste)", $sql_valeurs)===false) {
-							$result .= __boite_alerte(_T('spiplistes:Erreur_sur_la_base'), true);
-						}
+						spiplistes_listes_abonner($id_auteur, $abo_ajoute);
 					}
 					// Désabonnements ?
 					foreach($auteur_abos_current_list as $value) {
 						if(!in_array($value, $abos_set)) {
-							$abo_retire[] = $value;
-						}
-					}
-					if(count($abo_retire)) {
-						foreach($abo_retire as $value) {
-							if(!sql_delete("spip_auteurs_listes"
-								, "id_auteur=".sql_quote($id_auteur)." AND id_liste=".sql_quote($value)
-								)) {
-								$result .= __boite_alerte(_T('spiplistes:Erreur_sur_la_base'), true);
-							}
+							spiplistes_listes_desabonner($id_auteur, $value);
 						}
 					}
 				}
 				// désabonne de tout
 				else {
-					if(!sql_delete("spip_auteurs_listes", "id_auteur=".sql_quote($id_auteur))) {
+					if(spiplistes_listes_desabonner($id_auteur, "toutes") === false) {
 						$result .= __boite_alerte(_T('spiplistes:Erreur_sur_la_base'), true);
 					}
 				}

@@ -83,13 +83,7 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<", _SPIPLISTES_LOG_D
 	
 				if(is_array($list) && count($list)) {	
 					// on abonne l'auteur aux listes choisies
-					$sql_values = "";
-					while( list(,$val) = each($list) ) {
-						$sql_values .= " ($id_auteur,"._q($val)."),";
-					}
-					$sql_values = rtrim($sql_values, ",");
-					$sql_query = "INSERT INTO spip_auteurs_listes (id_auteur,id_liste) VALUES $sql_values";
-					if(spip_query($sql_query)) {
+					if(spiplistes_listes_abonner($id_auteur, $list) !== false) {
 						$message_formulaire = _T('spiplistes:abonnement_modifie');
 					}
 				} 
@@ -98,7 +92,7 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<", _SPIPLISTES_LOG_D
 				$type_abo = _request('suppl_abo'); 
 				if($format != $type_abo) {
 					$format = $type_abo;
-					spip_query("UPDATE spip_auteurs_elargis SET `spip_listes_format`="._q($format)." WHERE id_auteur=$id_auteur");	
+					spiplistes_format_abo_modifier($id_auteur, $format);
 					// affichage des modifs
 					if($format == 'non') {
 						$message_formulaire = _T('spiplistes:desabonnement_valid').":&nbsp;".$email;  

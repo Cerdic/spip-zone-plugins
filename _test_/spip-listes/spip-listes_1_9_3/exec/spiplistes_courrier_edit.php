@@ -167,12 +167,18 @@ function exec_spiplistes_courrier_edit(){
 		. "<label for='sujet_courrier'>"._T('spiplistes:sujet_courrier').":</label>\n"
 		. "<input id='sujet_courrier' type='text' class='formo' name='titre' value=\"$titre\" size='40' $clearonfocus />\n"
 		. "<p style='margin-bottom:1.75em;'>"._T('spiplistes:Courrier_edit_desc')."</p>\n"
+		;
+	$titre_block_depliable = _T('spiplistes:Generer_le_contenu');
+	$page_result .= ""
 		//
 		// générer le contenu
 		// Reprise du Formulaire adapté de abomailman () // MaZiaR - NetAktiv	// tech@netaktiv.com
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_insert-slide.gif', true)
-		. bouton_block_invisible(md5(_T('spiplistes:charger_patron')))
-		. "<span class='verdana2 triangle_label' onclick=\"javascript:$('#triangle".$compteur_block."').click();\">"._T('spiplistes:Generer_le_contenu')."</span>\n"
+		//. bouton_block_invisible(md5(_T('spiplistes:charger_patron')))
+		. spiplistes_bouton_block_depliable($titre_block_depliable, false, md5(_T('spiplistes:charger_patron')))
+		. "<span class='verdana2 triangle_label' onclick=\"javascript:$('#triangle".$compteur_block."').click();\">"
+			. (spiplistes_spip_est_inferieur_193() ? $titre_block_depliable : "")
+			. "</span>\n"
 		. debut_block_invisible(md5(_T('spiplistes:charger_patron')))
 		// 
 		. "<div id='ajax-loader' align='right'><img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."ajax_indicator.gif' /></div>\n"

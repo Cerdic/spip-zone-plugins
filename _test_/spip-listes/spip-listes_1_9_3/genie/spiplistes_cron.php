@@ -234,8 +234,9 @@ spiplistes_log("CRON: insert_id : ".$r, _SPIPLISTES_LOG_DEBUG);
 	// Si panier courriers des encours plein, 
 	// ou si queue en attente, appelle meleuse
 	if (spiplistes_courriers_en_cours_count() 
-		|| spiplistes_courriers_en_queue_count()){
-		spiplistes_log("CRON: appel meleuse", _SPIPLISTES_LOG_DEBUG);
+		|| ($n = spiplistes_courriers_en_queue_compter("etat=".sql_quote("")))
+	){
+spiplistes_log("CRON: $n jobs, appel meleuse", _SPIPLISTES_LOG_DEBUG);
 		include_spip('inc/spiplistes_meleuse');
 		return(spiplistes_meleuse());
 	}
