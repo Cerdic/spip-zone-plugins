@@ -1,0 +1,29 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+		playtaliste
+	</nom>
+	<auteur><!-- Auteur du plugin -->
+		Bruno Bergot
+	</auteur>
+	<version>
+		0.1
+	</version>
+	<etat>
+		dev
+	</etat>
+	<description>
+		<p>Un formulaire <code>#FORMULAIRE_PLAYTALISTE</code> permet aux visiteurs du site d'ajouter des documents a un playliste enregistree dans un cookie.</p>
+		<p>La balise <code>#PLAYTALISTE_LISTE</code> renvoie une chaine utilisable dans une boucle documents avec le critere IN.</p>
+	</description>
+	<prefix>
+		playtaliste
+	</prefix>
+	<fonctions>
+		playtaliste_fonctions.php
+	</fonctions>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>playtaliste_fonctions.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+</plugin>
