@@ -1,14 +1,58 @@
-<html>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
-	<title><:inscription2:page_confirmation:></title>
-	<INCLURE{fond=inc-head}>
+<title>[(#NOM_SITE_SPIP|textebrut)] - <:inscription2:page_confirmation:></title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
 </head>
 
 <body>
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
-<div style="width:80%;margin:auto">
-#FORMULAIRE_INSCRIPTION2_CONFIRMATION
-</div>
-	<INCLURE{fond=inc-pied}>
+
+	[(#REM) Contenu principal : derniers articles publies ]
+	<div class="hfeed" id="conteneur">
+	<div id="contenu">
+		<div class="cartouche">
+			<h1 class="invisible"><:inscription2:page_confirmation:></h1>
+		</div>
+
+		<div class="texte">
+			#FORMULAIRE_INSCRIPTION2_CONFIRMATION
+		</div>
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+    </div><!--#navigation-->
+    
+    [(#REM) Menu de navigation laterale ]
+    <div id="extra">
+
+        [(#REM) Articles dans la meme rubrique ]
+        <B_articles_rubrique>
+        <div class="menu">
+            <h2><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
+            <ul>
+                <BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse} {0,10}>
+                <li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+                </BOUCLE_articles_rubrique>
+            </ul>
+        </div>
+        </B_articles_rubrique>
+        
+    </div><!--#extra-->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!--#page-->
 </body>
 </html>
