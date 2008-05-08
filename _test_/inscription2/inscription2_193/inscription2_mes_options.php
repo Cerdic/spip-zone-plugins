@@ -50,7 +50,7 @@
 	$tables_principales['spip_auteurs_elargis']  =	array('field' => &$spip_auteurs_elargis, 'key' => &$spip_auteurs_elargis_key);
 	$tables_principales['spip_geo_pays']  =	array('field' => &$spip_geo_pays, 'key' => &$spip_geo_pays_key);
 	
-	// surcharger auteur session, desactiv� car ca pete en 193
+	// surcharger auteur session, desactive car ca pete en 193
 	/*
 	if(is_array($var_user) and isset($GLOBALS['auteur_session']['id_auteur'])){
 		$id = $GLOBALS['auteur_session']['id_auteur'];
@@ -101,8 +101,7 @@ function revision_auteurs_elargi_dist($id, $c=false) {
 //email envoye lors de l'inscription
 
 function envoyer_inscription2($id_auteur,$mode="inscription") {
-	if ($GLOBALS['spip_version_code']>=1.9259){include_spip('inc/envoyer_mail');}
-	else{include_spip('inc/mail');}
+	include_spip('inc/mail');
 	
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
