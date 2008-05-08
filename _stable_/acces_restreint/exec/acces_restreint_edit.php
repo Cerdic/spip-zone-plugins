@@ -26,15 +26,15 @@ function exec_acces_restreint_edit(){
 		AccesRestreint_enregistrer_zone();
 	}
 	
-	debut_page(_T('accesrestreint:page_zones_acces'));
+	echo debut_page(_T('accesrestreint:page_zones_acces'));
 	
 	echo "<br /><br /><br />";
 	gros_titre(_T('accesrestreint:titre_zones_acces'));
-	debut_gauche();
+	echo debut_gauche();
 	
 	// Boite info
 	 if ($id_zone) {
-		debut_boite_info();
+		echo debut_boite_info();
 		echo "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" ;
 		echo _T('accesrestreint:zone_numero');
 		echo "<br /><span class='spip_xx-large'>";
@@ -50,21 +50,21 @@ function exec_acces_restreint_edit(){
 		if ($nb_aut>0)
 			$s .= "$nb_aut "._T('accesrestreint:auteurs');
 		echo "<div style='text-align:center;'>$s</div>";
-		fin_boite_info();
+		echo fin_boite_info();
 	}
 
 //Raccourcis
 	$res = icone_horizontale(_T('accesrestreint:voir_toutes'), generer_url_ecrire("acces_restreint",''), "../"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif", 'rien.gif',false);
 	echo bloc_des_raccourcis($res);
 	
-	debut_droite();
+	echo debut_droite();
 	$requete = "SELECT * FROM spip_zones WHERE id_zone=$id_zone";
 	$res = spip_query($requete);
 	$row = spip_fetch_array($res);
 
 	if (!autoriser('modifier','zone') OR (!$row && $new!='oui')) {
 		echo _T('avis_non_acces_page');
-		fin_page();
+		echo fin_page();
 		exit;
 	}
 
@@ -85,7 +85,7 @@ function exec_acces_restreint_edit(){
 	if (isset($_GET['retour']))
 		$retour = $_GET['retour'];
 
-	debut_cadre_relief();
+	echo debut_cadre_relief();
 	if ($new == 'oui')
 		// URL temporaire pour éviter d'afficher un id_zone nul
 		echo generer_url_post_ecrire('acces_restreint_edit',"new=zone_cree".($retour?"&retour=".urlencode($retour):""));
@@ -109,7 +109,7 @@ function exec_acces_restreint_edit(){
 	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='Enregistrer' value='"._T('bouton_enregistrer')."' class='fondo'></div>";
 	echo "</form>\n";
 
-	fin_cadre_relief();
+	echo fin_cadre_relief();
 
 	echo "<br />\n";
 	echo "<div align='$spip_lang_right'>";
@@ -132,7 +132,7 @@ function exec_acces_restreint_edit(){
 	}
 
 
-	fin_page();
+	echo fin_page();
 }
 
 ?>

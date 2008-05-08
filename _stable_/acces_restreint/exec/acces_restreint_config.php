@@ -26,14 +26,14 @@ function AccesRestreint_appliquer_modifs_config() {
 
 			$admin = _T('info_modification_parametres_securite');
 			include_spip('inc/admin');
-			debut_admin(_request('exec'), $admin);
+			echo debut_admin(_request('exec'), $admin);
 			foreach($liste_meta as $i) {
 				if (_request($i) !== NULL) {
 					ecrire_meta($i, _request($i));
 				}
 			}
 			ecrire_metas();
-			fin_admin($admin);
+			echo fin_admin($admin);
 			break;
 		}
 	}
@@ -60,7 +60,7 @@ function exec_acces_restreint_config(){
 	echo "<br /><br /><br />";
 	gros_titre(_T('titre_config_fonctions'));
 
-	debut_gauche();
+	echo debut_gauche();
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'acces_restreint_config'),'data'=>''));
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'acces_restreint_config'),'data'=>''));
@@ -71,7 +71,7 @@ function exec_acces_restreint_config(){
 	echo bloc_des_raccourcis($res);
 
 
-	debut_droite();
+	echo debut_droite();
 	lire_metas();
 
 	$action = generer_url_ecrire('acces_restreint_config');
@@ -82,7 +82,7 @@ function exec_acces_restreint_config(){
 
 	AccesRestreint_htaccess_config();
 	AccesRestreint_htpasswd_config();
-
+	echo '</div></form>';
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'acces_restreint_config'),'data'=>''));
 
@@ -97,7 +97,7 @@ function AccesRestreint_htaccess_config() {
 
 	global $spip_lang_right;
 
-	debut_cadre_trait_couleur("cadenas-24.gif", false, "", 
+	echo debut_cadre_trait_couleur("cadenas-24.gif", false, "", 
 			  _L("Acc&egrave;s aux document joints par leur URL"));
 	include_spip('inc/acces');
 	$creer_htaccess = gerer_htaccess();
@@ -114,7 +114,7 @@ function AccesRestreint_htaccess_config() {
 	echo "</div>";
 	echo "<div style='text-align:$spip_lang_right'><input type='submit'  value='"._T('bouton_valider')."' class='fondo' /></div>";
 	
-	fin_cadre_trait_couleur();
+	echo fin_cadre_trait_couleur();
 
 	echo "<br />";
 }
@@ -125,7 +125,7 @@ function AccesRestreint_htpasswd_config() {
 	include_spip('inc/acces');
 	ecrire_acces();
 
-	debut_cadre_trait_couleur("cadenas-24.gif", false, "",
+	echo debut_cadre_trait_couleur("cadenas-24.gif", false, "",
 		_T('info_fichiers_authent'));
 
 	$creer_htpasswd = $GLOBALS['meta']["creer_htpasswd"];
@@ -140,7 +140,7 @@ function AccesRestreint_htpasswd_config() {
 	echo "</div>";
 	echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 	
-	fin_cadre_trait_couleur();
+	echo fin_cadre_trait_couleur();
 }
 
 ?>
