@@ -1,6 +1,11 @@
 <BOUCLE_testsiart(GROUPES_MOTS){id_groupe=#ENV{id_groupe}}{articles=oui}><B_rechart>
 <h3 class='article'><:info_articles_trouves:></h3>
-[<p class='pagination'>(#PAGINATION)</p>]
+<div class='pagination'><span class='tri'>
+<a href='[(#SELF|parametre_url{tri,date})]'><:par_date:></a> |
+<a href='[(#SELF|parametre_url{tri,titre})]'><:par_titre:></a> |
+<a href='[(#SELF|parametre_url{senstri,asc})]'><img src='#CHEMIN{images/monter-16.png}' alt='croissant' /></a> |
+<a href='[(#SELF|parametre_url{senstri,desc})]'><img src='#CHEMIN{images/descendre-16.png}' alt='decroissant' /></a> |
+</span>[(#PAGINATION)] <div class='nettoyeur'></div></div>
 <ul class='items'>
 <BOUCLE_rechart(ARTICLES){!id_mot=#ENV{id}}{recherche #ENV{recherche}}{pagination 5}{par #ENV{tri,date}}{inverse #ENV{senstri,desc}|=={asc}|?{0,1}}{statut IN #ENV{statuts,#ARRAY{publie}}}>
 <li class='item article'>
