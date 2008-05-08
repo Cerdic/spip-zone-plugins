@@ -53,11 +53,8 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode, $retour) {
 		}else
 			echo _T('inscription2:rien_a_faire');
 	}else{
-		if ($GLOBALS['spip_version_code']>=1.9259){
-			include_spip('inc/acces');
-			include_spip('inc/envoyer_mail');
-		}
-		else{include_spip('inc/mail');}
+		include_spip('inc/acces');
+		include_spip('inc/mail');
 		
 		$htpass = generer_htpass($pass);
 		$statut = lire_config('inscription2/statut_nouveau');
