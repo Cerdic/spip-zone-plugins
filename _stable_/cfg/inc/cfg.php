@@ -12,14 +12,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Renvoie la liste des configurations disponibles dans le path
-function liste_cfg() {
+// ou dans le dossier donne en argument
+function liste_cfg($dir='') {
 	// Faire la liste des éléments qui ont un cfg ; ca peut etre des plugins
 	// mais aussi des squelettes ou n'importe quoi
 	$liste = array();
-	foreach (creer_chemin() as $dir) {
-		if (basename($dir) != 'cfg')
-			$liste =
-				array_merge($liste, preg_files($dir.'fonds/', '/cfg_.*html$'));
+	// tous les repertoires
+	if (!$dir){
+		foreach (creer_chemin() as $dir) {
+			if (basename($dir) != 'cfg')
+				$liste = array_merge($liste, preg_files($dir.'fonds/', '/cfg_.*html$'));
+		}
+	// ou seulement celui demande
+	} else {	
+		$dir = rtrim(rtrim($dir),'/').'/';
+		$liste = preg_files($dir.'fonds/', '/cfg_.*html$');
 	}
 
 	if ($liste) {
@@ -38,21 +45,74 @@ function liste_cfg() {
 function icone_lien_cfg($dir) {
 	$ret = '';
 // si ce n'est pas l'adresse du plugin cfg : 
-	if (basename($dir) != basename(str_replace('/inc','',dirname(__FILE__))))
-	if ($l = preg_files($dir.'/fonds/', '/cfg_.*html$')) {
-		foreach($l as $cfg) {
-			$fonds = substr(basename($cfg,'.html'),4);
-			$ret .= '<a href="'.generer_url_ecrire('cfg', 'cfg='.$fonds).'">'
-				.'<img src="'._DIR_PLUGIN_CFG.'cfg-16.png"
-					width="16" height="16"
-					alt="'._T('icone_configuration_site').' '.$fonds.'"
-					title="'._T('icone_configuration_site').' '.$fonds.'"
-				/></a>';
+	if (basename($dir) != basename(str_replace('/inc','',dirname(__FILE__)))) {
+		if ($onglets = lister_onglets_cfg($dir)){
+			foreach ($onglets as $fonds=>$ong){
+				if ($ong['afficher'])
+					$ret .= '<a href="'.$ong['url'].'">'
+						.'<img src="'._DIR_PLUGIN_CFG.'cfg-16.png"
+							width="16" height="16"
+							alt="'._T('icone_configuration_site').' '.$fonds.'"
+							title="'._T('icone_configuration_site').' '.$fonds.'"
+						/></a>';					
+			}
 		}
 	}
 
 	return $ret;
 }
+
+
+
+// retourne un tableau contenant une liste de fonds cfg et leurs parametres
+// d'onglet (oui/non/titre_parent), plus quelques autres parametres (url, titre, icone),
+// pour un repertoire donne (sinon tout le path)
+function lister_onglets_cfg($dir=''){
+	$onglets = array();
+	
+	// scruter les onglets affichables
+	if ($l = liste_cfg($dir)) {
+		foreach($l as $fonds => $cfg) {
+
+			if (!isset($onglets[$fonds])) 
+				$onglets[$fonds] = array();
+			$args = array();
+			$args['afficher'] = false;
+			
+			// On va chercher la config cible
+			// et on regarde ses donnees pour faire l'onglet
+			// seulement si l'onglet doit etre affiche
+			$_cfg = cfg_charger_classe('cfg','inc');
+			$tmp = new $_cfg($fonds);
+
+			if ($tmp->autoriser()){
+				$args['onglet'] = $tmp->form->param->onglet;
+				$args['url'] = generer_url_ecrire('cfg', 'cfg='.$fonds);
+				// titre
+				if (!$args['titre'] = $tmp->form->param->titre)
+					$args['titre'] = $fonds;
+				// icone	
+				$path = dirname(dirname($cfg));	
+				$args['icone'] = '';
+				if ($tmp->form->param->icone)
+					$args['icone'] = $path.'/'.$tmp->form->param->icone;
+				else if (file_exists($path.'/plugin.xml'))
+					$args['icone'] = 'plugin-24.gif';
+				else
+					$args['icone'] = _DIR_PLUGIN_CFG.'cfg-doc-22.png';	
+				
+				// l'afficher ?
+				if ($tmp->form->param->onglet == 'oui')
+					$args['afficher'] = true;
+			}
+			
+			$onglets[$fonds] = array_merge($args, $onglets[$fonds]); // conserver les donnees deja presentes ('enfant_actif')
+		}
+	}
+	return $onglets;	
+}
+	
+
 
 
 // la classe cfg represente une page de configuration
@@ -165,8 +225,7 @@ class cfg_dist
 				. "\n</div></form>\n";
 	
 	}
-	
-
+		
 	//
 	// Affiche la liste des onglets de CFG
 	// 
@@ -178,65 +237,28 @@ class cfg_dist
 	// le parent n'a pas 'onglet=non' sinon rien ne sera expose...
 	// 
 	function barre_onglets(){
-		$onglets = array();
 		
-		// scruter les onglets affichables ainsi que l'onglet 'expose'
-		if ($l = liste_cfg()) {
-			foreach($l as $fonds => $cfg) {
-
-				if (!isset($onglets[$fonds])) 
-					$onglets[$fonds] = array();
-				$args = array();
-				$args['afficher'] = false;
-				
-				// On va chercher la config cible
-				// et on regarde ses donnees pour faire l'onglet
-				// seulement si l'onglet doit etre affiche
-				$_cfg = cfg_charger_classe('cfg','inc');
-				$tmp = new $_cfg($fonds);
-
-				if ($tmp->autoriser() && $tmp->form->param->onglet=='oui') {
-					$args['afficher'] = true;
-					$args['url'] = generer_url_ecrire(_request('exec'), 'cfg='.$fonds);
-					
-					$path = dirname(dirname($cfg));
-	
-					// titre
-					if (!$args['titre'] = $tmp->form->param->titre)
-						$args['titre'] = $fonds;
-
-					// icone		
-					$args['icone'] = '';
-					if ($tmp->form->param->icone)
-						$args['icone'] = $path.'/'.$tmp->form->param->icone;
-					else if (file_exists($path.'/plugin.xml'))
-						$args['icone'] = 'plugin-24.gif';
-					else
-						$args['icone'] = _DIR_PLUGIN_CFG.'cfg-doc-22.png';
-					
-					// onglet actif		
-					$args['actif'] = ($fonds == _request('cfg'));
-				}
-				
+		// determiner les onglets a cacher et a mettre en surbrillance
+		if ($onglets = lister_onglets_cfg()){
+			foreach ($onglets as $fonds=>&$ong){
+				$o = $ong['onglet'];
+				// onglet actif
+				if ($o == 'oui')	
+					$ong['actif'] = ($fonds == _request('cfg'));
 				// rendre actif un parent si l'enfant est actif (onglet=nom_du_parent
 				// (/!\ ne pas le desactiver s'il a deja ete mis actif)
-				$o = $tmp->form->param->onglet;
-				if ($tmp->autoriser() && $o && $o!='oui' && $o!='non'){
+				if ($o && $o!='oui' && $o!='non'){
 					if (!isset($onglets[$o])) 
 						$onglets[$o]=array();
 					
 					if (!isset($onglets[$o]['enfant_actif'])) 
 						$onglets[$o]['enfant_actif']=false;
 						
-					$onglets[$o]['enfant_actif'] = 
-						($onglets[$o]['enfant_actif'] 
-						|| $fonds == _request('cfg'));
+					$onglets[$o]['enfant_actif'] = ($onglets[$o]['enfant_actif'] OR $fonds == _request('cfg'));
 				}
-				
-				$onglets[$fonds] = array_merge($args, $onglets[$fonds]); // conserver les donnees deja presentes ('enfant_actif')
 			}
 		}
-		
+
 		// retourner le code des onglets selectionnes
 		$res = "";
 		if ($onglets) {

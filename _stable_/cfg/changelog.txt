@@ -1,6 +1,9 @@
 Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 
+v1.7.4 (08 05 2008)
+- Ne pas lister tous les formulaires cfg dans la page de gestion de plugin, mais seulement ceux avec l'onglet sur "oui"
+
 v1.7.3 (23 04 2008)
 - correction compat sql_showtable() sur 1.9.2 (fil)
 - suivi svn pour les formulaires dynamiques (necessitent 'action')
