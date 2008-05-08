@@ -3,7 +3,8 @@
 		playtaliste
 	</nom>
 	<auteur><!-- Auteur du plugin -->
-		Bruno Bergot
+		Bruno Bergot<br />
+		Site de d&eacute;monstration : [->http://www.ousopo.org/]
 	</auteur>
 	<version>
 		0.1
@@ -12,8 +13,8 @@
 		dev
 	</etat>
 	<description>
-		<p>Un formulaire <code>#FORMULAIRE_PLAYTALISTE</code> permet aux visiteurs du site d'ajouter des documents a un playliste enregistree dans un cookie.</p>
-		<p>La balise <code>#PLAYTALISTE_LISTE</code> renvoie une chaine utilisable dans une boucle documents avec le critere IN.</p>
+		<p>Un formulaire <code>#FORMULAIRE_PLAYTALISTE</code> permet aux visiteurs du site d'ajouter des documents &agrave; un playliste enregistr&eacute;e dans un cookie.</p>
+		<p>La balise <code>#PLAYTALISTE_LISTE</code> renvoie une cha&icirc;ne utilisable dans une boucle documents avec le crit&egrave;re IN.</p>
 	</description>
 	<prefix>
 		playtaliste
