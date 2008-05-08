@@ -218,9 +218,12 @@ function Agenda_formulaire_saisie_rapide_previsu() {
 
 		$largeurs = array('', '', '', '');
 		$styles = array('arial11', 'arial11', 'arial11', 'arial11');
-		$out .= afficher_liste($largeurs, $table, $styles);
-
-		$out .= "</table></div>\n";
+		if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {
+			$out .= xhtml_table_id_type($table, $largeurs, $styles, $tranche);
+		} else {
+			$out .= afficher_liste($largeurs, $table, $styles);
+			$out .= "</table></div>\n";
+		}
 		$out .= "<span style='display:none'>";
 		$out .= "<textarea name='evenements_saisie_rapide' rows='10' class='forml' >";
 		$out .= _request('evenements_saisie_rapide');

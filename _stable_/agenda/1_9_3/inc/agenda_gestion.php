@@ -119,9 +119,12 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 
 		$largeurs = array('', '', '', '', '');
 		$styles = array('arial11', 'arial11', 'arial2', 'arial11', 'arial11');
-		$out .= afficher_liste($largeurs, $table, $styles);
-
-		$out .= "</table></div>\n";
+		if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {
+			$out .= xhtml_table_id_type($table, $largeurs, $styles, $tranche);
+		} else {
+			$out .= afficher_liste($largeurs, $table, $styles);
+			$out .= "</table></div>\n";
+		}
 
 		$les_evenements = join(',', $les_evenements);
 	}
