@@ -21,13 +21,6 @@ foreach ($included_files as $filename) {
 	}
 }
 
-if(!function_exists('debut_page')) {
-	function debut_page ($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil") {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page($titre, $rubrique, $sous_rubrique, $id_rubrique);
-	}
-}
-
 if(!function_exists('spip_insert_id')) {
 	function spip_insert_id () {
 		return mysql_insert_id();
@@ -45,20 +38,6 @@ if(!function_exists('debut_block_invisible')) {
 	function debut_block_invisible ($id="") {
 		include_spip('inc/layer');
 		return debut_block_depliable(false,$id);
-	}
-}
-
-if(!function_exists('bouton_block_invisible')) {
-	function bouton_block_invisible ($nom_block, $icone='') {
-		include_spip('inc/layer');
-		return bouton_block_depliable(_T("info_sans_titre"),false,$nom_block);
-	}
-}
-
-if(!function_exists('bouton_block_visible')) {
-	function bouton_block_visible ($nom_block) {
-		include_spip('inc/layer');
-		return bouton_block_depliable(_T("info_sans_titre"),true,$nom_block);
 	}
 }
 

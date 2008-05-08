@@ -177,19 +177,19 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			// récupère la liste où auteur est abonné
 			$auteur_abos_current_list = spiplistes_listes_abonnements_auteur($id_auteur);
 			
-			if(_request('btn_abonnements_valider')) {
-				$bouton_block = "bouton_block_visible";
-				$debut_block = "debut_block_visible";
-			}
-			else {
-				$bouton_block = "bouton_block_invisible";
-				$debut_block = "debut_block_invisible";
-			}
+			$bloc_visible = _request('btn_abonnements_valider');
+			
+			$debut_block = ($bloc_visible ? "debut_block_visible" : "debut_block_invisible");
 			
 			$result .= ""
 				. "<!-- formulaire abonnement spiplistes -->\n" 
 				. "<a name='abonnement'></a>\n"
-				. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png", true, "", $bouton_block("abos_block")._T('spiplistes:abonnements_aux_courriers').__plugin_aide("abo_fiche_auteur"))
+				. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png"
+					, true, _T('spiplistes:abonnements_aux_courriers'))
+				. spiplistes_bouton_block_depliable(
+					_T('spiplistes:abonnements_aux_courriers')
+					, $bloc_visible
+					, "abos_block")
 				. "<div class='verdana2'>"
 				;
 			if($n = count($auteur_abos_current_list)) {
