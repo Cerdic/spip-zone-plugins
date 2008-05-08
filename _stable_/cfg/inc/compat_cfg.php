@@ -253,7 +253,19 @@ function compat_cfg_defs_dist() {
 				return spip_mysql_count($res);
 			}',
 		
-		
+
+		'sql_countsel' => 
+ 			'(
+				$from = array(), 
+				$where = array(),
+				$groupby = array(), 
+				$limit = \'\', 
+				$having = array(),
+				$serveur=\'\'
+ 			) {
+				return(sql_select(\'COUNT(*)\', $from, $where, $groupby, \'\', $limit, $having, $serveur));
+ 			}',
+ 					
 		'sql_selectdb' => 
 			'(
 				$res, 
