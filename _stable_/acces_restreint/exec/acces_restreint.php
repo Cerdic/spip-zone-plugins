@@ -17,15 +17,15 @@ function exec_acces_restreint(){
 		creer_base(); // au cas ou
 	}
 	  
-	debut_page(_T('accesrestreint:page_zones_acces'));
+	echo debut_page(_T('accesrestreint:page_zones_acces'));
 	
 	echo "<br /><br /><br />";
 	gros_titre(_T('accesrestreint:titre_zones_acces'));
-	debut_gauche();
+	echo debut_gauche();
 	
-	debut_boite_info();
+	echo debut_boite_info();
 	echo propre(_T('accesrestreint:info_page'));	
-	fin_boite_info();
+	echo fin_boite_info();
 	
 	if (autoriser('modifier','zone')) {
 		$res = icone_horizontale(_T('accesrestreint:creer_zone'), generer_url_ecrire("acces_restreint_edit","new=oui"), "../"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif", "creer.gif",false);
@@ -36,10 +36,10 @@ function exec_acces_restreint(){
 		echo bloc_des_raccourcis($res);
 	}
 	
-	debut_droite();
+	echo debut_droite();
 	if (!autoriser('modifier','zone')) {
 		echo _T('avis_non_acces_page');
-		fin_page();
+		echo fin_page();
 		exit;
 	}
 	
@@ -110,10 +110,10 @@ function exec_acces_restreint(){
 			$s = propre($row['descriptif']);
 			$vals[] = $s;
 			
-			$s = ($row['publique']=='oui')?"<img src='"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/restreint-16.png' width='16' height='16' />":'';
+			$s = ($row['publique']=='oui')?"<img src='"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/restreint-16.png' width='16' height='16' alt='' />":'';
 			$vals[] = $s;
 			
-			$s = ($row['privee']=='oui')?"<img src='"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/restreint-16.png' width='16' height='16' />":'';
+			$s = ($row['privee']=='oui')?"<img src='"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/restreint-16.png' width='16' height='16' alt='' />":'';
 			$vals[] = $s;
 			
 			$s = "";
@@ -134,20 +134,24 @@ function exec_acces_restreint(){
 	}
 
 	// on affiche la table
-	$titre_table = _T('accesrestreint:titre_table');
-	$icone = "../"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif";
-	//if ($titre_table) echo "<div style='height: 12px;'></div>";
-	echo "<div class='liste'>";
 	bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
-	echo "<table width='100%' cellpadding='5' cellspacing='0' border='0'>";
-	echo $tranches;
 	$largeurs = array('','','','','','','');
 	$styles = array('arial11', 'arial1', 'arial1','arial1','arial1','arial1','arial1');
-	echo afficher_liste($largeurs, $table, $styles);
-	echo "</table>";
-	echo "</div>";
-
-	echo "<br/>";
+	if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {
+		echo xhtml_table_id_type($table, $largeurs, $styles, $tranche);
+	} else {
+		$titre_table = _T('accesrestreint:titre_table');
+		$icone = "../"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif";
+		//if ($titre_table) echo "<div style='height: 12px;'></div>";
+		echo "<div class='liste'>";
+		echo "<table width='100%' cellpadding='5' cellspacing='0' border='0'>";
+		echo $tranches;
+		echo afficher_liste($largeurs, $table, $styles);
+		echo "</table>";
+		echo "</div>";
+	}
+	echo "</div></div>";
+	echo "<br />";
 
 /*	debut_cadre_relief();
 	echo generer_url_post_ecrire("acces_restreint");
@@ -164,7 +168,7 @@ function exec_acces_restreint(){
 	echo "</form>";
 	fin_cadre_relief();*/
 
-	fin_page();
+	echo fin_page();
 }
 
 ?>
