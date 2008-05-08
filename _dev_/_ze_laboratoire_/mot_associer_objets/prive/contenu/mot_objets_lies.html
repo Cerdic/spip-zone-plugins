@@ -2,11 +2,9 @@
 <h3 class='article'><:info_articles_lies_mot:></h3>
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='items'>
-<BOUCLE_articles(ARTICLES){id_mot}{pagination}{par #ENV{tri,date}}{inverse #ENV{senstri,desc}|=={asc}|?{0,1}}{statut IN #ENV{statuts,#ARRAY{publie}}}>
+<BOUCLE_articles(ARTICLES){id_mot}{pagination 5}{par #ENV{tri,date}}{inverse #ENV{senstri,desc}|=={asc}|?{0,1}}{statut IN #ENV{statuts,#ARRAY{publie}}}>
 <li class='item article'>
-[(#REM) les actions tournent sur une url publiques, le retour foire, evidemment, trouver une autre methode d'appel !
-<span class='action'><a class='ajax' href="#URL_ACTION_AUTEUR{editer_mot,#ID_ARTICLE|concat{',',#ID_MOT,',articles,id_article,article'},#SELF|parametre_url{recherche,#ENV{recherche}}}"><:info_retirer:><img src='#CHEMIN{images/croix-rouge.gif}' alt='X'></a></span>
-]
+<span class='action'><a class='ajax' href="#URL_ACTION_AUTEUR{editer_mots,#ID_ARTICLE|concat{',',#ID_MOT,',articles,id_article,article'},#SELF|parametre_url{recherche,#ENV{recherche},'&'}}"><img src='#CHEMIN{images/croix-rouge.gif}' alt='X'></a></span>
 <span class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</span>
 <span class='titre'>
 [<span class='logo'>(#LOGO_ARTICLE||image_reduire{26,20})</span>]
