@@ -257,7 +257,8 @@ function spiplistes_format_abo_suspendre ($id_auteur) {
 // si id_auteur, celui-ci uniquement
 // sinon, 'tous' pour modifier globalement (uniquement ceux ayant déjà un format)
 function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
-	if($format = (spiplistes_format_est_correct($format) ? $format : false)) {
+	if($format = spiplistes_format_valide($format)) {
+spiplistes_log("#### format ".$format);
 		$sql_table = "spip_auteurs_elargis";
 		$sql_champs = array('`spip_listes_format`' => $format);
 		if($id_auteur=='tous') {
@@ -268,7 +269,7 @@ function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
 				$sql_champs['id_auteur'] = $id_auteur;
 				return(sql_insertq($sql_table, $sql_champs));
 			} else {
-				$sql_where = "id_auteur=$id_auteur LIMIT 1"; 
+				$sql_where = "id_auteur=".sql_quote($id_auteur)." LIMIT 1"; 
 			}
 		}
 		else {
@@ -296,7 +297,7 @@ function spiplistes_format_abo_demande ($id_auteur) {
 		/* Code à valider. Si ok, supprimer ci-dessus.
 		$GLOBALS['mysql_rappel_nom_base'] = false;
 		$result = sql_getfetsel("spip_listes_format", "spip_auteurs_elargis", "id_auteur=".sql_quote($id_auteur));
-		$result = spiplistes_format_est_correct($result) ? $result : false;
+		$result = spiplistes_format_valide($result);
 		/**/
 	}
 	return($result);
@@ -817,8 +818,8 @@ function spiplistes_pied_de_page_liste($id_liste = 0, $lang = false) {
 	return ($result);
 }
 
-function spiplistes_format_est_correct ($format) {
-	return(in_array($format, array("non", "texte", "html")));
+function spiplistes_format_valide ($format) {
+	return(in_array($format, array("non", "texte", "html")) ? $format : false);
 }
 
 function spiplistes_ecrire_metas() {

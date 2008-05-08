@@ -113,13 +113,12 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 						}
 					}
 					if(count($abo_ajoute)) {
-						$sql_query = "";
+						$sql_valeurs = "";
 						foreach($abo_ajoute as $value) {
-							$sql_query .= " ($id_auteur, $value),";
+							$sql_valeurs .= " ($id_auteur, $value),";
 						}
-						$sql_query = rtrim($sql_query, ",");
-						$sql_query = "INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES ".$sql_query;
-						if(!spip_query($sql_query)) {
+						$sql_valeurs = rtrim($sql_valeurs, ",");
+						if(sql_insert("spip_auteurs_listes", "(id_auteur, id_liste)", $sql_valeurs)===false) {
 							$result .= __boite_alerte(_T('spiplistes:Erreur_sur_la_base'), true);
 						}
 					}
@@ -144,31 +143,12 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 					if(!sql_delete("spip_auteurs_listes", "id_auteur=".sql_quote($id_auteur))) {
 						$result .= __boite_alerte(_T('spiplistes:Erreur_sur_la_base'), true);
 					}
-					spiplistes_log("#### enleve tout de ".$id_auteur);
 				}
 			} // end if
 			
 			// si retour de formulaire, modifie le format de réception
 			if($abo_format = _request('abo_format')) {
-				if(!spiplistes_format_est_correct($abo_format)) {
-					$abo_format = "";
-				}
-				else {
-					$sql_query = "SELECT COUNT(id_auteur) AS c 
-						FROM spip_auteurs_elargis WHERE id_auteur=$id_auteur LIMIT 1";
-					if(($row = spip_fetch_array(spip_query($sql_query)))
-						&& $row['c'] ) {
-						$sql_query = "UPDATE spip_auteurs_elargis SET `spip_listes_format`="._q($abo_format)." 
-						WHERE id_auteur=$id_auteur";
-					}
-					else {
-						$sql_query = "INSERT INTO spip_auteurs_elargis (id_auteur,`spip_listes_format`) 
-							VALUES ($id_auteur,"._q($abo_format).")";
-					}
-					if(!spip_query($sql_query)) {
-						$result .= __boite_alerte(_T('spiplistes:Erreur_sur_la_base'), true);
-					}
-				}
+				spiplistes_format_abo_modifier ($id_auteur, $abo_format);
 			}
 			
 			// récupère le format d'abonnement de id_auteur
@@ -272,7 +252,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				. "</ul>\n"
 				. fin_cadre_formulaire(true)
 				;
-			if(spiplistes_format_est_correct($abo_format) && ($abo_format!="non")) {
+			if(spiplistes_format_valide($abo_format) && ($abo_format!="non")) {
 				$result .= ""
 					. debut_cadre_formulaire("margin-top:1ex", true)
 					. "<ul class='liste-format-desabo'>\n"
