@@ -7,6 +7,7 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+// CP-20080508: ajout de sql_countsel()
 // CP-20080508: correction sql_insert()
 // CP-20080507: ajout de sql_drop_table()
 // CP-2080329: ajout de sql_fetsel() et sql_getfetsel()
@@ -253,29 +254,17 @@ function compat_spiplistes_defs_dist() {
 				$res, $serveur=\'\', $option=true
 			) {
 				return ($res ? mysql_num_rows($res) : 0);
+			}',
+			
+		// n'existe pas en 1.9.2
+		'sql_countsel' => 
+			'(
+				$table
+				, $where=\'\'
+			) {
+				return(sql_select(\'COUNT(*)\', $table, $where));
 			}'
 
-		/*
-		'sql_count' => 
-			'(
-				$res, 
-				$serveur=\'\'
-			) {
-				return spip_mysql_count($res);
-			}'
-		
-		
-		'sql_selectdb' => 
-			'(
-				$res, 
-				$serveur=\'\'
-			) {
-				$GLOBALS[\'spip_mysql_db\'] = mysql_select_db($res);
-				return $GLOBALS[\'spip_mysql_db\'];
-			}',	
-		
-		
-		*/
 	);
 	return $defs;
 }
