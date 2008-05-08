@@ -1,0 +1,13 @@
+<plugin>
+	<nom>Mots associer objets</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	[Cedric Morin->http://www.yterium.net]
+_ &#169; 2008 - Licence GPL
+	</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>Formulaire de recherche/association d'objets sur les mots</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>mao</prefix>
+	<pipeline><nom>affiche_milieu</nom><inclure>mao_pipelines.php</inclure></pipeline>
+</plugin>

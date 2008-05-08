@@ -1,0 +1,20 @@
+<BOUCLE_testsiart(GROUPES_MOTS){id_groupe=#ENV{id_groupe}}{articles=oui}><B_rechart>
+<h3 class='article'><:info_articles_trouves:></h3>
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='items'>
+<BOUCLE_rechart(ARTICLES){!id_mot=#ENV{id}}{recherche #ENV{recherche}}{pagination 5}{par #ENV{tri,date}}{inverse #ENV{senstri,desc}|=={asc}|?{0,1}}{statut IN #ENV{statuts,#ARRAY{publie}}}>
+<li class='item article'>
+<span class='action'><input type='checkbox' name='associer[article][]' value='#ID_ARTICLE' /></span>
+<span class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</span>
+<span class='titre'>
+[<span class='logo'>(#LOGO_ARTICLE||image_reduire{26,20})</span>]
+<a href='#URL_ECRIRE{articles,id_article=#ID_ARTICLE}' title='<:info_numero_abbreviation:> #ID_ARTICLE'>#TITRE</a>
+</span>
+<span class='auteurs'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href='#URL_ECRIRE{auteurs_infos,id_auteur=#ID_AUTEUR}'>#NOM</a></BOUCLE_auteurs></span>
+<span class='date'>[(#DATE|affdate_jourcourt)]</span>
+<span class='numero'><:info_numero_abbreviation:> #ID_ARTICLE</span>
+<div class='nettoyeur'></div>
+</li>
+</BOUCLE_rechart>
+</ul>
+</B_rechart></BOUCLE_testsiart>

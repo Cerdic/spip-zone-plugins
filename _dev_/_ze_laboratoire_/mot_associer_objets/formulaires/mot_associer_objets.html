@@ -1,0 +1,44 @@
+<style>
+h3.article {background:url(#CHEMIN{images/article-24.gif}) no-repeat center left;padding:5px 0 5px 30px;}
+ul.items {list-style:none;padding:0;margin:0.25em 0;border-bottom:1px solid #F8F7F3;}
+ul.items li.item {clear:both;border-top:1px solid #F8F7F3;padding:0.2em 0;}
+ul.items li.item:hover {background:#F8F7F3;}
+ul.items li.item .action {display:block;float:right;}
+ul.items li.item .statut {float:left;width:15px;}
+ul.items li.item .titre {float:left;width:260px;}
+ul.items li.item .logo {float:right;width:40px;}
+ul.items li.item .auteurs {float:left;width:80px;font-size:0.9em;}
+ul.items li.item .date {float:left;width:60px;font-size:0.9em;}
+ul.items li.item .numero {float:right;width:50px;font-size:0.9em;font-weight:bold;}
+
+</style>
+<INCLURE{fond=prive/contenu/mot_objets_lies}{id_mot=#ENV{id}}{statuts=#ENV{statuts}}>
+
+<div class="formfx recherche" id="formulaire_recherche#ENV{id}">
+<br class='spacer' />
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[(#ENV**{editable}|?{' '})
+<form method='post' action='#ENV{action}#formulaire_recherche#ENV{id}'>
+[(#REM) declarer les hidden qui declencheront le service du formulaire 
+parametre : url d'action ]
+#ACTION_FORMULAIRE{#ENV{action}}
+[(#REM) les champs de saisie]
+<fieldset><ol>
+<li class="text champ_recherche obligatoire">
+<label for='recherche' class='nocmx'><:bouton_ajouter:></label>
+<input type="text" name='recherche' id='recherche' value="#ENV*{recherche}" class='text' size='30' />
+[<span class='erreur'>(#ENV**{erreur}|table_valeur{recherche})</span>]
+</li>
+</ol></fieldset>
+<div style='text-align: right'><input class='fondo' type='submit' value='<:info_rechercher:>' /></div>
+
+[(#REM) les recherches, type par type]
+[(#INCLURE{fond=formulaires/selecteur_mot_associer_articles}{env}{ajax})
+<div class='nettoyeur'></div>
+<div style='text-align: right'><input class='fondo' type='submit' value='<:bouton_ajouter:>' /></div>
+]
+</form>
+</div>
+<div class='spacer'></div>
+]
