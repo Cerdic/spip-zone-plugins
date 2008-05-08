@@ -7,6 +7,7 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+// CP-20080508: correction sql_insert()
 // CP-20080507: ajout de sql_drop_table()
 // CP-2080329: ajout de sql_fetsel() et sql_getfetsel()
 // Documentation: http://www.spip.net/ecrire/?exec=articles&id_article=3683
@@ -187,10 +188,12 @@ function compat_spiplistes_defs_dist() {
 		// n'existe pas en 1.9.2
 		'sql_insert' => 
 			'(
-				$table, $champs
+				$table
+				, $noms
+				, $valeurs
 			) {
-				$query = "INSERT INTO $table (".implode(",", array_keys($champs)).") VALUES (".implode(",", $champs).")";
-				return sql_query($query);
+				$query = "INSERT INTO $table $noms VALUES $valeurs";
+				return (sql_query($query));
 			}',
 
 		// n'existe pas en 1.9.2

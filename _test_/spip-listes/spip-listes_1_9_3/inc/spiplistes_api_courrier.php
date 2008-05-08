@@ -243,7 +243,8 @@ function spiplistes_courrier_tampon_texte ($tampon_patron, $tampon_html) {
  * @param $id_liste : reference d'une liste
  */
 function spiplistes_courrier_remplir_queue_envois ($id_courrier, $id_liste) {
-
+	$id_courrier = intval($id_courrier);
+	$id_liste = intval($id_liste);
 spiplistes_log("API: remplir courrier $id_courrier, liste : $id_liste", _SPIPLISTES_LOG_DEBUG);
 	if(($id_courrier > 0) && ($id_liste > 0)) {
 	
@@ -254,22 +255,20 @@ spiplistes_log("API: remplir courrier $id_courrier, liste : $id_liste", _SPIPLIS
 			;
 	
 		// remplir la queue d'envois
+		$i = sql_quote($id_courrier);
+		$s = sql_quote("a_envoyer");
+		$sql_valeurs = "";
 		while($row = sql_fetch($sql_result)) {
-			if(!sql_insert(
-				'spip_auteurs_courriers'
-				, array(
-					'id_auteur' => sql_quote($row['id_auteur'])
-					, 'id_courrier' => sql_quote($id_courrier)
-					, 'statut' => sql_quote("a_envoyer")
-					, 'maj' => 'NOW()'
-				)
-				)
-			) {
-spiplistes_log("ERREUR spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste) / sql_insert"
-		, _SPIPLISTES_LOG_DEBUG);
-				return(false);
-			}
+			$sql_valeurs .= "(".sql_quote(intval($row['id_auteur'])).",$i,$s,NOW()),";
 		}
+		$sql_valeurs = rtrim($sql_valeurs, ",");
+		sql_insert(
+			'spip_auteurs_courriers'
+			,	"("
+				. "id_auteur,id_courrier,statut,maj"
+				. ")"
+			,	$sql_valeurs
+		);
 		
 		// Compter le nombre de destinaires
 		$row = sql_fetch(sql_select(
@@ -284,14 +283,14 @@ spiplistes_log("ERREUR spiplistes_courrier_remplir_queue_envois($id_courrier, $i
 				, array('total_abonnes' => sql_quote($row['n']))
 				, "id_courrier="._q($id_courrier)
 				)) {
-spiplistes_log("ERREUR spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste) / sql_updateq"
+spiplistes_log("ERR: spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste) / sql_updateq"
 		, _SPIPLISTES_LOG_DEBUG);
 				return(false);
 			}
 		}
 		return(true);
 	}
-spiplistes_log("ERREUR spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste) valeur nulle ?"
+spiplistes_log("ERR: spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste) valeur nulle ?"
 		, _SPIPLISTES_LOG_DEBUG);
 	return(false);
 }

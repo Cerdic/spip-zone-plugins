@@ -84,20 +84,22 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 
 	$nb_courriers = sql_count($sql_result);
 	
+	$str_log = "MEL:";
+	
 	// si meleuse suspendue, signale en log 
 	if($opt_suspendre_meleuse == 'oui') {
 		spiplistes_log("MEL: SUSPEND MODE !!!");
 		return(0 - $nb_courriers);
 	}
 
-	// signale en log si mode simulation
-	if($opt_simuler_envoi == 'oui') {
-		spiplistes_log("MEL: SIMULATION MODE !!!");
-	}
-
 	$meleuse_statut = "1";
 	
 	if($nb_courriers) {
+
+		// signale en log si mode simulation
+		if($opt_simuler_envoi == 'oui') {
+			spiplistes_log("MEL: SIMULATION MODE !!!");
+		}
 
 		$nomsite = $GLOBALS['meta']['nom_site'];
 		$urlsite = $GLOBALS['meta']['adresse_site'];
@@ -137,7 +139,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 			
 			$pied_page_html = "" ;
 			
-			$str_log = "MEL: ID_COURRIER: #$id_courrier"; 
+			$str_log .= " ID_COURRIER: #$id_courrier"; 
 			
 			//////////////////////////
 			// Determiner le destinataire ou la liste destinataire
@@ -394,7 +396,6 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 	} // end if()
 	else {
 		$str_log .= " NO JOBS"; 
-		spiplistes_log("MEL: "._T('spiplistes:envoi_fini'), _SPIPLISTES_LOG_DEBUG);
 	}
 
 	spiplistes_log($str_log);

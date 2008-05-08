@@ -59,7 +59,9 @@ function exec_spiplistes_listes_toutes(){
 			$array_set = array(
 				'date' => 'NOW()'
 			);
-			spiplistes_listes_modifier_liste($id_liste, $array_set);
+			if(!spiplistes_listes_modifier_liste($id_liste, $array_set)) {
+				spiplistes_log("ERR: listes_modifier_liste #$id_liste");
+			}
 		}
 
 		// suppression demandée par _SPIPLISTES_EXEC_LISTE_GERER
@@ -126,7 +128,7 @@ function exec_spiplistes_listes_toutes(){
 	// MODE EDIT LISTES FIN --------------------------------------------------------
 	
 	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
-
+	
 }
 
 /******************************************************************************************/

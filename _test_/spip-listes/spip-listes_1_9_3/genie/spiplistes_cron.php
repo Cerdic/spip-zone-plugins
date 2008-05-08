@@ -72,8 +72,8 @@ function cron_spiplistes_cron ($last_time) {
 
 	// demande les listes auto a' envoyer (date <= maintenant)
 	$sql_where = "message_auto='oui'
-			AND (date > 0) 
-			AND (date BETWEEN 0 AND NOW())
+			AND date IS NOT NULL  
+			AND date <= NOW()
 			AND (".spiplistes_listes_sql_where(_SPIPLISTES_LISTES_STATUTS_OK).")
 			"
 		;
@@ -85,10 +85,10 @@ function cron_spiplistes_cron ($last_time) {
 	
 	$nb_listes_ok = sql_count($listes_privees_et_publiques);
 	
-spiplistes_log("CRON: nb listes ok: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("CRON: nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 
 	if($opt_suspendre_trieuse == 'oui') {
-		spiplistes_log("TRI: SUSPEND MODE !!!");
+		spiplistes_log("CRON TRI: SUSPEND MODE !!!");
 		if($nb_listes_ok) {
 			return(0 - $nb_listes_ok);
 		}
@@ -184,28 +184,39 @@ spiplistes_log("CRON: nb listes ok: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 			}
 			else {
 	//spiplistes_log("CRON: courrier vide !!", _SPIPLISTES_LOG_DEBUG);
-				$date_debut_envoi = "date_debut_envoi=NOW()";
-				$date_fin_envoi = "date_fin_envoi=NOW()";
+				$date_debut_envoi = "NOW()";
+				$date_fin_envoi = "NOW()";
 				$statut = _SPIPLISTES_STATUT_VIDE;
 			}
 			
 			/////////////////////////////
 			// Place le courrier dans le casier
-			sql_insert(
+			$r = sql_insert(
 				'spip_courriers'
-				, array(
-					'titre' => sql_quote($titre)
-					, 'date' => 'NOW()'
-					, 'statut' => sql_quote($statut)
-					, 'type' => sql_quote(_SPIPLISTES_TYPE_LISTEAUTO)
-					, 'id_auteur' => sql_quote($id_auteur)
-					, 'id_liste' => sql_quote($id_liste)
-					, 'date_debut_envoi' => $date_debut_envoi
-					, 'date_fin_envoi' => $date_fin_envoi
-					, 'texte' => sql_quote($texte)
-				)
+				,	"("
+					. "titre
+						,date
+						,statut
+						,type
+						,id_auteur
+						,id_liste
+						,date_debut_envoi
+						,date_fin_envoi
+						,texte"
+					. ")"
+				, 	"("
+					. sql_quote($titre)
+					. ",NOW()"
+					. ",".sql_quote($statut)
+					. ",".sql_quote(_SPIPLISTES_TYPE_LISTEAUTO)
+					. ",".sql_quote($id_auteur)
+					. ",".sql_quote($id_liste)
+					. ",".$date_debut_envoi
+					. ",".$date_fin_envoi
+					. ",".sql_quote($texte)
+					. ")"
 			);
-	
+spiplistes_log("CRON: insert_id : ".$r, _SPIPLISTES_LOG_DEBUG);
 			/////////////////////////////
 			// Ajoute les abonnés dans la queue (spip_auteurs_courriers)
 			if($taille_courrier_ok) {
