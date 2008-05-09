@@ -149,7 +149,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 			} 
 			else if($id_liste > 0) {
 			// courrier à destination des abonnés d'une liste
-				$total_abonnes = spiplistes_nb_abonnes_count($id_liste);
+				$total_abonnes = spiplistes_listes_nb_abonnes_compter($id_liste);
 				$str_log .= " to: ID_LISTE #$id_liste ($total_abonnes users)"; 
 	
 				$pied_page_html = spiplistes_pied_de_page_liste($id_liste);
@@ -166,7 +166,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 				}
 				else {
 					$str_log .= " [ERROR] ID_LISTE #id_liste MISSING"; 
-					spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_ERREUR."' WHERE id_courrier=$id_courrier LIMIT 1"); 
+					spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_ERREUR);
 					// quitte while() principal
 					break;
 				}
@@ -174,7 +174,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 			else {
 				// erreur dans un script d'appel ? Ou url ? Ou base erreur ?
 				$str_log .= " [ERROR] MISSING PARAMS (id_liste AND email_test)";
-				spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_ERREUR."' WHERE id_courrier=$id_courrier LIMIT 1"); 
+				spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_ERREUR);
 				// quitte while() principal
 				break;
 			}
@@ -358,7 +358,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 			else {
 				//aucun destinataire connu pour ce message
 //spiplistes_log("MEL: "._T('spiplistes:erreur_sans_destinataire')."---"._T('spiplistes:envoi_annule'), _SPIPLISTES_LOG_DEBUG);
-				spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_IGNORE."' WHERE id_courrier=$id_courrier LIMIT 1");
+				spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_IGNORE);
 				spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 				$str_log .= " END #$id_courrier";
 				// 

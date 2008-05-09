@@ -63,20 +63,6 @@ function spiplistes_str_ok_error ($statut) {
 	return("[".(($statut != false) ? "OK" : "ERR")."]");
 }
 
-// Nombre d'abonnes a une liste, chaine html
-function spiplistes_nb_abonnes_liste_str_get ($id_liste, $nb_abos = false) {
-	$result = "";
-	if(($id_liste > 0) && ($nb_abos == false)) {
-		$nb_abos = spiplistes_nb_abonnes_count($id_liste);
-	}
-	$result =
-		($nb_abos)
-		? "(" . spiplistes_singulier_pluriel_str_get($nb_abos, _T('spiplistes:nb_abonnes_sing'), _T('spiplistes:nb_abonnes_plur')) . ")"
-		: _T('spiplistes:sans_abonne')
-		;
-	return ($result);
-}
-
 function spiplistes_singulier_pluriel_str_get ($var, $str_sing, $str_plur, $returnvar = true) {
 	$result = "";
 	if($var) {
@@ -87,8 +73,7 @@ function spiplistes_singulier_pluriel_str_get ($var, $str_sing, $str_plur, $retu
 
 //CP-20080508
 function spiplistes_sql_compter ($table, $sql_whereq) {
-	$n = sql_countsel($table, $sql_whereq);
-	return(array($n) ? $n[0] : 0);
+	return(sql_countsel($table, $sql_whereq));
 }
 
 //CP-20080508 : dans la queueu d'envoi des courriers
@@ -269,6 +254,14 @@ function spiplistes_listes_abonnements_auteur ($id_auteur) {
 	return($result);
 }
 
+// retourne nombre d'abonnes a une liste
+function spiplistes_listes_nb_abonnes_compter ($id_liste = 0) {
+	$id_liste = intval($id_liste);
+	$sql_whereq = (($id_liste > 0) ? "id_liste=".sql_quote($id_liste) : "");
+	return(spiplistes_sql_compter ("spip_auteurs_listes", $sql_whereq));
+}
+
+
 // CP-20080505 : renvoie array sql_where des listes publiees
 function spiplistes_listes_sql_where ($listes) {
 	return("statut=".implode(" OR statut=", array_map("sql_quote", explode(";", $listes))));
@@ -336,16 +329,6 @@ function spiplistes_format_abo_demande ($id_auteur) {
 }
 
 
-/* retourne l'id auteur depuis l'email */
-function spiplistes_idauteur_depuis_email ($email) {
-	if($email = email_valide($email)) {
-		return(sql_getfetsel("id_auteur", "spip_auteurs"
-			, "email=".sql_quote($email)." AND statut<>".sql_quote("5poubelle"))
-		);
-	}
-	return(false);
-}
-
 /*
  * validation de l'inscription d'un id_auteur
  * Il faut deja etre inscrit !
@@ -378,23 +361,6 @@ function spiplistes_terminer_page_non_autorisee ($return = true) {
 // termine page si la donnée n'existe pas dans la base
 function spiplistes_terminer_page_donnee_manquante ($return = true) {
 	spiplistes_terminer_page_message (_T('spiplistes:Pas_de_donnees'), $return);
-}
-
-// retourne nombre d'abonnes a une liste ou toutes les listes
-// ou par id_auteur
-function spiplistes_nb_abonnes_count ($id_liste = 'toutes', $id_auteur = 'tous') {
-	$id_liste = ($id_liste=='toutes') ? 0 : intval($id_liste);
-	$id_auteur = ($id_auteur=='tous') ? 0 : intval($id_auteur);
-	
-	$where = (($id_liste == 0) ? "" : " id_liste=$id_liste");
-	$where .= (($id_auteur == 0) ? "" : (strlen($where) ? " AND " : "")." id_auteur=$id_auteur");
-	if(strlen($where))  {
-		$where = " WHERE $where";
-	}
-	$sql_query = "SELECT COUNT(id_auteur) AS n FROM spip_auteurs_listes $where";
-	$result = spip_fetch_array(spip_query($sql_query));
-	$result = ($result && ($result['n']>0)) ? $result['n'] : 0;
-	return ($result);
 }
 
 // renvoie id_auteur du courier (CP-20071018)

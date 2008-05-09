@@ -723,6 +723,17 @@ function  spiplistes_arbo_rubriques($id_rubrique,  $rslt_id_rubrique="") {
 	return $arbo;
 	
 }
+// Nombre d'abonnes a une liste, chaine html
+function spiplistes_nb_abonnes_liste_str_get ($id_liste) {
+	$nb_abos = spiplistes_listes_nb_abonnes_compter($id_liste);
+	$result =
+		($nb_abos)
+		? "(" . spiplistes_singulier_pluriel_str_get($nb_abos, _T('spiplistes:nb_abonnes_sing'), _T('spiplistes:nb_abonnes_plur')) . ")"
+		: _T('spiplistes:sans_abonne')
+		;
+	return ($result);
+}
+
 
 //
 ?>

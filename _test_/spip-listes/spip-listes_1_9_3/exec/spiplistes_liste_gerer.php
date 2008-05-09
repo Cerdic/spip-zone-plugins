@@ -306,7 +306,7 @@ function exec_spiplistes_liste_gerer () {
 
 	$titre_message = ($titre_message=='') ? $titre._T('spiplistes:_de_').$meta['nom_site'] : $titre_message;
 
-	$nb_abonnes = spiplistes_nb_abonnes_count ($id_liste);
+	$nb_abonnes = spiplistes_listes_nb_abonnes_compter($id_liste);
 
 	// preparation des boutons 
 	if($flag_editable) {

@@ -71,7 +71,7 @@ function cron_spiplistes_cron ($last_time) {
 	$sql_select = "id_liste,titre,titre_message,date,maj,message_auto,periode,lang,patron,statut";
 
 	// demande les listes auto a' envoyer (date <= maintenant)
-	$sql_where = "message_auto='oui'
+	$sql_where = "message_auto=".sql_quote('oui')."
 			AND date IS NOT NULL  
 			AND date <= NOW()
 			AND (".spiplistes_listes_sql_where(_SPIPLISTES_LISTES_STATUTS_OK).")
@@ -100,7 +100,6 @@ spiplistes_log("CRON: nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 
 	if($nb_listes_ok > 0) {
 		while($row = sql_fetch($listes_privees_et_publiques)) {
-		//while(false) {
 		
 			// initalise les variables
 			foreach(explode(",", $sql_select) as $key) {
@@ -117,26 +116,26 @@ spiplistes_log("CRON: nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 			// Tampon date prochain envoi (dans 'date') et d'envoi (dans 'maj')
 			$sql_set = $next_time = false;
 			if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_PERIODIQUES))) {
-				$_time = strtotime($envoyer_quand);
-				$_heure = date("H", $_time);
-				$_minute = date("i", $_time);
-				$_mois = date("m", $_time);
-				$_jour = date("j", $_time);
-				$_an = date("Y"); // la date est forcée par celle du système (eviter erreurs)
+				$job_time = strtotime($envoyer_quand);
+				$job_heure = date("H", $job_time);
+				$job_minute = date("i", $job_time);
+				$job_mois = date("m", $job_time);
+				$job_jour = date("j", $job_time);
+				$job_an = date("Y"); // la date est forcée par celle du système (eviter erreurs)
 				switch($statut) {
 					case _SPIPLISTES_YEARLY_LIST:
-						$next_time = mktime($_heure, $_minute, 0, $_mois, $_jour, $_an+1);
+						$next_time = mktime($job_heure, $job_minute, 0, $job_mois, $job_jour, $job_an+1);
 						break;
 					case _SPIPLISTES_MENSUEL_LIST:
 					case _SPIPLISTES_MONTHLY_LIST:
-						$next_time = mktime($_heure, $_minute, 0, $_mois+1, $_jour, $_an);
+						$next_time = mktime($job_heure, $job_minute, 0, $job_mois+1, $job_jour, $job_an);
 						break;
 					case _SPIPLISTES_HEBDO_LIST:
 					case _SPIPLISTES_WEEKLY_LIST:
-						$next_time = mktime($_heure, $_minute, 0, $_mois, $_jour+7, $_an);
+						$next_time = mktime($job_heure, $job_minute, 0, $job_mois, $job_jour+7, $job_an);
 						break;
 					case _SPIPLISTES_DAILY_LIST:
-						$next_time = mktime($_heure, $_minute, 0, $_mois, $_jour+$periode, $_an);
+						$next_time = mktime($job_heure, $job_minute, 0, $job_mois, $job_jour+$periode, $job_an);
 						break;
 					default:
 						$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote("non"));
@@ -147,8 +146,8 @@ spiplistes_log("CRON: nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 				$next_time = time() + (_SPIPLISTES_TIME_1_DAY * $periode);
 			}
 			else {
-				// pas de période ? c'est un envoyer_maintenant.
-				// Applique le tampon date d'envoi et repasse la liste en auto non
+				// pas de periode ? c'est un envoyer_maintenant.
+				// applique le tampon date d'envoi et repasse la liste en auto non
 				$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote("non"));
 			}
 			if($next_time || count($sql_set)) {

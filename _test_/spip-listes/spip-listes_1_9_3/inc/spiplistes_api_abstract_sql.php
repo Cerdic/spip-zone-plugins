@@ -259,8 +259,7 @@ function compat_spiplistes_defs_dist() {
 		// n'existe pas en 1.9.2
 		'sql_countsel' => 
 			'(
-				$table
-				, $where = \'\'
+				  $from = array()
 				, $where = array()
 				, $groupby = array()
 				, $limit = \'\'

@@ -295,6 +295,38 @@ spiplistes_log("ERR: spiplistes_courrier_remplir_queue_envois($id_courrier, $id_
 	return(false);
 }
 
+//CP-20080509: upadte sql sur un courrier
+function spiplistes_courrier_modifier ($id_courrier, $sql_set_array) {
+	$id_courrier = intval($id_courrier);
+	$result = 
+		($id_courrier > 0)
+		?
+			sql_updateq(
+				"spip_courriers"
+				, $sql_set_array
+				, "id_courrier=".sql_quote($id_courrier)." LIMIT 1"
+			)
+		: false
+		;
+	return($result);
+}
+
+//CP-20080509: changer le statut d'un courrier
+function spiplistes_courrier_statut_modifier ($id_courrier, $new_statut) {
+	$id_courrier = intval($id_courrier);
+	$result = 
+		($id_courrier > 0)
+		?
+			spiplistes_courrier_modifier(
+				$id_courrier
+				, array('statut' => $new_statut)
+			)
+		: false
+		;
+	spiplistes_log("API: Modifier statut courrier #$id_courrier : $new_statut ".spiplistes_str_ok_error($result));
+	return($result);
+}
+
 
 // CP-20080329
 function spiplistes_courrier_supprimer_queue_envois ($sql_where_key, $sql_where_value) {

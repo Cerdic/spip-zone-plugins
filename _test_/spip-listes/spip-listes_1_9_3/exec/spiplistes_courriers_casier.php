@@ -46,7 +46,7 @@ function spiplistes_afficher_pile_messages() {
 		return (false); 
 	}
 	
-	$out = ""
+	$pile_result = ""
 		. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_timer.gif', true, ''
 			, _T('spiplistes:Messages_automatiques').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "casier_courriers"))
 		. "\n"
@@ -88,12 +88,12 @@ function spiplistes_afficher_pile_messages() {
 				$periodicite = _T('spiplistes:envoi_manuel');
 		}
 	
-		$out .= ""
+		$pile_result .= ""
 			. "<tr " . (($ii++ % 2) ? "class='row-even'" : "") . ">\n"
 			. "<td><a href='" . generer_url_public('patron_switch',"patron=$patron&date=$date_dernier")."'>$patron</a>"
 			. "<br />$periodicite</td>\n"
 			. "<td><a href='" . generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste") . "'>$titre</a>"
-			. "<br />".spiplistes_nb_abonnes_liste_str_get($id_liste, false)."."
+			. "<br />".spiplistes_nb_abonnes_liste_str_get($id_liste)."."
 			. "</td>"
 			. "<td>"
 			.	(
@@ -105,11 +105,11 @@ function spiplistes_afficher_pile_messages() {
 			;
 	} // end while
 	
-	$out .= ""
+	$pile_result .= ""
 		. "</table>\n"
 		. fin_cadre_enfonce(true)
 		;
-	return ($out);
+	return ($pile_result);
 	
 } // end spiplistes_afficher_pile_messages()
 
@@ -157,14 +157,7 @@ function exec_spiplistes_courriers_casier () {
 	if($btn_confirmer_envoi 
 		&& $flag_modifiable
 	) {
-		$r = sql_update(
-			'spip_courriers'
-			, array(
-				'statut' => sql_quote(_SPIPLISTES_STATUT_ENCOURS)
-			)
-			, "id_courrier=".sql_quote($id_courrier)." LIMIT 1"
-		);
-spiplistes_log("TEST envoi direct :".($r ? "ok" : "erreur"), _SPIPLISTES_LOG_DEBUG);
+		$r = spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_ENCOURS);
 		if($id_liste > 0) {
 			spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 			// passe le courrier a la meleuse
