@@ -260,9 +260,15 @@ function compat_spiplistes_defs_dist() {
 		'sql_countsel' => 
 			'(
 				$table
-				, $where=\'\'
+				, $where = \'\'
+				, $where = array()
+				, $groupby = array()
+				, $limit = \'\'
+				, $having = array()
+				, $serveur = \'\'
+				, $option = true
 			) {
-				return(sql_select(\'COUNT(*)\', $table, $where));
+				return(sql_select(\'COUNT(*)\', $from, $where, $groupby, \'\', $limit, $having, $serveur));
 			}'
 
 	);

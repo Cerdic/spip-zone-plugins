@@ -5,6 +5,7 @@
 
 
 TO-DO:
+- revoir la doc docs/__installation_fr.txt
 - pouvoir déléguer l'administration d'une liste 
 - Corriger documentation contextuelle
 - maintenance: mettre en place l'auth. par FTP.
