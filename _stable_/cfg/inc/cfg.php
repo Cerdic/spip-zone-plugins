@@ -240,7 +240,7 @@ class cfg_dist
 		
 		// determiner les onglets a cacher et a mettre en surbrillance
 		if ($onglets = lister_onglets_cfg()){
-			foreach ($onglets as $fonds=>&$ong){
+			foreach ($onglets as $fonds=>$ong){
 				$o = $ong['onglet'];
 				// onglet actif
 				if ($o == 'oui')	
