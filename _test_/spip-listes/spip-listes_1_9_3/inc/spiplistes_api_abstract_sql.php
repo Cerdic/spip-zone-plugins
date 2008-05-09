@@ -268,7 +268,7 @@ function compat_spiplistes_defs_dist() {
 				, $serveur = \'\'
 				, $option = true
 			) {
-				return(sql_select(\'COUNT(*)\', $from, $where, $groupby, \'\', $limit, $having, $serveur));
+				return(sql_select(\'COUNT(*)\', $from, $where, $groupby, \'\', $limit, $having, $serveur, $option));
 			}'
 
 	);

@@ -378,7 +378,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 
 				///////////////////////
 				// si courrier pas terminé, redemande la main au CRON, sinon nettoyage.
-				if($t = spiplistes_courriers_en_cours_count($id_courrier)) {
+				if($t = spiplistes_courriers_en_queue_compter("id_courrier".sql_quote($id_courrier))) {
 					$str_log .= " LEFT $t"; 
 					$meleuse_statut = "-1";
 				}
@@ -400,9 +400,9 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 
 	spiplistes_log($str_log);
 
-	if(($ii = spiplistes_courriers_en_cours_count()) > 0) {
+	if(($ii = spiplistes_courriers_en_cours_compter()) > 0) {
 	// il en reste après la meleuse ? Signale au CRON tache non terminée
-		spiplistes_log("MEL: il reste des courriers a envoyer ($ii) !", _SPIPLISTES_LOG_DEBUG);
+		spiplistes_log("MEL: courriers prets au depart ($ii) !", _SPIPLISTES_LOG_DEBUG);
 		$meleuse_statut = "-1";
 	}
 	
