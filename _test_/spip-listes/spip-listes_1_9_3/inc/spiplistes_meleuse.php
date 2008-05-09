@@ -51,8 +51,6 @@ include_spip('inc/spiplistes_api_globales');
 	
 function spiplistes_meleuse () { 
 
-spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
-
 	include_spip('inc/meta');
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
@@ -76,13 +74,16 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 	//////////////////////////
 	// Trouver un courrier a envoyer 
 
-	$sql_select = "titre,texte,message_texte,type,id_courrier,id_liste,email_test,total_abonnes,date_debut_envoi";
+	$sql_select = array(
+		'titre', 'texte', 'message_texte', 'type'
+		, 'id_courrier', 'id_liste', 'email_test', 'total_abonnes', 'date_debut_envoi'
+		);
 	
-	$sql_query = "SELECT $sql_select FROM spip_courriers WHERE statut='"._SPIPLISTES_STATUT_ENCOURS."' LIMIT 1";
-
-	$sql_result = spip_query($sql_query);
-
-	$nb_courriers = sql_count($sql_result);
+	$sql_casier_courrier = sql_select(
+		$sql_select, "spip_courriers", "statut=".sql_quote(_SPIPLISTES_STATUT_ENCOURS)." LIMIT 1"
+	);
+	
+	$nb_courriers = sql_count($sql_casier_courrier);
 	
 	$str_log = "MEL:";
 	
@@ -96,6 +97,8 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 	
 	if($nb_courriers) {
 
+		spiplistes_log("MEL: $nb_courriers JOBS. Distribution...");
+		
 		// signale en log si mode simulation
 		if($opt_simuler_envoi == 'oui') {
 			spiplistes_log("MEL: SIMULATION MODE !!!");
@@ -114,9 +117,9 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 		}
 		
 		// boucle (sur LIMIT 1) pour pouvoir sortir par break si erreur
-		while($row = spip_fetch_array($sql_result)) {
+		while($row = sql_fetch($sql_casier_courrier)) {
 		
-			foreach(explode(",", $sql_select) as $key) {
+			foreach($sql_select as $key) {
 				$$key = $row[$key];
 			}
 			foreach(array('id_courrier','id_liste','total_abonnes') as $key) {
@@ -145,7 +148,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 			// Determiner le destinataire ou la liste destinataire
 			if($is_a_test = email_valide($email_test)) {
 			// courrier à destination adresse email de test
-				$str_log .= " to: $email_test (TEST)"; 
+				$str_log .= " TO: $email_test (TEST)"; 
 			} 
 			else if($id_liste > 0) {
 			// courrier à destination des abonnés d'une liste
@@ -153,19 +156,14 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 				$str_log .= " to: ID_LISTE #$id_liste ($total_abonnes users)"; 
 	
 				$pied_page_html = spiplistes_pied_de_page_liste($id_liste);
-				$lang = spiplistes_langue_liste($id_liste);
-				if($lang != '') $GLOBALS['spip_lang'] = $lang ;
-	
-				$result_d = spip_query("SELECT * FROM spip_listes WHERE id_liste=$id_liste LIMIT 1");
-		
-				if($ro = spip_fetch_array($result_d)){
-					$titre_liste = $ro["titre"];
-					$id = $ro["id_liste"];
-					$email_envoi = $ro["email_envoi"];
-//spiplistes_log("MEL: "._T('spiplistes:envoi_listes').$titre_liste, _SPIPLISTES_LOG_DEBUG);
+
+				$lang = spiplistes_listes_langue($id_liste);
+
+				if($lang != '') {
+					$GLOBALS['spip_lang'] = $lang;
 				}
-				else {
-					$str_log .= " [ERROR] ID_LISTE #id_liste MISSING"; 
+				if(!$email_envoi = spiplistes_listes_email_emetteur($id_liste)) {
+					$str_log .= " [ERROR] ID_LISTE #id_liste or email MISSING"; 
 					spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_ERREUR);
 					// quitte while() principal
 					break;
@@ -240,7 +238,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 			$email_a_envoyer['html']->AddCustomHeader("Return-Path: ".$from); 	
 			$email_a_envoyer['html']->SMTPKeepAlive = true;
 		
-			spiplistes_log("MEL: Reply-to: ".$from."\n");
+			$str_log .= " REPLY-TO: ".$from;
 			
 			if($total_abonnes) {
 		
@@ -338,7 +336,7 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 								$nb_emails_echec++;
 							}
 						}
-						else {  // email fin TXT /HTML  -----------------------------------------
+						else {  
 							$nb_emails_non_envoyes++; //desabonnes 
 							spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur=$id_auteur AND id_courrier="._q($id_courrier));	
 							$str_temp .= " "._T('spiplistes:pas_abonne_en_ce_moment');
@@ -348,7 +346,14 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 					
 					// si c'est un test on repasse en redac
 					if($is_a_test) {
-						spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_REDAC."',email_test='',total_abonnes=0 WHERE id_courrier=$id_courrier");
+						spiplistes_courrier_modifier(
+							$id_courrier
+							, array(
+								'email_test' => ''
+								, 'total_abonnes' => 0
+								, 'statut' => _SPIPLISTES_STATUT_REDAC
+							)						
+						);
 						spiplistes_log('MEL: repasse document en statut redac', _SPIPLISTES_LOG_DEBUG);
 					}
 					$email_a_envoyer['texte']->SmtpClose();
@@ -367,30 +372,39 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 
 			if(!$is_a_test) {
 				// faire le bilan apres l'envoi d'un lot
-				$sql_update = " nb_emails_envoyes=(nb_emails_envoyes + $nb_emails_envoyes),
-								nb_emails_texte=(nb_emails_texte + ".$nb_emails['texte']."),
-								nb_emails_html=(nb_emails_html + ".$nb_emails['html']."),"
-								;
-				if($nb_emails_echec) $sql_update .= "nb_emails_echec=(nb_emails_echec + $nb_emails_echec),";
-				if($nb_emails_non_envoyes) $sql_update .= "nb_emails_non_envoyes=(nb_emails_non_envoyes + $nb_emails_non_envoyes),";
+				$sql_set = array(
+					  'nb_emails_envoyes' => "(nb_emails_envoyes + $nb_emails_envoyes)"
+					, 'nb_emails_texte' => "(nb_emails_texte + ".$nb_emails['texte'].")"
+					, 'nb_emails_html' => "(nb_emails_html + ".$nb_emails['html'].")"
+				);
+				if($nb_emails_echec) {
+					$sql_set['nb_emails_echec'] = "(nb_emails_echec + $nb_emails_echec)";
+				}
+				if($nb_emails_non_envoyes) {
+					$sql_set['nb_emails_non_envoyes'] = "(nb_emails_non_envoyes + $nb_emails_non_envoyes)";
+				}
 
 				$str_log .= " (HTML: ".$nb_emails['html'].") (TEXT: ".$nb_emails['texte'].") (NONE: $nb_emails_non_envoyes)";
 
 				///////////////////////
 				// si courrier pas terminé, redemande la main au CRON, sinon nettoyage.
-				if($t = spiplistes_courriers_en_queue_compter("id_courrier".sql_quote($id_courrier))) {
+				if($t = spiplistes_courriers_en_queue_compter("id_courrier=".sql_quote($id_courrier))) {
 					$str_log .= " LEFT $t"; 
 					$meleuse_statut = "-1";
 				}
 				else {
 					$statut = ($type=_SPIPLISTES_TYPE_NEWSLETTER) ? _SPIPLISTES_STATUT_PUBLIE : _SPIPLISTES_STATUT_AUTO;
-					$sql_update .= "statut='$statut',date_fin_envoi=NOW(),";
+					$sql_set['statut'] = sql_quote($statut);
+					$sql_set['date_fin_envoi'] = "NOW()";
 					spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 					$str_log .= " END #$id_courrier";
 					$meleuse_statut = "1";
 				}
-				$sql_update = rtrim($sql_update, ",");
-				spip_query("UPDATE spip_courriers SET $sql_update WHERE id_courrier=$id_courrier LIMIT 1"); 
+				sql_update(
+					"spip_courriers"
+					, $sql_set
+					, "id_courrier=".sql_quote($id_courrier)." LIMIT 1"
+				);
 			}
 		} // end while()
 	} // end if()
@@ -411,12 +425,15 @@ spiplistes_log("MEL: spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 
 /*
 */
-function spiplistes_langue_liste ($id_liste) {
+function spiplistes_listes_langue ($id_liste) {
 	if(($id_liste = intval($id_liste)) > 0) {
-		$lang = spip_query("SELECT lang FROM spip_listes WHERE id_liste=$id_liste LIMIT 0,1");
-		$lang = spip_fetch_array($lang);
-		$lang = $lang['lang'];
-		return ($lang);
+		return(
+			sql_getfetsel(
+				'lang'
+				, "spip_listes"
+				, "id_liste=".sql_quote($id_liste)." LIMIT 1"
+			)
+		);
 	}
 	return(false);
 }

@@ -67,7 +67,8 @@ function exec_spiplistes_listes_toutes(){
 		// suppression demandée par _SPIPLISTES_EXEC_LISTE_GERER
 		if($btn_supprimer_liste_confirme 
 			&& $id_liste
-			&& spiplistes_listes_supprimer_liste($id_liste)) {
+			&& spiplistes_listes_supprimer_liste($id_liste)
+		) {
 			spiplistes_log("ID_LISTE #$id_liste DELETED BY ID_AUTEUR #$connect_id_auteur");
 		}
 	}

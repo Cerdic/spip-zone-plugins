@@ -261,6 +261,23 @@ function spiplistes_listes_nb_abonnes_compter ($id_liste = 0) {
 	return(spiplistes_sql_compter ("spip_auteurs_listes", $sql_whereq));
 }
 
+//CP-20080509: renvoie email emetteur d'une liste
+function spiplistes_listes_email_emetteur ($id_liste = 0) {
+	$id_liste = intval($id_liste);
+	$result = false;
+	if(!(
+		($id_liste > 0)
+		&& ($result = 
+			sql_getfetsel(
+				"email_envoi"
+				, "spip_listes"
+				, "id_liste=".sql_quote($id_liste)." LIMIT 1"
+			))
+	)) {
+		$result = entites_html($GLOBALS['meta']['email_webmaster']);
+	}
+	return($result);
+}
 
 // CP-20080505 : renvoie array sql_where des listes publiees
 function spiplistes_listes_sql_where ($listes) {
