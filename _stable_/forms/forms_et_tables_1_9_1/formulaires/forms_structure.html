@@ -108,10 +108,10 @@
 <script src="[(#CHEMIN{javascript/datePicker.js}|url_absolue)]" type="text/javascript"></script>
 ]
 <script type="text/javascript"><!--
-$('div.spip_forms input.formo').bind('focus',function(){$(this).addClass('formo-focus');});
-$('div.spip_forms input.formo').bind('blur',function(){$(this).removeClass('formo-focus');});
-$('div.spip_forms input.forml').bind('focus',function(){$(this).addClass('forml-focus');});
-$('div.spip_forms input.forml').bind('blur',function(){$(this).removeClass('forml-focus');});
+jQuery('div.spip_forms input.formo').bind('focus',function(){jQuery(this).addClass('formo-focus');});
+jQuery('div.spip_forms input.formo').bind('blur',function(){jQuery(this).removeClass('formo-focus');});
+jQuery('div.spip_forms input.forml').bind('focus',function(){jQuery(this).addClass('forml-focus');});
+jQuery('div.spip_forms input.forml').bind('blur',function(){jQuery(this).removeClass('forml-focus');});
 [(#GET{date-picker}|?{' '})
 	$.datePicker.setDateFormat('dmy','/');
 	[(#INCLURE{fond=formulaires/date_picker_init}|charset2unicode{html}|unicode2charset)]
