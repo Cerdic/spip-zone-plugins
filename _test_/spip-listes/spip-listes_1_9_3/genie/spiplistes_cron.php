@@ -128,6 +128,7 @@ spiplistes_log("CRON: nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 						break;
 					case _SPIPLISTES_MENSUEL_LIST:
 					case _SPIPLISTES_MONTHLY_LIST:
+						$job_jour = (_SPIPLISTES_MONTHLY_LIST ? 1 : $job_jour);
 						$next_time = mktime($job_heure, $job_minute, 0, $job_mois+1, $job_jour, $job_an);
 						break;
 					case _SPIPLISTES_HEBDO_LIST:
