@@ -70,8 +70,7 @@ function autoriser_crayonner_dist($faire, $type, $id, $qui, $opt) {
 		$opt[$opt['champ']] = true;
 
 	return (
-		autoriser('voir', $type, $id, $qui, $opt)
-		AND autoriser('modifier', $type, $id, $qui, $opt)
+		 autoriser('modifier', $type, $id, $qui, $opt)
 	);
 }
 
