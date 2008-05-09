@@ -120,7 +120,7 @@ spiplistes_log("CRON: nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 				$job_heure = date("H", $job_time);
 				$job_minute = date("i", $job_time);
 				$job_mois = date("m", $job_time);
-				$job_jour = date("j", $job_time);
+				$job_jour = (($statut == _SPIPLISTES_MONTHLY_LIST) ? 1 : date("j", $job_time));
 				$job_an = date("Y"); // la date est forcée par celle du système (eviter erreurs)
 				switch($statut) {
 					case _SPIPLISTES_YEARLY_LIST:
@@ -128,7 +128,6 @@ spiplistes_log("CRON: nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 						break;
 					case _SPIPLISTES_MENSUEL_LIST:
 					case _SPIPLISTES_MONTHLY_LIST:
-						$job_jour = (_SPIPLISTES_MONTHLY_LIST ? 1 : $job_jour);
 						$next_time = mktime($job_heure, $job_minute, 0, $job_mois+1, $job_jour, $job_an);
 						break;
 					case _SPIPLISTES_HEBDO_LIST:
