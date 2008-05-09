@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2007                                                *
+ *  Copyright (c) 2001-2008                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -45,11 +45,11 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	$titre = $document['titre'];
 	$date = $document['date'];
 
-	if ($document['mode'] == 'vignette') {
+	if ($document['mode'] == 'image') {
 		$supp = 'image-24.gif';
 		$label = _T('entree_titre_image');
 		$taille = $vignette = '';
-
+	  
 	} else {
 		$supp = 'doc-24.gif';
 		$label = _T('entree_titre_document');
@@ -61,52 +61,54 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	if (($n=strlen($entete)) > 20)
 		$entete = substr($entete, 0, 10)."...".substr($entete, $n-10, $n);
 	if (strlen($document['titre']))
-		$entete = "<b>". lignes_longues(typo($titre),25) . "</b>";
+		$entete = "<strong>". lignes_longues(typo($titre),25) . "</strong>";
 
 	$contenu = '';
 	if ($descriptif)
-	  $contenu .=  lignes_longues(propre($descriptif),25)  . "<br />\n" ;
+	  $contenu .=  "<p>".PtoBR(lignes_longues(propre($descriptif),25)) . "</p>\n";
 	if ($document['largeur'] OR $document['hauteur'])
 	  $contenu .= _T('info_largeur_vignette',
 		     array('largeur_vignette' => $document['largeur'],
 			   'hauteur_vignette' => $document['hauteur']));
 	else
-	  $contenu .= taille_en_octets($document['taille']) . ' - ';
+	  $contenu .= taille_en_octets($document['taille']);
 
 	if ($date) $contenu .= "<br />\n" . affdate($date);
 
-	$corps =
-	  (!$contenu ? '' :
-	   "<br /><div class='verdana1' style='text-align: center;'>$contenu</div>") .
-	  "<b>$label</b><br />\n" .
+	include_spip('inc/editer');
+	$corps = (!$contenu ? '' :
+	   "<div class='verdana1' style='text-align: center;'>$contenu</div>") .
+	  "<label for='titre_document$id_document'><b>$label</b></label><br />\n" .
 
-	  "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre).
-	  "\" size='40'	onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /><br /><br />\n" .
+	  "<input type='text' name='titre_document' id='titre_document$id_document' class='formo' value=\"".entites_html($titre).
+	  "\" size='40'	onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /><br />\n" .
 	  date_formulaire_legender($date, $id_document) .
-	  "<br />\n<b>".
+	  "<br />\n<label for='descriptif_document$id_document'><b>".
 	  _T('info_description_2').
-	  "</b><br />\n" .
-	  "<textarea name='descriptif_document' rows='4' class='formo' cols='*' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
+	  "</b></label><br />\n" .
+	  "<textarea name='descriptif_document' id='descriptif_document$id_document' rows='4' class='formo' cols='*' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
 	    entites_html($descriptif) .
 	  "</textarea>\n" .
-	  $taille ;
+	  $taille
 	  
+	  .controles_md5($document);
+
 	$att_bouton = " class='fondo spip_xx-small'";
 	$att_span = " id='valider_doc$id_document' "
 	. ($flag == 'ajax' ? '' : "class='display_au_chargement'")
-	.  "style='text-align:"
+	.  " style='text-align:"
 	.  $GLOBALS['spip_lang_right']
 	. ($flag == 'ajax' ? ';display:block' : "")
 	. "'";
 
-	if (!_DIR_RESTREINT)
+	if (test_espace_prive())
 		$corps = ajax_action_post("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, _T('bouton_enregistrer'), $att_bouton, $att_span, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
 		  . "<br class='nettoyeur' />";
 	else {
 		$corps = "<div>"
-		       . $corps
+		       . $corps 
 		       . "<span"
-		       . $att
+		       . $att_span
 		       . "><input type='submit' class='fondo' value='"
 		       . _T('bouton_enregistrer')
 		       ."' /></span><br class='nettoyeur' /></div>";
@@ -116,15 +118,20 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 		$redirect = ancre_url($redirect,"legender-$id_document");
 		$corps = generer_action_auteur("legender", $id_document, $redirect, $corps, "\nmethod='post'");
 	}
-
+	
 	$corps .=  $vignette . "\n\n";
 
 	$texte = _T('icone_supprimer_document');
-	if (preg_match('/_edit$/', $script))
-		$action = redirige_action_auteur('supprimer', "document-$id_document", $script, "id_$type=$id#$ancre");
+	$s = ($ancre =='documents' ? '': '-');
+
+	if (preg_match('/_edit$/', $script)){
+		if ($id==0)
+			$action = redirige_action_auteur('supprimer', "document-$id_document-$script-$id", $script, "id_$type=$id#$ancre");
+		else
+			$action = redirige_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre");
+	}
 	else {
-		$s = ($ancre =='documents' ? '': '-');
-		if (!_DIR_RESTREINT)
+		if (test_espace_prive())
 			$action = ajax_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre", array($texte));
 		else{
 			$redirect = str_replace('&amp;','&',$script);
@@ -135,19 +142,13 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 
 	// le cas $id<0 correspond a un doc charge dans un article pas encore cree,
 	// et ca buggue si on propose de supprimer => on ne propose pas
-	if ($id > 0)
+	if (!($id < 0) && ($document['vu']=='non' OR is_null($document['vu'])))
 		$corps .= icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
 
-	$corps = "<div class='verdana1' style='color: "
-	. $GLOBALS['couleur_foncee']
-	. "; border: 1px solid "
-	. $GLOBALS['couleur_foncee']
-	. "; padding: 5px; margin: 3px; background-color: white;'>"
-	. block_parfois_visible("legender-aff-$id_document", $entete, $corps, "text-align:center;", $flag)
-	. "</div>";
-
-	return ajax_action_greffe("legender-$id_document", $corps);
+	$corps = block_parfois_visible("legender-aff-$id_document", sinon($entete,_T('info_sans_titre')), $corps, "text-align:center;", $flag);
+	return ajax_action_greffe("legender", $id_document, $corps);
 }
+
 
 // http://doc.spip.org/@vignette_formulaire_legender
 function vignette_formulaire_legender($id_document, $document, $script, $type, $id, $ancre)
@@ -157,11 +158,12 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 
 	if (preg_match('/_edit$/', $script)) {
 		$iframe_redirect = generer_url_ecrire("documents_colonne","id=$id&type=$type",true);
-		$action = redirige_action_auteur('supprimer', "document-$id_vignette", $script, "id_$type=$id&show_docs=$id_document#$ancre");
+		$action = redirige_action_auteur('supprimer', "document-$id_vignette-$script-$id", $script, "id_$type=$id&show_docs=$id_document#$ancre");
 	} else {
 		$iframe_redirect = generer_url_ecrire("documenter","id_$type=$id&type=$type",true);
 		$s = ($ancre =='documents' ? '': '-');
-		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_vignette", $script, "id_$type=$id&type=$type&s=$s&show_docs=$id_document#$ancre", array($texte),'',"function(r,noeud) {noeud.innerHTML = r; \$('.form_upload',noeud).async_upload(async_upload_portfolio_documents);}");
+		$f = $id_vignette ? "/$id_document" : '';
+		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_vignette$f", $script, "id_$type=$id&type=$type&s=$s&show_docs=$id_document#$ancre", array($texte),'',"function(r,noeud) {noeud.innerHTML = r; \$('form.form_upload',noeud).async_upload(async_upload_portfolio_documents);}");
 	}
 
 	$joindre = charger_fonction('joindre', 'inc');
@@ -170,16 +172,26 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 	if ($id<0) $supprimer = ''; // cf. ci-dessus, article pas encore cree
 
 	//seul ajout de mots partout
-		$editer_mot = charger_fonction('editer_mot', 'inc');
+		$editer_mot = charger_fonction('editer_mots', 'inc');
 		$s = $editer_mot('document', $id_document, "", "", true,'oui'); 
 	//
 	
 
-	
 	return $s."<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: #eeeeee; background-color: white;' />"
 	. (!$id_vignette
-	   ? $joindre($script, "id_$type=$id",$id, _T('info_vignette_personnalisee'), 'vignette', $type, $ancre, $id_document,$iframe_redirect)
-	   : $supprimer);
+		? $joindre(array(
+			'script' => $script,
+			'args' => "id_$type=$id",
+			'id' => $id,
+			'intitule' => _T('info_vignette_personnalisee'),
+			'mode' => 'vignette',
+			'type' => $type,
+			'ancre' => $ancre,
+			'id_document' => $id_document,
+			'iframe_script' => $iframe_redirect
+			))
+		: $supprimer
+	);
 }
 
 
@@ -188,8 +200,8 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 function formulaire_taille($document) {
 
 	// (on ne le propose pas pour les images qu'on sait
-	// lire, id_type<=3), sauf bug, ou document distant
-	if ($document['id_type'] <= 3
+	// lire : gif jpg png), sauf bug, ou document distant
+	if (in_array($document['extension'], array('gif','jpg','png'))
 	AND $document['hauteur']
 	AND $document['largeur']
 	AND $document['distant']!='oui')
@@ -197,10 +209,9 @@ function formulaire_taille($document) {
 	$id_document = $document['id_document'];
 
 	// Donnees sur le type de document
-	$t = @spip_abstract_fetsel('inclus,extension',
-		'spip_types_documents', "id_type=".$document['id_type']);
+	$extension = $document['extension'];
+	$t = sql_fetsel('inclus','spip_types_documents', "extension=".sql_quote($extension));
 	$type_inclus = $t['inclus'];
-	$extension = $t['extension'];
 
 	# TODO -- pour le MP3 "l x h pixels" ne va pas
 	if (($type_inclus == "embed" OR $type_inclus == "image")
@@ -212,24 +223,28 @@ function formulaire_taille($document) {
 		// ou tous les formats qui s'affichent en embed
 		OR $type_inclus == "embed"
 	)) {
-		return "\n<br /><b>"._T('entree_dimensions')."</b><br />\n" .
-		  "<input type='text' name='largeur_document' class='fondl spip_xx-small' value=\"".$document['largeur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />" .
-		  " &#215; <input type='text' name='hauteur_document' class='fondl spip_xx-small' value=\"".$document['hauteur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
+		return "\n<br /><label for='largeur_document$id_document'><b>"._T('entree_dimensions')."</b></label><br />\n" .
+		  "<input type='text' name='largeur_document' id='largeur_document$id_document' class='fondl spip_xx-small' value=\"".$document['largeur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />" .
+		  " &times; <input type='text' name='hauteur_document' id='hauteur_document$id_document' class='fondl spip_xx-small' value=\"".$document['hauteur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
 	}
 }
 
 // http://doc.spip.org/@date_formulaire_legender
 function date_formulaire_legender($date, $id_document) {
 
-	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)){
+	if (preg_match(",([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}),", $date, $regs)){
 		$mois = $regs[2];
 		$jour = $regs[3];
 		$annee = $regs[1];
+		$heure = $regs[4];
+		$minute = $regs[5];
 	}
 	return  "<b>"._T('info_mise_en_ligne')."</b><br />\n" .
-		afficher_jour($jour, "name='jour_doc' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
-		afficher_mois($mois, "name='mois_doc' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
-		afficher_annee($annee, "name='annee_doc' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") .
+		afficher_jour($jour, "name='jour_doc' id='jour_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
+		afficher_mois($mois, "name='mois_doc' id='mois_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
+		afficher_annee($annee, "name='annee_doc' id='annee_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") .
+		afficher_heure($heure, "name='heure_doc' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") . 
+		afficher_minute($minute, "name='minute_doc' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") . 
 		"<br />\n";
 }
 
