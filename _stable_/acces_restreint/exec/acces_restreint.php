@@ -134,24 +134,20 @@ function exec_acces_restreint(){
 	}
 
 	// on affiche la table
-	bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
-	$largeurs = array('','','','','','','');
-	$styles = array('arial11', 'arial1', 'arial1','arial1','arial1','arial1','arial1');
-	if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {
-		echo xhtml_table_id_type($table, $largeurs, $styles, $tranche);
-	} else {
 		$titre_table = _T('accesrestreint:titre_table');
 		$icone = "../"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif";
 		//if ($titre_table) echo "<div style='height: 12px;'></div>";
 		echo "<div class='liste'>";
+	bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
 		echo "<table width='100%' cellpadding='5' cellspacing='0' border='0'>";
 		echo $tranches;
+	$largeurs = array('','','','','','','');
+	$styles = array('arial11', 'arial1', 'arial1','arial1','arial1','arial1','arial1');
 		echo afficher_liste($largeurs, $table, $styles);
 		echo "</table>";
-		echo "</div>";
-	}
-	echo "</div></div>";
-	echo "<br />";
+		echo "</div></div>";
+
+	echo "</div>";
 
 /*	debut_cadre_relief();
 	echo generer_url_post_ecrire("acces_restreint");
