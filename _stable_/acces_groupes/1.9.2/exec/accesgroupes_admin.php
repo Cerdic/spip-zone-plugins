@@ -945,7 +945,7 @@ function exec_accesgroupes_admin() {
 			echo "</td>";
 			echo "\r\n<td style='border-top: 1px solid #cccccc; text-align : right; padding-right: 20px;'>";
 			if ($id_util_restreint == 0 OR ($id_util_restreint != 0 AND accesgroupes_est_proprio($groupe) == TRUE)) {
-				$h = generer_url_ecrire("accesgroupes_admin","del_ss_groupe=".$row['id_ss_groupe']."groupe=$groupe");
+				$h = generer_url_ecrire("accesgroupes_admin","del_ss_groupe=".$row['id_ss_groupe']."&groupe=$groupe");
 				echo "\r\n<a href=\"$h\">"._T('accesgroupes:retirer_groupe')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' style='vertical-align: middle;'")."</a>";
 				//                         echo $row['dde_acces'] == 1 ? "&nbsp;|&nbsp;<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&mod_ss_groupe=".$row['id_ss_groupe']."&groupe=".$groupe."\">"._T('accesgroupes:accepter')."</a>" : "";
 			}
