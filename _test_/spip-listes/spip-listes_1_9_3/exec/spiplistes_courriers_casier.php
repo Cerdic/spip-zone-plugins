@@ -141,7 +141,7 @@ function exec_spiplistes_courriers_casier () {
 		'btn_confirmer_envoi', 'id_courrier', 'id_liste'
 		, 'statut'
 		, 'btn_supprimer_courrier'
-		, 'btn_arreter_envoi'
+		, 'btn_arreter_envoi' // si valide, contient id du courrier
 		) as $key) {
 		$$key = _request($key);
 	}
@@ -157,7 +157,7 @@ function exec_spiplistes_courriers_casier () {
 	if($btn_confirmer_envoi 
 		&& $flag_modifiable
 	) {
-		$r = spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_ENCOURS);
+		spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_ENCOURS);
 		if($id_liste > 0) {
 			spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 			// passe le courrier a la meleuse
@@ -175,16 +175,16 @@ function exec_spiplistes_courriers_casier () {
 	}
 	
 	// arreter un courrier en cours d'envoi
-	if($btn_arreter_envoi
+	if(
+		$btn_arreter_envoi 
 		&& $flag_modifiable
 	) {
-		sql_update(
-			'spip_courriers'
+		spiplistes_courrier_modifier(
+			$btn_arreter_envoi 
 			, array(
 				'statut' => sql_quote(_SPIPLISTES_STATUT_STOPE)
 				, 'date_fin_envoi' => "NOW()"
 			)
-			, "id_courrier=".sql_quote($btn_arreter_envoi)." LIMIT 1"
 		);
 		spiplistes_courrier_supprimer_queue_envois('id_courrier', $btn_arreter_envoi);
 	}
