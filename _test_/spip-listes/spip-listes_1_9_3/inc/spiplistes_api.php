@@ -110,6 +110,14 @@ function spiplistes_courriers_casier_count ($statut='tous') {
 	return(__table_items_count('spip_courriers', 'id_courrier', $where));
 }
 
+// CP-20080510
+function spiplistes_courriers_casier_premier ($sql_select, $sql_whereq) {
+	return(sql_select(
+			$sql_select, "spip_courriers", $sql_whereq." LIMIT 1"
+		)
+	);
+}
+
 //CP-20080508 : dans la table des listes
 function spiplistes_listes_compter ($sql_whereq = "") {
 	return(spiplistes_sql_compter("spip_listes", $sql_whereq));
@@ -137,6 +145,16 @@ function spiplistes_auteurs_courriers_modifier ($array_set, $sql_where) {
 		sql_update(
 			'spip_auteurs_courriers'
 			, $array_set
+			, $sql_where
+		)
+	);
+}
+
+// CP-20080510
+function spiplistes_auteurs_courriers_supprimer ($sql_whereq) {
+	return(
+		sql_delete(
+			'spip_auteurs_courriers'
 			, $sql_where
 		)
 	);

@@ -296,12 +296,13 @@ spiplistes_log("ERR: spiplistes_courrier_remplir_queue_envois($id_courrier, $id_
 }
 
 //CP-20080509: upadte sql sur un courrier
-function spiplistes_courrier_modifier ($id_courrier, $sql_set_array) {
+function spiplistes_courrier_modifier ($id_courrier, $sql_set_array, $quote = true) {
 	$id_courrier = intval($id_courrier);
+	$sql_update = $quote ? "sql_updateq" : "sql_update";
 	$result = 
 		($id_courrier > 0)
 		?
-			sql_updateq(
+			$sql_update(
 				"spip_courriers"
 				, $sql_set_array
 				, "id_courrier=".sql_quote($id_courrier)." LIMIT 1"
