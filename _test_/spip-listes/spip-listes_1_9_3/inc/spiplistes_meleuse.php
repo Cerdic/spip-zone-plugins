@@ -29,6 +29,11 @@ include_spip('inc/spiplistes_api_globales');
 /*
 	Prend dans le panier des courriers a envoyer (spip_courriers) les encours
 	- formate le titre, texte pour l'envoi
+	
+	les etiquettes sont dans la queue d'envois (spip_auteurs_courriers)
+	- id_auteur (pour reprendre l'adresse mail de id_auteur)
+	- id_courrier (le courrier a dupliquer/envoyer)
+	
 	la queue (spip_auteurs_courriers) a été remplie par cron_spiplistes_cron()
 	se sert de la queue pour ventiler les envois par lots
 
@@ -49,7 +54,7 @@ include_spip('inc/spiplistes_api_globales');
 
 */
 	
-function spiplistes_meleuse () { 
+function spiplistes_meleuse () {
 
 	include_spip('inc/meta');
 	include_spip('inc/texte');
@@ -71,17 +76,16 @@ function spiplistes_meleuse () {
 		$$key = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 
-	//////////////////////////
 	// Trouver un courrier a envoyer 
-
 	$sql_courrier_select = array(
 		'titre', 'texte', 'message_texte', 'type'
 		, 'id_courrier', 'id_liste', 'email_test', 'total_abonnes', 'date_debut_envoi'
 		);
 
+	// prend le premier courrier en attente si present
 	$sql_courrier_a_traiter = spiplistes_courriers_casier_premier(
 		  $sql_courrier_select
-		, "statut=".sql_quote(_SPIPLISTES_STATUT_ENCOURS)
+		, "statut=".sql_quote(_SPIPLISTES_STATUT_READY)
 	);
 	
 	$nb_courriers = sql_count($sql_courrier_a_traiter);
@@ -103,7 +107,7 @@ function spiplistes_meleuse () {
 		|| $nb_etiquettes
 	) {
 
-		spiplistes_log("MEL: ".($nb_courriers + $nb_etiquettes)." JOBS. Distribution...");
+		spiplistes_log("MEL: ".($nb_courriers + $nb_etiquettes)." JOBS. Distribution... ($nb_courriers, $nb_etiquettes)");
 		
 		// signale en log si mode simulation
 		if($opt_simuler_envoi == 'oui') {
@@ -296,7 +300,12 @@ function spiplistes_meleuse () {
 					$sql_adresses_dest = sql_select(
 						  array('a.nom', 'a.id_auteur', 'a.email')
 						, array('spip_auteurs AS a', 'spip_auteurs_courriers AS b')
-						, array("etat=".sql_quote($id_process))
+						, array(
+							"etat=".sql_quote($id_process)
+							, "a.id_auteur=b.id_auteur"
+							, "b.id_courrier=".sql_quote($id_courrier)
+							)
+						, array('a.email')
 					);
 				}
 					
@@ -304,10 +313,6 @@ function spiplistes_meleuse () {
 //spiplistes_log("MEL: nb destinataires: $nb_destinataires", _SPIPLISTES_LOG_DEBUG);
 				if($nb_destinataires > 0) {
 		
-					// ne sert qu'a l affichage
-					$debut = $nb_emails_envoyes + $nb_emails_non_envoyes; 
-					spiplistes_log("MEL: envois effectues : ".$debut.", pas : ".$limit.", nb:".$nb_destinataires, _SPIPLISTES_LOG_DEBUG);	
-
 					//envoyer le lot d'emails selectionnes (la liasse)
 					while($adresse = sql_fetch($sql_adresses_dest)) {
 						$str_temp = " ";
