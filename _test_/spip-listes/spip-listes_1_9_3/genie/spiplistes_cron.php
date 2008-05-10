@@ -233,6 +233,7 @@ spiplistes_log("CRON: insert_id : ".$r, _SPIPLISTES_LOG_DEBUG);
 	if(
 		$n = 
 			spiplistes_courriers_en_cours_compter()
+			+ spiplistes_courriers_au_depart_compter()
 			+ spiplistes_courriers_en_queue_compter("etat=".sql_quote(""))
 	){
 spiplistes_log("CRON: $n JOBS, appel meleuse", _SPIPLISTES_LOG_DEBUG);

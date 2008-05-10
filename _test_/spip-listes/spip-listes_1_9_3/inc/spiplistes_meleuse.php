@@ -85,7 +85,7 @@ function spiplistes_meleuse () {
 	// prend le premier courrier en attente si present
 	$sql_courrier_a_traiter = spiplistes_courriers_casier_premier(
 		  $sql_courrier_select
-		, "statut=".sql_quote(_SPIPLISTES_STATUT_READY)
+		, "statut=".sql_quote(_SPIPLISTES_STATUT_DEPART)." OR statut=".sql_quote(_SPIPLISTES_STATUT_READY)
 	);
 	
 	$nb_courriers = sql_count($sql_courrier_a_traiter);

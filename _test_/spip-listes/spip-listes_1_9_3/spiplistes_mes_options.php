@@ -46,15 +46,16 @@ define("_SPIPLISTES_LOTS_PERMIS", "1;5;10;30;100");
 
 define("_SPIPLISTES_ZERO_TIME_DATE", "0000-00-00 00:00:00");
 
-define("_SPIPLISTES_STATUT_REDAC", "redac");
-define("_SPIPLISTES_STATUT_READY", "ready");
-define("_SPIPLISTES_STATUT_ENCOURS", "encour");
+define("_SPIPLISTES_STATUT_REDAC", "redac"); // en cours de redac
+define("_SPIPLISTES_STATUT_READY", "ready"); // pret à etre envoyé
+define("_SPIPLISTES_STATUT_DEPART", "depart"); // plié et tamponné. Peut etre pris par la meleuse
+define("_SPIPLISTES_STATUT_ENCOURS", "encour"); // en cours par meleuse
 define("_SPIPLISTES_STATUT_AUTO", "auto"); // publié de liste
-define("_SPIPLISTES_STATUT_PUBLIE", "publie");
-define("_SPIPLISTES_STATUT_VIDE", "vide");
-define("_SPIPLISTES_STATUT_IGNORE", "ignore");
-define("_SPIPLISTES_STATUT_STOPE", "stope");
-define("_SPIPLISTES_STATUT_ERREUR", "erreur");
+define("_SPIPLISTES_STATUT_PUBLIE", "publie"); // publié
+define("_SPIPLISTES_STATUT_VIDE", "vide"); // moins de 10 car.
+define("_SPIPLISTES_STATUT_IGNORE", "ignore"); // pas de destinataire
+define("_SPIPLISTES_STATUT_STOPE", "stope"); // stope par admin
+define("_SPIPLISTES_STATUT_ERREUR", "erreur"); // en erreur
 
 define("_SPIPLISTES_TYPE_NEWSLETTER", "nl");
 define("_SPIPLISTES_TYPE_LISTEAUTO", "auto");

@@ -84,7 +84,7 @@ function spiplistes_courriers_en_queue_compter ($sql_whereq = "") {
 	return(spiplistes_sql_compter("spip_auteurs_courriers", $sql_whereq));
 }
 
-//CP-20080509: renvoie le nb de courriers en depart
+//CP-20080509: renvoie le nb de courriers en cours d envoie
 // somme des abonnes
 function spiplistes_courriers_en_cours_compter () {
 	$n = 
@@ -98,10 +98,17 @@ function spiplistes_courriers_en_cours_compter () {
 			&& $n
 			&& $n[0]
 		)
-		? intval($row[0])
+		? intval($n[0])
 		: 0
 		;
 	return($n);
+}
+
+//CP-20080510: renvoie le nb de courriers en depart
+function spiplistes_courriers_au_depart_compter () {
+	return(
+		sql_countsel("spip_courriers", "statut=".sql_quote(_SPIPLISTES_STATUT_READY))
+	);
 }
 
 // CP-20071009

@@ -157,7 +157,7 @@ function exec_spiplistes_courriers_casier () {
 	if($btn_confirmer_envoi 
 		&& $flag_modifiable
 	) {
-		spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_ENCOURS);
+		spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_DEPART);
 		if($id_liste > 0) {
 			spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 			// passe le courrier directement a la meleuse
