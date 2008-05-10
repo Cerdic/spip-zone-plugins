@@ -140,7 +140,7 @@ function exec_spiplistes_abonnes_tous () {
 	// première boite des stats
 	$page_result .= ""
 		. debut_cadre_trait_couleur("forum-interne-24.gif", true)
-		. bandeau_titre_boite2(_T('spiplistes:abonnes_titre'), "", "", "black", false)
+		. spiplistes_titre_boite_info(_T('spiplistes:abonnes_titre'))
 		. "<div class='verdana2' style='position:relative;margin:1ex;height:8em;'>"
 		// bloc de gauche. Répartition des abonnés.
 		. "<div style='position:absolute;top:0;left:0;width:250px;' id='info_abo'>"

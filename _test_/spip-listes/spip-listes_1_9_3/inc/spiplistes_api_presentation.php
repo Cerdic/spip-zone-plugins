@@ -734,6 +734,19 @@ function spiplistes_nb_abonnes_liste_str_get ($id_liste) {
 	return ($result);
 }
 
+// CP-20080510
+function spiplistes_titre_boite_info ($titre = "") {
+	global $spip_display, $spip_lang_left;
+	$result =
+		(!empty($titre))
+		?
+			"<h3 style='padding-$spip_lang_left:3px;text-align:$spip_lang_left;border-bottom:1px solid #444;margin:0;' class='verdana2'>"
+			. $titre
+			. "</h3>\n"
+		: ""
+		;
+	return($result);
+}
 
 //
 ?>

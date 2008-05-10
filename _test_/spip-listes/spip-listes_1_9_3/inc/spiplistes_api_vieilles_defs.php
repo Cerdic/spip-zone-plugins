@@ -45,25 +45,6 @@ if(!function_exists('debut_block_invisible')) {
 // toujours a cette valeur a present en 193
 $GLOBALS['options'] = 'avancees';
 
-if(!function_exists('bandeau_titre_boite2')) {
-	function bandeau_titre_boite2 ($titre, $logo="", $fond="toile_blanche", $texte="ligne_noire") {
-		global $spip_lang_left, $spip_display, $browser_name;
-		
-		if (strlen($logo) > 0 AND $spip_display != 1 AND $spip_display != 4) {
-			$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
-	
-			return "\n<div style='position: relative;$ie_style'>"
-			. "\n<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>"
-			. http_img_pack($logo, "", "")
-			. "</div>"
-			. "\n<div style='padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2 $fond $texte'>$titre</div>"
-			. "</div>";
-		} else {
-			return "<h3 style='padding: 3px; border-bottom: 1px solid #444; margin: 0px;' class='verdana2 $fond $texte'>$titre</h3>";
-		}
-	}
-}
-
 if(!function_exists('creer_objet_multi')) {
 	function creer_objet_multi ($r, $l) {
 		sql_multi($r, $l);

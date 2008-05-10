@@ -161,10 +161,10 @@ function exec_spiplistes_import_export(){
 		if($abos_liste && is_array($abos_liste) && count($abos_liste)) {
 			include_spip('inc/spiplistes_import');
 			$page_result .= ""
-				. debut_cadre_formulaire("background-color:white;margin-bottom:1em;", true)
-				. bandeau_titre_boite2(_T('spiplistes:Resultat_import'),"","white","black",false)
+				. debut_boite_info(true)
+				. spiplistes_titre_boite_info(_T('spiplistes:Resultat_import'))
 				. spiplistes_import($fichier_import['tmp_name'], $fichier_import['name'], $abos_liste, $format_abo, $separateur, true)
-				. fin_cadre_formulaire(true)
+				. fin_boite_info(true)
 				;
 		}
 	}

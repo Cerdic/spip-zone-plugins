@@ -41,7 +41,7 @@ function spiplistes_destiner_envoi ($id_courrier, $id_liste, $flag_editable
 		$destinataire = "";
 	
 	if($id_liste) {
-		if($row = sql_fetsel("titre", "spip_listes", "id_liste=$id_liste")) {
+		if($row = sql_fetsel("titre", "spip_listes", "id_liste=".sql_quote($id_liste))) {
 			$destinataire = $row['titre'];
 		}
 	}
