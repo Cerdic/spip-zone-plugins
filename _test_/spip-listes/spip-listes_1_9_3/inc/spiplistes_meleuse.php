@@ -27,7 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/spiplistes_api_globales');
 
 /*
-	Prend dans le panier des courriers (spip_courriers) les encours
+	Prend dans le panier des courriers a envoyer (spip_courriers) les encours
 	- formate le titre, texte pour l'envoi
 	la queue (spip_auteurs_courriers) a été remplie par cron_spiplistes_cron()
 	se sert de la queue pour ventiler les envois par lots
@@ -85,6 +85,8 @@ function spiplistes_meleuse () {
 	
 	$nb_courriers = sql_count($sql_casier_courrier);
 	
+	$nb_etiquettes = spiplistes_courriers_en_queue_compter("etat=".sql_quote(""));
+	
 	$str_log = "MEL:";
 	
 	// si meleuse suspendue, signale en log 
@@ -95,9 +97,12 @@ function spiplistes_meleuse () {
 
 	$meleuse_statut = "1";
 	
-	if($nb_courriers) {
+	if(
+		$nb_courriers // courriers non auto au depart ?
+		|| $nb_etiquettes
+	) {
 
-		spiplistes_log("MEL: $nb_courriers JOBS. Distribution...");
+		spiplistes_log("MEL: ".($nb_courriers + $nb_etiquettes)." JOBS. Distribution...");
 		
 		// signale en log si mode simulation
 		if($opt_simuler_envoi == 'oui') {
@@ -114,6 +119,14 @@ function spiplistes_meleuse () {
 		}
 		else {
 			$tampon_html = $tampon_texte = "";
+		}
+		
+		if($nb_courriers) {
+			// courriers (probablement non auto) au départ ?
+			// c'est le cas par exemple des tests
+		} else if($nb_etiquettes) {
+			// il reste des etiquettes ? envoi massif non terminé !
+			
 		}
 		
 		// boucle (sur LIMIT 1) pour pouvoir sortir par break si erreur
@@ -253,7 +266,11 @@ function spiplistes_meleuse () {
 					// Traitement d'une liasse
 					// un id pour ce processus
 					$id_process = intval(substr(creer_uniqid(),0,5));
-					spip_query("UPDATE spip_auteurs_courriers SET etat=$id_process WHERE etat='' AND id_courrier=$id_courrier LIMIT $limit");
+					//spip_query("UPDATE spip_auteurs_courriers SET etat=$id_process WHERE etat='' AND id_courrier=$id_courrier LIMIT $limit");
+					spiplistes_auteurs_courriers_modifier(
+						array('etat' => sql_quote($id_process))
+						, "etat=".sql_quote('')." AND id_courrier=".sql_quote($id_courrier)." LIMIT $limit"
+					);
 					$result_inscrits = spip_query(
 						"SELECT a.nom, a.id_auteur, a.email 
 						FROM spip_auteurs AS a, spip_auteurs_courriers AS b 

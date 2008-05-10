@@ -164,7 +164,7 @@ spiplistes_log("CRON: nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 	
 	
 			/////////////////////////////
-			// preparation du courrier à placer dans le panier
+			// preparation du courrier à placer dans le panier (spip_courriers)
 			// en cas de période, la date est dans le passé pour avoir les elements publies depuis cette date
 			include_spip('public/assembler');
 			$contexte_patron = array('date' => $dernier_envoi, 'patron'=>$patron, 'lang'=>$lang);
@@ -186,6 +186,7 @@ spiplistes_log("CRON: nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 				$date_debut_envoi = "NOW()";
 				$date_fin_envoi = "NOW()";
 				$statut = _SPIPLISTES_STATUT_VIDE;
+				spiplistes_log("CRON: envoi mail nouveautes : courrier vide", _SPIPLISTES_LOG_DEBUG);
 			}
 			
 			/////////////////////////////
@@ -217,26 +218,24 @@ spiplistes_log("CRON: nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 			);
 spiplistes_log("CRON: insert_id : ".$r, _SPIPLISTES_LOG_DEBUG);
 			/////////////////////////////
-			// Ajoute les abonnés dans la queue (spip_auteurs_courriers)
+			// place les etiquettes en ajoutant 
+			// les abonnés dans la queue (spip_auteurs_courriers)
 			if($taille_courrier_ok) {
 				$id_courrier = spip_insert_id();
 				spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste);
-			} 
-			else {
-				// contenu du courrier vide
-	spiplistes_log("CRON: envoi mail nouveautes : courrier vide", _SPIPLISTES_LOG_DEBUG);
 			} 
 		}// end while // fin traitement des listes
 	}	
 	
 	/////////////////////////////
-	// Si panier courriers des encours plein, 
-	// ou si queue en attente, appelle meleuse
-	if (
-			($n = spiplistes_courriers_en_cours_compter())
-		|| ($n = spiplistes_courriers_en_queue_compter("etat=".sql_quote("")))
+	// Si panier courriers des encours plein 
+	// ou si queue en attente, appel de la meleuse
+	if(
+		$n = 
+			spiplistes_courriers_en_cours_compter()
+			+ spiplistes_courriers_en_queue_compter("etat=".sql_quote(""))
 	){
-spiplistes_log("CRON: $n jobs, appel meleuse", _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("CRON: $n JOBS, appel meleuse", _SPIPLISTES_LOG_DEBUG);
 		include_spip('inc/spiplistes_meleuse');
 		return(spiplistes_meleuse());
 	}

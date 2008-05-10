@@ -197,14 +197,15 @@ function exec_spiplistes_import_export(){
 		$ii = 0;
 		foreach($listes_array as $row) {
 			$id_liste = $row['id_liste'] ;
-			$titre = $row['titre'] ;
+			$titre = couper($row['titre'], 30, '...');
+			$texte = couper($row['texte'], 30, '...');
 			$checked = ($nb_listes == 1) ? "checked='checked'" : "";
 			$label = _T('spiplistes:Liste_de_destination').": $titre";
 			if($connect_toutes_rubriques || ($connect_id_auteur == spiplistes_mod_listes_get_id_auteur($id_liste))) {
 				$page_result .= ""
 					. "<li style='padding:4px;background-color:#".(($ii++ % 2) ? "fff" : "ccc").";'>"
 					. "<input name='abos_liste[]' type='checkbox' id='abos_$id_liste' value='$id_liste' title=\"$label\" $checked />\n"
-					. "<label for='abos_$id_liste'><strong>".$row['titre']."</strong> <em>".propre($row['texte'])."</em></label>\n"
+					. "<label for='abos_$id_liste'><strong>".$titre."</strong> <em>".$texte."</em></label>\n"
 					. "</li>\n"
 					;
 			}
@@ -251,19 +252,22 @@ function exec_spiplistes_import_export(){
 			// exportation par listes
 			. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT), true)
 			. debut_cadre_relief("", true, "", _T('spiplistes:Exporter_une_liste_d_abonnes'))
+			. "<ul style='padding-left:0;list-style:none;' class='verdana2'>\n"
 			;
-		$ii = 1;
+		$ii = 0;
 		foreach($listes_array as $row) {
 			$id_liste = intval($row['id_liste']);
+			$titre = couper($row['titre'], 30, '...');
 			$page_result .= ""
 				. "<li style='padding:4px;background-color:#".(($ii++ % 2) ? "fff" : "ccc").";'>"
 				. spiplistes_form_input_radio('export_id', $id_liste
-					, "<strong>".$row['titre']."</strong> <em>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</em>"
+					, "<strong>".$titre."</strong> <em>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</em>"
 					, ($nb_listes==1), true, false)
 				. "</li>\n"
 				;
 		}
 		$page_result .= ""
+			. "</ul>"
 			. fin_cadre_relief(true)
 			. "<!-- fin de liste export -->\n"
 			//

@@ -59,7 +59,7 @@ function exec_spiplistes_listes_toutes(){
 			$array_set = array(
 				'date' => 'NOW()'
 			);
-			if(!spiplistes_listes_modifier_liste($id_liste, $array_set)) {
+			if(!spiplistes_listes_liste_modifier($id_liste, $array_set)) {
 				spiplistes_log("ERR: listes_modifier_liste #$id_liste");
 			}
 		}

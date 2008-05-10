@@ -121,12 +121,23 @@ function spiplistes_listes_abonnements_compter ($sql_whereq = "") {
 }
 
 // CP-20080501
-function spiplistes_listes_modifier_liste ($id_liste, $array_set) {
+function spiplistes_listes_liste_modifier ($id_liste, $array_set) {
 	return(
 		sql_update(
 			'spip_listes'
 			, $array_set
 			, "id_liste=".sql_quote($id_liste)." LIMIT 1"
+		)
+	);
+}
+
+// CP-20080510
+function spiplistes_auteurs_courriers_modifier ($array_set, $sql_where) {
+	return(
+		sql_update(
+			'spip_auteurs_courriers'
+			, $array_set
+			, $sql_where
 		)
 	);
 }
