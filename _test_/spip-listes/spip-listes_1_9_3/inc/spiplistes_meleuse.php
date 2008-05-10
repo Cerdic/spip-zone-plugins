@@ -385,6 +385,7 @@ function spiplistes_meleuse () {
 					} // fin while
 					
 					// supprime la liasse de la queue d'envois
+spiplistes_log("MEL: supprimer queue $id_process", _SPIPLISTES_LOG_DEBUG);
 					spiplistes_auteurs_courriers_supprimer("etat=".sql_quote($id_process));
 					
 					// si c'est un test on repasse le courrier en redac
@@ -436,7 +437,8 @@ function spiplistes_meleuse () {
 					$meleuse_statut = "-1";
 				}
 				else {
-					$statut = ($type=_SPIPLISTES_TYPE_NEWSLETTER) ? _SPIPLISTES_STATUT_PUBLIE : _SPIPLISTES_STATUT_AUTO;
+					$statut = ($type == _SPIPLISTES_TYPE_NEWSLETTER) ? _SPIPLISTES_STATUT_PUBLIE : _SPIPLISTES_STATUT_AUTO;
+spiplistes_log("MEL: nouveau statut $statut", _SPIPLISTES_LOG_DEBUG);
 					$sql_set_array['statut'] = sql_quote($statut);
 					$sql_set_array['date_fin_envoi'] = "NOW()";
 					$str_log .= " END #$id_courrier";

@@ -182,7 +182,7 @@ function exec_spiplistes_courriers_casier () {
 		spiplistes_courrier_modifier(
 			$btn_arreter_envoi 
 			, array(
-				'statut' => sql_quote(_SPIPLISTES_STATUT_STOPE)
+				'statut' => _SPIPLISTES_STATUT_STOPE
 				, 'date_fin_envoi' => "NOW()"
 			)
 		);
