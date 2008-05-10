@@ -222,9 +222,7 @@ function exec_spiplistes_liste_gerer () {
 				
 					$sql_champs['message_auto'] = 'oui';
 					$sql_champs['titre_message'] = $titre_message;
-					if(!$envoyer_maintenant) {
-						$sql_champs['date'] = $envoyer_quand;
-					}
+					$sql_champs['date'] = (!$envoyer_maintenant) ? $envoyer_quand : '';
 					
 					switch($auto_chrono) {
 						case 'auto_jour':
