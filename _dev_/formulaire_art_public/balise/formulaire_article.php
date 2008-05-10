@@ -240,7 +240,7 @@ function balise_FORMULAIRE_ARTICLE_dyn($id_rubrique,$url) {
 			if (is_array(_request('supprimer')))
 			foreach (_request('supprimer') as $supprimer) {
 				if ($supprimer = intval($supprimer)
-				AND $s = spip_query("SELECT * FROM spip_documents_articles WHERE id_article="._q($id_article)." AND id_document="._q($supprimer))
+				AND $s = spip_query("SELECT * FROM spip_documents_articles WHERE id_article="._q($article)." AND id_document="._q($supprimer))
 				AND $t = spip_fetch_array($s)) {
 					include_spip('inc/documents');
 					$s = spip_query("SELECT * FROM spip_documents WHERE id_document="._q($supprimer));
