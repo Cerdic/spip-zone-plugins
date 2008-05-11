@@ -246,10 +246,11 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Forcer_abonnement_erreur' => "Erreur technique signal&eacute;e lors de la modification d'une liste abonn&eacute;e. 
 	V&eacute;rifiez cette liste avant de poursuivre votre op&eacute;ration.",
 'Format_obligatoire_pour_diffusion' => "Pour confirmer l'abonnement de ce compte, vous devez s&eacute;lectionner un format 
-	de r&eacute;ception.",
+	de r&eacute;ception."
+, 'format_reception' => "Format de r&eacute;ception :"
 
 //G
-'Generer_le_contenu' => "G&eacute;n&eacute;rer le contenu",
+, 'Generer_le_contenu' => "G&eacute;n&eacute;rer le contenu",
 
 //H
 'Historique_des_envois' => 'Historique des envois',

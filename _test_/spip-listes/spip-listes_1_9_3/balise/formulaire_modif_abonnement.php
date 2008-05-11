@@ -134,7 +134,13 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<", _SPIPLISTES_LOG_D
 					
 					$message = _T('spiplistes:abonnement_mail_passcookie', array('nom_site_spip' => $nomsite, 'adresse_site' => $urlsite, 'cookie' => $cookie));
 					
-					if (envoyer_mail($email_desabo, "[$nomsite] "._T('spiplistes:abonnement_titre_mail'), $message)) {
+					if(
+						spiplistes_envoyer_mail(
+							$email_desabo
+							, "[$nomsite] "._T('spiplistes:abonnement_titre_mail')
+							, $message
+							)
+					) {
 						$erreur = _T('spiplistes:pass_recevoir_mail');
 					}
 					else {

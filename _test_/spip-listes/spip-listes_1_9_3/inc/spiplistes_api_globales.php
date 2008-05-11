@@ -41,6 +41,7 @@ function spiplistes_log($texte, $level = LOG_WARNING) {
 		// En 193, modifier $taille_des_logs
 		spip_log($texte, _SPIPLISTES_PREFIX);
 	}
+	return(true);
 }
 
 // CP-20080324

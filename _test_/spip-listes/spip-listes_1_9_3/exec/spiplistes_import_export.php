@@ -172,7 +172,7 @@ function exec_spiplistes_import_export(){
 	$list = sql_select(
 		array('id_liste','titre','texte')
 		, 'spip_listes'
-		, spiplistes_listes_sql_where(_SPIPLISTES_LISTES_STATUTS_OK));
+		, spiplistes_listes_sql_where_or(_SPIPLISTES_LISTES_STATUTS_OK));
 
 	$nb_listes = sql_count($list);
 	

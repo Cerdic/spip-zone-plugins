@@ -281,10 +281,14 @@ function spiplistes_listes_desabonner ($id_auteur, $id_liste) {
 }
 
 // CP-20080330 : renvoie la liste des abonnements pour id_auteur
-function spiplistes_listes_abonnements_auteur ($id_auteur) {
+function spiplistes_listes_abonnements_auteur ($id_auteur, $avec_titre = false) {
 	$result = array();
-	$sql_result = sql_select ("id_liste", "spip_auteurs_listes", "id_auteur=".sql_quote($id_auteur));
-	while ($row = spip_fetch_array($sql_result)) {
+	$sql_select = "id_liste".($avec_titre ? ",titre" : "");
+	$sql_result = sql_select ($sql_select
+		, "spip_auteurs_listes"
+		, "id_auteur=".sql_quote($id_auteur)
+	);
+	while ($row = sql_fetch($sql_result)) {
 		$result[] = $row['id_liste'];
 	}
 	return($result);
@@ -315,8 +319,13 @@ function spiplistes_listes_email_emetteur ($id_liste = 0) {
 	return($result);
 }
 
+//CP-20080511
+function spiplistes_listes_liste ($select = "*", $sql_whereq = "") {
+	return(sql_getfetsel($select, "spip_listes", $sql_whereq));
+}
+
 // CP-20080505 : renvoie array sql_where des listes publiees
-function spiplistes_listes_sql_where ($listes) {
+function spiplistes_listes_sql_where_or ($listes) {
 	return("statut=".implode(" OR statut=", array_map("sql_quote", explode(";", $listes))));
 }
 
@@ -344,7 +353,7 @@ function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
 		}
 		else if(($id_auteur = intval($id_auteur)) > 0) {
 			if(!spiplistes_format_abo_demande($id_auteur)) {
-				$sql_champs['id_auteur'] = $id_auteur;
+				$sql_champs['id_auteur'] = sql_quote($id_auteur);
 				return(sql_insertq($sql_table, $sql_champs));
 			} else {
 				$sql_where = "id_auteur=".sql_quote($id_auteur)." LIMIT 1"; 
@@ -596,6 +605,41 @@ function spiplistes_auteurs_cookie_oubli_updateq ($cookie_oubli, $where, $where_
 			. "=" . sql_quote($where) . " LIMIT 1";
 	}
 	return(sql_update('spip_auteurs', array('cookie_oubli' => sql_quote($cookie_oubli)), $where));
+}
+
+//CP-20080511
+function spiplistes_auteurs_auteur_select ($sql_select, $sql_where) {
+	return(sql_select($sql_select, 'spip_auteurs', $sql_where." LIMIT 1"));
+}
+
+//CP-20080511
+function spiplistes_auteurs_auteur_delete ($sql_where) {
+	return(sql_delete('spip_auteurs', $sql_where." LIMIT 1"));
+}
+
+//CP-20080511
+function spiplistes_auteurs_auteur_insertq ($champs_array) {
+	return(sql_insertq('spip_auteurs', $champs_array));
+}
+
+//CP-20080511
+function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $headers = "") {
+	static $opt_simuler_envoi;
+	if(!$opt_simuler_envoi) {
+		$opt_simuler_envoi = __plugin_lire_key_in_serialized_meta('opt_simuler_envoi', _SPIPLISTES_META_PREFERENCES);
+	}
+	if(!$from) {
+		$from = "no-reply@".$_SERVER['SERVER_NAME'];
+	}
+
+	return(
+		($opt_simuler_envoi == 'oui')
+		? spiplistes_log("API: MAIL SIMULATION MODE !!!")
+		: (
+			($f = charger_fonction('envoyer_mail','inc'))
+			&& $f($to, $subject, $message, $from, $headers)
+			)
+	);
 }
 
 // charge les vieilles def nécessaires si besoin

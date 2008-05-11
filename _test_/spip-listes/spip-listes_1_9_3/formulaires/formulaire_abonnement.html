@@ -18,7 +18,7 @@
 	[(#ENV{erreur}|?{'',' '})
 	<:pass_indiquez_cidessous:>
 	
-	<form action="#SELF#spiplistes" method="post">
+	<form action="#SELF#spip-listes" method="post">
 		<div style="text-align:right">
 				<input type="text" class="spip_formulaires" name="email_oubli" value="" />
 				<input type="hidden" name="oubli_pass" value="oui" />
@@ -63,7 +63,7 @@
 [<span style="color:red">(#ENV*{reponse_formulaire})</span>]
 
 [(#ENV{mode_login}|?{' ',''})
-	<form action="#SELF#spiplistes" method="post" id="spip-listes">
+	<form class="formulaire-spiplistes-abo" action="#SELF#spip-listes" method="post" id="spip-listes">
 ][(#REM) 
 	================================
 	liste des listes
@@ -74,8 +74,8 @@
 			Si une seule liste en parametre de la balise, ne liste que celle-ci
 		]
 		<BOUCLE_liste(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {id_liste=#ENV{liste}} {0,(#ENV{mode_login}|?{1,0})}>
-			[<fieldset style="margin-bottom:1em;">
-			[<legend style="font-weight:bold;">(#TITRE)</legend>]
+			[<fieldset>
+			[<legend>(#TITRE)</legend>]
 			(#TEXTE)
 			</fieldset>]
 		</BOUCLE_liste>
@@ -86,25 +86,28 @@
 		]
 		<B_listes>
 			<fieldset>
-			<legend style="color:#000">[(#TOTAL_BOUCLE|=={1}|?{
+			<legend>[(#TOTAL_BOUCLE|=={1}|?{
 				<:spiplistes:abo_1_lettre:></legend>
 				,<:spiplistes:abo_listes:></legend>})]
-			
+		<ul>
 		<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {0,(#ENV{mode_login}|?{100,0})}>
 				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
 				<input type="hidden" name="list&#91;&#93;"  checked="checked" value="#ID_LISTE" />
 				<:spiplistes:abonne_une_seule_liste_publique:>: <strong>#TITRE</strong> [- <em>(#TEXTE|textebrut|couper{80})</em>]
 				]
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
-				<div style="text-align:left; padding:0px 0px 4px 0px;clear:both">
+				<li>
 				<label><input type="checkbox" name="list&#91;&#93;" value="#ID_LISTE" />
-				[<strong>(#TITRE)</strong>][ - <em>(#TEXTE|textebrut|couper{80})</em>]</a></label></div>]
+				[<strong>(#TITRE)</strong>][ - <em>(#TEXTE|textebrut|couper{80})</em>]</label></li>]
 		</BOUCLE_listes>
-		[(#COMPTEUR_BOUCLE|!={1}|?{'<br />',''})]
+		</ul>
+		</fieldset>
+		[(#COMPTEUR_BOUCLE|!={1}|?{'<!-- fin de liste -->',''})]
 		</B_listes>
 			[(#ENV{reponse_formulaire}|?{'',' '})
 				<:spiplistes:aucune_liste_publique:>]
 			[(#ENV{mode_login}|?{' ',''})
+			</fieldset>
 			<fieldset style="color:#000">
 			<legend><:spiplistes:abo_1_lettre:></legend>]
 		<//B_listes>
@@ -114,8 +117,6 @@
 	mode_login
 
 ][(#ENV{mode_login}|?{' ',''})
-		<div>
-				<input name="suppl_abo" id="suppl_abo_html" value="html"  type="hidden" />
 				
 [(#REM) 
 	================================
@@ -128,20 +129,22 @@
 	================================
 	fin du formulaire
 ]
-			<div style="margin-top:5px">
-				<label style="font-weight:bold;"><:form_pet_votre_email:> :
-				<input type="text" class="forml" style="width:12em;clear:both;" name="mail_inscription_" value="" size="30" /></label>
-			</div>
-			<div>
-				<label><input name="desabo" id="suppl_abo_oui" value="non" checked="checked" type="radio" /><:spiplistes:abonnement_0:></label>
-			</div>
+			<fieldset>
+				<legend><:form_pet_votre_email:></legend>
+				<label style="display:none;" for="mail_inscription_"><:form_indiquer_email:> :</label>
+				<input type="text" class="forml" id="mail_inscription_" name="mail_inscription_" value="" size="40" />
+			</fieldset>
+			<fieldset>
+				<legend><:spiplistes:format_reception:></legend>
+				<label><input name="suppl_abo" value="html" checked="checked" type="radio" /><:spiplistes:html:></label>
+				<label><input name="suppl_abo" value="texte" type="radio" /><:spiplistes:texte:></label>
 			[(#ENV{d}|?{' ',''})
 			<div>
 				<label><input name="desabo" id="suppl_abo_non" value="oui" type="radio" /><:spiplistes:desabonnement:></label>
 			</div>
-			]
-			<div style="text-align:right;height:1.4em;line-height:1.4em;">
-				<input type="submit" name="Valider" class="spip_bouton" value="<:bouton_valider:>" />
+			]</fieldset>
+			<div class="spip_bouton">
+				<input type="submit" name="Valider" value="<:bouton_valider:>" />
 			</div>
-		</div></fieldset></form>]
+		</form>]
 </div>

@@ -51,13 +51,6 @@ if(!function_exists('creer_objet_multi')) {
 	}
 }
 
-if(!function_exists('envoyer_mail')) {
-	function envoyer_mail ($email, $sujet, $texte, $from = "", $headers = "") {
-		$envoyer_mail = charger_fonction('envoyer_mail','inc');
-		return $envoyer_mail($email,$sujet,$texte,$from,$headers);
-	}
-}
-
 if(!function_exists('spip_abstract_showtable')) {
 	function spip_abstract_showtable ($table, $serveur='', $table_spip = false) {
 		vieilles_log('spip_abstract_showtable()');

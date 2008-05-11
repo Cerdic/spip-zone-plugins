@@ -1,0 +1,22 @@
+/* spiplistes_formulaire.css */
+
+.formulaire-spiplistes-abo {
+	margin:0;
+	padding:0;
+}
+form.formulaire-spiplistes-abo fieldset { 
+}
+.formulaire-spiplistes-abo legend { 
+	font-weight:700; 
+}
+.formulaire-spiplistes-abo ul, .formulaire-spiplistes-abo li {
+	margin:0;
+	padding:0;
+	border:0;
+}
+.formulaire-spiplistes-abo ul, .formulaire-spiplistes-abo li {
+	list-style: none;
+}
+.formulaire-spiplistes-abo li {
+	line-height:1.2em;
+}

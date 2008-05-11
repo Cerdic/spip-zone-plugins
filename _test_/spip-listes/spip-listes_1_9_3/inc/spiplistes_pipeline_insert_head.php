@@ -23,7 +23,8 @@ function spiplistes_insert_head ($flux) {
 
 	$flux .= ""
 		. "\n\n<!-- PLUGIN SPIPLISTES v.: ".__plugin_real_version_get(_SPIPLISTES_PREFIX)." -->\n"
-	;
+		. "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPLISTES."spiplistes_formulaire.css' type='text/css' media='all' />\n"
+		;
 
 	if(in_array(_request('page'), array(
 		'abonnement'	// formulaire 
@@ -36,9 +37,9 @@ function spiplistes_insert_head ($flux) {
 	}
 
 	$flux .= ""
-		. "\n<!-- / PLUGIN SPIPLISTES -->\n"
+		. "<!-- / PLUGIN SPIPLISTES -->\n"
 	;
-	return ($flux);
+	return($flux);
 }
 
 ?>

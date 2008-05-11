@@ -74,7 +74,7 @@ function cron_spiplistes_cron ($last_time) {
 	$sql_where = "message_auto=".sql_quote('oui')."
 			AND date IS NOT NULL  
 			AND date <= NOW()
-			AND (".spiplistes_listes_sql_where(_SPIPLISTES_LISTES_STATUTS_OK).")
+			AND (".spiplistes_listes_sql_where_or(_SPIPLISTES_LISTES_STATUTS_OK).")
 			"
 		;
 	$listes_privees_et_publiques = sql_select(
