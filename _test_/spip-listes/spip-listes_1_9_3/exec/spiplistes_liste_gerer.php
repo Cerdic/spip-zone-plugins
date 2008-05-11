@@ -426,7 +426,7 @@ function exec_spiplistes_liste_gerer () {
 			, ($ii==0), true)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
-		//. spiplistes_boite_autocron(true) // ne pas géner l'édition
+		//. spiplistes_boite_autocron() // ne pas géner l'édition
 		. spiplistes_boite_info_spiplistes(true)
 		. debut_droite($rubrique, true)
 		;

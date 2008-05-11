@@ -54,7 +54,7 @@ include_spip('inc/spiplistes_api_globales');
 
 */
 	
-function spiplistes_meleuse () {
+function spiplistes_meleuse () { 
 
 	include_spip('inc/meta');
 	include_spip('inc/texte');
@@ -85,7 +85,7 @@ function spiplistes_meleuse () {
 	// prend le premier courrier en attente si present
 	$sql_courrier_a_traiter = spiplistes_courriers_casier_premier(
 		  $sql_courrier_select
-		, "statut=".sql_quote(_SPIPLISTES_STATUT_DEPART)." OR statut=".sql_quote(_SPIPLISTES_STATUT_READY)
+		, "statut=".sql_quote(_SPIPLISTES_STATUT_DEPART)
 	);
 	
 	$nb_courriers = sql_count($sql_courrier_a_traiter);
@@ -107,7 +107,7 @@ function spiplistes_meleuse () {
 		|| $nb_etiquettes
 	) {
 
-		spiplistes_log("MEL: ".($nb_courriers + $nb_etiquettes)." JOBS. Distribution... ($nb_courriers, $nb_etiquettes)");
+		spiplistes_log("MEL: ".($nb_courriers + $nb_etiquettes)." JOBS. Distribution... (c: $nb_courriers, e: $nb_etiquettes)");
 		
 		// signale en log si mode simulation
 		if($opt_simuler_envoi == 'oui') {
@@ -135,6 +135,7 @@ function spiplistes_meleuse () {
 			if($id_courrier = sql_getfetsel(
 					  'id_courrier'
 					, 'spip_auteurs_courriers'
+					// pas d'etat == pas encore traité
 					, "etat=".sql_quote('')." LIMIT 1"
 				)
 			) {
@@ -282,7 +283,9 @@ function spiplistes_meleuse () {
 				}
 				else {
 					// Pour mémo: les étiquettes sont crées par la trieuse
-					// ou directement en backoffice pour les envois de test
+					// ou directement en backoffice 
+					// - pour les envois de test
+					// - pour les envoyer maintenant des courriers
 					
 					// Traitement d'une liasse d'étiquettes
 					// un id pour ce processus (le tampon est unique par liasse)
@@ -296,7 +299,7 @@ function spiplistes_meleuse () {
 							, "etat=".sql_quote('')." AND id_courrier=".sql_quote($id_courrier)." LIMIT $limit"
 					);
 					
-					// prendre la liasse des courriers etiquettés et tamponnés
+					// prendre la liasse des courriers etiquettés
 					$sql_adresses_dest = sql_select(
 						  array('a.nom', 'a.id_auteur', 'a.email')
 						, array('spip_auteurs AS a', 'spip_auteurs_courriers AS b')

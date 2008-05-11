@@ -104,17 +104,14 @@ function spiplistes_courriers_en_cours_compter () {
 	return($n);
 }
 
-//CP-20080510: renvoie le nb de courriers en depart
-function spiplistes_courriers_au_depart_compter () {
-	return(
-		sql_countsel("spip_courriers", "statut=".sql_quote(_SPIPLISTES_STATUT_READY))
-	);
-}
-
-// CP-20071009
-function spiplistes_courriers_casier_count ($statut='tous') {
-	$where = ($statut!='tous') ? " WHERE statut='$statut'" : "";
-	return(__table_items_count('spip_courriers', 'id_courrier', $where));
+// CP-20080511
+function spiplistes_courriers_statut_compter ($statut='tous') {
+	$sql_where = spiplistes_listes_sql_where_or(
+		($statut == 'tous')
+		? _SPIPLISTES_LISTES_STATUTS_TOUS
+		: $statut
+		);
+	return(sql_countsel('spip_courriers', $sql_where));
 }
 
 // CP-20080510

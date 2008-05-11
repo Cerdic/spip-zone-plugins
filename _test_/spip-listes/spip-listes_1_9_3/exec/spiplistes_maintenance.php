@@ -203,7 +203,7 @@ function exec_spiplistes_maintenance () {
 		. __plugin_boite_meta_info(_SPIPLISTES_PREFIX, true)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
-		. spiplistes_boite_autocron(true) 
+		. spiplistes_boite_autocron() 
 		. spiplistes_boite_info_spiplistes(true)
 		. debut_droite($rubrique, true)
 		;
@@ -224,10 +224,10 @@ function exec_spiplistes_maintenance () {
 		. spiplistes_form_debut ($maintenance_url_action, true)
 		. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 		;
-	if(spiplistes_courriers_casier_count()) {
+	if(spiplistes_courriers_statut_compter()) {
 		$page_result .= spiplistes_form_fieldset_debut(_T('spiplistes:suppression_', $objet), true);
 		foreach($tous_les_statuts_courriers as $statut) {
-			if(spiplistes_courriers_casier_count($statut)) {
+			if(spiplistes_courriers_statut_compter($statut)) {
 				$titre = spiplistes_items_get_item('tab_t', $statut);
 				$page_result .= spiplistes_form_input_checkbox ('supprimer_courriers_'.$statut, $statut, $titre, false, true);
 			}

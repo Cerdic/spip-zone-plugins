@@ -46,6 +46,7 @@ define("_SPIPLISTES_LOTS_PERMIS", "1;5;10;30;100");
 
 define("_SPIPLISTES_ZERO_TIME_DATE", "0000-00-00 00:00:00");
 
+// documentation: http://www.quesaco.org/Spiplistes-les-etats-du-courrier
 define("_SPIPLISTES_STATUT_REDAC", "redac"); // en cours de redac
 define("_SPIPLISTES_STATUT_READY", "ready"); // pret à etre envoyé
 define("_SPIPLISTES_STATUT_DEPART", "depart"); // plié et tamponné. Peut etre pris par la meleuse

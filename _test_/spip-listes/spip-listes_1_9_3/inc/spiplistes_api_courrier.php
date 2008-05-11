@@ -309,6 +309,8 @@ function spiplistes_courrier_modifier ($id_courrier, $sql_set_array, $quote = tr
 			)
 		: false
 		;
+	spiplistes_log("API: modifier courrier #$id_courrier "
+		.spiplistes_str_ok_error($result), _SPIPLISTES_LOG_DEBUG);
 	return($result);
 }
 

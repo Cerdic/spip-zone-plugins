@@ -536,7 +536,9 @@ function spiplistes_boite_autocron_info ($icone = "", $return = false, $titre_bo
 	else echo($result);
 }
 
-function spiplistes_boite_autocron ($return = false) { 
+// la boite autocron apparait en backoffice sur la colone droite
+// si courrier en cours d'envoi
+function spiplistes_boite_autocron () { 
 	@define('_SPIP_LISTE_SEND_THREADS',1);
 	
 	global $connect_id_auteur;
@@ -544,18 +546,14 @@ function spiplistes_boite_autocron ($return = false) {
 	// initialise les options
 	foreach(array(
 		'opt_suspendre_trieuse'
-		,'opt_suspendre_meleuse'
+		, 'opt_suspendre_meleuse'
+		, 'opt_simuler_envoi'
 		) as $key) {
 		$$key = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 
 	$result = "";
 	
-	// initialise les options
-	foreach(array('opt_simuler_envoi') as $key) {
-		$$key = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
-	}
-
 	// Informe sur l'état de la trieuse
 	if($opt_suspendre_trieuse == 'oui') {
 		if(_request('opt_suspendre_trieuse')=='non') {
@@ -606,17 +604,12 @@ function spiplistes_boite_autocron ($return = false) {
 	
 	include_spip('genie/spiplistes_cron');
 	if($ii = cron_spiplistes_cron($time) > 0) { 
-	// le CRON n'a rien a faire. Pas de boite autocron
-		if($return) return($result);
-		else {
-spiplistes_log("AUTOCRON no jobs ! $ii", _SPIPLISTES_LOG_DEBUG);
-			echo($result);
-			return;
-		}
+		// le CRON n'a rien a faire. Pas de boite autocron
+		return($result);
 	}
 	
 	$n = spiplistes_nb_grand_total_courriers();
-spiplistes_log("AUTOCRON nb courriers prets envoi $n", _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("AUTOCRON: nb courriers prets envoi $n", _SPIPLISTES_LOG_DEBUG);
 
 	if($n > 0) {
 		$result .= ""
@@ -685,9 +678,7 @@ spiplistes_log("AUTOCRON nb courriers prets envoi $n", _SPIPLISTES_LOG_DEBUG);
 			. fin_boite_info(true)
 			;
 	}
-
-	if($return) return($result);
-	else echo($result);
+	return($result);
 }
 
 // adapté de abomailman ()

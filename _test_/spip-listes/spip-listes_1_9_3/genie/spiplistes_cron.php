@@ -232,8 +232,7 @@ spiplistes_log("CRON: insert_id : ".$r, _SPIPLISTES_LOG_DEBUG);
 	// ou si queue en attente, appel de la meleuse
 	if(
 		$n = 
-			spiplistes_courriers_en_cours_compter()
-			+ spiplistes_courriers_au_depart_compter()
+			spiplistes_courriers_statut_compter(_SPIPLISTES_STATUT_READY)
 			+ spiplistes_courriers_en_queue_compter("etat=".sql_quote(""))
 	){
 spiplistes_log("CRON: $n JOBS, appel meleuse", _SPIPLISTES_LOG_DEBUG);
@@ -247,7 +246,7 @@ spiplistes_log("CRON: $n JOBS, appel meleuse", _SPIPLISTES_LOG_DEBUG);
 
 function genie_spiplistes_cron ($last_time) {
 	include_spip('inc/spiplistes_api_globales');
-spiplistes_log("CRON: genie_spiplistes_cron() 193", _SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("CRON: genie_spiplistes_cron() 193", _SPIPLISTES_LOG_DEBUG);
 	cron_spiplistes_cron ($last_time);
 }
 

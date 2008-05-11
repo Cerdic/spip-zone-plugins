@@ -217,9 +217,16 @@ function exec_spiplistes_courrier_gerer () {
 			}
 
 			if($change_statut == _SPIPLISTES_STATUT_READY) {
-				$titre = $titre ; // pas de propre ici, ca fait un <p> </p>
+				//$titre = propre($titre); // pas de propre ici, ca fait un <p> </p>
 				$texte = spiplistes_courrier_propre($texte);
-				spip_query("UPDATE spip_courriers SET titre="._q($titre).",texte="._q($texte).",statut='$change_statut' WHERE id_courrier=$id_courrier LIMIT 1");
+				spiplistes_courrier_modifier(
+					$id_courrier
+					, array(
+						'titre' => $titre
+						, 'texte' => $texte
+						, 'statut' => $change_statut
+					)
+				);
 				spiplistes_log("ID_COURRIER #$id_courrier MODIFIED TO $change_statut BY ID_AUTEUR #$connect_id_auteur");
 				$statut = $change_statut;
 			}
@@ -253,7 +260,8 @@ function exec_spiplistes_courrier_gerer () {
 				$message_texte = spiplistes_courrier_version_texte($texte);
 			}
 			// construit la boite de selection destinataire
-			$boite_selection_destinataire = (($statut==_SPIPLISTES_STATUT_REDAC) || ($statut==_SPIPLISTES_STATUT_READY))
+			$boite_selection_destinataire = 
+				(($statut==_SPIPLISTES_STATUT_REDAC) || ($statut==_SPIPLISTES_STATUT_READY))
 				? spiplistes_destiner_envoi($id_courrier, $id_liste, true, $statut, $type, 'btn_changer_destination', $email_test)
 				: ""
 				;
@@ -433,7 +441,7 @@ function exec_spiplistes_courrier_gerer () {
 		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:aller_au_panier_'), true)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
-		. spiplistes_boite_autocron(true)
+		. spiplistes_boite_autocron()
 		. spiplistes_boite_info_spiplistes(true)
 		. debut_droite($rubrique, true)
 		;

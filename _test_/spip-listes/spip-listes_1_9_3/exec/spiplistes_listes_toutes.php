@@ -96,7 +96,7 @@ function exec_spiplistes_listes_toutes(){
 		. spiplistes_naviguer_paniers_listes(_T('spiplistes:aller_aux_listes_'), true)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
-		. spiplistes_boite_autocron(true) 
+		. spiplistes_boite_autocron() 
 		. spiplistes_boite_info_spiplistes(true)
 		. debut_droite($rubrique, true)
 		;
