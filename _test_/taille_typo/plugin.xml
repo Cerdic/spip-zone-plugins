@@ -1,0 +1,33 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Taille typo
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Bruno Bergot &agrave; partir du switcher de Fil
+	<br />&#169; 2008 - Distribu&#233; sous licence GNU/GPL
+	<br />Site de d&eacute;monstration : [->http://www.ipidv.org/]
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	<multi>
+	Choix de la taille de typo du site et stockage du choix dans un cookie.
+	Pour permettre aux visiteurs de changer la taille de typo du site il faut ins&eacute;rer des liens de ce type dans ses squelettes :
+	<br /><code>[(#SELF|parametre_url{taille_typo,1})]</code>
+	<br />Le param&egrave;tre &agrave; passer dans l'url est la taille de typo souhait&eacute;e en em.
+	</multi>
+	<lien></lien> <!-- URI de documentation -->
+	</description>
+	<prefix> 
+	taille_typo
+	</prefix>	
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>affichage_final</action>
+		<inclure>taille_typo_fonctions.php</inclure>
+	</pipeline>
+</plugin>
