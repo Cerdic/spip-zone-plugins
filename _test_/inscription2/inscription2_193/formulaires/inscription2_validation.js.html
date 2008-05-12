@@ -1,12 +1,15 @@
+[(#LANG|=={en}|?{'',' '})
+	<script type="text/javascript" src="#CHEMIN{lib/jquery-validate/localization/messages_#LANG.js}"></script>
+]
 <script type="text/javascript"><!--
 /* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
 
 	jQuery.validator.addMethod("chainenombre", function(value, element) {
-		return this.optional(element) || /^[A-Za-z0-9\-\'\.ÂâÄäÁÀàËëÈèÊêÉéÏïÎîÌìÍÒòÓÔôÖöÙùÜüÛû‡,˚ ]+$/.test(value);
+		return this.optional(element) || /^[A-Za-z0-9\-\'\.ßÂâÄäÁÀàËëÈèÊêÉéÏïÎîÌìÍÒòÓÔôÖöÙùÜüÛû‡,˚ ]+$/.test(value);
 	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:> <:inscription2:chainenombre:>");
 
 	jQuery.validator.addMethod("chaine", function(value, element) {
-		return this.optional(element) || /^[A-Za-z\-\'\.ÂâÄäÁÀàËëÈèÊêÉéÏïÎîÌìÍÒòÓÔôÖöÙùÜüÛû‡,˚ ]+$/.test(value);
+		return this.optional(element) || /^[A-Za-z\-\'\.ßÂâÄäÁÀàËëÈèÊêÉéÏïÎîÌìÍÒòÓÔôÖöÙùÜüÛû‡,˚ ]+$/.test(value);
 	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:> <:inscription2:chainelettre:>");
 
 	jQuery.validator.addMethod("postal", function(value, element) {
@@ -65,96 +68,95 @@
 				#INCLURE{fond=javascript/echoppe_inscription_messages}
 			]
 			sexe: {
-				required:"<:inscription2:champ_obligatoire:>"},
+				required:"<:inscription2:champ_obligatoire:>"
+			},
 			nom_famille: {
 				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
-				rangeLength:"Min 2 Max 20 <:inscription2:caracteres:>"},
+				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>"
+			},
 			prenom:{
 				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
-				rangeLength:"Min 2 Max 20 <:inscription2:caracteres:>"},
+				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>"
+			},
 			nom: {
 				required:"<:inscription2:champ_obligatoire:>",
-				chainenombre:"<:inscription2:chaine_valide:> <:inscription2:chainenombre:>",
-				rangeLength:"Min 2 Max 20 <:inscription2:caracteres:>"},
+				chainenombre:"<:inscription2:chaine_valide:> <:inscription2:chainenombre:>"
+			},
 			username: {
 				required:"<:inscription2:champ_obligatoire:>",
-				chainenombre:"<:inscription2:chaine_valide:> <:inscription2:chainenombre:>",
-				rangeLength:"Min 4 Max 20 <:inscription2:caracteres:>"},
+				chainenombre:"<:inscription2:chaine_valide:> <:inscription2:chainenombre:>"
+			},
 			adresse: {
-				required:"<:inscription2:champ_obligatoire:>",
-				rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"},
+				required:"<:inscription2:champ_obligatoire:>"
+			},
 			code_postal: {
 				required:"<:inscription2:champ_obligatoire:>",
-				postal:"<:inscription2:cp_valide:>",
-				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
+				postal:"<:inscription2:cp_valide:>"
+			},
 			ville: {
 				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
-				rangeLength:"Min 2 Max 30 <:inscription2:caracteres:>"},
+				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>"
+			},
 			pays: {
-				required:"<:inscription2:champ_obligatoire:>"},
+				required:"<:inscription2:champ_obligatoire:>"
+			},
 			email: {
 				required:"<:inscription2:champ_obligatoire:>",
-				email:"<:inscription2:email_valide:>",
-				rangeLength:"Min 5 Max 30 <:inscription2:caracteres:>"},
+				email:"<:inscription2:email_valide:>"
+			},
 			telephone: {
 				required:"<:inscription2:champ_obligatoire:>",
-				numero:"<:inscription2:numero_valide:>",
-				rangeLength:"Min 6 Max 25 <:inscription2:caracteres:>"},
+				numero:"<:inscription2:numero_valide:>"
+			},
 			fax: {
 				required:"<:inscription2:champ_obligatoire:>",
-				numero:"<:inscription2:numero_valide:>",
-				rangeLength:"Min 6 Max 25 <:inscription2:caracteres:>"},
+				numero:"<:inscription2:numero_valide:>"
+			},
 			mobile: {
 				required:"<:inscription2:champ_obligatoire:>",
-				numero:"<:inscription2:numero_valide:>",
-				rangeLength:"Min 6 Max 25 <:inscription2:caracteres:>"},
+				numero:"<:inscription2:numero_valide:>"
+			},
 			profession: {
 				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
-				rangeLength:"Min 3 Max 30 <:inscription2:caracteres:>"},
+				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>"
+			},
 			societe: {
 				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainenombre:>",
-				rangeLength:"Min 3 Max 30 <:inscription2:caracteres:>"},
+				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainenombre:>"
+			},
 			secteur:{
 				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 3 Max 50 <:inscription2:caracteres:>"},
+				chaine:"<:inscription2:chaine_valide:>"
+			},
 			fonction: {
 				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
-				rangeLength:"Min 3 Max 50 <:inscription2:caracteres:>"},
+				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>"
+			},
 			adresse_pro: {
-				required:"<:inscription2:champ_obligatoire:>",
-				rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"},
+				required:"<:inscription2:champ_obligatoire:>"
+			},
 			code_postal_pro: {
 				required:"<:inscription2:champ_obligatoire:>",
-				postal:"<:inscription2:cp_valide:>",
-				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
+				postal:"<:inscription2:cp_valide:>"
+			},
 			ville_pro: {
 				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
-				rangeLength:"Min 2 Max 30 <:inscription2:caracteres:>"},
+				chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>"
+			},
 			pays_pro: {
-				required:"<:inscription2:champ_obligatoire:>"},
+				required:"<:inscription2:champ_obligatoire:>"
+			},
 			telephone_pro: {
 				required:"<:inscription2:champ_obligatoire:>",
-				numero:"<:inscription2:numero_valide:>",
-				rangeLength:"Min 6 Max 25 <:inscription2:caracteres:>"},
+				numero:"<:inscription2:numero_valide:>"
 			fax_pro: {
 				required:"<:inscription2:champ_obligatoire:>",
-				numero:"<:inscription2:numero_valide:>",
-				rangeLength:"Min 6 Max 25 <:inscription2:caracteres:>"},
+				numero:"<:inscription2:numero_valide:>"
 			mobile_pro: {
 				required:"<:inscription2:champ_obligatoire:>",
-				numero:"<:inscription2:numero_valide:>",
-				rangeLength:"Min 6 Max 25 <:inscription2:caracteres:>"},
+				numero:"<:inscription2:numero_valide:>"
 			divers:{
 				required:"<:inscription2:champ_obligatoire:>",
-				rangeLength:"Min 3 Max 1000 <:inscription2:caracteres:>"}
 		}
 	});
 
