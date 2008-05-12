@@ -171,7 +171,10 @@ function spiplistes_listes_liste_creer ($statut, $lang, $titre, $texte, $pied_pa
 			, 'pied_page' => $pied_page
 			)
 		)
-	) {
+	) { 
+		if(is_bool($id_liste)) { // 192 ??
+			$id_liste = spip_insert_id();
+		}
 		$id_liste = intval($id_liste);
 		$id_auteur = intval($connect_id_auteur);
 		spiplistes_mod_listes_supprimer("id_liste=".sql_quote($id_liste));

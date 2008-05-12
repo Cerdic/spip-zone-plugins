@@ -371,8 +371,9 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Pas_de_liste_pour_import' => "Vous devez cr&eacute;er au moins une liste de destination afin de pouvoir importer 
 	vos abonn&eacute;s.",
 'Periodicite_:' => "P&eacute;riodicit&eacute; : ",
-'Prets_a_envoi' => "Pr&ecirc;ts &agrave; l'envoi",
-'Publies' => "Publi&eacute;s"
+'Prets_a_envoi' => "Pr&ecirc;ts &agrave; l'envoi"
+, 'Publies' => "Publi&eacute;s"
+, 'publies_auto' => "Publi&eacute;s (auto)"
 , 'pas_de_liste' => "Aucune liste de type envoi non programm&eacute;."
 , 'pas_de_format' => "Aucun format de r&eacute;ception d&eacute;fini pour les abonn&eacute;s."
 , 'aucune_liste_publique' => "Aucune liste de diffusion publique disponible."

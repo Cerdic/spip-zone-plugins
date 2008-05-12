@@ -249,7 +249,7 @@ $spiplistes_items = array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-grise.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_publie-24.png'
 		, 'alt' => _T('spiplistes:message_arch')
-		, 'nav_t' => _T('spiplistes:Publies')
+		, 'nav_t' => _T('spiplistes:publies_auto')
 		, 'tab_t' => _T('spiplistes:Courriers_auto_publies')
 		, 'desc' => null
 		)

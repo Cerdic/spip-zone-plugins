@@ -45,7 +45,7 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 
 						// ajoute l'invite' dans la table des auteurs
 						$pass = creer_pass_aleatoire(8, $email);
-						sql_insertq(
+						$id_auteur = sql_insertq(
 							"spip_auteurs"
 							, array(
 								  'nom' => $nom
@@ -58,17 +58,13 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 							)
 						);
 						
-						$id_auteur = spip_insert_id();
-						
+						if(is_bool($id_auteur)) { // 192 ??
+							$id_auteur = spip_insert_id();
+						}
+
 						// le format de reception
-						sql_insertq(
-							"spip_auteurs_elargis"
-							, array(
-								'id_auteur' => $id_auteur
-								, '`spip_listes_format`' => $format_abo
-							)
-						);
-						
+						spiplistes_format_abo_modifier($id_auteur, $format_abo);
+
 						// abonne le comptes aux listes
 						if(is_array($abos_liste) && count($abos_liste)) {
 							$sql_values = "";

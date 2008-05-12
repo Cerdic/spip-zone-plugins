@@ -278,10 +278,12 @@ spiplistes_log("MEL: etiquette en cours pour ID_COURRIER #$id_courrier"
 		
 				$limit = intval($GLOBALS['meta']['spiplistes_lots']); // nombre de messages envoyes par boucles.	
 				
-				spiplistes_log("MEL: titre: $titre, total_abos: $total_abonnes, limit: $limit", _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("MEL: titre: $titre, total_abos: $total_abonnes, limit: $limit"
+	, _SPIPLISTES_LOG_DEBUG);
 
 				if($is_a_test) {
-					$sql_adresses_dest = spip_query("SELECT id_auteur,nom,email FROM spip_auteurs WHERE email="._q($email_test)." LIMIT 1");
+					$sql_adresses_dest = sql_select('id_auteur,nom,email', "spip_auteurs"
+						, "email=".sql_quote($email_test)." LIMIT 1");
 				}
 				else {
 					// Pour mémo: les étiquettes sont crées par la trieuse
