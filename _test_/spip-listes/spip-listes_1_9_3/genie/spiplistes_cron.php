@@ -65,14 +65,14 @@ function cron_spiplistes_cron ($last_time) {
 	foreach(array(
 		'opt_suspendre_trieuse'
 		) as $key) {
-		$$key = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
+		$$key = spiplistes_pref_lire($key);
 	}
 
 	$sql_select = "id_liste,titre,titre_message,date,maj,message_auto,periode,lang,patron,statut";
 
 	// demande les listes auto a' envoyer (date <= maintenant)
 	$sql_where = "message_auto=".sql_quote('oui')."
-			AND date IS NOT NULL  
+			AND date > 0  
 			AND date <= NOW()
 			AND (".spiplistes_listes_sql_where_or(_SPIPLISTES_LISTES_STATUTS_OK).")
 			"
@@ -232,8 +232,7 @@ spiplistes_log("CRON: insert_id : ".$r, _SPIPLISTES_LOG_DEBUG);
 	// ou si queue en attente, appel de la meleuse
 	if(
 		$n = 
-			spiplistes_courriers_statut_compter(_SPIPLISTES_STATUT_READY)
-			+ spiplistes_courriers_en_queue_compter("etat=".sql_quote(""))
+			spiplistes_courriers_en_queue_compter("etat=".sql_quote(""))
 	){
 spiplistes_log("CRON: $n JOBS, appel meleuse", _SPIPLISTES_LOG_DEBUG);
 		include_spip('inc/spiplistes_meleuse');

@@ -83,7 +83,7 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<", _SPIPLISTES_LOG_D
 	
 				if(is_array($list) && count($list)) {	
 					// on abonne l'auteur aux listes choisies
-					if(spiplistes_listes_abonner($id_auteur, $list) !== false) {
+					if(spiplistes_abonnements_ajouter($id_auteur, $list) !== false) {
 						$message_formulaire = _T('spiplistes:abonnement_modifie');
 					}
 				} 

@@ -157,13 +157,17 @@ function exec_spiplistes_courriers_casier () {
 	if($btn_confirmer_envoi 
 		&& $flag_modifiable
 	) {
-		spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_DEPART);
 		if($id_liste > 0) {
 			spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
-			// passe le courrier directement a la meleuse
 			spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste);
-			spiplistes_log("SEND ID_COURRIER #$id_courrier ON ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur");
+spiplistes_log("SEND ID_COURRIER #$id_courrier ON ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur"
+		, _SPIPLISTES_LOG_DEBUG);
+		} else {
+spiplistes_log("SEND ID_COURRIER #$id_courrier TEST BY ID_AUTEUR #$connect_id_auteur"
+		, _SPIPLISTES_LOG_DEBUG);
 		}
+		// passe le courrier directement a la meleuse
+		spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_ENCOURS);
 	}
 
 	// supprimer un courrier des cases

@@ -549,7 +549,7 @@ function spiplistes_boite_autocron () {
 		, 'opt_suspendre_meleuse'
 		, 'opt_simuler_envoi'
 		) as $key) {
-		$$key = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
+		$$key = spiplistes_pref_lire($key);
 	}
 
 	$result = "";
@@ -738,6 +738,25 @@ function spiplistes_titre_boite_info ($titre = "") {
 		;
 	return($result);
 }
+
+// termine page si la donnée n'existe pas dans la base
+function spiplistes_terminer_page_donnee_manquante ($return = true) {
+	spiplistes_terminer_page_message (_T('spiplistes:Pas_de_donnees'), $return);
+}
+
+
+// termine la page (en affichant message ou retour)
+function spiplistes_terminer_page_message ($message) {
+	$result = "<p>$message</p>";
+	if($return) return($result);
+	else echo($result);
+}
+
+// termine la page (à employer qd droits insuffisants)
+function spiplistes_terminer_page_non_autorisee ($return = true) {
+	spiplistes_terminer_page_message (_T('spiplistes:acces_a_la_page'), $return);
+}
+
 
 //
 ?>

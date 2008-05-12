@@ -79,17 +79,20 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			, "spip_listes"
 			, $sql_where
 			, ''
-			, "titre ASC"
+			, array("titre ASC")
 			);
-		
+
+		$nb_listes_dispo = sql_count($sql_result);
+//spiplistes_log(gettype($nb_listes_dispo).":".$nb_listes_dispo);		
+
 		// si liste disponible, affiche formulaire
-		if($sql_result && sql_count($sql_result)) {
+		if($sql_result && $nb_listes_dispo) {
 			
 			// récupère la liste des listes
 			$listes = array();
 			while($row = sql_fetch($sql_result)) {
 				$listes[] = array(
-					'id_liste' => $row['id_liste']
+					'id_liste' => intval($row['id_liste'])
 					, 'titre' => $row['titre']
 					, 'texte' => $row['texte']
 					, 'date' => $row['date']
@@ -112,18 +115,18 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 						}
 					}
 					if(count($abo_ajoute)) {
-						spiplistes_listes_abonner($id_auteur, $abo_ajoute);
+						spiplistes_abonnements_ajouter($id_auteur, $abo_ajoute);
 					}
 					// Désabonnements ?
 					foreach($auteur_abos_current_list as $value) {
 						if(!in_array($value, $abos_set)) {
-							spiplistes_listes_desabonner($id_auteur, $value);
+							spiplistes_listes_auteur_desabonner($id_auteur, $value);
 						}
 					}
 				}
 				// désabonne de tout
 				else {
-					if(spiplistes_listes_desabonner($id_auteur, "toutes") === false) {
+					if(spiplistes_listes_auteur_desabonner($id_auteur, "toutes") === false) {
 						$result .= __boite_alerte(_T('spiplistes:Erreur_sur_la_base'), true);
 					}
 				}
@@ -131,11 +134,11 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			
 			// si retour de formulaire, modifie le format de réception
 			if($abo_format = _request('abo_format')) {
-				spiplistes_format_abo_modifier ($id_auteur, $abo_format);
+				spiplistes_format_abo_modifier($id_auteur, $abo_format);
 			}
 			
 			// récupère le format d'abonnement de id_auteur
-			$abo_format = spiplistes_format_abo_demande($id_auteur);
+			$abo_format = spiplistes_format_abo_demande($id_auteur);		
 		
 			// récupère la liste où auteur est abonné
 			$auteur_abos_current_list = spiplistes_listes_abonnements_auteur($id_auteur);
@@ -148,7 +151,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				. "<!-- formulaire abonnement spiplistes -->\n" 
 				. "<a name='abonnement'></a>\n"
 				. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png"
-					, true, _T('spiplistes:abonnements_aux_courriers'))
+					, true, '', _T('spiplistes:listes_de_diffusion_'))
 				. spiplistes_bouton_block_depliable(
 					_T('spiplistes:abonnements_aux_courriers')
 					, $bloc_visible
@@ -156,10 +159,12 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				. "<div class='verdana2'>"
 				;
 			if($n = count($auteur_abos_current_list)) {
-				$result .= spiplistes_singulier_pluriel_str_get(
-					$n
-					, _T('spiplistes:info_liste_1')
-					, _T('spiplistes:info_liste_2'))
+				$result .= $n."/"
+					. spiplistes_singulier_pluriel_str_get(
+						  $nb_listes_dispo
+						, _T('spiplistes:info_liste_1')
+						, _T('spiplistes:info_liste_2')
+						)
 					. ". "
 					. _T('spiplistes:format_de_reception')." : "
 						.	(
@@ -240,8 +245,8 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 					. debut_cadre_formulaire("margin-top:1ex", true)
 					. "<ul class='liste-format-desabo'>\n"
 					. "<li>\n"
-					. " <input type='radio' name='abo_format' value='non' id='format_rcpt_non' title='"._T('spiplistes:Suspendre_abonnements')."' />"
-					. " <label for='format_rcpt_non'>"._T('spiplistes:Suspendre_abonnements')."</label></li>\n"
+					. spiplistes_form_input_radio('abo_format', 'non', _T('spiplistes:Suspendre_abonnements')
+						, false, true, false)
 					. "</ul>\n"
 					. fin_cadre_formulaire(true)
 					;

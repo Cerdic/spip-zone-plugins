@@ -125,7 +125,7 @@ function exec_spiplistes_maintenance () {
 							// de la table des abonne's
 							&& sql_delete("spip_auteurs_listes", $sql_where)
 							// de la table des mode'rateurs (pas de LIMIT, si plusieurs mode'rateurs)
-							&& spiplistes_mod_listes_delete($sql_where)
+							&& spiplistes_mod_listes_supprimer($sql_where)
 						)
 						?	$msg_ok
 						:	$msg_bad

@@ -74,9 +74,9 @@ function exec_spiplistes_courrier_previsu () {
 	$charset = $meta['charset'];
 	
 	$texte_lien_courrier =
-		(__plugin_lire_key_in_serialized_meta('opt_lien_en_tete_courrier', _SPIPLISTES_META_PREFERENCES) == 'oui')
+		(spiplistes_pref_lire('opt_lien_en_tete_courrier') == 'oui')
 		? spiplistes_lien_courrier_html_get(
-			__plugin_lire_key_in_serialized_meta('lien_patron', _SPIPLISTES_META_PREFERENCES)
+			spiplistes_pref_lire('lien_patron')
 			, generer_url_public('courrier', "id_courrier=$id_courrier")
 			)
 		: ""
@@ -85,8 +85,8 @@ function exec_spiplistes_courrier_previsu () {
 	$pied_page = ($id_liste) ? spiplistes_pied_de_page_liste($id_liste, $lang) : "";
 	
 	$texte_editeur =
-		(__plugin_lire_key_in_serialized_meta('opt_ajout_tampon_editeur', _SPIPLISTES_META_PREFERENCES) == 'oui')
-		? spiplistes_tampon_html_get(__plugin_lire_key_in_serialized_meta('tampon_patron', _SPIPLISTES_META_PREFERENCES))
+		(spiplistes_pref_lire('opt_ajout_tampon_editeur') == 'oui')
+		? spiplistes_tampon_html_get(spiplistes_pref_lire('tampon_patron'))
 		: ""
 		;
 	

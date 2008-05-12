@@ -104,15 +104,8 @@ function exec_spiplistes_liste_gerer () {
 			
 			$pied_page = spiplistes_pied_de_page_liste(0, $GLOBALS['spip_lang']);
 			
-			spip_query("INSERT INTO spip_listes (statut, lang, titre, texte, pied_page) 
-				VALUES ('"._SPIPLISTES_PRIVATE_LIST."','".$GLOBALS['spip_lang']."',"._q($titre).","._q($texte).","._q($pied_page).")");
-			$id_liste = spip_insert_id();
-			//Auteur de la liste (moderateur)
-			spiplistes_mod_listes_delete("id_liste".sql_quote($id_liste));
-			spip_query("INSERT INTO spip_auteurs_mod_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
-			//abonne le moderateur a  sa liste
-			spip_query("DELETE FROM spip_auteurs_listes WHERE id_liste = "._q($id_liste));
-			spip_query("INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
+			$id_liste = spiplistes_listes_liste_creer(_SPIPLISTES_PRIVATE_LIST, $GLOBALS['spip_lang']
+				, $titre, $texte, $pied_page);
 		} 
 		spiplistes_log("LISTE ID #$id_liste added by ID_AUTEUR #$connect_id_auteur");
 	}
@@ -175,9 +168,8 @@ function exec_spiplistes_liste_gerer () {
 					// si la liste passe en privee, retire les invites
 					if($statut == _SPIPLISTES_PRIVATE_LIST) {
 						$auteur_statut = '6forum';
-						spip_query("DELETE FROM spip_auteurs_listes
-							WHERE id_auteur IN (SELECT id_auteur FROM spip_auteurs WHERE statut='$auteur_statut')");
-						spiplistes_log(" AUTEURS ($auteur_statut) REMOVED FROM LISTE $id_liste ($statut) BY ID_AUTEUR #$connect_id_auteur");
+						spiplistes_abonnements_auteurs_supprimer($auteur_statut);
+						spiplistes_log("AUTEURS ($auteur_statut) REMOVED FROM LISTE #$id_liste ($statut) BY ID_AUTEUR #$connect_id_auteur");
 					}
 				}
 				// Modifier la langue ?

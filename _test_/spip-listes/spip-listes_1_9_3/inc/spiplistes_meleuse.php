@@ -73,7 +73,7 @@ function spiplistes_meleuse () {
 		, 'opt_ajout_pied_courrier', 'pied_patron'
 		, 'opt_ajout_tampon_editeur', 'tampon_patron'
 		) as $key) {
-		$$key = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
+		$$key = spiplistes_pref_lire($key);
 	}
 
 	// Trouver un courrier a envoyer 
@@ -85,7 +85,7 @@ function spiplistes_meleuse () {
 	// prend le premier courrier en attente si present
 	$sql_courrier_a_traiter = spiplistes_courriers_casier_premier(
 		  $sql_courrier_select
-		, "statut=".sql_quote(_SPIPLISTES_STATUT_DEPART)
+		, "statut=".sql_quote(_SPIPLISTES_STATUT_ENCOURS)
 	);
 	
 	$nb_courriers = sql_count($sql_courrier_a_traiter);
@@ -107,7 +107,8 @@ function spiplistes_meleuse () {
 		|| $nb_etiquettes
 	) {
 
-		spiplistes_log("MEL: ".($nb_courriers + $nb_etiquettes)." JOBS. Distribution... (c: $nb_courriers, e: $nb_etiquettes)");
+spiplistes_log("MEL: ".($nb_courriers + $nb_etiquettes)." JOBS. Distribution... (c: $nb_courriers, e: $nb_etiquettes)"
+	, _SPIPLISTES_LOG_DEBUG);
 		
 		// signale en log si mode simulation
 		if($opt_simuler_envoi == 'oui') {
@@ -126,10 +127,7 @@ function spiplistes_meleuse () {
 			$tampon_html = $tampon_texte = "";
 		}
 		
-		if($nb_courriers) {
-			// courriers (probablement non auto) au départ ?
-			// c'est le cas par exemple des tests
-		} else if($nb_etiquettes) {
+		if($nb_etiquettes) {
 			// il reste des etiquettes ? envoi massif non terminé !
 			// prendre la premiere etiquette sur le tas et traiter son courrier
 			if($id_courrier = sql_getfetsel(
@@ -143,9 +141,13 @@ function spiplistes_meleuse () {
 					  $sql_courrier_select
 					, "id_courrier=".sql_quote($id_courrier)
 				);
-				spiplistes_log("MEL: etiquette en cours pour ID_COURRIER #$id_courrier", _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("MEL: etiquette en cours pour ID_COURRIER #$id_courrier"
+	, _SPIPLISTES_LOG_DEBUG);
 			}
-		}
+		} else if($nb_courriers) {
+			// courriers (probablement non auto) au départ ?
+			// c'est le cas par exemple des tests
+		} 
 		
 		// boucle (sur LIMIT 1) pour pouvoir sortir par break si erreur
 		while($row = sql_fetch($sql_courrier_a_traiter)) {
@@ -222,7 +224,7 @@ function spiplistes_meleuse () {
 			$page_texte = ($message_texte !='') ? $message_texte : spiplistes_courrier_version_texte($page_html);
 			$pied_page_texte = spiplistes_courrier_version_texte($pied_page_html);
 			
-			////////////////////////////////////		  
+			////////////////////////////////////
 			// Ajoute lien tete de courrier
 			if($opt_lien_en_tete_courrier && ($opt_lien_en_tete_courrier == 'oui') && !empty($lien_patron)) {
 				$url_courrier = generer_url_public('courrier', "id_courrier=$id_courrier");
@@ -232,7 +234,7 @@ function spiplistes_meleuse () {
 				$page_texte = $lien_courrier_texte . $page_texte;
 			}
 
-			////////////////////////////////////		  
+			////////////////////////////////////
 			// La petite ligne du renvoi du cookie pour modifier son abonnement
 			$pied_rappel_html = _T('spiplistes:Cliquez_ici_pour_modifier_votre_abonnement');
 			$pied_rappel_texte = _T('spiplistes:abonnement_mail_text');
@@ -293,7 +295,7 @@ function spiplistes_meleuse () {
 					
 					// un coup de tampon sur les etiquettes 
 					// des courriers qui vont partir
-					spiplistes_auteurs_courriers_modifier(
+					spiplistes_courriers_en_queue_modifier(
 						array(
 							  'etat' => sql_quote($id_process))
 							, "etat=".sql_quote('')." AND id_courrier=".sql_quote($id_courrier)." LIMIT $limit"
@@ -308,7 +310,7 @@ function spiplistes_meleuse () {
 							, "a.id_auteur=b.id_auteur"
 							, "b.id_courrier=".sql_quote($id_courrier)
 							)
-						, array('a.email')
+						, 'a.email'
 					);
 				}
 					
@@ -389,7 +391,7 @@ function spiplistes_meleuse () {
 					
 					// supprime la liasse de la queue d'envois
 spiplistes_log("MEL: supprimer queue $id_process", _SPIPLISTES_LOG_DEBUG);
-					spiplistes_auteurs_courriers_supprimer("etat=".sql_quote($id_process));
+					spiplistes_courriers_en_queue_supprimer("etat=".sql_quote($id_process));
 					
 					// si c'est un test on repasse le courrier en redac
 					if($is_a_test) {

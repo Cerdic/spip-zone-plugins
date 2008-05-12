@@ -45,7 +45,7 @@ function action_spiplistes_changer_statut_abonne_dist () {
 				&& (($id_liste = intval($arg[2])) > 0)
 				&& autoriser('abonnerauteur', 'liste', $id_liste, NULL, array('id_auteur'=>$id_auteur))
 				) {
-				spiplistes_listes_abonner($id_auteur, $id_liste);
+				spiplistes_abonnements_ajouter($id_auteur, $id_liste);
 				//attribuer un format de reception si besoin (ancien auteur)
 				if(
 					(!$abo = spiplistes_format_abo_demande($id_auteur)) 
@@ -60,7 +60,7 @@ function action_spiplistes_changer_statut_abonne_dist () {
 			// désabonne un auteur
 			if ($id_liste = intval($arg[2])) {
 				if (autoriser('desabonnerauteur', 'liste', $id_liste, NULL, array('id_auteur'=>$id_auteur))) {
-					if(spiplistes_listes_desabonner ($id_auteur, $id_liste)) {
+					if(spiplistes_listes_auteur_desabonner ($id_auteur, $id_liste)) {
 						spiplistes_log("UNSUBSCRIBE ID_AUTEUR #$id_auteur from ID_LISTE #$id_liste by ID_AUTEUR #$connect_id_auteur");	
 					}
 				}

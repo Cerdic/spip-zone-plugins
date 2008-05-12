@@ -84,9 +84,8 @@ function exec_spiplistes_courrier_gerer () {
 			|| ($connect_id_auteur == spiplistes_courrier_id_auteur_get($id_courrier)) || !$id_courrier));
 
 	if($flag_editable) {
-		//////////////////////////////////////////////////////
 		// Modification de courrier
-		////
+
 		// effectue les modifications demandees si retour local ou retour editeur
 		if($id_courrier > 0) {
 			
@@ -101,18 +100,16 @@ function exec_spiplistes_courrier_gerer () {
 							$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_Adresse_email_inconnue'), true);
 						}
 						else {
-							// Ok. Enregistre l'adresse et passe le courrier ready pour la meleuse
-							sql_updateq(
-								"spip_courriers"
+							// Ok. Enregistre l'adresse test
+							spiplistes_courrier_modifier(
+								$id_courrier
 								, array(
-									'email_test' => $email_test
+									  'email_test' => $email_test
 									, 'total_abonnes' => 1
 									, 'id_liste' => 0
+									, 'statut' => ($change_statut = _SPIPLISTES_STATUT_READY)
 									)
-								, "id_courrier=".sql_quote($id_courrier)." LIMIT 1"
 							);
-							//passer le mail en pret a l envoi
-							$change_statut = _SPIPLISTES_STATUT_READY;
 							$str_destinataire = _T('spiplistes:email_adresse') . " : $email_test";
 						}
 					}
@@ -120,19 +117,30 @@ function exec_spiplistes_courrier_gerer () {
 						$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_Adresse_email_invalide'), true);
 					}
 				} // end if($btn_envoi_test)
+				
 				else if($radio_destination == 'id_liste') {
 				//////////////////////////////////////////////////////
 				// demande d'envoi a  une liste (formulaire local)
 					if($id_liste > 0) {
-						if(($nb_abos = spiplistes_listes_nb_abonnes_compter($id_liste)) > 0) {
-							if($row = spip_fetch_array(spip_query ("SELECT titre FROM spip_listes WHERE id_liste = $id_liste LIMIT 1"))) {
-								// va chercher le nom de la liste + nb abos
-								$str_destinataire = _T('spiplistes:sur_liste') . " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>".$row['titre']."</a>"
-									. " " . spiplistes_nb_abonnes_liste_str_get($id_liste, $nb_abos);
-								// Ok. Met a  jour le panier
-								spip_query("UPDATE spip_courriers SET email_test='',total_abonnes=$nb_abos,id_liste=$id_liste WHERE id_courrier=$id_courrier LIMIT 1");
-								$change_statut = _SPIPLISTES_STATUT_READY;
-							}
+						if(
+							($nb_abos = spiplistes_listes_nb_abonnes_compter($id_liste)) > 0
+						) {
+							$str_destinataire = ""
+								. _T('spiplistes:sur_liste') 
+								. " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>"
+								. spiplistes_listes_liste_fetsel($id_liste, 'titre')
+								. "</a>"
+								. " " . spiplistes_nb_abonnes_liste_str_get($id_liste, $nb_abos)
+								;
+							spiplistes_courrier_modifier(
+								$id_courrier
+								, array(
+									  'email_test' => ""
+									, 'total_abonnes' => $nb_abos
+									, 'id_liste' => $id_liste
+									, 'statut' => ($change_statut = _SPIPLISTES_STATUT_READY)
+								)
+							);
 						}
 						else {
 							$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_liste_vide'), true);
@@ -141,23 +149,22 @@ function exec_spiplistes_courrier_gerer () {
 				} // end if($radio_destination
 			} // if($btn_changer_destination
 	
-			else if ($btn_courrier_valider) {
-			// retour editeur
+			else if($btn_courrier_valider) {
+				// retour editeur local
 				if(!empty($titre)) {
-					sql_updateq(
-						"spip_courriers"
+					spiplistes_courrier_modifier(
+						$id_courrier
 						, array(
 							  'titre' => $titre
 							, 'texte' => $texte
 						)
-						, "id_courrier=".sql_quote($id_courrier)." LIMIT 1"
 					);
 				}
 				else {
 					$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_courrier_titre_vide'), true);
 				}
 			}
-			
+			/*
 			else if($btn_confirmer_envoi && $flag_editable) {
 				spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_ENCOURS);
 				spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
@@ -165,7 +172,7 @@ function exec_spiplistes_courrier_gerer () {
 				spiplistes_courrier_remplir_queue_envois($id_courrier,$id_liste);
 				spiplistes_log("SEND ID_COURRIER #$id_courrier ON ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur");
 			}
-	
+			*/
 			// FIN DES MODIFICATIONS
 	}
 	
@@ -218,29 +225,23 @@ function exec_spiplistes_courrier_gerer () {
 
 			if($change_statut == _SPIPLISTES_STATUT_READY) {
 				//$titre = propre($titre); // pas de propre ici, ca fait un <p> </p>
+				// Le statut n'est modifié ici, mais 
+				// par courrier_casier en retour de ce formulaire
 				$texte = spiplistes_courrier_propre($texte);
 				spiplistes_courrier_modifier(
 					$id_courrier
 					, array(
 						'titre' => $titre
 						, 'texte' => $texte
-						, 'statut' => $change_statut
 					)
 				);
-				spiplistes_log("ID_COURRIER #$id_courrier MODIFIED TO $change_statut BY ID_AUTEUR #$connect_id_auteur");
+				spiplistes_log("ID_COURRIER #$id_courrier titre,texte MODIFIED BY ID_AUTEUR #$connect_id_auteur");
 				$statut = $change_statut;
 			}
 			else if($change_statut == _SPIPLISTES_STATUT_STOPE){
 				spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 				spiplistes_log("ID_COURRIER #$id_courrier CANCELLED BY ID_AUTEUR #$connect_id_auteur");
 			}
-			/* futur
-			else if($change_statut == _SPIPLISTES_STATUT_BREAK) {
-				// si envoi annule par spiplistes_boite_autocron, stope les envois en cours
-				spip_query("SELECT id_courrier,statut FROM spip_courriers WHERE statut='".."'")
-				spiplistes_log("BREAK BY ID_AUTEUR #$connect_id_auteur");
-			}
-			*/
 			
 			// prepare le texte texte seul
 			if(!in_array($statut, array(
@@ -268,7 +269,6 @@ function exec_spiplistes_courrier_gerer () {
 		}
 	}
 
-	
 	//////////////////////////////////////////////////////
 	// preparation des boutons si droits
 	$gros_bouton_modifier = 
@@ -331,6 +331,7 @@ function exec_spiplistes_courrier_gerer () {
 			? ""
 				. debut_cadre_couleur('', true)
 				// formulaire de confirmation envoi
+				// renvoie sur la page des casiers
 				. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE,"id_courrier=$id_courrier")."' method='post'>"
 				. "<p style='text-align:center;font-weight:bold;' class='verdana2'>"
 				. _T('spiplistes:confirme_envoi')

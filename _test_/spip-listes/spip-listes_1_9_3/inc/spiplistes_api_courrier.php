@@ -225,7 +225,7 @@ function spiplistes_courrier_tampon_texte ($tampon_patron, $tampon_html) {
 	$contexte_patron = array();
 	$result = false;
 	foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
-		$contexte_patron[$key] = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
+		$contexte_patron[$key] = spiplistes_pref_lire($key);
 	}
 	$f = _SPIPLISTES_PATRONS_TAMPON_DIR.$tampon_patron;
 	if (find_in_path($f."_texte.html")){
@@ -245,7 +245,8 @@ function spiplistes_courrier_tampon_texte ($tampon_patron, $tampon_html) {
 function spiplistes_courrier_remplir_queue_envois ($id_courrier, $id_liste) {
 	$id_courrier = intval($id_courrier);
 	$id_liste = intval($id_liste);
-spiplistes_log("API: remplir courrier $id_courrier, liste : $id_liste", _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("API: remplir courrier #$id_courrier, liste : #$id_liste"
+	, _SPIPLISTES_LOG_DEBUG);
 	if(($id_courrier > 0) && ($id_liste > 0)) {
 	
 		// prendre la liste des abonnés à cette liste
@@ -270,23 +271,21 @@ spiplistes_log("API: remplir courrier $id_courrier, liste : $id_liste", _SPIPLIS
 			,	$sql_valeurs
 		);
 		
-		// Compter le nombre de destinaires
-		$row = sql_fetch(sql_select(
-			"COUNT(id_auteur) AS n"
-			, "spip_auteurs_courriers"
-			, "id_courrier=".sql_quote($id_courrier)." AND statut=".sql_quote('a_envoyer')
+		$nb = spiplistes_courriers_en_queue_compter(
+			array(
+				"id_courrier=".sql_quote($id_courrier)
+				, "statut=".sql_quote('a_envoyer')
 			)
 		);
 		
-		if($row && $row['n']) {
-			if(!sql_updateq('spip_courriers'
-				, array('total_abonnes' => sql_quote($row['n']))
-				, "id_courrier="._q($id_courrier)
-				)) {
-spiplistes_log("ERR: spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste) / sql_updateq"
+		if($nb) {
+			spiplistes_courrier_modifier(
+				$id_courrier
+				, array('total_abonnes' => sql_quote($nb))
+				);
+		} else {
+spiplistes_log("ERR: pile etiquettes vide pour courrier #$id_courrier"
 		, _SPIPLISTES_LOG_DEBUG);
-				return(false);
-			}
 		}
 		return(true);
 	}
@@ -358,5 +357,19 @@ function spiplistes_courrier_supprimer_queue_envois ($sql_where_key, $sql_where_
 function spiplistes_courrier_supprimer ($sql_where_key, $sql_where_value) {
 	return(sql_delete("spip_courriers", $sql_where_key."=".sql_quote($sql_where_value)));
 }
+
+// renvoie id_auteur du courier (CP-20071018)
+function spiplistes_courrier_id_auteur_get ($id_courrier) {
+	if(($id_courrier = intval($id_courrier)) > 0) {
+		if($sql_result = spip_query("SELECT id_auteur FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 1")) {
+			if($row = spip_fetch_array($sql_result)) {
+				return($row['id_auteur']);
+			}
+		}
+	}
+	return(false);
+}
+
+
 
 ?>

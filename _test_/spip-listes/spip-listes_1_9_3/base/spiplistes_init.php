@@ -109,7 +109,7 @@ function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 
 	$spiplistes_current_version =  __plugin_current_version_get(_SPIPLISTES_PREFIX);
 	$spiplistes_real_version = __plugin_real_version_get(_SPIPLISTES_PREFIX);
-	$opt_simuler_envoi = __plugin_lire_key_in_serialized_meta('opt_simuler_envoi', _SPIPLISTES_META_PREFERENCES);
+	$opt_simuler_envoi = spiplistes_pref_lire('opt_simuler_envoi');
 	if($spiplistes_current_version || !$opt_simuler_envoi) {
 	// si mise à jour ou première install, passe en simulation d'envoi
 		$opt_simuler_envoi = 

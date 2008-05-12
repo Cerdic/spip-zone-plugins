@@ -31,7 +31,7 @@
 
 function spiplistes_log($texte, $level = LOG_WARNING) {
 	if(__server_in_private_ip_adresses()
-		&& __plugin_lire_key_in_serialized_meta('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)
+		&& spiplistes_pref_lire('opt_console_syslog')
 	) {
 		__syslog_trace($texte, $level);
 	}
@@ -51,6 +51,11 @@ function spiplistes_spip_est_inferieur_193 () {
 		$is_inf = version_compare($GLOBALS['spip_version_code'],'1.9300','<');
 	}
 	return($is_inf);
+}
+
+//CP-20080512
+function spiplistes_pref_lire ($key) {
+	return(__plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES));
 }
 
 ?>

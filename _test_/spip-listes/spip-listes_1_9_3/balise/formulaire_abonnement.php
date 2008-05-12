@@ -342,7 +342,7 @@ spiplistes_log("message:".$message, _SPIPLISTES_LOG_DEBUG);
 					)
 			) {
 spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
-				spiplistes_listes_abonner(intval($row['id_auteur']), $listes_demande);
+				spiplistes_abonnements_ajouter(intval($row['id_auteur']), $listes_demande);
 			}
 		
 			// creation .htpasswd & LDAP si besoin systeme

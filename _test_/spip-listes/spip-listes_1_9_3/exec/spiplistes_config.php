@@ -151,7 +151,7 @@ function exec_spiplistes_config () {
 	}
 	
 	if(!__server_in_private_ip_adresses() 
-		&& __plugin_lire_key_in_serialized_meta ('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)
+		&& spiplistes_pref_lire('opt_console_syslog')
 		// si pas sur réseau privé et option syslog validé,
 		// retire l'option syslog (cas de copie de base du LAN sur celle du WAN)
 		) {
@@ -223,12 +223,12 @@ function exec_spiplistes_config () {
 
 	//////////////////////////////////////////////////////
 	// Boite parametrage complément du courrier
-	$opt_lien_en_tete_courrier = (__plugin_lire_key_in_serialized_meta('opt_lien_en_tete_courrier', _SPIPLISTES_META_PREFERENCES) == 'oui');
-	$lien_patron = __plugin_lire_key_in_serialized_meta('lien_patron', _SPIPLISTES_META_PREFERENCES);
-	$opt_ajout_tampon_editeur = (__plugin_lire_key_in_serialized_meta('opt_ajout_tampon_editeur', _SPIPLISTES_META_PREFERENCES) == 'oui');
-	$tampon_patron = __plugin_lire_key_in_serialized_meta('tampon_patron', _SPIPLISTES_META_PREFERENCES);
+	$opt_lien_en_tete_courrier = (spiplistes_pref_lire('opt_lien_en_tete_courrier') == 'oui');
+	$lien_patron = spiplistes_pref_lire('lien_patron');
+	$opt_ajout_tampon_editeur = (spiplistes_pref_lire('opt_ajout_tampon_editeur') == 'oui');
+	$tampon_patron = spiplistes_pref_lire('tampon_patron');
 	foreach($_tampon_cles as $key) {
-		$$key = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
+		$$key = spiplistes_pref_lire($key);
 	}
 	$page_result .= ""
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_complement-24.png", true, "", _T('spiplistes:Complement_des_courriers'))
@@ -350,19 +350,19 @@ function exec_spiplistes_config () {
 	$page_result .= ""
 		. debut_cadre_relief("", true, "", _T('spiplistes:Mode_suspendre_trieuse'))
    	. "<input type='checkbox' name='opt_suspendre_trieuse' value='oui' id='opt_suspendre_trieuse' "
-			. ((__plugin_lire_key_in_serialized_meta('opt_suspendre_trieuse', _SPIPLISTES_META_PREFERENCES) == 'oui') ? "checked='checked'" : "") . " />\n"
+			. ((spiplistes_pref_lire('opt_suspendre_trieuse') == 'oui') ? "checked='checked'" : "") . " />\n"
    	. "<label class='verdana2' for='opt_suspendre_trieuse'>"._T('spiplistes:Suspendre_le_tri_des_listes')."</label>\n"
 		. fin_cadre_relief(true)
 		//
 		. debut_cadre_relief("", true, "", _T('spiplistes:Mode_suspendre_meleuse'))
    	. "<input type='checkbox' name='opt_suspendre_meleuse' value='oui' id='opt_suspendre_meleuse' "
-			. ((__plugin_lire_key_in_serialized_meta('opt_suspendre_meleuse', _SPIPLISTES_META_PREFERENCES) == 'oui') ? "checked='checked'" : "") . " />\n"
+			. ((spiplistes_pref_lire('opt_suspendre_meleuse') == 'oui') ? "checked='checked'" : "") . " />\n"
    	. "<label class='verdana2' for='opt_suspendre_meleuse'>"._T('spiplistes:Suspendre_lenvoi_des_courriers')."</label>\n"
 		. fin_cadre_relief(true)
 		//
 		. debut_cadre_relief("", true, "", _T('spiplistes:mode_simulation'))
    	. "<input type='checkbox' name='opt_simuler_envoi' value='oui' id='opt_simuler_envoi' "
-			. ((__plugin_lire_key_in_serialized_meta('opt_simuler_envoi', _SPIPLISTES_META_PREFERENCES) == "oui") ? "checked='checked'" : "") . " />\n"
+			. ((spiplistes_pref_lire('opt_simuler_envoi') == "oui") ? "checked='checked'" : "") . " />\n"
    	. "<label class='verdana2' for='opt_simuler_envoi'>"._T('spiplistes:simuler_les_envois')."</label>\n"
 		. fin_cadre_relief(true)
 		//
@@ -392,7 +392,7 @@ function exec_spiplistes_config () {
 				. debut_cadre_relief("", true, "", _T('spiplistes:Console_syslog'))
 				. "<p class='verdana2'>"._T('spiplistes:Console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR']))."</p>\n"
 				. "<input type='checkbox' name='opt_console_syslog' value='oui' id='opt_console_syslog' "
-					. ((__plugin_lire_key_in_serialized_meta('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "")
+					. ((spiplistes_pref_lire('opt_console_syslog')) ? "checked='checked'" : "")
 					. " />\n"
 				. "<label class='verdana2' for='opt_console_syslog'>"._T('spiplistes:Console_syslog_texte')."</label>\n"
 				. fin_cadre_relief(true)
@@ -403,7 +403,7 @@ function exec_spiplistes_config () {
 				;
 		}
 		// voir les journaux SPIP
-		if(!__plugin_lire_key_in_serialized_meta('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)) {
+		if(!spiplistes_pref_lire('opt_console_syslog')) {
 		// si syslog non activé, on visualise les journaux de spip
 			// lien sur logs ou affiche logs
 			$page_result .= ""

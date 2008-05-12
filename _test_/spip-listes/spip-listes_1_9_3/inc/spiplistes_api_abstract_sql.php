@@ -265,9 +265,11 @@ function compat_spiplistes_defs_dist() {
 				, $limit = \'\'
 				, $having = array()
 				, $serveur = \'\'
-				, $option = true
+				, $requeter = true
 			) {
-				return(sql_select(\'COUNT(*)\', $from, $where, $groupby, \'\', $limit, $having, $serveur, $option));
+				$r = sql_select(\'COUNT(*)\', $from, $where, $groupby, \'\', $limit, $having, $serveur, $requeter);
+				if ($r && $requeter) list($r) = mysql_fetch_array($r, MYSQL_NUM);
+				return($r);
 			}'
 
 	);
