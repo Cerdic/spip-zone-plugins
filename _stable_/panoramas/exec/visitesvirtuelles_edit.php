@@ -79,6 +79,7 @@ function exec_visitesvirtuelles_edit(){
 			$largeur = $row['largeur'];
 			$hauteur = $row['hauteur'];
 			$id_lieu_depart = $row['id_lieu_depart'];
+			$id_carte = $row['id_carte'];
 		}
 		$focus = "";
 		$action_link = generer_action_auteur("visitesvirtuelles_edit","$id_visite",urlencode($redirect));
@@ -173,7 +174,10 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 	$titre = entites_html($row['titre']);
 	$descriptif = entites_html($row['descriptif']);
 	$largeur = intval($row['largeur']);	
-	$hauteur = intval($row['hauteur']);	
+	$hauteur = intval($row['hauteur']);
+	$id_carte = intval($row['id_carte']);	
+	if ($largeur==0) $largeur=600;	
+	if ($hauteur==0) $hauteur=400;	
 	$id_lieu_depart = intval($row['id_lieu_depart']);	
 
 
@@ -200,6 +204,10 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 	$out .= "<strong><label for='id_lieu_depart_visite'>"._T("panoramas:id_lieu_depart")."</label></strong> ";
 	$out .= "<input type='text' name='id_lieu_depart' id='id_lieu_depart_visite' class='formo $focus' ".
 		"value=\"".$id_lieu_depart."\" size='5' /><br />\n";
+	
+	$out .= "<strong><label for='id_carte_visite'>"._T("panoramas:id_carte")."</label></strong> ";
+	$out .= "<input type='text' name='id_carte' id='id_carte_visite' class='formo $focus' ".
+		"value=\"".$id_carte."\" size='5' /><br />\n";
 	
 	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";

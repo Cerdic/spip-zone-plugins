@@ -18,11 +18,14 @@ function Interactions_update($id_interaction){
 	$type = _request('type');
 	$x_lieu_cible = intval(_request('x_lieu_cible'));
 	$id_article_cible = intval(_request('id_article_cible'));
+	$id_rubrique_cible = intval(_request('id_rubrique_cible'));
+	$id_jeu_cible = intval(_request('id_jeu_cible'));
 	$id_lieu_cible = intval(_request('id_lieu_cible'));
 	$id_document_cible = intval(_request('id_document_cible'));
 	$id_visite_cible = intval(_request('id_visite_cible'));
 	$url_cible = _request('url_cible');
-	$id_image = intval(_request('id_image'));
+	$id_objet = intval(_request('id_objet'));
+	$id_objet_activation = intval(_request('id_objet_activation'));
 
 	//
 	// Modifications des donnees d'une interaction
@@ -49,7 +52,10 @@ function Interactions_update($id_interaction){
 			"id_document_cible="._q($id_document_cible).", ".
 			"id_visite_cible="._q($id_visite_cible).", ".
 			"url_cible="._q($url_cible).", ".
-			"id_image="._q($id_image).", ".
+			"id_objet="._q($id_objet).", ".
+			"id_objet_activation="._q($id_objet_activation).", ".
+			"id_rubrique_cible="._q($id_rubrique_cible).", ".
+			"id_jeu_cible="._q($id_jeu_cible).", ".
 			"id_lieu="._q($id_lieu).", ".
 			"id_visite="._q($id_visite).
 		" WHERE id_interaction="._q($id_interaction);

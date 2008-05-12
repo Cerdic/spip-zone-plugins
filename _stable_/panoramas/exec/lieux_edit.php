@@ -80,6 +80,10 @@ function exec_lieux_edit(){
 			$id_visite = $row['id_visite'];
 			$boucler = $row['boucler'];
 			$id_photo = $row['id_photo'];
+			$id_audio = $row['id_audio'];
+			$audio_repeter = $row['audio_repeter'];
+			$position_x_carte = $row['position_x_carte'];
+			$position_y_carte = $row['position_y_carte'];
 		}
 		$focus = "";
 		$action_link = generer_action_auteur("lieux_edit","$id_lieu",urlencode($redirect));
@@ -166,7 +170,11 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$titre = entites_html($row['titre']);
 	$descriptif = entites_html($row['descriptif']);
 	$boucler = $row['boucler'];	
+	$audio_repeter = $row['audio_repeter'];	
 	$id_photo =  intval($row['id_photo']);
+	$id_audio =  intval($row['id_audio']);
+	$position_x_carte =  intval($row['position_x_carte']);
+	$position_y_carte =  intval($row['position_y_carte']);
 	
 	$out = "";
 	$out .= "<p>";
@@ -193,7 +201,7 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$out .= "</textarea><br />\n";
 
 	$out .= "<strong><label for='boucler_form'>"._T("panoramas:boucler")."</label></strong> ";
-	$out .= "<select name='boucler' id='boucler_visite' class='formo $focus' ".
+	$out .= "<select name='boucler' id='boucler_lieu' class='formo $focus' ".
 		"value=\"".$boucler."\" >
 			<option value=\"oui\"";
 	if ($boucler=="oui") $out .= "selected=\"selected\"";
@@ -207,10 +215,38 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$out .= " >"._T("panoramas:non")."</option>
 		</select><br />\n";
 	$out .= "<strong><label for='id_photo_form'>"._T("panoramas:id_photo")."</label></strong> ";
-	$out .= "<input type='text' name='id_photo' id='id_photo_visite' class='formo $focus' ".
+	$out .= "<input type='text' name='id_photo' id='id_photo_lieu' class='formo $focus' ".
 		"value=\"".$id_photo."\" size='5' /><br />\n";
 
 	
+	$out .= "<strong><label for='audio_repeter_form'>"._T("panoramas:audio_repeter")."</label></strong> ";
+	$out .= "<select name='audio_repeter' id='audio_repeter_lieu' class='formo $focus' ".
+		"value=\"".$audio_repeter."\" >
+			<option value=\"oui\"";
+	if ($audio_repeter=="oui") $out .= "selected=\"selected\"";
+	
+
+	$out .= " >"._T("panoramas:oui")."</option>
+			<option value=\"non\"";
+
+	if (!($audio_repeter=="oui")) $out .= "selected=\"selected\"";
+
+	$out .= " >"._T("panoramas:non")."</option>
+		</select><br />\n";
+	
+
+	$out .= "<strong><label for='id_audio_form'>"._T("panoramas:id_audio")."</label></strong> ";
+	$out .= "<input type='text' name='id_audio' id='id_audio_lieu' class='formo $focus' ".
+		"value=\"".$id_audio."\" size='5' /><br />\n";
+
+	$out .= "<strong><label for='position_x_carte_form'>"._T("panoramas:position_x_carte")."</label></strong> ";
+	$out .= "<input type='text' name='position_x_carte' id='position_x_carte_lieu' class='formo $focus' ".
+		"value=\"".$position_x_carte."\" size='5' /><br />\n";
+
+	$out .= "<strong><label for='position_y_carte_form'>"._T("panoramas:position_y_carte")."</label></strong> ";
+	$out .= "<input type='text' name='position_y_carte' id='position_y_carte_lieu' class='formo $focus' ".
+		"value=\"".$position_y_carte."\" size='5' /><br />\n";
+
 	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
 

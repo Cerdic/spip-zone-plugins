@@ -76,11 +76,14 @@ function exec_interactions_edit(){
 			$type = $row['type'];
 			$x_lieu_cible = $row['x_lieu_cible'];
 			$id_article_cible = $row['id_article_cible'];
+			$id_rubrique_cible = $row['id_rubrique_cible'];
 			$id_lieu_cible = $row['id_lieu_cible'];
 			$id_document_cible = $row['id_document_cible'];
 			$id_visite_cible = $row['id_visite_cible'];
+			$id_jeu_cible = $row['id_jeu_cible'];
 			$url_cible = $row['url_cible'];
-			$id_image = $row['id_image'];
+			$id_objet = $row['id_objet'];
+			$id_objet_activation = $row['id_objet_activation'];
 		}
 		$focus = "";
 		$action_link = generer_action_auteur("interactions_edit","$id_interaction",urlencode($redirect));
@@ -108,11 +111,14 @@ function exec_interactions_edit(){
 		$row['type'] = $type;
 		$row['x_lieu_cible'] = $x_lieu_cible;
 		$row['id_article_cible'] = $id_article_cible;
+		$row['id_rubrique_cible'] = $id_rubrique_cible;
 		$row['id_lieu_cible'] = $id_lieu_cible;
 		$row['id_document_cible'] = $id_document_cible;
 		$row['id_visite_cible'] = $id_visite_cible;
 		$row['url_cible'] = $url_cible;
-		$row['id_image'] = $id_image;
+		$row['id_objet'] = $id_objet;
+		$row['id_objet_activation'] = $id_objet_activation;
+		$row['id_jeu_cible'] = $id_jeu_cible;
 		$action_link = generer_action_auteur("interactions_edit","new",urlencode($redirect));
 	}
 	
@@ -191,7 +197,10 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$id_document_cible = $row['id_document_cible'];
 	$id_visite_cible = $row['id_visite_cible'];
 	$url_cible = $row['url_cible'];
-	$id_image = $row['id_image'];
+	$id_objet = intval($row['id_objet']);
+	$id_objet_activation = intval($row['id_objet_activation']);
+	$id_rubrique_cible = intval($row['id_rubrique_cible']);
+	$id_jeu_cible = intval($row['id_jeu_cible']);
 	
 	$out = "";
 	$out .= "<p>";
@@ -238,37 +247,92 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 		"value=\"".$y2."\" size='5' /><br />\n";
 
 	$out .= "<strong><label for='type_interaction'>"._T("panoramas:type")."</label></strong> ";
-	$out .= "<input type='text' name='type' id='type_interaction' class='formo $focus' ".
-		"value=\"".$type."\" size='5' /><br />\n";
+	$out .= "<select name='type' id='type_interaction' class='formo $focus' ".
+		"value=\"".$type."\" >";
 
+	//options
+	$out .= "	<option value=\"descriptif\"";
+	if ($type=="descriptif") $out .= "selected=\"selected\"";
+	$out .= " >"._T("panoramas:descriptif")."</option>";
+
+	$out .= "	<option value=\"lieu\"";
+	if ($type=="lieu") $out .= "selected=\"selected\"";
+	$out .= " >"._T("panoramas:lieu")."</option>";
+
+	$out .= "	<option value=\"visite\"";
+	if ($type=="visite") $out .= "selected=\"selected\"";
+	$out .= " >"._T("panoramas:visite")."</option>";
+	
+	$out .= "	<option value=\"article\"";
+	if ($type=="article") $out .= "selected=\"selected\"";
+	$out .= " >"._T("panoramas:article")."</option>";
+
+	$out .= "	<option value=\"rubrique\"";
+	if ($type=="rubrique") $out .= "selected=\"selected\"";
+	$out .= " >"._T("panoramas:rubrique")."</option>";
+
+	$out .= "	<option value=\"document\"";
+	if ($type=="document") $out .= "selected=\"selected\"";
+	$out .= " >"._T("panoramas:document")."</option>";
+
+	$out .= "	<option value=\"jeu\"";
+	if ($type=="jeu") $out .= "selected=\"selected\"";
+	$out .= " >"._T("panoramas:jeu")."</option>";
+
+	$out .= "	<option value=\"url\"";
+	if ($type=="url") $out .= "selected=\"selected\"";
+	$out .= " >"._T("panoramas:url")."</option>";
+
+	$out .= "	<option value=\"objet\"";
+	if ($type=="objet") $out .= "selected=\"selected\"";
+	$out .= " >"._T("panoramas:objet")."</option>";
+
+	//fin options
+
+	$out .= "</select><br />\n";
+	
+
+	
 
 	$out .= "<strong><label for='x_lieu_cible_interaction'>"._T("panoramas:x_lieu_cible")."</label></strong> ";
-	$out .= "<input x_lieu_cible='text' name='x_lieu_cible' id='x_lieu_cible_interaction' class='formo $focus' ".
+	$out .= "<input type='text' name='x_lieu_cible' id='x_lieu_cible_interaction' class='formo $focus' ".
 		"value=\"".$x_lieu_cible."\" size='5' /><br />\n";
 
 	$out .= "<strong><label for='id_article_cible_interaction'>"._T("panoramas:id_article_cible")."</label></strong> ";
-	$out .= "<input id_article_cible='text' name='id_article_cible' id='id_article_cible_interaction' class='formo $focus' ".
+	$out .= "<input type='text' name='id_article_cible' id='id_article_cible_interaction' class='formo $focus' ".
 		"value=\"".$id_article_cible."\" size='5' /><br />\n";
 
+	$out .= "<strong><label for='id_rubrique_cible_interaction'>"._T("panoramas:id_rubrique_cible")."</label></strong> ";
+	$out .= "<input type='text' name='id_rubrique_cible' id='id_rubrique_cible_interaction' class='formo $focus' ".
+		"value=\"".$id_rubrique_cible."\" size='5' /><br />\n";
+
+	$out .= "<strong><label for='id_jeu_cible_interaction'>"._T("panoramas:id_jeu_cible")."</label></strong> ";
+	$out .= "<input type='text' name='id_jeu_cible' id='id_jeu_cible_interaction' class='formo $focus' ".
+		"value=\"".$id_jeu_cible."\" size='5' /><br />\n";
+
 	$out .= "<strong><label for='id_lieu_cible_interaction'>"._T("panoramas:id_lieu_cible")."</label></strong> ";
-	$out .= "<input id_lieu_cible='text' name='id_lieu_cible' id='id_lieu_cible_interaction' class='formo $focus' ".
+	$out .= "<input type='text' name='id_lieu_cible' id='id_lieu_cible_interaction' class='formo $focus' ".
 		"value=\"".$id_lieu_cible."\" size='5' /><br />\n";
 
 	$out .= "<strong><label for='id_document_cible_interaction'>"._T("panoramas:id_document_cible")."</label></strong> ";
-	$out .= "<input id_document_cible='text' name='id_document_cible' id='id_document_cible_interaction' class='formo $focus' ".
+	$out .= "<input type='text' name='id_document_cible' id='id_document_cible_interaction' class='formo $focus' ".
 		"value=\"".$id_document_cible."\" size='5' /><br />\n";
 
 	$out .= "<strong><label for='id_visite_cible_interaction'>"._T("panoramas:id_visite_cible")."</label></strong> ";
-	$out .= "<input id_visite_cible='text' name='id_visite_cible' id='id_visite_cible_interaction' class='formo $focus' ".
+	$out .= "<input type='text' name='id_visite_cible' id='id_visite_cible_interaction' class='formo $focus' ".
 		"value=\"".$id_visite_cible."\" size='5' /><br />\n";
 
 	$out .= "<strong><label for='url_cible_interaction'>"._T("panoramas:url_cible")."</label></strong> ";
 	$out .= "<input url_cible='text' name='url_cible' id='url_cible_interaction' class='formo $focus' ".
 		"value=\"".$url_cible."\" size='5' /><br />\n";
 
-	$out .= "<strong><label for='id_image_interaction'>"._T("panoramas:id_image")."</label></strong> ";
-	$out .= "<input id_image='text' name='id_image' id='id_image_interaction' class='formo $focus' ".
-		"value=\"".$id_image."\" size='5' /><br />\n";
+	$out .= "<strong><label for='id_objet_interaction'>"._T("panoramas:id_objet")."</label></strong> ";
+	$out .= "<input type='text' name='id_objet' id='id_objet_interaction' class='formo $focus' ".
+		"value=\"".$id_objet."\" size='5' /><br />\n";
+
+	$out .= "<strong><label for='id_objet_activation_interaction'>"._T("panoramas:id_objet_activation")."</label></strong> ";
+	$out .= "<input type='text' name='id_objet_activation' id='id_objet_activation_interaction' class='formo $focus' ".
+		"value=\"".$id_objet_activation."\" size='5' /><br />\n";
 
 	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";

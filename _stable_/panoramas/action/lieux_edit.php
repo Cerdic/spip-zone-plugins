@@ -12,6 +12,10 @@ function Lieux_update($id_lieu){
 	$id_visite = intval(_request('id_visite'));
 	$boucler = _request('boucler');
 	$id_photo = intval(_request('id_photo'));
+	$id_audio = intval(_request('id_audio'));
+	$audio_repeter = _request('audio_repeter');
+	$position_x_carte = intval(_request('position_x_carte'));
+	$position_y_carte = intval(_request('position_y_carte'));
 	
 	//
 	// Modifications des donnees du lieu
@@ -29,6 +33,10 @@ function Lieux_update($id_lieu){
 			"descriptif="._q($descriptif).", ".
 			"boucler="._q($boucler).", ".
 			"id_photo="._q($id_photo).", ".
+			"id_audio="._q($id_audio).", ".
+			"audio_repeter="._q($audio_repeter).", ".
+			"position_x_carte="._q($position_x_carte).", ".
+			"position_y_carte="._q($position_y_carte).", ".
 			"id_visite="._q($id_visite).
 		" WHERE id_lieu="._q($id_lieu);
 		$result = spip_query($query);

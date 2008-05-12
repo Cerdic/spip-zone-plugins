@@ -12,6 +12,7 @@ function Visitesvirtuelles_update($id_visite){
 	$largeur = intval(_request('largeur'));
 	$hauteur = intval(_request('hauteur'));
 	$id_lieu_depart = intval(_request('id_lieu_depart'));
+	$id_carte = intval(_request('id_carte'));
 	
 	//
 	// Modifications des donnees de base de la visite virtuelle
@@ -28,6 +29,7 @@ function Visitesvirtuelles_update($id_visite){
 			"titre="._q($titre).", ".
 			"descriptif="._q($descriptif).", ".
 			"id_lieu_depart="._q($id_lieu_depart).", ".
+			"id_carte="._q($id_carte).", ".
 			"largeur="._q($largeur).", ".
 			"hauteur="._q($hauteur).
 		" WHERE id_visite="._q($id_visite);
