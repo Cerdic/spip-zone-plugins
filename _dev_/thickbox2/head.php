@@ -1,6 +1,5 @@
 <?php
 
-include_spip("inc/filtres");
 
 function ThickBox1_insert_head($flux){
 
@@ -15,6 +14,7 @@ function ThickBox1_insert_head($flux){
 }
 
 function ThickBox1_header_prive($flux) {
+include_spip("inc/filtres");
 
 $flux .=
 
@@ -42,6 +42,8 @@ return $flux;
 }
 
 function ThickBox1_insert_js($flux){
+include_spip("inc/filtres");
+
 // on ajoute la class thickbox aux liens de type="image/xxx"
 
 // TODO: ne charger thickbox.js et thickbox.css que si 
