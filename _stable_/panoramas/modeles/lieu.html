@@ -8,9 +8,16 @@
 	<map id="map#ID_LIEU" name="map#ID_LIEU"> 
 		<BOUCLE_interactions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
 			<area shape="rect" coords="#X1,#X2,#Y1,#Y2"
-				[(#ID_ARTICLE_CIBLE|>{0}|?{' ',''}) href="#URL_PAGE{article,id_article=#ID_ARTICLE_CIBLE}"]
-				<BOUCLE_documentpointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}> href="#URL_DOCUMENT" class="thickbox"</BOUCLE_documentpointe>
-			 alt="#TITRE" />
+				[(#TYPE|=={'article'}|?{' ',''}) href="#URL_PAGE{article,id_article=#ID_ARTICLE_CIBLE}" class="type-article"]
+				[(#TYPE|=={'rubrique'}|?{' ',''}) href="#URL_PAGE{rubrique,id_rubrique=#ID_RUBRIQUE_CIBLE}" class="type-rubrique"]
+				[(#TYPE|=={'lieu'}|?{' ',''}) href="#URL_PAGE{lieu,id_lieu=#ID_LIEU_CIBLE}" class="type-lieu"]
+				[(#TYPE|=={'visite'}|?{' ',''}) href="#URL_PAGE{visite,id_visite=#ID_VISITE_CIBLE}" class="type-visite"]
+				[(#TYPE|=={'url'}|?{' ',''}) href="#URL_CIBLE" class="type-url"]
+				[(#TYPE|=={'descriptif'}|?{' ',''}) href="#URL_PAGE{descriptif_interaction_ajax,id_interaction=#ID_INTERACTION}" class="type-descriptif thickbox"]
+				<BOUCLE_documentpointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}>[(#TYPE|=={'document'}|?{' ',''})  href="#URL_DOCUMENT" class="type-document thickbox"]</BOUCLE_documentpointe>
+				[(#TYPE|=={'jeu'}|?{' ',''}) href="#URL_PAGE{jeu_interaction_ajax,id_interaction=#ID_INTERACTION&KeepThis=true&TB_iframe=true&height=400&width=600}" class="type-jeu thickbox"]
+				
+			alt="#TITRE" />
 		</BOUCLE_interactions>
 		
 	</map>

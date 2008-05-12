@@ -1,0 +1,32 @@
+[(#REM)
+
+	Charger les css de panoramas
+
+]#CACHE{7*24*3600,cache-client}
+#HTTP_HEADER{'Content-Type: text/css'}
+[(#INCLURE{css/jquery.panorama.css}|compacte_css)]
+.type-jeu {
+	background-image: url(#CHEMIN{img_pack/interactions/type-jeu.gif});
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.type-document {
+	background-image: url(#CHEMIN{img_pack/interactions/type-document.gif});
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.type-url {
+	background-image: url(#CHEMIN{img_pack/interactions/type-url.gif});
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.type-descriptif {
+	background-image: url(#CHEMIN{img_pack/interactions/type-descriptif.gif});
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.type-article, .type-lieu, .type-rubrique, .type-visite {
+	background-image: url(#CHEMIN{img_pack/interactions/type-article.gif});
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
