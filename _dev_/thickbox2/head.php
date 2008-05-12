@@ -1,5 +1,7 @@
 <?php
 
+include_spip("inc/filtres");
+
 function ThickBox1_insert_head($flux){
 
 	// on ajoute la class thickbox aux liens de type="image/xxx"
