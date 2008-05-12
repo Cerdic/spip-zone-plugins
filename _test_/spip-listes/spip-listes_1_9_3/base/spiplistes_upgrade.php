@@ -159,9 +159,17 @@ function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version,
 					$contexte_pied = array('lang'=>$langue);
 					$pied = recuperer_fond('modeles/piedmail', $contexte_pied);
 					
-					spip_query("INSERT INTO spip_listes (titre, texte, statut, date, lang, pied_page) VALUES ("
-						._q($titre_liste).","._q($texte_liste).","._q($statut).","._q($date_liste).","._q($langue).","._q($pied).")" );
-					$id_liste=spip_insert_id();
+					$id_liste = sql_insertq(
+						"spip_listes"
+						, array(
+							'titre' => $titre_liste
+							, 'texte' => $texte_liste
+							, 'statut' => $statut
+							, 'date' => $date_liste
+							, 'lang' => $langue
+							, 'pied_page' => $pied
+						)
+					);
 					if($message_auto=="oui")
 						spip_query("UPDATE spip_listes SET patron="._q($patron_liste).", periode="._q($periode_liste)
 						  . ", maj=FROM_UNIXTIME("._q($maj_liste)."), email_envoi="._q($email_envoi)

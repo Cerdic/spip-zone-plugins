@@ -45,6 +45,7 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 
 						// ajoute l'invite' dans la table des auteurs
 						$pass = creer_pass_aleatoire(8, $email);
+						
 						$id_auteur = sql_insertq(
 							"spip_auteurs"
 							, array(
@@ -57,10 +58,6 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 								, 'cookie_oubli' => creer_uniqid()
 							)
 						);
-						
-						if(is_bool($id_auteur)) { // 192 ??
-							$id_auteur = spip_insert_id();
-						}
 
 						// le format de reception
 						spiplistes_format_abo_modifier($id_auteur, $format_abo);

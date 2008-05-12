@@ -194,7 +194,8 @@ function compat_spiplistes_defs_dist() {
 				, $valeurs
 			) {
 				$query = "INSERT INTO $table $noms VALUES $valeurs";
-				return (sql_query($query));
+				$r = sql_query($query);
+				return ($r ? mysql_insert_id() : $r);
 			}',
 
 		// n'existe pas en 1.9.2
@@ -211,7 +212,8 @@ function compat_spiplistes_defs_dist() {
 				}
 				
 				$query = "INSERT INTO $table (".implode(",", array_keys($champs)).") VALUES (".implode(",", $champs).")";
-				return sql_query($query);
+				$r = sql_query($query);
+				return($r ? mysql_insert_id() : $r);
 			}',
 		
 		'sql_showtable' => '($table, $serveur=\'\') {
