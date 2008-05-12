@@ -5,26 +5,26 @@
  */
 	
 	
-	
-
 	function motspartout_upgrade(){
-		//installation du champ id_parent et du meta concernant l'installation
-		spip_query("ALTER TABLE `spip_groupes_mots` ADD `id_parent` BIGINT( 20 ) NOT NULL ;"); 
+		//installation du champ id_parent et du meta concernant l'installation 
+		sql_alter("TABLE `spip_groupes_mots` ADD `id_parent` BIGINT(20) NOT NULL "); 
+		sql_alter("TABLE `spip_groupes_mots` ADD `id_parent` BIGINT(20) NOT NULL "); 
+		sql_alter("TABLE `spip_groupes_mots` ADD `id_parent` BIGINT(20) NOT NULL ");
 		
-		ecrire_meta('MotsPartout:mots-partout-arbo-installe','oui');
 		
-		
+		ecrire_meta('MotsPartout:mots-partout-arbo-installe','oui');		
+
 	}
 	
 	function motspartout_modifier_tables() {
 		//desinstallation du champ et du meta
-		spip_query("ALTER TABLE `spip_groupes_mots` DROP `id_parent`");
+		sql_alter("TABLE `spip_groupes_mots` DROP `id_parent`");
 		effacer_meta('MotsPartout:mots-partout-arbo-installe');
 	}
 	
 	function motspartout_install($action){
 		global $forms_base_version;
-		switch ($action){
+		switch ($action){	        
 			case 'install':
 				motspartout_upgrade();
 				break;
