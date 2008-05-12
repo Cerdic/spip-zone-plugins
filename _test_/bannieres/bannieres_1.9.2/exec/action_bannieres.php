@@ -40,6 +40,8 @@
 			
 			debut_page(_T('ban:gestion_bannieres'), "", "");
 			
+			$url_retour = $_SERVER['HTTP_REFERER'];
+			
 			debut_gauche();
 			
 			debut_boite_info();
@@ -52,14 +54,14 @@
 			
 			debut_droite();
 			
-			debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_libelle_suppression'));
+			debut_cadre_relief(  "", false, "", $titre = "Suppression d'une campagne d'affichage");
 							
-			echo '<p>'. _T('asso:adherent_message_confirmer_suppression').'</p>';
+			echo '<p>Confirmer la suppression ?</p>';
 			echo '<form action="'.$url_action_bannieres.'"  method="post">';
 			echo '<input type=hidden name="action" value="drop">';
 			echo '<input type=hidden name="id" value="'.$id_banniere.'">';
 			echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
-			echo '<input name="submit" type="submit" value="'._T('asso:adherent_bouton_confirmer').'" class="fondo"></td></tr>';
+			echo '<input name="submit" type="submit" value="Confirmer" class="fondo"></td></tr>';
 			
 			fin_cadre_relief();
 			
@@ -77,13 +79,15 @@
 		//On vérifie les dimensions et taille de l'image 
         if($infos_img[0] > $width_max) { $width_err="Banni&egrave;re trop large !"; }
 		if($infos_img[1] > $height_max) {$height_err="Banni&egrave;re trop haute !";}
+		/*
 		if($ext IN lire_config('bannieres/formats')) {$ext_err="Mauvais format d'image !";}
 		$errors = array($width_err,$height_err, $ext_err);
 		if ($width_err || $height_err || $ext_err) {
 			header ('location:'.$url_edit_banniere.'&messages='.$errors);
 			exit;
 		}
-			
+		*/
+		
 		//AJOUT BANNIERE
 		if ($action=="ajoute") {		
 			spip_query(" INSERT INTO spip_bannieres (nom,email,site,debut,fin,commentaire,alt,creation) VALUES("._q($nom).", "._q($email).", "._q($site).", "._q($debut).", "._q($fin).", "._q($commentaire).", "._q($alt).", CURRENT_DATE() ) ");
