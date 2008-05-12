@@ -71,7 +71,8 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode,$option,$article) {
 				$var_user[$cle] = _request($cle);
 		}
 	}
-		
+	$nobot = _request('nobot');
+	
 	$aux = true;
 	$commentaire = true;
 	if($var_user['domaines']){
@@ -101,7 +102,10 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode,$option,$article) {
 			return array("formulaires/abonnement_validation", $GLOBALS['delais'],$var_user);
 		}
 	}
-			
+	if($nobot){
+		return array("formulaires/inscription2", $GLOBALS['delais'],$var_user);
+	}
+	
 	// enregistrement du nouvel inscrit
 	if($var_user['email'] and $aux){
 		$commentaire = message_inscription2($var_user, $mode);
@@ -141,7 +145,7 @@ function message_inscription2($var_user, $mode) {
 	$row = sql_select("nom, statut, id_auteur, login, email, alea_actuel","spip_auteurs","email=" . _q($var_user['email']));
 	$row = sql_fetch($row);
 
-	if (!$row) 							// il n'existe pas, creer les identifiants  
+	if (!$row) 	// il n'existe pas, creer les identifiants  
 		return inscription2_nouveau($var_user);
 	
 	if ($row['statut'] == '5poubelle')	// irrecuperable
