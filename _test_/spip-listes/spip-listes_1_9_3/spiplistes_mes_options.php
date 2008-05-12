@@ -49,7 +49,6 @@ define("_SPIPLISTES_ZERO_TIME_DATE", "0000-00-00 00:00:00");
 // documentation: http://www.quesaco.org/Spiplistes-les-etats-du-courrier
 define("_SPIPLISTES_STATUT_REDAC", "redac"); // en cours de redac
 define("_SPIPLISTES_STATUT_READY", "ready"); // pret à etre envoyé
-define("_SPIPLISTES_STATUT_DEPART", "depart"); // plié et tamponné. Peut etre pris par la meleuse
 define("_SPIPLISTES_STATUT_ENCOURS", "encour"); // en cours par meleuse
 define("_SPIPLISTES_STATUT_AUTO", "auto"); // publié de liste
 define("_SPIPLISTES_STATUT_PUBLIE", "publie"); // publié
