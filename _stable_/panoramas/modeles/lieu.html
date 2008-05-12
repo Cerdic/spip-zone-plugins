@@ -1,5 +1,5 @@
-<B_visite>
-<BOUCLE_visite(VISITES_VIRTUELLES_LIEUX){id_lieu}>
+<B_lieux>
+<BOUCLE_lieux(VISITES_VIRTUELLES_LIEUX){id_lieu}>
 	<BOUCLE_photo(DOCUMENTS){id_document=#ID_PHOTO}>
 		<img src="#URL_DOCUMENT" class="panorama#ID_LIEU" width="#LARGEUR" height="#HAUTEUR" 
 	</BOUCLE_photo>
@@ -38,7 +38,19 @@
 <script type="text/javascript" src="#CHEMIN{js/thickbox.js}"></script>
 <script type="text/javascript">
 	tb_pathToImage = "#CHEMIN{css/loadingAnimation.gif}";
-</script>
-</BOUCLE_visite>
 
-</B_visite>
+<BOUCLE_visites(VISITES_VIRTUELLES){id_visite=#ID_VISITE}>
+<BOUCLE_carte(DOCUMENTS){id_document=#ID_CARTE}>
+[$(document).ready(function(){
+	$('.panorama-viewport').append("<div class='panorama-carte'><img src='(#URL_DOCUMENT)' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><h2><a href='#'><:panoramas:carte:></a></h2></div>");
+	$('.panorama-carte h2 a').flipv().bind('click', function() { 
+				$('.panorama-carte img').slideToggle('slow');
+	});
+});]
+</BOUCLE_carte>
+</BOUCLE_visites>
+
+</script>
+</BOUCLE_lieux>
+
+</B_lieux>

@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'visite_numero' => 'Visite num&eacute;ro',
 'lieu_numero' => 'Lieu num&eacute;ro',
 'interaction_numero' => 'Interaction num&eacute;ro',
-'previsualisation' => 'Pr&eacute;visualisation'
+'previsualisation' => 'Pr&eacute;visualisation',
+'carte' => 'Carte'
 );
 ?>

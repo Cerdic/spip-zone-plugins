@@ -108,3 +108,28 @@
 	opacity: .5;
 	margin-top: 0;
 }
+.panorama-carte {
+	position: absolute; 
+	top: 0;
+	left: 0;
+}
+.panorama-carte img {
+	float: left;
+	display: none;
+}
+.panorama-carte h2 a {
+	float: left;
+	color: white;
+	font-size: 16px; 
+	font-family: Verdana;
+	background: #ff4b00;
+	margin-top: 0;
+	padding: 3px;
+	width: 20px;
+	height: 70px;
+	filter: alpha(opacity=50);
+	opacity: .5;
+}
+.panorama-carte h2 {
+	margin-top: 0;
+}
