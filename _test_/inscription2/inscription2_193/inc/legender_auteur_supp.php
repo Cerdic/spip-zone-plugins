@@ -77,11 +77,11 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 		}elseif($cle=='newsletter' and $val != ''){
 			$aux3 = array();
 			$aux4 = array();
-			$news = spip_query("select id_liste, titre from spip_listes");
-			$listes = spip_query("select id_liste from spip_auteurs_listes where id_auteur = $id");
-			while($q = spip_fetch_array($listes))
+			$news = sql_select("id_liste, titre","spip_listes");
+			$listes = sql_select("id_liste","spip_auteurs_listes","id_auteur = $id");
+			while($q = sql_fetch($listes))
 				$aux3[]=$q['id_liste'];
-			while($q = spip_fetch_array($news))
+			while($q = sql_fetch($news))
 				$aux4[] = $q;
 		}
 	}
@@ -138,7 +138,7 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 		}
 		elseif($cle!= 'id_auteur' and $cle != 'statut_nouveau')
 		$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
-		. "<input type='text' id='$cle' name='$cle' class='formo' value='$val'><br />"; 
+		. "<input type='text' id='$cle' name='$cle' class='formo' value='".typo($val)."'><br />"; 
 	}
 	if($news){
 		if ($aux4){
@@ -268,11 +268,11 @@ function legender_auteur_supp_voir($auteur, $redirect)
 		elseif($cle=='newsletter' and $val != ''){
 			$aux3 = array();
 			$aux4 = array();
-			$news = spip_query("select id_liste, titre from spip_listes");
-			$listes = spip_query("select id_liste from spip_auteurs_listes where id_auteur = $id");
-			while($q = spip_fetch_array($listes))
+			$news = sql_select("id_liste, titre","spip_listes");
+			$listes = sql_select("id_liste","spip_auteurs_listes","id_auteur = $id");
+			while($q = sql_fetch($listes))
 				$aux3[]=$q['id_liste'];
-			while($q = spip_fetch_array($news))
+			while($q = sql_fetch($news))
 				$aux4[] = $q;
 		}
 	}
