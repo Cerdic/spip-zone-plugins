@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'Num',
+	'creer_zone' => 'Neuen Bereich anlegen',
 
 	// D
 	'descriptif' => 'Beschreibung',
@@ -24,6 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_zone' => 'neuen Bereich erstellen',
 	'icone_menu_config' => 'eingeschr&#228;nkter Zugang',
 	'icone_supprimer_zone' => 'Bereich l&#246;schen',
+	'info_ajouter_zones' => 'Alle Bereichen hinzuf&uuml;gen',
+	'info_auteurs_lies_zone' => 'Autoren mit Zugang zu diesem Bereich',
 	'info_page' => 'Hier k&#246;nnen Sie die zugangsbeschr&#228;nkten Bereiche Ihrer Webseite verwalten.',
 	'info_retirer_zone' => 'Bereich l&#246;schen',
 	'info_retirer_zones' => 'alle Bereiche l&#246;schen',
@@ -46,7 +49,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_table' => 'alle zugangsbeschr&#228;nkten Bereiche',
 	'titre_zones_acces' => 'zugangsbeschr&#228;nkte Bereiche',
 
+	// V
+	'voir_toutes' => 'Alle Bereiche anzeigen',
+
 	// Z
+	'zone_numero' => 'BEREICH NUMMER:',
 	'zone_restreinte_espace_prive' => 'Zugang im Redaktionsbereich beschr&#228;nken',
 	'zone_restreinte_publique' => 'Zugang auf der &#246;ffentlichen Webseite beschr&#228;nken'
 );
