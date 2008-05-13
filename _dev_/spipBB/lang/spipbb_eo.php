@@ -76,8 +76,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sinscrire' => '<MODIF>Registri&#285;i',
 	'statut' => 'Statuso',
 	'sujet' => '<MODIF>Temo&nbsp;',
-	'sujets' => 'Temoj',
-	'sujets_aucun' => 'Nun, neniu temo estas en tiu forumo',
 	'sujet_auteur' => 'A&#365;toro',
 	'sujet_clos_texte' => 'Tiu temo estas fermita, vi ne plu povas kontribui.',
 	'sujet_clos_titre' => 'Temo fermita',
@@ -85,6 +83,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet_nouveau' => 'Nova temo',
 	'sujet_rejete' => '<MODIF>Temo rifuzita',
 	'sujet_valide' => '<MODIF>Validenda temo',
+	'sujets' => 'Temoj',
+	'sujets_aucun' => 'Nun, neniu temo estas en tiu forumo',
 
 	// T
 	'tous_forums' => '&#264;iuj forumoj',

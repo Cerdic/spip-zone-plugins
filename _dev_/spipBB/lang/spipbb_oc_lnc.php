@@ -76,8 +76,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sinscrire' => '<MODIF>s\'enregistrar',
 	'statut' => 'Estatut',
 	'sujet' => '<MODIF>Subj&egrave;cte&nbsp;',
-	'sujets' => 'Subj&egrave;ctes',
-	'sujets_aucun' => 'Pas cap de subj&egrave;ctes encara dins aquel forum',
 	'sujet_auteur' => 'Autor',
 	'sujet_clos_texte' => 'Aquel subj&egrave;cte es clavat, i pod&egrave;tz pas mai postar dess&uacute;s.',
 	'sujet_clos_titre' => 'Subj&egrave;cte Clavat',
@@ -85,6 +83,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet_nouveau' => 'Subj&egrave;cte n&ograve;u',
 	'sujet_rejete' => 'Subj&egrave;cte refusat;',
 	'sujet_valide' => 'Subj&egrave;cte de validar',
+	'sujets' => 'Subj&egrave;ctes',
+	'sujets_aucun' => 'Pas cap de subj&egrave;ctes encara dins aquel forum',
 
 	// T
 	'tous_forums' => 'Totes los forums',

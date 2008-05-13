@@ -76,8 +76,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sinscrire' => '<MODIF>Rexistrarse',
 	'statut' => 'Estatuto',
 	'sujet' => '<MODIF>Asunto&nbsp;',
-	'sujets' => 'Asuntos',
-	'sujets_aucun' => 'Non hai ning&uacute;n asunto neste foro neste intre',
 	'sujet_auteur' => 'Autor',
 	'sujet_clos_texte' => 'Este asunto est&aacute; pechado, xa non se pode publicar nel.',
 	'sujet_clos_titre' => 'Asunto pechado',
@@ -85,6 +83,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet_nouveau' => 'Novo asunto',
 	'sujet_rejete' => 'Asunto rexeitado;',
 	'sujet_valide' => 'Asunto proposto para validaci&oacute;n',
+	'sujets' => 'Asuntos',
+	'sujets_aucun' => 'Non hai ning&uacute;n asunto neste foro neste intre',
 
 	// T
 	'tous_forums' => 'Todos os foros',

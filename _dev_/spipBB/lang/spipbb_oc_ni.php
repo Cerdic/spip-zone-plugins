@@ -76,8 +76,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sinscrire' => '<MODIF>si registrar',
 	'statut' => 'Estatut',
 	'sujet' => '<MODIF>Subj&egrave;cte&nbsp;',
-	'sujets' => 'Subj&egrave;ctes',
-	'sujets_aucun' => 'Minga de subj&egrave;ctes encara dins aqueu f&ograve;ro',
 	'sujet_auteur' => 'Autor',
 	'sujet_clos_texte' => 'Aquest subj&egrave;cte es barrat, pod&egrave;tz pas plus li postar.',
 	'sujet_clos_titre' => 'Subj&egrave;cte Barrat',
@@ -85,6 +83,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet_nouveau' => 'Subj&egrave;cte n&ograve;u',
 	'sujet_rejete' => 'Subj&egrave;cte refudat;',
 	'sujet_valide' => 'Subj&egrave;cte de validar',
+	'sujets' => 'Subj&egrave;ctes',
+	'sujets_aucun' => 'Minga de subj&egrave;ctes encara dins aqueu f&ograve;ro',
 
 	// T
 	'tous_forums' => 'Toi lu f&ograve;ros',

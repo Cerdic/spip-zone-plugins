@@ -76,8 +76,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sinscrire' => '<MODIF>sich einschreiben',
 	'statut' => 'Status',
 	'sujet' => '<MODIF>Thema',
-	'sujets' => 'Themen',
-	'sujets_aucun' => 'Dieses Forum hat noch keine Themen',
 	'sujet_auteur' => 'Autor',
 	'sujet_clos_texte' => 'Dieses Thema ist abgeschlossen. Sie k&ouml;nnen keine Beitr&auml;ge posten.',
 	'sujet_clos_titre' => 'Abgeschlossenes Thema',
@@ -85,6 +83,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet_nouveau' => 'Neues Thema',
 	'sujet_rejete' => 'Abgelehntes Thema',
 	'sujet_valide' => 'Themen &uuml;berpr&uuml;fen',
+	'sujets' => 'Themen',
+	'sujets_aucun' => 'Dieses Forum hat noch keine Themen',
 
 	// T
 	'tous_forums' => 'Alle Foren',

@@ -8,8 +8,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'a_propos_auteur_dpt' => 'Pep tra diwar-benn :',
 	'admin_action_01_configuration' => 'Ardremmezi&ntilde;',
 	'admin_action_02_etat' => 'Stad ar foromo&ugrave;',
+	'admin_action_ZZ_debug' => 'Kempenn',
 	'admin_action_effacer' => 'Kemennadenno&ugrave; nac\'het',
 	'admin_action_fromphorum' => 'Emporzha&ntilde; phorum',
 	'admin_action_fromphpbb' => 'Emporzha&ntilde; phpBB',
@@ -20,7 +22,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_action_swforum' => 'Kemennadenno&ugrave; merket',
 	'admin_action_swlog' => 'Danevell ar spam',
 	'admin_action_swwords' => 'Mera&ntilde;s ar gerio&ugrave;',
-	'admin_action_ZZ_debug' => 'Kempenn',
 	'admin_afficher_bouton_alerte_abus' => 'Diskouez an nozelenno&ugrave;-diwall Re Bell',
 	'admin_affichier_bouton_rss' => 'Diskouez an nozelenno&ugrave; RSS',
 	'admin_age_forum' => 'Oad ar forom bloavezhio&ugrave;/mizvezhio&ugrave;',
@@ -49,7 +50,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annonce' => 'Kemenn',
 	'anonyme' => 'Disanv',
 	'avatar' => 'Avatar',
-	'a_propos_auteur_dpt' => 'Pep tra diwar-benn :',
 
 	// C
 	'citer' => 'Menegi&ntilde;',
@@ -114,8 +114,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sinscrire' => '<MODIF>enrolla&ntilde;',
 	'statut' => 'Statud',
 	'sujet' => '<MODIF>Sujed&nbsp;',
-	'sujets' => 'Sujedo&ugrave;',
-	'sujets_aucun' => 'Sujed ebet er forom evit poent',
 	'sujet_auteur' => 'Skridaozer',
 	'sujet_clos_texte' => 'Kloz eo ar sujed-ma&ntilde;, n\'hallit kas netra.',
 	'sujet_clos_titre' => 'Sujed Kloz',
@@ -123,6 +121,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet_nouveau' => 'Sujed Nevez',
 	'sujet_rejete' => '<MODIF>Sujed bet nac\'het',
 	'sujet_valide' => '<MODIF>Sujed da asanti&ntilde;',
+	'sujets' => 'Sujedo&ugrave;',
+	'sujets_aucun' => 'Sujed ebet er forom evit poent',
 
 	// T
 	'tous_forums' => 'An holl foromo&ugrave;',

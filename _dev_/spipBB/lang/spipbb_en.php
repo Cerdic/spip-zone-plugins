@@ -8,8 +8,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'a_propos_auteur_dpt' => 'Everything about:',
 	'admin_action_01_configuration' => 'Configure',
 	'admin_action_02_etat' => 'Forums overview',
+	'admin_action_ZZ_debug' => 'Debug',
 	'admin_action_effacer' => 'Rejected posts',
 	'admin_action_fromphorum' => 'Import from Phorum',
 	'admin_action_fromphpbb' => 'Import from PhpBB',
@@ -20,7 +22,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_action_swforum' => 'Flagged posts',
 	'admin_action_swlog' => 'Spam Log',
 	'admin_action_swwords' => 'Manage Words',
-	'admin_action_ZZ_debug' => 'Debug',
 	'admin_afficher_bouton_alerte_abus' => 'Show Abuse alert buttons',
 	'admin_affichier_bouton_rss' => 'Show RSS buttons',
 	'admin_age_forum' => 'Forum age Years/months',
@@ -83,7 +84,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_plugin_requis_ok_balisession' => '[The BALISE_SESSION plugin->http://www.spip-contrib.net/?article1224]: provides information about connected visitors.',
 	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605] : provides tags and functions.',
 	'admin_sous_titre' => 'Go to the SpipBB forums admin panel',
-	'admin_spipbb_release' => 'SpipBB relase',
 	'admin_spip_config_forums' => 'SPIP configuration:',
 	'admin_spip_forums_ok' => 'The public forums are enabled.',
 	'admin_spip_forums_warn' => '<p>{{Beware}} : By default, Your forums are not activated. The recommended setting is to use the automatic activation ([see here->@config_contenu@]).</p><p>Otherwise, you will have to activate them article by article.</p>',
@@ -91,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_spip_mots_cles_warn' => '<p>{{Beware}} : The keywords are not activated in SPIP, you won\'t be able to use them for the advanced features.</p><p>It is recommended to activate them. ([see here->@configuration@]).</p>',
 	'admin_spip_mots_forums_ok' => 'Forum keywords are enabled',
 	'admin_spip_mots_forums_warn' => '<p>{{Beware}} : The keywords for public forums are not activated in SPIP, you won\'t be able to use them for the relevant advanced features.</p><p>It is recommended to activate them. ([see here->@configuration@]).</p>',
+	'admin_spipbb_release' => 'SpipBB relase',
 	'admin_statistique' => 'Information',
 	'admin_surtitre' => 'Forums management',
 	'admin_temps_deplacement' => 'Amount of time before an admin can move',
@@ -124,7 +125,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'anonyme' => 'Anonymous',
 	'auteur' => 'Author',
 	'avatar' => 'Avatar',
-	'a_propos_auteur_dpt' => 'Everything about:',
 
 	// B
 	'bouton_select_all' => 'Select all',
@@ -170,8 +170,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deplacer_sujet_dpt' => 'Moving of:',
 	'deplacer_vide' => 'Not any other forum left: moving this thread is impossible!',
 	'dernier' => '&nbsp;Last', # exec/spipbb_admin.php
-	'derniers_messages' => 'Last topics',
 	'dernier_membre' => 'Last registered member: ',
+	'derniers_messages' => 'Last topics',
 	'diviser' => 'Split',
 	'diviser_confirmer' => 'Confirm the topics splitting',
 	'diviser_dans_dpt' => 'Into this Forum:',
@@ -186,8 +186,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effacer' => 'Delete',
 	'email' => 'E-mail',
 	'en_ligne' => 'Who\'s online?',
-	'en_reponse_a' => 'Answering the message',
 	'en_rep_sujet_' => '&nbsp;:::&nbsp;Topic : ',
+	'en_reponse_a' => 'Answering the message',
 	'etplus' => '...and more...',
 	'extra_avatar_saisie_url' => 'Your avatar\'s URL (http://... ...)',
 	'extra_avatar_saisie_url_info' => 'Visitor\'s avatar URL',
@@ -209,10 +209,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'fiche_contact' => 'Contact form',
-	'filtrer' => 'Filter',
 	'fil_annonce_annonce' => 'Move this topic into Announcement',
 	'fil_annonce_desannonce' => 'Remove the Announcement mode',
 	'fil_deplace' => 'Move this thread',
+	'filtrer' => 'Filter',
 	'forum' => 'Forums',
 	'forum_annonce_annonce' => 'Mark as announce',
 	'forum_annonce_desannonce' => 'Remove the announce mark',
@@ -271,13 +271,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'import_titre' => 'Migration of @nom_base@ forum',
 	'import_titre_etape' => 'Migration of @nom_base@ forum - step',
 	'info' => 'Information',
-	'infos_refus_suivi_sujet' => 'Don\'t follow these threads',
-	'infos_suivi_forum_par_inscription' => 'Follow the thread by registration',
 	'info_annonce_ferme' => 'State Announce/Closed',
 	'info_confirmer_passe' => 'Confirm this new password:',
 	'info_ferme' => 'State closed',
 	'info_inscription_invalide' => 'Impossible to register',
 	'info_plus_cinq_car' => 'more than 5 characters',
+	'infos_refus_suivi_sujet' => 'Don\'t follow these threads',
+	'infos_suivi_forum_par_inscription' => 'Follow the thread by registration',
 	'inscription' => 'Register',
 	'inscrit_le' => 'Registrered on',
 	'inscrit_le_dpt' => 'Registrered on',
@@ -300,6 +300,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'membres_inscrits' => 'registered members',
 	'membres_les_plus_actifs' => 'Most active members',
 	'message' => 'Message',
+	'message_s' => 'Messages',
+	'message_s_dpt' => 'Messages: ',
 	'messages' => 'Answers',
 	'messages_anonymes' => 'anonymize',
 	'messages_derniers' => 'Latest Messages',
@@ -308,12 +310,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages_supprimer_tous' => 'delete',
 	'messages_voir_dernier' => 'Jump to the last message',
 	'messages_voir_dernier_s' => 'Watch the last messages',
-	'message_s' => 'Messages',
-	'message_s_dpt' => 'Messages: ',
 	'moderateur' => 'Moderator',
+	'moderateur_dpt' => 'Moderator: ',
 	'moderateurs' => 'Moderator(s)',
 	'moderateurs_dpt' => 'Moderators: ',
-	'moderateur_dpt' => 'Moderator: ',
 	'modif_parametre' => 'Change your parameters',
 	'mot_annonce' => 'Announcement
  _ An announcement is placed at the head of the forum on all pages.',
@@ -325,9 +325,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  _ A post-it is placed underneath announcements, before ordinary messages. It only appears once in the list.',
 
 	// N
+	'no_message' => 'No message by that search criterium',
 	'nom_util' => 'Member name',
 	'non' => 'No',
-	'no_message' => 'No message by that search criterium',
 
 	// O
 	'ordre_croissant' => 'Increasing',
@@ -355,13 +355,6 @@ _ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
 	'plugin_licence' => 'Distributed under the GPL licence',
 	'plugin_lien' => '[See the documentation of the plugin from Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
 	'plugin_nom' => 'SpipBB: Management of SPIP forums',
-	'poster_date_' => 'Posted the: ',
-	'poster_message' => 'Post a topic',
-	'poste_valide' => 'Post(s) to check...',
-	'postit' => 'Postit',
-	'postit_dpt' => 'Postit: ',
-	'posts_effaces' => 'Topics deleted!',
-	'posts_refuses' => 'Blocked topics to delete!',
 	'post_aucun_pt' => 'aucun&nbsp;!',
 	'post_efface_lui' => 'Ce sujet comprend @$nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\\n',
 	'post_ip' => 'Posts sent from IP address',
@@ -369,6 +362,13 @@ _ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
 	'post_rejete' => 'Rejected post',
 	'post_titre' => '&nbsp;:::&nbsp;Title: ',
 	'post_verifier_sujet' => 'Check this post',
+	'poste_valide' => 'Post(s) to check...',
+	'poster_date_' => 'Posted the: ',
+	'poster_message' => 'Post a topic',
+	'postit' => 'Postit',
+	'postit_dpt' => 'Postit: ',
+	'posts_effaces' => 'Topics deleted!',
+	'posts_refuses' => 'Blocked topics to delete!',
 	'previsualisation' => 'Preview',
 	'profil' => 'Profile',
 
@@ -412,10 +412,10 @@ _ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
 	'retour_forum' => 'Back to the forum home',
 
 	// S
+	's_abonner_a' => 'RSS: subscribe to this thread',
 	'secteur_forum' => 'ROOT',
 	'selection_efface' => 'Deleted the selection... ',
 	'selection_tri_dpt' => 'Choose the sorting method:',
-	'signature' => 'Signature',
 	'sign_admin' => '{{This page can only be seen by the site owner.}}<p>It provides access to the plugin configuration of &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; and the forum management of your site.</p><p>Version : @version@ @distant@</p><p>See&nbsp;:
 _ • [The documentation of Spip-Contrib->http://www.spip-contrib.net/?article2460]
 _ • [The help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
@@ -424,6 +424,7 @@ _ • [The help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info
 	'sign_reinit' => '<p>Reset:
  _ • [the whole plugin->@plugin@]</p>',
 	'sign_tempo' => 'Build with <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
+	'signature' => 'Signature',
 	'sinscrire' => 'Register',
 	'site_propose' => 'Proposed Website',
 	'site_web' => 'Web site',
@@ -434,8 +435,6 @@ _ • [The help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info
 	'statut_redac' => 'Moderator',
 	'statut_visit' => 'Member',
 	'sujet' => 'Topic',
-	'sujets' => 'Topics',
-	'sujets_aucun' => 'No topics in this forum for the time being',
 	'sujet_auteur' => 'Author',
 	'sujet_clos_texte' => 'This topic is closed, you cannot post to it.',
 	'sujet_clos_titre' => 'Topic closed',
@@ -447,6 +446,8 @@ _ • [The help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info
 	'sujet_repondre' => 'Reply',
 	'sujet_s' => 'Topics',
 	'sujet_valide' => 'Topic to confirm',
+	'sujets' => 'Topics',
+	'sujets_aucun' => 'No topics in this forum for the time being',
 	'supprimer' => 'Delete',
 	'sw_admin_can_spam' => 'Allow admin to post spam words',
 	'sw_admin_no_spam' => 'No spam',
@@ -473,7 +474,6 @@ _ • [The help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info
 	'sw_warning_pm_message' => 'Private message text',
 	'sw_warning_pm_titre' => 'Private message subject',
 	'sw_word' => 'Word',
-	's_abonner_a' => 'RSS: subscribe to this thread',
 
 	// T
 	'title_ferme' => 'Close the forum/news',

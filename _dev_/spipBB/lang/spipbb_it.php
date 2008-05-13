@@ -76,8 +76,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sinscrire' => '<MODIF>registrarsi',
 	'statut' => 'Status',
 	'sujet' => '<MODIF>Argomento&nbsp;',
-	'sujets' => 'Argomenti',
-	'sujets_aucun' => 'Nessuna discussione in questo forum attualmente',
 	'sujet_auteur' => 'Autore',
 	'sujet_clos_texte' => 'Questa discussione &egrave; stata chiusa e non &egrave; possibile inviare altri messaggi.',
 	'sujet_clos_titre' => 'Argomento Chiuso',
@@ -85,6 +83,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet_nouveau' => 'Nuovo argomento',
 	'sujet_rejete' => '<MODIF>Argomento rifiutato',
 	'sujet_valide' => '<MODIF>Argomento da convalidare',
+	'sujets' => 'Argomenti',
+	'sujets_aucun' => 'Nessuna discussione in questo forum attualmente',
 
 	// T
 	'tous_forums' => 'Tutti i forum',

@@ -8,8 +8,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'a_propos_auteur_dpt' => 'Tot respecte a:',
 	'admin_action_01_configuration' => 'Configuraci&oacute;',
 	'admin_action_02_etat' => 'Estat dels f&ograve;rums',
+	'admin_action_ZZ_debug' => 'Depurador',
 	'admin_action_effacer' => 'Missatges rebutjats ',
 	'admin_action_fromphorum' => 'Importar de F&ograve;rum',
 	'admin_action_fromphpbb' => 'Importar de PhpBB',
@@ -20,7 +22,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_action_swforum' => 'Entrades marcades',
 	'admin_action_swlog' => 'Registre del correu brossa',
 	'admin_action_swwords' => 'Gesti&oacute; de les paraules',
-	'admin_action_ZZ_debug' => 'Depurador',
 	'admin_afficher_bouton_alerte_abus' => 'Mostrar els botons alerta Ab&uacute;s',
 	'admin_affichier_bouton_rss' => 'Mostrar els botons RSS',
 	'admin_age_forum' => 'Edat del f&ograve;rum Anys/mesos',
@@ -83,7 +84,6 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'admin_plugin_requis_ok_balisession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224]: proporciona les informacions sobre els visitants autentificats. ',
 	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605]: proporciona funcions i etiquetes.',
 	'admin_sous_titre' => 'Accedir al panell d\'administraci&oacute; dels f&ograve;rums amb SpipBB',
-	'admin_spipbb_release' => 'Versi&oacute; d\'SpipBB',
 	'admin_spip_config_forums' => 'Configuraci&oacute; d\'SPIP&nbsp;:',
 	'admin_spip_forums_ok' => 'Els f&ograve;rums p&uacute;blics estan ben activats.',
 	'admin_spip_forums_warn' => '<p>{{Atenci&oacute;}}: els vostres f&ograve;rums estan desactivats per defecte, us recomanem utilitzar la publicaci&oacute; immediata: [veure aqu&iacute;->@config_contenu@].</p><p>En cas contrari les haureu d\'activar article per article.</p>',
@@ -91,6 +91,7 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'admin_spip_mots_cles_warn' => '<p>{{Atenci&oacute;}}: Les paraules clau no estan actives a SPIP, no podreu utilitzar les funcions avan&ccedil;ades associades.</p><p>Us recomanem que les activeu: [veure aqu&iacute;->@configuration@].</p>',
 	'admin_spip_mots_forums_ok' => 'Les paraules clau associades als f&ograve;rum estan ben activades.',
 	'admin_spip_mots_forums_warn' => '<p>{{Atenci&oacute;}}: Les paraules clau en els f&ograve;rums del lloc p&uacute;blic no estan actives a SPIP, no podreu utilitzar les funcions avan&ccedil;ades associades.</p><p>Us recomanem que permeteu la seva utilitzaci&oacute;: [veure aqu&iacute;->@configuration@].</p>',
+	'admin_spipbb_release' => 'Versi&oacute; d\'SpipBB',
 	'admin_statistique' => 'Informaci&oacute;',
 	'admin_surtitre' => 'Gestionar els f&ograve;rums',
 	'admin_temps_deplacement' => 'Temps requerit abans del despla&ccedil;ament per un administrador',
@@ -124,7 +125,6 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'anonyme' => 'An&ograve;nim',
 	'auteur' => 'Autor',
 	'avatar' => 'Avatar',
-	'a_propos_auteur_dpt' => 'Tot respecte a:',
 
 	// B
 	'bouton_select_all' => 'Seleccionar-ho tot',
@@ -170,8 +170,8 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'deplacer_sujet_dpt' => 'Despla&ccedil;ament de:',
 	'deplacer_vide' => 'Cap altre f&ograve;rum: impossible despla&ccedil;ar.',
 	'dernier' => '&nbsp;&Uacute;ltim',
-	'derniers_messages' => 'Darrers Missatges',
 	'dernier_membre' => 'Darrer membre registrat: ',
+	'derniers_messages' => 'Darrers Missatges',
 	'diviser' => 'Dividir',
 	'diviser_confirmer' => 'Confirmar la separaci&oacute; dels missatges',
 	'diviser_dans_dpt' => 'Per posar al f&ograve;rum:',
@@ -186,8 +186,8 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'effacer' => 'Esborrar',
 	'email' => 'Correu electr&ograve;nic',
 	'en_ligne' => 'Qui hi ha en l&iacute;nia?',
-	'en_reponse_a' => 'En resposta al missatge',
 	'en_rep_sujet_' => '&nbsp;:::&nbsp;Assumpte: ',
+	'en_reponse_a' => 'En resposta al missatge',
 	'etplus' => '... i m&eacute;s ...',
 	'extra_avatar_saisie_url' => 'URL dels vostre avatar (http://... ...)',
 	'extra_avatar_saisie_url_info' => 'URL de l\'avatar del visitant',
@@ -209,10 +209,10 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 
 	// F
 	'fiche_contact' => 'Fitxa Contacte',
-	'filtrer' => 'Filtrar',
 	'fil_annonce_annonce' => 'Passar l\'Assumpte en Av&iacute;s',
 	'fil_annonce_desannonce' => 'Suprimir el mode Av&iacute;s',
 	'fil_deplace' => 'Despla&ccedil;ar aquest fil',
+	'filtrer' => 'Filtrar',
 	'forum' => 'F&ograve;rums',
 	'forum_annonce_annonce' => 'Posar la marca d\'av&iacute;s',
 	'forum_annonce_desannonce' => 'Suprimir la marca d\'av&iacute;s',
@@ -271,13 +271,13 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'import_titre' => 'Importar un f&ograve;rum @nom_base@',
 	'import_titre_etape' => 'Importar un f&ograve;rum  @nom_base@ - etape',
 	'info' => 'Informacions',
-	'infos_refus_suivi_sujet' => 'No seguir m&eacute;s els assumptes',
-	'infos_suivi_forum_par_inscription' => 'Seguiment del f&ograve;rum per registre',
 	'info_annonce_ferme' => 'Estat Av&iacute;s / Tancar',
 	'info_confirmer_passe' => 'Confirmar aquesta nova contrasenya:',
 	'info_ferme' => 'Estat Tancat',
 	'info_inscription_invalide' => 'Registre impossible',
 	'info_plus_cinq_car' => 'm&eacute;s de 5 car&agrave;cters',
+	'infos_refus_suivi_sujet' => 'No seguir m&eacute;s els assumptes',
+	'infos_suivi_forum_par_inscription' => 'Seguiment del f&ograve;rum per registre',
 	'inscription' => 'Registre',
 	'inscrit_le' => 'Inscrit el',
 	'inscrit_le_dpt' => 'Inscrit el:',
@@ -300,6 +300,8 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'membres_inscrits' => 'membres inscrits',
 	'membres_les_plus_actifs' => 'Membres m&eacute;s actius',
 	'message' => 'Missatge',
+	'message_s' => 'Missatges',
+	'message_s_dpt' => 'Missatges: ',
 	'messages' => 'Respostes',
 	'messages_anonymes' => 'tornar an&ograve;nims',
 	'messages_derniers' => '&Uacute;ltims missatges',
@@ -308,12 +310,10 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'messages_supprimer_tous' => 'suprimir-los',
 	'messages_voir_dernier' => 'Veure l\'&uacute;ltim missatge',
 	'messages_voir_dernier_s' => 'Veure els &uacute;ltims missatges',
-	'message_s' => 'Missatges',
-	'message_s_dpt' => 'Missatges: ',
 	'moderateur' => 'Moderador',
+	'moderateur_dpt' => 'Moderador: ',
 	'moderateurs' => 'Moderador(s)',
 	'moderateurs_dpt' => 'Moderadors: ',
-	'moderateur_dpt' => 'Moderador: ',
 	'modif_parametre' => 'Modifiqueu els vostres par&agrave;metres',
 	'mot_annonce' => 'Av&iacute;s
 _ Un av&iacute;s est&agrave; situat a sobre del f&ograve;rum a totes les p&agrave;gines.',
@@ -325,9 +325,9 @@ _ Un av&iacute;s est&agrave; situat a sobre del f&ograve;rum a totes les p&agrav
 _ Un post-it est&agrave; situat a sota dels anuncis, abans dels missatges ordinaris. Apareix nom&eacute;s una vegada a la llista.',
 
 	// N
+	'no_message' => 'Cap assumpte o missatge respon als vostres criteris de cerca',
 	'nom_util' => 'Nom d\'usuari',
 	'non' => 'No',
-	'no_message' => 'Cap assumpte o missatge respon als vostres criteris de cerca',
 
 	// O
 	'ordre_croissant' => 'Creixent',
@@ -337,7 +337,8 @@ _ Un post-it est&agrave; situat a sota dels anuncis, abans dels missatges ordina
 
 	// P
 	'pagine_page_' => ' .. p&agrave;gina',
-	'pagine_post_s' => '<MODIF> missatges',
+	'pagine_post_' => 'resposta',
+	'pagine_post_s' => 'respostes',
 	'pagine_sujet_s' => 'assumptes',
 	'par_' => 'per ',
 	'plugin_auteur' => 'La SpipBB Team: [veure la llista de col&middot;laboradors a Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
@@ -355,13 +356,6 @@ _ [Acc&eacute;s al panell d\'administraci&oacute;-> .?exec=spipbb_configuration]
 	'plugin_licence' => 'Distribu&iuml;t sota llic&egrave;ncia GPL',
 	'plugin_lien' => '[Consultar la documentaci&oacute; del plugin a Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
 	'plugin_nom' => 'SpipBB: Gesti&oacute; dels f&ograve;rums d\'SPIP',
-	'poster_date_' => 'Enviat el: ',
-	'poster_message' => 'Enviar un missatge',
-	'poste_valide' => 'Post(s) per validar...',
-	'postit' => 'Post-it',
-	'postit_dpt' => 'Post-it: ',
-	'posts_effaces' => 'Missatges esborrats!',
-	'posts_refuses' => 'Missatges rebutjats, esborrar-los!',
 	'post_aucun_pt' => 'cap!',
 	'post_efface_lui' => 'Aquest assumpte t&eacute; @
 nbr_post@ missatge(s). Esborrats amb ell!\\n',
@@ -370,6 +364,13 @@ nbr_post@ missatge(s). Esborrats amb ell!\\n',
 	'post_rejete' => 'Missatge rebutjat',
 	'post_titre' => ':::&nbsp;T&iacute;tol: ',
 	'post_verifier_sujet' => 'Verificar aquest assumpte',
+	'poste_valide' => 'Post(s) per validar...',
+	'poster_date_' => 'Enviat el: ',
+	'poster_message' => 'Enviar un missatge',
+	'postit' => 'Post-it',
+	'postit_dpt' => 'Post-it: ',
+	'posts_effaces' => 'Missatges esborrats!',
+	'posts_refuses' => 'Missatges rebutjats, esborrar-los!',
 	'previsualisation' => 'Vista pr&egrave;via',
 	'profil' => 'Perfil',
 
@@ -390,10 +391,10 @@ nbr_post@ missatge(s). Esborrats amb ell!\\n',
 	'retour_forum' => 'Retorn a l\'inici del f&ograve;rum',
 
 	// S
+	's_abonner_a' => 'RSS . Subscriure\'s a: ',
 	'secteur_forum' => 'ARREL',
 	'selection_efface' => 'Esborrar la selecci&oacute;...',
 	'selection_tri_dpt' => 'Seleccionar el m&egrave;tode d\'ordenaci&oacute;:',
-	'signature' => 'Signatura',
 	'sign_admin' => '{{Aquesta p&agrave;gina nom&eacute;s est&agrave; disponible pels responsables del lloc.}}<p>D&oacute;na acc&eacute;s a la configuraci&oacute; del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; aix&iacute; com a la gesti&oacute; dels f&ograve;rums del lloc Web.</p><p>Versi&oacute;: @version@ @distant@</p><p>Consulteu:
 _ • [La documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/?article2460]
 _ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
@@ -402,6 +403,7 @@ _ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.spip-zone.info/spi
 	'sign_reinit' => '<p>Arrencar de nou:
  _ • [tot el plugin->@plugin@]</p>',
 	'sign_tempo' => 'Realitzat amb <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
+	'signature' => 'Signatura',
 	'sinscrire' => 'Registrar-se',
 	'site_propose' => 'Lloc proposat per @auteur_post@',
 	'site_web' => 'Lloc Web',
@@ -412,8 +414,6 @@ _ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.spip-zone.info/spi
 	'statut_redac' => 'Redactor',
 	'statut_visit' => 'Membre',
 	'sujet' => 'Assumpte',
-	'sujets' => 'Assumptes',
-	'sujets_aucun' => 'De moment no hi ha cap assumpte en aquest f&ograve;rum',
 	'sujet_auteur' => 'Autor',
 	'sujet_clos_texte' => 'Aquest assumpte est&agrave; tancat, no podeu enviar-hi missatges.',
 	'sujet_clos_titre' => 'Assumpte Tancat',
@@ -425,6 +425,8 @@ _ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.spip-zone.info/spi
 	'sujet_repondre' => 'Respondre a l\'assumpte',
 	'sujet_s' => 'Assumptes',
 	'sujet_valide' => 'Assumpte per validar',
+	'sujets' => 'Assumptes',
+	'sujets_aucun' => 'De moment no hi ha cap assumpte en aquest f&ograve;rum',
 	'supprimer' => 'Suprimir',
 	'sw_admin_can_spam' => 'Els administradors estan autoritzats',
 	'sw_admin_no_spam' => 'No correu brossa',
@@ -451,7 +453,6 @@ _ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.spip-zone.info/spi
 	'sw_warning_pm_message' => 'Text del missatge privat',
 	'sw_warning_pm_titre' => 'Assumpte del missatge privat',
 	'sw_word' => 'Paraula',
-	's_abonner_a' => 'RSS . Subscriure\'s a: ',
 
 	// T
 	'title_ferme' => 'Tancar el f&ograve;rum/article',

@@ -76,8 +76,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sinscrire' => '<MODIF>p&#345;ihl&aacute;sit se',
 	'statut' => 'Status',
 	'sujet' => '<MODIF>P&#345;edm&#283;t&nbsp;',
-	'sujets' => 'P&#345;edm&#283;ty',
-	'sujets_aucun' => 'V t&eacute;to diskusn&iacute; skupin&#283; prozat&iacute;m neexistuje &#382;&aacute;dn&yacute; p&#345;edm&#283;t',
 	'sujet_auteur' => 'Autor',
 	'sujet_clos_texte' => 'Tento p&#345;edm&#283;t je ukon&#269;en. Dal&#353;&iacute; zpr&aacute;vy k n&#283;mu nem&#367;&#382;ete zas&iacute;lat.',
 	'sujet_clos_titre' => 'Skon&#269;en&yacute; p&#345;edm&#283;t',
@@ -85,6 +83,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet_nouveau' => 'Nov&yacute; p&#345;edm&#283;t',
 	'sujet_rejete' => 'Odm&iacute;tnut&yacute; p&#345;edm&#283;t',
 	'sujet_valide' => 'P&#345;edm&#283;t ke schv&aacute;len&iacute;',
+	'sujets' => 'P&#345;edm&#283;ty',
+	'sujets_aucun' => 'V t&eacute;to diskusn&iacute; skupin&#283; prozat&iacute;m neexistuje &#382;&aacute;dn&yacute; p&#345;edm&#283;t',
 
 	// T
 	'tous_forums' => 'V&#353;echny diskusn&iacute; skupiny',
