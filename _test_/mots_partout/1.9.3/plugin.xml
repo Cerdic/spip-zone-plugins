@@ -49,11 +49,6 @@
 		<inclure>mots_partout.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<action>ajouterOnglets</action>
-		<inclure>mots_partout.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>affiche_milieu</nom>
 		<action>afficherMots</action>
 		<inclure>mots_partout.php</inclure>

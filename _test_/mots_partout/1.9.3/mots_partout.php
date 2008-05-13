@@ -21,13 +21,6 @@ function MotsPartout_ajouterBoutons($boutons_admin) {
   return $boutons_admin;
 }
 
-function MotsPartout_ajouterOnglets($flux) {
-  if($flux['args']=='configuration')
-	$flux['data']['mots_partout']= new Bouton(
-											  "../"._DIR_PLUGIN_MOTSPARTOUT."/tag.png", 'Configurer Mots Partout',
-											  generer_url_ecrire("config_mots_partout"));
-  return $flux;
-}
 function MotsPartout_afficherMots($flux) {
 	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
 	if(($flux['args']['exec']=='mots_types') && $tables_installees['groupes_mots']) {
