@@ -16,6 +16,7 @@
 				[(#TYPE|=={'descriptif'}|?{' ',''}) href="#URL_PAGE{descriptif_interaction_ajax,id_interaction=#ID_INTERACTION}" class="type-descriptif thickbox"]
 				<BOUCLE_documentpointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}>[(#TYPE|=={'document'}|?{' ',''})  href="#URL_DOCUMENT" class="type-document thickbox"]</BOUCLE_documentpointe>
 				[(#TYPE|=={'jeu'}|?{' ',''}) href="#URL_PAGE{jeu_interaction_ajax,id_interaction=#ID_INTERACTION&KeepThis=true&TB_iframe=true&height=400&width=600}" class="type-jeu thickbox"]
+				<BOUCLE_objet(DOCUMENTS){id_document=#ID_OBJET}>[(#TYPE|=={'objet'}|?{' ',''})  href="#" class="type-objet type-objet#ID_DOCUMENT"]</BOUCLE_objet>
 				
 			alt="#TITRE" />
 		</BOUCLE_interactions>
@@ -42,13 +43,45 @@
 <BOUCLE_visites(VISITES_VIRTUELLES){id_visite=#ID_VISITE}>
 <BOUCLE_carte(DOCUMENTS){id_document=#ID_CARTE}>
 [$(document).ready(function(){
-	$('.panorama-viewport').append("<div class='panorama-carte'><img src='(#URL_DOCUMENT)' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><h2><a href='#'><:panoramas:carte:></a></h2></div>");
-	$('.panorama-carte h2 a').flipv().bind('click', function() { 
-				$('.panorama-carte img').slideToggle('slow');
+	$('.panorama-viewport').append("<div class='panorama-onglets'><img class='panorama-carte' src='(#URL_DOCUMENT)' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:><ul></ul></div><div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2><h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2></div></div>");
+	$('.panorama-onglets h2.panorama-carte a').flipv().bind('click', function() { 
+				$('img.panorama-carte').toggle();
+				if ($('img.panorama-carte').css('display') != 'none') 
+					$('h2.panorama-panier').hide();
+				else
+					$('h2.panorama-panier').show();
+				return false;
+	});
+	$('.panorama-onglets h2.panorama-panier a').flipv().bind('click', function() { 
+				$('div.panorama-panier').toggle();
+				if ($('div.panorama-panier').css('display') != 'none') 
+					$('h2.panorama-carte').hide();
+				else
+					$('h2.panorama-carte').show();
+				return false;
 	});
 });]
 </BOUCLE_carte>
 </BOUCLE_visites>
+	$(document).ready(function(){
+	<BOUCLE_interactionsobjet(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
+		<BOUCLE_objetcourant(DOCUMENTS){id_document=#ID_OBJET}>
+			[(#TYPE|=={'objet'}|?{' ',''})  
+				$('.type-objet#ID_DOCUMENT').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />");
+				$('.type-objet#ID_DOCUMENT').draggable({helper: 'clone', opacity: .4});
+				$('h2.panorama-panier').droppable({
+					accept: ".type-objet#ID_DOCUMENT",
+					activeClass: 'droppable-active',
+					hoverClass: 'droppable-hover',
+					drop: function(ev, ui) {
+						$('div.panorama-panier ul').append("<li><img src='#URL_DOCUMENT' /></li>");
+						$('.type-objet#ID_DOCUMENT').remove();
+					}
+				});
+			]
+		</BOUCLE_objetcourant>
+	</BOUCLE_interactionsobjet>
+	});
 
 </script>
 </BOUCLE_lieux>

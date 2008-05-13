@@ -31,6 +31,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lieu_numero' => 'Lieu num&eacute;ro',
 'interaction_numero' => 'Interaction num&eacute;ro',
 'previsualisation' => 'Pr&eacute;visualisation',
-'carte' => 'Carte'
+'carte' => 'Carte',
+'panier' => 'Panier',
+'fermer_fenetre' => 'Fermer la fen&ecirc;tre',
+'contenu_panier' => 'Contenu du panier'
 );
 ?>
