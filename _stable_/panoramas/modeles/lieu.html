@@ -8,15 +8,16 @@
 	<map id="map#ID_LIEU" name="map#ID_LIEU"> 
 		<BOUCLE_interactions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
 			<area shape="rect" coords="#X1,#X2,#Y1,#Y2"
-				[(#TYPE|=={'article'}|?{' ',''}) href="#URL_PAGE{article,id_article=#ID_ARTICLE_CIBLE}" class="type-article"]
-				[(#TYPE|=={'rubrique'}|?{' ',''}) href="#URL_PAGE{rubrique,id_rubrique=#ID_RUBRIQUE_CIBLE}" class="type-rubrique"]
-				[(#TYPE|=={'lieu'}|?{' ',''}) href="#URL_PAGE{lieu,id_lieu=#ID_LIEU_CIBLE}" class="type-lieu"]
-				[(#TYPE|=={'visite'}|?{' ',''}) href="#URL_PAGE{visite,id_visite=#ID_VISITE_CIBLE}" class="type-visite"]
-				[(#TYPE|=={'url'}|?{' ',''}) href="#URL_CIBLE" class="type-url"]
-				[(#TYPE|=={'descriptif'}|?{' ',''}) href="#URL_PAGE{descriptif_interaction_ajax,id_interaction=#ID_INTERACTION}" class="type-descriptif thickbox"]
-				<BOUCLE_documentpointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}>[(#TYPE|=={'document'}|?{' ',''})  href="#URL_DOCUMENT" class="type-document thickbox"]</BOUCLE_documentpointe>
-				[(#TYPE|=={'jeu'}|?{' ',''}) href="#URL_PAGE{jeu_interaction_ajax,id_interaction=#ID_INTERACTION&KeepThis=true&TB_iframe=true&height=400&width=600}" class="type-jeu thickbox"]
-				<BOUCLE_objet(DOCUMENTS){id_document=#ID_OBJET}>[(#TYPE|=={'objet'}|?{' ',''})  href="#" class="type-objet type-objet#ID_DOCUMENT"]</BOUCLE_objet>
+				[(#TYPE|=={'article'}|?{' ',''}) href="#URL_PAGE{article,id_article=#ID_ARTICLE_CIBLE}" class="interaction#ID_INTERACTION type-article"]
+				[(#TYPE|=={'rubrique'}|?{' ',''}) href="#URL_PAGE{rubrique,id_rubrique=#ID_RUBRIQUE_CIBLE}" class="interaction#ID_INTERACTION type-rubrique"]
+				[(#TYPE|=={'lieu'}|?{' ',''}) href="#URL_PAGE{lieu,id_lieu=#ID_LIEU_CIBLE}" class="interaction#ID_INTERACTION type-lieu"]
+				[(#TYPE|=={'visite'}|?{' ',''}) href="#URL_PAGE{visite,id_visite=#ID_VISITE_CIBLE}" class="interaction#ID_INTERACTION type-visite"]
+				[(#TYPE|=={'url'}|?{' ',''}) href="#URL_CIBLE" class="interaction#ID_INTERACTION type-url"]
+				[(#TYPE|=={'descriptif'}|?{' ',''}) href="#URL_PAGE{descriptif_interaction_ajax,id_interaction=#ID_INTERACTION}" class="interaction#ID_INTERACTION type-descriptif thickbox"]
+				<BOUCLE_documentpointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}>[(#TYPE|=={'document'}|?{' ',''})  href="#URL_DOCUMENT" class="interaction#ID_INTERACTION type-document thickbox"]</BOUCLE_documentpointe>
+				[(#TYPE|=={'jeu'}|?{' ',''}) href="#URL_PAGE{jeu_interaction_ajax,id_interaction=#ID_INTERACTION&KeepThis=true&TB_iframe=true&height=400&width=600}" class="interaction#ID_INTERACTION type-jeu thickbox"]
+				<BOUCLE_objet(DOCUMENTS){id_document=#ID_OBJET}>[(#TYPE|=={'objet'}|?{' ',''})  href="#" class="interaction#ID_INTERACTION type-objet type-objet#ID_DOCUMENT"]</BOUCLE_objet>
+				<BOUCLE_personnage(DOCUMENTS){id_document=#ID_PERSONNAGE}>[(#TYPE|=={'personnage'}|?{' ',''})  href="#" class="interaction#ID_INTERACTION type-personnage- type-personnage#ID_DOCUMENT"]</BOUCLE_personnage>
 				
 			alt="#TITRE" />
 		</BOUCLE_interactions>
@@ -64,23 +65,52 @@
 </BOUCLE_carte>
 </BOUCLE_visites>
 	$(document).ready(function(){
+		
 	<BOUCLE_interactionsobjet(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
+		
+		[ (#REM) interactions avec les objets : drag and drop dans le panier ]
 		<BOUCLE_objetcourant(DOCUMENTS){id_document=#ID_OBJET}>
 			[(#TYPE|=={'objet'}|?{' ',''})  
 				$('.type-objet#ID_DOCUMENT').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />");
-				$('.type-objet#ID_DOCUMENT').draggable({helper: 'clone', opacity: .4});
+				$('.type-objet#ID_DOCUMENT').draggable({helper: 'clone', opacity: .4, revert: true});
 				$('h2.panorama-panier').droppable({
 					accept: ".type-objet#ID_DOCUMENT",
 					activeClass: 'droppable-active',
 					hoverClass: 'droppable-hover',
 					drop: function(ev, ui) {
-						$('div.panorama-panier ul').append("<li><img src='#URL_DOCUMENT' /></li>");
+						$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+						$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
 						$('.type-objet#ID_DOCUMENT').remove();
 					}
 				});
 			]
 		</BOUCLE_objetcourant>
+	
+		[ (#REM) interactions qui requièrent un objet pour être actives (il faudra drag and dropper l'objet sur l'interaction depuis le panier ]
+		<BOUCLE_objetactivation(DOCUMENTS){id_document=#ID_OBJET_ACTIVATION}>
+			$('.interaction#ID_INTERACTION')
+				.unbind('click')
+				.bind('click', function() {
+							alert("<:panoramas:manque_objet:> #TITRE");
+							return false;
+						})
+				.droppable({
+					accept: "div.objet#ID_DOCUMENT, .type-objet#ID_DOCUMENT",
+					activeClass: 'droppable-active',
+					hoverClass: 'droppable-hover',
+					drop: function(ev, ui) {
+						alert("<:panoramas:merci:>");
+						$('div.panorama-panier').hide();
+						$('h2.panorama-carte').show();
+						$(this).unbind('click');
+						tb_init(this);
+						$('div.panorama-panier ul li div.objet#ID_DOCUMENT, .type-objet#ID_DOCUMENT').remove();
+					}
+			});
+		</BOUCLE_objetactivation>
+		
 	</BOUCLE_interactionsobjet>
+
 	});
 
 </script>

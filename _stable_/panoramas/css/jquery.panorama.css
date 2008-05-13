@@ -120,6 +120,9 @@ img.panorama-carte, div.panorama-panier {
 	opacity: .9;
 	filter: alpha(opacity=90);
 }
+div.panorama-panier ul {
+	list-style-type: none;
+}
 .panorama-onglets-titres {
 	float: left;	
 }

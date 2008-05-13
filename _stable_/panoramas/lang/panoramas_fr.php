@@ -34,6 +34,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'carte' => 'Carte',
 'panier' => 'Panier',
 'fermer_fenetre' => 'Fermer la fen&ecirc;tre',
-'contenu_panier' => 'Contenu du panier'
+'contenu_panier' => 'Contenu du panier',
+'manque_objet' => 'Il vous manque l\'objet :',
+'merci' => 'Merci'
 );
 ?>

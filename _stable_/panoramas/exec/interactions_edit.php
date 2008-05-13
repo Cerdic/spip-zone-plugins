@@ -83,6 +83,7 @@ function exec_interactions_edit(){
 			$id_jeu_cible = $row['id_jeu_cible'];
 			$url_cible = $row['url_cible'];
 			$id_objet = $row['id_objet'];
+			$id_personnage = $row['id_personnage'];
 			$id_objet_activation = $row['id_objet_activation'];
 		}
 		$focus = "";
@@ -117,6 +118,7 @@ function exec_interactions_edit(){
 		$row['id_visite_cible'] = $id_visite_cible;
 		$row['url_cible'] = $url_cible;
 		$row['id_objet'] = $id_objet;
+		$row['id_personnage'] = $id_personnage;
 		$row['id_objet_activation'] = $id_objet_activation;
 		$row['id_jeu_cible'] = $id_jeu_cible;
 		$action_link = generer_action_auteur("interactions_edit","new",urlencode($redirect));
@@ -198,6 +200,7 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$id_visite_cible = $row['id_visite_cible'];
 	$url_cible = $row['url_cible'];
 	$id_objet = intval($row['id_objet']);
+	$id_personnage = intval($row['id_personnage']);
 	$id_objet_activation = intval($row['id_objet_activation']);
 	$id_rubrique_cible = intval($row['id_rubrique_cible']);
 	$id_jeu_cible = intval($row['id_jeu_cible']);
@@ -329,6 +332,10 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= "<strong><label for='id_objet_interaction'>"._T("panoramas:id_objet")."</label></strong> ";
 	$out .= "<input type='text' name='id_objet' id='id_objet_interaction' class='formo $focus' ".
 		"value=\"".$id_objet."\" size='5' /><br />\n";
+
+	$out .= "<strong><label for='id_personnage_interaction'>"._T("panoramas:id_personnage")."</label></strong> ";
+	$out .= "<input type='text' name='id_personnage' id='id_personnage_interaction' class='formo $focus' ".
+		"value=\"".$id_personnage."\" size='5' /><br />\n";
 
 	$out .= "<strong><label for='id_objet_activation_interaction'>"._T("panoramas:id_objet_activation")."</label></strong> ";
 	$out .= "<input type='text' name='id_objet_activation' id='id_objet_activation_interaction' class='formo $focus' ".

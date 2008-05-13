@@ -25,6 +25,7 @@ function Interactions_update($id_interaction){
 	$id_visite_cible = intval(_request('id_visite_cible'));
 	$url_cible = _request('url_cible');
 	$id_objet = intval(_request('id_objet'));
+	$id_personnage = intval(_request('id_personnage'));
 	$id_objet_activation = intval(_request('id_objet_activation'));
 
 	//
@@ -53,6 +54,7 @@ function Interactions_update($id_interaction){
 			"id_visite_cible="._q($id_visite_cible).", ".
 			"url_cible="._q($url_cible).", ".
 			"id_objet="._q($id_objet).", ".
+			"id_personnage="._q($id_personnage).", ".
 			"id_objet_activation="._q($id_objet_activation).", ".
 			"id_rubrique_cible="._q($id_rubrique_cible).", ".
 			"id_jeu_cible="._q($id_jeu_cible).", ".
