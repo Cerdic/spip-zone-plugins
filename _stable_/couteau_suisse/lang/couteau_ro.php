@@ -36,10 +36,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sommaire_page_long' => ',&nbsp;page&nbsp;@page@',
 	'sommaire_titre' => 'Sumar',
 	'stats_auteur' => '@icon@ @nom@, &nbsp;@date@',
+	'stats_date' => '<NEW>@jour@/@mois@/@annee@&nbsp;&agrave;&nbsp;@h@h@m@',
 
 	// T
-	'textes_formatspip' => 'TEXTE ORIGINALE &Icirc;N FORMAT SPIP',
 	'texte_formatspip' => 'TEXT ORIGINAL &Icirc;N FORMAT SPIP',
+	'textes_formatspip' => 'TEXTE ORIGINALE &Icirc;N FORMAT SPIP',
 	'titre' => 'Cu&#355;itul Elve&#355;ian',
 
 	// V

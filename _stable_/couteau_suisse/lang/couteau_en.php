@@ -36,10 +36,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sommaire_page_long' => ',&nbsp;page&nbsp;@page@',
 	'sommaire_titre' => 'Table of content',
 	'stats_auteur' => '@icon@ @nom@, @date@',
+	'stats_date' => '@jour@/@mois@/@annee@&nbsp;at&nbsp;@h@:@m@',
 
 	// T
-	'textes_formatspip' => 'ORIGINAL TEXTS IN SPIP FORMAT',
 	'texte_formatspip' => 'ORIGINAL TEXT IN SPIP FORMAT',
+	'textes_formatspip' => 'ORIGINAL TEXTS IN SPIP FORMAT',
 	'titre' => 'Swiss Knife',
 
 	// V
