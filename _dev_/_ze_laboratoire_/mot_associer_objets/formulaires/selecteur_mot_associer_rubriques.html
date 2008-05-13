@@ -1,0 +1,25 @@
+<BOUCLE_testsirub(GROUPES_MOTS){id_groupe=#ENV{id_groupe}}{rubriques=oui}><B_rechrub>
+<h3 class='rubrique'><:info_rubriques_trouvees:></h3>
+<div class='pagination'><span class='tri'>
+<a href='[(#SELF|parametre_url{tri,date})]'><:par_date:></a> |
+<a href='[(#SELF|parametre_url{tri,titre})]'><:par_titre:></a> |
+<a href='[(#SELF|parametre_url{senstri,asc})]'><img src='#CHEMIN{images/monter-16.png}' alt='croissant' /></a> |
+<a href='[(#SELF|parametre_url{senstri,desc})]'><img src='#CHEMIN{images/descendre-16.png}' alt='decroissant' /></a> |
+</span>[(#PAGINATION)] <div class='nettoyeur'></div></div>
+<ul class='items'>
+<BOUCLE_rechrub(RUBRIQUES){!id_mot=#ENV{id}}{recherche #ENV{recherche}}{pagination 5}{par #ENV{tri,date}}{inverse #ENV{senstri,desc}|=={asc}|?{0,1}}{statut IN #ENV{statuts,#ARRAY{publie}}}>
+<li class='item article'>
+<span class='action'><input type='checkbox' name='associer[rubrique][]' value='#ID_RUBRIQUE' /></span>
+<span class='statut'></span>
+<span class='titre'>
+[<span class='logo'>(#LOGO_RUBRIQUE||image_reduire{26,20})</span>]
+<a href='#URL_ECRIRE{naviguer,id_rubrique=#ID_RUBRIQUE}' title='<:info_numero_abbreviation:> #ID_RUBRIQUE'>#TITRE</a>
+</span>
+<span class='auteurs'><BOUCLE_auteurs(AUTEURS){id_rubrique}{', '}><a href='#URL_ECRIRE{auteurs_infos,id_auteur=#ID_AUTEUR}'>#NOM</a></BOUCLE_auteurs></span>
+<span class='date'>[(#DATE|affdate_jourcourt)]</span>
+<span class='numero'><:info_numero_abbreviation:> #ID_RUBRIQUE</span>
+<div class='nettoyeur'></div>
+</li>
+</BOUCLE_rechrub>
+</ul>
+</B_rechrub></BOUCLE_testsirub>
