@@ -13,9 +13,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg' => 'CFG',
 	'choisir_module_a_configurer' => 'Escolha o m&oacute;dula para configurar',
-	'configuration_modules' => 'Configura&ccedil;&atilde;o dos m&oacute;dulos',
 	'config_enregistree' => 'Inclus&atilde;o de <b>@nom@</b> efetuada',
 	'config_supprimee' => 'Exclus&atilde;o de <b>@nom@</b> efetuada',
+	'configuration_modules' => 'Configura&ccedil;&atilde;o dos m&oacute;dulos',
 
 	// E
 	'erreur_copie_fichier' => 'N&atilde;o foi poss&iacute;vel copiar o arquivo @fichier@ para o seu local definitivo',
