@@ -8,8 +8,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'afficher_sources' => 'Visa denna syndikering',
 	'aff_resume' => 'Visa sammanfattningarna',
+	'afficher_sources' => 'Visa denna syndikering',
 	'annee' => 'Senaste &aring;ret',
 	'articles_recents_court' => 'De senaste artiklarna',
 

@@ -8,8 +8,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'afficher_sources' => 'D&euml;s Source weisen',
 	'aff_resume' => 'R&eacute;sum&eacute; weisen',
+	'afficher_sources' => 'D&euml;s Source weisen',
 	'annee' => 'Jo&euml;r',
 	'articles_recents_court' => 'Nei Artikelen',
 
