@@ -11,8 +11,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_non' => ':&nbsp;no',
 	'2pts_oui' => ':&nbsp;yes',
 
+	// S
+	'SPIP_liens:description' => '@puce@ By default, all links on the site open in the current window. But it can be useful to open external links in a new window, i.e. adding {target="_blank"} to all link tags bearing one of the SPIP classes {spip_out}, {spip_url} or {spip_glossaire}. It is sometimes necessary to add one of these classes to the links in the site\'s templates (html files) in order make this functionality wholly effective.[[%radio_target_blank3%]]
+
+@puce@ SPIP provides the shortcut <code>[?word]</code> to link words to their definition. By default (or if you leave the box below empty), wikipedia.org is used as the external glossary. You may choose another address. <br />Test link: [?SPIP][[%url_glossaire_externe2%]]',
+	'SPIP_liens:nom' => 'SPIP and external links',
+
 	// A
 	'acces_admin' => 'Administrators\' access:',
+	'auteur_forum:description' => 'Request all authors of public messages to fill in (with at least one letter!) the field "@_CS_FORUM_NOM@" in order to avoid completely anonymous messages.',
+	'auteur_forum:nom' => 'No anonymous forums',
 	'auteurs:description' => 'This tool configures the appearance of [the authors\' page->./?exec=auteurs], in the private area.
 
 @puce@ Define here the maximum number of authors to display in the central frame of the author\'s page. Beyond this number page numbering will be triggered.[[%max_auteurs_page%]]
@@ -20,8 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @puce@ Which kinds of authors should be listed on the spages?
 [[%auteurs_tout_voir%]][[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]',
 	'auteurs:nom' => 'Authors page',
-	'auteur_forum:description' => 'Request all authors of public messages to fill in (with at least one letter!) the field "@_CS_FORUM_NOM@" in order to avoid completely anonymous messages.',
-	'auteur_forum:nom' => 'No anonymous forums',
 
 	// B
 	'basique' => 'Basic',
@@ -154,6 +160,10 @@ _ This tool may be combined with {A summary for your articles}.',
 	'etendu' => 'Expanded',
 
 	// F
+	'f_jQuery:description' => 'Prevents the installation of {jQuery} on th epublic site in order to economise some "machine resources". The jQuery library ([->http://jquery.com/]) is useful in Javascript programming and many plugins use it. SPIP uses it in the editing interface.
+
+N.B: some Swiss Knife tools require {jQuery} to be installed. ',
+	'f_jQuery:nom' => 'Deactivate jQuery',
 	'filets_sep:aide' => 'Dividing lines: <b>__i__</b> or <b>i</b> is a number.<br />Other available lines: @liste@',
 	'filets_sep:description' => 'Inserts separating lines for any SPIP texts which can be customised with a stylesheet.
 _ The syntax is: "__code__", where "code" is either the identifying number (from 0 to 7) of the line to insert and which is linked to the corresponding style, or the name of an image in the plugins/couteau_suisse/img/filets directory.',
@@ -174,10 +184,6 @@ forcer_langue)',
 	'format_spip' => 'Articles in SPIP format',
 	'forum_lgrmaxi:description' => 'By default forum messages are not limited in size. If this tool is activated, an error message is shown each time someone tries to post a message larger than the size given, and the message is refused. An empty value (or 0) means that no limit will be imposed.[[%forum_lgrmaxi%]]',
 	'forum_lgrmaxi:nom' => 'Size of forums',
-	'f_jQuery:description' => 'Prevents the installation of {jQuery} on th epublic site in order to economise some "machine resources". The jQuery library ([->http://jquery.com/]) is useful in Javascript programming and many plugins use it. SPIP uses it in the editing interface.
-
-N.B: some Swiss Knife tools require {jQuery} to be installed. ',
-	'f_jQuery:nom' => 'Deactivate jQuery',
 
 	// G
 	'glossaire:description' => '@puce@ Use one or several groups of keywords to manage an internal glossary. Enter the names of the groups here, separating them by  colons (:). If you leave the box empty (or enter "Glossaire"), it is the "Glossaire" group which will be used.[[%glossaire_groupes%]]@puce@ You can indicate the maximum number of links to create in a text for each word. A null or negative value will mean that all instances of the words will be treated. [[%glossaire_limite% par mot-cl&eacute;]]@puce@ There is a choice of two options for generating the small window which appears on the mouseover. [[%glossaire_js%]]',
@@ -197,10 +203,10 @@ _ • [the whole plugin->@reset@]
 </p>',
 
 	// I
-	'insertions:description' => 'N.B.: tool in development!! [[%insertions%]]',
-	'insertions:nom' => 'Auto-correct',
 	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between &lt;head&gt; et &lt;/head&gt;. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
 	'insert_head:nom' => '#INSERT_HEAD tag',
+	'insertions:description' => 'N.B.: tool in development!! [[%insertions%]]',
+	'insertions:nom' => 'Auto-correct',
 	'introduction:description' => 'This tag can be used in templates to generate short summaries of articles, new items, etc.</p>
 <p>{{Beware}} : If you have another plugin defining the fonction {balise_INTRODUCTION()} or you have defined it in your templates, you will get a compilation error.</p>
 @puce@ You can specify (as a percentage of the default value) the lenght of the text generated by the tag #INTRODUCTION. A null value, or a value equal to 100 will not modify anything and return the defaults: : 500 characters for the articles, 300 for the news items and 600 for forums and sections.
@@ -235,9 +241,9 @@ _ • [the whole plugin->@reset@]
 	'label:insertions' => 'Auto-correct:',
 	'label:lgr_introduction' => 'Length of summary:',
 	'label:lgr_sommaire' => 'Length of summary (9 to 99):',
+	'label:lien_inctroduction' => 'Clickable follow-on dots:',
 	'label:liens_interrogation' => 'Protect URLs:',
 	'label:liens_orphelins' => 'Clickable links:',
-	'label:lien_inctroduction' => 'Clickable follow-on dots:',
 	'label:max_auteurs_page' => 'Authors per page:',
 	'label:message_travaux' => 'Your maintenance message:',
 	'label:paragrapher' => 'Always insert paragraphs:',
@@ -286,22 +292,13 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me@s
 	'modifier_vars' => 'Change these @nb@ parameters',
 
 	// N
-	'nouveaux' => 'New',
 	'no_IP:description' => 'Deactivates, in order to preserve confidentiality, the mechanism which records the IP addresses of visitors to your site. SPIP will thus no longer record any IP addresses, neither temporarily at the time of the visits (used for managing statistics or for spip.log), nor in the forums (source of posts).',
 	'no_IP:nom' => 'No IP recording',
+	'nouveaux' => 'New',
 
 	// O
 	'orientation:description' => '3 new criteria for your templates: <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Ideal for sorting photos according to their format (carre = square; paysage = landscape).',
 	'orientation:nom' => 'Picture orientation',
-	'outils_actifs' => 'Activated tools:',
-	'outils_caches' => 'Hidden tools:',
-	'outils_inactifs' => 'Inactive tools:',
-	'outils_liste' => 'List of tools of the Swiss Knife',
-	'outils_permuter_gras1' => 'Switch the tools in bold type',
-	'outils_permuter_gras2' => 'Switch the @nb@ tools in bold type?',
-	'outils_resetselection' => 'Reset the selection',
-	'outils_selectionactifs' => 'Select all the active tools',
-	'outils_selectiontous' => 'ALL',
 	'outil_actif' => 'Activated tool',
 	'outil_activer' => 'Activate',
 	'outil_activer_le' => 'Activate the tool',
@@ -310,10 +307,20 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me@s
 	'outil_desactiver_le' => 'Deactivate this tool',
 	'outil_inactif' => 'Inactive tool',
 	'outil_intro' => 'This page lists the functionalties which the plugin makes available to you.<br /><br />By clicking on the names of the tools below, you choose the ones which you can then switch on/off using the central button: active tools will be disabled and <i>vice versa</i>. When you click, the tools description is shown above the list. The tool categories are collapsible to hide the tools they contain. A double-click allows you to directly switch a tool on/off.<br /><br />For first use, it is recommended to activate tools one by one, thus reavealing any incompatibilites with your templates, with SPIP or with other plugins.<br /><br />N.B.: simply loading this page recompiles all the Swiss Knife tools.',
-	'outil_intro_old' => '<MODIF>This is the old interface.<br /><br />If you have difficulties in using <a href=\\\'./?exec=admin_couteau_suisse\\\'>the new interface</a>, please let us know in the forum of <a href=\\\'http://www.spip-contrib.net/?article2166\\\'>Spip-Contrib</a>.',
+	'outil_intro_old' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\\\'./?exec=admin_couteau_suisse\\\'>the new interface</a>, please let us know in the forum of <a href=\\\'http://www.spip-contrib.net/?article2166\\\'>Spip-Contrib</a>.',
 	'outil_nb' => '@pipe@ : @nb@ tool',
 	'outil_nbs' => '@pipe@ : @nb@ tools',
 	'outil_permuter' => 'Switch the tool: &laquo; @text@ &raquo; ?',
+	'outils_actifs' => 'Activated tools:',
+	'outils_caches' => 'Hidden tools:',
+	'outils_cliquez' => 'Click on the names of the tools below to show their description.',
+	'outils_inactifs' => 'Inactive tools:',
+	'outils_liste' => 'List of tools of the Swiss Knife',
+	'outils_permuter_gras1' => 'Switch the tools in bold type',
+	'outils_permuter_gras2' => 'Switch the @nb@ tools in bold type?',
+	'outils_resetselection' => 'Reset the selection',
+	'outils_selectionactifs' => 'Select all the active tools',
+	'outils_selectiontous' => 'ALL',
 
 	// P
 	'pack_alt' => 'See the current configuration parameters',
@@ -325,9 +332,9 @@ If you reset the plugin by clicking on a pack, the Swiss Knife will reconfigure 
 	'pack_du' => '• of the pack @pack@',
 	'pack_installe' => 'Installation of a configuration pack',
 	'pack_titre' => 'Current configuration',
+	'par_defaut' => 'By default',
 	'paragrapher2:description' => 'The SPIP function <code>paragrapher()</code> inserts the tags &lt;p&gt; and &lt;/p&gt; around all texts which do not have paragraphs. In order to have a finer control over your styles and layout, you can give a uniform look to your texts throughout the site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Insert paragraphs',
-	'par_defaut' => 'By default',
 	'pipelines' => 'Entry points used:',
 	'pucesli:description' => 'Replaces bullets &laquo;-&raquo; (simple dash) in articles with ordered lists &laquo;-*&raquo; (transformed into  &lt;ul>&lt;li>…&lt;/li>&lt;/ul> in HTML) whose style may be customised using CSS.',
 	'pucesli:nom' => 'Beautiful bullets',
@@ -340,6 +347,7 @@ If you reset the plugin by clicking on a pack, the Swiss Knife will reconfigure 
 	'rss_desactiver' => 'Deactivate &laquo;Swiss Knife updates&raquo;',
 	'rss_edition' => 'RSS feed updated:',
 	'rss_titre' => 'Development of the &laquo;The Swiss Knife&raquo;:',
+	'rss_var' => 'Swiss Knife updates',
 
 	// S
 	'sauf_admin' => 'All, except administrators',
@@ -378,13 +386,9 @@ List here the sequences you wish to prohibit@_CS_ASTER@ separating them with spa
 	'spam:nom' => 'Fight against SPAM',
 	'spip_cache:description' => '@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily, in order to see the effect of changes immediately.[[%radio_desactive_cache3%]]@puce@ The cache occupies disk space and SPIP can limit the amount of space taken up. Leaving empty or putting 0 means that no quota will be applied.[[%quota_cache% Mo]]@puce@ If the  #CACHE tag is not found in a template, then, by default, SPIP caches a page for 24 hours before recalculating it. You can modify this default here.[[%duree_cache% heures]]@puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:nom' => 'SPIP and the cache',
-	'SPIP_liens:description' => '@puce@ By default, all links on the site open in the current window. But it can be useful to open external links in a new window, i.e. adding {target="_blank"} to all link tags bearing one of the SPIP classes {spip_out}, {spip_url} or {spip_glossaire}. It is sometimes necessary to add one of these classes to the links in the site\'s templates (html files) in order make this functionality wholly effective.[[%radio_target_blank3%]]
-
-@puce@ SPIP provides the shortcut <code>[?word]</code> to link words to their definition. By default (or if you leave the box below empty), wikipedia.org is used as the external glossary. You may choose another address. <br />Test link: [?SPIP][[%url_glossaire_externe2%]]',
-	'SPIP_liens:nom' => 'SPIP and external links',
+	'stat_auteurs' => 'Authors in statistics',
 	'statuts_spip' => 'Only the following SPIP status:',
 	'statuts_tous' => 'Every status',
-	'stat_auteurs' => 'Authors in statistics',
 	'suivi_forums:description' => 'The author of an article is always informed when a message is posted in the article\'s public forum. It is also possible to inform others: either all the forum\'s participants, or  just all the authors of messages higher in the thread.[[%radio_suivi_forums3%]]',
 	'suivi_forums:nom' => 'Overview of the public forums',
 	'supprimer_cadre' => 'Delete this frame',

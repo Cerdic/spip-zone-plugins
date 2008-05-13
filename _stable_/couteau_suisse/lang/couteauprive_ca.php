@@ -11,8 +11,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_non' => '&nbsp;:&nbsp;no',
 	'2pts_oui' => '&nbsp;:&nbsp;si',
 
+	// S
+	'SPIP_liens:description' => '@puce@ Tout els enlla&ccedil;os del lloc s\'obren per defecte a la mateixa finestra de navegaci&oacute; que esteu. Per&ograve; pot ser &uacute;til obrir els enlla&ccedil;os externs al lloc en una nova finestra --es pot aconseguir afegint {target="_blank"} a totes les etiquetes &lt;a&gt; dotades per SPIP de les classes {spip_out}, {spip_url} o {spip_glossaire}. A vegades pot ser &uacute;til afegir una d\'aquestes classes als enlla&ccedil;os de l\'esquelet del lloc (fitxers html) per tal d\'ampliar al m&agrave;xim aquesta funcionalitat.[[%radio_target_blank3%]]
+
+@puce@ SPIP permet lligar paraules amb la seva definici&oacute; gr&agrave;cies a la drecera tipogr&agrave;fica <code>[?mot]</code>. Per defecte (o si deixeu buida la casella de m&eacute;s avall), el glossari extern us envia cap a l\'enciclop&egrave;dia lliure wikipedia.org. Us toca a vosaltres decidir quina adre&ccedil;a voleu utilitzar. <br />Enlla&ccedil; de prova: [?SPIP][[%url_glossaire_externe2%]]',
+	'SPIP_liens:nom' => 'SPIP i els enlla&ccedil;os externs',
+
 	// A
 	'acces_admin' => 'Acc&eacute;s administradors:',
+	'auteur_forum:description' => 'Incita a tots els autors de missatges p&uacute;blics a omplir (amb una lletra com a m&iacute;nim!) el camp &laquo;@_CS_FORUM_NOM@&raquo; per tal d\'evitar les contribucions totalment an&ograve;nimes.',
+	'auteur_forum:nom' => 'No als f&ograve;rums an&ograve;nims',
 	'auteurs:description' => 'Aquesta eina configura l\'aparen&ccedil;a de [la p&agrave;gina autors->./?exec=auteurs], a la part privada.
 
 @puce@ Defineix aqu&iacute; el nombre m&agrave;xim d\'autors a mostrar en el quadre central de la p&agrave;gina d\'autors. M&eacute;s enll&agrave;, trobem una paginaci&oacute;.[[%max_auteurs_page%]]
@@ -20,8 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @puce@ Quins estats d\'autors es poden llistar en aquesta p&agrave;gina? 
 [[%auteurs_tout_voir%]][[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]',
 	'auteurs:nom' => 'P&agrave;gina d\'autors',
-	'auteur_forum:description' => 'Incita a tots els autors de missatges p&uacute;blics a omplir (amb una lletra com a m&iacute;nim!) el camp &laquo;@_CS_FORUM_NOM@&raquo; per tal d\'evitar les contribucions totalment an&ograve;nimes.',
-	'auteur_forum:nom' => 'No als f&ograve;rums an&ograve;nims',
 
 	// B
 	'basique' => 'B&agrave;sic',
@@ -156,6 +162,10 @@ _ Aquesta eina es pot completar amb {Un sumari pels vostres articles}.',
 	'etendu' => 'Est&egrave;s',
 
 	// F
+	'f_jQuery:description' => 'Impedeix la instal&middot;laci&oacute; de {jQuery} a la part p&uacute;blica per tal d\'economitzar una mica de &laquo;temps m&agrave;quina&raquo;. Aquesta llibreria ([->http://jquery.com/]) aporta nombroses comoditats a la programaci&oacute; de Javascript i pot ser utilitzat per certs plugins. SPIP l\'utilitza a la seva part privada.
+
+Atenci&oacute;: certes eines del Ganivet Su&iacute;s necessiten les funcions de {jQuery}. ',
+	'f_jQuery:nom' => 'Desactiva jQuery',
 	'filets_sep:aide' => 'L&iacute;nies de Separaci&oacute;: <b>__i__</b> o <b>i</b> &eacute;s un nombre.<br />Altres l&iacute;nies disponibles: @liste@',
 	'filets_sep:description' => 'Insereix l&iacute;nies de separaci&oacute;, que es poden personalitzar per fulls d\'estil, a tots els textos d\'SPIP.
 _ La sintaxi &eacute;s: "__code__", o "code" representa o b&eacute; el n&uacute;mero d\'identificaci&oacute; (de 0 a 7) de la l&iacute;nia a inserir en relaci&oacute; directa amb els estils corresponents, o b&eacute; el nom d\'una imatge situada a dins de la carpeta plugins/couteau_suisse/img/filets.',
@@ -175,10 +185,6 @@ Atenci&oacute;: a dins dels f&ograve;rums, peticions, flux sindicats, etc., la g
 	'format_spip' => 'Els articles en format SPIP',
 	'forum_lgrmaxi:description' => 'Per defecte, els missatges de f&ograve;rum no tenen l&iacute;mits de mida. Si aquesta eina est&agrave; activada, es mostrar&agrave; un missatge d\'error quan alg&uacute; vulgui enviar un missatge d\'una mida superior al valor especificat, i el missatge es rebutjar&agrave;. Un valor buit o igual a 0 significa, no obstant, que no s\'aplica cap l&iacute;mit.[[%forum_lgrmaxi%]]',
 	'forum_lgrmaxi:nom' => 'Mida dels f&ograve;rums',
-	'f_jQuery:description' => 'Impedeix la instal&middot;laci&oacute; de {jQuery} a la part p&uacute;blica per tal d\'economitzar una mica de &laquo;temps m&agrave;quina&raquo;. Aquesta llibreria ([->http://jquery.com/]) aporta nombroses comoditats a la programaci&oacute; de Javascript i pot ser utilitzat per certs plugins. SPIP l\'utilitza a la seva part privada.
-
-Atenci&oacute;: certes eines del Ganivet Su&iacute;s necessiten les funcions de {jQuery}. ',
-	'f_jQuery:nom' => 'Desactiva jQuery',
 
 	// G
 	'glossaire:description' => '@puce@ Gesti&oacute; d\'un glossari intern lligat a un o diversos grups de paraules clau. Inscriviu aqu&iacute; el nom dels grups separant-los per dos punts &laquo;&nbsp;:&nbsp;&raquo;. Deixant buida la casella que segueix (o teclejant "Glossari"), &eacute;s el grup "Glossari" el que es far&agrave; servir.[[%glossaire_groupes%]]@puce@ Per cada paraula, teniu la possibilitat d\'escollir el n&uacute;mero m&agrave;xim d\'enlla&ccedil;os creats als vostres textos. Tot valor nul o negatiu implica que es tractaran totes les paraules reconegudes. [[%glossaire_limite% per paraula clau]]@puce@ S\'ofereixen dues solucions per gestionar la petita finestra autom&agrave;tica que apareix quan hi passes per sobre el ratol&iacute;.  [[%glossaire_js%]]',
@@ -198,10 +204,10 @@ _ • [De tot el plugin->@reset@]
 </p>',
 
 	// I
-	'insertions:description' => 'ATENCI&Oacute;: eina en curs de desenvolupament!! [[%insertions%]]',
-	'insertions:nom' => 'Correccions autom&agrave;tiques',
 	'insert_head:description' => 'Activa autom&agrave;ticament l\'etiqueta [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] a tots els esquelets, tinguin o no aquesta etiqueta entre &lt;head&gt; i &lt;/head&gt;. Gr&agrave;cies a aquesta opci&oacute;, els plugins podran inserir javascript (.js) o fulls d\'estil (.css).',
 	'insert_head:nom' => 'Etiqueta #INSERT_HEAD',
+	'insertions:description' => 'ATENCI&Oacute;: eina en curs de desenvolupament!! [[%insertions%]]',
+	'insertions:nom' => 'Correccions autom&agrave;tiques',
 	'introduction:description' => 'Aquesta etiqueta situada als esquelets serveix en general a la p&agrave;gina principal o a les seccions per fer un resum dels articles, breus, etc..</p>
 <p>{{Atenci&oacute;}}: Abans d\'activar aquesta funcionalitat, verifiqueu b&eacute; que no existeix ja cap funci&oacute; {balise_INTRODUCTION()} al vostre esquelet o als vostres plugins. La sobrec&agrave;rrega produ&iuml;ra un error de compilaci&oacute;.</p>
 @puce@ Podeu precisar (en percentatge en relaci&oacute; al valor utilitzat per defecte) la llargada del text retornat per l\'etiqueta #INTRODUCTION. Un valor  nul o igual a 100 no modifica l\'aspecte de la introducci&oacute; i utilitza, per tant, els valors per defecte seg&uuml;ents: 500 car&agrave;cters pels articles, 300 per les breus i 600 per les seccions.
@@ -236,9 +242,9 @@ _ • [De tot el plugin->@reset@]
 	'label:insertions' => 'Correccions autom&agrave;tiques:',
 	'label:lgr_introduction' => 'Llargada del resum:',
 	'label:lgr_sommaire' => 'Llargada del sumari (9 a 99):',
+	'label:lien_inctroduction' => 'Punts de continuaci&oacute; clicables:',
 	'label:liens_interrogation' => 'Protegir els URLs: ',
 	'label:liens_orphelins' => 'Enlla&ccedil;os clicables:',
-	'label:lien_inctroduction' => 'Punts de continuaci&oacute; clicables:',
 	'label:max_auteurs_page' => 'Autors per p&agrave;gina:',
 	'label:message_travaux' => 'El vostre missatge de manteniment:',
 	'label:paragrapher' => 'Sempre par&agrave;grafs:',
@@ -287,22 +293,13 @@ _ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del t
 	'modifier_vars' => 'Modificar aquests @nb@ par&agrave;metres',
 
 	// N
-	'nouveaux' => 'Nou',
 	'no_IP:description' => 'Desactiva el mecanisme d\'enregistrament autom&agrave;tic de les adreces IP dels visitants del vostre lloc per motius de confidencialitat: SPIP no conservar&agrave; m&eacute;s cap n&uacute;mero IP, ni temporalment, de les persones que us puguin visitar (per gestionar les estad&iacute;stiques o alimentar spip.log), ni en els f&ograve;rums (responsabilitat).',
 	'no_IP:nom' => 'No emmagatzemar la IP',
+	'nouveaux' => 'Nou',
 
 	// O
 	'orientation:description' => '3 nous criteris pels vostres esquelets: <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Ideal per la classificaci&oacute; de les fotografies en funci&oacute; de la seva forma. ',
 	'orientation:nom' => 'Orientaci&oacute; de les imatges',
-	'outils_actifs' => 'Eines actives:',
-	'outils_caches' => 'Eines amagades:',
-	'outils_inactifs' => 'Eines inactives:',
-	'outils_liste' => 'Llista d\'eines del Ganivet Su&iacute;s',
-	'outils_permuter_gras1' => 'Intercanviar les eines en negreta',
-	'outils_permuter_gras2' => 'Intercanviar les @nb@ eines en negreta?',
-	'outils_resetselection' => 'Reiniciar la selecci&oacute;',
-	'outils_selectionactifs' => 'Seleccionar totes les eines actives',
-	'outils_selectiontous' => 'TOTS',
 	'outil_actif' => 'Eina activa',
 	'outil_activer' => 'Activar',
 	'outil_activer_le' => 'Activar l\'eina',
@@ -311,10 +308,20 @@ _ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del t
 	'outil_desactiver_le' => 'Desactivar l\'eina',
 	'outil_inactif' => 'Eina inactiva',
 	'outil_intro' => 'Aquesta p&agrave;gina llista les funcionalitats del plugin que teniu disponibles.<br /><br />Fent un clic damunt del nom de les eines que hi ha m&eacute;s avall, seleccioneu aquells als que podreu canviar l\'estat amb l\'ajuda del bot&oacute; central: les eines activades es desactivaran i <i>viceversa</i>. A cada clic, la descripci&oacute; apareix a sota de les llistes. Les categories s&oacute;n plegables i les eines es poden amagar.  El doble-clic permet de canviar r&agrave;pidament una eina.<br /><br />Quan s\'usa per primer cop, &eacute;s recomanable activar les eina una a una, per si apareixen algunes incompatibilitats amb el vostre esquelet, amb SPIP o amb altres plugins.<br /><br />Nota: la simple c&agrave;rrega d\'aquesta p&agrave;gina torna a compilar el conjunt d\'eines del Ganivet Su&iacute;s.',
-	'outil_intro_old' => '<MODIF>Aquesta interf&iacute;cie &eacute;s antiga.<br /><br />Si trobeu problemes en l\'&uacute;s de la <a href=\'./?exec=admin_couteau_suisse\'>nova interf&iacute;cie</a>, no dubteu de dir-nos-ho al f&ograve;rum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
+	'outil_intro_old' => 'Aquesta interf&iacute;cie &eacute;s antiga.<br /><br />Si trobeu problemes en l\'&uacute;s de la <a href=\'./?exec=admin_couteau_suisse\'>nova interf&iacute;cie</a>, no dubteu de dir-nos-ho al f&ograve;rum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
 	'outil_nb' => '@pipe@: @nb@ eina',
 	'outil_nbs' => '@pipe@: @nb@ eines',
 	'outil_permuter' => 'Intercanviar l\'eina: &laquo;@text@&raquo;?',
+	'outils_actifs' => 'Eines actives:',
+	'outils_caches' => 'Eines amagades:',
+	'outils_cliquez' => 'Feu un clic sobre el nom de les eines que hi ha m&eacute;s amunt per mostrar aqu&iacute; la seva descripci&oacute;. ',
+	'outils_inactifs' => 'Eines inactives:',
+	'outils_liste' => 'Llista d\'eines del Ganivet Su&iacute;s',
+	'outils_permuter_gras1' => 'Intercanviar les eines en negreta',
+	'outils_permuter_gras2' => 'Intercanviar les @nb@ eines en negreta?',
+	'outils_resetselection' => 'Reiniciar la selecci&oacute;',
+	'outils_selectionactifs' => 'Seleccionar totes les eines actives',
+	'outils_selectiontous' => 'TOTS',
 
 	// P
 	'pack_alt' => 'Veure els par&agrave;metres de configuraci&oacute; en curs',
@@ -326,9 +333,9 @@ Si torneu a iniciar el plugin fent un clic sobre un pack, el Ganivet Su&iacute;s
 	'pack_du' => '• del pack @pack@',
 	'pack_installe' => 'Instal&middot;laci&oacute; d\'un pack de configuraci&oacute;',
 	'pack_titre' => 'Configuraci&oacute; Actual',
+	'par_defaut' => 'Per defecte',
 	'paragrapher2:description' => 'La funci&oacute; SPIP <code>paragrapher()</code> insereix etiquetes &lt;p&gt; i &lt;/p&gt; a tots els textos que estan desprove&iuml;ts de par&agrave;grafs. Per tal de gestionar m&eacute;s finament els vostres estils i les vostres compaginacions, teniu la possibilitat d\'uniformitzar l\'aspecte dels textos del vostre lloc.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Par&agrave;graf',
-	'par_defaut' => 'Per defecte',
 	'pipelines' => 'Pipelines utilitzades:',
 	'pucesli:description' => 'Substitueix els car&agrave;cters &laquo;-&raquo; (guionet simple) dels articles per llistes numerades &laquo;-*&raquo; (tradu&iuml;des en HTML per: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) dels que l\'estil es pot personalitzar amb CSS.',
 	'pucesli:nom' => 'Car&agrave;cters bonics',
@@ -341,6 +348,7 @@ Si torneu a iniciar el plugin fent un clic sobre un pack, el Ganivet Su&iacute;s
 	'rss_desactiver' => 'Desactivar les &laquo;Revisions del Ganivet Su&iacute;s&raquo;',
 	'rss_edition' => 'Flux RSS actualitzat el:',
 	'rss_titre' => '&laquo;El Ganivet Su&iacute;s&raquo; en desenvolupament:',
+	'rss_var' => 'Les revisions del Ganivet Su&iacute;s',
 
 	// S
 	'sauf_admin' => 'Tots, excepte els administradors',
@@ -379,13 +387,9 @@ Llisteu aqu&iacute; les seq&uuml;&egrave;ncies prohibides @_CS_ASTER@ separant-l
 	'spam:nom' => 'Lluita contra l\'SPAM',
 	'spip_cache:description' => '@puce@ Per defecte, SPIP calcula totes les p&agrave;gines p&uacute;bliques i les situa a la mem&ograve;ria cau per tal d\'accelerar la consulta. Desactivar temporalment la mem&ograve;ria cau pot ajudar al desenvolupament del lloc.[[%radio_desactive_cache3%]]@puce@ La mem&ograve;ria cau ocupa un cert espai del disc i SPIP pot limitar-ne la import&agrave;ncia. Un valor buit o igual a 0 significa que no s\'aplica cap quota.[[%quota_cache% Mo]]@puce@ Si l\'etiqueta #CACHE no es troba als vostres esquelets locals, SPIP considera per defecte que la mem&ograve;ria cau d\'una p&agrave;gina t&eacute; una durada de vida de 24 hores abans de tornar-la a calcular. Per tal de gestionar millor l&iexcl;enc&agrave;rrec del vostre servidor, podeu modificar aqu&iacute; aquest valor.[[%duree_cache% heures]]@puce@ Si teniu diversos llocs mutualitzats, podeu especificar aqu&iacute; el valor per defecte que tindran en compte tots els llocs locals (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:nom' => 'SPIP i la mem&ograve;ria cau…',
-	'SPIP_liens:description' => '@puce@ Tout els enlla&ccedil;os del lloc s\'obren per defecte a la mateixa finestra de navegaci&oacute; que esteu. Per&ograve; pot ser &uacute;til obrir els enlla&ccedil;os externs al lloc en una nova finestra --es pot aconseguir afegint {target="_blank"} a totes les etiquetes &lt;a&gt; dotades per SPIP de les classes {spip_out}, {spip_url} o {spip_glossaire}. A vegades pot ser &uacute;til afegir una d\'aquestes classes als enlla&ccedil;os de l\'esquelet del lloc (fitxers html) per tal d\'ampliar al m&agrave;xim aquesta funcionalitat.[[%radio_target_blank3%]]
-
-@puce@ SPIP permet lligar paraules amb la seva definici&oacute; gr&agrave;cies a la drecera tipogr&agrave;fica <code>[?mot]</code>. Per defecte (o si deixeu buida la casella de m&eacute;s avall), el glossari extern us envia cap a l\'enciclop&egrave;dia lliure wikipedia.org. Us toca a vosaltres decidir quina adre&ccedil;a voleu utilitzar. <br />Enlla&ccedil; de prova: [?SPIP][[%url_glossaire_externe2%]]',
-	'SPIP_liens:nom' => 'SPIP i els enlla&ccedil;os externs',
+	'stat_auteurs' => 'Els autors en stat',
 	'statuts_spip' => 'Nom&eacute;s els statuts SPIP seg&uuml;ents:',
 	'statuts_tous' => 'Tots els statuts',
-	'stat_auteurs' => 'Els autors en stat',
 	'suivi_forums:description' => 'Un autor d\'un article est&agrave; sempre informat quan es publica un missatge al f&ograve;rum que aquest t&eacute; associat. Per&ograve;, a m&eacute;s, tamb&eacute; es possible advertir a: tots els participants al f&ograve;rum o nom&eacute;s als autors dels missatges en endavant.[[%radio_suivi_forums3%]]',
 	'suivi_forums:nom' => 'Seguiment dels f&ograve;rums p&uacute;blics',
 	'supprimer_cadre' => 'Suprimir aquest quadre',
