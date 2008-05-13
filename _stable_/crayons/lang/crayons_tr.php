@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer' => 'D&uuml;zenle',
-	'editer_@type@_@id@' => '@type@ @id@ tamamen d&uuml;zenle',
+	'editer_@type@_@id@' => '@type@ @id@ t&uuml;m&uuml;n&uuml; d&uuml;zenle',
 	'editer_tout' => 'Hepsini d&uuml;zenle',
 
 	// M
