@@ -15,7 +15,7 @@
 [<span class='logo'>(#LOGO_ARTICLE||image_reduire{26,20})</span>]
 <a href='#URL_ECRIRE{articles,id_article=#ID_ARTICLE}' title='<:info_numero_abbreviation:> #ID_ARTICLE'>#TITRE</a>
 </span>
-<span class='auteurs'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href='#URL_ECRIRE{auteurs_infos,id_auteur=#ID_AUTEUR}'>#NOM</a></BOUCLE_auteurs></span>
+<span class='auteurs'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href='#URL_ECRIRE{auteurs_infos,id_auteur=#ID_AUTEUR}'>#NOM</a></BOUCLE_auteurs>&nbsp;<//B_auteurs></span>
 <span class='date'>[(#DATE|affdate_jourcourt)]</span>
 <span class='numero'><:info_numero_abbreviation:> #ID_ARTICLE</span>
 <div class='nettoyeur'></div>

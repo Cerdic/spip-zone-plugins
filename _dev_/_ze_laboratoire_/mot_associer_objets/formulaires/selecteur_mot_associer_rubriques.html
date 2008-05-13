@@ -15,7 +15,7 @@
 [<span class='logo'>(#LOGO_RUBRIQUE||image_reduire{26,20})</span>]
 <a href='#URL_ECRIRE{naviguer,id_rubrique=#ID_RUBRIQUE}' title='<:info_numero_abbreviation:> #ID_RUBRIQUE'>#TITRE</a>
 </span>
-<span class='auteurs'><BOUCLE_auteurs(AUTEURS){id_rubrique}{', '}><a href='#URL_ECRIRE{auteurs_infos,id_auteur=#ID_AUTEUR}'>#NOM</a></BOUCLE_auteurs></span>
+<span class='auteurs'><BOUCLE_auteurs(AUTEURS){id_rubrique}{', '}><a href='#URL_ECRIRE{auteurs_infos,id_auteur=#ID_AUTEUR}'>#NOM</a></BOUCLE_auteurs>&nbsp;<//B_auteurs></span>
 <span class='date'>[(#DATE|affdate_jourcourt)]</span>
 <span class='numero'><:info_numero_abbreviation:> #ID_RUBRIQUE</span>
 <div class='nettoyeur'></div>
