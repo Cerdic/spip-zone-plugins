@@ -54,8 +54,8 @@ function gis_insertar_head($flux){
 		$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>';
 		if ((_request('exec')=='articles'))
 			$flux .= '<script type="text/javascript">
-		$(document).ready(function() {
-			$(\'#cadroFormulario\').hide()
+		jQuery(document).ready(function() {
+			jQuery(\'#cadroFormulario\').hide()
 		});
 		</script>
 		<script type="text/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
@@ -75,7 +75,7 @@ function gis_affichage_final($flux){
 		<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>
 		<script type="text/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
         $incHead .= '<script type="text/javascript">
-                $(document).unload(function(){
+                jQuery(document).unload(function(){
                 	Gunload();
                 });
                 </script>';
