@@ -1,0 +1,44 @@
+[(#REM) descriptif=
+<h4>Configuration du plugin SWFUpload</h4>
+Ici vous pouvez indiquer diff&eacute;rentes valeurs pour configurer le plugin.<br />
+<br />
+]
+
+[(#REM) titre=SWFUpload]
+[(#REM) icone=images/swfupload-24.png]
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset><legend><:swfupload:texte_swfupload:></legend>
+<p>
+<label for="file_size_limit"><:swfupload:file_size_limit:></label>
+<input type="text" name="file_size_limit" class="type_txt" id="file_size_limit" size="60"
+	value="#ENV{file_size_limit,2048}" />
+</p>
+<p>
+<label for="file_types"><:swfupload:file_types:></label>
+<input type="text" name="file_types" class="type_txt" id="file_types" size="60"
+	value="#ENV{file_types,*.jpg;*.gif;*.png}" />
+</p>
+<p>
+<label for="file_upload_limit"><:swfupload:file_upload_limit:></label>
+<input type="text" name="file_upload_limit" class="type_txt" id="file_upload_limit" size="60"
+	value="#ENV{file_upload_limit,0}" />
+</p>
+<p>
+<label for="debug"><:swfupload:debug:></label>
+<input type="text" name="debug" class="type_txt" id="debug" size="60"
+	value="#ENV{debug,false}" />
+</p>
+<p>* si <b>_</b> ou vide, supprime la fonctionnalit&eacute; (vide reviendra au d&eacute;faut)</p>
+</fieldset>
+
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:ok:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</form>
+
