@@ -16,6 +16,7 @@ function Lieux_update($id_lieu){
 	$audio_repeter = _request('audio_repeter');
 	$position_x_carte = intval(_request('position_x_carte'));
 	$position_y_carte = intval(_request('position_y_carte'));
+	$decalage_x = intval(_request('decalage_x'));
 	
 	//
 	// Modifications des donnees du lieu
@@ -37,6 +38,7 @@ function Lieux_update($id_lieu){
 			"audio_repeter="._q($audio_repeter).", ".
 			"position_x_carte="._q($position_x_carte).", ".
 			"position_y_carte="._q($position_y_carte).", ".
+			"decalage_x="._q($decalage_x).", ".
 			"id_visite="._q($id_visite).
 		" WHERE id_lieu="._q($id_lieu);
 		$result = spip_query($query);

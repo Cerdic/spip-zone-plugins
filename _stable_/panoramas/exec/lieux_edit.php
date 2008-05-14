@@ -84,6 +84,7 @@ function exec_lieux_edit(){
 			$audio_repeter = $row['audio_repeter'];
 			$position_x_carte = $row['position_x_carte'];
 			$position_y_carte = $row['position_y_carte'];
+			$decalage_x = $row['decalage_x'];
 		}
 		$focus = "";
 		$action_link = generer_action_auteur("lieux_edit","$id_lieu",urlencode($redirect));
@@ -175,6 +176,7 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$id_audio =  intval($row['id_audio']);
 	$position_x_carte =  intval($row['position_x_carte']);
 	$position_y_carte =  intval($row['position_y_carte']);
+	$decalage_x =  intval($row['decalage_x']);
 	
 	$out = "";
 	$out .= "<p>";
@@ -217,6 +219,10 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$out .= "<strong><label for='id_photo_form'>"._T("panoramas:id_photo")."</label></strong> ";
 	$out .= "<input type='text' name='id_photo' id='id_photo_lieu' class='formo $focus' ".
 		"value=\"".$id_photo."\" size='5' /><br />\n";
+
+	$out .= "<strong><label for='decalage_x_form'>"._T("panoramas:decalage_x")."</label></strong> ";
+	$out .= "<input type='text' name='decalage_x' id='decalage_x_lieu' class='formo $focus' ".
+		"value=\"".$decalage_x."\" size='5' /><br />\n";
 
 	
 	$out .= "<strong><label for='audio_repeter_form'>"._T("panoramas:audio_repeter")."</label></strong> ";

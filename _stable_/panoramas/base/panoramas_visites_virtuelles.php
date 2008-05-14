@@ -53,6 +53,7 @@ $visites_virtuelles_lieux = array(
 		"boucler"	=> "ENUM('oui', 'non') DEFAULT 'oui' NOT NULL", /* le panorama correspond-t'il à une vue à 360 degrès ? */
 		"position_x_carte"	=> "int(21) NOT NULL", /* emplacement du lieu sur la carte 2D */
 		"position_y_carte"	=> "int(21) NOT NULL", 
+		"decalage_x"	=> "int(21) NOT NULL", /* décalage par défaut du panorama (start_position) */
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP"
 		);
