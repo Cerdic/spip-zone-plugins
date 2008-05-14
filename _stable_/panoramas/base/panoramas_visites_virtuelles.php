@@ -54,6 +54,7 @@ $visites_virtuelles_lieux = array(
 		"position_x_carte"	=> "int(21) NOT NULL", /* emplacement du lieu sur la carte 2D */
 		"position_y_carte"	=> "int(21) NOT NULL", 
 		"decalage_x"	=> "int(21) NOT NULL", /* décalage par défaut du panorama (start_position) */
+		"documents_associes"	=> "text NOT NULL", /* id des documents associés au lieu, séparés par des virgules */
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP"
 		);

@@ -37,14 +37,13 @@
 <script type="text/javascript" src="#CHEMIN{js/cvi_text_lib.js}"></script>
 <script type="text/javascript" src="#CHEMIN{js/jquery.advanced-panorama.js}"></script>
 <script type="text/javascript" src="#CHEMIN{js/jquery.flipv.js}"></script>
-<script type="text/javascript" src="#CHEMIN{js/thickbox.js}"></script>
 <script type="text/javascript">
 	tb_pathToImage = "#CHEMIN{css/loadingAnimation.gif}";
 
 <BOUCLE_visites(VISITES_VIRTUELLES){id_visite=#ID_VISITE}>
 <BOUCLE_carte(DOCUMENTS){id_document=#ID_CARTE}>
-[$(document).ready(function(){
-	$('.panorama-viewport').append("<div class='panorama-onglets'><img class='panorama-carte' src='(#URL_DOCUMENT)' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:><ul></ul></div><div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2><h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2></div></div>");
+$(document).ready(function(){
+	[$('.panorama-viewport').append("<div class='panorama-onglets'><img class='panorama-carte' src='(#URL_DOCUMENT)' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:><ul></ul></div><div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2><h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2></div></div>");
 	$('.panorama-onglets h2.panorama-carte a').flipv().bind('click', function() { 
 				$('img.panorama-carte').toggle();
 				if ($('img.panorama-carte').css('display') != 'none') 
@@ -52,7 +51,7 @@
 				else
 					$('h2.panorama-panier').show();
 				return false;
-	});
+	});]
 	$('.panorama-onglets h2.panorama-panier a').flipv().bind('click', function() { 
 				$('div.panorama-panier').toggle();
 				if ($('div.panorama-panier').css('display') != 'none') 
@@ -61,7 +60,7 @@
 					$('h2.panorama-carte').show();
 				return false;
 	});
-});]
+});
 </BOUCLE_carte>
 </BOUCLE_visites>
 	$(document).ready(function(){
@@ -114,6 +113,18 @@
 	});
 
 </script>
+
+#SET{docs, #DOCUMENTS_ASSOCIES}
+<B_documentsassocies>
+<div class="documents-lieu">
+<h2><:panoramas:documents_associes:></h2>
+<BOUCLE_documentsassocies(DOCUMENTS)>[(#ID_DOCUMENT|inclusdans{#GET**{docs}}|?{' ',''})
+		<a href="#URL_DOCUMENT" class="thickbox">[(#LOGO_DOCUMENT||image_reduire{0,100})]</a>
+	]</BOUCLE_documentsassocies>
+</div>
+</B_documentsassocies>
+
 </BOUCLE_lieux>
+<script type="text/javascript" src="#CHEMIN{js/thickbox.js}"></script>
 
 </B_lieux>

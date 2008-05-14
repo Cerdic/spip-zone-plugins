@@ -85,6 +85,7 @@ function exec_lieux_edit(){
 			$position_x_carte = $row['position_x_carte'];
 			$position_y_carte = $row['position_y_carte'];
 			$decalage_x = $row['decalage_x'];
+			$documents_associes = $row['documents_associes'];
 		}
 		$focus = "";
 		$action_link = generer_action_auteur("lieux_edit","$id_lieu",urlencode($redirect));
@@ -177,6 +178,7 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$position_x_carte =  intval($row['position_x_carte']);
 	$position_y_carte =  intval($row['position_y_carte']);
 	$decalage_x =  intval($row['decalage_x']);
+	$documents_associes =  $row['documents_associes'];
 	
 	$out = "";
 	$out .= "<p>";
@@ -191,18 +193,18 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 		"<input type='hidden' name='idtarget' value='proprietes' />" .
 		"<input type='hidden' name='id_visite' value='$id_visite' />" ;
 
-	$out .= "<strong><label for='titre_form'>"._T("panoramas:titre_lieu")."</label></strong> "._T('info_obligatoire_02');
+	$out .= "<strong><label for='titre_lieu'>"._T("panoramas:titre_lieu")."</label></strong> "._T('info_obligatoire_02');
 	$out .= "<br />";
 	$out .= "<input type='text' name='titre' id='titre_lieu' class='formo $focus' ".
 		"value=\"".$titre."\" size='40' /><br />\n";
 
-	$out .= "<strong><label for='desc_form'>"._T('info_descriptif')."</label></strong>";
+	$out .= "<strong><label for='desc_lieu'>"._T('info_descriptif')."</label></strong>";
 	$out .= "<br />";
 	$out .= "<textarea name='descriptif' id='desc_lieu' class='forml' rows='4' cols='40' wrap='soft'>";
 	$out .= $descriptif;
 	$out .= "</textarea><br />\n";
 
-	$out .= "<strong><label for='boucler_form'>"._T("panoramas:boucler")."</label></strong> ";
+	$out .= "<strong><label for='boucler_lieu'>"._T("panoramas:boucler")."</label></strong> ";
 	$out .= "<select name='boucler' id='boucler_lieu' class='formo $focus' ".
 		"value=\"".$boucler."\" >
 			<option value=\"oui\"";
@@ -216,16 +218,16 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 
 	$out .= " >"._T("panoramas:non")."</option>
 		</select><br />\n";
-	$out .= "<strong><label for='id_photo_form'>"._T("panoramas:id_photo")."</label></strong> ";
+	$out .= "<strong><label for='id_photo_lieu'>"._T("panoramas:id_photo")."</label></strong> ";
 	$out .= "<input type='text' name='id_photo' id='id_photo_lieu' class='formo $focus' ".
 		"value=\"".$id_photo."\" size='5' /><br />\n";
 
-	$out .= "<strong><label for='decalage_x_form'>"._T("panoramas:decalage_x")."</label></strong> ";
+	$out .= "<strong><label for='decalage_x_lieu'>"._T("panoramas:decalage_x")."</label></strong> ";
 	$out .= "<input type='text' name='decalage_x' id='decalage_x_lieu' class='formo $focus' ".
 		"value=\"".$decalage_x."\" size='5' /><br />\n";
 
 	
-	$out .= "<strong><label for='audio_repeter_form'>"._T("panoramas:audio_repeter")."</label></strong> ";
+	$out .= "<strong><label for='audio_repeter_lieu'>"._T("panoramas:audio_repeter")."</label></strong> ";
 	$out .= "<select name='audio_repeter' id='audio_repeter_lieu' class='formo $focus' ".
 		"value=\"".$audio_repeter."\" >
 			<option value=\"oui\"";
@@ -241,17 +243,21 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 		</select><br />\n";
 	
 
-	$out .= "<strong><label for='id_audio_form'>"._T("panoramas:id_audio")."</label></strong> ";
+	$out .= "<strong><label for='id_audio_lieu'>"._T("panoramas:id_audio")."</label></strong> ";
 	$out .= "<input type='text' name='id_audio' id='id_audio_lieu' class='formo $focus' ".
 		"value=\"".$id_audio."\" size='5' /><br />\n";
 
-	$out .= "<strong><label for='position_x_carte_form'>"._T("panoramas:position_x_carte")."</label></strong> ";
+	$out .= "<strong><label for='position_x_carte_lieu'>"._T("panoramas:position_x_carte")."</label></strong> ";
 	$out .= "<input type='text' name='position_x_carte' id='position_x_carte_lieu' class='formo $focus' ".
 		"value=\"".$position_x_carte."\" size='5' /><br />\n";
 
-	$out .= "<strong><label for='position_y_carte_form'>"._T("panoramas:position_y_carte")."</label></strong> ";
+	$out .= "<strong><label for='position_y_carte_lieu'>"._T("panoramas:position_y_carte")."</label></strong> ";
 	$out .= "<input type='text' name='position_y_carte' id='position_y_carte_lieu' class='formo $focus' ".
 		"value=\"".$position_y_carte."\" size='5' /><br />\n";
+
+	$out .= "<strong><label for='documents_associes_lieu'>"._T("panoramas:documents_associes")."</label></strong> ";
+	$out .= "<input type='text' name='documents_associes' id='documents_associes_lieu' class='formo $focus' ".
+		"value=\"".$documents_associes."\" size='5' /><br />\n";
 
 	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
