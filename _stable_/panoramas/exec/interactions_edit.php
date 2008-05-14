@@ -250,6 +250,22 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= $descriptif;
 	$out .= "</textarea><br />\n";
 
+	$resultlieu = spip_query("SELECT * FROM spip_visites_virtuelles_lieux WHERE id_lieu="._q($id_lieu));
+		if ($rowlieu = spip_fetch_array($resultlieu)) {
+			$id_photo = $rowlieu['id_photo'];
+			$resultdocument = spip_query("SELECT * FROM spip_documents WHERE id_document="._q($id_photo));
+			if ($rowdocument = spip_fetch_array($resultdocument)) {
+				$fichier = $rowdocument['fichier'];
+				$largeur = $rowdocument['largeur'];
+				$hauteur = $rowdocument['hauteur'];
+				$out .= "<div>
+					<img id='panorama-selection-interaction' src='../".$fichier."' width='".$largeur."' height='".$hauteur."' />
+				</div>
+				";
+			}
+			
+		}
+		
 	$out .= "<strong><label for='x1_interaction'>"._T("panoramas:x1")."</label></strong> ";
 	$out .= "<input type='text' name='x1' id='x1_interaction' class='formo $focus' ".
 		"value=\"".$x1."\" size='5' /><br />\n";
@@ -391,6 +407,27 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 
 	$out .= "</form>";
 	$out .= "</div>";
+	$out .= "<script type='text/javascript'>  
+		$(document).ready(function () { 
+			var initialx1 = parseInt($('#x1_interaction').val());
+			var initialy1 = parseInt($('#y1_interaction').val());
+			var initialx2 = parseInt($('#x2_interaction').val());
+			var initialy2 = parseInt($('#y2_interaction').val());
+			
+			$('img#panorama-selection-interaction').imgAreaSelect({ 
+				selectionColor: 'blue', 
+				onSelectEnd: selectionEnd, x1: initialx1, y1: initialy1, x2: initialx2, y2: initialy2 
+				
+			});  
+		}); 
+		function selectionEnd(img, selection) { 
+			$('#x1_interaction').val(selection.x1);
+			$('#x2_interaction').val(selection.x2);
+			$('#y1_interaction').val(selection.y1);
+			$('#y2_interaction').val(selection.y2);
+
+		}
+		</script>";
 	
 
 	$out .= Panoramas_fin_cadre_formulaire(true);

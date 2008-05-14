@@ -15,7 +15,9 @@ function panoramas_insertion_in_header_prive($flux)
 	<link rel=\"stylesheet\" type=\"text/css\" href=\""._DIR_PLUGIN_PANORAMAS."css/thickbox.css\" />
 	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.dimensions.min.js\"></script>
 	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery-ui-personalized-1.5b3.min.js\"></script>
-	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.panorama.js\"></script>";
+	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.panorama.js\"></script>
+	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.imgareaselect-0.3.min.js\"></script>
+	";
 }
 	
 function panoramas_ajouter_boutons($boutons_admin){
