@@ -98,7 +98,13 @@ $visites_virtuelles_interactions = array(
 		"id_jeu_cible"	=> "bigint(21)", /* l'interaction est un jeu (nécessite le plugin jeu) */
 		"url_cible"	=> "text", /*'interaction pointe vers une url */
 		"id_objet"	=> "bigint(21)", /* lorsque l'interaction est un objet, id de l'image de l'objet */
+		"id_personnage"	=> "bigint(21)", /* lorsque l'interaction est un personnage, id de l'image du personnage */
+		"id_personnage_survol"	=> "bigint(21)", /* lorsque l'interaction est un personnage, id de l'image du personnage affichée au survol de la souris */
 		"id_objet_activation"	=> "bigint(21)", /* l'interaction n'est active que si l'objet a été ramassé */
+		"texte_avant_activation"	=> "text NOT NULL", /* texte affiché lorsque l'interaction n'est pas active */
+		"texte_apres_activation"	=> "text NOT NULL", /* texte affiché lorsque l'interaction vient d'être activée */
+		"id_audio_avant_activation"	=> "bigint(21)", /* son joué lorsque l'interaction n'est pas active */
+		"id_audio_apres_activation"	=> "bigint(21)", /* son joué lorsque l'interaction vient d'être activée */
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP"
 		);

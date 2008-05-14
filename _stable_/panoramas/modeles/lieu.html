@@ -7,7 +7,7 @@
 	<B_interactions>
 	<map id="map#ID_LIEU" name="map#ID_LIEU"> 
 		<BOUCLE_interactions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
-			<area shape="rect" coords="#X1,#X2,#Y1,#Y2"
+			<area shape="rect" coords="#X1,#Y1,#X2,#Y2"
 				[(#TYPE|=={'article'}|?{' ',''}) href="#URL_PAGE{article,id_article=#ID_ARTICLE_CIBLE}" class="interaction#ID_INTERACTION type-article"]
 				[(#TYPE|=={'rubrique'}|?{' ',''}) href="#URL_PAGE{rubrique,id_rubrique=#ID_RUBRIQUE_CIBLE}" class="interaction#ID_INTERACTION type-rubrique"]
 				[(#TYPE|=={'lieu'}|?{' ',''}) href="#URL_PAGE{lieu,id_lieu=#ID_LIEU_CIBLE}" class="interaction#ID_INTERACTION type-lieu"]

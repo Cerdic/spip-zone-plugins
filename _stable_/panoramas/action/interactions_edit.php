@@ -28,6 +28,12 @@ function Interactions_update($id_interaction){
 	$id_personnage = intval(_request('id_personnage'));
 	$id_objet_activation = intval(_request('id_objet_activation'));
 
+	$id_personnage_survol = intval(_request('id_personnage_survol'));
+	$texte_avant_activation = _request('texte_avant_activation');
+	$texte_apres_activation = _request('texte_apres_activation');
+	$id_audio_avant_activation = intval(_request('id_audio_avant_activation'));
+	$id_audio_apres_activation = intval(_request('id_audio_apres_activation'));
+	
 	//
 	// Modifications des donnees d'une interaction
 	//
@@ -58,6 +64,11 @@ function Interactions_update($id_interaction){
 			"id_objet_activation="._q($id_objet_activation).", ".
 			"id_rubrique_cible="._q($id_rubrique_cible).", ".
 			"id_jeu_cible="._q($id_jeu_cible).", ".
+			"id_personnage_survol="._q($id_personnage_survol).", ".
+			"texte_avant_activation="._q($texte_avant_activation).", ".
+			"texte_apres_activation="._q($texte_apres_activation).", ".
+			"id_audio_avant_activation="._q($id_audio_avant_activation).", ".
+			"id_audio_apres_activation="._q($id_audio_apres_activation).", ".
 			"id_lieu="._q($id_lieu).", ".
 			"id_visite="._q($id_visite).
 		" WHERE id_interaction="._q($id_interaction);

@@ -85,6 +85,12 @@ function exec_interactions_edit(){
 			$id_objet = $row['id_objet'];
 			$id_personnage = $row['id_personnage'];
 			$id_objet_activation = $row['id_objet_activation'];
+			$id_personnage_survol = $row['id_personnage_survol'];
+			$texte_avant_activation = $row['texte_avant_activation'];
+			$texte_apres_activation = $row['texte_apres_activation'];
+			$id_audio_avant_activation = $row['id_audio_avant_activation'];
+			$id_audio_apres_activation = $row['id_audio_apres_activation'];
+	
 		}
 		$focus = "";
 		$action_link = generer_action_auteur("interactions_edit","$id_interaction",urlencode($redirect));
@@ -121,6 +127,12 @@ function exec_interactions_edit(){
 		$row['id_personnage'] = $id_personnage;
 		$row['id_objet_activation'] = $id_objet_activation;
 		$row['id_jeu_cible'] = $id_jeu_cible;
+		$row['id_personnage_survol'] = $id_personnage_survol;
+		$row['texte_avant_activation'] = $texte_avant_activation;
+		$row['texte_apres_activation'] = $texte_apres_activation;
+		$row['id_audio_avant_activation'] = $id_audio_avant_activation;
+		$row['id_audio_apres_activation'] = $id_audio_apres_activation;
+		
 		$action_link = generer_action_auteur("interactions_edit","new",urlencode($redirect));
 	}
 	
@@ -204,6 +216,11 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$id_objet_activation = intval($row['id_objet_activation']);
 	$id_rubrique_cible = intval($row['id_rubrique_cible']);
 	$id_jeu_cible = intval($row['id_jeu_cible']);
+	$id_personnage_survol = intval($row['id_personnage_survol']);
+	$texte_avant_activation = $row['texte_avant_activation'];
+	$texte_apres_activation = $row['texte_apres_activation'];
+	$id_audio_avant_activation = intval($row['id_audio_avant_activation']);
+	$id_audio_apres_activation = intval($row['id_audio_apres_activation']);
 	
 	$out = "";
 	$out .= "<p>";
@@ -237,14 +254,14 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= "<input type='text' name='x1' id='x1_interaction' class='formo $focus' ".
 		"value=\"".$x1."\" size='5' /><br />\n";
 
-	$out .= "<strong><label for='x2_interaction'>"._T("panoramas:x2")."</label></strong> ";
-	$out .= "<input type='text' name='x2' id='x2_interaction' class='formo $focus' ".
-		"value=\"".$x2."\" size='5' /><br />\n";
-
 	$out .= "<strong><label for='y1_interaction'>"._T("panoramas:y1")."</label></strong> ";
 	$out .= "<input type='text' name='y1' id='y1_interaction' class='formo $focus' ".
 		"value=\"".$y1."\" size='5' /><br />\n";
 
+	$out .= "<strong><label for='x2_interaction'>"._T("panoramas:x2")."</label></strong> ";
+	$out .= "<input type='text' name='x2' id='x2_interaction' class='formo $focus' ".
+		"value=\"".$x2."\" size='5' /><br />\n";
+	
 	$out .= "<strong><label for='y2_interaction'>"._T("panoramas:y2")."</label></strong> ";
 	$out .= "<input type='text' name='y2' id='y2_interaction' class='formo $focus' ".
 		"value=\"".$y2."\" size='5' /><br />\n";
@@ -289,6 +306,10 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= "	<option value=\"objet\"";
 	if ($type=="objet") $out .= "selected=\"selected\"";
 	$out .= " >"._T("panoramas:objet")."</option>";
+
+	$out .= "	<option value=\"personnage\"";
+	if ($type=="personnage") $out .= "selected=\"selected\"";
+	$out .= " >"._T("panoramas:personnage")."</option>";
 
 	//fin options
 
@@ -337,9 +358,33 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= "<input type='text' name='id_personnage' id='id_personnage_interaction' class='formo $focus' ".
 		"value=\"".$id_personnage."\" size='5' /><br />\n";
 
+	$out .= "<strong><label for='id_personnage_survol_interaction'>"._T("panoramas:id_personnage_survol")."</label></strong> ";
+	$out .= "<input type='text' name='id_personnage_survol' id='id_personnage_survol_interaction' class='formo $focus' ".
+		"value=\"".$id_personnage_survol."\" size='5' /><br />\n";
+
 	$out .= "<strong><label for='id_objet_activation_interaction'>"._T("panoramas:id_objet_activation")."</label></strong> ";
 	$out .= "<input type='text' name='id_objet_activation' id='id_objet_activation_interaction' class='formo $focus' ".
 		"value=\"".$id_objet_activation."\" size='5' /><br />\n";
+
+	$out .= "<strong><label for='texte_avant_activation_form'>"._T('texte_avant_activation')."</label></strong>";
+	$out .= "<br />";
+	$out .= "<textarea name='texte_avant_activation' id='texte_avant_activation_interaction' class='forml' rows='4' cols='40' wrap='soft'>";
+	$out .= $texte_avant_activation;
+	$out .= "</textarea><br />\n";
+
+	$out .= "<strong><label for='texte_apres_activation_form'>"._T('texte_apres_activation')."</label></strong>";
+	$out .= "<br />";
+	$out .= "<textarea name='texte_apres_activation' id='texte_apres_activation_interaction' class='forml' rows='4' cols='40' wrap='soft'>";
+	$out .= $texte_apres_activation;
+	$out .= "</textarea><br />\n";
+
+	$out .= "<strong><label for='id_audio_avant_activation_interaction'>"._T("panoramas:id_audio_avant_activation")."</label></strong> ";
+	$out .= "<input type='text' name='id_audio_avant_activation' id='id_audio_avant_activation_interaction' class='formo $focus' ".
+		"value=\"".$id_audio_avant_activation."\" size='5' /><br />\n";
+
+	$out .= "<strong><label for='id_audio_apres_activation_interaction'>"._T("panoramas:id_audio_apres_activation")."</label></strong> ";
+	$out .= "<input type='text' name='id_audio_apres_activation' id='id_audio_apres_activation_interaction' class='formo $focus' ".
+		"value=\"".$id_audio_apres_activation."\" size='5' /><br />\n";
 
 	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
