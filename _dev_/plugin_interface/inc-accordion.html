@@ -1,0 +1,92 @@
+[(#REM) Appel Javascript supplementaire ]
+<script language="javascript" src="plugins/plugin_interface/js/accordion.js" type="text/javascript"></script>
+<script language="javascript" src="plugins/plugin_interface/js/iutil.js" type="text/javascript"></script>
+
+
+<link rel="stylesheet" href="plugins/plugin_interface/css/interface.css" type="text/css" media="screen" />
+<script type="text/javascript">
+
+$(document).ready(
+function()
+{
+$('#myAccordion').Accordion(
+{
+headerSelector : 'dt',
+panelSelector : 'dd',
+activeClass : 'myAccordionActive',
+hoverClass : 'myAccordionHover',
+panelHeight : 270,
+speed : 150
+}
+);
+}
+);
+</script>
+
+<dl id="myAccordion">
+				
+
+				<B_theme>
+					<dt class="someClass">Th&egrave;mes de stages</dt>
+					<dd>
+					<ul>
+						<BOUCLE_theme(MOTS) {id_groupe=4} {par num titre}>
+						<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+						</BOUCLE_theme>
+					</ul>
+					</dd>
+				</B_theme>
+				
+				
+				<B_periode>				
+				<dt class="someClass">P&eacute;riode de stages</dt>
+				
+					<dd>
+					<ul>
+					<BOUCLE_periode(MOTS) {id_groupe=3} {par num titre}>
+					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+					</BOUCLE_periode>
+					</ul>
+					</dd>
+				</B_periode>
+				
+						
+				<B_sous_rubriques>
+				<dt class="someClass">Nos formations</dt>
+					<dd>
+					<ul>
+						<BOUCLE_sous_rubriques(RUBRIQUES) {id_rubrique=7} {par num titre, titre}>
+						
+							[(#REM) Une boucle recursive pour le mini plan]
+							<B_miniplan>
+							<ul>
+								<BOUCLE_miniplan(RUBRIQUES) {id_parent} {par num titre, titre}>
+								<li>
+									<a href="<INCLURE{fond=inc-triurlrubrique}{id_rubrique}>">[(#TITRE)]</a>
+									<BOUCLE_m2(BOUCLE_miniplan)></BOUCLE_m2>
+								</li>
+								</BOUCLE_miniplan>
+							</ul>
+							</B_miniplan>
+
+						
+						</BOUCLE_sous_rubriques>
+					</ul>
+					</dd>
+				</B_sous_rubriques>	
+				
+				<B_infoutile>
+	
+					<dt class="someClass">A  savoir</dt>
+					<dd>
+						<ul>
+						<BOUCLE_infoutile(ARTICLES){id_rubrique=7}{id_mot=16}{par num date}>
+						<li><a href="#URL_ARTICLE">#TITRE</a></li>
+						</BOUCLE_infoutile>
+						</ul>
+					</dd>	
+					
+				</B_infoutile>
+</dl>	
+				
+

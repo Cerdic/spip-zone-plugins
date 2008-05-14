@@ -1,0 +1,49 @@
+
+
+[(#REM) Image aléatoire ]
+[(#REM) Appel Javascript supplementaire ]
+<script language="javascript" src="plugins/plugin_interface/js/carousel.js" type="text/javascript"></script>
+<script language="javascript" src="plugins/plugin_interface/js/iutil.js" type="text/javascript"></script>
+<script language="javascript" src="plugins/plugin_interface/js/interface.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="plugins/plugin_interface/css/interface.css" type="text/css" media="screen" />
+
+<script type="text/javascript">
+
+window.onload = 
+	function()
+	{
+		$('#carouselthelia').Carousel(
+			{
+				itemWidth: 150,
+				itemHeight: 200,
+				itemMinWidth: 60,
+				items: 'a',
+				reflections: .7,
+				rotationSpeed: 4
+
+			}
+		);
+	}
+</script>
+
+
+
+		
+		<THELIA_PROD type="PRODUIT"  classement="inverse" num="5">
+		
+		<div id="carouselthelia">	
+		
+
+		<a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique=THELIA-RUBRIQUE_ID}">
+			<THELIA_IMAGE type="IMAGE" num="1" produit="THELIA-ID" largeur="150">
+ 				<img src="THELIA-IMAGE"  alt="THELIA-PRODTITRE  " title="THELIA-PRODTITRE"  />
+			</THELIA_IMAGE>
+		</a>
+		
+		</div><!-- fin listeImgAlea -->
+	</THELIA_PROD>
+
+
+
+

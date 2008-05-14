@@ -1,0 +1,328 @@
+<!-- titre=menu dock style mac OS -->
+<!-- icone= -->
+<!-- descriptif= repose sur le script fisheye -->
+<!-- nom=interfacefisheye -->
+<!-- depot=metapack -->
+
+<!-- onglet=interface -->
+<!-- liens*=interface -->
+<!-- liens*=interfacecarousel -->
+<!-- liens*=interfacefisheye -->
+
+#CACHE{0}
+
+
+<style type="text/css" media="all">
+
+
+table /* Le tableau en lui-même */
+{
+   margin: auto; /* Centre le tableau */
+   
+   border-collapse: collapse; /* Colle les bordures entre elles */
+}
+
+td /* Les cellules normales */
+{
+background-image: url(plugin_interface/css/images/slider_back.jpg);
+   border-bottom: 1px solid #eee;
+   text-align: left; /* Tous les textes des cellules seront centrés*/
+   padding: 5px; /* Petite marge intérieure aux cellules pour éviter que le texte touche les bordures */
+}
+</style>
+
+
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+
+
+<form method="post" enctype="multipart/form-data" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset><legend><:interface:elements:></legend>
+
+<table>
+<tr>
+	<td>
+		<img src="#CHEMIN{css/images/kde/accueil.png}" width="30px">
+		<label><input type="checkbox" name="accueil" [checked="(#ENV{accueil})"] /><:interface:accueil:></label>
+	</td>
+	<td>
+		<label for="acceuilint"></label>
+		<input type="text" name="acceuilint" 	id="acceuilint"  value="[(#CONFIG{interfacefisheye/acceuilint}|sinon{<:interface:accueil:>})]"  style="display:inline"/>
+	</td>
+	
+</tr>	
+	
+<tr>
+	<td>
+		<img src="#CHEMIN{css/images/kde/prive.png}" width="30px">
+		<label><input type="checkbox" name="prive" [checked="(#ENV{prive})"] /><:interface:prive:></label>
+	</td>
+	<td>
+		<label for="priveint"></label>
+		<input type="text" name="priveint" 	id="priveint"  value="[(#CONFIG{interfacefisheye/priveint}|sinon{<:interface:prive:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td>
+		<img src="#CHEMIN{css/images/kde/plan.png}" width="30px">
+	<label><input type="checkbox" name="plan" [checked="(#ENV{plan})"] /><:interface:plan:></label>
+	</td>
+	<td>
+		<label for="planint"></label>
+		<input type="text" name="planint" 	id="planint"  value="[(#CONFIG{interfacefisheye/planint}|sinon{<:interface:plan:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td>
+		<img src="#CHEMIN{css/images/kde/rss.png}" width="30px">
+		<label><input type="checkbox" name="rss" [checked="(#ENV{rss})"] /><:interface:rss:></label>
+	</td>
+	<td>
+		<label for="rssint"></label>
+		<input type="text" name="rssint" 	id="rssint"  value="[(#CONFIG{interfacefisheye/rssint}|sinon{<:interface:rss:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td>
+		<img src="#CHEMIN{css/images/kde/spip.png}" width="30px">
+	<label><input type="checkbox" name="spip" [checked="(#ENV{spip})"] /><:interface:spip:></label>
+</td>
+	<td>
+	<label for="spipint"></label>
+	<input type="text" name="spipint" 	id="spipint"  value="[(#CONFIG{interfacefisheye/spipint}|sinon{<:interface:spip:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td>
+	<img src="#CHEMIN{css/images/kde/agenda.png}" width="30px">
+	<label><input type="checkbox" name="agenda" [checked="(#ENV{agenda})"] /><:interface:agenda:></label>
+</td>
+	<td>
+	<label for="agendaint"></label>
+	<input type="text" name="agendaint" 	id="agendaint"  value="[(#CONFIG{interfacefisheye/agendaint}|sinon{<:interface:agenda:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td>
+	<img src="#CHEMIN{css/images/kde/mention.png}" width="30px">
+	<label><input type="checkbox" name="mention" [checked="(#ENV{mention})"] /><:interface:mention:></label>
+	&nbsp;url:&nbsp;
+	<input type="text" name="contacturl" 	id="contacturl"  value="[(#CONFIG{interfacefisheye/contacturl}|sinon{<:interface:contactint:>})]" style="display:inline"/>
+		
+</td>
+	<td>
+	<label for="mentionint"></label>
+	<input type="text" name="mentionint" 	id="mentionint"  value="[(#CONFIG{interfacefisheye/mentionint}|sinon{<:interface:mention:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td>
+	<img src="#CHEMIN{css/images/kde/contact.png}" width="30px">
+	<label><input type="checkbox" name="contact" [checked="(#ENV{contact})"] /><:interface:contact:></label>&nbsp;&nbsp;url:
+	<input type="text" name="contacturl" 	id="contacturl"  value="[(#CONFIG{interfacefisheye/contacturl}|sinon{<:interface:contactint:>})]"  style="display:inline"/>
+</td>
+	<td>
+	<label for="contactint"></label>
+	<input type="text" name="contactint" 	id="contactint"  value="[(#CONFIG{interfacefisheye/contactint}|sinon{<:interface:contactint:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td>
+		[(#CFG_CHEMIN{interfacefisheye/file1}|image_reduire{30})]
+		<label><input type="checkbox" name="perso1" [checked="(#ENV{perso1})"] /><:interface:perso1:></label>&nbsp;&nbsp;
+		url:&nbsp;&nbsp;
+		<input type="text" name="perso1url" id="perso1url"  value="[(#CONFIG{interfacefisheye/perso1url})]"  style="display:inline;"/>
+
+		
+		<input type="file" name="file1" value="" size="30" />
+		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{file1})</span>] <br />
+		
+		
+		
+	</td>
+	<td>
+		<label for="perso1int"></label>
+		<input type="text" name="perso1int" 	id="perso1int"  value="[(#CONFIG{interfacefisheye/perso1int}|sinon{<:interface:perso1int:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td>
+		[(#CFG_CHEMIN{interfacefisheye/file2}|image_reduire{30})]
+		<label><input type="checkbox" name="perso2" [checked="(#ENV{perso2})"] /><:interface:perso2:></label>&nbsp;&nbsp;
+		url:&nbsp;&nbsp;
+		<input type="text" name="perso2url" 	id="perso2url"  value="[(#CONFIG{interfacefisheye/perso2url})]" style="display:inline"/>
+
+		<input type="file" name="file2" value="" size="30" />
+		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{file2})</span>]<br />
+		
+	</td>
+	<td>
+		<label for="perso2int"></label>
+		<input type="text" name="perso2int" 	id="perso2int"  value="[(#CONFIG{interfacefisheye/perso2int}|sinon{<:interface:perso2int:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td>
+		[(#CFG_CHEMIN{interfacefisheye/file3}|image_reduire{30})]
+		<label><input type="checkbox" name="perso3" [checked="(#ENV{perso3})"] /><:interface:perso3:></label>&nbsp;&nbsp;
+		url:&nbsp;&nbsp;
+		<input type="text" name="perso3url" 	id="perso3url"  value="[(#CONFIG{interfacefisheye/perso3url})]" style="display:inline"/>
+
+		<input type="file" name="file3" value="" size="30" />
+		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{file3})</span>]<br />
+	</td>
+	<td>
+		<label for="perso3int"></label>
+		<input type="text" name="perso3int" 	id="perso3int"  value="[(#CONFIG{interfacefisheye/perso3int}|sinon{<:interface:perso3int:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+<tr>
+	<td>		
+		[(#CFG_CHEMIN{interfacefisheye/file4}|image_reduire{30})]
+		<label><input type="checkbox" name="perso4" [checked="(#ENV{perso4})"] /><:interface:perso4:></label>&nbsp;&nbsp;
+		url:&nbsp;&nbsp;
+		<input type="text" name="perso4url" 	id="perso4url"  value="[(#CONFIG{interfacefisheye/perso4url})]" style="display:inline"/>
+
+		<input type="file" name="file4" value="" size="30" />
+		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{file4})</span>]<br />
+	
+	</td>
+	<td>
+		<label for="perso4int"></label>
+		<input type="text" name="perso4int" 	id="perso4int"  value="[(#CONFIG{interfacefisheye/perso4int}|sinon{<:interface:perso4int:>})]"  style="display:inline"/>
+	</td>
+</tr>
+
+
+</table>
+
+</fieldset>
+
+<!--mentions légales renvoi vers un article à coder dans cfg-->
+<fieldset><legend><:interface:configjs:></legend>
+
+<label for="maxwidth"><:interface:maxWidth:></label>
+<input type="text" name="maxwidth" 	id="maxwidth"  value="[(#CONFIG{interface/maxwidth})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>px</i>&nbsp;&nbsp;
+
+<label for="maxwidth"><:interface:itemwidth:></label>
+<input type="text" name="itemwidth" 	id="itemwidth"  value="[(#CONFIG{interface/itemwidth})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>px</i>&nbsp;&nbsp;
+
+<label for="maxwidth"><:interface:proximity:></label>
+<input type="text" name="proximity" 	id="proximity"  value="[(#CONFIG{interface/proximity})]" class="forml" style="width:4em;display:inline"/>
+
+
+</fieldset>
+
+<fieldset><legend><:interface:theme:></legend>
+
+<table>
+<tr>
+<td rowspan="3">
+<select name="theme" multiple="multiple" size="5">
+	<option value="images" [(#CONFIG{interface/images}|=={"images"}|?{selected="selected",})]><:interface:truc:></option>	
+	<option value="center" [(#CONFIG{interface/effetbis}|=={"center"}|?{selected="selected",})]><:interface:muche:></option>
+	<option value="right" [(#CONFIG{interface/effetbis}|=={"right"}|?{selected="selected",})]><:interface:bidule:></option>
+</select>
+</td>
+<td>
+<img src="#CHEMIN{css/images/kde/kde.png}">
+</td>
+<td>
+<:interface:position:>
+</td>
+</tr>
+
+<tr>
+<td>
+<img src="#CHEMIN{css/images/kde/spip.png}">
+</td>
+<td>
+<:interface:position:>
+</td>
+</tr>
+
+<tr>
+<td>
+<img src="#CHEMIN{css/images/kde/spip.png}">
+</td>
+<td>
+<:interface:position:>
+</td>
+</tr>
+</table>
+</fieldset>
+
+<fieldset><legend><:interface:position:></legend>
+<table>
+<tr>
+<th><:interface:dimensionmenu:></th>
+<th><:interface:couleurmenu:></th>
+<th><:interface:valign:></th>
+<th><:interface:halign:></th>
+</tr>
+
+<tr>
+<td>
+<:interface:hauteu:>&nbsp;&nbsp;<input type="text" name="hauteurmenu" 	id="hauteurmenu"  value="[(#CONFIG{interface/hauteurmenu})]" class="forml" style="width:4em; display:inline;"/>&nbsp;<i>px</i>&nbsp;
+</td>
+
+<td>
+&nbsp;<:interface:couleurfond:>&nbsp;<input type="text" name="fond" 	class="cfg_couleur" size="7" id="fond"  value="[(#CONFIG{interface/fond})]"/>
+</td>
+
+
+<td rowspan="2">
+<select name="halign[]" multiple="multiple" size="5">
+	<option value="0">(aucun)</option>
+	<option value="left" [(#CONFIG{interface/left}|=={"fade"}|?{selected="selected",})]><:interface:gauche:></option>	
+	<option value="center" [(#CONFIG{interface/effetbis}|=={"center"}|?{selected="selected",})]><:interface:centre:></option>
+	<option value="right" [(#CONFIG{interface/effetbis}|=={"right"}|?{selected="selected",})]><:interface:droite:></option>
+	
+</select>
+</td>
+
+<td>
+<label><input type="checkbox" name="haut" [checked="(#ENV{haut})"] /><:interface:haut:></label>&nbsp;&nbsp;
+</td>
+
+</tr>
+
+
+<tr>
+<td>	
+<:interface:hauteu:>&nbsp;&nbsp;<input type="text" name="hauteurmenu" 	id="hauteurmenu"  value="[(#CONFIG{interface/hauteurmenu})]" class="forml" style="width:4em; display:inline;"/>&nbsp;<i>px</i>&nbsp;
+</td>
+
+<td>
+<:interface:couleurbord:><input type="text" name="fonda" 	class="cfg_couleur" size="7" id="fonda"  value="[(#CONFIG{interface/fonda})]"/>
+</td>
+
+<td>
+<label><input type="checkbox" name="bas" [checked="(#ENV{bas})"] /><:interface:bas:></label>
+</td>
+
+</tr>
+
+</table>
+</fieldset>
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:ok:>"  />
+<input type="reset" value="<:reset:>"  />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>"  />
+</div>
+</form>
+
+
+

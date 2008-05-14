@@ -1,0 +1,73 @@
+<style type="text/css" media="all">
+
+.fisheye{
+	text-align: center;
+	height: 50px;
+	position: relative;
+}
+a.fisheyeItem
+{
+	text-align: center;
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+	width: 40px;
+	position: absolute;
+	display: block;
+	top: 0;
+}
+
+.fisheyeItem img
+{
+	border: none;
+	margin: 0 auto 5px auto;
+	width: 100%;
+}
+
+.fisheyeItem span,
+
+.fisheyeContainter
+{
+	background-color: #f00;
+	height: 50px;
+	width: 200px;
+	left: 500px;
+	position: absolute;
+}
+#fisheye2
+{
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+}
+</style>
+
+<script type="text/javascript">
+	
+	$(document).ready(
+		function()
+		{
+			$('#fisheye').Fisheye(
+				{
+					maxWidth: 50,
+					items: 'a',
+					itemsText: 'span',
+					container: '.fisheyeContainter',
+					itemWidth: 40,
+					proximity: 90,
+					halign : 'center'
+				}
+			)
+		}	
+	);
+
+</script>			
+
+<div id="fisheye" class="fisheye">
+		<div class="fisheyeContainter">
+			<a href="http://www.cemea-haute-normandie.org" class="fisheyeItem"><img src="#CHEMIN{plugin_interface/css/images/region.png}" alt="Site régional" /><span>Site régional</span></a>
+			<!--<a href="http://www.cemea-hn.fr/stagiaire" class="fisheyeItem"><img src="#CHEMIN{plugin_interface/css/images/stagiaires.png}" alt="Site anciens stagaires" /><span>Anciens stagiaires</span></a> -->
+			<a href="http://www.cemea-hn.fr/militant" class="fisheyeItem"><img src="#CHEMIN{plugin_interface/css/images/militant.png}" alt="Site interne" /><span>Site interne</span></a>
+			<a href="http://www.cemea.asso.fr" class="fisheyeItem"><img src="#CHEMIN{plugin_interface/css/images/national.png}" alt="Site national" /><span>Site national</span></a>
+		</div>
+</div>

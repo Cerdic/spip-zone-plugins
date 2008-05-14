@@ -1,0 +1,37 @@
+#carousel
+	{
+		
+		position: absolute;
+		
+	}
+	
+#carousel a
+	{
+		position: absolute;
+		width: 100px;
+	}
+
+
+#myAccordion {padding-left:0;	 }
+
+#myAccordion dt{	
+	
+	background-color: #6699FF;	
+	font-size: 1em;
+	padding: 5px;	
+	font-weight: bold;	
+	border-top: 2px ;	
+	border-bottom: 2px;
+	color: #000000;
+	-moz-border-radius: 6px;
+	border-radius: 6px;		}
+
+#myAccordion dd{	overflow: auto;}
+
+#myAccordion dt.myAccordionHover{	background-color: #90ef30;}
+
+#myAccordion dt.myAccordionActive{	background-color: #66FF99;	border-top: 2px ;	border-bottom: 2px;}
+
+
+
+
