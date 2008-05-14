@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="plugins/image-cycle/css/cycle.css" type="text/css" media="screen" />
 
 <style>
-.cycle
+.cycle2
 {
 [width: (#CONFIG{imagecycle/largeurcadrebis})px !important;]
 [height: (#CONFIG{imagecycle/hauteurcadrebis})px !important;]
@@ -13,12 +13,12 @@ text-align:center;
 
 }
 
-#ie {
+#ie2 {
 [width: (#CONFIG{imagecycle/largeurcadrebis})px !important;]
 [height: (#CONFIG{imagecycle/hauteurcadrebis})px !important;]
 }
 
-.cycle img 
+.cycle2 img 
 {
 [(#CONFIG{imagecycle/taillefixebis}|?{' ',''})
 [width: (#CONFIG{imagecycle/largeurbis})px !important;]
@@ -34,13 +34,15 @@ text-align:center;
 text-align:left;
 [border : 1px solid (#CONFIG{imagecycle/cadrebis});]
 [background-color: (#CONFIG{imagecycle/couleurbis});]
+-moz-border-radius: 6px;
+	border-radius: 6px;
 
 }
 
 </style>
 
 
-<div id="ie">
+<div id="ie2">
 [(#CONFIG{imagecycle/aleatoirebis}|?{' ',''})
 <INCLURE{fond=noisettes/listecycle2a}>
 ]
