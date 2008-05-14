@@ -183,12 +183,13 @@ function snippets_translate_raccourcis_modeles($translations){
 // recupere id d'un auteur selon son nom ou le creer
 function get_id_auteur($name) {
     if (trim($name)=="") return false;    
-    $sql = "SELECT id_auteur FROM spip_auteurs WHERE nom='".addslashes($name)."'";
+    $sql = "SELECT id_auteur FROM spip_auteurs WHERE nom='".addslashes(filtrer_entites($name))."'";
     $result = spip_query($sql);
     while ($row = spip_fetch_array($result)) {
        return $row['id_auteur'];
     }
     // auteur inconnu, on le cree ...
+    spip_log("creation auteur".$name,"snippets");
     return sql_insertq('spip_auteurs',array('nom'=>$name,'statut'=>'1comite')) ;
 }
 
@@ -198,14 +199,14 @@ function get_id_mot($name) {
   
    if (trim($name)=="") return false; 
     list($type,$titre) = explode('|',$name) ;
-    $sql = "SELECT id_mot FROM spip_mots WHERE titre='".addslashes($titre)."'";
+    $sql = "SELECT id_mot FROM spip_mots WHERE titre='".addslashes(filtrer_entites($titre))."'";
     $result = spip_query($sql);
     while ($row = spip_fetch_array($result)) {
        return $row['id_mot'];
     }
 
     // creer le groupe ?
-    $sql = "SELECT id_groupe FROM spip_groupes_mots WHERE titre='".addslashes($type)."'";
+    $sql = "SELECT id_groupe FROM spip_groupes_mots WHERE titre='".addslashes(filtrer_entites($type))."'";
     $result2 = spip_query($sql);
     $nb = sql_count($result2);
     if ($nb == 0) {
@@ -216,6 +217,7 @@ function get_id_mot($name) {
     }
     
     // mot inconnu, on le cree ...
+     spip_log("creation mot : ".$titre."groupe ".$id_groupe,"snippets");
     return  sql_insertq('spip_mots',array('type'=>$type, 'titre'=>$titre , 'id_groupe' => $id_groupe)) ;
 
 }
