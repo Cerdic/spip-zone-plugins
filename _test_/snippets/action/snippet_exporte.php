@@ -29,7 +29,7 @@ function action_snippet_exporte(){
 		if ($f) {
 			include_spip('public/assembler');
 			$out = recuperer_fond($f,array('id'=>intval($id)));
-			$out = preg_replace(",\n[\s]*(?=\n),","",$out);
+			$out = preg_replace(",\n\n[\s]*(?=\n),","",$out);
 			
 			$filename=str_replace(":","_",$arg);
 			if (preg_match(",<titre>(.*)</titre>,Uims",$out,$regs))
