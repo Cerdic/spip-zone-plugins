@@ -20,10 +20,6 @@ $.prototype.cfgCrayons = function (options) {
 
 $.prototype.cfgCrayons.prototype.mkimg = function(what, extra) {
   return '<em class="crayon-'+what+'" title="'+ this.img[what].txt + (extra ? extra : '') + '"></em>';
-/*  return '<img class="crayon-' + what +
-    '" src="' + this.imgPath + '/' + this.img[what].file +
-    '" title="' + this.img[what].txt + (extra ? extra : '') + ' /">';
-*/
 };
 
 $.prototype.cfgCrayons.prototype.iconclick = function(c) {
