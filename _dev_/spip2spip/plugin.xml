@@ -5,24 +5,21 @@
 	<auteur>	<!-- Auteur du plugin -->
 	erational
  	[erational.org->http://www.erational.org]
-_ &#169; 2006 - Licence GPL
+_ &#169; 2006-2008 - Licence GPL
 	</auteur>
 	<version>1.5</version>
 	<etat>dev</etat>
 	<description>
-    Migration de la [contribution SPIP2SPIP->http://www.a-brest.net/article2340.html] en plugin.
-    <p>Permet de copier les articles de SPIP distant dans le SPIP sous forme d'articles. 
-    A la diff&#233;rence de miroir de syndication, vous avez le choix des articles &#224; recopier ou diffuser en attribuant les mots-cl&#233;s du groupe dedi&#233; - spip2spip - 
-    <br />Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;es: 
-    </p>
-    <ul>
-    <li>formatage original SPIP de l'article</li>
-    <li>images, documents attach&#233;s recopi&#233;s en documents distants</li>
-    <li>essayer de faire correspondre les auteurs</li>
-    <li>licence ...</li>  
-    </ul>
+Permet de copier les articles de SPIP distant dans le SPIP sous forme d'articles. 
+A la diff&#233;rence de miroir de syndication, vous avez le choix des articles &#224; recopier ou diffuser en attribuant les mots-cl&#233;s du groupe d&#233;di&#233; {{- spip2spip -}} 
+
+_ Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;es: 
+-* formatage original SPIP de l'article
+-* images, documents attach&#233;s recopi&#233;s en documents distants
+-* essayer de faire correspondre les auteurs
+-* licence ...
 	</description>
-	<lien>http://trac.rezo.net/trac/spip-zone/wiki/SpipToSpip</lien> <!-- URI de documentation --> 
+	<lien>http://www.spip-contrib.net/SPIP2SPIP</lien> <!-- URI de documentation --> 
 	<fonctions>spiptospip_filtre.php</fonctions>
 	<prefix>spip2spip</prefix>
 	<fonctions>spiptospip_fonctions.php</fonctions>
