@@ -72,7 +72,7 @@
 							<THELIA_declinaisons type="DECLINAISON" produit="THELIA-ID">
 								THELIA-TITRE : <select name="declinaisonTHELIA-ID"  onChange="if ($(this).val()!='') $('form#formAjouter').find('.LIEN_commander').removeAttr('disabled'); else $('form#formAjouter').find('.LIEN_commander').attr('disabled','disabled');">
 									<option value=""><:spipthelia:votre_choix:></option>
-									<THELIA_decldisp type="DECLIDISP" declinaison="THELIA-ID">
+									<THELIA_decldisp type="DECLIDISP" declinaison="THELIA-ID" produit="THELIA-PRODUIT" stockmini="1">
 										<option value="THELIA-ID">THELIA-TITRE</option>
 									</THELIA_decldisp>
 								</select>		 		
