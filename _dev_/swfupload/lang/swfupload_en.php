@@ -7,5 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'file_types' => '<b>File types</b> setting accepts a semi-colon separated list of file extensions that are allowed to be selected by the user. Use '*.*' to allow all file types',
 'file_upload_limit' => '<b>File upload limit</b><br/>Dynamically modifies the file_upload_limit setting. The special value zero (0) indicates "no limit".',
 'debug' => 'Enables or disables debug output. The parameter should be true or false.',
+'texte_uploadqueue' => 'Upload queue',
+'texte_filesupload' => 'Upload files',
+'texte_boutonupload' => 'Upload files',
+'texte_cancelupload' => 'Cancel upload',
 );
 ?>

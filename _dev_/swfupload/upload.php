@@ -12,21 +12,10 @@
 		echo "invalid upload";
 		exit(0);
 	}
-	
-	function getName($pre='',$post='')
-{
-	$name=microtime();
-	$name=str_replace(array(' ','.'),'',$name);
-	$cle=mt_rand(0,9);
-	return $pre.$name.$cle.'.'.$post;
-}
 
 		$upload_dir=$_POST["UPLOAD_DIR"];
-		//$extension_upload=substr(strrchr($_FILES['Filedata']['name'], '.')  ,1);
 		$nom=$upload_dir.$_FILES['Filedata']['name'];
-		//$nom=getName($upload_dir,$extension_upload);
-		//$nom=getName('upload2/',$extension_upload);
-		move_uploaded_file($_FILES['Filedata']['tmp_name'],$nom);	
+		@move_uploaded_file($_FILES['Filedata']['tmp_name'],$nom);	
 
 	$file_id = md5($_FILES["Filedata"]["tmp_name"] + rand()*100000);
 	

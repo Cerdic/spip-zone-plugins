@@ -1,7 +1,7 @@
 <plugin>
 	<nom>SWFupload</nom>
 	<auteur>Phil 2008</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>dev</etat>
 	<description>Permet de t&eacute;l&eacute;charger des images dans le dossier upload sans acc&egrave;s ftp</description>
 	<icon>swfupload-24.png</icon>
@@ -10,11 +10,6 @@
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
-		<inclure>swfupload_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>header_prive</nom>
-		<action>ajouterSWF</action>
 		<inclure>swfupload_pipelines.php</inclure>
 	</pipeline>
 </plugin>

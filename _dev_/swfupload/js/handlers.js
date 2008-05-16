@@ -1,250 +1,177 @@
-function fileQueueError(fileObj, error_code, message) {
+/* Demo Note:  This demo uses a FileProgress class that handles the UI for displaying the file name and percent complete.
+The FileProgress class is not part of SWFUpload.
+*/
+
+
+/* **********************
+   Event Handlers
+   These are my custom event handlers to make my
+   web application behave the way I went when SWFUpload
+   completes different tasks.  These aren't part of the SWFUpload
+   package.  They are part of my application.  Without these none
+   of the actions SWFUpload makes will show up in my application.
+   ********************** */
+function fileQueued(file) {
 	try {
-		var error_name = "";
-		switch(error_code) {
-			case SWFUpload.ERROR_CODE_QUEUE_LIMIT_EXCEEDED:
-				error_name = "You have attempted to queue too many files.";
-			break;
-		}
+		var progress = new FileProgress(file, this.customSettings.progressTarget);
+		progress.setStatus("Pending...");
+		progress.toggleCancel(true, this);
 
-		if (error_name !== "") {
-			alert(error_name);
-			return;
-		}
-
-		switch(error_code) {
-			case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
-				image_name = "zerobyte.gif";
-			break;
-			case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
-				image_name = "toobig.gif";
-			break;
-			case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
-			case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
-			default:
-				alert(message);
-				image_name = "error.gif";
-			break;
-		}
-
-		AddImage("images/" + image_name);
-
-	} catch (ex) { this.debug(ex); }
+	} catch (ex) {
+		this.debug(ex);
+	}
 
 }
 
-function fileDialogComplete(num_files_queued) {
+function fileQueueError(file, errorCode, message) {
 	try {
-		if (num_files_queued > 0) {
-			this.startUpload();
+		if (errorCode === SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED) {
+			alert("You have attempted to queue too many files.\n" + (message === 0 ? "You have reached the upload limit." : "You may select " + (message > 1 ? "up to " + message + " files." : "one file.")));
+			return;
 		}
+
+		var progress = new FileProgress(file, this.customSettings.progressTarget);
+		progress.setError();
+		progress.toggleCancel(false);
+
+		switch (errorCode) {
+		case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+			progress.setStatus("File is too big.");
+			this.debug("Error Code: File too big, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
+			break;
+		case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+			progress.setStatus("Cannot upload Zero Byte files.");
+			this.debug("Error Code: Zero byte file, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
+			break;
+		case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+			progress.setStatus("Invalid File Type.");
+			this.debug("Error Code: Invalid File Type, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
+			break;
+		default:
+			if (file !== null) {
+				progress.setStatus("Unhandled Error");
+			}
+			this.debug("Error Code: " + errorCode + ", File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
+			break;
+		}
+	} catch (ex) {
+        this.debug(ex);
+    }
+}
+
+function fileDialogComplete(numFilesSelected, numFilesQueued) {
+	try {
+		if (numFilesSelected > 0) {
+			document.getElementById(this.customSettings.cancelButtonId).disabled = false;
+		}
+		
+		/* I want auto start the upload and I can do that here */
+		this.startUpload();
+	} catch (ex)  {
+        this.debug(ex);
+	}
+}
+
+function uploadStart(file) {
+	try {
+		/* I don't want to do any file validation or anything,  I'll just update the UI and
+		return true to indicate that the upload should start.
+		It's important to update the UI here because in Linux no uploadProgress events are called. The best
+		we can do is say we are uploading.
+		 */
+		var progress = new FileProgress(file, this.customSettings.progressTarget);
+		progress.setStatus("Uploading...");
+		progress.toggleCancel(true, this);
+	}
+	catch (ex) {}
+	
+	return true;
+}
+
+function uploadProgress(file, bytesLoaded, bytesTotal) {
+	try {
+		var percent = Math.ceil((bytesLoaded / bytesTotal) * 100);
+
+		var progress = new FileProgress(file, this.customSettings.progressTarget);
+		progress.setProgress(percent);
+		progress.setStatus("Uploading...");
 	} catch (ex) {
 		this.debug(ex);
 	}
 }
 
-function uploadProgress(fileObj, bytesLoaded) {
-
+function uploadSuccess(file, serverData) {
 	try {
-		var percent = Math.ceil((bytesLoaded / fileObj.size) * 100)
+		var progress = new FileProgress(file, this.customSettings.progressTarget);
+		progress.setComplete();
+		progress.setStatus("Complete.");
+		progress.toggleCancel(false);
 
-		var progress = new FileProgress(fileObj,  this.customSettings.upload_target);
-		progress.SetProgress(percent);
-		if (percent === 100) {
-			progress.SetStatus("Creating thumbnail...");
-			progress.ToggleCancel(false);
-			progress.ToggleCancel(true, this, fileObj.id);
-		} else {
-			progress.SetStatus("Uploading...");
-			progress.ToggleCancel(true, this, fileObj.id);
-		}
-	} catch (ex) { this.debug(ex); }
+	} catch (ex) {
+		this.debug(ex);
+	}
 }
 
-function uploadSuccess(fileObj, server_data) {
+function uploadError(file, errorCode, message) {
 	try {
-		// upload.php returns the thumbnail id in the server_data, use that to retrieve the thumbnail for display
-		
-		AddImage("../thumbnail.php?id=" + server_data);
+		var progress = new FileProgress(file, this.customSettings.progressTarget);
+		progress.setError();
+		progress.toggleCancel(false);
 
-		var progress = new FileProgress(fileObj,  this.customSettings.upload_target);
-
-		progress.SetStatus("Thumbnail Created.");
-		progress.ToggleCancel(false);
-
-
-	} catch (ex) { this.debug(ex); }
-}
-
-function uploadComplete(fileObj) {
-	try {
-		/*  I want the next upload to continue automatically so I'll call startUpload here */
-		if (this.getStats().files_queued > 0) {
-			this.startUpload();
-		} else {
-			var progress = new FileProgress(fileObj,  this.customSettings.upload_target);
-			progress.SetComplete();
-			progress.SetStatus("All images received.");
-			progress.ToggleCancel(false);
-		}
-	} catch (ex) { this.debug(ex); }
-}
-
-function uploadError(fileObj, error_code, message) {
-	var image_name =  "error.gif";
-	try {
-		switch(error_code) {
-			case SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED:
-				try {
-					var progress = new FileProgress(fileObj,  this.customSettings.upload_target);
-					progress.SetCancelled();
-					progress.SetStatus("Stopped");
-					progress.ToggleCancel(true, this, fileObj.id);
-				}
-				catch (ex) { this.debug(ex); }
-			case SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED:
-				image_name = "uploadlimit.gif";
+		switch (errorCode) {
+		case SWFUpload.UPLOAD_ERROR.HTTP_ERROR:
+			progress.setStatus("Upload Error: " + message);
+			this.debug("Error Code: HTTP Error, File name: " + file.name + ", Message: " + message);
 			break;
-			default:
-				alert(message);
+		case SWFUpload.UPLOAD_ERROR.UPLOAD_FAILED:
+			progress.setStatus("Upload Failed.");
+			this.debug("Error Code: Upload Failed, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
 			break;
-		}
-
-		AddImage("images/" + image_name);
-
-	} catch (ex) { this.debug(ex); }
-
-}
-
-
-/* ******************************************
- *	FileProgress Object
- *	Control object for displaying file info
- * ****************************************** */
-
-function FileProgress(fileObj, target_id) {
-	this.file_progress_id = "divFileProgress";
-
-	this.fileProgressWrapper = document.getElementById(this.file_progress_id);
-	if (!this.fileProgressWrapper) {
-		this.fileProgressWrapper = document.createElement("div");
-		this.fileProgressWrapper.className = "progressWrapper";
-		this.fileProgressWrapper.id = this.file_progress_id;
-
-		this.fileProgressElement = document.createElement("div");
-		this.fileProgressElement.className = "progressContainer";
-
-		var progressCancel = document.createElement("a");
-		progressCancel.className = "progressCancel";
-		progressCancel.href = "#";
-		progressCancel.style.visibility = "hidden";
-		progressCancel.appendChild(document.createTextNode(" "));
-
-		var progressText = document.createElement("div");
-		progressText.className = "progressName";
-		progressText.appendChild(document.createTextNode(fileObj.name));
-
-		var progressBar = document.createElement("div");
-		progressBar.className = "progressBarInProgress";
-
-		var progressStatus = document.createElement("div");
-		progressStatus.className = "progressBarStatus";
-		progressStatus.innerHTML = "&nbsp;";
-
-		this.fileProgressElement.appendChild(progressCancel);
-		this.fileProgressElement.appendChild(progressText);
-		this.fileProgressElement.appendChild(progressStatus);
-		this.fileProgressElement.appendChild(progressBar);
-
-		this.fileProgressWrapper.appendChild(this.fileProgressElement);
-
-		document.getElementById(target_id).appendChild(this.fileProgressWrapper);
-		FadeIn(this.fileProgressWrapper, 0);
-
-	} else {
-		this.fileProgressElement = this.fileProgressWrapper.firstChild;
-		this.fileProgressElement.childNodes[1].firstChild.nodeValue = fileObj.name;
-	}
-
-	this.height = this.fileProgressWrapper.offsetHeight;
-
-}
-FileProgress.prototype.SetProgress = function(percentage) {
-	this.fileProgressElement.className = "progressContainer green";
-	this.fileProgressElement.childNodes[3].className = "progressBarInProgress";
-	this.fileProgressElement.childNodes[3].style.width = percentage + "%";
-}
-FileProgress.prototype.SetComplete = function() {
-	this.fileProgressElement.className = "progressContainer blue";
-	this.fileProgressElement.childNodes[3].className = "progressBarComplete";
-	this.fileProgressElement.childNodes[3].style.width = "";
-
-}
-FileProgress.prototype.SetError = function() {
-	this.fileProgressElement.className = "progressContainer red";
-	this.fileProgressElement.childNodes[3].className = "progressBarError";
-	this.fileProgressElement.childNodes[3].style.width = "";
-
-}
-FileProgress.prototype.SetCancelled = function() {
-	this.fileProgressElement.className = "progressContainer";
-	this.fileProgressElement.childNodes[3].className = "progressBarError";
-	this.fileProgressElement.childNodes[3].style.width = "";
-
-}
-FileProgress.prototype.SetStatus = function(status) {
-	this.fileProgressElement.childNodes[2].innerHTML = status;
-}
-
-FileProgress.prototype.ToggleCancel = function(show, upload_obj, file_id) {
-	this.fileProgressElement.childNodes[0].style.visibility = show ? "visible" : "hidden";
-	if (upload_obj) {
-		this.fileProgressElement.childNodes[0].onclick = function() { upload_obj.cancelUpload(); return false; };
-	}
-}
-
-function AddImage(src) {
-	var new_img = document.createElement("img");
-	new_img.style.margin = "5px";
-
-	document.getElementById("thumbnails").appendChild(new_img);
-	if (new_img.filters) {
-		try {
-			new_img.filters.item("DXImageTransform.Microsoft.Alpha").opacity = 0;
-		} catch (e) {
-			// If it is not set initially, the browser will throw an error.  This will set it if it is not set yet.
-			new_img.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=' + 0 + ')';
-		}
-	} else {
-		new_img.style.opacity = 0;
-	}
-
-	new_img.onload = function () { FadeIn(new_img, 0); };
-	new_img.src = src;
-}
-
-function FadeIn(element, opacity) {
-	var reduce_opacity_by = 15;
-	var rate = 30;	// 15 fps
-
-
-	if (opacity < 100) {
-		opacity += reduce_opacity_by;
-		if (opacity > 100) opacity = 100;
-
-		if (element.filters) {
-			try {
-				element.filters.item("DXImageTransform.Microsoft.Alpha").opacity = opacity;
-			} catch (e) {
-				// If it is not set initially, the browser will throw an error.  This will set it if it is not set yet.
-				element.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=' + opacity + ')';
+		case SWFUpload.UPLOAD_ERROR.IO_ERROR:
+			progress.setStatus("Server (IO) Error");
+			this.debug("Error Code: IO Error, File name: " + file.name + ", Message: " + message);
+			break;
+		case SWFUpload.UPLOAD_ERROR.SECURITY_ERROR:
+			progress.setStatus("Security Error");
+			this.debug("Error Code: Security Error, File name: " + file.name + ", Message: " + message);
+			break;
+		case SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED:
+			progress.setStatus("Upload limit exceeded.");
+			this.debug("Error Code: Upload Limit Exceeded, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
+			break;
+		case SWFUpload.UPLOAD_ERROR.FILE_VALIDATION_FAILED:
+			progress.setStatus("Failed Validation.  Upload skipped.");
+			this.debug("Error Code: File Validation Failed, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
+			break;
+		case SWFUpload.UPLOAD_ERROR.FILE_CANCELLED:
+			// If there aren't any files left (they were all cancelled) disable the cancel button
+			if (this.getStats().files_queued === 0) {
+				document.getElementById(this.customSettings.cancelButtonId).disabled = true;
 			}
-		} else {
-			element.style.opacity = opacity / 100;
+			progress.setStatus("Cancelled");
+			progress.setCancelled();
+			break;
+		case SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED:
+			progress.setStatus("Stopped");
+			break;
+		default:
+			progress.setStatus("Unhandled Error: " + errorCode);
+			this.debug("Error Code: " + errorCode + ", File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
+			break;
 		}
-	}
+	} catch (ex) {
+        this.debug(ex);
+    }
+}
 
-	if (opacity < 100) {
-		setTimeout(function() { FadeIn(element, opacity); }, rate);
+function uploadComplete(file) {
+	if (this.getStats().files_queued === 0) {
+		document.getElementById(this.customSettings.cancelButtonId).disabled = true;
 	}
+}
+
+// This event comes from the Queue Plugin
+function queueComplete(numFilesUploaded) {
+	var status = document.getElementById("divStatus");
+	status.innerHTML = numFilesUploaded + " file" + (numFilesUploaded === 1 ? "" : "s") + " uploaded.";
 }

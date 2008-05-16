@@ -2,12 +2,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-//include_spip('inc/actions'); // *action_auteur et determine_upload
+include_spip('inc/actions'); // *action_auteur et determine_upload
 
 session_start();
 $_SESSION["file_info"] = array();
 
-function exec_swfupload_admin()
+function exec_swfupload_admin_dist()
 {
 global $connect_statut, $connect_login, $connect_toutes_rubriques, $couleur_foncee, $flag_gz, $options,$supp;
 
@@ -34,19 +34,89 @@ fin_boite_info();
 
 echo debut_droite();
 echo gros_titre(_T('swfupload:titre_swfupload'));
-echo "
-	<div style=\"margin: 0px 10px;\">
-		<div>
-			<form>
-				<button id=\"btnBrowse\" type=\"button\" style=\"padding: 5px;\" onclick=\"swfu.selectFiles(); this.blur();\"><img src=\""._DIR_PLUGIN_SWFUPLOAD."applicationdemo/images/page_white_add.png\" style=\"padding-right: 3px; vertical-align: bottom;\">Select Images <span style=\"font-size: 7pt;\">(2 MB Max)</span></button>
-			</form>
-		</div>
+echo swfupload_SWF_js($flux);
+echo '
+<form id="form1" action="index.php" method="post" enctype="multipart/form-data">
+		<div>'._T('swfupload:texte_swfupload').'</div>
 
-		<div id=\"divFileProgressContainer\" style=\"height: 75px;\"></div>
-		<div id=\"thumbnails\"></div>
-	</div>";
+		<div class="content">
+			<fieldset class="flash" id="fsUploadProgress">
+				<legend>'._T('swfupload:texte_uploadqueue').'</legend>
+			</fieldset>
+			<div id="divStatus">0 '._T('swfupload:texte_filesupload').'</div>
+			<div>
+				<input type="button" value="'._T('swfupload:texte_boutonupload').'" onclick="swfu.selectFiles()" style="font-size: 8pt;" />
+				<input id="btnCancel" type="button" value="'._T('swfupload:texte_cancelupload').'" onclick="swfu.cancelQueue();" disabled="disabled" style="font-size: 8pt;" /><br />
+
+			</div>
+		</div>
+	</form>';
 echo fin_gauche();
 echo fin_page();
+}
+
+function swfupload_SWF_js($flux) {
+$session = session_id();
+
+//$upload_dir = "../../".determine_upload();
+$upload_dir = "../".determine_upload();
+$file_size_limit = lire_config('swfupload/file_size_limit');
+$file_types = lire_config('swfupload/file_types');
+$file_upload_limit = lire_config('swfupload/file_upload_limit');
+$debug = lire_config('swfupload/debug');
+
+if (!$file_size_limit || $file_size_limit == '_' || $file_size_limit == '') $file_size_limit = '2048' ;
+if (!$file_types || $file_types == '_' || $file_types == '') $file_types = "*.jpg;*.gif;*.png" ;
+if (!$file_upload_limit || $file_upload_limit == '_' || $file_upload_limit == '') $file_upload_limit = '0' ;
+if (!$debug || $debug == '_' || $debug == '') $debug = "false" ;
+
+$flux .= '
+<link href="'._DIR_PLUGIN_SWFUPLOAD.'css/default.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'swfupload/swfupload.js"></script>
+	<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'js/swfupload.queue.js"></script>
+		<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'js/fileprogress.js"></script>
+			<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'js/handlers.js"></script>
+	<script type="text/javascript">
+		var swfu;
+		window.onload = function () {
+			swfu = new SWFUpload({
+				// Flash Settings '._DIR_PLUGIN_SWFUPLOAD.'
+				flash_url : "'._DIR_PLUGIN_SWFUPLOAD.'swfupload/swfupload_f9.swf",	// Relative to this file
+				// Backend Settings
+				upload_url: "../upload.php",	//http://127.0.0.1/clg-clement/ecrire?action= Relative to the SWF file
+				post_params: {"UPLOAD_DIR": "'.$upload_dir.'","PHPSESSID": "'.$session.'"},
+				// File Upload Settings
+				file_size_limit : "'.$file_size_limit.'",	// 2MB
+				file_types : "'.$file_types.'",
+				file_types_description : "Allowed Files",
+				file_upload_limit : "'.$file_upload_limit.'",
+
+				// Event Handler Settings - these functions as defined in Handlers.js
+				//  The handlers are not part of SWFUpload but are part of my website and control how
+				//  my website reacts to the SWFUpload events.
+				file_queued_handler : fileQueued,
+				file_queue_error_handler : fileQueueError,
+				file_dialog_complete_handler : fileDialogComplete,
+				upload_start_handler : uploadStart,
+				upload_progress_handler : uploadProgress,
+				upload_error_handler : uploadError,
+				upload_success_handler : uploadSuccess,
+				upload_complete_handler : uploadComplete,
+				queue_complete_handler : queueComplete,
+
+				custom_settings : {
+					progressTarget : "fsUploadProgress",
+					cancelButtonId : "btnCancel",
+
+				},
+				
+				// Debug Settings
+				debug: '.$debug.'
+			});
+		}
+	</script>';
+	return $flux;
+	//}
 }
 
 ?>
