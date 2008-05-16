@@ -32,7 +32,7 @@ function inc_prepare_recherche($recherche, $table='articles', $cond=false, $serv
 		foreach ($liste_index_tables as $ttable) {
 			$table_abreg = preg_replace("{^spip_}","",$ttable);
 			$hash = substr(md5($recherche . $table_abreg),0,16);
-			$cache[$recherche][$table_abreg] = array("points","recherche='$hash'");
+			$cache[$recherche][$table_abreg] = array("resultats.points as points","recherche='$hash'");
 			$hashes[] = $hash;
 		}
 
