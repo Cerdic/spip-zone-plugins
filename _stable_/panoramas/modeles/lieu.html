@@ -1,4 +1,5 @@
 <B_lieux>
+
 <BOUCLE_lieux(VISITES_VIRTUELLES_LIEUX){id_lieu}>
 	<BOUCLE_photo(DOCUMENTS){id_document=#ID_PHOTO}>
 		<img src="#URL_DOCUMENT" class="panorama#ID_LIEU" width="#LARGEUR" height="#HAUTEUR" 
@@ -43,7 +44,7 @@
 <BOUCLE_visites(VISITES_VIRTUELLES){id_visite=#ID_VISITE}>
 <BOUCLE_carte(DOCUMENTS){id_document=#ID_CARTE}>
 $(document).ready(function(){
-	[$('.panorama-viewport').append("<div class='panorama-onglets'><img class='panorama-carte' src='(#URL_DOCUMENT)' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:><ul></ul></div><div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2><h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2></div></div>");
+	$('.panorama-viewport').append("<div class='panorama-onglets'><img class='panorama-carte' src='(#URL_DOCUMENT)' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:><ul><?php echo(str_replace('"', '\'', $_COOKIE['objets_ramasses'])); ?></ul></div><div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2><h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2></div></div>");
 	$('.panorama-onglets h2.panorama-carte a').flipv().bind('click', function() { 
 				$('img.panorama-carte').toggle();
 				if ($('img.panorama-carte').css('display') != 'none') 
@@ -51,7 +52,7 @@ $(document).ready(function(){
 				else
 					$('h2.panorama-panier').show();
 				return false;
-	});]
+	});
 	$('.panorama-onglets h2.panorama-panier a').flipv().bind('click', function() { 
 				$('div.panorama-panier').toggle();
 				if ($('div.panorama-panier').css('display') != 'none') 
@@ -65,23 +66,37 @@ $(document).ready(function(){
 </BOUCLE_visites>
 	$(document).ready(function(){
 		
+	
 	<BOUCLE_interactionsobjet(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
 		
 		[ (#REM) interactions avec les objets : drag and drop dans le panier ]
 		<BOUCLE_objetcourant(DOCUMENTS){id_document=#ID_OBJET}>
 			[(#TYPE|=={'objet'}|?{' ',''})  
-				$('.type-objet#ID_DOCUMENT').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />");
-				$('.type-objet#ID_DOCUMENT').draggable({helper: 'clone', opacity: .4, revert: true});
-				$('h2.panorama-panier').droppable({
-					accept: ".type-objet#ID_DOCUMENT",
-					activeClass: 'droppable-active',
-					hoverClass: 'droppable-hover',
-					drop: function(ev, ui) {
-						$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
-						$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
-						$('.type-objet#ID_DOCUMENT').remove();
-					}
-				});
+				[ (#REM) suppression des objets qui sont déjà dans le panier ]
+				/*if ($('div.panorama-panier ul').find('.objet#ID_DOCUMENT')) {
+					//$('.type-objet#ID_DOCUMENT').remove();
+				} else {*/				
+					$('.type-objet#ID_DOCUMENT').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />");
+					$('.type-objet#ID_DOCUMENT').draggable({helper: 'clone', opacity: .4, revert: true});
+					$('h2.panorama-panier').droppable({
+						accept: ".type-objet#ID_DOCUMENT",
+						activeClass: 'droppable-active',
+						hoverClass: 'droppable-hover',
+						drop: function(ev, ui) {
+							$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+							$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
+							$('.type-objet#ID_DOCUMENT').remove();
+							
+							//mis à jour des cookies
+							var objets_ramasses = $('div.panorama-panier ul').html();
+							$.cookie('objets_ramasses', objets_ramasses);
+							
+						}
+					});
+				//}
+				if ($('div.panorama-panier ul').find('.objet#ID_DOCUMENT').length > 0) {
+					$('.type-objet#ID_DOCUMENT').remove();
+				}
 			]
 		</BOUCLE_objetcourant>
 	
@@ -104,6 +119,11 @@ $(document).ready(function(){
 						$(this).unbind('click');
 						tb_init(this);
 						$('div.panorama-panier ul li div.objet#ID_DOCUMENT, .type-objet#ID_DOCUMENT').remove();
+						
+						//mis à jour des cookies
+						var objets_ramasses = $('div.panorama-panier ul').html();
+						$.cookie('objets_ramasses', objets_ramasses);
+						
 					}
 			});
 		</BOUCLE_objetactivation>

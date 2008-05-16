@@ -408,25 +408,29 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= "</form>";
 	$out .= "</div>";
 	$out .= "<script type='text/javascript'>  
-		$(document).ready(function () { 
-			var initialx1 = parseInt($('#x1_interaction').val());
-			var initialy1 = parseInt($('#y1_interaction').val());
-			var initialx2 = parseInt($('#x2_interaction').val());
-			var initialy2 = parseInt($('#y2_interaction').val());
-			
-			$('img#panorama-selection-interaction').imgAreaSelect({ 
-				selectionColor: 'blue', 
-				onSelectEnd: selectionEnd, x1: initialx1, y1: initialy1, x2: initialx2, y2: initialy2 
-				
-			});  
-		}); 
-		function selectionEnd(img, selection) { 
-			$('#x1_interaction').val(selection.x1);
-			$('#x2_interaction').val(selection.x2);
-			$('#y1_interaction').val(selection.y1);
-			$('#y2_interaction').val(selection.y2);
+			function selectionEnd(img, selection) { 
+				$('#x1_interaction').val(selection.x1);
+				$('#x2_interaction').val(selection.x2);
+				$('#y1_interaction').val(selection.y1);
+				$('#y2_interaction').val(selection.y2);
 
-		}
+			}
+			$(document).ready(function () { 
+				var initialx1 = parseInt($('#x1_interaction').val());
+				var initialy1 = parseInt($('#y1_interaction').val());
+				var initialx2 = parseInt($('#x2_interaction').val());
+				var initialy2 = parseInt($('#y2_interaction').val());
+				
+				$('img#panorama-selection-interaction').imgAreaSelect({
+						selectionColor: 'blue', 
+						onSelectEnd: selectionEnd, 
+						x1: initialx1, 
+						y1: initialy1, 
+						x2: initialx2, 
+						y2: initialy2
+				});
+			}); 
+		
 		</script>";
 	
 
