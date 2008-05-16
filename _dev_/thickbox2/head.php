@@ -20,7 +20,7 @@ $flux .=
 
 '
 <script src=\''.url_absolue(find_in_path('javascript/thickbox.js')).'\' type=\'text/javascript\'></script>
-<link rel="stylesheet" href="'.url_absolue(find_in_path('thickbox.css')).'" type="text/css" media="projection, screen" />
+<link rel="stylesheet" href="'.url_absolue(find_in_path('thickbox.css')).'" type="text/css" media="projection, screen, tv" />
 <script type="text/javascript"><!--
 // Inside the function "this" will be "document" when called by ready() 
 // and "the ajaxed element" when called because of onAjaxLoad 
