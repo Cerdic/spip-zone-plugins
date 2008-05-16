@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
     <version>
-    2.4.1
+    2.5.0
     </version>
     <nom> <!-- Nom du plugin -->
     <multi>
@@ -50,6 +50,7 @@ _ Der urspr&uuml;ngliche Code von Courcy wurde weitgehend neu geschrieben um:
 -* Statistiken: [Joseph->http://www.spip-contrib.net/Joseph] basierend auf eine [Kontribution von Fran&ccedil;ois Schreuer->http://www.spip-contrib.net/Mesurer-la-longueur-d-un-article].
 _ Adaptation f&uuml;r SPIP 1.9.2 von [Coyote->http://www.spip-contrib.net/_Coyote_] (28. M&auml;rz 2007)
    </multi>
+-* [Joel Savignon->http://www.neosystem.com/] pour le navigateur de rubriques/articles/breves.
 _ <multi>
    [fr]&#169; 2007 - Distribu&#233; sous licence GNU/GPL
    [ar]&#169; &#1634;&#1632;&#1632;&#1639; - &#1605;&#1608;&#1586;&#1593; &#1576;&#1605;&#1608;&#1580;&#1576; &#1575;&#1604;&#1578;&#1585;&#1582;&#1610;&#1589; &#1575;&#1604;&#1593;&#1575;&#1605; GNU/GPL

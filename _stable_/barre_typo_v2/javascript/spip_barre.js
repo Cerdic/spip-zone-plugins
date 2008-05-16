@@ -382,6 +382,12 @@ function barre_galerie(champs_de_texte, cheminediteur) {
 		'width=550,height=400,menubar=no,scrollbars=yes,statusbar=yes')
 }
 
+function barre_liens_spip(champs_de_texte, cheminediteur) {
+	zone_selection = champs_de_texte;
+	window.open(cheminediteur+'?exec=liens_spip', 'liens_spip',
+		'width=550,height=400,menubar=no,scrollbars=yes,statusbar=yes')
+}
+
 function barre_selection(champ) {
 	var resultat = "";
 	champ.focus();
