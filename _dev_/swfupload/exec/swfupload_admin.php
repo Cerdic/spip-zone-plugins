@@ -106,8 +106,7 @@ $flux .= '
 
 				custom_settings : {
 					progressTarget : "fsUploadProgress",
-					cancelButtonId : "btnCancel",
-
+					cancelButtonId : "btnCancel"
 				},
 				
 				// Debug Settings
