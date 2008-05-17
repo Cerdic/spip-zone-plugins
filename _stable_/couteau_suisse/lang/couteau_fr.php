@@ -27,6 +27,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Page @page@ : @title@',
 	'page_precedente' => 'Page pr&eacute;c&eacute;dente',
 	'page_suivante' => 'Page suivante',
+	'plugin_xml' => "R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelles et utiles am&#233;liorant la gestion de votre site SPIP.
+
+Chacun de ces outils peut &#234;tre activ&#233; ou non par l'utilisateur sur [la page d'administration du plugin->./?exec=admin_couteau_suisse] et g&#233;rer un certain nombre de variables : cliquer sur {{Configuration}}, puis choisir l'onglet {{Le Couteau Suisse}}.
+
+Les cat&#233;gories disponibles sont : Administration, Am&#233;liorations typographiques, Raccourcis typographiques, Affichage public, Balises, filtres, crit&#232;res.
+
+D&#233;couvrez dans ce plugin vos outils favoris : {Exposants typographiques}, {Guillemets typographiques}, {Belles puces}, {Un sommaire pour vos articles}, {Smileys}, {Supprime le num&#233;ro}, {Belles URLs}, {SPIP et les liens... externes}, {Pas de forums anonymes}, {D&#233;coupe en pages et onglets}, etc., etc.
+
+N'h&#233;sitez pas &#224; consulter les articles de documentation du plugin publi&#233;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+
+Compatibilit&#233; : SPIP toutes versions 1.9x",
 
 	// S
 	'smileys_dispos' => 'Frimousses disponibles :',
