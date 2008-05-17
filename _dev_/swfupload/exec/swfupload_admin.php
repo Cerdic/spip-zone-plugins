@@ -3,9 +3,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/actions'); // *action_auteur et determine_upload
+include_spip('inc/swfupload_form'); // *action_auteur et determine_upload
 
 session_start();
 $_SESSION["file_info"] = array();
+
 
 function exec_swfupload_admin_dist()
 {
@@ -35,22 +37,7 @@ fin_boite_info();
 echo debut_droite();
 echo gros_titre(_T('swfupload:titre_swfupload'));
 echo swfupload_SWF_js($flux);
-echo '
-<form id="form1" action="index.php" method="post" enctype="multipart/form-data">
-		<div>'._T('swfupload:texte_swfupload').'</div>
-
-		<div class="content">
-			<fieldset class="flash" id="fsUploadProgress">
-				<legend>'._T('swfupload:texte_uploadqueue').'</legend>
-			</fieldset>
-			<div id="divStatus">0 '._T('swfupload:texte_filesupload').'</div>
-			<div>
-				<input type="button" value="'._T('swfupload:texte_boutonupload').'" onclick="swfu.selectFiles()" style="font-size: 8pt;" />
-				<input id="btnCancel" type="button" value="'._T('swfupload:texte_cancelupload').'" onclick="swfu.cancelQueue();" disabled="disabled" style="font-size: 8pt;" /><br />
-
-			</div>
-		</div>
-	</form>';
+echo swfupload_form();
 echo fin_gauche();
 echo fin_page();
 }
@@ -58,7 +45,7 @@ echo fin_page();
 function swfupload_SWF_js($flux) {
 $session = session_id();
 
-$upload_dir = "../".determine_upload();
+//$upload_dir = "../".determine_upload();
 $file_size_limit = lire_config('swfupload/file_size_limit');
 $file_types = lire_config('swfupload/file_types');
 $file_upload_limit = lire_config('swfupload/file_upload_limit');
@@ -70,20 +57,21 @@ if (!$file_upload_limit || $file_upload_limit == '_' || $file_upload_limit == ''
 if (!$debug || $debug == '_' || $debug == '') $debug = "false" ;
 
 $flux .= '
-<link href="'._DIR_PLUGIN_SWFUPLOAD.'css/default.css" rel="stylesheet" type="text/css" />
+	<link href="'._DIR_PLUGIN_SWFUPLOAD.'css/default.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'swfupload/swfupload.js"></script>
 	<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'js/swfupload.queue.js"></script>
-		<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'js/fileprogress.js"></script>
-			<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'js/handlers.js"></script>
+	<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'js/fileprogress.js"></script>
+	<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'js/handlers.js"></script>
 	<script type="text/javascript">
 		var swfu;
 		window.onload = function () {
 			swfu = new SWFUpload({
 				// Flash Settings '._DIR_PLUGIN_SWFUPLOAD.'
-				flash_url : "'._DIR_PLUGIN_SWFUPLOAD.'swfupload/swfupload_f9.swf",	// Relative to this file
-				// Backend Settings
-				upload_url: "'.url_absolue(_DIR_PLUGIN_SWFUPLOAD).'upload.php",	//Relative to the SWF file, utiliser url absolue cest mieux 
-				post_params: {"UPLOAD_DIR": "'.$upload_dir.'","PHPSESSID": "'.$session.'"},
+				flash_url : "'.url_absolue(_DIR_PLUGIN_SWFUPLOAD).'swfupload/swfupload_f9.swf",	// Relative to this file
+				// Backend Settings - Relative to the SWF file, utiliser url absolue cest mieux 
+				upload_url: "'.$GLOBALS['meta']["adresse_site"].'/'._DIR_RESTREINT_ABS.'?exec=swfupload_upload",	
+
+				post_params: {"PHPSESSID": "'.$session.'"},
 				// File Upload Settings
 				file_size_limit : "'.$file_size_limit.'",	// 2MB
 				file_types : "'.$file_types.'",
