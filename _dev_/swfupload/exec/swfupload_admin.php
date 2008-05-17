@@ -83,7 +83,7 @@ $flux .= '
 				// Flash Settings '._DIR_PLUGIN_SWFUPLOAD.'
 				flash_url : "'._DIR_PLUGIN_SWFUPLOAD.'swfupload/swfupload_f9.swf",	// Relative to this file
 				// Backend Settings
-				upload_url: "../upload.php",	//http://127.0.0.1/clg-clement/ecrire?action= Relative to the SWF file
+				upload_url: "../upload.php",	//Relative to the SWF file
 				post_params: {"UPLOAD_DIR": "'.$upload_dir.'","PHPSESSID": "'.$session.'"},
 				// File Upload Settings
 				file_size_limit : "'.$file_size_limit.'",	// 2MB
