@@ -4,6 +4,7 @@
 		[en]SpipBB: Management of SPIP forums
 		[fr]SpipBB : Gestion des forums de SPIP
 		[ca]SpipBB: Gesti&oacute; dels f&ograve;rums d'SPIP
+		[pt]SpipBB: Gest&atilde;o dos f&oacute;runs de SPIP
 	</multi>
 </nom>
 <auteur>
@@ -15,6 +16,7 @@ _ &#169; 2006 - <multi>
 [en]Distributed under the GPL licence
 [fr]Distribu&eacute; sous licence GPL
 [ca]Distribu&iuml;t sota llic&egrave;ncia GPL
+[pt]Distribu&iacute;do sob licen&ccedil;a GPL
 </multi>
 </auteur>
 <version>0.4.9.8</version>
@@ -44,6 +46,18 @@ _ [Access to the admin panel-> .?exec=spipbb_configuration]
  _ {{Plugin spipbb en curs de desenvolupament. Utilitzeu-los assumint-ne els riscs i els perills}}
 
  _ [Acc&eacute;s al panell d'administraci&oacute;-&gt; .?exec=spipbb_configuration]
+[pt]
+O plugin SpipBB permite :
+-* De gerir de maneira centralizada os f&oacute;runs de SPIP (convers&atilde;o privada),
+-* De utilizar um sector como base de um grupo de f&oacute;runs como os &laquo;Bulletin Board&raquo; como phpBB. neste sector, os subt&iacute;tulos s&atilde;o grupos de f&oacute;runs, os artigos dos f&oacute;runs, cada mensagem no f&oacute;rum h&aacute; do thread.
+
+{{Consulte :}}
+-* [ a ajuda e apoio sobre spipbb.spip-zone.info - http://spipbb.spip-zone.info/spip.php?article11],
+-* [ A documenta&ccedil;&atilde;o sobre Spip-contrib - http://www.spip-contrib.net/SpipBB-le-forum].
+
+_ {{Plugin spipbb en cours de developpement. Vous l'utilisez &agrave; vos risques et p&eacute;rils}}
+
+_ [Acc&egrave;s au panneau d'administration-> .?exec=spipbb_configuration]
 
 [fr]Le plugin SpipBB permet :
 -* De g&eacute;rer de fa&ccedil;on centralis&eacute;e les forums de SPIP (interface priv&eacute;e),
@@ -60,6 +74,7 @@ _ [Acc&egrave;s au panneau d'administration-> .?exec=spipbb_configuration]
 </description>
 <lien>[<multi>[en]See the documentation of the plugin from Spip-contrib
 [ca]Consultar la documentaci&oacute; del plugin a Spip-contrib
+[pt]Consultar a documenta&ccedil;&atilde;o do plugin sobre Spip-contrib
 [fr]Consulter la documentation du plugin sur Spip-contrib</multi>
 ->http://www.spip-contrib.net/SpipBB-le-forum]</lien> <!-- [fr] URI de documentation [en] documentation URI -->
 <icon>img_pack/spipbb-48.png</icon> <!-- [fr] icone du plugin [en] plugin icon -->
