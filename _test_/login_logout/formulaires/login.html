@@ -17,8 +17,18 @@ jQuery().ready(function(){
 	var qstring = window.location.search;
 	var page_login = (qstring.length && (qstring.search(/page=login/)>0));
 
-	$('#var_login_id').blur(function(){
-		if($(this).val().length) {
+//	$('#var_login_id').blur(function(){
+
+// utiliser une variable pour éviter que focus() relance l'appel des aléas toutes les secondes tant que le champ de mot de passe est sélectionné
+  var str_login = '';
+// vider le champ mot de passe si il est pré-rempli
+  $(document).ready(function(){ $('#session_password').val(''); });
+// lancer la récupération des aleas par ajax sur le focus dans le champ de mot de passe
+  $('#session_password').focus(function(){ recup_aleas(); });
+    
+  function recup_aleas() {
+		if($('#var_login_id').val().length && $('#var_login_id').val() != str_login) {
+			str_login = $('#var_login_id').val();
 			$.ajax({
 				type: 'post'
 				, url: $('#lilo_url_action').val()
@@ -44,7 +54,7 @@ jQuery().ready(function(){
 				}
 			}); // end $.ajax
 		} // end if
-	}); // end blur
+	} // end function
 	
 	$('#lilo_login').submit( function() {
 		if (
