@@ -58,7 +58,6 @@ echo fin_page();
 function swfupload_SWF_js($flux) {
 $session = session_id();
 
-//$upload_dir = "../../".determine_upload();
 $upload_dir = "../".determine_upload();
 $file_size_limit = lire_config('swfupload/file_size_limit');
 $file_types = lire_config('swfupload/file_types');
@@ -83,7 +82,7 @@ $flux .= '
 				// Flash Settings '._DIR_PLUGIN_SWFUPLOAD.'
 				flash_url : "'._DIR_PLUGIN_SWFUPLOAD.'swfupload/swfupload_f9.swf",	// Relative to this file
 				// Backend Settings
-				upload_url: "../upload.php",	//Relative to the SWF file
+				upload_url: "'.url_absolue(_DIR_PLUGIN_SWFUPLOAD).'upload.php",	//Relative to the SWF file, utiliser url absolue cest mieux 
 				post_params: {"UPLOAD_DIR": "'.$upload_dir.'","PHPSESSID": "'.$session.'"},
 				// File Upload Settings
 				file_size_limit : "'.$file_size_limit.'",	// 2MB
