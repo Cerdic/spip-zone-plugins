@@ -58,14 +58,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer' => 'L&ouml;schen',
 
 	// T
-	'testauteur' => '<NEW>Exemple sur champ extra/cfg de la table auteur',
-	'testcasier' => '<NEW>Exemple de casier',
-	'testclassic' => '<NEW>Exemple m&eacute;ta classique',
-	'testinclure' => '<NEW>Exemple d\'inclusion de squelette',
-	'testmulti' => '<NEW>Exemple entr&eacute;es multiples',
-	'testphp' => '<NEW>Exemple de stockage php',
-	'testsimple' => '<NEW>Exemple simple',
-	'testtable' => '<NEW>Exemple sur champs d\'une table sql'
+	'testauteur' => 'Beispiel f&uuml;r ein extra/cfg Feld der Autorentabelle',
+	'testcasier' => 'Beispiel f&uuml;r ein Fach',
+	'testclassic' => 'Beispiel f&uuml;r klassische Metadaten',
+	'testinclure' => 'Beispiel f&uuml;r ein eingebettetes Skelett',
+	'testmulti' => 'Beispiel f&uuml;r Mehrfacheingaben',
+	'testphp' => 'Beispiel f&uuml;r PHP Speicher',
+	'testsimple' => 'Einfaches Beispiel',
+	'testtable' => 'Beispiel f&uuml;r ein Feld einer SQL Tabelle'
 );
 
 ?>
