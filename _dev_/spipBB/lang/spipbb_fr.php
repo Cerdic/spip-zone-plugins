@@ -295,6 +295,7 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 	'maintenance' => 'Maintenance',
 	'maintenance_fermer' => 'a ferm&eacute; l\'article/forum :',
 	'maintenance_pour' => 'pour MAINTENANCE.',
+	'membres_en_ligne' => 'membres en ligne',
 	'membres_inscrits' => 'membres inscrits',
 	'membres_les_plus_actifs' => 'Membres les plus actifs',
 	'message' => 'Message',
