@@ -1,6 +1,10 @@
 /*
 */
 
+#CACHE{3600,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
 /*  ------------------------------------------------------
     Definition des styles propres a Imagebox
     ------------------------------------------------------ */
@@ -16,15 +20,15 @@
 	font-size: 13px;
 	color: #000; }
 #ImageBoxCaptionImages { margin: 0; }
-#ImageBoxNextImage, #ImageBoxPrevImage { background:url('../img_pack/spacer.gif'); }
-#ImageBoxNextImage:hover { background:url('../img_pack/next_image.jpg') no-repeat right top; }
-#ImageBoxPrevImage:hover { background:url('../img_pack/prev_image.jpg') no-repeat left bottom; }
+#ImageBoxNextImage, #ImageBoxPrevImage { background:url('#CHEMIN{img_pack/spacer.gif}'); }
+#ImageBoxNextImage:hover { background:url('#CHEMIN{img_pack/next_image.jpg}') no-repeat right top; }
+#ImageBoxPrevImage:hover { background:url('#CHEMIN{img_pack/prev_image.jpg}') no-repeat left bottom; }
 
 /*  ------------------------------------------------------
     Definition des styles propres a SlideShow (diaporama)
     ------------------------------------------------------ */
 #diaporama {
-	background:url('../img_pack/loading.gif}') no-repeat center 50%;
+	background:url('#CHEMIN{img_pack/loading.gif}') no-repeat center 50%;
 	border:2px solid #f00;
 /*	border:1px solid transparent;*/
 	clear:both;
@@ -35,9 +39,9 @@
 	vertical-align:middle; }
 .pagelinks { display:none; }
 /* this is for IE so the prev/next links can be hovered*/
-.nextSlide, .prevSlide { background-image:url('../img_pack/spacer.gif'); }
-.nextSlide:hover { background:url('../img_pack/nextslide.jpg') no-repeat right top; color: transparent; text-decoration: none; }
-.prevSlide:hover { background:url('../img_pack/prevslide.jpg') no-repeat left bottom; color: transparent; text-decoration: none; }
+.nextSlide, .prevSlide { background-image:url('#CHEMIN{img_pack/spacer.gif}'); }
+.nextSlide:hover { background:url('#CHEMIN{img_pack/nextslide.jpg}') no-repeat right top; color: transparent; text-decoration: none; }
+.prevSlide:hover { background:url('#CHEMIN{img_pack/prevslide.jpg}') no-repeat left bottom; color: transparent; text-decoration: none; }
 
 /*  ------------------------------------------------------
     Definition des styles propres a Carousel 3D

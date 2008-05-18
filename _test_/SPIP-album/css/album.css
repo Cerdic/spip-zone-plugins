@@ -39,7 +39,7 @@
 /*  ------------------------------------------------------
     Definition des styles propres a Carousel 3D
     ------------------------------------------------------ */
-#carousel { background-color: #111; }
+#carousel { background-color: #111; position: relative; }
 #carousel a { position: absolute; }
 
 /*  ------------------------------------------------------

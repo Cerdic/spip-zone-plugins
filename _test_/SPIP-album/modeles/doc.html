@@ -22,7 +22,8 @@
 	[(#SET{fichier,[(#LOGO_DOCUMENT||extraire_attribut{src})]})]
 	[(#SET{width,[(#LOGO_DOCUMENT||extraire_attribut{width})]})]
 	[(#SET{height,[(#LOGO_DOCUMENT||extraire_attribut{height})]})]
-	#SET{url,#ENV{lien,#URL_DOCUMENT}}
+	[(#CONFIG{plugin}|match{DW2}|?{' '}) #SET{url,#ENV{lien,#URL_DOC_OUT}}]
+	[(#CONFIG{plugin}|match{DW2}|?{'',' '}) #SET{url,#ENV{lien,#URL_DOCUMENT}}]
 ]
 
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[width:(#GET{width}|min{350}|max{120})]px;']>

@@ -23,7 +23,7 @@ function album_entete($public=true){
 <script type="text/javascript" src="'.find_in_path('javascript/interface.js').'"></script>
 <script type="text/javascript">
 var init_ib = function(){
-	$.ImageBox.init(
+	jQuery.ImageBox.init(
 		{
 			loaderSRC: "'.find_in_path('img_pack/loading.gif').'",
 			closeHTML: "<img src=\''.find_in_path('img_pack/'._T('album:close').'label.gif').'\' />",
@@ -36,7 +36,7 @@ var init_ib = function(){
 	if (!$public) $entete .='//onAjaxLoad est utilise seulement dans la partie privee
 if(typeof onAjaxLoad =="function") onAjaxLoad(init_ib);
 ';
-	$entete .='$(document).ready(init_ib);
+	$entete .='jQuery(document).ready(init_ib);
 </script>
 
 ';

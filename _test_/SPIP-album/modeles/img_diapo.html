@@ -15,7 +15,7 @@
 <script type='text/javascript'>
 // Code d'appel de la fonction diaporama.
 var init_diapo = function(){
-	$.slideshow(
+	jQuery.slideshow(
 		{
 			container : 'diaporama',
 			loader: '#CHEMIN{img_pack/loading.gif}',
@@ -44,5 +44,5 @@ var init_diapo = function(){
 };
 //onAjaxLoad est utilise seulement dans la partie privee
 if(typeof onAjaxLoad =="function") onAjaxLoad(init_diapo);
-$(document).ready(init_diapo);
+jQuery(document).ready(init_diapo);
 </script>

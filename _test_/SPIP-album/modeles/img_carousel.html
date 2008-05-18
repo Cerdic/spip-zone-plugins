@@ -25,21 +25,19 @@
 	[<a href="[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]"[ title="(#TITRE|texte_backend|sinon{[(#FICHIER)]})"] rel="imagebox-carousel"><img src="(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{hauteur}}|extraire_attribut{src})" width="100%" /></a>]</BOUCLE_imgsecteur><//B_imgrub><//B_imgbreve><//B_imgarticle><//B_imgrubrique>
 </span>
 
-<script type="text/javascript">
+<script>
 // Code d'appel de la fonction Carousel 3D.
-var init_carousel = function(){
-	$('#carousel').Carousel(
+jQuery(function(){
+	jQuery('#carousel').Carousel(
 		{
 			[itemWidth: (#GET{taille}|div{10}|round),]
 			[itemHeight:  (#GET{taille}|div{10}|round),]
 			[itemMinWidth:  (#GET{taille}|div{20}|round),]
 			items: 'a',
 			reflections: .5,
-			rotationSpeed: 1.8
+			rotationSpeed: 2,
+			slowOnOut: false
 		}
 	);
-}
-//onAjaxLoad est utilise seulement dans la partie privee
-if(typeof onAjaxLoad =="function") onAjaxLoad(init_carousel);
-$(document).ready(init_carousel);
+});
 </script>
