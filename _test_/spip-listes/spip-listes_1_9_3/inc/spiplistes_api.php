@@ -615,6 +615,10 @@ function spiplistes_ecrire_metas() {
 	return(__ecrire_metas());
 }
 
+//CP-20080519
+// Les fonctions spiplistes_auteurs_*() concernent les auteurs
+// Table cible : spip_auteurs
+
 // CP-20080503
 // soit update cookie du cookie transmis
 // soit update cookie de l'email transmis

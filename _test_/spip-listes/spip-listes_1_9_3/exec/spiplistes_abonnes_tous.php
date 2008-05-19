@@ -42,33 +42,20 @@ function exec_spiplistes_abonnes_tous () {
 		, $connect_id_auteur
 		;
 
-	if($connect_statut == "0minirezo") {
+	$flag_autorise = ($connect_statut == "0minirezo");
 	
-		// Nombre total d'auteurs (ou visiteur, ou perso) elligibes
-		// Nota: un compte 'nouveau' est un compte visiteur (inscription) qui ne s'est pas encore connecté
-		// Nota2: un compte créé via l'espace privé mais pas encore connecté
-		// n'a pas le statut 'nouveau' mais celui de son groupe
-		$sql_query = "
-			SELECT COUNT(id_auteur) AS n 
-			FROM spip_auteurs 
-			WHERE statut!='5poubelle' AND statut!='nouveau'";
-		$row = spip_fetch_array(spip_query($sql_query));
-		$total_auteurs = $row['n'];
+	if($flag_autorise) {
+	
+		$total_auteurs_elligibles = spiplistes_auteurs_elligibles_compter();
 		
 		//Total des auteurs qui ne sont pas abonnes a une liste
-		$sql_query = "
-			SELECT COUNT(id_auteur) AS n 
-			FROM spip_auteurs
-			WHERE statut!='5poubelle' AND statut!='nouveau' 
-				AND id_auteur NOT IN (SELECT id_auteur FROM spip_auteurs_listes GROUP BY id_auteur)";
-		$row = spip_fetch_array(spip_query($sql_query));
-		$nb_abonnes_a_rien = $row['n'];
+		$nb_abonnes_a_rien = spiplistes_auteurs_non_abonnes_compter();
 
 		//evaluer les formats de tous les auteurs + compter tous les auteurs
-		$sql_query = "
-			SELECT `spip_listes_format`, COUNT(`spip_listes_format`) 
-			FROM spip_auteurs_elargis GROUP BY `spip_listes_format`";
-		$sql_result = spip_query($sql_query);
+		$sql_result = sql_select(
+			"`spip_listes_format` AS format, COUNT(`spip_listes_format`) AS nb"
+			, "spip_auteurs_elargis", "", "`spip_listes_format`"
+		);
 		//repartition des formats
 		$total_abonnes_format = 0;
 		$nb_abonnes_par_format = array(
@@ -76,19 +63,20 @@ function exec_spiplistes_abonnes_tous () {
 			, 'html' => 0	// au format html
 			, 'non' => 0	// qui a été désabonné
 			);
-		while ($row = spip_fetch_array($sql_result, SPIP_NUM)) {
-			$nb_abonnes_par_format[$row[0]] = $row[1];
-			$total_abonnes_format += $row[1];
+		while($row = sql_fetch($sql_result)) {
+			$nb_abonnes_par_format[$row['format']] = $row['nb'];
+			$total_abonnes_format += $row['nb'];
 		}
 	
 		//Compter tous les abonnes a des listes 
-		$result_pile = spip_query(
-		  'SELECT listes.statut, COUNT(abonnements.id_auteur)
-			FROM spip_listes AS listes LEFT JOIN spip_auteurs_listes AS abonnements USING (id_liste)
-			GROUP BY listes.statut');
+		$sql_result = sql_select(
+			"listes.statut AS statut, COUNT(abonnements.id_auteur) AS nb"
+			, "spip_listes AS listes LEFT JOIN spip_auteurs_listes AS abonnements USING (id_liste)"
+			, "", "listes.statut"
+		);
 		$nb_abonnes_listes = array();
-		while ($row = spip_fetch_array($result_pile, SPIP_NUM)) {
-			$nb_abonnes_listes[$row[0]] = intval($row[1]);
+		while ($row = sql_fetch($sql_result)) {
+			$nb_abonnes_listes[$row['statut']] = intval($row['nb']);
 		}
 	}
 	
@@ -105,7 +93,7 @@ function exec_spiplistes_abonnes_tous () {
 	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
 
 	// la gestion des abonnés est réservée aux admins 
-	if($connect_statut != "0minirezo") {
+	if(!$flag_autorise) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
@@ -115,7 +103,7 @@ function exec_spiplistes_abonnes_tous () {
 		;
 
 	// formulaire de recherche 
-	if ($total_auteurs > 1) {
+	if ($total_auteurs_elligibles > 1) {
 		$page_result .= ""
 			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."contact_loupe-24.png", true, "", _T('spiplistes:chercher_un_auteur'))
 			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)."' method='post' class='verdana2'>"
@@ -242,7 +230,7 @@ function exec_spiplistes_abonnes_tous () {
 	// La requete de base est tres sympa
 	//
 	
-	$query = "SELECT
+	$sql_query = "SELECT
 		aut.id_auteur AS id_auteur,
 		aut.statut AS statut,
 		aut.login AS login,
@@ -265,13 +253,47 @@ function exec_spiplistes_abonnes_tous () {
 
 	$page_result .= ""
 		. "<div id='auteurs'>\n"
-		. spiplistes_afficher_auteurs($query, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE), true)
+		. spiplistes_afficher_auteurs($sql_query, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE), true)
 		. "</div>\n"
 		;
 	
 	echo($page_result);
 
 	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
+}
+
+//CP-200080519
+// Nombre total d'auteurs (ou visiteur, ou perso) elligibles
+// Nota: un compte 'nouveau' est un compte visiteur (inscription) qui ne s'est pas encore connecté
+// Nota2: un compte créé via l'espace privé mais pas encore connecté
+// n'a pas le statut 'nouveau' mais celui de son groupe
+function spiplistes_auteurs_elligibles_compter () {
+	static $nb;
+	if(!$nb) {
+		$sql_where = array(
+			  "statut!=".sql_quote('5poubelle')
+			, "statut!=".sql_quote('nouveau')
+			);
+		$nb = sql_countsel('spip_auteurs', $sql_where);
+	}
+	return($nb);
+}
+
+//CP-200080519
+//Total des auteurs qui ne sont pas abonnes a une liste
+function spiplistes_auteurs_non_abonnes_compter () {
+	static $nb;
+	if(!$nb) {
+		$selection =
+			sql_select("id_auteur", "spip_auteurs_listes", '','id_auteur','','','','',false);
+		$sql_where = array(
+			  "statut!=".sql_quote('5poubelle')
+			, "statut!=".sql_quote('nouveau')
+			, "id_auteur NOT IN (".$selection.")"
+			);
+		$nb = sql_countsel('spip_auteurs', $sql_where);
+	}
+	return($nb);
 }
 
 /******************************************************************************************/
