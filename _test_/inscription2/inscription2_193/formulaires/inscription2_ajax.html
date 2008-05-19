@@ -1,0 +1,238 @@
+#CACHE{0}
+
+[(#REM) ------------------------ VALIDATION JAVASCRIPT jquery-plugin-validation ------------------------ ]
+#INCLURE{fond=formulaires/inscription2_validation.js}
+
+
+[<div>(#ENV*{message})</div>]
+
+[<div style="color:red; font-style:bold;">(#ENV*{commentaires}|=={1}|?{'',' '}) #ENV*{commentaires} </div>]
+
+<div class="formulaire formulaire_inscription2" id="formulaire_inscription2[_(#ENV{id_auteur})]">
+<a id="abonnement" name="abonnement"></a>
+
+[(#ENV**{editable}|?{' '})
+    <form action='#SELF' method='post'>
+        #ACTION_FORMULAIRE{#SELF}
+
+
+        [(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+	        [(#INCLURE{fond=formulaires/abonnement_liste}{article=#ENV{article}}{abonnement=#ENV{abonnement}}{option=#ENV{option}})]	
+        ]
+
+        [(#REM) Charge les informations minimale d'un auteur]
+        <fieldset class="info_connection">
+            <legend>
+	            <:inscription2:info_connection:>
+            </legend>
+
+            <ol class="formfx">
+                [(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
+                <li class="editer_nom[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{obligatoire})]">
+	                <label for="nom"><:inscription2:nom:> (<:inscription2:nom_explication:>)</label>
+	                <input type="text" class="text" name="nom" id="nom" value="#ENV{nom}" />
+                </li>]
+                
+                [(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
+                <li class="editer_username[ (#CONFIG{inscription2/username_obligatoire}|=={on}|?{obligatoire})]">
+	                <label for="username"><:inscription2:username:></label>
+	                <input type="text" class="text" name="username" id="username" value="#ENV{login}" />
+                </li>]
+
+                [(#CONFIG{inscription2/email}|=={on}|?{' ', ''})	
+                <li class="editer_email[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{obligatoire})]">
+	                <label for="email"><:inscription2:email:></label>
+	                <input type="text" class="text" name="email" id="email" value="#ENV{email}" />
+                </li>]
+            </ol>            
+        </fieldset> 
+        
+        
+        [(#EVAL{defined('_DIR_PLUGIN_ASSOCIATION')}|?{' ',''})
+        	#INCLURE{fond=formulaires/inscription2_form_asso}
+        ]
+        
+        
+        [(#REM) information générales]
+        <fieldset class="infos_perso">
+            <legend>
+	            <:inscription2:info_perso:>
+            </legend>
+            
+            <ol class="formfx">
+
+                [(#CONFIG{inscription2/sexe}|=={on}|?{' ', ''})
+                <li class="sexe[ (#CONFIG{inscription2/sexe_obligatoire}|=={on}|?{obligatoire})]">            
+				    <fieldset>
+					    <legend>Civilité</legend>
+					    <ul class="formfx">
+						    <li>
+                                <input class="radio" class="radio" name="sexe" id="monsieur" type="radio" [(#ENV{sexe}|=={M}|?{'checked="checked"'})] value="M" />
+    	    	                <label for="sexe"> <:inscription2:masculin:></label>
+    	    	                
+						    </li>
+						    <li>
+		    	                <input class="radio" class="radio"name="sexe" id="madame" type="radio" [(#ENV{sexe}|=={F}|?{'checked="checked"'})] value="F" />
+							    <label for="madame"> <:inscription2:feminin:></label>
+						    </li>
+					    </ul>
+				    </fieldset>                </li>]
+
+                [(#CONFIG{inscription2/nom_famille}|=={on}|?{' ', ''})	
+                <li class="editer_nom_famille[ (#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{obligatoire})]">
+	                <label for="nom_famille"><:inscription2:nom_famille:></label>
+	                <input type="text" name="nom_famille" id="nom_famille" value="#ENV{nom_famille}" />
+                </li>]
+                
+                [(#CONFIG{inscription2/prenom}|=={on}|?{' ', ''})	
+                <li class="editer_prenom[ (#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{obligatoire})]">
+	                <label for="prenom"><:inscription2:prenom:></label>
+	                <input type="text" class="text" name="prenom" id="prenom" value="#ENV{prenom}" />       
+                </li>
+                ]
+                
+                [(#CONFIG{inscription2/naissance}|=={on}|?{' ', ''})
+                <li class="editer_naissance[ (#CONFIG{inscription2/naissance_obligatoire}|=={on}|?{obligatoire})]">
+	                <label><:inscription2:naissance:></label>
+	                <INCLURE{fond=formulaires/inscription2_form_date_naissance}>
+                </li>]
+
+                [(#CONFIG{inscription2/adresse}|=={on}|?{' ', ''})	
+                <li class="editer_adresse[ (#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{obligatoire})]">
+	                <label for="adresse"><:inscription2:adresse:></label>
+	                <textarea name="adresse" class="textarea" id="adresse" rows="5" cols="10">#ENV{adresse}</textarea>
+                </li>]
+
+                [(#CONFIG{inscription2/code_postal}|=={on}|?{' ', ''})	
+                <li class="editer_code_postal[ (#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{obligatoire})]">
+	                <label for="code_postal"><:inscription2:code_postal:></label>
+	                <input type="text" class="text" name="code_postal" id="code_postal" value="#ENV{code_postal}" />
+                </li>]
+
+                [(#CONFIG{inscription2/ville}|=={on}|?{' ', ''})	
+                <li class="editer_ville[ (#CONFIG{inscription2/ville_obligatoire}|=={on}|?{obligatoire})]">
+	                <label for="ville"><:inscription2:ville:></label>
+	                <input type="text" class="text"name="ville" id="ville" value="#ENV{ville}" />
+                </li>]
+
+                [(#CONFIG{inscription2/pays}|=={on}|?{' ', ''})	
+                <li class="editer_pays[ (#CONFIG{inscription2/pays_obligatoire}|=={on}|?{obligatoire})]">
+	                <label for="pays"><:inscription2:pays:></label>
+	                <INCLURE{fond=formulaires/inscription2_pays}{pays=#ENV{pays}}>
+                </li>]
+
+                [(#CONFIG{inscription2/telephone}|=={on}|?{' ', ''})	
+                <li class="editer_telephone[ (#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{obligatoire})]">
+	                <label for="telephone"><:inscription2:telephone:></label>
+	                <input type="text" class="text" name="telephone" id="telephone" value="#ENV{telephone}" />
+                </li>]
+
+                [(#CONFIG{inscription2/fax}|=={on}|?{' ', ''})	
+                <li class="editer_fax[ (#CONFIG{inscription2/fax_obligatoire}|=={on}|?{obligatoire})]">
+	                <label for="fax"><:inscription2:fax:></label>
+	                <input type="text" class="text" name="fax" id="fax" value="#ENV{fax}" />
+                </li>]
+                
+                [(#CONFIG{inscription2/mobile}|=={on}|?{' ', ''})	
+                <li class="editer_mobile[ (#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{obligatoire})]">
+	                <label for="mobile"><:inscription2:mobile:></label>
+	                <input type="text" class="text" name="mobile" id="mobile" value="#ENV{mobile}" />
+                </li>]
+
+                [(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
+                <li class="editer_commentaire[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{obligatoire})]">
+	                <label><:inscription2:commentaire:></label>
+	                <textarea name="commentaire" class="textarea" id="commentaire">#ENV{commentaire}</textarea>	
+                </li>]
+            </ol>
+        </fieldset>
+
+        [(#REM) Afficher les coordonnées profesionnelles]
+        #SET{afficher_plus, false}
+        [(#CONFIG{inscription2/profession}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+        [(#CONFIG{inscription2/societe}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+        [(#CONFIG{inscription2/secteur}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+        [(#CONFIG{inscription2/fonction}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+        [(#CONFIG{inscription2/adresse_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+        [(#CONFIG{inscription2/code_postal_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+        [(#CONFIG{inscription2/ville_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+        [(#CONFIG{inscription2/pays_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+
+        [(#GET{afficher_plus}|=={true}|?{' ', ''})
+        <fieldset class="infos_pros">
+            <legend>
+                <:inscription2:info_pros:>
+            </legend>
+            
+            <ol>
+                [(#CONFIG{inscription2/profession}|=={on}|?{' ', ''})
+                <li class="editer_profession[ (#CONFIG{inscription2/profession_obligatoire}|=={on}|?{obligatoire})]">
+                    <label for="profession"><:inscription2:profession:></label>
+                    <input type="text" class="text" name="profession" id="profession" value="#ENV{profession}"/>
+                </li>]
+                [(#CONFIG{inscription2/societe}|=={on}|?{' ', ''})
+                <li class="editer_societe[ (#CONFIG{inscription2/societe_obligatoire}|=={on}|?{obligatoire})]">
+                    <label for="societe"><:inscription2:societe:></label>
+                    <input type="text" class="text" name="societe" id="societe" value="#ENV{societe}"/>
+                </li>]
+                [(#CONFIG{inscription2/secteur}|=={on}|?{' ', ''})
+                <li class="editer_secteur[ (#CONFIG{inscription2/secteur_obligatoire}|=={on}|?{obligatoire})]">
+                    <label for="secteur"><:inscription2:secteur:></label>
+                    <input type="text" class="text" name="secteur" id="secteur" value="#ENV{secteur}"/>
+                </li>]
+                [(#CONFIG{inscription2/fonction}|=={on}|?{' ', ''})
+                <li class="editer_fonction[ (#CONFIG{inscription2/fonction_obligatoire}|=={on}|?{obligatoire})]">
+                    <label for="fonction"><:inscription2:fonction:></label>
+                    <input type="text" class="text" name="fonction" id="fonction" value="#ENV{fonction}"/>
+                </li>]
+                [(#CONFIG{inscription2/adresse_pro}|=={on}|?{' ', ''})
+                <li class="textarea[ (#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{obligatoire})]">
+                    <label for="adresse_pro"><:inscription2:adresse_pro:></label>
+                    <textarea name="adresse_pro" class="text" id="adresse_pro">#ENV{adresse_pro}</textarea>
+                </li>]
+                [(#CONFIG{inscription2/code_postal_pro}|=={on}|?{' ', ''})
+                <li class="editer_code_postal_pro[ (#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{obligatoire})]">
+                    <label for="code_postal_pro"><:inscription2:code_postal:></label>
+                    <input type="text" class="text" name="code_postal_pro" id="code_postal_pro" value="#ENV{code_postal_pro}"/>
+                </li>]
+                [(#CONFIG{inscription2/ville_pro}|=={on}|?{' ', ''})
+                <li class="editer_ville_pro[ (#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{obligatoire})]">
+                    <label for="ville_pro"><:inscription2:ville:></label>
+                    <input type="text" class="text" name="ville_pro" id="ville_pro" value="#ENV{ville_pro}"/>
+                </li>]
+                [(#CONFIG{inscription2/pays_pro}|=={on}|?{' ', ''})	
+                <li class="editer_pays_pro[ (#CONFIG{inscription2/pays_pro_obligatoire}|=={on}|?{obligatoire})]">
+                    <label for="pays_pro"><:inscription2:pays:></label>
+                    <INCLURE{fond=formulaires/inscription2_pays_pro}{pays_pro=#ENV{pays_pro}}>
+                </li>]
+            </ol>
+        </fieldset>
+        ]
+        
+        [(#CONFIG{plugin/ECHOPPE}|?{' ', ''})
+	        <INCLURE{fond=formulaires/inscription2_echoppe_livraison}>
+        ]
+
+        [(#CONFIG{inscription2/newsletter}|=={on}|?{' ', ''})
+	        [(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_listes}>]
+        ]
+
+        [(#CONFIG{inscription2/publication}|=={on}|?{' ', ''})
+        <div>
+	        <:inscription2:publication:>
+	        <input type="checkbox" style="display:inline;float:none;width:15px" name="publication" id="publication" value="#ENV{publication}" />
+	        <br class="nettoyeur" />
+        </div>
+        ]
+
+        [(#CONFIG{inscription2/domaines}|=={on}|?{' ', ''})
+	        #INCLURE{fond=formulaires/inscription2_form_domaines}	
+        ]        
+        
+	    <p class="boutons">
+		    <input type="submit" class="submit" value="<:bouton_valider:>" />
+	    </p>        
+        
+    </form>
+]
+</div>
