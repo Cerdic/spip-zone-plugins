@@ -82,21 +82,7 @@ function spiplistes_sql_compter ($table, $sql_whereq) {
 //CP-20080509: renvoie le nb de courriers en cours d envoie
 // somme des abonnes
 function spiplistes_courriers_en_cours_compter () {
-	$n = 
-		(
-			($n = sql_fetch(sql_select(
-				"SUM(total_abonnes)"
-				, "spip_courriers"
-				, "statut=".sql_quote(_SPIPLISTES_STATUT_ENCOURS)
-				))
-			)
-			&& $n
-			&& $n[0]
-		)
-		? intval($n[0])
-		: 0
-		;
-	return($n);
+	return(sql_getfetsel('SUM(total_abonnes)', 'spip_courriers', "statut=".sql_quote(_SPIPLISTES_STATUT_ENCOURS)));
 }
 
 // CP-20080511
@@ -250,16 +236,14 @@ function spiplistes_listes_lister ($select = "*", $where = "") {
 function spiplistes_listes_desabonner_statut ($id_auteur, $listes_statuts) {
 	if(($id_auteur = intval($id_auteur)) && count($listes_statuts)) {
 		$sql_where = "statut=".implode(" OR statut=", array_map("sql_quote", $listes_statuts));
-		$sql_query = "SELECT id_liste FROM spip_listes WHERE $sql_where";
-		$sql_result = spip_query ($sql_query);
+		$sql_result = sql_select("id_liste", "spip_listes", $sql_where);
 		$listes = array();
-		while($row = spip_fetch_array($sql_result)) {
+		while($row = sql_fetch($sql_result)) {
 			$listes[] = intval($row['id_liste']);
 		}
 		if(count($listes)) {
-			$sql_where = " id_auteur=$id_auteur AND (id_liste=" . implode(" OR id_liste=", $listes) . ")";
-			$sql_query = "DELETE FROM spip_auteurs_listes WHERE $sql_where";
-			$result=spip_query($sql_query);
+			$sql_where = " id_auteur=".sql_quote($id_auteur)." AND (id_liste=" . implode(" OR id_liste=", $listes) . ")";
+			sql_delete("spip_auteurs_listes", $sql_where);
 		}
 		return(spiplistes_format_abo_modifier($id_auteur));
 	}
@@ -571,23 +555,6 @@ function spiplistes_lien_courrier_texte_get ($lien_patron, $lien_html, $url_cour
 	}
 	return($result);
 }
-
-
-// Renvoie le nombre total de courriers en attente (CP-20071018)
-// Cumul des total_abonnes
-function spiplistes_nb_grand_total_courriers () {
-	$sql_query = "SELECT SUM(total_abonnes) AS n FROM spip_courriers WHERE statut='"._SPIPLISTES_STATUT_ENCOURS."'";
-	$sql_result = spip_query($sql_query);
-	$result = 
-		($row = spip_fetch_array($sql_result))
-		? intval($row['n'])
-		: 0
-		;
-	return($result);
-}
-
-
-
 
 function spiplistes_pied_de_page_liste($id_liste = 0, $lang = false) {
 	$result = false;

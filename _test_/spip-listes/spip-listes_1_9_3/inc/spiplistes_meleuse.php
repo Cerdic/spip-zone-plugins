@@ -108,8 +108,7 @@ function spiplistes_meleuse () {
 		|| $nb_etiquettes
 	) {
 
-spiplistes_log("MEL: ".($nb_courriers + $nb_etiquettes)." JOBS. Distribution... (c: $nb_courriers, e: $nb_etiquettes)"
-	, _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("MEL: ".$nb_etiquettes."/".$nb_courriers." JOBS. Distribution...", _SPIPLISTES_LOG_DEBUG);
 		
 		// signale en log si mode simulation
 		if($opt_simuler_envoi == 'oui') {

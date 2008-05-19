@@ -608,10 +608,10 @@ function spiplistes_boite_autocron () {
 		return($result);
 	}
 	
-	$n = spiplistes_nb_grand_total_courriers();
-spiplistes_log("AUTOCRON: nb courriers prets envoi $n", _SPIPLISTES_LOG_DEBUG);
+	$nb_etiquettes = spiplistes_courriers_en_queue_compter("etat=".sql_quote(''));
+	$nb_abos_encour = spiplistes_courriers_en_cours_compter();
 
-	if($n > 0) {
+	if($nb_etiquettes > 0) {
 		$result .= ""
 			. "<br />"
 			. debut_boite_info(true)
@@ -619,11 +619,12 @@ spiplistes_log("AUTOCRON: nb courriers prets envoi $n", _SPIPLISTES_LOG_DEBUG);
 			. "<div style='padding : 10px;text-align:center'><img alt='' src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_distribution-48.gif' /></div>"
 			. "<div id='meleuse'>"
 			.	(
-					($total = spiplistes_courriers_en_cours_compter())
+					($nb_abos_encour)
 					?	""
 						. "<p align='center' id='envoi_statut'>"._T('spiplistes:envoi_en_cours')." "
-						. "<strong id='envois_restants'>$n</strong>/<span id='envois_total'>$total</span> (<span id='envois_restant_pourcent'>"
-						. round($n/$total*100)."</span>%)</p>"
+						. "<strong id='envois_restants'>$nb_etiquettes</strong>/<span id='envois_total'>$nb_abos_encour</span> "
+						. "(<span id='envois_restant_pourcent'>"
+						. round($nb_etiquettes/$nb_abos_encour*100)."</span>%)</p>"
 					:	""
 				)
 			// message si simulation d'envoi	

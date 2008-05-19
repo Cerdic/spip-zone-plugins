@@ -87,9 +87,9 @@ function exec_spiplistes_abonne_edit () {
 	if($id_auteur > 0) {
 	
 		$sql_select = "nom,bio,email,nom_site,url_site,login,pass,statut,pgp,messagerie,imessage,low_sec";
-		$sql_result = spip_query("SELECT $sql_select FROM spip_auteurs WHERE id_auteur=$id_auteur LIMIT 1");
+		$sql_result = sql_select($sql_select, "spip_auteurs", "id_auteur=".sql_quote($id_auteur)." LIMIT 1");
 
-		if($row = spip_fetch_array($sql_result)) {
+		if($row = sql_fetch($sql_result)) {
 			foreach(explode(",", $sql_select) as $key) {
 				$$key = $row[$key];
 			}
