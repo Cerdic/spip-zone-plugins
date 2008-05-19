@@ -279,15 +279,14 @@ function exec_spiplistes_liste_gerer () {
 
 	//////////////////////////////////////////////////////
 	// Recharge les donnees la liste
-	$result = spip_query("SELECT * FROM spip_listes WHERE id_liste="._q($id_liste)." LIMIT 1");
 
-	if($row = spip_fetch_array($result)) {
-		foreach(array(
-		// initialise les variables du resultat SQL
-			'id_liste', 'titre', 'texte'
+	$sql_select_array = array('id_liste', 'titre', 'texte'
 			, 'titre_message', 'pied_page', 'date', 'statut', 'maj'
-			, 'email_envoi', 'message_auto', 'periode', 'patron', 'lang'
-			) as $key) {
+			, 'email_envoi', 'message_auto', 'periode', 'patron', 'lang');
+
+	if($row = spiplistes_listes_liste_fetsel($id_liste, $sql_select_array)) {
+		foreach($sql_select_array as $key) {
+			// initialise les variables du resultat SQL
 			$$key = $row[$key];
 		}
 	}

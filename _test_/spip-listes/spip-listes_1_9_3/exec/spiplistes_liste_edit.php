@@ -67,11 +67,10 @@ function exec_spiplistes_liste_edit(){
 		$id_mod_liste = spiplistes_mod_listes_get_id_auteur($id_liste);
 		$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
 
-		$sql_select = "titre,lang,pied_page,texte,date,statut";
-		$sql_result = spip_query("SELECT ".$sql_select." FROM spip_listes WHERE id_liste=$id_liste LIMIT 1");
+		$sql_select_array = array('titre', 'lang', 'pied_page', 'texte', 'date', 'statut');
 	
-		if ($row = spip_fetch_array($sql_result)) {
-			foreach(explode(",", $sql_select) as $key) {
+		if($row = spiplistes_listes_liste_fetsel($id_liste, $sql_select_array)) {
+			foreach($sql_select_array as $key) {
 				$$key = $row[$key];
 			}
 			// supers-admins et moderateur seuls ont droit de modifier la liste

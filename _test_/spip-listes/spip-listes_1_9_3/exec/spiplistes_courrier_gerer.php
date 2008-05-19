@@ -177,9 +177,9 @@ function exec_spiplistes_courrier_gerer () {
 	}
 	
 		// Ok. recharge les donnees pour completer le formulaire
-		$sql_select = "titre,texte,email_test,statut";
-		if($row = spip_fetch_array(spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 1"))) {
-			foreach(explode(",", $sql_select) as $key) {
+		$sql_select_array = array('titre', 'texte', 'email_test', 'statut');
+		if($row = spiplistes_courriers_premier($id_courrier, $sql_select_array)) {
+			foreach($sql_select_array as $key) {
 				$$key = $row[$key];
 			}
 		} // end if($id_courrier > 0)

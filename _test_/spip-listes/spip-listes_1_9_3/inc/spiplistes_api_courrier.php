@@ -357,6 +357,10 @@ function spiplistes_courrier_supprimer_queue_envois ($sql_where_key, $sql_where_
 function spiplistes_courrier_supprimer ($sql_where_key, $sql_where_value) {
 	return(sql_delete("spip_courriers", $sql_where_key."=".sql_quote($sql_where_value)));
 }
+//CP-20080519
+function spiplistes_courriers_premier ($id_courrier, $sql_select_array) {
+	return(sql_fetsel($sql_select_array, 'spip_courriers', "id_courrier=".sql_quote($id_courrier), '', '', 1));
+}
 
 // renvoie id_auteur du courier (CP-20071018)
 function spiplistes_courrier_id_auteur_get ($id_courrier) {
