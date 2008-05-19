@@ -42,35 +42,30 @@
 	<//T_produitpromo>
 
 	<div class="declinaisonProduit">
-		<THELIA_declinaisons type="DECLINAISON" produit="THELIA-ID">
-			<T_decldisptest1>
-			<THELIA_decldisptest1 type="DECLIDISP" declinaison="THELIA-ID" produit="THELIA-PRODUIT">
-			</THELIA_decldisptest1> 
+		<THELIA_declinaisons type="DECLINAISON" rubrique="THELIA-RUBRIQUE" produit="THELIA-ID">
+		<T_decldisp1>
+			<THELIA_decldisp1 type="DECLIDISP" declinaison="THELIA-ID" produit="THELIA-PRODUIT">
+			</THELIA_decldisp1> 
 			THELIA-TITRE : 
-				<select name="declinaisonTHELIA-ID" onChange="if ($(this).val()!='') $('form#formAjouterTHELIA-PRODUIT').find('.LIEN_commander').removeAttr('disabled'); else $('form#formAjouterTHELIA-PRODUIT').find('.LIEN_commander').attr('disabled','disabled');">
-					<option value=""><:spipthelia:votre_choix:></option>
-			</T_decldisptest1>
-			<//T_decldisptest1>
-					
-			<THELIA_decldisp type="DECLIDISP" declinaison="THELIA-ID" produit="THELIA-PRODUIT">
-				<option value="THELIA-ID">THELIA-TITRE</option>
-			</THELIA_decldisp>
-			
-
-			<T_decldisptest2>
-			<THELIA_decldisptest2 type="DECLIDISP" declinaison="THELIA-ID" produit="THELIA-PRODUIT" num="1">
-			</THELIA_decldisptest2> 
+			<select name="declinaisonTHELIA-ID">
+		</T_decldisp1>
+		<//T_decldisp1>
+									
+		<THELIA_decldisp type="DECLIDISP" declinaison="THELIA-ID" produit="THELIA-PRODUIT">
+		 	<option value="THELIA-ID">THELIA-TITRE</option>
+		</THELIA_decldisp> 
+ 									
+		<T_decldisp2>
+			<THELIA_decldisp2 type="DECLIDISP" declinaison="THELIA-ID" produit="THELIA-PRODUIT">
+			</THELIA_decldisp2> 
 			</select>
-			</T_decldisptest2>
-			<//T_decldisptest2>		 		
+		</T_decldisp2>
+		<//T_decldisp2>
+									
+										 		
 		</THELIA_declinaisons>
 	</div>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			if ($("form#formAjouterTHELIA-ID").find('select').length > 0)
-					$("form#formAjouterTHELIA-ID").find('.LIEN_commander').attr('disabled','disabled');
-		});
-	</script>
+	
 
 	<p class="thelia_panier">
 	<T_produitreappro>
