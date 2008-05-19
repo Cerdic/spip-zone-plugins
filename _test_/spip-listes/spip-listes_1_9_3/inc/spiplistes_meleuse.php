@@ -178,15 +178,15 @@ spiplistes_log("MEL: etiquette en cours pour ID_COURRIER #$id_courrier"
 			$str_log .= " ID_COURRIER: #$id_courrier"; 
 			
 			//////////////////////////
-			// Determiner le destinataire ou la liste destinataire
+			// Determiner email de l emetteur
 			if($is_a_test = email_valide($email_test)) {
 				// courrier à destination adresse email de test
-				$str_log .= " TO: $email_test (TEST)"; 
+				$str_log .= " TO: $email_test (TEST)";
 			} 
 			else if($id_liste > 0) {
 				// courrier à destination des abonnés d'une liste
 				$total_abonnes = spiplistes_listes_nb_abonnes_compter($id_liste);
-				$str_log .= " to: ID_LISTE #$id_liste ($total_abonnes users)"; 
+				$str_log .= " TO: ID_LISTE #$id_liste ($total_abonnes users)"; 
 	
 				$pied_page_html = spiplistes_pied_de_page_liste($id_liste);
 
@@ -286,7 +286,7 @@ spiplistes_log("MEL: titre: $titre, total_abos: $total_abonnes, limit: $limit"
 						, "email=".sql_quote($email_test)." LIMIT 1");
 				}
 				else {
-					// Pour mémo: les étiquettes sont crées par la trieuse
+					// Pour mémo: les étiquettes sont créées par la trieuse
 					// ou directement en backoffice 
 					// - pour les envois de test
 					// - pour les envoyer maintenant des courriers
@@ -303,7 +303,7 @@ spiplistes_log("MEL: titre: $titre, total_abos: $total_abonnes, limit: $limit"
 							, "etat=".sql_quote('')." AND id_courrier=".sql_quote($id_courrier)." LIMIT $limit"
 					);
 					
-					// prendre la liasse des courriers etiquettés
+					// prendre la liasse des etiquettes tamponnées
 					$sql_adresses_dest = sql_select(
 						  array('a.nom', 'a.id_auteur', 'a.email')
 						, array('spip_auteurs AS a', 'spip_auteurs_courriers AS b')
@@ -317,7 +317,7 @@ spiplistes_log("MEL: titre: $titre, total_abos: $total_abonnes, limit: $limit"
 				}
 					
 				$nb_destinataires = sql_count($sql_adresses_dest);
-//spiplistes_log("MEL: nb destinataires: $nb_destinataires", _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("MEL: nb destinataires: $nb_destinataires", _SPIPLISTES_LOG_DEBUG);
 				if($nb_destinataires > 0) {
 		
 					//envoyer le lot d'emails selectionnes (la liasse)

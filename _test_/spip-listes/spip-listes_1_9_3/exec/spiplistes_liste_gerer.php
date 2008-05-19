@@ -701,23 +701,28 @@ function exec_spiplistes_liste_gerer () {
 	$page_result .= ""
 		. fin_cadre_relief(true)
 		;
-		
-	$editer_auteurs = charger_fonction('editer_auteurs','inc');
 	
-	$page_result .= ""
-		//////////////////////////
-		// Liste des abonnes
-		// Appliquer les modifications sur les abonnes
-		. "<a name='auteurs'></a>"
-		. $editer_auteurs(
-			'liste'	// $type
-			, $id_liste // $id
-			, $flag_editable 
-			, _request('cherche_auteur') //$cherche_auteur
-			, _request('ids')	// $ids
-			, _T('spiplistes:abon') // $titre_boite
-			)
-		;
+	if(spiplistes_spip_est_inferieur_193()) {
+		// CP-20080519
+		// ce morceau fonctionne en 192, pas en 193
+		// si quelqu'un a une idée ?
+		$editer_auteurs = charger_fonction('editer_auteurs','inc');
+		
+		$page_result .= ""
+			//////////////////////////
+			// Liste des abonnes
+			// Appliquer les modifications sur les abonnes
+			. "<a name='auteurs'></a>"
+			. $editer_auteurs(
+				'liste'	// $type
+				, $id_liste // $id
+				, $flag_editable 
+				, _request('cherche_auteur') //$cherche_auteur
+				, _request('ids')	// $ids
+				, _T('spiplistes:abon') // titre de la boite
+				)
+			;
+	}
 		
 	// le super-admin peut abonner en masse
 	if($connect_toutes_rubriques) {
