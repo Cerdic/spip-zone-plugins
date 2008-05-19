@@ -55,6 +55,7 @@ include_spip('inc/spiplistes_api_globales');
 */
 	
 function spiplistes_meleuse () { 
+//return(0); //pour debuguer uniquement
 
 	include_spip('inc/meta');
 	include_spip('inc/texte');

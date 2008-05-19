@@ -316,7 +316,7 @@ function exec_spiplistes_courrier_gerer () {
 			$gros_bouton_arreter_envoi = 
 				icone (
 					_T('spiplistes:Arreter_envoi')
-					// si arreter envoi, passe la main a  exec/spip_listes
+					// si arreter envoi, passe la main a exec/spiplistes_courriers_casier
 					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE, "btn_arreter_envoi=$id_courrier")
 					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_redac-24.png"
 					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stop-top-right-24.png"
@@ -388,8 +388,8 @@ function exec_spiplistes_courrier_gerer () {
 				break;
 			case _SPIPLISTES_STATUT_ENCOURS:
 				$str_statut_courrier = ""
-					. _T('spiplistes:envoi_program')."<br />$str_destinataire<br /><br />"
-					. "<a href='?exec=spip_listes'>["._T('spiplistes:voir_historique')."]</a>"
+					. _T('spiplistes:message_en_cours')."<br />$str_destinataire<br /><br />"
+					//. "<a href='?exec=spip_listes'>["._T('spiplistes:voir_historique')."]</a>"
 					;
 				break;
 			case _SPIPLISTES_STATUT_PUBLIE:
