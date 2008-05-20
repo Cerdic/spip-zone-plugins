@@ -18,7 +18,9 @@ if (!include_spip('inc/autoriser'))
 
 function exec_forms_reponses(){
 	global $id_form;
+	$id_form=_request('id_form');
 	global $supp_reponse;
+	$supp_reponse=_request('supp_reponse');
 	$debut = _request('debut');
   _Forms_install();
 
@@ -35,38 +37,38 @@ function exec_forms_reponses(){
 	}
 
 
-	debut_page("&laquo; ".textebrut(typo($titre))." &raquo;", "redacteurs", "suivi-forms");
-	debut_gauche();
+	echo debut_page("&laquo; ".textebrut(typo($titre))." &raquo;", "redacteurs", "suivi-forms");
+	echo debut_gauche();
 
 	if ($id_form) {
-		debut_boite_info();
+		echo debut_boite_info();
 		if ($retour = urldecode(_request('retour')))
-			icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",'right');
-		icone_horizontale(_T("forms:formulaire_aller"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "img_pack/form-24.png", "rien.gif");
+			echo icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",'right');
+		echo icone_horizontale(_T("forms:formulaire_aller"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "img_pack/form-24.png", "rien.gif");
 
 		if (autoriser('administrer','form',$id_form)) {
 			$retour = urlencode(self());
-			icone_horizontale(_T("forms:telecharger_reponses"),
+			echo icone_horizontale(_T("forms:telecharger_reponses"),
 				generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif");
 		}
 
-		fin_boite_info();
+		echo fin_boite_info();
 	}
 
-	debut_droite();
+	echo debut_droite();
 
 
 	if (!autoriser('administrer','form',$id_form)) {
 		echo "<strong>"._T('avis_acces_interdit')."</strong>";
-		fin_page();
+		echo fin_page();
 		exit;
 	}
 
 	if ($id_form) {
-		gros_titre(_T("forms:suivi_formulaire")."&nbsp;: &laquo;&nbsp;".typo($titre)."&nbsp;&raquo;");
+		echo gros_titre(_T("forms:suivi_formulaire")."&nbsp;: &laquo;&nbsp;".typo($titre)."&nbsp;&raquo;");
 	}
 	else {
-		gros_titre(_T("forms:suivi_formulaires"));
+		echo gros_titre(_T("forms:suivi_formulaires"));
 	}
 
 
@@ -88,10 +90,10 @@ function exec_forms_reponses(){
 
 	if ($id_form && ($type_form=='sondage')) {
 		echo "<br />\n";
-		debut_cadre_enfonce("statistiques-24.gif");
+		echo debut_cadre_enfonce("statistiques-24.gif");
 		include_spip('forms_fonctions');
 		echo Forms_afficher_reponses_sondage($id_form);
-		fin_cadre_enfonce();
+		echo fin_cadre_enfonce();
 	}
 
 	//
@@ -149,7 +151,7 @@ function exec_forms_reponses(){
 		$titre_form = $row['titre'];
 
 		echo "<br />\n";
-		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png");
+		echo debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png");
 
 		$link=parametre_url(self(),'supp_reponse', $id_donnee);
 		echo icone(_T("forms:supprimer_reponse"), $link,"../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "supprimer.gif", "right");
@@ -202,7 +204,7 @@ function exec_forms_reponses(){
 
 		echo "<div style='clear: both;'></div>";
 
-		fin_cadre_relief();
+		echo fin_cadre_relief();
 	}
 
 
