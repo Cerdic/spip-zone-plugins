@@ -6,7 +6,6 @@
 xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" 
 xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 
-
 <channel>
 	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
 	<link>[(#URL_SITE_SPIP)/]</link>
@@ -18,7 +17,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 	</itunes:owner>
 	<itunes:explicit>no</itunes:explicit>
 	<language>#LANG</language>
-	<BOUCLE_un_article(ARTICLES){id_rubrique ?}{id_secteur ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{par date}{inverse}{0, #ENV{limit}}>
+	<BOUCLE_un_article(ARTICLES){id_rubrique ?}{id_secteur ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{id_groupe?}{par date}{inverse}{0, #ENV{limit}}>
 	<item>
 	<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 	[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>]

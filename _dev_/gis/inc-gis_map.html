@@ -58,9 +58,9 @@
 			
 			//leemo-lo documento dos marcadores
 			[(#ENV{recursive}|=={1}|?{' ',''})
-       			jQuery.get('[(#URL_PAGE{rss-gis-recursive})]', {[limit:(#ENV{limit, 50})][, id_rubrique:(#ID_RUBRIQUE)][, id_parent:(#ID_RUBRIQUE)][, id_secteur:(#ID_SECTEUR)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)]}, function(xml[(#GET{id_carte_gis})]){
+       			jQuery.get('[(#URL_PAGE{rss-gis-recursive})]', {[limit:(#ENV{limit, 50})][, id_rubrique:(#ID_RUBRIQUE)][, id_parent:(#ID_RUBRIQUE)][, id_secteur:(#ID_SECTEUR)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)][, id_groupe:(#ID_GROUPE)]}, function(xml[(#GET{id_carte_gis})]){
     		][(#ENV{recursive}|=={1}|?{'',' '})
-				jQuery.get('[(#URL_PAGE{rss-gis})]', {[limit:(#ENV{limit, 50})][, id_rubrique:(#ID_RUBRIQUE)][, id_secteur:(#ID_SECTEUR)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)]}, function(xml[(#GET{id_carte_gis})]){
+				jQuery.get('[(#URL_PAGE{rss-gis})]', {[limit:(#ENV{limit, 50})][, id_rubrique:(#ID_RUBRIQUE)][, id_secteur:(#ID_SECTEUR)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)][, id_groupe:(#ID_GROUPE)]}, function(xml[(#GET{id_carte_gis})]){
 			]
 				//xml almacena en un objeto xml los datos recogidos del documento leido
     				jQuery("item", xml[(#GET{id_carte_gis})]).each(function(item[(#GET{id_carte_gis})]){
