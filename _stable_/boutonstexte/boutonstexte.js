@@ -10,15 +10,15 @@ if (typeof jQuery == 'function')
 		var boutons = $('<span class="boutonstexte"></span>');
 
 		if (!$("img.textsizeup").length && boutonstexte.txtSizeUp) {
-			$('<button class="textsizeup"/>')
+			$('<button class="textsizeup"><img src="rien.gif" alt="' + boutonstexte.txtSizeUp +'" /></button>')
 			.appendTo(boutons);
 		}
 		if (!$("img.textsizedown").length && boutonstexte.txtSizeDown) {
-			$('<button class="textsizedown" />')
+			$('<button class="textsizedown"><img src="rien.gif" alt="' + boutonstexte.txtSizeDown +'" /></button>')
 			.appendTo(boutons);
 		}
 		if (!$("img.textonly").length && boutonstexte.txtOnly) {
-			$('<button class="textonly" />')
+			$('<button class="textonly"><img src="rien.gif" alt="' + boutonstexte.txtOnly +'" /></button>')
 			.appendTo(boutons);
 		}
 
