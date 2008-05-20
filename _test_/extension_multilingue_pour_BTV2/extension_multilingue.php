@@ -1,5 +1,8 @@
 <?php
 function ExtensionMultilingue_BT_toolbox($params) {
+
+//test pour savoir si on est appelé par la btv2 ou récursivement par la btm( barre typo multilingue)
+//c'est à dire que la btm va créer n nouvelles btv2 pour chaque langues, donc ce pipeline sera appelé pour chacune, et ne devra pas s'exécuter
 if (strpos($params['champ'], "zone_multilingue") === FALSE)
 {
 	$fetch = function_exists('spip_fetch_array')?'spip_fetch_array':'sql_fetch';
@@ -14,6 +17,7 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 
 	$langues_choisies = explode(",",lire_config('ExtensionMultilingue/langues_ExtensionMultilingue','fr,en,de'));	
 	
+	//edition des rubriques
 	if ($_GET['exec'] == "rubriques_edit") {
 
 		if (lire_config('ExtensionMultilingue/rubriques_'.$nom_champ.'_ExtensionMultilingue', '') != "on")
@@ -34,6 +38,7 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 			$texte = $row['texte'];
 		}
 	}
+	//edition des articles
 	else if ($_GET['exec'] == "articles_edit")
 	{
 		if (lire_config("ExtensionMultilingue/articles_".$nom_champ."_ExtensionMultilingue", '') != "on")
@@ -63,6 +68,7 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 		}
 		
 	}
+	//edition des breves
 	else if ($_GET['exec'] == "breves_edit")
 	{
 		if (lire_config("ExtensionMultilingue/breves_".$nom_champ."_ExtensionMultilingue", '') != "on")
@@ -86,6 +92,7 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 			
 		}
 	}
+	//edition de la configuration du site
 	else if ($_GET['exec'] == "configuration")
 	{
 		if (lire_config("ExtensionMultilingue/configuration_".$nom_champ."_ExtensionMultilingue", '') != "on")
@@ -94,6 +101,7 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 		$descriptif = $GLOBALS['meta']["descriptif_site"];
 
 	}
+	//édition des groupes de mots clefs
 	else if ($_GET['exec'] == "mots_type")
 	{
 		
@@ -117,6 +125,7 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 		}
 
 	}
+	//édition des mots clefs
 	else if ($_GET['exec'] == "mots_edit")
 	{
 		
@@ -137,6 +146,7 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 
 	}
 
+	//édition des sites référencés
 	else if ($_GET['exec'] == "sites_edit")	{
 
 		if (lire_config("ExtensionMultilingue/sites_".$nom_champ."_ExtensionMultilingue", '') != "on")
@@ -152,9 +162,11 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 		}
 	}
 	
+	//dans les cas ou la btm doit s'éxécuter :
 	if (($_GET['exec'] == "sites_edit") || ($_GET['exec'] == "articles_edit") || ($_GET['exec'] == "breves_edit") || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
 	{
 		
+		//en fonction du champ que l'on est en train de traiter...
 		if (($nom_champ == "titre") || ($nom_champ == "nom_site") || ($nom_champ == "change_type"))
 		{
 			//on gere le numero dans un input separe
@@ -167,6 +179,10 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
         		}
 			$ret .= "</ul>";
 
+			
+			//on ajouter un onglet par langue, et dans chaque onglet une BTV2 et un input
+			// en réalité les div des onglets sont ajoutés en bas de la page et seulement à l'initilisation (voir le header_privé) ils sont déplacés 
+			// vers le champ à éditer
 			for ($i=0; $i<count($langues_choisies); $i++)
 			{
 				$ret .= "
@@ -395,7 +411,12 @@ $newtab="";
 	if (($_GET['exec'] == "sites_edit") || ($_GET['exec'] == "articles_edit") || ($_GET['exec'] == "breves_edit") || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
 	{
 
-		
+		// insertion des librairies javascript requises et initialisation javascript :
+		// - masquer le précédent textarea ou input du champ,
+		// - mettre les onglets en place (qui étaient provisoirement placés en pied de page) -> déplacement avec jQuery
+		// - puis redirection de l'évènement submit pour fusionner l'ensemble des onglets dans un <multi> avant de faire le vrai submit (calculer_actions_head_multilingues)
+	
+
 		//cas de l'edition des rubriques
 		if ($_GET['exec'] == "rubriques_edit")
 		{
