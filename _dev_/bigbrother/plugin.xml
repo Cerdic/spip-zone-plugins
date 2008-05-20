@@ -1,0 +1,28 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+		Big Brother
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 		RastaPopoulos - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+		0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+		dev
+	</etat>
+	<description>
+		Surveiller et punir.
+		
+		Ce plugin garde en mémoire les visites de toutes les personnes ayant un compte.
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix> 
+		bigbrother
+	</prefix>
+	<options>bigbrother_options.php</options>
+	<install>base/bigbrother_installation.php</install>
+	
+	<!-- Big brother nécessite les plugins suivant -->
+	<necessite id='cfg' version="[1.0.4;]" />
+</plugin>
