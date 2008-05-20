@@ -228,8 +228,7 @@ spiplistes_log("CRON: insert_id : ".$r, _SPIPLISTES_LOG_DEBUG);
 	}	
 	
 	/////////////////////////////
-	// Si panier courriers des encours plein 
-	// ou si queue en attente, appel de la meleuse
+	// Si panier des etiquettes plein, appel de la meleuse
 	if(
 		$n = 
 			spiplistes_courriers_en_queue_compter("etat=".sql_quote(""))

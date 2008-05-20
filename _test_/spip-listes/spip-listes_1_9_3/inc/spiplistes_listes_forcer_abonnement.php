@@ -35,26 +35,41 @@ function spiplistes_listes_forcer_abonnement ($id_liste, $statut) {
 	}
 	
 	if(!empty($sql_where)) {
-
-		$sql_query = "SELECT id_auteur FROM spip_auteurs 
-			WHERE $sql_where AND LENGTH(email) AND id_auteur NOT IN (SELECT id_auteur FROM spip_auteurs_listes WHERE id_liste=$id_liste)";
-
-spiplistes_log("# $sql_query");
 		
-		if($sql_result = spip_query($sql_query)) {
+		// cherche les non-abonnés
+		$selection =
+			(spiplistes_spip_est_inferieur_193())
+			? "SELECT id_auteur FROM spip_auteurs_listes WHERE id_liste=".sql_quote($id_liste)
+			: sql_select("id_auteur", "spip_auteurs_listes", "id_liste=".sql_quote($id_liste),'','','','','',false)
+			;
+		$sql_result = sql_select(
+			  'id_auteur'
+			, 'spip_auteurs'
+			, array(
+				  $sql_where
+				, "LENGTH(email)"
+				, "id_auteur NOT IN ($selection)"
+			)
+		);
+	
+		if($sql_result) {
 		
-			spiplistes_log($nb = sql_count($sql_result)." AUTEURS ($statut) ADDED TO LISTE $id_liste BY ID_AUTEUR #$connect_id_auteur");
+spiplistes_log($nb = sql_count($sql_result)." AUTEURS ($statut) ADDED TO LISTE $id_liste BY ID_AUTEUR #$connect_id_auteur");
 
 			$sql_values = "";
 
 			if($nb > 0) {
-				while($row = spip_fetch_array($sql_result)) {
-					$sql_values .= " (".$row['id_auteur'].", $id_liste, NOW()),";
+				while($row = sql_fetch($sql_result)) {
+					$sql_values .= " (".sql_quote(intval($row['id_auteur'])).", $id_liste, NOW()),";
 				}
 				if(!empty($sql_values)) {
 						$sql_values = rtrim($sql_values, ",");
-						$sql_query = "INSERT INTO spip_auteurs_listes (id_auteur, id_liste, date_inscription) VALUES $sql_values";
-						return(spip_query($sql_query));
+						return(
+							sql_insert('spip_auteurs_listes'
+							, "(id_auteur, id_liste, date_inscription)"
+							, $sql_values
+							)
+						);
 				} 
 			}
 			return(0); // pas d'abo à rajouter. Pas une erreur.
@@ -65,10 +80,9 @@ spiplistes_log("# $sql_query");
 	// désabonner tous
 
 		$result = 0;
-		$sql_query = "DELETE FROM spip_auteurs_listes WHERE id_liste=$id_liste";
-
-		if(spip_query($sql_query)) {
-			spiplistes_log(" AUTEURS (tous) REMOVED FROM LISTE $id_liste BY ID_AUTEUR #$connect_id_auteur");
+		$sql_result = sql_delete('spip_auteurs_listes', "id_liste=".sql_quote($id_liste));
+		if($sql_result) {
+			spiplistes_log("AUTEURS (tous) REMOVED FROM LISTE $id_liste BY ID_AUTEUR #$connect_id_auteur");
 			$result++;
 			return($result);
 		}
