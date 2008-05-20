@@ -88,7 +88,7 @@ function spiplistes_courriers_en_cours_compter () {
 function spiplistes_courriers_statut_compter ($statut='tous') {
 	$sql_where = spiplistes_listes_sql_where_or(
 		($statut == 'tous')
-		? _SPIPLISTES_LISTES_STATUTS_TOUS
+		? _SPIPLISTES_COURRIERS_STATUTS
 		: $statut
 		);
 	return(spiplistes_sql_compter('spip_courriers', $sql_where));
@@ -187,6 +187,31 @@ function spiplistes_abonnements_listes_auteur ($id_auteur, $avec_titre = false) 
 	return($result);
 }
 
+// CP-20080324 : desabonner un id_auteur d'une id_liste
+// CP-20080508 : ou de toutes les listes si $id_liste = 'toutes'
+function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste) {
+	$result = false;
+	$nb_listes =  0;
+	if(($id_auteur = intval($id_auteur)) > 0) {
+		$id_aq = "id_auteur=".sql_quote($id_auteur);
+		$sql_table = "spip_auteurs_listes";
+		$sql_where = "";
+		if($id_liste == "toutes") {
+			$sql_where = "id_auteur=".sql_quote($id_auteur);
+			$nb_listes = spiplistes_abonnements_compter($id_aq);
+		} else if(($id_liste = intval($id_liste)) > 0) {
+			$sql_where = array("id_auteur=".sql_quote($id_auteur), "id_liste=".sql_quote($id_liste));
+			$nb_listes++;
+		}
+		if(!empty($sql_where)) {
+			$result = sql_delete($sql_table, $sql_where);
+		}
+	}
+	spiplistes_log("API: listes_desabonner id_auteur #$id_auteur to $nb_listes liste(s) "
+		.spiplistes_str_ok_error($result), _SPIPLISTES_LOG_DEBUG);
+	return($result);
+}
+
 //CP-20080512 : supprimer des abonnements
 function spiplistes_abonnements_supprimer ($sql_whereq) {
 	return(sql_delete('spip_auteurs_listes', $sql_whereq));
@@ -274,32 +299,6 @@ function spiplistes_listes_lister ($select = "*", $where = "") {
 	return(NULL);
 }
 
-
-// CP-20080324 : desabonner un id_auteur d'une id_liste
-// CP-20080508 : ou de toutes les listes si $id_liste = 'toutes'
-function spiplistes_listes_auteur_desabonner ($id_auteur, $id_liste) {
-	$result = false;
-	$nb_listes =  0;
-	if(($id_auteur = intval($id_auteur)) > 0) {
-		$id_aq = "id_auteur=".sql_quote($id_auteur);
-		$sql_table = "spip_auteurs_listes";
-		$sql_where = "";
-		if($id_liste == "toutes") {
-			$sql_where = "id_auteur=".sql_quote($id_auteur);
-			$nb_listes = spiplistes_abonnements_compter($id_aq);
-		} else if(($id_liste = intval($id_liste)) > 0) {
-			$sql_where = array("id_auteur=".sql_quote($id_auteur), "id_liste=".sql_quote($id_liste));
-			$nb_listes++;
-		}
-		if(!empty($sql_where)) {
-			$result = sql_delete($sql_table, $sql_where);
-			spiplistes_log("result: ".$result);
-		}
-	}
-	spiplistes_log("API: listes_desabonner id_auteur #$id_auteur to $nb_listes liste(s) "
-		.spiplistes_str_ok_error($result), _SPIPLISTES_LOG_DEBUG);
-	return($result);
-}
 
 // retourne nombre d'abonnes a une liste
 function spiplistes_listes_nb_abonnes_compter ($id_liste = 0) {

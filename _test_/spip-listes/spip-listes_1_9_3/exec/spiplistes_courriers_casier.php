@@ -158,8 +158,6 @@ function exec_spiplistes_courriers_casier () {
 		&& $flag_modifiable
 	) {
 		// passe le courrier directement a la meleuse
-spiplistes_log("##CASIER id_courrier #$id_courrier id_liste #$id_liste"
-		, _SPIPLISTES_LOG_DEBUG);
 		if($id_liste >= 0) {
 			// destinataire(s) = abonnés à une liste
 			// si id_liste == 0, destinataire = adresse email de test

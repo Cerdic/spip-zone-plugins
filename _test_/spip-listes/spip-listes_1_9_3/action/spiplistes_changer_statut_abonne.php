@@ -60,7 +60,7 @@ function action_spiplistes_changer_statut_abonne_dist () {
 			// désabonne un auteur
 			if ($id_liste = intval($arg[2])) {
 				if (autoriser('desabonnerauteur', 'liste', $id_liste, NULL, array('id_auteur'=>$id_auteur))) {
-					if(spiplistes_listes_auteur_desabonner ($id_auteur, $id_liste)) {
+					if(spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste)) {
 						spiplistes_log("UNSUBSCRIBE ID_AUTEUR #$id_auteur from ID_LISTE #$id_liste by ID_AUTEUR #$connect_id_auteur");	
 					}
 				}

@@ -120,13 +120,13 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 					// Désabonnements ?
 					foreach($auteur_abos_current_list as $value) {
 						if(!in_array($value, $abos_set)) {
-							spiplistes_listes_auteur_desabonner($id_auteur, $value);
+							spiplistes_abonnements_auteur_desabonner($id_auteur, $value);
 						}
 					}
 				}
 				// désabonne de tout
 				else {
-					if(spiplistes_listes_auteur_desabonner($id_auteur, "toutes") === false) {
+					if(spiplistes_abonnements_auteur_desabonner($id_auteur, "toutes") === false) {
 						$result .= __boite_alerte(_T('spiplistes:Erreur_sur_la_base'), true);
 					}
 				}

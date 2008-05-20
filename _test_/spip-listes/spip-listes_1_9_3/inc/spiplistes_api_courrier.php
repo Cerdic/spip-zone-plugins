@@ -245,23 +245,43 @@ function spiplistes_courrier_tampon_texte ($tampon_patron, $tampon_html) {
 function spiplistes_courrier_remplir_queue_envois ($id_courrier, $id_liste, $id_auteur = 0) {
 	$id_courrier = intval($id_courrier);
 	$id_liste = intval($id_liste);
-spiplistes_log("API: remplir courrier: #$id_courrier, liste: #$id_liste, auteur: $id_auteur", _SPIPLISTES_LOG_DEBUG);
-	if(($id_courrier > 0) && ($id_liste >= 0)) {
+	
+spiplistes_log("API: remplir courrier: #$id_courrier, liste: #$id_liste, auteur: #$id_auteur", _SPIPLISTES_LOG_DEBUG);
+	
+	if($id_courrier > 0) {
 	
 		$statut_q = sql_quote('a_envoyer');
 		$id_courrier_q = sql_quote($id_courrier);
-		$id_liste_q = sql_quote($id_liste);
 		$sql_valeurs = "";
 	
 		if($id_liste > 0) {
 			// prendre la liste des abonnés à cette liste
-			$sql_result = sql_select('id_auteur', 'spip_auteurs_listes', "id_liste=$id_liste_q");
-		
-			// remplir la queue d'envois
+			$sql_result = sql_select('id_auteur', 'spip_auteurs_listes', "id_liste=".sql_quote($id_liste), '', 'id_auteur');
+			$ids_abos = array();
 			while($row = sql_fetch($sql_result)) {
-				$sql_valeurs .= "(".sql_quote(intval($row['id_auteur'])).",$id_courrier_q, $statut_q, NOW()),";
+				$ids_abos[] = intval($row['id_auteur']);
 			}
-			$sql_valeurs = rtrim($sql_valeurs, ",");			
+			if(count($ids_abos)) {
+				$sql_where_q = "(".implode(",", array_map("sql_quote", $ids_abos)).")";
+				$sql_result = sql_select('id_auteur', 'spip_auteurs', "id_auteur IN $sql_where_q", '', 'id_auteur');
+				$ids_auteurs = array();
+				while($row = sql_fetch($sql_result)) {
+					$ids_auteurs[] = intval($row['id_auteur']);
+				}
+				foreach($ids_abos as $ii) {
+					// l'auteur n'existe plus, le desabonner !
+					if(!in_array($ii, $ids_auteurs)) {
+						spiplistes_abonnements_auteur_desabonner($ii, 'toutes');
+					}
+				}
+				if(count($ids_auteurs) > 0) {
+					// remplir la queue d'envois
+					foreach($ids_auteurs as $ii) {
+						$sql_valeurs .= "(".sql_quote($ii).",$id_courrier_q, $statut_q, NOW()),";
+					}
+					$sql_valeurs = rtrim($sql_valeurs, ",");			
+				}
+			}
 		}
 		else if(($id_auteur = intval($id_auteur)) > 0) {
 			// envoi mail test
@@ -290,7 +310,7 @@ spiplistes_log("API: remplir courrier: #$id_courrier, liste: #$id_liste, auteur:
 			return(true);
 		}
 	}
-spiplistes_log("ERR: spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste, , $id_auteur) valeur nulle ?"
+spiplistes_log("ERR: spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste, $id_auteur) valeur nulle ?"
 		, _SPIPLISTES_LOG_DEBUG);
 	return(false);
 }
