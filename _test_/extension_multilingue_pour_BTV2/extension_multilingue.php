@@ -101,6 +101,21 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 		$descriptif = $GLOBALS['meta']["descriptif_site"];
 
 	}
+	//edition des auteurs
+	else if ($_GET['exec'] == "auteur_infos") {
+
+		if (lire_config("ExtensionMultilingue/auteurs_".$nom_champ."_ExtensionMultilingue", '') != "on")
+			return $params;
+		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=" . intval($_GET['id_auteur']) );
+
+		if ($row = $fetch($result)) {
+			$titre = str_replace("\"","'",$row["nom"]);
+			$descriptif = $row["bio"];
+		} else {
+			$titre = "";
+			$descriptif = "";
+		}
+	}
 	//édition des groupes de mots clefs
 	else if ($_GET['exec'] == "mots_type")
 	{
@@ -163,11 +178,11 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 	}
 	
 	//dans les cas ou la btm doit s'éxécuter :
-	if (($_GET['exec'] == "sites_edit") || ($_GET['exec'] == "articles_edit") || ($_GET['exec'] == "breves_edit") || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
+	if (($_GET['exec'] == "sites_edit") || ($_GET['exec'] == "auteur_infos") || ($_GET['exec'] == "articles_edit") || ($_GET['exec'] == "breves_edit") || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
 	{
 		
 		//en fonction du champ que l'on est en train de traiter...
-		if (($nom_champ == "titre") || ($nom_champ == "nom_site") || ($nom_champ == "change_type"))
+		if (($nom_champ == "titre") || ($nom_champ == "nom_site") || ($nom_champ == "change_type") || ($nom_champ == "nom"))
 		{
 			//on gere le numero dans un input separe
 			$ret .= "
@@ -224,7 +239,7 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 			
 				
 		}
-		else if (($nom_champ == "descriptif") || ($nom_champ == "descriptif_site"))
+		else if (($nom_champ == "descriptif") || ($nom_champ == "descriptif_site") || ($nom_champ == "bio"))
 		{
 			$ret .= "<div class=\"container-onglets\">
     			<ul class=\"tabs-nav\">";
@@ -408,7 +423,7 @@ function ExtensionMultilingue_header_prive($texte) {
 $langues_choisies = explode(",",lire_config('ExtensionMultilingue/langues_ExtensionMultilingue','fr,en,de'));	
 	
 $newtab="";
-	if (($_GET['exec'] == "sites_edit") || ($_GET['exec'] == "articles_edit") || ($_GET['exec'] == "breves_edit") || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
+	if (($_GET['exec'] == "sites_edit") || ($_GET['exec'] == "articles_edit") || ($_GET['exec'] == "auteur_infos") || ($_GET['exec'] == "breves_edit") || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
 	{
 
 		// insertion des librairies javascript requises et initialisation javascript :
@@ -636,6 +651,31 @@ $newtab="";
 			if (lire_config('barre_typo_generalisee/sites_description_barre_typo_generalisee') == "on")
 			{
 				if (lire_config("ExtensionMultilingue/sites_descriptif_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea")."$('#barre_typo_site_descriptif table.spip_barre').css(\"display\", \"none\");";
+			}
+			$newtab .= "$('.container-onglets').tabs();
+			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+		
+			$newtab .= "</script>";
+		}
+		//cas de l'edition des auteurs
+		else if ($_GET['exec'] == "auteur_infos") 
+		{
+			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
+        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
+        		<![endif]-->
+           
+        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+		       
+			<script type=\"text/javascript\">
+			$(document).ready(function() {";
+		
+			if (lire_config('barre_typo_generalisee/auteurs_signature_barre_typo_generalisee') == "on")
+			{
+				if (lire_config("ExtensionMultilingue/auteurs_nom_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues_titre("document.formulaire.nom", $langues_choisies, "input")."$('#barre_typo_auteur_nom table.spip_barre').css(\"display\", \"none\");";
+			}
+			if (lire_config('barre_typo_generalisee/auteurs_quietesvous_barre_typo_generalisee') == "on")
+			{
+				if (lire_config("ExtensionMultilingue/auteurs_bio_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.bio", $langues_choisies, "textarea")."$('#barre_typo_auteur_bio table.spip_barre').css(\"display\", \"none\");";
 			}
 			$newtab .= "$('.container-onglets').tabs();
 			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
