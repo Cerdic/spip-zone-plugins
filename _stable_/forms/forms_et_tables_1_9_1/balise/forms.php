@@ -6,8 +6,8 @@
  * Auteurs :
  * Antoine Pitrou
  * Cedric Morin
- * Renato
- * ??? 2005,2006 - Distribue sous licence GNU/GPL
+ * Renato Formato
+ * (c) 2005-2008 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -27,6 +27,14 @@ function balise_FORMS_stat($args, $filtres) {
 	return $args;
 }
 
+function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_donnee_liee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree",$forms_obligatoires="") {
+	// on est en 1.9.2, ce branchement n'est pas automatique !
+	include_spip('balise/formulaire_');
+	include_spip('forms_cvt');
+	return balise_FORMULAIRE__dyn('forms',$id_form,$id_article,$id_donnee,$id_donnee_liee,$class,$script_validation,$message_confirm,$reponse_enregistree,$forms_obligatoires);
+}
+
+/*
 function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_donnee_liee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree",$forms_obligatoires="") {
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
@@ -162,5 +170,5 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 			'class' => 'formulaires/'.($class?$class:'forms_structure'),
 		));
 }
-
+*/
 ?>

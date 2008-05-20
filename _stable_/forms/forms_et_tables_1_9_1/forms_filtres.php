@@ -125,7 +125,8 @@
 	}
 	
 	function forms_valeur($tableserialisee,$cle,$defaut=''){
-		$t = unserialize($tableserialisee);
+		if (!is_array($t=$tableserialisee))
+			$t = unserialize($tableserialisee);
 		return isset($t[$cle])?$t[$cle]:$defaut;
 	}
 	
