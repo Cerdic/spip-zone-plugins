@@ -253,7 +253,7 @@ $sauve .= $temp = "\n######## PACK ACTUEL DE CONFIGURATION DU COUTEAU SUISSE ###
 }
 
 // cree un tableau $infos_pipelines et initialise $cs_metas_pipelines
-function cs_initialise_includes() {
+function cs_initialise_includes($count_metas_outils) {
 	global $outils, $cs_metas_pipelines;
 	// toutes les infos sur les pipelines
 	$infos_pipelines = array();
@@ -268,6 +268,8 @@ function cs_initialise_includes() {
 	// inclure d'office outils/cout_fonctions.php
 	if ($temp=cs_lire_fichier_php("outils/cout_fonctions.php"))
 		$infos_pipelines['code_fonctions'][] = $temp;
+	// variable de verification
+	$infos_pipelines['code_options'][] = "\$GLOBALS['cs_verif']=$count_metas_outils;";
 	// parcours de tous les outils
 	foreach ($outils as $i=>$outil) {
 		// stockage de la liste des fonctions par pipeline, si l'outil est actif...
@@ -330,7 +332,7 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		$temp_js[] = "if (window.jQuery) jQuery(document).ready(function(){\n".join("\n", $temp_jq)."\n});";
 	if (count($temp_js))
 		$cs_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
-			./*compacte_js*/(join("\n", $temp_js))."\n// --></script>\n";
+			.compacte_js(join("\n", $temp_js))."\n// --></script>\n";
 	// mise en code des traitements trouves
 	foreach($traitements_utilises as $b=>$balise) {
 		foreach($balise as $p=>$precision) {

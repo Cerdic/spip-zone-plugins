@@ -43,7 +43,7 @@ define('_URL_CONTRIB', 'http://www.spip-contrib.net/?article');
 
 // chemin du fichier de fonctions
 define('_COUT_FONCTIONS_PHP', find_in_path('cout_fonctions.php'));
-$GLOBALS['cs_options'] = $GLOBALS['cs_fonctions'] = $GLOBALS['cs_fonctions_essai'] = $GLOBALS['cs_init'] = 0;
+$GLOBALS['cs_options'] = $GLOBALS['cs_fonctions'] = $GLOBALS['cs_fonctions_essai'] = $GLOBALS['cs_init'] = $GLOBALS['cs_verif'] = 0;
 
 // parametres concernant le plugin ?
 $GLOBALS['cs_params'] = isset($_GET['cs'])?explode(',', $_GET['cs']):array();
@@ -99,6 +99,12 @@ if($zap) {
 		if(file_exists($f_cs)) {
 			cs_log(" -- inclusion de '$f_cs'");
 			include_once($f_cs);
+			// verification des metas : reinitialisation si une erreur est detectee
+			if (count($metas_outils)<>$GLOBALS['cs_verif']) {
+				cs_log("ERREUR : metas incorrects - verif = $GLOBALS[cs_verif]");
+				cs_initialisation(true);
+				if (!$GLOBALS['cs_verif']) include_once($f_cs);
+			}
 		} else {
 			$GLOBALS['cs_utils'] = 0;
 			cs_log(" -- fichier '$f_cs' toujours introuvable !!");
