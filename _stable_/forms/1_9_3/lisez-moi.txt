@@ -1,2 +1,0 @@
-Vous trouverez la documentation de ce pluguin à l'adresse suivante :
-http://trac.rezo.net/trac/spip-zone/wiki/LesPlugins
