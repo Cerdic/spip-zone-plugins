@@ -358,7 +358,7 @@ spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
 			else if($type_abo=="texte" || $type_abo=="html")  {
 				// prepare le message a envoyer par mail
 				
-				$listes_abonnements = spiplistes_listes_abonnements_auteur($id_auteur, true);
+				$listes_abonnements = spiplistes_abonnements_listes_auteur($id_auteur, true);
 				$message_list = '' ;
 				$nb = count($listes_abonnements);
 				foreach($listes_abonnements as $liste) {

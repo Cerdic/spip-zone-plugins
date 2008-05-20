@@ -242,54 +242,55 @@ function spiplistes_courrier_tampon_texte ($tampon_patron, $tampon_html) {
  * @param : $id_courrier : reference d'un envoi
  * @param $id_liste : reference d'une liste
  */
-function spiplistes_courrier_remplir_queue_envois ($id_courrier, $id_liste) {
+function spiplistes_courrier_remplir_queue_envois ($id_courrier, $id_liste, $id_auteur = 0) {
 	$id_courrier = intval($id_courrier);
 	$id_liste = intval($id_liste);
-spiplistes_log("API: remplir courrier #$id_courrier, liste : #$id_liste"
-	, _SPIPLISTES_LOG_DEBUG);
-	if(($id_courrier > 0) && ($id_liste > 0)) {
+spiplistes_log("API: remplir courrier: #$id_courrier, liste: #$id_liste, auteur: $id_auteur", _SPIPLISTES_LOG_DEBUG);
+	if(($id_courrier > 0) && ($id_liste >= 0)) {
 	
-		// prendre la liste des abonnés à cette liste
-		$sql_result = sql_select('id_auteur'
-			, 'spip_auteurs_listes'
-			, "id_liste=".sql_quote($id_liste))
-			;
-	
-		// remplir la queue d'envois
-		$i = sql_quote($id_courrier);
-		$s = sql_quote("a_envoyer");
+		$statut_q = sql_quote('a_envoyer');
+		$id_courrier_q = sql_quote($id_courrier);
+		$id_liste_q = sql_quote($id_liste);
 		$sql_valeurs = "";
-		while($row = sql_fetch($sql_result)) {
-			$sql_valeurs .= "(".sql_quote(intval($row['id_auteur'])).",$i,$s,NOW()),";
-		}
-		$sql_valeurs = rtrim($sql_valeurs, ",");
-		sql_insert(
-			'spip_auteurs_courriers'
-			,	"("
-				. "id_auteur,id_courrier,statut,maj"
-				. ")"
-			,	$sql_valeurs
-		);
+	
+		if($id_liste > 0) {
+			// prendre la liste des abonnés à cette liste
+			$sql_result = sql_select('id_auteur', 'spip_auteurs_listes', "id_liste=$id_liste_q");
 		
-		$nb = spiplistes_courriers_en_queue_compter(
-			array(
-				"id_courrier=".sql_quote($id_courrier)
-				, "statut=".sql_quote('a_envoyer')
-			)
-		);
-		
-		if($nb) {
-			spiplistes_courrier_modifier(
-				$id_courrier
-				, array('total_abonnes' => sql_quote($nb))
-				);
-		} else {
-spiplistes_log("ERR: pile etiquettes vide pour courrier #$id_courrier"
-		, _SPIPLISTES_LOG_DEBUG);
+			// remplir la queue d'envois
+			while($row = sql_fetch($sql_result)) {
+				$sql_valeurs .= "(".sql_quote(intval($row['id_auteur'])).",$id_courrier_q, $statut_q, NOW()),";
+			}
+			$sql_valeurs = rtrim($sql_valeurs, ",");			
 		}
-		return(true);
+		else if(($id_auteur = intval($id_auteur)) > 0) {
+			// envoi mail test
+			$sql_valeurs = "(".sql_quote($id_auteur).",$id_courrier_q, $statut_q, NOW())";
+		}
+		if(!empty($sql_valeurs)) {
+			sql_insert(
+				'spip_auteurs_courriers'
+				,	"("
+					. "id_auteur,id_courrier,statut,maj"
+					. ")"
+				,	$sql_valeurs
+			);
+			$nb_etiquettes = spiplistes_courriers_en_queue_compter(
+				array(
+					"id_courrier=".sql_quote($id_courrier)
+					, "statut=".sql_quote('a_envoyer')
+				)
+			);
+			if($nb_etiquettes && ($id_liste > 0)) {
+				spiplistes_courrier_modifier(
+					$id_courrier
+					, array('total_abonnes' => sql_quote($nb_etiquettes))
+					);
+			}
+			return(true);
+		}
 	}
-spiplistes_log("ERR: spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste) valeur nulle ?"
+spiplistes_log("ERR: spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste, , $id_auteur) valeur nulle ?"
 		, _SPIPLISTES_LOG_DEBUG);
 	return(false);
 }
@@ -308,27 +309,13 @@ function spiplistes_courrier_modifier ($id_courrier, $sql_set_array, $quote = tr
 			)
 		: false
 		;
-	spiplistes_log("API: modifier courrier #$id_courrier "
-		.spiplistes_str_ok_error($result), _SPIPLISTES_LOG_DEBUG);
 	return($result);
 }
 
 //CP-20080509: changer le statut d'un courrier
 function spiplistes_courrier_statut_modifier ($id_courrier, $new_statut) {
-	$id_courrier = intval($id_courrier);
-	$result = 
-		($id_courrier > 0)
-		?
-			spiplistes_courrier_modifier(
-				$id_courrier
-				, array('statut' => $new_statut)
-			)
-		: false
-		;
-	spiplistes_log("API: Modifier statut courrier #$id_courrier : $new_statut ".spiplistes_str_ok_error($result));
-	return($result);
+	return(spiplistes_courrier_modifier($id_courrier, array('statut' => $new_statut)));
 }
-
 
 // CP-20080329
 function spiplistes_courrier_supprimer_queue_envois ($sql_where_key, $sql_where_value) {

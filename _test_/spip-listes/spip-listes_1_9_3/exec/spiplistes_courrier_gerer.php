@@ -91,11 +91,10 @@ function exec_spiplistes_courrier_gerer () {
 			
 			if($btn_changer_destination) {
 				if($radio_destination == 'email_test') {
-				//////////////////////////////////////////////////////
-				// demande d'envoi a  mail de test (formulaire local)
+					// demande d'envoi a  mail de test (retour formulaire local)
 					if(email_valide($email_test)) {
-						if(!spiplistes_idauteur_depuis_email($email_test)) {
-						// verifie si l'adresse est dans la table des auteurs
+						if(!($id_auteur_test = spiplistes_idauteur_depuis_email($email_test))) {
+							// verifie si l'adresse est dans la table des auteurs
 							// si inconnue, refuse d'envoyer
 							$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_Adresse_email_inconnue'), true);
 						}
@@ -106,7 +105,7 @@ function exec_spiplistes_courrier_gerer () {
 								, array(
 									  'email_test' => $email_test
 									, 'total_abonnes' => 1
-									, 'id_liste' => 0
+									, 'id_liste' => ($id_liste = 0)
 									, 'statut' => ($change_statut = _SPIPLISTES_STATUT_READY)
 									)
 							);
@@ -119,8 +118,7 @@ function exec_spiplistes_courrier_gerer () {
 				} // end if($btn_envoi_test)
 				
 				else if($radio_destination == 'id_liste') {
-				//////////////////////////////////////////////////////
-				// demande d'envoi a  une liste (formulaire local)
+					// demande d'envoi a  une liste (retour formulaire local)
 					if($id_liste > 0) {
 						if(
 							($nb_abos = spiplistes_listes_nb_abonnes_compter($id_liste)) > 0
@@ -164,15 +162,6 @@ function exec_spiplistes_courrier_gerer () {
 					$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_courrier_titre_vide'), true);
 				}
 			}
-			/*
-			else if($btn_confirmer_envoi && $flag_editable) {
-				spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_ENCOURS);
-				spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
-				// passe le courrier a  la meleuse
-				spiplistes_courrier_remplir_queue_envois($id_courrier,$id_liste);
-				spiplistes_log("SEND ID_COURRIER #$id_courrier ON ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur");
-			}
-			*/
 			// FIN DES MODIFICATIONS
 	}
 	
@@ -338,6 +327,7 @@ function exec_spiplistes_courrier_gerer () {
 				. "</p>"
 				. "<input type='hidden' name='id_liste' value='$id_liste' />"
 				. "<input type='hidden' name='id_courrier' value='$id_courrier' />"
+				. "<input type='hidden' name='id_auteur_test' value='$id_auteur_test' />"
 				. "<div style='text-align:right;'><input type='submit' name='btn_confirmer_envoi' value='"._T('spiplistes:Envoyer_ce_courrier')."' class='fondo' /></div>\n"
 				. "</form>"
 				. fin_cadre_couleur(true)

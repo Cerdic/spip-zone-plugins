@@ -105,7 +105,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				$abos_set = _request('abos_set');
 				$abo_ajoute = array();
 				// liste des abonnements de id_auteur
-				$auteur_abos_current_list = spiplistes_listes_abonnements_auteur($id_auteur);
+				$auteur_abos_current_list = spiplistes_abonnements_listes_auteur($id_auteur);
 				// ajoute/retire les abonnements désirés
 				if(count($abos_set)) {
 					// Abonnements ?
@@ -141,7 +141,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			$abo_format = spiplistes_format_abo_demande($id_auteur);		
 		
 			// récupère la liste où auteur est abonné
-			$auteur_abos_current_list = spiplistes_listes_abonnements_auteur($id_auteur);
+			$auteur_abos_current_list = spiplistes_abonnements_listes_auteur($id_auteur);
 			
 			$bloc_visible = _request('btn_abonnements_valider');
 			

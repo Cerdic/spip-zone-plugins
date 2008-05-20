@@ -138,14 +138,14 @@ function exec_spiplistes_courriers_casier () {
 	///////////////////////////
 	// initialise les variables postées par formulaire (formulaire gerer)
 	foreach(array(
-		'btn_confirmer_envoi', 'id_courrier', 'id_liste'
+		'btn_confirmer_envoi', 'id_courrier', 'id_liste', 'id_auteur_test'
 		, 'statut'
 		, 'btn_supprimer_courrier'
 		, 'btn_arreter_envoi' // si valide, contient id du courrier
 		) as $key) {
 		$$key = _request($key);
 	}
-	foreach(array('id_courrier', 'id_liste'
+	foreach(array('id_courrier', 'id_liste', 'id_auteur_test'
 		, 'btn_supprimer_courrier', 'btn_arreter_envoi'
 		) as $key) {
 		$$key = intval($$key);
@@ -157,16 +157,22 @@ function exec_spiplistes_courriers_casier () {
 	if($btn_confirmer_envoi 
 		&& $flag_modifiable
 	) {
-		if($id_liste > 0) {
+		// passe le courrier directement a la meleuse
+spiplistes_log("##CASIER id_courrier #$id_courrier id_liste #$id_liste"
+		, _SPIPLISTES_LOG_DEBUG);
+		if($id_liste >= 0) {
+			// destinataire(s) = abonnés à une liste
+			// si id_liste == 0, destinataire = adresse email de test
 			spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
-			spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste);
+			spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste, $id_auteur_test);
+			if($id_liste > 0) {
 spiplistes_log("SEND ID_COURRIER #$id_courrier ON ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur"
 		, _SPIPLISTES_LOG_DEBUG);
-		} else {
-spiplistes_log("SEND ID_COURRIER #$id_courrier TEST BY ID_AUTEUR #$connect_id_auteur"
+			} else {
+spiplistes_log("SEND ID_COURRIER #$id_courrier TO #$id_auteur_test TEST BY ID_AUTEUR #$connect_id_auteur"
 		, _SPIPLISTES_LOG_DEBUG);
+			}
 		}
-		// passe le courrier directement a la meleuse
 		spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_ENCOURS);
 	}
 
