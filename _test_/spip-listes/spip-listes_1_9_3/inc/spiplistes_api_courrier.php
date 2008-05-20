@@ -256,14 +256,16 @@ spiplistes_log("API: remplir courrier: #$id_courrier, liste: #$id_liste, auteur:
 	
 		if($id_liste > 0) {
 			// prendre la liste des abonnés à cette liste
-			$sql_result = sql_select('id_auteur', 'spip_auteurs_listes', "id_liste=".sql_quote($id_liste), '', 'id_auteur');
+			$sql_result = sql_select('id_auteur', 'spip_auteurs_listes', "id_liste=".sql_quote($id_liste), ''
+				, array('id_auteur'));
 			$ids_abos = array();
 			while($row = sql_fetch($sql_result)) {
 				$ids_abos[] = intval($row['id_auteur']);
 			}
 			if(count($ids_abos)) {
 				$sql_where_q = "(".implode(",", array_map("sql_quote", $ids_abos)).")";
-				$sql_result = sql_select('id_auteur', 'spip_auteurs', "id_auteur IN $sql_where_q", '', 'id_auteur');
+				$sql_result = sql_select('id_auteur', 'spip_auteurs', "id_auteur IN $sql_where_q", ''
+					, array('id_auteur'));
 				$ids_auteurs = array();
 				while($row = sql_fetch($sql_result)) {
 					$ids_auteurs[] = intval($row['id_auteur']);

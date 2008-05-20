@@ -128,7 +128,6 @@ function compat_spiplistes_defs_dist() {
 					$groupby, 
 					$orderby, 
 					$limit, 
-					$limit, 
 					$sousrequete = \'\', 
 					$having,
 					$table = \'\', 
