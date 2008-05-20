@@ -44,7 +44,7 @@ function exec_forms_reponses(){
 		echo debut_boite_info();
 		if ($retour = urldecode(_request('retour')))
 			echo icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",'right');
-		echo icone_horizontale(_T("forms:formulaire_aller"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "img_pack/form-24.png", "rien.gif");
+		echo icone_horizontale(_T("forms:formulaire_aller"), "?exec=forms_edit&amp;id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "img_pack/form-24.png", "rien.gif");
 
 		if (autoriser('administrer','form',$id_form)) {
 			$retour = urlencode(self());
