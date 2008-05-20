@@ -418,6 +418,21 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 	}	
 }
 
+function extension_multilingue_appelsjavascript() {
+	//insere les appels javascript et css requis dans le head de la page	
+
+	return " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
+        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
+        		<![endif]-->
+           
+        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>";
+}
+function extension_multilingue_afficheronglets() {
+	//appel à la fonction jQuery d'affichage des onglets
+	return "$('.container-onglets').tabs();
+			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+}
+
 function ExtensionMultilingue_header_prive($texte) {
 
 $langues_choisies = explode(",",lire_config('ExtensionMultilingue/langues_ExtensionMultilingue','fr,en,de'));	
@@ -435,14 +450,7 @@ $newtab="";
 		//cas de l'edition des rubriques
 		if ($_GET['exec'] == "rubriques_edit")
 		{
-			
-			
-	
-			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
-        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
-        		<![endif]-->
-           
-        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+			$newtab .= extension_multilingue_appelsjavascript()."
 			       
 			<script type=\"text/javascript\">
 			$(document).ready(function() {";
@@ -459,19 +467,14 @@ $newtab="";
 			{
 				if (lire_config("ExtensionMultilingue/rubriques_texte_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea")."$('#barre_typo_rubrique_texte table.spip_barre').css(\"display\", \"none\");";	
 			}
-			$newtab .= "$('.container-onglets').tabs();
-			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+			$newtab .= extension_multilingue_afficheronglets();
 		
 			$newtab .= "</script>";
 		}
 		//cas de l'edition des articles
 		else if ($_GET['exec'] == "articles_edit")
 		{
-			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
-        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
-        		<![endif]-->
-           
-        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+			$newtab .= extension_multilingue_appelsjavascript()."
 		       
 			<script type=\"text/javascript\">
 			$(document).ready(function() {";
@@ -515,19 +518,14 @@ $newtab="";
 			{
 				if (lire_config("ExtensionMultilingue/articles_ps_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.ps", $langues_choisies, "textarea")."$('#barre_typo_article_ps table.spip_barre').css(\"display\", \"none\");";	
 			}
-			$newtab .= "$('.container-onglets').tabs();
-			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+			$newtab .= extension_multilingue_afficheronglets();
 		
 			$newtab .= "</script>";
 		}	
 		//cas de l'edition des breves
 		else if ($_GET['exec'] == "breves_edit")
 		{
-		$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
-        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
-        		<![endif]-->
-           
-        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+		$newtab .= extension_multilingue_appelsjavascript()."
 		       
 			<script type=\"text/javascript\">
 			$(document).ready(function() {";
@@ -545,19 +543,14 @@ $newtab="";
 			{
 				if (lire_config("ExtensionMultilingue/breves_lien_titre_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.lien_titre", $langues_choisies, "input")."$('#barre_typo_breve_lien_titre table.spip_barre').css(\"display\", \"none\");";
 			}
-			$newtab .= "$('.container-onglets').tabs();
-			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+			$newtab .= extension_multilingue_afficheronglets();
 		
 			$newtab .= "</script>";
 		}
 		//cas de l'edition de la configuration
 		else if ($_GET['exec'] == "configuration")
 		{
-			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
-        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
-        		<![endif]-->
-           
-        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+			$newtab .= extension_multilingue_appelsjavascript()."
 		       
 			<script type=\"text/javascript\">
 			$(document).ready(function() {";
@@ -570,19 +563,14 @@ $newtab="";
 			{
 				if (lire_config("ExtensionMultilingue/configuration_descriptif_site_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif_site", $langues_choisies, "textarea")."$('#barre_typo_configuration_descriptif_site table.spip_barre').css(\"display\", \"none\");";
 			}
-			$newtab .= "$('.container-onglets').tabs();
-			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+			$newtab .= extension_multilingue_afficheronglets();
 		
 			$newtab .= "</script>";
 		}
 		//cas de l'edition des groupes de mots clefs
 		else if ($_GET['exec'] == "mots_type") 
 		{
-			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
-        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
-        		<![endif]-->
-           
-        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+			$newtab .= extension_multilingue_appelsjavascript()."
 		       
 			<script type=\"text/javascript\">
 		
@@ -599,19 +587,14 @@ $newtab="";
 			{
 				if (lire_config("ExtensionMultilingue/groupesmots_texte_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea")."$('#barre_typo_groupemot_texte table.spip_barre').css(\"display\", \"none\");";
 			}
-			$newtab .= "$('.container-onglets').tabs();
-			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+			$newtab .= extension_multilingue_afficheronglets();
 		
 			$newtab .= "</script>";
 		}
 		//cas de l'edition des mots clefs
 		else if ($_GET['exec'] == "mots_edit")
 		{
-			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
-        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
-        		<![endif]-->
-           
-        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+			$newtab .= extension_multilingue_appelsjavascript()."
 		       
 			<script type=\"text/javascript\">
 			$(document).ready(function() {";
@@ -627,19 +610,14 @@ $newtab="";
 			{
 				if (lire_config("ExtensionMultilingue/mots_texte_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea")."$('#barre_typo_mot_texte table.spip_barre').css(\"display\", \"none\");";
 			}
-			$newtab .= "$('.container-onglets').tabs();
-			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+			$newtab .= extension_multilingue_afficheronglets();
 		
 			$newtab .= "</script>";
 		}
 		//cas de l'edition des sites references
 		else if ($_GET['exec'] == "sites_edit") 
 		{
-			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
-        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
-        		<![endif]-->
-           
-        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+			$newtab .= extension_multilingue_appelsjavascript()."
 		       
 			<script type=\"text/javascript\">
 			$(document).ready(function() {";
@@ -652,19 +630,14 @@ $newtab="";
 			{
 				if (lire_config("ExtensionMultilingue/sites_descriptif_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea")."$('#barre_typo_site_descriptif table.spip_barre').css(\"display\", \"none\");";
 			}
-			$newtab .= "$('.container-onglets').tabs();
-			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+			$newtab .= extension_multilingue_afficheronglets();
 		
 			$newtab .= "</script>";
 		}
 		//cas de l'edition des auteurs
 		else if ($_GET['exec'] == "auteur_infos") 
 		{
-			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
-        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
-        		<![endif]-->
-           
-        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+			$newtab .= extension_multilingue_appelsjavascript()."
 		       
 			<script type=\"text/javascript\">
 			$(document).ready(function() {";
@@ -677,8 +650,7 @@ $newtab="";
 			{
 				if (lire_config("ExtensionMultilingue/auteurs_bio_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.bio", $langues_choisies, "textarea")."$('#barre_typo_auteur_bio table.spip_barre').css(\"display\", \"none\");";
 			}
-			$newtab .= "$('.container-onglets').tabs();
-			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+			$newtab .= extension_multilingue_afficheronglets();
 		
 			$newtab .= "</script>";
 		}
@@ -740,6 +712,7 @@ function extension_multilingue_extraire_multi_lang ($letexte, $langue_souhaitee)
 
 function calculer_actions_head_multilingues ($champ, $langues_choisies, $typedechamp)
 {
+	//réassembler les textareas ou inputs des onglets dans un <multi>[fr]...[en]..[..]..</multi> avant le submit
 	$nom_champ = str_replace(".", "_", $champ);
 	$champ_fin = substr($champ, strrpos($champ, ".") + 1);
 
@@ -759,6 +732,9 @@ function calculer_actions_head_multilingues ($champ, $langues_choisies, $typedec
 }
 function calculer_actions_head_multilingues_titre ($champ, $langues_choisies, $typedechamp)
 {
+	//idem fonction précédente mais avec gestion du numéro dans un champ à part que l'on colle devant le titre
+	// N°. <multi>[fr]...[en]..[..]..</multi>
+	
 	$nom_champ = str_replace(".", "_", $champ);
 	$champ_fin = substr($champ, strrpos($champ, ".") + 1);
 
