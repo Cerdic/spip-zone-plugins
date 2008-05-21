@@ -96,7 +96,7 @@ function afficher_gestion_lien($champ, $num_barre) {
 $tableau_formulaire = '
  <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
 <tr><td> 
-'._T('bartypenr:barre_adresse').'&nbsp;: <input type="text" name="lien_nom" id="lien_nom'.$num_barre.'" value="http://" size="21" maxlength="255" /><a href="" onclick="javascript:barre_liens_spip('.$champ.', \'\'); return false;" title="'._T('icone_doc_rubrique').'" ><img src="../dist/images/rubrique-12.gif" style="position: relative; top: 4px; left: 2px;"></a><br />
+'._T('bartypenr:barre_adresse').'&nbsp;: <input type="text" name="lien_nom" id="lien_nom'.$num_barre.'" value="http://" size="21" maxlength="255" /><a href="" onclick="javascript:barre_liens_spip('.$champ.', \'\'); return false;" title="'._T('icone_doc_rubrique').'" ><img src="../dist/images/rubrique-12.gif" style="position: relative; top: 4px; left: 2px;" alt="Chercher un objet SPIP" /></a><br />
 '._T('bartypenr:barre_bulle').'&nbsp;: <input type="text" name="lien_bulle" id="lien_bulle'.$num_barre.'" value="" size="21" maxlength="255" />
 </td><td>
 '._T('bartypenr:barre_langue').'&nbsp;: <input type="text" name="lien_langue" id="lien_langue'.$num_barre.'" value="" size="10" maxlength="10" />
