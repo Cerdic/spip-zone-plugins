@@ -1,14 +1,25 @@
-<div class="grand_select">
-	<strong><:inscription2:newsletter:></strong>
-	<p><:inscription2:exp_newsletter:></p>
-<div id="newsletter" style="width:33%;margin:auto">
-#SET{selected,#CONFIG{inscription2/newsletters,'',''}}
- <input name="format" id="format" value="html"  type="hidden" />
+<fieldset class="info_newsletters">
+    <legend>
+        <:inscription2:newsletter:>
+    </legend>
+
+    <p><:inscription2:exp_newsletter:></p>
+
+    [(#REM) Tableau des liste en selection par défaut]
+    #SET{selected,#CONFIG{inscription2/newsletters,'',''}}
+
+    <ol class="formfx">
+    
 	<BOUCLE_listes(LISTES){statut=liste}>
-		<label>
-		<input type="checkbox" name="newsletters[]" value="#ID_LISTE" [(#ID_LISTE|in_array{#GET{selected}}|?{' ',''}) checked="checked"] />
-		#TITRE
-		</label>
-	</BOUCLE_listes>
-</div>
-</div>
+	    <li class="editer_newsletters">
+            <input type="checkbox" class="checkbox" name="newsletters[]" id="newsletters-#ID_LISTE"value="#ID_LISTE" [(#ID_LISTE|in_array{#GET{selected}}|?{' ',''}) checked="checked"] />
+            <label for="newsletters-#ID_LISTE">
+            #TITRE
+            </label>
+            [<p class='erreur'>(#ENV**{erreurs}|table_valeur{newsletters-#ID_LISTE})</p>]
+        </li>
+    </BOUCLE_listes>
+    </ol>           
+     
+    [<p class='erreur'>(#ENV**{erreurs}|table_valeur{newsletters})</p>]
+</fieldset> 
