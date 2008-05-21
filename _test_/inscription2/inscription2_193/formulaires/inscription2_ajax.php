@@ -32,4 +32,40 @@ function formulaires_inscription2_ajax_charger_dist(){
     
 	return $valeurs;
 }
+
+
+function formulaires_inscription2_ajax_verifier_dist(){
+    
+    //charger cfg
+    include_spip('cfg_options');   
+
+    //charge la fonction de controle du login et mail
+    //$test_inscription = charger_fonction('test_inscription');
+
+    $erreurs = array();
+    //message d'erreur au cas par cas
+    if (!_request('nom')) $erreurs['nom'] = 'Ce champ est obligatoire';
+    if (!_request('email')) $erreurs['email'] = 'Veuillez saisir votre email de la forme \'nom@domaine.com\'';
+    if (!_request('username')) $erreurs['username'] = 'Votre identifiant est obligatoire';
+    
+    //message d'erreur genéralisé
+    if (count($erreurs)) $erreurs['message_erreur'] = 'Veuillez remplir les champs obligatoires';
+    
+    return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
+}
+
+/*
+
+// http://doc.spip.org/@test_inscription_dist
+function test_inscription_dist($mode, $mail, $nom, $id=0) {
+
+    include_spip('inc/filtres');
+    $nom = trim(corriger_caracteres($nom));
+    if (!$nom || strlen($nom) > 64)
+        return _T('ecrire:info_login_trop_court');
+    if (!$r = email_valide($mail)) return _T('info_email_invalide');
+    return array('email' => $r, 'nom' => $nom, 'bio' => $mode);
+}
+*/
+
 ?>
