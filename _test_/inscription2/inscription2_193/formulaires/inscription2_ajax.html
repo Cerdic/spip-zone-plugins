@@ -4,11 +4,6 @@
 [(#REM) ------------------------ VALIDATION JAVASCRIPT jquery-plugin-validation ------------------------ ]
 #INCLURE{fond=formulaires/inscription2_validation.js}
 
-
-[<div>(#ENV*{message})</div>]
-
-[<div style="color:red; font-style:bold;">(#ENV*{commentaires}|=={1}|?{'',' '}) #ENV*{commentaires} </div>]
-
 <div class="formulaire formulaire_inscription2 formfx" id="formulaire_inscription2[_(#ENV{id_auteur})]">
 <a id="abonnement" name="abonnement"></a>
 
@@ -21,7 +16,7 @@
 
 
         [(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
-	        [(#INCLURE{fond=formulaires/abonnement_liste}{article=#ENV{article}}{abonnement=#ENV{abonnement}}{option=#ENV{option}})]	
+	        [(#INCLURE{fond=formulaires/abonnement_liste}{env}{article=#ENV{article}}{abonnement=#ENV{abonnement}}{option=#ENV{option}})]	
         ]
 
         [(#REM) Charge les informations minimale d'un auteur]
@@ -237,11 +232,11 @@
         ]
         
         [(#CONFIG{plugin/ECHOPPE}|?{' ', ''})
-	        <INCLURE{fond=formulaires/inscription2_echoppe_livraison}>
+	        <INCLURE{fond=formulaires/inscription2_echoppe_livraison}{env}>
         ]
 
         [(#CONFIG{inscription2/newsletter}|=={on}|?{' ', ''})
-	        [(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_listes}>]
+	        [(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_listes}{env}>]
         ]
 
         [(#CONFIG{inscription2/publication}|=={on}|?{' ', ''})
@@ -253,7 +248,7 @@
         ]
 
         [(#CONFIG{inscription2/domaines}|=={on}|?{' ', ''})
-	        #INCLURE{fond=formulaires/inscription2_form_domaines}	
+	        [(#INCLURE{fond=formulaires/inscription2_form_domaines}{env})]
         ]        
         
 	    <p class="boutons">
