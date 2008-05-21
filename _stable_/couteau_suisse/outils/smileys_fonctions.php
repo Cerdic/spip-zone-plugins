@@ -41,7 +41,7 @@ function balise_SMILEYS_dist($p) {
 			$html .= "<tr class=\"$class\">";
 		}
 		$html .= $liens
-			?"<td><a href=\"javascript:barre_inserer('{$smileys[0][$i]}',document.getElementById('textarea_1'))\">{$smileys[1][$i]}</a></td>"
+			?"<td><a href=\"javascript:barre_inserer('{$smileys[0][$i]}',document.getElementById('".(defined('_SPIP19300')?'texte':'textarea_1')."'))\">{$smileys[1][$i]}</a></td>"
 			:"<td>{$smileys[1][$i]}<br />{$smileys[0][$i]}</td>";
 		if ($i % $nb_col == $nb_col - 1)
 			$html .= "</tr>\n";
