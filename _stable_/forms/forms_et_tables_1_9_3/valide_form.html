@@ -1,6 +1,4 @@
-#CACHE{0}
-[(#HTTP_HEADER{Content-Type: image/gif})]
-<?php
+#CACHE{0}<?php
 /*
  * forms
  * version plug-in de spip_form
@@ -70,7 +68,7 @@ function valide_sondage()
 		$image = pack("H*", $image);
 		$size = strlen($image);
 
-		//Header("Content-Type: image/gif");
+		Header("Content-Type: image/gif");
 		Header("Content-Length: ".$size);
 		Header("Cache-Control: no-cache,no-store");
 		Header("Pragma: no-cache");
