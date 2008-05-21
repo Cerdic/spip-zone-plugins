@@ -3,10 +3,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 
-//  FIXME: 
-//  - verifier le groupe - spip2spip - n'a pas deja ete installe (pour eviter de recreer le groupe)
-
-
 // -------------------------------
 // Main: SPIP2SPIP-INSTALL
 // -------------------------------
@@ -29,7 +25,7 @@ function exec_spip2spip_install(){
   
   //
   // spip2spip installed ?
-  $sql = "SELECT COUNT(titre) AS c FROM ".$table_prefix."_groupes_mots WHERE titre='spip2spip'";
+  $sql = "SELECT COUNT(titre) AS c FROM ".$table_prefix."_groupes_mots WHERE titre='- spip2spip -'";
   $k = spip_fetch_array(spip_query($sql));
   if ($k['c']==1){
     debut_cadre_relief();
