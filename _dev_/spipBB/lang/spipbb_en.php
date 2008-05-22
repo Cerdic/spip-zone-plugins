@@ -297,6 +297,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maintenance' => 'Maintenance',
 	'maintenance_fermer' => 'closed the news/forum:',
 	'maintenance_pour' => 'for MAINTENANCE.',
+	'membres_en_ligne' => 'members online',
 	'membres_inscrits' => 'registered members',
 	'membres_les_plus_actifs' => 'Most active members',
 	'message' => 'Message',
