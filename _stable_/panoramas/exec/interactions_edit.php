@@ -332,75 +332,79 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= "</select><br />\n";
 	
 
-	
+	$out .= "<fieldset id='infos-cible'><legend>"._T("panoramas:informations_cible")."</legend>";
 
-	$out .= "<strong><label for='x_lieu_cible_interaction'>"._T("panoramas:x_lieu_cible")."</label></strong> ";
+	$out .= "<strong><label for='x_lieu_cible_interaction' id='x_lieu_cible_interaction_label'>"._T("panoramas:x_lieu_cible")."</label></strong> ";
 	$out .= "<input type='text' name='x_lieu_cible' id='x_lieu_cible_interaction' class='formo $focus' ".
-		"value=\"".$x_lieu_cible."\" size='5' /><br />\n";
+		"value=\"".$x_lieu_cible."\" size='5' />\n";
 
-	$out .= "<strong><label for='id_article_cible_interaction'>"._T("panoramas:id_article_cible")."</label></strong> ";
+	$out .= "<strong><label for='id_article_cible_interaction' id='id_article_cible_interaction_label'>"._T("panoramas:id_article_cible")."</label></strong> ";
 	$out .= "<input type='text' name='id_article_cible' id='id_article_cible_interaction' class='formo $focus' ".
-		"value=\"".$id_article_cible."\" size='5' /><br />\n";
+		"value=\"".$id_article_cible."\" size='5' />\n";
 
-	$out .= "<strong><label for='id_rubrique_cible_interaction'>"._T("panoramas:id_rubrique_cible")."</label></strong> ";
+	$out .= "<strong><label for='id_rubrique_cible_interaction' id='id_rubrique_cible_interaction_label'>"._T("panoramas:id_rubrique_cible")."</label></strong> ";
 	$out .= "<input type='text' name='id_rubrique_cible' id='id_rubrique_cible_interaction' class='formo $focus' ".
-		"value=\"".$id_rubrique_cible."\" size='5' /><br />\n";
+		"value=\"".$id_rubrique_cible."\" size='5' />\n";
 
-	$out .= "<strong><label for='id_jeu_cible_interaction'>"._T("panoramas:id_jeu_cible")."</label></strong> ";
+	$out .= "<strong><label for='id_jeu_cible_interaction' id='id_jeu_cible_interaction_label'>"._T("panoramas:id_jeu_cible")."</label></strong> ";
 	$out .= "<input type='text' name='id_jeu_cible' id='id_jeu_cible_interaction' class='formo $focus' ".
-		"value=\"".$id_jeu_cible."\" size='5' /><br />\n";
+		"value=\"".$id_jeu_cible."\" size='5' />\n";
 
-	$out .= "<strong><label for='id_lieu_cible_interaction'>"._T("panoramas:id_lieu_cible")."</label></strong> ";
+	$out .= "<strong><label for='id_lieu_cible_interaction' id='id_lieu_cible_interaction_label'>"._T("panoramas:id_lieu_cible")."</label></strong> ";
 	$out .= "<input type='text' name='id_lieu_cible' id='id_lieu_cible_interaction' class='formo $focus' ".
-		"value=\"".$id_lieu_cible."\" size='5' /><br />\n";
+		"value=\"".$id_lieu_cible."\" size='5' />\n";
 
-	$out .= "<strong><label for='id_document_cible_interaction'>"._T("panoramas:id_document_cible")."</label></strong> ";
+	$out .= "<strong><label for='id_document_cible_interaction' id='id_document_cible_interaction_label'>"._T("panoramas:id_document_cible")."</label></strong> ";
 	$out .= "<input type='text' name='id_document_cible' id='id_document_cible_interaction' class='formo $focus' ".
-		"value=\"".$id_document_cible."\" size='5' /><br />\n";
+		"value=\"".$id_document_cible."\" size='5' />\n";
 
-	$out .= "<strong><label for='id_visite_cible_interaction'>"._T("panoramas:id_visite_cible")."</label></strong> ";
+	$out .= "<strong><label for='id_visite_cible_interaction' id='id_visite_cible_interaction_label'>"._T("panoramas:id_visite_cible")."</label></strong> ";
 	$out .= "<input type='text' name='id_visite_cible' id='id_visite_cible_interaction' class='formo $focus' ".
-		"value=\"".$id_visite_cible."\" size='5' /><br />\n";
+		"value=\"".$id_visite_cible."\" size='5' />\n";
 
-	$out .= "<strong><label for='url_cible_interaction'>"._T("panoramas:url_cible")."</label></strong> ";
+	$out .= "<strong><label for='url_cible_interaction' id='url_cible_interaction_label'>"._T("panoramas:url_cible")."</label></strong> ";
 	$out .= "<input url_cible='text' name='url_cible' id='url_cible_interaction' class='formo $focus' ".
-		"value=\"".$url_cible."\" size='5' /><br />\n";
+		"value=\"".$url_cible."\" size='5' />\n";
 
-	$out .= "<strong><label for='id_objet_interaction'>"._T("panoramas:id_objet")."</label></strong> ";
+	$out .= "<strong><label for='id_objet_interaction' id='id_objet_interaction_label'>"._T("panoramas:id_objet")."</label></strong> ";
 	$out .= "<input type='text' name='id_objet' id='id_objet_interaction' class='formo $focus' ".
-		"value=\"".$id_objet."\" size='5' /><br />\n";
+		"value=\"".$id_objet."\" size='5' />\n";
 
-	$out .= "<strong><label for='id_personnage_interaction'>"._T("panoramas:id_personnage")."</label></strong> ";
+	$out .= "<strong><label for='id_personnage_interaction' id='id_personnage_interaction_label'>"._T("panoramas:id_personnage")."</label></strong> ";
 	$out .= "<input type='text' name='id_personnage' id='id_personnage_interaction' class='formo $focus' ".
-		"value=\"".$id_personnage."\" size='5' /><br />\n";
+		"value=\"".$id_personnage."\" size='5' />\n";
 
-	$out .= "<strong><label for='id_personnage_survol_interaction'>"._T("panoramas:id_personnage_survol")."</label></strong> ";
+	$out .= "<strong><label for='id_personnage_survol_interaction' id='id_personnage_survol_interaction_label'>"._T("panoramas:id_personnage_survol")."</label></strong> ";
 	$out .= "<input type='text' name='id_personnage_survol' id='id_personnage_survol_interaction' class='formo $focus' ".
-		"value=\"".$id_personnage_survol."\" size='5' /><br />\n";
+		"value=\"".$id_personnage_survol."\" size='5' />\n";
 
-	$out .= "<strong><label for='id_objet_activation_interaction'>"._T("panoramas:id_objet_activation")."</label></strong> ";
+	$out .= "</fieldset>";
+
+	$out .= "<fieldset id='infos-activation'><legend>"._T("panoramas:informations_activation")."</legend>";
+
+	$out .= "<strong><label for='id_objet_activation_interaction' id='id_objet_activation_interaction_label'>"._T("panoramas:id_objet_activation")."</label></strong> ";
 	$out .= "<input type='text' name='id_objet_activation' id='id_objet_activation_interaction' class='formo $focus' ".
-		"value=\"".$id_objet_activation."\" size='5' /><br />\n";
+		"value=\"".$id_objet_activation."\" size='5' />\n";
 
-	$out .= "<strong><label for='texte_avant_activation_form'>"._T('texte_avant_activation')."</label></strong>";
-	$out .= "<br />";
+	$out .= "<strong><label for='texte_avant_activation_form' id='texte_avant_activation_interaction_label'>"._T('texte_avant_activation')."</label></strong>";
 	$out .= "<textarea name='texte_avant_activation' id='texte_avant_activation_interaction' class='forml' rows='4' cols='40' wrap='soft'>";
 	$out .= $texte_avant_activation;
-	$out .= "</textarea><br />\n";
+	$out .= "</textarea>\n";
 
-	$out .= "<strong><label for='texte_apres_activation_form'>"._T('texte_apres_activation')."</label></strong>";
-	$out .= "<br />";
+	$out .= "<strong><label for='texte_apres_activation_form' id='texte_apres_activation_interaction_label'>"._T('texte_apres_activation')."</label></strong>";
 	$out .= "<textarea name='texte_apres_activation' id='texte_apres_activation_interaction' class='forml' rows='4' cols='40' wrap='soft'>";
 	$out .= $texte_apres_activation;
-	$out .= "</textarea><br />\n";
+	$out .= "</textarea>\n";
 
-	$out .= "<strong><label for='id_audio_avant_activation_interaction'>"._T("panoramas:id_audio_avant_activation")."</label></strong> ";
+	$out .= "<strong><label for='id_audio_avant_activation_interaction' id='id_audio_avant_activation_interaction_label'>"._T("panoramas:id_audio_avant_activation")."</label></strong> ";
 	$out .= "<input type='text' name='id_audio_avant_activation' id='id_audio_avant_activation_interaction' class='formo $focus' ".
-		"value=\"".$id_audio_avant_activation."\" size='5' /><br />\n";
+		"value=\"".$id_audio_avant_activation."\" size='5' />\n";
 
-	$out .= "<strong><label for='id_audio_apres_activation_interaction'>"._T("panoramas:id_audio_apres_activation")."</label></strong> ";
+	$out .= "<strong><label for='id_audio_apres_activation_interaction' id='id_audio_apres_activation_interaction_label'>"._T("panoramas:id_audio_apres_activation")."</label></strong> ";
 	$out .= "<input type='text' name='id_audio_apres_activation' id='id_audio_apres_activation_interaction' class='formo $focus' ".
-		"value=\"".$id_audio_apres_activation."\" size='5' /><br />\n";
+		"value=\"".$id_audio_apres_activation."\" size='5' />\n";
+
+	$out .= "</fieldset>";
 
 	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
@@ -414,6 +418,22 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 				$('#y1_interaction').val(selection.y1);
 				$('#y2_interaction').val(selection.y2);
 
+			}
+			function switch_infos_cible() {
+				$('#infos-cible input, #infos-cible textarea, #infos-cible label').hide();
+					switch ($('#type_interaction option:selected').val()) {
+						case 'article' : $('#id_article_cible_interaction, #id_article_cible_interaction_label').show(); break;
+						case 'lieu' : $('#id_lieu_cible_interaction, #id_lieu_cible_interaction_label, #x_lieu_cible_interaction, #x_lieu_cible_interaction_label').show(); break;
+						case 'visite' : $('#id_visite_cible_interaction, #id_visite_cible_interaction_label').show(); break;
+						case 'jeu' : $('#id_jeu_cible_interaction, #id_jeu_cible_interaction_label').show(); break;
+						case 'rubrique' : $('#id_rubrique_cible_interaction, #id_rubrique_cible_interaction_label').show(); break;
+						case 'document' : $('#id_document_cible_interaction, #id_document_cible_interaction_label').show(); break;
+						case 'url' : $('#url_cible_interaction, #url_cible_interaction_label').show(); break;
+						case 'objet' : $('#id_objet_interaction, #id_objet_interaction_label').show(); break;
+						case 'personnage' : $('#id_personnage_interaction, #id_personnage_interaction_label, #id_personnage_survol_interaction, #id_personnage_survol_interaction_label').show(); break;
+						case 'descriptif' : break;
+						default : $('#infos-cible input, #infos-cible textarea, #infos-cible label').show();
+					}
 			}
 			$(document).ready(function () { 
 				var initialx1 = parseInt($('#x1_interaction').val());
@@ -429,6 +449,13 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 						x2: initialx2, 
 						y2: initialy2
 				});
+
+				//affichage des zones à renseigner en fonction du type choisi
+				$('#type_interaction').bind('change', function () {
+					switch_infos_cible();
+					
+				});
+				switch_infos_cible();
 			}); 
 		
 		</script>";
