@@ -29,6 +29,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Page @page@: @title@',
 	'page_precedente' => 'Previous page',
 	'page_suivante' => 'Next page',
+	'plugin_xml' => 'Gathers together in one plugin many small, useful tools to improve the management of your SPIP site.
+
+Each tool can be ativated individually by the the user from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set some options, click on {{Configuration}}, then choose the {{Swiss Knife}} tab.
+
+Available categories are: Administration, Typographical improvements, Typographical shortcuts, Display on the public site, Tags, Filters, Criteria..
+
+Find your favourite tools in this plugin: {Superscript}, {Curly inverted commas}, {Beautiful bullets}, {A summary for your articles}, {Smileys}, {Delete the number}, {Fine URLs}, {SPIP and external links}, {No anonymous forums}, {Division in pages and tab}, etc., etc.
+
+See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+
+Compatibility: SPIP 1.9x (all versions)',
 
 	// S
 	'smileys_dispos' => 'Available smileys:',
