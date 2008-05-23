@@ -211,7 +211,7 @@ _ &bull; [De tout le plugin->@reset@]
 @puce@ Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : <html>&laquo;&amp;nbsp;(&hellip;)&raquo;</html>. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.
 [[%suite_introduction%]]
 @puce@ Si la balise #INTRODUCTION est utilis&eacute;e pour r&eacute;sumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite d&eacute;finis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : &laquo;Lire la suite de l\'article&hellip;&raquo;
-[[%lien_inctroduction%]]
+[[%lien_introduction%]]
 ',
 	'introduction:nom' => 'Balise #INTRODUCTION',
 
@@ -238,7 +238,7 @@ _ &bull; [De tout le plugin->@reset@]
 	'label:insertions' => 'Corrections automatiques :',
 	'label:lgr_introduction' => 'Longueur du r&eacute;sum&eacute; :',
 	'label:lgr_sommaire' => 'Largeur du sommaire (9 &agrave; 99) :',
-	'label:lien_inctroduction' => 'Points de suite cliquables :',
+	'label:lien_introduction' => 'Points de suite cliquables :',
 	'label:liens_interrogation' => 'Prot&eacute;ger les URLs :',
 	'label:liens_orphelins' => 'Liens cliquables :',
 	'label:max_auteurs_page' => 'Auteurs par page :',

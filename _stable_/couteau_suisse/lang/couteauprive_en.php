@@ -214,7 +214,7 @@ _ • [the whole plugin->@reset@]
 @puce@ By default, if the text if too long, #INTRODUCTION will end with an extra : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. You can change this to a customized string to mark that there is more text availlable.
 [[%suite_introduction%]]
 @puce@ If the #INTRODUCTION tag is used for an article, the Swiss Knife can generate a link to the article on the string marking that there is more text availlable.
-[[%lien_inctroduction%]]
+[[%lien_introduction%]]
 ',
 	'introduction:nom' => '#INTRODUCTION tag',
 
@@ -241,7 +241,7 @@ _ • [the whole plugin->@reset@]
 	'label:insertions' => 'Auto-correct:',
 	'label:lgr_introduction' => 'Length of summary:',
 	'label:lgr_sommaire' => 'Length of summary (9 to 99):',
-	'label:lien_inctroduction' => 'Clickable follow-on dots:',
+	'label:lien_introduction' => 'Clickable follow-on dots:',
 	'label:liens_interrogation' => 'Protect URLs:',
 	'label:liens_orphelins' => 'Clickable links:',
 	'label:max_auteurs_page' => 'Authors per page:',

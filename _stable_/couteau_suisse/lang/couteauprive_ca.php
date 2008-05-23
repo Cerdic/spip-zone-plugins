@@ -215,7 +215,7 @@ _ • [De tot el plugin->@reset@]
 @puce@ Per defecte, els punts de continuaci&oacute; afegits al resultat de l\'etiqueta #INTRODUCTION si el text &eacute;s massa llarg s&oacute;n: <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Aqu&iacute; podeu precisar la vostra pr&ograve;pia cadena de car&agrave;cters que indiqui al lector que el text truncat t&eacute; una continuaci&oacute;.
 [[%suite_introduction%]]
 @puce@ Si l\'etiqueta #INTRODUCTION es fa servir per resumir un article, llavors el Ganivet Su&iacute;s pot fabricar un enlla&ccedil; al damunt dels punts de continuaci&oacute; definits m&eacute;s amunt per tal de conduir al lector cap al text original. Per exemple: &laquo;Llegir la continuaci&oacute; de l\'article…&raquo;
-[[%lien_inctroduction%]]
+[[%lien_introduction%]]
 ',
 	'introduction:nom' => 'Etiqueta #INTRODUCTION',
 
@@ -242,7 +242,7 @@ _ • [De tot el plugin->@reset@]
 	'label:insertions' => 'Correccions autom&agrave;tiques:',
 	'label:lgr_introduction' => 'Llargada del resum:',
 	'label:lgr_sommaire' => 'Llargada del sumari (9 a 99):',
-	'label:lien_inctroduction' => 'Punts de continuaci&oacute; clicables:',
+	'label:lien_introduction' => 'Punts de continuaci&oacute; clicables:',
 	'label:liens_interrogation' => 'Protegir els URLs: ',
 	'label:liens_orphelins' => 'Enlla&ccedil;os clicables:',
 	'label:max_auteurs_page' => 'Autors per p&agrave;gina:',
