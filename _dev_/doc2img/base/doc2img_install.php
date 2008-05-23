@@ -113,19 +113,19 @@ function doc2img_installer($version,$version_finale) {
             $dir_doc2img = getcwd().'/'._DIR_IMG.'/doc2img';
             mkdir($dir_doc2img);
             spip_log('création repertoire '.$dir_doc2img,'doc2img');
-        //passage en 0.2, rien … faire
+        //passage en 0.2, rien à faire
         case 0.1 :
         //on attaque la 0.3
-        //initialisation d'une configuration par d‚faut
+        //initialisation d'une configuration par défaut
         case 0.2 :
-            //définition des param‚tres de base
+            //définition des paramètres de base
             $cfg = array(
                 "format_document" => "pdf,tif",
-                "repertoire_cible" => "IMG/doc2img",
+                "repertoire_cible" => "doc2img",
                 "format_cible" => "png",
                 "proportion" => "on"
             );
-        	//par d‚faut juste le champ d'id text_area est corrigeable
+        	//par défaut juste le champ d'id text_area est corrigeable
 			ecrire_meta('doc2img',serialize($cfg));
         //passage en 0.4, rien à faire
 		case 0.3 :
@@ -137,7 +137,7 @@ function doc2img_installer($version,$version_finale) {
             		    
     }
 
-    //on met … jour la version du plugin
+    //on met à jour la version du plugin
     ecrire_meta('doc2img_version', $version_finale);
     ecrire_metas();
 }
