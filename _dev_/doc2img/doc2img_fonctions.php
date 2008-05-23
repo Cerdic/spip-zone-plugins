@@ -22,5 +22,24 @@ function spip_explode($texte,$separateur){
     return explode($separateur,$texte);
 }
 
+/*! \brief explode() pour spip
+ *
+ *  Surcharge de la fonction php explode(), pour être utilisé par php
+ *  Remarque : L'appel de filtre passe toujours le texte source en premier 
+ *  (c'est le compilateur qui fait ça tout seul)=> il faut inverser les paramètres d'explode qui elle attend le texte en second d'où spip_explode
+ *  
+ * \param $texte balise fournit par le compilateur
+ * \param $separateur pattern 
+ * \return tableau decomposé par $separateur      
+ */   
+function d2c_convertir($id_document) {
+    include_spip('inc/convertir');
+    if (controler_document($id_document)) {
+        convertir_document($id_document);
+        return " ";
+    } else {
+        return "";
+    }
+}
 
 ?>
