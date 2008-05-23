@@ -24,7 +24,10 @@
             //Charge le fichier de conf spécifique au serveur
             include_spip('serveurs/'.$serveur);
             //execute la surcharge
-            return thumbsite_serveur($url);
+			if ($url)
+            	return thumbsite_serveur($url);
+			else 
+				return '';
         }
     }
 ?>
