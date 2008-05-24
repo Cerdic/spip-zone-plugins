@@ -141,8 +141,10 @@ spiplistes_log("MEL: ".$nb_etiquettes."/".$nb_courriers." JOBS. Distribution..."
 					  $sql_courrier_select
 					, "id_courrier=".sql_quote($id_courrier)
 				);
-spiplistes_log("MEL: etiquette en cours pour ID_COURRIER #$id_courrier"
-	, _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("MEL: etiquette en cours pour ID_COURRIER #$id_courrier", _SPIPLISTES_LOG_DEBUG);
+			} else {
+				// un vieux bug dans une ancienne version, eradiqué depuis (j'espère ;-)
+spiplistes_log("MEL: premiere etiquette en erreur. id_courier = 0. Supprimer cette etiquette manuellement !");
 			}
 		} else if($nb_courriers) {
 			// courriers (probablement non auto) au départ ?
