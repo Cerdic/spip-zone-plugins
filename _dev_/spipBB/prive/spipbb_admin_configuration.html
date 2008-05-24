@@ -102,7 +102,7 @@
 		<td>
 		<select name='id_mot_ferme'>
 		<BOUCLE_mot_ferme(MOTS){id_groupe=#ENV{id_groupe_mot}}{par id_mot}>
-		<option value='#ID_MOT'[ selected='(#ENV{id_mot_ferme}|=={#ID_MOT}|?{selected})']>#TITRE - #DESCRIPTIF</option>
+		<option value='#ID_MOT'[ selected='(#ENV{id_mot_ferme}|=={#ID_MOT}|?{selected})']>#TITRE[ - (#DESCRIPTIF|couper{40})]</option>
 		</BOUCLE_mot_ferme>
 		<option value="0"[ selected="(#ENV{id_mot_ferme}|=={0}|?{selected})"]>&nbsp;</option>
 		</B_mot_ferme>
@@ -116,7 +116,7 @@
 		<td>
 		<select name='id_mot_annonce'>
 		<BOUCLE_mot_annonce(MOTS){id_groupe=#ENV{id_groupe_mot}}{par id_mot}>
-		<option value='#ID_MOT'[ selected='(#ENV{id_mot_annonce}|=={#ID_MOT}|?{selected})']>#TITRE - #DESCRIPTIF</option>
+		<option value='#ID_MOT'[ selected='(#ENV{id_mot_annonce}|=={#ID_MOT}|?{selected})']>#TITRE[ - (#DESCRIPTIF|couper{40})]</option>
 		</BOUCLE_mot_annonce>
 		<option value="0"[ selected="(#ENV{id_mot_annonce}|=={0}|?{selected})"]>&nbsp;</option>
 		</B_mot_annonce>
@@ -130,7 +130,7 @@
 		<td>
 		<select name='id_mot_postit'>
 		<BOUCLE_mot_postit(MOTS){id_groupe=#ENV{id_groupe_mot}}{par id_mot}>
-		<option value='#ID_MOT'[ selected='(#ENV{id_mot_postit}|=={#ID_MOT}|?{selected})']>#TITRE - #DESCRIPTIF</option>
+		<option value='#ID_MOT'[ selected='(#ENV{id_mot_postit}|=={#ID_MOT}|?{selected})']>#TITRE[ - (#DESCRIPTIF|couper{40})]</option>
 		</BOUCLE_mot_postit>
 		<option value="0"[ selected="(#ENV{id_mot_postit}|=={0}|?{selected})"]>&nbsp;</option>
 		</B_mot_postit>
