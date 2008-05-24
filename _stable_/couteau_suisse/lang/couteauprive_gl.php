@@ -206,14 +206,14 @@ _ • [De todo o m&oacute;dulo->@reset@]
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'AVISO : ferramenta en proceso de desenvolvemento !! [[%insertions%]]',
 	'insertions:nom' => 'Correcci&oacute;ns autom&aacute;ticas',
-	'introduction:description' => 'Esta baliza para situar nos esqueletos serve en xeral para placer dans les squelettes sert en g&eacute;n&eacute;ral para actualizaci&oacute;n (&agrave; la une) ou nas secci&oacute;ns co fin de producir un resumo de artigos, de breves, etc..</p>
+	'introduction:description' => '<MODIF>Esta baliza para situar nos esqueletos serve en xeral para placer dans les squelettes sert en g&eacute;n&eacute;ral para actualizaci&oacute;n (&agrave; la une) ou nas secci&oacute;ns co fin de producir un resumo de artigos, de breves, etc..</p>
 <p>{{Aviso}} : Antes de activar esta funcionalidade, comprobe ben que ningunha funci&oacute;n {balise_INTRODUCTION()} exista xano seu esqueleto ou nos seus m&oacute;dulos, a sobrecarga producir&iacute;a un erro de compilaci&oacute;n.</p>
 @puce@ Pode precisar (en porcentaxe en relaci&oacute;n co valor usado de modo predeterminado) a largura do texto reeenviado pola baliza #INTRODUCTION. Une valeur nulo ou igual a 100 non modifica o aspecto da introduci&oacute;n e usa daquela os valores predeterminados seguintes : 500 caracteres para os artigos, 300 para as breves e 600 para os foros ou as secci&oacute;ns.
 [[%lgr_introduction%&nbsp;%]]
 @puce@ De modo predeterminado, os puntos suspensivos engadidos ao resultado da baliza #INTRODUCTION se o texto &eacute; demasiado longo son : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Pode precisar aqu&iacute; a s&uacute;a propia cadea de caracteres que indiquen ao lector que o texto truncado ten unha continuidade.
 [[%suite_introduction%]]
 @puce@ Se a baliza #INTRODUCTION se emprega para resumir un artigo, ent&oacute;n A Navalla Su&iacute;za pode fabricar unha ligaz&oacute;n sobre eses puntos suspensivos definidos a seguir co fin de levar o lector ao texto orixinal. Por exemplo : &laquo;Ler a continuidade deste artigo…&raquo;
-[[%lien_introduction%]]
+[[%lien_inctroduction%]]
 ',
 	'introduction:nom' => 'Baliza #INTRODUCTION',
 

@@ -208,14 +208,14 @@ _ • [De tot el plugin->@reset@]
 	'insert_head:nom' => 'Etiqueta #INSERT_HEAD',
 	'insertions:description' => 'ATENCI&Oacute;: eina en curs de desenvolupament!! [[%insertions%]]',
 	'insertions:nom' => 'Correccions autom&agrave;tiques',
-	'introduction:description' => 'Aquesta etiqueta situada als esquelets serveix en general a la p&agrave;gina principal o a les seccions per fer un resum dels articles, breus, etc..</p>
+	'introduction:description' => '<MODIF>Aquesta etiqueta situada als esquelets serveix en general a la p&agrave;gina principal o a les seccions per fer un resum dels articles, breus, etc..</p>
 <p>{{Atenci&oacute;}}: Abans d\'activar aquesta funcionalitat, verifiqueu b&eacute; que no existeix ja cap funci&oacute; {balise_INTRODUCTION()} al vostre esquelet o als vostres plugins. La sobrec&agrave;rrega produ&iuml;ra un error de compilaci&oacute;.</p>
 @puce@ Podeu precisar (en percentatge en relaci&oacute; al valor utilitzat per defecte) la llargada del text retornat per l\'etiqueta #INTRODUCTION. Un valor  nul o igual a 100 no modifica l\'aspecte de la introducci&oacute; i utilitza, per tant, els valors per defecte seg&uuml;ents: 500 car&agrave;cters pels articles, 300 per les breus i 600 per les seccions.
 [[%lgr_introduction%&nbsp;%]]
 @puce@ Per defecte, els punts de continuaci&oacute; afegits al resultat de l\'etiqueta #INTRODUCTION si el text &eacute;s massa llarg s&oacute;n: <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Aqu&iacute; podeu precisar la vostra pr&ograve;pia cadena de car&agrave;cters que indiqui al lector que el text truncat t&eacute; una continuaci&oacute;.
 [[%suite_introduction%]]
 @puce@ Si l\'etiqueta #INTRODUCTION es fa servir per resumir un article, llavors el Ganivet Su&iacute;s pot fabricar un enlla&ccedil; al damunt dels punts de continuaci&oacute; definits m&eacute;s amunt per tal de conduir al lector cap al text original. Per exemple: &laquo;Llegir la continuaci&oacute; de l\'article…&raquo;
-[[%lien_introduction%]]
+[[%lien_inctroduction%]]
 ',
 	'introduction:nom' => 'Etiqueta #INTRODUCTION',
 
