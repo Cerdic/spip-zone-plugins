@@ -29,6 +29,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Bladzijde @page@: @title@',
 	'page_precedente' => 'Vorige bladzijde',
 	'page_suivante' => 'Volgende bladzijde',
+	'plugin_xml' => 'In slechts &eacute;&eacute;n plugin verenigt een lijst van kleine nieuwe en nuttige functies die het beleid verbeteren, van uw site SPIP.
+
+Elk van deze werktuigen kan of niet door de gebruiker op geactiveerd worden [de bladzijde van bestuur van plugin->./?exec=admin_couteau_suisse] en een aantal variabele beheren: op {{Configuratie}} klikken, vervolgens de tab kiezen {{Le Couteau Suisse}}.
+
+De beschikbare categorie&euml;n zijn: Bestuur, typografische Verbeteringen, typografische Kortere wegen, openbare Display, Bakens, filters, criteria.
+
+Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typografische Aanhalingstekens}, {Mooi chips}, {schaft een overzicht voor uw artikelen}, {Smileys}, {het nummer}, {Mooi URLs}, {SPIP en de band af… externe}, {Niet van onbekende forums}, {D&eacute;coupe in bladzijdes en tabben}, etc., etc.
+
+Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+
+De verenigbaarheid: SPIP iedereen betaalden 1.9x',
 
 	// S
 	'smileys_dispos' => 'Beschikbare smylies :',
