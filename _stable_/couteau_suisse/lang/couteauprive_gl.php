@@ -213,7 +213,7 @@ _ • [De todo o m&oacute;dulo->@reset@]
 @puce@ De modo predeterminado, os puntos suspensivos engadidos ao resultado da baliza #INTRODUCTION se o texto &eacute; demasiado longo son : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Pode precisar aqu&iacute; a s&uacute;a propia cadea de caracteres que indiquen ao lector que o texto truncado ten unha continuidade.
 [[%suite_introduction%]]
 @puce@ Se a baliza #INTRODUCTION se emprega para resumir un artigo, ent&oacute;n A Navalla Su&iacute;za pode fabricar unha ligaz&oacute;n sobre eses puntos suspensivos definidos a seguir co fin de levar o lector ao texto orixinal. Por exemplo : &laquo;Ler a continuidade deste artigo…&raquo;
-[[%lien_inctroduction%]]
+[[%lien_introduction%]]
 ',
 	'introduction:nom' => 'Baliza #INTRODUCTION',
 
