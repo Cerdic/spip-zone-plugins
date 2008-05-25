@@ -20,7 +20,10 @@ function afficher_boutonsavances($champ, $champhelp) {
   </tr> 
 </table>
 ';
-	return produceWharf('tableau_boutonsavances','',$tableau_formulaire); 	
+	if (lire_config('bte/defaultbarrestyle','close') == "open")
+		return str_replace( "style='display: none;'>", " style='display: block;'>", produceWharf('tableau_boutonsavances','',$tableau_formulaire));
+	else
+		return produceWharf('tableau_boutonsavances','',$tableau_formulaire);
 }
 
 function TypoEnluminee_BT_toolbox($params) {

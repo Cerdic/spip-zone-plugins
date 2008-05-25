@@ -59,6 +59,10 @@
 		<option value="Non"[ selected="(#ENV{insertcss,Oui}|=={Non}|?{selected})"]>Ne pas faire l'insertion automatique</option>
 	</select>
 </fieldset>
+<fieldset><legend>Par défault, la barre est</legend>
+	<input type="radio" name="defaultbarrestyle" value="open" [checked="(#ENV{defaultbarrestyle,open}|=={open}|?{checked})"]/>ouverte,
+	<input type="radio" name="defaultbarrestyle" value="close" [checked="(#ENV{defaultbarrestyle,close}|=={close}|?{checked})"]/>fermée
+</fieldset>
 <!--<fieldset><legend><:enlumtypo:cfg_mode_titraille:></legend>
 	<label for="sc_mode_titraille">Raccourcis typographiques de titraille par numéro ou par nombre d'étoiles&nbsp;:</label>
 	<select name="mode_titraille" id="sc_mode_titraille" class="forml">
