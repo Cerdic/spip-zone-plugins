@@ -5,6 +5,7 @@
     <!-- Auteur du plugin -->
     <auteur>crowf00t</auteur>
     <version>0.1</version>
+    <version_base>0.3</version_base>
     <etat>dev</etat>
     <icon></icon>
     <description>Petit plugin qui permet de lier un article &agrave; un ou plusieurs autre(s)</description>
