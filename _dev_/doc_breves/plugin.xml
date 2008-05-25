@@ -1,0 +1,11 @@
+<plugin>
+	<nom>Documents in Br&egrave;ves</nom>
+	<auteur>mmmx</auteur>
+	<version>0.01</version>
+	<etat>dev</etat>
+	<description>Afficher documents dans les Br&egrave;ves</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>docbr</prefix>
+	<fonctions>docb_functions.php</fonctions>
+	<install>base/docbr_upgrade.php</install>
+</plugin>
