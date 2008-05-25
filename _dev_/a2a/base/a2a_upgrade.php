@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function a2a_install($action){
 	
-	$version_locale = 0.2;
+	$version_locale = 0.3;
 	
 	switch ($action){
 		case 'test':
@@ -15,6 +15,10 @@ function a2a_install($action){
 			if ($version_locale > $version_installee){
 				if (version_compare($version_installee,"0.2","<")){
 					spip_query("ALTER TABLE `spip_articles_lies`  ADD `rang` BIGINT( 21 ) NOT NULL");
+					ecrire_meta('version_a2a',$version_installee="0.2");
+				}
+				if (version_compare($version_installee,"0.3","<")){
+					spip_query("ALTER TABLE `spip_articles_lies`  CHANGE `rang` `rang` bigint(21) NOT NULL DEFAULT '0'");
 					ecrire_meta('version_a2a',$version_installee="0.2");
 				}
 				return false;
