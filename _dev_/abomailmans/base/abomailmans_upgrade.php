@@ -7,7 +7,7 @@
  * $Id$
 */
 	
-	$GLOBALS['abomailmans_base_version'] = 0.10;
+	$GLOBALS['abomailmans_base_version'] = 0.20;
 	function abomailmans_upgrade(){
 		$version_base = $GLOBALS['abomailmans_base_version'];
 		$current_version = 0.0;
