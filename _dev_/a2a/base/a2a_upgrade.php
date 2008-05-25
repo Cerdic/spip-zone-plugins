@@ -19,7 +19,7 @@ function a2a_install($action){
 				}
 				if (version_compare($version_installee,"0.3","<")){
 					spip_query("ALTER TABLE `spip_articles_lies`  CHANGE `rang` `rang` bigint(21) NOT NULL DEFAULT '0'");
-					ecrire_meta('version_a2a',$version_installee="0.2");
+					ecrire_meta('version_a2a',$version_installee="0.3");
 				}
 				return false;
 			}else{
