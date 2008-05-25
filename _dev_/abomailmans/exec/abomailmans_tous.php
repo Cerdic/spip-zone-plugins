@@ -5,6 +5,7 @@
  * MaZiaR - NetAktiv
  * tech@netaktiv.com
  * Printemps 2007
+ * $Id$
 */
 
 

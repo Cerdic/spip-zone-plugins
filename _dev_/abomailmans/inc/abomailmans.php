@@ -6,6 +6,7 @@
  * tech@netaktiv.com
  * Printemps 2007
  * Inspire de Spip-Listes
+ * $Id$
 */
 
 
@@ -155,31 +156,32 @@
 
 // Afficher l'arbo
 function  abomailman_arbo_rubriques($id_rubrique,  $rslt_id_rubrique="") {
-	global $ran;
-	$ran ++;
-	
-	$marge="&nbsp;&nbsp;&nbsp;|";
-	for ($g=0;$g<$ran;$g++) {
-		if (($ran-1)==0) {
-			$marge="&bull;";
-		}
-		else {
-			$marge .="-"; 
-		}
-	}
-	$marge .="&nbsp;";
+    global $ran;
+    $ran ++;
+    
+    $marge="&nbsp;&nbsp;&nbsp;|";
+    for ($g=0;$g<$ran;$g++) {
+        if (($ran-1)==0) {
+            $marge="&bull;";
+        }
+        else {
+            $marge .="---";
+        }
+    }
+    $marge .="&nbsp;";
 
-	$rqt_rubriques = spip_query ("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE id_parent='".$id_rubrique."'");
-	while ($row = spip_fetch_array($rqt_rubriques)) {
-		$id_rubrique = $row['id_rubrique'];
-		$id_parent = $row['id_parent'];
-		$titre = $row['titre'];
-		$arbo .="<option value='".$id_rubrique."'>" . $marge  . supprimer_numero (typo($titre)) . "</option>";
-		$arbo .= abomailman_arbo_rubriques($id_rubrique,   $rslt_id_parent);
-	}
-	
-	return $arbo;
-	
+    $rqt_rubriques = spip_query ("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE id_parent='".$id_rubrique."'");
+    while ($row = spip_fetch_array($rqt_rubriques)) {
+        $id_rubrique = $row['id_rubrique'];
+        $id_parent = $row['id_parent'];
+        $titre = $row['titre'];
+        $arbo .="<option value='".$id_rubrique."'>" . $marge  . supprimer_numero (typo($titre)) . "</option>";
+        $arbo .= abomailman_arbo_rubriques($id_rubrique,   $rslt_id_parent);
+    }
+    
+    $ran --;
+    return $arbo;
+    
 }
 
 ?>

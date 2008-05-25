@@ -6,6 +6,7 @@
  * tech@netaktiv.com
  * Printemps 2007
  * Inspire de Spip-Listes
+ * $Id$
 */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -87,6 +88,8 @@ function exec_abomailmans_affiche_template(){
 		echo "<input type=\"hidden\" name=\"sujet\" value=\"".$sujet."\">";
 		echo "<input type=\"hidden\" name=\"message\" value=\"".$message."\">";
 		echo "<input type=\"hidden\" name=\"date\" value=\"".$date."\">";
+		echo "<input type=\"hidden\" name=\"id_rubrique\" value=\"".$id_rubrique."\">";
+		echo "<input type=\"hidden\" name=\"id_mot\" value=\"".$id_mot."\">";
 
 		echo liens_absolus($texte_template).$message_erreur."";
 		echo "<br/><br/>";

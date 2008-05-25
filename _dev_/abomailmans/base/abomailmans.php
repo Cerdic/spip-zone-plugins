@@ -4,6 +4,7 @@
  * MaZiaR - NetAktiv
  * tech@netaktiv.com
  * Printemps 2007
+ * $Id$
 */
 
 $spip_abomailmans = array(
@@ -11,7 +12,8 @@ $spip_abomailmans = array(
 	"titre" 		=> "varchar(255) NOT NULL",
 	"descriptif" 	=> "text",
 	"email"			=> "varchar(255)",
-	"maj" 			=> "TIMESTAMP");
+	"maj" 			=> "TIMESTAMP",
+	"email_sympa"   => "varchar(255)");
 
 $spip_abomailmans_key = array(
 	"PRIMARY KEY" => "id_abomailman");

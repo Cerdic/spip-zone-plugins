@@ -1,4 +1,5 @@
 // JavaScript Document
+// $Id$
 
 $(document).ready(init);
 function init()

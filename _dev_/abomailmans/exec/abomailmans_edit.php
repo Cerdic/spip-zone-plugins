@@ -5,6 +5,7 @@
  * MaZiaR - NetAktiv
  * tech@netaktiv.com
  * Printemps 2007
+ * $Id$
 */
 
 
@@ -22,6 +23,7 @@ function abomailmans_update(){
 	$email = _request('email');
 	$supp_confirme = _request('supp_confirme');
 	$supp_rejet = _request('supp_rejet');
+	$email_sympa = _request('email_sympa');
 
 	//
 	// Modifications des donnees de base du formulaire
@@ -42,18 +44,20 @@ function abomailmans_update(){
 		// creation
 		if ($new == 'oui' && $titre) {
 			$id_abomailman = spip_abstract_insert(
-			"spip_abomailmans","(titre,descriptif,email)",
+			"spip_abomailmans","(titre,descriptif,email,email_sympa)",
 			"(".
 				spip_abstract_quote($titre).", ".
 				spip_abstract_quote($descriptif).", ".
-				spip_abstract_quote($email).")");
+				spip_abstract_quote($email).", ".
+				spip_abstract_quote($email_sympa).")");
 		}
 		// maj
 		else if ($id_abomailman && $titre) {
 			spip_query("UPDATE spip_abomailmans SET ".
 				"titre=".spip_abstract_quote($titre).", ".
 				"descriptif=".spip_abstract_quote($descriptif).", ".
-				"email=".spip_abstract_quote($email).
+				"email=".spip_abstract_quote($email).", ".
+				"email_sympa=".spip_abstract_quote($email_sympa)." ".
 				"WHERE id_abomailman=$id_abomailman");
 		}
 		// lecture
@@ -63,6 +67,7 @@ function abomailmans_update(){
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
 			$email = $row['email'];
+			$email_sympa = $row['email_sympa'];
 		}
 	}	
 	
@@ -80,6 +85,7 @@ function exec_abomailmans_edit(){
 	$email = _request('email');
 	$supp_confirme = _request('supp_confirme');
 	$supp_rejet = _request('supp_rejet');
+	$email_sympa = _request('email_sympa');
 
 	
   _abomailmans_install();
@@ -105,6 +111,7 @@ function exec_abomailmans_edit(){
 		$descriptif = "";
 		$email = "";
 		$js_titre = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+        $email_sympa = "";
 	}
 	else {
 		//
@@ -118,6 +125,7 @@ function exec_abomailmans_edit(){
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
 			$email = $row['email'];
+			$email_sympa = $row['email_sympa'];
 
 		}
 		$js_titre = "";
@@ -170,6 +178,12 @@ function exec_abomailmans_edit(){
 			echo propre($email);
 			echo "</div>\n";
 		}
+	    if ($email_sympa) {
+            echo "<p /><div align='left' border: 1px dashed #aaaaaa;'>";
+            echo "<strong class='verdana2'>"._T('abomailmans:emailliste_abosympa')."</strong> ";
+            echo propre($email_sympa);
+            echo "</div>\n";
+        }
 
 		
 
@@ -226,6 +240,11 @@ function exec_abomailmans_edit(){
 		echo "<br />";
 		echo "<input type='text' name='email' id='email_abomailman' CLASS='formo' ".
 			 "value=\"".$email."\" size='40' /><br />\n";
+			 
+        echo "<strong><label for='email_abosympa'>"._T("abomailmans:emailliste_abosympa")."</label></strong> "._T("abomailmans:info_sisympa");
+        echo "<br />";
+        echo "<input type='text' name='email_sympa' id='email_abosympa' CLASS='formo' ".
+             "value=\"".$email_sympa."\" size='40' /><br />\n";
  	
 		echo "<div align='right'>";
 		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";

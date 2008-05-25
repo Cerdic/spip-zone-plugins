@@ -4,6 +4,7 @@
  * MaZiaR - NetAktiv
  * tech@netaktiv.com
  * Printemps 2007
+ * $Id$
 */
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 

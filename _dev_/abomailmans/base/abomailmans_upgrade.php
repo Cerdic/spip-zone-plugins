@@ -4,6 +4,7 @@
  * MaZiaR - NetAktiv
  * tech@netaktiv.com
  * Printemps 2007
+ * $Id$
 */
 	
 	$GLOBALS['abomailmans_base_version'] = 0.10;

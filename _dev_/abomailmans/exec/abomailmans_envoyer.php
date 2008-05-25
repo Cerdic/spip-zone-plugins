@@ -6,6 +6,7 @@
  * tech@netaktiv.com
  * Printemps 2007
  * Inspire de Spip-Listes
+ * $Id$
 */
 
 

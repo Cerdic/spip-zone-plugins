@@ -1,6 +1,7 @@
 <?php
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// $Id$
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 		'abomailmans' 					=> 'Mailmans',
@@ -13,12 +14,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		'emailliste_abomailman'			=> 'L\'adresse e-mail de la liste',
 		'supprimer'						=> 'Supprimer',
 
-		'nom'							=> 'Nom',
+		'nom'							=> 'Nom et pr&eacute;nom (facultatif)',
 		'prenom'						=> 'Pr&eacute;nom',
 		'email_abonnement'				=> 'Votre adresse e-mail',
-		'je_m_abonne'					=> 'Je m\'abonne &agrave; cette liste : ',
+		'je_m_abonne'					=> 'Cochez pour valider l\'abonnement ou le d&eacute;sabonnement.',
 
-		'message_confirmation'			=> 'Une demande de confirmation de votre abonnement vient d\'&ecirc;tre envoy&eacute;e par cette liste  : ',
+		'message_confirmation_a'      	=> 'Une demande d\'abonnement aux listes suivantes vient d\'&ecirc;tre envoy&eacute;e :',
+        'message_confirmation_d'        => 'Une demande de d&eacute;sabonnement aux listes suivantes vient d\'&ecirc;tre envoy&eacute;e. Il faudra r&eacute;pondre aux mails que vous allez recevoir pour valider ces demandes : ',
+        'message_confirm_suite'         => 'Pour valider votre demande, r&eacute;pondez &agrave; la demande de confirmation que vous allez recevoir par mail.',
+		
 		'email_oublie'					=> 'Vous avez oubli&eacute; votre adresse e-mail',
 
 		'template'						=> 'Choisissez le mod&egrave;le et son contnu',
@@ -28,7 +32,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		'message'						=> 'Introduction &agrave; votre courrier, avant le contenu issu du site',
 		'envoi_apercu'					=> 'Aper&ccedil;u',
 		'envoi_confirmer'				=> 'Confirmer et envoyer',
-		'envoyer_mailmans'				=> 'S&eacute;l&eacute;ctionner le mod&egrave;le et son contenu'
+		'envoyer_mailmans'				=> 'S&eacute;l&eacute;ctionner le mod&egrave;le et son contenu',
+		
+		'emailliste_abosympa'           => 'L\'adresse e-mail de l\'administrateur Sympa',
+		'info_sisympa'                  => '[Obligatoire si liste Sympa]',
+		'btn_abonnement'                => 'S\'abonner',
+		'btn_desabonnement'             => 'Se d&eacute;sabon.',
+		'liste_oublie'                  => 'Vous avez oubli&eacute; de cocher une liste !'
 );
 
 

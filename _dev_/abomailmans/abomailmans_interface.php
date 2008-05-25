@@ -4,6 +4,7 @@
  * MaZiaR - NetAktiv
  * tech@netaktiv.com
  * Printemps 2007
+ * $Id$
 */
 
 function abomailmans_ajouter_boutons($boutons_admin) {
