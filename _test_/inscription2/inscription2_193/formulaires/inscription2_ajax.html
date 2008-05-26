@@ -1,11 +1,6 @@
 #CACHE{0}
 
-
-[(#REM) ------------------------ VALIDATION JAVASCRIPT jquery-plugin-validation ------------------------ ]
-#INCLURE{fond=formulaires/inscription2_validation.js}
-
 <div class="formulaire formulaire_inscription2 formfx" id="formulaire_inscription2[_(#ENV{id_auteur})]">
-<a id="abonnement" name="abonnement"></a>
 
 [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 
@@ -13,7 +8,6 @@
 [(#ENV*{editable}|?{' '})
     <form action='#SELF' method='post'>
 		#ACTION_FORMULAIRE{#SELF}
-
 
         [(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
 	        [(#INCLURE{fond=formulaires/abonnement_liste}{env}{article=#ENV{article}}{abonnement=#ENV{abonnement}}{option=#ENV{option}})]	
@@ -33,11 +27,11 @@
 	                [<p class='erreur'>(#ENV**{erreurs}|table_valeur{nom})</p>]
                 </li>]
                 
-                [(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
-                <li class="editer_username[ (#CONFIG{inscription2/username_obligatoire}|=={on}|?{obligatoire})]">
-	                <label for="username"><:inscription2:username:></label>
-	                <input type="text" class="text" name="username" id="username" value="#ENV{login}" />
-	                [<p class='erreur'>(#ENV**{erreurs}|table_valeur{username})</p>]
+                [(#CONFIG{inscription2/login}|=={on}|?{' ', ''})	
+                <li class="editer_username[ (#CONFIG{inscription2/login_obligatoire}|=={on}|?{obligatoire})]">
+	                <label for="login"><:inscription2:login:></label>
+	                <input type="text" class="text" name="login" id="login" value="#ENV{login}" />
+	                [<p class='erreur'>(#ENV**{erreurs}|table_valeur{login})</p>]
                 </li>]
 
                 [(#CONFIG{inscription2/email}|=={on}|?{' ', ''})	
