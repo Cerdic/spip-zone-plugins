@@ -62,26 +62,26 @@
 </td>
 </tr><tr>
 <td>
-	<strong><:inscription2:username:></strong>
+	<strong><:inscription2:login:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="username" [checked="(#CONFIG{inscription2/username}?{checked})"] onclick="showoblig(this)" id="username" />
+		<input type="checkbox" name="login" [checked="(#CONFIG{inscription2/login}?{checked})"] onclick="showoblig(this)" id="login" />
 	</label>
-	<label style="[(#CONFIG{inscription2/username}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="username_obligatoire" [checked="(#CONFIG{inscription2/username_obligatoire}?{checked})"] id="username_obligatoire" />
+	<label style="[(#CONFIG{inscription2/login}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="login_obligatoire" [checked="(#CONFIG{inscription2/login_obligatoire}?{checked})"] id="login_obligatoire" />
 		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="username_fiche_mod" onclick = "enadis(this,username_fiche)" [checked="(#CONFIG{inscription2/username_fiche_mod}?{checked})"] id="username_fiche_mod" />
+		<input type="checkbox" name="login_fiche_mod" onclick = "enadis(this,login_fiche)" [checked="(#CONFIG{inscription2/login_fiche_mod}?{checked})"] id="login_fiche_mod" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="username_fiche" [checked="(#CONFIG{inscription2/username_fiche}?{checked})"] id="username_fiche" [disabled ="(#CONFIG{inscription2/username_fiche_mod}?{disabled})"] />
+		<input type="checkbox" name="login_fiche" [checked="(#CONFIG{inscription2/login_fiche}?{checked})"] id="login_fiche" [disabled ="(#CONFIG{inscription2/login_fiche_mod}?{disabled})"] />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="username_table" [checked="(#CONFIG{inscription2/username_table}?{checked})"] id="username_table" />
+		<input type="checkbox" name="login_table" [checked="(#CONFIG{inscription2/login_table}?{checked})"] id="login_table" />
 	</label>
 </td>
 </tr><tr>	
