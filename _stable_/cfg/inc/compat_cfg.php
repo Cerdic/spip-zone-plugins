@@ -42,6 +42,8 @@ function inc_compat_cfg_dist($quoi = NULL) {
 	if (!function_exists($f = 'compat_cfg_defs')) $f .= '_dist';
 	$defs = $f();
 
+	include_spip('base/abstract_sql');
+	
 	if (is_string($quoi))
 		$quoi = array($quoi);
 	else if (is_null($quoi))
@@ -67,13 +69,13 @@ function compat_cfg_defs_dist() {
 		
 		'sql_query' => 
 			'($res, $serveur=\'\') {
-				return spip_query_db($res);
+				return spip_query($res);
 			}',	
 		
 		// n'existe pas en 1.9.2
 		'sql_alter' => 
 			'($res, $serveur=\'\') {
-				return spip_query_db(\'ALTER \' . $res);
+				return spip_query(\'ALTER \' . $res);
 			}',	
 				
 		// n'existe pas en 1.9.2
@@ -86,7 +88,7 @@ function compat_cfg_defs_dist() {
 						. implode(\',\', $table)
 						. \' WHERE \'
 						. implode(\' AND \', $where);
-				return spip_query_db($query);
+				return spip_query($query);
 			}',
 			
 		// sql_quote : _q directement
@@ -195,7 +197,7 @@ function compat_cfg_defs_dist() {
 							. \' SET \' . $r
 							. (empty($where) ? \'\' :\' WHERE \' . implode(\' AND \', $where));
 				if ($query)
-					return spip_query_db($query);
+					return spip_query($query);
 			}',
 
 		'sql_updateq' => 
@@ -263,7 +265,7 @@ function compat_cfg_defs_dist() {
 				$having = array(),
 				$serveur=\'\'
  			) {
-				return(sql_select(\'COUNT(*)\', $from, $where, $groupby, \'\', $limit, $having, $serveur));
+				return(sql_getfetsel(\'COUNT(*)\', $from, $where, $groupby, \'\', $limit, $having, $serveur));
  			}',
  					
 		'sql_selectdb' => 
