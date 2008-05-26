@@ -19,12 +19,16 @@ function formulaires_inscription2_ajax_charger_dist(){
     $id_auteur = intval($GLOBALS['auteur_session']['id_auteur']);
     
     //si on a bien un auteur alors on préremplit le formulaire avec ses informations
+    //les nom des champs sont les memes que ceux de la base de données
     if ($id_auteur) {
         $auteur = sql_fetsel(
             '*',
             'spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)',
             'id_auteur ='.$id_auteur            
         );
+
+
+        //spip_log($auteur,'inscription2');
 
 	    $valeurs = $auteur;
     }
@@ -42,12 +46,24 @@ function formulaires_inscription2_ajax_verifier_dist(){
     //charge la fonction de controle du login et mail
     //$test_inscription = charger_fonction('test_inscription');
 
+    //initialise le tableau des erreurs
     $erreurs = array();
     //message d'erreur au cas par cas
-    if (!_request('nom')) $erreurs['nom'] = 'Ce champ est obligatoire';
-    if (!_request('email')) $erreurs['email'] = 'Veuillez saisir votre email de la forme \'nom@domaine.com\'';
-    if (!_request('username')) $erreurs['username'] = 'Votre identifiant est obligatoire';
+
+    //vérifier les champs obligatoire
+    foreach (lire_config('inscription2/') as $clef => $valeur) {
+        //decoupe la clef sous le forme $resultat[0] = $resultat[1] ."_obligatoire"
+        preg_match('/(.*)_obligatoire/i',$clef,$resultat);
+        //si clef obligatoire, obligatoire activé et _request vide alors erreur
+        //peut etre rajouté dans le test  l'existence de '$resultat
+        if ($valeur == 'on' && !_request($resultat[1])) {
+            $erreurs[$resultat[1]] = 'Ce champ est obligatoire';    
+        }
     
+    }
+    
+    //vérifier certains champs spécifiquement
+   
     //message d'erreur genéralisé
     if (count($erreurs)) $erreurs['message_erreur'] = 'Veuillez remplir les champs obligatoires';
     
