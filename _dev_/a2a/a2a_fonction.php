@@ -2,8 +2,8 @@
 
 function lister_articles_lies($id_article){
 	$liste = '';
-	$result = spip_query("SELECT id_article_lie FROM spip_articles_lies WHERE id_article=$id_article");
-	while($row = spip_fetch_array($result)) {
+	$result = sql_select('id_article_lie','spip_articles_lies','id_article=' . sql_quote($id_article));
+	while($row = sql_fetch($result)) {
 		$liste[] = $row['id_article_lie'];	
 	}
 	return $liste;

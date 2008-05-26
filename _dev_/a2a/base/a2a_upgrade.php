@@ -14,11 +14,11 @@ function a2a_install($action){
 			if ($version_installee){
 			if ($version_locale > $version_installee){
 				if (version_compare($version_installee,"0.2","<")){
-					spip_query("ALTER TABLE `spip_articles_lies`  ADD `rang` BIGINT( 21 ) NOT NULL");
+					sql_alter("TABLE spip_articles_lies  ADD rang BIGINT( 21 ) NOT NULL");
 					ecrire_meta('version_a2a',$version_installee="0.2");
 				}
 				if (version_compare($version_installee,"0.3","<")){
-					spip_query("ALTER TABLE `spip_articles_lies`  CHANGE `rang` `rang` bigint(21) NOT NULL DEFAULT '0'");
+					sql_alter("TABLE spip_articles_lies CHANGE rang rang bigint(21) NOT NULL DEFAULT '0'");
 					ecrire_meta('version_a2a',$version_installee="0.3");
 				}
 				return false;

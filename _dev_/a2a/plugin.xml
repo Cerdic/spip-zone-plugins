@@ -4,7 +4,7 @@
 
     <!-- Auteur du plugin -->
     <auteur>crowf00t</auteur>
-    <version>0.1</version>
+    <version>0.2</version>
     <version_base>0.3</version_base>
     <etat>dev</etat>
     <icon></icon>
@@ -23,6 +23,9 @@
     <!-- Chemin du fichier d'installation et de mise à jour -->
     <install>base/a2a_upgrade.php</install>
 
+	<!-- Dependances : CFG afin d'avoir les fonctions sql_* en 1.9.2 -->
+	<necessite id="cfg" version="[1.7.5;]" />
+	
     <!--pipeline, surcharge de fonction à des moments précis de la génération d'une page spip -->
 	<pipeline> 
 			<nom>affiche_milieu</nom> 
