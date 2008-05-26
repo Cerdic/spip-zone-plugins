@@ -56,7 +56,7 @@ function formulaires_inscription2_ajax_verifier_dist(){
         preg_match('/(.*)_obligatoire/i',$clef,$resultat);
         //si clef obligatoire, obligatoire activé et _request vide alors erreur
         //peut etre rajouté dans le test  l'existence de '$resultat
-        if ($valeur == 'on' && !_request($resultat[1])) {
+        if ($resultat[1] && $valeur == 'on' && !_request($resultat[1])) {
             $erreurs[$resultat[1]] = 'Ce champ est obligatoire';    
         }
     
