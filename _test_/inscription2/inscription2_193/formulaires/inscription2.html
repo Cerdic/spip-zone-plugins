@@ -30,10 +30,10 @@
 	<br class="nettoyeur" />
 </div>
 ]
-[(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
-<div[ (#CONFIG{inscription2/username_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="username"><:inscription2:username:></label>
-	<input type="text" class="forml" name="username" id="username" value="#ENV{login}" />
+[(#CONFIG{inscription2/login}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/login_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="username"><:inscription2:login:></label>
+	<input type="text" class="forml" name="login" id="login" value="#ENV{login}" />
 	<br class="nettoyeur" />
 </div>
 ]
