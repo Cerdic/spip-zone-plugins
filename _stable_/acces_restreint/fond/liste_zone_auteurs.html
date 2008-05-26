@@ -6,9 +6,9 @@
 	<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>
 		<BOUCLE_zones(ZONES){id_auteur ?}{id_rubrique ?}{pagination 15}>
 		<tr class="tr_liste">
-		<td style="width: 25px;" class="arial11"><a href="[(#VAL{acces_restreint_edit}|generer_url_ecrire|parametre_url{id_zone}|parametre_url{retour,[(#SELF|url_absolue)]})]"><img src="#CHEMIN{img_pack/restreint-16.png}" alt="" border="0" height="16" width="16"></a>
+		<td style="width: 25px;" class="arial11"><a href="[(#EVAL{acces_restreint_edit}|generer_url_ecrire|parametre_url{id_zone,#ID_ZONE}|parametre_url{retour,[(#SELF|url_absolue)]})]"><img src="#CHEMIN{img_pack/restreint-16.png}" alt="" border="0" height="16" width="16"></a>
 		</td>
-		<td class="arial2"><a href="[(#VAL{acces_restreint_edit}|generer_url_ecrire|parametre_url{id_zone}|parametre_url{retour,[(#SELF|url_absolue)]})]">#TITRE</a>
+		<td class="arial2"><a href="[(#EVAL{acces_restreint_edit}|generer_url_ecrire|parametre_url{id_zone,#ID_ZONE}|parametre_url{retour,[(#SELF|url_absolue)]})]">#TITRE</a>
 		</td>
 		<td class="arial2">&nbsp;
 		[(#GET{editable}|=={true}|?{' '})
