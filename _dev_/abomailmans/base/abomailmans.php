@@ -13,7 +13,9 @@ $spip_abomailmans = array(
 	"descriptif" 	=> "text",
 	"email"			=> "varchar(255)",
 	"maj" 			=> "TIMESTAMP",
-	"email_sympa"   => "varchar(255)");
+	"email_sympa"   => "varchar(255)",
+	"desactive"     => "tinyint(4) NOT NULL default '0'"
+	);
 
 $spip_abomailmans_key = array(
 	"PRIMARY KEY" => "id_abomailman");

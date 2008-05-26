@@ -24,6 +24,7 @@ function abomailmans_update(){
 	$supp_confirme = _request('supp_confirme');
 	$supp_rejet = _request('supp_rejet');
 	$email_sympa = _request('email_sympa');
+	$desactive = _request('abomailmans_desactive');
 
 	//
 	// Modifications des donnees de base du formulaire
@@ -44,12 +45,14 @@ function abomailmans_update(){
 		// creation
 		if ($new == 'oui' && $titre) {
 			$id_abomailman = spip_abstract_insert(
-			"spip_abomailmans","(titre,descriptif,email,email_sympa)",
+			"spip_abomailmans","(titre,descriptif,email,email_sympa,desactive)",
 			"(".
 				spip_abstract_quote($titre).", ".
 				spip_abstract_quote($descriptif).", ".
 				spip_abstract_quote($email).", ".
-				spip_abstract_quote($email_sympa).")");
+				spip_abstract_quote($email_sympa).", ".
+				spip_abstract_quote($desactive).")"
+				);
 		}
 		// maj
 		else if ($id_abomailman && $titre) {
@@ -57,7 +60,8 @@ function abomailmans_update(){
 				"titre=".spip_abstract_quote($titre).", ".
 				"descriptif=".spip_abstract_quote($descriptif).", ".
 				"email=".spip_abstract_quote($email).", ".
-				"email_sympa=".spip_abstract_quote($email_sympa)." ".
+				"email_sympa=".spip_abstract_quote($email_sympa).", ".
+				"desactive=".spip_abstract_quote($desactive)." ".
 				"WHERE id_abomailman=$id_abomailman");
 		}
 		// lecture
@@ -68,6 +72,7 @@ function abomailmans_update(){
 			$descriptif = $row['descriptif'];
 			$email = $row['email'];
 			$email_sympa = $row['email_sympa'];
+			$desactive = $row['desactive'];
 		}
 	}	
 	
@@ -86,7 +91,7 @@ function exec_abomailmans_edit(){
 	$supp_confirme = _request('supp_confirme');
 	$supp_rejet = _request('supp_rejet');
 	$email_sympa = _request('email_sympa');
-
+    $desactive = _request('abomailmans_desactive');
 	
   _abomailmans_install();
 
@@ -112,6 +117,7 @@ function exec_abomailmans_edit(){
 		$email = "";
 		$js_titre = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
         $email_sympa = "";
+        $desactive = "";
 	}
 	else {
 		//
@@ -126,6 +132,7 @@ function exec_abomailmans_edit(){
 			$descriptif = $row['descriptif'];
 			$email = $row['email'];
 			$email_sympa = $row['email_sympa'];
+			$desactive = $row['desactive'];
 
 		}
 		$js_titre = "";
@@ -245,6 +252,11 @@ function exec_abomailmans_edit(){
         echo "<br />";
         echo "<input type='text' name='email_sympa' id='email_abosympa' CLASS='formo' ".
              "value=\"".$email_sympa."\" size='40' /><br />\n";
+             
+        echo afficher_choix('abomailmans_desactive', "$desactive",
+            array('0' => _T('abomailmans:active'), 
+                  '1' => _T('abomailmans:desactive'))
+           );
  	
 		echo "<div align='right'>";
 		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";

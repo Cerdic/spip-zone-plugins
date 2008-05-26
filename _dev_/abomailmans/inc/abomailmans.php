@@ -117,6 +117,11 @@
 					$link = parametre_url('','exec=abomailmans_edit&supp_abomailman', $id_abomailman);
 					$link = parametre_url($link,'id_abomailman', $id_abomailman);
 					$vals[] = "<a href='$link'>"._T("abomailmans:supprimer")."</a>";
+                    if ($row['desactive'] == 1) {
+                        $vals[] = "<input type='checkbox' name='abomailmans_desactive' checked /> " . _T('abomailmans:desactive');
+                    } else {
+                        $vals[] = "<input type='checkbox' name='abomailmans_desactive' /> " . _T('abomailmans:desactive'); 
+                    }
 				}
 				$vals[] = $s;
 

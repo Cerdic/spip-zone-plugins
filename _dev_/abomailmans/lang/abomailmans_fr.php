@@ -38,7 +38,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		'info_sisympa'                  => '[Obligatoire si liste Sympa]',
 		'btn_abonnement'                => 'S\'abonner',
 		'btn_desabonnement'             => 'Se d&eacute;sabon.',
-		'liste_oublie'                  => 'Vous avez oubli&eacute; de cocher une liste !'
+		'liste_oublie'                  => 'Vous avez oubli&eacute; de cocher une liste !',
+		'active'                        => 'Activ&eacute;',
+		'desactive'                     => 'D&eacute;sactiv&eacute;'
 );
 
 

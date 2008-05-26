@@ -17,7 +17,7 @@
 				<label for="email"><:abomailmans:email_abonnement:><br />
 					<input name="email" id="email" type="text" class="inp" />
 				</label><br />
-				<BOUCLE_listes(ABOMAILMANS){id_abomailman ?}>
+				<BOUCLE_listes(ABOMAILMANS){id_abomailman ?}{desactive=0}>
 					<br />
                     <label>
                         <input name="listes[]" type="checkbox" value="[(#EMAIL_SYMPA|?{[(#TITRE)]@@@[(#EMAIL_SYMPA)]@@[(#EMAIL|abosympa_checkbox{#TOTAL_BOUCLE})]" />, [(#TITRE)]@@@[(#EMAIL|abomailman_checkbox{#TOTAL_BOUCLE})]" />})]
