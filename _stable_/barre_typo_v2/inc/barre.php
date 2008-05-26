@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2007                                                *
+ *  Copyright (c) 2001-2008                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -269,39 +269,36 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	// le champ est passe sous la forme document.getElementById('champ')
 	if(preg_match(",document\.getElementById\('(\w+)'\),", $champ, $reg))
 		$id = $reg[1]; else $id = '';
-    $params_vierge = array('champ'=>$champ, 'help'=>$champhelp, 'lang'=>$spip_lang, 'name'=>$name, 'id'=>$id, 'num'=>$num_barre, 'forum'=>$forum, 'ecrire'=>$ecrire, 'crayons'=> $crayons, 'flux'=>'');
+	$params_vierge = array('champ'=>$champ, 'help'=>$champhelp, 'lang'=>$spip_lang, 'name'=>$name, 'id'=>$id, 'num'=>$num_barre, 'forum'=>$forum, 'ecrire'=>$ecrire, 'crayons'=> $crayons, 'flux'=>'');
 	$layer_public = '<script type="text/javascript" src="' . find_in_path('javascript/layer.js').'"></script>';
 	$ret = ($num_barre > 1)  ? '' :
 	  $layer_public . '<script type="text/javascript" src="' . find_in_path('javascript/spip_barre.js').'"></script>';
 
 	// Pregeneration des toolzbox.. (wharfing)
-    $toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp, $num_barre);
+	$toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp, $num_barre);
 	$toolbox .= afficher_formatages_speciaux($champ, $spip_lang, $champhelp, $num_barre);
-    $toolbox .= afficher_gestion_lien($champ, $num_barre);
-    $toolbox .= afficher_gestion_ancre($champ, $num_barre);
-    $toolbox .= afficher_gestion_remplacer($champ, $champhelp, $num_barre);
+	$toolbox .= afficher_gestion_lien($champ, $num_barre);
+	$toolbox .= afficher_gestion_ancre($champ, $num_barre);
+	$toolbox .= afficher_gestion_remplacer($champ, $champhelp, $num_barre);
 	// Pipeline pour ajouter des toolzbox
-    $add = pipeline("BT_toolbox", $params_vierge);
-    $toolbox .= $add['flux'];
+	$add = pipeline("BT_toolbox", $params_vierge);
+	$toolbox .= $add['flux'];
 
 	$ret .= "<table class='spip_barre' cellpadding='0' cellspacing='0' border='0'>";
 	$ret .= "\n<tr>";
 	$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 	$col = 0;
 
-	// Raccourcis de caracteres : italique & gras
+	// Italique, gras, intertitres
 	$ret .= bouton_barre_racc("barre_raccourci('{','}',$champ)", _DIR_IMG_ICONES_BARRE."italique.png", _T('barre_italic'), $champhelp);
 	$ret .= bouton_barre_racc("barre_raccourci('{{','}}',$champ)", _DIR_IMG_ICONES_BARRE."gras.png", _T('barre_gras'), $champhelp);
 	$add = pipeline("BT_caracteres", $params_vierge);
 	$ret .= $add['flux'];
 
-	//$params = array($champ,$champhelp,$spip_lang); $add = pipeline("BarreTypoEnrichie_tous",array($champ,$champhelp,$spip_lang)); if ($params!=$add) $ret .= $add;
-	//$params = array($champ,$champhelp,$spip_lang); $add = pipeline("BarreTypoEnrichie_avancees",array($champ,$champhelp,$spip_lang)); if ($params!=$add) $retP .= $add;
 
 	$retP = '';
 	// Raccourcis de paragraphes : intertitres, formatages speciaux
 	if (!$forum) {
-		// $params = array($champ,$champhelp,$spip_lang); $add = pipeline("BarreTypoEnrichie_ecrire",array($champ,$champhelp,$spip_lang)); if ($params!=$add) $retP .= $add;
 		$retP .= bouton_barre_racc("barre_raccourci('\n\n{{{','}}}\n\n',$champ)", _DIR_IMG_ICONES_BARRE."intertitre.png", _T('barre_intertitre'), $champhelp);
 		if (config_bte('btv2/avancee', 'Oui'))
 			$retP .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_formatages_speciaux']."','');", _DIR_BTV2_IMG.'tag.png', _T('bartypenr:barre_formatages_speciaux'), $champhelp);;
@@ -319,9 +316,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_BTV2_IMG.'ancre.png', _T('bartypenr:barre_ancres'), $champhelp);  
 	if (!$forum)
 		$retL .= bouton_barre_racc("barre_raccourci('[[',']]',$champ)", _DIR_IMG_ICONES_BARRE."notes.png", _T('barre_note'), $champhelp);
-	else {
-		// $params = array($champ,$champhelp,$spip_lang);	$add = pipeline("BarreTypoEnrichie_forum",array($champ,$champhelp,$spip_lang));	if ($params!=$add) $retL .= $add;
-	}
 	$retL .= bouton_barre_racc("barre_raccourci('[?',']',$champ)", _DIR_BTV2_IMG.'barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
 	$add = pipeline("BT_liens", $params_vierge);
 	$retL .= $add['flux'];
@@ -356,7 +350,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$col++;
 
 	// Un petit bouton d'aide en partie privee...
-	if ($ecrire) {
+	if (test_espace_prive()) {
 		$ret .= "\n<td style='text-align:$spip_lang_right;' valign='middle'>";
 		$col++;
 		$ret .= aide("raccourcis");
@@ -366,13 +360,13 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$ret .= "</tr>";
 
 	// Sur les forums publics, petite barre d'aide en survol des icones
-	if (!$ecrire)
+	if (!test_espace_prive())
 		$ret .= "\n<tr>\n<td colspan='$col'><input disabled='disabled' type='text' class='barre' id='barre_$num_barre' size='45' maxlength='100'\nvalue=\"".attribut_html(_T('barre_aide'))."\" /></td></tr>";
 
 	$ret .= "</table>";
-	 $ret .= $toolbox;
-	 $ret .= '<script type="text/javascript"><!--';
-	 $ret .= '
+	$ret .= $toolbox;
+	$ret .= '<script type="text/javascript"><!--';
+	$ret .= '
 form_dirty = false;
 warn_onunload = true;
 
