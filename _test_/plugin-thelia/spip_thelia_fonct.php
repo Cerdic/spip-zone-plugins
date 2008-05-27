@@ -39,6 +39,13 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	if ((strpos($texte, "THELIA-") === FALSE) && (strpos($texte, "<THELIA") == FALSE))
 		return $texte;
 	
+	//convertion utf-8 vers ISO des variables $_REQUEST
+	$sauvegarde_request ="";
+	foreach ($_REQUEST as $clef => $valeur) {
+                $sauvegarde_request[$clef] = $valeur;
+		$_REQUEST[$clef]=unicode2charset(charset2unicode($valeur, 'utf-8'),'iso-8859-1');
+            }
+
 	//parsonnalisation des variables thélia
 	switch($_REQUEST['page']){
 		case 'panier' : $securise=0; $pageret=1; break;
@@ -63,11 +70,7 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	//sauvegarde des variables qui vont être modifiées pour thélia
 	$sav_page = $page;
 	$sav_session_navig_lang = $_SESSION['navig']->lang;
-	$sav_request_lang = $_REQUEST['lang'];
-	$sav_request_action = $_REQUEST['action'];
-	$sav_request_page = $_REQUEST['page'];
-	$sav_request_article = $_REQUEST['article'];
-
+	
 
 	//conflit sur la variable $page. 
 	$page = new stdclass;
@@ -94,7 +97,6 @@ function spip_thelia_appeler_moteur_thelia($texte)
 		case 'es' : $_REQUEST['lang'] = 3; break;
 		default: $_REQUEST['lang'] = 1; break;
 	}
-	
 	
 	//réaffectation des variables de thélia qui ont étées renommées dans les squelettes pour éviter les conflits avec spip
 	$_REQUEST['action'] = $_REQUEST['thelia_action'];
@@ -125,18 +127,19 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	ob_end_clean();
 	$texte = remplacement_sortie_thelia($texte);
 
-	//au retour de thélia, on convertie en utf8 pour spip
+	//au retour de thélia, on convertie en utf8 pour SPIP
 	$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
 	
 
 	//on restaure les variables session et request modifiées pour les plugins suivants sur affichage final
 	$page = $sav_page;
 	$_SESSION['navig']->lang = $sav_session_navig_lang;
-	$_REQUEST['lang'] = $sav_request_lang;
-	$_REQUEST['action'] = $sav_request_action;
-	$_REQUEST['page'] = $sav_request_page;
-	$_REQUEST['article'] = $sav_request_article;
+	
 
+	//restauration des variables $_REQUEST en utf-8 pour SPIP
+	foreach ($sauvegarde_request as $clef => $valeur) {
+                $_REQUEST[$clef]=$valeur;
+        }
 	
 	return ($texte);	
 }
