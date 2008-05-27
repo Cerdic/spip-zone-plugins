@@ -164,13 +164,29 @@ function notifications_forumprive($quoi, $id_forum) {
 
 	// Qui va-t-on prevenir ?
 	$tous = array();
-	// 1. Les auteurs de l'article (si c'est un article)
-	if ($t['id_article']
-	AND $GLOBALS['notifications']['prevenir_auteurs_prive']) {
-		$result = spip_query("SELECT auteurs.email FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
 
-		while ($qui = spip_fetch_array($result))
-			$tous[] = $qui['email'];
+	// 1. Prevenir les auteurs
+	if ($GLOBALS['notifications']['prevenir_auteurs_prive']) {
+
+		// 1.1. Les auteurs du message (si c'est un message)
+		if ($t['id_message']) {
+			$result = spip_query("SELECT auteurs.email FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message="._q($t['id_message'])." AND auteurs.id_auteur=lien.id_auteur");
+	
+			while ($qui = spip_fetch_array($result))
+				$tous[] = $qui['email'];
+	
+			charger_generer_url();
+			$url = generer_url_ecrire('message', 'id_message='.$t['id_message']) .'#id'.$t['id_forum'];
+			$t['texte'] .= "\n\n"._T('forum_ne_repondez_pas')."\n<html>$url</html>";
+		}
+	
+		// 1.2. Les auteurs de l'article (si c'est un article)
+		elseif ($t['id_article']) {
+			$result = spip_query("SELECT auteurs.email FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+	
+			while ($qui = spip_fetch_array($result))
+				$tous[] = $qui['email'];
+		}
 	}
 
 	// 2. Les moderateurs
