@@ -168,7 +168,7 @@ add_outil( array(
 	'id' => 'set_options',
 	'auteur' 	 => 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
 	'code:options' => "%%radio_set_options4%%",
-	'categorie' => 'admin',
+	'categorie' => 'interface',
 	// pipeline pour retirer en javascript le bouton de controle de l'interface
 	'pipeline:header_prive' => 'set_options_header_prive',
 	// non supporte a partir de la version 1.93
@@ -178,11 +178,34 @@ add_outil( array(
 add_outil( array(
 	'id' => 'simpl_interface',
 	'code:options' => "@define('_ACTIVER_PUCE_RAPIDE', false);",
-	'categorie' => 'admin',
+	'categorie' => 'interface',
 	'version-min' => '1.9300',
 ));
 
-	// ici on a besoin de six boutons radio : 'page', 'html', 'propres', 'propres2, ''standard' et 'propres-qs'
+add_variable( array(
+	'nom' => 'tri_articles',
+	'format' => 'chaine',
+	'radio' => array('0+titre,titre' => 'couteauprive:tri_titre', 
+		'date DESC' => 'couteauprive:tri_publi', 'date_modif DESC' => 'couteauprive:tri_modif', 
+		'perso' => 'couteauprive:tri_perso' ),
+	'radio/ligne' => 1,
+	'defaut' => "'0+titre,titre'",
+	'code:%s!="perso"' => "@define('_TRI_ARTICLES_RUBRIQUE', %s);\n",
+));
+add_variable( array(
+	'nom' => 'tri_perso',
+	'format' => 'chaine',
+	'defaut' => '',
+	'code:strlen(%s)' => "@define('_TRI_ARTICLES_RUBRIQUE', %s);",
+));
+add_outil( array(
+	'id' => 'tri_articles',
+	'code:options' => "%%tri_articles%%%%tri_perso%%",
+	'categorie' => 'interface',
+	'version-min' => '1.9300',
+));
+
+// ici on a besoin de six boutons radio : 'page', 'html', 'propres', 'propres2, ''standard' et 'propres-qs'
 define('_CS_PROPRE_QS', defined('_SPIP19300')?'propres_qs':'propres-qs');
 add_variable( array(
 	'nom' => 'radio_type_urls3',
@@ -421,7 +444,7 @@ add_outil( array(
 	'auteur'=>'Pat, Joseph LARMARANGE (format SPIP)',
 	'contrib' => 2564,
 	'code:options' => "%%cs_rss%%%%format_spip%%%%stat_auteurs%%",
-	'categorie' => 'admin',
+	'categorie' => 'interface',
 	'pipeline:affiche_milieu' => 'boites_privees_affiche_milieu',
 	'pipeline:affiche_droite' => 'boites_privees_affiche_droite',
 ));
@@ -460,7 +483,7 @@ add_variable( array(
 add_outil( array(
 	'id' => 'auteurs',
 	'code:options' => "%%max_auteurs_page%%\$temp_auteurs=array(%%auteurs_0%%%%auteurs_1%%%%auteurs_5%%%%auteurs_6%%%%auteurs_n%%); %%auteurs_tout_voir%% unset(\$temp_auteurs);",
-	'categorie' => 'admin',
+	'categorie' => 'interface',
 	'version-min' => '1.9300',
 //	'pipeline:affiche_milieu' => 'auteurs_affiche_milieu',
 ));

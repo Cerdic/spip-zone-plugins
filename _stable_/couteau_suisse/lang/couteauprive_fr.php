@@ -60,11 +60,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'categ:admin' => '1. Administration',
-	'categ:divers' => '6. Divers',
-	'categ:public' => '4. Affichage public',
-	'categ:spip' => '5. Balises, filtres, crit&egrave;res',
-	'categ:typo-corr' => '2. Am&eacute;liorations des textes',
-	'categ:typo-racc' => '3. Raccourcis typographiques',
+	'categ:interface' => '10. Interface priv&eacute;e',
+	'categ:divers' => '60. Divers',
+	'categ:public' => '40. Affichage public',
+	'categ:spip' => '50. Balises, filtres, crit&egrave;res',
+	'categ:typo-corr' => '20. Am&eacute;liorations des textes',
+	'categ:typo-racc' => '30. Raccourcis typographiques',
 	'certaines_couleurs' => 'Seules les balises d&eacute;finies ci-dessous@_CS_ASTER@ :',
 	'chatons:aide' => 'Chatons : @liste@',
 	'chatons:description' => 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <code>:nom</code>.
@@ -166,7 +167,7 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 	'filets_sep:description' => 'Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de SPIP.
 _ La syntaxe est : &quot;__code__&quot;, o&ugrave; &quot;code&quot; repr&eacute;sente soit le num&eacute;ro d&rsquo;identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d\'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Filets de S&eacute;paration',
-	'filtrer_javascript:description' => 'Pour g&eacute;rer le javascript dans les articles, trois modes sont disponibles :
+	'filtrer_javascript:description' => 'Pour g&eacute;rer l\'insertion de javascript dans les articles, trois modes sont disponibles :
 - <i>jamais</i> : le javascript est refus&eacute; partout
 - <i>d&eacute;faut</i> : le javascript est signal&eacute; en rouge dans l\'espace priv&eacute;
 - <i>toujours</i> : le javascript est accept&eacute; partout.
@@ -449,7 +450,16 @@ _ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du
 
 	// X
 	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitul&eacute; &laquo;&nbsp;Analyse XML&nbsp;&raquo; est ajout&eacute; aux autres boutons d\'administration.',
-	'xml:nom' => 'Validateur XML'
+	'xml:nom' => 'Validateur XML',
+
+	'tri_articles:description' => "En naviguant sur le site en partie priv&eacute;e ([->./?exec=auteurs]), choisissez ici le tri &agrave; utiliser pour afficher vos articles &agrave; l'int&eacute;rieur de vos rubriques.\n\nLes propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL 'ORDER BY' : n'utilisez le tri personnalis&eacute; que si vous savez ce que vous faites (champs disponibles : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
+[[%tri_articles%]][[->%tri_perso%]]",
+	'tri_articles:nom' => 'Tri des articles',
+	'label:tri_articles' => 'Votre choix :',
+	'tri_titre' => 'Tri sur le titre (ORDER BY 0+titre,titre)',
+	'tri_publi' => 'Tri sur la date de publication (ORDER BY date DESC)',
+	'tri_modif' => 'Tri sur la date de modification (ORDER BY date_modif DESC)',
+	'tri_perso' => 'Tri SQL personnalis&eacute;, ORDER BY suivi de :',
 );
 
 ?>
