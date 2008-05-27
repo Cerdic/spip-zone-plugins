@@ -165,6 +165,9 @@
         [(#CONFIG{inscription2/code_postal_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
         [(#CONFIG{inscription2/ville_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
         [(#CONFIG{inscription2/pays_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+        [(#CONFIG{inscription2/telephone_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+        [(#CONFIG{inscription2/mobile_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+        [(#CONFIG{inscription2/fax_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
 
         [(#GET{afficher_plus}|=={true}|?{' ', ''})
         <fieldset class="infos_pros">
@@ -221,6 +224,24 @@
                     <INCLURE{fond=formulaires/inscription2_pays_pro}{pays_pro=#ENV{pays_pro}}>
                     [<p class='erreur'>(#ENV**{erreurs}|table_valeur{pays_pro})</p>]
                 </li>]
+                [(#CONFIG{inscription2/telephone_pro}|=={on}|?{' ', ''})	
+                <li class="editer_pays_pro[ (#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|?{obligatoire})]">
+                    <label for="pays_pro"><:inscription2:telephone_pro:></label>
+                    <input type="text" class="text" name="telephone_pro" id="telephone_pro" value="#ENV{telephone_pro}"/>
+                    [<p class='erreur'>(#ENV**{erreurs}|table_valeur{telephone_pro})</p>]
+                </li>]
+                [(#CONFIG{inscription2/mobile_pro}|=={on}|?{' ', ''})	
+                <li class="editer_pays_pro[ (#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|?{obligatoire})]">
+                    <label for="pays_pro"><:inscription2:mobile_pro:></label>
+                    <input type="text" class="text" name="mobile_pro" id="mobile_pro" value="#ENV{mobile_pro}"/>
+                    [<p class='erreur'>(#ENV**{erreurs}|table_valeur{mobile_pro})</p>]
+                </li>]
+                [(#CONFIG{inscription2/fax_pro}|=={on}|?{' ', ''})	
+                <li class="editer_pays_pro[ (#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|?{obligatoire})]">
+                    <label for="pays_pro"><:inscription2:fax_pro:></label>
+                    <input type="text" class="text" name="fax_pro" id="fax_pro" value="#ENV{fax_pro}"/>
+                    [<p class='erreur'>(#ENV**{erreurs}|table_valeur{fax_pro})</p>]
+                </li>]                                                
             </ol>
         </fieldset>
         ]
