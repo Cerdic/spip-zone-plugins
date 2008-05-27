@@ -25,23 +25,17 @@ define('_DIR_BTV2_IMG', _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/')
 
 // http://doc.spip.org/@bouton_barre_racc
 function bouton_barre_racc($action, $img, $help, $champhelp) {
-	include_spip('inc/charsets');
 
 	$a = attribut_html($help);
-	$action = str_replace ("&lt;", '%3C',  $action);
-	$action = str_replace ("&gt;", '%3E',  $action);
-	$action = str_replace ("\n", '%5Cn',  $action);
-	$action = unicode_to_javascript(html2unicode($action));
-	$action = str_replace("\"","&quot;",$action);
-	return "<a href=\"javascript:"
+	return "<a\nhref=\"javascript:"
 		.$action
-		."\"\n tabindex='1000' title=\""
+		."\" tabindex='1000'\ntitle=\""
 		. $a
 		."\"" 
-		.(test_espace_prive() ? '' : " onmouseover=\"helpline('"
+		  .(test_espace_prive() ? '' :  ("\nonmouseover=\"helpline('"
 		  .addslashes(str_replace('&#39;',"'",$a))
-		  ."',$champhelp)\" onmouseout=\"helpline('"
-		  .attribut_html(_T('barre_aide'))
+		  ."',$champhelp)\"\nonmouseout=\"helpline('"
+					 .attribut_html(_T('barre_aide')))
 		  ."', $champhelp)\"")
 		."><img src='"
 		.$img
@@ -270,9 +264,10 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	if(preg_match(",document\.getElementById\('(\w+)'\),", $champ, $reg))
 		$id = $reg[1]; else $id = '';
 	$params_vierge = array('champ'=>$champ, 'help'=>$champhelp, 'lang'=>$spip_lang, 'name'=>$name, 'id'=>$id, 'num'=>$num_barre, 'forum'=>$forum, 'ecrire'=>$ecrire, 'crayons'=> $crayons, 'flux'=>'');
-	$layer_public = '<script type="text/javascript" src="' . find_in_path('javascript/layer.js').'"></script>';
+
 	$ret = ($num_barre > 1)  ? '' :
-	  $layer_public . '<script type="text/javascript" src="' . find_in_path('javascript/spip_barre.js').'"></script>';
+	  "<script type='text/javascript' src='". find_in_path(_JAVASCRIPT.'layer.js') ."'></script>".http_script('', 'spip_barre.js');
+
 
 	// Pregeneration des toolzbox.. (wharfing)
 	$toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp, $num_barre);
@@ -287,7 +282,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$ret .= "<table class='spip_barre' cellpadding='0' cellspacing='0' border='0'>";
 	$ret .= "\n<tr>";
 	$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
-	$col = 0;
+	$col = 1;
 
 	// Italique, gras, intertitres
 	$ret .= bouton_barre_racc("barre_raccourci('{','}',$champ)", _DIR_IMG_ICONES_BARRE."italique.png", _T('barre_italic'), $champhelp);
@@ -298,7 +293,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 	$retP = '';
 	// Raccourcis de paragraphes : intertitres, formatages speciaux
-	if (!$forum) {
+	if ($ecrire) {
 		$retP .= bouton_barre_racc("barre_raccourci('\n\n{{{','}}}\n\n',$champ)", _DIR_IMG_ICONES_BARRE."intertitre.png", _T('barre_intertitre'), $champhelp);
 		if (config_bte('btv2/avancee', 'Oui'))
 			$retP .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_formatages_speciaux']."','');", _DIR_BTV2_IMG.'tag.png', _T('bartypenr:barre_formatages_speciaux'), $champhelp);;
@@ -312,29 +307,30 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 	$retL = '';
 	// Gestion des liens, ancres, notes, glossaire
-    $retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_lien']."','');", _DIR_IMG_ICONES_BARRE."lien.png", _T('barre_lien'), $champhelp);
-	$retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_BTV2_IMG.'ancre.png', _T('bartypenr:barre_ancres'), $champhelp);  
-	if (!$forum)
+	$retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_lien']."','');", _DIR_IMG_ICONES_BARRE."lien.png", _T('barre_lien'), $champhelp);
+	if ($ecrire) {
+		$retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_BTV2_IMG.'ancre.png', _T('bartypenr:barre_ancres'), $champhelp);  
 		$retL .= bouton_barre_racc("barre_raccourci('[[',']]',$champ)", _DIR_IMG_ICONES_BARRE."notes.png", _T('barre_note'), $champhelp);
-	$retL .= bouton_barre_racc("barre_raccourci('[?',']',$champ)", _DIR_BTV2_IMG.'barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
+		$retL .= bouton_barre_racc("barre_raccourci('[?',']',$champ)", _DIR_BTV2_IMG.'barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
+	}
 	$add = pipeline("BT_liens", $params_vierge);
 	$retL .= $add['flux'];
 	$ret .= "&nbsp;$retL</td>\n<td>";
 	$col++;
-
-	$retS = '';
-	// Gestion des structures : remplacement, tableaux, images
-     $retS .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_remplacer']."','');", _DIR_BTV2_IMG.'chercher_remplacer.png', _T('bartypenr:barre_chercher'), $champhelp);
-	$retS .= bouton_barre_racc("barre_tableau($champ, '"._DIR_RESTREINT."')", _DIR_BTV2_IMG.'barre-tableau.png', _T('bartypenr:barre_tableau'), $champhelp);
-	// DEB Galerie JPK
-	// idee originale de http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images-et-documents.html
-	if (!$forum)
+		
+	if ($ecrire) {
+		$retS = '';
+		// Gestion des structures : remplacement, tableaux, images
+		$retS .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_remplacer']."','');", _DIR_BTV2_IMG.'chercher_remplacer.png', _T('bartypenr:barre_chercher'), $champhelp);
+		$retS .= bouton_barre_racc("barre_tableau($champ, '"._DIR_RESTREINT."')", _DIR_BTV2_IMG.'barre-tableau.png', _T('bartypenr:barre_tableau'), $champhelp);
+		// DEB Galerie JPK
+		// idee originale de http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images-et-documents.html
 		$retS .= bouton_barre_racc("javascript:barre_galerie($champ, '"._DIR_RESTREINT."')", _DIR_BTV2_IMG.'galerie.png', _T('bartypenr:barre_galerie'), $champhelp);
-	$add = pipeline("BT_structures", $params_vierge);
-	$retS .= $add['flux'];
-	$ret .= "&nbsp;$retS</td>\n<td>";
-//	$ret .= "</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
-	$col++;
+		$add = pipeline("BT_structures", $params_vierge);
+		$retS .= $add['flux'];
+		$ret .= "&nbsp;$retS</td>\n<td>";
+		$col++;
+	}
 
 
 	$retG = '';
@@ -383,27 +379,26 @@ function chainHandler(obj, handlerName, handler) {
 };
 
 $(document).ready(function(){';
-	 if (!$forum) {
-	 $ret .= '
-	$('.$champ.').after("<div id=\"article_preview'.$num_barre.'\"></div>");
-	$('.$champ.').before("<div id=\"article_stats'.$num_barre.'\"></div>");
-	';
-	global $spip_version_code;
-	if (version_compare($spip_version_code,'1.9250','<')){
-	 $ret .= '$.ajaxTimeout( 5000 );
-	 '; // jquery < 1.1.4
-	} else {
-	 $ret .= '$.ajaxSetup({timeout: 5000});'; // a partir de jquery 1.1.4, donc de SPIP 1.9.3
+	if ($ecrire) {
+		$ret .= '
+		$('.$champ.').after("<div id=\"article_preview'.$num_barre.'\"></div>");
+		$('.$champ.').before("<div id=\"article_stats'.$num_barre.'\"></div>");
+		';
+		global $spip_version_code;
+		if (version_compare($spip_version_code,'1.9250','<')){
+			$ret .= '$.ajaxTimeout( 5000 );'; // jquery < 1.1.4
+		} else {
+			$ret .= '$.ajaxSetup({timeout: 5000});'; // a partir de jquery 1.1.4, donc de SPIP 1.9.3
+		}
+		$ret .= '
+		$('.$champ.').keypress(function() { MajPreview('.$num_barre.',"'.$champ.'") });
+		$('.$champ.').select(function() { MajStats('.$num_barre.',"'.$champ.'") });
+		$('.$champ.').click(function() { MajStats('.$num_barre.',"'.$champ.'") });';
 	}
-	 $ret .= '
-	$('.$champ.').keypress(function() { MajPreview('.$num_barre.',"'.$champ.'") });
-	$('.$champ.').select(function() { MajStats('.$num_barre.',"'.$champ.'") });
-	$('.$champ.').click(function() { MajStats('.$num_barre.',"'.$champ.'") });';
-	 }
-	 $ret .= '
+	$ret .= '
 	chainHandler(window,\'onbeforeunload\',function(e) { 
 		if (e == undefined && window.event) {
-	                e = window.event;
+			e = window.event;
 		}
 		if ( (warn_onunload == true) && (form_dirty == true) && ($.browser.mozilla) ) {
 			e.returnValue = \'Quitter la page sans sauvegarder ?\';
