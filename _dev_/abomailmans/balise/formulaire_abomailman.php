@@ -65,7 +65,8 @@ function balise_FORMULAIRE_ABOMAILMAN_dyn($id_abomailman) {
 			    $temp2 = explode ("@", $email_liste_sympa);
 			    $proprio_liste = $temp2[0] . '-request@' . $temp2[1];
 			    $objet = (empty($abonnement)) ? 'UNSUBSCRIBE' : 'SUBSCRIBE';
-			    $sujet = $objet . " " . $email_liste_sympa . ' ' . $nom;
+                $sujet = $objet . " " . $email_liste_sympa . ' ';
+                $sujet .= (empty($desabonnement)) ? $nom : '';
                 if (abomailman_mail ($nom, $email, $sympa_join, $sympa_join, $sujet)) {
                     $liste_confirme  .= " <b>". $email_liste_sympa ."</b><br>";
                 }
@@ -78,7 +79,6 @@ function balise_FORMULAIRE_ABOMAILMAN_dyn($id_abomailman) {
 //                $contenu_mail .= 'subject : ' . $sujet . "\n";
 //                $email_debug = 't.bothorel@free.fr';
 //                abomailman_mail ('abomailmanstest', $email_debug, '', $email_debug ,'mailman pour SYMPA plugin debug', $contenu_mail);		    		
-
                 // Fin debug
 			}
 		 }
