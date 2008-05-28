@@ -220,7 +220,7 @@ function exec_malettre(){
 							echo "<h4>Apercu</h4>\n";
 							echo "Sujet: <input type='text' size='55' name='lettre_title' value=\"".$lettre_title."\" /><br />\n";
               echo "<iframe width=\"600\" height=\"500\" src=\"$path_archive_full/.malettre.html?nocache=".time()."\"></iframe>\n";
-							echo "<h4>Le source HTML</h4>\n";
+							echo "<h4>Version HTML</h4>\n";
 							echo "<textarea cols='70' rows='20'>$sourceHTML</textarea>";
 							echo "<h4>Version Texte</h4>\n";
 							echo "<textarea cols='70' rows='20'>$sourceTXT</textarea>";
@@ -345,7 +345,7 @@ function exec_malettre(){
 								echo "<fieldset>\n";
 								echo "Sujet du mail :<i>(format spip non support&eacute;)</i><br />\n";
 								echo "<input type='text' size='55' name='lettre_title' /><br />\n";
-								echo "<br />Texte d'introduction  - <a href='$page_edit$id_article_edito'>&eacute;diter ce texte</a>\n";
+								echo "<br />Texte d'introduction  - <a href='$page_edit$id_article_edito'>&eacute;diter ce texte</a><br />\n";
 								echo "<iframe width='600' height='500' src='../?page=malettre_edito&amp;id_article=$id_article_edito'></iframe>\n";
 								echo $stro;								
 							
