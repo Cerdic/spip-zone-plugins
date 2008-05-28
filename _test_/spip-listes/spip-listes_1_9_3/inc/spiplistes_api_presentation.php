@@ -685,36 +685,50 @@ function spiplistes_boite_autocron () {
 // adapté de abomailman ()
 // MaZiaR - NetAktiv
 // tech@netaktiv.com
- 
 
-// Afficher l'arbo
-function  spiplistes_arbo_rubriques($id_rubrique,  $rslt_id_rubrique="") {
-	global $ran;
-	$ran ++;
-	
-	$marge="&nbsp;&nbsp;&nbsp;|";
-	for ($g=0;$g<$ran;$g++) {
-		if (($ran-1)==0) {
-			$marge="&bull;";
-		}
-		else {
-			$marge .="-"; 
-		}
-	}
-	$marge .="&nbsp;";
 
-	$rqt_rubriques = spip_query ("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE id_parent='".$id_rubrique."'");
-	while ($row = spip_fetch_array($rqt_rubriques)) {
-		$id_rubrique = $row['id_rubrique'];
-		$id_parent = $row['id_parent'];
-		$titre = $row['titre'];
-		$arbo .="<option value='".$id_rubrique."'>" . $marge  . supprimer_numero (typo($titre)) . "</option>";
-		$arbo .= spiplistes_arbo_rubriques($id_rubrique,   $rslt_id_parent);
+// CP-20080528
+// Renvoie l'arborescence des rubriques
+function spiplistes_arbo_rubriques ($id_rubrique = 0, $ran = 0) {
+	
+	// une seule rqt pour récupérer toutes les rubriques
+	$sql_result = sql_select("id_rubrique,id_parent,titre", "spip_rubriques");
+	$rubriques_array = array();
+	// empile les rubriques
+	while($row = sql_fetch($sql_result)) {
+		$rubriques_array[] = array(
+			'id_rubrique' => intval($row['id_rubrique'])
+			, 'id_parent' => intval($row['id_parent'])
+			, 'titre' => supprimer_numero(typo($row['titre']))
+		);
 	}
-	
-	return $arbo;
-	
+	// renvoie la liste sous forme de option de select (html)
+	return(
+		"<!-- liste des rubriques -->\n"
+		. spiplistes_arbo_rubriques_sub($rubriques_array)
+	);
 }
+
+// sous-fonction de spiplistes_arbo_rubriques()
+// récursive
+function spiplistes_arbo_rubriques_sub ($rubriques_array, $id_parent = 0, $ran = 0) {
+	$result = "";
+	$marge =
+		($ran)
+		? "&nbsp;&nbsp;&nbsp;|".str_repeat("--", $ran)
+		: "&bull;"
+		;
+	foreach($rubriques_array as $rubrique) {
+		if($rubrique['id_parent'] == $id_parent) {
+			$result .= ""
+				. "<option value='" . $rubrique['id_rubrique'] . "'>" . $marge . "&nbsp;" . $rubrique['titre'] . "</option>\n"
+				. spiplistes_arbo_rubriques_sub($rubriques_array, $rubrique['id_rubrique'], $ran + 1)
+				;
+		}
+	}
+	return($result);
+}
+
 // Nombre d'abonnes a une liste, chaine html
 function spiplistes_nb_abonnes_liste_str_get ($id_liste) {
 	$nb_abos = spiplistes_listes_nb_abonnes_compter($id_liste);

@@ -40,6 +40,7 @@ function exec_spiplistes_courrier_edit(){
 	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_api_presentation');
+	include_spip('inc/spiplistes_api_courrier');
 	include_spip('public/assembler');
 	include_spip('inc/spiplistes_naviguer_paniers');
 
@@ -60,10 +61,9 @@ function exec_spiplistes_courrier_edit(){
 	if($id_courrier > 0) {
 	///////////////////////////
 	// Edition /modification d'un courrier
-		$sql_select = "titre,texte,type,statut,id_auteur";
-		$result = spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 1");
-		if ($row = spip_fetch_array($result)) {
-			foreach(explode(",", $sql_select) as $key) {
+		$sql_select_array = array('titre','texte','type','statut','id_auteur');
+		if($row = spiplistes_courriers_premier($id_courrier, $sql_select_array)) {
+			foreach($sql_select_array as $key) {
 				$$key = $row[$key];
 			}
 			$titre = entites_html($titre);
@@ -209,7 +209,7 @@ function exec_spiplistes_courrier_edit(){
 		. "<label class='verdana2' for='ajouter_rubrique'>"._T('spiplistes:Lister_articles_de_rubrique').":</label>\n"
 		. "<select name='id_rubrique' id='ajouter_rubrique' class='formo'>\n"
 		. "<option value=''></option>\n"
-		. spiplistes_arbo_rubriques(0)
+		. spiplistes_arbo_rubriques()
 		. "</select>\n"
 		. "<br />\n"
 		//
@@ -218,16 +218,16 @@ function exec_spiplistes_courrier_edit(){
 		. "<select name='id_mot' id='ajouter_motcle' class='formo'>\n"
 		. "<option value=''></option>\n"
 		;
-	$rqt_gmc = spip_query ("SELECT id_groupe,titre FROM spip_groupes_mots WHERE articles='oui'");
-	while ($row = spip_fetch_array($rqt_gmc)) {
+	$rqt_gmc = sql_select (array('id_groupe','titre'), 'spip_groupes_mots', "articles=".sql_quote('oui'));
+	while ($row = sql_fetch($rqt_gmc)) {
 		$id_groupe = intval($row['id_groupe']);
 		$titre = $row['titre'];
 		$page_result .= "<option value='' disabled='disabled'>". supprimer_numero (typo($titre)) . "</option>\n";
-		$rqt_mc = spip_query ("SELECT id_mot,titre FROM spip_mots WHERE id_groupe=$id_groupe");
-		while ($row = spip_fetch_array($rqt_mc)) {
+		$rqt_mc = sql_select (array('id_mot','titre'), 'spip_mots', "id_groupe=".sql_quote($id_groupe));
+		while ($row = sql_fetch($rqt_mc)) {
 			$id_mot = intval($row['id_mot']);
 			$titre = supprimer_numero (typo($row['titre']));
-			$page_result .= "<option value='$id_mot'>--$titre</option>\n";
+			$page_result .= "<option value='$id_mot'>--&nbsp;$titre</option>\n";
 		}
 	}
 	$page_result .= ""

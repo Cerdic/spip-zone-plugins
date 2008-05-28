@@ -271,7 +271,9 @@ function spiplistes_listes_liste_creer ($statut, $lang, $titre, $texte, $pied_pa
 		spiplistes_mod_listes_ajoute($id_auteur, $id_liste);
 		spiplistes_abonnements_supprimer("id_liste=".sql_quote($id_liste));
 		spiplistes_abonnements_ajouter($id_auteur, $id_liste);
+		return($id_liste);
 	}
+	return(false);
 }
 
 // CP-20080430: renvoie tableau liste des listes

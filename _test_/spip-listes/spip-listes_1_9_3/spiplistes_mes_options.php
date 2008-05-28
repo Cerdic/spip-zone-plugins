@@ -373,4 +373,5 @@ $spiplistes_items = array(
 		spiplistes_upgrade();
 	}
 
+	include_spip('inc/spiplistes_api_globales');
 ?>

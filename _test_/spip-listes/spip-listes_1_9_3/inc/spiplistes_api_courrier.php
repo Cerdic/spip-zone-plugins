@@ -374,7 +374,7 @@ function spiplistes_courriers_premier ($id_courrier, $sql_select_array) {
 // renvoie id_auteur du courier (CP-20071018)
 function spiplistes_courrier_id_auteur_get ($id_courrier) {
 	if(($id_courrier = intval($id_courrier)) > 0) {
-		if($sql_result = spip_query("SELECT id_auteur FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 1")) {
+		if($sql_result = sql_select('id_auteur', 'spip_courriers', "id_courrier=".sql_quote($id_courrier), '', '', 1)) {
 			if($row = spip_fetch_array($sql_result)) {
 				return($row['id_auteur']);
 			}

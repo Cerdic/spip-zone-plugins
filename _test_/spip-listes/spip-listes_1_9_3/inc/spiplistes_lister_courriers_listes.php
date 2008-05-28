@@ -90,7 +90,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 			break;
 	}
 	//
-	$resultat_aff = spip_query("SELECT $sql_select FROM $sql_from WHERE $sql_where ORDER BY $sql_order DESC LIMIT $position,$pas");
+	$resultat_aff = sql_select($sql_select, $sql_from, $sql_where, '', array($sql_order." DESC "), $position.",".$pas);
 	
 	//////////////////////
 	if (($nb_ = @sql_count($resultat_aff)) > 0) {
@@ -241,8 +241,12 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 				break;
 		}
 		
-		if(($sql_result = spip_query("SELECT $sql_select FROM $sql_from WHERE $sql_where"))
-			&& ($row = spip_fetch_array($sql_result)) && ($total=$row['n'])) {
+		$sql_result = sql_select($sql_select, $sql_from, $sql_where);
+		
+		if(
+			$sql_result
+			&& ($row = sql_fetch($sql_result)) && ($total = $row['n'])
+		) {
 			$retour = _request('exec');
 			$en_liste .= spiplistes_afficher_pagination($retour, $param, $total, $position, $nom_position, $pas);
 		}
