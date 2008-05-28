@@ -1,22 +1,17 @@
 <?php
+// modif cy_altern pour prise en compte critère id_parent dans groupes_mots sans avoir une erreur
+// prendre en compte le champ id_parent dans la table groupes_mots
+//include_spip ('serial');
+global $tables_principales;
+$tables_principales['spip_groupes_mots']['field']['id_parent'] = "bigint(20) NOT NULL default '0'";
+
+
+
 /***********************************************************************/
 /* DÃ©finition des choses sur lesquels on peut vouloir mettre des mots clefs*/
 /***********************************************************************/
 
 //==========================ARTICLES============================================
-global $tables_principales;
-$tables_principales['spip_mots_documents']['field'] = array(
-        "id_mot"    => "BIGINT (21) DEFAULT '0' NOT NULL",
-        "id_document"    => "BIGINT (21) DEFAULT '0' NOT NULL");
-
-$tables_principales['spip_mots_documents']['key'] = array(
-        "KEY id_mot"    => "id_mot",
-        "KEY id_document"    => "id_document");
-
-global $tables_relations;
-$tables_relations['mots']['id_document'] = 'mots_documents';
-$tables_relations['documents']['id_mot'] = 'mots_documents';
-
 global $choses_possibles,$statuts_possibles;
 $statuts_possibles[]='publie';
 $statuts_possibles[]='propose';
