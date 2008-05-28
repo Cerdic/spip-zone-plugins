@@ -184,7 +184,7 @@ function exec_spiplistes_courrier_gerer () {
 			$statut = _SPIPLISTES_STATUT_REDAC;
 			$type = 'nl';
 			$result = spip_query("INSERT INTO spip_courriers (titre,texte,date,statut,type,id_auteur) 
-				VALUES ("._q($titre).","._q($texte).",NOW(),'$statut','$type',"._q($connect_id_auteur).")"); 
+				VALUES (".sql_quote($titre).",".sql_quote($texte).",NOW(),'$statut','$type',".sql_quote($connect_id_auteur).")"); 
 			$id_courrier = spip_insert_id(); 
 		}
 		else {
@@ -201,7 +201,7 @@ function exec_spiplistes_courrier_gerer () {
 		$sql_select_str = "titre";
 		$sql_select = $sql_select_int.",".$sql_select_str.",".$sql_select_tmp;
 		
-		if($row = spip_fetch_array(spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier="._q($id_courrier)." LIMIT 1"))) {
+		if($row = spip_fetch_array(spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=".sql_quote($id_courrier)." LIMIT 1"))) {
 			foreach(explode(",", $sql_select) as $key) {
 				$$key = $row[$key];
 			}

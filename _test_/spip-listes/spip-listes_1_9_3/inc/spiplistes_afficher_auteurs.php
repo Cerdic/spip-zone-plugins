@@ -158,7 +158,7 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 	while ($auteur = spip_fetch_array($t)) {
 		if ($auteur['statut'] == '0minirezo') {
 			$auteur['restreint'] = sql_count(spip_query(
-				"SELECT * FROM spip_auteurs_rubriques WHERE id_auteur="._q($auteur['id_auteur'])
+				"SELECT * FROM spip_auteurs_rubriques WHERE id_auteur=".sql_quote($auteur['id_auteur'])
 				));
 		}
 		$auteurs[] = $auteur;

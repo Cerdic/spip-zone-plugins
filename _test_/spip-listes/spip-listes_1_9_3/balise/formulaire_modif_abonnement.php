@@ -65,7 +65,7 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<", _SPIPLISTES_LOG_D
 		
 		// cherche l'abonné
 		$sql_select = "id_auteur,statut,nom,email";
-		$sql_result = spip_query("SELECT $sql_select FROM spip_auteurs WHERE cookie_oubli="._q($d)." AND statut<>'5poubelle' AND pass<>'' LIMIT 1");
+		$sql_result = spip_query("SELECT $sql_select FROM spip_auteurs WHERE cookie_oubli=".sql_quote($d)." AND statut<>'5poubelle' AND pass<>'' LIMIT 1");
 		$row = spip_fetch_array($sql_result);
 		
 		if($row) {
@@ -104,7 +104,7 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<", _SPIPLISTES_LOG_D
 				}
 				
 				// detruire le cookie perso
-				//spip_query("UPDATE spip_auteurs SET cookie_oubli='' WHERE cookie_oubli ="._q($d));
+				//spip_query("UPDATE spip_auteurs SET cookie_oubli='' WHERE cookie_oubli =".sql_quote($d));
 				spiplistes_auteurs_cookie_oubli_updateq('', $d, $true);
 				
 				$d = '';
@@ -123,7 +123,7 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<", _SPIPLISTES_LOG_D
 		// adresse email seule reçue
 		// envoyer le cookie de relance modif abonnement par email
 		if (email_valide($email_desabo)) {
-			$res = spip_query("SELECT * FROM spip_auteurs WHERE email ="._q($email_desabo)." LIMIT 1");
+			$res = spip_query("SELECT * FROM spip_auteurs WHERE email =".sql_quote($email_desabo)." LIMIT 1");
 			if ($row = spip_fetch_array($res)) {
 				if ($row['statut'] == '5poubelle') {
 					$erreur = _T('pass_erreur_acces_refuse');

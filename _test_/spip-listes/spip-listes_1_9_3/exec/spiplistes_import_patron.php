@@ -72,7 +72,7 @@ function exec_spiplistes_import_patron(){
 	$message_texte = $message_texte;
 
 	if((strlen($texte) > 10))
-		spip_query("UPDATE spip_courriers SET titre="._q($titre).", texte="._q($texte).", message_texte="._q($message_texte)." WHERE id_courrier="._q($id_message));
+		spip_query("UPDATE spip_courriers SET titre=".sql_quote($titre).", texte=".sql_quote($texte).", message_texte=".sql_quote($message_texte)." WHERE id_courrier=".sql_quote($id_message));
 	else
 		$message_erreur = _T('spiplistes:patron_erreur');
 	

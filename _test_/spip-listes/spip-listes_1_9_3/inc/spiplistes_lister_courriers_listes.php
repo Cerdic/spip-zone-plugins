@@ -72,7 +72,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 		case 'courriers':
 			$sql_select = "id_courrier, titre, date, date_debut_envoi,date_fin_envoi, nb_emails_envoyes,total_abonnes,email_test";
 			$sql_from = "spip_courriers";
-			$sql_where = "statut="._q($statut);
+			$sql_where = "statut=".sql_quote($statut);
 			$sql_order = "date";
 			break;
 		case 'listes':
@@ -85,7 +85,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 			}
 			$sql_select = "id_liste,titre,date,patron,maj ";
 			$sql_from = "spip_listes";
-			$sql_where = "statut="._q($statut)." $clause_where";
+			$sql_where = "statut=".sql_quote($statut)." $clause_where";
 			$sql_order = "date";
 			break;
 	}

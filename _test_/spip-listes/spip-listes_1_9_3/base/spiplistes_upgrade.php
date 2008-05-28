@@ -171,24 +171,24 @@ function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version,
 						)
 					);
 					if($message_auto=="oui")
-						spip_query("UPDATE spip_listes SET patron="._q($patron_liste).", periode="._q($periode_liste)
-						  . ", maj=FROM_UNIXTIME("._q($maj_liste)."), email_envoi="._q($email_envoi)
-						  . ", message_auto="._q($message_auto)." WHERE id_liste="._q($id_liste));
+						spip_query("UPDATE spip_listes SET patron=".sql_quote($patron_liste).", periode=".sql_quote($periode_liste)
+						  . ", maj=FROM_UNIXTIME(".sql_quote($maj_liste)."), email_envoi=".sql_quote($email_envoi)
+						  . ", message_auto=".sql_quote($message_auto)." WHERE id_liste=".sql_quote($id_liste));
 					
 					//Auteur de la liste (moderateur)
-					spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_liste ="._q($id_liste));
-					spip_query("INSERT INTO spip_auteurs_mod_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
+					spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_liste =".sql_quote($id_liste));
+					spip_query("INSERT INTO spip_auteurs_mod_listes (id_auteur, id_liste) VALUES (".sql_quote($connect_id_auteur).",".sql_quote($id_liste).")");
 					
 					//recuperer les abonnes (peut etre plus tard ?)
-					$abos=spip_query("SELECT id_auteur, id_article FROM spip_auteurs_articles WHERE id_article="._q($id_article));
+					$abos=spip_query("SELECT id_auteur, id_article FROM spip_auteurs_articles WHERE id_article=".sql_quote($id_article));
 					while($abonnes=spip_fetch_array($abos)){
 						$abo=$abonnes["id_auteur"];
-						spip_query("INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES ("._q($abo).","._q($id_liste).")");
+						spip_query("INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES (".sql_quote($abo).",".sql_quote($id_liste).")");
 					}
 					
 					//effacer les anciens articles/abo
-					spip_query("DELETE FROM spip_articles WHERE id_article ="._q($id_article));
-					spip_query("DELETE FROM spip_auteurs_articles WHERE id_article ="._q($id_article));
+					spip_query("DELETE FROM spip_articles WHERE id_article =".sql_quote($id_article));
+					spip_query("DELETE FROM spip_auteurs_articles WHERE id_article =".sql_quote($id_article));
 		
 					//manque un traitement pour récuperer les courriers
 				}
@@ -200,10 +200,10 @@ function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version,
 				$format = $abo['abo'] ;
 			if($format=="texte" OR $format=="html")
 			spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`, `spip_listes_format`) 
-			VALUES ("._q($row[1]).","._q($format).") ");
+			VALUES (".sql_quote($row[1]).",".sql_quote($format).") ");
 			else
 			spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`, `spip_listes_format`) 
-			VALUES ("._q($row[1]).","._q('non').") ");
+			VALUES (".sql_quote($row[1]).",".sql_quote('non').") ");
 			}
 			
 			echo _T('spiplistes:regulariser');
@@ -282,10 +282,10 @@ function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version,
 				$format = $abo['abo'] ;
 			if($format=="texte" OR $format=="html")
 			spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`, `spip_listes_format`) 
-			VALUES ("._q($row[1]).","._q($format).") ");
+			VALUES (".sql_quote($row[1]).",".sql_quote($format).") ");
 			else
 			spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`, `spip_listes_format`) 
-			VALUES ("._q($row[1]).","._q('non').") ");
+			VALUES (".sql_quote($row[1]).",".sql_quote('non').") ");
 			
 				if ($abo['abo']) {
 					$cmpt[$abo['abo']] ++;

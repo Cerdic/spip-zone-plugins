@@ -384,7 +384,7 @@ if(!function_exists("lire_meta")) {
 		$result = 0;
 		if(_FILE_CONNECT && @file_exists(_FILE_CONNECT_INS .'.php')) {
 			if(!isset($GLOBALS['meta'][$key])) {
-				$sql_result = @spip_query("SELECT valeur FROM spip_meta WHERE nom="._q($key)." LIMIT 1");
+				$sql_result = @spip_query("SELECT valeur FROM spip_meta WHERE nom=".sql_quote($key)." LIMIT 1");
 				if($row = spip_fetch_array($sql_result)) {
 					$result = $row[$key];
 					$GLOBALS['meta'][$key] = $result;

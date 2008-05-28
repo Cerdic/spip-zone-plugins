@@ -66,7 +66,7 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 						if(is_array($abos_liste) && count($abos_liste)) {
 							$sql_values = "";
 							foreach($abos_liste as $id_liste) {
-								$sql_values .= " ("._q($id_auteur).","._q($id_liste).",NOW()),";
+								$sql_values .= " (".sql_quote($id_auteur).",".sql_quote($id_liste).",NOW()),";
 							}
 							$sql_values = rtrim($sql_values, ",");
 							if(!empty($sql_values)) {
