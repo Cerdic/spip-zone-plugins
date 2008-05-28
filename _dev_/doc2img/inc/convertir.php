@@ -44,6 +44,7 @@ function convertir_document($id_document) {
 
     include_spip('base/compat193');
     include_spip('cfg_options');
+    include_spip('inc/documents');
 
     //racine du site c'est a dire url_site/
     //une action se repere à la racine du site 
@@ -65,7 +66,7 @@ function convertir_document($id_document) {
     // on précise le repertoire IMG/
     $document['source_url'] = _DIR_IMG.$document['source_url'];
 
-    //decompose nom.extension
+    //decompose nom.extension
     $file_array = explode(".",$document['fullname']);
     $document['extension'] = $file_array[1];
     $document['name'] = $file_array[0];
@@ -77,10 +78,18 @@ function convertir_document($id_document) {
     $document['cible_url'] = _DIR_IMG.lire_config('doc2img/repertoire_cible').'/'.$document['name'];
 
     spip_log('cible_url : '.$racine_site.'/'.$document['cible_url'] ,'doc2img');
-
+    
+    //vérifie si le document a été converti
+    $exist = sql_getfetsel('id_doc2img','spip_doc2img','id_document='.$id_document);
+    if (!$exist) {
+        include_spip('base/doc2img_install');
+        rm($racine_site.'/'.$document['cible_url']);
+        mkdir($racine_site.'/'.$document['cible_url']);
+    }
+            
     //si le repertoire existe on ne genere pas les images, url absolue
-    if (@mkdir($racine_site.'/'.$document['cible_url'])!==false) {
-
+    //if (@mkdir($racine_site.'/'.$document['cible_url'])!==false) {
+    if (!$exist) {
         //charge le document dans imagick
         spip_log('charge le document','doc2img');
         spip_log('url_source'.$racine_site.'/'.$document['source_url'].'/'.$document['fullname'],'doc2img');
@@ -140,7 +149,6 @@ function convertir_document($id_document) {
     } else {
         spip_log("il semblerait que ce document ai déjà été converti","doc2img");
     }
-
 }
 
 ?>
