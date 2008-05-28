@@ -1,14 +1,18 @@
 #CACHE{0}
 <html>
 <body>
-<BOUCLE_arts(ARTICLES){tout}>
-<a href='#URL_ARTICLE'>#TITRE</a>
+<p><a href="ecrire/?exec=sigles_tous">Gérer les acronymes</a></p>
+<p>
+<BOUCLE_arts(ARTICLES){tout}{!par date}>
+<a name="art#ID_ARTICLE"></a><a href='#URL_ARTICLE'>#TITRE</a>
   [(#TITRE|acronymes_voir|acronymes_ajouter)]
   [(#SOUSTITRE|acronymes_voir|acronymes_ajouter)]
   [(#DESCRIPTIF|acronymes_voir|acronymes_ajouter)]
   [(#CHAPO|acronymes_voir|acronymes_ajouter)]
   [(#TEXTE|acronymes_voir|acronymes_ajouter)]
-  <br/>
+  <br />
 </BOUCLE_arts>
+</p>
+<p><a href="ecrire/?exec=sigles_tous">Gérer les acronymes</a></p>
 </body>
 </html>
