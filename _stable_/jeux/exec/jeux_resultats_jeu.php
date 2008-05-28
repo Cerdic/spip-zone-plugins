@@ -7,7 +7,7 @@ include_spip('exec/inc_boites_infos');
 function exec_jeux_resultats_jeu(){
 	$id_jeu 	= _request('id_jeu');
 	$par = _request('par');
-	($par == '') ? $par='resultat_court' : $par = $par;
+	($par == '') ? $par='' : $par = $par;
 	
 	$requete	= spip_fetch_array(spip_query("SELECT id_jeu,type_jeu,titre_prive FROM spip_jeux WHERE id_jeu =".$id_jeu));
 	$id_jeu		= $requete['id_jeu'];

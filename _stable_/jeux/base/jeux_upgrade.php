@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['jeux_base_version'] = 0.13;
+$GLOBALS['jeux_base_version'] = 0.14;
 
 function jeux_install($install){
 	$version_base = $GLOBALS['jeux_base_version'];
@@ -90,6 +90,13 @@ function jeux_verifier_base(){
 				spip_query('ALTER TABLE `spip_jeux` DROP `titre`');
 			if (isset($desc['field']['nom']))
 				spip_query('ALTER TABLE `spip_jeux` DROP `nom`');
+			jeux_maj_version($current_version, $test_version);
+		}
+		if ($current_version<($test_version=0.14)){
+			// suppression de 'titre' et 'nom'
+			$desc = $showtable("spip_jeux_resultats", true);
+			if (!isset($desc['field']['total']))
+				spip_query('ALTER TABLE `spip_jeux_resultats` ADD `total` int(12) NOT NULL AFTER `resultat_long`');
 			jeux_maj_version($current_version, $test_version);
 		}
 

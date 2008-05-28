@@ -7,7 +7,7 @@ include_spip('exec/inc_boites_infos');
 function exec_jeux_resultats_auteur(){
 	$id_auteur 	= _request('id_auteur');
 	$par = _request('par');
-	($par == '') ? $par='resultat_court' : $par = $par;
+	($par == '') ? $par='' : $par = $par;
 	
 	$requete = spip_fetch_array(spip_query("SELECT id_auteur,nom FROM spip_auteurs WHERE id_auteur =".$id_auteur));
 	$nom = $requete['nom'];
