@@ -43,7 +43,7 @@
 		pipeline('exec_init',array('args'=>array('exec'=>'meteo','id_meteo'=>$id_meteo),'data'=>''));
 
 		if (!empty($_POST['changer_action'])) {
-			$action	= $_POST['action'];
+			$action	= $_POST['action_meteo'];
 			if ($action == 'poubelle') {
 				spip_query('DELETE FROM spip_previsions WHERE id_meteo="'.$id_meteo.'"');
 				spip_query('DELETE FROM spip_meteo WHERE id_meteo="'.$id_meteo.'" LIMIT 1');
@@ -54,7 +54,8 @@
 		}
 
 		if (!empty($_POST['reload'])) {
-			cron_previsions_meteo($dummy);
+			include_spip('genie/previsions_meteo');
+			genie_previsions_meteo($dummy);
 		}
 
 		$requete_meteo = 'SELECT id_meteo, ville, code, statut, maj FROM spip_meteo WHERE id_meteo="'.$id_meteo.'" LIMIT 1';
@@ -88,10 +89,10 @@
 		echo "<tr width='100%'><td width='100%' valign='top'>";
 		switch ($statut) {
 			case 'publie':
-				$logo_statut = http_img_pack("puce-verte.gif");
+				$logo_statut = http_img_pack("puce-verte.gif",_T('publie'));
 				break;
 			case 'en_erreur':
-				$logo_statut = http_img_pack("puce-orange-anim.gif");
+				$logo_statut = http_img_pack("puce-orange-anim.gif",_T('erreur'));
 				break;
 		}
 		
@@ -118,7 +119,7 @@
 
 		echo debut_cadre_relief(true);
 		echo "<center><B>"._T('meteo:action')."</B>&nbsp;";
-		echo "<SELECT NAME='action' SIZE='1' CLASS='fondl'>\n";
+		echo "<SELECT NAME='action_meteo' SIZE='1' CLASS='fondl'>\n";
 		echo '	<OPTION VALUE="aucune">'._T('meteo:action_aucune').'</OPTION>'."\n";
 		echo '	<OPTION VALUE="poubelle">'._T('meteo:action_poubelle').'</OPTION>'."\n";
 		echo "</SELECT>";

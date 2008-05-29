@@ -51,7 +51,8 @@
 				spip_query($modification);
 			}
 			
-			cron_previsions_meteo($dummy);
+			include_spip('genie/previsions_meteo');
+			genie_previsions_meteo($dummy);
 
 			$url = generer_url_ecrire('meteo', 'id_meteo='.$id_meteo, '&');
 			echo '<script language="javascript" type="text/javascript">window.location.replace("'.$url.'");</script>';

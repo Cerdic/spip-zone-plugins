@@ -18,6 +18,6 @@
 	 }
 
 	include_spip('base/meteo');
-
+	include_spip('inc/vieilles_defs');
 
 ?>
