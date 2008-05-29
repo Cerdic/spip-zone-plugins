@@ -77,4 +77,33 @@ function date_depuis($date) {
  	    return $retour;
 }
 
+// http://doc.spip.org/@inc_editer_auteurs_dist
+function inc_editer_auteurs($type, $id, $flag, $cherche_auteur, $ids, $titre_boite = NULL, $script_edit_objet = NULL) {
+	global $options;
+	$arg_ajax = "&id_{$type}=$id";
+	//ligne rajouté au fork
+	$arg_ajax .= "&type=".$type;
+	//fin du fork du fichier
+	
+	if ($script_edit_objet===NULL)
+	 $script_edit_objet = $type.'s';
+
+	if ($titre_boite===NULL)
+		$titre_boite = _T('texte_auteurs'). aide("artauteurs");
+	else
+		$arg_ajax.= "&titre=".urlencode($titre_boite);
+
+	$cond_les_auteurs = "";
+	$aff_les_auteurs = afficher_auteurs_objet($type, $id, $flag, $cond_les_auteurs, $script_edit_objet, $arg_ajax);
+
+	if ($flag AND $options == 'avancees') {
+		$futurs = ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit_objet, $arg_ajax);
+	} else $futurs = '';
+
+	$ldap = isset($GLOBALS['meta']['ldap_statut_import']) ?
+	  $GLOBALS['meta']['ldap_statut_import'] : '';
+
+	return editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $aff_les_auteurs, $futurs, $ldap,$titre_boite,$script_edit_objet, $arg_ajax);
+}
+
 ?>
