@@ -1,13 +1,12 @@
 <plugin>
-        <nom>Plugin Grenouille</nom>
+        <nom>Grenouille</nom>
         <auteur>[Art&eacute;go->http://www.artego.fr] + touti</auteur>
         <version>1.3</version>
         <etat>stable</etat>
-        <description>Pr&eacute;visions m&eacute;t&eacute;o extraites du xml comme xoap.weather.com/weather/local/FRXX0337?cc=*&unit=s&dayf=7
+        <description>Pr&eacute;visions m&eacute;t&eacute;o extraites du xml comme xoap.weather.com/weather/local/FRXX0337?cc=*&amp;unit=s&amp;dayf=7
 _ Compatible avec {{SPIP 1.9.3}}
 _ D&eacute;posez vos images numerotees.png dans le dossier grenouille! cf http://liquidweather.net/icons.php
-_ {{D&eacute;mo}} voir [->../?page=demo_meteo]
-_ {{Mod&egrave;le}} dans squelettes <code>[(#MODELE{meteo,id_meteo=1})]</code> ou en r&eacute;daction <code><meteo|id_meteo=1></code>
+_ {{Mod&egrave;le}} dans squelettes <code>[(#MODELE{meteo,id_meteo=1})]</code> ou en r&eacute;daction <code><meteo|id_meteo=1 /></code>
         </description>
         <lien>http://www.artego.fr/-Previsions-meteo-</lien>
         <options>meteo_options.php</options>
