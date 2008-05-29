@@ -1,0 +1,17 @@
+<plugin>
+	<nom>PB PageRank</nom>
+	<auteur>ARNO*</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>Ce plugin affiche le PageRank Google de votre site sur la page «A suivre».</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>pb_pagerank</prefix>
+	<install>base/pb_pagerank_install.php</install>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<action>interface</action>
+		<inclure>pb_pagerank.php</inclure>
+	</pipeline>
+
+</plugin>
+
