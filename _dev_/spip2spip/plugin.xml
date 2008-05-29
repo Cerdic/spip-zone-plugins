@@ -6,8 +6,10 @@
 	erational
  	[erational.org->http://www.erational.org]
 _ &#169; 2006-2008 - Licence GPL
+	Modifier par PLANTINET Florent de Miura Conseil
+	[Miura Conseil->http://http://www.miura-conseil.com/]
 	</auteur>
-	<version>1.5</version>
+	<version>1.6</version>
 	<etat>dev</etat>
 	<description>
 Permet de copier les articles de SPIP distant dans le SPIP sous forme d'articles. 
@@ -18,6 +20,8 @@ _ Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;e
 -* images, documents attach&#233;s recopi&#233;s en documents distants
 -* essayer de faire correspondre les auteurs
 -* licence ...
+-* Mise à jour des articles et evenements deja présent
+-* Ajout des evenements
 	</description>
 	<lien>http://www.spip-contrib.net/SPIP2SPIP</lien> <!-- URI de documentation --> 
 	<fonctions>spiptospip_filtre.php</fonctions>

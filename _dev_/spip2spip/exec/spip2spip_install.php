@@ -49,11 +49,18 @@ function exec_spip2spip_install(){
     `last_syndic` timestamp,
     PRIMARY KEY  (`id`)
   );";  
+
   spip_query($sql);
-  
+
   // ajout du groupe mot 
   echo "<h4>"._T('spiptospip:install_spip2spip_3')."</h4>\n";
-  $sql = "INSERT INTO ".$table_prefix."_groupes_mots VALUES ('', '- spip2spip -', '".addslashes(_T('spiptospip:install_spip2spip_4'))."', '".addslashes(_T('spiptospip:install_spip2spip_5'))."', 'non', '', 'oui', '', 'oui', '', 'oui', 'oui', 'non', '')";
+  $sql = "INSERT INTO ".$table_prefix."_groupes_mots
+  (`id_groupe` ,`titre` ,`descriptif` ,`unseul` ,`obligatoire` ,`articles` ,`breves` ,`rubriques` ,`syndic` ,`evenements` ,`minirezo` ,`comite` ,`forum` ,`maj`) VALUES
+  ('', '- spip2spip -', '".addslashes(_T('spiptospip:install_spip2spip_4'))."', '".addslashes(_T('spiptospip:install_spip2spip_5'))."', 'non', '', 'oui', '', 'oui', '', 'oui', 'oui', 'non', '')";
+
+  echo $sql;
+  
+  
   spip_query($sql); 
   
   echo "<div style='color:green;margin:10px 0'>"._T('spiptospip:install_spip2spip_99')."</div>";

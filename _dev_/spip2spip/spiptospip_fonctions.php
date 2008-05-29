@@ -6,10 +6,20 @@
 // Parametres
 //---------------------------------------
 define("DEBUG_S2S",false);        // mode debug ?
-define("STATUT_DEFAUT","prop");   // statut des articles importés: prop(proposé),publie(publié)
-define("PREVENIR_EMAIL",true);    // prevenir par email à chaque nouvelle syndication ?
+define("STATUT_DEFAUT","publie");   // statut des articles importés: prop(proposé),publie(publié)
+define("PREVENIR_EMAIL",false);    // prevenir par email à chaque nouvelle syndication ?
 // si oui, sur quel email envoie le report ?
 define("EMAIL_S2S", $GLOBALS['meta']['adresse_suivi'] ); // par defaut, adresse de suivi editorial, possible de forcer un email "machin@foo.org" 
+
+/* LOG */
+
+function errlogtxt($errtxt){
+	$fp = fopen('errlog.txt','a+');
+	fseek($fp,SEEK_END);
+	$nouverr=$errtxt."\r\n";
+	fputs($fp,$nouverr);
+	fclose($fp); //basta
+}
 
 
 //---------------------------------------
@@ -48,7 +58,7 @@ function analyser_backend_spip2spip($rss){
   include_ecrire("inc_texte.php"); # pour couper()
 	include_ecrire("inc_filtres.php"); # pour filtrer_entites()
 		
-	$xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','lang','keyword','licence','documents'); 
+	$xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','evenements', 'lang','keyword','licence','documents'); 
 	
 	$syndic_regexp = array(
 				'item'           => ',<item[>[:space:]],i',
@@ -63,10 +73,12 @@ function analyser_backend_spip2spip($rss){
 				'ps'             => ',<ps[^>]*>(.*?)</ps[^>]*>,ims',
 				'auteur'         => ',<auteur[^>]*>(.*?)</auteur[^>]*>,ims',
 				'link'           => ',<link[^>]*>(.*?)</link[^>]*>,ims',
+				'evenements'       => ',<evenements[^>]*>(.*?)</evenements[^>]*>,ims',
         'lang'           => ',<lang[^>]*>(.*?)</lang[^>]*>,ims',
         'keyword'        => ',<keyword[^>]*>(.*?)</keyword[^>]*>,ims',
         'licence'        => ',<licence[^>]*>(.*?)</licence[^>]*>,ims',
         'documents'       => ',<documents[^>]*>(.*?)</documents[^>]*>,ims',
+		
 	);
 	
 	$xml_doc_tags = array('id','url','titre','desc');
@@ -81,6 +93,20 @@ function analyser_backend_spip2spip($rss){
 				'desc'           => ',<desc[^>]*>(.*?)</desc[^>]*>,ims',
 	);
 	
+	$xml_event_tags = array('idevent','datedeb','datefin','titre','desc','lieu','horaire','idsource');
+
+	$evenement_regexp = array(		
+  			'evenement'       => ',<evenement[>[:space:]],i',
+				'evenementfin'    => '</evenement>',
+				'idevent'             => ',<idevent[^>]*>(.*?)</idevent[^>]*>,ims',
+        		'datedeb'            => ',<datedeb[^>]*>(.*?)</datedeb[^>]*>,ims',
+				'datefin'          => ',<datefin[^>]*>(.*?)</datefin[^>]*>,ims',
+				'titre'          => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
+				'desc'           => ',<desc[^>]*>(.*?)</desc[^>]*>,ims',
+				'lieu'          => ',<lieu[^>]*>(.*?)</lieu[^>]*>,ims',
+				'horaire'          => ',<horaire[^>]*>(.*?)</horaire[^>]*>,ims',
+				'idsource'          => ',<idsource[^>]*>(.*?)</idsource[^>]*>,ims',
+	);
 	// fichier backend correct ?
 	if (!is_spip2spip_backend($rss)) return _T('avis_echec_syndication_01');
 	
@@ -104,6 +130,8 @@ function analyser_backend_spip2spip($rss){
 		$debut_texte = substr($rss, "0", $debut_item);
 		$fin_texte = substr($rss, $fin_item, strlen($rss));
 		$rss = $debut_texte.$fin_texte;
+		
+		
 	}
 
 	// Analyser chaque <item>...</item> du backend et le transformer en tableau
@@ -152,7 +180,38 @@ function analyser_backend_spip2spip($rss){
               }             
               $data['documents'] =  serialize($portfolio);
           }       
-    }			                                                  
+    }
+	
+		                                                  
+
+	// On parse le noeud evenement
+    if ($data['evenements'] != "") {         
+          
+          $evenements = array();
+          if (preg_match_all($evenement_regexp['evenement'],$data['evenements'],$r3, PREG_SET_ORDER))
+          	foreach ($r3 as $regs) {
+          		$debut_item = strpos($data['evenements'],$regs[0]);
+          		$fin_item = strpos($data['evenements'],$evenement_regexp['evenementfin'])+strlen($evenement_regexp['evenementfin']);
+          		$evenements[] = substr($data['evenements'],$debut_item,$fin_item-$debut_item);
+          		$debut_texte = substr($data['evenements'], "0", $debut_item);
+          		$fin_texte = substr($data['evenements'], $fin_item, strlen($data['evenements']));
+          		$data['evenements'] = $debut_texte.$fin_texte;
+				
+          }
+          
+          if (count($evenements)) {          
+              foreach ($evenements as $evenement) {                 
+                 $data_node = array();
+                 foreach ($xml_event_tags as $xml_event_tag) {
+                    if (preg_match($evenement_regexp[$xml_event_tag],$evenement,$match)) $data_node[$xml_event_tag] = $match[1]; 
+  				                                                                      else $data_node[$xml_event_tag] = "";
+  				       } 
+                $portfolio[] = $data_node;                                                     
+              }   
+			  //print_r($portfolio)    ;      
+              $data['evenements'] =  serialize($portfolio); 
+          }       
+    }	
 	
 		// Nettoyer les donnees et remettre les CDATA en place
 		foreach ($data as $var => $val) {
@@ -267,7 +326,7 @@ function passe_document_mode_vignette($id_document,$mode="vignette") {
 //
 // layout invert la navigation
 function insert_shortcut() {
-  /* debug only
+  /* //debug only
   debut_raccourcis();
   //icone_horizontale(....);  
   echo "<ul>\n";

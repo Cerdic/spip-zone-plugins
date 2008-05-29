@@ -39,6 +39,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'install_spip2spip_99' => '<p>Installation de SPIP2SPIP complète !</p><a href=\'?exec=spip2spip\'>Retourner sur l\'interface principale de SPIP2SPIP</a>',
 'imported_already' => 'article d&eacute;jà import&eacute;',
 'imported_new' => 'nouvel article',
+'imported_update' => 'article mis &agrave; jour  ',
+'event_ok' => 'Nouvel Evenement le ',
 'imported_view' => 'consulter l\'article import&eacute;',
 'installed' => 'spip2spip est install&eacute;. cette page ne sert plus à rien</p>',
 

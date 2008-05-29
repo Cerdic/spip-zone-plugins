@@ -62,12 +62,102 @@ function exec_spip2spip_syndic(){
           echo "<ul>\n";        
           // Est que l'article n'a pas été déjà importée ?
           if (isset($article['titre'])) {
+		  	$documents_current_article = array();
             $current_titre = $article['titre'];
             $sql2 = "SELECT COUNT(titre) as c FROM ".$table_prefix."_articles WHERE titre='".addslashes($current_titre)."'";
             $nb_article = spip_fetch_array(spip_query($sql2));
             if ($nb_article['c']!=0) { 
-              // article déjà connu
-              echo "<li>[<span style='color:#999'>"._T('spiptospip:imported_already')."</span>] $current_titre</li>\n";
+            	$sql3 = "SELECT * FROM ".$table_prefix."_articles WHERE titre='".addslashes($current_titre)."'";
+            	$modif = spip_fetch_array(spip_query($sql3));
+				
+				$_amodif=false; $_elemmodif="";
+                $_surtitre = $article['surtitre'];
+				if($modif['surtitre']!=$_surtitre){$_amodif=true; $_elemmodif .="surtitre, ";}
+				
+				$_titre = $article['titre'];
+				if($modif['titre']!=$_titre){$_amodif=true;$_elemmodif .="titre, ";}
+				
+				$_soustitre = $article['soustitre'];
+				if($modif['soustitre']!=$_soustitre){$_amodif=true;$_elemmodif .="soustitre, ";}
+				
+				$_descriptif = convert_extra($article['descriptif'],$documents_current_article);
+				if($modif['descriptif']!=$_descriptif){$_amodif=true;$_elemmodif .="descriptif, ";}
+				
+				$_chapo = convert_extra($article['chapo'],$documents_current_article);
+				if($modif['chapo']!=$_chapo){$_amodif=true;$_elemmodif .="chapo, "; echo "<hr />";
+				echo $modif['chapo'];
+				echo "<hr />";
+				echo $_chapo;}
+				
+				$_texte = convert_extra($article['texte'],$documents_current_article);
+				if($modif['texte']!=$_texte){$_amodif=true;$_elemmodif .="texte, ";}
+				
+				$_ps = convert_extra($article['ps'],$documents_current_article);
+				if($modif['ps']!=$_ps){$_amodif=true;$_elemmodif .="ps, ";}
+				
+				$_date =  date('Y-m-d H:i:s',time()); // $article['date'];  // date de la syndication ou date de l'article ?
+				$_lang =  $article['lang'];
+				if($modif['lang']!=$_lang){$_amodif=true;$_elemmodif .="lang, ";}
+				
+				$_id_auteur = $article['auteur'];
+				if($modif['auteur']!=$_auteur){$_amodif=true;$_elemmodif .="auteur, ";}
+				
+				$_link = $article['link'];
+				
+				$_licence = $article['licence']; 
+				if($modif['licence']!=$_licence){$_amodif=true;$_elemmodif .="licence, ";}		 
+			 
+			 	if($_amodif){		//(lang,surtitre,titre,soustitre,id_rubrique,descriptif,chapo,texte,ps,statut,accepter_forum,date) `texte`='".addslashes($_texte)."',
+				$sql4 = "UPDATE ".$table_prefix."_articles ";
+  				        $sql4.="SET  `lang`='".addslashes($_lang)."',`surtitre`='".addslashes($_surtitre)."',`titre`='".addslashes($_titre)."',`soustitre`='".addslashes($_soustitre)."',`descriptif`='".addslashes($_descriptif)."',`chapo`='".addslashes($_chapo)."',`texte`='".addslashes($_texte)."',`ps`='".addslashes($_ps)."',`statut`='".$_statut."',`date`='".$_date."' ";
+						$sql4.="WHERE id_article='".$modif['id_article']."';";
+						//echo $sql4;
+  				        spip_query($sql4);
+					echo "<li>[<span style='color:#999'>"._T('spiptospip:imported_update')."</span>] $current_titre</li>\n";
+					echo "<a href='?exec=articles&amp;id_article=".$modif['id_article']."' style='padding:5px;border:1px solid;background:#ddd;display: block;'>"._T('spiptospip:imported_view')."</a>";
+					echo "<div style='padding:5px;border:1px solid;background:#ddd;display: block;'>".$_elemmodif."</div>";
+					
+					}
+					else {
+					echo "<li>[<span style='color:#999'><a href='?exec=articles&amp;id_article=".$modif['id_article']."' >"._T('spiptospip:imported_already')."</a></span>] $current_titre</li>\n";
+					}
+				   
+				  // traitement des evenements
+                  $_evenements = $article['evenements'];
+				  $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );
+                  if ($_evenements!="") {
+					   $_evenements=unserialize($_evenements);           
+                  		foreach($_evenements as $_evenement) {                      
+							$id_distant = $_evenement['idevent'];
+							$datedeb = $_evenement['datedeb'];
+							$datefin = $_evenement['datefin'];
+							$lieu = addslashes($_evenement['lieu']);
+							$horaire = $_evenement['horaire'];
+							$titre = addslashes($_evenement['titre']);                        
+							$desc = addslashes($_evenement['desc']);                         
+							$idsource = $_evenement['idsource'];      
+							
+							if($_titre==$titre){	  
+								$sqle = "SELECT * FROM ".$table_prefix."_evenements WHERE id_article='".$modif['id_article']."'";
+								$rese=spip_query($sqle);
+								$dedans=false;
+								$rechevent=array($id_distant,$datedeb,$datefin,$lieu,$horaire,$titre,$desc,$idsource);
+								while($modifevent = spip_fetch_array($rese)){
+										if($id_distant==$modifevent['id_evenement']){ $dedans=true; }
+								}	
+								if(!$dedans){
+									 $sql="INSERT INTO `".$table_prefix."_evenements` (`id_evenement` ,	`id_article` ,`date_debut` ,`date_fin` ,`titre` ,`descriptif` ,	`lieu` ,`horaire` ,`id_evenement_source` ,`idx` ,`maj`)
+										VALUES ('".$id_distant."' , '".$modif['id_article']."', '".$datedeb."', '".$datefin."', '".$titre."', '".$desc."', '".$lieu."', '".$horaire."', '".$idsource."', 'oui', NOW( ))";
+								  echo "<div style='padding:5px;border:1px solid #5DA7C5;background:#ddd;display: block;'>"._T('spiptospip:event_ok').$datedeb." &agrave; ".$lieu."</div>";
+										//echo $sql;							  
+										  spip_query($sql);  
+								}
+							}
+       			
+                    	} 
+                  }	
+			
+
             } else {  
               // nouvel article à importer
               echo "<li>[<span style='color:#090'>"._T('spiptospip:imported_new')."</span>] $current_titre<br />\n";
@@ -156,7 +246,7 @@ function exec_spip2spip_syndic(){
               		$_licence = $article['licence'];                           		
               		
               		// on cite la source originale ds le champs ps et la licence
-              		$_ps .= addslashes(_T('spiptospip:origin_url'))." [".$_link."->".$_link."]";
+              		//$_ps .= addslashes(_T('spiptospip:origin_url'))." [".$_link."->".$_link."]";
               		
                   // licence ?                
                   if ($_licence !="" && !isLicenceInstalled)                               		
@@ -188,6 +278,33 @@ function exec_spip2spip_syndic(){
                        $sql="INSERT INTO ".$table_prefix."_documents_articles (id_document,id_article) VALUES ('$document_current_article','$id_nouvel_article')";                     
                        spip_query($sql);                  			
                   }                       
+ 
+                   // traitement des evenements
+                  $_evenements = $article['evenements'];
+				  $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );
+                  if ($_evenements!="") {
+                   $_evenements=unserialize($_evenements);           
+                    foreach($_evenements as $_evenement) {                      
+                        $id_distant = $_evenement['idevent'];
+                        $datedeb = $_evenement['datedeb'];
+                        $datefin = $_evenement['datefin'];
+                        $lieu = addslashes($_evenement['lieu']);
+                        $horaire = $_evenement['horaire'];
+                        $titre = addslashes($_evenement['titre']);                        
+                        $desc = addslashes($_evenement['desc']);                         
+                        $idsource = $_evenement['idsource'];      
+						      
+						//echo $titreart."==".$titre."<br />";		  
+						if($_titre==$titre){		                      
+                          $sql="INSERT INTO `".$table_prefix."_evenements` (`id_evenement` ,	`id_article` ,`date_debut` ,`date_fin` ,`titre` ,`descriptif` ,	`lieu` ,`horaire` ,`id_evenement_source` ,`idx` ,`maj`)
+								VALUES ('".$id_distant."' , '".$id_nouvel_article."', '".$datedeb."', '".$datefin."', '".$titre."', '".$desc."', '".$lieu."', '".$horaire."', '".$idsource."', 'oui', NOW( ))";
+						  echo "<div style='padding:5px;border:1px solid #5DA7C5;background:#ddd;display: block;'>"._T('spiptospip:event_ok').$datedeb." &agrave; ".$lieu."</div>";
+						  /*echo $sql;
+						  echo "<hr />";*/
+        				          spip_query($sql);      
+						}            			
+                    	} 
+                  }
                                        
                   // .... dans le groupe mot "licence" ?
                   if ($_licence !="" && isLicenceInstalled) {                              		
