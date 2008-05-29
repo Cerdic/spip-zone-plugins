@@ -6,21 +6,10 @@
 // Parametres
 //---------------------------------------
 define("DEBUG_S2S",false);        // mode debug ?
-define("STATUT_DEFAUT","publie");   // statut des articles importés: prop(proposé),publie(publié)
-define("PREVENIR_EMAIL",false);    // prevenir par email à chaque nouvelle syndication ?
+define("STATUT_DEFAUT","prop");   // statut des articles importés: prop(proposé),publie(publié)
+define("PREVENIR_EMAIL",true);    // prevenir par email à chaque nouvelle syndication ?
 // si oui, sur quel email envoie le report ?
 define("EMAIL_S2S", $GLOBALS['meta']['adresse_suivi'] ); // par defaut, adresse de suivi editorial, possible de forcer un email "machin@foo.org" 
-
-/* LOG */
-
-function errlogtxt($errtxt){
-	$fp = fopen('errlog.txt','a+');
-	fseek($fp,SEEK_END);
-	$nouverr=$errtxt."\r\n";
-	fputs($fp,$nouverr);
-	fclose($fp); //basta
-}
-
 
 //---------------------------------------
 // Fonctions
@@ -323,20 +312,5 @@ function passe_document_mode_vignette($id_document,$mode="vignette") {
    spip_query($sql);
 } 
 
-//
-// layout invert la navigation
-function insert_shortcut() {
-  /* //debug only
-  debut_raccourcis();
-  //icone_horizontale(....);  
-  echo "<ul>\n";
-  echo "<li><a href='spip2spip.php'>home</a><br />&nbsp;</li>\n";
-  echo "<li><a href='spip2spip-install.php'>install</a></li>\n";
-  echo "<li><a href='spip2spip-cron.php'>complete syndication</a></li>\n";
-  echo "<li><a href='../spip2spip-cron.php'>cron</a></li>\n";
-  echo "</ul>\n";
-  fin_raccourcis();
-  */
-}
 
 ?>

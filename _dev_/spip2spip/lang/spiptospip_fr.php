@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_s2s_3' => 'Ajouter ce site',
 
 // H
-'how_to' => 'Pensez à bien attribuer les mots-cl&eacute;s du groupe spip2spip [<a href=\'?exec=mots_tous\'>Voir le groupe</a>]<br /><br />
+'how_to' => 'Pensez à bien attribuer les mots-cl&eacute;s du groupe - spip2spip - [<a href=\'?exec=mots_tous\'>Voir le groupe</a>]<br /><br />
 - attribuer les mots cl&eacute;s de ce groupe à vos <strong>articles</strong> dont vous voulez partager le contenu avec les autres<br /><br />
 - attribuer les mots cl&eacute;s de ce groupe à vos <strong>rubriques</strong> dans lequel vous voulez importer les articles d\'autres sites utilisant spip2spip dont vous voulez importer à une th&eacute;matique donn&eacute;e.',
 

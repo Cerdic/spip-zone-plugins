@@ -3,29 +3,32 @@
 	SPIP2SPIP
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	erational
- 	[erational.org->http://www.erational.org]
+	erational - [erational.org->http://www.erational.org]
+_ contribution: [Florent Plantinet->http://www.miura-conseil.com/]	
 _ &#169; 2006-2008 - Licence GPL
-	Modifier par PLANTINET Florent de Miura Conseil
-	[Miura Conseil->http://http://www.miura-conseil.com/]
 	</auteur>
 	<version>1.6</version>
 	<etat>dev</etat>
 	<description>
-Permet de copier les articles de SPIP distant dans le SPIP sous forme d'articles. 
-A la diff&#233;rence de miroir de syndication, vous avez le choix des articles &#224; recopier ou diffuser en attribuant les mots-cl&#233;s du groupe d&#233;di&#233; {{- spip2spip -}} 
+Permet d'importer et d'exporter des articles avec d'autres sites SPIP en conservant le formatage spip
+-* {{importer des articles:}} attribuer les mots-cl&#233;s du groupe d&#233;di&#233; {- spip2spip -} &#224; vos rubriques et inscrire les flux spip2spip de vos sites partenaires 
+-* {{diffuser vos articles:}} attribuer les mots-cl&#233;s du groupe d&#233;di&#233; {- spip2spip -} &#224; vos articles et donner [votre adresse de flux spip2spip (simple)->../spip.php?page=backend-spip2spip]  
+
+
 
 _ Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;es: 
 -* formatage original SPIP de l'article
 -* images, documents attach&#233;s recopi&#233;s en documents distants
 -* essayer de faire correspondre les auteurs
--* licence ...
--* Mise à jour des articles et evenements deja présent
--* Ajout des evenements
+-* licence ..
+-* &#233;v&#233;nements plugin agenda avec le [flux spip2spip (agenda)->../spip.php?page=backend-spip2spip-agenda]
+-* Mise &#224; jour des articles et &#233;v&#233;nements d&#233;j&#224; pr&#233;sent
+
 	</description>
 	<lien>http://www.spip-contrib.net/SPIP2SPIP</lien> <!-- URI de documentation --> 
 	<fonctions>spiptospip_filtre.php</fonctions>
 	<prefix>spip2spip</prefix>
+	<icon>img_pack/icon.png </icon>
 	<fonctions>spiptospip_fonctions.php</fonctions>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>

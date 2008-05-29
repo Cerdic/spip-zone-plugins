@@ -26,7 +26,6 @@ function exec_spip2spip_syndic(){
   echo "<br / ><br />";
   gros_titre(_T('spiptospip:copy_spip2spip'));
   debut_gauche();
-  insert_shortcut();
   debut_boite_info();
   echo _T('spiptospip:intro_spip2spip');
   fin_boite_info();
