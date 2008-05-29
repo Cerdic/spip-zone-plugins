@@ -1,0 +1,33 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})] #CACHE{0}
+
+<style type="text/css">
+<!--
+.posrelative{position: relative;}
+.minologo{position: absolute; top: -12px; left: 3px;}
+.liste .verdana2{border-bottom: 1px solid rgb(68, 68, 68); padding: 3px 3px 3px 30px; font-weight:bold;}
+-->
+</style>
+ 
+<BOUCLE_meteo(METEO) {id_meteo}>
+
+<div class="liste">
+<div class="posrelative">
+<div class="minologo"><img alt="meteo" src="#CHEMIN{/img_meteo/previsions.png}"/></div>
+<div class="verdana2"><:meteo:previsions_meteo:></div>
+</div>
+
+<table width='100%' cellpadding='2' cellspacing='0' border='0'>
+<BOUCLE_previsions(PREVISIONS) {id_meteo} {par date}>
+<tr class="tr_liste">
+<td style="width: 18px;">
+[(#ID_TEMPS|icone_num_meteo{[(#TEMPS|traduire_meteo)]}|image_reduire{25})]
+</td><td class="arial2" style="width: 100px;">
+[(#DATE|nom_jour|substr{0,3}) ][(#DATE|jour) ][(#DATE|nom_mois)]
+</td><td class="arial2" style="width: 100px;">
+[(#TEMPS|traduire_meteo)]
+</td><td class="arial1" style="width: 50px;">
+#MINIMA&#8451; - #MAXIMA&#8451;
+</td></tr>
+</BOUCLE_previsions>
+</table>
+</BOUCLE_meteo>

@@ -1,0 +1,41 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})] #CACHE{0}
+
+<style type="text/css">
+<!--
+.posrelative{position: relative;}
+.minologo{position: absolute; top: -12px; left: 3px;}
+.liste .verdana2{border-bottom: 1px solid rgb(68, 68, 68); padding: 3px 3px 3px 30px; font-weight:bold;}
+-->
+</style>
+
+<div class="liste">
+<div class="posrelative">
+<div class="minologo"><img alt="meteo" src="#CHEMIN{/img_meteo/meteo.png}"/></div>
+<div class="verdana2"><:meteo:liste_des_meteos:></div>
+</div>
+
+<div>
+<table width='100%' cellpadding='2' cellspacing='0' border='0'>
+	<BOUCLE_listmeteos(METEO){par id_meteo}>
+	<tr class='tr_liste'>
+	<td style='width: 12px;'>
+	[(#ID_METEO|meteo_puce_statut_meteo{[(#STATUT)]})]
+	</td>
+	<td class="arial2">
+	[<a href="[(#URL_ECRIRE{meteo}|parametre_url{id_meteo,#ID_METEO})]">(#VILLE)</a>] 
+	</td>
+	<td style='width: 200px;' class="arial1">
+	<BOUCLE_prevision(PREVISIONS) {id_meteo} {par date}{0,1}>[(#ID_TEMPS|icone_num_meteo{[(#TEMPS|traduire_meteo)]}|image_reduire{20})]</BOUCLE_prevision>
+	[(#STATUT|=={en_erreur}|?{<span style="color:red;"><:meteo:probleme_de_recuperation_du_flux:></span>,[(#ID_TEMPS|icone_num_meteo{[(#TEMPS|traduire_meteo)]}|image_reduire{25})]})]
+	</td>
+	<td style='width: 80px;' class="arial1">
+	#CODE
+	</td>
+	<td style='width: 50px; font-weight:bold;' class="arial1">
+	N&deg;&nbsp;#ID_METEO
+	</td>
+	</tr>
+	</BOUCLE_listmeteos>
+</table>
+</div>
+<B_listmeteos>

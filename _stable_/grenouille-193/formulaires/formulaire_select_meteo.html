@@ -1,0 +1,45 @@
+<B_meteos-dispos>
+	<form action="#SELF" method="post">
+	<label for="meteosel">Votre ville&nbsp;:</label><br />
+	<select name="meteosel" id="meteosel" class="forml">
+		<BOUCLE_meteos-dispos(METEO)>
+			[<option[ value="(#ID_METEO)"][ (#ENV*{meteosel}|=={#ID_METEO}|?{'selected="selected"',''})]>(#VILLE|supprimer_numero)</option>]
+		</BOUCLE_meteos-dispos>
+	</select>
+	<button type="submit" class="bouton" name="valider"><span>&gt;</span></button>
+</form>
+</B_meteos-dispos>
+
+<B_meteo>
+	<BOUCLE_meteo(METEO){id_meteo=#ENV*{meteosel}}>
+		<table>
+		<BOUCLE_previsions(PREVISIONS){id_meteo}{par date}{0,3}>
+			<tr>
+				<td style="width:69%">[(#DATE|nom_jour) ][(#DATE|jour) ][(#DATE|nom_mois)]</td>
+				<td style="width:15%">[(#TEMPS|icone_meteo{#CHEMIN{'images/img_meteo/'}})]</td>
+				<td style="width:15%">
+					#MINIMA&deg;C<br />
+					#MAXIMA&deg;C
+				</td>
+			</tr>
+		</BOUCLE_previsions>
+		</table>
+	</BOUCLE_meteo>
+</B_meteo>
+
+	<BOUCLE_meteo-defaut(METEO){par num ville}{0,1}>
+		<table>
+		<BOUCLE_previsions-defaut(PREVISIONS){id_meteo}{par date}{0,3}>
+			<tr>
+				<td style="width:66%">[(#DATE|nom_jour) ][(#DATE|jour) ][(#DATE|nom_mois)]</td>
+				<td style="width:17%">[(#TEMPS|icone_meteo{#CHEMIN{'images/img_meteo/'}})]</td>
+				<td style="width:17%">
+					#MINIMA&deg;C<br />
+					#MAXIMA&deg;C
+				</td>
+			</tr>
+		</BOUCLE_previsions-defaut>
+		</table>
+	</BOUCLE_meteo-defaut>
+
+<//B_meteo>

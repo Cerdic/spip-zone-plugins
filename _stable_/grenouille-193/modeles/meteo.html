@@ -1,0 +1,44 @@
+#CACHE{0}
+
+<style>
+.meteo{font-family:"Arial",sans-serif; color:#666; background-color:#E6E6FA; width:200px; padding:1em; margin:1em;}
+.meteo .villetitre{font-size:2em; margin:0; padding:0; margin-bottom:0.5em;}
+.meteoday{ text-align:center; display:block; background-color:#fff;}
+.meteoday dd, .prevision dd{color:#000}
+.prevision{float:left;  width:32%; text-align:center; font-size:0.8em}
+.prevision, .meteoday, .prevision dd, .meteoday dd{margin:0; padding:0;}
+</style>
+
+
+<div class="meteo">
+<BOUCLE_meteo(METEO) {id_meteo?}>
+
+<h4 class="villetitre">[(#VILLE|ucwords)]</h4>
+
+<BOUCLE_previsions(PREVISIONS) {id_meteo} {par date}{0,4}>
+
+[(#COMPTEUR_BOUCLE|=={1}|?{
+<dl class="meteoday">
+<dt>[(#DATE|nom_jour) ][(#DATE|affdate)]</dt>
+<dd>
+[(#ID_TEMPS|icone_num_meteo{[(#TEMPS|traduire_meteo)]}|image_reduire{70})]
+</dd>
+<dd>#MINIMA&#8451; - #MAXIMA&#8451;</dd>
+</dl>
+,
+<dl class="prevision">
+<dt>[(#DATE|nom_jour|substr{0,3}) ][(#DATE|jour) ][(#DATE|nom_mois)]</dt>
+<dd>
+[(#ID_TEMPS|icone_num_meteo{[(#TEMPS|traduire_meteo)]}|image_reduire{25})]
+</dd>
+<dd class="ddprev" > #MINIMA&#8451; - #MAXIMA&#8451;</dd>
+</dl>
+})]
+
+</BOUCLE_previsions>
+
+
+</BOUCLE_meteo>
+
+<br style="clear:both;" />
+</div>
