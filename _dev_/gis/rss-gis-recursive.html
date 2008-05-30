@@ -9,7 +9,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 <channel>
 	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
 	<link>[(#URL_SITE_SPIP)/]</link>
-	<description>[(#DESCRIPTIF_SITE_SPIP|texte_backend)]</description>
+	<description>[(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)]</description>
     <itunes:category text="Music"/>
     <itunes:owner>
 		<itunes:name>[(#NOM_SITE_SPIP|texte_backend)]</itunes:name>
@@ -38,7 +38,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 			<B_tags1><geo_icon><BOUCLE_tags1(MOTS){id_article}{type=marker_icon}>[#URL_SITE_SPIP/IMG/(#LOGO_MOT|fichier)]</BOUCLE_tags1></geo_icon></B_tags1>
 			<B_tags><dc:subject><BOUCLE_tags(MOTS){id_article}>[(#TITRE|texte_backend)]</BOUCLE_tags></dc:subject></B_tags>
 			[<itunes:author>(#LESAUTEURS|supprimer_tags|texte_backend)</itunes:author>]
-			[<itunes:summary>(#DESCRIPTIF|texte_backend)</itunes:summary>]
+			[<itunes:summary>(#DESCRIPTIF|supprimer_tags|texte_backend)</itunes:summary>]
 			<itunes:duration>00:00:00</itunes:duration>
 		<BOUCLE_img(DOCUMENTS){id_article}{mode=document}{extension==jpg|png|gif}{0,1}>
 		[<itunes:image href="(#URL_DOCUMENT|url_absolue)" />]
@@ -69,7 +69,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 			<B_tags12><geo_icon><BOUCLE_tags12(MOTS){id_article}{type=marker_icon}>[#URL_SITE_SPIP/IMG/(#LOGO_MOT|fichier)]</BOUCLE_tags12></geo_icon></B_tags12>
 			<B_tags2><dc:subject><BOUCLE_tags2(MOTS){id_article}>[(#TITRE|texte_backend)]</BOUCLE_tags2></dc:subject></B_tags2>
 			[<itunes:author>(#LESAUTEURS|supprimer_tags|texte_backend)</itunes:author>]
-			[<itunes:summary>(#DESCRIPTIF|texte_backend)</itunes:summary>]
+			[<itunes:summary>(#DESCRIPTIF|supprimer_tags|texte_backend)</itunes:summary>]
 			<itunes:duration>00:00:00</itunes:duration>
 		<BOUCLE_img2(DOCUMENTS){id_article}{mode=document}{extension==jpg|png|gif}{0,1}>
 		[<itunes:image href="(#URL_DOCUMENT|url_absolue)" />]
