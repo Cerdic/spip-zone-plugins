@@ -90,7 +90,7 @@
 		
 		//AJOUT BANNIERE
 		if ($action=="ajoute") {		
-			spip_query(" INSERT INTO spip_bannieres (nom,email,site,debut,fin,commentaire,alt,creation) VALUES("._q($nom).", "._q($email).", "._q($site).", "._q($debut).", "._q($fin).", "._q($commentaire).", "._q($alt).", CURRENT_DATE() ) ");
+			spip_query(" INSERT INTO spip_bannieres (nom,email,site,debut,fin,commentaires,alt,creation) VALUES("._q($nom).", "._q($email).", "._q($site).", "._q($debut).", "._q($fin).", "._q($commentaire).", "._q($alt).", CURRENT_DATE() ) ");
 			$query= spip_query("SELECT max(id_banniere) AS id_ban FROM spip_bannieres");
 			$data=spip_fetch_array($query);
 			$id_banniere=$data['id_ban'];
@@ -98,7 +98,7 @@
 		
 		//MODIFICATION BANNIERE
 		if ($action=="modifie") {		
-			spip_query("UPDATE spip_bannieres SET nom="._q($nom).", email="._q($email).", site="._q($site).", debut="._q($debut).", fin="._q($fin).", commentaire="._q($commentaire).", alt="._q($alt)." WHERE id_banniere="._q($id_banniere) );
+			spip_query("UPDATE spip_bannieres SET nom="._q($nom).", email="._q($email).", site="._q($site).", debut="._q($debut).", fin="._q($fin).", commentaires="._q($commentaire).", alt="._q($alt)." WHERE id_banniere="._q($id_banniere) );
 		}
 		
 		//UPLOAD BANNIERE

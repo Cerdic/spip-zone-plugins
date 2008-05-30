@@ -55,7 +55,7 @@
 			$ext=$data['ext'];
 			$debut=$data['debut'];
 			$fin=$data['fin'];
-			$commentaire=$data['commentaire'];
+			$commentaire=$data['commentaires'];
 		}
 		echo '<form action="'.$url_action_bannieres.'" method="post" enctype="multipart/form-data">';	
 		

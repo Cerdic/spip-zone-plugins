@@ -57,7 +57,7 @@
 			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.bannieres_datefr($data['debut']).'</td>';
 			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.bannieres_datefr($data['fin']).'</td>';
 			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.$data['clics'].'</td>';
-			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.$data['commentaire'].'</td>';
+			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.$data['commentaires'].'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;"><a href="'.generer_url_ecrire("action_bannieres","action=supprime&id=".$data['id_banniere']).'" title="Supprimer la campagne"><img src="'._DIR_PLUGIN_BANNIERES.'/img_pack/poubelle-12.gif" title="Supprimer"></a></td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;"><a href="'.generer_url_ecrire("edit_banniere","action=modifie&id=".$data['id_banniere']).'" title="Modifier la campagne"><img src="'._DIR_PLUGIN_BANNIERES.'/img_pack/edit-12.gif" title="Modifier"></a></td>';
 			echo '</tr>';
