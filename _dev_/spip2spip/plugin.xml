@@ -20,7 +20,7 @@ _ Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;e
 -* essayer de faire correspondre les auteurs
 -* &#233;v&#233;nements plugin agenda avec le [flux spip2spip (agenda)->../spip.php?page=backend-spip2spip-agenda]
 
-_ Si vous avez le plugin CFG [configurer les options d'import->./?exec=cfg&cfg=spip2spip]
+_ Si vous avez le plugin CFG [configurer les options d'import->./?exec=cfg&amp;cfg=spip2spip]
 
 	</description>
 	<lien>http://www.spip-contrib.net/SPIP2SPIP</lien> <!-- URI de documentation --> 
