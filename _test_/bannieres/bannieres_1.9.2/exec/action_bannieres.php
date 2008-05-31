@@ -44,10 +44,6 @@
 			
 			debut_gauche();
 			
-			debut_boite_info();
-			echo association_date_du_jour();	
-			fin_boite_info();
-			
 			debut_raccourcis();
 			icone_horizontale(_T('ban:bouton_retour'), $url_retour, _DIR_PLUGIN_BANNIERES."/img_pack/retour-24.png","rien.gif");	
 			fin_raccourcis();
