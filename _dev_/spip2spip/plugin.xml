@@ -7,22 +7,20 @@
 _ contribution: [Florent Plantinet->http://www.miura-conseil.com/]	
 _ &#169; 2006-2008 - Licence GPL
 	</auteur>
-	<version>1.6</version>
+	<version>1.7</version>
 	<etat>dev</etat>
 	<description>
 Permet d'importer et d'exporter des articles avec d'autres sites SPIP en conservant le formatage spip
 -* {{importer des articles:}} attribuer les mots-cl&#233;s du groupe d&#233;di&#233; {- spip2spip -} &#224; vos rubriques et inscrire les flux spip2spip de vos sites partenaires 
 -* {{diffuser vos articles:}} attribuer les mots-cl&#233;s du groupe d&#233;di&#233; {- spip2spip -} &#224; vos articles et donner [votre adresse de flux spip2spip (simple)->../spip.php?page=backend-spip2spip]  
 
-
-
 _ Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;es: 
 -* formatage original SPIP de l'article
--* images, documents attach&#233;s recopi&#233;s en documents distants
+-* images, documents attach&#233;s recopi&#233;s en documents distants, licence
 -* essayer de faire correspondre les auteurs
--* licence ..
 -* &#233;v&#233;nements plugin agenda avec le [flux spip2spip (agenda)->../spip.php?page=backend-spip2spip-agenda]
--* Mise &#224; jour des articles et &#233;v&#233;nements d&#233;j&#224; pr&#233;sent
+
+_ Si vous avez le plugin CFG [configurer les options d'import->./?exec=cfg&cfg=spip2spip]
 
 	</description>
 	<lien>http://www.spip-contrib.net/SPIP2SPIP</lien> <!-- URI de documentation --> 

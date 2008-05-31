@@ -1,11 +1,9 @@
 #CACHE{0}
-[(#REM) descriptif=non fonctionnel  <br /> ... merci d'attendre un peu]
+[(#REM) descriptif=Options des imports de spip2spip]
 [(#REM) titre=Spip2spip]
 [(#REM) icone=img_pack/icon.png]
 
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
-
-
  <fieldset><legend>Statut des articles import&eacute;s</legend>
       <select name="import_statut">
         <option value="prop"[(#ENV{import_statut}|=={prop}|?{' selected="selected"'})]><:ecrire:info_statut_site_3:></option>
@@ -38,7 +36,7 @@
   <fieldset><legend>Mode d'import et de synchronisation des articles</legend> 
      <select name="import_mode">
       <option value="import_once"[(#ENV{import_mode}|=={import_once}|?{' selected="selected"'})]>Importer une seule fois et ne pas mettre &agrave; jour</option>
-      <option value="import_synchro"[(#ENV{import_mode}|=={import_synchro}|?{' selected="selected"'})]>Importer et synchroniser si mise &agrave; jour sur le site distant</option>
+      <option value="import_synchro"[(#ENV{import_mode}|=={import_synchro}|?{' selected="selected"'})]>Importer et synchroniser si mise &agrave; jour sur le site distant (exp&eacute;rimental)</option>
       </select>
  </fieldset> 
  

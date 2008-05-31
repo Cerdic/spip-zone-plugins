@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'copy_spip2spip' => 'Spip2Spip: Copie SPIP à SPIP',
+'config_spip2spip' => 'Configurer',
 
 // F
 'form_s2s_1' => 'Titre du site',
@@ -52,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'not_installed' => 'spip2spip n\'est pas encore install&eacute;.<p><a href=\'?exec=spip2spip_install\'>installer spip2spip</a></p>',
 
 // O
-'origin_url' => 'L\'adresse originale de cet article est', 
+'origin_url' => 'L\'adresse originale de cet article est',
 
 // S
 'site_manage' => 'Gestion des sites à synchroniser',

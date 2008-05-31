@@ -1,15 +1,14 @@
 <?php
 
-// FIXME integrer table_prefix 
+// FIXME 
+// - integrer table_prefix 
 
 //---------------------------------------
 // Parametres
 //---------------------------------------
-define("DEBUG_S2S",false);        // mode debug ?
+
 define("STATUT_DEFAUT","prop");   // statut des articles importés: prop(proposé),publie(publié)
 define("PREVENIR_EMAIL",true);    // prevenir par email à chaque nouvelle syndication ?
-// si oui, sur quel email envoie le report ?
-define("EMAIL_S2S", $GLOBALS['meta']['adresse_suivi'] ); // par defaut, adresse de suivi editorial, possible de forcer un email "machin@foo.org" 
 
 //---------------------------------------
 // Fonctions

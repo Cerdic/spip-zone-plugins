@@ -1,7 +1,9 @@
 <?php
 // version spip2spip pour le cron
-// (il est aussi possible de lancer manuelement via le backoffice)
+// (il est aussi possible de lancer manuelement via le backoffice exec/spip2spip_syndic)
 //
+// attention script muet (appel par cron), ne rien afficher ! (utiliser le mailLog et spip_log)
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include(dirname(__FILE__).'/spiptospip_fonctions.php');
 
@@ -13,7 +15,6 @@ function spip2spip_ajouter_cron($taches) {
 function cron_spip2spip($t) {
   //
   // equivalent de exec/spip2spip_syndic.php sans sortie (pour cron)
-  // anciennnement (version contrib) spip2spip-cron.php
   
   include_spip("inc/distant"); 
   include_spip("inc/syndic"); 
@@ -26,6 +27,21 @@ function cron_spip2spip($t) {
   // groupe mot cle "licence" installe ? (contrib: http://www.spip-contrib.net/Filtre-Licence )
   if (get_id_groupemot("licence"))  $isLicenceInstalled = true; 
                               else  $isLicenceInstalled = false;
+  
+  // si cfg dispo, on charge les valeurs
+  if (function_exists(lire_config))  {
+      $import_statut = lire_config('spip2spip/import_statut');
+      $import_mode = lire_config('spip2spip/import_mode');
+      if (lire_config('spip2spip/citer_source')=="on") $citer_source=true; else  $citer_source=false;
+      if (lire_config('spip2spip/email_alerte')=="on") $email_alerte=true; else  $email_alerte=false;
+      $email_suivi = lire_config('spip2spip/email_suivi'); 
+  } else { // sinon valeur par defaut
+      $import_statut = "prop";         // statut des articles importés: prop(proposé),publie(publié)
+      $import_mode = "import_once";    // import une fois (import_once) ou synchro (import_synchro)
+      $citer_source = true; 
+      $email_alerte = true;
+      $email_suivi = $GLOBALS['meta']['adresse_suivi']; // adresse de suivi editorial
+  }
   
   
   //------------------------------- 
@@ -53,7 +69,7 @@ function cron_spip2spip($t) {
       // Des articles dispo pour ce site ?
       if (is_array($articles)) {
         foreach ($articles as $article) {
-          echo "<ul>\n";        
+                 
           // Est que l'article n'a pas été déjà importée ?
           if (isset($article['titre'])) {
 		  	$documents_current_article = array();
@@ -61,106 +77,98 @@ function cron_spip2spip($t) {
             $sql2 = "SELECT COUNT(titre) as c FROM ".$table_prefix."_articles WHERE titre='".addslashes($current_titre)."'";
             $nb_article = spip_fetch_array(spip_query($sql2));
             if ($nb_article['c']!=0) { 
-            	$sql3 = "SELECT * FROM ".$table_prefix."_articles WHERE titre='".addslashes($current_titre)."'";
-            	$modif = spip_fetch_array(spip_query($sql3));
-				
-				$_amodif=false; $_elemmodif="";
-                $_surtitre = $article['surtitre'];
-				if($modif['surtitre']!=$_surtitre){$_amodif=true; $_elemmodif .="surtitre, ";}
-				
-				$_titre = $article['titre'];
-				if($modif['titre']!=$_titre){$_amodif=true;$_elemmodif .="titre, ";}
-				
-				$_soustitre = $article['soustitre'];
-				if($modif['soustitre']!=$_soustitre){$_amodif=true;$_elemmodif .="soustitre, ";}
-				
-				$_descriptif = convert_extra($article['descriptif'],$documents_current_article);
-				if($modif['descriptif']!=$_descriptif){$_amodif=true;$_elemmodif .="descriptif, ";}
-				
-				$_chapo = convert_extra($article['chapo'],$documents_current_article);
-				if($modif['chapo']!=$_chapo){$_amodif=true;$_elemmodif .="chapo, "; echo "<hr />";
-				echo $modif['chapo'];
-				echo "<hr />";
-				echo $_chapo;}
-				
-				$_texte = convert_extra($article['texte'],$documents_current_article);
-				if($modif['texte']!=$_texte){$_amodif=true;$_elemmodif .="texte, ";}
-				
-				$_ps = convert_extra($article['ps'],$documents_current_article);
-				if($modif['ps']!=$_ps){$_amodif=true;$_elemmodif .="ps, ";}
-				
-				$_date =  date('Y-m-d H:i:s',time()); // $article['date'];  // date de la syndication ou date de l'article ?
-				$_lang =  $article['lang'];
-				if($modif['lang']!=$_lang){$_amodif=true;$_elemmodif .="lang, ";}
-				
-				$_id_auteur = $article['auteur'];
-				if($modif['auteur']!=$_auteur){$_amodif=true;$_elemmodif .="auteur, ";}
-				
-				$_link = $article['link'];
-				
-				$_licence = $article['licence']; 
-				if($modif['licence']!=$_licence){$_amodif=true;$_elemmodif .="licence, ";}		 
-			 
-			 	if($_amodif){		//(lang,surtitre,titre,soustitre,id_rubrique,descriptif,chapo,texte,ps,statut,accepter_forum,date) `texte`='".addslashes($_texte)."',
-				$sql4 = "UPDATE ".$table_prefix."_articles ";
-  				        $sql4.="SET  `lang`='".addslashes($_lang)."',`surtitre`='".addslashes($_surtitre)."',`titre`='".addslashes($_titre)."',`soustitre`='".addslashes($_soustitre)."',`descriptif`='".addslashes($_descriptif)."',`chapo`='".addslashes($_chapo)."',`texte`='".addslashes($_texte)."',`ps`='".addslashes($_ps)."',`statut`='".$_statut."',`date`='".$_date."' ";
-						$sql4.="WHERE id_article='".$modif['id_article']."';";
-						//echo $sql4;
-  				        spip_query($sql4);
-					echo "<li>[<span style='color:#999'>"._T('spiptospip:imported_update')."</span>] $current_titre</li>\n";
-					echo "<a href='?exec=articles&amp;id_article=".$modif['id_article']."' style='padding:5px;border:1px solid;background:#ddd;display: block;'>"._T('spiptospip:imported_view')."</a>";
-					echo "<div style='padding:5px;border:1px solid;background:#ddd;display: block;'>".$_elemmodif."</div>";
-					
-					}
-					else {
-					echo "<li>[<span style='color:#999'>"._T('spiptospip:imported_already')."</span>] $current_titre</li>\n";
-					}
-					
-					// traitement des evenements
-                  $_evenements = $article['evenements'];
-				  $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );
-                  if ($_evenements!="") {
-					   $_evenements=unserialize($_evenements);           
-                  		foreach($_evenements as $_evenement) {                      
-							$id_distant = $_evenement['idevent'];
-							$datedeb = $_evenement['datedeb'];
-							$datefin = $_evenement['datefin'];
-							$lieu = addslashes($_evenement['lieu']);
-							$horaire = $_evenement['horaire'];
-							$titre = addslashes($_evenement['titre']);                        
-							$desc = addslashes($_evenement['desc']);                         
-							$idsource = $_evenement['idsource'];      
-							
-							if($_titre==$titre){	  
-								$sqle = "SELECT * FROM ".$table_prefix."_evenements WHERE id_article='".$modif['id_article']."'";
-								$rese=spip_query($sqle);
-								$dedans=false;
-								$rechevent=array($id_distant,$datedeb,$datefin,$lieu,$horaire,$titre,$desc,$idsource);
-								while($modifevent = spip_fetch_array($rese)){
-										if($id_distant==$modifevent['id_evenement']){ $dedans=true; }
-								}	
-								if(!$dedans){
-									 $sql="INSERT INTO `".$table_prefix."_evenements` (`id_evenement` ,	`id_article` ,`date_debut` ,`date_fin` ,`titre` ,`descriptif` ,	`lieu` ,`horaire` ,`id_evenement_source` ,`idx` ,`maj`)
-										VALUES ('".$id_distant."' , '".$modif['id_article']."', '".$datedeb."', '".$datefin."', '".$titre."', '".$desc."', '".$lieu."', '".$horaire."', '".$idsource."', 'oui', NOW( ))";
-								  echo "<div style='padding:5px;border:1px solid #5DA7C5;background:#ddd;display: block;'>"._T('spiptospip:event_ok').$datedeb." &agrave; ".$lieu."</div>";
-										//echo $sql;							  
-										  spip_query($sql);  
-								}
-							}
-       			
-                    	} 
-                  }	
-					
-
+                       // article deja connu et present ds la base                        
+                       if ($import_mode != "import_synchro") {
+                              // mode import_once: on ne fait rien
+                              
+                       } else {                       
+                              // mode import_synchro: maj de l'article (code de plantinet)            
+            
+                              $sql3 = "SELECT * FROM ".$table_prefix."_articles WHERE titre='".addslashes($current_titre)."'";
+                              $modif = spip_fetch_array(spip_query($sql3));
+                      				
+                      				$_amodif=false; $_elemmodif="";
+                                      $_surtitre = $article['surtitre'];
+                      				if($modif['surtitre']!=$_surtitre){$_amodif=true; $_elemmodif .="surtitre, ";}
+                      				
+                      				$_titre = $article['titre'];
+                      				if($modif['titre']!=$_titre){$_amodif=true;$_elemmodif .="titre, ";}
+                      				
+                      				$_soustitre = $article['soustitre'];
+                      				if($modif['soustitre']!=$_soustitre){$_amodif=true;$_elemmodif .="soustitre, ";}
+                      				
+                      				$_descriptif = convert_extra($article['descriptif'],$documents_current_article);
+                      				if($modif['descriptif']!=$_descriptif){$_amodif=true;$_elemmodif .="descriptif, ";}
+                      				
+                      				$_chapo = convert_extra($article['chapo'],$documents_current_article);
+                      				if($modif['chapo']!=$_chapo){$_amodif=true;$_elemmodif .="chapo, ";}
+                      				
+                      				$_texte = convert_extra($article['texte'],$documents_current_article);
+                      				if($modif['texte']!=$_texte){$_amodif=true;$_elemmodif .="texte, ";}
+                      				
+                      				$_ps = convert_extra($article['ps'],$documents_current_article);
+                      				if($modif['ps']!=$_ps){$_amodif=true;$_elemmodif .="ps, ";}
+                      				
+                      				$_date =  date('Y-m-d H:i:s',time()); // $article['date'];  // date de la syndication ou date de l'article ?
+                      				$_lang =  $article['lang'];
+                      				if($modif['lang']!=$_lang){$_amodif=true;$_elemmodif .="lang, ";}
+                      				
+                      				$_id_auteur = $article['auteur'];
+                      				if($modif['auteur']!=$_auteur){$_amodif=true;$_elemmodif .="auteur, ";}
+                      				
+                      				$_link = $article['link'];
+                      				
+                      				$_licence = $article['licence']; 
+                      				if($modif['licence']!=$_licence){$_amodif=true;$_elemmodif .="licence, ";}		 
+                      			 
+                      			 	if($_amodif){		//(lang,surtitre,titre,soustitre,id_rubrique,descriptif,chapo,texte,ps,statut,accepter_forum,date) `texte`='".addslashes($_texte)."',
+                      				$sql4 = "UPDATE ".$table_prefix."_articles ";
+                        				        $sql4.="SET  `lang`='".addslashes($_lang)."',`surtitre`='".addslashes($_surtitre)."',`titre`='".addslashes($_titre)."',`soustitre`='".addslashes($_soustitre)."',`descriptif`='".addslashes($_descriptif)."',`chapo`='".addslashes($_chapo)."',`texte`='".addslashes($_texte)."',`ps`='".addslashes($_ps)."',`statut`='".$_statut."',`date`='".$_date."' ";
+                      						$sql4.="WHERE id_article='".$modif['id_article']."';";
+                        				        spip_query($sql4);
+                              	}						
+                      					// traitement des evenements
+                                        $_evenements = $article['evenements'];
+                      				  $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );
+                                        if ($_evenements!="") {
+                      					   $_evenements=unserialize($_evenements);           
+                                        		foreach($_evenements as $_evenement) {                      
+                      							$id_distant = $_evenement['idevent'];
+                      							$datedeb = $_evenement['datedeb'];
+                      							$datefin = $_evenement['datefin'];
+                      							$lieu = addslashes($_evenement['lieu']);
+                      							$horaire = $_evenement['horaire'];
+                      							$titre = addslashes($_evenement['titre']);                        
+                      							$desc = addslashes($_evenement['desc']);                         
+                      							$idsource = $_evenement['idsource'];      
+                      							
+                      							if($_titre==$titre){	  
+                      								$sqle = "SELECT * FROM ".$table_prefix."_evenements WHERE id_article='".$modif['id_article']."'";
+                      								$rese=spip_query($sqle);
+                      								$dedans=false;
+                      								$rechevent=array($id_distant,$datedeb,$datefin,$lieu,$horaire,$titre,$desc,$idsource);
+                      								while($modifevent = spip_fetch_array($rese)){
+                      										if($id_distant==$modifevent['id_evenement']){ $dedans=true; }
+                      								}	
+                      								if(!$dedans){
+                      									 $sql="INSERT INTO `".$table_prefix."_evenements` (`id_evenement` ,	`id_article` ,`date_debut` ,`date_fin` ,`titre` ,`descriptif` ,	`lieu` ,`horaire` ,`id_evenement_source` ,`idx` ,`maj`)
+                      										VALUES ('".$id_distant."' , '".$modif['id_article']."', '".$datedeb."', '".$datefin."', '".$titre."', '".$desc."', '".$lieu."', '".$horaire."', '".$idsource."', 'oui', NOW( ))";
+                      						  
+                      										  spip_query($sql);  
+                      								}
+                      							}
+                             			
+                                          	} 
+                                        }	
+					                    // maj de l'article fin(code de plantinet) 
+                       }
             } else {  
               // nouvel article à importer
-              echo "<li>[<span style='color:#090'>"._T('spiptospip:imported_new')."</span>] $current_titre<br />\n";
               
               // on cherche la rubrique destination
               $target = get_id_rubrique($article['keyword']);
               if (!$target) {
-                  // pas de destination
-                  echo "<span style='color:#009'>"._T('spiptospip:no_target')." <strong>".$article['keyword']."</strong></span></li>\n";                    
+                  // pas de destination                                    
               } else {
                   // tout est bon, on insert les donnnees ! 
                   
@@ -235,13 +243,14 @@ function cron_spip2spip($t) {
               		$_date =  date('Y-m-d H:i:s',time()); // $article['date'];  // date de la syndication ou date de l'article ?
               		$_lang =  addslashes($article['lang']);
               		$_id_rubrique = $target;            		          		
-              		$_statut = STATUT_DEFAUT;
+              		$_statut = $import_statut;
               		$_id_auteur = $article['auteur'];
               		$_link = $article['link'];
               		$_licence = $article['licence'];                           		
               		
               		// on cite la source originale ds le champs ps et la licence
-              		$_ps .= addslashes(_T('spiptospip:origin_url'))." [".$_link."->".$_link."]";
+              		if ($citer_source)
+              		      $_ps .= addslashes(_T('spiptospip:origin_url'))." [".$_link."->".$_link."]";
               		
                   // licence ?                
                   if ($_licence !="" && !isLicenceInstalled)                               		
@@ -253,8 +262,7 @@ function cron_spip2spip($t) {
   				        $sql3.="VALUES( '$_lang','$_surtitre','$_titre','$_soustitre',$_id_rubrique,'$_descriptif','$_chapo','$_texte','$_ps','$_statut','pos','$_date')";
   				        spip_query($sql3);
   				        $id_nouvel_article = spip_insert_id();
-  				        echo "<a href='?exec=articles&amp;id_article=$id_nouvel_article' style='padding:5px;border:1px solid;background:#ddd;display: block;'>"._T('spiptospip:imported_view')."</a>";
-                  $mailLog .= $article['titre'] ."\n"._T('spiptospip:imported_view').": ".$GLOBALS['meta']['adresse_site']."/ecrire/?exec=articles&id_article=$id_nouvel_article \n\n";
+  				        $mailLog .= $article['titre'] ."\n"._T('spiptospip:imported_view').": ".$GLOBALS['meta']['adresse_site']."/ecrire/?exec=articles&id_article=$id_nouvel_article \n\n";
   				                      			        
                   // ... dans la table auteurs
   				        if ($_id_auteur) {
@@ -289,13 +297,10 @@ function cron_spip2spip($t) {
                         $desc = addslashes($_evenement['desc']);                         
                         $idsource = $_evenement['idsource'];      
 						      
-						//echo $titreart."==".$titre."<br />";		  
+  
 						if($_titre==$titre){		                      
                           $sql="INSERT INTO `".$table_prefix."_evenements` (`id_evenement` ,	`id_article` ,`date_debut` ,`date_fin` ,`titre` ,`descriptif` ,	`lieu` ,`horaire` ,`id_evenement_source` ,`idx` ,`maj`)
 								VALUES ('".$id_distant."' , '".$id_nouvel_article."', '".$datedeb."', '".$datefin."', '".$titre."', '".$desc."', '".$lieu."', '".$horaire."', '".$idsource."', 'oui', NOW( ))";
-						  echo "<div style='padding:5px;border:1px solid #5DA7C5;background:#ddd;display: block;'>"._T('spiptospip:event_ok').$datedeb." &agrave; ".$lieu."</div>";
-						  /*echo $sql;
-						  echo "<hr />";*/
         				          spip_query($sql);      
 						}            			
                     	} 
@@ -309,33 +314,23 @@ function cron_spip2spip($t) {
                         spip_query($sql);                       
                       } 
                   }               
-                                               
-  				        
+                  
+                  // log pour suivi du cron                             
+  				        spip_log("spip2spip: nouvel article $id_nouvel_article from $_link"); 
               }
-                       
-              echo "</li>\n";            
-              
+             
             }           
   
           }  
-           echo "</ul>\n";
+
           
           // alerte email ?	
-          if (PREVENIR_EMAIL && $mailLog !="") {
-              envoyer_mail(EMAIL_S2S,"Syndication automatique SPIP2SPIP", $mailLog);	    
+          if ($email_alerte && $mailLog !="") {
+              envoyer_mail($email_suivi,"Syndication automatique SPIP2SPIP", $mailLog);	    
           } 
           
-          // debug ?
-          if (DEBUG_S2S) {  
-            echo $mailLog;
-            foreach ($article as $k=>$detail) 
-                 echo "\n<br /><strong>$k :</strong>".convert_ln($detail);
-          }
-          
         }
-      } else {
-        echo "<div style='color:red'>$articles</div>\n";;
-      }
+      } 
       
       // update syndic date
       $sql = "UPDATE ".$table_prefix."_spip2spip SET last_syndic = NOW() WHERE id=$current_id LIMIT 1";

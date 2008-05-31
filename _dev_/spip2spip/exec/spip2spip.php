@@ -10,10 +10,7 @@ include_spip('inc/presentation');
 // -------------------------------
 
 function exec_spip2spip(){
-  //include ("inc.php");
-  //include_ecrire ("inc_acces.php");
-  //include_ecrire ("inc_config.php");
-  //include_ecrire("inc_presentation");
+
   
   global $table_prefix;
   
@@ -44,13 +41,14 @@ function exec_spip2spip(){
   echo "<br / ><br />";
   gros_titre(_T('spiptospip:copy_spip2spip'));
   debut_gauche();
-  debut_boite_info();
+  echo debut_boite_info();
   echo _T('spiptospip:intro_spip2spip');
-  fin_boite_info();
+  if (function_exists(lire_config)) echo "<p><a href='?exec=cfg&cfg=spip2spip'>"._T('spiptospip:config_spip2spip')."</a></p>";
+  echo fin_boite_info();
     
     
     
-  debut_droite();
+  echo debut_droite();
   
   //
   // spip2spip installed ?
