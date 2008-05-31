@@ -198,7 +198,12 @@ L\'&eacute;quipe de @nom_site@',
 'email_valide' => 'Veuillez ins&eacute;rer un email valide',
 
 'titre_confirmation' => 'Confirmation',
-'page_confirmation' => 'Page de confirmation de votre inscription'
+'page_confirmation' => 'Page de confirmation de votre inscription',
+
+// maj infos compte par l'utilisateur
+'maj_profil_ok' => 'Votre compte a &eacute;t&eacute; mis &agrave; jour',
+'maj_profil_erreur' => 'Erreur MySQL lors de la mise &agrave; jour des donn&eacute;: '
+
 
 );
 
