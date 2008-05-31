@@ -4,13 +4,6 @@
 // - integrer table_prefix 
 
 //---------------------------------------
-// Parametres
-//---------------------------------------
-
-define("STATUT_DEFAUT","prop");   // statut des articles importés: prop(proposé),publie(publié)
-define("PREVENIR_EMAIL",true);    // prevenir par email à chaque nouvelle syndication ?
-
-//---------------------------------------
 // Fonctions
 //---------------------------------------
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
