@@ -28,7 +28,7 @@ _ Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;e
 	<lien>http://www.spip-contrib.net/SPIP2SPIP</lien> <!-- URI de documentation --> 
 	<fonctions>spiptospip_filtre.php</fonctions>
 	<prefix>spip2spip</prefix>
-	<icon>img_pack/icon.png </icon>
+	<icon>img_pack/icon.png</icon>
 	<fonctions>spiptospip_fonctions.php</fonctions>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>

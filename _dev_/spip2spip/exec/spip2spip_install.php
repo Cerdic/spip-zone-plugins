@@ -1,4 +1,11 @@
 <?php
+// installation de spip2spip 
+//  - table sup pour stocker les flux 
+//  - ajout groupe spip2spip
+//
+// TODO: 
+// - a installer directement via l'interface plugin
+
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
@@ -54,14 +61,17 @@ function exec_spip2spip_install(){
 
   // ajout du groupe mot 
   echo "<h4>"._T('spiptospip:install_spip2spip_3')."</h4>\n";
-  $sql = "INSERT INTO ".$table_prefix."_groupes_mots
-  (`id_groupe` ,`titre` ,`descriptif` ,`unseul` ,`obligatoire` ,`articles` ,`breves` ,`rubriques` ,`syndic` ,`evenements` ,`minirezo` ,`comite` ,`forum` ,`maj`) VALUES
-  ('', '- spip2spip -', '".addslashes(_T('spiptospip:install_spip2spip_4'))."', '".addslashes(_T('spiptospip:install_spip2spip_5'))."', 'non', '', 'oui', '', 'oui', '', 'oui', 'oui', 'non', '')";
 
-  echo $sql;
+    // installation de base
+    $sql = "INSERT INTO ".$table_prefix."_groupes_mots ( `id_groupe` , `titre` , `descriptif` , `texte` , `unseul` , `obligatoire` , `articles` , `breves` , `rubriques` , `syndic` , `minirezo` , `comite` , `forum` , `maj` )  
+                                                VALUES (NULL, '- spip2spip -', '".addslashes(_T('spiptospip:install_spip2spip_4'))."', '".addslashes(_T('spiptospip:install_spip2spip_5'))."', 'non', '', 'oui', '', 'oui', '', 'oui', 'oui', 'non',NOW())";
+    echo $sql;
+    spip_query($sql);                                              
   
-  
-  spip_query($sql); 
+    // on tente maj si champs evenemt (plugin agenda)                                               
+    $sql = "UPDATE ".$table_prefix."_groupes_mots SET evenements='oui' WHERE titre='- spip2spip -'";
+    spip_query($sql);     
+    
   
   echo "<div style='color:green;margin:10px 0'>"._T('spiptospip:install_spip2spip_99')."</div>";
   

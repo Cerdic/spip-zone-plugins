@@ -159,6 +159,7 @@ function cron_spip2spip($t) {
               // on cherche la rubrique destination
               $target = get_id_rubrique($article['keyword']);
               if (!$target) {
+                  // pas de destination
                   echo "<span style='color:#009'>"._T('spiptospip:no_target')." <strong>".$article['keyword']."</strong></span></li>\n";                    
               } else {
                   // tout est bon, on insert les donnnees ! 
@@ -240,7 +241,7 @@ function cron_spip2spip($t) {
               		$_licence = $article['licence'];                           		
               		
               		// on cite la source originale ds le champs ps et la licence
-              		//$_ps .= addslashes(_T('spiptospip:origin_url'))." [".$_link."->".$_link."]";
+              		$_ps .= addslashes(_T('spiptospip:origin_url'))." [".$_link."->".$_link."]";
               		
                   // licence ?                
                   if ($_licence !="" && !isLicenceInstalled)                               		
