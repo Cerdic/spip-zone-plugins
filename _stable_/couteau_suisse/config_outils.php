@@ -189,7 +189,7 @@ add_variable( array(
 		'date DESC' => 'couteauprive:tri_publi', 'date_modif DESC' => 'couteauprive:tri_modif', 
 		'perso' => 'couteauprive:tri_perso' ),
 	'radio/ligne' => 1,
-	'defaut' => "'0+titre,titre'",
+	'defaut' => "'date DESC'", //"'0+titre,titre'",
 	'code:%s!="perso"' => "@define('_TRI_ARTICLES_RUBRIQUE', %s);\n",
 ));
 add_variable( array(
