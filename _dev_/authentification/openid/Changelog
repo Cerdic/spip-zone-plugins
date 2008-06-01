@@ -1,5 +1,11 @@
 
-v0.7 (10 04 2008)
+0.8 (02 06 2008)
+- Mise a jour avec le nouveau formulaire CVT de login (interface a retravailler)
+- Permettre OpenID 2.0 et 1.0
+- Creer les auteurs s'ils n'existent pas dans la base (todo: ne pas le faire si inscriptions non autorisees)
+- L'OpenID est maintenant stocke dans un champ "openid" de la table spip_auteurs
+
+0.7 (10 04 2008)
 - Utiliser la librairie 2.0.1, et la faire telecharger dans /lib
 
 0.6: 20080409
