@@ -185,8 +185,10 @@ add_outil( array(
 add_variable( array(
 	'nom' => 'tri_articles',
 	'format' => 'chaine',
-	'radio' => array('0+titre,titre' => 'couteauprive:tri_titre', 
-		'date DESC' => 'couteauprive:tri_publi', 'date_modif DESC' => 'couteauprive:tri_modif', 
+	'radio' => array(
+		'date_modif DESC' => 'couteauprive:tri_modif',
+		'0+titre,titre' => 'couteauprive:tri_titre',
+		'date DESC' => 'couteauprive:tri_publi', 
 		'perso' => 'couteauprive:tri_perso' ),
 	'radio/ligne' => 1,
 	'defaut' => "'date DESC'", //"'0+titre,titre'",
