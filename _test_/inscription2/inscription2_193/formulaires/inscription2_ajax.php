@@ -22,13 +22,11 @@ function formulaires_inscription2_ajax_charger_dist(){
     //les nom des champs sont les memes que ceux de la base de données
     if ($id_auteur) {
         $auteur = sql_fetsel(
-            '*',
+            'nom,email,login'
+            .',prenom,nom_famille,sexe,societe,secteur,fonction,adresse_pro,code_postal_pro,ville_pro,pays_pro,telephone_pro,fax_pro,mobile_pro',
             'spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)',
             'id_auteur ='.$id_auteur            
         );
-
-
-        //spip_log($auteur,'inscription2');
 
 	    $valeurs = $auteur;
     }
@@ -53,11 +51,11 @@ function formulaires_inscription2_ajax_verifier_dist(){
     //vérifier les champs obligatoire
     foreach (lire_config('inscription2/') as $clef => $valeur) {
         //decoupe la clef sous le forme $resultat[0] = $resultat[1] ."_obligatoire"
-        preg_match('/(.*)_obligatoire/i',$clef,$resultat);
+        //?: permet de rechercher la chaine sans etre retournée dans les résultats        
+        preg_match('/^(.*)(?:_obligatoire)/i', $clef, $resultat);        
         //si clef obligatoire, obligatoire activé et _request vide alors erreur
-        //peut etre rajouté dans le test  l'existence de '$resultat
         if ($resultat[1] && $valeur == 'on' && !_request($resultat[1])) {
-            $erreurs[$resultat[1]] = 'Ce champ est obligatoire';    
+            $erreurs[$resultat[1]] = 'Ce champ est obligatoire';   
         }
     
     }
@@ -68,6 +66,103 @@ function formulaires_inscription2_ajax_verifier_dist(){
     if (count($erreurs)) $erreurs['message_erreur'] = 'Veuillez remplir les champs obligatoires';
     
     return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
+}
+
+function formulaires_inscription2_ajax_traiter_dist(){
+
+	global $tables_principales;
+
+    //on obtient l'id de la personne connectée
+    $id_auteur = intval($GLOBALS['auteur_session']['id_auteur']);
+    
+    //charge les valeurs de chaque champs proposés dans le formulaire
+    foreach (lire_config('inscription2/') as $clef => $valeur) {
+        /* Il faut retrouver les noms des champ, 
+         * par défaut inscription2 propose pour chaque champ le cas champ_obligatoire
+         *  On retrouve donc les chaines de type champ_obligatoire
+         *  Ensuite on verifie que le champ est proposé dans le formulaire
+         *  Remplissage de $valeurs[]
+         */
+        //decoupe la clef sous le forme $resultat[0] = $resultat[1] ."_obligatoire"
+        //?: permet de rechercher la chaine sans etre retournée dans les résultats
+        preg_match('/^(.*)(?:_obligatoire)/i', $clef, $resultat);
+            
+        if ((!empty($resultat[1])) && (lire_config('inscription2/'.$resultat[1]) == 'on')) {
+            $valeurs[$resultat[1]] = _request($resultat[1]);
+        }
+    }
+    
+    //$valeurs contient donc tous les champs remplit ou non 
+    
+    //definir les champs pour spip_auteurs
+    $table = "spip_auteurs";
+    
+    //genere le tableau des valeurs à mettre à jour pour spip_auteurs
+    //toutes les clefs qu'inscription2 peut mettre à jour
+    $clefs = array_fill_keys(array('login','nom','email','bio'),'');
+    //extrait uniquement les données qui ont été proposées à la modification
+    $val = array_intersect_key($valeurs,$clefs);
+        
+   //spip_log($valeurs,'inscription2');
+        
+    //inserer les données dans spip_auteurs -- si $id_auteur mise à jour autrement nouvelle entrée
+    if ($id_auteur) {
+        spip_log('update','inscription2');
+        $where = 'id_auteur = '.$id_auteur;
+        sql_updateq(
+            $table,
+            $val,
+            $where
+        );
+    } else {
+        spip_log('insert','inscription2');
+        $id_auteur = sql_insertq(
+            $table,
+            $val
+        );
+    }
+    
+    //spip_log($val,'inscription2');  
+    //spip_log($id_auteur,'inscription2');
+  
+    $table = 'spip_auteurs_elargis';
+
+    //extrait les valeurs propre à spip_auteurs_elargis
+
+    //genere le tableau des valeurs à mettre à jour pour spip_auteurs
+    //toutes les clefs qu'inscription2 peut mettre à jour
+    //s'appuie sur les tables definies par le plugin
+    $clefs = $tables_principales['spip_auteurs_elargis']['field']; //array_fill_keys($tables_principales['spip_auteurs_elargis']['field'],'');
+
+    //extrait uniquement les données qui ont été proposées à la modification
+    $val = array_intersect_key($valeurs,$clefs);
+
+    $id_elargi = sql_getfetsel('id','spip_auteurs_elargis','id_auteur='.$id_auteur);
+
+    if ($id_elargi) {
+        $where = 'id_auteur = '.$id_auteur;
+        $id_auteur = sql_updateq(
+            $table,
+            $val,
+            $where            
+        );
+    } else {
+        $id_auteur = sql_insertq(
+            $table,
+            $val
+        );
+    }
+ 
+    spip_log($val,'inscription2');
+    
+    if ($id_auteur) {    
+        $message = "Les modifications de votre profil ont bien été prises en compte";
+    } else {
+        $message = "Votre inscription a bien été pris en compte. Vous allez recevoir par courrier electronique vos identifiants de connexion.";
+    }
+
+    return $message;
+
 }
 
 /*
