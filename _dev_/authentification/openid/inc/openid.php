@@ -130,8 +130,9 @@ function demander_authentification_openid($login, $cible){
 
 // analyse le retour de la requete openID
 // et redirige vers une url en fonction
-function terminer_authentification_openid($redirect){
-
+function terminer_authentification_openid($cible){
+	$redirect=""; // redirection sur erreur
+	
 	// Complete the authentication process using the server's response.
 	include_spip('inc/openid');
 	$consumer = init_auth_openid();
@@ -172,27 +173,50 @@ function terminer_authentification_openid($redirect){
 				'openid' => $openid
 			);
 
-			openid_ajouter_auteur($couples);
-			$ok = $identifier_login($openid, "");
-			#$redirect = openid_url_erreur(_L("Echec de l'auth openid dans SPIP (utilisateur inconnu ?)"));
+			// on ajoute un auteur uniquement si les inscriptions sont autorisees sur le site
+			if ($GLOBALS['meta']['accepter_inscriptions']=='oui') {
+				// d'abord ajouter l'auteur si le login propose n'existe pas deja
+				if (!$ok = openid_ajouter_auteur($couples)) {
+					$redirect = openid_url_erreur(_L("Inscription impossible : un login identique existe deja"));
+				} else {
+					// verifier que l'insertion s'est bien deroulee 
+					$ok = $identifier_login($openid, "");
+				}
+			}
+			// rediriger si pas inscrit
+			if (!$ok && !$redirect) {
+				$redirect = openid_url_erreur(_L("Utilisateur OpenID inconnu dans le site)"));
+			}
 		}
 		
 		// sinon, c'est on est habilite ;)
 		if ($ok) {
+			## Cette partie est identique
+			## a formulaire_login_traiter
 			$auth = charger_fonction('auth','inc');
 			$auth();
-			
+
+			// Si on se connecte dans l'espace prive, 
+			// ajouter "bonjour" (repere a peu pres les cookies desactives)
+			if (openid_is_url_prive($cible)) {
+				$cible = parametre_url($cible, 'bonjour', 'oui', '&');
+			}
+			if ($cible) {
+				$cible = parametre_url($cible, 'var_login', '', '&');
+			} 
+	
 			// Si on est admin, poser le cookie de correspondance
 			if ($GLOBALS['auteur_session']['statut'] == '0minirezo') {
 				include_spip('inc/cookie');
 				spip_setcookie('spip_admin', '@'.$GLOBALS['auteur_session']['login'],
 				time() + 7 * 24 * 3600);
 			}
+			## /fin identique
 		}
 	}
 	
 	include_spip('inc/headers');
-	redirige_par_entete($redirect);	
+	redirige_par_entete($redirect?$redirect:$cible);	
 }
 
 
@@ -209,6 +233,10 @@ function openid_url_erreur($message){
 			urlencode($message));
 }
 
+function openid_is_url_prive($cible){
+	$parse = parse_url($cible);
+	return strncmp(substr($parse['path'],-strlen(_DIR_RESTREINT_ABS)), _DIR_RESTREINT_ABS, strlen(_DIR_RESTREINT_ABS))==0;	
+}
 
 function openid_ajouter_auteur($couples){
 	$statut = ($GLOBALS['openid_statut_nouvel_auteur'] 
@@ -216,6 +244,13 @@ function openid_ajouter_auteur($couples){
 			: '1comite');
 			
 	include_spip('base/abstract_sql');
+	// si un utilisateur possede le meme login, on ne continue pas
+	// sinon on risque de perdre l'integrite de la table
+	// (pour le moment, on suppose dans la table spip_auteurs
+	// qu'un login ou qu'un opentid est unique)
+	if (sql_getfetsel('id_auteur','spip_auteurs','login='.sql_quote($couples['login']))) {
+		return false;
+	}
 	$id_auteur = sql_insertq("spip_auteurs", array('statut' => $statut));
 	
 	include_spip('action/editer_auteur');
