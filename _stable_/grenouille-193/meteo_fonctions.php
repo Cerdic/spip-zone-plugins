@@ -1,19 +1,5 @@
 <?php
 
-
-	/**
-	 * SPIP-Météo : prévisions météo dans vos squelettes
-	 *
-	 * Copyright (c) 2006
-	 * Agence Artégo http://www.artego.fr
-	 *  
-	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-	 * Pour plus de details voir le fichier COPYING.txt.
-	 *  
-	 **/
-
-	#include_spip('inc/plugin');
-
 	global $tableau_meteo;
 
  	$tableau_meteo	= array(
@@ -71,10 +57,10 @@
 	/**
 	 * meteo_ajouter_boutons
 	 *
-	 * Ajoute les boutons pour la meteo dans l'espace privé
+	 * Ajoute les boutons pour la meteo dans l'espace priv̩
 	 *
 	 * @param array boutons_admin
-	 * @return array boutons_admin le même tableau avec une entrée en plus
+	 * @return array boutons_admin le m̻me tableau avec une entr̩e en plus
 	 * @author Pierre Basson
 	 **/
 	function meteo_ajouter_boutons($boutons_admin) {
@@ -106,7 +92,7 @@
 	 * meteo_calculer_icone_temps
 	 *
 	 * @param int id_prevision
-	 * @return string image correspondant à la prévision
+	 * @return string image correspondant �  la pr̩vision
 	 * @author Pierre Basson
 	 **/
 	function meteo_calculer_temps($id_prevision) {
@@ -125,40 +111,30 @@
 	 * @param string temps
 	 * @param string chemin
 	 * @param string extension
-	 * @return string image correspondant à la prévision
+	 * @return string image correspondant �  la pr̩vision
 	 * @author Pierre Basson
 	 **/
-	function icone_meteo($temps, $chemin='', $extension="png") {
-		if (empty($chemin))
-			$chemin = '/img_meteo/';
-		$img = find_in_path($chemin.$temps.'.'.$extension);
+	# cf pour le choix des icones http://liquidweather.net/icons.php
+	function icone_meteo($temps, $chemin='', $extension="png"){
+			$chemin = 'grenouille/';
+		$img = _DIR_PLUGIN_METEO.$chemin.$temps.'.'.$extension;
+		include_spip('inc/logos');
 		if (file_exists($img)) {
-			include_spip('inc/logos');
 			list ($h,$l) = taille_image($img);
 			return '<img src="'.$img.'" alt="'.$temps.'" title="'.traduire_meteo($temps).'" width="'.$l.'" height="'.$h.'" />';
 		} else {
-			return $img;
+			#alors le dossier /grenouille n'a pas d'image, on reprend la fonction de depart (avec images de img_meteo)
+			global $tableau_meteo;
+			$temps= $tableau_meteo[$temps];
+			$chemin = 'img_meteo/';
+			$img = _DIR_PLUGIN_METEO.$chemin.$temps.'.'.$extension;
+			list ($h,$l) = taille_image($img);
+			return '<img src="'.$img.'" alt="'.$temps.'" title="'.traduire_meteo($temps).'" width="'.$l.'" height="'.$h.'" />';
+
 		}
 		
 	}
 	
-	#icone a partir du numero (plus rapide et facilement modifiable), les images portent un numero 1.png etc
-	# cf pour le choix http://liquidweather.net/icons.php
-	#si le dossier /grenouille/ n'a pas d'image, on reprend la fonction de depart (avec images de img_meteo)
-	
-	function icone_num_meteo($id_prevision, $temps='', $chemin='', $extension="png") {
-		if (empty($chemin))
-			$chemin = '/grenouille/';
-		$img = find_in_path($chemin.$id_prevision.'.'.$extension);
-		if (file_exists($img)) {
-			include_spip('inc/logos');
-			list ($h,$l) = taille_image($img);
-			return '<img src="'.$img.'" alt="'.$temps.'" title="'.traduire_meteo($temps).'" width="'.$l.'" height="'.$h.'" />';
-		} else {
-			return icone_meteo($temps, $chemin='', $extension="png");
-		}
-		
-	}
 
 
 

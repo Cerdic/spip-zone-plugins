@@ -25,8 +25,8 @@
 	[<a href="[(#URL_ECRIRE{meteo}|parametre_url{id_meteo,#ID_METEO})]">(#VILLE)</a>] 
 	</td>
 	<td style='width: 200px;' class="arial1">
-	<BOUCLE_prevision(PREVISIONS) {id_meteo} {par date}{0,1}>[(#ID_TEMPS|icone_num_meteo{[(#TEMPS|traduire_meteo)]}|image_reduire{20})]</BOUCLE_prevision>
-	[(#STATUT|=={en_erreur}|?{<span style="color:red;"><:meteo:probleme_de_recuperation_du_flux:></span>,[(#ID_TEMPS|icone_num_meteo{[(#TEMPS|traduire_meteo)]}|image_reduire{25})]})]
+	<BOUCLE_prevision(PREVISIONS) {id_meteo} {par date}{0,1}>[(#ID_TEMPS|icone_meteo|image_reduire{20})]</BOUCLE_prevision>
+	[(#STATUT|=={en_erreur}|?{<span style="color:red;"><:meteo:probleme_de_recuperation_du_flux:></span>})]
 	</td>
 	<td style='width: 80px;' class="arial1">
 	#CODE

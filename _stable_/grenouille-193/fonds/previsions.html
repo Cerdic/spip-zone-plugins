@@ -20,7 +20,7 @@
 <BOUCLE_previsions(PREVISIONS) {id_meteo} {par date}>
 <tr class="tr_liste">
 <td style="width: 18px;">
-[(#ID_TEMPS|icone_num_meteo{[(#TEMPS|traduire_meteo)]}|image_reduire{25})]
+[(#ID_TEMPS|icone_meteo|image_reduire{25})]
 </td><td class="arial2" style="width: 100px;">
 [(#DATE|nom_jour|substr{0,3}) ][(#DATE|jour) ][(#DATE|nom_mois)]
 </td><td class="arial2" style="width: 100px;">
