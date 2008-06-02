@@ -179,4 +179,134 @@ function spip_thelia_ajouter_boutons($boutons_admin){
 	}
 	return $boutons_admin;
 }
+function spip_thelia_affiche_milieu($flux) {
+	$exec =  $flux['args']['exec'];
+	$id_article= $_REQUEST['id_article'];
+	$id_rubrique= $_REQUEST['id_rubrique'];
+	if ($exec=='articles'){
+		$flux['data'] .= spip_thelia_formulaire_article($id_article, article_editable($id_article),'articles');
+	}else if (($exec=='naviguer')&&($id_rubrique)){
+		$flux['data'] .= spip_thelia_formulaire_rubrique($id_rubrique, rubrique_editable($id_rubrique),'rubriques');
+	}
+	return $flux;
+}
+function article_editable($id_article){
+	return autoriser('modifier','article',$id_article);
+}
+function rubrique_editable($id_rubrique){
+	return autoriser('modifier','rubrique',$id_rubrique);
+}
+function spip_thelia_formulaire_article($id_article, $flag_editable, $script){
+
+  	global $spip_lang_right;
+ 	include_spip("inc/presentation");
+	include_spip('public/assembler');
+	include_spip('inc/charsets');
+
+	global $spip_lang_left, $spip_lang_right, $options;
+	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
+
+	$out = "<div id='editer_produit-$id_article'>";
+	$out .= "<a name='produit'></a>";
+	if ($flag_editable) {
+		if (_request('edit')||_request('neweven'))
+			$bouton = bouton_block_visible("produitsarticle");
+		else
+			$bouton = bouton_block_invisible("produitsarticle");
+	}
+	
+	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton._T('spipthelia:produits_associes_article'));
+
+	$out .= debut_block_invisible('produitsarticle');
+	
+	$link = generer_action_auteur('produits_article',"$id_article",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('articles&id_article='.$id_article,"",false,true)));
+	$out .= "<form method='POST' action='$link' style='float:$spip_lang_right'>\n";
+	$out .= form_hidden($link);
+	
+	//
+	// Afficher les produits associes
+	//
+	
+	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
+	$res = recuperer_fond("fonds/produits_associes_article","id_article=".$id_article);
+	$res = str_replace("THELIA-", "#", $res);
+	
+	//avant d'envoyer à thélia, on convertie en iso pour thélia
+	$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
+	ob_start();
+	chdir('..');
+	include_once("fonctions/moteur.php");
+	chdir('ecrire');
+	$texte = ob_get_contents();
+	ob_end_clean();
+	$texte = remplacement_sortie_thelia($texte);
+
+	//au retour de thélia, on convertit en utf8 pour SPIP
+	$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
+	$out .= $texte;
+
+	$out .= "</form>\n";	
+
+	$out .= fin_block();
+
+	$out .= fin_cadre_enfonce(true);
+	$out .= "</div><br/>";
+	return $out;
+}
+
+function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script){
+
+  	global $spip_lang_right;
+ 	include_spip("inc/presentation");
+	include_spip('public/assembler');
+	include_spip('inc/charsets');
+
+	global $spip_lang_left, $spip_lang_right, $options;
+	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
+
+	$out = "<div id='editer_produit-$id_rubrique'>";
+	$out .= "<a name='produit'></a>";
+	if ($flag_editable) {
+		if (_request('edit')||_request('neweven'))
+			$bouton = bouton_block_visible("produitsrubrique");
+		else
+			$bouton = bouton_block_invisible("produitsrubrique");
+	}
+	
+	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton._T('spipthelia:produits_associes_rubrique'));
+	$out .= debut_block_invisible('produitsrubrique');
+	
+	$link = generer_action_auteur('produits_rubrique',"$id_rubrique",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('naviguer&id_rubrique='.$id_rubrique,"",false,true)));
+	$out .= "<form method='POST' action='$link' style='float:$spip_lang_right'>\n";
+	$out .= form_hidden($link);
+	
+	//
+	// Afficher les produits associes
+	//
+	
+	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
+	$res = recuperer_fond("fonds/produits_associes_rubrique","id_rubrique=".$id_rubrique);
+	$res = str_replace("THELIA-", "#", $res);
+	
+	//avant d'envoyer à thélia, on convertie en iso pour thélia
+	$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
+	ob_start();
+	chdir('..');
+	include_once("fonctions/moteur.php");
+	chdir('ecrire');
+	$texte = ob_get_contents();
+	ob_end_clean();
+	$texte = remplacement_sortie_thelia($texte);
+
+	//au retour de thélia, on convertit en utf8 pour SPIP
+	$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
+	$out .= $texte;
+
+	$out .= "</form>\n";	
+
+	$out .= fin_block();
+	$out .= fin_cadre_enfonce(true);
+	$out .= "</div><br/>";
+	return $out;
+}
 ?>

@@ -1,0 +1,64 @@
+#CACHE{0}
+
+<div class="spip_boutons" style="float: right;">
+	<input type="submit" value="<:spipthelia:mettre_a_jour:>" />
+</div>
+
+<ul>
+<THELIA_rubriquesniveau1 type="RUBRIQUE" parent="0">
+
+<li><input type="checkbox" id="rubriquethelia-THELIA-ID" name="rubriquethelia-THELIA-ID" /><label for="rubriquethelia-THELIA-ID">THELIA-TITRE</label>
+<ul>
+	<THELIA_produitsniveau1 type="PRODUIT" rubrique="THELIA-ID" profondeur="1">
+		<li><input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label></li>
+	</THELIA_produitsniveau1>
+	<THELIA_rubriquesniveau2 type="RUBRIQUE" parent="THELIA-ID">
+		<li><input type="checkbox" id="rubriquethelia-THELIA-ID" name="rubriquethelia-THELIA-ID" /><label for="rubriquethelia-THELIA-ID">THELIA-TITRE</label>
+			<ul>
+			<THELIA_produitsniveau2 type="PRODUIT" rubrique="THELIA-ID" profondeur="1">
+			<li><input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label></li>
+			</THELIA_produitsniveau2>
+			<THELIA_rubriquesniveau3 type="RUBRIQUE" parent="THELIA-ID">
+				<li><input type="checkbox" id="rubriquethelia-THELIA-ID" name="rubriquethelia-THELIA-ID" /><label for="rubriquethelia-THELIA-ID">THELIA-TITRE</label>
+					<ul>
+					<THELIA_produitsniveau3 type="PRODUIT" rubrique="THELIA-ID" profondeur="1">
+						<li><input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label></li>
+					</THELIA_produitsniveau3>
+					<THELIA_rubriquesniveau4 type="RUBRIQUE" parent="THELIA-ID">
+						<li><input type="checkbox" id="rubriquethelia-THELIA-ID" name="rubriquethelia-THELIA-ID" /><label for="rubriquethelia-THELIA-ID">THELIA-TITRE</label>
+							<ul>
+							<THELIA_produitsniveau4 type="PRODUIT" rubrique="THELIA-ID" profondeur="1">
+								<li><input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label></li>
+							</THELIA_produitsniveau4>
+							</ul>
+						</li>
+					</THELIA_rubriquesniveau4>
+					</ul>
+				</li>
+			
+			</THELIA_rubriquesniveau3>
+			</ul>
+		</li>
+	</THELIA_rubriquesniveau2>
+	</ul>
+</li>
+
+</THELIA_rubriquesniveau1>
+</ul>
+<script type="text/javascript">
+	$(document).ready(function(){
+		<BOUCLE_associationsrubriquesthelia(RUBRIQUESTHELIA_RUBRIQUES){id_rubrique}>
+			//test
+			$('#rubriquethelia-#ID_RUBRIQUETHELIA').attr('checked', 'checked');
+		</BOUCLE_associationsrubriquesthelia>
+	
+		<BOUCLE_associationsrubriques(PRODUITS_RUBRIQUES){id_rubrique}>
+			$('#produit-#ID_PRODUIT').attr('checked', 'checked');
+		</BOUCLE_associationsrubriques>
+	});
+</script>
+<div class="spip_boutons" style="float: right;">
+	<input type="submit" value="<:spipthelia:mettre_a_jour:>" />
+</div>
+
+&nbsp;<br/>

@@ -126,10 +126,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'plugin_thelia' => 'avec le plugin Th&eacute;lia pour SPIP',
 'retour_boutique' => 'Continuer mes achats',
 'mes_achats' => 'Mes achats',
-'bonjour' => 'Bonjour'
-
-
-
-
+'bonjour' => 'Bonjour',
+'produits_associes_article' => 'PRODUITS ASSOCIES A L\'ARTICLE',
+'produits_associes_rubrique' => 'PRODUITS ASSOCIES A LA RUBRIQUE',
+'mettre_a_jour' => 'Mettre &agrave; jour'
 );
 ?>

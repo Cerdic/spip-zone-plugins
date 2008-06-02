@@ -1,16 +1,21 @@
 <plugin>
 	<nom>Interface Th&eacute;lia</nom>
- 	<version>1.11</version>
+ 	<version>1.2</version>
  	<prefix>spip_thelia</prefix>
  	<auteur>Arnault Pachot, Alain Cousin, Claude Chadoutaud</auteur>
  	<description>Plugin permettant d'utiliser les boucles Th&eacute;lia dans vos squelettes <br/>
-	[acc&egrave;s au panneau de configuration pour param&eacute;trer la version deTh&eacute;lia->.?exec=cfg&amp;cfg=spip_thelia] 
+	[acc&egrave;s au panneau de configuration pour param&eacute;trer la version de Th&eacute;lia->.?exec=cfg&amp;cfg=spip_thelia] 
 <br/>Distribu&eacute; sous licence GNU/GPL   </description>
 	
 	<lien>http://www.spip-contrib.net/Plugin-Thelia</lien> <!-- URI de documentation -->
- 	<etat>stable</etat>
- 	<fonctions></fonctions>
- 	<pipeline>
+ 	<etat>dev</etat>
+ 	<options> <!-- fichier charge a chaque hit -->
+		spip_thelia_mes_options.php
+	</options>
+	<fonctions>
+		spip_thelia_fonct.php
+	</fonctions>
+	<pipeline>
   		<nom>affichage_final</nom>
   		<action>appeler_moteur_thelia</action>
   		<inclure>spip_thelia_fonct.php</inclure>
@@ -31,10 +36,17 @@
 		<inclure>spip_thelia_fonct.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>affiche_milieu</action>
+		<inclure>spip_thelia_fonct.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>post_typo</nom>
   		<action>supprimer_balises_thelia</action>
   		<inclure>spip_thelia_fonct.php</inclure>
 	</pipeline>
+	
+	<install>base/spip_thelia_upgrade.php</install>
 	<icon>img_pack/logo_thelia.png</icon>
  	<necessite id="CFG" version="[1.0;]" />
 	<necessite id='spip' version='[1.92;]' />
