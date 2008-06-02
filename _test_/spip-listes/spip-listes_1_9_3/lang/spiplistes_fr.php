@@ -469,8 +469,9 @@ liste.",
 'Valider_abonnement' => "Valider cet abonnement"
 , 'vous_etes_abonne_aux_listes_selectionnees_' => "Vous &ecirc;tes abonn&eacute; aux listes s&eacute;lectionn&eacute;es "
 
-, 'abon' => 'LES ABONNES',
-'abon_ajouter' => 'AJOUTER UN ABONNE &nbsp; ',
+, 'abon' => 'LES ABONNES'
+, 'abos_cette_liste' => "Les abonn&eacute;s &agrave; cette liste"
+, 'abon_ajouter' => 'AJOUTER UN ABONNE &nbsp; ',
 'abonees' => 'tous les abonn&eacute;s',
 'abonne_listes' => 'Ce contact est abonn&eacute; aux listes suivantes',
 'abonne_aucune_liste' => 'Abonn&eacute;s &agrave; aucune liste',

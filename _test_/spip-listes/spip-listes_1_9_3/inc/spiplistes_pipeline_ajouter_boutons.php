@@ -1,5 +1,5 @@
 <?php
-// inc/spiplistes_afficher_auteurs.php
+// inc/spiplistes_pipeline_ajouter_boutons.php
 /*
 	SPIP-Listes pipeline
 	

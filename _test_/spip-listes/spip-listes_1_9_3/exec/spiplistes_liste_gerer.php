@@ -46,12 +46,15 @@ function exec_spiplistes_liste_gerer () {
 	include_spip('inc/spiplistes_api_presentation');
 	include_spip('inc/spiplistes_dater_envoi');
 	include_spip('inc/spiplistes_naviguer_paniers');
+	include_spip('inc/spiplistes_afficher_auteurs');
 	
 	global $meta
 		, $connect_statut
 		, $connect_toutes_rubriques
 		, $connect_id_auteur
-		, $spip_lang_left,$spip_lang_right
+		, $spip_lang_left
+		, $spip_lang_right
+		, $couleur_claire
 		;
 
 	// initialise les variables postees par le formulaire
@@ -323,9 +326,94 @@ function exec_spiplistes_liste_gerer () {
 					, false
 					)
 			;
+		// la grosse boite des abonnes
+		$tri = _request('tri') ? _request('tri') : 'nom';
+		$retour = generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE);
+		$retour = parametre_url($retour,"tri",$tri);
+		switch ($tri) {
+			case 'statut':
+				$sql_where = array("aut.statut!=".sql_quote('5poubelle'));
+				$sql_order = array('statut','login','unom');
+				break;
+			case 'email':
+				$sql_where = array();
+				$sql_order = array('LOWER(email)');
+				break;
+			case 'nombre':
+				$sql_where = array();
+				$sql_order = array('compteur DESC','unom');
+				break;
+			case 'nom':
+			default:
+				$sql_where = array("aut.statut!=".sql_quote('5poubelle'));
+				$sql_order = array('unom');
+		}
+		$sql_where[] = "lien.id_liste=".sql_quote($id_liste);
+		$sql_select = "
+			aut.id_auteur AS id_auteur,
+			aut.statut AS statut,
+			aut.login AS login,
+			aut.nom AS nom,
+			aut.email AS email,
+			aut.url_site AS url_site,
+			aut.messagerie AS messagerie,
+			fmt.`spip_listes_format` AS format,
+			UPPER(aut.nom) AS unom,
+			COUNT(lien.id_liste) as compteur";
+		$sql_from = "spip_auteurs as aut
+			LEFT JOIN spip_auteurs_listes AS lien ON aut.id_auteur=lien.id_auteur
+			LEFT JOIN spip_listes AS liste ON (lien.id_liste = liste.id_liste)
+			LEFT JOIN spip_auteurs_elargis AS fmt ON aut.id_auteur=fmt.id_auteur";
+		$sql_group = array('aut.id_auteur');
+		$boite_abonnes = ""
+			. spiplistes_afficher_auteurs(
+				  $sql_select, $sql_from, $sql_where, $sql_group, $sql_order
+				, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")
+				, 10 // max par page
+				, $tri
+				)
+			;
+		$abonnes = $non_abonnes = "";
+		$ids_abos = spiplistes_listes_liste_abo_ids($id_liste);
+		$sql_from = array("spip_auteurs");
+		$sql_where = array("email <> ''"); // email obligatoire !
+		if($statut == _SPIPLISTES_PRIVATE_LIST) {
+			$sql_where[] = "(statut=".sql_quote('0minirezo')." OR statut=".sql_quote('1comite').")";
+		}
+		$sql_result = sql_select("nom,id_auteur,statut", $sql_from, $sql_where, '', 'statut,nom');
+		$ii = 1;
+		while($row = sql_fetch($sql_result)) {
+			if(in_array($row['id_auteur'], $ids_abos)) {
+				$couleur_ligne = (($ii++) % 2) ? '#eee' : $couleur_claire;
+				$abonnes .= ""
+					. "<tr style='background-color: $couleur_ligne'>"
+					. "<td>".puce_statut_auteur($row['id_auteur'], $row['statut'], 0, 'auteur')."</td>\n"
+					. "&nbsp;"
+					. "<td>".$row['nom']."</td>\n"
+					. "<td>desabvo</td>\n"
+					. "</tr>\n";
+			} else {
+			}
+		}
+		// renvoie le résulat en Ajax si sous SPIP svn et AJAX
+		if(defined("_AJAX") && _AJAX) {
+		spiplistes_log("result ajax");
+			echo($boite_abonnes);
+			exit(0);
+		} 
+		$bouton = bouton_block_depliable(_T('spiplistes:abos_cette_liste'), true, "abonnes_liste");
+		$grosse_boite_abonnements = ""
+			. debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
+			. debut_cadre_relief('', true)
+			. "<div id='auteurs' class='verdana2'>\n"
+			. $boite_abonnes
+			. "</div>\n"
+			. fin_cadre_relief(true)
+			. fin_cadre_enfonce(true)
+			;
 	}
 	else {
-		$gros_bouton_modifier = $gros_bouton_supprimer = "";
+		$gros_bouton_modifier = $gros_bouton_supprimer = $grosse_boite_abonnements = "";
 	}
 
 ////////////////////////////////////
@@ -547,8 +635,9 @@ function exec_spiplistes_liste_gerer () {
 		. "<table border='0' cellspacing='1' cellpadding='3' width='100%'>\n"
 		. "<tr><td align='$spip_lang_left' class='verdana2'>\n"
 		;
-	if ($message_auto != "oui")
+	if ($message_auto != "oui") {
 		$page_result .= "<div class='verdana2'>"._T('spiplistes:Pas_de_courrier_auto_programme')."</div>\n";
+	}
 	else {
 		$page_result .= ""
 			// petite ligne d'info si envoi programme
@@ -722,7 +811,12 @@ function exec_spiplistes_liste_gerer () {
 				)
 			;
 	}
-		
+	// CP-20080602
+	// en cours de construction pour SPIP svn
+	else {
+		$page_result .= $grosse_boite_abonnements;
+	}
+	
 	// le super-admin peut abonner en masse
 	if($connect_toutes_rubriques) {
 		$page_result .= ""

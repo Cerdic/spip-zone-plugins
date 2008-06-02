@@ -89,9 +89,11 @@ function exec_spiplistes_abonnes_tous () {
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "abonnes_tous";
 
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
-
+	if(!defined("_AJAX") || !_AJAX) {
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
+	}
+	
 	// la gestion des abonnés est réservée aux admins 
 	if(!$flag_autorise) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
@@ -122,7 +124,7 @@ function exec_spiplistes_abonnes_tous () {
 		. spiplistes_boite_info_spiplistes(true)
 		. debut_droite($rubrique, true)
 		// boite résultat Recherche d'auteur
-		. spiplistes_cherche_auteur(true)
+		. spiplistes_cherche_auteur()
 		;
 	
 	// première boite des stats
@@ -188,49 +190,31 @@ function exec_spiplistes_abonnes_tous () {
 	
 	$tri = _request('tri') ? _request('tri') : 'nom';
 	$retour = parametre_url($retour,"tri",$tri);
+
 	
-	//
 	// Construire la requete
-	//
-	
-	$sql_visible="1=1"; 
-	$partri = " " . _T('info_par_tri', array('tri' => $tri));
-	
-	$sql_sel = '';
 	
 	// tri
 	switch ($tri) {
-		case 'nombre':
-			$sql_order = ' ORDER BY compteur DESC, unom';
-			$type_requete = 'nombre';
-			$partri = " "._T('info_par_nombre_article');
-			break;
 		case 'statut':
-			$sql_order = ' ORDER BY statut, login = "", unom';
-			$type_requete = 'auteur';
-			$sql_visible = " aut.statut!='5poubelle'";
-			break;
-		case 'nom':
-			$sql_order = ' ORDER BY unom';
-			$type_requete = 'auteur';
-			$sql_visible = " aut.statut!='5poubelle'";
+			$sql_where = array("aut.statut!=".sql_quote('5poubelle'));
+			$sql_order = array('statut','login','unom');
 			break;
 		case 'email':
-			$sql_order = ' ORDER BY LOWER(email)';
-			$type_requete = 'auteur';
+			$sql_where = array();
+			$sql_order = array('LOWER(email)');
 			break;
-		case 'multi':
+		case 'nombre':
+			$sql_where = array();
+			$sql_order = array('compteur DESC','unom');
+			break;
+		case 'nom':
 		default:
-			$type_requete = 'auteur';
-			$sql_sel = ", ".creer_objet_multi ("nom", $spip_lang);
-			$sql_order = " ORDER BY multi";
+			$sql_where = array("aut.statut!=".sql_quote('5poubelle'));
+			$sql_order = array('unom');
 	}
 
-	
-	// La requete de base est tres sympa
-	//
-	
-	$sql_query = "SELECT
+	$sql_select = "
 		aut.id_auteur AS id_auteur,
 		aut.statut AS statut,
 		aut.login AS login,
@@ -240,26 +224,36 @@ function exec_spiplistes_abonnes_tous () {
 		aut.messagerie AS messagerie,
 		fmt.`spip_listes_format` AS format,
 		UPPER(aut.nom) AS unom,
-		COUNT(lien.id_liste) as compteur
-		$sql_sel
-		FROM spip_auteurs as aut
+		COUNT(lien.id_liste) as compteur";
+	$sql_from = "spip_auteurs as aut
 		LEFT JOIN spip_auteurs_listes AS lien ON aut.id_auteur=lien.id_auteur
 		LEFT JOIN spip_listes AS art ON (lien.id_liste = art.id_liste)
-		LEFT JOIN spip_auteurs_elargis AS fmt ON aut.id_auteur=fmt.id_auteur
-		WHERE
-		$sql_visible
-		GROUP BY aut.id_auteur
-		$sql_order";
+		LEFT JOIN spip_auteurs_elargis AS fmt ON aut.id_auteur=fmt.id_auteur";
+	$sql_group = array('aut.id_auteur');
 
-	$page_result .= ""
-		. "<div id='auteurs'>\n"
-		. spiplistes_afficher_auteurs($sql_query, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE), true)
-		. "</div>\n"
+	$boite_abonnes = ""
+		. spiplistes_afficher_auteurs(
+			  $sql_select, $sql_from, $sql_where, $sql_group, $sql_order
+			, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)
+			, 10 // max par page
+			, $tri
+			)
 		;
 	
-	echo($page_result);
-
-	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
+	if(defined("_AJAX") && _AJAX) {
+		echo($boite_abonnes);
+	} 
+	else {
+		$page_result .= ""
+			. debut_cadre_relief('redacteurs-24.gif', true)
+			. "<div id='auteurs'>\n"
+			. $boite_abonnes
+			. "</div>\n"
+			. fin_cadre_relief(true)
+			;
+		echo($page_result);
+		echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
+	}
 }
 
 //CP-200080519

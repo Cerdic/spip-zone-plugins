@@ -24,7 +24,7 @@
 
 include_spip('inc/spiplistes_api');
 
-function spiplistes_cherche_auteur ($return = false) {
+function spiplistes_cherche_auteur () {
 	if (!$cherche_auteur = _request('cherche_auteur')) return;
 	
 	$col = strpos($cherche_auteur, '@') !== false ? 'email' : 'nom';
@@ -34,11 +34,11 @@ function spiplistes_cherche_auteur ($return = false) {
 		$cherche_auteur = str_replace('%', ' ', $cherche_auteur);
 	}
 	
-	$sql_result = spip_query("SELECT id_auteur, $col FROM spip_auteurs $like");
+	$sql_result = sql_select("id_auteur,$col", "spip_auteurs", $like);
 	
-	while ($row = spip_fetch_array($sql_result, SPIP_NUM)) {
-		$table_auteurs[] = $row[1];
-		$table_ids[] = $row[0];
+	while($row = sql_fetch($sql_result)) {
+		$table_auteurs[] = $row[$col];
+		$table_ids[] = $row['id_auteur'];
 	}
 	
 	$resultat = mots_ressemblants($cherche_auteur, $table_auteurs, $table_ids);
@@ -58,8 +58,8 @@ function spiplistes_cherche_auteur ($return = false) {
 			. "<strong>"._T('spiplistes:une_inscription')."</strong>:<br />\n"
 			. "<ul>"
 			;
-		$sql_result = spip_query("SELECT id_auteur,nom,email,bio FROM spip_auteurs WHERE id_auteur=$nouv_auteur LIMIT 1");
-		while ($row = spip_fetch_array($sql_result)) {
+		$sql_result = sql_select("id_auteur,nom,email,bio", "spip_auteurs", "id_auteur=".sql_quote($nouv_auteur), '', '', 1);
+		while ($row = sql_fetch($sql_result)) {
 			$id_auteur = $row['id_auteur'];
 			$nom_auteur = $row['nom'];
 			$email_auteur = $row['email'];
@@ -76,19 +76,21 @@ function spiplistes_cherche_auteur ($return = false) {
 			. "</ul>\n"
 			;
 	}
-	elseif (count($resultat) < 16) {
+	else if (count($resultat) < 16) {
 		reset($resultat);
 		unset($les_auteurs);
-		while (list(, $id_auteur) = each($resultat))
+		while (list(, $id_auteur) = each($resultat)) {
 			$les_auteurs[] = $id_auteur;
-		if ($les_auteurs) {
+		}
+		if($les_auteurs) {
 			$les_auteurs = join(',', $les_auteurs);
 			$result .= ""
 				. "<strong>"._T('texte_plusieurs_articles', array('cherche_auteur' => $cherche_auteur))."</strong><br />"
 				. "<ul>"
 				;
-			$sql_result = spip_query("SELECT id_auteur,nom,email,bio FROM spip_auteurs WHERE id_auteur IN ($les_auteurs) ORDER BY nom");
-			while ($row = spip_fetch_array($sql_result)) {
+			$sql_select = array('id_auteur','nom','email','bio');
+			$sql_result = sql_select($sql_select, "spip_auteurs", "id_auteur IN ($les_auteurs)", '', array('nom'));
+			while ($row = sql_fetch($sql_result)) {
 				$id_auteur = $row['id_auteur'];
 				$nom_auteur = $row['nom'];
 				$email_auteur = $row['email'];
@@ -103,7 +105,8 @@ function spiplistes_cherche_auteur ($return = false) {
 						;
 				}
 				$result .= ""
-					. " | <a href=\"".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT,"id_auteur=$id_auteur")."\">"._T('spiplistes:choisir')."</a>"
+					. " | <a href=\"".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT,"id_auteur=$id_auteur")."\">"
+					. _T('spiplistes:choisir')."</a>"
 					;
 				if (trim($bio_auteur)) {
 					$result .= ""
@@ -130,32 +133,36 @@ function spiplistes_cherche_auteur ($return = false) {
 		. "</div>"
 		;
 
-	if($return) return($result);
-	else echo($result);
+	return($result);
 }
 
-function spiplistes_afficher_auteurs($query, $url, $return = false) {
+function spiplistes_afficher_auteurs(
+	$sql_select, $sql_from, $sql_where, $sql_group, $sql_order
+	, $url
+	, $max_par_page = 10
+	, $tri
+) {
 	
-	global $couleur, $couleur_claire;
+	global 
+		  $spip_lang_left
+		, $spip_lang_right
+		;
 
-	$tri = _request('tri') ? _request('tri') : 'nom';
+	$nombre_auteurs = 
+		(($row = sql_fetch(sql_select("COUNT(id_auteur) AS n", 'spip_auteurs'))) && $row['n'])
+		? $row['n'] : 0;
 
-	$t = spip_query('SELECT COUNT(*) FROM spip_auteurs');
-	$nombre_auteurs = spip_fetch_array($t, SPIP_NUM);
-	$nombre_auteurs = intval($nombre_auteurs[0]);
-	
 	// reglage du debut
-	$max_par_page = 30;
 	$debut = intval(_request('debut'));
 	if ($debut > $nombre_auteurs - $max_par_page) {
-		$debut = max(0,$nombre_auteurs - $max_par_page);
+		$debut = max(0, $nombre_auteurs - $max_par_page);
 	}
 	
-	$t = spip_query($query . ' LIMIT ' . $debut . ',' . $max_par_page);
+	$sql_result = sql_select($sql_select, $sql_from, $sql_where, $sql_group, $sql_order, $debut . ',' . $max_par_page);
 	
-	$auteurs=array();
+	$auteurs = array();
 	$les_auteurs = array();
-	while ($auteur = spip_fetch_array($t)) {
+	while ($auteur = sql_fetch($sql_result)) {
 		if ($auteur['statut'] == '0minirezo') {
 			$auteur['restreint'] = sql_count(spip_query(
 				"SELECT * FROM spip_auteurs_rubriques WHERE id_auteur=".sql_quote($auteur['id_auteur'])
@@ -165,20 +172,22 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 		$les_auteurs[] = $auteur['id_auteur'];
 	}
 		
-	$lettre = array();
-	if (($tri == 'nom') && ($GLOBALS['options'] == 'avancees')) {
-		$qlettre = spip_query("SELECT distinct UPPER(LEFT(nom,1)) l, COUNT(*) FROM spip_auteurs GROUP BY l ORDER BY l");
+	$lettres_onglet = array();
+	if($tri == 'nom') {
+		$sql_result = sql_select(
+			array("DISTINCT UPPER(LEFT(nom,1)) AS l"
+				, "COUNT(*) AS n")
+			, "spip_auteurs", '', "l", "l");
 		$count = 0;
-		while ($rlettre = spip_fetch_array($qlettre, SPIP_NUM)) {
-			$lettre[$rlettre[0]] = $count;
-			$count += intval($rlettre[1]);
+		while ($row = sql_fetch($sql_result)) {
+			$lettres_onglet[$row['l']] = $count;
+			$count += intval($row['n']);
 		}
 	}
 	
 	//////////////////////////////////
 	// tableau des resultats
 	$result = ""
-		. debut_cadre_relief('redacteurs-24.gif', true)
 		. "<table border='0' cellpadding='3' cellspacing='0' width='100%' class='arial2, spiplistes-abos'>\n"
 		;
 	
@@ -258,7 +267,7 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 			$result .= ""
 				. "<tr class='onglets'><td colspan='7'>"
 				;
-			foreach ($lettre as $key => $val) {
+			foreach ($lettres_onglet as $key => $val) {
 				$result .= 
 					($val == $debut)
 					? "<strong>$key</strong> "
@@ -278,11 +287,16 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 	list(,,,$trad,$val) = explode("|",_T("spiplistes:options")); 
 	$trad = explode(",",$trad);
 	$val = explode(",",$val);
-	$trad_map = Array();
+	$trad_map = array();
 	for($index_map=0;$index_map<count($val);$index_map++) {
 		$trad_map[$val[$index_map]] = $trad[$index_map];
 	}
-	$ii=0;
+
+	$a_title_abo_html =  " title='"._T('spiplistes:Abonner_format_html')."'";
+	$a_title_abo_texte =  " title='"._T('spiplistes:Abonner_format_texte')."'";
+	$a_title_desabo =  " title='"._T('spiplistes:Desabonner')."'";
+
+	$ii = 1;
 	
 	//////////////////////////////////
 	// ici commence la vraie boucle
@@ -290,11 +304,10 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 	// les auteurs (la liste)
 	foreach ($auteurs as $row) {
 		// couleur de ligne
-		$couleur = (($ii++) % 2) ? '#eee' : $couleur_claire;
-
+		$couleur_ligne = (($ii++) % 2) ? '#eee' : '#fff';
 
 		$result .= ""
-			. "<tr style='background-color: $couleur'>"
+			. "<tr style='background-color: $couleur_ligne'>"
 			//
 			// #1: statut auteur (icone)
 			. "<td>"
@@ -355,25 +368,26 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 			. "<a name='abo".$row['id_auteur']."'></a>"
 			;
 
+		// SPIP 192 ne prend pas les array dans parametre_url()
+		// obligé de l'appeler 2 x
 		$retour = parametre_url($url,'debut',$debut);
+		$retour = parametre_url($retour,'tri',$tri);
+		
 		
 		$u = generer_action_auteur('spiplistes_changer_statut_abonne', $row['id_auteur']."-format", $retour);
 		
-		$a_title_abo_html =  " title='"._T('spiplistes:Abonner_format_html')."'";
-		$a_title_abo_texte =  " title='"._T('spiplistes:Abonner_format_texte')."'";
-		$a_title_desabo =  " title='"._T('spiplistes:Desabonner')."'";
-
+		$a_format_html = "<a $a_title_abo_html href='".parametre_url($u,'statut','html')."'>"._T('spiplistes:html')."</a>";
+		$a_format_texte = "<a $a_title_abo_texte href='".parametre_url($u,'statut','texte')."'>"._T('spiplistes:texte')."</a>";
+		$a_format_non = "<a $a_title_desabo href='".parametre_url($u,'statut','non')."'>"._T('spiplistes:desabo')."</a>";
+		
 		if($abo == 'html') {
-			$option_abo = "<a $a_title_desabo href='".parametre_url($u,'statut','non')."'>"._T('spiplistes:desabo')
-			 . "</a> | <a $a_title_abo_texte href='".parametre_url($u,'statut','texte')."'>"._T('spiplistes:texte')."</a>";
+			$option_abo = $a_format_non." | ".$a_format_texte;
 		}
 		elseif ($abo == 'texte') {
-			$option_abo = "<a $a_title_desabo href='".parametre_url($u,'statut','non')."'>"._T('spiplistes:desabo')
-			 . "</a> | <a $a_title_abo_html href='".parametre_url($u,'statut','html')."'>"._T('spiplistes:html')."</a>";
+			$option_abo = $a_format_non." | ".$a_format_html;
 		}
 		else {
-			$option_abo = "<a $a_title_abo_texte href='".parametre_url($u,'statut','texte')."'>"._T('spiplistes:texte')
-			 . "</a> | <a $a_title_abo_html href='".parametre_url($u,'statut','html')."'>"._T('spiplistes:html')."</a>";
+			$option_abo = $a_format_texte." | ".$a_format_html;
 		}
 		
 		$result .= ""
@@ -384,51 +398,46 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 	
 	$result .= ""
 		. "</table>\n"
-		. "<a name='bas'>"
-		. "<table width='100%' border='0'>"
 		;
-	
+		
+	// flèche de pagination si besoin
 	$debut_suivant = $debut + $max_par_page;
 	
 	if (($debut_suivant < $nombre_auteurs) || ($debut > 0)) {
 	
 		$result .= ""
-			. "<tr height='10'></tr>"
-			. "<tr bgcolor='white'><td align='left'>"
+			. "<table id='bas' width='100%' border='0'>"
+			. "<tr bgcolor='white'><td style='text-align: $spip_lang_left'>"
 			;
 		if ($debut > 0) {
 			$debut_prec = strval(max($debut - $max_par_page, 0));
+			$action_url = parametre_url($url, 'debut', $debut_prec);
+			$action_url = parametre_url($action_url, 'tri', $tri);
 			$result .= ""
-				. "<form method='post' action='".parametre_url($url,'debut',$debut_prec)."'>"
-				. "<div style='text-align:left;'>"
-				. "<input type='submit' name='submit' value='&lt;&lt;&lt;' class='fondo' />"
-				. "</div>"
-				. "</form>"
+				. "<a href='$action_url' onclick=\"return AjaxSqueeze('$action_url','auteurs','',event)\">"
+						. "&lt;&lt;&lt;"
+						. "</a>\n"
+				;
+		}
+		if($debut_suivant < $nombre_auteurs) {
+			$action_url = parametre_url($url, 'debut', $debut_suivant);
+			$action_url = parametre_url($action_url, 'tri', $tri);
+			$result .= ""
+				. "</td><td style='text-align: $spip_lang_right'>"
+				. "<a href='$action_url' onclick=\"return AjaxSqueeze('$action_url','auteurs','',event)\">"
+						. "&gt;&gt;&gt;"
+						. "</a>\n"
 				;
 		}
 		$result .= ""
-			. "</td><td align='right'>"
-			.	(
-				($debut_suivant < $nombre_auteurs)
-				? "<form method='post' action='".parametre_url($url,'debut',$debut_suivant)."'>\n"
-					. "<div style='text-align:right;'>"
-					. "<input type='submit' name='submit' value='&gt;&gt;&gt;' class='fondo' />\n"
-					. "</div>"
-					. "</form>\n"
-				: ""
-				)
 			. "</td></tr>\n"
+			. "</table>\n"
 			;
-	}
+	} //
 	
-	$result .= ""
-		. "</table>\n"
-		. fin_cadre_relief(true)
-		;
-
-	if($return) return($result);
-	else echo($result);
+	return($result);
 }
+
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */

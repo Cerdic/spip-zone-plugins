@@ -276,6 +276,17 @@ function spiplistes_listes_liste_creer ($statut, $lang, $titre, $texte, $pied_pa
 	return(false);
 }
 
+//CP-20080602
+// renvoie tableau de id_auteurs abonnes a une liste
+function spiplistes_listes_liste_abo_ids ($id_liste) {
+	$sql_result = sql_select('id_auteur', 'spip_auteurs_listes', "id_liste=".sql_quote($id_liste), '', array('id_auteur'));
+	$ids_abos = array();
+	while($row = sql_fetch($sql_result)) {
+		$ids_abos[] = intval($row['id_auteur']);
+	}
+	return($ids_abos);
+}
+
 // CP-20080430: renvoie tableau liste des listes
 function spiplistes_listes_lister ($select = "*", $where = "") {
 	if($where) {
