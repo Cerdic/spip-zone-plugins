@@ -5,6 +5,9 @@
 [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 
 
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+
+
 [(#ENV*{editable}|?{' '})
     <form action='#SELF' method='post'>
 		#ACTION_FORMULAIRE{#SELF}
@@ -63,12 +66,12 @@
 					    <legend>Civilité</legend>
 					    <ul class="formfx">
 						    <li>
-                                <input class="radio" class="radio" name="sexe" id="monsieur" type="radio" [(#ENV{sexe}|=={M}|?{'checked="checked"'})] value="M" />
-    	    	                <label for="sexe"> <:inscription2:masculin:></label>
+                                <input class="radio" name="sexe" id="monsieur" type="radio" [(#ENV{sexe}|=={M}|?{'checked="checked"'})] value="M" />
+    	    	                <label for="monsieur"> <:inscription2:masculin:></label>
     	    	                
 						    </li>
 						    <li>
-		    	                <input class="radio" class="radio"name="sexe" id="madame" type="radio" [(#ENV{sexe}|=={F}|?{'checked="checked"'})] value="F" />
+		    	                <input class="radio" name="sexe" id="madame" type="radio" [(#ENV{sexe}|=={F}|?{'checked="checked"'})] value="F" />
 							    <label for="madame"> <:inscription2:feminin:></label>
 						    </li>
 					    </ul>
@@ -100,7 +103,7 @@
                 [(#CONFIG{inscription2/adresse}|=={on}|?{' ', ''})	
                 <li class="editer_adresse[ (#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{obligatoire})]">
 	                <label for="adresse"><:inscription2:adresse:></label>
-	                <textarea name="adresse" class="textarea" id="adresse" rows="5" cols="10">#ENV{adresse}</textarea>
+	                <textarea name="adresse" class="textarea" id="adresse" rows="5" cols="20">#ENV{adresse}</textarea>
 	                [<p class='erreur'>(#ENV**{erreurs}|table_valeur{adresse})</p>]
                 </li>]
 
@@ -149,7 +152,7 @@
                 [(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
                 <li class="editer_commentaire[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{obligatoire})]">
 	                <label><:inscription2:commentaire:></label>
-	                <textarea name="commentaire" class="textarea" id="commentaire">#ENV{commentaire}</textarea>	
+	                <textarea name="commentaire" class="textarea" id="commentaire" rows="5" cols="20">#ENV{commentaire}</textarea>	
 	                [<p class='erreur'>(#ENV**{erreurs}|table_valeur{commentaire})</p>]
                 </li>]
             </ol>
@@ -203,7 +206,7 @@
                 [(#CONFIG{inscription2/adresse_pro}|=={on}|?{' ', ''})
                 <li class="textarea[ (#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{obligatoire})]">
                     <label for="adresse_pro"><:inscription2:adresse_pro:></label>
-                    <textarea name="adresse_pro" class="text" id="adresse_pro">#ENV{adresse_pro}</textarea>
+                    <textarea name="adresse_pro" class="text" id="adresse_pro" rows="5" cols="20">#ENV{adresse_pro}</textarea>
                     [<p class='erreur'>(#ENV**{erreurs}|table_valeur{adress_pro})</p>]
                 </li>]
                 [(#CONFIG{inscription2/code_postal_pro}|=={on}|?{' ', ''})
