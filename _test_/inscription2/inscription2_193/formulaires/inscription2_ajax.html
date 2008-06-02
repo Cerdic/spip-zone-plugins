@@ -124,7 +124,7 @@
                 [(#CONFIG{inscription2/pays}|=={on}|?{' ', ''})	
                 <li class="editer_pays[ (#CONFIG{inscription2/pays_obligatoire}|=={on}|?{obligatoire})]">
 	                <label for="pays"><:inscription2:pays:></label>
-	                <INCLURE{fond=formulaires/inscription2_pays}{pays=#ENV{pays}}>
+                    <INCLURE{fond=formulaires/inscription2_pays}{name=pays}{id_pays=#ENV{pays}}>
 	                [<p class='erreur'>(#ENV**{erreurs}|table_valeur{pays})</p>]
                 </li>]
 
@@ -178,7 +178,7 @@
                 <:inscription2:info_pros:>
             </legend>
             
-            <ol>
+            <ol class="formfx">
                 [(#CONFIG{inscription2/profession}|=={on}|?{' ', ''})
                 <li class="editer_profession[ (#CONFIG{inscription2/profession_obligatoire}|=={on}|?{obligatoire})]">
                     <label for="profession"><:inscription2:profession:></label>
@@ -224,7 +224,7 @@
                 [(#CONFIG{inscription2/pays_pro}|=={on}|?{' ', ''})	
                 <li class="editer_pays_pro[ (#CONFIG{inscription2/pays_pro_obligatoire}|=={on}|?{obligatoire})]">
                     <label for="pays_pro"><:inscription2:pays:></label>
-                    <INCLURE{fond=formulaires/inscription2_pays_pro}{pays_pro=#ENV{pays_pro}}>
+                    <INCLURE{fond=formulaires/inscription2_pays}{name=pays_pro}{id_pays=#ENV{pays_pro}}>
                     [<p class='erreur'>(#ENV**{erreurs}|table_valeur{pays_pro})</p>]
                 </li>]
                 [(#CONFIG{inscription2/telephone_pro}|=={on}|?{' ', ''})	
