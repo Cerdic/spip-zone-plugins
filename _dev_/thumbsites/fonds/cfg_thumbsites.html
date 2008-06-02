@@ -30,7 +30,8 @@ Ici vous pouvez configurer le plugin Thumbsites.
     <p>
         <label for="serveur">Choissisez le serveur de capture</label>
         <select name="serveur" id="serveur">
-            <option value="thumbshots"[(#ENV{serveur}|=={'thumbshots'}|?{' selected="selected"'})]>thumbshots</option>
+            <option value="thumbshots"[(#ENV{serveur}|=={'thumbshots'}|?{' selected="selected"'})]>thumbshots.com</option>
+            <option value="thumbshots_de"[(#ENV{serveur}|=={'thumbshots_de'}|?{' selected="selected"'})]>thumbshots.de</option>
             <option value="girafa"[(#ENV{serveur}|=={'girafa'}|?{' selected="selected"'})]>girafa</option>
         </select>
     </p>        
@@ -41,9 +42,19 @@ Ici vous pouvez configurer le plugin Thumbsites.
         <a href="http://www.thumbshots.com">Thumbshots</a> propose un service gratuit qui ne nécessite pas d'identification.
     </p>
     <p>
-        Les vignettes générées seront de 120 x 90 pixels
+        Les vignettes générées seront de 120 x 90 pixels.
     </p>
 </fieldset>
+
+<fieldset id="thumbshots_de" class="conf_serveur [(#ENV{serveur}|=={'thumbshots_de'}|?{'actif'})]"><legend>Thumbshots.de</legend>
+    <p>
+        <a href="http://www.thumbshots.de">Thumbshots.de</a> propose un service équivalent à thumbshots.com. Bien que les services soient identiques, ce sont bien 2 sites distincts.
+    </p>
+    <p>
+        Les vignettes générées seront de 120 x 90 pixels.
+    </p>
+</fieldset>
+
 
 <fieldset id="girafa" class="conf_serveur [(#ENV{serveur}|=={'girafa'}|?{'actif'})]"><legend>Girafa</legend>
     <p>
@@ -65,10 +76,11 @@ Ici vous pouvez configurer le plugin Thumbsites.
     </p>
 </fieldset>
 
+
 [(#REM) Code jQuery de la gestion des configuration serveur ]
 <script type="text/javascript"><!--
 	if ($('#activer:checked').length == 0) {
-	    //si le plugin inactif, aucun seveur de presenté
+	    //si le plugin inactif, aucun serveur de presenté
 		$('.conf_serveur').hide();
 	} else {	
 	    //on cache les configuration serveur excepté de celui actif
