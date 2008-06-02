@@ -143,7 +143,7 @@ function confirm(msg,callback) {
 	if(!empty($id) and $act=='sup'){
 		$row = spip_fetch_array(spip_query("select a.statut, b.id as 'id_auteur_elargi' from spip_auteurs a, spip_auteurs_elargis b where a.id_auteur='$id' AND a.id_auteur=b.id_auteur"));
 		//var_dump($row);die();
-		if($row['statut'] !='0minirezo' and $row['statut'] !='1commite')
+		if($row['statut'] !='0minirezo' and $row['statut'] !='1comite')
 			spip_query("DELETE FROM spip_auteurs WHERE id_auteur='$id'");
 
 		spip_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur='$id'");

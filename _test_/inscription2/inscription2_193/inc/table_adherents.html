@@ -138,7 +138,7 @@ function confirm(msg,callback) {
 	if(!empty($id) and $act=='sup'){
 		$row = sql_fetch(sql_select("statut","spip_auteurs","id_auteur='$id'"));
 		
-		if($row['statut'] !='0minirezo' and $row['statut'] !='1commite')
+		if($row['statut'] !='0minirezo' and $row['statut'] !='1comite')
 			sql_delete("spip_auteurs","id_auteur='$id'");
 
 		sql_updateq("spip_auteurs",array('statut'=>'5poubelle'),"id_auteur='$id'");
