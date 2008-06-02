@@ -8,9 +8,9 @@
     [(#REM) Tableau des liste en selection par défaut]
     #SET{selected,#CONFIG{inscription2/newsletters,'',''}}
 
+    <B_listes>
     <ol class="formfx">
-    
-	<BOUCLE_listes(LISTES){statut=liste}>
+	<BOUCLE_listes(LISTES){statut==.*pub.*}>
 	    <li class="editer_newsletters">
             <input type="checkbox" class="checkbox" name="newsletters[]" id="newsletters-#ID_LISTE"value="#ID_LISTE" [(#ID_LISTE|in_array{#GET{selected}}|?{' ',''}) checked="checked"] />
             <label for="newsletters-#ID_LISTE">
@@ -19,7 +19,8 @@
             [<p class='erreur'>(#ENV**{erreurs}|table_valeur{newsletters-#ID_LISTE})</p>]
         </li>
     </BOUCLE_listes>
-    </ol>           
+    </ol>     
+    </B_listes>      
      
-    [<p class='erreur'>(#ENV**{erreurs}|table_valeur{newsletters})</p>]
+    [<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{newsletters})</p>]
 </fieldset> 
