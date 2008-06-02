@@ -3,7 +3,7 @@
 
 // tentative pour prendre en compte tous les cas possibles d'exception
 $exceptions = 	
-	(_en_travaux_ADMIN == 1 && $GLOBALS['auteur_session']['statut'] == '0minirezo')
+	(_en_travaux_ADMIN == 1 && cout_autoriser())
 	|| (strpos($_SERVER["PHP_SELF"],'/ecrire') !== false)
 	|| isset($_GET['action'])
 	|| isset($_POST['action'])
