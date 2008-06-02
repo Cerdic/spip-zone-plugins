@@ -50,8 +50,13 @@ x) Afficher en rouge dans une liste le titre d'un article protégé si l'usager es
 <h3 class="titre" <BOUCLE_restreint2(ZONES_RUBRIQUES){id_rubrique}>style="background-color:red"</BOUCLE_restreint2> ><a href="#URL_ARTICLE">#TITRE</a></h3>
 </BOUCLE_articles>
 
+x) Changer l'adresse mail de monitoring par la votre lignes
+173 et 147 du fichier abonnement_options.php
+
+
 TODO :
 
 VÈrifier les index de spip_auteurs_elargis_abonnements et le auto increment
 mettre le montant payÈ dans spip_auteurs_elargis_articles
 passer en cfg les mails automatiques de confirmation d'achat d'article
+passer l'adresse email de monitoring en variable cfg
