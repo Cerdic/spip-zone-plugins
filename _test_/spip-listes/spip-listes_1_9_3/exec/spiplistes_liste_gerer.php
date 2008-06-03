@@ -41,12 +41,14 @@ function exec_spiplistes_liste_gerer () {
 
 	include_spip('inc/mots');
 	include_spip('inc/lang');
+	include_spip('inc/editer_auteurs');
 	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_api_presentation');
 	include_spip('inc/spiplistes_dater_envoi');
 	include_spip('inc/spiplistes_naviguer_paniers');
 	include_spip('inc/spiplistes_afficher_auteurs');
+	include_spip('inc/spiplistes_listes_selectionner_auteur');
 	
 	global $meta
 		, $connect_statut
@@ -328,91 +330,26 @@ function exec_spiplistes_liste_gerer () {
 			;
 		// la grosse boite des abonnes
 		$tri = _request('tri') ? _request('tri') : 'nom';
-		$retour = generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE);
-		$retour = parametre_url($retour,"tri",$tri);
-		switch ($tri) {
-			case 'statut':
-				$sql_where = array("aut.statut!=".sql_quote('5poubelle'));
-				$sql_order = array('statut','login','unom');
-				break;
-			case 'email':
-				$sql_where = array();
-				$sql_order = array('LOWER(email)');
-				break;
-			case 'nombre':
-				$sql_where = array();
-				$sql_order = array('compteur DESC','unom');
-				break;
-			case 'nom':
-			default:
-				$sql_where = array("aut.statut!=".sql_quote('5poubelle'));
-				$sql_order = array('unom');
-		}
-		$sql_where[] = "lien.id_liste=".sql_quote($id_liste);
-		$sql_select = "
-			aut.id_auteur AS id_auteur,
-			aut.statut AS statut,
-			aut.login AS login,
-			aut.nom AS nom,
-			aut.email AS email,
-			aut.url_site AS url_site,
-			aut.messagerie AS messagerie,
-			fmt.`spip_listes_format` AS format,
-			UPPER(aut.nom) AS unom,
-			COUNT(lien.id_liste) as compteur";
-		$sql_from = "spip_auteurs as aut
-			LEFT JOIN spip_auteurs_listes AS lien ON aut.id_auteur=lien.id_auteur
-			LEFT JOIN spip_listes AS liste ON (lien.id_liste = liste.id_liste)
-			LEFT JOIN spip_auteurs_elargis AS fmt ON aut.id_auteur=fmt.id_auteur";
-		$sql_group = 'aut.id_auteur';
-		$boite_abonnes = ""
-			. spiplistes_afficher_auteurs(
-				  $sql_select, $sql_from, $sql_where, $sql_group, $sql_order
-				, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")
-				, 10 // max par page
-				, $tri
-				)
-			;
-		$abonnes = $non_abonnes = "";
-		$ids_abos = spiplistes_listes_liste_abo_ids($id_liste);
-		$sql_from = array("spip_auteurs");
-		$sql_where = array("email <> ''"); // email obligatoire !
-		if($statut == _SPIPLISTES_PRIVATE_LIST) {
-			$sql_where[] = "(statut=".sql_quote('0minirezo')." OR statut=".sql_quote('1comite').")";
-		}
-		$sql_result = sql_select("nom,id_auteur,statut", $sql_from, $sql_where, '', array('statut','nom'));
-		$ii = 1;
-		while($row = sql_fetch($sql_result)) {
-			if(in_array($row['id_auteur'], $ids_abos)) {
-				$couleur_ligne = (($ii++) % 2) ? '#eee' : $couleur_claire;
-				$abonnes .= ""
-					. "<tr style='background-color: $couleur_ligne'>"
-					. "<td>".puce_statut_auteur($row['id_auteur'], $row['statut'], 0, 'auteur')."</td>\n"
-					. "&nbsp;"
-					. "<td>".$row['nom']."</td>\n"
-					. "<td>desabvo</td>\n"
-					. "</tr>\n";
-			} else {
-			}
-		}
-		// renvoie le résulat en Ajax si sous SPIP svn et AJAX
-		if(defined("_AJAX") && _AJAX) {
-		spiplistes_log("result ajax");
-			echo($boite_abonnes);
-			exit(0);
-		} 
-		$titre_block_depliable = _T('spiplistes:abos_cette_liste');
+		$boite_liste_abonnes = spiplistes_listes_boite_abonnements($id_liste, $statut, $tri, _SPIPLISTES_EXEC_LISTE_GERER);
+		$titre_boite = _T('spiplistes:abos_cette_liste');
+		$nb = spiplistes_listes_nb_abonnes_compter($id_liste);
+		$legend = _T('spiplistes:nbre_abonnes').$nb;
 		//$bouton = bouton_block_depliable(_T('spiplistes:abos_cette_liste'), true, "abonnes_liste");
 		$grosse_boite_abonnements = ""
-			. spiplistes_bouton_block_depliable($titre_block_depliable
+			. "<!-- boite abonnes/elligibles -->\n"
+			. debut_cadre_enfonce("auteur-24.gif", true, "", $titre_boite)
+			. spiplistes_bouton_block_depliable($legend
 				, false, md5('abonnes_liste'))
-			. debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
+			. (spiplistes_spip_est_inferieur_193() ? $legend : "")
+			. debut_block_invisible(md5('abonnes_liste'))
 			. debut_cadre_relief('', true)
-			. "<div id='auteurs' class='verdana2'>\n"
-			. $boite_abonnes
+			. "<div id='grosse_boite_abonnements' class='verdana1'>\n"
+			. $boite_liste_abonnes
 			. "</div>\n"
 			. fin_cadre_relief(true)
+			. fin_block()
 			. fin_cadre_enfonce(true)
+			. "<!-- fin boite abonnes/elligibles -->\n"
 			;
 	}
 	else {
@@ -793,7 +730,8 @@ function exec_spiplistes_liste_gerer () {
 		. fin_cadre_relief(true)
 		;
 	
-	if(spiplistes_spip_est_inferieur_193()) {
+	//if(spiplistes_spip_est_inferieur_193()) {
+	if(false) {
 		// CP-20080519
 		// ce morceau fonctionne en 192, pas en 193
 		// si quelqu'un a une idée ?
@@ -816,9 +754,9 @@ function exec_spiplistes_liste_gerer () {
 	}
 	// CP-20080602
 	// en cours de construction pour SPIP svn
-	else {
+	//else {
 		$page_result .= $grosse_boite_abonnements;
-	}
+	//}
 	
 	// le super-admin peut abonner en masse
 	if($connect_toutes_rubriques) {

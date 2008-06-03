@@ -133,6 +133,7 @@ define("_SPIPLISTES_EXEC_MAINTENANCE", _SPIPLISTES_EXEC_PREFIX."maintenance");
 define("_SPIPLISTES_ACTION_PREFIX", _SPIPLISTES_PREFIX."_");
 define("_SPIPLISTES_ACTION_SUPPRIMER_ABONNER", _SPIPLISTES_ACTION_PREFIX."supprimer_abonne");
 define("_SPIPLISTES_ACTION_CHANGER_STATUT_ABONNE", _SPIPLISTES_ACTION_PREFIX."changer_statut_abonne");
+define("_SPIPLISTES_ACTION_ABONNER_AUTEUR", _SPIPLISTES_ACTION_PREFIX."listes_abonner_auteur");
 
 // les formats d'envoi autorisés, ou non pour pseudo-désabonné
 define("_SPIPLISTES_FORMATS_ALLOWED", "html;texte;non");

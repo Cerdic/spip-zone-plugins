@@ -140,7 +140,7 @@ function spiplistes_afficher_auteurs(
 	$sql_select, $sql_from, $sql_where, $sql_group, $sql_order
 	, $url
 	, $max_par_page = 10
-	, $tri
+	, $tri = 'nom'
 ) {
 	
 	global 
@@ -148,9 +148,7 @@ function spiplistes_afficher_auteurs(
 		, $spip_lang_right
 		;
 
-	$nombre_auteurs = 
-		(($row = sql_fetch(sql_select("COUNT(id_auteur) AS n", 'spip_auteurs'))) && $row['n'])
-		? $row['n'] : 0;
+	$nombre_auteurs = sql_count(sql_select("COUNT(aut.id_auteur)", $sql_from, $sql_where, $sql_group));
 
 	// reglage du debut
 	$debut = intval(_request('debut'));

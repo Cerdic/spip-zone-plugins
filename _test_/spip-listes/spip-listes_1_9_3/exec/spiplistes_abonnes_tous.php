@@ -27,6 +27,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
+include_spip('inc/spiplistes_listes_selectionner_auteur');
 
 function exec_spiplistes_abonnes_tous () {
 
@@ -186,68 +187,18 @@ function exec_spiplistes_abonnes_tous () {
 	////////////////////////////
 	// Liste des auteurs
 	
-	$retour = generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE);
-	
 	$tri = _request('tri') ? _request('tri') : 'nom';
-	$retour = parametre_url($retour,"tri",$tri);
 
-	
-	// Construire la requete
-	
-	// tri
-	switch ($tri) {
-		case 'statut':
-			$sql_where = array("aut.statut!=".sql_quote('5poubelle'));
-			$sql_order = array('statut','login','unom');
-			break;
-		case 'email':
-			$sql_where = array();
-			$sql_order = array('LOWER(email)');
-			break;
-		case 'nombre':
-			$sql_where = array();
-			$sql_order = array('compteur DESC','unom');
-			break;
-		case 'nom':
-		default:
-			$sql_where = array("aut.statut!=".sql_quote('5poubelle'));
-			$sql_order = array('unom');
-	}
-
-	$sql_select = "
-		aut.id_auteur AS id_auteur,
-		aut.statut AS statut,
-		aut.login AS login,
-		aut.nom AS nom,
-		aut.email AS email,
-		aut.url_site AS url_site,
-		aut.messagerie AS messagerie,
-		fmt.`spip_listes_format` AS format,
-		UPPER(aut.nom) AS unom,
-		COUNT(lien.id_liste) as compteur";
-	$sql_from = "spip_auteurs as aut
-		LEFT JOIN spip_auteurs_listes AS lien ON aut.id_auteur=lien.id_auteur
-		LEFT JOIN spip_listes AS art ON (lien.id_liste = art.id_liste)
-		LEFT JOIN spip_auteurs_elargis AS fmt ON aut.id_auteur=fmt.id_auteur";
-	$sql_group = 'aut.id_auteur';
-
-	$boite_abonnes = ""
-		. spiplistes_afficher_auteurs(
-			  $sql_select, $sql_from, $sql_where, $sql_group, $sql_order
-			, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)
-			, 10 // max par page
-			, $tri
-			)
-		;
+	$boite_liste_abonnes = spiplistes_listes_boite_abonnes(0, $tri, _SPIPLISTES_EXEC_ABONNES_LISTE);
 	
 	if(defined("_AJAX") && _AJAX) {
-		echo($boite_abonnes);
+		echo($boite_liste_abonnes);
 	} 
 	else {
 		$page_result .= ""
 			. debut_cadre_relief('redacteurs-24.gif', true)
 			. "<div id='auteurs'>\n"
-			. $boite_abonnes
+			. $boite_liste_abonnes
 			. "</div>\n"
 			. fin_cadre_relief(true)
 			;
@@ -279,7 +230,10 @@ function spiplistes_auteurs_non_abonnes_compter () {
 	static $nb;
 	if(!$nb) {
 		$selection =
-			sql_select("id_auteur", "spip_auteurs_listes", '','id_auteur','','','','',false);
+			(spiplistes_spip_est_inferieur_193())
+			? "SELECT id_auteur FROM spip_auteurs_listes GROUP BY id_auteur"
+			: sql_select("id_auteur", "spip_auteurs_listes", '','id_auteur','','','','',false)
+		;
 		$sql_where = array(
 			  "statut!=".sql_quote('5poubelle')
 			, "statut!=".sql_quote('nouveau')
