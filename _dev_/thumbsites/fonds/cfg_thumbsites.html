@@ -33,6 +33,7 @@ Ici vous pouvez configurer le plugin Thumbsites.
             <option value="thumbshots"[(#ENV{serveur}|=={'thumbshots'}|?{' selected="selected"'})]>thumbshots.com</option>
             <option value="thumbshots_de"[(#ENV{serveur}|=={'thumbshots_de'}|?{' selected="selected"'})]>thumbshots.de</option>
             <option value="girafa"[(#ENV{serveur}|=={'girafa'}|?{' selected="selected"'})]>girafa</option>
+            <option value="websnapr"[(#ENV{serveur}|=={'websnapr'}|?{' selected="selected"'})]>websnapr</option>
         </select>
     </p>        
 </fieldset>
@@ -73,6 +74,28 @@ Ici vous pouvez configurer le plugin Thumbsites.
     <p>
         <label for="girafa_signature">Saissisez votre signature : </label>
         <input type="text" name="girafa_signature" id="girafa_signature" [value="(#ENV{girafa_signature})"]>
+    </p>
+</fieldset>
+
+
+<fieldset id="websnapr" class="conf_serveur [(#ENV{serveur}|=={'websnapr'}|?{'actif'})]"><legend>Websnapr</legend>
+    <p>
+        Pour utiliser ce service vous devez être inscrit sur le site <a href="http://www.websnapr.com">girafa</a>
+        <br/>
+        La version gratuite permet de traiter de 250.000  captures de site par mois, à un rythme de 80 captures par heure.
+    </p>
+    <p>
+        <label for="websnapr_clef">Saissisez votre clef : </label>
+        <input type="text" name="websnapr_clef" id="websnapr_clef" [value="(#ENV{websnapr_clef})"]>
+    </p>
+    <p>
+        <label for="websnapr_taille">Saissisez la taille des captures : </label>
+        <select name="websnapr_taille" id="websnapr_taille">
+            <option value="T" [(#ENV{websnapr_taille}|=={T}|?{selected="selected"})]>92x70 pixels</option>
+            <option value="S" [(#ENV{websnapr_taille}|=={S}|?{selected="selected"})]>202x152 pixels</option>
+            <option value="M" [(#ENV{websnapr_taille}|=={M}|?{selected="selected"})]>400x300 pixels</option>
+            <option value="L" [(#ENV{websnapr_taille}|=={L}|?{selected="selected"})]>640x480 pixels</option>                                    
+        </select>
     </p>
 </fieldset>
 
