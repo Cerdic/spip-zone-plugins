@@ -266,7 +266,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$params_vierge = array('champ'=>$champ, 'help'=>$champhelp, 'lang'=>$spip_lang, 'name'=>$name, 'id'=>$id, 'num'=>$num_barre, 'forum'=>$forum, 'ecrire'=>$ecrire, 'crayons'=> $crayons, 'flux'=>'');
 
 	$ret = ($num_barre > 1)  ? '' :
-	  "<script type='text/javascript' src='". find_in_path(_JAVASCRIPT.'layer.js') ."'></script>".http_script('', 'spip_barre.js');
+	  "<script type='text/javascript' src='". find_in_path(_JAVASCRIPT.'layer.js') ."'></script>".http_script('', _DIR_PLUGIN_BARRETYPOENRICHIE.'javascript/spip_barre.js');
 
 
 	// Pregeneration des toolzbox.. (wharfing)
