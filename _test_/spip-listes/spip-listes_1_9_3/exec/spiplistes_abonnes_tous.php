@@ -229,7 +229,7 @@ function exec_spiplistes_abonnes_tous () {
 		LEFT JOIN spip_auteurs_listes AS lien ON aut.id_auteur=lien.id_auteur
 		LEFT JOIN spip_listes AS art ON (lien.id_liste = art.id_liste)
 		LEFT JOIN spip_auteurs_elargis AS fmt ON aut.id_auteur=fmt.id_auteur";
-	$sql_group = array('aut.id_auteur');
+	$sql_group = 'aut.id_auteur';
 
 	$boite_abonnes = ""
 		. spiplistes_afficher_auteurs(

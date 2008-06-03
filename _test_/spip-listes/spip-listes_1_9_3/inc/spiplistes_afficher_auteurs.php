@@ -177,7 +177,7 @@ function spiplistes_afficher_auteurs(
 		$sql_result = sql_select(
 			array("DISTINCT UPPER(LEFT(nom,1)) AS l"
 				, "COUNT(*) AS n")
-			, "spip_auteurs", '', "l", "l");
+			, "spip_auteurs", '', "l", array("l"));
 		$count = 0;
 		while ($row = sql_fetch($sql_result)) {
 			$lettres_onglet[$row['l']] = $count;

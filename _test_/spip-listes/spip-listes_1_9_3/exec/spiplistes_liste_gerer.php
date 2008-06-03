@@ -364,7 +364,7 @@ function exec_spiplistes_liste_gerer () {
 			LEFT JOIN spip_auteurs_listes AS lien ON aut.id_auteur=lien.id_auteur
 			LEFT JOIN spip_listes AS liste ON (lien.id_liste = liste.id_liste)
 			LEFT JOIN spip_auteurs_elargis AS fmt ON aut.id_auteur=fmt.id_auteur";
-		$sql_group = array('aut.id_auteur');
+		$sql_group = 'aut.id_auteur';
 		$boite_abonnes = ""
 			. spiplistes_afficher_auteurs(
 				  $sql_select, $sql_from, $sql_where, $sql_group, $sql_order
@@ -380,7 +380,7 @@ function exec_spiplistes_liste_gerer () {
 		if($statut == _SPIPLISTES_PRIVATE_LIST) {
 			$sql_where[] = "(statut=".sql_quote('0minirezo')." OR statut=".sql_quote('1comite').")";
 		}
-		$sql_result = sql_select("nom,id_auteur,statut", $sql_from, $sql_where, '', 'statut,nom');
+		$sql_result = sql_select("nom,id_auteur,statut", $sql_from, $sql_where, '', array('statut','nom'));
 		$ii = 1;
 		while($row = sql_fetch($sql_result)) {
 			if(in_array($row['id_auteur'], $ids_abos)) {
@@ -401,8 +401,11 @@ function exec_spiplistes_liste_gerer () {
 			echo($boite_abonnes);
 			exit(0);
 		} 
-		$bouton = bouton_block_depliable(_T('spiplistes:abos_cette_liste'), true, "abonnes_liste");
+		$titre_block_depliable = _T('spiplistes:abos_cette_liste');
+		//$bouton = bouton_block_depliable(_T('spiplistes:abos_cette_liste'), true, "abonnes_liste");
 		$grosse_boite_abonnements = ""
+			. spiplistes_bouton_block_depliable($titre_block_depliable
+				, false, md5('abonnes_liste'))
 			. debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
 			. debut_cadre_relief('', true)
 			. "<div id='auteurs' class='verdana2'>\n"
