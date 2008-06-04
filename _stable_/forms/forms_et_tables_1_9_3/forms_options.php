@@ -17,6 +17,7 @@ if (!defined('_DIR_PLUGIN_FORMS')){
 if (defined('_DIR_PLUGIN_CRAYONS'))
 	include_spip('forms_crayons');
 include_spip('base/forms');
+include_spip('inc/vieilles_defs');
 $GLOBALS['forms_actif_exec'][] = 'donnees_edit';
 $GLOBALS['forms_saisie_km_exec'][] = 'donnees_edit';
 // pipelines d'ajout et surcharge des champs
