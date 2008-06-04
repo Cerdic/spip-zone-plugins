@@ -16,8 +16,8 @@
 	  Interface Slideshow - Intégration d'un portfolio dans un article ou dans une colonne de menu. 
 	  <br/><br/>Utilisation du script <a href="http://interface.eyecon.ro/demos/slideshow.html">Interface Slideshow pour JQUERY</a>
 	  <br/><br/>
-  Pour intégrer le portoflio dans une boucle ARTCICLE : <code> <INCLURE{fond=inc-slideshow-portfolio}{id_article}></code>
-	  <br/>Pour intégrer le slideshow dans un squelette : associer le mot clé Slideshow a un article et inclure <code><INCLURE{fond=inc-slideshow}></code>
+  Pour intégrer le portoflio dans une boucle ARTCICLE : <em>&lt;INCLURE&#123;fond=inc-slideshow-portfolio&#125;&#123;id_article&#125;&gt;</em>
+	  <br/>Pour intégrer le slideshow dans un squelette : associer le mot clé Slideshow a un article et inclure <em>&lt;INCLURE&#123;fond=inc-slideshow&#125;&gt;</em>
 	 <br/><br/>
 	 La configuration optionnelle peut se faire en installant le plugin cfg et en chargeant ecrire/?exec=cfg&cfg=slideshow
 	 <br/><br/>
