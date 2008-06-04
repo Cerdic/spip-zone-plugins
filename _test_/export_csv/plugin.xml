@@ -25,7 +25,8 @@ _ &copy; 2008 -
 	</description>
 	
 	<lien>[Configuration->.?exec=cfg&amp;cfg=exportcsv]</lien>
-	
+	<lien>[Documentation->http://www.webdesigneuse.net/carnet/index.php/2008/03/18/7-export-csv-un-plugin-pour-spip]</lien>
+
 	<prefix>exportcsv</prefix>
 	
 	<icon>img_pack/exportcsv-72.png</icon>
