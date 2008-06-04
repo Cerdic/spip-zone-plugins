@@ -10,5 +10,6 @@
 
 function exec_clevermail_queue_process() {
 	include_spip('inc/clevermail_cron');
+	cron_clevermail_cron('yes');
 }
 ?>
