@@ -350,7 +350,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			$out .= debut_cadre_enfonce("", true);
 
 		$out .= "<img src='"._DIR_PLUGIN_FORMS."img_pack/choix-handle-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;'/>";
-		$out .= "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
+		$out .= "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;z-index:1'>";
 		$out .= "<span class='boutons_ordonne'>";
 		if ($aff_min) {
 			$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-monter",urlencode($redirect));
