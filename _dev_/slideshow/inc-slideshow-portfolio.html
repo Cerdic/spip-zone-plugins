@@ -1,5 +1,5 @@
 <div id="slideShow_portfolio">
-<BOUCLE_rub_slide_portfolio1(ARTICLES){id_article}><BOUCLE_documents__portfolio1(DOCUMENTS){mode=document}{id_article}{extension==(png|jpg|gif)$} {par hasard}{0,1} {doublons}><img [src="(#FICHIER||image_reduire{#CONFIG{slideshow/largeur_portfolio,480},#CONFIG{slideshow/hauteur_portfolio,400}}|extraire_attribut{src})"] alt="[(#NOM_SITE_SPIP|textebrut) - ] [(#TITRE|supprimer_numero|texte_backend)]" title="[(#NOM_SITE_SPIP|textebrut)][ - (#TITRE|supprimer_numero|texte_backend)]" /></BOUCLE_documents__portfolio1></BOUCLE_rub_slide_portfolio1>
+<BOUCLE_rub_slide_portfolio1(ARTICLES){id_article}><BOUCLE_documents__portfolio1(DOCUMENTS){mode=document}{id_article}{extension==(png|jpg|gif)$} {par hasard}{0,1} {doublons}><img [src="(#FICHIER||image_reduire{#CONFIG{slideshow/largeur_portfolio,480},#CONFIG{slideshow/hauteur_portfolio,400}}|extraire_attribut{src})"] alt="[(#NOM_SITE_SPIP|textebrut) - ] [(#TITRE|supprimer_numero|texte_backend)]" title="[(#NOM_SITE_SPIP|textebrut)][ - (#TITRE|supprimer_numero|texte_backend)]" /></BOUCLE_documents__portfolio1>
 </div>
 <script type="text/javascript">
 $(document).ready(
@@ -20,10 +20,10 @@ $(document).ready(
 				captionClass: 'slideCaption',
 				autoplay: #CONFIG{slideshow/timing,5},
 				images : [
-				{<BOUCLE_rub_slide__portfolio2(ARTICLES){id_article}><BOUCLE_documents_slide_portfolio2(DOCUMENTS){'},{'}{mode=document}{id_article}{extension==(png|jpg|gif)$} {par hasard} {doublons}>
+				{<BOUCLE_documents_slide_portfolio2(DOCUMENTS){'},{'}{mode=document}{id_article}{extension==(png|jpg|gif)$} {par hasard} {doublons}>
 						src: '[(#FICHIER||image_reduire{#CONFIG{slideshow/largeur_portfolio,480},#CONFIG{slideshow/hauteur_portfolio,400}}|extraire_attribut{src})]',
 						caption: '[(#NOM_SITE_SPIP|textebrut)][ - (#TITRE)]'
-				</BOUCLE_documents_slide_portfolio2></BOUCLE_rub_slide__portfolio2>}				
+				</BOUCLE_documents_slide_portfolio2>}
 				]
 			}
 		)	
@@ -41,4 +41,4 @@ $(document).ready(
 	);		
 	}	
 );
-</script>
+</script></BOUCLE_rub_slide_portfolio1>

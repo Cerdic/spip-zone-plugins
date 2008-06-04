@@ -1,5 +1,5 @@
 <div id="slideShow1">
-<BOUCLE_rub_slide_1(ARTICLES){id_article}><BOUCLE_documents_slideshow_1(DOCUMENTS){mode=document}{id_article}{extension==(png|jpg|gif)$} {par hasard}{0,1} {doublons}><img [src="(#FICHIER||image_reduire{800,500}|extraire_attribut{src})"] alt="[(#NOM_SITE_SPIP|textebrut) - ] [(#TITRE|supprimer_numero|texte_backend)]" title="[(#NOM_SITE_SPIP|textebrut) - ][(#TITRE|supprimer_numero|texte_backend)]" /></BOUCLE_documents_slideshow_1></BOUCLE_rub_slide_1>
+<BOUCLE_rub_slide_1(ARTICLES){id_article}><BOUCLE_documents_slideshow_1(DOCUMENTS){mode=document}{id_article}{extension==(png|jpg|gif)$} {par hasard}{0,1} {doublons}><img [src="(#FICHIER||image_reduire{800,500}|extraire_attribut{src})"] alt="[(#NOM_SITE_SPIP|textebrut) - ] [(#TITRE|supprimer_numero|texte_backend)]" title="[(#NOM_SITE_SPIP|textebrut) - ][(#TITRE|supprimer_numero|texte_backend)]" /></BOUCLE_documents_slideshow_1>
 </div>
 <script type="text/javascript">
 $(document).ready(
@@ -20,10 +20,10 @@ $(document).ready(
 				captionClass: 'slideCaption',
 				autoplay: 5,
 				images : [
-				{<BOUCLE_rub_slide_2(ARTICLES){id_article}><BOUCLE_documents_slideshow1(DOCUMENTS){'},{'}{mode=document}{id_article}{extension==(png|jpg|gif)$} {par hasard}{0,5} {doublons}>
+				{<BOUCLE_documents_slideshow1(DOCUMENTS){'},{'}{mode=document}{id_article}{extension==(png|jpg|gif)$} {par hasard}{0,5} {doublons}>
 						src: '[(#FICHIER||image_reduire{800,500}|extraire_attribut{src})]',
 						caption: '[(#NOM_SITE_SPIP|textebrut) - ][(#TITRE)]'
-				</BOUCLE_documents_slideshow1></BOUCLE_rub_slide_2>}				
+				</BOUCLE_documents_slideshow1>}	
 				]
 			}
 		)	
@@ -41,4 +41,4 @@ $(document).ready(
 	);		
 	}	
 );
-</script>
+</script></BOUCLE_rub_slide_1>

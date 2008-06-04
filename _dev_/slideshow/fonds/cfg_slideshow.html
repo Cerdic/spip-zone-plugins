@@ -1,0 +1,107 @@
+#CACHE{0}
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+[(#REM) descriptif=
+<h4>Configuration du slideshow</h4>
+]
+[(#REM) titre=Interface slideshow]
+
+
+<fieldset><legend>Param&egrave;tres du diaporama</legend>
+	<label for="passage">Fondu entre les images (millisecondes)</label>
+	<input type="text" name="passage" id="passage" value="[(#ENV{passage}|sinon{400" onfocus="this.value='';})]" size="20" class="forml" /><br />
+	<label for="timing">Temps d'affichage des images (secondes)</label>
+	<input type="text" name="timing" id="timing" value="[(#ENV{timing}|sinon{15" onfocus="this.value='';})]" size="20" class="forml" /><br />
+</fieldset>
+<fieldset><legend>Redimensionnement de l'image</legend>
+	<label for="largeur_vignette">Largeur vignette</label>
+	<input type="text" name="largeur_vignette" id="largeur_vignette" value="[(#ENV{largeur}|sinon{800" onfocus="this.value='';})]" size="20" class="forml" /><br />
+	<label for="hauteur_vignette">Hauteur vignette</label>
+	<input type="text" name="hauteur_vignette" id="hauteur_vignette" value="[(#ENV{hauteur}|sinon{500" onfocus="this.value='';})]" size="20" class="forml" /><br />
+	<label for="largeur_portfolio">Largeur portfolio</label>
+	<input type="text" name="largeur_portfolio" id="largeur_portfolio" value="[(#ENV{largeur_portfolio}|sinon{480" onfocus="this.value='';})]" size="20" class="forml" /><br />
+	<label for="hauteur_portfolio">Hauteur portfolio</label>
+	<input type="text" name="hauteur_portfolio" id="hauteur_portfolio" value="[(#ENV{hauteur_portfolio}|sinon{400" onfocus="this.value='';})]" size="20" class="forml" /><br />
+</fieldset>
+<fieldset><legend>Dimension du cadre</legend>
+	<label for="largeur_cadre_vignette">Largeur du cadre vignette</label>
+	<input type="text" name="largeur_cadre_vignette" id="largeur_cadre_vignette" value="[(#ENV{largeur_cadre_vignette}|sinon{170" onfocus="this.value='';})]" size="20" class="forml" /><br />
+	<label for="hauteur_cadre_vignette">Hauteur du cadre vignette</label>
+	<input type="text" name="hauteur_cadre_vignette" id="hauteur_cadre_vignette" value="[(#ENV{hauteur_cadre_vignette}|sinon{300" onfocus="this.value='';})]" size="20" class="forml" /><br />
+	<label for="largeur_cadre_portfolio">Largeur du cadre portfolio</label>
+	<input type="text" name="largeur_cadre_portfolio" id="largeur_cadre_portfolio" value="[(#ENV{largeur_cadre_portfolio}|sinon{500" onfocus="this.value='';})]" size="20" class="forml" /><br />
+	<label for="hauteur_cadre_portfolio">Hauteur du cadre portfolio</label>
+	<input type="text" name="hauteur_cadre_portfolio" id="hauteur_cadre_portfolio" value="[(#ENV{hauteur_cadre_portfolio}|sinon{520" onfocus="this.value='';})]" size="20" class="forml" /><br />
+</fieldset>
+<fieldset><legend>Habillage</legend>
+	<label for="background">Couleur de fond</label>
+	<input type="text" name="background" id="background" value="[(#ENV{background,#FFF}|sinon{#FFF" onfocus="this.value='';})]" size="20" class="forml" /><br />
+</fieldset>
+<fieldset><legend>Outil de navigation vignette</legend>	
+	<input type="checkbox" name="navigation_vignette" id="navigation_vignette" [checked="(#ENV{navigation_vignette})"] /><label for="navigation_vignette">Afficher </label>	
+</fieldset>
+<fieldset><legend>Descriptif des images vignette</legend>	
+	<input type="checkbox" name="descriptif_vignette" id="descriptif_vignette" [checked="(#ENV{descriptif_vignette})"] /><label for="descriptif_vignette">Afficher </label>	
+</fieldset>
+
+<fieldset><legend>Outil de navigation portfolio</legend>	
+	<input type="checkbox" name="navigation_portfolio" id="navigation_portfolio" [checked="(#ENV{navigation_portfolio})"] /><label for="navigation_portfolio">Afficher </label>
+</fieldset>
+
+<fieldset><legend>Descriptif des images portfolio</legend>	
+	<input type="checkbox" name="descriptif_portfolio" id="descriptif_portfolio" [checked="(#ENV{descriptif_portfolio})"] /><label for="descriptif_portfolio">Afficher </label>
+</fieldset>
+<script type="text/javascript">
+function reset_all() {
+<?   $curdir = "../plugins/interface-slideshow/images/set-pictos/";     
+      // Liste des dossiers de sets previous / next
+      $dir = opendir($curdir);
+      // on scanne le répertoire
+      while($p=readdir($dir)) {
+         // si c'est un dossier sauf . (current directory)
+         if(is_dir($curdir."/".$p)&&($p!=".")) {
+            // si c'est le dossier .. (parent directory)
+            if($p!="..") {
+             if (file_exists("../plugins/interface-slideshow/images/set-pictos/".$p."/nextslide.gif")&&file_exists("../plugins/interface-slideshow/images/set-pictos/".$p."/prevslide.gif")&&file_exists("../plugins/interface-slideshow/images/set-pictos/".$p."/slideshow_loader.gif")) { 
+		?>
+		document.getElementById("label_set_pictos_<?php echo $p; ?>").style.border = "1px solid #ccc";
+		document.getElementById("label_set_pictos_<?php echo $p; ?>").style.background = "#E6E6E6";
+		<?php
+		}
+            }
+         }
+      }
+      closedir($dir);
+      ?>
+}
+</script>
+<fieldset><legend>Set d'icones</legend>
+Pour installer de nouveau sets, disposez simplement vos fichiers nextslide.gif, prevslide.gif et slideshow_loader.gif dans le dossier  
+<?   $curdir = "../plugins/interface-slideshow/images/set-pictos/"; 
+      echo "<b>".$curdir."</b><br><br>\n";
+      // Liste des dossiers de sets previous / next
+      $dir = opendir($curdir);
+      // on scanne le répertoire
+      while($p=readdir($dir)) {
+         // si c'est un dossier sauf . (current directory)
+         if(is_dir($curdir."/".$p)&&($p!=".")) {
+            // si c'est le dossier .. (parent directory)
+            if($p!="..") {
+             if (file_exists("../plugins/interface-slideshow/images/set-pictos/".$p."/nextslide.gif")&&file_exists("../plugins/interface-slideshow/images/set-pictos/".$p."/prevslide.gif")&&file_exists("../plugins/interface-slideshow/images/set-pictos/".$p."/slideshow_loader.gif")) { 
+	?>
+	<input type="radio" name="set_pictos" value="<?php echo $p; ?>" id="set_pictos_<?php echo $p; ?>" pid="[(#ENV{set_pictos}|sinon{01})]" style="display:none;" <?php if (strcmp("[(#CONFIG{slideshow/set_pictos}|sinon{bleu-simple})]","$p")==0) {echo "checked";} ?> />
+	<?php echo $p; ?> <label id="label_set_pictos_<?php echo $p; ?>" for="set_pictos_<?php echo $p; ?>" onclick="reset_all();this.style.border='1px dotted #666';this.style.background='#CCC';" class="forml" style="width:98%;cursor:pointer; cursor:hand;text-align:center;<?php if (strcmp("[(#CONFIG{slideshow/set_pictos}|sinon{bleu-simple})]","$p")==0) {echo "border:1px solid #666;background:#ccc";} ?>"><img src="../plugins/interface-slideshow/images/set-pictos/<?php echo $p; ?>/prevslide.gif" /><img src="../plugins/interface-slideshow/images/set-pictos/<?php echo $p; ?>/slideshow_loader.gif" /><img src="../plugins/interface-slideshow/images/set-pictos/<?php echo $p; ?>/nextslide.gif" /> </label><br />
+		<?php
+		}
+            }
+         }
+      }
+      closedir($dir);
+      ?>	
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
+
