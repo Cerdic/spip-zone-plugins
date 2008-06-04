@@ -201,7 +201,7 @@ function exec_spiplistes_courrier_gerer () {
 		$sql_select_str = "titre";
 		$sql_select = $sql_select_int.",".$sql_select_str.",".$sql_select_tmp;
 		
-		if($row = spip_fetch_array(spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=".sql_quote($id_courrier)." LIMIT 1"))) {
+		if($row = sql_fetch(sql_select($sql_select, "spip_courriers", "id_courrier=".sql_quote($id_courrier), '', '', 1))) {
 			foreach(explode(",", $sql_select) as $key) {
 				$$key = $row[$key];
 			}
@@ -345,7 +345,7 @@ function exec_spiplistes_courrier_gerer () {
 				$str_destinataire = _T('spiplistes:email_adresse') . " : <span style='font-weight:bold;color:gray;'>$email_test</span>";
 			}
 			else {
-				if($row = spip_fetch_array(spip_query ("SELECT titre FROM spip_listes WHERE id_liste = $id_liste LIMIT 1"))) {
+				if($row = sql_fetch(sql_select('titre', 'spip_listes', "id_liste=".sql_quote($id_liste), '', '', 1))) {
 					$str_destinataire = ""
 						. _T('spiplistes:Liste_de_destination') 
 						. " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>".$row['titre']."</a>"
@@ -356,7 +356,7 @@ function exec_spiplistes_courrier_gerer () {
 					$str_destinataire = _T('spiplistes:Courriers_sans_liste');
 				}
 			}
-		}
+		} //
 		
 		$str_statut_courrier = "";
 		

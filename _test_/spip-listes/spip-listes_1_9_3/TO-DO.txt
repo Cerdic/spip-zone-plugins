@@ -8,7 +8,7 @@ TO-DO:
 - ne pas accepter l'import dans une liste qui n'a pas de grand patron (sans grand patron, le courrier de la liste est vide...)
 - permettre dans l'import l'assignation d'un abonné à un groupe (redac ou invité) et donc revoir l'export
 - optimiser le cron (j'ai comme l'impression que certains s'attendent à voir le courrier partir illico). Il y a peut-etre une astuce à trouver ici (calculer la charge du serveur, le nombre de plugin utilisant le cron, etc.) Des idées ?
-- terminer la compat svn (reste environ 60 spip_query() et autres...) CP20080604
+- terminer la compat svn (reste environ 40 spip_query() et autres...) CP20080604
 - corriger les CSS pour espace public des formulaires (le cache, toujours le cache)
 - vérifier la personnalisation des courriers
 - revoir la doc docs/__installation_*.txt
