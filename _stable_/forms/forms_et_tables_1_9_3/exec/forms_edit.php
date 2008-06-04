@@ -176,25 +176,30 @@ function exec_forms_edit(){
 	$bloc = _request('bloc');
 	if ($ajax_charset && $bloc=='dummy') {
 		ajax_retour("");
+		exit;
 	}
 	if ($ajax_charset && $bloc=='apercu') {
 		include_spip('public/assembler');
 		$GLOBALS['var_mode']='calcul';
 		$apercu = recuperer_fond('modeles/form',array('id_form'=>$id_form,'var_mode'=>'calcul'));
 		ajax_retour($apercu);
+		exit;
 	}
 	if ($ajax_charset && $bloc=='resume') {
 		include_spip('public/assembler');
 		$GLOBALS['var_mode']='calcul';
 		$apercu = recuperer_fond('modeles/form',array('id_form'=>$id_form,'var_mode'=>'calcul'));
 		ajax_retour(contenu_boite_resume($id_form, $row, $apercu));
+		exit;
 	}
 	if ($ajax_charset && $bloc=='proprietes') {
 		ajax_retour(boite_proprietes($id_form, $row, $focus, $action_link, $redirect));
+		exit;
 	}
 	$bloc = explode("-",$bloc);
 	if ($ajax_charset && $bloc[0]=='champs') {
 		ajax_retour(Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ,$redirect,isset($bloc[2])?$bloc[2]:false));
+		exit;
 	}
 
 
