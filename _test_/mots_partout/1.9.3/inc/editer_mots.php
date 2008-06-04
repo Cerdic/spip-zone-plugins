@@ -394,7 +394,7 @@ function select_sous_menu_groupe_mots($id_groupe,$table='articles',$niveau=0){
         //boucle sur les sous groupes
 		//$result_sous_groupes = spip_query($query);
 
-		$result_sous_groupes = editer_mot_droits("id_groupe,titre, ".sql_multi ("titre", $spip_lang), "$table = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))) ORDER BY multi");
+		$result_sous_groupes = editer_mots_droits("id_groupe,titre, ".sql_multi ("titre", $spip_lang), "$table = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))) ORDER BY multi");
 		
 		 while ($row = sql_fetch($result_sous_groupes)) {
 		     $res .= "\n<option value='" .$row['id_groupe'] .
