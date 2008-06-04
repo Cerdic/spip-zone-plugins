@@ -90,10 +90,8 @@ function exec_spiplistes_abonnes_tous () {
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "abonnes_tous";
 
-	if(!defined("_AJAX") || !_AJAX) {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
-	}
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
 	
 	// la gestion des abonnés est réservée aux admins 
 	if(!$flag_autorise) {
@@ -189,22 +187,15 @@ function exec_spiplistes_abonnes_tous () {
 	
 	$tri = _request('tri') ? _request('tri') : 'nom';
 
-	$boite_liste_abonnes = spiplistes_listes_boite_abonnes(0, $tri, _SPIPLISTES_EXEC_ABONNES_LISTE);
-	
-	if(defined("_AJAX") && _AJAX) {
-		echo($boite_liste_abonnes);
-	} 
-	else {
-		$page_result .= ""
-			. debut_cadre_relief('redacteurs-24.gif', true)
-			. "<div id='auteurs'>\n"
-			. $boite_liste_abonnes
-			. "</div>\n"
-			. fin_cadre_relief(true)
-			;
-		echo($page_result);
-		echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
-	}
+	$page_result .= ""
+		. debut_cadre_relief('redacteurs-24.gif', true)
+		. "<div id='auteurs'>\n"
+		. spiplistes_listes_boite_abonnes(0, $tri, $debut, _SPIPLISTES_EXEC_ABONNES_LISTE)
+		. "</div>\n"
+		. fin_cadre_relief(true)
+		;
+	echo($page_result);
+	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
 }
 
 //CP-200080519

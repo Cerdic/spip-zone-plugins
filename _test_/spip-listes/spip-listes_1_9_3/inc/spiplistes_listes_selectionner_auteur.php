@@ -65,7 +65,7 @@ function spiplistes_listes_auteurs_elligibles ($id_liste = 0, $statut_liste = ''
 //CP-20080603
 // renvoie la boite en liste des abonnés à une liste
 // si $id_liste == 0, liste tous les abonnements
-function spiplistes_listes_boite_abonnes ($id_liste, $tri, $url_retour) {
+function spiplistes_listes_boite_abonnes ($id_liste, $tri, $debut, $scrip_retour) {
 	$id_liste = intval($id_liste);
 	$sql_where = array("aut.statut <> ".sql_quote('5poubelle'));
 	switch ($tri) {
@@ -104,9 +104,11 @@ function spiplistes_listes_boite_abonnes ($id_liste, $tri, $url_retour) {
 	$boite_abonnes = ""
 		. spiplistes_afficher_auteurs(
 			  $sql_select, $sql_from, $sql_where, $sql_group, $sql_order
-			, generer_url_ecrire($url_retour, "tri=$tri&id_liste=$id_liste")
+			, $scrip_retour
 			, _SPIPLISTES_LIGNES_PAR_PAGE
 			, $tri
+			, $id_liste
+			, $debut
 			)
 		;
 	return($boite_abonnes);
@@ -140,6 +142,10 @@ function spiplistes_listes_selectionner_elligibles ($non_abonnes, $nb_non_abonne
 			. "</select>\n"
 			;
 		$clic = _T('bouton_ajouter');
+	// Il existe sous SPIP une autre boite selecteur lorsque le nombre d'auteurs > 10
+	//  A voir si besoin d'adapter pour SPIP-Listes ? (trier les sans emails, les déja abonnés, etc.)
+	// En attendant, au dela de _SPIPLISTES_SELECT_MIN_AUTEURS, affiche la boite de recherche.
+	//
 	//} else if((_SPIP_AJAX < 1) || ($nb_non_abonnes >= _SPIP_SELECT_MAX_AUTEURS)) {
 	} else {
 		  $select_abo = "$text <input type='text' name='cherche_auteur' onclick=\"$js\" class='fondl' value='' size='20' />";
@@ -174,10 +180,10 @@ function spiplistes_listes_selectionner_elligibles ($non_abonnes, $nb_non_abonne
 //CP20080603
 // la boite complète (abonnés et elligibles)
 // fonction appelé aussi par action pour resultat en ajax
-function spiplistes_listes_boite_abonnements ($id_liste, $statut_liste, $tri, $url_retour) {
+function spiplistes_listes_boite_abonnements ($id_liste, $statut_liste, $tri, $debut, $script_retour) {
 	$boite_abonnements = ""
 		. "<div id='auteurs'>\n"
-		. spiplistes_listes_boite_abonnes($id_liste, $tri, $url_retour)
+		. spiplistes_listes_boite_abonnes($id_liste, $tri, $debut, $script_retour)
 		. "</div>\n"
 		;
 	// demande la liste des elligibles

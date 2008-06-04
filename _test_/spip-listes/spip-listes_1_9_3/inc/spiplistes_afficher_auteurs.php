@@ -136,11 +136,13 @@ function spiplistes_cherche_auteur () {
 	return($result);
 }
 
-function spiplistes_afficher_auteurs(
+function spiplistes_afficher_auteurs (
 	$sql_select, $sql_from, $sql_where, $sql_group, $sql_order
-	, $url
+	, $script_retour
 	, $max_par_page = 10
 	, $tri = 'nom'
+	, $id_liste = 0
+	, $debut = 0
 ) {
 	
 	global 
@@ -151,7 +153,10 @@ function spiplistes_afficher_auteurs(
 	$nombre_auteurs = sql_count(sql_select("COUNT(aut.id_auteur)", $sql_from, $sql_where, $sql_group));
 
 	// reglage du debut
-	$debut = intval(_request('debut'));
+	if(!$debut) {
+		// si js pas activé, récupère dans l'url
+		$debut = intval(_request('debut'));
+	}
 	if ($debut > $nombre_auteurs - $max_par_page) {
 		$debut = max(0, $nombre_auteurs - $max_par_page);
 	}
@@ -199,7 +204,7 @@ function spiplistes_afficher_auteurs(
 		.	(
 			($tri=='statut')
 			? $icon_auteur
-			: "<a href='".parametre_url($url,'tri','statut')."' title='"._T('lien_trier_statut')."'>$icon_auteur</a>"
+			: "<a href='".parametre_url($script_retour,'tri','statut')."' title='"._T('lien_trier_statut')."'>$icon_auteur</a>"
 			)
 		. "</th>\n"
 		// #2: nom
@@ -207,7 +212,7 @@ function spiplistes_afficher_auteurs(
 		.	(
 		 	($tri == '' || $tri=='nom')
 			? _T('info_nom')
-			: "<a href='".parametre_url($url,'tri','nom')."' title='"._T('lien_trier_nom')."'>"._T('info_nom')."</a>"
+			: "<a href='".parametre_url($script_retour,'tri','nom')."' title='"._T('lien_trier_nom')."'>"._T('info_nom')."</a>"
 			)
 		. "</th>\n"
 		//
@@ -228,7 +233,7 @@ function spiplistes_afficher_auteurs(
 		.	(
 			($tri=='nombre')
 			? _T('spiplistes:nb_abos')
-			: "<a href='".parametre_url($url,'tri','nombre')."' title='"._T('spiplistes:lien_trier_nombre')."'>"._T('spiplistes:nb_abos')."</a>"
+			: "<a href='".parametre_url($script_retour,'tri','nombre')."' title='"._T('spiplistes:lien_trier_nombre')."'>"._T('spiplistes:nb_abos')."</a>"
 			)
 		. "</th>\n"
 		//
@@ -244,18 +249,30 @@ function spiplistes_afficher_auteurs(
 			. "<tr class='onglets'><td colspan='7'>"
 			;
 		// onglets : affiche les chiffres 
+		$result .= "<!-- onglets chiffres -->\n";
 		for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
 			if ($j > 0) $result .= " | ";
 			
-			if ($j == $debut)
+			if ($j == $debut) {
 				$result .= "<strong>$j</strong>";
-			elseif ($j > 0)
-				$result .= "<a href='".parametre_url($url,'debut',$j)."'>$j</a>";
-			else
-				$result .= " <a href='".parametre_url($url,'debut',0)."'>0</a>";
+			} else {
+				// si js inactif, $exec_url prend le relais
+				$exec_url = generer_url_ecrire($script_retour, "id_liste=$id_liste&tri=$tri&debut=$j");
+				// sinon, ajax animera la boite des abos
+				$action_url = generer_action_auteur(_SPIPLISTES_ACTION_LISTE_ABONNES
+					, $id_liste." ".$j." ".$tri);
+				$result .= 
+					"<a href='"
+						. parametre_url($exec_url, 'redirect', $exec_url)
+						. "' onclick=\"return AjaxSqueeze('$action_url','auteurs','$exec_url',event)\">"
+						. $j
+						. "</a>\n"
+						;
+			}
 			
-			if (($debut > $j)  && ($debut < $j+$max_par_page))
+			if (($debut > $j)  && ($debut < $j+$max_par_page)) {
 				$result .= " | <strong>$debut</strong>";
+			}
 		}
 		$result .= ""
 			. "</td></tr>\n"
@@ -263,13 +280,23 @@ function spiplistes_afficher_auteurs(
 		// onglets : affichage des lettres
 		if (($tri == 'nom') && ($GLOBALS['options'] == 'avancees')) {
 			$result .= ""
-				. "<tr class='onglets'><td colspan='7'>"
+				. "<tr class='onglets'><td colspan='7'>\n"
+				. "<!-- onglets des lettres -->\n"
 				;
 			foreach ($lettres_onglet as $key => $val) {
+				// si js inactif, $exec_url prend le relais
+				$exec_url = generer_url_ecrire($script_retour, "id_liste=$id_liste&tri=$tri&debut=$val");
+				// sinon, ajax animera la boite des abos
+				$action_url = generer_action_auteur(_SPIPLISTES_ACTION_LISTE_ABONNES
+					, $id_liste." ".$val." ".$tri);
 				$result .= 
 					($val == $debut)
 					? "<strong>$key</strong> "
-					: "<a href='".parametre_url($url,'debut',$val)."'>$key</a> "
+					: "<a href='"
+						. parametre_url($exec_url, 'redirect', $exec_url)
+						. "' onclick=\"return AjaxSqueeze('$action_url','auteurs','$exec_url',event)\">"
+						. $key
+						. "</a>\n"
 					;
 			}
 			$result .= ""
@@ -368,9 +395,8 @@ function spiplistes_afficher_auteurs(
 
 		// SPIP 192 ne prend pas les array dans parametre_url()
 		// obligé de l'appeler 2 x
-		$retour = parametre_url($url,'debut',$debut);
+		$retour = parametre_url($script_retour,'debut',$debut);
 		$retour = parametre_url($retour,'tri',$tri);
-		
 		
 		$u = generer_action_auteur('spiplistes_changer_statut_abonne', $row['id_auteur']."-format", $retour);
 		
@@ -402,27 +428,34 @@ function spiplistes_afficher_auteurs(
 	$debut_suivant = $debut + $max_par_page;
 	
 	if (($debut_suivant < $nombre_auteurs) || ($debut > 0)) {
-	
+		
+		$exec_url = generer_url_ecrire($script_retour, "id_liste=$id_liste&tri=$tri&debut=$debut");
+		
 		$result .= ""
 			. "<table id='bas' width='100%' border='0'>"
 			. "<tr bgcolor='white'><td style='text-align: $spip_lang_left'>"
 			;
 		if ($debut > 0) {
 			$debut_prec = strval(max($debut - $max_par_page, 0));
-			$action_url = parametre_url($url, 'debut', $debut_prec);
-			$action_url = parametre_url($action_url, 'tri', $tri);
+			$action_url = generer_action_auteur(_SPIPLISTES_ACTION_LISTE_ABONNES
+				, $id_liste." ".$debut_prec." ".$tri);
 			$result .= ""
-				. "<a href='$action_url' onclick=\"return AjaxSqueeze('$action_url','auteurs','',event)\">"
+				. "<a href='"
+				. parametre_url($action_url, 'redirect', $exec_url)
+				. "' onclick=\"return AjaxSqueeze('$action_url','auteurs','$exec_url',event)\">"
 						. "&lt;&lt;&lt;"
 						. "</a>\n"
 				;
 		}
 		if($debut_suivant < $nombre_auteurs) {
-			$action_url = parametre_url($url, 'debut', $debut_suivant);
-			$action_url = parametre_url($action_url, 'tri', $tri);
+			$action_url = generer_action_auteur(_SPIPLISTES_ACTION_LISTE_ABONNES
+				, $id_liste." ".$debut_suivant." ".$tri);
 			$result .= ""
-				. "</td><td style='text-align: $spip_lang_right'>"
-				. "<a href='$action_url' onclick=\"return AjaxSqueeze('$action_url','auteurs','',event)\">"
+				. "</td><td style='text-align: $spip_lang_right'\n"
+				. "<!-- fleche suivante -->\n"
+				. "<a href='"
+				. parametre_url($action_url, 'redirect', $exec_url)
+				. "' onclick=\"return AjaxSqueeze('$action_url','auteurs','$exec_url',event)\">"
 						. "&gt;&gt;&gt;"
 						. "</a>\n"
 				;

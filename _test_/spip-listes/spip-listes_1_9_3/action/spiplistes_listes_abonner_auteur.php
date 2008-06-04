@@ -23,8 +23,8 @@ function action_spiplistes_listes_abonner_auteur_dist () {
 	if(($id_liste > 0) && ($id_auteur > 0)) {
 		include_spip('inc/spiplistes_listes_selectionner_auteur');
 		spiplistes_abonnements_ajouter ($id_auteur, $id_liste);
-		echo(spiplistes_listes_boite_abonnements($id_liste, 'liste', $tri, $redirect));
+		echo(spiplistes_listes_boite_abonnements($id_liste, 'liste', $tri, $debut, $redirect));
 	}
-	exit;
+	exit(0);
 } //
 ?>

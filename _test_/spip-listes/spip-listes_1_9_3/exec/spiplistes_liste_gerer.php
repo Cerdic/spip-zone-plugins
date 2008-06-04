@@ -330,7 +330,9 @@ function exec_spiplistes_liste_gerer () {
 			;
 		// la grosse boite des abonnes
 		$tri = _request('tri') ? _request('tri') : 'nom';
-		$boite_liste_abonnes = spiplistes_listes_boite_abonnements($id_liste, $statut, $tri, _SPIPLISTES_EXEC_LISTE_GERER);
+		$boite_liste_abonnes = spiplistes_listes_boite_abonnements(
+			$id_liste, $statut, $tri, $debut, _SPIPLISTES_EXEC_LISTE_GERER
+			);
 		$titre_boite = _T('spiplistes:abos_cette_liste');
 		$nb = spiplistes_listes_nb_abonnes_compter($id_liste);
 		$legend = _T('spiplistes:nbre_abonnes').$nb;
