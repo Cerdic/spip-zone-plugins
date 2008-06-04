@@ -19,7 +19,7 @@
   Pour intégrer le portoflio dans une boucle ARTCICLE : <em>&lt;INCLURE&#123;fond=inc-slideshow-portfolio&#125;&#123;id_article&#125;&gt;</em>
 	  <br/>Pour intégrer le slideshow dans un squelette : associer le mot clé Slideshow a un article et inclure <em>&lt;INCLURE&#123;fond=inc-slideshow&#125;&gt;</em>
 	 <br/><br/>
-	 La configuration optionnelle peut se faire en installant le plugin cfg et en chargeant ecrire/?exec=cfg&cfg=slideshow
+	 La configuration optionnelle peut se faire en installant le plugin cfg et en chargeant ecrire/?exec=cfg&amp;cfg=slideshow
 	 <br/><br/>
 	 <strong>ATTENTION</strong> : Necessite jQuery et la balise #INSERT_HEAD dans les squelettes
 	<br/><br/>Ce plugin est distribué sous licence GNU/GPL
