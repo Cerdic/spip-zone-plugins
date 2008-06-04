@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // J K
 // L
 // M
+'gmc_associes' => 'Groupes de mots-cl&eacute;s associ&eacute;s',
 'mc_associes' => 'Mots-cl&eacute;s associ&eacute;s',
 'mot_clef' => 'Mots-cl&eacute;s',
 
