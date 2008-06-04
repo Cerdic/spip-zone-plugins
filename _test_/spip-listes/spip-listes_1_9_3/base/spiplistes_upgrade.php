@@ -35,7 +35,7 @@
 
 include_spip('inc/spiplistes_api_globales');
 include_spip('inc/spiplistes_api');
-
+include_spip('inc/spiplistes_api_abstract_sql');
 
 function spiplistes_upgrade () {
 
@@ -65,21 +65,18 @@ function spiplistes_upgrade () {
 	
 	if($spiplistes_current_version < $spiplistes_real_version) {
 
-		spiplistes_log("UPGRADING $spiplistes_name $spiplistes_current_version TO $spiplistes_real_version", _SPIPLISTES_LOG_DEBUG);
+		spiplistes_log("UPGRADING $spiplistes_name $spiplistes_current_version TO $spiplistes_real_version");
 
-
-		if($spiplistes_current_version < 1.98008) {
-		// Commenter, ca aide ! ;-) (CP-20071016)
+		if($spiplistes_current_version < 1.9923) {
 			// Ne modifie pas le schéma. Ajoute juste une légende sur les tables
-			spip_query("ALTER TABLE spip_listes COMMENT 'Listes de diffusion'");
-			spip_query("ALTER TABLE spip_courriers COMMENT 'Panier des courriers'");
-			spip_query("ALTER TABLE spip_auteurs_courriers COMMENT 'Queue des envois de courriers'");
-			spip_query("ALTER TABLE spip_auteurs_mod_listes COMMENT 'Moderateurs des listes de diffusion'");
-			spip_query("ALTER TABLE spip_auteurs_listes COMMENT 'Carnet des abonnements'");
-			spip_query("ALTER TABLE spip_auteurs_elargis COMMENT 'Preferences des auteurs/abonnés'");
-			$spiplistes_current_version_base = 1.98008;
+			sql_alter("TABLE spip_listes COMMENT ".sql_quote("Listes de diffusion"));
+			sql_alter("TABLE spip_courriers COMMENT ".sql_quote("Panier des courriers (casiers)"));
+			sql_alter("TABLE spip_auteurs_courriers COMMENT ".sql_quote("Queue des envois de courriers"));
+			sql_alter("TABLE spip_auteurs_listes COMMENT ".sql_quote("Listes de abonnements aux listes"));
+			sql_alter("TABLE spip_auteurs_mod_listes COMMENT ".sql_quote("Moderateurs des listes de diffusion"));
+			sql_alter("TABLE spip_auteurs_elargis COMMENT ".sql_quote("Preferences des auteurs/abonnes (formats recept.)"));
+			$spiplistes_current_version = 1.9923;
 		}
-
 
 /* ... */
 
@@ -228,8 +225,8 @@ function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version,
 		if ($current_version<1.92){
 //spiplistes_log("UPGRADE: current_version: $current_version", _SPIPLISTES_LOG_DEBUG);
 			echo "SpipListes Maj 1.92<br />";
-			spip_query("ALTER TABLE spip_listes ADD titre_message varchar(255) NOT NULL default '';");
-			spip_query("ALTER TABLE spip_listes ADD pied_page longblob NOT NULL;");
+			sql_alter("TABLE spip_listes ADD titre_message varchar(255) NOT NULL default ''");
+			sql_alter("TABLE spip_listes ADD pied_page longblob NOT NULL");
 			ecrire_meta('spiplistes_version', $current_version=1.92);
 		}
 		if ($current_version<1.94){
@@ -243,16 +240,16 @@ function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version,
 				spip_query("DROP TABLE spip_auteurs_mod_listes"); // elle vient d'etre cree par un creer_base inopportun
 				spip_query("DROP TABLE spip_auteurs_courriers"); // elle vient d'etre cree par un creer_base inopportun
 			}
-			spip_query("ALTER TABLE spip_auteurs_listes RENAME spip_auteurs_mod_listes;");
-			spip_query("ALTER TABLE spip_abonnes_listes RENAME spip_auteurs_listes;");
-			spip_query("ALTER TABLE spip_abonnes_courriers RENAME spip_auteurs_courriers;");
+			sql_alter("TABLE spip_auteurs_listes RENAME spip_auteurs_mod_listes");
+			sql_alter("TABLE spip_abonnes_listes RENAME spip_auteurs_listes");
+			sql_alter("TABLE spip_abonnes_courriers RENAME spip_auteurs_courriers");
 			ecrire_meta('spiplistes_version', $current_version=1.94);
 		}
 		if ($current_version<1.95){
 //spiplistes_log("UPGRADE: current_version: $current_version", _SPIPLISTES_LOG_DEBUG);
 			echo "SpipListes Maj 1.95<br />";
 			include_spip('base/abstract_sql');
-			spip_query("ALTER TABLE spip_auteurs_courriers ADD etat varchar(5) NOT NULL default '' AFTER statut");
+			sql_alter("TABLE spip_auteurs_courriers ADD etat varchar(5) NOT NULL default '' AFTER statut");
 			ecrire_meta('spiplistes_version', $current_version=1.95);
 		}
 		
@@ -324,28 +321,32 @@ function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version,
 		}
 		
 		
-		if ($current_version<1.98){
+		if ($current_version<1.98) {
 			
 			echo "SpipListes Maj 1.98<br />";
 			include_spip('base/abstract_sql');
 		
-		echo "regulariser l'index";
-		$table_nom = "spip_auteurs_elargis";
-		//ajout des index
-		$desc = spip_abstract_showtable($table_nom, '', true);
-		if($desc['key']['PRIMARY KEY']!='id'){
-			spip_query("ALTER TABLE ".$table_nom." DROP PRIMARY KEY");
-				if(!isset($desc['fields']['id']))
-				spip_query("ALTER TABLE ".$table_nom." ADD id INT NOT NULL AUTO_INCREMENT PRIMARY KEY");
-				else 
-				spip_query("ALTER TABLE ".$table_nom." ADD PRIMARY KEY (id)");
-		}
-		if($desc['key']['KEY id_auteur'])
-		spip_query("ALTER TABLE ".$table_nom." DROP INDEX id_auteur, ADD INDEX id_auteur (id_auteur)");
-		else
-		spip_query("ALTER TABLE ".$table_nom." ADD INDEX id_auteur (id_auteur)");
-		
-		ecrire_meta('spiplistes_version', $current_version=1.98);
+			echo "regulariser l'index";
+			$table_nom = "spip_auteurs_elargis";
+			//ajout des index
+			$desc = spip_abstract_showtable($table_nom, '', true);
+			if($desc['key']['PRIMARY KEY']!='id'){
+				sql_alter("TABLE ".$table_nom." DROP PRIMARY KEY");
+				if(!isset($desc['fields']['id'])) {
+					sql_alter("TABLE ".$table_nom." ADD id INT NOT NULL AUTO_INCREMENT PRIMARY KEY");
+				}
+				else {
+					sql_alter("TABLE ".$table_nom." ADD PRIMARY KEY (id)");
+				}
+			}
+			if($desc['key']['KEY id_auteur']) {
+				sql_alter("TABLE ".$table_nom." DROP INDEX id_auteur, ADD INDEX id_auteur (id_auteur)");
+			}
+			else {
+				sql_alter("TABLE ".$table_nom." ADD INDEX id_auteur (id_auteur)");
+			}
+			
+			ecrire_meta('spiplistes_version', $current_version=1.98);
 		}
 		
 		spiplistes_ecrire_metas();

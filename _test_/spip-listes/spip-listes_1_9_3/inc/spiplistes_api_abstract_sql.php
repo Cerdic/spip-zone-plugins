@@ -22,7 +22,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_COMPAT_CFG_192', true);
+if(!defined("_COMPAT_CFG_192")) {
+	define('_COMPAT_CFG_192', true);
+}
 
 
 /* fichier de compatibilite vers spip 1.9.2 */
@@ -77,7 +79,7 @@ function compat_spiplistes_defs_dist() {
 		// n'existe pas en 1.9.2
 		'sql_alter' => 
 			'($res, $serveur=\'\') {
-				return spip_query_db(\'ALTER \' . $res);
+				return spip_query(\'ALTER \' . $res);
 			}',	
 				
 		// n'existe pas en 1.9.2
