@@ -21,6 +21,7 @@ if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {
 		$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
 		$largeurs = array('12','', '');
 		$styles = array('', 'arial2', 'arial11');
+		include_spip('inc/presenter_liste');
 		return affiche_tranche_bandeau($requete, "rubrique-24.gif", "#999999", "white", $tmp_var, $titre_table, false, $largeurs, $styles, 'afficher_rubriques_boucle');
 	}
 }
