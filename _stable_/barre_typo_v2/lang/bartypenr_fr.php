@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_adresse' => 'Adresse',
 'barre_lien_externe' => 'Lien externe',
 'barre_bulle' => 'Bulle d\'aide',
+'barre_formatages_speciaux' => 'Formatage sp&eacute;ciaux',
 'barre_galerie' => 'Ouvrir la galerie',
 'barre_gestion_caption' => 'Caption et R&eacute;sum&eacute;',
 'barre_gestion_colonne' => 'Nb colonnes',
@@ -41,6 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_preview' => 'Mode pr&eacute;visualisation',
 'barre_stats' => 'Afficher les statistiques du texte',
 
+'barre_code' => 'Mettre en forme un &lt;code&gt;code informatique&lt;/code&gt;',
+'barre_cadre' => 'Placer dans une &lt;cadre&gt;zone de saisie de texte&lt;/poesie&gt;',
 'barre_poesie' => 'Mettre en forme comme une &lt;poesie&gt;po&eacute;sie&lt;/poesie&gt;',
 
 'barre_ancres' => 'Gestion des ancres',
