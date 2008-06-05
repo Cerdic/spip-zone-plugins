@@ -25,7 +25,7 @@ function exec_galerie() {
 	echo install_debut_html(_T('bartypenr:galerie'));
 
 	// les pliages utilisent desormais jQuery
-	if(version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) echo '<script src="../spip.php?page=jquery.js" type="text/javascript"></script>
+	if(version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) echo '<script src="../dist/javascript/jquery.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="../spip.php?page=style_prive&amp;ltr=left&amp;couleur_claire=C5E41C&amp;couleur_foncee=9DBA00" id="cssprivee" />
 <!--[if lt IE 8]>
 <link rel="stylesheet" type="text/css" href="../spip.php?page=style_prive_ie&amp;ltr=left&amp;couleur_claire=C5E41C&amp;couleur_foncee=9DBA00" />
