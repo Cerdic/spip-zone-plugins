@@ -9,7 +9,7 @@ function afficher_boutonsavances($champ, $champhelp) {
 	$reta .= bouton_barre_racc("barre_raccourci('[|','|]',$champ)", _DIR_BTE_IMG.'center.png', _T('enlumtypo:barre_centrer'), $champhelp);
 	$reta .= bouton_barre_racc("barre_raccourci('[/','/]',$champ)", _DIR_BTE_IMG.'right.png', _T('enlumtypo:barre_alignerdroite'), $champhelp);
 	$reta .= bouton_barre_racc("barre_raccourci('[(',')]',$champ)", _DIR_BTE_IMG.'cadretexte.png', _T('enlumtypo:barre_encadrer'), $champhelp);
-	$reta .= bouton_barre_racc("barre_raccourci('<del>','</del>',$champ)", _DIR_BTE_IMG.'text_strikethrough.png', _T('enlumtypo:barre_texte_barre'), $champhelp);
+	$reta .= bouton_barre_racc("barre_raccourci('<del>','</del>',$champ)", _DIR_BTE_IMG.'text_strikethrough.png', _T('enlumtypo:barre_barre'), $champhelp);
 		
 	$tableau_formulaire = '
 <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
