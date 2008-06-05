@@ -32,8 +32,10 @@ function boucle_LISTES($id_boucle, &$boucles) {
 //
 function boucle_COURRIERS ($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
-	$boucle->from[] =  "spip_courriers AS $id_table";
+	if(spiplistes_spip_est_inferieur_193()) {
+		$id_table = $boucle->id_table;
+		$boucle->from[] =  "spip_courriers AS $id_table";
+	}
 	$boucle->where[] = array("'='","'type'","'\"nl\"'"); 
 	return (calculer_boucle($id_boucle, $boucles));
 }

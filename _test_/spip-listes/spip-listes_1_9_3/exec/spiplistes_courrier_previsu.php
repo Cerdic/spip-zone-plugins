@@ -93,7 +93,11 @@ function exec_spiplistes_courrier_previsu () {
 	if($lire_base) {
 		// prendre le courrier enregistré dans la base
 		$sql_select = 'texte,titre' . (($format=='texte') ? ',message_texte' : '');
-		if($id_courrier && ($row=spip_fetch_array(sql_select($sql_select, "spip_courriers", "id_courrier=$id_courrier", "", "", "1")))) {
+		
+		if(
+			$id_courrier 
+			&& ($row = sql_fetsel($sql_select, "spip_courriers", "id_courrier=".sql_quote($id_courrier), "", "", 1))
+		) {
 			foreach(explode(",", $sql_select) as $key) {
 				$$key = propre($row[$key]);
 			}
@@ -122,14 +126,13 @@ function exec_spiplistes_courrier_previsu () {
 					echo($message_texte);
 					exit(0);
 				}
-				else {
 					$texte_html = ""
 						. "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Strict//EN\">\n"
 						. (($lang) ? "<html lang='$lang' dir='ltr'>\n" : "")
 						. "<head>\n"
 						. "<meta http-equiv='Content-Type' content='text/html; charset=".$charset."'>\n"
 						. "<meta http-equiv='Pragma' content='no-cache'>\n"
-						. "<title>$titre</title>\n"
+						. "<title>".textebrut($titre)."</title>\n"
 						. "</head>\n"
 						. "<body style='text-align:center;'>\n"
 						. "<div style='margin:0 auto;'>\n"
@@ -138,6 +141,7 @@ function exec_spiplistes_courrier_previsu () {
 						. "</body>\n"
 						. "</html>\n";
 					ajax_retour($texte_html);
+					exit(0);
 				}
 			} // end if plein_ecran
 			echo($texte);
