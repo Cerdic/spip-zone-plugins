@@ -243,7 +243,7 @@
 		static $puce=false;
 		static $puce_attr=false;
 		if (!$puce){
-			$puce = definir_puce();
+			if (function_exists('definir_puce')) $puce = definir_puce();
 			$puce_attr = tag2attributs($puce);
 		}
 		$attributs = tag2attributs($innerTag);
