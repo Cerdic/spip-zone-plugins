@@ -1,3 +1,6 @@
+CP-20080605
+En cas d'upgrade, conserver ce dossier (voir base/spiplistes_upgrade.php)
+
 CP-20080504
 
 Ce dossier est présent ici pour des raisons historiques.
@@ -7,4 +10,5 @@ Utilisé dans la version 192 de SPIP-Listes, il ne l'est plus dans la version
 
 Les patrons pieds_courriers sont maintenant à placer dans 
 patrons/pieds_courriers/
+
 

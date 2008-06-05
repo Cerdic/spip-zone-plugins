@@ -132,10 +132,11 @@ function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version,
 			include_spip('base/abstract_sql');
 			
 			//Migrer des listes anciennes // a deplacer dans une en fonction
-			$resultat_aff = spip_query("SELECT * FROM spip_articles WHERE statut='liste' OR statut='inact' OR statut='poublist'");
+			$resultat_aff = sql_select("*", 'spip_articles'
+				, "statut=".sql_quote('liste')." OR statut=".sql_quote('inact')." OR statut=".sql_quote('poublist'));
 			if(@sql_count($resultat_aff) > 0){
 				echo _T('spiplistes:mettre_a_jour');
-				while ($row = spip_fetch_array($resultat_aff)) {
+				while ($row = sql_fetch($resultat_aff)) {
 					$id_article=$row['id_article'];
 					$titre_liste=corriger_caracteres($row['titre']);
 					$texte_liste = corriger_caracteres($row['texte']);
@@ -168,24 +169,36 @@ function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version,
 						)
 					);
 					if($message_auto=="oui")
-						spip_query("UPDATE spip_listes SET patron=".sql_quote($patron_liste).", periode=".sql_quote($periode_liste)
-						  . ", maj=FROM_UNIXTIME(".sql_quote($maj_liste)."), email_envoi=".sql_quote($email_envoi)
-						  . ", message_auto=".sql_quote($message_auto)." WHERE id_liste=".sql_quote($id_liste));
+						sql_update(
+							'spip_listes'
+							, array(
+								'patron' => sql_quote($patron_liste)
+								, 'periode' => sql_quote($periode_liste)
+								, 'maj' => "FROM_UNIXTIME(".sql_quote($maj_liste).")"
+								, 'email_envoi' => sql_quote($email_envoi)
+								, 'message_auto' => sql_quote($message_auto)
+								)
+							, "id_liste=".sql_quote($id_liste)
+							);
 					
 					//Auteur de la liste (moderateur)
-					spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_liste =".sql_quote($id_liste));
+					sql_delete('spip_auteurs_mod_listes', "id_liste =".sql_quote($id_liste));
 					spip_query("INSERT INTO spip_auteurs_mod_listes (id_auteur, id_liste) VALUES (".sql_quote($connect_id_auteur).",".sql_quote($id_liste).")");
 					
 					//recuperer les abonnes (peut etre plus tard ?)
-					$abos=spip_query("SELECT id_auteur, id_article FROM spip_auteurs_articles WHERE id_article=".sql_quote($id_article));
-					while($abonnes=spip_fetch_array($abos)){
+					$abos = sql_select('id_auteur,id_article', 'spip_auteurs_articles'
+						, "id_article=".sql_quote($id_article));
+					while($abonnes= sql_fetch($abos)){
 						$abo=$abonnes["id_auteur"];
-						spip_query("INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES (".sql_quote($abo).",".sql_quote($id_liste).")");
+						sql_insert('spip_auteurs_listes'
+							, "(id_auteur, id_liste)"
+							, "(".sql_quote($abo).",".sql_quote($id_liste).")"
+							);
 					}
 					
 					//effacer les anciens articles/abo
-					spip_query("DELETE FROM spip_articles WHERE id_article =".sql_quote($id_article));
-					spip_query("DELETE FROM spip_auteurs_articles WHERE id_article =".sql_quote($id_article));
+					sql_delete('spip_articles', "id_article =".sql_quote($id_article));
+					sql_delete('spip_auteurs_articles', "id_article =".sql_quote($id_article));
 		
 					//manque un traitement pour récuperer les courriers
 				}
