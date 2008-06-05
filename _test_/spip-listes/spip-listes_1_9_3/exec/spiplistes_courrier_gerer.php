@@ -77,11 +77,18 @@ function exec_spiplistes_courrier_gerer () {
 			
 	$page_result = $message_erreur = $str_destinataire = "";
 
-	// l'edition du courrier est reservee aux super-admins 
-	// ou aux admin createur du courrier
-	$flag_editable = (($connect_statut == "0minirezo") 
-		&& ($connect_toutes_rubriques 
-			|| ($connect_id_auteur == spiplistes_courrier_id_auteur_get($id_courrier)) || !$id_courrier));
+	// l'edition du courrier est reservee...
+	$flag_editable = (
+		($connect_statut == "0minirezo") 
+		&& (
+			// aux super-admins 
+			$connect_toutes_rubriques 
+			// ou aux admins createur du courrier
+			|| (
+				$id_courrier
+				&& ($connect_id_auteur == spiplistes_courrier_id_auteur_get($id_courrier)))
+			)
+	);
 
 	if($flag_editable) {
 		// Modification de courrier
@@ -115,7 +122,7 @@ function exec_spiplistes_courrier_gerer () {
 					else {
 						$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_Adresse_email_invalide'), true);
 					}
-				} // end if($btn_envoi_test)
+				} // end if($radio_destination == 'email_test')
 				
 				else if($radio_destination == 'id_liste') {
 					// demande d'envoi a  une liste (retour formulaire local)
@@ -163,7 +170,7 @@ function exec_spiplistes_courrier_gerer () {
 				}
 			}
 			// FIN DES MODIFICATIONS
-	}
+		}
 	
 		// Ok. recharge les donnees pour completer le formulaire
 		$sql_select_array = array('titre', 'texte', 'email_test', 'statut');
@@ -179,13 +186,15 @@ function exec_spiplistes_courrier_gerer () {
 	// Nouveau courrier
 	////
 	if(($connect_statut == "0minirezo") && ($new == 'oui')) {
-	// retour editeur. Creation du courrier
+		// retour editeur. Creation du courrier
 		if(!empty($titre)) {
 			$statut = _SPIPLISTES_STATUT_REDAC;
 			$type = 'nl';
-			$result = spip_query("INSERT INTO spip_courriers (titre,texte,date,statut,type,id_auteur) 
-				VALUES (".sql_quote($titre).",".sql_quote($texte).",NOW(),'$statut','$type',".sql_quote($connect_id_auteur).")"); 
-			$id_courrier = spip_insert_id(); 
+			$id_courrier = sql_insert(
+				'spip_courriers'
+				, "(titre,texte,date,statut,type,id_auteur)"
+				, "(".sql_quote($titre).",".sql_quote($texte).",NOW(),".sql_quote($statut).",".sql_quote($type).",".sql_quote($connect_id_auteur).")"
+			);
 		}
 		else {
 			$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_courrier_titre_vide'), true);
@@ -201,7 +210,7 @@ function exec_spiplistes_courrier_gerer () {
 		$sql_select_str = "titre";
 		$sql_select = $sql_select_int.",".$sql_select_str.",".$sql_select_tmp;
 		
-		if($row = sql_fetch(sql_select($sql_select, "spip_courriers", "id_courrier=".sql_quote($id_courrier), '', '', 1))) {
+		if($row = sql_fetsel($sql_select, "spip_courriers", "id_courrier=".sql_quote($id_courrier), '', '', 1)) {
 			foreach(explode(",", $sql_select) as $key) {
 				$$key = $row[$key];
 			}
@@ -256,7 +265,7 @@ function exec_spiplistes_courrier_gerer () {
 				: ""
 				;
 		}
-	}
+	} // end if()
 
 	//////////////////////////////////////////////////////
 	// preparation des boutons si droits
@@ -494,8 +503,10 @@ function exec_spiplistes_courrier_gerer () {
 			;
 	} // end if
 	else {
-		$page_result .= ""
-			. __boite_alerte (_T('spiplistes:Erreur_courrier_introuvable'), true)
+		$page_result .= 
+			(empty($message_erreur))
+			? __boite_alerte (_T('spiplistes:Erreur_courrier_introuvable'), true)
+			: $message_erreur
 			;
 	}
 

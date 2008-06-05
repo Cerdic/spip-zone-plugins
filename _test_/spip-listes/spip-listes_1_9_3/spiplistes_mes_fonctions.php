@@ -30,23 +30,12 @@ function boucle_LISTES($id_boucle, &$boucles) {
 //
 // <BOUCLE(COURRIERS)>
 //
-function boucle_COURRIERS($id_boucle, &$boucles) {
-        //$boucle = &$boucles[$id_boucle]; // ancien code 192
-        $boucle = $boucles[$id_boucle];
-        $id_table = $boucle->id_table;
-        // ancien code. Ca fonctionnait en 192 ?
-        //$boucle->from[] =  "spip_courriers AS $id_table";
-        //$boucle->where[] = "type='nl'";
-			$type = $boucle->type_requete;
-       $boucle->where[] = array("'='","'type'","'\"nl\"'"); 
-		if (!$id_table)
-		//      table hors SPIP
-			$boucle->from[$type] =  $type;
-		else {
-		// les tables declarees par spip ont un prefixe et un surnom
-			$boucle->from[$id_table] =  'spip_' . $type ;
-		}
-        return calculer_boucle($id_boucle, $boucles);
+function boucle_COURRIERS ($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$boucle->from[] =  "spip_courriers AS $id_table";
+	$boucle->where[] = array("'='","'type'","'\"nl\"'"); 
+	return (calculer_boucle($id_boucle, $boucles));
 }
 
 // Filtres SPIP-listes
