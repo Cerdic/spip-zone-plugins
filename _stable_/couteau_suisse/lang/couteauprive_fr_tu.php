@@ -62,11 +62,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'categ:admin' => '1. Administration',
-	'categ:divers' => '6. Divers',
-	'categ:public' => '4. Affichage public',
-	'categ:spip' => '5. Balises, filtres, crit&egrave;res',
-	'categ:typo-corr' => '2. Am&eacute;liorations des textes',
-	'categ:typo-racc' => '3. Raccourcis typographiques',
+	'categ:divers' => '<MODIF>6. Divers',
+	'categ:public' => '<MODIF>4. Affichage public',
+	'categ:spip' => '<MODIF>5. Balises, filtres, crit&egrave;res',
+	'categ:typo-corr' => '<MODIF>2. Am&eacute;liorations des textes',
+	'categ:typo-racc' => '<MODIF>3. Raccourcis typographiques',
 	'certaines_couleurs' => 'Seules les balises d&eacute;finies ci-dessous@_CS_ASTER@ :',
 	'chatons:aide' => 'Chatons : @liste@',
 	'chatons:description' => 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <code>:nom</code>.
@@ -168,7 +168,7 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 	'filets_sep:description' => 'Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de SPIP.
 _ La syntaxe est : "__code__", o&ugrave; "code" repr&eacute;sente soit le num&eacute;ro d’identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d\'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Filets de S&eacute;paration',
-	'filtrer_javascript:description' => 'Pour g&eacute;rer le javascript dans les articles, trois modes sont disponibles :
+	'filtrer_javascript:description' => '<MODIF>Pour g&eacute;rer le javascript dans les articles, trois modes sont disponibles :
 - <i>jamais</i> : le javascript est refus&eacute; partout
 - <i>d&eacute;faut</i> : le javascript est signal&eacute; en rouge dans l\'espace priv&eacute;
 - <i>toujours</i> : le javascript est accept&eacute; partout.

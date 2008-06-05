@@ -60,8 +60,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'categ:admin' => '1. Administration',
-	'categ:interface' => '10. Interface priv&eacute;e',
 	'categ:divers' => '60. Divers',
+	'categ:interface' => '10. Interface priv&eacute;e',
 	'categ:public' => '40. Affichage public',
 	'categ:spip' => '50. Balises, filtres, crit&egrave;res',
 	'categ:typo-corr' => '20. Am&eacute;liorations des textes',
@@ -263,6 +263,7 @@ _ &bull; [De tout le plugin->@reset@]
 	'label:style_p' => 'Votre style :',
 	'label:suite_introduction' => 'Points de suite :',
 	'label:titre_travaux' => 'Titre du message :',
+	'label:tri_articles' => 'Votre choix :',
 	'label:url_glossaire_externe2' => 'Lien vers le glossaire externe :',
 	'liens_en_clair:description' => 'Met &agrave; votre disposition le filtre : \'liens_en_clair\'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d\'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre \'cs=print\' ou \'page=print\' dans l\'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.',
 	'liens_en_clair:nom' => 'Liens en clair',
@@ -407,6 +408,15 @@ _ N\'oubliez pas de v&eacute;rifier que \'un_texte\' est bien d&eacute;fini dans
 	'travaux_prochainement' => 'Ce site sera r&eacute;tabli tr&egrave;s prochainement.
 _ Merci de votre compr&eacute;hension.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
+	'tri_articles:description' => 'En naviguant sur le site en partie priv&eacute;e ([->./?exec=auteurs]), choisissez ici le tri &agrave; utiliser pour afficher vos articles &agrave; l\'int&eacute;rieur de vos rubriques.
+
+Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL \'ORDER BY\' : n\'utilisez le tri personnalis&eacute; que si vous savez ce que vous faites (champs disponibles : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
+[[%tri_articles%]][[->%tri_perso%]]',
+	'tri_articles:nom' => 'Tri des articles',
+	'tri_modif' => 'Tri sur la date de modification (ORDER BY date_modif DESC)',
+	'tri_perso' => 'Tri SQL personnalis&eacute;, ORDER BY suivi de :',
+	'tri_publi' => 'Tri sur la date de publication (ORDER BY date DESC)',
+	'tri_titre' => 'Tri sur le titre (ORDER BY 0+titre,titre)',
 	'type_urls:description' => '@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'acc&egrave;s aux pages de votre site :
 <div style="font-size:90%; margin:0 2em;">
 - {{page}} : la valeur par d&eacute;faut pour SPIP v1.9x : <code>/spip.php?article123</code>.
@@ -450,16 +460,7 @@ _ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du
 
 	// X
 	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitul&eacute; &laquo;&nbsp;Analyse XML&nbsp;&raquo; est ajout&eacute; aux autres boutons d\'administration.',
-	'xml:nom' => 'Validateur XML',
-
-	'tri_articles:description' => "En naviguant sur le site en partie priv&eacute;e ([->./?exec=auteurs]), choisissez ici le tri &agrave; utiliser pour afficher vos articles &agrave; l'int&eacute;rieur de vos rubriques.\n\nLes propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL 'ORDER BY' : n'utilisez le tri personnalis&eacute; que si vous savez ce que vous faites (champs disponibles : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
-[[%tri_articles%]][[->%tri_perso%]]",
-	'tri_articles:nom' => 'Tri des articles',
-	'label:tri_articles' => 'Votre choix :',
-	'tri_titre' => 'Tri sur le titre (ORDER BY 0+titre,titre)',
-	'tri_publi' => 'Tri sur la date de publication (ORDER BY date DESC)',
-	'tri_modif' => 'Tri sur la date de modification (ORDER BY date_modif DESC)',
-	'tri_perso' => 'Tri SQL personnalis&eacute;, ORDER BY suivi de :',
+	'xml:nom' => 'Validateur XML'
 );
 
 ?>

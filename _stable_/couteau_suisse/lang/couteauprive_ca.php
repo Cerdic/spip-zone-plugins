@@ -64,11 +64,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'categ:admin' => '1. Administraci&oacute;',
-	'categ:divers' => '6. Divers',
-	'categ:public' => '4. Visualitzaci&oacute; p&uacute;blica',
-	'categ:spip' => '5. Etiquetes, filtres, criteris',
-	'categ:typo-corr' => '2. Millora dels textos',
-	'categ:typo-racc' => '3. Dreceres tipogr&agrave;fiques',
+	'categ:divers' => '<MODIF>6. Divers',
+	'categ:public' => '<MODIF>4. Visualitzaci&oacute; p&uacute;blica',
+	'categ:spip' => '<MODIF>5. Etiquetes, filtres, criteris',
+	'categ:typo-corr' => '<MODIF>2. Millora dels textos',
+	'categ:typo-racc' => '<MODIF>3. Dreceres tipogr&agrave;fiques',
 	'certaines_couleurs' => 'Nom&eacute;s les etiquetes definides m&eacute;s avall@_CS_ASTER@ :',
 	'chatons:aide' => 'Emoticones: @liste@',
 	'chatons:description' => 'Insereix imatges (o emoticones pels {xats}) en tots els textos on apareix una cadena del tipus <code>:nom</code>.
@@ -170,7 +170,7 @@ Atenci&oacute;: certes eines del Ganivet Su&iacute;s necessiten les funcions de 
 	'filets_sep:description' => 'Insereix l&iacute;nies de separaci&oacute;, que es poden personalitzar per fulls d\'estil, a tots els textos d\'SPIP.
 _ La sintaxi &eacute;s: "__code__", o "code" representa o b&eacute; el n&uacute;mero d\'identificaci&oacute; (de 0 a 7) de la l&iacute;nia a inserir en relaci&oacute; directa amb els estils corresponents, o b&eacute; el nom d\'una imatge situada a dins de la carpeta plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'L&iacute;nies de Separaci&oacute;',
-	'filtrer_javascript:description' => 'Per gestionar el javascript a dins dels articles, podem fer-ho de tres maneres:
+	'filtrer_javascript:description' => '<MODIF>Per gestionar el javascript a dins dels articles, podem fer-ho de tres maneres:
 - <i>jamais</i> : el javascript &eacute;s rebutjat a tot arreu
 - <i>d&eacute;faut</i> : el javascript s\'assenyala en vermell a l\'espai privat
 - <i>toujours</i> : el javascript s\'accepta arreu.
@@ -208,13 +208,13 @@ _ • [De tot el plugin->@reset@]
 	'insert_head:nom' => 'Etiqueta #INSERT_HEAD',
 	'insertions:description' => 'ATENCI&Oacute;: eina en curs de desenvolupament!! [[%insertions%]]',
 	'insertions:nom' => 'Correccions autom&agrave;tiques',
-	'introduction:description' => '<MODIF>Aquesta etiqueta situada als esquelets serveix en general a la p&agrave;gina principal o a les seccions per fer un resum dels articles, breus, etc..</p>
+	'introduction:description' => 'Aquesta etiqueta que cal posar a dins dels esquelets serveix, en general a la p&agrave;gina principal o a les seccions, per fer un resum dels articles, de les notes breus, etc..</p>
 <p>{{Atenci&oacute;}}: Abans d\'activar aquesta funcionalitat, verifiqueu b&eacute; que no existeix ja cap funci&oacute; {balise_INTRODUCTION()} al vostre esquelet o als vostres plugins. La sobrec&agrave;rrega produ&iuml;ra un error de compilaci&oacute;.</p>
-@puce@ Podeu precisar (en percentatge en relaci&oacute; al valor utilitzat per defecte) la llargada del text retornat per l\'etiqueta #INTRODUCTION. Un valor  nul o igual a 100 no modifica l\'aspecte de la introducci&oacute; i utilitza, per tant, els valors per defecte seg&uuml;ents: 500 car&agrave;cters pels articles, 300 per les breus i 600 per les seccions.
+@puce@ Podeu precisar (en percentatge en relaci&oacute; al valor utilitzat per defecte) la llargada del text a retornar per l\'etiqueta #INTRODUCTION. Cap valor o igual a 100 no modifica l\'aspecte de la introducci&oacute; i utilitza, per tant, els valors per defecte seg&uuml;ents: 500 car&agrave;cters pels articles, 300 per les notes breus i 600 pels f&ograve;rums i les seccions.
 [[%lgr_introduction%&nbsp;%]]
-@puce@ Per defecte, els punts de continuaci&oacute; afegits al resultat de l\'etiqueta #INTRODUCTION si el text &eacute;s massa llarg s&oacute;n: <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Aqu&iacute; podeu precisar la vostra pr&ograve;pia cadena de car&agrave;cters que indiqui al lector que el text truncat t&eacute; una continuaci&oacute;.
+@puce@ Per defecte, els punts de continuaci&oacute; afegits al resultat de l\'etiqueta #INTRODUCTION si el text &eacute;s massa llarg s&oacute;n: <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Aqu&iacute; podeu precisar la vostra pr&ograve;pia cadena de car&agrave;cters que indiqui al lector que el text tallat t&eacute; una continuaci&oacute;.
 [[%suite_introduction%]]
-@puce@ Si l\'etiqueta #INTRODUCTION es fa servir per resumir un article, llavors el Ganivet Su&iacute;s pot fabricar un enlla&ccedil; al damunt dels punts de continuaci&oacute; definits m&eacute;s amunt per tal de conduir al lector cap al text original. Per exemple: &laquo;Llegir la continuaci&oacute; de l\'article…&raquo;
+@puce@ Si l\'etiqueta #INTRODUCTION es fa servir per resumir un article, llavors el Ganivet Su&iacute;s pot fabricar un enlla&ccedil; al damunt dels punts de continuaci&oacute; definits m&eacute;s amunt per tal portar al lector cap al text original. Per exemple: &laquo;Llegir la continuaci&oacute; de l\'article…&raquo;
 [[%lien_introduction%]]
 ',
 	'introduction:nom' => 'Etiqueta #INTRODUCTION',

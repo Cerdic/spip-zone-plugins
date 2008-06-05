@@ -62,11 +62,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'categ:admin' => '1. Administraci&oacute;n',
-	'categ:divers' => '6. Varios',
-	'categ:public' => '4. Exposici&oacute;n p&uacute;blica',
-	'categ:spip' => '5. Balizas, filtros, criterios',
-	'categ:typo-corr' => '2. Melloramento de textos',
-	'categ:typo-racc' => '3. Atallos tipogr&aacute;ficos',
+	'categ:divers' => '<MODIF>6. Varios',
+	'categ:public' => '<MODIF>4. Exposici&oacute;n p&uacute;blica',
+	'categ:spip' => '<MODIF>5. Balizas, filtros, criterios',
+	'categ:typo-corr' => '<MODIF>2. Melloramento de textos',
+	'categ:typo-racc' => '<MODIF>3. Atallos tipogr&aacute;ficos',
 	'certaines_couleurs' => 'S&oacute; as balizas definidas aqu&iacute; abaixo ci-dessous@_CS_ASTER@ :',
 	'chatons:aide' => 'Chatons : @liste@',
 	'chatons:description' => 'Introduce imaxes(ou chatons para que moito andan cos {tchats}) en todos os textos ou aparece unha cadea do tipo <code>:nom</code>.
@@ -168,7 +168,7 @@ Aviso : alg&uacute;nhas ferramentas de A Navalla Su&iacute;za necesitan as funci
 	'filets_sep:description' => 'Insire filetes de separaci&oacute;n, personalizables mediante as follas de estilo, en todos os textos de SPIP.
 _ A sintaxe &eacute; : "__code__", ou "code" representa ben o n&uacute;mero de identificaci&oacute;n (de 0 &agrave; 7) do filete inserible en relaci&oacute;n directa cos estilos correspondentes, ben o nome dunha imaxe situada no cartafol plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Filetes de separaci&oacute;n',
-	'filtrer_javascript:description' => 'Para xerar o javascript nos artigos, tres modos son dispo&ntilde;&iacute;beis :
+	'filtrer_javascript:description' => '<MODIF>Para xerar o javascript nos artigos, tres modos son dispo&ntilde;&iacute;beis :
 - <i>nunca</i> : o javascript &eacute; rexeitado en todas partes
 - <i>predeterminadot</i> : o javascript m&aacute;rcase en vermellos na zona privad
 - <i>sempre</i> : o javascript &eacute; aceptado por todas as partes.
@@ -206,9 +206,9 @@ _ • [De todo o m&oacute;dulo->@reset@]
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'AVISO : ferramenta en proceso de desenvolvemento !! [[%insertions%]]',
 	'insertions:nom' => 'Correcci&oacute;ns autom&aacute;ticas',
-	'introduction:description' => '<MODIF>Esta baliza para situar nos esqueletos serve en xeral para placer dans les squelettes sert en g&eacute;n&eacute;ral para actualizaci&oacute;n (&agrave; la une) ou nas secci&oacute;ns co fin de producir un resumo de artigos, de breves, etc..</p>
-<p>{{Aviso}} : Antes de activar esta funcionalidade, comprobe ben que ningunha funci&oacute;n {balise_INTRODUCTION()} exista xano seu esqueleto ou nos seus m&oacute;dulos, a sobrecarga producir&iacute;a un erro de compilaci&oacute;n.</p>
-@puce@ Pode precisar (en porcentaxe en relaci&oacute;n co valor usado de modo predeterminado) a largura do texto reeenviado pola baliza #INTRODUCTION. Une valeur nulo ou igual a 100 non modifica o aspecto da introduci&oacute;n e usa daquela os valores predeterminados seguintes : 500 caracteres para os artigos, 300 para as breves e 600 para os foros ou as secci&oacute;ns.
+	'introduction:description' => 'Esta baliza situable nos esqueletos serve xeralmente para unha &uacute;ltima hora ou nas secci&oacute;ns co fin de producir un resumo de artigos, de breves, etc..</p>
+<p>{{Aviso}} : Antes de activar esta funcionalidade, comprobe ben que ningunha funci&oacute;n {balise_INTRODUCTION()} exista xa no seu esqueleto ou nos m&oacute;dulos, a sobrecarga producir&iacute;a un erro de compilaci&oacute;n.</p>
+@puce@ Pode precisar (porcentualmente en relaci&oacute;n co valor usado de modo predeterminado) a lonxitude do texto reeenviado pola baliza #INTRODUCTION. Un valor nulo ou igual a 100 non modifica o aspecto da introduci&oacute;n e usa daquela os valores predeterminados seguintes : 500 caracteres para os artigos, 300 para as breves e 600 para os foros ou as secci&oacute;ns.
 [[%lgr_introduction%&nbsp;%]]
 @puce@ De modo predeterminado, os puntos suspensivos engadidos ao resultado da baliza #INTRODUCTION se o texto &eacute; demasiado longo son : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Pode precisar aqu&iacute; a s&uacute;a propia cadea de caracteres que indiquen ao lector que o texto truncado ten unha continuidade.
 [[%suite_introduction%]]
