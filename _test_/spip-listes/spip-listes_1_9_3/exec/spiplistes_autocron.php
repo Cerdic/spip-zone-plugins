@@ -20,11 +20,15 @@ function exec_spiplistes_autocron () {
 
 	spiplistes_log("exec_autocron() <<", _SPIPLISTES_LOG_DEBUG); 	
 
-	$sql_result = spip_query("SELECT id_courrier,total_abonnes,nb_emails_envoyes FROM spip_courriers WHERE statut='"._SPIPLISTES_STATUT_ENCOURS."' LIMIT 1");
+	$sql_result = sql_select(
+		"id_courrier,total_abonnes,nb_emails_envoyes"
+		, 'spip_courriers'
+		, "statut=".sql_quote(_SPIPLISTES_STATUT_ENCOURS), '', '', 1
+	);
 
 	if(sql_count($sql_result) > 0 ){
 
-		$row = spip_fetch_array($sql_result);	
+		$row = sql_fetch($sql_result);	
 
 		// Compter le nombre de mails a envoyer
 		

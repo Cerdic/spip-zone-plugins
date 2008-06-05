@@ -336,7 +336,7 @@ function spiplistes_afficher_auteurs (
 			//
 			// #1: statut auteur (icone)
 			. "<td>"
-			. bonhomme_statut($row)
+			. spiplistes_bonhomme_statut($row)
 			. "</td>\n"
 			//
 			// #2: nom
@@ -469,6 +469,16 @@ function spiplistes_afficher_auteurs (
 	return($result);
 }
 
+// Lorsqu'appelé par ?action, perd la position
+// corrige le lien relatif
+function spiplistes_bonhomme_statut ($row) {
+	$result = bonhomme_statut($row);
+	if(preg_match(",^<img src='dist/images,", $result)) {
+		$result = preg_replace(",^<img src='dist/images,", "<img src='../dist/images", $result);
+	}
+	spiplistes_log("#:".$result);
+	return($result);
+}
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
