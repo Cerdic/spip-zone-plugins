@@ -128,9 +128,12 @@ function spiplistes_listes_selectionner_elligibles ($non_abonnes, $nb_non_abonne
 			, '6forum' => _T('info_visiteurs')
 			, '6visiteur' => _T('info_visiteurs')
 		);
+		// si un seul, activer plutot la sélection par la souris 
+		// onchange n'est pas transmis si un seul 'option'
+		$onevent = ($nb_non_abonnes == 1) ? "onmousedown" : "onchange";
 		$select_abo = ""
 			. "<span class='verdana1'>"._T('spiplistes:abon_ajouter')."</span>\n"
-			. "<select name='select_abo' size='1' class='fondl' style='width:150px;' onchange=\"$js\">\n";
+			. "<select name='select_abo' size='1' class='fondl' style='width:150px;' $onevent=\"$js\">\n";
 		foreach($non_abonnes as $key => $values) {
 			$select_abo .= "<optgroup label=\"".$t_statut[$key]."\" style='background-color: $couleur_claire;'>\n";
 			foreach($values as $id => $nom) {
@@ -162,7 +165,7 @@ function spiplistes_listes_selectionner_elligibles ($non_abonnes, $nb_non_abonne
 	return(
 		  "<!-- form listes select elligibles -->\n"
 		. "<form style='margin:0px; border:0px' action='$action' method='post'>\n"
-		. "<div id='boite_selection_elligibles'>\n"
+		. "<div id='boite_selection_elligibles' style='padding:0;margin:0.5em 0 0'>\n"
 		. $select_abo
 		. "<span><input type='submit' value='Ajouter' "
 			. " onclick=\"return AjaxSqueeze(this.form, 'grosse_boite_abonnements', '$retour', event)\" "

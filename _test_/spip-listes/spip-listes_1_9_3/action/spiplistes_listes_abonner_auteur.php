@@ -19,11 +19,12 @@ function action_spiplistes_listes_abonner_auteur_dist () {
 	$action = _request('action');
 	$tri = urldecode(_request('tri'));
 	$redirect = urldecode(_request('redirect'));
-	
+
 	if(($id_liste > 0) && ($id_auteur > 0)) {
+		$statut_liste = sql_getfetsel('statut', 'spip_listes', "id_liste=".sql_quote($id_liste), '', '', 1);
 		include_spip('inc/spiplistes_listes_selectionner_auteur');
 		spiplistes_abonnements_ajouter ($id_auteur, $id_liste);
-		echo(spiplistes_listes_boite_abonnements($id_liste, 'liste', $tri, $debut, $redirect));
+		echo(spiplistes_listes_boite_abonnements($id_liste, $statut_liste, $tri, $debut, $redirect));
 	}
 	exit(0);
 } //

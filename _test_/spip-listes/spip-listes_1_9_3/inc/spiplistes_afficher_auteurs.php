@@ -476,7 +476,6 @@ function spiplistes_bonhomme_statut ($row) {
 	if(preg_match(",^<img src='dist/images,", $result)) {
 		$result = preg_replace(",^<img src='dist/images,", "<img src='../dist/images", $result);
 	}
-	spiplistes_log("#:".$result);
 	return($result);
 }
 
