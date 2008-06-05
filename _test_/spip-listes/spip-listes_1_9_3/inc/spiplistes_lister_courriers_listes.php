@@ -62,11 +62,11 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 	// requete
 	// construction de la requête SQL
 	// sera (en partie) utilisée plus bas pour compter et pagination
-	switch($element) {
+	switch($element) { 
 		case 'abonnements':
-			$sql_select = "listes.id_liste,listes.titre,listes.statut,listes.date,lien.id_auteur";
-			$sql_from = "spip_auteurs_listes AS lien LEFT JOIN spip_listes AS listes ON lien.id_liste=listes.id_liste";
-			$sql_where = "lien.id_auteur=$id_auteur AND (listes.statut='"._SPIPLISTES_PRIVATE_LIST."' OR listes.statut='"._SPIPLISTES_PUBLIC_LIST."')";
+			$sql_select = "listes.id_liste,listes.titre,listes.statut,listes.date,abos.id_auteur";
+			$sql_from = "spip_auteurs_listes AS abos LEFT JOIN spip_listes AS listes ON abos.id_liste=listes.id_liste";
+			$sql_where = "abos.id_auteur=".sql_quote($id_auteur);
 			$sql_order = "listes.titre";
 			break;
 		case 'courriers':
@@ -111,7 +111,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 			. "<table width='100%' cellpadding='2' cellspacing='0' border='0'>\n"
 			;
 		
-		while ($row = spip_fetch_array($resultat_aff)) {
+		while ($row = sql_fetch($resultat_aff)) {
 		
 			$titre = $row['titre'];
 			$date = $row['date'];

@@ -241,7 +241,6 @@ function exec_spiplistes_abonne_edit () {
 		//
 		. "<br />\n"
 		// Liste des abonnements
-		// CP-20080504 : bug ! la liste n'apparait pas. A revoir.
 		. spiplistes_lister_courriers_listes(
 			_T('spiplistes:abonne_listes')
 			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'

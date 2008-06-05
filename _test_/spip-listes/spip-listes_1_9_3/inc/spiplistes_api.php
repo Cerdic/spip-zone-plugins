@@ -132,8 +132,7 @@ function spiplistes_abonnements_ajouter ($id_auteur, $id_liste) {
 			$nb_listes++;
 		}
 	}
-	spiplistes_log("API: listes_abonner id_auteur #$id_auteur to $nb_listes liste(s) "
-		.spiplistes_str_ok_error($result), _SPIPLISTES_LOG_DEBUG);
+	spiplistes_log("API: listes_abonner id_auteur #$id_auteur to $nb_listes liste(s) ", _SPIPLISTES_LOG_DEBUG);
 	return($result);
 }
 
@@ -148,7 +147,7 @@ function spiplistes_abonnements_desabonner_statut ($id_auteur, $listes_statuts) 
 			$listes[] = intval($row['id_liste']);
 		}
 		if(count($listes)) {
-			$sql_where = " id_auteur=".sql_quote($id_auteur)." AND (id_liste=" . implode(" OR id_liste=", $listes) . ")";
+			$sql_where = " id_auteur=".sql_quote($id_auteur)." AND id_liste IN (" . implode(",", $listes) . ")";
 			sql_delete("spip_auteurs_listes", $sql_where);
 		}
 		return(spiplistes_format_abo_modifier($id_auteur));
