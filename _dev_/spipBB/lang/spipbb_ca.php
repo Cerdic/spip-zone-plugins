@@ -297,6 +297,7 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'maintenance' => 'Manteniment',
 	'maintenance_fermer' => 'ha tancat l\'article/f&ograve;rum :',
 	'maintenance_pour' => 'per MANTENIMENT.',
+	'membres_en_ligne' => 'membres en l&iacute;nia',
 	'membres_inscrits' => 'membres inscrits',
 	'membres_les_plus_actifs' => 'Membres m&eacute;s actius',
 	'message' => 'Missatge',
