@@ -29,6 +29,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&aacute;xina @page@ : @title@',
 	'page_precedente' => 'P&aacute;xina anterior',
 	'page_suivante' => 'P&aacute;xina seguinte',
+	'plugin_xml' => 'Re&uacute;ne nun s&oacute; m&oacute;dulo unha lista de pequenas funcionalidades novas e &uacute;tiles que melloran a xesti&oacute;n do seu web SPIP.
+
+Cada unha destas ferramentas pode ser activada ou non polo usuario en  [p&aacute;xina de administraci&oacute;n do m&oacute;dulo->./?exec=admin_couteau_suisse] e xestionar un certo n&uacute;mero de variables : Premer en {{Configuraci&oacute;n}}, logo escoller a pestana {{A Navalla Su&iacute;za}}.
+
+As categor&iacute;as dispo&ntilde;ibles son : administraci&oacute;n, melloras tipogr&aacute;ficas, atallos tipogr&aacute;ficos, presentaci&oacute;n p&uacute;blica, balizas, filtros, criterios.
+
+Descubra neste m&oacute;dulos as s&uacute;as ferramentas favoritas : {Super&iacute;ndices  tipogr&aacute;ficos}, {V&iacute;rgulas tipogr&aacute;ficas}, {Vi&ntilde;etas fermosas}, {Un sumario para os seus artigos}, {Riso&ntilde;os}, {Suprimir o n&uacute;mero}, {URL fermosos}, {SPIP e as ligaz&oacute;ns... externas}, {Ning&uacute;n foro an&oacute;nimo}, {Partir en p&aacute;xinas e pestanas}, etc., etc.
+
+Non dubide en consultar os artigos de documentaci&oacute;n do m&oacute;dulo publicados en  : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+
+Compatibilidade : SPIP todas as versi&oacute;ns 1.9x',
 
 	// S
 	'smileys_dispos' => 'Cari&ntilde;as (emoticon) dispo&ntilde;ibles :',

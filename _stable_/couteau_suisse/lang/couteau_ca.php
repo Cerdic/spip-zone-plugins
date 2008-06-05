@@ -29,6 +29,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&agrave;gina @page@ : @title@',
 	'page_precedente' => 'P&agrave;gina enrere',
 	'page_suivante' => 'P&aacute;gina endavant',
+	'plugin_xml' => 'Reuneix en un sol plugin una llista de petites noves funcionalitats i utilitats que milloren la gesti&oacute; del vostre lloc SPIP.
+
+L\'usuari pot activar, o no, cadascuna d\'aquestes utilitats [la p&agrave;gina d\'administraci&oacute; del plugin->./?exec=admin_couteau_suisse] i gestoinar un cert nombre de variables: fer un clic a {{Configuraci&oacute;}}, despr&eacute;s escollir la pestanya {{El Ganivet Su&iacute;s}}.
+
+Les categories disponibles s&oacute;n: Administraci&oacute;, Millores tipogr&agrave;fiques, Dreceres tipogr&agrave;fiques, Presentaci&oacute; p&uacute;blica, Etiquetes, Filtres, Criteris.
+
+Descobriu en aquest plugin les vostres utilitats favorites: {Expositors tipogr&agrave;fics}, {Cometes tipogr&agrave;fiques}, {Bonics s&iacute;mbols}, {Un sumari pels vostres articles}, {Emoticones}, {Suprimir el n&uacute;mero}, {Bonics URLs}, {SPIP i els enlla&ccedil;os... externs}, {No F&ograve;rums an&ograve;mins}, {Divisi&oacute; en p&agrave;gines i pestanyes}, etc., etc.
+
+No dubteu a consultar els articles de la documentaci&oacute; del plugin publicats a: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+
+Compatibilitat: SPIP totes les versions 1.9x',
 
 	// S
 	'smileys_dispos' => 'Cares atractives disponibles:',
@@ -36,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sommaire_page_long' => ',&nbsp;p&agrave;gina&nbsp;@page@',
 	'sommaire_titre' => 'Sumari',
 	'stats_auteur' => '@icon@ @nom@, el&nbsp;@date@',
-	'stats_date' => '@jour@/@mois@/@annee@&nbsp;&agrave;&nbsp;@h@h@m@',
+	'stats_date' => '@jour@/@mois@/@annee@&nbsp;a&nbsp;@h@h@m@',
 
 	// T
 	'texte_formatspip' => 'TEXT ORIGINAL EN FORMAT SPIP',
