@@ -52,6 +52,11 @@
 					spip_query("INSERT INTO `spip_types_documents` ( `id_type` , `titre` , `descriptif` , `extension` , `mime_type` , `inclus` , `upload` , `maj` )    VALUES ('', 'Google Earth Placemark', '', 'kml', 'application/vnd.google-earth.kml+xml', 'non', 'oui', NOW( ));");
 				ecrire_meta($nom_meta_base_version,$current_version="0.1.4");
 			}
+			if (version_compare($current_version,"0.1.5","<")){
+				spip_query("ALTER TABLE spip_gis ADD id_rubrique int(11) NULL NULL AFTER id_article");
+				spip_query("ALTER TABLE spip_gis ADD INDEX ( id_rubrique )");
+				ecrire_meta($nom_meta_base_version,$current_version="0.1.5");
+			}
 			ecrire_metas();
 		}
 	}

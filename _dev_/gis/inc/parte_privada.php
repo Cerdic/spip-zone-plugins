@@ -10,15 +10,16 @@
  */
 include_spip('base/abstract_sql');
  
-function gis_cambiar_coord($id_article) {
+function gis_cambiar_coord($id,$table,$exec) {
 	global $spip_lang_left, $spip_lang_right;
-	$id_article = _request(id_article);
+	
+	$pkey = id_table_objet($table);
 	
 	$glat = NULL;
 	$glonx = NULL;
 	$gicon = NULL;
 	$mapa = "";
-	$result= spip_query("SELECT * FROM spip_gis WHERE id_article = " . intval($id_article));
+	$result= spip_query("SELECT * FROM spip_gis WHERE $pkey = " . intval($id));
 	if ($row = spip_fetch_array($result)){
 		$glat = $row['lat'];
 		$glonx = $row['lonx'];
@@ -27,12 +28,12 @@ function gis_cambiar_coord($id_article) {
 		$glat = _request('lat');
 		$glonx = _request('lonx');
 		if (!$row)
-			spip_abstract_insert("spip_gis", "(id_article, lat, lonx)", "(" . _q($id_article) .","._q($glat)." ,"._q($glonx).")");
+			spip_abstract_insert("spip_gis", "($pkey, lat, lonx)", "(" . _q($id) .","._q($glat)." ,"._q($glonx).")");
 		else
-			spip_query("UPDATE spip_gis SET lat="._q($glat).", lonx="._q($glonx)."  WHERE id_article = " . _q($id_article));
+			spip_query("UPDATE spip_gis SET lat="._q($glat).", lonx="._q($glonx)."  WHERE $pkey = " . _q($id));
 	}
 	if ($glat!==NULL){
-		$resultMots = spip_query("SELECT * FROM spip_mots_articles WHERE id_article = ".intval($id_article));
+		$resultMots = spip_query("SELECT * FROM spip_mots_$table WHERE $pkey = ".intval($id));
 		while ($rowMot = spip_fetch_array($resultMots)) {
 			$resultMotIcon = spip_query("SELECT * FROM spip_mots WHERE type ='marker_icon' AND id_mot=".$rowMot['id_mot']);
 			if ($rowMotIcon = spip_fetch_array($resultMotIcon)){
@@ -70,7 +71,7 @@ function gis_cambiar_coord($id_article) {
 	. $gis_append_clicable_map('formMap','form_lat','form_long',$glat,$glonx,NULL,NULL,$row?true:false);
 	
 	// Formulario para actualizar as coordenadas do mapa______________________.
-	$s .= '<form id="formulaire_coordenadas" name="formulaire_coordenadas" action="'.generer_url_ecrire(articles."&id_article=".$id_article).'" method="post">
+	$s .= '<form id="formulaire_coordenadas" name="formulaire_coordenadas" action="'.generer_url_ecrire($exec,"&$pkey=".$id).'" method="post">
 		<input type="text" name="lat" id="form_lat" value="'.$glat.'" />
 		<input type="text" name="lonx" id="form_long" value="'.$glonx.'" />
 		<input type="submit" name="actualizar" value="'._T("gis:boton_actualizar").'" />
@@ -80,7 +81,7 @@ function gis_cambiar_coord($id_article) {
 	$s .= fin_block();
 	$s .= fin_block();
 	$s .= fin_cadre(true);
-	$s .= "\n<p>";
+	$s .= "\n</p>";
 	return $s;
 }
 /*
@@ -92,7 +93,6 @@ function gis_mot_groupe($id_groupe){
 }*/
 function gis_mots($id_mot) {
 	global $spip_lang_left, $spip_lang_right;
-	$id_mot = _request(id_mot);
 	
 	$glat = NULL;
 	$glonx = NULL;
@@ -109,7 +109,7 @@ function gis_mots($id_mot) {
 		else
 			spip_query("UPDATE spip_gis_mots SET lat="._q($glat).", lonx="._q($glonx)."  WHERE id_mot = " . _q($id_mot));
 	}
-	$s .= "\n<p>";
+	//$s .= "\n<p>";
 	$s .= debut_cadre('r', _DIR_PLUGIN_GIS."img_pack/correxir.png");
 	$s .= bouton_block_invisible("ajouter_form");
 	$s .= "&nbsp;&nbsp;&nbsp;<strong class='verdana3' style='text-transform: uppercase;'>"
@@ -129,17 +129,17 @@ function gis_mots($id_mot) {
 	. $gis_append_mini_map('formMap','form_lat','form_long',$glat,$glonx,NULL,NULL,$row?true:false);
 	
 	// Formulario para actualizar as coordenadas do mapa______________________.
-	$s .= '<form id="formulaire_coordenadas" name="formulaire_coordenadas" action="'.generer_url_ecrire(mots_edit."&id_mot=".$id_mot).'" method="post">
+	$s .= '<form id="formulaire_coordenadas" name="formulaire_coordenadas" action="'.generer_url_ecrire("mots_edit","&id_mot=".$id_mot).'" method="post">
 		<input type="text" name="lat" id="form_lat" value="'.$glat.'" />
 		<input type="text" name="lonx" id="form_long" value="'.$glonx.'" />
 		<input type="submit" name="actualizar" value="'._T("gis:boton_actualizar").'" />
 		</form>
 		</div>';
-	$s .= debut_block_visible("ajouter_form");
+	//$s .= debut_block_visible("ajouter_form");
 	$s .= fin_block();
 	$s .= fin_block();
 	$s .= fin_cadre(true);
-	$s .= "\n<p>";
+	//$s .= "\n</p>";
 	return $s;
 }
  

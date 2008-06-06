@@ -16,16 +16,19 @@ global $tables_auxiliaires;
 $spip_gis = array(
 	"id_gis" 	=> "bigint(21) NOT NULL",
 	"id_article" => "int(11) NULL NULL",
+	"id_rubrique" => "int(11) NULL NULL",
 	"lat" => "float(21)  NULL NULL",
 	"lonx" => "float(21)  NULL NULL"
 	);
 	
 $spip_gis_key = array(
 	"PRIMARY KEY" => "id_gis",
-	"KEY id_article" => "id_article"
+	"KEY id_article" => "id_article",
+	"KEY id_rubrique" => "id_rubrique"
 	);
 $spip_gis_join = array(
-	"id_article"=>"id_article"
+	"id_article"=>"id_article",
+	"id_rubrique"=>"id_rubrique",
 	);
 
 $tables_principales['spip_gis'] = array(
@@ -71,6 +74,8 @@ $table_des_tables['gis_mots']='gis_mots';
 global $tables_jointures;
 $tables_jointures['spip_articles'][]= 'gis';
 $tables_jointures['spip_gis'][] = 'articles';
+$tables_jointures['spip_rubriques'][]= 'gis';
+$tables_jointures['spip_gis'][] = 'rubriques';
 $tables_jointures['spip_mots'][]= 'gis_mots';
 $tables_jointures['spip_gis_mots'][] = 'mots';
 ?>
