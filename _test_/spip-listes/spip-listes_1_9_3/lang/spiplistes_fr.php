@@ -90,6 +90,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'abonne_sans_format' => "Ce compte est actuellement d&eacute;sabonn&eacute;. Aucun format de courrier n'est 
 	d&eacute;fini. Il ne peut pas recevoir de courrier. D&eacute;finissez un format 
 	de r&eacute;ception pour ce compte afin de valider son abonnement."
+, 'msg_abonne_sans_format' => "format de reception manquant"
 
 //B
 

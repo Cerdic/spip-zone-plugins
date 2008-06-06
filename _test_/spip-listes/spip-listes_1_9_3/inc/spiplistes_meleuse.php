@@ -220,7 +220,7 @@ spiplistes_log("MEL: premiere etiquette en erreur. id_courier = 0. Supprimer cet
 		
 			$is_from_valide = email_valide($from);         
 		
-			////////////////////////////////////		  
+			////////////////////////////////////
 			// Prepare la version texte
 			$objet_texte = spiplistes_courrier_version_texte($objet_html);
 			$page_texte = ($message_texte !='') ? $message_texte : spiplistes_courrier_version_texte($page_html);
@@ -388,7 +388,7 @@ spiplistes_log("MEL: nb destinataires: $nb_destinataires", _SPIPLISTES_LOG_DEBUG
 							}
 						} else {  
 							$nb_emails_non_envoyes++; 
-							$str_temp .= " "._T('spiplistes:pas_abonne_en_ce_moment');
+							$str_temp .= " "._T('spiplistes:msg_abonne_sans_format');
 						} /* fin abo*/
 						spiplistes_log("MEL: ".$str_temp);
 					} // fin while

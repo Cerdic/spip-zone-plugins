@@ -446,6 +446,7 @@ function exec_spiplistes_courrier_gerer () {
 					;
 				break;
 			case _SPIPLISTES_STATUT_PUBLIE:
+			case _SPIPLISTES_STATUT_AUTO:
 				$str_statut_courrier = ""
 					. "<span>"
 					. "<strong>"._T('spiplistes:message_arch')."</strong></span>"
@@ -460,7 +461,7 @@ function exec_spiplistes_courrier_gerer () {
 					. " <ul>"
 					. "  <li>"._T('spiplistes:format_html').$nb_emails_html."</li>"
 					. "  <li>"._T('spiplistes:format_texte').$nb_emails_texte."</li>"
-					. "  <li>"._T('spiplistes:desabonnes').": ".$nb_emails_non_envoyes."</li>"
+					. "  <li>"._T('spiplistes:desabonnes')." : ".$nb_emails_non_envoyes."</li>"
 					. " </ul>"
 					. " <li>"._T('spiplistes:erreur_envoi').$nb_emails_echec."</li>"
 					. "</ul>"
