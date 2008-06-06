@@ -21,7 +21,7 @@
 	[(#REM) -------------------- Pour jw ----------------]
 			<title>[(#TITRE|supprimer_numero|propre|texte_backend|sinon{#FICHIER}|replace{'IMG/',''}|texte_backend)]</title>
 	[(#REM) -------------------- Pour musicplayer ----------------]
-			<annotation>[(#TITRE|supprimer_numero|propre|translitteration|propre|sinon{#FICHIER}|replace{'IMG/',''}|texte_backend)]</annotation>
+			<annotation>[(#TITRE|supprimer_numero|supprimer_tags|translitteration|propre|sinon{#FICHIER}|replace{'IMG/',''}|texte_backend)]</annotation>
 			[(#ENV{creator}|!={''}|?{' ',''})<creator>#ENV{creator}</creator>]
 		</track>
 	</BOUCLE_docs>
@@ -35,7 +35,7 @@
 	</trackList>
 	</B_docs>
 
-[(#REM) -------------------- Les deux boucles qui suivent sont en cours de developpement. Elles devraient a terme permettre de sortir la liste des documents associ�s � des articles ET � des rubriques par branche 
+[(#REM) -------------------- Les deux boucles qui suivent sont en cours de developpement. Elles devraient a terme permettre de sortir la liste des documents associés a des articles ET a des rubriques par branche 
 (c-a-d y compris dans l'ensemble des sous-rubriques contenue dans la rubrique selectionnee)
 Apparemment la piste engagee n'est pas bonne n'hesitez pas a modifier les lignes ci-dessous, cela n'affectera en rien le fonctionnement du plugin----------------]
 <B_rubsecteur>
