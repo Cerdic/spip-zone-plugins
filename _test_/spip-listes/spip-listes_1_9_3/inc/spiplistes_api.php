@@ -313,10 +313,32 @@ function spiplistes_listes_lister ($select = "*", $where = "") {
 
 
 // retourne nombre d'abonnes a une liste
-function spiplistes_listes_nb_abonnes_compter ($id_liste = 0) {
+// si $preciser, renvoie tableau total et formats
+function spiplistes_listes_nb_abonnes_compter ($id_liste = 0, $preciser = false) {
 	$id_liste = intval($id_liste);
 	$sql_whereq = (($id_liste > 0) ? "id_liste=".sql_quote($id_liste) : "");
-	return(spiplistes_sql_compter ("spip_auteurs_listes", $sql_whereq));
+	$total = spiplistes_sql_compter ("spip_auteurs_listes", $sql_whereq);
+	if($preciser) {
+		$selection = 
+			(spiplistes_spip_est_inferieur_193())
+			? "SELECT id_auteur FROM spip_auteurs_listes AS l WHERE $sql_whereq"
+			: sql_select("id_auteur", "spip_auteurs_listes", $sql_whereq,'','','','','',false)
+			;
+		$sql_result = sql_select(
+			"`spip_listes_format` AS f, COUNT(*) AS n"
+			, "spip_auteurs_elargis"
+			, "id_auteur IN (".$selection.")"
+			, "`spip_listes_format`");
+		$formats = array('html' => 0, 'texte' => 0);
+		$keys = array_keys($formats);
+		while($row = sql_fetch($sql_result)) {
+			if(in_array($row['f'], $keys)) {
+				$formats[$row['f']] += $row['n'];
+			}
+		}
+		return(array($total, $formats['html'], $formats['texte']));
+	}
+	return($total);
 }
 
 //CP-20080509: renvoie email emetteur d'une liste
@@ -582,9 +604,7 @@ function spiplistes_pied_de_page_liste($id_liste = 0, $lang = false) {
 		$lang = $GLOBALS['spip_lang'];
 	}
 	if(($id_liste = intval($id_liste)) > 0){
-		if($row = spip_fetch_array(spip_query("SELECT pied_page FROM spip_listes WHERE id_liste=$id_liste LIMIT 1"))) {
-			$result = $row['pied_page'];
-		}
+		$result = sql_getfetsel('pied_page', 'spip_listes', "id_liste=".sql_quote($id_liste), '','',1);
 	}
 	if(!$result) {
 		include_spip('public/assembler');

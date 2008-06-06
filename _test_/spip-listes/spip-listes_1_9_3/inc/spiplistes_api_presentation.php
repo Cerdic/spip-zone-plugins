@@ -731,11 +731,21 @@ function spiplistes_arbo_rubriques_sub ($rubriques_array, $id_parent = 0, $ran =
 
 // Nombre d'abonnes a une liste, chaine html
 function spiplistes_nb_abonnes_liste_str_get ($id_liste) {
-	$nb_abos = spiplistes_listes_nb_abonnes_compter($id_liste);
+	list($nb_abos, $html, $texte) = spiplistes_listes_nb_abonnes_compter($id_liste, true);
+	$absents = $nb_abos - ($html + $texte);
 	$result =
 		($nb_abos)
-		? "(" . spiplistes_singulier_pluriel_str_get($nb_abos, _T('spiplistes:nb_abonnes_sing'), _T('spiplistes:nb_abonnes_plur')) . ")"
-		: _T('spiplistes:sans_abonne')
+		? "(" 
+			. spiplistes_singulier_pluriel_str_get($nb_abos, _T('spiplistes:nb_abonnes_sing'), _T('spiplistes:nb_abonnes_plur')) 
+			.	(
+				$absents 
+				? " - " . _T('spiplistes:_dont_')
+					. spiplistes_singulier_pluriel_str_get($absents, _T('spiplistes:desabonne_sing')
+						, _T('spiplistes:desabonnes_plur'))
+				: ""
+				)
+			. ")"
+		: "("._T('spiplistes:sans_abonne').")"
 		;
 	return ($result);
 }

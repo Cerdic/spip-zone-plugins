@@ -336,7 +336,7 @@ function exec_spiplistes_liste_gerer () {
 		$titre_boite = _T('spiplistes:abos_cette_liste');
 		$nb = spiplistes_listes_nb_abonnes_compter($id_liste);
 		$legend = _T('spiplistes:nbre_abonnes').$nb;
-		//$bouton = bouton_block_depliable(_T('spiplistes:abos_cette_liste'), true, "abonnes_liste");
+		$legend = "<small>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</small>";
 		$grosse_boite_abonnements = ""
 			. "<!-- boite abonnes/elligibles -->\n"
 			. debut_cadre_enfonce("auteur-24.gif", true, "", $titre_boite)
@@ -732,33 +732,7 @@ function exec_spiplistes_liste_gerer () {
 		. fin_cadre_relief(true)
 		;
 	
-	//if(spiplistes_spip_est_inferieur_193()) {
-	if(false) {
-		// CP-20080519
-		// ce morceau fonctionne en 192, pas en 193
-		// si quelqu'un a une idée ?
-		$editer_auteurs = charger_fonction('editer_auteurs','inc');
-		
-		$page_result .= ""
-			//////////////////////////
-			// Liste des abonnes
-			// Appliquer les modifications sur les abonnes
-			. "<a name='auteurs'></a>"
-			. $editer_auteurs(
-				'liste'	// $type
-				, $id_liste // $id
-				, $flag_editable 
-				, _request('cherche_auteur') //$cherche_auteur
-				, _request('ids')	// $ids
-				, _T('spiplistes:abon') // titre de la boite
-				)
-			;
-	}
-	// CP-20080602
-	// en cours de construction pour SPIP svn
-	//else {
-		$page_result .= $grosse_boite_abonnements;
-	//}
+	$page_result .= $grosse_boite_abonnements;
 	
 	// le super-admin peut abonner en masse
 	if($connect_toutes_rubriques) {

@@ -155,8 +155,9 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'des_formats' => "des formats"
 , 'des_listes' => "des listes"
 , '_de_' => " de "
-, 'dans_jours' => 'dans',
-'definir_squel' => 'Choisir le mod&egrave;le de courrier &agrave; pr&eacute;visualiser',
+, 'dans_jours' => 'dans'
+, '_dont_' => " dont "
+, 'definir_squel' => 'Choisir le mod&egrave;le de courrier &agrave; pr&eacute;visualiser',
 'definir_squel_choix' => 'A la r&eacute;daction d\'un nouveau courrier, SPIP-Listes vous permet de charger un patron. En appuyant sur un bouton, vous chargez dans le corps du courrier le contenu d\'un des squelettes du repertoire <strong>/patrons</strong> (situ&eacute; &agrave; la racine de votre site Spip). <p><strong>Vous pouvez &eacute;diter et modifier ces squelettes selon vos go&ucirc;ts.</strong></p> <ul><li>Ces squelettes peuvent contenir du code HTML classique</li>
 	<li>Ce squelette peut contenir des boucles Spip</li>
 	<li>Apr&egrave;s le chargement du patron, vous pourrez re-&eacute;diter le courrier avant envoi (pour ajouter du texte)</li>
@@ -178,6 +179,8 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Desabonner_definitif' => "D&eacute;sabonner ce compte de toutes les listes de diffusion.",
 'Desabonner' => "D&eacute;sabonner"
 , 'dupliquer_ce_courrier' => "Dupliquer ce courrier"
+, 'desabonne_sing' => ' d&eacute;sabonn&eacute;'
+, 'desabonnes_plur' => ' d&eacute;sabonn&eacute;s'
 
 //E
 , 'email' => 'E-mail',
@@ -423,8 +426,9 @@ liste.",
 'Selectionnez_une_liste_de_destination' => "S&eacute;lectionnez une ou plusieurs listes de destination pour vos abonn&eacute;s.",
 'Stoppes' => "Stopp&eacute;s",
 'Sans_destinataire' => "Sans destinataire",
-'Sans_abonnement' => "Sans abonnement",
-'Supprimer_ce_contact' => "Supprimer ce contact",
+'Sans_abonnement' => "Sans abonnement"
+, 'sans_abonne' => "sans abonn&eacute;"
+, 'Supprimer_ce_contact' => "Supprimer ce contact",
 'Suppression_de' => "Suppression de"
 , 'suppression_' => "Suppression @objet@"
 , 'suppression_chronos_' => "Supprimer les envois programm&eacute;s (chrono) "
