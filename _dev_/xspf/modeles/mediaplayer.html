@@ -13,20 +13,20 @@
 	avec la participation de kent1, cy_altern, marcimat, renato et toggg.
 	
 Plusieurs methodes d'insertion :
-	M�thode classique <template><mediaplayer123></template> ou 123 est l'id article fournissant les documents attaches
-	M�thode par rubrique (on prend les videos parmis les documents de la rubrique) :
+	Methode classique <template><mediaplayer123></template> ou 123 est l'id article fournissant les documents attaches
+	Methode par rubrique (on prend les videos parmis les documents de la rubrique) :
 	<template><mediaplayer|rubrique=123></template>
-	M�thode par secteur (on prend les videos parmis les documents du secteur) :
+	Methode par secteur (on prend les videos parmis les documents du secteur) :
 	<template><mediaplayer|secteur=123></template>
-	M�thode par document unique (on prend un seul document) :
+	Methode par document unique (on prend un seul document) :
 	<template><mediaplayer|document=123></template>
 	
 	Pour les options, voir http://www.jeroenwijering.com/extras/readme.html
 	- type : texte,'flv,swf,mp3,jpg,png,gif'	Types de fichiers a prendre en compte
 	- width : px|%,320		Largeur de l'animation flash
 	- height : px|%,240		Hauteur de l'animation flash
-	- displaywidth : px|%,width		Largeur de la zone d'affichage du contenu (photo, logo, vid�o) dans l'animation 
-	- displayheight : px|%,height		Hauteur de la zone d'affichage du contenu (photo, logo, vid�o) dans l'animation (La diff�rence entre la hauteur de l'animation et la hauteur de la zone de contenu est la place disponible pour la playlist)
+	- displaywidth : px|%,width		Largeur de la zone d'affichage du contenu (photo, logo, video) dans l'animation 
+	- displayheight : px|%,height		Hauteur de la zone d'affichage du contenu (photo, logo, video) dans l'animation (La difference entre la hauteur de l'animation et la hauteur de la zone de contenu est la place disponible pour la playlist)
 	- overstretch : true|false|fit|none,none
 	- shuffle : true|false,false
 	- repeat : true|false|list,false
@@ -144,7 +144,7 @@ Plusieurs methodes d'insertion :
 
 <script type="text/javascript">
 // <![CDATA[
-	var s_[(#ENV{id})]_[(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/mediaplayer-3-14/mediaplayer.swf}","mediaplayer","#GET{width}","#GET{height}","7");
+	var s_[(#ENV{id})]_[(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/mediaplayer-3-16/mediaplayer.swf}","mediaplayer","#GET{width}","#GET{height}","7");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("allowfullscreen","#GET{allowfullscreen}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("wmode","#GET{wmode}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|url_absolue|parametre_url{type,#GET{type},'&'}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
