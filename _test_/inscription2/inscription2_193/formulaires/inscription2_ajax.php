@@ -22,7 +22,7 @@ function formulaires_inscription2_ajax_charger_dist($id_auteur = NULL){
 
     //si on a bien un auteur alors on préremplit le formulaire avec ses informations
     //les nom des champs sont les memes que ceux de la base de données
-    if ($id_auteur) {
+    if (is_numeric($id_auteur)) {
         $auteur = sql_fetsel(
             'nom,email,login'
             .',prenom,nom_famille,sexe,societe,secteur,fonction,adresse_pro,code_postal_pro,ville_pro,pays_pro,telephone_pro,fax_pro,mobile_pro',
@@ -63,13 +63,12 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
     }
     
     //vérifier que l'auteur a bien des droits d'édition
-    if ($id_auteur) {
+    if (is_numeric($id_auteur)) {
         include_spip('inc/autoriser');
-        spip_log("autoriser : ".$id_auteur,'inscription2');
         if (!autoriser('modifier','auteur',$id_auteur)) {
             $erreurs['message_erreur'] .= "Desolé vous n'avez pas le droit de modifier cet auteur<br/>";
         }
-    }    
+    }
     //vérifier certains champs spécifiquement
    
     //message d'erreur genéralisé
@@ -115,7 +114,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
     $val = array_intersect_key($valeurs,$clefs);
                 
     //inserer les données dans spip_auteurs -- si $id_auteur mise à jour autrement nouvelle entrée
-    if ($id_auteur) {
+    if (is_numeric($id_auteur)) {
         $where = 'id_auteur = '.$id_auteur;
         sql_updateq(
             $table,
@@ -123,6 +122,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
             $where
         );
     } else {
+        $val['statut'] = lire_config('inscription2/statut_nouveau');
         $id_auteur = sql_insertq(
             $table,
             $val
@@ -151,6 +151,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
             $where      
         );
     } else {
+        $val['id_auteur'] = $id_auteur;
         $id_auteur = sql_insertq(
             $table,
             $val
@@ -160,6 +161,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
     if ($id_elargi) {    
         $message = "Les modifications de votre profil ont bien été prises en compte";
     } else {
+        envoyer_inscription2($id_auteur);
         $message = "Votre inscription a bien été pris en compte. Vous allez recevoir par courrier electronique vos identifiants de connexion.";
     }
 
