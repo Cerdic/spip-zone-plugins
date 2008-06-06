@@ -6,7 +6,7 @@
 	include_spip('base/abstract_sql');
 	
 	//verifier qu'on a bien cfg
-	if(!function_exists('lire_config')) return;
+	if(!function_exists('lire_config')) die("Installez cfg voyons !");
 	
 	#define('_SIGNALER_ECHOS', false); // horrible
 	
@@ -101,7 +101,7 @@ function revision_auteurs_elargi_dist($id, $c=false) {
 //email envoye lors de l'inscription
 
 function envoyer_inscription2($id_auteur,$mode="inscription") {
-	include_spip('inc/mail');
+    include_spip('inc/envoyer_mail');
 	
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
@@ -113,6 +113,8 @@ function envoyer_inscription2($id_auteur,$mode="inscription") {
         "spip_auteurs AS a LEFT JOIN spip_auteurs_elargis AS b USING(id_auteur)",
         "a.id_auteur =$id_auteur"
     );
+
+    spip_log($var_user,'inscription2');
 
 	if($var_user['alea_actuel']==''){ 
  		$var_user['alea_actuel'] = rand(1,99999); 
