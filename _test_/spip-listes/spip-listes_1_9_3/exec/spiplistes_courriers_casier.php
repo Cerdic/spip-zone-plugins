@@ -47,7 +47,7 @@ function spiplistes_afficher_pile_messages() {
 	}
 	
 	$pile_result = ""
-		. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_timer.gif', true, ''
+		. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_timer.gif', true, ''
 			, _T('spiplistes:Messages_automatiques').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "casier_courriers"))
 		. "\n"
 		. "<table class='spiplistes-tab' width='100%'  border='0' cellspacing='1' cellpadding='0'>\n" 
@@ -58,7 +58,7 @@ function spiplistes_afficher_pile_messages() {
 		. "</tr>\n"
 		;
 
-	while($row = spip_fetch_array($list)) {
+	while($row = sql_fetch($list)) {
 		foreach(explode(",", $sql_select) as $key) {
 			$$key = $row[$key];
 		}
@@ -88,6 +88,7 @@ function spiplistes_afficher_pile_messages() {
 				$periodicite = _T('spiplistes:envoi_manuel');
 		}
 	
+		$ii = 0;
 		$pile_result .= ""
 			. "<tr " . (($ii++ % 2) ? "class='row-even'" : "") . ">\n"
 			. "<td><a href='" . generer_url_public('patron_switch',"patron=$patron&date=$date_dernier")."'>$patron</a>"

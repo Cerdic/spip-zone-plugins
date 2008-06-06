@@ -75,7 +75,8 @@ function exec_spiplistes_courrier_gerer () {
 		$$key = trim($$key);
 	}
 			
-	$page_result = $message_erreur = $str_destinataire = "";
+	$page_result = $message_erreur = $str_destinataire =
+		$boite_confirme_envoi = "";
 
 	// l'edition du courrier est reservee...
 	$flag_editable = (
@@ -367,24 +368,34 @@ function exec_spiplistes_courrier_gerer () {
 				. fin_cadre_relief(true)
 				;
 		}
-		$boite_confirme_envoi = 
-			($statut == _SPIPLISTES_STATUT_READY)
-			? ""
-				. debut_cadre_couleur('', true)
-				// formulaire de confirmation envoi
-				// renvoie sur la page des casiers
-				. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE,"id_courrier=$id_courrier")."' method='post'>"
-				. "<p style='text-align:center;font-weight:bold;' class='verdana2'>"
-				. _T('spiplistes:confirme_envoi')
-				. "</p>"
-				. "<input type='hidden' name='id_liste' value='$id_liste' />"
-				. "<input type='hidden' name='id_courrier' value='$id_courrier' />"
-				. "<input type='hidden' name='id_auteur_test' value='$id_auteur_test' />"
-				. "<div style='text-align:right;'><input type='submit' name='btn_confirmer_envoi' value='"._T('spiplistes:Envoyer_ce_courrier')."' class='fondo' /></div>\n"
-				. "</form>"
-				. fin_cadre_couleur(true)
-			: ""
-			;
+		if($statut == _SPIPLISTES_STATUT_READY) {
+			if(!$id_liste && !$id_auteur_test) {
+				// normalement, la validation est locale, mais si l'utilisateur
+				// part sur un casier, le retour ici est incomplet...
+				// cas particulier d'un appel d'un courrier ready à partir des casiers
+				// il faut recréer $id_auteur_test si id_liste == 0
+				if(!($id_auteur_test = spiplistes_idauteur_depuis_email($email_test))) {
+					spiplistes_log("ERR: id_auteur_test #$id_auteur_test (id_auteur missing ?)");
+				}
+			}
+			if(($id_liste > 0) || ($id_auteur_test > 0)) {
+				$boite_confirme_envoi = ""
+					. debut_cadre_couleur('', true)
+					// formulaire de confirmation envoi
+					// renvoie sur la page des casiers
+					. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE,"id_courrier=$id_courrier")."' method='post'>"
+					. "<p style='text-align:center;font-weight:bold;' class='verdana2'>"
+					. _T('spiplistes:confirme_envoi')
+					. "</p>"
+					. "<input type='hidden' name='id_liste' value='$id_liste' />"
+					. "<input type='hidden' name='id_courrier' value='$id_courrier' />"
+					. "<input type='hidden' name='id_auteur_test' value='$id_auteur_test' />"
+					. "<div style='text-align:right;'><input type='submit' name='btn_confirmer_envoi' value='"._T('spiplistes:Envoyer_ce_courrier')."' class='fondo' /></div>\n"
+					. "</form>"
+					. fin_cadre_couleur(true)
+					;
+			}
+		}
 	}
 
 	/////////////////////
