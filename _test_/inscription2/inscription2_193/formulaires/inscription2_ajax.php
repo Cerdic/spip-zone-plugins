@@ -69,7 +69,17 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
             $erreurs['message_erreur'] .= "Desolé vous n'avez pas le droit de modifier cet auteur<br/>";
         }
     }
+    
     //vérifier certains champs spécifiquement
+   
+    //Vérifier le login
+    // c'est à dire regarder dans la base si un autre utilisateur que celui en cours posséde le login saisi
+    if (_request('login')) {
+        if (sql_getfetsel('id_auteur','spip_auteurs','id_auteur !='.intval($id_auteur).' AND login LIKE \''._request('login').'\'')) {
+            $erreurs['login'] = "Login deja utilisé, veuillez en choisir un autre";
+        }
+    }
+
    
     //message d'erreur genéralisé
     if (count($erreurs)) {
@@ -102,6 +112,13 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
         }
     }
     
+    //Définir le login
+    include_spip('balise/formulaire_inscription');
+    if (!_request('login')) {
+        $valeurs['login'] = test_login($valeurs['nom'], $valeurs['email']);
+    }
+    
+    
     //$valeurs contient donc tous les champs remplit ou non 
     
     //definir les champs pour spip_auteurs
@@ -122,7 +139,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
             $where
         );
     } else {
-        $val['statut'] = lire_config('inscription2/statut_nouveau');
+        $val['statut'] = 'aconfirmer';
         $id_auteur = sql_insertq(
             $table,
             $val
