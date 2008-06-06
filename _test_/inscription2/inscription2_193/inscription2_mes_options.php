@@ -108,14 +108,24 @@ function envoyer_inscription2($id_auteur,$mode="inscription") {
 	
 	$prenom = (lire_config('inscription2/prenom')) ? "b.prenom," : "" ;
 	
-	$var_user=spip_fetch_array(spip_query("select a.nom, $prenom a.id_auteur, a.alea_actuel, a.login, a.email from spip_auteurs a join spip_auteurs_elargis b where a.id_auteur='$id_auteur' and a.id_auteur=b.id_auteur"));
-	
+    $var_user = sql_fetsel(
+        "a.nom,$prenom a.id_auteur, a.alea_actuel, a.login, a.email",
+        "spip_auteurs AS a LEFT JOIN spip_auteurs_elargis AS b USING(id_auteur)",
+        "a.id_auteur =$id_auteur"
+    );
+
 	if($var_user['alea_actuel']==''){ 
  		$var_user['alea_actuel'] = rand(1,99999); 
- 	    spip_query("UPDATE spip_auteurs SET alea_actuel='".$var_user['alea_actuel']."' WHERE id_auteur = ".$id_auteur); 
+ 		sql_updateq(
+ 		    "spip_auteurs",
+ 		    array(
+ 		        "alea_actuel" => $var_user['alea_actuel']
+ 		    ),
+ 		    "id_auteur = $id_auteur"
+ 		);
       } 
  	
- 	if($mode="inscription"){ 
+ 	if($mode=="inscription"){ 
 	
 	$message = _T('inscription2:message_auto')."\n\n"
 			. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n"
@@ -129,7 +139,7 @@ function envoyer_inscription2($id_auteur,$mode="inscription") {
 		$sujet = "[$nom_site_spip] "._T('inscription2:activation_compte'); 
 	}
 	
-	if($mode="rappel_mdp"){ 
+	if($mode=="rappel_mdp"){ 
  	
  	$message = _T('inscription2:message_auto')."\n\n" 
  	. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n" 
