@@ -63,7 +63,6 @@ function exec_spiplistes_courrier_gerer () {
 		, 'new' // idem
 		, 'btn_changer_destination', 'radio_destination', 'email_test', 'id_liste' // (formulaire local) destinataire
 		, 'change_statut' // (formulaire spiplistes_boite_autocron) 'publie' pour annuler envoi par boite autocron
-		//, 'btn_confirmer_envoi' // (formulaire local) confirmer envoi
 		, 'btn_dupliquer_courrier' // (formulaire local) dupliquer le courrier
 		, 'supp_dest'
 		) as $key) {
@@ -333,8 +332,11 @@ function exec_spiplistes_courrier_gerer () {
 				. "</div>\n"
 				;
 		}
-		else {
-			// Un courrier publié peut-être dupliqué pour édition
+		if(
+			($statut == _SPIPLISTES_STATUT_PUBLIE)
+			|| ($statut == _SPIPLISTES_STATUT_STOPE)
+		) {
+			// Un courrier publié ou stoppé peut-être dupliqué pour édition
 			// on revient sur cette page avec le contenu récupéré
 			$gros_bouton_dupliquer = 
 				"<div style='margin-top:1ex;'>"

@@ -125,7 +125,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Console_syslog_texte' => "Activer les journaux syst&egrave;mes (syslog)",
 'Casier_a_courriers' => "Casier &agrave; courriers",
 'Courriers_en_cours_de_redaction' => 'Courriers en cours de r&eacute;daction',
-'Courriers_prets_a_etre_envoye' => "Courriers pr&ecirc;ts &agrave; &ecirc;tre envoy&eacute;"
+'Courriers_prets_a_etre_envoye' => "Courriers pr&ecirc;ts &agrave; &ecirc;tre envoy&eacute;s"
 , 'Courriers_publies' => "Courriers publi&eacute;s"
 , 'Courriers_auto_publies' => "Courriers automatiques publi&eacute;s",
 'Courriers_stope' => "Courriers stopp&eacute;s en cours d'envoi",
