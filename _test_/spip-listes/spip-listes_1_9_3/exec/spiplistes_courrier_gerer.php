@@ -34,11 +34,11 @@ include_spip('inc/spiplistes_api_globales');
 	Affiche un courrier. 
 	Le formulaire permet :
 	- l'envoi sur mail de test
-	- l'attachement d'une liste
-	Dans les deux cas, le statut du courrier passe a  _SPIPLISTES_STATUT_READY 
-	(la meleuse prend en charge les courriers en statut _SPIPLISTES_STATUT_READY)
-	
+	- l'envoi sur les destinataires d'une liste
+	- le passage en mode édition
+	- la duplication d'un courrier archivé, le passe en mode redac	
 */
+
 function exec_spiplistes_courrier_gerer () {
 
 	include_spip('inc/barre');
@@ -63,12 +63,13 @@ function exec_spiplistes_courrier_gerer () {
 		, 'new' // idem
 		, 'btn_changer_destination', 'radio_destination', 'email_test', 'id_liste' // (formulaire local) destinataire
 		, 'change_statut' // (formulaire spiplistes_boite_autocron) 'publie' pour annuler envoi par boite autocron
-		, 'btn_confirmer_envoi' // (formulaire local) confirmer envoi
+		//, 'btn_confirmer_envoi' // (formulaire local) confirmer envoi
+		, 'btn_dupliquer_courrier' // (formulaire local) dupliquer le courrier
 		, 'supp_dest'
 		) as $key) {
 		$$key = _request($key);
 	}
-	foreach(array('id_courrier', 'id_liste') as $key) {
+	foreach(array('id_courrier', 'id_liste', 'btn_dupliquer_courrier') as $key) {
 		$$key = intval($$key);
 	}
 	foreach(array('email_test','titre','texte') as $key) {
@@ -92,9 +93,32 @@ function exec_spiplistes_courrier_gerer () {
 
 	if($flag_editable) {
 		// Modification de courrier
+	
+		if($btn_dupliquer_courrier > 0) {
+			$id_courrier = $btn_dupliquer_courrier;
+		}
 
 		// effectue les modifications demandees si retour local ou retour editeur
 		if($id_courrier > 0) {
+
+			if($btn_dupliquer_courrier > 0) {
+				if($row = sql_fetsel('titre,texte', 'spip_courriers', "id_courrier=".sql_quote($id_courrier),'','',1)) {
+					$titre = $row['titre'];
+					$texte = $row['texte'];
+					$str_log = "id_courrier #$id_courrier";
+					$statut = _SPIPLISTES_STATUT_REDAC;
+					$type = 'nl';
+					$id_courrier = sql_insert(
+						'spip_courriers'
+						, "(titre,texte,date,statut,type,id_auteur)"
+						, "(".sql_quote($titre).",".sql_quote($texte).",NOW(),".sql_quote($statut).",".sql_quote($type).",".sql_quote($connect_id_auteur).")"
+					);
+					spiplistes_log("$str_log DUPLICATED TO #$id_courrier BY ID_AUTEUR #$connect_id_auteur");
+				}
+				else {
+					spiplistes_log("ERR: DUPLICATION FROM id_courrier #$id_courrier (missing ?)");
+				}
+			}
 			
 			if($btn_changer_destination) {
 				if($radio_destination == 'email_test') {
@@ -270,6 +294,7 @@ function exec_spiplistes_courrier_gerer () {
 	//////////////////////////////////////////////////////
 	// preparation des boutons si droits
 	$gros_bouton_modifier = 
+		$gros_bouton_dupliquer = 
 		$gros_bouton_supprimer = 
 		$gros_bouton_arreter_envoi = ""
 		;
@@ -308,7 +333,23 @@ function exec_spiplistes_courrier_gerer () {
 				. "</div>\n"
 				;
 		}
-	
+		else {
+			// Un courrier publié peut-être dupliqué pour édition
+			// on revient sur cette page avec le contenu récupéré
+			$gros_bouton_dupliquer = 
+				"<div style='margin-top:1ex;'>"
+				. icone (
+					_T('spiplistes:dupliquer_ce_courrier')
+					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER, "btn_dupliquer_courrier=$id_courrier")
+					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif'
+					, _DIR_IMG_PACK."creer.gif"
+					, "right"
+					, false
+					)
+				. "</div>\n"
+				;
+		}
+		
 		if($statut == _SPIPLISTES_STATUT_ENCOURS) {
 		// L'envoi d'un courrier en cours peut etre stoppe
 			$gros_bouton_arreter_envoi = 
@@ -354,7 +395,7 @@ function exec_spiplistes_courrier_gerer () {
 				$str_destinataire = _T('spiplistes:email_adresse') . " : <span style='font-weight:bold;color:gray;'>$email_test</span>";
 			}
 			else {
-				if($row = sql_fetch(sql_select('titre', 'spip_listes', "id_liste=".sql_quote($id_liste), '', '', 1))) {
+				if($row = sql_fetsel('titre', 'spip_listes', "id_liste=".sql_quote($id_liste), '', '', 1)) {
 					$str_destinataire = ""
 						. _T('spiplistes:Liste_de_destination') 
 						. " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>".$row['titre']."</a>"
@@ -456,9 +497,10 @@ function exec_spiplistes_courrier_gerer () {
 			. "<tr>"
 			. "<td>".spiplistes_gros_titre($titre, spiplistes_items_get_item('puce', $statut), true)."</td>"
 			. "<td rowspan='2' style='vertical-align:top;width:90px;'>"
-				// si besoin, l'un de ces deux boutons apparait
+				// si besoin, l'un de ces trois boutons apparait
 				. $gros_bouton_modifier
 				. $gros_bouton_arreter_envoi
+				. $gros_bouton_dupliquer
 				."</td>"
 			. "</tr>"
 			. "<tr> "

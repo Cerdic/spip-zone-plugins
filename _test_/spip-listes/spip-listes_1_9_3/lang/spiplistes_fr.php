@@ -175,10 +175,11 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Pas_de_donnees' => "D&eacute;sol&eacute;, mais l'enregistrement demand&eacute; n'existe pas dans la base de donn&eacute;es.",
 'Desabonner_temporaire' => "D&eacute;sabonner temporairement ce compte.",
 'Desabonner_definitif' => "D&eacute;sabonner ce compte de toutes les listes de diffusion.",
-'Desabonner' => "D&eacute;sabonner",
+'Desabonner' => "D&eacute;sabonner"
+, 'dupliquer_ce_courrier' => "Dupliquer ce courrier"
 
 //E
-'email' => 'E-mail',
+, 'email' => 'E-mail',
 'email_envoi' => 'Envoi des emails',
 'envoi' => 'Envoi :',
 'envoi_charset' => 'Charset de l\'envoi',
