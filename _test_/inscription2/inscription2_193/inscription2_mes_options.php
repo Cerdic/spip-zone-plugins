@@ -25,7 +25,7 @@
 	$spip_auteurs_elargis['id'] = "int NOT NULL";
 	foreach(lire_config('inscription2') as $cle => $val) {
 		$cle = ereg_replace("_(obligatoire|fiche|table).*", "", $cle);
-		if($val!='' and $cle != 'nom' and $cle != 'statut_nouveau' and $cle != 'email' and $cle != 'username' and $cle != 'statut_int'  and $cle != 'accesrestreint' and !ereg("^(categories|zone|newsletter).*$", $cle) ){
+		if($val!='' and $clef != 'login' and $cle != 'nom' and $cle != 'statut_nouveau' and $cle != 'email' and $cle != 'username' and $cle != 'statut_int'  and $cle != 'accesrestreint' and !ereg("^(categories|zone|newsletter).*$", $cle) ){
 			if($cle == 'naissance' )
 				$spip_auteurs_elargis[$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
 			elseif($cle == 'validite' )
@@ -50,7 +50,7 @@
 	$tables_principales['spip_auteurs_elargis']  =	array('field' => &$spip_auteurs_elargis, 'key' => &$spip_auteurs_elargis_key);
 	$tables_principales['spip_geo_pays']  =	array('field' => &$spip_geo_pays, 'key' => &$spip_geo_pays_key);
 	
-	// surcharger auteur session, desactive car ca pete en 193
+	// surcharger auteur session, desactivé car ca pete en 193
 	/*
 	if(is_array($var_user) and isset($GLOBALS['auteur_session']['id_auteur'])){
 		$id = $GLOBALS['auteur_session']['id_auteur'];
