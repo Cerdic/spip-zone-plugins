@@ -168,5 +168,6 @@ It supports playback of a single Flash video file, RTMP streams or RSS, XSPF and
 'jw_media_player_install' => '<p>Pour installer JW Media Player, t&eacute;l&eacute;chargez le <a href="http://www.jeroenwijering.com/upload/mediaplayer-3-16.zip">ici</a> et d&eacute;compressez un répertoire du m&ecirc;me nom que l\'archive dans un dossier lib/ &agrave; la racine du site (en pr&eacute;vision de la verion 2.0 de SPIP.</p>',
 'jw_rotator_install' => '<NEW><p>Pour installer JW Image Rotator, t&eacute;l&eacute;chargez le <a href="http://www.jeroenwijering.com/upload/jw_image_rotator.zip">ici</a> et d&eacute;compressez le tel quel dans un dossier lib/ &agrave; la racine du site (en pr&eacute;vision de la verion 2.0 de SPIP.</p>',
 
+'js_necessaire' => 'D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia ',
 );
 ?>
