@@ -5,7 +5,7 @@
 			<strong><a href="#" id="ouvrire_liaison_a2a" >+</a>&nbsp;<:a2a:articles_lies:></strong><br />
 			<B_LesLie>
 			<ul>
-			<BOUCLE_LesLie(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}>
+			<BOUCLE_LesLie(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}{par rang}>
 					
 				<BOUCLE_lesArticlesLies(ARTICLES){id_article = #ID_ARTICLE_LIE}>
 					<li>#TITRE : 
