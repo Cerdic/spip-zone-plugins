@@ -14,12 +14,12 @@
 	avec la participation de kent1, cy_altern, marcimat, renato et toggg.
 	
 Plusieurs methodes d'insertion :
-	Méthode classique <template><jukebox123></template> ou 123 est l'id article fournissant les documents attaches
-	Méthode par rubrique (on prend les videos parmis les documents de la rubrique) :
+	Methode classique <template><jukebox123></template> ou 123 est l'id article fournissant les documents attaches
+	Methode par rubrique (on prend les videos parmis les documents de la rubrique) :
 	<template><jukebox|rubrique=123></template>
-	Méthode par secteur (on prend les videos parmis les documents du secteur) :
+	Methode par secteur (on prend les videos parmis les documents du secteur) :
 	<template><jukebox|secteur=123></template>
-	Méthode par document unique (on prend un seul document) :
+	Methode par document unique (on prend un seul document) :
 	<template><jukebox|document=123></template>
 	
 	Pour les options, voir http://www.jeroenwijering.com/extras/readme.html
@@ -97,7 +97,7 @@ Plusieurs methodes d'insertion :
 
 [(#SET{align,#ENV{align,center}})]
 
-<noscript><p>D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia </p></noscript>
+<noscript><p><:xspf:js_necessaire:></p></noscript>
 <!-- alternetive texte pour ceux qui ont le js desactive -->
 
 <div id="jukebox[(#GET{objet_spip})]#ENV{id}" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
@@ -108,7 +108,7 @@ Plusieurs methodes d'insertion :
 
 <script type="text/javascript">
 // <![CDATA[
-var s1 = new SWFObject("[(#CHEMIN{lib/jukebox/xspf_jukebox.swf})]", "jukebox", "#GET{width}","#GET{height}", "7", "#ffffff", true);
+	var s1 = new SWFObject("[(#CHEMIN{lib/jukebox/xspf_jukebox.swf})]", "jukebox", "#GET{width}","#GET{height}", "7", "#ffffff", true);
 	s1.addParam("wmode","#GET{wmode}");
 	s1.addVariable("skin_url", "#URL_SITE_SPIP/lib/jukebox/[(#GET{skin})/]");
 	s1.addVariable("playlist_url",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|url_absolue|parametre_url{type,mp3|flv,'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
