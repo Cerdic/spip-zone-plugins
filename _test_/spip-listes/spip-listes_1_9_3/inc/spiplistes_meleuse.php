@@ -73,6 +73,7 @@ function spiplistes_meleuse () {
 		, 'opt_lien_en_tete_courrier', 'lien_patron'
 		, 'opt_ajout_pied_courrier', 'pied_patron'
 		, 'opt_ajout_tampon_editeur', 'tampon_patron'
+		, 'opt_personnaliser_courrier'
 		) as $key) {
 		$$key = spiplistes_pref_lire($key);
 	}
@@ -346,6 +347,12 @@ spiplistes_log("MEL: nb destinataires: $nb_destinataires", _SPIPLISTES_LOG_DEBUG
 		
 							if($is_from_valide) {
 								$_url = generer_url_public('abonnement','d='.$cookie);
+								
+								if($opt_personnaliser_courrier == 'oui') {
+									$page_html = spiplistes_personnaliser_courrier($page_html, $id_auteur);
+									$page_texte = spiplistes_personnaliser_courrier($page_texte, $id_auteur);
+								}
+								
 								// le &amp; semble poser problème sur certains MUA. A suivre...
 								$_url = preg_replace(',(&amp;),','&', $_url);
 								switch($format_abo) {
@@ -487,6 +494,24 @@ function spiplistes_listes_langue ($id_liste) {
 	return(false);
 }
 
+//CP-20080608 :: personnalisation du courrier (experimental)
+// recherche/remplace les tags «auteur (cle)» en masse dans le corps du message.
+// (toutes les cles présentes dans la table *_auteur sont utilisables)
+function spiplistes_personnaliser_courrier ($corps, $id_auteur) {
+	if($auteur = sql_fetsel("*", 'spip_auteur', "id_auteur=".sql_quote($id_auteur), '','', 1)) {
+		$ii = 0;
+		$pattern = array();
+		$replace = array();
+		foreach($auteur as $key => $val) {
+			$tag = "«auteur ($key)»";
+			$pattern[$ii] = "/«auteur ($key)»/";
+			$replace[$ii] = $auteur[$key];
+			$ii++;
+		}
+		$corps = preg_replace($pattern, $replace, $corps);
+	}
+	return($corps);
+}
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
