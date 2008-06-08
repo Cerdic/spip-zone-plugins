@@ -223,6 +223,7 @@ function exec_spiplistes_config () {
 
 	//////////////////////////////////////////////////////
 	// Boite parametrage complément du courrier
+	$opt_personnaliser_courrier = (spiplistes_pref_lire('opt_personnaliser_courrier') == 'oui');
 	$opt_lien_en_tete_courrier = (spiplistes_pref_lire('opt_lien_en_tete_courrier') == 'oui');
 	$lien_patron = spiplistes_pref_lire('lien_patron');
 	$opt_ajout_tampon_editeur = (spiplistes_pref_lire('opt_ajout_tampon_editeur') == 'oui');

@@ -363,16 +363,21 @@ spiplistes_log("MEL: nb destinataires: $nb_destinataires", _SPIPLISTES_LOG_DEBUG
 								$_url = preg_replace(',(&amp;),','&', $_url);
 								switch($format_abo) {
 									case 'html':
-										$body =
+										$email_a_envoyer[$format_abo]->Body =
 											"<html>\n\n<body>\n\n"
 											. $page_html
 											. $pied_page_html
 											. "<a href=\"$_url\">".$pied_rappel_html."</a>\n\n</body></html>"
 											. $tampon_html
 											;
+										$email_a_envoyer[$format_abo]->AltBody = $page_texte ."\n\n"
+											. $pied_page_texte
+											. str_replace("&amp;", "&", $pied_rappel_texte). " " . $_url."\n\n"
+											. $tampon_texte
+											;
 										break;
 									case 'texte':
-										$body =
+										$email_a_envoyer[$format_abo]->Body =
 											$page_texte ."\n\n"
 											. $pied_page_texte
 											. str_replace("&amp;", "&", $pied_rappel_texte). " " . $_url."\n\n"
@@ -381,9 +386,8 @@ spiplistes_log("MEL: nb destinataires: $nb_destinataires", _SPIPLISTES_LOG_DEBUG
 										break;
 								}
 
-								$email_a_envoyer[$format_abo]->Body = $body;
 								$email_a_envoyer[$format_abo]->SetAddress($email, $nom_auteur);
-								
+
 								// envoie le mail																
 								if(($opt_simuler_envoi == "oui") ? true : $email_a_envoyer[$format_abo]->send()) {
 									$str_temp .= "  [OK]";
@@ -501,22 +505,23 @@ function spiplistes_listes_langue ($id_liste) {
 }
 
 //CP-20080608 :: personnalisation du courrier (experimental)
-// recherche/remplace les tags «auteur (cle)» en masse dans le corps du message.
+// recherche/remplace les tags _AUTEUR_CLE_ en masse dans le corps du message.
 // (toutes les cles présentes dans la table *_auteur sont utilisables)
 function spiplistes_personnaliser_courrier ($corps, $id_auteur) {
+
 	if($auteur = sql_fetsel("*", 'spip_auteurs', "id_auteur=".sql_quote($id_auteur), '','', 1)) {
 		$ii = 0;
 		$pattern = array();
 		$replace = array();
+		krsort($auteur);
 		foreach($auteur as $key => $val) {
-			$tag = "«auteur ($key)»";
-			$pattern[$ii] = "/«auteur ($key)»/";
+			$pattern[$ii] = ",(_AUTEUR_" . strtoupper($key) .")_,";
 			$replace[$ii] = $auteur[$key];
 			$ii++;
 		}
 		$corps = preg_replace($pattern, $replace, $corps);
 		spiplistes_log("MEL: personnalisation du courrier pour $id_auteur", _SPIPLISTES_LOG_DEBUG);
-	}
+	} 
 	return($corps);
 }
 
