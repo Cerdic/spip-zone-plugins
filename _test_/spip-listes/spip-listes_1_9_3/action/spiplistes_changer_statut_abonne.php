@@ -33,7 +33,7 @@ function action_spiplistes_changer_statut_abonne_dist () {
 		if ($action=='format') {
 			//modification du format abonné ('html', 'texte' ou 'non')
 			$statut = _request('statut');
-			if(autoriser('statutabonement', 'auteur', $id_auteur)) {
+			if(autoriser('modifierformat', 'abonne', $id_auteur)) {
 				if(spiplistes_format_abo_modifier($id_auteur, $statut)) {
 					spiplistes_log("FORMAT ID_AUTEUR #$id_auteur changed to [$statut] by ID_AUTEUR #$connect_id_auteur");
 					if(!$redirect) {

@@ -211,6 +211,14 @@ function balise_DATE_MODIF_FORUM($p) {
    return $p;
 }
 
+// autorise les admins et l'utilisateur à modifier son format de réception
+function autoriser_abonne_modifierformat ($faire, $type, $id) {
+	return(
+		$GLOBALS['auteur_session']['id_auteur'] == $id
+		|| $GLOBALS['auteur_session']['statut'] == '0minirezo'
+	);
+}
+
 //utiliser le cron pour envoyer les messages en attente
 function spiplistes_taches_generales_cron($taches_generales) {
 	$taches_generales['spiplistes_cron'] = 10 ;
