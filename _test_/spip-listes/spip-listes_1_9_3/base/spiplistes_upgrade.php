@@ -92,7 +92,12 @@ function spiplistes_upgrade () {
 	return($spiplistes_current_version);
 }
 
-function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version, $spiplistes_current_version_base, $spiplistes_real_version_base) {
+function spiplistes_upgrade_base (
+	$spiplistes_name
+	, $spiplistes_current_version
+	, $spiplistes_current_version_base
+	, $spiplistes_real_version_base
+) {
 //spiplistes_log("spiplistes_upgrade_base() <<", _SPIPLISTES_LOG_DEBUG);
 	
 	if($spiplistes_current_version_base && ($spiplistes_current_version_base >= $spiplistes_real_version_base)) {

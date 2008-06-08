@@ -28,7 +28,7 @@ function spiplistes_install ($action) {
 			// si renvoie true, c'est que la base est à jour, inutile de re-installer
 			// la valise plugin "effacer tout" apparaît.
 			// si renvoie false, SPIP revient avec $action = 'install' (une seule fois)
-			$spiplistes_version = lire_meta('spiplistes_version');
+			$spiplistes_version = $GLOBALS['meta']['spiplistes_version'];
 			$result = (
 				$spiplistes_version
 				&& ($spiplistes_version >= __plugin_real_version_get(_SPIPLISTES_PREFIX))
@@ -37,7 +37,7 @@ function spiplistes_install ($action) {
 				);
 			if(
 				!spiplistes_spip_est_inferieur_193() 
-				&& (_request('action')=='desinstaller_plugin')
+				&& (_request('action') == 'desinstaller_plugin')
 			) {
 				// dans action/desinstaller_plugin.php
 				// pour réellement désinstaller le plugin dans les metas et cache
@@ -48,13 +48,13 @@ function spiplistes_install ($action) {
 			return($result);
 			break;
 		case 'install':
-			if(!lire_meta('spiplistes_version')) {
+			if(!$GLOBALS['meta']['spiplistes_version']) {
 				$result = spiplistes_base_creer();
 			}
 			else {
 				// logiquement, ne devrait pas passer par là (upgrade assuré par mes_options)
 				include_spip('base/spiplistes_upgrade');
-				$result = spiplistes_upgrade_base();
+				//$result = spiplistes_upgrade_base();
 			}
 			$result = (
 				$result
@@ -99,7 +99,7 @@ function spiplistes_base_creer () {
 	ecrire_meta('spiplistes_base_version', $spiplistes_base_version);
 	spiplistes_ecrire_metas();
 	
-	$spiplistes_base_version = lire_meta('spiplistes_base_version');
+	$spiplistes_base_version = $GLOBALS['meta']['spiplistes_base_version'];
 
 	return($spiplistes_base_version);
 }
@@ -148,7 +148,7 @@ function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 }
 
 function spiplistes_activer_inscription_visiteurs () {
-	$accepter_visiteurs = lire_meta('accepter_visiteurs');
+	$accepter_visiteurs = $GLOBALS['meta']['accepter_visiteurs'];
 	if($accepter_visiteurs != 'oui') {
 		$accepter_visiteurs = 'oui';
 		ecrire_meta("accepter_visiteurs", $accepter_visiteurs);

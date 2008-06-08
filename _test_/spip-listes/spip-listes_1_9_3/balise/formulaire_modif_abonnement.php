@@ -47,8 +47,8 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn () <<", _SPIPLISTES_LOG_D
 	$formulaire_cookie_affiche = $formulaire_affiche = $message_formulaire = $modif_affiche = $erreur = '';
 	
 	//utiliser_langue_site();
-	$nomsite=lire_meta("nom_site");
-	$urlsite=lire_meta("adresse_site");
+	$nomsite = $GLOBALS['meta']['nom_site'];
+	$urlsite = $GLOBALS['meta']['adresse_site'];
 	
 	// aller chercher le formulaire html qui va bien				
 	$formulaire = "formulaires/formulaire_modif_abonnement";	
