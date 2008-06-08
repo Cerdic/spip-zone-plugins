@@ -58,7 +58,7 @@
             	*/
             	var timer = this.bytesPercent ;
             	
-            	$("#loading").css({width:Math.round(timer) +"%"});
+            	$("#vloading").css({width:Math.round(timer) +"%"});
             	
             	var isPlaying = (this.isPlaying == "true");
             	isVideoPlaying = "true" ;
@@ -66,7 +66,7 @@
            		document.getElementById("playerpause").style.display = (isPlaying)?"block":"none";
            		
             	var timer2 = this.position / this.duration * 100 ;
-            	$("#position").css({width:Math.round(timer2) +"%"});
+            	$("#vposition").css({width:Math.round(timer2) +"%"});
                    
         	};
         	
@@ -88,7 +88,42 @@
 		margin-top:5px;
 		}
 		
-		#scrollbar {
+#vscrollbar{
+clear:both;
+height:5px;
+margin:5px 0px;
+border:1px solid white;
+background-color:white;
+position:relative;
+}
+#vloading{
+margin:0px;
+padding:0px;
+height:5px;
+background-color:#ccc;
+width:0%;
+position:absolute;
+left:0px;
+top:0px;
+font-size:0.3em;
+z-index:10;
+}
+#vposition{
+margin:0px;
+padding:0px;
+height:5px;
+background-color:#e74455;
+width:0%;
+position:absolute;
+left:0px;
+top:0px;
+font-size:0.3em;
+z-index:20;
+}
+
+		
+		
+		#vscrollbar {
 		clear:none;
 		}
 #player .timeline a:hover {
@@ -148,9 +183,9 @@
 
 
 
-<div id="scrollbar">
-<div id="loading"></div>
-<div id="position"></div>
+<div id="vscrollbar">
+<div id="vloading"></div>
+<div id="vposition"></div>
 </div>
 
 <ul class="playliste">

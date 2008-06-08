@@ -1,12 +1,14 @@
 /*
-	Appelee par le body onload, cette fonction affiche les players mp3 et genere les playlistes associees
+	Appelee par le body onload, cette fonction affiche les players mp3/flv et genere les playlistes associees
 	Auteur : BoOz <booz CHEZ rezo POINT net>
 	Licence : GNU/GPL
 
 	compatibilite firefox par Vincent Ramos <www-lansargues CHEZ kailaasa POINT net> et erational <http://www.erational.org>
 *
 * Fonctionne avec jQuery.
+* sounmanager2 : http://www.schillmania.com/projects/soundmanager2/
 **/
+
 
 var track_index = 0;
 var playa='';
@@ -14,7 +16,9 @@ var playa='';
 live_track = 'stop' ; 
 live_video = 'stop' ; 
 isVideoPlaying = 'false' ; 
-videoPause = false ;     
+videoPause = false ;
+isPlaying = false ;
+     
 
 //tableau des mp3 de la page
 mp3Array = new Array();
@@ -32,14 +36,21 @@ soundManager.onload = function() {
   
 }
 
+// Nouvelle methode pour les tableaux// Retourne la premiere occurence correspondant, sinon falseArray.prototype.contains = function (ele) {	for (var i = 0; i < this.length; i++) {		if (this[i] == ele) {			return true;		}	}	return false;};
+
+
+
 
 $(document).ready(function(){
 
-lecteur_multimedia_init();
+//lecteur_debug();
 
-});
-
-function lecteur_multimedia_init(){
+/*
+soundManager.onload = function() {
+// soundManager is initialised, ready to use. Create a sound for this demo page.
+soundManager.defaultOptions.volume = 80;    // set global default volume
+}
+*/
 
 var aff= $("a[@rel='enclosure'][@href$=mp3]").size(); 
 
@@ -51,7 +62,7 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 	$('body').append(playa);
 	$('div#musicplayer').css({position:"fixed",top:"10px", right:"10px",width:"0",height:"0"});
 	
-	// lister les mp3 de la page et ajouter un bouton "play" devant
+	// lister les mp3 de la page 
 	$("a[@rel='enclosure'][@href$=mp3]").each(
 		function(i) {	 
 				// we store mp3 links in an array
@@ -64,14 +75,21 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 		             {
 		                 e.preventDefault();
 		                 player_play(i);
-		             }
+		                 $("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');		
+		                 
+		              }
 		         );
-		         $(this).parent().click(
-		             function(e)
-		             {
-		                 player_play(i);
-		             }
-		         );
+		         
+		         // activer le click sur un parent de class "play_"
+		         if ( $(this).parent().attr("class") ) 
+		               		if(  $(this).parent().attr("class").split(" ").contains("play_") )
+		               	 		$(this).parent().click(
+		             					function(e)
+		             							{
+												player_play(i);
+		                 						$("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');																	}		
+		                		);
+		         // ajouter un bouton "play" devant les liens hors player - 
 		         //a passer en .ajoute_musicplayer()	
 				//$(this).before('<span class="play_">play</span>&nbsp;');
 				$(this).before('<span class="play_"><img src="' + image_play + '"/></span>&nbsp;');
@@ -82,7 +100,7 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 
 	$("a[@rel='video']").each(
 		function(i) {	 
-				// we store swf links in an array
+				// we store flv links in an array
 				flvArray.push(this.href);
 				flvTitles.push($(this).html());
 
@@ -99,7 +117,21 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 		}
 	);
 
-	// toggle play / pause
+
+	// css playliste
+	// du player
+	$(".playliste").find("span").remove(); // traiter a par le player
+
+	$(".playliste li").hover(function(){
+	  $(this).addClass("over");
+	},function(){
+	  $(this).removeClass("over");
+	});	
+
+
+
+
+	// liens mp3 hors player avec bouton	
 	// toggle play / pause
 	$("span.play_").each(
 	function(i) {
@@ -110,11 +142,11 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 			              player_stop();
 			             }else{
 			            player_play(i) ;
+			            $(this).html("<img src='" + image_pause + "'/>").addClass("play_on");	
+			            // i c pas forcemment bon si t'as un player avant le lien cf plus bas
 			            }  						
 						 },function(e){
-						
-			              player_stop();
-			              
+			              player_stop(); // ou pause ?		              
 						 }		
 			         );
 	
@@ -123,17 +155,27 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 
 
 
-	// pas de boutons play dans la playliste
-	// mais un joli fond
-	$(".playliste").find("span").remove();
+ // le bouton play/pause du player
+ 
+	    $('#bouton_play').click(function(e){
+	    //console.log(isPlaying);
+	    if(!isPlaying){
+	    	$(this).attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');	    	   
+		    if(live_track =='stop') {
+		   		player_play(0) ;
+		   	}else{
+		    	player_togglePause();
+		    }	
+	    }else{	
+	    	$(this).attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/play.png');		
+	   		player_togglePause();
+	    }
+	    });
 
-	$(".playliste li").hover(function(){
-	  $(this).addClass("over");
-	},function(){
-	  $(this).removeClass("over");
-	});	
-
-
+	
+	
+	
+	
 
 	// chopper les coordonnées du clic dans la barre de progression
 	$("#scrollbar").click(function(e){
@@ -148,27 +190,39 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
      var position = Math.round(myListener.duration * x / 100) ;
      getFlashObject().SetVariable("method:setPosition", position);
      }
-
+     /*console.log( mySound.position + 'hop' + newposition + ' ' + x +'%');*/
   	 });
 
   	 $("#now_playing").change(function(){
   	      	 scroller_init();
 	 });
 	 
+	 // taille player video
+	 /*  $("#myFlash").toggle(function(){
+	  this.width = 2 * this.width ;
+	  this.height = 2 * this.height ;
+	  }
+	  ,function(){
+	  this.width =  this.width / 2 ;
+	  this.height = this.height / 2 ;
+	 }); */
 	 
-}
+	 
+});
 
 
 // .play() plugin jquery
 
 function player_play(i){
 	player_stop();
+	$("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');
+
 	track_index = i ;
 	live_track = i ;
 
 	//$("span.play_:eq("+i+")").html("stop").addClass("play_on");		
-	$("span.play_:eq("+i+")").html("<img src='" + image_pause + "'/>").addClass("play_on");		
-	$(".playliste li:eq("+i+")").addClass("play_on");
+	$("span.play_:eq("+i+")").html("<img src='" + image_pause + "'/>").addClass("play_on");	// i c pas forcemment bon si t'as un player avant le lien, il faut retrancher le nb d'item de la playlist du lecteur (ne pas mettre enclosure aux deux ?)	
+	$(".play_:eq("+i+")").addClass("play_on");
 
 	if(soundManager.url != 'undefined'){
 		soundManager.createSound({
@@ -245,9 +299,11 @@ function player_play(i){
         }});
        $("#scroller").css("left", min_taille-taille) ;
 
-
-		
 	    soundManager.play('son_'+i,{volume:100}) ;
+	    isPlaying = true ;
+	    
+ 		//lecteur_debug();
+	    
 	}else{
 	
 	//Ajouter le musicplayer de secours
@@ -281,13 +337,15 @@ $("#musicplayer").html('<object '+
 
 function player_stop(){
 						//reinit d'un autre play
-						
+						isPlaying = false ;
+
 						//$("span.play_on").html('play');
 						$("span.play_on").html('<img src="' + image_play + '"/>');
 						$("span.play_on").removeClass("play_on");
 						live_track = 'stop' ;
 						
 						$(".playliste li.play_on").removeClass("play_on");
+						reset_boutons();
 						soundManager.destroySound("son_" + track_index);
 						soundManager.stopAll();
 						//stop le musicplayer en flash < 8
@@ -324,10 +382,41 @@ function unLoad(i){
 		player_play(track_index);
 		
 	}
+	
+	
+	function player_togglePause()
+	{	
+		
+	 soundManager.togglePause('son_'+live_track) ;
+	 //console.log(isPlaying);
+	 if(isPlaying == true){ 
+	 	isPlaying = false ;
+	 }else{ 
+	 	isPlaying = true ;
+	 	} 
+	
+	}
+
+
+
+
+	function reset_boutons(){
+	$("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/play.png');
+	$(".position").html("0'00''");
+	$("#position,#loading").width(0);
+	}
+
+
+
+
 
 
 	// lecteur video
 	// doc : http://flv-player.net/players/js/documentation/
+
+
+
+
 
 
  function video_play(i){
@@ -383,3 +472,10 @@ function video_next()
             	getFlashObject().SetVariable("method:setVolume", volume);
             }
    
+   
+   function lecteur_debug(){
+   	
+  	var content = $("#debug").html() ; 	
+	$("#debug").html(content + "<br />live_track = " +live_track ) ; 
+   	
+ 	};
