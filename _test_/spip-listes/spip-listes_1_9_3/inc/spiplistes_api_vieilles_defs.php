@@ -21,12 +21,6 @@ foreach ($included_files as $filename) {
 	}
 }
 
-if(!function_exists('spip_insert_id')) {
-	function spip_insert_id () {
-		return mysql_insert_id();
-	}
-}
-
 if(!function_exists('debut_block_visible')) {
 	function debut_block_visible ($id="") {
 		include_spip('inc/layer');
@@ -44,12 +38,6 @@ if(!function_exists('debut_block_invisible')) {
 // utilisé en 192C (inc/boutons.php)
 // toujours a cette valeur a present en 193
 $GLOBALS['options'] = 'avancees';
-
-if(!function_exists('creer_objet_multi')) {
-	function creer_objet_multi ($r, $l) {
-		sql_multi($r, $l);
-	}
-}
 
 if(!function_exists('spip_abstract_showtable')) {
 	function spip_abstract_showtable ($table, $serveur='', $table_spip = false) {

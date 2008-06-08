@@ -243,11 +243,11 @@ function spiplistes_listes_liste_modifier ($id_liste, $array_set) {
 
 // CP-20080501
 function spiplistes_listes_liste_supprimer ($id_liste) {
-	$id_liste = "id_liste=".sql_quote(intval($id_liste));
+	$sql_where = "id_liste=".sql_quote(intval($id_liste));
 	return(
-		sql_delete('spip_listes', $id_liste." LIMIT 1")
-		&& spiplistes_mod_listes_supprimer($id_liste)
-		&& sql_delete('spip_auteurs_listes', $id_liste)
+		sql_delete('spip_listes', $sql_where." LIMIT 1")
+		&& spiplistes_mod_listes_supprimer($sql_where)
+		&& sql_delete('spip_auteurs_listes', $sql_where)
 	);
 }
 
@@ -469,18 +469,32 @@ function spiplistes_format_abo_demande ($id_auteur) {
 // Les fonctions spiplistes_mod_listes_*() concernent les abonnements
 // Table cible : spip_auteurs_mod_listes
 
-// renvoie ID du moderateur de la liste
+// -> renvoie ID du moderateur de la liste
+// CP-20080608 : ou de toutes les listes si $id_liste = 'toutes'
+// -> renvoie du style: array[id_liste] => id_auteur
 function spiplistes_mod_listes_get_id_auteur ($id_liste) {
-	$id_liste = intval($id_liste);
-	if($id_liste > 0) {
-		return(sql_getfetsel('id_auteur', 'spip_auteurs_mod_listes', "id_liste=".sql_quote($id_liste)." LIMIT 1"));
+	$sql_from = 'spip_auteurs_mod_listes';
+	if($id_liste == "toutes") {
+		if($sql_result = sql_select("*", $sql_from)) {
+			$result = array();
+			while($row = sql_fetch($sql_result)) {
+				$result[$row['id_liste']] = $row['id_auteur'];
+			}
+			return($result);
+		}
+	} else if(($id_liste = intval($id_liste)) > 0) {
+		return(sql_getfetsel('id_auteur', $sql_from, "id_liste=".sql_quote($id_liste),'','',1));
 	}
 	return(0);
 }
 
 // CP-20080503: supprime une liste dans table des modérateurs
 function spiplistes_mod_listes_supprimer ($sql_whereq) {
-	return(sql_delete('spip_auteurs_mod_listes', $sql_whereq));	
+	return(
+		(is_string($sql_whereq))
+		? sql_delete('spip_auteurs_mod_listes', $sql_whereq)
+		: false
+	);	
 }
 
 //CP-20080512

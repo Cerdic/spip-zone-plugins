@@ -603,7 +603,8 @@ function spiplistes_boite_autocron () {
 	}
 	
 	include_spip('genie/spiplistes_cron');
-	if($ii = cron_spiplistes_cron($time) > 0) { 
+	$time = time();
+	if(cron_spiplistes_cron($time) > 0) { 
 		// le CRON n'a rien a faire. Pas de boite autocron
 		return($result);
 	}
