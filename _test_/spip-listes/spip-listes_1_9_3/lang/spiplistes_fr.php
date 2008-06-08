@@ -388,10 +388,17 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Patron_grand_' => "Grand patron ",
 'Pas_adresse_email' => "Pas d&acute;adresse email",
 'Patron_manquant' => "Vous devez appliquer un grand patron avant de param&eacute;trer l'envoi de cette 
-liste.",
+liste."
+, 'personnaliser_le_courrier' => "Personnaliser le courrier"
+, 'personnaliser_le_courrier_desc' => 
+	"Vous pouvez personnaliser le courrier pour chaque abonn&eacute; en ins&eacute;rant 
+   dans votre patron les tags n&eacute;cessaires. Par exemple, pour ins&eacute;rer 
+   le nom de votre abonn&eacute; dans son courrier lors de l'envoi, placez dans 
+   votre patron &laquo;auteur (nom)&raquo;."
+, 'personnaliser_le_courrier_label' => "Activer la personnalisation du courrier"
 
 //R
-'recherche' => 'Rechercher',
+, 'recherche' => 'Rechercher',
 'regulariser' => 'regulariser les desabonnes avec listes...<br />',
 'revenir_haut' => 'Revenir en haut de la page',
 'reponse' => 'En r&eacute;ponse au message',

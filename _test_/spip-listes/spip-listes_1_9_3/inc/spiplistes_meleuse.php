@@ -120,7 +120,10 @@ spiplistes_log("MEL: ".$nb_etiquettes."/".$nb_courriers." JOBS. Distribution..."
 		$urlsite = $GLOBALS['meta']['adresse_site'];
 
 		// prépare le tampon editeur
-		if($opt_ajout_tampon_editeur && !empty($tampon_patron)) {
+		if(
+			($opt_ajout_tampon_editeur == 'oui')
+			&& !empty($tampon_patron)
+		) {
 			$tampon_html = spiplistes_tampon_html_get($tampon_patron);
 			$tampon_texte = spiplistes_courrier_tampon_texte($tampon_patron, $tampon_html);
 		}
@@ -229,7 +232,10 @@ spiplistes_log("MEL: premiere etiquette en erreur. id_courier = 0. Supprimer cet
 			
 			////////////////////////////////////
 			// Ajoute lien tete de courrier
-			if($opt_lien_en_tete_courrier && ($opt_lien_en_tete_courrier == 'oui') && !empty($lien_patron)) {
+			if(
+				($opt_lien_en_tete_courrier == 'oui') 
+				&& !empty($lien_patron)
+			) {
 				$url_courrier = generer_url_public('courrier', "id_courrier=$id_courrier");
 				$lien_courrier_html = spiplistes_lien_courrier_html_get($lien_patron, $url_courrier);
 				$lien_courrier_texte = spiplistes_lien_courrier_texte_get($lien_patron, $lien_courrier_html, $url_courrier);
@@ -498,7 +504,7 @@ function spiplistes_listes_langue ($id_liste) {
 // recherche/remplace les tags «auteur (cle)» en masse dans le corps du message.
 // (toutes les cles présentes dans la table *_auteur sont utilisables)
 function spiplistes_personnaliser_courrier ($corps, $id_auteur) {
-	if($auteur = sql_fetsel("*", 'spip_auteur', "id_auteur=".sql_quote($id_auteur), '','', 1)) {
+	if($auteur = sql_fetsel("*", 'spip_auteurs', "id_auteur=".sql_quote($id_auteur), '','', 1)) {
 		$ii = 0;
 		$pattern = array();
 		$replace = array();
@@ -509,6 +515,7 @@ function spiplistes_personnaliser_courrier ($corps, $id_auteur) {
 			$ii++;
 		}
 		$corps = preg_replace($pattern, $replace, $corps);
+		spiplistes_log("MEL: personnalisation du courrier pour $id_auteur", _SPIPLISTES_LOG_DEBUG);
 	}
 	return($corps);
 }

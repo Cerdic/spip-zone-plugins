@@ -47,7 +47,8 @@ function exec_spiplistes_config () {
 	spiplistes_log("CONFIGURE ID_AUTEUR #$connect_id_auteur <<");
 	
 	$keys_complement_courrier = array(
-		'opt_lien_en_tete_courrier', 'lien_patron'
+		'opt_personnaliser_courrier'
+		, 'opt_lien_en_tete_courrier', 'lien_patron'
 		, 'opt_ajout_tampon_editeur', 'tampon_patron'
 		);
 	$keys_complement_courrier = array_merge($keys_complement_courrier, $_tampon_cles = explode(",", _SPIPLISTES_TAMPON_CLES));
@@ -105,12 +106,11 @@ function exec_spiplistes_config () {
 
 	if($btn_complement_courrier) {
 		foreach($keys_complement_courrier as $key) {
-			if(!empty($$key)) {
-				__plugin_ecrire_key_in_serialized_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
-			} 
-			else {
-				__plugin_ecrire_key_in_serialized_meta ($key, null, _SPIPLISTES_META_PREFERENCES);
-			}
+			__plugin_ecrire_key_in_serialized_meta(
+				$key
+				, (!empty($$key) ? $$key : 'non')
+				, _SPIPLISTES_META_PREFERENCES
+				);
 		}
 		$doit_ecrire_metas = true;
 	}
@@ -233,6 +233,16 @@ function exec_spiplistes_config () {
 	$page_result .= ""
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_complement-24.png", true, "", _T('spiplistes:Complement_des_courriers'))
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
+		//
+		// personnaliser le courrier (reprend les données de *_auteur)
+		. debut_cadre_relief("", true, "", _T('spiplistes:personnaliser_le_courrier'))
+		. "<p class='verdana2'>"._T('spiplistes:personnaliser_le_courrier_desc')."</p>"
+		. "<label class='verdana2'>"
+   	. "<input type='checkbox' name='opt_personnaliser_courrier' value='oui' "
+			. (($opt_personnaliser_courrier == 'oui') ? "checked='checked'" : "")
+			. " />\n"
+   	. _T('spiplistes:personnaliser_le_courrier_label')."</label>\n"
+		. fin_cadre_relief(true)
 		//
 		// ajout du renvoi de tete, lien courrier
 		. debut_cadre_relief("", true, "", _T('spiplistes:Complement_lien_en_tete'))
