@@ -345,9 +345,9 @@ function exec_spiplistes_liste_gerer () {
 			. (spiplistes_spip_est_inferieur_193() ? $legend : "")
 			. debut_block_invisible(md5('abonnes_liste'))
 			. debut_cadre_relief('', true)
-			. "<div id='grosse_boite_abonnements' class='verdana1'>\n"
+			//. "<div id='grosse_boite_abonnements' class='verdana1'>\n"
 			. $boite_liste_abonnes
-			. "</div>\n"
+			//. "</div>\n"
 			. fin_cadre_relief(true)
 			. fin_block()
 			. fin_cadre_enfonce(true)

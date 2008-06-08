@@ -21,6 +21,9 @@ function action_spiplistes_changer_statut_abonne_dist () {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	$redirect = urldecode(_request('redirect'));
+	$id_liste = urldecode(_request('id_liste'));
+	$tri = urldecode(_request('tri'));
+	$debut = urldecode(_request('debut'));
 
 	$arg = explode('-',$arg);
 	$id_auteur = intval($arg[0]);
@@ -33,6 +36,13 @@ function action_spiplistes_changer_statut_abonne_dist () {
 			if(autoriser('statutabonement', 'auteur', $id_auteur)) {
 				if(spiplistes_format_abo_modifier($id_auteur, $statut)) {
 					spiplistes_log("FORMAT ID_AUTEUR #$id_auteur changed to [$statut] by ID_AUTEUR #$connect_id_auteur");
+					if(!$redirect) {
+						include_spip('inc/spiplistes_afficher_auteurs');
+						include_spip('inc/spiplistes_api_presentation');
+						include_spip('inc/spiplistes_listes_selectionner_auteur');
+						echo(spiplistes_listes_boite_abonnes($id_liste, $tri, $debut, $script_retour));
+						exit(0);
+					}
 				}
 			}
 		}

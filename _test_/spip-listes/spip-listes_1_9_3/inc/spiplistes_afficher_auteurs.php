@@ -195,7 +195,7 @@ function spiplistes_afficher_auteurs (
 		;
 	
 	// titres du tableau (a-la-SPIP, en haut)
-	$icon_auteur = "<img src='"._DIR_IMG_PACK."/admin-12.gif' alt='' border='0'>";
+	$icon_auteur = spiplistes_corrige_img_pack("<img src='"._DIR_IMG_PACK."/admin-12.gif' alt='' border='0'>");
 	$result .= ""
 		. "<tr bgcolor='#DBE1C5'>"
 		//
@@ -317,9 +317,11 @@ function spiplistes_afficher_auteurs (
 		$trad_map[$val[$index_map]] = $trad[$index_map];
 	}
 
-	$a_title_abo_html =  " title='"._T('spiplistes:Abonner_format_html')."'";
-	$a_title_abo_texte =  " title='"._T('spiplistes:Abonner_format_texte')."'";
-	$a_title_desabo =  " title='"._T('spiplistes:Desabonner')."'";
+	$a_title_abo = array(
+		'html' =>  " title=\""._T('spiplistes:Abonner_format_html')."\""
+		, 'texte' =>  " title=\""._T('spiplistes:Abonner_format_texte')."\""
+		, 'desabo' =>  " title=\""._T('spiplistes:Desabonner')."\""
+	);
 
 	$ii = 1;
 	
@@ -353,11 +355,9 @@ function spiplistes_afficher_auteurs (
 			. "<td>"
 			.	(
 				(strlen($row['email'])>3)
-				? "<a href='mailto:".$row['email']."'><img alt='' src='"._DIR_IMG_PACK."m_envoi_rtl.gif' /></a>"
-				: "<img alt='"._T('spiplistes:Pas_adresse_email')."'"
-					// img ne prend pas de title (incorrect) mais mozilla n'affiche en bullet que pour title
-					. " title='"._T('spiplistes:Pas_adresse_email')."'"
-					. " src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."puceoff.gif' />"
+				? "<a href='mailto:".$row['email']."'>"
+					. spiplistes_corrige_img_pack("<img src='"._DIR_IMG_PACK."m_envoi_rtl.gif' alt='' /></a>")
+				: "<span title='"._T('spiplistes:Pas_adresse_email')."'>&bull;</span>"
 				)
 			. "</td>\n"
 			//
@@ -393,32 +393,34 @@ function spiplistes_afficher_auteurs (
 			. "<a name='abo".$row['id_auteur']."'></a>"
 			;
 
-		// SPIP 192 ne prend pas les array dans parametre_url()
-		// obligé de l'appeler 2 x
-		$retour = parametre_url($script_retour,'debut',$debut);
-		$retour = parametre_url($retour,'tri',$tri);
+		$exec_url = generer_url_ecrire($script_retour,"id_liste=$id_liste&debut=$debut&tri=$tri");
+		$action_url = generer_action_auteur('spiplistes_changer_statut_abonne', $row['id_auteur']."-format", $exec_url);
+		$action_url_ajax = generer_action_auteur('spiplistes_changer_statut_abonne', $row['id_auteur']."-format");
+		$action_url_ajax = parametre_url($action_url_ajax, 'id_liste', $id_liste);
+		$action_url_ajax = parametre_url($action_url_ajax, 'debut', $debut);
+		$action_url_ajax = parametre_url($action_url_ajax, 'tri', $tri);
 		
-		$u = generer_action_auteur('spiplistes_changer_statut_abonne', $row['id_auteur']."-format", $retour);
-		
-		$a_format_html = "<a $a_title_abo_html href='".parametre_url($u,'statut','html')."'>"._T('spiplistes:html')."</a>";
-		$a_format_texte = "<a $a_title_abo_texte href='".parametre_url($u,'statut','texte')."'>"._T('spiplistes:texte')."</a>";
-		$a_format_non = "<a $a_title_desabo href='".parametre_url($u,'statut','non')."'>"._T('spiplistes:desabo')."</a>";
-		
-		if($abo == 'html') {
-			$option_abo = $a_format_non." | ".$a_format_texte;
+		$a_format = array('html' => "", 'texte' => "", 'non' => "");
+		foreach(array_keys($a_format) as $key) {
+			$legend = ($key == 'non') ? 'Desabonner' : $key;
+			$a_format[$key] = ""
+				. "<a ".$a_title_abo[$key]." href='"
+					. parametre_url($action_url, 'statut', $key)
+					. "' onclick=\"return AjaxSqueeze('"
+					. parametre_url($action_url_ajax, 'statut', $key)
+						."','auteurs','',event)\">"
+					. _T('spiplistes:'.$legend)
+					. "</a>\n"
+				;		
 		}
-		elseif ($abo == 'texte') {
-			$option_abo = $a_format_non." | ".$a_format_html;
-		}
-		else {
-			$option_abo = $a_format_texte." | ".$a_format_html;
-		}
-		
 		$result .= ""
-			. "&nbsp;".$option_abo
+			. "&nbsp;"
+				. $a_format[(in_array($abo, array('html','texte')) ? 'non' : 'texte')]
+				. " | "
+				. $a_format[(($abo == 'html') ? 'texte' : 'html')]
 			. "</td></tr>\n"
 			;
-	}
+	} //
 	
 	$result .= ""
 		. "</table>\n"
@@ -469,14 +471,17 @@ function spiplistes_afficher_auteurs (
 	return($result);
 }
 
-// Lorsqu'appelé par ?action, perd la position
-// corrige le lien relatif
 function spiplistes_bonhomme_statut ($row) {
-	$result = bonhomme_statut($row);
-	if(preg_match(",^<img src='dist/images,", $result)) {
-		$result = preg_replace(",^<img src='dist/images,", "<img src='../dist/images", $result);
+	return(spiplistes_corrige_img_pack(bonhomme_statut($row)));
+}
+
+// Lorsqu'appelé par ?action (ajax), perd la position
+// corrige le lien relatif
+function spiplistes_corrige_img_pack ($img) {
+	if(preg_match(",^<img src='dist/images,", $img)) {
+		$img = preg_replace(",^<img src='dist/images,", "<img src='../dist/images", $img);
 	}
-	return($result);
+	return($img);
 }
 
 /******************************************************************************************/

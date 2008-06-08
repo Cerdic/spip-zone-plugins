@@ -185,6 +185,7 @@ function spiplistes_listes_selectionner_elligibles ($non_abonnes, $nb_non_abonne
 // fonction appelé aussi par action pour resultat en ajax
 function spiplistes_listes_boite_abonnements ($id_liste, $statut_liste, $tri, $debut, $script_retour) {
 	$boite_abonnements = ""
+		. "<div id='grosse_boite_abonnements' class='verdana1'>\n"
 		. "<div id='auteurs'>\n"
 		. spiplistes_listes_boite_abonnes($id_liste, $tri, $debut, $script_retour)
 		. "</div>\n"
@@ -194,6 +195,9 @@ function spiplistes_listes_boite_abonnements ($id_liste, $statut_liste, $tri, $d
 	if($nb_non_abonnes > 0) {
 		$boite_abonnements .= spiplistes_listes_selectionner_elligibles($non_abonnes, $nb_non_abonnes, $id_liste, $tri);
 	}
+	$boite_abonnements .= ""
+		. "</div>\n"
+		;
 	return($boite_abonnements);
 }
 
