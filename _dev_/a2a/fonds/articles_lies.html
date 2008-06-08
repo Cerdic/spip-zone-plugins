@@ -10,8 +10,9 @@
 				<BOUCLE_lesArticlesLies(ARTICLES){id_article = #ID_ARTICLE_LIE}>
 					<li>#TITRE : 
 					<a href="[(#URL_ARTICLE|url_absolue)]"><:a2a:voir:></a> | 
-					<a href="[(#EVAL{supprimer_lien_a2a}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&redirect=ecrire/#SELF})]">
-						<:a2a:supprimer_le_lien:></a>
+					<a href="[(#EVAL{supprimer_lien_a2a}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&redirect=ecrire/#SELF})]"><:a2a:supprimer_le_lien:></a> |
+					<a href="[(#EVAL{a2a_modifier_rang}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&modifier_rang=moins&redirect=ecrire/#SELF})]"><:a2a:rang_moins:></a> |
+					<a href="[(#EVAL{a2a_modifier_rang}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&modifier_rang=plus&redirect=ecrire/#SELF})]"><:a2a:rang_plus:></a>
 					</li>
 				</BOUCLE_lesArticlesLies>
 					

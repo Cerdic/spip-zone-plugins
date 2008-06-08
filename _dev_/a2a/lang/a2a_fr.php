@@ -16,6 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_resultat' => 'Pas de r&eacute;sultats',
 	
 	// R
+	'rang_moins' => 'Monter',
+	'rang_plus' => 'Descendre',
 	'rechercher' => 'Rechercher',
 	'rechercher_un_article_a_lier' => 'Rechercher un article',
 	
