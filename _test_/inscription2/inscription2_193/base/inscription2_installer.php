@@ -4,11 +4,12 @@ $GLOBALS['inscription2_version'] = 0.61;
 
 function inscription2_upgrade(){
 	
+    include_spip('cfg_options');
+	
 	//On force le fait d accepter les visiteurs
 	$accepter_visiteurs = $GLOBALS['meta']['accepter_visiteurs'];
 	if($accepter_visiteurs != 'oui'){
 		ecrire_meta("accepter_visiteurs", "oui");
-		if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) ecrire_metas();
 	}
 	
 	$version_base = $GLOBALS['inscription2_version'];
@@ -44,14 +45,157 @@ function inscription2_upgrade(){
 			spip_query("ALTER TABLE ".$table_nom." DROP INDEX id_auteur, ADD INDEX id_auteur (id_auteur)");
 		else
 			spip_query("ALTER TABLE ".$table_nom." ADD INDEX id_auteur (id_auteur)");
-	
+
 		//insertion des infos par defaut
 		$lala = $GLOBALS['meta']['inscription2'];
 		
 		if(!$lala){
-		ecrire_meta('inscription2','a:142:{s:3:"nom";s:2:"on";s:15:"nom_obligatoire";s:2:"on";s:13:"nom_fiche_mod";s:2:"on";s:9:"nom_fiche";N;s:9:"nom_table";s:2:"on";s:5:"email";s:2:"on";s:17:"email_obligatoire";s:2:"on";s:15:"email_fiche_mod";N;s:11:"email_fiche";N;s:11:"email_table";N;s:11:"nom_famille";s:2:"on";s:23:"nom_famille_obligatoire";N;s:21:"nom_famille_fiche_mod";N;s:17:"nom_famille_fiche";N;s:17:"nom_famille_table";s:2:"on";s:6:"prenom";s:2:"on";s:18:"prenom_obligatoire";N;s:16:"prenom_fiche_mod";N;s:12:"prenom_fiche";N;s:12:"prenom_table";s:2:"on";s:8:"username";s:2:"on";s:20:"username_obligatoire";N;s:18:"username_fiche_mod";s:2:"on";s:14:"username_fiche";N;s:14:"username_table";N;s:9:"naissance";N;s:21:"naissance_obligatoire";N;s:19:"naissance_fiche_mod";N;s:15:"naissance_fiche";N;s:15:"naissance_table";N;s:4:"sexe";N;s:16:"sexe_obligatoire";N;s:14:"sexe_fiche_mod";N;s:10:"sexe_fiche";N;s:10:"sexe_table";N;s:7:"adresse";s:2:"on";s:19:"adresse_obligatoire";N;s:17:"adresse_fiche_mod";s:2:"on";s:13:"adresse_fiche";N;s:13:"adresse_table";N;s:11:"code_postal";s:2:"on";s:23:"code_postal_obligatoire";N;s:21:"code_postal_fiche_mod";s:2:"on";s:17:"code_postal_fiche";N;s:17:"code_postal_table";N;s:5:"ville";s:2:"on";s:17:"ville_obligatoire";N;s:15:"ville_fiche_mod";s:2:"on";s:11:"ville_fiche";N;s:11:"ville_table";s:2:"on";s:4:"pays";N;s:16:"pays_obligatoire";N;s:14:"pays_fiche_mod";N;s:10:"pays_fiche";N;s:10:"pays_table";N;s:9:"telephone";s:2:"on";s:21:"telephone_obligatoire";N;s:19:"telephone_fiche_mod";s:2:"on";s:15:"telephone_fiche";N;s:15:"telephone_table";N;s:3:"fax";N;s:15:"fax_obligatoire";N;s:13:"fax_fiche_mod";N;s:9:"fax_fiche";N;s:9:"fax_table";N;s:6:"mobile";N;s:18:"mobile_obligatoire";N;s:16:"mobile_fiche_mod";N;s:12:"mobile_fiche";N;s:12:"mobile_table";N;s:11:"commentaire";s:2:"on";s:23:"commentaire_obligatoire";N;s:21:"commentaire_fiche_mod";N;s:17:"commentaire_fiche";N;s:17:"commentaire_table";N;s:10:"profession";N;s:22:"profession_obligatoire";N;s:20:"profession_fiche_mod";N;s:16:"profession_fiche";N;s:16:"profession_table";N;s:7:"societe";N;s:19:"societe_obligatoire";N;s:17:"societe_fiche_mod";N;s:13:"societe_fiche";N;s:13:"societe_table";N;s:11:"url_societe";N;s:23:"url_societe_obligatoire";N;s:21:"url_societe_fiche_mod";N;s:17:"url_societe_fiche";N;s:17:"url_societe_table";N;s:7:"secteur";N;s:19:"secteur_obligatoire";N;s:17:"secteur_fiche_mod";N;s:13:"secteur_fiche";N;s:13:"secteur_table";N;s:8:"fonction";N;s:20:"fonction_obligatoire";N;s:18:"fonction_fiche_mod";N;s:14:"fonction_fiche";N;s:14:"fonction_table";N;s:11:"adresse_pro";N;s:23:"adresse_pro_obligatoire";N;s:21:"adresse_pro_fiche_mod";N;s:17:"adresse_pro_fiche";N;s:17:"adresse_pro_table";N;s:15:"code_postal_pro";N;s:27:"code_postal_pro_obligatoire";N;s:25:"code_postal_pro_fiche_mod";N;s:21:"code_postal_pro_fiche";N;s:21:"code_postal_pro_table";N;s:9:"ville_pro";N;s:21:"ville_pro_obligatoire";N;s:19:"ville_pro_fiche_mod";N;s:15:"ville_pro_fiche";N;s:15:"ville_pro_table";N;s:8:"pays_pro";N;s:20:"pays_pro_obligatoire";N;s:18:"pays_pro_fiche_mod";N;s:14:"pays_pro_fiche";N;s:14:"pays_pro_table";N;s:13:"telephone_pro";N;s:25:"telephone_pro_obligatoire";N;s:23:"telephone_pro_fiche_mod";N;s:19:"telephone_pro_fiche";N;s:19:"telephone_pro_table";N;s:7:"fax_pro";N;s:19:"fax_pro_obligatoire";N;s:17:"fax_pro_fiche_mod";N;s:13:"fax_pro_fiche";N;s:13:"fax_pro_table";N;s:10:"mobile_pro";N;s:22:"mobile_pro_obligatoire";N;s:20:"mobile_pro_fiche_mod";N;s:16:"mobile_pro_fiche";N;s:16:"mobile_pro_table";N;s:11:"publication";N;s:8:"domaines";N;s:6:"divers";N;s:14:"statut_nouveau";s:6:"6forum";s:8:"creation";N;s:10:"statut_int";N;s:14:"statut_interne";s:0:"";}');
-			//On ecrit tout de suite les metas comme cela on cree les champs directement derriere
-			if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) ecrire_metas();
+		    ecrire_config(
+		        'inscription2',
+		        array(
+		            'nom' => 'on',
+		            'nom_obligatoire' => 'on',
+		            'nom_fiche_mod' => 'on',
+		            'nom_fiche' => 'on',
+		            'nom_table' => 'on',
+		            'email' => 'on',
+		            'email_obligatoire' => 'on',
+		            'email_fiche_mod' => NULL,
+		            'email_fiche' => NULL,
+		            'email_table' => NULL,
+		            'nom_famille' => 'on',
+		            'nom_famille_obligatoire' => NULL,
+		            'nom_famille_fiche_mod' => NULL,
+		            'nom_famille_fiche' => NULL,
+		            'nom_famille_table' => 'on',
+		            'prenom' => 'on',
+		            'prenom_obligatoire' => NULL,
+		            'prenom_fiche_mod' => NULL,
+		            'prenom_fiche' => NULL,
+		            'prenom_table' => 'on',
+		            'login' => 'on',
+		            'login_obligatoire' => NULL,
+		            'login_fiche_mod' => 'on',
+		            'login_fiche' => NULL,
+		            'login_table' => NULL,
+		            'naissance' => NULL,
+		            'naissance_obligatoire' => NULL,
+		            'naissance_fiche_mod' => NULL,
+		            'naissance_fiche' => NULL,
+		            'naissance_table' => NULL,
+		            'sexe' => NULL,
+		            'sexe_obligatoire' => NULL,
+		            'sexe_fiche_mod' => NULL,
+		            'sexe_fiche' => NULL,
+		            'sexe_table' => NULL,
+		            'adresse' => 'on',
+		            'adresse_obligatoire' => NULL,
+		            'adresse_fiche_mod' => 'on',
+		            'adresse_fiche' => NULL,
+		            'adresse_table' => NULL,
+		            'code_postal' => 'on',
+		            'code_postal_obligatoire' => NULL,
+		            'code_postal_fiche_mod' => 'on',
+		            'code_postal_fiche' => NULL,
+		            'code_postal' => NULL,
+		            'ville' => 'on',
+		            'ville_obligatoire'  => NULL,
+		            'ville_fiche_mod' => 'on',
+		            'ville_fiche' => NULL,
+		            'ville_table' => 'on',
+		            'pays' => NULL,
+		            'pays_obligatoire' => NULL,
+		            'pays_fiche_mod' => NULL,
+		            'pays_fiche' => NULL,
+		            'pays_table' => NULL,
+		            'telephone' => 'on',
+		            'telephone_obligatoire' => NULL,
+		            'telephone_fiche_mod' => 'on',
+		            'telephone_fiche' => NULL,
+		            'telephone_table' => NULL,
+		            'fax' => NULL,
+		            'fax_obligatoire' => NULL,
+		            'fax_fiche_mod' => NULL,
+		            'fax_fiche' => NULL,
+		            'fax_table' => NULL,
+		            'mobile' => NULL,
+		            'mobile_obligatoire' => NULL,
+		            'mobile_fiche_mod' => NULL,
+		            'mobile_fiche' => NULL,
+		            'mobile_table' => NULL,
+		            'commentaire' => 'on',
+		            'commentaire_obligatoire' => NULL,
+		            'commentaire_fiche_mod' => NULL,
+		            'commentaire_fiche' => NULL,
+		            'commentaire_table' => NULL,
+		            'profession' => NULL,
+		            'profession_obligatoire' => NULL,
+		            'profession_fiche_mod' => NULL,
+		            'profession_fiche' => NULL,
+		            'profession_table' => NULL,
+		            'societe' => NULL,
+		            'societe_obligatoire' => NULL,
+		            'societe_fiche_mod' => NULL,
+		            'societe_fiche' => NULL,
+		            'societe_table' => NULL,
+		            'url_societe' => NULL,
+		            'url_societe_obligatoire' => NULL,
+		            'url_societe_fiche_mod' => NULL,
+		            'url_societe_fiche' => NULL,
+		            'url_societe_table' => NULL,
+		            'secteur' => NULL,
+		            'secteur_obligatoire' => NULL,
+		            'secteur_fiche_mod' => NULL,
+		            'secteur_fiche' => NULL,
+		            'secteur_table' => NULL,
+		            'fonction' => NULL,
+		            'fonction_obligatoire' => NULL,
+		            'fonction_fiche_mod' => NULL,
+		            'fonction_table' => NULL,
+		            'adresse_pro' => NULL,
+		            'adresse_pro_obligatoire' => NULL,
+		            'adresse_pro_fiche_mod' => NULL,
+		            'adresse_pro_fiche' => NULL,
+		            'adresse_pro_table' => NULL,
+		            'code_postal_pro' => NULL,
+		            'code_postal_pro_obligatoire' => NULL,
+		            'code_postal_pro_fiche_mod' => NULL,
+		            'code_postal_pro_fiche' => NULL,
+		            'code_postal_pro_table' => NULL,
+		            'ville_pro' => NULL,
+		            'ville_pro_obligatoire' => NULL,
+		            'ville_pro_fiche_mod' => NULL,
+		            'ville_pro_fiche' => NULL,
+		            'ville_pro_table' => NULL,
+		            'pays_pro' => NULL,
+		            'pays_pro_obligatoire' => NULL,
+		            'pays_pro_fiche_mod' => NULL,
+		            'pays_pro_fiche' => NULL,
+		            'pays_pro_table' => NULL,
+		            'telephone_pro' => NULL,
+		            'telephone_pro_obligatoire' => NULL,
+		            'telephone_pro_fiche_mod' => NULL,
+		            'telephone_pro_fiche' => NULL,
+		            'telephone_pro_table' => NULL,
+		            'fax_pro' => NULL,
+		            'fax_pro_obligatoire' => NULL,
+		            'fax_pro_fiche_mod' => NULL,
+		            'fax_pro_fiche' => NULL,
+		            'fax_pro_table' => NULL,
+		            'mobile_pro' => NULL,
+		            'mobille_pro_obligatoire' => NULL,
+		            'mobile_pro_fiche_mod' => NULL,
+		            'mobile_pro_fiche' => NULL,
+		            'mobile_pro_table' => NULL,
+		            'publication' => NULL,
+		            'domaines' => NULL,
+		            'divers' => NULL,
+		            'statut_nouveau' => '6forum',
+		            'creation' => NULL,
+		            'statut_int' => NULL,
+		            'statut_interne' => ''		            
+		        )
+	        );
 		}
 	
 		//ajouts des differents champs ecris dans les metas
