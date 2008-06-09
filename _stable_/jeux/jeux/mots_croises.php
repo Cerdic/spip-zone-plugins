@@ -124,25 +124,34 @@ function calcul_tableau_grille($texte){
 
 // compare les variables Post avec les valeurs de la solution...
 function comparaison_grille($tableau_grille, $indexJeux) {
-    $erreurs=0; $vides=0;
+    $erreurs=0; $vides=0; $total=0;
     foreach($tableau_grille as $ligne =>$contenu_ligne) {
         foreach ($contenu_ligne as $colonne =>$cellule) {
             //compare les valeurs du tableau PHP avec les variables POST
 			if ($cellule!='*') {
 				$input = trim(_request('GR'.$indexJeux.'x'.($colonne+1).'x'.($ligne+1)));
+				$total++; // nombre de case total
 	            if ($input=='') $vides++;
     	         elseif (strtoupper($input)!=strtoupper($cellule)) $erreurs++;
 			}	
 		}
 	}
-    return array($erreurs, $vides);
+    return array($erreurs, $vides,$total);
 }
 
 // renvoie le nombre d'erreurs et de cases vides
 function calcul_erreurs_grille($solution, $indexJeux) {
 	if (_request("bouton_envoi_$indexJeux") == '') return '';
 	else {
-	  list($nbr_erreurs, $nbr_vides) = comparaison_grille($solution, $indexJeux); 
+	  list($nbr_erreurs, $nbr_vides,$total) = comparaison_grille($solution, $indexJeux); 
+	  // on insère le resultat dans ma base de donnée
+	  if ($_POST['id_jeu']!=''){
+	  	
+	  	include_spip('base/jeux_ajouter_resultat');
+		jeux_ajouter_resulat($_POST['id_jeu'], $total-$nbr_erreurs-$nbr_vides, $total);
+		}
+	  
+	  // on retourne ce qu'on affiche
 	  return '<p class="jeux_erreur">'
 		. (($nbr_erreurs==0)?_T('jeux:aucune_erreur'):(
 		 ($nbr_erreurs==1)?_T('jeux:une_erreur'):_T("jeux:n_erreurs", Array('n'=>$nbr_erreurs))

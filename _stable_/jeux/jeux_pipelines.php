@@ -134,7 +134,7 @@ function jeux_affiche_droite($flux){
 	
 	if (in_array($flux['args']['exec'],array('auteur_infos'))){
 	include_spip('exec/inc_boites_infos');			
-	$r = boite_infos_spip_auteur($flux['args']['id_auteur']);  
+	$flux['data'] .= boite_infos_spip_auteur($flux['args']['id_auteur']);  
 	
 	}
 	
