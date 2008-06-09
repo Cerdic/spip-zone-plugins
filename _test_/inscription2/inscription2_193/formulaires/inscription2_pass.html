@@ -203,6 +203,9 @@ function cryptage() {
 [(#CONFIG{inscription2/code_postal_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
 [(#CONFIG{inscription2/ville_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
 [(#CONFIG{inscription2/pays_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+[(#CONFIG{inscription2/telephone_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+[(#CONFIG{inscription2/fax_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+[(#CONFIG{inscription2/mobile_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
 
 [(#GET{afficher_plus}|=={true}|?{' ', ''})
 <fieldset class="infos-auteurs">
@@ -267,6 +270,31 @@ function cryptage() {
 	<br class="nettoyeur" />
 </div>
 ]
+
+[(#CONFIG{inscription2/telephone_pro}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
+       <label for="telephone_pro"><:inscription2:telephone_pro:></label>
+       <input type="text" class="forml" name="telephone_pro"
+id="telephone_pro" value="#ENV{telephone_pro}"/>
+       <br class="nettoyeur" />
+</div>]
+
+[(#CONFIG{inscription2/fax_pro}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
+       <label for="fax_pro"><:inscription2:fax_pro:></label>
+       <input type="text" class="forml" name="fax_pro" id="fax_pro"
+value="#ENV{fax_pro}"/>
+       <br class="nettoyeur" />
+</div>]
+
+[(#CONFIG{inscription2/mobile_pro}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
+       <label for="mobile_pro"><:inscription2:mobile_pro:></label>
+       <input type="text" class="forml" name="mobile_pro" id="mobile_pro"
+value="#ENV{mobile_pro}"/>
+       <br class="nettoyeur" />
+</div>]
+
 </fieldset>
 ]
 
