@@ -504,7 +504,7 @@ function spiplistes_listes_langue ($id_liste) {
 	return(false);
 }
 
-//CP-20080608 :: personnalisation du courrier (experimental)
+//CP-20080608 :: personnalisation du courrier
 // recherche/remplace les tags _AUTEUR_CLE_ en masse dans le corps du message.
 // (toutes les cles présentes dans la table *_auteur sont utilisables)
 function spiplistes_personnaliser_courrier ($corps, $id_auteur) {
