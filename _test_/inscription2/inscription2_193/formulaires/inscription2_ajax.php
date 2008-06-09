@@ -15,20 +15,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // chargement des valeurs par defaut des champs du formulaire
 function formulaires_inscription2_ajax_charger_dist($id_auteur = NULL){
 
-    //on obtient l'id de la personne connectée
-    //$id_auteur = intval($GLOBALS['auteur_session']['id_auteur']);
-    
+	global $tables_principales;
+   
+    //initialise les variables d'environnement pas défaut
     $valeurs = array();
+
+    //récupere la liste des champs possible
+    $champs = inscription2_champs_formulaire();
 
     //si on a bien un auteur alors on préremplit le formulaire avec ses informations
     //les nom des champs sont les memes que ceux de la base de données
     if (is_numeric($id_auteur)) {
         $auteur = sql_fetsel(
-            'nom,email,login'
-            .',prenom,nom_famille,sexe,societe,secteur,fonction,adresse_pro,code_postal_pro,ville_pro,pays_pro,telephone_pro,fax_pro,mobile_pro',
+            $champs,
             'spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)',
             'id_auteur ='.$id_auteur            
         );
+
 
 	    $valeurs = $auteur;
     }
@@ -185,6 +188,34 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
     return $message;
 
 }
+
+/*
+ *  ! brief Determine les champs de formulaire à traiter
+ *  
+ */
+function inscription2_champs_formulaire() {
+
+    //charge les valeurs de chaque champs proposés dans le formulaire
+    foreach (lire_config('inscription2/') as $clef => $valeur) {
+        /* Il faut retrouver les noms des champ, 
+         * par défaut inscription2 propose pour chaque champ le cas champ_obligatoire
+         *  On retrouve donc les chaines de type champ_obligatoire
+         *  Ensuite on verifie que le champ est proposé dans le formulaire
+         *  Remplissage de $valeurs[]
+         */
+        //decoupe la clef sous le forme $resultat[0] = $resultat[1] ."_obligatoire"
+        //?: permet de rechercher la chaine sans etre retournée dans les résultats
+        preg_match('/^(.*)(?:_obligatoire)/i', $clef, $resultat);
+            
+        if ((!empty($resultat[1])) && (lire_config('inscription2/'.$resultat[1]) == 'on')) {
+            $valeurs[] = $resultat[1];
+        }
+    }
+
+    return $valeurs;
+
+}
+
 
 /*
 
