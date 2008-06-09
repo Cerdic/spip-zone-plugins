@@ -147,6 +147,13 @@ define("_SPIPLISTES_TAMPON_CLES", "editeur_nom,editeur_adresse,editeur_rcs,edite
 
 define("_SPIPLISTES_TIME_1_DAY", (3600 * 24));
 
+if(spiplistes_spip_est_inferieur_193()) { 
+	@define('SPIP_BOTH', MYSQL_BOTH);
+	@define('SPIP_ASSOC', MYSQL_ASSOC);
+	@define('SPIP_NUM', MYSQL_NUM);
+}
+
+
 //Balises Spip-listes
 
 function balise_MELEUSE_CRON($p) {

@@ -44,8 +44,6 @@ function exec_spiplistes_config () {
 		, $spip_lang_right
 		;
 
-	spiplistes_log("CONFIGURE ID_AUTEUR #$connect_id_auteur <<");
-	
 	$keys_complement_courrier = array(
 		'opt_personnaliser_courrier'
 		, 'opt_lien_en_tete_courrier', 'lien_patron'
@@ -98,10 +96,15 @@ function exec_spiplistes_config () {
 	}
 
 	$doit_ecrire_metas = false;
+	$str_log = "";
+	if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
+		$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = array();
+	}
 	
 	if($abonnement_valider && $abonnement_config) {
 		ecrire_meta('abonnement_config', $abonnement_config);
 		$doit_ecrire_metas = true;
+		$str_log .= "abonnement_config = $abonnement_config, ";
 	}
 
 	if($btn_complement_courrier) {
@@ -111,6 +114,7 @@ function exec_spiplistes_config () {
 				, (!empty($$key) ? $$key : 'non')
 				, _SPIPLISTES_META_PREFERENCES
 				);
+			$str_log .= $key." = ".$$key.", ";
 		}
 		$doit_ecrire_metas = true;
 	}
@@ -118,49 +122,46 @@ function exec_spiplistes_config () {
 	if($btn_param_valider) {
 		foreach($keys_param_valider as $key) {
 			if(($key != 'email_defaut') || email_valide($email_defaut)) {
+				$str_log .= $key." = ".$$key.", ";
 				ecrire_meta($key, $$key);
 			}
 		}
 		foreach($keys_opts_param_valider as $key) {
-			if(!empty($$key)) {
-				if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
-					$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = array();
-				}
-				__plugin_ecrire_key_in_serialized_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
-			} 
-			else {
-				__plugin_ecrire_key_in_serialized_meta ($key, null, _SPIPLISTES_META_PREFERENCES);
-			}
+			$$key = (!empty($$key)) ? $$key : 'non';
+			__plugin_ecrire_key_in_serialized_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
+			$str_log .= $key." = ".$$key.", ";
 		}
 		$doit_ecrire_metas = true;
 	}
 		
 	if($btn_console_syslog) {
+		if(!__server_in_private_ip_adresses()) {
+		}
 		foreach($keys_console_syslog as $key) {
-			if(!empty($$key)) {
-				if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
-					$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = array();
-				}
-				__plugin_ecrire_key_in_serialized_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
-			} 
-			else {
-				__plugin_ecrire_key_in_serialized_meta ($key, null, _SPIPLISTES_META_PREFERENCES);
+			if(
+				// si pas sur réseau privé et option syslog validé,
+				// retire l'option syslog (cas de copie de base du LAN sur celle du WAN)
+				($key == 'opt_console_syslog')
+				&& !__server_in_private_ip_adresses()
+			) {
+				$$key = 'non';
+			} else {
+				$$key = (!empty($$key)) ? $$key : 'non';
 			}
+			__plugin_ecrire_key_in_serialized_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
+			$str_log .= $key." = ".$$key.", ";
 		}
 		$doit_ecrire_metas = true;
 	}
 	
-	if(!__server_in_private_ip_adresses() 
-		&& spiplistes_pref_lire('opt_console_syslog')
-		// si pas sur réseau privé et option syslog validé,
-		// retire l'option syslog (cas de copie de base du LAN sur celle du WAN)
-		) {
-		__plugin_ecrire_key_in_serialized_meta ($key, null, _SPIPLISTES_META_PREFERENCES);
-		$doit_ecrire_metas = true;
+	if($doit_ecrire_metas) {
+		// recharge les metas en cache 
+		spiplistes_ecrire_metas();
 	}
 	
-	if($doit_ecrire_metas) {
-		spiplistes_ecrire_metas();
+	if(!empty($str_log)) {
+		$str_log = rtrim($str_log, ", ");
+		spiplistes_log("CONFIGURE id_auteur #$connect_id_auteur : ".$str_log);
 	}
 
 	// Paramétrages des envois
@@ -403,7 +404,7 @@ function exec_spiplistes_config () {
 				. debut_cadre_relief("", true, "", _T('spiplistes:Console_syslog'))
 				. "<p class='verdana2'>"._T('spiplistes:Console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR']))."</p>\n"
 				. "<input type='checkbox' name='opt_console_syslog' value='oui' id='opt_console_syslog' "
-					. ((spiplistes_pref_lire('opt_console_syslog')) ? "checked='checked'" : "")
+					. ((spiplistes_pref_lire('opt_console_syslog') == 'oui') ? "checked='checked'" : "")
 					. " />\n"
 				. "<label class='verdana2' for='opt_console_syslog'>"._T('spiplistes:Console_syslog_texte')."</label>\n"
 				. fin_cadre_relief(true)
@@ -414,7 +415,7 @@ function exec_spiplistes_config () {
 				;
 		}
 		// voir les journaux SPIP
-		if(!spiplistes_pref_lire('opt_console_syslog')) {
+		if(!($ii = spiplistes_pref_lire('opt_console_syslog')) || ($ii == 'non')) {
 		// si syslog non activé, on visualise les journaux de spip
 			// lien sur logs ou affiche logs
 			$page_result .= ""

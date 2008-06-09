@@ -9,6 +9,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
 include_spip('inc/spiplistes_api');
+include_spip('inc/layer');
 
 // pipeline (plugin.xml)
 function spiplistes_affiche_milieu ($flux) {
@@ -145,7 +146,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			
 			$bloc_visible = _request('btn_abonnements_valider');
 			
-			$debut_block = ($bloc_visible ? "debut_block_visible" : "debut_block_invisible");
+			$debut_block = ($bloc_visible ? "spiplistes_debut_block_visible" : "spiplistes_debut_block_invisible");
 			
 			$result .= ""
 				. "<!-- formulaire abonnement spiplistes -->\n" 

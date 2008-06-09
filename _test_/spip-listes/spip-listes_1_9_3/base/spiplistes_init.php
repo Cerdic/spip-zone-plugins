@@ -32,19 +32,9 @@ function spiplistes_install ($action) {
 			$result = (
 				$spiplistes_version
 				&& ($spiplistes_version >= __plugin_real_version_get(_SPIPLISTES_PREFIX))
-				&& spip_mysql_showtable("spip_auteurs_elargis")
-				&& spip_mysql_showtable("spip_listes")
+				&& sql_showtable("spip_listes")
 				);
-			if(
-				!spiplistes_spip_est_inferieur_193() 
-				&& (_request('action') == 'desinstaller_plugin')
-			) {
-				// dans action/desinstaller_plugin.php
-				// pour réellement désinstaller le plugin dans les metas et cache
-				// SPIP 192 attend false, 193 true
-				$result = !$result;
-			}
-			spiplistes_log("TEST: ".($result ? "TRUE" : "FALSE"), _SPIPLISTES_LOG_DEBUG);
+			//spiplistes_log("TEST: ".($result ? "OK" : "NO"), _SPIPLISTES_LOG_DEBUG);
 			return($result);
 			break;
 		case 'install':
@@ -54,7 +44,7 @@ function spiplistes_install ($action) {
 			else {
 				// logiquement, ne devrait pas passer par là (upgrade assuré par mes_options)
 				include_spip('base/spiplistes_upgrade');
-				//$result = spiplistes_upgrade_base();
+				$result = spiplistes_upgrade();
 			}
 			$result = (
 				$result
@@ -66,13 +56,13 @@ function spiplistes_install ($action) {
 				// la case à cocher du plugin sera quand même cochée
 				spiplistes_log("spiplistes INSTALL: ERROR. PLEASE REINSTALL PLUGIN...");
 			}
-			spiplistes_log("spiplistes INSTALL: ".($result ? "OK" : "NO"));
+			spiplistes_log("INSTALL: ".($result ? "OK" : "NO"));
 			return($result);
 			break;
 		case 'uninstall':
 			// est appellé lorsque "Effacer tout" dans exec=admin_plugin
 			$result = spiplistes_vider_tables();
-			spiplistes_log("UNINSTALL: ".($result ? "TRUE" : "FALSE"));
+			spiplistes_log("UNINSTALL: ".($result ? "OK" : "NO"));
 			return($result);
 			break;
 		default:
@@ -161,24 +151,27 @@ function spiplistes_activer_inscription_visiteurs () {
 
 function spiplistes_vider_tables () {
 
-spiplistes_log("spiplistes_vider_tables() <<", _SPIPLISTES_LOG_DEBUG);
-
 	include_spip('base/abstract_sql');
 	
-	sql_drop_table(
-		"spip_listes, spip_courriers, spip_auteurs_courriers, spip_auteurs_listes, spip_auteurs_mod_listes"
-		, true);
+	// ne supprime pas la table spip_auteurs_elargis (utilisée par inscription2, echoppe, ... ? )
+	$sql_tables = "spip_listes, spip_courriers, spip_auteurs_courriers, spip_auteurs_listes, spip_auteurs_mod_listes";
 	
-	// ne supprime pas spip_auteurs_elargis. Ca peut servir ;-?
-	effacer_meta('spiplistes_version');
-	effacer_meta('spiplistes_base_version');
-	effacer_meta('spiplistes_charset_envoi');
-	effacer_meta('spiplistes_lots');
-	effacer_meta('abonnement_config');
-	effacer_meta(_SPIPLISTES_META_PREFERENCES);
+	spiplistes_log("DROPT TABLES ".$sql_tables);
+	sql_drop_table($sql_tables, true);
+	
+	// effacer les metas (prefs, etc.)
+	sql_delete('spip_meta', 
+		"nom=".sql_quote('spiplistes_version')
+		. " OR nom=".sql_quote('spiplistes_base_version')
+		. " OR nom=".sql_quote('spiplistes_charset_envoi')
+		. " OR nom=".sql_quote('spiplistes_lots')
+		. " OR nom=".sql_quote('abonnement_config')
+		. " OR nom=".sql_quote(_SPIPLISTES_META_PREFERENCES)
+	);
+	// recharge les metas en cache 
 	spiplistes_ecrire_metas();
 	
 	return(true);
-}
+} //
 
 ?>

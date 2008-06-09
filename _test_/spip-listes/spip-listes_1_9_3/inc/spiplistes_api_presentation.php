@@ -394,14 +394,14 @@ function spiplistes_boite_patron ($flag_editable, $id_liste
 			$result  .= ""
 				. spiplistes_bouton_block_depliable ($titre_boite, true, md5($nom_bouton_valider))
 				. (spiplistes_spip_est_inferieur_193() ? $titre_boite : "")
-				. debut_block_visible(md5($nom_bouton_valider))
+				. spiplistes_debut_block_visible(md5($nom_bouton_valider))
 				;
 		}
 		else {
 			$result  .= ""
 				. spiplistes_bouton_block_depliable ($titre_boite, false, md5($nom_bouton_valider))
 				. (spiplistes_spip_est_inferieur_193() ? $titre_boite : "")
-				. debut_block_invisible(md5($nom_bouton_valider))
+				. spiplistes_debut_block_invisible(md5($nom_bouton_valider))
 				;
 		}
 	}
@@ -783,6 +783,21 @@ function spiplistes_terminer_page_non_autorisee ($return = true) {
 	spiplistes_terminer_page_message (_T('spiplistes:acces_a_la_page'), $return);
 }
 
+function spiplistes_debut_block_visible ($id="") {
+	if(!function_exists('debut_block_visible')) {
+		include_spip('inc/layer');
+		return(debut_block_depliable(true,$id));
+	}
+	return(debut_block_visible($id));
+}
+
+function spiplistes_debut_block_invisible ($id="") {
+	if(!function_exists('debut_block_invisible')) {
+		include_spip('inc/layer');
+		return debut_block_depliable(false,$id);
+	}
+	return(debut_block_invisible($id));
+}
 
 //
 ?>

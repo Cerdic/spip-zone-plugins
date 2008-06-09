@@ -216,8 +216,8 @@ function compat_spiplistes_defs_dist() {
 				$r = sql_query($query);
 				return($r ? mysql_insert_id() : $r);
 			}',
-		
-		'sql_showtable' => '($table, $serveur=\'\') {
+		//
+		'sql_showtable' => '($table, $serveur=\'\') { 
 			return spip_abstract_showtable($table, \'mysql\', true);
 		}',
 		

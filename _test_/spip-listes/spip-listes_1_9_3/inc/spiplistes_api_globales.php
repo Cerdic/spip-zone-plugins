@@ -31,7 +31,7 @@
 
 function spiplistes_log($texte, $level = LOG_WARNING) {
 	if(__server_in_private_ip_adresses()
-		&& spiplistes_pref_lire('opt_console_syslog')
+		&& (spiplistes_pref_lire('opt_console_syslog') == 'oui')
 	) {
 		__syslog_trace($texte, $level);
 	}

@@ -122,7 +122,7 @@ function spiplistes_upgrade_base (
 		
 		// si etait deja installe mais dans une vieille version, on reprend a zero
 		include_spip('base/abstract_sql');
-		$desc = spip_abstract_showtable("spip_listes", '', true);
+		$desc = sql_showtable("spip_listes");
 		if (!isset($desc['field']['id_liste']))
 			$current_version = 0.0;
 		if (
@@ -253,7 +253,7 @@ function spiplistes_upgrade_base (
 			include_spip('base/abstract_sql');
 			if (($res=spip_query("SELECT id_auteur FROM spip_auteurs_mod_listes"))
 				AND (!spip_fetch_array($res))
-			  AND ($desc = spip_abstract_showtable("spip_abonnes_listes", '', true))
+			  AND ($desc = sql_showtable("spip_abonnes_listes"))
 			  AND isset($desc['field']['id_auteur'])) {
 				spip_query("DROP TABLE spip_auteurs_mod_listes"); // elle vient d'etre cree par un creer_base inopportun
 				spip_query("DROP TABLE spip_auteurs_courriers"); // elle vient d'etre cree par un creer_base inopportun
@@ -347,7 +347,7 @@ function spiplistes_upgrade_base (
 			echo "regulariser l'index";
 			$table_nom = "spip_auteurs_elargis";
 			//ajout des index
-			$desc = spip_abstract_showtable($table_nom, '', true);
+			$desc = sql_showtable($table_nom);
 			if($desc['key']['PRIMARY KEY']!='id'){
 				sql_alter("TABLE ".$table_nom." DROP PRIMARY KEY");
 				if(!isset($desc['fields']['id'])) {
