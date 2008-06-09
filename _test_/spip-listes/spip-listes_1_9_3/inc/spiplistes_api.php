@@ -686,10 +686,6 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 	);
 }
 
-// charge les vieilles def nécessaires si besoin
-if(!spiplistes_spip_est_inferieur_193()) { 
-	include_spip("inc/spiplistes_api_vieilles_defs");
-}
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
