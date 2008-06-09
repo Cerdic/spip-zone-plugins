@@ -6,8 +6,9 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-include_spip("inc/plugin_globales_lib");
 include_spip('base/abstract_sql');
+include_spip("inc/plugin_globales_lib");
+include_spip('inc/spiplistes_api_globales');
 include_spip('inc/spiplistes_api_abstract_sql');
 
 define("_SPIPLISTES_PREFIX", "spiplistes");
@@ -147,12 +148,12 @@ define("_SPIPLISTES_TAMPON_CLES", "editeur_nom,editeur_adresse,editeur_rcs,edite
 
 define("_SPIPLISTES_TIME_1_DAY", (3600 * 24));
 
+
 if(spiplistes_spip_est_inferieur_193()) { 
 	@define('SPIP_BOTH', MYSQL_BOTH);
 	@define('SPIP_ASSOC', MYSQL_ASSOC);
 	@define('SPIP_NUM', MYSQL_NUM);
 }
-
 
 //Balises Spip-listes
 
@@ -390,5 +391,4 @@ $spiplistes_items = array(
 		spiplistes_upgrade();
 	}
 
-	include_spip('inc/spiplistes_api_globales');
 ?>
