@@ -350,7 +350,7 @@ function exec_spiplistes_maintenance () {
 function spiplistes_listes_select ($sql_select, $sql_where = "") {
 	$result = array();
 	if(!empty($sql_select) && ($r = sql_select($sql_select, "spip_listes", $sql_where))) {
-		while($row = spip_fetch_array($r)) {
+		while($row = sql_fetch($r)) {
 			$result[] = $row;
 		}
 	}

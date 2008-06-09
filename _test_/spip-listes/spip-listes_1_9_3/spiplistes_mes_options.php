@@ -163,32 +163,25 @@ function balise_MELEUSE_CRON($p) {
    return $p;
 }
 
-
-function calcul_DATE_MODIF_SITE() {
-	$sql_select = "date,titre";
-	$sql_from = "spip_articles";
-	$sql_where = "statut='publie'";
-	$sql_groupby = "";
-	$sql_orderby = "date DESC";
-	$sql_limit = "1";
-	$sql_having = "";
-   $date_art=sql_select($sql_select, $sql_from, $sql_where, $sql_groupby, $sql_orderby, $sql_limit, $sql_having);
-   $date_art=spip_fetch_array($date_art);
-   $date_art= $date_art['date'];
-   
-	$sql_select = "date_heure,titre";
-	$sql_from = "spip_breves";
-	$sql_where = "statut='publie'";
-	$sql_groupby = "";
-	$sql_orderby = "date_heure DESC";
-	$sql_limit = "1";
-	$sql_having = "";
-   $date_bre=sql_select($sql_select, $sql_from, $sql_where, $sql_groupby, $sql_orderby, $sql_limit, $sql_having);
-   $date_bre=spip_fetch_array($date_bre);
-   $date_bre= $date_bre['date_heure'];
-   
-   $date_modif= ($date_bre>$date_art)? $date_bre : $date_art ;   
-   return  $date_modif;
+function calcul_DATE_MODIF_SITE () {
+   $date_art = sql_getfetsel(
+		'date'
+		, "spip_articles"
+		, "statut=".sql_quote('publie')
+		, ''
+		, array("date DESC")
+		, 1
+		);
+   $date_bre = sql_getfetsel(
+		'date_heure'
+		, "spip_breves"
+		, "statut=".sql_quote('publie')
+		, ''
+		, array("date_heure DESC")
+		, 1
+		);
+   $date_modif = ($date_bre > $date_art)? $date_bre : $date_art;
+   return($date_modif);
 }
 
 function balise_DATE_MODIF_SITE($p) {
@@ -199,18 +192,15 @@ function balise_DATE_MODIF_SITE($p) {
 
 // exemple d'utilisation de la balise: patrons/nouveautes_forum.html
 function calcul_DATE_MODIF_FORUM() {
-	$sql_select = "date_heure,titre";
-	$sql_from = "spip_forum";
-	$sql_where = "statut='publie'";
-	$sql_groupby = "";
-	$sql_orderby = "date_heure DESC";
-	$sql_limit = "1";
-	$sql_having = "";
-   $date_f=sql_select($sql_select, $sql_from, $sql_where, $sql_groupby, $sql_orderby, $sql_limit, $sql_having);
-   $date_f=spip_fetch_array($date_f);
-   $date_f= $date_f['date_heure'];
-   
-   return  $date_f;
+   $date_f = sql_getfetsel(
+		'date_heure'
+		, "spip_forum"
+		, "statut=".sql_quote('publie')
+		, ''
+		, array("date_heure DESC")
+		, 1
+		);
+   return($date_f);
 }
 
 function balise_DATE_MODIF_FORUM($p) {

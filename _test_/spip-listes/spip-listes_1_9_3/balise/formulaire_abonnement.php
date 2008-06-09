@@ -93,7 +93,7 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 
 			$sql_result = spiplistes_auteurs_auteur_select('statut', "email=".sql_quote($email_oubli));
 			
-			if($row = spip_fetch_array($sql_result)) {
+			if($row = sql_fetch($sql_result)) {
 				if($row['statut'] == '5poubelle')
 					$erreur = _T('pass_erreur_acces_refuse');
 				else {
@@ -308,7 +308,7 @@ spiplistes_log("message:".$message, _SPIPLISTES_LOG_DEBUG);
 						spiplistes_auteurs_auteur_select('id_auteur', "email=".sql_quote($mail_inscription_))
 					)
 				) {
-					while($row = spip_fetch_array($sql_result)) {
+					while($row = sql_fetch($sql_result)) {
 					}
 				}
 				else {
