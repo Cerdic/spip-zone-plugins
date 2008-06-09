@@ -125,10 +125,12 @@ function spiplistes_upgrade_base (
 		$desc = sql_showtable("spip_listes");
 		if (!isset($desc['field']['id_liste']))
 			$current_version = 0.0;
-		if (
-			($res=spip_query("SELECT * FROM spip_articles WHERE statut='liste' OR statut='inact' OR statut='poublist'"))
-			AND ($row = spip_fetch_array($res)) )
+		if(
+			sql_getfetsel("*", 'spip_articles'
+				, "statut=".sql_quote('liste')." OR statut=".sql_quote('inact')." OR statut=".sql_quote('poublist'))
+		) {
 			$current_version=0.0;
+		}
 
 		if ($current_version==0.0){
 			// Verifie que les tables spip_listes existent, sinon les creer
@@ -139,7 +141,7 @@ function spiplistes_upgrade_base (
 			//Migrer des listes anciennes // a deplacer dans une en fonction
 			$resultat_aff = sql_select("*", 'spip_articles'
 				, "statut=".sql_quote('liste')." OR statut=".sql_quote('inact')." OR statut=".sql_quote('poublist'));
-			if(@sql_count($resultat_aff) > 0){
+			if(@sql_count($resultat_aff) > 0) {
 				echo _T('spiplistes:mettre_a_jour');
 				while ($row = sql_fetch($resultat_aff)) {
 					$id_article=$row['id_article'];
@@ -188,13 +190,17 @@ function spiplistes_upgrade_base (
 					
 					//Auteur de la liste (moderateur)
 					sql_delete('spip_auteurs_mod_listes', "id_liste =".sql_quote($id_liste));
-					spip_query("INSERT INTO spip_auteurs_mod_listes (id_auteur, id_liste) VALUES (".sql_quote($connect_id_auteur).",".sql_quote($id_liste).")");
+					sql_insert(
+						'spip_auteurs_mod_listes'
+						, "(id_auteur, id_liste)"
+						, "(".sql_quote($connect_id_auteur).",".sql_quote($id_liste).")"
+					);
 					
 					//recuperer les abonnes (peut etre plus tard ?)
 					$abos = sql_select('id_auteur,id_article', 'spip_auteurs_articles'
 						, "id_article=".sql_quote($id_article));
-					while($abonnes= sql_fetch($abos)){
-						$abo=$abonnes["id_auteur"];
+					while($abonnes = sql_fetch($abos)){
+						$abo = intval($abonnes['id_auteur']);
 						sql_insert('spip_auteurs_listes'
 							, "(id_auteur, id_liste)"
 							, "(".sql_quote($abo).",".sql_quote($id_liste).")"
@@ -207,36 +213,49 @@ function spiplistes_upgrade_base (
 		
 					//manque un traitement pour récuperer les courriers
 				}
-			//evaluer les extras de tous les auteurs et les virer
-			$result = spip_query(
-			  'SELECT extra, spip_auteurs.id_auteur FROM spip_auteurs');
-			while ($row = spip_fetch_array($result, SPIP_NUM)) {
-				$abo = unserialize($row[0]);
-				$format = $abo['abo'] ;
-			if($format=="texte" OR $format=="html")
-			spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`, `spip_listes_format`) 
-			VALUES (".sql_quote($row[1]).",".sql_quote($format).") ");
-			else
-			spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`, `spip_listes_format`) 
-			VALUES (".sql_quote($row[1]).",".sql_quote('non').") ");
-			}
+				//evaluer les extras de tous les auteurs et les virer
+				$result = sql_select(
+					"extra AS e, spip_auteurs.id_auteur AS i"
+					, 'spip_auteurs'
+				);
+				while ($row = sql_fetch($result)) {
+					$abo = unserialize($row['e']);
+					$format = $abo['abo'] ;
+					if($format=="texte" || $format=="html") {
+						sql_insert(
+							'spip_auteurs_elargis'
+							, "(id_auteur,`spip_listes_format`)"
+							, "(".sql_quote($row['i']).",".sql_quote($format).")"
+						);
+					}
+					else {
+						sql_insert(
+							'spip_auteurs_elargis'
+							, "(id_auteur, `spip_listes_format`)"
+							, "(".sql_quote($row['i']).",".sql_quote('non').")"
+						);
+					}
+				} // end while
+				
+				echo _T('spiplistes:regulariser');
+	
+				$result = sql_select(
+					"a.email, a.id_auteur"
+					, "spip_auteurs AS a, spip_auteurs_listes AS l, spip_auteurs_elargis AS f"
+					, array(
+						"a.id_auteur=f.id_auteur"
+						, "f.spip_listes_format=".sql_quote('non')
+						, "a.id_auteur=l.id_auteur"
+						, "a.statut!=".sql_quote('5poubelle')
+					)
+					, array("email")
+				); //
+				
+				while($res = sql_fetch($result)) {
+					sql_delete('spip_auteurs_listes', "id_auteur =".sql_quote($res['id_auteur'])) ;			
+				} 
+			} // end if(@sql_count($resultat_aff) > 0)
 			
-			echo _T('spiplistes:regulariser');
-
-			$result = spip_query("SELECT a.`email`, a.id_auteur FROM `spip_auteurs` a, `spip_auteurs_listes` l, `spip_auteurs_elargis` f
-			WHERE a.id_auteur=f.id_auteur 
-			AND f.spip_listes_format = 'non'
-			AND a.id_auteur = l.id_auteur
-			AND a.statut!='5poubelle' 
-			GROUP BY email
-			");
-			
-			while($res = spip_fetch_array($result)){
-			spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur =".$res['id_auteur']) ;			
-			} 
-			
-			
-			}
 			ecrire_meta('spiplistes_version',$current_version=$version_base,'non');
 		}
 		
@@ -251,12 +270,13 @@ function spiplistes_upgrade_base (
 //spiplistes_log("UPGRADE: current_version: $current_version", _SPIPLISTES_LOG_DEBUG);
 			echo "SpipListes Maj 1.94<br />";
 			include_spip('base/abstract_sql');
-			if (($res=spip_query("SELECT id_auteur FROM spip_auteurs_mod_listes"))
-				AND (!spip_fetch_array($res))
-			  AND ($desc = sql_showtable("spip_abonnes_listes"))
-			  AND isset($desc['field']['id_auteur'])) {
-				spip_query("DROP TABLE spip_auteurs_mod_listes"); // elle vient d'etre cree par un creer_base inopportun
-				spip_query("DROP TABLE spip_auteurs_courriers"); // elle vient d'etre cree par un creer_base inopportun
+			if (($res = sql_select('id_auteur', 'spip_auteurs_mod_listes'))
+				&& (!sql_fetch($res))
+				&& ($desc = sql_showtable("spip_abonnes_listes"))
+				&& isset($desc['field']['id_auteur'])
+			) {
+				sql_drop_table("spip_auteurs_mod_listes"); // elle vient d'etre cree par un creer_base inopportun
+				sql_drop_table("spip_auteurs_courriers"); // elle vient d'etre cree par un creer_base inopportun
 			}
 			sql_alter("TABLE spip_auteurs_listes RENAME spip_auteurs_mod_listes");
 			sql_alter("TABLE spip_abonnes_listes RENAME spip_auteurs_listes");
@@ -278,30 +298,38 @@ function spiplistes_upgrade_base (
 			
 			//installer la table spip_auteurs_elargis si besoin
 			$table_nom = "spip_auteurs_elargis";
-			spip_query("CREATE TABLE IF NOT EXISTS ".$table_nom." (
-			`id_auteur` BIGINT NOT NULL ,
-			`spip_listes_format` VARCHAR( 8 ) DEFAULT 'non' NOT NULL
+			sql_query("CREATE TABLE IF NOT EXISTS ".$table_nom." (
+				`id_auteur` BIGINT NOT NULL ,
+				`spip_listes_format` VARCHAR( 8 ) DEFAULT 'non' NOT NULL
 			 ) ");
 			
 			//evaluer les extras de tous les auteurs + compter tous les auteurs
-			$result = spip_query(
-			  'SELECT extra, spip_auteurs.id_auteur FROM spip_auteurs');
+			$result = sql_select(
+				"extra AS e,spip_auteurs.id_auteur AS i"
+				, 'spip_auteurs');
 			$nb_inscrits = 0;
 		
 			//repartition des extras
 			$cmpt = array('texte'=>0, 'html'=>0, 'non'=>0);
 			
-			while ($row = spip_fetch_array($result, SPIP_NUM)) {
-				$nb_inscrits ++ ;
-				$abo = unserialize($row[0]);
+			while ($row = sql_fetch($result)) {
+				$nb_inscrits++ ;
+				$abo = unserialize($row['e']);
 				$format = $abo['abo'] ;
-			if($format=="texte" OR $format=="html")
-			spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`, `spip_listes_format`) 
-			VALUES (".sql_quote($row[1]).",".sql_quote($format).") ");
-			else
-			spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`, `spip_listes_format`) 
-			VALUES (".sql_quote($row[1]).",".sql_quote('non').") ");
-			
+			if($format=="texte" || $format=="html") {
+				sql_insert(
+					'spip_auteurs_elargis'
+					, "(id_auteur, `spip_listes_format`)"
+					, "(".sql_quote($row['i']).",".sql_quote($format).")"
+				);
+			}
+			else {
+				sql_insert(
+					'spip_auteurs_elargis'
+					, "(id_auteur, `spip_listes_format`)"
+					, "(".sql_quote($row['i']).",".sql_quote('non').") "
+				);
+			}
 				if ($abo['abo']) {
 					$cmpt[$abo['abo']] ++;
 				}
@@ -312,31 +340,33 @@ function spiplistes_upgrade_base (
 			ecrire_meta('spiplistes_version', $current_version=1.96);
 		}
 		
-		if ($current_version<1.97){
+		if ($current_version<1.97) {
 //spiplistes_log("UPGRADE: current_version: $current_version", _SPIPLISTES_LOG_DEBUG);
 			echo "SpipListes Maj 1.97<br />";
 			include_spip('base/abstract_sql');
 
-		echo "regulariser les desabonnes avec listes...<br />";
-
-		$result = spip_query("SELECT a.`email`, a.id_auteur FROM `spip_auteurs` a, `spip_auteurs_listes` l, `spip_auteurs_elargis` f
-		WHERE a.id_auteur=f.id_auteur 
-		AND f.spip_listes_format = 'non'
-		AND a.id_auteur = l.id_auteur
-		AND a.statut!='5poubelle' 
-		GROUP BY email
-		");
-		
-		$nb_inscrits = sql_count($result);
-		echo $nb_inscrits ;
-		
-		while($res = spip_fetch_array($result)){
-		spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur =".$res['id_auteur']) ;			
-		} 
-
-
+			echo "regulariser les desabonnes avec listes...<br />";
+	
+			$result = sql_select(
+				"a.email,a.id_auteur"
+				, "spip_auteurs AS a, spip_auteurs_listes AS l, spip_auteurs_elargis AS f"
+				, array(
+					"a.id_auteur=f.id_auteur"
+					, "f.spip_listes_format=".sql_quote('non')
+					, "a.id_auteur=l.id_auteur"
+					, "a.statut!=".sql_quote('5poubelle' )
+				)
+				, array("email")
+			); //
+			
+			$nb_inscrits = sql_count($result);
+			echo($nb_inscrits);
+			
+			while($res = sql_fetch($result)) {
+				sql_delete("spip_auteurs_listes", "id_auteur =".sql_quote($res['id_auteur'])) ;			
+			} 
 			ecrire_meta('spiplistes_version', $current_version=1.97);
-		}
+		} // end if ($current_version<1.97)
 		
 		
 		if ($current_version<1.98) {

@@ -36,9 +36,9 @@ function action_spiplistes_supprimer_abonne_dist () {
 
 	if (autoriser('supprimer', 'auteur', $id_auteur)) {
 	
-		$result = spip_query("SELECT id_auteur,statut FROM spip_auteurs WHERE id_auteur=$id_auteur LIMIT 1");
+		$result = sql_select("id_auteur,statut", "spip_auteurs", "id_auteur=".sql_quote($id_auteur), '','', 1);
 		
-		if ($row = spip_fetch_array($result)) {
+		if ($row = sql_fetch($result)) {
 		
 			$id_auteur = intval($row['id_auteur']);
 			$statut = $row['statut'];
@@ -47,9 +47,12 @@ function action_spiplistes_supprimer_abonne_dist () {
 				($id_auteur > 0)
 				&& ($statut=='6forum') 
 			) {
-				spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur=$id_auteur");
-				//spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur=$id_auteur");
-				spip_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur=$id_auteur LIMIT 1");
+				sql_delete("spip_auteurs_courriers", "id_auteur=".sql_quote($id_auteur));
+				sql_update(
+					"spip_auteurs"
+					, "statut=".sql_quote('5poubelle')
+					, "id_auteur=".sql_quote($id_auteur)." LIMIT 1"
+				);
 				spiplistes_format_abo_modifier($id_auteur, 'non');
 
 				// garde une petite trace...
