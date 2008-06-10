@@ -39,6 +39,7 @@ include_spip('inc/spiplistes_api_globales');
 	
 function exec_spiplistes_liste_gerer () {
 
+	include_spip('inc/autoriser');
 	include_spip('inc/mots');
 	include_spip('inc/lang');
 	include_spip('inc/editer_auteurs');
@@ -90,7 +91,8 @@ function exec_spiplistes_liste_gerer () {
 
 	$envoyer_maintenant = ($envoyer_maintenant == 'oui');
 	
-	$boite_pour_confirmer_envoi_maintenant = "";
+	$boite_pour_confirmer_envoi_maintenant = 
+		$grosse_boite_moderateurs = "";
 	
 	$page_result = "";
 
@@ -119,8 +121,9 @@ function exec_spiplistes_liste_gerer () {
 	// Modifier une liste
 	////
 		// les supers-admins et le moderateur seuls peuvent modifier la liste
-		$id_mod_liste = spiplistes_mod_listes_get_id_auteur($id_liste);
-		$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
+		$ids_mods_array = spiplistes_mod_listes_get_id_auteur($id_liste);
+		$ids_mods_array = ($ids_mods_array && isset($ids_mods_array[$id_liste]) ? $ids_mods_array[$id_liste] : array());
+		$flag_editable = ($connect_toutes_rubriques || in_array($connect_id_auteur, $ids_mods_array));
 
 		if($flag_editable) {
 //spiplistes_log("LISTE MODIF: flag_editable <<", _SPIPLISTES_LOG_DEBUG);
@@ -297,8 +300,9 @@ function exec_spiplistes_liste_gerer () {
 	}
 
 	// les supers-admins et le moderateur seuls peuvent modifier la liste
-	$id_mod_liste = spiplistes_mod_listes_get_id_auteur($id_liste);
-	$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
+	$ids_mods_array = spiplistes_mod_listes_get_id_auteur($id_liste);
+	$ids_mods_array = ($ids_mods_array && isset($ids_mods_array[$id_liste]) ? $ids_mods_array[$id_liste] : array());
+	$flag_editable = ($connect_toutes_rubriques || in_array($connect_id_auteur, $ids_mods_array));
 
 	$titre_message = ($titre_message=='') ? $titre._T('spiplistes:_de_').$meta['nom_site'] : $titre_message;
 
@@ -328,6 +332,7 @@ function exec_spiplistes_liste_gerer () {
 					, false
 					)
 			;
+			
 		// la grosse boite des abonnes
 		$tri = _request('tri') ? _request('tri') : 'nom';
 		$boite_liste_abonnes = spiplistes_listes_boite_abonnements(
@@ -345,14 +350,38 @@ function exec_spiplistes_liste_gerer () {
 			. (spiplistes_spip_est_inferieur_193() ? $legend : "")
 			. debut_block_invisible(md5('abonnes_liste'))
 			. debut_cadre_relief('', true)
-			//. "<div id='grosse_boite_abonnements' class='verdana1'>\n"
 			. $boite_liste_abonnes
-			//. "</div>\n"
 			. fin_cadre_relief(true)
 			. fin_block()
 			. fin_cadre_enfonce(true)
 			. "<!-- fin boite abonnes/elligibles -->\n"
 			;
+
+		// la grosse boite des moderateurs
+		$boite_liste_moderateurs = spiplistes_listes_boite_moderateurs(
+			$id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'mods-conteneur'
+			);
+		$titre_boite = _T('spiplistes:mods_cette_liste');
+		$nb = spiplistes_mod_listes_compter($id_liste);
+		$legend = _T('spiplistes:nbre_mods').$nb;
+		$legend = "<small>".spiplistes_nb_moderateurs_liste_str_get($nb)."</small>";
+		$grosse_boite_moderateurs = ""
+			. "<!-- boite moderateurs -->\n"
+			. debut_cadre_enfonce("redacteurs-24.gif", true, "", $titre_boite)
+			. spiplistes_bouton_block_depliable($legend
+				, false, md5('mods_liste'))
+			. (spiplistes_spip_est_inferieur_193() ? $legend : "")
+			. debut_block_invisible(md5('mods_liste'))
+			. debut_cadre_relief('', true)
+			. "<div id='mods-conteneur'>\n"
+			. $boite_liste_moderateurs
+			. "</div>\n"
+			. fin_cadre_relief(true)
+			. fin_block()
+			. fin_cadre_enfonce(true)
+			. "<!-- fin boite moderateurs -->\n"
+			;
+
 	}
 	else {
 		$gros_bouton_modifier = $gros_bouton_supprimer = $grosse_boite_abonnements = "";
@@ -638,6 +667,7 @@ function exec_spiplistes_liste_gerer () {
 	$date_debut_envoi = (!empty($date_prevue) ? $date_prevue : (($date && intval($date)) ? $date : normaliser_date(time())));
 
 	$page_result .= ""
+		. "</td>\n"
 		. "</tr>\n"
 		. "<tr><td align='$spip_lang_left' class='verdana2'>"
 		. "<input type='radio' name='message_auto' value='oui' id='auto_oui' "
@@ -732,7 +762,10 @@ function exec_spiplistes_liste_gerer () {
 		. fin_cadre_relief(true)
 		;
 	
-	$page_result .= $grosse_boite_abonnements;
+	$page_result .= ""
+		. $grosse_boite_abonnements
+		. $grosse_boite_moderateurs
+		;
 	
 	// le super-admin peut abonner en masse
 	if($connect_toutes_rubriques) {
@@ -740,10 +773,11 @@ function exec_spiplistes_liste_gerer () {
 			. "\n<!-- forcer abo -->\n"
 			. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."abonner-24.png", true, '', _T('spiplistes:Forcer_les_abonnement_liste').__plugin_aide("forcerliste"))."\n"
 			. "<p class='verdana2'>\n"
-			. _T('spiplistes:Forcer_abonnement_desc')."<br />\n"
-			. "<blockquote class='verdana2'><em>"
+			. _T('spiplistes:Forcer_abonnement_desc')
+			. "</p>\n"
+			. "<p class='verdana2' style='margin-bottom:1em'><em>"
 			. _T('spiplistes:Forcer_abonnement_aide', array('lien_retour' => generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)))
-			. "</em></blockquote></p>\n"
+			. "</em></p>\n"
 			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste#auteurs")."' id='form_forcer_abo' name='form_forcer_abo' method='post'>\n"
 			. debut_cadre_relief("", true)."\n"
 			//

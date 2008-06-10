@@ -136,6 +136,7 @@ define("_SPIPLISTES_ACTION_SUPPRIMER_ABONNER", _SPIPLISTES_ACTION_PREFIX."suppri
 define("_SPIPLISTES_ACTION_CHANGER_STATUT_ABONNE", _SPIPLISTES_ACTION_PREFIX."changer_statut_abonne");
 define("_SPIPLISTES_ACTION_ABONNER_AUTEUR", _SPIPLISTES_ACTION_PREFIX."listes_abonner_auteur");
 define("_SPIPLISTES_ACTION_LISTE_ABONNES", _SPIPLISTES_ACTION_PREFIX."liste_des_abonnes");
+define("_SPIPLISTES_ACTION_MOD_GERER", _SPIPLISTES_ACTION_PREFIX."moderateurs_gerer");
 
 // les formats d'envoi autorisés, ou non pour pseudo-désabonné
 define("_SPIPLISTES_FORMATS_ALLOWED", "html;texte;non");
@@ -210,11 +211,36 @@ function balise_DATE_MODIF_FORUM($p) {
 }
 
 // autorise les admins et l'utilisateur à modifier son format de réception
-function autoriser_abonne_modifierformat ($faire, $type, $id) {
+function autoriser_abonne_modifierformat ($faire = '', $type = '', $id_objet = 0, $qui = NULL, $opt = NULL) {
 	return(
 		$GLOBALS['auteur_session']['id_auteur'] == $id
 		|| $GLOBALS['auteur_session']['statut'] == '0minirezo'
 	);
+}
+
+//CP-20080610 :: autoriser la moderation d'une liste
+function autoriser_liste_moderer ($faire = '', $type = '', $id_objet = 0, $qui = NULL, $opt = NULL) {
+	$result = false;
+	if(($type == 'liste') && ($faire == "moderer") && ($id_objet > 0)) {
+		if(!$qui) {
+			$qui = $GLOBALS['auteur_session']['id_auteur'];
+		}
+		$result = 
+			($GLOBALS['auteur_session']['statut'] == '0minirezo')
+			|| (
+				sql_getfetsel(
+					"id_auteur"
+					, 'spip_auteurs_mod_listes'
+					, array(
+						"id_liste=".sql_quote($id_objet)
+						, "id_auteur=".$qui
+					)
+					, '', '', 1
+				)
+			)
+			;
+	}
+	return($result);
 }
 
 //utiliser le cron pour envoyer les messages en attente

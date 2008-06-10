@@ -30,6 +30,13 @@ function spiplistes_header_prive ($flux) {
 <!--
 .spiplistes fieldset { border:1px solid black; }
 .spiplistes .message-alerte { color:red; font-weight:bold; }
+.spiplistes .liste-moderateurs { list-style: none;margin:0;padding:0;width:100%;height:auto;display:table; }
+.spiplistes .liste-moderateurs li 
+, .spiplistes .liste-moderateurs li .statut-nom
+, .spiplistes .liste-moderateurs li .supprim { margin:0;padding:0 0 0 0.5ex;display:table-cell;line-height:1.6em;width:50%; }
+.spiplistes .liste-moderateurs li  { display:table-row;width:100% }
+.spiplistes .liste-moderateurs li .nom { padding-left:2ex }
+.spiplistes .liste-moderateurs li .supprim { font-weight:bold;text-align:right;padding:0 1ex }
 -->
 </style>
 "

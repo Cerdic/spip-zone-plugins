@@ -751,6 +751,23 @@ function spiplistes_nb_abonnes_liste_str_get ($id_liste) {
 	return ($result);
 }
 
+//CP-20080610
+// Nombre de moderateurs d'une liste, chaine html
+function spiplistes_nb_moderateurs_liste_str_get ($nb) {
+	$result = ""
+		. "("
+		.	(
+			($nb)
+			? spiplistes_singulier_pluriel_str_get(
+				$nb
+				, _T('spiplistes:nb_moderateur_sing'), _T('spiplistes:nb_moderateurs_plur')) 
+			: _T('spiplistes:sans_moderateur')
+			)
+		. ")"
+		;
+	return ($result);
+}
+
 // CP-20080510
 function spiplistes_titre_boite_info ($titre = "") {
 	global $spip_display, $spip_lang_left;

@@ -201,7 +201,9 @@ function exec_spiplistes_import_export(){
 			$texte = couper($row['texte'], 30, '...');
 			$checked = ($nb_listes == 1) ? "checked='checked'" : "";
 			$label = _T('spiplistes:Liste_de_destination').": $titre";
-			if($connect_toutes_rubriques || ($connect_id_auteur == spiplistes_mod_listes_get_id_auteur($id_liste))) {
+			$ids_mods_array = spiplistes_mod_listes_get_id_auteur($id_liste);
+			$ids_mods_array = ($ids_mods_array && isset($ids_mods_array[$id_liste]) ? $ids_mods_array[$id_liste] : array();
+			if($connect_toutes_rubriques || in_array($connect_id_auteur, $ids_mods_array)) {
 				$page_result .= ""
 					. "<li style='padding:4px;background-color:#".(($ii++ % 2) ? "fff" : "ccc").";'>"
 					. "<input name='abos_liste[]' type='checkbox' id='abos_$id_liste' value='$id_liste' title=\"$label\" $checked />\n"

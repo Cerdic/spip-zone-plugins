@@ -119,14 +119,7 @@ function exec_spiplistes_maintenance () {
 				if(_request("supprimer_liste_$id_liste")) {
 					$sql_where = "id_liste=".sql_quote($id_liste);
 					$msg =
-						(
-							// supprime la liste 
-							sql_delete("spip_listes", $sql_where." LIMIT 1")
-							// de la table des abonne's
-							&& sql_delete("spip_auteurs_listes", $sql_where)
-							// de la table des mode'rateurs (pas de LIMIT, si plusieurs mode'rateurs)
-							&& spiplistes_mod_listes_supprimer($sql_where)
-						)
+						spiplistes_listes_liste_supprimer($id_liste)
 						?	$msg_ok
 						:	$msg_bad
 						;

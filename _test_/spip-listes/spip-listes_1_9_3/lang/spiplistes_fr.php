@@ -329,8 +329,9 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'messages_voir_dernier' => 'Voir le dernier message',
 'methode_envoi' => 'M&eacute;thode d\'envoi'
 , 'mettre_a_jour' => '<h3>SPIP-listes va mettre &agrave; jour</h3>'
-, 'moderateurs' => 'Mod&eacute;rateur(s)',
-'modifier' => 'Modifier',
+, 'moderateurs' => "Mod&eacute;rateur(s)"
+, 'mods_cette_liste' => "Les mod&eacute;rateurs de cette liste"
+, 'modifier' => 'Modifier',
 'mis_a_jour' => 'Mis &agrave; jour',
 'Modifier_un_courrier_:' => "Modifier un courrier :",
 'Modifier_ce_courrier' => "Modifier ce courrier",
@@ -348,13 +349,16 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 	reprendre les exp&eacute;ditions en cours. ",
 'meleuse_suspendue' => "Meleuse suspendue",
 'meleuse_suspendue_info' => "L'envoi des courriers en attente d'exp&eacute;dition est suspendu.",
-'Meleuse_reactivee' => "M&egrave;leuse r&eacute;activ&eacute;e",
+'Meleuse_reactivee' => "M&egrave;leuse r&eacute;activ&eacute;e"
 
 //n
-'nb_abonnes_plur' => ' abonn&eacute;s',
-'nb_abonnes_sing' => ' abonn&eacute;',
-'nbre_abonnes' => 'Nombre d\'abonn&eacute;s : ',
-'nom' => 'Nom d\'utilisateur',
+, 'nb_abonnes_sing' => " abonn&eacute;"
+, 'nb_abonnes_plur' => " abonn&eacute;s"
+, 'nb_moderateur_sing' => " mod&eacute;rateur"
+, 'nb_moderateurs_plur' => " mod&eacute;rateurs"
+, 'nbre_abonnes' => "Nombre d\'abonn&eacute;s : "
+, 'nbre_mods' => "Nombre de mod&eacute;rateurs : "
+, 'nom' => 'Nom d\'utilisateur',
 'nombre_lot' => 'Nombre d\'envois par lot',
 'Nouveau_courrier' => 'Cr&eacute;er un nouveau courrier',
 'nouveaute_intro' => 'Bonjour, <br />Voici les nouveaut&eacute;s publi&eacute;es sur le site',
@@ -435,6 +439,7 @@ liste."
 'Sans_destinataire' => "Sans destinataire",
 'Sans_abonnement' => "Sans abonnement"
 , 'sans_abonne' => "sans abonn&eacute;"
+, 'sans_moderateur' => "sans mod&eacute;rateur"
 , 'Supprimer_ce_contact' => "Supprimer ce contact",
 'Suppression_de' => "Suppression de"
 , 'suppression_' => "Suppression @objet@"
@@ -450,6 +455,7 @@ liste."
 'separateur_semicolon' => "point-virgule (<code>;</code>)",
 'simulation_desactive' => "Mode simulation d&eacute;sactiv&eacute;."
 , 'simuler_les_envois' => "Simuler les envois de courriers"
+, 'sup_mod' => "Supprimer ce mod&eacute;rateur"
 
  //T
 , 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',
@@ -575,8 +581,8 @@ liste."
 
 'nb_abonnes' => 'Dans les listes : ',
 'nb_inscrits' => 'Dans le site :  ',
-'nb_listes' => 'Incriptions dans toutes les listes : ',
-'Pas_de_courrier_auto_programme' => 'Il n\'y a pas de courrier automatique planifi&eacute; pour cette liste.'
+'nb_listes' => 'Incriptions dans toutes les listes : '
+, 'Pas_de_courrier_auto_programme' => "Il n'y a pas de courrier automatique planifi&eacute; pour cette liste."
 , 'Pas_de_periodicite' => "Pas de p&eacute;riodicit&eacute;."
 , 'nouvelle_abonne' => 'L\'abonn&eacute; suivant a &eacute;t&eacute; ajout&eacute; la liste',
 

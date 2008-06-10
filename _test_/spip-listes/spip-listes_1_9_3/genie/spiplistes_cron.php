@@ -119,10 +119,11 @@ spiplistes_log($log_msg."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBU
 			$dernier_envoi = $maj;
 		
 			// demande id_auteur de la liste pour signer le courrier
+			// si plusieurs moderateurs, prend le premier
 			$id_auteur = 
-				(isset($mod_listes_ids[$id_liste]) && ($mod_listes_ids[$id_liste] > 0))
-				? $mod_listes_ids[$id_liste]
-				: 1 // attribué à l'admin principale si manquant
+				(isset($mod_listes_ids[$id_liste]) && ($mod_listes_ids[$id_liste][0] > 0))
+				? $mod_listes_ids[$id_liste][0]
+				: 1 // attribué à l'admin principal si manquant
 				;
 			
 			// Tampon date prochain envoi (dans 'date') et d'envoi (dans 'maj')

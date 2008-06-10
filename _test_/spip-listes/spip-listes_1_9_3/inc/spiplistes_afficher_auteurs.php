@@ -195,7 +195,7 @@ function spiplistes_afficher_auteurs (
 		;
 	
 	// titres du tableau (a-la-SPIP, en haut)
-	$icon_auteur = spiplistes_corrige_img_pack("<img src='"._DIR_IMG_PACK."/admin-12.gif' alt='' border='0'>");
+	$icon_auteur = spiplistes_corrige_img_pack("<img src='"._DIR_IMG_PACK."/admin-12.gif' alt='' border='0' />");
 	$result .= ""
 		. "<tr bgcolor='#DBE1C5'>"
 		//
@@ -383,7 +383,7 @@ function spiplistes_afficher_auteurs (
 			. "<td>"
 			.	(
 				($row['compteur'])
-				? "<span class='spiplistes-legend-stitre'>".$row['compteur']."<span>"
+				? "<span class='spiplistes-legend-stitre'>".$row['compteur']."</span>"
 				: ""
 				)
 			. "</td>\n"

@@ -64,8 +64,9 @@ function exec_spiplistes_liste_edit(){
 	// Modification de la liste transmise
 	//
 		// les supers-admins et le moderateur seuls peuvent modifier la liste
-		$id_mod_liste = spiplistes_mod_listes_get_id_auteur($id_liste);
-		$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
+		$ids_mods_array = spiplistes_mod_listes_get_id_auteur($id_liste);
+		$ids_mods_array = ($ids_mods_array && isset($ids_mods_array[$id_liste]) ? $ids_mods_array[$id_liste] : array());
+		$flag_editable = ($connect_toutes_rubriques || in_array($connect_id_auteur, $ids_mods_array));
 
 		$sql_select_array = array('titre', 'lang', 'pied_page', 'texte', 'date', 'statut');
 	
@@ -74,8 +75,9 @@ function exec_spiplistes_liste_edit(){
 				$$key = $row[$key];
 			}
 			// supers-admins et moderateur seuls ont droit de modifier la liste
-			$id_mod_liste = spiplistes_mod_listes_get_id_auteur($id_liste);
-			$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
+//			$ids_mods_array = spiplistes_mod_listes_get_id_auteur($id_liste);
+//			$ids_mods_array = ($ids_mods_array && isset($ids_mods_array[$id_liste]) ? $ids_mods_array[$id_liste] : array();
+//			$flag_editable = ($connect_toutes_rubriques || in_array($connect_id_auteur, $ids_mods_array));
 		}
 		else {
 			// liste perdue ?
