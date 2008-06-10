@@ -3,22 +3,17 @@
 <B_resultats>
 <table class='spip'>
 <tr class="row_first">
-	<th>[(#GET{par}|!=={id_jeu}|?{' '})<a href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_numero_court:>[(#GET{par}|!=={date}|?{' '})</a>]</th>
-	<th>[(#GET{par}|!={id_jeu}|?{' '})<a href="[(#SELF|parametre_url{par,type_jeu})]">]<:jeux:jeu_type:>[(#GET{par}|!={id_jeu}|?{' '})</a>]</th>
+	<th>[(#GET{par}|!=={id_jeu}|?{' '})<a class="ajax" href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_numero_court:>[(#GET{par}|!=={date}|?{' '})</a>]</th>
+	<th>[(#GET{par}|!={id_jeu}|?{' '})<a class="ajax" href="[(#SELF|parametre_url{par,type_jeu})]">]<:jeux:jeu_type:>[(#GET{par}|!={id_jeu}|?{' '})</a>]</th>
 	
-	<th>[(#GET{par}|!=={date}|?{' '})<a href="[(#SELF|parametre_url{par,date})]">]<:date:>[(#GET{par}|!=={date}|?{' '})</a>]</th>
-	<th>[(#GET{par}|!=={resultat_court}|?{' '})<a href="[(#SELF|parametre_url{par,''})]">]<:jeux:resultat:>[(#GET{par}|?{' '})</a>]</th>
+	<th>[(#GET{par}|!=={date}|?{' '})<a class="ajax" href="[(#SELF|parametre_url{par,date})]">]<:date:>[(#GET{par}|!=={date}|?{' '})</a>]</th>
+	<th>[(#GET{par}|!=={resultat_court}|?{' '})<a class="ajax" href="[(#SELF|parametre_url{par,''})]">]<:jeux:resultat:>[(#GET{par}|?{' '})</a>]</th>
 </tr></thead>
 #PAGINATION
-<BOUCLE_resultats(JEUX_RESULTATS spip_jeux) {id_auteur=#ENV{id}} {par #GET{par}, round(resultat_court / total, 3)}{inverse inverse #GET{par}!={id_jeu}}{pagination 30}>
+<BOUCLE_resultats(JEUX_RESULTATS spip_jeux) {id_auteur=#ENV{id}} {par #GET{par}}{inverse #GET{par}!={id_jeu}}{pagination 30}>
 <tr [class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 	<td>#ID_JEU</td>
-<B_jeu>
-
 	<td>#TYPE_JEU</td>
-
-
-
 	<td>[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
 	<td>#RESULTAT_COURT / #TOTAL</td>
 </tr>
