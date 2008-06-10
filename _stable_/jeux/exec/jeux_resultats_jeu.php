@@ -36,7 +36,7 @@ function exec_jeux_resultats_jeu(){
 	echo "<div class='nettoyeur'></div>";
 	include_spip('public/assembler');
 	debut_cadre('liste');
-	echo recuperer_fond('fonds/resultats_jeu_detail', array('id_jeu'=>$id_jeu,'par'=>$par));
+	echo recuperer_fond('fonds/resultats', array('id_jeu'=>$id_jeu,'par'=>$par));
 	fin_cadre('liste');
 	
 	fin_cadre_relief();

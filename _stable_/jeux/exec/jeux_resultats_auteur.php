@@ -30,11 +30,12 @@ function exec_jeux_resultats_auteur(){
 	jeux_compat_boite('creer_colonne_droite');
 	jeux_compat_boite('debut_droite');
 	debut_cadre_relief();
-	gros_titre(_T("jeux:resultats_auteur", array('nom'=>$nom)), '', false);
+	
+	echo gros_titre(_T("jeux:resultats_auteur", array('nom'=>$nom)), '', false);
 	
 	include_spip('public/assembler');
 	debut_cadre('liste');
-	echo recuperer_fond('fonds/resultats_auteur_detail',array('id_auteur'=>$id_auteur,'par'=>$par));
+	echo recuperer_fond('fonds/resultats',array('id_auteur'=>$id_auteur,'par'=>$par));
 	fin_cadre('liste');
 	
 	fin_cadre_relief();
