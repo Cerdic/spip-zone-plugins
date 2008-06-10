@@ -70,12 +70,11 @@ problemes dans les deux elements au sujet des sous-repertoires]
 </ul>
 
 <?php } else { ?>
-
-<ul>
-<li>
-<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel='nofollow'><:sedna:connexion:></a>
-</li>
-</ul>
+<script type='text/javascript'>document.writeln('<ul>'
++'<li>'+'<'+'a href='
++'"[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow"><:sedna:connexion:><'
++'/a></li></ul>');
+</script>
 
 <?php } ?>
 
