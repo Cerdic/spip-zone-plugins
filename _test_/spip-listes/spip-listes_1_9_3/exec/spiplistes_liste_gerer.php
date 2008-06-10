@@ -120,13 +120,10 @@ function exec_spiplistes_liste_gerer () {
 	//////////////////////////////////////////////////////
 	// Modifier une liste
 	////
-		// les supers-admins et le moderateur seuls peuvent modifier la liste
-		$ids_mods_array = spiplistes_mod_listes_get_id_auteur($id_liste);
-		$ids_mods_array = ($ids_mods_array && isset($ids_mods_array[$id_liste]) ? $ids_mods_array[$id_liste] : array());
-		$flag_editable = ($connect_toutes_rubriques || in_array($connect_id_auteur, $ids_mods_array));
+		// les admins toutes rubriques et le moderateur seuls peuvent modifier la liste
+		$flag_editable = autoriser('moderer', 'liste', $connect_id_auteur);
 
 		if($flag_editable) {
-//spiplistes_log("LISTE MODIF: flag_editable <<", _SPIPLISTES_LOG_DEBUG);
 		
 			// Recupere les donnees de la liste courante pour optimiser l'update
 			$sql_select = "statut,titre,date,lang";

@@ -220,13 +220,18 @@ function autoriser_abonne_modifierformat ($faire = '', $type = '', $id_objet = 0
 
 //CP-20080610 :: autoriser la moderation d'une liste
 function autoriser_liste_moderer ($faire = '', $type = '', $id_objet = 0, $qui = NULL, $opt = NULL) {
+	global 
+		$connect_statut
+		, $connect_toutes_rubriques
+		;
+	
 	$result = false;
 	if(($type == 'liste') && ($faire == "moderer") && ($id_objet > 0)) {
 		if(!$qui) {
 			$qui = $GLOBALS['auteur_session']['id_auteur'];
 		}
 		$result = 
-			($GLOBALS['auteur_session']['statut'] == '0minirezo')
+			(($connect_statut == '0minirezo') && $connect_toutes_rubriques)
 			|| (
 				sql_getfetsel(
 					"id_auteur"
