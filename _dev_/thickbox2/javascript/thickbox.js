@@ -33,7 +33,7 @@ if(typeof TB_chemin_animation == 'undefined') { TB_chemin_animation = 'circle_an
 
 function TB_image() {
 	var t = this.title || this.name ;
-	var longdesc = $('img[@longdesc]', this).attr('longdesc');
+	var longdesc = jQuery('img[@longdesc]', this).attr('longdesc');
 
 	if (longdesc)
 		TB_show(t,longdesc);
@@ -45,7 +45,7 @@ function TB_image() {
 
 //add thickbox to href elements that have a class of .thickbox
 function TB_init(root) {
-	$("a.thickbox",root).each(
+	jQuery("a.thickbox",root).each(
 		function(i) {
 			this.onclick = TB_image;
 			var t = this.alt || this.name || null;
@@ -69,20 +69,20 @@ function TB_init(root) {
 function TB_show(caption, url) {//function called when the user clicks on a thickbox link
 	try {
 		if (document.getElementById("TB_HideSelect") == null) {
-		$("body").append("<iframe id='TB_HideSelect'></iframe><div id='TB_overlay' title='Fermer'></div><div id='TB_window'></div>");
-		$("#TB_overlay").click(TB_remove);
+		jQuery("body").append("<iframe id='TB_HideSelect'></iframe><div id='TB_overlay' title='Fermer'></div><div id='TB_window'></div>");
+		jQuery("#TB_overlay").click(TB_remove);
 	}
-	$(".TB_hide").hide();
+	jQuery(".TB_hide").hide();
 
 	if(caption==null){caption=""};
 
 	if(!FULL_S){
-		$(window).scroll(TB_position);
+		jQuery(window).scroll(TB_position);
 	}
 
 	TB_overlaySize();
 
-	$("body").append("<div id='TB_load'><img src='"+TB_chemin_animation+"' alt='loading' /></div>");
+	jQuery("body").append("<div id='TB_load'><img src='"+TB_chemin_animation+"' alt='loading' /></div>");
 	TB_load_position();
 
 	if(url.indexOf("?")!==-1){ //If there is a query string involved
@@ -176,34 +176,34 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
 		TB_WIDTH = imageWidth + 20;
 		TB_HEIGHT = imageHeight + 20;
 
-		$("#TB_window").append("<a href='#' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+" - next picture'/></a>" + "<div id='TB_legend' style='background-color:#fff'><div id='TB_caption'>"+caption+"</div><div id='TB_secondLine'>" + TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + TB_Diapo +"</div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'><img src='"+TB_chemin_close+"' alt='Fermer' /></a></div></div>"); 
+		jQuery("#TB_window").append("<a href='#' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+" - next picture'/></a>" + "<div id='TB_legend' style='background-color:#fff'><div id='TB_caption'>"+caption+"</div><div id='TB_secondLine'>" + TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + TB_Diapo +"</div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'><img src='"+TB_chemin_close+"' alt='Fermer' /></a></div></div>"); 
 
-		$("#TB_closeWindowButton").click(TB_remove);
-		$("#TB_load").remove();
-		$("#TB_window").fadeIn("slow");
-		//setTimeout('$("#TB_legend").slideDown(800);',1600);
+		jQuery("#TB_closeWindowButton").click(TB_remove);
+		jQuery("#TB_load").remove();
+		jQuery("#TB_window").fadeIn("slow");
+		//setTimeout('jQuery("#TB_legend").slideDown(800);',1600);
 
 	if (!(TB_NextHTML == "")) {
 		function goNext(){
 			FULL_S = false ;
-			$("#TB_window").remove();
-			$("body").append("<div id='TB_window'></div>");
+			jQuery("#TB_window").remove();
+			jQuery("body").append("<div id='TB_window'></div>");
 			TB_show(TB_NextCaption, TB_NextURL); 
 			return false;
 		}
-		$("#TB_next").click(goNext);
+		jQuery("#TB_next").click(goNext);
 	}
 
 	if (!(TB_PrevHTML == "")) {
 		function goPrev(){
 			FULL_S = false ;
-			if($(document).unbind('click',goPrev)){$(document).unbind('click',goPrev)};
-			$("#TB_window").remove();
-			$("body").append("<div id='TB_window'></div>");
+			if(jQuery(document).unbind('click',goPrev)){jQuery(document).unbind('click',goPrev)};
+			jQuery("#TB_window").remove();
+			jQuery("body").append("<div id='TB_window'></div>");
 			TB_show(TB_PrevCaption, TB_PrevURL);
 			return false;
 		}
-		$("#TB_prev").click(goPrev);
+		jQuery("#TB_prev").click(goPrev);
 	}
 
 	if (!(TB_Full_Size == "")) {
@@ -221,26 +221,26 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
 					TB_LEFT = 50 ;
 				}
 
-				$("#TB_window").animate({top:TB_TOP,left:TB_LEFT,width:(IMAGE_WIDTH+20),height:(IMAGE_HEIGHT+20)},1500);
-		 		$("#TB_Image").animate({top:20,left:20,width:IMAGE_WIDTH,height:IMAGE_HEIGHT},1500, TB_recadre);
+				jQuery("#TB_window").animate({top:TB_TOP,left:TB_LEFT,width:(IMAGE_WIDTH+20),height:(IMAGE_HEIGHT+20)},1500);
+		 		jQuery("#TB_Image").animate({top:20,left:20,width:IMAGE_WIDTH,height:IMAGE_HEIGHT},1500, TB_recadre);
 				}
 	 		else{
 	 			FULL_S = false ;
-	 			$("#TB_window").animate({top: (arrayPageScroll[1] + (pagesize[1]-TB_HEIGHT)/2),left:(arrayPageScroll[0] + (pagesize[0] - TB_WIDTH)/2), width:TB_WIDTH,height:TB_HEIGHT},1500);
-	 			$("#TB_Image").animate({top:20,left:20,width:(TB_WIDTH - 20),height:(TB_HEIGHT - 20)},1500,TB_recadre);
+	 			jQuery("#TB_window").animate({top: (arrayPageScroll[1] + (pagesize[1]-TB_HEIGHT)/2),left:(arrayPageScroll[0] + (pagesize[0] - TB_WIDTH)/2), width:TB_WIDTH,height:TB_HEIGHT},1500);
+	 			jQuery("#TB_Image").animate({top:20,left:20,width:(TB_WIDTH - 20),height:(TB_HEIGHT - 20)},1500,TB_recadre);
 	 		}
 			return false;
 		}
-		$("#TB_Full").click(fullSize);
+		jQuery("#TB_Full").click(fullSize);
 	 }
 
 	if(!(TB_NextHTML == "")){
-		$("#TB_ImageOff").click(goNext);
+		jQuery("#TB_ImageOff").click(goNext);
 	}else{
-		$("#TB_ImageOff").click(TB_remove);
+		jQuery("#TB_ImageOff").click(TB_remove);
 	}
 
-	$("#TB_Diapo").click(diaporama);
+	jQuery("#TB_Diapo").click(diaporama);
 
 	document.onkeydown = function(e){
 		if (e == null) { // ie
@@ -265,15 +265,15 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
 
 	TB_position() ;
 	 
-	$("#TB_load").remove();
-	$("#TB_window").css({display:"block"}); //for safari using css instead of show
+	jQuery("#TB_load").remove();
+	jQuery("#TB_window").css({display:"block"}); //for safari using css instead of show
 
 
 	//diapo
 	//console.log("deb " + DELAI); 
 	if(DIAPO)
 		setTimeout('diapo();',DELAI);
-		$("#TB_ImageOff")[0].focus();
+		jQuery("#TB_ImageOff")[0].focus();
 	}
 
 	imgPreloader.src = url;
@@ -296,36 +296,36 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
 
 		if(url.indexOf('TB_iframe') != -1){
 			urlNoQuery = url.split('TB_');
-			$("#TB_window").append("<div id='TB_title'><div id='TB_ajaxWindowTitle'>"+caption+"</div><div id='TB_closeAjaxWindow'><a href='#' id='TB_closeWindowButton' title='Close'>close</a></div></div><iframe frameborder='0' hspace='0' src='"+urlNoQuery[0]+"' id='TB_iframeContent' name='TB_iframeContent' style='width:"+(ajaxContentW + 29)+"px;height:"+(ajaxContentH + 17)+"px;' onload='TB_showIframe()'> </iframe>");
+			jQuery("#TB_window").append("<div id='TB_title'><div id='TB_ajaxWindowTitle'>"+caption+"</div><div id='TB_closeAjaxWindow'><a href='#' id='TB_closeWindowButton' title='Close'>close</a></div></div><iframe frameborder='0' hspace='0' src='"+urlNoQuery[0]+"' id='TB_iframeContent' name='TB_iframeContent' style='width:"+(ajaxContentW + 29)+"px;height:"+(ajaxContentH + 17)+"px;' onload='TB_showIframe()'> </iframe>");
 		}else{
-			$("#TB_window").append("<div id='TB_title'><div id='TB_ajaxWindowTitle'>"+caption+"</div><div id='TB_closeAjaxWindow'><a href='#' id='TB_closeWindowButton'>close</a></div></div><div id='TB_ajaxContent' style='width:"+ajaxContentW+"px;height:"+ajaxContentH+"px;'></div>");
+			jQuery("#TB_window").append("<div id='TB_title'><div id='TB_ajaxWindowTitle'>"+caption+"</div><div id='TB_closeAjaxWindow'><a href='#' id='TB_closeWindowButton'>close</a></div></div><div id='TB_ajaxContent' style='width:"+ajaxContentW+"px;height:"+ajaxContentH+"px;'></div>");
 		}
 
-		$("#TB_closeWindowButton").click(TB_remove);
+		jQuery("#TB_closeWindowButton").click(TB_remove);
 
 		if(url.indexOf('TB_inline') != -1){
-			$("#TB_ajaxContent").html($('#' + params['inlineId']).html());
+			jQuery("#TB_ajaxContent").html(jQuery('#' + params['inlineId']).html());
 			TB_position();
-			$("#TB_load").remove();
-			$("#TB_window").css({display:"block"}); 
+			jQuery("#TB_load").remove();
+			jQuery("#TB_window").css({display:"block"}); 
 		}else if(url.indexOf('TB_iframe') != -1){
 			TB_position();
 			if(frames['TB_iframeContent'] == undefined){//be nice to safari
-				$("#TB_load").remove();
-				$("#TB_window").css({display:"block"});
-				$(document).keyup( function(e){ var key = e.keyCode; if(key == 27){TB_remove()} });
+				jQuery("#TB_load").remove();
+				jQuery("#TB_window").css({display:"block"});
+				jQuery(document).keyup( function(e){ var key = e.keyCode; if(key == 27){TB_remove()} });
 			}
 		}else{
-			$("#TB_ajaxContent").load(url, function(){
+			jQuery("#TB_ajaxContent").load(url, function(){
 				TB_position();
-				$("#TB_load").remove();
-				$("#TB_window").css({display:"block"}); 
+				jQuery("#TB_load").remove();
+				jQuery("#TB_window").css({display:"block"}); 
 			});
 		}
 
 	}
 
-	$(window).resize(TB_position);
+	jQuery(window).resize(TB_position);
 
 	document.onkeyup = function(e){
 		if (e == null) { // ie
@@ -351,7 +351,7 @@ function diaporama(){
 		DIAPO = true ;
 		//console.log("deb"); 
 		diapo();
-		//$("TB_secondLine").html(TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + "[Stop]");
+		//jQuery("TB_secondLine").html(TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + "[Stop]");
 	} else {
 		DIAPO = false ;
 	}
@@ -361,8 +361,8 @@ function diapo(){
 	//console.log(DIAPO);
 	if(DIAPO){
 		if(TB_NextURL !=""){
-			$("#TB_window").remove();
-			$("body").append("<div id='TB_window'></div>");
+			jQuery("#TB_window").remove();
+			jQuery("body").append("<div id='TB_window'></div>");
 			//console.log("hop");
 			TB_show(TB_NextCaption, TB_NextURL); 
 		}else DIAPO = false ;
@@ -371,19 +371,19 @@ function diapo(){
 }
 
 function TB_showIframe(){
-	$("#TB_load").remove();
-	$("#TB_window").css({display:"block"});
+	jQuery("#TB_load").remove();
+	jQuery("#TB_window").css({display:"block"});
 }
 
 function TB_remove() {
 	DIAPO = false ;
 	FULL_S = false ;
-	$("#TB_imageOff").unbind('click');
-	$("#TB_overlay").unbind('click');
-	$("#TB_closeWindowButton").unbind('click');
-	$("#TB_window").fadeOut("fast",function(){$('#TB_window,#TB_overlay,#TB_HideSelect').remove();});
-	$("#TB_load").remove();
-	$(".TB_hide").show();
+	jQuery("#TB_imageOff").unbind('click');
+	jQuery("#TB_overlay").unbind('click');
+	jQuery("#TB_closeWindowButton").unbind('click');
+	jQuery("#TB_window").fadeOut("fast",function(){jQuery('#TB_window,#TB_overlay,#TB_HideSelect').remove();});
+	jQuery("#TB_load").remove();
+	jQuery(".TB_hide").show();
 	
 	return false;
 }
@@ -391,16 +391,16 @@ function TB_remove() {
 function TB_position() {
 	var pagesize = TB_getPageSize();
 	var arrayPageScroll = TB_getPageScrollTop();
-	var legendHeight = $("#TB_legend").height() ;	
+	var legendHeight = jQuery("#TB_legend").height() ;	
 
 	if(FULL_S && DIAPO){
 		FULL_S = false ;
-		$("#TB_window").animate({top: (arrayPageScroll[1] + (pagesize[1]-TB_HEIGHT)/2),left:(arrayPageScroll[0] + (pagesize[0] - TB_WIDTH)/2), width:TB_WIDTH,height:TB_HEIGHT},1500);
-		$("#TB_Image").animate({top:20,left:20,width:(TB_WIDTH - 20),height:(TB_HEIGHT - 20)},1500,TB_recadre);
+		jQuery("#TB_window").animate({top: (arrayPageScroll[1] + (pagesize[1]-TB_HEIGHT)/2),left:(arrayPageScroll[0] + (pagesize[0] - TB_WIDTH)/2), width:TB_WIDTH,height:TB_HEIGHT},1500);
+		jQuery("#TB_Image").animate({top:20,left:20,width:(TB_WIDTH - 20),height:(TB_HEIGHT - 20)},1500,TB_recadre);
 	}
 
 	if(!FULL_S || DIAPO){
-		$("#TB_window").css({width:TB_WIDTH+"px",left: (arrayPageScroll[0] + (pagesize[0] - TB_WIDTH)/2)+"px", top: (arrayPageScroll[1] + (pagesize[1]-TB_HEIGHT)/2 - legendHeight/2)+"px" });
+		jQuery("#TB_window").css({width:TB_WIDTH+"px",left: (arrayPageScroll[0] + (pagesize[0] - TB_WIDTH)/2)+"px", top: (arrayPageScroll[1] + (pagesize[1]-TB_HEIGHT)/2 - legendHeight/2)+"px" });
 	}
 }
 
@@ -420,14 +420,14 @@ function TB_overlaySize(){
 		yScroll = document.body.offsetHeight;
 		xScroll = document.body.offsetWidth;
 	}
-	$("#TB_overlay").css({"height":yScroll +"px", "width":xScroll +"px"});
-	$("#TB_HideSelect").css({"height":yScroll +"px","width":xScroll +"px"});
+	jQuery("#TB_overlay").css({"height":yScroll +"px", "width":xScroll +"px"});
+	jQuery("#TB_HideSelect").css({"height":yScroll +"px","width":xScroll +"px"});
 }
 
 function TB_load_position() {
 	var pagesize = TB_getPageSize();
 	var arrayPageScroll = TB_getPageScrollTop();
-	$("#TB_load")
+	jQuery("#TB_load")
 	.css({left: (arrayPageScroll[0] + (pagesize[0] - 100)/2)+"px", top: (arrayPageScroll[1] + ((pagesize[1]-100)/2))+"px" })
 	.css({display:"block"});
 }
