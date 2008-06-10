@@ -165,10 +165,10 @@ function exec_spiplistes_courriers_casier () {
 			spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 			spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste, $id_auteur_test);
 			if($id_liste > 0) {
-spiplistes_log("SEND ID_COURRIER #$id_courrier ON ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur"
+spiplistes_log("SEND ID_COURRIER #$id_courrier ON id_liste #$id_liste BY id_auteur #$connect_id_auteur"
 		, _SPIPLISTES_LOG_DEBUG);
 			} else {
-spiplistes_log("SEND ID_COURRIER #$id_courrier TO #$id_auteur_test TEST BY ID_AUTEUR #$connect_id_auteur"
+spiplistes_log("SEND ID_COURRIER #$id_courrier TO #$id_auteur_test TEST BY id_auteur #$connect_id_auteur"
 		, _SPIPLISTES_LOG_DEBUG);
 			}
 		}
