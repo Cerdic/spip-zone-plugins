@@ -100,19 +100,25 @@ function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 	$spiplistes_current_version =  __plugin_current_version_get(_SPIPLISTES_PREFIX);
 	$spiplistes_real_version = __plugin_real_version_get(_SPIPLISTES_PREFIX);
 	$opt_simuler_envoi = spiplistes_pref_lire('opt_simuler_envoi');
-	if($spiplistes_current_version || !$opt_simuler_envoi) {
-	// si mise à jour ou première install, passe en simulation d'envoi
-		$opt_simuler_envoi = 
-			($spiplistes_current_version < $spiplistes_real_version)
-				// mise à jour de spiplistes ?
-			? "oui"
-				// reprend pref
-			: "non"
-			;
-	}
-	else {
+	$opt_simuler_envoi = ($opt_simuler_envoi == 'oui') ? 'oui' : 'non';
+	
+	if(
+		// si première install...
+		!$spiplistes_current_version
+		||
+		(
+		// ou mise à jour...
+			(
+				$spiplistes_current_version 
+				|| ($opt_simuler_envoi == 'non')
+			)
+			&& ($spiplistes_current_version < $spiplistes_real_version)
+		)
+	) {
+	// ...passe en simulation d'envoi
 		$opt_simuler_envoi = "oui";
 	}
+
 	if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
 		$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = "";
 	}
