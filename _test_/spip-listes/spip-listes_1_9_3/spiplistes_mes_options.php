@@ -238,7 +238,7 @@ function autoriser_liste_moderer ($faire = '', $type = '', $id_objet = 0, $qui =
 					, 'spip_auteurs_mod_listes'
 					, array(
 						"id_liste=".sql_quote($id_objet)
-						, "id_auteur=".$qui
+						, "id_auteur=".$qui['id_auteur']
 					)
 					, '', '', 1
 				)

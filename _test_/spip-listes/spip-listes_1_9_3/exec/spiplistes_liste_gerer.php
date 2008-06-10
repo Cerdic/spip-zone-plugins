@@ -121,7 +121,7 @@ function exec_spiplistes_liste_gerer () {
 	// Modifier une liste
 	////
 		// les admins toutes rubriques et le moderateur seuls peuvent modifier la liste
-		$flag_editable = autoriser('moderer', 'liste', $connect_id_auteur);
+		$flag_editable = autoriser('moderer', 'liste', $id_liste);
 
 		if($flag_editable) {
 		
@@ -297,9 +297,7 @@ function exec_spiplistes_liste_gerer () {
 	}
 
 	// les supers-admins et le moderateur seuls peuvent modifier la liste
-	$ids_mods_array = spiplistes_mod_listes_get_id_auteur($id_liste);
-	$ids_mods_array = ($ids_mods_array && isset($ids_mods_array[$id_liste]) ? $ids_mods_array[$id_liste] : array());
-	$flag_editable = ($connect_toutes_rubriques || in_array($connect_id_auteur, $ids_mods_array));
+	$flag_editable = autoriser('moderer', 'liste', $id_liste);
 
 	$titre_message = ($titre_message=='') ? $titre._T('spiplistes:_de_').$meta['nom_site'] : $titre_message;
 
@@ -666,89 +664,98 @@ function exec_spiplistes_liste_gerer () {
 	$page_result .= ""
 		. "</td>\n"
 		. "</tr>\n"
-		. "<tr><td align='$spip_lang_left' class='verdana2'>"
-		. "<input type='radio' name='message_auto' value='oui' id='auto_oui' "
-			. ((empty($patron) || (!$flag_editable)) ? " disabled='disabled' " : "")
-			. ($auto_checked = ($message_auto=='oui' ? "checked='checked'" : ""))
-			. " />"
-		. "<label for='auto_oui' ".($auto_checked ? "style='font-weight:bold;'" : "").">"
-			. _T('spiplistes:prog_env')."</label>\n"
-		. "<div id='auto_oui_detail' "
-			.((empty($patron) || (!$flag_editable) || !$auto_checked) ? "style='display:none;'" : "")
-			.">"
-		. "<ul style='list-style-type:none;'>\n"
-		. '<li>'._T('spiplistes:message_sujet').': <input type="text" name="titre_message" value="'.$titre_message.'" size="50" class="fondl" /> </li>'."\n"
-		// 
-		// chrono jour
-		. "<li style='margin-top:0.5em'>"
-			. spiplistes_form_input_radio ('auto_chrono', 'auto_jour'
-				, ''
-				, (($statut == _SPIPLISTES_DAILY_LIST) || ($periode > 0))
-				, true, false)
-			. _T('spiplistes:Tous_les')." <input type='text' name='periode' value='".$periode."' size='4' maxlength='4' class='fondl' /> "._T('info_jours')
-			. "</li>\n"
-		// chrono hebdo
-		. "<li>"
-			. spiplistes_form_input_radio ('auto_chrono', 'auto_hebdo'
-				, _T('spiplistes:Toutes_les_semaines')
-				, (($statut == _SPIPLISTES_HEBDO_LIST) || ($statut == _SPIPLISTES_WEEKLY_LIST))
-				, true, false)
-			. spiplistes_form_input_checkbox('auto_weekly', 'oui'
-				, _T('spiplistes:en_debut_de_semaine'), ($statut == _SPIPLISTES_WEEKLY_LIST), true, false)
-			. "</li>\n"
-		// chrono mois
-		. "<li>"
-			. spiplistes_form_input_radio ('auto_chrono', 'auto_mensuel'
-				, _T('spiplistes:Tous_les_mois')
-				, (($statut == _SPIPLISTES_MENSUEL_LIST) || ($statut == _SPIPLISTES_MONTHLY_LIST))
-				, true, false)
-			. spiplistes_form_input_checkbox('auto_mois', 'oui'
-				, _T('spiplistes:en_debut_de_mois'), ($statut == _SPIPLISTES_MONTHLY_LIST), true, false)
-			. "</li>\n"
-		// chrono année
-		. "<li>"
-			. spiplistes_form_input_radio ('auto_chrono', 'auto_an'
-				, _T('spiplistes:Tous_les_ans')
-				, ($statut == _SPIPLISTES_YEARLY_LIST)
-				, true, false)
-			. "</li>\n"
-		. "<li style='margin-top:0.5em'>"._T('spiplistes:A_partir_de')." : <br />\n"
-		//
-		. spiplistes_dater_envoi($id_liste, true, $statut, $date_debut_envoi, 'btn_changer_date', false)."</li>\n"
-		.	(
-			(!$envoyer_maintenant)
-			? " <li>"
-				. spiplistes_form_input_checkbox('envoyer_maintenant', 'oui'
-					, _T('spiplistes:env_maint'), false, true)
-				. "</li>\n"
-			: ""
-			)
-		. "</ul></div>\n"
 		;
-	$checked = ($message_auto=='non') ? "checked='checked'" : "";
-	$disabled = ((empty($patron) || (!$flag_editable)) ? " disabled='disabled' " : "");
+	if($flag_editable) {
+		$page_result .= ""
+			. "<tr><td align='$spip_lang_left' class='verdana2'>"
+			. "<input type='radio' name='message_auto' value='oui' id='auto_oui' "
+				. (empty($patron) ? " disabled='disabled' " : "")
+				. ($auto_checked = ($message_auto=='oui' ? "checked='checked'" : ""))
+				. " />"
+			. "<label for='auto_oui' ".($auto_checked ? "style='font-weight:bold;'" : "").">"
+				. _T('spiplistes:prog_env')."</label>\n"
+			. "<div id='auto_oui_detail' "
+				.((empty($patron) || !$auto_checked) ? "style='display:none;'" : "")
+				.">"
+			. "<ul style='list-style-type:none;'>\n"
+			. '<li>'._T('spiplistes:message_sujet').': <input type="text" name="titre_message" value="'.$titre_message.'" size="50" class="fondl" /> </li>'."\n"
+			// 
+			// chrono jour
+			. "<li style='margin-top:0.5em'>"
+				. spiplistes_form_input_radio ('auto_chrono', 'auto_jour'
+					, ''
+					, (($statut == _SPIPLISTES_DAILY_LIST) || ($periode > 0))
+					, true, false)
+				. _T('spiplistes:Tous_les')." <input type='text' name='periode' value='".$periode."' size='4' maxlength='4' class='fondl' /> "._T('info_jours')
+				. "</li>\n"
+			// chrono hebdo
+			. "<li>"
+				. spiplistes_form_input_radio ('auto_chrono', 'auto_hebdo'
+					, _T('spiplistes:Toutes_les_semaines')
+					, (($statut == _SPIPLISTES_HEBDO_LIST) || ($statut == _SPIPLISTES_WEEKLY_LIST))
+					, true, false)
+				. spiplistes_form_input_checkbox('auto_weekly', 'oui'
+					, _T('spiplistes:en_debut_de_semaine'), ($statut == _SPIPLISTES_WEEKLY_LIST), true, false)
+				. "</li>\n"
+			// chrono mois
+			. "<li>"
+				. spiplistes_form_input_radio ('auto_chrono', 'auto_mensuel'
+					, _T('spiplistes:Tous_les_mois')
+					, (($statut == _SPIPLISTES_MENSUEL_LIST) || ($statut == _SPIPLISTES_MONTHLY_LIST))
+					, true, false)
+				. spiplistes_form_input_checkbox('auto_mois', 'oui'
+					, _T('spiplistes:en_debut_de_mois'), ($statut == _SPIPLISTES_MONTHLY_LIST), true, false)
+				. "</li>\n"
+			// chrono année
+			. "<li>"
+				. spiplistes_form_input_radio ('auto_chrono', 'auto_an'
+					, _T('spiplistes:Tous_les_ans')
+					, ($statut == _SPIPLISTES_YEARLY_LIST)
+					, true, false)
+				. "</li>\n"
+			. "<li style='margin-top:0.5em'>"._T('spiplistes:A_partir_de')." : <br />\n"
+			//
+			. spiplistes_dater_envoi($id_liste, true, $statut, $date_debut_envoi, 'btn_changer_date', false)."</li>\n"
+			.	(
+				(!$envoyer_maintenant)
+				? " <li>"
+					. spiplistes_form_input_checkbox('envoyer_maintenant', 'oui'
+						, _T('spiplistes:env_maint'), false, true)
+					. "</li>\n"
+				: ""
+				)
+			. "</ul></div>\n"
+			;
+		$checked = ($message_auto=='non') ? "checked='checked'" : "";
+		$disabled = (empty($patron) ? " disabled='disabled' " : "");
+		$page_result .= ""
+			. "<br /><input type='radio' name='message_auto' value='non' id='auto_non' $disabled $checked />"
+			. ($checked ? "<strong>" : "")
+			. " <label for='auto_non'>"._T('spiplistes:prog_env_non')."</label> "
+			. ($checked ? "</strong>" : "")
+			. "</td></tr>\n"
+			;
+
+		$page_result .= ""
+			. "<tr><td style='text-align:$spip_lang_right;'>"
+			. 	(
+				($id_liste)
+				? "<input type='hidden' name='id_liste' value='$id_liste' />"
+				: ""
+				)
+			.	(
+				($new)
+				? "<input type='hidden' name='new' value='$new' />"
+				: ""
+				)
+			// bouton de validation
+			. (!empty($patron) 
+				? spiplistes_form_bouton_valider('btn_modifier_courrier_auto', _T('bouton_valider'), true, true)
+				: "")
+			. "</td></tr>"
+			;
+	}
 	$page_result .= ""
-		. "<br /><input type='radio' name='message_auto' value='non' id='auto_non' $disabled $checked />"
-		. ($checked ? "<strong>" : "")
-		. " <label for='auto_non'>"._T('spiplistes:prog_env_non')."</label> "
-		. ($checked ? "</strong>" : "")
-		. "</td></tr>\n"
-		. "<tr><td style='text-align:$spip_lang_right;'>"
-		. 	(
-			($id_liste)
-			? "<input type='hidden' name='id_liste' value='$id_liste' />"
-			: ""
-			)
-		.	(
-			($new)
-			? "<input type='hidden' name='new' value='$new' />"
-			: ""
-			)
-		// bouton de validation
-		. ((!empty($patron) && $flag_editable) 
-			? spiplistes_form_bouton_valider('btn_modifier_courrier_auto', _T('bouton_valider'), true, true)
-			: "")
-		. "</td></tr>"
 		. "</table>\n"
 		. spiplistes_form_fin(true)
 		. fin_cadre_relief(true)
@@ -757,9 +764,6 @@ function exec_spiplistes_liste_gerer () {
 		
 	$page_result .= ""
 		. fin_cadre_relief(true)
-		;
-	
-	$page_result .= ""
 		. $grosse_boite_abonnements
 		. $grosse_boite_moderateurs
 		;
