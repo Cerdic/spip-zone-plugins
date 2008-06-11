@@ -53,8 +53,11 @@ function n_to_br($texte){
 }
 
 function id_pays_to_pays($id_pays){
-	$pays = sql_getfetsel('pays', 'spip_geo_pays', 'id_pays ='.$id_pays) ;
-	return $pays;
+	if($id_pays != 0){
+		$pays = sql_getfetsel('pays', 'spip_geo_pays', 'id_pays ='.$id_pays) ;
+		return $pays;
+	}
+	else return;
 }
 
 function form_hidden_env($env){
