@@ -42,7 +42,10 @@ _ <multi>
 	-->
 	<prefix> 
 	Corbeille
-	</prefix>
+	</prefix>	
+  <icon>
+  img_pack/trash-full-24.png
+  </icon>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>
