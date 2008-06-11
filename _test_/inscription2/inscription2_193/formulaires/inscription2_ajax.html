@@ -31,7 +31,7 @@
                 </li>]
                 
                 [(#CONFIG{inscription2/login}|=={on}|?{' ', ''})	
-                <li class="editer_username[ (#CONFIG{inscription2/login_obligatoire}|=={on}|?{obligatoire})]">
+                <li class="editer_login[ (#CONFIG{inscription2/login_obligatoire}|=={on}|?{obligatoire})]">
 	                <label for="login"><:inscription2:login:></label>
 	                <input type="text" class="text" name="login" id="login" value="#ENV{login}" />
 	                [<p class='erreur'>(#ENV**{erreurs}|table_valeur{login})</p>]
@@ -53,7 +53,7 @@
         
         
         [(#REM) information générales]
-        <fieldset class="infos_perso">
+        <fieldset class="info_perso">
             <legend>
 	            <:inscription2:info_perso:>
             </legend>
@@ -173,9 +173,9 @@
         [(#CONFIG{inscription2/fax_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
 
         [(#GET{afficher_plus}|=={true}|?{' ', ''})
-        <fieldset class="infos_pros">
+        <fieldset class="info_pro">
             <legend>
-                <:inscription2:info_pros:>
+                <:inscription2:info_pro:>
             </legend>
             
             <ol class="formfx">

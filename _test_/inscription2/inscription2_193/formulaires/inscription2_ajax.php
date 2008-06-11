@@ -60,7 +60,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
         preg_match('/^(.*)(?:_obligatoire)/i', $clef, $resultat);        
         //si clef obligatoire, obligatoire activé et _request() vide alors erreur
         if ($resultat[1] && $valeur == 'on' && !_request($resultat[1])) {
-            $erreurs[$resultat[1]] = 'Ce champ est obligatoire';   
+            $erreurs[$resultat[1]] = _T('inscription2:champ_obligatoire');   
         }
     
     }
@@ -141,12 +141,14 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
             $val,
             $where
         );
+        $new = false;
     } else {
         $val['statut'] = 'aconfirmer';
         $id_auteur = sql_insertq(
             $table,
             $val
         );
+        $new = true;
     }
     $table = 'spip_auteurs_elargis';
 
@@ -178,7 +180,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
         );
     }
     
-    if ($id_elargi) {    
+    if (!$new) {    
         $message = "Les modifications de votre profil ont bien été prises en compte";
     } else {
         envoyer_inscription2($id_auteur);

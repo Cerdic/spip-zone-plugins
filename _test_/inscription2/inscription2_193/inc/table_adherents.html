@@ -97,7 +97,7 @@ function confirm(msg,callback) {
 	//rechercher
 	$valeur=_request('valeur');
 	$case=_request('case');
-	if($case == 'username') $case = 'login';
+
 	if (isset($valeur)) {
 		if($case=='id'){
 			$critere="a.id_auteur='$valeur'";
