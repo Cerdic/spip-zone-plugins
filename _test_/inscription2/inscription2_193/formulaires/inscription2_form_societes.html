@@ -1,0 +1,7 @@
+<select name="id_societe"  id="id_societe">
+<BOUCLE_societes(SOCIETES){tout}>
+	<option value="#ID_SOCIETE" [(#ID_SOCIETE|=={#ENV{id_societe}}) selected="selected"]>
+    	#NOM
+	</option>
+</BOUCLE_societes>
+</select>

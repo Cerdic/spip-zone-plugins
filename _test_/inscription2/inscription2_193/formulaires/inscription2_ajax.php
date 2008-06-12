@@ -64,7 +64,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
         }
     
     }
-    
+
     //vérifier que l'auteur a bien des droits d'édition
     if (is_numeric($id_auteur)) {
         include_spip('inc/autoriser');

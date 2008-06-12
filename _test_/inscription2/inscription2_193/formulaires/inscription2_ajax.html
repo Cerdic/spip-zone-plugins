@@ -76,7 +76,8 @@
 						    </li>
 					    </ul>
 				    </fieldset>
-				    [<p class='erreur'>(#ENV**{erreurs}|table_valeur{sexe})</p>]                </li>]
+				    [<p class='erreur'>(#ENV**{erreurs}|table_valeur{sexe})</p>]
+                </li>]
 
                 [(#CONFIG{inscription2/nom_famille}|=={on}|?{' ', ''})	
                 <li class="editer_nom_famille[ (#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{obligatoire})]">
@@ -190,6 +191,12 @@
                     <label for="societe"><:inscription2:societe:></label>
                     <input type="text" class="text" name="societe" id="societe" value="#ENV{societe}"/>
                     [<p class='erreur'>(#ENV**{erreurs}|table_valeur{societe})</p>]
+                </li>]
+                [(#CONFIG{inscription2/id_societe}|=={on}|?{' ', ''})
+                <li class="editer_societe[ (#CONFIG{inscription2/id_societe_obligatoire}|=={on}|?{obligatoire})]">
+                    <label for="id_societe"><:inscription2:societe:></label>
+        	        [(#INCLURE{fond=formulaires/inscription2_form_societes}{env})]
+                    [<p class='erreur'>(#ENV**{erreurs}|table_valeur{id_societe})</p>]
                 </li>]
                 [(#CONFIG{inscription2/secteur}|=={on}|?{' ', ''})
                 <li class="editer_secteur[ (#CONFIG{inscription2/secteur_obligatoire}|=={on}|?{obligatoire})]">

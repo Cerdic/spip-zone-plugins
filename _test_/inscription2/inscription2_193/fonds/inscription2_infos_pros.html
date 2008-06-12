@@ -61,6 +61,30 @@
 </td>
 </tr><tr>
 <td>
+	<strong><:inscription2:societe:> (Choisir depuis une liste )</strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="id_societe" [checked="(#CONFIG{inscription2/id_societe}?{checked})"] onclick="showoblig(this)" id="id_societe" />
+	</label>
+	<label style="[(#CONFIG{inscription2/id_societe}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="id_societe_obligatoire" [checked="(#CONFIG{inscription2/id_societe_obligatoire}?{checked})"] id="id_societe_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="id_societe_fiche_mod" onclick = "enadis(this,societe_fiche)" [checked="(#CONFIG{inscription2/id_societe_fiche_mod}?{checked})"] id="id_societe_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="id_societe_fiche" [checked="(#CONFIG{inscription2/id_societe_fiche}?{checked})"] id="id_societe_fiche" [disabled ="(#CONFIG{inscription2/id_societe_fiche_mod}?{disabled})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="id_societe_table" [checked="(#CONFIG{inscription2/id_societe_table}?{checked})"] id="id_societe_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
 	<strong><:inscription2:url_societe:></strong>
 </td><td>
 	<label>

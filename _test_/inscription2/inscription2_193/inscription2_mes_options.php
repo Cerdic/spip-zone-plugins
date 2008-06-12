@@ -61,6 +61,22 @@
 	}
 	*/	
 	
+	
+	/* Gerer table Societes */
+	$spip_societes['id_societe'] = "bigint(21) NOT NULL";
+	$spip_societes['nom'] = "text NOT NULL ";
+	$spip_societes['secteur'] = "text NOT NULL ";
+	$spip_societes['adresse'] = "text NOT NULL ";
+	$spip_societes['code_postal'] = "text NOT NULL ";
+	$spip_societes['ville'] = "text NOT NULL ";
+	$spip_societes['id_pays'] = "bigint(21) NOT NULL";
+	$spip_societes['telephone'] = "text NOT NULL ";
+	
+	$spip_societes_key = array('PRIMARY KEY' => 'id_societe', 'KEY id_pay' => 'id_pays');
+	
+	$tables_principales['spip_societes'] = array('field' => &$spip_societes, 'key' => &$spip_societes_key);
+    $table_des_tables['societes'] = 'societes';
+	
 # autoriser les visiteurs a modifier leurs infos
 # define ('_DEBUG_AUTORISER', true);
 if (!function_exists('autoriser_spip_auteurs_elargis')) {

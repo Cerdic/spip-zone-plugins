@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['inscription2_version'] = 0.61;
+$GLOBALS['inscription2_version'] = 0.62;
 
 function inscription2_upgrade(){
 	
@@ -97,7 +97,7 @@ function inscription2_upgrade(){
 		            'code_postal_obligatoire' => NULL,
 		            'code_postal_fiche_mod' => 'on',
 		            'code_postal_fiche' => NULL,
-		            'code_postal_table' => NULL,
+		            'code_postal' => NULL,
 		            'ville' => 'on',
 		            'ville_obligatoire'  => NULL,
 		            'ville_fiche_mod' => 'on',
@@ -151,7 +151,6 @@ function inscription2_upgrade(){
 		            'fonction' => NULL,
 		            'fonction_obligatoire' => NULL,
 		            'fonction_fiche_mod' => NULL,
-		            'fonction_fiche' => NULL,
 		            'fonction_table' => NULL,
 		            'adresse_pro' => NULL,
 		            'adresse_pro_obligatoire' => NULL,
@@ -271,6 +270,38 @@ function inscription2_upgrade(){
 		echo "Inscription2 update @ 0.61<br/>On retablit le champs pays sur la table pays et pas nom";
 		ecrire_meta('inscription2_version',$current_version=0.61);
 	}
+
+	if ($current_version<0.62){
+		include_spip('base/abstract_sql');
+		
+        ecrire_config(
+        'inscription2',
+        array(
+            'id_societe' => NULL,
+            'id_societe_obligatoire' => NULL,
+            'id_societe_fiche_mod' => NULL,
+            'id_societe_fiche' => NULL,
+            'id_societe_table' => NULL)
+        );
+        
+        
+    	$spip_societes['id_societe'] = "bigint(21) NOT NULL";
+	    $spip_societes['nom'] = "text NOT NULL ";
+	    $spip_societes['secteur'] = "text NOT NULL ";
+	    $spip_societes['adresse'] = "text NOT NULL ";
+	    $spip_societes['code_postal'] = "text NOT NULL ";
+	    $spip_societes['ville'] = "text NOT NULL ";
+	    $spip_societes['id_pays'] = "bigint(21) NOT NULL";
+	    $spip_societes['telephone'] = "text NOT NULL ";
+                
+        $spip_societes_key = array('PRIMARY KEY' => 'id_societe', 'KEY id_pay' => 'id_pays');
+        
+        sql_create('spip_societes', $spip_societes,$spip_societes_key,true);
+    	
+		echo "Inscription2 update @ 0.62<br/>On gére les societes aussi dans une table";
+		ecrire_meta('inscription2_version',$current_version=0.62);
+	}
+		
 	if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) ecrire_metas();
 }
 
