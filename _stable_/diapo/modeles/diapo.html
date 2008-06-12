@@ -26,7 +26,7 @@
 - meme nom de boucle + 6 caracteres(_diapo)
 => il faudrait sans doute surcharger pagination...]
 <BOUCLE_docs_diapo(DOCUMENTS){id_article}{extension IN png,jpg,gif}{diapo (#GET{nb_vignettes}) #ID_ARTICLE}{par num titre, titre, id_document}>
-<img class="diapo_loading" alt="<:diapo:loading:>" style="display:none" src="[(#CHEMIN{'img_pack/loading.gif'})]"/>
+<img class="diapo_loading" alt="<:diapo:loading:>" style="display:none" src="[(#CHEMIN{'img_pack/loading.gif'})]" />
 <div class="diapo[ (#ENV{align}|match{right|left}|?{'diapo_petit','diapo_grand'})]">
 <a href="#FICHIER"[ title="(#TITRE|supprimer_numero|texte_backend)"] type="#MIME_TYPE">
 <img class="diapo_petit"[ style="(#ENV{align}|match{right|left}|?{'','display:none'})"] src='[(#FICHIER|image_reduire{#DIAPO_GRAND,#DIAPO_GRAND_H}|extraire_attribut{src})]' height='[(#FICHIER|image_reduire{#DIAPO_PETIT,#DIAPO_PETIT_H}|hauteur)]' width='[(#FICHIER|image_reduire{#DIAPO_PETIT,#DIAPO_PETIT_H}|largeur)]' alt='[(#TITRE|supprimer_numero|texte_backend)]' />
