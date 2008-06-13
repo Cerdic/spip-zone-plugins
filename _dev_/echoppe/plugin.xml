@@ -7,7 +7,7 @@
 		crowf00t, kent1, yoann etc... &copy; 2007 - Distribu&eacute; sous licence GNU/LGPL
 	</auteur>
 	<version>
-		0.1.9
+		0.2.9
 	</version>
 	<etat>
 		dev
@@ -27,7 +27,7 @@ _
 	<prefix>echoppe</prefix>
 	<necessite id='cfg' version='[1.0.6;]' />
 	<necessite id='Inscription2' version='[0.2;]' />
-	<necessite id="compat" version="[1.9.3.2;]" />
+	<necessite id='compat9919' version='[1.9.3.1;]' />
 	<install>base/echoppe_upgrade.php</install>
 	<options>echoppe_options.php</options>
 	<fonctions>echoppe_fonctions.php</fonctions>
@@ -46,6 +46,11 @@ _
 		<!-- nom de la fonction a appelé sans son prefixe -->
 		<action>header_prive</action>
 		<!-- chemin du fichier contenant la fonction -->
+		<inclure>echoppe_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
 		<inclure>echoppe_pipeline.php</inclure>
 	</pipeline>
 	<bouton id='echoppe' parent='naviguer'>
