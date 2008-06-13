@@ -9,7 +9,7 @@
 		<input type="hidden" name="item_name_#_PanierPayPal:COMPTEUR_BOUCLE" value="#TITRE">
 	</BOUCLE_LeProduit>
 </BOUCLE_PanierPayPal>
-	<input type="hidden" name="return" value="[(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public{retour_validation=reussi}|abs_url)]">
-	<input type="hidden" name="cancel_return" value="[(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public{retour_validation=erreur}|abs_url)]">
+	<input type="hidden" name="return" value="[(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public{validation_paiement=reussi}|abs_url)]">
+	<input type="hidden" name="cancel_return" value="[(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public{validation_paiement=erreur}|abs_url)]">
 	<input class="BOUTON" type="submit" value="Payer via PayPal" />
 </form>

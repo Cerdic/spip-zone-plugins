@@ -9,6 +9,7 @@
 		<br />
 		<strong><:echoppe:modele:></strong><br />
 		<input type="text" name="squelette" class="forml" value="#MDL" /><br />
+		[(#FIND_ALL_IN_PATH{'prestataires/paiement/','html'}|array2select{squelette})]
 		<strong><:echoppe:version:></strong><br />
 		<input type="text" name="version" class="forml" value="#VERSION" /><br />
 		<strong><:echoppe:statut:></strong><br />

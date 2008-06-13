@@ -23,4 +23,15 @@ function recuperer_id_secteur($id, $id_objet, $objet){
 	}
 }
 
+function array2select($tab, $nom, $style){
+	
+	$select .= '<select class="'.$style.'">';
+	
+	foreach ($tab as $option){
+		$select .= '<option value="'.$option.'">'.$option.'</option>';
+	}
+	
+	$select .= '</select>';
+}
+
 ?>
