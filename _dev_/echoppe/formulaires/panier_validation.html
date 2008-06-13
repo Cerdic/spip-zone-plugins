@@ -1,11 +1,5 @@
 <div class="formulaire_panier">
-	<div class="echoppe_etapes">
-		<div class="echoppe_etape_0"><:echoppe:editer_le_panier:></div>
-		<div class="echoppe_etape_1"><:echoppe:enregistrement_et_connexion:></div>
-		<div class="echoppe_etape_2_ok"><:echoppe:paiement:></div>
-		<div class="echoppe_etape_3"><:echoppe:fin:></div>
-	</div>
-	<br />
+	[(#MODELE{chemin_panier}{etape=3})]
 	<form action="#SELF" method="post">
 		<:echoppe:selectionnez_le_mode_de_paiement:><br />
 		<input type="radio" name="paiement_par_virment" /><:echoppe:paiment_par_virement:>

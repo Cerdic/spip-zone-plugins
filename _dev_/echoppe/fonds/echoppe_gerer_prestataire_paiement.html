@@ -1,0 +1,11 @@
+[(#CHEMIN{images/credit_cards.png}|debut_cadre_trait_couleur{0,"",<:echoppe:les_prestataires_paiement:>,"",gestion_prestataire_paiement})]
+<B_LesPrestatairesPaiement>
+<ul>
+<BOUCLE_LesPrestatairesPaiement(SPIP_ECHOPPE_PRESTATAIRES_PAIEMENT){statut != poubelle}>
+	<li><a href="[(#EVAL{'echoppe_prestataire_paiement'}|generer_url_ecrire{id_prestataire=#ID_PRESTATAIRE})]">#TITRE</a></li>
+</BOUCLE_LesPrestatairesPaiement>
+</ul>
+</B_LesPrestatairesPaiement>
+<br />
+<a href="[(#EVAL{echoppe_prestataire_paiement}|generer_url_ecrire{new=oui})]" ><img src="#CHEMIN{'images/list-add.png'}" alt="<:echoppe:ajouter_un_prestataire_de_paiement:>" /><:echoppe:ajouter_un_prestataire_de_paiement:></a>
+[(#EVAL{1}|fin_cadre_trait_couleur)]

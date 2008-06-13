@@ -1,7 +1,7 @@
+[(#CHEMIN{images/go-home.png}|debut_cadre_trait_couleur{0,"",<:echoppe:edition_de:> [(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouveau_depot:>,<em><:pas_de_titre:></em>}})],"",depot})]
 <form action="[(#EVAL{echoppe_sauver_depot}|generer_url_action)]" method="post" >
 	<input type="hidden" name="new" value="#NEW" />
 	<input type="hidden" name="id_depot" value="#ID_DEPOT" />
-	[<h1>(#NEW|=={"oui"}|?{<:echoppe:nouveau_depot:>,<:echoppe:edition_de:>&nbsp;[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]})</h1>]
 	<input type="text" name ="titre" class="forml" value="#TITRE" /><br /><br />
 	<strong><:echoppe:description_du_depot:></strong><br />
 	[(#DESCRIPTIF**|barre_textarea{10,20,#LANG})]
@@ -24,3 +24,4 @@
 	<input type="text" name="adresse[email]" class="forml" value="#EMAIL" /><br />
 	<input type="submit" value="<:echoppe:enregistrer:>" class="fondo" />
 </form>
+[(#EVAL{1}|fin_cadre_trait_couleur)]

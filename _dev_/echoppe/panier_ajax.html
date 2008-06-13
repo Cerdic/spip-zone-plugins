@@ -1,0 +1,41 @@
+#HTTP_HEADER{Content-type: text/html;}
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<INCLURE{fond=inclusion/head_rubrique}>
+		<INCLURE{fond=inclusion/head}>
+	</head>
+	<body>
+		<B_LePanier>
+			<div class="formulaire_panier" style="background: white;">
+				<form action="spip.php" method="post">
+					<input type="hidden" name="action" value="echoppe_maj_panier" />
+					<table class="panier" cellspacing="0" cellpadding="0" border="0" summary="panier du client">
+							<tr class="titre_panier">
+								<th class = "panier_titre"><:echoppe:titre_produit:></th>
+								<th class = "panier_prix_ttc"><:echoppe:prix_ttc:></th>
+								<th class = "panier_quantite"><:echoppe:quantite:></th>
+								<th class = "panier_supprimer">&nbsp;</th>
+							</tr>
+					<BOUCLE_LePanier(SPIP_ECHOPPE_PANIERS){id_panier?}{token_panier = #SESSION{echoppe_token_panier}}>
+							<tr class="[(#COMPTEUR_BOUCLE|alterner{l_impair,l_paire})]">
+								<BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits){id_produit}>
+									<td class = "panier_titre">#TITRE</td>
+									<td class = "panier_prix_ttc">#PRIX_TVAC&nbsp;&euro;</td>
+									<td class = "panier_quantite">
+										<input type="hidden" name="id_produit" value="#ID_PRODUIT" /><input type="text" value="#QUANTITE" name="quantite[#ID_PRODUIT]" size="2" />
+									</td>
+									<td class="panier_supprimer"><a class="nyroModal" href="[(#EVAL{echoppe_supprimer_element_panier}|generer_url_action{id_panier=#ID_PANIER})]"><:echoppe:supprimer:></a></td>
+								</BOUCLE_LeProduit>
+							</tr>
+					</BOUCLE_LePanier>
+					</table>
+					<br />
+					<hr />
+					<input type="submit" value="<:echoppe:valider:>" />
+				</form>
+			</div>
+		</B_LePanier>
+	</body>
+</html>

@@ -19,8 +19,9 @@ function balise_FORMULAIRE_PANIER_dyn($id_panier, $formulaire) {
 	$contexte['valider_panier'] = _request('valider_panier');
 	$contexte['paiement_panier'] = _request('paiement_panier');
 	$contexte['visualisation_panier'] = _request('paiement_panier');
+	$contexte['echoppe_prestataire_paiement'] = _request('prestataire_paiement');
+	$contexte['finaliser_paiement'] = _request('finaliser_paiement');
 	$contexte['message'] = "";
-	
 	if ($contexte['valider_panier'] == "oui"){
 		$contexte['formulaire'] = "formulaires/panier_inscription";
 	}
@@ -30,6 +31,15 @@ function balise_FORMULAIRE_PANIER_dyn($id_panier, $formulaire) {
 	}
 	
 	if ($contexte['finaliser_paiement'] == "oui"){
+		session_set('echoppe_prestataire_paiement', $contexte['echoppe_prestataire_paiement'] );
+		if ($GLOBALS['auteur_session']['id_auteur'] > 0){
+			$contexte['formulaire'] = "formulaires/panier_prestataire_paiement";
+		}else{
+			$contexte['formulaire'] = "formulaires/panier_erreur_login";
+		}
+	}
+	
+	if ($contexte['validation_paiement'] == "oui"){
 		$contexte['mail_corps'] = recuperer_fond('fonds/echoppe_mail_virement', array("echoppe_token_panier"=>session_get('echoppe_token_panier'),"echoppe_token_client"=>session_get('echoppe_token_client') ));
 		$contexte['mail_to'] = $GLOBALS['auteur_session']['email'];
 		if (lire_config('echoppe/email_pour_confirmation_panier') != ""){

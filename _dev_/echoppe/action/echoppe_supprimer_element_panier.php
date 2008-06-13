@@ -12,7 +12,8 @@ function action_echoppe_supprimer_element_panier(){
 	//echo $contexte['sql'];
 	$contexte['res'] = spip_query($contexte['sql']);
 	
-	redirige_par_entete(generer_url_public(lire_config('echoppe/squelette_panier', 'echoppe_panier')));
+	/*redirige_par_entete(generer_url_public(lire_config('echoppe/squelette_panier', 'echoppe_panier')));*/
+	redirige_par_entete(generer_url_public('panier_ajax'));
 	
 	
 		

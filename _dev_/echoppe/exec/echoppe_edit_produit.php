@@ -48,14 +48,8 @@ function exec_echoppe_edit_produit(){
 	echo fin_boite_info();*/
 	
 	
-	($contexte['id_categorie'] > 0)?$raccourcis .= icone_horizontale(_T('echoppe:retour_a_la_categorie'), generer_url_ecrire("echoppe_categorie","id_categorie=".$contexte['id_categorie']."&lang=".$contexte['lang_categorie']), _DIR_PLUGIN_ECHOPPE."images/retour.png","", false)."<hr />":$raccourcis=$raccourcis;
-	($contexte['id_produit'] > 0)?$raccourcis .= icone_horizontale(_T('echoppe:retour_au_produit'), generer_url_ecrire("echoppe_produit","id_produit=".$contexte['id_produit']."&lang=".$contexte['lang_produit']), _DIR_PLUGIN_ECHOPPE."images/retour.png","", false)."<hr />":$raccourcis=$raccourcis;	
-	//$raccourcis .= '<hr />';
-	$raccourcis .= icone_horizontale(_T('echoppe:gerer_les_depots'), generer_url_ecrire("echoppe_gerer_depots",""), _DIR_PLUGIN_ECHOPPE."images/go-home.png","", false);
-	$raccourcis .= "<hr />";
-	$raccourcis .= icone_horizontale(_T('echoppe:gerer_les_paniers'), generer_url_ecrire("echoppe_paniers"), _DIR_PLUGIN_ECHOPPE."images/panier.png","", false);
-	$raccourcis .= '<hr />';
-	$raccourcis .= icone_horizontale(_T('echoppe:gerer_echoppe'), generer_url_ecrire("echoppe",""), _DIR_PLUGIN_ECHOPPE."images/echoppe_blk_24.png","", false);
+	include_spip('inc/echoppe_raccourcis');
+	$raccourcis = generer_raccourcis_echoppe();
 	echo bloc_des_raccourcis($raccourcis);
 
 	if ($contexte['new'] != 'oui' && $contexte['new'] != 'ajout_description'){
@@ -66,7 +60,6 @@ function exec_echoppe_edit_produit(){
 
 	echo creer_colonne_droite();
 	echo debut_droite(_T('echoppe:edition_de_produit'));
-	echo gros_titre(_T("echoppe:edition_de_produit"));
 	
 	echo recuperer_fond('fonds/echoppe_edit_produit', $contexte);
 

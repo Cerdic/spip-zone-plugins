@@ -1,63 +1,61 @@
+[(#CHEMIN{images/credit_cards.png}|debut_cadre_trait_couleur{0,"",<:echoppe:gestion_des_paniers:>,"",gestion_panier})]
 <B_LesPanierstemporaire>
 	<h2><:echoppe:paniers_en_attente:></h2>
-	#PAGINATION
+	#PAGINATION<br />
 <BOUCLE_LesPanierstemporaire(SPIP_ECHOPPE_PANIERS){statut = temporaire}{pagination}{"<br />"}>
 	<a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#TOKEN_PANIER|unique)]</a>
 </BOUCLE_LesPanierstemporaire>
-	#PAGINATION
-	
+	<br />#PAGINATION<br />
 </B_LesPanierstemporaire>
-
 <hr />
+
 <h2><:echoppe:paniers_reserve:></h2>
 <B_LesPaniersreserve>
-
-	#PAGINATION
+	#PAGINATION<br />
 <BOUCLE_LesPaniersreserve(SPIP_ECHOPPE_PANIERS){statut = reserve}{pagination}{"<br />"}>
 	<a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#TOKEN_PANIER|unique)]</a>
 </BOUCLE_LesPaniersreserve>
-	#PAGINATION
+	<br />#PAGINATION<br />
 </B_LesPaniersreserve>
-
 <hr />
+
 <h2><:echoppe:paniers_valide:></h2>
 <B_LesPaniersvalide>
-	#PAGINATION
+	#PAGINATION<br />
 <BOUCLE_LesPaniersvalide(SPIP_ECHOPPE_PANIERS){statut = valide}{pagination}{"<br />"}>
 	<a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#TOKEN_PANIER|unique)]</a>
 </BOUCLE_LesPaniersvalide>
-	#PAGINATION
+	<br />#PAGINATION<br />
 </B_LesPaniersvalide>
-
 <hr />
+
 <h2><:echoppe:paniers_paye:></h2>
 <B_LesPanierspaye>
-
-	#PAGINATION
+	#PAGINATION<br />
 <BOUCLE_LesPanierspaye(SPIP_ECHOPPE_PANIERS){statut = paye}{pagination}{"<br />"}>
 	<a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#TOKEN_PANIER|unique)]</a>
 </BOUCLE_LesPanierspaye>
-	#PAGINATION
+	<br />#PAGINATION<br />
 </B_LesPanierspaye>
-
 <hr />
+
 <h2><:echoppe:paniers_traite:></h2>
 <B_LesPanierstraite>
-
-	#PAGINATION
+	#PAGINATION<br />
 <BOUCLE_LesPanierstraite(SPIP_ECHOPPE_PANIERS){statut = traite}{pagination}{"<br />"}>
 	<a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#TOKEN_PANIER|unique)]</a>
 </BOUCLE_LesPanierstraite>
-	#PAGINATION
+	<br />#PAGINATION<br />
 </B_LesPanierstraite>
-
 <hr />
+
 <h2><:echoppe:paniers_envoye:></h2>
 <B_LesPaniersenvoye>
 
-	#PAGINATION
+	#PAGINATION<br />
 <BOUCLE_LesPaniersenvoye(SPIP_ECHOPPE_PANIERS){statut = envoye}{pagination}{"<br />"}>
 	<a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#TOKEN_PANIER|unique)]</a>
 </BOUCLE_LesPaniersenvoye>
-	#PAGINATION
+	<br />#PAGINATION
 </B_LesPaniersenvoye>
+[(#EVAL{1}|fin_cadre_trait_couleur)]

@@ -1,0 +1,13 @@
+<div class="formulaire_panier">
+	[(#MODELE{chemin_panier}{etape=2})]
+	<form action="#SELF" method="post">
+		<:echoppe:selectionnez_le_mode_de_paiement:><br />
+		<BOUCLE_ListPrestaire_paielent(SPIP_ECHOPPE_PRESTATAIRES_PAIEMENT){statut = publie}{"<br />"}>
+			<input type="radio" name="prestataire_paiement" value="#MDL" />#TITRE
+		</BOUCLE_ListPrestaire_paielent>
+		<input type="hidden" name="finaliser_paiement" value="oui" />
+		<br />
+		<br />
+		<input type="submit" value="<:echoppe:selectionner:>" />
+	</form>
+</div>

@@ -28,3 +28,24 @@
 	<br />
 	<input type="submit" name="_cfg_ok" value="<:OK:>" />
 </form>
+<br />
+<hr />
+<br />
+<strong><:echoppe:donnees_de_facturation:></strong>
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+	<fieldset><legend><:echoppe:coordonees_du_beneficiaire:></legend>
+		<:echoppe:denomination_du_beneficiaire:>&nbsp;<br /><input type="text" name="denomination_beneficiaire" value="#CONFIG{echoppe/denomination_beneficiaire}" size="50" /><br /><br />
+		<:echoppe:nom_du_beneficiaire:>&nbsp;<br /><input type="text" name="nom_beneficiaire" value="#CONFIG{echoppe/nom_beneficiaire}" size="50" /><br /><br />
+		<:echoppe:prenom_du_beneficiaire:>&nbsp;<br /><input type="text" name="prenom_beneficiaire" value="#CONFIG{echoppe/prenom_beneficiaire}" size="50" /><br /><br />
+		<:echoppe:adresse_du_beneficiaire:>&nbsp;<br /><input type="text" name="adresse_beneficiaire" value="#CONFIG{echoppe/adresse_beneficiaire}" size="50" /><br /><br />
+		<:echoppe:code_postal_du_beneficiaire:>&nbsp;<br /><input type="text" name="code_postal_beneficiaire" value="#CONFIG{echoppe/code_postal_beneficiaire}" size="50" /><br /><br />
+		<:echoppe:ville_du_beneficiaire:>&nbsp;<br /><input type="text" name="ville_beneficiaire" value="#CONFIG{echoppe/ville_beneficiaire}" size="50" /><br /><br />
+		<:echoppe:pays_du_beneficiaire:>&nbsp;<br /><input type="text" name="pays_beneficiaire" value="#CONFIG{echoppe/pays_beneficiaire}" size="50" /><br /><br />
+		<:echoppe:email_du_beneficiaire:>&nbsp;<br /><input type="text" name="email_beneficiaire" value="#CONFIG{echoppe/email_beneficiaire}" size="50" /><br /><br />
+		<:echoppe:numero_de_compte_du_beneficiaire:>&nbsp;<br /><input type="text" name="numero_de_compte_beneficiaire" value="#CONFIG{echoppe/numero_de_compte_beneficiaire}" size="50" /><br /><br />
+		
+	</fieldset>
+	<br />
+	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</form>
+

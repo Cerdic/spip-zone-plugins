@@ -1,0 +1,23 @@
+[(#CHEMIN{images/credit_cards.png}|debut_cadre_trait_couleur{0,"",[(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouveau_prestataire:>,<em><:pas_de_titre:></em>}})],"",prestataire})]
+	<form action="[(#EVAL{echoppe_sauver_prestataire}|generer_url_action)]" method="post" >
+		<input type="hidden" name="new" value="#NEW" />
+		<input type="hidden" name="id_prestataire" value="#ID_PRESTATAIRE" />
+		[<h1>(#NEW|=={"oui"}|?{<:echoppe:nouveau_prestataire:>,<:echoppe:edition_de:>&nbsp;[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]})</h1>]
+		<input type="text" name ="titre" class="forml" value="#TITRE" /><br /><br />
+		<strong><:echoppe:description_du_prestataire:></strong><br />
+		[(#DESCRIPTIF**|barre_textarea{10,20,#LANG})]
+		<br />
+		<strong><:echoppe:modele:></strong><br />
+		<input type="text" name="squelette" class="forml" value="#MDL" /><br />
+		<strong><:echoppe:version:></strong><br />
+		<input type="text" name="version" class="forml" value="#VERSION" /><br />
+		<strong><:echoppe:statut:></strong><br />
+		<select name="statut" >
+			<option value="publie" [(#STATUT|=={publie}|?{selected})] ><:publie:></option>
+			<option value="en_attente" [(#STATUT|=={en_attente}|?{selected})] ><:en_attente:></option>
+			<option value="poubelle" [(#STATUT|=={poubelle}|?{selected})] ><:poubelle:></option>
+		</select>
+		<br />
+		<input type="submit" value="<:echoppe:enregistrer:>" class="fondo" />
+	</form>
+[(#EVAL{1}|fin_cadre_trait_couleur)]

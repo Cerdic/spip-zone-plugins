@@ -1,37 +1,22 @@
 <div class="formulaire_panier">
-	<div class="echoppe_etapes">
-		<div class="echoppe_etape_0_ok"><:echoppe:editer_le_panier:></div>
-		<div class="echoppe_etape_1"><:echoppe:enregistrement_et_connexion:></div>
-		<div class="echoppe_etape_2"><:echoppe:paiement:></div>
-		<div class="echoppe_etape_3"><:echoppe:fin:></div>
-	</div>
+	[(#MODELE{chemin_panier}{etape=0})]
 	<B_LePanier>
-		[(#ENV{editer_produit}|=={oui}|?{' ',''})
-			<form action="spip.php" method="post">
-			<input type="hidden" name="action" value="echoppe_ajouter_panier" />
-			<input type="hidden" name="achat_rapide" value="maj" />
-			<input type="hidden" name="id_panier" value="#ID_PANIER" />
-			<input type="hidden" name="redirect" value="#SELF" />
-		]
 		<table class="panier" summary="panier du client" border="0" cellpadding="0" cellspacing="0">
         <tbody>
 			<tr class="titre_panier">
 				<th class = "panier_titre"><:echoppe:titre_produit:></th>
 				<th class = "panier_prix_ttc"><:echoppe:prix_ttc:></th>
 				<th class = "panier_quantite"><:echoppe:quantite:></th>
-                <th></td>
 			</tr>
 	<BOUCLE_LePanier(SPIP_ECHOPPE_PANIERS){id_panier?}{token_panier = #SESSION{echoppe_token_panier}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{l_impair,l_paire})]">
 				<BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits){id_produit}>
-					<td class = "panier_titre">#TITRE</td>
+					<td class = "panier_titre"><a href="?page=produit2&id_produit=#ID_PRODUIT">#TITRE</a></td>
 					<td class = "panier_prix_ttc">#PRIX_TVAC&nbsp;&euro;</td>
 					<td class = "panier_quantite">
 						[(#ENV{editer_produit}|=={oui}|?{'',' '})#QUANTITE]
 						[(#ENV{editer_produit}|=={oui}|?{' ',''})<input type="hidden" name="id_produit" value="#ID_PRODUIT" /><input type="text" value="#QUANTITE" name="quantite" size="2" />]
 					</td>
-					[(#ENV{editer_produit}|=={oui}|?{'',' '})<td class = "panier_modifier"><a href="[(#EVAL{echoppe_panier}|generer_url_public{editer_produit=oui&id_panier=#ID_PANIER})]"><:echoppe:editer:></a></td>]
-					[(#ENV{editer_produit}|=={oui}|?{' ',''})<td class = "panier_supprimer"><a href="[(#EVAL{echoppe_supprimer_element_panier}|generer_url_action{id_panier=#ID_PANIER})]"><:echoppe:supprimer:></a></td>]
 					
 				</BOUCLE_LeProduit>
 			</tr>
@@ -40,19 +25,15 @@
                 <th>Total</th>
                 <th>#TOTAL_PANIER_TVAC&nbsp;&euro; TVAC<br /><small>#TOTAL_PANIER_HTVA&nbsp;&euro; HTVA</small></td>
                 <th></th>
-                <th></th>
             </tr>
          </tbody>
 		</table>
 		<hr />
-		[(#ENV{editer_produit}|=={oui}|?{' ',''})<input type="submit" /></form><a href="#URL_PANIER"><:echoppe:retour_au_panier:></a>]
-		[(#ENV{editer_produit}|=={oui}|?{'',' '})
+			<a href="?page=panier_ajax" class="nyroModal" ><:echoppe:editer:></a>
 			<form action="#SELF" method="post">
 				<input type="hidden" name="valider_panier" value="oui" />
 				<input type="submit" value="<:echoppe:valider_mon_panier:>" class="valider"/>
 			</form>
-		]
-		
 	</B_LePanier>
 		<:echoppe:le_panier_est_vide:>
 	<//B_LePanier>
