@@ -6,33 +6,89 @@
 
 <ul>
 <THELIA_produitsniveau0 type="PRODUIT" rubrique="0" profondeur="1">
-		<li><input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label></li>
+		<li>[(#CONFIG{spip_thelia/produits_rubriques_spip_thelia}|=={"oui"}|?{' ',''})
+			<input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label>
+		]
+		[(#CONFIG{spip_thelia/produits_rubriques_spip_thelia}|=={"oui"}|?{'',' '})
+			THELIA-TITRE
+		]</li>
+		
 </THELIA_produitsniveau0>
+	
 <THELIA_rubriquesniveau1 type="RUBRIQUE" parent="0">
 
-<li><input type="checkbox" id="rubriquethelia-THELIA-ID" name="rubriquethelia-THELIA-ID" /><label for="rubriquethelia-THELIA-ID">THELIA-TITRE</label>
-<ul>
+<li>
+	[(#CONFIG{spip_thelia/rubriques_rubriques_spip_thelia}|=={"oui"}|?{' ',''})
+		<input type="checkbox" id="rubriquethelia-THELIA-ID" name="rubriquethelia-THELIA-ID" /><label for="rubriquethelia-THELIA-ID">THELIA-TITRE</label>
+	]
+	[(#CONFIG{spip_thelia/rubriques_rubriques_spip_thelia}|=={"oui"}|?{'',' '})
+		THELIA-TITRE
+	]
+	<ul>
 	<THELIA_produitsniveau1 type="PRODUIT" rubrique="THELIA-ID" profondeur="1">
-		<li><input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label></li>
+		<li>[(#CONFIG{spip_thelia/produits_rubriques_spip_thelia}|=={"oui"}|?{' ',''})
+			<input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label>
+		]
+		[(#CONFIG{spip_thelia/produits_rubriques_spip_thelia}|=={"oui"}|?{'',' '})
+			THELIA-TITRE
+		]</li>
 	</THELIA_produitsniveau1>
 	<THELIA_rubriquesniveau2 type="RUBRIQUE" parent="THELIA-ID">
-		<li><input type="checkbox" id="rubriquethelia-THELIA-ID" name="rubriquethelia-THELIA-ID" /><label for="rubriquethelia-THELIA-ID">THELIA-TITRE</label>
+		<li>	
+			[(#CONFIG{spip_thelia/rubriques_rubriques_spip_thelia}|=={"oui"}|?{' ',''})
+				<input type="checkbox" id="rubriquethelia-THELIA-ID" name="rubriquethelia-THELIA-ID" /><label for="rubriquethelia-THELIA-ID">THELIA-TITRE</label>
+			]
+			[(#CONFIG{spip_thelia/rubriques_rubriques_spip_thelia}|=={"oui"}|?{'',' '})
+				THELIA-TITRE
+			]
 			<ul>
 			<THELIA_produitsniveau2 type="PRODUIT" rubrique="THELIA-ID" profondeur="1">
-			<li><input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label></li>
+				<li>
+					[(#CONFIG{spip_thelia/produits_rubriques_spip_thelia}|=={"oui"}|?{' ',''})
+						<input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label>
+					]
+					[(#CONFIG{spip_thelia/produits_rubriques_spip_thelia}|=={"oui"}|?{'',' '})
+						THELIA-TITRE
+					]
+				</li>
 			</THELIA_produitsniveau2>
 			<THELIA_rubriquesniveau3 type="RUBRIQUE" parent="THELIA-ID">
-				<li><input type="checkbox" id="rubriquethelia-THELIA-ID" name="rubriquethelia-THELIA-ID" /><label for="rubriquethelia-THELIA-ID">THELIA-TITRE</label>
+				<li>
+					[(#CONFIG{spip_thelia/rubriques_rubriques_spip_thelia}|=={"oui"}|?{' ',''})
+						<input type="checkbox" id="rubriquethelia-THELIA-ID" name="rubriquethelia-THELIA-ID" /><label for="rubriquethelia-THELIA-ID">THELIA-TITRE</label>
+					]
+					[(#CONFIG{spip_thelia/rubriques_rubriques_spip_thelia}|=={"oui"}|?{'',' '})
+						THELIA-TITRE
+					]
+
 					<ul>
 					<THELIA_produitsniveau3 type="PRODUIT" rubrique="THELIA-ID" profondeur="1">
-						<li><input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label></li>
+						<li>
+						[(#CONFIG{spip_thelia/produits_rubriques_spip_thelia}|=={"oui"}|?{' ',''})
+							<input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label>
+						]
+						[(#CONFIG{spip_thelia/produits_rubriques_spip_thelia}|=={"oui"}|?{'',' '})
+							THELIA-TITRE
+						]
+						</li>
 					</THELIA_produitsniveau3>
 					<THELIA_rubriquesniveau4 type="RUBRIQUE" parent="THELIA-ID">
-						<li><input type="checkbox" id="rubriquethelia-THELIA-ID" name="rubriquethelia-THELIA-ID" /><label for="rubriquethelia-THELIA-ID">THELIA-TITRE</label>
+						<li>
+							[(#CONFIG{spip_thelia/rubriques_rubriques_spip_thelia}|=={"oui"}|?{' ',''})
+								<input type="checkbox" id="rubriquethelia-THELIA-ID" name="rubriquethelia-THELIA-ID" /><label for="rubriquethelia-THELIA-ID">THELIA-TITRE</label>
+							]
+							[(#CONFIG{spip_thelia/rubriques_rubriques_spip_thelia}|=={"oui"}|?{'',' '})
+								THELIA-TITRE
+							]
 							<ul>
 							<THELIA_produitsniveau4 type="PRODUIT" rubrique="THELIA-ID" profondeur="1">
-								<li><input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label></li>
-							</THELIA_produitsniveau4>
+								<li>
+									[(#CONFIG{spip_thelia/produits_rubriques_spip_thelia}|=={"oui"}|?{' ',''})
+										<input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label>
+									]
+									[(#CONFIG{spip_thelia/produits_rubriques_spip_thelia}|=={"oui"}|?{'',' '})
+										THELIA-TITRE
+									]</li></THELIA_produitsniveau4>
 							</ul>
 						</li>
 					</THELIA_rubriquesniveau4>

@@ -183,17 +183,22 @@ function spip_thelia_affiche_milieu($flux) {
 	$exec =  $flux['args']['exec'];
 	$id_article= $_REQUEST['id_article'];
 	$id_rubrique= $_REQUEST['id_rubrique'];
-	if ($exec=='articles'){
-		$flux['data'] .= spip_thelia_formulaire_article($id_article, article_editable($id_article),'articles');
-	}else if (($exec=='naviguer')&&($id_rubrique)){
-		$flux['data'] .= spip_thelia_formulaire_rubrique($id_rubrique, rubrique_editable($id_rubrique),'rubriques');
+	if (function_exists('lire_config')) {
+		if ($exec=='articles'){
+			if((lire_config("spip_thelia/produits_articles_spip_thelia", "non") == "oui")||(lire_config("spip_thelia/rubriques_articles_spip_thelia", "non") == "oui"))
+				$flux['data'] .= spip_thelia_formulaire_article($id_article, spip_thelia_article_editable($id_article),'articles');
+		}
+		else if (($exec=='naviguer')&&($id_rubrique)){
+			if((lire_config("spip_thelia/produits_rubriques_spip_thelia", "non") == "oui")||(lire_config("spip_thelia/rubriques_rubriques_spip_thelia", "non") == "oui"))
+				$flux['data'] .= spip_thelia_formulaire_rubrique($id_rubrique, spip_thelia_rubrique_editable($id_rubrique),'rubriques');
+		}
 	}
 	return $flux;
 }
-function article_editable($id_article){
+function spip_thelia_article_editable($id_article){
 	return autoriser('modifier','article',$id_article);
 }
-function rubrique_editable($id_rubrique){
+function spip_thelia_rubrique_editable($id_rubrique){
 	return autoriser('modifier','rubrique',$id_rubrique);
 }
 function spip_thelia_formulaire_article($id_article, $flag_editable, $script){
