@@ -71,7 +71,7 @@ function gis_cambiar_coord($id,$table,$exec) {
 	. $gis_append_clicable_map('formMap','form_lat','form_long',$glat,$glonx,NULL,NULL,$row?true:false);
 	
 	// Formulario para actualizar as coordenadas do mapa______________________.
-	$s .= '<form id="formulaire_coordenadas" name="formulaire_coordenadas" action="'.generer_url_ecrire($exec,"&$pkey=".$id).'" method="post">
+	$s .= '<form id="formulaire_coordenadas" name="formulaire_coordenadas" action="'.generer_url_ecrire($exec,"$pkey=".$id).'" method="post">
 		<input type="text" name="lat" id="form_lat" value="'.$glat.'" />
 		<input type="text" name="lonx" id="form_long" value="'.$glonx.'" />
 		<input type="submit" name="actualizar" value="'._T("gis:boton_actualizar").'" />
