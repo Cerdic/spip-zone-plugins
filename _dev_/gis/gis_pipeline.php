@@ -49,12 +49,12 @@ function gis_insertar_maparticle($flux){
 				//et si la rubrique est dans l'arrayrub
 				if (in_array($id_rubrique, $arracfgrubriques_gis)) {
 					include_spip('inc/parte_privada');
-					$flux['data'].= gis_cambiar_coord($flux['args']['id_rubrique'],"rubriques","naviguer");
+					$flux['data'].= gis_cambiar_coord($flux['args']['id_rubrique'],"rubrique","naviguer");
 				}
 			}
 		}else {
 			include_spip('inc/parte_privada');
-			$flux['data'].= gis_cambiar_coord($flux['args']['id_rubrique'],"rubriques","naviguer");	 
+			$flux['data'].= gis_cambiar_coord($flux['args']['id_rubrique'],"rubrique","naviguer");	 
 		}
 	
 	}
