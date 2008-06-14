@@ -1,0 +1,30 @@
+[(#REM)
+/******************************************************************
+***  Ce plugin EVA_freemind, créé par Olivier Gautier, est mis ***
+***      à disposition sous un contrat Creative Commons BY      *** 
+***                 consultable à l'adresse                     ***
+***      http://www.creativecommons.org/licenses/by/2.0/fr/     ***
+******************************************************************/
+]
+[(#REM) version modifiée cy_altern pour afficher les cartes freemind dynamiques du plugin aff_zone ]
+
+[(#REM) paramètres spécifiques aff_zone: au mini un statut ]
+  [(#ENV{statut}|?{' ',''}) #SET{statut, #ENV{statut}}]
+  [(#ENV{statut}|?{'',' '}) #SET{statut, tout}]
+
+	<script type="text/javascript" src="#EVAL{_DIR_PLUGIN_EVA_FREEMIND}scripts/flashobject.js"></script>
+	<div id="flashcontent">Flash ou Javascript ne sont pas activ&eacute;s. Activez-les et relancez la page !</div>
+	<script type="text/javascript">
+	// <![CDATA[
+	var fo = new FlashObject("#EVAL{_DIR_PLUGIN_EVA_FREEMIND}scripts/visorFreemind.swf", "visorFreeMind",
+	"[(#ENV**{largeur}|?{#ENV**{largeur},"100%"})]",
+	"[(#ENV**{hauteur}|?{#ENV**{hauteur},"400"})]",
+	6, "#9999ff");
+	fo.addParam("quality", "high");
+	fo.addParam("bgcolor", "#ffffff");
+	fo.addVariable("openUrl", "_blank");
+	fo.addVariable("initLoadFile", "#URL_SITE_SPIP/?page=affzone_fm&statut=#GET{statut}[&cat=(#ENV{cat})]");
+	fo.addVariable("startCollapsedToLevel","5");
+	fo.write("flashcontent");
+	// ]]>
+  </script>

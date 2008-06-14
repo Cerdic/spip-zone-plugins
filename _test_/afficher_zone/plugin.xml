@@ -1,0 +1,36 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	    Afficher les plugins de la Zone
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	    cy_altern - &#169; 2008   Distribu&#233; sous licence GNU/GPL
+	</auteur>
+	<version>
+	    0.1
+	</version>
+	<etat>
+	    test
+	</etat>
+	<description>
+	    trier/classer/afficher les plugins de la Zone à partir du flux RSS. 
+      Trois formats de sortie: RSS, page spip et carte freemind.
+	</description>
+	<lien>http://spip-contrib.net/spip.php?article2733</lien>
+  <icon>img_pack/mag_maj.png</icon>
+  <necessite id="cfg" version="[1.7.5;]" />
+  <options>aff_zone_options.php</options><!-- gere l'appel de base/aff_zone_tables.php -->
+  <fonctions>aff_zone_fonctions.php</fonctions>
+	<prefix> 
+	   aff_zone
+	</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>aff_zone_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>aff_zone_pipeline.php</inclure>
+	</pipeline>
+  <install>base/aff_zone_install.php</install>
+	<chemin dir='' />	
+</plugin>

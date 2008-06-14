@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#CONFIG{aff_zone/titre_rss}|texte_backend)] - [(#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inc-head}>
+[(#REM) Lien vers le flux RSS des breves ]
+<link rel="alternate" type="application/rss+xml" title="flux rss des plugins selectionnes" href="#URL_SITE_SPIP/?page=affzone_rss[&statut=(#ENV{statut})][&cat=(#ENV{cat})]" />
+<script language="JavaScript" type="text/javascript">
+$(document).ready(function() {
+  // afficher la page avec les catégories sélectionnées
+    $("#go_cat").click(function() {
+        var liste_cat = '';
+        $("input.choix_cat:checked").each(function() {
+            liste_cat += (liste_cat == '' ? '' : ',') + $(this).attr("name");
+        });
+        if (liste_cat != '') location.href = "[(#SELF|parametre_url{statut,''}|parametre_url{cat,''})][&statut=(#ENV{statut})]&cat=" + liste_cat;
+        else location.href = "[(#SELF|parametre_url{statut,''}|parametre_url{cat,''})][&statut=(#ENV{statut})]";
+    });
+});
+</script>
+
+
+</head>
+
+<body class="page_breve">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Contenu ]
+    <div id="conteneur">
+    <div id="contenu">
+
+        [(#REM) Fil d'Ariane ]
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/" ><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane></div>
+
+[(#REM) début aff_zone ]        
+        [(#REM) on utilise titre et descriptif du flux RSS stockés par CFG ] 
+        [<div class="cartouche">
+            <h1 class="">(#CONFIG{aff_zone/titre_rss})</h1>
+        </div>]
+        [<div class="chapo">(#CONFIG{aff_zone/descriptif_rss})</div>]
+
+        [(#REM) tout est dans le modèle affzone ]
+        <div class="texte">[(#MODELE{affzone}{statut=#ENV{statut}}{cat=#ENV{cat}})]</div>
+[(#REM) fin aff_zone ]         
+                
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+        
+[(#REM) aff_zone: début interface de choix statut / catégories ]
+  [(#REM) faire la correspondance statuts/icones ]
+    #SET{ico_stable, #CHEMIN{images/puce-verte.gif}}
+    #SET{ico_test, #CHEMIN{images/puce-orange.gif}}
+    #SET{ico_dev, #CHEMIN{images/puce-poubelle.gif}}
+    #SET{ico_experimental, #CHEMIN{images/puce-rouge.gif}}
+
+[(#REM) à partir de statut=xxx sortir une chaine compatible LIKE ]
+  [(#ENV{statut}|=={tout}|?{' ',''}) #SET{ch_statut, %} ]
+  [(#ENV{statut}|=={tout}|?{'',' '}) #SET{ch_statut, #ENV{statut}|makelike} ]
+[(#REM) si pas de statut, utiliser tout ]
+  [(#ENV{statut}|?{'',' '}) #SET{ch_statut, %} ]
+      
+    <div class="menu rubriques">
+    	<h2><:aff_zone:choix_statut:></h2>
+        <B_choix_statuts>
+        <ul>
+        <BOUCLE_choix_statuts(MOTS){id_groupe=#CONFIG{aff_zone/id_groupe_statuts}}>
+          <li><a href="[(#SELF|parametre_url{statut,''}|parametre_url{cat,''})]&statut=#TITRE"><img src="#GET{ico_#TITRE}"> #TITRE</a></li>
+        </BOUCLE_choix_statuts>
+        <li><a href="[(#SELF|parametre_url{statut,''}|parametre_url{cat,''})]&statut=tout">
+            <BOUCLE_tout(MOTS){id_groupe=#CONFIG{aff_zone/id_groupe_statuts}}>
+            <img src="#GET{ico_#TITRE}"> 
+            </BOUCLE_tout>
+             <:aff_zone:tout:></a>
+        </li>
+        </ul>
+        </B_choix_statuts>
+    </div>
+    <div class="menu rubriques">
+    	<h2><input type="button" id="go_cat" style="float:right" value="go" /> 
+            <:aff_zone:categorie_afficher:>
+        </h2>
+        <ul>
+        <BOUCLE_choix_groupes(GROUPES_MOTS){id_groupe IN (#CONFIG{aff_zone/categorie})}{par titre}>
+          [(#REM) tester si il existe des plugins dans cette catégorie, sinon ne pas l'afficher ] 
+          <BOUCLE_test_cats(SYNDIC_ARTICLES){id_groupe}{tags LIKE #GET{ch_statut}}>[(#TOTAL_BOUCLE|!={0}|?{' ',''})]</BOUCLE_test_cats>
+          <li><input type="checkbox" name="#ID_GROUPE" class="choix_cat" id="cat_#ID_GROUPE" /> <label for="cat_#ID_GROUPE">#TITRE</label></li>
+          </B_test_cats>
+        </BOUCLE_choix_groupes>
+        </ul>
+    </div>
+        
+[(#REM) aff_zone: fin interface de choix statut / catégories ]        
+        
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+    </div><!--#navigation-->
+    
+    [(#REM) Menu de navigation laterale ]
+    <div id="extra">
+
+
+        
+    </div><!--#extra-->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!--#page-->
+</body>
+</html>

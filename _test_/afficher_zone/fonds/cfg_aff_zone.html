@@ -1,0 +1,40 @@
+#CACHE{0}
+<!-- descriptif=<strong>Configuration du plugin Afficher la Zone</strong>
+<br />#PUCE choisir le groupe de mots clés qui contient <strong>les mots clés des statuts</strong> (dev, test, stable, experimental)
+<br />#PUCE choisir les groupes de mots clés qui constituent <strong>les catégories</strong> de classement des plugins
+-->
+<!-- titre=plugin Afficher la Zone -->
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<fieldset>
+    <legend><:aff_zone:choix_groupe_statuts:>:</legend>
+    <select name="id_groupe_statuts">
+        <option value=""><:aff_zone:choisir:></option>
+  	 <BOUCLE_statuts(GROUPES_MOTS){par titre}>
+  	    <option value="#ID_GROUPE" [(#CONFIG{aff_zone/id_groupe_statuts}|=={#ID_GROUPE}|?{selected="selected",''})]>&nbsp;&nbsp;#ID_GROUPE. #TITRE</option>
+     </BOUCLE_statuts>
+    </select>
+</fieldset>
+<fieldset>
+    <legend><:aff_zone:choix_groupes_categories:>:</legend>
+    <BOUCLE_categories(GROUPES_MOTS){par titre}>
+        <input type="checkbox" name="categorie[]" value="#ID_GROUPE"
+         [(#ID_GROUPE|in_array{#CONFIG{aff_zone/categorie}}|?{' ',''}) checked="checked" ] 
+         multiple="multiple" />
+        <label>#ID_GROUPE. #TITRE</label>
+        <br />
+    </BOUCLE_categories>
+</fieldset>
+<fieldset>
+    <legend><:aff_zone:rss_presentation:>:</legend>
+    <label for="titre_rss"><:aff_zone:titre_rss:>:</label><br />
+    <input type="text" name="titre_rss" id="titre_rss" style="width: 95%;" value="#CONFIG{aff_zone/titre_rss}" /><br />
+    <br />
+    <label for="descriptif_rss"><:aff_zone:descriptif_rss:>:</label><br />
+    <textarea name="descriptif_rss" id="descriptif_rss" style="width: 95%; height: 8em;">#CONFIG{aff_zone/descriptif_rss}</textarea>
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
+

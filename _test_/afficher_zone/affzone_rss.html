@@ -1,0 +1,64 @@
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:xml="http://www.w3.org/XML/1998/namespace"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+>
+
+<channel[ xml:lang="(#LANG)"]>
+	<title>[(#CONFIG{aff_zone/titre_rss}|texte_backend)][ - <:aff_zone:statut:>: (#ENV{statut})]</title>
+	<link>#URL_SITE_SPIP/</link>
+	<description>[(#CONFIG{aff_zone/descriptif_rss}|supprimer_tags|texte_backend)]</description>
+	<language>#LANG</language>
+	<generator>SPIP - www.spip.net</generator>
+  <atom:link href="#URL_SITE_SPIP/?page=affzone_rss[&amp;statut=(#ENV{statut})]" rel="self" type="application/rss+xml" />
+
+[	<image>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|texte_backend)</url>
+		<link>#URL_SITE_SPIP/</link>
+		[<height>(#LOGO_SITE_SPIP||extraire_attribut{height})</height>]
+		[<width>(#LOGO_SITE_SPIP||extraire_attribut{width})</width>]
+	</image>
+]
+
+[(#REM) à partir de statut=xxx sortir une chaine compatible LIKE ]
+  [(#ENV{statut}|=={tout}|?{' ',''}) #SET{ch_statut, %} ]
+  [(#ENV{statut}|=={tout}|?{'',' '}) #SET{ch_statut, #ENV{statut}|makelike} ]
+[(#REM) si pas de statut, utiliser tout ]
+  [(#ENV{statut}|?{'',' '}) #SET{ch_statut, %} ]
+
+[(#REM) récupérer l'array des groupes de mots clés qui font les catégories de classement
+        éventuellement filtré par le GET cat=xx,yy,zz ]  
+  [(#ENV{cat}|?{'',' '}) [(#SET{categories, #CONFIG{aff_zone/categorie} })] ]
+  [(#ENV{cat}|?{' ',''}) [(#SET{categories, #ENV{cat}|makearray})] ]
+  
+<BOUCLE_plugins(SYNDIC_ARTICLES )
+  {url_syndic = http://files.spip.org/spip-zone/ref.rss.xml.gz}
+  {tags LIKE #GET{ch_statut}}
+  {id_groupe IN (#GET{categories})}>
+    <item[ xml:lang="(#LANG)"]>
+      <title>[(#TITRE|texte_backend)]</title>
+      <link>#URL</link>
+      <guid isPermaLink="true">#URL</guid>
+      <dc:date>[(#DATE|date_iso)]</dc:date>
+      <dc:format>text/html</dc:format>
+      [<dc:language>(#LANG)</dc:language>]
+      [<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
+      <BOUCLE_statut(MOTS){id_syndic_article}{id_groupe = #CONFIG{aff_zone/id_groupe_statuts}}{0,1}>
+      <category domain="http://www.spip.net/fr_article3448.html#etat">#TITRE</category>#SET{statut_plug, #TITRE}
+      </BOUCLE_statut>
+      <enclosure url="http://files.spip.org" length="123456" type="application/zip"/>
+      <description>[(#DESCRIPTIF|texte_backend|sauts_lignes)]
+[&lt;a href="http://www.spip.net/fr_article3448.html#etat" rel="directory"&gt;(#GET{statut_plug}|texte_backend)&lt;/a&gt;]
+      <BOUCLE_categorie(MOTS){id_syndic_article}{id_groupe IN #GET{categories}}{0,1}>
+[&lt;a href="#URL_SITE_SPIP/?page=affzone_html[&amp;statut=(#ENV{statut})]" rel="tag"&gt;(#TYPE|supprimer_numero|texte_backend)&lt;/a&gt; ]
+
+[&lt;a href="#URL_SITE_SPIP/?page=affzone_html[&amp;statut=(#ENV{statut})]" rel="tag"&gt;(#TITRE|texte_backend)&lt;/a&gt;]          
+      </BOUCLE_categorie>
+      </description>
+    </item>
+</BOUCLE_plugins>
+</channel>
+</rss>

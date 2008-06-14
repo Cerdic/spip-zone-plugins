@@ -1,0 +1,28 @@
+[(#REM) faire la correspondance statuts/icones ]
+  #SET{ico_stable, #CHEMIN{images/puce-verte.gif}}
+  #SET{ico_test, #CHEMIN{images/puce-orange.gif}}
+  #SET{ico_dev, #CHEMIN{images/puce-poubelle.gif}}
+  #SET{ico_experimental, #CHEMIN{images/puce-rouge.gif}}
+<div  id="choix_statut">
+<fieldset>
+  <legend><:aff_zone:attribution_mots_cles:></legend>
+  <p><:aff_zone:help_info:></p>
+  <a href="#URL_SITE_SPIP/?page=affzone_html[&statut=(#ENV{statut})]"><:aff_zone:voir_en_ligne:></a>
+</fieldset>
+<fieldset>
+  <legend><:aff_zone:choix_statut:></legend>
+    <B_choix_statuts>
+    <ul>
+    <BOUCLE_choix_statuts(MOTS){id_groupe=#CONFIG{aff_zone/id_groupe_statuts}}>
+      <li><a href="[(#URL_SITE_SPIP)]/ecrire/?exec=aff_zone&statut=#TITRE"><img src="#GET{ico_#TITRE}"> #TITRE</a></li>
+    </BOUCLE_choix_statuts>
+    </li>
+    </ul>
+    </B_choix_statuts>
+</fieldset>
+<fieldset>
+  <legend><:aff_zone:affichage_plugins:></legend>
+  <div class="mot_oui" id="aff_masq_mot_oui"><:aff_zone:masquer_attribues:></div>
+  <div class="mot_non" id="aff_masq_mot_non"><:aff_zone:afficher_attribues:></div>
+</fieldset>
+</div>

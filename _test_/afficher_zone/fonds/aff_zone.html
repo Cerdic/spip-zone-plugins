@@ -1,0 +1,76 @@
+#CACHE{0}
+<link rel="stylesheet" type="text/css" href="#CHEMIN{fonds/aff_zone.css}"></link>
+<span class="valider">
+    <span id="retour_validation"></span>
+    <input type="button" id="bouton_valider" value="<:aff_zone:valider:>" />
+</span>
+<h1>
+[<:aff_zone:titre_statut:>: (#ENV{statut})]
+[(#ENV{statut}|?{'',' '}) <:aff_zone:titre_choisir_statut:>]
+</h1>
+
+<BOUCLE_feinte(BREVES){0,1}>[(#ENV{statut}|?{' ',''})]</BOUCLE_feinte>
+<form action="#SELF" method="post" id="principal">
+    <fieldset id="choix_cat">
+        <legend>
+        	<:aff_zone:choix_categorie:>
+        </legend>
+        <B_liste_groupes>
+        <ul>
+        <BOUCLE_liste_groupes(GROUPES_MOTS){id_groupe IN (#CONFIG{aff_zone/categorie})}{par titre}>
+            <li class="groupe_mc"><img src="#CHEMIN{images/groupe-mot-24.gif}" alt=""> <strong>#TITRE</strong>
+            <B_liste_mots>
+            <ul>
+            <BOUCLE_liste_mots(MOTS){id_groupe}{par titre}>
+                <li><input type="radio" name="mot" value="#ID_MOT" id="mot_#ID_MOT" class="mot"> <label for="mot_#ID_MOT">#TITRE</label></li>
+            </BOUCLE_liste_mots>
+            </ul>
+            </B_liste_mots>
+            </li>
+        </BOUCLE_liste_groupes>
+        </ul>
+        </B_liste_groupes>
+    </fieldset>
+    
+    <fieldset id="choix_plug">
+        <legend>
+        	<:aff_zone:choix_plugins:>
+        </legend>
+        [(#REM) à partir de statut=xxx sortir une chaine compatible LIKE ]
+          [(#ENV{statut}|=={tout}|?{' ',''}) #SET{ch_statut, %} ]
+          [(#ENV{statut}|=={tout}|?{'',' '}) #SET{ch_statut, #ENV{statut}|makelike} ]
+        [(#REM) si pas de statut, utiliser tout ]
+          [(#ENV{statut}|?{'',' '}) #SET{ch_statut, %} ]
+        <B_liste_plugs>
+        <ul>
+        [(#REM) tri {par SUBSTRING_INDEX(titre," - ",1)} pour ne pas tenir compte du - Version xxx dans l'intitulé du titre
+                afin que les différentes versions des plugins ayant le même nom soient triées {!par date} donc le plus récent en premier  
+                ce qui permet que la bidouille de #TITRE|traiter_titre sélectionne cette version
+        ]
+        <BOUCLE_liste_plugs(SYNDIC_ARTICLES)
+            {url_syndic = http://files.spip.org/spip-zone/ref.rss.xml.gz}
+            {tags LIKE #GET{ch_statut}}
+            {url LIKE '%/_plugins_/%'}
+            {par SUBSTRING_INDEX(titre," - ",1)} 
+            {!par date}>
+            [(#REM) récupérer l'id d'un éventuel mot clé attaché au plugin ]
+            <BOUCLE_mot_attache(MOTS){id_syndic_article}{id_groupe IN (#CONFIG{aff_zone/categorie})}{0,1}>
+                [(#SET{mot_attache, mot_#ID_MOT})]
+                [(#SET{aff_attache, aff_#ID_MOT})]
+                [(#SET{mot_oui, mot_oui})]
+            </BOUCLE_mot_attache>
+                [(#SET{mot_attache, ''})]
+                [(#SET{mot_oui, ''})]
+            <//B_mot_attache>
+            [<li [class="(#GET{mot_oui})"] id="li_#ID_SYNDIC_ARTICLE">
+                <img src="#CHEMIN{images/mot-cle-24.gif}" alt="selectionner la categorie" title="selectionner la categorie" class="acces_cat"[ id="(#GET{aff_attache})"] />
+                <input class="[(#GET{mot_attache})] plugin" type="checkbox" multiple="multiple" name="plugin" value="#ID_SYNDIC_ARTICLE" id="plugin_#ID_SYNDIC_ARTICLE" />
+                <label for="plugin_#ID_SYNDIC_ARTICLE">(#TITRE|traiter_titre)</label>
+            </li>]
+        </BOUCLE_liste_plugs>
+        </ul>
+        </B_liste_plugs>        
+    </fieldset>
+
+</form>
+</B_feinte>

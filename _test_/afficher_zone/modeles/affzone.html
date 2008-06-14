@@ -1,0 +1,86 @@
+[(#REM) faire la correspondance statuts/icones ]
+  #SET{ico_stable, #CHEMIN{images/puce-verte.gif}}
+  #SET{ico_test, #CHEMIN{images/puce-orange.gif}}
+  #SET{ico_dev, #CHEMIN{images/puce-poubelle.gif}}
+  #SET{ico_experimental, #CHEMIN{images/puce-rouge.gif}}
+
+[(#REM) à partir de statut=xxx sortir une chaine compatible LIKE ]
+  [(#ENV{statut}|=={tout}|?{' ',''}) #SET{ch_statut, %} ]
+  [(#ENV{statut}|=={tout}|?{'',' '}) #SET{ch_statut, #ENV{statut}|makelike} ]
+[(#REM) si pas de statut, utiliser tout ]
+  [(#ENV{statut}|?{'',' '}) #SET{ch_statut, %} ]
+  
+[(#REM) récupérer l'array des groupes de mots clés qui font les catégories de classement
+        éventuellement filtré par le GET cat=xx,yy,zz ]  
+  [(#ENV{cat}|?{'',' '}) [(#SET{categories, #CONFIG{aff_zone/categorie} })] ]
+  [(#ENV{cat}|?{' ',''}) [(#SET{categories, #ENV{cat}|makearray})] ]
+
+<BOUCLE_feinte(BREVES){0,1}>[(#ENV{statut}|?{' ',''})]</BOUCLE_feinte>  
+        <a style="float: right; margin: 2px;" href="#URL_SITE_SPIP/?page=affzone_fm[&statut=(#ENV{statut})][&cat=(#ENV{cat})]">
+            <img src="#CHEMIN{img_pack/freemind-24.png}" alt="icone aff_zone" style="vertical-align: middle;">
+            <:aff_zone:lien_freemind:>
+        </a>
+        <a style="float: right; margin: 2px;" href="#URL_SITE_SPIP/?page=affzone_rss[&statut=(#ENV{statut})][&cat=(#ENV{cat})]">
+            <img src="#CHEMIN{img_pack/feed.png}" alt="icone aff_zone" style="vertical-align: middle;">
+            <:aff_zone:lien_rss:>
+        </a>
+        [(#ENV{statut}|=={tout}|?{'',' '})
+        <h1 style="font-size: 1.2em; margin-bottom: 0.5em;"><:aff_zone:statut:>: <img src="#GET{ico_#ENV{statut}}" rel="ico statut" /> #ENV{statut}</h1>
+        ]
+    <BOUCLE_liste_groupes(GROUPES_MOTS){id_groupe IN (#GET{categories})}{par titre}>
+    
+      [(#REM) tester si il existe des plugins dans cette catégorie, sinon ne pas l'afficher ] 
+      <BOUCLE_test_plugs(SYNDIC_ARTICLES){id_groupe}{tags LIKE #GET{ch_statut}}>[(#TOTAL_BOUCLE|!={0}|?{' ',''})]</BOUCLE_test_plugs>
+          <div class="menu articles">
+            <h2>[(#TITRE|majuscules)]</h2>
+            
+            [(#REM) tester si il existe des plugins dans ce groupe, sinon ne pas l'afficher ]
+            <BOUCLE_liste_mots(MOTS){id_groupe}{par titre}>
+              <BOUCLE_test_plugs2(SYNDIC_ARTICLES){id_mot}{tags LIKE #GET{ch_statut}}>[(#TOTAL_BOUCLE|!={0}|?{' ',''})]</BOUCLE_test_plugs2>
+                  
+                  <div class="menu articles" style="margin: 1em 0 1em 3em;">
+                    <h2>#TITRE</h2>
+                    [(#REM) tri {par SUBSTRING_INDEX(titre," - ",1)} pour ne pas tenir compte du - Version xxx 
+                            dans l'intitulé du titre afin que les différentes versions des plugins ayant le même nom 
+                             soient triées {!par date} donc le plus récent en premier  
+                    ]
+                    <BOUCLE_liste_plugs(SYNDIC_ARTICLES)
+                        {id_mot}
+                        {tags LIKE #GET{ch_statut}}
+                        {par SUBSTRING_INDEX(titre," - ",1)} 
+                        {!par date}>
+                        <h3><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
+                        [<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
+                        <small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)][ &mdash; <em>(#TAGS|afficher_tags)</em>]</small>
+                        [<div class="introduction">(#DESCRIPTIF|image_reduire{300})</div>]
+                    </BOUCLE_liste_plugs>
+                  </div>
+                  
+              </B_test_plugs2>
+            </BOUCLE_liste_mots>
+            
+          </div>
+      </B_test_plugs>
+      
+    </BOUCLE_liste_groupes>
+</B_feinte>
+<div class="menu articles">
+    <h2><:aff_zone:titre_choisir_statut:></h2>
+    <fieldset>
+      <legend><:aff_zone:choix_statut:></legend>
+      <B_choix_statuts>
+      <ul>
+      <BOUCLE_choix_statuts(MOTS){id_groupe=#CONFIG{aff_zone/id_groupe_statuts}}>
+        <li><a href="[(#SELF|parametre_url{statut,''})]&statut=#TITRE"><img src="#GET{ico_#TITRE}"> #TITRE</a></li>
+      </BOUCLE_choix_statuts>
+      <li><a href="[(#SELF|parametre_url{statut,''})]&statut=tout">
+          <BOUCLE_tout(MOTS){id_groupe=#CONFIG{aff_zone/id_groupe_statuts}}>
+          <img src="#GET{ico_#TITRE}"> 
+          </BOUCLE_tout>
+           <:aff_zone:tout:></a>
+      </li>
+      </ul>
+      </B_choix_statuts>
+    </fieldset>
+</div>
+<//B_feinte>

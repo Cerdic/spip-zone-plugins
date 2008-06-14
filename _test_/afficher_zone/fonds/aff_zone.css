@@ -1,0 +1,20 @@
+#choix_cat ul, #choix_statut ul,  #choix_plug ul { margin: 0; padding: 0; }
+ 
+#choix_statut { float: left; }
+
+#choix_cat { float: left; width: 150px; }
+#choix_cat ul li, #choix_statut ul li, #choix_plug ul li { list-style-type: none; line-height: 1.7em; margin-top: 4px; }
+#choix_cat ul li input, #choix_plug ul li input { vertical-align: middle; }
+.groupe_mc { padding-top: 8px; }
+#choix_cat ul li img { vertical-align: top; }
+
+.valider {float: right; }
+#retour_validation {font-size: 2em; }
+
+.mot_oui, .mot_non, .cat_encours { background-color: #66f; border: solid 1px #309; }
+.mot_non { display: none; }
+#aff_masq_mot_oui, #aff_masq_mot_non { cursor: pointer; }
+
+.acces_cat { float: right; display: none;}
+.mot_oui .acces_cat { display: inline; cursor: pointer; }
+ 

@@ -1,0 +1,52 @@
+[(#HTTP_HEADER{Content-type: application/download; Content-Length: 5000; Content-Disposition: attachment; filename: carte_plugins.mm; [; charset=(#CHARSET)]})]<map version="0.8.1">
+<!-- 
+[(#REM) à partir de statut=xxx sortir une chaine compatible LIKE ]
+  [(#ENV{statut}|?{' ',''}) #SET{titre_statut, #ENV{statut}} ]
+  [(#ENV{statut}|=={tout}|?{' ',''}) #SET{ch_statut, %} ]
+  [(#ENV{statut}|=={tout}|?{'',' '}) #SET{ch_statut, #ENV{statut}|makelike} ]
+[(#REM) si pas de statut, utiliser tout ]
+  [(#ENV{statut}|?{'',' '}) #SET{titre_statut, tout} ]
+  [(#ENV{statut}|?{'',' '}) #SET{ch_statut, %} ]
+  
+[(#REM) récupérer l'array des groupes de mots clés qui font les catégories de classement
+        éventuellement filtré par le GET cat=xx,yy,zz ]  
+  [(#ENV{cat}|?{'',' '}) [(#SET{categories, #CONFIG{aff_zone/categorie} })] ]
+  [(#ENV{cat}|?{' ',''}) [(#SET{categories, #ENV{cat}|makearray})] ]
+ -->
+    <node BACKGROUND_COLOR="#ffff00" COLOR="#000000" CREATED="1212567880843" ID="Freemind_Link_1238831885" MODIFIED="1213368921765" STYLE="fork" TEXT="<:aff_zone:plugins:> <:aff_zone:statut:>: #GET{titre_statut}">
+        <font BOLD="true" NAME="SansSerif" SIZE="20"/>
+        <hook NAME="accessories/plugins/AutomaticLayout.properties"/>
+        #SET{pos, left}
+    <BOUCLE_liste_groupes(GROUPES_MOTS){id_groupe IN (#GET{categories})}{par titre}>
+        [(#REM) tester si il existe des plugins dans cette catégorie, sinon ne pas l'afficher ] 
+        <BOUCLE_test_plugs(SYNDIC_ARTICLES){id_groupe}{tags LIKE #GET{ch_statut}}>[(#TOTAL_BOUCLE|!={0}|?{' ',''})]</BOUCLE_test_plugs>
+        
+        <node COLOR="#0033ff" CREATED="1212569503671" ID="Freemind_Link_1204770636" MODIFIED="1213368717125" POSITION="[(#GET{pos})]" STYLE="bubble" TEXT="#TITRE">
+            [(#GET{pos}|=={right}|?{#SET{pos, left}, #SET{pos, right}})]
+            <font NAME="SansSerif" SIZE="18"/>
+            [(#REM) tester si il existe des plugins dans ce groupe, sinon ne pas l'afficher ]
+            <BOUCLE_liste_mots(MOTS){id_groupe}{par titre}>
+                <BOUCLE_test_plugs2(SYNDIC_ARTICLES){id_mot}{tags LIKE #GET{ch_statut}}>[(#TOTAL_BOUCLE|!={0}|?{' ',''})]</BOUCLE_test_plugs2>
+                
+                <node COLOR="#00b439" CREATED="1212569551031" ID="Freemind_Link_760150801" MODIFIED="1213368717140" TEXT="#TITRE">
+                    <font NAME="SansSerif" SIZE="16"/>
+                    <BOUCLE_liste_plugs(SYNDIC_ARTICLES)
+                        {id_mot}
+                        {tags LIKE #GET{ch_statut}}
+                        {par SUBSTRING_INDEX(titre," - ",1)} 
+                        {!par date}>
+                        <node COLOR="#990000" CREATED="1212568609562" ID="Freemind_Link_181226588" MODIFIED="1213369338640" TEXT="[(#TITRE|sans_version)]" VSHIFT="-15">
+                            <font NAME="SansSerif" SIZE="14"/>
+                        </node>
+                    </BOUCLE_liste_plugs>
+                </node>
+                
+                </B_test_plugs2>
+            </BOUCLE_liste_mots>
+        </node>
+        
+      </B_test_plugs>
+    </BOUCLE_liste_groupes>
+    
+    </node>
+</map>
