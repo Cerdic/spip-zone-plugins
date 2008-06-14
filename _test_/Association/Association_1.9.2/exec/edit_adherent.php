@@ -70,8 +70,8 @@
 		echo '<select name="categorie" id="categorie" class="formo" />';
 		$sql = spip_query ("SELECT * FROM spip_asso_categories ORDER BY id_categorie") ;
 		while ($var = spip_fetch_array($sql)) {
-			echo '<option value="'.$var['valeur'].'"';
-			if($categorie== $var['valeur']){echo ' selected="selected"';}
+			echo '<option value="'.$var['id_categorie'].'"';
+			if($categorie== $var['id_categorie']){echo ' selected="selected"';}
 			echo '> '.$var['libelle'].'</option>';
 		}
 		echo '</select>';

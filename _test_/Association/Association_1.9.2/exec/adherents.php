@@ -183,7 +183,11 @@
 			echo '<a href="mailto:'.$data["email"].'">'.$data["nom_famille"].'</a></td>';
 			}
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["prenom"].'</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["categorie"].'</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
+			$sql=spip_query("SELECT valeur FROM spip_asso_categories WHERE id_categorie=".$data["categorie"]);
+			$categorie=spip_fetch_array($sql);
+			echo $categorie['valeur'];			
+			echo '</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
 			if ($data['validite']==""){echo '&nbsp;';}else{echo association_datefr($data['validite']);}
 			echo '</td>';
