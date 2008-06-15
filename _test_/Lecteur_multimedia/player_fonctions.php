@@ -26,7 +26,7 @@ function Player_head(){
 	. "//--></script>\n";
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'javascript/jscroller.js"></script>';
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>';
-	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_PLAYER.'player.css" type="text/css" media="projection, screen, tv" />';
+	$flux .= '<link rel="stylesheet" href="'.find_in_path('player.css').'" type="text/css" media="projection, screen, tv" />';
 	return $flux;
 }
 function Player_insert_head($flux){
@@ -50,7 +50,7 @@ function Player_affichage_final($flux){
  */
 
 // Contrairement au plugin original (http://zone.spip.org/trac/spip-zone/browser/_plugins_branche_stable_/_spip_1_9_0_/dewplayer)
-// Cette version pour la version 1.9.1 utilisera la modification du modèle doc pour traiter les adresses relatives 
+// Cette version pour la version 1.9.1 utilisera la modification du modï¿½le doc pour traiter les adresses relatives 
 // qu'on retrouverait si on placerait un lien dans le texte par une balise <docXX>
 // ajout d'un rel="enclosure" simple sur les liens mp3
 function Player_post_propre($texte) {
@@ -77,7 +77,7 @@ return $titre ;
 }
 
 // CP 20080321
-// balise à placer dans le modèle
+// balise ï¿½ placer dans le modï¿½le
 // donne la ligne FlashVars
 function balise_PLAYER_FLV_FLASHVVARS ($p) {
 	
@@ -98,13 +98,13 @@ function balise_PLAYER_FLV_FLASHVVARS ($p) {
 			$player_config = unserialize($GLOBALS['meta'][_PLAYER_META_PREFERENCES]);
 			
 			include_spip('inc/player_flv_config');
-			// la grosse table commune à tous les profils
+			// la grosse table commune ï¿½ tous les profils
 			$player_flv_config = player_flv_config();
 	
 			$result = array();
 			$player_key = $player_config['player_key'];
 			
-			// n'envoyer que ce qui est nécessaire au profil configuré en admin
+			// n'envoyer que ce qui est nï¿½cessaire au profil configurï¿½ en admin
 			// mini demande beaucoup moins de variables que multi
 			foreach($player_flv_config as $key => $value) {
 				if(
@@ -125,8 +125,8 @@ function balise_PLAYER_FLV_FLASHVVARS ($p) {
 
 
 // CP 20080321
-// balise à placer dans le modèle
-// donne le nom du fichier player flv demandé à la config
+// balise ï¿½ placer dans le modï¿½le
+// donne le nom du fichier player flv demandï¿½ ï¿½ la config
 function balise_PLAYER_FLV_PLAYER ($p) {
 
 	$id_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
