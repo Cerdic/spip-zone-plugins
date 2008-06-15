@@ -1,0 +1,40 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: application/x-javascript; charset=#CHARSET}
+
+$(document).ready(function() {
+//pour inserer des raccourcis dans les crayons actifs a partir dune liste
+//nom des divs cliquables
+
+	$('#programmearticle, .insereraccourci, .insert_code abbr').click(function(){ 
+	if($(".crayon-active").length > 0 ){
+		$('.crayon-active').css('background','#F8F8F8');
+	//on colle le texte qu on vient de cliquer
+		$('.crayon-active').replaceSelection($(this).text(), true);
+		$.each($('.crayon-active'), update);
+		e.preventDefault(); 
+		
+	}else{
+		$('#alertez').html('<div style="color:red"><:adminpublic:positionner_le_curseur:></div>');
+	}
+		}); 
+
+//permettait d'insérer un modele programme genre <prog|2> à partir d'une liste, non utilisé ici
+		// $('#raccourci, #raccourcimot').change(function(){
+		// var choix = $(this).val();
+		// $('#programmearticle').html("&lt;"+choix+"&gt;");
+		// });
+		
+		
+//pour cacher afficher la boite	
+	$(".diktat").toggle(function() {
+	$(".obeirpoliment").hide();
+	},function(){
+	$(".obeirpoliment").show();
+	});
+	
+});
+
+ 
+
+ 
+ 

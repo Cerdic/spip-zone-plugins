@@ -1,0 +1,115 @@
+#CACHE{0}<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>[
+<meta name="description" content="(#INTRODUCTION|couper{150}|attribut_html)" />
+]<B_URLMOT>
+<link rel="alternate" type="application/rss+xml" title="<:titre_page_mots_tous:>" href="#URL_PAGE{backend}<BOUCLE_URLMOT(MOTS){id_article}>&amp;id_mot[]=#ID_MOT</BOUCLE_URLMOT>" />
+</B_URLMOT><B_URLAUTEURS>
+<link rel="alternate" type="application/rss+xml" title="<:icone_auteurs:>" href="#URL_PAGE{backend}<BOUCLE_URLAUTEURS(AUTEURS){id_article}>&amp;id_auteur[]=#ID_AUTEUR</BOUCLE_URLAUTEURS>" />
+</B_URLAUTEURS><INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_article" style="margin-top:20px; position:relative;">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Contenu principal : derniers articles publies ]
+	<div id="conteneur">
+	<div id="contenu">
+
+[(#REM) pour recup id_rubrique wiki]
+<BOUCLE_wiki(RUBRIQUES){id_rubrique IN #CONFIG{autorite/espace_wiki}}>
+#SET{wikirub,#ID_RUBRIQUE}
+</BOUCLE_wiki>
+
+
+<div style="width:450px; float:left">
+<B_artimodif>
+<h3><:admin_modifier_article:></h3>
+<BOUCLE_artimodif(ARTICLES){id_article}{id_auteur=#SESSION{id_auteur}}{statut IN prepa,prop,publie}>
+[(#FORMULAIRE_EDITER_ARTICLE{#ID_ARTICLE})]
+</BOUCLE_artimodif>
+
+
+[<h3><:icone_ecrire_article:></h3>
+(#AUTORISER{creerarticledans,rubrique,#ENV{id_rubrique}})
+[(#FORMULAIRE_EDITER_ARTICLE{id_rubrique})]
+]
+
+<//B_artimodif>
+
+
+<BOUCLE_JEauteur(AUTEURS) {id_auteur=#SESSION{id_auteur}}>
+#FORMULAIRE_LOGO_AUTEUR
+
+	<div class="vcard">[(#REM) microformat vcard]
+        <div class="cartouche">
+            [(#LOGO_AUTEUR||image_reduire{200,200})]
+            <h1 class="#EDIT{qui} fn">#NOM</h1>
+        </div>
+
+        <div class="#EDIT{bio} texte note">[(#BIO|sinon{Bio:})]</div>
+        <p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="[(#URL_SITE)]" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>
+	</div>
+
+		
+</BOUCLE_JEauteur>		
+		
+		
+		
+		
+		
+</div>
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+	
+	[(#REM) Menu de navigation laterale ]
+	<div id="navigation">
+		
+		[(#REM) Menu Tous vos articles ]
+		<B_auteur>
+		<div style="text-align:left; width:200px;">
+		<h5><a href="[(#SELF|parametre_url{id_article,''}|parametre_url{id_rubrique,#GET{wikirub,#ID_RUBRIQUE}})]"><:icone_ecrire_article:></a></h5>
+		<BOUCLE_auteur(AUTEURS){id_article?}{id_auteur=#SESSION{id_auteur}}>
+		<B_arti>
+		<h3><:icone_tous_articles:></h3>
+		[(#ANCRE_PAGINATION)]
+		<ul>
+		<BOUCLE_arti(ARTICLES){id_auteur}{statut IN prepa,prop,publie}{pagination 6}{par date}{inverse}>
+		<li style="list-style-image:url([(#STATUT|cree_puce_stat|extraire_attribut{src})]); margin: 0.5em 0 0.5em 0" >
+		[<a href="(#URL_PAGE{adminpublic,id_article=#ID_ARTICLE})" title="[(#STATUT|cree_puce_stat|extraire_attribut{alt})]">#TITRE</a>]
+		</li>
+		</BOUCLE_arti>
+		<ul>
+		[<p class="pagination">(#PAGINATION)</p>]
+		</B_arti>
+		</BOUCLE_auteur>
+		</div>
+		</B_auteur>
+		
+		[(#REM) Menu de navigation par rubriques ]
+		<INCLURE{fond=inc-rubriques}{id_rubrique}{id_article}>
+	
+		
+	</div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale ]
+	<div id="extra">
+		
+	[<div style="background-color:#DADADA; border:1px solid #666;">(#LOGINMINI_PUBLIC|?{'',' '})</div>]
+	
+	[(#SESSION|?{' ',''}) #SESSION{nom} <a href="#URL_LOGOUT" title="se deconnecter"> D&eacute;connexion</a>]
+	
+		
+	</div><!--#extra-->
+	
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+	
+</div><!--#page-->
+</body>
+</html>

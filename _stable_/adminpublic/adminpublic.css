@@ -1,0 +1,39 @@
+/*boite admin*/
+/*formulaire evenement*/
+.editereve{text-align:left; background-color:#fff; width:300px; position:absolute; left:300px; top:100px; z-index:2000;}
+.editereve form{padding:1em;}
+.editereve form span {display:block;}
+.editereve form select.fondl {width:20%}
+#agenda-visu-evenement select{font-size:0.9em;}
+.agenda-visu-evenement-bouton-fermer a{border:1px solid red; float:right; font-weight:bold;}
+#agenda-visu-evenement{border:3px solid #888;}
+#evenement_descriptif{width:90%;}
+
+.paddingadmin{ padding: 1em }
+#special-admin h5{background-color:#444; color:#FFF; display:block; margin:0; padding:0.5em; font-size:1.1em;}
+#special-admin h6{background-color:#f1f1f1; display:block; margin:0;  border-top:3px solid #555; border-bottom:1px solid #fff; font-size:1em; color:#000; }
+#programmearticle{ padding: 0 0 1em 0;}
+#special-admin select, #special-admin input { display:block; width:90%;}
+#special-admin forml{  width:100px;}
+#special-admin form { display:block;  width:90%;}
+
+.strong{font-weight:bold; font-size:1.1em;}
+#programmearticle, .insereraccourci{background-color:#fff; font-weight:normal; color:green;}
+#special-admin { 
+position: absolute;
+top: 1em;
+left: 5px;
+width: 200px;
+z-index:1200;
+height:95%;
+overflow:auto;
+}
+
+.obeirpoliment{ background-color: #F9F9F9; border: 1px solid #666666;}
+html>body #special-admin {
+position: fixed; color:#666;
+}
+
+#boutonadmin a{display:block; }
+
+

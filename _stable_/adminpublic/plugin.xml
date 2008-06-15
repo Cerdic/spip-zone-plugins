@@ -1,0 +1,14 @@
+<plugin>
+	<nom><multi>[fr]Admin-Public</multi></nom>
+	<auteur>contact@elastick.net</auteur>
+	<version>0.01</version>
+	<etat>test</etat>
+	<icon>adminpublic.png</icon>
+	<description>>=SPIP 1.9.3<multi> [fr]Administrer les pages depuis l'espace public [en] Administration from public space</multi></description>
+	<fonctions>adminpublic_mes_fonctions.php</fonctions>
+	<prefix>adminpublic</prefix>
+	<lien>[Documentation->../plugins/...]</lien>
+	<pipeline>
+		<nom>insert_head</nom>
+	</pipeline>
+</plugin>
