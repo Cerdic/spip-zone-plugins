@@ -62,11 +62,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'categ:admin' => '1. Administration',
-	'categ:divers' => '<MODIF>6. Miscellaneous',
-	'categ:public' => '<MODIF>4. Public site',
-	'categ:spip' => '<MODIF>5. Tags, filters, criteria',
-	'categ:typo-corr' => '<MODIF>2. Text improvements',
-	'categ:typo-racc' => '<MODIF>3. Typographical shortcuts',
+	'categ:divers' => '60. Miscellaneous',
+	'categ:interface' => '10. Private interface',
+	'categ:public' => '40. Public site',
+	'categ:spip' => '50. Tags, filters, criteria',
+	'categ:typo-corr' => '20. Text improvements',
+	'categ:typo-racc' => '30. Typographical shortcuts',
 	'certaines_couleurs' => 'Only the tags defined below @_CS_ASTER@:',
 	'chatons:aide' => 'Smileys: @liste@',
 	'chatons:description' => 'Replace <code>:name</code> with smiley images in the text.
@@ -168,7 +169,7 @@ N.B: some Swiss Knife tools require {jQuery} to be installed. ',
 	'filets_sep:description' => 'Inserts separating lines for any SPIP texts which can be customised with a stylesheet.
 _ The syntax is: "__code__", where "code" is either the identifying number (from 0 to 7) of the line to insert and which is linked to the corresponding style, or the name of an image in the plugins/couteau_suisse/img/filets directory.',
 	'filets_sep:nom' => 'Dividing lines',
-	'filtrer_javascript:description' => '<MODIF>Three modes are available for controlling Javascript inserted directly in the text of articles:
+	'filtrer_javascript:description' => 'Three modes are available for controlling Javascript inserted directly in the text of articles:
 - <i>never</i>: Javascript is prohibited everywhere
 - <i>default</i>: the presence of Javascript is highlighted in red in the editing interface
 - <i>always</i>: Javascript is always accepted.
@@ -266,6 +267,7 @@ _ • [the whole plugin->@reset@]
 	'label:style_p' => 'Your style:',
 	'label:suite_introduction' => 'Follow-on dots',
 	'label:titre_travaux' => 'Message title:',
+	'label:tri_articles' => 'Your choice:',
 	'label:url_glossaire_externe2' => 'Link to external glossary:',
 	'liens_en_clair:description' => 'Makes the filter: \'liens_en_clair\' available to you. Your text probably contains hyperlinks which are not visible when the page is printed. This filter adds the link code between square brackets for every clickabel link (external links and email addresses). N.B: in printing mode (when using the parameter \'cs=print\' or \'page=print\' in the URL), this treatment is automatically applied.',
 	'liens_en_clair:nom' => 'Visible hyperlinks',
@@ -411,6 +413,15 @@ _ Do not forget to check that the variable used (here, "a_text") is defined in t
 	'travaux_prochainement' => 'This site will be back online soon.
 _ Thank you for your understanding.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
+	'tri_articles:description' => 'Choose the sort order to be used for displaying articles in the editing interface ([->./?exec=auteurs]), within the sections.
+
+The options below use the SQL function \'ORDER BY\'. Only use the customised option if you know what you are doing (the available fields are: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
+[[%tri_articles%]][[->%tri_perso%]]',
+	'tri_articles:nom' => 'Article sort order',
+	'tri_modif' => 'Sort by last modified date (ORDER BY date_modif DESC)',
+	'tri_perso' => 'Sort by customised SQL, ORDER BY:',
+	'tri_publi' => 'Sort by publication date (ORDER BY date DESC)',
+	'tri_titre' => 'Sort by title (ORDER BY 0+titre,titre)',
 	'type_urls:description' => '@puce@ SPIP offers a choice between several types of URLs for your site:
 <div style="font-size:90%; margin:0 2em;">
 - {{page}} : the default type for SPIP v1.9x : <code>/spip.php?article123</code>.

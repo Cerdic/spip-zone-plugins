@@ -64,11 +64,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'categ:admin' => '1. Administraci&oacute;',
-	'categ:divers' => '<MODIF>6. Divers',
-	'categ:public' => '<MODIF>4. Visualitzaci&oacute; p&uacute;blica',
-	'categ:spip' => '<MODIF>5. Etiquetes, filtres, criteris',
-	'categ:typo-corr' => '<MODIF>2. Millora dels textos',
-	'categ:typo-racc' => '<MODIF>3. Dreceres tipogr&agrave;fiques',
+	'categ:divers' => '60. Divers',
+	'categ:interface' => '10. Interf&iacute;cie privada',
+	'categ:public' => '40. Visualitzaci&oacute; p&uacute;blica',
+	'categ:spip' => '50. Etiquetes, filtres, criteris',
+	'categ:typo-corr' => '20. Millora dels textos',
+	'categ:typo-racc' => '30. Dreceres tipogr&agrave;fiques',
 	'certaines_couleurs' => 'Nom&eacute;s les etiquetes definides m&eacute;s avall@_CS_ASTER@ :',
 	'chatons:aide' => 'Emoticones: @liste@',
 	'chatons:description' => 'Insereix imatges (o emoticones pels {xats}) en tots els textos on apareix una cadena del tipus <code>:nom</code>.
@@ -170,12 +171,12 @@ Atenci&oacute;: certes eines del Ganivet Su&iacute;s necessiten les funcions de 
 	'filets_sep:description' => 'Insereix l&iacute;nies de separaci&oacute;, que es poden personalitzar per fulls d\'estil, a tots els textos d\'SPIP.
 _ La sintaxi &eacute;s: "__code__", o "code" representa o b&eacute; el n&uacute;mero d\'identificaci&oacute; (de 0 a 7) de la l&iacute;nia a inserir en relaci&oacute; directa amb els estils corresponents, o b&eacute; el nom d\'una imatge situada a dins de la carpeta plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'L&iacute;nies de Separaci&oacute;',
-	'filtrer_javascript:description' => '<MODIF>Per gestionar el javascript a dins dels articles, podem fer-ho de tres maneres:
-- <i>jamais</i> : el javascript &eacute;s rebutjat a tot arreu
-- <i>d&eacute;faut</i> : el javascript s\'assenyala en vermell a l\'espai privat
-- <i>toujours</i> : el javascript s\'accepta arreu.
+	'filtrer_javascript:description' => 'Per gestionar la inserci&oacute; de javascript a dins dels articles, podem fer-ho de tres maneres:
+- <i>mai</i> : el javascript &eacute;s rebutjat a tot arreu
+- <i>defecte</i> : el javascript s\'assenyala en vermell a l\'espai privat
+- <i>sempre</i> : el javascript s\'accepta a tot arreu.
 
-Atenci&oacute;: a dins dels f&ograve;rums, peticions, flux sindicats, etc., la gesti&oacute; dels javascript &eacute;s <b>sempre</b> segura.[[%radio_filtrer_javascript3%]]',
+Atenci&oacute;: a dins dels f&ograve;rums, peticions, flux sindicats, etc., la gesti&oacute; del javascript &eacute;s <b>sempre</b> segura.[[%radio_filtrer_javascript3%]]',
 	'filtrer_javascript:nom' => 'Gesti&oacute; del javascript',
 	'flock:description' => 'Desactiva el sistema bloqueig de fitxers neutralitzant la funci&oacute; PHP {flock()}. Alguns hostatjadors posen problemes greus fruit d\'un sistema de fitxers inadaptat o a una manca de sincronitzaci&oacute;. No activeu aquesta eina si el vostre lloc funciona normalment. ',
 	'flock:nom' => 'Cap bloqueig de fitxers',
@@ -266,6 +267,7 @@ _ • [De tot el plugin->@reset@]
 	'label:style_p' => 'El vostre estil:',
 	'label:suite_introduction' => 'Punts de continuaci&oacute;:',
 	'label:titre_travaux' => 'T&iacute;tol del missatge:',
+	'label:tri_articles' => 'La vostra elecci&oacute;:',
 	'label:url_glossaire_externe2' => 'Enlla&ccedil; al glossari extern:',
 	'liens_en_clair:description' => 'Posa a la vostra disposici&oacute; el filtre: \'liens_en_clair\'. El vostre text cont&eacute; probablement enlla&ccedil;os que no s&oacute;n visibles durant la impressi&oacute;. Aquest filtre afegeix entre claud&agrave;tors el dest&iacute; de cada enlla&ccedil; clicable (enlla&ccedil;os externs o correus electr&ograve;nics). Atenci&oacute;: en mode impressi&oacute; (par&agrave;metre \'cs=print\' o \'page=print\' al url de la p&agrave;gina), aquesta funcionalitat s\'aplica autom&agrave;ticament.',
 	'liens_en_clair:nom' => 'Enlla&ccedil;os visibles',
@@ -411,6 +413,15 @@ _ No oblideu verificar que \'un_texte\' estigui ben definit als fitxers de lleng
 	'travaux_prochainement' => 'Aquest lloc es restablir&agrave; ben aviat.
 _ Gr&agrave;cies per la vostra comprensi&oacute;.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
+	'tri_articles:description' => 'Navegant pel lloc a la part privada ([->./?exec=auteurs]), escolliu aqu&iacute; la tria que es far&agrave; servir per mostrar els vostres articles a dins de les seccions.
+
+Les propostes que hi han m&eacute;s avall estan basades en la funcionalitat SQL \'ORDER BY\': nom&eacute;s utilitzeu la opci&oacute; personalitzada si sabeu qu&egrave; us feu (camps disponibles: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
+[[%tri_articles%]][[->%tri_perso%]]',
+	'tri_articles:nom' => 'Opcions dels articles',
+	'tri_modif' => 'Tria sobre la data de modificaci&oacute; (ORDER BY date_modif DESC)',
+	'tri_perso' => 'Tria SQL personalitzada, ORDER BY seguit de:',
+	'tri_publi' => 'Tria sobre la data de publicaci&oacute; (ORDER BY date DESC)',
+	'tri_titre' => 'Tria sobre el t&iacute;tol (ORDER BY 0+titre,titre)',
 	'type_urls:description' => '@puce@ SPIP ofereix la possibilitat d\'escollir entre diversos jocs d\'URLs per fabricar els enlla&ccedil;os d\'acc&eacute;s a les p&agrave;gines del vostre lloc:
 <div style="font-size:90%; margin:0 2em;">
 - {{page}}: el valor per defecte per SPIP v1.9x: <code>/spip.php?article123</code>.

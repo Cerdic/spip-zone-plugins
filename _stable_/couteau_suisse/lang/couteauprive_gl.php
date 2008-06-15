@@ -62,11 +62,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'categ:admin' => '1. Administraci&oacute;n',
-	'categ:divers' => '<MODIF>6. Varios',
-	'categ:public' => '<MODIF>4. Exposici&oacute;n p&uacute;blica',
-	'categ:spip' => '<MODIF>5. Balizas, filtros, criterios',
-	'categ:typo-corr' => '<MODIF>2. Melloramento de textos',
-	'categ:typo-racc' => '<MODIF>3. Atallos tipogr&aacute;ficos',
+	'categ:divers' => '60. Varios',
+	'categ:interface' => '10. Interface privada',
+	'categ:public' => '40. Exposici&oacute;n p&uacute;blica',
+	'categ:spip' => '50. Balizas, filtros, criterios',
+	'categ:typo-corr' => '20. Melloramento de textos',
+	'categ:typo-racc' => '30. Atallos tipogr&aacute;ficos',
 	'certaines_couleurs' => 'S&oacute; as balizas definidas aqu&iacute; abaixo ci-dessous@_CS_ASTER@ :',
 	'chatons:aide' => 'Chatons : @liste@',
 	'chatons:description' => 'Introduce imaxes(ou chatons para que moito andan cos {tchats}) en todos os textos ou aparece unha cadea do tipo <code>:nom</code>.
@@ -168,12 +169,12 @@ Aviso : alg&uacute;nhas ferramentas de A Navalla Su&iacute;za necesitan as funci
 	'filets_sep:description' => 'Insire filetes de separaci&oacute;n, personalizables mediante as follas de estilo, en todos os textos de SPIP.
 _ A sintaxe &eacute; : "__code__", ou "code" representa ben o n&uacute;mero de identificaci&oacute;n (de 0 &agrave; 7) do filete inserible en relaci&oacute;n directa cos estilos correspondentes, ben o nome dunha imaxe situada no cartafol plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Filetes de separaci&oacute;n',
-	'filtrer_javascript:description' => '<MODIF>Para xerar o javascript nos artigos, tres modos son dispo&ntilde;&iacute;beis :
+	'filtrer_javascript:description' => 'Para xerar a inserci&oacute;n de javascript nos artigos, son tres os modos :
 - <i>nunca</i> : o javascript &eacute; rexeitado en todas partes
-- <i>predeterminadot</i> : o javascript m&aacute;rcase en vermellos na zona privad
+- <i>predeterminado</i> : o javascript m&aacute;rcase en vermello na zona privada
 - <i>sempre</i> : o javascript &eacute; aceptado por todas as partes.
 
-Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du javascript est <b>toujours</b> s&eacute;curis&eacute;e.[[%radio_filtrer_javascript3%]]',
+Aviso : nos foros, petici&oacute;ns, fluxos afiliados, etc., a xesti&oacute;n do javascript &eacute; <b>sempre</b> securizada.[[%radio_filtrer_javascript3%]]',
 	'filtrer_javascript:nom' => 'Xesti&oacute;n do javascript',
 	'flock:description' => 'Desactiva o bloqueo de ficheiros neutralizando a funci&oacute;n PHP {flock()}. Alg&uacute;s aloxadores dan de feito problemas graves sexa por un sistema de ficheiros inadaptados ou sexa por unha falta de sincronizaci&oacute;n. Non active esta utilidade  se este funciona normalmente.',
 	'flock:nom' => 'Non bloquear os ficheiros',
@@ -264,6 +265,7 @@ _ • [De todo o m&oacute;dulo->@reset@]
 	'label:style_p' => 'O seu estilo :',
 	'label:suite_introduction' => 'Puntos de continuidade :',
 	'label:titre_travaux' => 'T&iacute;tulo da mensaxe :',
+	'label:tri_articles' => 'A s&uacute;a elecci&oacute;n :',
 	'label:url_glossaire_externe2' => 'Ligaz&oacute;n sobre o glosario externo :',
 	'liens_en_clair:description' => 'Pon &aacute; s&uacute;a disposici&oacute;n o filtro : \'liens_en_clair\'. O seu texto cont&eacute;n probablemente ligaz&oacute;ns de hipertexto que non son visibles tras unha impresi&oacute;n. Este filtro engade entre corchetes o destino de cada ligaz&oacute;n activa (ligaz&oacute;ns externas ou correos). Atenci&oacute;n : en modo de impresi&oacute;n (par&aacute;metro \'cs=print\' ou \'page=print\' no url da p&aacute;xina), esta funcionalidade apl&iacute;case automaticamente.',
 	'liens_en_clair:nom' => 'Ligaz&oacute;ns en claro',
@@ -409,6 +411,15 @@ _ Non esqueza verificar \'un_texte\' est&aacute; ben definido nos ficheiros de l
 	'travaux_prochainement' => 'Este web ser&aacute; restablecido axi&ntilde;a.
 _ Grazas pola s&uacute;a comprensi&oacute;n.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
+	'tri_articles:description' => 'En navegando o web na zona privada([->./?exec=auteurs]), escolla aqu&iacute; a ordenaci&oacute;n que usar&aacute; para mostrar os artigos no interior das secci&oacute;ns.
+
+As propostas que seguen est&aacute;n baseadas na funcionalidade SQL \'ORDER BY\' : non empregue unha ordenaci&oacute;n personalizada se non est&aacute; seguro do que est&aacute; a facer (campos dispo&ntilde;&iacute;beis : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
+[[%tri_articles%]][[->%tri_perso%]]',
+	'tri_articles:nom' => 'Ordenaci&oacute;n de artigos',
+	'tri_modif' => 'Ordenaci&oacute;n coa data de modificaci&oacute;n (ORDER BY date_modif DESC)',
+	'tri_perso' => 'Ordenaci&oacute;n SQL personalizada, ORDER BY segundo a estrutura :',
+	'tri_publi' => 'Ordenaci&oacute;n sobre a data de publicaci&oacute;n (ORDER BY date DESC)',
+	'tri_titre' => 'Ordenaci&oacute;n sobre o t&iacute;tulo (ORDER BY 0+titre,titre)',
 	'type_urls:description' => '@puce@ SPIP ofrece unha elecci&oacute;n entre varios xogos de URL para facer as ligaz&oacute;ns de acceso &aacute;s p&aacute;xinas do seu web :
 <div style="font-size:90%; margin:0 2em;">
 - {{paxina}} : o valor predeterminado de SPIP v1.9x : <code>/spip.php?article123</code>.
