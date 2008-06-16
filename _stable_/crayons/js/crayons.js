@@ -1,6 +1,6 @@
 (function($){
 /*
- *  crayons.js (c) Fil, toggg 2006-2007 -- licence GPL
+ *  crayons.js (c) Fil, toggg 2006-2008 -- licence GPL
  */
 
 // le prototype configuration de Crayons
@@ -148,6 +148,7 @@ $.fn.opencrayon = function(evt, percent) {
             .attr('rel','crayon_'+id_crayon);
           if ($.browser.msie) $(me).css({'zoom':1});
           var pos = $(me).offset({'scroll':false});
+          console.log(pos);
           $('<div class="crayon-html" id="crayon_'+id_crayon+'"></div>')
           .css({
             'position':position,
