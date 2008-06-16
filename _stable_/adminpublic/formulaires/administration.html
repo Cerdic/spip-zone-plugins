@@ -53,11 +53,13 @@ G&eacute;rer votre compte
 
 
 [<!-- (#REM) CREER EVENEMENT // necessite plugin agenda --> ]
+[(#ENV{id_article}|?{' ',''})
 [(#AUTORISER{modifier,article,#ENV{id_article}})
 <a href='[(#SELF|parametre_url{ajout_evenement,oui}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_evenement,''})]'>
 <h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_AGENDA})img_pack/agenda-24.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="ajouter" title="<:agenda:titre_cadre_ajouter_evenement:>" />
  <:adminpublic:ajouter_evenement:>
 </a> &agrave; cet article </h6>]
+]
 
 
 [<!-- (#REM) INSERER DOCUMENT ARTICLE ou RUBRIQUE // necessite plugin formulaire_upload--> ]

@@ -42,7 +42,7 @@
 <//B_artimodif>
 
 
-<BOUCLE_JEauteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{statut IN 0minirezo,6forum}>
+<BOUCLE_JEauteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{statut !IN 5poubelle}>
 
 	<div class="vcard">[(#REM) microformat vcard]
         <div class="cartouche">
