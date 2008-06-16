@@ -12,6 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+//charger cfg
+include_spip('cfg_options');   
+
+
 // chargement des valeurs par defaut des champs du formulaire
 function formulaires_inscription2_ajax_charger_dist($id_auteur = NULL){
 
@@ -43,9 +47,6 @@ function formulaires_inscription2_ajax_charger_dist($id_auteur = NULL){
 
 function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
     
-    //charger cfg
-    include_spip('cfg_options');   
-
     //charge la fonction de controle du login et mail
     //$test_inscription = charger_fonction('test_inscription');
 
@@ -174,7 +175,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
         );
     } else {
         $val['id_auteur'] = $id_auteur;
-        $id_auteur = sql_insertq(
+        $id = sql_insertq(
             $table,
             $val
         );
@@ -197,7 +198,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
  */
 function inscription2_champs_formulaire() {
 
-    //charge les valeurs de chaque champs proposés dans le formulaire
+    //charge les valeurs de chaque champs proposés dans le formulaire   
     foreach (lire_config('inscription2/') as $clef => $valeur) {
         /* Il faut retrouver les noms des champ, 
          * par défaut inscription2 propose pour chaque champ le cas champ_obligatoire
