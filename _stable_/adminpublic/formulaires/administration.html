@@ -5,6 +5,8 @@
 [(#REM) les boutons par defaut de SPIP]
 <div dir="#LANG_DIR" id="boutonadmin">
 	[<a href="(#ENV{analyser})" id="analyser"><:analyse_xml:>[(#ENV{xhtml_error}|?{' *',''})]</a>]
+	
+	[(#AUTORISER{ecrire,'','',#SESSION{id_auteur}})
 	[<a href="[(#ENV{voir_article})]" id="voir_article"><:admin_modifier_article:>((#ENV{id_article}))</a>]
 	[<a href="[(#ENV{voir_breve})]"	id="voir_breve"><:admin_modifier_breve:>((#ENV{id_breve}))</a>]
 	[<a href="[(#ENV{voir_rubrique})]" id="voir_rubrique"><:admin_modifier_rubrique:>((#ENV{id_rubrique}))</a>]
@@ -12,6 +14,8 @@
 	[<a href="[(#ENV{voir_site})]" id="voir_site"><:icone_modifier_site:>((#ENV{id_syndic}))</a>]
 	[<a href="[(#ENV{voir_auteur})]" id="voir_auteur"><:admin_modifier_auteur:>((#ENV{id_auteur}))</a>]
 	[<a href="(#ENV{ecrire})" id="ecrire"><:espace_prive:></a>]
+	]
+	
 	<a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]"  id="var_mode"><:admin_recalculer:>[(#ENV{use_cache})]</a>
 	[<a href="(#ENV{statistiques})"  id="statistiques">[<:info_visites:>&nbsp;(#ENV{visites})][;&nbsp;<:info_popularite_5:>&nbsp;(#ENV{popularite})]</a>]
 	[<a href="(#ENV{preview})" id="preview"><:previsualisation:></a>]
@@ -19,7 +23,14 @@
 </div>
 
 [<!-- (#REM) GESTION COMPTE --> ]
-<h6><a href="#URL_PAGE{adminpublic}">G&eacute;rer votre compte</a></h6>
+[(#SESSION{nom}|?{' ',''}) 
+<h6><a href="#URL_PAGE{adminpublic}">
+[<img src="(#IMG{[(#CHEMIN{images/auteur-24.gif})]}|image_reduire{16,16}|extraire_attribut{src})" width="16px" height="16px" alt="mon compte"/>]
+G&eacute;rer votre compte
+</a>
+</h6>
+]
+
 
 
 [<!-- (#REM) AIDE CRAYONS // necessite plugin crayons --> ]
@@ -42,7 +53,7 @@
 
 
 [<!-- (#REM) CREER EVENEMENT // necessite plugin agenda --> ]
-[(#AUTORISER{modifier,article,#ENV{id_article}}|?{' ',''})
+[(#AUTORISER{modifier,article,#ENV{id_article}})
 <a href='[(#SELF|parametre_url{ajout_evenement,oui}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_evenement,''})]'>
 <h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_AGENDA})img_pack/agenda-24.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="ajouter" title="<:agenda:titre_cadre_ajouter_evenement:>" />
  <:adminpublic:ajouter_evenement:>

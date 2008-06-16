@@ -42,17 +42,17 @@
 <//B_artimodif>
 
 
-<BOUCLE_JEauteur(AUTEURS) {id_auteur=#SESSION{id_auteur}}>
-#FORMULAIRE_LOGO_AUTEUR
+<BOUCLE_JEauteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{statut IN 0minirezo,6forum}>
 
 	<div class="vcard">[(#REM) microformat vcard]
         <div class="cartouche">
-            [(#LOGO_AUTEUR||image_reduire{200,200})]
+            <div class="#EDIT{logo} fn">[(#LOGO_AUTEUR|image_reduire{200,200}|sinon{[<img src="(#CHEMIN{images/auteur-24.gif})" width="24px" height="24px" alt="mon logo" style="float:right;"/>]})]</div>
             <h1 class="#EDIT{qui} fn">#NOM</h1>
+	    <div class="#EDIT{email} fn">#EMAIL</div>
+	     <div class="#EDIT{bio} texte">[(#BIO|sinon{Bio:})]</div>
+	    <div class="#EDIT{pgp} fn">[(#PGP|sinon{Clef PGP:})]</div>
         </div>
-
-        <div class="#EDIT{bio} texte note">[(#BIO|sinon{Bio:})]</div>
-        <p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="[(#URL_SITE)]" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>
+        <p class="#EDIT{hyperlien} hyperlien"><:votre_site:> : <a href="[(#URL_SITE)]" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>
 	</div>
 
 		
