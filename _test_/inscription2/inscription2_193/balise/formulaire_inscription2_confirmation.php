@@ -54,14 +54,24 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode, $retour) {
 			echo _T('inscription2:rien_a_faire');
 	}else{
 		include_spip('inc/acces');
-		include_spip('inc/mail');
+		include_spip('inc/envoyer_mail');
 		
 		$htpass = generer_htpass($pass);
 		$statut = lire_config('inscription2/statut_nouveau');
-		sql_updateq("spip_auteurs",array("statut" => $statut, "pass" => $pass, "htpass" => $htpass, "alea_actuel" => ""), "id_auteur = ".$id);
+		/* Confirme l'inscription par la mise à jour du statut par défaut et le mot de passe */
+		sql_updateq(
+		    "spip_auteurs",
+		    array(
+		        "statut" => $statut, 
+		        "pass" => $pass, 
+		        "htpass" => $htpass, 
+		        "alea_actuel" => ""
+	        ),
+	         "id_auteur = ".$id)
+         ;
 		echo "<strong>"._T('pass_nouveau_enregistre')."</strong><p><a href='".$retour."'>"._T('retour')."</a></p>";
-		$var_user = sql_select("nom, email, login","spip_auteurs","id_auteur=".$id);
-		$var_user = sql_fetch($var_user);
+		$var_user = sql_fetsel("nom, email, login","spip_auteurs","id_auteur=".$id);
+
 		if($var_user){
 			$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 			$adresse_site = $GLOBALS['meta']["adresse_site"];
