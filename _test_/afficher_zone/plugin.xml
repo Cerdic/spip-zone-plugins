@@ -1,5 +1,5 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
+	<nom>
 	    Afficher les plugins de la Zone
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
@@ -16,7 +16,7 @@
       Trois formats de sortie: RSS, page spip et carte freemind.
 	</description>
 	<lien>http://spip-contrib.net/spip.php?article2733</lien>
-  <icon>img_pack/mag_maj.png</icon>
+  <icon>aff_zone.png</icon>
   <necessite id="cfg" version="[1.7.5;]" />
   <options>aff_zone_options.php</options><!-- gere l'appel de base/aff_zone_tables.php -->
   <fonctions>aff_zone_fonctions.php</fonctions>

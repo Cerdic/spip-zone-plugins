@@ -8,7 +8,7 @@
 		// si on est admin
 		if ($GLOBALS['connect_statut'] == "0minirezo") {
 		  // on voit le bouton comme  sous-menu de "auteurs"
-			$boutons_admin['naviguer']->sousmenu['aff_zone']= new Bouton("../"._DIR_PLUGIN_AFF_ZONE."/img_pack/mag_maj.png", _T('aff_zone:module_titre') );
+			$boutons_admin['naviguer']->sousmenu['aff_zone']= new Bouton("../"._DIR_PLUGIN_AFF_ZONE."/img_pack/aff_zone.png", _T('aff_zone:module_titre') );
 		}
 		return $boutons_admin;
 	}

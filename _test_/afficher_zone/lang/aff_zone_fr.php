@@ -3,6 +3,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
+"activez_cfg" => "Vous devez avoir install&eacute; et activ&eacute; le plugin CFG pour que ce plugin focntionne",
 "aff_zone" => "trier/classer/afficher les plugins &agrave; partir du flux RSS des paquets de la zone",
 "affichage_plugins" => "Affichage des plugins",
 "afficher_attribues" => "Afficher les plugins attribu&eacute;s",
@@ -50,10 +51,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 "statut" => "Statut",
 
 // T
-"titre_choisir_statut" => "Choisissez un statut",
+"titre_choisir_statut" => "choisissez un statut",
 "titre_page" => "Classement des plugins",
 "titre_rss" => "Titre du flux RSS",
-"titre_statut" => "Plugins ayant le statut",
+"titre_statut" => "plugins ayant le statut",
 "tout" => "tout",
 
 // V

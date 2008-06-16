@@ -9,7 +9,7 @@
 [(#ENV{statut}|?{'',' '}) <:aff_zone:titre_choisir_statut:>]
 </h1>
 
-<BOUCLE_feinte(BREVES){0,1}>[(#ENV{statut}|?{' ',''})]</BOUCLE_feinte>
+<BOUCLE_feinte(SITES){0,1}>[(#ENV{statut}|?{' ',''})]</BOUCLE_feinte>
 <form action="#SELF" method="post" id="principal">
     <fieldset id="choix_cat">
         <legend>

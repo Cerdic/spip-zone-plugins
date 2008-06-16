@@ -15,7 +15,7 @@
   [(#ENV{cat}|?{'',' '}) [(#SET{categories, #CONFIG{aff_zone/categorie} })] ]
   [(#ENV{cat}|?{' ',''}) [(#SET{categories, #ENV{cat}|makearray})] ]
 
-<BOUCLE_feinte(BREVES){0,1}>[(#ENV{statut}|?{' ',''})]</BOUCLE_feinte>  
+<BOUCLE_feinte(SITES){0,1}>[(#ENV{statut}|?{' ',''})]</BOUCLE_feinte>  
         <a style="float: right; margin: 2px;" href="#URL_SITE_SPIP/?page=affzone_fm[&statut=(#ENV{statut})][&cat=(#ENV{cat})]">
             <img src="#CHEMIN{img_pack/freemind-24.png}" alt="icone aff_zone" style="vertical-align: middle;">
             <:aff_zone:lien_freemind:>

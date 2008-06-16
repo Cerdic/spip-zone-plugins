@@ -18,7 +18,11 @@
     <legend><:aff_zone:choix_groupes_categories:>:</legend>
     <BOUCLE_categories(GROUPES_MOTS){par titre}>
         <input type="checkbox" name="categorie[]" value="#ID_GROUPE"
-         [(#ID_GROUPE|in_array{#CONFIG{aff_zone/categorie}}|?{' ',''}) checked="checked" ] 
+         [(#REM) avant d'utiliser le in_array, s'assurer que l'array #CONFIG{aff_zone/categorie} existe sinon méchant warning dans
+                 les pages de config des plugins lorsque pas de groupes de mots clés configuré... ] 
+         [(#CONFIG{aff_zone/categorie}|is_array|?{' ',''})
+            [(#ID_GROUPE|in_array{#CONFIG{aff_zone/categorie}}|?{' ',''}) checked="checked" ]
+         ]
          multiple="multiple" />
         <label>#ID_GROUPE. #TITRE</label>
         <br />

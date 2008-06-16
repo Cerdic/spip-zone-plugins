@@ -1,6 +1,6 @@
 #choix_cat ul, #choix_statut ul,  #choix_plug ul { margin: 0; padding: 0; }
  
-#choix_statut { float: left; }
+/*#choix_statut { float: left; width: 240px; text-align: left;}*/
 
 #choix_cat { float: left; width: 150px; }
 #choix_cat ul li, #choix_statut ul li, #choix_plug ul li { list-style-type: none; line-height: 1.7em; margin-top: 4px; }

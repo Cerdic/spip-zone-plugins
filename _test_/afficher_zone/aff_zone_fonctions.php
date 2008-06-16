@@ -1,5 +1,6 @@
 <?php
   if (!defined("_ECRIRE_INC_VERSION")) return;
+
   $GLOBALS['titres_enregistres'] = array();
   function traiter_titre($titre) {
     // nettoyer le nom

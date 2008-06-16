@@ -12,14 +12,6 @@
   include_spip('public/assembler');
 
   function exec_aff_zone() {
-  // récupérer les paramètres de CFG
-    $id_groupes_categories = implode(',', lire_config('aff_zone/categorie'));
-    $id_groupe_mots_statut = lire_config('aff_zone/id_groupe_statuts');
-
-	// définir comme constante le chemin du répertoire du plugin
-      $p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-      $pp = explode("/", end($p));
-      define('_DIR_PLUGIN_AFF_ZONE',(_DIR_PLUGINS.$pp[0]));
     // vérifier les droits
       global $connect_statut, $connect_toutes_rubriques;
       if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {    
@@ -32,6 +24,40 @@
           else echo _T('avis_non_acces_page');
           exit;
       }
+      
+  // si CFG n'est pas actif arreter tout
+    if (!function_exists('lire_config')) {
+        // si on est pas en retour ajax d'enregistrement d'une modif
+          if (!_request("id_mot")) {
+              debut_page(_T('titre'), "aff_zone", "plugin");
+              echo _T('aff_zone:activez_cfg');
+              fin_page();
+          }
+          else echo _T('aff_zone:activez_cfg');
+          exit;
+    }
+    
+  // si la config du plugin n'a pas encore été faite, basculer automatiquement sur l'interface cfg
+    if (!lire_meta('aff_zone')) {
+        include_spip('inc/headers');
+        redirige_url_ecrire('cfg','cfg=aff_zone');
+    }
+  
+  // récupérer les paramètres de CFG
+    $id_groupes_categories = implode(',', lire_config('aff_zone/categorie'));
+    $id_groupe_mots_statut = lire_config('aff_zone/id_groupe_statuts');
+
+    // récupérer le numéro de version et passer le chemin du plugin en constante
+      include_spip('inc/plugin');
+      $Tplugins_actifs = liste_plugin_actifs();
+      $version_script = $Tplugins_actifs['AFF_ZONE']['version'];
+      define('_DIR_PLUGIN_AFF_ZONE',$Tplugins_actifs['AFF_ZONE']['dir']);
+/* 
+	// définir comme constante le chemin du répertoire du plugin
+      $p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+      $pp = explode("/", end($p));
+      define('_DIR_PLUGIN_AFF_ZONE',(_DIR_PLUGINS.$pp[0]));
+*/
 
 // TRAITEMENT DONNEES par ajax à la validation d'une série de checkbox de plugin pour un mot-clé
 // => mettre à jour la table spip_mots_syndic_articles: créer/modifier/effacer 
@@ -67,7 +93,7 @@
                   sql_delete('spip_mots_syndic_articles', 
                              'id_syndic_article = '.$data['id_syndic_article'].' AND id_mot = '.$data['id_mot']
                             );
-                  if (mysql_error() != '') $Terreurs[] = _T('erreur_suppression').' id_plugin = '.$data['id_syndic_article'].' id_mot = '.$data['id_mot'].': '.mysql_error();
+                  if (mysql_error() != '') $Terreurs[] = _T('aff_zone:erreur_suppression').' id_plugin = '.$data['id_syndic_article'].' id_mot = '.$data['id_mot'].': '.mysql_error();
               }
           }
           
@@ -92,7 +118,7 @@
                   sql_delete('spip_mots_syndic_articles', 
                              'id_syndic_article = '.$data['id_syndic_article'].' AND id_mot = '.$data['id_mot']
                             );
-                  if (mysql_error() != '') $Terreurs[] = _T('erreur_suppression').' id_plugin = '.$data['id_syndic_article'].' id_mot = '.$data['id_mot'].': '.mysql_error();
+                  if (mysql_error() != '') $Terreurs[] = _T('aff_zone:erreur_suppression').' id_plugin = '.$data['id_syndic_article'].' id_mot = '.$data['id_mot'].': '.mysql_error();
               }
           }
           
@@ -102,7 +128,7 @@
               sql_replace('spip_mots_syndic_articles', 
                           array('id_mot'=>_request('id_mot'), 'id_syndic_article'=>$id_plug)
                          );
-              if (mysql_error() != '') $Terreurs[] = _T('erreur_enregistrement').' id_plugin = '.$id_plug.': '.mysql_error();
+              if (mysql_error() != '') $Terreurs[] = _T('aff_zone:erreur_enregistrement').' id_plugin = '.$id_plug.': '.mysql_error();
           }
           if (count($Terreurs) == 0) echo 'OK';
           else echo implode('<br>',$Terreurs);
@@ -168,42 +194,38 @@
 // FIN INITIALISATION
       
 // DEBUT AFFICHAGE
-      
-	  // trouver la version en cours à partir de plugin.xml
-      $Tlecture_fich_plugin = file(_DIR_PLUGIN_AFF_ZONE.'/plugin.xml');
-      $stop_prochain = 0;
-      foreach ($Tlecture_fich_plugin as $ligne) {
-          if ($stop_prochain == 1) {
-           $version_script = $ligne;
-           break;
-          }
-          if (substr_count($ligne, '<version>') > 0) {
-           $stop_prochain = 1;
-          }
-      }
+include_spip('inc/commencer_page');
+      $htm = '';
       $commencer_page = charger_fonction('commencer_page', 'inc');
       echo $commencer_page(_T('aff_zone:attribution_mots_cles'), "", "", "");
-
-      echo gros_titre(_T('aff_zone:titre_page'));
-      echo debut_gauche();
-      echo debut_boite_info();
-      echo "<strong>"._T('aff_zone:plugin_info')."</strong><br />";
-      echo '<br /><a href="?exec=cfg&cfg=aff_zone">'._T('aff_zone:lien_config').'</a><br />';
-      echo "<br /><strong>"._T('aff_zone:version')."</strong>".$version_script;
-      echo fin_boite_info();
+      echo gros_titre(_T('aff_zone:titre_page'), '', false);
+      
+      echo debut_gauche('', true);
       
       $contexte = array();
       $contexte['statut'] = _request('statut');
       
       echo recuperer_fond('fonds/choix_statut', $contexte);
-      
-      echo debut_droite();
-      echo debut_cadre_couleur();
+
+      echo creer_colonne_droite('', true);
+      echo debut_boite_info(true);
+      echo "<strong>"._T('aff_zone:plugin_info')."</strong><br />";
+      echo '<br /><a href="?exec=cfg&cfg=aff_zone">'._T('aff_zone:lien_config').'</a><br />';
+      echo "<br /><strong>"._T('aff_zone:version')."</strong>".$version_script;
+      echo fin_boite_info(true);
+            
+      echo debut_droite('', true);
+      echo debut_cadre_formulaire('', true);
+      echo debut_cadre_couleur(_DIR_PLUGIN_AFF_ZONE.'img_pack/aff_zone.png', true);
 
       echo recuperer_fond('fonds/aff_zone', $contexte);
       
-      echo fin_cadre_couleur();
+      echo fin_cadre_couleur(true);
+      echo fin_cadre_formulaire(true);
+      echo fin_gauche();
+      
 	    echo fin_page();
+      
 }		 		 
 
 ?>
