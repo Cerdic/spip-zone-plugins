@@ -55,7 +55,7 @@
 			echo '<label for="date"><strong>'._T('asso:Date du paiement (AAAA-MM-JJ)').' :</strong></label>';
 			echo '<input name="date" type="text" value="'.date('Y-m-d').'" id="date" class="formo" />';
 			echo '<label for="montant"><strong>'._T('asso:Montant paye (en euros)').' :</strong></label>';
-			$sql = spip_query( "SELECT * FROM spip_asso_categories WHERE valeur='$categorie' ");
+			$sql = spip_query( "SELECT * FROM spip_asso_categories WHERE id_categorie='$categorie' ");
 			while($categorie = spip_fetch_array($sql)) {
 				$duree=$categorie['duree'];
 				$mois=$mois+$duree;
