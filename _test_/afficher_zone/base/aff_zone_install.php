@@ -28,7 +28,7 @@
         $Tstatuts = array('stable','test','dev','experimental');
         foreach ($Tstatuts as $st) {
           sql_insertq('spip_mots', 
-                      array('titre'=>$st, 'id_groupe'=>$id_groupe)
+                      array('titre'=>$st, 'id_groupe'=>$id_groupe; 'type'=>'statut des plugins')
                      );
           if (mysql_error() != '') $Terreurs[] = 'erreur creation du mot cle '.$st.': '.mysql_error();
         }
