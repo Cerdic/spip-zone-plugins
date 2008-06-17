@@ -55,12 +55,13 @@ function exec_mutualisation_dist() {
 			$url .= '/';
 			$nom_site = sinon($meta['nom_site'], $v);
 			$stats = intval($meta['popularite_total']);
-			if ($plugins = @unserialize($meta['plugin']))
+			if ($plugins = @unserialize($meta['plugin'])) {
+				ksort($plugins);
 				$plugins = count($plugins)
 				. ' <small>'
 				. strtolower(join(', ', array_keys($plugins)))
 				. '</small>';
-			else
+			} else
 				$plugins = '-';
 
 			// S'il faut upgrader, creer un bouton qui permettra
