@@ -16,16 +16,35 @@ function inc_geomap_config(){
 		if(_request('ok')){
 			include_spip('inc/meta');
 			ecrire_meta('geomap_googlemapkey',$_POST['key']);
+			$version = $_POST['api_version'];
+			if($version=="2.")
+			 $version .= $_POST['api_version_number'];
+			ecrire_meta('geomap_googlemapversion',$version); 
 			ecrire_metas();
 		}
 		$apikey = isset($GLOBALS['meta']['geomap_googlemapkey'])?$GLOBALS['meta']['geomap_googlemapkey']:"";
+		$apiversion = isset($GLOBALS['meta']['geomap_googlemapversion'])?$GLOBALS['meta']['geomap_googlemapversion']:"";
+    if(!$apiversion)
+      $apiversion = "2";
+    $apiversionnumber = "";
+    if(preg_match(",(2\.)(\d+),",$apiversion,$m)) {
+      $apiversion = $m[1];
+      $apiversionnumber = $m[2];
+    } 
 		$out .= '<br/>';
 		$out .= '<a href="http://www.google.com/apis/maps" target="_blank" ><img src="'._DIR_PLUGIN_GEOMAP.'img_pack/logo_google.gif" border="0" align="left" hspace="10" ></a>';
-		$out .= '<form name="googlemapkey" method="post" action="'.self().'">';
+		$out .= '<div style="float:left">';
+    $out .= '<form name="googlemapkey" method="post" action="'.self().'">';
 		$out .= '<br/>';
 		$out .= '<label>Google Map API Key <a href="http://www.google.com/apis/maps/signup.html" target="_blank" >'._T('geomap:conseguir').'</a></label> <input type="text" name="key" value="'.$apikey.'" size="30" />';
-		$out .= '<input type="submit" name="ok" value="'._T('bouton_enregistrer').'" />';
-		
+		$out .= '<br/>';
+    $out .= '<div>API Version <a href="http://code.google.com/apis/maps/documentation/index.html#API_Updates" target="_blank">info</a>:</div>';
+    $out .= '<div><label><input type="radio" name="api_version" value="2" '.($apiversion==="2"?'checked="checked" ':'').'/>Current version</label></div>';
+    $out .= '<div><label><input type="radio" name="api_version" value="2.x" '.($apiversion==="2.x"?'checked="checked" ':'').'/>Latest version</label></div>';
+    $out .= '<div><label><input type="radio" name="api_version" value="2.s" '.($apiversion==="2.s"?'checked="checked" ':'').'/>Stable version</label></div>';
+    $out .= '<div><label><input type="radio" name="api_version" value="2." '.($apiversion==="2."?'checked="checked" ':'').'/>Other version</label> <input type="text" name="api_version_number" value="'.$apiversionnumber.'" /></div>';
+    $out .= '<input type="submit" name="ok" value="'._T('bouton_enregistrer').'" />';
+		$out .= '</form></div>';
 		if(_request('ok')){
 			$out .= '<div align="center" style="margin:20px auto">';
 			$out .= ''._T('geomap:clave_engadida').'<code>'._request('key').'</code>';
@@ -51,7 +70,7 @@ function inc_geomap_config(){
 
 			$geomap_append_moveend_map = charger_fonction('geomap_append_moveend_map','inc');
 			$out .= 
-			"<div id='cadroFormulario' style='border:1px solid #000;margin-top:30px;padding:10px;tex-align:center;'>\n"
+			"<div id='cadroFormulario' style='clear:left;border:1px solid #000;margin-top:30px;padding:10px;tex-align:center;'>\n"
 			. "<p>"._T('geomap:default_geoloc')."</p>"
 			. "<div id='formMap' name='formMap' style='width: 470px; height: 350px;margin:10px auto;'></div>"
 			. $geomap_append_moveend_map('formMap','form_lat','form_lonx',$glat,$glonx,'form_zoom',$gzoom,false);
