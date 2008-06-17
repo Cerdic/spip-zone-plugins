@@ -147,7 +147,7 @@ $.fn.opencrayon = function(evt, percent) {
           .find('>.crayon-icones')
             .attr('rel','crayon_'+id_crayon);
           if ($.browser.msie) $(me).css({'zoom':1});
-          var pos = $(me).offset({'scroll':false});
+          var pos = $(me).offset();
           $('<div class="crayon-html" id="crayon_'+id_crayon+'"></div>')
           .css({
             'position':position,
@@ -337,7 +337,7 @@ $.fn.activatecrayon = function(percent) {
       .end()
       // decaler verticalement si la fenetre d'edition n'est pas visible
       .each(function(){
-        var offset = $(this).offset({'scroll':false});
+        var offset = $(this).offset();
         var hauteur = parseInt($(this).css('height'));
         var scrolltop = $(window).scrollTop();
         var h = $(window).height();
