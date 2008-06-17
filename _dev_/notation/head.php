@@ -26,8 +26,8 @@ function notation_insert_head($flux){
 	var notation_img = "'.$img.'";
 	var notation_multi = '.$multi.';
 </script>
-<script type="text/javascript" src="'.find_in_path('notation.js').'"></script>
-<link rel="stylesheet" href="'.find_in_path('css/notation.css').'" type="text/css" media="all" />';
+<script type="text/javascript" src="'._DIR_PLUGIN_NOTATION.'notation.js"></script>
+<link rel="stylesheet" href="'._DIR_PLUGIN_NOTATION.'css/notation.css" type="text/css" media="all" />';
 
 	return $flux;
 }
