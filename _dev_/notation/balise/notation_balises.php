@@ -65,12 +65,19 @@ function notation_etoile($nb)
   return $ret;
 }
 
-// Affichage de la note sous forme d'etoiles
+// Lles balises
+
 function balise_NOTATION_ETOILE($p){
-  // Parametre de la balise
-  $param = interprete_argument_balise(1,$p);
-  // Code...
-	$p->code = "notation_etoile(".$param.")";
+	$param = interprete_argument_balise(1,$p);
+	$p->code = "notation_etoile($param)";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+function balise_NOTATION_ETOILE_CLICK($p){
+	$nb = interprete_argument_balise(1,$p);
+	$id = interprete_argument_balise(2,$p);
+	$p->code = "notation_etoile_click($nb,$id)";
 	$p->interdire_scripts = false;
 	return $p;
 }
