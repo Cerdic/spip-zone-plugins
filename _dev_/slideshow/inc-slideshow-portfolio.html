@@ -22,23 +22,11 @@ $(document).ready(
 				images : [
 				{<BOUCLE_documents_slide_portfolio2(DOCUMENTS){'},{'}{mode=document}{id_article}{extension==(png|jpg|gif)$} {par hasard} {doublons}>
 						src: '[(#FICHIER||image_reduire{#CONFIG{slideshow/largeur_portfolio,480},#CONFIG{slideshow/hauteur_portfolio,400}}|extraire_attribut{src})]',
-						caption: '[(#NOM_SITE_SPIP|textebrut)][ - (#TITRE)]'
+						caption: '[(#NOM_SITE_SPIP|urldecode)][ - (#TITRE)]'
 				</BOUCLE_documents_slide_portfolio2>}
 				]
 			}
-		)	
-		$('a').ToolTip(
-		{
-			className: 'inputsTooltip',
-			position: 'mouse'
-		}
-	);
-	$('img').ToolTip(
-		{
-			className: 'inputsTooltip',
-			position: 'mouse'
-		}
-	);		
+		)
 	}	
 );
 </script></BOUCLE_rub_slide_portfolio1>
