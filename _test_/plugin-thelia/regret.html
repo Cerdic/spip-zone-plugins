@@ -22,6 +22,19 @@
 		<div id="contenu">
 		
 						
+			[(#REM) Afficher les étapes de la commande et visualiser l'étape courante ]
+			<div id="etapes-achat">
+			<h2 class="invisible"><:etapes_achat:></h2>
+			<ul>
+				<li><div><:spipthelia:valider_panier:></div></li>
+				<li><div><:spipthelia:identifiez_vous:></div></li>
+				<li><div><:spipthelia:choix_mode_livraison:></div></li>
+				<li><div><:spipthelia:choix_paiement:></div></li>
+				<li class="etape-courante derniere-etape"><div><:spipthelia:envoyer_commande:></div></li>
+			</ul>
+			<br class="nettoyeur" />
+			</div>
+
 			[(#REM) Titre de la rubrique ]
 			<div class="titrePage">
 				<h1><:spipthelia:erreur_paiement:></h1>

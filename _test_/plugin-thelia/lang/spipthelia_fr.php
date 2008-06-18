@@ -1,6 +1,6 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'valider_panier' => 'Valider mon panier',
+'valider_panier' => 'Je valide mon panier',
 'ajouter_panier' => 'Ajouter au panier',
 'mon_panier' => 'Contenu de mon panier',
 'photo_produit' => 'Photo',
@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'selectionner_autre_adresse' => 'S&eacute;lectionnez une autre adresse de livraison',
 'adresse_facturation_defaut' => 'Mon adresse de facturation par d&eacute;faut',
 'ajouter_adresse_livraison' => 'Ajouter une adresse de livraison',
-'choix_mode_livraison' => 'Choix du mode de livraison',
+'choix_mode_livraison' => 'Je choisis un mode de livraison',
 'type_livraison_tarif' => 'Type de livraison &amp; tarif',
 'continuer' => 'Continuer',
 'probleme_adresse_livraison' => 'Vous devez choisir une autre adresse de livraison. <br/>Nous ne r&eacute;alisons pas de livraison vers ce pays.',
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'a_bientot' => 'Bonne navigation et à bient&ocirc;t',
 'erreur_paiement' => 'Erreur de paiement',
 'commentaire_erreur_paiement' => 'Nous vous informons que la procédure de paiement n\'a pas pu aboutir, veuillez vous renseigner aupr&egrave;s de votre &eacute;tablissement bancaire.',
-'commentaire_erreur_paiement_suite' => 'Bonne navigation et &agrave; bientôt',
+'commentaire_erreur_paiement_suite' => 'Bonne navigation et &agrave; bient&ocirc;t',
 'page_precedente' => 'Page pr&eacute;c&eacute;dente',
 'page_suivante' => 'Page suivante',
 'mon_compte' => 'Mon compte',
@@ -92,7 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'confirmation_email' => 'Confirmation de votre e-mail',
 'valider' => 'Valider',
 'nouveau_client' => 'Je suis un nouveau client',
-'identifiez_vous' => 'Identifiez-vous',
+'identifiez_vous' => 'Je m\'identifie',
 'deja_compte' => 'J\'ai d&eacute;j&agrave; un compte',
 'mon_email' => 'Mon e-mail',
 'votre_email' => 'Votre e-mail',
@@ -129,6 +129,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bonjour' => 'Bonjour',
 'produits_associes_article' => 'PRODUITS ASSOCIES A L\'ARTICLE',
 'produits_associes_rubrique' => 'PRODUITS ASSOCIES A LA RUBRIQUE',
-'mettre_a_jour' => 'Mettre &agrave; jour'
+'mettre_a_jour' => 'Mettre &agrave; jour',
+'etapes_achat' => 'Les &eacute;tapes de ma commande :',
+'envoyer_commande' => 'J\'envoie ma commande'
+
+
 );
 ?>

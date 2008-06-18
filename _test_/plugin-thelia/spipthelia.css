@@ -214,3 +214,39 @@ a.LIEN_pages:hover {
 .autres-images-produit {
 	clear: both;
 }
+#etapes-achat ul  {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#etapes-achat ul li {
+	float: left;
+	color: #939393;
+	height: 70px;
+	padding: 0;
+	margin: 0;
+	padding-right: 23px;
+	background-image: url(fleche-etapes.png);
+	background-position: right 11px;
+	background-repeat: no-repeat;
+	font-size: .8em;
+	
+}
+#etapes-achat ul li.derniere-etape {
+	background-image: none;
+	padding-right: 0;
+}
+	
+#etapes-achat ul li div {
+	width: 70px;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+#etapes-achat ul li.etape-courante {
+	color: #F60;
+	font-weight: bold;
+}
+#etapes-achat ul li.etape-courante div {
+	border: 1px solid #F60;
+}
+
