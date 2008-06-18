@@ -16,11 +16,13 @@
     }
     
     function aff_masq_complements(id_plug) {
-        if (id_plug == '') $(".details_plug").each(function(){ masquer($(this)); });
+        if (id_plug == '') $(".details_plug").each(function(){ $(this).css("display","none"); });
         else {
-            $(".details_plug").each(function(){ masquer($(this)); });
+            masquer($(".plug_ouvert"));
+            $(".plug_ouvert").attr("class","details_plug");
             id_plug = id_plug.substring(4);
             afficher($("#details_" + id_plug));
+            $("#details_" + id_plug).attr("class","plug_ouvert");
         }
     }
   
