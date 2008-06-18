@@ -14,6 +14,7 @@
      </BOUCLE_statuts>
     </select>
 </fieldset>
+<br />
 <fieldset>
     <legend><:aff_zone:choix_groupes_categories:>:</legend>
     <BOUCLE_categories(GROUPES_MOTS){par titre}>
@@ -28,6 +29,7 @@
         <br />
     </BOUCLE_categories>
 </fieldset>
+<br />
 <fieldset>
     <legend><:aff_zone:rss_presentation:>:</legend>
     <label for="titre_rss"><:aff_zone:titre_rss:>:</label><br />
@@ -35,6 +37,25 @@
     <br />
     <label for="descriptif_rss"><:aff_zone:descriptif_rss:>:</label><br />
     <textarea name="descriptif_rss" id="descriptif_rss" style="width: 95%; height: 8em;">#CONFIG{aff_zone/descriptif_rss}</textarea>
+</fieldset>
+<br />
+<fieldset>
+    <legend><:aff_zone:fm_lien:>:</legend>
+    <:aff_zone:fm_lien_txt:>
+    <input type="radio" name="type_lien_fm" id="fm_lien_zip" value="zip" [(#CONFIG{aff_zone/type_lien_fm}|=={zip}|?{' ',''})checked="checked"] />
+    <label for="fm_lien_zip"><:aff_zone:fm_lien_zip:>:</label> 
+    <br />
+    <input type="radio" name="type_lien_fm" id="fm_lien_zone" value="zone"  [(#CONFIG{aff_zone/type_lien_fm}|=={zone}|?{' ',''})checked="checked"]/>
+    <label for="descriptif_rss"><:aff_zone:fm_lien_zone:>:</label> 
+</fieldset>
+<br />
+<fieldset>
+    <legend><:aff_zone:mode_affichage:>:</legend>
+    <input type="radio" name="mode_affichage" id="mode_compact" value="compact" [(#CONFIG{aff_zone/mode_affichage}|=={compact}|?{' ',''})checked="checked"] />
+    <label for="mode_compact"><:aff_zone:mode_compact:>:</label> 
+    <br />
+    <input type="radio" name="mode_affichage" id="mode_complet" value="complet"  [(#CONFIG{aff_zone/mode_affichage}|=={complet}|?{' ',''})checked="checked"]/>
+    <label for="mode_complet"><:aff_zone:mode_complet:>:</label> 
 </fieldset>
 
 <input type="submit" name="_cfg_ok" value="<:OK:>" />

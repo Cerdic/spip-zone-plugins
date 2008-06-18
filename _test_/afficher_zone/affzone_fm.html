@@ -13,7 +13,7 @@
   [(#ENV{cat}|?{'',' '}) [(#SET{categories, #CONFIG{aff_zone/categorie} })] ]
   [(#ENV{cat}|?{' ',''}) [(#SET{categories, #ENV{cat}|makearray})] ]
  -->
-    <node BACKGROUND_COLOR="#ffff00" COLOR="#000000" CREATED="1212567880843" ID="Freemind_Link_1238831885" MODIFIED="1213368921765" STYLE="fork" TEXT="<:aff_zone:plugins:> <:aff_zone:statut:>: #GET{titre_statut}">
+    <node BACKGROUND_COLOR="#ffff00" COLOR="#000000" CREATED="[(#NOOP|cree_date)]" ID="Freemind_Link_[(#NOOP|cree_date)]" MODIFIED="[(#NOOP|cree_date)]" STYLE="fork" TEXT="<:aff_zone:plugins:> <:aff_zone:statut:>: #GET{titre_statut}">
         <font BOLD="true" NAME="SansSerif" SIZE="20"/>
         <hook NAME="accessories/plugins/AutomaticLayout.properties"/>
         #SET{pos, left}
@@ -21,21 +21,24 @@
         [(#REM) tester si il existe des plugins dans cette catégorie, sinon ne pas l'afficher ] 
         <BOUCLE_test_plugs(SYNDIC_ARTICLES){id_groupe}{tags LIKE #GET{ch_statut}}>[(#TOTAL_BOUCLE|!={0}|?{' ',''})]</BOUCLE_test_plugs>
         
-        <node COLOR="#0033ff" CREATED="1212569503671" ID="Freemind_Link_1204770636" MODIFIED="1213368717125" POSITION="[(#GET{pos})]" STYLE="bubble" TEXT="#TITRE">
+        <node COLOR="#0033ff" CREATED="[(#MAJ|affdate{YmdHis})]" ID="Freemind_Link_#ID_GROUPE" MODIFIED="[(#MAJ|affdate{YmdHis})]" POSITION="[(#GET{pos})]" STYLE="bubble" TEXT="#TITRE">
             [(#GET{pos}|=={right}|?{#SET{pos, left}, #SET{pos, right}})]
             <font NAME="SansSerif" SIZE="18"/>
             [(#REM) tester si il existe des plugins dans ce groupe, sinon ne pas l'afficher ]
             <BOUCLE_liste_mots(MOTS){id_groupe}{par titre}>
                 <BOUCLE_test_plugs2(SYNDIC_ARTICLES){id_mot}{tags LIKE #GET{ch_statut}}>[(#TOTAL_BOUCLE|!={0}|?{' ',''})]</BOUCLE_test_plugs2>
                 
-                <node COLOR="#00b439" CREATED="1212569551031" ID="Freemind_Link_760150801" MODIFIED="1213368717140" TEXT="#TITRE">
+                <node COLOR="#00b439" CREATED="[(#MAJ|affdate{YmdHis})]" ID="Freemind_Link_#ID_MOT" MODIFIED="[(#MAJ|affdate{YmdHis})]" TEXT="#TITRE">
                     <font NAME="SansSerif" SIZE="16"/>
                     <BOUCLE_liste_plugs(SYNDIC_ARTICLES)
                         {id_mot}
                         {tags LIKE #GET{ch_statut}}
                         {par SUBSTRING_INDEX(titre," - ",1)} 
                         {!par date}>
-                        <node COLOR="#990000" CREATED="1212568609562" ID="Freemind_Link_181226588" MODIFIED="1213369338640" TEXT="[(#TITRE|sans_version)]" VSHIFT="-15">
+                        [(#REM) l'adresse du lien (trac / zip) à mettre sur le plugin en fonction de #CONFIG{aff_zone/type_lien_fm} ]
+                            [(#CONFIG{aff_zone/type_lien_fm}|=={zone}|?{' ',''}) #SET{url_lien, #URL}]
+                            [(#CONFIG{aff_zone/type_lien_fm}|=={zip}|?{' ',''}) #SET{url_lien, #URL|url_zip}]
+                        <node COLOR="#990000" CREATED="[(#DATE|affdate{YmdHis})]" ID="Freemind_Link_#ID_SYNDIC" MODIFIED="[(#MAJ|affdate{YmdHis})]" LINK="#GET{url_lien}" TEXT="[(#TITRE|sans_version)]" VSHIFT="-15">
                             <font NAME="SansSerif" SIZE="14"/>
                         </node>
                     </BOUCLE_liste_plugs>

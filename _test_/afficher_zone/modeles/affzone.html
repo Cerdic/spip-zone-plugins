@@ -1,3 +1,37 @@
+[(#REM) gérer le mode d'affichage: le paramètre ENV est prioritaire sur la config CFG ]
+  [(#ENV{mode}|?{' ',''}) #SET{mode_aff, #ENV{mode}}]
+  [(#ENV{mode}|?{'',' '}) #SET{mode_aff, #CONFIG{aff_zone/mode_affichage}}]
+
+[(#GET{mode_aff}|=={compact}|?{' ',''})
+<script language="JavaScript" type="text/javascript">
+// le javascript pour afficher / masquer les détails d'un plugin
+    var vitesse = "slow";
+    function afficher(toto) {
+        if (!jQuery.browser.safari) toto.show(vitesse);
+        else toto.css("display", "block");
+    }
+    function masquer(toto) {
+        if (!jQuery.browser.safari) toto.hide(vitesse);
+        else toto.css("display", "none");
+    }
+    
+    function aff_masq_complements(id_plug) {
+        if (id_plug == '') $(".details_plug").each(function(){ masquer($(this)); });
+        else {
+            $(".details_plug").each(function(){ masquer($(this)); });
+            id_plug = id_plug.substring(4);
+            afficher($("#details_" + id_plug));
+        }
+    }
+  
+  $(document).ready(function() {
+       aff_masq_complements('');
+       $("h3").click(function() {
+          aff_masq_complements($(this).attr("id"));
+       });
+  });
+</script>
+]
 [(#REM) faire la correspondance statuts/icones ]
   #SET{ico_stable, #CHEMIN{images/puce-verte.gif}}
   #SET{ico_test, #CHEMIN{images/puce-orange.gif}}
@@ -49,10 +83,18 @@
                         {tags LIKE #GET{ch_statut}}
                         {par SUBSTRING_INDEX(titre," - ",1)} 
                         {!par date}>
-                        <h3><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
-                        [<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
-                        <small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)][ &mdash; <em>(#TAGS|afficher_tags)</em>]</small>
-                        [<div class="introduction">(#DESCRIPTIF|image_reduire{300})</div>]
+                        <h3 style="margin-bottom: 0px; cursor: pointer;" id="aff_#ID_SYNDIC_ARTICLE" title="<:aff_zone:clicker_afficher:>"><img src="#GET{ico_#TAGS|afficher_tags|recuperer_txt_tag}" rel="ico statut" /> #TITRE</h3>
+                        <div id="details_#ID_SYNDIC_ARTICLE" class="details_plug">
+                          <small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)][ &mdash; <em>(#TAGS|afficher_tags)</em>]</small>
+                          <div class="introduction">
+                            <span style="float: right;"> 
+                                [<a href="(#URL_ARTICLE)" title="<:aff_zone:page_zone:>"><img src="#CHEMIN{img_pack/zone-12.png}" alt="<:aff_zone:page_zone:>" style="vertical-align: middle;" /> <:aff_zone:page_zone:></a>]
+                                <br />
+                                [<a href="(#URL|url_zip)" title="<:aff_zone:telecharger_zip:>"><img src="#CHEMIN{img_pack/zip-12.png}" alt="<:aff_zone:telecharger_zip:>" style="vertical-align: middle;" /> <:aff_zone:telecharger:></a>]
+                            </span>
+                            [(#DESCRIPTIF|image_reduire{300})]
+                          </div>
+                        </div>
                     </BOUCLE_liste_plugs>
                   </div>
                   

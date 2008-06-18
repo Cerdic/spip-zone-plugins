@@ -49,4 +49,20 @@
     return preg_replace('/ - Version.*$/is', '', $txt);
   }
   
+  function cree_date($rien) {
+    return date("YmdHis");
+  }  
+  
+  function url_zip($url_trac) {
+    $Turl = explode('/', $url_trac);
+    for ($i = 1; $i < count($Turl); $i++) {
+        if ($next) return 'http://files.spip.org/spip-zone/'.$Turl[$i].'.zip';
+        if (in_array($Turl[$i], array('_dev_','_test_','_stable_'))) $next = true;
+    }
+  }
+  
+  function recuperer_txt_tag($tag) {
+    preg_match('/<a.*?>(.*?)<\/a>/is', $tag, $res);
+    if ($res) return $res[1];
+  }
 ?>
