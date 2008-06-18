@@ -13,15 +13,9 @@
     et <em>&gt;notation|topten&lt;</em> qui donne les 10 meilleurs articles.
   </description>
   <icon>img_pack/note.gif</icon>
-  <fonctions>
-    notation.php
-  </fonctions>
-  <fonctions>
-    balise/notation_balises.php
-  </fonctions>
-  <fonctions> <!-- fichier charge a chaque recalul de page -->
-	public/notation_boucles.php
-  </fonctions>
+  <fonctions>notation.php</fonctions>
+  <fonctions>balise/notation_balises.php</fonctions>
+  <options>notation_options.php</options>
   <install>base/notation_init.php</install>
 	<pipeline>
         <nom>ajouter_boutons</nom>
