@@ -13,13 +13,13 @@ function balise_ACTION_FORMULAIRE($p){
 	if (strlen($_url))
 		$p->code .= " . (form_hidden($_url))";
 	if (strlen($_form))
-		$p->code .= 
+		$p->code .=
 		// envoyer le nom du formulaire que l'on traite
 		". '<input type=\'hidden\' name=\'formulaire_action\' value=\'' . $_form . '\' />'"
 		// transmettre les eventuels args de la balise formulaire
 		. ". '<input type=\'hidden\' name=\'formulaire_action_args\' value=\'' . @\$Pile[0]['formulaire_args']. '\' />'"
 		. ". (@\$Pile[0]['_hidden']?@\$Pile[0]['_hidden']:'')";
-	
+
 	if (strlen($p->code))
 		$p->code = "'<div>'" . $p->code . " . '</div>'";
 	$p->interdire_scripts = false;
@@ -51,8 +51,8 @@ function traiter_formulaires_dynamiques(){
 				if (($v=_request('var_ajax'))
 				 AND ($v!=='form')
 				 AND ($args = _request('var_ajax_env'))) {
-					$url = parametre_url($url,'var_ajax',$v,'&');	
-					$url = parametre_url($url,'var_ajax_env',$args,'&');	
+					$url = parametre_url($url,'var_ajax',$v,'&');
+					$url = parametre_url($url,'var_ajax_env',$args,'&');
 				}
 				redirige_par_entete($url);
 			}
@@ -218,9 +218,9 @@ function verifier_cle_action($action, $cle) {
 
 // http://doc.spip.org/@redirige_formulaire
 function redirige_formulaire($url, $equiv = '') {
-	if (!_request('var_ajax') 
+	if (!_request('var_ajax')
 	  && !_request('var_ajaxcharset')
-		&& !headers_sent() 
+		&& !headers_sent()
 		&& !$_GET['var_mode']){
 		include_spip('inc/headers');
 		redirige_par_entete(str_replace('&amp;','&',$url), $equiv);
@@ -233,8 +233,8 @@ function redirige_formulaire($url, $equiv = '') {
 			$url = url_de_base().$url;
 		$url = str_replace('&amp;','&',$url);
 		spip_log("redirige formulaire ajax: $url");
-		include_spip('inc/filtres');	
-		return 
+		include_spip('inc/filtres');
+		return
 		"<script type='javascript'>window.location='$url';</script>"
 		. http_img_pack('searching.gif','');
 	}

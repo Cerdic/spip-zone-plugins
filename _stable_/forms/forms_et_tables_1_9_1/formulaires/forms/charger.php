@@ -81,7 +81,7 @@ function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donne
 		  $q.="AND donnees.id_donnee="._q($id_donnee);
 		$res = spip_query($q);
 		if($row2 = spip_fetch_array($res)){
-			if (($row['multiple']=='non') && ($row['modifiable']=='non')) return "";
+			if (($row['multiple']=='non') && ($row['modifiable']=='non')) return array(false,array());
 			$id_donnee=$row2['id_donnee'];
 			$valeurs = array_merge($valeurs,Forms_valeurs($id_donnee,$id_form));
 		}
