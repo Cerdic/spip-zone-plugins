@@ -1,36 +1,21 @@
-<BOUCLE_breve (BREVES) {id_breve}>
-<BOUCLE_metas_breves (SPIP_GESTION_METAS) {id_breve}>
-	<title>[(#TITRE|supprimer_numero|textebrut|entites_html)][(#TITRE|=={''}|?{' ',''})[(#_breve:TITRE|supprimer_numero|textebrut|entites_html)]] &ndash; #NOM_SITE_SPIP</title>
-	[<meta name="keywords" content="(#KEYWORDS|entites_html)">]
-	[<meta name="description" content="(#DESCRIPTION|entites_html)">]
-</BOUCLE_metas_breves>
-	<title>[(#TITRE|supprimer_numero|textebrut|entites_html)][(#TITRE|=={''}|?{' ',''})[(#_breve:TITRE|supprimer_numero|textebrut|entites_html)]] &ndash; #NOM_SITE_SPIP</title>
-<//B_metas_breves>
-</BOUCLE_breve>
-<BOUCLE_article (ARTICLES) {id_article}>
-<BOUCLE_metas_articles (SPIP_GESTION_METAS) {id_article}>
-	<title>[(#TITRE|supprimer_numero|textebrut|entites_html)][(#TITRE|=={''}|?{' ',''})[(#_article:TITRE|supprimer_numero|textebrut|entites_html)]] &ndash; #NOM_SITE_SPIP</title>
-	[<meta name="keywords" content="(#KEYWORDS|entites_html)">]
-	[<meta name="description" content="(#DESCRIPTION|entites_html)">]
-</BOUCLE_metas_articles>
-	<title>[(#TITRE|supprimer_numero|textebrut|entites_html)][(#TITRE|=={''}|?{' ',''})[(#_article:TITRE|supprimer_numero|textebrut|entites_html)]] &ndash; #NOM_SITE_SPIP</title>
-<//B_metas_articles>
-</BOUCLE_article>
-<BOUCLE_rubrique (RUBRIQUES) {id_rubrique}>
-<BOUCLE_metas_rubriques (SPIP_GESTION_METAS) {id_rubrique}>
-	<title>[(#TITRE|supprimer_numero|textebrut|entites_html)][(#TITRE|=={''}|?{' ',''})[(#_rubrique:TITRE|supprimer_numero|textebrut|entites_html)]] &ndash; #NOM_SITE_SPIP</title>
-	[<meta name="keywords" content="(#KEYWORDS|entites_html)">]
-	[<meta name="description" content="(#DESCRIPTION|entites_html)">]
-</BOUCLE_metas_rubriques>
-	<title>[(#TITRE|supprimer_numero|textebrut|entites_html)][(#TITRE|=={''}|?{' ',''})[(#_rubrique:TITRE|supprimer_numero|textebrut|entites_html)]] &ndash; #NOM_SITE_SPIP</title>
-<//B_metas_rubriques>
-</BOUCLE_rubrique>
-[(#REM) Si on passe id_rubrique=0, SPIP ne trouvera pas de rubrique et donc exécutera le code suivant]
-<BOUCLE_metas_sommaire (SPIP_GESTION_METAS) {id_rubrique}>
-	<title>[(#TITRE|supprimer_numero|textebrut|entites_html)][(#TITRE|=={''}|?{' ',''})[(#_rubrique:TITRE|supprimer_numero|textebrut|entites_html)]] &ndash; #NOM_SITE_SPIP</title>
-	[<meta name="keywords" content="(#KEYWORDS|entites_html)">]
-	[<meta name="description" content="(#DESCRIPTION|entites_html)">]
-</BOUCLE_metas_sommaire>
-	<title>[(#TITRE|supprimer_numero|textebrut|entites_html)][(#TITRE|=={''}|?{' ',''})[(#_rubrique:TITRE|supprimer_numero|textebrut|entites_html)]] &ndash; #NOM_SITE_SPIP</title>
-<//B_metas_sommaire>
+#CACHE{0}
+#SET{article,#ENV{id_article}}
+<BOUCLE_condition(ARTICLES){0,1}><BOUCLE_article(ARTICLES){id_article=#GET{article}}><BOUCLE_metas_articles(spip_gestion_metas){id_article=#GET{article}}>[<title>(#TITRE|supprimer_numero|textebrut|entites_html)</title>][<meta name="description" content="(#DESCRIPTION|entites_html)"/>]</BOUCLE_metas_articles></B_metas_articles>[<title>(#TITRE|supprimer_numero|textebrut|entites_html) &ndash; #TITRE_PARENT</title>][<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]<//B_metas_articles></BOUCLE_article></BOUCLE_condition></B_condition>
+
+<BOUCLE_rubrique (RUBRIQUES) {id_rubrique}><BOUCLE_metas_rubriques (spip_gestion_metas) {id_rubrique}>[<title>(#TITRE|supprimer_numero|textebrut|entites_html)</title>][<meta name="description" content="(#DESCRIPTION|entites_html)" />]</BOUCLE_metas_rubriques>
+</B_metas_rubriques>[<title>(#TITRE|supprimer_numero|textebrut|entites_html)[ &ndash; (#ID_PARENT|titre_parent)]</title>][<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]<//B_metas_rubriques></BOUCLE_rubrique></B_rubrique>
+
+<BOUCLE_metas_sommaire (spip_gestion_metas) {id_rubrique}>[<title>(#TITRE|supprimer_numero|textebrut|entites_html)</title>][<meta name="description" content="(#DESCRIPTION|entites_html)" />]</BOUCLE_metas_sommaire></B_metas_sommaire>[<title>(#NOM_SITE_SPIP|textebrut|entites_html)</title>][<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|textebrut|entites_html)" />]<//B_metas_sommaire>
+
 <//B_rubrique>
+<//B_condition>
+<B_keyword><meta name="keywords" content='<BOUCLE_keyword(MOTS){id_groupe IN 9,10}{", "}>#TITRE</BOUCLE_keyword>' /></B_keyword>
+
+[(#REM)
+  fonctionnement :
+
+    si on a un article on en prend les méta défini par le plugin sinon on en prend le titre et l'intro
+    si on a une rubrique ( publiée ) alors on prend les métas s'ils existent sinon le titre et l'intro
+    si on a un id de rubrique passé ( zéro ) et que ce n'est pas une rubrique publiée , alors on en prend les meta sinon le titre et le descriptif du site spip
+
+]

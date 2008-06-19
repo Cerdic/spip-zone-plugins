@@ -10,3 +10,5 @@
 			
 		
 - Tester le multinlinguisme.
+
+- attention si le mot dit important se situe dans un attribut html ... ca le modifie aussi 
