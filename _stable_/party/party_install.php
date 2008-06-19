@@ -34,6 +34,7 @@ function party_installation($url) {
 		$id = sql_getfetsel('id_syndic', 'spip_syndic', array('url_syndic = "' . $url . '"', 'statut="publie"'));
 
 	if(!$id) {
+		include_spip('inc/site');
 		include_spip('action/editer_site');
 		$site = analyser_site($url);
 		$id = insert_syndic(0);
