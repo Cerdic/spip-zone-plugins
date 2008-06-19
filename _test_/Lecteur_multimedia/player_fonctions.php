@@ -15,20 +15,21 @@ function Player_head(){
 	$flux = "";
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'soundmanager/soundmanager2.js"></script>';
 	$flux .= '<script type="text/javascript"><!--'."\n"
-	. 'var musicplayerurl="'._DIR_PLUGIN_PLAYER.'eraplayer_playlist.swf";'
-	. 'var image_play="'._DIR_PLUGIN_PLAYER_IMAGES.'playl.gif";'
-	. 'var image_pause="'._DIR_PLUGIN_PLAYER_IMAGES.'pausel.gif";'
-	. 'soundManager.url = "'._DIR_PLUGIN_PLAYER.'soundmanager/soundmanager2.swf";'
-	. 'soundManager.consoleOnly = true;'
-  	. 'soundManager.debugMode = false;'
-  	. 'soundManager.nullURL = "'._DIR_PLUGIN_PLAYER.'soundmanager/null.mp3";'
-	. 'var videoNullUrl = "'._DIR_PLUGIN_PLAYER.'null.flv";'
+	. 'var musicplayerurl="'._DIR_PLUGIN_PLAYER.'eraplayer_playlist.swf";'."\n"
+	. 'var image_play="'._DIR_PLUGIN_PLAYER_IMAGES.'playl.gif";'."\n"
+	. 'var image_pause="'._DIR_PLUGIN_PLAYER_IMAGES.'pausel.gif";'."\n"
+	. 'soundManager.url = "'._DIR_PLUGIN_PLAYER.'soundmanager/soundmanager2.swf";'."\n"
+  	. 'soundManager.nullURL = "'._DIR_PLUGIN_PLAYER.'soundmanager/null.mp3";'."\n"
+	. 'var videoNullUrl = "'._DIR_PLUGIN_PLAYER.'null.flv";'."\n"
+	. 'var DIR_PLUGIN_PLAYER = "'._DIR_PLUGIN_PLAYER.'";'
 	. "//--></script>\n";
-	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'javascript/jscroller.js"></script>';
-	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>';
-	$flux .= '<link rel="stylesheet" href="'.find_in_path('player.css').'" type="text/css" media="projection, screen, tv" />';
+	
+	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'javascript/jscroller.js"></script>'."\n";
+	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>'."\n";
+	$flux .= '<link rel="stylesheet" href="'.find_in_path('player.css').'" type="text/css" media="projection, screen, tv" />'."\n";
 	return $flux;
 }
+
 function Player_insert_head($flux){
 	if (!defined('_PLAYER_AFFICHAGE_FINAL') OR !_PLAYER_AFFICHAGE_FINAL)
 		$flux .= Player_head();

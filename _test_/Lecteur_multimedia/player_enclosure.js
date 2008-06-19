@@ -19,6 +19,8 @@ isVideoPlaying = 'false' ;
 videoPause = false ;
 isPlaying = false ;
      
+soundManager.consoleOnly = true;
+soundManager.debugMode = false;
 
 //tableau des mp3 de la page
 mp3Array = new Array();
