@@ -20,7 +20,7 @@
     $spip_doc2img['page'] = "int NOT NULL";
 
     // déclaration des clef primaire et etrangére
-    $spip_doc2img_key = array("PRIMARY KEY"	=> "id_doc2img", 'KEY id_document' => 'id_document');
+    $spip_doc2img_key = array("PRIMARY KEY"	=> "id_doc2img", 'KEY id_document' => 'id_document', 'UNIQUE KEY document' => 'id_document,page');
 
     //on sauvegarde le tout dans SPIP
     $tables_principales['spip_doc2img']  =	array('field' => &$spip_doc2img, 'key' => &$spip_doc2img_key);
