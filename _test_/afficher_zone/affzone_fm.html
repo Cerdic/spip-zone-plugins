@@ -38,7 +38,7 @@
                         [(#REM) l'adresse du lien (trac / zip) à mettre sur le plugin en fonction de #CONFIG{aff_zone/type_lien_fm} ]
                             [(#CONFIG{aff_zone/type_lien_fm}|=={zone}|?{' ',''}) #SET{url_lien, #URL}]
                             [(#CONFIG{aff_zone/type_lien_fm}|=={zip}|?{' ',''}) #SET{url_lien, #URL|url_zip}]
-                        <node COLOR="#990000" CREATED="[(#DATE|affdate{YmdHis})]" ID="Freemind_Link_#ID_SYNDIC_ARTICLE" MODIFIED="[(#MAJ|affdate{YmdHis})]" LINK="#GET{url_lien}" TEXT="[(#TITRE|sans_version)]" VSHIFT="-15">
+                        <node COLOR="#990000" CREATED="[(#DATE|affdate{YmdHis})]" ID="Freemind_Link_#ID_SYNDIC_ARTICLE" MODIFIED="[(#MAJ|affdate{YmdHis})]" LINK="#GET{url_lien}" TEXT="[(#TITRE|ajoute_multi|propre|supprimer_tags|sans_version|texte_backend)]" VSHIFT="-15">
                             <font NAME="SansSerif" SIZE="14"/>
                         </node>
                     </BOUCLE_liste_plugs>

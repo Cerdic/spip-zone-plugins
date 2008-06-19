@@ -50,7 +50,7 @@
   }
   
   function cree_date($rien) {
-    return date("YmdHis");
+    return mktime();
   }  
   
   function url_zip($url_trac) {
@@ -65,4 +65,9 @@
     preg_match('/<a.*?>(.*?)<\/a>/is', $tag, $res);
     if ($res) return $res[1];
   }
+  
+  function ajoute_multi($titre) {
+      return '<multi>'.$titre.'</multi>';
+  }
+  
 ?>

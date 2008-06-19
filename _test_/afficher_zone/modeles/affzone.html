@@ -33,7 +33,9 @@
        });
   });
 </script>
+<style type="text/css">h3 { cursor: pointer; }</style>
 ]
+
 [(#REM) faire la correspondance statuts/icones ]
   #SET{ico_stable, #CHEMIN{images/puce-verte.gif}}
   #SET{ico_test, #CHEMIN{images/puce-orange.gif}}
@@ -85,7 +87,7 @@
                         {tags LIKE #GET{ch_statut}}
                         {par SUBSTRING_INDEX(titre," - ",1)} 
                         {!par date}>
-                        <h3 style="margin-bottom: 0px; cursor: pointer;" id="aff_#ID_SYNDIC_ARTICLE" title="<:aff_zone:clicker_afficher:>"><img src="#GET{ico_#TAGS|afficher_tags|recuperer_txt_tag}" rel="ico statut" /> #TITRE</h3>
+                        <h3 style="margin-bottom: 0px;" id="aff_#ID_SYNDIC_ARTICLE" title="<:aff_zone:clicker_afficher:>"><img src="#GET{ico_#TAGS|afficher_tags|recuperer_txt_tag}" rel="ico statut" /> [(#TITRE|ajoute_multi|propre|supprimer_tags)]</h3>
                         <div id="details_#ID_SYNDIC_ARTICLE" class="details_plug">
                           <small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)][ &mdash; <em>(#TAGS|afficher_tags)</em>]</small>
                           <div class="introduction">
@@ -94,7 +96,7 @@
                                 <br />
                                 [<a href="(#URL|url_zip)" title="<:aff_zone:telecharger_zip:>"><img src="#CHEMIN{img_pack/zip-12.png}" alt="<:aff_zone:telecharger_zip:>" style="vertical-align: middle;" /> <:aff_zone:telecharger:></a>]
                             </span>
-                            [(#DESCRIPTIF|image_reduire{300})]
+                            [(#DESCRIPTIF|image_reduire{300}|ajoute_multi|propre)]
                           </div>
                         </div>
                     </BOUCLE_liste_plugs>
