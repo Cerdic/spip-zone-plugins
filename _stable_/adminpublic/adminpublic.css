@@ -13,12 +13,9 @@
 #special-admin h5{background-color:#444; color:#FFF; display:block; margin:0; padding:0.5em; font-size:1.1em;}
 #special-admin h6{background-color:#f1f1f1; display:block; margin:0;  border-top:3px solid #555; border-bottom:1px solid #fff; font-size:1em; color:#000; }
 #programmearticle{ padding: 0 0 1em 0;}
-#special-admin select, #special-admin input { display:block; width:90%;}
-#special-admin forml{  width:100px;}
-#special-admin form { display:block;  width:90%;}
 
-.strong{font-weight:bold; font-size:1.1em;}
-#programmearticle, .insereraccourci{background-color:#fff; font-weight:normal; color:green;}
+#programmearticle .insereraccourci{background-color:#fff; font-weight:normal; color:green;}
+ 
 #special-admin { 
 position: absolute;
 top: 1em;
@@ -26,14 +23,27 @@ left: 5px;
 width: 200px;
 z-index:1200;
 height:95%;
-overflow:auto;
+overflow:auto; 
 }
 
-.obeirpoliment{ background-color: #F9F9F9; border: 1px solid #666666;}
+.obeirpoliment{ background-color: #F9F9F9; border: 1px solid #666666; }
 html>body #special-admin {
 position: fixed; color:#666;
 }
 
 #boutonadmin a{display:block; }
+
+#special-admin .formulaire_upload .decrire_doc{width:100%;}
+#special-admin .formulaire_upload h4{display:block; margin:0; padding:0;  width:100%; }
+#special-admin .formulaire_upload {margin:0; padding:0; text-align:center;}
+#special-admin .formulaire_upload .bord_formup{ width:90%; margin:0 auto; margin-top:8px; margin-bottom:8px; }
+#special-admin .formulaire_upload .spip_doc_logo{text-align:center; margin:0 auto; width:100%;}
+#special-admin .formulaire_upload .spip_doc_logo img{ margin:0 auto;}
+#special-admin .formulaire_upload  .floatright, #special-admin .formulaire_upload  .floatleft{float:none; margin:0 auto;}
+#special-admin .formulaire_upload .checkbox, #special-admin .formulaire_upload .strong{display:none;}
+#special-admin .formulaire_upload .inputfile {text-align:left; padding:0; border:1px solid #ccc; background-color:#fff;}
+#special-admin .formulaire_upload .inputfile input{padding:0; margin:0;  display:block; } 
+#special-admin .formulaire_upload .insert_code abbr, #special-admin .formulaire_upload .spip_bouton input{font-size:0.9em;}
+#special-admin .formulaire_upload .insert_code abbr{color:green;}
 
 

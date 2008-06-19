@@ -18,13 +18,12 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <fieldset style="border:none; padding:0px;  margin:0px;"><legend>
 	 
-	[<:form_forum_identifiants:> <a onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;" target="spip_pass" href="(#URL_PAGE{identifiants})"> (?) </a>]
+	[<:form_forum_identifiants:> <a onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;" target="spip_pass" href="(#URL_PAGE{identifiants})" title="<:comment_s_inscrire:>"> (?) </a>]
 
 	  </legend>
 			[<span id="spip_logo_auteur" >(#ENV*{_logo,''})</span>]
 		  <ol class="formfx" >
 		    <li class="editer_login obligatoire">
-		      <label for="var_login" style="display:none;"><:login_login2:></label>
 		      <label for="var_login" style="display:inline;"><:login_login:></label>
 		      <input  class='text forml' type='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40' />
 					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{var_login})</span>]
@@ -33,7 +32,7 @@
 		      <label for="password" style="display:inline;"><:login_pass2:></label>
 		      <input class='password forml' type='password' name='password' id='password' value="" size='40' />
 					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{password})</span>]
-					<span><a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><img src="" alt="(?)" title="<:login_motpasseoublie:>"></a></span>
+					<span><a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;" title="<:login_motpasseoublie:>">(?)</a></span>
 		    </li>
 				[(#ENV{rester_connecte})
 				<li class="editer_session" style="display:none;">

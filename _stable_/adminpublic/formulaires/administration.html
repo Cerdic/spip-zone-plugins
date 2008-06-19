@@ -1,6 +1,10 @@
 <div id="special-admin">
 <h5>[(#SESSION{nom})] <a href="#" class="diktat">[+]</a></h5>
 <div class="obeirpoliment">
+	[<div style="background-color:#DADADA; border:1px solid #666;">(#LOGINMINI_PUBLIC|?{'',' '})</div>]
+	[(#SESSION|?{' ',''})<a href="#URL_LOGOUT" title="se deconnecter">D&eacute;connexion</a>]
+	
+
 
 [(#REM) les boutons par defaut de SPIP]
 <div dir="#LANG_DIR" id="boutonadmin">
@@ -13,8 +17,8 @@
 	[<a href="[(#ENV{voir_mot})]" id="voir_mot"><:admin_modifier_mot:>((#ENV{id_mot}))</a>]
 	[<a href="[(#ENV{voir_site})]" id="voir_site"><:icone_modifier_site:>((#ENV{id_syndic}))</a>]
 	[<a href="[(#ENV{voir_auteur})]" id="voir_auteur"><:admin_modifier_auteur:>((#ENV{id_auteur}))</a>]
-	[<a href="(#ENV{ecrire})" id="ecrire"><:espace_prive:></a>]
 	]
+	[<a href="(#ENV{ecrire})" id="ecrire"><:espace_prive:></a>]
 	
 	<a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]"  id="var_mode"><:admin_recalculer:>[(#ENV{use_cache})]</a>
 	[<a href="(#ENV{statistiques})"  id="statistiques">[<:info_visites:>&nbsp;(#ENV{visites})][;&nbsp;<:info_popularite_5:>&nbsp;(#ENV{popularite})]</a>]
@@ -23,7 +27,7 @@
 </div>
 
 [<!-- (#REM) GESTION COMPTE --> ]
-[(#SESSION{nom}|?{' ',''}) 
+[(#AUTORISER{modifier,auteur,#SESSION{id_auteur}})  
 <h6><a href="#URL_PAGE{adminpublic}">
 [<img src="(#IMG{[(#CHEMIN{images/auteur-24.gif})]}|image_reduire{16,16}|extraire_attribut{src})" width="16px" height="16px" alt="mon compte"/>]
 G&eacute;rer votre compte
@@ -42,13 +46,23 @@ G&eacute;rer votre compte
 [<!-- (#REM) CREER ARTICLE -->]
 <BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}>
 [(#AUTORISER{creerarticledans,rubrique,#ENV{id_rubrique}})
-<h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> <a href="?page=adminpublic&id_rubrique=#ID_RUBRIQUE"><:icone_ecrire_article:></a>  dans la rubrique [(#TITRE|supprimer_numero)]</h6>]
+<h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> 
+<a href="?page=adminpublic&id_rubrique=#ID_RUBRIQUE"><:icone_ecrire_article:></a>  dans la rubrique [(#TITRE|supprimer_numero)]</h6>]
 </BOUCLE_rub>
-[(#REM) pour recup id_rubrique wiki]
+[<!--(#REM) pour recup id_rubrique admin restreint-->]
+<BOUCLE_rubrestreinte(SPIP_AUTEURS_RUBRIQUES){id_auteur=#SESSION{id_auteur}}{0,1}>
+<h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> 
+<a href="?page=adminpublic&id_rubrique=#ID_RUBRIQUE"><:icone_ecrire_article:></a>  dans votre rubrique</h6>
+</BOUCLE_rubrestreinte>
+[<!--(#REM) pour recup id_rubrique wiki-->]
 <BOUCLE_wiki(RUBRIQUES){id_rubrique IN #CONFIG{autorite/espace_wiki}}{0,1}>
 [(#CONFIG{autorite/espace_wiki_rubrique_anonyme}|?{' ',''})
-<h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> <a href="?page=adminpublic&id_rubrique=#ID_RUBRIQUE"><:icone_ecrire_article:></a></h6>]
+<h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> 
+<a href="?page=adminpublic&id_rubrique=#ID_RUBRIQUE"><:icone_ecrire_article:></a></h6>]
 </BOUCLE_wiki>
+
+<//B_rubrestreinte>
+
 <//B_rub>
 
 
@@ -62,14 +76,18 @@ G&eacute;rer votre compte
 ]
 
 
+[<!-- (#REM) INSERER DOCUMENT mais eviter de doublonner!--> ]
+[(#SELF|match{upload}|?{'',' '})
+
 [<!-- (#REM) INSERER DOCUMENT ARTICLE ou RUBRIQUE // necessite plugin formulaire_upload--> ]
 [(#EVAL{_DIR_PLUGIN_FORMULAIREUPLOAD}|?{' ',''}) 
-[(#AUTORISER{modifier,article,#ENV{id_article}})    [(#CONFIG{documents_article}|=={oui}|?{<h6>Ins&eacute;rer des documents</h6>}) ] ]
-[(#AUTORISER{modifier,rubrique,#ENV{id_rubrique}})  [(#CONFIG{documents_rubrique}|=={oui}|?{<h6>Ins&eacute;rer des documents</h6>})] ]
+[(#AUTORISER{modifier,article,#ENV{id_article}})    [(#CONFIG{documents_article}|=={oui}|?{<h6>Ins&eacute;rer des documents</h6>}) ]  ]
+[(#AUTORISER{modifier,rubrique,#ENV{id_rubrique}})  [(#CONFIG{documents_rubrique}|=={oui}|?{<h6>Ins&eacute;rer des documents</h6>}) ] ]
 ]
 
-
 [<div id='alertez'></div>(#FORMULAIRE_UPLOAD)]
+
+]
 
 </div>
 </div>
