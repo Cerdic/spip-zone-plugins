@@ -12,12 +12,14 @@ function controler_document($id_document) {
     include_spip('base/compat193');
     include_spip('cfg_options');    
 
-    //on recupere l'extension du document
-    $sql = "SELECT extension
-                FROM spip_documents
-                LEFT JOIN spip_types_documents ON spip_documents.id_type = spip_types_documents.id_type
-                WHERE id_document =".$id_document;
-    $res = sql_fetch(spip_query($sql));
+    //statut par defaut on ne peut pas convertir
+    $return = false;
+
+    $res = sql_fetsel(
+        'extension',
+        'spip_documents',
+        'id_document = '.$id_document
+    );
 
     //on lit la chaine de caractéres listant les extensions autorisées
     $types_autorises = lire_config("doc2img/format_document",null,true);
@@ -25,11 +27,21 @@ function controler_document($id_document) {
     //on controle si le document est convertible ou non
     if (preg_match("/".$res['extension']."/i",$types_autorises)) {
         spip_log("Document autorisé à la conversion","doc2img");
-        return true;
+        $pages = sql_countsel('spip_doc2img','id_document='.$id_document,'id_doc2img');
+        spip_log('pages :'.$pages,'doc2img');
+        if ($pages) {
+            spip_log("Document deja converti","doc2img");
+            $return = false;
+        } else  {
+            spip_log("à convertir");
+            $return = true;
+        }
     } else {
         spip_log("Document refusé à la conversion","doc2img");
-        return false;
+        $return = false;
     }
+    
+    return $return;
 }
 
 /*! \brief fonction autonome convertissant un document donné en paramétre
@@ -66,7 +78,8 @@ function convertir_document($id_document) {
     // on précise le repertoire IMG/
     $document['source_url'] = _DIR_IMG.$document['source_url'];
 
-    //decompose nom.extension
+
+    //decompose nom.extension
     $file_array = explode(".",$document['fullname']);
     $document['extension'] = $file_array[1];
     $document['name'] = $file_array[0];
@@ -80,16 +93,21 @@ function convertir_document($id_document) {
     spip_log('cible_url : '.$racine_site.'/'.$document['cible_url'] ,'doc2img');
     
     //vérifie si le document a été converti
-    $exist = sql_getfetsel('id_doc2img','spip_doc2img','id_document='.$id_document);
-    if (!$exist) {
-        include_spip('base/doc2img_install');
-        rm($racine_site.'/'.$document['cible_url']);
-        mkdir($racine_site.'/'.$document['cible_url']);
-    }
-            
+    $pages = sql_countsel('spip_doc2img','id_document='.$id_document,'id_doc2img');
+    spip_log('pages :'.$pages,'doc2img');
+
+#    //nettoie et créé le repertoire cible
+#    if ($pages > 0) {
+#        include_spip('base/doc2img_install');
+#        rm($racine_site.'/'.$document['cible_url']);
+#    }
+    
     //si le repertoire existe on ne genere pas les images, url absolue
     //if (@mkdir($racine_site.'/'.$document['cible_url'])!==false) {
-    if (!$exist) {
+    if (!$pages) {
+        //creation du repertoire cible
+        @mkdir($racine_site.'/'.$document['cible_url']);
+        
         //charge le document dans imagick
         spip_log('charge le document','doc2img');
         spip_log('url_source'.$racine_site.'/'.$document['source_url'].'/'.$document['fullname'],'doc2img');
