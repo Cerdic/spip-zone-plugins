@@ -14,11 +14,11 @@
 		<label>Choisissez la ou les rubriques &agrave; utiliser :</label>
 		<select name="rubriques_gis[]" multiple="multiple" size="9">
 			<option value=""[ (#GET{wichrub}|?{'',' '})selected="selected"]>Aucune</option>
-			<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+			<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}{tout}>
 			<option value="#ID_RUBRIQUE"[ (#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>
 			Secteur #ID_RUBRIQUE : #TITRE
 			</option>
-			<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+			<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}{tout}>
 			<option value="#ID_RUBRIQUE"[ (#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>
 			&rarr; Rubrique #ID_RUBRIQUE : #TITRE
 			</option>
