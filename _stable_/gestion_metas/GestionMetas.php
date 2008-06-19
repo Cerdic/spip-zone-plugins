@@ -21,9 +21,7 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 
-include_spip('public/interfaces');
-global $table_des_traitements;
-$table_des_traitements["TEXTE"][0] = 'propre(GestionMetas_mots_strong(%s))';
+
 
 function GestionMetas_affiche_gauche($flux) {
 	if ((_request('exec') != 'naviguer') && (_request('exec') != 'articles') && (_request('exec') != 'breves_voir')) return;
