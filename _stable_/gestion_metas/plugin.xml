@@ -6,7 +6,7 @@
 	<auteur>[Olivier G.->mailto:o.gendrin@novactive.com] pour [Novactive->http://www.novactive.fr/]</auteur>
 	<description>Ce plugin permet de remplir la table qui lie les m&#233;tadonn&#233;es et les articles ou les rubriques.
 	- il permet aussi de modifier les url propres de chacun de ces objets
-	- il permet aussi de mettre en évidence des mots choisi comme importants : tous les mots écrits dans ?exec=cfg&cfg=motsimportantssont modifier par entour&eacute; par la balise html strong</description>
+	- il permet aussi de mettre en évidence des mots choisi comme importants : tous les mots écrits dans [->./?exec=cfg&amp;cfg=motsimportantssont] modifier par entour&eacute; par la balise html strong</description>
 	<fonctions>GestionMetas.php</fonctions>
 	<pipeline>
 		<nom>affiche_gauche</nom>
