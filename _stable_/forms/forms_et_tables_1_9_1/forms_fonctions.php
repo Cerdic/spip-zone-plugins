@@ -269,7 +269,7 @@
 			include_spip('inc/layer'); // definit browser_barre
 		if ($id=='') {$id="textarea_$num_textarea";$num_textarea++;}
 	
-		$texte = entites_html($texte);
+		//$texte = entites_html($texte);
 		if (($active!='oui') || (!$GLOBALS['browser_barre']))
 			return "<textarea name='$name' rows='$rows' class='$class' cols='$cols' id='$id'>$texte</textarea>";
 	
