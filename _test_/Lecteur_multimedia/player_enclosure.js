@@ -15,7 +15,7 @@ var playa='';
 
 live_track = 'stop' ; 
 live_video = 'stop' ; 
-isVideoPlaying = 'false' ; 
+isVideoPlaying = false ; 
 videoPause = false ;
 isPlaying = false ;
      
