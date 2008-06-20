@@ -114,12 +114,16 @@ function spiplistes_get_icone_auteur ($statut) {
 }
 
 // CP-20080323
-function spiplistes_form_bouton_valider ($name, $value, $reset = false, $return = false) {
+function spiplistes_form_bouton_valider ($name, $value = "", $reset = false) {
 	global $spip_lang_right;
-	static $reset_value;
-	if(!$reset_value) { 
-		$reset_value = _T('spiplises:retablir');
+	static $submit_value, $reset_value;
+	if(!$submit_value) { 
+		$submit_value = _T('bouton_valider');
 	}
+	if(!$reset_value) { 
+		$reset_value = _T('spiplistes:retablir');
+	}
+	$value = (!empty($value) ? $value : $submit_value);
 	$reset = 
 		$reset
 		? "<input type='reset' name='reset_".$name."' value=\"".$reset_value."\" class='fondo' />\n"
@@ -131,8 +135,7 @@ function spiplistes_form_bouton_valider ($name, $value, $reset = false, $return 
 		. "<input type='submit' id='$name' name='$name' value='".$value."' class='fondo' />\n"
 		. "</div>\n"
 		;
-	if($return) return($result);
-	else echo($result);
+	return($result);
 }
 
 // CP-20080323

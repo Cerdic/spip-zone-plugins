@@ -231,7 +231,7 @@ function exec_spiplistes_maintenance () {
 		$page_result .= spiplistes_form_message(_T('spiplistes:Casier_vide'), true);
 	}
 	$page_result .= ""
-		. spiplistes_form_bouton_valider ('btn_supprimer_courriers', _T('bouton_valider'), false, true)
+		. spiplistes_form_bouton_valider ('btn_supprimer_courriers')
 		. spiplistes_form_fin(true)
 		. fin_cadre_trait_couleur(true)
 		;
@@ -262,7 +262,7 @@ function exec_spiplistes_maintenance () {
 		}
 		$page_result .= ""
 			. spiplistes_form_fieldset_fin(true)
-			. spiplistes_form_bouton_valider('btn_reset_listes', _T('bouton_valider'), false, true)
+			. spiplistes_form_bouton_valider('btn_reset_listes')
 			. spiplistes_form_fin(true)
 			;
 	}
@@ -293,7 +293,7 @@ function exec_spiplistes_maintenance () {
 		}
 		$page_result .= ""
 			. spiplistes_form_fieldset_fin(true)
-			. spiplistes_form_bouton_valider ('btn_supprimer_listes', _T('bouton_valider'), false, true)
+			. spiplistes_form_bouton_valider ('btn_supprimer_listes')
 			. spiplistes_form_fin(true)
 			;
 	}
@@ -320,7 +320,7 @@ function exec_spiplistes_maintenance () {
 				, true) 
 			. spiplistes_form_input_checkbox ('confirmer_supprimer_formats', 'oui', _T('spiplistes:confirmer_supprimer_formats'), false, true)
 			. spiplistes_form_fieldset_fin(true)
-			. spiplistes_form_bouton_valider('btn_supprimer_formats', _T('bouton_valider'), false, true)
+			. spiplistes_form_bouton_valider('btn_supprimer_formats')
 			. spiplistes_form_fin(true)
 			;
 	} else {

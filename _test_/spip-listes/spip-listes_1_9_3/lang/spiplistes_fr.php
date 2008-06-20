@@ -18,7 +18,7 @@ Cette liste d'abonn&eacute;s doit &ecirc;tre au format texte seul, une ligne
 L'adresse email doit &ecirc;tre unique, ainsi que le login. Si cette adresse 
    email ou se login existe dans la base du site, la ligne sera rejet&eacute;e.<br />
 Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent 
-   &ecirc;tre ignor&eacute;s (vous pouvez importer des listes issues des anciennces versions de SPIP-Listes)."
+   &ecirc;tre ignor&eacute;s (vous pouvez importer des listes issues des anciennes versions de SPIP-Listes)."
 , 'aide_en_ligne' => "Aide en ligne"
 
 //A
@@ -301,6 +301,8 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'log_console_syslog_desc' => "Vous &ecirc;tes sur un r&eacute;seau local (@IP_LAN@). Si besoin, vous pouvez activer la console sur syslog au lieu des journaux SPIP (conseill&eacute; sous unix)."
 , 'log_console_syslog_texte' => "Activer les journaux syst&egrave;mes (renvoi sur syslog)"
 , 'log_console_syslog' => "Console syslog"
+, 'log_voir_les_journaux' => "Voir les journaux SPIPLISTES"
+
 
 //M
 , 'mail_format' => 'Vous &ecirc;tes abonn&eacute; &agrave; la lettre d\'information du site @nom_site_spip@ en format',
@@ -341,13 +343,13 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'mode_simulation' => "Mode simulation",
 'mode_simulation_info' => "Le mode simulation est activ&eacute;. La m&eacute;leuse fait semblant d'envoyer le courrier. 
 	En r&eacute;alit&eacute;, aucun courrier n'est exp&eacute;di&eacute;."
-, 'Mode_suspendre_trieuse' => "Suspendre le traitement des envois des listes de diffusion",
+, 'mode_suspendre_trieuse' => "Suspendre le traitement des envois des listes de diffusion",
 'Suspendre_le_tri_des_listes' => "Cette option vous permet - en cas d'engorgement - de suspendre le traitement des 
 	listes de diffusion programm&eacute;es et de red&eacute;finir les param&egrave;tres 
 	d'envoi. D&eacute;sactivez ensuite cette option pour reprendre le traitement des 
 	listes de diffusion programm&eacute;es.",
-'Mode_suspendre_meleuse' => "Suspendre l'envoi des courriers",
-'Suspendre_lenvoi_des_courriers' => "Cette option vous permet - en cas d'engorgement 
+'mode_suspendre_meleuse' => "Suspendre l'envoi des courriers",
+'suspendre_lenvoi_des_courriers' => "Cette option vous permet - en cas d'engorgement 
 	- d'annuler l'envoi des courriers. D&eacute;sactivez ensuite cette option pour 
 	reprendre les exp&eacute;ditions en cours. ",
 'meleuse_suspendue' => "Meleuse suspendue",
@@ -485,7 +487,6 @@ liste."
 'vous_pouvez_egalement' => 'Vous pouvez &eacute;galement',
 'vous_inscrire_auteur' => 'vous inscrire en tant qu\'auteur',
 'voir_discussion' => 'Voir la discussion',
-'Voir_les_journaux_SPIPLISTES' => "Voir les journaux SPIPLISTES",
 'masquer_les_journaux_SPIPLISTES' => "Masquer les journaux SPIPLISTES"
 , 'Vides' => "Vides",
 'Valider_abonnement' => "Valider cet abonnement"

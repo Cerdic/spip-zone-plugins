@@ -238,7 +238,7 @@ function exec_spiplistes_config () {
 	}
 	$page_result .= ""
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_complement-24.png", true, "", _T('spiplistes:Complement_des_courriers'))
-		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
+		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
 		//
 		// personnaliser le courrier (reprend les données de *_auteur)
 		. debut_cadre_relief("", true, "", _T('spiplistes:personnaliser_le_courrier'))
@@ -293,7 +293,7 @@ function exec_spiplistes_config () {
 		//
 		// bouton de validation
 		. "<div style='text-align:right;'><input type='submit' name='btn_complement_courrier' class='fondo' value='"._T('bouton_valider')."' /></div>\n"
-		. "</form>\n"
+		. spiplistes_form_fin(true)
 		. fin_cadre_trait_couleur(true)
 		;
 
@@ -301,7 +301,7 @@ function exec_spiplistes_config () {
 	// Boite parametrage envoi du courrier
 	$page_result .= ""
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_envoyer-24.png", true, "", _T('spiplistes:Envoi_des_courriers'))
-		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
+		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
 		//
 		// adresse email de retour (reply-to)
 		. debut_cadre_relief("", true, "", _T('spiplistes:adresse_envoi'))
@@ -364,33 +364,29 @@ function exec_spiplistes_config () {
 		//
 	// options simulation des envois, suspendre le tri, la meleuse
 	$page_result .= ""
-		. debut_cadre_relief("", true, "", _T('spiplistes:Mode_suspendre_trieuse'))
-   	. "<input type='checkbox' name='opt_suspendre_trieuse' value='oui' id='opt_suspendre_trieuse' "
-			. ((spiplistes_pref_lire('opt_suspendre_trieuse') == 'oui') ? "checked='checked'" : "") . " />\n"
-   	. "<label class='verdana2' for='opt_suspendre_trieuse'>"._T('spiplistes:Suspendre_le_tri_des_listes')."</label>\n"
+		. debut_cadre_relief("", true, "", _T('spiplistes:mode_suspendre_trieuse'))
+		. spiplistes_form_input_checkbox (
+			'opt_suspendre_trieuse'
+			, "oui", _T('spiplistes:Suspendre_le_tri_des_listes')
+			, (spiplistes_pref_lire('opt_suspendre_trieuse') == "oui"), true, false)
 		. fin_cadre_relief(true)
 		//
-		. debut_cadre_relief("", true, "", _T('spiplistes:Mode_suspendre_meleuse'))
-   	. "<input type='checkbox' name='opt_suspendre_meleuse' value='oui' id='opt_suspendre_meleuse' "
-			. ((spiplistes_pref_lire('opt_suspendre_meleuse') == 'oui') ? "checked='checked'" : "") . " />\n"
-   	. "<label class='verdana2' for='opt_suspendre_meleuse'>"._T('spiplistes:Suspendre_lenvoi_des_courriers')."</label>\n"
+		. debut_cadre_relief("", true, "", _T('spiplistes:mode_suspendre_meleuse'))
+		. spiplistes_form_input_checkbox (
+			'opt_suspendre_meleuse'
+			, "oui", _T('spiplistes:suspendre_lenvoi_des_courriers')
+			, (spiplistes_pref_lire('opt_suspendre_meleuse') == "oui"), true, false)
 		. fin_cadre_relief(true)
 		//
 		. debut_cadre_relief("", true, "", _T('spiplistes:mode_simulation'))
-   	. "<input type='checkbox' name='opt_simuler_envoi' value='oui' id='opt_simuler_envoi' "
-			. ((spiplistes_pref_lire('opt_simuler_envoi') == "oui") ? "checked='checked'" : "") . " />\n"
-   	. "<label class='verdana2' for='opt_simuler_envoi'>"._T('spiplistes:simuler_les_envois')."</label>\n"
+		. spiplistes_form_input_checkbox (
+			'opt_simuler_envoi'
+			, "oui", _T('spiplistes:simuler_les_envois')
+			, (spiplistes_pref_lire('opt_simuler_envoi') == "oui"), true, false)
 		. fin_cadre_relief(true)
 		//
-		// Boutons de reinit/reset/validation
-		. "<div style='text-align:right;'>"
-		/* CP: bouton à mettre en place après modif base/spiplistes_init.php (pas encore installé, voir SPIP-Listes-V)
-		. "<label for='p_reinit' style='display:none;'>"._T('spiplistes:reinitialiser')."</label>\n"
-		. "<input type='submit' name='param_reinitialise' value='"._T('spiplistes:reinitialiser')."' id='p_reinit' class='fondo' />&nbsp;"
-		*/
-		. "<input type='reset' name='param_reset' value='"._T('spiplistes:Retablir')."' class='fondo' id='p_reset' class='fondo' style='display:inline' />&nbsp;"
-		. "<input type='submit' name='btn_param_valider' class='fondo' value='"._T('bouton_valider')."' /></div>\n"
-		. "</form>\n"
+		. spiplistes_form_bouton_valider("btn_param_valider", _T('bouton_valider'), true)
+		. spiplistes_form_fin(true)
 		. fin_cadre_trait_couleur(true)
 		;
 
@@ -398,30 +394,29 @@ function exec_spiplistes_config () {
 	// La console
 		$page_result .= ""
 			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."console-24.gif", true, "", _T('spiplistes:log_console'))
-			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
+			. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
 			. debut_cadre_relief("", true, "", _T('spiplistes:log_details_console'))
-			. spiplistes_form_input_checkbox ('opt_log_voir_destinataire'
+			. spiplistes_form_input_checkbox (
+				'opt_log_voir_destinataire'
 				, "oui", _T('spiplistes:log_voir_destinataire')
-				, ($opt_log_voir_destinataire == "oui"), true, false)
+				, (spiplistes_pref_lire('opt_log_voir_destinataire') == "oui"), true, false)
 			. fin_cadre_relief(true)
 			;
 		// Paramétrer la console de debug/logs si sur LAN
 		if(__server_in_private_ip_adresses()) {
 			$page_result .= ""
-				//
-				// ajout du renvoi de tete
 				. debut_cadre_relief("", true, "", _T('spiplistes:log_console_syslog'))
 				. "<p class='verdana2'>"._T('spiplistes:log_console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR']))."</p>\n"
-				. "<input type='checkbox' name='opt_console_syslog' value='oui' id='opt_console_syslog' "
-					. ((spiplistes_pref_lire('opt_console_syslog') == 'oui') ? "checked='checked'" : "")
-					. " />\n"
-				. "<label class='verdana2' for='opt_console_syslog'>"._T('spiplistes:log_console_syslog_texte')."</label>\n"
-				. fin_cadre_relief(true)
+				. spiplistes_form_input_checkbox (
+					'opt_console_syslog'
+					, "oui", _T('spiplistes:log_console_syslog_texte')
+					, (spiplistes_pref_lire('opt_console_syslog') == "oui"), true, false)
+					. fin_cadre_relief(true)
 				;
 		}
 		$page_result .= ""
-			. spiplistes_form_bouton_valider("btn_console_syslog", _T('bouton_valider'), false, true)
-			. "</form>\n"
+			. spiplistes_form_bouton_valider("btn_console_syslog")
+			. spiplistes_form_fin(true)
 			;
 		// voir les journaux SPIP
 		if(!($ii = spiplistes_pref_lire('opt_console_syslog')) || ($ii == 'non')) {
@@ -429,7 +424,7 @@ function exec_spiplistes_config () {
 			// lien sur logs ou affiche logs
 			$page_result .= ""
 				. "<a id='view-spiplistes-log' name='view-spiplistes-log' href='#view-spiplistes-log' class='verdana2'>"
-					. _T('spiplistes:Voir_les_journaux_SPIPLISTES')
+					. _T('spiplistes:log_voir_les_journaux')
 					. "</a>\n"
 				. "<div id='view-spiplistes-log-box'></div>\n"
 				;

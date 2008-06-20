@@ -208,7 +208,7 @@ function exec_spiplistes_liste_gerer () {
 						. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE), true)
 						. "<p style='text-align:center;font-weight:bold;' class='verdana2'>". _T('spiplistes:Confirmez_envoi_liste')	. "</p>"
 						. "<input type='hidden' name='id_liste' value='$id_liste' />"
-						. spiplistes_form_bouton_valider('btn_confirmer_envoi_maintenant', _T('bouton_valider'), false, true)
+						. spiplistes_form_bouton_valider('btn_confirmer_envoi_maintenant')
 						. spiplistes_form_fin(true)
 						. fin_cadre_couleur(true)
 						;
@@ -558,7 +558,7 @@ function exec_spiplistes_liste_gerer () {
 		. "</div>\n"
 		.	(
 				($flag_editable)
-				? spiplistes_form_bouton_valider('btn_modifier_diffusion', _T('bouton_valider'), false, true)
+				? spiplistes_form_bouton_valider('btn_modifier_diffusion')
 					. spiplistes_form_fin(true)
 				: ""
 			)
@@ -578,7 +578,7 @@ function exec_spiplistes_liste_gerer () {
 				. ""._T('spiplistes:adresse')."</p>\n"
 				. "<div style='text-align:center'>\n"
 				. "<input type='text' name='email_envoi' value=\"".$email_envoi."\" size='40' class='fondl' /></div>\n"
-				. spiplistes_form_bouton_valider('btn_modifier_replyto', _T('bouton_valider'), false, true)
+				. spiplistes_form_bouton_valider('btn_modifier_replyto')
 			: "</p><p style='font-weight:bold;text-align:center;'>$email_envoi</p>\n"
 			)
 		. spiplistes_form_fin(true)
@@ -750,7 +750,7 @@ function exec_spiplistes_liste_gerer () {
 				)
 			// bouton de validation
 			. (!empty($patron) 
-				? spiplistes_form_bouton_valider('btn_modifier_courrier_auto', _T('bouton_valider'), true, true)
+				? spiplistes_form_bouton_valider('btn_modifier_courrier_auto', _T('bouton_valider'), true)
 				: "")
 			. "</td></tr>"
 			;

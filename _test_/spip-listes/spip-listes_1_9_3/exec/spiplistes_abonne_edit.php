@@ -223,7 +223,7 @@ function exec_spiplistes_abonne_edit () {
 				, (($format_abo == 'non') && ($modif_abo != 'suspend')), true, false)
 			. fin_cadre_relief(true)
 			. "<input type='hidden' name='id_auteur' value=$id_auteur >\n"
-			. spiplistes_form_bouton_valider('btn_confirmer_format', _T('bouton_valider'), false, true)
+			. spiplistes_form_bouton_valider('btn_confirmer_format')
 			. spiplistes_form_fin(true)
 			. fin_cadre_relief(true)
 			;

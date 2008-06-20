@@ -238,7 +238,7 @@ function exec_spiplistes_import_export(){
 			. spiplistes_fieldset_separateur($separateur)
 			//
 			. fin_cadre_relief(true)
-			. spiplistes_form_bouton_valider('btn_valider_import', _T('bouton_valider'), false, true)
+			. spiplistes_form_bouton_valider('btn_valider_import')
 			. spiplistes_form_fin(true)
 			;
 	} // end else
@@ -283,7 +283,7 @@ function exec_spiplistes_import_export(){
 			//
 			. spiplistes_fieldset_separateur($separateur)
 			//
-			. spiplistes_form_bouton_valider('btn_valider_export', _T('bouton_valider'), false, true)
+			. spiplistes_form_bouton_valider('btn_valider_export')
 			. spiplistes_form_fin(true)
 			. fin_cadre_trait_couleur(true)
 			;
