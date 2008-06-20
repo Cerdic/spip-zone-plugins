@@ -91,7 +91,8 @@ function spiplistes_destiner_envoi ($id_courrier, $id_liste, $flag_editable
 							)
 						: _T('spiplistes:sans_abonne')
 						;
-					$masque .= "<option value='" . $row['id_liste'] . "' $checked>" 
+					$option_disabled = ($row['nb_abos']  > 0) ? "" : "disabled='disabled'";
+					$masque .= "<option value='" . $row['id_liste'] . "' $checked $option_disabled>" 
 						. $row['titre'] . " (" . $nb_abos . ")</option>\n";
 				}
 				$masque .= ""
