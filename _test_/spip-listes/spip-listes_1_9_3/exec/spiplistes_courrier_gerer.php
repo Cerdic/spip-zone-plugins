@@ -78,20 +78,21 @@ function exec_spiplistes_courrier_gerer () {
 	$page_result = $message_erreur = $str_destinataire =
 		$boite_confirme_envoi = "";
 
+	$flag_admin = ($connect_statut == "0minirezo") && $connect_toutes_rubriques;
+	$flag_moderateur = count($listes_moderees = spiplistes_mod_listes_id_auteur($connect_id_auteur));
+	$flag_createur = ($id_courrier && ($connect_id_auteur == spiplistes_courrier_id_auteur_get($id_courrier)));
+
 	// l'edition du courrier est reservee...
-	$flag_editable = (
-		($connect_statut == "0minirezo") 
-		&& (
-			// aux super-admins 
-			$connect_toutes_rubriques 
-			// ou aux admins createur du courrier
-			|| (
-				$id_courrier
-				&& ($connect_id_auteur == spiplistes_courrier_id_auteur_get($id_courrier)))
-			)
+	$flag_autorise = (
+		// aux super-admins 
+		$flag_admin
+		// ou a un moderateur
+		|| $flag_moderateur
+		// ou au createur du courrier
+		|| $flag_createur
 	);
 
-	if($flag_editable) {
+	if($flag_autorise) {
 		// Modification de courrier
 	
 		if($btn_dupliquer_courrier > 0) {
@@ -203,7 +204,7 @@ function exec_spiplistes_courrier_gerer () {
 				$$key = $row[$key];
 			}
 		} // end if($id_courrier > 0)
-	}  // end if($flag_editable)
+	}  // end if($flag_autorise)
 
 
 	//////////////////////////////////////////////////////
@@ -285,7 +286,11 @@ function exec_spiplistes_courrier_gerer () {
 			// construit la boite de selection destinataire
 			$boite_selection_destinataire = 
 				(($statut==_SPIPLISTES_STATUT_REDAC) || ($statut==_SPIPLISTES_STATUT_READY))
-				? spiplistes_destiner_envoi($id_courrier, $id_liste, true, $statut, $type, 'btn_changer_destination', $email_test)
+				? spiplistes_destiner_envoi($id_courrier, $id_liste
+						, $flag_admin
+						, $flag_moderateur
+						, $listes_moderees
+						, $statut, $type, 'btn_changer_destination', $email_test)
 				: ""
 				;
 		}
@@ -298,11 +303,11 @@ function exec_spiplistes_courrier_gerer () {
 		$gros_bouton_supprimer = 
 		$gros_bouton_arreter_envoi = ""
 		;
-	$flag_editable = (
+	$flag_autorise = (
 		(($connect_statut == "0minirezo") && ($connect_toutes_rubriques)) 
 		|| ($connect_id_auteur == $id_auteur));
 	
-	if($flag_editable) {
+	if($flag_autorise) {
 		
 		if(($statut == _SPIPLISTES_STATUT_REDAC) || ($statut == _SPIPLISTES_STATUT_READY)) {
 		// Le courrier peut-etre modifie si en preparation 
@@ -427,7 +432,7 @@ function exec_spiplistes_courrier_gerer () {
 			case _SPIPLISTES_STATUT_REDAC:
 				$str_statut_courrier = _T('spiplistes:message_en_cours')."<br />"
 				.	(
-					($flag_editable)
+					($flag_autorise)
 					? _T('spiplistes:modif_envoi')
 					: ""
 					)

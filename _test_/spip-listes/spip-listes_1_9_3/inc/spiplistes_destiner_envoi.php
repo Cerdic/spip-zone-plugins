@@ -11,7 +11,7 @@ include_spip('inc/spiplistes_api');
 /*
 	Formulaire de sélection destinataire
 
-	$flag_editable: si true, possibilité de modifier le destinataire
+	$flag_admin: si true, possibilité de modifier le destinataire
 	sinon, ne fait qu'afficher l'état
 	
 	Renvoie :
@@ -22,7 +22,11 @@ include_spip('inc/spiplistes_api');
 	$email_test: adresse email de test
 	$id_liste: id de la liste choisie
 */
-function spiplistes_destiner_envoi ($id_courrier, $id_liste, $flag_editable
+function spiplistes_destiner_envoi (
+	$id_courrier, $id_liste
+	, $flag_admin
+	, $flag_moderateur
+	, $listes_moderees
 	, $statut, $type, $nom_bouton_validation, $email_test = "") {
 
 	include_spip('inc/presentation');
@@ -60,7 +64,10 @@ function spiplistes_destiner_envoi ($id_courrier, $id_liste, $flag_editable
 		.  "</strong>"
 		;
 			
-	if($flag_editable && (($statut == _SPIPLISTES_STATUT_REDAC) || ($statut == _SPIPLISTES_STATUT_READY))) {
+	if(
+		($flag_admin || $flag_moderateur)
+		&& (($statut == _SPIPLISTES_STATUT_REDAC) || ($statut == _SPIPLISTES_STATUT_READY))
+	) {
 
 			$adresse_test = $GLOBALS['auteur_session']['email'];
 			$listes_abos = spiplistes_listes_lister_abos();
@@ -81,19 +88,23 @@ function spiplistes_destiner_envoi ($id_courrier, $id_liste, $flag_editable
 					. "<select class='verdana2' name='id_liste' onchange='document.getElementById(\"destlist\").checked=true;' >\n"
 					;
 				foreach($listes_abos as $row) {
-					$checked = ($id_liste == $row['id_liste']) ? "checked='checked'" : "";
-					$nb_abos = 
+					if(
 						($row['nb_abos']  > 0)
-						? spiplistes_singulier_pluriel_str_get(
+						&& (
+								$flag_admin
+								|| ($flag_moderateur && in_array($row['id_liste'], $listes_moderees))
+							)
+					) {
+						$checked = ($id_liste == $row['id_liste']) ? "checked='checked'" : "";
+						$nb_abos = spiplistes_singulier_pluriel_str_get(
 							$row['nb_abos']
 							, _T('spiplistes:nb_abonnes_sing')
 							, _T('spiplistes:nb_abonnes_plur')
 							)
-						: _T('spiplistes:sans_abonne')
-						;
-					$option_disabled = ($row['nb_abos']  > 0) ? "" : "disabled='disabled'";
-					$masque .= "<option value='" . $row['id_liste'] . "' $checked $option_disabled>" 
-						. $row['titre'] . " (" . $nb_abos . ")</option>\n";
+							;
+						$masque .= "<option value='" . $row['id_liste'] . "' $checked >" 
+							. $row['titre'] . " (" . $nb_abos . ")</option>\n";
+					}
 				}
 				$masque .= ""
 					. "</select>\n"

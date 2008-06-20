@@ -151,8 +151,12 @@ function exec_spiplistes_courriers_casier () {
 		) as $key) {
 		$$key = intval($$key);
 	}
-	
-	$flag_modifiable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur));
+
+	$flag_admin = ($connect_statut == "0minirezo") && $connect_toutes_rubriques;
+	$flag_moderateur = count($listes_moderees = spiplistes_mod_listes_id_auteur($connect_id_auteur));
+	$flag_createur = ($id_courrier && ($connect_id_auteur == spiplistes_courrier_id_auteur_get($id_courrier)));
+
+	$flag_modifiable = ($flag_admin || $flag_moderateur || $flag_createur);
 
 	// confirmer l'envoi d'un courrier
 	if($btn_confirmer_envoi 
