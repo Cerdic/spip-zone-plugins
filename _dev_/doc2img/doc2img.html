@@ -1,10 +1,8 @@
 #CACHE{0}
 <B_listed2c>
     Liste des documents
-<BOUCLE_listed2c(DOC2IMG) > 
-    [(#ID_DOCUMENT|unique|?{' ',''})
-        <a href=#URL_PAGE{doc2img,id_document=#ID_DOCUMENT}> #ID_DOCUMENT </a>
-    ]
+<BOUCLE_listed2c(DOC2IMG) {fusion id_document} > 
+    <a href=#URL_PAGE{doc2img,id_document=#ID_DOCUMENT}> #ID_DOCUMENT </a>
 </BOUCLE_listed2c>
 
 <B_d2c>
