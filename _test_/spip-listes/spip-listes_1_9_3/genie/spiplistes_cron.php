@@ -228,7 +228,7 @@ spiplistes_log($log_msg."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBU
 					. ",".sql_quote($texte)
 					. ")"
 			);
-spiplistes_log($log_msg."insert_id : ".$id_courrier, _SPIPLISTES_LOG_DEBUG);
+
 			/////////////////////////////
 			// place les etiquettes en ajoutant 
 			// les abonnés dans la queue (spip_auteurs_courriers)
@@ -244,7 +244,9 @@ spiplistes_log($log_msg."insert_id : ".$id_courrier, _SPIPLISTES_LOG_DEBUG);
 		$n = 
 			spiplistes_courriers_en_queue_compter("etat=".sql_quote(""))
 	){
+
 spiplistes_log($log_msg."$n JOBS, appel meleuse", _SPIPLISTES_LOG_DEBUG);
+
 		include_spip('inc/spiplistes_meleuse');
 		return(spiplistes_meleuse());
 	}

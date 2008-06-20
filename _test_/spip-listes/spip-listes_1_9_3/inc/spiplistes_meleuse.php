@@ -290,8 +290,7 @@ spiplistes_log("MEL: premiere etiquette en erreur. id_courier = 0. Supprimer cet
 		
 				$limit = intval($GLOBALS['meta']['spiplistes_lots']); // nombre de messages envoyes par boucles.	
 				
-spiplistes_log("MEL: titre: $titre, total_abos: $total_abonnes, limit: $limit"
-	, _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("MEL: total_abos: $total_abonnes, limit: $limit", _SPIPLISTES_LOG_DEBUG);
 
 				if($is_a_test) {
 					$sql_adresses_dest = sql_select('id_auteur,nom,email', "spip_auteurs"
