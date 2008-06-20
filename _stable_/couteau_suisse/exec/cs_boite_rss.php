@@ -60,7 +60,7 @@ $force = false;
 			 $p .= "<li style='padding-top:0.6em;'>$t</li>";
 		}
 	} else {
-		include_spip('cout_fonctions');
+		include(_DIR_PLUGIN_COUTEAU_SUISSE_.'cout_fonctions');
 		$p = '<span style="color: red;">'._T('couteauprive:erreur:probleme', array('pb'=>cs_lien(_CS_RSS_SOURCE,_T('couteauprive:erreur:distant')))).'</span>';
 	}
 	include_spip('inc/filtres');

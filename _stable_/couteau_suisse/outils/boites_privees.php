@@ -23,7 +23,7 @@ function boites_privees_affiche_droite($flux) {
 			// compatibilite SPIP 1.92
 			$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
 			// pour cs_lien()
-			include_spip('cout_fonctions');
+			include(_DIR_PLUGIN_COUTEAU_SUISSE_.'cout_fonctions');
 			$flux['data'] .= debut_cadre_relief(find_in_path('img/couteau-24.gif'),true,'',_T('icone_statistiques_visites'))
 				. "<p><b>"._T('couteau:derniers_connectes')."</b></p>"
 				. cs_derniers_connectes($fetch)
