@@ -397,7 +397,7 @@ function exec_spiplistes_config () {
 	//////////////////////////////////////////////////////
 	// La console
 		$page_result .= ""
-			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."console-24.gif", true, "", _T('spiplistes:Console'))
+			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."console-24.gif", true, "", _T('spiplistes:log_console'))
 			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
 			. debut_cadre_relief("", true, "", _T('spiplistes:log_details_console'))
 			. spiplistes_form_input_checkbox ('opt_log_voir_destinataire'

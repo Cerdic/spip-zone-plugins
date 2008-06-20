@@ -120,8 +120,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
    du courrier original pr&eacute;sent sur votre site.",
 'Complement_tampon_editeur' => "Ajouter le tampon Editeur",
 'Complement_tampon_editeur_desc' => "Cette option vous permet de rajouter le tampon de l'&eacute;diteur en fin de courrier. ",
-'Complement_tampon_editeur_label' => "Ajouter le tampon Editeur en fin de courrier",
-'Console' => "Console"
+'Complement_tampon_editeur_label' => "Ajouter le tampon Editeur en fin de courrier"
 , 'Casier_a_courriers' => "Casier &agrave; courriers"
 , 'Courriers_en_cours_de_redaction' => 'Courriers en cours de r&eacute;daction',
 'Courriers_prets_a_etre_envoye' => "Courriers pr&ecirc;ts &agrave; &ecirc;tre envoy&eacute;s"
@@ -296,6 +295,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Liste_publique' => "Liste publique",
 'Liste_abandonnee' => "Liste abandonn&eacute;e",
 'Liste_diffusee_le_premier_de_chaque_mois' => "Liste diffus&eacute;e le premier de chaque mois. "
+, 'log_console' => "Console"
 , 'log_details_console' => "D&eacute;tails de la console"
 , 'log_voir_destinataire' => "Lister les adresses email des destinataires dans la console lors de l'envoi."
 , 'log_console_syslog_desc' => "Vous &ecirc;tes sur un r&eacute;seau local (@IP_LAN@). Si besoin, vous pouvez activer la console sur syslog au lieu des journaux SPIP (conseill&eacute; sous unix)."

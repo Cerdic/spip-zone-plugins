@@ -331,10 +331,14 @@ spiplistes_log("MEL: titre: $titre, total_abos: $total_abonnes, limit: $limit"
 				$nb_destinataires = sql_count($sql_adresses_dest);
 spiplistes_log("MEL: nb destinataires: $nb_destinataires", _SPIPLISTES_LOG_DEBUG);
 				if($nb_destinataires > 0) {
-		
+
 					//envoyer le lot d'emails selectionnes (la liasse)
 					while($adresse = sql_fetch($sql_adresses_dest)) {
-						$str_temp = " ";
+
+						if($log_voir_destinataire) {
+							$str_temp = "";
+						}
+
 						$id_auteur = intval($adresse['id_auteur']);
 						$nom_auteur = $adresse['nom'];
 						$email = $adresse['email'];
@@ -346,8 +350,10 @@ spiplistes_log("MEL: nb destinataires: $nb_destinataires", _SPIPLISTES_LOG_DEBUG
 				
 						$format_abo = spiplistes_format_abo_demande($id_auteur);
 							
-						$str_temp .= $nom_auteur."(".$format_abo.") - $email";
 						$total++;
+						if($log_voir_destinataire) {
+							$str_temp .= $nom_auteur."(".$format_abo.") - $email";
+						}
 						unset ($cookie);
 		
 						if(($format_abo=='html') || ($format_abo=='texte')) {
@@ -393,22 +399,30 @@ spiplistes_log("MEL: nb destinataires: $nb_destinataires", _SPIPLISTES_LOG_DEBUG
 
 								// envoie le mail																
 								if(($opt_simuler_envoi == "oui") ? true : $email_a_envoyer[$format_abo]->send()) {
-									$str_temp .= "  [OK]";
 									$nb_emails_envoyes++;
 									$nb_emails[$format_abo]++;
+									if($log_voir_destinataire) {
+										$str_temp .= "  [OK]";
+									}
 								}
 								else {
-									$str_temp .= _T('spiplistes:erreur_mail');
 									$nb_emails_echec++;
+									if($log_voir_destinataire) {
+										$str_temp .= _T('spiplistes:erreur_mail');
+									}
 								}
 							}
 							else {
-								$str_temp .= _T('spiplistes:sans_adresse');
 								$nb_emails_echec++;
+								if($log_voir_destinataire) {
+									$str_temp .= _T('spiplistes:sans_adresse');
+								}
 							}
 						} else {  
 							$nb_emails_non_envoyes++; 
-							$str_temp .= " "._T('spiplistes:msg_abonne_sans_format');
+							if($log_voir_destinataire) {
+								$str_temp .= " "._T('spiplistes:msg_abonne_sans_format');
+							}
 						} /* fin abo*/
 						
 						if($log_voir_destinataire) {
