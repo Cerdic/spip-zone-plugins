@@ -31,7 +31,7 @@ function traiter_formulaires_dynamiques(){
 	static $done = false;
 	if (!$done) {
 		if ($action = _request('action')) {
-			define('_ESPACE_PRIVE', true);
+			define('_ESPACE_PRIVE', !_DIR_RESTREINT);
 			include_spip('base/abstract_sql'); // chargement systematique pour les actions
 			include_spip('inc/autoriser'); // chargement systematique pour les actions
 			include_spip('inc/headers');
@@ -57,7 +57,8 @@ function traiter_formulaires_dynamiques(){
 				redirige_par_entete($url);
 			}
 			if (!headers_sent()
-			AND !ob_get_length())
+			AND !ob_get_length()
+			AND !$action=='redirect')
 				http_status(204); // No Content
 			exit;
 		}
