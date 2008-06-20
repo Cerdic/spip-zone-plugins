@@ -108,6 +108,9 @@
 				
 				$text = join($output);
 
+				if (strlen($regexp_finale))
+					$text = preg_replace($regexp_finale, '\1\2', $text);
+
 				return substr($text, 0, strlen($text) - 1);
 			}
 ?>
