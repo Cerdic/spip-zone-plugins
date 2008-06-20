@@ -157,13 +157,13 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 					$nb_abo = "";
 					if(empty($email_test)) {
 						$nb_abo = 
-							($total_abonnes)
-							? (
-								($total_abonnes > 1)
-								? $total_abonnes._T('spiplistes:nb_abonnes_plur') 
-								: $total_abonnes._T('spiplistes:nb_abonnes_sing')
+							($total_abonnes > 0)
+							? spiplistes_singulier_pluriel_str_get(
+								$total_abonnes
+								, _T('spiplistes:nb_destinataire_sing')
+								, _T('spiplistes:nb_destinataire_plur')
 								)
-							: 0
+							: _T('spiplistes:aucun_destinataire')
 							;
 					}
 					else {

@@ -360,7 +360,9 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'nb_abonnes_sing' => " abonn&eacute;"
 , 'nb_abonnes_plur' => " abonn&eacute;s"
 , 'nb_moderateur_sing' => " mod&eacute;rateur"
-, 'nb_moderateurs_plur' => " mod&eacute;rateurs"
+, 'nb_moderateur_plur' => " mod&eacute;rateurs"
+, 'nb_destinataire_sing' => " destinataire"
+, 'nb_destinataire_plur' => " destinataires"
 , 'nbre_abonnes' => "Nombre d\'abonn&eacute;s : "
 , 'nbre_mods' => "Nombre de mod&eacute;rateurs : "
 , 'nom' => 'Nom d\'utilisateur',
@@ -390,6 +392,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'publies_auto' => "Publi&eacute;s (auto)"
 , 'pas_de_liste' => "Aucune liste de type envoi non programm&eacute;."
 , 'pas_de_format' => "Aucun format de r&eacute;ception d&eacute;fini pour les abonn&eacute;s."
+, 'aucune_liste_dispo' => "Aucune liste disponible."
 , 'aucune_liste_publique' => "Aucune liste de diffusion publique disponible."
 , 'pas_de_liste_en_auto' => "Aucune liste de type envoi programm&eacute; (chrono)."
 , 'Patron_du_tampon' => "Patron du tampon ",
@@ -445,6 +448,7 @@ liste."
 'Sans_abonnement' => "Sans abonnement"
 , 'sans_abonne' => "sans abonn&eacute;"
 , 'sans_moderateur' => "sans mod&eacute;rateur"
+, 'aucun_destinataire' => "aucun destinataire"
 , 'Supprimer_ce_contact' => "Supprimer ce contact",
 'Suppression_de' => "Suppression de"
 , 'suppression_' => "Suppression @objet@"

@@ -763,7 +763,7 @@ function spiplistes_nb_moderateurs_liste_str_get ($nb) {
 			($nb)
 			? spiplistes_singulier_pluriel_str_get(
 				$nb
-				, _T('spiplistes:nb_moderateur_sing'), _T('spiplistes:nb_moderateurs_plur')) 
+				, _T('spiplistes:nb_moderateur_sing'), _T('spiplistes:nb_moderateur_plur')) 
 			: _T('spiplistes:sans_moderateur')
 			)
 		. ")"
@@ -817,6 +817,31 @@ function spiplistes_debut_block_invisible ($id="") {
 		return debut_block_depliable(false,$id);
 	}
 	return(debut_block_invisible($id));
+}
+
+// CP-20080430: renvoie tableau de listes valides avec nb abonnes
+// du style :
+//   array(
+//     array(
+//       $id_liste
+//       , $titre // titre de la liste
+//       , $nb_abos
+//     )
+//   , ...
+//   )
+function spiplistes_listes_lister_abos () {
+	$sql_select = array('l.id_liste', 'l.titre', 'COUNT(a.id_auteur) AS nb_abos');
+	$sql_from = "spip_listes as l LEFT JOIN spip_auteurs_listes AS a ON l.id_liste=a.id_liste";
+	$sql_where = "l.statut=".implode(" OR l.statut=", array_map("sql_quote", explode(";", _SPIPLISTES_LISTES_STATUTS_OK)));
+	$sql_group = 'l.id_liste';
+	if($sql_result = sql_select($sql_select, $sql_from, $sql_where, $sql_group)) {
+		$result = array();
+		while($row = sql_fetch($sql_result)) {
+			$result[] = $row;
+		}
+		return($result);
+	}
+	return(NULL);
 }
 
 //

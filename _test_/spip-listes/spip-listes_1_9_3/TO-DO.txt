@@ -5,7 +5,6 @@
 
 
 TO-DO:
-- dans select de la liste de destination pour un envoi de test d'une liste, ajouter le nombre d'abos à valeur option, ou retirer au visuel les listes sans abos.
 - autoriser le moderateur d'une liste l'import/export dans la liste qu'il maintient
 - autoriser la création d'un courrier à un modérateur (il ne pourra l'envoyer qu'a une adresse de test ou une liste d'abonnés qu'il maintient)
 - ne pas accepter l'import dans une liste qui n'a pas de grand patron (sans grand patron, le courrier de la liste est vide...)

@@ -286,32 +286,6 @@ function spiplistes_listes_liste_abo_ids ($id_liste) {
 	return($ids_abos);
 }
 
-// CP-20080430: renvoie tableau liste des listes
-function spiplistes_listes_lister ($select = "*", $where = "") {
-	if($where) {
-		// spip_mysql_select() join AND par défaut
-		// Il faut un OR !
-		// Construit la requete...
-		if(is_array($where)) {
-			$where = implode(" OR statut=", array_map("sql_quote", $where));
-		} else {
-			$where = sql_quote($where);
-		}
-		$where = "statut=".$where;
-	}
-	if($select
-		&& ($sql_result = sql_select($select, "spip_listes", $where))
-	) {
-		$result = array();
-		while($row = sql_fetch($sql_result)) {
-			$result[] = $row;
-		}
-		return($result);
-	}
-	return(NULL);
-}
-
-
 // retourne nombre d'abonnes a une liste
 // si $preciser, renvoie tableau total et formats
 function spiplistes_listes_nb_abonnes_compter ($id_liste = 0, $preciser = false) {

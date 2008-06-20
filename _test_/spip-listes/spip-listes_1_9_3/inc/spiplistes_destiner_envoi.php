@@ -63,6 +63,8 @@ function spiplistes_destiner_envoi ($id_courrier, $id_liste, $flag_editable
 	if($flag_editable && (($statut == _SPIPLISTES_STATUT_REDAC) || ($statut == _SPIPLISTES_STATUT_READY))) {
 
 			$adresse_test = $GLOBALS['auteur_session']['email'];
+			$listes_abos = spiplistes_listes_lister_abos();
+			$liste_disabled = $listes_abos ? "" : " disabled='disabled'";
 			// propose l'envoi en test
 			$masque = ""
 				. "<ul class='verdana2' style='list-style-type:none;padding-left:0;'>"
@@ -70,21 +72,36 @@ function spiplistes_destiner_envoi ($id_courrier, $id_liste, $flag_editable
 				. "<label for='desttest'>"._T('spiplistes:email_tester')."</label> : "
 				. "<input type='text' name='email_test' value='$adresse_test' class='fondo' size='35' />\n"
 				. "</li>"
-				. "<li> <input type='radio' name='radio_destination' value='id_liste' id='destlist' />"
+				. "<li> <input type='radio' name='radio_destination' value='id_liste' id='destlist' $liste_disabled />"
 				. "<label for='destlist'>"._T('spiplistes:listes_de_diffusion_')."</label> : "
-			// propose les listes
-				. "<select class='verdana2' name='id_liste' onchange='document.getElementById(\"destlist\").checked=true;' >\n"
 				;
-			foreach(
-				spiplistes_listes_lister(
-					array('id_liste', 'titre') 
-					, explode(";", _SPIPLISTES_LISTES_STATUTS_OK)
-				) as $row) {
-				$checked = ($id_liste == $row['id_liste']) ? "checked='checked'" : "";
-				$masque .= "<option value='" . $row['id_liste'] . "' $checked>" . $row['titre'] . "</option>\n";
+			// propose les listes
+			if($listes_abos) {
+				$masque .= ""
+					. "<select class='verdana2' name='id_liste' onchange='document.getElementById(\"destlist\").checked=true;' >\n"
+					;
+				foreach($listes_abos as $row) {
+					$checked = ($id_liste == $row['id_liste']) ? "checked='checked'" : "";
+					$nb_abos = 
+						($row['nb_abos']  > 0)
+						? spiplistes_singulier_pluriel_str_get(
+							$row['nb_abos']
+							, _T('spiplistes:nb_abonnes_sing')
+							, _T('spiplistes:nb_abonnes_plur')
+							)
+						: _T('spiplistes:sans_abonne')
+						;
+					$masque .= "<option value='" . $row['id_liste'] . "' $checked>" 
+						. $row['titre'] . " (" . $nb_abos . ")</option>\n";
+				}
+				$masque .= ""
+					. "</select>\n"
+					;
+			}
+			else {
+				$masque .= _T('spiplistes:aucune_liste_dispo');
 			}
 			$masque .= ""
-				. "</select>\n"
 				. "</li>"
 				. "</ul>"
 				. "<div style='text-align:right;'>"
