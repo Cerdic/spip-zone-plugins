@@ -6,7 +6,7 @@
 	<description>Gestion de lettres d'information bas&#233; sur CleverMail</description>
 	<lien>[Documentation->http://www.clever-age.com/veille/blog/plugin-clevermail-pour-spip-pour-une-gestion-simple-de-lettres-d-informations.html]</lien>
 	<install>base/clevermail_init.php</install>
-	<options>clevermail.php</options>
+	<options>clevermail_options.php</options>
 	<prefix>clevermail</prefix>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
