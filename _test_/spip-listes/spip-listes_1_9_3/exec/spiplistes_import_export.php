@@ -213,11 +213,31 @@ function exec_spiplistes_import_export(){
 			. "<p class='verdana2'>"._T('spiplistes:Selectionnez_une_liste_de_destination')."</p>\n"
 			. "<ul style='padding-left:0;list-style:none;margin:0;' class='verdana2'>\n"
 			;
+
+		$listes_sans_patron = array();
+
+		if(count($listes_array) > 0) {
+			// une liste sans patron ne peut pas contenir d'abonnés.
+			// récupère la liste des listes qui n'ont pas de patron.
+			$sql_result = sql_select('id_liste', 'spip_listes'
+				, array("patron=''"
+					, "(statut=".implode(" OR statut=", array_map("sql_quote", explode(";", _SPIPLISTES_LISTES_STATUTS_OK))).")"
+				)
+			);
+			while($row = sql_fetch($sql_result)) {
+				$listes_sans_patron[] = $row['id_liste'];
+			}
+		}
+		
 		// liste des listes (destination)
 		$ii = 0;
 		foreach($listes_array as $row) {
 			$id_liste = $row['id_liste'] ;
-			if($flag_admin || in_array($id_liste, $listes_moderees)) {
+			if(
+				!in_array($id_liste, $listes_sans_patron)
+				&&
+				($flag_admin || in_array($id_liste, $listes_moderees))
+			) {
 				$titre = couper($row['titre'], 30, '...');
 				$texte = couper($row['texte'], 30, '...');
 				$label = _T('spiplistes:Liste_de_destination').": $titre";
@@ -279,13 +299,18 @@ function exec_spiplistes_import_export(){
 			$id_liste = intval($row['id_liste']);
 			if($flag_admin || in_array($id_liste, $listes_moderees)) {
 				$titre = couper($row['titre'], 30, '...');
-				$page_result .= ""
-					. "<li style='padding:4px;background-color:#".(($ii++ % 2) ? "fff" : "ccc").";'>"
-					. spiplistes_form_input_radio('export_id', $id_liste
-						, "<strong>".$titre."</strong> <em>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</em>"
-						, ($nb_listes==1), true, false)
-					. "</li>\n"
-					;
+				list($nb_abos, $html, $texte) = spiplistes_listes_nb_abonnes_compter($id_liste, true);
+				if($nb_abos > 0) {
+					$page_result .= ""
+						. "<li style='padding:4px;background-color:#".(($ii++ % 2) ? "fff" : "ccc").";'>"
+						. spiplistes_form_input_radio('export_id', $id_liste
+							, "<strong>".$titre."</strong> <em>"
+								. spiplistes_nb_abonnes_liste_str_get($id_liste, $nb_abos, $html, $texte)
+								. "</em>"
+							, ($nb_listes==1), true, false)
+						. "</li>\n"
+						;
+				}
 			}
 		}
 		$page_result .= ""

@@ -734,8 +734,10 @@ function spiplistes_arbo_rubriques_sub ($rubriques_array, $id_parent = 0, $ran =
 }
 
 // Nombre d'abonnes a une liste, chaine html
-function spiplistes_nb_abonnes_liste_str_get ($id_liste) {
-	list($nb_abos, $html, $texte) = spiplistes_listes_nb_abonnes_compter($id_liste, true);
+function spiplistes_nb_abonnes_liste_str_get ($id_liste, $nb_abos = false, $html = false, $texte = false) {
+	if($nb_abos === false) {
+		list($nb_abos, $html, $texte) = spiplistes_listes_nb_abonnes_compter($id_liste, true);
+	}
 	$absents = $nb_abos - ($html + $texte);
 	$result =
 		($nb_abos)

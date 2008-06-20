@@ -27,10 +27,11 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 		}
 		//
 		$new_entries = file($filename);
-		$ii = count($new_entries);
+		$nb_entries = count($new_entries);
 		$new_abonne = $bad_login = $bad_email = 0;
 		$statut = "6forum";
-		for($jj=0; $jj<$ii; $jj++) {
+		
+		for($jj = 0; $jj < $nb_entries; $jj++) {
 			$nouvelle_entree = trim($new_entries[$jj]);
 			if(!empty($nouvelle_entree) && !ereg("^[/#]", $nouvelle_entree)) {
 				list($email, $login, $nom) = explode($separateur, $nouvelle_entree);
@@ -66,7 +67,7 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 						// le format de reception
 						spiplistes_format_abo_modifier($id_auteur, $format_abo);
 
-						// abonne le comptes aux listes
+						// abonne le compte aux listes
 						if(is_array($abos_liste) && count($abos_liste)) {
 							$sql_values = "";
 							foreach($abos_liste as $id_liste) {
