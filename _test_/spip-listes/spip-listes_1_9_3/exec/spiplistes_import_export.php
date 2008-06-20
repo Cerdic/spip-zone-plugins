@@ -217,7 +217,7 @@ function exec_spiplistes_import_export(){
 			. "<form action='" . generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT) . "' method='post' enctype='multipart/form-data'name='importform'>\n"
 			. debut_cadre_relief("", true, "", _T('spiplistes:Liste_de_destination'))
 			. "<p class='verdana2'>"._T('spiplistes:Selectionnez_une_liste_de_destination')."</p>\n"
-			. "<ul style='padding-left:0;list-style:none;margin:0;' class='verdana2'>\n"
+			. "<ul class='liste-listes verdana2'>\n"
 			;
 
 		$listes_sans_patron = array();
@@ -236,7 +236,7 @@ function exec_spiplistes_import_export(){
 		}
 		
 		// liste des listes (destination)
-		$ii = 0;
+		$couleur_ligne = 0;
 		foreach($listes_array as $row) {
 			$id_liste = $row['id_liste'] ;
 			if(
@@ -248,8 +248,9 @@ function exec_spiplistes_import_export(){
 				$texte = couper($row['texte'], 30, '...');
 				$label = _T('spiplistes:Liste_de_destination').": $titre";
 				$checked = ($nb_listes == 1) ? "checked='checked'" : "";
+				$class = ($couleur_ligne++ % 2) ? "class='row-even'" : "";
 				$page_result .= ""
-					. "<li style='padding:4px;background-color:#".(($ii++ % 2) ? "fff" : "ccc").";'>"
+					. "<li style='padding:4px' $class >"
 					. "<input name='abos_liste[]' type='checkbox' id='abos_$id_liste' value='$id_liste' title=\"$label\" $checked />\n"
 					. "<label for='abos_$id_liste'><strong>".$titre."</strong> <em>".$texte."</em></label>\n"
 					. "</li>\n"
@@ -300,15 +301,16 @@ function exec_spiplistes_import_export(){
 			. debut_cadre_relief("", true, "", _T('spiplistes:Exporter_une_liste_d_abonnes'))
 			. "<ul class='liste-listes verdana2'>\n"
 			;
-		$ii = 0;
+		$couleur_ligne = 0;
 		foreach($listes_array as $row) {
 			$id_liste = intval($row['id_liste']);
 			if($flag_admin || in_array($id_liste, $listes_moderees)) {
 				$titre = couper($row['titre'], 30, '...');
+				$class = ($couleur_ligne++ % 2) ? "class='row-even'" : "";
 				list($nb_abos, $html, $texte) = spiplistes_listes_nb_abonnes_compter($id_liste, true);
 				if($nb_abos > 0) {
 					$page_result .= ""
-						. "<li style='padding:4px;background-color:#".(($ii++ % 2) ? "fff" : "ccc").";'>"
+						. "<li style='padding:4px'  $class >"
 						. spiplistes_form_input_radio('export_id', $id_liste
 							, "<strong>".$titre."</strong> <em>"
 								. spiplistes_nb_abonnes_liste_str_get($id_liste, $nb_abos, $html, $texte)

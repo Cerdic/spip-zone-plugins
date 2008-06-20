@@ -58,6 +58,7 @@ function spiplistes_afficher_pile_messages() {
 		. "</tr>\n"
 		;
 
+	$couleur_ligne = 1;
 	while($row = sql_fetch($list)) {
 		foreach(explode(",", $sql_select) as $key) {
 			$$key = $row[$key];
@@ -90,7 +91,7 @@ function spiplistes_afficher_pile_messages() {
 	
 		$ii = 0;
 		$pile_result .= ""
-			. "<tr " . (($ii++ % 2) ? "class='row-even'" : "") . ">\n"
+			. "<tr " . ((($couleur_ligne++) % 2) ? "class='row-even'" : "") . ">\n"
 			. "<td><a href='" . generer_url_public('patron_switch',"patron=$patron&date=$date_dernier")."'>$patron</a>"
 			. "<br />$periodicite</td>\n"
 			. "<td><a href='" . generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste") . "'>$titre</a>"

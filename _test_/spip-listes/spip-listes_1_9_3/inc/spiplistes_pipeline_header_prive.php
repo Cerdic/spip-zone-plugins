@@ -24,40 +24,25 @@ function spiplistes_header_prive ($flux) {
 	$flux .= ""
 		. "\n\n<!-- PLUGIN SPIPLISTES GADGETS v.: ".__plugin_real_version_get(_SPIPLISTES_PREFIX)." -->\n"
 		. "<script src='".url_absolue(find_in_path('javascript/spiplistes_gadgets.js'))."' type='text/javascript'></script>\n"
-		. "
-<!-- SpipListes CSS -->
-<style type='text/css'>
-<!--
-.spiplistes fieldset { border:1px solid black; }
-.spiplistes .message-alerte { color:red; font-weight:bold; }
-.spiplistes .liste-moderateurs
-, .spiplistes .liste-listes { list-style: none;margin:0;padding:0;width:100%;height:auto;display:table; }
-.spiplistes .liste-moderateurs li 
-, .spiplistes .liste-moderateurs li .statut-nom
-, .spiplistes .liste-moderateurs li .supprim { margin:0;padding:0 0 0 0.5ex;display:table-cell;line-height:1.6em;width:50%; }
-.spiplistes .liste-moderateurs li  { display:table-row;width:100% }
-.spiplistes .liste-moderateurs li .nom { padding-left:2ex }
-.spiplistes .liste-moderateurs li .supprim { font-weight:bold;text-align:right;padding:0 1ex }
--->
-</style>
-"
-	;
+		;
 
 	if(in_array($exec, array(
 		_SPIPLISTES_EXEC_ABONNES_LISTE
 		, _SPIPLISTES_EXEC_COURRIER_EDIT
 		, _SPIPLISTES_EXEC_COURRIERS_LISTE
 		, _SPIPLISTES_EXEC_LISTES_LISTE
+		, _SPIPLISTES_EXEC_LISTE_GERER
 		, _SPIPLISTES_EXEC_MAINTENANCE
 		, _SPIPLISTES_EXEC_CONFIGURE
 		, 'auteur_infos' // liste-listes
+		, _SPIPLISTES_EXEC_IMPORT_EXPORT
 		)
 		)
 	) {
 		
 		$flux .= "\n\n<!-- PLUGIN SPIPLISTES v.: ".__plugin_real_version_get(_SPIPLISTES_PREFIX)." -->\n"
-					. "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPLISTES."spiplistes_style_prive.css' type='text/css' media='all' />\n"
-					;
+			. "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPLISTES."spiplistes_style_prive.css' type='text/css' media='all' />\n"
+			;
 
 		switch($exec) {
 			case _SPIPLISTES_EXEC_COURRIER_EDIT:

@@ -343,7 +343,7 @@ function exec_spiplistes_liste_gerer () {
 			. spiplistes_bouton_block_depliable($legend
 				, false, md5('abonnes_liste'))
 			. (spiplistes_spip_est_inferieur_193() ? $legend : "")
-			. debut_block_invisible(md5('abonnes_liste'))
+			. spiplistes_debut_block_invisible(md5('abonnes_liste'))
 			. debut_cadre_relief('', true)
 			. $boite_liste_abonnes
 			. fin_cadre_relief(true)
@@ -366,7 +366,7 @@ function exec_spiplistes_liste_gerer () {
 			. spiplistes_bouton_block_depliable($legend
 				, false, md5('mods_liste'))
 			. (spiplistes_spip_est_inferieur_193() ? $legend : "")
-			. debut_block_invisible(md5('mods_liste'))
+			. spiplistes_debut_block_invisible(md5('mods_liste'))
 			. debut_cadre_relief('', true)
 			. "<div id='mods-conteneur'>\n"
 			. $boite_liste_moderateurs

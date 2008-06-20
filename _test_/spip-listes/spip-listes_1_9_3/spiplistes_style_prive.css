@@ -1,4 +1,14 @@
 /* spiplistes (private part) CSS Document */
+.spiplistes fieldset { border:1px solid black; }
+.spiplistes .message-alerte { color:red; font-weight:bold; }
+.spiplistes .liste-moderateurs
+, .spiplistes .liste-listes { list-style: none;margin:0;padding:0;width:100%;height:auto;display:table;background:#ddd }
+.spiplistes .liste-moderateurs li 
+, .spiplistes .liste-moderateurs li .statut-nom
+, .spiplistes .liste-moderateurs li .supprim { margin:0;padding:0 0 0 0.5ex;display:table-cell;line-height:1.6em;width:50%; }
+.spiplistes .liste-moderateurs li  { display:table-row;width:100% }
+.spiplistes .liste-moderateurs li .nom { padding-left:2ex }
+.spiplistes .liste-moderateurs li .supprim { font-weight:bold;text-align:right;padding:0 1ex }
 .spiplistes .triangle_label { font-weight: bold; text-decoration: underline; cursor: pointer; }
 table.spiplistes-abos {
 	font-size:80%;
@@ -32,7 +42,7 @@ table.spiplistes-tab td {
 	padding:3px;
 	width:33%;
 }
-table.spiplistes-tab tr.row-even {
+.spiplistes .row-even {
 	background-color:#fff;
 }
 .spiplistes-legend-titre {
