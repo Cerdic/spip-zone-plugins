@@ -1,0 +1,112 @@
+#CACHE{0}
+
+/**
+ * Onglets - dF 2008
+ */
+
+/* Onglet assorti aux onglets de menu */
+#onglet {
+  margin: 0;
+  margin-top: -1px;
+  width: 100%;
+  border: #[(#CONFIG{acsOngletsBordColor,#df0000})] thin solid;
+  [background: #(#CONFIG{acsOngletsFondColor});]
+  -moz-border-radius-topright: 8px;
+  -moz-border-radius-bottomright: 8px;
+  -moz-border-radius-bottomleft: 8px;
+}
+
+* html #onglet { /* pour IE uniquement */
+  clear: both;
+  z-index: 0;
+  margin: 0;
+  top: -1px;
+  position: relative;
+}
+
+#onglet #hierarchie { /* Fil d'Ariane */
+  padding-left: 5px;
+  font-size: 0.71em;
+  position: relative;
+  z-index: 2;
+}
+
+#onglet .texte_nav {
+  font-size: 0.71em;
+  margin-right: 5px;
+  position: relative;
+  z-index: 2;
+}
+
+#onglet .contre-encart {
+  [background: #(#CONFIG{acsOngletsFondColor});]
+}
+
+
+/* onglets de menu */
+#menunav {
+  font-size:75%;
+  line-height: normal;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  position: relative;
+}
+
+#menunav ul {
+  margin:0;
+  padding: 0 0 0;
+  list-style: none;
+}
+
+#menunav li {
+  float:left;
+  position:relative; /* pour IE */
+  z-index: 1; /* pour IE */
+  background: url("[(#ACS_CHEMIN)]img/onglets/left.gif") no-repeat left top;
+  margin-right: 3px; /* space between Onglets */
+  padding:0 0 0 9px;
+  border-bottom: 0;
+  line-height: 14px; /* PROVISOIRE : en px pour permettre différentes tailles de fontes sans flinguer le système d'onglets */
+}
+
+#menunav a {
+  float:left;
+  display:block;
+  width:.1em;
+  background:url("[(#ACS_CHEMIN)]img/onglets/right.gif") no-repeat right top;
+  padding:5px 14px 4px 6px;
+  text-decoration:none;
+  font-weight:bold;
+  color: ##CONFIG{acsOngletsLienInactif,#CONFIG{acsFondLink,4f4f8f}};
+  word-wrap: nowrap;
+}
+
+#menunav > ul a {width:auto;}
+  /* Commented Backslash Hack hides rule from IE5-Mac \*/
+  #menunav a {float:none;}
+  /* End IE5-Mac hack */
+  #menunav a:hover {
+  color: ##CONFIG{acsOngletsLinkHover,#CONFIG{acsFondLinkHover,ff0000}};
+}
+
+#menunav #current {
+  background-position: 0 -300px;
+  border-width: 0;
+}
+
+#menunav #current a {
+  background-position:100% -300px;
+  padding-bottom:5px;
+  color: ##CONFIG{acsOngletsLink,#CONFIG{acsFondLink,002f6f}};
+}
+
+#menunav li:hover, #menunav li:hover a {
+  background-position:0% -150px;
+  color: ##CONFIG{acsOngletsLienSurvol,ff0000};
+}
+
+#menunav li:hover a {
+  background-position:100% -150px;
+}

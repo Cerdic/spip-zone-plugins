@@ -1,0 +1,14 @@
+<div id="menunav">
+  <ul class="general">
+    <li[(#ENV{current}|=={#CONFIG{acsOnglets1}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="?page=#CONFIG{acsOnglets1}" title="#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets1'])}">#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets1'])}</a></li>
+    #SET{t2,#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets2'])}} #SET{l2,#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets2'])}}
+    [(#CONFIG{activer_statistiques}|=={oui}|?{' '}) <li[(#ENV{current}|=={#CONFIG{acsOnglets2}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="?page=#CONFIG{acsOnglets2}" title="#GET{l2}">#GET{t2}</a></li>]
+    <li[(#ENV{current}|=={#CONFIG{acsOnglets3}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="?page=#CONFIG{acsOnglets3}" title="#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets3'])}">#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets3'])}</a></li>
+    #SET{t4,#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets4'])}} #SET{l4,#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets4'])}}
+    [(#CONFIG{acsOngletschoix4}|=={oui}|?{' '}) <li[(#ENV{current}|=={#CONFIG{acsOnglets4}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="?page=#CONFIG{acsOnglets4}" title="#GET{l4}">#GET{t4}</a></li>]
+
+    [(#REM) Onglet publier, affiché ou non, au choix. La page login est remplacé par la page "publier" si le plugin openPublishing est activé ]
+    #SET{url_publier, #EVAL{in_array('openPublishing', $GLOBALS['plugins']) ? '?page=publier' : 'ecrire/'}}
+    [(#CONFIG{acsOngletsPublier,oui}|=={oui}|?{<li[(#ENV{current}|=={login}|?{' '})id="current"[(#SET{pm,oui})]]><a href="[(#GET{url_publier})]" title="<:acs:onglets__publier:> #NOM_SITE_SPIP"><i><:acs:onglets_publier:></i></a></li>})]
+  </ul>
+</div>

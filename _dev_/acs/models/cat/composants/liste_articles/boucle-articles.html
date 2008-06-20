@@ -1,0 +1,3 @@
+#SET{plugin_notation, #EVAL{in_array('notation', $GLOBALS['plugins'])}}
+[(#GET{plugin_notation}|?{' '}) <INCLURE{fond=composants/liste_articles/ba-inc-democratie}{self=#SELF}{debut_articles}{classement}{url}>]
+[(#GET{plugin_notation}|?{'', ' '}) <INCLURE{fond=composants/liste_articles/ba-inc}{self=#SELF}{debut_articles}>]

@@ -1,0 +1,18 @@
+<div id="banniere">
+    [(#CONFIG{acsBanniereUseLogo}|=={oui}|?{' '})
+    [(#REM) Afficher le logo ou le titre du site ]
+    <a rel="start" href="#URL_SITE_SPIP/">
+    [(#LOGO_SITE_SPIP||?{
+    [(#LOGO_SITE_SPIP
+      ||image_reduire{770,200}
+      |inserer_attribut{alt,[(#NOM_SITE_SPIP|textebrut)]}
+      |inserer_attribut{title,[(#NOM_SITE_SPIP|textebrut)]}
+      )]
+    ,
+    <span id="nom_site_spip">#NOM_SITE_SPIP</span>
+    })]
+    </a>
+  ]
+  [(#CONFIG{acsBanniereImage}|=={''}|?{' '}) <a href="#URL_SITE_SPIP" class="nom_site">#NOM_SITE_SPIP</a>]
+  [(#CONFIG{acsBanniereImage}|!={''}|?{' '}) <a href="#URL_SITE_SPIP" class="nom_site"><img class="banniere" src="[(#ACS_CHEMIN)]img/banniere/#CONFIG{acsBanniereImage}" height="60px" width="468px" border="0" title="Retour à la une de #NOM_SITE_SPIP" onmouseover="this.src='?action=wrap&amp;module=#CHEMIN{composants/banniere/bnr/banner.php}&amp;exclut=#CONFIG{acsBanniereImage}';" onmouseout="this.src='[(#ACS_CHEMIN)]img/banniere/#CONFIG{acsBanniereImage}';" alt="Retour à la une de #NOM_SITE_SPIP" /></a>]
+</div>

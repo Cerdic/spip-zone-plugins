@@ -1,0 +1,19 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Encart</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
+  <version>0.2</version>
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
+
+  <param>
+    <nom>optionnel</nom>
+    <valeur>oui</valeur>
+  </param>
+  <param>
+    <nom>preview</nom>
+    <valeur>200</valeur>
+  </param>
+
+</composant>

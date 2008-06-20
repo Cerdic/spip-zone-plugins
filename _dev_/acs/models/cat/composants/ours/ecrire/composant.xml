@@ -1,0 +1,44 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Ours</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
+  <version>0.2</version>
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
+
+  <param>
+    <nom>preview</nom>
+    <valeur>50</valeur>
+  </param>
+
+  <variable>
+    <nom>Text</nom>
+    <type>color</type>
+    <valeur>ff0000</valeur>
+  </variable>
+  <variable>
+    <nom>Link</nom>
+    <type>color</type>
+    <valeur>ff8f00</valeur>
+  </variable>
+  <variable>
+    <nom>LinkHover</nom>
+    <type>color</type>
+    <valeur>ff0000</valeur>
+  </variable>
+  <variable>
+    <nom>LienRefus</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>LienACS</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+</composant>

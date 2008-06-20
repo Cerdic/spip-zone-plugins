@@ -1,0 +1,11 @@
+#CACHE{0}
+
+[(#SET{titre,<:acs:document_multimedia:>})]
+[(#SET{largeur,200})]
+[(#SET{hauteur,150})]
+
+<table width="100%" style="border-collapse: separate; border-spacing: 5px;"><tr style="vertical-align: bottom; text-align: center; [background: #(#CONFIG{acsOngletsFondColor})]"><td style="padding: 5px;">
+</td><td style="padding: 5px;">
+  <INCLURE{fond=composants/video/flv}{autostart=#AUTOSTART}{hauteur=#GET{hauteur}}{largeur=#GET{largeur}}{mmfile=#CHEMIN{composants/video/img_pack/demo.flv}}{titre=#GET{titre}}>
+  [(#CONFIG{acsMultimediaDownload,oui}|=={oui}|?{' '})<a href="#CHEMIN{composants/video/img_pack/demo.flv}"><:acs:video_download:></a>]
+</td></tr></table>

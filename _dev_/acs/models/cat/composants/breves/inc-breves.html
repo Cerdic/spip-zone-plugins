@@ -1,0 +1,14 @@
+<B_breves>#ANCRE_PAGINATION
+  <div class="breves">
+    <div class="menu-titre">
+      <img id="img_ajax_breves" src="#CHEMIN{images/searching.gif}" style="visibility: hidden;" align="#LANG_RIGHT" />
+      <h2 class="menu-titre" style="text-align: center"><:dernieres_breves:></h2>
+      [<p class="pagination">(#PAGINATION)</p>]
+    </div>
+    <ul>
+      <BOUCLE_breves(BREVES) {id_secteur ?} {par date}{inverse} {pagination 20}>
+      <li class="menu-item">[<small>(#DATE|affdate_court)</small> ]<a href="#URL_BREVE">#TITRE</a></li>
+      </BOUCLE_breves>
+    </ul>
+  </div>[(#REM) fin breves ]
+</B_breves>

@@ -1,0 +1,130 @@
+function MM_findObj(n, d) { //v4.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+}
+
+function swap_couche(couche, rtl) {
+  var triangle, layer;
+
+	if (!(triangle = MM_findObj('triangle' + couche))) return;
+	if (!(layer = MM_findObj('Layer' + couche))) return;
+
+	if (!(triangle.src.indexOf('deplierbas.gif') > 0)) {
+		triangle.src = 'dist/images/deplierbas.gif';
+		layer.style.display = 'block';
+		triangle.title = 'Replier';
+	}
+  else {
+		triangle.src = 'dist/images/deplierhaut.gif';
+		layer.style.display = 'none';
+		triangle.title = 'Déplier';
+	}
+}
+
+function AjaxRet(res,status, target, callback)
+{
+  if (res.aborted) return;
+  if (status=='error') return jQuery(target).html('HTTP Error');
+
+  if (this.evalScripts)
+    // Inject the HTML into all the matched elements
+    jQuery(target).html(res.responseText)
+      // Execute all the scripts inside of the newly-injected HTML
+      .evalScripts()
+      // Execute callback
+      .each( callback, [res.responseText, status] );
+    //callback(res,status);
+  else // jQuery v1.1.4
+    jQuery(target).html(res.responseText).each( callback, [res.responseText, status] );
+}
+
+// Si Ajax est disponible, cette fonction l'utilise pour envoyer la requete.
+// Si le premier argument n'est pas une url, ce doit etre un formulaire.
+// Le deuxieme argument doit etre l'ID d'un noeud qu'on animera pendant Ajax.
+// Le troisieme, optionnel, est la fonction traitant la r�ponse.
+// La fonction par defaut affecte le noeud ci-dessus avec la reponse Ajax.
+// En cas de formulaire, AjaxSqueeze retourne False pour empecher son envoi
+// Le cas True ne devrait pas se produire car le cookie spip_accepte_ajax
+// a du anticiper la situation.
+// Toutefois il y toujours un coup de retard dans la pose d'un cookie:
+// eviter de se loger avec redirection vers un telle page
+
+function AjaxSqueeze(trig, id, callback, event)
+{
+  var target = jQuery('#'+id);
+
+  // position du demandeur dans le DOM (le donner direct serait mieux)
+  if (!target.size()) {return true;}
+
+  // animation immediate pour faire patienter
+  if (typeof ajax_image_searching != 'undefined') {
+    target.prepend(ajax_image_searching);
+  }
+  return !AjaxSqueezeNode(trig, target, callback, event);
+}
+
+// La fonction qui fait vraiment le travail decrit ci-dessus.
+// Son premier argument est deja le noeud du DOM
+// et son resultat booleen est inverse ce qui lui permet de retourner
+// le gestionnaire Ajax comme valeur non fausse
+
+function AjaxSqueezeNode(trig, target, f, event)
+{
+  var i, callback;
+
+  // retour std si pas precise: affecter ce noeud avec ce retour
+  if (!f) {
+    callback = function() { verifForm(this);}
+  }
+  else {
+    callback = function(res,status) { f.apply(this,[res,status]); verifForm(this);}
+  }
+  valid = (typeof event != 'object') ? false : ((event.altKey || event.metaKey) == true);
+
+  valid = false;
+  if (typeof(window['_OUTILS_DEVELOPPEURS']) != 'undefined')
+    valid = (typeof event != 'object') ? false : ((event.altKey || event.metaKey) == true);
+
+  if (typeof(trig) == 'string') {
+    i = trig.split('?');
+    trig = i[0] +'?var_ajaxcharset=utf-8&' + i[1];
+    // laisser le choix de la touche enfoncee au moment du clic
+    // car beaucoup de systemes en prenne une a leur usage
+    if  (valid) {
+       window.open(trig+'&transformer_xml=valider_xml');
+    }
+    res = jQuery.ajax({"url":trig,
+         "complete":function(r,s){AjaxRet(r,s,target, callback)}});
+    return res;
+
+  }
+
+  if(valid) {
+    //open a blank window
+    var doc = window.open("","valider").document;
+    //create a document to enable receiving the result of the ajax post
+    doc.open();
+    doc.close();
+    //store the searching image to be able to remove it after the post completes
+    var searching_img = $(">:first",target);
+    //set the element receiving the ajax post
+    target = doc.body;
+  }
+
+  jQuery(trig).ajaxSubmit({"target":target,
+            "after":function(res,status){
+    if(valid) searching_img.remove();
+    if(status=='error') return this.html('Erreur HTTP');
+    callback(res,status);
+  },
+      "before":function (vars){
+       vars.push({"name":"var_ajaxcharset","value":"utf-8"});
+       if (valid)
+        vars.push({"name":"transformer_xml","value":"valider_xml"});
+       return true;
+          }});
+  return true;
+}

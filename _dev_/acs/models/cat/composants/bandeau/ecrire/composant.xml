@@ -1,0 +1,69 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Bandeau</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
+  <version>0.2</version>
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
+
+  <param>
+    <nom>optionnel</nom>
+    <valeur>true</valeur>
+  </param>
+  <param>
+    <nom>preview</nom>
+    <valeur>88</valeur>
+  </param>
+
+  <variable>
+    <nom>CouleurFond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>CouleurTexte</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>BordHautCouleur</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>BordBasCouleur</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>BordLargeur</nom>
+    <type>largeurbord</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>BordStyle</nom>
+    <type>stylebord</type>
+    <label>non</label>
+  </variable>
+
+  <variable>
+    <nom>Legende</nom>
+    <type>text</type>
+    <taille>80</taille>
+  </variable>
+  <variable>
+    <nom>Alignement</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>center</option>
+    <option>right</option>
+    <defaut>center</defaut>
+  </variable>
+  <variable>
+    <nom>Contenu</nom>
+    <type>textarea</type>
+    <lines>3</lines>
+  </variable>
+  <variable>
+    <nom>Text2</nom>
+    <type>textarea</type>
+    <lines>2</lines>
+  </variable>
+</composant>

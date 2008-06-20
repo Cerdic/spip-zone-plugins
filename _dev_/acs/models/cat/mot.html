@@ -1,0 +1,155 @@
+#CACHE{86400}
+<BOUCLE_mot_principal(MOTS) {id_mot} {doublons}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2008
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+]
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<INCLURE{fond=inc-head_meta}>
+   <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+   [<meta name="description" content="(#DESCRIPTIF|couper{150}|textebrut)" />]
+   <INCLURE{fond=inc-head_css}>
+
+   [(#REM) Lien vers le flux RSS du mot cle ]
+   <link rel="alternate" type="application/rss+xml" title="[(#TITRE|textebrut|texte_backend)]" href="[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]" />
+</head>
+
+<body class="page_mot">
+<INCLURE{fond=composants/entete/entete}>
+
+[(#REM) Menu de navigation laterale (colonne 1)]
+<div id="colonne1"><div class="spacer"></div>
+	<div class="mg">
+    [(#REM) Colonne 1 - Menu de navigation par rubriques ]
+    <INCLURE{fond=composants/col1/col1}>
+
+	[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
+	<B_mots_freres>
+	<div class="divers">
+		#ANCRE_PAGINATION
+		[<p class="pagination">(#PAGINATION)</p>]
+		<div class="menu-titre"><:mots_clefs_meme_groupe:></div>
+		<ul>
+		<BOUCLE_mots_freres(MOTS) {type} {par titre} {pagination 20}>
+			<li class="menu-item"><a href="#URL_MOT"[ class="(#EXPOSE)"]>#TITRE</a></li>
+		</BOUCLE_mots_freres>
+		</ul>
+	</div>
+	</B_mots_freres>
+
+	[(#REM) Menu de navigation mots-cles : les autres groupes avec un lien sur le premier mot du groupe ]
+	<B_groupes_freres>
+	<div class="divers">
+		<h2 class="menu-titre"><:autres_groupes_mots_clefs:></h2>
+		<ul>
+		<BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {titre!==(_rubs)} {doublons}>
+		<BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {0,1}>
+			<li class="menu-item"><a href="#URL_MOT">#TYPE</a></li>
+		</BOUCLE_mot_cousin>
+		</BOUCLE_groupes_freres>
+		</ul>
+	</div>
+	</B_groupes_freres>
+	</div><!-- fin mg -->
+</div><!-- fin colonne1 (navigation) -->
+
+[(#REM) Colonne 2 ]
+<div id="colonne2"><div class="spacer"></div>
+    <INCLURE{fond=composants/onglets/onglets}>
+
+    <div id="onglet">
+    <div class="cartouche">
+      [(#LOGO_MOT||image_reduire{200,200})]
+      <h1 class="titre">#TITRE</h1>
+    </div>
+
+    [<div class="chapo">(#TEXTE)</div>]
+
+    <br class="nettoyeur" />
+
+    [(#REM) Articles lies au mot-cle ]
+    <B_articles>
+    <div class="contre-encart">
+      <div class="liste-articles">
+          #ANCRE_PAGINATION
+				[<p class="pagination">(#PAGINATION)</p>]
+          <ul>
+            <BOUCLE_articles(ARTICLES) {id_mot} {par date}{inverse} {pagination 10}>
+            <INCLURE{fond=composants/liste_articles/liste_articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}>
+            </BOUCLE_articles>
+          </ul>
+      </div>
+
+    </div><!-- fin contre-encart -->
+    </B_articles>
+
+    <div class="encart">
+
+      [(#REM) Rubriques liees au mot-cle ]
+      <B_rubriques>
+      <div class="rubriques">
+          <h2 class="menu-titre"><:rubriques:></h2>
+          <ul>
+            <BOUCLE_rubriques(RUBRIQUES) {id_mot} {par titre}>
+            <li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+            </BOUCLE_rubriques>
+          </ul>
+      </div>
+      </B_rubriques>
+
+      [(#REM) Breves liees au mot-cle ]
+      <B_breves>
+      <div class="breves">
+          <h2 class="menu-titre"><:breves:></h2>
+          <ul>
+            <BOUCLE_breves(BREVES) {id_mot} {par titre}>
+            <li><a href="#URL_BREVE">#TITRE</a></li>
+            </BOUCLE_breves>
+          </ul>
+      </div>
+      </B_breves>
+
+      [(#REM) Liens des forums ]
+      <B_forums_liens>
+      <div class="forums">
+          <h2 class="menu-titre"><:messages_forum:></h2>
+          <ul>
+            <BOUCLE_forums_liens(FORUMS) {id_mot} {plat} {par date}{inverse}>
+            <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_FORUM">#TITRE</a></li>
+            </BOUCLE_forums_liens>
+          </ul>
+      </div>
+      </B_forums_liens>
+
+      [(#REM) Sites web lies au mot-cle ]
+      <B_sites>
+      <div class="syndic">
+          <h2 class="menu-titre"><:sites_web:></h2>
+          <ul>
+            <BOUCLE_sites(SITES) {id_mot} {par nom_site}>
+            <li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>
+            </BOUCLE_sites>
+          </ul>
+      </div>
+      </B_sites>
+
+    </div><!-- fin encart -->
+
+    [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+	</div><!-- fin onglet -->
+</div><!-- fin colonne2 -->
+
+[(#REM) Pied de page ]
+<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+#SPIP_CRON
+</body>
+</html>
+</BOUCLE_mot_principal>

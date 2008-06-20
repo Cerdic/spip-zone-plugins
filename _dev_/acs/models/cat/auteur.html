@@ -1,0 +1,83 @@
+#CACHE{86400}
+<BOUCLE_auteur_principal(AUTEURS) {id_auteur}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+   <INCLURE{fond=inc-head_meta}>
+   <title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+   [<meta name="description" content="(#BIO|couper{150}|textebrut)" />]
+   <meta name="keywords" lang="#LANG" content="<:meta_keywords:>[,(#NOM|textebrut)]" />
+   <meta name="expires" content="86400" />
+   [<meta name="author" content="(#NOM|textebrut)"/>]
+   <meta name="abstract" content="<:meta_page_auteur:>" />
+   <meta name="copyright" content="<:meta_rights:>[ (#NOM|textebrut) ][&amp; (#NOM_SITE_SPIP|textebrut)] (#URL_SITE_SPIP)" />
+[(#REM) DC metas ]
+   <meta name="DC.Title" content="[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]" />
+   <meta name="DC.Date" content="[(#DATE)]" />
+   [<meta name="DC.Contributor" content="(#NOM|textebrut)" />]
+   <meta name="DC.Publisher" content="[<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)]" />
+   <meta name="DC.Subject" content="[(#NOM|textebrut)]" />
+   <meta name="DC.Description" content="<:meta_page_auteur:>" />
+   <meta name="DC.Rights" content="<:meta_rights:>[: (#NOM|textebrut) ][&amp; (#NOM_SITE_SPIP|textebrut)] (#URL_SITE_SPIP)" />
+   <INCLURE{fond=inc-head_css}>
+</head>
+
+<body class="page_auteur">
+<INCLURE{fond=composants/entete/entete}>
+
+<div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation lateral (colonne 1)]
+  <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
+	  <INCLURE{fond=composants/col1/col1}{self=#SELF}>
+    <INCLURE{fond=composants/auteurs/auteurs}{self=#SELF}{debut_auteurs}{id_auteur}>[(#REM) Autres auteurs ]
+  </div>[(#REM) fin menu ]
+</div>[(#REM) fin colonne1 (navigation)]
+
+[(#REM) Colonne 2 ]
+<div id="colonne2"><div class="spacer"></div>
+
+[(#REM) Contenu principal : derniers articles publies ]
+
+  <INCLURE{fond=composants/onglets/onglets}>
+  <div id="onglet">
+
+    [(#REM) Fil d'Ariane ]
+    <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="?page=auteurs"><:info_auteurs:></a>[ &gt; (#NOM|couper{80})]</div>
+
+    <div class="cartouche">
+      [(#LOGO_AUTEUR||image_reduire{200,200})]
+      <h1 class="titre">#NOM</h1>
+      [<p class="soustitre"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+    </div>
+
+    [<div class="texte">(#BIO)</div><br />]
+
+    [(#REM) Articles de l'auteur ]
+    <B_articles>
+    <div class="contre-encart">
+        <div class="liste-articles">
+          #ANCRE_PAGINATION
+          [<p class="pagination">(#PAGINATION)</p>]
+          <ul>
+            <BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse} {pagination 10}>
+            <INCLURE{fond=composants/liste_articles/liste_articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}>
+            </BOUCLE_articles>
+          </ul>
+        </div>
+
+    </div><!-- fin contre-encart -->
+    </B_articles>
+
+    [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+	</div><!-- fin onglet -->
+</div><!-- fin colonne2 -->
+<div id="colonne3"><div class="spacer"></div>
+    [<div class="encart"><div class="divers">(#FORMULAIRE_ECRIRE_AUTEUR)</div></div><!-- fin encart -->]
+</div>
+
+[(#REM) Pied de page ]
+<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+#SPIP_CRON
+</body>
+</html>
+</BOUCLE_auteur_principal>

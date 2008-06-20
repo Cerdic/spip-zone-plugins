@@ -1,0 +1,56 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Edito</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
+  <version>0.2</version>
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
+
+  <param>
+    <nom>optionnel</nom>
+    <valeur>true</valeur>
+  </param>
+  <param>
+    <nom>preview</nom>
+    <valeur>150</valeur>
+  </param>
+
+  <variable>
+    <nom>FondCouleur</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>BordCouleur</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>BordLargeur</nom>
+    <type>largeurbord</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>BordStyle</nom>
+    <type>stylebord</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>LegendBordCouleur</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>LegendBordLargeur</nom>
+    <type>largeurbord</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>LegendBordStyle</nom>
+    <type>stylebord</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>NbLettres</nom>
+    <type>nombre</type>
+    <valeur>300</valeur>
+  </variable>
+</composant>

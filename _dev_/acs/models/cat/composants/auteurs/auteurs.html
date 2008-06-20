@@ -1,0 +1,5 @@
+#CACHE{86400}[(#REM) Bloc auteurs, avec pagination.]
+[(#CONFIG{acsAuteursUse}|=={oui}|?{' '})
+<div id="ajax_auteurs">
+  <INCLURE {fond=composants/auteurs/inc-auteurs}{self=#SELF}{debut_auteurs}{id_auteur}>
+</div>]

@@ -1,0 +1,24 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Custom 3</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
+  <version>0.2</version>
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
+
+  <param>
+    <nom>optionnel</nom>
+    <valeur>true</valeur>
+  </param>
+  <param>
+    <nom>preview</nom>
+    <valeur>150</valeur>
+  </param>
+
+  <variable>
+    <nom>Contenu</nom>
+    <type>textarea</type>
+    <lines>5</lines>
+  </variable>
+</composant>

@@ -1,0 +1,34 @@
+#CACHE{0}
+/* Habillage des forums */
+ul.forum { display: block; clear: both; margin: 0; padding: 0; }
+.forum-total {margin: 0; padding: 0;}
+.forum-fil { margin-top: 2px; margin-left: 1em; margin-right: 1px; font-weight: normal;}
+.forum-fil ul { display: block; margin: 0; padding: 0; margin-left: 1em; }
+.forum-chapo .forum-titre { display: block; margin: 0; padding: 0; font-weight: bold; text-decoration: none; color: ##CONFIG{acsFondText,333}; }
+.forum-chapo small {}
+.forum-texte { margin: 0; padding: 0.5em 1em 0 1em; color: ##CONFIG{acsFondText,333}; font-size: 0.82em; text-align: justify}
+.forum-texte .forum-lien {}
+.forum-texte .forum-repondre-message { margin: 0; padding: 0; text-align: right}
+.forum-item {padding-bottom: 10px;}
+/* Boite d'un forum : eclaircissement progressif des bords */
+ul .forum-message { border: [(#CONFIG{acsForumBordLargeur,thin}) ][(#CONFIG{acsForumBordStyle,solid}) ] ##CONFIG{acsForumBord,666}; margin: 0; padding: 0; margin-bottom: 2px; }
+ul ul .forum-message { border: thin solid ##CONFIG{acsForumBord,A4A4A4}; }
+ul ul ul .forum-message { border: thin solid ##CONFIG{acsForumBord,B8B8B8}; }
+ul ul ul ul .forum-message { border: thin solid ##CONFIG{acsForumBord,CCC}; }
+ul ul ul ul ul .forum-message { border: thin solid ##CONFIG{acsForumBord,E0E0E0}; }
+ul ul ul ul ul ul .forum-message { border: thin dotted ##CONFIG{acsForumBord,E0E0E0}; }
+
+/* Boite de titre d'un forum : mise en couleur selon la profondeur du forum */
+ul .forum-chapo { border: none; border-bottom: 1px dotted ##CONFIG{acsForumBord,B8B8B8}; margin: 0; padding: 3px 6px 2px 6px; font-size: 0.88em; background: ##CONFIG{acsForumFond1,C4E0E0}; }
+ul ul .forum-chapo { background: ##CONFIG{acsForumFond2,D4E8E8}; }
+ul ul ul .forum-chapo { background: ##CONFIG{acsForumFond3,E4F0F0}; }
+ul ul ul ul .forum-chapo { background: ##CONFIG{acsForumFond4,F4F8F8}; }
+ul ul ul ul ul .forum-chapo { background: ##CONFIG{acsForumFond5,FFF}; }
+ul ul ul ul ul ul .forum-chapo { background: ##CONFIG{acsForumFond6,FFF}; }
+
+.repondreaufil {float: right;}
+
+.forum-repondre {
+  margin-left: 4px;
+  font-size: 0.88em;
+}

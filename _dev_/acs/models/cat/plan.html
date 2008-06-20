@@ -1,0 +1,51 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
+<head>
+   <INCLURE{fond=inc-head_meta}>
+   <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+   <meta name="description" content="<:meta_dc_subject_article:>[ (#NOM_SITE_SPIP|textebrut)][: (#TITRE|textebrut)]" />
+   <meta name="keywords" content="[(#TITRE|textebrut|sans_guillemets)][,(#SURTITRE|textebrut|sans_guillemets)][,(#SOUSTITRE|textebrut|sans_guillemets)][,(#TITRE|askeywords)][,(#SURTITRE|askeywords)][,(#SOUSTITRE|askeywords)][,(#LESAUTEURS|supprimer_tags|askeywords)]" />
+   <meta name="expires" content="7200" />
+   <meta name="author" content="[<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)]" />
+   <meta name="abstract" content="[(#TITRE|textebrut)][: (#DESCRIPTIF|supprimer_tags|textebrut|sans_guillemets)]" />
+   <meta name="copyright" content="<:meta_rights:>[: (#LESAUTEURS|supprimer_tags|textebrut) &amp; ][(#NOM_SITE_SPIP|textebrut) ](#URL_SITE_SPIP)" />
+[(#REM) DC metas ]
+   <meta name="DC.Title" content="[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]" />
+   <meta name="DC.keywords" content="[(#TITRE|textebrut|sans_guillemets)][,(#SURTITRE|textebrut|sans_guillemets)][,(#SOUSTITRE|textebrut|sans_guillemets)][,(#TITRE|askeywords)][,(#SURTITRE|askeywords)][,(#SOUSTITRE|askeywords)][,(#LESAUTEURS|supprimer_tags|askeywords)]" />
+   <meta name="DC.Date" content="[(#DATE_REDAC|?{#DATE_REDAC, #DATE})]" />
+   [<meta name="DC.Contributor" content="(#LESAUTEURS|supprimer_tags|textebrut)" />]
+   <meta name="DC.Publisher" content="[(#LESAUTEURS|supprimer_tags|textebrut) &amp; ][(#NOM_SITE_SPIP|textebrut)]" />
+   <meta name="DC.Subject" content="<:meta_dc_subject_article:>[ (#NOM_SITE_SPIP|textebrut)][: (#TITRE|textebrut)]" />
+   <meta name="DC.Description" content="[(#TITRE|textebrut)][: (#DESCRIPTIF|supprimer_tags|textebrut|sans_guillemets)]" />
+   <meta name="DC.Rights" content="<:meta_rights:>[: (#LESAUTEURS|supprimer_tags|textebrut) &amp; ][(#NOM_SITE_SPIP|textebrut) ](#URL_SITE_SPIP)" />
+   <INCLURE{fond=inc-head_css}>
+</head>
+
+<body class="page_plan">
+<INCLURE{fond=composants/entete/entete}>
+
+[(#REM) Menu de navigation laterale (colonne 1) ]
+<div id="colonne1"><div class="spacer"></div>
+    <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
+    <INCLURE{fond=composants/col1/col1}>
+  </div>[(#REM) fin menu ]
+</div>[(#REM) fin colonne1 (navigation) ]
+
+[(#REM) Colonne 2 ]
+<div id="colonne2"><div class="spacer"></div>
+	<INCLURE{fond=composants/onglets/onglets}{current=plan}>
+	<div id="onglet">
+		[(#REM) Fil d'Ariane ]
+		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:plan_site:></div>
+    [(#CONFIG{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/liste_articles/boucle-plan-democratie}>][(#REM) Si composant democratie activé]
+    [(#CONFIG{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/liste_articles/boucle-plan}>][(#REM) Si composant democratie inactif]
+	</div>
+</div>
+
+[(#REM) Pied de page ]
+<INCLURE{fond=inc-pied}>
+
+#SPIP_CRON
+</body>
+</html>

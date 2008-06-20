@@ -1,0 +1,25 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Democratie</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
+  <version>0.2</version>
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
+
+  <param>
+    <nom>optionnel</nom>
+    <valeur>plugin notation</valeur>
+  </param>
+
+  <variable>
+    <nom>SeuilPublic</nom>
+    <type>nombre</type>
+  </variable>
+  <variable>
+    <nom>Directe</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+  </variable>
+</composant>

@@ -1,0 +1,76 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2008
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+]
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" xml:lang="#LANG" lang="#LANG">
+<head>
+   <INCLURE{fond=inc-head_meta}>
+   <title><:liens:>[ (#NOM_SITE_SPIP|textebrut)]</title>
+   <meta name="description" content="<:liens:>[ (#NOM_SITE_SPIP|textebrut)]" />
+   <meta name="keywords" lang="#LANG" content="<:meta_keywords:>[,(#TITRE|textebrut)],<:sites:>" />
+   <meta name="expires" content="3600" />
+   <meta name="author" content="[<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)]" />
+   <meta name="abstract" content="<:meta_page_sites:>" />
+   <meta name="copyright" content="<:meta_rights:>[: (#NOM_SITE_SPIP|textebrut)] (#URL_SITE_SPIP)" />
+[(#REM) DC metas ]
+   <meta name="DC.Title" content="[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]" />
+   <meta name="DC.Date" content="[(#DATE)]" />
+   [<meta name="DC.Contributor" content="<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)" />]
+   <meta name="DC.Publisher" content="[<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)]" />
+   <meta name="DC.Subject" content="<:meta_page_sites:>" />
+   <meta name="DC.Description" content="<:meta_page_sites:>[. (#NOM_SITE_SPIP|textebrut)][: (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]" />
+   <meta name="DC.Rights" content="<:meta_rights:>[: <:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut) ](#URL_SITE_SPIP)" />
+   <INCLURE{fond=inc-head_css}>
+</head>
+
+<body class="page_sites">
+<INCLURE{fond=composants/entete/entete}>
+
+[(#REM) Menu de navigation laterale (colonne 1)]
+<div id="colonne1"><div class="spacer"></div>
+    <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
+      <INCLURE{fond=composants/col1/col1}>
+  </div>[(#REM) fin menu ]
+</div>[(#REM) fin colonne1 (navigation) ]
+
+[(#REM) Colonne 2 ]
+<div id="colonne2"><div class="spacer"></div>
+    <INCLURE{fond=composants/onglets/onglets}{current=sites}>
+	<div id="onglet">
+  [(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:autres_sites:></div>
+    <BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+    <div class="plan-secteur">
+        <B_sites>
+          <ul>
+              <li>
+              <h1 class="plan-secteur">[(#LOGO_RUBRIQUE|left)][<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#TITRE|supprimer_numero)</a>]</h1></li>
+              <ul>
+              <BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
+              <li class="menu-item">
+              <a href="?site#ID_SYNDIC" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#NOM_SITE</a>
+              <a href="#URL_SITE" target="_new" title="<:acces_direct:>: #URL_SITE" class="spip_out"><img src="#CHEMIN{composants/liste_articles/img_pack/goto.gif}" alt="&uaArr;"  title="<:acces_direct:>: #URL_SITE" /></a>
+              <i>[(#DESCRIPTIF|couper{150})]</i>
+              </li>
+              </BOUCLE_sites>
+              </ul>
+          </ul>
+        </B_sites>
+    </div>
+    </BOUCLE_secteurs>
+	</div><!-- fin onglet -->
+</div><!-- fin colonne2 -->
+
+[(#REM) Pied de page ]
+<INCLURE{fond=inc-pied}>
+
+#SPIP_CRON
+</body>
+</html>

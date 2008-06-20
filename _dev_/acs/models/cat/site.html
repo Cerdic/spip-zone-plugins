@@ -1,0 +1,55 @@
+#CACHE{7200}
+<BOUCLE_sites(SITES) {id_syndic} {unique}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2008
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+]
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<INCLURE{fond=inc-head_meta}>
+	<title><:site:></title>
+	<meta name="description" content="<:site:>" />
+	<INCLURE{fond=inc-head_css}>
+</head>
+
+<body class="page_site">
+<INCLURE{fond=composants/entete/entete}>
+
+[(#REM) Menu de navigation laterale (colonne 1)]
+<div id="colonne1"><div class="spacer"></div>
+	<div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
+		<INCLURE{fond=composants/col1/col1}>
+	</div>[(#REM) fin mg ]
+</div>[(#REM) fin colonne1 (navigation) ]
+
+[(#REM) Colonne 2 ]
+<div id="colonne2"><div class="spacer"></div>
+  <INCLURE{fond=composants/onglets/onglets}{current=sites}>
+  <div id="onglet">
+	  <div class="cartouche">
+      <h1 style="clear:both;">[(#LOGO_SITE|left)]<a href="#URL_SITE" title="[(#DESCRIPTIF)]" target="_new"><strong><strong>#NOM_SITE</strong></strong></a>
+      </h1>
+      <a href="#URL_SITE" title="[(#DESCRIPTIF)]" target="_new">#URL_SITE</a>
+      [(#DESCRIPTIF|justifier)]
+
+      [(#REM) Forum du site ]
+      <a href="#forum" name="forum" id="forum"></a>
+      [<h2 class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_site:> <small><i>(<:repondre_article_notice:>)</i></small></a></h2>]
+      <INCLURE{fond=inc-forum}{id_syndic}>
+		</div>[(#REM) fin cartouche ]
+	</div>[(#REM) fin onglet ]
+</div>[(#REM) fin colonne2 ]
+
+[(#REM) Pied de page ]
+<INCLURE{fond=inc-pied}>
+
+#SPIP_CRON
+</body>
+</html>
+</BOUCLE_sites>

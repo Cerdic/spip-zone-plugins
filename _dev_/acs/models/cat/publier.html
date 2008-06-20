@@ -1,0 +1,54 @@
+#CACHE{24 * 3600}
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2008
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+   Le fichier est en cache dans SPIP, mais les navigateurs ne doivent pas
+   conserver cette page en memoire
+]
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+  <title><:acs:onglets__publier:> [(#NOM_SITE_SPIP|textebrut)]</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+  <meta name="robots" content="none" />
+  <meta name="generator" content="[(#NOM_SITE_SPIP) & ]SPIP #SPIP_VERSION" />
+  <INCLURE{fond=inc-head_css}>
+  <link rel="stylesheet" href="#CHEMIN{css/op.css}" type="text/css" media="projection, screen, tv" />[(#REM) Feuille de style optionnelle pour le plugin openPublishing ]
+</head>
+<body class="page_sommaire">
+  <INCLURE{fond=composants/entete/entete}>
+
+	[(#REM) Menu de navigation laterale (colonne 1)]
+	<div id="colonne1"><div class="spacer"></div>
+		<div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
+      <INCLURE{fond=composants/col1/col1}>
+		</div>
+	</div>[(#REM) fin colonne1 (navigation) ]
+	[(#REM) Colonne 2 ]
+	<div id="colonne2"><div class="spacer"></div>
+    <INCLURE{fond=composants/onglets/onglets}{current=login}>
+    <div id="onglet" style="background: #ffffff">
+      <div id="acs_op">[(#FORMULAIRE_ARTICLE{#SELF})]</div>
+  	</div>
+	</div>[(#REM) Fin colonne 2 ]
+
+  <div id="colonne3"><div class="spacer"></div>
+    <div class="acs_op_cartouche">
+      <div align="center"><a href="ecrire/"><:login_acces_prive:></a></div><br />
+      <div style="color: red; text-align: center">ATTENTION !!!</div><br />
+      <p style="text-align: justify">Le formulaire ci-contre permet de proposer anonymement un article, mais ne donne pas accès à toutes les possibilités de publication, ni aux forums internes de l'équipe.<br /><br />
+      Pour profiter de tous les avantages de ce site, demandez un code d'accès <u>par mail</u> à <a href="mailto:[(#EMAIL_WEBMASTER|cm)]">[(#EMAIL_WEBMASTER|cm)]</a>.</p>
+    </div>
+  </div>
+[(#REM) Pied de page ]
+<INCLURE{fond=inc-pied}>
+#SPIP_CRON
+</body>
+</html>

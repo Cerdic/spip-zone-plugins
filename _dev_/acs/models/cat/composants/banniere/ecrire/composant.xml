@@ -1,0 +1,41 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Banniere</nom>
+
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
+  <version>0.2</version>
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
+
+  <param>
+    <nom>optionnel</nom>
+    <valeur>true</valeur>
+  </param>
+  <param>
+    <nom>preview</nom>
+    <valeur>80</valeur>
+  </param>
+
+  <variable>
+    <nom>ImageFond</nom>
+    <type>img</type>
+    <chemin>img/fond</chemin>
+  </variable>
+  <variable>
+    <nom>Image</nom>
+    <type>img</type>
+    <chemin>img/banniere</chemin>
+  </variable>
+  <variable>
+    <nom>Hauteur</nom>
+    <type>nombre</type>
+    <valeur>60</valeur>
+  </variable>
+  <variable>
+    <nom>UseLogo</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+  </variable>
+</composant>
