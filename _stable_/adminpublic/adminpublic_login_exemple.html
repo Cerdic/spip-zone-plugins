@@ -17,12 +17,12 @@ blabla
 </div><!--#page-->
 
 [(#FORMULAIRE_ADMIN)] 
-
-	[<div id="special-adminbis">
+<div id="special-adminbis" [(#SESSION{id_auteur}|?{' ',''}) style="display:none;"]>
+	[
 	<h5>Participez &agrave; la vie de ce site!</h5>
-	<div style="background-color:#DADADA; border:1px solid #666;">(#LOGINMINI_PUBLIC|?{'',' '})</div>
-	[(#SESSION|?{' ',''})<a href="#URL_LOGOUT" title="se deconnecter">D&eacute;connexion</a>]
-	</div>]
+	(#SESSION{id_auteur}|?{'',' '}) <a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" class='login_modal'><:lien_connecter:></a>
+	]
+</div>
 	
 </body>
 </html>

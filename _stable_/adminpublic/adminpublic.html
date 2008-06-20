@@ -75,7 +75,7 @@
 		[(#REM) Menu Tous vos articles ]
 		<B_auteur>
 		<div style="text-align:left; width:200px;">
-		<h5><a href="[(#SELF|parametre_url{id_article,''}|parametre_url{id_rubrique,#GET{wikirub,#ID_RUBRIQUE}})]"><:icone_ecrire_article:></a></h5>
+		<h5><a href="[(#SELF|parametre_url{id_article,''}|parametre_url{id_rubrique,[(#GET{wikirub,#ID_RUBRIQUE}|sinon{XX})]})]"><:icone_ecrire_article:></a></h5>
 		<BOUCLE_auteur(AUTEURS){id_article?}{id_auteur=#SESSION{id_auteur}}>
 		<B_arti>
 		<h3><:icone_tous_articles:></h3>
@@ -101,10 +101,6 @@
 	
 	[(#REM) Menu de navigation laterale ]
 	<div id="extra">
-		
-	[<div style="background-color:#DADADA; border:1px solid #666;">(#LOGINMINI_PUBLIC|?{'',' '})</div>]
-	
-	[(#SESSION|?{' ',''}) #SESSION{nom} <a href="#URL_LOGOUT" title="se deconnecter"> D&eacute;connexion</a>]
 	
 		
 	</div><!--#extra-->

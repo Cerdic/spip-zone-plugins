@@ -44,6 +44,13 @@ G&eacute;rer votre compte
 
 
 [<!-- (#REM) CREER ARTICLE -->]
+
+[(#REM) pour recup id_rubrique wiki]
+<BOUCLE_wiki(RUBRIQUES){id_rubrique IN #CONFIG{autorite/espace_wiki}}>
+#SET{wikirub,#ID_RUBRIQUE}
+</BOUCLE_wiki>
+
+
 <BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}>
 [(#AUTORISER{creerarticledans,rubrique,#ENV{id_rubrique}})
 <h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> 
@@ -55,11 +62,9 @@ G&eacute;rer votre compte
 <a href="?page=adminpublic&id_rubrique=#ID_RUBRIQUE"><:icone_ecrire_article:></a>  dans votre rubrique</h6>
 </BOUCLE_rubrestreinte>
 [<!--(#REM) pour recup id_rubrique wiki-->]
-<BOUCLE_wiki(RUBRIQUES){id_rubrique IN #CONFIG{autorite/espace_wiki}}{0,1}>
-[(#CONFIG{autorite/espace_wiki_rubrique_anonyme}|?{' ',''})
+
 <h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> 
-<a href="?page=adminpublic&id_rubrique=#ID_RUBRIQUE"><:icone_ecrire_article:></a></h6>]
-</BOUCLE_wiki>
+<a href="[(#URL_PAGE{adminpublic}|parametre_url{id_rubrique,[(#GET{wikirub,#ID_RUBRIQUE}|sinon{XX})]})]"><:icone_ecrire_article:></a></h6>
 
 <//B_rubrestreinte>
 

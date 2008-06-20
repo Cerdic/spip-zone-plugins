@@ -10,6 +10,7 @@
 		};
 	}
 	
+	
 /*
 * #IMG{fichier, alt} -> <img src='fichier' alt='alt' />
 *[(#IMG{images/blocsallesom.png}|image_reduire{280}|extraire_attribut{src})]
