@@ -76,6 +76,7 @@ function exec_spiplistes_config () {
 			
 	$keys_console_syslog = array(
 		'opt_console_syslog' // permet d'envoyer le journal sur syslog
+		, 'opt_log_voir_destinataire' // ecrire adresse mail des destinataires dans les journaux
 		);
 			
 	// initialise les variables postées par le formulaire
@@ -138,6 +139,9 @@ function exec_spiplistes_config () {
 		if(!__server_in_private_ip_adresses()) {
 		}
 		foreach($keys_console_syslog as $key) {
+			if($key == $opt_log_voir_destinataire) {
+				$opt_log_voir_destinataire = (!empty($$key)) ? $$key : 'non';
+			}
 			if(
 				// si pas sur réseau privé et option syslog validé,
 				// retire l'option syslog (cas de copie de base du LAN sur celle du WAN)
@@ -394,26 +398,31 @@ function exec_spiplistes_config () {
 	// La console
 		$page_result .= ""
 			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."console-24.gif", true, "", _T('spiplistes:Console'))
+			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
+			. debut_cadre_relief("", true, "", _T('spiplistes:log_details_console'))
+			. spiplistes_form_input_checkbox ('opt_log_voir_destinataire'
+				, "oui", _T('spiplistes:log_voir_destinataire')
+				, ($opt_log_voir_destinataire == "oui"), true, false)
+			. fin_cadre_relief(true)
 			;
 		// Paramétrer la console de debug/logs si sur LAN
 		if(__server_in_private_ip_adresses()) {
 			$page_result .= ""
-				. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
 				//
 				// ajout du renvoi de tete
-				. debut_cadre_relief("", true, "", _T('spiplistes:Console_syslog'))
-				. "<p class='verdana2'>"._T('spiplistes:Console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR']))."</p>\n"
+				. debut_cadre_relief("", true, "", _T('spiplistes:log_console_syslog'))
+				. "<p class='verdana2'>"._T('spiplistes:log_console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR']))."</p>\n"
 				. "<input type='checkbox' name='opt_console_syslog' value='oui' id='opt_console_syslog' "
 					. ((spiplistes_pref_lire('opt_console_syslog') == 'oui') ? "checked='checked'" : "")
 					. " />\n"
-				. "<label class='verdana2' for='opt_console_syslog'>"._T('spiplistes:Console_syslog_texte')."</label>\n"
+				. "<label class='verdana2' for='opt_console_syslog'>"._T('spiplistes:log_console_syslog_texte')."</label>\n"
 				. fin_cadre_relief(true)
-				//
-				// bouton de validation
-				. "<div style='text-align:right;'><input type='submit' name='btn_console_syslog' class='fondo' value='"._T('bouton_valider')."' /></div>\n"
-				. "</form>\n"
 				;
 		}
+		$page_result .= ""
+			. spiplistes_form_bouton_valider("btn_console_syslog", _T('bouton_valider'), false, true)
+			. "</form>\n"
+			;
 		// voir les journaux SPIP
 		if(!($ii = spiplistes_pref_lire('opt_console_syslog')) || ($ii == 'non')) {
 		// si syslog non activé, on visualise les journaux de spip

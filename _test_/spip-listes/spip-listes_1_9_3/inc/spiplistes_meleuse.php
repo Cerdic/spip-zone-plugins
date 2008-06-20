@@ -74,6 +74,7 @@ function spiplistes_meleuse () {
 		, 'opt_ajout_pied_courrier', 'pied_patron'
 		, 'opt_ajout_tampon_editeur', 'tampon_patron'
 		, 'opt_personnaliser_courrier'
+		, 'opt_log_voir_destinataire'
 		) as $key) {
 		$$key = spiplistes_pref_lire($key);
 	}
@@ -93,6 +94,8 @@ function spiplistes_meleuse () {
 	$nb_courriers = sql_count($sql_courrier_a_traiter);
 	
 	$nb_etiquettes = spiplistes_courriers_en_queue_compter("etat=".sql_quote(''));
+	
+	$log_voir_destinataire = ($opt_log_voir_destinataire == "oui");
 	
 	$str_log = "MEL:";
 	
@@ -407,7 +410,11 @@ spiplistes_log("MEL: nb destinataires: $nb_destinataires", _SPIPLISTES_LOG_DEBUG
 							$nb_emails_non_envoyes++; 
 							$str_temp .= " "._T('spiplistes:msg_abonne_sans_format');
 						} /* fin abo*/
-						spiplistes_log("MEL: ".$str_temp);
+						
+						if($log_voir_destinataire) {
+							spiplistes_log("MEL: ".$str_temp);
+						}
+						
 					} // fin while
 					
 					// supprime la liasse de la queue d'envois

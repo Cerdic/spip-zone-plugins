@@ -121,11 +121,9 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Complement_tampon_editeur' => "Ajouter le tampon Editeur",
 'Complement_tampon_editeur_desc' => "Cette option vous permet de rajouter le tampon de l'&eacute;diteur en fin de courrier. ",
 'Complement_tampon_editeur_label' => "Ajouter le tampon Editeur en fin de courrier",
-'Console' => "Console",
-'Console_syslog_desc' => "Vous &ecirc;tes sur un r&eacute;seau local (@IP_LAN@). Si besoin, vous pouvez activer la console sur syslog au lieu des journaux SPIP.",
-'Console_syslog_texte' => "Activer les journaux syst&egrave;mes (syslog)",
-'Casier_a_courriers' => "Casier &agrave; courriers",
-'Courriers_en_cours_de_redaction' => 'Courriers en cours de r&eacute;daction',
+'Console' => "Console"
+, 'Casier_a_courriers' => "Casier &agrave; courriers"
+, 'Courriers_en_cours_de_redaction' => 'Courriers en cours de r&eacute;daction',
 'Courriers_prets_a_etre_envoye' => "Courriers pr&ecirc;ts &agrave; &ecirc;tre envoy&eacute;s"
 , 'Courriers_publies' => "Courriers publi&eacute;s"
 , 'Courriers_auto_publies' => "Courriers automatiques publi&eacute;s",
@@ -297,10 +295,15 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Liste_prive' => "Liste priv&eacute;e",
 'Liste_publique' => "Liste publique",
 'Liste_abandonnee' => "Liste abandonn&eacute;e",
-'Liste_diffusee_le_premier_de_chaque_mois' => "Liste diffus&eacute;e le premier de chaque mois. ",
+'Liste_diffusee_le_premier_de_chaque_mois' => "Liste diffus&eacute;e le premier de chaque mois. "
+, 'log_details_console' => "D&eacute;tails de la console"
+, 'log_voir_destinataire' => "Lister les adresses email des destinataires dans la console lors de l'envoi."
+, 'log_console_syslog_desc' => "Vous &ecirc;tes sur un r&eacute;seau local (@IP_LAN@). Si besoin, vous pouvez activer la console sur syslog au lieu des journaux SPIP (conseill&eacute; sous unix)."
+, 'log_console_syslog_texte' => "Activer les journaux syst&egrave;mes (renvoi sur syslog)"
+, 'log_console_syslog' => "Console syslog"
 
 //M
-'mail_format' => 'Vous &ecirc;tes abonn&eacute; &agrave; la lettre d\'information du site @nom_site_spip@ en format',
+, 'mail_format' => 'Vous &ecirc;tes abonn&eacute; &agrave; la lettre d\'information du site @nom_site_spip@ en format',
 'mail_non' => 'Vous n\'&ecirc;tes pas abonn&eacute; &agrave; la lettre d\'information du site @nom_site_spip@',
 'maintenance_objet' => "Maintenance @objet@",
 'message_arch' => 'Courrier archiv&eacute;',

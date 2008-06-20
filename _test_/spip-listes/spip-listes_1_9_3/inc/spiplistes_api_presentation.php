@@ -122,7 +122,7 @@ function spiplistes_form_bouton_valider ($name, $value, $reset = false, $return 
 	}
 	$reset = 
 		$reset
-		? "<input type='reset' name='reset_".$name."' value='R&eacute;tablir' class='fondo' />\n"
+		? "<input type='reset' name='reset_".$name."' value=\"".$reset_value."\" class='fondo' />\n"
 		: ""
 		;
 	$result = ""
