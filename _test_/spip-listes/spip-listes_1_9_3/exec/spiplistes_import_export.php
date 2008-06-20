@@ -49,11 +49,26 @@ function exec_spiplistes_import_export(){
 
 	$separateur = (($separateur == 'tab') ? "\t" : ";");
 	
-	$flag_autorise = (
-			($connect_statut == "0minirezo") && $connect_toutes_rubriques
-		);
+	$flag_admin = ($connect_statut == "0minirezo") && $connect_toutes_rubriques;
+	$flag_moderateur = false;
+	
+	$flag_autorise = 
+		$flag_admin
+		|| (
+				$flag_moderateur = ($listes_moderees = spiplistes_mod_listes_id_auteur($connect_id_auteur))
+			)
+		;
 
-	if($flag_autorise) {
+	// exportation de liste. Retour formulaire local.
+	// les admins tt rubriques peuvent tt exporter
+	// le moderateur ne peut exporter que sa liste
+	if(
+		$flag_autorise
+		&& 
+			(	$flag_admin
+				|| in_array($export_id, $listes_moderees)
+			)
+	) {
 	
 		// generation du fichier export ?
 		if($btn_valider_export && $export_id) {
@@ -152,6 +167,7 @@ function exec_spiplistes_import_export(){
 			$page_result .= __boite_alerte(_T('spiplistes:Selectionnez_une_liste_pour_import'), true);
 		}
 	}
+		
 	// import form
 	$page_result .= ""
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'listes_in-24.png', true, "", _T('spiplistes:Importer'))
@@ -163,7 +179,11 @@ function exec_spiplistes_import_export(){
 			$page_result .= ""
 				. debut_boite_info(true)
 				. spiplistes_titre_boite_info(_T('spiplistes:Resultat_import'))
-				. spiplistes_import($fichier_import['tmp_name'], $fichier_import['name'], $abos_liste, $format_abo, $separateur, true)
+				. spiplistes_import($fichier_import['tmp_name']
+					, $fichier_import['name'], $abos_liste, $format_abo, $separateur
+					, $flag_admin
+					, $listes_moderees
+					)
 				. fin_boite_info(true)
 				;
 		}
@@ -193,17 +213,15 @@ function exec_spiplistes_import_export(){
 			. "<p class='verdana2'>"._T('spiplistes:Selectionnez_une_liste_de_destination')."</p>\n"
 			. "<ul style='padding-left:0;list-style:none;margin:0;' class='verdana2'>\n"
 			;
-		// liste des listes
+		// liste des listes (destination)
 		$ii = 0;
 		foreach($listes_array as $row) {
 			$id_liste = $row['id_liste'] ;
-			$titre = couper($row['titre'], 30, '...');
-			$texte = couper($row['texte'], 30, '...');
-			$checked = ($nb_listes == 1) ? "checked='checked'" : "";
-			$label = _T('spiplistes:Liste_de_destination').": $titre";
-			$ids_mods_array = spiplistes_mod_listes_get_id_auteur($id_liste);
-			$ids_mods_array = ($ids_mods_array && isset($ids_mods_array[$id_liste]) ? $ids_mods_array[$id_liste] : array());
-			if($connect_toutes_rubriques || in_array($connect_id_auteur, $ids_mods_array)) {
+			if($flag_admin || in_array($id_liste, $listes_moderees)) {
+				$titre = couper($row['titre'], 30, '...');
+				$texte = couper($row['texte'], 30, '...');
+				$label = _T('spiplistes:Liste_de_destination').": $titre";
+				$checked = ($nb_listes == 1) ? "checked='checked'" : "";
 				$page_result .= ""
 					. "<li style='padding:4px;background-color:#".(($ii++ % 2) ? "fff" : "ccc").";'>"
 					. "<input name='abos_liste[]' type='checkbox' id='abos_$id_liste' value='$id_liste' title=\"$label\" $checked />\n"
@@ -218,7 +236,7 @@ function exec_spiplistes_import_export(){
 			//
 			// Sélection du format de réception
 			. debut_cadre_relief("", true, "", _T('spiplistes:Format_de_reception'))
-			. "<ul style='padding-left:0;list-style:none;' class='verdana2'>\n"
+			. "<ul class='liste-listes verdana2'>\n"
 			. "<li>"
 				. spiplistes_form_input_radio('format_abo', 'html', _T('spiplistes:html'), true, true, false)
 				. "</li>\n"
@@ -254,19 +272,21 @@ function exec_spiplistes_import_export(){
 			// exportation par listes
 			. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT), true)
 			. debut_cadre_relief("", true, "", _T('spiplistes:Exporter_une_liste_d_abonnes'))
-			. "<ul style='padding-left:0;list-style:none;' class='verdana2'>\n"
+			. "<ul class='liste-listes verdana2'>\n"
 			;
 		$ii = 0;
 		foreach($listes_array as $row) {
 			$id_liste = intval($row['id_liste']);
-			$titre = couper($row['titre'], 30, '...');
-			$page_result .= ""
-				. "<li style='padding:4px;background-color:#".(($ii++ % 2) ? "fff" : "ccc").";'>"
-				. spiplistes_form_input_radio('export_id', $id_liste
-					, "<strong>".$titre."</strong> <em>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</em>"
-					, ($nb_listes==1), true, false)
-				. "</li>\n"
-				;
+			if($flag_admin || in_array($id_liste, $listes_moderees)) {
+				$titre = couper($row['titre'], 30, '...');
+				$page_result .= ""
+					. "<li style='padding:4px;background-color:#".(($ii++ % 2) ? "fff" : "ccc").";'>"
+					. spiplistes_form_input_radio('export_id', $id_liste
+						, "<strong>".$titre."</strong> <em>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</em>"
+						, ($nb_listes==1), true, false)
+					. "</li>\n"
+					;
+			}
 		}
 		$page_result .= ""
 			. "</ul>"

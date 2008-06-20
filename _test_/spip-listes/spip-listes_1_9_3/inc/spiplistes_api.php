@@ -497,6 +497,18 @@ function spiplistes_mod_listes_compter ($id_liste) {
 	return(($n && $n['n']) ? $n['n'] : false);
 }
 
+//CP-20080620
+// renvoie tableau id_liste des listes modérées par l'auteur
+function spiplistes_mod_listes_id_auteur ($id_auteur) {
+	$result = false;
+	if($sql_result = sql_select('id_liste', 'spip_auteurs_mod_listes', 'id_auteur='.sql_quote($id_auteur))) {
+		$result = array();
+		while($row = sql_fetch($sql_result)) {
+			$result[] = $row['id_liste'];
+		}
+	}
+	return($result);
+}
 
 //function spiplistes_texte_propre($texte)
 // passe propre() sur un texte puis nettoie les trucs rajoutes par spip sur du html

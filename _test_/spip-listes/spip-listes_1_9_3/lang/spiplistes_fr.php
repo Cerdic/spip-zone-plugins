@@ -271,10 +271,11 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 	et participer &agrave; tous les forums.  L\'inscription permet &eacute;galement d\'acc&eacute;der aux parties du site en acc&egrave;s restreint
 	et de recevoir les lettres d\'informations.'
 , 'import_export' => 'Import / Export'
-, 'introduction_du_courrier_' => "Introduction &agrave; votre courrier, avant le contenu issu du site ",
+, 'introduction_du_courrier_' => "Introduction &agrave; votre courrier, avant le contenu issu du site "
+, 'incorrect_ou_dupli' => " (incorrect ou dupli)"
 
 //J
-'jour' => 'jour',
+, 'jour' => 'jour',
 'jours' => 'jours',
 
 //L

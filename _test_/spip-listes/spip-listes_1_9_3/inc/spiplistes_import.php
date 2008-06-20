@@ -10,7 +10,11 @@ include_spip('inc/presentation');
 include_spip('inc/acces');
 include_spip('inc/spiplistes_api_globales');
 
-function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "non", $separateur = "\t", $return = false) {
+function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "non"
+	, $separateur = "\t"
+	, $flag_admin
+	, $listes_autorisees
+) {
 	$result = "";
 	if(is_readable($filename)) {
 		// récupère les logins et mails existants pour éviter les doublons
@@ -93,11 +97,11 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 			$result .= "<br />"._T('pass_erreur')." login: $bad_login\n";
 		}
 		if($bad_email) {
-			$result .= "<br />"._T('pass_erreur')." email: $bad_email\n";
+			$result .= "<br />"._T('pass_erreur')." email: $bad_email "._T('spiplistes:incorrect_ou_dupli')."\n";
 		}
 		$result = "<strong>$realname</strong>\n" . $result;
 	}
-	if($return) return($result);
-	else echo($result);
+	return($result);
 }
+//
 ?>
