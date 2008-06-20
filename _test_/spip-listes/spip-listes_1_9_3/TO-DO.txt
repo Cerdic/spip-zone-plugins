@@ -5,7 +5,6 @@
 
 
 TO-DO:
-- permettre dans l'import l'assignation d'un abonné à un groupe (redac ou invité) et donc revoir l'export
 - optimiser le cron (j'ai comme l'impression que certains s'attendent à voir le courrier partir illico). Il y a peut-etre une astuce à trouver ici (calculer la charge du serveur, le nombre de plugin utilisant le cron, etc.) Des idées ?
 - terminer la compat svn (fouiller!) CP20080609
 - corriger les CSS pour espace public des formulaires (le cache, toujours le cache)
