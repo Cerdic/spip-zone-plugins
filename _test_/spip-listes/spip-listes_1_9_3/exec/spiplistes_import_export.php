@@ -42,7 +42,7 @@ function exec_spiplistes_import_export(){
 	foreach(array(
 		'btn_valider_import', 'abos_liste', 'format_abo'	// retour import
 		, 'btn_valider_export', 'export_id' // retour export
-		, 'separateur'
+		, 'separateur', 'exporter_statut_auteur'
 		) as $key) {
 		$$key = _request($key);
 	}
@@ -73,7 +73,7 @@ function exec_spiplistes_import_export(){
 		// generation du fichier export ?
 		if($btn_valider_export && $export_id) {
 		
-			$sql_select = array('a.email', 'a.nom', 'a.login');
+			$sql_select = array('a.email', 'a.nom', 'a.login', 'a.statut');
 			$sql_from = array('spip_auteurs AS a');
 			$sql_where = array("a.statut!=".sql_quote('5poubelle'));
 			if(($id_liste = intval($export_id)) > 0) {
@@ -100,12 +100,13 @@ function exec_spiplistes_import_export(){
 			}
 
 			$sql_result = sql_select(
-				array('a.email', 'a.nom', 'a.login')
+				$sql_select
 				, $sql_from
 				, $sql_where
 				);
 
 			$nb_inscrits = sql_count($sql_result);
+			$exporter_statut_auteur = ($exporter_statut_auteur == 'oui');
 			
 			$str_export = ""
 				. "# ".__plugin_html_signature(_SPIPLISTES_PREFIX, true, false)."\n"
@@ -116,11 +117,16 @@ function exec_spiplistes_import_export(){
 				. "# date: ".date("Y-m-d")."\n"
 				. "# nb abos: ".$nb_inscrits."\n\n"
 				. "#\n"
-				. "# 'email'".$separateur."'login'".$separateur."'nom'\n\n"
+				. "# 'email'".$separateur."'login'".$separateur."'nom'"
+				. ($exporter_statut_auteur ? $separateur."'statut'" : "")
+				. "\n\n"
 				;
 			
 			while($row = sql_fetch($sql_result)) {
-				$str_export .= $row['email'].$separateur.$row['login'].$separateur.$row['nom']."\n";
+				$str_export .= $row['email'].$separateur.$row['login'].$separateur.$row['nom']
+					. ($exporter_statut_auteur ? $separateur.$row['statut'] : "")
+					. "\n"
+					;
 			}
 			// envoie le fichier
 			header("Content-type: text/plain");
@@ -325,6 +331,10 @@ function exec_spiplistes_import_export(){
 			. spiplistes_form_input_radio('export_id', 'desabo', _T('spiplistes:desabonnes'), false, true, false)
 			. "</div>"
 			. fin_cadre_relief(true)
+			. "<fieldset class='verdana2'><legend>"._T('spiplistes:export_etendu_').":</legend>"
+			. spiplistes_form_input_checkbox('exporter_statut_auteur', 'oui'
+				, _T('spiplistes:exporter_statut'), false, true, false)
+			. "</fieldset>\n"
 			//
 			. spiplistes_fieldset_separateur($separateur)
 			//

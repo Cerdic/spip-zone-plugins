@@ -218,6 +218,8 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'en_debut_de_mois' => "en d&eacute;but de mois"
 , 'envoi_non_programme' => "Envoi non programm&eacute;"
 , 'editer_fiche_abonne' => "Editer la fiche de l'abonn&eacute;"
+, 'export_etendu_' => "Export &eacute;tendu "
+, 'exporter_statut' => "Exporter le statut (invit&eacute;, r&eacute;dacteur, etc.)"
 ,
 
 //F

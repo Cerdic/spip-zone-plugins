@@ -29,13 +29,18 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 		$new_entries = file($filename);
 		$nb_entries = count($new_entries);
 		$new_abonne = $bad_login = $bad_email = 0;
-		$statut = "6forum";
+		$statuts_auteurs = array('6forum', '1comite', '0minirezo');
 		
 		for($jj = 0; $jj < $nb_entries; $jj++) {
 			$nouvelle_entree = trim($new_entries[$jj]);
 			if(!empty($nouvelle_entree) && !ereg("^[/#]", $nouvelle_entree)) {
-				list($email, $login, $nom) = explode($separateur, $nouvelle_entree);
+				list($email, $login, $nom, $statut) = explode($separateur, $nouvelle_entree);
 				$email = strtolower(trim($email));
+				if(
+					!in_array($statut, $statuts_auteurs)
+				) {
+					$statut = "6forum";
+				}
 				if(($email = email_valide($email)) && !in_array($email, $current_emails)) {
 					$login = strtolower(trim($login));
 					if(empty($login)) {
