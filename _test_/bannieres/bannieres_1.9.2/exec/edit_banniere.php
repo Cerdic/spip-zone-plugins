@@ -13,6 +13,7 @@
 	//---------------------------- 
 
 	include_spip('inc/presentation');
+	define('_DIR_IMG', $f.'IMG/');
 
 	function exec_edit_banniere(){
 		global $connect_statut, $connect_toutes_rubriques;
@@ -33,11 +34,11 @@
 		
 		if ($connect_statut == '0minirezo') {
 			debut_raccourcis();
-			icone_horizontale("Retour", $url_retour,_DIR_PLUGIN_BANNIERES."/img_pack/retour-24.png","rien.gif");	
+			icone_horizontale("Retour", $url_retour,_DIR_PLUGIN_BANNIERES."img_pack/retour-24.png","rien.gif");	
 			fin_raccourcis();
 		}		
 		debut_droite();
-		debut_cadre_relief ( "../"._DIR_PLUGIN_BANNIERES."/img_pack/bannieres.png", false, "", $titre = 'FICHE BANNIERE');
+		debut_cadre_relief ( "../"._DIR_PLUGIN_BANNIERES."img_pack/bannieres.png", false, "", $titre = 'FICHE BANNIERE');
 		
 		$action=$_GET['action'];
 		$incorrect=$_GET['incorrect'];
@@ -60,7 +61,7 @@
 		echo '<form action="'.$url_action_bannieres.'" method="post" enctype="multipart/form-data">';	
 		
 		#Identification
-		if ($action=="modifie"){echo '<p><img src="../IMG/ban_'.$id_banniere.'.'.$ext.'" width="100%" /></p>';}
+		if ($action=="modifie"){echo '<p><img src="'._DIR_IMG.'ban_'.$id_banniere.'.'.$ext.'" width="100%" /></p>';}
 		echo '<label for="nom"><strong>Campagne :</strong></label>';
 		echo '<input name="nom" type="text" value="'.$nom.'" id="nom" class="formo" />';
 		echo '<label for="email"><strong>Email :</strong></label>';
