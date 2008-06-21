@@ -23,7 +23,7 @@ function exec_spiplistes_autocron () {
 	$sql_result = sql_select(
 		"id_courrier,total_abonnes,nb_emails_envoyes"
 		, 'spip_courriers'
-		, "statut=".sql_quote(_SPIPLISTES_STATUT_ENCOURS), '', '', 1
+		, "statut=".sql_quote(_SPIPLISTES_COURRIER_STATUT_ENCOURS), '', '', 1
 	);
 
 	if(sql_count($sql_result) > 0 ){

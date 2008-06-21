@@ -40,10 +40,12 @@ function exec_spiplistes_maintenance () {
 	// la maintenance spiplistes est réservée à l'admin principal 
 	$flag_autorise = ($connect_statut == "0minirezo") && ($connect_id_auteur == 1);
 	
-	$tous_les_statuts_courriers = array(_SPIPLISTES_STATUT_REDAC, _SPIPLISTES_STATUT_READY
-			, _SPIPLISTES_STATUT_ENCOURS
-			, _SPIPLISTES_STATUT_AUTO, _SPIPLISTES_STATUT_PUBLIE
-			, _SPIPLISTES_STATUT_VIDE, _SPIPLISTES_STATUT_IGNORE, _SPIPLISTES_STATUT_STOPE, _SPIPLISTES_STATUT_ERREUR);
+	$tous_les_statuts_courriers = array(_SPIPLISTES_COURRIER_STATUT_REDAC, _SPIPLISTES_COURRIER_STATUT_READY
+			, _SPIPLISTES_COURRIER_STATUT_ENCOURS
+			, _SPIPLISTES_COURRIER_STATUT_AUTO, _SPIPLISTES_COURRIER_STATUT_PUBLIE
+			, _SPIPLISTES_COURRIER_STATUT_VIDE, _SPIPLISTES_COURRIER_STATUT_IGNORE
+			, _SPIPLISTES_COURRIER_STATUT_STOPE, _SPIPLISTES_COURRIER_STATUT_ERREUR
+			);
 
 	$msg_maintenance = array();
 	
@@ -68,7 +70,7 @@ function exec_spiplistes_maintenance () {
 		if($btn_supprimer_courriers) {
 			foreach($tous_les_statuts_courriers as $statut) {
 				if(_request("supprimer_courriers_$statut")) {
-					if($statut == _SPIPLISTES_STATUT_ENCOURS) {
+					if($statut == _SPIPLISTES_COURRIER_STATUT_ENCOURS) {
 						// supprime d'abord de la queue d'envoi
 						spiplistes_courrier_supprimer_queue_envois('statut', $statut);
 						spiplistes_log("RESET spool ID_COURRIER #$id_courrier by ID_AUTEUR #$connect_id_auteur");

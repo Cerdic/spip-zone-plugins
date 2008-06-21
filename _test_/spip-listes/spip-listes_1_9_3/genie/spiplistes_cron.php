@@ -41,9 +41,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	// Precision sur la table spip_listes:
 	// 'date': date d'envoi souhaitee (prochain envoi)
 	// 'maj': date d'envoi du courrier mis a' jour par cron.
+	// 'type' : type de liste attribuée soit en direct, via liste_gerer, 
+	//          soit par la trieuse, en cron
+	// type = 'nl' : (newsletter) liste envoyée en direct
+	// type = 'auto' : liste traitée par la trieuse, en cron
 	
 /*
-	renvoie:
+	cron_spiplistes_cron() renvoie:
 	- nul, si la tache n'a pas a etre effectuee
 	- positif, si la tache a ete effectuee
 	- negatif, si la tache doit etre poursuivie ou recommencee
@@ -59,7 +63,7 @@ function cron_spiplistes_cron ($last_time) {
 	include_spip('inc/spiplistes_api_courrier');
 	include_spip('inc/spiplistes_api_abstract_sql');
 
-	$log_msg = "CRON: ";
+	$prefix_log = "CRON: ";
 
 	// initialise les options (prefs spiplistes)
 	foreach(array(
@@ -69,10 +73,10 @@ function cron_spiplistes_cron ($last_time) {
 	}
 
 	if($opt_suspendre_trieuse == 'oui') {
-		spiplistes_log($log_msg."SUSPEND MODE !!!");
+		spiplistes_log($prefix_log."SUSPEND MODE !!!");
 		if(spiplistes_courriers_en_queue_compter("etat=".sql_quote("")) > 0) {
 			include_spip('inc/spiplistes_meleuse');
-			return(spiplistes_meleuse());
+			return(spiplistes_meleuse($last_time));
 		}
 		else {
 			return($last_time);
@@ -101,7 +105,7 @@ function cron_spiplistes_cron ($last_time) {
 	
 	$nb_listes_ok = sql_count($listes_privees_et_publiques);
 	
-spiplistes_log($log_msg."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
+spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 
 	if($nb_listes_ok > 0) {
 	
@@ -169,12 +173,12 @@ spiplistes_log($log_msg."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBU
 					$sql_set = array('date' => sql_quote(normaliser_date($next_time)));
 				}
 				$sql_set['maj'] = 'NOW()';
-				sql_update('spip_listes'
+				sql_update(
+					'spip_listes'
 					, $sql_set
 					, "id_liste=".sql_quote($id_liste)." LIMIT 1"
 					);
 			}
-	
 	
 			/////////////////////////////
 			// preparation du courrier à placer dans le panier (spip_courriers)
@@ -184,7 +188,7 @@ spiplistes_log($log_msg."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBU
 			$texte = recuperer_fond('patrons/'.$patron, $contexte_patron);
 			$titre = ($titre_message =="") ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
 			
-	//spiplistes_log($log_msg."Titre => $titre", _SPIPLISTES_LOG_DEBUG);
+//spiplistes_log($prefix_log."Titre => $titre", _SPIPLISTES_LOG_DEBUG);
 	
 			$taille_courrier_ok = (spiplistes_strlen(spiplistes_courrier_version_texte($texte)) > 10);
 	
@@ -192,16 +196,15 @@ spiplistes_log($log_msg."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBU
 				include_spip('inc/filtres');
 				$texte = liens_absolus($texte);
 				$date_debut_envoi = $date_fin_envoi = "''";
-				$statut = _SPIPLISTES_STATUT_ENCOURS;
+				$statut = _SPIPLISTES_COURRIER_STATUT_ENCOURS;
 			}
 			else {
-	//spiplistes_log($log_msg."courrier vide !!", _SPIPLISTES_LOG_DEBUG);
+//spiplistes_log($prefix_log."courrier vide !!", _SPIPLISTES_LOG_DEBUG);
 				$date_debut_envoi = $date_fin_envoi = "NOW()";
-				$statut = _SPIPLISTES_STATUT_VIDE;
-				spiplistes_log($log_msg."envoi mail nouveautes : courrier vide", _SPIPLISTES_LOG_DEBUG);
+				$statut = _SPIPLISTES_COURRIER_STATUT_VIDE;
+spiplistes_log($prefix_log."envoi mail nouveautes : courrier vide", _SPIPLISTES_LOG_DEBUG);
 			}
 			
-			/////////////////////////////
 			// Place le courrier dans le casier
 			$id_courrier = sql_insert(
 				'spip_courriers'
@@ -220,7 +223,7 @@ spiplistes_log($log_msg."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBU
 					. sql_quote($titre)
 					. ",NOW()"
 					. ",".sql_quote($statut)
-					. ",".sql_quote(_SPIPLISTES_TYPE_LISTEAUTO)
+					. ",".sql_quote(_SPIPLISTES_COURRIER_TYPE_LISTEAUTO)
 					. ",".sql_quote($id_auteur)
 					. ",".sql_quote($id_liste)
 					. ",".$date_debut_envoi
@@ -229,13 +232,12 @@ spiplistes_log($log_msg."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBU
 					. ")"
 			);
 
-			/////////////////////////////
-			// place les etiquettes en ajoutant 
-			// les abonnés dans la queue (spip_auteurs_courriers)
 			if($taille_courrier_ok) {
+				// place les etiquettes
+				// (ajout des abonnés dans la queue (spip_auteurs_courriers))
 				spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste);
 			} 
-		}// end while // fin traitement des listes
+		} // end while // fin traitement des listes
 	}	
 	
 	/////////////////////////////
@@ -245,19 +247,20 @@ spiplistes_log($log_msg."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBU
 			spiplistes_courriers_en_queue_compter("etat=".sql_quote(""))
 	){
 
-spiplistes_log($log_msg."$n JOBS, appel meleuse", _SPIPLISTES_LOG_DEBUG);
+spiplistes_log($prefix_log."$n job(s), appel meleuse", _SPIPLISTES_LOG_DEBUG);
 
 		include_spip('inc/spiplistes_meleuse');
-		return(spiplistes_meleuse());
+		return(spiplistes_meleuse($last_time));
 	}
 	return ($last_time); 
 } // cron_spiplistes_cron()
 
-// SPIP 193 ?
+// En SPIP 192, c'est cron_* qui est appellé
+// En SPIP 193, c'est genie_* qui est appellé
 
 function genie_spiplistes_cron ($last_time) {
 	include_spip('inc/spiplistes_api_globales');
-spiplistes_log("GENI: genie_spiplistes_cron() 193", _SPIPLISTES_LOG_DEBUG);
+// spiplistes_log("GENI: genie_spiplistes_cron() 193", _SPIPLISTES_LOG_DEBUG);
 	cron_spiplistes_cron ($last_time);
 }
 

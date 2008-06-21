@@ -26,7 +26,8 @@ function action_spiplistes_envoi_lot_dist ()
 	if($nb_etiquettes > 0) {
 		// envoi d'un lot par la meleuse
 		include_spip('inc/spiplistes_meleuse');
-		spiplistes_meleuse();
+		$last_time = time();
+		spiplistes_meleuse($last_time);
 		$nb_etiquettes = spiplistes_courriers_en_queue_compter("etat=".sql_quote(''));
 	}
 	

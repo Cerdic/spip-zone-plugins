@@ -66,7 +66,7 @@ function spiplistes_destiner_envoi (
 			
 	if(
 		($flag_admin || $flag_moderateur)
-		&& (($statut == _SPIPLISTES_STATUT_REDAC) || ($statut == _SPIPLISTES_STATUT_READY))
+		&& (($statut == _SPIPLISTES_COURRIER_STATUT_REDAC) || ($statut == _SPIPLISTES_COURRIER_STATUT_READY))
 	) {
 
 			$adresse_test = $GLOBALS['auteur_session']['email'];

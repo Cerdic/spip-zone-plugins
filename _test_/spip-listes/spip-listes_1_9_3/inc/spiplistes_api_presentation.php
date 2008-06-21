@@ -607,15 +607,17 @@ function spiplistes_boite_autocron () {
 	
 	include_spip('genie/spiplistes_cron');
 	$time = time();
-	if(cron_spiplistes_cron($time) > 0) { 
+	$time = cron_spiplistes_cron($time);
+
+	if($time > 0) { 
 		// le CRON n'a rien a faire. Pas de boite autocron
 		return($result);
 	}
-	
-	$nb_etiquettes = spiplistes_courriers_en_queue_compter("etat=".sql_quote(''));
-	$nb_abos_encour = spiplistes_courriers_en_cours_compter();
 
-	if($nb_etiquettes > 0) {
+	$nb_etiquettes = spiplistes_courriers_en_queue_compter("etat=".sql_quote(''));
+	$nb_total_abonnes = spiplistes_courriers_total_abonnes();
+
+	if(($nb_etiquettes > 0) && ($nb_total_abonnes > 0)) {
 		$result .= ""
 			. "<br />"
 			. debut_boite_info(true)
@@ -623,12 +625,12 @@ function spiplistes_boite_autocron () {
 			. "<div style='padding : 10px;text-align:center'><img alt='' src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_distribution-48.gif' /></div>"
 			. "<div id='meleuse'>"
 			.	(
-					($nb_abos_encour)
+					($nb_total_abonnes)
 					?	""
 						. "<p align='center' id='envoi_statut'>"._T('spiplistes:envoi_en_cours')." "
-						. "<strong id='envois_restants'>$nb_etiquettes</strong>/<span id='envois_total'>$nb_abos_encour</span> "
+						. "<strong id='envois_restants'>$nb_etiquettes</strong>/<span id='envois_total'>$nb_total_abonnes</span> "
 						. "(<span id='envois_restant_pourcent'>"
-						. round($nb_etiquettes/$nb_abos_encour*100)."</span>%)</p>"
+						. round($nb_etiquettes / $nb_total_abonnes * 100)."</span>%)</p>"
 					:	""
 				)
 			// message si simulation d'envoi	
@@ -641,13 +643,11 @@ function spiplistes_boite_autocron () {
 		
 		$href = generer_action_auteur('spiplistes_envoi_lot','envoyer');
 
-		for ($i=0;$i<_SPIP_LISTE_SEND_THREADS;$i++) {
+		for ($i = 0; $i < _SPIP_LISTE_SEND_THREADS; $i++) {
 			$result .= "<span id='proc$i' class='processus' name='$href'></span>";
 		}
-		if (_request('exec')==_SPIPLISTES_EXEC_COURRIERS_LISTE) {
-			$result .= "<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE)."' id='redirect_after'></a>";
-		}
 		$result .= ""
+			. "<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE)."' id='redirect_after'></a>"
 			. "</div>"
 			. "<script><!--
 		var target = $('#envois_restants');
@@ -661,11 +661,11 @@ function spiplistes_boite_autocron () {
 			}
 		}
 		jQuery.fn.runProcessus = function(url) {
-			var proc=this;
-			var href=url;
+			var proc = this;
+			var href = url;
 			$(target).load(url,function(data){
 				restant = $(target).html();
-				pourcent=Math.round(restant/total*100);
+				pourcent = Math.round(restant/total*100);
 				$(target_pc).html(pourcent);
 				if (Math.round(restant)>0)
 					$(proc).runProcessus(href);
@@ -678,7 +678,8 @@ function spiplistes_boite_autocron () {
 			$(this).html(ajax_image_searching).runProcessus(href);
 			//run_processus($(this).attr('id'));
 		});
-		//--></script>"
+		//-->
+		</script>"
 			. "<p class='verdana2'>"._T('spiplistes:texte_boite_en_cours')."</p>" 
 			. fin_boite_info(true)
 			;

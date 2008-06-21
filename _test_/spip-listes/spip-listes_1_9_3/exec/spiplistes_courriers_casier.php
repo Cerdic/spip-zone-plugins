@@ -159,49 +159,46 @@ function exec_spiplistes_courriers_casier () {
 
 	$flag_modifiable = ($flag_admin || $flag_moderateur || $flag_createur);
 
-	// confirmer l'envoi d'un courrier
-	if($btn_confirmer_envoi 
-		&& $flag_modifiable
-	) {
-		// passe le courrier directement a la meleuse
-		if($id_liste >= 0) {
-			// destinataire(s) = abonnés à une liste
-			// si id_liste == 0, destinataire = adresse email de test
-			spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
-			spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste, $id_auteur_test);
-			if($id_liste > 0) {
-spiplistes_log("SEND ID_COURRIER #$id_courrier ON id_liste #$id_liste BY id_auteur #$connect_id_auteur"
-		, _SPIPLISTES_LOG_DEBUG);
-			} else {
-spiplistes_log("SEND ID_COURRIER #$id_courrier TO #$id_auteur_test TEST BY id_auteur #$connect_id_auteur"
-		, _SPIPLISTES_LOG_DEBUG);
-			}
-		}
-		spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_STATUT_ENCOURS);
-	}
+	if($flag_modifiable) {
 
-	// supprimer un courrier des cases
-	if($btn_supprimer_courrier
-		&& $flag_modifiable
-	) {
-		sql_delete("spip_courriers", "id_courrier=".sql_quote($btn_supprimer_courrier)." LIMIT 1");
-		spiplistes_courrier_supprimer_queue_envois('id_courrier', $btn_supprimer_courrier);
-	}
+		// confirmer l'envoi d'un courrier
+		if($btn_confirmer_envoi) {
+			// passe le courrier directement a la meleuse
+			if($id_liste >= 0) {
+				// destinataire(s) = abonnés à une liste
+				// si id_liste == 0, destinataire = adresse email de test
+				spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
+				spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste, $id_auteur_test);
+				if($id_liste > 0) {
+	spiplistes_log("SEND id_courrier #$id_courrier ON id_liste #$id_liste BY id_auteur #$connect_id_auteur"
+			, _SPIPLISTES_LOG_DEBUG);
+				} else {
+	spiplistes_log("SEND id_courrier #$id_courrier TO #$id_auteur_test TEST BY id_auteur #$connect_id_auteur"
+			, _SPIPLISTES_LOG_DEBUG);
+				}
+			}
+			spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_COURRIER_STATUT_ENCOURS);
+		}
 	
-	// arreter un courrier en cours d'envoi
-	if(
-		$btn_arreter_envoi 
-		&& $flag_modifiable
-	) {
-		spiplistes_courrier_modifier(
-			$btn_arreter_envoi 
-			, array(
-				'statut' => _SPIPLISTES_STATUT_STOPE
-				, 'date_fin_envoi' => "NOW()"
-			)
-		);
-		spiplistes_courrier_supprimer_queue_envois('id_courrier', $btn_arreter_envoi);
-	}
+		// supprimer un courrier des cases
+		if($btn_supprimer_courrier) {
+			sql_delete("spip_courriers", "id_courrier=".sql_quote($btn_supprimer_courrier)." LIMIT 1");
+			spiplistes_courrier_supprimer_queue_envois('id_courrier', $btn_supprimer_courrier);
+		}
+		
+		// arreter un courrier en cours d'envoi
+		if($btn_arreter_envoi) {
+			spiplistes_courrier_modifier(
+				$btn_arreter_envoi 
+				, array(
+					'statut' => _SPIPLISTES_COURRIER_STATUT_STOPE
+					, 'date_fin_envoi' => "NOW()"
+				)
+			);
+			spiplistes_courrier_supprimer_queue_envois('id_courrier', $btn_arreter_envoi);
+		}
+		
+	} // end if $flag_modifiable
 
 ////////////////////////////////////
 // PAGE CONTENU
@@ -237,10 +234,12 @@ spiplistes_log("SEND ID_COURRIER #$id_courrier TO #$id_auteur_test TEST BY id_au
 
 	// Début de liste
 	$listes_statuts = array(
-		_SPIPLISTES_STATUT_ENCOURS, _SPIPLISTES_STATUT_REDAC, _SPIPLISTES_STATUT_READY
+		_SPIPLISTES_COURRIER_STATUT_ENCOURS, _SPIPLISTES_COURRIER_STATUT_REDAC
+		, _SPIPLISTES_COURRIER_STATUT_READY
 		, $_skip_statut
-		, _SPIPLISTES_STATUT_AUTO, _SPIPLISTES_STATUT_PUBLIE
-		, _SPIPLISTES_STATUT_VIDE, _SPIPLISTES_STATUT_IGNORE, _SPIPLISTES_STATUT_STOPE, _SPIPLISTES_STATUT_ERREUR
+		, _SPIPLISTES_COURRIER_STATUT_AUTO, _SPIPLISTES_COURRIER_STATUT_PUBLIE
+		, _SPIPLISTES_COURRIER_STATUT_VIDE, _SPIPLISTES_COURRIER_STATUT_IGNORE
+		, _SPIPLISTES_COURRIER_STATUT_STOPE, _SPIPLISTES_COURRIER_STATUT_ERREUR
 		);
 	$mes_statuts = ($statut && in_array($statut, $listes_statuts)) ? array($statut) : $listes_statuts;
 	foreach($mes_statuts as $statut) {

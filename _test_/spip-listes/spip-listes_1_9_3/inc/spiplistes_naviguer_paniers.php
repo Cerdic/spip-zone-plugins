@@ -40,7 +40,7 @@ function spiplistes_naviguer_paniers ($titre, $element, $les_statuts, $return = 
 		foreach($les_statuts as $statut=>$value) {
 			if($value && ($current_statut != $statut)) {
 				$result .= ""
-					. "<li>"
+					. "<li id='menu-navig-$statut'>"
 					. icone_horizontale(
 						spiplistes_items_get_item('nav_t', $statut).($value ? " <em>($value)</em>" : "")
 						, generer_url_ecrire($script_exec, "statut=$statut")

@@ -107,8 +107,8 @@ function exec_spiplistes_courrier_gerer () {
 					$titre = $row['titre'];
 					$texte = $row['texte'];
 					$str_log = "id_courrier #$id_courrier";
-					$statut = _SPIPLISTES_STATUT_REDAC;
-					$type = 'nl';
+					$statut = _SPIPLISTES_COURRIER_STATUT_REDAC;
+					$type = _SPIPLISTES_COURRIER_TYPE_NEWSLETTER;
 					$id_courrier = sql_insert(
 						'spip_courriers'
 						, "(titre,texte,date,statut,type,id_auteur)"
@@ -138,7 +138,7 @@ function exec_spiplistes_courrier_gerer () {
 									  'email_test' => $email_test
 									, 'total_abonnes' => 1
 									, 'id_liste' => ($id_liste = 0)
-									, 'statut' => ($change_statut = _SPIPLISTES_STATUT_READY)
+									, 'statut' => ($change_statut = _SPIPLISTES_COURRIER_STATUT_READY)
 									)
 							);
 							$str_destinataire = _T('spiplistes:email_adresse') . " : $email_test";
@@ -168,7 +168,7 @@ function exec_spiplistes_courrier_gerer () {
 									  'email_test' => ""
 									, 'total_abonnes' => $nb_abos
 									, 'id_liste' => $id_liste
-									, 'statut' => ($change_statut = _SPIPLISTES_STATUT_READY)
+									, 'statut' => ($change_statut = _SPIPLISTES_COURRIER_STATUT_READY)
 								)
 							);
 						}
@@ -213,8 +213,8 @@ function exec_spiplistes_courrier_gerer () {
 	if(($connect_statut == "0minirezo") && ($new == 'oui')) {
 		// retour editeur. Creation du courrier
 		if(!empty($titre)) {
-			$statut = _SPIPLISTES_STATUT_REDAC;
-			$type = 'nl';
+			$statut = _SPIPLISTES_COURRIER_STATUT_REDAC;
+			$type = _SPIPLISTES_COURRIER_TYPE_NEWSLETTER;
 			$id_courrier = sql_insert(
 				'spip_courriers'
 				, "(titre,texte,date,statut,type,id_auteur)"
@@ -246,7 +246,7 @@ function exec_spiplistes_courrier_gerer () {
 				$$key = typo($$key);
 			}
 
-			if($change_statut == _SPIPLISTES_STATUT_READY) {
+			if($change_statut == _SPIPLISTES_COURRIER_STATUT_READY) {
 				//$titre = propre($titre); // pas de propre ici, ca fait un <p> </p>
 				// Le statut n'est modifié ici, mais 
 				// par courrier_casier en retour de ce formulaire
@@ -261,17 +261,17 @@ function exec_spiplistes_courrier_gerer () {
 				spiplistes_log("ID_COURRIER #$id_courrier titre,texte MODIFIED BY ID_AUTEUR #$connect_id_auteur");
 				$statut = $change_statut;
 			}
-			else if($change_statut == _SPIPLISTES_STATUT_STOPE){
+			else if($change_statut == _SPIPLISTES_COURRIER_STATUT_STOPE){
 				spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 				spiplistes_log("ID_COURRIER #$id_courrier CANCELLED BY ID_AUTEUR #$connect_id_auteur");
 			}
 			
 			// prepare le texte texte seul
 			if(!in_array($statut, array(
-					  _SPIPLISTES_STATUT_REDAC
-					, _SPIPLISTES_STATUT_READY
-					, _SPIPLISTES_STATUT_PUBLIE
-					, _SPIPLISTES_STATUT_STOPE
+					  _SPIPLISTES_COURRIER_STATUT_REDAC
+					, _SPIPLISTES_COURRIER_STATUT_READY
+					, _SPIPLISTES_COURRIER_STATUT_PUBLIE
+					, _SPIPLISTES_COURRIER_STATUT_STOPE
 					))
 				) {
 				$texte = spiplistes_courrier_propre($texte);
@@ -285,7 +285,7 @@ function exec_spiplistes_courrier_gerer () {
 			}
 			// construit la boite de selection destinataire
 			$boite_selection_destinataire = 
-				(($statut==_SPIPLISTES_STATUT_REDAC) || ($statut==_SPIPLISTES_STATUT_READY))
+				(($statut==_SPIPLISTES_COURRIER_STATUT_REDAC) || ($statut==_SPIPLISTES_COURRIER_STATUT_READY))
 				? spiplistes_destiner_envoi($id_courrier, $id_liste
 						, $flag_admin
 						, $flag_moderateur
@@ -309,7 +309,7 @@ function exec_spiplistes_courrier_gerer () {
 	
 	if($flag_autorise) {
 		
-		if(($statut == _SPIPLISTES_STATUT_REDAC) || ($statut == _SPIPLISTES_STATUT_READY)) {
+		if(($statut == _SPIPLISTES_COURRIER_STATUT_REDAC) || ($statut == _SPIPLISTES_COURRIER_STATUT_READY)) {
 		// Le courrier peut-etre modifie si en preparation 
 			$gros_bouton_modifier = 
 				icone (
@@ -323,7 +323,7 @@ function exec_spiplistes_courrier_gerer () {
 				;
 		}
 		
-		if($statut != _SPIPLISTES_STATUT_PUBLIE) {
+		if($statut != _SPIPLISTES_COURRIER_STATUT_PUBLIE) {
 		// Le courrier peut-etre supprime s'il n'a pas ete publie
 			$gros_bouton_supprimer = 
 				"<div style='margin-top:1ex;'>"
@@ -339,8 +339,8 @@ function exec_spiplistes_courrier_gerer () {
 				;
 		}
 		if(
-			($statut == _SPIPLISTES_STATUT_PUBLIE)
-			|| ($statut == _SPIPLISTES_STATUT_STOPE)
+			($statut == _SPIPLISTES_COURRIER_STATUT_PUBLIE)
+			|| ($statut == _SPIPLISTES_COURRIER_STATUT_STOPE)
 		) {
 			// Un courrier publié ou stoppé peut-être dupliqué pour édition
 			// on revient sur cette page avec le contenu récupéré
@@ -358,7 +358,7 @@ function exec_spiplistes_courrier_gerer () {
 				;
 		}
 		
-		if($statut == _SPIPLISTES_STATUT_ENCOURS) {
+		if($statut == _SPIPLISTES_COURRIER_STATUT_ENCOURS) {
 		// L'envoi d'un courrier en cours peut etre stoppe
 			$gros_bouton_arreter_envoi = 
 				icone (
@@ -373,7 +373,7 @@ function exec_spiplistes_courrier_gerer () {
 				. fin_cadre_relief(true)
 				;
 		}
-		if($statut == _SPIPLISTES_STATUT_READY) {
+		if($statut == _SPIPLISTES_COURRIER_STATUT_READY) {
 			if(!$id_liste && !$id_auteur_test) {
 				// normalement, la validation est locale, mais si l'utilisateur
 				// part sur un casier, le retour ici est incomplet...
@@ -408,7 +408,7 @@ function exec_spiplistes_courrier_gerer () {
 	if($id_courrier > 0) {
 		$le_type = _T('spiplistes:message_type');
 		
-		if($statut != _SPIPLISTES_STATUT_REDAC) {
+		if($statut != _SPIPLISTES_COURRIER_STATUT_REDAC) {
 			if(!empty($email_test)) {
 				$str_destinataire = _T('spiplistes:email_adresse') . " : <span style='font-weight:bold;color:gray;'>$email_test</span>";
 			}
@@ -429,7 +429,7 @@ function exec_spiplistes_courrier_gerer () {
 		$str_statut_courrier = "";
 		
 		switch($statut) {
-			case _SPIPLISTES_STATUT_REDAC:
+			case _SPIPLISTES_COURRIER_STATUT_REDAC:
 				$str_statut_courrier = _T('spiplistes:message_en_cours')."<br />"
 				.	(
 					($flag_autorise)
@@ -438,20 +438,20 @@ function exec_spiplistes_courrier_gerer () {
 					)
 				;
 				break;
-			case _SPIPLISTES_STATUT_READY:
+			case _SPIPLISTES_COURRIER_STATUT_READY:
 				$str_statut_courrier = ""
 					. "<p class='verdana2'>"._T('spiplistes:message_presque_envoye') . "<br />"
 					. $str_destinataire . "<br />"
 					;
 				break;
-			case _SPIPLISTES_STATUT_ENCOURS:
+			case _SPIPLISTES_COURRIER_STATUT_ENCOURS:
 				$str_statut_courrier = ""
 					. _T('spiplistes:message_en_cours')."<br />$str_destinataire<br /><br />"
 					//. "<a href='?exec=spip_listes'>["._T('spiplistes:voir_historique')."]</a>"
 					;
 				break;
-			case _SPIPLISTES_STATUT_PUBLIE:
-			case _SPIPLISTES_STATUT_AUTO:
+			case _SPIPLISTES_COURRIER_STATUT_PUBLIE:
+			case _SPIPLISTES_COURRIER_STATUT_AUTO:
 				$str_statut_courrier = ""
 					. "<span>"
 					. "<strong>"._T('spiplistes:message_arch')."</strong></span>"

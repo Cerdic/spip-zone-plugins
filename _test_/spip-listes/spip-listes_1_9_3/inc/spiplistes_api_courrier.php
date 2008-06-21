@@ -378,6 +378,20 @@ function spiplistes_courrier_id_auteur_get ($id_courrier) {
 	return(false);
 }
 
-
-
+//CP-20080509: renvoie somme des abonnes en cours d envoi
+function spiplistes_courriers_total_abonnes ($id_courrier = 0) {
+	$id_courrier = intval($id_courrier);
+	$sql_where = "statut=".sql_quote(_SPIPLISTES_COURRIER_STATUT_ENCOURS);
+	if($id_courrier > 0) {
+		$sql_where .= " AND id_courrier=".sql_quote($id_courrier);
+	}
+	return(
+		sql_getfetsel(
+			'SUM(total_abonnes)'
+			, 'spip_courriers'
+			, $sql_where
+		)
+	);
+}
+//
 ?>

@@ -48,18 +48,18 @@ define("_SPIPLISTES_LOTS_PERMIS", "1;5;10;30;100");
 define("_SPIPLISTES_ZERO_TIME_DATE", "0000-00-00 00:00:00");
 
 // documentation: http://www.quesaco.org/Spiplistes-les-etats-du-courrier
-define("_SPIPLISTES_STATUT_REDAC", "redac"); // en cours de redac
-define("_SPIPLISTES_STATUT_READY", "ready"); // pret à etre envoyé
-define("_SPIPLISTES_STATUT_ENCOURS", "encour"); // en cours par meleuse
-define("_SPIPLISTES_STATUT_AUTO", "auto"); // publié de liste
-define("_SPIPLISTES_STATUT_PUBLIE", "publie"); // publié
-define("_SPIPLISTES_STATUT_VIDE", "vide"); // moins de 10 car.
-define("_SPIPLISTES_STATUT_IGNORE", "ignore"); // pas de destinataire
-define("_SPIPLISTES_STATUT_STOPE", "stope"); // stope par admin
-define("_SPIPLISTES_STATUT_ERREUR", "erreur"); // en erreur
+define("_SPIPLISTES_COURRIER_STATUT_REDAC", "redac"); // en cours de redac
+define("_SPIPLISTES_COURRIER_STATUT_READY", "ready"); // pret à etre envoyé
+define("_SPIPLISTES_COURRIER_STATUT_ENCOURS", "encour"); // en cours par meleuse
+define("_SPIPLISTES_COURRIER_STATUT_AUTO", "auto"); // publié de liste
+define("_SPIPLISTES_COURRIER_STATUT_PUBLIE", "publie"); // publié
+define("_SPIPLISTES_COURRIER_STATUT_VIDE", "vide"); // moins de 10 car.
+define("_SPIPLISTES_COURRIER_STATUT_IGNORE", "ignore"); // pas de destinataire
+define("_SPIPLISTES_COURRIER_STATUT_STOPE", "stope"); // stope par admin
+define("_SPIPLISTES_COURRIER_STATUT_ERREUR", "erreur"); // en erreur
 
-define("_SPIPLISTES_TYPE_NEWSLETTER", "nl");
-define("_SPIPLISTES_TYPE_LISTEAUTO", "auto");
+define("_SPIPLISTES_COURRIER_TYPE_NEWSLETTER", "nl");
+define("_SPIPLISTES_COURRIER_TYPE_LISTEAUTO", "auto");
 
 // champ 'statut' de 'spip_listes' varchar(10)
 define("_SPIPLISTES_PUBLIC_LIST", "liste");
@@ -72,7 +72,7 @@ define("_SPIPLISTES_MONTHLY_LIST", "pub_mois"); // debut de mois
 define("_SPIPLISTES_YEARLY_LIST", "pub_an");
 define("_SPIPLISTES_TRASH_LIST", "poublist");
 
-// les statuts de périodique
+// les statuts des périodique
 define("_SPIPLISTES_LISTES_STATUTS_PERIODIQUES", 
 	_SPIPLISTES_DAILY_LIST
 	. ";" . _SPIPLISTES_HEBDO_LIST
@@ -97,15 +97,15 @@ define("_SPIPLISTES_LISTES_STATUTS_TOUS",
 
 // statuts des courriers tels qu'affichés en liste 
 define("_SPIPLISTES_COURRIERS_STATUTS"
-	,	_SPIPLISTES_STATUT_REDAC
-	. ";" . _SPIPLISTES_STATUT_READY
-	. ";" . _SPIPLISTES_STATUT_ENCOURS
-	. ";" . _SPIPLISTES_STATUT_AUTO
-	. ";" . _SPIPLISTES_STATUT_PUBLIE
-	. ";" . _SPIPLISTES_STATUT_VIDE
-	. ";" . _SPIPLISTES_STATUT_IGNORE
-	. ";" . _SPIPLISTES_STATUT_STOPE
-	. ";" . _SPIPLISTES_STATUT_ERREUR
+	,	_SPIPLISTES_COURRIER_STATUT_REDAC
+	. ";" . _SPIPLISTES_COURRIER_STATUT_READY
+	. ";" . _SPIPLISTES_COURRIER_STATUT_ENCOURS
+	. ";" . _SPIPLISTES_COURRIER_STATUT_AUTO
+	. ";" . _SPIPLISTES_COURRIER_STATUT_PUBLIE
+	. ";" . _SPIPLISTES_COURRIER_STATUT_VIDE
+	. ";" . _SPIPLISTES_COURRIER_STATUT_IGNORE
+	. ";" . _SPIPLISTES_COURRIER_STATUT_STOPE
+	. ";" . _SPIPLISTES_COURRIER_STATUT_ERREUR
 	);
 
 // charsets:
@@ -259,7 +259,7 @@ function spiplistes_taches_generales_cron($taches_generales) {
 */
 $spiplistes_items = array(
 	// les courriers
-	_SPIPLISTES_STATUT_REDAC => array(
+	_SPIPLISTES_COURRIER_STATUT_REDAC => array(
 		'puce' => _DIR_IMG_PACK."puce-blanche.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_brouillon-24.png'
 		, 'alt' => _T('spiplistes:message_en_cours')
@@ -267,7 +267,7 @@ $spiplistes_items = array(
 		, 'tab_t' => _T('spiplistes:Courriers_en_cours_de_redaction') // tab_t = titre du tableau dans spip_listes
 		, 'desc' => null // description, sous-titre
 	)
-	, _SPIPLISTES_STATUT_READY => array(
+	, _SPIPLISTES_COURRIER_STATUT_READY => array(
 		'puce' => _DIR_IMG_PACK."puce-orange.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_brouillon-24.png'
 		, 'alt' => _T('spiplistes:message_redac')
@@ -275,7 +275,7 @@ $spiplistes_items = array(
 		, 'tab_t' => _T('spiplistes:Courriers_prets_a_etre_envoye')
 		, 'desc' => null
 		)
-	, _SPIPLISTES_STATUT_ENCOURS => array(
+	, _SPIPLISTES_COURRIER_STATUT_ENCOURS => array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce_verte_encour.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_encour-24.png'
 		, 'alt' => _T('spiplistes:message_en_cours')
@@ -283,7 +283,7 @@ $spiplistes_items = array(
 		, 'tab_t' => _T('spiplistes:aff_encours')
 		, 'desc' => null
 		)
-	, _SPIPLISTES_STATUT_AUTO => array(
+	, _SPIPLISTES_COURRIER_STATUT_AUTO => array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-grise.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_publie-24.png'
 		, 'alt' => _T('spiplistes:message_arch')
@@ -291,7 +291,7 @@ $spiplistes_items = array(
 		, 'tab_t' => _T('spiplistes:Courriers_auto_publies')
 		, 'desc' => null
 		)
-	, _SPIPLISTES_STATUT_PUBLIE => array(
+	, _SPIPLISTES_COURRIER_STATUT_PUBLIE => array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-grise.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_publie-24.png'
 		, 'alt' => _T('spiplistes:message_arch')
@@ -299,7 +299,7 @@ $spiplistes_items = array(
 		, 'tab_t' => _T('spiplistes:Courriers_publies')
 		, 'desc' => null
 		)
-	, _SPIPLISTES_STATUT_STOPE => array(
+	, _SPIPLISTES_COURRIER_STATUT_STOPE => array(
 		// courrier stopé en cours d'envoi
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-stop.png"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_stop-24.png'
@@ -308,7 +308,7 @@ $spiplistes_items = array(
 		, 'tab_t' => _T('spiplistes:Courriers_stope')
 		, 'desc' => null
 		)
-	, _SPIPLISTES_STATUT_VIDE => array(
+	, _SPIPLISTES_COURRIER_STATUT_VIDE => array(
 		// courrier sans contenu
 		'puce' => _DIR_IMG_PACK."puce-rouge.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_vide-24.png'
@@ -317,7 +317,7 @@ $spiplistes_items = array(
 		, 'tab_t' => _T('spiplistes:Courriers_vides')
 		, 'desc' => null
 		)
-	, _SPIPLISTES_STATUT_IGNORE => array(
+	, _SPIPLISTES_COURRIER_STATUT_IGNORE => array(
 		// courrier sans abonné
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-inconnu.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_ignore-24.png'
@@ -326,7 +326,7 @@ $spiplistes_items = array(
 		, 'tab_t' => _T('spiplistes:Courriers_sans_destinataire')
 		, 'desc' => null
 		)
-	, _SPIPLISTES_STATUT_ERREUR => array(
+	, _SPIPLISTES_COURRIER_STATUT_ERREUR => array(
 		// courrier en erreur (liste manquante)
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-inconnu.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_ignore-24.png'

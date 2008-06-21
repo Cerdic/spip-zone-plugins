@@ -78,12 +78,6 @@ function spiplistes_sql_compter ($table, $sql_whereq) {
 	return($sql_result);
 }
 
-//CP-20080509: renvoie le nb de courriers en cours d envoie
-// somme des abonnes
-function spiplistes_courriers_en_cours_compter () {
-	return(sql_getfetsel('SUM(total_abonnes)', 'spip_courriers', "statut=".sql_quote(_SPIPLISTES_STATUT_ENCOURS)));
-}
-
 // CP-20080511
 function spiplistes_courriers_statut_compter ($statut='tous') {
 	$sql_where = spiplistes_listes_sql_where_or(
@@ -376,6 +370,19 @@ function spiplistes_courriers_en_queue_supprimer ($sql_whereq) {
 			'spip_auteurs_courriers'
 			, $sql_whereq
 		)
+	);
+}
+
+// CP-20080621
+// la première etiquette sur le tas
+function spiplistes_courriers_en_queue_premier ($select, $where) {
+	return(
+		sql_getfetsel(
+				  $select
+				, 'spip_auteurs_courriers'
+				, $where
+				, '', '', 1
+			)
 	);
 }
 

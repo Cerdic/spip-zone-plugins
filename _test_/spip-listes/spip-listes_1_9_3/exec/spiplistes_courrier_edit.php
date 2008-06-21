@@ -83,8 +83,8 @@ function exec_spiplistes_courrier_edit(){
 		if(!$id_courrier) {
 		///////////////////////////
 		// si pas de ID courrier, c'est une création
-			$statut = _SPIPLISTES_STATUT_REDAC; 
-			$type = 'nl';
+			$statut = _SPIPLISTES_COURRIER_STATUT_REDAC; 
+			$type = _SPIPLISTES_COURRIER_TYPE_NEWSLETTER;
 			$new = 'oui';
 			$titre = _T('spiplistes:Nouveau_courrier');
 			$clearonfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
@@ -179,7 +179,7 @@ function exec_spiplistes_courrier_edit(){
 		. "<span class='verdana2 triangle_label' onclick=\"javascript:$('#triangle".$compteur_block."').click();\">"
 			. (spiplistes_spip_est_inferieur_193() ? $titre_block_depliable : "")
 			. "</span>\n"
-		. debut_block_invisible(md5(_T('spiplistes:charger_patron')))
+		. spiplistes_debut_block_invisible(md5(_T('spiplistes:charger_patron')))
 		// 
 		. "<div id='ajax-loader' align='right'><img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."ajax_indicator.gif' /></div>\n"
 		//sélection du patron
