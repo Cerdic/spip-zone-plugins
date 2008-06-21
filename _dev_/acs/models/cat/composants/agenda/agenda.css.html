@@ -4,37 +4,6 @@
  * Feuille de style Agenda, par Daniel Faivre, 2007-2008
  */
 
-
-/* info-bulle */
-.bulle{
-position: absolute;
-min-width: 200px;
-display: none;
-z-index : 999;
-background: ##CONFIG{acsAgendaBulleFondColor,ffffef} [ url('[(#ACS_CHEMIN)]img/trame/(#CONFIG{acsAgendaBulleFondImage})') repeat top left];  /* agenda_bulle_fond.png */
-padding: 0;
-margin: 0;
-border: [(#CONFIG{acsAgendaBordLargeur,1px})][ (#CONFIG{acsAgendaBordStyle,ridge})][ #(#CONFIG{acsAgendaBordColor,c2d4d4})];
-font-size: 8pt;
-line-height:normal;
-text-align: #LANG_LEFT;
-}
-
-* html .bulle {
-width: 250px; /* IE exige une largeur définie */
-}
-
-.bulle .ligne{
-  padding-left: 2px;
-  padding-right: 2px;
-}
-.bulle .ligne:hover{
-  background: #[(#CONFIG{acsAgendaBulleSurvol,ffffbf})];
-}
-
-.bulle a {font-weight: normal; color: #af0000; display: block; width: 100%}
-.bulle a:hover {color: #df0000; background: #[(#CONFIG{acsAgendaBulleSurvol,ffffbf})]; display: block; width: 100%}
-
 .small_mini a:link {
   color: #af0000;
 }
@@ -97,3 +66,41 @@ width: 250px; /* IE exige une largeur définie */
   padding-right: 5px;
   padding-bottom: 0;
 }
+
+/* info-bulle */
+.bulle{
+position: absolute;
+min-width: 200px;
+display: none;
+z-index : 999;
+background: ##CONFIG{acsAgendaBulleFondColor,ffffef} [ url('[(#ACS_CHEMIN)]img/trame/(#CONFIG{acsAgendaBulleFondImage})') repeat top left];  /* agenda_bulle_fond.png */
+padding: 0;
+margin: 0;
+border: [(#CONFIG{acsAgendaBordLargeur,1px})][ (#CONFIG{acsAgendaBordStyle,ridge})][ #(#CONFIG{acsAgendaBordColor,c2d4d4})];
+font-size: 8pt;
+line-height:normal;
+text-align: #LANG_LEFT;
+}
+
+* html .bulle {
+width: 250px; /* IE exige une largeur définie */
+}
+
+.bulle .ligne{
+  padding-left: 2px;
+  padding-right: 2px;
+}
+.bulle .ligne:hover{
+  background: #[(#CONFIG{acsAgendaBulleSurvol,ffffbf})];
+}
+
+.bulle a {
+	font-weight: normal;
+	display: block;
+	width: 100%;
+	border:0;
+	padding:0;
+	text-align: left;
+	font-style: normal;
+}
+.bulle a:hover {color: #df0000; background: #[(#CONFIG{acsAgendaBulleSurvol,ffffbf})]; display: block; width: 100%}
