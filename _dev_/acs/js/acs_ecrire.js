@@ -120,7 +120,7 @@ $(document).ready(
       },
       onStop: function() { // reset select on stop dragging from its ctlWidget
         $.log('Stop drag widget ' + dragid);
-        if ($(dragid).parent().attr("className") == "ctlWidget") {
+        if ($(dragid).parent().is(".ctlWidget")) {
           var dropid = "#select_" + $(dragid).parent().attr("id");
           $("#widgets").append($(dragid));
           $(dropid).val("");
@@ -152,6 +152,10 @@ $(document).ready(
         $.log('Drop ' + drag.id + ' on ctlWidget ' + dropid);
         $(dropid).val(drag.id);
         if ($(dropid).val() == drag.id) {
+	      if ($(dragid).parent().is(".ctlWidget")) {
+	        var olddropid = "#select_" + $(dragid).parent().attr("id");
+	        $(olddropid).val("");
+	      }        		
           $(this).find(".widget").fx = dfx; // restore desired revert effect
           $("#widgets").append($(this).find(".widget"));
           $(this).find(".widget").remove();
