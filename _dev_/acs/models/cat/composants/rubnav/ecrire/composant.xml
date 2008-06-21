@@ -30,6 +30,13 @@
     <valeur>ffdf00</valeur>
   </variable>
   <variable>
+    <nom>Titre</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
     <nom>TitreFondColor</nom>
     <type>color</type>
   </variable>

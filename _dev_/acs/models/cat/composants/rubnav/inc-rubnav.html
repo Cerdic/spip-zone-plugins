@@ -62,7 +62,7 @@
 
 <B_rubriques2>
 	<div class="rubriques">
-		<div class="menu-titre"><:rubriques:></div>
+		[(#CONFIG{acsRubnavTitre}|=={oui}|?{' '})<div class="menu-titre"><:rubriques:></div>]
 		<ul>
 			<BOUCLE_rubriques2(RUBRIQUES) {racine} {par num titre, titre}{doublons}>
 				<li class="menu-item" [id="rubmenu(#EXPOSE)"]>[(#EXPOSE|?{#SET{EXPOSED, #EXPOSE}, ''})]

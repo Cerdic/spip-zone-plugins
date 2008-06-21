@@ -13,12 +13,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'acsRubnav3' => 'Composant optionnel 3',
 'acsRubnavBordColor' => 'Bord',
 'acsRubnavFondColor' => 'Fond',
+'acsRubnavFondColor2' => 'Fond niveau 2',
+'acsRubnavFondColor3' => 'Fond niveau 3',
 'acsRubnavFondColorHover' => 'Fond, au survol',
 'acsRubnavTitreFondColor' => 'Titre',
 'acsRubnavSepColor' => 'S&eacute;parateur',
 'acsRubnavAlign' => 'Alignement',
 'acsRubnavAlignLeft' => 'gauche',
 'acsRubnavAlignCenter' => 'centr&eacute;',
-'acsRubnavAlignRight' => 'droit'
+'acsRubnavAlignRight' => 'droit',
+'acsRubnavTitre' => 'Afficher le titre du bloc sur les rubriques du groupe 3',
+'acsRubnavTitreOui' => _T('item_oui'),
+'acsRubnavTitreNon' => _T('item_non')
 );
 ?>

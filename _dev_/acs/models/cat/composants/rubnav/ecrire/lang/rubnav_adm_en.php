@@ -11,13 +11,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'acsRubnav1' => 'Component 1',
 'acsRubnav2' => 'Optionnel component 2',
 'acsRubnav3' => 'Optionnel component 3',
-'acsRubnavFondColor' => 'Background',
 'acsRubnavBordColor' => 'Border',
+'acsRubnavFondColor' => 'Background',
+'acsRubnavFondColor2' => 'Background level 2',
+'acsRubnavFondColor3' => 'Background level 3',
+'acsRubnavFondColorHover' => 'Background, over',
 'acsRubnavTitreFondColor' => 'Title',
 'acsRubnavSepColor' => 'S&eacute;parator',
 'acsRubnavAlign' => 'Alignment',
 'acsRubnavAlignLeft' => 'left',
 'acsRubnavAlignCenter' => 'center;',
-'acsRubnavAlignRight' => 'right'
+'acsRubnavAlignRight' => 'right',
+'acsRubnavTitre' => 'Show bloc title on level 3 rubrics',
+'acsRubnavTitreOui' => _T('item_oui'),
+'acsRubnavTitreNon' => _T('item_non')
 );
 ?>
