@@ -15,10 +15,10 @@ function inc_geomap_config(){
 		$out .= debut_cadre('r', _DIR_PLUGIN_GEOMAP."img_pack/correxir.png");
 		if(_request('ok')){
 			include_spip('inc/meta');
-			ecrire_meta('geomap_googlemapkey',$_POST['key']);
-			$version = $_POST['api_version'];
+			ecrire_meta('geomap_googlemapkey',_request('key'));
+			$version = _request('api_version');
 			if($version=="2.")
-			 $version .= $_POST['api_version_number'];
+			 $version .= _request('api_version_number');
 			ecrire_meta('geomap_googlemapversion',$version); 
 			ecrire_metas();
 		}
