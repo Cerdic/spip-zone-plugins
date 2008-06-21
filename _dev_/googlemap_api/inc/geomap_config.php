@@ -64,6 +64,7 @@ function inc_geomap_config(){
 					ecrire_meta('geomap_default_zoom',$zoom);
 				ecrire_metas();
 			}
+			$out .= '<form name="position" method="post" action="'.self().'">';
 			$glat = isset($GLOBALS['meta']['geomap_default_lat'])?$GLOBALS['meta']['geomap_default_lat']:'42.7631';
 			$glonx = isset($GLOBALS['meta']['geomap_default_lonx'])?$GLOBALS['meta']['geomap_default_lonx']:'-7.9321';
 			$gzoom = isset($GLOBALS['meta']['geomap_default_zoom'])?$GLOBALS['meta']['geomap_default_zoom']:'7';
