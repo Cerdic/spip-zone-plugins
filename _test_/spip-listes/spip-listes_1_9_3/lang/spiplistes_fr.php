@@ -96,10 +96,11 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 
 , 'bouton_listes' => 'Lettres d\'information'
 , 'bouton_modifier' => 'Modifier ce courrier'
-, 'abonnements_aux_courriers' => "Abonnements aux courriers",
+, 'abonnements_aux_courriers' => "Abonnements aux courriers"
+, 'boite_agenda_titre_' => "Planning de diffusion "
 
 //C
-'calcul_patron' => 'Calcul avec le patron version texte',
+, 'calcul_patron' => 'Calcul avec le patron version texte',
 'calcul_html' => 'Calcul depuis la version HTML du message',
 'Cette_liste_est' => 'Cette liste est',
 'charger_patron' => 'Choisir un patron pour le courrier',

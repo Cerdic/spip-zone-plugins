@@ -10,6 +10,7 @@
 .spiplistes .liste-moderateurs li .nom { padding-left:2ex }
 .spiplistes .liste-moderateurs li .supprim { font-weight:bold;text-align:right;padding:0 1ex }
 .spiplistes .triangle_label { font-weight: bold; text-decoration: underline; cursor: pointer; }
+.spiplistes .titre-petite-boite { font-size:80%;text-transform: uppercase;font-weight:bold }
 table.spiplistes-abos {
 	font-size:80%;
 	border:1px solid gray;

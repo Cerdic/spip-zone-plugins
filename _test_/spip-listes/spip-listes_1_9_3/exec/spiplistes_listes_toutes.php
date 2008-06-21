@@ -35,6 +35,7 @@ function exec_spiplistes_listes_toutes(){
 	include_spip('inc/spiplistes_api_presentation');
 	include_spip('inc/spiplistes_lister_courriers_listes');
 	include_spip('inc/spiplistes_naviguer_paniers');
+	include_spip('inc/spiplistes_agenda');
 	
 	global $connect_statut
 		, $connect_id_auteur
@@ -94,6 +95,7 @@ function exec_spiplistes_listes_toutes(){
 		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
 		. debut_gauche($rubrique, true)
 		. spiplistes_naviguer_paniers_listes(_T('spiplistes:aller_aux_listes_'), true)
+		. spiplistes_boite_agenda()
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron() 
