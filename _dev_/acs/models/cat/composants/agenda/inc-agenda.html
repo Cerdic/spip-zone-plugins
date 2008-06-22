@@ -15,8 +15,11 @@ if (!is_callable(sql_fetch)) {
 
 $calendrier_mois=$_GET['calendrier_mois'];
 $calendrier_annee=$_GET['calendrier_annee'];
-$months = array('', 'janvier', 'f&eacute;vrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'ao&ucirc;t', 'septembre', 'octobre', 'novembre', 'd&eacute;cembre');
-$days = array('di', 'lu', 'ma', 'me', 'je', 've', 'sa');
+$months = array('', _T('acs:agenda_janvier'), _T('acs:agenda_fevrier'), _T('acs:agenda_mars'),
+	 _T('acs:agenda_avril'), _T('acs:agenda_mai'), _T('acs:agenda_juin'), _T('acs:agenda_juillet'),
+	 _T('acs:agenda_aout'), _T('acs:agenda_septembre'), _T('acs:agenda_octobre'),
+	 _T('acs:agenda_novembre'), _T('acs:agenda_decembre'));
+$days = array(_T('acs:agenda_di'), _T('acs:agenda_lu'), _T('acs:agenda_ma'), _T('acs:agenda_me'), _T('acs:agenda_je'), _T('acs:agenda_ve'), _T('acs:agenda_sa'));
 if ($test_mini_agenda_deja_present!=1 &&!function_exists('mkdate')) {
 	function mkdate($month, $day, $year) {
 		return mktime(0, 0, 0, $month, $day, $year);
