@@ -71,11 +71,13 @@ $table_des_tables['gis']='gis';
 $table_des_tables['gis_config']='gis_config';
 $table_des_tables['gis_mots']='gis_mots';
 //-- Jointures ----------------------------------------------------
-global $tables_jointures;
-$tables_jointures['spip_articles'][]= 'gis';
-$tables_jointures['spip_gis'][] = 'articles';
-$tables_jointures['spip_rubriques'][]= 'gis';
-$tables_jointures['spip_gis'][] = 'rubriques';
-$tables_jointures['spip_mots'][]= 'gis_mots';
-$tables_jointures['spip_gis_mots'][] = 'mots';
+//Les jointures sont pas necessaires parce que le champs a utiliser comme criteres sont dejà 
+//dans les tables de GIS
+//global $tables_jointures;
+//$tables_jointures['spip_articles'][]= 'gis';
+//$tables_jointures['spip_gis'][] = 'articles';
+//$tables_jointures['spip_rubriques'][]= 'gis';
+//$tables_jointures['spip_gis'][] = 'rubriques';
+//$tables_jointures['spip_mots'][]= 'gis_mots';
+//$tables_jointures['spip_gis_mots'][] = 'mots';
 ?>
