@@ -5,6 +5,8 @@
 
 
 TO-DO:
+- revoir le code couleur dans le planning tableau (donner à chaque barre la couleur du type de liste)
+- modifier petite icone des listes privées (lui créer un code couleur, pour le moment, c'est une mini-icone évidée)
 - terminer la compat svn (fouiller!) CP20080609
 - corriger les CSS pour espace public des formulaires (le cache, toujours le cache)
 - revoir la doc docs/__installation_*.txt

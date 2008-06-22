@@ -51,12 +51,12 @@ function spiplistes_boite_agenda_contenu ($periode, $retour, $img_pack) {
 	$maintenant = time();
 	switch($periode) {
 		case _SPIPLISTES_AGENDA_PERIODE_HEBDO:
-			$loupe_img = 'loupe-plus.gif';
+			$loupe_img = 'loupe-moins.gif';
 			$autre_periode = _SPIPLISTES_AGENDA_PERIODE_MOIS;
 			break;
 		case _SPIPLISTES_AGENDA_PERIODE_MOIS:
 		default:
-			$loupe_img = 'loupe-moins.gif';
+			$loupe_img = 'loupe-plus.gif';
 			$autre_periode = _SPIPLISTES_AGENDA_PERIODE_HEBDO;
 			$periode = _SPIPLISTES_AGENDA_PERIODE_DEFAUT;
 	}
@@ -70,7 +70,6 @@ function spiplistes_boite_agenda_contenu ($periode, $retour, $img_pack) {
 		$result .= ""
 			. "<div style='height:"._SPIPLISTES_AGENDA_LOUPE_HEIGHT."px'>\n"
 			. "<a href='".$exec_url."'"
-//				. " onclick=\"return(AjaxSqueeze('".$action_url."','spiplistes_boite_agenda','".$exec_url."',event))\""
 				. " onclick=\"return(AjaxSqueeze('".$action_url."','spiplistes_boite_agenda','',event))\""
 				. " title='"._T('spiplistes:boite_agenda_voir_jours', array('nb_jours' => $autre_periode))."'"
 				. " class='agenda-loupe'"
@@ -190,11 +189,8 @@ function spiplistes_boite_agenda_contenu ($periode, $retour, $img_pack) {
 // d'aujourd'hui, sur $jours jours.
 function spiplistes_listes_inventaire ($jours) {
 
-	//$aujourdhui = date("Y-m-d 00:00:00");
-	//$jusqua = date("Y-m-d 00:00:00", mktime(0, 0, 0, date("m")  , date("d") + ($jours - 1), date("Y")));
-
 	$sql_result = sql_select(
-		'l.id_liste, l.titre, COUNT( a.id_auteur ) AS nb_abos, date'
+		'l.id_liste, l.titre, COUNT( a.id_auteur ) AS nb_abos, l.date'
 		, 'spip_listes AS l LEFT JOIN spip_auteurs_listes AS a ON a.id_liste = l.id_liste'
 		, array(
 			"date >= CURDATE()"
@@ -250,7 +246,6 @@ function spiplistes_boitelistes_calculer_max ($inventaire) {
 	foreach($inventaire as $jour) {
 		$count = max(spiplistes_boitelistes_calculer_jour($jour), $count);
 	}
-//spiplistes_log("max: $count");
 	return($count);
 }
 
