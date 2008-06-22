@@ -11,7 +11,6 @@
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>lire_aussi</prefix>
-	<options>lire_aussi_options.php</options>
 	<install>base/lire_aussi_install.php</install>
 	<pipeline>
 		<nom>affiche_milieu</nom>
