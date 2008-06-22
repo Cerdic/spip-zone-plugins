@@ -1,0 +1,64 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+#CACHE{0}
+
+<BOUCLE_principale(ARTICLES){id_article}{statut==prop|prepa|publie|refuse|poubelle}>
+[(#EVAL{debut_cadre_enfonce("", true, "", "Lire aussi...")})]
+
+	<B_reference>
+	<div class='cadre cadre-liste'><table width='100%' cellpadding='2' cellspacing='0' border='0'>
+	<BOUCLE_reference(ARTICLES){id_article=#ID_LIRE}{id_lire > 0}{statut==prop|prepa|publie|refuse|poubelle}>
+		<BOUCLE_aff_ligne(ARTICLES){id_article}{statut==prop|prepa|publie|refuse|poubelle}>
+		<tr class='tr_liste'>
+			<td style='text-align: center;'>
+				<BOUCLE_test_ref(ARTICLES){id_article}{id_article!=#ID_LIRE}{statut==prop|prepa|publie|refuse|poubelle}>
+				[(#EVAL{autoriser('modifier','article', #ID_LIRE)==1}|?{" ",""})
+				<a title='Utiliser comme article de référence' onclick="$('#pave_lire_aussi').load('../?page=lire_aussi_interface&id_article=#ENV{id_article}&id_lire=#ID_LIRE&nouvelle_ref_lire=#ID_ARTICLE'); return false;" href="#"><img src="#URL_SITE_SPIP/[(#EVAL{_DIR_PLUGIN_LIRE_AUSSI})]imgs/icone_lireaussi.gif" alt="+" /></a>
+				]
+				</BOUCLE_test_ref>
+			</td>
+		
+		
+			<td class="arial2">
+				[(#EVAL{#ID_ARTICLE==#ID_LIRE}|?{"<b>",""})]
+				<BOUCLE_test_encours(ARTICLES){id_article}{id_article=#ENV{id_article}}{statut==prop|prepa|publie|refuse|poubelle}>
+					#TITRE
+				</BOUCLE_test_encours>
+					<a href="?exec=articles&id_article=#ID_ARTICLE">#TITRE</a>
+				<//B_test_encours>
+				[(#EVAL{#ID_ARTICLE==#ID_LIRE}|?{"</b>",""})]
+			</td>
+			<td class="arial1">[(#DATE|affdate)]</td>
+			<td class="arial1"><b>N°#ID_ARTICLE</b></td>
+			<td>
+				<BOUCLE_test_ref2(ARTICLES){id_article}{id_article!=#ID_LIRE}{statut==prop|prepa|publie|refuse|poubelle}>
+				[(#EVAL{autoriser('modifier','article', #ID_ARTICLE)==1}|?{" ",""})
+				<a title='Retirer de la liste' onclick="$('#pave_lire_aussi').load('../?page=lire_aussi_interface&id_article=#ENV{id_article}&id_lire=#ID_LIRE&supprimer_lire=#ID_ARTICLE'); return false;" href="#"><img src="../dist/images/croix-rouge.gif" alt="X" /></a>
+				]
+				</BOUCLE_test_ref2>
+			</td>
+		</tr>
+		</BOUCLE_aff_ligne>
+	</BOUCLE_reference>	
+	
+	<BOUCLE_lire_aussi(ARTICLES){id_lire=#ID_LIRE}{id_article!=#ID_LIRE}{id_lire > 0}{statut==prop|prepa|publie|refuse|poubelle}{par num titre}>
+		<!--#ID_ARTICLE-->
+		<BOUCLE_aff_ligne2(BOUCLE_aff_ligne)></BOUCLE_aff_ligne2>
+	</BOUCLE_lire_aussi>
+	</table></div>
+	</B_reference>
+
+
+[(#EVAL{autoriser('modifier','article', #ID_ARTICLE)==1}|?{" ",""})
+
+	<form onsubmit="valeur=Math.floor($('#ajouter_lire').attr('value')); if (valeur > 0 && valeur != #ID_ARTICLE){ $('#pave_lire_aussi').load('../?page=lire_aussi_interface&id_article=#ENV{id_article}&id_lire=#ID_LIRE&ajouter_lire='+valeur); }; return false;" action="index.php" method="get">
+	Lire aussi l'article numéro : 
+	<input type="hidden" name="exec" value="articles">
+	<input type="hidden" name="id_article" value="#ID_ARTICLE">
+	<input id="ajouter_lire" type="text" />
+	<input type="submit" value="Ajouter" class="fondo" />
+	</form>
+]
+
+[(#EVAL{fin_cadre_enfonce(true)})]
+
+</BOUCLE_principale>
