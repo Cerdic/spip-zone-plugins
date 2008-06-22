@@ -48,10 +48,11 @@ function exec_spiplistes_listes_toutes(){
 		foreach(array(
 			'btn_supprimer_liste_confirme', 'id_liste' // _SPIPLISTES_EXEC_LISTE_GERER
 			, 'btn_confirmer_envoi_maintenant', 'titre_message'
+			, 'periode_agenda' // local: pour afficher l'agenda
 			) as $key) {
 			$$key = _request($key);
 		}
-		foreach(array('id_liste') as $key) {
+		foreach(array('id_liste', 'periode_agenda') as $key) {
 			$$key = intval($$key);
 		}
 
@@ -95,7 +96,7 @@ function exec_spiplistes_listes_toutes(){
 		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
 		. debut_gauche($rubrique, true)
 		. spiplistes_naviguer_paniers_listes(_T('spiplistes:aller_aux_listes_'), true)
-		. spiplistes_boite_agenda()
+		. spiplistes_boite_agenda($periode_agenda)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron() 

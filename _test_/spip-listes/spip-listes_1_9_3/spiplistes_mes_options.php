@@ -224,11 +224,15 @@ function autoriser_liste_moderer ($faire = '', $type = '', $id_objet = 0, $qui =
 		$connect_statut
 		, $connect_toutes_rubriques
 		;
-	
+
 	$result = false;
-	if(($type == 'liste') && ($faire == "moderer") && ($id_objet > 0)) {
+	if(($type == 'liste') && ($faire == "moderer")) {
 		if(!$qui) {
 			$qui = $GLOBALS['auteur_session']['id_auteur'];
+		}
+		$sql_where = array("id_auteur=".$qui['id_auteur']);
+		if($id_objet > 0) {
+			$sql_where[] = "id_liste=".sql_quote($id_objet);
 		}
 		$result = 
 			(($connect_statut == '0minirezo') && $connect_toutes_rubriques)
@@ -236,10 +240,7 @@ function autoriser_liste_moderer ($faire = '', $type = '', $id_objet = 0, $qui =
 				sql_getfetsel(
 					"id_auteur"
 					, 'spip_auteurs_mod_listes'
-					, array(
-						"id_liste=".sql_quote($id_objet)
-						, "id_auteur=".$qui['id_auteur']
-					)
+					, $sql_where
 					, '', '', 1
 				)
 			)

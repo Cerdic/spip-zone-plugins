@@ -98,6 +98,8 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'bouton_modifier' => 'Modifier ce courrier'
 , 'abonnements_aux_courriers' => "Abonnements aux courriers"
 , 'boite_agenda_titre_' => "Planning de diffusion "
+, 'boite_agenda_legende' => "Sur @nb_jours@ jours"
+, 'boite_agenda_voir_jours' => "Voir sur les @nb_jours@ jours coulants"
 
 //C
 , 'calcul_patron' => 'Calcul avec le patron version texte',
@@ -359,6 +361,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'meleuse_suspendue' => "Meleuse suspendue",
 'meleuse_suspendue_info' => "L'envoi des courriers en attente d'exp&eacute;dition est suspendu.",
 'Meleuse_reactivee' => "M&egrave;leuse r&eacute;activ&eacute;e"
+, 'max_' => "Max "
 
 //n
 , 'nb_abonnes_sing' => " abonn&eacute;"
@@ -394,11 +397,12 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Prets_a_envoi' => "Pr&ecirc;ts &agrave; l'envoi"
 , 'Publies' => "Publi&eacute;s"
 , 'publies_auto' => "Publi&eacute;s (auto)"
-, 'pas_de_liste' => "Aucune liste de type envoi non programm&eacute;."
+, 'pas_de_liste' => "Aucune liste de type &laquo;envoi non programm&eacute;&raquo;."
+, 'pas_de_liste_prog' => "Aucune liste programm&eacute;e."
 , 'pas_de_format' => "Aucun format de r&eacute;ception d&eacute;fini pour les abonn&eacute;s."
 , 'aucune_liste_dispo' => "Aucune liste disponible."
 , 'aucune_liste_publique' => "Aucune liste de diffusion publique disponible."
-, 'pas_de_liste_en_auto' => "Aucune liste de type envoi programm&eacute; (chrono)."
+, 'pas_de_liste_en_auto' => "Aucune liste de type &laquo;envoi programm&eacute;&raquo; (chrono)."
 , 'Patron_du_tampon' => "Patron du tampon ",
 'Patron_de_pied_' => "Patron de pied ",
 'Patron_grand_' => "Grand patron ",

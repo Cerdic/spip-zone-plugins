@@ -11,6 +11,5 @@ TO-DO:
 - permettre l'import direct d'une image dans le courrier (sans lien). Un poil compliqué, mais faisable.
 - corriger documentation contextuelle (to-do perpetuel ;-))
 - maintenance: mettre en place l'auth. par FTP.
-- module de stats (calendrier des envoyés/à envoyer pour vérifier engorgement)
 - icone 'casier à courrier' à revoir. Idem 'listes de diffusion'
 
