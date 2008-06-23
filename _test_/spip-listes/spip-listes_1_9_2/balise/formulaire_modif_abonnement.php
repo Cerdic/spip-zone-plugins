@@ -32,8 +32,8 @@ include_spip ("inc/spiplistes_api");
 
 	
 	//utiliser_langue_site();
-	$nomsite=lire_meta("nom_site");
-	$urlsite=lire_meta("adresse_site");
+	$nomsite=extraire_multi(lire_meta("nom_site"));
+	$urlsite=extraire_multi(lire_meta("adresse_site"));
 	
 	// aller chercher le formulaire html qui va bien				
 $formulaire = "formulaires/formulaire_modif_abonnement";	
