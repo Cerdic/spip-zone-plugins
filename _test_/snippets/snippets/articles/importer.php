@@ -29,6 +29,8 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 	$translations = array();
 	
 	$forcer_id = false ; // mettre true pour garder les meme id que dans le XML
+	$forcer_maj = false ; // mettre true pour mettre a jour un lot d'articles de meme titre que dans le spip cible
+	
 	
 	if ($arbre && isset($arbre[$tag_objets]))
 		foreach($arbre[$tag_objets] as $objets){
@@ -36,6 +38,16 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 			spip_log($objet['titre'],"snippets");
 				$creation = false;
 				$auteur_connu = false ;
+				
+				// mettre a jour des articles deja en bdd avec le xml fournit
+				if($forcer_maj){
+				$id_target = '';
+				$id_article_trouve = sql_fetsel("id_article","spip_articles","titre=".sql_quote($objet['titre'][0])); // ajouter la rub courrante
+				$id_target = $id_article_trouve['id_article'] ;
+				if(!intval($id_target))
+					spip_log($objet['titre'][0].$id_target,"snippets_titres_erreur");
+				}
+				
 				include_spip('action/editer_article');
 				// si c'est une creation, creer le formulaire avec les infos d'entete
 				if (!($id_objet=intval($id_target))){
@@ -61,7 +73,7 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 						AND ($creation OR !in_array($key,$champs_non_ajoutables) OR !$row[$key])
 						AND isset($objet[$key])){
 						$v=trim(spip_xml_aplatit($objet[$key]));
-						$row[$key] = $creation?$v:($row[$key].$v);
+						$row[$key] = ($creation or $forcer_maj)?$v:($row[$key].$v);
 					}
 								
 				revisions_articles($id_objet , $row);
@@ -73,10 +85,11 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 					}
 				}
 				
-				$id_article = $id_objet ;
+				$id_article = $id_objet ; 
 				
-				if ( $objet['auteur'] AND $creation){
+				if ( $objet['auteur'] AND ($creation OR $forcer_maj)){
 					$auteur_connu = true ;
+					sql_delete("spip_auteurs_articles","id_article=".sql_quote($id_article));
 					foreach($objet['auteur'] as $nom){
 					// ajouter l'auteur
 						spip_log($nom,"snippets");
@@ -103,8 +116,9 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
         		}
         		
         		
-        		if ( $objet['mot'] AND $creation){
+        		if ( $objet['mot'] AND ($creation OR $forcer_maj)){
 			
+					sql_delete("spip_mots_articles","id_article=".sql_quote($id_article));
 					foreach($objet['mot'] as $mot){
 					spip_log($mot,"snippets");
 					// ajouter le mot cle
@@ -118,7 +132,7 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 					}
 				}	
         		
-        		
+        	
         		
         		
 			}
