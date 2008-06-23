@@ -81,8 +81,8 @@ $inscription_visiteur ="";
 					$cookie = creer_uniqid();
 					spip_query("UPDATE spip_auteurs SET cookie_oubli = "._q($cookie)." WHERE email ="._q($email_oubli));
 	
-					$nom_site_spip = lire_meta("nom_site");
-					$adresse_site = lire_meta("adresse_site");
+					$nom_site_spip = extraire_multi(lire_meta("nom_site"));
+					$adresse_site = extraire_multi(lire_meta("adresse_site"));
 	
 					$message = _T('spiplistes:abonnement_mail_passcookie', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site, 'cookie' => $cookie));
 					
@@ -173,8 +173,8 @@ function formulaire_inscription($type,$acces_membres,$formulaire) {
 	if($acces_membres == 'non') $nom_inscription_ = test_login2($mail_inscription_) ;
 
       //utiliser_langue_site();
-	$nomsite=lire_meta("nom_site");
-	$urlsite=lire_meta("adresse_site");
+	$nomsite= extraire_multi(lire_meta("nom_site"));
+	$urlsite=extraire_multi(lire_meta("adresse_site"));
 	
 	//Verify the form source. This way it is possible to create many newsletter forms
 	//in the same page (but with different fond) to separate subscription and deletion as an example
@@ -267,8 +267,8 @@ $result = spip_query("SELECT * FROM spip_auteurs WHERE email="._q($mail_inscript
 
       ecrire_acces();
 
-	$nom_site_spip = lire_meta("nom_site");
-	$adresse_site = lire_meta("adresse_site");
+	$nom_site_spip = extraire_multi(lire_meta("nom_site"));
+	$adresse_site = extraire_multi(lire_meta("adresse_site"));
 
 	$message = _T('form_forum_message_auto')."\n\n"._T('spiplistes:bonjour')."\n";
 			
