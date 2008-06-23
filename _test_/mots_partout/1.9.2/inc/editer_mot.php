@@ -223,6 +223,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 			//Dans le cas du form simplifie on ne mets pas l'icone
 			if($simplifie!='oui')
 				$vals= array("<a href='$url'>$cle</a>");
+			else $vals=array();
 			
 
 			$row_groupe = spip_fetch_array(spip_query("SELECT titre, unseul, obligatoire, minirezo, comite FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
