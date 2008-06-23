@@ -5,7 +5,6 @@
 	[(#SESSION|?{' ',''})<a href="#URL_LOGOUT" title="se deconnecter">D&eacute;connexion</a>]
 	
 
-
 [(#REM) les boutons par defaut de SPIP]
 <div dir="#LANG_DIR" id="boutonadmin">
 	[<a href="(#ENV{analyser})" id="analyser"><:analyse_xml:>[(#ENV{xhtml_error}|?{' *',''})]</a>]
@@ -18,6 +17,7 @@
 	[<a href="[(#ENV{voir_site})]" id="voir_site"><:icone_modifier_site:>((#ENV{id_syndic}))</a>]
 	[<a href="[(#ENV{voir_auteur})]" id="voir_auteur"><:admin_modifier_auteur:>((#ENV{id_auteur}))</a>]
 	]
+	
 	[<a href="(#ENV{ecrire})" id="ecrire"><:espace_prive:></a>]
 	
 	<a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]"  id="var_mode"><:admin_recalculer:>[(#ENV{use_cache})]</a>
@@ -36,7 +36,6 @@ G&eacute;rer votre compte
 ]
 
 
-
 [<!-- (#REM) AIDE CRAYONS // necessite plugin crayons --> ]
 [(#AUTORISER{modifier,article,#ENV{id_article}})  
 [<h6><img src="(#IMG{[(#EVAL{_DIR_PLUGIN_CRAYONS})images/crayon20.png]}|image_reduire{16,16}|extraire_attribut{src})" width="16px" height="16px" alt="crayon"/> <:adminpublic:modifier_les_textes:></h6><:adminpublic:survoler_le_texte:>]
@@ -45,7 +44,7 @@ G&eacute;rer votre compte
 
 [<!-- (#REM) CREER ARTICLE -->]
 
-[(#REM) pour recup id_rubrique wiki]
+[<!--(#REM) pour recup id_rubrique wiki-->]
 <BOUCLE_wiki(RUBRIQUES){id_rubrique IN #CONFIG{autorite/espace_wiki}}>
 #SET{wikirub,#ID_RUBRIQUE}
 </BOUCLE_wiki>
@@ -61,7 +60,7 @@ G&eacute;rer votre compte
 <h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> 
 <a href="?page=adminpublic&id_rubrique=#ID_RUBRIQUE"><:icone_ecrire_article:></a>  dans votre rubrique</h6>
 </BOUCLE_rubrestreinte>
-[<!--(#REM) pour recup id_rubrique wiki-->]
+[<!--(#REM) recup id_rubrique wiki sinon XX-->]
 
 <h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> 
 <a href="[(#URL_PAGE{adminpublic}|parametre_url{id_rubrique,[(#GET{wikirub,#ID_RUBRIQUE}|sinon{XX})]})]"><:icone_ecrire_article:></a></h6>
@@ -74,10 +73,10 @@ G&eacute;rer votre compte
 [<!-- (#REM) CREER EVENEMENT // necessite plugin agenda --> ]
 [(#ENV{id_article}|?{' ',''})
 [(#AUTORISER{modifier,article,#ENV{id_article}})
-<a href='[(#SELF|parametre_url{ajout_evenement,oui}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_evenement,''})]'>
-<h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_AGENDA})img_pack/agenda-24.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="ajouter" title="<:agenda:titre_cadre_ajouter_evenement:>" />
+<h6><a href='[(#SELF|parametre_url{ajout_evenement,oui}|parametre_url{id_article,#ENV{id_article}}|parametre_url{id_evenement,''})]'>
+<img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_AGENDA})img_pack/agenda-24.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="ajouter" title="<:agenda:titre_cadre_ajouter_evenement:>" />
  <:adminpublic:ajouter_evenement:>
-</a> &agrave; cet article </h6>]
+</a></h6>]
 ]
 
 

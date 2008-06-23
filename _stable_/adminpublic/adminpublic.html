@@ -28,25 +28,34 @@
 
 <div style="width:450px; float:left">
 <B_artimodif>
-<h3><:admin_modifier_article:></h3>
+<h3><:admin_modifier_article:></h3> 
 <BOUCLE_artimodif(ARTICLES){id_article}{id_auteur=#SESSION{id_auteur}}{statut IN prepa,prop,publie}>
+[<h1>(#TITRE)</h1>]
+  <ul>
+	 <li style="list-style-image:url([(#STATUT|cree_puce_stat|extraire_attribut{src})]); margin: 0.5em 0 0.5em 0" >
+	  <h4>Votre article est [(#STATUT|cree_puce_stat|extraire_attribut{alt})]</h4>
+	 </li>
+  </ul>
+<a href='[(#SELF|parametre_url{ajout_evenement,oui}|parametre_url{id_article,#ENV{id_article}}|parametre_url{id_evenement,''})]'>
+<img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_AGENDA})img_pack/agenda-24.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="ajouter" title="<:agenda:titre_cadre_ajouter_evenement:>" />
+ <:adminpublic:ajouter_evenement:>
+</a>
+
 [(#FORMULAIRE_EDITER_ARTICLE{#ID_ARTICLE})]
+
 </BOUCLE_artimodif>
 
 
 [<h3><:icone_ecrire_article:></h3>
-
-
 (#AUTORISER{creerarticledans,rubrique,#ENV{id_rubrique}})
 [(#FORMULAIRE_EDITER_ARTICLE)]
 ]
 
 <//B_artimodif>
 
-
 <BOUCLE_JEauteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{statut !IN 5poubelle}>
-
-	<div class="vcard">[(#REM) microformat vcard]
+<hr style="clear:both; padding-top:2em; border:none;  border-bottom:1px solid #666" />
+	<div class="vcard" style=" padding:1em; ">[(#REM) microformat vcard]
         <div class="cartouche">
             <div class="#EDIT{logo} fn">[(#LOGO_AUTEUR|image_reduire{200,200}|sinon{[<img src="(#CHEMIN{images/auteur-24.gif})" width="24px" height="24px" alt="mon logo" style="float:right;"/>]})]</div>
             <h1 class="#EDIT{qui} fn">#NOM</h1>
@@ -55,15 +64,10 @@
 	    <div class="#EDIT{pgp} fn">[(#PGP|sinon{Clef PGP:})]</div>
         </div>
         <p class="#EDIT{hyperlien} hyperlien"><:votre_site:> : <a href="[(#URL_SITE)]" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>
-	</div>
-
-		
+	</div>		
 </BOUCLE_JEauteur>		
 		
-		
-		
-		
-		
+	
 </div>
 
 	</div><!--#contenu-->
