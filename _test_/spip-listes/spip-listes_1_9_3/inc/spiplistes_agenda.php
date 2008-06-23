@@ -22,7 +22,10 @@ define("_SPIPLISTES_ACTION_AGENDA", _SPIPLISTES_ACTION_PREFIX."agenda");
 define("_SPIPLISTES_MIN_HEIGHT_BAR", 5);
 define("_SPIPLISTES_MAX_HEIGHT_BAR", _SPIPLISTES_AGENDA_TABLE_HEIGHT);
 
+include_spip('inc/spiplistes_api_presentation');
+
 function spiplistes_boite_agenda ($periode = false) {
+
 	$result = ""
 		. "<!-- boite agenda spiplistes -->\n"
 		. debut_cadre_relief("statistiques-24.gif", true)
@@ -113,10 +116,10 @@ function spiplistes_boite_agenda_contenu ($periode, $retour, $img_pack) {
 		}
 		for($ii = 0; $ii < $periode; $ii++) {
 			$date_sql = date("Y-m-d", mktime(0, 0, 0, date("m")  , date("d")+$ii, date("Y")));
-			$date_jour = date("w j, Y", mktime(0, 0, 0, date("m")  , date("d")+$ii, date("Y")));
+			$date_jour = date("w j", mktime(0, 0, 0, date("m")  , date("d")+$ii, date("Y")));
 			$dimanche = ($date_jour[0] == "0");
 			$date_jour = preg_replace_callback("/^(\d{1,2}) (.*)$/", "spiplistes_redate", $date_jour);
-			$style = ($dimanche ? "border-right:1px solid #ccc;" : "");
+			$style = "border-right:1px solid #" . ($dimanche ? "f99" : "cff") . ";";
 			$liste_graph =
 				(isset($inventaire[$date_sql]) && count($inventaire[$date_sql]))
 				? spiplistes_boitelistes_planning_jour($inventaire[$date_sql], $date_jour, $coef_graph)
@@ -190,7 +193,7 @@ function spiplistes_boite_agenda_contenu ($periode, $retour, $img_pack) {
 function spiplistes_listes_inventaire ($jours) {
 
 	$sql_result = sql_select(
-		'l.id_liste, l.titre, COUNT( a.id_auteur ) AS nb_abos, l.date'
+		'l.id_liste, l.titre, COUNT( a.id_auteur ) AS nb_abos, l.date, l.statut'
 		, 'spip_listes AS l LEFT JOIN spip_auteurs_listes AS a ON a.id_liste = l.id_liste'
 		, array(
 			"date >= CURDATE()"
@@ -210,6 +213,7 @@ function spiplistes_listes_inventaire ($jours) {
 				, 'titre' => $row['titre']
 				, 'nb_abos' => $row['nb_abos']
 				, 'date' => $row['date']
+				, 'statut' => $row['statut']
 			);
 		}
 		return($result);
@@ -231,10 +235,11 @@ function spiplistes_boitelistes_planning_jour ($planning, $prefix_titre, $coef_g
 			: _T('spiplistes:aucun_destinataire')
 			;
 		$titre = $prefix_titre.": ".couper($liste['titre'])." ($titre_nb_abos)";
-		$height = max(_SPIPLISTES_MIN_HEIGHT_BAR, ceil($liste['nb_abos'] * $coef_graph));
+		$height = "height:".max(_SPIPLISTES_MIN_HEIGHT_BAR, ceil($liste['nb_abos'] * $coef_graph))."px;";
 		$href = generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=".$liste['id_liste']);
+		$bgcolor = "background-color:#".spiplistes_items_get_item("icon_color", $liste['statut']).";";
 		$result .= ""
-			. "<a href='$href' class='a-fond-".intval($ii++ % 2)."' title='".$titre."' style='height:".$height."px'>\n"
+			. "<a href='$href' class='a-fond-".intval($ii++ % 2)."' title='".$titre."' style='$height $bgcolor'>\n"
 			. "</a>\n"
 			;
 	}
