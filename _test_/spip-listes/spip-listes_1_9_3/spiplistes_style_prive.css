@@ -17,7 +17,7 @@
 .spiplistes .titre-petite-boite { font-size:80%;text-transform: uppercase;font-weight:bold }
 .spiplistes .table-agenda { position:absolute;left:0;top:0; border:1px solid #000; border-top:0 }
 .spiplistes .table-agenda caption { text-align:left;border-bottom:1px solid #ccc;height:16px;overflow: hidden }
-.spiplistes .table-agenda .bas { vertical-align: bottom }
+.spiplistes .table-agenda .bas { vertical-align: bottom; overflow:hidden }
 .spiplistes .table-agenda table, .spiplistes .table-agenda tr, .spiplistes .table-agenda tr { padding:0;margin:0 }
 .spiplistes .table-agenda .tr-legend { border:0;vertical-align:top;font-size:60%;font-weight:700 }
 .spiplistes .table-agenda .left-legend { text-align:left;width:40%;float:left }
@@ -25,8 +25,6 @@
 .spiplistes .agenda-loupe { display:block;width:26px;height:24px;background: url() no-repeat left top }
 .spiplistes .centrer { text-align:center }
 .spiplistes .a-fond-0, .spiplistes .a-fond-1 { display:block; margin:0;padding:0;border-top:1px solid #fff }
-.spiplistes .a-fond-0 { background-color:#c99 }
-.spiplistes .a-fond-1 { background-color:#99c }
 table.spiplistes-abos {	font-size:80%;	border:1px solid gray }
 table.spiplistes-abos tr.onglets { border-bottom: 10px solid #ccc;line-height:1.8em;margin-bottom:1em;padding:1em }
 table.spiplistes-abos td { line-height:1.25em; border-bottom: 1px solid #ccc }

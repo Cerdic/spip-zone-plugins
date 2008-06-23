@@ -36,7 +36,7 @@ function spiplistes_boite_agenda ($periode = false) {
 			. (_SPIPLISTES_AGENDA_LOUPE_HEIGHT 
 				+ _SPIPLISTES_AGENDA_CAPTION_HEIGHT
 				+ _SPIPLISTES_AGENDA_TABLE_HEIGHT
-				+ (_SPIPLISTES_AGENDA_CADRE_PADDING * 2)
+				+ (_SPIPLISTES_AGENDA_CADRE_PADDING * 4)
 				)
 			. "px'>\n"
 		. "<div id='spiplistes_boite_agenda' style='padding:"._SPIPLISTES_AGENDA_CADRE_PADDING."px 0'>\n"
@@ -67,6 +67,9 @@ function spiplistes_boite_agenda_contenu ($periode, $retour, $img_pack) {
 	$inventaire = spiplistes_listes_inventaire($periode);
 
 	if($inventaire) {
+
+		$inventaire = spiplistes_listes_completer_planning($inventaire, $periode);
+		
 		$exec_url = parametre_url($retour, 'periode_agenda', $autre_periode);
 		$action_url = generer_action_auteur(_SPIPLISTES_ACTION_AGENDA, $autre_periode);
 		$action_url = parametre_url($action_url, 'redirect', rawurlencode($retour));
@@ -115,13 +118,13 @@ function spiplistes_boite_agenda_contenu ($periode, $retour, $img_pack) {
 			return(_T('date_jour_'.$matches[1])." ".$matches[2]);
 		}
 		for($ii = 0; $ii < $periode; $ii++) {
-			$date_sql = date("Y-m-d", mktime(0, 0, 0, date("m")  , date("d")+$ii, date("Y")));
+			$date_sql = spiplistes_date_jour_sql($ii);
 			$date_jour = date("w j", mktime(0, 0, 0, date("m")  , date("d")+$ii, date("Y")));
 			$dimanche = ($date_jour[0] == "0");
 			$date_jour = preg_replace_callback("/^(\d{1,2}) (.*)$/", "spiplistes_redate", $date_jour);
 			$style = "border-right:1px solid #" . ($dimanche ? "f99" : "cff") . ";";
 			$liste_graph =
-				(isset($inventaire[$date_sql]) && count($inventaire[$date_sql]))
+				(isset($inventaire[$date_sql]))
 				? spiplistes_boitelistes_planning_jour($inventaire[$date_sql], $date_jour, $coef_graph)
 				: ""
 				;
@@ -193,7 +196,7 @@ function spiplistes_boite_agenda_contenu ($periode, $retour, $img_pack) {
 function spiplistes_listes_inventaire ($jours) {
 
 	$sql_result = sql_select(
-		'l.id_liste, l.titre, COUNT( a.id_auteur ) AS nb_abos, l.date, l.statut'
+		'l.id_liste, l.titre, COUNT( a.id_auteur ) AS nb_abos, l.date, l.statut, l.periode'
 		, 'spip_listes AS l LEFT JOIN spip_auteurs_listes AS a ON a.id_liste = l.id_liste'
 		, array(
 			"date >= CURDATE()"
@@ -208,13 +211,7 @@ function spiplistes_listes_inventaire ($jours) {
 			if(!isset($result[$date])) {
 				$result[$date] = array();
 			}
-			$result[$date][] = array(
-				'id_liste' => $row['id_liste']
-				, 'titre' => $row['titre']
-				, 'nb_abos' => $row['nb_abos']
-				, 'date' => $row['date']
-				, 'statut' => $row['statut']
-			);
+			$result[$date][] = $row;
 		}
 		return($result);
 	}
@@ -260,6 +257,80 @@ function spiplistes_boitelistes_calculer_jour ($jour) {
 		$count += $liste['nb_abos'];
 	}
 	return($count);
+}
+
+function spiplistes_date_jour_sql ($ii) {
+	return(date("Y-m-d", mktime(0, 0, 0, date("m")  , date("d")+$ii, date("Y"))));
+}
+
+function spiplistes_listes_completer_planning ($inventaire, $periode_max) {
+	$planning = array();
+	for($ii = 0; $ii < $periode_max; $ii++) {
+		$date_sql = spiplistes_date_jour_sql($ii);
+		if(isset($inventaire[$date_sql])) {
+			foreach($inventaire[$date_sql] as $liste) {
+				$rythme_jour = 0;
+				switch($liste['statut']) {
+					case _SPIPLISTES_DAILY_LIST:
+						$rythme_jour = 
+							($liste['periode'] > 0)
+							? $liste['periode']
+							: 1
+							; // pas de break, continue sur rythme_jour
+					case _SPIPLISTES_HEBDO_LIST:
+					case _SPIPLISTES_WEEKLY_LIST:
+						if(!$rythme_jour) {
+							$rythme_jour = 7;
+						}
+						$planning = spiplistes_listes_completer_planning_jour(
+							$planning, $liste, $rythme_jour, $ii, $periode_max
+						);
+						break;
+					case _SPIPLISTES_MENSUEL_LIST:
+					case _SPIPLISTES_MONTHLY_LIST:
+						$planning = spiplistes_listes_completer_planning_mois(
+							$planning, $liste, $ii, $periode_max
+						);
+						break;
+					//case _SPIPLISTES_YEARLY_LIST: // inutile, pour l'instant
+					default:
+						if(!isset($planning[$date_sql])) {
+							$planning[$date_sql] = array();
+						}
+						$planning[$date_sql][] = $liste;
+						break;
+				}
+			}
+		}
+	}
+	return($planning);
+}
+
+function spiplistes_listes_completer_planning_jour ($planning, $liste, $rythme_jour, $periode_debut, $periode_max) {
+	if($rythme_jour) {
+		for($ii = $periode_debut; $ii < $periode_max; $ii += $rythme_jour) {
+			$date_sql = spiplistes_date_jour_sql($ii);
+			if(!isset($planning[$date_sql])) {
+				$planning[$date_sql] = array();
+			}
+			$planning[$date_sql][] = $liste;
+		}
+	}
+	return($planning);
+}
+
+function spiplistes_listes_completer_planning_mois ($planning, $liste, $periode_debut, $periode_max) {
+	$time_futur = strtotime("+ $periode_debut day");
+	$time_max = strtotime("+ $periode_max day");
+	while($time_futur < $time_max) {
+		$date_sql = date("Y-m-d", $time_futur);
+		if(!isset($planning[$date_sql])) {
+			$planning[$date_sql] = array();
+		}
+		$planning[$date_sql][] = $liste;
+		$time_futur = strtotime("+ 1 month", $time_futur);
+	}
+	return($planning);
 }
 
 //

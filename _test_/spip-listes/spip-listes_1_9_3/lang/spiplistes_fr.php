@@ -97,7 +97,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'bouton_listes' => 'Lettres d\'information'
 , 'bouton_modifier' => 'Modifier ce courrier'
 , 'abonnements_aux_courriers' => "Abonnements aux courriers"
-, 'boite_agenda_titre_' => "Planning de diffusion "
+, 'boite_agenda_titre_' => "Planning des diffusions "
 , 'boite_agenda_legende' => "Sur @nb_jours@ jours"
 , 'boite_agenda_voir_jours' => "Voir sur les @nb_jours@ jours coulants"
 
