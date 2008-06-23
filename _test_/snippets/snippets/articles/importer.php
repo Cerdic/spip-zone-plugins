@@ -17,16 +17,18 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 	
 	$table_prefix = $GLOBALS['table_prefix'] ;
 
-	$champs_non_importables = array('id_article',"id_rubrique","id_secteur","maj","export","visites","referers","popularite","id_trad","idx","id_version","url_propre");
+	$champs_non_importables = array("id_article","id_rubrique","id_secteur","maj","export","visites","referers","popularite","id_trad","idx","id_version","url_propre");
 	$champs_non_ajoutables = array('titre',"statut",'date','date_redac','lang');
 	$champs_jointures = array('auteur','mot');
-	$champs_defaut_values = array('statut'=>'prop');
+	$champs_defaut_values = array('statut'=>'publie');
 	$table = 'spip_articles';
 	$primary = 'id_article';
 	$fields = $GLOBALS['tables_principales']['spip_articles']['field'];
 	$tag_objets="articles";
 	$tag_objet="article";
 	$translations = array();
+	
+	$forcer_id = false ; // mettre true pour garder les meme id que dans le XML
 	
 	if ($arbre && isset($arbre[$tag_objets]))
 		foreach($arbre[$tag_objets] as $objets){
@@ -40,6 +42,15 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 					if (preg_match(",id_rubrique=([0-9]*),i",$contexte,$regs))
 						$id_rubrique=intval($regs[1]);
 					$id_objet = insert_article($id_rubrique);
+					
+					// forcer l'id
+					if($forcer_id){
+					$champs_non_importables = array("id_rubrique","id_secteur","maj","export","visites","referers","popularite","id_trad","idx","id_version","url_propre");
+					$sql = "UPDATE ".$table_prefix."_articles SET id_article = '".$objet['id_article'][0]."' WHERE id_article = '$id_objet'";
+        			spip_query($sql); 
+        			$id_objet = $objet['id_article'][0] ;
+					}
+					
 					$creation = true;
 				}
 				// sinon on ajoute chaque champ, sauf le titre
