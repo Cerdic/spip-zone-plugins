@@ -1,0 +1,59 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+#CACHE{0}
+
+<!--
+[<base href="(#EVAL{_DIR_PB_REL})" >]
+-->
+[(#EVAL{debut_cadre_enfonce("[(#EVAL{_DIR_PLUGIN_SELECTION}|url_absolue)]/imgs/emblem-favorite.png", true, "", "Sélection d'articles...")})]
+<!--
+[<base href="(#EVAL{_DIR_PB_REL})" >]
+-->
+
+
+<B_selection>
+<div class='cadre cadre-liste'><table width='100%' cellpadding='2' cellspacing='0' border='0'>
+<BOUCLE_selection(ARTICLES pb_selection){statut==prop|prepa|publie|refuse|poubelle}{par ordre}{spip_pb_selection.id_rubrique=#ENV{id_rubrique}}>
+
+
+
+	<tr class='tr_liste'>
+		[<td><img src="(#EVAL{puce_statut_article([(#ID_ARTICLE)], "[(#STATUT)]", "[(#STATUT)]", 'article') }|extraire_attribut{src}|url_absolue)" /></td>]
+
+		[(#EVAL{autoriser('modifier','rubrique', [(#ENV{id_rubrique})])==1}|?{" ",""})
+		<td>
+			[(#EVAL{#COMPTEUR_BOUCLE!=1}|?{" ",""})
+				<div><a href="#" onclick="$('#pave_selection').load('#URL_SITE_SPIP?page=selection_interface&id_rubrique=#ENV{id_rubrique}&remonter_ordre=#ID_ARTICLE'); return false;"><img src="[(#EVAL{_DIR_PLUGIN_SELECTION}|url_absolue)]/imgs/fleche-haut.gif" /></a></div> 
+			]
+			[(#EVAL{#COMPTEUR_BOUCLE!=#TOTAL_BOUCLE}|?{" ",""})
+				<div><a href="#" onclick="$('#pave_selection').load('#URL_SITE_SPIP?page=selection_interface&id_rubrique=#ENV{id_rubrique}&descendre_ordre=#ID_ARTICLE'); return false;"><img src="[(#EVAL{_DIR_PLUGIN_SELECTION}|url_absolue)]/imgs/fleche-bas.gif" /></a></div> 
+			]
+		</td>
+		]
+		<td style='text-align: center;'>[<a href="#URL_SITE_SPIP/#EVAL{_DIR_RESTREINT_ABS}?exec=articles&amp;id_article=#ID_ARTICLE"><img src="(#LOGO_ARTICLE||image_reduire{50}|extraire_attribut{src}|url_absolue)" [style="(#LOGO_ARTICLE||image_reduire{50}|extraire_attribut{style})]"  /></a>]</td>
+		<td class="arial2"><a href="#URL_SITE_SPIP/#EVAL{_DIR_RESTREINT_ABS}?exec=articles&amp;id_article=#ID_ARTICLE">[(#SURTITRE)<br />]<b>#TITRE</b>[<br />(#SOUSTITRE)]</a></td>
+		<td class="arial1">[(#DATE|affdate)]</td>
+		<td class="arial1"><b>N°#ID_ARTICLE</b></td>
+		[(#EVAL{autoriser('modifier','rubrique', [(#ENV{id_rubrique})])==1}|?{" ",""})
+		<td>
+			<a title='Retirer de la liste' onclick="$('#pave_selection').load('#URL_SITE_SPIP?page=selection_interface&id_rubrique=#ENV{id_rubrique}&supprimer_ordre=#ID_ARTICLE'); return false;" href="#"><img src="#URL_SITE_SPIP/dist/images/croix-rouge.gif" alt="X" /></a>
+		</td>
+		]
+	</tr>	
+</BOUCLE_selection>
+</table></div>
+</B_selection>
+
+
+[(#EVAL{autoriser('modifier','rubrique', [(#ENV{id_rubrique})])==1}|?{" ",""})
+	<form onsubmit="valeur=Math.floor($('#ajouter_selection').attr('value')); if (valeur > 0){ $('#pave_selection').load('#URL_SITE_SPIP?page=selection_interface&id_rubrique=#ENV{id_rubrique}&ajouter_selection='+valeur); }; return false;" action="index.php" method="get">
+	Sélectionner l'article numéro : 
+	<input type="hidden" name="exec" value="naviguer">
+	<input type="hidden" name="id_rubrique" value="#ENV{id_rubrique}">
+	<input id="ajouter_selection" type="text" />
+	<input type="submit" value="Ajouter" class="fondo" />
+	</form>
+
+]
+
+
+[(#EVAL{fin_cadre_enfonce(true)})]
