@@ -96,17 +96,23 @@ function doc2img_installer($version,$version_finale) {
     spip_log('installation ou mise à jour','doc2img');
     
     // on fait les mise à jour qui suive $version
+	// $version == version en cours
     switch ($version) {
         //le plugin n'a été jamais installé
         case NULL :
             //on créé une table qui servira à faire correspondre les images avec  les documents
             spip_log('création de la table','doc2img');
-            spip_query("CREATE TABLE spip_doc2img (
-                id_doc2img BIGINT (21) AUTO_INCREMENT, 
-                id_document BIGINT (21) NOT NULL, 
-                fichier varchar(255) NOT NULL, 
-                PRIMARY KEY (id_doc2img)
-                );");
+			sql_create(
+				'spip_doc2img',
+				array(
+					'id_doc2img' => 'BIGINT (21) AUTO_INCREMENT', 
+                	'id_document' => 'BIGINT (21) NOT NULL',
+ 					'fichier' => 'VARCHAR(255) NOT NULL'
+				), 
+				array(
+					'PRIMARY KEY' => 'id_doc2img'
+				)
+            );
             spip_log('table spip_doc2img créée','doc2img');
             //on defini un repertoire de stockage
             spip_log(_DIR_IMG,'doc2img');
@@ -131,15 +137,21 @@ function doc2img_installer($version,$version_finale) {
 		case 0.3 :
 		//passage en 0.5
 		case 0.4 :
-		    //on permet la numération des page
-            spip_query("ALTER TABLE spip_doc2img
-                ADD page INT NOT NULL;");
-            		    
+		    //on permet la numérotation des page
+            sql_alter(
+				"TABLE spip_doc2img 
+	                ADD page INT NOT NULL;"
+			);
+		//passage en 0.9
+		case 0.8 :
+			sql_alter(
+				"TABLE spip_doc2img 
+					ADD UNIQUE document (id_document, page)"
+			);
     }
 
     //on met à jour la version du plugin
     ecrire_meta('doc2img_version', $version_finale);
-    ecrire_metas();
 }
 
 /*! \brief desinstalleur
@@ -159,19 +171,20 @@ function doc2img_uninstaller() {
 
     //on néttoie ce qui a été installée
     //supprime la table doc2img
-	spip_query("DROP TABLE spip_doc2img");
+	sql_drop_table("spip_doc2img");
 	
 	spip_log('suppression table','doc2img');
 	//on supprime le repertoire créé et son contenu
-	$dir_doc2img = getcwd().'/'.lire_config('doc2img/repertoire_cible');
+	$dir_doc2img = getcwd().'/'._DIR_IMG.lire_config('doc2img/repertoire_cible');
 	spip_log('suppression des doc2img :'.$dir_doc2img,'doc2img');
     rm($dir_doc2img);
  
 	//supprime les log
-	rm(getcwd().'/tmp/doc2img.log');
+	spip_log('suppression des log : '.getcwd().'../tmp/doc2img.log*','doc2img');
+
+	rm(getcwd().'../tmp/doc2img.log*');
 
     //on efface la meta indiquant la version installée
     effacer_meta('doc2img_version');
-    ecrire_metas();
 }
 ?>
