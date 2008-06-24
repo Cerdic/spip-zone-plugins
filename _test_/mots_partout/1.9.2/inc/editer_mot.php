@@ -71,10 +71,10 @@ function inc_editer_mot($objet, $id_objet, $cherche_mot, $select_groupe, $flag,$
 	//preparation de l'utilisation de recuperer_fond a ce niveau
 	//definition du contexte 
 	
-	$squel=recup_squelette_motspartout("listemot_".$table);
+	/*$squel=recup_squelette_motspartout("listemot_".$table);
 	$contexte_liste=array("table"=>$table,"id_objet"=>$id_objet,"visible"=>$visible,"simplifie"=>$simplifie);
 	
-	$res=recuperer_fond($squel,$contexte_liste);
+	$res=recuperer_fond($squel,$contexte_liste);*/
 	
 
 	//
@@ -551,7 +551,7 @@ $query="SELECT id_groupe,titre, ".creer_objet_multi ("titre", $spip_lang)." FROM
 }
 
 
-
+/* code commenté en attendant d'avoir la fonctionnalité des squelettes pour l'affichage des mots clefs
 function recup_squelette_motspartout($squel){
 	
 	if($fond=find_in_path($squel)) return $fond;
@@ -560,7 +560,7 @@ function recup_squelette_motspartout($squel){
 		return find_in_path($squel);
 	}
 	
-}
+}*/
 
 
 
