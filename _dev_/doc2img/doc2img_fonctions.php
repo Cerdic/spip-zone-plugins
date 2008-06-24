@@ -22,24 +22,30 @@ function spip_explode($texte,$separateur){
     return explode($separateur,$texte);
 }
 
-/*! \brief explode() pour spip
+/*! \brief d2c_convertir
  *
- *  Surcharge de la fonction php explode(), pour être utilisé par php
- *  Remarque : L'appel de filtre passe toujours le texte source en premier 
- *  (c'est le compilateur qui fait ça tout seul)=> il faut inverser les paramètres d'explode qui elle attend le texte en second d'où spip_explode
+ *  Filtre pour lancer la conversion d'un document depuis un squelette
  *  
- * \param $texte balise fournit par le compilateur
- * \param $separateur pattern 
- * \return tableau decomposé par $separateur      
+ * \param $id_document le document à convertir
+ * \return un statut vrai/faux exploitable par un tableau
  */   
 function d2c_convertir($id_document) {
     include_spip('inc/convertir');
-    if (controler_document($id_document)) {
-        convertir_document($id_document);
-        return " ";
+    if ((is_doc2img($id_document) == false) && (can_doc2img($id_document) == true) ) {
+        return convertir_document($id_document);
     } else {
-        return "";
+        return '';
     }
+}
+
+function d2c_is_convert($id_document) {
+    include_spip('inc/convertir');
+    return is_doc2img($id_document) ? ' ' : '';
+}
+
+function d2c_can_convert($id_document) {
+    include_spip('inc/convertir');
+    return can_doc2img($id_document) ? ' ' : '';
 }
 
 ?>

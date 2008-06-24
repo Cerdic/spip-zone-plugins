@@ -1,0 +1,36 @@
+#CACHE{0}
+#SET{total,0}
+<B_DOC>
+    #PAGINATION
+    <table>
+    <tr>
+        <td>id_document</td>
+        <td>extension</td>
+        <td>converti</td>
+        <td>convertible</td>
+        <td> voir </td>
+        <td> fichier </td> 
+        <td> TOTAL </td>
+    </tr>
+<BOUCLE_DOC(DOCUMENTS) {id_document?} {extension == (.*|pdf)} {par id_document} {pagination 100}>
+<tr>
+    <td>#ID_DOCUMENT</td>
+    <td>#EXTENSION</td>
+    <td>[(#ID_DOCUMENT|d2c_is_convert)]</td>
+    <td>[(#ID_DOCUMENT|d2c_can_convert)]</td>
+    <td>    
+        <iframe src="#URL_PAGE{doc2img_convert,id_document=#ID_DOCUMENT}" height="30" width="210"></iframe>
+    </td>
+    <td>
+        <a href="#URL_SITE_SPIP/#FICHIER">#FICHIER</a>
+    </td>
+    <td>
+        [(#EXTENSION|=={pdf}|?{' '})
+            [(#SET{total,#GET{total}|plus{1}})]
+        ]
+        #GET{total}
+    </td>
+</tr>
+</BOUCLE_DOC>
+</table>
+
