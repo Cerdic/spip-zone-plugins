@@ -8,7 +8,6 @@
  */
 function is_doc2img($id_document) {
     $pages = sql_countsel('spip_doc2img','id_document='.$id_document,'id_doc2img');
-    spip_log('converti : '.is_numeric($pages),'doc2img');
     if (is_numeric($pages)) {        
         return true;
     } else  {
@@ -39,10 +38,8 @@ function can_doc2img($id_document = NULL) {
     
     //on controle si le document est convertible ou non    
     if (in_array($extension,$types_autorises)) {
-        spip_log($id_document.' convertible','doc2img');
         return true;
     } else {
-        spip_log($id_document.' non convertible','doc2img');    
         return false;
     }
 }
@@ -54,7 +51,7 @@ function can_doc2img($id_document = NULL) {
  *  \param $id_document identifiant du document à controler
  *  \return booleen $resultat : true document convertible, false sinon
  */
-function doc2img_ratio($handle) {
+function doc2img_ratio(&$handle) {
 
     //on determine les dimensions des frames
     $proportion = (lire_config('doc2img/proportion'));
@@ -143,16 +140,14 @@ function convertir_document($id_document) {
     $document['cible_url']['relative'] = $dir_img.lire_config('doc2img/repertoire_cible').'/'.$document['name'].'/';
     $document['cible_url']['absolute'] = $racine_site.$document['cible_url']['relative'];
 
-    spip_log($result,'doc2img');
-    spip_log($document,'doc2img');
+    //spip_log($document,'doc2img');
     //verrouille document ou quitte
     //si erreur sur verrou alors on quitte le script
     if (!$fp = @spip_fopen_lock($document['source_url']['absolute'].$document['fullname'],'r',LOCK_EX)) {
+        spip_log('verouillé '.$id_document,'doc2img');
         return false;
     }
-    
-    spip_log('document verrouillé'.$id_document,'doc2img');
-    
+        
     //suppresssion d'un eventuel repertoire deja existant
     include_spip('base/doc2img_install');
     rm($document['cible_url']['absolute']);
@@ -165,12 +160,11 @@ function convertir_document($id_document) {
 
     //creation du repertoire cible
     if (!@mkdir($document['cible_url']['absolute'])) {
+        spip_log('erreur repertoire '.$id_document,'doc2img');    
         return false;
     };
         
     //charge le document dans imagick
-    spip_log('charge le document','doc2img');
-    spip_log('document_source : '.$document['source_url']['absolute'].$document['fullname'],'doc2img');
     $handle = imagick_readimage($document['source_url']['absolute'].$document['fullname']);
 
     //determine le nombre de pages dans le document
@@ -186,23 +180,18 @@ function convertir_document($id_document) {
         $handle_frame = imagick_getimagefromlist($handle);
 
         //calcule des dimensions
-        $dimensions = doc2img_ratio($handle_frame);
-        
-        spip_log('dimensions','doc2img');
-        spip_log($dimensions,'doc2img');
-        
+        //$dimensions = doc2img_ratio($handle_frame);
+                
         //on redimensionne l'image
-        imagick_zoom($handle_frame, $dimensions['largeur'], $dimensions['hauteur']);
+        //imagick_zoom($handle_frame, $dimensions['largeur'], $dimensions['hauteur']);
         
         //nom du fichier cible, c'est à dire la frame (image) indexée
         $document['frame'] = $document['name'].'-'.$frame.'.'.$extension;
-
-        spip_log('document_frame : '.$document['frame'],'doc2img');
         
         //on sauvegarde la page
         imagick_writeimage($handle_frame,  $document['cible_url']['absolute'].$document['frame']);
 
-        //sauvegarde les donnees dans la base
+        //sauvegarde les donnees dans la base        
         sql_insertq(
             "spip_doc2img",
             array(
@@ -221,13 +210,10 @@ function convertir_document($id_document) {
     
     // libération du verrou
     spip_fclose_unlock($fp);
-    spip_log("document libéré ".$id_document,'doc2img');        
 
-    spip_log("document ok",'doc2img');        
+    spip_log($id_document." document ok",'doc2img');        
 
-
-
-    return ' ';
+    return true;
 }
 
 ?>
