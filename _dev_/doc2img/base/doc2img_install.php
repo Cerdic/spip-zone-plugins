@@ -106,8 +106,8 @@ function doc2img_installer($version,$version_finale) {
 				'spip_doc2img',
 				array(
 					'id_doc2img' => 'BIGINT (21) AUTO_INCREMENT', 
-                	'id_document' => 'BIGINT (21) NOT NULL',
- 					'fichier' => 'VARCHAR(255) NOT NULL'
+                	'id_document' => 'BIGINT (21) NOT NULL DEFAULT 0',
+ 					'fichier' => 'VARCHAR(255) NOT NULL DEFAULT \'\''
 				), 
 				array(
 					'PRIMARY KEY' => 'id_doc2img'
@@ -140,7 +140,7 @@ function doc2img_installer($version,$version_finale) {
 		    //on permet la numérotation des page
             sql_alter(
 				"TABLE spip_doc2img 
-	                ADD page INT NOT NULL;"
+	                ADD page INT NOT NULL DEFAULT 0;"
 			);
 		//passage en 0.9
 		case 0.8 :
