@@ -33,7 +33,7 @@ function gis_cambiar_coord($id,$table,$exec) {
 			spip_query("UPDATE spip_gis SET lat="._q($glat).", lonx="._q($glonx)."  WHERE $pkey = " . _q($id));
 	}
 	if ($glat!==NULL){
-		$resultMots = spip_query("SELECT * FROM spip_mots_$table WHERE $pkey = ".intval($id));
+		$resultMots = spip_query("SELECT * FROM spip_mots_{$table}s WHERE $pkey = ".intval($id));
 		while ($rowMot = spip_fetch_array($resultMots)) {
 			$resultMotIcon = spip_query("SELECT * FROM spip_mots WHERE type ='marker_icon' AND id_mot=".$rowMot['id_mot']);
 			if ($rowMotIcon = spip_fetch_array($resultMotIcon)){
