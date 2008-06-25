@@ -13,6 +13,7 @@
 include_spip('inc/notation_util');
 include_spip('inc/vieilles_defs');
 include_spip('balise/notation_balises');
+include_spip('base/abstract_sql');
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
@@ -58,7 +59,7 @@ function balise_NOTATION_dyn($id_article=0, $auteur_session=array()) {
 			$canvote= true;
 		else{
 			$statut = $auteur_session['statut'];
-			if (($acces=='ide' && $statut!='') || ($acces=='aut' && isauteur) || ($acces=='adm' && $statut=="0minirezo"))
+			if (($acces=='ide' && $statut!='') || ($acces=='aut' && $isauteur) || ($acces=='adm' && $statut=="0minirezo"))
 				$canvote= true;
 		}
 		
