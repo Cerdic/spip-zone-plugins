@@ -139,8 +139,7 @@ function convertir_document($id_document) {
     $document['cible_url']['relative'] = _DIR_IMG.lire_config('doc2img/repertoire_cible').'/'.$document['name'].'/';
     $document['cible_url']['absolute'] = $racine_site.$document['cible_url']['relative'];
 
-    //spip_log($document,'doc2img');
-
+    spip_log($document,'doc2img');
     //verrouille document ou quitte
     //si erreur sur verrou alors on quitte le script
     if (!$fp = @spip_fopen_lock($document['source_url']['absolute'].$document['fullname'],'r',LOCK_EX)) {
@@ -162,24 +161,35 @@ function convertir_document($id_document) {
     if (!@mkdir($document['cible_url']['absolute'])) {
         spip_log('erreur repertoire '.$id_document,'doc2img');    
         return false;
-    };
+    }
         
     //charge le document dans imagick
-    $handle = imagick_readimage($document['source_url']['absolute'].$document['fullname']);
-
     //determine le nombre de pages dans le document
-    $nb_pages = imagick_getlistsize($handle);
+    if (class_exists('Imagick')) {
+        //version 2.x
+        $image = new Imagick($document['source_url']['absolute'].$document['fullname']);  
+        $nb_pages = $image->getNumberImages();
+
+    } else {
+        //version 0.9
+        $handle = imagick_readimage($document['source_url']['absolute'].$document['fullname']);    
+        $nb_pages = imagick_getlistsize($handle);
+    }
+
     
     //determine l'extension à utiliser
     $extension = lire_config('doc2img/format_cible');
-    
-    //chaque page est un fichier qu'on sauve dans la table doc2img indéxé par son numéro de page
+        //chaque page est un fichier qu'on sauve dans la table doc2img indéxé par son numéro de page
     for ($frame = 0 ; $frame < $nb_pages; $frame++ ) {
         spip_log($id_document.'-'.$frame,'doc2img');
         //on accede à la page $frame
-        imagick_goto($handle, $frame);
-        $handle_frame = imagick_getimagefromlist($handle);
-
+        if (@imagick_goto($handle, $frame)) {
+            $handle_frame = @imagick_getimagefromlist($handle);
+        } else {
+            $image->nextImage();
+            $image_frame = $image->current();
+        }
+        
         //calcule des dimensions
         //$dimensions = doc2img_ratio($handle_frame);
                 
@@ -190,7 +200,8 @@ function convertir_document($id_document) {
         $document['frame'] = $document['name'].'-'.$frame.'.'.$extension;
         
         //on sauvegarde la page
-        imagick_writeimage($handle_frame,  $document['cible_url']['absolute'].$document['frame']);
+        if (!@imagick_writeimage($handle_frame,  $document['cible_url']['absolute'].$document['frame']))
+            $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
 
         //sauvegarde les donnees dans la base        
         sql_insertq(
@@ -203,11 +214,11 @@ function convertir_document($id_document) {
         );
         
         //on libére la frame
-        imagick_free($handle_frame);        
+        @imagick_free($handle_frame);
     }
     
     //on libére les ressources
-    imagick_free($handle);
+    @imagick_free($handle);
     
     // libération du verrou
     spip_fclose_unlock($fp);
