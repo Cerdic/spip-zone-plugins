@@ -198,6 +198,7 @@ function spiplistes_afficher_auteurs (
 	
 	// titres du tableau (a-la-SPIP, en haut)
 	$icon_auteur = spiplistes_corrige_img_pack("<img src='"._DIR_IMG_PACK."/admin-12.gif' alt='' border='0' />");
+	$id_liste_url = ($id_liste ? "&id_liste=$id_liste" : "");
 	$result .= ""
 		. "<tr bgcolor='#DBE1C5'>"
 		//
@@ -206,7 +207,9 @@ function spiplistes_afficher_auteurs (
 		.	(
 			($tri=='statut')
 			? $icon_auteur
-			: "<a href='".parametre_url($script_retour,'tri','statut')."' title='"._T('lien_trier_statut')."'>$icon_auteur</a>"
+			: "<a href='"
+				. generer_url_ecrire($script_retour, "tri=statut".$id_liste_url)
+				. "' title='"._T('lien_trier_statut')."'>$icon_auteur</a>"
 			)
 		. "</th>\n"
 		// #2: nom
@@ -214,7 +217,9 @@ function spiplistes_afficher_auteurs (
 		.	(
 		 	($tri == '' || $tri=='nom')
 			? _T('info_nom')
-			: "<a href='".parametre_url($script_retour,'tri','nom')."' title='"._T('lien_trier_nom')."'>"._T('info_nom')."</a>"
+			: "<a href='"
+				. generer_url_ecrire($script_retour,"tri=nom".$id_liste_url)
+				. "' title='"._T('lien_trier_nom')."'>"._T('info_nom')."</a>"
 			)
 		. "</th>\n"
 		//
@@ -235,7 +240,9 @@ function spiplistes_afficher_auteurs (
 		.	(
 			($tri=='nombre')
 			? _T('spiplistes:nb_abos')
-			: "<a href='".parametre_url($script_retour,'tri','nombre')."' title='"._T('spiplistes:lien_trier_nombre')."'>"._T('spiplistes:nb_abos')."</a>"
+			: "<a href='"
+				. generer_url_ecrire($script_retour,"tri=nombre".$id_liste_url)
+				. "' title='"._T('spiplistes:lien_trier_nombre')."'>"._T('spiplistes:nb_abos')."</a>"
 			)
 		. "</th>\n"
 		//

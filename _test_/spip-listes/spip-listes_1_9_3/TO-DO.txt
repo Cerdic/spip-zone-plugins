@@ -5,6 +5,7 @@
 
 
 TO-DO:
+- revoir liste auteurs, l'ajax n'a pas le bon retour (ex.: flèche droite perd la page d'appel, du coup le clic suivant sur th de tri se perd)
 - revoir spiplistes_abonne_edit (désabonné, abonné, format ..., pas très clair). Voire supprimer cette page et renvoyer son formulaire corrigé sur auteur_infos.
 - revoir squelette format texte d'envoi (manque retour chariot, titre supprimer_numero, etc...)
 - vérifier envoi du test. Il doit être au format HTML suivi d'un autre au format Texte. Test au 24/06/2008, seule la version texte est envoyée.
