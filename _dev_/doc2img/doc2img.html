@@ -8,7 +8,7 @@
 <B_d2c>
     <p class="pagination">#PAGINATION{page_precedent_suivant}</p>
 <BOUCLE_d2c(DOC2IMG) {id_document} {pagination 1} >
-    <img src="#FICHIER" />
+    <img src="#EVAL{_DIR_IMG}#FICHIER" />
 </BOUCLE_d2c>
     <p>Ce document poss&eacute;de #GRAND_TOTAL page(s)</p>
     <p class="pagination">#PAGINATION{page_precedent_suivant}</p>
