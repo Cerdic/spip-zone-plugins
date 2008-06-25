@@ -1,36 +1,81 @@
 #CACHE{0}
 #SET{total,0}
-<B_DOC>
-    #PAGINATION
-    <table>
-    <tr>
-        <td>id_document</td>
-        <td>extension</td>
-        <td>converti</td>
-        <td>convertible</td>
-        <td> voir </td>
-        <td> fichier </td> 
-        <td> TOTAL </td>
-    </tr>
-<BOUCLE_DOC(DOCUMENTS) {id_document?} {extension == (.*|pdf)} {par id_document} {pagination 100}>
-<tr>
-    <td>#ID_DOCUMENT</td>
-    <td>#EXTENSION</td>
-    <td>[(#ID_DOCUMENT|d2c_is_convert)]</td>
-    <td>[(#ID_DOCUMENT|d2c_can_convert)]</td>
-    <td>    
-        <iframe src="#URL_PAGE{doc2img_convert,id_document=#ID_DOCUMENT}" height="30" width="210"></iframe>
-    </td>
-    <td>
-        <a href="#URL_SITE_SPIP/#FICHIER">#FICHIER</a>
-    </td>
-    <td>
-        [(#EXTENSION|=={pdf}|?{' '})
-            [(#SET{total,#GET{total}|plus{1}})]
-        ]
-        #GET{total}
-    </td>
-</tr>
-</BOUCLE_DOC>
-</table>
 
+<html>
+<head>
+#INSERT_HEAD
+
+<script>
+
+    function convert(doc,index) {
+        frame = $(doc).eq(index);
+        id_document = frame.text();
+                
+        frame.html(
+            '<img src="http://trac.rezo.net/trac/spip/browser/spip/dist/images/loader.gif?format=raw" />'
+        );
+
+        $.ajax({
+          url: "?page=doc2img_convert",
+          data: {id_document : id_document},
+          async: false,
+          complete : function(request,status) {
+            frame.html('<p>'+request.responseText+'</p>');
+            if ($(doc).eq(index+1).text())
+                convert(doc,index+1);
+          }
+        });    
+    }
+
+    $('document').ready( function() {
+        doc = 'td.frame';
+        convert(doc,0);
+    });
+
+</script>
+
+</head>
+
+<body>
+
+    <B_DOC>
+        <table>
+        <tr>
+            <td>id_document</td>
+            <td>extension</td>
+            <td>convertible</td>
+            <td>converti</td>        
+            <td> voir </td>
+            <td> fichier </td> 
+            <td> TOTAL </td>
+        </tr>
+    <BOUCLE_DOC(DOCUMENTS) {id_document?} {extension == (pdf)} {par id_document} {0,10}>
+    <tr>
+        <td>#ID_DOCUMENT</td>
+        <td>#EXTENSION</td>
+        [(#ID_DOCUMENT|d2c_can_convert|?{
+            <td bgcolor="#00FF00">oui</td>,
+            <td bgcolor="#FF0000">non</td>}
+        )]
+        
+        [(#ID_DOCUMENT|d2c_is_convert|?{
+            <td bgcolor="#FF0000">oui</td>,
+            <td bgcolor="#00FF00">non</td>}
+        )]
+        <td class="frame">#ID_DOCUMENT</td>
+        <td>
+            <a href="#URL_SITE_SPIP/#FICHIER">#FICHIER</a>
+        </td>
+        <td>
+            [(#EXTENSION|=={pdf}|?{' '})
+                [(#SET{total,#GET{total}|plus{1}})]
+            ]
+            #GET{total}
+        </td>
+    </tr>
+    </BOUCLE_DOC>
+    </table>
+
+</body>
+
+</html>

@@ -6,14 +6,12 @@
 </BOUCLE_listed2c>
 
 <B_d2c>
-    #ANCRE_PAGINATION
+    <p class="pagination">#PAGINATION{page_precedent_suivant}</p>
 <BOUCLE_d2c(DOC2IMG) {id_document} {pagination 1} >
     <img src="#FICHIER" />
 </BOUCLE_d2c>
-    <p>
-    Ce document poss&eacute;de #GRAND_TOTAL page(s)
-    </p>
-    #PAGINATION{page_precedent_suivant}
+    <p>Ce document poss&eacute;de #GRAND_TOTAL page(s)</p>
+    <p class="pagination">#PAGINATION{page_precedent_suivant}</p>
 </B_d2c>
     table vide
 <//B_d2c>
