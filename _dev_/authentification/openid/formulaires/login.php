@@ -70,7 +70,7 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 	{
 		$auth_http = generer_url_action('cookie',"",false,true);
 	}
-		
+	
 	$valeurs = array(
 		'auth_http' => $auth_http,
 		'var_login' => $login,
@@ -83,7 +83,7 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 	$valeurs['_hidden'] = 
 	'<input type="hidden" name="session_password_md5" value="" />'
 	. '<input type="hidden" name="next_session_password_md5" value="" />';
-
+	
 	// Si on est connecte, envoyer vers la destination
 	// si on en a le droit, et sauf si on y est deja
 	verifier_visiteur();

@@ -8,5 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'utilisateur_inconnu' => 'Utilisateur inconnu sur ce site',
   'verif_refusee' => 'V&eacute;rification refus&eacute;e',
   'erreur_openid' => 'Erreur d\'authentification OpenID: avez-vous bien entr&eacute; un OpenID valide?',
-  'erreur_librairies' => 'Impossible de trouver les librairies d\'authenfication OpenID'
+  'erreur_librairies' => 'Impossible de trouver les librairies d\'authenfication OpenID',
+// O
+  'openid' => 'OpenID'
 );
