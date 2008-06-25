@@ -51,7 +51,8 @@ function doc2img_post_edition($flux) {
 //	include_spip('inc/convertir');
 
     if (($flux['args']['operation'] == 'ajouter_document') 
-            && (controler_document($id_document) == true)
+            && (can_doc2img($id_document) == true)
+            && (is_doc2img($id_document) == false)
             && (lire_config('doc2img/conversion_auto') == "on"))  {
 	    spip_log('document '.$id_document.' en conversion automatique','doc2img');
 	    convertir_document($id_document);
