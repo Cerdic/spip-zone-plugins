@@ -190,10 +190,9 @@ function convertir_document($id_document) {
     } else {
         $image_frame = $image->current();
     }
-    
-    
-    //chaque page est un fichier qu'on sauve dans la table doc2img indéxé par son numéro de page
-    for ($frame = 1 ; $frame <= $nb_pages; $frame++ ) {        
+
+    //chaque page est un fichier qu'on sauve dans la table doc2img indéxé par son numéro de page    
+    do {
         //calcule des dimensions
         //$dimensions = doc2img_ratio($handle_frame);
                 
@@ -231,8 +230,9 @@ function convertir_document($id_document) {
         } else {
             $image->nextImage();
             $image_frame = $image->current();
-        }
-    }
+        }  
+        $frame++;
+    } while($frame < $nb_pages );
     
     //on libére les ressources
     if (!@imagick_free($handle)) {
