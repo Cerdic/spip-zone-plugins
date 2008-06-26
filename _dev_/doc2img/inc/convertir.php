@@ -182,17 +182,18 @@ function convertir_document($id_document) {
     //determine l'extension à utiliser
     $extension = lire_config('doc2img/format_cible');
     
+    //charge la premiere image
+    spip_log($id_document.'-0','doc2img');
+    //on accede à la page $frame
+    if (@imagick_goto($handle, 0)) {
+        $handle_frame = @imagick_getimagefromlist($handle);
+    } else {
+        $image_frame = $image->current();
+    }
+    
+    
     //chaque page est un fichier qu'on sauve dans la table doc2img indéxé par son numéro de page
-    for ($frame = 0 ; $frame < $nb_pages; $frame++ ) {
-        spip_log($id_document.'-'.$frame,'doc2img');
-        //on accede à la page $frame
-        if (@imagick_goto($handle, $frame)) {
-            $handle_frame = @imagick_getimagefromlist($handle);
-        } else {
-            $image->nextImage();
-            $image_frame = $image->current();
-        }
-        
+    for ($frame = 1 ; $frame <= $nb_pages; $frame++ ) {        
         //calcule des dimensions
         //$dimensions = doc2img_ratio($handle_frame);
                 
@@ -220,6 +221,16 @@ function convertir_document($id_document) {
         if (!@imagick_free($handle_frame)) {
             $image_frame->clear();
             $image_frame->destroy();
+        }
+        
+        //on charge la frame suivante
+        spip_log($id_document.'-'.$frame,'doc2img');
+        //on accede à la page $frame
+        if (@imagick_goto($handle, $frame)) {
+            $handle_frame = @imagick_getimagefromlist($handle);
+        } else {
+            $image->nextImage();
+            $image_frame = $image->current();
         }
     }
     
