@@ -1,4 +1,5 @@
 /*boite admin*/
+
 /*formulaire evenement*/
 .editereve{text-align:left; background-color:#fff; width:300px; position:absolute; left:300px; top:100px; z-index:2000;}
 .editereve form{padding:1em;}
@@ -11,7 +12,7 @@
 
 .paddingadmin{ padding: 1em }
 #special-admin h5{background-color:#444; color:#FFF; display:block; margin:0; padding:0.5em; font-size:1.1em;}
-#special-admin h6{background-color:#f1f1f1; display:block; margin:0;  border-top:3px solid #555; border-bottom:1px solid #fff; font-size:1em; color:#000; }
+#special-admin h6{background-color:#f1f1f1; display:block; margin:0;  border-top:1px solid #555; padding:2px 0 2px 0; font-size:1em; color:#000; }
 #programmearticle{ padding: 0 0 1em 0;}
 
 #programmearticle .insereraccourci{background-color:#fff; font-weight:normal; color:green;}
@@ -20,11 +21,28 @@
 position: absolute;
 top: 1em;
 left: 5px;
-width: 200px;
+width: 120px;
 z-index:1200;
 height:95%;
-overflow:auto; 
+overflow:auto;
+text-align:center;
 }
+
+#special-admin a,  #special-admin img{ 
+text-decoration:none; border:none; color:#CC3333;
+}
+
+#special-admin a:hover{ 
+text-decoration:none; background-color:#FFFF00; color:#660000;
+}
+
+#special-admin .formfx li {
+list-style-type:none; text-align:left;
+}
+#special-admin .formfx input {
+width:90%; margin-left:3%;
+}
+
 
 .obeirpoliment{ background-color: #F9F9F9; border: 1px solid #666666; }
 html>body #special-admin {
