@@ -12,7 +12,7 @@
  *  \author bishop http://fr.php.net/manual/fr/function.unlink.php#53549  
  */
 function rm($fileglob) {
-    spip_log($fileglob,'doc2img');
+    //spip_log($fileglob,'doc2img');
     if (is_string($fileglob)) {
         if (is_file($fileglob)) {
             return unlink($fileglob);
@@ -146,7 +146,7 @@ function doc2img_installer($version,$version_finale) {
 		case 0.8 :
 			sql_alter(
 				"TABLE spip_doc2img 
-					ADD UNIQUE document (id_document, page)"
+					ADD UNIQUE INDEX document (id_document, page)"
 			);
     }
 
@@ -180,9 +180,9 @@ function doc2img_uninstaller() {
     rm($dir_doc2img);
  
 	//supprime les log
-	spip_log('suppression des log : '.getcwd().'../tmp/doc2img.log*','doc2img');
+	spip_log('suppression des log :','doc2img');
 
-	rm(getcwd().'../tmp/doc2img.log*');
+	rm(getcwd().'/../tmp/doc2img.log*');
 
     //on efface la meta indiquant la version installée
     effacer_meta('doc2img_version');
