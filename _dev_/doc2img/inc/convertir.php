@@ -139,7 +139,8 @@ function convertir_document($id_document) {
     $document['cible_url']['relative'] = _DIR_IMG.lire_config('doc2img/repertoire_cible').'/'.$document['name'].'/';
     $document['cible_url']['absolute'] = $racine_site.$document['cible_url']['relative'];
 
-    spip_log($document,'doc2img');
+    spip_log($document,'doc2img');
+
     //verrouille document ou quitte
     //si erreur sur verrou alors on quitte le script
     if (!$fp = @spip_fopen_lock($document['source_url']['absolute'].$document['fullname'],'r',LOCK_EX)) {
@@ -169,6 +170,7 @@ function convertir_document($id_document) {
         //version 2.x
         $image = new Imagick($document['source_url']['absolute'].$document['fullname']);  
         $nb_pages = $image->getNumberImages();
+        spip_log($document['source_url']['absolute'].$document['fullname'].' -> '.$nb_pages,'doc2img');
 
     } else {
         //version 0.9
@@ -179,7 +181,8 @@ function convertir_document($id_document) {
     
     //determine l'extension à utiliser
     $extension = lire_config('doc2img/format_cible');
-        //chaque page est un fichier qu'on sauve dans la table doc2img indéxé par son numéro de page
+    
+    //chaque page est un fichier qu'on sauve dans la table doc2img indéxé par son numéro de page
     for ($frame = 0 ; $frame < $nb_pages; $frame++ ) {
         spip_log($id_document.'-'.$frame,'doc2img');
         //on accede à la page $frame
@@ -214,11 +217,17 @@ function convertir_document($id_document) {
         );
         
         //on libére la frame
-        @imagick_free($handle_frame);
+        if (!@imagick_free($handle_frame)) {
+            $image_frame->clear();
+            $image_frame->destroy();
+        }
     }
     
     //on libére les ressources
-    @imagick_free($handle);
+    if (!@imagick_free($handle)) {
+        $image->clear();
+        $image->destroy();        
+    }
     
     // libération du verrou
     spip_fclose_unlock($fp);
