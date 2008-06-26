@@ -184,15 +184,19 @@ function convertir_document($id_document) {
     
     //charge la premiere image
     spip_log($id_document.'-0','doc2img');
-    //on accede à la page $frame
-    if (@imagick_goto($handle, 0)) {
-        $handle_frame = @imagick_getimagefromlist($handle);
-    } else {
-        $image_frame = $image->current();
-    }
+    
+    $frame = 0;
 
     //chaque page est un fichier qu'on sauve dans la table doc2img indéxé par son numéro de page    
     do {
+    
+        //on accede à la page $frame
+        if (@imagick_goto($handle, $frame)) {
+            $handle_frame = @imagick_getimagefromlist($handle);
+        } else {
+            $image_frame = new imagick($document['source_url']['absolute'].$document['fullname'].'['.$frame.']');
+        }
+    
         //calcule des dimensions
         //$dimensions = doc2img_ratio($handle_frame);
                 
@@ -203,8 +207,10 @@ function convertir_document($id_document) {
         $document['frame'] = $document['name'].'-'.$frame.'.'.$extension;
         
         //on sauvegarde la page
-        if (!@imagick_writeimage($handle_frame,  $document['cible_url']['absolute'].$document['frame']))
+        if (!@imagick_writeimage($handle_frame,  $document['cible_url']['absolute'].$document['frame'])) {
+            $image_frame->setImageFormat($extension);
             $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
+        }
 
         //sauvegarde les donnees dans la base        
         sql_insertq(
@@ -222,15 +228,6 @@ function convertir_document($id_document) {
             $image_frame->destroy();
         }
         
-        //on charge la frame suivante
-        spip_log($id_document.'-'.$frame,'doc2img');
-        //on accede à la page $frame
-        if (@imagick_goto($handle, $frame)) {
-            $handle_frame = @imagick_getimagefromlist($handle);
-        } else {
-            $image->nextImage();
-            $image_frame = $image->current();
-        }  
         $frame++;
     } while($frame < $nb_pages );
     
