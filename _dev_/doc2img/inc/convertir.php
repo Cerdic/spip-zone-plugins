@@ -168,12 +168,14 @@ function convertir_document($id_document) {
     //determine le nombre de pages dans le document
     if (class_exists('Imagick')) {
         //version 2.x
+        $version = '2.x';
         $image = new Imagick($document['source_url']['absolute'].$document['fullname']);  
         $nb_pages = $image->getNumberImages();
         spip_log($document['source_url']['absolute'].$document['fullname'].' -> '.$nb_pages,'doc2img');
 
     } else {
         //version 0.9
+        $version = '0.9';
         $handle = imagick_readimage($document['source_url']['absolute'].$document['fullname']);    
         $nb_pages = imagick_getlistsize($handle);
     }
@@ -191,10 +193,12 @@ function convertir_document($id_document) {
     do {
     
         //on accede à la page $frame
-        if (@imagick_goto($handle, $frame)) {
+        if ($version == '0.9') {
+            imagick_goto($handle, $frame);
             $handle_frame = @imagick_getimagefromlist($handle);
         } else {
             $image_frame = new imagick($document['source_url']['absolute'].$document['fullname'].'['.$frame.']');
+            spip_log($document['source_url']['absolute'].$document['fullname'].'['.$frame.']','doc2img');
         }
     
         //calcule des dimensions
@@ -207,9 +211,12 @@ function convertir_document($id_document) {
         $document['frame'] = $document['name'].'-'.$frame.'.'.$extension;
         
         //on sauvegarde la page
-        if (!@imagick_writeimage($handle_frame,  $document['cible_url']['absolute'].$document['frame'])) {
+        if ($version == '0.9') {
+            imagick_writeimage($handle_frame,  $document['cible_url']['absolute'].$document['frame']);
+        } else {
             $image_frame->setImageFormat($extension);
             $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
+            spip_log('ecriture frame'.$frame,'doc2img');
         }
 
         //sauvegarde les donnees dans la base        
@@ -221,20 +228,28 @@ function convertir_document($id_document) {
                 "page" => $frame
             )
         );
+        spip_log('injection bd','doc2img');
         
         //on libére la frame
-        if (!@imagick_free($handle_frame)) {
+        if ($version == '0.9') {
+            imagick_free($handle_frame);
+        } else {
             $image_frame->clear();
             $image_frame->destroy();
+            spip_log('liberation ressources frame','doc2img');
         }
         
         $frame++;
+    
     } while($frame < $nb_pages );
     
     //on libére les ressources
-    if (!@imagick_free($handle)) {
+    if ($version == '0.9') {
+        imagick_free($handle);
+    } else {
         $image->clear();
-        $image->destroy();        
+        $image->destroy();
+        spip_log('liberation image','doc2img');
     }
     
     // libération du verrou
