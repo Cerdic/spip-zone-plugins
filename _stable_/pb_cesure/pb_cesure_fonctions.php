@@ -73,7 +73,6 @@
 
 			// Function: Text hyphenation
 			function cesure($text, $lang="xxx") {
-	
 				$GLOBALS["pb_leftmin"] = 2;
 				$GLOBALS["pb_rightmin"] = 2;
 				$GLOBALS["pb_charmin"] = 4;
@@ -94,7 +93,17 @@
 					if(mb_strpos($word_boundaries, $char) === false && $tag == "") {
 						$word .= $char;
 					} else {
-						if($word != "") { $output[] = pb_word_hyphenation($word); $word = ""; }
+						if($word != "") { 
+							// Couper les mots, sauf ceux avec majuscule initiale (francais, anglais)
+							if (($lang == "fr" || $lang =="en")) {
+								if (ereg("^[A-ZÀÉÈÎ]", $word)) $output[] = $word; 
+								else $output[] = pb_word_hyphenation($word);
+							}
+							else {
+								$output[] = pb_word_hyphenation($word);
+							}
+							$word = ""; 
+						}
 						if($tag != "" || $char == "<") $tag .= $char;
 						if($tag != "" && $char == ">") {
 							$tag_name = (mb_strpos($tag, " ")) ? mb_substr($tag, 1, mb_strpos($tag, " ") - 1) : mb_substr($tag, 1, mb_strpos($tag, ">") - 1);
