@@ -8,6 +8,7 @@
 
 include_spip("inc/utils");
 include_spip("inc/presentation");
+include_spip("inc/vieilles_defs");
 
 function exec_geomap_config(){
 	global $connect_statut,$spip_lang_right;
