@@ -112,24 +112,20 @@ function afficher_gestion_remplacer($champ, $champhelp, $num_barre) {
 
 $tableau_formulaire = '
 <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
-<tr><td><label for="barre_chercher'.$num_barre.'">'.
+<tr style="vertical-align:top;"><td>'.
 _T('bartypenr:barre_gestion_cr_chercher')
-.'</label> <input type="text" id="barre_chercher'.$num_barre.'" name="barre_chercher" value="" size="12" maxlength="255" /><br />
-<input type="checkbox" name="rec_case" id="rec_case'.$num_barre.'" value="yes" />
-<label for="rec_case'.$num_barre.'">'._T('bartypenr:barre_gestion_cr_casse').'</label><br />
+.' <input type="text" id="barre_chercher'.$num_barre.'" name="barre_chercher" value="" size="12" maxlength="255" /><br />
+<input style="width:auto;" type="checkbox" name="rec_case" id="rec_case'.$num_barre.'" value="yes" />&nbsp;'._T('bartypenr:barre_gestion_cr_casse').'<br />
    <input type="button" value="'._T('bartypenr:barre_gestion_cr_chercher').'" class="fondo"
   onclick="javascript:barre_search(document.getElementById(\'barre_chercher'.$num_barre.'\').value, document.getElementById(\'rec_entier'.$num_barre.'\').checked, document.getElementById(\'rec_case'.$num_barre.'\').checked, '.$champ.');" /> 
-</td><td><label for="barre_remplacer'.$num_barre.'">'
-._T('bartypenr:barre_gestion_cr_remplacer')
-.'</label> <input type="text" name="barre_remplacer" id="barre_remplacer'.$num_barre.'" value="" size="12" maxlength="255" /><br />
-<input type="checkbox" name="rec_tout" id="rec_tout'.$num_barre.'" value="yes" />
-<label for="rec_tout'.$num_barre.'">'._T('bartypenr:barre_gestion_cr_tout').'</label><br />
-<input type="checkbox" name="rec_entier" id="rec_entier'.$num_barre.'" value="yes" />
-<label for="rec_entier'.$num_barre.'">'._T('bartypenr:barre_gestion_cr_entier').'</label><br />
+</td><td>'._T('bartypenr:barre_gestion_cr_remplacer')
+.' <input type="text" name="barre_remplacer" id="barre_remplacer'.$num_barre.'" value="" size="12" maxlength="255" /><br />
+<input style="width:auto;" type="checkbox" name="rec_tout" id="rec_tout'.$num_barre.'" value="yes" />&nbsp;'._T('bartypenr:barre_gestion_cr_tout').'<br />
+<input style="width:auto;" type="checkbox" name="rec_entier" id="rec_entier'.$num_barre.'" value="yes" />&nbsp;'._T('bartypenr:barre_gestion_cr_entier').'<br />
    <input type="button" value="'._T('bartypenr:barre_gestion_cr_remplacer').'" class="fondo"
   onclick="javascript:barre_searchreplace(document.getElementById(\'barre_chercher'.$num_barre.'\').value, document.getElementById(\'barre_remplacer'.$num_barre.'\').value, document.getElementById(\'rec_tout'.$num_barre.'\').checked, document.getElementById(\'rec_case'.$num_barre.'\').checked, document.getElementById(\'rec_entier'.$num_barre.'\').checked,'.$champ.','.$num_barre.');" /> 
 </td>
-<td>'._T('bartypenr:barre_gestion_cr_changercasse').'&nbsp;: '. RaccourcisMajusculesMinuscules($champ, $champhelp, $num_barre).'
+<td>'._T('bartypenr:barre_gestion_cr_changercasse').'<br />'. RaccourcisMajusculesMinuscules($champ, $champhelp, $num_barre).'
 </td>
 </tr></table>';
 
@@ -141,16 +137,14 @@ function afficher_gestion_ancre($champ, $num_barre) {
 
 $tableau_formulaire = '
 <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
-  <tr>
+  <tr style="vertical-align:top;">
     <td style="width:auto; text-align:center;"><strong>'.
 _T('bartypenr:barre_gestion_anc_caption')
 .'</strong></td>
     <td style="width:auto;"><strong>'.
 _T('bartypenr:barre_gestion_anc_inserer')
 .'</strong><br />
-    <label for="ancre_nom'.$num_barre.'"><i>'.
-_T('bartypenr:barre_gestion_anc_nom')
-.'</i></label> <br />
+    <i>'._T('bartypenr:barre_gestion_anc_nom').'</i><br />
       <input type="text" name="ancre_nom" id="ancre_nom'.$num_barre.'" />
 	  
 	<input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_ancre(\'[\', \'<-\', \']\', document.getElementById(\'ancre_nom'.$num_barre.'\').value, '.$champ.','.$num_barre.');" />
@@ -158,12 +152,8 @@ _T('bartypenr:barre_gestion_anc_nom')
 	<td style="width:auto;"><strong>'.
 _T('bartypenr:barre_gestion_anc_pointer')
 .'</strong><br />
-    <label for="ancre_cible'.$num_barre.'"><i>'.
-_T('bartypenr:barre_gestion_anc_cible')
-.'</i></label> <input type="text" name="ancre_cible" id="ancre_cible'.$num_barre.'" /><br />
-	<label for="ancre_bulle'.$num_barre.'"><i>'.
-_T('bartypenr:barre_gestion_anc_bulle')
-.'</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle'.$num_barre.'" />
+    <i>'._T('bartypenr:barre_gestion_anc_cible').'</i><br /><input type="text" name="ancre_cible" id="ancre_cible'.$num_barre.'" /><br />
+	<i>'._T('bartypenr:barre_gestion_anc_bulle').'</i><br /><input type="text" name="ancre_bulle" id="ancre_bulle'.$num_barre.'" />
 	<input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', document.getElementById(\'ancre_cible'.$num_barre.'\').value, document.getElementById(\'ancre_bulle'.$num_barre.'\').value, '.$champ.', '.$num_barre.');" /> 
 </td>
   </tr> 
