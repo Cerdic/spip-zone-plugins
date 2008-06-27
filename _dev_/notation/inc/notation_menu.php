@@ -39,9 +39,9 @@ function ecrire_menu($menu='table')
 	// Afficher les onglets
 	gros_titre("Plugin "._T('notation:notation'));
 	echo debut_onglet().
-	onglet(_T('notation:afficher_tables'), generer_url_ecrire("notation"), 'table', $menu, '../'._DIR_PLUGIN_NOTATION.'/img_pack/notation.png').
-	onglet(_T('notation:param'), generer_url_ecrire("notation_param"), 'param', $menu, '../'._DIR_PLUGIN_NOTATION.'/img_pack/spip_mecano_24.png').
-	onglet(_T('notation:aide'), generer_url_ecrire("notation_help"), 'help', $menu, '../'._DIR_PLUGIN_NOTATION.'/img_pack/notation_help.png').
+	onglet(_T('notation:afficher_tables'), generer_url_ecrire("notation"), 'table', $menu, '../'._DIR_PLUGIN_NOTATION.'img_pack/notation.png').
+	onglet(_T('notation:param'), generer_url_ecrire("notation_param"), 'param', $menu, '../'._DIR_PLUGIN_NOTATION.'img_pack/spip_mecano_24.png').
+	onglet(_T('notation:aide'), generer_url_ecrire("notation_help"), 'help', $menu, '../'._DIR_PLUGIN_NOTATION.'img_pack/notation_help.png').
 	fin_onglet();
 
 
