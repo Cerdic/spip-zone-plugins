@@ -7,8 +7,8 @@
  *  \return booleen $resultat : true document converti, false sinon
  */
 function is_doc2img($id_document) {
-    $pages = sql_countsel('spip_doc2img','id_document='.$id_document,'id_doc2img');
-    if (is_numeric($pages)) {        
+    $pages = intval(sql_countsel('spip_doc2img','id_document='.$id_document));
+    if ($pages > 0) {        
         return true;
     } else  {
         return false;
@@ -184,14 +184,14 @@ function convertir_document($id_document) {
     //determine l'extension à utiliser
     $extension = lire_config('doc2img/format_cible');
     
-    //charge la premiere image
-    spip_log($id_document.'-0','doc2img');
     
     $frame = 0;
 
     //chaque page est un fichier qu'on sauve dans la table doc2img indéxé par son numéro de page    
     do {
-    
+        //charge la premiere image
+        spip_log($id_document.'-'.$frame,'doc2img');    
+
         //on accede à la page $frame
         if ($version == '0.9') {
             imagick_goto($handle, $frame);
@@ -212,11 +212,11 @@ function convertir_document($id_document) {
         
         //on sauvegarde la page
         if ($version == '0.9') {
-            imagick_writeimage($handle_frame,  $document['cible_url']['absolute'].$document['frame']);
+            imagick_writeimage($handle_frame, $document['cible_url']['absolute'].$document['frame']);
         } else {
             $image_frame->setImageFormat($extension);
             $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
-            spip_log('ecriture frame'.$frame,'doc2img');
+            spip_log('ecriture frame '.$frame,'doc2img');
         }
 
         //sauvegarde les donnees dans la base        
