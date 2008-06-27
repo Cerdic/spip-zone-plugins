@@ -56,7 +56,7 @@ function exec_notation_param(){
 	   echo generer_url_post_ecrire("notation_param").'<div>';
 	   
 	   /* Ponderation */
-	   debut_cadre_trait_couleur("../"._DIR_PLUGIN_NOTATION."/img_pack/poids.gif", false, "", _T('notation:ponderation'));
+	   debut_cadre_trait_couleur("../"._DIR_PLUGIN_NOTATION."img_pack/poids.gif", false, "", _T('notation:ponderation'));
 	   debut_cadre_relief();
        echo("<span class='verdana2'>"._T("notation:info_ponderation")."</span>");
      fin_cadre_relief();
@@ -107,7 +107,7 @@ function exec_notation_param(){
 	   fin_cadre_trait_couleur();
 	   
 	   /* Nombre d'etoiles */
-	   debut_cadre_trait_couleur("../"._DIR_PLUGIN_NOTATION."/img_pack/note.gif", false, "", _T('notation:nb_etoiles'));
+	   debut_cadre_trait_couleur("../"._DIR_PLUGIN_NOTATION."img_pack/note.gif", false, "", _T('notation:nb_etoiles'));
  	   debut_cadre_relief();
        echo("<span class='verdana2'>"._T("notation:info_etoiles")."</span>");
      fin_cadre_relief();
