@@ -57,6 +57,38 @@
 				spip_query("ALTER TABLE spip_gis ADD INDEX ( id_rubrique )");
 				ecrire_meta($nom_meta_base_version,$current_version="0.1.5");
 			}
+			/*esto es para realizar los cambios de nombre de variables*/
+			if (version_compare($current_version,"0.1.6","<")){
+				$value = "";
+				$res = spip_query("SELECT name, value FROM spip_meta WHERE name='geomap_default_lat'");
+				if ($row = spip_fetch_array($res)) {
+					$value = $row['value'];
+					ecrire_meta('gis_default_lat',$value);
+				} else {
+					effacer_meta('gis_default_lat');
+				}
+				$res = spip_query("SELECT name, value FROM spip_meta WHERE name='geomap_default_lonx'");
+				if ($row = spip_fetch_array($res)) {
+					$value = $row['value'];
+					ecrire_meta('gis_default_lonx',$value);
+				} else {
+					effacer_meta('gis_default_lonx');
+				}
+				$res = spip_query("SELECT name, value FROM spip_meta WHERE name='geomap_default_zoom'");
+				if ($row = spip_fetch_array($res)) {
+					$value = $row['value'];
+					ecrire_meta('gis_default_zoom',$value);
+				} else {
+					effacer_meta('gis_default_zoom');
+				}
+				effacer_meta("geomap_default_lat");
+				effacer_meta("geomap_default_lonx");
+				effacer_meta("geomap_default_zoom");
+				ecrire_meta('gis_map', 'no');
+				spip_query("ALTER TABLE spip_gis ADD zoom int(4) NULL NULL AFTER lonx");
+				ecrire_meta($nom_meta_base_version,$current_version="0.1.6");
+			}
+			/*se encaga de trasladar las variables generales de geomap a gis*/
 			ecrire_metas();
 		}
 	}

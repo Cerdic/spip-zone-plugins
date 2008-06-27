@@ -11,7 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'configurar_gis' => 'Configurar Plugin Gis',
 'conseguir' => '(conseguir)',
 'cambiar' => 'cambiar coordenadas',
-'boton_actualizar' => 'actualizar'
+'boton_actualizar' => 'actualizar',
+'falta_plugin' => 'Para poder utilizar o plugin GIS necesita un segundo plugin que xestione os mapas instaleo e activeo dende o panel de xesti&oacute;n dos plugin',
+'lat' => 'latitude',
+'long' => 'lonxitude',
+'zoom' => 'zoom'
 );
 
 ?>

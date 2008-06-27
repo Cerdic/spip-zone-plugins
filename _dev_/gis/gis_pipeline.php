@@ -11,6 +11,16 @@
 
 include_spip('exec/gis');
 
+function gis_ajouterBoutons($boutons_admin) {
+	// si eres administrador
+	if (autoriser('administrer','gis')) {
+    // vese o bot—n na barra de "configuraci—n"
+	    $boutons_admin['configuration']->sousmenu['gis_config']= new Bouton(
+		    _DIR_PLUGIN_GIS.'img_pack/correxir.png', _T('gis:configuration'));
+	}
+	return $boutons_admin;
+}
+
 function gis_gismot($flux){
 	if (_request('exec')=='mots_edit'){
 		include_spip('inc/parte_privada');
@@ -66,15 +76,17 @@ function gis_insertar_maparticle($flux){
 // inserta no head da parte PRIVADA
 // --------------------------------
 function gis_insertar_head($flux){
-	$flux .= '<script type="text/javascript" src="'.generer_url_public('geomap.js').'"></script>';
-	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>';
+	if ((isset($GLOBALS['meta']['gis_map']))&&($GLOBALS['meta']['gis_map']!='no')&&(strpos($GLOBALS['meta']['plugin'] , strtoupper($GLOBALS['meta']['gis_map'])))) {
+		$gis_script_init = charger_fonction($GLOBALS['meta']['gis_map'].'_script_init','inc');
+		$flux .= $gis_script_init();
+	}
 	if ((_request('exec')=='articles' || _request('exec')=='naviguer'))
-		$flux .= '<script type="text/javascript">
-	jQuery(document).ready(function() {
-		jQuery(\'#cadroFormulario\').hide()
-	});
-	</script>
-	<script type="text/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
+		$flux .= '
+		<script type="text/javascript">
+			jQuery(document).ready(function() {
+				jQuery(\'#cadroFormulario\').hide()
+			});
+		</script>';
 	return $flux;
 }
 
@@ -82,18 +94,13 @@ function gis_insertar_head($flux){
 // inserta no head da parte PUBLICA
 // --------------------------------
 function gis_affichage_final($flux){
+
     if ((strpos($flux, '<div id="map') == true) or (strpos($flux, '<div id="formMap') == true) or (strpos($flux, "<div id='map") == true)){
-	
-		$incHead='
-		<script type="text/javascript" src="'.generer_url_public('geomap.js').'"></script>
-		<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>
-		<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>
-		<script type="text/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
-        $incHead .= '<script type="text/javascript">
-                jQuery(document).unload(function(){
-                	Gunload();
-                });
-                </script>';
+		$incHead = '';
+		if ((isset($GLOBALS['meta']['gis_map']))&&($GLOBALS['meta']['gis_map']!='no')&&(strpos($GLOBALS['meta']['plugin'] , strtoupper($GLOBALS['meta']['gis_map'])))) {
+			$gis_public_script_init = charger_fonction($GLOBALS['meta']['gis_map'].'_public_script_init','inc');
+			$incHead .= $gis_public_script_init();
+		}
         return substr_replace($flux, $incHead, strpos($flux, '</head>'), 0);
     } else {
 		return $flux;

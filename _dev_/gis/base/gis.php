@@ -18,7 +18,8 @@ $spip_gis = array(
 	"id_article" => "int(11) NULL NULL",
 	"id_rubrique" => "int(11) NULL NULL",
 	"lat" => "float(21)  NULL NULL",
-	"lonx" => "float(21)  NULL NULL"
+	"lonx" => "float(21)  NULL NULL",
+	"zoom" => "tinyint(4)  NULL NULL"
 	);
 	
 $spip_gis_key = array(
