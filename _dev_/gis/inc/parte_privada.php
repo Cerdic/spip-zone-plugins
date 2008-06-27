@@ -32,6 +32,11 @@ function gis_cambiar_coord($id,$table,$exec) {
 		else
 			spip_query("UPDATE spip_gis SET lat="._q($glat).", lonx="._q($glonx)."  WHERE $pkey = " . _q($id));
 	}
+	
+	//pour ne pas recharger le api de google map
+  $geomap_script_init = charger_fonction('geomap_script_init','inc');
+	$geomap_script_init();
+	
 	if ($glat!==NULL){
 		$resultMots = spip_query("SELECT * FROM spip_mots_{$table}s WHERE $pkey = ".intval($id));
 		while ($rowMot = spip_fetch_array($resultMots)) {
