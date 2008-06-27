@@ -13,6 +13,7 @@ include_spip('inc/distant');
 function inc_geomap_script_init_dist(){
 	static $deja_insere = false;
 	if ($deja_insere) return "";
+	$deja_insere = true;
 	$config = lire_meta('geomap_googlemapkey');
 	$version = lire_meta('geomap_googlemapversion');
 	$geomap = compacte_js(find_in_path('js/geomap.js'));
