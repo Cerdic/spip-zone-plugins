@@ -220,14 +220,17 @@ function convertir_document($id_document) {
         }
 
         //sauvegarde les donnees dans la base        
-        sql_insertq(
+        if (!sql_insertq(
             "spip_doc2img",
             array(
                 "id_document" => $id_document,
                 "fichier" => set_spip_doc($document['cible_url']['relative'].$document['frame']),
-                "page" => $frame
+                "page" => $frame,
             )
-        );
+        )) {
+            spip_log("erreur sql","doc2img");
+            return false;
+        }
         spip_log('injection bd','doc2img');
         
         //on libére la frame

@@ -32,7 +32,7 @@ function spip_explode($texte,$separateur){
 function d2c_convertir($id_document) {
     include_spip('inc/convertir');
     if ((is_doc2img($id_document) == false) && (can_doc2img($id_document) == true) ) {
-        return convertir_document($id_document);
+        return convertir_document($id_document) ? ' ' : '';
     } else {
         return '';
     }
