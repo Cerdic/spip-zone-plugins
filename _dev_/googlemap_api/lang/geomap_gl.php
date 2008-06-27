@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'conseguir' => '(conseguir)',
 'default_geoloc' => '<NEW>Position par d&eacute;faut des cartes :',
 'configuration' => '<NEW>Configuration',
-'miseajour' => '<NEW>Mise &agrave; jour'
+'miseajour' => '<NEW>Mise &agrave; jour',
+'msgplugin' => 'Escolleu Google Map API como complemento para poder utilizar o plugin GIS: '
 );
 
 ?>
-

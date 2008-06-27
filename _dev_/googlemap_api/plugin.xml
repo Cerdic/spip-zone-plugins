@@ -21,10 +21,6 @@ _ Help to use the API in several plugins (Gis, Geoforms...).
  <install>base/geomap_upgrade.php</install>
  <fonctions>public/geomap_balises.php</fonctions>
  <prefix>geomap</prefix>
- <pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-		<inclure>geomap_pipeline.php</inclure>
-	</pipeline>
  <chemin dir='' />
+ 
 </plugin>
