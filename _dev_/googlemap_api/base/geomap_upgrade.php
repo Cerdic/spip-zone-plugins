@@ -22,22 +22,20 @@
 				ecrire_meta('geomap_version',$current_version=0.2);
 			}
 		}
-		ecrire_metas();
+		ecrire_meta('gis_map','geomap');
 	}
 	
 	function geomap_vider_tables(){
+		ecrire_meta('gis_map','no');
 		effacer_meta("geomap_googlemapkey");
-		effacer_meta("geomap_default_lat");
-		effacer_meta("geomap_default_lonx");
-		effacer_meta("geomap_default_zoom");
 		effacer_meta("geomap_version");
-		ecrire_metas();
 	}
 
 	function geomap_install($action){
 		$version_base = $GLOBALS['geomap_version'];
 		switch ($action){
 			case 'test':
+				ecrire_meta('gis_map','geomap');
 				return (isset($GLOBALS['meta']['geomap_version']) 
 					AND ($GLOBALS['meta']['geomap_version']>=$version_base));
 				break;
