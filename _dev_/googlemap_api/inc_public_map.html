@@ -9,9 +9,9 @@
 	var map[(#GET{id_carte_gis})];
 	var markerManager[(#GET{id_carte_gis})];
 	<BOUCLE_centrado(GIS){id_article?}{id_rubrique ?}{0,1}>
-	#SET{latitude,#ENV{latit,#LAT}}
-	#SET{lonxitude,#ENV{lonxit,#LONX}}
-	#SET{zoommapa, #ENV{zoom,#ZOOM}}
+	#SET{latitude,#ENV{latit,#CONFIG**{gis_default_lat,0}}}
+	#SET{lonxitude,#ENV{lonxit,#CONFIG**{gis_default_lonx,0}}}
+	#SET{zoommapa, #ENV{zoom,#CONFIG**{gis_default_zoom,0}}
 	</BOUCLE_centrado>
 	#SET{latitude,#ENV{latit,#CONFIG**{gis_default_lat,0}}}
 	#SET{lonxitude,#ENV{lonxit,#CONFIG**{gis_default_lonx,0}}}
