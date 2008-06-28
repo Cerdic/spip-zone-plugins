@@ -17,21 +17,21 @@
 function action_doc2img_convert_dist(){
 
     //on charge les fonctions de conversion
-    include_spip('inc/convertir');
+    include_spip('inc/doc2img_convertir');
 
     //on lance la conversion du document 
-    convertir_document(_request('id_document'));
-    
-    //charge la page donéne par $redirect à defaut la page appelante
-    if (empty($redirect)) {
-        $redirect = $_SERVER['HTTP_REFERER'];
-    } else {
-        $redirect = "ecrire/".rawurldecode(_request('redirect'));
+    $id_document = intval(_request('id_document'));
+    if ($id_document) {
+        convertir_document($id_document);    
     }
+
+    //charge la page donéne par $redirect à defaut la page appelante
+#    if (empty($redirect)) {
+        $redirect = $_SERVER['HTTP_REFERER'];
+#    } else {
+#        $redirect = "ecrire/".rawurldecode(_request('redirect'));
+#    }
     spip_log("redirection : ". $redirect,"doc2img");
     redirige_par_entete($redirect);
 }
-
-
-
 ?>

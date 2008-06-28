@@ -30,21 +30,21 @@ function spip_explode($texte,$separateur){
  * \return un statut vrai/faux exploitable par un tableau
  */   
 function d2c_convertir($id_document) {
-    include_spip('inc/convertir');
+    include_spip('inc/doc2img_convertir');
     if ((is_doc2img($id_document) == false) && (can_doc2img($id_document) == true) ) {
-        return convertir_document($id_document) ? ' ' : '';
+        return convertir_document($id_document) ? '1' : ' ';
     } else {
         return '';
     }
 }
 
 function d2c_is_convert($id_document) {
-    include_spip('inc/convertir');
+    include_spip('inc/doc2img_convertir');
     return is_doc2img($id_document) ? ' ' : '';
 }
 
 function d2c_can_convert($id_document) {
-    include_spip('inc/convertir');
+    include_spip('inc/doc2img_convertir');
     return can_doc2img($id_document) ? ' ' : '';
 }
 
