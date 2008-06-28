@@ -4,9 +4,8 @@
 <br /><a href="http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189" class="spip_out"><multi>[fr]Vers documentation</multi></a>
 <p><a href="?exec=rec_mc" class="spip_out"><multi>[fr]Vers configuration des mots-cl&eacute</multi>;</a></p>
 -->
-<!-- titre=<multi>[fr]Recherches Multi-Crit&egrave;res</multi>-->
-<!-- icone=img_pack/rec_mc-24.png-->
-
+<!-- titre=<multi>[fr]Recherches Multi-Crit&egrave;res[en]Multi Keywords Research</multi> -->
+<!-- icone=img_pack/rec_mc-24.png -->
 <!-- head=<script type="text/javascript">
 bloc2 = true;
 function hexa2(couleur2)
@@ -64,8 +63,12 @@ document.write("</TABLE>");
 			<div class="labels_cfg_rec_mc">
 				<label><:rmc:liste_deroulante:>
 				<input type="radio" name="checklist#ID_GROUPE" value="list#ID_GROUPE" [(#ENV{checklist#ID_GROUPE}|=={list#ID_GROUPE}|?{checked,''})] /></label>
+				<label><:rmc:liste_deroulante_multi:>
+				<input type="radio" name="checklist#ID_GROUPE" value="list_multi#ID_GROUPE" [(#ENV{checklist#ID_GROUPE}|=={list_multi#ID_GROUPE}|?{checked,''})] /></label>
 				<label><:rmc:checkboxs:>
 				<input type="radio" name="checklist#ID_GROUPE" value="check#ID_GROUPE" [(#ENV{checklist#ID_GROUPE}|=={check#ID_GROUPE}|?{checked,''})] /></label>
+				<label><:rmc:radio:>
+				<input type="radio" name="checklist#ID_GROUPE" value="radio#ID_GROUPE" [(#ENV{checklist#ID_GROUPE}|=={radio#ID_GROUPE}|?{checked,''})] /></label>
 			</div>
 		</li>
 		</BOUCLE_groupes>
@@ -89,6 +92,7 @@ document.write("</TABLE>");
 		<:rmc:mots_tous_presents_aide:>
 	</fieldset>
 	</p>
+	[(#REM) on commente cette partie puique inutile
 	<p>
 	<fieldset>
 		<legend><:rmc:bordure:></legend>
@@ -129,6 +133,7 @@ document.write("</TABLE>");
 		<input type="text" name="hexvalpol" id="hexvalpol" value="#ENV{hexvalpol}" />
 	</fieldset>
 	</p>
+	]
 	<p>
 		<input type="submit" name="_cfg_ok" value="<:OK:>" />
 		<input type="reset" value="<:Reset:>" />

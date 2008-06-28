@@ -1,4 +1,4 @@
-<select name="idmot[]" id="#ENV{titre}">
+<select name="idmot[]" id="#ENV{titre}" multiple="multiple" class="sel_mc">
 	[(#REM) On boucle sur les mots du groupe]
 	<BOUCLE_mots(MOTS){id_groupe}{par titre}>
 		[(#REM) on cherche si le mot est exclu]

@@ -63,7 +63,7 @@ include_spip("inc/rec_mc_inc_pres");
 
 	debut_droite();
 
-	debut_cadre_relief( _DIR_IMG_REC_MC."cles24.png");
+	debut_cadre_relief( _DIR_IMG_REC_MC."rec_mc-24.png");
 
 		echo gros_titre(_T('rmc:titre_config'));
 

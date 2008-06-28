@@ -3,7 +3,7 @@
 # RECHERCHE MULTI-CRITERES                                           #
 #                                                                    #
 # Auteurs : Dominique (Dom) Lepaisant                                #
-# www.etab.ac-caen.fr/bureaudestests/TiSpip/                         #
+# tispip.etab.ac-caen.fr                                             #
 # Stéphanie De Nadaï - www.webdesigneuse.net                         #
 #  - Fev 2008                                                        #
 #                                                                    #
@@ -27,9 +27,6 @@
 	[(#SET{coul,#CONFIG{Recherche multicritere/hexvalpol}})]
 	[(#SET{bord,#CONFIG{Recherche multicritere/hexval}})]
 
-[(#REM) Tentavive de ne pas afficher les styles s'il ne sont pas configurés ligne 45 : 
-		pas très propre : si tou vide, affiche style="; ; ;"
-]
 	[(#GET{taille}|!={""}|?{#SET{taille, font-size:#GET{taille}}})]
 	[(#GET{coul}|!={""}|?{#SET{coul, color:#GET{coul}}})]
 	[(#GET{bord}|!={""}|?{#SET{bord, border:1px solid #GET{bord}}})]
@@ -42,15 +39,19 @@
 	<fieldset>
 		<legend><:rmc:liste_mots:></legend>
 		<p><em><:rmc:aide_select_multi:></em></p>
-		<div class="liste_mc" style="#GET{coul}; #GET{bord}; #GET{taille};">
+		<div class="liste_mc" style="[(#GET{coul});][(#GET{bord});][(#GET{taille});]">
 
 			[(#REM) On recherche les groupes de mots attribues à la rubrique en cours ou au secteur]
-			<BOUCLE_rmc_groupesparrubrique(GROUPES_MOTS spip_rmc_rubs_groupes){id_rubrique}{id_rubrique=#GET{idrub}}>
+			<BOUCLE_rmc_groupesparrubrique(GROUPES_MOTS spip_rmc_rubs_groupes){par num titre}{par titre}{id_rubrique}{id_rubrique=#GET{idrub}}>
 				<div> 
 					<p>
-					<label for="#TITRE">#TITRE</label>
+					<label for="#TITRE">[(#TITRE)]</label>
 					</p>
-					[(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|=={list#ID_GROUPE}|?{[(#MODELE{rec_mc_list}{id_groupe})],[(#MODELE{rec_mc_check}{id_groupe})]})]
+					[(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|=={list_multi#ID_GROUPE}|?{' '})[(#MODELE{rec_mc_list_multi}{id_groupe}{titre=#TITRE})] ]
+					[(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|=={list#ID_GROUPE}|?{' '})[(#MODELE{rec_mc_list}{id_groupe}{titre=#TITRE})] ]
+					[(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|=={check#ID_GROUPE}|?{' '})[(#MODELE{rec_mc_check}{id_groupe}{titre=#TITRE})] ]
+					[(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|=={radio#ID_GROUPE}|?{' '})[(#MODELE{rec_mc_radio}{id_groupe}{titre=#TITRE})] ]
+					[(#CONFIG{Recherche multicritere/checklist#ID_GROUPE}|?{'',' '})[(#MODELE{rec_mc_list_multi}{id_groupe}{titre=#TITRE})] ]
 				</div>
 				[(#REM)ici, on peut ajouter un <br /> avec un style "clear:both;" conditionné au nb de colonnes]
 			</BOUCLE_rmc_groupesparrubrique>

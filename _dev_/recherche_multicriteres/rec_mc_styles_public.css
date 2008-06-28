@@ -15,7 +15,7 @@
 ######################################################################]
 */
 #form_mc {
-clear:both;
+clear:both; /* a commenter suivant le squelette */
 text-align:center;
 padding:.3em;
 border:1px solid #ccc;
@@ -84,7 +84,7 @@ height:5em;
 }
 /* bloc d'options de recherche */
 fieldset.options_mc {
-clear:both;
+clear:both;  /* a commenter suivant le squelette */
 text-align:left;
 margin-top:.8em;
 }

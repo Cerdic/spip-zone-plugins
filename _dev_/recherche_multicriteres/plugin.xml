@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0.1" encoding="ISO-8859-1"?>
 <plugin>
 	<nom><multi>[fr]Recherche Multi-Crit&egrave;res[en]Multi Keywords Research</multi></nom>
 	<description>
 		<multi>
 		[fr]Recherche Multi-crit&egrave;res par mots-cl&eacute;s.<br />
 		La recherche multicrit&egrave;res par mots-cl&eacute;s permet de rechercher des articles s&eacute;lectionnant un ou plusieurs mots-cl&eacute;. La recherche retournera la liste d&rsquo;articles associ&eacute;s &agrave; ces mots-cl&eacute;<br />
-		Vous pouvez choisir le type d'affichage des groupes de mots dans le formulaire (<i>liste d&eacute;roulante ou cases &agrave; cocher</i>)
+		Vous pouvez choisir le type d&rsquo;affichage des groupes de mots dans le formulaire (<i>liste d&eacute;roulante &agrave; choix multiple, liste d&eacute;roulantes, cases &agrave; cocher à choix unique ou  cases &agrave; cocher à choix multiple. </i>)
 		Vous pouvez rechercher les articles associ&eacute;s &agrave; tous les mots ou non (et/ou)<br />
 		Vous pouvez limiter la recherche par date de publication des articles (-7 jours, -1 mois, -3 mois, -12 mois, tous)<br />
 		Dans le cas de l&rsquo;affichage par rubriques, vous pouvez limiter ou non la recherche &agrave; la rubrique en cours.<br />
@@ -31,7 +31,7 @@
 	<prefix>rec_mc</prefix>
 	<etat>dev</etat>
 	<auteur>Dom Lepaisant - d&rsquo;apr&egrave;s une contrib de <a href="http://www.netdeveloppeur.com/tutoriaux-et-astuces-spip/spip-recherche-multicriteres-article34.html">Paul Sanchez - NetDeveloppeur</a></auteur>
-	<icon>img_pack/cles24.png</icon>
+	<icon>img_pack/rec_mc-48.png</icon>
 	<install>base/rec_mc_upgrade.php</install>
 	<pipeline>
 		<nom>ajouter_boutons</nom>

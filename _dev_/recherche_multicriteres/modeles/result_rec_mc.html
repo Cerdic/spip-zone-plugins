@@ -3,7 +3,7 @@
 # RECHERCHE MULTI-CRITERES - MODELE AFFICHAGE DES RESULTATS          #
 #                                                                    #
 # Auteurs : Dominique (Dom) Lepaisant                                #
-# www.etab.ac-caen.fr/bureaudestests/TiSpip/                         #
+# www.tispip.etab.ac-caen.fr                         #
 # Stéphanie De Nadaï - www.webdesigneuse.net                         #
 #  - Fev 2008                                                        #
 #                                                                    #
@@ -101,7 +101,7 @@ if (isset($_POST['idmot'])) {
 	if ($result) {
 		$titrerub = supprimer_numero($titrerub);
 		$idrub = 0;
-		$resultataffiche .= "<h1><:rmc:recherche_resultats:></h1>"; 
+		$resultataffiche .= "<h3><:rmc:recherche_resultats:></h3>"; 
 		$listidmot2 = "";
 		$listidmotprec = "";
 		
@@ -226,7 +226,7 @@ if (isset($_POST['idmot'])) {
 		echo "<p class=\"mots_mc\"><:rmc:articles_sans:> $the, $org</p>";			
 	}	
 } else {
-	echo "<p class=\"mots_mc\"><:rmc:selectionner_mot:>";
+	echo "<div class=\"mots_mc\"><:rmc:selectionner_mot:></div>";
 # inutile si form recherche inclus	
 #	echo "<br /><a href=\"".$_SERVER['HTTP_REFERER']."\" onclick=\"javascript:history.back(); return false;\">Retour</a></p>";	
 }

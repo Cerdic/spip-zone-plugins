@@ -24,7 +24,7 @@ function rec_mc_ajouterBoutons($boutons_admin) {
 	if ($GLOBALS['connect_statut'] == "0minirezo"  && $GLOBALS["connect_toutes_rubriques"]) {
 		// on voit le bouton dans la barre "naviguer"
 		$boutons_admin['naviguer']->sousmenu['rec_mc']= new Bouton(
-			"../"._DIR_IMG_REC_MC."cles24.png",  // icone
+			"../"._DIR_IMG_REC_MC."rec_mc-24.png",  // icone
 			'Recherche multi-criteres'	// titre
 			);
 	}
