@@ -91,12 +91,16 @@ class cfg_depot_php
 			return array(false, $this->val);	
 		}
 
+		foreach ($this->champs as $name => $def) {
+			if (isset($def['id'])) continue;
+			$this->_ici[$name] = $this->val[$name];
+		}
+		
 		if (!$this->ecrire_fichier($this->_base)){
 			return array(false, $this->val);
 		}
 		
-		return array(true, $this->_ici);
-	
+		return array(true, $this->_ici);	
 	}
 	
 	

@@ -1,6 +1,9 @@
 Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 
+v1.7.6 (27 06 2008)
+- Correction bug avec ecrire_config(php::...)
+
 v1.7.5 (26 05 2008)
 - Corrections de la librairie sql_* pour 1.9.2
 
