@@ -171,6 +171,8 @@ function exec_spiplistes_courrier_previsu () {
 	
 		if($avec_intro == 'oui') {
 		
+			$message_intro = "<div>".propre($message_intro)."</div>\n";
+		
 		} // end if($avec_intro == 'oui')
 
 		if($avec_patron == 'oui') {
@@ -222,6 +224,8 @@ function exec_spiplistes_courrier_previsu () {
 	
 		$contexte_pied = array('lang'=>$lang);
 		$texte_pied = recuperer_fond('modeles/piedmail', $contexte_pied);
+		
+		$texte = $message_intro . $texte;
 		
 		$page_result = ""
 			// boite courrier au format html
