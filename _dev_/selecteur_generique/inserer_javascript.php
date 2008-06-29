@@ -58,6 +58,8 @@ EOS;
 function SelecteurGenerique_inserer_mot() {
 	if ($id = _request('id_article')) {
 		$type = 'id_article';
+	} elseif ($id = _request('id_rubrique')) {
+		$type = 'id_rubrique';
 	} elseif ($id = _request('id_syndic')) {
 		$type = 'id_syndic';
 	} else {
@@ -200,6 +202,7 @@ function SelecteurGenerique_inserer_javascript($flux) {
 	}
 
 	if (_request('exec') == 'articles'
+	OR _request('exec') == 'naviguer'
 	OR _request('exec') == 'breves_voir'
 	OR _request('exec') == 'sites') {
 		$js .= SelecteurGenerique_inserer_mot();
