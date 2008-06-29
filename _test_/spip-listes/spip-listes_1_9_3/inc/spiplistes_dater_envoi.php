@@ -12,50 +12,60 @@ include_spip('inc/actions');
 include_spip('inc/date');
 include_spip('inc/spiplistes_api');
 
-function spiplistes_dater_envoi($id, $flag, $statut, $date_debut_envoi, $btn_nom_valider, $enveloppe_formulaire = true)
-{
-	global $spip_lang_left, $spip_lang_right, $options;
+function spiplistes_dater_envoi (
+	$type_objet, $id_objet, $statut_objet
+	, $flag_autorise
+	, $titre_boite
+	, $date_debut_envoi, $btn_nom_valider, $enveloppe_formulaire = true
+) {
+	global $spip_lang_left, $spip_lang_right;
 	
-	if($statut=='vide') {
+	if($statut_objet=='vide') {
 		return(false);
 	}
 	
-	$date_valide = (!empty($date_debut_envoi) && ($date_debut_envoi != _SPIPLISTES_ZERO_TIME_DATE));
+	$date_valide = spiplistes_date_heure_valide($date_debut_envoi);
 
-	if ($flag && (
-			(($statut == 'encour') || ($statut == 'redac') || ($statut == 'ready'))	// courrier ?
-			|| ( // liste valide ?
-				in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_OK))
-				) 
-		&& ($options == 'avancees'))
-		) {
+	$courrier_editable = 
+		($type_objet == 'courrier')
+		&&	(
+			($statut_objet == _SPIPLISTES_COURRIER_STATUT_REDAC) 
+			|| ($statut_objet == _SPIPLISTES_COURRIER_STATUT_ENCOURS)
+		)
+		;
+	$liste_editable = 
+		($type_objet == 'liste')
+		&& in_array($statut_objet, explode(";", _SPIPLISTES_LISTES_STATUTS_OK))
+		;
+		
+	if($flag_autorise && ($courrier_editable || $liste_editable)) {
 
 		if(!$date_valide) {
-			// propose une date par défaut
+			// propose date maintenant par défaut
 			$date_debut_envoi = normaliser_date(time());
+			$date_valide = spiplistes_date_heure_valide($date_debut_envoi);
 		}
 
-		if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?", $date_debut_envoi, $regs)) {
-			$annee = $regs[1];
-			$mois = $regs[2];
-			$jour = $regs[3];
-			$heure = $regs[5];
-			$minute = $regs[6];
-		}
+		list($annee, $mois, $jour, $heure, $minute, $seconde) = $date_valide;
 		
 		$js = "size='1' class='fondl' onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 		
-		$invite =  "<strong><span class='verdana1' style='text-transform: uppercase;'>"
-			. _T('spiplistes:Date_expedition')
-			. ' : </span> '
-			. (!$date_valide ? "<span style='color:gray'>"._T('spiplistes:Date_non_precisee')."</span>" : majuscules(affdate($date_debut_envoi)))
-			.  "</strong>"
+		$invite = ""
+			. "<span class='verdana1 titre-boite-date'>"
+			. "<span class='titre'>" . $titre_boite . "</span>"
+			. ": "
+			.	(
+				(!$date_valide)
+				? "<span class='gray'>" . _T('spiplistes:date_non_precisee') . "</span>" 
+				: "<span class='date'>" . affdate_heure($date_debut_envoi) . "</span>"
+				)
+			.  "</span>\n"
 			;
 		
 		$masque = 
 			afficher_jour($jour, "name='jour' $js", true)
 			. afficher_mois($mois, "name='mois' $js", true)
-			. afficher_annee($annee, "name='annee' $js")
+			. afficher_annee($annee, "name='annee' $js", $annee)
 			. " - "
 			. afficher_heure($heure, "name='heure' $js")
 			. afficher_minute($minute, "name='minute' $js")
@@ -64,14 +74,17 @@ function spiplistes_dater_envoi($id, $flag, $statut, $date_debut_envoi, $btn_nom
 
 		if($enveloppe_formulaire) {
 			$masque = ""
-				. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,'id_courrier='.$id)."' method='post' style='margin: 5px; margin-$spip_lang_left: 20px;'>\n"
+				. "<!-- dater_envoi form -->\n"
+				. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,'id_$type_objet='.$id_objet)."' method='post' style='margin: 5px; margin-$spip_lang_left: 20px;'>\n"
 				. $masque
-				. (
-					($date_valide)
-					? "<input type='submit' name='$btn_nom_valider' value=\""._T('bouton_changer')."\" class='fondo visible_au_chargement' id='valider_date'/>"
-					: "<input type='submit' name='$btn_nom_valider' value=\""._T('bouton_valider')."\" class='fondo' id='valider_date'/>"
-					)
-				. "</form>"
+				. "<input type='submit' name='$btn_nom_valider' id='valider_date' "
+					.	(
+						($date_valide)
+						? "value=\""._T('bouton_changer')."\" class='fondo visible_au_chargement'"
+						: "value=\""._T('bouton_valider')."\" class='fondo'"
+						)
+				. "/>"
+				. "</form>\n"
 				;
 		}
 
@@ -80,22 +93,30 @@ function spiplistes_dater_envoi($id, $flag, $statut, $date_debut_envoi, $btn_nom
 	else {
 		$result = ""
 			. "<div style='text-align:center;'>"
-			. "<strong><span class='verdana1'>"
-			. (($statut == 'encour')
-				? _T('spiplistes:Courrier_en_traitement')
-				: _T('spiplistes:Date_expedition')
+			. "<span class='verdana1 titre-boite-date'><span class='titre'>"
+			.	(
+				($statut_objet == 'encour')
+				? _T('spiplistes:courrier_en_cours_')
+				: _T('spiplistes:date_expedition_')
 				)
-			. "</span> "
-			. ($date_valide
+			. "</span>: <span class='date'>"
+			.	(
+				($date_valide)
 				? affdate_heure($date_debut_envoi)
-				: _T('spiplistes:Des_validation')
+				: _T('spiplistes:attente_validation')
 				)
-			. "</strong>"
-			. "</div>"
+			. "</span></span>"
+			. "</div>\n"
 			;
 	}
 	if(!empty($result)) {
-		$result =  "<div style='margin-top:1ex;clear:right;'>" . debut_cadre_couleur('',true) . $result .  fin_cadre_couleur(true) ."</div>\n";
+		$result = ""
+			. "<div style='margin-top:1ex;clear:right;'>" 
+			. debut_cadre_couleur('',true) 
+			. $result 
+			. fin_cadre_couleur(true) 
+			. "</div>\n"
+			;
 	}
 	return ($result);
 }

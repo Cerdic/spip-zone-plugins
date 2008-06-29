@@ -201,12 +201,13 @@ function exec_spiplistes_liste_gerer () {
 					$envoyer_quand = false;
 				}
 				
-				if($envoyer_maintenant) {
+				if($envoyer_maintenant && ($message_auto != 'non')) {
 					$boite_pour_confirmer_envoi_maintenant = ""
 						. debut_cadre_couleur('', true)
 						// formulaire de confirmation envoi
 						. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE), true)
-						. "<p style='text-align:center;font-weight:bold;' class='verdana2'>". _T('spiplistes:Confirmez_envoi_liste')	. "</p>"
+						. "<p style='text-align:center;font-weight:bold;' class='verdana2'>"
+						. _T('spiplistes:boite_confirmez_envoi_liste')	. "</p>"
 						. "<input type='hidden' name='id_liste' value='$id_liste' />"
 						. spiplistes_form_bouton_valider('btn_confirmer_envoi_maintenant')
 						. spiplistes_form_fin(true)
@@ -417,11 +418,10 @@ function exec_spiplistes_liste_gerer () {
 			$('#auto_oui_detail').toggle();
 		});
 		$('input[@name=auto_chrono]').change(function(){
-			$('input[@name=periode]').val('0');
 			$('#auto_weekly').attr('checked',false);
 			$('#auto_mois').attr('checked',false);
 		});
-		$('input[@name=periode]').change(function(){
+		$('input[@name=periode]').focus(function(){
 			$('#auto_weekly').attr('checked',false);
 			$('#auto_mois').attr('checked',false);
 			$('input[@name=auto_chrono][@value=auto_jour]').attr('checked','checked');
@@ -678,15 +678,22 @@ function exec_spiplistes_liste_gerer () {
 				.((empty($patron) || !$auto_checked) ? "style='display:none;'" : "")
 				.">"
 			. "<ul style='list-style-type:none;'>\n"
-			. '<li>'._T('spiplistes:message_sujet').': <input type="text" name="titre_message" value="'.$titre_message.'" size="50" class="fondl" /> </li>'."\n"
+			. "<li>"._T('spiplistes:message_sujet')
+			. ': <input type="text" name="titre_message" value="'.$titre_message.'" size="50" class="fondl" /> </li>'."\n"
+			;
 			// 
 			// chrono jour
+			$ii = ($periode > 0) ? $periode : 1;
+		$page_result .= ""
 			. "<li style='margin-top:0.5em'>"
 				. spiplistes_form_input_radio ('auto_chrono', 'auto_jour'
 					, ''
-					, (($statut == _SPIPLISTES_DAILY_LIST) || ($periode > 0))
-					, true, false)
-				. _T('spiplistes:Tous_les')." <input type='text' name='periode' value='".$periode."' size='4' maxlength='4' class='fondl' /> "._T('info_jours')
+					, ($statut == _SPIPLISTES_DAILY_LIST)
+					, true, false
+					)
+				. _T('spiplistes:Tous_les')
+				. " <input type='text' name='periode' value='".$ii."' size='4' maxlength='4' class='fondl' /> "
+				. _T('info_jours')
 				. "</li>\n"
 			// chrono hebdo
 			. "<li>"
@@ -715,7 +722,14 @@ function exec_spiplistes_liste_gerer () {
 				. "</li>\n"
 			. "<li style='margin-top:0.5em'>"._T('spiplistes:A_partir_de')." : <br />\n"
 			//
-			. spiplistes_dater_envoi($id_liste, true, $statut, $date_debut_envoi, 'btn_changer_date', false)."</li>\n"
+			. spiplistes_dater_envoi(
+				'liste', $id_liste, $statut
+				, $flag_editable
+				, _T('spiplistes:date_expedition_')
+				, $date_debut_envoi, 'btn_changer_date'
+				, false
+				)
+			. "</li>\n"
 			.	(
 				(!$envoyer_maintenant)
 				? " <li>"
@@ -727,12 +741,13 @@ function exec_spiplistes_liste_gerer () {
 			. "</ul></div>\n"
 			;
 		$checked = ($message_auto=='non') ? "checked='checked'" : "";
+		$class = $checked ? "class='bold'" : "";
 		$disabled = (empty($patron) ? " disabled='disabled' " : "");
 		$page_result .= ""
 			. "<br /><input type='radio' name='message_auto' value='non' id='auto_non' $disabled $checked />"
-			. ($checked ? "<strong>" : "")
+			. "<span $class >"
 			. " <label for='auto_non'>"._T('spiplistes:prog_env_non')."</label> "
-			. ($checked ? "</strong>" : "")
+			. "</span>\n"
 			. "</td></tr>\n"
 			;
 

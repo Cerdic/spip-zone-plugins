@@ -657,6 +657,17 @@ function spiplistes_auteurs_cookie_oubli_updateq ($cookie_oubli, $where, $where_
 	return(sql_update('spip_auteurs', array('cookie_oubli' => sql_quote($cookie_oubli)), $where));
 }
 
+// CP-20080629
+function spiplistes_date_heure_valide ($date_heure) {
+	$date_array = recup_date($date_heure);
+	if($date_array) {
+		list($annee, $mois, $jour) = $date_array;
+		list($heures, $minutes, $secondes) = recup_heure($date_heure);
+		return(array($annee, $mois, $jour, $heures, $minutes, $secondes));
+	}
+	return(false);
+}
+
 //CP-20080511
 function spiplistes_auteurs_auteur_select ($sql_select, $sql_where) {
 	return(sql_select($sql_select, 'spip_auteurs', $sql_where." LIMIT 1"));

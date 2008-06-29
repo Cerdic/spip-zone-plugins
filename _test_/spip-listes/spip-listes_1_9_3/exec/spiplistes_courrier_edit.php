@@ -81,7 +81,6 @@ function exec_spiplistes_courrier_edit(){
 
 	if($flag_editable) {
 		if(!$id_courrier) {
-		///////////////////////////
 		// si pas de ID courrier, c'est une création
 			$statut = _SPIPLISTES_COURRIER_STATUT_REDAC; 
 			$type = _SPIPLISTES_COURRIER_TYPE_NEWSLETTER;
@@ -183,7 +182,8 @@ function exec_spiplistes_courrier_edit(){
 		// 
 		. "<div id='ajax-loader' align='right'><img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."ajax_indicator.gif' /></div>\n"
 		//sélection du patron
-		. "<label class='verdana2' style='font-weight:bold;display:block;margin-top:1em;' for='patron'>"._T('spiplistes:Choisir_un_patron').":</label>\n"
+		. "<label class='verdana2' style='font-weight:bold;display:block;margin-top:1em;' for='patron'>"
+		. _T('spiplistes:choisir_un_patron_').":</label>\n"
 		. spiplistes_boite_selection_patrons ("", true, _SPIPLISTES_PATRONS_DIR, "patron", 1, "100%")."<br />\n"
 		//
 		//

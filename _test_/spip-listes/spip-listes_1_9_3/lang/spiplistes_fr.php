@@ -20,6 +20,7 @@ L'adresse email doit &ecirc;tre unique, ainsi que le login. Si cette adresse
 Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent 
    &ecirc;tre ignor&eacute;s (vous pouvez importer des listes issues des anciennes versions de SPIP-Listes)."
 , 'aide_en_ligne' => "Aide en ligne"
+, 'attente_validation' => "attente validation"
 
 //A
 , 'abo_1_lettre' => 'Lettre d\'information',
@@ -100,6 +101,9 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'boite_agenda_titre_' => "Planning des diffusions "
 , 'boite_agenda_legende' => "Sur @nb_jours@ jours"
 , 'boite_agenda_voir_jours' => "Voir sur les @nb_jours@ jours coulants"
+, 'boite_confirmez_envoi_liste' => "Vous avez demand&eacute; l'envoi imm&eacute;diat de cette liste 
+	de diffusion.<br />
+	Svp, veuillez confirmer votre demande."
 
 //C
 , 'calcul_patron' => 'Calcul avec le patron version texte',
@@ -136,7 +140,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Ce_courrier_ne_sera_envoye_qu_une_fois' => "Ce courrier ne sera envoy&eacute; qu'une fois.",
 'conseil_sauvegarder_avant' => "<strong>Conseil</strong>: faire une sauvegarde de la base avant de confirmer la suppression 
    @objet@. L'annulation est impossible ici.",
-'Choisir_un_patron' => "Choisir un patron ",
+'choisir_un_patron_' => "Choisir un patron ",
 'Courrier_edit_desc' => 'Vous pouvez choisir de g&eacute;n&eacute;rer automatiquement le contenu du courrier
 	ou r&eacute;diger simplement votre courrier dans la bo&icirc;te <strong>texte du courrier</strong>.',
 'Contenu_a_partir_de_date_' => "Contenu &agrave; partir de cette date ",
@@ -144,11 +148,9 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 	dans la bo&icirc;te @titre_champ_texte@.",
 'courrier_realise_avec_spiplistes' => "Courrier réalisé avec SPIP-Listes",
 'Confirmer_la_suppression_de_la_liste' => "Confirmer la suppression de la liste ",
-'Confirmez_requete' => "Veuillez confirmer la requ&ecirc;te.",
-'Confirmez_envoi_liste' => "Vous avez demand&eacute; l'envoi imm&eacute;diat de cette liste 
-	de diffusion.<br />
-	Svp, veuillez confirmer votre demande."
+'Confirmez_requete' => "Veuillez confirmer la requ&ecirc;te."
 , 'confirmer_supprimer_formats' => "Supprimer les formats de r&eacute;ception des abonn&eacute;s."
+, 'courrier_en_cours_' => "Courrier en traitement "
 
 
 //D
@@ -157,6 +159,8 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , '_de_' => " de "
 , 'dans_jours' => 'dans'
 , '_dont_' => " dont "
+, 'date_expedition_' => "Date d'exp&eacute;dition "
+, 'date_non_precisee' => "Date non pr&eacute;cis&eacute;e"
 , 'definir_squel' => 'Choisir le mod&egrave;le de courrier &agrave; pr&eacute;visualiser',
 'definir_squel_choix' => 'A la r&eacute;daction d\'un nouveau courrier, SPIP-Listes vous permet de charger un patron. En appuyant sur un bouton, vous chargez dans le corps du courrier le contenu d\'un des squelettes du repertoire <strong>/patrons</strong> (situ&eacute; &agrave; la racine de votre site Spip). <p><strong>Vous pouvez &eacute;diter et modifier ces squelettes selon vos go&ucirc;ts.</strong></p> <ul><li>Ces squelettes peuvent contenir du code HTML classique</li>
 	<li>Ce squelette peut contenir des boucles Spip</li>
@@ -172,7 +176,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'date_depuis'=>'depuis @delai@', 
 'discussion_intro' => 'Bonjour, <br />Voici les discussions d&eacute;marr&eacute;es sur le site',
 'Destination' => "Destination",
-'Date_non_precisee' => "Date non pr&eacute;cis&eacute;e",
 'Dernier_envoi_le_:' => "Dernier envoi le :",
 'Pas_de_donnees' => "D&eacute;sol&eacute;, mais l'enregistrement demand&eacute; n'existe pas dans la base de donn&eacute;es.",
 'Desabonner_temporaire' => "D&eacute;sabonner temporairement ce compte.",

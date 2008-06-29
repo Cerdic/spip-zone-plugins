@@ -25,6 +25,11 @@
 .spiplistes .agenda-loupe { display:block;width:26px;height:24px;background: url() no-repeat left top }
 .spiplistes .centrer { text-align:center }
 .spiplistes .a-fond-0, .spiplistes .a-fond-1 { display:block; margin:0;padding:0;border-top:1px solid #fff }
+.spiplistes .gray { color:#ccc }
+.spiplistes .bold { font-weight:bold }
+.spiplistes .titre-boite-date { font-weight:700 }
+.spiplistes .titre-boite-date .titre { text-transform: uppercase }
+.spiplistes .titre-boite-date .date {}
 table.spiplistes-abos {	font-size:80%;	border:1px solid gray }
 table.spiplistes-abos tr.onglets { border-bottom: 10px solid #ccc;line-height:1.8em;margin-bottom:1em;padding:1em }
 table.spiplistes-abos td { line-height:1.25em; border-bottom: 1px solid #ccc }
