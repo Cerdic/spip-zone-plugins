@@ -80,7 +80,7 @@ function exec_spiplistes_courrier_previsu () {
 	
 	foreach(array_merge($str_values, $int_values) as $key) {
 		$$key = _request($key);
-		spiplistes_log("$key :-: ".$$key);
+//spiplistes_log("$key :-: ".$$key);
 	}
 	foreach($int_values as $key) {
 		$$key = intval($$key);
