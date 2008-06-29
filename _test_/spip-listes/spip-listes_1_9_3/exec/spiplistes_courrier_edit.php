@@ -40,6 +40,7 @@ function exec_spiplistes_courrier_edit(){
 	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_api_presentation');
+	include_spip('inc/spiplistes_dater_envoi');
 	include_spip('inc/spiplistes_api_courrier');
 	include_spip('public/assembler');
 	include_spip('inc/spiplistes_naviguer_paniers');
@@ -135,7 +136,7 @@ function exec_spiplistes_courrier_edit(){
 		;
 
 	$page_result .= ""
-		// le bloc pour aperçu
+		// le bloc pour aperçu (retour ajax)
 		. "<div id='apercu-courrier' style='clear:both;tex-align:center'></div>\n"
 		//
 		. debut_cadre_formulaire('', true)
@@ -162,11 +163,12 @@ function exec_spiplistes_courrier_edit(){
 		. "<input type='hidden' name='modifier_message' value=\"oui\" />\n"
 		. "<input type='hidden' name='id_courrier' value='$id_courrier' />\n"
 		//
-		// bloc sujet
+		// bloc sujet du courrier
 		. "<label for='sujet_courrier'>"._T('spiplistes:sujet_courrier').":</label>\n"
 		. "<input id='sujet_courrier' type='text' class='formo' name='titre' value=\"$titre\" size='40' $clearonfocus />\n"
 		. "<p style='margin-bottom:1.75em;'>"._T('spiplistes:Courrier_edit_desc')."</p>\n"
 		;
+		
 	$titre_block_depliable = _T('spiplistes:Generer_le_contenu');
 	$page_result .= ""
 		//
@@ -180,30 +182,74 @@ function exec_spiplistes_courrier_edit(){
 			. "</span>\n"
 		. spiplistes_debut_block_invisible(md5(_T('spiplistes:charger_patron')))
 		// 
-		. "<div id='ajax-loader' align='right'><img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."ajax_indicator.gif' /></div>\n"
-		//sélection du patron
-		. "<label class='verdana2' style='font-weight:bold;display:block;margin-top:1em;' for='patron'>"
-		. _T('spiplistes:choisir_un_patron_').":</label>\n"
-		. spiplistes_boite_selection_patrons ("", true, _SPIPLISTES_PATRONS_DIR, "patron", 1, "100%")."<br />\n"
-		//
-		//
-		. "<div id='boite-2-cols' style='margin:1em 0;padding:0;vertical-align:top;width:100%;height:3em;'>\n" 
-		// la date
-		// sélecteur de date
-		// nota: les scripts js sont appelés dans header_prive
-		. "<div id='col-gauche' style='width:50%;height:3em;float:left;'>\n"
-		. "<script type='text/javascript'><!-- \n$(document).ready(function(){ \n $.datePicker.setDateFormat('yyyy-mm-dd');\n"
-		. unicode2charset(charset2unicode(recuperer_fond('formulaires/date_picker_init'),'html'))
-		. " \n $('input.date-picker').datePicker({startDate:'01/01/1900'});\n }); \n //--></script>\n"
-		. "<label class='verdana2' for='date'>"._T('spiplistes:Contenu_a_partir_de_date_').":</label><br />\n"
-		. "<input name='date' id='date' class='date-picker' style='font-size:11px;' />\n"
-		. "</div>\n"
+		. "<div id='ajax-loader' align='right'><img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."ajax_indicator.gif' alt='' /></div>\n"
+		;
+		
+	$page_result .= ""
 		// sélecteur de langues
-		. "<label class='verdana2' for='lang'>"._T('spiplistes:Langue_du_courrier_').":</label><br />\n"
-		. "<select name='lang' class='fondo' id='lang'>\n"
+		. "<div class='boite-generer-option'>\n"
+		. "<label class='verdana2'>"._T('spiplistes:Langue_du_courrier_').": "
+		. "<select name='lang' class='fondo'>\n"
 		. liste_options_langues('changer_lang')
-		. "</select>\n"
-		. "</div>\n" // fin boite-2-cols
+		. "</select></label>\n"
+		. "</div>\n"
+		;
+		
+	$page_result .= ""
+		// texte introduction à placer avant le patron et sommaire 
+		. "<div class='boite-generer-option'>\n"
+		. "<label class='verdana2'>"
+		. "<input type='checkbox' id='avec_intro' name='avec_intro' value='non' />"
+		. _T('spiplistes:avec_introduction')
+		. "</label>\n"
+		. "<div id='choisir_intro' class='option'>"
+		. "<label class='verdana2' style='display:block;' for='message_intro'>"
+		. _T('spiplistes:introduction_du_courrier_').":</label>\n"
+		. afficher_barre('document.formulaire_courrier_edit.message_intro')
+		. "<textarea id='message_intro' name='message_intro' ".$GLOBALS['browser_caret']." rows='5' cols='40' wrap='soft' style='width:100%;'>\n"
+		. "</textarea>\n"
+		. "</div>\n"
+		. "</div>\n"
+		;
+		
+	// sélection du patron
+	$page_result .= ""
+		. "<div class='boite-generer-option'>\n"
+		. "<label class='verdana2'>"
+		. "<input type='checkbox' id='avec_patron' name='avec_patron' value='non' />"
+		. _T('spiplistes:a_partir_de_patron')
+		. "</label>\n"
+		. "<div id='choisir_patron' class='option'>"
+		. "<label class='verdana2'>"
+		. _T('spiplistes:choisir_un_patron_').":</label>\n"
+		. spiplistes_boite_selection_patrons ("", true, _SPIPLISTES_PATRONS_DIR, "patron", 1)
+		. "<div id='patron_pos' style='display:none'>\n"
+		. "<span class='verdana2'>" . _T('spiplistes:generer_patron_'). "</span>\n"
+		. spiplistes_form_input_radio ('patron_pos', 'avant', _T('spiplistes:generer_patron_avant'), true, true, false)
+		. spiplistes_form_input_radio ('patron_pos', 'apres', _T('spiplistes:generer_patron_apres'), false, true, false)
+		. "</div>\n"
+		. "</div>\n"
+		. "</div>\n"
+		;
+	
+	// Générer un sommaire
+	$page_result .= ""
+		. "<div class='boite-generer-option'>\n"
+		. "<label class='verdana2'>"
+		. "<input type='checkbox' id='avec_sommaire' name='avec_sommaire' value='non' />"
+		. _T('spiplistes:generer_un_sommaire')
+		. "</label>\n"
+		. "<div id='choisir_sommaire' class='option'>"
+		// Prendre en compte à partir de quelle date ?
+		. spiplistes_dater_envoi(
+			'courrier', $id_courrier, $statut
+			, $flag_editable
+			, _T('spiplistes:Contenu_a_partir_de_date_')
+			, normaliser_date(time()), 'btn_changer_date'
+			, false
+			)
+		;		
+	$page_result .= ""
 		//
 		// sélecteur de rubriques
 		. "<label class='verdana2' for='ajouter_rubrique'>"._T('spiplistes:Lister_articles_de_rubrique').":</label>\n"
@@ -232,22 +278,25 @@ function exec_spiplistes_courrier_edit(){
 	}
 	$page_result .= ""
 		. "</select><br />\n"
-		// texte introduction
-		. "<label class='verdana2' style='display:block;' for='text_area'>"._T('spiplistes:introduction_du_courrier_').":</label>\n"
-		. afficher_barre('document.formulaire_courrier_edit.message')
-		. "<textarea id='text_area' name='message' ".$GLOBALS['browser_caret']." rows='5' cols='40' wrap='soft' style='width:100%;'>\n"
-		. "</textarea>\n"
-		//
+		. "</div>\n"
+		. "</div>\n"
+		; // fin générer le sommaire
+		
+	$page_result .= ""
 		. "<p class='verdana2'>\n"
-			. _T('spiplistes:Cliquez_Generer_desc', array('titre_bouton'=>_T('spiplistes:generer_Apercu'), 'titre_champ_texte'=>_T('spiplistes:texte_courrier')))
+			. _T('spiplistes:Cliquez_Generer_desc'
+				, array('titre_bouton'=>_T('spiplistes:generer_Apercu'), 'titre_champ_texte'=>_T('spiplistes:texte_courrier'))
+				)
 			. "</p>\n"
-		. "<p class='verdana2' style='text-align:right;'>\n"
-		. "<input type='submit' name='Valider' value='"._T('spiplistes:generer_Apercu')."' class='fondo' /></p>\n"
+		. spiplistes_form_bouton_valider ('Valider', _T('spiplistes:generer_Apercu'))
 		. fin_block() // fin_block_invisible
 		. fin_cadre_relief(true)
 		. "<br />\n"
-		//
-		// bloc texte
+		;
+		
+	//
+	// bloc du courrier (titre, texte), toujours visible
+	$page_result .= ""
 		. "<label for='texte_courrier'>"._T('spiplistes:texte_courrier')."</label>\n"
 		. afficher_barre('document.formulaire_courrier_edit.texte')
 		. "<textarea id='texte_courrier' name='texte' ".$GLOBALS['browser_caret']." class='formo' rows='20' cols='40' wrap=soft>\n"
@@ -256,7 +305,8 @@ function exec_spiplistes_courrier_edit(){
 		. (!$id_courrier ? "<input type='hidden' name='new' value=\"oui\" />\n" : "")
 		//
 		. "<p style='text-align:right;'>\n"
-		. "<input type='submit' onclick='this.value=\"oui\";' id='btn_courrier_edit' name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' /></p>\n"
+		. "<input type='submit' onclick='this.value=\"oui\";' id='btn_courrier_edit' "
+			. " name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' /></p>\n"
 		//
 		// fin formulaire
 		. "</form>\n"

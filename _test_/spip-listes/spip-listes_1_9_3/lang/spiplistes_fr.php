@@ -92,6 +92,8 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 	d&eacute;fini. Il ne peut pas recevoir de courrier. D&eacute;finissez un format 
 	de r&eacute;ception pour ce compte afin de valider son abonnement."
 , 'msg_abonne_sans_format' => "format de reception manquant"
+, 'a_partir_de_patron' => "A partir d'un patron"
+, 'avec_introduction' => "Avec texte d'introduction"
 
 //B
 
@@ -260,10 +262,14 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'format_reception' => "Format de r&eacute;ception :"
 
 //G
-, 'Generer_le_contenu' => "G&eacute;n&eacute;rer le contenu",
+, 'Generer_le_contenu' => "G&eacute;n&eacute;rer le contenu"
+, 'generer_un_sommaire' => "G&eacute;n&eacute;rer un sommaire"
+, 'generer_patron_' => "G&eacute;n&eacute;rer le patron "
+, 'generer_patron_avant' => "avant le sommaire"
+, 'generer_patron_apres' => "apr&egrave;s le sommaire."
 
 //H
-'Historique_des_envois' => 'Historique des envois',
+, 'Historique_des_envois' => 'Historique des envois',
 
 //I
 'info_auto' => 'SPIP-Listes pour spip peut envoyer r&eacute;guli&egrave;rement aux inscrits, l\'annonce des derni&egrave;res nouveaut&eacute;s du site (articles et br&egrave;ves r&eacute;cemment publi&eacute;s).',

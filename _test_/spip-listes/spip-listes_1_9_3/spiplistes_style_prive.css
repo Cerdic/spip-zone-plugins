@@ -30,6 +30,8 @@
 .spiplistes .titre-boite-date { font-weight:700 }
 .spiplistes .titre-boite-date .titre { text-transform: uppercase }
 .spiplistes .titre-boite-date .date {}
+.spiplistes .boite-generer-option {margin:0.5em 0}
+.spiplistes .boite-generer-option .option {margin:0.5em 0 0 5ex; display:none}
 table.spiplistes-abos {	font-size:80%;	border:1px solid gray }
 table.spiplistes-abos tr.onglets { border-bottom: 10px solid #ccc;line-height:1.8em;margin-bottom:1em;padding:1em }
 table.spiplistes-abos td { line-height:1.25em; border-bottom: 1px solid #ccc }

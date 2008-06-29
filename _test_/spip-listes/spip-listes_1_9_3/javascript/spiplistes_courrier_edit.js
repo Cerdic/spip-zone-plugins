@@ -36,4 +36,33 @@ jQuery(document).ready(function(){
 			}
 		return (false);
 	});
+	jQuery("#avec_intro").click(function(){
+		if($(this).attr('checked')) {
+			jQuery("#choisir_intro").show();
+			jQuery(this).val('oui');
+		} else {
+			jQuery("#choisir_intro").hide();
+			jQuery(this).val('non');
+		}
+	});
+	jQuery("#avec_patron").click(function(){
+		if($(this).attr('checked')) {
+			jQuery("#choisir_patron").show();
+			jQuery(this).val('oui');
+		} else {
+			jQuery("#choisir_patron").hide();
+			jQuery(this).val('non');
+		}
+	});
+	jQuery("#avec_sommaire").click(function(){
+		if($(this).attr('checked')) {
+			jQuery("#patron_pos").show();
+			jQuery("#choisir_sommaire").show();
+			jQuery(this).val('oui');
+		} else {
+			jQuery("#patron_pos").hide();
+			jQuery("#choisir_sommaire").hide();
+			jQuery(this).val('non');
+		}
+	});
 });

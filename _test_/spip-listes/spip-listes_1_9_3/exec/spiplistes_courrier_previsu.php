@@ -3,6 +3,7 @@
 // exec/spiplistes_courrier_previsu.php
 // _SPIPLISTES_EXEC_COURRIER_PREVUE
 
+// utilisé par _SPIPLISTES_EXEC_COURRIER_EDIT
 
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
@@ -63,11 +64,25 @@ function exec_spiplistes_courrier_previsu () {
 	include_spip('inc/spiplistes_api_courrier');
 	include_spip('inc/spiplistes_api_abstract_sql');
 	
-	foreach(array('patron', 'titre', 'message', 'Confirmer', 'date', 'id_rubrique', 'id_rubrique', 'id_mot', 'id_courrier', 'id_liste'
-		, 'lire_base', 'format', 'plein_ecran') as $key) {
+	$int_values = array(
+		'id_rubrique', 'id_mot', 'id_courrier', 'id_liste'
+		, 'jour', 'mois', 'annee', 'heure', 'minute'
+	);
+	$str_values = array(
+		'lang'
+		, 'avec_intro', 'message_intro'
+		, 'avec_patron', 'patron', 'patron_pos'
+		, 'avec_sommaire'
+		, 'titre', 'message'
+		, 'Confirmer', 'date'
+		, 'lire_base', 'format', 'plein_ecran'
+	);
+	
+	foreach(array_merge($str_values, $int_values) as $key) {
 		$$key = _request($key);
+		spiplistes_log("$key :-: ".$$key);
 	}
-	foreach(array('id_courrier', 'id_liste') as $key) {
+	foreach($int_values as $key) {
 		$$key = intval($$key);
 	}
 
@@ -89,6 +104,8 @@ function exec_spiplistes_courrier_previsu () {
 		? spiplistes_tampon_html_get(spiplistes_pref_lire('tampon_patron'))
 		: ""
 		;
+	
+	$texte_intro = $texte_patron = $texte_sommaire = "";
 	
 	if($lire_base) {
 		// prendre le courrier enregistré dans la base
@@ -151,31 +168,52 @@ function exec_spiplistes_courrier_previsu () {
 		}
 	}
 	else {
-		// générer le contenu (éditeur)
-		include_spip('public/assembler');
-		$contexte_template = array(
-			'date' => trim ($date)
-			, 'id_rubrique' => $id_rubrique
-			, 'id_mot' => $id_mot
-			, 'patron' => $patron
-			, 'lang' => $lang
-			, 'sujet' => $titre
-			, 'message' => $message 
-		);
+	
+		if($avec_intro == 'oui') {
 		
-		if (find_in_path('patrons/'.$patron.'_texte.html')){
-			$patron_version_texte = true ;
-			$message_texte =  recuperer_fond('patrons/'.$patron.'_texte', $contexte_template);
-		}
+		} // end if($avec_intro == 'oui')
+
+		if($avec_patron == 'oui') {
+		
+			// générer le contenu (éditeur)
+			include_spip('public/assembler');
+			$contexte_template = array(
+				'date' => trim ($date)
+				, 'id_rubrique' => $id_rubrique
+				, 'id_mot' => $id_mot
+				, 'patron' => $patron
+				, 'lang' => $lang
+				, 'sujet' => $titre
+				, 'message' => $message 
+			);
+			
+			if (find_in_path('patrons/'.$patron.'_texte.html')){
+				$patron_version_texte = true ;
+				$message_texte =  recuperer_fond('patrons/'.$patron.'_texte', $contexte_template);
+			}
 		
 
-		// Il faut utiliser recuperer_page et non recuperer_fond car sinon les url des articles
-		// sont sous forme privee : spip.php?action=redirect&.... horrible !
-		// pour utiliser recuperer_fond,il faudrait etre ici dans un script action
-		//	$texte_patron = recuperer_fond('patrons/'.$template, $contexte_template);
-
-		$titre = $titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
-		$texte = $texte_patron = recuperer_fond('patrons/'.$patron, $contexte_template);
+			// Il faut utiliser recuperer_page et non recuperer_fond car sinon les url des articles
+			// sont sous forme privee : spip.php?action=redirect&.... horrible !
+			// pour utiliser recuperer_fond,il faudrait etre ici dans un script action
+			//	$texte_patron = recuperer_fond('patrons/'.$template, $contexte_template);
+	
+			$titre = $titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
+			$texte = $texte_patron = recuperer_fond('patrons/'.$patron, $contexte_template);
+		
+		} // end if($avec_patron == 'oui')
+		
+		if($avec_sommaire == 'oui') {
+		
+			if($id_rubrique > 0) {
+				$texte_sommaire = "<ul>\n";
+				$texte_sommaire = "</ul>\n";
+			}
+		
+			if($id_mot > 0) {
+			}
+		
+		} // end if($avec_sommaire == 'oui')
 
 		$form_action = ($id_courrier) 
 			? generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,"id_courrier=$id_courrier")

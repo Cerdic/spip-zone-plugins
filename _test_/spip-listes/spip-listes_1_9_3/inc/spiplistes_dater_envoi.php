@@ -16,7 +16,8 @@ function spiplistes_dater_envoi (
 	$type_objet, $id_objet, $statut_objet
 	, $flag_autorise
 	, $titre_boite
-	, $date_debut_envoi, $btn_nom_valider, $enveloppe_formulaire = true
+	, $date_debut_envoi
+	, $btn_nom_valider, $enveloppe_formulaire = true
 ) {
 	global $spip_lang_left, $spip_lang_right;
 	
@@ -65,7 +66,7 @@ function spiplistes_dater_envoi (
 		$masque = 
 			afficher_jour($jour, "name='jour' $js", true)
 			. afficher_mois($mois, "name='mois' $js", true)
-			. afficher_annee($annee, "name='annee' $js", $annee)
+			. afficher_annee($annee, "name='annee' $js")
 			. " - "
 			. afficher_heure($heure, "name='heure' $js")
 			. afficher_minute($minute, "name='minute' $js")
