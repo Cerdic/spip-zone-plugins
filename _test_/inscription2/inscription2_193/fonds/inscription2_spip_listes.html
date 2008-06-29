@@ -18,6 +18,10 @@
 </select>
 </B_listes>
 <small><br /><:inscription2:select_listes:><br />
-<a onclick="$('#newsletters').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small><br />
+<a onclick="$('#newsletters').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a></small><br />
+</label>
+<label>
+	<input type="checkbox" name="optout" [(#CONFIG{inscription2/optout}|=={on}|?{checked="checked"})] id="optout" />
+	<strong><:inscription2:optout:></strong> 
 </label>
 </div>

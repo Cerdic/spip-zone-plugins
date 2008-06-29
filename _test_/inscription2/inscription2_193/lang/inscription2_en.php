@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choisir_listes' => "Choose the newsletters that will be proposed to the new adherents of the site:",
 'select_listes' => '(you may select a group holding down the shift key)',
 'deselect_listes' => '> deselect all',
+'optout' => 'Cases &agrave; coch&#233;es non pr&#233;coch&#233;es (optout)',
 
 //Geolocalisation
 'geoloc' => 'G&eacute;olocalisation',

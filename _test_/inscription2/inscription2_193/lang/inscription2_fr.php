@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choisir_listes' => 'Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adh&eacute;rents&nbsp;: ',
 'select_listes' => '(vous pouvez s&#233;lectionner plusieurs secteurs avec la touche shift)',
 'deselect_listes' => '> tout d&#233;s&eacute;lectionner',
+'optout' => 'Cases &agrave; coch&#233;es non pr&#233;coch&#233;es (optout)',
 
 //Geolocalisation
 'geoloc' => 'G&eacute;olocalisation',

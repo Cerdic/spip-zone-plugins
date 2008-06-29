@@ -5,14 +5,19 @@
 
     <p><:inscription2:exp_newsletter:></p>
 
-    [(#REM) Tableau des liste en selection par défaut]
+    [(#REM) Tableau des listes en selection par défaut]
     #SET{selected,#CONFIG{inscription2/newsletters,'',''}}
 
     <B_listes>
     <ol class="formfx">
-	<BOUCLE_listes(LISTES){statut==.*pub.*}>
+	<BOUCLE_listes(LISTES){statut IN '.*pub.*','liste'}>
 	    <li class="editer_newsletters">
-            <input type="checkbox" class="checkbox" name="newsletters[]" id="newsletters-#ID_LISTE"value="#ID_LISTE" [(#ID_LISTE|in_array{#GET{selected}}|?{' ',''}) checked="checked"] />
+            <input type="checkbox" class="checkbox" name="newsletters[]" id="newsletters-#ID_LISTE" value="#ID_LISTE" 
+            [(#CONFIG{inscription2/optout}|=={on}|?{
+            [(#ID_LISTE|=={#ENV{id_liste}}|?{' ',''}) checked="checked"] />
+            ,
+            [(#ID_LISTE|in_array{#GET{selected}}|?{' ',''}) checked="checked"] />
+            })]
             <label for="newsletters-#ID_LISTE">
             #TITRE
             </label>
@@ -20,7 +25,7 @@
         </li>
     </BOUCLE_listes>
     </ol>     
-    </B_listes>      
+    </B_listes>rien <//B_listes>     
      
     [<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{newsletters})</p>]
 </fieldset> 

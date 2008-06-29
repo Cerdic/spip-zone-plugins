@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choisir_listes' => "Elija las listas de difusion (Spip-listes) que seran propuestas a los nuevos adherentes del sitio: ",
 'select_listes' => '(puede seleccionar varias presionando la tecla shift)',
 'deselect_listes' => '> deseleccionar todo',
+'optout' => 'Cases &agrave; coch&#233;es non pr&#233;coch&#233;es (optout)',
 
 //Geolocalisation
 'geoloc' => 'G&eacute;olocalisation',
