@@ -1,0 +1,27 @@
+
+/* dimensios for both splash image and the player wrapper */
+a.flowplayer, a.flowplayer img {
+	display:block;				
+	width:309px;
+	height:249px;
+	border:0px;	
+	margin-bottom: 80px;	
+}
+
+/* play button on top of splash screenn */
+div.playButton {
+	background:url(play.png) no-repeat;
+	width:50px;
+	height:50px;
+	position:relative;
+	top:-240px;
+	left:134px;	
+	opacity:0.9;
+	margin-bottom:-50px;
+}
+
+/* play button upon mouseover */
+div.playButton:hover {
+	opacity:1.0;		
+}
+

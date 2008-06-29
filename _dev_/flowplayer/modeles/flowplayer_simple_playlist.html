@@ -1,0 +1,92 @@
+[(#REM)Mod&#232;le SPIP pour le FlowPlayer, lecteur video en Flash OpenSource
+Flowplayer simple-playlist : mod&#232;le pour une seule video avec playliste simple
+Home Page : http://www.flowplayer.org
+A minimal setup to get you started. This configuration is the same as in our Quick Start documentation:
+http://flowplayer.org/player/quick-start.html
+http://www.flowplayer.org/tools/flow-playlist.html
+http://www.flowplayer.org/tools/scrollable.html
+
+]
+
+[(#REM)<flowplayer_simple_playlist|id_article=2> etc... ]
+
+<!-- <script language="javascript" type="text/javascript" src="#CHEMIN{js/jquery.pack.js}"></script>
+on en en sans doute pas besoin du jquery puisque c'est dans SPIP -->
+
+<script type="text/javascript" src="#CHEMIN{js/flashembed.min.js}"></script>
+
+<script type="text/javascript" src="#CHEMIN{js/flow.playlist.js}"></script>
+
+
+
+<!-- include flashembed - which is a general purpose tool for inserting Flash on your page. Following line is required. -->
+
+<!--Il faudra trouver un moyen d'inclure la css dans le plugin je sais pas comment on fait pour que ca charge dans le head
+<link rel="stylesheet" type="text/css" href="css/common.css"/>
+Pour l'instant dans le head du squelette article -->
+
+
+
+
+<noscript><p>
+D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia 
+</p>
+</noscript>
+<!-- alternetive texte pour ceux qui ont le js desactive -->
+
+
+<script type="text/javascript"> 
+	// <![CDATA[
+		$(function() {             
+    $("#playlist").playlist( 
+     
+        // flash configuration (required) 
+        "#CHEMIN{players/FlowPlayerDark.swf}", 
+         
+        // flowplayer configuration (optional) 
+        {initialScale:'scale'},  
+         
+        // playlist configuration (optional) 
+        {player:'#player', loop:true} 
+    ); 
+});
+
+
+	// ]]>	
+	</script>  
+
+
+
+<div id="flowplayer_simple_playlist">
+
+<!-- player is initially loaded with splash screen and play button -->
+
+<a id="player">
+<img src="#CHEMIN{css/flowplayer.png}" alt="<:videos:>" width="309" height="249" />
+</a>
+		
+<div class="play"></div>
+	
+</div>	<!-- Fin de flowplayer_simple_playlist -->	
+	
+
+<!-- this is our playlist -->
+	
+<div id="playlist">
+	
+<B_docjoints>
+
+<BOUCLE_docjoints(DOCUMENTS){id_article?}{id_rubrique?}{id_document ?}{id_breve ?}{id_mot ?}{mode=document}{extension IN jpg,flv,swf,mp3,mp4,png,h.264}{par num titre}{par id_document}>
+
+[<a href="[(#URL_DOCUMENT|url_absolue)]">(#TITRE)<br /> [(#DESCRIPTIF|PtoBR)]</a>]
+
+</BOUCLE_docjoints>
+
+</B_docjoints>
+
+		
+	
+
+</div> <!-- Fin playliste -->
+
+
