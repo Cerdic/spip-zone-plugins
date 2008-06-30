@@ -1,7 +1,11 @@
 #CACHE{0}
-<BOUCLE_doc(DOCUMENTS) {id_document}> 
-    [(#ID_DOCUMENT|d2c_convertir|?{ 
-        [conversion lancée <a href="(#URL_PAGE{doc2img,id_document=#ID_DOCUMENT})" target="_blank"> Voir </a>],
-        pas de conversion
+<BOUCLE_doc(DOCUMENTS) {id_document}>
+    #SET{res, #ID_DOCUMENT|d2c_convertir }
+    
+    <b>#GET{res}</b>
+    
+    [(#GET{res}|=={1}|?{ 
+        Conversion ok,
+        #GET{res}
     })]
 </BOUCLE_doc>

@@ -89,7 +89,15 @@ function doc2img_ratio(&$handle) {
 }
 
 
-
+/*! \brief fonction pour connaitre les infos fichiers du document
+ *
+ *  Calcul un tableau :
+ *  - avec informations sur le documents (nom, repertoire, nature)
+ *  - determine les informations des documents finaux (nom, respertoire, extension) 
+ *  
+ * \param $id_document identifiant du document à convertir  
+ * \return $document : liste de données caractérisant le document
+ */ 
 function doc2img_document($id_document) {
 
     //on recupere l'url du document
@@ -154,7 +162,7 @@ function convertir_document($id_document) {
     //si erreur sur verrou alors on quitte le script
     if (!$fp = @spip_fopen_lock($document['source_url']['absolute'].$document['fullname'],'r',LOCK_EX)) {
         spip_log('verouillé '.$id_document,'doc2img');
-        return false;
+        return "erreur document verrouillé";
     }
         
     //suppresssion d'un eventuel repertoire deja existant
@@ -170,7 +178,7 @@ function convertir_document($id_document) {
     //creation du repertoire cible
     if (!@mkdir($document['cible_url']['absolute'])) {
         spip_log('erreur repertoire '.$id_document,'doc2img');    
-        return false;
+        return "erreur impossible de creer le repertoire";
     }
         
     //charge le document dans imagick
@@ -227,7 +235,6 @@ function convertir_document($id_document) {
             $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
             spip_log('ecriture frame '.$frame,'doc2img');
         }
-
         //sauvegarde les donnees dans la base        
         if (!sql_insertq(
             "spip_doc2img",
@@ -238,7 +245,7 @@ function convertir_document($id_document) {
             )
         )) {
             spip_log("erreur sql","doc2img");
-            return false;
+            return "erreur base de donnée";
         }
         spip_log('injection bd','doc2img');
         

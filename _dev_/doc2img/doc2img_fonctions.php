@@ -31,10 +31,14 @@ function spip_explode($texte,$separateur){
  */   
 function d2c_convertir($id_document) {
     include_spip('inc/doc2img_convertir');
-    if ((is_doc2img($id_document) == false) && (can_doc2img($id_document) == true) ) {
-        return convertir_document($id_document) ? '1' : ' ';
+    if (can_doc2img($id_document)) {
+        if (is_doc2img($id_document)) {
+            return "deja converti";
+        } else {
+            return convertir_document($id_document);
+        }    
     } else {
-        return '';
+        return "non convertible";
     }
 }
 
