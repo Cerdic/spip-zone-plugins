@@ -90,9 +90,9 @@ function nettoyage_xtag($c) {
 	// les zitaliques
 	$c = preg_replace ('/<cTypeface:Italic>(.*?)<cTypeface:>/ims', '{\1}', $c);
 	$c = preg_replace ('/<[$]f[^<>]+Italic[^<>]+>(.*?)<f[$]>/', '{\1}', $c);
-	$c = preg_replace ('/<I>(.*?)<[$I]>/ms', '{\1}', $c);
-	$c = preg_replace ('/<I>(.*?)(\n|$)/ms', '{\1}', $c);
-	$c = preg_replace ('/{( *)}/ms', '/1', $c);
+	$c = preg_replace ('/<I>(.*?)<[$I]>/', '{\1}', $c);
+	$c = preg_replace ('/<I>(.*?)(\n|$)/', '{\1}\2', $c);
+	$c = preg_replace ('/{(\s*)}/ms', '\1', $c);
 
 	// supprimer un sale petit tiret
 	$c = str_replace("&#173;", '', $c);
@@ -114,7 +114,6 @@ function nettoyage_xtag($c) {
 
 	// espaces multiples
 	$c = preg_replace(",  +,", " ", $c);
-
 
 	return $c;
 }

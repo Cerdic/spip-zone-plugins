@@ -9,8 +9,8 @@
 function nettoyer_format($t) {
 
 	// resserrer les {}
-	$t = preg_replace('/{([.,])/', '\1{', $t);
-	$t = preg_replace('/}([.,])/', '\1}', $t);
+	$t = preg_replace('/{([.,]+)/', '\1{', $t);
+	$t = preg_replace('/}([.,]+)/', '\1}', $t);
 	$t = preg_replace(',([^{]){ ,', '\1 {', $t);
 	$t = preg_replace(', }([^}]),', '} \1', $t);
 	$t = preg_replace(',} {,', ' ', $t);
