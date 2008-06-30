@@ -185,6 +185,7 @@ function doc2img_uninstaller() {
  
     //supprime les meta CFG
     effacer_config('doc2img');
+    effacer_config('php::doc2img/');
 
 	//supprime les log
 	spip_log('suppression des log :','doc2img');

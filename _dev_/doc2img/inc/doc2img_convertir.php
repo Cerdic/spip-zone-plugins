@@ -148,6 +148,8 @@ function convertir_document($id_document) {
     include_spip('inc/documents');
     include_spip('inc/flock');
 
+    ecrire_config('php::doc2img/'.$id_document.'/statut','encours');
+
     //racine du site c'est a dire url_site/
     //une action se repere à la racine du site 
     $racine_site = getcwd().'/';
@@ -197,7 +199,8 @@ function convertir_document($id_document) {
         $nb_pages = imagick_getlistsize($handle);
     }
 
-    
+    ecrire_config('php::doc2img/'.$id_document.'/pages',$nb_pages);
+
     //determine l'extension à utiliser
     $extension = lire_config('doc2img/format_cible');
     
@@ -273,8 +276,9 @@ function convertir_document($id_document) {
     
     // libération du verrou
     spip_fclose_unlock($fp);
+    ecrire_config('php::doc2img/'.$id_document.'/statut','ok');
 
-    spip_log($id_document." document ok",'doc2img');        
+    spip_log($id_document." document ok",'doc2img');
 
     return true;
 }
