@@ -47,8 +47,7 @@ function doc2img_post_edition($flux) {
     $id_document = $flux['args']['id_objet'];
     spip_log('id_document'.$id_document,'doc2img');
 
-    include_once('inc/convertir.php');
-//	include_spip('inc/convertir');
+	include_spip('inc/doc2img_convertir');
 
     if (($flux['args']['operation'] == 'ajouter_document') 
             && (can_doc2img($id_document) == true)
