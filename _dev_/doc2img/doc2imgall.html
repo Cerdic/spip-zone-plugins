@@ -12,7 +12,7 @@
         id_document = frame.text();
                 
         frame.html(
-            '<img src="http://trac.rezo.net/trac/spip/browser/spip/dist/images/loader.gif?format=raw" />'
+            '<img src="#CHEMIN{images/loader.gif}" />'
         );
 
         $.ajax({
@@ -34,12 +34,34 @@
 
 </script>
 
+<style>
+    table {
+        margin-left : auto;
+        margin-right : auto;
+        border : 1px solid black;
+    }
+    
+    thead {
+        font-weight : bold;
+        text-align: center;
+    }
+    
+    tr {
+        border-bottom : 1px solid black;
+    }
+    
+</style>
+
 </head>
 
 <body>
-
     <B_DOC>
-        <table>
+        <div>
+        Liste de #TOTAL_BOUCLE sur les #GRAND_TOTAL documents
+        <p class="pagination">#PAGINATION</p>
+        </div>
+        <table rules="groups">
+        <thead>
         <tr>
             <td>id_document</td>
             <td>extension</td>
@@ -47,9 +69,12 @@
             <td>converti</td>        
             <td> voir </td>
             <td> fichier </td> 
-            <td> TOTAL </td>
+            <td> nb pages</td>
+            <td> statut </td>
+            <td> TOTAL </td>            
         </tr>
-    <BOUCLE_DOC(DOCUMENTS) {id_document?} {extension == (pdf)} {par id_document} {0,10}>
+        </thead>
+    <BOUCLE_DOC(DOCUMENTS) {id_document?} {extension == (.*|pdf)} {par id_document} {pagination 50}>
     <tr>
         <td>#ID_DOCUMENT</td>
         <td>#EXTENSION</td>
@@ -64,18 +89,23 @@
         )]
         <td class="frame">#ID_DOCUMENT</td>
         <td>
-            <a href="#URL_SITE_SPIP/#FICHIER">#FICHIER</a>
+            <a href="#URL_SITE_SPIP/#FICHIER" target="_blank">#FICHIER</a>
+        </td>
+        <td>
+            [(#CONFIG{php::doc2img/#ID_DOCUMENT/pages})]
+        </td>
+        <td>
+            [(#CONFIG{php::doc2img/#ID_DOCUMENT/statut})]
         </td>
         <td>
             [(#EXTENSION|=={pdf}|?{' '})
                 [(#SET{total,#GET{total}|plus{1}})]
+                #GET{total}    
             ]
-            #GET{total}
         </td>
     </tr>
     </BOUCLE_DOC>
     </table>
-
 </body>
 
 </html>
