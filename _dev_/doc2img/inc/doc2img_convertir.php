@@ -88,6 +88,42 @@ function doc2img_ratio(&$handle) {
     return $dimensions;
 }
 
+
+
+function doc2img_document($id_document) {
+
+    //on recupere l'url du document
+    $fichier = sql_getfetsel(
+        'fichier',
+        'spip_documents',
+        'id_document='.$id_document
+    );
+
+    //chemin relatif du fichier
+    $fichier = get_spip_doc($fichier); 
+
+    //nom complet du fichier : recherche ce qui suit le dernier / et retire ce dernier
+    // $resultat[0] = $resultat[1]/$resultat[2].$resultat[3]
+    preg_match('/(.*)\/(.*)\.(.\w*)/i', $fichier, $result);
+
+    //url relative du repertoire contenant le fichier , on retire aussi le / en fin
+    $document['source_url']['relative'] = $result[1].'/';
+    $document['source_url']['absolute'] = $racine_site.$document['source_url']['relative'];
+    
+    //information sur le nom du fichier
+    $document['extension'] = $result[3];
+    $document['name'] = $result[2];
+    $document['fullname'] = $result[2].'.'.$result[3];
+    
+    //creation du repertoire cible
+    //url relative du repertoire cible
+    $document['cible_url']['relative'] = _DIR_IMG.lire_config('doc2img/repertoire_cible').'/'.$document['name'].'/';
+    $document['cible_url']['absolute'] = $racine_site.$document['cible_url']['relative'];
+
+    return $document;
+}
+
+
 /*! \brief fonction autonome convertissant un document donné en paramétre
  *
  *  Ensemble des actions necessaires à la conversion d'un document en image :
@@ -110,34 +146,7 @@ function convertir_document($id_document) {
 
     spip_log('doc2img à convertir : '.$id_document ,'doc2img');
 
-    //on recupere l'url du document
-    $fichier = sql_getfetsel(
-        'fichier',
-        'spip_documents',
-        'id_document='.$id_document
-    );
-
-
-    //chemin relatif du fichier
-    $fichier = get_spip_doc($fichier); 
-
-    //nom complet du fichier : recherche ce qui suit le dernier / et retire ce dernier
-    // $resultat[0] = $resultat[1]/$resultat[2].$resultat[3]
-    preg_match('/(.*)\/(.*)\.(.\w*)/i', $fichier, $result);
-
-    //url relative du repertoire contenant le fichier , on retire aussi le / en fin
-    $document['source_url']['relative'] = $result[1].'/';
-    $document['source_url']['absolute'] = $racine_site.$document['source_url']['relative'];
-    
-    //information sur le nom du fichier
-    $document['extension'] = $result[3];
-    $document['name'] = $result[2];
-    $document['fullname'] = $result[2].'.'.$result[3];
-    
-    //creation du repertoire cible
-    //url relative du repertoire cible
-    $document['cible_url']['relative'] = _DIR_IMG.lire_config('doc2img/repertoire_cible').'/'.$document['name'].'/';
-    $document['cible_url']['absolute'] = $racine_site.$document['cible_url']['relative'];
+    $document = doc2img_document($id_document);
 
     spip_log($document,'doc2img');
 
