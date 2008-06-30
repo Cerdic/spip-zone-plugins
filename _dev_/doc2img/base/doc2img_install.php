@@ -118,7 +118,7 @@ function doc2img_installer($version,$version_finale) {
             //on defini un repertoire de stockage
             spip_log(_DIR_IMG,'doc2img');
             $dir_doc2img = getcwd().'/'._DIR_IMG.'doc2img/';
-            mkdir($dir_doc2img);
+            @mkdir($dir_doc2img);
             spip_log('création repertoire '.$dir_doc2img,'doc2img');
         //passage en 0.2, rien à faire
         case 0.1 :
