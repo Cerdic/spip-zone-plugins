@@ -105,13 +105,14 @@ function doc2img_installer($version,$version_finale) {
 			sql_create(
 				'spip_doc2img',
 				array(
-					'id_doc2img' => 'BIGINT (21) AUTO_INCREMENT', 
-                	'id_document' => 'BIGINT (21) NOT NULL DEFAULT 0',
+					'id_doc2img' => 'INTEGER AUTO_INCREMENT NOT NULL', 
+                	'id_document' => 'INTEGER NOT NULL DEFAULT 0',
  					'fichier' => 'VARCHAR(255) NOT NULL DEFAULT \'\''
 				), 
 				array(
 					'PRIMARY KEY' => 'id_doc2img'
-				)
+				),
+				true
             );
             spip_log('table spip_doc2img créée','doc2img');
             //on defini un repertoire de stockage
@@ -140,14 +141,17 @@ function doc2img_installer($version,$version_finale) {
 		    //on permet la numérotation des page
             sql_alter(
 				"TABLE spip_doc2img 
-	                ADD page INT NOT NULL DEFAULT 0;"
+	                ADD page INTEGER NOT NULL DEFAULT 0;"
 			);
 		//passage en 0.9
 		case 0.8 :
-			sql_alter(
-				"TABLE spip_doc2img 
-					ADD UNIQUE INDEX document (id_document, page)"
-			);
+		    sql_query(
+		        "CREATE UNIQUE INDEX document ON spip_doc2img (id_document,page)"
+		    );
+#			sql_alter(
+#				"TABLE spip_doc2img 
+#					ADD UNIQUE document (id_document, page)"
+#			);
     }
 
     //on met à jour la version du plugin
@@ -179,9 +183,11 @@ function doc2img_uninstaller() {
 	spip_log('suppression des doc2img :'.$dir_doc2img,'doc2img');
     rm($dir_doc2img);
  
+    //supprime les meta CFG
+    effacer_config('doc2img');
+
 	//supprime les log
 	spip_log('suppression des log :','doc2img');
-
 	rm(getcwd().'/../tmp/doc2img.log*');
 
     //on efface la meta indiquant la version installée
