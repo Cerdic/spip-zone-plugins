@@ -109,7 +109,11 @@ class cfg_depot_php
 		if (!$this->charger()){
 			return array(false, $this->val);	
 		}
-    	
+
+		// pas de champ, on supprime tout
+		if (!$this->champs)
+			return array($this->ecrire_fichier(), array());
+			
     	// effacer les champs
     	foreach ($this->champs as $name => $def) {
 			if (isset($def['id'])) continue;
@@ -123,12 +127,12 @@ class cfg_depot_php
 			}
 			unset($this->_arbre[$i][0][$this->_arbre[$i][1]]);
 		}
-		
+
 		return array($this->ecrire_fichier($this->_base), $this->_ici);
 	}
 	
 	
-	function ecrire_fichier($contenu){
+	function ecrire_fichier($contenu=array()){
 		$fichier = $this->get_fichier();
 
 		if (!$contenu) {
@@ -160,8 +164,8 @@ $cfg = ' . var_export($contenu, true) . ';
 
 		$arbre = explode('/',$args);
 		$this->param->nom = array_shift($arbre);
-		$champ = array_pop($arbre);
-		$this->champs = array($champ=>true);
+		if ($champ = array_pop($arbre))
+			$this->champs = array($champ=>true);
 		$this->param->casier = implode('/',$arbre);
 		return true;	
 	}
