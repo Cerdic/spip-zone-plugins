@@ -75,9 +75,9 @@ boutonsTexte.prototype.texteOnly = function(elt)
 	}
 	texte.addClass("onlytext");
 	jQuery(texte[texte.length-1]).after('<div id="marktextonly">marktextonly</div>');
+	$('body>*').hide();
 	jQuery(elt).attr({ 'title': that.txtBackSpip, 'alt': that.txtBackSpip }).
-		parent().prependTo("body").after(texte).
-		siblings().gt(texte.length-1).hide();
+		parent().prependTo("body").after(texte);
 	this.backTextOnly = true;
 }
 boutonsTexte.prototype.fontBigger = function(elt)
