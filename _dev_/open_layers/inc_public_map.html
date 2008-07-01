@@ -14,14 +14,20 @@
 		}
 		return url;
 	}
-	function agregarMarcador (xmlItem, markerLayer) {
+	function agregarMarcador (xmlItem, markerLayer, map) {
 		var xmlLat = $("geo_lat",xmlItem);
 		var xmlLng = $("geo_long",xmlItem);
+		var xmlSon = $("enclosure",xmlItem);
+		var popup = null;
 		if ((xmlLat.length == 0) || (xmlLng.length == 0)) return;
 		else {
 			var lat = parseFloat(xmlLat.text());
 			var lng = parseFloat(xmlLng.text());
+			var id = extraerID($("link",xmlItem).text());
+			var html = $("description",xmlItem).text();
 			var icon = $("geo_icon",xmlItem).text();
+			var son;
+			if (xmlSon.length != 0) son = xmlSon.attr("url");
 			var point = new OpenLayers.LonLat(lng,lat);
 			var size = new OpenLayers.Size(20,34);
 			var calculateOffset = function(size) { return new OpenLayers.Pixel(-(size.w/2), -size.h); };
@@ -33,6 +39,21 @@
 				calculateOffset
 			);
 			var marcador = new OpenLayers.Marker(point, icon);
+			marcador.events.register("mousedown", marcador, function mousedown(evt) {
+				if (popup == null) {
+					popup = new OpenLayers.Popup.FramedCloud("popup"+id, new OpenLayers.LonLat(lng,lat));
+       				popup.panMapIfOutOfView = true;
+       				popup.autoSize = true;
+       				popup.closeBox = true;
+       				popup.padding = 10;
+       				popup.contentDiv.style.overflow = 'visible';
+       				popup.setContentHTML(html);
+					map.addPopup(popup);
+				} else {
+                	popup.toggle();
+				}
+				OpenLayers.Event.stop(evt);
+        	});
 			markerLayer.addMarker(marcador);
 		}	
 	}
@@ -74,7 +95,7 @@
 			
 			jQuery("item", xml[(#GET{id_carte_gis})]).each(function(item[(#GET{id_carte_gis})]){
 				var xmlItem[(#GET{id_carte_gis})] = xml[(#GET{id_carte_gis})].documentElement.getElementsByTagName("item")[item[(#GET{id_carte_gis})]];
- 				agregarMarcador(xmlItem[(#GET{id_carte_gis})], markers[(#GET{id_carte_gis})]);
+ 				agregarMarcador(xmlItem[(#GET{id_carte_gis})], markers[(#GET{id_carte_gis})], map[(#GET{id_carte_gis})]);
 			});
 		});	
 	}
