@@ -25,11 +25,32 @@ $(document).ready(function() {
 		// });
 		
 		
+	$("#special-admin").css({width:"24px", left:"110px", overflow:"hidden"});
+	$("#special-admin a").css({width:"120px"});
+		
+		
 //pour cacher afficher la boite	
 	$(".diktat").toggle(function() {
-	$(".obeirpoliment").hide();
+	//$(".obeirpoliment").hide();
+	$("#special-admin").css({width:"24px", left:"110px", overflow:"hidden"});
+//$(".obeirpoliment").css({border:"1px solid #666"});
+	$("#special-admin a").css({width:"120px"});
+	$(".showme").hide();
 	},function(){
-	$(".obeirpoliment").show();
+	//$(".obeirpoliment").show();
+	$("#special-admin").css({width:"120px", left:"5px", overflow:"auto"});
+	$("#special-admin a").css({width:"120px"});
+	});
+
+//pour cacher afficher info
+$(".showme").hide();
+
+	$(".infocrayon").toggle(function() {
+	$(".showme").show();
+	$("#special-admin").css({width:"120px", left:"5px", overflow:"auto"});
+	$("#special-admin a").css({width:"120px"});
+	},function(){
+	$(".showme").hide();
 	});
 	
 });

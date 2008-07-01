@@ -1,5 +1,33 @@
 <?php
 
+#Vous pouvez affiner ...
+####################################################################
+#ajout core SPIP
+#pour modifier en ligne un evenement
+#fichier ecrire/balise/formulaire_admin.php 
+#ajouter ligne 73 dans le tableau de $env
+#marche pas sur l'enregistrement..
+
+#$env['id_evenement'] = (_request('id_evenement'));
+
+####################################################################
+
+#ajout sur dist/formulaires/editer_article
+#permet de donner un statut ˆ un nouvel article
+#donc pour ne pas casser dans l'espace privŽ
+#ligne 12 aprs  <input type='hidden' name='id_article' value='#ENV{id_article}' />
+/*
+	[(#REM) on definit les hidden en une ligne: statut de l'article, redirect etc... si espace public ]
+	 [(#SELF|match{exec}|?{'',' '}) <!-- suppose pas dans espace prive -->
+	 <input type="hidden" name="statut" value="[(#ENV**{statut}|sinon{prop})]" >
+	 <input type="hidden" name="redirect" value="[(#SELF|parametre_url{id_article,[(#ENV{id_article})]})]" />
+	 ]
+*/
+	 
+#####################################################################
+	
+	
+
 	function cree_puce_stat($statut){	
 	switch ($statut) {
 		case 'prepa': return  http_img_pack("puce-blanche.gif",_T('texte_statut_en_cours_redaction'));

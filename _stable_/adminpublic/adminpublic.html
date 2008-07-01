@@ -7,7 +7,9 @@
 <link rel="alternate" type="application/rss+xml" title="<:titre_page_mots_tous:>" href="#URL_PAGE{backend}<BOUCLE_URLMOT(MOTS){id_article}>&amp;id_mot[]=#ID_MOT</BOUCLE_URLMOT>" />
 </B_URLMOT><B_URLAUTEURS>
 <link rel="alternate" type="application/rss+xml" title="<:icone_auteurs:>" href="#URL_PAGE{backend}<BOUCLE_URLAUTEURS(AUTEURS){id_article}>&amp;id_auteur[]=#ID_AUTEUR</BOUCLE_URLAUTEURS>" />
-</B_URLAUTEURS><INCLURE{fond=inc-head}>
+</B_URLAUTEURS>
+<link rel="stylesheet" type="text/css" href="http://ordinateur-de-loumi.local/bordegrande/spip.php?page=style_prive&amp;ltr=left&amp;couleur_claire=97d2e1&amp;couleur_foncee=5da7c5" />
+<INCLURE{fond=inc-head}>
 </head>
 
 <body class="page_article" style="margin-top:20px; position:relative;">
@@ -48,7 +50,7 @@
 
 [<h3><:icone_ecrire_article:></h3>
 (#AUTORISER{creerarticledans,rubrique,#ENV{id_rubrique}})
-[(#FORMULAIRE_EDITER_ARTICLE)]
+[(#FORMULAIRE_EDITER_ARTICLE{'',#ENV{id_rubrique}})]
 ]
 
 <//B_artimodif>

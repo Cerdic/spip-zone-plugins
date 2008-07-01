@@ -1,44 +1,72 @@
 <div id="special-admin">
-<h5>[(#SESSION{nom})] <a href="#" class="diktat">[+]</a></h5>
+<a href="#" class="diktat">
+<img src="[(#CHEMIN{images/plus.gif}|image_reduire{10}|extraire_attribut{src})]" width="9px" height="9px" alt="[+]" />
+[(#SESSION{nom})] 
+</a>
 <div class="obeirpoliment">
-	[<div style="background-color:#DADADA; border:1px solid #666;">(#LOGINMINI_PUBLIC|?{'',' '})</div>]
-	[(#SESSION|?{' ',''})<a href="#URL_LOGOUT" title="se deconnecter">D&eacute;connexion</a>]
+	[<div class="loginmini">(#LOGINMINI_PUBLIC|?{'',' '})</div>]
 	
 
 [(#REM) les boutons par defaut de SPIP]
 <div dir="#LANG_DIR" id="boutonadmin">
+	[(#SESSION|?{' ',''})<a href="#URL_LOGOUT" title="D&eacute;connexion">
+	<img src="[(#CHEMIN{images/deconnecter-24.gif}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="(-)"  />
+	D&eacute;connexion</a>]
+	
 	[<a href="(#ENV{analyser})" id="analyser"><:analyse_xml:>[(#ENV{xhtml_error}|?{' *',''})]</a>]
 	
 	[(#AUTORISER{ecrire,'','',#SESSION{id_auteur}})
-	[<a href="[(#ENV{voir_article})]" id="voir_article"><:admin_modifier_article:>((#ENV{id_article}))</a>]
-	[<a href="[(#ENV{voir_breve})]"	id="voir_breve"><:admin_modifier_breve:>((#ENV{id_breve}))</a>]
-	[<a href="[(#ENV{voir_rubrique})]" id="voir_rubrique"><:admin_modifier_rubrique:>((#ENV{id_rubrique}))</a>]
-	[<a href="[(#ENV{voir_mot})]" id="voir_mot"><:admin_modifier_mot:>((#ENV{id_mot}))</a>]
-	[<a href="[(#ENV{voir_site})]" id="voir_site"><:icone_modifier_site:>((#ENV{id_syndic}))</a>]
-	[<a href="[(#ENV{voir_auteur})]" id="voir_auteur"><:admin_modifier_auteur:>((#ENV{id_auteur}))</a>]
+	[<a href="[(#ENV{voir_article})]" id="voir_article">
+	<img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/adminespace.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt=">|<"  />
+<:admin_modifier_article:>((#ENV{id_article}))</a>]
+	[<a href="[(#ENV{voir_breve})]"	id="voir_breve">
+	<img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/adminespace.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt=">|<"  />
+<:admin_modifier_breve:>((#ENV{id_breve}))</a>]
+	[<a href="[(#ENV{voir_rubrique})]" id="voir_rubrique">
+	<img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/adminespace.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt=">|<"  />
+<:admin_modifier_rubrique:>((#ENV{id_rubrique}))</a>]
+	[<a href="[(#ENV{voir_mot})]" id="voir_mot">	
+	<img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/adminespace.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt=">|<"  />
+<:admin_modifier_mot:>((#ENV{id_mot}))</a>]
+	[<a href="[(#ENV{voir_site})]" id="voir_site">	
+	<img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/adminespace.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt=">|<"  />
+<:icone_modifier_site:>((#ENV{id_syndic}))</a>]
+	[<a href="[(#ENV{voir_auteur})]" id="voir_auteur">	
+	<img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/adminespace.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt=">|<"  />
+<:admin_modifier_auteur:>((#ENV{id_auteur}))</a>]
 	]
 	
-	[<a href="(#ENV{ecrire})" id="ecrire"><:espace_prive:></a>]
+	[<a href="(#ENV{ecrire})" id="ecrire" title="<:espace_prive:>">
+	<img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/adminespace.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt=">|<"  />
+	<:espace_prive:></a>]
 	
-	<a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]"  id="var_mode"><:admin_recalculer:>[(#ENV{use_cache})]</a>
+	<a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]"  id="var_mode" title="<:admin_recalculer:>">
+	<img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/recalcul.gif]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="( )"  />
+	Recalculer[(#ENV{use_cache})]</a>
 	[<a href="(#ENV{statistiques})"  id="statistiques">[<:info_visites:>&nbsp;(#ENV{visites})][;&nbsp;<:info_popularite_5:>&nbsp;(#ENV{popularite})]</a>]
 	[<a href="(#ENV{preview})" id="preview"><:previsualisation:></a>]
 	[<a href="(#ENV{debug})"  id="debug"><:admin_debug:></a>]
-</div>
+
 
 [<!-- (#REM) GESTION COMPTE --> ]
-[(#AUTORISER{modifier,auteur,#SESSION{id_auteur}})  
-<h6><a href="#URL_PAGE{adminpublic}">
+[(#AUTORISER{modifier,auteur,#SESSION{id_auteur}}) 
+
+<a href="#URL_PAGE{adminpublic}" title="G&eacute;rer votre compte">
 [<img src="(#IMG{[(#CHEMIN{images/auteur-24.gif})]}|image_reduire{16,16}|extraire_attribut{src})" width="16px" height="16px" alt="mon compte"/>]
-G&eacute;rer votre compte
+Votre compte
 </a>
-</h6>
 ]
 
 
 [<!-- (#REM) AIDE CRAYONS // necessite plugin crayons --> ]
-[(#AUTORISER{modifier,article,#ENV{id_article}})  
-[<h6><img src="(#IMG{[(#EVAL{_DIR_PLUGIN_CRAYONS})images/crayon20.png]}|image_reduire{16,16}|extraire_attribut{src})" width="16px" height="16px" alt="crayon"/> <:adminpublic:modifier_les_textes:></h6><:adminpublic:survoler_le_texte:>]
+[(#PLUGIN{crayons}|?{' ',''})
+[(#AUTORISER{modifier,article,#ENV{id_article}})
+<div class="infoadmin"><a href="#info-crayons" class="infocrayon" title="<:adminpublic:modifier_les_textes:>">
+<img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/aide.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt=">|<"  />
+<:adminpublic:modifier_les_textes:>
+</a>
+<small class="showme"><:adminpublic:survoler_le_texte:></small>]
+</div>
 ]
 
 
@@ -52,41 +80,41 @@ G&eacute;rer votre compte
 
 <BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}>
 [(#AUTORISER{creerarticledans,rubrique,#ENV{id_rubrique}})
-<h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> 
-<a href="?page=adminpublic&id_rubrique=#ID_RUBRIQUE"><:icone_ecrire_article:></a>  dans la rubrique [(#TITRE|supprimer_numero)]</h6>]
+<a href="?page=adminpublic&id_rubrique=#ID_RUBRIQUE"><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> 
+&Eacute;crire pour [(#TITRE|supprimer_numero)]
+</a>]
 </BOUCLE_rub>
 [<!--(#REM) pour recup id_rubrique admin restreint-->]
 <BOUCLE_rubrestreinte(SPIP_AUTEURS_RUBRIQUES){id_auteur=#SESSION{id_auteur}}{0,1}>
-<h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> 
-<a href="?page=adminpublic&id_rubrique=#ID_RUBRIQUE"><:icone_ecrire_article:></a>  dans votre rubrique</h6>
+<a href="?page=adminpublic&id_rubrique=#ID_RUBRIQUE"><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> 
+&Eacute;crire pour votre rubrique</a>
 </BOUCLE_rubrestreinte>
 [<!--(#REM) recup id_rubrique wiki sinon XX-->]
-
-<h6><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> 
-<a href="[(#URL_PAGE{adminpublic}|parametre_url{id_rubrique,[(#GET{wikirub,#ID_RUBRIQUE}|sinon{XX})]})]"><:icone_ecrire_article:></a></h6>
-
+<a href="[(#URL_PAGE{adminpublic}|parametre_url{id_rubrique,[(#GET{wikirub,#ID_RUBRIQUE}|sinon{XX})]})]"><img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_ADMINPUBLIC})images/articleplus.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="article+"/> 
+&Eacute;crire un article</a>
 <//B_rubrestreinte>
 
 <//B_rub>
 
 
 [<!-- (#REM) CREER EVENEMENT // necessite plugin agenda --> ]
+[(#PLUGIN{agenda}|?)]
 [(#ENV{id_article}|?{' ',''})
 [(#AUTORISER{modifier,article,#ENV{id_article}})
-<h6><a href='[(#SELF|parametre_url{ajout_evenement,oui}|parametre_url{id_article,#ENV{id_article}}|parametre_url{id_evenement,''})]'>
+<a href='[(#SELF|parametre_url{ajout_evenement,oui}|parametre_url{id_article,#ENV{id_article}}|parametre_url{id_evenement,''})]'>
 <img src="[(#IMG{[(#EVAL{_DIR_PLUGIN_AGENDA})img_pack/agenda-24.png]}|image_reduire{16,16}|extraire_attribut{src})]" width="16px" height="16px" alt="ajouter" title="<:agenda:titre_cadre_ajouter_evenement:>" />
  <:adminpublic:ajouter_evenement:>
-</a></h6>]
-]
+</a>]
+] 
 
 
 [<!-- (#REM) INSERER DOCUMENT mais eviter de doublonner!--> ]
 [(#SELF|match{upload}|?{'',' '})
 
 [<!-- (#REM) INSERER DOCUMENT ARTICLE ou RUBRIQUE // necessite plugin formulaire_upload--> ]
-[(#EVAL{_DIR_PLUGIN_FORMULAIREUPLOAD}|?{' ',''}) 
-[(#AUTORISER{modifier,article,#ENV{id_article}})    [(#CONFIG{documents_article}|=={oui}|?{<h6>Ins&eacute;rer des documents</h6>}) ]  ]
-[(#AUTORISER{modifier,rubrique,#ENV{id_rubrique}})  [(#CONFIG{documents_rubrique}|=={oui}|?{<h6>Ins&eacute;rer des documents</h6>}) ] ]
+[(#PLUGIN{formulaireupload}) 
+[(#ENV{id_article}|?{' ',''})[(#AUTORISER{modifier,article,#ENV{id_article}})    [(#CONFIG{documents_article}|=={oui}|?{Ins&eacute;rer des documents}) ]  ]]
+[(#ENV{id_rubrique}|?{' ',''})[(#AUTORISER{modifier,rubrique,#ENV{id_rubrique}})  [(#CONFIG{documents_rubrique}|=={oui}|?{Ins&eacute;rer des documents}) ] ]]
 ]
 
 [<div id='alertez'></div>(#FORMULAIRE_UPLOAD)]
@@ -95,6 +123,7 @@ G&eacute;rer votre compte
 
 </div>
 </div>
+</div>
 
 [<!-- (#REM) CREER EVENEMENT // POSITION ABSOLUTE --> ]
-[<div class="editereve">(#FORMULAIRE_EDITION_EVENEMENT{id_evenement})</div>]
+[<div class="editereve">(#FORMULAIRE_EDITION_EVENEMENT{id_evenement}{id_article})</div>]
