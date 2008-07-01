@@ -16,23 +16,23 @@ function CGpuis ($n){
 
 function compteur_graphique_calcul_image($CG_limite,$CG_num,$CG_habillage,$CG_indent_image) {
 //Test 1 : doit-on générer à partir de vignettes GIF ou PNG ?
-$test1 = spip_query("SELECT id_compteur FROM ext_compteurgraphique WHERE statut = 11");
-$tab1 = spip_fetch_array($test1);
+$test1 = sql_select("id_compteur","spip_compteurgraphique","statut = 11");
+$tab1 = sql_fetch($test1);
 $res1 = $tab1['id_compteur'];
 if (isset($res1)) {$t1='.png'; $test1=true;} else {$t1='.gif'; $test1=false;}
 
 //Test 2 : doit-on générer du GIF ou du PNG ?
-$test2 = spip_query("SELECT id_compteur FROM ext_compteurgraphique WHERE statut = 12");
-$tab2 = spip_fetch_array($test2);
+$test2 = sql_select("id_compteur","spip_compteurgraphique","statut = 12");
+$tab2 = sql_fetch($test2);
 $res2 = $tab2['id_compteur'];
 if (isset($res2)) {$t2='.png'; $test2=true;} else {$t2='.gif'; $test2=false;}
 
 //Test 3 : doit-on gérer la transparence ou non ?
-$test3 = spip_query("SELECT id_compteur FROM ext_compteurgraphique WHERE statut = 13");
-$tab3 = spip_fetch_array($test3);
+$test3 = sql_select("id_compteur","spip_compteurgraphique","statut = 13");
+$tab3 = sql_fetch($test3);
 $res3 = $tab3['id_compteur'];
 
-    $CG_chemin="lib/compteurgraphique_pack/";
+    $CG_chemin=_DIR_PLUGIN_COMPTEURGRAPHIQUE."img_pack/";
     if ($CG_limite==0) {
         $i=1;
         while (!isset($CG_stop)) {
@@ -59,7 +59,7 @@ $res3 = $tab3['id_compteur'];
         imagedestroy($CG_images);
     }
     if (!isset($res3)) {imagecolortransparent($CG_image_totale,$CG_couleurblanche);}
-    $CG_chemin_image = "IMG/CompteurGraphique/CompteurGraphique".$CG_indent_image.$t2;
+    $CG_chemin_image = _DIR_IMG."CompteurGraphique/CompteurGraphique".$CG_indent_image.$t2;
     if ($test2) {header('Content-Type: image/png'); imagepng($CG_image_totale,$CG_chemin_image);} else {header('Content-Type: image/gif'); imagegif($CG_image_totale,$CG_chemin_image);}
     imagedestroy($CG_image_totale);
     $CG_texte_retour="CompteurGraphique".$CG_indent_image.$t2;

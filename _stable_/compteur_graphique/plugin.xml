@@ -1,15 +1,17 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
 	<nom> <!-- Nom du plugin -->
 	Compteurs de visites graphiques
 	</nom>
 	<auteur>
     Olivier Gautier, &eacute;quipe de d&eacute;veloppement Eva-WEB.
-    <br/>Cette <!-- span xmlns:dc="http://purl.org/dc/elements/1.1/" href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dc:type" -->cr&eacute;ation<!-- /span --> est mise &agrave;  disposition sous un <a rel="license" href="http://creativecommons.org/licenses/by/2.0/fr/">contrat Creative Commons</a>.
+    <br/>Cette <span xmlns:dc="http://purl.org/dc/elements/1.1/" href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dc:type">cr&eacute;ation</span> est mise &agrave;  disposition sous un <a rel="license" href="http://creativecommons.org/licenses/by/2.0/fr/">contrat Creative Commons</a>.
     <br />&nbsp;<br /><div style="text-align:center;"><a rel="license" href="http://creativecommons.org/licenses/by/2.0/fr/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by/2.0/fr/88x31.png"/></a></div>
+    <br />&nbsp;<br />
+    <strong>Il est indispensable de cr&eacute;er un r&eacute;pertoire nomm&eacute; CompteurGraphique &agrave; l'int&eacute;rieur du r&eacute;pertoire IMG pour que ce plugin fonctionne !</strong>
+    <br />La cr&eacute;ation de ce r&eacute;pertoire est n&eacute;anmois prise en charge par ce plugin.
 	</auteur>
 	<version>
-	0.2
+	0.3
 	</version>
     <version_base>0.1</version_base>
 	<etat>
@@ -38,5 +40,4 @@
         <inclure>CompteurGraphique_pipeline.php</inclure>
     </pipeline>
     <necessite id='SPIP' version='[1.9259;]' />
-    <necessite id="lib:compteurgraphique_pack" src="http://www.ac-rouen.fr/evaweb/files/compteurgraphique_pack.zip" />
 </plugin>

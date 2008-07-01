@@ -1,11 +1,10 @@
 <?php
 
 function calcule_repertoire_max() {
-$cheminCG_rel="../lib/compteurgraphique_pack/";
 $icone = "../"._DIR_PLUGIN_COMPTEURGRAPHIQUE."/img_pack/CompteurGraphique.gif";
     $i=0;
     $j=0;
-    $cheminCG_rel="../lib/compteurgraphique_pack/";
+    $cheminCG_rel=_DIR_PLUGIN_COMPTEURGRAPHIQUE."img_pack/";
     while ($j==0) {
         $i++;
         if (file_exists($cheminCG_rel.$i.'/0.gif') || file_exists($cheminCG_rel.$i.'/0.png')) {}
@@ -16,71 +15,60 @@ $icone = "../"._DIR_PLUGIN_COMPTEURGRAPHIQUE."/img_pack/CompteurGraphique.gif";
 }
 
 function CompteurGraphique_ArticleGauche ($exec) {
-$verif_presence_table = spip_query("SELECT id_compteur FROM ext_compteurgraphique WHERE statut=10");
+$CG_nom_table = "spip_compteurgraphique";
+$verif_presence_table = sql_select("id_compteur",$CG_nom_table,"statut=10");
 if ($verif_presence_table == '') {return;}
 $retour ='';
-$CG_nom_table = "ext_compteurgraphique";
-$cheminCG_rel="../lib/compteurgraphique_pack/";
-$icone = "../"._DIR_PLUGIN_COMPTEURGRAPHIQUE."/img_pack/CompteurGraphique.gif";
+$cheminCG_rel=_DIR_PLUGIN_COMPTEURGRAPHIQUE."img_pack/";
+$icone = _DIR_PLUGIN_COMPTEURGRAPHIQUE."/img_pack/CompteurGraphique.gif";
 if ((isset($_GET['id_article'])) AND is_numeric($_GET['id_article'])) {$id_article=$_GET['id_article'];}
 if (isset($id_article)) {
 
 if (isset($_POST['choix_habillage']) && isset($_POST['valid_decompte']) && isset($_POST['changement_chiffres2']) && is_numeric($_POST['changement_chiffres2'])) {
     if ($_POST['valid_decompte']==2) {$choix_decompte="decompte=".$_POST['choix_decompte'].","; $statut=2;} else {$statut=1;}
-    $requete_reactivation = "UPDATE ".$CG_nom_table." SET ".$choix_decompte."statut=".$statut.",longueur=".$_POST['changement_chiffres2'].",habillage=".$_POST['choix_habillage']." WHERE id_article = ".$id_article;
-    $resultat_reactivation = spip_query($requete_reactivation);
+    $resultat_reactivation = sql_updateq($CG_nom_table,array("decompte" => $_POST['choix_decompte'],"statut" => $statut,"longueur" => $_POST['changement_chiffres2'],"habillage" => $_POST['choix_habillage']),"id_article = $id_article");
 }
 
 if (isset($_POST['changement_habillage']) && is_numeric($_POST['changement_habillage'])) {
-    $requete_changement_habillage = "UPDATE ".$CG_nom_table." SET habillage = ".$_POST['changement_habillage']." WHERE id_article = ".$id_article;
-    $resultat_changement_habillage = spip_query($requete_changement_habillage);
+    $resultat_changement_habillage = sql_updateq($CG_nom_table,array("habillage" => $_POST['changement_habillage']),"id_article = $id_article");
 }
 
 if (isset($_POST['modif_decompte_decompte']) && is_numeric($_POST['modif_decompte_decompte'])) {
-    $requete_changement_decompte = "UPDATE ".$CG_nom_table." SET decompte = ".$_POST['modif_decompte_decompte']." WHERE id_article = ".$id_article;
-    $resultat_changement_decompte = spip_query($requete_changement_decompte);
+    $resultat_changement_decompte = sql_updateq($CG_nom_table,array("decompte" => $_POST['modif_decompte_decompte']),"id_article = $id_article");
 }
 
 if (isset($_POST['transition_decompte']) && is_numeric($_POST['transition_decompte'])) {
-    $requete_transition_decompte = "UPDATE ".$CG_nom_table." SET decompte=".$_POST['transition_decompte'].",statut=2 WHERE id_article = ".$id_article;
-    $resultat_transition_decompte = spip_query($requete_transition_decompte);
+    $resultat_transition_decompte = sql_updateq($CG_nom_table,array("decompte" => $_POST['transition_decompte'], "statut" => 2),"id_article = $id_article");
 }
 
 if (isset($_POST['changement_chiffres']) && is_numeric($_POST['changement_chiffres'])) {
-    $requete_changement_chiffres = "UPDATE ".$CG_nom_table." SET longueur = ".$_POST['changement_chiffres']." WHERE id_article = ".$id_article;
-    $resultat_changement_chiffres = spip_query($requete_changement_chiffres);
+    $resultat_changement_chiffres = sql_updateq($CG_nom_table,array("longueur" => $_POST['changement_chiffres']),"id_article = $id_article");
 }
 
 if (isset($_POST['suppression_compteur']) && ($_POST['suppression_compteur']==1)) {
-    $requete_suppr_compteur = "DELETE FROM ".$CG_nom_table." WHERE id_article=".$id_article;
-    $resultat_suppr_compteur=spip_query($requete_suppr_compteur);
+    $resultat_suppr_compteur=sql_delete($CG_nom_table,"id_article=$id_article");
 }
     
 if (isset($_POST['interdiction_compteur']) && ($_POST['interdiction_compteur']==1)) {
-    $requete_interdiction_compteur = "UPDATE ".$CG_nom_table." SET statut = 3 WHERE id_article = ".$id_article;
-    $resultat_interdiction_compteur = spip_query($requete_interdiction_compteur);
+    $resultat_interdiction_compteur = sql_updateq($CG_nom_table,array("statut" => 3),"id_article = $id_article");
 }
 
 if (isset($_POST['interdiction_compteur']) && ($_POST['interdiction_compteur']==2)) {
-    $requete_interdiction_compteur = "INSERT INTO ".$CG_nom_table." VALUES (NULL,NULL,".$id_article.",NULL,3,NULL,NULL)";
-    $resultat_interdiction_compteur = spip_query($requete_interdiction_compteur);
+    $resultat_interdiction_compteur = sql_insertq($CG_nom_table,array("id_article" => $id_article,"statut" => 3));
 }
 
 if (isset($_POST['transition_visites']) && ($_POST['transition_visites']==1)) {
-    $requete_transition_visites = "UPDATE ".$CG_nom_table." SET statut = 1 WHERE id_article = ".$id_article;
-    $resultat_transition_visites = spip_query($requete_transition_visites);
+    $resultat_transition_visites = sql_updateq($CG_nom_table,array("statut" => 1),"id_article = $id_article");
 }
 
 if (isset($_POST['nouveau_chiffres']) && is_numeric($_POST['nouveau_decompte']) && is_numeric($_POST['nouveau_chiffres']) && is_numeric($_POST['nouveau_habillage'])) {
     if ($_POST['nouveau_decompte']==1) {$CG_dec="NULL";} else {$CG_dec=$_POST['choix_decompte'];}
-    $requete_nouveau_compteur = "INSERT INTO ".$CG_nom_table." VALUES (NULL,".$CG_dec.",".$id_article.",NULL,".$_POST['nouveau_decompte'].",".$_POST['nouveau_chiffres'].",".$_POST['nouveau_habillage'].")";
-    $resultat_nouveau_compteur = spip_query($requete_nouveau_compteur);
+    $resultat_nouveau_compteur = sql_insertq($CG_nom_table,array("decompte" => $CG_dec,"id_article" => $id_article,"statut" => $_POST['nouveau_decompte'],"longueur" => $_POST['nouveau_chiffres'],"habillage" => $_POST['nouveau_habillage']));
 }
 
 //Récupération d'une éventuelle entrée pour cet article dans la table du compteur
-$requete1 = "SELECT id_compteur,decompte,statut,longueur,habillage FROM ".$CG_nom_table." WHERE id_article = ".$id_article;
-$resultat1 = spip_query($requete1);
-$resultat1_tableau = spip_fetch_array($resultat1);
+$resultat1 = sql_select("id_compteur,decompte,statut,longueur,habillage",$CG_nom_table,"id_article = $id_article");
+$resultat1_tableau = sql_fetch($resultat1);
 $CG_id_compteur = $resultat1_tableau['id_compteur'];
 $CG_statut = $resultat1_tableau['statut'];
 $CG_decompte = $resultat1_tableau['decompte'];
@@ -88,9 +76,8 @@ $CG_longueur = $resultat1_tableau['longueur'];
 $CG_habillage = $resultat1_tableau['habillage'];
 
 //On récupère les données concernant l'article en cours
-$requete3 = "SELECT id_rubrique,visites FROM spip_articles WHERE id_article =".$id_article;
-$resultat3 = spip_query($requete3);
-$resultat3_tableau = spip_fetch_array($resultat3);
+$resultat3 = sql_select("id_rubrique,visites","spip_articles","id_article = $id_article");
+$resultat3_tableau = sql_fetch($resultat3);
 $CG_idr = $resultat3_tableau['id_rubrique'];
 $CG_vis = $resultat3_tableau['visites'];
 
@@ -328,7 +315,7 @@ if (isset($CG_statut)) {
                     $retour .= '</option>';
                 }
 	$retour .= '</select><br />&nbsp;<br /><input type="submit" value="';
-	$retour .= _T('compteurgraphique:CG_chiffre_auto');
+	$retour .= _T('compteurgraphique:CG_valider');
 	$retour .= '"></div></form>';
         $retour .= fin_block();
         $retour .= "<br />&nbsp;<br />";
@@ -347,16 +334,14 @@ if (isset($CG_statut)) {
 }
 
 else {
-    $requete_rub = "SELECT statut,longueur,habillage FROM ".$CG_nom_table." WHERE id_rubrique = ".$CG_idr;
-    $resultat_rub = spip_query($requete_rub);
-    $resultat_rub_tableau = spip_fetch_array($resultat_rub);
+    $resultat_rub = sql_select("statut,longueur,habillage",$CG_nom_table,"id_rubrique = $CG_idr");
+    $resultat_rub_tableau = sql_fetch($resultat_rub);
     $CG_rub_statut = $resultat_rub_tableau['statut'];
     $CG_rub_longueur = $resultat_rub_tableau['longueur'];
     $CG_rub_habillage = $resultat_rub_tableau['habillage'];
     
-    $requete_tous = "SELECT habillage FROM ".$CG_nom_table." WHERE statut = 6";
-    $resultat_tous = spip_query($requete_tous);
-    $resultat_tous_tableau = spip_fetch_array($resultat_tous);
+    $resultat_tous = sql_select("habillage",$CG_nom_table,"statut = 6");
+    $resultat_tous_tableau = sql_fetch($resultat_tous);
     $CG_tous_habillage = $resultat_tous_tableau['habillage'];
     
     if ($CG_rub_statut==4){

@@ -12,9 +12,8 @@
         habillage INTEGER DEFAULT NULL,
         PRIMARY KEY (id_compteur)
         )';
-        $resCreateTableQuery = spip_query($createTableQuery);
-        $createCompteurTechnique = "INSERT INTO ".$CompteurGraphiqueTable." VALUES (NULL,0,NULL,NULL,10,NULL,NULL)";
-        $resCompteurTechnique = spip_query($createCompteurTechnique);
+        $resCreateTableQuery = sql_query($createTableQuery);
+        $resCompteurTechnique = sql_insertq($CompteurGraphiqueTable,array("decompte" => 0,"statut" => 10));
         if ($resCreateTableQuery != 1) {
             $retour .= "La table ".$CompteurGraphiqueTable." n'existe pas et sa cr&eacute;ation est impossible, le plugin Compteur Graphique ne peut pas fonctionner. Merci de cr&eacute;er la table manuellement ou de <a href=\"?exec=admin_plugin\">d&eacute;sactiver le plugin</a>.";
             spip_log('impossible de cr&eacute;er la table '.$CompteurGraphiqueTable, 'mysql');
@@ -27,8 +26,7 @@
     return $retour;
     }
     function CompteurGraphiqueTable_Verif_Initiale ($CompteurGraphiqueTable) {
-    $query_verif = 'SELECT * FROM '.$CompteurGraphiqueTable.' LIMIT 1';
-    $res_verif = spip_query($query_verif);
+    $res_verif = sql_select("*",$CompteurGraphiqueTable,'','','',1);
     if ($res_verif == '') {return create_CompteurGraphiqueTable($CompteurGraphiqueTable);}
     else {return;}
     }

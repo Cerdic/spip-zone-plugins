@@ -1,10 +1,11 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip("inc/presentation");
 
 function calcule_repertoire_max() {
     $i=0;
     $j=0;
-    $cheminCG_rel="../lib/compteurgraphique_pack/";
+    $cheminCG_rel=_DIR_PLUGIN_COMPTEURGRAPHIQUE."img_pack/";
     while ($j==0) {
         $i++;
         if (file_exists($cheminCG_rel.$i.'/0.gif') || file_exists($cheminCG_rel.$i.'/0.png')) {}
@@ -16,91 +17,91 @@ function calcule_repertoire_max() {
 
 function exec_compteur_graphique(){
 
-    include_spip("inc/presentation");
-    $CG_nom_table = "ext_compteurgraphique";
+ 
+
+    $CG_nom_table = "spip_compteurgraphique";
     
     if (($_POST['drop_table_CG']) == 2) {
-    spip_query('DROP TABLE ext_compteurgraphique');
+    sql_query('DROP TABLE spip_compteurgraphique');
     }
 
     if (isset($_POST['tous_habillage']) && is_numeric($_POST['tous_habillage']) && is_numeric($_POST['tous_chiffres'])) {
-        $requete_nouveau_tous = "INSERT INTO ".$CG_nom_table." VALUES (NULL,NULL,NULL,NULL,6,".$_POST['tous_chiffres'].",".$_POST['tous_habillage'].")";
-        $resultat_nouveau_tous = spip_query($requete_nouveau_tous);
+        $resultat_nouveau_tous = sql_insertq($CG_nom_table,array("statut" => 6,"longueur" => $_POST['tous_chiffres'],"habillage" => $_POST['tous_habillage']));
     }
     
     if (isset($_POST['total_habillage']) && is_numeric($_POST['total_habillage']) && is_numeric($_POST['total_chiffres'])) {
-        $requete_nouveau_total = "INSERT INTO ".$CG_nom_table." VALUES (NULL,NULL,NULL,NULL,7,".$_POST['total_chiffres'].",".$_POST['total_habillage'].")";
-        $resultat_nouveau_total = spip_query($requete_nouveau_total);
+        $resultat_nouveau_total = sql_insertq($CG_nom_table,array("statut" => 7,"longueur" => $_POST['total_chiffres'],"habillage" => $_POST['total_habillage']));
     }
     
      if (isset($_POST['changement_habillage_total']) && is_numeric($_POST['changement_habillage_total'])) {
-        $requete_changement_habillage_total = "UPDATE ".$CG_nom_table." SET habillage = ".$_POST['changement_habillage_total']." WHERE statut = 7";
-        $resultat_changement_habillage_total = spip_query($requete_changement_habillage_total);
+        $resultat_changement_habillage_total = sql_updateq($CG_nom_table,array("habillage" => $_POST['changement_habillage_total']),"statut = 7");
     }
     
     if (isset($_POST['changement_habillage_tous']) && is_numeric($_POST['changement_habillage_tous'])) {
-        $requete_changement_habillage_tous = "UPDATE ".$CG_nom_table." SET habillage = ".$_POST['changement_habillage_tous']." WHERE statut = 6";
-        $resultat_changement_habillage_tous = spip_query($requete_changement_habillage_tous);
+        $resultat_changement_habillage_tous = sql_updateq($CG_nom_table,array("habillage" => $_POST['changement_habillage_tous']),"statut = 6");
     }
     
     if (isset($_POST['changement_chiffres_total']) && is_numeric($_POST['changement_chiffres_total'])) {
-        $requete_changement_chiffres_tous = "UPDATE ".$CG_nom_table." SET longueur = ".$_POST['changement_chiffres_total']." WHERE statut = 7";
-        $resultat_changement_chiffres_tous = spip_query($requete_changement_chiffres_tous);
+        $resultat_changement_chiffres_tous = sql_updateq($CG_nom_table,array("longueur" => $_POST['changement_chiffres_total']),"statut = 7");
     }
     
     if (isset($_POST['changement_chiffres_tous']) && is_numeric($_POST['changement_chiffres_tous'])) {
-        $requete_changement_chiffres_tous = "UPDATE ".$CG_nom_table." SET longueur = ".$_POST['changement_chiffres_tous']." WHERE statut = 6";
-        $resultat_changement_chiffres_tous = spip_query($requete_changement_chiffres_tous);
+        $resultat_changement_chiffres_tous = sql_updateq($CG_nom_table,array("longueur" => $_POST['changement_chiffres_tous']),"statut = 6");
     }
 
     if (is_numeric($_POST['suppression_total']) && ($_POST['suppression_total']==1)) {
-        $requete_suppr_tous = "DELETE FROM ".$CG_nom_table." WHERE statut = 7";
-        $resultat_suppr_tous = spip_query($requete_suppr_tous);
+        $resultat_suppr_tous = sql_delete($CG_nom_table,"statut = 7");
     }
     
     if (is_numeric($_POST['suppression_tous']) && ($_POST['suppression_tous']==1)) {
-        $requete_suppr_tous = "DELETE FROM ".$CG_nom_table." WHERE statut = 6";
-        $resultat_suppr_tous = spip_query($requete_suppr_tous);
+        $resultat_suppr_tous = sql_query($CG_nom_table,"statut = 6");
     }
 
 
-    $icone = "../"._DIR_PLUGIN_COMPTEURGRAPHIQUE."/img_pack/CompteurGraphique.gif";
-    $cheminCG_rel="../lib/compteurgraphique_pack/";
+    $icone = "../"._DIR_PLUGIN_COMPTEURGRAPHIQUE."img_pack/CompteurGraphique.gif";
+    $cheminCG_rel=_DIR_PLUGIN_COMPTEURGRAPHIQUE."img_pack/";
 
-	debut_page(_T('compteurgraphique:CG_nom'));
-    gros_titre(_T('compteurgraphique:CG_nom'));
-    debut_gauche();
-    debut_droite();
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('compteurgraphique:CG_nom') , '', '', '');
+	echo gros_titre(_T('compteurgraphique:CG_nom'),'',false);
+	echo debut_gauche("",true);
+	echo debut_droite("",true);
+	
+	if ($GLOBALS['connect_statut'] != "0minirezo" OR !$GLOBALS["connect_toutes_rubriques"]) {
+	echo _T('avis_non_acces_page');
+	echo fin_gauche(), fin_page();
+	exit;
+    }	
+    
      if ( ($_POST['creer_table']) == 1) {
 	include_spip("inc/CompteurGraphique_VerifBase");
 	echo create_CompteurGraphiqueTable($CG_nom_table);
     }
     /* On teste la présence de la table dans la base de données, dans le cas contraire, on propose un formulaire de création */
-    $verif_presence_table = spip_query("SELECT id_compteur FROM ".$CG_nom_table." WHERE statut=10");
+    $verif_presence_table = sql_select("id_compteur",$CG_nom_table,"statut=10");
 if ($verif_presence_table == '') {
-        debut_cadre_trait_couleur('', false, '', _T('compteurgraphique:CG_creer_table'));
+        echo debut_cadre_trait_couleur('', true, '', _T('compteurgraphique:CG_creer_table'));
             echo '<div style="text-align:center;">'._T('compteurgraphique:CG_creer_la_table').'<br />&nbsp;<br />';
             echo '<form method="POST" action="'.generer_url_ecrire("compteur_graphique").'">';
             echo '<input type="hidden" name="creer_table" value="1"><input type="submit" value="'._T('compteurgraphique:CG_creer').'"></form></div>';
-        fin_cadre_trait_couleur();
+        echo fin_cadre_trait_couleur(true);
 	}
 else {
-    debut_cadre_trait_couleur($icone, false, '', _T('compteurgraphique:CG_exec_titre'));
+    echo debut_cadre_trait_couleur($icone, true, '', _T('compteurgraphique:CG_exec_titre'));
     echo "<br />";
 
 	if (($_POST['drop_table_CG']) == 1) {
-	debut_cadre_enfonce('', false, '', _T('compteurgraphique:CG_suppr_table_confirm'));
+	echo debut_cadre_enfonce('', true, '', _T('compteurgraphique:CG_suppr_table_confirm'));
         echo _T('compteurgraphique:CG_suppr_table_confirm_explic');
 	echo '<form method="POST" action="'.generer_url_ecrire("compteur_graphique").'">';
 	echo '<input type="hidden" name="drop_table_CG" value="2">';
 	echo '<div style="text-align:center;"><br /><input type="submit" value="'._T('compteurgraphique:CG_confirmer').'"></div>';
 	echo '</form>';
-        fin_cadre_enfonce();}
+        echo fin_cadre_enfonce(true);}
 
-        debut_cadre_sous_rub('', false, '',_T('compteurgraphique:CG_exec_tous_articles'));
-        $requete1="SELECT longueur,habillage FROM ".$CG_nom_table." WHERE statut = 6";
-        $resultat1= spip_query($requete1);
-        $resultat1_tableau = spip_fetch_array($resultat1);       
+        echo debut_cadre_sous_rub('', true, '',_T('compteurgraphique:CG_exec_tous_articles'));
+        $resultat1= sql_select("longueur,habillage",$CG_nom_table,"statut = 6");
+        $resultat1_tableau = sql_fetch($resultat1);
         $CG_tous_longueur = $resultat1_tableau['longueur'];
         $CG_tous_habillage = $resultat1_tableau['habillage'];
         if (isset($CG_tous_habillage)) {
@@ -194,13 +195,13 @@ else {
             <?php echo fin_block();
         }
         
-        fin_cadre_sous_rub();
+        echo fin_cadre_sous_rub(true);
         echo "<br />";
 
-	debut_cadre_enfonce('', false, '', _T('compteurgraphique:CG_def_compteur_tot'));
+	echo debut_cadre_enfonce('', true, '', _T('compteurgraphique:CG_def_compteur_tot'));
 	
-	$test_compteur_total = spip_query("SELECT habillage,longueur FROM ext_compteurgraphique WHERE statut = 7");
-	$resultat_total = spip_fetch_array($test_compteur_total);       
+	$test_compteur_total = sql_select("habillage,longueur",$CG_nom_table,"statut = 7");
+	$resultat_total = sql_fetch($test_compteur_total);       
         $CG_total_longueur = $resultat_total['longueur'];
         $CG_total_habillage = $resultat_total['habillage'];
 	if ($CG_total_habillage=='') {	
@@ -293,23 +294,23 @@ else {
 	}
 	
 	echo fin_block();
-        fin_cadre_enfonce();
+        echo fin_cadre_enfonce(true);
 	echo '<br />';
         
 	
 	
 	if ($_POST['config_CG']=='oui') {
-		spip_query ("DELETE FROM ".$CG_nom_table." WHERE statut = 9");
+		sql_delete($CG_nom_table,"statut = 9");
 	}
 	if ($_POST['config_CG']=='non') {
-		spip_query ("DELETE FROM ".$CG_nom_table." WHERE statut = 9");
-		spip_query ("INSERT INTO ".$CG_nom_table." VALUES (NULL,NULL,NULL,NULL,9,NULL,NULL)");
+		sql_delete($CG_nom_table,"statut = 9");
+		sql_insertq($CG_nom_table,array("statut" => 9));
 	}
-	$test_config = spip_query("SELECT id_compteur FROM ".$CG_nom_table." WHERE statut = 9");
-	$tab_config = spip_fetch_array($test_config);
+	$test_config = sql_select("id_compteur",$CG_nom_table,"statut = 9");
+	$tab_config = sql_fetch($test_config);
 	$res_config = $tab_config['id_compteur'];
 	
-        debut_cadre_enfonce('', false, '', _T('compteurgraphique:CG_config_CG'));
+        echo debut_cadre_enfonce('', true, '', _T('compteurgraphique:CG_config_CG'));
         echo _T('compteurgraphique:CG_config_CG_explic');
 	echo '<form method="POST" action="'.generer_url_ecrire("compteur_graphique").'"><div style="text-align:center;">';
 	echo _T('compteurgraphique:CG_oui').'<input type="radio" name="config_CG" value="oui" ';
@@ -320,14 +321,14 @@ else {
 	echo '></div><hr />';
 	
 	if ($_POST['genere_CG_miniatures']=='gif') {
-		spip_query ("DELETE FROM ".$CG_nom_table." WHERE statut = 11");
+		sql_delete($CG_nom_table,"statut = 11");
 	}
 	if ($_POST['genere_CG_miniatures']=='png') {
-		spip_query ("DELETE FROM ".$CG_nom_table." WHERE statut = 11");
-		spip_query ("INSERT INTO ".$CG_nom_table." VALUES (NULL,NULL,NULL,NULL,11,NULL,NULL)");
+		sql_delete($CG_nom_table,"statut = 11");
+		sql_insertq($CG_nom_table,array("statut" => 11));
 	}
-	$test1 = spip_query("SELECT id_compteur FROM ".$CG_nom_table." WHERE statut = 11");
-	$tab1 = spip_fetch_array($test1);
+	$test1 = sql_select("id_compteur",$CG_nom_table,"statut = 11");
+	$tab1 = sql_fetch($test1);
 	$res1 = $tab1['id_compteur'];
 	if (isset($res1)) {$t1GIF=''; $t1PNG='checked';} else {$t1GIF='checked'; $t1PNG='';}
 	echo _T('compteurgraphique:CG_config_genere');
@@ -337,14 +338,14 @@ else {
 	echo $t1PNG.'></div><br /><hr />';
 	
 	if ($_POST['genere_CG']=='gif') {
-		spip_query ("DELETE FROM ".$CG_nom_table." WHERE statut = 12");
+		sql_delete($CG_nom_table,"statut = 12");
 	}
 	if ($_POST['genere_CG']=='png') {
-		spip_query ("DELETE FROM ".$CG_nom_table." WHERE statut = 12");
-		spip_query ("INSERT INTO ".$CG_nom_table." VALUES (NULL,NULL,NULL,NULL,12,NULL,NULL)");
+		sql_delete($CG_nom_table,"statut = 12");
+		sql_insertq($CG_nom_table,array("statut" => 12));
 	}
-	$test2 = spip_query("SELECT id_compteur FROM ".$CG_nom_table." WHERE statut = 12");
-	$tab2 = spip_fetch_array($test2);
+	$test2 = sql_select("id_compteur",$CG_nom_table,"statut = 12");
+	$tab2 = sql_fetch($test2);
 	$res2 = $tab2['id_compteur'];
 	if (isset($res2)) {$t2GIF=''; $t2PNG='checked';} else {$t2GIF='checked'; $t2PNG='';}
 	echo _T('compteurgraphique:CG_config_genere_final');
@@ -354,14 +355,14 @@ else {
 	echo $t2PNG.' ></div><br /><hr />';
 	
 	if ($_POST['transparent_CG']=='oui') {
-		spip_query ("DELETE FROM ".$CG_nom_table." WHERE statut = 13");
+		sql_delete($CG_nom_table,"statut = 13");
 	}
 	if ($_POST['transparent_CG']=='non') {
-		spip_query ("DELETE FROM ".$CG_nom_table." WHERE statut = 13");
-		spip_query ("INSERT INTO ".$CG_nom_table." VALUES (NULL,NULL,NULL,NULL,13,NULL,NULL)");
+		sql_delete($CG_nom_table,"statut = 13");
+		sql_insertq($CG_nom_table,array("statut" => 13));
 	}
-	$test3 = spip_query("SELECT id_compteur FROM ".$CG_nom_table." WHERE statut = 13");
-	$tab3 = spip_fetch_array($test3);
+	$test3 = sql_select("id_compteur",$CG_nom_table,"statut = 13");
+	$tab3 = sql_fetch($test3);
 	$res3 = $tab3['id_compteur'];
 	if (isset($res3)) {$t3OUI=''; $t2NON='checked';} else {$t2OUI='checked'; $t2NON='';}
 	echo _T('compteurgraphique:CG_config_transparence');
@@ -373,18 +374,18 @@ else {
 	
 	echo '<div style="text-align:center;"><input type="submit" value="'._T('compteurgraphique:CG_valider').'"></div>';
 	echo '</form>';
-        fin_cadre_enfonce();
+        echo fin_cadre_enfonce(true);
 	echo '<br />';
 	
-        debut_cadre_enfonce('', false, '', _T('compteurgraphique:CG_drop_table'));
+        echo debut_cadre_enfonce('', true, '', _T('compteurgraphique:CG_drop_table'));
         echo _T('compteurgraphique:CG_drop_table_explication');
 	echo '<form method="POST" action="'.generer_url_ecrire("compteur_graphique").'">';
 	echo '<input type="hidden" name="drop_table_CG" value="1">';
 	echo '<div style="text-align:center;"><br /><input type="submit" value="'._T('compteurgraphique:CG_suppr').'"></div>';
 	echo '</form>';
-        fin_cadre_enfonce();
+        echo fin_cadre_enfonce(true);
         
-    fin_cadre_trait_couleur();
+    echo fin_cadre_trait_couleur(true);
 }
     echo fin_gauche(), fin_page();
 }

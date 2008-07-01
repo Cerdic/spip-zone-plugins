@@ -1,38 +1,37 @@
 <?php
 function CompteurGraphique_install($action){
-	$CompteurGraphiqueTable = 'ext_compteurgraphique';
+	$CompteurGraphiqueTable = 'spip_compteurgraphique';
 	switch ($action){
 	
 	case 'test':
-	$CG_verif = spip_query('SELECT id_compteur FROM '.$CompteurGraphiqueTable.' WHERE statut = 10');
-	$CG_ver_tab = spip_fetch_array($CG_verif);
+	if (!opendir(_DIR_IMG."CompteurGraphique")) {mkdir(_DIR_IMG."CompteurGraphique");}
+	$CG_verif_ancien = sql_select("id_compteur",$CompteurGraphiqueTable,"statut = 10");
+	$CG_ver_tab_ancien = sql_fetch($CG_verif_ancien);
+	$CG_id_compteur_ancien = $CG_ver_tab_ancien['id_compteur'];
+	if (isset($CG_id_compteur_ancien)) {
+	sql_query('RENAME TABLE ext_compteurgraphique TO spip_compteurgraphique');
+	}	
+	$CG_verif = sql_select("id_compteur",$CompteurGraphiqueTable,"statut = 10");
+	$CG_ver_tab = sql_fetch($CG_verif);
 	$CG_id_compteur = $CG_ver_tab['id_compteur'];
 	if (!isset($CG_id_compteur)) {return false;}
 	else {return true;}
 	break;
 
 	case 'install':
-	$CG_verif = spip_query('SELECT id_compteur FROM '.$CompteurGraphiqueTable.' WHERE statut = 10');
-	$CG_ver_tab = spip_fetch_array($CG_verif);
+	$CG_verif = sql_select("id_compteur",$CompteurGraphiqueTable,"statut = 10");
+	$CG_ver_tab = sql_fetch($CG_verif);
 	$CG_id_compteur = $CG_ver_tab['id_compteur'];
 	if (!isset($CG_id_compteur)) {
-	$createTableQuery = 'CREATE TABLE IF NOT EXISTS '.$CompteurGraphiqueTable.'
-	(id_compteur INTEGER NOT NULL AUTO_INCREMENT,
-	decompte INTEGER DEFAULT NULL,
-	id_article INTEGER DEFAULT NULL,
-	id_rubrique INTEGER DEFAULT NULL,
-	statut INTEGER DEFAULT NULL,
-	longueur INTEGER DEFAULT NULL,
-	habillage INTEGER DEFAULT NULL,
-	PRIMARY KEY (id_compteur)
-	)';
-	spip_query($createTableQuery);
-	spip_query("INSERT INTO ".$CompteurGraphiqueTable." VALUES (NULL,0,NULL,NULL,10,NULL,NULL)");
+	include_spip('base/compteurgraphique');
+	include_spip('base/create');
+	creer_base();
+	sql_insertq($CompteurGraphiqueTable,array("decompte" => 0,"statut" => 10));
 	}
 	break;
        
 	case 'uninstall':
-	spip_query('DROP TABLE ext_compteurgraphique');
+	sql_query('DROP TABLE spip_compteurgraphique');
 	break;
 	}
 }

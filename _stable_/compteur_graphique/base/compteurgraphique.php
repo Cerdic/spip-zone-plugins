@@ -11,7 +11,7 @@ $CompteurGraphiqueTable = array(
 $CompteurGraphiqueTable_key = array( 
 "PRIMARY KEY" => "id_compteur");
 
-$GLOBALS['tables_principales']['ext_compteurgraphique'] = 
+$GLOBALS['tables_principales']['spip_compteurgraphique'] = 
     array('field' => &$CompteurGraphiqueTable, 'key' => &$CompteurGraphiqueTable_key);
 
 ?>

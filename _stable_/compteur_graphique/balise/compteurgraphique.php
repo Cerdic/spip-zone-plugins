@@ -15,44 +15,40 @@ function balise_COMPTEURGRAPHIQUE_stat($args,$filtres) {
 
 function balise_COMPTEURGRAPHIQUE_dyn($num_compt) {
     $CG_ida = $GLOBALS['id_article'];
-    $CG_nom_table = "ext_compteurgraphique";
+    $CG_nom_table = "spip_compteurgraphique";
     include_spip('inc/CompteurGraphique_inclusions');
     
     //On récupère le numéro du compteur technique permettant la génération des compteurs
-    $requete1 = "SELECT decompte FROM ".$CG_nom_table." WHERE statut = 10";
-    $resultat1 = spip_query($requete1);
-    $resultat1_tableau = spip_fetch_array($resultat1);
+    $resultat1 = sql_select("decompte",$CG_nom_table,"statut = 10");
+    $resultat1_tableau = sql_fetch($resultat1);
     $CGtechnique = $resultat1_tableau['decompte'];
     
     //Etude du cas où un numéro de compteur est défini dans le paramètre de la balise : statut = 7 : la donnée statut est inutilisée ici
     if ($num_compt!='') {
-        $requete2 = "SELECT decompte,longueur,habillage,statut FROM ".$CG_nom_table." WHERE id_compteur =".$num_compt;
-        $resultat2 = spip_query($requete2);
+        $resultat2 = sql_select("decompte,longueur,habillage,statut",$CG_nom_table,"id_compteur = $num_compt");
         //On vérifie que le compteur n'a pas été supprimé dans la base de données
         if ($resultat2!=''){
-            $resultat2_tableau = spip_fetch_array($resultat2);
+            $resultat2_tableau = sql_fetch($resultat2);
             $CG_longueur = $resultat2_tableau['longueur'];
             $CG_habillage = $resultat2_tableau['habillage'];
             $CG_decompte = $resultat2_tableau['decompte'];
             $CG_statut = $resultat2_tableau['statut'];
             //On traite ici le cas de l'affichage du nombre total de visites du site
             if ($CG_statut==7) {
-                	$CGstat_result = spip_query("SELECT SUM(visites) AS total_absolu FROM spip_visites");
-                	if ($CGrow = spip_fetch_array($CGstat_result)) {
+                	$CGstat_result = sql_query("SELECT SUM(visites) AS total_absolu FROM spip_visites");
+                	if ($CGrow = sql_fetch($CGstat_result)) {
 		                $CG_decompte = $CGrow['total_absolu'];
 	                }
             }
             $CGtechnique++;
             $CGtechnique = $CGtechnique%100;
-            $requete_incrementation_technique = "UPDATE ".$CG_nom_table." SET decompte = ".$CGtechnique." WHERE statut = 10";
-            spip_query($requete_incrementation_technique);
+            sql_updateq($CG_nom_table,array("decompte" => $CGtechnique),"statut = 10");
             $CG_destruction = ($CGtechnique+50)%100;
-            $CG_fichier = "IMG/CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
+            $CG_fichier = _DIR_IMG."CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
             if (file_exists($CG_fichier)) {unlink($CG_fichier);}
             if ($CG_statut!=7) {
                 $CG_decompte++;
-                $requete_incrementation_decompte = "UPDATE ".$CG_nom_table." SET decompte=".$CG_decompte." WHERE id_compteur = ".$num_compt;
-                spip_query($requete_incrementation_decompte);
+                sql_updateq($CG_nom_table,array("decompte" => $CG_decompte),"id_compteur = $num_compt");
             }
             $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_decompte,$CG_habillage,$CGtechnique);
             return array('formulaires/compteurgraphique',0,array('CG'=>$envoi_final));
@@ -66,19 +62,18 @@ function balise_COMPTEURGRAPHIQUE_dyn($num_compt) {
         // Etudes des cas où on est dans un article et le numéro de compteur n'est pas défini
         if (isset($CG_ida)) {
         //On récupère les données concernant l'article en cours
-            $requete3 = "SELECT id_rubrique,visites FROM spip_articles WHERE id_article =".$CG_ida;
-            $resultat3 = spip_query($requete3);
-            $resultat3_tableau = spip_fetch_array($resultat3);
+            $resultat3 = sql_select("id_rubrique,visites","spip_articles","id_article = $CG_ida");
+            $resultat3_tableau = sql_fetch($resultat3);
             $CG_idr = $resultat3_tableau['id_rubrique'];
             $CG_vis = $resultat3_tableau['visites'];
             
         //On récupère les stats du jour pour avoir le nombre total réel de visite
         global $aff_jours;
         if (!($aff_jours = intval($aff_jours))) {$aff_jours = 105;}
-	    $result=spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM spip_visites_articles WHERE id_article = ".$CG_ida." AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date");
+	    $result=sql_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM spip_visites_articles WHERE id_article = ".$CG_ida." AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date");
 	    $date_debut = '';
 	    $log = array();
-	    while ($row = spip_fetch_array($result)) {
+	    while ($row = sql_fetch($result)) {
 		    $date = $row['date_unix'];
 		    if (!$date_debut) $date_debut = $date;
 		    $log[$date] = $row['visites'];
@@ -95,9 +90,8 @@ function balise_COMPTEURGRAPHIQUE_dyn($num_compt) {
 		}
             
         //On récupère les données de la table des compteurs pour vérifier si l'identifiant de l'article y est défini 
-            $requete4 = "SELECT statut,decompte,longueur,habillage FROM ".$CG_nom_table." WHERE id_article =".$CG_ida;
-            $resultat4 = spip_query($requete4);
-            $resultat4_tableau = spip_fetch_array($resultat4);
+            $resultat4 = sql_select("statut,decompte,longueur,habillage",$CG_nom_table,"id_article = $CG_ida");
+            $resultat4_tableau = sql_fetch($resultat4);
             $CG_statut = $resultat4_tableau['statut'];
             $CG_decompte = $resultat4_tableau['decompte'];
             $CG_longueur = $resultat4_tableau['longueur'];
@@ -109,10 +103,9 @@ function balise_COMPTEURGRAPHIQUE_dyn($num_compt) {
                 if ($CG_statut==1) {
                     $CGtechnique++;
                     $CGtechnique = $CGtechnique%100;
-                    $requete_incrementation_technique = "UPDATE ".$CG_nom_table." SET decompte = ".$CGtechnique." WHERE statut = 10";
-                    spip_query($requete_incrementation_technique);
+                    sql_updateq($CG_nom_table,array("decompte" => $CGtechnique),"statut = 10");
                     $CG_destruction = ($CGtechnique+50)%100;
-                    $CG_fichier = "IMG/CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
+                    $CG_fichier = _DIR_IMG."CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
                     if (file_exists($CG_fichier)) {unlink($CG_fichier);}
                     $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_vis+$visites_today,$CG_habillage,$CGtechnique);
                     return array('formulaires/compteurgraphique',0,array('CG'=>$envoi_final));
@@ -122,14 +115,12 @@ function balise_COMPTEURGRAPHIQUE_dyn($num_compt) {
                 if ($CG_statut==2) {
                     $CGtechnique++;
                     $CGtechnique = $CGtechnique%100;
-                    $requete_incrementation_technique = "UPDATE ".$CG_nom_table." SET decompte = ".$CGtechnique." WHERE statut = 10";
-                    spip_query($requete_incrementation_technique);
+                    sql_updateq($CG_nom_table,array("decompte" => $CGtechnique),"statut = 10");
                     $CG_destruction = ($CGtechnique+50)%100;
-                    $CG_fichier = "IMG/CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
+                    $CG_fichier = _DIR_IMG."CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
                     if (file_exists($CG_fichier)) {unlink($CG_fichier);}
                     $CG_decompte++;
-                    $requete_incrementation_decompte = "UPDATE ".$CG_nom_table." SET decompte = ".$CG_decompte." WHERE id_article = ".$CG_ida;
-                    spip_query($requete_incrementation_decompte);
+                    sql_updateq($CG_nom_table,array("decompte" => $CG_decompte),"id_article = $CG_ida");
                     $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_decompte,$CG_habillage,$CGtechnique);
                     return array('formulaires/compteurgraphique',0,array('CG'=>$envoi_final));
                     }                        
@@ -141,9 +132,8 @@ function balise_COMPTEURGRAPHIQUE_dyn($num_compt) {
             }
             //Sinon, on réalise un traitement pour la rubrique
             else {
-                $requete5 = "SELECT statut,decompte,longueur,habillage FROM ".$CG_nom_table." WHERE id_rubrique = ".$CG_idr;
-                $resultat5 = spip_query($requete5);
-                $resultat5_tableau= spip_fetch_array($resultat5);
+                $resultat5 = sql_select("statut,decompte,longueur,habillage",$CG_nom_table,"id_rubrique = $CG_idr");
+                $resultat5_tableau= sql_fetch($resultat5);
                 $CG_statut = $resultat5_tableau['statut'];
                 $CG_decompte = $resultat5_tableau['decompte'];
                 $CG_longueur = $resultat5_tableau['longueur'];
@@ -154,10 +144,9 @@ function balise_COMPTEURGRAPHIQUE_dyn($num_compt) {
                     if ($CG_statut==4) { 
                         $CGtechnique++;
                         $CGtechnique = $CGtechnique%100;
-                        $requete_incrementation_technique = "UPDATE ".$CG_nom_table." SET decompte = ".$CGtechnique." WHERE statut = 10";
-                        spip_query($requete_incrementation_technique);
+                        sql_updateq($CG_nom_table,array("decompte" => $CGtechnique),"statut = 10");
                         $CG_destruction = ($CGtechnique+50)%100;
-                        $CG_fichier = "IMG/CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
+                        $CG_fichier = _DIR_IMG."CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
                         if (file_exists($CG_fichier)) {unlink($CG_fichier);}
                         $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_vis+$visites_today,$CG_habillage,$CGtechnique);
                         return array('formulaires/compteurgraphique',0,array('CG'=>$envoi_final));
@@ -170,18 +159,16 @@ function balise_COMPTEURGRAPHIQUE_dyn($num_compt) {
             
             //Enfin, s'il n'y a pas d'entrée article, ni rubrique, on cherche s'il y a un modèle de compteur défini pour tous les articles (statut = 6)
                 else {
-                    $requete6 = "SELECT longueur,habillage FROM ".$CG_nom_table." WHERE statut = 6";
-                    $resultat6= spip_query($requete6);
-                    $resultat6_tableau = spip_fetch_array($resultat6);
+                    $resultat6= sql_select("longueur,habillage",$CG_nom_table,"statut = 6");
+                    $resultat6_tableau = sql_fetch($resultat6);
                     $CG_longueur = $resultat6_tableau['longueur'];
                     $CG_habillage = $resultat6_tableau['habillage'];
                     if (isset($CG_longueur)) {
                         $CGtechnique++;
                         $CGtechnique = $CGtechnique%100;
-                        $requete_incrementation_technique = "UPDATE ".$CG_nom_table." SET decompte = ".$CGtechnique." WHERE statut = 10";
-                        spip_query($requete_incrementation_technique);
+                        sql_updateq($CG_nom_table,array("decompte" => $CGtechnique),"statut = 10");
                         $CG_destruction = ($CGtechnique+50)%100;
-                        $CG_fichier = "IMG/CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
+                        $CG_fichier = _DIR_IMG."CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
                         if (file_exists($CG_fichier)) {unlink($CG_fichier);}
                         $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_vis+$visites_today,$CG_habillage,$CGtechnique);
                         return array('formulaires/compteurgraphique',0,array('CG'=>$envoi_final));
