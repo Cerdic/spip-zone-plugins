@@ -49,14 +49,14 @@ function affiche_arborescence($cfg='') {
 					function cfg_arbo(){
 						jQuery('#cfg_arbo_$hash ul').hide();
 						jQuery('#cfg_arbo_$hash h5')
-						.prepend('<b>[+] </b>')
+						.prepend('<strong>[+] <\/strong>')
 						.toggle(
 						  function () {
-							$(this).children('b').text('[-] ');
+							$(this).children('strong').text('[-] ');
 							$(this).next('ul').show();
 						  },
 						  function () {
-							$(this).children('b').text('[+] ');
+							$(this).children('strong').text('[+] ');
 							$(this).next('ul').hide();
 						  });						
 					}
