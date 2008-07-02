@@ -340,14 +340,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$ret .= "&nbsp;$retG</td>";
 	$col++;
 
-	// Un petit bouton d'aide en partie privee...
-	if ($ecrire) {
-		$ret .= "\n<td style='text-align:$spip_lang_right;' valign='middle'>";
-		$col++;
-		$ret .= aide("raccourcis");
-		$ret .= "&nbsp;";
-		$ret .= "</td>";
-	}
 	$ret .= "</tr>";
 
 	// Sur les forums publics, petite barre d'aide en survol des icones
