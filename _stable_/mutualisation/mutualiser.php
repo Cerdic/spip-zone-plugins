@@ -152,17 +152,14 @@ function demarrer_site($site = '', $options = array()) {
 
 	}
 
-
 	/*
 	 * Tout est pret, on execute la mutualisation.
 	 */
 	define('_SPIP_PATH',
-		$e . 'dist/:' .  // + 
 		$e . ':' .
 		_DIR_RACINE .':' . 
 		_DIR_RACINE .'dist/:' .
 		_DIR_RACINE .'prive/:' .
-		_DIR_RACINE .'dist/javascript/:' . // +
 		_DIR_RESTREINT);
 
 	// definir une constante qui contient l'adresse du repertoire du site mutualise
