@@ -20,6 +20,7 @@ _ Help to use the API in several plugins (Gis, Geoforms...).
  <lien>http://www.escoitar.org/documentacion/spip.php?article175</lien>
  <install>base/geomap_upgrade.php</install>
  <fonctions>public/geomap_balises.php</fonctions>
+ <options>geomap_options.php</options>
  <prefix>geomap</prefix>
  <pipeline>
 		<nom>ajouter_boutons</nom>
