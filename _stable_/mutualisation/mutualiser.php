@@ -161,6 +161,7 @@ function demarrer_site($site = '', $options = array()) {
 		$e . ':' .
 		_DIR_RACINE .':' . 
 		_DIR_RACINE .'dist/:' .
+		_DIR_RACINE .'prive/:' .
 		_DIR_RACINE .'dist/javascript/:' . // +
 		_DIR_RESTREINT);
 
