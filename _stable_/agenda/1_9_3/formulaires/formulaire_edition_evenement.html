@@ -85,7 +85,7 @@ $('#afficher_horaire_fin_evenement').show();} else{$('#afficher_horaire_debut_ev
 [(#REM) MOTS CLES : chaque groupe de mot cle attribuable a un evenement agenda
 	donne un select ]
 <span class='agenda_mots_cles'>
-<BOUCLE_groupes(GROUPES_MOTS){evenements='oui'}>
+<BOUCLE_groupes(GROUPES_MOTS){tables==evenements}>
 	<select name='evenement_groupe_mot_select_#ID_GROUPE[]' class='fondl verdana1 agenda_mot_cle_select'[
 	(#UNSEUL|=={'oui'}|?{'',' '}) multiple='multiple' size='4']>
 	[<option value='x' style='font-variant: small-caps;' [
