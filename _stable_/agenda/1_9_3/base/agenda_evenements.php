@@ -70,7 +70,7 @@ global $table_des_tables;
 $table_des_tables['evenements']='evenements';
 
 
-
+/*
 // Extension de la table des groupes de mots cles
 $spip_groupes_mots = array(
 		"id_groupe"	=> "bigint(21) NOT NULL",
@@ -99,6 +99,7 @@ $spip_groupes_mots_key = array(
 
 $tables_principales['spip_groupes_mots'] =
 	array('field' => &$spip_groupes_mots, 'key' => &$spip_groupes_mots_key);
+*/
 
 global  $table_des_traitements;
 $table_des_traitements['LIEU'][]= 'propre(%s)';

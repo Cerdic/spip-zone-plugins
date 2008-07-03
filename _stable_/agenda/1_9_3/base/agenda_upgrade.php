@@ -1,6 +1,6 @@
 <?php
 	
-	$GLOBALS['agenda_base_version'] = 0.13;
+	$GLOBALS['agenda_base_version'] = 0.18;
 	function Agenda_verifier_base(){
 		$version_base = $GLOBALS['agenda_base_version'];
 		$current_version = 0.0;
@@ -40,6 +40,14 @@
 				include_spip('base/abstract_sql');
 				creer_base();
 				ecrire_meta('agenda_base_version',$current_version=0.13,'non');
+			}
+			if ($current_version<0.18){
+				include_spip('base/create');
+				include_spip('base/abstract_sql');
+				creer_base();
+				sql_update('spip_groupes_mots',array('tables'=>"concat(tables,'evenements,')"),"evenements='oui'");
+				sql_alter("TABLE spip_groupes_mots DROP evenements");
+				ecrire_meta('agenda_base_version',$current_version=0.18,'non');
 			}
 	
 		}
