@@ -90,6 +90,7 @@ function nettoyage_xtag($c) {
 	// les zitaliques
 	$c = preg_replace ('/<cTypeface:Italic>(.*?)<cTypeface:>/ims', '{\1}', $c);
 	$c = preg_replace ('/<[$]f[^<>]+Italic[^<>]+>(.*?)<f[$]>/', '{\1}', $c);
+	$c = preg_replace ('/<It(-\d+)?>/', '<I>', $c);
 	$c = preg_replace ('/<I>(.*?)<[$I]>/', '{\1}', $c);
 	$c = preg_replace ('/<I>(.*?)(\n|$)/', '{\1}\2', $c);
 	$c = preg_replace ('/{(\s*)}/ms', '\1', $c);
