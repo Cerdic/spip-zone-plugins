@@ -38,7 +38,7 @@
 	<br />
 	<select name="migre_id_mot[]" multiple="multiple" size="5">
 	<BOUCLE_mots(MOTS){par id_mot}>
-		<option value="#ID_MOT"[(#ID_MOT|in_array{#CONFIG{migrestatic/migre_id_mot,'',''}}|?{' selected="selected"'})]>#ID_MOT . #TITRE</option>
+		<option value="#ID_MOT"[(#ID_MOT|in_array{#CONFIG{migrestatic/migre_id_mot,#ARRAY}}|?{' selected="selected"'})]>#ID_MOT . #TITRE</option>
 	</BOUCLE_mots>
 	</select>
 	<small><:migrestatic:choix_mot_cle_selection:></small>
