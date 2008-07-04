@@ -40,7 +40,7 @@ function spip_thelia_appeler_moteur_thelia($texte)
 		return $texte;
 	
 	//convertion utf-8 vers ISO des variables $_REQUEST
-	$sauvegarde_request ="";
+	$sauvegarde_request = array();
 	foreach ($_REQUEST as $clef => $valeur) {
                 $sauvegarde_request[$clef] = $valeur;
 		$_REQUEST[$clef]=unicode2charset(charset2unicode($valeur, 'utf-8'),'iso-8859-1');
