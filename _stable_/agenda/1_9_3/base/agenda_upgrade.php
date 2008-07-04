@@ -45,7 +45,7 @@
 				include_spip('base/create');
 				include_spip('base/abstract_sql');
 				creer_base();
-				sql_update('spip_groupes_mots',array('tables'=>"concat(tables,'evenements,')"),"evenements='oui'");
+				sql_update('spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'evenements,')"),"evenements='oui'");
 				sql_alter("TABLE spip_groupes_mots DROP evenements");
 				ecrire_meta('agenda_base_version',$current_version=0.18,'non');
 			}

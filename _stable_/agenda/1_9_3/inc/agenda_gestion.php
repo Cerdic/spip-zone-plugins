@@ -357,7 +357,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	// MOTS CLES : chaque groupe de mot cle attribuable a un evenement agenda
 	// donne un select
 	$out .=  "<div class='agenda_mots_cles'>";
-	$res = sql_select("*","spip_groupes_mots","tables LIKE '%evenements%' ORDER BY titre");
+	$res = sql_select("*","spip_groupes_mots","tables_liees LIKE '%evenements%' ORDER BY titre");
 	while ($row = sql_fetch($res)){
 		$id_groupe = $row['id_groupe'];
 		$multiple = ($row['unseul']=='oui')?"size='4'":"multiple='multiple' size='4'";
