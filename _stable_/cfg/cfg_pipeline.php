@@ -43,8 +43,8 @@ function cfg_header_prive($flux){
 	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_CFG.'css/cfg.css" type="text/css" media="all" />';
 
 	include_spip('inc/filtres');
-	$cfg_formulaire = cfg_charger_classe('cfg_formulaire','inc');
-	$config = &new $cfg_formulaire(
+	include_spip('inc/cfg_formulaire');
+	$config = &new cfg_formulaire(
 				sinon(_request('cfg'), ''),
 				sinon(_request('cfg_id'),''));
 	

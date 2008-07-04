@@ -82,8 +82,8 @@ function lister_onglets_cfg($dir=''){
 			// On va chercher la config cible
 			// et on regarde ses donnees pour faire l'onglet
 			// seulement si l'onglet doit etre affiche
-			$_cfg = cfg_charger_classe('cfg','inc');
-			$tmp = new $_cfg($fonds);
+			include_spip('inc/cfg');
+			$tmp = new cfg($fonds);
 
 			if ($tmp->autoriser()){
 				$args['onglet'] = $tmp->form->param['onglet'];
@@ -116,13 +116,13 @@ function lister_onglets_cfg($dir=''){
 
 
 // la classe cfg represente une page de configuration
-class cfg_dist
+class cfg
 {
 	var $form; // la classe cfg_formulaire
 	
-	function cfg_dist($nom, $cfg_id = '', $opt = array()) {
-		$cfg_formulaire = cfg_charger_classe('cfg_formulaire','inc');
-		$this->form = &new $cfg_formulaire($nom, $cfg_id, $opt);
+	function cfg($nom, $cfg_id = '', $opt = array()) {
+		include_spip('inc/cfg_formulaire');
+		$this->form = &new cfg_formulaire($nom, $cfg_id, $opt);
 	}
 
 	function autoriser()  {return $this->form->autoriser(); }

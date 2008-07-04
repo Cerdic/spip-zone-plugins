@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // la classe cfg represente une page de configuration
-class cfg_formulaire_dist{
+class cfg_formulaire{
 
 // les parametres des formulaires cfg sont stockes dans cet objet
 	var $param;
@@ -44,7 +44,7 @@ class cfg_formulaire_dist{
 	//
 	// Constructeur de la classe
 	//
-	function cfg_formulaire_dist($nom, $cfg_id = '', $opt = array())
+	function cfg_formulaire($nom, $cfg_id = '', $opt = array())
 	{
 		$this->param = array(
 			'afficher_messages' => true, // afficher ce compte rendu ?

@@ -13,9 +13,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_cfg_dist($class = null)
 {
 	include_spip('inc/filtres');
-
-	$cfg = cfg_charger_classe('cfg','inc');
-	$config = &new $cfg(
+	include_spip('inc/cfg');
+	$config = &new cfg(
 		($nom = sinon(_request('cfg'), '')),
 		($cfg_id = sinon(_request('cfg_id'),''))
 		);

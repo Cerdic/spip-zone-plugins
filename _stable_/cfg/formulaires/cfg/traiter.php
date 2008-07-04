@@ -7,8 +7,8 @@
 //
 function formulaires_cfg_traiter_dist($cfg="", $cfg_id=""){
 
-	$cfg_formulaire = cfg_charger_classe('cfg_formulaire','inc');
-	$config = &new $cfg_formulaire($cfg, $cfg_id);
+	include_spip('inc/cfg_formulaire');
+	$config = &new cfg_formulaire($cfg, $cfg_id);
 	
 	if ($config->verifier())
 		$config->traiter();
