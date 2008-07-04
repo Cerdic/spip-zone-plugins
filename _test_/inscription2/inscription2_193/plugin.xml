@@ -19,7 +19,7 @@
 		  Inscription2
 	</prefix>
 	<necessite id="cfg" version="[1.0.7;]" />
-	<necessite id="SPIP" version='[1.9262;]' />
+	<necessite id="SPIP" version='[1.9.3;]' />
 	<necessite id="lib:jquery-validate" src="http://jquery.bassistance.de/validate/jquery.validate.zip" />
 	<install>base/inscription2_installer.php</install>
 	<options>
