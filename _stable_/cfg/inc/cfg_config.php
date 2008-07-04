@@ -41,8 +41,8 @@ function cfg_charger_depot($args){
 		}
 	}
 
-	$d = cfg_charger_classe('cfg_depot');
-	$depot = new $d($depot);
+	include_spip('inc/cfg_depot');
+	$depot = new cfg_depot($depot);
 	$depot->charger_args($args);
 	return $depot;
 }

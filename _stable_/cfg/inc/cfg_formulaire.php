@@ -122,8 +122,8 @@ class cfg_formulaire_dist{
 		  
 		// creer le storage et lire les valeurs
 		$this->param['depot'] = strtolower(trim($this->param['depot']));
-		$cfg_depot = cfg_charger_classe('cfg_depot','inc');
-		$this->depot = new $cfg_depot($this->param['depot'], $this->params);
+		include_spip('inc/cfg_depot');
+		$this->depot = new cfg_depot($this->param['depot'], $this->params);
 		$ok &= $this->lire();
 
 		// charger les champs particuliers si existants

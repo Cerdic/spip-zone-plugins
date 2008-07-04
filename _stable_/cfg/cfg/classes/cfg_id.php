@@ -58,8 +58,8 @@ function cfg_pre_traiter_cfg_id($nom, &$cfg){
 			$cfg->param['cfg_id'] = $new_id;
 			// recreer un depot avec le nouvel identifiant 
 			// (sinon les requetes ne creent pas les bons 'where')
-			$cfg_depot = cfg_charger_classe('cfg_depot','inc');
-			$cfg->depot = new $cfg_depot($cfg->param['depot'], $cfg->params);
+			include_spip('inc/cfg_depot');
+			$cfg->depot = new cfg_depot($cfg->param['depot'], $cfg->params);
 			// recharger le formulaire avec le nouvel identifiant (sinon les parametres 
 			// <!-- param=valeur --> de formulaires qui contienent 
 			// #ENV{cfg_id} ou #ENV{id} ne sont pas a jour)

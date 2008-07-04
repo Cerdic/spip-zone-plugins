@@ -9,7 +9,7 @@
 // - lire, ecrire, effacer
 
 
-class cfg_depot_dist{
+class cfg_depot{
 	
 	var $nom;
 	var $depot;
@@ -40,7 +40,7 @@ class cfg_depot_dist{
 	//	);
 	//
 	//
-	function cfg_depot_dist($depot='metapack', $params=array()){
+	function cfg_depot($depot='metapack', $params=array()){
 		if (!isset($params['param'])) {
 			$params['param'] = array();
 		}
