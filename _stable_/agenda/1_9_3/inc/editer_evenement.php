@@ -188,7 +188,7 @@ function Agenda_action_formulaire_article($id_article,$id_evenement=NULL, $c=NUL
 				"date_fin" => $date_fin));
 
 		// les mots cles : par groupes
-		$res = sql_select("*", "spip_groupes_mots", "tables_liees LIKE '%evenements%'", "titre");
+		$res = sql_select("*", "spip_groupes_mots", "tables_liees LIKE '(^|,)evenements($|,)'", "titre");
 		$liste_mots = array();
 		while ($row = sql_fetch($res)){
 			$id_groupe = $row['id_groupe'];

@@ -83,7 +83,7 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 		$out .= "</div><div class='descriptif-visu'>$fdescriptif &nbsp;</div>\n";
 
 		$out .=  "<div class='agenda_mots_cles'>";
-		$res = sql_select("*","spip_groupes_mots","tables_liees LIKE '%evenements%' ORDER BY titre");
+		$res = sql_select("*","spip_groupes_mots","tables_liees LIKE '(^|,)evenements($|,)' ORDER BY titre");
 		$sep = "";
 		while ($row = sql_fetch($res)){
 			$id_groupe = $row['id_groupe'];
