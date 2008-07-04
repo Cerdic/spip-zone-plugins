@@ -1,0 +1,56 @@
+[(#REM)Mod&#232;le SPIP pour jmycarousel
+http://www.enova-tech.net/fre/lab/jMyCarousel
+http://www.enova-tech.net/fre/lab/jMyCarousel/2
+Attention GD2 necessaire pour le image reduire
+<jmycarousel|id_article=1> pour appeler le modele dans un article
+]
+
+	
+<script type="text/javascript" src="#CHEMIN{js/jMyCarousel.js}"></script>
+
+<script type="text/javascript" src="#CHEMIN{js/jquery.mousewheel.js}"></script>	
+	
+	
+	
+<script type="text/javascript"> 
+// <![CDATA[
+		$(function() {
+		    $(".jMyCarousel").jMyCarousel({
+		        visible: '100%'
+		    });
+		});
+		// ]]>
+	</script>	
+	
+<div id="exempleun">
+	
+
+<div class="jMyCarousel">
+
+<B_docjoints>
+
+<ul>
+
+<BOUCLE_docjoints(DOCUMENTS){id_article?}{id_rubrique?}{id_document ?}{id_breve ?}{id_mot ?}{mode=document}{extension IN jpg,png,gif}{par num titre}{par id_document}{doublons}>
+
+
+<li>
+
+<a href="#FICHIER" type="#MIME_TYPE" alt="#TITRE" class="tickbox">
+<img src="[(#URL_DOCUMENT||image_reduire{200,150}|extraire_attribut{src})]" alt=" #TITRE" /> 
+</a>
+
+</li>
+
+</BOUCLE_docjoints>
+
+</ul>
+
+</B_docjoints>
+
+</div>
+
+</div>
+
+
+

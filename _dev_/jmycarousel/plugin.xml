@@ -1,0 +1,43 @@
+<plugin>
+	<nom><multi>
+		[fr]jMyCarousel [en]jMyCarousel
+	</multi></nom>
+	<auteur>Collectif SPIP</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	
+	<icon>css/_img/jmycarousel.jpg</icon>
+
+	
+	<description><multi>
+[en]This plugin [...]. 
+
+[fr]Ce plugin fournit un modele pour inserer des images en jMycarousel
+	</multi></description>
+	<lien>
+[{{Exemples et doc provisoire en ligne}} :->http://alexmacapple.dyndns.org/gisiesvn/spip.php?rubrique3]
+	</lien>
+	 <fonctions>
+	  jmycarousel.php
+  </fonctions>
+
+	<prefix>
+	jmycarousel
+</prefix>
+
+<pipeline>
+	<nom>insert_head</nom>
+	<action>insert_head</action>
+	<inclure>jmycarousel.php</inclure>
+</pipeline>
+
+<pipeline>
+	<nom>affichage_final</nom>
+	<action>affichage_final</action>
+	<inclure>jmycarousel.php</inclure>
+</pipeline>
+</plugin>

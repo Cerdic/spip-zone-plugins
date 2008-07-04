@@ -1,0 +1,54 @@
+[(#REM)Mod&#232;le SPIP pour jmycarousel
+http://www.enova-tech.net/fre/lab/jMyCarousel
+http://www.enova-tech.net/fre/lab/jMyCarousel/2
+Attention GD2 necessaire pour le image recadre, image reduire
+http://www.spip-contrib.net/Creer-une-galerie-d-images-avec
+<jmycarousel_recadre|id_article=1> pour appeler le modele dans un article
+]
+
+
+	
+<script type="text/javascript" src="#CHEMIN{js/jMyCarousel.js}"></script>
+
+<script type="text/javascript" src="#CHEMIN{js/jquery.mousewheel.js}"></script>	
+	
+	
+	
+<script type="text/javascript"> 
+// <![CDATA[
+		$(function() {
+		    $(".jMyCarousel").jMyCarousel({
+		        visible: '100%'
+		    });
+		});
+		// ]]>
+	</script>	
+	
+
+<div class="jMyCarousel">
+
+<!-- DEBUT BOUCLE_img -->
+
+<B_img>
+
+<BOUCLE_img(DOCUMENTS){id_article?}{id_rubrique?}{id_document ?}{id_breve ?}{id_mot ?}{mode=document}{extension IN jpg,png,gif}{par num titre}{par id_document}{doublons}>
+
+<ul>
+       #SET{ratio_x,#LARGEUR|div{200}}
+        #SET{ratio_y,#HAUTEUR|div{150}}
+        #SET{ratio,#GET{ratio_x}|<={#GET{ratio_y}}|?{#GET{ratio_x},#GET{ratio_y}}}
+        
+        [<li><a href="#FICHIER" type="#MIME_TYPE" alt="#TITRE" class="tickbox">(#FICHIER|image_reduire_par{#GET{ratio}}|image_recadre{200,150,center}|inserer_attribut{alt,#TITRE})</a></li>]
+        
+</ul>
+
+</BOUCLE_img>
+
+ </B_img>
+ 
+<//B_img>
+<!-- FIN BOUCLE_img -->
+
+</div>
+
+
