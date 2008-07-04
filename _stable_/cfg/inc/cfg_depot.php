@@ -45,7 +45,7 @@ class cfg_depot_dist{
 			$params['param'] = array();
 		}
 		
-		include_spip('cfg/depots/'.$depot);
+		include_spip('depots/'.$depot);
 		if (class_exists($class = 'cfg_depot_'.$depot)) {
 			$this->depot = &new $class($params);
 		} else {
