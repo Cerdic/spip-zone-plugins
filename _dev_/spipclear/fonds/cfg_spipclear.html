@@ -24,6 +24,11 @@ Configuration du plugin SpipClear.
 			<input type="radio" name="navigation_gauche" value="1"[ (#ENV{navigation_gauche}|=={1}|?{checked="checked",''})] />
 			<:spipclear:label_navigation_gauche:>
 		</label>
+	<p><:spipclear:look_sommaire:></p>
+		<label>
+			<input type="checkbox" name="articles_entiers" [ (#ENV{articles_entiers}|=={on}|?{checked="checked",''})] />
+			<:spipclear:sommaire_articles_entiers:>
+		</label>
 	</p>
 </fieldset>
 

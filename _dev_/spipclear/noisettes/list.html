@@ -14,10 +14,16 @@
 	<BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_categorie>
 	</p>
 
+	[(#CONFIG{spipclear/articles_entiers}|=={on}?{' ',''})
+	[<div class="post-content #EDIT{texte}" lang="#LANG">
+		(#TEXTE)
+	</div>]]
+
+	[(#CONFIG{spipclear/articles_entiers}|=={on}?{'',' '})
 	[<div class="post-content #EDIT{intro}" lang="#LANG">
 		(#INTRODUCTION)
-	</div>]
-	
+	</div>]]
+		
 	[<div class="post-content" lang="#LANG"><strong><:voir_en_ligne:></strong> : <a href="(#URL_SITE)">#NOM_SITE</a></div>]
 	
 	<p class="post-info-co"> 

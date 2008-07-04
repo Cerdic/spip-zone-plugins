@@ -72,6 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'legend_theme' => 'Th&egrave;me', // CFG
 'lien' => 'Lien', // Non utilise
 'liens' => 'Liens',
+'look_sommaire' => 'Customisation de la page d\'accueil',
 
 //O
 'oksearch' => 'ok',
@@ -88,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_comment' => 'site',
 'syndication' => 'Syndication',
 'selectionner_theme' => 'Cliquez pour s&eacute;lectionner ce th&ecirc;me',
+'sommaire_articles_entiers' => 'Afficher les articles en entiers (par d&eacute;faut, seule une introduction est affich&eacute;e)',
 
 //T
 'texte_erreur1' => 'La recherche de',
