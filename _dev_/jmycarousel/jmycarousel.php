@@ -4,3 +4,4 @@ function jmycarousel_insert_head($flux){
 		return $flux;
 }
 
+?>
