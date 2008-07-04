@@ -25,6 +25,6 @@ _ &#169; 2005-2007 - Distribu&eacute; sous licence GPL
 	<prefix> 
 	sedna
 	</prefix>
-	<necessite id='SPIP' version='[1.9207;]' />
+	<necessite id='SPIP' version='[1.9.2;]' />
 	<options>sedna_options.php</options>
 </plugin>
