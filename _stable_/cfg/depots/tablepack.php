@@ -15,6 +15,28 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // cfg_tablepack retrouve et met a jour les donnees serialisees dans une colonne d'une table
 // par défaut : colonne 'cfg' et table 'spip_auteurs'
 // ici, cfg_id est obligatoire ... peut-être mappé sur l'auteur courant (a voir)
+//
+//
+// pour #CONFIG{xxx} ou lire_config('xxx') si xxx demarre par
+// ~ on utilise la colonne 'cfg' de spip_auteurs 
+//   ~ tout court veut dire l'auteur connecte,
+//   ~123 celui de l'auteur 123
+
+// Pour utiliser une autre colonne, il faut renseigner @colonne
+//   ~@extra/champ ou 
+//   ~id_auteur@prefs/champ
+//
+// Pour recuperer des valeurs d'une table particuliere,
+// il faut utiliser 'table:id/champ' ou 'table@colonne:id/champ'
+//   table:123 contenu de la colonne 'cfg' de l'enregistrement id 123 de "table"
+//   rubriques@extra:3/qqc  rubrique 3, colonne extra, champ 'qqc'
+//
+// "table" est un nom de table ou un raccourci comme "article"
+// on peut croiser plusieurs id comme spip_auteurs_articles:6:123
+// (mais il n'y a pas d'extra dans spip_auteurs_articles ...)
+// Le 2eme argument de la balise est la valeur defaut comme pour la dist
+//
+
 class cfg_depot_tablepack
 {
 	var $champs = array();
@@ -52,14 +74,14 @@ class cfg_depot_tablepack
 	}
 	
 	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
-	function charger($creer = false){
+	function charger(){
 		if (!$this->param['cfg_id']) {
 			$this->messages['message_erreur'][] = _T('cfg:id_manquant');
 			return false;
 		}
 		
 		// verifier que la colonne existe
-		if (!$this->verifier_colonne($creer)) {
+		if (!$this->verifier_colonne()) {
 			return false;
 		} else {
 			// recuperer la valeur du champ de la table sql
@@ -231,16 +253,7 @@ class cfg_depot_tablepack
 	function verifier_colonne($creer = false) {
 		$col = sql_showtable($table = $this->param['table']);
 		if (!array_key_exists($colonne = $this->param['colonne'], $col['field'])) {
-			if (!$creer){
-				return false;
-			}
-			
-			if (!sql_alter("TABLE " . $table . " ADD " . $colonne . " TEXT DEFAULT ''")) {
-				spip_log("CFG (ecrire_config) n'a pas reussi a creer automatiquement la colonne " . $colonne . " dans la table " . $table . ".");
-				return false;	
-			}
-			
-			spip_log("CFG (ecrire_config) a cree automatiquement la colonne " . $colonne . " dans la table " . $table . ".");
+			return false;
 		}
 		return true;
 	}

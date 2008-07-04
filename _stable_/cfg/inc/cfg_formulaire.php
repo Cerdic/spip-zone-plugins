@@ -122,7 +122,7 @@ class cfg_formulaire{
 		  
 		// creer le storage et lire les valeurs
 		$this->param['depot'] = strtolower(trim($this->param['depot']));
-		include_spip('inc/cfg_depot');
+		include_spip('inc/cfg_config');
 		$this->depot = new cfg_depot($this->param['depot'], $this->params);
 		$ok &= $this->lire();
 

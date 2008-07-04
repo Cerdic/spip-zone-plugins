@@ -5,7 +5,7 @@ v1.8.0 (04 07 2008)
 - Simplifier *_config() en se passant de la classe cfg_params()
 - les fonctions des balises sont chargées au calcul et non en permanence et sont déplacees dans cfg_fonctions.php
 - suppression de cfg_charger_classe() : la surchage, c'est simplement le fichier, on se passe de _dist
-
+- déplacemeent de la classe cfg_depot dans inc/cfg_config
 
 v1.7.6 (27 06 2008)
 - Correction bug avec ecrire_config(php::...)
