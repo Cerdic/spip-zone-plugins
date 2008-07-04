@@ -49,5 +49,5 @@
 	<install>base/spip_thelia_upgrade.php</install>
 	<icon>img_pack/logo_thelia.png</icon>
  	<necessite id="CFG" version="[1.0;]" />
-	<necessite id='spip' version='[1.92;]' />
+	<necessite id='spip' version='[1.9.2;]' />
 </plugin>
