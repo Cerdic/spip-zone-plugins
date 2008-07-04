@@ -1,5 +1,5 @@
 <div id="sidebar">
-
+<div id="blognav">
 	[(#CALENDRIER_MINI{[(#ENV{self})]})]
 
 	<INCLURE{fond=inc-archives}{id_secteur}{self=#SELF}{decal}{var_date=archives}{date=#ENV{archives,#DATE}}>
@@ -26,7 +26,7 @@
 			<BOUCLE_categories(RUBRIQUES){id_secteur}{id_parent=#ENV{id_secteur}}{par num titre}>
 			<li>
 			[(#ID_RUBRIQUE|choixsiegal{#ENV{id_rubrique},<strong>,''})]
-				<a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+				<a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero)]</a>
 			[(#ID_RUBRIQUE|choixsiegal{#ENV{id_rubrique},</strong>,''})]
 			</li>
 			</BOUCLE_categories>
@@ -48,7 +48,6 @@
 	</B_languages>
 
 	#PIPELINE{boussole}
-
 	<B_links>
 	<div id="links">
 		<h2><:spipclear:liens:></h2>
@@ -60,6 +59,8 @@
 		</ul>
 	</div>
 	</B_links>
+</div>
+<div id="blogextra">
 		
 	<div id="syndicate">
 		<h2><:spipclear:syndication:></h2>
@@ -70,4 +71,5 @@
 			[<li><a href="(#URL_PAGE{atom}|parametre_url{id_rubrique,#ENV{id_secteur}}|parametre_url{type,co})"><:spipclear:fil_atom_commentaires:></a></li>]
 		</ul>
 	</div>
+</div>
 </div>
