@@ -132,7 +132,7 @@ function Agenda_compile_texte_saisie_rapide($texte) {
 function Agenda_verifie_les_mots_clefs($mots_envoyes) {
  	$les_mots_ok = $mots_compiles = array();
 	// on recupere tous les mots cles sur les evenements
-	$res = sql_select("*","spip_groupes_mots","tables_liees LIKE '(^|,)evenements($|,)'");
+	$res = sql_select("*","spip_groupes_mots","tables_liees REGEXP '(^|,)evenements($|,)'");
 	while ($row = sql_fetch($res)){
 		$id_groupe = $row['id_groupe'];
 		$titre = supprimer_numero($row['titre']);
