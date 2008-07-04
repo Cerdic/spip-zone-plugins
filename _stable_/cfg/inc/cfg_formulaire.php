@@ -46,11 +46,27 @@ class cfg_formulaire_dist{
 	//
 	function cfg_formulaire_dist($nom, $cfg_id = '', $opt = array())
 	{
-			
-		$cfg_params = cfg_charger_classe("cfg_params");
-		$this->param = &new $cfg_params();
-		$this->param->nom = $this->vue = $nom;
-		$this->param->cfg_id = $cfg_id;
+		$this->param = array(
+			'afficher_messages' => true, // afficher ce compte rendu ?
+			'autoriser' => 'configurer',	// le "faire" de autoriser($faire), par defaut, autoriser_configurer_dist()	
+			'autoriser_absence_id' => 'non', // autoriser l'insertion de nouveau contenu dans une table sans donner d'identifiant ?
+			'casier' => '', // sous tableau optionel du meta ou va etre stocke le fragment de config
+			'cfg_id' => '', // pour une config multiple , l'id courant
+			'descriptif' => '', // descriptif
+			'depot' => 'metapack', // (ancien 'storage') le depot utilise pour stocker les donnees, par defaut metapack: spip_meta serialise 
+			'fichier' => '', // pour storage php, c'est l'adresse du fichier (depuis la racine de spip), sinon ca prend /local/cfg/nom.php
+			'head' => '', // partie du fond cfg a inserer dans le head par le pipeline header_prive (todo insert_head?)
+			'icone' => '', // lien pour une icone
+			'liens' => array(), // liens optionnels sur des sous-config <!-- liens*=xxx -->
+			'liens_multi' => array(), // liens optionnels sur des sous-config pour des fonds utilisant un champ multiple  <!-- liens_multi*=xxx -->
+			'nom' => '', // le nom du meta (ou autre) ou va etre stocke la config concernee
+			'onglet' => 'oui', // cfg doit-il afficher un lien vers le fond sous forme d'onglet dans la page ?exec=cfg
+			'presentation' => 'auto', // cfg doit-il encadrer le formulaire tout seul ?
+			'refus' => '', // en cas de refus d'autorisation, un message informatif [(#REM) refus=...]
+			'table' => '', // nom de la table sql pour storage extra ou table
+		);
+		$this->param['nom'] = $this->vue = $nom;
+		$this->param['cfg_id'] = $cfg_id;
 		
 		// definition de l'alias params
 		$this->params = array(
@@ -67,7 +83,8 @@ class cfg_formulaire_dist{
 		// charger les donnees du fond demande
 		$this->charger();
 	}
-	
+
+		
 	// retourne true en cas d'erreur...
 	function erreurs(){
 		return $this->messages['erreurs'] || $this->messages['message_erreur'];
@@ -104,9 +121,9 @@ class cfg_formulaire_dist{
 		$this->actionner_extensions('pre_charger');	  
 		  
 		// creer le storage et lire les valeurs
-		$this->param->depot = strtolower(trim($this->param->depot));
+		$this->param['depot'] = strtolower(trim($this->param['depot']));
 		$cfg_depot = cfg_charger_classe('cfg_depot','inc');
-		$this->depot = new $cfg_depot($this->param->depot, $this->params);
+		$this->depot = new $cfg_depot($this->param['depot'], $this->params);
 		$ok &= $this->lire();
 
 		// charger les champs particuliers si existants
@@ -228,9 +245,9 @@ class cfg_formulaire_dist{
 	// 
 	function nom_config()
 	{
-	    return $this->param->nom . 
-	    		($this->param->casier ? '/' . $this->param->casier : '') .
-	    		($this->param->cfg_id ? '/' . $this->param->cfg_id : '');
+	    return $this->param['nom'] . 
+	    		($this->param['casier'] ? '/' . $this->param['casier'] : '') .
+	    		($this->param['cfg_id'] ? '/' . $this->param['cfg_id'] : '');
 	}
 
 
@@ -269,15 +286,15 @@ class cfg_formulaire_dist{
 		}
 
 		// pour compatibilite avec les anciennes versions (<1.4.1)
-		if (isset($this->param->storage)) 
-			$this->param->depot = $this->param->storage;
+		if (isset($this->param['storage'])) 
+			$this->param['depot'] = $this->param['storage'];
 		
-		if ($this->param->depot == 'classic')
-			$this->param->depot = 'meta';
+		if ($this->param['depot'] == 'classic')
+			$this->param['depot'] = 'meta';
 			
-		if ($this->param->depot == 'extrapack'){
-			$this->param->depot = 'tablepack';
-			$this->param->colonne = 'extra';
+		if ($this->param['depot'] == 'extrapack'){
+			$this->param['depot'] = 'tablepack';
+			$this->param['colonne'] = 'extra';
 		}
 		
 		// definir les parametres qui sont a traiter comme des extensions
@@ -398,12 +415,12 @@ class cfg_formulaire_dist{
 			#if (!isset($contexte['editable'])) $contexte['editable'] = true; // plante 1.9.2 !!
 			
 			// passer cfg_id...
-			if (!isset($contexte['cfg_id']) && $this->param->cfg_id) {
-				$contexte['cfg_id'] = $this->param->cfg_id;
+			if (!isset($contexte['cfg_id']) && $this->param['cfg_id']) {
+				$contexte['cfg_id'] = $this->param['cfg_id'];
 			}
 			// passer id aussi
-			if (!isset($contexte['id']) && $this->param->cfg_id) {
-				$contexte['id'] = $this->param->cfg_id;
+			if (!isset($contexte['id']) && $this->param['cfg_id']) {
+				$contexte['id'] = $this->param['cfg_id'];
 			}
 			// passer 'message_ok', 'message_erreur', 'erreurs'	
 			if (!isset($contexte['message_ok']) && $this->messages['message_ok']) {
@@ -434,8 +451,8 @@ class cfg_formulaire_dist{
 		if ($autoriser !== -1) return $autoriser;
 		
 		include_spip('inc/autoriser');
-		if (!$autoriser = autoriser($this->param->autoriser)){
-			$this->messages['message_refus'] = $this->param->refus;
+		if (!$autoriser = autoriser($this->param['autoriser'])){
+			$this->messages['message_refus'] = $this->param['refus'];
 		}
 		return $autoriser;
 	}
@@ -525,10 +542,10 @@ class cfg_formulaire_dist{
 	//
 	function creer_hash_cfg($action=''){
 		include_spip('inc/securiser_action');
-	    $arg = 'cfg0.0.0-' . $this->param->nom . '-' . $this->vue;
+	    $arg = 'cfg0.0.0-' . $this->param['nom'] . '-' . $this->vue;
 		return 
 			'?cfg=' . $this->vue .
-			'&cfg_id=' . $this->param->cfg_id .
+			'&cfg_id=' . $this->param['cfg_id'] .
 		    '&arg=' . $arg .
 		    '&hash=' .  calculer_action_auteur($action . '-' . $arg);		
 	}
@@ -590,7 +607,7 @@ class cfg_formulaire_dist{
 					if (function_exists($f = 'cfg_' . $action . '_param_' . $param)){ // absence possible normale
 						// artillerie lourde on passe
 						// la valeur et la classe
-						$f($this->param->$param, $this);						
+						$f($this->param[$param], $this);						
 					}
 				}
 			}
@@ -610,10 +627,10 @@ class cfg_formulaire_dist{
 	// 
 	// Lorsque des parametres sont passes dans le formulaire 
 	// par <!-- param=valeur -->
-	// stocker $this->param->parametre=valeur
+	// stocker $this->param['parametre']=valeur
 	// 
 	// Si <!-- param*=valeur -->
-	// Stocker $this->param->parametre[]=valeur
+	// Stocker $this->param['parametre'][]=valeur
 	// 
 	//
 	function post_params($regs) {
@@ -622,9 +639,9 @@ class cfg_formulaire_dist{
 		$regs[4] = trim($regs[4]);
 		
 		if (empty($regs[3])) {
-		    $this->param->{$regs[2]} = $regs[4];
-		} elseif (is_array($this->param->{$regs[2]})) {
-		    $this->param->{$regs[2]}[] = $regs[4];
+		    $this->param[$regs[2]] = $regs[4];
+		} elseif (is_array($this->param[$regs[2]])) {
+		    $this->param[$regs[2]][] = $regs[4];
 		}
 		// plus besoin de garder ca
 		return '';

@@ -17,11 +17,6 @@ if (version_compare($GLOBALS['spip_version_code'],'1.9300','<'))
 	
 // inclure les fonctions lire_config(), ecrire_config() et effacer_config()
 include_spip('inc/cfg_config');
-// Inclure la balise #CFG_ARBO
-include_spip('balise/cfg_arbo');
-// Inclure les balises #CONFIG et #CFG_CHEMIN
-include_spip('balise/cfg_config');
-
 
 // _dir_lib possiblement utile
 if (!defined('_DIR_LIB')) define('_DIR_LIB', _DIR_RACINE . 'lib/');

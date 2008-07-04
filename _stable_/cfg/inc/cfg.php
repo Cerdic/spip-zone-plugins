@@ -86,23 +86,23 @@ function lister_onglets_cfg($dir=''){
 			$tmp = new $_cfg($fonds);
 
 			if ($tmp->autoriser()){
-				$args['onglet'] = $tmp->form->param->onglet;
+				$args['onglet'] = $tmp->form->param['onglet'];
 				$args['url'] = generer_url_ecrire('cfg', 'cfg='.$fonds);
 				// titre
-				if (!$args['titre'] = $tmp->form->param->titre)
+				if (!$args['titre'] = $tmp->form->param['titre'])
 					$args['titre'] = $fonds;
 				// icone	
 				$path = dirname(dirname($cfg));	
 				$args['icone'] = '';
-				if ($tmp->form->param->icone)
-					$args['icone'] = $path.'/'.$tmp->form->param->icone;
+				if ($tmp->form->param['icone'])
+					$args['icone'] = $path.'/'.$tmp->form->param['icone'];
 				else if (file_exists($path.'/plugin.xml'))
 					$args['icone'] = 'plugin-24.gif';
 				else
 					$args['icone'] = _DIR_PLUGIN_CFG.'cfg-doc-22.png';	
 				
 				// l'afficher ?
-				if ($tmp->form->param->onglet == 'oui')
+				if ($tmp->form->param['onglet'] == 'oui')
 					$args['afficher'] = true;
 			}
 			
@@ -128,18 +128,18 @@ class cfg_dist
 	function autoriser()  {return $this->form->autoriser(); }
 	function traiter()  {return $this->form->traiter();}
 	
-	function get_titre(){ return $this->form->param->titre;}
-	function get_nom()  { return $this->form->param->nom;}
+	function get_titre(){ return $this->form->param['titre'];}
+	function get_nom()  { return $this->form->param['nom'];}
 	function get_boite(){ 
-		if (!(($titre = $this->form->param->titre) && ($boite = $this->form->param->boite))){
-			$boite=($titre)?$titre: _T('icone_configuration_site') . ' ' . $this->form->param->nom;
+		if (!(($titre = $this->form->param['titre']) && ($boite = $this->form->param['boite']))){
+			$boite=($titre)?$titre: _T('icone_configuration_site') . ' ' . $this->form->param['nom'];
 		}
 		return $boite;
 	}
 	// pour pouvoir tester si la presentation des formulaires doit etre appliquee ou non
 	// m'est avis que ca devrait virer cette 'presentation=auto'...
 	// c'est comme 'rediriger', il n'y a que le plugin 'autorite' qui l'utilise
-	function get_presentation() { return $this->form->param->presentation;	}
+	function get_presentation() { return $this->form->param['presentation'];	}
 	
 	//
 	// Affiche la boite d'info
@@ -156,7 +156,7 @@ class cfg_dist
 	{
 		$return = '';
 		// liens simples
-		foreach ($this->form->param->liens as $lien) {
+		foreach ($this->form->param['liens'] as $lien) {
 			$nom = _T($lien);
 			$lien =  array_pop(explode(':',$lien)); // ne garder que la derniere partie de la chaine de langue
 			$return .= ($l = $this->generer_lien($lien, $nom)) ? "<li>$l</li>\n" : "";
@@ -191,7 +191,7 @@ class cfg_dist
 	// 
 	function liens_multi(){
 		// liens multiples
-		foreach ($this->form->param->liens_multi as $lien) {
+		foreach ($this->form->param['liens_multi'] as $lien) {
 			$nom = _T($lien);
 			$lien =  array_pop(explode(':',$lien)); // ne garder que la derniere partie de la chaine de langue
 			$return .= ($l = $this->generer_lien_multi($lien, $nom)) ? "<li>$l</li>\n" : "";
@@ -288,7 +288,7 @@ class cfg_dist
 
 	// affiche le descriptif du formulaire
 	function descriptif(){
-		if ($d = $this->form->param->descriptif)
+		if ($d = $this->form->param['descriptif'])
 			return propre($d);	
 	}
 	
@@ -296,9 +296,9 @@ class cfg_dist
 	function acces_refuse(){
 		include_spip('inc/minipres');
 		return minipres(_T('info_acces_refuse'), 
-			$this->form->param->refus 
-				? $this->form->param->refus 
-				: " (cfg {$this->form->param->nom} - {$this->form->vue} - {$this->form->param->cfg_id})");
+			$this->form->param['refus']
+				? $this->form->param['refus']
+				: " (cfg {$this->form->param[nom]} - {$this->form->vue} - {$this->form->param[cfg_id]})");
 	}
 	
 	// afficher les messages de cfg

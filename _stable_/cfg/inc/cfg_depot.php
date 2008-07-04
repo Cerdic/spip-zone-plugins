@@ -42,8 +42,7 @@ class cfg_depot_dist{
 	//
 	function cfg_depot_dist($depot='metapack', $params=array()){
 		if (!isset($params['param'])) {
-			$p = cfg_charger_classe('cfg_params');
-			$params['param'] = new $p;
+			$params['param'] = array();
 		}
 		
 		include_spip('cfg/depots/'.$depot);

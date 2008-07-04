@@ -99,33 +99,6 @@ function inc_effacer_config_dist($cfg=''){
 	$depot = cfg_charger_depot($cfg);
 	return $depot->effacer_config();	
 }
-	
-	
-
-//
-// Cherche le vrai nom d'une table
-// ainsi que ses cles primaires
-//
-function get_table_id($table) {	
-	static $catab = array(
-		'tables_principales' => 'base/serial',
-		'tables_auxiliaires' => 'base/auxiliaires',
-	);
-	$try = array($table, 'spip_' . $table);
-	foreach ($catab as $categ => $catinc) {
-		include_spip($catinc);
-		foreach ($try as $nom) {
-			if (isset($GLOBALS[$categ][$nom])) {
-				return array($nom,
-					preg_split('/\s*,\s*/', $GLOBALS[$categ][$nom]['key']['PRIMARY KEY']));
-			}
-		}
-	}
-	if ($try = table_objet($table)) {
-		return array('spip_' . $try, array(id_table_objet($table)));
-	}
-	return array(false, false);
-}
 
 
 

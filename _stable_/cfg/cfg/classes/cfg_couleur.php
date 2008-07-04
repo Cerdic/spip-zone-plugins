@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // ajouter automatiquement le parametre 'selecteur_couleur' (ajoute les js de farbtastic)
 function cfg_charger_cfg_couleur($nom, &$cfg){
 
-	$cfg->param->selecteur_couleur = 1;
+	$cfg->param['selecteur_couleur'] = 1;
 	$cfg->ajouter_extension_parametre('selecteur_couleur');
 	    
 	return $cfg;

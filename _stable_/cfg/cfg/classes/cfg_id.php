@@ -23,7 +23,7 @@ function cfg_pre_charger_cfg_id($nom, &$cfg){
 	// #CONFIG{.../y1/y2/y3/...}
 	// 
 	if (_request('_cfg_affiche')) {
-		$cfg->param->cfg_id = implode('/', array_map('_request', $cfg->champs_id));
+		$cfg->param['cfg_id'] = implode('/', array_map('_request', $cfg->champs_id));
 	} 
 	    
 	return $cfg;
@@ -47,7 +47,7 @@ function cfg_pre_traiter_cfg_id($nom, &$cfg){
 	// qui ont la classe css 'cfg_id'
 	if ($cfg->champs_id) {
 		$new_id = implode('/', array_map('_request', $cfg->champs_id));
-		if ($new_id != $cfg->param->cfg_id){
+		if ($new_id != $cfg->param['cfg_id']){
 			// si c'est un deplacement, on efface
 			if (!_request('_cfg_copier')) {
 				// et ne pas perdre les valeurs suite a l'effacement dans ce cas precis
@@ -55,11 +55,11 @@ function cfg_pre_traiter_cfg_id($nom, &$cfg){
 				$cfg->effacer();
 				$cfg->val = $vals;
 			}
-			$cfg->param->cfg_id = $new_id;
+			$cfg->param['cfg_id'] = $new_id;
 			// recreer un depot avec le nouvel identifiant 
 			// (sinon les requetes ne creent pas les bons 'where')
 			$cfg_depot = cfg_charger_classe('cfg_depot','inc');
-			$cfg->depot = new $cfg_depot($cfg->param->depot, $cfg->params);
+			$cfg->depot = new $cfg_depot($cfg->param['depot'], $cfg->params);
 			// recharger le formulaire avec le nouvel identifiant (sinon les parametres 
 			// <!-- param=valeur --> de formulaires qui contienent 
 			// #ENV{cfg_id} ou #ENV{id} ne sont pas a jour)

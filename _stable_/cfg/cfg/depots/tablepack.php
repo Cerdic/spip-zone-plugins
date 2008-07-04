@@ -37,13 +37,13 @@ class cfg_depot_tablepack
 			$this->$o = $v;
 		}	
 
-		if (!$this->param->colonne)	$this->param->colonne = 'cfg'; 
-		if (!$this->param->table) 	$this->param->table = 'spip_auteurs';
+		if (!$this->param['colonne'])	$this->param['colonne'] = 'cfg'; 
+		if (!$this->param['table']) 	$this->param['table'] = 'spip_auteurs';
 		// colid : nom de la colonne primary key
-		list($this->param->table, $colid) = get_table_id($this->param->table);
+		list($this->param['table'], $colid) = $this->get_table_id($this->param['table']);
 		
 		// renseigner les liens id=valeur
-		$id = explode('/',$this->param->cfg_id);
+		$id = explode('/',$this->param['cfg_id']);
 		foreach ($colid as $n=>$c) {
 			if (isset($id[$n])) {
 				$this->_id[$c] = $id[$n];
@@ -53,7 +53,7 @@ class cfg_depot_tablepack
 	
 	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
 	function charger($creer = false){
-		if (!$this->param->cfg_id) {
+		if (!$this->param['cfg_id']) {
 			$this->messages['message_erreur'][] = _T('cfg:id_manquant');
 			return false;
 		}
@@ -68,13 +68,13 @@ class cfg_depot_tablepack
 				$this->_where[] = $nom . '=' . sql_quote($id);
 			}
 			
-			$this->_base = ($d = sql_getfetsel($this->param->colonne, $this->param->table, $this->_where)) ? unserialize($d) : array();
+			$this->_base = ($d = sql_getfetsel($this->param['colonne'], $this->param['table'], $this->_where)) ? unserialize($d) : array();
 		}	
 		
 		$this->_arbre = array();
 		$this->_ici = &$this->_base;
-    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param->nom);
-    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param->casier);
+    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['nom']);
+    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['casier']);
     	return true;	
 	}
 	
@@ -88,8 +88,8 @@ class cfg_depot_tablepack
 		$ici = &$this->_ici;
 
         // utile ??
-    	if ($this->param->cfg_id) {
-    		$cles = explode('/', $this->param->cfg_id);
+    	if ($this->param['cfg_id']) {
+    		$cles = explode('/', $this->param['cfg_id']);
 			foreach ($this->champs_id as $i => $name) {
 				$ici[$name] = $cles[$i];
 		    }
@@ -125,7 +125,7 @@ class cfg_depot_tablepack
 			$ici = $this->val;	
 		}	
 
-		$ok = sql_updateq($this->param->table, array($this->param->colonne => serialize($this->_base)), $this->_where);	
+		$ok = sql_updateq($this->param['table'], array($this->param['colonne'] => serialize($this->_base)), $this->_where);	
 		return array($ok, $ici);
 	}
 	
@@ -155,7 +155,7 @@ class cfg_depot_tablepack
 			unset($this->_arbre[$i][0][$this->_arbre[$i][1]]);
 		}
 		
-		$ok = sql_updateq($this->param->table, array($this->param->colonne => serialize($this->_base)), $this->_where);	
+		$ok = sql_updateq($this->param['table'], array($this->param['colonne'] => serialize($this->_base)), $this->_where);	
 		return array($ok, array());
 	}
 	
@@ -181,16 +181,16 @@ class cfg_depot_tablepack
 		} else {
 			list($table, $id) = explode(':',array_shift($args),2);
 			list($table, $colonne) = explode('@',$table);
-			list($table, $colid) = get_table_id($table);
+			list($table, $colid) = $this->get_table_id($table);
 		}
-		$this->param->cfg_id = $id;
-		$this->param->colonne = $colonne ? $colonne : 'cfg';
-		$this->param->table = $table ? $table : 'spip_auteurs';
-		$this->param->nom = array_shift($args);
+		$this->param['cfg_id'] = $id;
+		$this->param['colonne'] = $colonne ? $colonne : 'cfg';
+		$this->param['table'] = $table ? $table : 'spip_auteurs';
+		$this->param['nom'] = array_shift($args);
 		if ($champ = array_pop($args)) {
 			$this->champs = array($champ=>true);
 		}
-		$this->param->casier = implode('/',$args);
+		$this->param['casier'] = implode('/',$args);
 		
 		// renseigner les liens id=valeur
 		$id = explode(':',$id);
@@ -229,8 +229,8 @@ class cfg_depot_tablepack
 	
 	
 	function verifier_colonne($creer = false) {
-		$col = sql_showtable($table = $this->param->table);
-		if (!array_key_exists($colonne = $this->param->colonne, $col['field'])) {
+		$col = sql_showtable($table = $this->param['table']);
+		if (!array_key_exists($colonne = $this->param['colonne'], $col['field'])) {
 			if (!$creer){
 				return false;
 			}
@@ -244,6 +244,34 @@ class cfg_depot_tablepack
 		}
 		return true;
 	}
+
+	
+	//
+	// Cherche le vrai nom d'une table
+	// ainsi que ses cles primaires
+	//
+	function get_table_id($table) {	
+		static $catab = array(
+			'tables_principales' => 'base/serial',
+			'tables_auxiliaires' => 'base/auxiliaires',
+		);
+		$try = array($table, 'spip_' . $table);
+		foreach ($catab as $categ => $catinc) {
+			include_spip($catinc);
+			foreach ($try as $nom) {
+				if (isset($GLOBALS[$categ][$nom])) {
+					return array($nom,
+						preg_split('/\s*,\s*/', $GLOBALS[$categ][$nom]['key']['PRIMARY KEY']));
+				}
+			}
+		}
+		if ($try = table_objet($table)) {
+			return array('spip_' . $try, array(id_table_objet($table)));
+		}
+		return array(false, false);
+	}
+
 }
+
 
 ?>

@@ -9,7 +9,7 @@
 _ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[de]Vertrieb unter Lizenz</multi> GNU/LGPL
     </auteur>
     <version>
-    1.7.6
+    1.8.0
     </version>
     <etat>
     stable
@@ -36,9 +36,8 @@ Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie d
     cfg.png
     </icon>
     <chemin dir='' />
-    <options>
-    cfg_options.php
-    </options>
+    <options>cfg_options.php</options>
+    <fonctions>cfg_fonctions.php</fonctions>
 
     <pipeline>
         <nom>ajouter_boutons</nom>

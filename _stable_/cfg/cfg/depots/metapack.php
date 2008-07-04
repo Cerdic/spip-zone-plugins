@@ -36,11 +36,11 @@ class cfg_depot_metapack
 
 	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
 	function charger(){
-		$this->_base = is_array($c = $GLOBALS['meta'][$this->param->nom]) ? $c : @unserialize($c);
+		$this->_base = is_array($c = $GLOBALS['meta'][$this->param['nom']]) ? $c : @unserialize($c);
 		$this->_arbre = array();
 		$this->_ici = &$this->_base;
-    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param->casier);
-    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param->cfg_id);
+    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['casier']);
+    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['cfg_id']);
     	return true;	
 	}
 	
@@ -53,8 +53,8 @@ class cfg_depot_metapack
 		$ici = &$this->_ici;
     	
         // utile ??
-    	if ($this->param->cfg_id) {
-    		$cles = explode('/', $this->param->cfg_id);
+    	if ($this->param['cfg_id']) {
+    		$cles = explode('/', $this->param['cfg_id']);
 			foreach ($this->champs_id as $i => $name) {
 				$ici[$name] = $cles[$i];
 		    }
@@ -79,7 +79,7 @@ class cfg_depot_metapack
 	{
   		// si pas de champs : on ecrit directement (ecrire_meta(metapack::nom,$val))...
   		if (!$this->champs){
-  			ecrire_meta($this->param->nom, serialize($this->val));
+  			ecrire_meta($this->param['nom'], serialize($this->val));
   			if (defined('_COMPAT_CFG_192')) ecrire_metas();
   			return array(true, $this->val);
   		}
@@ -94,7 +94,7 @@ class cfg_depot_metapack
 			$ici[$name] = $this->val[$name];
 		}
 
-		ecrire_meta($this->param->nom, serialize($this->_base));
+		ecrire_meta($this->param['nom'], serialize($this->_base));
 		if (defined('_COMPAT_CFG_192')) ecrire_metas();
 		return array(true, $ici);
 	}
@@ -104,7 +104,7 @@ class cfg_depot_metapack
 	function effacer(){
   		// si pas de champs : on supprime directement (effacer_meta(metapack::nom))...
   		if (!$this->champs){
-  			effacer_meta($this->param->nom);
+  			effacer_meta($this->param['nom']);
   			if (defined('_COMPAT_CFG_192')) ecrire_metas();
   			return array(true, array());
   		}
@@ -129,9 +129,9 @@ class cfg_depot_metapack
 		}
 		
 		if (!$this->_base) {
-		    effacer_meta($this->param->nom);
+		    effacer_meta($this->param['nom']);
 		} else {
-		    ecrire_meta($this->param->nom, serialize($this->_base));
+		    ecrire_meta($this->param['nom'], serialize($this->_base));
 	    }		
 		if (defined('_COMPAT_CFG_192')) ecrire_metas();
 		
@@ -144,11 +144,11 @@ class cfg_depot_metapack
 	// il se peut qu'il n'y ait pas de champs si : lire_config(metapack::nom);
 	function charger_args($args){
 		$args = explode('/',$args);
-		$this->param->nom = array_shift($args);
+		$this->param['nom'] = array_shift($args);
 		if ($champ = array_pop($args)) {
 			$this->champs = array($champ=>true);
 		}
-		$this->param->casier = implode('/',$args);
+		$this->param['casier'] = implode('/',$args);
 		return true;	
 	}
 	

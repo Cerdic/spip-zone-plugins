@@ -31,17 +31,17 @@ class cfg_depot_php
 		}
 	}
 	
-	// calcule l'emplacepent du fichier
+	// calcule l'emplacement du fichier
 	function get_fichier(){
 		static $fichier = array();
-		$cle = $this->param->nom . ' - ' . $this->param->fichier;
+		$cle = $this->param['nom'] . ' - ' . $this->param['fichier'];
 		if (isset($fichier[$cle])) 
 			return $fichier[$cle];
 		
-		if (!$this->param->fichier) 
-			$f = _DIR_VAR . 'cfg/' . $this->param->nom . '.php';	
+		if (!$this->param['fichier']) 
+			$f = _DIR_VAR . 'cfg/' . $this->param['nom'] . '.php';	
 		else
-			$f = _DIR_RACINE . $this->param->fichier;
+			$f = _DIR_RACINE . $this->param['fichier'];
 
 		include_spip('inc/flock');
 		return $fichier[$cle] = sous_repertoire(dirname($f)) . basename($f);
@@ -62,9 +62,9 @@ class cfg_depot_php
     	}
 
     	$this->_ici = &$this->_base;
-    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param->nom);
-    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param->casier);
-    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param->cfg_id);	
+    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['nom']);
+    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['casier']);
+    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['cfg_id']);	
     	return true;
 	}
 	
@@ -75,8 +75,8 @@ class cfg_depot_php
 		}
 		
     	// utile ??
-    	if ($this->param->cfg_id) {
-    		$cles = explode('/', $this->param->cfg_id);
+    	if ($this->param['cfg_id']) {
+    		$cles = explode('/', $this->param['cfg_id']);
 			foreach ($this->champs_id as $i => $name) {
 				$this->_ici[$name] = $cles[$i];
 		    }
@@ -163,10 +163,10 @@ $cfg = ' . var_export($contenu, true) . ';
 		}
 
 		$arbre = explode('/',$args);
-		$this->param->nom = array_shift($arbre);
+		$this->param['nom'] = array_shift($arbre);
 		if ($champ = array_pop($arbre))
 			$this->champs = array($champ=>true);
-		$this->param->casier = implode('/',$arbre);
+		$this->param['casier'] = implode('/',$arbre);
 		return true;	
 	}
 	

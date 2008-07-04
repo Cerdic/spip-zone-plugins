@@ -36,16 +36,16 @@ class cfg_depot_table
 			$this->$o = $v;
 		}
 		
-		if (!$this->param->table) {
+		if (!$this->param['table']) {
 			$this->messages['message_erreur'][] = _T('cfg:nom_table_manquant');
 			return false;
 		}
 		
 		// colid : nom de la colonne primary key
-		list($this->param->table, $colid) = get_table_id($this->param->table);
+		list($this->param['table'], $colid) = $this->get_table_id($this->param['table']);
 		
 		// renseigner les liens id=valeur
-		$id = explode('/',$this->param->cfg_id);
+		$id = explode('/',$this->param['cfg_id']);
 		foreach ($colid as $n=>$c) {
 			if (isset($id[$n])) {
 				$this->_id[$c] = $id[$n];
@@ -55,7 +55,7 @@ class cfg_depot_table
 	
 	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
 	function charger($creer = false){
-		if (!$this->param->cfg_id AND !($this->param->autoriser_absence_id == 'oui')) {
+		if (!$this->param['cfg_id'] AND !($this->param['autoriser_absence_id'] == 'oui')) {
 			$this->messages['message_erreur'][] = _T('cfg:id_manquant');
 			return false;
 		}
@@ -81,7 +81,7 @@ class cfg_depot_table
 			
 		$this->_base = ($d = sql_fetsel(
 			$this->_select, 
-			$this->param->table, 
+			$this->param['table'], 
 			$this->_where)) ? $d : array();
 		
 		$this->_existe = count($this->_base);
@@ -99,8 +99,8 @@ class cfg_depot_table
 		}
 
         // utile ??
-    	if ($this->param->cfg_id) {
-    		$cles = explode('/', $this->param->cfg_id);
+    	if ($this->param['cfg_id']) {
+    		$cles = explode('/', $this->param['cfg_id']);
 			foreach ($this->champs_id as $i => $name) {
 				$this->_ici[$name] = $cles[$i];
 		    }
@@ -137,9 +137,9 @@ class cfg_depot_table
 			
 		// update
 		if ($this->_existe) {	
-		    $ok = sql_updateq($this->param->table, $this->_ici, $this->_where );
+		    $ok = sql_updateq($this->param['table'], $this->_ici, $this->_where );
 	    } else {
-			$ok = $id = sql_insertq($this->param->table, $this->_ici);
+			$ok = $id = sql_insertq($this->param['table'], $this->_ici);
 	    }
 
 		// remettre l'id
@@ -158,7 +158,7 @@ class cfg_depot_table
 			return array(false, $this->val, $this->messages);	
 		}
 		
-		$ok = !$this->_existe || sql_delete($this->param->table, $this->_where );	
+		$ok = !$this->_existe || sql_delete($this->param['table'], $this->_where );	
 		return array($ok, array());
 	}
 	
@@ -170,11 +170,11 @@ class cfg_depot_table
 
 		list($table, $id) = explode(':',$args,2);
 		list($table, $colonne) = explode('@',$table);
-		list($table, $colid) = get_table_id($table);
+		list($table, $colid) = $this->get_table_id($table);
 		
-		$this->param->cfg_id = $id;
-		$this->param->champs = $colonne ? array($colonne=>true) : '';
-		$this->param->table = $table ? $table : 'spip_cfg';
+		$this->param['cfg_id'] = $id;
+		$this->param['champs'] = $colonne ? array($colonne=>true) : '';
+		$this->param['table'] = $table ? $table : 'spip_cfg';
 		
 		// renseigner les liens id=valeur
 		$id = explode(':',$id);
@@ -212,94 +212,37 @@ class cfg_depot_table
 	}
 	
 
-}
-
-
-
-
-// cfg_table retrouve et met a jour les donnees d'une table "objet" $cfg->table
-// ici, $cfg->cfg_id est obligatoire
-class cfg_table
-{
-	function cfg_table(&$cfg, $opt = array())
-	{
-		$this->cfg = &$cfg;
-		foreach ($opt as $o=>$v) {
-			$this->$o = $v;
-		}
-		$this->cfg->param->table || ($this->cfg->message = _T('cfg:nom_table_manquant'));
-	}
-	
-
-	/* 
-	 * Recuperer les valeurs
-	 * 
-	 * Le parametre 'autoriser_absence_id=oui' permet d'autoriser
-	 * une requete sql d'insertion de nouveau contenu
-	 * meme si l'on ne donne pas la valeur du champs cle primaire (id)
-	 * ce qui permet d'executer la requete si le champ id est autoincrement.
-	 * 
-	 * Si un message d'erreur est retourne, on ne peut 
-	 * faire aucune modification.
-	 * 
-	 */
-	function lire()
-	{
-		// si cfg_id n'est pas present,
-		// pas la peine de continuer
- 		if (!$this->cfg->param->cfg_id) {
- 			// ignorer cette erreur si le champ id est 'autoincrement'
- 			if (!$this->cfg->param->autoriser_absence_id == 'oui')
-				$this->cfg->message = _T('cfg:id_manquant');
-			return false;
-		}
-
-   		$cles = explode('/', $this->cfg->param->cfg_id);
-    	$val = array();
-    	// selection des champs du select
-		$select = array();
-		foreach ($this->cfg->champs as $name => $def) {
-			if (isset($def['id'])) {
-				continue;
+	//
+	// Cherche le vrai nom d'une table
+	// ainsi que ses cles primaires
+	//
+	function get_table_id($table) {	
+		static $catab = array(
+			'tables_principales' => 'base/serial',
+			'tables_auxiliaires' => 'base/auxiliaires',
+		);
+		$try = array($table, 'spip_' . $table);
+		foreach ($catab as $categ => $catinc) {
+			include_spip($catinc);
+			foreach ($try as $nom) {
+				if (isset($GLOBALS[$categ][$nom])) {
+					return array($nom,
+						preg_split('/\s*,\s*/', $GLOBALS[$categ][$nom]['key']['PRIMARY KEY']));
+				}
 			}
-			$select[] = $name;
-	    }
-		$query = sql_select($select, $this->cfg->param->table, $this->where());
-		($query = sql_fetch($query)) && ($val = $query);
-
-		foreach ($this->cfg->champs_id as $i => $name) {
-			$val[$name] = $cles[$i];
-	    }
-
-	    return $val;
+		}
+		if ($try = table_objet($table)) {
+			return array('spip_' . $try, array(id_table_objet($table)));
+		}
+		return array(false, false);
 	}
-	
-// fabriquer un array WHERE depuis cfg_id
-	function where()
-	{
-   		$cles = explode('/', $this->cfg->param->cfg_id);
-		$where = array();
-		foreach ($this->cfg->champs_id as $i => $name) {
-			$where[] = $name . '=' 
-					. (is_numeric($cles[$i]) ? intval($cles[$i]) : sql_quote($cles[$i]));
-	    }
-		return $where;
-	}
-	
-// modifier le fragment qui peut etre tout le meta
-	function modifier($supprimer = false)
-	{
 
-		$this->cfg_id = $sep = '';
-		foreach ($this->cfg->champs_id as $name) {
-			$this->param->cfg_id .= $sep . _request($name);
-			$sep = '/';
-	    }
-
-
-
-		
-
-	}
 }
+
+
+
+
+
+
+
 ?>
