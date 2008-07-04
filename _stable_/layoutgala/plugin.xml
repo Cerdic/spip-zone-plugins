@@ -34,6 +34,6 @@ Permet de choisir un agencement parmis les 40 de [LayoutGala->http://blog.html.i
 		<nom>insert_head</nom>
 		<inclure>layoutgala_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[1.9300;]' />
+	<necessite id="SPIP" version='[1.9.3;]' />
 	<necessite id="cfg" version="[1.0.8;]" />
 </plugin>
