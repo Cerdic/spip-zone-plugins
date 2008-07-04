@@ -1,9 +1,9 @@
 <BOUCLE_article(ARTICLES){id_article}>
 <div class="post">
-[(#LOGO_ARTICLE|right|#URL_ARTICLE|liens_absolus)]
-[<p class="surtitre">(#SURTITRE)</p>]
-<h2 class="post-title">#TITRE</h2>
-[<p class="soustitre">(#SOUSTITRE)</p>]
+[(#LOGO_ARTICLE|right|#URL_ARTICLE|liens_absolus|inserer_attribut{class,#EDIT{logo}})]
+[<p class="surtitre #EDIT{soustitre}">(#SURTITRE)</p>]
+<h2 class="post-title #EDIT{titre}">#TITRE</h2>
+[<p class="soustitre #EDIT{surtitre}">(#SOUSTITRE)</p>]
 <p class="post-info"><B_auteurs><:par_auteur|ucfirst:> <BOUCLE_auteurs(AUTEURS){id_article}{", "}><span[ title="(#BIO|couper{60}|texte_backend)"]>#NOM</span></BOUCLE_auteurs>,</B_auteurs>
 [(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
 <span>::</span> <BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></BOUCLE_categorie>
