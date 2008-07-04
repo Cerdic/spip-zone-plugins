@@ -10,42 +10,29 @@
 *  
 **/
 
-function notation_install($action){
+include_spip('inc/meta');
+include_spip('base/create');
 include_spip('inc/vieilles_defs');
-	switch ($action)
-	{	// La base est deja cree ?
-		case 'test':
-			// Verifier que le champ id_notation est present...
-			include_spip('base/abstract_sql');
-			if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
-				$desc = spip_abstract_showtable("spip_notations", '', true);
-			} else {
-				$desc = spip_abstract_showtable("spip_notations");
-			}
-			return (isset($desc['field']['maj']));
-			break;
-		// Installer la base
-		case 'install':
-			include_spip('base/create');
-			if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
-				$desc = spip_abstract_showtable("spip_notations", '', true);
-			} else {
-				$desc = spip_abstract_showtable("spip_notations");
-			}
-			if (isset($desc['field']['id_notation']))
-      { spip_query("ALTER TABLE spip_notations ADD `maj` TIMESTAMP NOT NULL ");
-      }
-			else
-      { include_spip('base/notation');
-        creer_base();
-      }
-			break;
-		// Supprimer la base
-		case 'uninstall':
-			spip_query("DROP TABLE spip_notations");
-			spip_query("DROP TABLE spip_notations_articles");
-			break;
+
+function notation_upgrade($nom_meta_base_version,$version_cible){
+	$current_version = 0.0;
+	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
+			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
+		
+		if ($current_version==0.0){
+			include_spip('base/notation');
+			creer_base();
+			ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
+		}
+		ecrire_metas();
 	}
-}	
+}
+
+function notation_vider_tables($nom_meta_base_version) {
+	spip_query("DROP TABLE spip_notations");
+	spip_query("DROP TABLE spip_notations_articles");
+	effacer_meta($nom_meta_base_version);
+	ecrire_metas();
+}
 	
 ?>
