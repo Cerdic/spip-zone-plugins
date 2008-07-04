@@ -60,7 +60,7 @@
 	<necessite id="CFG" version="[1.0;]" />
 	<necessite id="BarreTypoEnrichie" version="[2.3.1;]" />
 	<necessite id="barre_typo_generalisee" version="[1.4;]" />
-	<necessite id='spip' version='[1.92;]' />
+	<necessite id='spip' version='[1.9.2;]' />
 	
 	
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
