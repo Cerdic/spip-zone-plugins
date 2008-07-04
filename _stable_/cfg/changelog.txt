@@ -6,6 +6,9 @@ v1.8.0 (04 07 2008)
 - les fonctions des balises sont chargées au calcul et non en permanence et sont déplacees dans cfg_fonctions.php
 - suppression de cfg_charger_classe() : la surchage, c'est simplement le fichier, on se passe de _dist
 - déplacemeent de la classe cfg_depot dans inc/cfg_config
+- tests unitaires pour les fonctions lire_config, ecrire_config et effacer_config pour les dépots meta, metapack et php
+- lire_config metapack et php ne renvoyaient pas NULL si la méta ou le fichier php etait absent
+
 
 v1.7.6 (27 06 2008)
 - Correction bug avec ecrire_config(php::...)

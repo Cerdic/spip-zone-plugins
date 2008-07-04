@@ -49,11 +49,12 @@ class cfg_depot_php
 	
 	
 	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
-	function charger(){
+	function charger($lire=false){
 		$fichier = $this->get_fichier();
 
 		// inclut une variable $cfg
     	if (!@include $fichier) {
+    		if ($lire) return false;
     		$this->_base = array();
     	} elseif (!$cfg OR !is_array($cfg)) {
     		$this->_base = array();
@@ -70,7 +71,7 @@ class cfg_depot_php
 	
 	// recuperer les valeurs.
 	function lire() {
-		if (!$this->charger()){
+		if (!$this->charger(true)){
 			return array(false, $this->val);	
 		}
 		

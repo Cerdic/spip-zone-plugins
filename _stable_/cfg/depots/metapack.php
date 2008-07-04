@@ -35,7 +35,9 @@ class cfg_depot_metapack
 	
 
 	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
-	function charger(){
+	function charger($lire = false){
+		if ($lire && !isset($GLOBALS['meta'][$this->param['nom']])) 
+			return false;
 		$this->_base = is_array($c = $GLOBALS['meta'][$this->param['nom']]) ? $c : @unserialize($c);
 		$this->_arbre = array();
 		$this->_ici = &$this->_base;
@@ -47,7 +49,7 @@ class cfg_depot_metapack
 	// recuperer les valeurs.
 	function lire()
 	{
-		if (!$this->charger()){
+		if (!$this->charger(true)){
 			return array(false, $this->val);	
 		}
 		$ici = &$this->_ici;
