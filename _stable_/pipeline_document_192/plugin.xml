@@ -17,7 +17,7 @@
 
 
    <!-- précise les dependances vis-a-vis de d'autres plugins -->
-   <necessite id="spip" version="[1.92;1.93(" />
+   <necessite id="spip" version="[1.9.2;1.9.3]" />
    
    <chemin dir='' />
 

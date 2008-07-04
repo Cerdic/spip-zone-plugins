@@ -18,5 +18,5 @@
   		<inclure>fenetre_flottante_define_head.php</inclure>
  	</pipeline>
  	<necessite id="CFG" version="[1.0;]" />
-	<necessite id='spip' version='[1.92;]' />
+	<necessite id='spip' version='[1.9.2;]' />
 </plugin>

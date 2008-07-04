@@ -22,7 +22,7 @@ _ Ce plugin n&eacute;cessite le plugin "Acc&egrave;s Restreint v2"
 	<prefix>
 	squeezezone
 	</prefix>
-	<necessite id="SPIP" version='[1.9302;]' />
+	<necessite id="SPIP" version='[1.9.3;]' />
 	<necessite id="AccesRestreint" version='[0.2;]' />
 	<necessite id="SelecteurGenerique" version="[0.1;]" />
 	<chemin dir='' />

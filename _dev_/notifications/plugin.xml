@@ -41,7 +41,7 @@
 		<inclure>cron.php</inclure>
 	</pipeline>
 
-	<necessite id='spip' version='[1.9259;]' />
+	<necessite id='spip' version='[1.9.2;]' />
 	<necessite id='cfg' version='[0;]' />
 
 </plugin>
