@@ -19,5 +19,23 @@
 
 	include_spip('base/meteo');
 	include_spip('inc/vieilles_defs');
+	
+	
+	
+		/**
+	 * meteo_taches_generales_cron
+	 *
+	 * Ajout des tâches planifiées pour le plugin
+	 *
+	 * @param array taches_generales
+	 * @return true
+	 * @author Pierre Basson
+	 **/
+	function meteo_taches_generales_cron($taches_generales) {
+		$taches_generales['previsions_meteo'] = 60 * 60; // toutes les heures
+		return $taches_generales;
+	}
+	
+	
 
 ?>

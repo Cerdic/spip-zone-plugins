@@ -1,20 +1,5 @@
 <?php
 
-	/**
-	 * meteo_taches_generales_cron
-	 *
-	 * Ajout des tâches planifiées pour le plugin
-	 *
-	 * @param array taches_generales
-	 * @return true
-	 * @author Pierre Basson
-	 **/
-	function meteo_taches_generales_cron($taches_generales) {
-		$taches_generales['previsions_meteo'] = 60 * 60; // toutes les heures
-		return $taches_generales;
-	}
-
-
 
 	/**
 	 * meteo_recherche
@@ -88,7 +73,10 @@
 	 * @author Pierre Basson
 	 **/
 	function meteo_lire_xml($chaine, $est_fichier, $item, $champs) {
-		if ($est_fichier) $chaine = @file_get_contents($chaine);
+	// Aller chercher les donnees du XML et les analyser
+	include_spip('inc/distant');
+	if ($est_fichier) $chaine = recuperer_page($chaine);
+		#@file_get_contents($chaine); 
 		else return false;
 		if ($chaine) {
 			// on explode sur <item>
@@ -142,6 +130,11 @@
 	 **/
 	function meteo_convertir_fahrenheit_celsius($t) {
 		return round( ($t - 32) * 5 / 9 );
+	}
+	
+	
+	function generer_supprimer_meteo($id_meteo){
+	return ajax_action_auteur('editer_meteo', "$id_mot",$clic);
 	}
 
 
