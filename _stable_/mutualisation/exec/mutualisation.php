@@ -29,7 +29,7 @@ function exec_mutualisation_dist() {
 	$page = '';
 	
 	$page .= '<div style="text-align:right">'._T('version')
-		. ' ' . $GLOBALS['spip_version'].'</div>';
+		. ' ' . $GLOBALS['spip_version_base'].'</div>';
 
 
 	$page .= "<table style='clear:both;'>
@@ -112,7 +112,7 @@ function exec_mutualisation_dist() {
 
 
 function test_upgrade_site($meta) {
-	if ($GLOBALS['spip_version']
+	if ($GLOBALS['spip_version_base']
 	!= str_replace(',','.',$meta['version_installee'])) {
 		$secret = $meta['version_installee'].'-'.$meta['alea_ephemere'];
 		$secret = md5($secret);

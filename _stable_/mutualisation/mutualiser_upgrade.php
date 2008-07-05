@@ -14,7 +14,7 @@ function mutualiser_upgrade() {
 		exit;
 	}
 
-	if ($GLOBALS['spip_version']
+	if ($GLOBALS['spip_version_base']
 	== str_replace(',','.',$GLOBALS['meta']['version_installee'])) {
 		echo minipres('Rien &#224; faire');
 		exit;
@@ -27,7 +27,7 @@ function mutualiser_upgrade() {
 	lire_metas();
 	$new = $GLOBALS['meta']['version_installee'];
 	if ($old == $new
-	OR $new != $GLOBALS['spip_version']) {
+	OR $new != $GLOBALS['spip_version_base']) {
 		echo minipres(_T('titre_page_upgrade'),
 			_L('Erreur de mise &#224; jour de @old@ vers @new@',
 				array('old' => $old, 'new' => $new))
