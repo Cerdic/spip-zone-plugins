@@ -1,16 +1,6 @@
 #HTTP_HEADER{Content-type: text/javascript}
 $(document).ready(function(){
 	
-	$("a#ouvrire_liaison_a2a").click(function(){
-		var box_vis = $("div#div_liaison_a2a:visible");
-		box_vis.slideUp();
-		
-		var box = $("div#div_liaison_a2a:hidden");
-		box.slideDown();
-		
-		return false;
-	});
-	
 	$("form#form_liaison_a2a").submit(function(){
 		var recherche = $("input#recherche_a2a").val();
 		var id_article = $("input#a2a_article_orig").val();

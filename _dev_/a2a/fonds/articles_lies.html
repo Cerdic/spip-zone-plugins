@@ -1,36 +1,30 @@
-<br />
-<div class="cadre-e-noir">
-	<div class="cadre-e">
-		<div class="cadre-padding">
-			<strong><a href="#" id="ouvrire_liaison_a2a" >+</a>&nbsp;<:a2a:articles_lies:></strong><br />
-			<B_LesLie>
-			<ul>
-			<BOUCLE_LesLie(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}{par rang}>
-					
-				<BOUCLE_lesArticlesLies(ARTICLES){id_article = #ID_ARTICLE_LIE}>
-					<li>#TITRE : 
-					<a href="[(#URL_ARTICLE|url_absolue)]"><:a2a:voir:></a> | 
-					<a href="[(#EVAL{supprimer_lien_a2a}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&redirect=ecrire/#SELF})]"><:a2a:supprimer_le_lien:></a> |
-					<a href="[(#EVAL{a2a_modifier_rang}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&modifier_rang=moins&redirect=ecrire/#SELF})]"><:a2a:rang_moins:></a> |
-					<a href="[(#EVAL{a2a_modifier_rang}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&modifier_rang=plus&redirect=ecrire/#SELF})]"><:a2a:rang_plus:></a>
-					</li>
-				</BOUCLE_lesArticlesLies>
-					
-			</BOUCLE_LesLie>
-				</ul>
-			</B_LesLie>
-			<strong><:a2a:pas_articles_lies:></strong>
-			<//B_LesLie>
-			<div id="div_liaison_a2a" style="display: none;">
-				<!-- <:a2a:lier_un_article_a_celui_ci:><br /> -->
-				<form id="form_liaison_a2a" action="[(#EVAL{recherche_article_a2a}|generer_url_action)]" method="get" >
-					<input type="hidden" id="a2a_article_orig" name="id_article" value="#ID_ARTICLE_ORIG" />
-					<label for="recherche_a2a"><:a2a:rechercher_un_article_a_lier:></label>
-					<input type="text" name="recherche" id="recherche_a2a" />&nbsp;<input type="submit" name="ok" value="<:a2a:rechercher:>" />
-				</form>
-				<div id="resultat_recherche_a2a"></div>
-			</div>
-		</div>
-	</div>
+[(#EVAL{debut_cadre_enfonce("", true, "", "<:a2a:articles_lies:>")})]
+<B_LesLie>
+<div class="cadre cadre-liste"><table width="100%" cellpadding="2" cellspacing="0" border="0">
+<BOUCLE_LesLie(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}{par rang}>
+<tr class='tr_liste'>
+	<BOUCLE_lesArticlesLies(ARTICLES){id_article = #ID_ARTICLE_LIE}>
+		<td class="arial2"><a href="[(#URL_ARTICLE|url_absolue)]">#TITRE</a></td>
+		[(#EVAL{autoriser('modifier','article', #ID_ARTICLE_ORIG)}|=={1}|?{' '}) 
+		<td class="arial1"><a href="[(#EVAL{a2a_modifier_rang}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&modifier_rang=moins&redirect=ecrire/#SELF})]"><:a2a:rang_moins:></a></td>
+		<td class="arial1"><a href="[(#EVAL{a2a_modifier_rang}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&modifier_rang=plus&redirect=ecrire/#SELF})]"><:a2a:rang_plus:></a></td>
+		<td class="arial1"><a href="[(#EVAL{supprimer_lien_a2a}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&redirect=ecrire/#SELF})]"><:a2a:supprimer_le_lien:></a></td>
+		]
+	</BOUCLE_lesArticlesLies>
+</tr>	
+</BOUCLE_LesLie>
+</table></div>
+</B_LesLie>
+<:a2a:pas_articles_lies:>
+<//B_LesLie>
+[(#EVAL{autoriser('modifier','article', #ID_ARTICLE_ORIG)}|=={1}|?{' '})
+<div class="cadre cadre-liste">
+	<form id="form_liaison_a2a" action="[(#EVAL{recherche_article_a2a}|generer_url_action)]" method="get" >
+		<input type="hidden" id="a2a_article_orig" name="id_article" value="[(#ID_ARTICLE_ORIG)]" />
+		<label for="recherche_a2a"><:a2a:rechercher_un_article_a_lier:></label>
+		<input type="text" name="recherche" id="recherche_a2a" />&nbsp;<input type="submit" name="ok" value="<:a2a:rechercher:>" />
+	</form>
+	<div id="resultat_recherche_a2a"></div>
 </div>
-<br />
+]
+[(#EVAL{fin_cadre_enfonce(true)})]
