@@ -15,17 +15,14 @@
   <variable>
     <nom>Text</nom>
     <type>color</type>
-    <valeur>ff0000</valeur>
   </variable>
   <variable>
     <nom>Link</nom>
     <type>color</type>
-    <valeur>ff8f00</valeur>
   </variable>
   <variable>
     <nom>LinkHover</nom>
     <type>color</type>
-    <valeur>ff0000</valeur>
   </variable>
   <variable>
     <nom>LienRefus</nom>
