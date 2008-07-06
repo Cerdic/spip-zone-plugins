@@ -47,14 +47,14 @@ Si le plugin notation est présent, il est intégré.
     <B_auteurs>
     <div class="spacer"></div>
     <ul>
-        <BOUCLE_auteurs(AUTEURS) {id_article} {par nom}>
+        <BOUCLE_auteurs(AUTEURS) {id_article} {par nom} >
         <li>
           <div class="divers">
-          <div class="menu-titre" title="Tout sur #NOM">Du même auteur: <a href="spip.php?auteur#ID_AUTEUR" title="Tout sur #NOM">#NOM</a></div>
+          <div class="menu-titre" title="Tout sur #NOM"><:meme_auteur:> <a href="spip.php?auteur#ID_AUTEUR" title="#NOM">#NOM</a></div>
 		<ul>
               [<li class="menu-item" style="text-align: center"><a href="(#URL_SITE)">#NOM_SITE</a></li>]
               [<li class="menu-item" style="text-align: center">(#BIO)</li>]
-              <BOUCLE_articles_auteur(ARTICLES) {id_auteur} {par popularite} {inverse} {0,5} {lang=#LANG}>
+              <BOUCLE_articles_auteur(ARTICLES) {id_auteur} {par popularite} {inverse} {0,5} {lang ?}>
               <li class="menu-item"><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
               </BOUCLE_articles_auteur>
           </ul>
@@ -81,9 +81,9 @@ Si le plugin notation est présent, il est intégré.
     <B_articles_rubrique>[(#REM) Articles dans la meme rubrique ]
     <div class="spacer"></div>
     <div class="divers">
-        <div class="menu-titre">Dans la m&ecirc;me rubrique</div>
+        <div class="menu-titre"><:meme_rubrique:></div>
         <ul>
-        <BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par hasard} {exclus} {0,8}>
+        <BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par hasard} {exclus} {0,8} {lang ?}>
           <li class="menu-item"><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
         </BOUCLE_articles_rubrique>
         </ul>
