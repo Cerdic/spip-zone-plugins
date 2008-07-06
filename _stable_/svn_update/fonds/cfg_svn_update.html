@@ -13,7 +13,7 @@
     <fieldset>
         <legend> Administrateur SVN</legend>
         <p>
-            #SET{selected,#CONFIG{svn_update/administrateurs,'',''}}
+            #SET{selected,#CONFIG{svn_update/administrateurs,#ARRAY}}
             <label for="administrateurs">Selectionnez parmi les comptes suivants ceux qui seront autorisés à gérer les mises à jour SVN</label>        
 
             <p class="information"> Si aucun compte n'est selectionné, seul le compte d'identifiant 1 est autorisé</p>
