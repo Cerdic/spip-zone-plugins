@@ -1,7 +1,7 @@
 [(#SET{acsEncartKeyword,<:acs:encart_keyword:>})]
 <B_encart>
 <div class="composantEncart">
-<BOUCLE_encart(ARTICLES) {par date} {inverse} {doublons} {titre_mot=#GET{acsEncartKeyword}} {0,3}>
+<BOUCLE_encart(ARTICLES) {par date} {inverse} {doublons} {titre_mot=#GET{acsEncartKeyword}} {0,3}{lang ?}>
   <div class="cartouche">
     [<div align="center">(#LOGO_ARTICLE)</div>]
 

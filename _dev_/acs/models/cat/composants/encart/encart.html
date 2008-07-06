@@ -1,4 +1,4 @@
 [(#CONFIG{acsEncartUse}|=={oui}|?{' '})
-  [(#CONFIG{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/encart/encart-democratie}>][(#REM) Encart si composant democratie activé]
-  [(#CONFIG{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/encart/encart-oligarchie}>][(#REM) Encart si composant democratie inactif]
+  [(#CONFIG{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/encart/encart-democratie}{lang=#LANG}>][(#REM) Encart si composant democratie activé]
+  [(#CONFIG{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/encart/encart-oligarchie}{lang=#LANG}>][(#REM) Encart si composant democratie inactif]
 ]
