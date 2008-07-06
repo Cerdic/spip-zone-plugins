@@ -45,7 +45,7 @@ function Agenda_affiche_milieu($flux) {
 	
 	if ($exec=='articles'){
 //on teste si cfg est actif
-	if (function_exists(lire_config)) {	
+	if ((function_exists(lire_config)) && (count(lire_config("agenda/rubriques_agenda",' '))>1)) {
 	$arracfgrubriques=lire_config("agenda/rubriques_agenda",' ');
 		if ($id_article!=''){
 		//on cherche la rubrique de l'article
