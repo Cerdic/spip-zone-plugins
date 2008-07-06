@@ -61,11 +61,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'categ:admin' => '1. Administratie',
-	'categ:divers' => '<MODIF>6. Diversen',
-	'categ:public' => '<MODIF>4. Openbare display',
-	'categ:spip' => '<MODIF>5. Bakens, filters, criteria',
-	'categ:typo-corr' => '<MODIF>2. Teksten verbeteringen',
-	'categ:typo-racc' => '<MODIF>3. Typografische kortere wegen',
+	'categ:divers' => '60. Diversen',
+	'categ:interface' => '10. Interface priv&eacute;e',
+	'categ:public' => '40. Openbare display',
+	'categ:spip' => '50. Bakens, filters, criteria',
+	'categ:typo-corr' => '20. Teksten verbeteringen',
+	'categ:typo-racc' => '30. Typografische kortere wegen',
 	'certaines_couleurs' => 'Enkel de hieronder bepaalde bakens@_CS_ASTER@ :',
 	'chatons:aide' => 'Katjes : @liste@',
 	'chatons:description' => 'Neemt beelden (of katjes voor {tchats}) op in alle teksten waar een keten van het soort blijkt <code>:nom</code>.
@@ -132,7 +133,7 @@ _ Dans les squelettes : vous avez &agrave; votre disposition les nouvelles balis
 _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.',
 	'decoupe:nom' => 'In bladzijdes en tabben snijden',
 	'desactiver_flash:description' => 'Schaft de onderwerpen flash van de bladzijdes van uw plaats af en vervangt ze door de verenigde alternatieve inhoud.',
-	'desactiver_flash:nom' => '<MODIF>D&eacute;sactive de onderwerpen flash',
+	'desactiver_flash:nom' => 'De activering terugtrekken van de onderwerpen flash',
 	'detail_balise_etoilee' => '<NEW>{{Attention}} : V&eacute;rifiez bien l\'utilisation faite par vos squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outil ne s\'appliqueront pas sur : @bal@.',
 	'detail_fichiers' => 'Bestanden :',
 	'detail_inline' => 'Code inline :',
@@ -155,14 +156,14 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.'
 	'erreur:nom' => 'Fout !',
 	'erreur:probleme' => 'Zurig probleem : @pb@',
 	'erreur:traitements' => '<NEW>Le Couteau Suisse - Erreur de compilation des traitements : m&eacute;lange \'typo\' et \'propre\' interdit !',
-	'erreur:version' => '<NEW>Cet outil est indisponible dans cette version de SPIP.',
+	'erreur:version' => 'Dit werktuig is niet beschikbaar in deze versie van SPIP.',
 	'etendu' => 'Uitgestrekt',
 
 	// F
-	'f_jQuery:description' => '<NEW>Emp&ecirc;che l\'installation de {jQuery} dans la partie publique afin d\'&eacute;conmiser un peu de &laquo;temps machine&raquo;. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l\'utilise dans sa partie priv&eacute;e.
+	'f_jQuery:description' => 'Verhindert de installatie van {jQuery} in het openbare deel teneinde e&eacute;conmiser een beetje van &#132;tijd bekokstooft&#147;. Deze boekhandel ([- > http://jquery.com/]) brengt talrijke gerief in de programmering van Javascript en kan door bepaalde plugins gebruikt worden. SPIP gebruikt het bij zijn deel priv&eacute;e.
 
-Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions de {jQuery}. ',
-	'f_jQuery:nom' => '<NEW>D&eacute;sactive jQuery',
+Opgelet: bepaalde werktuigen van het Zwitserland Mes vereisen de functies van {jQuery}.',
+	'f_jQuery:nom' => 'Inactieve jQuery.',
 	'filets_sep:aide' => 'Scheidingsnetten&nbsp;: <b>__i__</b> waar <b>i</b> is een aantal.<br />Andere beschikbare netten : @liste@',
 	'filets_sep:description' => 'Neemt scheidingsnetten op, aan de persoonlijke behoeften aanpasbaar door bladen van stijl, in alle teksten van SPIP.
 _ De syntaxis is : "__code__", waar &#132;de code&#147; vertegenwoordigt ofwel het identificatienummer (van 0 tot 7) van het net dat in rechtstreeks verband met de overeenkomstige stijlen, ofwel de naam van een beeld moet opgenomen worden dat in het dossier wordt geplaatst plugins/couteau_suisse/img/filets.',
@@ -263,6 +264,7 @@ _ &bull; [De tout le plugin->@reset@]
 	'label:style_p' => 'Uw stijl :',
 	'label:suite_introduction' => 'Punten van vervolg :',
 	'label:titre_travaux' => 'Titel van het bericht :',
+	'label:tri_articles' => '<NEW>Votre choix :',
 	'label:url_glossaire_externe2' => 'Band naar het externe glossarium :',
 	'liens_en_clair:description' => '<NEW>Met &agrave; votre disposition le filtre : \'liens_en_clair\'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d\'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre \'cs=print\' ou \'page=print\' dans l\'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.',
 	'liens_en_clair:nom' => 'Band in klaarheid',
@@ -297,18 +299,18 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	// O
 	'orientation:description' => '<NEW>3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.',
 	'orientation:nom' => '<NEW>Orientation des images',
-	'outil_actif' => '<NEW>Outil actif',
-	'outil_activer' => '<NEW>Activer',
-	'outil_activer_le' => '<NEW>Activer l\'outil',
-	'outil_cacher' => '<NEW>Ne plus afficher',
+	'outil_actif' => 'Actief werktuig',
+	'outil_activer' => 'Activeren',
+	'outil_activer_le' => 'Het werktuig activeren',
+	'outil_cacher' => 'Niet meer aangeven',
 	'outil_desactiver' => '<NEW>D&eacute;sactiver',
 	'outil_desactiver_le' => '<NEW>D&eacute;sactiver l\'outil',
-	'outil_inactif' => '<NEW>Outil inactif',
-	'outil_intro' => '<NEW>Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition.<br /><br />En cliquant sur le nom des outils ci-dessous, vous s&eacute;lectionnez ceux dont vous pourrez permuter l\'&eacute;tat &agrave; l\'aide du bouton central : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>. &Agrave; chaque clic, la description apparait au-dessous des listes. Les cat&eacute;gories sont repliables et les outils peuvent &ecirc;tre cach&eacute;s. Le double-clic permet de permuter rapidement un outil.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d\'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d\'autres plugins.<br /><br />Note : le simple chargement de cette page recompile l\'ensemble des outils du Couteau Suisse.',
+	'outil_inactif' => 'Inactief werktuig',
+	'outil_intro' => 'Deze bladzijde zet de functies van plugin op een lijst die uw ter beschikking worden gesteld.<br /><br />Door op de naam van de werktuigen te klikken hieronder, selecteert u degenen waarvan zult kunnen verwisselen u de stand met behulp van de centrale knoop: de geactiveerde werktuigen d&eacute;sactiv&eacute;s en <i>vice versa</i>. Aan elke klik, blijkt de beschrijving onder de lijsten. De categorie&euml;n zijn opvouwbaar en de werktuigen kunnen verborgen worden. Het dubbele-Voor een eerste gebruik, wordt hij aanbevolen om de werktuigen &eacute;&eacute;n voor &eacute;&eacute;n te activeren, ingeval zeker de onverenigbaarheden met uw skelet, SPIP of anderen plugins zouden blijkenklik maakt het mogelijk om een werktuig snel te verwisselen.<br /><br />.<br /><br />Nota : de eenvoudige lading van deze bladzijde compileert het geheel van de werktuigen van het Zwitserland Mes opnieuw.',
 	'outil_intro_old' => '<NEW>Cette interface est ancienne.<br /><br />Si vous rencontrez des probl&egrave;mes dans l\'utilisation de la <a href=\'./?exec=admin_couteau_suisse\'>nouvelle interface</a>, n\'h&eacute;sitez pas &agrave; nous en faire part sur le forum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
-	'outil_nb' => '<NEW>@pipe@ : @nb@ outil',
-	'outil_nbs' => '<NEW>@pipe@ : @nb@ outils',
-	'outil_permuter' => '<NEW>Permuter l\'outil : &laquo; @text@ &raquo; ?',
+	'outil_nb' => '@pipe@ : @nb@ werktuig',
+	'outil_nbs' => '@pipe@ : @nb@ werktuigen',
+	'outil_permuter' => 'Het werktuig verwisselen : &laquo; @text@ &raquo; ?',
 	'outils_actifs' => '<NEW>Outils actifs :',
 	'outils_caches' => '<NEW>Outils cach&eacute;s :',
 	'outils_cliquez' => '<NEW>Cliquez sur le nom des outils ci-dessus pour afficher ici leur description.',
@@ -407,6 +409,15 @@ _ N\'oubliez pas de v&eacute;rifier que \'un_texte\' est bien d&eacute;fini dans
 	'travaux_prochainement' => '<NEW>Ce site sera r&eacute;tabli tr&egrave;s prochainement.
 _ Merci de votre compr&eacute;hension.',
 	'travaux_titre' => '<NEW>@_CS_TRAVAUX_TITRE@',
+	'tri_articles:description' => '<NEW>En naviguant sur le site en partie priv&eacute;e ([->./?exec=auteurs]), choisissez ici le tri &agrave; utiliser pour afficher vos articles &agrave; l\'int&eacute;rieur de vos rubriques.
+
+Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL \'ORDER BY\' : n\'utilisez le tri personnalis&eacute; que si vous savez ce que vous faites (champs disponibles : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
+[[%tri_articles%]][[->%tri_perso%]]',
+	'tri_articles:nom' => '<NEW>Tri des articles',
+	'tri_modif' => '<NEW>Tri sur la date de modification (ORDER BY date_modif DESC)',
+	'tri_perso' => '<NEW>Tri SQL personnalis&eacute;, ORDER BY suivi de :',
+	'tri_publi' => '<NEW>Tri sur la date de publication (ORDER BY date DESC)',
+	'tri_titre' => '<NEW>Tri sur le titre (ORDER BY 0+titre,titre)',
 	'type_urls:description' => '<NEW>@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'acc&egrave;s aux pages de votre site :
 <div style="font-size:90%; margin:0 2em;">
 - {{page}} : la valeur par d&eacute;faut pour SPIP v1.9x : <code>/spip.php?article123</code>.
