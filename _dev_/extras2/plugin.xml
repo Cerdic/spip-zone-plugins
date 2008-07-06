@@ -1,0 +1,20 @@
+<plugin>
+	<nom>Extras 2</nom>
+	<auteur>fil@rezo.net
+_ &#169; 2008 - Distribu&#233; sous licence GNU/LGPL
+</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<icon></icon>
+	<description>une page ?exec=extras permet d'ajouter des champs et des tables a gerer dans l'espace priv&#233;</description>
+	<options></options>
+	<fonctions></fonctions>
+	<prefix>Extras2</prefix>
+	<install></install>
+	<lien></lien>
+	<pipeline>
+		<nom></nom>
+		<action></action>
+		<inclure></inclure>
+	</pipeline>
+</plugin>
