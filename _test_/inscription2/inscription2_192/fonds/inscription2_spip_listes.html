@@ -1,5 +1,5 @@
-#SET{checked,#CONFIG{inscription2/newsletter,'',''}}
-#SET{selected,#CONFIG{inscription2/newsletters,'',''}}
+#SET{checked,#CONFIG{inscription2/newsletter,#ARRAY}}
+#SET{selected,#CONFIG{inscription2/newsletters,#ARRAY}}
 <div>
 <label>
 	<input type="checkbox" name="newsletter" onclick="showhide(this, '#news')" [(#GET{checked}|=={on}|?{checked="checked"})] id="newsletter" />

@@ -19,7 +19,7 @@
 	<prefix>
 		  Inscription2
 	</prefix>
-	<necessite id='cfg' version='[1.0.6;]' />
+	<necessite id='cfg' version='[1.5.0;]' />
 	<install>base/inscription2_installer.php</install>
 	<options>
 		inscription2_mes_options.php

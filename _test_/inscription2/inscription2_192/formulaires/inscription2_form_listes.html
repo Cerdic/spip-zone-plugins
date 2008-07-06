@@ -2,7 +2,7 @@
 	<strong><:inscription2:newsletter:></strong>
 	<p><:inscription2:exp_newsletter:></p>
 <div id="newsletter" style="width:33%;margin:auto">
-#SET{selected,#CONFIG{inscription2/newsletters,'',''}}
+#SET{selected,#CONFIG{inscription2/newsletters,#ARRAY}}
  <input name="format" id="format" value="html"  type="hidden" />
 	<BOUCLE_listes(LISTES){statut=liste}>
 		<label>
