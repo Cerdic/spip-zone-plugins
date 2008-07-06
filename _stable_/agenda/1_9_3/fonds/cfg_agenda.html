@@ -1,0 +1,39 @@
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+[(#REM) descriptif=
+<h4><multi>Agenda in which sections ?</multi></h4>
+<multi>Which section will be used?</multi>
+<br />
+<a href="http://www.spip-contrib.net/Plugin-Agenda" class="spip_out">Documentation Agenda</a>
+]
+
+[(#REM) titre=Agenda]
+
+#SET{wichrub,#CONFIG{agenda/rubriques_agenda,'',''}}
+<h4><multi>[en]Show the agenda in the following sections?[fr]Afficher l'Agenda pour les articles de quelle rubrique?</multi></h4>
+<fieldset>
+<legend><multi>[en]Which section?[fr]Quelle rubrique?</multi></legend>
+<label><multi>[en]Selection of the section to use :[fr]Choix de la ou des rubriques &agrave; utiliser:</multi></label>
+<select name="rubriques_agenda[]" multiple="multiple" size="5">
+<option value="" [(#GET{wichrub}|?{'',' '})selected="selected"]>
+<multi>[en]none[fr]aucunes</multi>
+</option>
+<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+<option value="#ID_RUBRIQUE" [(#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})] style="font-weight: bold;">
+<strong><multi>[en]root[fr]racine</multi> #ID_RUBRIQUE : #TITRE</strong>
+</option>
+
+<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+<option [(#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})] value="#ID_RUBRIQUE">
+&nbsp;&nbsp;<multi>[en]section[fr]rubrique</multi> #ID_RUBRIQUE : #TITRE
+</option>
+<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+</BOUCLE_rubriques>
+</BOUCLE_secteurs>
+</select>
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>

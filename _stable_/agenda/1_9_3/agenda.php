@@ -41,14 +41,36 @@ function Agenda_exec_init($flux) {
 
 function Agenda_affiche_milieu($flux) {
 	$exec =  $flux['args']['exec'];
+	$id_article = $flux['args']['id_article'];
+	
 	if ($exec=='articles'){
+//on teste si cfg est actif
+	if (function_exists(lire_config)) {	
+	$arracfgrubriques=lire_config("agenda/rubriques_agenda",' ');
+		if ($id_article!=''){
+		//on cherche la rubrique de l'article
+		$row = sql_fetsel("id_rubrique", "spip_articles", "id_article=$id_article");
+		$id_rubrique = $row['id_rubrique'];
+		//et si la rubrique est dans l'arrayrub
+			if (in_array($id_rubrique, $arracfgrubriques)) {
+			include_spip('inc/calendar');
+			include_spip('inc/agenda_gestion');
+			$flux['data'] .= Agenda_formulaire_article($id_article, article_editable($id_article),'articles');
+			}
+		}
+	} 
+//cfg n'est pas actif
+	else {
 		include_spip('inc/calendar');
 		include_spip('inc/agenda_gestion');
-		$id_article = $flux['args']['id_article'];
 		$flux['data'] .= Agenda_formulaire_article($id_article, article_editable($id_article),'articles');
+		}
 	}
 	return $flux;
 }
+
+
+
 
 function Agenda_rendu_boite($titre,$descriptif,$lieu,$type='ics'){
 	$texte = "<span class='calendrier-verdana10'><span  style='font-weight: bold;'>";
