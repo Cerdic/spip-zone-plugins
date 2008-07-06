@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$("form#form_liaison_a2a").submit(function(){
 		var recherche = $("input#recherche_a2a").val();
 		var id_article = $("input#a2a_article_orig").val();
-		$("div#resultat_recherche_a2a").html('<img src="../dist/images/searching.gif" alt="searching" />')
+		$("div#resultat_recherche_a2a").html('<img src="../prive/images/searching.gif" alt="searching" />')
 		$.get("[(#EVAL{recherche_article_a2a}|generer_url_action)]",{recherche: recherche, id_article: id_article},function(resultat_recherche){
 				$("div#resultat_recherche_a2a").html(resultat_recherche);
 			}
