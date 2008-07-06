@@ -18,13 +18,11 @@
 <:a2a:pas_articles_lies:>
 <//B_LesLie>
 [(#EVAL{autoriser('modifier','article', #ID_ARTICLE_ORIG)}|=={1}|?{' '})
-<div class="cadre cadre-liste">
-	<form id="form_liaison_a2a" action="[(#EVAL{recherche_article_a2a}|generer_url_action)]" method="get" >
-		<input type="hidden" id="a2a_article_orig" name="id_article" value="[(#ID_ARTICLE_ORIG)]" />
-		<label for="recherche_a2a"><:a2a:rechercher_un_article_a_lier:></label>
-		<input type="text" name="recherche" id="recherche_a2a" />&nbsp;<input type="submit" name="ok" value="<:a2a:rechercher:>" />
-	</form>
-	<div id="resultat_recherche_a2a"></div>
-</div>
+<form id="form_liaison_a2a" action="[(#EVAL{recherche_article_a2a}|generer_url_action)]" method="get" >
+	<input type="hidden" id="a2a_article_orig" name="id_article" value="[(#ID_ARTICLE_ORIG)]" />
+	<label for="recherche_a2a"><:a2a:rechercher_un_article_a_lier:> :</label>
+	<input type="text" name="recherche" id="recherche_a2a" />&nbsp;<input type="submit" name="ok" value="<:a2a:rechercher:>" />
+</form>
+<div id="resultat_recherche_a2a"></div>
 ]
 [(#EVAL{fin_cadre_enfonce(true)})]
