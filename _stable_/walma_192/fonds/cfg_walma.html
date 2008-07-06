@@ -128,7 +128,7 @@ Choisissez ci-dessous une rubrique pour WALMA
 
 <br />
 
-#SET{selected,#CONFIG{walma/espace_walma,'',''}}
+#SET{selected,#CONFIG{walma/espace_walma,#ARRAY}}
 <select name="espace_walma[]" multiple="multiple" size="5" id="espace_walma">
 <BOUCLE_rmul(RUBRIQUES){tout}{par num titre, titre}>
 	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#GET{selected}}|?{' selected="selected"'})]>
