@@ -29,11 +29,11 @@
 <p><:archive:rubriques_archiver:></p>
     <BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
 <label for="#ID_RUBRIQUE">#TITRE (#ID_RUBRIQUE) </label>
-<input type="checkbox" name="idrub[]" value="#ID_RUBRIQUE" id="#ID_RUBRIQUE"  [(#ID_RUBRIQUE|in_array{[(#CONFIG{archive/idrub,'',''})]}|?{'checked="checked"'})]/><br />
+<input type="checkbox" name="idrub[]" value="#ID_RUBRIQUE" id="#ID_RUBRIQUE"  [(#ID_RUBRIQUE|in_array{[(#CONFIG{archive/idrub,#ARRAY})]}|?{'checked="checked"'})]/><br />
 
       <BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
 <label for="#ID_RUBRIQUE">#TITRE (#ID_RUBRIQUE)</label>
-<input type="checkbox" name="idrub[]" value="#ID_RUBRIQUE" id="#ID_RUBRIQUE"   [(#ID_RUBRIQUE|in_array{[(#CONFIG{archive/idrub,'',''})]}|?{'checked="checked"'})]/><br />
+<input type="checkbox" name="idrub[]" value="#ID_RUBRIQUE" id="#ID_RUBRIQUE"   [(#ID_RUBRIQUE|in_array{[(#CONFIG{archive/idrub,#ARRAY})]}|?{'checked="checked"'})]/><br />
 
    <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
       </BOUCLE_rubriques>
