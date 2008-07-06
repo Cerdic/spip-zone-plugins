@@ -289,7 +289,7 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
         Voulez-vous ouvrir ce wiki au-del&#224; des administrateurs&nbsp;:
         <br />
         <label>Ouvrir aux r&#233;dacteurs du site&nbsp; :
-            #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_redacteurs,'',''}}
+            #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_redacteurs,#ARRAY}}
             <select name="espace_wiki_motsclef_redacteurs" id="espace_wiki_motsclef_redacteurs">
                 [(#REM) Mots clef Wiki Redacteurs]
                 <BOUCLE_mwr(MOTS){tout}{par num titre, titre}>
@@ -302,7 +302,7 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 
         <br />
         <label>Ouvrir aux visiteurs enregistr&#233;s&nbsp; :
-            #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_visiteurs,'',''}}
+            #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_visiteurs,#ARRAY}}
             <select name="espace_wiki_motsclef_visiteurs" id="espace_wiki_motsclef_visiteurs">
                 [(#REM) Mots clef Wiki Visiteurs]
                 <BOUCLE_mwv(MOTS){tout}{par num titre, titre}>
@@ -316,7 +316,7 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
         <br />
 
         <label>Ouvrir à tous les visiteurs du site :
-            #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_anonyme,'',''}}
+            #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_anonyme,#ARRAY}}
             <select name="espace_wiki_motsclef_anonyme" id="espace_wiki_motsclef_anonyme">
                 [(#REM) Mots clef Wiki Anonyme]
                 <BOUCLE_mwa(MOTS){tout}{par num titre, titre}>
