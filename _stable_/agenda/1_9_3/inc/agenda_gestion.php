@@ -7,6 +7,7 @@ include_spip('inc/presentation');
 include_spip('inc/minipres');
 include_spip('inc/calendar');
 include_spip('agenda_mes_fonctions');
+include_spip('inc/vieilles_defs');
 
 function article_editable($id_article){
 	return autoriser('modifier','article',$id_article);
