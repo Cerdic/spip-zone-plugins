@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Le 3eme argument permet de controler la serialisation du resultat
 // (mais ne sert que pour le depot 'meta') qui doit parfois deserialiser
 // ex: |in_array{#CONFIG{toto,#ARRAY,1}}.
-// Ceci n'affecte pas d'autres depots et |in_array{#CONFIG{toto/,#ARRAY}} sera equivelent
+// Ceci n'affecte pas d'autres depots et |in_array{#CONFIG{toto/,#ARRAY}} sera equivalent
 // car du moment qu'il y a un /, c'est le depot 'metapack' qui est appelle.
 //
 function balise_CONFIG($p) {

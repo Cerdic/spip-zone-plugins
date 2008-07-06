@@ -1,6 +1,10 @@
 Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 
+v1.8.1 (04 07 2008)
+- Correction bug introduit en 1.8.0 d'erreur de lecture si aucune valeur
+n'etait encore enregistrees dans une depot metapack ou php.
+
 v1.8.0 (04 07 2008)
 - Simplifier *_config() en se passant de la classe cfg_params()
 - les fonctions des balises sont chargées au calcul et non en permanence et sont déplacees dans cfg_fonctions.php

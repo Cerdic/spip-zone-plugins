@@ -72,7 +72,7 @@ class cfg_depot_php
 	// recuperer les valeurs.
 	function lire() {
 		if (!$this->charger(true)){
-			return array(false, $this->val);	
+			return array(true, null); // pas de chargement = pas de valeur encore enregistrees
 		}
 		
     	// utile ??

@@ -51,6 +51,9 @@
 	$essais[] = array(array('un'=>1, 'deux'=>2, 'troisc'=>"3"), 'metapack::assoc/three');
 	$essais[] = array(1, 'metapack::assoc/three/un');
 	$essais[] = array('3', 'metapack::assoc/three/troisc');
+	// racourcis
+	$essais[] = array($assoc, 'assoc/');
+	$essais[] = array('element 1', 'assoc/one');
 	
 	$err = tester_fun('lire_config', $essais);
 
