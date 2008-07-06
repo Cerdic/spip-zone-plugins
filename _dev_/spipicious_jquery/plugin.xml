@@ -31,7 +31,7 @@ _ Icon from [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/pro
 		<inclure>spipicious_head.php</inclure>
 	</pipeline>
 	<necessite id="SelecteurGenerique" version="[0.1;]" />
-	<necessite id='cfg' version='[1.0.4;]' />
+	<necessite id='cfg' version='[1.5.0;]' />
 	<necessite id="SPIP" version='[1.9.3;]' />
 	<chemin dir='' />
 	<options>
