@@ -6,6 +6,8 @@
     <li[(#ENV{current}|=={#CONFIG{acsOnglets3}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="?page=#CONFIG{acsOnglets3}" title="#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets3'])}">#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets3'])}</a></li>
     #SET{t4,#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets4'])}} #SET{l4,#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets4'])}}
     [(#CONFIG{acsOngletschoix4}|=={oui}|?{' '}) <li[(#ENV{current}|=={#CONFIG{acsOnglets4}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="?page=#CONFIG{acsOnglets4}" title="#GET{l4}">#GET{t4}</a></li>]
+    #SET{t5,#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets5'])}} #SET{l5,#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets5'])}}    
+    [(#CONFIG{acsOngletschoix5}|=={oui}|?{' '}) <li[(#ENV{current}|=={#CONFIG{acsOnglets5}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="?page=#CONFIG{acsOnglets5}" title="#GET{l5}">#GET{t5}</a></li>]
 
     [(#REM) Onglet publier, affiché ou non, au choix. La page login est remplacé par la page "publier" si le plugin openPublishing est activé ]
     #SET{url_publier, #EVAL{in_array('openPublishing', $GLOBALS['plugins']) ? '?page=publier' : 'ecrire/'}}
