@@ -55,7 +55,9 @@ function exec_spiplistes_courrier_previsu () {
 
 	include_spip('base/abstract_sql');
 	include_spip('inc/presentation');
+	include_spip('inc/presentation');
 	include_spip('inc/distant');
+	include_spip('inc/date');
 	include_spip('inc/urls');
 	include_spip('inc/meta');
 	include_spip('inc/filtres');
@@ -63,10 +65,11 @@ function exec_spiplistes_courrier_previsu () {
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_api_courrier');
 	include_spip('inc/spiplistes_api_abstract_sql');
+	include_spip('public/assembler');
 	
 	$int_values = array(
 		'id_rubrique', 'id_mot', 'id_courrier', 'id_liste'
-		, 'jour', 'mois', 'annee', 'heure', 'minute'
+		, 'annee', 'mois', 'jour', 'heure', 'minute'
 	);
 	$str_values = array(
 		'lang'
@@ -77,7 +80,7 @@ function exec_spiplistes_courrier_previsu () {
 		, 'Confirmer', 'date'
 		, 'lire_base', 'format', 'plein_ecran'
 	);
-	
+
 	foreach(array_merge($str_values, $int_values) as $key) {
 		$$key = _request($key);
 //spiplistes_log("$key :-: ".$$key);
@@ -207,12 +210,45 @@ function exec_spiplistes_courrier_previsu () {
 		
 		if($avec_sommaire == 'oui') {
 		
+			$sql_date = format_mysql_date($annee, $mois, $jour, $heure, $minute);
+
 			if($id_rubrique > 0) {
-				$texte_sommaire = "<ul>\n";
-				$texte_sommaire = "</ul>\n";
+				if($sql_result = sql_select("titre,id_article"
+					, "spip_articles"
+					, array("id_rubrique=".sql_quote($id_rubrique), "date >= " . sql_quote($sql_date))
+					)) {
+					while($row = sql_fetch($sql_result)) {
+						$texte_sommaire .= "<li> <a href='"
+							. generer_url_article($row['id_article'])
+							. "'>"
+							. $row['titre']
+							. "</a></li>\n";
+					}
+				}
 			}
 		
 			if($id_mot > 0) {
+				if($sql_result = sql_select("a.titre,a.id_article"
+					, "spip_articles AS a LEFT JOIN spip_mots_articles AS m ON a.id_article=m.id_article"
+					, "m.id_mot=".sql_quote($id_mot)." AND a.date >= " . sql_quote($sql_date)
+					)) {
+					while($row = sql_fetch($sql_result)) {
+						$texte_sommaire .= "<li> <a href='"
+							. generer_url_article($row['id_article'])
+							. "'>"
+							. $row['titre']
+							. "</a></li>\n";
+					}
+				}
+			}
+			
+			if(!empty($texte_sommaire)) {
+				$texte_sommaire = "<ul>" . $texte_sommaire . "</ul>\n";
+				$texte = 
+					($patron_pos == "avant")
+					? $texte . $texte_sommaire
+					: $texte_sommaire . $texte
+					;
 			}
 		
 		} // end if($avec_sommaire == 'oui')

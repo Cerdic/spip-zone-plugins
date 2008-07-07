@@ -27,7 +27,7 @@ jQuery(document).ready(function(){
 		}
 		else {
 		// c'est le bouton de previsu qui valide
-			var data = jQuery('input,textarea,radio,select, checkbox', this).serialize();
+			var data = jQuery('input[@type=checkbox][@checked],input[@type=radio][@checked],select,textarea',this).serialize();
 			jQuery.ajax({ type: "POST", 
 						url: "./?exec=spiplistes_courrier_previsu", 
 						data: data, 
