@@ -91,8 +91,6 @@ function spiplistes_base_creer () {
 	creer_base();
 	spiplistes_log("INSTALL: database creation");
 
-	ecrire_meta('spiplistes_version', __plugin_real_version_get(_SPIPLISTES_PREFIX));
-
 	$spiplistes_base_version = __plugin_real_version_base_get(_SPIPLISTES_PREFIX);
 	ecrire_meta('spiplistes_base_version', $spiplistes_base_version);
 	spiplistes_ecrire_metas();
@@ -105,33 +103,13 @@ function spiplistes_base_creer () {
 
 function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 
-	$spiplistes_current_version =  __plugin_current_version_get(_SPIPLISTES_PREFIX);
-	$spiplistes_real_version = __plugin_real_version_get(_SPIPLISTES_PREFIX);
-	$opt_simuler_envoi = spiplistes_pref_lire('opt_simuler_envoi');
-	$opt_simuler_envoi = ($opt_simuler_envoi == 'oui') ? 'oui' : 'non';
-	
-	if(
-		// si première install...
-		!$spiplistes_current_version
-		||
-		(
-		// ou mise à jour...
-			(
-				$spiplistes_current_version 
-				|| ($opt_simuler_envoi == 'non')
-			)
-			&& ($spiplistes_current_version < $spiplistes_real_version)
-		)
-	) {
-	// ...passe en simulation d'envoi
-		$opt_simuler_envoi = "oui";
-	}
-
 	if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
 		$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = "";
 	}
-	//spiplistes_log("### _SPIPLISTES_META_PREFERENCES : $opt_simuler_envoi");
-	__plugin_ecrire_key_in_serialized_meta ('opt_simuler_envoi', $opt_simuler_envoi, _SPIPLISTES_META_PREFERENCES);
+
+	// par default, simuler les envois à l'installation
+	__plugin_ecrire_key_in_serialized_meta ('opt_simuler_envoi', "oui", _SPIPLISTES_META_PREFERENCES);
+	
 	// les autres preferences serialisées ('_SPIPLISTES_META_PREFERENCES') sont installées par exec/spiplistes_config
 
 	// autres valeurs par défaut à l'installation
@@ -140,14 +118,19 @@ function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 		, 'spiplistes_charset_envoi' => _SPIPLISTES_CHARSET_ENVOI
 		, 'mailer_smtp' => 'non'
 		, 'abonnement_config' => 'simple'
+		, 'spiplistes_version' => __plugin_real_version_get(_SPIPLISTES_PREFIX)
 	);
 	foreach($spiplistes_spip_metas as $key => $value) {
-		if($reinstall || !isset($GLOBALS['meta'][$key])) {
+		if($reinstall 
+			|| !isset($GLOBALS['meta'][$key])
+			|| ($GLOBALS['meta'][$key] != $value)
+		) {
 			ecrire_meta($key, $value);
 		}
 	}
 	
 	spiplistes_ecrire_metas();
+	
 	return(true);
 }
 
@@ -174,14 +157,17 @@ function spiplistes_vider_tables () {
 	sql_drop_table($sql_tables, true);
 	
 	// effacer les metas (prefs, etc.)
-	sql_delete('spip_meta', 
-		"nom=".sql_quote('spiplistes_version')
-		. " OR nom=".sql_quote('spiplistes_base_version')
-		. " OR nom=".sql_quote('spiplistes_charset_envoi')
-		. " OR nom=".sql_quote('spiplistes_lots')
-		. " OR nom=".sql_quote('abonnement_config')
-		. " OR nom=".sql_quote(_SPIPLISTES_META_PREFERENCES)
-	);
+	$sql_spiplistes_metas = array(
+		'spiplistes_version'
+		, 'spiplistes_base_version'
+		, 'spiplistes_charset_envoi'
+		, 'spiplistes_lots'
+		, 'abonnement_config'
+		, _SPIPLISTES_META_PREFERENCES
+		);
+	spiplistes_log("DELETE meta: " . implode(", ", $sql_spiplistes_metas));
+	sql_delete('spip_meta', "nom=".implode(" OR nom=", array_map("sql_quote", $sql_spiplistes_metas)));
+
 	// recharge les metas en cache 
 	spiplistes_ecrire_metas();
 	

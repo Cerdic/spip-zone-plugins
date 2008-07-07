@@ -67,7 +67,7 @@ function spiplistes_upgrade () {
 
 		spiplistes_log("UPGRADING $spiplistes_name $spiplistes_current_version TO $spiplistes_real_version");
 
-		if($spiplistes_current_version < 1.9923) {
+		if($spiplistes_current_version < 1.9982) {
 			// Ne modifie pas le schéma. Ajoute juste une légende sur les tables
 			sql_alter("TABLE spip_listes COMMENT ".sql_quote("Listes de diffusion"));
 			sql_alter("TABLE spip_courriers COMMENT ".sql_quote("Panier des courriers (casiers)"));
