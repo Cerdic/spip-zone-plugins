@@ -200,6 +200,7 @@ function exec_spiplistes_config () {
 		. debut_gauche($rubrique, true)
 		. __plugin_boite_meta_info(_SPIPLISTES_PREFIX, true)
 		. creer_colonne_droite($rubrique, true)
+		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron()
 		. spiplistes_boite_info_spiplistes(true)
 		. debut_droite($rubrique, true)
