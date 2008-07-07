@@ -123,7 +123,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Cette_liste_est' => 'Cette liste est',
 'charger_patron' => 'Choisir un patron pour le courrier',
 'charger_le_patron' => 'G&eacute;n&eacute;rer le courrier',
-'choix_defini' => 'Pas de choix d&eacute;finis.\n'
+'choix_defini' => 'Pas de choix d&eacute;fini.\n'
 , 'Configuration' => 'Configuration'
 , 'Cliquez_ici_pour_modifier_votre_abonnement' => "Cliquez ici pour modifier votre abonnement"
 , 'courriers' => 'Courriers',

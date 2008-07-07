@@ -70,6 +70,7 @@ img {
    <li><a href="#configuration">Configuration</a></li>
    <li><a href="#simulation">Activation des envois de courriers (mode simulation)</a></li>
    <li><a href="#acces_gestion">Acc&eacute;der &agrave; la gestion du courrier</a></li>
+   <li><a href="#courrierouliste">Courrier ou liste de diffusion</a></li>
    <li><a href="#casier_courriers">Le casier &agrave; courriers</a></li>
    <li><a href="#testeremail">Tester l'envoi du courrier</a></li>
    <li><a href="#forcer_format">Forcer le format de r&eacute;ception pour un abonn&eacute;</a></li>
@@ -77,7 +78,7 @@ img {
    <li><a href="#configureliste">Configurer une liste de diffusion</a></li>
    <li><a href="#replyto">Adresse email de retour (reply-to)</a></li>
    <li><a href="#planifierdiff">Planifier les diffusions</a></li>
-   <li><a href="#temporiser">Planifier un courrier, une liste de diffusion</a></li>
+   <li><a href="#temporiser">Planifier une liste de diffusion</a></li>
    <li><a href="#abo_fiche_auteur">Abonnement par la fiche auteur</a></li>
    <li><a href="#abo_fiche_auteur">Abonnement par la page des listes</a></li>
    <li><a href="#forcerabos">Forcer tous les abonnements</a></li>
@@ -143,6 +144,33 @@ img {
    l'administrateur principal du site. Si vos listes de courriers deviennent trop 
    importantes, adressez-vous &agrave; lui, il pourra am&eacute;liorer la situation 
    gr&acirc;ce &agrave; cette option.</p>
+<h2><a name="courrierouliste" id="courrierouliste"></a>Courrier ou liste de diffusion</h2>
+<p>Deux modes de cr&eacute;ations vous sont propos&eacute;s :</p>
+<ul>
+   <li>Courrier</li>
+   <li>Liste de diffusion</li>
+</ul>
+<p>Les courriers ne peuvent pas &ecirc;tre param&eacute;tr&eacute;s pour &ecirc;tre 
+   envoy&eacute;s p&eacute;riodiquement. Si vous voulez qu'un courrier puisse 
+   &ecirc;tre envoy&eacute; tous les 3 jours ou tous les mois, vous devez le transformer 
+   en patron et cr&eacute;er une liste de diffusion.</p>
+<p>Un patron est un squelette SPIP.</p>
+<p>Les patrons fournis, et ceux que vous pouvez cr&eacute;er et rajouter &agrave; 
+   la liste, permettent la g&eacute;n&eacute;ration automatique du courrier, &agrave; 
+   la date d'exp&eacute;dition souhait&eacute;e. Ainsi, si vous r&eacute;alisez 
+   un patron qui r&eacute;sume une de vos rubriques, ce r&eacute;sum&eacute; sera 
+   g&eacute;n&eacute;r&eacute; &agrave; chaque date p&eacute;riodique d'envoi 
+   souhait&eacute;e.</p>
+<p>Il n'en est pas de m&ecirc;me avec un courrier. Le contenu du courrier est 
+   lui, g&eacute;n&eacute;r&eacute; &agrave; la date de sa cr&eacute;ation. Ce 
+   contenu peut &ecirc;tre g&eacute;n&eacute;r&eacute; &agrave; partir d'un patron, 
+   mais il est important de noter que le contenu g&eacute;n&eacute;r&eacute; ne 
+   le sera pas plus tard. Par contre, ce contenu est &eacute;ditable. Vous pouvez 
+   le modifier apr&egrave;s sa cr&eacute;ation, ce qui n'est pas possible avec 
+   une liste de diffusion.</p>
+<p>Lorsqu'une liste de diffusion est exp&eacute;di&eacute;e, le contenu g&eacute;n&eacute;r&eacute; 
+   devient &agrave; son tour un courrier qui appara&icirc;t dans le casier <strong>Courrier 
+   automatique publi&eacute;</strong>.</p>
 <h2><a name="casier_courriers" id="casier_courriers"></a>Le casier &agrave; courriers</h2>
 <p>Le casier &agrave; courriers permet de lister, dans l'ordre :</p>
 <ul>
@@ -161,7 +189,7 @@ img {
    <li>Les courriers non envoy&eacute;s : 
       <ul>
          <li>Courriers vides, en g&eacute;n&eacute;ral g&eacute;n&eacute;r&eacute; 
-            par un patron mais donc le r&eacute;sultat ne donne rien :</li>
+            par un patron mais dont le r&eacute;sultat ne donne rien :</li>
          <li>Courriers ignor&eacute;s, sans destinataires - la liste n'a plus 
             d'abonn&eacute;s ;</li>
          <li>Les envois abandonn&eacute;s lors de l'exp&eacute;dition.</li>
@@ -192,17 +220,12 @@ img {
    un &eacute;ventuel engorgement des envois.</p>
 <p><img src="../img_docs/2008-06-23_125824.png" width="288" height="338" alt="" /></p>
 <p>Vous pouvez acc&eacute;der directement &agrave; la liste souhait&eacute;e en 
-   cliquant sur sa barrre du planning.</p>
-<h2><a name="temporiser" id="temporiser"></a>Planifier un courrier, une liste 
-   de diffusion</h2>
-<p>Les courriers peuvent exceptionnellement &ecirc;tre envoy&eacute;s &agrave; 
-   une date pr&eacute;cise. Il suffit d'indiquer la date d'envoi souhait&eacute; 
-   dans le formulaire du courrier concern&eacute;.</p>
+   cliquant sur sa barre du planning.</p>
+<h2><a name="temporiser" id="temporiser"></a>Planifier une liste de diffusion</h2>
+<p>Les listes de diffusion peuvent exceptionnellement &ecirc;tre envoy&eacute;es 
+   &agrave; une date pr&eacute;cise. Il suffit d'indiquer la date d'envoi souhait&eacute;e 
+   dans le formulaire de la liste concern&eacute;e.</p>
 <p><img src="../img_docs/2007-09-05_184833.png" width="493" height="66" alt="" /></p>
-<p>Les courriers ne peuvent pas &ecirc;tre param&eacute;tr&eacute;s pour &ecirc;tre 
-   envoy&eacute;s p&eacute;riodiquement. Si vous voulez qu'un courrier puisse 
-   &ecirc;tre envoy&eacute; tous les 3 jours ou tous les mois, vous devez le transformer 
-   en patron et cr&eacute;er une liste de diffusion.</p>
 <p>Lorsqu'une liste de diffusion publique est correctement param&eacute;tr&eacute;e 
    (s&eacute;lection des patrons, liste d'abonn&eacute;s), vous pouvez choisir 
    pour elle une diffusion p&eacute;riodique en jours, hebdomadaire, mensuelle 
