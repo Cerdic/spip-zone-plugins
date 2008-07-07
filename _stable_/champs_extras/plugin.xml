@@ -1,0 +1,27 @@
+<plugin>
+  <nom>Champs Extras</nom>
+  <auteur>collectif</auteur>
+  <version>1.0</version>
+  <etat>stable</etat>
+  <description>Champs extras issus du core de Spip</description>
+  <prefix>extras</prefix>
+  <necessite id='SPIP' version='[2.0.0 dev;]' />
+  <options>extras_options.php</options>
+  <pipeline>
+	  <nom>editer_contenu_objet</nom>
+  	<inclure>extras_pipelines.php</inclure>
+  </pipeline>
+  <pipeline>
+	  <nom>pre_edition</nom>
+  	<inclure>extras_pipelines.php</inclure>
+  </pipeline>
+  <pipeline>
+	  <nom>afficher_contenu_objet</nom>
+  	<inclure>extras_pipelines.php</inclure>
+  </pipeline>
+   <pipeline>
+	  <nom>afficher_revision_objet</nom>
+  	<inclure>extras_pipelines.php</inclure>
+  </pipeline>
+
+</plugin>
