@@ -1,62 +1,5 @@
 [(#SET{id_carte_gis,#ENV{id_carte_gis,1}})]
 <script type="text/javascript">
-	function extraerID(url){
-		var posicion = url.indexOf("article");
-		if (posicion != -1) {
-			url = url.substring(posicion + 7);
-			posicion = url.indexOf ("&");
-			if (posicion != -1) {
-				url = url.substring(0,posicion);
-			}
-			//se non e un artigo de spip que lle dean
-		} else {
-			url = url.substring(url.length - 4);
-		}
-		return url;
-	}
-	function agregarMarcador (xmlItem, markerLayer, map) {
-		var xmlLat = $("geo_lat",xmlItem);
-		var xmlLng = $("geo_long",xmlItem);
-		var xmlSon = $("enclosure",xmlItem);
-		var popup = null;
-		if ((xmlLat.length == 0) || (xmlLng.length == 0)) return;
-		else {
-			var lat = parseFloat(xmlLat.text());
-			var lng = parseFloat(xmlLng.text());
-			var id = extraerID($("link",xmlItem).text());
-			var html = $("description",xmlItem).text();
-			var icon = $("geo_icon",xmlItem).text();
-			var son;
-			if (xmlSon.length != 0) son = xmlSon.attr("url");
-			var point = new OpenLayers.LonLat(lng,lat);
-			var size = new OpenLayers.Size(20,34);
-			var calculateOffset = function(size) { return new OpenLayers.Pixel(-(size.w/2), -size.h); };
-			var urlicon = (icon != "" ? icon : URLbase + "/gis/img_pack/correxir.png");
-			var icon = new OpenLayers.Icon(
-				urlicon,
-				size,
-				null,
-				calculateOffset
-			);
-			var marcador = new OpenLayers.Marker(point, icon);
-			marcador.events.register("mousedown", marcador, function mousedown(evt) {
-				if (popup == null) {
-					popup = new OpenLayers.Popup.FramedCloud("popup"+id, new OpenLayers.LonLat(lng,lat));
-       				popup.panMapIfOutOfView = true;
-       				popup.autoSize = true;
-       				popup.closeBox = true;
-       				popup.padding = 10;
-       				popup.contentDiv.style.overflow = 'visible';
-       				popup.setContentHTML(html);
-					map.addPopup(popup);
-				} else {
-                	popup.toggle();
-				}
-				OpenLayers.Event.stop(evt);
-        	});
-			markerLayer.addMarker(marcador);
-		}	
-	}
 	var URLbase = "[(#CHEMIN{plugins}|url_absolue)]";
 	var map[(#GET{id_carte_gis})] = null;
 	var markers[(#GET{id_carte_gis})] = null;
@@ -69,35 +12,45 @@
 	#SET{lonxitude,#ENV{lonxit,#CONFIG**{gis_default_lonx,0}}}
 	#SET{zoommapa, #ENV{zoom,#CONFIG**{gis_default_zoom,0}}
 	<//B_centrado>
-		
 	function init[(#GET{id_carte_gis})](){
-		map[(#GET{id_carte_gis})] = new OpenLayers.Map("map[(#GET{id_carte_gis})]");
+		map[(#GET{id_carte_gis})] = new OpenLayers.Map("map[(#GET{id_carte_gis})]",{
+			maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
+			numZoomLevels: 19,
+			maxResolution: 156543.0399,
+			units: 'm',
+			projection: new OpenLayers.Projection("EPSG:900913"),
+			displayProjection: new OpenLayers.Projection("EPSG:4326")
+		});
 		markers[(#GET{id_carte_gis})] = new OpenLayers.Layer.Markers("Markers");
-		map[(#GET{id_carte_gis})].addLayer(markers[(#GET{id_carte_gis})]);
 		var lon = #GET{lonxitude};
 		var lat = #GET{latitude};
 		var zoom = #ENV{zoom,#CONFIG**{gis_default_zoom,0}};
 		var lonlat = new OpenLayers.LonLat(lon, lat);
-		var wms = new OpenLayers.Layer.WMS(
+		var nasa = new OpenLayers.Layer.WMS( "NASA Global Mosaic",
+			"http://t1.hypercube.telascience.org/cgi-bin/landsat7", 
+			{layers: "landsat7"}
+		);
+ 		var wms = new OpenLayers.Layer.WMS(
 			"#EVAL{$map_wms_name = isset($GLOBALS['meta']['openlayer_wmsname'])?$GLOBALS['meta']['openlayer_wmsname']:'OpenLayers WMS';}",
 			"#EVAL{$map_wms_url = isset($GLOBALS['meta']['openlayer_wmsurl'])?$GLOBALS['meta']['openlayer_wmsurl']:'http://labs.metacarta.com/wms/vmap0';}",
 			{layers: 'basic'}
 		);
-		map[(#GET{id_carte_gis})].addLayer(wms);
+		var osm = new OpenLayers.Layer.OSM.Osmarender("Osmarender");
+		map[(#GET{id_carte_gis})].addLayers([osm, wms, nasa]);
+		map[(#GET{id_carte_gis})].addLayer(markers[(#GET{id_carte_gis})]);
 		map[(#GET{id_carte_gis})].zoomTo(zoom);
-		map[(#GET{id_carte_gis})].setCenter(lonlat);
-       		
+		map[(#GET{id_carte_gis})].setCenter(lonlat.fromDataToDisplay());
+		map[(#GET{id_carte_gis})].addControl(new OpenLayers.Control.LayerSwitcher());
 	[(#ENV{recursive}|=={1}|?{' ',''})
 		jQuery.get('[(#URL_PAGE{rss-gis-recursive})]', {[limit:(#ENV{limit, 50})][, id_rubrique:(#ID_RUBRIQUE)][, id_parent:(#ID_RUBRIQUE)][, id_secteur:(#ID_SECTEUR)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)][, id_groupe:(#ID_GROUPE)]}, function(xml[(#GET{id_carte_gis})]){
 	][(#ENV{recursive}|=={1}|?{'',' '})
 		jQuery.get('[(#URL_PAGE{rss-gis})]', {[limit:(#ENV{limit, 50})][, id_rubrique:(#ID_RUBRIQUE)][, id_secteur:(#ID_SECTEUR)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)][, id_groupe:(#ID_GROUPE)]}, function(xml[(#GET{id_carte_gis})]){
 	]
-			
 			jQuery("item", xml[(#GET{id_carte_gis})]).each(function(item[(#GET{id_carte_gis})]){
 				var xmlItem[(#GET{id_carte_gis})] = xml[(#GET{id_carte_gis})].documentElement.getElementsByTagName("item")[item[(#GET{id_carte_gis})]];
  				agregarMarcador(xmlItem[(#GET{id_carte_gis})], markers[(#GET{id_carte_gis})], map[(#GET{id_carte_gis})]);
 			});
-		});	
+		});
 	}
 	$(document).ready(function(){
 		init[(#GET{id_carte_gis})]();

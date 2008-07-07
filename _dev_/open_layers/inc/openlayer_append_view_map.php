@@ -35,7 +35,15 @@ function inc_openlayer_append_view_map_dist($target_id,$view_lat,$view_long,$vie
         var viewMap = null;
         var viewMapMarkers  = null;
         function initViewMap(){
-            viewMap = new OpenLayers.Map(\''.$target_id.'\', { controls: [] });
+            viewMap = new OpenLayers.Map("'.$target_id.'",{
+            	controls: [new OpenLayers.Control.LayerSwitcher()],
+                maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
+                numZoomLevels: 19,
+                maxResolution: 156543.0399,
+                units: "m",
+                projection: new OpenLayers.Projection("EPSG:900913"),
+                displayProjection: new OpenLayers.Projection("EPSG:4326")
+            });
             var lon = '.$view_long.';
             var lat = '.$view_lat.';
             var zoom = '.$view_zoom.';
@@ -45,9 +53,14 @@ function inc_openlayer_append_view_map_dist($target_id,$view_lat,$view_long,$vie
                 "'.$map_wms_url.'",
                 {layers: \'basic\'}
             );
-            viewMap.addLayer(wms);
+            var nasa = new OpenLayers.Layer.WMS( "NASA Global Mosaic",
+                "http://t1.hypercube.telascience.org/cgi-bin/landsat7", 
+                {layers: "landsat7"}
+            );
+            var osm = new OpenLayers.Layer.OSM.Osmarender("Osmarender");
+            viewMap.addLayers([osm, nasa, wms]);
             viewMap.zoomTo(zoom);
-            viewMap.setCenter(lonlat);
+            viewMap.setCenter(lonlat.fromDataToDisplay());
             viewMapMarkers = new OpenLayers.Layer.Markers("Markers");
 			viewMap.addLayer(viewMapMarkers);
 			var marcador = null;
@@ -61,7 +74,7 @@ function inc_openlayer_append_view_map_dist($target_id,$view_lat,$view_long,$vie
 			size = new OpenLayers.Size(20,34);
 			calculateOffset = function(size) { return new OpenLayers.Pixel(-(size.w/2), -size.h); };
 			icon = new OpenLayers.Icon(
-						\'/IMG/'.$view_icon.'\',
+						"/IMG/'.$view_icon.'",
 						size,
 						null,
 						calculateOffset
@@ -71,14 +84,14 @@ function inc_openlayer_append_view_map_dist($target_id,$view_lat,$view_long,$vie
 			size = new OpenLayers.Size(20,34);
 			calculateOffset = function(size) { return new OpenLayers.Pixel(-(size.w/2), -size.h); };
 			icon = new OpenLayers.Icon(
-						\''._DIR_PLUGIN_GEOMAP.'img_pack/correxir.png\',
+						"'._DIR_PLUGIN_OPENLAYER.'img_pack/correxir.png",
 						size,
 						null,
 						calculateOffset
 					);';
 			}
 			$out .= '
-			marcador = new OpenLayers.Marker(lonlat, icon);
+			marcador = new OpenLayers.Marker(lonlat.fromDataToDisplay(), icon);
             viewMapMarkers.addMarker(marcador);';
 		}
 	}
@@ -88,7 +101,6 @@ function inc_openlayer_append_view_map_dist($target_id,$view_lat,$view_long,$vie
         	initViewMap();
         });
     </script>';
-	//por algunha razon o view map interfire co cliclable map en openlayers impedindo o funcionamento do cotrol que permite facer click
-	//return $out;
+	return $out;
 }
 ?>

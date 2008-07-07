@@ -59,14 +59,21 @@ function inc_openlayer_append_moveend_map_dist($target_id, $map_wms_name, $map_w
                 trigger: function(e) {
                 	var lonlat = map.getCenter();
                 	var zoom = map.getZoom();
-                	jQuery(\'#'.$target_lat_id.'\').val(lonlat.lat);
-                	jQuery(\'#'.$target_long_id.'\').val(lonlat.lon);
-                	jQuery(\'#'.$target_zoom_id.'\').val(zoom);
+                	jQuery("#'.$target_lat_id.'").val(lonlat.fromDisplayToData().lat);
+                	jQuery("#'.$target_long_id.'").val(lonlat.fromDisplayToData().lon);
+                	jQuery("#'.$target_zoom_id.'").val(zoom);
                 }
 
         });
         function init(){
-            map = new OpenLayers.Map(\''.$target_id.'\');
+            map = new OpenLayers.Map("'.$target_id.'",{
+                maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
+                numZoomLevels: 19,
+                maxResolution: 156543.0399,
+                units: "m",
+                projection: new OpenLayers.Projection("EPSG:900913"),
+                displayProjection: new OpenLayers.Projection("EPSG:4326")
+            });
             var lon = '.$view_long.';
             var lat = '.$view_lat.';
             var zoom = '.$view_zoom.';
@@ -76,9 +83,15 @@ function inc_openlayer_append_moveend_map_dist($target_id, $map_wms_name, $map_w
                 "'.$map_wms_url.'",
                 {layers: \'basic\'}
             );
-            map.addLayer(wms);
+            var nasa = new OpenLayers.Layer.WMS( "NASA Global Mosaic",
+                "http://t1.hypercube.telascience.org/cgi-bin/landsat7", 
+                {layers: "landsat7"}
+            );
+            var osm = new OpenLayers.Layer.OSM.Osmarender("Osmarender");
+            map.addLayers([osm, nasa, wms]);
             map.zoomTo(zoom);
-            map.setCenter(lonlat);
+            map.setCenter(lonlat.fromDataToDisplay());
+            map.addControl(new OpenLayers.Control.LayerSwitcher());
             var click = new OpenLayers.Control.Click();
             map.addControl(click);
             click.activate();

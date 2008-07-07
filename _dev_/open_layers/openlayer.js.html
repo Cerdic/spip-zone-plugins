@@ -1,0 +1,9 @@
+[(#REM)
+
+	Charger la librairie GoogleMaps et nos ajouts
+
+]#CACHE{7*24*3600,cache-client}
+#HTTP_HEADER{'Content-Type: text/javascript'}
+[#SET{cache,#REM|sinon{http://www.openlayers.org/api/OpenLayers.js}
+[(#GET{cache}|recuperer_page|compacte_js)]]
+[(#INCLURE{js/geomap.js})]
