@@ -562,6 +562,7 @@ function spiplistes_boite_autocron () {
 		if(_request('opt_suspendre_trieuse')=='non') {
 			if($connect_id_auteur == 1) {
 				__plugin_ecrire_key_in_serialized_meta ('opt_suspendre_trieuse', $opt_suspendre_trieuse = 'non', _SPIPLISTES_META_PREFERENCES);
+				spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:Trieuse_reactivee')."</p>\n";
 			}
 		}
@@ -578,6 +579,7 @@ function spiplistes_boite_autocron () {
 		if(_request('opt_suspendre_meleuse')=='non') {
 			if($connect_id_auteur == 1) {
 				__plugin_ecrire_key_in_serialized_meta ('opt_suspendre_meleuse', $opt_suspendre_meleuse = 'non', _SPIPLISTES_META_PREFERENCES);
+				spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:Meleuse_reactivee')."</p>\n";
 			}
 		}
@@ -594,6 +596,7 @@ function spiplistes_boite_autocron () {
 		if(_request('opt_simuler_envoi')=='non') {
 			if($connect_id_auteur == 1) {
 				__plugin_ecrire_key_in_serialized_meta ('opt_simuler_envoi', $opt_simuler_envoi = 'non', _SPIPLISTES_META_PREFERENCES);
+				spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:simulation_desactive')."</p>\n";
 			}
 		}
