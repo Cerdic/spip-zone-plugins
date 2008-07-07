@@ -9,7 +9,7 @@
 
   <param>
     <nom>optionnel</nom>
-    <valeur>acsMultimediaUse</valeur>
+    <valeur>acsVideoUse</valeur>
   </param>
   <param>
     <nom>preview</nom>
