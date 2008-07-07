@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '_plan' => 'All the site on one page',
 'sites' => 'Links',
 '_sites' => 'Other sites to discover',
+'forums' => 'Forums',
+'_forums' => 'Reactions, ideas, suggestions',
 'publier' => 'Publish',
 '_publier' => 'Publish on'
 );

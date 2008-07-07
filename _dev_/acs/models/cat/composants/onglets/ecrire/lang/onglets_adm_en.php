@@ -29,5 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'acsOngletschoix4' => 'Panel 4',
 'acsOngletschoix4Oui' => _T('item_oui'),
 'acsOngletschoix4Non' => _T('item_non'),
+'acsOnglets5' => ' ',
+'acsOngletschoix5' => 'Pane 5',
+'acsOngletschoix5Oui' => _T('item_oui'),
+'acsOngletschoix5Non' => _T('item_non')
 );
 ?>
