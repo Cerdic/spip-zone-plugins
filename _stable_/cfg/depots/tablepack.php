@@ -92,10 +92,8 @@ class cfg_depot_tablepack
 			
 			$this->_base = ($d = sql_getfetsel($this->param['colonne'], $this->param['table'], $this->_where)) ? unserialize($d) : array();
 		}	
-		
 		$this->_arbre = array();
 		$this->_ici = &$this->_base;
-    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['nom']);
     	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['casier']);
     	return true;	
 	}
@@ -159,16 +157,13 @@ class cfg_depot_tablepack
 			return array(false, $this->val, $this->messages);	
 		}
 		$ici = &$this->_ici;
-		
 		if ($this->champs){
 			foreach ($this->champs as $name => $def) {
 				if (isset($def['id'])) continue;
 				unset($ici[$name]);
 			}
-		} else {
-			unset($ici);	
-		}	
-
+		}
+			
 		// supprimer les dossiers vides
 		for ($i = count($this->_arbre); $i--; ) {
 			if ($this->_arbre[$i][0][$this->_arbre[$i][1]]) {
@@ -176,7 +171,6 @@ class cfg_depot_tablepack
 			}
 			unset($this->_arbre[$i][0][$this->_arbre[$i][1]]);
 		}
-		
 		$ok = sql_updateq($this->param['table'], array($this->param['colonne'] => serialize($this->_base)), $this->_where);	
 		return array($ok, array());
 	}
@@ -208,7 +202,6 @@ class cfg_depot_tablepack
 		$this->param['cfg_id'] = $id;
 		$this->param['colonne'] = $colonne ? $colonne : 'cfg';
 		$this->param['table'] = $table ? $table : 'spip_auteurs';
-		$this->param['nom'] = array_shift($args);
 		if ($champ = array_pop($args)) {
 			$this->champs = array($champ=>true);
 		}

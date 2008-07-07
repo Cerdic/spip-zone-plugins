@@ -1,7 +1,11 @@
 Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 
-v1.8.1 (04 07 2008)
+v1.8.2 (07 07 2008)
+- Corection d'un bug sur le depot tablepack avec effacer_config().
+- tests unitaires pour le dépot tablepack
+
+v1.8.1 (06 07 2008)
 - Correction bug introduit en 1.8.0 d'erreur de lecture si aucune valeur
 n'etait encore enregistrees dans une depot metapack ou php.
 
@@ -12,7 +16,7 @@ v1.8.0 (04 07 2008)
 - déplacemeent de la classe cfg_depot dans inc/cfg_config
 - tests unitaires pour les fonctions lire_config, ecrire_config et effacer_config pour les dépots meta, metapack et php
 - lire_config metapack et php ne renvoyaient pas NULL si la méta ou le fichier php etait absent
-
+- CFG ne supporte plus l'écriture (hack) #CONFIG{expression,'',''}, à remplacer par #CONFIG{expression,#ARRAY}
 
 v1.7.6 (27 06 2008)
 - Correction bug avec ecrire_config(php::...)
