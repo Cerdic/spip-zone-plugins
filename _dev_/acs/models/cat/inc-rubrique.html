@@ -42,10 +42,10 @@
     [(#REM) Contenu principal : contenu de la rubrique ]
     <div class="cartouche">
         [(#LOGO_RUBRIQUE||image_reduire{200,200})]
-        [<h1 class="titre">(#TITRE|supprimer_numero)</h1>]
+        [<h1 class="#EDIT{titre} titre">(#TITRE|supprimer_numero)</h1>]
         <small><:dernier_ajout:> &ndash; [(#DATE|nom_jour) ][(#DATE|affdate).]</small>
     </div>
-      [<div class="chapo" style="z-order:2">(#TEXTE)</div>]
+      [<div class="#EDIT{texte} chapo" style="z-order:2">(#TEXTE)</div>]
 
     <div class="contre-encart">
       [(#REM) Articles de la rubrique ]
