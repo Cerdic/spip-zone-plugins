@@ -40,29 +40,37 @@ function spiplistes_install ($action) {
 		case 'install':
 			if(!$GLOBALS['meta']['spiplistes_version']) {
 				$result = spiplistes_base_creer();
+				$str_log = "create";
 			}
 			else {
 				// logiquement, ne devrait pas passer par là (upgrade assuré par mes_options)
 				include_spip('base/spiplistes_upgrade');
 				$result = spiplistes_upgrade();
+				$str_log = "upgrade";
 			}
 			$result = (
 				$result
 				&& spiplistes_initialise_spip_metas_spiplistes()
 				&& spiplistes_activer_inscription_visiteurs()
 				);
+			$str_log = "INSTALL: $str_log " . spiplistes_str_ok_error($result);
 			if(!$result) {
 				// nota: SPIP ne filtre pas le résultat. Si retour en erreur,
 				// la case à cocher du plugin sera quand même cochée
-				spiplistes_log("spiplistes INSTALL: ERROR. PLEASE REINSTALL PLUGIN...");
+				$str_log .= ": PLEASE REINSTALL PLUGIN";
 			}
-			spiplistes_log("INSTALL: ".($result ? "OK" : "NO"));
+			else {
+				echo(_T('spiplistes:_aide_install'
+					, array('url_config' => generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE))
+					));
+			}
+			spiplistes_log($str_log);
 			return($result);
 			break;
 		case 'uninstall':
 			// est appellé lorsque "Effacer tout" dans exec=admin_plugin
 			$result = spiplistes_vider_tables();
-			spiplistes_log("UNINSTALL: ".($result ? "OK" : "NO"));
+			spiplistes_log("UNINSTALL: " . spiplistes_str_ok_error($result));
 			return($result);
 			break;
 		default:

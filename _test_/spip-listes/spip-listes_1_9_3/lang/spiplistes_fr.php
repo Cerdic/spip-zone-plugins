@@ -2,6 +2,10 @@
 
 // This is a SPIP module file  --  Ceci est un fichier module de SPIP
 
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
 $GLOBALS['i18n_spiplistes_fr'] = array(
 
 
@@ -19,6 +23,12 @@ L'adresse email doit &ecirc;tre unique, ainsi que le login. Si cette adresse
    email ou se login existe dans la base du site, la ligne sera rejet&eacute;e.<br />
 Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent 
    &ecirc;tre ignor&eacute;s (vous pouvez importer des listes issues des anciennes versions de SPIP-Listes)."
+, '_aide_install' => "<p>Bienvenue dans le monde de SPIP-Listes.</p>
+<p class='verdana2'>Par d&eacute;faut, &agrave; l'installation, SPIP-Listes est en mode <em>simulation 
+   d'envoi</em> afin de vous permettre de d&eacute;couvrir les fonctionnalit&eacute;s 
+   et d'effectuer vos premiers tests.</p>
+<p class='verdana2'>Pour valider les diff&eacute;rentes options de SPIP-Listes, rendez-vous <a href='@url_config@'>sur 
+   la page de configuration</a>.</p>"
 , 'aide_en_ligne' => "Aide en ligne"
 , 'attente_validation' => "attente validation"
 
