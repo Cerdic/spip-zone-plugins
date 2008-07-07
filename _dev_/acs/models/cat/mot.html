@@ -82,8 +82,8 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
           #ANCRE_PAGINATION
 				[<p class="pagination">(#PAGINATION)</p>]
           <ul>
-            <BOUCLE_articles(ARTICLES) {id_mot} {par date}{inverse} {pagination 10}>
-            <INCLURE{fond=composants/liste_articles/liste_articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}>
+            <BOUCLE_articles(ARTICLES) {id_mot} {par date}{inverse} {pagination 10} {lang=#LANG}>
+            <INCLURE{fond=composants/liste_articles/liste_articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{lang ?}>
             </BOUCLE_articles>
           </ul>
       </div>
