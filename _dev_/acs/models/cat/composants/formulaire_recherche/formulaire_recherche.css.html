@@ -16,7 +16,7 @@
   [border-style: (#CONFIG{acsFormulaire_rechercheBordStyle,#CONFIG{acsFondBordStyle}});]
   [border-color: #(#CONFIG{acsFormulaire_rechercheBordColor,#CONFIG{acsFondBordColor}});]
   color: ##CONFIG{acsFondText,00008f};
-  background: #[(#CONFIG{acsFondColor,ffffff})];
+  [background: #(#CONFIG{acsFondColor});]
   -moz-border-radius: 8px;
   -moz-border-radius-topleft: 0;
   padding-left: 4px;
@@ -26,7 +26,7 @@
 
 .formulaire_recherche label {
   position: relative;
-  background: ##CONFIG{acsFormulaire_rechercheOngletColor,f2f2ff};
+  [background: #(#CONFIG{acsFormulaire_rechercheOngletColor,#CONFIG{acsFondColor}});]
   color: ##CONFIG{acsFondText,00008f};
   padding-left: 15px;
   padding-right: 15px;
