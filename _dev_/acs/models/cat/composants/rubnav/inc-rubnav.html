@@ -8,20 +8,14 @@
 	<div class="rubriques">
 		<ul>
 			<BOUCLE_rubriques0(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group1}{doublons}>
-				<li class="menu-item" [id="rubmenu(#EXPOSE)"]>[(#EXPOSE|?{#SET{EXPOSED, #EXPOSE}, ''})]
-					<BOUCLE_test_sousrub0(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES, #GET{EXPOSED}|?{'', 'true'}})]</BOUCLE_test_sousrub0>
-					[(#GET{AFILLES}|? {<a href="#URL_RUBRIQUE"><img src="[(#CHEMIN{composants/rubnav/img_pack/deplierhaut.gif})]" class="deplierub" alt="+" title="Cliquez pour déplier les sous-rubriques" onmouseover='this.src="[(#CHEMIN{composants/rubnav/img_pack/deplierhauton.gif})]";' onmouseout='this.src="[(#CHEMIN{composants/rubnav/img_pack/deplierhaut.gif})]";' align="right" /></a>, ''})]
-					[(#SET{AFILLES, ""})][(#SET{EXPOSED, ""})]
+				<li class="menu-item" [id="rubmenu(#EXPOSE)"]>
 					<a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE"[ class="(#EXPOSE)"] title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]">[(#TITRE|supprimer_numero|couper{80})]</a>
           <B_sous_rubriques0>
             <ul>
-              <BOUCLE_sous_rubriques0(RUBRIQUES) {id_parent} {par num titre, titre}><BOUCLE_test_expose0(RUBRIQUES) {id_enfant}>#EXPOSE{' '}</BOUCLE_test_expose0>
+              <BOUCLE_sous_rubriques0(RUBRIQUES) {id_parent} {par num titre, titre}>
 							<li class="menu-item">
-							[(#EXPOSE|?{#SET{EXPOSED, #EXPOSE}, ''})]
-							<BOUCLE_test_soussousrub0(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES, #GET{EXPOSED}|?{'', 'true'}})]</BOUCLE_test_soussousrub0>
-							[(#GET{AFILLES}|?{' '})<a href="#URL_RUBRIQUE"><img src="[(#CHEMIN{composants/rubnav/img_pack/deplierhaut.gif})]" class="deplierub" alt="+"  title="Cliquez pour déplier les sous-rubriques" onmouseover='this.src="[(#CHEMIN{composants/rubnav/img_pack/deplierhauton.gif})]";' onmouseout='this.src="[(#CHEMIN{composants/rubnav/img_pack/deplierhaut.gif})]";' align="right" /></a>]
 							<a id="rub#ID_RUBRIQUE" style="text-align: center;" href="#URL_RUBRIQUE"[ class="(#EXPOSE)"] title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]">[(#TITRE|supprimer_numero|couper{80})]</a>
-							[(#SET{AFILLES, ""})][(#SET{EXPOSED, ""})]<BOUCLE_re0(BOUCLE_sous_rubriques0)></BOUCLE_re0></li>
+							<BOUCLE_re0(BOUCLE_sous_rubriques0)></BOUCLE_re0></li>
 							</B_test_expose0></BOUCLE_sous_rubriques0>
 						</ul>
 					</B_sous_rubriques0>
