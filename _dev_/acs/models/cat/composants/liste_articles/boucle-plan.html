@@ -11,7 +11,7 @@ Boucle plan du site
   <!-- Articles et sous-rubriques -->
   <B_articles_racine>
     <div class="plan-articles">
-      <BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
+      <BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre} {lang ?}>
       [<img src="#ACS_CHEMIN{img/puces/}(#CONFIG{acsListe_articlesPuce})" alt="¤" />]
       <a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"] class="plan-article">#TITRE</a>
       </BOUCLE_articles_racine>
@@ -26,7 +26,7 @@ Boucle plan du site
       [<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"] style="float: left;">(#TITRE|supprimer_numero)</a>  &nbsp;]
       <B_articles>
         <div class="plan-articles">
-        <BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
+        <BOUCLE_articles(ARTICLES) {id_rubrique} {par titre} {lang ?}>
           [<img src="#ACS_CHEMIN{img/puces/}(#CONFIG{acsListe_articlesPuce})" alt="¤" />]
           <a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"] class="texte">#TITRE</a>
         </BOUCLE_articles>
