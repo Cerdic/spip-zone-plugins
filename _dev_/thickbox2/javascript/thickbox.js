@@ -355,6 +355,7 @@ function diaporama(){
 	} else {
 		DIAPO = false ;
 	}
+	return false;
 }
 
 function diapo(){
