@@ -1,6 +1,6 @@
 #CACHE{0}
 
-<div class="formulaire formulaire_inscription2 formfx" id="formulaire_inscription2[_(#ENV{id_auteur})]">
+<div class="ajax formulaire formulaire_inscription2 formfx" id="formulaire_inscription2[_(#ENV{id_auteur})]">
 
 [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 
@@ -9,8 +9,9 @@
 
 
 [(#ENV*{editable}|?{' '})
-    <form action='#SELF' method='post'>
+    <form action='./' method='post'>
 		#ACTION_FORMULAIRE{#SELF}
+		<input name="redirect" value="#SELF" type="hidden" />
 
         [(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
 	        [(#INCLURE{fond=formulaires/abonnement_liste}{env}{article=#ENV{article}}{abonnement=#ENV{abonnement}}{option=#ENV{option}})]	
@@ -186,17 +187,17 @@
                     <input type="text" class="text" name="profession" id="profession" value="#ENV{profession}"/>
                     [<p class='erreur'>(#ENV**{erreurs}|table_valeur{profession})</p>]
                 </li>]
+                [(#CONFIG{inscription2/id_societe}|=={on}|?{' ', ''})
+                <li class="editer_societe[ (#CONFIG{inscription2/id_societe_obligatoire}|=={on}|?{obligatoire})]">
+                    <label for="id_societe"><:inscription2:id_societe:></label>
+        	        [(#INCLURE{fond=formulaires/inscription2_form_societes}{env})]
+                    [<p class='erreur'>(#ENV**{erreurs}|table_valeur{id_societe})</p>]
+                </li>]
                 [(#CONFIG{inscription2/societe}|=={on}|?{' ', ''})
                 <li class="editer_societe[ (#CONFIG{inscription2/societe_obligatoire}|=={on}|?{obligatoire})]">
                     <label for="societe"><:inscription2:societe:></label>
                     <input type="text" class="text" name="societe" id="societe" value="#ENV{societe}"/>
                     [<p class='erreur'>(#ENV**{erreurs}|table_valeur{societe})</p>]
-                </li>]
-                [(#CONFIG{inscription2/id_societe}|=={on}|?{' ', ''})
-                <li class="editer_societe[ (#CONFIG{inscription2/id_societe_obligatoire}|=={on}|?{obligatoire})]">
-                    <label for="id_societe"><:inscription2:societe:></label>
-        	        [(#INCLURE{fond=formulaires/inscription2_form_societes}{env})]
-                    [<p class='erreur'>(#ENV**{erreurs}|table_valeur{id_societe})</p>]
                 </li>]
                 [(#CONFIG{inscription2/secteur}|=={on}|?{' ', ''})
                 <li class="editer_secteur[ (#CONFIG{inscription2/secteur_obligatoire}|=={on}|?{obligatoire})]">
