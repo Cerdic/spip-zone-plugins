@@ -71,6 +71,7 @@
 	$spip_societes['ville'] = "VARCHAR(255) NOT NULL ";
 	$spip_societes['id_pays'] = "BIGINT(21) NOT NULL";
 	$spip_societes['telephone'] = "VARCHAR(255) NOT NULL ";
+	$spip_societes['fax'] = "VARCHAR(255) NOT NULL ";	
 	
 	$spip_societes_key = array('PRIMARY KEY' => 'id_societe', 'KEY id_pay' => 'id_pays');
 	
@@ -123,13 +124,15 @@ function envoyer_inscription2($id_auteur,$mode="inscription") {
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
 	
 	$prenom = (lire_config('inscription2/prenom')) ? "b.prenom," : "" ;
+	$nom = (lire_config('inscription2/nom_famille')) ? "b.nom_famille," : "" ;
 	
     $var_user = sql_fetsel(
-        "a.nom,$prenom a.id_auteur, a.alea_actuel, a.login, a.email",
+        "a.nom,$prenom $prenom a.id_auteur, a.alea_actuel, a.login, a.email",
         "spip_auteurs AS a LEFT JOIN spip_auteurs_elargis AS b USING(id_auteur)",
         "a.id_auteur =$id_auteur"
     );
 
+    spip_log('envoie mail id: '.$id_auteur,'inscription2');
     spip_log($var_user,'inscription2');
 
 	if($var_user['alea_actuel']==''){ 
@@ -146,7 +149,7 @@ function envoyer_inscription2($id_auteur,$mode="inscription") {
  	if($mode=="inscription"){ 
 	
 	$message = _T('inscription2:message_auto')."\n\n"
-			. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n"
+			. _T('inscription2:email_bonjour', array('nom'=> $var_user['prenom']." ".$var_user['nom']))."\n\n"
 			. _T('inscription2:texte_email_inscription', array(
 			'link_activation' => $adresse_site.'/spip.php?page=inscription2_confirmation&id='
 			   .$var_user['id_auteur'].'&cle='.$var_user['alea_actuel'].'&mode=conf', 
@@ -170,7 +173,9 @@ function envoyer_inscription2($id_auteur,$mode="inscription") {
  	$sujet = "[$nom_site_spip] "._T('inscription2:rappel_password'); 
  	} 
 
-	if (envoyer_mail($var_user['email'],
+    spip_log($message,'inscription2');
+
+	if (inc_envoyer_mail_dist($var_user['email'],
 			$sujet,
 			 $message))
 		return "ok";
