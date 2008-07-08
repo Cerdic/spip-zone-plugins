@@ -24,6 +24,7 @@
 .spiplistes .table-agenda .right-legend { text-align:right }
 .spiplistes .agenda-loupe { display:block;width:26px;height:24px;background: url() no-repeat left top }
 .spiplistes .centrer { text-align:center }
+.spiplistes .panier { list-style:none;padding:1ex;margin:0 }
 .spiplistes .a-fond-0, .spiplistes .a-fond-1 { display:block; margin:0;padding:0;border-top:1px solid #fff }
 .spiplistes .gray { color:#ccc }
 .spiplistes .bold { font-weight:bold }

@@ -29,16 +29,23 @@
 	Les fonctions qui doivent être chargées par tous les scripts sauf inc/spiplistes_api*
 */
 
+// Certains hébergeurs ont désactivé l'accès à syslog (free,...)
+// Recréer les constantes pour trier les journaux
+if(!defined("LOG_WARNING")) {
+	define("LOG_WARNING", 4);
+	define("LOG_DEBUG", 7);
+}
+
 function spiplistes_log($texte, $level = LOG_WARNING) {
 	if(__server_in_private_ip_adresses()
 		&& (spiplistes_pref_lire('opt_console_syslog') == 'oui')
 	) {
 		__syslog_trace($texte, $level);
 	}
-	else if($level <= LOG_DEBUG) {
+	else if($level < LOG_DEBUG) {
 		// Taille du log SPIP trop courte en 192
 		// Ne pas envoyer si DEBUG sinon tronque sans cesse
-		// En 193, modifier $taille_des_logs
+		// En SPIP 193, modifier globale $taille_des_logs pour la rotation
 		spip_log($texte, _SPIPLISTES_PREFIX);
 	}
 	return(true);

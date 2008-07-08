@@ -205,6 +205,7 @@ function exec_spiplistes_courriers_casier () {
 ////////////////////////////////////
 
 	$titre_page = _T('spiplistes:spip_listes');
+
 	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "courrier_casier";
