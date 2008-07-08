@@ -5,7 +5,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'col1' => 'Colonne 1',
 'col1_description' => 'Conteneur pour d\'autres composants.',
-'col1_help' => 'Dans ce modèle ACS, ce composant est utilisé par défaut en colonne 1 (colonne de gauche pour les langues s\'écrivant de gauche à droite). Les composants optionnels ne sont affichés que sur les pages qui incluent le composant Col1 avec le paramètre {composants_optionnels=oui}',
+'col1_help' => 'Dans ce modèle ACS, ce composant est utilisé par défaut en colonne 1 (colonne de gauche pour les langues s\'écrivant de gauche à droite).
+ Le composant optionnel n° 4 n\'est affiché que sur les pages qui incluent le composant Col1 avec le paramètre {composants_optionnels=4}',
 
 'acsCol11' => 'Composant 1',
 'acsCol12' => 'Composant 2',
