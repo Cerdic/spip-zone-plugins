@@ -58,6 +58,8 @@ $GLOBALS['i18n_'._LILO_PREFIX.'_fr'] = array(
 , 'configurer_statut_couleur_00f' => "Bleu"
 , 'configurer_statut_couleur_666' => "Gris"
 
+, 'javascript_manquant' => "Javascript n&acute;est pas activ&eacute;.<br />
+	Svp, activez Javascript sur votre navigateur et rechargez cette page. "
 , 'jquery_manquant' => "jQuery n&acute;est pas activ&eacute;.<br />
 	Svp, contactez le responsable du site en lui signalant cette erreur. "
 , 'jquery_manquant_prive' => "Vous devez activer jQuery pour configurer ce plugin."

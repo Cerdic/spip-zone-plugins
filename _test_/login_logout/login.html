@@ -31,22 +31,29 @@
 	.formulaire_login label { color:##ENV{couleur_foncee,3874b0}; }
 	.spip_bouton input { float: #LANG_RIGHT; background-color: ##ENV{couleur_foncee,3874b0}; }
 	#bloc_session_remember { text-align:#LANG_LEFT}
-	.lilo-js-alert { background-color:red; color:yellow; line-height:1.4em; padding:1em }
+	.lilo-js-alert { background-color:red; color:yellow; line-height:1.4em; padding:1em; display:block !important }
 	.lilo-js-alert small { font-weight:normal }
 -->
 </style>
-<script language="JavaScript" type="text/JavaScript">
+<script type="text/JavaScript">
+//<![CDATA[
 jQuery().ready(function(){
 	$('#var_login_id').focus();
-	$('.lilo-js-alert').hide();
+	$('.lilo-alert-intro').hide();
 });
+//]]>
 </script>
 </head>
 <body class="page_login">
 
 <div id='buste'>
 	<h1 class="spip">#NOM_SITE_SPIP<br /><small><:login_acces_prive:></small></h1>
-	<h2 class="lilo-js-alert"><:forum_titre_erreur:> <small><:lilo:jquery_manquant:></small></h2>
+	<div class='lilo-alert-intro'>
+<noscript>
+	<h2 class="lilo-js-alert"><:forum_titre_erreur:> <small><:lilo:javascript_manquant:></small></h2>
+</noscript>
+	<h2 class="lilo-js-alert" style='display:none'><:forum_titre_erreur:> <small><:lilo:jquery_manquant:></small></h2>
+	</div>
 	<div id='ventre'>
 		#MENU_LANG_ECRIRE
 		<div class="formulaire_spip formulaire_login">
