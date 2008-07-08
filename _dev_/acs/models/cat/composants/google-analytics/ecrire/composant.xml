@@ -17,7 +17,7 @@
   <variable>
     <nom>UA</nom>
     <type>text</type>
-    <taille>10</taille>
-    <value>UA-xxxxxx-x</value>
+    <taille>15</taille>
+    <value>UA-xxxxxxx-x</value>
   </variable>
 </composant>
