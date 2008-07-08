@@ -13,7 +13,7 @@
 
 // gestion des extras (voir inc_extra pour plus d'informations)
 //$champs_extra = false;
-$champs_extra_proposes = false;
+//$champs_extra_proposes = false;
 
 // #EXTRA
 // [(#EXTRA|extra{isbn})]
