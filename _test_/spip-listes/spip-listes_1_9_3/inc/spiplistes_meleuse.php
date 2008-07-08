@@ -254,7 +254,7 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 			$email_a_envoyer['texte']->AddCustomHeader("Reply-To: ".$from); 
 			$email_a_envoyer['texte']->AddCustomHeader("Return-Path: ".$from); 
 			$email_a_envoyer['texte']->SMTPKeepAlive = true;
-			
+
 			$email_a_envoyer['html'] = new phpMail('', $objet_html, $page_html, $page_texte, $GLOBALS['meta']['spiplistes_charset_envoi']);
 			$email_a_envoyer['html']->From = $from ; 
 			$email_a_envoyer['html']->AddCustomHeader("Errors-To: ".$from); 
@@ -343,7 +343,7 @@ spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinatair
 						}
 				
 						$format_abo = spiplistes_format_abo_demande($id_auteur);
-							
+
 						$total++;
 						if($log_voir_destinataire) {
 							$str_temp .= $nom_auteur."(".$format_abo.") - $email";
@@ -373,7 +373,7 @@ spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinatair
 											. "<a href=\"$_url\">".$pied_rappel_html."</a>\n\n</body></html>"
 											. $tampon_html
 											;
-										/*
+										/* la version alternative texte */
 										$email_a_envoyer[$format_abo]->AltBody = 
 											$page_texte ."\n\n"
 											. $pied_page_texte
@@ -381,8 +381,6 @@ spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinatair
 											. $tampon_texte
 											;
 										break;
-										*/
-										// pas de break. Un courrier html contient AUSSI la version texte.
 									case 'texte':
 										$email_a_envoyer[$format_abo]->Body =
 											$page_texte ."\n\n"

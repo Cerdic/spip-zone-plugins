@@ -5,8 +5,6 @@
 
 
 TO-DO:
-- manque le cr (windows/outlook) dans la version texte du courrier. Revoir le filtre.
-- Le courrier envoyé à un abonné est expédié en texte au lieu de html.
 - utf8 à vérifier sur les courriers
 - revoir liste auteurs, l'ajax n'a pas le bon retour (ex.: flèche droite perd la page d'appel, du coup le clic suivant sur th de tri se perd)
 - revoir spiplistes_abonne_edit (désabonné, abonné, format ..., pas très clair). Voire supprimer cette page et renvoyer son formulaire corrigé sur auteur_infos.
