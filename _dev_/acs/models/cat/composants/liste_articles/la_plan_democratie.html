@@ -1,0 +1,9 @@
+<B_articles>
+<div class="plan-articles">
+<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre} {lang ?} {note_ponderee>=#CONFIG{acsDemocratieSeuilPublication,0}} {statut==#DEMOCRATIE_STATUT} >
+<span class="plan-article">[<img src="#ACS_CHEMIN{img/puces/}(#CONFIG{acsListe_articlesPuce})" alt="¤" />]
+<a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a>
+[(#MODE|=={forums}|?{' '})<INCLURE {fond=composants/forum/nbmessages}{id_article}{lang ?}>]</span>
+</BOUCLE_articles>
+</div>
+</B_articles>
