@@ -91,9 +91,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function extra_saisie($extra, $table_objet, $ensemble='') {
 	include_spip('inc/presentation');
 	if ($affiche = extra_form($extra, $table_objet, $ensemble)) {
-		return debut_cadre_enfonce('',true)
+/*		return debut_cadre_enfonce('',true)
 			. $affiche
 			. fin_cadre_enfonce(true);
+*/
+		return "<ul><li><fieldset>".$affiche."</fielset></li></ul>";
 	}
 }
 
@@ -140,7 +142,7 @@ function extra_form($extra, $table_objet, $ensemble='') {
 		list($form, $filtre, $prettyname, $choix, $valeurs) = explode("|", $desc);
 
 		if (!$prettyname) $prettyname = ucfirst($champ);
-		$affiche .= "<b>$prettyname&nbsp;:</b><br />";
+		$affiche .= "<li class='extra'><label>$prettyname&nbsp;:</label>";
 
 		switch($form) {
 
@@ -170,7 +172,7 @@ function extra_form($extra, $table_objet, $ensemble='') {
 					$valeurs = $choix ;
 
 				$affiche .= "<select name='suppl_$champ' ";
-				$affiche .= "class='forml'>\n";
+				$affiche .= "class=''>\n";
 				$i = 0 ;
 				while (list(, $choix_) = each($choix)) {
 					$val = $valeurs[$i] ;
@@ -230,7 +232,7 @@ function extra_form($extra, $table_objet, $ensemble='') {
 
 			case "bloc":
 			case "block":
-				$affiche .= "<textarea name='suppl_$champ' class='forml' rows='5' cols='40'>".entites_html($extra[$champ])."</textarea>\n";
+				$affiche .= "<textarea name='suppl_$champ' class='' rows='5' cols='40'>".entites_html($extra[$champ])."</textarea>\n";
 				break;
 
 			case "masque":
@@ -240,13 +242,13 @@ function extra_form($extra, $table_objet, $ensemble='') {
 			case "ligne":
 			case "line":
 			default:
-				$affiche .= "<input type='text' name='suppl_$champ' class='forml'\n";
+				$affiche .= "<input type='text' name='suppl_$champ' class=''\n";
 				$affiche .= " value=\"".entites_html($extra[$champ])."\" size='40'>\n";
 				break;
 		}
 
 		$affiche .= "<input type='hidden' name='extra' value='1' />\n";
-		$affiche .= "<br />\n";
+		$affiche .= "</li>\n";
 	}
 
 	return $affiche;
