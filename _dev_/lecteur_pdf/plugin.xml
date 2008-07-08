@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
 	<nom>
 	lecteur pdf
@@ -12,7 +13,7 @@
 		dev
 	</etat>
 	<description>
-	insère un lecteur de fichier pdf directement dans un article en y insérant le code<code><lecteurpdfXX></code> en remplaçant XX par le buméro de l'article 
+	ins&#232;re un lecteur de fichier pdf directement dans un article en y ins&#233;rant le code<code><lecteurpdfXX></code> en remplaçant XX par le num&#233;ro de l'article 
  
 	</description>
 	<icon>css/images/logo_article.png</icon>
