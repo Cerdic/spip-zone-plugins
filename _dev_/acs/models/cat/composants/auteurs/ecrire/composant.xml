@@ -11,7 +11,7 @@
 
   <param>
     <nom>optionnel</nom>
-    <valeur>activer_breves</valeur>
+    <valeur>true</valeur>
   </param>
   <param>
     <nom>preview</nom>
