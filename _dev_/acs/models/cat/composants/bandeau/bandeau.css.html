@@ -17,18 +17,19 @@ fieldset.a_la_une {
 }
 
 fieldset.a_la_une legend {
-  [background: #(#CONFIG{acsBandeauCouleurFond});
-  [border: #CONFIG{acsBandeauBordLargeur,thin} #CONFIG{acsBandeauBordStyle,groove1} #(#CONFIG{acsBandeauBordHautCouleur});
+  background: ##CONFIG{acsBandeauCouleurFond,#CONFIG{acsFondColor}};
+  [border: #CONFIG{acsBandeauBordLargeur,thin}[ (#CONFIG{acsBandeauBordStyle,groove}) ]#(#CONFIG{acsBandeauBordHautCouleur});
   border-bottom: 0;
-  ]]
+  ]
   font-weight: normal;
   padding-left: 8px;
   padding-right: 8px;
+  padding-top: 0.4em;
   font-style: italic;
   font-size: 0.7em;
-  line-height: 0.7em;
+  line-height: 0.4em;
   -moz-border-radius: 16px;
-  margin-top: -0.35em;
+  margin-top: -0.8em;
 }
 
 div.a_la_une {
