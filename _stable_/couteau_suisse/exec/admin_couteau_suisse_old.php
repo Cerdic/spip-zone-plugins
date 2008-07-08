@@ -164,7 +164,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	global $couleur_claire;
 	global $outils;
 
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+	if (!cout_autoriser()) {
 		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
 		echo _T('avis_non_acces_page');
 		fin_page();
