@@ -38,8 +38,7 @@
 	<div id="onglet">
 		[(#REM) Fil d'Ariane ]
 		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:plan_site:></div>
-    [(#CONFIG{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/liste_articles/boucle-plan-democratie}>][(#REM) Si composant democratie activé]
-    [(#CONFIG{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/liste_articles/boucle-plan}>][(#REM) Si composant democratie inactif]
+    <INCLURE{fond=composants/liste_articles/boucle-plan}{lang ?}>
 	</div>
 </div>
 

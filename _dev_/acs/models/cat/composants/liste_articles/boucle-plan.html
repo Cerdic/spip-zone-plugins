@@ -9,14 +9,9 @@ Boucle plan du site
   </h1>
 
   <!-- Articles et sous-rubriques -->
-  <B_articles_racine>
-    <div class="plan-articles">
-      <BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre} {lang ?}>
-      [<img src="#ACS_CHEMIN{img/puces/}(#CONFIG{acsListe_articlesPuce})" alt="¤" />]
-      <a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"] class="plan-article">#TITRE</a>
-      </BOUCLE_articles_racine>
-    </div>
-  </B_articles_racine>
+  [(#CONFIG{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/liste_articles/la_plan_democratie}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie activé]
+  [(#CONFIG{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/liste_articles/la_plan}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie inactif]
+  
 
   <B_rubriques>
     <ul class="plan-rubriques">
@@ -24,14 +19,8 @@ Boucle plan du site
       <li class="plan-rubrique">
       [<div style="float:left"><a href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE||image_reduire{#CONFIG{acsListe_articlesLogoTailleMax,50},#CONFIG{acsListe_articlesLogoTailleMax,50}})</a></div>]
       [<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"] style="float: left;">(#TITRE|supprimer_numero)</a>  &nbsp;]
-      <B_articles>
-        <div class="plan-articles">
-        <BOUCLE_articles(ARTICLES) {id_rubrique} {par titre} {lang ?}>
-          [<img src="#ACS_CHEMIN{img/puces/}(#CONFIG{acsListe_articlesPuce})" alt="¤" />]
-          <a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"] class="texte">#TITRE</a>
-        </BOUCLE_articles>
-        </div>
-      </B_articles>
+      [(#CONFIG{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/liste_articles/la_plan_democratie}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie activé]
+      [(#CONFIG{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/liste_articles/la_plan}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie inactif]      
       <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
       </li>
     </BOUCLE_rubriques>
