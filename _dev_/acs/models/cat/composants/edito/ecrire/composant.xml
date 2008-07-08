@@ -19,11 +19,11 @@
   </param>
 
   <variable>
-    <nom>FondCouleur</nom>
+    <nom>Fond</nom>
     <type>color</type>
   </variable>
   <variable>
-    <nom>BordCouleur</nom>
+    <nom>Bord</nom>
     <type>color</type>
   </variable>
   <variable>
@@ -37,7 +37,7 @@
     <label>non</label>
   </variable>
   <variable>
-    <nom>LegendBordCouleur</nom>
+    <nom>LegendBord</nom>
     <type>color</type>
   </variable>
   <variable>

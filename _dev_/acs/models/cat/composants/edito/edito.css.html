@@ -5,10 +5,12 @@
  *************/
 
 .edito {
-  border: #CONFIG{acsEditoBordLargeur,2}px #CONFIG{acsEditoBordStyle,dotted} ##CONFIG{acsEditoBordCouleur,dfdfdf};
+  [border-width: (#CONFIG{acsEditoBordLargeur});]
+  [border-style: (#CONFIG{acsEditoBordStyle});]
+  [border-color: #(#CONFIG{acsEditoBord});]
   border-left:0;
   border-right:0;
-  background: ##CONFIG{acsEditoFondCouleur,efefef};
+  [background: #(#CONFIG{acsEditoFond});]
   margin: 0;
   padding: 5px;
   padding-bottom: 0;
@@ -17,7 +19,9 @@
 
 .edito legend{
   margin-left: 10px;
-  border: #CONFIG{acsEditoBordLegendLargeur,1}px #CONFIG{acsEditoLegendBordStyle,solid} [#(#CONFIG{acsEditoLegendBordCouleur,dfdfaf})];
+  [border-width: (#CONFIG{acsEditoLegendBordLargeur});]
+  [border-style: (#CONFIG{acsEditoLegendBordStyle});]
+  [border-color: #(#CONFIG{acsEditoLegendBord});]   
   -moz-border-radius: 10px;
   font: bold 0.88em serif, Garamond;
 }

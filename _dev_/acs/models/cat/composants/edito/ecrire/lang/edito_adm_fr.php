@@ -10,9 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'edito_on' => _T('item_oui'),
 'edito_off' => _T('item_non'),
 
-'acsEditoFondCouleur' => 'Fond',
-'acsEditoBordCouleur' => 'Bordure',
-'acsEditoLegendBordCouleur' => 'Bordure du titre',
+'acsEditoFond' => 'Fond',
+'acsEditoBord' => 'Bordure',
+'acsEditoLegendBord' => 'Bordure du titre',
 'acsEditoNbLettres' => 'Lettres avant coupure'
 );
 ?>
