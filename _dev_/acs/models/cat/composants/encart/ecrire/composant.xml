@@ -3,7 +3,9 @@
   <nom>Encart</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
-  <version>0.2</version>
+  <version>0.3</version>
+  <version_acs_min>0.3</version_acs_min>
+  <version_acs_max>0.3</version_acs_max>
   <version_spip_min>1.9207</version_spip_min>
   <version_spip_max>1.9208</version_spip_max>
 
