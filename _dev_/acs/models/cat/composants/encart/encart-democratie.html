@@ -4,7 +4,7 @@
 <BOUCLE_encart(ARTICLES) {doublons} {titre_mot=#GET{acsEncartKeyword}} {par date} {inverse} {0,3} {lang ?}>
   <BOUCLE_encart_democratique(ARTICLES spip_notations_articles) {id_article} {note_ponderee>=#CONFIG{acsDemocratieSeuilPublic,0}} {lang ?}>
     <div class="cartouche">
-      [<div align="center">(#LOGO_ARTICLE)</div>]
+      [<div class="spip_logos"><a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE)</a></div>]
 
       [<p class="surtitre">(#SURTITRE)</p>]
       <h1 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h1>

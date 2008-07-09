@@ -20,5 +20,11 @@
 }
 
 .composantEncart .cartouche .texte_nav {
-  text-align: right;
+  text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
+}
+
+.composantEncart .cartouche .spip_logos {
+  float: [(#ENV{ltr}|choixsiegal{left,right,left})];
+  margin: 4px;
+  margin-left: 0; [(#REM) inherited, so do not do twice]
 }

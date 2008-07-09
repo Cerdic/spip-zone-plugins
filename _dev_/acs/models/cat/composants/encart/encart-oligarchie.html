@@ -3,7 +3,7 @@
 <div class="composantEncart">
 <BOUCLE_encart(ARTICLES) {par date} {inverse} {doublons} {titre_mot=#GET{acsEncartKeyword}} {0,3}{lang ?}>
   <div class="cartouche">
-    [<div align="center">(#LOGO_ARTICLE)</div>]
+      [<div class="spip_logos"><a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE)</a></div>]
 
     [<p class="surtitre">(#SURTITRE)</p>]
     <h1 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h1>
