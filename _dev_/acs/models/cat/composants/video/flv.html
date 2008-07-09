@@ -3,7 +3,7 @@
 <object type="application/x-shockwave-flash" data="#CHEMIN{composants/video/swf/player_flv.swf}" width="[(#LARGEUR|=={0}|?{400,#LARGEUR})]" height="[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]">
   <param name="movie" value="#CHEMIN{composants/video/swf/player_flv.swf}" />
   <param name="FlashVars" value="flv=[(#MMFILE|url_absolue)]&amp;width=[(#LARGEUR|=={0}|?{400,#LARGEUR})]&amp;height=[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]&amp;bgcolor=#CONFIG{acsOngletsFondColor,ffffff}&amp;bgcolor1=#CONFIG{acsVideoflvbgcolor1,dfdfdf}&amp;bgcolor2=#CONFIG{acsVideoflvbgcolor2,afafaf}&amp;buttoncolor=#CONFIG{acsVideoIcons,009966}&amp;buttonovercolor=#CONFIG{acsVideoIconsHover,00ff00}&amp;slidercolor1=#CONFIG{acsVideoIconsHover,00ff00}&amp;slidercolor2=#CONFIG{acsVideoIcons,009966}&amp;sliderovercolor=#CONFIG{acsVideoIconsHover,00df00}&amp;textcolor=dfdfdf[&amp;title=(#TITRE)][&amp;startimage=(#LOGO_DOCUMENT||extraire_attribut{src}||url_absolue)]&amp;showstop=1&amp;showvolume=1&amp;showtime=1[(#AUTOSTART|?{&amp;autoplay=1,''})]" />
-  <param name="wmode" value="#ffffff" />
+  <param name="wmode" value="#[(#CONFIG{acsOngletsFondColor,ffffff})]" />
   [<span><a href="[(#MMFILE|url_absolue)]">(#MMFILE)</a></span>]
 </object>
 
