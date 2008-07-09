@@ -1,0 +1,59 @@
+#CACHE{0}
+[(#REM) Plugin SpiBB - Licence GPL]
+[(#REM) SpipBB admin - Page d'accueil des statistiques]
+
+[(#REM) h. passer tout ca en css ]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_infos:>})]
+[(#REM) ------------------------ Liste et edition ------------------------ ]
+
+<table cellpadding='5' cellspacing='0' border='0' width='100%'>
+<thead>
+<tr bgcolor='#ENV{couleur_foncee}' style='color:#ffffff; font-weight:bold;'>
+	<td class='verdana2' width='35%'><:spipbb:admin_statistique:></td>
+	<td class='verdana2' width='15%'><:spipbb:admin_valeur:></td>
+<!--	<td class='verdana2' width='35%'><:spipbb:admin_statistique:></td>
+	<td class='verdana2' width='15%'><:spipbb:admin_valeur:></td> -->
+</tr>
+</thead>
+<tbody>
+<tr bgcolor='#ENV{couleur_claire}'>
+	<td class='verdana2'><:spipbb:admin_total_posts:></td>
+	<td class='verdana2'>#ENV{total_posts}</td>
+</tr>
+<tr bgcolor='#ffffff'>
+	<td class='verdana2'><:spipbb:admin_average_posts:></td>
+	<td class='verdana2'>#ENV{posts_per_day}</td>
+</tr>
+<tr bgcolor='#ENV{couleur_claire}'>
+	<td class='verdana2'><:spipbb:admin_total_users:></td>
+	<td class='verdana2'>#ENV{total_users}</td>
+</tr>
+<tr bgcolor='#ffffff'>
+	<td class='verdana2'><:spipbb:admin_average_users:></td>
+	<td class='verdana2'>#ENV{users_per_day}</td>
+</tr>
+<tr bgcolor='#ENV{couleur_claire}'>
+	<td class='verdana2'><:spipbb:admin_date_ouverture:></td>
+	<td class='verdana2'>[(#ENV{start_date}|affdate_jourcourt)]</td>
+</tr>
+<tr bgcolor='#ffffff'>
+	<td class='verdana2'><:spipbb:admin_age_forum:></td>
+	<td class='verdana2'>#ENV{forum_age}</td>
+</tr>
+<tr bgcolor='#ENV{couleur_claire}'>
+	<td class='verdana2'><:spipbb:admin_total_users_online:></td>
+	<td class='verdana2'>#ENV{total_online}</td>
+</tr>
+[(#REM) affiches en pied de page ;-)) ! c: 22/12/7 non car la version contient en plus les infos SVN ici ]
+<tr bgcolor='#ffffff'>
+	<td class='verdana2'>SPIP</td>
+	<td class='verdana2'>[(#SPIP_VERSION)]</td>
+</tr>
+<tr bgcolor='#ENV{couleur_claire}'>	
+	<td class='verdana2'><:spipbb:admin_spipbb_release:></td>
+	<td class='verdana2'>#ENV*{spipbb_version}</td>
+</tr>
+</tbody>
+</table>
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]

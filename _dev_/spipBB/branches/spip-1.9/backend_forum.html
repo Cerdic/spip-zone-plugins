@@ -1,0 +1,85 @@
+#CACHE{3600}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
+<?php echo '<' ?>?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+
+<channel>
+
+	<title>[(#NOM_SITE_SPIP|texte_backend) ]<:forg:forum:></title>
+	<link>#URL_SITE_SPIP/</link>
+	<description>[(#DESCRIPTIF_SITE_SPIP|texte_backend)]</description>
+	<language>#LANG</language>
+	<generator>SPIP - www.spip.net</generator>
+
+[	<image>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|texte_backend)</url>
+		<link>#URL_SITE_SPIP/</link>
+		[<height>(#LOGO_SITE_SPIP||extraire_attribut{height})</height>]
+		[<width>(#LOGO_SITE_SPIP||extraire_attribut{width})</width>]
+	</image>
+]
+
+<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+<BOUCLE_tout_art(ARTICLES){branche}>
+#SET{articles,#GET{articles}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}}
+</BOUCLE_tout_art>
+
+
+<BOUCLE_forum_rub(FORUMS){id_article IN #GET{articles}}{plat}{!par date}{0,20}{unique}>
+	<item>
+		<title>[(#TITRE|supprimer_numero|texte_backend)] - [(#DATE|affdate{'d/m/Y'})]</title>
+		<link>[(#URL_PAGE{voirsujet,id_forum=#ID_THREAD#forum#ID_FORUM}|url_absolue)]</link>
+		[<guid isPermaLink="true">(#URL_PAGE{voirsujet,id_forum=#ID_THREAD#forum#ID_FORUM}|url_absolue)</guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		[<dc:creator>(#NOM|supprimer_tags|texte_backend)</dc:creator>]
+
+[(#REM)
+	Le bloc qui suit diffuse aussi le texte integral du fil,
+	ce qui permet une syndication plus riche (mais plus "lourde").
+	Fonction desactivable depuis les reglages du site.
+]
+[(#CONFIG{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>[(#LOGO_BREVE|right||texte_backend)
+		][&lt;div class='rss_texte'&gt;(#TEXTE|texte_backend)&lt;/div&gt;
+		][&lt;hr /&gt;
+		&lt;div class='rss_notes'&gt;(#NOTES|texte_backend)&lt;/div&gt;]
+		</content:encoded>
+]
+	</item>
+</BOUCLE_forum_rub>
+</BOUCLE_rub>
+</B_rub>
+
+<BOUCLE_commentaires(FORUMS){id_article?}{id_thread?}{plat}{!par date}{0,20}{unique}>
+	<item>
+		<title>[(#TITRE|supprimer_numero|texte_backend)] - [(#DATE|affdate{'d/m/Y'})]</title>
+		<link>[(#URL_PAGE{voirsujet,id_forum=#ID_THREAD#forum#ID_FORUM}|url_absolue)]</link>
+		[<guid isPermaLink="true">(#URL_PAGE{voirsujet,id_forum=#ID_THREAD#forum#ID_FORUM}|url_absolue)</guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		[<dc:creator>(#NOM|supprimer_tags|texte_backend)</dc:creator>]
+
+[(#REM)
+	Le bloc qui suit diffuse aussi le texte integral du fil,
+	ce qui permet une syndication plus riche (mais plus "lourde").
+	Fonction desactivable depuis les reglages du site.
+]
+[(#CONFIG{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>[(#LOGO_BREVE|right||texte_backend)
+		][&lt;div class='rss_texte'&gt;(#TEXTE|texte_backend)&lt;/div&gt;
+		][&lt;hr /&gt;
+		&lt;div class='rss_notes'&gt;(#NOTES|texte_backend)&lt;/div&gt;]
+		</content:encoded>
+]
+	</item>
+</BOUCLE_commentaires>
+<//B_rub>
+
+</channel>
+
+</rss>

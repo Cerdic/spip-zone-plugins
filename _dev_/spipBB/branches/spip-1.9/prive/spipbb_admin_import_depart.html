@@ -1,0 +1,105 @@
+#CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
+[(#REM) SpipBB admin - Page de gestion des forums ]
+[(#REM) Import : configuration params import ]
+
+<form method="post" action="#ENV{lien_action}">
+<input type='hidden' id="exec" value="#ENV{exec_script}" />
+
+[(#ENV{lien_action}|form_hidden)]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:import_titre:>})]
+[(#REM) ------------------------ Configuration generale ------------------------ ]
+
+<fieldset>
+<legend><:spipbb:import_parametres_rubrique:></legend>
+#ENV*{choix_rubrique}
+</fieldset>
+
+<fieldset>
+<legend><:spipbb:import_parametres_titre:></legend>
+<:spipbb:import_parametres_base:>
+<div><table border='1' cellspacing='1' cellpadding='3' width="100%">
+#ENV*{phpbb_liste_fichiers}
+</table>
+<div style='border:1px solid black'>
+<table border='0' cellspacing='1' cellpadding='3' width="100%">
+<tr style='border:none'>
+	<td style='text-align:right'>
+		<label for='import_host'><:spipbb:import_host:></label>
+	</td>
+	<td>
+		<input type='text' id='import_host' name='import_host' value='localhost' />
+	</td>
+	<td rowspan='6'>
+		<input type='radio' name='import_source' value='#ENV{radio_checked}' 
+		id='import_source_#ENV{radio_checked}'
+		[checked='(#ENV{radio_checked}|=={0}|?{checked})'] />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='import_login'><:spipbb:import_login:></label>
+	</td>
+	<td>
+		<input type='text' id='import_login' name='import_login' value='' />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='import_pass'><:spipbb:import_pass:></label>
+	</td>
+	<td>
+		<input type='password' id='import_pass' name='import_pass' value='' /><br />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='import_base'><:spipbb:import_base:></label>
+	</td>
+	<td>
+		<input type='text' id='import_base' name='import_base' value='' /><br />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='import_prefix'><:spipbb:import_prefix:></label>
+	</td>
+	<td>
+		<input type='text' id='import_prefix' name='import_prefix' value='' /><br />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='import_root'><:spipbb:import_racine:></label>
+	</td>
+	<td>
+		<input type='text' id='import_root' name='import_root' value='' />
+	</td>
+</tr>
+</table>
+</div>
+</fieldset>
+
+<fieldset>
+<legend><:spipbb:import_choix_test_titre:></legend>
+<div><table border='0' cellspacing='1' cellpadding='3' width="100%">
+<tr>
+	<td align='left' class='verdana2'><:spipbb:import_choix_test:></td>
+	<td align='left' class='verdana2'>
+		<input type='radio' name='import_test' value='oui' id='import_test_1' [ checked="(#ENV{import_test}|=={'oui'}|?{checked})"] /> <label for='import_test_1'><:oui:></label>
+		&nbsp;
+		<input type='radio' name='import_test' value='non' id='import_test_0' [ checked="(#ENV{import_test}|=={'non'}|?{checked})"] /> <label for='import_test_0'><:non:></label>
+	</td>
+</tr>
+</table></div>
+</fieldset>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:OK:>" class="fondo" />
+</div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+</form>

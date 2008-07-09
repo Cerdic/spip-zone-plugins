@@ -1,0 +1,15 @@
+#CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
+[(#REM) SpipBB admin - Page de gestion des forums]
+[(#REM) Ce fichier est inclus a chaque etape de la boucle exec/spip_admin_fromphpbb tables ]
+<tr>
+	<td colspan='2'>
+		#ENV{import_table} #ENV{tablename}
+	</td>
+	<td>
+		<input type='hidden' name='fromphpbb_table_#ENV{key}' value='#ENV{tablename}' />
+		<input type='hidden' name='fromphpbb_table_path_#ENV{key}' value='#ENV{avatar_path}' />
+		<input type='radio' name='fromphpbb_source' value='#ENV{key}' id='fromphpbb_source_#ENV{key}'
+		[checked='(#ENV{key}|=={0}|?{checked})'] />
+	</td>
+</tr>
