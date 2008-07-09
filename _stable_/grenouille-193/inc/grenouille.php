@@ -1,6 +1,5 @@
 <?php
 
-
 	/**
 	 * meteo_recherche
 	 *
@@ -73,10 +72,7 @@
 	 * @author Pierre Basson
 	 **/
 	function meteo_lire_xml($chaine, $est_fichier, $item, $champs) {
-	// Aller chercher les donnees du XML et les analyser
-	include_spip('inc/distant');
-	if ($est_fichier) $chaine = recuperer_page($chaine);
-		#@file_get_contents($chaine); 
+		if ($est_fichier) $chaine = @file_get_contents($chaine);
 		else return false;
 		if ($chaine) {
 			// on explode sur <item>
@@ -130,11 +126,6 @@
 	 **/
 	function meteo_convertir_fahrenheit_celsius($t) {
 		return round( ($t - 32) * 5 / 9 );
-	}
-	
-	
-	function generer_supprimer_meteo($id_meteo){
-	return ajax_action_auteur('editer_meteo', "$id_mot",$clic);
 	}
 
 

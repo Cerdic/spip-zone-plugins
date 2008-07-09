@@ -18,7 +18,7 @@ _ {{Mod&egrave;le}} dans squelettes <code>[(#MODELE{meteo,id_meteo=1})]</code> o
         </pipeline>
         <pipeline>
                 <nom>taches_generales_cron</nom>
-                <inclure>meteo_options.php</inclure>
+                <inclure>meteo_fonctions.php</inclure>
         </pipeline>
         <pipeline>
                 <nom>recherche</nom>

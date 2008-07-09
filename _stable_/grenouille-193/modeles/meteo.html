@@ -1,19 +1,11 @@
 #CACHE{0}
 
-<style>
-.meteo{font-family:"Arial",sans-serif; color:#666; background-color:#E6E6FA; width:200px; padding:1em; margin:1em;}
-.meteo .villetitre{font-size:2em; margin:0; padding:0; margin-bottom:0.5em;}
-.meteoday{ text-align:center; display:block; background-color:#fff;}
-.meteoday dd, .prevision dd{color:#000}
-.prevision{float:left;  width:32%; text-align:center; font-size:0.8em}
-.prevision, .meteoday, .prevision dd, .meteoday dd{margin:0; padding:0;}
-</style>
+<B_meteo>
 
-
-<div class="meteo">
 <BOUCLE_meteo(METEO) {id_meteo?}>
+<div class="meteo">
 
-<h4 class="villetitre">[(#VILLE|ucwords)]</h4>
+<h2 class="villetitre">Aujourd'hui &agrave; Borde grande</h2>[(#REM)[(#VILLE|ucwords)]]
 
 <BOUCLE_previsions(PREVISIONS) {id_meteo} {par date}{0,4}>
 
@@ -42,3 +34,4 @@
 
 <br style="clear:both;" />
 </div>
+</B_meteo>

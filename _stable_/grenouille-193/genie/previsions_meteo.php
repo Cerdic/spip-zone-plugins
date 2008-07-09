@@ -1,7 +1,6 @@
 <?php
 
-
-	include_spip('inc/grenouille');
+include_spip('inc/grenouille');
 	
 /**
  * genie_previsions_meteo
@@ -15,6 +14,8 @@
 function genie_previsions_meteo($t) {
 	
 	$aujourdhui = date("Y-m-d 00:00:00");
+	spip_log("le rappel de la mŽtŽo est fait pour $aujourdhui ");
+	
 	sql_delete('spip_previsions','date<'. sql_quote($aujourdhui));
 	$jours = 7;
 	$villes = sql_select('*', 'spip_meteo');
