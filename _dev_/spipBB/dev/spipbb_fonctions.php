@@ -141,16 +141,14 @@ function spipbb_nb_messages_groupe($id_bidon){
 //Filtre :  citation
 //Base : BoOz
 //Modif scoty  29/10/06 .. -> spip 1.9.1/2
+//Modif chryjs 9/7/8 .. -> spip 2.0SVN
 //Affiche le texte à citer
 //+-------------------------------------+
-function barre_forum_citer($texte, $lan, $rows, $cols, $lang='')
+function barre_forum_citer($texte, $lan)
 {
 	if (!$premiere_passe = rawurldecode(_request('retour_forum'))) {
 		if(_request('citer')=='oui'){
 			$id_citation = _request('id_forum') ;
-			//$query = "SELECT auteur, texte FROM spip_forum WHERE id_forum=$id_citation";
-			//$result = sql_query($query);
-			//$row = sql_fetch($result);
 			$row = sql_fetsel('auteur,texte','spip_forum',"id_forum=$id_citation");
 			$aut_cite=$row['auteur'];
 			$text_cite=$row['texte'];
@@ -158,8 +156,7 @@ function barre_forum_citer($texte, $lan, $rows, $cols, $lang='')
 			$texte="{{ $aut_cite $lan }}\n<quote>\n$text_cite</quote>\n";
 		}
 	}
-	if (!function_exists('barre_textarea')) include_spip('inc/vieilles_defs'); // version > _SPIPBB_REV_BARRE_TEXTAREA
-	return barre_textarea($texte, $rows, $cols, $lang);
+	return $texte;
 } // barre_forum_citer
 
 // ------------------------------------------------------------------------------

@@ -336,8 +336,8 @@ _ Un postit est situé en dessous des annonces, avant les messages ordinaires. Il
 
 	// P
 	'pagine_page_' => ' .. page ',
-	'pagine_post_' => ' r&eacuteponse',
-	'pagine_post_s' => ' r&eacuteponses',
+	'pagine_post_' => ' r&eacute;ponse',
+	'pagine_post_s' => ' r&eacute;ponses',
 	'pagine_sujet_s' => ' sujets',
 	'par_' => 'par ',
 	'plugin_auteur' => 'La SpipBB Team : [voir la liste des contributeurs sur Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',

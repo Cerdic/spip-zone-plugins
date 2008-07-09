@@ -1,7 +1,12 @@
 Regles d intervention
 =====================
 
-A priori toutes les ameliorations sont les bienvenues. Ceci dit essayez de vous annoncer au prealable dans la mesure ou pour le moment on essaie de reprendre le code et de le mettre a jour...
+A priori toutes les ameliorations sont les bienvenues.
+Ceci dit essayez de vous annoncer au prealable dans la mesure où
+pour le moment on essaie de reprendre le code et de le mettre a jour...
+
+- La version dev/ est adaptée à SPIP en SVN (2.0 a ce jour)
+- La version branche est dediée aux versions en cours de SPIP (ex 1.9)
 
 Merci
 

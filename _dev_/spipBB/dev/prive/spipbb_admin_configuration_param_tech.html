@@ -1,0 +1,27 @@
+#CACHE{0}
+[(#REM) Plugin SpiBB - Licence GPL]
+[(#REM) SpipBB admin - Configuration generale SpipBB]
+
+
+[(#REM) ------------------------ CONFIG ISSUE GAFOSPIP : PARAMETRES TECHNIQUES------------------------ ]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_interface:>})]
+
+<table cellpadding='3' cellspacing='0' border='0' width='100%'>
+<tr>
+	<td><:spipbb:admin_nombre_lignes_messages:></td>
+	<td>
+		<input type='text' name='fixlimit' value='#ENV{fixlimit}' size='4' />
+	</td>
+</tr>
+<tr>
+	<td><:spipbb:admin_temps_deplacement:></td>
+	<td>
+		<input type='text' name='lockmaint' value='#ENV{lockmaint}' size='4' />
+	</td>
+</tr>
+</table>
+
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:bouton_valider:>" class="fondo" /></div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]

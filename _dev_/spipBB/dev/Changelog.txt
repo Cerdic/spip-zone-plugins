@@ -1,4 +1,10 @@
-﻿2008-05-05  chryjs  <chryjs!@!free!.!fr>
+﻿2008-07-09  chryjs  <chryjs!@!free!.!fr>
+
+ * Séparation dev/branche pour réellement dissocier le code des versions de spip... trop imbriqué trop lourd à garder fusionné
+ * 0.5.0.0 Petite correction pour la version spip > SVN 12000 : les formulaires de forums ont changé... reste un bug lié à AJAX ? la citation reste dans le cache semble-t-il...
+
+
+2008-05-05  chryjs  <chryjs!@!free!.!fr>
 
  * 0.4.9.8 correction cosmétique sur trad FR + probleme de order by sans array
 
