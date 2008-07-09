@@ -1,10 +1,11 @@
 <plugin>
+<version>0.4.9.9</version>
 <nom>
 	<multi>
-		[en]SpipBB: Management of SPIP forums
-		[fr]SpipBB : Gestion des forums de SPIP
-		[ca]SpipBB: Gesti&oacute; dels f&ograve;rums d'SPIP
-		[pt]SpipBB: Gest&atilde;o dos f&oacute;runs de SPIP
+		[en]SpipBB: Management of SPIP 1.9 forums
+		[fr]SpipBB : Gestion des forums de SPIP 1.9
+		[ca]SpipBB: Gesti&oacute; dels f&ograve;rums d'SPIP 1.9
+		[pt]SpipBB: Gest&atilde;o dos f&oacute;runs de SPIP 1.9
 	</multi>
 </nom>
 <auteur>
@@ -19,7 +20,6 @@ _ &#169; 2006 - <multi>
 [pt]Distribu&iacute;do sob licen&ccedil;a GPL
 </multi>
 </auteur>
-<version>0.4.9.8</version>
 <etat>dev</etat>
 <description>
 	<multi>

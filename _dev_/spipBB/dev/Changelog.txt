@@ -2,6 +2,8 @@
 
  * Séparation dev/branche pour réellement dissocier le code des versions de spip... trop imbriqué trop lourd à garder fusionné
  * 0.5.0.0 Petite correction pour la version spip > SVN 12000 : les formulaires de forums ont changé... reste un bug lié à AJAX ? la citation reste dans le cache semble-t-il...
+ * 0.5.0.1 Correction des chemins et url diverses
+
 
 
 2008-05-05  chryjs  <chryjs!@!free!.!fr>
