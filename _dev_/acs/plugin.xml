@@ -2,8 +2,10 @@
 	<nom> <!-- Nom du plugin -->
 	ACS
 	</nom>
-	<description> - <a href="?exec=acs">Assistant de Configuration de Sites.</a>
+	<description>
+	 - <a href="?exec=acs">Assistant de Configuration du Site</a>
 	</description>
+	<lien>[Documentation->http://acs.geomaticien.org]</lien>
 	<auteur>	<!-- Auteur du plugin -->
  	Daniel FAIVRE &copy; 2008 - licence GPL
 	</auteur>
