@@ -4,7 +4,7 @@
 <legend>&nbsp;<:acs:edito_edito:>&nbsp;</legend>
   [(#ENV{debut_articles}|?{'',' '})]
   <ul>
-    <BOUCLE_edito(ARTICLES) {par date}{inverse} {doublons} {titre_mot=#GET{acsEditoKeyword}} {0,1}>
+    <BOUCLE_edito(ARTICLES) {par date}{inverse} {doublons} {titre_mot=#GET{acsEditoKeyword}} {0,1}{lang=#LANG}>
     <li>
       [<p class="surtitre">(#SURTITRE)</p>]
       <p class="titre"><a href="#URL_ARTICLE">#TITRE</a></p>
