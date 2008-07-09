@@ -2,9 +2,9 @@
 
 	// player_fonctions.php
 
-	// $LastChangedRevision$
-	// $LastChangedBy$
-	// $LastChangedDate$
+	// $LastChangedRevision:$
+	// $LastChangedBy:$
+	// $LastChangedDate:$
 
 if (!defined('_DIR_PLUGIN_PLAYER')){ // defini automatiquement par SPIP 1.9.2
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
@@ -78,11 +78,26 @@ return $titre ;
 }
 
 // CP 20080321
-// balise � placer dans le mod�le
+// balise a' placer dans le modele
 // donne la ligne FlashVars
 function balise_PLAYER_FLV_FLASHVVARS ($p) {
 	
 	static $player_flv_flashvars = null;
+
+/* pour debug. Dump du parametre 
+spip_log("######################################");
+if(!function_exists('dump_me')) {
+	function dump_me($p, $m = "###: ") {
+		foreach($p as $k => $v) {
+			spip_log($m . $k . " = ".$v);
+			if(is_array($v) || is_object($v)) {
+				dump_me($v, $m . $k.": ");
+			}
+		}
+	}
+}
+dump_me($p);
+/**/
 
 	$id_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
 	
@@ -99,13 +114,13 @@ function balise_PLAYER_FLV_FLASHVVARS ($p) {
 			$player_config = unserialize($GLOBALS['meta'][_PLAYER_META_PREFERENCES]);
 			
 			include_spip('inc/player_flv_config');
-			// la grosse table commune � tous les profils
+			// la grosse table commune a tous les profils
 			$player_flv_config = player_flv_config();
 	
 			$result = array();
 			$player_key = $player_config['player_key'];
 			
-			// n'envoyer que ce qui est n�cessaire au profil configur� en admin
+			// n'envoyer que ce qui est necessaire au profil configure en admin
 			// mini demande beaucoup moins de variables que multi
 			foreach($player_flv_config as $key => $value) {
 				if(
@@ -126,8 +141,8 @@ function balise_PLAYER_FLV_FLASHVVARS ($p) {
 
 
 // CP 20080321
-// balise � placer dans le mod�le
-// donne le nom du fichier player flv demand� � la config
+// balise a' placer dans le modele
+// donne le nom du fichier player flv demande a' la config
 function balise_PLAYER_FLV_PLAYER ($p) {
 
 	$id_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;

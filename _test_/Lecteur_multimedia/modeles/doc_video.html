@@ -23,7 +23,6 @@ Sinon, utiliser le comportement normal.
 <BOUCLE_doc (DOCUMENTS) {id_document}>
 #SET{player,#ENV{player,#CONFIG{player,'neoplayer'}}}
 
-
 [(#REM) Document MP3 ? ]
 [(#TYPE_DOCUMENT|=={MP3}|?{
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
@@ -95,7 +94,10 @@ Sinon, utiliser le comportement normal.
 <dt class='spip_doc_titre'>
 <object type="application/x-shockwave-flash" data="#EVAL{_DIR_PLUGIN_PLAYER}#PLAYER_FLV_PLAYER" width="[(#LARGEUR|=={0}|?{400,#LARGEUR})]" height="[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]">
 <param name="movie" value="#EVAL{_DIR_PLUGIN_PLAYER}#PLAYER_FLV_PLAYER" />
-<param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#LARGEUR|=={0}|?{400,#LARGEUR})]&amp;height=[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]&amp;#PLAYER_FLV_FLASHVVARS" />
+<param 
+ name="FlashVars"
+ value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#LARGEUR|=={0}|?{400,#LARGEUR})]&amp;height=[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]&amp;#PLAYER_FLV_FLASHVVARS[&amp;srturl=(#ENV{srturl})]"
+/>
 <param name="wmode" value="opaque" />
 <param name="allowFullScreen" value="true" />
 [<strong>(#TITRE)</strong>]

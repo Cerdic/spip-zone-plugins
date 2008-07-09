@@ -2,9 +2,9 @@
 
 	// exec/player_admin.php
 	
-	// $LastChangedRevision$
-	// $LastChangedBy$
-	// $LastChangedDate$
+	// $LastChangedRevision:$
+	// $LastChangedBy:$
+	// $LastChangedDate:$
 
 	/*****************************************************
 	Copyright (C) 2008 Christian PAULUS
