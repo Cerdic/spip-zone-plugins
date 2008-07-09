@@ -80,11 +80,12 @@ function tableau_smileys($cols='',$return=true) {
 	// nombre de colonnes (2 par défaut) (pas trop large pour GAF ! !!) c: 23/12/7 Il vaut mieux 3 ou reduire l'espace disponible ou le nombre d'emoticons
 	if($cols=='') { $cols=3; }
 	$compte=0;
+	$champ='texte';
 
 	$aff = "<table width='100%' cellspacing='0' cellpadding='1' border='0'><tr>\n";
 	while (list($nom,$chem) = each($listimag)) {
 		$aff.= "<td style='vertical-align:bottom' class='verdana1'><div style='text-align:center'>\n
-			<a href=\"javascript:emoticon(':".$nom."')\">\n
+			<a href=\"javascript:emoticon(':$nom',document.getElementById('$champ'))\">\n
 			<img src='".$chem."' style='border:0' title='smiley - ".$nom."' alt='smil' />\n
 			</a></div></td>\n";
 

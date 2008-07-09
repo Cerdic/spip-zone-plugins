@@ -2,8 +2,8 @@
 // function pour affichage smileys dans texte sur un clic
 
 
-function emoticon(text) {
-	var txtarea = document.formulaire.texte;
+function emoticon(text,champ) {
+	var txtarea = champ;
 	text = ' ' + text + ' ';
 		
 	if(txtarea.createTextRange && txtarea.caretPos) {
