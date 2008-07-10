@@ -1,9 +1,15 @@
 <B_articles>
 <div class="plan-articles">
 <BOUCLE_articles(ARTICLES) {id_rubrique} {par titre} {lang ?}>
+[(#MODE|=={forums}|?{#ACCEPTER_FORUM|!={non}|?{' '}})
 <span class="plan-article">[<img src="#ACS_CHEMIN{img/puces/}(#CONFIG{acsListe_articlesPuce})" alt="¤" />]
-<a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a>
-[(#MODE|=={forums}|?{' '})<INCLURE {fond=composants/forum/nbmessages}{id_article}{lang ?}>]</span>
+<a href="#URL_ARTICLE[(#MODE|=={forums}|?{'#forum'})]" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a>
+<INCLURE {fond=composants/forum/nbmessages}{id_article}{lang ?}>
+</span>]
+[(#MODE|!={forums}|?{' '})
+<span class="plan-article">[<img src="#ACS_CHEMIN{img/puces/}(#CONFIG{acsListe_articlesPuce})" alt="¤" />]
+<a href="#URL_ARTICLE[(#MODE|=={forums}|?{'#forum'})]" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a>
+</span>]
 </BOUCLE_articles>
 </div>
 </B_articles>
