@@ -7,9 +7,9 @@
 		<strong><:echoppe:description_du_prestataire:></strong><br />
 		[(#DESCRIPTIF**|barre_textarea{10,20,#LANG})]
 		<br />
-		<strong><:echoppe:modele:></strong><br />
-		<input type="text" name="squelette" class="forml" value="#MDL" /><br />
-		[(#FIND_ALL_IN_PATH{'prestataires/paiement/','html'}|array2select{squelette})]
+		<strong><:echoppe:modele:></strong>&nbsp;
+		[(#LISTE_SKEL_PAIEMENT|skel_paiement{#MDL})]<br /><br />
+		
 		<strong><:echoppe:version:></strong><br />
 		<input type="text" name="version" class="forml" value="#VERSION" /><br />
 		<strong><:echoppe:statut:></strong><br />

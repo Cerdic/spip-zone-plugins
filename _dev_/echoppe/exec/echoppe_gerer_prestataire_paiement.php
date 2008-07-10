@@ -19,8 +19,9 @@ function exec_echoppe_gerer_prestataire_paiement(){
 	echo debut_gauche();
 	
 	//echo recuperer_fond('fonds/echoppe_prestataires_paiement',$contexte);
+	
 	echo debut_boite_info();
-	echo recuperer_fond('fonds/echoppe_info_prestataires_paiement', $contexte);
+	echo recuperer_fond('fonds/echoppe_info_prestataire_paiement', $contexte);
 	echo fin_boite_info();
 	
 	include_spip('inc/echoppe_raccourcis');
@@ -30,8 +31,6 @@ function exec_echoppe_gerer_prestataire_paiement(){
 	echo creer_colonne_droite();
 	
 	echo debut_droite(_T('echoppe:gerer_les_prestataire_paiement'));
-	//echo gros_titre($contexte['titre']);
-	var_dump(find_all_in_path('prestataires/paiement/','html'));
 	echo recuperer_fond('fonds/echoppe_gerer_prestataire_paiement', $contexte);
 	echo fin_gauche();
 	echo fin_page();

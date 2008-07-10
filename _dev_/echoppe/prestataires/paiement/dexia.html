@@ -1,4 +1,5 @@
 <form      id="dexia"    name="wait"      action="https://directnet.dexia.be/PayButton.jspx" method="post">
+	<fieldset>
 	<input type="hidden" name="browserName" value="">
 	<input type="hidden" name="browserVersion" value="">
 	<input type="hidden" name="windowName" value="">
@@ -19,10 +20,11 @@
 	<input type="hidden" name="communicationStruct" value="N">
 	<input type="hidden" name="templateName" value="EComWait.html">
 	<input type="hidden" name="Feedback" value="no">
-	<input type="hidden" name="ReturnURLOk" value="[(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public{validation_paiement=reussi}|abs_url)]">
+	<input type="hidden" name="ReturnURLOk" value="[(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public{retour_validation=reussi&token_panier=[(#SESSION{echoppe_token_panier})]&id_auteur=[(#SESSION{id_auteur})],'&'}|abs_url)]">
 
-	<input type="hidden" name="ReturnURLNOk" value="(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public{validation_paiement=erreur}|abs_url)]">
+	<input type="hidden" name="ReturnURLNOk" value="(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public{retour_validation=erreur&token_panier=[(#SESSION{echoppe_token_panier})]&id_auteur=[(#SESSION{id_auteur})],'&'}|abs_url)]">
 	<input type="hidden" name="ReturnToOrigin" value="[(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public|abs_url)]">
 	<input type="hidden" name="PageNumber" value="0">
-	<input class="BOUTON" type="submit" value="Payer via Dexia" />
+    </fieldset>
+    <div class="spip_bouton"><input type="submit" value="Payer via Dexia" ></div>
 </form>

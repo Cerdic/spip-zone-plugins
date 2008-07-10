@@ -1,4 +1,5 @@
 <form action="https://www.paypal.com/be/cgi-bin/webscr" method="post" id="paypal">
+	<fieldset>
 	<input type="hidden" name="cmd" value="_cart">
 	<input type="hidden" name="upload" value="1">
 	<input type="hidden" name="business" value="#CONFIG{echoppe/email_beneficiaire}">
@@ -9,7 +10,9 @@
 		<input type="hidden" name="item_name_#_PanierPayPal:COMPTEUR_BOUCLE" value="#TITRE">
 	</BOUCLE_LeProduit>
 </BOUCLE_PanierPayPal>
-	<input type="hidden" name="return" value="[(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public{validation_paiement=reussi}|abs_url)]">
-	<input type="hidden" name="cancel_return" value="[(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public{validation_paiement=erreur}|abs_url)]">
-	<input class="BOUTON" type="submit" value="Payer via PayPal" />
+	<input type="hidden" name="return" value="[(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public{retour_validation=reussi&token_panier=[(#SESSION{echoppe_token_panier})]&id_auteur=[(#SESSION{id_auteur})],'&'}|abs_url)]">
+	<input type="hidden" name="cancel_return" value="[(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public{retour_validation=erreur&token_panier=[(#SESSION{echoppe_token_panier})]&id_auteur=[(#SESSION{id_auteur})],'&'}|abs_url)]">
+    </fieldset>
+
+    <div class="spip_bouton"><input type="submit" value="Payer via PayPal" ></div>
 </form>

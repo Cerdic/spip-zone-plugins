@@ -30,13 +30,14 @@
 	<em>Token du client = #SESSION{echoppe_token_client}</em><br />
 	<em>Url du panier = <a href="#URL_PANIER">#URL_PANIER</a></em><br />
 	<em>Total item panier = <a href="#URL_PANIER">#TOTAL_ITEM_PANIER</a></em><br />
+	<em>Statut du panier = <a href="#URL_PANIER">[(#SESSION{echoppe_statut_panier})]</a></em><br />
 	
 		<B_CategoriesALaRacine>
 		<div >
 			<ul>
 				<BOUCLE_CategoriesALaRacine(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){par num titre}{id_secteur = 0}{lang = ""}>
 				<li>[<strong>(#TITRE|supprimer_numero)</strong>]<br />
-					<div style="border: 1px #CCC doted;">[<small>(#DESCRIPTIF|couper{100})</small>]
+					<div style="border: 1px #CCC dotted;">[<small>(#DESCRIPTIF|couper{100})</small>]
 					[(#TEXTE)]</div>
 					<B_LesProduitsDeCetteCategorie>
 						<ul>

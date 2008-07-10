@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ajouter_une_option' => 'Ajouter une option',
 
 // C
-'c_est_termine_vorte_panier_a_bien_ete_enregistre_et_est_en_cours_de_traiment' => 'C\'est fini. Votre panier &aacute; bien &eacute;&eacute; valid&eacutre;. Notre &eacute;quipe le traite dans les plus bref d&eacute;lais.',
+'c_est_termine_vorte_panier_a_bien_ete_enregistre_et_est_en_cours_de_traiment' => 'Votre panier a bien &eacute;t&eacute; valid&eacute;! Vous allez recevoir un e-mail r&eacute;capitulatif de votre commande. Notre &eacute;quipe la traite dans les plus brefs d&eacute;lais.',
 'categorie_numero' => 'Cat&eacute;gorie num&eacute;ro :',
 'centimetre_racourcci' => 'cm.',
 'chemin_categorie' => 'Chemin de la cat&eacute;gorie',
@@ -35,6 +35,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'confguration_d_echoppe' => 'Configuration d\'Echoppe',
 'configuration_generale' => 'Configuration g&eacute;n&eacute;rale',
 'coordonees_du_beneficiaire' => 'Coordonn&eacute;es du b&eacute;n&eacute;ficiaire',
+'coordonnees_societe' => 'Coordonn&eacute;es soci&eacute;t&eacute; (facultatif)',
+'coordonnees_livraison' => 'Coordonn&eacute;es de livraison (facultatif)',
+'coordonnees_livraison_detail' => 'Si vous ne remplissez pas cette partie, votre commande sera envoy&eacute;e aux coordonn&eacute;es renseign&eacute;es ci-dessus.',
+'connection' => 'Connectez-vous',
+'commentaire' => 'Communication structur&eacute;',
 
 // D
 'dans_la_categorie' => 'Dans la cat&eacute;gorie',
@@ -42,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_de_retrait_de_vente' => 'Date de retrait de la vente',
 'denomination_du_beneficiaire' => 'D&eacute;nomination du b&eacute;n&eacute;ficiaire',
 'descriptif'=>'Descriptif :',
-'descriptif_echoppe' => 'Echoppe est un plugin de gestion de boutique en ligne. Il tente d\' &ecirc;tre le plus g&eacute;n&eacute;raliste possible.',
+'descriptif_echoppe' => '<strong>Echoppe est un plugin de gestion de boutique en ligne.</strong><br />Il vous permet de g&eacute;rer les diff&eacute;rents &eacute;tapes n&eacute;cessaires &agrave; la vente en ligne de produits.',
 'description_du_depot' => 'Description',
 'detail_du_stock' => 'D&eacute;tail du stock',
 'derniere_modification' => 'Derni&egrave;re modification',
@@ -51,9 +56,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // E
 'echoppe'=>'Echoppe',
 'echoppe_info_panier' => 'Gestion du panier',
-'editer'=>'Editer',
-'editer_categorie' => 'Editer la cat&eacute;gorie',
-'editer_version'=>'Editer la version',
+'editer'=>'&Eacute;diter',
+'editer_donnees'=>'&Eacute;diter mes donn&eacute;es',
+'editer_categorie' => '&Eacute;diter la cat&eacute;gorie',
+'editer_version'=>'&Eacute;diter la version',
+'editer_panier'=>'&Eacute;diter mon panier',
 'edition_de' => '&Eacute;dition de',
 'edition_de_cetegorie'=>'&Eacute;dition d\'une cat&eacute;gorie',
 'edition_de_la_version'=>'&Eacute;dition de la version',
@@ -65,10 +72,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'email_du_depot' => 'E-Mail',
 'email_pour_confirmation_panier' => 'Email des destinataires qui recevront les paniers valid&eacute;s',
 'en_stock' => 'en stock',
-'erreur_de_validation_panier_vous_devez_etre_loge' => 'Erreur de validation. Vous devez &ecirc;tes enregistr&eacute; pour valider votre panier.',
+'erreur_de_validation_panier_vous_devez_etre_loge' => 'Erreur de validation. Vous devez &ecirc;tre enregistr&eacute; pour valider votre panier.',
 'etat_des_stocks' => '&Eacute;tat des stocks',
 'etat_du_produit' => '&Eacute;tat du produit',
 'euro' => '&euro;',
+'explication_du_systeme_par_virement' => 'Voici les informations n&eacute;cessaires pour effectuer le virement afin de payer votre commande. Une fois le paiement re&ccedil;u sur notre compte, nous vous en informerons par e-mail et passerons &agrave; l\'&eacute;tape d\'envoi de la commande.',
 
 // F
 'fax_du_depot' => 'Fax',
@@ -87,11 +95,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'inconnu' => 'inconnu',
-'info_depot' => 'G&eacute;rer vos d&eacute;p&ocirc;ts ici.',
-'info_paniers' => 'G&eacute;rez les paniers de vos clients',
+'info_depot' => '<strong>Gestion des d&eacute;p&ocirc;ts</strong><br />Vous pouvez r&eacute;partir votre stock de produits en plusieurs d&eacute;p&ocirc;ts. Il en faut au minimum 1.',
+'info_paniers' => '<strong>G&eacute;rez les paniers des visiteurs</strong><br />Chaque cr&eacute;ation de panier dans la partie publique du site est visible ici et est class&eacute; selon son statut.',
+'info_prestataire_paiement' => '<strong>G&eacute;rez les prestataires de paiement</strong><br />Attention, cette partie n&eacute;cessite la cr&eacute;ation de mod&egrave;les de paiement sur base des recommandations des prestataires (PayPal, ...).',
 'ignorer_date_de_retrait_de_vente' => 'Ignorer la date de retrait de la vente',
 'ignorer_date_mise_en_vente' => 'Ignorer la date de mise en vente',
 'impossible_copier_dans'=>'Impossible de copier le fichier dans ',
+'informations_client'=>'Informations du client',
 
 //J
 'jours' => 'jours',
@@ -102,7 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'langue_editee' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
 'largeur' => 'Largeur',
 'le_panier' => 'Le panier',
-'le_panier_est_vide' => 'Le panier est vide',
+'le_panier_est_vide' => '<strong>Votre panier est vide !</strong>',
 'les_categories' => 'Les cat&eacute;gories',
 'les_depots' => 'Les d&eacute;p&ocirc;ts',
 'les_options_du_produit' => 'Les options de ce produit',
@@ -115,19 +125,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 'mettre_a_jour' => 'Mettre &agrave; jour',
-'mettre_le_panier_a_jour' => 'Mettre le panier &agrave; jour',
+'mettre_le_panier_a_jour' => 'Actualiser le panier',
 'montant_total_du_panier' => 'Montant total du panier',
+'mail_recap_debut' => 'Bonjour,
+
+Voici le récapitulatif de votre commande sur ',
+'mail_recap_fin' => 'Dès la confirmation du paiement reçue, nous traiterons votre commande.
+
+Merci de votre confiance,
+
+L\'équipe de ',
 
 // N
+'ne_le' => 'N&eacute;(e) le',
 'nom_de_la_nouvelle_option' => 'Nom de la nouvelle option',
 'nom_du_beneficiaire' => 'Nom du b&eacute;n&eacute;ficiaire',
-'numero_de_compte_du_beneficiaire' => 'Num&eacute;rot de compte du b&eacute;n&eacute;ficiaire',
+'numero_de_compte_du_beneficiaire' => 'Num&eacute;ro de compte du b&eacute;n&eacute;ficiaire',
 'numero_du_depot' => 'Num&eacute;ro',
 'numero_tva_livraison' => 'Num&eacute;ro de TVA',
 'nombre_de_chiffre_apres_la_virgule' => 'Nombre maximum de chiffre apr&egrave;s la virgule',
 'nouveau_depot' => 'Nouveau d&eacute;p&ocirc;t',
 'nouveau_produit' => 'Cr&eacute;er un produit',
 'nouvelle_categorie' => 'Nouvelle cat&eacute;gorie',
+'nouveau_client' => 'Nouveau client ?',
+'nouveau_client_details' => 'Remplissez le formulaire ci-dessous. Les champs marqu&eacute;s d\'une * sont obligatoires.<br/>Une fois le formulaire compl&eacute;t&eacute; et envoy&eacute;, vous recevrez un email confirmant votre inscription et contenant votre mot de passe.',
+'numero_tva' => 'N&deg; de TVA',
 
 
 // P
@@ -138,22 +160,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'paniers_traite' => 'Paniers trait&eacute;s',
 'paniers_valide' => 'Paniers valid&eacute;s',
 'paniers_envoye' => 'Paniers envoy&eacute;s',
+'paniers_perso' => 'Votre panier',
+'paniers_perso_details' => 'Voici les produits que vous avez s&eacute;lectionn&eacute;s. Vous pouvez modifier le contenu de votre panier et ensuite le valider pour passer commande.',
 'par_defaut' => 'Par d&eacute;faut',
 'payer_le_panier' => 'Payer le panier',
 'produit_dans_ce_panier' => 'Nombre de produit(s) dans ce panier',
 'pas_d_options_pour_le_produit' => 'Pas d\'option pour ce produit',
-'pas_de_depot_ici' => 'Pas de d&eacute;p&ocirc;t ici.',
-'pas_de_categorie_ici' => 'Pas de cat&eacute;gorie ici.',
+'pas_de_depot_ici' => 'Pas de d&eacute;p&ocirc;t ici',
+'pas_de_categorie_ici' => 'Pas de cat&eacute;gorie ici',
 'pas_de_num_de_ref' => 'Aucune',
 'pas_de_produit_ici' => 'Pas de produits &agrave; cette adresse.',
 'pas_de_titre' => 'Pas de titre',
 'pas_encore_de_categorie' => 'Pas encore de cat&eacute;gorie',
 'pas_encore_de_depots' => 'Il n\'y a pas encore de d&eacute;p&ocirc;t',
-'pas_encore_cree' => 'N\'existe pas encore.',
+'pas_encore_cree' => 'N\'existe pas encore',
 'pas_encore_modifie' => 'Jamais modifi&eacute;',
 'pays_du_beneficiaire' => 'Pays du b&eacute;n&eacute;ficiaire',
 'pays_du_depot' => 'Pays',
-'prenom_du_beneficiaire' => 'Prenom du b&eacute;n&eacute;ficiaire',
+'prenom_du_beneficiaire' => 'Pr&eacute;nom du b&eacute;n&eacute;ficiaire',
 'prepa' => 'en pr&eacute;paration',
 'prix_base' => 'Prix de base HTVA',
 'prix_ttc' => 'Prix TTC',
@@ -163,6 +187,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'publie' => 'publi&eacute;',
 'poubelle' => '&agrave; la poubelle',
 'ps' => 'Remarque',
+'payer_commande' => 'Paiement de  votre commande',
+'panier_encours'=> 'Votre panier est en cours de paiement. Vous ne pouvez plus ajouter de produits &agrave; ce stade ',
 
 // Q
 'quantite_minimum' => 'Quantit&eacute; minimum',
@@ -175,7 +201,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_a_la_categorie' => 'Retour &agrave; la cat&eacute;gorie',
 'retour_au_panier' => 'Retour au panier',
 'retour_au_produit' => 'Retour au produit',
-'retour_au_sommaire' => 'Retour &agrave; l\'acceuil',
+'retour_au_sommaire' => 'Retour &agrave; l\'accueil',
+'recapitulatif' => 'Voici un r&eacute;capitulatif de votre commande avant paiement :',
 
 // S
 'separer_par_des_v_pour_en_mettre_plusieurs' => 'S&eacute;parez chaque email par des virgules \',\' pour en indiquer plusieurs',
@@ -184,6 +211,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'statut_du_panier' => 'Statut du panier',
 'stock_dans_le_depot' => 'Stock dans le d&eacute;p&ocirc;t',
 'stock_total' => 'Stock TOTAL',
+'selectionner' => 'S&eacute;lectionner',
+'selectionner_details' => 'Veuillez s&eacute;lectionner un mode de paiement dans la liste ci-dessous :',
+'secteur_d_activite' => 'Secteur d\'activit&eacute;',
+'statut_temporaire' => 'temporaire',
+'statut_reserve' => 'r&eacute;serv&eacute;',
+'statut_valide' => 'valid&eacute;',
+'statut_paye' => 'pay&eacute;',
+'statut_traite' => 'trait&eacute;',
+'statut_envoye' => 'envoy&eacute;',
+
 
 // T
 'taux_de_tva_par_defaut' => 'Taux de T.V.A. par d&eacute;faut',
@@ -195,6 +232,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'information_de_l_option' => 'informations dur l\'option',
 'titre_produit' => 'Titre du produit :',
 'tva' => 'TVA',
+'total' => 'Total',
 
 // U
 'unites' => 'Unit&eacute;(s)',

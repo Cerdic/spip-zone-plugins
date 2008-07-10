@@ -1,10 +1,12 @@
+<:echoppe:mail_recap_debut:>#NOM_SITE_SPIP
 -----------------------------------------------------------------------
-<BOUCLE_LePanier(SPIP_ECHOPPE_PANIERS){id_panier?}{token_panier = #SESSION{echoppe_token_panier}}>
-<BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits){id_produit}>
-#TITRE	#PRIX_TVAC €	#QUANTITE
-</BOUCLE_LeProduit>
-</BOUCLE_LePanier>
+<BOUCLE_LePanier(SPIP_ECHOPPE_PANIERS){id_panier?}{token_panier = #SESSION{echoppe_token_panier}}><BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits){id_produit}>
+#QUANTITE x #TITRE - #PRIX_TVAC #CONFIG{echoppe/devise, euro}</BOUCLE_LeProduit></BOUCLE_LePanier>
 -----------------------------------------------------------------------
-<:echoppe:total:>	#TOTAL_PANIER_TVAC € TVAC
-					#TOTAL_PANIER_HTVA € HTVA
+<:echoppe:total:>
+#TOTAL_PANIER_TVAC #CONFIG{echoppe/devise, euro}  TVAC
+#TOTAL_PANIER_HTVA #CONFIG{echoppe/devise, euro}  HTVA
+
+<:echoppe:mail_recap_fin:>#NOM_SITE_SPIP
+
 

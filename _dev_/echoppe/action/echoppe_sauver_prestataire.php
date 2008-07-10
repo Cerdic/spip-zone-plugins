@@ -7,7 +7,7 @@ function action_echoppe_sauver_prestataire(){
 	$contexte['id_prestataire'] = _request('id_prestataire');
 	$contexte['titre'] = _request('titre');
 	$contexte['description'] = _request('texte');
-	$contexte['squelette'] = _request('squelette');
+	$contexte['squelette'] = _request('mdl');
 	$contexte['statut'] = _request('statut');
 	$contexte['version'] = _request('version');
 	

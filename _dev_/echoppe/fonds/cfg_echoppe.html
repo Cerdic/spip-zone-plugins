@@ -3,7 +3,14 @@
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 	<fieldset><legend><:echoppe:configuration_generale:></legend>
 		<:echoppe:taux_de_tva_par_defaut:>&nbsp;<input type="text" name="taux_de_tva_par_defaut" value="#CONFIG{echoppe/taux_de_tva_par_defaut, 6}" size="1" />&nbsp;%<br />
-		<:echoppe:nombre_de_chiffre_apres_la_virgule:>:&nbsp;<input type="text" name="nombre_chiffre_apres_virgule" value="[(#CONFIG{echoppe/nombre_chiffre_apres_virgule,2})]" size="1" />
+		<:echoppe:nombre_de_chiffre_apres_la_virgule:>:&nbsp;<input type="text" name="nombre_chiffre_apres_virgule" value="[(#CONFIG{echoppe/nombre_chiffre_apres_virgule,2})]" size="1" /><br />
+		<:echoppe:devise_utilisee:>
+		<select name="devise">
+			<option value="euro" [(#CONFIG{echoppe/devise, euro}|=={euro}|?{selected='selected'})] >&euro;</option>
+			<option value="pound" [(#CONFIG{echoppe/devise, euro}|=={pound}|?{selected='selected'})] >&pound;</option>
+			<option value="yen" [(#CONFIG{echoppe/devise, euro}|=={yen}|?{selected='selected'})] >&yen;</option>
+			<option value="dollard" [(#CONFIG{echoppe/devise, euro}|=={dollard}|?{selected='selected'})] >$</option>
+		</select>
 	</fieldset>
 	<br />
 	<fieldset><legend><:echoppe:les_produits:></legend>

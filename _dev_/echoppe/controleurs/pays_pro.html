@@ -1,0 +1,8 @@
+#CACHE{0}
+<BOUCLE_LAuteur(SPIP_AUTEURS_ELARGIS){id_auteur = #SESSION{id_auteur}}>
+	<select class="crayon-active" name="#ENV{name_pays_pro}">
+	<BOUCLE_LEsPays(SPIP_GEO_PAYS)>
+		<option value="#ID_PAYS" [(#ID_PAYS|=={#_LAuteur:PAYS_PRO}|?{selected="selected"})]>#PAYS</option>
+	</BOUCLE_LEsPays>
+	</select>
+</BOUCLE_LAuteur>
