@@ -16,10 +16,10 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 <BOUCLE_decompte(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat}></BOUCLE_decompte>
 [<h2 class="forum-decompte">
-	<a href="#" onclick="swap_couche('0', '','#ACS_CHEMIN{img/triangles/}'); return false;">
+	<a name="forum" href="#forum" onclick="swap_couche('0', '','#ACS_CHEMIN{img/triangles/}'); return false;">
 		<img id='triangle0' src='[(#GET{ouvrir}|?{#ACS_CHEMIN{img/triangles/deplierhaut.gif},#ACS_CHEMIN{img/triangles/deplierbas.gif}})]' alt='' title='[(#ENV{ouvrir}|?{Déplier,Replier})]' width='10' height='10' border='0' />
 	</a>
-	<a href="#"  onclick="swap_couche('0','','#ACS_CHEMIN{img/triangles/}'); return false;">
+	<a name="forum" href="#forum"  onclick="swap_couche('0','','#ACS_CHEMIN{img/triangles/}'); return false;">
 		(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
 [(#TOTAL_BOUCLE|=={1}|?{<:message:>,<:messages_forum:>})]
 	</a>
