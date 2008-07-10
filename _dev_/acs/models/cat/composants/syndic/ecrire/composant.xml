@@ -1,0 +1,31 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Syndic</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
+  <version>0.3</version>
+  <version_acs_min>0.3</version_acs_min>
+  <version_acs_max>0.3</version_acs_max>
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
+
+  <param>
+    <nom>preview</nom>
+    <valeur>250</valeur>
+  </param>
+  <param>
+    <nom>optionnel</nom>
+    <valeur>oui</valeur>
+  </param>
+  
+  <variable>
+    <nom>NbSites</nom>
+    <type>nombre</type>
+    <valeur>5</valeur>
+  </variable>
+  <variable>
+    <nom>NbArt</nom>
+    <type>nombre</type>
+    <valeur>3</valeur>
+  </variable>
+</composant>

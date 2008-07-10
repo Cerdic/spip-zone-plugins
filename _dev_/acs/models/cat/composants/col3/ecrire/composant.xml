@@ -17,10 +17,11 @@
     <composant>custom2</composant>
     <composant>custom3</composant>
     <composant>encart</composant>
-    <composant>formulaireRecherche</composant>
+    <composant>formulaire_recherche</composant>
     <composant>agenda</composant>
     <composant>playlist</composant>
     <composant>repimages</composant>
+    <composant>syndic</composant>
   </variable>
   <variable>
     <nom>2</nom>
@@ -30,10 +31,11 @@
     <composant>custom2</composant>
     <composant>custom3</composant>
     <composant>encart</composant>
-    <composant>formulaireRecherche</composant>
+    <composant>formulaire_recherche</composant>
     <composant>agenda</composant>
     <composant>playlist</composant>
     <composant>repimages</composant>
+    <composant>syndic</composant>
   </variable>
   <variable>
     <nom>3</nom>
@@ -43,10 +45,11 @@
     <composant>custom2</composant>
     <composant>custom3</composant>
     <composant>encart</composant>
-    <composant>formulaireRecherche</composant>
+    <composant>formulaire_recherche</composant>
     <composant>agenda</composant>
     <composant>playlist</composant>
     <composant>repimages</composant>
+    <composant>syndic</composant>
   </variable>
   <variable>
     <nom>4</nom>
@@ -56,10 +59,11 @@
     <composant>custom2</composant>
     <composant>custom3</composant>
     <composant>encart</composant>
-    <composant>formulaireRecherche</composant>
+    <composant>formulaire_recherche</composant>
     <composant>agenda</composant>
     <composant>playlist</composant>
     <composant>repimages</composant>
+    <composant>syndic</composant>
   </variable>
   <variable>
     <nom>5</nom>
@@ -69,9 +73,10 @@
     <composant>custom2</composant>
     <composant>custom3</composant>
     <composant>encart</composant>
-    <composant>formulaireRecherche</composant>
+    <composant>formulaire_recherche</composant>
     <composant>agenda</composant>
     <composant>playlist</composant>
     <composant>repimages</composant>
+    <composant>syndic</composant>
   </variable>
 </composant>

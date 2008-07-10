@@ -56,6 +56,7 @@ html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-d
 [(#CONFIG{acsForumUse}|=={oui}|?{' '}) #INCLURE{fond=composants/forum/forum.css}]
 [(#CONFIG{acsPlaylistUse}|=={oui}|?{' '}) #INCLURE{fond=composants/playlist/playlist.css} ]
 [(#CONFIG{acsRepimagesUse}|=={oui}|?{' '}) #INCLURE{fond=composants/repimages/repimages.css} ]
+[(#CONFIG{acsSyndicUse}|=={oui}|?{' '}) #INCLURE{fond=composants/syndic/syndic.css} ]
 
 #SET{plugin_notation, #EVAL{in_array('notation', $GLOBALS['plugins'])}}
 [(#GET{plugin_notation}|?{' '})

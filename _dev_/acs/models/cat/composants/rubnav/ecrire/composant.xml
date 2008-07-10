@@ -1,6 +1,6 @@
 <composant>
   <!-- Nom du composant -->
-  <nom>Fond</nom>
+  <nom>Rubnav</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
   <version>0.3</version>
