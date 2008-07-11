@@ -10,7 +10,6 @@
     [(#CONFIG{acsOngletschoix5}|=={oui}|?{' '}) <li[(#ENV{current}|=={#CONFIG{acsOnglets5}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="?page=#CONFIG{acsOnglets5}" title="#GET{l5}">#GET{t5}</a></li>]
 
     [(#REM) Onglet publier, affiché ou non, au choix. La page login est remplacé par la page "publier" si le plugin openPublishing est activé ]
-    #SET{url_publier, #EVAL{"(is_array($GLOBALS['plugins']) && in_array('openPublishing', $GLOBALS['plugins'])) ? '?page=publier' : 'ecrire/'"}}
-    [(#CONFIG{acsOngletsPublier,oui}|=={oui}|?{<li[(#ENV{current}|=={login}|?{' '})id="current"[(#SET{pm,oui})]]><a href="[(#GET{url_publier})]" title="<:acs:onglets__publier:> #NOM_SITE_SPIP"><i><:acs:onglets_publier:></i></a></li>})]
+    [(#CONFIG{acsOngletsPublier,oui}|=={oui}|?{<li[(#ENV{current}|=={login}|?{' '})id="current"[(#SET{pm,oui})]]><a href="[(#EVAL{defined('_DIR_PLUGIN_OPENPUBLISHING')}|?{'?page=publier','ecrire/'})]" title="<:acs:onglets__publier:> #NOM_SITE_SPIP"><i><:acs:onglets_publier:></i></a></li>})]
   </ul>
 </div>
