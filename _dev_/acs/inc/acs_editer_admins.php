@@ -173,6 +173,9 @@ function afficher_admins_objet($type, $id, $flag_editable, $cond_les_auteurs, $s
 	$result = determiner_admins_objet($type,$id,$cond_les_auteurs);
 	$cpt = sql_count($result);
 
+  if (!defined('_TRANCHES'))
+    define('_TRANCHES', 10); // Compat 2.0
+    
 	$tmp_var = "acs_editer_admins-$id";
 	$nb_aff = floor(1.5 * _TRANCHES);
 	if ($cpt > $nb_aff) {
@@ -251,6 +254,131 @@ function ajouter_admins_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_a
 	return ajax_action_post('acs_editer_admins', "$id,$type", $script_edit, "id_{$type}=$id", $sel, $clic, "class='fondo visible_au_chargement' id='valider_ajouter_admin_$id'", "", $arg_ajax);
 }
 
+if (!is_callable('afficher_tranches_requete')) {
+  // http://doc.spip.org/@afficher_tranches_requete from Spip 1.9.2d (Deleted from 2.0)
+  function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $old_arg=NULL) {
+    static $ancre = 0;
+    global $browser_name, $spip_lang_right, $spip_display;
+    if ($old_arg!==NULL){ // eviter de casser la compat des vieux appels $cols_span ayant disparu ...
+      $tmp_var = $url;    $url = $nb_aff; $nb_aff=$old_arg;
+    }
+  
+    $deb_aff = intval(_request($tmp_var));
+    $ancre++;
+    $self = self();
+    $ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
+  
+    $texte = "\n<div style='position: relative;$ie_style; background-color: #dddddd; border-bottom: 1px solid #444444; padding: 2px;' class='arial1' id='a$ancre'>";
+    $on ='';
+  
+    for ($i = 0; $i < $num_rows; $i += $nb_aff){
+      $deb = $i + 1;
+      $fin = $i + $nb_aff;
+      if ($fin > $num_rows) $fin = $num_rows;
+      if ($deb > 1) $texte .= " |\n";
+      if ($deb_aff + 1 >= $deb AND $deb_aff + 1 <= $fin) {
+        $texte .= "<b>$deb</b>";
+      }
+      else {
+        $script = parametre_url($self, $tmp_var, $deb-1);
+        if ($url) {
+          $on = "\nonclick=\"return charger_id_url('"
+          . $url
+          . "&amp;"
+          . $tmp_var
+          . '='
+          . ($deb-1)
+          . "','"
+          . $tmp_var
+          . '\');"';
+        }
+        $texte .= "<a href=\"$script#a$ancre\"$on>$deb</a>";
+      }
+    }
+  
+    $style = " class='arial2' style='border-bottom: 1px solid #444444; position: absolute; top: 1px; $spip_lang_right: 15px;'";
+  
+    $script = parametre_url($self, $tmp_var, -1);
+    if ($url) {
+          $on = "\nonclick=\"return charger_id_url('"
+          . $url
+          . "&amp;"
+          . $tmp_var
+          . "=-1','"
+          . $tmp_var
+          . '\');"';
+    }
+    $l = htmlentities(_T('lien_tout_afficher'));
+    $texte .= "<a$style\nhref=\"$script#a$ancre\"$on><img\nsrc='". _DIR_IMG_PACK . "plus.gif' title=\"$l\" alt=\"$l\" /></a>";
+  
+  
+    $texte .= "</div>\n";
+  
+    return $texte;
+  }
+  // http://doc.spip.org/@afficher_liste
+  function afficher_liste($largeurs, $table, $styles = '') {
+    global $spip_display;
+  
+    if (!is_array($table)) return "";
+  
+    if ($spip_display != 4) {
+      $res = '';
+      foreach ($table as $t) {
+        $res .= afficher_liste_display_neq4($largeurs, $t, $styles);
+      }
+    } else {
+      $res = "\n<ul style='text-align: $spip_lang_left; background-color: white;'>";
+      foreach ($table as $t) {
+        $res .= afficher_liste_display_eq4($largeurs, $t, $styles);
+      }
+      $res .= "\n</ul>";
+    }
+  
+    return $res;
+  }
+  
+  // http://doc.spip.org/@afficher_liste_display_neq4
+  function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
+    global $spip_lang_left,$browser_name;
+    if (!is_array($t) or !count($t)) return "";
+  
+    $evt = (preg_match(",msie,i", $browser_name) ? " onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\"" :'');
+  
+    reset($largeurs);
+    if ($styles) reset($styles);
+    $res ='';
+    while (list(, $texte) = each($t)) {
+      $style = $largeur = "";
+      list(, $largeur) = each($largeurs);
+      if ($styles) list(, $style) = each($styles);
+      if (!trim($texte)) $texte .= "&nbsp;";
+      $res .= "\n<td" .
+        ($largeur ? (" style='width: $largeur" ."px;'") : '') .
+        ($style ? " class=\"$style\"" : '') .
+        ">" . lignes_longues($texte) . "\n</td>";
+    }
+  
+    return "\n<tr class='tr_liste'$evt>$res</tr>";
+  }
+  
+  // http://doc.spip.org/@afficher_liste_display_eq4
+  function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
+    global $spip_lang_left;
+    if (!is_array($t) or !count($t)) return "";
+  
+    $res = "\n<li>";
+    reset($largeurs);
+    if ($styles) reset($styles);
+    while (list(, $texte) = each($t)) {
+      $style = $largeur = "";
+      list(, $largeur) = each($largeurs);
+      if (!$largeur) $res .= $texte." ";
+    }
+    $res .= "</li>\n";
+    return $res;
+  }
+}
 // http://doc.spip.org/@objet_auteur_select
 function objet_admin_select($result)
 {
