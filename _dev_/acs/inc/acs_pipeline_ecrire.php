@@ -52,7 +52,7 @@ function acs_header_prive($flux) {
 ';</script>'.
 '<script type="text/javascript" src="../dist/javascript/dragdrop_interface.js"></script>'.
 '<script type="text/javascript" src="'._DIR_ACS.'js/acs_ecrire.js"></script>'.
-'<script type="text/javascript" src="'._DIR_ACS.'js/ColorPicker.js"></script>';
+'<script type="text/javascript" src="'._DIR_ACS.'js/picker.js"></script>';
 }
 
 ?>
