@@ -4,6 +4,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'derniers_commentaires' => 'Derniers commentaires',
+'derniers_commentaires_info' => 'Ajax & soft-downgrade',
 'derniers_commentaires_description' => 'Les derniers commentaires des visiteurs du site.',
 
 'derniers_commentaires_on' => _T('item_oui'),
