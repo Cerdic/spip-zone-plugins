@@ -8,8 +8,9 @@
 #SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
 
 <BOUCLE_primale(RUBRIQUES){id_rubrique}>
-	<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}>
-<BOUCLE_rubrique_principal(RUBRIQUES){id_secteur}{racine}>
+
+<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}>
+	<BOUCLE_rubrique_principal(RUBRIQUES){id_secteur}{racine}>
 
 	#SET{secteur,#ID_SECTEUR}
 
@@ -19,8 +20,6 @@
 	]
 
 	<!-- boucles tableau -->
-	<B_categories>
-
 	<table class="spipforum" id="rubrique_forum">
 		<tr>
 			<th colspan="2" class='tforum'><:spipbb:forum:></th>
@@ -28,13 +27,16 @@
 			<th class='tmessage'><:spipbb:message_s:></th>
 			<th class='tdern'><:spipbb:messages_derniers:></th>
 		</tr>
-<!-- essai h.12/11/07 .. forums du secteur (racine) c:15/4/8 a condition qu'on soit dans le secteur non ? !-->
-		<BOUCLE_forum_secteur(ARTICLES){id_rubrique}{par num titre}>
-				<tr class="ligne_forum">
-[(#MODELE{ligne_voir_forum}{id_article}{id_rub_primale=#_primale:ID_RUBRIQUE})]
-			</tr>
-		</BOUCLE_forum_secteur>
+	[(#REM) essai h.12/11/07 .. forums du secteur (racine) c:15/4/8 a condition qu'on soit dans le secteur non ? ]
+	[(#REM) c: 12/7/8 ... oui mais pas nécessaire d'avoir des sous rubriques pour qu'ils s'affichent dans ce cas ]
 
+	<BOUCLE_forum_secteur(ARTICLES){id_rubrique}{par num titre}>
+		<tr class="ligne_forum">
+[(#MODELE{ligne_voir_forum}{id_article}{id_rub_primale=#_primale:ID_RUBRIQUE})]
+		</tr>
+	</BOUCLE_forum_secteur>
+
+	<B_categories>
 	<!-- sous-rubrique -->
 	[(#REM) chryjs 19/12/7 supprime doublon : B_categories ]
 	<BOUCLE_categories(RUBRIQUES){id_parent}{par num titre}>

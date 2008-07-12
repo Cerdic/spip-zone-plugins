@@ -1,4 +1,9 @@
-﻿2008-07-09  chryjs  <chryjs!@!free!.!fr>
+﻿2008-07-12  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.5.0.0 On doit pouvoir afficher les forums d'un secteur sans nécessairement avoir des sous-rubriques (des groupes de forums)
+
+
+2008-07-09  chryjs  <chryjs!@!free!.!fr>
 
  * Separation version 1.9
  * 0.4.9.9 correction des chemins et url diverses

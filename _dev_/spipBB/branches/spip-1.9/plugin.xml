@@ -1,23 +1,32 @@
 <plugin>
-<version>0.4.9.9</version>
+<version>0.5.0.0</version>
 <nom>
 	<multi>
 		[en]SpipBB: Management of SPIP 1.9 forums
 		[fr]SpipBB : Gestion des forums de SPIP 1.9
 		[ca]SpipBB: Gesti&oacute; dels f&ograve;rums d'SPIP 1.9
 		[pt]SpipBB: Gest&atilde;o dos f&oacute;runs de SPIP 1.9
+		[tr]SpipBB : SPIP 1.9 forumlar&#305;n&#305;n y&ouml;netimi
+		[nl]SpipBB: Beleid van de SPIP 1.9 forums
+		[gl]SpipBB : xesti&oacute;n de foros de SPIP 1.9
 	</multi>
 </nom>
 <auteur>
-		[<multi>[en]The SpipBB Team: see the contributors' list on Spip-contrib
+[<multi>[en]The SpipBB Team: see the contributors' list on Spip-contrib
 [ca]La SpipBB Team: veure la llista de col&middot;laboradors a Spip-contrib
-[fr]La SpipBB Team : voir la liste des contributeurs sur Spip-contrib</multi>
-		->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]
-_ &#169; 2006 - <multi>
+[nl]SpipBB Team: zie de lijst van contributoren op Spip-contrib
+[gl]O equipo SpipBB : ver a lista de contribuidores en Spip-contrib
+[pt]O SpipBB Equipa: ver a lista dos contribuintes sobre Spip-contrib
+[tr]SpipBB Tak&#305;m&#305; : kat&#305;l&#305;mc&#305;lar&#305;n listesini g&ouml;rmek i&ccedil;in
+[fr]La SpipBB Team : voir la liste des contributeurs sur Spip-contrib</multi>->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]
+_ &#169; 2006 - 2008<multi>
 [en]Distributed under the GPL licence
 [fr]Distribu&eacute; sous licence GPL
 [ca]Distribu&iuml;t sota llic&egrave;ncia GPL
 [pt]Distribu&iacute;do sob licen&ccedil;a GPL
+[tr]GPL lisans&#305; ile da&#287;&#305;t&#305;lan
+[nl]Verdeeld onder GPL vergunning
+[gl]Distribu&iacute;do baixo licenza GPL
 </multi>
 </auteur>
 <etat>dev</etat>
@@ -70,11 +79,50 @@ _ [Acc&egrave;s au panneau d'administration-> .?exec=spipbb_configuration]
 _ {{Plugin spipbb en cours de developpement. Vous l'utilisez &agrave; vos risques et p&eacute;rils}}
 
 _ [Acc&egrave;s au panneau d'administration-> .?exec=spipbb_configuration]
+
+[nl]Plugin SpipBB laat toe:
+-* Om op gecentraliseerde wijze de forums van SPIP (particuliere interface),
+ te beheren-* Om een sector als basis van een groep forums zoals &#132;het Bulletin Board&#147; zoals phpBB te gebruiken. In deze sector, zijn sous-rubriques groepen forums, de artikelen van de forums, elk bericht in het forum van een artikel start er een thread.
+
+{{Raadplegen:}}
+-* [de hulp en steun op spipbb.spip-zone.info - > http://spipbb.spip-zone.info/spip.php?article11],
+-* [De documentatie over Spip-contrib-> http://www.spip-contrib.net/SpipBB-le-forum].
+
+_ {{Plugin spipbb in ontwikkeling. U gebruikt het met uw risico\'s en gevaren}}
+
+_ [Toegang tot het administratie paneel ->.? exec=spipbb_configuration]
+
+[gl]O m&oacute;dulos SpipBB permite :
+-* Xestionar de forma centralizada os foros d SPIP (interface privada),
+-* Usar un sector como base dun grupo de de foros de tipo &laquo;Bulletin Board&raquo; como phpBB. Neste sector, as secci&oacute;ns son grupos de foros, os artigos son os foros, cada mensaxe dentro do foro dun artigo comeza un f&iacute;o.
+
+{{Consulte :}}
+-* [a axuda en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
+-* [a documentaci&oacute;n en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+
+_ {{M&oacute;dulo spipbb en curso de desenvolvemento. &Uacute;seo ao seu risco e ventura}}
+
+_ [Acceso ao panel de administraci&oacute;n-> .?exec=spipbb_configuration]
+
+[tr]SpipBB eklentisi &#351;unlar&#305; sa&#287;lar :
+-* SPIP forumlar&#305;n&#305; tek merkezden y&ouml;netmek (&ouml;zel aray&uuml;z),
+-* Bir sekt&ouml;r&uuml; forumlar grubu veritaban&#305; olarak phpBB benzeri &laquo;Bulletin Board&raquo; gibi kullanmak. Bu sekt&ouml;rde; alt ba&#351;l&#305;klar forum gruplar&#305; ve forum makaleleridir. Bir makalenin forumuna yaz&#305;lan her yeni mesaj orada bir "thread" ba&#351;lat&#305;r.
+
+{{Consultez :}}
+-* [l\'aide et support sur spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
+-* [La documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+
+_ {{Plugin spipbb en cours de developpement. Vous l\'utilisez &agrave; vos risques et p&eacute;rils}}
+
+_ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 	</multi>
 </description>
 <lien>[<multi>[en]See the documentation of the plugin from Spip-contrib
 [ca]Consultar la documentaci&oacute; del plugin a Spip-contrib
 [pt]Consultar a documenta&ccedil;&atilde;o do plugin sobre Spip-contrib
+[nl]De documentatie van plugin raadplegen op Spip-contrib
+[gl]Consulte a documentaci&oacute;n do m&oacute;dulo en Spip-contrib
+[tr]Spip-contrib\'de eklenti hakk&#305;ndaki belgelere bkz->http://www.spip-contrib.net/SpipBB-le-forum
 [fr]Consulter la documentation du plugin sur Spip-contrib</multi>
 ->http://www.spip-contrib.net/SpipBB-le-forum]</lien> <!-- [fr] URI de documentation [en] documentation URI -->
 <icon>img_pack/spipbb-48.png</icon> <!-- [fr] icone du plugin [en] plugin icon -->
