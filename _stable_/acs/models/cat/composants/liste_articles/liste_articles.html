@@ -1,0 +1,12 @@
+<li>
+<div class="entete">
+  <div class="infos_article">
+  [(#CONFIG{acsListe_articlesDates}|=={oui}|?{
+    [(#DATE_REDAC|?{[(#DATE_REDAC|affdate)],[ <:acs:liste_articles_redige:> (#DATE|affdate)]})][(#CONFIG{acsListe_articlesAut}|=={oui}|?{' '}) [((#AUTEURS))]][(#DATE_REDAC|?{[(#DATE_MODIF|affdate|!={#DATE|affdate}|?{
+      [(#DATE_MODIF|affdate|!={#DATE_REDAC|affdate}|?{<i> - <:acs:liste_articles_maj:>  [(#DATE_MODIF|affdate)],''})]</i>,''})],[(#DATE_MODIF|affdate|!={#DATE|affdate}|?{[(#DATE_MODIF|affdate|!={#DATE_REDAC|affdate}|?{<i> - <:acs:liste_articles_publie:>  [(#DATE_MODIF|affdate)],''})]</i>,''})]})],[(#CONFIG{acsListe_articlesAut}|=={oui}|?{' '}) [((#AUTEURS))]]})
+  ]<BOUCLE_Rubb2(RUBRIQUES){id_rubrique}>[(#ENV{masquer_rubrique}|!={oui}|?{' '}) - <i><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a></i>]</BOUCLE_Rubb2>[(#NOTE|?{' '})#NOTATION_ETOILE{#NOTE}]</div>
+  <div class="titres">[<p class="surtitre">(#SURTITRE)</p>]<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>[<p class="soustitre">(#SOUSTITRE)</p>]</div>
+</div><br class="nettoyeur" />
+[<a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE||image_reduire{#CONFIG{acsListe_articlesLogoTailleMax,50},#CONFIG{acsListe_articlesLogoTailleMax,50}})</a>][<div class="extrait">(#TEXTE|coupe{#ENV{coupe,200},... <small><i><a href="#URL_ARTICLE"> (<:acs:liste_articles_lire_la_suite:>)</a></i></small>})</div>]
+<br class="nettoyeur" />
+</li>

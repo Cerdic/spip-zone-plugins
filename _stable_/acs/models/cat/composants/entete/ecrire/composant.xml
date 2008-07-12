@@ -1,0 +1,42 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Entete</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
+  <version>0.3</version>
+  <version_acs_min>0.3</version_acs_min>
+  <version_acs_max>0.3</version_acs_max>
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
+
+  <variable>
+    <nom>1</nom>
+    <type>widget</type>
+    <composant>banniere</composant>
+    <composant>bandeau</composant>
+    <composant>repimages</composant>
+    <composant>custom</composant>
+    <composant>custom2</composant>
+    <composant>custom3</composant>
+  </variable>
+  <variable>
+    <nom>2</nom>
+    <type>widget</type>
+    <composant>banniere</composant>
+    <composant>bandeau</composant>
+    <composant>repimages</composant>
+    <composant>custom</composant>
+    <composant>custom2</composant>
+    <composant>custom3</composant>
+  </variable>
+  <variable>
+    <nom>3</nom>
+    <type>widget</type>
+    <composant>banniere</composant>
+    <composant>bandeau</composant>
+    <composant>repimages</composant>
+    <composant>custom</composant>
+    <composant>custom2</composant>
+    <composant>custom3</composant>
+  </variable>
+</composant>

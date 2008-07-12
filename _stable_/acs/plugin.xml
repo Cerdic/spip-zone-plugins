@@ -1,0 +1,51 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	ACS
+	</nom>
+	<description>
+	 - <a href="?exec=acs">Assistant de Configuration du Site</a>
+	</description>
+	<lien>[Documentation->http://acs.geomaticien.org]</lien>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Daniel FAIVRE &copy; 2008 - licence GPL
+	</auteur>
+  <version>0.3 (20080713)</version>
+	<etat>
+	dev
+	</etat>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix>
+	acs
+	</prefix>
+	<fonctions>
+		acs_fonctions.php
+	</fonctions>
+	<options>
+		acs_options.php
+	</options>
+	
+  <install>base/acs_install.php</install>
+  
+  <pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBouton</action>
+		<inclure>inc/acs_pipeline_ecrire.php</inclure>
+	</pipeline>
+  <pipeline>
+    <nom>header_prive</nom>
+    <inclure>inc/acs_pipeline_ecrire.php</inclure>
+  </pipeline>
+  <pipeline>
+    <nom>post_edition</nom>
+    <inclure>inc/acs_post_edition.php</inclure>
+  </pipeline>
+
+  <pipeline>
+    <nom>insert_head</nom>
+    <inclure>inc/acs_insert_head.php</inclure>
+  </pipeline>
+
+</plugin>

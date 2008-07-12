@@ -1,0 +1,328 @@
+[(#REM)
+             ACS
+         (Plugin Spip)
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2008
+Copyleft: licence GPL - Cf. LICENCES.txt
+
+  Ce squelette definit les styles de l'espace prive pour ACS
+
+  Note: l'entete "Vary:" sert a repousser l'entete par
+  defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+  genant en cas de "rotation du cookie de session" apres
+  un changement d'IP (effet de clignotement).
+
+  ATTENTION: il faut absolument le charset sinon Firefox croit que
+  c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+table { margin: 0; padding: 0; border-collapse: collapse; border-spacing:0; border: 1px;}
+img { margin: 0; padding: 0; border: none;}
+hr {height: 1px; margin:2px; border:0; border-top: 1px solid ##ENV{couleur_claire,3874b0}}
+
+.alert{
+  color: red;
+}
+
+/* Mise en page en colonnes - ne PAS mettre margin/padding là-dedans ! */
+.acs_colonnes {
+  display: block;
+  padding: 0;
+  margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+}
+.acs_col1, .acs_col2, .acs_col3 {
+  padding: 0;
+  margin: 0;
+}
+.acs_col1, .acs_col3 {
+  width: 25%;
+}
+.acs_col1 {
+  float: #LANG_LEFT;
+}
+.acs_col2 {
+  float: #LANG_LEFT;
+}
+.acs_col3 {
+  float: #LANG_RIGHT;
+}
+/* contenu des colonnes */
+.acs_col {
+  padding: 10px;
+}
+
+.acs_box {
+  position: relative;
+  [border: #(#ENV{couleur_foncee,3874b0}) thin solid;]
+  -moz-border-radius: 10px;
+  background: #ffffff;
+  margin-top: 14px;
+}
+
+.acs_box_titre {
+  background: ##ENV{couleur_foncee,3874b0};
+  padding-#LANG_LEFT: 40px;
+  padding-#LANG_RIGHT: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  -moz-border-radius-topleft: 9px;
+  -moz-border-radius-topright: 9px;
+  color: #ffffff;
+  font-family: verdana,arial,helvetica,sans;
+  font-size: 12px;
+  font-weight: bold;
+}
+.acs_box_titre a {
+  font-weight: normal;
+  color: #ffffff;
+}
+
+.acs_box_texte {
+  padding: 4px;
+  text-align: #LANG_LEFT;
+}
+
+.acs_box_composants {
+  width: 186px;
+}
+
+fieldset.apercu {
+  margin: 0;
+  padding: 0;
+  [border: #(#ENV{couleur_claire,3874b0}) thin inset;]
+  [background-color: #(#CONFIG{acsFondCouleur});]
+  [background-image: url([(#ACS_CHEMIN)]img/fond/(#CONFIG{acsFondImage}));]
+  background-repeat: repeat;
+}
+
+.apercu legend {
+  margin-left: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background: #fff;
+  border: #[(#ENV{couleur_claire,3874b0} )] thin inset;
+  -moz-border-radius: 8px;
+}
+
+.label {
+  font-color: #dfdfdf;
+}
+
+.forml {
+  padding:0;
+  padding-left:2px;
+  position: relative;
+}
+
+.formc {
+  padding: 0;
+  line-height: 1em;
+  background: #e4e4e4;
+  border: 1px solid #[(#ENV{couleur_claire,3874b0})];
+  behavior: url(../dist/win_width.htc);
+  font-size: 12px;
+  font-family: Verdana,Arial,Sans,sans-serif;
+  width: 100%;
+}
+
+.led {
+  border: 1px solid ##ENV{couleur_foncee,3874b0};
+  width: 1.15em;
+  height: 1.15em;
+  cursor:pointer;
+}
+
+.icon {
+  width: 1.27em; height: 1.27em;
+  cursor:pointer;
+}
+
+.liste_pages tr {
+  vertical-align: top;
+}
+.liste_pages td {
+  text-align: justify;
+}
+.liste_pages_sep {
+  height: 0.5em;
+}
+
+.spip_params {
+  line-height: 1em;
+  color: #3874b0;
+  margin-bottom: 2px;
+}
+
+.onlinehelp {
+  font-size: -1;
+  font-style: italic;
+  color: ##ENV{couleur_foncee,3874b0};
+}
+
+.onlinehelp .onlinehelplayer {
+  font-style: normal;
+}
+
+.onlinehelp .triangle {
+  vertical-align: top;
+  cursor:pointer;
+}
+
+.btc_0 {
+  background: #f2fff2;
+}
+.btc_1 {
+  background: #ffe;
+}
+.btc_2 {
+  background: #fff8f8;
+}
+.btc_3 {
+  background: #f2f8ff;
+}
+.btc_4 {
+  background: #f8fff2;
+}
+
+.ctlWidget_droppable_active {
+  opacity: 0.6;
+  -moz-opacity: 0.6;
+  -khtml-opacity: 0.6;
+  filter: alpha(opacity=60);
+}
+.ctlWidget_droppable_over {
+  outline: 1px dotted black;
+}
+
+.nompage {
+  color: black;
+}
+.nompage:hover {
+  color: blue;
+}
+
+.widget, .widgy {
+  text-align: center;
+  -moz-border-radius: 12px;
+  color: #444;
+}
+.widget:hover, .widgy:hover {
+  color: black;
+}
+
+.widgy {
+  min-width: 80px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background: #e5f6e8;
+  border: 1px outset ##ENV{couleur_foncee,3874b0};
+}
+.widgy:hover {
+  background: #b4e9b4;
+  border: 1px inset ##ENV{couleur_foncee,3874b0};
+}
+.widgy_overriden {
+  background: #ffe5b1;
+}
+.widgy_overriden:hover {
+  background: #fed991;
+}
+.widgy_unused {
+  background: #dfdfdf;
+}
+
+.widget {
+  font-weight: bold;
+  font-size: 10px;
+  cursor: pointer;
+  height: 24px;
+  width: 180px;
+  margin: 0;
+  background: url(#CHEMIN{img_pack/composant.png}) no-repeat;
+  z-order: 3;
+}
+.widget:hover {
+  color: black;
+  background: url(#CHEMIN{img_pack/composant_hover.png}) no-repeat;
+}
+.widget_overriden {
+  background: url(#CHEMIN{img_pack/composant_overide.png}) no-repeat;
+}
+.widget_overriden:hover {
+  background: url(#CHEMIN{img_pack/composant_overide_hover.png}) no-repeat;
+}
+.widget_unused {
+  background: url(#CHEMIN{img_pack/composant_inactif.png}) no-repeat;
+}
+.widget img {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.widget a, .widgy a {
+  color: black;
+}
+.widget a:hover, .widgy a:hover {
+  color: darkgreen;
+}
+.widget table {
+  width: 100%;
+  height: 100%;
+}
+.widget table tr {
+  vertical-align: middle;
+}
+
+.ctlWidget {
+  width: 180px;
+  height: 24px;
+  text-align: center;
+  border: 1px inset ##ENV{couleur_foncee,3874b0};
+  -moz-border-radius: 12px;
+  background: #f0f0f8;
+}
+.select_widget {
+  position:absolute;
+  width: 160px;
+  height: 18px;
+  margin-left:10px;
+  margin-top:2px;
+}
+
+/* Coloration syntaxique acs-spip */
+.spip_source {
+  overflow: scroll;
+  max-height: 600px;
+  border: 1px inset #dfdfdf;
+}
+
+.col_MODELE {
+  color: darkblue;
+}
+.col_BOUCLE, .col_FIN_BOUCLE, .col_B, .col_FIN_B {
+  color: darkviolet;
+}
+.col_REM {
+  color: grey;
+}
+.col_TRAD {
+  color: brown;
+}
+.col_INCLURE {
+  color: blue;
+}
+.col_VAR {
+  color: #00228f;
+}
+.col_BALISE {
+  color: #005d00;
+}

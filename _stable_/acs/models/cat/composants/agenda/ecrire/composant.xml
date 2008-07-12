@@ -1,0 +1,80 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Agenda</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
+  <version>0.3</version>
+  <version_acs_min>0.3</version_acs_min>
+  <version_acs_max>0.3</version_acs_max>
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
+
+  <param>
+    <nom>optionnel</nom>
+    <valeur>oui</valeur>
+  </param>
+  <param>
+    <nom>preview</nom>
+    <valeur>140</valeur>
+  </param>
+
+  <variable>
+    <nom>TitreFondColor</nom>
+    <type>color</type>
+    <valeur>acsRubnavFondColor</valeur>
+  </variable>
+  <variable>
+    <nom>TitreFondImage</nom>
+    <type>img</type>
+    <chemin>img/trame</chemin>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>HeadFondColor</nom>
+    <type>color</type>
+    <valeur>acsRubnavFondColor</valeur>
+  </variable>
+  <variable>
+    <nom>BordColor</nom>
+    <type>color</type>
+    <valeur>acsRubnavBordColor</valeur>
+  </variable>
+  <variable>
+    <nom>BordLargeur</nom>
+    <type>largeurbord</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>BordStyle</nom>
+    <type>stylebord</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>NotThisMonth</nom>
+    <type>color</type>
+    <valeur>acsRubnavFondColorHover</valeur>
+  </variable>
+  <variable>
+    <nom>ThisMonth</nom>
+    <type>color</type>
+    <valeur>acsFondColor</valeur>
+  </variable>
+  <variable>
+    <nom>ThisDay</nom>
+    <type>color</type>
+    <valeur>acsFondColor</valeur>
+  </variable>
+  <variable>
+    <nom>BulleFondColor</nom>
+    <type>color</type>
+  </variable>  <variable>
+    <nom>BulleSurvol</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>BulleFondImage</nom>
+    <type>img</type>
+    <chemin>img/trame</chemin>
+    <label>non</label>
+  </variable>
+</composant>

@@ -1,0 +1,30 @@
+#CACHE{0}
+
+.composantEncart .cartouche {
+  [background: #(#CONFIG{acsEncartColor,#CONFIG{acsFondColor}});]
+  [border-width: (#CONFIG{acsEncartBordLargeur,#CONFIG{acsFondBordLargeur}});]
+  [border-style: (#CONFIG{acsEncartBordStyle,#CONFIG{acsFondBordStyle}});]
+  [border-color: #(#CONFIG{acsEncartBordColor,#CONFIG{acsFondBordColor}});]
+  padding-left: 4px;
+  padding-right: 4px;
+  -moz-border-radius: 8px;
+}
+
+.composantEncart .cartouche .surtitre, .composantEncart .cartouche .titre, .composantEncart .cartouche .soustitre  {
+  margin: 0;
+  font-size: 0.79em;
+}
+.composantEncart .cartouche .titre {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.composantEncart .cartouche .texte_nav {
+  text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
+}
+
+.composantEncart .cartouche .spip_logos {
+  float: [(#ENV{ltr}|choixsiegal{left,right,left})];
+  margin: 4px;
+  margin-left: 0; [(#REM) inherited, so do not do twice]
+}

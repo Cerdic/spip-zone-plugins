@@ -1,0 +1,28 @@
+#CACHE{0}
+
+.syndic {
+  [border-width: (#CONFIG{acsRubnavBordLargeur,#CONFIG{acsFondBordLargeur}});]
+  [border-style: (#CONFIG{acsRubnavBordStyle,#CONFIG{acsFondBordStyle}});]
+  [border-color: #(#CONFIG{acsRubnavBordColor,#CONFIG{acsFondBordColor}});]
+  [background: #(#CONFIG{acsRubnavFondColor});]
+}
+
+.syndic .menu-titre {
+  [background: #(#CONFIG{acsRubnavTitreFondColor})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsRubnavTitreFondImage})) repeat top left];]
+}
+
+.syndic .menu-item{
+  [background: #(#CONFIG{acsRubnavFondColor});]
+  border-top: 1px solid #[(#CONFIG{acsRubnavSepColor,#CONFIG{acsFondBordColor,dfefef}})];
+  padding-left: 5px;
+}
+
+.syndic .menu-titre {
+  text-align: center;
+  font-size: 1.03em;
+  font-weight: bold;
+}
+
+.syndic .menu-item a {
+  [text-align: (#CONFIG{acsRubnavAlign});]
+}

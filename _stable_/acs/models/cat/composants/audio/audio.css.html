@@ -1,0 +1,116 @@
+#CACHE{0}
+
+.mp3player {
+  opacity: 0.6;
+}
+
+.mp3player .track_info, .mp3player .track_id3, .playlist .track_info {
+  border: thin solid;
+  [border-color: #(#CONFIG{acsPlaylistSepColor,#CONFIG{acsRubnavSepColor,#CONFIG{acsFondBordColor}}});]
+  -moz-border-radius: 1em;
+  margin: 2px;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 8px;
+  height: 10px;
+  color: ##CONFIG{acsAudioTrackStatus,00afdf};
+}
+
+.mp3player .track_info {
+  float: right;
+}
+
+.mp3player .track_id3 {
+  text-align: #LANG_LEFT;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.mp3player .track_status {
+  font-size: 8px;
+  color: ##CONFIG{acsAudioTrackStatus,00afdf};
+}
+
+.mp3player .track_control, .mp3player .hidden {
+  display: none;
+}
+
+.mp3player .btn {
+  text-align: #LANG_LEFT;
+  margin: 0;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.mp3player .btn li {
+  display: inline;
+}
+.mp3player .btn li img {
+  cursor:pointer;
+}
+
+.mp3player .progressBarBorder {
+  border: 1px solid ##CONFIG{acsAudioProgressBarBord,#CONFIG{acsRubnavBordColor,afafaf}};
+  height: 2px;
+  margin: 6px;
+  margin-left: 8px;
+  margin-right: 8px;
+  cursor:pointer;
+  text-align: left;
+  position: relative;
+}
+.mp3player .progressBar {
+  height: 2px;
+  background: #8d8fff;
+  width: 0;
+}
+.mp3player .loadBar {
+  height: 2px;
+  background: #8adf8a;
+  width: 0;
+}
+.mp3player .slider {
+  position: absolute;
+  display:block;
+  left: -6px;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  background: url(#CHEMIN{composants/audio/img_pack/slider-light.png}) 0 0 no-repeat;
+}
+.mp3player .slider:hover {
+  background: url(#CHEMIN{composants/audio/img_pack/slider.png}) 0 0 no-repeat;
+}
+
+#soundmanager-debug {
+ position:fixed;
+ _position:absolute; /* IE <7 */
+ top:0px;
+ left:0px;
+ width:48em;
+ height:60em;
+ overflow:auto;
+ border:1px solid #ccc;
+ padding:1em;
+ margin:1em;
+ font-family:"lucida console",verdana,tahoma,"sans serif";
+ font-size:x-small;
+ background:#dfdfdf;
+ color: #000;
+ z-index: 999;
+}
+
+#soundmanager-debug code {
+ font-size:1.1em;
+ color: #000000;
+}
+
+#soundmanager-debug div {
+ margin-top:0.1em;
+ color: #000000;
+}

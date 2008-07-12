@@ -1,0 +1,25 @@
+#CACHE{0}
+
+#ours {
+  clear: both;
+  border: 0;
+  padding: 0;
+  padding-left: 75px;
+  padding-right: 75px;
+  padding-bottom: 4px;
+  margin-top: 2px;
+  font-style: italic;
+  font-size: 0.77em;
+  text-align: center;
+  [color: #(#CONFIG{acsOursText});]
+  <BOUCLE_rubrique(RUBRIQUES) {racine} {titre_mot=_Ours} {0,1}>border-top: thin dotted ##CONFIG{acsOursText,#CONFIG{acsOngletsBordColor}};</BOUCLE_rubrique>
+}
+
+#ours legend {
+  margin-top: 2px;
+}
+
+#ours img { vertical-align: middle; }
+
+[#ours a {color: #(#CONFIG{acsOursLink});}]
+[#ours a:hover {color: #(#CONFIG{acsOursLinkHover});}]

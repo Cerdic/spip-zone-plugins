@@ -1,0 +1,18 @@
+<div class="syndic">
+<div class="menu-titre">Sur le Web</div>
+<BOUCLE_syndsit(SYNDICATION) {syndication==(oui)|(sus)} {par date} {par nom_site} {0,#CONFIG{acsSyndicNbSites,5}}>
+  <ul>
+    <li><div class="menu-titre"><a href="#URL_SITE" target="synd" [ title="(#NOM_SITE|texte_backend)"] class="spip_out">#NOM_SITE</a></div>
+    <B_syndic>
+    <ul>
+      <BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date} {inverse} {0,#CONFIG{acsSyndicNbArt,3}}>
+        <li class="menu-item">
+            [<i>(#DATE|affdate_court)</i>:] <a href="#URL_ARTICLE" target="synd"  [title="(#DESCRIPTIF|textebrut|entites_html|couper{100})"] class="spip_out">#TITRE</a>
+        </li>
+      </BOUCLE_syndic>
+    </ul>
+    </B_syndic>
+    </li>
+  </ul>
+</BOUCLE_syndsit>
+</div>

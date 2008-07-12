@@ -1,0 +1,106 @@
+#CACHE{0}
+
+/**
+ * Feuille de style Agenda, par Daniel Faivre, 2007-2008
+ */
+
+.small_mini a:link {
+  color: #af0000;
+}
+
+.small_mini a:hover {
+  color: #df0000;
+}
+
+/* Calendrier */
+.small_mini {
+  font-family:V erdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #999999;
+  [background: #(#CONFIG{acsAgendaThisMonth, #CONFIG{acsFondColor,fff}});]
+  [border-width: (#CONFIG{acsAgendaBordLargeur,#CONFIG{acsFondBordLargeur}});]
+  [border-style: (#CONFIG{acsAgendaBordStyle,#CONFIG{acsFondBordStyle}});]
+  [border-color: #(#CONFIG{acsAgendaBordColor,#CONFIG{acsFondBordColor}});]
+  text-align:center;
+  font-style:normal;
+}
+
+.small_mini td {
+  padding: 2px;
+}
+
+.calendar_header {
+  [background: #(#CONFIG{acsAgendaTitreFondColor})  /* efffef */ [ url('[(#ACS_CHEMIN)]img/trame/(#CONFIG{acsAgendaTitreFondImage})')] repeat top right;] /* agenda_titre.png */
+  text-align: center;
+  color: ##CONFIG{acsFondText,000};
+}
+
+.calendar_head_mini {
+  background: ##CONFIG{acsAgendaHeadFondColor,#CONFIG{acsRubnavFondColor,ececec}};
+  text-align: center;
+  font-size: 10px;
+  color: ##CONFIG{acsFondText,000};
+  font-family: Verdana, Arial, Helvatica, sans-serif;
+  font-style:normal;
+}
+
+.calendar_not_this_month {
+  [background: #(#CONFIG{acsAgendaNotThisMonth,#CONFIG{acsRubnavFondColorHover,ececec}});]
+  color:#aaa;
+}
+
+.calendar_this_month {
+  padding: 2px;
+  [background: #(#CONFIG{acsAgendaThisMonth,#CONFIG{acsFondColor,fdfdfd}});]
+  color:#aaa;
+}
+
+.calendar_this_day a {
+  text-align: center;
+  [background: #(#CONFIG{acsAgendaThisDay,ffffef});]
+  font-weight:bold;
+  font-style: italic;
+  border: 1px solid ##CONFIG{acsFondLink,dfdfaf};
+  -moz-border-radius: 5px;
+  padding: 2px;
+  padding-right: 5px;
+  padding-bottom: 0;
+}
+
+/* info-bulle */
+.bulle{
+position: absolute;
+min-width: 200px;
+display: none;
+z-index : 999;
+background: ##CONFIG{acsAgendaBulleFondColor,ffffef} [ url('[(#ACS_CHEMIN)]img/trame/(#CONFIG{acsAgendaBulleFondImage})') repeat top left];  /* agenda_bulle_fond.png */
+padding: 0;
+margin: 0;
+border: [(#CONFIG{acsAgendaBordLargeur,1px})][ (#CONFIG{acsAgendaBordStyle,ridge})][ #(#CONFIG{acsAgendaBordColor,c2d4d4})];
+font-size: 8pt;
+line-height:normal;
+text-align: #LANG_LEFT;
+}
+
+* html .bulle {
+width: 250px; /* IE exige une largeur définie */
+}
+
+.bulle .ligne{
+  padding-left: 2px;
+  padding-right: 2px;
+}
+.bulle .ligne:hover{
+  background: #[(#CONFIG{acsAgendaBulleSurvol,ffffbf})];
+}
+
+.bulle a {
+	font-weight: normal;
+	display: block;
+	width: 100%;
+	border:0;
+	padding:0;
+	text-align: left;
+	font-style: normal;
+}
+.bulle a:hover {color: #df0000; background: #[(#CONFIG{acsAgendaBulleSurvol,ffffbf})]; display: block; width: 100%}

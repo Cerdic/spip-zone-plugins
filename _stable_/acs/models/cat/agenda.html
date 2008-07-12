@@ -1,0 +1,58 @@
+#CACHE{900}
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2008
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Affiche un agenda par périodes choisies
+
+]
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+   <INCLURE{fond=inc-head_meta}>
+   <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+   <meta name="description" content="<:meta_dc_subject_article:>[ (#NOM_SITE_SPIP|textebrut)][: (#TITRE|textebrut)]" />
+   <meta name="keywords" content="[(#TITRE|textebrut|sans_guillemets)][,(#SURTITRE|textebrut|sans_guillemets)][,(#SOUSTITRE|textebrut|sans_guillemets)][,(#TITRE|askeywords)][,(#SURTITRE|askeywords)][,(#SOUSTITRE|askeywords)][,(#LESAUTEURS|supprimer_tags|askeywords)]" />
+   <meta name="robots" content="none">
+   <meta name="expires" content="7200" />
+   <meta name="author" content="[<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)]" />
+   <meta name="abstract" content="[(#TITRE|textebrut)][: (#DESCRIPTIF|supprimer_tags|textebrut|sans_guillemets)]" />
+   <meta name="copyright" content="<:meta_rights:>[: (#LESAUTEURS|supprimer_tags|textebrut) &amp; ][(#NOM_SITE_SPIP|textebrut) ](#URL_SITE_SPIP)" />
+   <meta name="DC.keywords" content="[(#TITRE|textebrut|sans_guillemets)][,(#SURTITRE|textebrut|sans_guillemets)][,(#SOUSTITRE|textebrut|sans_guillemets)][,(#TITRE|askeywords)][,(#SURTITRE|askeywords)][,(#SOUSTITRE|askeywords)][,(#LESAUTEURS|supprimer_tags|askeywords)]" />
+   <meta name="DC.Date" content="[(#DATE_REDAC|?{#DATE_REDAC, #DATE})]" />
+   [<meta name="DC.Contributor" content="(#LESAUTEURS|supprimer_tags|textebrut)" />]
+   <meta name="DC.Publisher" content="[(#LESAUTEURS|supprimer_tags|textebrut) &amp; ][(#NOM_SITE_SPIP|textebrut)]" />
+   <meta name="DC.Subject" content="<:meta_dc_subject_article:>[ (#NOM_SITE_SPIP|textebrut)][: (#TITRE|textebrut)]" />
+   <meta name="DC.Rights" content="<:meta_rights:>[: (#LESAUTEURS|supprimer_tags|textebrut) &amp; ][(#NOM_SITE_SPIP|textebrut) ](#URL_SITE_SPIP)" />
+   <INCLURE{fond=inc-head_css}>
+</head>
+
+<body class="page_agenda">
+<INCLURE{fond=composants/entete/entete}>[(#REM) Entete de la page + titre du site ]
+
+[(#REM) Menu de navigation laterale (colonne 1)]
+<div id="colonne1"><div class="spacer"></div>
+    <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
+      <INCLURE{fond=composants/col1/col1}>
+  </div>[(#REM) fin menu ]
+</div>[(#REM) fin colonne1 (navigation) ]
+
+[(#REM) Colonne 2 ]
+<div id="colonne2"><div class="spacer"></div>
+  [(#REM) Contenu principal : derniers articles publies ]
+  <INCLURE{fond=composants/onglets/onglets}{current=agenda}>
+  <div id="onglet">
+		<div class="page_agenda">
+			[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=agenda_#ENV{type,mois}} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}>]
+		</div>
+	</div><!-- fin onglet -->
+</div><!-- fin colonne2 -->
+
+[(#REM) Pied de page ]
+<INCLURE{fond=inc-pied}>
+</body>
+</html>

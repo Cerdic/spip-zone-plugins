@@ -1,0 +1,53 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Audio</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
+  <version>0.3</version>
+  <version_acs_min>0.3</version_acs_min>
+  <version_acs_max>0.3</version_acs_max>
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
+
+  <param>
+    <nom>optionnel</nom>
+    <valeur>oui</valeur>
+  </param>
+  <param>
+    <nom>preview</nom>
+    <valeur>150</valeur>
+  </param>
+
+  <variable>
+    <nom>Btn</nom>
+    <type>color</type>
+    <valeur>acsFondColor</valeur>
+  </variable>
+  <variable>
+    <nom>BtnOn</nom>
+    <type>color</type>
+    <valeur>acsRubnavBordColor</valeur>
+  </variable>
+
+  <variable>
+    <nom>TrackStatus</nom>
+    <type>color</type>
+    <valeur>00afdf</valeur>
+  </variable>
+
+  <variable>
+    <nom>LoadBar</nom>
+    <type>color</type>
+    <valeur>8adf8a</valeur>
+  </variable>
+  <variable>
+    <nom>ProgressBar</nom>
+    <type>color</type>
+    <valeur>8d8fff</valeur>
+  </variable>
+  <variable>
+    <nom>ProgressBarBord</nom>
+    <type>color</type>
+    <valeur>acsRubnavBordColor</valeur>
+  </variable>
+</composant>

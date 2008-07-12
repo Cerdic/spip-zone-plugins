@@ -1,0 +1,27 @@
+[(#SET{acsEncartKeyword,<:acs:encart_keyword:>})]
+<B_encart>
+<div class="composantEncart">
+<BOUCLE_encart(ARTICLES) {doublons} {titre_mot=#GET{acsEncartKeyword}} {par date} {inverse} {0,3} {lang ?}>
+  <BOUCLE_encart_democratique(ARTICLES spip_notations_articles) {id_article} {note_ponderee>=#CONFIG{acsDemocratieSeuilPublic,0}} {lang ?}>
+    <div class="cartouche">
+      [<div class="spip_logos"><a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE)</a></div>]
+
+      [<p class="surtitre">(#SURTITRE)</p>]
+      <h1 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h1>
+      [<p class="soustitre">(#SOUSTITRE)</p>]
+
+      [(#REM) Inclure le modele des liens de traductions ]
+      #MODELE{article_traductions}
+
+      [<div class="chapo">(#CHAPO)</div>]
+
+      [<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+      [<div class="texte">(#TEXTE|supprimer_tags|coupe{300, &nbsp; ... <small><i><a href="#URL_ARTICLE" style="font-weight:normal">(lire la suite)</a></i></small>})
+        <div class="texte_nav">[(#DATE_REDAC|?{[(#DATE_REDAC|nom_jour) ][(#DATE_REDAC|affdate)], [(#DATE|nom_jour) ][(#DATE|affdate)]})][, <:par_auteur:> (#LESAUTEURS)]</div>
+      </div>]
+    </div>[(#REM) fin cartouche ]
+    <div class="spacer"></div>
+  </BOUCLE_encart_democratique>
+</BOUCLE_encart>
+</div>
+</B_encart>

@@ -1,0 +1,69 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Forum</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
+  <version>0.3</version>
+  <version_acs_min>0.3</version_acs_min>
+  <version_acs_max>0.3</version_acs_max>
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
+
+  <param>
+    <nom>optionnel</nom>
+    <valeur>true</valeur>
+  </param>
+  <param>
+    <nom>preview</nom>
+    <valeur>250</valeur>
+  </param>
+
+  <variable>
+    <nom>Bord</nom>
+    <type>color</type>
+    <valeur>acsOngletsBordColor</valeur>
+  </variable>
+  <variable>
+    <nom>BordLargeur</nom>
+    <type>largeurbord</type>
+    <valeur>acsFondBordLargeur</valeur>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>BordStyle</nom>
+    <type>stylebord</type>
+    <label>non</label>
+    <valeur>acsFondBordStyle</valeur>
+  </variable>
+
+  <variable>
+    <nom>Fond1</nom>
+    <type>color</type>
+    <valeur>f8fff8</valeur>
+  </variable>
+  <variable>
+    <nom>Fond2</nom>
+    <type>color</type>
+    <valeur>fafffa</valeur>
+  </variable>
+  <variable>
+    <nom>Fond3</nom>
+    <type>color</type>
+    <valeur>f5fff5</valeur>
+  </variable>
+  <variable>
+    <nom>Fond4</nom>
+    <type>color</type>
+    <valeur>efffef</valeur>
+  </variable>
+  <variable>
+    <nom>Fond5</nom>
+    <type>color</type>
+    <valeur>dfffdf</valeur>
+  </variable>
+  <variable>
+    <nom>Fond6</nom>
+    <type>color</type>
+    <valeur>d0ffd0</valeur>
+  </variable>
+</composant>

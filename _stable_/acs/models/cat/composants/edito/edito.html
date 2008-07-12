@@ -1,0 +1,4 @@
+[(#CONFIG{acsEditoUse}|=={oui}|?{' '})
+  [(#CONFIG{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/edito/edito-democratie}>][(#REM) Edito si composant democratie activé]
+  [(#CONFIG{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/edito/edito-oligarchie}>][(#REM) Edito si composant democratie inactif]
+]

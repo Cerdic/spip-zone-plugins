@@ -1,0 +1,126 @@
+#CACHE{7*24*3600}[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2008
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Page d'une brève.
+
+]
+<BOUCLE_breve_principal(BREVES) {id_breve} {lang ?}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" xml:lang="#LANG" lang="#LANG">
+<head>
+   <INCLURE{fond=inc-head_meta}>
+   <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+   <meta name="description" content="<:meta_dc_subject_breve:>[ (#NOM_SITE_SPIP|textebrut)][: (#TITRE|textebrut)]" />
+   <meta name="keywords" content="[(#TITRE|textebrut|sans_guillemets)][,(#SURTITRE|textebrut|sans_guillemets)][,(#SOUSTITRE|textebrut|sans_guillemets)][,(#TITRE|askeywords)][,(#SURTITRE|askeywords)][,(#SOUSTITRE|askeywords)][,(#LESAUTEURS|supprimer_tags|askeywords)]" />
+   <meta name="expires" content="7200" />
+   [<meta name="author" content="(#LESAUTEURS|supprimer_tags|textebrut)"/>]
+   <meta name="abstract" content="[(#TITRE|textebrut)][: (#DESCRIPTIF|supprimer_tags|textebrut|sans_guillemets)]" />
+   <meta name="copyright" content="<:meta_rights:>[: (#LESAUTEURS|supprimer_tags|textebrut) &amp; ][(#NOM_SITE_SPIP|textebrut) ](#URL_SITE_SPIP)" />
+[(#REM) DC metas ]
+   <meta name="DC.Title" content="[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]" />
+   <meta name="DC.keywords" content="[(#TITRE|textebrut|sans_guillemets)][,(#SURTITRE|textebrut|sans_guillemets)][,(#SOUSTITRE|textebrut|sans_guillemets)][,(#TITRE|askeywords)][,(#SURTITRE|askeywords)][,(#SOUSTITRE|askeywords)][,(#LESAUTEURS|supprimer_tags|askeywords)]" />
+   <meta name="DC.Date" content="[(#DATE_REDAC|?{#DATE_REDAC, #DATE})]" />
+   [<meta name="DC.Contributor" content="(#LESAUTEURS|supprimer_tags|textebrut)" />]
+   <meta name="DC.Publisher" content="[(#LESAUTEURS|supprimer_tags|textebrut) &amp; ][(#NOM_SITE_SPIP|textebrut)]" />
+   <meta name="DC.Subject" content="<:meta_dc_subject_breve:>[ (#NOM_SITE_SPIP|textebrut)][: (#TITRE|textebrut)]" />
+   <meta name="DC.Description" content="[(#TITRE|textebrut)][: (#DESCRIPTIF|supprimer_tags|textebrut|sans_guillemets)]" />
+   <meta name="DC.Rights" content="<:meta_rights:>[: (#LESAUTEURS|supprimer_tags|textebrut) &amp; ][(#NOM_SITE_SPIP|textebrut) ](#URL_SITE_SPIP)" />
+   <INCLURE{fond=inc-head_css}>
+   [(#REM) Lien vers le flux RSS des breves ]
+	 <link rel="alternate" type="application/rss+xml" title="<:dernieres_breves:>" href="#URL_PAGE{backend-breves}" />
+</head>
+
+<body class="page_breve">
+[(#REM) Entete de la page + titre du site ]
+<INCLURE{fond=composants/entete/entete}>
+
+[(#REM) Menu de navigation laterale (colonne 1)]
+<div id="colonne1"><div class="spacer"></div>
+  <div class="mg">
+    [(#REM) Colonne 1 - Menu de navigation par rubriques ]
+    <INCLURE{fond=composants/col1/col1}{self=#SELF}>
+
+    <B_breves_rubrique>[(#REM) breves dans la meme rubrique ]
+    <div class="spacer"></div>
+    <div class="divers">
+        <div class="menu-titre">Dans la m&ecirc;me rubrique</div>
+        <ul>
+        <BOUCLE_breves_rubrique(BREVES) {id_rubrique} {par date} {inverse} {exclus} {0,8}>
+          <li class="menu-item"><a href="#URL_BREVE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
+        </BOUCLE_breves_rubrique>
+        </ul>
+    </div>
+    </B_breves_rubrique>
+    
+    	[(#REM) Menu de navigation mots-cles ]
+			<B_mots>
+			<div class="divers">
+				<h2 class="menu-titre"><:mots_clefs:></h2>
+				<ul>
+				<BOUCLE_mots(MOTS) {id_breve} {par titre}>
+					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+				</BOUCLE_mots>
+				</ul>
+			</div>
+			</B_mots>
+			
+  </div>[(#REM) fin menu ]
+</div>[(#REM) fin colonne1 (navigation) ]
+
+   [(#REM) Colonne 2 ]
+   <div id="colonne2"><div class="spacer"></div>
+      [(#REM) Contenu principal : dernieres breves publies ]
+        <INCLURE{fond=composants/onglets/onglets}{current=breve}>
+
+         <div id="onglet">
+
+         [(#REM) Fil d'Ariane ]
+         <span id="hierarchie" style="float: left"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</span>
+
+			  <span class="texte_nav" style="float: right">[(#DATE_REDAC|?{[(#DATE_REDAC|nom_jour) ][(#DATE_REDAC|affdate)], [(#DATE|nom_jour) ][(#DATE|affdate)]})][, <:par_auteur:> (#LESAUTEURS)] </span>
+        <br class="nettoyeur" />
+
+				<div class="contre-encart">
+
+         <div class="cartouche">
+            <div class="entete">
+            <span style="float: left">
+            #DEBUT_SURLIGNE
+            <h1 class="#EDIT{titre} titre">#TITRE</h1>
+            #FIN_SURLIGNE</span>
+            <br class="nettoyeur" />
+            </div>[(#LOGO_BREVE||image_reduire{100,100})]
+         </div>[(#REM) fin cartouche ]
+
+         #DEBUT_SURLIGNE
+         [<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
+
+         [<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+         [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{300,0})</div>]
+         #FIN_SURLIGNE
+				</div>[(#REM) fin contre-encart]
+         [<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+
+					<br class="nettoyeur" />
+					[(#REM) Forum de la breve
+					NB : pour desactiver les forums de breve, supprimez simplement les lignes ci-dessous ]
+					[<a href="#forum" name="forum" id="forum"></a><h2 class="forum-repondre"><span class="texte_nav" style="float: right"><a href="#URL_BREVE&ouvrir=oui"><small><:lire_tous_les_messages:></small></a></span><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:><small><i>(<:repondre_article_notice:>)</i></small></a><INCLURE{fond=composants/forum/forum}{id_breve}{ouvrir=#OUVRIR}{debut_forums}>]
+					</div>[(#REM) fin onglet]
+				</div>[(#REM) fin colonne2]
+				<div id="colonne3"><div class="spacer"></div>
+          <div class="encart">
+            [(#REM) colonne 3 configurable ]
+            <INCLURE{fond=composants/col3/col3}{self=#SELF}{debut_doc}>
+          </div>[(#REM) fin encart ]
+				</div>[(#REM) fin colonne3]
+
+[(#REM) Pied de page ]
+<INCLURE{fond=inc-pied}>
+</body>
+</html>
+</BOUCLE_breve_principal>

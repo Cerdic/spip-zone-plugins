@@ -1,0 +1,32 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Formulaire_recherche</nom>
+
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
+  <version>0.3</version>
+  <version_acs_min>0.3</version_acs_min>
+  <version_acs_max>0.3</version_acs_max>  
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
+
+  <param>
+    <nom>optionnel</nom>
+    <valeur>activer_moteur</valeur>
+  </param>
+  <param>
+    <nom>preview</nom>
+    <valeur>68</valeur>
+  </param>
+
+  <variable>
+    <nom>BordColor</nom>
+    <type>color</type>
+    <valeur>acsFondBordColor</valeur>
+  </variable>
+  <variable>
+    <nom>OngletColor</nom>
+    <type>color</type>
+    <valeur>acsFondColor</valeur>
+  </variable>
+</composant>
