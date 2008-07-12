@@ -172,8 +172,7 @@ Si le plugin notation est présent, il est intégré.
             <INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
          ]
 					<br class="nettoyeur" />
-          #SET{plugin_notation, #EVAL{in_array('notation', $GLOBALS['plugins'])}}
-          [(#GET{plugin_notation}|?{' '}) #NOTATION]
+          [(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{' '}) #NOTATION]
 
          [(#REM) Forum de l'article ]
 					[(#STATUT|=={refuse}|?{'<a href="" class="refus">Article refusé</a>', ''})]

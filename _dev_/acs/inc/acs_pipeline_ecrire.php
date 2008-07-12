@@ -50,7 +50,7 @@ function acs_header_prive($flux) {
 '<script type="text/javascript">var DEBUG = '.
 'false'. // true active le debug des éléments jQuery dans ACS
 ';</script>'.
-'<script type="text/javascript" src="../dist/javascript/dragdrop_interface.js"></script>'.
+'<script type="text/javascript" src="'._DIR_ACS.'js/dragdrop_interface.js"></script>'.
 '<script type="text/javascript" src="'._DIR_ACS.'js/acs_ecrire.js"></script>'.
 '<script type="text/javascript" src="'._DIR_ACS.'js/picker.js"></script>';
 }

@@ -28,7 +28,7 @@ function acs_info_box($titre, $description, $help, $info, $icon, $description_co
   if ($description) $r .= '<div>'.$description.'</div>';
   if ($description_contextuelle) $r .= '<div>'.$description_contextuelle.'</div>';
   if ($info) $r .= '<div class="onlinehelp">'.$info.'</div>';
-  if ($help) $r .= '<div class="onlinehelp" onclick=\'$("#help_context").slideToggle("slow");\' style="cursor:pointer;"><img src="../dist/images/aide.gif" onmouseover=\'$("#help_context").slideToggle("slow");\' /> '._T('icone_aide_ligne').'</div><div id="help_context" class="onlinehelp pliable" style="text-align: justify">'.$help.'</div>';
+  if ($help) $r .= '<div class="onlinehelp" onclick=\'$("#help_context").slideToggle("slow");\' style="cursor:pointer;"><img src="'._DIR_PLUGIN_ACS.'/img_pack/aide.gif" onmouseover=\'$("#help_context").slideToggle("slow");\' /> '._T('icone_aide_ligne').'</div><div id="help_context" class="onlinehelp pliable" style="text-align: justify">'.$help.'</div>';
   if ($addon) $r .= '<br />'.$addon;
   return acs_box($titre, $r, $icon, false, '<img src="'._DIR_PLUGIN_ACS.'/img_pack/info.png" />');
 }

@@ -58,8 +58,7 @@ html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-d
 [(#CONFIG{acsRepimagesUse}|=={oui}|?{' '}) #INCLURE{fond=composants/repimages/repimages.css} ]
 [(#CONFIG{acsSyndicUse}|=={oui}|?{' '}) #INCLURE{fond=composants/syndic/syndic.css} ]
 
-#SET{plugin_notation, #EVAL{in_array('notation', $GLOBALS['plugins'])}}
-[(#GET{plugin_notation}|?{' '})
+[(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{'', ' '})
 .notation {}
 .notation .topten {
   border: thin dotted ##CONFIG{acsFondBordColor,AAE};

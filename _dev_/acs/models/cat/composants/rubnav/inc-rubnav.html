@@ -70,7 +70,7 @@
 							<BOUCLE_sous_rubriques2(RUBRIQUES) {id_parent} {par num titre, titre}><BOUCLE_test_expose2(RUBRIQUES) {id_enfant}>#EXPOSE{' '}</BOUCLE_test_expose2>
 							<li class="menu-item">[(#EXPOSE|?{#SET{EXPOSED, #EXPOSE}, ''})]
 								<BOUCLE_test_soussousrub2(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES, #GET{EXPOSED}|?{'', 'true'}})]</BOUCLE_test_soussousrub2>
-									[(#GET{AFILLES}|? {<a href="#URL_RUBRIQUE"><img src="#CHEMIN{composants/rubnav/img_pack/deplierhaut.gif}" class="deplierub" alt="+" title="Cliquez pour déplier les sous-rubriques" onmouseover='this.src="dist/images/deplierhauton.gif"' onmouseout='this.src="#CHEMIN{composants/rubnav/img_pack/deplierhaut.gif}";' align="right" /></a>, ''})][(#SET{AFILLES, ""})][(#SET{EXPOSED, ""})]<a id="rub#ID_RUBRIQUE" style="text-align: center;" href="#URL_RUBRIQUE"[ class="(#EXPOSE)"] title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]">[(#TITRE|supprimer_numero|couper{80})]</a><BOUCLE_re2(BOUCLE_sous_rubriques2)></BOUCLE_re2></li>
+									[(#GET{AFILLES}|? {<a href="#URL_RUBRIQUE"><img src="#CHEMIN{composants/rubnav/img_pack/deplierhaut.gif}" class="deplierub" alt="+" title="Cliquez pour déplier les sous-rubriques" onmouseover='this.src="#CHEMIN{composants/rubnav/img_pack/deplierhauton.gif}"' onmouseout='this.src="#CHEMIN{composants/rubnav/img_pack/deplierhaut.gif}";' align="right" /></a>, ''})][(#SET{AFILLES, ""})][(#SET{EXPOSED, ""})]<a id="rub#ID_RUBRIQUE" style="text-align: center;" href="#URL_RUBRIQUE"[ class="(#EXPOSE)"] title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]">[(#TITRE|supprimer_numero|couper{80})]</a><BOUCLE_re2(BOUCLE_sous_rubriques2)></BOUCLE_re2></li>
 								</B_test_expose2></BOUCLE_sous_rubriques2>
             </ul>
 					</B_sous_rubriques2>
