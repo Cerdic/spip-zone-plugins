@@ -5,10 +5,10 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'auteurs' => 'Auteurs',
 'auteurs_info' => 'Ajax & soft-downgrade',
-'auteurs_description' => 'Bloc liste des auteurs.',
+'auteurs_description' => 'Authors list block.',
 'auteurs_on' => _T('item_oui'),
 'auteurs_off' => _T('item_non'),
 
-'acsAuteursNb' => 'Nombre'
+'acsAuteursNb' => 'Number'
 );
 ?>

@@ -19,19 +19,19 @@
   </param>
 
   <variable>
-    <nom>CouleurFond</nom>
+    <nom>Fond</nom>
     <type>color</type>
   </variable>
   <variable>
-    <nom>CouleurTexte</nom>
+    <nom>TextColor</nom>
     <type>color</type>
   </variable>
   <variable>
-    <nom>BordHautCouleur</nom>
+    <nom>BordHaut</nom>
     <type>color</type>
   </variable>
   <variable>
-    <nom>BordBasCouleur</nom>
+    <nom>BordBas</nom>
     <type>color</type>
   </variable>
   <variable>
