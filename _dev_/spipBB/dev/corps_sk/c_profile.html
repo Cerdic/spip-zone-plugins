@@ -15,7 +15,7 @@
 <BOUCLE_lang_sel(RUBRIQUES){id_rubrique=#GET{id_rubrique}}>
 <BOUCLE_recap(AUTEURS){id_auteur=#GET{id_auteur}}{tout}>
 
-	<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}>
+	<INCLURE{fond=inc_teteforum}{id_rubrique}>
 
 	<p class="space_20"></p>
 
@@ -38,7 +38,7 @@
 		</tr>
 	</table>
 
-	<INCLURE(session.php){fond=inc_piedforum}{id_rubrique}>
+	<INCLURE{fond=inc_piedforum}{id_rubrique}>
 
 </BOUCLE_recap>
 </B_recap>

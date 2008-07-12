@@ -8,7 +8,7 @@
 	[(#REM) Comme on ne peut pas faire ces boucles dans la partie conditionnelle on prepare ici]
 
 
-	<INCLURE(session.php){fond=inc_teteforum}{id_article}>
+	<INCLURE{fond=inc_teteforum}{id_article}>
 
 	[(#REM) c: 11/1/8 on determine si on est admin (pour l'affichage)]
 	[(#REM) Probleme des admin restreints a revoir... #SESSION{statut} ? ]
@@ -78,7 +78,7 @@
 	<?php } ?>
 
 
-	<INCLURE(session.php){fond=inc_piedforum}{id_article}>
+	<INCLURE{fond=inc_piedforum}{id_article}>
 
 </BOUCLE_recap>
 </B_recap>

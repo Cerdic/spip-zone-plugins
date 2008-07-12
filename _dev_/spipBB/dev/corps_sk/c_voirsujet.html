@@ -6,7 +6,7 @@
 	[
 	(#REM) entete corps forum
 	]
-	<INCLURE(session.php){fond=inc_teteforum}{id_article}>
+	<INCLURE{fond=inc_teteforum}{id_article}>
 
 	<p class="space_20"></p>
 
@@ -103,7 +103,16 @@
 			</tr>
 			<tr class="ligne_sujet">
 				<td>
-					[<div class="#EDIT{texte}">(#TEXTE|lignes_longues|smileys)</div>]
+					<div class="#EDIT{texte} forum-texte">
+						[(#TEXTE|lignes_longues|smileys)]
+						<BOUCLE_doc_pc(DOCUMENTS){id_forum}>
+						[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+							[(#EMBED_DOCUMENT|image_reduire{300})]
+						,
+							[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+						})]
+						</BOUCLE_doc_pc>
+					</div>
 
 					[(#REM) signature auteur ]
 					[<p class="signature">(#SIGNATURE_POST|PtoBr)</p>]
@@ -225,8 +234,16 @@
 		</tr>
 		<tr class="ligne_sujet">
 			<td>
-				[<div class="#EDIT{texte}">(#TEXTE|lignes_longues|smileys)</div>]
-
+				<div class="#EDIT{texte} forum-texte">
+					[(#TEXTE|lignes_longues|smileys)]
+					<BOUCLE_doc_p(DOCUMENTS){id_forum}>
+					[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+						[(#EMBED_DOCUMENT|image_reduire{300})]
+					,
+						[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+					})]
+					</BOUCLE_doc_p>
+				</div>
 				[(#REM) signature auteur ]
 				[<p class="signature">(#SIGNATURE_POST|PtoBr)</p>]
 
@@ -309,8 +326,16 @@
 		</tr>
 		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
 			<td>
-				[<div class="#EDIT{texte}">(#TEXTE|lignes_longues|smileys)</div>]
-
+				<div class="#EDIT{texte} forum-texte">
+					[(#TEXTE|lignes_longues|smileys)]
+					<BOUCLE_doc(DOCUMENTS){id_forum}>
+					[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+						[(#EMBED_DOCUMENT|image_reduire{300})]
+					,
+						[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+					})]
+					</BOUCLE_doc>
+				</div>
 				[(#REM) signature auteur ]
 				[<p class="signature">(#SIGNATURE_POST|PtoBr)</p>]
 
@@ -368,7 +393,7 @@
 	]})]
 	#GET{affboutonadminforum}
 
-	<INCLURE(session.php){fond=inc_piedforum}{id_article}{id_thread}>
+	<INCLURE{fond=inc_piedforum}{id_article}{id_thread}>
 
 	[(#REM) si visiteur non identifie : form login ]
 	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]

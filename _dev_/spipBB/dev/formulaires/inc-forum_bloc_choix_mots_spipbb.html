@@ -1,0 +1,14 @@
+[(#REM) c: 12/7/8 On n'affiche pas le groupe specifique de spipBB dans le reste du site !]
+<BOUCLE_G(GROUPES_MOTS)
+	{forum=(#CONFIG{mots_cles_forums}|choixsiegal{oui,oui,jamais})}
+	{articles==(#ENV{table}|choixsiegal{articles,'oui','.*'})}
+	{breves==(#ENV{table}|choixsiegal{breves,'oui','.*'})}
+	{rubriques==(#ENV{table}|choixsiegal{rubriques,'oui','.*'})}
+	{syndic==(#ENV{table}|choixsiegal{syndic,'oui','.*'})}
+>
+[(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
+	<fieldset>
+	<p class='legend'><:mots_clefs:> : #TITRE</p>
+		<INCLURE{fond=formulaires/inc-choix_mots_spipbb}{id_groupe}{ajouter_mot}{unseul}>
+	</fieldset>
+]</BOUCLE_G>

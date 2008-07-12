@@ -44,7 +44,7 @@
 
 	<fieldset>
 	<legend><:form_pet_message_commentaire:></legend><ul>
-	[<li>(#INCLURE{fond=formulaires/inc-forum_bloc_choix_mots}{table=#ENV*{table}}{ajouter_mot})</li>]
+	[<li>(#INCLURE{fond=formulaires/inc-forum_bloc_choix_mots_spipbb}{table=#ENV*{table}}{ajouter_mot})</li>]
 
 [(#CONFIG{forums_titre}|=={oui}|?{
 	<li class='saisie_titre[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]'><label for="titre"><:forum_titre:></label>

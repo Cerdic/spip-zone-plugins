@@ -4,7 +4,7 @@
 [(#REM) On recupere le mot cle ferme]
 #SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
 
-		<INCLURE(session.php){fond=inc_teteforum}{id_article}>
+		<INCLURE{fond=inc_teteforum}{id_article}>
 
 		<p class="space_10"></p>
 
@@ -84,7 +84,8 @@
 				</td>
 				<td class="nbr_post">
 					<?php $tot_visites=0; ?>
-					<BOUCLE_vues_a(VISITES_FORUMS){id_forum}><?php $tot_visites+=#VISITES; ?></BOUCLE_vues_a>
+					<BOUCLE_vues_a(VISITES_FORUMS){id_forum}><?php $tot_visites+=#VISITES;
+					?></BOUCLE_vues_a>
 					<?php echo $tot_visites; ?>
 				</td>
 				<td class="dernier_msg">
@@ -139,7 +140,8 @@
 				</td>
 				<td class="nbr_post">
 					<?php $tot_visites=0; ?>
-					<BOUCLE_vues_p(VISITES_FORUMS){id_forum}><?php $tot_visites+=#VISITES;?></BOUCLE_vues_p>
+					<BOUCLE_vues_p(VISITES_FORUMS){id_forum}><?php $tot_visites+=#VISITES;
+					?></BOUCLE_vues_p>
 					<?php echo $tot_visites; ?>
 				</td>
 				<td class="dernier_msg">
@@ -214,7 +216,8 @@
 				</td>
 				<td class="nbr_post">
 					<?php $tot_visites=0; ?>
-					<BOUCLE_vues(VISITES_FORUMS){id_forum}><?php $tot_visites+=#VISITES; ?></BOUCLE_vues></B_vues>
+					<BOUCLE_vues(VISITES_FORUMS){id_forum}><?php $tot_visites+=#VISITES;
+					?></BOUCLE_vues></B_vues>
 					<?php echo $tot_visites; ?>
 				</td>
 				<td class="dernier_msg">
@@ -269,7 +272,7 @@
 		[(#REM) ligne chemin ]
 		[(#MODELE{chemin_hierarchie}{id_article}{encours=#ENV{id_article}})]
 
-		<INCLURE(session.php){fond=inc_piedforum}{id_article}>
+		<INCLURE{fond=inc_piedforum}{id_article}>
 
 		[(#REM) si visiteur non identifie : form login ]
 		[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]

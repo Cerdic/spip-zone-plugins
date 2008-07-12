@@ -23,11 +23,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 if (!defined("_INC_SPIPBB_COMMON")) include_spip('inc/spipbb_common');
 spipbb_log("included",3,__FILE__);
 
-global $spip_version_code;
-if (version_compare($spip_version_code,_SPIPBB_REV_STYLISER,'<')){
-	include_spip('public/styliser192'); // SPIP 1.9.2
-} else { // SPIP 1.9.3
-
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
 //----------------------------------------------------------------------------
@@ -132,7 +127,5 @@ function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html'
 
 	return array($squelette, $ext, $ext, "$squelette.$ext");
 } // public_styliser
-
-} // fin de la condition de version de SPIP
 
 ?>

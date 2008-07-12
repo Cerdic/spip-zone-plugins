@@ -3,7 +3,7 @@
 #SET{id_mot_annonce,#CONFIG{spipbb/id_mot_annonce}}
 #SET{id_mot_postit,#CONFIG{spipbb/id_mot_postit}}
 
-	<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}>
+	<INCLURE{fond=inc_teteforum}{id_rubrique}>
 
 	[(#REM)éliminer les forums des rubriques et articles appartenant aux autres secteurs]
 	<BOUCLE_contexte(RUBRIQUES){id_rubrique}>
@@ -22,12 +22,12 @@
 
 
 	<p class="space_20"></p>
-	
+
 	<table class="spipforum" id="derniers_msg">
-		<tr> 
+		<tr>
 			<th colspan="4"><:spipbb:messages_derniers:></th>
 		</tr>
-		
+
 		<BOUCLE_forums_liens(FORUMS){plat}{!par date}{age<15}{doublons}{pagination 20}>
 			#SET{clos,0}
 			<BOUCLE_fo(FORUMS){id_thread}>
@@ -39,7 +39,7 @@
 					[(#REM) pas utilise par spipbb mais propose ]
 					#SET{titre_forum,#TITRE|texte_script}
 				</BOUCLE_ArticleForum>
-				
+
 				<BOUCLE_sujet_type(FORUMS){id_thread}{plat}>
 					<BOUCLE_ferme(FORUMS){id_forum}{id_mot=#GET{id_mot_ferme}}>
 						#SET{clos,1}
@@ -53,10 +53,10 @@
 				</BOUCLE_sujet_type>
 
 			 </B_sujet_type>
-				
+
 			</BOUCLE_fo>
 
-						
+
 		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
 			[(#REM) type icone de ligne ]
 			[(#GET{clos}|=={0}|?{<td class='etatsujet post'><span>&nbsp;,
@@ -70,7 +70,7 @@
 			<td>
 				[(#DATE|nom_jour)] [(#DATE|affdate),] [(#DATE|heures)]:[(#DATE|minutes)]
 			</td>
-			<td class="auteur_post">	
+			<td class="auteur_post">
 				<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
 					[(#NOM|sinon{<:spipbb:anonyme:>})]
 				</BOUCLE_auteurp>
@@ -81,7 +81,7 @@
 				</a>
 			</td>
 		</tr>
-			
+
 		</BOUCLE_forums_liens>
 		<tr class="pagination">
 			<td colspan="4">
@@ -92,7 +92,7 @@
 		</B_forums_liens>
 	</table>
 
-	<INCLURE(session.php){fond=inc_piedforum}{id_rubrique}>
+	<INCLURE{fond=inc_piedforum}{id_rubrique}>
 
 
 <!-- fin code derniers_messages.html -->

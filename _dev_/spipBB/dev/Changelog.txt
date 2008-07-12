@@ -1,4 +1,13 @@
-﻿2008-07-10  chryjs  <chryjs!@!free!.!fr>
+﻿2008-07-12  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.5.0.3 On doit pouvoir afficher les forums d'un secteur sans nécessairement avoir des sous-rubriques (des groupes de forums)
+ * Suppression de l'appel au fichier session.php inutile dans cette version
+ * Suppression de l'appel à la librairie de compatibilité inutile dans cette version spipbb_192 styliser_192
+ * Maintenant qu'on peut ajouter des documents dans les forums autant les afficher !
+ * On filtre l'affichage des mots clés de SpipBB : oui si on est authentifié (prochainement controle sur les droits) dans secteur spipbb, non si on est ailleurs ou pas modo
+
+
+2008-07-10  chryjs  <chryjs!@!free!.!fr>
 
  * 0.5.0.2 Pour que le js des emoticons fonctionne (en l'état) il faut que le formulaire (ajax ou pas) soit nomme "formulaire"...
 

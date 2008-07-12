@@ -5,7 +5,7 @@
 
 <BOUCLE_recap(FORUMS){id_forum}{doublons}>
 
-	<INCLURE(session.php){fond=inc_teteforum}{id_article}>
+	<INCLURE{fond=inc_teteforum}{id_article}>
 
 	#SET{secteur,#CONFIG{spipbb/id_secteur}}
 
@@ -178,7 +178,7 @@
 
 	<?php } ?>
 
-	<INCLURE(session.php){fond=inc_piedforum}{id_article}>
+	<INCLURE{fond=inc_piedforum}{id_article}>
 
 </BOUCLE_recap>
 </B_recap>
