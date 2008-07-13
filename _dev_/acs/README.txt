@@ -1,11 +1,13 @@
 
              Assistant de Configuration du Site
 
-http:// acs.geomaticien.org
+Version : 0.4
+
+Documentation : http:// acs.geomaticien.org
 
 ________________________________________________________________________________
 Licence: GPL
-Dernière mise à jour de ce document le: 10-05-2008
+Dernière mise à jour de ce document le: 13-07-2008
 Par: Daniel FAIVRE
 ________________________________________________________________________________
 
@@ -143,7 +145,3 @@ Evolutions prévues:
 - Distribuer ACS avec d'autres modèles
 
 - Compléter le modèle "Cat" avec des composants alternatifs équifonctionnels pour un "Rubnav" (navigation par rubriques) avec menus déroulants css ou js, un composant cartographique polymorphe et non limité à des technologies propriétaire, une gestion unifiée des "albums" photos et vidéos intégrée, une évolution progressive vers une conception "WYSIWYG" des pages du site (terminer l'intégration des boucles aux composants, puis les mettre dans une "boite à outils" adaptée, à développer)...
-
-- Compléter l'API publique des composants pour faciliter l'intégration de multiples composants indépendants "Ajaxifiés en mode non intrusif" sur la partie publique.
-
-

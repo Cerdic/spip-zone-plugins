@@ -19,6 +19,7 @@ if(in_array('notation', $GLOBALS['plugins'])) $GLOBALS['ACS_ACCES'][] = 'notatio
 if(in_array('w3c_go_home', $GLOBALS['plugins'])) $GLOBALS['ACS_ACCES'][] = 'w3c_go_home';
 if(in_array('openPublishing', $GLOBALS['plugins'])) $GLOBALS['ACS_ACCES'][] = 'op';
 
+
 /*__________________________________________________________________
 
   Ne PAS modifier ce qui suit - Do NOT modify antything after this
