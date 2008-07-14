@@ -1,17 +1,17 @@
 #CACHE{0}
 
-.rubriques, .derniersCommentaires, .divers, .breves {
+.rubriques, .divers, .breves {
   [border-width: (#CONFIG{acsRubnavBordLargeur,#CONFIG{acsFondBordLargeur}});]
   [border-style: (#CONFIG{acsRubnavBordStyle,#CONFIG{acsFondBordStyle}});]
   [border-color: #(#CONFIG{acsRubnavBordColor,#CONFIG{acsFondBordColor}});]
   [background: #(#CONFIG{acsRubnavFondColor});]
 }
 
-.rubriques .menu-titre, .derniersCommentaires  .menu-titre, .divers .menu-titre, .breves .menu-titre {
+.rubriques .menu-titre, .divers .menu-titre, .breves .menu-titre {
   [background: #(#CONFIG{acsRubnavTitreFondColor})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsRubnavTitreFondImage})) repeat top left];]
 }
 
-.rubriques .menu-item, .derniersCommentaires .menu-item, .divers .menu-item, .breves .menu-item {
+.rubriques .menu-item, .divers .menu-item, .breves .menu-item {
   [background: #(#CONFIG{acsRubnavFondColor});]
   border-top: 1px solid #[(#CONFIG{acsRubnavSepColor,#CONFIG{acsFondBordColor,dfefef}})];
 }

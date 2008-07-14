@@ -17,7 +17,10 @@ $GLOBALS['ACS_ACCES'] = array('mots_type');
 // Contrôle d'accès ACS aux pages d'administration de certains plugins, s'ils sont installés
 if(in_array('notation', $GLOBALS['plugins'])) $GLOBALS['ACS_ACCES'][] = 'notation_param';
 if(in_array('w3c_go_home', $GLOBALS['plugins'])) $GLOBALS['ACS_ACCES'][] = 'w3c_go_home';
-if(in_array('openPublishing', $GLOBALS['plugins'])) $GLOBALS['ACS_ACCES'][] = 'op';
+if(in_array('openPublishing', $GLOBALS['plugins'])) {
+  $GLOBALS['ACS_ACCES'][] = 'op';
+  $GLOBALS['ACS_ACCES'][] = 'op_effacer';
+}
 
 
 /*__________________________________________________________________
