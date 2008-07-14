@@ -21,6 +21,10 @@ class cfg_formulaire{
 	var $depot = null;
 // le fond html utilise , en general pour config simple idem $nom
 	var $vue = '';
+// l'adresse du fond html (sans l'extension .html)
+	var $path_vue = '';
+// provient-on d'un formulaire de type CVT (charger/verifier/traiter) dans formulaires/ ?
+	var $depuis_cvt = false;
 // compte-rendu des mises a jour
 	var $messages = array('message_ok'=>array(), 'message_erreur'=>array(), 'erreurs'=>array());
 // les champs trouve dans le fond
@@ -99,15 +103,20 @@ class cfg_formulaire{
 		
 		// si pas de fichier, rien a charger
 		if (!$this->vue) return false;
-		
+
 		// lecture de la vue (fond cfg)
 		// il s'agit de recuperer le contenu du fichier
-		$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html');
+ 		if (!$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html')){
+			if ($fichier = find_in_path($nom = 'formulaires/' . $this->vue .'.html'))
+				$this->depuis_cvt = true;
+		}
 		if (!lire_fichier($fichier, $this->controldata)) {
 			$ok = false;
 			$this->messages['message_erreur'][] =  _T('cfg:erreur_lecture', array('nom' => $nom));
-		}
-		
+		} else {
+			$this->path_vue = substr($fichier,0,-5);
+		}		
+
 		// recherche et stockage des parametres de cfg 
 		$this->recuperer_parametres();
 
@@ -150,9 +159,12 @@ class cfg_formulaire{
 		// si on a pas poste de formulaire, pas la peine de controler
 		// ce qui mettrait de fausses valeurs dans l'environnement
 		if  (!_request('_cfg_ok') && !_request('_cfg_delete')) return true;
-		
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$securiser_action();
+
+		// les formulaires CVT ont deja leurs securites
+		if (!$this->depuis_cvt) {
+			$securiser_action = charger_fonction('securiser_action', 'inc');
+			$securiser_action();
+		}
 
 		// actions par champs speciaux, avant les tests des nouvelles valeurs
 		$this->actionner_extensions('pre_verifier');
@@ -211,8 +223,11 @@ class cfg_formulaire{
 	
 		if (!_request('_cfg_ok') && !_request('_cfg_delete')) return false;
 		
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$securiser_action();
+		// les formulaires CVT ont deja leurs securites
+		if (!$this->depuis_cvt) {
+			$securiser_action = charger_fonction('securiser_action', 'inc');
+			$securiser_action();
+		}
 		
 		// traiter les champs speciaux
 		$this->actionner_extensions('pre_traiter');	
@@ -311,7 +326,7 @@ class cfg_formulaire{
 	// ce qui evite de dupliquer les tableaux 
 	// (si on utilisait recuperer_parametres() a la place)
 	function effacer_parametres(){
-			$this->fond_compile = effacer_parametres_cfg($this->fond_compile);		
+		$this->fond_compile = preg_replace('/(<!-- ([a-z0-9_]\w+)(\*)?=)(.*?)-->/sim', '', $this->fond_compile);		
 	}
 	
 	
@@ -410,9 +425,10 @@ class cfg_formulaire{
 			
 			// rendre editable systematiquement
 			// sinon, ceux qui utilisent les fonds CFG avec l'API des formulaires dynamiques
-			// et mettent des [(#ENV**{editable}|?{' '}) ... ] ne verraient pas leurs variables
+			// et mettent des [(#ENV**{editable}|oui) ... ] ne verraient pas leurs variables
 			// dans l'environnement vu que CFG ne pourrait pas lire les champs du formulaire
-			#if (!isset($contexte['editable'])) $contexte['editable'] = true; // plante 1.9.2 !!
+			if ($this->depuis_cvt)
+				if (!isset($contexte['editable'])) $contexte['editable'] = true; // plante 1.9.2 !!
 			
 			// passer cfg_id...
 			if (!isset($contexte['cfg_id']) && $this->param['cfg_id']) {
@@ -434,7 +450,7 @@ class cfg_formulaire{
 			}
 			
 			$val = $this->val ? array_merge($contexte, $this->val) : $contexte;
-			$this->fond_compile = recuperer_fond('fonds/cfg_' . $this->vue, $val);
+			$this->fond_compile = recuperer_fond($this->path_vue, $val);
 		}
 		return $this->fond_compile;
 	}
@@ -449,7 +465,17 @@ class cfg_formulaire{
 	{
 		static $autoriser=-1;
 		if ($autoriser !== -1) return $autoriser;
-		
+
+		// on peut passer 'oui' ou 'non' directement au parametre autoriser
+		if ($this->param['autoriser'] == 'oui')
+			return $autoriser = 1;
+		if ($this->param['autoriser'] == 'non') {
+			$this->messages['message_refus'] = $this->param['refus'];
+			return $autoriser = 0;
+		}
+		// sinon, test de l'autorisation
+		// <!-- autoriser=webmestre -->
+		// <!-- autoriser=configurer -->
 		include_spip('inc/autoriser');
 		if (!$autoriser = autoriser($this->param['autoriser'])){
 			$this->messages['message_refus'] = $this->param['refus'];
@@ -525,10 +551,11 @@ class cfg_formulaire{
 	//
 	function formulaire($contexte = array())
 	{
-		if (!find_in_path('fonds/cfg_' . $this->vue . '.html'))
+		if (!$this->path_vue)
 			return '';
 
-		$contexte['_cfg_'] = $this->creer_hash_cfg();
+		if (!$this->depuis_cvt)
+			$contexte['_cfg_'] = $this->creer_hash_cfg();
 
 		// recuperer le fond avec le contexte
 		// forcer le calcul.

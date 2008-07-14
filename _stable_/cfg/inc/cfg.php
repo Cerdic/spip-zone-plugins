@@ -14,21 +14,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Renvoie la liste des configurations disponibles dans le path
 // ou dans le dossier donne en argument
 function liste_cfg($dir='') {
-	// Faire la liste des éléments qui ont un cfg ; ca peut etre des plugins
+	// Faire la liste des elements qui ont un cfg ; ca peut etre des plugins
 	// mais aussi des squelettes ou n'importe quoi
 	$liste = array();
 	// tous les repertoires
 	if (!$dir){
 		foreach (creer_chemin() as $dir) {
-			if (basename($dir) != 'cfg')
-				$liste = array_merge($liste, preg_files($dir.'fonds/', '/cfg_.*html$'));
+			$liste = array_merge($liste, preg_files($dir.'fonds/', 'cfg_[^/]*[.]html$'));
 		}
 	// ou seulement celui demande
 	} else {	
 		$dir = rtrim(rtrim($dir),'/').'/';
-		$liste = preg_files($dir.'fonds/', '/cfg_.*html$');
+		$liste = preg_files($dir.'fonds/', 'cfg_[^/]*[.]html$');
 	}
-
 	if ($liste) {
 		$l = array();
 		foreach($liste as $cfg) {
@@ -44,18 +42,15 @@ function liste_cfg($dir='') {
 // donne
 function icone_lien_cfg($dir) {
 	$ret = '';
-// si ce n'est pas l'adresse du plugin cfg : 
-	if (basename($dir) != basename(str_replace('/inc','',dirname(__FILE__)))) {
-		if ($onglets = lister_onglets_cfg($dir)){
-			foreach ($onglets as $fonds=>$ong){
-				if ($ong['afficher'])
-					$ret .= '<a href="'.$ong['url'].'">'
-						.'<img src="'._DIR_PLUGIN_CFG.'cfg-16.png"
-							width="16" height="16"
-							alt="'._T('icone_configuration_site').' '.$fonds.'"
-							title="'._T('icone_configuration_site').' '.$fonds.'"
-						/></a>';					
-			}
+	if ($onglets = lister_onglets_cfg($dir)){
+		foreach ($onglets as $fonds=>$ong){
+			if ($ong['afficher'])
+				$ret .= '<a href="'.$ong['url'].'">'
+					.'<img src="'._DIR_PLUGIN_CFG.'cfg-16.png"
+						width="16" height="16"
+						alt="'._T('icone_configuration_site').' '.$fonds.'"
+						title="'._T('icone_configuration_site').' '.$fonds.'"
+					/></a>';					
 		}
 	}
 

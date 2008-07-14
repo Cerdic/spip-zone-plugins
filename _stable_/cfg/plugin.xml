@@ -9,7 +9,7 @@
 _ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[de]Vertrieb unter Lizenz</multi> GNU/LGPL
     </auteur>
     <version>
-    1.8.2
+    1.9.0
     </version>
     <etat>
     stable
@@ -41,17 +41,27 @@ Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie d
 
     <pipeline>
         <nom>ajouter_boutons</nom>
-        <action>ajouter_boutons</action>
-        <inclure>cfg_pipeline.php</inclure>
-    </pipeline>
-    <pipeline>
-        <nom>insert_head</nom>
-        <action>insert_head</action>
         <inclure>cfg_pipeline.php</inclure>
     </pipeline>
     <pipeline>
         <nom>header_prive</nom>
-        <action>header_prive</action>
         <inclure>cfg_pipeline.php</inclure>
     </pipeline>
+
+     <pipeline>
+        <nom>formulaire_charger</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
+     <pipeline>
+        <nom>formulaire_verifier</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>formulaire_traiter</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>editer_contenu_formulaire_cfg</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>    
 </plugin>

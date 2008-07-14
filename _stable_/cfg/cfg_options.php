@@ -37,16 +37,8 @@ $GLOBALS['cfg_libs'] = array(
 	)
 );
 
-
-// fonction pour effacer les parametres cfg lors le l'inclusion d'un fond
-// utile pour les #FORMULAIRE comme formulaires/cfg.html
-// [(#INCLURE{fond=fonds/cfg_toto}{env}|effacer_parametres_cfg)]
-function effacer_parametres_cfg($texte){
-	return preg_replace('/(<!-- ([a-z0-9_]\w+)(\*)?=)(.*?)-->/sim', '', $texte);		
-}
-
 // signaler le pipeline de notification
 $GLOBALS['spip_pipeline']['cfg_post_edition'] = "";
-
+$GLOBALS['spip_pipeline']['editer_contenu_formulaire_cfg'] = "";
 
 ?>

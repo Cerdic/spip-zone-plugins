@@ -1,9 +1,29 @@
 Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 
+
+v1.9.0 (14 07 2008)
+- Lorsqu'un formulaire SPIP 2 / CVT n'a pas de fonction charger(), ce sont les
+fonctions Charger, Verifier et Traiter de CFG qui sont utilisees pour ce formulaire.
+Cela permet des #FORMULAIRE_XX ou XX est un formulaire CFG/CVT formulaires/xx.html.
+Il peut ainsi y avoir des formulaires CFG public/prive, ajax ou non (et qui fonctionnent !).
+Differences entre un fonds/cfg_xx.html et formulaires/xx.html :
+	* les fonds/ s'affichent dans ?exec=cfg, pas les formulaires/
+	* les fonds/ ont [(#ENV{_cfg_}|form_hidden)], pas les formulaires/
+	* en revanche, les formulaires ont #ACTION_FORMULAIRE{#SELF}, pas les fonds/
+- Correction du preg_files() sur les fonds/ pour ne prendre reellement
+que des fichiers commencant par 'cfg_' (et non aussi le contenu d'un dossier
+commencant par cfg_)
+- Deplacements des exemples de fonds cfg dans le plugin cfg_exemples
+- la syntaxe #FORMULAIRE_CFG{xx} disparait au profit de #FORMULAIRE_XX
+- si le parametre <!-- autoriser=oui --> alors, on autorise.
+S'il est egal a non, alors on n'autorise pas. Permet d'ecrire :
+<!-- autoriser=[(#AUTORISER{modifier,auteur,#ID_AUTEUR}|?{oui,non})]-->
+les syntaxes <!-- autoriser=webmestre --> continuent de fonctionner.
+
 v1.8.2 (07 07 2008)
 - Corection d'un bug sur le depot tablepack avec effacer_config().
-- tests unitaires pour le dépot tablepack
+- tests unitaires pour le depot tablepack
 
 v1.8.1 (06 07 2008)
 - Correction bug introduit en 1.8.0 d'erreur de lecture si aucune valeur
@@ -11,7 +31,7 @@ n'etait encore enregistrees dans une depot metapack ou php.
 
 v1.8.0 (04 07 2008)
 - Simplifier *_config() en se passant de la classe cfg_params()
-- les fonctions des balises sont chargées au calcul et non en permanence et sont déplacees dans cfg_fonctions.php
+- les fonctions des balises sont chargées au calcul et non en permanence et sont deplacees dans cfg_fonctions.php
 - suppression de cfg_charger_classe() : la surchage, c'est simplement le fichier, on se passe de _dist
 - déplacemeent de la classe cfg_depot dans inc/cfg_config
 - tests unitaires pour les fonctions lire_config, ecrire_config et effacer_config pour les dépots meta, metapack et php
