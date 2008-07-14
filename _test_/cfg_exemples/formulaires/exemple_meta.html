@@ -1,26 +1,18 @@
 
-<!-- titre=Exemple stockage dans fond 'cfg_exemple_meta' -->
-<!-- autoriser=voir -->
-<!-- onglet=non -->
-
+<!-- autoriser=oui -->
 
 #CACHE{0}
-<div class="ajax">
+
 [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 [<p class="formulaire_message">(#ENV*{message_ok})</p>]
 <form method="post" action="#SELF">
 #ACTION_FORMULAIRE{#SELF}
 
-<label>Description</label>
-<textarea name="description" rows="4" cols="40" style="width:100%;">[(#ENV{description})]</textarea>
+<label for="ex_description">Description</label>
+<textarea id="ex_description" name="description" rows="4" cols="40" style="width:100%;">[(#ENV{description})]</textarea>
 
 <input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
-<input type="reset" value="<:cfg:Reset:>" />
-<input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" />
 </form>
 
-
 <em>#ENV{message_erreur}</em>
-R&eacute;sultat dans le fond :<br />
-#CFG_ARBO{exemple_meta}
-</div>
+
