@@ -73,6 +73,8 @@ margin:5px 0px;
 border:1px solid white;
 background-color:white;
 position:relative;
+cursor:hand;
+cursor:pointer;
 }
 #loading{
 margin:0px;
