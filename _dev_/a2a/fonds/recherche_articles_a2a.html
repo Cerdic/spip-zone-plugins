@@ -1,4 +1,5 @@
 [(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
+#CACHE{0}
 #SET{exclure,#ARRAY{}}
 <BOUCLE_doublons(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}>
 #SET{exclure,#GET{exclure}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE_LIE}}}

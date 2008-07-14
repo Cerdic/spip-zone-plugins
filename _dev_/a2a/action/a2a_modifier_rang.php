@@ -22,9 +22,6 @@ function action_a2a_modifier_rang(){
 			//on met à jour le rang de l'article à modifier
 			sql_update('spip_articles_lies', array('rang' => --$rang), 'id_article=' . sql_quote($id_article) . 'AND id_article_lie=' . sql_quote($id_article_cible));
 	}
-
-	include_spip('inc/header');
-	redirige_par_entete(generer_url_ecrire("articles", "id_article=".$id_article, "&"));
 }
 
 ?>
