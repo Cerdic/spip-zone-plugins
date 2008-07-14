@@ -1,0 +1,17 @@
+#CACHE{7200}
+[(#REM) Liens des forums ]
+<B_forums_liens>
+<div class="blocForums">
+  <div class="menu-titre">
+    #ANCRE_PAGINATION
+    <img id="img_ajax_blocForums" src="#CHEMIN{images/searching.gif}" style="visibility: hidden;" align="#LANG_RIGHT" />
+    <h2 class="menu-titre" title="<:derniers_messages_forum:>"><:derniers_commentaires:></h2>
+  </div>
+    [<p class="pagination">(#PAGINATION)</p>]
+  <ul>
+  <BOUCLE_forums_liens(FORUMS) {plat} {par date}{inverse} {pagination 20}>
+    <li class="menu-item">[<small>(#DATE|affdate_court)</small> ]<a href="?article#ID_ARTICLE&ouvrir=oui#forum#ID_FORUM" [title="(#TEXTE|supprimer_tags|attribut_html|couper{500})"]>#TITRE</a></li>
+  </BOUCLE_forums_liens>
+  </ul>
+</div>
+</B_forums_liens>
