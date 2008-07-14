@@ -1,9 +1,7 @@
 
-<!-- titre=Test extra sur articles -->
 <!-- storage=tablepack -->
 <!-- table=spip_articles -->
-<!-- autoriser=modifier_article_#ENV{id} -->
-<!-- onglet=non -->
+<!-- autoriser=[(#AUTORISER{modifier,article,#ENV{id}}|{oui,non})] -->
 
 #CACHE{0}
 
@@ -26,15 +24,22 @@
 
 [(#VAL{0}|debut_block_depliable{cfg_exemples_articles})]
 
-	<div class="formulaire_spip formulaire_cfg" id="formulaire_cfg_#ENV{cfg_hash}">
-		<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
-		#ACTION_FORMULAIRE{#SELF,cfg}
-		<input type="hidden" name="id" class="cfg_id" value="#ENV{id}" />
+	<div class="formulaire_spip formulaire_cfg">
+		[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+		[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+		<form method="post" action="#SELF">
+		#ACTION_FORMULAIRE{#SELF}
+		<!-- input type="hidden" name="id_article" class="cfg_id" value="[(#ENV{id})]" / -->
+		<ul>
+		<li>
+			<label for='frm_documentation'>URL de documentation</label>
+			<input type="text" name="url_documentation" id="frm_documentation" value="[(#ENV{url_documentation})]" class='text' />
+		</li>
+		</ul>
 
-		<label for='frm_documentation'>URL de documentation</label>
-		<input type="text" name="url_documentation" id="frm_documentation" value="[(#ENV{url_documentation})]" class="fondl" />
-
-		<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="fondl" />
+		<p class='boutons'>
+			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="fondl" />
+		</p>
 		</form>
 	</div>
 
