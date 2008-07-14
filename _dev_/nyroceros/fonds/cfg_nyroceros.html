@@ -1,0 +1,25 @@
+<!-- titre=<:nyroceros:cfg_titre_nyroceros:> -->
+<!-- descriptif=<:nyroceros:cfg_descr_nyroceros:> -->
+<!-- boite=<:nyroceros:cfg_boite_nyroceros:> -->
+<!-- autoriser=webmestre -->
+<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres. -->
+
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>
+	[(#ENV{_cfg_}|form_hidden)]
+	
+	<fieldset>
+		<legend><:nyroceros:cfg_lgd_selecteur:></legend>
+		<p><:nyroceros:cfg_inf_selecteur:></p>
+		<label for="_nyro_selecteur_galerie">Expression CSS ou etendue jQuery</label>
+		<input type="text" name="selecteur_galerie" class="type_txt" id="_nyro_selecteur_galerie" size="60"
+			value="#ENV{selecteur_galerie, #documents_portfolio .nyroceros}" />
+	</fieldset>
+	
+	<div>
+	<input type="submit" name="_cfg_ok" class="fondo" value="<:valider:>" />
+	<input type="submit" name="_cfg_delete" class="fondo" value="<:effacer:>" />
+	</div>
+</div></form>
+
