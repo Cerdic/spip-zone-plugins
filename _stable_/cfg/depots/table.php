@@ -35,6 +35,10 @@ class cfg_depot_table
 		foreach ($params as $o=>$v) {
 			$this->$o = $v;
 		}
+	}
+	
+	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
+	function charger($creer = false){
 		
 		if (!$this->param['table']) {
 			$this->messages['message_erreur'][] = _T('cfg:nom_table_manquant');
@@ -51,10 +55,7 @@ class cfg_depot_table
 				$this->_id[$c] = $id[$n];
 			}
 		}
-	}
-	
-	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
-	function charger($creer = false){
+		
 		if (!$this->param['cfg_id'] AND !($this->param['autoriser_absence_id'] == 'oui')) {
 			$this->messages['message_erreur'][] = _T('cfg:id_manquant');
 			return false;

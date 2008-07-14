@@ -1,6 +1,10 @@
 Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 
+v1.9.2 (14 07 2008)
+- Corrections depots tablepack et table qui testaient leurs parametres un peu trop tot,
+ce qui effacait parfois les valeurs par defaut, apres coup.
+
 v1.9.1 (14 07 2008)
 - Correction depot tablepack qui oubliait de prendre en compte le nom du formulaire dans
 l'enregistrement depuis v1.8.2.

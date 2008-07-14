@@ -62,7 +62,7 @@ function cfg_formulaire_charger($flux){
 	// s'il n'y a pas de fonction charger, on utilise le parseur de CFG
 	$form = $flux['args']['form'];
 	if (cfg_from_cvt($form)){
-		
+
 		// ici, on a le nom du fond cfg... 
 		// on recupere donc les parametres du formulaire.	
 		include_spip('inc/cfg_formulaire');
@@ -73,7 +73,7 @@ function cfg_formulaire_charger($flux){
 		$valeurs = array(
 			'_cfg_fond' => 'formulaires/'.$form,
 			'_cfg_nom' => $form,
-			#'id' => $cfg_id,
+			'id' => $cfg_id,
 			// passer aussi les arguments spécifiques a cfg
 			'_cfg_' => $config->creer_hash_cfg() // passer action=cfg pour avoir un hash formulaire correct
 		);

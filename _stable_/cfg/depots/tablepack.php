@@ -58,30 +58,32 @@ class cfg_depot_tablepack
 		foreach ($params as $o=>$v) {
 			$this->$o = $v;
 		}	
-
-		if (!$this->param['colonne'])	$this->param['colonne'] = 'cfg'; 
-		if (!$this->param['table']) 	$this->param['table'] = 'spip_auteurs';
-		// colid : nom de la colonne primary key
-		list($this->param['table'], $colid) = $this->get_table_id($this->param['table']);
-		
-		// renseigner les liens id=valeur
-		$id = explode('/',$this->param['cfg_id']);
-		foreach ($colid as $n=>$c) {
-			if (isset($id[$n])) {
-				$this->_id[$c] = $id[$n];
-			}
-		}
 	}
 	
 	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
-	function charger(){
+	function charger($lire = false){
+		if (!$this->param['colonne'])	$this->param['colonne'] = 'cfg';
+
+		// colid : nom de la colonne primary key
+		if ($this->param['table']) {
+			list($this->param['table'], $colid) = $this->get_table_id($this->param['table']);
+
+			// renseigner les liens id=valeur
+			$id = explode('/',$this->param['cfg_id']);
+			foreach ($colid as $n=>$c) {
+				if (isset($id[$n])) {
+					$this->_id[$c] = $id[$n];
+				}
+			}
+		}
+		
 		if (!$this->param['cfg_id']) {
 			$this->messages['message_erreur'][] = _T('cfg:id_manquant');
 			return false;
 		}
 		
 		// verifier que la colonne existe
-		if (!$this->verifier_colonne()) {
+		if (!$this->verifier_colonne()) {echo "<br />hein? ";print_r($this); 
 			return false;
 		} else {
 			// recuperer la valeur du champ de la table sql
@@ -103,8 +105,8 @@ class cfg_depot_tablepack
 	function lire()
 	{
 		// charger
-		if (!$this->charger()){
-			return array(false, $this->val, $this->messages);	
+		if (!$this->charger(true)){
+			return array(true, null);	
 		}
 		$ici = &$this->_ici;
 
@@ -144,7 +146,7 @@ class cfg_depot_tablepack
 			}
 		} else {
 			$ici = $this->val;	
-		}	
+		}
 
 		$ok = sql_updateq($this->param['table'], array($this->param['colonne'] => serialize($this->_base)), $this->_where);	
 		return array($ok, $ici);
@@ -215,7 +217,7 @@ class cfg_depot_tablepack
 				$this->_id[$c] = $id[$n];
 			}
 		}
-		
+
 		return true;	
 	}
 	
@@ -249,6 +251,11 @@ class cfg_depot_tablepack
 			return false;
 		$col = sql_showtable($table = $this->param['table']);
 		if (!is_array($col['field']) OR !array_key_exists($colonne = $this->param['colonne'], $col['field'])) {
+			if ($creer
+			&& $colonne
+			&& sql_alter('TABLE '.$this->param['table'] . ' ADD ' . $colonne . 'TEXT NOT NULL DEFAULT \'\'')) {
+				return true;
+			}
 			return false;
 		}
 		return true;
