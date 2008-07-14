@@ -4,19 +4,17 @@
 <!-- table=spip_auteurs -->
 <!-- #colonne=cfg -->
 <!-- colonne=extra -->
-<!-- autoriser=voir -->
-<!-- onglet=non -->
+<!-- autoriser=oui -->
 
 #CACHE{0}
 
 <div class="cfg_exemples_perso">
-Si je suis loggu&eacute;, le formulaire s'affiche...
+Si je suis loggué, le formulaire s'affiche...
 [(#SESSION{id_auteur}|?{' '})
 
 
-<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
-#ACTION_FORMULAIRE{#SELF,cfg}
-<input type="hidden" name="id" class="cfg_id" value="#ENV{id}" />
+<form method="post" action="#SELF">
+#ACTION_FORMULAIRE{#SELF}
 
 <fieldset><legend>Test par auteur...</legend>
 <label for='frm_afficher_toto'>Afficher toto ?</label>
@@ -28,14 +26,13 @@ Si je suis loggu&eacute;, le formulaire s'affiche...
 </fieldset>
 
 <input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
-<input type="reset" value="<:cfg:Reset:>" />
 <input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" />
 </form>
 ]
 
 
 Si afficher_toto = oui, TOTO s'affiche :
-[(#CONFIG{~[(#SESSION{id_auteur})]@extra/testform_auteur/afficher_toto}|=={oui}|?{' ',''})
+[(#CONFIG{~[(#SESSION{id_auteur})]@extra/exemple_extra_auteur2/afficher_toto}|=={oui}|?{' ',''})
 	<b>TOTO est là !</b>
 ]		
 </div>

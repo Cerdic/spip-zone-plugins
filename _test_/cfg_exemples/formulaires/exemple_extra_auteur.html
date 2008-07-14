@@ -1,0 +1,18 @@
+
+<!-- depot=tablepack -->
+<!-- colonne=extra -->
+<!-- table=spip_auteurs -->
+
+#CACHE{0}
+<form method="post" action="#SELF">
+#ACTION_FORMULAIRE{#SELF}
+
+<fieldset><legend><:cfg:champs_auteur_extra:></legend>
+<label>Champ 1</label>
+<input type="text" name="chp1" value="#ENV{chp1}" size="10" />
+<label>Champ 2</label>
+<input type="text" name="chp2" value="#ENV{chp2}" size="10" />
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
+</form>

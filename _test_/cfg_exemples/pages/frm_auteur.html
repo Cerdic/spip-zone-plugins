@@ -1,16 +1,39 @@
 <h1>Formulaire pour champs extra</h1>
 
-<h2>Colonne 'extra' sur la table 'auteur' : <a href="#EVAL{_DIR_PLUGIN_CFG_EXEMPLES}fonds/cfg_testform_auteur.html">fonds/cfg_testform_auteur.html</a></h2>
+<h2>Colonne 'extra' sur la table 'auteur' :
+<a href="#EVAL{_DIR_PLUGIN_CFG_EXEMPLES}formulaires/exemple_extra_auteur.html">
+formulaires/exemple_extra_auteur.html</a></h2>
 
 <p>
 <b>Code :</b><br />
 <code>[(&#035;CFG_ARBO{~[(&#035;SESSION{id_auteur})@extra]})]</code><br />
-<code>&#035;FORMULAIRE_CFG{testform_auteur,&#035;SESSION{id_auteur},formulaires/cfg_exemple_auteur}</code>
+<code>&#035;FORMULAIRE_EXEMPLE_EXTRA_AUTEUR{&#035;SESSION{id_auteur}}</code>
 </p>
 
 [(#CFG_ARBO{~[(#SESSION{id_auteur})@extra]})]
 
+#FORMULAIRE_EXEMPLE_EXTRA_AUTEUR{#SESSION{id_auteur}}
+
 #FORMULAIRE_CFG{testform_auteur,#SESSION{id_auteur}}
 		
-<b>Code de fonds/cfg_testform_auteur.html</b>
-#CODE{fonds/cfg_testform_auteur.html}
+<b>Code de formulaires/exemple_extra_auteur.html</b>
+#CODE{formulaires/exemple_extra_auteur.html}
+
+
+<h2>Colonne 'extra' sur la table 'auteur' :
+<a href="#EVAL{_DIR_PLUGIN_CFG_EXEMPLES}formulaires/exemple_extra_auteur2.html">
+formulaires/exemple_extra_auteur2.html</a></h2>
+<p>
+<b>Code :</b><br />
+<code>[(&#035;CFG_ARBO{~[(&#035;SESSION{id_auteur})@extra]})]</code><br />
+<code>&lt;div class="ajax"&gt;&#035;FORMULAIRE_EXEMPLE_EXTRA_AUTEUR2{&#035;SESSION{id_auteur}}&lt;/div&gt;</code>
+</p>
+
+[(#CFG_ARBO{~[(#SESSION{id_auteur})@extra]})]
+
+<div class="ajax">
+#FORMULAIRE_EXEMPLE_EXTRA_AUTEUR2{#SESSION{id_auteur}}
+</div>
+		
+<b>Code de formulaires/exemple_extra_auteur2.html</b>
+#CODE{formulaires/exemple_extra_auteur2.html}
