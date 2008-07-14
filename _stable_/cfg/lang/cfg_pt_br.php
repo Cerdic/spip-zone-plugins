@@ -27,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_id' => 'O campo @champ@ precisa come&ccedil;ar por uma letra ou sublinhado',
 	'erreur_type_idnum' => 'O campo @champ@ precisa ser num&eacute;rico',
 	'erreur_type_pwd' => 'O campo @champ@ precisa ter mais de 5 caracteres',
-	'extraarticles' => 'Exemplo de campo extra em uma mat&eacute;ria',
 
 	// I
 	'id_manquant' => 'Faltando identificador',
@@ -55,17 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reset' => 'Apagar',
 
 	// S
-	'supprimer' => 'Excluir',
-
-	// T
-	'testauteur' => 'Exemplo de campo extra/cfg da tabela autor',
-	'testcasier' => 'Exemplo de arm&aacute;rio',
-	'testclassic' => 'Exemplo meta cl&aacute;ssico',
-	'testinclure' => 'Exemplo de inclus&atilde;o de template',
-	'testmulti' => 'Exemplo de entradas m&uacute;ltiplas',
-	'testphp' => 'Exemplo de armazenagem php',
-	'testsimple' => 'Exemplo simples',
-	'testtable' => 'Exemplo sobre campos de uma tabela sql'
+	'supprimer' => 'Excluir'
 );
 
 ?>

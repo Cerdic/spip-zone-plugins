@@ -27,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_id' => 'Das Feld @champ@ muss mit einem Buchstaben oder einem Unterstrich beginnen.',
 	'erreur_type_idnum' => 'Das Feld @champ@ muss numerisch sein.',
 	'erreur_type_pwd' => 'Das Feld @champ@ ben&ouml;tigt mindestens 5 Zeichen.',
-	'extraarticles' => 'Beispiel f&uuml;r ein extra-Feld in einem Artikel',
 
 	// I
 	'id_manquant' => 'Fehlende ID',
@@ -55,17 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reset' => 'Reset',
 
 	// S
-	'supprimer' => 'L&ouml;schen',
-
-	// T
-	'testauteur' => 'Beispiel f&uuml;r ein extra/cfg Feld der Autorentabelle',
-	'testcasier' => 'Beispiel f&uuml;r ein Fach',
-	'testclassic' => 'Beispiel f&uuml;r klassische Metadaten',
-	'testinclure' => 'Beispiel f&uuml;r ein eingebettetes Skelett',
-	'testmulti' => 'Beispiel f&uuml;r Mehrfacheingaben',
-	'testphp' => 'Beispiel f&uuml;r PHP Speicher',
-	'testsimple' => 'Einfaches Beispiel',
-	'testtable' => 'Beispiel f&uuml;r ein Feld einer SQL Tabelle'
+	'supprimer' => 'L&ouml;schen'
 );
 
 ?>

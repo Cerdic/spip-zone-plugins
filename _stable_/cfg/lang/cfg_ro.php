@@ -27,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_id' => 'C&acirc;mpul @champ@ trebuie s&#259; &icirc;nceap&#259; cu o liter&#259; sau underscore (_)',
 	'erreur_type_idnum' => 'C&acirc;mpul @champ@ trebuie s&#259; fie numeric',
 	'erreur_type_pwd' => 'C&acirc;mpul @champ@ trebuie s&#259; aib&#259; mai mult de 5 caractere',
-	'extraarticles' => 'Exemplu de c&acirc;mp extra &icirc;ntr-un articol',
 
 	// I
 	'id_manquant' => 'Identificator care lipse&#351;te',
@@ -55,17 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reset' => '&#350;terge&#355;i',
 
 	// S
-	'supprimer' => '&#350;terge&#355;i',
-
-	// T
-	'testauteur' => 'Exemplu de c&acirc;mp extra/cfg din tabela autori',
-	'testcasier' => 'Exemplu de cazier',
-	'testclassic' => 'Exemplu meta-clasic',
-	'testinclure' => 'Exemplu de includere de schelet',
-	'testmulti' => 'Exemplu de intr&#259;ri multiple',
-	'testphp' => 'Exemplu de stocare php',
-	'testsimple' => 'Exemplu simplu',
-	'testtable' => 'Exemplu pe c&acirc;mpuri dintr-o tabel&#259; sql'
+	'supprimer' => '&#350;terge&#355;i'
 );
 
 ?>

@@ -27,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_id' => '@champ@ alan&#305; bir harfle veya alt&ccedil;izgiyle ba&#351;lamal&#305;',
 	'erreur_type_idnum' => '@champ@ alan&#305; say&#305;sal olmal&#305;',
 	'erreur_type_pwd' => '@champ@ alan&#305; 5 karakterden uzun olmal&#305;',
-	'extraarticles' => 'Bir makalede ekstra alan&#305; &ouml;rne&#287;i',
 
 	// I
 	'id_manquant' => 'Tan&#305;mlay&#305;c&#305; eksik',
@@ -55,17 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reset' => 'Sil',
 
 	// S
-	'supprimer' => 'Kald&#305;r',
-
-	// T
-	'testauteur' => 'Yazar tablosundaki extra/cfg alan&#305; i&ccedil;in &ouml;rnek',
-	'testcasier' => 'Kutu &ouml;rne&#287;i',
-	'testclassic' => 'Klasik meta &ouml;rne&#287;i',
-	'testinclure' => '&#304;skelet ekleme &ouml;rne&#287;i',
-	'testmulti' => '&Ccedil;oklu giri&#351; &ouml;rne&#287;i',
-	'testphp' => 'Php stoklama (stockage) &ouml;rne&#287;i',
-	'testsimple' => 'Basit &ouml;rnek',
-	'testtable' => 'Bir sql tablo alanlar&#305; &ouml;rne&#287;i'
+	'supprimer' => 'Kald&#305;r'
 );
 
 ?>

@@ -27,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_id' => 'The field @champ@ must begin with a letter or an underscore',
 	'erreur_type_idnum' => 'The field @champ@ must be numeric',
 	'erreur_type_pwd' => 'The field @champ@ must comprise more than 5 characters',
-	'extraarticles' => 'Example of an extra field on an article',
 
 	// I
 	'id_manquant' => 'Missing identifier',
@@ -55,17 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reset' => 'Delete',
 
 	// S
-	'supprimer' => 'Delete',
-
-	// T
-	'testauteur' => 'Example of an extra/cfg field in the \'auteur\' table',
-	'testcasier' => 'Example of a locker',
-	'testclassic' => 'Example of a classic meta',
-	'testinclure' => 'Example of including a template',
-	'testmulti' => 'Example of multiple entries',
-	'testphp' => 'Example of PHP stockage',
-	'testsimple' => 'Simple example',
-	'testtable' => 'Example of fields of an SQL table'
+	'supprimer' => 'Delete'
 );
 
 ?>

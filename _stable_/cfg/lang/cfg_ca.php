@@ -27,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_id' => 'El camp @champ@ ha de comen&ccedil;ar per una lletra o un subratllat',
 	'erreur_type_idnum' => 'El camp @champ@ ha de ser num&egrave;ric',
 	'erreur_type_pwd' => 'El camp @champ@ ha de tenir m&eacute;s de 5 car&agrave;cters',
-	'extraarticles' => 'Exemple de camp extra en un article',
 
 	// I
 	'id_manquant' => 'Falta identificador ',
@@ -55,17 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reset' => 'Esborrar',
 
 	// S
-	'supprimer' => 'Suprimir',
-
-	// T
-	'testauteur' => 'Exemple en un camp extra/cfg de la taula autor',
-	'testcasier' => 'Exemple de casella',
-	'testclassic' => 'Exemple objectiu cl&agrave;ssic',
-	'testinclure' => 'Exemple d\'inclusi&oacute; d\'esquelet',
-	'testmulti' => 'Exemple entrades m&uacute;ltiples',
-	'testphp' => 'Exemple d\'emmagatzematge php',
-	'testsimple' => 'Exemple simple',
-	'testtable' => 'Exemple sobre camps d\'una taula table sql'
+	'supprimer' => 'Suprimir'
 );
 
 ?>

@@ -27,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_type_id' => 'Het veld @champ@ moet met een brief of een beginnen onderstreept',
 	'erreur_type_idnum' => 'Het veld @champ@ moet numeriek zijn',
 	'erreur_type_pwd' => 'Het veld @champ@ moet meer dan 5 karakters hebben',
-	'extraarticles' => 'Extra voorbeeld van veld op een artikel',
 
 	// I
 	'id_manquant' => 'Ontbrekende identificatie',
@@ -55,17 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reset' => 'Uitwissen',
 
 	// S
-	'supprimer' => 'Afschaffen',
-
-	// T
-	'testauteur' => 'Voorbeeld op veld extra/cfg van de tafel auteur',
-	'testcasier' => 'Voorbeeld van vak',
-	'testclassic' => 'Voorbeeld klassieke m&eacute;ta',
-	'testinclure' => 'Voorbeeld van insluitsel van skelet',
-	'testmulti' => 'Voorbeeld veelvoudige toegangen',
-	'testphp' => 'Voorbeeld van opslag php',
-	'testsimple' => 'Eenvoudig voorbeeld',
-	'testtable' => 'Voorbeeld op velden van een tafel sql'
+	'supprimer' => 'Afschaffen'
 );
 
 ?>
