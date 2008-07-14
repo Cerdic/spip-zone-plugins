@@ -1,5 +1,5 @@
 <?php
-
+# a modifier pour #formulaire_xx
 function cfg_exemples_affiche_milieu($flux) {
 	$exec =  $flux['args']['exec'];
 	if ($exec=='articles'){
