@@ -20,13 +20,14 @@ function liste_cfg($dir='') {
 	// tous les repertoires
 	if (!$dir){
 		foreach (creer_chemin() as $dir) {
-			$liste = array_merge($liste, preg_files($dir.'fonds/', 'cfg_[^/]*[.]html$'));
+			$liste = array_merge($liste, preg_files($d=$dir.'fonds/', $d.'cfg_[^/]*[.]html$'));
 		}
 	// ou seulement celui demande
 	} else {	
 		$dir = rtrim(rtrim($dir),'/').'/';
-		$liste = preg_files($dir.'fonds/', 'cfg_[^/]*[.]html$');
+		$liste = preg_files($d=$dir.'fonds/', $d.'cfg_[^/]*[.]html$');
 	}
+
 	if ($liste) {
 		$l = array();
 		foreach($liste as $cfg) {
