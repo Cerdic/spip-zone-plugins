@@ -1,10 +1,9 @@
 <?php
 function panoramas_insertion_in_head($flux)
 {
-	return "<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.js\"></script>
+	return "<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery-1.2.6.min.js\"></script>
 	".$flux.panoramas_stylesheet_html("panorama")."
 	<link rel=\"stylesheet\" type=\"text/css\" href=\""._DIR_PLUGIN_PANORAMAS."css/thickbox.css\" />
-	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.dimensions.min.js\"></script>
 	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery-ui-personalized-1.5b3.min.js\"></script>
 	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.panorama.js\"></script>
 	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.cookie.js\"></script>";
