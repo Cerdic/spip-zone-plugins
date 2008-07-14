@@ -18,5 +18,7 @@
 	font-weight:bold;
 	color:#E34900;
 }
-
+.formulaire_message{color:#4EB826;}
+.formulaire_erreur{color:#ED291D;}
 h2{margin-top:1em;}
+

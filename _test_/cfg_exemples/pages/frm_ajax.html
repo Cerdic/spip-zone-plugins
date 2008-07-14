@@ -1,26 +1,28 @@
 <h1>Formulaire pour spip_meta</h1>
 
-<h2>Un formulaire CFG simple : <a href="#EVAL{_DIR_PLUGIN_CFG_EXEMPLES}fonds/cfg_exemple_meta.html">fonds/cfg_exemple_meta.html</a></h2>
+<h2>Un formulaire CFG simple :
+<a href="#EVAL{_DIR_PLUGIN_CFG_EXEMPLES}formulaires/exemple_meta_cvt.html">
+formulaires/exemple_meta_cvt.html</a></h2>
 
 <p>
 <b>Code :</b><br />
-<code>&#035;CFG_ARBO{exemple_meta}</code><br />
-<code>&#035;FORMULAIRE_CFG{exemple_meta}</code><br />
-<code>&lt;div class="ajax"&gt;&#035;FORMULAIRE_CFG{exemple_meta}&lt;/div&gt;</code>
+<code>&#035;CFG_ARBO{exemple_meta_cvt}</code><br />
+<code>&#035;FORMULAIRE_EXEMPLE_META_CVT</code><br />
+<code>&lt;div class="ajax"&gt;&#035;FORMULAIRE_EXEMPLE_META_CVT&lt;/div&gt;</code>
 </p>
 
-#CFG_ARBO{exemple_meta}
+#CFG_ARBO{exemple_meta_cvt}
 
 <h2>Sans ajax</h2>
-#FORMULAIRE_EXEMPLE_META
+#FORMULAIRE_EXEMPLE_META_CVT
 
 <h2>Avec ajax</h2>
 <div class="ajax">
-#FORMULAIRE_EXEMPLE_META
+#FORMULAIRE_EXEMPLE_META_CVT
 </div>
 
 <p>Lorsque l'on valide le formulaire Ajax, la balise
-&#035;CFG_ARBO avant la balise &#035;FORMULAIRE_EXEMPLE_META ne 
+&#035;CFG_ARBO avant la balise &#035;FORMULAIRE_EXEMPLE_META_CVT ne 
 montre pas les modifications tant que
 la page n'a pas &eacute;t&eacute; calcul&eacute;e de nouveau.<br /> 
 <a href="#SELF&var_mode=calcul">Calculer la page</a>.</p>
@@ -29,5 +31,5 @@ la page n'a pas &eacute;t&eacute; calcul&eacute;e de nouveau.<br />
 qui encadre le formulaire.</p>	
 
 <b>Code du fond CFG :</b>
-#CODE{formulaires/exemple_meta.html}
+#CODE{formulaires/exemple_meta_cvt.html}
 

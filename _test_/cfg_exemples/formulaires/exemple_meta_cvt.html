@@ -9,10 +9,8 @@
 #ACTION_FORMULAIRE{#SELF}
 
 <label for="ex_description">Description</label>
-<textarea id="ex_description" name="description" rows="4" cols="40" style="width:100%;">[(#ENV{description})]</textarea>
+<textarea name="description" id="ex_description" rows="4" cols="40" style="width:100%;">[(#ENV{description})]</textarea>
 
 <input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
 </form>
-
-<em>#ENV{message_erreur}</em>
 
