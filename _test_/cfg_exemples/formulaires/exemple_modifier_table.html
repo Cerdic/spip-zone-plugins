@@ -1,20 +1,17 @@
 
-<!-- titre=Exemple stockage dans table -->
-<!-- autoriser=voir -->
+<!-- autoriser=oui -->
 <!-- storage=table -->
 <!-- table=spip_cfg_exemples -->
-<!-- onglet=non -->
 [(#REM) autoriser la creation d'une nouvelle entree dans la table ]
 <!-- autoriser_absence_id=oui -->
 
 #CACHE{0}
 
-<div class="formulaire_spip formulaire_cfg">
+<div class="formulaire_spip formulaire_editer formulaire_cfg">
 	<form method="post" action="#SELF">
 	<div>
-	[(#ENV{_cfg_}|form_hidden)]
-	#ACTION_FORMULAIRE{#SELF,cfg}
-	<input type="hidden" name="id_cfg_exemple" class="cfg_id" value="[(#ENV{id})]" />
+	#ACTION_FORMULAIRE{#SELF}
+	<!-- input type="hidden" name="id_cfg_exemple" class="cfg_id" value="[(#ENV{id})]" / -->
 	
 	<label>Description</label>
 	<input type="text" name="description" value="[(#ENV{description})]" />
@@ -24,7 +21,6 @@
 	<textarea name="texte" rows="4" cols="40" style="width:100%;">[(#ENV{texte})]</textarea>
 
 	<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
-	<input type="reset" value="<:cfg:Reset:>" />
 	<input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" />
 	</div>
 	</form>
