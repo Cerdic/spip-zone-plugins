@@ -310,6 +310,7 @@ class cfg_formulaire{
 		if ($this->param['depot'] == 'extrapack'){
 			$this->param['depot'] = 'tablepack';
 			$this->param['colonne'] = 'extra';
+			$this->param['table'] = 'spip_auteurs';
 		}
 		
 		// definir les parametres qui sont a traiter comme des extensions

@@ -94,6 +94,7 @@ class cfg_depot_tablepack
 		}	
 		$this->_arbre = array();
 		$this->_ici = &$this->_base;
+    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['nom']);
     	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['casier']);
     	return true;	
 	}
@@ -244,8 +245,10 @@ class cfg_depot_tablepack
 	
 	
 	function verifier_colonne($creer = false) {
+		if (!$this->param['table'])
+			return false;
 		$col = sql_showtable($table = $this->param['table']);
-		if (!array_key_exists($colonne = $this->param['colonne'], $col['field'])) {
+		if (!is_array($col['field']) OR !array_key_exists($colonne = $this->param['colonne'], $col['field'])) {
 			return false;
 		}
 		return true;
