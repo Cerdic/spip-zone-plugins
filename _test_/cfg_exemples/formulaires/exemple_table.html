@@ -1,21 +1,30 @@
-<div class="cfg_exemples_perso">
-Une boucle sur les champs de la table spip_cfg_exemples
 
-<form method="post" action="#SELF"><div>
-#ACTION_FORMULAIRE{#SELF}
+<!-- autoriser=oui -->
+<!-- storage=table -->
+<!-- table=spip_cfg_exemples -->
+[(#REM) autoriser la creation d'une nouvelle entree dans la table ]
+<!-- autoriser_absence_id=oui -->
 
-<fieldset>
-Selection de l'identifiant, vide pour un nouvelle entr&eacute;e.
-<label for="id">*<:cfg:id:></label>
-<select name="cfg_exemple_id" style="width:10em"; onChange="jQuery(this.form).submit()">
-	<option></option>
-	<BOUCLE_e(CFG_EXEMPLES)><option value="#ID_CFG_EXEMPLE"[ (#ID_CFG_EXEMPLE|=={[(#ENV{cfg_exemple_id})]}|?{' ',''})selected='selected' ]>#ID_CFG_EXEMPLE</option></BOUCLE_e>
-</select>
-<input type="submit" name="affiche" value="&gt;" />
-</fieldset>
+#CACHE{0}
+
+<div class="formulaire_spip formulaire_editer formulaire_cfg">
+	<form method="post" action="#SELF">
+	<div>
+	#ACTION_FORMULAIRE{#SELF}
+
+	<input type="hidden" name="id_cfg_exemple" class="cfg_id" value="[(#ENV{id})]" />
+
+	
+	<label>Description</label>
+	<input type="text" name="description" value="[(#ENV{description})]" />
+
+	<br />
+	<label>Texte</label>
+	<textarea name="texte" rows="4" cols="40" style="width:100%;">[(#ENV{texte})]</textarea>
+
+	<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
+	<input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" />
+	</div>
+	</form>
 </div>
-</form>
-
-#FORMULAIRE_EXEMPLE_MODIFIER_TABLE{#ENV{cfg_exemple_id}}
-
 </div>

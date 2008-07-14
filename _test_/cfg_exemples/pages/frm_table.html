@@ -10,12 +10,57 @@
 <code>&#035;FORMULAIRE_EXEMPLE_TABLE</code>
 </p>
 
-#FORMULAIRE_EXEMPLE_TABLE
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	jQuery('.exemple_table tr.formulaire_table').hide();
+	jQuery('.exemple_table td.editer_table').click(function(){
+		jQuery(this).parent().next('tr').toggle();
+	});
+});
+</script>
+
+<B_a>
+#PAGINATION
+<table class='spip exemple_table' border='1' width='90%'>
+<tr>
+	<th><a href="[(#SELF|parametre_url{tri,id_cfg_exemple}|parametre_url{senstri,[(#ENV{senstri,0}|=={0})]})]">id</a></th>
+	<th><a href="[(#SELF|parametre_url{tri,description}|parametre_url{senstri,[(#ENV{senstri,0}|=={0})]})]">description</a></th>
+	<th><a href="[(#SELF|parametre_url{tri,texte}|parametre_url{senstri,[(#ENV{senstri,0}|=={0})]})]">texte</a></th>
+</tr>
+<BOUCLE_a(CFG_EXEMPLES){pagination}{par #ENV{tri}}{inverse #ENV{senstri}}>
+<tr>
+	<td>#ID_CFG_EXEMPLE</td>
+	<td class="#EDIT{description}">#DESCRIPTION*</td>
+	<td class="#EDIT{texte}">#TEXTE*</td>
+	<td class='editer_table'><a href="#editer_table#ID_CFG_EXEMPLE">Editer</a></td>
+</tr>
+<tr class='formulaire_table'>
+	<td colspan="4">
+		<a name="editer_table#ID_CFG_EXEMPLE"></a>
+		#FORMULAIRE_EXEMPLE_TABLE{#ID_CFG_EXEMPLE}
+	</td>
+</tr>
+</BOUCLE_a>
+</B_a>
+<table class='spip exemple_table' border='1' width='90%'>
+<//B_a>
+<tr>
+	<td colspan="3"></td>
+	<td class='editer_table'><a href="#editer_table_new">Nouveau</a></td>
+</tr>
+<tr class='formulaire_table'>
+	<td colspan="4">
+		<a name="editer_table_nouveau"></a>
+		#FORMULAIRE_EXEMPLE_MODIFIER_TABLE
+	</td>
+</tr>
+</table>
+
+
+
 
 
 <b>Code de formulaire/exemple_table.html :</b>
-#CODE{formulaires/exemple_table.html}
+#CODE{formulaires/exemple_modifier_table.html}
 
-<b>Code de fonds/cfg_exemple_table2.html :</b>
-#CODE{fonds/cfg_exemple_table2.html}
 
