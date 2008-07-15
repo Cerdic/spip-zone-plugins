@@ -1,0 +1,46 @@
+<div class="formulaire_spip formulaire_inscription" id="formulaire_inscription">
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+[<p class="formulaire_message">(#ENV*{message_retour_openid})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[<p class='formulaire_erreur'>(#ENV*{erreur_retour_openid})</p>]
+[(#ENV{editable})
+[(#SET{self,[(#SELF|parametre_url{message_ok,''}|parametre_url{message_erreur,''})]})]
+<form method="post" action="#GET{self}">
+	#ACTION_FORMULAIRE{#GET{self}}
+	<fieldset>
+		[(#REM) on affiche plus ce message en cas d'erreur pour eviter d'allonger trop le formulaire]
+		[(#ENV*{message_erreur}|non)
+		[<h3 class='legend'><:pass_vousinscrire:></h3>
+		<p class='explication'>(#ENV*{_commentaire})</p>]
+		]
+		<h3 class='legend'><:openid:form_forum_openid:></h3>
+		<p class='explication'><:openid:form_forum_indiquer_openid:></p>
+		<ul>
+		  <li class='saisie_openid_inscription[ (#ENV*{erreurs}|table_valeur{openid_inscription}|oui)erreur]'>
+		      <label for="openid_inscription"><:openid:form_pet_votre_openid:></label>
+						[<span class="erreur">(#ENV*{erreurs}|table_valeur{openid_inscription})</span>]
+		      <input type="text" class="text" name="openid_inscription" id="openid_inscription" value="#ENV{openid_inscription}" size="30" />
+		  </li>
+		</ul>
+		[(#REM) Piege a robots spammeurs ]
+		<p style="display: none;"><label for="nobot"><:antispam_champ_vide:></label>
+		<input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
+		<p class="boutons"><input type="submit" value="<:bouton_valider:>" /></p>
+	</fieldset>
+ </form>
+[<script type="text/javascript"><!--
+document.getElementById('(#ENV{focus})').focus();
+--></script>]
+]
+</div>
+[(#ENV{focus,''}|?{' '})
+<div style="text-align: #LANG_RIGHT;">
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+document.write("<a style='color: #e86519' href='")
+document.write((window.opener) ? "javascript:close()" : "./")
+document.write("'><:pass_quitter_fenetre:><" + "/a>");
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
+<noscript>
+	&#91;<a href='./'><:pass_retour_public:></a>&#93;
+</noscript>
+</div>]

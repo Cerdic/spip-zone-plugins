@@ -2,7 +2,7 @@
 0.8.3 (15 07 2008)
 - edition privee de l'openid passe uniquement par des pipelines
 - ne pas inscrire systematiquement au login un openid inconnu meme s'il s'autorise
-=> todo : formulaire d'inscription pour cela
+- formulaire d'inscription #FORMULAIRE_INSCRIPTION_OPENID
 
 0.8.2 (25 06 2008)
 - pouvoir editer l'openid dans le prive

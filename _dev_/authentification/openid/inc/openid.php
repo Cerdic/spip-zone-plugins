@@ -49,11 +49,11 @@ function demander_authentification_openid($login, $cible){
 	if (!$auth_request) {
 		// ici, on peut rentrer dire que l'openid n'est pas connu...
 		// plutot que de rediriger et passer la main a d'autres methodes d'auth
-		return _T('authopenid:erreur_openid');
+		return _T('openid:erreur_openid');
 		
 		#include_spip('inc/cookie');
 		#spip_setcookie("spip_admin", "", time() - 3600);
-		#$redirect = openid_url_erreur(_T('authopenid:erreur_openid'));
+		#$redirect = openid_url_erreur(_T('openid:erreur_openid'), $cible);
 	} 
 	
 	// l'openid donne est connu. On va donc envoyer une redirection
@@ -90,7 +90,7 @@ function demander_authentification_openid($login, $cible){
 			
 			// If the redirect URL can't be built, display an error message.
 			if (Auth_OpenID::isFailure($redirect)) {
-				$redirect = openid_url_erreur(_L("Could not redirect to server: " . $redirect->message));
+				$redirect = openid_url_erreur(_L("Could not redirect to server: " . $redirect->message), $cible);
 			}
 		}
 		
@@ -104,7 +104,7 @@ function demander_authentification_openid($login, $cible){
 			// Display an error if the form markup couldn't be generated;
 			// otherwise, render the HTML.
 			if (Auth_OpenID::isFailure($form_html)) {
-				$redirect = openid_url_erreur(_L("Could not redirect to server: " . $form_html->message));
+				$redirect = openid_url_erreur(_L("Could not redirect to server: " . $form_html->message), $cible);
 			} 
 			
 			// pas d'erreur : affichage du formulaire et arret du script
@@ -140,12 +140,12 @@ function terminer_authentification_openid($cible){
 
 	// This means the authentication was cancelled.	
 	if ($response->status == Auth_OpenID_CANCEL) {
-	    $redirect = openid_url_erreur(_T('authopenid:verif_refusee')); 
+	    $redirect = openid_url_erreur(_T('openid:verif_refusee'), $cible); 
 	} 
 	
 	// Authentification echouee
 	elseif ($response->status == Auth_OpenID_FAILURE) {
-	    $redirect = openid_url_erreur("Authentication failed: " . $response->message);
+	    $redirect = openid_url_erreur("Authentication failed: " . $response->message, $cible);
 	} 
 	
 	// This means the authentication succeeded.
@@ -177,15 +177,17 @@ function terminer_authentification_openid($cible){
 			if ($GLOBALS['meta']['accepter_inscriptions']=='oui') {
 				// d'abord ajouter l'auteur si le login propose n'existe pas deja
 				if (!$ok = openid_ajouter_auteur($couples)) {
-					$redirect = openid_url_erreur(_L("Inscription impossible : un login identique existe deja"));
+					$redirect = openid_url_erreur(_L("Inscription impossible : un login identique existe deja"), $cible);
 				} else {
 					// verifier que l'insertion s'est bien deroulee 
-					$ok = $identifier_login($openid, "");
+					if (($ok = $identifier_login($openid, "")) && $cible){
+						$cible = parametre_url($cible,'message_ok',_L('openid:Vous &ecirc;tes maintenant inscrit et identifi&eacute; sur le site. Merci.'),'&');
+					}
 				}
 			}
 			// rediriger si pas inscrit
 			if (!$ok && !$redirect) {
-				$redirect = openid_url_erreur(_L("Utilisateur OpenID inconnu dans le site)"));
+				$redirect = openid_url_erreur(_L("Utilisateur OpenID inconnu dans le site)"), $cible);
 			}
 		}
 		
@@ -225,12 +227,13 @@ function openid_url_reception(){
 	return url_absolue(generer_url_action("controler_openid"));
 }
 
-function openid_url_erreur($message){
+function openid_url_erreur($message, $cible=''){
 	openid_log($message);
-	return parametre_url(
-			generer_url_public("login","var_erreur=openid&url=".$redirect,'&'),
-			"message_erreur", 
-			urlencode($message));
+	if ($cible)
+		$ret = $cible;
+	else
+		$ret = generer_url_public("login","var_erreur=openid&url=".$redirect,'&');
+	return parametre_url($ret, "message_erreur", urlencode($message),'&');
 }
 
 function openid_is_url_prive($cible){
