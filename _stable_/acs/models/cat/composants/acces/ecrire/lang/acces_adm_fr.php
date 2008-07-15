@@ -4,8 +4,8 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'acces' => 'Acces',
-'acces_description' => 'Activated keyword-based access control on some articles.',
-'acces_info' => 'Limit access to articles tagged with keyword _ide, _aut, or _adm to registered members and administrors.',
+'acces_description' => 'Active un contrôle d\'accès par mot-clé pour certains articles.',
+'acces_info' => 'Limite l\'accès aux articles avec mot-clé _ide, _aut, ou _adm aux visiteurs enregistrés, aux rédacteurs, et aux administrateurs.',
 
 'acces_on' => _T('item_oui'),
 'acces_off' => _T('item_non'),
