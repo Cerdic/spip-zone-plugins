@@ -62,7 +62,10 @@ if (!defined("_DIR_IMG_SPIPBB")) {
 
 // [fr] Plugin ecrit pour spip rev 1.9.3
 // [en] Plugin written for spip rev 1.9.3
-@define('_SPIP19300', true);
+// Modif car cas où on essaie avec la mauvaise version !!
+if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP19300', true);
+else
+@define('_SPIP19200', true);
 
 // Pour la verifciation d'une nouvelle version
 define('_URL_SPIPBB_PLUGIN_XML', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/_dev_/spipBB/dev/plugin.xml?format=txt');

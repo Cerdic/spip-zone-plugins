@@ -354,6 +354,7 @@ _ {{Plugin spipbb en cours de developpement. Vous l\'utilisez &agrave; vos risqu
 _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribu&eacute; sous licence GPL',
 	'plugin_lien' => '[Consulter la documentation du plugin sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_mauvaise_version' => 'Cette version du plugin n\'est pas compatible avec votre version de SPIP !',
 	'plugin_nom' => 'SpipBB : Gestion des forums de SPIP', #  Pour faciliter les traductions de plugin.xml
 	'post_aucun_pt' => 'aucun&nbsp;!',
 	'post_efface_lui' => 'Ce sujet comprend @$nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\\n',

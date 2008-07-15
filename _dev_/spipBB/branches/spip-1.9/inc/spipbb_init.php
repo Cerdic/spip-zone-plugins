@@ -39,20 +39,31 @@ $GLOBALS['spipbb_plug_version'] = $infos['version'];
 # controle config. ... Charge conversion 192
 #
 include_spip('inc/spipbb_util');
-
 #
-# Si Install/Maj ? Redir immediate, sauf si on y est !
+# Controle de la version du plugin vs SPIP
 #
-// c: 18/12/7 pas beau mais pas beau du tout un redirect planque dans un include !!!
-if(!spipbb_is_configured() AND _request('exec')!="spipbb_configuration") {
-	include_spip('inc/headers');
-	redirige_par_entete(generer_url_ecrire("spipbb_configuration",'',true));
+if (!defined('_SPIP19200')) {
+	// minipres + message
+	include_spip('inc/minipres');
+	echo minipres(_T('spipbb:plugin_mauvaise_version'));
+	die(_T('spipbb:plugin_mauvaise_version'));
 }
+else
+{
 
-#
-# inclure fonctions communes a tous exec
-#
-include_spip('inc/spipbb_presentation');
-include_spip('inc/spipbb_menus_gauche');
+	#
+	# Si Install/Maj ? Redir immediate, sauf si on y est !
+	#
+	// c: 18/12/7 pas beau mais pas beau du tout un redirect planque dans un include !!!
+	if(!spipbb_is_configured() AND _request('exec')!="spipbb_configuration") {
+		include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire("spipbb_configuration",'',true));
+	}
 
+	#
+	# inclure fonctions communes a tous exec
+	#
+	include_spip('inc/spipbb_presentation');
+	include_spip('inc/spipbb_menus_gauche');
+}
 ?>

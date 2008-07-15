@@ -30,15 +30,28 @@ include_spip('inc/spipbb_inc_config');
 
 function spipbb_install($action)
 {
+	static $test=0;
 	switch ($action)
 	{
 		case 'test' :
 			// Affichage ici du cadre sous la sous la partie plugins de Spip (affiche_gauche n'y est pas activte)
-			if(!defined('_SPIP19300')) echo '<br/>';
-			echo debut_cadre_enfonce('', true),
-				icone_horizontale(_T('spipbb:titre_spipbb'), generer_url_ecrire('spipbb_configuration'), find_in_path('img_pack/spipbb-24.png'), '', false),
-				fin_cadre_enfonce(true);
-			return isset($GLOBALS['meta']['spipbb']) ;
+			if(!defined('_SPIP19300'))
+			{
+				if ($test++==1) { // test est appelé 2 fois !
+					spipbb_log('(install) Version incompatible',1,"spipbb_install");
+					echo "<BR />";
+					echo debut_cadre_enfonce('', true),
+						icone_horizontale(_T('spipbb:plugin_mauvaise_version'), '', find_in_path('img_pack/spipbb-24.png'), '', false),
+						fin_cadre_enfonce(true);
+				}
+				return false;
+			}
+			else {
+				echo debut_cadre_enfonce('', true),
+					icone_horizontale(_T('spipbb:titre_spipbb'), generer_url_ecrire('spipbb_configuration'), find_in_path('img_pack/spipbb-24.png'), '', false),
+					fin_cadre_enfonce(true);
+				return isset($GLOBALS['meta']['spipbb']) ;
+			}
 			break;
 		case 'install' :
 //			spipbb_upgrade_all();

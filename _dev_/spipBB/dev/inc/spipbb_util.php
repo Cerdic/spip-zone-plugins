@@ -33,6 +33,7 @@ spipbb_log('included',2,__FILE__);
 // [en] Checks that spipbb is configured and uptodate
 //----------------------------------------------------------------------------
 function spipbb_is_configured() {
+	if (defined('_SPIP19200')) return false; // Pas la bonne version du plugin
 	# pas de spipbb
 	if (!isset($GLOBALS['spipbb'])) $GLOBALS['spipbb']=array();
 	if (!isset($GLOBALS['meta']['spipbb'])) return false;
@@ -52,7 +53,7 @@ function spipbb_is_configured() {
 		$infos=plugin_get_infos(_DIR_PLUGIN_SPIPBB);
 		$GLOBALS['spipbb_plug_version'] = $infos['version'];
 	}
-	if(version_compare($GLOBALS['spipbb']['version'],$GLOBALS['spipbb_plug_version'],'<')) return false; // _SPIPBB version sur 0.4.5 == 5 char
+	if(version_compare($GLOBALS['spipbb']['version'],$GLOBALS['spipbb_plug_version'],'<')) return false;
 	# sinon
 	return true;
 } // spipbb_is_configured

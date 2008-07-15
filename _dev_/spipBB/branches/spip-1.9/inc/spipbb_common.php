@@ -62,12 +62,13 @@ if (!defined("_DIR_IMG_SPIPBB")) {
 
 // [fr] Plugin ecrit pour spip rev 1.9.3 -> fournir les fonctions requises pour spip 1.9.2
 // [en] Plugin written for spip rev 1.9.3 -> provide required functions for spip 1.9.2
-//if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_SQL,'<')) {
+// Retabli pour le cas ou on installe par erreur cette version sur une version de Spip ulterieure
+if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_SQL,'<')) {
 	include_spip('inc/spipbb_192'); // SPIP 1.9.2
-//}
+}
 
-//if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP19300', true);
-//else
+if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP19300', true);
+else
 @define('_SPIP19200', true);
 
 // Pour la verifciation d'une nouvelle version
