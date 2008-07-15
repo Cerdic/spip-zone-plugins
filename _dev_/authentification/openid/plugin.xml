@@ -12,7 +12,7 @@
         [en]_ &#169; 2007 - Distributed under GNU/GPL License
         </multi>
    </auteur>
-   <version>0.8.2</version>
+   <version>0.8.3</version>
    <version_base>0.1</version_base>
    <etat>dev</etat>
    <icon>openid_big.png</icon>
@@ -33,4 +33,16 @@
 	<necessite id="lib:php-openid-2.0.1" src="http://openidenabled.com/files/php-openid/packages/php-openid-2.0.1.zip" />
    <prefix>openid</prefix>
    <install>base/openid_install.php</install>
+ 	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>openid_pipelines.php</inclure>
+	</pipeline>
+ 	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>openid_pipelines.php</inclure>
+	</pipeline>
+ 	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>openid_pipelines.php</inclure>
+	</pipeline>	
 </plugin>

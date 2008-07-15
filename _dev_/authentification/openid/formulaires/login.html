@@ -7,7 +7,7 @@
 	[<p class="formulaire_message">(#ENV**{message_ok})</p>]
 	[<p class='formulaire_erreur'>(#ENV**{message_erreur})</p>]
 	[<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{openid})</p>]
-
+	
 	[(#ENV{echec_cookie})<fieldset class='formulaire_erreur'>
 	<h2><:avis_erreur_cookie:></h2>
 	<p><:login_cookie_oblige:><br /><:login_cookie_accepte:></p>
@@ -20,7 +20,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <fieldset><legend><:form_forum_identifiants:></legend>
 			<span id="spip_logo_auteur">#ENV*{_logo,''}</span>
-		  <ol class="formfx">
+		  <ul>
 		    <li class="editer_login obligatoire">
 		      <label for="var_login"><:login_login2:></label>
 		      <input class='text forml' type='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40' />
@@ -38,7 +38,7 @@
 					    <label class='nofx' for="session_remember"><:login_rester_identifie:></label>
 			        </li>
 				]
-			</ol>
+			</ul>
 			<p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>
 		</fieldset>
 	</form>

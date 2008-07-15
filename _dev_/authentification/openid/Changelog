@@ -1,3 +1,7 @@
+
+0.8.3 (25 06 2008)
+- edition privee de l'openid passe uniquement par des pipelines
+
 0.8.2 (25 06 2008)
 - pouvoir editer l'openid dans le prive
 
