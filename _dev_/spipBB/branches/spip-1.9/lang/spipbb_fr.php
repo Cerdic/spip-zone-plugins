@@ -79,7 +79,7 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 	'admin_plugin_requis_erreur_cfg' => 'Installez le plugin CFG et activez le ! [Documentation ici->http://www.spip-contrib.net/?article1605], [Archive ZIP l&agrave;->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Les plugins requis suivants manquent. Activez-les !',
 	'admin_plugin_requis_ok' => 'Plugin(s)  install&eacute;(s) et actif(s) :',
-	'admin_plugin_requis_ok_balisession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224] : fourni les informations sur les visiteurs authentifi&eacute;.',
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224] : fourni les informations sur les visiteurs authentifi&eacute;.',
 	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605] : fourni des fonctions et des balises.',
 	'admin_sous_titre' => 'Acc&egrave;der au panneau d\'administration des forums avec SpipBB',
 	'admin_spip_config_forums' => 'Configuration de SPIP&nbsp;:',
