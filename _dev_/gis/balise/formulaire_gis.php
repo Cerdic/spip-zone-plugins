@@ -53,7 +53,7 @@ function balise_FORMULAIRE_GIS_dyn($id_rubrique) {
 	
 	$lang = _request('var_lang');	
 	$nom = 'changer_lang';
-	lang_dselect();
+	lang_select();
 	$langues = liste_options_langues($nom, $lang);
 	
 	// retourver le secteur et la langue de la rubrique
