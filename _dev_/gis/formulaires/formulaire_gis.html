@@ -27,7 +27,7 @@ if (GBrowserIsCompatible()) {
     var map = new GMap2(document.getElementById("formMap"));
     map.addControl(new GLargeMapControl());
     map.addControl(new GMapTypeControl());
-    map.setCenter(new GLatLng(42.95,-7.9), 8, G_MAP_TYPE);
+    map.setCenter(new GLatLng([(#CONFIG**{gis_default_lat,0})],[(#CONFIG**{gis_default_lonx,0})]), [(#CONFIG**{gis_default_zoom,0})], G_MAP_TYPE);
 
     // creamos el evento para crear nuevos marcadores
     GEvent.addListener(map, "click", function(overlay, point){
