@@ -1,9 +1,12 @@
 
-0.8.3 (25 06 2008)
+0.8.3 (15 07 2008)
 - edition privee de l'openid passe uniquement par des pipelines
+- ne pas inscrire systematiquement au login un openid inconnu meme s'il s'autorise
+=> todo : formulaire d'inscription pour cela
 
 0.8.2 (25 06 2008)
 - pouvoir editer l'openid dans le prive
+- ne pas inscrire si les inscriptions sont interdites
 
 0.8 (02 06 2008)
 - Mise a jour avec le nouveau formulaire CVT de login (interface a retravailler)
