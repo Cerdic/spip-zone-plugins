@@ -9,6 +9,7 @@
  *
  */
 include_spip('base/abstract_sql');
+include_spip('inc/vieilles_defs');
  
 function gis_cambiar_coord($id,$table,$exec) {
 	global $spip_lang_left, $spip_lang_right;
