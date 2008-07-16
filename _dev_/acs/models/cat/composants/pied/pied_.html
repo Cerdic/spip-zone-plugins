@@ -1,0 +1,20 @@
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2008
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Pied de page
+Footer
+]
+#SET{use1,#EVAL{"$GLOBALS['meta']['acs'.ucfirst($GLOBALS['contexte_inclus']['c1']).'Use']"}}
+[(#GET{use1}|=={oui}|?{' '}) [(#SET{c1,composants/[(#ENV{c1})]/[(#ENV{c1})]})] <INCLURE{fond=#GET{c1}}>]
+#SET{use2,#EVAL{"$GLOBALS['meta']['acs'.ucfirst($GLOBALS['contexte_inclus']['c2']).'Use']"}}
+[(#GET{use2}|=={oui}|?{' '}) [(#SET{c2,composants/[(#ENV{c2})]/[(#ENV{c2})]})] <INCLURE{fond=#GET{c2}}>]
+#SET{use3,#EVAL{"$GLOBALS['meta']['acs'.ucfirst($GLOBALS['contexte_inclus']['c3']).'Use']"}}
+[(#GET{use3}|=={oui}|?{' '}) [(#SET{c3,composants/[(#ENV{c3})]/[(#ENV{c3})]})] <INCLURE{fond=#GET{c3}}>]
+</body>
+</html>
