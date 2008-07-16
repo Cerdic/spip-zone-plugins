@@ -1,5 +1,4 @@
 #CACHE{7200}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 [(#REM)
              ACS
          (Plugin Spip)
@@ -8,34 +7,9 @@
 
 Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
-]
-<html dir="#LANG_DIR" lang="#LANG">
-<head>
-   <INCLURE{fond=inc-head_meta}>
-   <title>[(#NOM_SITE_SPIP|textebrut)] - <:meta_page_sommaire:></title>
-   <meta name="description" content="<:meta_page_sommaire:>[. (#NOM_SITE_SPIP|textebrut)][: (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]" />
-   <meta name="keywords" content="<:meta_keywords:>[,(#TITRE|textebrut)],<:sommaire:>" />
-   <meta name="expires" content="3600" />
-   <meta name="author" content="[<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)]" />
-   <meta name="abstract" content="<:meta_page_sommaire:>" />
-   <meta name="copyright" content="<:meta_rights:>[: (#NOM_SITE_SPIP|textebrut)] (#URL_SITE_SPIP)" />
-[(#REM) DC metas ]
-   <meta name="DC.Date" content="[(#DATE)]" />
-   [<meta name="DC.Contributor" content="<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)" />]
-   <meta name="DC.Publisher" content="[<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)]" />
-   <meta name="DC.Subject" content="<:meta_page_sommaire:>" />
-   <meta name="DC.Rights" content="<:meta_rights:>[: <:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut) ](#URL_SITE_SPIP)" />
-   <meta name="robots" content="none">
-   <INCLURE{fond=inc-head_css}>
-</head>
 
-<body class="page_refus">
-		<div id="central">
-
-<INCLURE{fond=composants/entete/entete}>
-
-[(#REM) Menu de navigation laterale (colonne 1)]
-<div id="colonne1"><div class="spacer"></div>
+]<INCLURE{fond=composants/entete/entete}{self=#SELF}{page=plan}{mrobots=none}>
+<div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
     <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
       <INCLURE{fond=composants/col1/col1}>
   </div>[(#REM) fin menu ]
@@ -81,9 +55,4 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 				</div><!-- fin div texte -->
 					</div><!-- fin onglet -->
 				</div><!-- fin colonne2 -->
-
-		</div>	<!-- fin central-->
-[(#REM) Pied de page ]
-<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
-</body>
-</html>
+<INCLURE{fond=composants/pied/pied}{self=#SELF}>[(#REM) Pied de page ]

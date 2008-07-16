@@ -8,29 +8,15 @@
 
 Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
-]
-<html dir="#LANG_DIR" lang="#LANG">
-<head>
-   <INCLURE{fond=inc-head_meta}>
-   <title><:resultats_recherche:> - [(#NOM_SITE_SPIP|textebrut)]</title>
-[(#REM) Preciser le charset ]
-   <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-   <meta name="robots" content="none" />
-   <INCLURE{fond=inc-head_css}>
-</head>
 
-<body class="page_recherche">
-<INCLURE{fond=composants/entete/entete}>
 
-[(#REM) Menu de navigation laterale (colonne 1)]
-<div id="colonne1"><div class="spacer"></div>
+]<INCLURE{fond=composants/entete/entete}{page=recherche}>
+<div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
     <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
       <INCLURE{fond=composants/col1/col1}>
   </div>[(#REM) fin menu ]
 </div>[(#REM) fin colonne1 (navigation) ]
-
-[(#REM) Colonne 2 ]
-<div id="colonne2"><div class="spacer"></div>
+<div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
 
     <INCLURE{fond=composants/onglets/onglets}{current=recherche}>
 
@@ -161,8 +147,4 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
       </div><!-- fin encart -->
 </div>
-
-[(#REM) Pied de page ]
-<INCLURE{fond=inc-pied}>
-</body>
-</html>
+<INCLURE{fond=composants/pied/pied}{self=#SELF}>[(#REM) Pied de page ]

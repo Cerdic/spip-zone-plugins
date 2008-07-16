@@ -1,32 +1,8 @@
 #CACHE{7200}
 <BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}{tout}>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" xml:lang="#LANG" lang="#LANG">
-<head>
-   <INCLURE{fond=inc-head_meta}>
-   <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-   <meta name="keywords" content="<:meta_keywords:>[,(#TITRE|textebrut)]" />
-   [<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut|sans_guillemets)" />]
-   <meta name="robots" content="all">
-   <meta name="expires" content="7200" />
-   <meta name="author" content="[<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)]" />
-   <meta name="abstract" content="[(#TITRE|textebrut)][: (#DESCRIPTIF|supprimer_tags|textebrut|sans_guillemets)]" />
-   <meta name="copyright" content="<:meta_rights:>[: (#NOM_SITE_SPIP|textebrut)] (#URL_SITE_SPIP)" />
-[(#REM) DC metas ]
-   <meta name="DC.Title" content="[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]" />
-   <meta name="DC.Date" content="[(#DATE_REDAC|?{#DATE_REDAC, #DATE})]" />
-   [<meta name="DC.Contributor" content="<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)" />]
-   <meta name="DC.Publisher" content="[<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)]" />
-   <meta name="DC.Subject" content="<:meta_dc_subject_rubrique:>[ (#NOM_SITE_SPIP|textebrut)][: (#TITRE|textebrut)]" />
-   <meta name="DC.Description" content="[(#TITRE|textebrut)][: (#DESCRIPTIF|supprimer_tags|textebrut|sans_guillemets)]" />
-   <meta name="DC.Rights" content="<:meta_rights:>[: <:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut) ](#URL_SITE_SPIP)" />
-   <INCLURE{fond=inc-head_css}>
-</head>
-<body class="page_rubrique">
-<INCLURE{fond=composants/entete/entete}>
+<INCLURE{fond=composants/entete/entete}{page=rubrique}{title=#TITRE|textebrut}>
 
-[(#REM) Menu de navigation laterale (colonne 1)]
-<div id="colonne1"><div class="spacer"></div>
+<div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
     <div class="mg">[(#REM) Menu de navigation par rubriques ]
       <INCLURE{fond=composants/col1/col1}{id_rubrique}>
   </div>[(#REM) fin menu ]
@@ -50,8 +26,8 @@
 
     <div class="contre-encart">
       [(#REM) Articles de la rubrique ]
-[(#MODE|=={Video}|?{' '}) <INCLURE{fond=composants/liste_articles/boucle-articles-rubrique_video}{id_rubrique}{classement}{debut_articles=#ENV{'debut_articles'}}{rubrique=#TITRE}>]
-[(#MODE|!={Video}|?{' '}) <INCLURE{fond=composants/liste_articles/boucle-articles-rubrique_texte}{id_rubrique}{classement}{debut_articles=#ENV{'debut_articles'}}{rubrique=#TITRE}>]
+[(#MODE|=={Video}|?{' '}) <INCLURE{fond=composants/articles/boucle-articles-rubrique_video}{id_rubrique}{classement}{debut_articles=#ENV{'debut_articles'}}{rubrique=#TITRE}>]
+[(#MODE|!={Video}|?{' '}) <INCLURE{fond=composants/articles/boucle-articles-rubrique_texte}{id_rubrique}{classement}{debut_articles=#ENV{'debut_articles'}}{rubrique=#TITRE}>]
 
 		  [(#REM) Documents joints a la rubrique ]
       <B_documents_joints>
@@ -81,12 +57,10 @@
 
     <INCLURE{fond=composants/breves/breves}{id_secteur}{debut_breves}>[(#REM) Breves du secteur ]
     <INCLURE{fond=composants/syndic/syndic-rub}{id_rubrique}>[(#REM) Sites de la rubrique ]
-    
+
   </div>[(#REM) fin encart]
 </div>[(#REM) fin colonne 3]
 
 [(#REM) Pied de page ]
-<INCLURE{fond=inc-pied}>
-</body>
-</html>
+<INCLURE{fond=composants/pied/pied}{self=#SELF}>
 </BOUCLE_rubrique_principal>

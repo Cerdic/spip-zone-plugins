@@ -1,7 +1,5 @@
 #CACHE{86400}
-<BOUCLE_mot_principal(MOTS) {id_mot} {doublons}>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-[(#REM)
+<BOUCLE_mot_principal(MOTS) {id_mot} {doublons}>[(#REM)
              ACS
          (Plugin Spip)
          Squelette Cat
@@ -9,23 +7,10 @@
 
 Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
-]
-<html dir="#LANG_DIR" lang="#LANG">
-<head>
-	<INCLURE{fond=inc-head_meta}>
-   <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-   [<meta name="description" content="(#DESCRIPTIF|couper{150}|textebrut)" />]
-   <INCLURE{fond=inc-head_css}>
 
-   [(#REM) Lien vers le flux RSS du mot cle ]
-   <link rel="alternate" type="application/rss+xml" title="[(#TITRE|textebrut|texte_backend)]" href="[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]" />
-</head>
-
-<body class="page_mot">
-<INCLURE{fond=composants/entete/entete}>
-
-[(#REM) Menu de navigation laterale (colonne 1)]
-<div id="colonne1"><div class="spacer"></div>
+][(#SET{title,<:acs:entete_meta_page_mot:>[ (#TITRE|textebrut|texte_backend)]})][(#SET{mdescription,[(#DESCRIPTIF|couper{150}|textebrut)]})][(#SET{mkeywords,[(#TITRE|textebrut|texte_backend),]<:acs:entete_meta_keywords:>})][(#SET{mrsstitle,[(#TITRE|textebrut|texte_backend)]})][(#SET{mrssurl,[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]})]
+<INCLURE{fond=composants/entete/entete}{self=#SELF}{page=mot}{title=#GET{title}}{mrobots=all}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}{rsstitle=#GET{rsstitle}}{rssurl=#GET{rssurl}}{mexpires=86400}>
+<div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
 	<div class="mg">
     [(#REM) Colonne 1 - Menu de navigation par rubriques ]
     <INCLURE{fond=composants/col1/col1}>
@@ -83,7 +68,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 				[<p class="pagination">(#PAGINATION)</p>]
           <ul>
             <BOUCLE_articles(ARTICLES) {id_mot} {par date}{inverse} {pagination 10} {lang=#LANG}>
-            <INCLURE{fond=composants/liste_articles/liste_articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{lang ?}>
+            <INCLURE{fond=composants/articles/articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{lang ?}>
             </BOUCLE_articles>
           </ul>
       </div>
@@ -146,9 +131,5 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
     [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 	</div><!-- fin onglet -->
 </div><!-- fin colonne2 -->
-
-[(#REM) Pied de page ]
-<INCLURE{fond=inc-pied}>
-</body>
-</html>
+<INCLURE{fond=composants/pied/pied}{self=#SELF}>[(#REM) Pied de page ]
 </BOUCLE_mot_principal>

@@ -1,17 +1,6 @@
 #CACHE{3600}
 #HTTP_HEADER{"Cache-Control: max-age=3600, must-revalidate"}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="#LANG_DIR" lang="#LANG">
-<head>
-   <title><:poster_message:> - [(#NOM_SITE_SPIP|textebrut)]</title>
-[(#REM) Preciser le charset ]
-   <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-   <meta name="robots" content="none" />
-   <INCLURE{fond=inc-head_css}>
-</head>
-
-<body class="page_forum">
-<INCLURE{fond=composants/entete/entete}>
+<INCLURE{fond=composants/entete/entete}{page=forum}{title=<:acs:forums_meta_page_forums:>}{mrobots=none}>
 
 [(#REM) Menu de navigation laterale (colonne 1)]
 <div id="colonne1"><div class="spacer"></div>
@@ -56,7 +45,7 @@
           <BOUCLE_ariane_site(HIERARCHIE) {id_rubrique}>
           &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
           </BOUCLE_ariane_site>
-          &gt; <a href="[(#ID_SYNDIC|generer_url_site)]">[(#TITRE|couper{80})</a>
+          &gt; <a href="[(#ID_SYNDIC|generer_url_site)]">[(#TITRE|couper{80})]</a>
           </BOUCLE_contexte_site>
 
           <//B_contexte_site>
@@ -123,10 +112,5 @@
 </div> <!-- fin div texte -->
 	</div><!-- fin onglet -->
 </div><!-- fin colonne2 -->
+<INCLURE{fond=composants/pied/pied}{self=#SELF}>[(#REM) Pied de page ]
 
-[(#REM) Pied de page ]
-<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
-
-#SPIP_CRON
-</body>
-</html>

@@ -10,29 +10,8 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Affiche un agenda par périodes choisies
 
-]
-<html dir="#LANG_DIR" lang="#LANG">
-<head>
-   <INCLURE{fond=inc-head_meta}>
-   <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-   <meta name="description" content="<:meta_dc_subject_article:>[ (#NOM_SITE_SPIP|textebrut)][: (#TITRE|textebrut)]" />
-   <meta name="keywords" content="[(#TITRE|textebrut|sans_guillemets)][,(#SURTITRE|textebrut|sans_guillemets)][,(#SOUSTITRE|textebrut|sans_guillemets)][,(#TITRE|askeywords)][,(#SURTITRE|askeywords)][,(#SOUSTITRE|askeywords)][,(#LESAUTEURS|supprimer_tags|askeywords)]" />
-   <meta name="robots" content="none">
-   <meta name="expires" content="7200" />
-   <meta name="author" content="[<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)]" />
-   <meta name="abstract" content="[(#TITRE|textebrut)][: (#DESCRIPTIF|supprimer_tags|textebrut|sans_guillemets)]" />
-   <meta name="copyright" content="<:meta_rights:>[: (#LESAUTEURS|supprimer_tags|textebrut) &amp; ][(#NOM_SITE_SPIP|textebrut) ](#URL_SITE_SPIP)" />
-   <meta name="DC.keywords" content="[(#TITRE|textebrut|sans_guillemets)][,(#SURTITRE|textebrut|sans_guillemets)][,(#SOUSTITRE|textebrut|sans_guillemets)][,(#TITRE|askeywords)][,(#SURTITRE|askeywords)][,(#SOUSTITRE|askeywords)][,(#LESAUTEURS|supprimer_tags|askeywords)]" />
-   <meta name="DC.Date" content="[(#DATE_REDAC|?{#DATE_REDAC, #DATE})]" />
-   [<meta name="DC.Contributor" content="(#LESAUTEURS|supprimer_tags|textebrut)" />]
-   <meta name="DC.Publisher" content="[(#LESAUTEURS|supprimer_tags|textebrut) &amp; ][(#NOM_SITE_SPIP|textebrut)]" />
-   <meta name="DC.Subject" content="<:meta_dc_subject_article:>[ (#NOM_SITE_SPIP|textebrut)][: (#TITRE|textebrut)]" />
-   <meta name="DC.Rights" content="<:meta_rights:>[: (#LESAUTEURS|supprimer_tags|textebrut) &amp; ][(#NOM_SITE_SPIP|textebrut) ](#URL_SITE_SPIP)" />
-   <INCLURE{fond=inc-head_css}>
-</head>
-
-<body class="page_agenda">
-<INCLURE{fond=composants/entete/entete}>[(#REM) Entete de la page + titre du site ]
+][(#SET{mkeywords,[(#ANNEE)][,(#MOIS)][,(#JOUR)][,(#EVAL{'_T("acs:entete_meta_page_agenda").","._T("acs:entete_meta_keywords")'})]})]
+<INCLURE{fond=composants/entete/entete}{page=agenda}{self=#SELF}{title=<:acs:entete_meta_page_agenda:>}{mdescription=<:acs:entete_meta_page_agenda:>}{mkeywords=#GET{mkeywords}}>[(#REM) Entete de la page + titre du site ]
 
 [(#REM) Menu de navigation laterale (colonne 1)]
 <div id="colonne1"><div class="spacer"></div>
@@ -53,6 +32,4 @@ Affiche un agenda par périodes choisies
 </div><!-- fin colonne2 -->
 
 [(#REM) Pied de page ]
-<INCLURE{fond=inc-pied}>
-</body>
-</html>
+<INCLURE{fond=composants/pied/pied}{self=#SELF}>

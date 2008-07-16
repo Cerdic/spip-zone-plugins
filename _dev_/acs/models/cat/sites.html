@@ -1,5 +1,4 @@
 #CACHE{7200}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 [(#REM)
              ACS
          (Plugin Spip)
@@ -8,34 +7,11 @@
 
 Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
-]
-<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" xml:lang="#LANG" lang="#LANG">
-<head>
-   <INCLURE{fond=inc-head_meta}>
-   <title><:liens:>[ (#NOM_SITE_SPIP|textebrut)]</title>
-   <meta name="description" content="<:liens:>[ (#NOM_SITE_SPIP|textebrut)]" />
-   <meta name="keywords" lang="#LANG" content="<:meta_keywords:>[,(#TITRE|textebrut)],<:sites:>" />
-   <meta name="robots" content="all">
-   <meta name="expires" content="3600" />
-   <meta name="author" content="[<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)]" />
-   <meta name="abstract" content="<:meta_page_sites:>" />
-   <meta name="copyright" content="<:meta_rights:>[: (#NOM_SITE_SPIP|textebrut)] (#URL_SITE_SPIP)" />
-[(#REM) DC metas ]
-   <meta name="DC.Title" content="[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]" />
-   <meta name="DC.Date" content="[(#DATE)]" />
-   [<meta name="DC.Contributor" content="<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)" />]
-   <meta name="DC.Publisher" content="[<:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut)]" />
-   <meta name="DC.Subject" content="<:meta_page_sites:>" />
-   <meta name="DC.Description" content="<:meta_page_sites:>[. (#NOM_SITE_SPIP|textebrut)][: (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]" />
-   <meta name="DC.Rights" content="<:meta_rights:>[: <:meta_dc_creator:> (#NOM_SITE_SPIP|textebrut) ](#URL_SITE_SPIP)" />
-   <INCLURE{fond=inc-head_css}>
-</head>
 
-<body class="page_sites">
-<INCLURE{fond=composants/entete/entete}>
+Sites
 
-[(#REM) Menu de navigation laterale (colonne 1)]
-<div id="colonne1"><div class="spacer"></div>
+]<INCLURE{fond=composants/entete/entete}{page=sites}{title=<:autres_sites:>}>
+<div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
     <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
       <INCLURE{fond=composants/col1/col1}>
   </div>[(#REM) fin menu ]
@@ -68,8 +44,4 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
     </BOUCLE_secteurs>
 	</div><!-- fin onglet -->
 </div><!-- fin colonne2 -->
-
-[(#REM) Pied de page ]
-<INCLURE{fond=inc-pied}>
-</body>
-</html>
+<INCLURE{fond=composants/pied/pied}{self=#SELF}>[(#REM) Pied de page ]

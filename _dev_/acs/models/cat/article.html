@@ -7,5 +7,5 @@
 Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
-][(#CONFIG{acsAccesUse}|=={oui}|?{' '}) <INCLUDE{fond=composants/acces/inc-article_acces}{id_article}{self=#SELF}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>]
-[(#CONFIG{acsAccesUse}|!={oui}|?{' '}) <INCLUDE{fond=inc-article}{id_article}{self=#SELF}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>]
+][(#CONFIG{acsArticlesLock}|=={oui}|?{' '}) <INCLUDE{fond=composants/articles/inc-article_acces}{id_article}{self=#SELF}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>]
+[(#CONFIG{acsArticlesLock}|!={oui}|?{' '}) <INCLUDE{fond=inc-article}{id_article}{self=#SELF}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>]
