@@ -6,59 +6,50 @@
 # Copyright Daniel FAIVRE, 2007-2008
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
-/**
- * Retourne la page d'admin "Pages"
- */
+include_spip('inc/acs_page_get_infos');
 include_spip('inc/acs_widgets');
 
-function acs_pages() {
-  $r = acs_box(_T('acs:pages'), liste_pages_du_site('pages', true), _DIR_ACS."/img_pack/pages-24.gif");
-  $r .= '<div id="page_infos"><a name="page_infos"></a>';
-  if (_request('pg')) {
-    include_spip('inc/acs_page_get_infos');
-    $r .= acs_page_get_infos(_request('pg'), _request('mode'));
-  }
-  $r .= '</div>';
-
-  $r.= '<a name="acs_vars"></a><div class="acs_vars_box pliable"><div id="acs_vars">';
+function acs_pages($page) {
+  $r = acs_page_get_infos($page, _request('mode'));
+    
+  $allvars.= '<a name="acs_vars"></a><div class="acs_vars_box pliable"><div id="acs_vars">';
   if (_request('show_vars') == 'oui') { // mode sans JQuery
     include_spip('inc/acs_page_get_all_variables');
-    $r .= acs_page_get_all_variables();
+    $allvars .= acs_page_get_all_variables();
   }
-  $r.= '</div></div>';
-  return $r;
+  $allvars.= '</div></div>';
+  return $allvars.'<div id="page_infos"><a name="page_infos"></a>'.$r.'</div>';
 }
 
-function acs_pages_gauche() {
+function acs_pages_gauche($page) {
   return acs_info_box(
     _T('acs:acs'),
-    _T('acs:description').'<br /><br />',
-    _T('acs:help').'<br /><br />',
-    _T('acs:info').'<br /><br />',
-    _DIR_PLUGIN_ACS."img_pack/pages-24.gif",
+    _T('assistant_configuration_squelettes').'<br /><br />',
+    _T('acs:onglet_pages_help'),
+    _T('acs:onglet_pages_info').'<br /><br />',
+    _DIR_PLUGIN_ACS."img_pack/page-24.gif",
     _T('acs:model_actif', array('model' => $GLOBALS['meta']['acsModel'])).
-      (($GLOBALS['meta']['acsSqueletteOverACS']) ? _T('acs:overriden_by', array('over' => str_replace(':', ' ', $GLOBALS['meta']['acsSqueletteOverACS']))) : '')._T('acs:model_actif2').'<br /><br />',
+    (($GLOBALS['meta']['acsSqueletteOverACS']) ? 
+      _T('acs:overriden_by', array('over' => str_replace(':', ' ', $GLOBALS['meta']['acsSqueletteOverACS'])))
+       :
+     	''
+    ).
+    _T('acs:model_actif2').
+    '<br /><br />'.
     '<div class="onlinehelp">'.
-      acs_plieur('plieur_acs_vars_box', 'acs_vars_box', '?exec=acs&onglet=pages&show_vars=oui#acs_vars',
-        false,
-        'if (typeof pavb == \'undefined\') {AjaxSqueeze(\'?exec=acs_page_get_all_variables\',\'acs_vars\'); pavb = true;}',
-        _T('acs:toutes_les_variables').'</div>'
-      )
+    acs_plieur('plieur_acs_vars_box', 'acs_vars_box', '?exec=acs&onglet=pages&show_vars=oui#acs_vars',
+    false,
+    'if (typeof pavb == \'undefined\') {AjaxSqueeze(\'?exec=acs_page_get_all_variables\',\'acs_vars\'); pavb = true;}',
+    _T('acs:toutes_les_variables').'</div>'.
+    '<br />'
+    )
   );
 }
 
-function acs_pages_droite() {
-  $cIconDef = _DIR_PLUGIN_ACS."/img_pack/composant-24.gif";
-
-  $configfile = find_in_path('composants/config.php');
-  @include $configfile;
-  if (is_array($choixComposants))
-    $l = liste_widgets($choixComposants, true, false);
-  else
-    $l = '&nbsp;';
-
-  return acs_box(count($choixComposants).' '.((count($choixComposants)==1) ? strtolower(_T('composant')) : strtolower(_T('composants'))), $l, $cIconDef, 'acs_box_composants');
+function acs_pages_droite($page) {
+  return acs_box(_T('acs:pages'), liste_pages_du_site('pages'),_DIR_PLUGIN_ACS."/img_pack/pages-24.gif" );
 }
+
 
 /**
  * Lit la liste des pages, modèles, et formulaires
@@ -110,5 +101,4 @@ function liste_pages_du_site($onglet, $large=false) {
   $r .= '<table width="100%"><tr><td>'._T('version').' <a style="color: black" title="Spip '.implode(', ', $GLOBALS['acs_table_versions_spip']).'">ACS '.ACS_VERSION.' ('.ACS_RELEASE.')</a></td><td style="text-align:'.$GLOBALS['spip_lang_right'].'">'._T('acs:acsDerniereModif').' '.date("Y-m-d H:i:s", $GLOBALS['meta']['acsDerniereModif']).'</td></tr></table>';
   return $r;
 }
-
 ?>

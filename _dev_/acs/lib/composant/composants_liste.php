@@ -9,6 +9,9 @@
 /**
  * Lit la liste des composants disponibles - Get available components list
  * Utilise le cache ACS - Use ACS cache
+ * 
+ * Retourne un tableau avec les noms de dossiers des composants en index
+ * Return Array('component1' => '', 'component2' => '#over#', ...)
  */
 function composants_liste(){
   static $cl=array();

@@ -43,7 +43,7 @@ function page_modes($page, $mode_source) {
   }
 
   // Mode schema / source
-  $link = '<a style="color: white" title="'.$page.'" href="?exec=acs&onglet=page&pg='.$page;
+  $link = '<a style="color: white" title="'.$page.'" href="?exec=acs&onglet=pages&pg='.$page;
   if ($mode_source) {
     $lblsrc = '<a id="mode_source" name="srcon" title="'.$page.'"><b>'._T('acs:source').'</b></a>';
     $lblsch = $link.'" id="mode_schema">'._T('acs:schema').'</a>';
@@ -55,7 +55,7 @@ function page_modes($page, $mode_source) {
   // Rendu
   $r = '<table><tr><td>';
   $r .= $lblsch.'</td><td> / </td><td> '.$lblsrc.' </td><td> ';
-  $r .= acs_plieur('plieur_spip_params', 'spip_params', '?exec=acs&onglet=page&pg='.$page.$detail, $on);
+  $r .= acs_plieur('plieur_spip_params', 'spip_params', '?exec=acs&onglet=pages&pg='.$page.$detail, $on);
   $r .= '</td></tr></table>';
   return $r;
 }
@@ -124,7 +124,7 @@ function page_get_infos($page, $mode_source=false) {
   if (isset($no_infos))
     $r = '<div>'._T('acs:page_rien_a_signaler').'</div><br />';
 
-  $r .= '<table width="100%"><tr><td><span class="onlinehelp">'._T('acs:source').' : </span><a class="lien_source" href="?exec=acs&onglet=page&pg='.$page.'&mode=source">'.substr($pg, 3).'</a></td>';
+  $r .= '<table width="100%"><tr><td><span class="onlinehelp">'._T('acs:source').' : </span><a class="lien_source" href="?exec=acs&onglet=pages&pg='.$page.'&mode=source">'.substr($pg, 3).'</a></td>';
   $r .= '<td style="text-align:'.$GLOBALS['spip_lang_right'].'">'._T('acs:acsDerniereModif').' '.date('Y-m-d H:i:s', $pg_derniere_modif).'</td>';
   $r .= '</tr></table>';
 

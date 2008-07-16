@@ -49,14 +49,13 @@ le plugin ACS à activer dans l'interface d'admin de spip.
 
 Composants pour ACS
 
-ACS utilise des squelettes constitués de composants élémentaires.
-Ceux-ci sont installés dans le dossier composants du squelette.
-
-Le fichier composants/config.php :
-Liste les composants du modèle, ordonnés par groupes.
+ACS utilise des "modèles ACS", qui sont des squelettes Spip constitués de composants élémentaires 
+et d'élements Spip classiques comme des modèles Spip ou des formulaires spip.
+Les composants ACS sont installés dans le dossier composants du modèle ACS actif, et, en option, dans le ou les 
+dossier(s) composants du (ou des) squelette(s) en plus d'ACS (override(s)).
 
 Dossiers et fichiers d'un composant:
-(seul le fichier composants/<composant>/ecrire/composant.xml est obligatoire)
+Seul le fichier composants/<composant>/ecrire/composant.xml est obligatoire: c'est lui qui définit un composant, pour ACS.
 
 composants/<composant> : racine
 
@@ -79,7 +78,7 @@ Par défaut, $GLOBALS['ACS_CHEMIN'] = IMG/_acs (défini dans acs_options.php)
 
 Le fichier composant.xml:
 param:
-- optionnel: true (absent= false, par défaut),
+- optionnel: true (absent=true, par défaut),
              ou nom de variable meta (activation si la variable vaut "oui"),
              ou plugin(s) <nom_de_plugin> (activation du composant si le plugin <nom_de_plugin> est actif)
 - preview:  true (absent=false, par défaut). Hauteur de preview si numérique.

@@ -63,6 +63,8 @@ class AdminComposant {
     $c = $config['composant'][0];
     $this->nom = $c['nom'][0];
     $this->version = $c['version'][0];
+    $this->version_acs_min = $c['version_acs_min'][0];
+    $this->version_acs_max = $c['version_acs_max'][0];
     $this->version_spip_min = $c['version_spip_min'][0];
     $this->version_spip_max = $c['version_spip_max'][0];
     $this->description = _T($type.'_description');
@@ -197,8 +199,8 @@ class AdminComposant {
   else $this->display = "display: none;";
 
   // bouton_radio2($nom, $valeur, $titre, $actif = false, $onClick="", $enable=true)
-  $o = bouton_radio2($varname, "oui", _T($this->type.'_on'), $var == "oui", "changeVisible(this.checked, '$varconf', 'block', 'none');",$enable);
-  $o .= bouton_radio2($varname, "non", _T($this->type.'_off'), $var == "non", "changeVisible(this.checked, '$varconf', 'none', 'block');",$enable);
+  $o = bouton_radio2($varname, "oui", _T('item_oui'), $var == "oui", "changeVisible(this.checked, '$varconf', 'block', 'none');",$enable);
+  $o .= bouton_radio2($varname, "non", _T('item_non'), $var == "non", "changeVisible(this.checked, '$varconf', 'none', 'block');",$enable);
   return $o;
   }
 
@@ -335,7 +337,22 @@ class AdminComposant {
     if (!is_array($param['option'])) return 'Pas d\'options pour '.$nom;
     $r = '<table><tr valign="bottom"><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$nom.'" title="'.$nom.'" class="label">'._T($nom).'</label></td><td>';
     foreach($param['option'] as $option) {
-      $r .= bouton_radio($nom, $option, '<label for "'.$nom.'" title="'.$nom.ucfirst($option).'" class="label">'._T($nom.ucfirst($option)).'</label>', $value == $option);
+      switch($option) {
+        case 'oui';
+          $label = _T('item_oui');
+          break;
+        case 'non';
+          $label = _T('item_non');
+          break;
+        default:
+          $label = _T($nom.ucfirst($option));
+      }
+      $r .= bouton_radio(
+        $nom,
+        $option,
+        '<label for "'.$nom.'" title="'.$nom.ucfirst($option).'" class="label">'.$label.'</label>',
+        $value == $option
+      );
     }
     $r .= '</td></tr></table>';
     return $r;

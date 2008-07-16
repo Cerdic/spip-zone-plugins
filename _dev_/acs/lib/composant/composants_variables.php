@@ -35,12 +35,8 @@ function lecture_composants_variables() {
     $config = find_in_path('composants/'.$composant.'/ecrire/composant.xml');
     $config = spip_xml_load($config); // Lit les paramètres de configuration du composant
     $c = $config['composant'][0];
-    if (is_array($c['param'])) {
-      foreach($c['param'] as $param) {
-        if ($param['nom'][0] == 'optionnel')
-          $r[$tag.ucfirst($composant).'Use'] = array('composant' => $composant, 'type' => 'use');
-      }
-    }
+    $r[$tag.ucfirst($composant).'Use'] = array('composant' => $composant, 'type' => 'use');
+
     if (is_array($c['variable'])) {
       foreach($c['variable'] as $k=>$var) {
         foreach($var as $xmltag=>$value) {

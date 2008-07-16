@@ -15,8 +15,9 @@ function composant_infos() {
   include (_DIR_PLUGIN_ACS.'lib/composant/composant_get_infos.php');
   $r ='';
 
-  $configfile = find_in_path('composants/config.php');
-  @include($configfile);
+  include_spip('lib/composant/composants_liste');
+  $choixComposants = array_keys(composants_liste());
+
   if (!is_array($choixComposants))
     ajax_retour($r.'<div class="alert">'._T('acs:config_not_found').'</div>');
 
@@ -95,7 +96,7 @@ function show_override($page) {
     $r = '<u>'.$page.'</u>';
   else
     $r = $page;
-  $r = '<a class="nompage" href="?exec=acs&onglet=page&pg='.$page.'">'.$r.'</a>';
+  $r = '<a class="nompage" href="?exec=acs&onglet=pages&pg='.$page.'">'.$r.'</a>';
   return $r;
 }
 

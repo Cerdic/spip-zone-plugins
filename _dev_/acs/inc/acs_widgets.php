@@ -10,11 +10,11 @@ require_once _DIR_ACS.'lib/composant/composants_actifs.php';
 
 // Affiche une liste contextuelle des composants - Onglets pages, page ET composants
 // Show a contextual widget list - Used by pages AND composants
-function liste_widgets($composants, $islink=false, $sort = true) {
+function liste_widgets($composants, $islink=false) {
   if (!is_array($composants)) return false;
 
   $r .= '<div id="widgets" class="widgets">';
-  if ($sort) sort($composants);
+  sort($composants);
   foreach($composants as $widget) {
     if ($widget == '') {
       $r .= '<hr style="margin-bottom: 2px"/>';

@@ -50,16 +50,13 @@ function exec_acs() {
   switch($onglet) {
     case 'pages':
       include_spip('inc/acs_pages');
-      $col1 = acs_pages_gauche();
-      $col2 = acs_pages();
-      $col3 = acs_pages_droite();
-      break;
-
-    case 'page':
-      include_spip('inc/acs_page');
-      $col1 = acs_page_gauche(_request('pg'));
-      $col2 = acs_page(_request('pg'));
-      $col3 = acs_page_droite(_request('pg'));
+      if (_request('pg'))
+        $pg = _request('pg');
+      else
+        $pg = 'sommaire';
+      $col1 = acs_pages_gauche($pg);
+      $col2 = acs_pages($pg);
+      $col3 = acs_pages_droite($pg);
       break;
 
     case 'adm':
@@ -71,10 +68,9 @@ function exec_acs() {
     case 'composants':
       include_spip('lib/composant/composant_select');
       include_spip('inc/acs_widgets');
-      include _DIR_PLUGIN_ACS.'lib/composant/classComposantPrive.php';
-
-      $configfile = find_in_path('composants/config.php');
-      @include $configfile;
+      include_spip('lib/composant/classComposantPrive');
+      include_spip('lib/composant/composants_liste');
+      $choixComposants = array_keys(composants_liste());
       if (!is_array($choixComposants))
         break;
 
@@ -85,10 +81,20 @@ function exec_acs() {
       $cc = _request('composant') ? _request('composant') : 'fond';
       $$c = new AdminComposant($cc, $debug = false);
 
-      // Crée l'interface d'administration du composant
-      if(isset($$c->optionnel)) {
-        $acsCU = $$c->fullname.'Use';
-        $enable = true;
+      // Crée l'interface d'administration du composant        
+      $acsCU = $$c->fullname.'Use';
+      $enable = true;
+
+      if ($_POST['changer_config']=='oui' && ($_POST[$acsCU] != $GLOBALS['meta'][$acsCU]))
+        ecrire_meta($acsCU, ($_POST[$acsCU] ? $_POST[$acsCU] : 'non'));
+
+      $acsCU = $$c->fullname.'Use';
+      $enable = true;
+      if (($$c->optionnel =='non') || ($$c->optionnel =='no')) {
+        $o = '';
+        ecrire_meta($acsCU,'oui'); // Active le composant non optionnel
+      }
+      else {
         // Désactive le composant s'il dépend de plugins non activés
         if (strpos($$c->optionnel, 'plugin') === 0) {
           $plugins_requis = explode(' ', substr($$c->optionnel, 7));
@@ -101,16 +107,12 @@ function exec_acs() {
           }
         }
         // Désactive le composant si "optionnel" est égal à une variable de configuration non égale à "oui" (si optionnel ne vaut pas oui ou true, il s'agit d'un nom de variable de configuration)
-        elseif (($$c->optionnel != 'oui') && ($$c->optionnel != 'true') && ($GLOBALS['meta'][$$c->optionnel] != 'oui')) {
+        elseif (isset($$c->optionnel) && ($$c->optionnel != 'oui') && ($$c->optionnel != 'yes') && ($GLOBALS['meta'][$$c->optionnel] != 'oui')) {
           ecrire_meta($acsCU,'non');
           $enable = false;
         }
-
-        if ($_POST['changer_config']=='oui' && ($_POST[$acsCU] != $GLOBALS['meta'][$acsCU]))
-          ecrire_meta($acsCU, ($_POST[$acsCU] ? $_POST[$acsCU] : 'non'));
-          $o = '<div align="'.$GLOBALS['spip_lang_right'].'" style ="font-weight: normal"><label>'._T('acs:use').' '._T($cc).' : </label>'.$$c->editswitch($enable).'</div>';
+        $o = '<div align="'.$GLOBALS['spip_lang_right'].'" style ="font-weight: normal"><label>'._T('acs:use').' '._T($cc).' : </label>'.$$c->editswitch($enable).'</div>';
       }
-      else $o = "";
 
       $cIcon = $$c->icon;
       if (!is_readable($cIcon)) $cIcon = $cIconDef;
@@ -129,8 +131,16 @@ function exec_acs() {
       );
       $col2 .= '<br /><a name="cTrad"></a><div id="cTrad"></div>'; // Container for translations - Ajax
 
+      include_spip('lib/composant/composants_liste');
+      $choixComposants = array_keys(composants_liste());
+      if (is_array($choixComposants))
+        $l = liste_widgets($choixComposants, true);
+      else
+        $l = '&nbsp;';  
       if (count($$c->widgets) > 0)       // Containers
-        $col3 =  acs_box(_T('composants'), liste_widgets($$c->widgets), $cIcon, 'acs_box_composants');
+        $col3 =  acs_box(_T('composants'), liste_widgets($$c->widgets), $cIcon, 'acs_box_composants').'<br />';
+      $col3 .= acs_box(count($choixComposants).' '.((count($choixComposants)==1) ? strtolower(_T('composant')) : strtolower(_T('composants'))), $l, $cIconDef, 'acs_box_composants');
+      
       if ($_POST['changer_config']=='oui')
         ecrire_metas(); // écrit les metas changés, obl. après composants
 
