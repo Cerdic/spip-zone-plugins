@@ -13,7 +13,11 @@
     <nom>preview</nom>
     <valeur>50</valeur>
   </param>
-
+  <param>
+    <nom>optionnel</nom>
+    <valeur>non</valeur>
+  </param>
+  
   <variable>
     <nom>Color</nom>
     <type>color</type>

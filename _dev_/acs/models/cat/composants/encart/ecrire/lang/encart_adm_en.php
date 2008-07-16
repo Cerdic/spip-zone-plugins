@@ -8,7 +8,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'encart_help' => 'Keyword depend on language: it is defined in Encart component language file.',
 'keyword' => 'Encart',
 
-'encart_on' => _T('item_oui'),
-'encart_off' => _T('item_non'),
 );
 ?>
