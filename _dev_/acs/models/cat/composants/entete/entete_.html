@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" xml:lang="#LANG" lang="#LANG">
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2008
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+]
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+  <meta name="generator" content="ACS 0.4 & SPIP #SPIP_VERSION" />
+  <meta name="rating" content="General" />
+  <meta name="category" content="Document" />
+  <meta name="page-topic" content="Document" />
+  <meta name="distribution" content="Global" />
+  <meta name="audience" content="General" />
+  [<title>(#ENV{title})</title>]
+  [<meta name="robots" content="(#ENV{mrobots,all})">]
+  [<meta name="expires" content="(#ENV{mexpires,3600})" />]
+  [<meta name="description" content="(#ENV{mdescription,[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]})" />]
+  [<meta name="keywords" lang="#LANG" content="(#ENV{mkeywords,<:acs:entete_meta_keywords:>})" />]
+  [<meta name="author" content="(#ENV{mauthor,<:acs:entete_meta_author:>})" />]
+  [<meta name="copyright" content="(#ENV{mcopyright,<:acs:entete_meta_copyright:>})" />]
+  [<meta name="abstract" content="(#ENV{mabstract,[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]})" />]
+  <meta name="organization" content="#NOM_SITE_SPIP" />
+  [<meta name="location" content="(#ENV{mlocation,<:acs:entete_meta_location:>})" />]
+  <meta name="DC.Type" content="Document" />
+  <meta name="DC.Format" content="text/html" />
+  <meta name="DC.Identifier" content="#URL_SITE_SPIP" />
+  <meta name="DC.Language" content="#LANG" />
+  <meta name="DC.Coverage" content="<:acs:entete_meta_dc_coverage:> #NOM_SITE_SPIP" />
+  [<meta name="DC.Creator" content="(#ENV{mauthor,<:acs:entete_meta_author:>})" />]
+  [<meta name="DC.Date" content="(#ENV{mdate, #DATE})" />]
+  [<meta name="DC.Contributor" content="(#ENV{mcontributor,#NOM_SITE_SPIP})" />]
+  [<meta name="DC.Publisher" content="(#ENV{mpublisher,#NOM_SITE_SPIP})" />]
+  [<meta name="DC.Subject" content="(#ENV{msubject,[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]})" />]
+  <link rel="schema.DC" href="#URL_SITE_SPIP/dc" />[(#REM) DC metas ]
+  [<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />][(#REM) Lien vers l'icone destinee a la barre de bookmarks ]
+  <link rel="alternate" type="application/rss+xml"[ title="(#ENV{rsstitle,<:syndiquer_site:>})"] href="#ENV{rssurl,#URL_PAGE{backend}}" />[(#REM) Lien vers le flux RSS du site ]
+  <link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="all" />[(#REM) Feuille de style par defaut pour le code genere par SPIP ]
+  <link rel="stylesheet" href="[(#CHEMIN{agenda.css}|direction_css)]" type="text/css" media="projection, screen, tv" />[(#REM) Feuille de style CSS pour l'agenda Spip]
+  #INSERT_HEAD [(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css. Située avant impression.css pour permettre   contrôle sur impression des autres plugins ]
+  <link rel="stylesheet" href="spip.php?page=habillage.css[&amp;v=(#ACS_DERNIERE_MODIF)]" type="text/css" media="projection, screen, tv" />[(#REM) Feuille de style CSS pour l'affichage du site a l'ecran ]
+  <link rel="stylesheet" href="[(#CHEMIN{impression.css}|direction_css)]" type="text/css" media="print" />[(#REM) Feuille de style CSS pour l'impression ]
+  <script type="text/javascript" src="#CHEMIN{javascript/layer.js}"></script>
+</head>
+<body[ class="page_(#ENV{page})"]>
+#SET{use1,#EVAL{"$GLOBALS['meta']['acs'.ucfirst($GLOBALS['contexte_inclus']['c1']).'Use']"}}
+[(#GET{use1}|=={oui}|?{' '}) [(#SET{c1,composants/[(#ENV{c1})]/[(#ENV{c1})]})] <INCLURE{fond=#GET{c1}}>]
+#SET{use2,#EVAL{"$GLOBALS['meta']['acs'.ucfirst($GLOBALS['contexte_inclus']['c2']).'Use']"}}
+[(#GET{use2}|=={oui}|?{' '}) [(#SET{c2,composants/[(#ENV{c2})]/[(#ENV{c2})]})] <INCLURE{fond=#GET{c2}}>]
+#SET{use3,#EVAL{"$GLOBALS['meta']['acs'.ucfirst($GLOBALS['contexte_inclus']['c3']).'Use']"}}
+[(#GET{use3}|=={oui}|?{' '}) [(#SET{c3,composants/[(#ENV{c3})]/[(#ENV{c3})]})] <INCLURE{fond=#GET{c3}}>]
