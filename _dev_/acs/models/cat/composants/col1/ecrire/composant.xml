@@ -4,11 +4,16 @@
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
   <version>0.4</version>
-  <version_acs_min>0.3</version_acs_min>
+  <version_acs_min>0.4</version_acs_min>
   <version_acs_max>0.4</version_acs_max>
   <version_spip_min>1.9207</version_spip_min>
   <version_spip_max>1.9208</version_spip_max>
 
+  <param>
+    <nom>optionnel</nom>
+    <valeur>no</valeur>
+  </param>
+  
   <variable>
     <nom>1</nom>
     <type>widget</type>
@@ -16,14 +21,14 @@
     <composant>playlist</composant>
     <composant>repimages</composant>
     <composant>encart</composant>
-    <composant>formulaire_recherche</composant>
+    <composant>recherche</composant>
     <composant>custom</composant>
     <composant>custom2</composant>
     <composant>custom3</composant>
     <composant>rubnav</composant>
     <composant>forums</composant>
     <composant>syndic</composant>
-    <valeur>formulaire_recherche</valeur>
+    <valeur>recherche</valeur>
   </variable>
   <variable>
     <nom>2</nom>
@@ -32,7 +37,7 @@
     <composant>playlist</composant>
     <composant>repimages</composant>
     <composant>encart</composant>
-    <composant>formulaire_recherche</composant>
+    <composant>recherche</composant>
     <composant>custom</composant>
     <composant>custom2</composant>
     <composant>custom3</composant>
@@ -48,7 +53,7 @@
     <composant>playlist</composant>
     <composant>repimages</composant>
     <composant>encart</composant>
-    <composant>formulaire_recherche</composant>
+    <composant>recherche</composant>
     <composant>custom</composant>
     <composant>custom2</composant>
     <composant>custom3</composant>
@@ -63,7 +68,7 @@
     <composant>playlist</composant>
     <composant>repimages</composant>
     <composant>encart</composant>
-    <composant>formulaire_recherche</composant>
+    <composant>recherche</composant>
     <composant>custom</composant>
     <composant>custom2</composant>
     <composant>custom3</composant>
@@ -78,7 +83,7 @@
     <composant>playlist</composant>
     <composant>repimages</composant>
     <composant>encart</composant>
-    <composant>formulaire_recherche</composant>
+    <composant>recherche</composant>
     <composant>custom</composant>
     <composant>custom2</composant>
     <composant>custom3</composant>

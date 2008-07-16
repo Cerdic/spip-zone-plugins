@@ -10,10 +10,6 @@
   <version_spip_max>1.9208</version_spip_max>
 
   <param>
-    <nom>optionnel</nom>
-    <valeur>true</valeur>
-  </param>
-  <param>
     <nom>preview</nom>
     <valeur>200</valeur>
   </param>

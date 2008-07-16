@@ -7,9 +7,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bandeau_description' => 'Text or html header',
 'bandeau_help' => 'Bandeau take whole width of page and can contain either text or html code.',
 
-'bandeau_on' => _T('item_oui'),
-'bandeau_off' => _T('item_non'),
-
 'acsBandeauFond' => 'Background',
 'acsBandeauBordHaut' => 'Border top',
 'acsBandeauBordBas' => 'Border bottom',

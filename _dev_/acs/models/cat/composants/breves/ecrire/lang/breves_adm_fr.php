@@ -5,7 +5,5 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'breves' => 'Br&egrave;ves',
 'breves_description' => 'Activable si les br&egrave;ves de Spip sont actives.',
-'breves_on' => _T('item_oui'),
-'breves_off' => _T('item_non')
 );
 ?>

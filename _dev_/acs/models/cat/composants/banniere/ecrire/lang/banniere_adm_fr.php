@@ -7,14 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'banniere_description' => 'Banni&egrave;re 468x60 qui change au survol, et logo du site en haut à gauche en option.',
 'banniere_help' => 'En l\'absence de banni&egrave;re, le nom du site est affiché en 60 pixels de haut.',
 
-'banniere_on' => _T('item_oui'),
-'banniere_off' => _T('item_non'),
-
 'acsBanniereImage' => 'Banni&egrave;re',
 'acsBanniereImageFond' => 'Arri&egrave;re-plan',
 'acsBanniereHauteur' => 'Hauteur',
 'acsBanniereUseLogo' => 'Afficher le logo du site',
-'acsBanniereUseLogoOui' => _T('item_oui'),
-'acsBanniereUseLogoNon' =>_T('item_non')
 );
 ?>

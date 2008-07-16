@@ -9,6 +9,11 @@
   <version_spip_min>1.9207</version_spip_min>
   <version_spip_max>1.9208</version_spip_max>
 
+  <param>
+    <nom>optionnel</nom>
+    <valeur>no</valeur>
+  </param>
+  
   <variable>
     <nom>1</nom>
     <type>widget</type>
@@ -17,7 +22,7 @@
     <composant>custom2</composant>
     <composant>custom3</composant>
     <composant>encart</composant>
-    <composant>formulaire_recherche</composant>
+    <composant>recherche</composant>
     <composant>agenda</composant>
     <composant>playlist</composant>
     <composant>repimages</composant>
@@ -31,7 +36,7 @@
     <composant>custom2</composant>
     <composant>custom3</composant>
     <composant>encart</composant>
-    <composant>formulaire_recherche</composant>
+    <composant>recherche</composant>
     <composant>agenda</composant>
     <composant>playlist</composant>
     <composant>repimages</composant>
@@ -45,7 +50,7 @@
     <composant>custom2</composant>
     <composant>custom3</composant>
     <composant>encart</composant>
-    <composant>formulaire_recherche</composant>
+    <composant>recherche</composant>
     <composant>agenda</composant>
     <composant>playlist</composant>
     <composant>repimages</composant>
@@ -59,7 +64,7 @@
     <composant>custom2</composant>
     <composant>custom3</composant>
     <composant>encart</composant>
-    <composant>formulaire_recherche</composant>
+    <composant>recherche</composant>
     <composant>agenda</composant>
     <composant>playlist</composant>
     <composant>repimages</composant>
@@ -73,7 +78,7 @@
     <composant>custom2</composant>
     <composant>custom3</composant>
     <composant>encart</composant>
-    <composant>formulaire_recherche</composant>
+    <composant>recherche</composant>
     <composant>agenda</composant>
     <composant>playlist</composant>
     <composant>repimages</composant>
