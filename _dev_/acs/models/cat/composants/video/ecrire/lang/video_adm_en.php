@@ -8,9 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'video_info' => 'To embed the player in an article, add filter player to tag &lt;doc123&gt; of a flv document. Examples: &lt;doc8|player&gt; ou &lt;doc123|player|autostart=yes&gt;',
 'video_help' => 'Use Flash player.',
 
-'video_on' => _T('item_oui'),
-'video_off' => _T('item_non'),
-
 'acsVideomp3bgcolor' => 'Background',
 'acsVideomp3Boutons' => 'Buttons',
 'acsVideomp3BoutonsHover' => 'Over',
@@ -20,7 +17,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'acsVideoIconsHover' => 'Over',
 
 'acsVideoDownload' => 'Download link',
-'acsVideoDownloadOui' => _T('item_oui'),
-'acsVideoDownloadNon' => _T('item_non')
+
 );
 ?>
