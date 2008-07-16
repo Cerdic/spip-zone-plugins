@@ -43,71 +43,71 @@ soundManager.onload = function() {
 
 
 
-$(document).ready(function(){
+jQuery(document).ready(function(){
 
 //lecteur_debug();
 
 lecteur_multimedia_init();});function lecteur_multimedia_init(){
 
-var aff= $("a[@rel='enclosure'][@href$=mp3]").size(); 
+var aff= jQuery("a[@rel='enclosure'][@hrefjQuery=mp3]").size(); 
 
-	//$("body").css({background:"#FF0000"});
+	//jQuery("body").css({background:"#FF0000"});
 	// preparer un plan B si flash < 8
 	playa  =  '<div id="musicplayer" style="">' +
 	         '</div>';
 			
-	$('body').append(playa);
-	$('div#musicplayer').css({position:"fixed",top:"10px", right:"10px",width:"0",height:"0"});
+	jQuery('body').append(playa);
+	jQuery('div#musicplayer').css({position:"fixed",top:"10px", right:"10px",width:"0",height:"0"});
 	
 	// lister les mp3 de la page 
-	$("a[@rel='enclosure'][@href$=mp3]").each(
+	jQuery("a[@rel='enclosure'][@href$=mp3]").each(
 		function(i) {	 
 				// we store mp3 links in an array
 				mp3Array.push(this.href);
-				mp3Titles.push($(this).html());
+				mp3Titles.push(jQuery(this).html());
 
 				//demarrer le lecteur lors d'un click
-				$(this).click(
+				jQuery(this).click(
 		             function(e)
 		             {
 		                 e.preventDefault();
 		                 player_play(i);
-		                 $("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');		
+		                 jQuery("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');		
 		                 
 		              }
 		         );
 		         
 		         // activer le click sur un parent de class "play_"
-		         if ( $(this).parent().attr("class") ) 
-		               		if(  $(this).parent().attr("class").split(" ").contains("play_") )
-		               	 		$(this).parent().click(
+		         if ( jQuery(this).parent().attr("class") ) 
+		               		if(  jQuery(this).parent().attr("class").split(" ").contains("play_") )
+		               	 		jQuery(this).parent().click(
 		             					function(e)
 		             							{
 												player_play(i);
-		                 						$("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');																	}		
+		                 						jQuery("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');																	}		
 		                		);
 		         // ajouter un bouton "play" devant les liens hors player - 
 		         //a passer en .ajoute_musicplayer()	
-				//$(this).before('<span class="play_">play</span>&nbsp;');
-				$(this).before('<span class="play_"><img src="' + image_play + '"/></span>&nbsp;');
+				//jQuery(this).before('<span class="play_">play</span>&nbsp;');
+				jQuery(this).before('<span class="play_"><img src="' + image_play + '"/></span>&nbsp;');
 
 		}
 	);
 
 
-	$("a[@rel='video']").each(
+	jQuery("a[@rel='video']").each(
 		function(i) {	 
 				// we store flv links in an array
 				flvArray.push(this.href);
-				flvTitles.push($(this).html());
+				flvTitles.push(jQuery(this).html());
 
 				//demarrer le lecteur lors d'un click
-				$(this).click(
+				jQuery(this).click(
 		             function(e)
 		             {
 		                e.preventDefault();
 		                video_play(i);	
-						// $("#now_playing").html($(this).html());                
+						// jQuery("#now_playing").html(jQuery(this).html());                
 		             }
 		         );
 		        
@@ -117,12 +117,12 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 
 	// css playliste
 	// du player
-	$(".playliste").find("span").remove(); // traiter a par le player
+	jQuery(".playliste").find("span").remove(); // traiter a par le player
 
-	$(".playliste li").hover(function(){
-	  $(this).addClass("over");
+	jQuery(".playliste li").hover(function(){
+	  jQuery(this).addClass("over");
 	},function(){
-	  $(this).removeClass("over");
+	  jQuery(this).removeClass("over");
 	});	
 
 
@@ -130,16 +130,16 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 
 	// liens mp3 hors player avec bouton	
 	// toggle play / pause
-	$("span.play_").each(
+	jQuery("span.play_").each(
 	function(i) {
 	 
-		$(this).toggle(
+		jQuery(this).toggle(
 			             function(e){ 
 			            if(live_track !=='stop'){
 			              player_stop();
 			             }else{
 			            player_play(i) ;
-			            $(this).html("<img src='" + image_pause + "'/>").addClass("play_on");	
+			            jQuery(this).html("<img src='" + image_pause + "'/>").addClass("play_on");	
 			            // i c pas forcemment bon si t'as un player avant le lien cf plus bas
 			            }  						
 						 },function(e){
@@ -154,17 +154,17 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 
  // le bouton play/pause du player
  
-	    $('#bouton_play').click(function(e){
+	    jQuery('#bouton_play').click(function(e){
 	    //console.log(isPlaying);
 	    if(!isPlaying){
-	    	$(this).attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');	    	   
+	    	jQuery(this).attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');	    	   
 		    if(live_track =='stop') {
 		   		player_play(0) ;
 		   	}else{
 		    	player_togglePause();
 		    }	
 	    }else{	
-	    	$(this).attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/play.png');		
+	    	jQuery(this).attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/play.png');		
 	   		player_togglePause();
 	    }
 	    });
@@ -173,9 +173,9 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 	
 	
 	
-	// chopper les coordonnées du clic dans la barre de progression
-	$("#scrollbar").click(function(e){
-	var x = Math.round((e.pageX - this.offsetLeft) / $(this).width() * 100);
+	// chopper les coordonnï¿½es du clic dans la barre de progression
+	jQuery("#scrollbar").click(function(e){
+	var x = Math.round((e.pageX - this.offsetLeft) / jQuery(this).width() * 100);
      if(live_track !== 'stop'){
      var mySound = soundManager.getSoundById('son_' + track_index);
      var newposition = Math.round(mySound.durationEstimate * x / 100) ;
@@ -189,7 +189,7 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 
   	 });
 
-  	 $("#now_playing").change(function(){
+  	 jQuery("#now_playing").change(function(){
   	      	 scroller_init();
 	 });
 	 
@@ -201,14 +201,14 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 
 function player_play(i){
 	player_stop();
-	$("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');
+	jQuery("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');
 
 	track_index = i ;
 	live_track = i ;
 
-	//$("span.play_:eq("+i+")").html("stop").addClass("play_on");		
-	$("span.play_:eq("+i+")").html("<img src='" + image_pause + "'/>").addClass("play_on");	// i c pas forcemment bon si t'as un player avant le lien, il faut retrancher le nb d'item de la playlist du lecteur (ne pas mettre enclosure aux deux ?)	
-	$(".play_:eq("+i+")").addClass("play_on");
+	//jQuery("span.play_:eq("+i+")").html("stop").addClass("play_on");		
+	jQuery("span.play_:eq("+i+")").html("<img src='" + image_pause + "'/>").addClass("play_on");	// i c pas forcemment bon si t'as un player avant le lien, il faut retrancher le nb d'item de la playlist du lecteur (ne pas mettre enclosure aux deux ?)	
+	jQuery(".play_:eq("+i+")").addClass("play_on");
 
 	if(soundManager.url != 'undefined'){
 		soundManager.createSound({
@@ -228,21 +228,21 @@ function player_play(i){
 		  var timer = this.bytesLoaded / this.bytesTotal * 100 ;
 		  var minutes = Math.floor(this.durationEstimate / 1000 / 60) ;
 		  var secondes = Math.floor((this.durationEstimate - minutes*1000*60) /1000);
-		  $(".duration").html(minutes + "'" + secondes +"''");
-		  $("#loading").css({width:Math.round(timer) +"%"});
+		  jQuery(".duration").html(minutes + "'" + secondes +"''");
+		  jQuery("#loading").css({width:Math.round(timer) +"%"});
 		  },          // callback function for "download progress update" (X of Y bytes received)
 		  onplay:function(){
-		  $("#loading").css("cursor","hand");
+		  jQuery("#loading").css("cursor","hand");
 		  var minutes = Math.floor(this.durationEstimate / 1000 / 60) ;
 		  var secondes = Math.floor((this.durationEstimate - minutes*1000*60) /1000);
-		  $(".duration").html(minutes + "'" + secondes +"''");		 
+		  jQuery(".duration").html(minutes + "'" + secondes +"''");		 
 		  },                // callback for "play" start
 		  whileplaying:function(){
 		  var minutes = Math.floor(this.position / 1000 / 60) ;
 		  var secondes = Math.floor((this.position - minutes*1000*60) /1000);
 		  var timer2 = this.position / this.durationEstimate * 100 ;
-		  $("#position").css({width:Math.round(timer2) +"%"});
-		  $(".position").html(minutes + "'" + secondes +"''");
+		  jQuery("#position").css({width:Math.round(timer2) +"%"});
+		  jQuery(".position").html(minutes + "'" + secondes +"''");
 		  },          // callback during play (position update)
 		  //'onstop':unLoad(this.sID),                // callback for "user stop"
 		  //'onbeforefinish': null,        // callback for "before sound finished playing (at [time])"
@@ -255,23 +255,23 @@ function player_play(i){
 		  'volume': 100    	
 	 	 });
 	  
-	  	//$("span#now_playing").html(i+"("+mp3Array[i]+")"+track_index);
-	  	//$("span#now_playing").append("son_"+i.id3.artist);
+	  	//jQuery("span#now_playing").html(i+"("+mp3Array[i]+")"+track_index);
+	  	//jQuery("span#now_playing").append("son_"+i.id3.artist);
 		file1 = mp3Titles[track_index];
 		file1 = file1.replace(/(%20)/g,' ');
 		file1 = file1.substr(0,90);
 		file1 = file1.replace(/(.mp3)/g,' ');
 		file1 = file1.replace(/(_|-)/g,' ');
-		//$("img[@alt='play']").attr()
+		//jQuery("img[@alt='play']").attr()
 		var taille = file1.length;
-		$("#now_playing").css("width", taille*6) ;
-		$("#scroller").css("width", taille*6) ;
-		$("#now_playing").html(file1) ;
-		var taille =  $("#scroller").width();
-  		var min_taille = $("#scroller_container").width();
+		jQuery("#now_playing").css("width", taille*6) ;
+		jQuery("#scroller").css("width", taille*6) ;
+		jQuery("#now_playing").html(file1) ;
+		var taille =  jQuery("#scroller").width();
+  		var min_taille = jQuery("#scroller_container").width();
 
 	   // adapter le defilement a la taille du texte
-       $.extend({scroller: {
+       jQuery.extend({scroller: {
        interval:     0,
        refresh:      300,  // Refresh Time in ms
        direction:    "left", // down,right,left,up
@@ -283,7 +283,7 @@ function player_play(i){
        min_height:   15,
        min_width:    min_taille
         }});
-       $("#scroller").css("left", min_taille-taille) ;
+       jQuery("#scroller").css("left", min_taille-taille) ;
 
 	    soundManager.play('son_'+i,{volume:100}) ;
 	    isPlaying = true ;
@@ -306,7 +306,7 @@ function player_play(i){
 		}
 	}
 
-$("#musicplayer").html('<object '+
+jQuery("#musicplayer").html('<object '+
 	'type="application/x-shockwave-flash" '+
 	'data="'+musicplayerurl+'" '+
 	'width="1" height="1" align="middle">'+
@@ -325,18 +325,18 @@ function player_stop(){
 						//reinit d'un autre play
 						isPlaying = false ;
 
-						//$("span.play_on").html('play');
-						$("span.play_on").html('<img src="' + image_play + '"/>');
-						$("span.play_on").removeClass("play_on");
+						//jQuery("span.play_on").html('play');
+						jQuery("span.play_on").html('<img src="' + image_play + '"/>');
+						jQuery("span.play_on").removeClass("play_on");
 						live_track = 'stop' ;
 						
-						$(".playliste li.play_on").removeClass("play_on");
+						jQuery(".playliste li.play_on").removeClass("play_on");
 						reset_boutons();
 						soundManager.destroySound("son_" + track_index);
 						soundManager.stopAll();
 						//stop le musicplayer en flash < 8
-						$("#musicplayer").html('');
-						$("#now_playing").html('');
+						jQuery("#musicplayer").html('');
+						jQuery("#now_playing").html('');
 }	
 
 
@@ -352,7 +352,7 @@ function unLoad(i){
 		unLoad("son_" + track_index);
 		track_index++;
 		//file1=(mp3Array[track_index].split("/"))[(mp3Array[track_index].split("/")).length-1];
-		//$("#now_playing").html(file1) ;
+		//jQuery("#now_playing").html(file1) ;
 		player_play(track_index);
 		
 	}
@@ -364,7 +364,7 @@ function unLoad(i){
 		unLoad("son_" + track_index);
 		track_index--;	
 		//file1=(mp3Array[track_index].split("/"))[(mp3Array[track_index].split("/")).length-1];
-		//$("#now_playing").html(file1) ;
+		//jQuery("#now_playing").html(file1) ;
 		player_play(track_index);
 		
 	}
@@ -387,9 +387,9 @@ function unLoad(i){
 
 
 	function reset_boutons(){
-	$("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/play.png');
-	$(".position").html("0'00''");
-	$("#position,#loading").width(0);
+	jQuery("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/play.png');
+	jQuery(".position").html("0'00''");
+	jQuery("#position,#loading").width(0);
 	}
 
 
@@ -416,7 +416,7 @@ function unLoad(i){
   	 		}          
      		getFlashObject().SetVariable("method:play", "");
      		videoPause = false ; 
-     		$(".playliste li:eq("+i+")").addClass("play_on");
+     		jQuery(".playliste li:eq("+i+")").addClass("play_on");
 
  }
 
@@ -443,7 +443,7 @@ function video_next()
 	
 	function video_stop()
 	{	
-   	 $(".playliste li.play_on").removeClass("play_on");
+   	 jQuery(".playliste li.play_on").removeClass("play_on");
 	 getFlashObject().SetVariable("method:stop", "");
 	 getFlashObject().SetVariable("method:setUrl", videoNullUrl);          
      getFlashObject().SetVariable("method:play", "");
@@ -461,7 +461,7 @@ function video_next()
    
    function lecteur_debug(){
    	
-  	var content = $("#debug").html() ; 	
+  	var content = jQuery("#debug").html() ; 	
 	$("#debug").html(content + "<br />live_track = " +live_track ) ; 
    	
  	};
