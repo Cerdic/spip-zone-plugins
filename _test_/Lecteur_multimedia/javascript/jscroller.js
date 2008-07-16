@@ -9,7 +9,7 @@
  * $Rev: 0.2 $
  */
  
-$(document).ready(function(){
+jQuery(document).ready(function(){
    this.defaults = {
      scroller: {
        interval:     0,
