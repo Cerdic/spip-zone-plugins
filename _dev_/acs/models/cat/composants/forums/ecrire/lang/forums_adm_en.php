@@ -7,9 +7,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forums_description' => 'Forum messages and last published messages block.',
 'forums_info' => 'Preview display messages from article n° 1, and block of last published messages.',
 
-'forums_on' => _T('item_oui'),
-'forums_off' => _T('item_non'),
-
 'acsForumsBord' => 'Border',
 'acsForumsFond1' => 'Background 1',
 'acsForumsFond2' => 'Background 2',
