@@ -1,0 +1,52 @@
+<?php
+
+// This is the SPIP language file for this site - Ceci est le fichier langue SPIP personnalisé pour ce site
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+
+// A
+'auteurs' => 'auteurs',
+'article' => 'Article',
+
+// C
+'contact' => 'Contact',
+'contact_txt' => 'Attention: <i>n\'envoyez PAS vos textes à publier à cette adresse. Pour publier une information, une annonce, ou un communiqué de presse, vous DEVEZ vous inscrire comme rédacteur-coopérateur. Merci. Ce mail est <u>réservé</u> à la presse, aux médias, et aux contacts officiels et administratifs avec notre équipe.',
+
+//
+'date_de_redaction' => 'date de r&eacute;daction',
+'date_de_publication' => 'date de publication',
+
+// I
+'inscription_html' => 'Coop&eacute;rez &agrave; ce site et proposez vos textes, en vous inscrivant ici. Vous recevrez un email vous indiquant vos codes d\'acc&egrave;s &agrave; l\'espace coop&eacute;ratif du site.',
+
+//
+'' => '',
+
+// F - 
+
+// L
+'liens' => 'Les liens du site',
+
+// N
+'nb_de_visites' => 'nombre de visites',
+
+// P
+'plan' => 'plan du site',
+'pertinence' => 'pertinence',
+'popularite' => 'popularit&eacute;',
+
+// R
+'repondre_article_notice' => 'Vous devez &ecirc;tre coop&eacute;rateur du site ou avoir un email valide',
+'repondre_site' => 'Donner votre avis sur ce site',
+'resume' => "résumé",
+
+// S
+'sites' => 'sites',
+
+// T
+'tries_par' => 'tri&eacute;s par',
+
+// V
+'valide' => 'valid&eacute;',
+)
+?>
