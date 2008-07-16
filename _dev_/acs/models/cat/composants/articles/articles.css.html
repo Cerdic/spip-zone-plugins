@@ -1,0 +1,162 @@
+#CACHE{0}
+
+/**
+ * Listes d'articles et extraits introductifs
+ * Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
+ */
+
+.liste-articles li {
+  border-top: #CONFIG{acsArticlesBordLargeur,#CONFIG{acsFondBordLargeur,thin}}[ (#CONFIG{acsArticlesBordStyle,dotted})][ #(#CONFIG{acsArticlesBordColor,#CONFIG{acsOngletsBordColor,dfdfdf}})];
+  [margin-bottom: (#CONFIG{acsArticlesMargeBas})px;]
+  margin-right: 1px;
+}
+
+.liste-articles .entete, .cartouche .entete, .plan-secteur h1 {
+  [background-color: #(#CONFIG{acsArticlesTitresFondColor,#CONFIG{acsFondColor,effdfd}});]
+  [background: url('[(#ACS_CHEMIN)]img/trame/(#CONFIG{acsArticlesTitresFondImage})') repeat top left;]
+ }
+
+.liste-articles .entete {
+  clear: both;
+  float: left;
+  width: 100%;
+}
+
+* html .liste-articles .entete { /* IE */
+  margin-right: 3px;
+  position: relative;
+  z-index: 2;
+}
+
+.liste-articles li p { margin: 0; padding: 0; padding-left: 5px; }
+
+.liste-articles .titres {
+  float: left;
+}
+
+.liste-articles .titre, .liste-articles .surtitre, .liste-articles .soustitre {
+  padding-left: 5px;
+  font-weight: bold;
+  font-size: 0.79em;
+}
+
+.liste-articles li .titre {
+  font-weight: bold;
+}
+
+.liste-articles li .spip_logos {
+  float: left;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 2px;
+}
+
+.liste-articles li .enclosures {
+  float: right;
+  text-align: right;
+  max-width: 60%;
+  margin: 0; }
+
+.liste-articles li .texte, .liste-articles li .extrait {
+  padding: 0.1em;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-top: 2px;
+  margin-bottom: 0.1em;
+  font-size: 0.82em;
+  text-align: justify;
+  display: inline-block;  /* IE */
+}
+
+.liste-articles .infos_article {
+  margin: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+  float: right;
+  font-size: 0.65em;
+}
+
+/*  ------------------------------------------
+/*  Habillage specifique du plan du site
+/*  ------------------------------------------ */
+
+.plan-secteur {position: relative; display: block; z-index: 1;} /* IE */
+
+.plan-secteur h1 {
+  border: 0;
+  border-top: [(#CONFIG{acsArticlesBordLargeur,1px})][( #CONFIG{acsArticlesBordStyle, solid})][ #(#CONFIG{acsArticlesBordCouleur, dfdfdf})];
+  margin: 0;
+  font-size: 110%;
+  font-weight: bold;
+  text-align: center;
+  margin-right:1px;
+}
+* html .plan-rubrique { /* IE */
+  width: 100%;
+  position: relative;
+  display: block;
+  z-index: 2;
+}
+
+.plan-secteur .menu-item {
+  margin-left: 1.5em;
+  list-style: url(#ACS_CHEMIN{img/puces/}#CONFIG{acsArticlesPuce,puce_8x8.gif});
+}
+
+.plan-rubrique {
+  border: 1px solid #[(#CONFIG{acsArticlesBordColor, dfdfdf})];
+  padding: 4px;
+  font-weight: bold;
+  [margin-top: (#CONFIG{acsArticlesMargeBas})px;]
+  [margin-bottom: (#CONFIG{acsArticlesMargeBas})px;]
+  -moz-border-radius: 8px;
+/*
+  border-right: 0;
+  -moz-border-radius-topright: 0;
+  -moz-border-radius-bottomright: 0;
+*/
+  min-height: #CONFIG{acsArticlesLogoTailleMax,50}px;
+}
+
+.plan-rubrique .spip_logos {
+  float: left;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+div.plan-articles {
+  font-weight: normal;
+  padding-left: 4px;
+  padding-right: 4px;
+  text-align: justify;
+}
+
+span.plan-article {
+  margin-right: 1em;
+}
+
+/* Eclaircissement ou assombrissement progressif des rubriques en fonction de la profondeur */
+
+ul .plan-rubrique {
+  background: #[(#CONFIG{acsArticlesRubFond2, fafffa})];
+  margin-left: 2%;
+}
+
+ul ul .plan-rubrique {
+  background: #[(#CONFIG{acsArticlesRubFond3, f5fff5})];
+  margin-left: 3%;
+}
+ul ul ul .plan-rubrique {
+  background: #[(#CONFIG{acsArticlesRubFond4, efffef})];
+  margin-left: 4%;
+}
+ul ul ul ul .plan-rubrique {
+  background: #[(#CONFIG{acsArticlesRubFond5, dfffdf})];
+  margin-left: 5%;
+}
+ul ul ul ul ul .plan-rubrique {
+  background: #[(#CONFIG{acsArticlesRubFond6, d0ffd0})];
+  margin-left: 6%;
+}

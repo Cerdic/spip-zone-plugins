@@ -1,0 +1,14 @@
+#CACHE{0}[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2008
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Les articles avec les mots-clés _ide, _aut, et _adm sont à accès restreint aux visiteurs enregistrés, membres, et admins.
+Access to articles tagged with keywords _ide, _aut, and _adm is restricted to registered members, authors, and administrators.
+
+]<B_acces_restreint><BOUCLE_acces_restreint(ARTICLES) {id_article} {statut==[publie|propose|refuse]} {titre_mot==(_ide|_aut|_adm)}>#SET{statut,#EVAL{$GLOBALS['auteur_session']['statut']}}[(#GET{statut}|?{'',' '})<INCLUDE{fond=composants/acces/redirect}{url_redirect=?page=login&url=#SELF}>]</BOUCLE_acces_restreint></B_acces_restreint>
+<INCLUDE{fond=inc-article}{id_article}{env}{self}{ouvrir}{debut_doc}{debut_forums}><//B_acces_restreint>

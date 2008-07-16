@@ -1,0 +1,13 @@
+<B_articles>
+<div class="contre-encart">
+  [(#ANCRE_PAGINATION)][<p class="pagination">(#PAGINATION)</p>]
+  <div class="liste-articles">
+    [(#ENV{debut_articles}|?{'',' '})]
+    <ul>
+    <BOUCLE_articles(ARTICLES) {par popularite} {inverse} {doublons} {pagination} {lang=#LANG}>
+      <INCLURE{fond=composants/articles/articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}>
+    </BOUCLE_articles>
+    </ul>
+  </div>
+</div>
+</B_articles>

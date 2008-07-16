@@ -1,0 +1,20 @@
+[(#REM)
+Les articles par popularité, sans doublons, pour la langue en cours,
+et dont la note dépasse la note seuil de publication si le composant democratie est actif.
+]
+<B_articles>
+<div class="contre-encart">
+  [(#ANCRE_PAGINATION)][<p class="pagination">(#PAGINATION)</p>]
+  <span class="texte_nav" style="float:right"><i><:articles:>[ </i>(#RUBRIQUE|supprimer_numero)<i>], [(#CONFIG{activer_statistiques}|=={oui}|?{[(#CLASSEMENT|=={note_ponderee}|?{<:acs:articles_classes_par_note_ponderee:></i> (<a href="#URL"><:acs:articles_classes_par_popularite:></a>),<:acs:articles_classes_par_popularite:>:</i> (<a href="#URL&amp;classement=note_ponderee"><:acs:articles_classes_par_note_ponderee:></a>)})],<:acs:articles_classes_par_note_ponderee:></i>})]</span>
+  <br class="nettoyeur" />
+  <div class="liste-articles">
+    [(#ENV{debut_articles}|?{'',' '})]
+    <ul>
+    #SET{stat,#DEMOCRATIE_STATUT}
+    <BOUCLE_articles(ARTICLES spip_notations_articles) {par (#CLASSEMENT|=={note_ponderee}|?{note_ponderee,popularite})}{inverse} {doublons} {pagination}{note_ponderee>=#CONFIG{acsDemocratieSeuilPublic,0}} {statut==#GET{stat,publie}} {lang=#LANG}>
+      <INCLURE{fond=composants/articles/articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{note=#NOTE_PONDEREE}>
+    </BOUCLE_articles>
+    </ul>
+  </div>
+</div>
+</B_articles>
