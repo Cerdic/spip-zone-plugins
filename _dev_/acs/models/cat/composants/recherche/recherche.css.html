@@ -1,0 +1,43 @@
+#CACHE{0}
+
+.formulaire_recherche {
+  margin: 0;
+  margin-right: 4px; /* = #recherche.padding-left */
+}
+
+.formulaire_recherche form { /* IE */
+  margin: 0;
+  padding: 0;
+}
+
+.formulaire_recherche #recherche {
+  position: relative;
+  [border-width: (#CONFIG{acsFormulaire_rechercheBordLargeur,#CONFIG{acsFondBordLargeur}});]
+  [border-style: (#CONFIG{acsFormulaire_rechercheBordStyle,#CONFIG{acsFondBordStyle}});]
+  [border-color: #(#CONFIG{acsFormulaire_rechercheBordColor,#CONFIG{acsFondBordColor}});]
+  color: ##CONFIG{acsFondText,00008f};
+  [background: #(#CONFIG{acsFondColor});]
+  -moz-border-radius: 8px;
+  -moz-border-radius-topleft: 0;
+  padding-left: 4px;
+  width: 100%;
+  top: -1px;
+}
+
+.formulaire_recherche label {
+  position: relative;
+  [background: #(#CONFIG{acsFormulaire_rechercheOngletColor,#CONFIG{acsFondColor}});]
+  color: ##CONFIG{acsFondText,00008f};
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+  font: normal normal 1em Verdana, 'Trebuchet MS', Arial, 'Lucida Sans', sans-serif;
+  [border-width: (#CONFIG{acsFormulaire_rechercheBordLargeur,#CONFIG{acsFondBordLargeur}});]
+  [border-style: (#CONFIG{acsFormulaire_rechercheBordStyle,#CONFIG{acsFondBordStyle}});]
+  [border-color: #(#CONFIG{acsFormulaire_rechercheBordColor,#CONFIG{acsFondBordColor}});]
+  border-bottom: 0px;
+  -moz-border-radius-topright: 8px;
+  -moz-border-radius-topleft: 8px;
+  top: 1px;
+  z-index: 1;
+}
