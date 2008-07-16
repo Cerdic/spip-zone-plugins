@@ -25,9 +25,9 @@ jQuery(document).ready(function(){
      }
    }
    
-   var config = $.extend(this.defaults);
-   var scroller = $(config.scroller.id);
-   var scroller_cont = $(config.scroller.cont_id);
+   var config = jQuery.extend(this.defaults);
+   var scroller = jQuery(config.scroller.id);
+   var scroller_cont = jQuery(config.scroller.cont_id);
    
    detectSizes();
    scroller_init(); 
@@ -53,7 +53,7 @@ jQuery(document).ready(function(){
 
    
    function scroller_init() {
-     $("#scroller a").click(function(){
+     jQuery("#scroller a").click(function(){
       window.open(this.href);
       return false;
      });
@@ -62,7 +62,7 @@ jQuery(document).ready(function(){
       window.onfocus=startScroll;
       /* window.onblur=stopScroll; */
         startScroll();  
-       if ($.browser.msie && !config.scroller.interval) {window.focus}
+       if (jQuery.browser.msie && !config.scroller.interval) {window.focus}
      }
    }
    
