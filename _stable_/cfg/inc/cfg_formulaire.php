@@ -61,6 +61,7 @@ class cfg_formulaire{
 			'fichier' => '', // pour storage php, c'est l'adresse du fichier (depuis la racine de spip), sinon ca prend /local/cfg/nom.php
 			'head' => '', // partie du fond cfg a inserer dans le head par le pipeline header_prive (todo insert_head?)
 			'icone' => '', // lien pour une icone
+			'interpreter' => 'oui', // si interpreter vaut 'non', le fond ne sera pas traite comme un fond cfg, mais comme une inclusion simple (pas de recherche des champs de formulaires). Cela permet d'utiliser des #FORMULAIRES_XX dans un fonds/ tout en utilisant la simplicite des parametres <!-- liens=.. --> par exemple.
 			'liens' => array(), // liens optionnels sur des sous-config <!-- liens*=xxx -->
 			'liens_multi' => array(), // liens optionnels sur des sous-config pour des fonds utilisant un champ multiple  <!-- liens_multi*=xxx -->
 			'nom' => '', // le nom du meta (ou autre) ou va etre stocke la config concernee
@@ -120,6 +121,13 @@ class cfg_formulaire{
 		// recherche et stockage des parametres de cfg 
 		$this->recuperer_parametres();
 
+		// si le fond ne doit pas etre calcule comme un fond CFG,
+		// on s'arrete ici. De cette maniere, CFG ne prendra pas
+		// comme des champs a recuperer les champs issus d'un autre formulaire
+		// CFG inclu depuis un formulaire CVT via #FORMULAIRE_XX
+		if ($this->param['interpreter'] == 'non')
+			return true;
+			
 		// recherche et stockage des noms de champs de formulaire
 		if ($err = $this->recuperer_noms_champs()){
 			$ok = false;

@@ -1,6 +1,18 @@
 Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 
+v1.9.3 (16 07 2008)
+- Permettre d'ajouter des #FORMULAIRE_XX dans des fonds/cfg_yy.html
+- introduction d'un parametre interpreter. Si <!-- interpreter=non -->
+alors le fonds/cfg_yy.html ne cherche pas a recuperer les champs du formulaire
+en scannant le code compile. Ainsi, il est possible de creer des fonds de configuration
+cfg en appelant des #FORMULAIRE_XX. Le fond ne prendra pas à tord des parametres
+du/des #FORMULAIRE inclus. Par contre, un tel fond ne peut pas avoir de formulaire
+CFG classique en même temps (on ne peut melanger) ;Mais un fond de ce type
+peut appeler plusieurs #FORMULAIRE differents.
+Les parametres <!-- param=valeurs --> continuent d'etre lus, ce qui permet d'indiquer
+des liens, des autorisations ou autre parametre comme le font normalement les fonds CFG.
+
 v1.9.2 (14 07 2008)
 - Corrections depots tablepack et table qui testaient leurs parametres un peu trop tot,
 ce qui effacait parfois les valeurs par defaut, apres coup.

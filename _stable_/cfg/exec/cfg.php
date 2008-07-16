@@ -20,7 +20,10 @@ function exec_cfg_dist($class = null)
 		);
 	
 	// traitements du formulaire poste
-	$config->traiter();
+	// seulement s'il provient d'un formulaire CFG
+	// et non d'un formulaire CVT dans un fond CFG
+	if (_request('arg'))
+		$config->traiter();
 	
 	//
 	// affichages
