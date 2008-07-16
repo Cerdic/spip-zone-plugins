@@ -8,9 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'playlist_info' => 'Require Audio component.',
 'playlist_description' => 'Display last published mp3 documents.',
 
-'playlist_on' => _T('item_oui'),
-'playlist_off' => _T('item_non'),
-
 'acsPlaylistFondColor' => 'Background',
 'acsPlaylistTitreColor' => 'Title background',
 'acsPlaylistBordColor' => 'Border',

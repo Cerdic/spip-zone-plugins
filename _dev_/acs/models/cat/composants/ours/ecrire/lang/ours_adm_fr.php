@@ -13,11 +13,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'acsOursLinkHover' => 'Au survol',
 
 'acsOursLienRefus' => 'Lien vers articles refus&eacute;s',
-'acsOursLienRefusOui' => _T('item_oui'),
-'acsOursLienRefusNon' =>_T('item_non'),
-'acsOursLienACS' => 'Lien ACS',
-'acsOursLienACSOui' => _T('item_oui'),
-'acsOursLienACSNon' =>_T('item_non'),
-
+'acsOursLienACS' => 'Lien ACS'
 );
 ?>

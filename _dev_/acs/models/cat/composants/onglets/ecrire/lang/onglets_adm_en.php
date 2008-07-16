@@ -17,21 +17,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'acsOngletsLink' => 'Link',
 'acsOngletsLinkHover' => 'Hover',
 'acsOngletsPublier' => 'Panel "Publish"',
-'acsOngletsPublierOui' => _T('item_oui'),
-'acsOngletsPublierNon' =>_T('item_non'),
 'acsOngletsLiens' => 'Panel "Links"',
-'acsOngletsLiensOui' => _T('item_oui'),
-'acsOngletsLiensNon' =>_T('item_non'),
 'acsOnglets1' => 'Panel 1',
 'acsOnglets2' => 'Panel 2',
 'acsOnglets3' => 'Panel 3',
 'acsOnglets4' => ' ',
 'acsOngletschoix4' => 'Panel 4',
-'acsOngletschoix4Oui' => _T('item_oui'),
-'acsOngletschoix4Non' => _T('item_non'),
 'acsOnglets5' => ' ',
 'acsOngletschoix5' => 'Pane 5',
-'acsOngletschoix5Oui' => _T('item_oui'),
-'acsOngletschoix5Non' => _T('item_non')
 );
 ?>
