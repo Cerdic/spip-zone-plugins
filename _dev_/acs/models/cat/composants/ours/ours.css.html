@@ -1,7 +1,8 @@
 #CACHE{0}
 
-#ours {
-  clear: both;
+.ours {clear: both}
+
+.ours fieldset {
   border: 0;
   padding: 0;
   padding-left: 75px;
@@ -15,11 +16,11 @@
   <BOUCLE_rubrique(RUBRIQUES) {racine} {titre_mot=_Ours} {0,1}>border-top: thin dotted ##CONFIG{acsOursText,#CONFIG{acsOngletsBordColor}};</BOUCLE_rubrique>
 }
 
-#ours legend {
+.ours legend {
   margin-top: 2px;
 }
 
-#ours img { vertical-align: middle; }
+.ours img { vertical-align: middle; }
 
-[#ours a {color: #(#CONFIG{acsOursLink});}]
-[#ours a:hover {color: #(#CONFIG{acsOursLinkHover});}]
+[.ours a {color: #(#CONFIG{acsOursLink});}]
+[.ours a:hover {color: #(#CONFIG{acsOursLinkHover});}]

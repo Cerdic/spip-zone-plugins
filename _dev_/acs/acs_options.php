@@ -22,7 +22,7 @@ if(in_array('openPublishing', $GLOBALS['plugins'])) {
   $GLOBALS['ACS_ACCES'][] = 'op_effacer';
 }
 
-
+define('_DEBUG_CRAYONS', true);
 /*__________________________________________________________________
 
   Ne PAS modifier ce qui suit - Do NOT modify antything after this

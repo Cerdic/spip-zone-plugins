@@ -95,7 +95,7 @@ function acs_adm_droite() {
     null,
     _T('acs:acsDerniereModif').' '.date("Y-m-d H:i:s", $GLOBALS['meta']['acsDerniereModif']).
     '<hr />'.
-    _T('acs:documentation').': <a href="http://acs.geomaticien.org"><img src="'._DIR_PLUGIN_ACS.'img_pack/acs_32x32_help.gif" alt="?" style="vertical-align: middle"/></a>',
+    _T('acs:documentation').': <a href="http://acs.geomaticien.org" target="_new"><img src="'._DIR_PLUGIN_ACS.'img_pack/acs_32x32_help.gif" alt="?" style="vertical-align: middle"/></a>',
     _DIR_PLUGIN_ACS."img_pack/acs_32x32.gif",
     '<form name="acs_config" action="?exec=acs&onglet=adm" method="post"><input type="hidden" name="changer_config" value="oui"><div style="text-align: right">'._T('acs:voir_pages_composants').'<input name="acsVoirPagesComposants" type="checkbox"'.($GLOBALS['meta']['acsVoirPagesComposants'] ? ' checked' : '').' /><br /><br /><input type="submit" name="'._T('bouton_valider').
   '" value="'._T('bouton_valider').'" class="fondo" /></div></form>');

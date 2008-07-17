@@ -8,7 +8,7 @@
 
 require_once _DIR_ACS.'lib/composant/composants_actifs.php';
 
-// Affiche une liste contextuelle des composants - Onglets pages, page ET composants
+// Affiche une liste contextuelle des composants - Onglet composants
 // Show a contextual widget list - Used by pages AND composants
 function liste_widgets($composants, $islink=false) {
   if (!is_array($composants)) return false;
@@ -23,12 +23,12 @@ function liste_widgets($composants, $islink=false) {
       $widget_icon = find_in_path('composants/'.$widget.'/img_pack/'.$widget.'_icon.gif');
       if (!file_exists($widget_icon))
         $widget_icon = _DIR_PLUGIN_ACS.'img_pack/composant-24.gif';
-      $link = '<a href="?exec=acs&amp;onglet=composants&amp;composant='.$widget.'" title="'._T('composant').'">';
+      $link = '<a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$widget.'" title="'._T('composant').'">';
       $r .= '<div id="'.$widget.'" class="'.get_widget_class($widget, 'widget').'">'.
         ($islink ? $link : '').
         '<table><tr><td>'.
         ($islink ? '' : $link).
-        '<img src="'.$widget_icon.'" />'.
+        '<img src="'.$widget_icon.'" style="width:20px;height:20px;vertical-align:middle" />'.
         ($islink ? '' : '</a>').
         '</td><td title="'.ucfirst($widget).'" style="padding-left: 5px; padding-right: 5px; width: 95%;"><div style="overflow:hidden; text-align:center">'.ucfirst(str_replace('_', ' ', $widget)).'</div></td></tr></table>'.
         ($islink ? '</a>' : '').

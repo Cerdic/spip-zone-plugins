@@ -1,4 +1,5 @@
 ACS version 0.4:
+- debut d'utilisation de crayons pour les composants
 - valeurs par défaut pour l'initialisation (composants/def.php)
 - nouvelle option de config ACS : affichage des pages et des inclusions des composants
 - interface d'administration d'ACS refaite, acceuil sur l'explorateur Ajax
