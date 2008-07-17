@@ -20,11 +20,7 @@ function formulaires_recherche_a2a_verifier($id_article){
 }
 
 function formulaires_recherche_a2a_traiter($id_article){
-	return 
-		array(
-			'recherche' => $recherche,
-			'id_article_orig' => $id_article_orig
-		);
+	return true; // permettre d'editer encore le formulaire
 }
 
 ?>
