@@ -5,9 +5,9 @@
 	<BOUCLE_lesArticlesLies(ARTICLES){id_article = #ID_ARTICLE_LIE}>
 		<td class="arial2"><a href="[(#URL_ARTICLE|url_absolue)]">#TITRE</a></td>
 		[(#EVAL{autoriser('modifier','article', #ID_ARTICLE_ORIG)}|=={1}|?{' '}) 
-		<td class="arial1"><a href="[(#EVAL{a2a_modifier_rang}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&modifier_rang=moins&redirect=ecrire/#SELF})]" class="ajax"><:a2a:rang_moins:></a></td>
-		<td class="arial1"><a href="[(#EVAL{a2a_modifier_rang}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&modifier_rang=plus&redirect=ecrire/#SELF})]" class="ajax"><:a2a:rang_plus:></a></td>
-		<td class="arial1"><a href="[(#EVAL{supprimer_lien_a2a}|generer_url_action{id_article_cible=#ID_ARTICLE&id_article=#ID_ARTICLE_ORIG&redirect=ecrire/#SELF})]" class="ajax"><:a2a:supprimer_le_lien:></a></td>
+		<td class="arial1"><a href="[(#URL_ACTION_AUTEUR{a2a_modifier_rang,#ID_ARTICLE/#ID_ARTICLE_ORIG/moins,#SELF})]" class="ajax"><:a2a:rang_moins:></a></td>
+		<td class="arial1"><a href="[(#URL_ACTION_AUTEUR{a2a_modifier_rang,#ID_ARTICLE/#ID_ARTICLE_ORIG/plus,#SELF})]" class="ajax"><:a2a:rang_plus:></a></td>
+		<td class="arial1"><a href="[(#URL_ACTION_AUTEUR{supprimer_lien_a2a,#ID_ARTICLE/#ID_ARTICLE_ORIG,#SELF})]" class="ajax"><:a2a:supprimer_le_lien:></a></td>
 		]
 	</BOUCLE_lesArticlesLies>
 </tr>	

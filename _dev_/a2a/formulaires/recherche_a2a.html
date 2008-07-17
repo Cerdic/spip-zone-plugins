@@ -9,14 +9,14 @@
 
 	#SET{exclure,#ARRAY{0,#ID_ARTICLE_ORIG}}
 	<BOUCLE_doublons(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}>
-	#SET{exclure,#GET{exclure}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE_LIE}}}
+	#SET{exclure,#GET{exclure}|push{#ID_ARTICLE_LIE}}
 	</BOUCLE_doublons>
 	<B_Recherche>
 		<ul>
 	<BOUCLE_Recherche(ARTICLES){recherche}{!id_article IN #GET{exclure}}>
 		[<li>(#TITRE) : 
 		<a href="[(#URL_ARTICLE|url_absolue)]"><:a2a:voir:></a> - 
-		<a href="[(#EVAL{a2a_lier_article}|generer_url_action{id_article=#ID_ARTICLE&amp;id_article_orig=#ID_ARTICLE_ORIG})]" ><:a2a:lier_cet_article:></a>
+		<a href="[(#URL_ACTION_AUTEUR{a2a_lier_article,#ID_ARTICLE/#ID_ARTICLE_ORIG,#SELF})]" class="ajax"><:a2a:lier_cet_article:></a>
 		</li>]
 	</BOUCLE_Recherche>
 		</ul>

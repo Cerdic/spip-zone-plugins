@@ -4,8 +4,11 @@ function action_supprimer_lien_a2a(){
 	include_spip('inc/utils');
 	include_spip('inc/headers');
 	$contexte = array();
-	$id_article_cible = _request('id_article_cible');
-	$id_article = _request('id_article');
+
+	$securiser_action = charger_fonction('securiser_action','inc');
+	$args = $securiser_action();
+
+	list($id_article_cible, $id_article) = explode('/',$args);
 	
 	$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . 'AND id_article_lie=' . sql_quote($id_article_cible));
 
@@ -20,6 +23,9 @@ function action_supprimer_lien_a2a(){
 		'id_article = ' . sql_quote($id_article), 
 		'id_article_lie = ' . sql_quote($id_article_cible)
 		));
+
+	if ($redirect = _request('redirect'))
+		redirige_par_entete(str_replace('&amp;','&',$redirect));	
 }
 
 ?>

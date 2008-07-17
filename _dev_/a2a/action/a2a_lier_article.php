@@ -2,8 +2,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_a2a_lier_article(){
-	$id_article_cible = _request('id_article');
-	$id_article_source = _request('id_article_orig');
+
+	$securiser_action = charger_fonction('securiser_action','inc');
+	$args = $securiser_action();
+
+	list($id_article_cible, $id_article_source) = explode('/',$args);
+	
 	//on verifie que cet article n'est pas deja lie
 	if (!sql_countsel('spip_articles_lies', array(
 		'id_article=' . sql_quote($id_article_source),
@@ -19,6 +23,9 @@ function action_a2a_lier_article(){
 	}
 
 	include_spip('inc/header');
+	if ($redirect = _request('redirect'))
+		redirige_par_entete(str_replace('&amp;','&',$redirect));
+		
 	redirige_par_entete(generer_url_ecrire("articles", "id_article=".$id_article_source, "&"));
 }
 
