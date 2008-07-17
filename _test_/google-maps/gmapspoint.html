@@ -1,0 +1,23 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/javascript[; charset=(#CHARSET)]})]
+<?php
+if(!empty($_POST['id']))
+{
+	if($_POST['id']==-1 && $_POST['lat']==$_POST['lng'])
+	{
+		spip_query('DELETE FROM spip_gmappoints WHERE id='.mysql_real_escape_string($_POST['lat']));
+		echo $_POST['id'];
+	}else if(empty($_POST['html'])){
+		spip_query('UPDATE spip_gmappoints SET lat='.mysql_real_escape_string($_POST['lat']).', lng='.mysql_real_escape_string($_POST['lng']).' WHERE id='.mysql_real_escape_string($_POST['id']));
+		echo $_POST['id'];
+	}else{
+		spip_query('UPDATE spip_gmappoints SET html="'.mysql_real_escape_string($_POST['html']).'" WHERE id='.mysql_real_escape_string($_POST['id']));
+		echo $_POST['id'];
+	}
+}
+else
+{
+	spip_query('INSERT INTO spip_gmappoints(lat,lng) VALUES (' . mysql_real_escape_string($_POST['lat']).','.mysql_real_escape_string($_POST['lng']).')');
+	echo mysql_insert_id();
+}
+?>

@@ -1,0 +1,23 @@
+<plugin>
+	<nom>Google Maps</nom>
+	<auteur>[J&eacute;r&ocirc;me Breton->jerome.breton@gmail.com] ([GroupeReflect->http://www.groupereflect.net])</auteur>
+	<version>1.0.3</version>
+	<etat>stable</etat>
+	<icon>images/logo.png</icon>
+	<description></description>
+	<lien></lien>
+	<fonctions>gmaps/fonctions.php</fonctions>
+	<options>gmaps/options.php</options>
+	<install>gmaps/install.php</install>
+	<prefix>gmaps</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouter_boutons</action>
+		<inclure>gmaps/pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_priver</action>
+		<inclure>gmaps/pipelines.php</inclure>
+	</pipeline>
+</plugin>

@@ -1,0 +1,16 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/javascript[; charset=(#CHARSET)]})]
+{"gmappoints": [<?php
+if('#ENV**{pts}'!='' && '#ENV**{edit}'==''){
+?><BOUCLE_points1(SPIP_GMAPPOINTS){id IN #ENV**{pts}}>{"id": "#ID", "lat": "#LAT", "lng": "#LNG", "html": "[(#HTML|traiter_raccourcis|json)]"}[(#TOTAL_BOUCLE|=={#COMPTEUR_BOUCLE}|?{'',','})]
+</BOUCLE_points1><?php
+}else if('#ENV**{pts}'!=''){
+?>
+<BOUCLE_points2(SPIP_GMAPPOINTS){id IN #ENV**{pts}}>
+{"id": "#ID", "lat": "#LAT", "lng": "#LNG", "html": "[(#HTML|json)]"}[(#TOTAL_BOUCLE|=={#COMPTEUR_BOUCLE}|?{'',','})]
+</BOUCLE_points2><?php
+}else{
+?><BOUCLE_points3(SPIP_GMAPPOINTS)>{"id": "#ID", "lat": "#LAT", "lng": "#LNG", "html": "[(#HTML|traiter_raccourcis|json)]"}[(#TOTAL_BOUCLE|=={#COMPTEUR_BOUCLE}|?{'',','})]
+</BOUCLE_points3><?php
+}
+?>]}

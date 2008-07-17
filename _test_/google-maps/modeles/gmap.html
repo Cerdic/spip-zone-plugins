@@ -1,0 +1,135 @@
+<?php
+switch('[(#ENV{pts})]')
+{	case 'tous' :
+    <BOUCLE_gmap_points(SPIP_GMAPPOINTS)>
+      $pts[]=#ID;
+    </BOUCLE_gmap_points>
+  break;
+  case 'aucun':
+    $pts=array();
+  break;
+  default:
+      $pts=explode(',','#ENV{pts}');
+      <BOUCLE_gmap_articles(ARTICLES){id_rubrique=#ENV{rubrique}}>
+        $l=html_entity_decode('[(#TEXTE*|texte_script)]');
+        $pts_tmp=array();
+        preg_match_all('/<gmap.*pts=([^>|]*)[^>]*>/',$l,$pts_tmp);
+        $pts_tmp=explode(',',$pts_tmp[1][0]);
+        $pts=array_merge($pts,$pts_tmp);
+        foreach($pts_tmp as $pt)
+        {	$pts_label[$pt]=article#ID_ARTICLE;	}
+      </BOUCLE_gmap_articles>
+      <BOUCLE_gmap_parent(RUBRIQUES){id_rubrique=#ENV{rubrique}}>
+      	<BOUCLE_gmap_enfant(RUBRIQUES){id_parent=#ID_RUBRIQUE}>
+      		$l=html_entity_decode('[(#TEXTE*|texte_script)]');
+	        $pts_tmp=array();
+	        preg_match_all('/<gmap.*pts=([^>|]*)[^>]*>/',$l,$pts_tmp);
+	        $pts_tmp=explode(',',$pts_tmp[1][0]);
+	        $pts=array_merge($pts,$pts_tmp);
+	        foreach($pts_tmp as $pt)
+	        {	$pts_label[$pt]=rubrique#ID_RUBRIQUE;	}
+      		<BOUCLE_gmap_enfant_articles(ARTICLES){id_rubrique}>
+		        $l=html_entity_decode('[(#TEXTE*|texte_script)]');
+		        $pts_tmp=array();
+		        preg_match_all('/<gmap.*pts=([^>|]*)[^>]*>/',$l,$pts_tmp);
+		        $pts_tmp=explode(',',$pts_tmp[1][0]);
+		        $pts=array_merge($pts,$pts_tmp);
+		        foreach($pts_tmp as $pt)
+		        {	$pts_label[$pt]=article#ID_ARTICLE;	}
+		      </BOUCLE_gmap_enfant_articles>
+		      <BOUCLE_gmap_enfant_recur(BOUCLE_gmap_enfant)></BOUCLE_gmap_enfant_recur>
+      	</BOUCLE_gmap_enfant>
+      </BOUCLE_gmap_parent>
+      if(in_array('tous',$pts))
+      {	$pts=array();
+        <BOUCLE_gmap_points2(SPIP_GMAPPOINTS)>
+          $pts[]=#ID;
+        </BOUCLE_gmap_points2>
+      }
+  break;
+}
+
+$filename=_DIR_PLUGIN_GMAPS.'googlekey.txt';
+$handle=fopen($filename,'r');
+$key = fread($handle, filesize($filename));
+fclose($handle);
+?>
+
+<script type="text/javascript" src="http://www.google.com/jsapi?key=<?php echo $key; ?>"></script>
+<script type="text/javascript">
+    google.load("maps", "2");
+
+    var iconOn = "<?php echo _DIR_PLUGIN_GMAPS; ?>images/markerOn.png";
+    var iconOff = "<?php echo _DIR_PLUGIN_GMAPS; ?>images/markerOff.png";
+
+    // Call this function when the page has been loaded
+	function initialize() {
+		var map = new google.maps.Map2(document.getElementById("map"));
+		map.disableDoubleClickZoom();
+		map.disableContinuousZoom();
+		map.enableScrollWheelZoom();
+		map.addMapType(G_PHYSICAL_MAP);
+		map.addControl(new GSmallMapControl());
+		map.addControl(new GMenuMapTypeControl());
+        map.setCenter(new google.maps.LatLng(0,0), #ENV{zoom,3});
+        switch("#ENV{type}")
+		{
+			case "physical" :
+			case "3" :	map.setMapType(G_PHYSICAL_MAP);		break;
+			case "hybrid" :
+			case "2" :	map.setMapType(G_HYBRID_MAP);		break;
+			case "satellite" :
+			case "1" :	map.setMapType(G_SATELLITE_MAP);	break;
+			case "normal" :
+			default :	map.setMapType(G_NORMAL_MAP);		break;
+		}
+        $.ajax({
+        	type: "GET",
+			url: "#URL_PAGE{gmapspoints}<?php
+				for($i=0;$i<sizeof($pts);$i++)
+				{	echo '&pts[]='.$pts[$i];	}
+				?>",
+			dataType: "json",
+			success: function(json){
+				var latmax=0;
+				var latmin=0;
+				var lngmax=0;
+				var lngmin=0;
+				for(var i=0;i<json.gmappoints.length;i++)
+				{	var lien='';
+					<?php if(!empty($pts_label)){ ?>
+						switch(json.gmappoints[i].id)
+						{
+							<?php
+							if(strstr(_RACCOURCI_LIEN,'&gt;')){	$arrow='-&gt;';	}
+							else{	$arrow='->';	}
+							foreach($pts_label as $pt => $id)
+							{
+								echo 'case "'.$pt.'": lien+=\''.texte_script(traiter_raccourcis('['._T("gmaps:lirelasuite").$arrow.$id.']')).'\'; ';
+								echo 'break;'."\n";
+							}
+							?>
+						}
+          			<?php } ?>
+					gr_addPoint(map,new google.maps.LatLng(json.gmappoints[i].lat,json.gmappoints[i].lng),json.gmappoints[i].id,json.gmappoints[i].html+lien);
+					if(latmax==0 || latmax<json.gmappoints[i].lat){	latmax=json.gmappoints[i].lat;	}
+					if(latmin==0 || latmin>json.gmappoints[i].lat){	latmin=json.gmappoints[i].lat;	}
+					if(lngmax==0 || lngmax<json.gmappoints[i].lng){	lngmax=json.gmappoints[i].lng;	}
+					if(lngmin==0 || lngmin>json.gmappoints[i].lng){	lngmin=json.gmappoints[i].lng;	}
+				}
+				var lat=latmin/1+(latmax-latmin)/2;
+				var lng=lngmin/1+(lngmax-lngmin)/2;
+				map.setCenter(new google.maps.LatLng(lat,lng), #ENV{zoom,3});
+			}
+	    });
+	}
+
+	function gr_addPoint(map,center,id,html){
+		var marker = new GMarker(center, {draggable: true});
+		marker.bindInfoWindowHtml(html,{maxWidth:([(#ENV{width,450}|>{280}|?{#ENV{width,450},280})]-100)});
+		map.addOverlay(marker);
+		return id;
+    }
+    google.setOnLoadCallback(initialize);
+</script>
+<div id="map" style="overflow:hidden;[margin-(#ENV{align,none}|!={none}|?{[(#ENV{align,none}|=={left}|?{'right','left'})],''}):10px;]float:[(#ENV{align,none})];height:[(#ENV{height,350}|>{280}|?{#ENV{height,350},280})]px;width:[(#ENV{width,450}|>{280}|?{#ENV{width,450},280})]px;"></div>
