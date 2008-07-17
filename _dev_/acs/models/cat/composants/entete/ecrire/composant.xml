@@ -1,6 +1,6 @@
 <composant>
   <!-- Nom du composant -->
-  <nom>Pied</nom>
+  <nom>Entete</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
   <version>0.4</version>
@@ -21,33 +21,34 @@
   <variable>
     <nom>1</nom>
     <type>widget</type>
-    <composant>google-analytics</composant>
+    <composant>banniere</composant>
+    <composant>bandeau</composant>
     <composant>repimages</composant>
     <composant>custom</composant>
     <composant>custom2</composant>
     <composant>custom3</composant>
-    <composant>ours</composant>
-    <valeur>ours</valeur>
+    <valeur>banniere</valeur>
   </variable>
   <variable>
     <nom>2</nom>
     <type>widget</type>
-    <composant>google-analytics</composant>
+    <composant>banniere</composant>
+    <composant>bandeau</composant>
     <composant>repimages</composant>
     <composant>custom</composant>
     <composant>custom2</composant>
     <composant>custom3</composant>
-    <composant>ours</composant>
+    <valeur>bandeau</valeur>
   </variable>
   <variable>
     <nom>3</nom>
     <type>widget</type>
-    <composant>google-analytics</composant>
+    <composant>banniere</composant>
+    <composant>bandeau</composant>
     <composant>repimages</composant>
     <composant>custom</composant>
     <composant>custom2</composant>
     <composant>custom3</composant>
-    <composant>ours</composant>
   </variable>
   <variable>
     <nom>4</nom>
