@@ -21,6 +21,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function demarrer_site($site = '', $options = array()) {
 	if (!$site) return;
 
+	// On test si on a une information de port dans l'url ex: http://$site:80/
+	// Si il y a un port de défini on renvoie vers le bon dossier squelette
+	$port = explode(':', $site);
+	if($port[1]){
+		list($site) = explode(':', $site);
+	}
+	
 	$options = array_merge(
 		array(
 			'creer_site' => false,
