@@ -171,9 +171,35 @@ function compat_cfg_defs_dist() {
 					$serveur				
 				);
 				return $r ? $r[$select] : NULL;
-			}',			
-			
-			
+			}',
+					
+		'sql_allfetsel' =>
+			'(
+				$select, 
+				$from = array(), 
+				$where = array(),
+				$groupby = array(), 
+				$orderby = array(), 
+				$limit = \'\', 
+				$having = array(),
+				$serveur=\'\'
+			) {
+				$q = sql_select(
+					$select, 
+					$from, 
+					$where,
+					$groupby, 
+					$orderby, 
+					$limit, 
+					$having,
+					$serveur				
+				);
+				if (!$q) return array();
+				$res = array();
+				while ($r = sql_fetch($q)) $res[] = $r;
+				return $res;
+			}',				
+		
 		// n'existe pas en 1.9.2
 		// on cree la requete directement
 		'sql_update' => 

@@ -1,6 +1,9 @@
 Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 
+v1.9.4 (17 07 2008)
+- ajout de compat 1.9.2 pour sql_allfetsel()
+
 v1.9.3 (16 07 2008)
 - Permettre d'ajouter des #FORMULAIRE_XX dans des fonds/cfg_yy.html
 - introduction d'un parametre interpreter. Si <!-- interpreter=non -->
