@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'etiquettes' => '&Eacute;tiquettes',
 'etiquettes_populaires' => '&Eacute;tiquettes populaires',
+'toutes_les_etiquettes' => 'Toutes les &eacute;tiquettes',
 'explication' => '&Eacute;tiquettes s&eacute;par&eacute;es par des espaces : <em>machin chose "plusieurs mots ensemble" truc "autre chose"</em>.',
 
 'modifier_etiquettes' => 'Modifier les &eacute;tiquettes',
