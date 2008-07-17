@@ -1,0 +1,10 @@
+<plugin>
+  <nom>Formulaire Annee</nom>
+  <auteur>b_b</auteur>
+  <version>0.1</version>
+  <etat>test</etat>
+  <prefix>formulaire_annee</prefix>
+  <description>
+  Juste un exemple de formulaire en CVT qui recupere des infos du contexte avec une fonction balise_stat.
+  </description>
+</plugin>
