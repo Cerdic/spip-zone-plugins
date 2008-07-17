@@ -331,7 +331,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$retG = '';
 	// Place pour les gadgets : caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...), preview, stats
 	$retG .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_caracteres']."','');", _DIR_BTV2_IMG.'clavier.png', _T('bartypenr:barre_caracteres'), $champhelp);
-	if (!$crayons && $ecrire) {
+	if (!$crayons && $ecrire && !$forum) {
 		$retG .= bouton_barre_racc("toggle_preview($num_barre,'".str_replace("'","\\'",$champ)."');", _DIR_BTV2_IMG.'eye.png', _T('bartypenr:barre_preview'), $champhelp);
 		$retG .= bouton_barre_racc("toggle_stats($num_barre,'".str_replace("'","\\'",$champ)."');", _DIR_BTV2_IMG.'stats.png', _T('bartypenr:barre_stats'), $champhelp);
 	}
