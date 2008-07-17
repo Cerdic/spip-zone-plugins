@@ -1,0 +1,51 @@
+
+<!-- autoriser=webmestre -->
+<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres. -->
+<!-- nom=nyroceros -->
+
+<div class="formulaire_spip formulaire_editer formulaire_cfg">
+
+	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+	
+<form method="post" action="#SELF"><div>
+	#ACTION_FORMULAIRE{SELF}
+
+	<ul>
+		<li class="editer_nyroceros_selecteur_commun[ (#ENV**{erreurs}|table_valeur{selecteur_commun}|oui)erreur]">
+			<label for="_nyro_selecteur_commun"><:nyroceros:cfg_lbl_selecteur_commun:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_commun})</span>]
+			<p class="explication"><:nyroceros:cfg_inf_selecteur_commun:></p>
+			<input type="text" name="selecteur_commun" class="text" id="_nyro_selecteur_commun" size="60"
+				value="#ENV{selecteur_commun, .nyroceros}" />
+		</li>
+		
+		<li class="editer_nyroceros_selecteur_galerie[ (#ENV**{erreurs}|table_valeur{selecteur_galerie}|oui)erreur]">
+			<label for="_nyro_selecteur_galerie"><:nyroceros:cfg_lbl_selecteur_galerie:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_galerie})</span>]
+			<p class="explication"><:nyroceros:cfg_inf_selecteur_galerie:></p>
+			<input type="text" name="selecteur_galerie" class="text" id="_nyro_selecteur_galerie" size="60"
+				value="#ENV{selecteur_galerie, #documents_portfolio .nyroceros}" />	
+		</li>
+
+		<li class="editer_nyroceros_traiter_toutes_images[ (#ENV**{erreurs}|table_valeur{traiter_toutes_images}|oui)erreur]">
+			<label><:nyroceros:cfg_lbl_traiter_toutes_images:></label>
+			<p class="explication"><:nyroceros:cfg_inf_traiter_toutes_images:></p>
+			<div class="choix">
+				<input type="radio" name="traiter_toutes_images" class="radio" id="_nyro_traiter_images_on" value="oui" [(#ENV{traiter_toutes_images,oui}|=={oui}|oui) checked="checked"] />
+				<label for='_nyro_traiter_images_on'><:oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="traiter_toutes_images" class="radio" id="_nyro_traiter_images_off" value="non" [(#ENV{traiter_toutes_images,oui}|=={non}|oui) checked="checked"] />
+				<label for='_nyro_traiter_images_off'><:non:></label>
+			</div>
+		</li>
+	</ul>
+
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+		<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
+	</p>
+</div></form>
+</div>

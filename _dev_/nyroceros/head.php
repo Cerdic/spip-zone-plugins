@@ -10,16 +10,25 @@ function Nyro_insert_head($flux){
 // and "the ajaxed element" when called because of onAjaxLoad 
 if (window.jQuery)
 (function($){
-var init_f = function() {
-	// selectionner tous les liens vers des images
-	$("a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']",this)
-	.addClass("nyroceros") // noter qu\'on l\'a vue
-	.attr("onclick","") // se debarrasser du onclick de SPIP
-	.nyroModal(); // activer le nyro
+var init_f = function() {';
 
-	// passer le portfolio en mode galerie de nyro
-	$("#documents_portfolio .nyroceros", this)
-	.attr("rel","galerie-portfolio");
+if (lire_config('nyroceros/traiter_toutes_images','oui')=='oui') {
+	$flux .='
+// selectionner tous les liens vers des images
+$("a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']",this)
+.addClass("nyroceros") // noter qu\'on l\'a vue
+.attr("onclick","") // se debarrasser du onclick de SPIP
+.nyroModal(); // activer le nyro
+';
+}
+
+$flux .= '
+// passer le portfolio en mode galerie de nyro
+$("'.lire_config('nyroceros/selecteur_galerie','#documents_portfolio .nyroceros').'", this)
+.attr("rel","galerie-portfolio");
+
+// charger nyro sur autre chose
+$("'.lire_config('nyroceros/selecteur_commun','.nyroceros').'").nyroModal();
 }
 //onAjaxLoad is defined in private area only
 if(typeof onAjaxLoad == "function") onAjaxLoad(init_f);
