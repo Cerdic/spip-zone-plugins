@@ -24,7 +24,7 @@ function acs_ajouterBouton($boutons_admin) {
      ) {
 
 		// on voit le bouton ACS dans la barre "configuration"
-		$boutons_admin['configuration']->sousmenu["acs"]= new Bouton(
+		$boutons_admin['configuration']->sousmenu["acs&detail=2"]= new Bouton(
 		_DIR_ACS."img_pack/acs_config-24.gif",  // affichage de l'icone
 		_T('acs:configurer_site') // affichage du texte
 		);

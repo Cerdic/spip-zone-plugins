@@ -42,7 +42,7 @@ function exec_acs() {
   echo acs_gros_titre(_T('acs:assistant_configuration_squelettes'));
 
 	echo debut_onglet();
-	echo onglet(_T('acs:pages'), generer_url_ecrire('acs', 'onglet=pages'), $onglet, 'pages', _DIR_PLUGIN_ACS."/img_pack/pages-24.gif");
+	echo onglet(_T('acs:pages'), generer_url_ecrire('acs', 'onglet=pages&detail=2'), $onglet, 'pages', _DIR_PLUGIN_ACS."/img_pack/pages-24.gif");
 	echo onglet(_T('acs:composants'), generer_url_ecrire('acs', 'onglet=composants'), $onglet, 'composants', $cIconDef);
 	echo onglet(_T('acs:adm'), generer_url_ecrire('acs', 'onglet=adm'), $onglet, 'adm', 'cadenas-24.gif');
 	echo fin_onglet();
@@ -63,6 +63,7 @@ function exec_acs() {
       include_spip('inc/acs_adm');
       $col1 = acs_adm_gauche();
       $col2 = acs_adm();
+      $col3 = acs_adm_droite();
       break;
 
     case 'composants':

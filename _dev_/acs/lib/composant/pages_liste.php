@@ -59,6 +59,14 @@ function pages_du_squelette($dir) {
   $pages = array();
 
   $dossiers = array('', 'modeles', 'formulaires');
+  
+  if ($GLOBALS['meta']['acsVoirPagesComposants']) {
+    $dossiers_composants = array_keys(composants_liste());
+    foreach($dossiers_composants as $k => $v)
+      $dossiers_composants[$k] = 'composants/'.$v;
+    sort($dossiers_composants);
+    $dossiers = array_merge($dossiers, $dossiers_composants);
+  }
   foreach($dossiers as $dossier) {
     $pages[$dossier] = array();
     $pdd = pages_du_dossier($dir, $dossier);

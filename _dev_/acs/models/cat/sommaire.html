@@ -23,7 +23,7 @@ Home page
   <div id="onglet">
   [(#REM) Fil d'Ariane ]
   <span id="hierarchie" style="float: left"><:accueil_site:></span>
-  <span class="texte_nav" style="float: right"><:meta_page_sommaire:>,[(#CONFIG{acsEditoUse}|=={oui}|?{' '}) &eacute;ditorial,][(#CONFIG{acsAgendaUse}|=={oui}|?{' '}) agenda,][(#CONFIG{acsRepimagesUse}|=={oui}|?{' '}) vid&eacute;os,][(#CONFIG{acsPlaylistUse}|=={oui}|?{' '}) mp3,] ...</span><br class="nettoyeur" />
+  <span class="texte_nav" style="float: right"><:acs:entete_meta_page_sommaire:>,[(#CONFIG{acsEditoUse}|=={oui}|?{' '}) &eacute;ditorial,][(#CONFIG{acsAgendaUse}|=={oui}|?{' '}) agenda,][(#CONFIG{acsRepimagesUse}|=={oui}|?{' '}) vid&eacute;os,][(#CONFIG{acsPlaylistUse}|=={oui}|?{' '}) mp3,] ...</span><br class="nettoyeur" />
   [(#CONFIG{acsEditoUse}|=={oui}|?{' '}) <INCLURE{fond=composants/edito/edito}{self=#SELF}>]  [(#REM) Contenu principal : éditorial ]
   [(#REM) Contenu principal : derniers communiqués et articles publies ]
   <INCLURE{fond=composants/articles/boucle-com}{self=#SELF}{debut_articles}> [(#REM)  TODO : ne pas afficher article de l'édito si Edito actif ]

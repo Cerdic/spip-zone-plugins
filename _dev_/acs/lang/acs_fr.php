@@ -18,6 +18,7 @@ else {
   $GLOBALS[$GLOBALS['idx_lang']] = array( // Espace ecrire
 
   'configurer_site' => 'Configurer le site',
+  'documentation' => 'Documentation',
 
   'assistant_configuration_squelettes' => 'Assistant de Configuration du Site',
   'acs' => 'ACS',
@@ -74,7 +75,8 @@ Pour configurer le site, cliquez sur l\'onglet "Composants" et personnalisez les
   'locked_pages' => 'Pages protégées',
   'model' => 'Mod&egrave;le',
   'squelette' => 'Squelette(s)',
-
+  'voir_pages_composants' => 'Afficher les pages des composants',
+  
   'acsDerniereModif' => 'Mis &agrave; jour le',
 
   'dev_infos' => 'Infos d&eacute;veloppeur',

@@ -10,7 +10,8 @@ function acs_install($action){
   switch ($action)
   {
     case 'test':
-      return isset($GLOBALS['meta']['acsOnglets1']); // TODO: remove any Model's components dependency
+      return false;
+      //return isset($GLOBALS['meta']['acsOnglets1']); // TODO: remove any Model's components dependency
       break;
 
     case 'install':
@@ -24,22 +25,10 @@ function acs_install($action){
 }
 
 
-function acs_set_default_values() {// TODO: remove any Model's components dependency
-  $def = array('acsModel' => 'cat',
-								'acsOnglets1' => 'sommaire',
-	    					'acsOnglets2' => 'resume',
-  							'acsOnglets3' => 'plan',
-  							'acsOnglets4' => 'sites',
-  							'acsOnglets5' => 'forums',
-  							'acsOngletsFondColor' => 'ffffff',
-  							'acsOngletsBordColor' => 'dfdfdf',
-    						'acsOngletsCouleurInactif' => 'efefef',
-    						'acsOngletsCouleurSurvol' => 'ffffff',
-  /*
-                '' => '',
-                '' => ''
-*/
-                );
+function acs_set_default_values() {
+  $defaults = find_in_path('composants/def.php');
+  if (is_readable($defaults))
+    include $defaults;
   foreach($def as $var=>$value) {
     ecrire_meta($var, $value);
   }

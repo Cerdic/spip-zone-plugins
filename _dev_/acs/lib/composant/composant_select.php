@@ -20,6 +20,7 @@ function select_composant($choixComposants, $cc, $onglet) {
     '<input type="hidden" name="exec" value="acs">'.
     '<input type="hidden" name="onglet" value="'.$onglet.'">'.
     '<table width="100%"><tr><td width="80%">'._T('acs:composant').'</td><td>'.$over.'</td><td><select name="composant" class="forml" style="width:auto" onchange="this.form.submit()"> ';
+  sort($choixComposants);
   foreach($choixComposants as $c)
     if ($c === '') $style++;
     else $r .= '<option name="'.$c.'" value="'.$c.'"'.(($c == $cc) ? ' selected': '').' class="btc_'.$style.'">'.ucfirst($c).'</option>';

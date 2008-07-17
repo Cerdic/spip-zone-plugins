@@ -23,13 +23,17 @@ function acs_adm() {
       $GLOBALS['dossier_squelettes'] = (isset($GLOBALS['meta']['acsSqueletteOverACS']) ? $GLOBALS['meta']['acsSqueletteOverACS'].':' : '')._DIR_PLUGIN_ACS.'models/'.$_POST['acsModel'];
       ecrire_metas();
     }
-  }
+  }  
   if (isset($_POST['changer_groupes']) && ($_POST['changer_groupes'] == 'oui')) {
     acs_groups_update($_POST['acsGroups']);
   }
   if (isset($_POST['changer_pages']) && ($_POST['changer_pages'] == 'oui'))
     acs_group_update_pages(acs_grid($_POST['group']), $_POST['pages']);
-
+  if (isset($_POST['changer_config']) && ($_POST['changer_config'] == 'oui')) {
+    ecrire_meta('acsVoirPagesComposants', $_POST['acsVoirPagesComposants']);
+    ecrire_metas();
+  }
+  
   $r = acs_box(_T('acs:model').' '._T('acs:acs'),
     acs_model()
     ,
@@ -84,8 +88,21 @@ function acs_adm_gauche() {
   );
 }
 
+function acs_adm_droite() {
+  return acs_info_box(
+  _T('acs:acs'),
+    _T('version').' <a style="color: black" title="Spip '.implode(', ', $GLOBALS['acs_table_versions_spip']).'">ACS '.ACS_VERSION.' ('.ACS_RELEASE.')</a><hr />',
+    null,
+    _T('acs:acsDerniereModif').' '.date("Y-m-d H:i:s", $GLOBALS['meta']['acsDerniereModif']).
+    '<hr />'.
+    _T('acs:documentation').': <a href="http://acs.geomaticien.org"><img src="'._DIR_PLUGIN_ACS.'img_pack/acs_32x32_help.gif" alt="?" style="vertical-align: middle"/></a>',
+    _DIR_PLUGIN_ACS."img_pack/acs_32x32.gif",
+    '<form name="acs_config" action="?exec=acs&onglet=adm" method="post"><input type="hidden" name="changer_config" value="oui"><div style="text-align: right">'._T('acs:voir_pages_composants').'<input name="acsVoirPagesComposants" type="checkbox"'.($GLOBALS['meta']['acsVoirPagesComposants'] ? ' checked' : '').' /><br /><br /><input type="submit" name="'._T('bouton_valider').
+  '" value="'._T('bouton_valider').'" class="fondo" /></div></form>');
+}
+
 function acs_model() {
-  $r = '<form name="acs_config" action="?exec=acs" method="post">'.
+  $r = '<form name="acs_model" action="?exec=acs" method="post">'.
         '<input type="hidden" name="onglet" value="adm"><input type="hidden" name="changer_model" value="oui">';
   $r .= '<table width="100%"><tr><td>'.ctlInput('acsModel', _T('acs:model'), select_model());
   $r .= '</td><td>'.ctlInput('acsSqueletteOverACS', _T('acs:squelette'), '<input type="text" name="acsSqueletteOverACS" value="'.$GLOBALS['meta']['acsSqueletteOverACS'].'" class="formc" />').'</td></tr></table><br />';

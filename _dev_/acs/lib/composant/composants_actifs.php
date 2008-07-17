@@ -21,6 +21,7 @@ function composants_actifs() {
   return $composants_actifs;
 }
 
+// Un composant actif est un composant qui possède une variable meta acsMonComposantUse égale à oui
 function lecture_composants_actifs() {
   $ca = array();
   $unused = array();

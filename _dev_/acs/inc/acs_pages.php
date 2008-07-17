@@ -10,15 +10,13 @@ include_spip('inc/acs_page_get_infos');
 include_spip('inc/acs_widgets');
 
 function acs_pages($page) {
-  $r = acs_page_get_infos($page, _request('mode'));
-    
   $allvars.= '<a name="acs_vars"></a><div class="acs_vars_box pliable"><div id="acs_vars">';
   if (_request('show_vars') == 'oui') { // mode sans JQuery
     include_spip('inc/acs_page_get_all_variables');
     $allvars .= acs_page_get_all_variables();
   }
   $allvars.= '</div></div>';
-  return $allvars.'<div id="page_infos"><a name="page_infos"></a>'.$r.'</div>';
+  return $allvars.'<div id="page_infos"><a name="page_infos"></a>'.acs_page_get_infos($page, _request('mode'), _request('detail')).'</div>';
 }
 
 function acs_pages_gauche($page) {
@@ -97,8 +95,6 @@ function liste_pages_du_site($onglet, $large=false) {
     if ($large) $r .= '<tr class="liste_pages_sep"><td colspan="2"></td></tr>'; else $r .= '<br />';
   }
   if ($large) $r .= '</table>';
-
-  $r .= '<table width="100%"><tr><td>'._T('version').' <a style="color: black" title="Spip '.implode(', ', $GLOBALS['acs_table_versions_spip']).'">ACS '.ACS_VERSION.' ('.ACS_RELEASE.')</a></td><td style="text-align:'.$GLOBALS['spip_lang_right'].'">'._T('acs:acsDerniereModif').' '.date("Y-m-d H:i:s", $GLOBALS['meta']['acsDerniereModif']).'</td></tr></table>';
   return $r;
 }
 ?>

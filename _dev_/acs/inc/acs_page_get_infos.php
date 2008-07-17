@@ -14,34 +14,33 @@
 include_spip('inc/acs_presentation');
 include_spip('lib/composant/page_source');
 
-function acs_page_get_infos($page, $mode) {
+function acs_page_get_infos($page, $mode, $detail) {
   include_spip('inc/acs_cache');
   $mode_source = ($mode == 'source');
   $mode = $mode_source ? '_source' : '_infos';
-  $r = cache('page_get_infos', 'pg_'.$GLOBALS['meta']['acsModel'].'_'.urlencode($page).$mode, array($page, $mode_source));
+  $r = cache('page_get_infos', 'pg_'.$GLOBALS['meta']['acsModel'].'_'.urlencode($page).$mode, array($page, $mode_source, $detail));
 
   // Si le fichier a été modifié depuis la mise en cache, on force le recalcul
   $pg = find_in_path($page.'.html');
   $pg_derniere_modif = filemtime($pg);
   if ($r[2] < $pg_derniere_modif)
-    $r = cache('page_get_infos', 'pg_'.$GLOBALS['meta']['acsModel'].'_'.urlencode($page).$mode, array($page, $mode_source), true);
+    $r = cache('page_get_infos', 'pg_'.$GLOBALS['meta']['acsModel'].'_'.urlencode($page).$mode, array($page, $mode_source, $detail), true);
 
   return $r[0];
 }
 
 // renvoie un widget avec les options d'affichage d'une page
-function page_modes($page, $mode_source) {
-
+function page_modes($page, $mode_source, $detail) {
   // Plieur
-  if (_request('detail') && (_request('detail') > 1)) {
+  if ($detail && ($detail > 1)) {
     $on = true;
-    $detail = '&detail='._request('detail');
+    $detail ='';
   }
   else {
     $on = false;
-    $detail ='';
+    $detail = '&detail=2';
+    
   }
-
   // Mode schema / source
   $link = '<a style="color: white" title="'.$page.'" href="?exec=acs&onglet=pages&pg='.$page;
   if ($mode_source) {
@@ -60,7 +59,7 @@ function page_modes($page, $mode_source) {
   return $r;
 }
 
-function page_get_infos($page, $mode_source=false) {
+function page_get_infos($page, $mode_source=false, $detail=false) {
   include_spip('inc/acs_widgets');
 
   $pg = find_in_path($page.'.html');
@@ -129,7 +128,8 @@ function page_get_infos($page, $mode_source=false) {
   $r .= '</tr></table>';
 
   $r .= '<script type="text/javascript">';// Script inséré ici AUSSI pour cas appel Ajax
-  if (_request('detail') <= 1) // Cache les détails sauf si niveau > 1
+
+  if (_request('detail') <= 1) // Cache les détails au chargement en mode Ajax, sauf si detail > 1
     $r .= '
 $(".spip_params").each(
   function(i) {
@@ -138,27 +138,27 @@ $(".spip_params").each(
 );'; // Hide pliables on load
 
   $r .= '
-    $("#plieur_spip_params").each(
-      function(i, plieur) {
-        plieur.onclick = function(e) {
-          var cap = plieur.name.substr(7); //classe à plier
-          imgp = $(".imgp_" + cap).attr("src");
-          ploff = $(".imgoff_" + cap).attr("src");
-          plon = $(".imgon_" + cap).attr("src");
-          if (imgp == ploff)
-            $(".imgp_" + cap).attr("src", plon)
-          else
-            $(".imgp_" + cap).attr("src", ploff)
+$("#plieur_spip_params").each(
+  function(i, plieur) {
+    plieur.onclick = function(e) {
+      var cap = plieur.name.substr(7); //classe à plier
+      imgp = $(".imgp_" + cap).attr("src");
+      ploff = $(".imgoff_" + cap).attr("src");
+      plon = $(".imgon_" + cap).attr("src");
+      if (imgp == ploff)
+        $(".imgp_" + cap).attr("src", plon)
+      else
+        $(".imgp_" + cap).attr("src", ploff)
 
-          $("." + cap).each(
-            function(i) {
-              $(this).slideToggle("slow");
-            }
-          );
-          return false;
+      $("." + cap).each(
+        function(i) {
+          $(this).slideToggle("slow");
         }
-      }
-    );
+      );
+      return false;
+    }
+  }
+);
 
 $("#mode_source").each(
   function(i, link) {
@@ -184,7 +184,7 @@ $("#mode_schema").each(
 
 </script>';
 
-  $r = acs_box(_T('acs:page').' '.$page, $r, _DIR_PLUGIN_ACS."img_pack/page-24.gif", false, page_modes($page, $mode_source));
+  $r = acs_box(_T('acs:page').' '.$page, $r, _DIR_PLUGIN_ACS."img_pack/page-24.gif", false, page_modes($page, $mode_source, $detail));
   return $r;
 }
 

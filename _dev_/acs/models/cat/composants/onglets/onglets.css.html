@@ -9,7 +9,7 @@
   margin: 0;
   margin-top: -1px;
   width: 100%;
-  border: #[(#CONFIG{acsOngletsBordColor,#df0000})] thin solid;
+  border: thin solid #[(#CONFIG{acsOngletsBordColor})];
   [background: #(#CONFIG{acsOngletsFondColor});]
   -moz-border-radius-topright: 8px;
   -moz-border-radius-bottomright: 8px;
@@ -67,7 +67,7 @@
   background: url("[(#ACS_CHEMIN)]img/onglets/left.gif") no-repeat left top;
   margin-right: 3px; /* space between Onglets */
   padding:0 0 0 9px;
-  border-bottom: 0;
+  border-bottom: 1px solid #[(#CONFIG{acsOngletsBordColor})];
   line-height: 14px; /* PROVISOIRE : en px pour permettre différentes tailles de fontes sans flinguer le système d'onglets */
 }
 
