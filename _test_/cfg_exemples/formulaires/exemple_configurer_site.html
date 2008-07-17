@@ -5,6 +5,7 @@
 #CACHE{0}
 
 [(#ENV{editable}|oui)
+<div class="formulaire_spip formulaire_cfg formulaire_exemple_configurer_site">
 [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 [<p class="formulaire_message">(#ENV*{message_ok})</p>]
 
@@ -13,27 +14,31 @@
 
 <fieldset>
 <legend><:cfg:storage_classic:></legend>
+<ul>
+	<li class="editer_email">
 		<label>Email webmaster</label>
-		<input type="text" name="email_webmaster" value="#ENV{email_webmaster}" size="30" />
 		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{email_webmaster})</span>]
-		<br />
-		
+		<input type="text" name="email_webmaster" class="text" value="#ENV{email_webmaster}" size="30" />
+	</li>
+	<li class="editer_nom_site">
 		<label>Nom site</label>
-		<input type="text" name="nom_site" value="#ENV{nom_site}" size="50" />
 		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{nom_site})</span>]
-		<br />
-		
+		<input type="text" name="nom_site" class="text" value="#ENV{nom_site}" size="50" />
+	</li>
+	<li class="editer_descriptif_site">
 		<label>Descriptif site</label>
-		<textarea name="descriptif_site" class="type_pwd" rows="4" cols="40" style="width:100%;">[(#ENV{descriptif_site})]</textarea>
 		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{descriptif_site})</span>]
-
+		<textarea name="descriptif_site" rows="4" cols="40">[(#ENV{descriptif_site})]</textarea>
+	</li>	
+</ul>
 </fieldset>
 
-<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
-<!-- input type="reset" value="<:cfg:Reset:>" / -->
-<!--input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" /-->
+<p class="boutons">
+<input type="submit" name="_cfg_ok" class="submit" value="<:cfg:OK:>" />
+</p>
 
 </div></form>
+</div>
 ]
 [(#ENV{editable}|non)
 	Vous devez être connecté en administrateur pour pouvoir utiliser ce formulaire.
