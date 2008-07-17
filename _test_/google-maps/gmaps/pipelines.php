@@ -2,7 +2,7 @@
 	function gmaps_ajouter_boutons($boutons_admin) {
 		 // on voit le bouton dans la barre "naviguer"
 		$boutons_admin['naviguer']->sousmenu["gmaps"]= new Bouton(
-			"../"._DIR_TMP."images/maps.png",  // icone
+			"../"._DIR_PLUGIN_GMAPS."images/maps.png",  // icone
 			_T("gmaps:gmaps") //titre
 		);
 		return $boutons_admin;
