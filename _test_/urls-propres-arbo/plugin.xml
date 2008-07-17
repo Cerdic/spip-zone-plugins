@@ -1,0 +1,38 @@
+<plugin>
+	<nom>URLs Propres avec Arborescence</nom>
+	<auteur>[J&eacute;r&ocirc;me Breton->jerome.breton@gmail.com] ([GroupeReflect->http://www.groupereflect.net]), [David Lafon->david.lafon@gmail.com] ([GroupeReflect->http://www.groupereflect.net]) basé sur le travail de [Boris Lechner->http://www.spip-contrib.net/URL-propres-en-arborescence]</auteur>
+	<version>1.0.1</version>
+	<etat>stable</etat>
+	<icon>url-propres-arbo/icon.png</icon>
+	<description>
+Une belle arborescence de rubriques devrait toujours être représentée
+par une belle url synthétisant cette arborescence. Et pourtant, même
+avec les urls propres, il était difficile d’obtenir plus qu’un titre
+et un identifiant peu parlants dans une barre d’adresse.
+
+Avec un site décomposé de la forme suivante :<code>/ (Racine)
++ Télé-achat (Secteur)
+|-+ Cuisine (Rubrique)
+   |-+ Presse-agrumes (Article)</code>
+
+Il paraît logique d’avoir des adresses du type
+- http://example.com/
+- http://example.com/tele-achat/
+- http://example.com/tele-achat/cuisine/
+- http://example.com/tele-achat/cuisine/presse-agrumes.html
+
+et bien c’est exactement ce qui vous est proposé ici !
+
+Pour que le pluggin fonctionne, il faut ajouter [ces lignes->../plugins/url-propres-arbo/htaccess.txt] à
+votre fichier {.htaccess} situé à la racine de votre site.
+	</description>
+	<lien></lien>
+	<fonctions>url-propres-arbo/fonctions.php</fonctions>
+	<options>url-propres-arbo/options.php</options>
+	<prefix>proprearbo</prefix>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>header_public</action>
+		<inclure>url-propres-arbo/pipelines.php</inclure>
+	</pipeline>
+</plugin>
