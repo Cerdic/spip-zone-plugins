@@ -32,9 +32,4 @@
 			<action>affiche_milieu</action> 
 			<inclure>a2a_pipeline.php</inclure>
 	</pipeline> 
-	<pipeline> 
-			<nom>header_prive</nom> 
-			<action>header_prive</action> 
-			<inclure>a2a_pipeline.php</inclure>
-	</pipeline>
 </plugin>
