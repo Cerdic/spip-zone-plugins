@@ -1,5 +1,7 @@
 <?php
 
+include_spip ('base/spip-listes');
+
 //nombre de processus d'envoi simultanes
 @define('_SPIP_LISTE_SEND_THREADS',1);
 

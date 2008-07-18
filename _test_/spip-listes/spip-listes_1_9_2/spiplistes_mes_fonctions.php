@@ -1,7 +1,5 @@
 <?php
 
-include_spip ('base/spip-listes');
-
 // Boucles SPIP-listes
 global $tables_principales,$exceptions_des_tables,$table_date;
 

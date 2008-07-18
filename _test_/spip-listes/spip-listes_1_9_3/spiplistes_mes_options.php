@@ -1,5 +1,7 @@
 <?php
 
+include_spip ('base/spip-listes');
+
 // spiplistes_mes_options.php
 
 // $LastChangedRevision$
