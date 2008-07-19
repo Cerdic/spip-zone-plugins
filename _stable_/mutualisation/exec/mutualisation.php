@@ -12,25 +12,10 @@ function exec_mutualisation_dist() {
 	if ( ($auteur_session['statut'] != '0minirezo') and ( $_SERVER["REMOTE_ADDR"]!='127.0.0.1'))
 		die('pas admin !');
 
-	// scanne tous les dossiers de $GLOBALS['mutualisation_dir'],
-	// chaque repertoire etant *normalement* un site mutualise
 	$sites = array();
-	$dir = @opendir($r = '../'.$GLOBALS['mutualisation_dir']);
-	while (false !== ($d = @readdir($dir))) {
-		if (is_dir($r.'/'.$d) && ($d != '.') && ($d != '..')) {
-			$sites[] = $d;
-		}
+	foreach(preg_files('../'.$GLOBALS['mutualisation_dir'].'/', '.*/config/connect.php') as $s) {
+		$sites[] = preg_replace(',^\.\./'.$GLOBALS['mutualisation_dir'].'/(.*)/config/connect.php,', '\1', $s);
 	}
-	closedir($dir);
-
-	// cette methode scanne les fichiers connect.php, mais
-	// s'ils sont dans un autre dossier que site/config/connect.php
-	// (pour les regrouper par exemple a la racine),
-	// cela ne scanne pas les sites !
-	#foreach(preg_files('../'.$GLOBALS['mutualisation_dir'].'/', '.*/config/connect.php') as $s) {
-	#	$sites[] = preg_replace(',^\.\./'.$GLOBALS['mutualisation_dir'].'/(.*)/config/connect.php,', '\1', $s);
-	#}
-	
 	sort($sites);
 
 	if (!file_exists(_DIR_IMG.'mutualiser.png'))
