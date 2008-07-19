@@ -8,7 +8,7 @@
 
 ]
 
-<div>
+<div id="playliste_video">
  <script type="text/javascript">
         	var myListener = new Object();
         	
@@ -165,7 +165,7 @@ z-index:20;
 #ANCRE_PAGINATION
 <div class="radiobox">
 
-<object id="myFlash" type="application/x-shockwave-flash" data="#CHEMIN{player_flv_js.swf}" width="320" height="240">
+<object id="myFlash" type="application/x-shockwave-flash" data="#CHEMIN{player_flv_js.swf}" width="#ENV{largeur,320}" height="#ENV{hauteur,240}">
 			<param name="movie" value="#CHEMIN{player_flv_js.swf}" />
 			<param name="AllowScriptAccess" value="always" />
 			<param name="FlashVars" value="listener=myListener&amp;interval=500&amp;useHandCursor=0&amp;bgcolor=fd9f00&amp;buffer=9" />
@@ -194,6 +194,6 @@ z-index:20;
 </BOUCLE_doc>
 </ul>
 [<div class="playliste_pagination">(#PAGINATION)</div>]
+</div>
 </B_doc>
-
 </div>
