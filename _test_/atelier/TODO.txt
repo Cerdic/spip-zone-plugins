@@ -1,0 +1,80 @@
+TODO.txt (fichier généré par le plugin Atelier 2008-07-20 19:41:42)
+-------------------------------------------------------------------
+
+* gestion des dictionnaires :
+créer une page permettant d'ajouter des définitions dans le fichier de langue du plugin
+
+
+* génération du fichier TODO.txt :
+permettre de générer un fichier TODO.txt créer à partir des taches du projet. Ce fichier devra être placé à la racine du plugin
+
+
+* génération du fichier plugin.xml :
+Faire un formulaire permettant de générer/modifier le fichier plugin.xml d'un plugin.
+
+
+* probleme choix par defaut "taches_edit" :
+Le choix par défaut du projet lors de l'édition d'une nouvelle tache doit être le projet d'origine et non le premier projet.
+
+Passage du parametre id_projet.
+
+
+* Bloc statistique page "lecture de projet" :
+Faire un bloc statistique lorsque l'on lit un projet :
+- nombres de taches ouvertes
+- nombres de taches fermées
+- etc ...
+
+
+* Formatage du texte façon SPIP :
+appliquer le formatage des textes façon spip dans les champs descriptif des taches et des projets
+
+
+* Gestion pages CFG :
+ajouter une gestion des pages CFG
+
+- Visualisation
+- Edition
+- Etc ...
+
+
+* Assigner un auteur aux taches :
+Possibilité de d'assigner à l'un des auteurs enregistrer une ou plusieurs taches.
+
+
+* Assigner un degrès d'urgence aux taches :
+Possibilité d'assigner un degrès d'urgence aux taches (1,2,3,4,5)
+
+- 1 : très urgent
+- 2 : urgent
+- 3 : moyennement urgent
+- 4 : peu urgent
+- 5 : très peu urgent
+
+Utiliser les mots-clés ?
+
+
+* Visualisation des metas :
+Une page ou un bloc pour pouvoir lire les metas
+
+
+* Enregistrer les modifications dans les metas :
+Trouver un moyen d'enregistrer les modifications effectué dans la page de visualisation des metas.
+
+
+* Lien vers la documentation du code :
+Ajouter un lien vers la documentation du code de spip
+
+
+* probleme url retour ajout d'une entrée dans le dictionnaire :
+faire en sorte de revenir vers le dictionnaire que l'on édite lorsque l'on ajoute une nouvelle entrée dans le dico
+
+
+* completer la correction des caractères dans les entrée dicos :
+faire tous les accents et les caractères spéciaux
+
+
+* permettre de supprimer une entrée dans le dico :
+
+
+
