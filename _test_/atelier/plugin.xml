@@ -1,0 +1,21 @@
+<plugin>
+	<nom>L'atelier</nom>
+	<icon>images/atelier.png</icon>
+	<version>0.1</version>
+	<auteur>Polez K&#233;vin - edd@riseup.net
+	- &#169; 2008-2009 - Distribu&#233; sous licence GPL</auteur>
+	<etat>dev</etat>
+	<description>
+	Framework de developpement pour SPIP
+	</description>
+	<lien>edd.lautre.net</lien>
+	<options>atelier_options.php</options>
+	<fonctions>atelier_fonctions.php</fonctions>
+	<prefix>atelier</prefix>
+	<install>atelier_pipelines.php</install>
+	<chemin dir='' />
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>atelier_pipelines.php</inclure>
+	</pipeline>
+</plugin>
