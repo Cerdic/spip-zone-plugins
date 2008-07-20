@@ -35,6 +35,7 @@ function projets($id_projet,$row) {
 
 	include_spip('inc/atelier_presentation');
 	include_spip('inc/atelier_autoriser');
+	include_spip('inc/atelier_plugins');
 	include_spip('inc/plugin');
 
 	$nom_page = atelier_debut_page(_T('atelier:titre_projets'),'projets');
@@ -48,6 +49,7 @@ function projets($id_projet,$row) {
 			'<a href="'.generer_url_ecrire('taches_edit','new=oui&id_projet='.$id_projet).'">'._T('atelier:ajouter_tache').'</a>',
 			'<a href="'.generer_url_ecrire('atelier_plugin_xml','id_projet='.$id_projet).'">'._T('atelier:plugin_xml').'</a>'
 		));
+
 		$cfg = plugin_get_infos('cfg');
 		if (!isset($cfg['erreur'][0])){
 			cadre_atelier(_T('atelier:cfg'),array(
@@ -55,6 +57,12 @@ function projets($id_projet,$row) {
 			'<a href="'.generer_url_ecrire('atelier_voir_cfg','id_projet='.$id_projet).'">'._T('atelier:voir_variables_cfg').'</a>'
 			));
 		}
+		$lang = array();
+		$lang[] =  '<a href="'.generer_url_ecrire('atelier_lang','id_projet='.$id_projet).'">'._T('atelier:atelier_lang').'</a>';
+
+		// mettre un lien pour tous les fichiers lang present dans le répertoire lang
+		cadre_atelier(_T('atelier:lang'),$lang);
+
 
 		atelier_cadre_infos();
 
@@ -74,7 +82,11 @@ function projets($id_projet,$row) {
 		echo fin_cadre_couleur(true);
 
 		echo liste_taches_ouvertes($row['id_projet']);
-		echo "generer TODO.txt";
+
+		include_spip('inc/atelier_todo');
+		$todo = charger_fonction('atelier_todo','inc');
+		echo $todo($id_projet);
+
 		echo liste_taches_fermees($row['id_projet']);
 		echo liste_taches($row['id_projet']);
 
@@ -86,10 +98,9 @@ function projets($id_projet,$row) {
 		echo debut_cadre_trait_couleur('',true,'',_T('atelier:repertoire')." "._DIR_PLUGINS.$row['prefixe']);
 
 		if ($row['type'] == 'plugin') {
-			include_spip('inc/atelier_plugins');
+
 			$verifier_droits = charger_fonction('atelier_plugins','inc');
 			if ($verifier_droits('verifier_droits')) {
-
 				$verifier_repertoire = charger_fonction('atelier_plugins','inc');
 				if (!$verifier_repertoire('verifier_repertoire',$row['prefixe'])) {
 					echo '<p>'._T('atelier:repertoire_inexistant').'</p>';
