@@ -45,10 +45,10 @@ function composant_infos() {
   $r .= liste_pages_composant(cGetPages($c, 'formulaires'), _T('acs:formulaire'), _T('acs:formulaires'));
   $r .= liste_pages_composant(cGetPages($c, 'composants'), _T('acs:composant'), _T('acs:composants'));
   $cp = 'composants/'.$c.'/';
-  $traductions_public = cGetTraductions($c,$cp.'lang',';.*[.]php$;iS');
+  $traductions = cGetTraductions($c,$cp.'lang',';.*[.]php$;iS');
   $r .= '<table width="100%"><tr><td colspan="2" class="onlinehelp">'.ucfirst(_T('spip:afficher_trad')).'</td></tr>';
-  $r .= (count($traductions_public[0]) ? '<tr><td style="width:10%; vertical-align: top;" align="'.$GLOBALS['spip_lang_right'].'"> '._T('acs:public').' </td><td>'.liens_traductions($c, $traductions_public[0]).'</td></tr>' : '');
-  $r .= (count($traductions_public[1]) ? '<tr><td style="width:10%; vertical-align: top;" align="'.$GLOBALS['spip_lang_right'].'"> '._T('acs:ecrire').' </td><td>'.liens_traductions($c, $traductions_public[1], 'ecrire').'</td></tr>' : '');
+  $r .= (count($traductions[0]) ? '<tr><td style="width:10%; vertical-align: top;" align="'.$GLOBALS['spip_lang_right'].'"> '._T('acs:public').' </td><td>'.liens_traductions($c, $traductions[0]).'</td></tr>' : '');
+  $r .= (count($traductions[1]) ? '<tr><td style="width:10%; vertical-align: top;" align="'.$GLOBALS['spip_lang_right'].'"> '._T('acs:ecrire').' </td><td>'.liens_traductions($c, $traductions[1], 'ecrire').'</td></tr>' : '');
   $r .= '</table><br />';
 
   return $r;

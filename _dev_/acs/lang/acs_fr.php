@@ -1,10 +1,10 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Specific to ACS plugin - sp&eacute;cifique au plugin ACS
+  include_spip('lib/composant/composants_ajouter_langue');
 
 // Lang file is build with components public lang files
 if (_DIR_RESTREINT != '') {
-  include_spip('lib/composant/composants_ajouter_langue');
   // Ajoute les fichiers de langue des composants (partie publique)
   $GLOBALS[$GLOBALS['idx_lang']] = array( // Espace public
   // L'upload direct depuis l'espace ecrire de spip &eacute;tant interdit, cette traduction se retrouve ici
@@ -76,7 +76,7 @@ Pour configurer le site, cliquez sur l\'onglet "Composants" et personnalisez les
   'model' => 'Mod&egrave;le',
   'squelette' => 'Squelette(s)',
   'voir_pages_composants' => 'Afficher les pages des composants',
-  
+
   'acsDerniereModif' => 'Mis &agrave; jour le',
 
   'dev_infos' => 'Infos d&eacute;veloppeur',
@@ -125,5 +125,6 @@ Pour configurer le site, cliquez sur l\'onglet "Composants" et personnalisez les
 
 
   );
+  composants_ajouter_langue('ecrire');
 }
 ?>

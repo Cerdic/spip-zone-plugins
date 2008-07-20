@@ -1,4 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+#CACHE{7200}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">	
 <html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" xml:lang="#LANG" lang="#LANG">
 [(#REM)
              ACS
@@ -42,9 +43,13 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
   <link rel="alternate" type="application/rss+xml"[ title="(#ENV{rsstitle,<:syndiquer_site:>})"] href="#ENV{rssurl,#URL_PAGE{backend}}" />[(#REM) Lien vers le flux RSS du site ]
   <link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="all" />[(#REM) Feuille de style par defaut pour le code genere par SPIP ]
   <link rel="stylesheet" href="[(#CHEMIN{agenda.css}|direction_css)]" type="text/css" media="projection, screen, tv" />[(#REM) Feuille de style CSS pour l'agenda Spip]
-  #INSERT_HEAD [(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css. SituÃ©e avant impression.css pour permettre   contrÃ´le sur impression des autres plugins ]
+  #INSERT_HEAD [(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css. Située avant impression.css pour permettre contrï¿½?le sur impression des autres plugins ]
   <link rel="stylesheet" href="spip.php?page=habillage.css[&amp;v=(#ACS_DERNIERE_MODIF)]" type="text/css" media="projection, screen, tv" />[(#REM) Feuille de style CSS pour l'affichage du site a l'ecran ]
   <link rel="stylesheet" href="[(#CHEMIN{impression.css}|direction_css)]" type="text/css" media="print" />[(#REM) Feuille de style CSS pour l'impression ]
+  [(#EVAL{defined('_DIR_PLUGIN_CRAYONS')}|?{' '})
+    <link rel="stylesheet" href="spip.php?page=acs_style_prive.css" type="text/css" media="projection, screen, tv" />
+    <script type="text/javascript" src="#CHEMIN{js/dragdrop_interface.js}"></script>
+  ][(#REM) Feuille de style CSS et scripts pour l'édition des composants ACS (feuilles de style de l'espace privé utilisées sur la partie publique, pour les crayons) ]
   <script type="text/javascript" src="#CHEMIN{javascript/layer.js}"></script>
 </head>
 <body[ class="page_(#ENV{page})"]>

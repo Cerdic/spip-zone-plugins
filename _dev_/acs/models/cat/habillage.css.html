@@ -96,7 +96,7 @@ background-repeat: no-repeat;
 }
 
 ul.spip {
-	list-style-image : url(puce.gif);
+	list-style : url(#ACS_CHEMIN{img/puces/}#CONFIG{acsArticlesPuce,puce_8x8.gif});
 }
 
 /* Espaceur de blocs */
@@ -370,7 +370,6 @@ fieldset.reponse_formulaire { border: 1px dotted; font-weight: normal; }
 /*  Cartouche et titraille
 ---------------------------------------------- */
 #colonne2 .cartouche {
-	background: url('img/decohautarticle.png') no-repeat top left;
 	font-family: serif, Arial;
 }
 #colonne2 .cartouche .titre {
@@ -501,36 +500,6 @@ table.spip tr.row_first { background: #dfefff; }
 table.spip tr.row_odd { background: #efdfff; }
 table.spip tr.row_even { background: #ffefdf; }
 table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
-
-/*************
- * photo du jour
- *************/
-
-div.photoUne {
-	float: right;
-}
-
-img.photoUne {
-	border: 1px solid #000;
-	margin: 10px;
-	margin-bottom: 0;
-}
-
-.photoUne .doc_titre {
-	text-align: center;
-	font-size: 0.71em;
-	margin: 10px;
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
-.photoUne .doc_descriptif {
-	text-align: justify;
-	font-size: 0.71em;
-	margin: 10px;
-	margin-top: 0;
-	margin-bottom: 0;
-}
 
 /*************
  * forumalire recommander

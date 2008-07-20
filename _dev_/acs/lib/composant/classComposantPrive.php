@@ -32,7 +32,10 @@ class AdminComposant {
   // Constructeur
   // Instancie (au besoin) un objet Composant à l'éxécution
   // pour en adopter les méthodes implémentées.
-  function AdminComposant($type, $debug = false)  {
+  function __construct($type, $debug = false) {
+    include_spip('inc/xml'); // spip_xml_load()
+    include_spip('inc/traduire');
+    
     $this->debug = $debug;
     $this->type = $type;
     $this->fullname = "acs".ucfirst($type);
@@ -43,20 +46,12 @@ class AdminComposant {
     // Dossier racine du composant
     $this->rootDir = find_in_path('composants/'.$type);
     $this->icon = $this->rootDir.'/img_pack/'.$type.'_icon.gif';
-
-    // Charge le fichier optionnel de langue du composant. Ordre de recherche:
-    // 1. langue courante depuis dossier_squelettes_over_acs
-    // 2. langue courante depuis dossier squelettes acs
-    // 3. langue par défaut depuis dossier_squelettes_over_acs
-    // 4. langue par défaut depuis dossier squelettes acs
-    $GLOBALS['idx_lang'] = 'i18n_ecrire_'.$GLOBALS['spip_lang'];
-    $langfile = find_in_path('composants/'.$type.'/ecrire/lang/'.$type.'_adm_'.$GLOBALS['spip_lang'].'.php');
-    if (!$langfile)
-      $langfile = find_in_path('composants/'.$type.'/ecrire/lang/'.$type.'_adm_fr.php');
-    surcharger_langue($langfile);
+    if (!is_readable($this->icon))
+      $this->icon = _DIR_PLUGIN_ACS."/img_pack/composant-24.gif";
+    $this->optionnel = 'oui';
+    $this->enable = true;
 
     // Lit les paramètres de configuration du composant
-    include_once('inc/xml.php');
     $config = spip_xml_load($this->rootDir.'/ecrire/composant.xml');
 
     // Affecte ses paramètres de configuration à l'objet Composant
@@ -67,7 +62,6 @@ class AdminComposant {
     $this->version_acs_max = $c['version_acs_max'][0];
     $this->version_spip_min = $c['version_spip_min'][0];
     $this->version_spip_max = $c['version_spip_max'][0];
-    $this->description = _T($type.'_description');
 
     if (is_array($c['param'])) {
       foreach($c['param'] as $param) {
@@ -78,6 +72,39 @@ class AdminComposant {
           $this->$param['nom'][0] = true;
       }
     }
+    
+    // Active le composant non optionnel
+    if (($this->optionnel=='non') || ($this->optionnel =='no') || ($this->optionnel =='false')) {
+      ecrire_meta($this->fullname.'Use','oui');
+      $this->enable = true;
+    }
+    else { // Regarde si le composant optionnel doit être activé
+      // Désactive le composant s'il dépend de plugins non activés
+      if (strpos($this->optionnel, 'plugin') === 0) {
+        $plugins_requis = explode(' ', substr($this->optionnel, 7));
+        foreach ($plugins_requis as $plug) {
+          $plug = strtoupper(trim($plug));
+          if (!acs_get_from_active_plugin($plug)) {
+            $this->enable = false;
+          }
+        }
+      }
+      // Désactive le composant si "optionnel" est égal à une variable de configuration non égale à "oui"
+      // (si optionnel ne vaut pas oui, yes, ou true, il s'agit d'un nom de variable meta)
+      elseif (isset($this->optionnel) && 
+               ($this->optionnel != 'oui') && 
+               ($this->optionnel != 'yes') && 
+               ($this->optionnel != 'true') && 
+               ($GLOBALS['meta'][$this->optionnel] != 'oui') 
+             ) {
+        ecrire_meta($this->fullname.'Use','non');
+        $this->enable = false;
+      }
+    }
+    
+    $this->vars[0] = array('nom' => 'Use',
+                           'valeur' => $GLOBALS['meta'][$this->fullname.'Use']
+                          );
     if (is_array($c['variable'])) {
       foreach($c['variable'] as $k=>$var) {
         foreach($var as $varname=>$value) {
@@ -86,7 +113,7 @@ class AdminComposant {
           else
             $v = $value[0];
           if ($this->debug) echo $type.'->vars['.$k.']['.$varname.'] = '.htmlentities((is_array($v) ? 'Array('.implode($v, ', ').')' : $v)) , "<br />"; // dbg composant
-          $this->vars[$k][$varname] = $v;
+          $this->vars[$k+1][$varname] = $v;
           if ($varname == 'valeur') { // Default values
             if (substr($v,0,3) == 'acs') {
               if (!in_array($v, $this->cvars)) $this->cvars[ ] = $v;
@@ -102,8 +129,9 @@ class AdminComposant {
         }
       }
     }
+
     // Mise à jour
-    if ($_POST['changer_config']=='oui') {
+    if ($_POST['maj_composant']=='oui') {
       foreach ($this->vars as $var) {
         $v = $this->fullname.$var['nom'];
         if ($_POST[$v] != $GLOBALS['meta'][$v]) {
@@ -133,6 +161,7 @@ class AdminComposant {
             else
               $this->errors[] = $cObj.'->afterUpdate '._T('acs:not_found');
         }
+        ecrire_metas();
         unset($updated);
       }
     }
@@ -154,14 +183,18 @@ class AdminComposant {
     return implode(', ', $this->cvars);
   }
 
+  function T($string) {
+    return _T('acs:'.$this->type.'_'.$string);
+  }
+  
 /**
  * Méthode gauche: affiche la colonne gauche dans spip admin
  */
   function gauche() {
     global $spip_version_code;
 
-    if (_TC($this->type.'_description') != $this->type.' description')
-      $r .= '<div>'._TC($this->type.'_description').'</div><br />';
+    //if (_TC($this->type.'_description') != $this->type.' description')
+      $r .= '<div>'.$this->T('description').'</div><br />';
 
     if (_TC($this->type.'_info') != $this->type.'_info')
       $r .= '<div class="onlinehelp" style="text-align: justify">'._TC($this->type.'_info').'</div><br />';
@@ -184,43 +217,51 @@ class AdminComposant {
   }
 
 /**
- * Méthode editswitch: affiche/masque l'éditeur du composant
- */
-  function editswitch($enable) {
-  $varname = $this->fullname.'Use';
-  $varconf = $this->fullname.'Config';
-
-  if (isset($GLOBALS['meta'][$varname]) && $GLOBALS['meta'][$varname])
-    $var = $GLOBALS['meta'][$varname];
-  else
-    $var = 'non';
-
-  if ($var == "oui")  $this->display = "display: block;";
-  else $this->display = "display: none;";
-
-  // bouton_radio2($nom, $valeur, $titre, $actif = false, $onClick="", $enable=true)
-  $o = bouton_radio2($varname, "oui", _T('item_oui'), $var == "oui", "changeVisible(this.checked, '$varconf', 'block', 'none');",$enable);
-  $o .= bouton_radio2($varname, "non", _T('item_non'), $var == "non", "changeVisible(this.checked, '$varconf', 'none', 'block');",$enable);
-  return $o;
-  }
-
-/**
  * Méthode edit: affiche un éditeur pour les variables du composant
  */
-  function edit() {
+  function edit($preview = false) {
     static $n;
     $n++; // Numérotation du composant (utile pour js)
-    $r = $this->n.'<div id="acs'.ucfirst($this->type).'Config" '.(isset($this->display) ? 'style="'.$this->display.'"' : '').'>';
-    if (isset($this->preview) && ($this->preview != 'non')  && ($this->preview != 'no')) {
+    
+    
+    $r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'js/picker.js"></script>';
+    
+    $r .= '<form name="acs" action="?exec=acs&onglet=composants" method="post">'.
+      "<input type='hidden' name='maj_composant' value='oui' />".
+      '<input type="hidden" name="composant" value="'.$this->type.'" />';
+      
+    if (($this->optionnel!='non') && ($this->optionnel!='no') && ($this->optionnel!='false')) {
+      $varname = $this->fullname.'Use';
+      $varconf = $this->fullname.'Config';
+      if (isset($GLOBALS['meta'][$varname]) && $GLOBALS['meta'][$varname])
+        $var = $GLOBALS['meta'][$varname];
+      else
+        $var = 'non';
+      if ($var == "oui")
+        $this->display = "display: block;";
+      else
+        $this->display = "display: none;";
+
+      $r .= '<div align="'.$GLOBALS['spip_lang_right'].'" style ="font-weight: normal"><label>'._T('acs:use').' '.$this->T('nom').' : </label>';
+      // acs_bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="", $enable=true)
+      $r .= acs_bouton_radio($varname, "oui", _T('item_oui'), $var == "oui", "changeVisible(this.checked, '$varconf', 'block', 'none');",$this->enable);
+      $r .= acs_bouton_radio($varname, "non", _T('item_non'), $var == "non", "changeVisible(this.checked, '$varconf', 'none', 'block');",$this->enable);
+      $r .= '</div>';
+    }
+
+    $r .= '<div id="acs'.ucfirst($this->type).'Config" '.(isset($this->display) ? 'style="'.$this->display.'"' : '').'>';
+    if ($preview && isset($this->preview) && ($this->preview != 'non')  && ($this->preview != 'no') && ($this->preview != 'false')) {
       $url = '../?page=wrap&c=composants/'.$this->type.'/'.$this->type.'&v='.$GLOBALS['meta']['acsDerniereModif'].'&var_mode=recalcul';
       $r .= '<fieldset class="apercu"><legend><a href="javascript:void(0)" onclick=" findObj(\''.$this->fullname.'\').src=\''.$url.'\';" title="'._T('admin_recalculer').'">'._T('previsualisation').'</a></legend><iframe id="'.$this->fullname.'" width="100%" height="'.(is_numeric($this->preview) ? $this->preview : 80).'px" frameborder="0" style="border:0" src="'.$url.'"></iframe></fieldset>';
     }
     // Affiche les variables paramétrables du composant:
     $controls = array();
     foreach ($this->vars as $var) {
-      $v = $this->fullname.$var['nom'];
-      if (isset($GLOBALS['meta'][$v]))
-        $$v = $GLOBALS['meta'][$v];
+      if ($var['nom'] === 'Use')
+        continue;
+      $v = $var['nom'];
+      if (isset($GLOBALS['meta'][$this->fullname.$v]))
+        $$v = $GLOBALS['meta'][$this->fullname.$v];
       elseif (isset($var['valeur'])) {
         $default = $var['valeur'];
         if ((substr($default,0,3) =='acs') && isset($GLOBALS['meta'][$default]))
@@ -252,8 +293,11 @@ class AdminComposant {
     if (isset($mep)) $r .= '<div align="'.$GLOBALS['spip_lang_right'].'">'.$mep.'</div>';
     $r .= '</div><table width="100%"><tr><td>';
 
-    if (count($this->errors)) $r .= '<div class="alert">'.implode('<br />', $this->errors).'</div>';
+    if (count($this->errors))
+      $r .= '<div class="alert">'.implode('<br />', $this->errors).'</div>';
+      
     $r .= '</td><td valign="bottom"><div style="text-align:'.$GLOBALS['spip_lang_right'].';"><input type="submit" name="'._T('bouton_valider').'" value="'._T('bouton_valider').'" class="fondo"></div></td></tr></table>';
+    $r .= '</form>';
     return $r;
   }
 /**
@@ -266,26 +310,30 @@ class AdminComposant {
 
   // Choix de couleur
   function ctlColor($nom, $couleur, $param) {
-    return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$nom.'" title="'.$nom.'" class="label">'._T($nom).'</label></td><td><input type="text" id="'.$nom.'" name="'.$nom.'" size="8" maxlength="6" value="'.$couleur.'" class="forml" onKeyUp="javascript:document.getElementById(\'led_'.$nom.'\').style.background=\'#\' + this.value;"></td><td><a   href="javascript:TCP.popup(document.forms[\'acs\'].elements[\''.$nom.'\'],0);"><div id="led_'.$nom.'" class="led" style="background: #'.$couleur.';" title="'._T('acs:choix_couleur').'"></div></a></td></tr></table></div>';
+    $var = $this->fullname.$nom;
+    return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td><td><input type="text" id="'.$var.'" name="'.$var.'" size="8" maxlength="6" value="'.$couleur.'" class="forml" onKeyUp="javascript:document.getElementById(\'led_'.$var.'\').style.background=\'#\' + this.value;"></td><td><a   href="javascript:TCP.popup(document.forms[\'acs\'].elements[\''.$var.'\'],0);"><div id="led_'.$var.'" class="led" style="background: #'.$couleur.';" title="'._T('acs:choix_couleur').'"></div></a></td></tr></table></div>';
   }
 
   // Choix d'image
   function ctlImg($nom, $image, $param) {
+    $var = $this->fullname.$nom;
     $c = $GLOBALS['ACS_CHEMIN'].'/'.$param['chemin'];
     acs_creer_chemin($c);
     $s = @getimagesize('../'.$c.'/'.$image);
     $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
-    if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$nom.'" title="'.$nom.'"  class="label">'._T($nom).'</label></td>';
-   $r .= '<td><input type="text" name="'.$nom.'"'.(is_array($s) ? ' title="'.$s[0].'x'.$s[1].'"' : '').' value="'.$image.'" size="40" class="forml"></td>';
-    $r .= '<td><a href="javascript:TFP.popup(document.forms[\'acs\'].elements[\''.$nom.'\'], document.forms[\'acs\'].elements[\''.$nom.'\'].value, \''.$c.'\');" title="'._T('acs:choix_image').'"><img src="'._DIR_PLUGIN_ACS.'img_pack/folder_image.png" class="icon" alt="'._T('acs:choix_image').'" /></a></td></tr></table></div>';
+    if ($param['label'] != 'non')
+      $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'"  class="label">'._T($nom).'</label></td>';
+    $r .= '<td><input type="text" name="'.$var.'"'.(is_array($s) ? ' title="'.$s[0].'x'.$s[1].'"' : '').' value="'.$image.'" size="40" class="forml"></td>';
+    $r .= '<td><a href="javascript:TFP.popup(document.forms[\'acs\'].elements[\''.$var.'\'], document.forms[\'acs\'].elements[\''.$var.'\'].value, \''.$c.'\');" title="'._T('acs:choix_image').'"><img src="'._DIR_PLUGIN_ACS.'img_pack/folder_image.png" class="icon" alt="'._T('acs:choix_image').'" /></a></td></tr></table></div>';
     return $r;
   }
 
   // Choix d'une largeur de bordure
   function ctlLargeurBord($nom, $largeur='0', $param) {
+    $var = $this->fullname.$nom;
     $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
-    if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$nom.'" title="'.$nom.'" class="label">'._T($nom).'</label></td>';
-    $r .= '<td><select name="'.$nom.'" title="'._T('acs:bordlargeur').'" class="forml" style="width: auto">'.
+    if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td>';
+    $r .= '<td><select name="'.$var.'" title="'._T('acs:bordlargeur').'" class="forml" style="width: auto">'.
       '<option value=""'.($largeur=="" ? ' selected' : '').'></option>'.
       '<option value="0"'.($largeur=="0" ? ' selected' : '').'>0</option>'.
       '<option value="thin"'.($largeur=="thin" ? ' selected' : '').'>thin</option>'.
@@ -300,9 +348,10 @@ class AdminComposant {
 
   // Choix d'un style  de bordure
   function ctlStyleBord($nom, $style='solid', $param) {
+    $var = $this->fullname.$nom;
     $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
-    if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$nom.'" title="'.$nom.'" class="label">'._T($nom).'</label></td>';
-    $r .= '<td><select name="'.$nom.'" title="'._T('acs:bordstyle').'" class="forml" style="width: auto">'.
+    if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td>';
+    $r .= '<td><select name="'.$var.'" title="'._T('acs:bordstyle').'" class="forml" style="width: auto">'.
       '<option value=""'.($style=="" ? ' selected' : '').' title="'._T('acs:parent').'"></option>'.
       '<option value="none"'.($style=="none" ? ' selected' : '').' title="'._T('acs:none').'">none</option>'.
       '<option value="solid"'.($style=="solid" ? ' selected' : '').' title="'._T('acs:solid').'">solid</option>'.
@@ -319,23 +368,27 @@ class AdminComposant {
 
   // Choix de valeur, avec + / - (todo)
   function ctlNombre($nom, $nombre=0, $param) {
-    return '<table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$nom.'" title="'.$nom.'"  class="label">'._T($nom).'</label></td><td><input type="text" name="'.$nom.'" size="8" maxlength="6" class="forml" value="'.$nombre.'" style="text-align:'.$GLOBALS['spip_lang_right'].'" /></td></tr></table>';
+    $var = $this->fullname.$nom;
+    return '<table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'"  class="label">'.$this->T($nom).'</label></td><td><input type="text" name="'.$var.'" size="8" maxlength="6" class="forml" value="'.$nombre.'" style="text-align:'.$GLOBALS['spip_lang_right'].'" /></td></tr></table>';
   }
 
   // Saisie d'un texte
   function ctlText($nom, $txt, $param = array('taille' => 30)) {
-    return '<table width="100%"><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$nom.'" title="'.$nom.'"  class="label">'._T($nom).'</label></td><td><input type="text" name="'.$nom.'" size="'.$param['taille'].'" maxlength="'.$param['taille'].'" class="forml" value="'.$txt.'" /></td></tr></table>';
+    $var = $this->fullname.$nom;
+    return '<table width="100%"><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'"  class="label">'.$this->T($nom).'</label></td><td><input type="text" name="'.$var.'" size="'.$param['taille'].'" maxlength="'.$param['taille'].'" class="forml" value="'.$txt.'" /></td></tr></table>';
   }
 
   // Saisie d'un texte long
   function ctlTextarea($nom, $txt, $param) {
-    return '<div align="'.$GLOBALS['spip_lang_left'].'"><label for "'.$nom.'" title="'.$nom.'">'._T($nom).'</label><textarea name="'.$nom.'" class="forml" rows="'.(isset($param['lines']) ? $param['lines']-1 : 2).'">'.$txt.'</textarea></div>';
+    $var = $this->fullname.$nom;
+    return '<div align="'.$GLOBALS['spip_lang_left'].'"><label for "'.$var.'" title="'.$var.'">'.$this->T($nom).'</label><textarea name="'.$var.'" class="forml" rows="'.(isset($param['lines']) ? $param['lines']-1 : 2).'">'.$txt.'</textarea></div>';
   }
 
   // Choix oui / non
   function ctlChoix($nom, $value, $param) {
     if (!is_array($param['option'])) return 'Pas d\'options pour '.$nom;
-    $r = '<table><tr valign="bottom"><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$nom.'" title="'.$nom.'" class="label">'._T($nom).'</label></td><td>';
+    $var = $this->fullname.$nom;
+    $r = '<table><tr valign="bottom"><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td><td>';
     foreach($param['option'] as $option) {
       switch($option) {
         case 'oui';
@@ -345,12 +398,12 @@ class AdminComposant {
           $label = _T('item_non');
           break;
         default:
-          $label = _T($nom.ucfirst($option));
+          $label = $this->T($nom.ucfirst($option));
       }
-      $r .= bouton_radio(
-        $nom,
+      $r .= acs_bouton_radio(
+        $var,
         $option,
-        '<label for "'.$nom.'" title="'.$nom.ucfirst($option).'" class="label">'.$label.'</label>',
+        '<label for "'.$var.'" title="'.$var.ucfirst($option).'" class="label">'.$label.'</label>',
         $value == $option
       );
     }
@@ -360,14 +413,13 @@ class AdminComposant {
 
   // Choix d'un composant
   function ctlWidget($nom, $value, $param ) {
-
-  require_once(_DIR_PLUGIN_ACS.'lib/composant/composants_variables.php');
-  $vars = composants_variables();
-
+    require_once(_DIR_PLUGIN_ACS.'lib/composant/composants_variables.php');
+    $vars = composants_variables();
+    $var = $this->fullname.$nom;
     if (!is_array($param['composant'])) return _T('acs:err_aucun_composant').' '.$nom.'<br />';
 
-    $r = '<table><tr><td><label for "'.$nom.'" title="'.$nom.'"  class="label">'._T($nom).'</label></td><td><div id="'.$nom.'" class="ctlWidget">';
-    $r .= '<select id="select_'.$nom.'" name="'.$nom.'" class="forml select_widget">';
+    $r = '<table><tr><td><label for "'.$var.'" title="'.$var.'"  class="label">'.$this->T($nom).'</label></td><td><div id="'.$var.'" class="ctlWidget">';
+    $r .= '<select id="select_'.$var.'" name="'.$var.'" class="forml select_widget">';
     $r .= '<option value=""'.($value=='' ? ' selected' : '').'> </option>';
 
     foreach($param['composant'] as $c) {
@@ -388,21 +440,22 @@ class AdminComposant {
   }
 
   function ctlHidden($nom, $value, $param) {
-    return '<input type="hidden" name="'.$nom.'" value="'.$value.'" />';
+    $var = $this->fullname.$nom;
+    return '<input type="hidden" name="'.$var.'" value="'.$value.'" />';
   }
 }
 
 // http://doc.spip.org/@bouton_radio
-function bouton_radio2($nom, $valeur, $titre, $actif = false, $onClick="", $enable=true) {
+function acs_bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="", $enable=true) {
   static $id_label = 0;
 
   if (strlen($onClick) > 0) $onClick = " onclick=\"$onClick\"";
-  $texte = "<input type='radio' name='$nom' value='$valeur' id='label_$id_label'$onClick";
+  $texte = "<input type='radio' name='$nom' value='$valeur' id='radio_$id_label'$onClick";
   if ($actif) {
     $texte .= ' checked="checked"';
     $titre = '<b>'.$titre.'</b>';
   }
-  $texte .= ($enable ? '' : ' disabled')." /> <label for='label_$id_label'>$titre</label>\n";
+  $texte .= ($enable ? '' : ' disabled')." /> <label for='radio_$id_label'>$titre</label>\n";
   $id_label++;
   return $texte;
 }
@@ -438,5 +491,14 @@ function spip_version_texte($version_code) {
     return $v[$version_code];
   else
     return $version_code;
+}
+
+// Retourne la traduction d'un terme défini par un composant crée AVANT
+// l'appel de cette fonction
+function _TC($texte) {
+  if (in_array($texte, array_keys($GLOBALS[$GLOBALS['idx_lang']])))
+    return $GLOBALS[$GLOBALS['idx_lang']][$texte];
+  else
+    return $texte;
 }
 ?>

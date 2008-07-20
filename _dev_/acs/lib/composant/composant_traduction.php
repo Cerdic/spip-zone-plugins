@@ -16,7 +16,7 @@ function composant_traduction($c='fond', $l='fr', $module='') {
 }
 
 function lecture_composant_traduction($c='fond', $l='fr', $module='') {
-  $langfile = 'composants/'.$c.($module ? '/'.$module : '').'/lang/'.$c.($module=='ecrire' ? '_adm' : '').'_'.$l.'.php';
+  $langfile = 'composants/'.$c.(($module != '') ? '/'.$module : '').'/lang/'.$c.(($module != '') ? '_'.$module : '').'_'.$l.'.php';
   $idx = $GLOBALS['idx_lang'];
   $GLOBALS['idx_lang'] = 'i18n_acs_'.$c.$module.'_'.$l;
   $f = find_in_path($langfile);

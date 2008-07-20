@@ -55,7 +55,7 @@ function cGetPages($c, $chemin='') {
  */
 function cGetTraductions($c) {
   $r[0] = cGetFiles($c, 'composants/'.$c.'/lang', $ext='php', strlen($c)+1);
-  $r[1] = cGetFiles($c, 'composants/'.$c.'/ecrire/lang', $ext='php', strlen($c)+5);
+  $r[1] = cGetFiles($c, 'composants/'.$c.'/ecrire/lang', $ext='php', strlen($c)+strlen('ecrire')+2);
   return $r;
 }
 
