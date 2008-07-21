@@ -13,6 +13,7 @@ include_spip ("inc/ajouter_documents");
 include_spip ("inc/getdocument");
 include_spip('inc/barre');
 include_spip('base/abstract_sql');
+include_spip('inc/vieilles_defs');
 
 function balise_FORMULAIRE_ARTICLE ($p) {
 	return calculer_balise_dynamique($p,'FORMULAIRE_ARTICLE', array('id_rubrique'));
