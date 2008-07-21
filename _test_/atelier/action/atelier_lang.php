@@ -119,6 +119,24 @@ function text_to_php($value) {
 	$value = preg_replace("#è#","&egrave;",$value);
 	$value = preg_replace("#à#","&agrave;",$value);
 	$value = preg_replace("#ê#","&ecirc;",$value);
+	$value = preg_replace("#â#","&acirc;",$value);
+	$value = preg_replace("#î#","&icirc;",$value);
+	$value = preg_replace("#ï#","&iuml;",$value);
+	$value = preg_replace("#œ#","&oelig;",$value);
+	$value = preg_replace("#ù#","&ugrave;",$value);
+	$value = preg_replace("#û#","&ucirc;",$value);
+	$value = preg_replace("#ç#","&ccedil;",$value);
+	$value = preg_replace("#É#","&Eacute;",$value);
+	$value = preg_replace("#È#","&Egrave;",$value);
+	$value = preg_replace("#À#","&Agrave;",$value);
+	$value = preg_replace("#Ê#","&Ecirc;",$value);
+	$value = preg_replace("#Â#","&Acirc;",$value);
+	$value = preg_replace("#Î#","&Icirc;",$value);
+	$value = preg_replace("#Ï#","&Iuml;",$value);
+	$value = preg_replace("#Œ#","&OElig;",$value);
+	$value = preg_replace("#Ù#","&Ugrave;",$value);
+	$value = preg_replace("#Û#","&Ucirc;",$value);
+	$value = preg_replace("#Ç#","&Ccedil;",$value);
 	return $value;
 }
 
