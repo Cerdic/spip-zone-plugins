@@ -3,13 +3,13 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'edito' => 'Edito',
-'edito_description' => 'Editorial. Un article mis en évidence selon un mot-clé.',
-'edito_help' => 'Le mot-clé dépend de la langue. En français, c\'est: "Edito". Le mot-clé est défini dans le fichier de langue du composant Edito.',
+'nom' => 'Edito',
+'description' => 'Editorial. Un article mis en évidence selon un mot-clé.',
+'help' => 'Le mot-clé dépend de la langue. En français, c\'est: "Edito". Le mot-clé est défini dans le fichier de langue du composant Edito.',
 
-'acsEditoFond' => 'Fond',
-'acsEditoBord' => 'Bordure',
-'acsEditoLegendBord' => 'Bordure du titre',
-'acsEditoNbLettres' => 'Lettres avant coupure'
+'Fond' => 'Fond',
+'Bord' => 'Bordure',
+'LegendBord' => 'Bordure du titre',
+'NbLettres' => 'Lettres avant coupure'
 );
 ?>
