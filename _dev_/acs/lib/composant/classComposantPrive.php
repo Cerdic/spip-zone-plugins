@@ -470,7 +470,6 @@ function acs_creer_chemin($c) {
   else
     return mkdir_recursive($dir);
 }
-
 /**
  * Makes directory, returns TRUE if exists or made
  *
@@ -485,22 +484,5 @@ function mkdir_recursive($pathname)
 }
 
 // Convertit la version code de spip en version texte
-// Le tableau ne contient que les versions de spip compatibles ET testées avec cette version d'ACS
-function spip_version_texte($version_code) {
-  $v = $GLOBALS['acs_table_versions_spip'];
 
-  if (isset($v[$version_code]))
-    return $v[$version_code];
-  else
-    return $version_code;
-}
-
-// Retourne la traduction d'un terme défini par un composant crée AVANT
-// l'appel de cette fonction
-function _TC($texte) {
-  if (in_array($texte, array_keys($GLOBALS[$GLOBALS['idx_lang']])))
-    return $GLOBALS[$GLOBALS['idx_lang']][$texte];
-  else
-    return $texte;
-}
 ?>
