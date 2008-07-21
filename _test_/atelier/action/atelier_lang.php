@@ -35,6 +35,7 @@ function action_atelier_lang_dist() {
 	$creer_repertoire = _request('creer_repertoire');
 	$creer_fichier = _request('creer_fichier');
 	$ajout_lang = _request('ajout_lang');
+	$edit_lang = _request('edit_lang');
 
 	if (isset($creer_repertoire)) {
 		atelier_creer_repertoire_lang($prefixe);
@@ -43,17 +44,30 @@ function action_atelier_lang_dist() {
 		$lang = _request('choix_lang');
 		atelier_creer_fichier_lang($prefixe,$lang);
 	}
+        $redirect = parametre_url(urldecode(generer_url_ecrire('atelier_lang')),
+				'id_projet', $id_projet, '&') . $err;
+
 	if (isset($ajout_lang)) {
 		$lang = _request('lang');
 		$module = _request('module');
 		$key = _request('key');
 		$value = _request('value');
 		atelier_ajout_lang($module,$lang,$enreg = array('key' => $key, 'value' => $value));
+	        $redirect = parametre_url(urldecode(generer_url_ecrire('atelier_lang',"id_projet=$id_projet")),
+				'fichier', $module.'_'.$lang.'.php', '&') . $err;
 	}
 
-
-        $redirect = parametre_url(urldecode(generer_url_ecrire('atelier_lang')),
-				'id_projet', $id_projet, '&') . $err;
+	if (isset($edit_lang)) {
+	
+		$arg = explode('-',$arg);
+		$id_projet = $arg[0];
+		$module = $arg[1];
+		$lang = $arg[2];
+	
+		atelier_edit_lang($module,$lang);
+	        $redirect = parametre_url(urldecode(generer_url_ecrire('atelier_lang',"id_projet=$id_projet")),
+				'fichier', $module.'_'.$lang.'.php', '&') . $err;
+	}
 
 	include_spip('inc/headers');
 	redirige_par_entete($redirect);
@@ -64,31 +78,26 @@ function atelier_creer_repertoire_lang($prefixe) {
 	mkdir(_DIR_PLUGINS.$prefixe.'/lang');
 }
 
-function atelier_ajout_lang($module,$lang,$enreg) {
-	$fichier = _DIR_PLUGINS.$module.'/lang/'.$module.'_'.$lang.'.php';
-	$value = text_to_php($enreg['value']);
-
+function atelier_lire_fichier_langue($fichier) {
 	$lignes = file($fichier,FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-	include_spip('inc/filtres');
 	$lang = array();
 
 	foreach($lignes as $l)
 		if (preg_match('#(\')(.*)(\')\s*=>\s*(\')(.*)(\',)#',$l,$match))
 			$lang[$match[2]] = $match[5];
+	return $lang;
+}
 
-	$lang[$enreg['key']] = $value;
-
-
-	$contenu='';
-	// on classe le tableau par ordre alphabetique
-	if (array_multisort(array_keys($lang),SORT_STRING,$lang)) {
-		foreach($lang as $key => $value) {
+function atelier_creer_contenu_langue($c) {
+	$contenu = '';
+	if (array_multisort(array_keys($c),SORT_STRING,$c))
+		foreach($c as $key => $value)
 			$contenu .= '\''.$key.'\' => \''.$value.'\','."\n";
-		}
-	}
+	return $contenu;
+}
 
+function atelier_ecrire_fichier_langue($fichier,$contenu) {
 	// on ajoute les commentaires repére ?
-
 	$debut_squel = 
 '<?php 
 
@@ -106,10 +115,37 @@ $GLOBALS[$GLOBALS[\'idx_lang\']] = array (
 );
 
 ?>';
-
 	$contenu = $debut_squel . $contenu . $fin_squel;
-
 	ecrire_fichier($fichier,$contenu);
+}
+
+function atelier_edit_lang($module,$lang) {
+	$fichier = _DIR_PLUGINS.$module.'/lang/'.$module.'_'.$lang.'.php';
+
+	$lang = atelier_lire_fichier_langue($fichier);
+
+	foreach ($lang as $key => $value) {
+		if ($key == 'action') {
+			if ($value) $c[$key] = text_to_php(_request('ATELIER$action'));
+		}
+		else {
+			if ($value) $c[$key] = text_to_php(_request($key));
+		}
+	}
+
+	$contenu = atelier_creer_contenu_langue($c);
+	atelier_ecrire_fichier_langue($fichier,$contenu);
+}
+
+function atelier_ajout_lang($module,$lang,$enreg) {
+	$fichier = _DIR_PLUGINS.$module.'/lang/'.$module.'_'.$lang.'.php';
+
+	$lang = atelier_lire_fichier_langue($fichier);
+
+	$lang[$enreg['key']] = text_to_php($enreg['value']);
+
+	$contenu = atelier_creer_contenu_langue($lang);
+	atelier_ecrire_fichier_langue($fichier,$contenu);
 }
 
 // prepare un texte pour inclusion dans fichier php

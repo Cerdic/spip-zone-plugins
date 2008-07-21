@@ -57,6 +57,7 @@ function atelier_edit_lang($a) {
 	$fichier = $a['fichier'];
 	$module = $a['module'];
 	$lang = $a['lang'];
+	$id_projet = $a['id_projet'];
 	if ($lang=='') $lang='fr';
 
 	$fichier_lang = '../plugins/'.$module.'/lang/'.$fichier;
@@ -70,15 +71,16 @@ function atelier_edit_lang($a) {
 		.'<table>';
 
 	foreach ($GLOBALS[$GLOBALS['idx_lang']] as $key => $value) {
-		$form .= '<tr><td>'.$key.'</td>'
-		.'<td><input type="text" name="'.$key.'" value="'.entites_html($value).'" size="50" /></td></tr>';
+		$form .= '<tr><td>'.$key.'</td>';
+		if ($key == 'action') $key = 'ATELIER$action';
+		$form .= '<td><input type="text" name="'.$key.'" value="'.entites_html($value).'" size="50" /></td></tr>';
 	}
 	$form .= '</table>'
 	. ("<div align='right'><input class='fondo' type='submit' value='"
 	. _T('atelier:bouton_enregistrer')
 	. "' /></div>");
 
-	return generer_action_auteur("atelier_lang", $module, '', $form, " method='post' name='formulaire'");
+	return generer_action_auteur("atelier_lang","$id_projet-$module-$lang", '', $form, " method='post' name='formulaire'");
 }
 
 function atelier_ajout_lang($a) {

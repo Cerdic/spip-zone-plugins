@@ -95,7 +95,8 @@ function atelier_lang($id_projet,$row,$fichier='') {
 				echo fin_cadre_couleur(true);
 
 				echo debut_cadre_couleur('',true);
-				echo $atelier_lang('edit',array('fichier' => $fichier,'module' => $module,'lang' => $lang));
+				echo '<p>'._T('atelier:explication_editer_lang').'</p>';
+				echo $atelier_lang('edit',array('id_projet' => $id_projet,'fichier' => $fichier,'module' => $module,'lang' => $lang));
 				echo fin_cadre_couleur(true);
 			}
 		}
