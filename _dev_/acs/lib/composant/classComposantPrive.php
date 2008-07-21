@@ -161,6 +161,7 @@ class AdminComposant {
             else
               $this->errors[] = $cObj.'->afterUpdate '._T('acs:not_found');
         }
+        ecrire_meta("acsDerniereModif", time());        
         ecrire_metas();
         unset($updated);
       }
@@ -193,13 +194,14 @@ class AdminComposant {
   function gauche() {
     global $spip_version_code;
 
-    //if (_TC($this->type.'_description') != $this->type.' description')
+    if ($this->T('description') != $this->type.' description')
       $r .= '<div>'.$this->T('description').'</div><br />';
 
-    if (_TC($this->type.'_info') != $this->type.'_info')
-      $r .= '<div class="onlinehelp" style="text-align: justify">'._TC($this->type.'_info').'</div><br />';
-    if (_TC($this->type.'_help') != $this->type.'_help')
-      $r .= '<div class="onlinehelp" onclick=\'$("#help_context").slideToggle("slow");\' style="cursor:pointer;"><img src="'._DIR_PLUGIN_ACS.'img_pack/aide.gif" onmouseover=\'$("#help_context").slideToggle("slow");\' /> '._T('icone_aide_ligne').'</div><div id="help_context" class="onlinehelp pliable" style="text-align: justify">'._TC($this->type.'_help').'</div><br />';
+    if ($this->T('info') != $this->type.' info')
+      $r .= '<div class="onlinehelp" style="text-align: justify">'.$this->T('info').'</div><br />';
+      
+    if ($this->T('help') != $this->type.' help')
+      $r .= '<div class="onlinehelp" onclick=\'$("#help_context").slideToggle("slow");\' style="cursor:pointer;"><img src="'._DIR_PLUGIN_ACS.'img_pack/aide.gif" onmouseover=\'$("#help_context").slideToggle("slow");\' /> '._T('icone_aide_ligne').'</div><div id="help_context" class="onlinehelp pliable" style="text-align: justify">'.$this->T('help').'</div><br />';
 
     $n = 999;
     $r .= '<div class="onlinehelp">'.acs_plieur('plieur_pu'.$n, 'pu'.$n, '#', false, 'if (typeof done'.$n.' == \'undefined\') {AjaxSqueeze(\'?exec=composant_get_infos&c='.$this->type.'\',\'puAjax'.$n.'\'); done'.$n.' = true;}', _T('acs:dev_infos') ).'</div><div class="pu'.$n.' pliable">';
