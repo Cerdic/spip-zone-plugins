@@ -66,48 +66,16 @@ function atelier_creer_repertoire_lang($prefixe) {
 
 function atelier_ajout_lang($module,$lang,$enreg) {
 	$fichier = _DIR_PLUGINS.$module.'/lang/'.$module.'_'.$lang.'.php';
+
 	$value = text_to_php($enreg['value']);
 
+	$ligne = '\''.$enreg['key'].'\' => \''.$value.'\',';
+
 	$lignes = file($fichier,FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-	include_spip('inc/filtres');
-	$lang = array();
+	array_splice($lignes, -3, 0, $ligne);
 
-	foreach($lignes as $l)
-		if (preg_match('#(\')(.*)(\')\s*=>\s*(\')(.*)(\',)#',$l,$match))
-			$lang[$match[2]] = $match[5];
-
-	$lang[$enreg['key']] = $value;
-
-
-	$contenu='';
-	// on classe le tableau par ordre alphabetique
-	if (array_multisort(array_keys($lang),SORT_STRING,$lang)) {
-		foreach($lang as $key => $value) {
-			$contenu .= '\''.$key.'\' => \''.$value.'\','."\n";
-		}
-	}
-
-	// on ajoute les commentaires repére ?
-
-	$debut_squel = 
-'<?php 
-
-// Fichier generer par le plugin Atelier
-
-if(!defined("_ECRIRE_INC_VERSION")) return; 
-
-$GLOBALS[$GLOBALS[\'idx_lang\']] = array (
-
-';
-
-	$fin_squel = 
-'
-
-);
-
-?>';
-
-	$contenu = $debut_squel . $contenu . $fin_squel;
+	$contenu = '';
+	foreach ($lignes as $l) $contenu .= $l ."\n";
 
 	ecrire_fichier($fichier,$contenu);
 }
@@ -118,7 +86,6 @@ function text_to_php($value) {
 	$value = preg_replace("#é#","&eacute;",$value);
 	$value = preg_replace("#è#","&egrave;",$value);
 	$value = preg_replace("#à#","&agrave;",$value);
-	$value = preg_replace("#ê#","&ecirc;",$value);
 	return $value;
 }
 

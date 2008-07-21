@@ -21,21 +21,24 @@
 
 function exec_projets_dist() {
 
-	exec_projets_args(intval(_request('id_projet')));
+	exec_projets_args(intval(_request('id_projet')),
+				_request('rapport')
+	);
 }
 
-function exec_projets_args($id_projet) {
+function exec_projets_args($id_projet,$rapport='') {
 	$projet_select = charger_fonction('projet_select','inc');
 	$row = $projet_select($id_projet);
 
-	projets($id_projet,$row);
+	projets($id_projet,$row,$rapport);
 }
 
-function projets($id_projet,$row) {
+function projets($id_projet,$row,$rapport='') {
 
 	include_spip('inc/atelier_presentation');
 	include_spip('inc/atelier_autoriser');
 	include_spip('inc/atelier_plugins');
+	include_spip('inc/atelier_svn');
 	include_spip('inc/plugin');
 
 	$nom_page = atelier_debut_page(_T('atelier:titre_projets'),'projets');
@@ -57,6 +60,12 @@ function projets($id_projet,$row) {
 			'<a href="'.generer_url_ecrire('atelier_voir_cfg','id_projet='.$id_projet).'">'._T('atelier:voir_variables_cfg').'</a>'
 			));
 		}
+
+		if (atelier_verifier_projet_svn($row['prefixe'])) {
+			cadre_atelier(_T('atelier:svn'),array(
+				'<a href="'.generer_url_ecrire('atelier_svn','id_projet='.$id_projet).'">'._T('atelier:page_svn').'</a>'
+			));
+		}
 		$lang = array();
 		$lang[] =  '<a href="'.generer_url_ecrire('atelier_lang','id_projet='.$id_projet).'">'._T('atelier:atelier_lang').'</a>';
 
@@ -67,6 +76,12 @@ function projets($id_projet,$row) {
 		atelier_cadre_infos();
 
 	atelier_debut_droite($nom_page);
+
+		if ($rapport != '') {
+			echo debut_cadre_trait_couleur('',true);
+			echo '<p>'.$rapport.'</p>';
+			echo fin_cadre_trait_couleur(true);
+		}
 
 		echo debut_cadre_trait_couleur('',true);
 

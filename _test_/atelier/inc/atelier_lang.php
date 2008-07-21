@@ -54,11 +54,12 @@ function atelier_creer_repertoire_lang($a) {
 }
 
 function atelier_edit_lang($a) {
+	$fichier = $a['fichier'];
 	$module = $a['module'];
 	$lang = $a['lang'];
 	if ($lang=='') $lang='fr';
 
-	$fichier_lang = '../plugins/'.$module.'/lang/'.$module.'_'.$lang.'.php';
+	$fichier_lang = '../plugins/'.$module.'/lang/'.$fichier;
 	$GLOBALS['idx_lang']='i18n_'.$module.'_fr';
 
 	include($fichier_lang);

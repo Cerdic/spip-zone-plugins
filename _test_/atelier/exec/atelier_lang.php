@@ -41,6 +41,8 @@ function atelier_lang($id_projet,$row,$fichier='') {
 	$nom_page = atelier_debut_page(_T('atelier:page_lang'),'atelier_lang');
 	if (!atelier_autoriser()) exit;
 
+	$atelier_lang = charger_fonction('atelier_lang','inc');
+
 	atelier_debut_gauche($nom_page);
 
 		atelier_cadre_raccourcis(array(
@@ -48,16 +50,18 @@ function atelier_lang($id_projet,$row,$fichier='') {
 		));
 
 		// on liste les fichiers lang
-		$dir = _DIR_PLUGINS.$row['prefixe'].'/lang';
-
-		if ($dh = opendir($dir)) {
-			$fichiers = array();
-			while (($file = readdir($dh)) !== false) {
-				if (($file != '.') && ($file != '..'))
-					$fichiers[] = '<a href="'.generer_url_ecrire('atelier_lang',"id_projet=$id_projet&fichier=$file").'">'.$file.'</a>';
+		
+		if ($atelier_lang('verifier_repertoire',array('prefixe' => $row['prefixe']))) {
+			$dir = _DIR_PLUGINS.$row['prefixe'].'/lang';
+			if ($dh = opendir($dir)) {
+				$fichiers = array();
+				while (($file = readdir($dh)) !== false) {
+					if (($file != '.') && ($file != '..'))
+						$fichiers[] = '<a href="'.generer_url_ecrire('atelier_lang',"id_projet=$id_projet&fichier=$file").'">'.$file.'</a>';
+				}
+				closedir($dh);
+				if (count($fichiers) > 0) cadre_atelier(_T('atelier:contenu_repertoire_lang'),$fichiers);
 			}
-			closedir($dh);
-			if (count($fichiers) > 0) cadre_atelier(_T('atelier:contenu_repertoire_lang'),$fichiers);
 		}
 
 		atelier_cadre_infos();
@@ -91,7 +95,7 @@ function atelier_lang($id_projet,$row,$fichier='') {
 				echo fin_cadre_couleur(true);
 
 				echo debut_cadre_couleur('',true);
-				echo $atelier_lang('edit',array('module' => $module,'lang' => $lang));
+				echo $atelier_lang('edit',array('fichier' => $fichier,'module' => $module,'lang' => $lang));
 				echo fin_cadre_couleur(true);
 			}
 		}

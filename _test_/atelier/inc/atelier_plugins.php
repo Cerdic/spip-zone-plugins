@@ -31,7 +31,7 @@ function inc_atelier_plugins_dist($action,$arg='') {
 }
 
 function atelier_verifier_repertoire_plugin($prefixe)  {
-	return file_exists(_DIR_PLUGINS.'/'.$prefixe);
+	return file_exists(_DIR_PLUGINS.$prefixe);
 }
 
 function atelier_creer_repertoire_plugin($id_projet) {

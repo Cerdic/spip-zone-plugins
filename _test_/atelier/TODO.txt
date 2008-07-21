@@ -1,4 +1,4 @@
-TODO.txt (fichier généré par le plugin Atelier 2008-07-20 19:41:42)
+TODO.txt (fichier généré par le plugin Atelier 2008-07-21 14:25:56)
 -------------------------------------------------------------------
 
 * gestion des dictionnaires :
@@ -75,6 +75,15 @@ faire tous les accents et les caractères spéciaux
 
 
 * permettre de supprimer une entrée dans le dico :
+
+
+
+* Gestion svn :
+- Ajouter une option permettant un "checkout" d'un projet sur le svn de spip
+- Pour les projets ayant été importé de cette manière, ajouter des options de commit et d'update
+
+
+* Faire un tri alphabétique des entrée du dico :
 
 
 

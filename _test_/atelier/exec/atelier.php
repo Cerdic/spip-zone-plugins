@@ -23,24 +23,26 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_atelier_dist() {
 
-	exec_atelier_args(	intval(_request('id_projet')) // id du projet par defaut
+	exec_atelier_args(	intval(_request('id_projet')), // id du projet par defaut
+				_request('rapport')
 	);
 }
 
-function exec_atelier_args($id_projet) {
+function exec_atelier_args($id_projet,$rapport='') {
 
 	$defaut = "defaut";
 	// recupere les données sur le projet à afficher
 	$projet_select = charger_fonction('projet_select','inc');
 	$row = $projet_select($id_projet?$id_projet:$defaut);
 
-	atelier($id_projet,$row,$defaut);
+	atelier($id_projet,$row,$defaut,$rapport);
 }
 
-function atelier($id_projet,$row,$defaut) {
+function atelier($id_projet,$row,$defaut,$rapport='') {
 
 	include_spip('inc/atelier_presentation');
 	include_spip('inc/atelier_autoriser');
+	include_spip('inc/atelier_svn');
 
 	$nom_page = atelier_debut_page(_T('atelier:page_principale'),'atelier');
 	if (!atelier_autoriser()) exit;
@@ -48,29 +50,37 @@ function atelier($id_projet,$row,$defaut) {
 	// verifier si les bases existent
 	include_spip('inc/atelier_installer_base');
 	$verifier_base = atelier_verifier_base();
-
+	$verifier_subversion = atelier_verifier_subversion();
 
 	atelier_debut_gauche($nom_page);
 
 		if ($verifier_base) {
-			cadre_atelier(_T('atelier:projets'), array(
-				'<a href="'.generer_url_ecrire('projets_edit','new=oui').'">'._T('atelier:nouveau_projet').'</a>',
-				'<a href="'.generer_url_ecrire('atelier_metas').'">'._T('atelier:voir_metas').'</a>'
-			));
+			$projets[] = '<a href="'.generer_url_ecrire('projets_edit','new=oui').'">'._T('atelier:nouveau_projet').'</a>';
+			$projets[] = '<a href="'.generer_url_ecrire('atelier_metas').'">'._T('atelier:voir_metas').'</a>';
+			if ($verifier_subversion) {
+				$projets[] = '<a href="'.generer_url_ecrire('atelier_svn').'">'._T('atelier:importer_projet_zone').'</a>';
+			}
+			cadre_atelier(_T('atelier:projets'), $projets);
 		}
 
 		atelier_cadre_fichiers_temp();
 
-		cadre_atelier(_T('atelier:administration'), array(
-			'<a href="'.generer_url_ecrire('supprimer_atelier').'">'._T('atelier:supprimer_atelier').'</a>'
-		));
+		$administration[] = '<a href="'.generer_url_ecrire('supprimer_atelier').'">'._T('atelier:supprimer_atelier').'</a>';
+		cadre_atelier(_T('atelier:administration'), $administration );
 
 		atelier_cadre_infos();
  
 	atelier_debut_droite($nom_page);
 
+	if ($rapport != '') {
+		echo debut_cadre_trait_couleur('',true);
+		echo '<p>'.$rapport.'</p>';
+		echo fin_cadre_trait_couleur(true);
+	}
+
 	echo debut_cadre_trait_couleur('',true);
 	echo '<p>'._T('atelier:presentation').'</p>';
+	if(!$verifier_subversion) echo '<p>'._T('atelier:installer_svn').'</p>';
 	echo fin_cadre_trait_couleur(true);
 
 	if (!$verifier_base) {
