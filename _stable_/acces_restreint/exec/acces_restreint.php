@@ -72,6 +72,9 @@ function exec_acces_restreint(){
 	$nb_aff = 1.5 * _TRANCHES;
 
 	if ($cpt > $nb_aff) {
+		if ($GLOBALS['spip_version_code']>=12008) {
+			include_spip('inc/presenter_liste');
+		}
 		$nb_aff = (_TRANCHES); 
 		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
 	}
