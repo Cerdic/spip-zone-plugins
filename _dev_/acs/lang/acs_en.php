@@ -1,10 +1,10 @@
 <?php
 // This is a SPIP language file
 // Specific to ACS plugin
-
+  include_spip('lib/composant/composants_ajouter_langue');
+  
 // Lang file is build with components public lang files
 if (_DIR_RESTREINT != '') {
-  include_spip('lib/composant/composants_ajouter_langue');
   // Add components lang files (public)
   $GLOBALS[$GLOBALS['idx_lang']] = array( // public area
   // L'upload direct depuis l'espace ecrire de spip étant interdit, cette traduction se retrouve ici
@@ -13,26 +13,27 @@ if (_DIR_RESTREINT != '') {
   'err_del_file' => 'Unable to delete file',
   );
   composants_ajouter_langue();
+  if (_request('action') == 'crayons_html') // Add translations for crayons plugin
+    composants_ajouter_langue('ecrire');  
 }
-else $GLOBALS[$GLOBALS['idx_lang']] = array( // Area ecrire
+else {
+  $GLOBALS[$GLOBALS['idx_lang']] = array( // Area ecrire
 
   'configurer_site' => 'Configure website',
+  'documentation' => 'Documentation',
 
   'assistant_configuration_squelettes' => 'Site configuration wizard',
   'acs' => 'ACS',
-  'description' => 'Configure website design and options.',
-  'info' => 'ACS add to spip customizables pages made with customizables components.',
 
   'model_actif' => 'ACS active model: <b>@model@</b>',
   'overriden_by' => ', overriden by skeletons from <u>@over@</u>',
   'model_actif2' => '.',
 
-  'help' => 'To setup your website, click on "Components" pane and customize components, beginning by "Background" (Fond), which define default values for other components.<br /><br />These page display customizable ACS plugin elements: pages, components, spip models and forms available in active ACS model, and default pages from spip distribution and installed plugins (even not used pages).<br /><br />ACS model elements may be eventually overriden by equivalents from skeleton directory optionnaly defined (Administration pane).<br /><br />All variables display all available components variables, whenever components are used or not.',
-
-  'onglet_page_description' => 'Schema and source.',
-  'onglet_page_info' => 'Page schema show spip loops and included elements.',
-  'onglet_page_help' => 'In pages list, underlined ones are read in the <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: underline">override</span> directory, bolded in current <span style="color: darkgreen; font-weight: bold; font-style: normal; text-decoration: none">ACS model</span>, italicized from <span style="color: darkgreen; font-weight: normal; font-style: underline; text-decoration: none">plugins</span>, and thoses without any font decoration from <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: none">spip distribution</span>.<br /><br />Little black triangle show a more detailed schema, including parameters and spip comments.',
-
+  'onglet_pages_description' => 'Schema and source.',
+  'onglet_pages_info' => 'Configure website design and options. ACS add to spip customizables pages made with customizables components.',
+  'onglet_pages_help' => 'In pages list, underlined ones are read in the <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: underline">override</span> directory, bolded in current <span style="color: darkgreen; font-weight: bold; font-style: normal; text-decoration: none">ACS model</span>, italicized from <span style="color: darkgreen; font-weight: normal; font-style: underline; text-decoration: none">plugins</span>, and thoses without any font decoration from <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: none">spip distribution</span>.<br /><br />Little black triangle show a more detailed schema, including parameters and spip comments.
+<br /><br />
+To setup your website, click on "Components" pane and customize components, beginning by "Background" (Fond), which define default values for other components.<br /><br />These page display customizable ACS plugin elements: pages, components, spip models and forms available in active ACS model, and default pages from spip distribution and installed plugins (even not used pages).<br /><br />ACS model elements may be eventually overriden by equivalents from skeleton directory optionnaly defined (Administration pane).<br /><br />All variables display all available components variables, whenever components are used or not.',
 
   'page' => 'Page',
   'pages' => 'Pages',
@@ -100,6 +101,7 @@ else $GLOBALS[$GLOBALS['idx_lang']] = array( // Area ecrire
   'ridge' => 'ridge',
   'inset' => 'inset',
   'outset' => 'outset'
-);
-
+  );
+  composants_ajouter_langue('ecrire');
+}
 ?>

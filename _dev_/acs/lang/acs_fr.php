@@ -13,6 +13,8 @@ if (_DIR_RESTREINT != '') {
   'err_del_file' => 'Impossible d\'effacer le fichier',
   );
   composants_ajouter_langue();
+  if (_request('action') == 'crayons_html') // On ajoute les traductions pour les crayons
+    composants_ajouter_langue('ecrire');  
 }
 else {
   $GLOBALS[$GLOBALS['idx_lang']] = array( // Espace ecrire
