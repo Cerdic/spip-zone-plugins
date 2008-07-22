@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_creer_la_zone' => 'Crear la nueva zona',
 
 	// C
-	'colonne_id' => 'No',
+	'colonne_id' => 'N&ordm;',
 	'creer_zone' => 'Crear una zona nueva',
 
 	// D
