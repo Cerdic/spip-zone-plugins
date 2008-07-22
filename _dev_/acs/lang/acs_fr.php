@@ -1,6 +1,5 @@
 <?php
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Specific to ACS plugin - sp&eacute;cifique au plugin ACS
+// Ceci est un fichier langue de SPIP sp&eacute;cifique au plugin ACS
   include_spip('lib/composant/composants_ajouter_langue');
 
 // Lang file is build with components public lang files
