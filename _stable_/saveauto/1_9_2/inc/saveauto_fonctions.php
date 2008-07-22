@@ -190,7 +190,7 @@ function saveauto_sauvegarde() {
 								 		echo _T('saveauto:impossible_liste_tables')."<br>";
                  }
                  if ($res) {
-                    $num_rows = spip_num_rows($res);
+                    $num_rows = sql_count($res);
                     $i = 0;
                     
                     //création du fichier
