@@ -154,22 +154,23 @@ function barre_ancre(debut,milieu,fin,affich,champ,barre) {
 
 function barre_inserer(text,champ,barre) {
 	var txtarea = champ;
-	
-	 if (is_ie) {
+	if( document.selection ){
 		txtarea.focus();
-		txtarea.caretPos = document.selection.createRange().duplicate();
-	}
-	
-	if (txtarea.createTextRange && txtarea.caretPos) {
-		var caretPos = txtarea.caretPos;
-		caretPos.text = caretPos.text.charAt(caretPos.text.length - 1) == ' ' ? caretPos.text + text + ' ' : caretPos.text + text;
-		txtarea.focus();
-	} else {
-		//txtarea.value  += text;
-		//txtarea.focus();
-		mozWrap(txtarea, '', text, barre);
-		return;
-	}
+		var r = document.selection.createRange();
+		if (r == null) {
+			txtarea.selectionStart = txtarea.value.length;
+			txtarea.selectionEnd = txtarea.selectionStart;
+		}
+		else {
+			var re = txtarea.createTextRange();
+			var rc = re.duplicate();
+			re.moveToBookmark(r.getBookmark());
+			rc.setEndPoint('EndToStart', re);
+			txtarea.selectionStart = rc.text.length;
+			txtarea.selectionEnd = rc.text.length + r.text.length;
+		}
+	} 
+	mozWrap(txtarea, '', text, barre);
 }
 
 // Attention : rec_tout (mot entier) n'est pas actif !
@@ -297,7 +298,6 @@ function barre_2Minuscules(champ, barre) {
 
 
 
-
 // Shows the help messages in the helpline window
 function helpline(help, champ) {
 	champ.value = help;
@@ -324,7 +324,7 @@ function setSelectionRange(input, selectionStart, selectionEnd) {
 }
 
 // From http://www.massless.org/mozedit/
-function mozWrap(txtarea, ouvre, ferme, barre)
+function mozWrap(txtarea, open, close, barre)
 {
 	var selLength = txtarea.textLength;
 	var selStart = txtarea.selectionStart;
@@ -341,15 +341,14 @@ function mozWrap(txtarea, ouvre, ferme, barre)
 	var s3 = (txtarea.value).substring(selEnd, selLength);
 
 	// Eviter melange bold-italic-intertitre
-	if ((txtarea.value).substring(selEnd,selEnd+1) == '}' && ferme.substring(0,1) == "}") ferme = ferme + " ";
-	if ((txtarea.value).substring(selEnd-1,selEnd) == '}' && ferme.substring(0,1) == "}") ferme = " " + ferme;
-	if ((txtarea.value).substring(selStart-1,selStart) == '{' && ouvre.substring(0,1) == "{") ouvre = " " + ouvre;
-	if ((txtarea.value).substring(selStart,selStart+1) == '{' && ouvre.substring(0,1) == "{") ouvre = ouvre + " ";
+	if ((txtarea.value).substring(selEnd,selEnd+1) == '}' && close.substring(0,1) == "}") close = close + " ";
+	if ((txtarea.value).substring(selEnd-1,selEnd) == '}' && close.substring(0,1) == "}") close = " " + close;
+	if ((txtarea.value).substring(selStart-1,selStart) == '{' && open.substring(0,1) == "{") open = " " + open;
+	if ((txtarea.value).substring(selStart,selStart+1) == '{' && open.substring(0,1) == "{") open = open + " ";
 
-	txtarea.value = s1 + ouvre + s2 + ferme + s3;
-	depl = selStart==selEnd?ferme.length:ouvre.length;
-	selDeb = selStart + depl;
-	selFin = selEnd + depl;
+	txtarea.value = s1 + open + s2 + close + s3;
+	selDeb = selStart + open.length;
+	selFin = selEnd + close.length;
 	window.setSelectionRange(txtarea, selDeb, selFin);
 	txtarea.scrollTop = selTop;
 	txtarea.focus();
