@@ -54,6 +54,11 @@ function action_atelier_svn_dist() {
 	redirige_par_entete($redirect);
 }
 
+function atelier_status_projet($nom) {
+	exec('cd '._DIR_PLUGINS.';svn status -u -v '.$nom,&$output,&$return_var);
+	return $output;
+}
+
 function atelier_update_projet($nom,&$rapport) {
 	$rapport .= _T('atelier:commande'). 'svn update<br />';
 	exec('cd '._DIR_PLUGINS.$nom.';svn update',&$output,&$return_var);

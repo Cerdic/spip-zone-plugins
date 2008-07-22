@@ -40,6 +40,10 @@ function atelier_verifier_projet_svn($prefixe) {
 	return file_exists(_DIR_PLUGINS.$prefixe.'/.svn');
 }
 
+function atelier_status_svn($arg) {
+	include_spip('action/atelier_svn');
+	return atelier_status_projet($arg['nom']);
+}
 function atelier_update_svn($arg) {
 	$form = "<input type='hidden' name='update_projet' value='oui' />\n"
 	. '<input type="hidden" name="nom" value="'.$arg['nom'].'" />'

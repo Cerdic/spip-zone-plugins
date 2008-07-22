@@ -22,16 +22,17 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_atelier_svn_dist() {
-	exec_atelier_svn_args(intval(_request('id_projet')));
+	exec_atelier_svn_args(intval(_request('id_projet')),
+				_request('opendir'));
 }
 
-function exec_atelier_svn_args($id_projet='') {
+function exec_atelier_svn_args($id_projet='',$opendir='') {
 	$projet_select = charger_fonction('projet_select','inc');
 	$row = $projet_select($id_projet);
-	atelier_svn($id_projet,$row);
+	atelier_svn($id_projet,$row,$opendir);
 }
 
-function atelier_svn($id_projet,$row) {
+function atelier_svn($id_projet,$row,$opendir='') {
 	include_spip('inc/atelier_presentation');
 	include_spip('inc/atelier_autoriser');
 	include_spip('inc/atelier_svn');
@@ -47,7 +48,11 @@ function atelier_svn($id_projet,$row) {
 	atelier_debut_droite($nom_page);
 
 		if ($id_projet) {
-			echo debut_cadre_trait_couleur('',true);
+//			echo debut_cadre_trait_couleur('',true);
+
+			echo '<p>'._T('atelier:explication_status_svn').'</p>';
+			cadre_atelier(' svn status -u -v ' . $row['prefixe'],atelier_status_svn(array('nom' =>$row['prefixe'])));
+
 			if (atelier_verifier_subversion()) {
 				echo '<p>'._T('atelier:update_svn').'</p>';
 

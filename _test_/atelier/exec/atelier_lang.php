@@ -87,6 +87,7 @@ function atelier_lang($id_projet,$row,$fichier='') {
 			echo gros_titre($fichier,'',false);
 			$module = $row['prefixe'];
 			$lang = '';
+
 			if ($atelier_lang('verifier_fichier',array('module' => $module,'fichier' => $fichier))) {
 				echo '<br />';
 				echo debut_cadre_couleur('',true);

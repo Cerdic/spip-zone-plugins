@@ -22,18 +22,19 @@
 function exec_projets_dist() {
 
 	exec_projets_args(intval(_request('id_projet')),
-				_request('rapport')
+				_request('rapport'),
+				_request('opendir')
 	);
 }
 
-function exec_projets_args($id_projet,$rapport='') {
+function exec_projets_args($id_projet,$rapport='',$opendir='') {
 	$projet_select = charger_fonction('projet_select','inc');
 	$row = $projet_select($id_projet);
 
-	projets($id_projet,$row,$rapport);
+	projets($id_projet,$row,$rapport,$opendir);
 }
 
-function projets($id_projet,$row,$rapport='') {
+function projets($id_projet,$row,$rapport='',$opendir='') {
 
 	include_spip('inc/atelier_presentation');
 	include_spip('inc/atelier_autoriser');
@@ -49,8 +50,15 @@ function projets($id_projet,$row,$rapport='') {
 		atelier_cadre_raccourcis();
 		cadre_atelier(_T('atelier:action'),array(
 			'<a href="'.generer_url_ecrire('projets_edit','id_projet='.$id_projet).'">'._T('atelier:modifier_projet').'</a>',
+			'<a href="'.generer_url_ecrire('atelier_plugin_xml','id_projet='.$id_projet).'">'._T('atelier:plugin_xml').'</a>',
+			'<a href="'.generer_url_ecrire('atelier_objets','id_projet='.$id_projet).'">'._T('atelier:objets').'</a>'
+		));
+
+
+		cadre_atelier(_T('atelier:taches'),array(
 			'<a href="'.generer_url_ecrire('taches_edit','new=oui&id_projet='.$id_projet).'">'._T('atelier:ajouter_tache').'</a>',
-			'<a href="'.generer_url_ecrire('atelier_plugin_xml','id_projet='.$id_projet).'">'._T('atelier:plugin_xml').'</a>'
+			'<a href="'.generer_url_ecrire('taches_vues','etat=toutes&id_projet='.$id_projet).'">'._T('atelier:liste_taches').'</a>',
+			'<a href="'.generer_url_ecrire('taches_vues','etat=fermees&id_projet='.$id_projet).'">'._T('atelier:liste_taches_fermees').'</a>',
 		));
 
 		$cfg = plugin_get_infos('cfg');
@@ -102,10 +110,6 @@ function projets($id_projet,$row,$rapport='') {
 		$todo = charger_fonction('atelier_todo','inc');
 		echo $todo($id_projet);
 
-		echo liste_taches_fermees($row['id_projet']);
-		echo liste_taches($row['id_projet']);
-
-
 		echo fin_cadre_trait_couleur(true);
 
 	
@@ -124,16 +128,8 @@ function projets($id_projet,$row,$rapport='') {
 			
 				}
 				else {
-					// navigation dans les fichiers du répertoire
-					$dir = _DIR_PLUGINS.$row['prefixe'];
-					if ($dh = opendir($dir)) {
-						echo "<ul>";
-						while (($file = readdir($dh)) !== false) {
-							echo "<li> $file -- " . @filetype($dir .'/'. $file) . "</li>";
-						}
-						echo "</ul>";
-						closedir($dh);
-					}
+					include_spip('inc/atelier_explorer');
+					atelier_explorer($row['prefixe'],$id_projet,$opendir,$nom_page);
 				}
 			}
 			else echo '<p>'._T('atelier:droit_insuffisant').'</p>';
@@ -169,17 +165,6 @@ function liste_taches_ouvertes($id_projet) {
 	return $afficher_projets('tache',$titre,$requete);
 }
 
-function liste_taches_fermees($id_projet) {
-	include_spip('inc/afficher_objets');
-
-	$afficher_projets = charger_fonction('afficher_objets','inc');
-
-	$titre = _T('atelier:liste_taches_fermees');
-	$requete = array('SELECT' => 'taches.id_tache, taches.titre ',
-			 'FROM' => "spip_taches as taches",
-			 'WHERE' => "taches.id_projet=$id_projet AND taches.etat='fermee'");
-	return $afficher_projets('tache',$titre,$requete);
-}
 
 
 ?>
