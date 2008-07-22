@@ -1,34 +1,79 @@
 #CACHE{0}
-<form method="post">
+
+[(#REM) titre=GIS]
+[(#REM) descriptif=
+<h4>Configuration du plugin GIS</h4>
+Choisissez dans quelles rubriques activer le plugin.
+]
+
+<div class="formulaire_spip formulaire_editer formulaire_cfg">
+<form method="post"><div>
 	[(#ENV{_cfg_}|form_hidden)]
-	[(#REM) descriptif=
-	<h4>Configuration du plugin GIS</h4>
-	Choisissez dans quelles rubriques activer le plugin.
-	]
-
-	[(#REM) titre=GIS]
-	
+	<ul>
 	#SET{wichrub,#CONFIG{gis/rubriques_gis,#ARRAY}}
-	<fieldset>
-		<legend>D&eacute;finir la port&eacute;e de GIS</legend>
-		<label>Choisissez la ou les rubriques &agrave; utiliser :</label>
-		<select name="rubriques_gis[]" multiple="multiple" size="9">
-			<option value=""[ (#GET{wichrub}|?{'',' '})selected="selected"]>Toutes</option>
-			<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}{tout}>
-			<option value="#ID_RUBRIQUE"[ (#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>
-			Secteur #ID_RUBRIQUE : #TITRE
-			</option>
-			<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}{tout}>
-			<option value="#ID_RUBRIQUE"[ (#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>
-			&rarr; Rubrique #ID_RUBRIQUE : #TITRE
-			</option>
-			<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
-			</BOUCLE_rubriques>
-			</BOUCLE_secteurs>
-		</select>
-	</fieldset>
+		<li>
+			<label for="rubriques_gis"><:gis:rubriques_plugin_actif:></label>
+			<p class="explications">Choisissez la ou les rubriques &agrave; utiliser :</p>
+			<select name="rubriques_gis[]" multiple="multiple" size="9">
+				<option value=""[ (#GET{wichrub}|?{'',' '})selected="selected"]>Toutes</option>
+				<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}{tout}>
+				<option value="#ID_RUBRIQUE"[ (#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>
+				Secteur #ID_RUBRIQUE : #TITRE
+				</option>
+				<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}{tout}>
+				<option value="#ID_RUBRIQUE"[ (#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>
+				&rarr; Rubrique #ID_RUBRIQUE : #TITRE
+				</option>
+				<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+				</BOUCLE_rubriques>
+				</BOUCLE_secteurs>
+			</select>
+		</li>
+		<li>
+			<fieldset>
+			<h3 class="legend"><:gis:parametres_formulaire:></h3>
+			<ul>
+				<li>
+					<label for="rubrique_cible"><:gis:info_rubrique_cible:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{rubrique_cible})</span>]
+					<select name="rubrique_cible">
+						<BOUCLE_r1(RUBRIQUES){racine}{par num titre}>
+						<option value=''></option>
+						<optgroup label="<:gis:secteur:> [(#TITRE|couper{40})]">
+							<option value="#ID_RUBRIQUE"[(#ENV{rubrique_cible}|=={#ID_RUBRIQUE}|oui) selected='selected']>[(#TITRE|couper{40})] (<:gis:racine:>)</option>
+							<B_r2>
+							<option value="" class='mysteric_hr' disabled='disabled'><:gis:ou_choisir:></option>
+							<BOUCLE_r2(RUBRIQUES){id_parent}{par num titre}>
+								<option value="#ID_RUBRIQUE"[(#ENV{rubrique_cible}|=={#ID_RUBRIQUE}|oui) selected='selected']>[(#TITRE|couper{40})]</option>
+							</BOUCLE_r2>
+						</optgroup>
+						</BOUCLE_r1>
+					</select>
+				</li>
+				<li>
+					<label for="statut"><:gis:info_statut_articles:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{statut})</span>]
+					<select name="statut">
+						<option value='prepa'[(#ENV{statut}|=={prepa}|oui) selected='selected']>En cours de rédaction</option>
+						<option value='prop'[(#ENV{statut}|=={prop}|oui) selected='selected']>Proposé</option>
+						<option value='publie'[(#ENV{statut}|=={publie}|oui) selected='selected']>Publié</option>
+					</select>
+				</li>
+				<li class="editer_formats_documents[ (#ENV**{erreurs}|table_valeur{formats_documents}|oui)erreur]">
+					<label for="formats_documents"><:gis:info_formats_documents:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{formats_documents})</span>]
+					<p class="explications"><:gis:texte_formats_documents:></p>
+					<input type="text" name="formats_documents" class="text" value="#ENV{formats_documents,'jpg,png,gif'}"  />
+				</li>
+			</ul>
+			</fieldset>
+		</li>
+	</ul>
 
-	<input type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
-	<input type="reset" value="<:Reset:>" class="fondo" />
-	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
-</form>
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+		<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
+	</p>
+</div></form>
+</div>
+#CFG_ARBO{gis}
