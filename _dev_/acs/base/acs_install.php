@@ -29,10 +29,12 @@ function acs_set_default_values() {
   $defaults = find_in_path('composants/def.php');
   if (is_readable($defaults))
     include $defaults;
-  foreach($def as $var=>$value) {
-    ecrire_meta($var, $value);
+  if (is_array($def)) {
+    foreach($def as $var=>$value) {
+      ecrire_meta($var, $value);      
+    }
+    ecrire_metas();
   }
-  ecrire_metas();
 }
 function acs_reset_vars() {
   spip_query("delete FROM spip_meta where left(nom,3)='acs'");
