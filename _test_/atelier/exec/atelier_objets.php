@@ -40,17 +40,29 @@ function atelier_objets($id_projet,$row,$rapport='') {
 	if (!atelier_autoriser()) exit;
 
 	atelier_debut_gauche($nom_page);
-		atelier_cadre_raccourcis();
+
+		atelier_cadre_raccourcis(array(
+			'<a href="'.generer_url_ecrire('projets','id_projet='.$row['id_projet']).'">'._T('atelier:revenir_projet').'</a>'
+		));
+                cadre_atelier('Gabarits',array(
+                '<a href="'.generer_url_ecrire('atelier_edit_fichier','fichier='._DIR_PLUGINS.'atelier/gabarits/exec.txt&mode=absolu&id_projet='.$row['id_projet']).'">'._T('atelier:editer_exec_txt').'</a>',
+                '<a href="'.generer_url_ecrire('atelier_edit_fichier','fichier='._DIR_PLUGINS.'atelier/gabarits/inc.txt&mode=absolu&id_projet='.$row['id_projet']).'">'._T('atelier:editer_inc_txt').'</a>',
+                '<a href="'.generer_url_ecrire('atelier_edit_fichier','fichier='._DIR_PLUGINS.'atelier/gabarits/action.txt&mode=absolu&id_projet='.$row['id_projet']).'">'._T('atelier:editer_action_txt').'</a>'
+                ));
+
 		atelier_cadre_infos();
+
 	atelier_debut_droite($nom_page);
+
 		echo debut_cadre_trait_couleur('',true);
-		echo '<p>'._T('atelier:explication_objets').'</p>';
+		echo '<p>'._T('atelier:explication_objets').'. Pour les objets de l\'espace privé,  votre objet aura pour nom : prefixe_nomobjet_[exec|inc|action]. Son fichier sera : [exec|inc|action]/prefixe_nomobjet.php</p>';
 		echo fin_cadre_trait_couleur(true);
 		echo debut_cadre_formulaire('',true);
 		include_spip('inc/atelier_objets.php');
 		$atelier_objets = charger_fonction('atelier_objets','inc');
-		echo $atelier_objets();
+		echo $atelier_objets(array('id_projet' => $id_projet));
 		echo fin_cadre_formulaire(true);
+
 	atelier_fin_gauche();
 	atelier_fin_page();
 }

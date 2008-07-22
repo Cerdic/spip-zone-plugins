@@ -1,0 +1,37 @@
+<?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+/** [nom_objet] Formulaire privé
+ @brief Fonction appelée par une feuille de l'espace privée de la manière suivante :
+	inclusion d'un formulaire :
+	 	$formulaire = charger_fonction('[nom_objet]','inc');
+	 	echo $formulaire($argument);
+	Cette fonction retourne un formulaire de saisie lorsque le formulaire est validé,
+	les champs sont envoyés à l'action [nom_objet] de l'espace privée.
+ @param argument Votre argument
+ @return L'action [nom_objet] de l'espace privée
+*/
+
+function inc_[nom_objet]_dist($argument) {
+
+	/* 
+		Eléments de présentation préalables
+	*/
+
+	$form = "<input type='hidden' name='[nom_objet]' value='oui' />\n"
+	/* Vos éléments de formulaires. Par exemple :
+		<input type="text" name="nom_champs" />;
+	   Ces champs seront récupérables dans la fonction action [nom_objet] via _request()
+	*/
+	. ("<div align='center'><input class='fondo' type='submit' value='"
+	. _T('[prefixe]:bouton')
+	. "' /></div>");
+
+	$arg =  ''; /* un argument a envoyer à l'action [nom_objet] */
+
+	return generer_action_auteur("[nom_objet]", $arg, '', $form, " method='post' name='formulaire'");
+
+}
+
+?>

@@ -50,7 +50,7 @@ function atelier_explorer($prefixe,$id_projet,$opendir,$nom_page) {
 					'<a href="'.generer_url_ecrire($nom_page,'opendir='.$chemin.'&id_projet='.$id_projet).'"><b>['.$file .']</b></a>';
 				else
 					$lignes[] = 
-					'<a href="'.generer_url_ecrire('atelier_edit_file','file='.$chemin.'&id_projet='.$id_projet).'">'.$file .'</a>';
+					'<a href="'.generer_url_ecrire('atelier_edit_fichier','fichier='.$chemin.'&id_projet='.$id_projet).'">'.$file .'</a>';
 			}
 		}
 		array_multisort($lignes,SORT_STRING);

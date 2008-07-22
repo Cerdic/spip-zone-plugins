@@ -1,0 +1,41 @@
+<?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+/** [nom_objet] Action de l'espace privée
+ @brief Fonction appelé par la validation d'un formulaire dans l'espace privée.
+	Cette fonction permet de traiter les champs du formulaire
+	et de rediriger l'utilisateur vers une feuille de l'espace privée
+*/
+function action_[nom_objet]_dist() {
+
+	/* un récupére l'argument de manière sécurisé */
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+
+	/* on vérifie si l'utilisateur a une session ouverte */
+	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	if (!$id_auteur) redirige_par_entete('./');
+
+	/* Vos traitements
+	Les champs du formulaires sont récupérables via _request().
+	Exemple :
+		$champs_1 = _request('champs_1');
+		$champs_2 = _request('champs_2');
+		$champs_3 = intval(_request('champs_3')); // Pour une valeur numérique
+	*/
+
+	/* construction de l'url de redirection
+	Exemple :
+		$redirect = parametre_url(urldecode(generer_url_ecrire('projets',"id_projet=$id_projet")),
+					'rapport', $rapport, '&') . $err;
+	*/
+	$redirect = parametre_url(
+			urldecode(generer_url_ecrire( /* le nom de la feuille */ )),
+			/* 'arg_1' */ , /* valeur_1 */, '&') . $err;
+
+	include_spip('inc/headers');
+	redirige_par_entete($redirect); /* redirection de l'utilisateur */
+}
+
+?>

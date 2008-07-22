@@ -1,0 +1,79 @@
+<?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+/** [nom_objet] Feuille privée
+ @brief Fonction appelée par l'url exec=[nom_objet]
+	Cette fonction a pour but de récupérer les différents arguments
+	et de les envoyer à la fonction de traitement des arguments
+	Pour passer des arguments à cette feuille, construisez des urls de type :
+	exec=[nom_objet]?arg_1=valeur_1&arg_2=valeur_2
+*/
+function exec_[nom_objet]_dist() {
+
+	/* pour récuperer vos arguments, utilisez la fonction _request('arg_1')
+	   exemple :
+	 	exec_[nom_objet]_args(
+	 	   _request('arg_1'),
+	 	   _request('arg_2'),
+	 	   intval(_request('arg_3') // pour les arguments numériques
+	 	);
+	*/ 
+
+	exec_[nom_objet]_args(/* _request('arg_1'), _request('arg_2') */);
+}
+
+
+/** [nom_objet] Traitement des arguments
+ @brief Cette fonction a pour but de traiter les arguments passés à la feuille.
+	Elle peut servir notemment pour rechercher d'autres informations à partir d'un argument.
+	Exemple, à partir de l'argument id_article, rechercher le titre, le descriptif, etc ...
+	et envoyer tout cela à la fonction principale
+	Conseil : placez vos fonctions de récupération de données dans un fichier "inc"
+	et appelez ces fonctions içi.
+	Un fichier "exec" ne devrait pas contenir d'appel direct à la base de donnée,
+	mais se contenter d'ordonner ces données.
+ @param arg_1 Votre premier argument
+ @param arg_2 Votre deuxieme argument
+*/
+function exec_[nom_objet]_args( /* $arg_1, $arg_2 */ ) {
+
+	/* 
+		... vos traitements ...
+	*/
+
+	[nom_objet]( /* $arg_1, $arg_2, $row */ );
+}
+
+/** [nom_objet] Fonction principale de la feuille.
+ @brief Cette fonction a pour but d'effectuer une présentation de vos données
+	les fichiers qui pourrons vous être utile :
+		include_spip('inc/filtres') => fonctions de traitements des données avant affichage
+		include_spip('inc/presentation') => fonctions de presentation (les cadres par exemple)
+ @param arg_1 Votre premier argument
+ @param arg_2 Votre deuxième argument
+ @param row un tableau de donnée
+*/
+function [nom_objet]( /* $arg_1, $arg_2, $row */ ) {
+
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page("[nom_objet]","[prefixe]","[nom_objet]");
+
+	if ($admin AND $connect_statut != "0minirezo") {
+		echo _T('avis_non_acces_page');
+		exit;
+	}
+
+	/* 
+		... vos traitements ...
+	*/
+
+	/* inclusion d'un formulaire :
+	 	$formulaire = charger_fonction('[prefixe]_nom/du/formulaire','inc');
+	 	echo $formulaire($arg);
+	*/
+
+	echo fin_page();
+}
+
+?>

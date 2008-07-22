@@ -1,4 +1,4 @@
-TODO.txt (fichier généré par le plugin Atelier 2008-07-21 14:25:56)
+TODO.txt (fichier généré par le plugin Atelier 2008-07-22 17:43:24)
 -------------------------------------------------------------------
 
 * gestion des dictionnaires :
@@ -85,5 +85,50 @@ faire tous les accents et les caractères spéciaux
 
 * Faire un tri alphabétique des entrée du dico :
 
+
+
+* probleme lors ajout definition (lang) :
+envoyé la langue au formulaire, sinon langue par defaut = fr, et le mauvais fichier est mis à jour ...
+
+
+* créer un menu "taches" pour y placer les liens version "taches fermée" et "toutes les taches" :
+Du coup en profiter pour virer ces deux cadre de la page principale d'un projet
+
+
+* définition des objets SPIP :
+faire une définition de tous les objets SPIP qu'il est possible de générer :
+- une feuille privée : un fichier exec dans l'espace privée
+- une feuille publique : un fichier html basique de spip
+- un formulaire privée : un fichier inc appelé a partir d'une feuille
+- un formulaire publique : ajout d'un formulaire publique
+- une action privée : l'action engendrée par un formulaire
+- une balise publique: ajout d'une balise publique
+
+- etc ...
+
+
+* permettre de modifier les gabarits de fichier :
+Soumettre à la liste les exemples de gabarits.
+Ne pas hesiter à y mettre la blinde de commentaire pour guider le developpeur.
+
+
+* Ajouter l'option Salvatore dans l'internationalisation :
+Voir avec le plugin Salvatore ...
+
+
+* pour un projet "svn", permettre l'ajout dans la liste des génération automatique de zip :
+
+
+
+* Importation SVN : mettre la description du plugin (plugin.xml) dans le camps description :
+
+
+
+* Explorateur de fichier : permettre de cliquer sur un fichier pour l'editer :
+faire un tableau ou chaque fichiers serait un liens vers une page d'edition
+
+
+* [explorateur] Pour les fichiers exec, ajouter un lien "visualisation" :
+Ce lien est l'url permettant d'afficher la présentation de la feuille.
 
 

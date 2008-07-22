@@ -22,7 +22,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inc_atelier_objets_dist($a=array()) {
-	$form = "<input type='hidden' name='creer_objet' value='oui' />\n"
+	$form = "<input type='hidden' name='atelier_objet' value='oui' />\n"
 	. atelier_objet_type()
 	. atelier_objet_nom()
 	. ("<div align='center'><input class='fondo' type='submit' value='"
@@ -31,7 +31,7 @@ function inc_atelier_objets_dist($a=array()) {
 
 	$arg =  $a['id_projet'];
 
-	return generer_action_auteur("creer_objet", $arg, '', $form, " method='post' name='formulaire'");
+	return generer_action_auteur("atelier_objets", $arg, '', $form, " method='post' name='formulaire'");
 
 
 }
@@ -43,11 +43,9 @@ function atelier_objet_nom() {
 function atelier_objet_type() {
 	return 'Type d\'objet : <br />'
 	. '<select name="type">'
-	. '<option value="feuille_prive">Feuille dans l\'espace privée (exec)</option>'
-	. '<option value="formulaire_prive">Formulaire dans l\'espace privée (inc)</option>'
-	. '<option value="action_prive">Action dans l\'espace privée (action)</option>'
-	. '<option value="tout">le couple exec->inc->action</option>'
-	. '<option value="complet">un objet complet</option>'
+	. '<option value="exec">Feuille dans l\'espace privée (exec)</option>'
+	. '<option value="inc">Formulaire dans l\'espace privée (inc)</option>'
+	. '<option value="action">Action dans l\'espace privée (action)</option>'
 	.'</select><br /><br />';
 }
 ?>
