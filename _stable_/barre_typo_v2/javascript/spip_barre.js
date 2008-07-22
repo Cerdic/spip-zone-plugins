@@ -213,7 +213,7 @@ function barre_searchreplace(chercher,remplacer, rec_tout, rec_case, rec_entier,
 	champ.value = champ.value.replace(re, remplacer);
 	champ.scrollTop = selTop;
 	champ.focus();
-	//MajPreview(barre, String(champ.id));
+	MajPreviewCallBack(barre, champ);
 }
 
 
@@ -237,7 +237,7 @@ function barre_capitales(champ,majuscules,barre) {
 			}
 			txtarea.focus();
 			theSelection = '';
-			//MajPreview(barre, String(txtarea.id));
+			MajPreviewCallBack(barre, champ);
 			return;
 		}
 	}
@@ -248,6 +248,7 @@ function barre_capitales(champ,majuscules,barre) {
 		} else {
 			barre_2Minuscules(champ, barre);
 		}
+		MajPreviewCallBack(barre, champ);
 		return;
 	}
 }
@@ -271,7 +272,7 @@ function barre_2Majuscules(champ, barre) {
 	champ.setSelectionRange(oldSelStart,oldSelEnd);
 	champ.scrollTop = selTop;
 	champ.focus();
-	//MajPreview(barre, String(champ.id));
+	MajPreviewCallBack(barre, champ);
 }
 
 function barre_2Minuscules(champ, barre) {
@@ -293,7 +294,7 @@ function barre_2Minuscules(champ, barre) {
 	champ.setSelectionRange(oldSelStart,oldSelEnd);
 	champ.scrollTop = selTop;
 	champ.focus();
-	//MajPreview(barre, String(champ.id));
+	MajPreviewCallBack(barre, champ);
 }
 
 
@@ -352,7 +353,7 @@ function mozWrap(txtarea, open, close, barre)
 	window.setSelectionRange(txtarea, selDeb, selFin);
 	txtarea.scrollTop = selTop;
 	txtarea.focus();
-	//MajPreview(barre, String(txtarea.id));
+	MajPreviewCallBack(barre, txtarea);
 	return;
 }
 
@@ -404,7 +405,7 @@ function barre_selection(champ) {
 
 function barre_content(champ) {
 	var resultat = "";
-	champ.focus();
+	$(champ).focus();
 	resultat = $(champ).val();
 	return resultat;
 }

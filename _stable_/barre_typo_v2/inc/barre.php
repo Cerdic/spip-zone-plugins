@@ -167,16 +167,16 @@ function afficher_caracteres($champ, $spip_lang, $champhelp, $num_barre) {
 
 	// guillemets
 	if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf" OR $spip_lang == "ar" OR $spip_lang == "es") {
-$reta .= bouton_barre_racc("barre_raccourci('&laquo;~','~&raquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets.png", _T('barre_guillemets'), $champhelp);
-$reta .= bouton_barre_racc("barre_raccourci('&ldquo;','&rdquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets-simples.png", _T('barre_guillemets_simples'), $champhelp);
+$reta .= bouton_barre_racc("barre_raccourci('&laquo;~','~&raquo;',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."guillemets.png", _T('barre_guillemets'), $champhelp);
+$reta .= bouton_barre_racc("barre_raccourci('&ldquo;','&rdquo;',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."guillemets-simples.png", _T('barre_guillemets_simples'), $champhelp);
 }
 else if ($spip_lang == "bg" OR $spip_lang == "de" OR $spip_lang == "pl" OR $spip_lang == "hr" OR $spip_lang == "src") {
-$reta .= bouton_barre_racc("barre_raccourci('&bdquo;','&ldquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets-de.png", _T('barre_guillemets'), $champhelp);
-$reta .= bouton_barre_racc("barre_raccourci('&sbquo;','&lsquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets-uniques-de.png", _T('barre_guillemets_simples'), $champhelp);
+$reta .= bouton_barre_racc("barre_raccourci('&bdquo;','&ldquo;',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."guillemets-de.png", _T('barre_guillemets'), $champhelp);
+$reta .= bouton_barre_racc("barre_raccourci('&sbquo;','&lsquo;',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."guillemets-uniques-de.png", _T('barre_guillemets_simples'), $champhelp);
 }
 else {
-$reta .= bouton_barre_racc("barre_raccourci('&ldquo;','&rdquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets-simples.png", _T('barre_guillemets'), $champhelp);
-$reta .= bouton_barre_racc("barre_raccourci('&lsquo;','&rsquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets-uniques.png", _T('barre_guillemets_simples'), $champhelp);
+$reta .= bouton_barre_racc("barre_raccourci('&ldquo;','&rdquo;',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."guillemets-simples.png", _T('barre_guillemets'), $champhelp);
+$reta .= bouton_barre_racc("barre_raccourci('&lsquo;','&rsquo;',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."guillemets-uniques.png", _T('barre_guillemets_simples'), $champhelp);
 }
 $reta .= '&nbsp;';
 	// caracteres
@@ -212,10 +212,10 @@ $tableau_formulaire = '
 
 // pour les caracteres
 function afficher_formatages_speciaux($champ, $spip_lang, $champhelp, $num_barre) {
-	$reta = bouton_barre_racc("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
-	$reta .= bouton_barre_racc("barre_raccourci('&lt;code&gt;','&lt;/code&gt;',$champ)", _DIR_BTV2_IMG.'page_white_code_red.png', _T('bartypenr:barre_code'), $champhelp);
-	$reta .= bouton_barre_racc("barre_raccourci('\n\n&lt;cadre&gt;','&lt;/cadre&gt;\n\n',$champ)", _DIR_BTV2_IMG.'page_white_code.png', _T('bartypenr:barre_cadre'), $champhelp);
-	$reta .= bouton_barre_racc("barre_raccourci('\n\n&lt;poesie&gt;','&lt;/poesie&gt;\n\n',$champ)", _DIR_BTV2_IMG.'poesie.png', _T('bartypenr:barre_poesie'), $champhelp);
+	$reta = bouton_barre_racc("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
+	$reta .= bouton_barre_racc("barre_raccourci('&lt;code&gt;','&lt;/code&gt;',$champ, $num_barre)", _DIR_BTV2_IMG.'page_white_code_red.png', _T('bartypenr:barre_code'), $champhelp);
+	$reta .= bouton_barre_racc("barre_raccourci('\n\n&lt;cadre&gt;','&lt;/cadre&gt;\n\n',$champ, $num_barre)", _DIR_BTV2_IMG.'page_white_code.png', _T('bartypenr:barre_cadre'), $champhelp);
+	$reta .= bouton_barre_racc("barre_raccourci('\n\n&lt;poesie&gt;','&lt;/poesie&gt;\n\n',$champ, $num_barre)", _DIR_BTV2_IMG.'poesie.png', _T('bartypenr:barre_poesie'), $champhelp);
 	$tableau_formulaire = '
 	<table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
 	  <tr class="spip_barre">
@@ -280,8 +280,8 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$col = 1;
 
 	// Italique, gras, intertitres
-	$ret .= bouton_barre_racc("barre_raccourci('{','}',$champ)", _DIR_IMG_ICONES_BARRE."italique.png", _T('barre_italic'), $champhelp);
-	$ret .= bouton_barre_racc("barre_raccourci('{{','}}',$champ)", _DIR_IMG_ICONES_BARRE."gras.png", _T('barre_gras'), $champhelp);
+	$ret .= bouton_barre_racc("barre_raccourci('{','}',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."italique.png", _T('barre_italic'), $champhelp);
+	$ret .= bouton_barre_racc("barre_raccourci('{{','}}',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."gras.png", _T('barre_gras'), $champhelp);
 	$add = pipeline("BT_caracteres", $params_vierge);
 	$ret .= $add['flux'];
 
@@ -289,11 +289,11 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$retP = '';
 	// Raccourcis de paragraphes : intertitres, formatages speciaux
 	if ($ecrire) {
-		$retP .= bouton_barre_racc("barre_raccourci('\n\n{{{','}}}\n\n',$champ)", _DIR_IMG_ICONES_BARRE."intertitre.png", _T('barre_intertitre'), $champhelp);
+		$retP .= bouton_barre_racc("barre_raccourci('\n\n{{{','}}}\n\n',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."intertitre.png", _T('barre_intertitre'), $champhelp);
 		if (config_bte('btv2/avancee', 'Oui'))
 			$retP .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_formatages_speciaux']."','');", _DIR_BTV2_IMG.'tag.png', _T('bartypenr:barre_formatages_speciaux'), $champhelp);;
 	} else {
-		$retP .= bouton_barre_racc("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
+		$retP .= bouton_barre_racc("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
 	}
 	$add = pipeline("BT_paragraphes", $params_vierge);
 	$retP .= $add['flux'];
@@ -305,8 +305,8 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_lien']."','');", _DIR_IMG_ICONES_BARRE."lien.png", _T('barre_lien'), $champhelp);
 	if ($ecrire) {
 		$retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_BTV2_IMG.'ancre.png', _T('bartypenr:barre_ancres'), $champhelp);  
-		$retL .= bouton_barre_racc("barre_raccourci('[[',']]',$champ)", _DIR_IMG_ICONES_BARRE."notes.png", _T('barre_note'), $champhelp);
-		$retL .= bouton_barre_racc("barre_raccourci('[?',']',$champ)", _DIR_BTV2_IMG.'barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
+		$retL .= bouton_barre_racc("barre_raccourci('[[',']]',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."notes.png", _T('barre_note'), $champhelp);
+		$retL .= bouton_barre_racc("barre_raccourci('[?',']',$champ, $num_barre)", _DIR_BTV2_IMG.'barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
 	}
 	$add = pipeline("BT_liens", $params_vierge);
 	$retL .= $add['flux'];
