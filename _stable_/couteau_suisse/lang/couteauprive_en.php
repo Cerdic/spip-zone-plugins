@@ -316,7 +316,7 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me@s
 	'outil_permuter' => 'Switch the tool: &laquo; @text@ &raquo; ?',
 	'outils_actifs' => 'Activated tools:',
 	'outils_caches' => 'Hidden tools:',
-	'outils_cliquez' => 'Click on the names of the tools below to show their description.',
+	'outils_cliquez' => 'Click the names of the tools above to show their description.',
 	'outils_inactifs' => 'Inactive tools:',
 	'outils_liste' => 'List of tools of the Swiss Knife',
 	'outils_permuter_gras1' => 'Switch the tools in bold type',
