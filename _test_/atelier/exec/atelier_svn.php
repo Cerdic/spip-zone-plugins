@@ -61,6 +61,14 @@ function atelier_svn($id_projet,$row,$opendir='') {
 					'nom' => $row['prefixe'],
 					'id_projet' => $id_projet
 					));
+
+                                echo '<p>'._T('atelier:commit_svn').'</p>';
+
+                                echo $projet_svn('commit', array(
+                                        'nom' => $row['prefixe'],
+                                        'id_projet' => $id_projet
+                                        ));
+
 			}
 			else {
 				echo '<p>'._T('atelier:installer_svn').'</p>';

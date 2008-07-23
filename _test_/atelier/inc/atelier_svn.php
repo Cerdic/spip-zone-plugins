@@ -53,6 +53,16 @@ function atelier_update_svn($arg) {
 	return generer_action_auteur("atelier_svn", $arg['id_projet'], '', $form, " method='post' name='formulaire'");
 }
 
+function atelier_commit_svn($arg) {
+        $form = "<input type='hidden' name='commit_projet' value='oui' />\n"
+	. '<input type="hidden" name="nom" value="'.$arg['nom'].'" />'
+        ._T('atelier:commentaire') . ' : <br /><textarea name="commentaire" style="border:1px solid #000;" cols="70" rows="6"></textarea><br />'
+	. ("<div align='center'><input class='fondo' type='submit' value='"
+	. _T('atelier:bouton_commit_projet')
+	. "' /></div>");
+	return generer_action_auteur("atelier_svn", $arg['id_projet'], '', $form, " method='post' name='formulaire'");
+}
+
 function atelier_checkout_svn($arg) {
 
 	$form = "<input type='hidden' name='checkout_projet' value='oui' />\n"

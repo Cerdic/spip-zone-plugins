@@ -92,8 +92,9 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 		}
 
 		echo debut_cadre_trait_couleur('',true);
-
+                $info = plugin_get_infos($row['prefixe']);
 		echo gros_titre($row['id_projet'].' - '. $row['titre'],'',false);
+                echo '<b>'._T('atelier:version').' : </b>'.$info['version'].'<br />';
 		echo '<b>'._T('atelier:texte_prefixe') .' : </b>'.$row['prefixe'] .'<br />';
 		echo '<b>'._T('atelier:texte_type').' : </b>'.$row['type'].'<br /><br />';;
 		
@@ -103,18 +104,6 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 			.propre($row['descriptif']);
 
 		echo fin_cadre_couleur(true);
-
-		echo liste_taches_ouvertes($row['id_projet']);
-
-		include_spip('inc/atelier_todo');
-		$todo = charger_fonction('atelier_todo','inc');
-		echo $todo($id_projet);
-
-		echo fin_cadre_trait_couleur(true);
-
-	
-
-		echo debut_cadre_trait_couleur('',true,'',_T('atelier:repertoire')." "._DIR_PLUGINS.$row['prefixe']);
 
 		if ($row['type'] == 'plugin') {
 
@@ -135,7 +124,15 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 			else echo '<p>'._T('atelier:droit_insuffisant').'</p>';
 
 		}
+
+		echo liste_taches_ouvertes($row['id_projet']);
+
+		include_spip('inc/atelier_todo');
+		$todo = charger_fonction('atelier_todo','inc');
+		echo $todo($id_projet);
+
 		echo fin_cadre_trait_couleur(true);
+
 
 	atelier_fin_gauche();
 	atelier_fin_page();

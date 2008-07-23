@@ -36,7 +36,7 @@ function action_atelier_edit_fichier_dist() {
 	$rapport = '';
 
 	ecrire_fichier(_DIR_PLUGINS.$prefixe.'/'.$fichier,$contenu);
-	$rapport = 'le fichier a &eacute;t&eacute; enregist&eacute;';
+	$rapport = _DIR_PLUGINS.$prefixe.'/'.$fichier. '<br />' ._T('atelier:fichier_enregistrer');
 
 	$redirect = parametre_url(urldecode(generer_url_ecrire('projets',"id_projet=$id_projet")),
 				'rapport', $rapport, '&') . $err;

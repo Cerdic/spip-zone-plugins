@@ -47,11 +47,28 @@ function action_atelier_svn_dist() {
 		$redirect = parametre_url(urldecode(generer_url_ecrire('projets',"id_projet=$id_projet")),
 				'rapport', $rapport, '&');
 	}
-
-
+        else if (_request('commit_projet')) {
+                $commentaire = _request('commentaire');
+                $id_projet = $arg;
+                atelier_commit_projet($nom, $commentaire, &$rapport);
+		$redirect = parametre_url(urldecode(generer_url_ecrire('projets',"id_projet=$id_projet")),
+				'rapport', $rapport, '&');
+        }
 
 	include_spip('inc/headers');
 	redirige_par_entete($redirect);
+}
+
+function atelier_commit_projet($nom, $commentaire, &$rapport) {
+        $rapport .= _T('atelier:commande'). 'svn commit -m "'.$commentaire.'"<br />';
+	echo $nom .'<br />' . $commentaire;	
+        exec('cd '._DIR_PLUGINS.$nom.';svn commit -m "'.$commentaire.'"',&$output,&$return_var);
+	$rapport .= _T('atelier:code_retour').$return_var.'<hr />';
+	switch ($return_var) {
+		case 0 : foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />';	break;
+		case 1 : foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />'; $rapport .= _T('atelier:erreur_commande');break; // erreur commande
+		default : $rapport .= _T('atelier:erreur_svn_pas_installe'); break; // pas de svn !
+	}
 }
 
 function atelier_status_projet($nom) {
