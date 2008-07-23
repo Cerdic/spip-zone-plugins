@@ -1,0 +1,25 @@
+<plugin>
+	<nom>
+	Accessibilit&#233;
+	</nom>
+	<auteur>
+	Goetsu	&#169; 2008 - GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Diverses am&#233;liorations d'acessibilit&#233;.
+	</description>
+	<lien>http://www.spip-contrib.net/Accessibilite</lien>
+	<prefix>
+	Accessibilite
+	</prefix>
+	<icon>
+	</icon>
+	<fonctions></fonctions>
+	<chemin dir='' />
+</plugin>
