@@ -133,7 +133,6 @@ class AdminComposant {
     }
     // Mise à jour
     if (_request('maj_composant')=='oui') {
-spip_log('***************************************** MAJ ok');
       foreach ($this->vars as $var) {
         $v = $this->fullname.$var['nom'];
         if ($_POST[$v] != $GLOBALS['meta'][$v]) {

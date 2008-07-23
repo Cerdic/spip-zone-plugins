@@ -20,6 +20,13 @@ function action_crayons_composant_store_dist() {
 	$wid = $_POST['crayons'][0];
 	//$f = charger_fonction('vues', 'composant', true);
 	$c = 'composants/'.$_POST['composant'].'/'.$_POST['composant'];
+	
+	// MàJ du composant - Update component
+	// TODO : faire ça plus proprement ! ;-)
+	include_spip('lib/composant/classComposantPrive');
+	$cprovi = new AdminComposant($_POST['composant']);
+	
+	// Retourne la vue - Return vue 
   $return[$wid] = vues_dist('composant', $_POST['composant'], 1, array('var_mode'=>'recalcul', 'c'=>$c));
 	echo var2js($return);
 	exit;
