@@ -31,6 +31,7 @@ function inc_editer_tache_dist($new,$id_tache=0,$row=array(),$id_projet=0) {
 	. editer_tache_descriptif($row['descriptif'])
 	. editer_tache_projet($row['id_projet'])
 	. editer_tache_etat($row['etat'])
+	. editer_tache_auteur($row['id_auteur'])
 
 	. ("<div align='right'><input class='fondo' type='submit' value='"
 	. _T('bouton_enregistrer')
@@ -77,7 +78,7 @@ function editer_tache_projet($id_projet) {
 }
 
 function editer_tache_etat($etat) {
-	$opt = '<select name="etat" value "'.$etat.'">"';
+	$opt = '<select name="etat" value="'.$etat.'">"';
 
 	if ($etat == 'fermee') {
 		$opt .= '<option value="ouverte">Ouverte</option>';
@@ -94,5 +95,17 @@ function editer_tache_etat($etat) {
 	$msg = _T('atelier:titre_edit_choix_etat');
 	$logo = "racine-site-24.gif";
 	return debut_cadre_couleur($logo, true, "", $msg) . $opt . fin_cadre_couleur(true);
+}
+
+function editer_tache_auteur($id_auteur) {
+	$res = '<select name="id_auteur" value="'.$id_auteur.'">"';
+	$q = sql_select('id_auteur, nom','spip_auteurs');
+	while ($r = sql_fetch($q))
+		$res .= '<option value="'.$r['id_auteur'].'">'.$r['nom'].'</option>';
+	$res .= '</select>';
+
+	$msg = _T('atelier:titre_edit_choix_auteur');
+	$logo = "racine-site-24.gif";
+	return debut_cadre_couleur($logo, true, "", $msg) . $res . fin_cadre_couleur(true);
 }
 ?>

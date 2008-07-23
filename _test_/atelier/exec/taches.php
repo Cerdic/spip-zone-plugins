@@ -35,6 +35,7 @@ function taches($id_tache,$row) {
 
 	include_spip('inc/atelier_presentation');
 	include_spip('inc/atelier_autoriser');
+	include_spip('inc/atelier_fonctions');
 
 	$nom_page = atelier_debut_page(_T('atelier:titre_taches'),'taches');
 	if (!atelier_autoriser()) exit;
@@ -54,7 +55,11 @@ function taches($id_tache,$row) {
 
 		echo debut_cadre_trait_couleur('',true);
 		echo gros_titre($row['id_tache'].' - '. $row['titre'],'',false);
-		echo '<b>'._T('atelier:texte_etat').' : </b>'._T('atelier:tache').' '.$row['etat'].'<br /><br />';
+		echo '<b>'._T('atelier:texte_etat').' : </b>'._T('atelier:tache').' '.$row['etat'].'<br />';
+
+		$nom = atelier_recuperer_nom_auteur($row['id_auteur']);
+		if (!$nom) $nom = 'personne';
+		echo 'Tache assignée à '. $nom . '<br /><br />';
 
 		echo debut_cadre_couleur('',true);
 

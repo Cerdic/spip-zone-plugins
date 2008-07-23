@@ -54,6 +54,7 @@ $tables_principales['spip_projets'] =
 $taches = array(
   "id_tache"			=> "bigint(21) NOT NULL auto_increment",
   "id_projet"			=> "bigint(21) NOT NULL",
+  "id_auteur"			=> "bigint(21) NOT NULL",
   "titre"			=> "text NOT NULL",
   "descriptif"			=> "text NOT NULL",
   "etat"			=> "ENUM('ouverte', 'fermee') NOT NULL DEFAULT 'ouverte'"

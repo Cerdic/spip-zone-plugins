@@ -1,4 +1,4 @@
-TODO.txt (fichier généré par le plugin Atelier 2008-07-23 16:40:35)
+TODO.txt (fichier généré par le plugin Atelier 2008-07-24 01:01:26)
 -------------------------------------------------------------------
 
 * gestion des dictionnaires :
@@ -161,5 +161,36 @@ Lors de la création d'un nouveau projet, proposer de créer l'orborescence de b
 
 * [explorateur] le rendre "ajax" :
 ne pas recharger toute la page mais juste le bloc.
+
+
+* [importer un projet de la zone] pbm raccourcis :
+retirer le liens "Retour au projet" qui ne sert à rien
+
+
+* [SVN] garder dans la base de donnée user /pass :
+Attention de bien codé le mot de passe. Ne pas le mettre en clair
+Utiliser une nouvelle table spip_svn [id_auteur - key, user, pass]
+
+
+* Ajouter une page de gestion des versions :
+gestion des versions attaché à un projet. Nouveau champs dans la table spip_projets dans le style des metas.
+
+Cette page permettra de créer des versions (0.1 0.2 0.3 etc ...)
+
+Dans la page d'édition des taches, une tache devra être assigné à l'une de ces versions
+
+
+* [liste des taches] classement par date  :
+date de création pour les tache ouverte
+date de fermeture pour les taches fermée
+
+
+* [args des pages exec] rejet en cas de controle negatif :
+Dans les fonctions args des pages exec, si un controle est effectué et que celui-ci est negatif, utiliser :
+
+include_spip('inc/minipres');
+echo minipres(_T('public:aucun_article'));
+
+Pour rejeter l'utilisateur.
 
 

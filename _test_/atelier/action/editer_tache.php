@@ -62,9 +62,9 @@ function taches_set($id_tache) {
 	$err = '';
 
 	$c = array();
-	foreach (array('titre', 'descriptif', 'id_projet','etat') as $champ)
+	foreach (array('titre', 'descriptif', 'id_projet','id_auteur','etat') as $champ)
 	       $c[$champ] = _request($champ);
-			
+
 	revision_tache($id_tache, $c);
 
 	return $err;
@@ -74,8 +74,8 @@ function revision_tache($id_tache, $c=false) {
 	include_spip('inc/autoriser');
 	include_spip('inc/filtres');
 
-	// Ces champs seront pris nom pour nom (_POST[x] => spip_articles.x)
-	$champs_normaux = array('titre', 'descriptif','id_projet','etat');
+	// Ces champs seront pris nom pour nom (_POST[x] => spip_taches.x)
+	$champs_normaux = array('titre', 'descriptif','id_projet','id_auteur','etat');
 
 	// ne pas accepter de titre vide
 	if (_request('titre', $c) === '')

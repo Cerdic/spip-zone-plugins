@@ -92,11 +92,26 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 		}
 
 		echo debut_cadre_trait_couleur('',true);
+
+
                 $info = plugin_get_infos($row['prefixe']);
 		echo gros_titre($row['id_projet'].' - '. $row['titre'],'',false);
                 echo '<b>'._T('atelier:version').' : </b>'.$info['version'].'<br />';
 		echo '<b>'._T('atelier:texte_prefixe') .' : </b>'.$row['prefixe'] .'<br />';
-		echo '<b>'._T('atelier:texte_type').' : </b>'.$row['type'].'<br /><br />';;
+		echo '<b>'._T('atelier:texte_type').' : </b>'.$row['type'].'<br /><br />';
+
+		include_spip('inc/atelier_stats');
+		$stats = projet_get_stats($id_projet);
+		echo '<div style="height : 60px;
+				margin-bottom: 10px;
+				margin-top: -80px;
+				margin-left: 250px;
+				padding-left: 5px;
+				border:1px dotted #000;">'
+			.'<b>Statistiques :</b><br />'
+			.$stats['taches_ouvertes'].' taches ouvertes.<br />'
+			.$stats['taches_fermees'].' taches fermées.<br />'
+			.'</div>';
 		
 		echo debut_cadre_couleur('',true);
 

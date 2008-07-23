@@ -62,7 +62,7 @@ function action_atelier_svn_dist() {
 }
 
 function atelier_commit_projet($nom, $commentaire, $user, $pass, &$rapport) {
-        $rapport .= _T('atelier:commande'). 'svn commit -m '.escapeshellarg($commentaire).'<br />';
+        $rapport .= _T('atelier:commande'). 'svn commit --encoding "UTF-8" -m "'.$commentaire.'"<br />';
 	if ($commentaire != '') {
 		include_spip('inc/filtres');
 		exec('cd '._DIR_PLUGINS.$nom.';svn commit --username "'.$user.'" --password "'.$pass.'" --encoding "UTF-8" -m "'.$commentaire.'" 2>&1',&$output,&$return_var);
@@ -79,7 +79,7 @@ function atelier_commit_projet($nom, $commentaire, $user, $pass, &$rapport) {
 }
 
 function atelier_status_projet($nom) {
-	exec('cd '._DIR_PLUGINS.';svn status -u -v '.$nom,&$output,&$return_var);
+	exec('cd '._DIR_PLUGINS.';svn status -u -v '.$nom.' 2>&1',&$output,&$return_var);
 	return $output;
 }
 
