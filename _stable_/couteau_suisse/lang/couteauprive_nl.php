@@ -168,12 +168,12 @@ Opgelet: bepaalde werktuigen van het Zwitserland Mes vereisen de functies van {j
 	'filets_sep:description' => 'Neemt scheidingsnetten op, aan de persoonlijke behoeften aanpasbaar door bladen van stijl, in alle teksten van SPIP.
 _ De syntaxis is : "__code__", waar &#132;de code&#147; vertegenwoordigt ofwel het identificatienummer (van 0 tot 7) van het net dat in rechtstreeks verband met de overeenkomstige stijlen, ofwel de naam van een beeld moet opgenomen worden dat in het dossier wordt geplaatst plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Scheidingsnetten',
-	'filtrer_javascript:description' => '<MODIF>Om javascript in de artikelen te beheren, zijn drie manieren beschikbaar :
+	'filtrer_javascript:description' => 'Om javascript in de artikelen te beheren, zijn drie manieren beschikbaar :
 - <i>nooit</i>: javascript wordt overal geweigerd
 - <i>het gebrek</i>: javascript is in rood in de particuliere ruimte aangeduid
 - <i>nog steeds</i>: javascript wordt overal aanvaard.
 
-Opgelet: in de forums, petities, georganiseerde stromen, enz, het beleid van javascript <b>wordt altijd</b> veiliggesteld.[[%radio_filtrer_javascript3%]]',
+Opgelet: in de forums, petities, georganiseerde stromen, enz., het beleid van javascript wordt <b>altijd</b> veiliggesteld.[[%radio_filtrer_javascript3%]]',
 	'filtrer_javascript:nom' => 'Beleid van javascript',
 	'flock:description' => 'D&eacute;sactiveren het systeem van grendeling van bestanden door de functie PHP {flock()} te neutraliseren. Bepaalde onderdak geeft immers ernstige problemen ten gevolge van een onaangepast systeem van bestanden of een gebrek aan synchronisatie. Activeert niet dit werktuig als uw plaats normaal werkt.',
 	'flock:nom' => 'Geen grendeling van bestanden',
@@ -293,12 +293,12 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 
 	// N
 	'no_IP:description' => '<NEW>D&eacute;sactive le m&eacute;canisme d\'enregistrement automatique des adresses IP des visiteurs de votre site par soucis de confidentialit&eacute; : SPIP ne conservera alors plus aucun num&eacute;ro IP, ni temporairement lors des visites (pour g&eacute;rer les statistiques ou alimenter spip.log), ni dans les forums (responsabilit&eacute;).',
-	'no_IP:nom' => '<NEW>Pas de stockage IP',
-	'nouveaux' => '<NEW>Nouveaux',
+	'no_IP:nom' => 'Geen IP opslag',
+	'nouveaux' => 'Nieuw',
 
 	// O
 	'orientation:description' => '<NEW>3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.',
-	'orientation:nom' => '<NEW>Orientation des images',
+	'orientation:nom' => 'De beelden ori&euml;ntatie',
 	'outil_actif' => 'Actief werktuig',
 	'outil_activer' => 'Activeren',
 	'outil_activer_le' => 'Het werktuig activeren',
