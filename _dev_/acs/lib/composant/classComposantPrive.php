@@ -497,5 +497,13 @@ function mkdir_recursive($pathname)
 }
 
 // Convertit la version code de spip en version texte
+// Le tableau ne contient que les versions de spip compatibles ET testées avec cette version d'ACS
+function spip_version_texte($version_code) {
+  $v = $GLOBALS['acs_table_versions_spip'];
 
+  if (isset($v[$version_code]))
+    return $v[$version_code];
+  else
+    return $version_code;
+}
 ?>
