@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>[ar]&#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578;[en]Forms[fr]Formulaires&amp;Tables[it] Forms[es] Formularios</multi> (SPIP 1.9.1+)
+	<multi>[ar]&#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578;[en]Forms[fr]Formulaires&amp;Tables[it] Forms[es] Formularios</multi> (SPIP 2, experimental)
 	</nom>
 	<icon>img_pack/form-24.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
