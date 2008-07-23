@@ -36,12 +36,21 @@ function action_editer_projet_dist() {
 
 	// Enregistre l'envoi dans la BD
 	$err = projets_set($id_projet);
+	if (_request('arbo')) projets_creer_arbo();
 
         $redirect = parametre_url(urldecode(generer_url_ecrire('projets')),
 				'id_projet', $id_projet, '&') . $err;
 
 	include_spip('inc/headers');
 	redirige_par_entete($redirect);
+}
+
+function projets_creer_arbo() {
+	exec('mkdir '._DIR_PLUGINS._request('prefixe'));
+	exec('mkdir '._DIR_PLUGINS._request('prefixe').'/exec');
+	exec('mkdir '._DIR_PLUGINS._request('prefixe').'/action');
+	exec('mkdir '._DIR_PLUGINS._request('prefixe').'/inc');
+	exec('mkdir '._DIR_PLUGINS._request('prefixe').'/lang');
 }
 
 function insert_projet() {

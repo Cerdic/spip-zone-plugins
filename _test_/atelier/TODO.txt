@@ -1,4 +1,4 @@
-TODO.txt (fichier généré par le plugin Atelier 2008-07-22 17:43:24)
+TODO.txt (fichier généré par le plugin Atelier 2008-07-23 16:40:35)
 -------------------------------------------------------------------
 
 * gestion des dictionnaires :
@@ -78,8 +78,7 @@ faire tous les accents et les caractères spéciaux
 
 
 
-* Gestion svn :
-- Ajouter une option permettant un "checkout" d'un projet sur le svn de spip
+* [svn] ajouter les options de commit / add / del :
 - Pour les projets ayant été importé de cette manière, ajouter des options de commit et d'update
 
 
@@ -116,12 +115,12 @@ Ne pas hesiter à y mettre la blinde de commentaire pour guider le developpeur.
 Voir avec le plugin Salvatore ...
 
 
-* pour un projet "svn", permettre l'ajout dans la liste des génération automatique de zip :
+* [svn] permettre l'ajout dans la liste des génération automatique de zip :
 
 
 
-* Importation SVN : mettre la description du plugin (plugin.xml) dans le camps description :
-
+* [SVN] mettre la description du plugin (plugin.xml) dans le camps description :
+Lors de l'Importation
 
 
 * Explorateur de fichier : permettre de cliquer sur un fichier pour l'editer :
@@ -130,5 +129,37 @@ faire un tableau ou chaque fichiers serait un liens vers une page d'edition
 
 * [explorateur] Pour les fichiers exec, ajouter un lien "visualisation" :
 Ce lien est l'url permettant d'afficher la présentation de la feuille.
+
+
+* [Fichier langues] permettre une navigation par ordre alphabétique :
+faire une navigation par onglet ou chaque onglet serait une lettre de l'alphabet
+
+
+* [taches] permettre de leur assigner un numéro de version :
+Par défaut la tache est assigné à la version de travail courante. Mais il est possible de les assigné à une version future
+
+
+* [nouveau projet] création de l'arborescence de base :
+Lors de la création d'un nouveau projet, proposer de créer l'orborescence de base
+
+
+* [Fichier] donner le nom du fichier enregistrer dans le rapport :
+
+
+
+* [fichier langue] Si il n'existe qu'un seul fichier lang, l'ouvrir immédiatement :
+
+
+
+* [svn] refuser les commit sans commentaires :
+
+
+
+* Améliorer la coloration syntaxique :
+
+
+
+* [explorateur] le rendre "ajax" :
+ne pas recharger toute la page mais juste le bloc.
 
 

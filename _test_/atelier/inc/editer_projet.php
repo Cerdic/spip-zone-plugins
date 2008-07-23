@@ -27,13 +27,20 @@ function inc_editer_projet_dist($new,$id_projet=0,$row=array()) {
 	. editer_projet_titre($row['titre'])
 	. editer_projet_descriptif($row['descriptif'])
 	. editer_projet_type($row['type'])
-	. editer_projet_prefixe($row['prefixe'])
+	. editer_projet_prefixe($row['prefixe']);
+	if ($new == "oui")
+		$form .= editer_projet_arbo();
 
-	. ("<div align='right'><input class='fondo' type='submit' value='"
+	$form .= ("<div align='right'><input class='fondo' type='submit' value='"
 	. _T('bouton_enregistrer')
 	. "' /></div>");
 
 	return generer_action_auteur("editer_projet", $id_projet, '', $form, " method='post' name='formulaire'");
+}
+
+
+function editer_projet_arbo(){
+	return ' <input type="checkbox" name="arbo" value="oui" /> '._T('atelier:creer_arbo');
 }
 
 function editer_projet_titre($titre) {
