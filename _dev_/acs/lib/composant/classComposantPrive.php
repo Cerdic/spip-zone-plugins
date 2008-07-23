@@ -33,6 +33,8 @@ class AdminComposant {
   // Instancie (au besoin) un objet Composant à l'éxécution
   // pour en adopter les méthodes implémentées.
   function __construct($type, $debug = false) {
+    global $_POST;
+    
     include_spip('inc/xml'); // spip_xml_load()
     include_spip('inc/traduire');
     
@@ -129,9 +131,9 @@ class AdminComposant {
         }
       }
     }
-
     // Mise à jour
-    if ($_POST['maj_composant']=='oui') {
+    if (_request('maj_composant')=='oui') {
+spip_log('***************************************** MAJ ok');
       foreach ($this->vars as $var) {
         $v = $this->fullname.$var['nom'];
         if ($_POST[$v] != $GLOBALS['meta'][$v]) {
@@ -221,16 +223,23 @@ class AdminComposant {
 /**
  * Méthode edit: affiche un éditeur pour les variables du composant
  */
-  function edit($preview = false) {
+  function edit($crayon=false) {
     static $n;
-    $n++; // Numérotation du composant (utile pour js)
-    
+    $n++; // Numérotation du composant (utile pour js)    
     
     $r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'js/picker.js"></script>';
-    
-    $r .= '<form name="acs" action="?exec=acs&onglet=composants" method="post">'.
-      "<input type='hidden' name='maj_composant' value='oui' />".
-      '<input type="hidden" name="composant" value="'.$this->type.'" />';
+    if ($crayon instanceof Crayon) {
+      $r .= '<form name="acs" action="?action=crayons_composant_store" method="post">'.
+            '<input type="hidden" class="crayon-id" name="crayons[]" value="'.$crayon->key.'" />'."\n".
+            '<input type="hidden" name="name_'.$crayon->key.'" value="'.$crayon->name.'" />'."\n".
+            '<input type="hidden" name="md5_'.$crayon->key.'" value="'.$crayon->md5.'" />'."\n";
+          "<input type='hidden' name='var_mode' value='recalcul' />";
+      $r .= $crayon->boutons();
+    }
+    else
+      $r .= '<form name="acs" action="?exec=acs&onglet=composants" method="post">';
+    $r .= "<input type='hidden' name='maj_composant' value='oui' />".
+					'<input type="hidden" name="composant" value="'.$this->type.'" />';
       
     if (($this->optionnel!='non') && ($this->optionnel!='no') && ($this->optionnel!='false')) {
       $varname = $this->fullname.'Use';
@@ -252,7 +261,7 @@ class AdminComposant {
     }
 
     $r .= '<div id="acs'.ucfirst($this->type).'Config" '.(isset($this->display) ? 'style="'.$this->display.'"' : '').'>';
-    if ($preview && isset($this->preview) && ($this->preview != 'non')  && ($this->preview != 'no') && ($this->preview != 'false')) {
+    if (!($crayon instanceof Crayon) && isset($this->preview) && ($this->preview != 'non')  && ($this->preview != 'no') && ($this->preview != 'false')) {
       $url = '../?page=wrap&c=composants/'.$this->type.'/'.$this->type.'&v='.$GLOBALS['meta']['acsDerniereModif'].'&var_mode=recalcul';
       $r .= '<fieldset class="apercu"><legend><a href="javascript:void(0)" onclick=" findObj(\''.$this->fullname.'\').src=\''.$url.'\';" title="'._T('admin_recalculer').'">'._T('previsualisation').'</a></legend><iframe id="'.$this->fullname.'" width="100%" height="'.(is_numeric($this->preview) ? $this->preview : 80).'px" frameborder="0" style="border:0" src="'.$url.'"></iframe></fieldset>';
     }
@@ -274,7 +283,7 @@ class AdminComposant {
       $draw = 'ctl'.ucfirst($var['type']);
       if (is_callable(array($this,$draw)))
         $controls[$var['nom']] = $this->$draw($v, $$v, $var);
-      else $controls[$var['nom']] = $draw."() undefined.<br />" ;
+      else $controls[$var['nom']] = $draw."() undefined.<br />" ;      
     }
 
     // Recherche une mise en page et y remplace les variables par des contrôles
@@ -298,8 +307,12 @@ class AdminComposant {
     if (count($this->errors))
       $r .= '<div class="alert">'.implode('<br />', $this->errors).'</div>';
       
-    $r .= '</td><td valign="bottom"><div style="text-align:'.$GLOBALS['spip_lang_right'].';"><input type="submit" name="'._T('bouton_valider').'" value="'._T('bouton_valider').'" class="fondo"></div></td></tr></table>';
-    $r .= '</form>';
+    $r .= '</td>';
+    if (!($crayon instanceof Crayon))
+      $r .= '<td valign="bottom"><div style="text-align:'.$GLOBALS['spip_lang_right'].';">'.
+      			'<input type="submit" name="'._T('bouton_valider').'" value="'._T('bouton_valider').'" class="fondo">'.
+						'</div></td>';
+    $r .= '</tr></table></form>';
     return $r;
   }
 /**

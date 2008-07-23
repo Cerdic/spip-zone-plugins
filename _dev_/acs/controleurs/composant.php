@@ -24,12 +24,12 @@ function controleurs_composant($regs) {
   <div style="width:'.$crayon->largeur.'px; height:'.$crayon->hauteur.'px">'.
     '<div style="position: absolute; opacity: 0.5;width:'.$crayon->largeur.'px; height:'.$crayon->hauteur.'px">'.
       recuperer_fond("composants/$c").
-    '</div>'.  
+    '</div>'.
     '<div style="position: relative; opacity: 1;">'.
     '<a href="'._DIR_RESTREINT.'index.php?exec=acs&onglet=composants&composant='.$champ.'"><img src="'.$icon.'" alt="'.$champ.'" title="'._T('crayons:editer').' '._T($champ).'" /></a>'.
   	'</div>'.
   	'<div class="edit_composant" style="position: absolute; display: block; top:0; left:0; z-index: 99999999">'.
-    acs_box($composant->T('nom'), $composant->edit(), $composant->icon).
+    acs_box($composant->T('nom'), $composant->edit($crayon), $composant->icon).
     '</div>'.
 	'</div>'.
 '<script language="javascript">

@@ -1,6 +1,5 @@
 ACS version 0.4:
 - simplification de la gestion des traductions. Contrôleur pour plugin crayons
-- debut d'utilisation de crayons pour les composants
 - valeurs par défaut pour l'initialisation (composants/def.php)
 - nouvelle option de config ACS : affichage des pages et des inclusions des composants
 - interface d'administration d'ACS refaite, acceuil sur l'explorateur Ajax
