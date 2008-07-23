@@ -25,9 +25,14 @@ function inc_atelier_edit_fichier_dist($a=array()) {
 	if ($a['mode'] == "absolu") lire_fichier($a['fichier'],&$contenu);
 	else lire_fichier(_DIR_PLUGINS.$a['prefixe'].'/'.$a['fichier'],&$contenu);
 
+
+	$texte = file(_DIR_PLUGINS.$a['prefixe'].'/'.$a['fichier']);
+	include_spip('inc/atelier_presentation');
+
 	$form = "<input type='hidden' name='atelier_edit_fichier' value='oui' />\n"
 	. '<input type="hidden" name="fichier" value="'.$a['fichier'].'" />'
 	. '<input type="hidden" name="prefixe" value="'.$a['prefixe'].'" />'
+	. atelier_debut_textarea($texte) . atelier_fin_textarea()
 	.'<textarea style="border:1px solid #000;" name="contenu" rows="50" cols="75">'.entites_html($contenu).'</textarea>'
 
 	. ("<div align='right'><input class='fondo' type='submit' value='"

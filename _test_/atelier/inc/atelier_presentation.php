@@ -133,6 +133,7 @@ function atelier_cadre_raccourcis($autres='') {
 
 	cadre_atelier(_T('atelier:raccourcis'), $liens);
 }
+
 function atelier_debut_cadre_form() {
 	echo debut_cadre_trait_couleur("",true); 
 	echo debut_cadre_formulaire("",true);
@@ -143,4 +144,40 @@ function atelier_fin_cadre_form() {
 	echo fin_cadre_trait_couleur(true);
 }
 
+function atelier_colorier(&$texte) {
+	include_spip('inc/filtres');
+	foreach($texte as $num => $ligne) {
+
+		$ligne = entites_html($ligne);
+		$ligne = preg_replace('#function#','<span style="color:#a52829;">function</span>',$ligne);
+		$ligne = preg_replace('#echo#','<span style="color:#a52829;">echo</span>',$ligne);
+		$ligne = preg_replace('#if#','<span style="color:#a52829;">if</span>',$ligne);
+		$ligne = preg_replace('#return#','<span style="color:#a52829;">return</span>',$ligne);
+		$ligne = preg_replace('#\$(.[^/ /|,]+?)([/ /|,])#','<span style="color:#008a8c;">$${1}${2}</span>',$ligne); // variables
+		$ligne = preg_replace('#//(.*)#','<span style="color:#1014ff;">//${1}</span>',$ligne); // comentaire d'une ligne
+		$ligne = preg_replace('#/\*#','<font color="#1014ff">/*',$ligne); // commentaire lignes multiples
+		$ligne = preg_replace('#\*/#','*/</font>',$ligne);
+
+		// chaine de caractères : ff00ff
+		// commande a52829
+		// commentaire : 1014ff
+		// variables : 008a8c
+
+		$ligne = preg_replace('#'.chr(9).'#','<span style="color:#fff;">------</span>',$ligne);
+		$texte[$num] = '<span style="display:block;width : 800px; overflow-y:visible;background:#fff;"><b style="color:#000;">'.$num.' </b>'. $ligne .'</span>';
+
+	}
+}
+function atelier_debut_textarea($texte=array()) {
+
+	atelier_colorier(&$texte);
+	$t ='';
+	foreach ($texte as$ligne) $t .= $ligne;
+	return '<div style="display: block;curser:text;border : 1px solid #000; width: 480px; height: 600px; overflow: auto; text-align:left;">'
+		.$t;
+}
+
+function atelier_fin_textarea() {
+	return '</div>';
+}
 ?>

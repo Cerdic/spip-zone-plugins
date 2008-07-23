@@ -66,8 +66,6 @@ function atelier_commit_projet($nom, $commentaire, $user, $pass, &$rapport) {
 	if ($commentaire != '') {
 		include_spip('inc/filtres');
 		exec('cd '._DIR_PLUGINS.$nom.';svn commit --username "'.$user.'" --password "'.$pass.'" --encoding "UTF-8" -m "'.$commentaire.'" 2>&1',&$output,&$return_var);
-		echo $return_var . '<hr />';
-		print_r($output);
 
 		$rapport .= _T('atelier:code_retour').$return_var.'<hr />';
 

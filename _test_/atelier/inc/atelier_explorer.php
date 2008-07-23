@@ -48,9 +48,13 @@ function atelier_explorer($prefixe,$id_projet,$opendir,$nom_page) {
 				if (@filetype($dir .'/'. $file) == 'dir')
 					$lignes[] = 
 					'<a href="'.generer_url_ecrire($nom_page,'opendir='.$chemin.'&id_projet='.$id_projet).'"><b>['.$file .']</b></a>';
-				else
-					$lignes[] = 
-					'<a href="'.generer_url_ecrire('atelier_edit_fichier','fichier='.$chemin.'&id_projet='.$id_projet).'">'.$file .'</a>';
+				else {
+					$l  = '<a href="'.generer_url_ecrire('atelier_edit_fichier','fichier='.$chemin.'&id_projet='.$id_projet).'">'.$file .'</a>';
+					preg_match('#(.*).php#',$file,$match);
+					if ($opendir =='exec') $l .= ' <span style="margin-top:-13px;float:right;"><a href="'.generer_url_ecrire($match[1]).'">Visualiser la feuille</a></span>';
+					$lignes[] = $l;
+
+				}
 			}
 		}
 		array_multisort($lignes,SORT_STRING);
