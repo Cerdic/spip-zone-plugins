@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array (
 'code_retour' => '- Code retour : ',
 'commande' => '- Commande : ',
 'commentaire' => 'Commentaire',
+'commit_sans_commentaire' => 'Votre commit a &eacute;t&eacute; annul&eacute; pour cause de commentaire manquant. Veuilliez remplir le champs "commentaire" avec les explications relatives &agrave; votre commit avant de valider le formulaire.',
 'commit_svn' => 'Mettre &agrave; jour la zone &agrave; partir de votre copie de travail. Cette action va provoquer une nouvelle version du projet sur la zone &agrave; partir de vos modifications. N\'oubliez surtout pas de remplir le champs "commentaire" afin d\'expliquer la nature de vos modifications.',
 'contenu_repertoire_lang' => 'Contenu du r&eacute;pertoire "lang". Cliquez sur l\'un des fichiers pour le modifier ou le visualiser.',
 'creer_projet' => 'Cr&eacute;er le projet ?',

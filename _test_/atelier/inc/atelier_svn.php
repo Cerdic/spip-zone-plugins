@@ -56,6 +56,8 @@ function atelier_update_svn($arg) {
 function atelier_commit_svn($arg) {
         $form = "<input type='hidden' name='commit_projet' value='oui' />\n"
 	. '<input type="hidden" name="nom" value="'.$arg['nom'].'" />'
+	._T('atelier:utilisateur_svn') . ' : <input type="text" name="user" /><br />'
+	._T('atelier:password_svn') . ' : <input type="password" name ="pass" /><br />'
         ._T('atelier:commentaire') . ' : <br /><textarea name="commentaire" style="border:1px solid #000;" cols="70" rows="6"></textarea><br />'
 	. ("<div align='center'><input class='fondo' type='submit' value='"
 	. _T('atelier:bouton_commit_projet')

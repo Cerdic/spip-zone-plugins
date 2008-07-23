@@ -50,7 +50,9 @@ function action_atelier_svn_dist() {
         else if (_request('commit_projet')) {
                 $commentaire = _request('commentaire');
                 $id_projet = $arg;
-                atelier_commit_projet($nom, $commentaire, &$rapport);
+		$user = _request('user');
+		$pass = _request('pass');
+                atelier_commit_projet($nom, $commentaire, $user, $pass, &$rapport);
 		$redirect = parametre_url(urldecode(generer_url_ecrire('projets',"id_projet=$id_projet")),
 				'rapport', $rapport, '&');
         }
@@ -59,16 +61,23 @@ function action_atelier_svn_dist() {
 	redirige_par_entete($redirect);
 }
 
-function atelier_commit_projet($nom, $commentaire, &$rapport) {
-        $rapport .= _T('atelier:commande'). 'svn commit -m "'.$commentaire.'"<br />';
-	echo $nom .'<br />' . $commentaire;	
-        exec('cd '._DIR_PLUGINS.$nom.';svn commit -m "'.$commentaire.'"',&$output,&$return_var);
-	$rapport .= _T('atelier:code_retour').$return_var.'<hr />';
-	switch ($return_var) {
-		case 0 : foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />';	break;
-		case 1 : foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />'; $rapport .= _T('atelier:erreur_commande');break; // erreur commande
-		default : $rapport .= _T('atelier:erreur_svn_pas_installe'); break; // pas de svn !
+function atelier_commit_projet($nom, $commentaire, $user, $pass, &$rapport) {
+        $rapport .= _T('atelier:commande'). 'svn commit -m '.escapeshellarg($commentaire).'<br />';
+	if ($commentaire != '') {
+		include_spip('inc/filtres');
+		exec('cd '._DIR_PLUGINS.$nom.';svn commit --username "'.$user.'" --password "'.$pass.'" --encoding "UTF-8" -m "'.$commentaire.'" 2>&1',&$output,&$return_var);
+		echo $return_var . '<hr />';
+		print_r($output);
+
+		$rapport .= _T('atelier:code_retour').$return_var.'<hr />';
+
+		switch ($return_var) {
+			case 0 : foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />';	break;
+			case 1 : foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />'; $rapport .= _T('atelier:erreur_commande');break; // erreur commande
+			default : $rapport .= _T('atelier:erreur_svn_pas_installe'); break; // pas de svn !
+		}
 	}
+	else $rapport .= _T('atelier:commit_sans_commentaire') . '<br />';
 }
 
 function atelier_status_projet($nom) {
