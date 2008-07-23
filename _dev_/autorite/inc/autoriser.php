@@ -176,7 +176,7 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 				array('0minirezo', '1comite', '6forum'))
 			AND in_array($r['statut'],
 				array('publie', 'prop', 'prepa', 'poubelle'))
-			AND sql_count(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+			AND sql_fetch(spip_query("SELECT * FROM spip_auteurs_articles WHERE id_auteur=".intval($qui['id_auteur'])." AND id_article=".intval($id)))
 		)
 		OR (
 			// un redacteur peut-il modifier un article propose ?
@@ -316,7 +316,7 @@ function autoriser_modererforum($faire, $type, $id, $qui, $opt) {
 			$GLOBALS['autorite']['auteur_modere_forum']
 			AND $type == 'article'
 			AND in_array($qui['statut'], array('0minirezo', '1comite'))
-			AND sql_count(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+			AND sql_fetch(spip_query("SELECT * FROM spip_auteurs_articles WHERE id_auteur=".intval($qui['id_auteur'])." AND id_article=".intval($id)))
 		);
 }
 } else
@@ -337,7 +337,7 @@ function autoriser_modererpetition($faire, $type, $id, $qui, $opt) {
 			$GLOBALS['autorite']['auteur_modere_petition']
 			AND $type == 'article'
 			AND in_array($qui['statut'], array('0minirezo', '1comite'))
-			AND sql_count(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+			AND sql_fetch(spip_query("SELECT * FROM spip_auteurs_articles WHERE id_auteur=".intval($qui['id_auteur'])." AND id_article=".intval($id)))
 		);
 }
 } else
