@@ -3,6 +3,9 @@ Todo :
 
 v1.9.5 (23 07 2008)
 - On introduit <!-- inline= --> (sert notamment au selecteur de couleur, pour l'avoir aussi en cvt.)
+- On introduit la possibilite de faire des actions 'post_traiter' simplement depuis un nom de formulaire :
+si un formulaire cfg possede une fonction 'cfg_{nom}_post_traiter(&$cfg)', elle sera appelee apres le traitement par CFG,
+en lui transmettant la classe php $cfg.
 
 v1.9.4 (17 07 2008)
 - ajout de compat 1.9.2 pour sql_allfetsel()

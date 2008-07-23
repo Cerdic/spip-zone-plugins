@@ -197,7 +197,7 @@ class cfg_formulaire{
 		}
 		
 		// charger une eventuelle fonction cfg_{vue}_verifier()
-		// vue etant le nom du fichier : fonds/cfg_{vue}.html
+		// vue etant le nom du fichier : fonds/cfg_{vue}.html ou en cvt formulaires/{vue}.html
 		// la fonction (qui peut etre mise dans fonds/cfg_{vue}_fonctions.php)
 		// retourne un array() sur le meme modele que /formulaires/x/verifier.php() de spip
 		if (function_exists($f = 'cfg_'.$this->vue.'_verifier') && ($err = $f())){
@@ -256,7 +256,14 @@ class cfg_formulaire{
 		$this->messages = pipeline('cfg_post_edition',array('args'=>array('nom_config'=>$this->nom_config()),'data'=>$this->messages));
 		
 		// traiter les champs speciaux
-		$this->actionner_extensions('post_traiter');	
+		$this->actionner_extensions('post_traiter');
+
+		// charger une eventuelle fonction cfg_{vue}_post_traiter()
+		// vue etant le nom du fichier : fonds/cfg_{vue}.html ou en cvt formulaires/{vue}.html
+		// on lui passe la classe cfg.
+		if (function_exists($f = 'cfg_'.$this->vue.'_post_traiter')){
+			$f($this);
+		}	
 	}
 
 

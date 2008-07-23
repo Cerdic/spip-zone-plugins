@@ -54,7 +54,8 @@ function cfg_header_prive($flux){
 // formulaire dont le nom est donne
 function cfg_from_cvt($form, $action='charger'){
 	return (!function_exists($f = 'formulaires_'.$form.'_'.$action)
-		AND !function_exists($f .= '_dist'));
+		AND !function_exists($f .= '_dist')
+		AND !function_exists($f = 'formulaires_'.$form.'_stat'));
 }
 
 # Formulaires CFG CVT
