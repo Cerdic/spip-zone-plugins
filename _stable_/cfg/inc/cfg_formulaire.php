@@ -61,6 +61,7 @@ class cfg_formulaire{
 			'fichier' => '', // pour storage php, c'est l'adresse du fichier (depuis la racine de spip), sinon ca prend /local/cfg/nom.php
 			'head' => '', // partie du fond cfg a inserer dans le head par le pipeline header_prive (todo insert_head?)
 			'icone' => '', // lien pour une icone
+			'inline' => '', // code qui sera insere apres le contenu du fond (peut servir pour inserer du js)
 			'interpreter' => 'oui', // si interpreter vaut 'non', le fond ne sera pas traite comme un fond cfg, mais comme une inclusion simple (pas de recherche des champs de formulaires). Cela permet d'utiliser des #FORMULAIRES_XX dans un fonds/ tout en utilisant la simplicite des parametres <!-- liens=.. --> par exemple.
 			'liens' => array(), // liens optionnels sur des sous-config <!-- liens*=xxx -->
 			'liens_multi' => array(), // liens optionnels sur des sous-config pour des fonds utilisant un champ multiple  <!-- liens_multi*=xxx -->
@@ -565,7 +566,7 @@ class cfg_formulaire{
 
 		if (!$this->depuis_cvt)
 			$contexte['_cfg_'] = $this->creer_hash_cfg();
-
+	
 		// recuperer le fond avec le contexte
 		// forcer le calcul.
 		$this->recuperer_fond($contexte, true);

@@ -92,7 +92,12 @@ function cfg_formulaire_charger($flux){
 			$editable = true;
 		}
 		
-		$valeurs['_pipeline'] = array('editer_contenu_formulaire_cfg','args'=>array('nom'=>$form,'contexte'=>$valeurs));
+		$valeurs['_pipeline'] = array('editer_contenu_formulaire_cfg',
+			'args'=>array(
+				'nom'=>$form,
+				'contexte'=>$valeurs,
+				'ajouter'=>$config->param['inline'])
+			);
 		$flux['data'] = array($editable, $valeurs);
 		// return $valeurs; // retourner simplement les valeurs
 		#return array(true,$valeurs); // forcer l'etat editable du formulaire et retourner les valeurs
@@ -151,6 +156,7 @@ function cfg_formulaire_traiter($flux){
 function cfg_editer_contenu_formulaire_cfg($flux){
 	// supprimer les parametres CFG du formulaire
 	$flux['data'] = preg_replace('/(<!-- ([a-z0-9_]\w+)(\*)?=)(.*?)-->/sim', '', $flux['data']);
+	$flux['data'] .= $flux['args']['ajouter'];
 	return $flux;
 }
 

@@ -13,9 +13,11 @@ function cfg_charger_param_selecteur_couleur($valeur, &$cfg){
 	// si la librairie farbtastic est installee,
 	// on la charge dans le header prive
 	$dir_lib = _DIR_LIB . 'farbtastic12/farbtastic/';
+	// si provient d'un CVT, on met inline, sinon dans head
+	$ou = ($cfg->depuis_cvt) ? 'inline':'head';
 	if (file_exists($lib = $dir_lib.'farbtastic.js')) {
-		$cfg->param['head'] .= "\n<script langage='javascript' src='$lib'></script>\n";
-		$cfg->param['head'] .= "
+		$cfg->param[$ou] .= "\n<script langage='javascript' src='$lib'></script>\n";
+		$cfg->param[$ou] .= "
 <link rel='stylesheet' href='".$dir_lib."farbtastic.css' type='text/css' />
 <style type='text/css'>
 <!--
