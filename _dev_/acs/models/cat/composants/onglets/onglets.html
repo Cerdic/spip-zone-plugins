@@ -1,4 +1,4 @@
-<div class="#EDIT{composant-onglets-1}">
+<div class="#PINCEAU{onglets}">
   <div id="menunav" class="#EDIT{composant-onglets-1}">
     <ul class="general">
       <li[(#ENV{current}|=={#CONFIG{acsOnglets1}}|?{' '})id="current"[(#SET{pm,oui})]]><a href="?page=#CONFIG{acsOnglets1}" title="#EVAL{_T('acs:onglets__'.$GLOBALS['meta']['acsOnglets1'])}">#EVAL{_T('acs:onglets_'.$GLOBALS['meta']['acsOnglets1'])}</a></li>

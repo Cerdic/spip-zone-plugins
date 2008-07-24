@@ -6,7 +6,7 @@
  * @return array (html, status)
  */
 
-function controleurs_composant($regs) {
+function controleurs_composant_dist($regs) {
   global $spip_lang;
   
   include_spip('public/assembler');
@@ -16,7 +16,7 @@ function controleurs_composant($regs) {
   list(,$crayon,$type,$champ,$id) = $regs;
   
   $c = $champ.'/'.$champ;
-  $crayon = new SecureCrayon("composant-$champ-" . $id, $valeur, array('hauteurMini' => 24, 'largeurMaxi' => 1280, 'hauteurMaxi' => 1024));
+  $crayon = new SecureCrayon("composant-$champ-" . $id, array(), array('hauteurMini' => 24, 'largeurMaxi' => 1280, 'hauteurMaxi' => 1024));
 
   $composant = new AdminComposant($champ);
   $icon = find_in_path('composants/'.$champ.'/img_pack/'.$champ.'_icon.gif');
@@ -26,8 +26,9 @@ function controleurs_composant($regs) {
       recuperer_fond("composants/$c").
     '</div>'.
     '<div style="position: relative; opacity: 1;">'.
-    '<a href="'._DIR_RESTREINT.'index.php?exec=acs&onglet=composants&composant='.$champ.'"><img src="'.$icon.'" alt="'.$champ.'" title="'._T('crayons:editer').' '._T($champ).'" /></a>'.
+    '<a href="'._DIR_RESTREINT.'spip.php?exec=acs&onglet=composants&composant='.$champ.'"><img src="'.$icon.'" alt="'.$champ.'" title="'._T('crayons:editer').' '._T($champ).'" /></a>'.
   	'</div>'.
+// TODO: modifier plugin crayons pour récupérer ici position du composant et taille innerWidth & innerHeight ?
   	'<div class="edit_composant" style="position: absolute; display: block; top:0; left:0; z-index: 99999999">'.
     acs_box($composant->T('nom'), $composant->edit($crayon), $composant->icon).
     '</div>'.
@@ -44,4 +45,5 @@ function controleurs_composant($regs) {
 
 	return array($html, $status);
 }
+
 ?>

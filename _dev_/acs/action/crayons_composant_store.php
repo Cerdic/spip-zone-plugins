@@ -18,7 +18,6 @@ function action_crayons_composant_store_dist() {
 	lang_select($GLOBALS['auteur_session']['lang']);
 	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 	$wid = $_POST['crayons'][0];
-	//$f = charger_fonction('vues', 'composant', true);
 	$c = 'composants/'.$_POST['composant'].'/'.$_POST['composant'];
 	
 	// MàJ du composant - Update component

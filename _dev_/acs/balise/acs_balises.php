@@ -9,6 +9,15 @@
 require_once _DIR_ACS.'lib/composant/composants_ajouter_balises.php';
 composants_ajouter_balises();
 
+function balise_PINCEAU($p) {
+  $composant = interprete_argument_balise(1,$p);
+  $composant = substr($composant, 1, strlen($composant)-2);
+  $p->code = '"crayon composant-'.$composant.'-1 pinceau"';
+  $p->statut = 'php';
+  $p->interdire_scripts = false;
+  return $p;
+}
+
 function balise_ACS_DERNIERE_MODIF($p) {
   $p->code = '$GLOBALS["meta"]["acsDerniereModif"]';
   $p->statut = 'php';

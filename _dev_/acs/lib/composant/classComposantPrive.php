@@ -228,12 +228,11 @@ class AdminComposant {
     
     $r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'lib/picker/picker.js"></script>';
     if ($crayon instanceof Crayon) {
-      $r .= '<form name="acs" action="?action=crayons_composant_store" method="post">'.
+      $r .= '<form name="acs" class="formulaire_crayon" action="?action=crayons_composant_store" method="post">'.
             '<input type="hidden" class="crayon-id" name="crayons[]" value="'.$crayon->key.'" />'."\n".
             '<input type="hidden" name="name_'.$crayon->key.'" value="'.$crayon->name.'" />'."\n".
             '<input type="hidden" name="md5_'.$crayon->key.'" value="'.$crayon->md5.'" />'."\n";
-          "<input type='hidden' name='var_mode' value='recalcul' />";
-      $r .= $crayon->boutons();
+          	"<input type='hidden' name='var_mode' value='recalcul' />";
     }
     else
       $r .= '<form name="acs" action="?exec=acs&onglet=composants" method="post">';
@@ -307,9 +306,8 @@ class AdminComposant {
       $r .= '<div class="alert">'.implode('<br />', $this->errors).'</div>';
       
     $r .= '</td>';
-    if (!($crayon instanceof Crayon))
-      $r .= '<td valign="bottom"><div style="text-align:'.$GLOBALS['spip_lang_right'].';">'.
-      			'<input type="submit" name="'._T('bouton_valider').'" value="'._T('bouton_valider').'" class="fondo">'.
+    $r .= '<td valign="bottom"><div style="text-align:'.$GLOBALS['spip_lang_right'].';">'.
+      			'<input type="submit" class="crayon-submit fondo" name="'._T('bouton_valider').'" value="'._T('bouton_valider').'">'.
 						'</div></td>';
     $r .= '</tr></table></form>';
     return $r;

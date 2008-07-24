@@ -1,5 +1,5 @@
 [(#CONFIG{acsEncartUse}|=={oui}|?{' '})
-<div class="#EDIT{composant-encart-1}">
+<div class="#PINCEAU{encart}">
   [(#CONFIG{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/encart/encart-democratie}{lang=#LANG}>][(#REM) Encart si composant democratie activé]
   [(#CONFIG{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/encart/encart-oligarchie}{lang=#LANG}>][(#REM) Encart si composant democratie inactif]
 </div>]
