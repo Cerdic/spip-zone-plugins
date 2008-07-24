@@ -226,7 +226,7 @@ class AdminComposant {
     static $n;
     $n++; // Numérotation du composant (utile pour js)    
     
-    $r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'js/picker.js"></script>';
+    $r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'lib/picker/picker.js"></script>';
     if ($crayon instanceof Crayon) {
       $r .= '<form name="acs" action="?action=crayons_composant_store" method="post">'.
             '<input type="hidden" class="crayon-id" name="crayons[]" value="'.$crayon->key.'" />'."\n".
@@ -325,7 +325,7 @@ class AdminComposant {
   // Choix de couleur
   function ctlColor($nom, $couleur, $param) {
     $var = $this->fullname.$nom;
-    return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td><td><input type="text" id="'.$var.'" name="'.$var.'" size="8" maxlength="6" value="'.$couleur.'" class="forml" onKeyUp="javascript:document.getElementById(\'led_'.$var.'\').style.background=\'#\' + this.value;"></td><td><a   href="javascript:TCP.popup(document.forms[\'acs\'].elements[\''.$var.'\'],0);"><div id="led_'.$var.'" class="led" style="background: #'.$couleur.';" title="'._T('acs:choix_couleur').'"></div></a></td></tr></table></div>';
+    return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td><td><input type="text" id="'.$var.'" name="'.$var.'" size="8" maxlength="6" value="'.$couleur.'" class="forml" onKeyUp="javascript:document.getElementById(\'led_'.$var.'\').style.background=\'#\' + this.value;"></td><td><a   href="javascript:TCP.popup(document.forms[\'acs\'].elements[\''.$var.'\'],0, \''._DIR_ACS.'\');"><div id="led_'.$var.'" class="led" style="background: #'.$couleur.';" title="'._T('acs:choix_couleur').'"></div></a></td></tr></table></div>';
   }
 
   // Choix d'image
@@ -338,7 +338,7 @@ class AdminComposant {
     if ($param['label'] != 'non')
       $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'"  class="label">'._T($nom).'</label></td>';
     $r .= '<td><input type="text" name="'.$var.'"'.(is_array($s) ? ' title="'.$s[0].'x'.$s[1].'"' : '').' value="'.$image.'" size="40" class="forml"></td>';
-    $r .= '<td><a href="javascript:TFP.popup(document.forms[\'acs\'].elements[\''.$var.'\'], document.forms[\'acs\'].elements[\''.$var.'\'].value, \''.$c.'\');" title="'._T('acs:choix_image').'"><img src="'._DIR_PLUGIN_ACS.'img_pack/folder_image.png" class="icon" alt="'._T('acs:choix_image').'" /></a></td></tr></table></div>';
+    $r .= '<td><a href="javascript:TFP.popup(document.forms[\'acs\'].elements[\''.$var.'\'], document.forms[\'acs\'].elements[\''.$var.'\'].value, \''.$c.'\', \''._DIR_RACINE.'\');" title="'._T('acs:choix_image').'"><img src="'._DIR_ACS.'img_pack/folder_image.png" class="icon" alt="'._T('acs:choix_image').'" /></a></td></tr></table></div>';
     return $r;
   }
 
