@@ -88,9 +88,9 @@ function cfg_formulaire_charger($flux){
 		}
 
 		if (!$config->autoriser()) {
-			$editable = false;
+			$valeurs['editable'] = false;
 		} else {
-			$editable = true;
+			$valeurs['editable'] = true;
 		}
 		
 		$valeurs['_pipeline'] = array('editer_contenu_formulaire_cfg',
@@ -99,7 +99,7 @@ function cfg_formulaire_charger($flux){
 				'contexte'=>$valeurs,
 				'ajouter'=>$config->param['inline'])
 			);
-		$flux['data'] = array($editable, $valeurs);
+		$flux['data'] = $valeurs;
 		// return $valeurs; // retourner simplement les valeurs
 		#return array(true,$valeurs); // forcer l'etat editable du formulaire et retourner les valeurs
 
