@@ -10,12 +10,13 @@ function formulaires_article_gis_charger_dist(){
 		'titre'=>'',
 		'texte'=>'',
 		'lat'=>'',
-		'lonx'=>''
+		'lonx'=>'',
+		'editable'=>true
 	);
 
 	// si on a pas de rubrique, on n'edite pas le formulaire !
 	if (!$id_rubrique = lire_config('gis/rubrique_cible')){
-		return false;
+		$valeurs['editable']=false;
 	}
 	
 	// si l'on vien juste de poster le formlaire et qu'il a ete valide
