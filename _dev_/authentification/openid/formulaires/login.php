@@ -87,10 +87,10 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 	// Si on est connecte, envoyer vers la destination
 	// si on en a le droit, et sauf si on y est deja
 	verifier_visiteur();
-	$editable = false;
+	$valeurs['editable']=false;
 	if (_request('var_erreur')
 	OR !$GLOBALS['visiteur_session']['id_auteur']) 
-		$editable = true;
+		$valeurs['editable'] = true;
 
 	if (is_null($prive) ? is_url_prive($cible) : $prive) {
 		include_spip('inc/autoriser');
@@ -101,7 +101,7 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 	if ($loge) {
 		// on est a destination ?
 		if ($cible == self())
-			$editable = false;
+			$valeurs['editable'] = false;
 		else {
 			// sinon on y va
 			include_spip('inc/headers');
@@ -120,7 +120,7 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 		$valeurs['echec_cookie'] = ' ';
 
 
-	return array($editable,$valeurs);
+	return $valeurs;
 }
 
 function formulaires_login_verifier_dist($cible="",$login="",$prive=null){

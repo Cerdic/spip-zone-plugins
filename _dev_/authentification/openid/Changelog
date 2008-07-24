@@ -1,3 +1,5 @@
+0.8.4 (24 07 2008)
+- suivre la svn : changement de syntaxe de CVT sur charger()
 
 0.8.3 (15 07 2008)
 - edition privee de l'openid passe uniquement par des pipelines
