@@ -261,17 +261,22 @@
 	        <INCLURE{fond=formulaires/inscription2_echoppe_livraison}{env}>
         ]
 
+        [(#CONFIG{inscription2/publication}|=={on}|?{' ', ''})
+        <fieldset>
+	        <legend><:inscription2:publication:></legend>
+			<ol>
+	        <li class="editer_publication"">
+                <label for="publication"><:inscription2:publication:></label>
+	            <input type="checkbox" class="checkbox" name="publication" id="publication" [(#ENV{publication}|?{'checked="checked"'})] value="on" />
+	        </li>
+			</ol>	        
+        </fieldset>
+        ]
+
         [(#CONFIG{inscription2/newsletter}|=={on}|?{' ', ''})
 	        [(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_listes}{env}>]
         ]
 
-        [(#CONFIG{inscription2/publication}|=={on}|?{' ', ''})
-        <div>
-	        <:inscription2:publication:>
-	        <input type="checkbox" style="display:inline;float:none;width:15px" name="publication" id="publication" value="#ENV{publication}" />
-	        <br class="nettoyeur" />
-        </div>
-        ]
 
         [(#CONFIG{inscription2/domaines}|=={on}|?{' ', ''})
 	        [(#INCLURE{fond=formulaires/inscription2_form_domaines}{env})]
