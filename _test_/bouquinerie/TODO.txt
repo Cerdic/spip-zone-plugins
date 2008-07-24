@@ -1,0 +1,81 @@
+TODO.txt (fichier généré par le plugin Atelier 2008-07-24 19:10:46)
+-------------------------------------------------------------------
+
+* ajouter le format AbeBooks :
+- ajouter le format AbeBooks
+
+
+* Afficher un rapport lors d'une importation :
+
+
+
+* Parametrage du traitement des images lors d'une importation :
+etablir un paramètrage de la gestion des images dans l'interface de configuration
+
+- par url
+- par document distant
+- par download de l'image
+- interdire
+
+
+* les erreurs d'upload doivent donner une page bien formatée et pas un simple echo (erreur 302) :
+
+
+
+* externaliser toutes les chaines de caractères dans le dico :
+
+
+
+* SPIP 2.0 : mettre un fond de la couleur dominante dans les titre des cadres de gauche :
+
+
+
+* changer le texte de la page d'importation. :
+mettre un truc plus générique
+
+
+* ajouter des ":" pour les champs de exec_livres :
+
+
+
+* changer le texte de la page recherche de doublon :
+mettre un truc plus explicite
+
+
+* corriger les fautes d'orthographes :
+
+
+
+* lors de l'importation, proposez de créer les mots clés. :
+
+
+
+* page edition livre : il y a deux fois le champs annee_edition :
+
+
+
+* Permettre le choix du format lors d'une exportation :
+
+
+
+* afficher un rapport lors de l'exportation :
+
+
+
+* supprimer les répertoire de travail temporaire lors d'une exportation :
+
+
+
+* spip_livres_catalogues n'est pas mise à jour :
+lorsque l'on change de catalogue en edition de livre, la table spip_livres_catalogues n'est pas mise à jour.
+la fonction de suppresion de livre ne met pas a jour la table spip_livres_catalogues
+
+
+* Barre de navigation "catalogue suivant / precedent" :
+
+
+
+* [exportatio] au format bouquinerie, dans status, il y a "loggue" ! :
+mettre le statut du livren et non de l'auteur !
+
+
