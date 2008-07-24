@@ -7,11 +7,10 @@ function formulaires_annee_charger_dist($type, $id_objet){
 	$valeurs = array(
 		'annee'=>date('Y'),
 		'id_objet'=>$id_objet,
-		'type'=>$type
+		'type'=>$type,
+		'editable'=>true // forcer l'etat editable du formulaire
 	);
 	return $valeurs; // retourner simplement les valeurs
-	//return array(true,$valeurs); // forcer l'etat editable du formulaire et retourner les valeurs
-	//return array(false,$valeurs); // forcer l'etat non editable du formulaire et retourner les valeurs
 }
 
 function formulaires_annee_verifier_dist(){
