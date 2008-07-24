@@ -98,30 +98,18 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 
 	global $tables_principales;
-    
-    //charge les valeurs de chaque champs proposés dans le formulaire
-    foreach (lire_config('inscription2/') as $clef => $valeur) {
-        /* Il faut retrouver les noms des champ, 
-         * par défaut inscription2 propose pour chaque champ le cas champ_obligatoire
-         *  On retrouve donc les chaines de type champ_obligatoire
-         *  Ensuite on verifie que le champ est proposé dans le formulaire
-         *  Remplissage de $valeurs[]
-         */
-        //decoupe la clef sous le forme $resultat[0] = $resultat[1] ."_obligatoire"
-        //?: permet de rechercher la chaine sans etre retournée dans les résultats
-        preg_match('/^(.*)(?:_obligatoire)/i', $clef, $resultat);
-            
-        if ((!empty($resultat[1])) && (lire_config('inscription2/'.$resultat[1]) == 'on')) {
-            $valeurs[$resultat[1]] = _request($resultat[1]);
-        }
+    /* Génerer la liste des champs à traiter
+	 * champ => valeur formulaire
+	 */
+    foreach(inscription2_champs_formulaire() as $clef => $valeur) {
+        $valeurs[$valeur] = _request($valeur);  
     }
-    
+
     //Définir le login
     include_spip('balise/formulaire_inscription');
     if (!_request('login')) {
         $valeurs['login'] = test_login($valeurs['nom'], $valeurs['email']);
     }
-    
     
     //$valeurs contient donc tous les champs remplit ou non 
     
@@ -133,7 +121,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
     $clefs = array_fill_keys(array('login','nom','email','bio'),'');
     //extrait uniquement les données qui ont été proposées à la modification
     $val = array_intersect_key($valeurs,$clefs);
-                
+
     //inserer les données dans spip_auteurs -- si $id_auteur mise à jour autrement nouvelle entrée
     if (is_numeric($id_auteur)) {
         $where = 'id_auteur = '.$id_auteur;
@@ -216,7 +204,6 @@ function inscription2_champs_formulaire() {
     }
 
     return $valeurs;
-
 }
 
 
