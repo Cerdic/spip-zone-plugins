@@ -15,6 +15,8 @@ Wrap (encapsulate) widgets for preview or Ajax call
 <html>
 <head>
 <meta name="robots" content="none">
+<script src="?page=jquery.js" type="text/javascript"></script>
+<script src="#CHEMIN{javascript/layer.js}" type="text/javascript"></script>
 <?php // Widget's style is not included yet in above css if just activated
 if (isset($_GET['var_mode']) && ($_GET['var_mode'] == "recalcul")) { // preview
   include_spip('inc/acs_insert_head');
@@ -26,8 +28,6 @@ if ($css) : ?>
 <?php endif; ?>
 [(#REM) Global ACS generated stylesheet]
 <link rel="stylesheet" href="spip.php?page=habillage.css[&v=(#ACS_DERNIERE_MODIF)]" type="text/css" media="projection, screen, tv" />
-<script src="?page=jquery.js" type="text/javascript"></script>
-<script src="#CHEMIN{javascript/layer.js}" type="text/javascript"></script>
 </head>
 <body><?php
 // Use preview if exist, or component itself if not.

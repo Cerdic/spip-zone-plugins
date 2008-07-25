@@ -19,21 +19,20 @@
   </param>
 
   <variable>
-    <nom>FondColor</nom>
+    <nom>Fond</nom>
     <type>color</type>
   </variable>
   <variable>
-    <nom>FondColor2</nom>
+    <nom>Fond2</nom>
     <type>color</type>
   </variable>
   <variable>
-    <nom>FondColor3</nom>
+    <nom>Fond3</nom>
     <type>color</type>
   </variable>
   <variable>
-    <nom>FondColorHover</nom>
+    <nom>FondHover</nom>
     <type>color</type>
-    <valeur>ffdf00</valeur>
   </variable>
   <variable>
     <nom>Titre</nom>
@@ -43,7 +42,7 @@
     <valeur>oui</valeur>
   </variable>
   <variable>
-    <nom>TitreFondColor</nom>
+    <nom>TitreFond</nom>
     <type>color</type>
   </variable>
   <variable>
@@ -53,14 +52,13 @@
     <label>non</label>
   </variable>
   <variable>
-    <nom>BordColor</nom>
+    <nom>Bord</nom>
     <type>color</type>
     <valeur>acsFondBordColor</valeur>
   </variable>
   <variable>
-    <nom>SepColor</nom>
+    <nom>Sep</nom>
     <type>color</type>
-    <valeur>acsFondBordColor</valeur>
   </variable>
   <variable>
     <nom>Align</nom>
