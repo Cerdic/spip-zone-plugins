@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description' => 'Petit formulaire de saisie d\'une recherche.',
 'help' => 'G&egrave;re le style du formulaire "formulaires/recherche.html" du squelette actif ou du squelette par d&eacute;faut. Le moteur de recherche intégré de spip doit &ecirc;tre actif.',
 
-'BordColor' => 'Bord',
-'OngletColor' => 'Onglet'
+'Bord' => 'Bord',
+'Onglet' => 'Onglet'
 );
 ?>

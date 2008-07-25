@@ -17,7 +17,7 @@
   <variable>
     <nom>TitreFondColor</nom>
     <type>color</type>
-    <valeur>acsRubnavFondColor</valeur>
+    <valeur>acsRubnavFond</valeur>
   </variable>
   <variable>
     <nom>TitreFondImage</nom>
@@ -28,12 +28,12 @@
   <variable>
     <nom>HeadFondColor</nom>
     <type>color</type>
-    <valeur>acsRubnavFondColor</valeur>
+    <valeur>acsRubnavFond</valeur>
   </variable>
   <variable>
     <nom>BordColor</nom>
     <type>color</type>
-    <valeur>acsRubnavBordColor</valeur>
+    <valeur>acsRubnavBord</valeur>
   </variable>
   <variable>
     <nom>BordLargeur</nom>
@@ -48,7 +48,7 @@
   <variable>
     <nom>NotThisMonth</nom>
     <type>color</type>
-    <valeur>acsRubnavFondColorHover</valeur>
+    <valeur>acsRubnavFondHover</valeur>
   </variable>
   <variable>
     <nom>ThisMonth</nom>

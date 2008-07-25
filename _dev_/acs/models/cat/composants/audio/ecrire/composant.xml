@@ -22,7 +22,7 @@
   <variable>
     <nom>BtnOn</nom>
     <type>color</type>
-    <valeur>acsRubnavBordColor</valeur>
+    <valeur>acsRubnavBord</valeur>
   </variable>
 
   <variable>
@@ -44,6 +44,6 @@
   <variable>
     <nom>ProgressBarBord</nom>
     <type>color</type>
-    <valeur>acsRubnavBordColor</valeur>
+    <valeur>acsRubnavBord</valeur>
   </variable>
 </composant>

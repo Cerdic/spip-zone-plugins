@@ -20,12 +20,12 @@
   </param>
 
   <variable>
-    <nom>BordColor</nom>
+    <nom>Bord</nom>
     <type>color</type>
     <valeur>acsFondBordColor</valeur>
   </variable>
   <variable>
-    <nom>OngletColor</nom>
+    <nom>Onglet</nom>
     <type>color</type>
     <valeur>acsFondColor</valeur>
   </variable>
