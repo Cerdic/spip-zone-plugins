@@ -134,7 +134,7 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.'
 	'decoupe:nom' => 'In bladzijdes en tabben snijden',
 	'desactiver_flash:description' => 'Schaft de onderwerpen flash van de bladzijdes van uw plaats af en vervangt ze door de verenigde alternatieve inhoud.',
 	'desactiver_flash:nom' => 'De activering terugtrekken van de onderwerpen flash',
-	'detail_balise_etoilee' => '<NEW>{{Attention}} : V&eacute;rifiez bien l\'utilisation faite par vos squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outil ne s\'appliqueront pas sur : @bal@.',
+	'detail_balise_etoilee' => '{{Aandacht}}: Controleert goed het gebruik dat door uw skeletten van de met sterren bezaaide bakens wordt gemaakt. De behandelingen van dit werktuig zullen niet op van toepassing zijn : @bal@.',
 	'detail_fichiers' => 'Bestanden :',
 	'detail_inline' => 'Code inline :',
 	'detail_jquery1' => '{{Aandacht}}: dit werktuig maakt plugin {jQuery} het noodzakelijk om met deze versie van SPIP te werken.',
@@ -289,15 +289,15 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	// M
 	'mailcrypt:description' => '<NEW>Masque tous les liens de courriels pr&eacute;sents dans vos textes en les rempla&ccedil;ant par un lien Javascript permettant quand m&ecirc;me d\'activer la messagerie du lecteur. Cet outil antispam tente d\'emp&ecirc;cher les robots de collecter les adresses &eacute;lectroniques laiss&eacute;es en clair dans les forums ou dans les balises de vos squelettes.',
 	'mailcrypt:nom' => '<NEW>MailCrypt',
-	'modifier_vars' => '<NEW>Modifier ces @nb@ param&egrave;tres',
+	'modifier_vars' => 'Dit @nb@ parameters wijzigen',
 
 	// N
-	'no_IP:description' => '<NEW>D&eacute;sactive le m&eacute;canisme d\'enregistrement automatique des adresses IP des visiteurs de votre site par soucis de confidentialit&eacute; : SPIP ne conservera alors plus aucun num&eacute;ro IP, ni temporairement lors des visites (pour g&eacute;rer les statistiques ou alimenter spip.log), ni dans les forums (responsabilit&eacute;).',
+	'no_IP:description' => 'Deactiveer het bezoekers IP adressen automatische registratie van uw site uit zorg voor vertrouwelijkheid: SPIP zal dan geen enkel nummer meer IP, noch tijdelijk bij de bezoeken (behouden om de statistieken te beheren of spip.log te voeden), noch in de forums (verantwoordelijkheid).',
 	'no_IP:nom' => 'Geen IP opslag',
 	'nouveaux' => 'Nieuw',
 
 	// O
-	'orientation:description' => '<NEW>3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.',
+	'orientation:description' => '3 nieuwe criteria voor uw skeletten: <code>{portret}</code>, <code>{vierkant}</code> en <code>{landschap}</code>. Ideaal voor de foto\'s indeling in functie van hun vorm.',
 	'orientation:nom' => 'De beelden ori&euml;ntatie',
 	'outil_actif' => 'Actief werktuig',
 	'outil_activer' => 'Activeren',
@@ -333,10 +333,10 @@ Als u plugin r&eacute;initialiserd door op een pakijs te klikken, reconfiguratie
 	'pack_installe' => 'Het invoeren van een configuratie pakijs',
 	'pack_titre' => 'Huidige configuratie',
 	'par_defaut' => 'Per gebrek',
-	'paragrapher2:description' => '<NEW>La fonction SPIP <code>paragrapher()</code> ins&egrave;re des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont d&eacute;pourvus de paragraphes. Afin de g&eacute;rer plus finement vos styles et vos mises en page, vous avez la possibilit&eacute; d\'uniformiser l\'aspect des textes de votre site.[[%paragrapher%]]',
-	'paragrapher2:nom' => '<NEW>Paragrapher',
+	'paragrapher2:description' => 'De <code>paragrapher()</code> SPIP functie neemt bakens &lt;p&gt; en &lt;/p&gt; in alle teksten die zonder paragrafen zijn. Teneinde fijner uw stijlen en uw opmaak te beheren, hebt u de mogelijkheid om het aspect van de teksten van uw site uniform te maken.',
+	'paragrapher2:nom' => 'Paragraaf',
 	'pipelines' => 'Gebruikte pijpleidingen&nbsp;:',
-	'pucesli:description' => '<NEW>Remplace les puces &laquo;-&raquo; (tiret simple) des articles par des listes not&eacute;es &laquo;-*&raquo; (traduites en HTML par : &lt;ul>&lt;li>&hellip;&lt;/li>&lt;/ul>) et dont le style peut &ecirc;tre personnalis&eacute; par css.',
+	'pucesli:description' => 'Vervangt de chips &laquo;-&raquo; (eenvoudig koppelteken) van de artikelen door genoteerde lijsten &laquo;-*&raquo; (in HTML door worden vertaald: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) en waarvan de stijl per css verpersoonlijkt kan worden.',
 	'pucesli:nom' => 'Mooie chips',
 
 	// R
@@ -346,16 +346,16 @@ Als u plugin r&eacute;initialiserd door op een pakijs te klikken, reconfiguratie
 	'rss_attente' => 'Wachten RSS...',
 	'rss_desactiver' => '&laquo; de Revisies van het Mes Zwitserland &raquo; deactiveren ',
 	'rss_edition' => 'Flux RSS worden bijgewerkt die :',
-	'rss_titre' => '<NEW>&laquo;&nbsp;Het Zwitserland Mes&nbsp;&raquo; in ontwikkeling :',
+	'rss_titre' => '&laquo;&nbsp;Het Zwitserland Mes&nbsp;&raquo; in ontwikkeling :',
 	'rss_var' => 'De revisies van het Zwitserland Mes',
 
 	// S
 	'sauf_admin' => 'Iedereen, behalve de beheerders',
-	'set_options:description' => '<NEW>S&eacute;lectionne d\'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.[[%radio_set_options4%]]',
+	'set_options:description' => 'Selecteert automatisch het soort particuliere interface (vereenvoudigd of geavanceerd) voor alle redacteuren reeds bestaand of om te komen en schaft de kleine ikonen hoofdband overeenkomstige af.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Soort particuliere interface',
 	'sf_amont' => 'Voorafgaand',
 	'sf_tous' => 'Iedereen',
-	'simpl_interface:description' => '<NEW>D&eacute;sactive le menu de changement rapide de statut d\'un article au survol de sa puce color&eacute;e. Cela est utile si vous cherchez &agrave; obtenir une interface priv&eacute;e la plus d&eacute;pouill&eacute;e possible afin d\'optimiser les performances client.',
+	'simpl_interface:description' => 'Deactiveer het menu van snelle statuut verandering van een artikel aan het overzicht van zijn kleurrijke chip. Dat is nuttig als u probeert om het meest ontdaan mogelijke van particuliere een interface te verkrijgen ten einde de prestaties klant te optimaliseren.',
 	'simpl_interface:nom' => 'Vermindering van de particuliere interface',
 	'smileys:aide' => 'Smileys : @liste@',
 	'smileys:description' => '<NEW>Ins&egrave;re des smileys dans tous les textes o&ugrave; apparait un raccourci du genre <acronym>:-)</acronym>. Id&eacute;al pour les  forums.
@@ -399,14 +399,14 @@ Listez ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par
 	'titre' => 'Het Zwitserland Mes',
 	'titre_tests' => 'Het Zwitserland Mes - Tests Bladzijde…',
 	'tous' => 'Iedereen',
-	'toutes_couleurs' => '<NEW>De 36 kleuren van de stijlen css :@_CS_EXEMPLE_COULEURS@',
+	'toutes_couleurs' => 'De 36 kleuren van de css stijlen :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Meertalige blokken&nbsp;: <b><:trad:></b>',
 	'toutmulti:description' => '<NEW>Introduit le raccourci <code><:un_texte:></code> pour introduire librement des blocs multi-langues dans un article.
 _ La fonction SPIP utilis&eacute;e est : <code>_T(\'un_texte\', $flux)</code>.
 _ N\'oubliez pas de v&eacute;rifier que \'un_texte\' est bien d&eacute;fini dans les fichiers de langue.',
-	'toutmulti:nom' => '<NEW>Blocs multilingues',
+	'toutmulti:nom' => 'Meertalige blokken',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
-	'travaux_prochainement' => '<NEW>Deze site zal zeer binnenkort hersteld worden.
+	'travaux_prochainement' => 'Deze site zal zeer binnenkort hersteld worden.
 _ Bedankt voor uw begrip.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
 	'tri_articles:description' => '<NEW>En naviguant sur le site en partie priv&eacute;e ([->./?exec=auteurs]), choisissez ici le tri &agrave; utiliser pour afficher vos articles &agrave; l\'int&eacute;rieur de vos rubriques.
@@ -439,29 +439,29 @@ _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l\'Imprimer
 	'typo_exposants:nom' => '<NEW>Exposants typographiques',
 
 	// U
-	'url_html' => '<NEW>html@_CS_ASTER@',
-	'url_page' => '<NEW>page',
-	'url_propres' => '<NEW>propres@_CS_ASTER@',
-	'url_propres-qs' => '<NEW>propres-qs',
-	'url_propres2' => '<NEW>propres2@_CS_ASTER@',
-	'url_standard' => '<NEW>standard',
+	'url_html' => 'html@_CS_ASTER@',
+	'url_page' => 'bladzijde',
+	'url_propres' => 'proper@_CS_ASTER@',
+	'url_propres-qs' => 'propers-qs',
+	'url_propres2' => 'proper2@_CS_ASTER@',
+	'url_standard' => 'standaard',
 
 	// V
-	'validez_page' => '<NEW>Pour acc&eacute;der aux modifications :',
-	'variable_vide' => '<NEW>(Vide)',
-	'vars_modifiees' => '<NEW>Les donn&eacute;es ont bien &eacute;t&eacute; modifi&eacute;es',
-	'version_a_jour' => '<NEW>Votre version est &agrave; jour.',
-	'version_distante' => '<NEW>Version distante...',
-	'version_nouvelle' => '<NEW>Nouvelle version : @version@',
-	'verstexte:description' => '<NEW>2 filtres pour vos squelettes, permettant de produire des pages plus l&eacute;g&egrave;res.
-_ version_texte : extrait le contenu texte d\'une page html &agrave; l\'exclusion de quelques balises &eacute;l&eacute;mentaires.
-_ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du texte plein.',
-	'verstexte:nom' => '<NEW>Version texte',
-	'votre_choix' => '<NEW>Votre choix :',
+	'validez_page' => 'Om de wijzigingen te bereiken :',
+	'variable_vide' => '(Leegte)',
+	'vars_modifiees' => 'De gegevens werden wel degelijk gewijzigd',
+	'version_a_jour' => 'Uw versie is aan dag.',
+	'version_distante' => 'Verwijderde versie...',
+	'version_nouvelle' => 'Nieuwe versie : @version@',
+	'verstexte:description' => '2 filters voor uw skeletten, die het mogelijk maken om lichtere bladzijdes te produceren.
+_ de tekst_versie : uitgetrokken de inhoud tekst van een HTML bladzijde met uitsluiting van enkele elementaire bakens.
+_ volle_tekst_versie : uitgetrokken de inhoud tekst van een HTML bladzijde om van de volle tekst terug te geven.',
+	'verstexte:nom' => 'Tekst versie',
+	'votre_choix' => 'Uw keus :',
 
 	// X
 	'xml:description' => '<NEW>Active le validateur xml pour l\'espace public tel qu\'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitul&eacute; &laquo;&nbsp;Analyse XML&nbsp;&raquo; est ajout&eacute; aux autres boutons d\'administration.',
-	'xml:nom' => '<NEW>Validateur XML'
+	'xml:nom' => 'XML Validatie'
 );
 
 ?>

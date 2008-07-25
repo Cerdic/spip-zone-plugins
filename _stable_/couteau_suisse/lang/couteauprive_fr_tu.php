@@ -62,11 +62,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'categ:admin' => '1. Administration',
-	'categ:divers' => '<MODIF>6. Divers',
-	'categ:public' => '<MODIF>4. Affichage public',
-	'categ:spip' => '<MODIF>5. Balises, filtres, crit&egrave;res',
-	'categ:typo-corr' => '<MODIF>2. Am&eacute;liorations des textes',
-	'categ:typo-racc' => '<MODIF>3. Raccourcis typographiques',
+	'categ:divers' => '60. Divers',
+	'categ:interface' => '10. Interface priv&eacute;e',
+	'categ:public' => '40. Affichage public',
+	'categ:spip' => '50. Balises, filtres, crit&egrave;res',
+	'categ:typo-corr' => '20. Am&eacute;liorations des textes',
+	'categ:typo-racc' => '30. Raccourcis typographiques',
 	'certaines_couleurs' => 'Seules les balises d&eacute;finies ci-dessous@_CS_ASTER@ :',
 	'chatons:aide' => 'Chatons : @liste@',
 	'chatons:description' => 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <code>:nom</code>.
@@ -168,7 +169,7 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 	'filets_sep:description' => 'Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de SPIP.
 _ La syntaxe est : "__code__", o&ugrave; "code" repr&eacute;sente soit le num&eacute;ro d’identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d\'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Filets de S&eacute;paration',
-	'filtrer_javascript:description' => '<MODIF>Pour g&eacute;rer le javascript dans les articles, trois modes sont disponibles :
+	'filtrer_javascript:description' => 'Pour g&eacute;rer l\'insertion de javascript dans les articles, trois modes sont disponibles :
 - <i>jamais</i> : le javascript est refus&eacute; partout
 - <i>d&eacute;faut</i> : le javascript est signal&eacute; en rouge dans l\'espace priv&eacute;
 - <i>toujours</i> : le javascript est accept&eacute; partout.
@@ -264,6 +265,7 @@ _ • [De tout le plugin->@reset@]
 	'label:style_p' => 'Ton style :',
 	'label:suite_introduction' => 'Points de suite :',
 	'label:titre_travaux' => 'Titre du message :',
+	'label:tri_articles' => 'Ton choix :',
 	'label:url_glossaire_externe2' => 'Lien vers le glossaire externe :',
 	'liens_en_clair:description' => 'Met &agrave; ta disposition le filtre : \'liens_en_clair\'. Ton texte contient probablement des liens hypertexte qui ne sont pas visibles lors d\'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre \'cs=print\' ou \'page=print\' dans l\'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.',
 	'liens_en_clair:nom' => 'Liens en clair',
@@ -409,6 +411,15 @@ _ N\'oublies pas de v&eacute;rifier que \'un_texte\' est bien d&eacute;fini dans
 	'travaux_prochainement' => 'Ce site sera r&eacute;tabli tr&egrave;s prochainement.
 _ Merci de votre compr&eacute;hension.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
+	'tri_articles:description' => 'En naviguant sur le site en partie priv&eacute;e ([->./?exec=auteurs]), choisis ici le tri &agrave; utiliser pour afficher tes articles &agrave; l\'int&eacute;rieur de tes rubriques.
+
+Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL \'ORDER BY\' : n\'utilise le tri personnalis&eacute; que si tu sais ce que tu fait (champs disponibles : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
+[[%tri_articles%]][[->%tri_perso%]]',
+	'tri_articles:nom' => 'Tri des articles',
+	'tri_modif' => 'Tri sur la date de modification (ORDER BY date_modif DESC)',
+	'tri_perso' => 'Tri SQL personnalis&eacute;, ORDER BY suivi de :',
+	'tri_publi' => 'Tri sur la date de publication (ORDER BY date DESC)',
+	'tri_titre' => 'Tri sur le titre (ORDER BY 0+titre,titre)',
 	'type_urls:description' => '@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'acc&egrave;s aux pages de ton site :
 <div style="font-size:90%; margin:0 2em;">
 - {{page}} : la valeur par d&eacute;faut pour SPIP v1.9x : <code>/spip.php?article123</code>.
