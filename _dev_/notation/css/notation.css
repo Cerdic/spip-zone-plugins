@@ -1,50 +1,18 @@
 /**
 * Plugin Notation
-* par JEM (jean-marc.viglino@ign.fr)
+* par JEM (jean-marc.viglino@ign.fr) et b_b
 * 
-* Copyright (c) 2007
+* Copyright (c) 2008
 * Logiciel libre distribue sous licence GNU/GPL.
 *  
 * Styles utilises par le plugin
 *  
 **/
-/* Le formulaire
-*/
-.formulaire_notation
-{	display:inline;
-	border:0;
-	padding:0;
-	margin:0;
-}
 
-/* Le texte note + nb votes
-*/
-.formulaire_notation .note
-{	color:Purple;
-	padding:0;
-	margin:0 5px 0 5px;
-	position:relative;
-	top:-2px;
-}
-
-/* Le bouton du formulaire
-*/
-.formulaire_notation input
-{	height:18px;
-	font-size:12px;
-	text-align:center;
-	vertical-align:middle;
-	border:1px outset #AAE;
-	background-color:#EEF;
-	color:#005;
-	margin:0;
-	padding:0;
-}
+.formulaire_notation .note{ padding:0; margin:0 5px; }
 
 /* Pour affichage dans les modeles
 */
-.notation
-{}
 
 .notation .note
 {	color:Purple;
@@ -70,8 +38,7 @@
 }
 
 .notation .auteurs
-{ /* width:100%; */
-  border:1px solid #AAE;
+{ border:1px solid #AAE;
   border-bottom:0;
   border-right:0;
 }

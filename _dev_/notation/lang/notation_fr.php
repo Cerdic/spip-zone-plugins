@@ -1,9 +1,9 @@
 <?php
 /**
-* Plugin Notation v.0.1
-* par JEM (jean-marc.viglino@ign.fr)
+* Plugin Notation v.0.5
+* par JEM (jean-marc.viglino@ign.fr) / b_b
 *
-* Copyright (c) 2007
+* Copyright (c) 2008
 * Logiciel libre distribue sous licence GNU/GPL.
 *
 * Contextualisation des messages
@@ -29,17 +29,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'detruire' => '<strong style="color:red">Attention, cette commande va d&eacute;truire les tables du plugin !</strong><br />Vous ne devez l\'utiliser que si vous voulez d&eacute;activer le plugin...',
 
 	// Affichage
-	'vos_notes' => 'Vos 5 meilleurs articles',
+	'vos_notes' => 'Vos 5 meilleurs notes',
 	'topten' => 'Les 10 meilleures notes',
 	'toptenp' => 'Les 10 meilleures notes (pond&eacute;r&eacute;es)',
-	'topnb' => 'Les 10 articles les plus not&eacute;s',
+	'topnb' => 'Les 10 objets les plus not&eacute;s',
+	'objets' => 'Objets',
 	'articles' => 'Articles',
 	'notes' => 'Notes',
 	'notesp' => 'Notes ponder&eacute;es',
 	'nbvotes' => 'Nb&nbsp;votes',
-	'nbvotes_moyen' => 'Nombre de votes moyens pas article : ',
+	'nbvotes_moyen' => 'Nombre de votes moyens par objet : ',
 	'nbvotes_total' => 'Nombre de votes total sur le site : ',
-	'nbarticle_note' => 'Nombre d\'articles ayant un vote : ',
+	'nbobjets_note' => 'Nombre d\'objets ayant une note : ',
 
   // Parametrage
 	'param' => 'Param&eacute;trage',

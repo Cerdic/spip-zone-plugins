@@ -1,31 +1,35 @@
 <plugin>
-  <nom>Notation des articles</nom>
-  <auteur>JEM</auteur>
-  <version>0.4</version>
-  <version_base>0.4.0</version_base>
-  <etat>test</etat>
+  <nom>Notation</nom>
+  <auteur>JEM - b_b</auteur>
+  <version>0.5</version>
+  <version_base>0.5.0</version_base>
+  <etat>dev</etat>
   <prefix>notation</prefix>
   <description>
-    <b>Attribuer une note aux articles Spip</b><hr/>
-    D&eacute;finition de la balise <code>#NOTATION</code> permettant 
-    la saise et l'affichage de la note dans un article.<br />
+    <b>Attribuer une note aux &eacute;l&eacute;ments de Spip</b><hr/>
+    D&eacute;finition de la balise <code>#FORMULAIRE_NOTATION</code> permettant 
+    la saise et l'affichage de la note d'un &eacute;l&eacute;ment de boucle.<br />
     D&eacute;finition des mod&egrave;les <em>&gt;autxx|notation|id_article=yy&lt;</em> 
     qui donne la note de l'auteur <i>xx</i> pour l'article <i>yy</i>
     et <em>&gt;notation|topten&lt;</em> qui donne les 10 meilleurs articles.
   </description>
   <icon>img_pack/note.gif</icon>
-  <fonctions>notation.php</fonctions>
-  <fonctions>balise/notation_balises.php</fonctions>
+  <fonctions>notation_fonctions.php</fonctions>
   <options>notation_options.php</options>
-  <install>base/notation_init.php</install>
+  <install>base/notation_upgrade.php</install>
 	<pipeline>
         <nom>ajouter_boutons</nom>
         <action>ajouterBoutons</action>
-        <inclure>notation.php</inclure>
+        <inclure>notation_fonctions.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>head.php</inclure>
+		<inclure>notation_pipeline.php</inclure>
+	</pipeline>
+		<pipeline>
+		<nom>affichage_final</nom>
+		<action>affichage_final</action>
+		<inclure>notation_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
