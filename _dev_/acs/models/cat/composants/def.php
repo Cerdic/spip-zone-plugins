@@ -5,27 +5,27 @@
 #
 # Copyright Daniel FAIVRE, 2007-2008
 # Copyleft: licence GPL - Cf. LICENCES.txt
-
-// On initialise les valeurs des variables du modèle 
-
+#
 /**
  *  ACS model default values
+ * On initialise les valeurs des variables du modèle 
  */
 $def = array(
 	'acsAgendaUse' => 'oui',
 	'acsArticlesUse' => 'oui',
-  'acsAudioUse' => 'oui',
+	'acsAudioUse' => 'oui',
+	'acsAuteursUse' => 'oui',
 	'acsBanniereUse' => 'oui',
 	'acsBanniereUseLogo' => 'oui',
 	'acsBandeauUse' => 'oui',
 	'acsBandeauContenu' => 'Under construction',
-  'acsCol1Use' => 'oui',
-  'acsCol11' => 'recherche',
+	'acsCol1Use' => 'oui',
+	'acsCol11' => 'recherche',
 	'acsCol12' => 'rubnav',
-  'acsCol13' => 'forums',
-  'acsCol15' => 'syndic',
-  'acsCol3Use' => 'oui',
-  'acsCol31' => 'agenda',
+	'acsCol13' => 'forums',
+	'acsCol15' => 'syndic',
+	'acsCol3Use' => 'oui',
+	'acsCol31' => 'agenda',
 	'acsCol32' => 'playlist',
 	'acsFondUse' => 'oui',
 	'acsFondColor' => 'f4f4f4',
@@ -36,12 +36,12 @@ $def = array(
 	'acsFondLink' => '00008d',
 	'acsFondlinkHover' => '0000f4',
 	'acsForumsUse' => 'oui',
-  'acsEditoUse' => 'oui',
-  'acsEnteteUse' => 'oui',
-  'acsEntete1' => 'banniere',
-  'acsEntete2' => 'bandeau',
-  'acsEnteteFavicon' => 'favicon.ico',
-  'acsOngletsUse' => 'oui',
+	'acsEditoUse' => 'oui',
+	'acsEnteteUse' => 'oui',
+	'acsEntete1' => 'banniere',
+	'acsEntete2' => 'bandeau',
+	'acsEnteteFavicon' => 'favicon.ico',
+	'acsOngletsUse' => 'oui',
 	'acsOnglets1' => 'sommaire',
 	'acsOnglets2' => 'resume',
 	'acsOnglets3' => 'plan',
@@ -54,7 +54,6 @@ $def = array(
 	'acsOursUse' => 'oui',
 	'acsPiedUse' => 'oui',
 	'acsPied1' => 'ours',
-  'acsPlayListUse' => 'no',
 	'acsRechercheUse' => 'oui',
 	'acsRubnavUse' => 'oui',
 	'acsRubnavFond' => 'f4f4ff',
@@ -62,20 +61,20 @@ $def = array(
 	'acsRubnavFond3' => 'e4e4ff',
 	'acsRubnavFondHover' => 'f8f8df',
 	'acsRubnavSep' => 'dfdfdf',
-  'acsSyndicUse' => 'oui',
+	'acsSyndicUse' => 'oui',
 	'acsVideoUse' => 'oui',
 
-  'acs' => '',
-  'acs' => '',
-  'acs' => '',
-  'acs' => '',
-  'acs' => '',
-  'acs' => '',
-  'acs' => '',
-  'acs' => '',
-  'acs' => '',
-  'acsDerniereModif' => time(),
-  'acsModel' => 'cat',
+	'acs' => '',
+	'acs' => '',
+	'acs' => '',
+	'acs' => '',
+	'acs' => '',
+	'acs' => '',
+	'acs' => '',
+	'acs' => '',
+	'acs' => '',
+	'acsDerniereModif' => time(),
+	'acsModel' => 'cat',
 
 );
 ?>
