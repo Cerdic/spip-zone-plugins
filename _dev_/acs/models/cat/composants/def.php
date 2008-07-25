@@ -18,7 +18,7 @@ $def = array(
 	'acsBanniereUse' => 'oui',
 	'acsBanniereUseLogo' => 'oui',
 	'acsBandeauUse' => 'oui',
-	'acsBandeauContenu' => 'Under construction',
+	'acsBandeauContenu' => '<a href="http://acs.geomaticien.org">ACS</a>: pour configurer ce site, <a href="ecrire/?exec=acs&onglet=composants&composant=fond">cliquez ici</a>.',
 	'acsCol1Use' => 'oui',
 	'acsCol11' => 'recherche',
 	'acsCol12' => 'rubnav',
