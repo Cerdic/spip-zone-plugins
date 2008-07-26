@@ -44,7 +44,7 @@
   </pipeline>
   <pipeline>
 		<nom>insert_head</nom>
-		<inclure>inc/acs_insert_head.php</inclure>
+		<inclure>inc/acs_pipeline_public.php</inclure>
 	</pipeline>
 
 </plugin>

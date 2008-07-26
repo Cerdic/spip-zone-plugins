@@ -1,3 +1,5 @@
+/* debut crayon.css originale */
+
 em.crayon-img-changed {
 	display: none;
 }
@@ -43,10 +45,6 @@ em.crayon-edit, em.crayon-crayon, em.crayon-img-changed {
 	width: 20px;
 }
 
-.pinceau em.crayon-crayon {
-  background: url(images/pinceau.png) no-repeat;
-}
-
 .crayon-icones em.crayon-searching {
 	background: url(images/searching.gif) no-repeat;
 	height: 13px;
@@ -89,4 +87,14 @@ em.crayon-edit, em.crayon-crayon, em.crayon-img-changed {
 	background:transparent url("images/resizer.png") no-repeat scroll 45%;
 	cursor:s-resize;
 	font-size:0.1em;
+}
+/* fin crayon.css originale */
+
+/* Styles des pinceaux ACS */
+.pinceau em.crayon-crayon {
+  background: url(images/pinceau.png) no-repeat;
+}
+
+.pinceau em.crayon-img-changed {
+	display: none;
 }

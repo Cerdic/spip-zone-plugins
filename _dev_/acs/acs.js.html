@@ -1,11 +1,14 @@
 [(#REM)
 
-  Charger la librairie ACS, ses dépendances, et les javascripts des composants
+  Charger la librairie ACS, ses dependances, et les javascripts des composants
+  
+  Ne PAS compacter les js inclus dans ce fichier : c'est lui qu'on doit compacter
 
 ]#CACHE{7*24*3600,cache-client}
 #HTTP_HEADER{'Content-Type: text/javascript'}
 
-[(#HEADER_COMPOSANTS{javascript}|compacte_js)]
+[(#INCLURE{javascript/dragdrop_interface.js})]
+[(#HEADER_COMPOSANTS{javascript})]
 
 /**
  * Transforme une url spip pour "wrapper" un composant (requis pour Ajax)

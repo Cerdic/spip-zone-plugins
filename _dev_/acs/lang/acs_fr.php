@@ -2,7 +2,27 @@
 // Ceci est un fichier langue de SPIP sp&eacute;cifique au plugin ACS
   include_spip('lib/composant/composants_ajouter_langue');
 
-// Lang file is build with components public lang files
+// traductions génériques utilisées dans la partie privée ET par les pinceaux (crayons des composants)
+$traductions_acs = array(
+  'use' => 'Utiliser',
+
+  'bordlargeur' => 'largeur de bordure (en pixels)',
+  'bordstyle' => 'style de bordure',
+  'parent' => 'valeur par d&eacute;faut',
+  'none' => 'pas de bordure, &eacute;quivaut à border-width:0',
+  'solid' => 'trait plein',
+  'dashed' => 'tirets',
+  'dotted' => 'pointill&eacute;s',
+  'double' => 'double traits pleins',
+  'groove' => 'grav&eacute; (inverse de ridge)',
+  'ridge' => 'sort de la page (inverse de groove)',
+  'inset' => 'incrust&eacute; dans la page (inverse de outset)',
+  'outset' => 'extrud&eacute; de la page (inverse de inset)'
+  
+);
+
+
+// Lang file is build with components lang files
 if (_DIR_RESTREINT != '') {
   // Ajoute les fichiers de langue des composants (partie publique)
   $GLOBALS[$GLOBALS['idx_lang']] = array( // Espace public
@@ -12,8 +32,10 @@ if (_DIR_RESTREINT != '') {
   'err_del_file' => 'Impossible d\'effacer le fichier',
   );
   composants_ajouter_langue();
-  if (_request('action') == 'crayons_html') // On ajoute les traductions pour les crayons
-    composants_ajouter_langue('ecrire');  
+  if (_request('action') == 'crayons_html') { // On ajoute les traductions pour les crayons
+    $GLOBALS[$GLOBALS['idx_lang']] = array_merge($traductions_acs, $GLOBALS[$GLOBALS['idx_lang']]);
+    composants_ajouter_langue('ecrire');
+  }
 }
 else {
   $GLOBALS[$GLOBALS['idx_lang']] = array( // Espace ecrire
@@ -81,7 +103,6 @@ Pour configurer le site, cliquez sur l\'onglet "Composants" et personnalisez les
   'acsDerniereModif' => 'Mis &agrave; jour le',
 
   'dev_infos' => 'Infos d&eacute;veloppeur',
-  'use' => 'Utiliser',
   'si_composant_actif' => 'Si le composant est utilis&eacute;',
   'composant_non_utilise' => 'Composant non utilis&eacute;',
   'references_autres_composants' => 'Valeurs par d&eacute;faut',
@@ -92,19 +113,6 @@ Pour configurer le site, cliquez sur l\'onglet "Composants" et personnalisez les
   'err_aucun_composant' => 'Aucun composant actif pour ',
   'spip_trop_ancien' => 'Ne fonctionne pas correctement avec spip < @min@',
   'spip_non_supporte' => 'Non testé avec spip > @max@',
-
-  'bordlargeur' => 'largeur de bordure (en pixels)',
-  'bordstyle' => 'style de bordure',
-  'parent' => 'valeur par d&eacute;faut',
-  'none' => 'pas de bordure, &eacute;quivaut à border-width:0',
-  'solid' => 'trait plein',
-  'dashed' => 'tirets',
-  'dotted' => 'pointill&eacute;s',
-  'double' => 'double traits pleins',
-  'groove' => 'grav&eacute; (inverse de ridge)',
-  'ridge' => 'sort de la page (inverse de groove)',
-  'inset' => 'incrust&eacute; dans la page (inverse de outset)',
-  'outset' => 'extrud&eacute; de la page (inverse de inset)',
 
 /* Page publications */
   'publications' => 'Publications',
@@ -126,6 +134,7 @@ Pour configurer le site, cliquez sur l\'onglet "Composants" et personnalisez les
 
 
   );
-  composants_ajouter_langue('ecrire');
+  $GLOBALS[$GLOBALS['idx_lang']] = array_merge($traductions_acs, $GLOBALS[$GLOBALS['idx_lang']]);
+  composants_ajouter_langue('ecrire');  
 }
 ?>

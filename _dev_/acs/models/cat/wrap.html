@@ -15,9 +15,9 @@ Wrap (encapsulate) widgets for preview or Ajax call
 <html>
 <head>
 <meta name="robots" content="none">
-<script src="?page=jquery.js" type="text/javascript"></script>
+<script src="spip.php?page=jquery.js" type="text/javascript"></script>
+<script src="spip.php?page=acs.js&var_mode=recalcul" type="text/javascript"></script>
 <script src="#CHEMIN{javascript/layer.js}" type="text/javascript"></script>
-[<script type="text/javascript">(#HEADER_COMPOSANTS{javascript})</script>]
 <?php // Widget's style is not included yet in above css if just activated
 $css = find_in_path($_GET['c'].'.css.html');
 if ($css) : ?>

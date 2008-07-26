@@ -2,6 +2,24 @@
 // This is a SPIP language file. Specific to ACS plugin
   include_spip('lib/composant/composants_ajouter_langue');
   
+// traductions génériques utilisées dans la partie privée ET par les pinceaux (crayons des composants)
+$traductions_acs = array(
+  'use' => 'Use',
+
+  'bordlargeur' => 'border width (pixels)',
+  'bordstyle' => 'border style',
+  'parent' => 'default value',
+  'none' => 'no border. Equivalent to border-width: 0',
+  'solid' => 'solid',
+  'dashed' => 'dashed',
+  'dotted' => 'dotted',
+  'double' => 'double',
+  'groove' => 'groove',
+  'ridge' => 'ridge',
+  'inset' => 'inset',
+  'outset' => 'outset'
+);
+
 // Lang file is build with components public lang files
 if (_DIR_RESTREINT != '') {
   // Add components lang files (public)
@@ -12,8 +30,10 @@ if (_DIR_RESTREINT != '') {
   'err_del_file' => 'Unable to delete file',
   );
   composants_ajouter_langue();
-  if (_request('action') == 'crayons_html') // Add translations for crayons plugin
-    composants_ajouter_langue('ecrire');  
+  if (_request('action') == 'crayons_html') { // Add translations for crayons plugin
+    $GLOBALS[$GLOBALS['idx_lang']] = array_merge($traductions_acs, $GLOBALS[$GLOBALS['idx_lang']]);
+    composants_ajouter_langue('ecrire');
+  }
 }
 else {
   $GLOBALS[$GLOBALS['idx_lang']] = array( // Area ecrire
@@ -76,7 +96,6 @@ To setup your website, click on "Components" pane and customize components, begi
   'acsDerniereModif' => 'Updated',
 
   'dev_infos' => 'Developper infos',
-  'use' => 'Use',
   'composant_non_utilise' => 'Unused component.',
   'references_autres_composants' => 'Default values',
   'choix_couleur' => 'Color choice',
@@ -87,20 +106,8 @@ To setup your website, click on "Components" pane and customize components, begi
   'err_aucun_composant' => 'No active component for ',
   'spip_trop_ancien' => 'Do not fit with spip < @min@',
   'spip_non_supporte' => 'Not tested with spip > @max@',
-
-  'bordlargeur' => 'border width (pixels)',
-  'bordstyle' => 'border style',
-  'parent' => 'default value',
-  'none' => 'no border. Equivalent to border-width: 0',
-  'solid' => 'solid',
-  'dashed' => 'dashed',
-  'dotted' => 'dotted',
-  'double' => 'double',
-  'groove' => 'groove',
-  'ridge' => 'ridge',
-  'inset' => 'inset',
-  'outset' => 'outset'
   );
+  $GLOBALS[$GLOBALS['idx_lang']] = array_merge($traductions_acs, $GLOBALS[$GLOBALS['idx_lang']]);  
   composants_ajouter_langue('ecrire');
 }
 ?>

@@ -82,6 +82,7 @@ function isUsed($c) {
   if ($GLOBALS['meta']['acs'.ucfirst($c).'Use'] == 'oui') return true;
   return false;
 }
+
 // #INTRO{taille, suite}
 // http://www.spip.net/@introduction
 // http://doc.spip.org/@balise_INTRODUCTION_dist
