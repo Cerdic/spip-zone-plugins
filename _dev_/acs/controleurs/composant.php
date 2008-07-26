@@ -16,16 +16,16 @@ function controleurs_composant_dist($regs) {
   list(,$crayon,$type,$champ,$id) = $regs;
   
   $c = $champ.'/'.$champ;
-  $crayon = new SecureCrayon("composant-$champ-" . $id, array(), array('hauteurMini' => 24, 'largeurMaxi' => 1280, 'hauteurMaxi' => 1024));
+  $crayon = new SecureCrayon("composant-$champ-" . $id);
 
   $composant = new AdminComposant($champ);
   $icon = find_in_path('composants/'.$champ.'/img_pack/'.$champ.'_icon.gif');
   if (($crayon->left + $crayon->largeur) > ($crayon->ww / 2))
-    $left = - 300;
+    $left = ($crayon->left < 300) ? 0 : - 300;
   else
     $left = Min($crayon->ww / 2, $crayon->left + $crayon->largeur);
-  $html = '<div style="width:'.$crayon->largeur.'px; height:'.$crayon->hauteur.'px">'.
-    '<div style="position: absolute; opacity: 0.5;width:'.$crayon->largeur.'px; height:'.$crayon->hauteur.'px">'.
+  $html = '<div style="width:'.$crayon->w.'px; height:'.$crayon->h.'px">'.
+    '<div style="position: absolute; opacity: 0.5;width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size:'._request('em').'">'.
       recuperer_fond("composants/$c").
     '</div>'.
     '<div style="position: relative; opacity: 1;">'.
