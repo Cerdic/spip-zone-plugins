@@ -575,7 +575,16 @@ function indexer_elements_associes($table, $id_objet, $table_associe, $valeur, $
 			$select="assoc.$col_id_as";
 			foreach(array_keys($INDEX_elements_associes[$table_associe]) as $quoi)
 				$select.=',assoc.' . $quoi;
-			$r = spip_query($q = "SELECT $select FROM $table_associe AS assoc,	spip_$table_rel AS lien WHERE lien.$col_id=$id_objet AND assoc.$col_id_as=lien.$col_id_as");
+
+			// pour les documents en SPIP 2 la jointure n'est pas la meme
+			if ($table_rel == 'documents_liens') {
+				$type = " AND objet='".preg_replace(',^id_,', '', $col_id)."'";
+				$col_id = 'id_objet';
+			}
+			else
+				$type='';
+
+			$r = spip_query($q = "SELECT $select FROM $table_associe AS assoc,	spip_$table_rel AS lien WHERE lien.$col_id=$id_objet$type AND assoc.$col_id_as=lien.$col_id_as");
 			while ($row = sql_fetch($r)) {
 				indexer_les_champs($row,
 					$INDEX_elements_associes[$table_associe],$valeur);
