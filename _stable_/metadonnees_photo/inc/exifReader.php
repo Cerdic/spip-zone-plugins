@@ -764,6 +764,8 @@ class phpExifReader {
                    	$this->ImageInfo["h"]["make"] = str_replace("PHASE ONE A/S", "PHASE ONE", $this->ImageInfo["h"]["make"]);
                    	$this->ImageInfo["h"]["make"] = str_replace("HASSELBLAD/IMACON", "HASSELBLAD", $this->ImageInfo["h"]["make"]);
                    	$this->ImageInfo["h"]["make"] = str_replace("SONY COMPUTER ENTERTAINMENT INC.", "SONY", $this->ImageInfo["h"]["make"]);
+                   	$this->ImageInfo["h"]["make"] = str_replace("SAMSUNG TECHWIN CO.", "SAMSUNG", $this->ImageInfo["h"]["make"]);
+                   	$this->ImageInfo["h"]["make"] = str_replace("SAMSUNG TECHWIN", "SAMSUNG", $this->ImageInfo["h"]["make"]);
 		
                  	break;
 
