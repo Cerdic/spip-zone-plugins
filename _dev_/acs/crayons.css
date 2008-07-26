@@ -98,3 +98,14 @@ em.crayon-edit, em.crayon-crayon, em.crayon-img-changed {
 .pinceau em.crayon-img-changed {
 	display: none;
 }
+
+img.bouton_edit_composant {
+	background: #e6f6e6;
+	border: 2px outset #224422;
+	height:24px;
+	width: 24px;
+	padding: 2px;
+}
+img.bouton_edit_composant:hover {
+	background: #ffefaf;
+}
