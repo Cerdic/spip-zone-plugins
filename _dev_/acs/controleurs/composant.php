@@ -29,7 +29,7 @@ function controleurs_composant_dist($regs) {
       recuperer_fond("composants/$c").
     '</div>'.
     '<div style="position: relative; opacity: 1;">'.
-    '<a href="'._DIR_RESTREINT.'spip.php?exec=acs&onglet=composants&composant='.$champ.'"><img src="'.$icon.'" alt="'.$champ.'" title="'._T('crayons:editer').' '._T($champ).'" /></a>'.
+    '<a href="'._DIR_RESTREINT.'?exec=acs&onglet=composants&composant='.$champ.'"><img src="'.$icon.'" alt="'.$champ.'" title="'._T('crayons:editer').' '._T($champ).'" /></a>'.
   	'</div>'.
 // TODO: modifier plugin crayons pour récupérer ici position du composant et taille innerWidth & innerHeight ?
   	'<div class="edit_composant" style="position: absolute; display: block; top:0; left:'.$left.'px; z-index: 99999999">'.

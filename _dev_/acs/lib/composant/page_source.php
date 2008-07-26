@@ -53,7 +53,7 @@ function analyse_page($page, $mode_source) {
     $reg[] = array('VAR', 1, $vars_regexp);
   if ($modeles_regexp)
       $reg[] = array('MODELE', 3, '(('.$modeles_regexp.')('.$reg_entre_accolades.'|'.$reg_filtre_spip.')*)');
-  $reg[] = array('INCLURE', 3, '((?:<|#)INCLURE[\s]*\{fond=([^\}]*)\}(?:([\s]*'.$reg_entre_accolades.'))*[>]?)');
+  $reg[] = array('INCLURE', 3, '((?:<|#)INCLU[R|D]E[\s]*\{fond=([^\}]*)\}(?:([\s]*'.$reg_entre_accolades.'))*[>]?)');
   $reg[] = array('BOUCLE', 4, '(<BOUCLE[_]?([^(]*)\(([^)]*)\)((?:>=|[^\>])*)>)');
   $reg[] = array('FIN_BOUCLE', 2, '(<\/BOUCLE[_]?([^>]*)>)');
   if ($mode_source) {
