@@ -39,10 +39,6 @@
     <inclure>inc/acs_pipeline_ecrire.php</inclure>
   </pipeline>
   <pipeline>
-    <nom>post_edition</nom>
-    <inclure>inc/acs_post_edition.php</inclure>
-  </pipeline>
-  <pipeline>
 		<nom>insert_head</nom>
 		<inclure>inc/acs_pipeline_public.php</inclure>
 	</pipeline>
