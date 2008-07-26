@@ -28,7 +28,7 @@
 
 ][(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
 <fieldset>
-<legend style="color:#000"><:spiplistes:devenir_abonne:></legend>
+<legend ><:spiplistes:devenir_abonne:></legend>
 <div><:spiplistes:inscription_visiteurs:></div>
 <div style="margin-top:5px"><:form_forum_indiquer_nom_email:></div>
 	[(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})
@@ -43,7 +43,7 @@
 ]
 		<BOUCLE_liste(LISTES) {statut IN 'liste', 'pub_mois'} {id_liste=#ENV{id_liste}}>
 			<fieldset style="margin-bottom:1em;">
-			<legend style="font-weight:bold;color:#000000">#TITRE</legend>
+			<legend style="font-weight:bold;">#TITRE</legend>
 			[(#ENV{mode_login}|?{' ',''})
 			<div style="margin-bottom:1em">#TEXTE</div>
 			]
