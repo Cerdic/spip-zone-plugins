@@ -6,14 +6,14 @@
 
 Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Le forum d'un article, rubrique, site ou brève.
 ]
 [(#PARAMETRES_FORUM|?) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 [(#SELF|parametre_url{ouvrir,''}|=={#SELF}|?{#SET{ouvrir,oui},#SET{ouvrir,''}})]
-[(#REM) Nombre total de messages ]
-[(#REM) Messages du forum ]
 <B_forums>
 <span class="texte_nav" style="float:right">#PAGINATION</span>
-
+[(#REM) Nombre total de messages ]
 <BOUCLE_decompte(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat}></BOUCLE_decompte>
 [<h2 class="forum-decompte">
 	<a name="forum" href="#forum" onclick="swap_couche('0', '','#ACS_CHEMIN{img/triangles/}'); return false;">
@@ -24,12 +24,10 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 [(#TOTAL_BOUCLE|=={1}|?{<:message:>,<:messages_forum:>})]
 	</a>
 </h2>]<//B_decompte>
-
+[(#REM) Messages du forum ]
 <ul class="forum" id="Layer0" [(#ENV{ouvrir}!={oui}|?{style="display: none"})]>
 	<BOUCLE_forums(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {par date} {inverse} {pagination 10}>
-
 	<li class="forum-fil">
-
 		<div class="forum-message">
 			<div class="forum-chapo">
         <span class="texte_nav" style="float:right">[(#DATE|affdate)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM|couper{80})]</span>
@@ -40,10 +38,8 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 				[<p class="forum-lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 				[<p class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:>[(#NOM|?{' de '#NOM|couper{80},' 'anonyme})]</a></p>]
 			</div>
-
          <B_forums_fils>
          <a href="javascript:swap_couche('#ID_FORUM','','#ACS_CHEMIN{img/triangles/}')"><img id="triangle#ID_FORUM" src='[(#GET{ouvrir}|?{#ACS_CHEMIN{img/triangles/deplierhaut.gif},#ACS_CHEMIN{img/triangles/deplierbas.gif}})]' alt='' title='Déplier' width='10' height='10' border='0' align="left" /></a> <a href="javascript:swap_couche('#ID_FORUM','','#ACS_CHEMIN{img/triangles/}')"> &nbsp; R&eacute;ponses &agrave; ce message</a>
-
 		   <ul id="Layer#ID_FORUM"[(#ENV{ouvrir}|!={oui}|?{' '}) style="display: none"]>
 			   <BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
 			   <li>
@@ -66,6 +62,5 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
       </div>
 	</li>
 	</BOUCLE_forums>
-
 </ul>
 </B_forums>
