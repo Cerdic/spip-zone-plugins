@@ -23,3 +23,9 @@ Installation:
 1) Copier le dossier acs dans le dossier plugins de la racine du site SPIP.
 2) Se connecter à l'espace ecrire en tant qu'auteur n°1 (qui doit être administrateur)
 3) Choisir l'option "Configurer le site" du menu "Configuration" de SPIP.
+
+________________________________________________________________________________
+
+Version mini des plugins compatibles:
+
+crayons : svn > 21756

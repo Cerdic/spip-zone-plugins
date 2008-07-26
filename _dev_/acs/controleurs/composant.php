@@ -20,8 +20,11 @@ function controleurs_composant_dist($regs) {
 
   $composant = new AdminComposant($champ);
   $icon = find_in_path('composants/'.$champ.'/img_pack/'.$champ.'_icon.gif');
-  $html = '
-  <div style="width:'.$crayon->largeur.'px; height:'.$crayon->hauteur.'px">'.
+  if (($crayon->left + $crayon->largeur) > ($crayon->ww / 2))
+    $left = - 300;
+  else
+    $left = Min($crayon->ww / 2, $crayon->left + $crayon->largeur);
+  $html = '<div style="width:'.$crayon->largeur.'px; height:'.$crayon->hauteur.'px">'.
     '<div style="position: absolute; opacity: 0.5;width:'.$crayon->largeur.'px; height:'.$crayon->hauteur.'px">'.
       recuperer_fond("composants/$c").
     '</div>'.
@@ -29,7 +32,7 @@ function controleurs_composant_dist($regs) {
     '<a href="'._DIR_RESTREINT.'spip.php?exec=acs&onglet=composants&composant='.$champ.'"><img src="'.$icon.'" alt="'.$champ.'" title="'._T('crayons:editer').' '._T($champ).'" /></a>'.
   	'</div>'.
 // TODO: modifier plugin crayons pour récupérer ici position du composant et taille innerWidth & innerHeight ?
-  	'<div class="edit_composant" style="position: absolute; display: block; top:0; left:0; z-index: 99999999">'.
+  	'<div class="edit_composant" style="position: absolute; display: block; top:0; left:'.$left.'px; z-index: 99999999">'.
     acs_box($composant->T('nom'), $composant->edit($crayon), $composant->icon).
     '</div>'.
 	'</div>'.
