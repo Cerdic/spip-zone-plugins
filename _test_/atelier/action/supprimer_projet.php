@@ -19,16 +19,29 @@
  *
  */
 
-// Compatibilites
-if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP19300', 1);
-if (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) @define('_SPIP19200', 1);
-else @define('_SPIP19100', 1);
+function action_supprimer_projet_dist() {
 
-// Compatibilite 1.9.2
-if (version_compare($GLOBALS['spip_version_code'],'1.9300','<'))
-  include_spip('inc/compat_atelier');
 
-// Declaration des tables
-include_spip('base/atelier_base');
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+
+	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	if (!$id_auteur) redirige_par_entete('./');
+
+	$id_projet = $arg;
+
+	sql_delete('spip_projets',"id_projet=$id_projet");
+	sql_delete('spip_taches',"id_projet=$id_projet");
+	sql_delete('spip_taches_projets',"id_projet=$id_projet");
+
+	$rapport = "le projet $id_projet a &eacute;t&eacute; supprim&eacute;<br />";
+	
+
+	$redirect = parametre_url(urldecode(generer_url_ecrire('atelier')),
+				'rapport', $rapport, '&');
+
+	include_spip('inc/headers');
+	redirige_par_entete($redirect);
+}
 
 ?>

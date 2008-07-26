@@ -39,6 +39,7 @@ $projets = array(
   "descriptif"			=> "text NOT NULL",
   "type"			=> "ENUM('plugin', 'squelette') NOT NULL DEFAULT 'plugin'",
   "prefixe"			=> "text NOT NULL",
+  "versions"			=> "LONGTEXT NULL DEFAULT NULL"
 
 );
                     
@@ -57,7 +58,9 @@ $taches = array(
   "id_auteur"			=> "bigint(21) NOT NULL",
   "titre"			=> "text NOT NULL",
   "descriptif"			=> "text NOT NULL",
-  "etat"			=> "ENUM('ouverte', 'fermee') NOT NULL DEFAULT 'ouverte'"
+  "etat"			=> "ENUM('ouverte', 'fermee') NOT NULL DEFAULT 'ouverte'",
+  "urgence"			=> "ENUM('tres_forte','forte','moyenne','faible','tres_faible') NOT NULL DEFAULT 'moyenne'",
+  "version"			=> "text NOT NULL"
 );
                     
 $taches_key = array(

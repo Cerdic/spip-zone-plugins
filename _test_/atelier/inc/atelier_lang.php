@@ -31,7 +31,11 @@ function inc_atelier_lang_dist($action,$arg=array()) {
 }
 
 function atelier_verifier_repertoire_lang($a) {
-	return file_exists(_DIR_PLUGINS.$a['prefixe'].'/lang');
+	if ($a['type'] == 'plugin') return file_exists(_DIR_PLUGINS.$a['prefixe'].'/lang');
+	else {
+		global $repertoire_squelettes_alternatifs; // plugin switcher
+		return file_exists('../'.$repertoire_squelettes_alternatifs.'/'.$a['prefixe'].'/lang');
+	}
 }
 
 function atelier_verifier_fichier_lang($a) {
@@ -58,9 +62,14 @@ function atelier_edit_lang($a) {
 	$module = $a['module'];
 	$lang = $a['lang'];
 	$id_projet = $a['id_projet'];
+	$type = $a['type'];
 	if ($lang=='') $lang='fr';
 
-	$fichier_lang = '../plugins/'.$module.'/lang/'.$fichier;
+	if ($type == 'plugin') $fichier_lang = '../plugins/'.$module.'/lang/'.$fichier;
+	else {
+		global $repertoire_squelettes_alternatifs; // plugin switcher
+		$fichier_lang = '../'.$repertoire_squelettes_alternatifs.'/'.$module.'/lang/'.$fichier;
+	}
 	$GLOBALS['idx_lang']='i18n_'.$module.'_fr';
 
 	include($fichier_lang);
@@ -80,17 +89,19 @@ function atelier_edit_lang($a) {
 	. _T('atelier:bouton_enregistrer')
 	. "' /></div>");
 
-	return generer_action_auteur("atelier_lang","$id_projet-$module-$lang", '', $form, " method='post' name='formulaire'");
+	return generer_action_auteur("atelier_lang","$id_projet-$module-$lang-$type", '', $form, " method='post' name='formulaire'");
 }
 
 function atelier_ajout_lang($a) {
 	$module = $a['module'];
 	$lang = $a['lang'];
+	$type = $a['type'];
 	if ($lang=='') $lang='fr';
 	$id_projet = $a['id_projet'];
 	$form =  "<input type='hidden' name='ajout_lang' value='oui' />\n"
 	. "<input type='hidden' name='lang' value='$lang' />\n"
 	. "<input type='hidden' name='module' value='$module' />\n"
+	. "<input type='hidden' name='type' value='$type' />\n"
 	. '<input type="text" name="key" value="ma_nouvelle_cle" /> => '
 	. '<input type="text" name="value" value="ma_definition" />  '
 	. ("<div align='right'><input class='fondo' type='submit' value='"

@@ -28,14 +28,35 @@ function action_atelier_objets_dist() {
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	if (!$id_auteur) redirige_par_entete('./');
 
+	global $repertoire_squelettes_alternatifs; // plugin switcher
+
 	$id_projet = $arg;
 	$r = sql_fetsel('prefixe','spip_projets',"id_projet=$id_projet");
 	$prefixe = $r['prefixe'];
 	$type = _request('type');
 	$nom = _request('nom');
-
-	$fichier = _DIR_PLUGINS . $prefixe .'/'. $type .'/'.$prefixe.'_'.$nom.'.php';
 	$rapport = '';
+
+	switch($type) {
+		case 'html' : 
+			if ($r['type'] == "plugin") $fichier = _DIR_PLUGINS . $prefixe .'/'.$nom.'.html';
+			else $fichier = './' . $repertoire_squelettes_alternatifs . '/'. $prefixe .'/'.$nom.'.html';
+			break;
+		default : 
+			if ($r['type'] == "plugin") {
+				$fichier = _DIR_PLUGINS . $prefixe .'/'. $type .'/'.$prefixe.'_'.$nom.'.php';
+				if (!file_exists(_DIR_PLUGINS . $prefixe .'/'. $type)) { // si le repertoire $type n'existe pas, le créer
+					$rapport .= 'cr&eacute;ation du r&eacute;pertoire '. $type . '<br />';
+					exec('cd '._DIR_PLUGINS . $prefixe.';mkdir '.$type,&$output,&$return_var);
+					$rapport .= _T('atelier:code_retour').$return_var.'<br />';
+					foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />';
+				}
+			}
+			else $fichier = './' . $repertoire_squelettes_alternatifs . '/'. $prefixe .'/'. $type .'/'.$prefixe.'_'.$nom.'.php';
+			break;
+	}
+
+
 	$contenu = '';
 	$output = array();
 
@@ -45,18 +66,11 @@ function action_atelier_objets_dist() {
 	$contenu = preg_replace('#\[nom_objet\]#',$prefixe.'_'.$nom,$contenu);
 	$contenu = preg_replace('#\[prefixe\]#',$prefixe,$contenu);
 
-	// si le repertoire $type n'existe pas, le créer
-	if (!file_exists(_DIR_PLUGINS . $prefixe .'/'. $type)) {
-		$rapport .= 'cr&eacute;ation du r&eacute;pertoire '. $type . '<br />';
-		exec('cd '._DIR_PLUGINS . $prefixe.';mkdir '.$type,&$output,&$return_var);
-		$rapport .= _T('atelier:code_retour').$return_var.'<br />';
-		foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />';
-	}
-
 	ecrire_fichier($fichier,$contenu);
 
 	$rapport .= 'cr&eacute;ation du fichier '.$fichier.'<br />';
 	if ($type=="exec") $rapport .= 'url d\'appel : exec='.$prefixe.'_'.$nom.'<br />';
+	if ($type=="html") $rapport .= 'url d\'appel : spip.php?page='.$nom.'<br />';
 
 	$redirect = parametre_url(urldecode(generer_url_ecrire('projets',"id_projet=$id_projet")),
 				'rapport', $rapport, '&') . $err;

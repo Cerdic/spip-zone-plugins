@@ -51,8 +51,12 @@ function atelier_lang($id_projet,$row,$fichier='') {
 
 		// on liste les fichiers lang
 		
-		if ($atelier_lang('verifier_repertoire',array('prefixe' => $row['prefixe']))) {
-			$dir = _DIR_PLUGINS.$row['prefixe'].'/lang';
+		if ($atelier_lang('verifier_repertoire',array('prefixe' => $row['prefixe'],'type' => $row['type']))) {
+			global $repertoire_squelettes_alternatifs; // plugin switcher
+
+			if ($row['type'] == 'plugin') $dir = _DIR_PLUGINS.$row['prefixe'].'/lang';
+			else $dir ='../' .$repertoire_squelettes_alternatifs.'/'.$row['prefixe'].'/lang';
+
 			if ($dh = opendir($dir)) {
 				$fichiers = array();
 				while (($file = readdir($dh)) !== false) {
@@ -72,7 +76,7 @@ function atelier_lang($id_projet,$row,$fichier='') {
 
 		$atelier_lang = charger_fonction('atelier_lang','inc');
 
-		if (!$atelier_lang('verifier_repertoire',array('prefixe' => $row['prefixe']))) {
+		if (!$atelier_lang('verifier_repertoire',array('prefixe' => $row['prefixe'],'type' => $row['type']))) {
 			echo '<p>'._T('atelier:explication_rep_lang').'</p>';
 			echo $atelier_lang('creer_repertoire',array('id_projet' =>$id_projet));
 		}
@@ -88,16 +92,16 @@ function atelier_lang($id_projet,$row,$fichier='') {
 			$module = $row['prefixe'];
 			$lang = '';
 
-			if ($atelier_lang('verifier_fichier',array('module' => $module,'fichier' => $fichier))) {
+			if ($atelier_lang('verifier_repertoire',array('prefixe' => $row['prefixe'],'type' => $row['type']))) {
 				echo '<br />';
 				echo debut_cadre_couleur('',true);
 				echo '<p>'._T('atelier:explication_ajouter_lang').'</p>';
-				echo $atelier_lang('ajout',array('id_projet' => $id_projet,'module' => $module,'lang' => $lang));
+				echo $atelier_lang('ajout',array('id_projet' => $id_projet,'module' => $module,'lang' => $lang,'type' => $row['type']));
 				echo fin_cadre_couleur(true);
 
 				echo debut_cadre_couleur('',true);
 				echo '<p>'._T('atelier:explication_editer_lang').'</p>';
-				echo $atelier_lang('edit',array('id_projet' => $id_projet,'fichier' => $fichier,'module' => $module,'lang' => $lang));
+				echo $atelier_lang('edit',array('id_projet' => $id_projet,'fichier' => $fichier,'module' => $module,'lang' => $lang,'type' => $row['type']));
 				echo fin_cadre_couleur(true);
 			}
 		}

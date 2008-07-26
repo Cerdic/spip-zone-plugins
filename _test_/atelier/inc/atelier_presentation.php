@@ -83,6 +83,55 @@ function liste_ligne($ligne,$align='left',$style='true') {
 	return '<tr><td style="text-align:'.$align.';">'.$ligne.'</td></tr>';
 }
 
+
+function debut_cadre_depliable($titre,$gros_titre,$id){
+	$jquery = 'jQuery(this).depliant("#'.$id.'");';
+
+	echo "<div class='cadre cadre-liste' style='margin-top: 20px;'>"
+		."<div style='position: absolute; top: -16px; left: 10px;z-index:1;'><img src='../prive/images/tache-24.gif'
+alt=''  /></div>"
+		."<div id='explorateur' class='titrem deplie' onmouseover='".$jquery."'><a class='titremancre'></a>$gros_titre</div>"
+		.'<div><div id="'.$id.'" class="bloc_depliable blocdeplie">'
+		.'<img src="../prive/images/searching.gif" alt="*" style="visibility: hidden; float: right" id="img_t_8bda" />'
+		.'<div style=";" class="arial1 tranches" id="a1">'.$titre.'</div>';
+}
+
+function fin_cadre_depliable() {
+	echo "<div class='nettoyeur'></div></div><div class='nettoyeur'></div></div></div>";
+}
+
+function atelier_cadre_depliable($titre, $gros_titre,$lignes,$id) {
+
+	echo debut_cadre_depliable($titre,$gros_titre,$id);
+
+	echo debut_liste();
+	foreach($lignes as $ligne) {
+		echo liste_ligne($ligne);
+	}
+	echo fin_liste();
+
+	echo fin_cadre_depliable();
+}
+function atelier_cadre_couleur($titre, $lignes) {
+	echo debut_cadre_trait_couleur('',true);
+	echo '<div style="text-align:center;font-weight:bold;">'.$titre.'</div><br /><br />';
+	foreach ($lignes as $key => $ligne) {
+		if (is_array($ligne)) {
+			if (count($ligne) > 0) {
+				echo '<table cellpadding="2" cellspacing="0" style="border:1px solid #000;width:100%;">
+					<caption style="font-weight:bold;">'.$key.'</caption>';
+				foreach ($ligne as $l) {
+					echo '<tr class="tr_liste"><td>'.$l.'</td></tr>';
+				}
+				echo '</table><br /><br />';
+			}
+		}
+		else echo $ligne . '<br />';
+	}
+
+	echo fin_cadre_trait_couleur(true);
+
+}
 function cadre_atelier($titre,$lignes) {
 	if (version_compare($GLOBALS['spip_version_code'],'2.0000','>')) // SPIP 2.0
 		echo debut_cadre_trait_couleur('',true,'','<span style="color:#000;">'.$titre.'</span>');

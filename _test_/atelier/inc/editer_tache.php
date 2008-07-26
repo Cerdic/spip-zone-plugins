@@ -31,7 +31,9 @@ function inc_editer_tache_dist($new,$id_tache=0,$row=array(),$id_projet=0) {
 	. editer_tache_descriptif($row['descriptif'])
 	. editer_tache_projet($row['id_projet'])
 	. editer_tache_etat($row['etat'])
+	. editer_tache_urgence($row['urgence'])
 	. editer_tache_auteur($row['id_auteur'])
+	. editer_tache_version($row['version'],$row['id_projet'])
 
 	. ("<div align='right'><input class='fondo' type='submit' value='"
 	. _T('bouton_enregistrer')
@@ -97,6 +99,23 @@ function editer_tache_etat($etat) {
 	return debut_cadre_couleur($logo, true, "", $msg) . $opt . fin_cadre_couleur(true);
 }
 
+function editer_tache_urgence($urgence) {
+	$opt = '<select name="urgence" value="'.$urgence.'">"';
+
+	$opt .= '<option value="tres_forte">Très forte</option>';
+	$opt .= '<option value="forte">Forte</option>';
+	$opt .= '<option selected value="moyenne">Moyenne</option>';
+	$opt .= '<option value="faible">Faible</option>';
+	$opt .= '<option value="tres_faible">Très faible</option>';
+
+
+
+	$opt .= '</select>';
+
+	$msg = _T('atelier:titre_edit_choix_urgence');
+	$logo = "racine-site-24.gif";
+	return debut_cadre_couleur($logo, true, "", $msg) . $opt . fin_cadre_couleur(true);
+}
 function editer_tache_auteur($id_auteur) {
 	$res = '<select name="id_auteur" value="'.$id_auteur.'">"';
 	$q = sql_select('id_auteur, nom','spip_auteurs');
@@ -105,6 +124,19 @@ function editer_tache_auteur($id_auteur) {
 	$res .= '</select>';
 
 	$msg = _T('atelier:titre_edit_choix_auteur');
+	$logo = "racine-site-24.gif";
+	return debut_cadre_couleur($logo, true, "", $msg) . $res . fin_cadre_couleur(true);
+}
+function editer_tache_version($version,$id_projet) {
+	$r = sql_fetsel('versions','spip_projets',"id_projet=$id_projet");
+	$versions = explode('/',$r['versions']);
+
+	$res = '<select name="version" value="'.$version.'">"';
+	foreach($versions as $version) 
+		$res .= '<option value="'.$version.'">'.$version.'</option>';
+	$res .= '</select>';
+
+	$msg = _T('atelier:titre_edit_choix_version');
 	$logo = "racine-site-24.gif";
 	return debut_cadre_couleur($logo, true, "", $msg) . $res . fin_cadre_couleur(true);
 }

@@ -19,16 +19,17 @@
  *
  */
 
-// Compatibilites
-if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP19300', 1);
-if (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) @define('_SPIP19200', 1);
-else @define('_SPIP19100', 1);
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Compatibilite 1.9.2
-if (version_compare($GLOBALS['spip_version_code'],'1.9300','<'))
-  include_spip('inc/compat_atelier');
 
-// Declaration des tables
-include_spip('base/atelier_base');
+function inc_supprimer_projet_dist($id_projet) {
+	$form = "<input type='hidden' name='supprimer_projet' value='oui' />\n"
+
+	. ("<div align='center'><input class='fondo' type='submit' value='"
+	. _T('atelier:bouton_supprimer')
+	. "' /></div>");
+
+	return generer_action_auteur("supprimer_projet", $id_projet, '', $form, " method='post' name='formulaire'");
+}
 
 ?>

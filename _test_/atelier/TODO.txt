@@ -1,4 +1,4 @@
-TODO.txt (fichier généré par le plugin Atelier 2008-07-24 01:01:26)
+TODO.txt (fichier généré par le plugin Atelier 2008-07-25 01:12:22)
 -------------------------------------------------------------------
 
 * gestion des dictionnaires :
@@ -119,7 +119,7 @@ Voir avec le plugin Salvatore ...
 
 
 
-* [SVN] mettre la description du plugin (plugin.xml) dans le camps description :
+* [SVN] mettre la description du plugin (plugin.xml) dans le champs description :
 Lors de l'Importation
 
 
@@ -173,7 +173,7 @@ Utiliser une nouvelle table spip_svn [id_auteur - key, user, pass]
 
 
 * Ajouter une page de gestion des versions :
-gestion des versions attaché à un projet. Nouveau champs dans la table spip_projets dans le style des metas.
+gestion des versions attaché à un projet. Nouveau champs dans la table spip_projets dans le style des champs extra.
 
 Cette page permettra de créer des versions (0.1 0.2 0.3 etc ...)
 
@@ -192,5 +192,58 @@ include_spip('inc/minipres');
 echo minipres(_T('public:aucun_article'));
 
 Pour rejeter l'utilisateur.
+
+
+* [SVN] permettre un commit initial pour les projets non SVN :
+
+
+
+* [Extra] permettre la gestion des champs extra :
+les champs extra des tables spip
+
+
+* Voir toutes les taches affecté à un auteur :
+
+
+
+* [edition d'une tache] il n'y a pas de raccourcis "retour au projet" :
+
+
+
+* [edition tache] l'urgence d'une tache se perd ...  :
+elle n'est pas répercuté dans le formulaire d'édition !
+
+
+* Formulaire publique : Rapport de bug :
+faire une nouvelle table spip_bug et l'alimenter à partir du formulaire publique. Pouvoir ratacher une tache à un ou plusieurs bugs
+
+
+* [Pages publiques] faires pages publiques de présentation :
+Faire ces pages en copiant sur la présentation de la dist.
+Placé dans le répertoire "public/"
+
+
+* Titre des pages : mettre le nom du projet si il existe :
+
+
+
+* Commande shell : utiliser shell_exec au lieu de exec :
+
+
+
+* [plugin_xml] ajouter un lien "retour vers le projet" :
+
+
+
+* [projet] permettre de supprimer un projet :
+
+
+
+* [commit] gestion des caractères interdits dans le log :
+
+
+
+* [edit_projet] A la place de exec('mkdir') utiliser mkdir(); :
+
 
 

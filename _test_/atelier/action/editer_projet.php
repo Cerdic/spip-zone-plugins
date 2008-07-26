@@ -29,6 +29,7 @@ function action_editer_projet_dist() {
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	if (!$id_auteur) redirige_par_entete('./');
 
+	$rapport = '';
 
 	if (!$id_projet = intval($arg)) {
 		$id_projet = insert_projet();
@@ -36,16 +37,55 @@ function action_editer_projet_dist() {
 
 	// Enregistre l'envoi dans la BD
 	$err = projets_set($id_projet);
-	if (_request('arbo')) projets_creer_arbo();
 
-        $redirect = parametre_url(urldecode(generer_url_ecrire('projets')),
-				'id_projet', $id_projet, '&') . $err;
+	// création de l'arborescence
+	if (_request('arbo')) {
+		switch (_request('type')) {
+			case 'plugin' : projets_creer_arbo_plug(); break;
+			case 'squelette' : projets_creer_arbo_ske(&$rapport); break;
+		}
+	}
+
+        $redirect = parametre_url(urldecode(generer_url_ecrire('projets',"id_projet=$id_projet")),
+				'rapport', $rapport, '&') . $err;
 
 	include_spip('inc/headers');
 	redirige_par_entete($redirect);
 }
 
-function projets_creer_arbo() {
+function projets_creer_arbo_ske(&$rapport) {
+	global $repertoire_squelettes_alternatifs; // plugin switcher
+
+	$rapport .= " commande : mkdir ./$repertoire_squelettes_alternatifs/"._request('prefixe')."<br />";
+	exec('mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe'),&$output,$return_var);
+	foreach($output as $ligne) $rapport.=$ligne.'<br />';
+
+	$rapport .= " commande : mkdir ./$repertoire_squelettes_alternatifs/"._request('prefixe').'/lang'."<br />";
+	exec('mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/lang',&$output,$return_var);
+	foreach($output as $ligne) $rapport.=$ligne.'<br />';
+
+	$rapport .= " commande : mkdir ./$repertoire_squelettes_alternatifs/"._request('prefixe').'/css'."<br />";
+	exec('mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/css',&$output,$return_var);
+	foreach($output as $ligne) $rapport.=$ligne.'<br />';
+
+	$rapport .= " commande : mkdir ./$repertoire_squelettes_alternatifs/"._request('prefixe').'/images'."<br />";
+	exec('mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/images',&$output,$return_var);
+	foreach($output as $ligne) $rapport.=$ligne.'<br />';
+
+	$rapport .= " commande : mkdir ./$repertoire_squelettes_alternatifs/"._request('prefixe').'/javascript'."<br />";
+	exec('mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/javascript',&$output,$return_var);
+	foreach($output as $ligne) $rapport.=$ligne.'<br />';
+
+	$rapport .= " commande : mkdir ./$repertoire_squelettes_alternatifs/"._request('prefixe').'/formulaires'."<br />";
+	exec('mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/formulaires',&$output,$return_var);
+	foreach($output as $ligne) $rapport.=$ligne.'<br />';
+
+	$rapport .= " commande : mkdir ./$repertoire_squelettes_alternatifs/"._request('prefixe').'/modeles'."<br />";
+	exec('mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/modeles',&$output,$return_var);
+	foreach($output as $ligne) $rapport.=$ligne.'<br />';
+}
+
+function projets_creer_arbo_plug() {
 	exec('mkdir '._DIR_PLUGINS._request('prefixe'));
 	exec('mkdir '._DIR_PLUGINS._request('prefixe').'/exec');
 	exec('mkdir '._DIR_PLUGINS._request('prefixe').'/action');

@@ -18,4 +18,5 @@
 		<nom>ajouter_boutons</nom>
 		<inclure>atelier_pipelines.php</inclure>
 	</pipeline>
+	<necessite id='switcher' version='[0.1;]' />
 </plugin>

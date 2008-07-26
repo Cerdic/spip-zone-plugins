@@ -31,6 +31,7 @@ function action_atelier_lang_dist() {
 	$id_projet = $arg;
 	$r = sql_fetsel('prefixe','spip_projets','id_projet='.$id_projet);
 	$prefixe = $r['prefixe'];
+	$type = $r['type'];
 
 	$creer_repertoire = _request('creer_repertoire');
 	$creer_fichier = _request('creer_fichier');
@@ -42,7 +43,7 @@ function action_atelier_lang_dist() {
 	}
 	if (isset($creer_fichier)) {
 		$lang = _request('choix_lang');
-		atelier_creer_fichier_lang($prefixe,$lang);
+		atelier_creer_fichier_lang($type,$prefixe,$lang);
 	}
         $redirect = parametre_url(urldecode(generer_url_ecrire('atelier_lang')),
 				'id_projet', $id_projet, '&') . $err;
@@ -52,7 +53,8 @@ function action_atelier_lang_dist() {
 		$module = _request('module');
 		$key = _request('key');
 		$value = _request('value');
-		atelier_ajout_lang($module,$lang,$enreg = array('key' => $key, 'value' => $value));
+		$type = _request('type');
+		atelier_ajout_lang($module,$lang,$type,$enreg = array('key' => $key, 'value' => $value));
 	        $redirect = parametre_url(urldecode(generer_url_ecrire('atelier_lang',"id_projet=$id_projet")),
 				'fichier', $module.'_'.$lang.'.php', '&') . $err;
 	}
@@ -63,8 +65,9 @@ function action_atelier_lang_dist() {
 		$id_projet = $arg[0];
 		$module = $arg[1];
 		$lang = $arg[2];
+		$type = $arg[3];
 	
-		atelier_edit_lang($module,$lang);
+		atelier_edit_lang($module,$lang,$type);
 	        $redirect = parametre_url(urldecode(generer_url_ecrire('atelier_lang',"id_projet=$id_projet")),
 				'fichier', $module.'_'.$lang.'.php', '&') . $err;
 	}
@@ -119,8 +122,12 @@ $GLOBALS[$GLOBALS[\'idx_lang\']] = array (
 	ecrire_fichier($fichier,$contenu);
 }
 
-function atelier_edit_lang($module,$lang) {
-	$fichier = _DIR_PLUGINS.$module.'/lang/'.$module.'_'.$lang.'.php';
+function atelier_edit_lang($module,$lang,$type) {
+	if ($type == 'plugin') $fichier = _DIR_PLUGINS.$module.'/lang/'.$module.'_'.$lang.'.php';
+	else {
+		global $repertoire_squelettes_alternatifs; // plugin switcher
+		$fichier = './'.$repertoire_squelettes_alternatifs.'/'.$module.'/lang/'.$module.'_'.$lang.'.php';
+	}
 
 	$lang = atelier_lire_fichier_langue($fichier);
 
@@ -137,8 +144,12 @@ function atelier_edit_lang($module,$lang) {
 	atelier_ecrire_fichier_langue($fichier,$contenu);
 }
 
-function atelier_ajout_lang($module,$lang,$enreg) {
-	$fichier = _DIR_PLUGINS.$module.'/lang/'.$module.'_'.$lang.'.php';
+function atelier_ajout_lang($module,$lang,$type,$enreg) {
+	if ($type == 'plugin') $fichier = _DIR_PLUGINS.$module.'/lang/'.$module.'_'.$lang.'.php';
+	else {
+		global $repertoire_squelettes_alternatifs; // plugin switcher
+		$fichier = './'.$repertoire_squelettes_alternatifs.'/'.$module.'/lang/'.$module.'_'.$lang.'.php';
+	}
 
 	$lang = atelier_lire_fichier_langue($fichier);
 
@@ -176,7 +187,7 @@ function text_to_php($value) {
 	return $value;
 }
 
-function atelier_creer_fichier_lang($prefixe,$lang) {
+function atelier_creer_fichier_lang($type,$prefixe,$lang) {
 
 	$squel = 
 '<?php 
@@ -190,8 +201,12 @@ $GLOBALS[$GLOBALS[\'idx_lang\']] = array (
 );
 
 ?>';
+	if ($type == 'plugin') $fichier = _DIR_PLUGINS.$prefixe.'/lang/'.$prefixe.'_'.$lang.'.php';
+	else {
+		global $repertoire_squelettes_alternatifs; // plugin switcher
+		$fichier = './'.$repertoire_squelettes_alternatifs.'/'.$prefixe.'/lang/'.$prefixe.'_'.$lang.'.php';
+	}
 
-	$fichier = _DIR_PLUGINS.$prefixe.'/lang/'.$prefixe.'_'.$lang.'.php';
 
 	ecrire_fichier($fichier,$squel);
 

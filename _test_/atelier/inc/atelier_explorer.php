@@ -21,9 +21,14 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function atelier_explorer($prefixe,$id_projet,$opendir,$nom_page) {
+function atelier_explorer($prefixe,$id_projet,$type,$opendir,$nom_page) {
 	// navigation dans les fichiers du répertoire
-	$dir = _DIR_PLUGINS.$prefixe;
+
+	global $repertoire_squelettes_alternatifs; // plugin switcher
+
+	if ($type == 'plugin') $dir = _DIR_PLUGINS.$prefixe;
+	else  $dir = '../'.$repertoire_squelettes_alternatifs.'/'.$prefixe;
+
 	if ($opendir) $dir .= '/' .$opendir;
 
 	if ($dh = opendir($dir)) {
@@ -60,10 +65,12 @@ function atelier_explorer($prefixe,$id_projet,$opendir,$nom_page) {
 		array_multisort($lignes,SORT_STRING);
 		arsort($lignes);
 		$titre = $dir;
+		include_spip('inc/atelier_svn');
 		if (atelier_verifier_projet_svn($prefixe))
 			$titre = $dir . ' [COPIE DE TRAVAIL]';
-			
-		cadre_atelier($titre,$lignes);
+		
+		$id = 'e'.substr(md5(_DIR_PLUGINS.$prefixe.'/'.$dir),0,8);
+		atelier_cadre_depliable($titre,"Explorateur",$lignes,$id);
 
 		closedir($dh);
 	}

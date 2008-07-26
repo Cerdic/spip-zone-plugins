@@ -25,4 +25,49 @@ function atelier_recuperer_nom_auteur($id_auteur) {
 	$r = sql_fetsel('nom','spip_auteurs',"id_auteur=$id_auteur");
 	return $r['nom'];
 }
+
+function atelier_recuperer_versions($id_projet) {
+	$r = sql_fetsel('versions','spip_projets',"id_projet=$id_projet");
+	if ($r['versions']) $versions = explode ('/',$r['versions']);
+	return $versions;
+}
+
+function atelier_recuperer_taches($id_projet, $version) {
+	$taches = array();
+	$q = sql_select('id_tache, titre, etat',
+			'spip_taches',
+			'id_projet='.$id_projet.' AND version="'.$version.'"',
+			'',
+			'etat');
+
+	while ($r = sql_fetch($q))
+		$taches[] = '<a href="'.generer_url_ecrire('taches','id_tache='.$r['id_tache']).'">'.$r['titre'].'</a></td><td style="text-align:right;">'.$r['etat'];
+	return $taches;
+}
+
+function atelier_recuperer_taches_ouvertes($id_projet, $version) {
+	$taches = array();
+	$q = sql_select('id_tache, titre, etat',
+			'spip_taches',
+			'id_projet='.$id_projet.' AND version="'.$version.'" AND etat="ouverte"',
+			'',
+			'etat');
+
+	while ($r = sql_fetch($q))
+		$taches[] = '<a href="'.generer_url_ecrire('taches','id_tache='.$r['id_tache']).'">'.$r['titre'].'</a>';
+	return $taches;
+}
+
+function atelier_recuperer_taches_fermees($id_projet, $version) {
+	$taches = array();
+	$q = sql_select('id_tache, titre, etat',
+			'spip_taches',
+			'id_projet='.$id_projet.' AND version="'.$version.'" AND etat="fermee"',
+			'',
+			'etat');
+
+	while ($r = sql_fetch($q))
+		$taches[] = '<a href="'.generer_url_ecrire('taches','id_tache='.$r['id_tache']).'">'.$r['titre'].'</a>';
+	return $taches;
+}
 ?>

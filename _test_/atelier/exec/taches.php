@@ -56,10 +56,12 @@ function taches($id_tache,$row) {
 		echo debut_cadre_trait_couleur('',true);
 		echo gros_titre($row['id_tache'].' - '. $row['titre'],'',false);
 		echo '<b>'._T('atelier:texte_etat').' : </b>'._T('atelier:tache').' '.$row['etat'].'<br />';
+		echo '<b>'._T('atelier:urgence').' : </b> '.$row['urgence'].'<br />';
 
 		$nom = atelier_recuperer_nom_auteur($row['id_auteur']);
 		if (!$nom) $nom = 'personne';
-		echo 'Tache assignée à '. $nom . '<br /><br />';
+		echo 'Tache assignée à '. $nom . '<br />';
+		echo 'Dû pour la version '. $row['version'] .'<br /><br />';
 
 		echo debut_cadre_couleur('',true);
 

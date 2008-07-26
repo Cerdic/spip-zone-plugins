@@ -22,18 +22,19 @@
 function exec_atelier_objets_dist() {
 
 	exec_atelier_objets_args(intval(_request('id_projet')),
-				_request('rapport')
+				_request('rapport'),
+				_request('opendir')
 	);
 }
 
-function exec_atelier_objets_args($id_projet,$rapport='') {
+function exec_atelier_objets_args($id_projet,$rapport='',$opendir='') {
 	$projet_select = charger_fonction('projet_select','inc');
 	$row = $projet_select($id_projet);
 
-	atelier_objets($id_projet,$row,$rapport);
+	atelier_objets($id_projet,$row,$rapport,$opendir);
 }
 
-function atelier_objets($id_projet,$row,$rapport='') {
+function atelier_objets($id_projet,$row,$rapport='',$opendir='') {
 	include_spip('inc/atelier_presentation');
 	include_spip('inc/atelier_autoriser');
 	$nom_page = atelier_debut_page(_T('atelier:titre_objets'),'atelier_objets');
@@ -60,7 +61,12 @@ function atelier_objets($id_projet,$row,$rapport='') {
 		echo debut_cadre_formulaire('',true);
 		include_spip('inc/atelier_objets.php');
 		$atelier_objets = charger_fonction('atelier_objets','inc');
-		echo $atelier_objets(array('id_projet' => $id_projet));
+		echo $atelier_objets(array('id_projet' => $id_projet,
+					 'type' => $row['type']));
+
+		include_spip('inc/atelier_explorer');
+		atelier_explorer($row['prefixe'],$id_projet,$row['type'],$opendir,$nom_page);
+
 		echo fin_cadre_formulaire(true);
 
 	atelier_fin_gauche();

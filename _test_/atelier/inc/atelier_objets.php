@@ -23,7 +23,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inc_atelier_objets_dist($a=array()) {
 	$form = "<input type='hidden' name='atelier_objet' value='oui' />\n"
-	. atelier_objet_type()
+	. atelier_objet_type($a['type'])
 	. atelier_objet_nom()
 	. ("<div align='center'><input class='fondo' type='submit' value='"
 	. _T('atelier:bouton_creer_objet')
@@ -40,12 +40,19 @@ function atelier_objet_nom() {
 	return 'Nom de l\'objet : <input type="text" name="nom" /><br /><br />';
 }
 
-function atelier_objet_type() {
-	return 'Type d\'objet : <br />'
-	. '<select name="type">'
-	. '<option value="exec">Feuille dans l\'espace privée (exec)</option>'
-	. '<option value="inc">Formulaire dans l\'espace privée (inc)</option>'
-	. '<option value="action">Action dans l\'espace privée (action)</option>'
-	.'</select><br /><br />';
+function atelier_objet_type($type) {
+	$res = 'Type d\'objet : <br />'
+		. '<select name="type">';
+
+	if ($type == 'plugin')
+		$res .= '<option value="exec">Feuille dans l\'espace privée (exec)</option>'
+			. '<option value="inc">Formulaire dans l\'espace privée (inc)</option>'
+			. '<option value="action">Action dans l\'espace privée (action)</option>';
+
+	$res .= '<option value="html">Page dans l\'espace publique (html)</option>'
+		. '</select><br /><br />';
+
+
+	return $res;
 }
 ?>

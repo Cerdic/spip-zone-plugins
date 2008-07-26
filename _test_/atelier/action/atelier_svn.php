@@ -96,41 +96,33 @@ function atelier_update_projet($nom,&$rapport) {
 }
 
 function atelier_checkout_projet($nom,$type,$etat,$creer_projet,&$rapport) {
-	$erreur = false;
 
 	include_spip('inc/atelier_plugins');
 	if (!$nom) {
 		$rapport .= _T('atelier:erreur_nom_manquant');
-		$erreur = true;
+		return;
 	}
 
-	if (($nom) && (atelier_verifier_repertoire_plugin($nom))) {
+	if (atelier_verifier_repertoire_plugin($nom)) {
 		$rapport .= _T('atelier:erreur_deja_present');
-		$erreur = true;
+		return;
 	}
 
-	if (!$erreur) {
-		$return_var = atelier_svn_import($nom,$type,$etat,&$rapport);
-
-		switch ($return_var) {
-			case 0 : // ok
-				foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />';
-				if ($creer_projet=='oui') atelier_svn_creer_projet($nom,$type,&$rapport);
-				break;
-			case 1 : $rapport .= _T('atelier:erreur_commande');break; // erreur commande
-			default : $rapport .= _T('atelier:erreur_svn_pas_installe'); break; // pas de svn !
-		}
-	}
-}
-
-function atelier_svn_import($nom,$type,$etat,&$rapport) {
 	$url_svn = 'svn://zone.spip.org/spip-zone/_'.$type.'s_/_'.$etat.'_/'.$nom;
-	$output = array();
 	$return_var = 0;
 	$rapport .= _T('atelier:commande'). 'svn checkout '.$url_svn . '<br />';
-	exec('cd '._DIR_PLUGINS.';svn checkout '.$url_svn,&$output,&$return_var);
+	exec('cd '._DIR_PLUGINS.';svn checkout '.$url_svn.' 2>&1',&$output,&$return_var);
 	$rapport .= _T('atelier:code_retour').$return_var.'<hr />';
-	return $return_var;
+	foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />';
+
+	switch ($return_var) {
+		case 0 : // ok
+
+			if ($creer_projet=='oui') atelier_svn_creer_projet($nom,$type,&$rapport);
+			break;
+		case 1 : $rapport .= _T('atelier:erreur_commande');break; // erreur commande
+		default : $rapport .= _T('atelier:erreur_svn_pas_installe'); break; // pas de svn !
+	}
 }
 
 function atelier_svn_creer_projet($nom,$type,&$rapport) {
