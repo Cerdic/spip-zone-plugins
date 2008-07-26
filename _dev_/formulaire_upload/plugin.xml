@@ -9,20 +9,16 @@
 	fil@rezo.net
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
 	dev
 	</etat>
 	<description>
 		<multi>
-		Permet &#224; chaque r&#233;dacteur d'uploader des documents dans sa bo&#238;te perso ; {cf.} [la zone d'upload->../spip.php?page=upload_zone].
-		
-		<h4><a href="?exec=cfg&amp;cfg=formupload">Configuration</a></h4>
+		Permet &#224; chaque r&#233;dacteur d'uploader des documents dans sa bo&#238;te perso
 		[it]
-		Consente ad ogni redattore di effettuare l'upload di documenti in un suo spazio personale; {cf.} [la zona di upload->../spip.php?page=upload_zone].
-
-		<h4><a href="?exec=cfg&amp;cfg=formupload">Configurazione</a></h4>
+		Consente ad ogni redattore di effettuare l'upload di documenti in un suo spazio personale
 		</multi>
 	</description>
 	<prefix>
@@ -33,6 +29,5 @@
 
 	<fonctions>base/formulaire_upload.php</fonctions>
 
-	<version_base>0.1</version_base>
-	<install>base/formulaire_upload_install.php</install>
+	<necessite id='spip' version='[2.0;]' />
 </plugin>

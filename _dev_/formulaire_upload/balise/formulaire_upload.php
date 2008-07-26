@@ -75,13 +75,13 @@ function balise_FORMULAIRE_UPLOAD_dyn(
 	if (is_array(_request('supprimer')))
 	foreach (_request('supprimer') as $supprimer) {
 		if ($supprimer = intval($supprimer)
-		AND $s = spip_query("SELECT * FROM spip_documents_${type}s WHERE id_${type}="._q($id)." AND id_document="._q($supprimer))
+		AND $s = spip_query("SELECT * FROM spip_documents_liens WHERE id_objet="._q($id)." AND objet='$type' AND id_document="._q($supprimer))
 		AND $t = spip_fetch_array($s)) {
 			include_spip('inc/documents');
 			$s = spip_query("SELECT * FROM spip_documents WHERE id_document="._q($supprimer));
 			$t = spip_fetch_array($s);
 			unlink(copie_locale(get_spip_doc($t['fichier'])));
-			spip_query("DELETE FROM spip_documents_${type}s WHERE id_document="._q($supprimer));
+			spip_query("DELETE FROM spip_documents_liens WHERE id_document="._q($supprimer));
 			spip_query("DELETE FROM spip_documents WHERE id_document="._q($supprimer));
 			$invalider = true;
 			spip_log("supprimer document ($type)".$supprimer, 'upload');
