@@ -103,8 +103,8 @@ $.fn.opencrayon = function(evt, percent) {
         'left': offset.left,
         'w': $(this).width(),
         'h': $(this).height(),
-        'ww': window.innerWidth,
-        'wh': window.innerHeight,
+        'ww': (window.innerWidth ? window.innerWidth : (document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.offsetWidth)),
+        'wh': (window.innerHeight ? window.innerHeight : (document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.offsetHeight)),
         'em': $(this).px('fontSize'), // eviter un bug MSIE sur fontSize
         'class': me.className,
         'color': $(this).css('color'),
