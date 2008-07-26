@@ -169,6 +169,12 @@ class Crayon {
 		// hauteur maxi d'un textarea selon wh: window height
 		$maxheight = min(max(intval(_request('wh', $c)) - 50, 400), $this->hauteurMaxi);
 		$this->hauteur = min(max(intval(_request('h', $c)), $this->hauteurMini), $maxheight);
+		$this->left = _request('left');
+		$this->top = _request('top');
+		$this->w = _request('w');
+		$this->h = _request('h');
+		$this->ww = _request('ww');
+		$this->wh = _request('wh');
 	}
 
 	// recuperer les elements de style
