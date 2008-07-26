@@ -97,9 +97,13 @@ $.fn.opencrayon = function(evt, percent) {
       .find('>span.crayon-icones span')
       .append(configCrayons.mkimg('searching')); // icone d'attente
       var me=this;
+      var offset = $(this).offset();
       var params = {
+        'top': offset.top,
+        'left': offset.left,
         'w': $(this).width(),
         'h': $(this).height(),
+        'ww': window.innerWidth,
         'wh': window.innerHeight,
         'em': $(this).px('fontSize'), // eviter un bug MSIE sur fontSize
         'class': me.className,
