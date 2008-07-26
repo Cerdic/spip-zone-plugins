@@ -97,12 +97,9 @@
 	<div id="exif_bas_#GET{compteur}" style='display: none; background-color: #b5ca77; padding: 5px; -webkit-border-radius: 10px;-moz-border-radius: 10px; margin-bottom: 5px; margin-top: 5px;'>
 	
 	
-	
-	<table cellspacing='3' cellpadding='0' style='width: 100%;  font-family: verdana; border: 0px;'>
-	
-	<tr>
-		<td style="text-align: center; font-size: 11px; font-weight: bold;">
 		<div style="float: #LANG_RIGHT;"><a href="#" onclick="$('#exif_haut_#GET{compteur}').show();$('#exif_bas_#GET{compteur}').hide(); return false;">[<img src="(#CHEMIN{images/noeud_moins.gif})" alt="-" />]</a></div>
+
+		<div style="text-align: center; font-size: 11px; font-weight: bold;">
 		[(#ENV{fichier}|lire_exif{logoAppareil}|?{" ",""})
 			[<a id="logo_camera_small#GET{compteur}" onclick="$('#logo_camera_small#GET{compteur}').hide(); $('#logo_camera_big#GET{compteur}').show(); return false;" href="#">(#GET{logo}|image_reduire{64})</a>]
 			[<a id="logo_camera_big#GET{compteur}" onclick="$('#logo_camera_big#GET{compteur}').hide(); $('#logo_camera_small#GET{compteur}').show(); return false;" style="display: none;" href="#">(#GET{logo}|image_reduire{120})</a>]
@@ -111,13 +108,10 @@
 			[(#ENV{fichier}|lire_exif{model})]
 		
 		</div>
-		</td>
-	</tr>
-	<tr><td>
-		<div id="histogramme#GET{compteur}" style="text-align: center;"><img src="#CHEMIN{images/loader.gif}" alt="Loading..." /></div>
-	</td></tr>
-	</table>
+		</div>
 
+		<div id="histogramme#GET{compteur}" style="text-align: center; padding-top: 5px;"><img src="#CHEMIN{images/loader.gif}" alt="Loading..." /></div>
+	
 	<table cellspacing='3' cellpadding='0' style='width: 100%;  font-family: verdana; border: 0px;'>
 
 	[(#REM) IPTC simples]
