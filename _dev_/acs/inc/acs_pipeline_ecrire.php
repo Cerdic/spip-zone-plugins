@@ -29,17 +29,6 @@ function acs_ajouterBouton($boutons_admin) {
 		_T('acs:configurer_site') // affichage du texte
 		);
 	}
-
-  $boutons_admin['accueil']->sousmenu["acs_documents_liste"]= new Bouton(
-  "doc-24.gif",
-  _T('info_document')
-  );
-
-  $boutons_admin['accueil']->sousmenu["acs_suivi_admins"]= new Bouton(
-  _DIR_ACS.'img_pack/admin-24.gif',
-  _T('acs:publications')
-  );
-
 	return $boutons_admin;
 }
 
