@@ -9,15 +9,15 @@
 Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 ][(#SET{title,<:acs:entete_meta_page_auteurs:>[ (#NOM_SITE_SPIP|textebrut)]})]
-<INCLURE{fond=composants/entete/entete}{page=plan}{title=#GET{title}}{mrobots=none}{mexpires=86400}>
+<INCLURE{fond=composants/entete/entete}{env=#ENV}{page=plan}{title=#GET{title}}{mrobots=none}{mexpires=86400}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
 	<div class="mg">
 		[(#REM) Colonne 1 - Menu de navigation par rubriques ]
-    <INCLURE{fond=composants/col1/col1}{self=#SELF}>
+    <INCLURE{fond=composants/col1/col1}{self=#SELF}{env=#ENV}>
 	</div><!-- fin mg -->
 </div><!-- fin colonne1 (navigation) -->
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  <INCLURE{fond=composants/onglets/onglets}>
+  <INCLURE{fond=composants/onglets/onglets}{env=#ENV}>
   <div id="onglet">
 		<span id="hierarchie" style="float: left"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; auteurs</span>
 		<span class="texte_nav" style="float: right">Faisons les présentations ...</span>
@@ -34,4 +34,4 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 	</div><!-- fin onglet -->
 </div><!-- fin colonne2 -->
 [(#REM) Pied de page ]
-<INCLURE{fond=composants/pied/pied}{self=#SELF}>
+<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>

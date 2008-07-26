@@ -9,7 +9,7 @@
 	<auteur>	<!-- Auteur du plugin -->
  	Daniel FAIVRE &copy; 2008 - licence GPL
 	</auteur>
-  <version>0.4 (20080725)</version>
+  <version>0.4 (20080726)</version>
 	<etat>
 	dev
 	</etat>
@@ -42,10 +42,9 @@
     <nom>post_edition</nom>
     <inclure>inc/acs_post_edition.php</inclure>
   </pipeline>
-
   <pipeline>
-    <nom>insert_head</nom>
-    <inclure>inc/acs_insert_head.php</inclure>
-  </pipeline>
+		<nom>insert_head</nom>
+		<inclure>inc/acs_insert_head.php</inclure>
+	</pipeline>
 
 </plugin>

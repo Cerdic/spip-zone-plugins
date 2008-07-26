@@ -11,19 +11,19 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 Affiche un agenda par périodes choisies
 
 ][(#SET{mkeywords,[(#ANNEE)][,(#MOIS)][,(#JOUR)][,(#EVAL{'_T("acs:entete_meta_page_agenda").","._T("acs:entete_meta_keywords")'})]})]
-<INCLURE{fond=composants/entete/entete}{page=agenda}{self=#SELF}{title=<:acs:entete_meta_page_agenda:>}{mdescription=<:acs:entete_meta_page_agenda:>}{mkeywords=#GET{mkeywords}}>[(#REM) Entete de la page + titre du site ]
+<INCLURE{fond=composants/entete/entete}{page=agenda}{self=#SELF}{env=#ENV}{title=<:acs:entete_meta_page_agenda:>}{mdescription=<:acs:entete_meta_page_agenda:>}{mkeywords=#GET{mkeywords}}>[(#REM) Entete de la page + titre du site ]
 
 [(#REM) Menu de navigation laterale (colonne 1)]
 <div id="colonne1"><div class="spacer"></div>
     <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
-      <INCLURE{fond=composants/col1/col1}>
+      <INCLURE{fond=composants/col1/col1}{env=#ENV}>
   </div>[(#REM) fin menu ]
 </div>[(#REM) fin colonne1 (navigation) ]
 
 [(#REM) Colonne 2 ]
 <div id="colonne2"><div class="spacer"></div>
   [(#REM) Contenu principal : derniers articles publies ]
-  <INCLURE{fond=composants/onglets/onglets}{current=agenda}>
+  <INCLURE{fond=composants/onglets/onglets}{current=agenda}{env=#ENV}>
   <div id="onglet">
 		<div class="page_agenda">
 			[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=agenda_#ENV{type,mois}} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}>]
@@ -32,4 +32,4 @@ Affiche un agenda par périodes choisies
 </div><!-- fin colonne2 -->
 
 [(#REM) Pied de page ]
-<INCLURE{fond=composants/pied/pied}{self=#SELF}>
+<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>

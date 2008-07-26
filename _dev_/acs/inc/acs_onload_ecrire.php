@@ -29,6 +29,13 @@ $GLOBALS['acs_table_versions_spip'] = array(
 if (_request('exec'))
   acs_acces(_request('exec'));
 
+  /**
+   * Contrôle l'accès à la page $page
+   * Les pages à contrôler sont déclarées dans $GLOBALS['ACS_ACCES'] (acs_options)
+   * et dans $GLOBALS['meta']['acsCadenasse'] (inc/acs_adm)
+   *
+   * @param string $page
+   */
 function acs_acces($page) {
   // les fichiers exec de configuration de spip sont administrés par les mêmes admins qu'ACS
   $enfer = array('acs', 'configuration', 'config_lang', 'admin_tech', 'admin_vider', 'admin_plugin');
@@ -39,7 +46,7 @@ function acs_acces($page) {
 
   $GLOBALS['ACS_ENFER'] = $enfer; // On garde cette définition pour affichage
 
-  if (isset($GLOBALS['meta']['ACS_ADMINS'])) { // Pas d'action avant initialisation !
+  if (isset($GLOBALS['meta']['ACS_ADMINS'])) { // Pas d'action avant initialisation d'ACS !
     // Les pages à accès contrôlé par ACS, avec choix des admins
     if (isset($GLOBALS['meta']['acsCadenasse']) && $GLOBALS['meta']['acsCadenasse']) {
       $acsCadenasse = unserialize($GLOBALS['meta']['acsCadenasse']);

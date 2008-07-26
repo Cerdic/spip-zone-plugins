@@ -8,25 +8,51 @@
 Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
-]<BOUCLE_sites(SITES){id_syndic}{unique}>
+]<BOUCLE_site(SYNDICATION) {id_syndic} {unique}>
+[(#REM) Les sites n'ont pas de "lang" a proprement parler ; on se base donc sur la langue de la rubrique qui les contient. Les articles syndiques, eux, ont une "lang". ]
+<BOUCLE_lang(RUBRIQUES){id_rubrique}>[(#SET{lang,#LANG})]</BOUCLE_lang>
 <INCLURE{fond=composants/entete/entete}{page=site}{title=<:site:>}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
 	<div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
-		<INCLURE{fond=composants/col1/col1}{self=#SELF}>
+		<INCLURE{fond=composants/col1/col1}{self=#SELF}{env=#ENV}>
 	</div>[(#REM) fin mg ]
 </div>[(#REM) fin colonne1 (navigation) ]
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  <INCLURE{fond=composants/onglets/onglets}{current=sites}>
+  <INCLURE{fond=composants/onglets/onglets}{current=sites}{env=#ENV}>
   <div id="onglet">
 	  <div class="cartouche">
-      <h1 style="clear:both;">[(#LOGO_SITE|left)]<a href="#URL_SITE" title="[(#DESCRIPTIF)]" target="_new"><strong><strong>#NOM_SITE</strong></strong></a>
-      </h1>
-      <a href="#URL_SITE" title="[(#DESCRIPTIF)]" target="_new">#URL_SITE</a>
+      [(#LOGO_SITE|left)]
+      <h1 class="#EDIT{nom_site} titre" style="clear:both;"><a href="#URL_SITE" title="[(#DESCRIPTIF)]" class="spip_out" target="_new">#NOM_SITE</a></h1>
+      [<p class="#EDIT{url_site} soustitre"><a href="#URL_SITE" title="[(#DESCRIPTIF)]" class="spip_out" target="_new">(#URL_SITE)</a></p>]
       [(#DESCRIPTIF|justifier)]
-      [(#REM) Forum du site ]
-      [<a href="#forum" name="forum" id="forum"></a><h2 class="forum-repondre"><span class="texte_nav" style="float: right"><a href="#SELF&ouvrir=oui"><small><:lire_tous_les_messages:></small></a></span><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:><small><i>(<:repondre_article_notice:>)</i></small></a><INCLURE{fond=composants/forums/forum}{id_syndic}{ouvrir=#OUVRIR}{debut_forums}>]
+      
+            [(#REM) Articles issus de la syndication ]
+      <B_articles>
+      <div class="liste-articles">
+        #ANCRE_PAGINATION
+        <h2 class="invisible"><:articles:></h2>
+        <ul>
+          <BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {pagination 5} {lang=#LANG}>
+          <li>
+            <h3 class="titre"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
+            [<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
+            <small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)][ &mdash; <em>(#TAGS|afficher_tags)</em>]</small>
+            [<div class="texte">(#DESCRIPTIF|image_reduire{300})
+            <br class="nettoyeur" /></div>]
+          </li>
+          </BOUCLE_articles>
+        </ul>
+        [<p class="pagination">(#PAGINATION)</p>]
+      </div>
+      </B_articles>
+
+      [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+      
+      [(#REM) Forum du site TODO : le refaire fonctionner, et décommenter ça !!! (spip va chercher une table syndics) grr ...
+      [<a href="#forum" name="forum" id="forum"></a><h2 class="forum-repondre"><span class="texte_nav" style="float: right"><a href="#SELF&ouvrir=oui"><small><:lire_tous_les_messages:></small></a></span><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:><small><i>(<:repondre_article_notice:>)</i></small></a><INCLURE{fond=inc-forum}{env=#ENV}{id_syndic}{ouvrir=#OUVRIR}{debut_forums}>]
+      ]
 		</div>[(#REM) fin cartouche ]
 	</div>[(#REM) fin onglet ]
 </div>[(#REM) fin colonne2 ]
-<INCLURE{fond=composants/pied/pied}{self=#SELF}>[(#REM) Pied de page ]
-</BOUCLE_sites>
+<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
+</BOUCLE_site>

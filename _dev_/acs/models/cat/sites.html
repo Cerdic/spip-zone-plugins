@@ -10,16 +10,16 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Sites
 
-]<INCLURE{fond=composants/entete/entete}{page=sites}{title=<:autres_sites:>}>
+]<INCLURE{fond=composants/entete/entete}{env=#ENV}{page=sites}{title=<:autres_sites:>}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
     <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
-      <INCLURE{fond=composants/col1/col1}>
+      <INCLURE{fond=composants/col1/col1}{env=#ENV}>
   </div>[(#REM) fin menu ]
 </div>[(#REM) fin colonne1 (navigation) ]
 
 [(#REM) Colonne 2 ]
 <div id="colonne2"><div class="spacer"></div>
-    <INCLURE{fond=composants/onglets/onglets}{current=sites}>
+    <INCLURE{fond=composants/onglets/onglets}{current=sites}{env=#ENV}>
 	<div id="onglet">
   [(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:autres_sites:></div>
@@ -44,4 +44,4 @@ Sites
     </BOUCLE_secteurs>
 	</div><!-- fin onglet -->
 </div><!-- fin colonne2 -->
-<INCLURE{fond=composants/pied/pied}{self=#SELF}>[(#REM) Pied de page ]
+<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]

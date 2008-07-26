@@ -9,23 +9,23 @@ Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 ][(#SET{mkeywords,#EVAL{'_T("acs:entete_meta_page_plan").","._T("acs:entete_meta_keywords")'}})]
-<INCLURE{fond=composants/entete/entete}{page=plan}{title=<:acs:entete_meta_page_plan:>}{mdescription=<:acs:entete_meta_page_plan:>}{mkeywords=#GET{mkeywords}}{mabstract=<:acs:entete_meta_page_plan:>}{mexpires=7200}{msubject=<:acs:entete_meta_page_plan:>}>
+<INCLURE{fond=composants/entete/entete}{page=plan}{env=#ENV}{title=<:acs:entete_meta_page_plan:>}{mdescription=<:acs:entete_meta_page_plan:>}{mkeywords=#GET{mkeywords}}{mabstract=<:acs:entete_meta_page_plan:>}{mexpires=7200}{msubject=<:acs:entete_meta_page_plan:>}>
 
 [(#REM) Menu de navigation laterale (colonne 1) ]
 <div id="colonne1"><div class="spacer"></div>
     <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
-    <INCLURE{fond=composants/col1/col1}>
+    <INCLURE{fond=composants/col1/col1}{env=#ENV}>
   </div>[(#REM) fin menu ]
 </div>[(#REM) fin colonne1 (navigation) ]
 
 [(#REM) Colonne 2 ]
 <div id="colonne2"><div class="spacer"></div>
-	<INCLURE{fond=composants/onglets/onglets}{current=plan}>
+	<INCLURE{fond=composants/onglets/onglets}{current=plan}{env=#ENV}>
 	<div id="onglet">
 		[(#REM) Fil d'Ariane ]
 		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:plan_site:></div>
-    <INCLURE{fond=composants/articles/boucle-plan}{lang ?}>
+    <INCLURE{fond=composants/articles/boucle-plan}{lang ?}{env=#ENV}>
 	</div>
 </div>
-<INCLURE{fond=composants/pied/pied}{self=#SELF}>[(#REM) Pied de page ]
+<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 

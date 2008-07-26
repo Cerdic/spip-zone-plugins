@@ -9,9 +9,9 @@
 Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
------------------------------------------
- *  Feuilles de styles de squelette ACS
------------------------------------------
+-----------------------------------------------
+ *  Feuilles de styles du squelette ACS Cat  * 
+-----------------------------------------------
  *
  * taille typo
  * Base       100%
@@ -29,7 +29,8 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
  * 10px       0.65em
  *  9px       0.59em
  * Attention : en dessous de 0.71em le texte devient illisible en text smallest sur MSIE
- */
+ 
+ TODO : réduire au minimum ce qui est defini ici ;-)
 ]
 
 html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS */
@@ -38,24 +39,7 @@ html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-d
 /**
  * css de composants - components css
  */
-
-#INCLURE{fond=composants/fond/fond.css}
-#INCLURE{fond=composants/rubnav/rubnav.css}
-#INCLURE{fond=composants/onglets/onglets.css}
-#INCLURE{fond=composants/articles/articles.css}
-
-[(#CONFIG{acsAgendaUse}|=={oui}|?{' '}) #INCLURE{fond=composants/agenda/agenda.css} ]
-[(#CONFIG{acsAudioUse}|=={oui}|?{' '}) #INCLURE{fond=composants/audio/audio.css} ]
-[(#CONFIG{acsBanniereUse}|=={oui}|?{' '}) #INCLURE{fond=composants/banniere/banniere.css} ]
-[(#CONFIG{acsBandeauUse}|=={oui}|?{' '}) #INCLURE{fond=composants/bandeau/bandeau.css} ]
-[(#CONFIG{acsEditoUse}|=={oui}|?{' '}) #INCLURE{fond=composants/edito/edito.css} ]
-[(#CONFIG{acsEncartUse}|=={oui}|?{' '}) #INCLURE{fond=composants/encart/encart.css} ]
-[(#CONFIG{acsRechercheUse}|=={oui}|?{' '}) #INCLURE{fond=composants/recherche/recherche.css} ]
-[(#CONFIG{acsForumsUse}|=={oui}|?{' '}) #INCLURE{fond=composants/forums/forums.css}]
-[(#CONFIG{acsOursUse}|=={oui}|?{' '}) #INCLURE{fond=composants/ours/ours.css} ]
-[(#CONFIG{acsPlaylistUse}|=={oui}|?{' '}) #INCLURE{fond=composants/playlist/playlist.css} ]
-[(#CONFIG{acsRepimagesUse}|=={oui}|?{' '}) #INCLURE{fond=composants/repimages/repimages.css} ]
-[(#CONFIG{acsSyndicUse}|=={oui}|?{' '}) #INCLURE{fond=composants/syndic/syndic.css} ]
+[(#HEADER_COMPOSANTS{css}|compacte_css)]
 
 [(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{'', ' '})
 .notation {}

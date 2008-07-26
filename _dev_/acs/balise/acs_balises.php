@@ -34,6 +34,54 @@ function balise_ACS_CHEMIN($p) {
   return $p;
 }
 
+/**
+ * Retourne les css ou les javascripts des composants
+ */
+function balise_HEADER_COMPOSANTS($p) {
+  $typeh = interprete_argument_balise(1,$p);
+  $typeh = substr($typeh, 1, strlen($typeh)-2);
+  $p->code = 'composants_head_cache("'.$typeh.'")';
+  $p->statut = 'php';
+  $p->interdire_scripts = false;
+  return $p; 
+}
+
+// Retourne les css ou javascripts des composants, concaténées. Cache.
+function composants_head_cache($type) {
+  $r = cache('composants_head', 'head_'.$GLOBALS['meta']['acsModel'].'_'.$type, array("$type"));
+  return $r[0];
+}
+
+// Retourne les css ou javascripts des composants, concaténées. Fonction.
+function composants_head($type) {
+  require_once _DIR_ACS.'lib/composant/composants_liste.php';
+  if (is_array(composants_liste())) {
+    // composants_liste() est statique,  mise en cache,
+    // et tient compte de l'override éventuel
+    foreach (composants_liste() as $c=>$tag) {
+      if (!isUsed($c)) continue;
+      $filepath = 'composants/'.$c.'/'.((strtolower($type) == 'css') ? $c.'.css': "$type/$c.js");
+      $file = find_in_path($filepath.'.html');
+      if (!$file) {
+        $file = find_in_path($filepath);
+        /*if (!$file)
+          continue;*/
+        $r .= file_get_contents($file);
+      }
+      else
+        $r .= recuperer_fond($filepath)."\r";
+    }
+  }
+  return $r;
+}
+/**
+ * Indique si un composant optionnel est activé
+ * Return true if an optionnal component is on
+ */
+function isUsed($c) {
+  if ($GLOBALS['meta']['acs'.ucfirst($c).'Use'] == 'oui') return true;
+  return false;
+}
 // #INTRO{taille, suite}
 // http://www.spip.net/@introduction
 // http://doc.spip.org/@balise_INTRODUCTION_dist

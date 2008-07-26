@@ -1,16 +1,16 @@
 #CACHE{7200}
 <BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}{tout}>
-<INCLURE{fond=composants/entete/entete}{page=rubrique}{title=#TITRE|textebrut}>
+<INCLURE{fond=composants/entete/entete}{env=#ENV}{page=rubrique}{title=#TITRE|textebrut}>
 
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
     <div class="mg">[(#REM) Menu de navigation par rubriques ]
-      <INCLURE{fond=composants/col1/col1}{id_rubrique}>
+      <INCLURE{fond=composants/col1/col1}{id_rubrique}{env=#ENV}>
   </div>[(#REM) fin menu ]
 </div>[(#REM) fin colonne1 (navigation) ]
 
 [(#REM) Colonne 2 ]
 <div id="colonne2"><div class="spacer"></div>
-	<INCLURE{fond=composants/onglets/onglets}{current=rubrique}>
+	<INCLURE{fond=composants/onglets/onglets}{current=rubrique}>{env=#ENV}
 	<div id="onglet">
 
     [(#REM) Fil d'Ariane ]
@@ -26,8 +26,8 @@
 
     <div class="contre-encart">
       [(#REM) Articles de la rubrique ]
-[(#MODE|=={Video}|?{' '}) <INCLURE{fond=composants/articles/boucle-articles-rubrique_video}{id_rubrique}{classement}{debut_articles=#ENV{'debut_articles'}}{rubrique=#TITRE}>]
-[(#MODE|!={Video}|?{' '}) <INCLURE{fond=composants/articles/boucle-articles-rubrique_texte}{id_rubrique}{classement}{debut_articles=#ENV{'debut_articles'}}{rubrique=#TITRE}>]
+[(#MODE|=={Video}|?{' '}) <INCLURE{fond=composants/articles/boucle-articles-rubrique_video}{env=#ENV}{id_rubrique}{classement}{debut_articles=#ENV{'debut_articles'}}{rubrique=#TITRE}>]
+[(#MODE|!={Video}|?{' '}) <INCLURE{fond=composants/articles/boucle-articles-rubrique_texte}{env=#ENV}{id_rubrique}{classement}{debut_articles=#ENV{'debut_articles'}}{rubrique=#TITRE}>]
 
 		  [(#REM) Documents joints a la rubrique ]
       <B_documents_joints>
@@ -55,12 +55,12 @@
     ]
     <div class="spacer"></div>
 
-    <INCLURE{fond=composants/breves/breves}{id_secteur}{debut_breves}>[(#REM) Breves du secteur ]
-    <INCLURE{fond=composants/syndic/syndic-rub}{id_rubrique}>[(#REM) Sites de la rubrique ]
+    <INCLURE{fond=composants/breves/breves}{env=#ENV}{id_secteur}{debut_breves}>[(#REM) Breves du secteur ]
+    <INCLURE{fond=composants/syndic/syndic-rub}{env=#ENV}{id_rubrique}>[(#REM) Sites de la rubrique ]
 
   </div>[(#REM) fin encart]
 </div>[(#REM) fin colonne 3]
 
 [(#REM) Pied de page ]
-<INCLURE{fond=composants/pied/pied}{self=#SELF}>
+<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>
 </BOUCLE_rubrique_principal>

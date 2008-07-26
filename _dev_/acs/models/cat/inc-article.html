@@ -11,10 +11,10 @@ Page d'un article.
 Si le plugin notation est présent, il est intégré.
 
 ]<BOUCLE_article_principal(ARTICLES) {id_article} {statut==[publie|propose|refuse]}>[(#SET{mdescription,<:acs:entete_article:>[ (#NOM_SITE_SPIP|textebrut)][: (#TITRE|textebrut)]})][(#SET{mkeywords,[(#EVAL{'_T("acs:entete_article").","._T("acs:entete_meta_keywords")'})][,(#TITRE|supprimer_tags|askeywords)][,(#SURTITRE|supprimer_tags|askeywords)][,(#SOUSTITRE|supprimer_tags|askeywords)][,(#LESAUTEURS|supprimer_tags|askeywords)][,(#DESCRIPTIF|supprimer_tags|askeywords)]})][(#SET{mabstract,[(#TITRE|textebrut)][: (#DESCRIPTIF|supprimer_tags|textebrut|sans_guillemets)]})]
-<INCLURE{fond=composants/entete/entete}{page=article}{title=#TITRE|textebrut}{mdescription=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mauthor=#LESAUTEURS|supprimer_tags|textebrut}{mabstract=#GET{mdescription}}{mcopyright=#LESAUTEURS|supprimer_tags|textebrut}{mcontributor=#LESAUTEURS|supprimer_tags|textebrut}{mpublisher=#LESAUTEURS|supprimer_tags|textebrut}{msubject=#GET{mabstract}}>[(#REM) Entete de la page + titre du site ]
+<INCLURE{fond=composants/entete/entete}{env=#ENV}{page=article}{title=#TITRE|textebrut}{mdescription=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mauthor=#LESAUTEURS|supprimer_tags|textebrut}{mabstract=#GET{mdescription}}{mcopyright=#LESAUTEURS|supprimer_tags|textebrut}{mcontributor=#LESAUTEURS|supprimer_tags|textebrut}{mpublisher=#LESAUTEURS|supprimer_tags|textebrut}{msubject=#GET{mabstract}}>[(#REM) Entete de la page + titre du site ]
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
   <div class="mg">    
-    <INCLURE{fond=composants/col1/col1}{self=#SELF}>[(#REM) Colonne 1 - Menu de navigation par rubriques ]
+    <INCLURE{fond=composants/col1/col1}{self=#SELF}{env=#ENV}>[(#REM) Colonne 1 - Menu de navigation par rubriques ]
     <B_auteurs>
     <ul>
         <BOUCLE_auteurs(AUTEURS) {id_article} {par nom} >
@@ -65,7 +65,7 @@ Si le plugin notation est présent, il est intégré.
    [(#REM) Colonne 2 ]
    <div id="colonne2"><div class="spacer"></div>
       [(#REM) Contenu principal : derniers articles publies ]
-        <INCLURE{fond=composants/onglets/onglets}{current=article}>
+        <INCLURE{fond=composants/onglets/onglets}{current=article}{env=#ENV}>
 
          <div id="onglet">
 
@@ -139,7 +139,7 @@ Si le plugin notation est présent, il est intégré.
          [(#REM) Petition :
          La petition ayant une PAGINATION il faut absolument lui passer SELF]
          [(#PETITION|?{' '})
-            <INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
+            <INCLURE{fond=inc-petition}{env=#ENV}{id_article}{self=#SELF}>
          ]
 					<br class="nettoyeur" />
           [(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{' '}) #NOTATION]
@@ -154,8 +154,8 @@ Si le plugin notation est présent, il est intégré.
 <div id="colonne3"><div class="spacer"></div>
   <div class="encart">
     [(#REM) colonne 3 configurable ]
-    <INCLURE{fond=composants/col3/col3}{self=#SELF}{debut_doc}>
+    <INCLURE{fond=composants/col3/col3}{self=#SELF}{env=#ENV}{debut_doc}>
   </div>[(#REM) fin encart ]
 </div>[(#REM) fin colonne3]
-<INCLURE{fond=composants/pied/pied}{self=#SELF}>[(#REM) Pied de page ]
+<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 </BOUCLE_article_principal>

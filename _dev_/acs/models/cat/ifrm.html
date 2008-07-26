@@ -39,22 +39,22 @@ la page distante est affichée dans le site, en gardant les menus de navigation
 </head>
 
 <body class="page_plan">
-<INCLURE{fond=composants/entete/entete}>
+<INCLURE{fond=composants/entete/entete}{env=#ENV}>
 
 [(#REM) Menu de navigation lateral (colonne 1)]
 <div id="colonne1"><div class="spacer"></div>
     <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
-      <INCLURE{fond=composants/col1/col1}>
+      <INCLURE{fond=composants/col1/col1}{env=#ENV}>
   </div>[(#REM) fin menu ]
 </div>[(#REM) fin colonne1 (navigation) ]
 
 [(#REM) Colonne 2 ]
 <div id="colonne2"><div class="spacer"></div>
-  <INCLURE{fond=composants/onglets/onglets}>
+  <INCLURE{fond=composants/onglets/onglets}{env=#ENV}>
   <div id="onglet">[(#REM) Contenu principal : un iframe ]
     [(#REM) Fil d'Ariane ]
     <span id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; #IFRM</span>
       <iframe src="#IFRM" name="pc" style="width:99%; min-height: 400px; max-height:718px; margin-bottom: 6px" frameborder="0"></iframe>
   </div>
 </div>
-<INCLURE{fond=composants/pied/pied}{self=#SELF}>
+<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>

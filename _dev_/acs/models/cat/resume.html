@@ -12,7 +12,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 <INCLURE{fond=composants/entete/entete}{page=resume}{title=<:acs:entete_meta_page_resume:>}{mkeywords=#EVAL{'_T("acs:entete_meta_page_resume").","._T("acs:entete_meta_keywords")'}}{mdescription=#GET{mdescription}}{mabstract=<:acs:entete_meta_page_resume:>}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
   <div class="mg">[(#REM) Menu de navigation par rubriques ]
-    <INCLURE{fond=composants/col1/col1}{self=#SELF}{composants_optionnels=4}{debut_forums_liens}>
+    <INCLURE{fond=composants/col1/col1}{self=#SELF}{env=#ENV}{composants_optionnels=4}{debut_forums_liens}>
 	</div>[(#REM) fin mg ]
 </div>[(#REM) fin colonne1 (navigation) ]
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
@@ -23,14 +23,14 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
     <span id="hierarchie" style="float: left"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:en_resume:></span>
     <span class="texte_nav" style="float: right"><:acs:entete_meta_page_resume:></span>
     <br class="nettoyeur" />
-      <INCLURE{fond=composants/articles/boucle-articles}{debut_articles}{classement}{url=spip.php?page=resume}>
+      <INCLURE{fond=composants/articles/boucle-articles}{env=#ENV}{debut_articles}{classement}{url=spip.php?page=resume}>
 	</div>[(#REM) fin onglet ]
 </div>[(#REM) fin colonne2 ]
 <div id="colonne3"><div class="spacer"></div>
 <div class="encart">
   [(#REM) colonne configurable ]
-  <INCLURE{fond=composants/col3/col3}{self=#SELF}{composants_optionnels=5}{debut_breves}{debut_doc}>
+  <INCLURE{fond=composants/col3/col3}{self=#SELF}{env=#ENV}{composants_optionnels=5}{debut_breves}{debut_doc}>
 </div><!-- fin encart -->
 </div>[(#REM) fin colonne3 ]
-<INCLURE{fond=composants/pied/pied}{self=#SELF}>[(#REM) Pied de page ]
+<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 

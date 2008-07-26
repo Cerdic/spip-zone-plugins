@@ -12,14 +12,14 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
    Le fichier est en cache dans SPIP, mais les navigateurs ne doivent pas
    conserver cette page en memoire
 
-]<INCLURE{fond=composants/entete/entete}{self=#SELF}{page=login}>
+]<INCLURE{fond=composants/entete/entete}{self=#SELF}{env=#ENV}{page=login}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
   <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
-    <INCLURE{fond=composants/col1/col1}{self=#SELF}>
+    <INCLURE{fond=composants/col1/col1}{self=#SELF}{env=#ENV}>
   </div>
 </div>[(#REM) fin colonne1 (navigation) ]
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  <INCLURE{fond=composants/onglets/onglets}{current=login}>
+  <INCLURE{fond=composants/onglets/onglets}{current=login}{env=#ENV}>
   <div id="onglet" style="background: #ffffff">
     <div id="acs_op">[(#FORMULAIRE_ARTICLE{#SELF})]</div>
   </div>
@@ -32,5 +32,5 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
     Pour profiter de tous les avantages de ce site, demandez un code d'accès <u>par mail</u> à <a href="mailto:[(#EMAIL_WEBMASTER|cm)]">[(#EMAIL_WEBMASTER|cm)]</a>.</p>
   </div>
 </div>
-<INCLURE{fond=composants/pied/pied}{self=#SELF}>[(#REM) Pied de page ]
+<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 
