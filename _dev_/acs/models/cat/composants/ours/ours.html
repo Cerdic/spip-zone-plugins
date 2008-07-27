@@ -23,7 +23,7 @@ Editor infos & contact
       <span class="screen_only"> | <a title="<:acs:ours_text_tooltip:>" href="oo/"><:acs:ours_text:></a></span>
       [(#CONFIG{acsDemocratieUse}|=={oui}|?{' '})<span class="screen_only"> | <a href="?page=prop" title="<:acs:democratie_gouvernance:>"><:acs:ours_proposes:></a></span>]
       [(#CONFIG{acsOursLienRefus,oui}|=={oui}|?{' '})<span class="screen_only"> | <a title="<:acs:ours_refus:>" href="?page=refus"><:acs:ours_refus:></a></span>]
-      [(#CONFIG{acsOursLienACS,oui}|=={oui}|?{' '})<span class="screen_only"> | <a title="<:acs:ours_acs_powered_tip:>"  href="http://acs.geomaticien.org"><img src="[(#CHEMIN{img_pack/acs_32x32.gif})]" alt="ACS powered" /></a></span>]
+      [(#CONFIG{acsOursLienACS,oui}|=={oui}|?{' '})<span class="screen_only"> | <a title="<:acs:ours_acs_powered_tip:> ([(#EVAL{ACS_VERSION})]-[(#EVAL{ACS_RELEASE})])"  href="http://acs.geomaticien.org"><img src="[(#CHEMIN{img_pack/acs_32x32.gif})]" alt="ACS powered" /></a></span>]
       </div>
     </fieldset>
   </div>
