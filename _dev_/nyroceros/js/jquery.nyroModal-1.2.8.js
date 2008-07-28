@@ -573,7 +573,7 @@ jQuery(function($) {
 			if (!currentSettings.modal)
 				removeModal();
 		} else if (currentSettings.type == 'gallery' && modal.ready && modal.dataReady && !modal.anim && !modal.transition) {
-			if (e.keyCode == 39 || e.keyCode == 40) {
+			if (e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 32) {
 				e.preventDefault();
 				$('.nyroModalNext', modal.content).eq(0).trigger('click');
 				return false;
