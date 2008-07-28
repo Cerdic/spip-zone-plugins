@@ -29,7 +29,32 @@ $("'.lire_config('nyroceros/selecteur_galerie','#documents_portfolio .nyroceros'
 
 // charger nyro sur autre chose
 $("'.lire_config('nyroceros/selecteur_commun','.nyroceros').'").nyroModal();
+
+'
+. ((lire_config('nyroceros/preload') == 'non')
+  ? ''
+  : '
+  // preload images
+  $.fn.preload = function() {
+    var url;
+    return this.each(function() {
+      if ((url = $(this).attr("href")) && url.match(/\.(jpg|jpeg|png|gif)$/)) {
+        var img = new Image;
+        img.src = url;
+      }
+    });
+  }
+
+  $.fn.nyroModal.settings.endShowContent = function(elts,settings) {
+    $(".nyroModalNext").preload();
+  }
+  
+  $(".nyroceros[@rel]:eq(0)").preload();
+  ')
+
+.'
 }
+
 //onAjaxLoad is defined in private area only
 if(typeof onAjaxLoad == "function") onAjaxLoad(init_f);
 	$(init_f);

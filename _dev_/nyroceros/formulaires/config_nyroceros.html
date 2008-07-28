@@ -40,6 +40,19 @@
 				<label for='_nyro_traiter_images_off'><:non:></label>
 			</div>
 		</li>
+
+		<li class="editer_nyroceros_preload[ (#ENV**{erreurs}|table_valeur{preload}|oui)erreur]">
+			<label><:nyroceros:cfg_lbl_preload:></label>
+			<p class="explication"><:nyroceros:cfg_inf_preload:></p>
+			<div class="choix">
+				<input type="radio" name="preload" class="radio" id="_nyro_preload_on" value="oui" [(#ENV{preload,oui}|=={oui}|oui) checked="checked"] />
+				<label for='_nyro_preload_on'><:oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="preload" class="radio" id="_nyro_preload_off" value="non" [(#ENV{preload,oui}|=={non}|oui) checked="checked"] />
+				<label for='_nyro_preload_off'><:non:></label>
+			</div>
+		</li>
 	</ul>
 
 
