@@ -9,5 +9,4 @@ function photo_infos_header($flux) {
 }
 
 
-
 ?>

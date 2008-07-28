@@ -1494,6 +1494,7 @@ class phpExifReader {
 			if (isset($this->ImageInfo['h']["make"])) $logo[] = trim($this->ImageInfo['h']["make"]);
 			if (isset($this->ImageInfo['h']["model"])) $logo[] = trim($this->ImageInfo['h']["model"]);
 			$logo = join("_", $logo);
+			$logo = ereg_replace("\/", ",", $logo);
 			$this->ImageInfo['h']["logoAppareil"] = ereg_replace("\ +", "_", "$logo.png");
 		}
 		

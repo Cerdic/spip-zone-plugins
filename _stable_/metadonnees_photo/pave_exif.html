@@ -109,8 +109,9 @@
 		
 		</div>
 		</div>
-
-		<div id="histogramme#GET{compteur}" style="text-align: center; padding-top: 5px;"><img src="#CHEMIN{images/loader.gif}" alt="Loading..." /></div>
+		[(#ENV{fichier}|test_traiter_image{[(#ENV{fichier}|largeur)], [(#ENV{fichier}|hauteur)]}|>{0}|?{" ",""})
+			<div id="histogramme#GET{compteur}" style="text-align: center; padding-top: 5px;"><img src="#CHEMIN{images/loader.gif}" alt="Loading..." /></div>
+		]
 	
 	<table cellspacing='3' cellpadding='0' style='width: 100%;  font-family: verdana; border: 0px;'>
 
