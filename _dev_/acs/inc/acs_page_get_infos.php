@@ -100,7 +100,8 @@ function page_get_infos($page, $mode_source=false, $detail=false) {
         }
       }
     }
-    $src = '<div class="spip_source">';
+    $pagid = str_replace('/', '_slash_', str_replace('-', '_tiret_', $page));
+    $src = '<div class="spip_source crayon source-'.$pagid.'-1 style="scroll: auto;" >';
     $src .= ' '.nl2br(implode('',$srcol));
     if ($dejalu < strlen($pageContent))
       $src .= affiche_source($pageContent, $dejalu);

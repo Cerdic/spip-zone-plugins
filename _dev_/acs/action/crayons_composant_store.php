@@ -21,7 +21,7 @@ function action_crayons_composant_store_dist() {
 	$c = 'composants/'.$_POST['composant'].'/'.$_POST['composant'];
 	
 	// MàJ du composant - Update component
-	// TODO : faire ça plus proprement ! ;-)
+	// l'instanciation d'un objet composant met à jour le composant
 	include_spip('lib/composant/classComposantPrive');
 	$cprovi = new AdminComposant($_POST['composant']);
 	

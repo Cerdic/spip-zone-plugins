@@ -228,14 +228,14 @@ class AdminComposant {
     
     $r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'lib/picker/picker.js"></script>';
     if ($crayon instanceof Crayon) {
-      $r .= '<form name="acs" class="formulaire_crayon" action="?action=crayons_composant_store" method="post">'.
+      $r .= '<form id="acs" name="acs" class="formulaire_crayon" action="?action=crayons_composant_store" method="post">'.
             '<input type="hidden" class="crayon-id" name="crayons[]" value="'.$crayon->key.'" />'."\n".
             '<input type="hidden" name="name_'.$crayon->key.'" value="'.$crayon->name.'" />'."\n".
             '<input type="hidden" name="md5_'.$crayon->key.'" value="'.$crayon->md5.'" />'."\n";
           	"<input type='hidden' name='var_mode' value='recalcul' />";
     }
     else
-      $r .= '<form name="acs" action="?exec=acs&onglet=composants" method="post">';
+      $r .= '<form id="acs" name="acs" action="?exec=acs&onglet=composants" method="post">';
     $r .= "<input type='hidden' name='maj_composant' value='oui' />".
 					'<input type="hidden" name="composant" value="'.$this->type.'" />';
       
