@@ -1,0 +1,10 @@
+<plugin>
+  <nom>Spip 2.0 Reloaded</nom>
+  <auteur>Cedric Morin [yterium.com->http://www.yterium.com]</auteur>
+  <version>0.1</version>
+  <etat>test</etat>
+  <description>Ce que vous ne trouverez pas dans Spip 2.0</description>
+  <fonctions>public/spip2_criteres.php</fonctions>
+  <prefix>spip2</prefix>
+  <necessite id='SPIP' version='[2.0.0 dev;]' />
+</plugin>
