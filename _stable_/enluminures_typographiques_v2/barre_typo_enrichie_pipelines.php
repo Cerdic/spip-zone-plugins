@@ -37,6 +37,7 @@ function TypoEnluminee_BT_toolbox($params) {
 function TypoEnluminee_BT_caracteres($params) {
 	$params['flux'] .= bouton_barre_racc("barre_raccourci('[*','*]',$params[champ], $params[num])", _DIR_BTE_IMG.'miseenevidence.png', _T('enlumtypo:barre_miseenevidence'), $params['help'])
 		. bouton_barre_racc("barre_raccourci('&lt;sup&gt;','&lt;/sup&gt;',$params[champ], $params[num])", _DIR_BTE_IMG.'exposant.png', _T('enlumtypo:barre_exposant'), $params['help'])
+		. bouton_barre_racc("barre_raccourci('&lt;sub&gt;','&lt;/sub&gt;',$params[champ], $params[num])", _DIR_BTE_IMG.'indice.png', _T('enlumtypo:barre_indice'), $params['help'])
 		. bouton_barre_racc("barre_raccourci('&lt;sc&gt;','&lt;/sc&gt;',$params[champ], $params[num])", _DIR_BTE_IMG.'petitescapitales.png', _T('enlumtypo:barre_petitescapitales'), $params['help']);
     return $params;
 }

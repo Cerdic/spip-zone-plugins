@@ -15,6 +15,7 @@
 	 *           [*texte*] : encadrer/surligner le texte (une partie a l'interieur d'un paragraphe)
 	 *           [**texte*] : variante encadrer/surligner le texte (une partie a l'interieur d'un paragraphe)
 	 *           <sup>texte</sup> : mettre en exposant le texte selectionne
+	 *           <sub>texte</sub> : mettre en indice le texte selectionne
 	 *
 	 *     Styles pour les encadrements a rajouter dans votre feuille de style :
 	 *            .texteencadre-spip {
@@ -176,6 +177,8 @@ function TypoEnluminee_post_propre($texte) {
 		$remplace1[] = /* 22 */	"</strong>";
 		$remplace1[] = /* 23 */ 	"<sup>";
 		$remplace1[] = /* 24 */	"</sup>";
+		$remplace1[] = /* 25 */ 	"<sub>";
+		$remplace1[] = /* 26 */	"</sub>";
 		$remplace1[] = /* 40 */	"<acronym title='$1' class='spip_acronym spip'>$2</acronym>";
 	}
 
@@ -287,6 +290,8 @@ function TypoEnluminee_post_typo($texte) {
 		/* 22 */	"</strong>",
 		/* 23 */ 	"<sup>",
 		/* 24 */	"</sup>",
+		/* 25 */ 	"<sub>",
+		/* 26 */	"</sub>",
 	);
 	$texte = preg_replace($cherche1, $remplace1, $texte);
 	// Acronymes
