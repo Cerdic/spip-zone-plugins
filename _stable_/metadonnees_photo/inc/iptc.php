@@ -320,6 +320,6 @@ $val;
 
 } 
 
-/* Fin class_IPTC
+/* Fin class_IPTC */
 
 ?>
