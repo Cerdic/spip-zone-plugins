@@ -72,8 +72,28 @@
 </B_test23>
 <hr />
 
-#SET{test,#ARRAY{1,2,3,4}}
+<h2>Tableau GET</h2>
+#SET{test,#ARRAY{1,2,5,6,3,4}}
 <BOUCLE_test30(POUR){tableau #GET{test}}>
 #CLE=>#VALEUR<br />
 </BOUCLE_test30>
 <hr />
+<h3>Par cle</h3>
+<BOUCLE_test30(POUR){tableau #GET{test}}{par cle}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test30>
+<hr />
+<h3>!Par cle</h3>
+<BOUCLE_test30(POUR){tableau #GET{test}}{!par cle}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test30>
+<hr />
+<h3>Par valeur</h3>
+<BOUCLE_test30(POUR){tableau #GET{test}}{par valeur}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test30>
+<hr />
+<h3>!Par valeur</h3>
+<BOUCLE_test30(POUR){tableau #GET{test}}{!par valeur}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test30>
