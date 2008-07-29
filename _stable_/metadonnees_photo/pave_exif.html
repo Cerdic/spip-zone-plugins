@@ -3,8 +3,7 @@
 
 [(#SET{afficher,[(#ENV{fichier}|lire_exif{make}|sinon{#ENV{fichier}|lire_exif{model}}|sinon{[(#ENV{fichier}|test_traiter_image{[(#ENV{fichier}|largeur)], [(#ENV{fichier}|hauteur)]})]}|sinon{[(#ENV{fichier}|lire_iptc)]})]})]
 
-[(#GET{afficher}|>0|?{" ",""})
-
+[(#GET{afficher}|?{" ",""})
 
 <div id="exif_haut_#GET{compteur}" onclick="$('#exif_haut_#GET{compteur}').hide();$('#exif_bas_#GET{compteur}').show(); $('#histogramme#GET{compteur}').load('?exec=pave_histogramme&fichier=#ENV{fichier}');"
 		onmouseover="$('#exif_resume_#GET{compteur}:hidden').show();"

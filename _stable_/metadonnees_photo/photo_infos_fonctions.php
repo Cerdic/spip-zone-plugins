@@ -1,13 +1,9 @@
 <?php
 
 
+// Lire aux:Lens, qui n'est pas du Exif standard
 function lire_aux_lens ($filename) {
-    
-    // very straightforward one-purpose utility function which
-    // reads image data and gets some EXIF data (what I needed) out from its XMP tags (by Adobe Photoshop CS)
-    // returns an array with values
-    // code by Pekka Saarinen http://photography-on-the.net
-    
+
     ob_start();
     readfile($filename);
     $source = ob_get_contents();
