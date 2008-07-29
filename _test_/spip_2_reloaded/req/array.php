@@ -27,11 +27,13 @@ function req_array_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap=
 }
 
 function array_get_var($table){
+	if (is_string($table) AND $t = unserialize($table))
+		$table = $t;
 	if(is_string($table) AND strpos($table,':')!==FALSE){
 		$iter = explode(':',$table);
-		if (count($iter)==2)
+		if (count($iter)==2 AND is_numeric($iter[0]) AND is_numeric($iter[1]))
 			$var = range($iter[0],$iter[1]);
-		if (count($iter)==3)
+		if (count($iter)==3 AND is_numeric($iter[0]) AND is_numeric($iter[1]) AND is_numeric($iter[2]))
 			$var = range($iter[0],$iter[2],$iter[1]);
 		return $var; // pas de copie necessaire
 	}
@@ -172,7 +174,7 @@ function array_query($query){
 	if ($query['orderby']){
 		// on ne prend que le premier critere
 		$sort = is_array($query['orderby'])?reset($query['orderby']):$query['orderby'];
-		$sort = str_replace($table.".","",$sort);
+		$sort = str_replace($query['from'].".","",$sort);
 		$sort = explode(',',$sort);
 		$sort = reset($sort);
 		if (preg_match(',^cle,',$sort)){
