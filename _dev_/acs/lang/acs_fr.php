@@ -17,8 +17,7 @@ $traductions_acs = array(
   'groove' => 'grav&eacute; (inverse de ridge)',
   'ridge' => 'sort de la page (inverse de groove)',
   'inset' => 'incrust&eacute; dans la page (inverse de outset)',
-  'outset' => 'extrud&eacute; de la page (inverse de inset)'
-  
+  'outset' => 'extrud&eacute; de la page (inverse de inset)',
 );
 
 
@@ -43,7 +42,7 @@ else {
   'configurer_site' => 'Configurer le site',
   'documentation' => 'Documentation',
 
-  'assistant_configuration_squelettes' => 'Assistant de Configuration du Site',
+  'assistant_configuration_squelettes' => 'Assistant Configuration du Site',
   'acs' => 'ACS',
 
   'model_actif' => 'Modèle ACS actif: <b>@model@</b>',
@@ -135,6 +134,6 @@ Pour configurer le site, cliquez sur l\'onglet "Composants" et personnalisez les
 
   );
   $GLOBALS[$GLOBALS['idx_lang']] = array_merge($traductions_acs, $GLOBALS[$GLOBALS['idx_lang']]);
-  composants_ajouter_langue('ecrire');  
+  composants_ajouter_langue('ecrire');
 }
 ?>
