@@ -20,16 +20,17 @@ function Crayons_insert_head($head) {
     //par défaut, pas de traitement sur les entetes
     $res = $head;
     
-    //vérifie la présence de cfg, si pas de cfg on cherche meme pas à faire de l'espace privé
-    if (!function_exists('lire_config')) {
+    //vérifie la présence d'une meta crayons, si c'est vide on ne cherche meme pas à traiter l'espace privé
+    $config_espace_prive = @unserialize($GLOBALS['meta']['crayons']);
+    if (empty($config_espace_prive)) {
         return $res;
     }
     
     
-    //vérifie que l'éditiojn de l'espace privé est autorisé
-    if (lire_config('crayons/espaceprive') == 'on') {
+    //vérifie que l'édition de l'espace privé est autorisé
+    if ($config_espace_prive['espaceprive'] == 'on') {
         //determine les pages (exec) crayonnables
-        if (in_array(_request('exec'), explode(',',lire_config('crayons/exec_autorise')))) {
+        if (in_array(_request('exec'), explode(',',$config_espace_prive['exec_autorise']))) {
             //Calcul des droits
             include_spip('inc/crayons');
             $res = Crayons_preparer_page($head, '*', wdgcfg(), 'head');
