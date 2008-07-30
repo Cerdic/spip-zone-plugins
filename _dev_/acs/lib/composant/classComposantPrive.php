@@ -323,7 +323,7 @@ class AdminComposant {
   // Choix de couleur
   function ctlColor($nom, $couleur, $param) {
     $var = $this->fullname.$nom;
-    return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td><td><input type="text" id="'.$var.'" name="'.$var.'" size="8" maxlength="6" value="'.$couleur.'" class="forml" onKeyUp="javascript:document.getElementById(\'led_'.$var.'\').style.background=\'#\' + this.value;"></td><td><a   href="javascript:TCP.popup(document.forms[\'acs\'].elements[\''.$var.'\'],0, \''._DIR_ACS.'\');"><div id="led_'.$var.'" class="led" style="background: #'.$couleur.';" title="'._T('acs:choix_couleur').'"></div></a></td></tr></table></div>';
+    return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td><td><input type="text" class="palette" id="'.$var.'" name="'.$var.'" size="8" maxlength="8" value="'.$couleur.'"></td></tr></table></div>';
   }
 
   // Choix d'image

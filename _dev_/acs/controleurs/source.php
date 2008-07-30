@@ -16,6 +16,7 @@ function controleurs_source_dist($regs) {
   $file = find_in_path($page.'.html');
   $source = file_get_contents($file);
   
+  // il faut passer champ=>source pour les comparaisons dans action/crayons_store
   $crayon = new SecureCrayon("source-$champ-" . $id, array($champ => $source));
   $html = $crayon->code().
 '<textarea name="content_'.$crayon->key.'_'.$champ.'" style="width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size: '._request('font-size').'">'.

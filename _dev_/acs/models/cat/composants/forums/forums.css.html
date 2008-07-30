@@ -11,20 +11,20 @@ ul.forum { display: block; clear: both; margin: 0; padding: 0; }
 .forum-texte .forum-repondre-message { margin: 0; padding: 0; text-align: right}
 .forum-item {padding-bottom: 10px;}
 /* Boite d'un forum : eclaircissement progressif des bords */
-ul .forum-message { border: [(#CONFIG{acsForumsBordLargeur,thin}) ][(#CONFIG{acsForumsBordStyle,solid}) ] ##CONFIG{acsForumsBord,666}; margin: 0; padding: 0; margin-bottom: 2px; }
-ul ul .forum-message { border: thin solid ##CONFIG{acsForumsBord,A4A4A4}; }
-ul ul ul .forum-message { border: thin solid ##CONFIG{acsForumsBord,B8B8B8}; }
-ul ul ul ul .forum-message { border: thin solid ##CONFIG{acsForumsBord,CCC}; }
-ul ul ul ul ul .forum-message { border: thin solid ##CONFIG{acsForumsBord,E0E0E0}; }
-ul ul ul ul ul ul .forum-message { border: thin dotted ##CONFIG{acsForumsBord,E0E0E0}; }
+ul .forum-message { border: [(#CONFIG{acsForumsBordLargeur,thin}) ][(#CONFIG{acsForumsBordStyle,solid}) ] #CONFIG{acsForumsBord,666}; margin: 0; padding: 0; margin-bottom: 2px; }
+ul ul .forum-message { border: thin solid #CONFIG{acsForumsBord,A4A4A4}; }
+ul ul ul .forum-message { border: thin solid #CONFIG{acsForumsBord,B8B8B8}; }
+ul ul ul ul .forum-message { border: thin solid #CONFIG{acsForumsBord,CCC}; }
+ul ul ul ul ul .forum-message { border: thin solid #CONFIG{acsForumsBord,E0E0E0}; }
+ul ul ul ul ul ul .forum-message { border: thin dotted #CONFIG{acsForumsBord,E0E0E0}; }
 
 /* Boite de titre d'un forum : mise en couleur selon la profondeur du forum */
-ul .forum-chapo { border: none; border-bottom: 1px dotted ##CONFIG{acsForumsBord,B8B8B8}; margin: 0; padding: 3px 6px 2px 6px; font-size: 0.88em; background: ##CONFIG{acsForumsFond1,C4E0E0}; }
-ul ul .forum-chapo { background: ##CONFIG{acsForumsFond2,D4E8E8}; }
-ul ul ul .forum-chapo { background: ##CONFIG{acsForumsFond3,E4F0F0}; }
-ul ul ul ul .forum-chapo { background: ##CONFIG{acsForumsFond4,F4F8F8}; }
-ul ul ul ul ul .forum-chapo { background: ##CONFIG{acsForumsFond5,FFF}; }
-ul ul ul ul ul ul .forum-chapo { background: ##CONFIG{acsForumsFond6,FFF}; }
+ul .forum-chapo { border: none; border-bottom: 1px dotted #CONFIG{acsForumsBord,B8B8B8}; margin: 0; padding: 3px 6px 2px 6px; font-size: 0.88em; background: ##CONFIG{acsForumsFond1,C4E0E0}; }
+ul ul .forum-chapo { background: #CONFIG{acsForumsFond2,D4E8E8}; }
+ul ul ul .forum-chapo { background: #CONFIG{acsForumsFond3,E4F0F0}; }
+ul ul ul ul .forum-chapo { background: #CONFIG{acsForumsFond4,F4F8F8}; }
+ul ul ul ul ul .forum-chapo { background: #CONFIG{acsForumsFond5,FFF}; }
+ul ul ul ul ul ul .forum-chapo { background: #CONFIG{acsForumsFond6,FFF}; }
 
 .repondreaufil {float: right;}
 
@@ -36,14 +36,14 @@ ul ul ul ul ul ul .forum-chapo { background: ##CONFIG{acsForumsFond6,FFF}; }
 .blocForums {
   [border-width: (#CONFIG{acsForumsBordLargeur,#CONFIG{acsRubnavBordLargeur,#CONFIG{acsFondBordLargeur}}});]
   [border-style: (#CONFIG{acsForumsBordStyle,#CONFIG{acsRubnavBordStyle,#CONFIG{acsFondBordStyle}}});]
-  [border-color: #(#CONFIG{acsForumsBord,#CONFIG{acsRubnavBordColor,#CONFIG{acsFondBordColor}}});]
-  [background: #(#CONFIG{acsRubnavFondColor});]
+  [border-color: (#CONFIG{acsForumsBord,#CONFIG{acsRubnavBordColor,#CONFIG{acsFondBordColor}}});]
+  [background: (#CONFIG{acsRubnavFondColor});]
 }
 .blocForums .menu-titre {
-  [background: #(#CONFIG{acsRubnavTitreFondColor})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsRubnavTitreFondImage})) repeat top left];]
+  [background: (#CONFIG{acsRubnavTitreFondColor})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsRubnavTitreFondImage})) repeat top left];]
 }
 .blocForums .menu-item {
-  [background: #(#CONFIG{acsRubnavFondColor});]
-  border-top: 1px solid #[(#CONFIG{acsRubnavSepColor,#CONFIG{acsFondBordColor,dfefef}})];
+  [background: (#CONFIG{acsRubnavFondColor});]
+  border-top: 1px solid [(#CONFIG{acsRubnavSepColor,#CONFIG{acsFondBordColor}})];
   text-align: #LANG_LEFT;
 }

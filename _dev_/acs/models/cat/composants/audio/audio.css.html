@@ -6,7 +6,7 @@
 
 .mp3player .track_info, .mp3player .track_id3, .playlist .track_info {
   border: thin solid;
-  [border-color: #(#CONFIG{acsPlaylistSepColor,#CONFIG{acsRubnavSepColor,#CONFIG{acsFondBordColor}}});]
+  [border-color: (#CONFIG{acsPlaylistSepColor,#CONFIG{acsRubnavSepColor,#CONFIG{acsFondBordColor}}});]
   -moz-border-radius: 1em;
   margin: 2px;
   margin-right: 5px;
@@ -18,7 +18,7 @@
   text-align: center;
   font-size: 8px;
   height: 10px;
-  color: ##CONFIG{acsAudioTrackStatus,00afdf};
+  color: #CONFIG{acsAudioTrackStatus,00afdf};
 }
 
 .mp3player .track_info {
@@ -33,7 +33,7 @@
 
 .mp3player .track_status {
   font-size: 8px;
-  color: ##CONFIG{acsAudioTrackStatus,00afdf};
+  color: #CONFIG{acsAudioTrackStatus,00afdf};
 }
 
 .mp3player .track_control, .mp3player .hidden {
@@ -55,7 +55,7 @@
 }
 
 .mp3player .progressBarBorder {
-  border: 1px solid ##CONFIG{acsAudioProgressBarBord,#CONFIG{acsRubnavBordColor,afafaf}};
+  border: 1px solid #CONFIG{acsAudioProgressBarBord,#CONFIG{acsRubnavBordColor,afafaf}};
   height: 2px;
   margin: 6px;
   margin-left: 8px;

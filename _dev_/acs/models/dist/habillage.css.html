@@ -21,13 +21,13 @@ body {
   margin: 1.5em;
   text-align: center;
   font-size: 1em;
-  [background: #(#CONFIG{acsFondColor})[ url('[(#ACS_CHEMIN)]img/fond/(#CONFIG{acsFondImage})') repeat];]
-  [color: #(#CONFIG{acsFondText});]
+  [background: (#CONFIG{acsFondColor})[ url('[(#ACS_CHEMIN)]img/fond/(#CONFIG{acsFondImage})') repeat];]
+  [color: (#CONFIG{acsFondText});]
 }
 
 /* liens du site */
-[a:link, a:visited {text-decoration: none; color: #(#CONFIG{acsFondLink});}]
-[a:hover {color: #(#CONFIG{acsFondLinkHover});}] /* couleur des liens au survol */
+[a:link, a:visited {text-decoration: none; color: (#CONFIG{acsFondLink});}]
+[a:hover {color: (#CONFIG{acsFondLinkHover});}] /* couleur des liens au survol */
 
 
 img, table { margin: 0; padding: 0; border: none; }

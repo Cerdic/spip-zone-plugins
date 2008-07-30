@@ -10,9 +10,7 @@
 [(#INCLURE{javascript/dragdrop_interface.js})]
 [(#HEADER_COMPOSANTS{javascript})]
 
-/**
- * Transforme une url spip pour "wrapper" un composant (requis pour Ajax)
- */
+[(#REM) Transforme une url spip pour "wrapper" un composant (requis pour Ajax)] 
 function wrapUrl(url, c) {
   url = url.replace(/\#[\w]*/, "");
   creg = '&c=' + c;

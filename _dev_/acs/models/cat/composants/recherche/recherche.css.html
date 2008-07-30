@@ -14,9 +14,9 @@
   position: relative;
   [border-width: (#CONFIG{acsRechercheBordLargeur,#CONFIG{acsFondBordLargeur}});]
   [border-style: (#CONFIG{acsRechercheBordStyle,#CONFIG{acsFondBordStyle}});]
-  [border-color: #(#CONFIG{acsRechercheBord,#CONFIG{acsFondBordColor}});]
-  color: ##CONFIG{acsFondText,00008f};
-  [background: #(#CONFIG{acsRechercheOnglet,#CONFIG{acsFondColor}});]
+  [border-color: (#CONFIG{acsRechercheBord,#CONFIG{acsFondBordColor}});]
+  color: #CONFIG{acsFondText,#00008f};
+  [background: (#CONFIG{acsRechercheOnglet,#CONFIG{acsFondColor}});]
   -moz-border-radius: 8px;
   -moz-border-radius-topleft: 0;
   padding-left: 4px;
@@ -26,15 +26,15 @@
 
 .formulaire_recherche label {
   position: relative;
-  [background: #(#CONFIG{acsRechercheOnglet,#CONFIG{acsFondColor}});]
-  color: ##CONFIG{acsFondText,00008f};
+  [background: (#CONFIG{acsRechercheOnglet,#CONFIG{acsFondColor}});]
+  color: #CONFIG{acsFondText,#00008f};
   padding-left: 15px;
   padding-right: 15px;
   text-align: center;
   font: normal normal 1em Verdana, 'Trebuchet MS', Arial, 'Lucida Sans', sans-serif;
   [border-width: (#CONFIG{acsRechercheBordLargeur,#CONFIG{acsFondBordLargeur}});]
   [border-style: (#CONFIG{acsRechercheBordStyle,#CONFIG{acsFondBordStyle}});]
-  [border-color: #(#CONFIG{acsRechercheBord,#CONFIG{acsFondBordColor}});]
+  [border-color: (#CONFIG{acsRechercheBord,#CONFIG{acsFondBordColor}});]
   border-bottom: 0px;
   -moz-border-radius-topright: 8px;
   -moz-border-radius-topleft: 8px;

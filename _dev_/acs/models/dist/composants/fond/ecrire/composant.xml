@@ -3,9 +3,9 @@
   <nom>Fond</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
-  <version>0.2</version>
-  <version_spip_min>1.9.2c</version_spip_min>
-  <version_spip_max>1.9.2c</version_spip_max>
+  <version>0.4</version>
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
 
   <param>
     <nom>preview</nom>
@@ -15,22 +15,22 @@
   <variable>
     <nom>Color</nom>
     <type>color</type>
-    <valeur>ffffff</valeur>
+    <valeur>#ffffff</valeur>
   </variable>
   <variable>
     <nom>Text</nom>
     <type>color</type>
-    <valeur>000000</valeur>
+    <valeur>#000000</valeur>
   </variable>
   <variable>
     <nom>Link</nom>
     <type>color</type>
-    <valeur>00008d</valeur>
+    <valeur>#00008d</valeur>
   </variable>
   <variable>
     <nom>LinkHover</nom>
     <type>color</type>
-    <valeur>0000ff</valeur>
+    <valeur>#0000ff</valeur>
   </variable>
   <variable>
     <nom>Image</nom>

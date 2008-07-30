@@ -4,16 +4,16 @@
   [border-width: (#CONFIG{acsRubnavBordLargeur,#CONFIG{acsFondBordLargeur}});]
   [border-style: (#CONFIG{acsRubnavBordStyle,#CONFIG{acsFondBordStyle}});]
   [border-color: #(#CONFIG{acsRubnavBord,#CONFIG{acsFondBordColor}});]
-  [background: #(#CONFIG{acsRubnavFond});]
+  [background: (#CONFIG{acsRubnavFond});]
 }
 
 .rubriques .menu-titre, .divers .menu-titre, .breves .menu-titre {
-  [background: #(#CONFIG{acsRubnavTitreFond})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsRubnavTitreFondImage})) repeat top left];]
+  [background: (#CONFIG{acsRubnavTitreFond})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsRubnavTitreFondImage})) repeat top left];]
 }
 
 .rubriques .menu-item, .divers .menu-item, .breves .menu-item {
-  [background: #(#CONFIG{acsRubnavFond});]
-  border-top: 1px solid #[(#CONFIG{acsRubnavSep})];
+  [background: (#CONFIG{acsRubnavFond});]
+  border-top: 1px solid [(#CONFIG{acsRubnavSep})];
 }
 
 /* Rubriques dépliables: icônes plus */
@@ -45,7 +45,7 @@
 
 .rubriques .menu-item , .mg .menu-item {
   [text-align: (#CONFIG{acsRubnavAlign});]
-  [background: #(#CONFIG{acsRubnavFond});]
+  [background: (#CONFIG{acsRubnavFond});]
   padding-left: 5px;
 }
 
@@ -55,14 +55,14 @@
 }
 
 .rubriques li .menu-item {
-  [background: #(#CONFIG{acsRubnavFond2});]
+  [background: (#CONFIG{acsRubnavFond2});]
   border: 1px solid [#(#CONFIG{acsRubnavSep})];
   border-right:0;
   padding-bottom: 2px;
 }
 
 .rubriques li li .menu-item {
-  [background: #(#CONFIG{acsRubnavFond3});]
+  [background: (#CONFIG{acsRubnavFond3});]
   border: 1px solid [#(#CONFIG{acsRubnavSep})];
   border-right:0;
 }
@@ -72,4 +72,4 @@
   width: 100%;
 }
 
-[.rubriques .menu-item:hover { background: #(#CONFIG{acsRubnavFondHover});}]
+[.rubriques .menu-item:hover { background: (#CONFIG{acsRubnavFondHover});}]

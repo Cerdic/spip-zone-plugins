@@ -3,13 +3,24 @@
 	ACS
 	</nom>
 	<description>
-	 - <a href="?exec=acs">Assistant de Configuration du Site</a>
+		<multi>
+			[fr]
+ - <a href="?exec=acs">Assistant de Configuration du Site</a>
+			<br />
+			Plugins recommandés :	<br />
+			 - crayons 1.0 (>21789): &eacute;dition du contenu et du design depuis le site public.<br />
+			 - palette 0.1: choix visuel des couleurs.<br />
+			 - en option, notation 0.3: publication par notation pour le modèle Cat.
+			 <br />
+		 [en]
+ - <a href="?exec=acs">ACS Site Configuration Wizard</a>
+		</multi>
 	</description>
 	<lien>[Documentation->http://acs.geomaticien.org]</lien>
 	<auteur>	<!-- Auteur du plugin -->
- 	Daniel FAIVRE &copy; 2008 - licence GPL
+ 	Daniel FAIVRE &copy; 2008 - <multi>[fr]licence GPL[en]GPL license</multi>
 	</auteur>
-  <version>0.4 (20080726)</version>
+  <version>0.4 (20080730)</version>
 	<etat>
 	dev
 	</etat>
@@ -20,15 +31,18 @@
 	<prefix>
 	acs
 	</prefix>
+  <icon>
+    img_pack/acs_32x32.gif
+  </icon>
 	<fonctions>
 		acs_fonctions.php
 	</fonctions>
 	<options>
 		acs_options.php
 	</options>
-	
+
   <install>base/acs_install.php</install>
-  
+
   <pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBouton</action>

@@ -4,16 +4,16 @@
   [border-width: (#CONFIG{acsRubnavBordLargeur,#CONFIG{acsFondBordLargeur}});]
   [border-style: (#CONFIG{acsRubnavBordStyle,#CONFIG{acsFondBordStyle}});]
   [border-color: #(#CONFIG{acsRubnavBordColor,#CONFIG{acsFondBordColor}});]
-  [background: #(#CONFIG{acsRubnavFondColor});]
+  [background: (#CONFIG{acsRubnavFondColor});]
 }
 
 .syndic .menu-titre {
-  [background: #(#CONFIG{acsRubnavTitreFondColor})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsRubnavTitreFondImage})) repeat top left];]
+  [background: (#CONFIG{acsRubnavTitreFondColor})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsRubnavTitreFondImage})) repeat top left];]
 }
 
 .syndic .menu-item{
-  [background: #(#CONFIG{acsRubnavFondColor});]
-  border-top: 1px solid #[(#CONFIG{acsRubnavSepColor,#CONFIG{acsFondBordColor,dfefef}})];
+  [background: (#CONFIG{acsRubnavFondColor});]
+  border-top: 1px solid [(#CONFIG{acsRubnavSepColor,#CONFIG{acsFondBordColor,#dfefef}})];
   padding-left: 5px;
 }
 

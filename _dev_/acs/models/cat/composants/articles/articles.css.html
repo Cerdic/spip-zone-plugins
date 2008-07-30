@@ -6,13 +6,13 @@
  */
 
 .liste-articles li {
-  border-top: #CONFIG{acsArticlesBordLargeur,#CONFIG{acsFondBordLargeur,thin}}[ (#CONFIG{acsArticlesBordStyle,dotted})][ #(#CONFIG{acsArticlesBordColor,#CONFIG{acsOngletsBordColor,dfdfdf}})];
+  border-top: #CONFIG{acsArticlesBordLargeur,#CONFIG{acsFondBordLargeur,thin}}[ (#CONFIG{acsArticlesBordStyle,dotted})][ (#CONFIG{acsArticlesBordColor,#CONFIG{acsOngletsBordColor}})];
   [margin-bottom: (#CONFIG{acsArticlesMargeBas})px;]
   margin-right: 1px;
 }
 
 .liste-articles .entete, .cartouche .entete, .plan-secteur h1 {
-  [background-color: #(#CONFIG{acsArticlesTitresFondColor,#CONFIG{acsFondColor,effdfd}});]
+  [background-color: (#CONFIG{acsArticlesTitresFondColor,#CONFIG{acsFondColor}});]
   [background: url('[(#ACS_CHEMIN)]img/trame/(#CONFIG{acsArticlesTitresFondImage})') repeat top left;]
  }
 
@@ -84,7 +84,7 @@
 
 .plan-secteur h1 {
   border: 0;
-  border-top: [(#CONFIG{acsArticlesBordLargeur,1px})][( #CONFIG{acsArticlesBordStyle, solid})][ #(#CONFIG{acsArticlesBordCouleur, dfdfdf})];
+  border-top: [(#CONFIG{acsArticlesBordLargeur,1px})][( #CONFIG{acsArticlesBordStyle, solid})][ (#CONFIG{acsArticlesBordCouleur})];
   margin: 0;
   font-size: 110%;
   font-weight: bold;
@@ -104,7 +104,7 @@
 }
 
 .plan-rubrique {
-  border: 1px solid #[(#CONFIG{acsArticlesBordColor, dfdfdf})];
+  border: 1px solid [(#CONFIG{acsArticlesBordColor})];
   padding: 4px;
   font-weight: bold;
   [margin-top: (#CONFIG{acsArticlesMargeBas})px;]
@@ -140,23 +140,23 @@ span.plan-article {
 /* Eclaircissement ou assombrissement progressif des rubriques en fonction de la profondeur */
 
 ul .plan-rubrique {
-  background: #[(#CONFIG{acsArticlesRubFond2, fafffa})];
+  background: [(#CONFIG{acsArticlesRubFond2, fafffa})];
   margin-left: 2%;
 }
 
 ul ul .plan-rubrique {
-  background: #[(#CONFIG{acsArticlesRubFond3, f5fff5})];
+  background: [(#CONFIG{acsArticlesRubFond3, f5fff5})];
   margin-left: 3%;
 }
 ul ul ul .plan-rubrique {
-  background: #[(#CONFIG{acsArticlesRubFond4, efffef})];
+  background: [(#CONFIG{acsArticlesRubFond4, efffef})];
   margin-left: 4%;
 }
 ul ul ul ul .plan-rubrique {
-  background: #[(#CONFIG{acsArticlesRubFond5, dfffdf})];
+  background: [(#CONFIG{acsArticlesRubFond5, dfffdf})];
   margin-left: 5%;
 }
 ul ul ul ul ul .plan-rubrique {
-  background: #[(#CONFIG{acsArticlesRubFond6, d0ffd0})];
+  background: [(#CONFIG{acsArticlesRubFond6, d0ffd0})];
   margin-left: 6%;
 }

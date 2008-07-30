@@ -12,8 +12,8 @@
   font-style: italic;
   font-size: 0.77em;
   text-align: center;
-  [color: #(#CONFIG{acsOursText});]
-  <BOUCLE_rubrique(RUBRIQUES) {racine} {titre_mot=_Ours} {0,1}>border-top: thin dotted ##CONFIG{acsOursText,#CONFIG{acsOngletsBordColor}};</BOUCLE_rubrique>
+  [color: (#CONFIG{acsOursText});]
+  <BOUCLE_rubrique(RUBRIQUES) {racine} {titre_mot=_Ours} {0,1}>border-top: thin dotted #CONFIG{acsOursText,#CONFIG{acsOngletsBordColor}};</BOUCLE_rubrique>
 }
 
 .ours legend {
@@ -22,5 +22,5 @@
 
 .ours img { vertical-align: middle; }
 
-[.ours a {color: #(#CONFIG{acsOursLink});}]
-[.ours a:hover {color: #(#CONFIG{acsOursLinkHover});}]
+[.ours a {color: (#CONFIG{acsOursLink});}]
+[.ours a:hover {color: (#CONFIG{acsOursLinkHover});}]

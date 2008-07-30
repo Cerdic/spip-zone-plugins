@@ -39,10 +39,12 @@ function controleurs_composant_dist($regs) {
 '<script language="javascript">
   $(".edit_composant").each(
   	function(i, composant) {
-    	$(this).Draggable({zIndex: 99999999, handle: ".acs_box_titre"});
+    	$(this).Draggable({zIndex: 99999000, handle: ".acs_box_titre"});
     	$(this).find(".acs_box_titre").css("cursor", "move");
   	}
   );
+  try {init_palette();}
+  catch(e) {}
 </script>';
   $status = NULL;
 
