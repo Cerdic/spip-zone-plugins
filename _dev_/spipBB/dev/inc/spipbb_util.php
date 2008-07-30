@@ -33,7 +33,7 @@ spipbb_log('included',2,__FILE__);
 // [en] Checks that spipbb is configured and uptodate
 //----------------------------------------------------------------------------
 function spipbb_is_configured() {
-	if (defined('_SPIP19200')) return false; // Pas la bonne version du plugin
+	if (defined('SPIPBB_SPIP19200')) return false; // Pas la bonne version du plugin
 	# pas de spipbb
 	if (!isset($GLOBALS['spipbb'])) $GLOBALS['spipbb']=array();
 	if (!isset($GLOBALS['meta']['spipbb'])) return false;

@@ -35,7 +35,7 @@ function spipbb_install($action)
 	{
 		case 'test' :
 			// Affichage ici du cadre sous la sous la partie plugins de Spip (affiche_gauche n'y est pas activte)
-			if(!defined('_SPIP19300'))
+			if(!defined('SPIPBB_SPIP19300'))
 			{
 				if ($test++==1) { // test est appelé 2 fois !
 					spipbb_log('(install) Version incompatible',1,"spipbb_install");

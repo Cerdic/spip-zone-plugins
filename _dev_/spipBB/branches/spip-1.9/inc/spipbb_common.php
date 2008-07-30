@@ -67,9 +67,9 @@ if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_SQL,'<')) {
 	include_spip('inc/spipbb_192'); // SPIP 1.9.2
 }
 
-if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP19300', true);
+if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('SPIPBB_SPIP19300', true);
 else
-@define('_SPIP19200', true);
+@define('SPIPBB_SPIP19200', true);
 
 // Pour la verifciation d'une nouvelle version
 define('_URL_SPIPBB_PLUGIN_XML', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/_dev_/spipBB/branches/spip-1.9/plugin.xml?format=txt');

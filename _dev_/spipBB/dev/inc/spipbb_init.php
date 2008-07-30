@@ -43,7 +43,7 @@ include_spip('inc/spipbb_util');
 #
 # Controle de la version du plugin vs SPIP
 #
-if (defined('_SPIP19200')) {
+if (defined('SPIPBB_SPIP19200')) {
 	// minipres + message
 	include_spip('inc/minipres');
 	echo minipres(_T('spipbb:plugin_mauvaise_version'));

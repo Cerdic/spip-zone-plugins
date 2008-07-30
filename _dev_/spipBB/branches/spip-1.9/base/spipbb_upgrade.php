@@ -35,7 +35,7 @@ function spipbb_install($action)
 	{
 		case 'test' :
 			// Affichage ici du cadre sous la sous la partie plugins de Spip (affiche_gauche n'y est pas activte)
-			if(!defined('_SPIP19300'))
+			if(!defined('SPIPBB_SPIP19300'))
 			{
 				echo '<br/>';
 				echo debut_cadre_enfonce('', true),
