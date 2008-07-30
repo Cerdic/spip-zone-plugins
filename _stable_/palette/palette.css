@@ -1,0 +1,15 @@
+.colorpicker {	
+	border:thin solid #3975B4;
+	background:#dfdfdf;
+	position: absolute; z-index: 99999009; /* ne PAS modifier */
+	text-align:center; height:auto; width: 200px;
+}
+.colorpicker_bar {
+	background-color:#3875bd;
+	color:white;
+	height:16px; font-size: 12px; font-weight:bold; margin: 0; padding: 2px;
+	text-align: left;
+}
+.colorpicker_close {float:right; font-size: 8px; font-weight:bold; margin: 2px; border:thin solid transparent;color:white; -moz-border-radius: 2px}
+.colorpicker_close:hover {border:thin outset black; background:#24486d;}
+.hover { cursor:pointer; }

@@ -1,0 +1,40 @@
+[(#REM)
+
+  Charge la librairie farbtastic ainsi que le javascript du plugin Palette
+
+]#CACHE{0}#HTTP_HEADER{'Content-Type: text/javascript'}
+[(#INCLURE{lib/farbtastic/farbtastic.js})]
+
+$(document).ready(
+  function() {
+    init_palette();
+  }
+);
+
+function init_palette() {
+  $(".palette").each(
+    function(i, palette){
+      $(palette).css("background-color", $(palette).attr("value"));
+      /* pas de id : on en cree un aleatoire */
+      if (!$(palette).attr("id")){
+        var newid = parseInt(10000*Math.random());
+        palette.id = newid;
+      }
+      palette.onclick = function(e) {
+        $(".colorpicker").empty().remove();
+        $(palette).after('<div class="colorpicker"><div class="colorpicker_close" title="<:palette:fermer:>">&nbsp;x&nbsp;</div><div class="colorpicker_bar"><:palette:palette:></div><div id="colorpicker"></div></div>');
+        $(".colorpicker").css({position: "absolute", display: "block", "z-index": "99999009"});
+        $('#colorpicker').css({display:'block'});
+        $('#colorpicker').farbtastic(palette);
+        $(".colorpicker_close").hover(function(){
+          $(this).addClass("hover");
+          },function(){
+            $(this).removeClass("hover");
+        });
+        $(".colorpicker_close").click( function() {
+          $(".colorpicker").empty().remove();
+        });
+      };
+    }
+  );
+}
