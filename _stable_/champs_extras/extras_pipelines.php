@@ -18,8 +18,10 @@ function extras_afficher_contenu_objet($flux){
 		$id_table_objet = id_table_objet($type);		
 		$id_objet = $flux['args']['id_objet'];
 		$spip_table_objet = table_objet_sql($type);
-			
-		$extra = sql_getfetsel('extra',$spip_table_objet,"$id_table_objet=".intval($id_objet));
+	
+		// Verfifier qu'il y a bien un champ extra (sinon plantage garanti)
+		$description_table = description_table($spip_table_objet);
+		if ($description_table["field"]["extra"]) $extra = sql_getfetsel('extra',$spip_table_objet,"$id_table_objet=".intval($id_objet));
 		include_spip('inc/extra');
 		$flux['data'].= extra_affichage($extra,$table_objet);
 	}
@@ -47,7 +49,7 @@ function extras_editer_contenu_objet($flux){
 function extras_pre_edition($flux){
 	$table_objet = $flux['args']['table_objet'];
 	$id_objet = $flux['args']['id_objet'];
-
+	
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($table_objet, $serveur);
 	
