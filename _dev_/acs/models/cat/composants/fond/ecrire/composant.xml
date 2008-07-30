@@ -21,22 +21,22 @@
   <variable>
     <nom>Color</nom>
     <type>color</type>
-    <valeur>ffffff</valeur>
+    <valeur>#ffffff</valeur>
   </variable>
   <variable>
     <nom>Text</nom>
     <type>color</type>
-    <valeur>000000</valeur>
+    <valeur>#000000</valeur>
   </variable>
   <variable>
     <nom>Link</nom>
     <type>color</type>
-    <valeur>00008d</valeur>
+    <valeur>#00008d</valeur>
   </variable>
   <variable>
     <nom>LinkHover</nom>
     <type>color</type>
-    <valeur>0000ff</valeur>
+    <valeur>#0000ff</valeur>
   </variable>
   <variable>
     <nom>Image</nom>
