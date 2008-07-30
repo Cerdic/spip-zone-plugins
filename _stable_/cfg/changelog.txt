@@ -1,5 +1,9 @@
 Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
+
+v1.9.7 (30 07 2008)
+- si on ne trouve pas de fichier au nom du fond, on n'essaie pas de le compiler...
+
 v1.9.6 (23 07 2008)
 - Suivre la svn de SPIP : le formulaire CVT charger() change la signature de son retour.
 

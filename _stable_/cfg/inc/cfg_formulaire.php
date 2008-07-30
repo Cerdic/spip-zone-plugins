@@ -112,6 +112,10 @@ class cfg_formulaire{
 			if ($fichier = find_in_path($nom = 'formulaires/' . $this->vue .'.html'))
 				$this->depuis_cvt = true;
 		}
+		
+		// si pas de fichier, rien a charger
+		if (!$fichier) return false;
+		
 		if (!lire_fichier($fichier, $this->controldata)) {
 			$ok = false;
 			$this->messages['message_erreur'][] =  _T('cfg:erreur_lecture', array('nom' => $nom));
@@ -467,6 +471,7 @@ class cfg_formulaire{
 			}
 			
 			$val = $this->val ? array_merge($contexte, $this->val) : $contexte;
+
 			$this->fond_compile = recuperer_fond($this->path_vue, $val);
 		}
 		return $this->fond_compile;
