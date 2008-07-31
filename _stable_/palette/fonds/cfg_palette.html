@@ -1,0 +1,29 @@
+#CACHE{0}
+<!-- titre=&nbsp;&nbsp;&nbsp;<:palette:palette:>-->
+<!-- icone=images/palette.png-->
+<!-- descriptif=
+<h4>
+Configuration du plugin Palette
+</h4>
+Palette permet d'ajouter automatiquement un s&eacute;lecteur de couleurs à un champ input, simplement en lui donnant la classe <b>palette</b>:<br />
+
+Exemple: <input class="palette" name="couleur" value="#dfdfdf" style="width:5em"><br />
+&lt;input <b>class="palette"</b> name="couleur" value="#dfdfdf" /&gt;<br/>
+
+<a href="http://www.spip-contrib.net/Palette" class="spip_out">Documentation sur contrib</a>
+-->
+
+<form method="post" action="#SELF">[<div>(#ENV{_cfg_}|form_hidden)</div>]
+  <fieldset><legend><:titre_configuration:></legend>
+  <p align="#LANG_RIGHT">
+  <label><:palette:palette_public:></label><input type="checkbox" name="palette_public" [checked="(#ENV{palette_public}|!={''}|?{'checked'})"] class="fondl" />
+  <br />
+  <label><:palette:palette_ecrire:></label><input type="checkbox" name="palette_ecrire" [checked="(#ENV{palette_ecrire}|!={''}|?{'checked'})"] class="fondl" />
+  </p>
+  </fieldset>
+
+ <div align="#LANG_RIGHT">
+  <input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+  <input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</form>
