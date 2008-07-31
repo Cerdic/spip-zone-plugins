@@ -11,6 +11,7 @@ else @define('_SPIP19100', 1);
 
 // Droits pour le Couteau Suisse
 function cout_autoriser() {
+	include_spip("inc/autoriser");
 	return function_exists('autoriser')
 		?autoriser('configurer', 'plugins')
 		:$GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"];
