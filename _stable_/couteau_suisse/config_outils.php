@@ -578,7 +578,8 @@ add_outil( array(
 	'auteur' 	 => '[Cedric MORIN->cedric.morin@yterium.com]',
 	'categorie'	 => 'public',
 	'jquery'	=> 'oui',
-	'pipeline:affichage_final' => 'InhibeFlash_affichage_final',
+	// fonction InhibeFlash_init() codee dans desactiver_flash.js : executee lors du chargement de la page et a chaque hit ajax
+	'code:jq_init' => 'InhibeFlash_init.apply(this);',
 ));
 
 add_variable( array(
