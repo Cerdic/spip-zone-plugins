@@ -7,6 +7,7 @@ $exceptions =
 	|| (strpos($_SERVER["PHP_SELF"],'/ecrire') !== false)
 	|| isset($_GET['action'])
 	|| isset($_POST['action'])
+//	|| ($_POST['formulaire_action']=='login') // TODO : formulaire SPIP 2.0
 	|| in_array($_GET['page'], array('login',
 		'style_prive',       // filtrage de la feuille de style admin mise en squelette
 		'style_prive_ie'))   // idem IE
@@ -25,7 +26,10 @@ function action_cs_travaux(){
 	echo recuperer_fond('fonds/en_travaux', array(
 		'message'=>_en_travaux_MESSAGE, 
 		'titre'=>defined('_en_travaux_TITRE')?_T('info_travaux_titre'):$GLOBALS['meta']['nom_site'],
-		'login'=>_en_travaux_ADMIN==1?'oui':'',
+		// SPIP 2.0 : suppression pour l'instant de la possibilite de se logger directement pour un admin
+		// car les redacteurs pourraient acceder qd meme au site (1 seule page, mais 1 page de trop)
+		// 'login'=>_en_travaux_ADMIN==1?'oui':'',
+		'login'=>defined('_SPIP19300')?'':(_en_travaux_ADMIN==1?'oui':''),
 	));
 	return true;
 }
