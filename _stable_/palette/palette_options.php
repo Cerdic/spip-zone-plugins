@@ -10,11 +10,10 @@
  */
 
 if (!function_exists('lire_config')) {
-  $config_palette = array(
-  'palette_public' => 'on', // la valeur 'on' active Palette pour le site public
-  'palette_ecrire' => 'on'  // la valeur 'on' active Palette pour l'espace privé 
-  );
-  ecrire_meta('palette', serialize(array('palette_public' => 'on', 'palette_ecrire' => 'on')));
-  if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) ecrire_metas();
+  $options_palette = array(
+    'palette_public' => 'on', // la valeur 'on' active Palette pour le site public
+    'palette_ecrire' => 'on'  // la valeur 'on' active Palette pour l'espace privÃ© 
+    );
+  $GLOBALS['palette'] = serialize($options_palette);
 }
 ?>
