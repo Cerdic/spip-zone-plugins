@@ -57,7 +57,7 @@ function envoi_recommander($contexte_inclus) {
 		'recommander_message'=>_request('recommander_message'),
 	);
 	include_spip('public/assembler');
-	$body = recuperer_fond('recommander/email',$contexte);
+	$body = recuperer_fond('modeles/recommander_email',$contexte);
 
 
 	// depiler la langue qu'on a empile plus haut
@@ -106,7 +106,7 @@ function action_fragment_recommander($return = false, $contexte_inclus = array()
 			'self'=>self()
 		);
 		include_spip('public/assembler');
-		$r = recuperer_fond('recommander/formulaire',$contexte);
+		$r = recuperer_fond('formulaires/recommander',$contexte);
 	}
 	
 	else {
@@ -119,7 +119,7 @@ function action_fragment_recommander($return = false, $contexte_inclus = array()
 			'url'=>$contexte_inclus['url'],
 		);
 		include_spip('public/assembler');
-		$r = recuperer_fond('recommander/envoye',$contexte);
+		$r = recuperer_fond('modeles/recommander_envoye',$contexte);
 	}
 
 	if ($return)

@@ -17,7 +17,7 @@ function balise_RECOMMANDER_dyn($titre='',$url='',$texte='',$subject='') {
 	if (!$f = charger_fonction('fragment_recommander', 'action', true))
 		die('erreur fragment_recommander absent');
 
-	return array('recommander/noisette', 0, 
+	return array('modeles/recommander', 0, 
 		array(
 			'fragment'=>$f(true,array('titre'=>$titre,'url'=>$url,'texte'=>$texte,'subject'=>$subject)),
 		));
