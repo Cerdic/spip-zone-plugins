@@ -4,7 +4,7 @@
 	<version>0.1</version>
 	<etat>test</etat>
 	<description>Ce plugin permet de traiter des CSS imbriqu&eacute;s.</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.paris-beyrouth.org/Plugin-CSS-imbriques</lien>
 	<prefix>css_imbriques</prefix>
 	<fonctions>css_imbriques_fonctions.php</fonctions>
 
