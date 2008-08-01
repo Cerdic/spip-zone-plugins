@@ -1,8 +1,10 @@
 .colorpicker {	
 	border:thin solid #3975B4;
 	background:#dfdfdf;
-	position: absolute; z-index: 99999009; /* ne PAS modifier */
 	text-align:center; height:auto; width: 200px;
+	position: absolute;
+	display: block;
+	z-index: 99999009; /* ne PAS modifier */
 }
 .colorpicker_bar {
 	background-color:#3875bd;
@@ -13,3 +15,6 @@
 .colorpicker_close {float:right; font-size: 8px; font-weight:bold; margin: 2px; border:thin solid transparent;color:white; -moz-border-radius: 2px}
 .colorpicker_close:hover {border:thin outset black; background:#24486d;}
 .hover { cursor:pointer; }
+#colorpicker {
+	display: block;
+}

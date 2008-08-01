@@ -33,8 +33,6 @@ function init_palette() {
       palette.onclick = function(e) {
         $(".colorpicker").empty().remove();
         $(palette).after('<div class="colorpicker"><div class="colorpicker_close" title="<:palette:fermer:>">&nbsp;x&nbsp;</div><div class="colorpicker_bar"><:palette:palette:></div><div id="colorpicker"></div></div>');
-        $(".colorpicker").css({position: "absolute", display: "block", "z-index": "99999009"});
-        $('#colorpicker').css({display:'block'});
         $('#colorpicker').farbtastic(palette);
         $(".colorpicker_close").hover(function(){
           $(this).addClass("hover");
