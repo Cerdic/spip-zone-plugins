@@ -40,11 +40,17 @@ $GLOBALS['cs_introduire'][] = 'cs_retire_glossaire';
 // remplace les accents unicode par l'equivalent charset/unicode/html
 function glossaire_accents($regexpr) {
 	if (strpos($regexpr, '&')===false) return $regexpr;
-	return preg_replace_callback(",&#([0-9]+);,", 'glossaire_accents_callback', $regexpr);
+	return preg_replace_callback(",&#([0-9]+);,", 'glossaire_accents_callback', str_replace('& ','&amp; ',$regexpr));
 }
 
+// $matches est un caractere unicode sous forme &#XXX;
+// ici on cherche toutes les formes de ce caractere, minuscule ou majuscule : unicode, charset et html
 function glossaire_accents_callback($matches) {
-	$u = unicode2charset($matches[0]);
+	$u = unicode2charset($matches[0]);	// charset
+//	$u2 = strtoupper($u);	// charset majuscule
+//	$u3 = htmlentities($u2, ENT_QUOTES, $GLOBALS['meta']['charset']);	// html majuscule
+//	$u4 = html2unicode($u3); // unicode majuscule
+//	$a = array_unique(array($u, $u2, htmlentities($u, ENT_QUOTES, $GLOBALS['meta']['charset']), $u3, $matches[0], $u4));
 	$a = array_unique(array($u, htmlentities($u, ENT_QUOTES, $GLOBALS['meta']['charset']), $matches[0]));
 	return '(?:'.join('|', $a).')';
 }
