@@ -43,11 +43,11 @@ function notation_etoile_click($nb, $id) {
 		$nb = round($nb);
 	}
 	for ($i=1; $i<=notation_get_nb_notes(); $i++){
-		$ret .= "<input name='notation$id' type='radio' class='auto-submit-star' value='$i'";
+		$ret .= "<input name='notation$id' type='radio' class='auto-submit-star' value='$i' ";
 		if($i==$nb){
-			$ret .= "checked='checked'";
+			$ret .= "checked='checked' ";
 		}
-		$ret .= "/>";
+		$ret .= "/>\n";
 	}
 	return $ret;
 }
@@ -60,11 +60,11 @@ function notation_etoile($nb,$id){
 		$nb = round($nb);
 	}
 	for ($i=1; $i<=notation_get_nb_notes(); $i++){
-		$ret .= "<input name='star$id' type='radio' class='star' disabled='disabled'";
+		$ret .= "<input name='star$id' type='radio' class='star' disabled='disabled' ";
 		if($i==$nb){
-			$ret .= "checked='checked'";
+			$ret .= "checked='checked' ";
 		}
-		$ret .= "/>";
+		$ret .= "/>\n";
 
 	}
 	return $ret;

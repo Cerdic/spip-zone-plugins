@@ -13,9 +13,9 @@ function notation_insert_head($flux){
 function notation_affichage_final($flux){
     if ((strpos($flux, '<div class="formulaire_notation') == true) or (strpos($flux, "class='formulaire_notation") == true)){
 		$incHead .= "\n<link href='"._DIR_PLUGIN_NOTATION."css/jquery.rating.css' type='text/css' rel='stylesheet'/>\n";
-		$incHead .= "<script src='"._DIR_PLUGIN_NOTATION."javascript/jquery.MetaData.js' type='text/javascript' language='javascript'></script>\n";
-		$incHead .= "<script src='"._DIR_PLUGIN_NOTATION."javascript/jquery.rating.js' type='text/javascript' language='javascript'></script>\n";
-		$incHead .= "\n<script type='text/javascript' language='javascript'>\n";
+		$incHead .= "<script src='"._DIR_PLUGIN_NOTATION."javascript/jquery.MetaData.js' type='text/javascript'></script>\n";
+		$incHead .= "<script src='"._DIR_PLUGIN_NOTATION."javascript/jquery.rating.js' type='text/javascript'></script>\n";
+		$incHead .= "\n<script type='text/javascript'>\n";
 		$incHead .= "function notation_init(){jQuery(function(){\n";
 		$incHead .= "jQuery('.formulaire_notation .access').hide();\n";
 		$incHead .= "jQuery(function(){ jQuery('input[@type=radio].star').rating(); });\n";
