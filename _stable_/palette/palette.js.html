@@ -13,36 +13,5 @@
 
 
 ]#CACHE{7*24*86400}#HTTP_HEADER{'Content-Type: text/javascript'}
-[(#INCLURE{lib/farbtastic/farbtastic.js})]
-
-$(document).ready(
-  function() {
-    init_palette();
-  }
-);
-
-function init_palette() {
-  $("input.palette").each(
-    function(i, palette){
-      $(palette).css("background-color", $(palette).attr("value"));
-      /* pas de id : on en cree un aleatoire */
-      if (!$(palette).attr("id")){
-        var newid = parseInt(10000*Math.random());
-        palette.id = newid;
-      }
-      palette.onclick = function(e) {
-        $(".colorpicker").empty().remove();
-        $(palette).after('<div class="colorpicker"><div class="colorpicker_close" title="<:palette:fermer:>">&nbsp;x&nbsp;</div><div class="colorpicker_bar"><:palette:palette:></div><div id="colorpicker"></div></div>');
-        $('#colorpicker').farbtastic(palette);
-        $(".colorpicker_close").hover(function(){
-          $(this).addClass("hover");
-          },function(){
-            $(this).removeClass("hover");
-        });
-        $(".colorpicker_close").click( function() {
-          $(".colorpicker").empty().remove();
-        });
-      };
-    }
-  );
-}
+[(#INCLURE{lib/farbtastic/farbtastic.js}|compacte_js)]
+[(#INCLURE{fond=javascript/palette2.js}|compacte_js)]
