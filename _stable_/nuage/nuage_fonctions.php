@@ -61,7 +61,7 @@ function nuage_tri_hasard($a,$b){
 	return (intval($a['hasard'])==intval($b['hasard']))?0:intval($a['hasard'])<intval($b['hasard'])?1:-1;
 }
 
-function nuage_affiche($nuage){
+function nuage_affiche($nuage,$max_mots = -1){
 	if (!is_array($nuage)) $nuage = unserialize($nuage);
 	$out .= "";
 	foreach($nuage as $cle=>$vals){
@@ -69,6 +69,8 @@ function nuage_affiche($nuage){
 		$a = $a . $cle . "</a>";
 		$out .= "<dt>$a</dt> ";
 		$out .= "<dd class='frequence'>".$vals['poids']."</dd>";
+		if ($max_mots>0) $max_mots--;
+		if ($max_mots==0) break;
 	}
 	return "<dl class='nuage'>$out</dl>";	
 }
