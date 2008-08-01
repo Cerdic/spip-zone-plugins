@@ -1,0 +1,12 @@
+<plugin>
+	<nom>CSS imbriqu&eacute;s</nom>
+	<auteur>ARNO*</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>Ce plugin permet de traiter des CSS imbriqu&eacute;s.</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>css_imbriques</prefix>
+	<fonctions>css_imbriques_fonctions.php</fonctions>
+
+</plugin>
+
