@@ -35,10 +35,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'Tienes que crear una carpeta @dir@ en tu carpeta ra&iacute;z de SPIP con permiso de escritura.',
 	'installer_lib_192' => 'Para instalar una biblioteca, descomprime manualmente el zip y copia su contenido en la carpeta @dir@.',
 
-	// L
-	'lib_farbtastic' => 'Farbtastic',
-	'lib_farbtastic_description' => 'Ofrece un cuentagotas para seleccionar colores',
-
 	// N
 	'nom_table_manquant' => 'Nombre de la tabla SQL que falta',
 	'nouveau' => 'Nuevo',

@@ -5,11 +5,11 @@
     [de]cfg: Konfigurationsmotor
     </multi>
     </nom>
-    <auteur>bertrand Gugger [->http://toggg.com/], Matthieu Marcillaud
-_ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[de]Vertrieb unter Lizenz</multi> GNU/LGPL
+    <auteur>bertrand Gugger [->http://toggg.com/], Matthieu Marcillaud, dF
+_ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]License[de]Vertrieb unter Lizenz</multi> GNU/LGPL
     </auteur>
     <version>
-    1.9.7
+    1.9.8
     </version>
     <etat>
     stable
@@ -19,8 +19,7 @@ _ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[de]Vertrieb unter Lizenz<
 [fr]Ce plugin permet de g&#233;rer tr&#232;s simplement des interfaces de configuration pour diff&#233;rents modules.
 
 Il est utilis&#233; par de nombreux plugins, mais il peut aussi avoir d'autres usages comme le param&#233;trage de squelettes.
-Les formulaires CFG peuvent avoir besoin de certaines librairies. Rendez-vous sur la page [?exec=cfg_install_libs->.?exec=cfg_install_libs] 
-pour les t&eacute;l&eacute;charger.
+[en]This plugin manage some configuration graphic user interfaces for some modules.
 [de]Dieses Plugin erm&#246;glicht es, in sehr einfacher Weise die Konfigurationsschnittstellen verschiedener Module zu verwalten.
 
 Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie die Parametereinstellung von Skeletten.
@@ -36,6 +35,7 @@ Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie d
     cfg.png
     </icon>
     <chemin dir='' />
+    <utilise id="palette" />
     <options>cfg_options.php</options>
     <fonctions>cfg_fonctions.php</fonctions>
 

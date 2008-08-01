@@ -35,10 +35,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'U moet een dossier @dir@ aan de wortel van uw SPIP cre&euml;ren dat toestemmingen van schrift heeft.',
 	'installer_lib_192' => 'Om een boekhandel te plaatsen, d&eacute;compressez manueel zip en kopi&euml;ert zijn inhoud in het dossier @dir@.',
 
-	// L
-	'lib_farbtastic' => 'Farbtastic',
-	'lib_farbtastic_description' => 'Aanbod een pipet om kleuren te selecteren',
-
 	// N
 	'nom_table_manquant' => 'Ontbrekende naam van de tafel SQL',
 	'nouveau' => 'Nieuw',

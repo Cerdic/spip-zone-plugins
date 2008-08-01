@@ -35,10 +35,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'You must create a directory named @dir@ with write permissions at the root of your SPIP site.',
 	'installer_lib_192' => 'To install a library, unzip the zip file manually and copy its contents to the @dir@ directory.',
 
-	// L
-	'lib_farbtastic' => 'Farbtastic',
-	'lib_farbtastic_description' => 'Allows you to use a dropper to select colours',
-
 	// N
 	'nom_table_manquant' => 'Missing SQL table name',
 	'nouveau' => 'New',

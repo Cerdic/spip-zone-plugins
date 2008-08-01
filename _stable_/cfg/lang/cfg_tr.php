@@ -35,10 +35,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'SPIP\'inizin k&ouml;k dizininde @dir@ isimli, yazma haklar&#305;na sahip bir dizin olu&#351;turmal&#305;s&#305;n&#305;z.',
 	'installer_lib_192' => 'Bir k&uuml;t&uuml;phane kurmak i&ccedil;in zip dosyas&#305;n&#305; el ile a&ccedil;&#305;n&#305;z ve i&ccedil;eri&#287;ini @dir@ dizinine kopyalay&#305;n&#305;z.',
 
-	// L
-	'lib_farbtastic' => 'Farbtastic',
-	'lib_farbtastic_description' => 'Renk se&ccedil;mek i&ccedil;in bir pipet sunar',
-
 	// N
 	'nom_table_manquant' => 'SQL tablosunun ismi eksik',
 	'nouveau' => 'Yeni',

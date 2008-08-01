@@ -18,25 +18,6 @@ if (version_compare($GLOBALS['spip_version_code'],'1.9300','<'))
 // inclure les fonctions lire_config(), ecrire_config() et effacer_config()
 include_spip('inc/cfg_config');
 
-// _dir_lib possiblement utile
-if (!defined('_DIR_LIB')) define('_DIR_LIB', _DIR_RACINE . 'lib/');
-
-// librairies que cfg peut telecharger (SPIP >= 1.9.3)
-// via la page ?exec=cfg_install_libs
-// en globals pour pouvoir etre etendu par d'autres plugins
-//
-// ces librairies doivent etre fournis en zip
-$GLOBALS['cfg_libs'] = array(
-	// farbtastic (color picker)
-	'farbtastic' => array(
-		'nom' => _T('cfg:lib_farbtastic'), // nom
-		'description' => _T('cfg:lib_farbtastic_description'), // description
-		'dir' => 'farbtastic12/farbtastic', // repertoire une fois decompresse ou se trouvent les js
-		'url' => 'http://acko.net/dev/farbtastic', // url de la documentation
-		'install' => 'http://acko.net/files/farbtastic_/farbtastic12.zip' // adresse du zip a telecharger
-	)
-);
-
 // signaler le pipeline de notification
 $GLOBALS['spip_pipeline']['cfg_post_edition'] = "";
 $GLOBALS['spip_pipeline']['editer_contenu_formulaire_cfg'] = "";

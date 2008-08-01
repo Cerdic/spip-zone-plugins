@@ -35,10 +35,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'Tu dois cr&eacute;er un dossier @dir@ &agrave; la racine de ton SPIP ayant des permissions d\'&eacute;criture.',
 	'installer_lib_192' => 'Pour installer une librairie, d&eacute;compresse manuellement le zip et copie son contenu dans le dossier @dir@.',
 
-	// L
-	'lib_farbtastic' => 'Farbtastic',
-	'lib_farbtastic_description' => 'Offre une pipette pour s&eacute;lectionner des couleurs',
-
 	// N
 	'nom_table_manquant' => 'Nom de la table SQL manquant',
 	'nouveau' => 'Nouveau',

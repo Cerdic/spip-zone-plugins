@@ -10,7 +10,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // apres que le parseur a trouve les champs (mais avant l'action 'charger' des parametres)
-// ajouter automatiquement le parametre 'selecteur_couleur' (ajoute les js de farbtastic)
+// ajouter automatiquement le parametre 'selecteur_couleur'
+// (ajoute les js du plugin Palette et la librairie farbtastic d'une façon mutualisable entre plugins)
 function cfg_charger_cfg_couleur($nom, &$cfg){
 
 	$cfg->param['selecteur_couleur'] = 1;

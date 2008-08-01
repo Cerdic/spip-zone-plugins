@@ -35,10 +35,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'Trebuie s&#259; crea&#355;i un director @dir@ &icirc;n directorul r&#259;d&#259;cin&#259; al site-ului SPIP - cu drepturi de scriere.',
 	'installer_lib_192' => 'Pentru a instala o libr&#259;rie, decomprima&#355;i  zip-ul &#351;i copia&#355;i con&#355;inutul s&#259;u &icirc;n directorul @dir@.',
 
-	// L
-	'lib_farbtastic' => 'Farbtastic',
-	'lib_farbtastic_description' => 'Ofera o pipet&#259; pentru selectarea culorilor',
-
 	// N
 	'nom_table_manquant' => 'Numele de tabel&#259; SQL lipse&#351;te',
 	'nouveau' => 'Nou',

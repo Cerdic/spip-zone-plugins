@@ -35,10 +35,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'Sie m&uuml;ssen ein beschreibbares Verzeichnis mit dem Namen @dir@ im Wurzelverzeichnis Ihrer SPIP-Website anlegen.',
 	'installer_lib_192' => 'Um eine Bibliothek zu installieren, entpacken Sie die ZIP-Datei manuell und kopieren Sie den Inhalt des Archivs in das Verzeichnis @dir@.',
 
-	// L
-	'lib_farbtastic' => 'Farbtastic',
-	'lib_farbtastic_description' => 'Bietet ein Pipette f&uuml;r die Farbauswahl.',
-
 	// N
 	'nom_table_manquant' => 'Fehlender Name der SQL Tabelle',
 	'nouveau' => 'Neu',
