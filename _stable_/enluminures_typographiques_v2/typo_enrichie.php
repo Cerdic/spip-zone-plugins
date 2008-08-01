@@ -193,7 +193,8 @@ function TypoEnluminee_pre_typo($texte) {
 		return $texte;
 		
 	// Compatibilite avec les versions de SPIP < 1.9.3
-	// Impossible de comprendre pourquoi tester_variable('debut_italique', "<i$class_spip>") ne renvoit rien en 1.9.2 !
+	// tester_variable('debut_italique', "<i$class_spip>") ne renvoit rien en 1.9.2 ! 
+	// Il en fixe la valeur s'il n'y en a pas deja une
 	// ==> contournement
 	if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
 		tester_variable('class_spip', ' class="spip"');
