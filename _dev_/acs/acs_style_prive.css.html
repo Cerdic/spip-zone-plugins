@@ -20,10 +20,12 @@ Copyleft: licence GPL - Cf. LICENCES.txt
 
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
 
 table { margin: 0; padding: 0; border-collapse: collapse; border-spacing:0; border: 1px;}
 img { margin: 0; padding: 0; border: none;}
-hr {height: 1px; margin:2px; border:0; border-top: 1px solid ##ENV{couleur_claire,3874b0}}
+hr {height: 1px; margin:2px; border:0; border-top: 1px solid #GET{claire};}
 
 .alert{
   color: red;
@@ -61,14 +63,14 @@ hr {height: 1px; margin:2px; border:0; border-top: 1px solid ##ENV{couleur_clair
 
 .acs_box {
   position: relative;
-  [border: #(#ENV{couleur_foncee,3874b0}) thin solid;]
+  border: thin solid #GET{foncee};
   -moz-border-radius: 10px;
   background: #ffffff;
   margin-top: 14px;
 }
 
 .acs_box_titre {
-  background: ##ENV{couleur_foncee,3874b0};
+  background: #GET{foncee};
   padding-#LANG_LEFT: 40px;
   padding-#LANG_RIGHT: 4px;
   padding-top: 2px;
@@ -104,8 +106,8 @@ hr {height: 1px; margin:2px; border:0; border-top: 1px solid ##ENV{couleur_clair
 fieldset.apercu {
   margin: 0;
   padding: 0;
-  [border: #(#ENV{couleur_claire,3874b0}) thin inset;]
-  [background-color: #(#CONFIG{acsFondCouleur});]
+  border: thin inset #GET{claire};
+  [background-color: (#CONFIG{acsFondCouleur});]
   [background-image: url([(#ACS_CHEMIN)]img/fond/(#CONFIG{acsFondImage}));]
   background-repeat: repeat;
 }
@@ -115,7 +117,7 @@ fieldset.apercu {
   padding-left: 5px;
   padding-right: 5px;
   background: #fff;
-  border: #[(#ENV{couleur_claire,3874b0} )] thin inset;
+  border: thin inset #GET{claire};
   -moz-border-radius: 8px;
 }
 
@@ -133,7 +135,7 @@ fieldset.apercu {
   padding: 0;
   line-height: 1em;
   background: #e4e4e4;
-  border: 1px solid #[(#ENV{couleur_claire,3874b0})];
+  border: 1px solid #GET{claire};
   behavior: url(../dist/win_width.htc);
   font-size: 12px;
   font-family: Verdana,Arial,Sans,sans-serif;
@@ -141,7 +143,7 @@ fieldset.apercu {
 }
 
 .led {
-  border: 1px solid ##ENV{couleur_foncee,3874b0};
+  border: 1px solid #GET{foncee};
   width: 1.15em;
   height: 1.15em;
   cursor:pointer;
@@ -171,7 +173,7 @@ fieldset.apercu {
 .onlinehelp {
   font-size: -1;
   font-style: italic;
-  color: ##ENV{couleur_foncee,3874b0};
+  color: #GET{foncee};
 }
 
 .onlinehelp .onlinehelplayer {
@@ -230,11 +232,11 @@ fieldset.apercu {
   padding-left: 5px;
   padding-right: 5px;
   background: #e5f6e8;
-  border: 1px outset ##ENV{couleur_foncee,3874b0};
+  border: 1px outset #GET{foncee};
 }
 .widgy:hover {
   background: #b4e9b4;
-  border: 1px inset ##ENV{couleur_foncee,3874b0};
+  border: 1px inset #GET{foncee};
 }
 .widgy_overriden {
   background: #ffe5b1;
@@ -296,7 +298,7 @@ fieldset.apercu {
   width: 180px;
   height: 24px;
   text-align: center;
-  border: 1px inset ##ENV{couleur_foncee,3874b0};
+  border: 1px inset #GET{foncee};
   -moz-border-radius: 12px;
   background: #f0f0f8;
 }
