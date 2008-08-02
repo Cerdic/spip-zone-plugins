@@ -182,6 +182,12 @@ add_outil( array(
 	'version-min' => '1.9300',
 ));
 
+add_outil( array(
+	'id' => 'icone_visiter',
+	'categorie' => 'interface',
+	'pipeline:header_prive' => 'icone_visiter_header_prive',
+));
+
 add_variable( array(
 	'nom' => 'tri_articles',
 	'format' => 'chaine',
