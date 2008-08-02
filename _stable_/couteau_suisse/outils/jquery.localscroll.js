@@ -2,12 +2,12 @@
  * jQuery.LocalScroll
  * Copyright (c) 2007-2008 Ariel Flesler - aflesler(at)gmail(dot)com | http://flesler.blogspot.com
  * Dual licensed under MIT and GPL.
- * Date: 3/10/2008
+ * Date: 6/3/2008
  *
  * @projectDescription Animated scrolling navigation, using anchors.
  * http://flesler.blogspot.com/2007/10/jquerylocalscroll-10.html
  * @author Ariel Flesler
- * @version 1.2.5
+ * @version 1.2.6
  *
  * @id jQuery.fn.localScroll
  * @param {Object} settings Hash of settings, it is passed in to jQuery.ScrollTo, none is required.
@@ -66,7 +66,7 @@
 					var a = $([e.target, e.target.parentNode]).filter(filter)[0];//if a valid link was clicked.
 					a && scroll( e, a, settings );//do scroll.
 				})
-				: this.find('a')//bind concretely, to each matching link
+				: this.find('a,area')//bind concretely, to each matching link
 						.filter( filter ).bind( settings.event, function(e){
 							scroll( e, this, settings );
 						}).end()
@@ -95,6 +95,8 @@
 			if( settings.hash )
 				$target.queue(function(){
 					location = link.hash;
+					// make sure this function is released
+					$(this).dequeue();
 				});
 		}
 	};
