@@ -45,12 +45,20 @@ function css_imbriques_decouper ($css) {
 
 			$definition[$compteur] = ereg_replace("[\ \n]*\[\[[0-9]*\]\][\ \n]*", "", $definition[$compteur]);
 
-			$css = str_replace($regs[0][$num], "[[$compteur]]", $css);
+			$chaine = $regs[0][$num];
+			$pos = strpos($css, $chaine);
+			$debut = substr($css, 0, $pos);
+			$fin = substr($css, $pos + strlen($chaine), strlen($css));
+			
+			
+			
+			$css = $debut."[[$compteur]]".$fin;
+			
+//			$css = str_replace($regs[0][$num], "[[$compteur]]", $css);
 			
 		}
 		
 	}
-
 
 	$css = "";
 	foreach($classe as $num=>$nom) {
