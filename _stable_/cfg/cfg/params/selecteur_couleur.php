@@ -14,7 +14,6 @@ function cfg_charger_param_selecteur_couleur($valeur, &$cfg){
 	$ou = ($cfg->depuis_cvt) ? 'inline':'head';
 	// si le plugin Palette est installé, on patche
 	if (is_dir(find_in_path(_DIR_PLUGIN_PALETTE))) {
-		$cfg->param[$ou] .= "\n<script langage='javascript' src='$lib'></script>\n";
 		$cfg->param[$ou] .= "
 <style>
 .colorpicker {position: relative;}
