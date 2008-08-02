@@ -1,19 +1,24 @@
-.colorpicker {	
-	border:thin solid #3975B4;
-	background:#dfdfdf;
+#CACHE{7*24*86400,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+.colorpicker {
+	border:thin solid #GET{foncee};
+	background: #fff6f6;
 	text-align:center; height:auto; width: 200px;
 	position: absolute;
 	display: block;
 	z-index: 99999009; /* ne PAS modifier */
 }
 .colorpicker_bar {
-	background-color:#3875bd;
+	background-color:#GET{foncee};
 	color:white;
 	height:16px; font-size: 12px; font-weight:bold; margin: 0; padding: 2px;
 	text-align: left;
 }
 .colorpicker_close {float:right; font-size: 8px; font-weight:bold; margin: 2px; border:thin solid transparent;color:white; -moz-border-radius: 2px}
-.colorpicker_close:hover {border:thin outset black; background:#24486d;}
+.colorpicker_close:hover {border:thin outset #GET{foncee}; background:#GET{claire};color:black}
 .hover { cursor:pointer; }
 #colorpicker {
 	display: block;
