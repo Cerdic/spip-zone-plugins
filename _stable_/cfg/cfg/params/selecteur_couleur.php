@@ -20,14 +20,14 @@ function cfg_charger_param_selecteur_couleur($valeur, &$cfg){
 </style>
 <script type='text/javascript'>
 //<![CDATA[
-$(document).ready(function() {
-	$('input.cfg_couleur').each(function() {
-		$(this).addClass('palette');
-		$(this).removeClass('cfg_couleur');
+jQuery(document).ready(function() {
+	jQuery('input.cfg_couleur').each(function() {
+		jQuery(this).addClass('palette');
+		jQuery(this).removeClass('cfg_couleur');
 	});
-});".
-($ou=='inline' ? "init_palette();" : ""). // On fait un init_palette si on est en Ajax
-"//]]>
+	init_palette(); // On fait un init_palette si on est en Ajax
+});
+//]]>
 </script>
 ";
 	}
