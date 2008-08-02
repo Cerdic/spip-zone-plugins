@@ -22,6 +22,8 @@ if (!is_callable('sql_count')) { // spip < 1.9.3
   function sql_count($res) {
     return spip_num_rows($res);
   }
+}
+if (!is_callable('sql_fecth')) { // spip < 1.9.3
   function sql_fetch($res) {
     return spip_fetch_array($res);
   }
