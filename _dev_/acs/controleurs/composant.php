@@ -24,7 +24,8 @@ function controleurs_composant_dist($regs) {
     $left = ($crayon->left < 300) ? 0 : - 300;
   else
     $left = Min($crayon->ww / 2, $crayon->left + $crayon->largeur);
-  $html = '<div style="width:'.$crayon->w.'px; height:'.$crayon->h.'px">'.
+  $html = '<style>'.recuperer_fond('acs_style_prive.css').'</style>';
+  $html .= '<div style="width:'.$crayon->w.'px; height:'.$crayon->h.'px">'.
     '<div style="position: absolute; opacity: 0.5;width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size:'._request('em').'">'.
       recuperer_fond("composants/$c").
     '</div>'.
@@ -33,7 +34,7 @@ function controleurs_composant_dist($regs) {
   	'</div>'.
 // TODO: modifier plugin crayons pour récupérer ici position du composant et taille innerWidth & innerHeight ?
   	'<div class="edit_composant" style="position: absolute; display: block; top:0; left:'.$left.'px; z-index: 99999999">'.
-    acs_box($composant->T('nom'), $composant->edit($crayon), $composant->icon).
+    acs_box($composant->T('nom'), $composant->edit($crayon), $composant->icon, 'editeur_composant').
     '</div>'.
 	'</div>'.
 '<script language="javascript">
