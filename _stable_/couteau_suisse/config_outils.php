@@ -829,6 +829,30 @@ add_outil( array(
 ));
 
 add_variable( array(
+	'nom' => 'scrollTo',
+	'check' => 'couteauprive:scrollTo',
+	'defaut' => 1,
+	'code:%s' => "define('CS_jQuery_scrollTo', %s);",
+));
+add_variable( array(
+	'nom' => 'LocalScroll',
+	'check' => 'couteauprive:LocalScroll',
+	'defaut' => 1,
+	'code:%s' => "define('CS_jQuery_localscroll', %s);",
+));
+add_outil( array(
+	'id' => 'soft_scroller',
+	'categorie'	=> 'public',
+	'code:options' => "%%scrollTo%%%%LocalScroll%%",
+	'jquery'	=> 'oui',
+	'pipelinecode:insert_head' => 'if(defined(\'CS_jQuery_scrollTo\')) $flux.=\'<script src="'.url_absolue(find_in_path("outils/jquery.scrollto.js")).'" type="text/javascript"></script>\';
+if(defined(\'CS_jQuery_localscroll\')) $flux.=\'<script src="'.url_absolue(find_in_path("outils/jquery.localscroll.js")).'" type="text/javascript"></script>\';',
+//	'code:js' => 'function soft_scroller_init() { jQuery.localScroll({hash: true}); }',
+//	'code:jq_init' => 'soft_scroller_init.apply(this);',
+	'code:jq' => "if(typeof jQuery.localScroll=='function') jQuery.localScroll({hash: true});",
+));
+
+add_variable( array(
 	'nom' => 'insertions',
 	'format' => 'chaine',
 	'lignes' => 8,
