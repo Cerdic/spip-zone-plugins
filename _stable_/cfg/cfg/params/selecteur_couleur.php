@@ -25,7 +25,7 @@ jQuery(document).ready(function() {
 		jQuery(this).addClass('palette');
 		jQuery(this).removeClass('cfg_couleur');
 	});
-	init_palette(); // On fait un init_palette si on est en Ajax
+	init_palette(); // relancer la palette pour prendre en compte les changements precedents (et pour les cas ajax)
 });
 //]]>
 </script>
