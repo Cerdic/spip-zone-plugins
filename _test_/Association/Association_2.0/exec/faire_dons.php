@@ -13,17 +13,17 @@
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 
-	function exec_action_dons() {
+	function exec_faire_dons() {
 		global $connect_statut, $connect_toutes_rubriques;
 		
 		include_spip ('inc/acces_page');
 		
 		$url_asso = generer_url_ecrire('association');
-		$url_action_dons = generer_url_ecrire('action_dons');
+		$url_faire_dons = generer_url_ecrire('faire_dons');
 		$url_retour=$_POST['url_retour'];
 		
 		$id_don = $_REQUEST['id'];		
-		$action=$_REQUEST['action'];
+		$faire=$_REQUEST['faire'];
 		
 		$date_don = $_POST['date_don'];
 		$bienfaiteur= $_POST['bienfaiteur'];
@@ -37,7 +37,7 @@
 		$commentaire=$_POST['commentaire'];
 		
 		//AJOUT DON
-		if ($action=="ajoute"){
+		if ($faire=="ajoute"){
 			spip_query( "INSERT INTO spip_asso_dons (date_don, bienfaiteur, id_adherent, argent, colis, valeur, contrepartie, commentaire ) VALUES ( "._q($date_don).", "._q($bienfaiteur).", "._q($id_adherent).", "._q($argent).", "._q($colis).", "._q($valeur).", "._q($contrepartie).", "._q($commentaire)." )");
 			$query=spip_query( "SELECT MAX(id_don) AS id_don FROM spip_asso_dons");
 			while ($data = spip_fetch_array($query)) {
@@ -50,7 +50,7 @@
 		}
 		
 		//MODIFICATION DON
-		if ($action=="modifie"){
+		if ($faire=="modifie"){
 			spip_query( " UPDATE spip_asso_dons SET date_don="._q($date_don).", bienfaiteur="._q($bienfaiteur).", id_adherent="._q($id_adherent).", argent="._q(argent).", colis="._q($colis).", valeur="._q($valeur).", contrepartie="._q($contrepartie).", commentaire="._q($commentaire)." WHERE id_don='$id_don' " );
 			spip_query( "UPDATE spip_asso_comptes SET date="._q($date_don).", journal="._q($journal).",recette="._q($argent).", justification="._q($justification)."  WHERE id_journal=$id_don AND imputation=".lire_config('association/pc_dons'));
 			header ('location:'.$url_retour);
@@ -58,7 +58,7 @@
 		}
 		
 		//SUPPRESSION PROVISOIRE DONS
-		if ($action=="supprime"){
+		if ($faire=="supprime"){
 			$url_retour = $_SERVER['HTTP_REFERER'];
 				
 			debut_page(_T('Gestion pour  Association'), "", "");
@@ -76,11 +76,11 @@
 			
 			debut_droite();
 			
-			debut_cadre_relief(  "", false, "", $titre = _T('Action sur les dons'));
+			debut_cadre_relief(  "", false, "", $titre = _T('faire sur les dons'));
 			echo '<div align="center">';
 			echo '<p><strong>Vous vous appr&ecirc;tez &agrave; effacer un don !</strong></p>';
-			echo '<form action="'.$url_action_dons.'" method="post">';
-			echo '<input name="action" type="hidden" value="drop">';
+			echo '<form action="'.$url_faire_dons.'" method="post">';
+			echo '<input name="faire" type="hidden" value="drop">';
 			echo '<input name="id" type="hidden" value="'.$id_don.'">';
 			echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 			echo '<div style="text-align:right;"><input name="submit" type="submit" value="Confirmer" class="fondo">';
@@ -90,7 +90,7 @@
 		}
 		
 		//  SUPPRESSION DEFINITIVE DONS
-		if ($action=="drop") {
+		if ($faire=="drop") {
 			spip_query( "DELETE FROM spip_asso_dons WHERE id_don='$id_don' ");
 			spip_query( "DELETE FROM spip_asso_comptes WHERE id_journal='$id_don' AND imputation=".lire_config('association/pc_dons'));  
 			header ('location:'.$url_retour);

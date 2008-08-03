@@ -11,15 +11,16 @@
 	**/
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
+	include_spip('inc/defs_supprimees');
 
 	function exec_edit_vente() {
 		global $connect_statut, $connect_toutes_rubriques;
 		
 		include_spip ('inc/acces_page');
 		
-		$url_action_ventes = generer_url_ecrire('action_ventes');
+		$url_faire_ventes = generer_url_ecrire('faire_ventes');
 		
-		$action=$_REQUEST['action'];
+		$faire=$_REQUEST['faire'];
 		$id_vente= $_REQUEST['id'];		
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		
@@ -38,8 +39,8 @@
 			$frais_envoi=$data['frais_envoi'];
 			$commentaire=$data['commentaire'];
 		}	
-		
-		debut_page();
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page();
 		
 		association_onglets();
 		
@@ -60,9 +61,9 @@
 		
 		debut_droite();
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('Mise &agrave; jour des ventes').' '.$action);
+		debut_cadre_relief(  "", false, "", $titre = _T('Mise &agrave; jour des ventes').' '.$faire);
 		
-		echo '<form method="post" action="'.$url_action_ventes.'">';	
+		echo '<form method="post" action="'.$url_faire_ventes.'">';	
 		echo '<label for="date_vente"><strong>Date (AAAA-MM-JJ) :</strong></label>';
 		echo '<input name="date_vente" type="text" value="'.$date_vente.'" id="date_vente" class="formo" />';
 		echo '<label for="article"><strong>Article :</strong></label>';
@@ -96,12 +97,12 @@
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
 		
 		echo '<input name="id" type="hidden" value="'.$id_vente.'" >';		
-		echo '<input name="action" type="hidden" value="'.$action.'">';
+		echo '<input name="faire" type="hidden" value="'.$faire.'">';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		
 		echo '<div style="float:right;">';
 		echo '<input name="submit" type="submit" value="';
-		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
+		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		

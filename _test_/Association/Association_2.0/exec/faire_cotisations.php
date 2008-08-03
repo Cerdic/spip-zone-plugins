@@ -10,12 +10,12 @@
 	*  
 	**/
 
-	function exec_action_cotisations() {
+	function exec_faire_cotisations() {
 		global $connect_statut, $connect_toutes_rubriques;
 		
 		include_spip ('inc/acces_page');
 		
-		$action=$_POST['action'];
+		$faire=$_POST['faire'];
 		$id_auteur= $_POST['id'];
 		$nom_famille= $_POST['nom_famille'];
 		$prenom= $_POST['prenom'];
@@ -28,7 +28,7 @@
 		$validite =$_POST['validite'];
 		$url_retour=$_POST['url_retour'];
 		
-		if($action=="ajoute") {
+		if($faire=="ajoute") {
 			spip_query( "INSERT INTO spip_asso_comptes (date, journal, recette, justification, imputation, id_journal) VALUES ("._q($date).", "._q($journal).", "._q($montant).", "._q($justification).", "._q($imputation).", "._q($id_auteur)." )" );
 			spip_query( "UPDATE spip_auteurs_elargis SET statut_interne='ok', montant="._q($montant).", date="._q($date).", validite="._q($validite)."WHERE id_auteur="._q($id_auteur) );
 			header ('location:'.$url_retour);

@@ -15,16 +15,16 @@
 	include_spip ('inc/mail');
 	//include_spip ('inc/charsets');
 
-	function exec_action_relances(){
+	function exec_faire_relances(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
 		include_spip ('inc/acces_page');
 		
-		$url_action_relances = generer_url_ecrire('action_relances','action=send');
+		$url_faire_relances = generer_url_ecrire('faire_relances','faire=send');
 		$url_retour=$_POST['url_retour'];
 		
 		//On récupère les données globales
-		$action=$_REQUEST['action'];
+		$faire=$_REQUEST['faire'];
 		$sujet=$_POST['sujet'];
 		$message=$_POST['message'] ;
 		$statut=$_POST['statut'];
@@ -34,7 +34,7 @@
 		$count=count ($email_tab);
 		
 		// CONFIRMATION
-		if ($action=="confirm") {
+		if ($faire=="confirm") {
 
 			debut_page(_T('Gestion pour  Association'), "", "");
 			
@@ -64,7 +64,7 @@
 			echo nl2br($message);
 			echo '</fieldset>';
 			
-			echo '<form method="post" action="'.$url_action_relances.'">';
+			echo '<form method="post" action="'.$url_faire_relances.'">';
 			for ( $i=0 ; $i < $count ; $i++ ) {
 				echo '<input name="id[]" type="hidden" value="'.$id_tab[$i].'">';
 				echo '<input name="statut[]" type="hidden" value="'.$statut_tab[$i].'">';
@@ -72,7 +72,7 @@
 			}
 			echo '<input name="sujet" type="hidden" value="'.$sujet.'">';
 			echo '<input name="message" type="hidden" value="'.$message.'">';
-			echo '<input name="action" type="hidden" value="send">';
+			echo '<input name="faire" type="hidden" value="send">';
 			echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 			echo '<div style="float:right;"><input name="submit" type="submit" value="'._T('asso:bouton_envoyer').'" class="fondo" /></div>';
 			echo '</form>';	
@@ -85,7 +85,7 @@
 		}
 		
 		//ENVOI
-		if ($action=="send") {
+		if ($faire=="send") {
 			//On prépare le mail et on envoi! On peut modifier le $headers à  sa guise
 			$nomasso=lire_config('association/nom');
 			$adresse=lire_config('association/email');

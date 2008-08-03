@@ -13,15 +13,15 @@
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 
-	function exec_action_categorie(){
+	function exec_faire_categorie(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
 		include_spip ('inc/acces_page');
 		
-		$url_action_categorie=generer_url_ecrire('action_categorie');
+		$url_faire_categorie=generer_url_ecrire('faire_categorie');
 		$url_retour = $_POST['url_retour'];
 		
-		$action=$_REQUEST['action'];
+		$faire=$_REQUEST['faire'];
 		$id_categorie=$_REQUEST['id'];
 		
 		$libelle=$_POST['libelle'];
@@ -32,7 +32,7 @@
 		
 		
 		//SUPPRESSION PROVISOIRE CATEGORIE
-		if ($action == "supprime") {
+		if ($faire == "supprime") {
 			$url_retour = $_SERVER['HTTP_REFERER'];
 			
 			debut_page(_T('Cat&eacute;gories de cotisation'), "", "");
@@ -52,9 +52,9 @@
 			debut_cadre_relief(  "", false, "", $titre = _T('Toutes les cat&eacute;gories de cotisation'));
 			
 			echo '<p><strong>Vous vous appr&ecirc;tez &agrave; effacer le cat&eacute;gorie n&deg; '.$id.' !</strong></p>';
-			echo '<form action="'.$url_action_categorie.'"  method="post">';
+			echo '<form action="'.$url_faire_categorie.'"  method="post">';
 			
-			echo '<input type=hidden name="action" value="drop">';
+			echo '<input type=hidden name="faire" value="drop">';
 			echo '<input type=hidden name="id" value="'.$id_categorie.'">';
 			echo '<input type=hidden name="url_retour" value="'.$url_retour.'">';
 			
@@ -67,21 +67,21 @@
 		}
 		
 		//  SUPPRESSION DEFINITIVE CATEGORIE
-		if ($action == "drop") {
+		if ($faire == "drop") {
 			spip_query( "DELETE FROM spip_asso_categories WHERE id_categorie='$id_categorie' " );
 			header ('location:'.$url_retour);
 			exit;
 		}
 		
 		//  MODIFICATION CATEGORIE
-		if ($action =="modifie") { 
+		if ($faire =="modifie") { 
 			spip_query( "UPDATE spip_asso_categories SET libelle="._q($libelle).", valeur="._q($valeur).", duree="._q($duree).", cotisation="._q($montant).", commentaires="._q($commentaires)." WHERE id_categorie='$id_categorie' " );
 			header ('location:'.$url_retour);
 			exit;
 		}
 		
 		//  AJOUT CATEGORIE	
-		if ($action == "ajoute") {
+		if ($faire == "ajoute") {
 			spip_query( "INSERT INTO spip_asso_categories (libelle, valeur, duree, cotisation, commentaires) VALUES ("._q($libelle).", "._q($valeur).", "._q($duree).", "._q($montant).", "._q($commentaires)." )" );
 			header ('location:'.$url_retour);
 			exit;

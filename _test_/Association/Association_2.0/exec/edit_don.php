@@ -9,7 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	
+	include_spip('inc/defs_supprimees');
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 
@@ -18,10 +18,10 @@
 		
 		include_spip ('inc/acces_page');
 		
-		$url_action_dons = generer_url_ecrire('action_dons');
+		$url_faire_dons = generer_url_ecrire('faire_dons');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
-		$action=$_REQUEST['action'];
+		$faire=$_REQUEST['faire'];
 		$id_don= $_REQUEST['id'];		
 		
 		$query = spip_query (" SELECT * FROM spip_asso_dons WHERE id_don=$id_don ");
@@ -37,7 +37,8 @@
 			$commentaire=$data['commentaire'];
 		}
 		
-		debut_page();
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo commencer_page();
 		
 		association_onglets();
 		
@@ -56,9 +57,9 @@
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('Mise &agrave; jour des dons'));
 		
-		echo '<form method="post" action="'.$url_action_dons.'">';
+		echo '<form method="post" action="'.$url_faire_dons.'">';
 		echo '<input name="id" type="hidden" value="'.$id_don.'">';
-		echo '<input name="action" type="hidden" value="'.$action.'">';
+		echo '<input name="faire" type="hidden" value="'.$faire.'">';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		
 		echo '<label for="date_don"><strong>Date (AAAA-MM-JJ) :</strong></label>';
@@ -88,7 +89,7 @@
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
 		
 		echo '<div style="float:right;"><input name="submit" type="submit" value="';
-		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
+		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		echo '</form>';

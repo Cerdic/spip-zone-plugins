@@ -13,14 +13,14 @@
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
-	function exec_action_prets(){
+	function exec_faire_prets(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
 		include_spip ('inc/acces_page');
 		
-		$url_action_prets=generer_url_ecrire('action_prets');
+		$url_faire_prets=generer_url_ecrire('faire_prets');
 		
-		$action=$_REQUEST['action'];
+		$faire=$_REQUEST['faire'];
 		$id_pret=$_REQUEST['id'];
 		$id_ressource=$_REQUEST['id_ressource'];
 		$date_sortie=$_POST['date_sortie'];
@@ -36,7 +36,7 @@
 		$url_retour=$_POST['url_retour'];
 		
 		//SUPPRESSION PROVISOIRE PRET
-		if ($action == "supprime") {
+		if ($faire == "supprime") {
 			
 			$url_retour = $_SERVER['HTTP_REFERER'];
 			
@@ -68,7 +68,7 @@
 			
 			debut_cadre_relief(  "", false, "", $titre = _T('asso:prets_titre_suppression_prets'));
 			echo '<p><strong>'._T('asso:prets_danger_suppression',array('id_pret' => $id_pret)).'</strong></p>';
-			echo '<form action="'.$url_action_prets.'&action=drop"  method="post">';
+			echo '<form action="'.$url_faire_prets.'&faire=drop"  method="post">';
 			
 			echo '<input type=hidden name="id_pret" value="'.$id_pret.'">';
 			echo '<input type=hidden name="url_retour" value="'.$url_retour.'">';
@@ -82,7 +82,7 @@
 		}
 		
 		//  SUPPRESSION DEFINITIVE PRET
-		if ($action == "drop") {
+		if ($faire == "drop") {
 			
 			spip_query( "DELETE FROM spip_asso_prets WHERE id_pret='$id_pret' " );
 			spip_query ("DELETE FROM spip_asso_comptes WHERE id_journal='$id_pret' " );
@@ -92,7 +92,7 @@
 		}
 		
 		//  MODIFICATION PRET
-		if ($action =="modifie") { 
+		if ($faire =="modifie") { 
 			spip_query( "UPDATE spip_asso_prets SET date_sortie="._q($date_sortie).", duree="._q($duree).", date_retour="._q($date_retour).", id_emprunteur="._q($id_emprunteur).", commentaire_sortie="._q($commentaire_sortie)." WHERE id_pret='$id_pret' " );
 			spip_query( "UPDATE spip_asso_comptes SET date="._q($date_sortie).", journal="._q($journal).",recette="._q($montant).") " );
 			header ('location:'.$url_retour);
@@ -100,7 +100,7 @@
 		}
 		
 		//  AJOUT PRET
-		if ($action == "ajoute") {
+		if ($faire == "ajoute") {
 			$query=spip_query( "INSERT INTO spip_asso_prets (id_ressource, date_sortie, duree, date_retour, id_emprunteur, commentaire_sortie, commentaire_retour) VALUES ("._q($id_ressource).", "._q($date_sortie).", "._q($duree).", "._q($date_retour).", "._q($id_emprunteur).", "._q($commentaire_sortie).", "._q($commentaire_retour)." )" );
 			if($query){
 				$sql=spip_query( "SELECT MAX(id_pret) AS id_pret FROM spip_asso_prets");

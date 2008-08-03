@@ -12,16 +12,17 @@
 	
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
-	
+	include_spip('inc/defs_supprimees');
+	//include_spip('inc/defs_supprimees');
 	function exec_edit_ressource(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
 		include_spip ('inc/acces_page');
 		
-		$url_action_ressources=generer_url_ecrire('action_ressources');
+		$url_faire_ressources=generer_url_ecrire('faire_ressources');
 		$url_retour = $_SERVER['HTTP_REFERER'];
-		
-		debut_page(_T('asso:ressources_titre_edition_ressources'), "", "");		
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo commencer_page(_T('asso:ressources_titre_edition_ressources'), "", "");		
 		
 		association_onglets();
 		
@@ -39,7 +40,7 @@
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:ressources_titre_edition_ressources'));
 		
-		$action=$_REQUEST['action'];
+		$faire=$_REQUEST['faire'];
 		$id=$_REQUEST['id'];
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
@@ -54,7 +55,7 @@
 			$statut=$data['statut'];
 			$commentaire=$data["commentaire"];
 		}		
-		echo '<form action="'.$url_action_ressources.'&action='.$action.'" method="post">';	
+		echo '<form action="'.$url_faire_ressources.'&faire='.$faire.'" method="post">';	
 		echo '<input name="id" type="hidden" value="'.$id_ressource.'" />';
 		echo '<label for="code"><strong>'._T('asso:ressources_libelle_code').' :</strong></label>';
 		echo '<input name="code" type="text" value="'.$code.'" id="code" class="formo" />';
@@ -73,11 +74,11 @@
 		echo '<br /><label for="commentaire"><strong>'._T('asso:ressources_libelle_commentaires').' :</strong></label>';
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
 		echo '<div style="float:right;"><input name="submit" type="submit" value="';
-		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
+		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" />
 		<input name="url_retour" type="hidden" value="'.$url_retour.'">
-		<input name="action" type="hidden" value="'.$action.'"></div>';
+		<input name="faire" type="hidden" value="'.$faire.'"></div>';
 		echo '</form>';
 		
 		fin_cadre_relief();  

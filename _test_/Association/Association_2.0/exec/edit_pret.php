@@ -9,7 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	
+	include_spip('inc/defs_supprimees');
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
@@ -18,11 +18,11 @@
 		
 		include_spip ('inc/acces_page');
 		
-		$url_action_prets=generer_url_ecrire('action_prets');
+		$url_faire_prets=generer_url_ecrire('faire_prets');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
-		$action=$_REQUEST['action'];
-		if ($action=="ajoute"){$id_ressource=$_REQUEST['id'];}
+		$faire=$_REQUEST['faire'];
+		if ($faire=="ajoute"){$id_ressource=$_REQUEST['id'];}
 		else {$id_pret=$_REQUEST['id'];}
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
@@ -36,8 +36,8 @@
 			$commentaire_sortie=$data['commentaire_sortie'];
 			$commentaire_retour=$data['commentaire_retour'];
 		}	
-		
-		debut_page(_T('asso:prets_titre_edition_prets'), "", "");		
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo commencer_page(_T('asso:prets_titre_edition_prets'), "", "");		
 		
 		association_onglets();
 		
@@ -75,12 +75,12 @@
 			$montant=$data['recette'];
 		}
 		
-		if( $action=="ajoute" ){ 
+		if( $faire=="ajoute" ){ 
 			$montant=$pu; 
 			$date_sortie=date('Y-m-d');
 		} 
 		
-		echo '<form action="'.$url_action_prets.'" method="post">';			
+		echo '<form action="'.$url_faire_prets.'" method="post">';			
 		
 		// Cadre Réservation
 		echo '<fieldset>';
@@ -120,10 +120,10 @@
 		echo '<input name="id" type="hidden" value="'.$id_pret.'" />';
 		echo '<input name="id_ressource" type="hidden" value="'.$id_ressource.'" />';		
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
-		echo '<input name="action" type="hidden" value="'.$action.'">';
+		echo '<input name="faire" type="hidden" value="'.$faire.'">';
 		
 		echo '<div style="float:right;"><input name="submit" type="submit" value="';
-		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
+		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		echo '</form>';	

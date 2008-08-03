@@ -12,12 +12,12 @@
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
-	function exec_action_activites(){
+	function exec_faire_activites(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
 		include_spip ('inc/acces_page'); 
 		
-		$url_action_activites=generer_url_ecrire('action_activites');
+		$url_faire_activites=generer_url_ecrire('faire_activites');
 		
 		$id_activite=$_POST['id_activite'];
 		$id_evenement=$_POST['id_evenement'];
@@ -36,24 +36,24 @@
 		$statut=$_POST['statut'];
 		$commentaire=$_POST['commentaire'];
 		
-		$action=$_POST['action'];
+		$faire=$_POST['faire'];
 		$url_retour=$_POST['url_retour'];
 		
 		//AJOUT INSCRIPTION
-		if ($action=="ajoute"){
+		if ($faire=="ajoute"){
 			spip_query( "INSERT INTO spip_asso_activites (date, id_evenement, nom, id_adherent, membres, non_membres, inscrits, email, telephone, adresse, montant, commentaire) VALUES ("._q($date).", "._q($id_evenement).", "._q($nom).", "._q($id_membre).", "._q($membres).", "._q($non_membres).", "._q($inscrits).", "._q($email).", "._q($telephone).", "._q($adresse).", "._q($montant).", "._q($commentaire)." )" );
 			header ('location:'.$url_retour);
 		}
 		
 		//MODIFICATION INSCRIPTION
-		if ($action=="modifie") {
+		if ($faire=="modifie") {
 			spip_query("UPDATE spip_asso_activites SET date="._q($date).", id_evenement="._q($id_evenement).", nom="._q($nom).", id_adherent="._q($id_membre).", membres="._q($membres).", non_membres="._q($non_membres).", inscrits="._q($inscrits).", email="._q($email).", telephone="._q($telephone).", adresse="._q($adresse).", montant="._q($montant).", date_paiement="._q($date_paiement).", statut="._q($statut).", commentaire="._q($commentaire)." WHERE id_activite='$id_activite' ");
 			header ('location:'.$url_retour);
 			exit;
 		}
 		
 		//AJOUT PAIEMENT
-		if ($action=="paie") {
+		if ($faire=="paie") {
 			spip_query("UPDATE spip_asso_activites SET nom="._q($nom).", id_adherent="._q($id_membre).", membres="._q($membres).", non_membres="._q($non_membres).", inscrits="._q($inscrits).", montant="._q($montant).", date_paiement="._q($date_paiement).", statut="._q($statut).", commentaire="._q($commentaire)." WHERE id_activite='$id_activite' ");
 			$justification=_T('asso:activite_justification_compte_inscription',array('id_activite' => $id_activite, 'nom' => $nom));
 			spip_query("INSERT INTO spip_asso_comptes (date, journal,recette,justification,imputation,id_journal) VALUES ("._q($date_paiement).","._q($journal).","._q($montant).","._q($justification).",".lire_config('association/pc_activites').","._q($id_activite).")");
@@ -85,7 +85,7 @@
 			debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_inscriptions_activites'));
 			echo '<p><strong>'._T('asso:activite_message_confirmation_supprimer',array('nombre' => $count, 'pluriel' => $count > 1 ? 's' : '')).'</strong></<p>';
 			echo '<table>';
-			echo '<form action="'.$url_action_activites.'"  method="post">';
+			echo '<form action="'.$url_faire_activites.'"  method="post">';
 			for ( $i=0 ; $i < $count ; $i++ ) {
 				$id = $delete_tab[$i];
 				echo '<input type="hidden" name="drop[]" value="'.$id.'" checked>';

@@ -13,7 +13,7 @@
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
-	function exec_action_adherents() {
+	function exec_faire_adherents() {
 		global $connect_statut, $connect_toutes_rubriques;
 		
 		include_spip('inc/acces_page');
@@ -24,11 +24,11 @@
 		$validite=$_POST['validite'];
 		$commentaire=$_POST['commentaire'];
 		$statut_interne=$_POST['statut_interne'];
-		$action=$_POST['action'];
+		$faire=$_POST['faire'];
 		$url_retour=$_POST['url_retour'];
 		
 		//MODIFICATION ADHERENT
-		if ($action=="modifie") {		
+		if ($faire=="modifie") {		
 			spip_query("UPDATE spip_auteurs_elargis SET id_asso="._q($id_asso).", commentaire="._q($commentaire).", validite="._q($validite).", categorie="._q($categorie).", statut_interne="._q($statut_interne)." WHERE id_auteur="._q($id_auteur) );
 			header ('location:'.$url_retour);
 			exit;
@@ -61,7 +61,7 @@
 			
 			echo '<p>'. _T('asso:adherent_message_confirmer_suppression').' : <br>';
 			echo '<table>';
-			echo '<form action="#"  method="post">';
+			echo '<form faire="#"  method="post">';
 			for ( $i=0 ; $i < $count ; $i++ ) {
 				$id = $delete_tab[$i];
 				$query = spip_query( "SELECT * FROM spip_auteurs_elargis where id_auteur='$id' " );

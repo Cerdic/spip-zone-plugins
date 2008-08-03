@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	/**
 	* Plugin Association
 	*
@@ -9,6 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
+	include_spip('inc/defs_supprimees');
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 
@@ -18,12 +19,13 @@
 		include_spip ('inc/acces_page');
 		
 		$url_asso = generer_url_ecrire('association');
-		$url_action_labels = generer_url_ecrire('action_labels');
+		$url_faire_labels = generer_url_ecrire('faire_labels');
 		$url_edit_relances = generer_url_ecrire('edit_relances');		
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		$indexation = lire_config('association/indexation');
 		
-		debut_page(_T('Gestion pour Association'), "", "");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo commencer_page(_T('Gestion pour Association'), "", "");
 		
 		association_onglets();
 		
@@ -47,7 +49,7 @@
 		echo '<tr>';
 		// Menu de sélection
 		echo '<td style="text-align:right;">';
-		echo '<form method="post" action="#">';
+		echo '<form method="post" faire="#">';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 		echo '<select name ="statut_interne" class="fondl" onchange="form.submit()">';
 		foreach (array(ok,echu,relance,sorti,lire_config('inscription2/statut_interne')) as $var) {
@@ -60,7 +62,7 @@
 		echo '</td></tr>';
 		echo '</table>';
 		
-		echo '<form method="post" action="'.$url_action_labels.'">';
+		echo '<form method="post" action="'.$url_faire_labels.'">';
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr bgcolor="#DBE1C5">';
 		echo '<td><strong>';

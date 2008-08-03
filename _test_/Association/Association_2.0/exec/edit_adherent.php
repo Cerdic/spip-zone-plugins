@@ -9,7 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	
+	include_spip('inc/defs_supprimees');
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 
@@ -18,7 +18,7 @@
 		
 		include_spip('inc/acces_page');
 		
-		$url_action_adherents=generer_url_ecrire('action_adherents');
+		$url_faire_adherents=generer_url_ecrire('faire_adherents');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$id_auteur= $_GET['id'];
@@ -34,9 +34,9 @@
 			$validite=$data['validite'];
 			$commentaire=$data['commentaire'];
 		}
-		$action='modifie';
-		
-		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
+		$faire='modifie';
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo commencer_page(_T('asso:titre_gestion_pour_association'), "", "");
 		
 		include_spip ('inc/navigation');
 		
@@ -61,7 +61,7 @@
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_modifier_membre'));
 		
-		echo '<form action="'.$url_action_adherents.'" method="post">';	
+		echo '<form action="'.$url_faire_adherents.'" method="post">';	
 		if (lire_config('association/indexation')=="id_asso"){
 			echo '<label for="id_asso"><strong>N&deg; d\'adh&eacute;rent :</strong></label>';
 			echo '<input name="id_asso" value="'.$id_asso.'" type="text" id="id_asso" class="formo" />';
@@ -88,12 +88,12 @@
 		echo '<label for="commentaire"><strong>'._T('asso:adherent_libelle_remarques').' :</strong></label>';
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';		
 		echo '<input name="id" type="hidden" value="'.$id_auteur.'" >';		
-		echo '<input name="action" type="hidden" value="'.$action.'">';
+		echo '<input name="faire" type="hidden" value="'.$faire.'">';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		
 		echo '<div style="float:right;">';
 		echo '<input name="submit" type="submit" value="';
-		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
+		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		echo '</form>';

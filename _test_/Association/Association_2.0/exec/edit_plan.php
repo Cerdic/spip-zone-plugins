@@ -9,6 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
+	include_spip('inc/defs_supprimees');
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
@@ -19,13 +20,13 @@
 		
 		$url_asso = generer_url_ecrire('association');
 		$url_plan = generer_url_ecrire('plan');
-		$url_action_plan=generer_url_ecrire('action_plan');
+		$url_faire_plan=generer_url_ecrire('faire_plan');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
-		$action=$_GET['action'];
+		$faire=$_GET['faire'];
 		$id_plan=$_GET['id'];
-		
-		debut_page(_T('Edition plan comptable'), "", "");		
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo commencer_page(_T('Edition plan comptable'), "", "");		
 		
 		association_onglets();
 		
@@ -54,7 +55,7 @@
 			$actif=$data['actif'];
 			$commentaire=$data["commentaire"];
 		}
-		echo '<form action="'.$url_action_plan.'" method="post">';	
+		echo '<form action="'.$url_faire_plan.'" method="post">';	
 		
 		echo '<label for="code"><strong>Code :</strong></label>';
 		echo '<input name="code" type="text" value="'.$code.'" id="code" class="formo" />';
@@ -70,19 +71,19 @@
 		echo '<input name="date_anterieure" type="text" value="'.$date_anterieure.'" id="date_anterieure" class="formo" />';
 		echo '<label for="actif"><strong>Compte activ&eacute; :</strong></label>';
 		echo '<input name="actif" type="radio" value="oui" id="actif" ';
-		if ($actif=="oui" || $action=="ajoute") {echo ' checked="checked"';}
+		if ($actif=="oui" || $faire=="ajoute") {echo ' checked="checked"';}
 		echo '>'._T('asso:plan_libelle_oui');
 		echo '<input name="actif" type="radio" value="non" id="actif" ';
 		if ($actif=="non") {echo ' checked="checked"';}
 		echo '>'._T('asso:plan_libelle_non');
 		echo '<br /><label for="commentaire"><strong>Commentaires :</strong></label>';
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
-		echo '<input type="hidden" name="action" value="'.$action.'">';
+		echo '<input type="hidden" name="faire" value="'.$faire.'">';
 		echo '<input type="hidden" name="id" value="'.$id_plan.'">';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		echo '<div style="float:right;">';
 		echo '<input name="submit" type="submit" value="';
-		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
+		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo"></div>';
 		echo '</form>';

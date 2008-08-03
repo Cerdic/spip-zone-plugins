@@ -9,16 +9,17 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
+	
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
-	
+	include_spip('inc/defs_supprimees');
 	function exec_edit_relances(){
 		global $connect_statut, $connect_toutes_rubriques;
-		
-		debut_page(_T('Gestion pour Association'), "", "");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo commencer_page(_T('Gestion pour Association'), "", "");
 		
 		$url_asso = generer_url_ecrire('association');
-		$url_action_relances = generer_url_ecrire('action_relances','action=confirm');
+		$url_faire_relances = generer_url_ecrire('faire_relances','faire=confirm');
 		$url_edit_relances = generer_url_ecrire('edit_relances');
 		$url_edit_labels = generer_url_ecrire('edit_labels');
 		$indexation = lire_config('association/indexation');
@@ -41,7 +42,7 @@
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('Tous les membres &agrave; relancer'));
 		
-		echo '<form method="post" action="'.$url_action_relances.'">';
+		echo '<form method="post" action="'.$url_faire_relances.'">';
 		
 		//MESSAGE
 		echo '<fieldset>';
@@ -113,7 +114,7 @@
 		echo '</table>';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		echo '<div style="float:right;"><input name="submit" type="submit" value="';
-		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
+		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		echo '</form>';	

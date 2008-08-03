@@ -12,12 +12,12 @@
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 
-	function exec_action_comptes(){
+	function exec_faire_comptes(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
 		include_spip ('inc/acces_page');
 		
-		$url_action_comptes=generer_url_ecrire('action_comptes');
+		$url_faire_comptes=generer_url_ecrire('faire_comptes');
 		
 		$id_compte=$_REQUEST['id'];
 		$date=$_POST['date'];
@@ -27,25 +27,25 @@
 		$justification=$_POST['justification'];
 		$journal=$_POST['journal'];
 		
-		$action = $_REQUEST['action'];
+		$faire = $_REQUEST['faire'];
 		$url_retour=$_POST['url_retour'];
 		
 		//AJOUT OPERATION
-		if ($action=="ajoute") {
+		if ($faire=="ajoute") {
 			spip_query( "INSERT INTO spip_asso_comptes (date, imputation, recette, depense, journal, justification) VALUES ('$date', '$imputation' ,'$recette', '$depense', '$journal', '$justification')");
 			header ('location:'.$url_retour);
 			exit;
 		}
 		
 		//MODIFICATION OPERATION
-		if ($action =="modifie") { 
+		if ($faire =="modifie") { 
 			spip_query( " UPDATE spip_asso_comptes SET date='$date', recette='$recette', depense='$depense', justification='$justification', journal='$journal' WHERE id_compte='$id_compte' " );
 			header ('location:'.$url_retour);
 			exit;
 		}
 		
 		//SUPPRESSION PROVISOIRE OPERATION
-		if ($action == "supprime") {
+		if ($faire == "supprime") {
 			
 			$url_retour = $_SERVER['HTTP_REFERER'];
 			
@@ -65,8 +65,8 @@
 			
 			debut_cadre_relief(  "", false, "", $titre = _T('Op&eacute;rations comptables'));
 			echo '<p><strong>Vous vous appr&ecirc;tez &agrave; effacer la ligne de compte n&deg; '.$id_compte.' !</strong></p>';
-			echo '<form action="'.$url_action_comptes.'"  method="post">';
-			echo '<input type=hidden name="action" value="drop">';
+			echo '<form action="'.$url_faire_comptes.'"  method="post">';
+			echo '<input type=hidden name="faire" value="drop">';
 			echo '<input type=hidden name="id" value="'.$id_compte.'">';
 			echo '<input type=hidden name="url_retour" value="'.$url_retour.'">';
 			echo '<p style="float:right;"><input name="submit" type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></p>';
@@ -79,7 +79,7 @@
 		//---------------------------- 
 		//  SUPPRESSION DEFINITIVE OPERATION
 		//---------------------------- 		
-		if ($action == "drop") {
+		if ($faire == "drop") {
 			
 			$url_retour=$_POST['url_retour'];
 			
@@ -116,7 +116,7 @@
 			debut_cadre_relief(  "", false, "", $titre = _T('Op&eacute;rations comptables'));
 			echo '<p>Vous vous appr&ecirc;tez &agrave; valider les op&eacute;rations  : <br>';
 			echo '<table>';
-			echo '<form action="'.$url_action_comptes.'"  method="post">';
+			echo '<form action="'.$url_faire_comptes.'"  method="post">';
 			for ( $i=0 ; $i < $count ; $i++ ) {	
 				$id = $valide_tab[$i];
 				$query = spip_query("SELECT * FROM spip_asso_comptes where id_compte='$id'");
