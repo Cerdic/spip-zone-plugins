@@ -288,7 +288,7 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 
 	// M
 	'mailcrypt:description' => '<NEW>Masque tous les liens de courriels pr&eacute;sents dans vos textes en les rempla&ccedil;ant par un lien Javascript permettant quand m&ecirc;me d\'activer la messagerie du lecteur. Cet outil antispam tente d\'emp&ecirc;cher les robots de collecter les adresses &eacute;lectroniques laiss&eacute;es en clair dans les forums ou dans les balises de vos squelettes.',
-	'mailcrypt:nom' => '<NEW>MailCrypt',
+	'mailcrypt:nom' => 'MailCrypt',
 	'modifier_vars' => 'Dit @nb@ parameters wijzigen',
 
 	// N
@@ -436,7 +436,7 @@ Plus d\'infos : [->http://www.spip.net/fr_article765.html]
 	'type_urls:nom' => 'Formaat van URLs',
 	'typo_exposants:description' => '<NEW>Textes fran&ccedil;ais : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
 _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l\'Imprimerie nationale telles qu\'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l\'Imprimerie nationale, Paris, 2002).',
-	'typo_exposants:nom' => '<NEW>Exposants typographiques',
+	'typo_exposants:nom' => 'Typografische inzenders',
 
 	// U
 	'url_html' => 'html@_CS_ASTER@',
@@ -460,7 +460,7 @@ _ volle_tekst_versie : uitgetrokken de inhoud tekst van een HTML bladzijde om va
 	'votre_choix' => 'Uw keus :',
 
 	// X
-	'xml:description' => '<NEW>Active le validateur xml pour l\'espace public tel qu\'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitul&eacute; &laquo;&nbsp;Analyse XML&nbsp;&raquo; est ajout&eacute; aux autres boutons d\'administration.',
+	'xml:description' => 'Actief validateur xml voor de openbare ruimte zoals hij in  [documentatie->http://www.spip.net/en_article3582.html]  wordt beschreven. Een knoop getiteld &laquo;&nbsp;Analyse XML&nbsp;&raquo; wordt aan de andere knopen van bestuur toegevoegd.',
 	'xml:nom' => 'XML Validatie'
 );
 
