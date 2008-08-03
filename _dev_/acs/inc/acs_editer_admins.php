@@ -23,7 +23,7 @@ if (!is_callable('sql_count')) { // spip < 1.9.3
     return spip_num_rows($res);
   }
 }
-if (!is_callable('sql_fecth')) { // spip < 1.9.3
+if (!is_callable('sql_fetch')) { // spip < 1.9.3
   function sql_fetch($res) {
     return spip_fetch_array($res);
   }
