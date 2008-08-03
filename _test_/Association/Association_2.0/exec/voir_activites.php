@@ -9,7 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-
+	include_spip('inc/defs_supprimees');
 	include_spip ('inc/navigation_modules');
 	
 	function exec_voir_activites(){
@@ -29,8 +29,8 @@
 		
 		if ( isset ($_POST['statut'] )) { $statut =  $_POST['statut']; }
 		else { $statut= "%"; }
-		
-		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:titre_gestion_pour_association'), "", "");
 		
 		association_onglets();
 		

@@ -9,10 +9,10 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-
+	
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
-	
+	include_spip('inc/defs_supprimees');
 	function exec_voir_adherent(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
@@ -32,8 +32,8 @@
 			$prenom=$data['prenom'];
 			$validite=$data['validite'];
 		}
-		
-		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:titre_gestion_pour_association'), "", "");
 		
 		association_onglets();
 		

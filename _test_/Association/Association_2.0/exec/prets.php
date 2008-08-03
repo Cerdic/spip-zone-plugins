@@ -9,7 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	
+	include_spip('inc/defs_supprimees');
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
@@ -25,8 +25,8 @@
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		$id_ressource=$_REQUEST['id'];
 		
-		
-		debut_page(_T('asso:prets_titre_liste_reservations'), "", "");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:prets_titre_liste_reservations'), "", "");
 		
 		association_onglets();
 		

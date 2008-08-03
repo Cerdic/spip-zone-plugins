@@ -11,6 +11,7 @@
 	**/
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
+	include_spip('inc/defs_supprimees');
 
 	function exec_ventes(){
 		global $connect_statut, $connect_toutes_rubriques;
@@ -25,8 +26,8 @@
 		
 		$annee=$_GET['annee'];
 		if(empty($annee)){$annee = date('Y');}
-		
-		debut_page(_T('Gestion pour  Association'), "", "");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('Gestion pour  Association'), "", "");
 		
 		association_onglets();
 		

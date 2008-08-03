@@ -9,7 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	
+	include_spip('inc/defs_supprimees');
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
@@ -23,8 +23,8 @@
 		$url_edit_ressource=generer_url_ecrire('edit_ressource','action=modifie');
 		$url_action_ressources=generer_url_ecrire('action_ressources');
 		$url_prets=generer_url_ecrire('prets');
-		
-		debut_page(_T('asso:ressources_titre_liste_ressources'), "", "");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:ressources_titre_liste_ressources'), "", "");
 		
 		association_onglets();
 		

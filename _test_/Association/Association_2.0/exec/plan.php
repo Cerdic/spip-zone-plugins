@@ -9,9 +9,10 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
+	include_spip('inc/defs_supprimees');
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
-
+	include_spip ('defs_supprimees'); 		// les defs supprimés par les dev de SPIP
 	function exec_plan(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
@@ -20,8 +21,8 @@
 		$url_plan = generer_url_ecrire('plan');
 		$url_edit_plan=generer_url_ecrire('edit_plan');
 		$url_action_plan=generer_url_ecrire('action_plan');
-		
-		debut_page(_T('plan comptable'), "", "");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('plan comptable'), "", "");
 		
 		association_onglets();
 		
