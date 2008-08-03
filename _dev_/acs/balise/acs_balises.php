@@ -12,7 +12,7 @@ composants_ajouter_balises();
 function balise_PINCEAU($p) {
   $composant = interprete_argument_balise(1,$p);
   $composant = substr($composant, 1, strlen($composant)-2);
-  $p->code = '"crayon composant-'.$composant.'-1 pinceau"';
+  $p->code = '"crayon type_pinceau composant-'.$composant.'-1"';
   $p->statut = 'php';
   $p->interdire_scripts = false;
   return $p;
