@@ -1,9 +1,9 @@
 <plugin>
-	<nom>Association 1.9.2</nom>
+	<nom>Association 2.0</nom>
 	<auteur>												<!-- Auteur du plugin -->
 	Bernard Blazin - Fran&ccedil;ois de Montlivault 
 	</auteur>
-	<version>0.64</version>
+	<version>0.65</version>
 	<etat>test</etat>
 	<description>
 		Gestion de petites associations
