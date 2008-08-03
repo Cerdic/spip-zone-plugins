@@ -1,5 +1,5 @@
 <plugin>
-	<nom>Le Couteau Suisse</nom>
+	<nom><multi>Swiss Knife[fr]Le Couteau Suisse[ca]El Ganivet Su&iacute;s[ar]&#1587;&#1603;&#1610;&#1606; &#1575;&#1604;&#1580;&#1610;&#1576;[nl]Het Zwitserland Mes[gl]A navalla su&iacute;za[es]La Navaja Suiza[de]Schweizer Taschenmesser</multi></nom>
 	<icon>img/couteau-50.gif</icon>
 	<version>1.7.18.04</version>
 	<auteur>Patrice Vanneufville
@@ -37,11 +37,66 @@ Elk van deze werktuigen kan of niet door de gebruiker op geactiveerd worden [de 
 
 De beschikbare categorie&euml;n zijn: Bestuur, typografische Verbeteringen, typografische Kortere wegen, openbare Display, Bakens, filters, criteria.
 
-Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typografische Aanhalingstekens}, {Mooi chips}, {schaft een overzicht voor uw artikelen}, {Smileys}, {het nummer}, {Mooi URLs}, {SPIP en de band af... externe}, {Niet van onbekende forums}, {D&eacute;coupe in bladzijdes en tabben}, etc., etc.
+Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typografische Aanhalingstekens}, {Mooi chips}, {schaft een overzicht voor uw artikelen}, {Smileys}, {het nummer}, {Mooi URLs}, {SPIP en de band af… externe}, {Niet van onbekende forums}, {D&eacute;coupe in bladzijdes en tabben}, etc., etc.
 
 Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 De verenigbaarheid: SPIP iedereen betaalden 1.9x
+[ca]Reuneix en un sol plugin una llista de petites noves funcionalitats i utilitats que milloren la gesti&oacute; del vostre lloc SPIP.
+
+L'usuari pot activar, o no, cadascuna d'aquestes utilitats [la p&agrave;gina d'administraci&oacute; del plugin->./?exec=admin_couteau_suisse] i gestoinar un cert nombre de variables: fer un clic a {{Configuraci&oacute;}}, despr&eacute;s escollir la pestanya {{El Ganivet Su&iacute;s}}.
+
+Les categories disponibles s&oacute;n: Administraci&oacute;, Millores tipogr&agrave;fiques, Dreceres tipogr&agrave;fiques, Presentaci&oacute; p&uacute;blica, Etiquetes, Filtres, Criteris.
+
+Descobriu en aquest plugin les vostres utilitats favorites: {Expositors tipogr&agrave;fics}, {Cometes tipogr&agrave;fiques}, {Bonics s&iacute;mbols}, {Un sumari pels vostres articles}, {Emoticones}, {Suprimir el n&uacute;mero}, {Bonics URLs}, {SPIP i els enlla&ccedil;os... externs}, {No F&ograve;rums an&ograve;mins}, {Divisi&oacute; en p&agrave;gines i pestanyes}, etc., etc.
+
+No dubteu a consultar els articles de la documentaci&oacute; del plugin publicats a: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+
+Compatibilitat: SPIP totes les versions 1.9x
+[de]Zusammenfassung einiger Zusatzfunktionen f&uuml;r eine bessere Verwaltung Ihrer SPIP Website.
+
+Jedes dieser Werkzeuge kann vom Administrator auf der |Seite zur Verwaltung des Plugins->./?exec=admin_couteau_suisse] aktiviert oder abgeschaltet und konfiguriert werden: Klicken Sie auf {{Konfiguration}}, und w&auml;hlen Sie dann {{Le Couteau Suisse}}.
+
+Sie k&ouml;nnen folgende Einstellungen vornehmen: Verwaltung, typografische Verbesserungen, typografische K&uuml;rzel, Anzeigeoptionen der Website, SPIP-Tags, Filter, Kriterien.
+
+W&auml;hlen Sie die f&uuml;r Sie wichtigsten Funktionen: {Typografische Hervorhebungen}, {typografische Anf&uuml;hrungszeichen}, {sch&ouml;ne Listen-Punkte}, {Inhaltsverzeichnis f&uuml;r Artikel}, {Smileys}, {Nummern entferneno}, {&auml;sthetische URLs}, {SPIP und externe Links}, {keine anonymen Foren}, {Aufteilung in Seiten und Reiter}, etc., etc.
+
+Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+
+Kompatibel mit: SPIP 1.9x
+[es]Re&uacute;ne en un solo plugin une liste de peque&ntilde;as caracter&iacute;sticas nuevas y &uacute;tiles para mejorar la gesti&oacute;n de tu sitio SPIP.
+
+Cada herramienta puede activarse o no por el usuario en [la p&aacute;gina de administraci&oacute;n del plugin->./?exec=admin_couteau_suisse] y manejar cierto n&uacute;mero de variables: pulsa en {{Configuraci&oacute;n}}, y selecciona la pesta&ntilde;a {{La Navaja Suiza}}.
+
+Las categor&iacute;as disponibles son: Administraci&oacute;n, Mejoras tipogr&aacute;ficas, Atajos tipogr&aacute;ficos, Publicaci&oacute;n, Balizas, filtros, criterios.
+
+Encuentra en este plugin tus herramientas favoritas: {Exponentes tipogr&aacute;ficos}, {Comillas tipogr&aacute;ficas}, {Marcas bonitas}, {Un sumario para tus art&iacute;culos}, {Smileys}, {Suprimir el n&uacute;mero}, {URLs elegantes}, {SPIP y los enlaces... externos}, {Foros no an&oacute;nimos}, {Dividir en p&aacute;ginas y pesta&ntilde;as}, etc., etc.
+
+No dudes en consultar los art&iacute;culos de documentaci&oacute;n del plugin publicados en: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+
+Compatibilidad: todas las versiones 1.9x de SPIP
+[ar]&#1610;&#1580;&#1605;&#1593; &#1601;&#1610; &#1605;&#1604;&#1581;&#1602; &#1608;&#1575;&#1581;&#1583; &#1608;&#1592;&#1575;&#1574;&#1601; &#1580;&#1583;&#1610;&#1583;&#1577; &#1608;&#1605;&#1601;&#1610;&#1583;&#1577; &#1578;&#1607;&#1583;&#1601; &#1575;&#1604;&#1609; &#1578;&#1581;&#1587;&#1610;&#1606; &#1575;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593;.
+
+&#1608;&#1610;&#1605;&#1603;&#1606; &#1578;&#1601;&#1593;&#1610;&#1604; &#1575;&#1610; &#1605;&#1606; &#1607;&#1584;&#1607; &#1575;&#1604;&#1608;&#1592;&#1575;&#1574;&#1601; &#1575;&#1608; &#1575;&#1610;&#1602;&#1575;&#1601;&#1607;&#1575; &#1601;&#1610; [&#1589;&#1601;&#1581;&#1577; &#1575;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1605;&#1604;&#1581;&#1602; ->  ./?exec=admin_couteau_suisse] &#1608;&#1575;&#1604;&#1578;&#1581;&#1603;&#1605; &#1576;&#1593;&#1583;&#1583; &#1605;&#1606; &#1575;&#1604;&#1605;&#1578;&#1594;&#1610;&#1585;&#1575;&#1578;: &#1575;&#1606;&#1602;&#1585; &#1593;&#1604;&#1609; {{&#1573;&#1593;&#1583;&#1575;&#1583; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593;}} &#1579;&#1605; &#1575;&#1582;&#1578;&#1585; &#1585;&#1575;&#1576;&#1591; {{&#1587;&#1603;&#1610;&#1606; &#1575;&#1604;&#1580;&#1610;&#1576;}}.
+
+&#1575;&#1589;&#1606;&#1575;&#1601; &#1575;&#1604;&#1608;&#1592;&#1575;&#1574;&#1601; &#1575;&#1604;&#1605;&#1578;&#1608;&#1575;&#1601;&#1585;&#1577; &#1607;&#1610;:&#1575;&#1604;&#1575;&#1583;&#1575;&#1585;&#1577;&#1548; &#1578;&#1581;&#1587;&#1610;&#1606; &#1575;&#1604;&#1603;&#1578;&#1575;&#1576;&#1577;&#1548; &#1575;&#1582;&#1578;&#1589;&#1575;&#1585;&#1575;&#1578; &#1575;&#1604;&#1603;&#1578;&#1575;&#1576;&#1577;&#1548; &#1593;&#1585;&#1590; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593; &#1575;&#1604;&#1593;&#1605;&#1608;&#1605;&#1610;&#1548; &#1575;&#1604;&#1593;&#1604;&#1575;&#1605;&#1575;&#1578;&#1548; &#1575;&#1604;&#1605;&#1585;&#1588;&#1581;&#1575;&#1578;&#1548; &#1575;&#1604;&#1605;&#1593;&#1575;&#1610;&#1610;&#1585;.
+
+&#1601;&#1610; &#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1604;&#1581;&#1602; &#1610;&#1605;&#1603;&#1606;&#1603; &#1575;&#1582;&#1578;&#1610;&#1575;&#1585; &#1575;&#1583;&#1608;&#1575;&#1578;&#1603; &#1575;&#1604;&#1605;&#1601;&#1590;&#1604;&#1577;: {&#1575;&#1604;&#1575;&#1587;}&#1548; {&#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &#1575;&#1604;&#1575;&#1602;&#1578;&#1576;&#1575;&#1587;}&#1548; {&#1604;&#1575;&#1574;&#1581;&#1577; &#1605;&#1581;&#1578;&#1608;&#1610;&#1575;&#1578; &#1575;&#1604;&#1605;&#1602;&#1575;&#1604;&#1575;&#1578;}&#1548; {&#1575;&#1586;&#1575;&#1604;&#1577; &#1575;&#1585;&#1602;&#1575;&#1605; &#1575;&#1604;&#1593;&#1606;&#1575;&#1589;&#1585;}&#1548; {&#1593;&#1606;&#1575;&#1608;&#1610;&#1606; URL &#1575;&#1604;&#1606;&#1592;&#1610;&#1601;&#1577;}&#1548; {&#1605;&#1606;&#1593; &#1575;&#1604;&#1605;&#1588;&#1575;&#1585;&#1603;&#1575;&#1578; &#1575;&#1604;&#1605;&#1594;&#1601;&#1604;&#1577;}&#1548; &#1575;&#1604;&#1582;.
+
+&#1604;&#1575; &#1578;&#1578;&#1585;&#1583;&#1583; &#1601;&#1610; &#1602;&#1585;&#1575;&#1569;&#1577; &#1605;&#1602;&#1575;&#1604;&#1575;&#1578; &#1578;&#1608;&#1579;&#1610;&#1602; &#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1604;&#1581;&#1602; &#1593;&#1604;&#1609; &#1575;&#1604;&#1593;&#1606;&#1608;&#1575;&#1606;:[spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+
+&#1610;&#1578;&#1608;&#1575;&#1601;&#1602; &#1605;&#1593; &#1603;&#1604; &#1575;&#1589;&#1583;&#1575;&#1585;&#1575;&#1578; 1.9x &#1605;&#1606; SPIP
+[gl]Re&uacute;ne nun s&oacute; m&oacute;dulo unha lista de pequenas funcionalidades novas e &uacute;tiles que melloran a xesti&oacute;n do seu web SPIP.
+
+Cada unha destas ferramentas pode ser activada ou non polo usuario en  [p&aacute;xina de administraci&oacute;n do m&oacute;dulo->./?exec=admin_couteau_suisse] e xestionar un certo n&uacute;mero de variables : Premer en {{Configuraci&oacute;n}}, logo escoller a pestana {{A Navalla Su&iacute;za}}.
+
+As categor&iacute;as dispo&ntilde;ibles son : administraci&oacute;n, melloras tipogr&aacute;ficas, atallos tipogr&aacute;ficos, presentaci&oacute;n p&uacute;blica, balizas, filtros, criterios.
+
+Descubra neste m&oacute;dulos as s&uacute;as ferramentas favoritas : {Super&iacute;ndices  tipogr&aacute;ficos}, {V&iacute;rgulas tipogr&aacute;ficas}, {Vi&ntilde;etas fermosas}, {Un sumario para os seus artigos}, {Riso&ntilde;os}, {Suprimir o n&uacute;mero}, {URL fermosos}, {SPIP e as ligaz&oacute;ns... externas}, {Ning&uacute;n foro an&oacute;nimo}, {Partir en p&aacute;xinas e pestanas}, etc., etc.
+
+Non dubide en consultar os artigos de documentaci&oacute;n do m&oacute;dulo publicados en  : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+
+Compatibilidade : SPIP todas as versi&oacute;ns 1.9x
 	</multi></description>
 	<lien>[->http://www.spip-contrib.net/Le-Couteau-Suisse]</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
