@@ -1,6 +1,6 @@
 (function($){
 /*
- *	crayons.js (c) Fil, toggg, dF 2006-2008 -- licence GPL
+ *	crayons.js (c) Fil, toggg, 2006-2008 -- licence GPL
  */
 
 // le prototype configuration de Crayons
