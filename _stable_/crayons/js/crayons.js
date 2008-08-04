@@ -1,6 +1,6 @@
 (function($){
 /*
- *	crayons.js (c) Fil, toggg 2006-2008 -- licence GPL
+ *	crayons.js (c) Fil, toggg, dF 2006-2008 -- licence GPL
  */
 
 // le prototype configuration de Crayons
@@ -23,7 +23,7 @@ $.prototype.cfgCrayons.prototype.mkimg = function(what, extra) {
 	return '<em class="crayon-'+what+'" title="'+ txt + (extra ? extra : '') + '"></em>';
 };
 
-$.prototype.cfgCrayons.prototype.iconclick = function(type, c) {
+$.prototype.cfgCrayons.prototype.iconclick = function(c, type) {
 
 	// le + qui passe en prive pour editer tout si classe type--id
 	var link = c.match(/\b(\w+)--(\d+)\b/);
@@ -375,7 +375,7 @@ $.fn.iconecrayon = function(){
 		var ctype = this.className.match(/\btype_(\w+)\b/);
 		type = (ctype) ? ctype[1] : 'crayon';
 		this.type = type; // Affecte son type a l'objet crayon
-		$(this).prepend(configCrayons.iconclick(type, this.className))
+		$(this).prepend(configCrayons.iconclick(this.className, type))
 		.find('.crayon-' + type + ', .crayon-img-changed') // le crayon a clicker lui-meme et sa memoire
 			.click(function(e){
 				$(this).parents('.crayon:eq(0)').opencrayon(e);
