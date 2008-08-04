@@ -34,9 +34,9 @@
 		echo '<p>'._T('asso:ressources_info').'</p>';
 		fin_boite_info();
 		
-		debut_raccourcis();
+		debut_raccourcis_sup();
 		icone_horizontale(_T('asso:ressources_nav_ajouter'), $url_ajout_ressource,'../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','creer.gif' );
-		fin_raccourcis();
+		fin_raccourcis_sup();
 		
 		debut_droite();
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:ressources_titre_liste_ressources'));

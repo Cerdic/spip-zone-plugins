@@ -19,9 +19,9 @@
 		include_spip ('inc/acces_page');
 		
 		$url_prets = generer_url_ecrire('prets');
-		$url_ajout_pret=generer_url_ecrire('edit_pret','action=ajoute');
-		$url_edit_pret=generer_url_ecrire('edit_pret','action=modifie');
-		$url_action_prets=generer_url_ecrire('action_prets');
+		$url_ajout_pret=generer_url_ecrire('edit_pret','faire=ajoute');
+		$url_edit_pret=generer_url_ecrire('edit_pret','faire=modifie');
+		$url_faire_prets=generer_url_ecrire('faire_prets');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		$id_ressource=$_REQUEST['id'];
 		
@@ -44,12 +44,12 @@
 		}
 		fin_boite_info();
 		
-		debut_raccourcis();
+		debut_raccourcis_sup();
 		if ($statut=="ok") {
 			icone_horizontale(_T('asso:prets_nav_ajouter'), $url_ajout_pret.'&id=$id_ressource', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','creer.gif');
 		}
 		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
-		fin_raccourcis();
+		fin_raccourcis_sup();
 		
 		debut_droite();
 		debut_cadre_relief(  "", false, "", $titre =_T('asso:prets_titre_liste_reservations'));
@@ -62,7 +62,7 @@
 		echo '<td><strong>'._T('asso:prets_entete_nom').'</strong></td>';
 		echo '<td><strong>'._T('asso:prets_entete_duree').'</strong></td>';
 		echo '<td><strong>'._T('asso:prets_entete_date_retour').'</strong></td>';
-		echo '<td colspan="2" style="text-align:center;"><strong>'._T('asso:entete_action').'</strong></td>';
+		echo '<td colspan="2" style="text-align:center;"><strong>'._T('asso:entete_faire').'</strong></td>';
 		echo'  </tr>';
 		$query = spip_query ( "SELECT * FROM spip_asso_prets WHERE id_ressource='$id_ressource' ORDER BY date_sortie DESC" ) ;
 		while ($data = spip_fetch_array($query)) {
@@ -85,7 +85,7 @@
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right">';
 			if ($data['date_retour']==0) { echo '&nbsp';} else {echo association_datefr($data['date_retour']);}
 			echo '</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_prets.'&action=supprime&id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource.'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="'._T('asso:prets_nav_annuler').'"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_faire_prets.'&faire=supprime&id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource.'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="'._T('asso:prets_nav_annuler').'"></a></td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_pret.'&id='.$data['id_pret'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:prets_nav_editer').'"></a></td>';
 			echo'  </tr>';
 		}     

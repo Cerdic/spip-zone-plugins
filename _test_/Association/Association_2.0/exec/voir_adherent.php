@@ -20,7 +20,7 @@
 		
 		$url_edit_compte = generer_url_ecrire('edit_compte');
 		$url_edit_activite = generer_url_ecrire('edit_activite');
-		$url_edit_pret = generer_url_ecrire('edit_pret','action=modifie');
+		$url_edit_pret = generer_url_ecrire('edit_pret','faire=modifie');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$id_auteur= $_GET['id'];
@@ -48,9 +48,9 @@
 		echo '<br /><div style="text-align:center;">'.association_date_du_jour().'</div>';	
 		fin_boite_info();
 		
-		debut_raccourcis();
+		debut_raccourcis_sup();
 		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
-		fin_raccourcis();
+		fin_raccourcis_sup();
 		
 		debut_droite();
 		

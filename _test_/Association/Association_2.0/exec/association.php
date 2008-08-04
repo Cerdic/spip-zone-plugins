@@ -49,7 +49,7 @@
 		echo lire_config('association/prefet').'<br>';
 		fin_cadre_formulaire();
 		
-		/* Provisoirement supprimé en attendant 1.9.3
+		
 		
 		echo '<br />';
 		gros_titre(_T('asso:votre_equipe'));		
@@ -66,7 +66,7 @@
 		echo '<td><strong>T&eacute;l&eacute;phone</strong></td>';
 		echo '</tr>';
 		$query = spip_query("SELECT * FROM spip_asso_adherents INNER JOIN spip_auteurs ON spip_auteurs_elargis.id_auteur=spip_auteurs.id_auteur WHERE fonction != '' AND statut_relance != 'sorti' ORDER BY nom_famille ");
-		while ($data = mysql_fetch_assoc($query)) {	
+		while ($data = mysql_fetch($query)) {	
 			$id_auteur=$data['id_auteur'];
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;"><a href="'.generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur").'" title="Modifier l\'administrateur">'.$data['nom'].' '.$data['prenom'].'</a></td>';
@@ -80,7 +80,7 @@
 		
 		fin_cadre_relief();	
 		
-		*/
+		
 		
 		fin_page();
 		

@@ -1,5 +1,5 @@
 <?php
-function debut_raccourcis(){
+function debut_raccourcis_sup(){
 	
 	global $spip_display;
 		
@@ -8,7 +8,7 @@ function debut_raccourcis(){
 		
 	echo fin_cadre_enfonce(true);
 };
-function fin_raccourcis(){
+function fin_raccourcis_sup(){
 	global $spip_display;
 	
 	if ($spip_display != 4) echo "</font>";

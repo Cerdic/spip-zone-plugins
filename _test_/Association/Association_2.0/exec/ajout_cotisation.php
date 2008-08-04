@@ -18,12 +18,12 @@
 		
 		include_spip('inc/acces_page');
 		
-		$url_action_cotisations = generer_url_ecrire('action_cotisations');
+		$url_faire_cotisations = generer_url_ecrire('faire_cotisations');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$id_auteur=$_GET['id'];
 		$query = spip_query( "SELECT * FROM spip_auteurs_elargis  WHERE id_auteur='$id_auteur' " );
-		while($data = spip_fetch_array($query)) {
+		/*while($data = spip_fetch_array($query)) {
 			$nom_famille=$data['nom_famille'];
 			$prenom=$data['prenom'];
 			$categorie=$data['categorie'];
@@ -31,9 +31,9 @@
 			$split = split("-",$validite); 
 			$annee = $split[0]; 
 			$mois = $split[1]; 
-			$jour = $split[2]; 
-			
-			debut_page(_T('Ajout de cotisation'), "", "");
+			$jour = $split[2]; */
+			$commencer_page = charger_fonction('commencer_page', 'inc');
+			echo $commencer_page(_T('Ajout de cotisation'), "", "");
 			
 			association_onglets();
 			
@@ -48,10 +48,10 @@
 			fin_boite_info();
 			
 			debut_droite();
-			
+			/*
 			debut_cadre_relief(  "", false, "", $titre = _T('asso:Nouvelle cotisation'));
 			
-			echo '<form action="'.$url_action_cotisations.'" method="POST">';
+			echo '<form faire="'.$url_faire_cotisations.'" method="POST">';
 			echo '<label for="date"><strong>'._T('asso:Date du paiement (AAAA-MM-JJ)').' :</strong></label>';
 			echo '<input name="date" type="text" value="'.date('Y-m-d').'" id="date" class="formo" />';
 			echo '<label for="montant"><strong>'._T('asso:Montant paye (en euros)').' :</strong></label>';
@@ -78,12 +78,12 @@
 			echo '<input type="hidden" name="nom_famille" value_famille="'.$nom_famille.'">';
 			echo '<input type="hidden" name="prenom" value="'.$prenom.'">';
 			echo '<input type="hidden" name="categorie" value="'.$categorie.'">';
-			echo '<input type="hidden" name="action" value="ajoute">';
-		}
+			echo '<input type="hidden" name="faire" value="ajoute">';
+		}*/
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		
 		echo '<div style="float:right;"><input name="submit" type="submit" value="';
-		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
+		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		echo '</form>';

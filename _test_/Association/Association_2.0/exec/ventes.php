@@ -56,9 +56,9 @@
 		}		
 		fin_boite_info();
 		
-		debut_raccourcis();
+		debut_raccourcis_sup();
 		icone_horizontale(_T('Ajouter une vente'), $url_ajout_vente, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/panier_in.gif','rien.gif' );
-		fin_raccourcis();
+		fin_raccourcis_sup();
 		
 		debut_droite();
 		

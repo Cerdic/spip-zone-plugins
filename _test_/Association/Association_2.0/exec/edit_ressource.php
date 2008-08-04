@@ -32,9 +32,9 @@
 		echo '<p></p>';
 		fin_boite_info();
 		
-		debut_raccourcis();
+		debut_raccourcis_sup();
 		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-png","rien.gif");	
-		fin_raccourcis();
+		fin_raccourcis_sup();
 		
 		debut_droite();
 		

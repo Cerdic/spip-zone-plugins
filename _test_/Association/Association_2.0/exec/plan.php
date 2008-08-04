@@ -20,7 +20,7 @@
 		
 		$url_plan = generer_url_ecrire('plan');
 		$url_edit_plan=generer_url_ecrire('edit_plan');
-		$url_action_plan=generer_url_ecrire('action_plan');
+		$url_faire_plan=generer_url_ecrire('faire_plan');
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('plan comptable'), "", "");
 		
@@ -34,10 +34,10 @@
 		echo'<p>'._T('asso:plan_info').'</p>';
 		fin_boite_info();
 		
-		debut_raccourcis();
-		icone_horizontale(_T('asso:plan_nav_ajouter'), generer_url_ecrire('edit_plan','action=ajoute'), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/EuroOff.gif', 'creer.gif');
+		debut_raccourcis_sup();
+		icone_horizontale(_T('asso:plan_nav_ajouter'), generer_url_ecrire('edit_plan','faire=ajoute'), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/EuroOff.gif', 'creer.gif');
 		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
-		fin_raccourcis();
+		fin_raccourcis_sup();
 		
 		debut_droite();
 		
@@ -67,7 +67,7 @@
 		echo '<td style="text-align:right;">';
 		
 		//Filtre actif
-		echo '<form method="post" action="'.$url_plan.'">';
+		echo '<form method="post" faire="'.$url_plan.'">';
 		echo '<input type="hidden" name="classe" value="'.$classe.'">';
 		echo '<select name ="actif" class="fondl" onchange="form.submit()">';
 		echo '<option value="oui" ';
@@ -91,7 +91,7 @@
 		echo '<td><strong>R&eacute;f&eacute;rence</strong></td>';
 		echo '<td style="text-align:right;"><strong>Solde initial</strong></td>';
 		echo '<td><strong>Date</strong></td>';
-		echo '<td colspan=2 style="text-align:center;"><strong>Action</strong></td>';
+		echo '<td colspan=2 style="text-align:center;"><strong>faire</strong></td>';
 		echo'  </tr>';
 		$query = spip_query ( "SELECT * FROM spip_asso_plan WHERE classe LIKE '$classe' AND actif='$actif' ORDER by classe, code" );
 		while ($data = spip_fetch_array($query)) {
@@ -102,8 +102,8 @@
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['reference'].'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($data['solde_anterieur'], 2, ',', ' ').' &euro;</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.association_datefr($data['date_anterieure']).'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_plan.'&action=supprime&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="Supprimer"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_plan.'&action=modifie&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Modifier"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_faire_plan.'&faire=supprime&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="Supprimer"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_plan.'&faire=modifie&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Modifier"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';

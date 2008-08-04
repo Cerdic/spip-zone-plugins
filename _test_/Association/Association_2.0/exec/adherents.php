@@ -66,10 +66,10 @@
 		echo '<div>'._T('asso:adherent_liste_nombre_total').'</div>';
 		fin_boite_info();	
 		
-		debut_raccourcis();
+		debut_raccourcis_sup_sup();
 		icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), $url_edit_relances,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif' ); 
 		icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&filtre='.$filtre,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/print-24.png','rien.gif' ); 
-		fin_raccourcis();
+		fin_raccourcis_sup_sup();
 		
 		debut_droite();
 		
