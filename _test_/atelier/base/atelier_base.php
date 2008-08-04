@@ -70,6 +70,24 @@ $taches_key = array(
 $tables_principales['spip_taches'] =
    array('field' => &$taches, 'key' => &$taches_key);
 
+//-- Table BUGS --------------------------------------------------------
+$bugs = array(
+  "id_bug"			=> "bigint(21) NOT NULL auto_increment",
+  "id_projet"			=> "bigint(21) NOT NULL",
+  "titre"			=> "text NOT NULL",
+  "descriptif"			=> "text NOT NULL",
+  "version"			=> "text NOT NULL",
+  "version_spip"		=> "text NOT NULL",
+  "date"			=> "TIMESTAMP"
+);
+
+$bugs_key = array(
+  "PRIMARY KEY" => "id_bug"
+);
+
+$tables_principales['spip_bugs'] = 
+   array('field' => &$bugs, 'key' => &$bugs_key);
+
 //----------------------------------------------------------------------
 //-- TABLES AUXILLIAIRES -----------------------------------------------
 //----------------------------------------------------------------------
@@ -94,8 +112,10 @@ global $table_des_tables, $table_primary;
 
 $table_primary['taches']='id_tache';
 $table_primary['projets']='id_projet';
+$table_primary['bugs']='id_bug';
 
 $table_des_tables['taches']='taches';
 $table_des_tables['projets']='projets';
+$table_des_tables['bugs']='bugs';
 
 ?>

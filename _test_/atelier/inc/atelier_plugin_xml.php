@@ -24,7 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function inc_atelier_plugin_xml_dist($id_projet=0,$arbre=array()) {
 
 	$form = "<input type='hidden' name='editer_plugin_xml' value='oui' />\n"
-	. '<table>'
+	. '<table border="1" cellpadding="5" cellspacing="0" style=" width: 100%;">'
 	. editer_plugin_nom($arbre['plugin'][0]['nom'][0])
 	. editer_plugin_auteur($arbre['plugin'][0]['auteur'][0])
 	. editer_plugin_version($arbre['plugin'][0]['version'][0])
@@ -43,39 +43,61 @@ function inc_atelier_plugin_xml_dist($id_projet=0,$arbre=array()) {
 }
 
 function editer_plugin_nom($nom) {
-	return '<tr><td>'._T('atelier:plugin_nom').'</td><td><input name="nom" type="text" value="'.$nom.'"/></td></tr>';
+	return '<tr><td style="vertical-align:top;">'._T('atelier:plugin_nom').'</td>'
+		.'<td><input name="nom" type="text" size="60" value="'.$nom.'"/><br />'
+		._T('atelier:plugin_expl_nom').'</td></tr>';
 }
 
 function editer_plugin_auteur($auteur) {
-	return '<tr><td>'._T('atelier:plugin_auteur').'</td><td><input name="auteur" type="text" value="'.$auteur.'" /></td></tr>';
+	return '<tr><td style="vertical-align:top;">'._T('atelier:plugin_auteur').'</td>'
+		.'<td><input name="auteur" size="60" type="text" value="'.$auteur.'" /><br />'
+		._T('atelier:plugin_expl_auteur').'</td></tr>';
 }
 
 function editer_plugin_version($version) {
-	return '<tr><td>'._T('atelier:plugin_version').'</td><td><input name="version" type="text" value="'.$version.'" /></td></tr>';
+	return '<tr><td style="vertical-align:top;">'._T('atelier:plugin_version').'</td>'
+		.'<td><input name="version" size="60" type="text" value="'.$version.'" /><br />'
+		._T('atelier:plugin_expl_version').'</td></tr>';
 }
 
 function editer_plugin_description($description) {
-	return '<tr><td>'._T('atelier:plugin_description').'</td><td><input name="description" type="text" value="'.$description.'" /></td></tr>';
+	return '<tr><td style="vertical-align:top;">'._T('atelier:plugin_description').'</td>'
+		.'<td><textarea cols="50" rows="7" name="description">'.$description.'</textarea><br />'
+		._T('atelier:plugin_expl_description').'</td></tr>';
 }
 
 function editer_plugin_etat($etat) {
-	return '<tr><td>'._T('atelier:plugin_etat').'</td><td><input name="etat" type="text" value="'.$etat.'" /></td></tr>';
+	return '<tr><td style="vertical-align:top;">'._T('atelier:plugin_etat').'</td>'
+		.'<td><select name="etat" value="'.$etat.'">'
+		.'<option value="dev">En développement</option>'
+		.'<option value="test">En test</option>'
+		.'<option value="stable">Stable</option>'
+		.'</select><br />'
+		._T('atelier:plugin_expl_etat').'</td></tr>';
 }
 
 function editer_plugin_lien($lien) {
-	return '<tr><td>'._T('atelier:plugin_lien').'</td><td><input name="lien" type="text" value="'.$lien.'" /></td></tr>';
+	return '<tr><td style="vertical-align:top;">'._T('atelier:plugin_lien').'</td>'
+		.'<td><input size="60" name="lien" type="text" value="'.$lien.'" /><br />'
+		._T('atelier:plugin_expl_lien').'</td></tr>';
 }
 
 function editer_plugin_options($options) {
-	return '<tr><td>'._T('atelier:plugin_options').'</td><td><input name="options" type="text" value="'.$options.'" /></td></tr>';
+	return '<tr><td style="vertical-align:top;">'._T('atelier:plugin_options').'</td>'
+		.'<td><input size="60" name="options" type="text" value="'.$options.'" /><br />'
+		._T('atelier:plugin_expl_options').'</td></tr>';
 }
 
 function editer_plugin_fonctions($fonctions) {
-	return '<tr><td>'._T('atelier:plugin_fonctions').'</td><td><input name="fonctions" type="text" value="'.$fonctions.'" /></td></tr>';
+	return '<tr><td style="vertical-align:top;">'._T('atelier:plugin_fonctions').'</td>'
+		.'<td><input size="60" name="fonctions" type="text" value="'.$fonctions.'" /><br />'
+		._T('atelier:plugin_expl_fonctions').'</td></tr>';
 }
 
 function editer_plugin_prefixe($prefixe) {
-	return '<tr><td>'._T('atelier:plugin_prefixe').'</td><td><input name="prefixe" type="text"  value="'.$prefixe.'"/></td></tr>';
+	return '<tr><td style="vertical-align:top;">'._T('atelier:plugin_prefixe').'</td>'
+		.'<td><input size="60" name="prefixe" type="text"  value="'.$prefixe.'"/><br />'
+		._T('atelier:plugin_expl_prefixe').'</td></tr>';
 }
 
 ?>

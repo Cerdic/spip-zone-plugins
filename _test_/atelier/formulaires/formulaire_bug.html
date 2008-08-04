@@ -1,0 +1,45 @@
+#CACHE{0}
+
+<form action="[(#ENV{url})]" method="post" name="formulaire_bug" enctype="multipart/form-data">
+
+	<input type="hidden" name="id_bug" value="[(#ENV**{id_bug})]"  size="50">
+	<input type="hidden" name="id_projet" value="[(#ENV**{id_projet})]"  size="50">
+	<input type="hidden" name="url_site" value="[(#URL_SITE_SPIP)]"  size="50">
+
+	<BOUCLE_projet(PROJETS){id_projet}>
+		Rapport de bug pour le projet <b>#TITRE</b>
+	</BOUCLE_projet>
+
+
+	<p>
+	<fieldset><legend><b>Description du bug rencontré</b></legend>
+		<p>
+		Titre : <br />
+		<input  type="text" name="titre" value="[(#ENV*{titre})]" size="15"><br />
+		Donnez un titre court et parlant<br /><br />
+		Descriptif : <br />
+		<textarea   name="descriptif">[(#ENV*{descriptif})]</textarea><br />
+		Décrivez votre bug de manière simple et concise<br /><br />
+		</p>
+	</fieldset>
+
+	<br />
+	<fieldset><legend><b>Versions</b></legend>
+		<p>
+		Version du plugin : <br />
+		<input  type="text" name="version" value="[(#ENV*{version})]" size="15"><br />
+		Quel version du plugin a provoqué ce bug ?<br /><br />
+
+		Version de spip : <br />
+		<input  type="text" name="version_spip" value="[(#ENV*{version_spip})]" size="15"><br />
+		Quel version de spip utilisiez-vous au moment du bug ?<br /><br />
+		</p>
+	</fieldset>
+	</p>
+
+	<p>
+		<input type='submit' name='valider' class='spip_bouton' value="valider" />
+		<input type="submit" name="abandonner" class="spip_bouton" value="abandonner" />
+	</p>
+
+</form>

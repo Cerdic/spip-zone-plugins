@@ -28,7 +28,7 @@ function atelier_recuperer_nom_auteur($id_auteur) {
 
 function atelier_recuperer_versions($id_projet) {
 	$r = sql_fetsel('versions','spip_projets',"id_projet=$id_projet");
-	if ($r['versions']) $versions = explode ('/',$r['versions']);
+	if ($r['versions'] != '') $versions = explode ('/',$r['versions']);
 	return $versions;
 }
 

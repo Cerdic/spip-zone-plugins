@@ -69,7 +69,9 @@ function atelier_plugin_xml($id_projet,$arbre) {
 
 	atelier_debut_gauche($nom_page);
 
-		atelier_cadre_raccourcis();
+		atelier_cadre_raccourcis(array(
+			'<a href="'.generer_url_ecrire('projets','id_projet='.$id_projet).'">'._T('atelier:revenir_projet').'</a>'
+		));
 		atelier_cadre_infos();
 
 	atelier_debut_droite($nom_page);
@@ -85,11 +87,12 @@ function atelier_plugin_xml($id_projet,$arbre) {
 		echo 'Fonctions : ' .$arbre['plugin'][0]['fonctions'][0] . '<br />';
 		echo 'Prefixe : ' .$arbre['plugin'][0]['prefix'][0] . '<br />';
 		echo fin_cadre_trait_couleur(true);
-		atelier_debut_cadre_form();
+
+		echo debut_cadre_couleur('',true);
 			echo _T('atelier:modifier_plugin_xml') .'&nbsp;:<br />'.gros_titre('Plugin.xml','',false);
 			$editer_plugin_xml = charger_fonction('atelier_plugin_xml','inc');
 			echo $editer_plugin_xml($id_projet,$arbre);
-		atelier_fin_cadre_form();
+		echo fin_cadre_couleur(true);
 
 	atelier_fin_gauche();
 	atelier_fin_page();
