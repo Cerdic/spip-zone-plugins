@@ -9,7 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	include_spip('inc/defs_supprimees');
+	
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 
@@ -31,13 +31,13 @@
 		debut_gauche();
 		
 		debut_boite_info();
-		association_date_du_jour();
+		echo association_date_du_jour();
 		fin_boite_info();
 		
-		debut_raccourcis();
-		icone_horizontale(_T('asso:Ajouter un don'), $url_ajout_don, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/bienfaiteur.png','creer.gif' );
-		fin_raccourcis();
 		
+		$res = icone_horizontale(_T('asso:Ajouter un don'), $url_ajout_don, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/bienfaiteur.png','creer.gif',false );
+		echo bloc_des_raccourcis($res);
+		creer_colonne_droite();
 		debut_droite();
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('Tous les dons'));
@@ -90,6 +90,6 @@
 		echo '</table>';
 		
 		fin_cadre_relief();  
-		fin_page();
+		echo fin_gauche(),fin_page();
 	}
 ?>
