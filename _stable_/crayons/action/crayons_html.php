@@ -361,10 +361,11 @@ function action_crayons_html_dist() {
 	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 
 	// CONTROLEUR
-	// on affiche le formulaire demande (contrôleur associé au crayon)
-	// Si le crayon n'est pas de type "crayon", c'est un crayon étendu, qui 
-	// intègre le formulaire requis à son contrôleur (pour avoir les boutons du formulaire 
-	// dans un contrôleur Draggable, par exemple, mais il y a d'autres usages possibles)
+	// on affiche le formulaire demande (controleur associe au crayon)
+	// Si le crayon n'est pas de type "crayon", c'est un crayon etendu, qui
+	// integre le formulaire requis à son controleur (pour avoir les boutons
+	// du formulaire dans un controleur Draggable, par exemple, mais il y a
+	// d'autres usages possibles)
 	include_spip('inc/crayons');
 	lang_select($GLOBALS['auteur_session']['lang']);
 	$return = affiche_controleur(_request('class'));
