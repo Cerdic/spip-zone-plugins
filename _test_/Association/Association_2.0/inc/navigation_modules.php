@@ -9,8 +9,10 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	
+	include_spip('inc/presentation');
+	include_spip('inc/utils');
 	function association_onglets(){
+		
 		global $id_auteur, $connect_id_auteur, $connect_statut, $statut_auteur, $options;
 		
 		echo debut_onglet();
