@@ -20,9 +20,9 @@
 		
 		$url_asso = generer_url_ecrire('association');
 		$url_ventes = generer_url_ecrire('ventes');
-		$url_action_ventes = generer_url_ecrire('action_ventes');
-		$url_edit_vente=generer_url_ecrire('edit_vente','action=modifie');
-		$url_ajout_vente=generer_url_ecrire('edit_vente','action=ajoute');
+		$url_faire_ventes = generer_url_ecrire('faire_ventes');
+		$url_edit_vente=generer_url_ecrire('edit_vente','faire=modifie');
+		$url_ajout_vente=generer_url_ecrire('edit_vente','faire=ajoute');
 		
 		$annee=$_GET['annee'];
 		if(empty($annee)){$annee = date('Y');}
@@ -78,7 +78,7 @@
 		echo '</table>';
 		
 		//TABLEAU
-		echo '<form action="'.$url_action_ventes.'" method="POST">';
+		echo '<form faire="'.$url_faire_ventes.'" method="POST">';
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr bgcolor="#DBE1C5">';
 		echo '<td style="text-align:right"><strong>ID</strong></td>';
