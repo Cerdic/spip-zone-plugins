@@ -41,7 +41,7 @@
 			$commentaires=$data["commentaires"];
 		}		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo commencer_page(_T('Cat&eacute;gories de cotisation'), "", "");
+		echo $commencer_page_T('Cat&eacute;gories de cotisation'), "", "");
 		
 		association_onglets();
 		

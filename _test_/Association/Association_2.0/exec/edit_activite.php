@@ -49,7 +49,7 @@
 			$lieu=$data['lieu'];
 		}
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo commencer_page(_T('asso:activite_titre_mise_a_jour_inscriptions'));
+		echo $commencer_page_T('asso:activite_titre_mise_a_jour_inscriptions'));
 		
 		association_onglets();
 		

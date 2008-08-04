@@ -37,7 +37,7 @@
 			$commentaire_retour=$data['commentaire_retour'];
 		}	
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo commencer_page(_T('asso:prets_titre_edition_prets'), "", "");		
+		echo $commencer_page_T('asso:prets_titre_edition_prets'), "", "");		
 		
 		association_onglets();
 		

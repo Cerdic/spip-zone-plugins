@@ -34,7 +34,7 @@
 			$justification=$data['justification'];
 		}
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo commencer_page();
+		echo $commencer_page);
 		
 		association_onglets();
 		

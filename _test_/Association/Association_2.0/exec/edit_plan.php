@@ -26,7 +26,7 @@
 		$faire=$_GET['faire'];
 		$id_plan=$_GET['id'];
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo commencer_page(_T('Edition plan comptable'), "", "");		
+		echo $commencer_page_T('Edition plan comptable'), "", "");		
 		
 		association_onglets();
 		

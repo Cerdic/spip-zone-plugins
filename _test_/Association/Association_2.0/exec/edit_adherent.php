@@ -36,7 +36,7 @@
 		}
 		$faire='modifie';
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo commencer_page(_T('asso:titre_gestion_pour_association'), "", "");
+		echo $commencer_page_T('asso:titre_gestion_pour_association'), "", "");
 		
 		include_spip ('inc/navigation');
 		

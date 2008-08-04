@@ -25,7 +25,7 @@
 		$indexation = lire_config('association/indexation');
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo commencer_page(_T('Gestion pour Association'), "", "");
+		echo $commencer_page_T('Gestion pour Association'), "", "");
 		
 		association_onglets();
 		
