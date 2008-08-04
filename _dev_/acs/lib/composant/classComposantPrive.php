@@ -146,6 +146,7 @@ class AdminComposant {
           $updated = true;
         }
       }
+      
       if (isset($updated)) {
         if ($this->afterUpdate) {
           @include_once($this->rootDir.'/ecrire/'.$type.'.php');
@@ -162,7 +163,7 @@ class AdminComposant {
             else
               $this->errors[] = $cObj.'->afterUpdate '._T('acs:not_found');
         }
-        ecrire_meta("acsDerniereModif", time());        
+        ecrire_meta("acsDerniereModif", time());
         ecrire_metas();
         unset($updated);
       }
@@ -224,18 +225,13 @@ class AdminComposant {
  */
   function edit($crayon=false) {
     static $n;
-    $n++; // Numérotation du composant (utile pour js)    
+    $n++; // Numérotation du composant (utile pour js)
+    
+    /*
+    if ($crayon instanceof Crayon) {
+    }*/
     
     $r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'lib/picker/picker.js"></script>';
-    if ($crayon instanceof Crayon) {
-      $r .= '<form id="acs" name="acs" class="formulaire_crayon" action="?action=crayons_composant_store" method="post">'.
-            '<input type="hidden" class="crayon-id" name="crayons[]" value="'.$crayon->key.'" />'."\n".
-            '<input type="hidden" name="name_'.$crayon->key.'" value="'.$crayon->name.'" />'."\n".
-            '<input type="hidden" name="md5_'.$crayon->key.'" value="'.$crayon->md5.'" />'."\n";
-          	"<input type='hidden' name='var_mode' value='recalcul' />";
-    }
-    else
-      $r .= '<form id="acs" name="acs" action="?exec=acs&onglet=composants" method="post">';
     $r .= "<input type='hidden' name='maj_composant' value='oui' />".
 					'<input type="hidden" name="composant" value="'.$this->type.'" />';
       
@@ -306,10 +302,7 @@ class AdminComposant {
       $r .= '<div class="alert">'.implode('<br />', $this->errors).'</div>';
       
     $r .= '</td>';
-    $r .= '<td valign="bottom"><div style="text-align:'.$GLOBALS['spip_lang_right'].';">'.
-      			'<input type="submit" class="crayon-submit fondo" name="'._T('bouton_valider').'" value="'._T('bouton_valider').'">'.
-						'</div></td>';
-    $r .= '</tr></table></form>';
+    $r .= '</tr></table>';
     return $r;
   }
 /**

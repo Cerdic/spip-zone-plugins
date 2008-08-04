@@ -34,14 +34,12 @@ function acs_ajouterBouton($boutons_admin) {
 
 function acs_header_prive($flux) {
   $url_css = '../spip.php?page=acs_style_prive.css&couleur_foncee='.substr($GLOBALS['couleur_foncee'],1).'&couleur_claire='.substr($GLOBALS['couleur_claire'],1);
-  return $flux.'<link rel="stylesheet" href="'.$url_css.'" type="text/css" media="projection, screen, tv" />'.
-'<script type="text/javascript" src="'._DIR_ACS.'javascript/jquery.debug.js"></script>'.
-'<script type="text/javascript">var DEBUG = '.
-'false'. // true active le debug des éléments jQuery dans ACS
-';</script>'.
-'<script type="text/javascript" src="'._DIR_ACS.'javascript/dragdrop_interface.js"></script>'.
+  
+  $r = '<link rel="stylesheet" href="'.$url_css.'" type="text/css" media="projection, screen, tv" />';
+	$r .= '<script type="text/javascript" src="'._DIR_ACS.'javascript/dragdrop_interface.js"></script>'.
 '<script type="text/javascript" src="'._DIR_ACS.'javascript/acs_ecrire.js"></script>'.
 '<script type="text/javascript" src="'._DIR_ACS.'lib/picker/picker.js"></script>';
+return $flux.$r;
 }
 
 ?>

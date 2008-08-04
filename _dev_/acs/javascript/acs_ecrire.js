@@ -29,8 +29,6 @@ function mode_source() {
 
 $(document).ready(
   function() {
-    $.log('acs_ecrire.js $(document).ready function called');
-
     // Hide help on start
     $(".pliable").each(
       function(i) {
@@ -41,7 +39,6 @@ $(document).ready(
     // Donne leur fonction onclick aux plieurs (générique)
     $(".acs_plieur").each(
       function(i, plieur) {
-        $.log('Init acs_plieur "' + plieur.id + '"');
         if (plieur.onclick != "undefined") {
           $(".imgon_" + plieur.name.substr(7)).attr("onclick", plieur.onclick);
         }
@@ -95,7 +92,6 @@ $(document).ready(
     $(".ctlWidget").each(
       function(i,cw) {
         selectid = "#select_" + cw.id;
-        $.log('Mask ' + selectid);
         $(selectid).attr("style", "visibility: hidden;");
         if ($(selectid).get(0)) $(selectid).get(0).style.visibility = "hidden"; /* IE */
         var dragid = "#" + $(selectid).val();
@@ -116,10 +112,8 @@ $(document).ready(
       fx: dfx,
       onStart: function(drag) { // store dragid
         dragid = "#" + $(drag).attr("id");
-        $.log('Start drag widget ' + dragid);
       },
       onStop: function() { // reset select on stop dragging from its ctlWidget
-        $.log('Stop drag widget ' + dragid);
         if ($(dragid).parent().is(".ctlWidget")) {
           var dropid = "#select_" + $(dragid).parent().attr("id");
           $("#widgets").append($(dragid));
@@ -136,7 +130,6 @@ $(document).ready(
       hoverclass: "ctlWidget_droppable_over",
       onHover: function(drag) {
         var dropid = "#select_" + $(this).attr("id");
-        $.log('onHover ctlWidget ' + dropid);
         var val = $(dropid).val();
         $(dropid).val(drag.id);
         if ($(dropid).val() == drag.id) {
@@ -149,7 +142,6 @@ $(document).ready(
       onDrop: function(drag) {
         var dropid = "#select_" + $(this).attr("id");
         var oldval = $(dropid).val();
-        $.log('Drop ' + drag.id + ' on ctlWidget ' + dropid);
         $(dropid).val(drag.id);
         if ($(dropid).val() == drag.id) {
 	      if ($(dragid).parent().is(".ctlWidget")) {

@@ -34,7 +34,19 @@ function controleurs_composant_dist($regs) {
   	'</div>'.
 // TODO: modifier plugin crayons pour récupérer ici position du composant et taille innerWidth & innerHeight ?
   	'<div class="edit_composant" style="position: absolute; display: block; top:0; left:'.$left.'px; z-index: 99999999">'.
-    acs_box($composant->T('nom'), $composant->edit($crayon), $composant->icon, 'editeur_composant').
+    acs_box(
+    $composant->T('nom'),
+    '<form id="acs" name="acs" class="formulaire_crayon" action="?action=crayons_composant_store" method="post">'.
+            '<input type="hidden" class="crayon-id" name="crayons[]" value="'.$crayon->key.'" />'."\n".
+            '<input type="hidden" name="name_'.$crayon->key.'" value="'.$crayon->name.'" />'."\n".
+            '<input type="hidden" name="md5_'.$crayon->key.'" value="'.$crayon->md5.'" />'."\n".
+          	'<input type="hidden" name="var_mode" value="recalcul" />'.
+    $composant->edit($crayon).
+    crayons_boutons().
+    '</form>',
+    $composant->icon,
+    'editeur_composant'
+    ).
     '</div>'.
 	'</div>'.
 '<script language="javascript">

@@ -14,7 +14,7 @@
 function acs_insert_head($flux) {
   $js = find_in_path('acs.js.html');
   if ($js)
-    $flux .= '<script type="text/javascript" src="spip.php?page=acs.js"></script>';
-  return $flux;
+    $r .= '<script type="text/javascript" src="spip.php?page=acs.js"></script>';
+  return $flux.$r;
 }
 ?>

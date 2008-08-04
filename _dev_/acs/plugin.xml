@@ -8,7 +8,7 @@
  - <a href="?exec=acs&amp;detail=2">Assistant de Configuration du Site</a>
 			<br />
 			Plugins recommand&eacute;s :	<br />
-			 - crayons 1.0 (>21861): &eacute;dition du contenu et du design depuis le site public.<br />
+			 - crayons 1.0 (>21883): &eacute;dition du contenu et du design depuis le site public.<br />
 			 - palette 1.0: choix visuel des couleurs.<br />
 			 - en option, notation 0.3: publication par notation pour le mod&egrave;le Cat.
 			 <br />
@@ -20,7 +20,7 @@
 	<auteur>	<!-- Auteur du plugin -->
  	Daniel FAIVRE &copy; 2008 - <multi>[fr]licence GPL[en]GPL license</multi>
 	</auteur>
-  <version>0.4 (20080730)</version>
+  <version>0.4 (20080804)</version>
 	<etat>
 	dev
 	</etat>

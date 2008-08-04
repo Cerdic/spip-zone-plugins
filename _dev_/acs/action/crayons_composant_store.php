@@ -26,6 +26,7 @@ function action_crayons_composant_store_dist() {
 	$cprovi = new AdminComposant($_POST['composant']);
 	
 	// Retourne la vue - Return vue 
+	$return['$erreur'] ='';
   $return[$wid] = vues_dist('composant', $_POST['composant'], 1, array('var_mode'=>'recalcul', 'c'=>$c));
 	echo var2js($return);
 	exit;

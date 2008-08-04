@@ -163,7 +163,6 @@ $("#plieur_spip_params").each(
 
 $("#mode_source").each(
   function(i, link) {
-    $.log("Init #mode_source");
     link.onclick = function(e) {
       AjaxSqueeze("?exec=acs_page_get_infos&pg=" + link.title + detail() + "&mode=source", "page_infos");
       document.location.href = "#page_infos";
@@ -174,7 +173,6 @@ $("#mode_source").each(
 
 $("#mode_schema").each(
   function(i, link) {
-    $.log("Init #mode_schema");
     link.onclick = function(e) {
       AjaxSqueeze("?exec=acs_page_get_infos&pg=" + link.title + detail() + "&mode=schema", "page_infos");
       document.location.href = "#page_infos";

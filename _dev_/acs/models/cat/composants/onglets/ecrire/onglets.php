@@ -11,10 +11,10 @@
 
 class acsOnglets extends Composant {
   function afterUpdate() {
-    $bc = $GLOBALS['meta']['acsOngletsBordColor'];
-    $ac = $GLOBALS['meta']['acsOngletsFondColor'];
-    $ic = $GLOBALS['meta']['acsOngletsCouleurInactif'];
-    $hc = $GLOBALS['meta']['acsOngletsCouleurSurvol'];
+  $bc = metacol('acsOngletsBordColor');
+  $ac = metacol('acsOngletsFondColor');
+  $ic = metacol('acsOngletsCouleurInactif');
+  $hc = metacol('acsOngletsCouleurSurvol');
 
     $imr = @ImageCreateFromGif(find_in_path('composants/onglets/img_pack/right.gif'));
     $iml = @ImageCreateFromGif(find_in_path('composants/onglets/img_pack/left.gif'));
@@ -60,4 +60,9 @@ class acsOnglets extends Composant {
   }
 }
 
+function metacol($var) {
+  $r = substr($GLOBALS['meta'][$var],1);
+  spip_log( $r . ' ');
+  return $r;
+}
 ?>
