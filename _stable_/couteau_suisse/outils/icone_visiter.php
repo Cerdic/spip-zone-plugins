@@ -9,18 +9,18 @@ global $spip_lang_left,$spip_lang_right;
 			$r = image_reduire("<img src='$fid' alt='' style='margin:0;' />", 46, 46);
 			$r = "<span style='height:48px; margin:0;'>$r</span>";
 			$q = 'span.icon_fond:last';
-		} else 
+		} else {
 			$r = image_reduire("<img src='$fid' alt='' style='margin:0;' />", 48, 48);
-			$r = "<span style='height:48px; margin:4px;'>$r</span>";
+			$r = addslashes("<span style='height:48px; margin:4px;'>$r</span>");
 			$q = 'img[@src*=visiter]';
-			
-	}// else return $flux;
+		}
+	} else return $flux;
 	return $flux. <<<JAVASCRIPT
 <script type="text/javascript"><!--
 // des que le DOM est pret...
 if (window.jQuery) jQuery(document).ready(function(){
 	jQuery("$q").hide()
-		.after("$r");
+	.after("$r");
 });
 //--></script>
 JAVASCRIPT;
