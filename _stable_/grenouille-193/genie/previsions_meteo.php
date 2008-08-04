@@ -5,17 +5,27 @@ include_spip('inc/grenouille');
 /**
  * genie_previsions_meteo
  *
- * TÃ¢che de fond pour mettre Ã  jour les prÃ©visions mÃ©tÃ©o
+ * Tache de fond pour mettre a jour les previsions meteo
  *
- * @param array taches_generales
- * @return true
  * @author Pierre Basson
  **/
+ 
 function genie_previsions_meteo($t) {
 	
 	$aujourdhui = date("Y-m-d 00:00:00");
-	spip_log("le rappel de la mŽtŽo est fait pour $aujourdhui ");
 	
+	/*toutes les heures on declenche la revision voir ("H")-1 */
+	$heureprecedent = date("Y-m-d H:00:00", mktime(date("H")-1, 0, 0, date("m") , date("d"), date("Y")));
+	$pourmaj = sql_fetsel('*','spip_meteo','maj', '', 'maj ASC',1);
+	$pour_maj = $pourmaj['maj'];
+	$id_meteo=$pourmaj['id_meteo'];
+	$statut=$pourmaj['statut'];
+	 
+	if (($pour_maj>$heureprecedent)&&($statut!='')){
+		 //spip_log("METEO pas besoin de mise ˆ jour car id_meteo = $id_meteo et $pour_maj > $heureprecedent");
+	}else{
+		  spip_log("METEO on declenche la revision car $pour_maj < $heureprecedent");
+	  
 	sql_delete('spip_previsions','date<'. sql_quote($aujourdhui));
 	$jours = 7;
 	$villes = sql_select('*', 'spip_meteo');
@@ -45,11 +55,12 @@ function genie_previsions_meteo($t) {
 				}
 
 				if ($id_prevision = sql_getfetsel('id_prevision', 'spip_previsions', 
-					array("date=". sql_quote($date), "id_meteo=". sql_quote($id_meteo)))) {
+					array("date=". sql_quote($date), "id_meteo=". sql_quote($id_meteo),"maj"))) {
 						sql_updateq('spip_previsions', $set,  
 							array(
 							'id_prevision='. sql_quote($id_prevision), 
-							'id_meteo='. sql_quote($id_meteo)));
+							'id_meteo='. sql_quote($id_meteo),
+							'maj='.'NOW()'));
 				} else {
 					isset($set['maxima']) || $set['maxima']='NA';
 					isset($set['minima']) || $set['minima']='NA';
@@ -68,6 +79,7 @@ function genie_previsions_meteo($t) {
 		}
 	}
 	return true;
+}
 }
 
 ?>

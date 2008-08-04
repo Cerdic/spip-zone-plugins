@@ -1,5 +1,11 @@
 <?php
 
+	#include_spip('inc/grenouille');
+	include_spip('genie/previsions_meteo');
+	genie_previsions_meteo($dummy);
+	
+	
+
 	/**
 	 * meteo_taches_generales_cron
 	 *
@@ -9,6 +15,7 @@
 	 * @return true
 	 * @author Pierre Basson
 	 **/
+	 
 	function meteo_taches_generales_cron($taches_generales) {
 		$taches_generales['previsions_meteo'] = 60 * 60; // toutes les heures
 		return $taches_generales;
@@ -19,7 +26,6 @@
 	
 
 	global $tableau_meteo;
-
  	$tableau_meteo	= array(
 							"1"	=> "pluie",
 							"2"	=> "pluie",
@@ -88,8 +94,7 @@
 		return $boutons_admin;
 	}
 
-	include_spip('inc/grenouille');
-	
+
 
 	/**
 	 * balise_TEMPS
