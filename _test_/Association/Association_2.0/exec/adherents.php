@@ -11,6 +11,7 @@
 	**/
 
 	include_spip('inc/navigation_modules');
+	include_spip('inc/presentation');
 	
 	function exec_adherents() {
 		
@@ -66,11 +67,12 @@
 		echo '<div>'._T('asso:adherent_liste_nombre_total').'</div>';
 		fin_boite_info();	
 		
-		debut_raccourcis_sup();
-		icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), $url_edit_relances,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif' ); 
-		icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&filtre='.$filtre,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/print-24.png','rien.gif' ); 
-		fin_raccourcis_sup();
-		
+		//debut_raccourcis_sup();
+		$res= icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), $url_edit_relances,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif',false ); 
+		$res .= icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&filtre='.$filtre,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/print-24.png','rien.gif',false ); 
+		//fin_raccourcis_sup();
+		echo bloc_des_raccourcis($res);
+		creer_colonne_droite();
 		debut_droite();
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_liste_actifs'));		
@@ -242,7 +244,8 @@
 		echo '</form>';
 		
 		fin_cadre_relief();  
-		fin_page();
+		echo fin_gauche();
+		echo fin_page();
 		
 	}
 ?>
