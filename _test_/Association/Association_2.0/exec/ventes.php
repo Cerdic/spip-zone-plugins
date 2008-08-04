@@ -11,7 +11,7 @@
 	**/
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
-	include_spip('inc/defs_supprimees');
+	
 
 	function exec_ventes(){
 		global $connect_statut, $connect_toutes_rubriques;
@@ -56,10 +56,11 @@
 		}		
 		fin_boite_info();
 		
-		debut_raccourcis_sup();
-		icone_horizontale(_T('Ajouter une vente'), $url_ajout_vente, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/panier_in.gif','rien.gif' );
-		fin_raccourcis_sup();
+		$res = icone_horizontale(_T('Ajouter une vente'), $url_ajout_vente, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/panier_in.gif','rien.gif',false );
+		echo bloc_des_raccourcis($res);
 		
+		
+		creer_colonne_droite();
 		debut_droite();
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('Toutes les ventes'));
@@ -119,6 +120,8 @@
 		echo '</form>';
 		
 		fin_cadre_relief();  
-		fin_page();
+		
+		
+		echo fin_droite(), fin_page();
 	}
 ?>
