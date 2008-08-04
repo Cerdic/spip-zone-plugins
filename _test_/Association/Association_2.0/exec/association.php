@@ -9,7 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	include_spip('inc/defs_supprimees');
+	
 	include_spip('inc/presentation');
 	include_spip('inc/gestion_base');
 	include_spip ('inc/navigation_modules');
