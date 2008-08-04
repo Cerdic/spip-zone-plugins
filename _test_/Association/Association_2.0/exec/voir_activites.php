@@ -9,7 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	include_spip('inc/defs_supprimees');
+	
 	include_spip ('inc/navigation_modules');
 	
 	function exec_voir_activites(){
@@ -52,13 +52,14 @@
 		}
 		fin_boite_info();
 		
-		debut_raccourcis_sup();
-		icone_horizontale(_T('asso:activite_bouton_ajouter_inscription'), $url_ajout_activite.'&id='.$id_evenement, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/panier_in.gif','rien.gif' );
-		icone_horizontale(_T('asso:activite_bouton_voir_liste_inscriptions'), $url_pdf_activite, _DIR_PLUGIN_ASSOCIATION."/img_pack/print-24.png","rien.gif");	
-		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
-		fin_raccourcis_sup();
 		
+		$res = icone_horizontale(_T('asso:activite_bouton_ajouter_inscription'), $url_ajout_activite.'&id='.$id_evenement, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/panier_in.gif','rien.gif',false );
+		$res .= icone_horizontale(_T('asso:activite_bouton_voir_liste_inscriptions'), $url_pdf_activite, _DIR_PLUGIN_ASSOCIATION."/img_pack/print-24.png","rien.gif",false);	
+		$res .= icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		echo bloc_des_raccourcis($res);
+		creer_colonne_droite();
 		debut_droite();
+
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_inscriptions_activites'));
 		
@@ -131,6 +132,6 @@
 		echo '</form>';
 		
 		fin_cadre_relief();  
-		fin_page();
+		echo fin_gauche(),fin_page();
 	}
 ?>

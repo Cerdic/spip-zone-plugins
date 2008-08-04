@@ -12,7 +12,7 @@
 	
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
-	include_spip('inc/defs_supprimees');
+	
 	function exec_voir_adherent(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
@@ -48,9 +48,12 @@
 		echo '<br /><div style="text-align:center;">'.association_date_du_jour().'</div>';	
 		fin_boite_info();
 		
-		debut_raccourcis_sup();
-		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
-		fin_raccourcis_sup();
+		
+		$res = icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		echo bloc_des_raccourcis($res);
+		creer_colonne_droite();
+		debut_droite();
+
 		
 		debut_droite();
 		
@@ -181,7 +184,7 @@
 		}
 		
 		fin_cadre_relief();
-		fin_page();
+		echo fin_gauche(),fin_page();
 	} 
 ?>
 
