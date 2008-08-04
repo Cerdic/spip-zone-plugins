@@ -100,6 +100,7 @@ $.fn.opencrayon = function(evt, percent) {
 			var me=this;
 			var offset = $(this).offset();
 			var params = {
+				'type': me.type,
 				'top': offset.top,
 				'left': offset.left,
 				'w': $(this).width(),
@@ -368,12 +369,12 @@ $.fn.activatecrayon = function(percent) {
 	});
 };
 
-// insere les icones dans l'element
+// insere les icones et le type de crayon (optionnel) dans l'element
 $.fn.iconecrayon = function(){
 	return this.each(function() {
 		var ctype = this.className.match(/\btype_(\w+)\b/);
 		type = (ctype) ? ctype[1] : 'crayon';
-		this.type = type;
+		this.type = type; // Affecte son type a l'objet crayon
 		$(this).prepend(configCrayons.iconclick(type, this.className))
 		.find('.crayon-' + type + ', .crayon-img-changed') // le crayon a clicker lui-meme et sa memoire
 			.click(function(e){
