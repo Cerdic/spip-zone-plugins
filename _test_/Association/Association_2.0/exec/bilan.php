@@ -14,16 +14,17 @@
 	include_spip ('inc/acces_page');
 	
 	function exec_bilan(){
-		echo "spip";
+		
 		global $connect_statut, $connect_toutes_rubriques;
-		/*
+		
 		include_spip ('inc/acces_page');
 		
 		$url_comptes = generer_url_ecrire('comptes');
 		$url_edit_compte = generer_url_ecrire('edit_compte');
 		$url_action_comptes = generer_url_ecrire('action_comptes');
 		
-		/*debut_page(_T('Gestion pour  Association'), "", '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/finances.jpg','rien.gif');
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('Gestion pour  Association'), "", '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/finances.jpg','rien.gif');
 		
 		association_onglets();
 		
@@ -33,10 +34,11 @@
 		echo association_date_du_jour();	
 		fin_boite_info();
 		
-		debut_raccourcis_sup();
-		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
-		fin_raccourcis_sup();
 		
+		$res = icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		echo bloc_des_raccourcis($res);
+		
+		creer_colonne_droite();
 		debut_droite();
 		
 		debut_cadre_relief(  "../"._DIR_PLUGIN_ASSOCIATION."/img_pack/finances.jpg", false, "", $titre = _T('Bilans comptables'));
@@ -132,7 +134,7 @@
 		echo '</table>';
 		
 		fin_cadre_relief();  
-		//fin_page();*/
+		echo fin_gauche(),fin_page();
 	}
 ?>
 
