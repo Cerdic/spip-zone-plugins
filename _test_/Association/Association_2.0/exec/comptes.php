@@ -9,6 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
+	include_spip('inc/defs_supprimees');
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
@@ -16,13 +17,13 @@
 		global $connect_statut, $connect_toutes_rubriques, $table_prefix;
 		
 		include_spip ('inc/acces_page');
-		
-		debut_page(_T('Gestion pour  Association'), "", "");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('Gestion pour  Association'), "", "");
 		
 		$url_comptes = generer_url_ecrire('comptes');
-		$url_ajout_compte = generer_url_ecrire('edit_compte','action=ajoute');
-		$url_edit_compte = generer_url_ecrire('edit_compte','action=modifie');
-		$url_action_comptes = generer_url_ecrire('action_comptes');
+		$url_ajout_compte = generer_url_ecrire('edit_compte','faire=ajoute');
+		$url_edit_compte = generer_url_ecrire('edit_compte','faire=modifie');
+		$url_faire_comptes = generer_url_ecrire('faire_comptes');
 		$url_bilan = generer_url_ecrire('bilan');
 		
 		if ( isset ($_REQUEST['imputation'] )) { $imputation = $_REQUEST['imputation']; }
@@ -91,7 +92,7 @@
 		echo '</td>';
 		
 		echo '<td style="text-align:right;">';
-		echo '<form method="post" action="'.$url_comptes.'">';
+		echo '<form method="post" faire="'.$url_comptes.'">';
 		echo '<select name ="imputation" class="fondl" onchange="form.submit()">';
 		echo '<option value="%" ';
 		if ($imputation=="%") { echo ' selected="selected"'; }
@@ -107,7 +108,7 @@
 		echo '</tr></table>';
 
 	//TABLEAU
-	echo '<form method="post" action="'.$url_action_comptes.'">';
+	echo '<form method="post" faire="'.$url_faire_comptes.'">';
 	echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 	echo '<tr bgcolor="#DBE1C5">';
 	echo '<td style="text-align:right;"><strong>ID</strong></td>';
@@ -143,7 +144,7 @@
 		if($data['valide']=='oui') {echo '<td class ='.$class.' colspan=3 style="border-top: 1px solid #CCCCCC;">&nbsp;</td>';}
 		else {
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_compte.'&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Mettre &agrave; jour"></a></td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_comptes.'&action=supprime&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="Supprimer"></a></td>';
+			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_faire_comptes.'&faire=supprime&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="Supprimer"></a></td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;;text-align:center"><input name="valide[]" type="checkbox" value='.$data['id_compte'].'></td>';
 		}
 		echo '</tr>';

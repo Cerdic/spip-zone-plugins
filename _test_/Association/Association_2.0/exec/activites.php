@@ -22,8 +22,8 @@
 		$url_ajout_activite = generer_url_ecrire('edit_activite','action=ajoute');
 		$url_edit_activites = generer_url_ecrire('edit_activite','action=modifie');
 		$url_voir_activites = generer_url_ecrire('voir_activites');
-		
-		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:titre_gestion_pour_association'), "", "");
 		
 		association_onglets();
 		

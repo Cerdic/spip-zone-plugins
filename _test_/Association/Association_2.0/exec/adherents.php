@@ -9,12 +9,12 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	
+
 	include_spip('inc/navigation_modules');
 	
 	function exec_adherents() {
 		
-		global $connect_statut, $connect_toutes_rubriques, $table_prefix;
+		//global $connect_statut, $connect_toutes_rubriques, $table_prefix;
 		
 		include_spip ('inc/acces_page');
 		
@@ -23,12 +23,12 @@
 		$url_editer_auteur = generer_url_ecrire('auteur_infos');
 		$url_edit_adherent = generer_url_ecrire('edit_adherent');
 		$url_voir_adherent = generer_url_ecrire('voir_adherent');
-		$url_action_adherents = generer_url_ecrire('action_adherents');
+		$url_faire_adherents = generer_url_ecrire('faire_adherents');
 		$url_edit_relances=generer_url_ecrire('edit_relances');
 		$url_pdf_adherents = generer_url_ecrire('pdf_adherents');
 		$indexation = lire_config('association/indexation');
-		
-		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:titre_gestion_pour_association'), "", "");
 		
 		association_onglets();
 		
@@ -107,7 +107,7 @@
 			if ($indexation=="id_asso") { $critere="id_asso='$id'"; }
 		}
 		
-		echo '<form method="post" action="'.$url_adherent.'">';
+		echo '<form method="post" faire="'.$url_adherent.'">';
 		echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10" ';
 		if ($indexation=='id_asso') { echo ' value="'._T('asso:adherent_libelle_id_asso').'" '; }
 		else { echo ' value="'._T('asso:adherent_libelle_id_adherent').'" ';}
@@ -117,7 +117,7 @@
 		echo '<td style="text-align:right;">';
 		
 		//Filtre statut
-		echo '<form method="post" action="'.$url_adherent.'">';
+		echo '<form method="post" faire="'.$url_adherent.'">';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 		echo '<select name ="filtre" class="fondl" onchange="form.submit()">';
 		foreach (array(defaut,ok,echu,relance,sorti,prospect) as $statut) {
@@ -132,7 +132,7 @@
 		echo '</table>';
 		
 		//Affichage de la liste
-		echo '<form method="post" action="'.$url_action_adherents.'">';
+		echo '<form method="post" faire="'.$url_faire_adherents.'">';
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr bgcolor="#DBE1C5">';
 		echo '<td><strong>';
@@ -144,7 +144,7 @@
 		echo '<td><strong>'._T('asso:adherent_libelle_prenom').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_libelle_categorie').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_libelle_validite').'</strong></td>';
-		echo '<td colspan="4" style="text-align:center;"><strong>'._T('asso:adherent_entete_action').'</strong></td>';
+		echo '<td colspan="4" style="text-align:center;"><strong>'._T('asso:adherent_entete_faire').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_entete_supprimer_abrev').'</strong></td>';
 		echo '</tr>';
 		
@@ -243,5 +243,6 @@
 		
 		fin_cadre_relief();  
 		fin_page();
+		
 	}
 ?>

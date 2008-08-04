@@ -19,9 +19,9 @@
 		include_spip ('inc/acces_page');
 		
 		$url_ressources = generer_url_ecrire('ressources');
-		$url_ajout_ressource=generer_url_ecrire('edit_ressource','action=ajoute');
-		$url_edit_ressource=generer_url_ecrire('edit_ressource','action=modifie');
-		$url_action_ressources=generer_url_ecrire('action_ressources');
+		$url_ajout_ressource=generer_url_ecrire('edit_ressource','faire=ajoute');
+		$url_edit_ressource=generer_url_ecrire('edit_ressource','faire=modifie');
+		$url_faire_ressources=generer_url_ecrire('faire_ressources');
 		$url_prets=generer_url_ecrire('prets');
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:ressources_titre_liste_ressources'), "", "");
@@ -47,7 +47,7 @@
 		echo '<td><strong>'._T('asso:ressources_entete_intitule').'</strong></td>';
 		echo '<td><strong>'._T('asso:ressources_entete_code').'</strong></td>';
 		echo '<td><strong>'._T('asso:ressources_entete_montant').'</strong></td>';
-		echo '<td colspan="3" style="text-align:center;"><strong>'._T('asso:entete_action').'</strong></td>';
+		echo '<td colspan="3" style="text-align:center;"><strong>'._T('asso:entete_faire').'</strong></td>';
 		echo'  </tr>';
 		$query = spip_query ( "SELECT * FROM spip_asso_ressources ORDER BY id_ressource" ) ;
 		while ($data = spip_fetch_array($query)) {
@@ -64,7 +64,7 @@
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['code'].'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($data['pu'], 2, ',', ' ').'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_prets.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:prets_nav_gerer').'"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_ressources.'&action=supprime&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="'._T('asso:ressources_nav_supprimer').'"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_faire_ressources.'&faire=supprime&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="'._T('asso:ressources_nav_supprimer').'"></a></td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_ressource.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:ressources_nav_editer').'"></a></td>';
 			echo'  </tr>';
 		}     
