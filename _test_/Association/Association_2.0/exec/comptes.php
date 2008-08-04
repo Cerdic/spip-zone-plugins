@@ -68,11 +68,11 @@
 		
 		fin_boite_info();	
 		
-		debut_raccourcis();
-		icone_horizontale(_T('Bilan'), $url_bilan, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/finances.jpg','rien.gif');
-		icone_horizontale(_T('Ajouter une op&eacute;ration'), $url_ajout_compte, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','creer.gif' );
-		fin_raccourcis();
 		
+		$res =  icone_horizontale(_T('Bilan'), $url_bilan, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/finances.jpg','rien.gif', false);
+		$res .= icone_horizontale(_T('Ajouter une op&eacute;ration'), $url_ajout_compte, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','creer.gif' , false);
+		echo bloc_des_raccourcis($res);
+		creer_colonne_droite();
 		debut_droite();
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('Informations comptables'));
@@ -157,7 +157,7 @@
 	//SOUS-PAGINATION
 	echo '<td>';
 	$query = spip_query( "SELECT * FROM ".$table_prefix."_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ");
-	$nombre_selection=spip_num_rows($query);
+	$nombre_selection=sql_count($query);
 	$pages=intval($nombre_selection/$max_par_page) + 1;
 
 	if ($pages == 1) { echo '';}
@@ -176,7 +176,7 @@
 	echo '</form>';
 
 	fin_cadre_relief();  
-	fin_page();
+	echo fin_gauche(),fin_page();
 }
 ?>
 

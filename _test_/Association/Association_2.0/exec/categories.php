@@ -9,7 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	include_spip('inc/defs_supprimees');
+	
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
@@ -24,7 +24,7 @@
 		$url_faire_categorie=generer_url_ecrire('faire_categorie');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo commencer_page(_T('Cat&eacute;gories de cotisation'), "", "");
+		echo $commencer_page(_T('Cat&eacute;gories de cotisation'), "", "");
 		
 		debut_gauche();
 		
@@ -32,11 +32,12 @@
 		echo association_date_du_jour();	
 		fin_boite_info();
 		
-		debut_raccourcis_sup();
-		icone_horizontale(_T('asso:Ajouter une cat&eacute;gorie de cotisation'), $url_ajout_categorie, _DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif","cree.gif");	
-		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
-		fin_raccourcis_sup();
-			
+		
+		$res = icone_horizontale(_T('asso:Ajouter une cat&eacute;gorie de cotisation'), $url_ajout_categorie, _DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif","cree.gif", false);	
+		$res .= icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif", false);	
+		echo bloc_des_raccourcis($res);
+		
+		creer_colonne_droite();	
 		debut_droite();
 		
 		debut_cadre_relief(  "../"._DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif", false, "", $titre = _T('Cat&eacute;gories de cotisation'));
@@ -67,6 +68,6 @@
 		echo'</table>';
 		
 		fin_cadre_relief();  		
-		fin_page();
+		echo fin_gauche(),fin_page();
 	}
 ?>
