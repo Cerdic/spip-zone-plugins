@@ -9,7 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-
+	include_spip('base/db_mysql');
 	function association_verifier_base(){
 		$version_base = 0.50; //version actuelle
 		$current_version = 0.0;

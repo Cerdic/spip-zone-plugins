@@ -29,10 +29,11 @@
 		
 		debut_boite_info();
 		echo propre(_T('asso:info_doc'));  	
+		
 		fin_boite_info();
 		
-		include_spip('inc/raccourcis');
 		
+		creer_colonne_droite();
 		debut_droite();	
 		
 		debut_cadre_formulaire();
@@ -49,12 +50,12 @@
 		echo lire_config('association/prefet').'<br>';
 		fin_cadre_formulaire();
 		
-		
+
 		
 		echo '<br />';
 		gros_titre(_T('asso:votre_equipe'));		
 		echo '<br />';	
-		
+	
 		debut_cadre_relief();
 		
 		echo '<table border=0 cellpadding=2 cellspacing=0 width="100%" class="arial2" style="border: 1px solid #aaaaaa;">';
@@ -66,7 +67,7 @@
 		echo '<td><strong>T&eacute;l&eacute;phone</strong></td>';
 		echo '</tr>';
 		$query = spip_query("SELECT * FROM spip_asso_adherents INNER JOIN spip_auteurs ON spip_auteurs_elargis.id_auteur=spip_auteurs.id_auteur WHERE fonction != '' AND statut_relance != 'sorti' ORDER BY nom_famille ");
-		while ($data = mysql_fetch($query)) {	
+		while ($data = spip_mysql_fetch($query)) {	
 			$id_auteur=$data['id_auteur'];
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;"><a href="'.generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur").'" title="Modifier l\'administrateur">'.$data['nom'].' '.$data['prenom'].'</a></td>';
@@ -81,8 +82,7 @@
 		fin_cadre_relief();	
 		
 		
-		
-		fin_page();
+		echo fin_gauche(),fin_page();
 		
 		//Petite routine pour mettre à jour les statuts de cotisation "échu"
 		spip_query("UPDATE spip_auteurs_elargis SET statut_interne='echu'  WHERE statut_interne = 'ok' AND validite < CURRENT_DATE() ");
