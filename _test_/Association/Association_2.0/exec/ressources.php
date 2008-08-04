@@ -30,15 +30,18 @@
 		
 		debut_gauche();
 		
-		debut_boite_info();
+		echo debut_boite_info();
 		echo '<p>'._T('asso:ressources_info').'</p>';
 		fin_boite_info();
 		
-		debut_raccourcis_sup();
-		icone_horizontale(_T('asso:ressources_nav_ajouter'), $url_ajout_ressource,'../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','creer.gif' );
-		fin_raccourcis_sup();
 		
+		$res = icone_horizontale(_T('asso:ressources_nav_ajouter'), $url_ajout_ressource,'../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','creer.gif', false );
+		echo bloc_des_raccourcis($res);
+				
+		creer_colonne_droite();
 		debut_droite();
+		
+		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:ressources_titre_liste_ressources'));
 		
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
@@ -71,6 +74,6 @@
 		echo'</table>';
 		
 		fin_cadre_relief();  
-		fin_page();
+		echo fin_gauche(), fin_page();
 	}
 ?>

@@ -122,6 +122,6 @@
 		fin_cadre_relief();  
 		
 		
-		echo fin_droite(), fin_page();
+		echo fin_gauche(), fin_page();
 	}
 ?>
