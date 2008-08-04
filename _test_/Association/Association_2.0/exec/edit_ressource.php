@@ -12,8 +12,7 @@
 	
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
-	include_spip('inc/defs_supprimees');
-	//include_spip('inc/defs_supprimees');
+	
 	function exec_edit_ressource(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
@@ -22,7 +21,7 @@
 		$url_faire_ressources=generer_url_ecrire('faire_ressources');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo commencer_page(_T('asso:ressources_titre_edition_ressources'), "", "");		
+		echo $commencer_page(_T('asso:ressources_titre_edition_ressources'), "", "");		
 		
 		association_onglets();
 		
@@ -32,11 +31,12 @@
 		echo '<p></p>';
 		fin_boite_info();
 		
-		debut_raccourcis_sup();
-		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-png","rien.gif");	
-		fin_raccourcis_sup();
 		
+		$res = icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-png","rien.gif",false);	
+		echo bloc_des_raccourcis($res);
+		creer_colonne_droite();
 		debut_droite();
+
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:ressources_titre_edition_ressources'));
 		
@@ -82,6 +82,6 @@
 		echo '</form>';
 		
 		fin_cadre_relief();  
-		fin_page();
+		echo fin_gauche(),fin_page();
 	}
 ?>

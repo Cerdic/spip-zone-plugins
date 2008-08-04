@@ -9,13 +9,13 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	include_spip('inc/defs_supprimees');
+	
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
 	function exec_edit_activite(){
 		global $connect_statut, $connect_toutes_rubriques;
-		
+	
 		include_spip('inc/acces_page');
 		
 		$url_faire_activites = generer_url_ecrire('faire_activites');
@@ -48,8 +48,9 @@
 			$date_debut=$data['date_debut'];
 			$lieu=$data['lieu'];
 		}
+		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page_T('asso:activite_titre_mise_a_jour_inscriptions'));
+		echo $commencer_page(_T('asso:activite_titre_mise_a_jour_inscriptions'));
 		
 		association_onglets();
 		
@@ -64,10 +65,11 @@
 		echo '<br /><div>'.association_date_du_jour().'</div>';		
 		fin_boite_info();	
 		
-		debut_raccourcis();
-		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
-		fin_raccourcis();
 		
+		$res = icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		
+		echo bloc_des_raccourcis($res);
+		creer_colonne_droite();
 		debut_droite();
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_mise_a_jour_inscriptions'));
 		
@@ -111,6 +113,6 @@
 		echo '</form>';
 		
 		fin_cadre_relief();  
-		fin_page();
+		echo fin_gauche(),fin_page();
 	}  
 ?>

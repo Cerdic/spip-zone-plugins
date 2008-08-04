@@ -9,7 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	include_spip('inc/defs_supprimees');
+	
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 
@@ -25,7 +25,7 @@
 		$indexation = lire_config('association/indexation');
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page_T('Gestion pour Association'), "", "");
+		echo $commencer_page(_T('Gestion pour Association'), "", "");
 		
 		association_onglets();
 		
@@ -35,11 +35,13 @@
 		echo association_date_du_jour();	
 		fin_boite_info();	
 		
-		debut_raccourcis();
-		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
-		fin_raccourcis();
 		
+		$res = icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		echo bloc_des_raccourcis($res);
+		creer_colonne_droite();
 		debut_droite();
+		
+		
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('Toutes les &eacute;tiquettes &agrave; g&eacute;n&eacute;rer'));
 		
@@ -108,6 +110,6 @@
 		echo '</form>';
 		
 		fin_cadre_relief();  
-		fin_page();
+		echo fin_gauche(),fin_page();
 	}
 ?>
