@@ -29,21 +29,7 @@ function SquelettesMots_ajouter_onglets($flux) {
   return $flux;
 }
 
-/*
-pas de tel point d'entree.
-function SquelettesMots_ajouter_boite_gauche($arguments) {  
-  global $connect_statut, $connect_toutes_rubriques, $spip_lang;
-  if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-	if($arguments['args']['exec'] == 'articles') {
-	  include('chercher_squelette.php');
-	  
-	$ext = $GLOBALS['extension_squelette'];
-	$arguments['data'] .= '<div class="cadre-info verdana1">'._T('SquelettesMots:utiliserasquelette',array('squelette' =>substr(cherher_squelette('article',$arguments['args']['id_rubrique'],$spip_lang),strpos('/')))).".$ext</div>";
-	}
-  }
-  return $arguments;
-}*/
-
+//TODO: essayer de se passer de cette insertion unilaterale de css ...
 function SquelettesMots_header_prive($texte) {
   $texte.= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_CHERCHER_SQUELETTES.'/chercher_squelettes_mots.css" />' . "\n";
   return $texte;
