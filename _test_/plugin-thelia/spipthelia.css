@@ -218,6 +218,7 @@ a.LIEN_pages:hover {
 .autres-images-produit {
 	clear: both;
 }
+
 #etapes-achat ul  {
 	margin: 0;
 	padding: 0;
@@ -229,7 +230,8 @@ a.LIEN_pages:hover {
 	height: 70px;
 	padding: 0;
 	margin: 0;
-	padding-right: 30px;
+	margin-bottom: 25px;
+	padding-right: 18px;
 	background-image: url(img_pack/fleche.jpg);
 	background-position: right 11px;
 	background-repeat: no-repeat;
@@ -261,6 +263,7 @@ a.LIEN_pages:hover {
 
 #etapes-achat ul li a:hover{
 	color: #F60;
+	border-bottom: 1px solid #F60;
 	}
 	
 	
