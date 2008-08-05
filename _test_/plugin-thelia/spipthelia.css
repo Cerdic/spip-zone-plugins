@@ -5,31 +5,34 @@
 /* styles thelia */
 
 .titrePage {
-	text-align: left;
+	text-align: center;
+	color: #000;
+	font-family: 'Helvetica-Bold','Helvetica','Arial',sans-serif;
+	font-size: 1.4em;
 	font-weight: bold;
-	padding-top: 10px;
-	padding-bottom: 5px;
+	line-height: 22px;
 }
 
 .sousTitrePage {
-	color: #12335B;
+	color:  #7a6d2c;
 	text-align: left;
 	font-weight: bold;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 20px;
 }
 
 .textePage {
 	color: #141414;
 	text-align: left;
-	font-weight: bold;
+	font-weight: normal;
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
 
 .separation {
 	height: 1px;
-	background-color: #7f8eb9;
+	background-color: #7a6d2c;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	overflow:hidden;
@@ -178,8 +181,9 @@ a.LIEN_pages:hover {
 	margin: 10px;
 }
 
+
 .zoneDeSaisie {
-	color: #12335B;
+	color: #7a6d2c;
 	font-weight: bold;
 	font-size: 0.9em;
 }
@@ -189,10 +193,10 @@ a.LIEN_pages:hover {
 }
 
 .commentaires {
-	font-size: 1em;
+	font-size: 0.9em;
 	font-style: italic;
 	font-weight: bold;
-	color: #12335B;
+	color: #7a6d2c;
 }
 
 /* style propre aux modeles <produit>*/
@@ -225,8 +229,8 @@ a.LIEN_pages:hover {
 	height: 70px;
 	padding: 0;
 	margin: 0;
-	padding-right: 23px;
-	background-image: url(fleche-etapes.png);
+	padding-right: 30px;
+	background-image: url(img_pack/fleche.jpg);
 	background-position: right 11px;
 	background-repeat: no-repeat;
 	font-size: .8em;
@@ -238,15 +242,25 @@ a.LIEN_pages:hover {
 }
 	
 #etapes-achat ul li div {
-	width: 70px;
+	width: 75px;
 	padding: 5px;
-	border: 1px solid #ccc;
+	padding-left: 10px;
+	/* border: 0px solid #ccc; */
 }
 #etapes-achat ul li.etape-courante {
 	color: #F60;
 	font-weight: bold;
 }
 #etapes-achat ul li.etape-courante div {
-	border: 1px solid #F60;
+	/* border: 0px solid #F60; */
 }
 
+#etapes-achat ul li a{
+	color: #808080;
+	}
+
+#etapes-achat ul li a:hover{
+	color: #F60;
+	}
+	
+	

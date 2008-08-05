@@ -7,19 +7,18 @@
 <INCLURE{fond=inc-head}>
 </head>
 
-<body class="page_adresse">
+<body">
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
+	<INCLURE{fond=inc-menu-horizontal}>
 
 	[(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:mes_coordonnees:></div>								
 		
-	<div id="conteneur">
-
-		[(#REM) Contenu principal : contenu de la rubrique ]
-		<div id="contenu">
+	[(#REM) Contenu principal : contenu de la rubrique ]
+			<div id="etapes">
 		  
 		[(#REM) Titre de la rubrique ]		  
 		  
@@ -28,11 +27,11 @@
 				<div id="etapes-achat">
 				<h2 class="invisible"><:etapes_achat:></h2>
 				<ul>
-					<li><div><a href="#URL_PAGE{panier,lang=#LANG}"><:spipthelia:valider_panier:></a></div></li>
-					<li><div><:spipthelia:identifiez_vous:></div></li>
-					<li class="etape-courante"><div><:spipthelia:choix_mode_livraison:></div></li>
-					<li><div><:spipthelia:choix_paiement:></div></li>
-					<li class="derniere-etape"><div><:spipthelia:envoyer_commande:></div></li>
+				<li><div><a href="[(#URL_PAGE{panier})]"><img src="[(#CHEMIN{img_pack/etape_1.jpg})]" alt="<:spipthelia:valider_panier:>"></a></div></li>
+					<li><div><a href="[(#URL_PAGE{connexion})]"><img src="[(#CHEMIN{img_pack/etape_2.jpg})]" alt="<:spipthelia:identifiez_vous:>"></a></div></li>					
+					<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_3_on.jpg})]" alt="<:spipthelia:choix_mode_livraison:>"></div></li>				
+					<li><div><img src="[(#CHEMIN{img_pack/etape_4.jpg})]" alt="<:spipthelia:choix_paiement:>"></div></li>			
+					<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>"></div></li>		
 				</ul>
 				<br class="nettoyeur" />
 				</div>
@@ -47,16 +46,16 @@
 				<h3><:spipthelia:adresse_facturation:></h3>
 				</div>
 				
-				<span class="textePage">
+				<div class="textePage">
 				THELIA-CLIENT_RAISON THELIA-CLIENT_PRENOM THELIA-CLIENT_NOM
 				<br />
 				THELIA-CLIENT_ADRESSE1 THELIA-CLIENT_ADRESSE2 THELIA-CLIENT_ADRESSE3<br />
 				THELIA-CLIENT_CPOSTAL THELIA-CLIENT_VILLE THELIA-CLIENT_PAYS<br />
-				</span>
-				<a href="#URL_PAGE{compte_modifier}"><:spipthelia:modifier_adresse:></a>
 				
-				<div class="separation">
+				<a href="#URL_PAGE{compte_modifier}"><:spipthelia:modifier_adresse:></a>
 				</div>
+				
+				<div class="separation"></div>
 				
 				[(#REM) Mon adresse de livraison ]
 					
@@ -64,7 +63,7 @@
 				<h3><:spipthelia:adresse_livraison:></h3>
 				</div>
 				
-			  <span class="textePage">
+			  <div class="textePage">
 				<THELIA_adrcours type="ADRESSE" adresse="THELIA-ADRESSE_ACTIVE">
 				THELIA-RAISON THELIA-PRENOM THELIA-NOM	
 				<br />
@@ -74,15 +73,14 @@
 			  <THELIA_pays type="PAYS" id="THELIA-PAYS">
 			  THELIA-TITRE	
 			  </THELIA_pays>
-			  
-			  </span>
 			  <br />
 			<THELIA_adrmodcours type="ADRESSE" adresse="THELIA-ADRESSE_ACTIVE" defaut="0">
 					  <a href="#URL_PAGE{livraison_modifier,adresse=THELIA-ID}"><:spipthelia:modifier_adresse:></a>
 			</THELIA_adrmodcours>
-			
+		
 			 </THELIA_adrcours>
-			
+				
+				
 				<br /><br />
 				<span class="commentaires"><:spipthelia:selectionner_autre_adresse:> : </span><br />
 				<a href="#URL_PAGE{adresse,thelia_action=modadresse&amp;adresse=0}"><:spipthelia:adresse_facturation_defaut:> </a>
@@ -93,7 +91,10 @@
 				<br />
 				<br />
 				<a href="#URL_PAGE{livraison_adresse}"><:spipthelia:ajouter_adresse_livraison:></a><br />
+				</div>
 				<br />
+			
+				
 				<div class="separation">
 				</div>
 
@@ -127,15 +128,8 @@
 		  	
 		</div>
 
-		[(#REM) Menu de navigation laterale ]
-		<div id="navigation">
 
-			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}>
-
-
-		</div><!-- fin navigation -->
-
+	</div>[(#REM) fin conteneur ]
 	</div>[(#REM) fin conteneur ]
 
 	[(#REM) Pied de page ]

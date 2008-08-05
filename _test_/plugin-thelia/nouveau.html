@@ -26,11 +26,11 @@
 				<div id="etapes-achat">
 				<h2 class="invisible"><:etapes_achat:></h2>
 				<ul>
-					<li><div><a href="#URL_PAGE{panier,lang=#LANG}"><:spipthelia:valider_panier:></a></div></li>
-					<li class="etape-courante"><div><:spipthelia:identifiez_vous:></div></li>
-					<li><div><:spipthelia:choix_mode_livraison:></div></li>
-					<li><div><:spipthelia:choix_paiement:></div></li>
-					<li class="derniere-etape"><div><:spipthelia:envoyer_commande:></div></li>
+					<li><div><a href="[(#URL_PAGE{panier})]"><img src="[(#CHEMIN{img_pack/etape_1.jpg})]" alt="<:spipthelia:valider_panier:>"></a></div></li>
+					<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_2_on.jpg})]" alt="<:spipthelia:identifiez_vous:>"></div></li>					
+					<li><div><img src="[(#CHEMIN{img_pack/etape_3.jpg})]" alt="<:spipthelia:choix_mode_livraison:>"></div></li>				
+					<li><div><img src="[(#CHEMIN{img_pack/etape_4.jpg})]" alt="<:spipthelia:choix_paiement:>"></div></li>			
+					<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>"></div></li>
 				</ul>
 				<br class="nettoyeur" />
 				</div>
@@ -47,15 +47,8 @@
 
 		[(#REM) fin contenu]
 
-		[(#REM) Menu de navigation laterale ]
-		<div id="navigation">
 
-			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}>
-
-
-		</div>[(#REM) fin navigation ]
-
+	</div>[(#REM) fin conteneur ]
 	</div>[(#REM) fin conteneur ]
 
 	[(#REM) Pied de page ]
