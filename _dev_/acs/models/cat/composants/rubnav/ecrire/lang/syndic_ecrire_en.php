@@ -9,4 +9,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'NbArt' => 'Nb of articles per site',
 'NbSites' => 'Nb of sites'
 );
+
 ?>

@@ -8,5 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'NbArt' => 'Nb d\'articles par site',
 'NbSites' => 'Nb de sites'
+
 );
 ?>
