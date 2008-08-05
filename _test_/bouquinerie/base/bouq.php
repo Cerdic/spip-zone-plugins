@@ -26,6 +26,7 @@ include_spip('base/auxiliaires');
 
 global $tables_principales;
 global $tables_auxiliaires;
+global $tables_jointures;
 
 //----------------------------------------------------------
 //-- TABLES PRINCIPALES ------------------------------------
@@ -89,10 +90,6 @@ $tables_principales['spip_catalogues'] =
   array('field' => &$catalogues, 'key' => &$catalogues_key);
   
 
-//----------------------------------------------------------------------
-//-- TABLES AUXILLIAIRES -----------------------------------------------
-//----------------------------------------------------------------------
-
 //-- Table MOTS_LIVRES -------------------------------------------------
 
 $mots_livres = array(
@@ -105,8 +102,25 @@ $mots_livres_key = array(
   "KEY id_mot" => "id_mot"
 );
 
-$tables_auxiliaires['spip_mots_livres'] =
+
+$tables_principales['spip_mots_livres'] =
   array('field' => &$mots_livres, 'key' => &$mots_livres_key);
+
+
+//-- Jointures ---------------------------------------------------------
+
+//$tables_jointures['spip_catalogues'][] = 'spip_livres';
+//$tables_jointures['spip_projets'][]= 'taches';
+//$tables_jointures['spip_taches'][] = 'projets';
+
+
+
+//$tables_jointures['spip_livres_mots'][] = 'mots';
+
+//----------------------------------------------------------------------
+//-- TABLES AUXILLIAIRES -----------------------------------------------
+//----------------------------------------------------------------------
+
 
 //-- Table LIVRES_CATALOGUES -------------------------------------------
 
@@ -123,24 +137,30 @@ $livres_catalogues_key = array(
 $tables_auxiliaires['spip_livres_catalogues'] =
   array('field' => &$livres_catalogues, 'key' => &$livres_catalogues_key);
   
-//-- Jointures ---------------------------------------------------------
-
-//$tables_jointures['spip_catalogues'][] = 'spip_livres';
-//$tables_jointures['spip_projets'][]= 'taches';
-//$tables_jointures['spip_taches'][] = 'projets';
 
 
 //-- table des table et table primary ------------------------------------
 
 global $table_des_tables, $table_primary;
+global $exceptions_des_tables;
+global $tables_relations;
 
 $table_primary['livres']='id_livre';
 $table_primary['catalogues']='id_catalogue';
-//$table_primary['mots_livres']
+$table_primary['mots_livres']='id_mot, id_livre';
 
 $table_des_tables['livres']='livres';
 $table_des_tables['catalogues']='catalogues';
-//$table_des_tables['mots_livres']='mots_livres';
-//$table_des_tables['livres_catalogues']='livres_catalogues';
+$table_des_tables['mots_livres']='mots_livres';
+$table_des_tables['livres_catalogues']='livres_catalogues';
+
+$tables_jointures['spip_mots'][]= 'mots_livres';
+$tables_jointures['spip_livres'][]= 'mots_livres';
+
+
+$exceptions_des_tables['mots']['id_livre']=array('spip_mots_livres', 'id_livre');
+
+$tables_relations['mots']['id_livre']='mots_livres';
+$tables_relations['livres']['id_mot']='mots_livres';
 
 ?>
