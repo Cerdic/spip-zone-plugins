@@ -154,7 +154,7 @@
 <select name="StatutArt" onMouseUp="this.form.id.value = this.options[this.selectedIndex].value;">
 <option value="redac" [(#ENV{StatutArt}|=={redac}|?{selected="selected"})]><:opconfig:statut_en_redaction:></option>
 <option value="prop" [(#ENV{StatutArt}|=={prop}|?{selected="selected"})]><:opconfig:statut_proposer:></option>
-<option value="valid" [(#ENV{StatutArt}|=={valid}|?{selected="selected"})]><:opconfig:statut_valide:></option>
+<option value="publie" [(#ENV{StatutArt}|=={publie}|?{selected="selected"})]><:opconfig:statut_valide:></option>
 </select>
 </p>
 <p>

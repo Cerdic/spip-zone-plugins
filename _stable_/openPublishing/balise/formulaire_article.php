@@ -516,6 +516,8 @@ if(!empty($variables['actions']['valider'])) {
 				"extra" => sql_quote($champs['extra'])),
 			 array("id_article=".$variables['champs_pri']['id_article'])
 		);
+
+		
 		if ($config['AuteurSpip'] == 'yes') {
 			// si auteur SPIP, attribuer l'article à l'auteur et non à "anonyme"
 			if ($variables['champs_aux']['choix_AuteurSpip'] != 'OK') {
@@ -612,10 +614,12 @@ $variables = pipeline('OP_action', array(
 			));
 
 
-// l'auteur est identifié et à coché la case Auteur SPIP (si la case est cochée, alors publication sous anonyme)
-if ($variables['champs_aux']['choix_AuteurSpip'] != 'OK') {
-	$variables['champs_pri']['nom_inscription'] = $GLOBALS['auteur_session']['nom'];
-	$variables['champs_pri']['mail_inscription'] = $GLOBALS['auteur_session']['email'];
+if ($config['AuteurSpip'] == 'yes') { // si la configuration autorise les auteurs spip
+	// l'auteur est identifié et a coché la case Auteur SPIP
+	if ($variables['champs_aux']['choix_AuteurSpip'] != 'OK') {
+		$variables['champs_pri']['nom_inscription'] = $GLOBALS['auteur_session']['nom'];
+		$variables['champs_pri']['mail_inscription'] = $GLOBALS['auteur_session']['email'];
+	}
 }
 
 // l'auteur demande la suppression de son logo
