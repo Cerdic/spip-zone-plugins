@@ -433,8 +433,12 @@ Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL 
 - {{html}} : les liens ont la forme des pages html classiques : <code>/article123.html</code>.
 - {{propre}} : les liens sont calcul&eacute;s gr&acirc;ce au titre: <code>/Mon-titre-d-article</code>.
 - {{propres2}} : l\'extension \'.html\' est ajout&eacute;e aux adresses g&eacute;n&eacute;r&eacute;es : <code>/Mon-titre-d-article.html</code>.
+- {{arborescentes}} (&agrave; partir de SPIP 2.0 uniquement) les liens sont de type arborescent : <code>/secteur/rubrique1/rubrique2/article</code>.
 - {{standard}} : URLs utilis&eacute;es par SPIP v1.8 et pr&eacute;c&eacute;dentes : <code>article.php3?id_article=123</code>
-- {{propres-qs}} : ce syst&egrave;me fonctionne en &quot;Query-String&quot;, c\'est-&agrave;-dire sans utilisation de .htaccess ; les liens sont de la forme : <code>/?Mon-titre-d-article</code>.</div>
+
+- {{propres-qs}} : ce syst&egrave;me fonctionne en &quot;Query-String&quot;, c\'est-&agrave;-dire sans utilisation de .htaccess ; les liens sont de la forme : <code>/?Mon-titre-d-article</code>.
+
+</div>
 
 Plus d\'infos : [->http://www.spip.net/fr_article765.html]
 [[%radio_type_urls3%]]
@@ -448,12 +452,14 @@ _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l\'Imprimer
 	'typo_exposants:nom' => 'Exposants typographiques',
 
 	// U
+	'url_arbo'	=>'arborescentes',
 	'url_html' => 'html@_CS_ASTER@',
 	'url_page' => 'page',
 	'url_propres' => 'propres@_CS_ASTER@',
 	'url_propres-qs' => 'propres-qs',
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_standard' => 'standard',
+	
 
 	// V
 	'validez_page' => 'Pour acc&eacute;der aux modifications :',

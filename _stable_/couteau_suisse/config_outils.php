@@ -218,8 +218,8 @@ define('_CS_PROPRE_QS', defined('_SPIP19300')?'propres_qs':'propres-qs');
 add_variable( array(
 	'nom' => 'radio_type_urls3',
 	'format' => 'chaine',
-	'radio' => array('page' => 'couteauprive:url_page', 'html' => 'couteauprive:url_html', 'propres' => 'couteauprive:url_propres', 'propres2' => 'couteauprive:url_propres2',
-			'standard' => 'couteauprive:url_standard', _CS_PROPRE_QS => 'couteauprive:url_propres-qs' ),
+	'radio' => array('page' => 'couteauprive:url_page', 'html' => 'couteauprive:url_html', 'propres' => 'couteauprive:url_propres', 'propres2' => 'couteauprive:url_propres2','arbo'=> 'couteauprive:url_arbo',
+			'standard' => 'couteauprive:url_standard', _CS_PROPRE_QS => 'couteauprive:url_propres-qs'),
 	'radio/ligne' => 4,
 	'defaut' => "'page'",
 	'code' => "\$GLOBALS['type_urls']=%s;\n",
