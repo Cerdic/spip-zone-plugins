@@ -9,7 +9,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Override d'un bug de spip 1.9.2c (1.9207)
-if ($GLOBALS['spip_version_code'] < 1.9208) {
+if ($GLOBALS['spip_version_code'] == 1.9207) {
   include_spip('inc/cookie');
 
   // Issued from http://doc.spip.org/@action_logout_dist with version spip = 1.9208 - 1.9.2.d)
