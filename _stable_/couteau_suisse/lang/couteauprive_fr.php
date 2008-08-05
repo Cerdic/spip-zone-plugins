@@ -266,6 +266,10 @@ _ &bull; [De tout le plugin->@reset@]
 	'label:radio_suivi_forums3' => '@_CS_CHOIX@',
 	'label:radio_target_blank3' => 'Nouvelle fen&ecirc;tre pour les liens externes :',
 	'label:radio_type_urls3' => 'Format des URLs :',
+	'label:url_arbo_minuscules'=>'Conserver la casse des URLs arborescentes',
+	'label:urls_arbo_sans_type'=>"Afficher le type d'objet SPIP dans les URLs arborescentes",
+	'label:url_arbo_sep_id'=>"Choisir le caract&egrave;re de s&eacute;paration titre-id en cas de doublon  (ne pas utiliser '/')",
+	'label:terminaison_urls_arbo'=>'Terminaisons des URls arborescentes (ex : .html)',
 	'label:set_couleurs' => 'Set &agrave; utiliser :',
 	'label:spam_mots' => 'S&eacute;quences interdites :',
 	'label:spip_script' => 'Script d\'appel :',
@@ -443,6 +447,12 @@ Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL 
 Plus d\'infos : [->http://www.spip.net/fr_article765.html]
 [[%radio_type_urls3%]]
 <p style=\'font-size:85%\'>@_CS_ASTER@pour utiliser les formats {html}, {propre}, {propre2} ou {arborescentes}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site SPIP sous le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d\'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</p>
+
+<p>Pour les URLS arborescentes :</p>
+[[%url_arbo_minuscules%]]
+[[%urls_arbo_sans_type%]]
+[[%url_arbo_sep_id%]]
+[[%terminaison_urls_arbo%]]
 
 @puce@ {{Uniquement si vous utilisez le format {page} ci-dessus}}, alors il vous est possible de choisir le script d\'appel &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de SPIP, &agrave; l\'image de celui qui existe d&eacute;j&agrave; : {index.php}.
 [[%spip_script%]]',
