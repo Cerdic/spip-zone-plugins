@@ -15,10 +15,10 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	  Pierre Andrews (Mortimer), d'apr&#232;s un code propos&#233; par D&#233;esse A.
 	</auteur>
 	<version>
-	  0.1
+	  2.0
 	</version>
 	<etat>
-	  stable
+	  dev
 	</etat>
 	<description>
 	<multi>
@@ -63,14 +63,10 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 		<inclure>SquelettesMots.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>ajouter_boite_gauche</nom>
-		<inclure>SquelettesMots.php</inclure>
-	</pipeline>
-	<pipeline>
 	  <nom>header_prive</nom>
 	  <inclure>SquelettesMots.php</inclure>
 	</pipeline>
 
-	<necessite id="spip" version="[1.9.2;]" />
+	<necessite id="spip" version="[2.0;]" />
 	<chemin dir='' />
 </plugin>

@@ -27,7 +27,9 @@ function exec_config_chercher_squelettes_mots() {
   include_spip("inc/presentation");
   include_spip ("base/abstract_sql");
 
-  debut_page('&laquo; '._T('squelettesmots:titre_page').' &raquo;', 'configurations', 'mots_partout');
+  $commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('squelettesmots:titre_page'), "configuration");
+  
 
   if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
@@ -38,21 +40,22 @@ function exec_config_chercher_squelettes_mots() {
 
 	echo '<br><br><br>';
 
-	gros_titre(_T('squelettesmots:gros_titre'));
+	echo gros_titre(_T('squelettesmots:gros_titre'),'',FALSE);
 
-	barre_onglets("configuration", "config_chercher_squelettes_mots");
+	echo barre_onglets("configuration", "config_chercher_squelettes_mots");
 
 	/*Affichage*/
-	debut_gauche();	
+	echo debut_gauche('',TRUE);	
 	
-	debut_boite_info();
+	echo debut_boite_info(TRUE);
 	echo propre(_T('squelettesmots:help'));
-	fin_boite_info();
-
-	debut_droite();
+	echo fin_boite_info(TRUE);
 	
-	include_ecrire('inc_config');
-	avertissement_config();
+	echo debut_droite('',TRUE);
+	
+	$config = charger_fonction('config', 'inc');
+	$config();
+	echo avertissement_config();
 
 	echo debut_cadre_relief("".find_in_path('spip_death.png')."", true);
 	echo '<form action="'.generer_url_ecrire('config_chercher_squelettes_mots').'" method="post">';
@@ -109,23 +112,23 @@ function exec_config_chercher_squelettes_mots() {
 		echo _T('squelettesmots:avertissement',array('squelette'=>'<em>'.$fond.'.html'.'</em>'));
 		echo '</div>';
 	  }
-	  echo '<div class="champs">';
+	  // echo '<div class="champs">';
 	  echo "<input type=\"checkbox\" class=\"actif\" name=\"actif[$index]\" checked=\"true\"/>";
 	  echo "<label for=\"fond_$index\" class=\"fond\">"._T('squelettesmots:fond')."</label>";
-	  echo "<input type=\"text\" name=\"fonds[$index]\" class=\"forml\" value=\"$fond\" id=\"fond_$index\"/>";
+	  echo "<input type=\"text\" name=\"fonds[$index]\" class=\"forml\"  value=\"$fond\" id=\"fond_$index\"/>";
 	  echo "<label for=\"id_groupe_$index\" class=\"id_groupe\">"._T('squelettesmots:groupe')."</label>";
-	  echo "<select name=\"tid_groupe[$index]\" class=\"id_groupe forml\" style=\"width:auto\" id=\"id_groupe_$index\">";
+	  echo "<select name=\"tid_groupe[$index]\" class=\"id_groupe forml\" id=\"id_groupe_$index\">";
 	  foreach($groupes_mots as $id => $titre) {
 		echo "<option value=\"$id\"".(($id_groupe == $id)?' selected="true"':'').">$titre</option>";
 	  }
 	  echo '</select>';
 	  echo "<label for=\"type_$index\" class=\"type\">"._T('squelettesmots:type')."</label>";
-	  echo "<select name=\"type[$index]\" class=\"type forml\" style=\"width:auto\" id=\"type_$index\">";
+	  echo "<select name=\"type[$index]\" class=\"type forml\" id=\"type_$index\">";
 	  foreach($id_tables as $t => $x) {
 		echo "<option value=\"$t\"".(($type == $t)?' selected="true"':'').">$t</option>";
 	  }
 	  echo '</select>';
-	  echo '</div>';
+	  // echo '</div>';
 	  $select1 = array('titre');
 	  $from1 = array('spip_mots AS mots');
 	  $where1 = array("id_groupe=$id_groupe");
@@ -135,7 +138,7 @@ function exec_config_chercher_squelettes_mots() {
 	  $cnt_actif = 0;
 	  $cnt_inactif = 0;
 	  while ($r = sql_fetch($rez)) {
-		include_ecrire("inc_charsets");
+		include_spip("inc/charsets");
 		$n = translitteration(preg_replace('/["\'.\s]/','_',extraire_multi($r['titre'])));
 		if ($squel = find_in_path("$fond-$n.$ext")) {
 		  $cnt_actif++;
@@ -157,10 +160,9 @@ function exec_config_chercher_squelettes_mots() {
 
 	  
 	  echo '<div class="possible">';
-	  if($cnt_actif+$cnt_inactif > 0) echo bouton_block_invisible("regle$index");
-	  echo _T('squelettesmots:possibilites',array('total_actif' => $cnt_actif, 'total_inactif'=>$cnt_inactif));
-	  if ($cnt_actif+$cnt_inactif > 0) {
-		echo debut_block_invisible("regle$index");
+	  if($cnt_actif+$cnt_inactif > 0) {
+	  echo bouton_block_depliable(_T('squelettesmots:possibilites',array('total_actif' => $cnt_actif, 'total_inactif'=>$cnt_inactif)),false);
+		echo debut_block_depliable(false,"regle$index");
 		echo $liste_squel;
 		echo fin_block();
 	  }
@@ -172,19 +174,20 @@ function exec_config_chercher_squelettes_mots() {
 	$index++;
 	
 	echo '<hr/>';
-	echo '<fieldset class="nouvelle_regle">';
+	echo '<fieldset class="nouvelle regle">';
 	echo '<legend>'._T('squelettesmots:nouvelle_regle').'</legend>';
 	echo "<input type=\"checkbox\" class=\"actif\" name=\"actif[$index]\"/>";
 	echo "<label for=\"fond_$index\" class=\"fond\">"._T('squelettesmots:fond')."</label>";
 	echo "<input type=\"text\" name=\"fonds[$index]\" class=\"forml\" value=\"article\"/>";
+	
 	echo "<label for=\"id_groupe_$index\" class=\"id_groupe\">"._T('squelettesmots:groupe')."</label>";
-	echo "<select name=\"tid_groupe[$index]\" class=\"id_groupe forml\" style=\"width:auto\" id=\"id_groupe_$index\">";
+	echo "<select name=\"tid_groupe[$index]\" class=\"id_groupe forml\" id=\"id_groupe_$index\">";
 	foreach($groupes_mots as $id => $titre) {
 	  echo "<option value=\"$id\">$titre</option>";
 	}
 	echo '</select>';
 	echo "<label for=\"type_$index\" class=\"type\">"._T('squelettesmots:type')."</label>";
-	echo "<select name=\"type[$index]\" class=\"type forml\" style=\"width:auto\" id=\"type_$index\">";
+	echo "<select name=\"type[$index]\" class=\"type forml\" id=\"type_$index\">";
 	foreach($id_tables as $t => $x) {
 	  echo "<option value=\"$t\">$t</option>";
 	}
@@ -199,7 +202,8 @@ function exec_config_chercher_squelettes_mots() {
   ecrire_meta('SquelettesMots:fond_pour_groupe',serialize($fonds));
   ecrire_metas();
   
-  fin_page();
+  echo fin_gauche();
+  echo fin_page();
   
 }
 

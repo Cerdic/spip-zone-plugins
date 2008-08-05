@@ -1,5 +1,12 @@
-fieldset input.fond {
-	width: 5em;
+fieldset.regle .forml {
+	display: inline;
+	margin-right:0.5em;
+	margin-bottom:1em;
+	width:auto;
+}
+
+fieldset.regle input.forml {
+	width:7em;
 }
 
 fieldset.regle div.possible {

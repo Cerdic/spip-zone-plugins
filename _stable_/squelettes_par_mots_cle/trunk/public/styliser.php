@@ -1,71 +1,76 @@
 <?php
 
-//    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
-//    Distribué sans garantie sous licence GPL.
-//
-//    This program is free software; you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation; either version 2 of the License, or any later version.
-//
-//    This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//
-//    You should have received a copy of the GNU General Public License
-//    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2008                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
+// Actuellement tous les squelettes se terminent par .html
+// pour des raisons historiques, ce qui est trompeur
+
 // http://doc.spip.org/@public_styliser_dist
-function public_styliser_dist($fond, $id_rubrique, $lang, $contexte) {
-	
-  // Actuellement tous les squelettes se terminent par .html
-  // pour des raisons historiques, ce qui est trompeur
-	$ext = 'html';
-	// Accrocher un squelette de base dans le chemin, sinon erreur
+// smc: fonction a surcharger proprement plutot que tout le fichier, a voir car que cette fonction dans le fichier ???
+function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='html', $contexte) {
+	if ($ext=='') $ext='html'; //smc: pb d'init valeur par defaut, on forcele test faute de mieux...
+	// Trouver un squelette de base dans le chemin
 	if (!$base = find_in_path("$fond.$ext")) {
-		include_spip('public/debug');
-		erreur_squelette(_T('info_erreur_squelette2',
-			array('fichier'=>"'$fond'")),
-			$GLOBALS['dossier_squelettes']);
-		$f = find_in_path(".$ext"); // on ne renvoie rien ici, c'est le resultat vide qui provoquere un 404 si necessaire
-		return array(substr($f, 0, -strlen(".$ext")),
-			     $ext,
-			     $ext,
-			     $f);
+		// Si pas de squelette regarder si c'est une table
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		if (preg_match('/^table:(.*)$/', $fond, $r)
+		AND $table = $trouver_table($r[1], $connect)
+		AND include_spip('inc/autoriser')
+		AND autoriser('webmestre')
+		) {
+				$fond = $r[1];
+				$base = _DIR_TMP . 'table_'.$fond . ".$ext";
+				if (!file_exists($base)
+				OR  $GLOBALS['var_mode']) {
+					$vertebrer = charger_fonction('vertebrer', 'public');
+					ecrire_fichier($base, $vertebrer($table));
+				}
+		} else { // on est gentil, mais la ...
+			include_spip('public/debug');
+			erreur_squelette(_T('info_erreur_squelette2',
+				array('fichier'=>"'$fond'")),
+				$GLOBALS['dossier_squelettes']);
+			$f = find_in_path(".$ext"); // on ne renvoie rien ici, c'est le resultat vide qui provoquere un 404 si necessaire
+			return array(substr($f, 0, -strlen(".$ext")), $ext, $ext, $f);
+		}
 	}
 
 	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
 	$squelette = substr($base, 0, - strlen(".$ext"));
-	$trouve = false;
-	$id_rubrique = intval($id_rubrique);
-	$id_rub_init = $id_rubrique;
-	
+
 	// On selectionne, dans l'ordre :
 	// fond=10
-	$f = "$fond=$id_rubrique";
-	if (($id_rubrique > 0) AND ($squel=find_in_path("$f.$ext"))){
-		$squelette = substr($squel, 0, - strlen(".$ext"));
-		$trouve = true;}
-	else {
-		// fond-10 fond-<rubriques parentes>
-		while ($id_rubrique > 0) {
-			$f = "$fond-$id_rubrique";
-			if ($squel=find_in_path("$f.$ext")) {
-				$squelette = substr($squel, 0, - strlen(".$ext"));
-				$trouve = true;
-				break;
-			}
-			else
-				$id_rubrique = quete_parent($id_rubrique);
+	if ($id_rubrique) {
+		$f = "$squelette=$id_rubrique";
+		if (@file_exists("$f.$ext"))
+			$squelette = $f;
+		else {
+			// fond-10 fond-<rubriques parentes>
+			do {
+				$f = "$squelette-$id_rubrique";
+				if (@file_exists("$f.$ext")) {
+					$squelette = $f;
+					break;
+				}
+			} while ($id_rubrique = quete_parent($id_rubrique));
 		}
 	}
-    
-    if(!$trouve) {
+	// smc: on ajoute la recherche des squelettes par mots clefs
+	
+	if(!$trouve) {
 		$fonds = unserialize($GLOBALS['meta']['SquelettesMots:fond_pour_groupe']);
 		if (is_array($fonds) && (list($id_groupe,$table,$id_table) = $fonds[$fond])) {
 		  $trouve = false;
@@ -89,6 +94,8 @@ function public_styliser_dist($fond, $id_rubrique, $lang, $contexte) {
 		  }
 		}
   }
+  
+	// fin ajout smc
 
 	// Affiner par lang
 	if ($lang) {
@@ -101,7 +108,7 @@ function public_styliser_dist($fond, $id_rubrique, $lang, $contexte) {
 
 	return array($squelette, $ext, $ext, "$squelette.$ext");
 }
-
+// smc: on ajoute la fonction qui va chercher les mots associ�s aux items dans le groupe qui va bien
 function sql_mot_squelette($id,$id_groupe,$table,$id_table,$recurse=false) {
   $select1 = array('titre');
   $from1 = array('spip_mots AS mots',
@@ -110,8 +117,9 @@ function sql_mot_squelette($id,$id_groupe,$table,$id_table,$recurse=false) {
 	$where1 = array("$id_table=$id",
 					'mots.id_mot=lien.id_mot',
 					"id_groupe=$id_groupe");
-			
-	$r = sql_fetch(sql_select($select1,$from1,$where1));
+	
+	//utilisation nouvelle fonciton spip2.0 optimisee a tester		
+	$r = sql_fetsel($select1,$from1,$where1);
 
 	if ($r) {
 		include_spip("inc/charsets");
