@@ -14,12 +14,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function action_crayons_composant_store_dist() {
   include_spip('inc/crayons');
-
 	lang_select($GLOBALS['auteur_session']['lang']);
 	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
+	  
+  // Dernière sécurité :Accès réservé aux admins ACS
+  // Last security: access restricted to ACS admins 
+  if (!in_array($GLOBALS['auteur_session']['id_auteur'], explode(',', $GLOBALS['meta']['ACS_ADMINS']))) {
+    echo var2js(array('$erreur' => _T('avis_operation_impossible')));
+    exit;
+  }
+
 	$wid = $_POST['crayons'][0];
-	$c = 'composants/'.$_POST['composant'].'/'.$_POST['composant'];
-	
+	$c = 'composants/'.$_POST['composant'].'/'.$_POST['composant'];	
 	// MàJ du composant - Update component
 	// l'instanciation d'un objet composant met à jour le composant
 	include_spip('lib/composant/classComposantPrive');

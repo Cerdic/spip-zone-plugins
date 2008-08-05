@@ -34,7 +34,7 @@ class AdminComposant {
   // pour en adopter les méthodes implémentées.
   function __construct($type, $debug = false) {
     global $_POST;
-    
+
     include_spip('inc/xml'); // spip_xml_load()
     include_spip('inc/traduire');
     
@@ -460,7 +460,7 @@ function acs_bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="", $e
     $texte .= ' checked="checked"';
     $titre = '<b>'.$titre.'</b>';
   }
-  $texte .= ($enable ? '' : ' disabled')." /> <label for='radio_$id_label'>$titre</label>\n";
+  $texte .= ($enable ? '' : ' disabled')." />&nbsp;<label for='radio_$id_label'>$titre</label>\n";
   $id_label++;
   return $texte;
 }
