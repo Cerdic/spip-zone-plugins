@@ -28,7 +28,7 @@ $("'.lire_config('nyroceros/selecteur_galerie','#documents_portfolio .nyroceros'
 .attr("rel","galerie-portfolio");
 
 // charger nyro sur autre chose
-$("'.lire_config('nyroceros/selecteur_commun','.nyroceros').'").nyroModal();
+$("'.lire_config('nyroceros/selecteur_commun','.nyroceros').'").nyroModal({bgColor: "'.lire_config('nyroceros/bgcolor','#000000').'"});
 
 '
 . ((lire_config('nyroceros/preload') == 'non')
