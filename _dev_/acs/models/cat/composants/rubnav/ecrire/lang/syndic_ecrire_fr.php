@@ -1,5 +1,5 @@
 <?php
-// This is a SPIP-ACS language file  --  Ceci est un fichier langue de SPIP-ACS
+// Ceci est un fichier langue de SPIP-ACS
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -8,6 +8,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'NbArt' => 'Nb d\'articles par site',
 'NbSites' => 'Nb de sites'
-
 );
 ?>

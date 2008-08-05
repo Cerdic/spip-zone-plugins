@@ -1,5 +1,5 @@
 <?php
-// This is a SPIP-ACS language file  --  Ceci est un fichier langue de SPIP-ACS
+// This is a SPIP-ACS language file
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
