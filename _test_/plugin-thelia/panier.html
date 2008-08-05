@@ -7,32 +7,29 @@
 <INCLURE{fond=inc-head}>
 </head>
 
-<body>
+<body class="page_panier">
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
-	<INCLURE{fond=inc-menu-horizontal}>
+
 	[(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:mon_panier:></div>
 
-
+	<div id="conteneur">
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
-		<div id="etapes">
+		<div id="contenu">
 					
 			[(#REM) Afficher les étapes de la commande et visualiser l'étape courante ]
 			<div id="etapes-achat">
 			<h2 class="invisible"><:etapes_achat:></h2>
 			<ul>
-			<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_1_on.jpg})]" alt="<:spipthelia:valider_panier:>"></div></li>
+				<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_1_on.jpg})]" alt="<:spipthelia:valider_panier:>"></div></li>
 					<li><div><img src="[(#CHEMIN{img_pack/etape_2.jpg})]" alt="<:spipthelia:identifiez_vous:>"></div></li>					
 					<li><div><img src="[(#CHEMIN{img_pack/etape_3.jpg})]" alt="<:spipthelia:choix_mode_livraison:>"></div></li>				
 					<li><div><img src="[(#CHEMIN{img_pack/etape_4.jpg})]" alt="<:spipthelia:choix_paiement:>"></div></li>			
 					<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>"></div></li>		
-				
-				
-				
 			</ul>
 			<br class="nettoyeur" />
 			</div>
@@ -44,10 +41,11 @@
 				
 			[(#REM) Contenu du panier ]
 
-			<table id="cont_panier">
+			<table id="panier">
   			<thead> 
 				<tr>
-						<th class="enteteTableau"><:spipthelia:references_produits:></th>
+    					<th class="enteteTableau"><:spipthelia:photo_produit:></th>
+    					<th class="enteteTableau"><:spipthelia:references_produits:></th>
     					<th class="enteteTableau"><:spipthelia:prix_unitaire:></th>
     					<th class="enteteTableau"><:spipthelia:quantite:></th>
     					<th class="enteteTableau"><:spipthelia:total_ttc:></th>
@@ -58,7 +56,8 @@
 			<tbody> 
 				<THELIA_CONTENU_PANIER type="PANIER">
 				<tr>
-						<td class="ligneTableau">THELIA-REF<br/>THELIA-TITRE
+					<td class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td>
+					<td class="ligneTableau">THELIA-REF<br/>THELIA-TITRE
 						<THELIA_decval type="DECVAL" article="THELIA-ARTICLE">
 							<br/>THELIA-DECLITITRE : THELIA-VALEUR
 						</THELIA_decval>
@@ -102,7 +101,15 @@
 		
 		</div>[(#REM) fin contenu ]
 
-	</div>[(#REM) fin conteneur ]
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+
+		</div>[(#REM) fin navigation ]
+
 	</div>[(#REM) fin conteneur ]
 
 	[(#REM) Pied de page ]

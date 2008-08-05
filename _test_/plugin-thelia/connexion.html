@@ -11,31 +11,32 @@
 <link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend})]" />
 </head>
 
-<body>
+<body class="page_panier">
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
-	<INCLURE{fond=inc-menu-horizontal}>
 
 	[(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:identifiez_vous:></div>
 			
+	<div id="conteneur">
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
-			<div id="etapes">
+		
+			
+				<div id="contenu">
 
 				
 				[(#REM) Afficher les étapes de la commande et visualiser l'étape courante ]
 				<div id="etapes-achat">
 				<h2 class="invisible"><:etapes_achat:></h2>
 				<ul>
-				
-					<li><div><a href="[(#URL_PAGE{panier})]"><img src="[(#CHEMIN{img_pack/etape_1.jpg})]" alt="<:spipthelia:valider_panier:>"></a></li>
+				<li><div><a href="[(#URL_PAGE{panier})]"><img src="[(#CHEMIN{img_pack/etape_1.jpg})]" alt="<:spipthelia:valider_panier:>"></a></li>
 					<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_2_on.jpg})]" alt="<:spipthelia:identifiez_vous:>"></div></li>					
 					<li><div><img src="[(#CHEMIN{img_pack/etape_3.jpg})]" alt="<:spipthelia:choix_mode_livraison:>"></div></li>				
 					<li><div><img src="[(#CHEMIN{img_pack/etape_4.jpg})]" alt="<:spipthelia:choix_paiement:>"></div></li>			
-					<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>"></div></li>			
+					<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>"></div></li>
 				</ul>
 				<br class="nettoyeur" />
 				</div>
@@ -44,7 +45,7 @@
 				[(#REM) Titre de la page]
 
 				<div class="titrePage">
-				<h3><:spipthelia:identifiez_vous:></h3>
+				<h1><:spipthelia:identifiez_vous:></h1>
 				</div>
 				
 				[(#REM) Contenu de la page]
@@ -169,8 +170,15 @@
 			</div>
 		[(#REM) fin contenu ]
 
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
 
-	</div>[(#REM) fin conteneur ]
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+
+		</div>[(#REM) fin navigation ]
+
 	</div>[(#REM) fin conteneur ]
 
 	[(#REM) Pied de page ]

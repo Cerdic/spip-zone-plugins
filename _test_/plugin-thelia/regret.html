@@ -12,14 +12,14 @@
 
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
-	<INCLURE{fond=inc-menu-horizontal}>
+
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:mon_panier:></div>
-
-
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:erreur_paiement:></div>		
+	
+	<div id="conteneur">
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
-		<div id="etapes">
+		<div id="contenu">
 		
 						
 			[(#REM) Afficher les étapes de la commande et visualiser l'étape courante ]
@@ -47,13 +47,20 @@
 		</div> [(#REM)fin contenu]
 
 
-	</div>[(#REM) fin conteneur ]
-</div>[(#REM) fin page ]
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
 
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+
+		</div>[(#REM) fin navigation ]
+
+	</div>[(#REM) fin conteneur ]
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-
+</div>[(#REM) fin page ]
 </body>
 </html>

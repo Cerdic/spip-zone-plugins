@@ -7,18 +7,19 @@
 <INCLURE{fond=inc-head}>
 </head>
 
-<body>
+<body class="page_cheque">
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
-		<INCLURE{fond=inc-menu-horizontal}>
 
 	[(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:reglement_cheque:></div>
 		
+	<div id="conteneur">
+
 		[(#REM) Contenu principal : contenu de la rubrique ]
-		<div id="etapes">
+		<div id="contenu">
 			
 			[(#REM) Afficher les étapes de la commande et visualiser l'étape courante ]
 			<div id="etapes-achat">
@@ -28,7 +29,7 @@
 				<li><div><a href="[(#URL_PAGE{connexion})]"><img src="[(#CHEMIN{img_pack/etape_2.jpg})]" alt="<:spipthelia:identifiez_vous:>"></a></div></li>					
 				<li><div><a href="[(#URL_PAGE{adresse})]"><img src="[(#CHEMIN{img_pack/etape_3.jpg})]" alt="<:spipthelia:choix_mode_livraison:>"></a></div></li>						
 				<li><div><img src="[(#CHEMIN{img_pack/etape_4.jpg})]" alt="<:spipthelia:choix_paiement:>"></li>			
-				<li class="etape-courante derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5_on.jpg})]" alt="<:spipthelia:envoyer_commande:>"></div></li>	
+				<li class="etape-courante derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5_on.jpg})]" alt="<:spipthelia:envoyer_commande:>"></div></li>
 			</ul>
 			<br class="nettoyeur" />
 			</div>
@@ -36,7 +37,7 @@
 			[(#REM) Titre de la rubrique ]
 
 			<div class="titrePage">
-				<h3><:spipthelia:reglement_cheque:></h3>
+				<h1><:spipthelia:reglement_cheque:></h1>
 			</div>
 				
 			[(#REM) contenu de la page ]
@@ -53,8 +54,16 @@
 		
 		</div>[(#REM) fin contenu ]
 
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
 
-</div>[(#REM) fin conteneur ]
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+
+		</div><!-- fin navigation -->
+
+	</div>[(#REM) fin conteneur ]
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>

@@ -7,21 +7,19 @@
 <INCLURE{fond=inc-head}>
 </head>
 
-<body>
+<body class="page_panier">
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
-	
-	<INCLURE{fond=inc-menu-horizontal}>
-	
+
 	[(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:spipthelia:recapitulatif_commande:></div>
 		
-
+	<div id="conteneur">
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
-		<div id="etapes">
+		<div id="contenu">
 			
 			[(#REM) Titre de la rubrique ]
 
@@ -29,12 +27,11 @@
 				<div id="etapes-achat">
 				<h2 class="invisible"><:etapes_achat:></h2>
 				<ul>
-				<li><div><a href="[(#URL_PAGE{panier})]"><img src="[(#CHEMIN{img_pack/etape_1.jpg})]" alt="<:spipthelia:valider_panier:>"></a></div></li>
+					<li><div><a href="[(#URL_PAGE{panier})]"><img src="[(#CHEMIN{img_pack/etape_1.jpg})]" alt="<:spipthelia:valider_panier:>"></a></div></li>
 				<li><div><a href="[(#URL_PAGE{connexion})]"><img src="[(#CHEMIN{img_pack/etape_2.jpg})]" alt="<:spipthelia:identifiez_vous:>"></a></div></li>					
 				<li><div><a href="[(#URL_PAGE{adresse})]"><img src="[(#CHEMIN{img_pack/etape_3.jpg})]" alt="<:spipthelia:choix_mode_livraison:>"></a></div></li>						
 				<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_4_on.jpg})]" alt="<:spipthelia:choix_paiement:>"></div></li>			
-				<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>"></div></li>		
-				
+				<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>"></div></li>
 				</ul>
 				<br class="nettoyeur" />
 				</div>
@@ -105,7 +102,7 @@
 			</div>
 
 			[(#REM) contenu de la page ]
-			<table width="400" border="0" cellspacing="0" cellpadding="5">
+			<table width="675" border="0" cellspacing="0" cellpadding="5">
 			   	<THELIA_PAIEMENT type="PAIEMENT">
 			 	<tr>
 				   	<td class="ligneTableau">THELIA-TITRE</td>
@@ -117,7 +114,15 @@
 			
 		
 		</div>[(#REM) fin contenu ]
-		</div>[(#REM) fin contenu ]
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+
+		</div><!-- fin navigation -->
 
 	</div><!-- fin conteneur -->
 
