@@ -62,6 +62,7 @@ function admin_bouquinerie($rapport = '') {
 		$catalogue = bouq_verifier_catalogue();
 		$livres = bouq_verifier_livres();
 		$livres_orph = bouq_verifier_livres_orphelins();
+		$menu_livre = array();
 
 		echo debut_gauche($nom_page,true); // SPIP 2.0
 
@@ -70,25 +71,21 @@ function admin_bouquinerie($rapport = '') {
 				'<a href="'.generer_url_ecrire("catalogues_edit","new=oui").'">'._T('bouq:ajouter_catalogue').'</a>',
 				'<a href="'.generer_url_ecrire("catalogues_import").'">'._T('bouq:importer_catalogue').'</a>'
 			));
-		else
+		else {
 			cadre_gauche_bouq('Catalogues',array(
 				'<a href="'.generer_url_ecrire("catalogues_edit","new=oui").'">'._T('bouq:ajouter_catalogue').'</a>',
 				'<a href="'.generer_url_ecrire("catalogues_import").'">'._T('bouq:importer_catalogue').'</a>',
 				'<a href="'.generer_url_ecrire("catalogues_export").'">'._T('bouq:exporter_catalogue').'</a>'
 			));
-
-
-
-		if ($livres) {
+			$menu_livre[] =	'<a href="'.generer_url_ecrire("livres_edit","new=oui").'">'._T('bouq:ajouter_livre').'</a>';
+			if ($livres) {
+				$menu_livre[] =	'<a href="'.generer_url_ecrire("rechercher_livres").'">'._T('bouq:rechercher_livre').'</a>';
+				$menu_livre[] =	'<a href="'.generer_url_ecrire("rechercher_doublons").'">'._T('bouq:rechercher_doublons').'</a>';
+			}
 			echo '<br />';
 
-			cadre_gauche_bouq('Livres',array(
-				'<a href="'.generer_url_ecrire("livres_edit","new=oui").'">'._T('bouq:ajouter_livre').'</a>',
-				'<a href="'.generer_url_ecrire("rechercher_livres").'">'._T('bouq:rechercher_livre').'</a>',
-				'<a href="'.generer_url_ecrire("rechercher_doublons").'">'._T('bouq:rechercher_doublons').'</a>'
-			));
+			cadre_gauche_bouq('Livres',$menu_livre);
 		}
-
 
 		echo '<br />';
 		bouq_afficher_admin();
