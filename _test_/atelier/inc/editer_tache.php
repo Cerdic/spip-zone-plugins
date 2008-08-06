@@ -101,14 +101,22 @@ function editer_tache_etat($etat) {
 
 function editer_tache_urgence($urgence) {
 	$opt = '<select name="urgence" value="'.$urgence.'">"';
+	if ($urgence) $selected = 'selected value="'.$urgence .'"';
 
-	$opt .= '<option value="tres_forte">Très forte</option>';
-	$opt .= '<option value="forte">Forte</option>';
-	$opt .= '<option selected value="moyenne">Moyenne</option>';
-	$opt .= '<option value="faible">Faible</option>';
-	$opt .= '<option value="tres_faible">Très faible</option>';
+	if ($urgence == 'tres_forte') $opt .= '<option '.$selected.'>Très forte</option>';
+	else $opt .= '<option value="tres_forte">Très forte</option>';
 
+	if ($urgence == 'forte') $opt .= '<option '.$selected.'>Forte</option>';
+	else $opt .= '<option value="forte">Forte</option>';
 
+	if ($urgence == 'moyenne') $opt .= '<option '.$selected.'>Moyenne</option>';
+	else $opt .= '<option value="moyenne">Moyenne</option>';
+
+	if ($urgence == 'faible') $opt .= '<option '.$selected.'>Faible</option>';
+	else $opt .= '<option value="faible">Faible</option>';
+
+	if ($urgence == 'tres_faible') $opt .= '<option '.$selected.'>Très faible</option>';
+	else $opt .= '<option value="tres_faible">Très faible</option>';
 
 	$opt .= '</select>';
 
