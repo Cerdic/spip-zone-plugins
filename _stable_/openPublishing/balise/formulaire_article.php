@@ -179,6 +179,7 @@ foreach ($variables['champs_aux'] as $key => $champ) {
 $variables['champs_pri']['id_article'] = intval($variables['champs_pri']['id_article']);
 $variables['champs_pri']['id_rubrique'] = intval($variables['champs_pri']['id_rubrique']);
 
+
 // traitement particulier pour un type de document automatique
 if ($config['DocIncAuto'] == 'yes') {
 	$variables['champs_aux']['type_doc'] = $config['DocAuto'];
@@ -796,14 +797,16 @@ if(!empty($variables['actions']['media'])) {
  				 * ajouter_un_document();
 				 * inc/ajouter_documents.php
 				 */
+				$ajouter_document = charger_fonction('ajouter_documents','inc');
+				$ajouter_document($tmp,$fichier,"article",$variables['champs_pri']['id_article'],$mode,$id_document,$documents_actifs);
 
-				inc_ajouter_documents_dist ($tmp,
+			/*	inc_ajouter_documents_dist ($tmp,
 							 $fichier,
 							 "article",
 							 $variables['champs_pri']['id_article'],
 							 $mode,
 							 $id_document,
-							 $documents_actifs);
+							 $documents_actifs);*/
 
 				// récupération de l'id
 				$ret = sql_fetch(sql_select(

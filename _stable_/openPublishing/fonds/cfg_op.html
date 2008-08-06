@@ -93,7 +93,7 @@
 
 <input type="checkbox" name="DocIncAuto" value="yes"  [(#ENV{DocIncAuto}|=={yes}|?{checked="yes"})] /><:opconfig:option_docauto:><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#PUCE<select name="DocAuto" onMouseUp="this.form.id.value = this.options[this.selectedIndex].value;">
-	<option value="vignette" [(#ENV{DocAuto}|=={#ID_RUBRIQUE}|?{selected="selected"})]>Image</option>
+	<option value="image" [(#ENV{DocAuto}|=={#ID_RUBRIQUE}|?{selected="selected"})]>Image</option>
 	<option value="document" [(#ENV{DocAuto}|=={#ID_RUBRIQUE}|?{selected="selected"})]>Document</option>
 	<option value="logo" [(#ENV{DocAuto}|=={#ID_RUBRIQUE}|?{selected="selected"})]>Logo</option>
 </select><br />

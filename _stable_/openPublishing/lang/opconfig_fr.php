@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'expliq_auteur_squelette' => 'Afin de r&eacute;cup&eacute;rer les donn&eacute;es d\'identification du r&eacute;dacteur, vous pouvez utiliser dans une boucle ARTICLES la balise EXTRA avec le filtre OP_pseudo ou OP_mail.',
 'expliq_composition_article' => 'Un article peut &ecirc;tre compos&eacute; de plusieurs champs qui ne sont pas forc&eacute;ment utilis&eacute; par tous les sites. Vous pouvez donc activer ou pas les champs ci-dessous. L\'espace de r&eacute;daction ne proposera aux r&eacute;dacteurs que les champs coch&eacute;s (ainsi qu\'&eacute;videmment le titre et le texte de l\'article).',
 'expliq_options' => 'Ces options permettre d\'&eacute;tendre ou de restreindres les fonctionnalit&eacute;es du plugin "Publication Ouverte". Les options coch&eacute;es seront disponibles dans l\'espace de r&eacute;daction',
-'expliq_agenda' => 'Si vous cochez cette option, le plugin "Publication Ouverte" proposera aux r&eacute;dacteurs de publier leurs articles sous forme de "date" dans l\'agenda. Il s\'agit en r&eacute;alit&eacute; de publier le contenu de l\'article sous forme de br&egrave;ve dans une rubrique sp&eacute;cifique.',
+'expliq_agenda' => 'Si vous cochez l\'option "gestion de Agenda du plugin Publication Ouverte", le plugin "Publication Ouverte" proposera aux r&eacute;dacteurs de publier leurs articles sous forme de "date" dans l\'agenda. Il s\'agit en r&eacute;alit&eacute; de publier le contenu de l\'article sous forme de br&egrave;ve dans une rubrique sp&eacute;cifique. Cette méthode correspond au m&eacute;canisme des version pr&eacute;c&eacute;dente du plugin. Vous pouvez à la place utiliser l\'option "utiliser des articles post-dat&eacute;s" qui publiera vos articles avec une date de publication dans le future',
 'expliq_statut' => 'Une fois que le r&eacute;dacteur a valid&eacute; son article, celui-ci apparaitra dans l\'espace priv&eacute;e de votre site avec le statut suivant :',
 'expliq_posttraitement' => 'Il s\'agit içi d\'effectuer des traitements de protection sur l\'article. Ces options s\'appliqueront apr&eacute;s la validation de l\'article par le r&eacute;dacteur.',
 'expliq_renvois' => 'Lorsqu\'un r&eacute;dacteur valide un article ou abandonne, le formulaire affiche un message et redirige le r&eacute;dacteur au bout de quelques secondes vers une autre page du site. Les options ci-dessous permettent de configurer cela. Attention, il faut indiquer des urls de type : « /spip.php?page=ma_page », le plugin compl&eacute;tera automatiquement l\'url.',
@@ -86,8 +86,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'option_auteur_spip' => 'Permettre aux r&eacute;dacteurs enregistr&eacute;s en tant que "auteur Spip" de publier les articles en leur nom',
 'option_doc_distant' => 'Permettre aux r&eacute;dacteurs d\'inclure des documents distants',
 'option_authentification' => 'Permettre aux r&eacute;dacteurs de s\'identifier (mail et pseudo).',
-'option_docimage' => '... de type "document"',
-'option_docdocument' => '... de type "image"',
+'option_docimage' => '... de type "image"',
+'option_docdocument' => '... de type "document"',
 'option_docauto' => 'imposer un type de document automatiquement (image, document ou logo).',
 'op_base_titre' => 'openPublishing : base de donn&eacute;e',
 
@@ -147,6 +147,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'utiliser_descriptif' => 'Utiliser le champ Descriptif',
 'utiliser_ps' => 'Utiliser le champ Post-Scriptum',
 'utiliser_agenda' => 'utiliser la gestion Agenda du plugin "Publication Ouverte"',
+'utiliser_article_agenda' => 'utiliser des articles post-dat&eacute;',
 
 
 
