@@ -88,6 +88,22 @@ $bugs_key = array(
 $tables_principales['spip_bugs'] = 
    array('field' => &$bugs, 'key' => &$bugs_key);
 
+//-- Table AMELIORATION --------------------------------------------------------
+$ameliorations = array(
+  "id_amelioration"		=> "bigint(21) NOT NULL auto_increment",
+  "id_projet"			=> "bigint(21) NOT NULL",
+  "titre"			=> "text NOT NULL",
+  "descriptif"			=> "text NOT NULL",
+  "date"			=> "TIMESTAMP"
+);
+
+$ameliorations_key = array(
+  "PRIMARY KEY" => "id_amelioration"
+);
+
+$tables_principales['spip_ameliorations'] = 
+   array('field' => &$ameliorations, 'key' => &$ameliorations_key);
+
 //----------------------------------------------------------------------
 //-- TABLES AUXILLIAIRES -----------------------------------------------
 //----------------------------------------------------------------------
@@ -113,9 +129,10 @@ global $table_des_tables, $table_primary;
 $table_primary['taches']='id_tache';
 $table_primary['projets']='id_projet';
 $table_primary['bugs']='id_bug';
+$table_primary['ameliorations']='id_amelioration';
 
 $table_des_tables['taches']='taches';
 $table_des_tables['projets']='projets';
 $table_des_tables['bugs']='bugs';
-
+$table_des_tables['ameliorations']='ameliorations';
 ?>

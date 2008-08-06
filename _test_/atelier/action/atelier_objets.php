@@ -42,6 +42,22 @@ function action_atelier_objets_dist() {
 			if ($r['type'] == "plugin") $fichier = _DIR_PLUGINS . $prefixe .'/'.$nom.'.html';
 			else $fichier = './' . $repertoire_squelettes_alternatifs . '/'. $prefixe .'/'.$nom.'.html';
 			break;
+		case 'table' :
+			$chemin = _DIR_PLUGINS . $prefixe . '/base';
+			$fichier = $chemin.'/'.$prefixe.'_base.php';
+			if (!file_exists($chemin)) {
+				$rapport .= 'cr&eacute;ation du r&eacute;pertoire base.<br />';
+				exec('cd '._DIR_PLUGINS . $prefixe.';mkdir base',&$output,&$return_var);
+				$rapport .= _T('atelier:code_retour').$return_var.'<br />';
+				foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />';
+			}
+			lire_fichier(_DIR_PLUGINS .'atelier/gabarits/base.txt',&$contenu);
+			$contenu = preg_replace('#\[nom_table\]#',$nom,$contenu);
+			if (file_exists($fichier)) { // le fichier existe, il faut le lire et pas le créer
+			}
+			else {
+			
+			}
 		default : 
 			if ($r['type'] == "plugin") {
 				$fichier = _DIR_PLUGINS . $prefixe .'/'. $type .'/'.$prefixe.'_'.$nom.'.php';

@@ -1,4 +1,4 @@
-TODO.txt (fichier généré par le plugin Atelier 2008-07-25 01:12:22)
+TODO.txt (fichier généré par le plugin Atelier 2008-08-06 17:32:40)
 -------------------------------------------------------------------
 
 * gestion des dictionnaires :
@@ -244,6 +244,24 @@ Placé dans le répertoire "public/"
 
 
 * [edit_projet] A la place de exec('mkdir') utiliser mkdir(); :
+
+
+
+* Bug edition des gabraits, :
+la coloration syntaxique ne trouve pas le fichier (chemin = absolus)
+
+
+* Permettre de visualiser et de modifier SPIP_PATH :
+SPIP_PATH contient l'ordre de recherche des chemins
+
+
+* Externaliser les gabarits de fichier lang dans le repertoire gabarits :
+
+
+
+* Permettre de visualiser les bugs rapporté dans l'interface privée :
+- ajouter un bloc "liste des bugs" listant tous les bugs non corriger
+- ajouter une page de visualisation du détail d'un bug + transformer ce rapport de bug en tâche
 
 
 

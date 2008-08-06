@@ -1,0 +1,32 @@
+#CACHE{0}
+
+<form action="[(#ENV{url})]" method="post" name="formulaire_amelioration" enctype="multipart/form-data">
+
+	<input type="hidden" name="id_amelioration" value="[(#ENV**{id_amelioration})]"  size="50">
+	<input type="hidden" name="id_projet" value="[(#ENV**{id_projet})]"  size="50">
+	<input type="hidden" name="url_site" value="[(#URL_SITE_SPIP)]"  size="50">
+
+	<BOUCLE_projet(PROJETS){id_projet}>
+		Demande d'am&eacute;lioration pour le projet <b>#TITRE</b>
+	</BOUCLE_projet>
+
+
+	<p>
+	<fieldset><legend><b>Description de l'am&eacute;lioration voulue</b></legend>
+		<p>
+		Titre : <br />
+		<input  type="text" name="titre" value="[(#ENV*{titre})]" size="15"><br />
+		Donnez un titre court et parlant<br /><br />
+		Descriptif : <br />
+		<textarea  cols="40" rows="15" name="descriptif">[(#ENV*{descriptif})]</textarea><br />
+		Décrivez votre amélioration de manière simple et concise<br /><br />
+		</p>
+	</fieldset>
+	</p>
+
+	<p>
+		<input type='submit' name='valider' class='spip_bouton' value="valider" />
+		<input type="submit" name="abandonner" class="spip_bouton" value="abandonner" />
+	</p>
+
+</form>

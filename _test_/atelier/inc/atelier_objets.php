@@ -47,7 +47,8 @@ function atelier_objet_type($type) {
 	if ($type == 'plugin')
 		$res .= '<option value="exec">Feuille dans l\'espace privée (exec)</option>'
 			. '<option value="inc">Formulaire dans l\'espace privée (inc)</option>'
-			. '<option value="action">Action dans l\'espace privée (action)</option>';
+			. '<option value="action">Action dans l\'espace privée (action)</option>'
+			. '<option value="table">Table supplémentaire dans la base de donnée</option>';
 
 	$res .= '<option value="html">Page dans l\'espace publique (html)</option>'
 		. '</select><br /><br />';

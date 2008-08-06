@@ -144,7 +144,7 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 
 		include_spip('inc/atelier_explorer');
 		atelier_explorer($row['prefixe'],$id_projet,$row['type'],$opendir,$nom_page);
-
+		echo liste_bugs($row['id_projet']);
 		echo liste_taches_ouvertes($row['id_projet']);
 
 		include_spip('inc/atelier_todo');
@@ -182,6 +182,17 @@ function liste_taches_ouvertes($id_projet) {
 	return $afficher_projets('tache',$titre,$requete);
 }
 
+function liste_bugs($id_projet) {
+	include_spip('inc/afficher_objets');
+
+	$afficher_bugs = charger_fonction('afficher_objets','inc');
+	
+	$titre = _T('atelier:liste_bugs');
+	$requete = array('SELECT' => 'bugs.id_bug, bugs.titre ',
+			 'FROM' => "spip_bugs as bugs",
+			 'WHERE' => "bugs.id_projet=$id_projet");
+	return $afficher_bugs('bug',$titre,$requete);
+}
 
 
 ?>

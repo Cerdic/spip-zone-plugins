@@ -1,0 +1,35 @@
+<?php
+
+//declaration des tables [liste_tables]
+
+include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
+include_spip('base/auxiliaires');
+
+global $tables_principales;
+
+//----------------------------------------------------------
+//-- TABLES PRINCIPALES ------------------------------------
+//----------------------------------------------------------
+
+
+//-- Table [nom_table] ------------------------------------------
+$[nom_table]s = array(
+  "id_[nom_table]"		=> "bigint(21) NOT NULL auto_increment"
+);
+                    
+$[nom_table]s_key = array(
+  "PRIMARY KEY"	=> "id_[nom_table]"
+);
+                                
+$tables_principales['spip_[nom_table]s'] =
+   array('field' => &$[nom_table]s, 'key' => &$[nom_table]s_key);
+
+//-- table des table et table primary ------------------------------------
+
+global $table_des_tables, $table_primary;
+
+$table_primary['[nom_table]s']='id_[nom_table]';
+
+$table_des_tables['[nom_table]s']='[nom_table]s';
+
+?>

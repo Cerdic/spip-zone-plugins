@@ -35,8 +35,8 @@ function exec_atelier_args($id_projet,$rapport='') {
 	$projet_select = charger_fonction('projet_select','inc');
 	$row = $projet_select($id_projet?$id_projet:$defaut);
 
-/*	include_spip('action/atelier_installer_base');
-	atelier_installer_base();*/
+	include_spip('action/atelier_installer_base');
+	atelier_installer_base();
 
 	atelier($id_projet,$row,$defaut,$rapport);
 }
