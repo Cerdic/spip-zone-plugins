@@ -71,8 +71,8 @@
 				return $hyphenated_word;
 			}
 
-			// Function: Text hyphenation
-			function cesure($text, $lang="xxx") {
+			function pb_effectuer_cesure($text, $lang="xxx") {
+
 				$GLOBALS["pb_leftmin"] = 2;
 				$GLOBALS["pb_rightmin"] = 2;
 				$GLOBALS["pb_charmin"] = 4;
@@ -86,6 +86,8 @@
 
 				$word = ""; $tag = ""; $tag_jump = 0; $output = array();
 				$word_boundaries = "<>\t\n\r\0\x0B !\"§$%&/()=?….,;:-–_„”«»‘’'/\\‹›()[]{}*+´`^|©℗®™℠¹²³";
+
+
 				$text = $text . " ";
 				
 				for($i = 0; $i < mb_strlen($text); $i++) {
@@ -120,6 +122,18 @@
 				if (strlen($regexp_finale))
 					$text = preg_replace($regexp_finale, '\1\2', $text);
 
-				return substr($text, 0, strlen($text) - 1);
+				return substr($text, 0, strlen($text) - 1);			
+			}
+			// Function: Text hyphenation
+			function cesure($text, $lang="xxx") {
+
+				if (ereg("<p[^>]*>", $text)) {
+					$text = preg_replace("/<p([^>]*)>(.*)<\/p>/miseU", "'<p\\1>'.stripslashes(pb_effectuer_cesure('\\2',$lang)).'</p>'", $text);
+				} else {
+					$text = pb_effectuer_cesure($text, $lang);
+				}
+
+				
+				return $text;
 			}
 ?>
