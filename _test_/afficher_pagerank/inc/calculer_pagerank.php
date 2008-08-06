@@ -78,6 +78,9 @@ function PB_PR_CheckHash($Hashnum)
 }
 
 function pb_getpagerank($url, $racine=false) {
+	
+		$url = ereg_replace("</?[^>]*>", "", $url);
+
 
 		if ($racine) {
 			$url = parse_url($url);

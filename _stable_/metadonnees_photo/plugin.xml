@@ -13,6 +13,7 @@
 
 		Les informations IPTC n&eacute;cessitent la fonction "iptcparse" de PHP et utilisent la classe "class_iptc" d'Alex Arica.
 	</description>
+	<licence>LGPL</licence>
 	<fonctions>photo_infos_fonctions.php</fonctions>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>photo_infos</prefix>
