@@ -1,0 +1,25 @@
+[(#REM)
+/******************************************************************
+***  Ce plugin eva_freemind, créé par Olivier Gautier et ***
+*** Dominique Lepaisan est mis à disposition sous un ***
+*** contrat GNU/GPL consultable à l'adresse                    ***
+***      http://www.april.org/gnu/gpl_french.html		     ***
+******************************************************************/
+]
+<BOUCLE_freeminddoc(DOCUMENTS){id_document=#ENV**{doc}}{mode=document}{extension==mm}>
+	<script type="text/javascript" src="#EVAL{_DIR_PLUGIN_EVA_FREEMIND}scripts/flashobject.js"></script>
+	<div id="flashcontent">Flash ou Javascript ne sont pas activ&eacute;s. Activez-les et relancez la page !</div>
+	<script type="text/javascript">
+	// <![CDATA[
+	var fo = new FlashObject("#EVAL{_DIR_PLUGIN_EVA_FREEMIND}scripts/visorFreemind.swf", "visorFreeMind",
+	"[(#ENV**{largeur}|?{#ENV**{largeur},"100%"})]",
+	"[(#ENV**{hauteur}|?{#ENV**{hauteur},"400"})]",
+	6, "#9999ff");
+	fo.addParam("quality", "high");
+	fo.addParam("bgcolor", "#ffffff");
+	fo.addVariable("openUrl", "_blank");
+	fo.addVariable("initLoadFile", "#URL_DOCUMENT");
+	fo.addVariable("startCollapsedToLevel","5");
+	fo.write("flashcontent");
+	// ]]></script>
+</BOUCLE_freeminddoc>
