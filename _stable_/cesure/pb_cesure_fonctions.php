@@ -16,7 +16,7 @@
 
 		define (_PB_PATH_TO_PATTERNS, _DIR_PLUGIN_PB_CESURE."patterns/");
 		define(_PB_DICTIONARY, "dictionary.txt");
-		define (_PB_EXCLUDE_TAGS, "code,pre,script,style");
+		define (_PB_EXCLUDE_TAGS, "code,pre,script,style,pbperso");
 
 
 
@@ -71,7 +71,10 @@
 				return $hyphenated_word;
 			}
 
+
+
 			function pb_effectuer_cesure($text, $lang="xxx") {
+
 
 				$GLOBALS["pb_leftmin"] = 2;
 				$GLOBALS["pb_rightmin"] = 2;
@@ -126,13 +129,20 @@
 			}
 			// Function: Text hyphenation
 			function cesure($text, $lang="xxx") {
+			
+				// echapper les caracteres speciaux pour qu'il ne soient pas coupes 
+				// (genre: &ccedil;)
+				$text = preg_replace("/(&.*;)/U", "<XXX\\1XXX>", $text);
+			
 
 				if (ereg("<p[^>]*>", $text)) {
 					$text = preg_replace("/<p([^>]*)>(.*)<\/p>/miseU", "'<p\\1>'.stripslashes(pb_effectuer_cesure('\\2',$lang)).'</p>'", $text);
 				} else {
 					$text = pb_effectuer_cesure($text, $lang);
 				}
-
+				
+				$text = str_replace("<XXX", "", $text);
+				$text = str_replace("XXX>", "", $text);
 				
 				return $text;
 			}
