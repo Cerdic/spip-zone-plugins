@@ -232,7 +232,6 @@ add_variable( array(
 add_variable( array(
 	'nom' => 'url_arbo_minuscules',
 	'format' => 'nombre',
-	'radio/ligne' => 2,
 	'radio' => array(0 => 'item_oui',
 					 1 => 'item_non'),				
 	'defaut' => 1,
@@ -241,7 +240,6 @@ add_variable( array(
 add_variable( array(
 	'nom' => 'urls_arbo_sans_type',
 	'format' => 'nombre',
-	'radio/ligne' => 2,
 	'radio' => array(0 => 'item_oui',
 					 1 => 'item_non'),				
 	'defaut' => 0,
@@ -889,7 +887,7 @@ add_outil( array(
 	'jquery'	=> 'oui',
 	'pipelinecode:insert_head' => 'if(defined(\'CS_jQuery_scrollTo\')) $flux.=\'<script src="'.url_absolue(find_in_path("outils/jquery.scrollto.js")).'" type="text/javascript"></script>\';
 if(defined(\'CS_jQuery_localscroll\')) $flux.=\'<script src="'.url_absolue(find_in_path("outils/jquery.localscroll.js")).'" type="text/javascript"></script>\';',
-//	'code:js' => 'function soft_scroller_init() { jQuery.localScroll({hash: true}); }',
+//	'code:js' => 'function soft_scroller_init() { if(typeof jQuery.localScroll=='function') jQuery.localScroll({hash: true}); }',
 //	'code:jq_init' => 'soft_scroller_init.apply(this);',
 	'code:jq' => "if(typeof jQuery.localScroll=='function') jQuery.localScroll({hash: true});",
 ));
