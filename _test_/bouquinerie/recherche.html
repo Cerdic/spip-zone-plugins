@@ -1,0 +1,93 @@
+[(#REM)
+	Un cache plus court, pour la boucle syndic_articles
+]#CACHE{3600}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_recherche">
+<div id="page">
+
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Contenu principal ]
+	<div class="hfeed" id="conteneur">
+	<div id="contenu">
+
+		<h1><:resultats_recherche:></h1>
+		<p>&#171;&nbsp;#RECHERCHE&nbsp;&#187;</p>
+
+
+		<h2>par titre</h2>
+		<B_titres>
+			[(#ANCRE_PAGINATION)]
+				<ul>
+					<BOUCLE_titres(LIVRES){titre LIKE %#RECHERCHE%}{pagination}>
+						<li><a href="#URL_LIVRE">#TITRE</a></li>
+					</BOUCLE_titres>
+				</ul>
+		</B_titres>
+
+		Aucun titre ne correspond à votre recherche
+		<//B_titres><br /><br />
+
+		<h2>par auteur</h2>
+		<B_auteurs>
+			[(#ANCRE_PAGINATION)]
+				<ul>
+					<BOUCLE_auteurs(LIVRES){auteur LIKE %#RECHERCHE%}{pagination}>
+						<li>#AUTEUR,&nbsp;&nbsp;<br /><a href="#URL_LIVRE">#TITRE</a></li>
+					</BOUCLE_auteurs>
+				</ul>
+		</B_auteurs>
+
+		Aucun auteur ne correspond à votre recherche
+		<//B_auteurs><br /><br />
+
+		<h2>par edition</h2>
+		<B_editions>
+			[(#ANCRE_PAGINATION)]
+				<ul>
+					<BOUCLE_editions(LIVRES){edition LIKE %#RECHERCHE%}{pagination}>
+						<li>#EDITION,&nbsp;&nbsp;<br /><a href="#URL_LIVRE">#TITRE</a></li>
+					</BOUCLE_editions>
+				</ul>
+		</B_editions>
+
+		Aucune édition ne correspond à votre recherche
+		<//B_editions><br /><br />
+
+		<h2>par mots-clés</h2>
+		<B_mots>
+			<ul>
+			<BOUCLE_mots(MOTS){titre LIKE %#RECHERCHE%}>
+				<li><a class="bold" href="#URL_PAGE{mot,id_mot=#ID_MOT}">#TITRE</a>
+					<ul>
+					<BOUCLE_livres(LIVRES){id_mot}{par titre}{inverse}>
+							<li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#URL_LIVRE">#TITRE</a></li>
+					</BOUCLE_livres>
+					</ul>
+				</li>
+			</BOUCLE_mots>
+			</ul>
+		</B_mots>
+		Aucun mots-clés ne correspond à votre recherche
+		<//B_mots>
+		<br /><br />
+
+	</div>
+	</div>
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+	
+</div><!--#page-->
+</body>
+</html>
+
