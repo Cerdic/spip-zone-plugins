@@ -269,7 +269,7 @@ _ &bull; [De tout le plugin->@reset@]
 	'label:url_arbo_minuscules'=>'Conserver la casse des titres dans les URLs :',
 	'label:urls_arbo_sans_type'=>"Afficher le type d'objet SPIP dans les URLs :",
 	'label:url_arbo_sep_id'=>"Caract&egrave;re de s&eacute;paration 'titre-id' en cas de doublon :<br/>(ne pas utiliser '/')",
-	'label:terminaison_urls_arbo'=>'Terminaison des URls (ex : .html) :<br/>',
+	'label:terminaison_urls_arbo'=>'Terminaison des URls (ex : .html) :',
 	'label:set_couleurs' => 'Set &agrave; utiliser :',
 	'label:spam_mots' => 'S&eacute;quences interdites :',
 	'label:spip_script' => 'Script d\'appel :',
