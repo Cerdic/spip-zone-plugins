@@ -264,8 +264,7 @@ function ajouter_livre_priceminister($cell, $id_catalogue,$doublons, $import_ima
 
 	// gestion des images liés
 	if (($cell[27]['type'] != 'null') && ($cell[28]['type'] != 'null')) { // url image/ secondaire; // url image/ principale
-
-		if ($import_image == 'url') {
+		if ($import_image != 'non') {
 			$url_price = 'http://www.priceminister.com/offer/buy/'.$livre['id_reference'].'/';
 			if ($page = file_get_contents($url_price)) {
 
@@ -275,7 +274,15 @@ function ajouter_livre_priceminister($cell, $id_catalogue,$doublons, $import_ima
 
 					if (preg_match('#src="(.+?)"#',$tab_2[0],$m) > 0 ) {
 						$livre['url_image'] = $m[1];
-						// gerer l'upload et document distant
+						if ($import_image == 'oui') $mode = "image";
+						else if ($import_image == 'distant') $mode = "distant";
+
+						if ($import_image != 'url') {
+							$fichier = 'img_'.$titre.'.jpg';
+
+							$ajouter_document = charger_fonction('ajouter_documents','inc');
+							$ajouter_document($m[1],$fichier,"livre",$id_livre,$mode,$id_document,$documents_actifs);
+						}
 					}
 				}
 			}

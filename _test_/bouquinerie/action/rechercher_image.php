@@ -27,8 +27,16 @@ function action_rechercher_image_dist() {
 
 	$id_livre = $arg;
 	$r = sql_fetsel('id_reference,titre','spip_livres',"id_livre=$id_livre");
-	
-	$url_price = 'http://www.priceminister.com/offer/buy/'.$r['id_reference'].'/';
+
+	recupere_image($id_livre,$r['id_reference'],$r['titre']);
+
+	$redirect = parametre_url(urldecode(generer_url_ecrire('livres')),"id_livre",$id_livre,'&');
+
+	redirige_par_entete($redirect);
+}
+
+function recupere_image($id_livre,$id_reference,$titre) {
+	$url_price = 'http://www.priceminister.com/offer/buy/'.$id_reference.'/';
 	if ($page = file_get_contents($url_price)) {
 
 		if (preg_match('#<div id="fp_pix">#',$page,$match, PREG_OFFSET_CAPTURE) > 0) {
@@ -41,17 +49,13 @@ function action_rechercher_image_dist() {
 				// gerer l'upload et document distant
 
 				//upload
-				$fichier = 'img_'.$r['titre'].'.jpg';
+				$fichier = 'img_'.$titre.'.jpg';
 				$mode = "image";
 				$ajouter_document = charger_fonction('ajouter_documents','inc');
 				$ajouter_document($m[1],$fichier,"livre",$id_livre,$mode,$id_document,$documents_actifs);
 			}
 		}
 	}
-
-	$redirect = parametre_url(urldecode(generer_url_ecrire('livres')),"id_livre",$id_livre,'&');
-
-	redirige_par_entete($redirect);
 }
 
 ?>
