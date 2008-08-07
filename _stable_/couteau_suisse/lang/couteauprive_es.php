@@ -411,7 +411,7 @@ _ No te olvides de verificar que \'un_texte\' est&eacute; bien definido en los f
 	'travaux_prochainement' => 'Este sitio se reactivar&aacute; en breve.
 _ Gracias por la comprensi&oacute;n.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => 'Elige aqu&iacute; la ordenaci&oacute;n que se usar&aacute; para mostrar tus art&iacute;culos dentro de las secciones cuando navegues por la parte privada del sitio ([->./?exec=auteurs]).
+	'tri_articles:description' => '<MODIF>Elige aqu&iacute; la ordenaci&oacute;n que se usar&aacute; para mostrar tus art&iacute;culos dentro de las secciones cuando navegues por la parte privada del sitio ([->./?exec=auteurs]).
 
 Las propuestas siguientes se basan en la funci&oacute;n SQL \'ORDER BY\': utiliza la ordenaci&oacute;n personalizada s&oacute;lo si sabes muy bien lo que haces (campos disponibles: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]',
@@ -420,7 +420,7 @@ Las propuestas siguientes se basan en la funci&oacute;n SQL \'ORDER BY\': utiliz
 	'tri_perso' => 'Ordenaci&oacute;n SQL personalizada, ORDER BY seguido por:',
 	'tri_publi' => 'Ordenar por fecha de publicaci&oacute;n (ORDER BY date DESC)',
 	'tri_titre' => 'Ordenar por t&iacute;tulo (ORDER BY 0+titre,titre)',
-	'type_urls:description' => '@puce@ SPIP te permite elegir entre varios tipos de URLs para crear los enlaces de acceso a las p&aacute;ginas de tu sitio:
+	'type_urls:description' => '<MODIF>@puce@ SPIP te permite elegir entre varios tipos de URLs para crear los enlaces de acceso a las p&aacute;ginas de tu sitio:
 <div style="font-size:90%; margin:0 2em;">
 - {{page}}: el valor por omisi&oacute;n para SPIP v1.9x : <code>/spip.php?article123</code>.
 - {{html}}: enlaces con forma de p&aacute;ginas html cl&aacute;sicas : <code>/article123.html</code>.
