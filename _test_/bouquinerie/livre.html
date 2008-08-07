@@ -1,0 +1,69 @@
+[(#REM)
+	Un cache plus court, pour la boucle syndic_articles
+]#CACHE{3600}
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Contenu principal ]
+	<div class="hfeed" id="conteneur">
+	<div id="contenu">
+
+	<br /><br />
+
+	<a href='#URL_PAGE{bouq_exemple}'>Retour ...</a>
+	<br /><br />
+
+	<BOUCLE_livre(LIVRES){id_livre}>
+		<h2>[(#AUTEUR),] #TITRE</h2>
+		<B_image>
+			<div style="float:right">
+			<BOUCLE_image(DOCUMENTS_LIENS){id_objet = #ENV{id_livre}}>
+				<BOUCLE_document(DOCUMENTS){id_document = #ID_DOCUMENT}{tout}>
+				<img  src="#FICHIER" alt="" />
+				</BOUCLE_document>
+			</BOUCLE_image>
+			</div>
+		</B_image>
+
+		<ul>
+		[<li><b><:auteur:> </b><br />&nbsp; (#AUTEUR)</li>]
+		[<li><b><:edition:> :</b><br />&nbsp; (#EDITION)</li>]
+		[<li><b><:lien_edition:> :</b><br />&nbsp; (#LIEU_EDITION)</li>]
+		[<li><b><:isbn:> :</b><br />&nbsp; (#ISBN)</li>]
+		[<li><b><:prix:> :</b><br />&nbsp; (#PRIX_VENTE) euros</li>]
+		[<li><b><:etat:> :</b><br />&nbsp;  (#ETAT_LIVRE)</li>]
+		[<li><b><:commentaire:> :</b><br />&nbsp;  (#COMMENTAIRE)</li>]
+		[<li><b><:type:> :</b><br />&nbsp;  (#TYPE_LIVRE)</li>]
+		[<li><b><:format:> :</b><br />&nbsp;  (#FORMAT)</li>]
+			<B_mots>
+			<li><b><:mots_cles:> : </b><br />&nbsp;
+				<BOUCLE_mots(MOTS){id_livre}>
+					<a href="#URL_PAGE{mot,id_mot=#ID_MOT}">#TITRE </a>
+				</BOUCLE_mots>
+			</li>
+		</B_mots>
+		</ul>
+
+
+	</BOUCLE_livre>
+	</div>
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+	
+</div><!--#page-->
+</body>
+</html>
+
