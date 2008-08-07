@@ -81,7 +81,6 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'admin_plugin_requis_erreur_cfg' => 'Instal&middot;leu el plugin CFG i activeu-lo! [Documentaci&oacute; aqu&iacute;->http://www.spip-contrib.net/?article1605], [Archiu ZIP aqu&iacute;->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Falten els seg&uuml;ents plugins requerits. Activeu-los!',
 	'admin_plugin_requis_ok' => 'Plugin(s) instal&middot;lat(s) i actiu(s): ',
-	'admin_plugin_requis_ok_balisession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224]: proporciona les informacions sobre els visitants autentificats. ',
 	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605]: proporciona funcions i etiquetes.',
 	'admin_sous_titre' => 'Accedir al panell d\'administraci&oacute; dels f&ograve;rums amb SpipBB',
 	'admin_spip_config_forums' => 'Configuraci&oacute; d\'SPIP&nbsp;:',
@@ -338,8 +337,8 @@ _ Un post-it est&agrave; situat a sota dels anuncis, abans dels missatges ordina
 
 	// P
 	'pagine_page_' => ' .. p&agrave;gina',
-	'pagine_post_' => 'resposta',
-	'pagine_post_s' => 'respostes',
+	'pagine_post_' => '<MODIF>resposta',
+	'pagine_post_s' => '<MODIF>respostes',
 	'pagine_sujet_s' => 'assumptes',
 	'par_' => 'per ',
 	'plugin_auteur' => 'La SpipBB Team: [veure la llista de col&middot;laboradors a Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',

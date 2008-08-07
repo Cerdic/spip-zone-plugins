@@ -81,7 +81,6 @@ Raadpleegt [documentatie over Spip-Contrib-> http://www.spip-contrib.net/SpipBB-
 	'admin_plugin_requis_erreur_cfg' => 'Plaatst plugin CFG en activeert! [Documentatie ici-> http://www.spip-contrib.net/?article1605], [Archief ZIP daar - > http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Volgende vereiste plugins hebben aan gebrek. Activeert ze !',
 	'admin_plugin_requis_ok' => 'Geplaatste(s) en actieve(n) Plugin(s) :',
-	'admin_plugin_requis_ok_balisession' => '[Plugin BALISE_SESSION-> http://www.spip-contrib.net/?article1224]: geleverd de informatie over de bezoekers voor echt verklaard.',
 	'admin_plugin_requis_ok_cfg' => '[Plugin CFG-> http://www.spip-contrib.net/?article1605]: geleverd van de functies en de bakens.',
 	'admin_sous_titre' => 'Het paneel van bestuur van de forums met SpipBB bereiken',
 	'admin_spip_config_forums' => 'Configuratie van SPIP&nbsp;:',
@@ -338,8 +337,8 @@ _ Wordt een postit onder de aankondigingen, voor de gewone berichten geplaatst. 
 
 	// P
 	'pagine_page_' => ' .. bladzijde ',
-	'pagine_post_' => 'antwoord',
-	'pagine_post_s' => 'antwoord',
+	'pagine_post_' => '<MODIF>antwoord',
+	'pagine_post_s' => '<MODIF>antwoord',
 	'pagine_sujet_s' => 'onderwerpen',
 	'par_' => 'door',
 	'plugin_auteur' => 'SpipBB Team: [zie de lijst van contributoren op Spip-contrib-> http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
@@ -381,11 +380,36 @@ nbr_post@ bericht(en). Uitgewist met hem&nbsp;!\\n',
 	'recherche' => 'Onderzoek',
 	'recherche_elargie' => 'Geavanceerd zoeken',
 	'redige_post' => 'Bericht schrijven',
-	'reglement' => '<MODIF><p>Les administrateurs et mod&eacute;rateurs de ce forum s\'efforceront de supprimer ou &eacute;diter tous les messages &agrave; caract&egrave;re r&eacute;pr&eacute;hensible aussi rapidement que possible. Toutefois, il leur est impossible de passer en revue tous les messages. Vous admettez donc que tous les messages post&eacute;s sur ces forums expriment la vue et opinion de leurs auteurs respectifs, et non pas des administrateurs, ou mod&eacute;rateurs, ou webmestres (except&eacute; les messages post&eacute;s par eux-m&ecirc;me) et par cons&eacute;quent ne peuvent pas &ecirc;tre tenus pour responsables.</p>
-
-<p>Vous consentez &agrave; ne pas poster de messages injurieux, obsc&egrave;nes, vulgaires, diffamatoires, mena&ccedil;ants, sexuels ou tout autre message qui violerait les lois applicables. Le faire peut vous conduire &agrave; &ecirc;tre banni imm&eacute;diatement de fa&ccedil;on permanente (et votre fournisseur d\'acc&egrave;s &agrave; internet en sera inform&eacute;). L\'adresse IP de chaque message est enregistr&eacute;e afin d\'aider &agrave; faire respecter ces conditions. Vous &ecirc;tes d\'accord sur le fait que le webmestre, l\'administrateur et les mod&eacute;rateurs de ce forum ont le droit de supprimer, &eacute;diter, d&eacute;placer ou verrouiller n\'importe quel sujet de discussion &agrave; tout moment. En tant qu\'utilisateur, vous &ecirc;tes d\'accord sur le fait que toutes les informations que vous donnerez ci-apr&egrave;s seront stock&eacute;es dans une base de donn&eacute;es. Cependant, ces informations ne seront divulgu&eacute;es &agrave; aucune tierce personne ou soci&eacute;t&eacute; sans votre accord. Le webmestre, l\'administrateur, et les mod&eacute;rateurs ne peuvent pas &ecirc;tre tenus pour responsables si une tentative de piratage informatique conduit &agrave; l\'acc&egrave;s de ces donn&eacute;es.</p>
-
-<p>Ce forum utilise les cookies pour stocker des informations sur votre ordinateur. Ces cookies ne contiendront aucune information que vous aurez entr&eacute; ci-apr&egrave;s, ils servent uniquement &agrave; am&eacute;liorer le confort d\'utilisation. L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;tails de votre enregistrement ainsi que votre mot de passe (et aussi pour vous envoyer un nouveau mot de passe dans la cas o&ugrave; vous l\'oublieriez).</p><p>En vous enregistrant, vous vous portez garant du fait d\'&ecirc;tre en accord avec le r&egrave;glement ci-dessus.</p>',
+	'reglement' => '<p>De beheerders en mod&eacute;rateurs van dit forum zullen proberen om
+ af te schaffen    of alle berichten van laakbare aard 
+ uitgeven    eveneens snel dan mogelijk. Evenwel is het hun onmogelijk om alle
+ de revue te passeren    de berichten. U geeft dus toe dat alle berichten die op deze forums
+ zijn opgesteld    spreken het standpunt en mening van hun respectieve auteurs, en niet van beheerders uit,
+    of mod&eacute;rateurs, of webmestres (behalve de berichten die per
+ zijn opgesteld    zij zelf) en bijgevolg kunnen niet voor verantwoordelijken gehouden worden.</p>
+    <p>U stemt ermee in om geen beledigende, vies berichten op te stellen,
+     vulgair, lasterlijk, dreigend, seksueel of om het even welk ander bericht dat
+ zou schenden    de wetten van toepassing. Het kan doen u ertoe aanzetten om
+ verbannen te worden    onmiddellijk permanent (en uw leverancier van toegang
+     aan Internet zal ingelicht worden erover). Het adres IP van elk bericht is
+    geregistreerd teneinde te helpen om deze voorwaarden te laten eerbiedigen.
+           U gaat akkoord met het feit dat webmestre, de beheerder
+    en mod&eacute;rateurs van dit forum hebben het recht om af te schaffen, uit te geven,
+    om het even welke discussieonderwerp op elk moment verplaatsen of grendelen.
+   Als gebruiker, gaat u akkoord met het feit dat alle informatie
+    dat u hierna zal opgeslagen worden in een database zult geven.
+   Nochtans zal deze informatie aan geen enkele derde persoon
+ bekend gemaakt zijn    of vennootschap zonder uw overeenkomst. Webmestre, de beheerder,
+    en mod&eacute;rateurs kunnen niet voor verantwoordelijken gehouden worden als une
+    leidt de informaticapoging tot piratage tot de toegang van deze gegevens.</p>
+    <p>Dit forum gebruikt cookies om een informatie op te slaan over uw computer.
+    Dit cookies zullen geen enkele informatie bevatten dat u hierna zult ingegaan zijn 
+    zij dienen alleen om het comfort van gebruik te verbeteren.
+    Het adres e-mail wordt alleen gebruikt teneinde de details
+ te bevestigen    van uw registratie alsmede uw wachtwoord (en eveneens om u nieuwe 
+ te verzenden    wachtwoord in het geval waar u het zou vergeten).</p>
+<p>Door u te registreren, draagt u u borg ten gevolge van in overeenstemming met
+    zijn regeling hierboven.</p>',
 	'repondre' => 'Antwoorden',
 	'reponse_s_' => 'Antwoorden',
 	'resultat_s_pour_' => ' resultaten voor ',
@@ -446,14 +470,14 @@ _ • [van hele plugin->@plugin@]</p>',
 	'sw_send_pm_warning' => '<strong>Verzendt een MP naar de gebruiker</strong><br/>wanneer hij een bericht met een verboden woord opstelt',
 	'sw_spam_forum_titre' => 'Beleid van de spam berichten',
 	'sw_spam_titre' => 'Filtrering van spam',
-	'sw_spam_words_action' => '<NEW>A partir de cette page, vous pouvez ajouter, &eacute;diter et supprimer des mots associ&eacute;s &agrave; du spam. Le caract&egrave;re (*) est accept&eacute; dans le mot. Par exemple&nbsp;: {{*tes*}} capturera {d&eacute;testable}, {{tes*}} capturera {tester}, {{*tes}} capturera {portes}.',
+	'sw_spam_words_action' => 'Vanaf deze bladzijde, kunt u, woorden toevoegen uitgeven en afschaffen die met spam worden verenigd. Het karakter (*) wordt in het woord aanvaard. Bijvoorbeeld&nbsp;: {{*tes*}} nemen {afschuwelijk}, {{tes*}} nemen {testen}, {{*tes}} nemen {deur}',
 	'sw_spam_words_mass_add' => 'Kopi&euml;ren-plakken of grijpen uw woorden in deze zone. Elk woord door een komma, twee punten of een terugkeer naar de lijn scheiden.',
 	'sw_spam_words_titre' => 'Filtrering van woorden',
-	'sw_spam_words_url_add' => '<NEW>Saisir l\'URL d\'un fichier contenant une liste de mots format&eacute;e comme ci-dessus. Exemple&nbsp;: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
+	'sw_spam_words_url_add' => 'Hierboven URL van een bestand met een lijst van woorden grijpen die wordt geformatteerd, als. Het voorbeeld&nbsp;: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'Admin auteur van het verzonden bericht kiezen',
 	'sw_warning_pm_message' => 'Tekst van het bericht particulier',
-	'sw_warning_pm_titre' => '<NEW>Sujet du message priv&eacute;',
-	'sw_word' => '<NEW>Mot',
+	'sw_warning_pm_titre' => 'Onderwerp van het particuliere bericht',
+	'sw_word' => 'Woord',
 
 	// T
 	'title_ferme' => 'Het forum/artikel sluiten',

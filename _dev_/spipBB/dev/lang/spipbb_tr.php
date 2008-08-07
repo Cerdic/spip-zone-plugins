@@ -81,7 +81,6 @@ Bkz [Spip-Contrib ile ilgili belgeler->http://www.spip-contrib.net/SpipBB-le-for
 	'admin_plugin_requis_erreur_cfg' => 'CFG eklentisini kurun ve aktive edin ![Belge i&ccedil;in bkz->http://www.spip-contrib.net/?article1605], [Zip ar&#351;ivi i&ccedil;in bkz->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => '&#350;u eklentiler eksik. Aktive edin !',
 	'admin_plugin_requis_ok' => 'Kurulu ve aktif eklentiler :',
-	'admin_plugin_requis_ok_balisession' => '[BALISE_SESSION eklenrtisi->http://www.spip-contrib.net/?article1224] : izinli ziyaret&ccedil;ilere ait bilgileri i&ccedil;erir.',
 	'admin_plugin_requis_ok_cfg' => '[CFG eklentisi->http://www.spip-contrib.net/?article1605] : fonksiyon ve komutlar&#305; i&ccedil;erir.',
 	'admin_sous_titre' => 'SpipBB ile forumlar&#305;n y&ouml;netim panosuna eri&#351;im',
 	'admin_spip_config_forums' => 'SPIP konfig&uuml;rasyonu&nbsp;:',
@@ -337,8 +336,8 @@ _ Duyurular&#305;n alt&#305;nda, basit mesajlardan &ouml;nce bir postit vard&#30
 
 	// P
 	'pagine_page_' => ' .. sayfa',
-	'pagine_post_' => ' yan&#305;t',
-	'pagine_post_s' => ' yan&#305;t',
+	'pagine_post_' => '<MODIF> yan&#305;t',
+	'pagine_post_s' => '<MODIF> yan&#305;t',
 	'pagine_sujet_s' => ' konu',
 	'par_' => '--> ',
 	'plugin_auteur' => 'SpipBB Tak&#305;m&#305; : [kat&#305;l&#305;mc&#305;lar&#305;n listesini g&ouml;rmek i&ccedil;in Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
