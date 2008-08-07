@@ -93,6 +93,10 @@ if ($GLOBALS['spx']['order'][0] == '-') {
 //------------------------------------------------------------------------------
 // Necessary files
 ob_start(); // prevent unwanted output
+//init des types mime pour spip2.0
+include_spip('inc/lang');
+@init_langues();
+//
 include_spip("config/spx_conf");
 $GLOBALS['spx']["language"] = $GLOBALS['spip_lang'];
 $GLOBALS['spx']["lang"] = $GLOBALS['spip_lang'];

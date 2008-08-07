@@ -1,4 +1,8 @@
-<script src=".?page=jquery.js" type="text/javascript"></script>
+<!-- insertion jquery-->
+<?php
+include_spip("inc/filtres");
+echo f_jQuery('');
+?>
 
 <script language="JavaScript1.2" type="text/javascript">
 <!--
