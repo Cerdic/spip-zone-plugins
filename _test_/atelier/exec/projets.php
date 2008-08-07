@@ -93,11 +93,6 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 	atelier_fin_gauche();
 	atelier_debut_droite();
 
-		if ($rapport != '') {
-			echo debut_cadre_trait_couleur('',true);
-			echo '<p>'.$rapport.'</p>';
-			echo fin_cadre_trait_couleur(true);
-		}
 
 		echo debut_cadre_trait_couleur('',true);
 
@@ -139,6 +134,14 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 			.'<a href="'.generer_url_ecrire('spixplorer').'"><img src="'.find_in_path("spixplorer.png").'" /></a>'		
 			.'</div>'
 			.'</div>';
+
+
+		if ($rapport != '') {
+			echo debut_cadre_trait_couleur('',true);
+			echo '<p>'.$rapport.'</p>';
+			echo fin_cadre_trait_couleur(true);
+		}
+
 		echo debut_cadre_couleur('',true);
 
 		echo '<b>'._T('atelier:texte_descriptif').' :</b><br />'

@@ -53,6 +53,36 @@ function atelier_update_svn($arg) {
 	return generer_action_auteur("atelier_svn", $arg['id_projet'], '', $form, " method='post' name='formulaire'");
 }
 
+function atelier_recuperer_fichier_add($output) {
+	$fichiers = array();
+
+	foreach($output as $lignes) {
+		if ($lignes[0] == "?") {
+			preg_match('#\?(\ *)(.*)#',$lignes,$match);
+			$fichiers[] = $match[2];
+		}
+	}
+	return $fichiers;
+}
+
+function atelier_add_svn($arg) {
+	if (!$arg['fichiers']) return;
+	$form = "<input type='hidden' name='add_projet' value='oui' />\n"
+	. '<input type="hidden" name="nom" value="'.$arg['nom'].'" />';
+
+	foreach ($arg['fichiers'] as $fichier) {
+		$n = preg_replace('/\//','_',$fichier);
+		$n = preg_replace('/\./','_',$n);
+		$form .= '<input type="checkbox" name="fichier_'.$n.'" value="yes">'.$fichier.'</input><br />';
+
+	}
+
+	$form .= ("<div align='center'><input class='fondo' type='submit' value='"
+	. _T('atelier:bouton_add_projet')
+	. "' /></div>");
+	return generer_action_auteur("atelier_svn", $arg['id_projet'], '', $form, " method='post' name='formulaire'");
+}
+
 function atelier_commit_svn($arg) {
         $form = "<input type='hidden' name='commit_projet' value='oui' />\n"
 	. '<input type="hidden" name="nom" value="'.$arg['nom'].'" />'

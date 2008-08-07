@@ -49,10 +49,9 @@ function atelier_svn($id_projet,$row,$opendir='') {
 	atelier_debut_droite();
 
 		if ($id_projet) {
-//			echo debut_cadre_trait_couleur('',true);
-
 			echo '<p>'._T('atelier:explication_status_svn').'</p>';
-			cadre_atelier(' svn status -u -v ' . $row['prefixe'],atelier_status_svn(array('nom' =>$row['prefixe'])));
+			$output = atelier_status_svn(array('nom' =>$row['prefixe']));
+			cadre_atelier(' svn status -u -v ' . $row['prefixe'],$output);
 
 			if (atelier_verifier_subversion()) {
 				echo '<p>'._T('atelier:update_svn').'</p>';
@@ -63,11 +62,22 @@ function atelier_svn($id_projet,$row,$opendir='') {
 					'id_projet' => $id_projet
 					));
 
+				$fichiers = atelier_recuperer_fichier_add($output);
+
+				echo 'Liste des fichiers à ajouter au projet ...<br />';
+				echo $projet_svn('add',array(
+					'nom' => $row['prefixe'],
+					'id_projet' => $id_projet,
+					'fichiers' => $fichiers
+					));
+
                                 echo '<p>'._T('atelier:commit_svn').'</p>';
+
 
                                 echo $projet_svn('commit', array(
                                         'nom' => $row['prefixe'],
-                                        'id_projet' => $id_projet
+                                        'id_projet' => $id_projet,
+
                                         ));
 
 			}

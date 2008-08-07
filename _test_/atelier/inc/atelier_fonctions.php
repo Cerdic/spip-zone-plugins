@@ -84,7 +84,7 @@ function atelier_recuperer_taches_fermees($id_projet, $version) {
 function atelier_init_spx($prefixe) {
 
 	lire_fichier(_DIR_PLUGINS.'spixplorer/config/spx_conf.php',&$contenu);
-	$contenu = preg_replace('#(\$GLOBALS\[\'spx\'\]\["home_dir"\]) \= "(.*)"#','${1} = "../plugins/'.$prefixe.'"',$contenu);
+	$contenu = preg_replace('#(\$GLOBALS\[\'spx\'\]\["home_dir"\]) \= "(.*)"#','${1} = "plugins/'.$prefixe.'"',$contenu);
 	ecrire_fichier(_DIR_PLUGINS.'spixplorer/config/spx_conf.php',$contenu);
 }
 ?>
