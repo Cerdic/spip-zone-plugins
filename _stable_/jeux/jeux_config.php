@@ -104,6 +104,9 @@ $jeux_caracteristiques = array(
 
 );
 
+// on envoie les caracteristiques aux plugins pour pouvoir ajouter des jeux tierces
+$jeux_caracteristiques = pipeline('jeux_caracteristiques', $jeux_caracteristiques);
+
 // addition de tous les separateurs
 $temp = array();
 foreach($jeux_caracteristiques['SEPARATEURS'] as $sep) $temp=array_merge($temp, $sep);
