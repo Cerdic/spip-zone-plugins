@@ -32,6 +32,11 @@ function exec_admin_bouquinerie_dist() {
 
 
 function exec_admin_bouquinerie_args($rapport='') {
+
+/*	include_spip('base/create');
+	include_spip('base/abstract_sql');
+	creer_base();*/
+
 	admin_bouquinerie($rapport);
 }
 

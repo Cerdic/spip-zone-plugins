@@ -26,7 +26,7 @@ function action_rechercher_image_dist() {
 	$arg = $securiser_action();
 
 	$id_livre = $arg;
-	$r = sql_fetsel('id_reference','spip_livres',"id_livre=$id_livre");
+	$r = sql_fetsel('id_reference,titre','spip_livres',"id_livre=$id_livre");
 	
 	$url_price = 'http://www.priceminister.com/offer/buy/'.$r['id_reference'].'/';
 	if ($page = file_get_contents($url_price)) {
@@ -36,9 +36,15 @@ function action_rechercher_image_dist() {
 			$tab_2 = preg_split('#</div>#',$tab[1]);
 
 			if (preg_match('#src="(.+?)"#',$tab_2[0],$m) > 0 ) {
-
+				include_spip('inc/ajouter_documents'); // pour l'ajout de documents
 				sql_updateq('spip_livres',array('url_image' => $m[1]),"id_livre=$id_livre");
 				// gerer l'upload et document distant
+
+				//upload
+				$fichier = 'img_'.$r['titre'].'.jpg';
+				$mode = "image";
+				$ajouter_document = charger_fonction('ajouter_documents','inc');
+				$ajouter_document($m[1],$fichier,"livre",$id_livre,$mode,$id_document,$documents_actifs);
 			}
 		}
 	}

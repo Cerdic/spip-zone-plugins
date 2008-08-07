@@ -107,15 +107,20 @@ $tables_principales['spip_mots_livres'] =
   array('field' => &$mots_livres, 'key' => &$mots_livres_key);
 
 
-//-- Jointures ---------------------------------------------------------
+//-- Table DOCUMENTS_LIVRES -------------------------------------------
 
-//$tables_jointures['spip_catalogues'][] = 'spip_livres';
-//$tables_jointures['spip_projets'][]= 'taches';
-//$tables_jointures['spip_taches'][] = 'projets';
+$documents_livres = array(
+  "id_document"		=> "bigint(21) DEFAULT '0' NOT NULL",
+  "id_livre"		=> "bigint(21) DEFAULT '0' NOT NULL"
+);
 
+$documents_livres_key = array(
+  "PRIMARY KEY" => "id_document, id_livre",
+  "KEY id_livre" => "id_livre"
+);
 
-
-//$tables_jointures['spip_livres_mots'][] = 'mots';
+$tables_principales['spip_documents_livres'] =
+  array('field' => &$documents_livres, 'key' => &$documents_livres_key);
 
 //----------------------------------------------------------------------
 //-- TABLES AUXILLIAIRES -----------------------------------------------
@@ -136,8 +141,6 @@ $livres_catalogues_key = array(
 
 $tables_auxiliaires['spip_livres_catalogues'] =
   array('field' => &$livres_catalogues, 'key' => &$livres_catalogues_key);
-  
-
 
 //-- table des table et table primary ------------------------------------
 
@@ -148,19 +151,27 @@ global $tables_relations;
 $table_primary['livres']='id_livre';
 $table_primary['catalogues']='id_catalogue';
 $table_primary['mots_livres']='id_mot, id_livre';
+$table_primary['documents_livres']='id_document, id_livre';
 
 $table_des_tables['livres']='livres';
 $table_des_tables['catalogues']='catalogues';
 $table_des_tables['mots_livres']='mots_livres';
+$table_des_tables['documents_livres']='documents_livres';
 $table_des_tables['livres_catalogues']='livres_catalogues';
 
 $tables_jointures['spip_mots'][]= 'mots_livres';
 $tables_jointures['spip_livres'][]= 'mots_livres';
 
+$tables_jointures['spip_documents'][]= 'documents_livres';
+$tables_jointures['spip_livres'][]= 'documents_livres';
 
 $exceptions_des_tables['mots']['id_livre']=array('spip_mots_livres', 'id_livre');
+$exceptions_des_tables['documents']['id_livre']=array('spip_documents_livres', 'id_livre');
 
 $tables_relations['mots']['id_livre']='mots_livres';
 $tables_relations['livres']['id_mot']='mots_livres';
+
+$tables_relations['documents']['id_livre']='documents_livres';
+$tables_relations['livres']['id_document']='documents_livres';
 
 ?>
