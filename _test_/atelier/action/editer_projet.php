@@ -38,6 +38,14 @@ function action_editer_projet_dist() {
 	// Enregistre l'envoi dans la BD
 	$err = projets_set($id_projet);
 
+	// Ajoute ou retire les auteurs
+	$q = sql_select('id_auteur','spip_auteurs');
+	while ($r = sql_fetch($q)) {
+		$check = _request('auteur_'.$r['id_auteur']);
+		if ($check == 'yes') sql_insertq('spip_auteurs_projets',array('id_auteur' => $r['id_auteur'],'id_projet' => $id_projet));
+		else sql_delete('spip_auteurs_projets','id_projet='.$id_projet.' AND id_auteur='.$r['id_auteur']);
+	}
+
 	// création de l'arborescence
 	if (_request('arbo')) {
 		switch (_request('type')) {

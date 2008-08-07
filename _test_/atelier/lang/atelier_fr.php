@@ -132,6 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array (
 'titre_infos' => 'Informations',
 'titre_objets' => 'Cr&eacute;ation d\'objets',
 'titre_plugin_xml' => 'Gestion du fichier plugin.xml',
+'titre_projet_choix_auteur' => 'Choississez les auteurs participants &agrave; ce projet.',
 'titre_projets' => 'Lecture d\'un projet',
 'titre_projets_edit' => 'Edition d\'un projet',
 'titre_roadmap' => 'Feuille de route',

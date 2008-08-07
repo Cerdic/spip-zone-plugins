@@ -122,6 +122,21 @@ $taches_projets_key = array(
 $tables_auxiliaires['spip_taches_projets'] =
   array('field' => &$taches_projets, 'key' => &$taches_projets_key);
 
+
+//-- Table AUTEURS_PROJETS ------------------------------------------
+$auteurs_projets = array(
+  "id_auteur"			=> "bigint(21) DEFAULT '0' NOT NULL",
+  "id_projet"			=> "bigint(21) DEFAULT '0' NOT NULL"
+);
+
+$auteurs_projets_key = array(
+  "PRIMARY KEY" => "id_auteur, id_projet",
+  "KEY id_projet" => "id_projet"
+);
+
+$tables_auxiliaires['spip_auteurs_projets'] =
+  array('field' => &$auteurs_projets, 'key' => &$auteurs_projets_key);
+
 //-- table des table et table primary ------------------------------------
 
 global $table_des_tables, $table_primary;

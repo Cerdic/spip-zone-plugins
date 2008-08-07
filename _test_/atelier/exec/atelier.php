@@ -35,8 +35,8 @@ function exec_atelier_args($id_projet,$rapport='') {
 	$projet_select = charger_fonction('projet_select','inc');
 	$row = $projet_select($id_projet?$id_projet:$defaut);
 
-	include_spip('action/atelier_installer_base');
-	atelier_installer_base();
+/*	include_spip('action/atelier_installer_base');
+	atelier_installer_base();*/
 
 	atelier($id_projet,$row,$defaut,$rapport);
 }
@@ -55,7 +55,7 @@ function atelier($id_projet,$row,$defaut,$rapport='') {
 	$verifier_base = atelier_verifier_base();
 	$verifier_subversion = atelier_verifier_subversion();
 
-	atelier_debut_gauche($nom_page);
+	atelier_debut_gauche();
 
 		if ($verifier_base) {
 			$projets[] = '<a href="'.generer_url_ecrire('projets_edit','new=oui').'">'._T('atelier:nouveau_projet').'</a>';
@@ -73,32 +73,31 @@ function atelier($id_projet,$row,$defaut,$rapport='') {
 
 		atelier_cadre_infos();
  
-	atelier_debut_droite($nom_page);
-
-	if ($rapport != '') {
-		echo debut_cadre_trait_couleur('',true);
-		echo '<p>'.$rapport.'</p>';
-		echo fin_cadre_trait_couleur(true);
-	}
-
-	echo debut_cadre_trait_couleur('',true);
-	echo '<p>'._T('atelier:presentation').'</p>';
-	if(!$verifier_subversion) echo '<p>'._T('atelier:installer_svn').'</p>';
-	echo fin_cadre_trait_couleur(true);
-
-	if (!$verifier_base) {
-		echo debut_boite_alerte();
-		echo '<p>'._T('atelier:installer_base').'</p>';
-		$installer_base = charger_fonction('atelier_installer_base','inc');
-		echo $installer_base();
-		echo fin_boite_alerte();
-	}
-
-
-
-	echo liste_projets();
-
 	atelier_fin_gauche();
+	atelier_debut_droite();
+
+		if ($rapport != '') {
+			echo debut_cadre_trait_couleur('',true);
+			echo '<p>'.$rapport.'</p>';
+			echo fin_cadre_trait_couleur(true);
+		}
+
+		echo debut_cadre_trait_couleur('',true);
+		echo '<p>'._T('atelier:presentation').'</p>';
+		if(!$verifier_subversion) echo '<p>'._T('atelier:installer_svn').'</p>';
+		echo fin_cadre_trait_couleur(true);
+
+		if (!$verifier_base) {
+			echo debut_boite_alerte();
+			echo '<p>'._T('atelier:installer_base').'</p>';
+			$installer_base = charger_fonction('atelier_installer_base','inc');
+			echo $installer_base();
+			echo fin_boite_alerte();
+		}
+
+		echo liste_projets();
+
+	atelier_fin_droite();
 	atelier_fin_page();  
 }
 

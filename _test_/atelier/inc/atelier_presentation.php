@@ -23,19 +23,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function atelier_debut_page($titre,$nom_page) {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page($titre, "atelier", $nom_page);
+	echo $commencer_page($titre, "atelier", $nom_page,'',false);
 
 	include_spip('inc/plugin');
 	$info = plugin_get_infos('atelier');
 
 	echo "<br /><br />"
 		."<div style='display : block;
+		 width : 90%;
+		 min-height : 700px;
 		 padding : 10px 10px 10px 10px;
-		 margin : 0px 200px 0px 200px;
+		 margin : 0px 0px 0px 10px;
 		 background-color: #fff;
   		 border: 2px solid #000;
 		 float : left;
 		 '>";
+	echo '<span style="float:right;"><a href="'.generer_url_ecrire("").'">Interface SPIP</a></span>';
 
 	echo "<div style='display: block;
 		 font-size: 1.6em; 
@@ -57,17 +60,26 @@ function atelier_fin_page() {
 	echo fin_page();
 }
 
-function atelier_debut_gauche($nom_page) {
-	echo debut_gauche($nom_page,true);
+function atelier_debut_gauche() {
+	echo '<br /><div style="width: 300px;position:absolute;">';
+	//echo debut_gauche($nom_page,true);
+}
+
+function atelier_debut_droite() {
+	echo '<div style="margin:0px 0px 0px 310px;text-align:left;">';
+//	echo debut_droite($nom_page,true);
 }
 
 function atelier_fin_gauche() {
-	echo fin_gauche();
+	echo '</div>';
+	//echo fin_gauche();
 }
 
-function atelier_debut_droite($nom_page) {
-	echo debut_droite($nom_page,true);
+function atelier_fin_droite() {
+	echo '</div>';
 }
+
+
 
 function debut_liste() {
 	return "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
@@ -134,7 +146,7 @@ function atelier_cadre_couleur($titre, $lignes) {
 }
 function cadre_atelier($titre,$lignes) {
 	if (version_compare($GLOBALS['spip_version_code'],'2.0000','>')) // SPIP 2.0
-		echo debut_cadre_trait_couleur('',true,'','<span style="color:#000;">'.$titre.'</span>');
+		echo debut_cadre_trait_couleur('',true,'',$titre);
 	else 
 		echo debut_cadre_trait_couleur('',true,'',$titre);
 
@@ -151,7 +163,7 @@ function atelier_cadre_infos() {
 	$info = plugin_get_infos('atelier');
 
 	cadre_atelier(_T('atelier:titre_infos'),array(
-		'<a href="http://spip-contrib.net/spip.php?page=article2780">'._T('atelier:documentation'). '</a>',
+		'<a href="http://www.spip-contrib.net/Plugin-Atelier">'._T('atelier:documentation'). '</a>',
 		'<a href="http://doc.spip.org/">'._T('atelier:documentation_code'). '</a>',
 		'Plugin Atelier '. $info['version'].'<br />'. _T('atelier:licence')
 	));

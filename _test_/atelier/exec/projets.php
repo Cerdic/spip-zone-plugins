@@ -39,13 +39,14 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 	include_spip('inc/atelier_presentation');
 	include_spip('inc/atelier_autoriser');
 	include_spip('inc/atelier_plugins');
+	include_spip('inc/atelier_fonctions');
 	include_spip('inc/atelier_svn');
 	include_spip('inc/plugin');
 
 	$nom_page = atelier_debut_page(_T('atelier:titre_projets'),'projets');
 	if (!atelier_autoriser()) exit;
 
-	atelier_debut_gauche($nom_page);
+	atelier_debut_gauche();
 
 		atelier_cadre_raccourcis();
 
@@ -89,7 +90,8 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 
 		atelier_cadre_infos();
 
-	atelier_debut_droite($nom_page);
+	atelier_fin_gauche();
+	atelier_debut_droite();
 
 		if ($rapport != '') {
 			echo debut_cadre_trait_couleur('',true);
@@ -108,18 +110,35 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 
 		include_spip('inc/atelier_stats');
 		$stats = projet_get_stats($id_projet);
-		echo '<div style="height : 60px;
+		$participants = atelier_recuperer_auteurs_projets($id_projet);
+		if (!$participants) $participants="aucun";
+ 
+		atelier_init_spx($row['prefixe']);
+
+		echo '<div style="height : 80px;
 				margin-bottom: 10px;
 				margin-top: -80px;
-				margin-left: 250px;
+				margin-left: 150px;
 				padding-left: 5px;
 				border:1px dotted #000;">'
-			.'<b>Statistiques :</b><br />'
+
+
+			.'<div style="float:left;margin-right:10px;">'
+			.'<b>Statistiques</b><br /><br />'
 			.$stats['taches_ouvertes'].' taches ouvertes.<br />'
 			.$stats['taches_fermees'].' taches fermées.<br />'
 			.'<a href="'.generer_url_ecrire('atelier_roadmap','id_projet='.$id_projet).'">'._T('atelier:voir_feuille_de_route').'</a>'
+			.'</div>'
+
+			.'<div style="float:left;margin-right:10px;">'
+			.'<b>Participants</b><br /><br />'
+			.$participants
+			.'</div>'
+			.'<div>'
+			.'<b>Explorateur</b><br />'
+			.'<a href="'.generer_url_ecrire('spixplorer').'"><img src="'.find_in_path("spixplorer.png").'" /></a>'		
+			.'</div>'
 			.'</div>';
-		
 		echo debut_cadre_couleur('',true);
 
 		echo '<b>'._T('atelier:texte_descriptif').' :</b><br />'
@@ -142,8 +161,7 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 			else echo '<p>'._T('atelier:droit_insuffisant').'</p>';
 		}
 
-		include_spip('inc/atelier_explorer');
-		atelier_explorer($row['prefixe'],$id_projet,$row['type'],$opendir,$nom_page);
+
 		echo liste_bugs($row['id_projet']);
 		echo liste_taches_ouvertes($row['id_projet']);
 
@@ -154,7 +172,7 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 		echo fin_cadre_trait_couleur(true);
 
 
-	atelier_fin_gauche();
+	atelier_fin_droite();
 	atelier_fin_page();
 }
 

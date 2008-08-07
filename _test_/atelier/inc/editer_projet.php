@@ -26,6 +26,7 @@ function inc_editer_projet_dist($new,$id_projet=0,$row=array()) {
 	$form = "<input type='hidden' name='editer_projet' value='oui' />\n"
 	. editer_projet_titre($row['titre'])
 	. editer_projet_descriptif($row['descriptif'])
+	. editer_projet_auteur($row['id_projet'])
 	. editer_projet_type($row['type'])
 	. editer_projet_prefixe($row['prefixe']);
 	if ($new == "oui")
@@ -56,11 +57,25 @@ function editer_projet_titre($titre) {
 function editer_projet_descriptif($descriptif) {
 	return ("\n<p>" . _T('atelier:texte_descriptif') .
 		"<br />\n" . 
-		"<textarea name='descriptif' class='forml' rows='2' cols='40'>" .
+		"<textarea name='descriptif' class='forml' rows='10' cols='40'>" .
 		entites_html($descriptif) .
 		"</textarea></p>");
 }
 
+function editer_projet_auteur($id_projet) {
+	$q = sql_select('id_auteur, nom','spip_auteurs');
+	while ($r = sql_fetch($q)) {
+		$a = sql_fetsel('id_auteur','spip_auteurs_projets','id_projet='.$id_projet.' AND id_auteur='.$r["id_auteur"]);
+		if ($a['id_auteur']) $opt .= '<input type="checkbox" checked="yes" name="auteur_'.$r['id_auteur'].'" value="yes">'.$r['nom'].'</input>';
+		else $opt .= '<input type="checkbox" name="auteur_'.$r['id_auteur'].'" value="yes">'.$r['nom'].'</input>';
+	}
+
+	$msg = _T('atelier:titre_projet_choix_auteur');
+	$logo = "racine-site-24.gif";
+
+	return debut_cadre_couleur($logo, true, "", $msg) . $opt . fin_cadre_couleur(true);
+
+}
 
 function editer_projet_type($type) {
 	$opt = '<select name="type" value="'.$type.'">';

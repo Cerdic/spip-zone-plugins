@@ -45,6 +45,16 @@ function atelier_recuperer_taches($id_projet, $version) {
 	return $taches;
 }
 
+function atelier_recuperer_auteurs_projets($id_projet) {
+	$auteurs = '';
+	$q = sql_select('id_auteur','spip_auteurs_projets',"id_projet=$id_projet");
+	while ($r = sql_fetch($q)) {
+		$a = sql_fetsel('nom','spip_auteurs','id_auteur='.$r['id_auteur']);
+		$auteurs .= $a['nom'] .' ';
+	}
+	return $auteurs;
+}
+
 function atelier_recuperer_taches_ouvertes($id_projet, $version) {
 	$taches = array();
 	$q = sql_select('id_tache, titre, etat',
@@ -69,5 +79,12 @@ function atelier_recuperer_taches_fermees($id_projet, $version) {
 	while ($r = sql_fetch($q))
 		$taches[] = '<a href="'.generer_url_ecrire('taches','id_tache='.$r['id_tache']).'">'.$r['titre'].'</a>';
 	return $taches;
+}
+
+function atelier_init_spx($prefixe) {
+
+	lire_fichier(_DIR_PLUGINS.'spixplorer/config/spx_conf.php',&$contenu);
+	$contenu = preg_replace('#(\$GLOBALS\[\'spx\'\]\["home_dir"\]) \= "(.*)"#','${1} = "../plugins/'.$prefixe.'"',$contenu);
+	ecrire_fichier(_DIR_PLUGINS.'spixplorer/config/spx_conf.php',$contenu);
 }
 ?>

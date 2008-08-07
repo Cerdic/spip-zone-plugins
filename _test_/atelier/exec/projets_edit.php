@@ -44,12 +44,15 @@ function projet_edit($id_projet,$new,$row) {
 	$nom_page = atelier_debut_page(_T('atelier:titre_projets_edit'),'projets_edit');
 	if (!atelier_autoriser()) exit;
 
-	atelier_debut_gauche($nom_page);
+	atelier_debut_gauche();
 
-		atelier_cadre_raccourcis();
+		atelier_cadre_raccourcis(array(
+			'<a href="'.generer_url_ecrire('projets','id_projet='.$row['id_projet']).'">'._T('atelier:revenir_projet').'</a>'
+		));
 		atelier_cadre_infos();
 
-	atelier_debut_droite($nom_page);
+	atelier_fin_gauche();
+	atelier_debut_droite();
 
 		atelier_debut_cadre_form();
 		echo _T('atelier:modifier_projet') .'&nbsp;:<br />'.gros_titre($row['titre'],'',false);
@@ -57,7 +60,7 @@ function projet_edit($id_projet,$new,$row) {
 		echo $editer_projet($new, $id_projet, $row);
 		atelier_fin_cadre_form();
 
-	atelier_fin_gauche();
+	atelier_fin_droite();
 	atelier_fin_page();
 }
 ?>

@@ -40,12 +40,13 @@ function atelier_svn($id_projet,$row,$opendir='') {
 	$nom_page = atelier_debut_page(_T('atelier:page_svn'),'atelier_svn');
 	if (!atelier_autoriser()) exit;
 
-	atelier_debut_gauche($nom_page);
+	atelier_debut_gauche();
 		atelier_cadre_raccourcis(array(
 			'<a href="'.generer_url_ecrire('projets','id_projet='.$row['id_projet']).'">'._T('atelier:revenir_projet').'</a>'
 		));
 		atelier_cadre_infos();
-	atelier_debut_droite($nom_page);
+	atelier_fin_gauche();
+	atelier_debut_droite();
 
 		if ($id_projet) {
 //			echo debut_cadre_trait_couleur('',true);
@@ -88,7 +89,7 @@ function atelier_svn($id_projet,$row,$opendir='') {
 			echo fin_cadre_trait_couleur(true);
 		}
 
-	atelier_fin_gauche();
+	atelier_fin_droite();
 	atelier_fin_page();  
 }
 

@@ -43,7 +43,7 @@ function atelier_lang($id_projet,$row,$fichier='') {
 
 	$atelier_lang = charger_fonction('atelier_lang','inc');
 
-	atelier_debut_gauche($nom_page);
+	atelier_debut_gauche();
 
 		atelier_cadre_raccourcis(array(
 			'<a href="'.generer_url_ecrire('projets','id_projet='.$row['id_projet']).'">'._T('atelier:revenir_projet').'</a>'
@@ -70,7 +70,8 @@ function atelier_lang($id_projet,$row,$fichier='') {
 
 		atelier_cadre_infos();
 
-	atelier_debut_droite($nom_page);
+	atelier_fin_gauche();
+	atelier_debut_droite();
 
 		echo debut_cadre_trait_couleur('',true);
 
@@ -107,7 +108,7 @@ function atelier_lang($id_projet,$row,$fichier='') {
 		}
 
 		echo fin_cadre_trait_couleur(true);
-	atelier_fin_gauche();
+	atelier_fin_droite();
 	atelier_fin_page();
 
 	
