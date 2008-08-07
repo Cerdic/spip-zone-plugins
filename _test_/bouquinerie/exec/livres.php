@@ -75,11 +75,13 @@ function livres($id_livre,$row) {
 		 echo '<img src="'.$row['url_image'].'" /></td><td>';
 	}
 
+	
 	if ($row['auteur']) echo _T('bouq:texte_auteur'). '&nbsp;:&nbsp;' . $row['auteur'] . '<br />';
 	if ($row['id_reference']) {
 		echo _T('bouq:texte_reference') . '&nbsp;:&nbsp;' . $row['id_reference'];
 		if ($row['type_import'] == 'priceminister')
 			echo ' / <a href="http://www.priceminister.com/offer/buy/'.$row['id_reference'].'/">lien priceminister</a>';
+			echo ' / <a href="'.generer_action_auteur('rechercher_image',$row['id_livre']).'">Rechercher une image</a>';
 		echo '<br />';
 	}
 	if ($row['illustrateur']) echo _T('bouq:texte_illustrateur') . '&nbsp;:&nbsp;' . $row['illustrateur'] . '<br />';
