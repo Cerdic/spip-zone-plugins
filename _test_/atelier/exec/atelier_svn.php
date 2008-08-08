@@ -56,29 +56,19 @@ function atelier_svn($id_projet,$row,$opendir='') {
 				$fichiers = atelier_recuperer_fichier_add($output);
 				$projet_svn = charger_fonction('atelier_svn','inc');
 
-				echo '<p>'._T('atelier:explication_status_svn').'</p>';
-				/*echo '<div style="height : 80px;
-						margin-bottom: 10px;
-						margin-top: -60px;
-						margin-left: 250px;
-						padding-left: 5px;
-						border:1px dotted #000;">';*/
-
-
 				echo '<div style="width : 500px;float:left;margin-right:10px;">';
 					cadre_atelier(' svn status -u -v ' . $row['prefixe'],$output);
 				echo '</div>';
 
+				echo '<p>'._T('atelier:explication_status_svn').'</p>';
+				echo '<hr />';
 
-				echo 'Liste des fichiers à ajouter au projet ...<br />';
 				echo $projet_svn('add',array(
 					'nom' => $row['prefixe'],
 					'id_projet' => $id_projet,
 					'fichiers' => $fichiers
 					));
 				echo '<hr />';
-
-
 
 				echo _T('atelier:update_svn');
 					echo $projet_svn('update',array(

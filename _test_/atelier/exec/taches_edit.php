@@ -45,12 +45,15 @@ function tache_edit($id_tache,$new,$id_projet,$row) {
 	$nom_page = atelier_debut_page(_T('atelier:titre_taches_edit'),'taches_edit');
 	if (!atelier_autoriser()) exit;
 
-	atelier_debut_gauche($nom_page);
+	atelier_debut_gauche();
 
-		atelier_cadre_raccourcis();
+		atelier_cadre_raccourcis(array(
+			'<a href="'.generer_url_ecrire('projets','id_projet='.$row['id_projet']).'">'._T('atelier:revenir_projet').'</a>'
+		));
 		atelier_cadre_infos();
 
-	atelier_debut_droite($nom_page);
+	atelier_fin_gauche();
+	atelier_debut_droite();
 
 		atelier_debut_cadre_form();
 
@@ -59,7 +62,7 @@ function tache_edit($id_tache,$new,$id_projet,$row) {
 		echo $editer_tache($new, $id_tache, $row, $id_projet);
 		atelier_fin_cadre_form();
 
-	atelier_fin_gauche();
+	atelier_fin_droite();
 	atelier_fin_page();
 }
 ?>

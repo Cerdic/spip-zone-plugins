@@ -92,34 +92,26 @@ function atelier_lire_fichier_langue($fichier) {
 }
 
 function atelier_creer_contenu_langue($c) {
-	$contenu = '';
+	$contenu = array();
 	if (array_multisort(array_keys($c),SORT_STRING,$c))
 		foreach($c as $key => $value)
-			$contenu .= '\''.$key.'\' => \''.$value.'\','."\n";
+			$contenu[strtoupper($key[0])][] = "\t".'\''.$key.'\' => \''.$value.'\','."\n";
 	return $contenu;
 }
 
+// contenu array[A (array=> lignes) B C ...]
 function atelier_ecrire_fichier_langue($fichier,$contenu) {
-	// on ajoute les commentaires repére ?
-	$debut_squel = 
-'<?php 
+	$squel = '';$texte='';
+	lire_fichier(_DIR_PLUGINS .'atelier/gabarits/lang.txt',&$squel);
 
-// Fichier generer par le plugin Atelier
-
-if(!defined("_ECRIRE_INC_VERSION")) return; 
-
-$GLOBALS[$GLOBALS[\'idx_lang\']] = array (
-
-';
-
-	$fin_squel = 
-'
-
-);
-
-?>';
-	$contenu = $debut_squel . $contenu . $fin_squel;
-	ecrire_fichier($fichier,$contenu);
+	foreach ($contenu as $lettre => $lignes) {
+		$texte .= "\n\t// $lettre\n\n";
+		foreach ($lignes as $ligne) {
+			$texte .= $ligne;
+		}
+	}
+	$squel = preg_replace('#\[definition\]#',$texte,$squel);
+	ecrire_fichier($fichier,$squel);
 }
 
 function atelier_edit_lang($module,$lang,$type) {
@@ -189,18 +181,9 @@ function text_to_php($value) {
 
 function atelier_creer_fichier_lang($type,$prefixe,$lang) {
 
-	$squel = 
-'<?php 
+	$squel = '';
+	lire_fichier(_DIR_PLUGINS .'atelier/gabarits/lang.txt',&$squel);
 
-// Fichier generer par le plugin Atelier
-
-if(!defined("_ECRIRE_INC_VERSION")) return; 
-
-$GLOBALS[$GLOBALS[\'idx_lang\']] = array (
-
-);
-
-?>';
 	if ($type == 'plugin') $fichier = _DIR_PLUGINS.$prefixe.'/lang/'.$prefixe.'_'.$lang.'.php';
 	else {
 		global $repertoire_squelettes_alternatifs; // plugin switcher

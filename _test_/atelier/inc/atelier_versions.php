@@ -23,7 +23,7 @@ function inc_atelier_versions_dist($id_projet) {
 
 	$form = "<input type='hidden' name='atelier_versions' value='oui' />\n"
 	. 'Ajouter une version à votre projet : <br /><input type="text" name="version" />'
-	. ("<div align='center'><input class='fondo' type='submit' value='"
+	. ("<div align='left'><input class='fondo' type='submit' value='"
 	. _T('atelier:bouton_ajouter_version')
 	. "' /></div>");
 

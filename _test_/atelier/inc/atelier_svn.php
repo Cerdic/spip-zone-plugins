@@ -68,8 +68,8 @@ function atelier_recuperer_fichier_add($output) {
 function atelier_add_svn($arg) {
 	if (!$arg['fichiers']) return;
 	$form = "<input type='hidden' name='add_projet' value='oui' />\n"
-	. '<input type="hidden" name="nom" value="'.$arg['nom'].'" />';
-
+	. '<input type="hidden" name="nom" value="'.$arg['nom'].'" />'
+	._T('atelier:titre_add_projet').'<br />';
 	foreach ($arg['fichiers'] as $fichier) {
 		$n = preg_replace('/\//','_',$fichier);
 		$n = preg_replace('/\./','_',$n);

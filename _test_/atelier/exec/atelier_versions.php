@@ -38,7 +38,7 @@ function atelier_versions($id_projet,$versions) {
 	$nom_page = atelier_debut_page(_T('atelier:titre_versions'),'atelier_versions');
 	if (!atelier_autoriser()) exit;
 
-	atelier_debut_gauche($nom_page);
+	atelier_debut_gauche();
 
 		atelier_cadre_raccourcis(array(
 			'<a href="'.generer_url_ecrire('projets','id_projet='.$id_projet).'">'._T('atelier:revenir_projet').'</a>',
@@ -47,7 +47,8 @@ function atelier_versions($id_projet,$versions) {
 
 		atelier_cadre_infos();
 
-	atelier_debut_droite($nom_page);
+	atelier_fin_gauche();
+	atelier_debut_droite();
 
 		$contenu = array();
 
@@ -56,7 +57,7 @@ function atelier_versions($id_projet,$versions) {
 		echo $ajouter_version($id_projet);
 
 
-	atelier_fin_gauche();
+	atelier_fin_droite();
 	atelier_fin_page();
 }
 
