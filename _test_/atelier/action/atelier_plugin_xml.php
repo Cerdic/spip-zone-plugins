@@ -42,24 +42,46 @@ function action_atelier_plugin_xml_dist() {
 	$options = _request('options');
 	$fonctions = _request('fonctions');
 	$prefixe = _request('prefixe');
+	$new_necessite_id = _request('new_necessite_id');
+	$new_necessite_version = _request('new_necessite_version');
+
+	include_spip('inc/xml');
+	$fichier = _DIR_PLUGINS.$prefixe.'/plugin.xml';
+	$arbre = spip_xml_load($fichier);
 
 	$gabarit = _DIR_PLUGINS.'atelier/gabarits/plugin.txt';
 	lire_fichier($gabarit,&$plugin_xml);
-
-	$plugin_xml = preg_replace('#\[description_projet\]#',$description,$plugin_xml); // attetion formater le descriptif (accents)
-	$plugin_xml = preg_replace('#\[nom_projet\]#',$nom,$plugin_xml);
-	$plugin_xml = preg_replace('#\[auteur_projet\]#',$auteur,$plugin_xml);
+	include_spip('inc/atelier_fonctions');
+	$plugin_xml = preg_replace('#\[description_projet\]#',text_to_plugin($description),$plugin_xml);
+	$plugin_xml = preg_replace('#\[nom_projet\]#',text_to_plugin($nom),$plugin_xml);
+	$plugin_xml = preg_replace('#\[auteur_projet\]#',text_to_plugin($auteur),$plugin_xml);
 	$plugin_xml = preg_replace('#\[version_projet\]#',$version,$plugin_xml);
 	$plugin_xml = preg_replace('#\[etat_projet\]#',$etat,$plugin_xml);
 	$plugin_xml = preg_replace('#\[lien_projet\]#',$lien,$plugin_xml);
 	$plugin_xml = preg_replace('#\[options_projet\]#',$options,$plugin_xml);
 	$plugin_xml = preg_replace('#\[fonctions_projet\]#',$fonctions,$plugin_xml);
 	$plugin_xml = preg_replace('#\[prefixe_projet\]#',$prefixe,$plugin_xml);
+	$plugin_xml = preg_replace('#\[install_projet\]#',"./",$plugin_xml);
+
+	$keys = $arbre['plugin'][0];
+	$dependances = '';
+	foreach ($keys as $key => $value) {
+		if (preg_match("#necessite\ id='(.*)'\ version='\[(.*);\]'#",$key,$match))
+			if (_request('supprimer_dep_'.$match[1]) != 'yes')
+				$dependances .= '<necessite id=\''.$match[1].'\' version=\'['.$match[2].';]\' />'."\n";
+	}
+
+	if ($new_necessite_id && $new_necessite_version)
+		$plugin_xml = preg_replace('#\[necessite\]#',$dependances."<necessite id='$new_necessite_id' version='[$new_necessite_version;]' />",$plugin_xml);
+	else
+		$plugin_xml = preg_replace('#\[necessite\]#',$dependances,$plugin_xml);
+
+
 
 	$fichier = _DIR_PLUGINS.$prefixe.'/plugin.xml';
 	ecrire_fichier($fichier,$plugin_xml);
 
-        $redirect = parametre_url(urldecode(generer_url_ecrire('projets')),
+        $redirect = parametre_url(urldecode(generer_url_ecrire('atelier_plugin_xml')),
 				'id_projet', $id_projet, '&') . $err;
 
 	include_spip('inc/headers');

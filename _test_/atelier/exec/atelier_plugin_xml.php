@@ -96,12 +96,23 @@ function atelier_plugin_xml($id_projet,$arbre) {
 		echo 'Options : ' .$arbre['plugin'][0]['options'][0] . '<br />';
 		echo 'Fonctions : ' .$arbre['plugin'][0]['fonctions'][0] . '<br />';
 		echo 'Prefixe : ' .$arbre['plugin'][0]['prefix'][0] . '<br />';
+
+		$keys = $arbre['plugin'][0];
+		$dependances = array();
+		foreach ($keys as $key => $value) {
+			if (preg_match("#necessite\ id='(.*)'\ version='\[(.*);\]'#",$key,$match))
+				$dependances[] = array('id' => $match[1],'version' => $match[2]);
+		}
+		foreach ($dependances as $necessite) {
+			echo 'Dependances : ' .$necessite['id']. ' version '. $necessite['version'].'<br />';
+		}
+
 		echo fin_cadre_trait_couleur(true);
 
 		echo debut_cadre_couleur('',true);
 			echo _T('atelier:modifier_plugin_xml') .'&nbsp;:<br />'.gros_titre('Plugin.xml','',false);
 			$editer_plugin_xml = charger_fonction('atelier_plugin_xml','inc');
-			echo $editer_plugin_xml($id_projet,$arbre);
+			echo $editer_plugin_xml($id_projet,$arbre,$dependances);
 		echo fin_cadre_couleur(true);
 
 	atelier_fin_droite();

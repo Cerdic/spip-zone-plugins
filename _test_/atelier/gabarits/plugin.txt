@@ -4,11 +4,14 @@
 	<version>[version_projet]</version>
 	<auteur>[auteur_projet]</auteur>
 	<etat>[etat_projet]</etat>
-	<description>[description_projet]</description>
+	<description>
+[description_projet]
+	</description>
 	<lien>[lien_projet]</lien>
 	<options>[options_projet]</options>
 	<fonctions>[fonctions_projet]</fonctions>
 	<prefix>[prefixe_projet]</prefix>
 	<install>[install_projet]</install>
 	<chemin dir='' />
+	[necessite]
 </plugin>

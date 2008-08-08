@@ -115,6 +115,7 @@ function atelier_ecrire_fichier_langue($fichier,$contenu) {
 }
 
 function atelier_edit_lang($module,$lang,$type) {
+	include_spip('inc/atelier_fonctions');
 	if ($type == 'plugin') $fichier = _DIR_PLUGINS.$module.'/lang/'.$module.'_'.$lang.'.php';
 	else {
 		global $repertoire_squelettes_alternatifs; // plugin switcher
@@ -137,6 +138,7 @@ function atelier_edit_lang($module,$lang,$type) {
 }
 
 function atelier_ajout_lang($module,$lang,$type,$enreg) {
+	include_spip('inc/atelier_fonctions');
 	if ($type == 'plugin') $fichier = _DIR_PLUGINS.$module.'/lang/'.$module.'_'.$lang.'.php';
 	else {
 		global $repertoire_squelettes_alternatifs; // plugin switcher
@@ -151,33 +153,7 @@ function atelier_ajout_lang($module,$lang,$type,$enreg) {
 	atelier_ecrire_fichier_langue($fichier,$contenu);
 }
 
-// prepare un texte pour inclusion dans fichier php
-function text_to_php($value) {
-	$value = preg_replace("#'#","\'",$value);
-	$value = preg_replace("#é#","&eacute;",$value);
-	$value = preg_replace("#è#","&egrave;",$value);
-	$value = preg_replace("#à#","&agrave;",$value);
-	$value = preg_replace("#ê#","&ecirc;",$value);
-	$value = preg_replace("#â#","&acirc;",$value);
-	$value = preg_replace("#î#","&icirc;",$value);
-	$value = preg_replace("#ï#","&iuml;",$value);
-	$value = preg_replace("#œ#","&oelig;",$value);
-	$value = preg_replace("#ù#","&ugrave;",$value);
-	$value = preg_replace("#û#","&ucirc;",$value);
-	$value = preg_replace("#ç#","&ccedil;",$value);
-	$value = preg_replace("#É#","&Eacute;",$value);
-	$value = preg_replace("#È#","&Egrave;",$value);
-	$value = preg_replace("#À#","&Agrave;",$value);
-	$value = preg_replace("#Ê#","&Ecirc;",$value);
-	$value = preg_replace("#Â#","&Acirc;",$value);
-	$value = preg_replace("#Î#","&Icirc;",$value);
-	$value = preg_replace("#Ï#","&Iuml;",$value);
-	$value = preg_replace("#Œ#","&OElig;",$value);
-	$value = preg_replace("#Ù#","&Ugrave;",$value);
-	$value = preg_replace("#Û#","&Ucirc;",$value);
-	$value = preg_replace("#Ç#","&Ccedil;",$value);
-	return $value;
-}
+
 
 function atelier_creer_fichier_lang($type,$prefixe,$lang) {
 

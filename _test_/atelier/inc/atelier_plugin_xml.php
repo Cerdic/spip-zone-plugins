@@ -21,7 +21,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function inc_atelier_plugin_xml_dist($id_projet=0,$arbre=array()) {
+function inc_atelier_plugin_xml_dist($id_projet=0,$arbre=array(),$dependances=array()) {
 
 	$form = "<input type='hidden' name='editer_plugin_xml' value='oui' />\n"
 	. '<table border="1" cellpadding="5" cellspacing="0" style=" width: 100%;">'
@@ -34,6 +34,7 @@ function inc_atelier_plugin_xml_dist($id_projet=0,$arbre=array()) {
 	. editer_plugin_options($arbre['plugin'][0]['options'][0])
 	. editer_plugin_fonctions($arbre['plugin'][0]['fonctions'][0])
 	. editer_plugin_prefixe($arbre['plugin'][0]['prefix'][0])
+	. editer_plugin_dependances($dependances)
 	. '</table>'
 	. ("<div align='right'><input class='fondo' type='submit' value='"
 	. _T('bouton_enregistrer')
@@ -42,6 +43,22 @@ function inc_atelier_plugin_xml_dist($id_projet=0,$arbre=array()) {
 	return generer_action_auteur("atelier_plugin_xml", $id_projet, '', $form, " method='post' name='formulaire'");
 }
 
+
+function editer_plugin_dependances($dependances) {
+	foreach ($dependances as $necessite) {
+		$msg .= '<tr><td style="vertical-align:top;">'._T('atelier:plugin_necessite').'</td>'
+		.'<td><input name="necessite_id" type="text" size="60" value="'.$necessite['id'].'"/><br />'
+		.'<input name="necessite_version" type="text" size="60" value="'.$necessite['version'].'"/><br />'
+		.'<input type="checkbox" name="supprimer_dep_'.$necessite['id'].'" value="yes">Supprimer cette d&eacute;pendance ?</input><br />'
+		._T('atelier:plugin_expl_necessite').'</td></tr>';
+
+	}
+	$msg .= '<tr><td style="vertical-align:top;">'._T('atelier:plugin_new_necessite').'</td>'
+		.'<td><input name="new_necessite_id" type="text" size="60" /><br />'
+		.'<input name="new_necessite_version" type="text" size="60" /><br />'
+		._T('atelier:plugin_expl_new_necessite').'</td></tr>';
+	return $msg;
+}
 function editer_plugin_nom($nom) {
 	return '<tr><td style="vertical-align:top;">'._T('atelier:plugin_nom').'</td>'
 		.'<td><input name="nom" type="text" size="60" value="'.$nom.'"/><br />'
