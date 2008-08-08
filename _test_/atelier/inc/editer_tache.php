@@ -140,8 +140,9 @@ function editer_tache_version($version,$id_projet) {
 	$versions = explode('/',$r['versions']);
 
 	$res = '<select name="version" value="'.$version.'">"';
-	foreach($versions as $version) 
-		$res .= '<option value="'.$version.'">'.$version.'</option>';
+	foreach($versions as $v)
+		if ($v == $version) $res .= '<option selected value="'.$v.'">'.$v.'</option>';
+		else $res .= '<option value="'.$v.'">'.$v.'</option>';
 	$res .= '</select>';
 
 	$msg = _T('atelier:titre_edit_choix_version');

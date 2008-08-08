@@ -64,41 +64,55 @@ function action_editer_projet_dist() {
 function projets_creer_arbo_ske(&$rapport) {
 	global $repertoire_squelettes_alternatifs; // plugin switcher
 
-	$rapport .= " commande : mkdir ./$repertoire_squelettes_alternatifs/"._request('prefixe')."<br />";
-	exec('mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe'),&$output,$return_var);
-	foreach($output as $ligne) $rapport.=$ligne.'<br />';
+	$return = mkdir('./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe'));
+	if ($return) $rapport .= ' commande : mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').' - r&eacute;ussite <br />';
+	else $rapport .= ' commande : mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').' - echec <br />';
 
-	$rapport .= " commande : mkdir ./$repertoire_squelettes_alternatifs/"._request('prefixe').'/lang'."<br />";
-	exec('mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/lang',&$output,$return_var);
-	foreach($output as $ligne) $rapport.=$ligne.'<br />';
+	$return = mkdir('./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/css');
+	if ($return) $rapport .= ' commande : mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/css'.' - r&eacute;ussite <br />';
+	else $rapport .= ' commande : mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/css'.' - echec <br />';
 
-	$rapport .= " commande : mkdir ./$repertoire_squelettes_alternatifs/"._request('prefixe').'/css'."<br />";
-	exec('mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/css',&$output,$return_var);
-	foreach($output as $ligne) $rapport.=$ligne.'<br />';
+	$return = mkdir('./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/lang');
+	if ($return) $rapport .= ' commande : mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/lang'.' - r&eacute;ussite <br />';
+	else $rapport .= ' commande : mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/lang'.' - echec <br />';
 
-	$rapport .= " commande : mkdir ./$repertoire_squelettes_alternatifs/"._request('prefixe').'/images'."<br />";
-	exec('mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/images',&$output,$return_var);
-	foreach($output as $ligne) $rapport.=$ligne.'<br />';
+	$return = mkdir('./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/images');
+	if ($return) $rapport .= ' commande : mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/images'.' - r&eacute;ussite <br />';
+	else $rapport .= ' commande : mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/images'.' - echec <br />';
 
-	$rapport .= " commande : mkdir ./$repertoire_squelettes_alternatifs/"._request('prefixe').'/javascript'."<br />";
-	exec('mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/javascript',&$output,$return_var);
-	foreach($output as $ligne) $rapport.=$ligne.'<br />';
+	$return = mkdir('./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/javascript');
+	if ($return) $rapport .= ' commande : mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/javascript'.' - r&eacute;ussite <br />';
+	else $rapport .= ' commande : mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/javascript'.' - echec <br />';
 
-	$rapport .= " commande : mkdir ./$repertoire_squelettes_alternatifs/"._request('prefixe').'/formulaires'."<br />";
-	exec('mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/formulaires',&$output,$return_var);
-	foreach($output as $ligne) $rapport.=$ligne.'<br />';
+	$return = mkdir('./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/formulaires');
+	if ($return) $rapport .= ' commande : mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/formulaires'.' - r&eacute;ussite <br />';
+	else $rapport .= ' commande : mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/formulaires'.' - echec <br />';
 
-	$rapport .= " commande : mkdir ./$repertoire_squelettes_alternatifs/"._request('prefixe').'/modeles'."<br />";
-	exec('mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/modeles',&$output,$return_var);
-	foreach($output as $ligne) $rapport.=$ligne.'<br />';
+	$return = mkdir('./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/modeles');
+	if ($return) $rapport .= ' commande : mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/modeles'.' - r&eacute;ussite <br />';
+	else $rapport .= ' commande : mkdir ./'.$repertoire_squelettes_alternatifs.'/'._request('prefixe').'/modeles'.' - echec <br />';
 }
 
-function projets_creer_arbo_plug() {
-	exec('mkdir '._DIR_PLUGINS._request('prefixe'));
-	exec('mkdir '._DIR_PLUGINS._request('prefixe').'/exec');
-	exec('mkdir '._DIR_PLUGINS._request('prefixe').'/action');
-	exec('mkdir '._DIR_PLUGINS._request('prefixe').'/inc');
-	exec('mkdir '._DIR_PLUGINS._request('prefixe').'/lang');
+function projets_creer_arbo_plug(&$rapport) {
+	$return = mkdir(_DIR_PLUGINS._request('prefixe'));
+	if ($return) $rapport .= ' commande : mkdir '. _DIR_PLUGINS._request('prefixe').' - r&eacute;ussite <br />';
+	else $rapport .= ' commande : mkdir '. _DIR_PLUGINS._request('prefixe').' - echec <br />';
+
+	$return = mkdir(_DIR_PLUGINS._request('prefixe').'/exec');
+	if ($return) $rapport .= ' commande : mkdir '. _DIR_PLUGINS._request('prefixe').'/exec'.' - r&eacute;ussite <br />';
+	else $rapport .= ' commande : mkdir '. _DIR_PLUGINS._request('prefixe').'/exec'.' - echec <br />';
+
+	$return = mkdir(_DIR_PLUGINS._request('prefixe').'/action');
+	if ($return) $rapport .= ' commande : mkdir '. _DIR_PLUGINS._request('prefixe').'/action'.' - r&eacute;ussite <br />';
+	else $rapport .= ' commande : mkdir '. _DIR_PLUGINS._request('prefixe').'/action'.' - echec <br />';
+
+	$return = mkdir(_DIR_PLUGINS._request('prefixe').'/inc');
+	if ($return) $rapport .= ' commande : mkdir '. _DIR_PLUGINS._request('prefixe').'/inc'.' - r&eacute;ussite <br />';
+	else $rapport .= ' commande : mkdir '. _DIR_PLUGINS._request('prefixe').'/inc'.' - echec <br />';
+
+	$return = mkdir(_DIR_PLUGINS._request('prefixe').'/lang');
+	if ($return) $rapport .= ' commande : mkdir '. _DIR_PLUGINS._request('prefixe').'/lang'.' - r&eacute;ussite <br />';
+	else $rapport .= ' commande : mkdir '. _DIR_PLUGINS._request('prefixe').'/lang'.' - echec <br />';
 }
 
 function insert_projet() {

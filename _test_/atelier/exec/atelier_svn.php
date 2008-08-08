@@ -41,9 +41,11 @@ function atelier_svn($id_projet,$row,$opendir='') {
 	if (!atelier_autoriser()) exit;
 
 	atelier_debut_gauche();
-		atelier_cadre_raccourcis(array(
-			'<a href="'.generer_url_ecrire('projets','id_projet='.$row['id_projet']).'">'._T('atelier:revenir_projet').'</a>'
-		));
+		if ($id_projet)
+			atelier_cadre_raccourcis(array(
+				'<a href="'.generer_url_ecrire('projets','id_projet='.$row['id_projet']).'">'._T('atelier:revenir_projet').'</a>'
+			));
+		else atelier_cadre_raccourcis();
 		atelier_cadre_infos();
 	atelier_fin_gauche();
 	atelier_debut_droite();

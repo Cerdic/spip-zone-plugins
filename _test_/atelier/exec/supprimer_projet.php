@@ -36,7 +36,7 @@ function supprimer_projet($id_projet) {
 	$nom_page = atelier_debut_page(_T('atelier:titre_supprimer_projet'),'supprimer_projet');
 	if (!atelier_autoriser()) exit;
 
-	atelier_debut_gauche($nom_page);
+	atelier_debut_gauche();
 
 		atelier_cadre_raccourcis(array(
 			'<a href="'.generer_url_ecrire('projets','id_projet='.$id_projet).'">'._T('atelier:retour_projet').'</a>'
@@ -44,7 +44,8 @@ function supprimer_projet($id_projet) {
 
 		atelier_cadre_infos();
 
-	atelier_debut_droite($nom_page);
+	atelier_fin_gauche();
+	atelier_debut_droite();
 
 		echo debut_boite_alerte();
 		echo '<p>'._T('atelier:prevenir_suppression_projet').'</p>';
@@ -53,7 +54,7 @@ function supprimer_projet($id_projet) {
 		echo $supprimer_projet($id_projet);
 		echo fin_boite_alerte();
 
-	atelier_fin_gauche();
+	atelier_fin_droite();
 	atelier_fin_page();
 }
 
