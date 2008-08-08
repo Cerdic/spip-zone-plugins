@@ -16,4 +16,7 @@ else @define('_SPIP19100', 1);
 include_spip('base/jeux_tables');
 include_spip('inc/jeux_autoriser');
 
+// Declaration du pipeline "jeux_caracteristiques" qui permet de declarer au plugin des jeux tierces
+$GLOBALS['spip_pipeline']['jeux_caracteristiques']=''; 
+
 ?>
