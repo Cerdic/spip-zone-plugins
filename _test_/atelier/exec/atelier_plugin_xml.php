@@ -98,13 +98,21 @@ function atelier_plugin_xml($id_projet,$arbre) {
 		echo 'Prefixe : ' .$arbre['plugin'][0]['prefix'][0] . '<br />';
 
 		$keys = $arbre['plugin'][0];
-		$dependances = array();
-		foreach ($keys as $key => $value) {
-			if (preg_match("#necessite\ id='(.*)'\ version='\[(.*);\]'#",$key,$match))
-				$dependances[] = array('id' => $match[1],'version' => $match[2]);
+		if ($keys) {
+			$dependances = array();
+			foreach ($keys as $key => $value) {
+				if (preg_match("#necessite\ id='(.*)'\ version='\[(.*);\]'#",$key,$match))
+					$dependances[] = array('id' => $match[1],'version' => $match[2]);
+			}
+			foreach ($dependances as $necessite) {
+				echo 'Dependances : <i>' .$necessite['id']. '</i><b> version </b><i>'. $necessite['version'].'</i><br />';
+			}
 		}
-		foreach ($dependances as $necessite) {
-			echo 'Dependances : ' .$necessite['id']. ' version '. $necessite['version'].'<br />';
+
+		if ($arbre['plugin'][0]['pipeline']){
+			foreach ($arbre['plugin'][0]['pipeline'] as $pipe) {
+				echo 'Pipeline : <i>'.$pipe['nom'][0].'</i><b> inclu dans </b><i>'. $pipe['inclure'][0].'</i><br />';
+			}
 		}
 
 		echo fin_cadre_trait_couleur(true);

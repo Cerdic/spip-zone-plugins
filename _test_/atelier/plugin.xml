@@ -19,16 +19,6 @@ Il propose
 <li>G&#233;n&#233;ration de feuilles priv&#233;es et publiques</li>
 <li>Explorateur de fichier</li>
 </ul>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	</description>
 	<lien>http://www.trevise.org</lien>
 	<options>atelier_options.php</options>
@@ -38,4 +28,5 @@ Il propose
 	<chemin dir='' />
 	<necessite id='cfg' version='[1.3.7;]' />
 
+	
 </plugin>

@@ -44,6 +44,8 @@ function action_atelier_plugin_xml_dist() {
 	$prefixe = _request('prefixe');
 	$new_necessite_id = _request('new_necessite_id');
 	$new_necessite_version = _request('new_necessite_version');
+	$new_pipeline_nom = _request('new_pipeline_nom');
+	$new_pipeline_inclure = _request('new_pipeline_inclure');
 
 	include_spip('inc/xml');
 	$fichier = _DIR_PLUGINS.$prefixe.'/plugin.xml';
@@ -76,6 +78,19 @@ function action_atelier_plugin_xml_dist() {
 	else
 		$plugin_xml = preg_replace('#\[necessite\]#',$dependances,$plugin_xml);
 
+
+	$pipelines = '';
+	if ($arbre['plugin'][0]['pipeline']){
+		foreach ($arbre['plugin'][0]['pipeline'] as $pipe) {
+			if (_request('supprimer_pipeline_'.$pipe['nom'][0]) != 'yes')
+				$pipelines .= "<pipeline>\n\t\t<nom>".$pipe['nom'][0]."</nom>\n\t\t<inclure>".$pipe['inclure'][0]."</inclure>\n\t</pipeline>\n";
+		}
+	}
+
+	if ($new_pipeline_nom && $new_pipeline_inclure)
+		$plugin_xml = preg_replace('#\[pipelines\]#',$pipelines."<pipeline>\n\t\t<nom>$new_pipeline_nom</nom>\n\t\t<inclure>$new_pipeline_inclure</inclure>\n\t</pipeline>\n",$plugin_xml);
+	else 
+		$plugin_xml = preg_replace('#\[pipelines\]#',$pipelines,$plugin_xml);
 
 
 	$fichier = _DIR_PLUGINS.$prefixe.'/plugin.xml';
