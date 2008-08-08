@@ -1,12 +1,18 @@
 [(#REM)
 /******************************************************************
 ***  Ce plugin eva_freemind, créé par Olivier Gautier et ***
-*** Dominique Lepaisan est mis à disposition sous un ***
+*** Dominique Lepaisant est mis à disposition sous un ***
 *** contrat GNU/GPL consultable à l'adresse                    ***
 ***      http://www.april.org/gnu/gpl_french.html		     ***
 ******************************************************************/
 ]
+<B_freeminddoc>
 <BOUCLE_freeminddoc(DOCUMENTS){id_document=#ENV**{doc}}{mode=document}{extension==mm}>
+	[(#SET{url,#URL_DOCUMENT})]
+</BOUCLE_freeminddoc>
+</B_freeminddoc>
+	[(#SET{url,#URL_SITE_SPIP/?page=plan_mm})]
+<//B_freeminddoc>
 	<script type="text/javascript" src="#EVAL{_DIR_PLUGIN_EVA_FREEMIND}scripts/flashobject.js"></script>
 	<div id="flashcontent">Flash ou Javascript ne sont pas activ&eacute;s. Activez-les et relancez la page !</div>
 	<script type="text/javascript">
@@ -18,8 +24,8 @@
 	fo.addParam("quality", "high");
 	fo.addParam("bgcolor", "#ffffff");
 	fo.addVariable("openUrl", "_blank");
-	fo.addVariable("initLoadFile", "#URL_DOCUMENT");
+	fo.addVariable("initLoadFile", "#GET{url}");
 	fo.addVariable("startCollapsedToLevel","5");
 	fo.write("flashcontent");
-	// ]]></script>
-</BOUCLE_freeminddoc>
+	// ]]>
+	</script>
