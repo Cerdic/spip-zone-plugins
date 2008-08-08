@@ -25,7 +25,15 @@ function exec_atelier_roadmap_dist() {
 
 function exec_atelier_roadmap_args($id_projet) {
 	include_spip('inc/atelier_fonctions');
+
+	if (!$id_projet || $id_projet == 0) {	
+		include_spip('inc/minipres');
+		echo minipres(_T('atelier:aucun_projet'));
+		exit;
+	}
+
 	$versions = atelier_recuperer_versions($id_projet);
+
 
 	atelier_roadmap($id_projet,$versions);
 }

@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array (
 	'ajouter_tache' => 'Ajouter une tache',
 	'atelier' => 'Atelier',
 	'atelier_lang' => 'Gestion des fichiers langue',
+	'aucun_projet' => 'Aucun projet selectionn&eacute;. Vous devez appeler cette page en lui donnant un num&eacute;ro de projet.',
 
 	// B
 

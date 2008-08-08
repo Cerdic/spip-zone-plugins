@@ -29,7 +29,11 @@ function exec_taches_vues_dist() {
 function exec_taches_vues_args($id_projet,$etat='toutes') {
 	$projet_select = charger_fonction('projet_select','inc');
 	$row = $projet_select($id_projet);
-
+	if (!$row) {	
+		include_spip('inc/minipres');
+		echo minipres(_T('atelier:aucun_projet'));
+		exit;
+	}
 	taches_vues($id_projet,$row,$etat);
 }
 

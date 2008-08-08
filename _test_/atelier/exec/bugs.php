@@ -27,7 +27,11 @@ function exec_bugs_dist() {
 function exec_bugs_args($id_bug) {
 	$bug_select = charger_fonction('bug_select','inc');
 	$row = $bug_select($id_bug);
-
+	if (!$row) {	
+		include_spip('inc/minipres');
+		echo minipres(_T('atelier:aucun_bug'));
+		exit;
+	}
 	bugs($id_bug,$row);
 }
 

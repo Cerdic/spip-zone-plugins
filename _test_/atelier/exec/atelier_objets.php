@@ -30,6 +30,11 @@ function exec_atelier_objets_dist() {
 function exec_atelier_objets_args($id_projet,$rapport='',$opendir='') {
 	$projet_select = charger_fonction('projet_select','inc');
 	$row = $projet_select($id_projet);
+	if (!$row) {
+		include_spip('inc/minipres');
+		echo minipres(_T('atelier:aucun_projet'));
+		exit;
+	}
 
 	atelier_objets($id_projet,$row,$rapport,$opendir);
 }

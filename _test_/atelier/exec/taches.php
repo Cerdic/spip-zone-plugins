@@ -27,7 +27,11 @@ function exec_taches_dist() {
 function exec_taches_args($id_tache) {
 	$tache_select = charger_fonction('tache_select','inc');
 	$row = $tache_select($id_tache);
-
+	if (!$row) {	
+		include_spip('inc/minipres');
+		echo minipres(_T('atelier:aucune_tache'));
+		exit;
+	}
 	taches($id_tache,$row);
 }
 

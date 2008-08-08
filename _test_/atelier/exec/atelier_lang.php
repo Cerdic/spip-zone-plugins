@@ -30,6 +30,12 @@ function exec_atelier_lang_dist() {
 function exec_atelier_lang_args($id_projet,$fichier='') {
 	$projet_select = charger_fonction('projet_select','inc');
 	$row = $projet_select($id_projet);
+	if (!$row) {
+		include_spip('inc/minipres');
+		echo minipres(_T('atelier:aucun_projet'));
+		exit;
+	}
+
 	atelier_lang($id_projet,$row,$fichier);
 }
 

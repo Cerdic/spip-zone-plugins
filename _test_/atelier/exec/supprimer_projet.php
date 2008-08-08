@@ -25,7 +25,11 @@ function exec_supprimer_projet_dist() {
 }
 
 function exec_supprimer_projet_args($id_projet) {
-
+	if (!$id_projet || $id_projet == 0) {
+		include_spip('inc/minipres');
+		echo minipres(_T('atelier:aucun_bug'));
+		exit;
+	}
 	supprimer_projet($id_projet);
 }
 

@@ -24,6 +24,12 @@ function exec_atelier_versions_dist() {
 }
 
 function exec_atelier_versions_args($id_projet) {
+
+	if (!$id_projet || $id_projet == 0) {	
+		include_spip('inc/minipres');
+		echo minipres(_T('atelier:aucun_projet'));
+		exit;
+	}
 	include_spip('inc/atelier_fonctions');
 	$versions = atelier_recuperer_versions($id_projet);
 

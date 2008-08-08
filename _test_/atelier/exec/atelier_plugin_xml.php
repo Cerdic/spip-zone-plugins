@@ -30,9 +30,19 @@ function exec_atelier_plugin_xml_args($id_projet) {
 	
 	$projet_select = charger_fonction('projet_select','inc');
 	$row = $projet_select($id_projet);
+	if (!$row) {
+		include_spip('inc/minipres');
+		echo minipres(_T('atelier:aucun_projet'));
+		exit;
+	}
 
 	// si le projet n'est pas un plugin : dehors
-	if ($row['type'] !=  "plugin") exit;
+	if ($row['type'] !=  "plugin")  {
+		include_spip('inc/minipres');
+		echo minipres(_T('atelier:que_pour_les_plugins'));
+		exit;
+	}
+
 	// si le fichier n'existe pas : le generer
 	$fichier = _DIR_PLUGINS.$row['prefixe'].'/plugin.xml';
 	if (!@file_exists($fichier)) {
@@ -67,14 +77,14 @@ function atelier_plugin_xml($id_projet,$arbre) {
 	$nom_page = atelier_debut_page(_T('atelier:titre_plugin_xml'),'atelier_plugin_xml');
 	if (!atelier_autoriser()) exit;
 
-	atelier_debut_gauche($nom_page);
+	atelier_debut_gauche();
 
 		atelier_cadre_raccourcis(array(
 			'<a href="'.generer_url_ecrire('projets','id_projet='.$id_projet).'">'._T('atelier:revenir_projet').'</a>'
 		));
 		atelier_cadre_infos();
-
-	atelier_debut_droite($nom_page);
+	atelier_fin_gauche();
+	atelier_debut_droite();
 
 		echo debut_cadre_trait_couleur('',true);
 		echo 'Nom : ' .$arbre['plugin'][0]['nom'][0] . '<br />';
@@ -94,7 +104,7 @@ function atelier_plugin_xml($id_projet,$arbre) {
 			echo $editer_plugin_xml($id_projet,$arbre);
 		echo fin_cadre_couleur(true);
 
-	atelier_fin_gauche();
+	atelier_fin_droite();
 	atelier_fin_page();
 
 }
