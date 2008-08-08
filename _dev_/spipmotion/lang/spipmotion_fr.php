@@ -21,6 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_encoder_videos' => 'VID&Eacute;OS &Agrave; ENCODER',
 	'verifier_droits' => 'V&eacute;rifiez les droits du fichier "script_bash/spipmotion.sh". Les droits sur ce fichier doivent &ecirc;tre en 777.',
 	'encodage_en_cours' => 'ENCODAGE EN COURS ...',
+	
+	'recuperer_logo' => 'R&eacute;cup&eacute;rer un logo depuis la video',
 	'zzzz' => 'zzzz'
 );
 ?>

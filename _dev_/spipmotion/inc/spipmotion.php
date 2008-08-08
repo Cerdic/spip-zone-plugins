@@ -63,7 +63,7 @@ function afficher_encodage($id, $type="article", $flag_modif = true) {
 	$ret .= "<script src='"._DIR_PLUGIN_SPIPMOTION."javascript/async_encode.js' type='text/javascript'></script>\n";
 	$ret .= <<<EOF
 	<script type='text/javascript'>
-	$("form.form_encode").async_encode(async_encode_article_edit)
+	jQuery("form.form_encode").async_encode(async_encode_article_edit)
 	</script>
 EOF;
 }

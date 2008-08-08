@@ -15,7 +15,6 @@
 	<description>
 	<multi>
 	[fr] Faire un dailymotion sous spip &iquest; Premi&#232;res infos [par ici->http://kent1.sklunk.net/spip.php?article93].
-	<h4><a href="?exec=cfg&amp;cfg=spipmotion">Configuration</a></h4>
 	</multi>
 	</description>
 	<lien>http://kent1.sklunk.net/spip.php?article93</lien>
@@ -25,10 +24,20 @@
 	</options>
 	<prefix>
 	spipmotion
-	</prefix>	
+	</prefix>
 	<pipeline>
 		<nom>affiche_droite</nom>
 		<action>affiche_droite</action>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<action>editer_contenu_objet</action>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<action>post_edition</action>
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
 	<chemin dir='' />
