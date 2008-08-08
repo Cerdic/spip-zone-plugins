@@ -49,20 +49,26 @@ function atelier_svn($id_projet,$row,$opendir='') {
 	atelier_debut_droite();
 
 		if ($id_projet) {
-			echo '<p>'._T('atelier:explication_status_svn').'</p>';
-			$output = atelier_status_svn(array('nom' =>$row['prefixe']));
-			cadre_atelier(' svn status -u -v ' . $row['prefixe'],$output);
 
+			echo debut_cadre_trait_couleur('',true);
 			if (atelier_verifier_subversion()) {
-				echo '<p>'._T('atelier:update_svn').'</p>';
-
-				$projet_svn = charger_fonction('atelier_svn','inc');
-				echo $projet_svn('update',array(
-					'nom' => $row['prefixe'],
-					'id_projet' => $id_projet
-					));
-
+				$output = atelier_status_svn(array('nom' =>$row['prefixe']));
 				$fichiers = atelier_recuperer_fichier_add($output);
+				$projet_svn = charger_fonction('atelier_svn','inc');
+
+				echo '<p>'._T('atelier:explication_status_svn').'</p>';
+				/*echo '<div style="height : 80px;
+						margin-bottom: 10px;
+						margin-top: -60px;
+						margin-left: 250px;
+						padding-left: 5px;
+						border:1px dotted #000;">';*/
+
+
+				echo '<div style="width : 500px;float:left;margin-right:10px;">';
+					cadre_atelier(' svn status -u -v ' . $row['prefixe'],$output);
+				echo '</div>';
+
 
 				echo 'Liste des fichiers à ajouter au projet ...<br />';
 				echo $projet_svn('add',array(
@@ -70,15 +76,27 @@ function atelier_svn($id_projet,$row,$opendir='') {
 					'id_projet' => $id_projet,
 					'fichiers' => $fichiers
 					));
+				echo '<hr />';
+
+
+
+				echo _T('atelier:update_svn');
+					echo $projet_svn('update',array(
+						'nom' => $row['prefixe'],
+						'id_projet' => $id_projet
+						));
+				echo '<hr />';
 
                                 echo '<p>'._T('atelier:commit_svn').'</p>';
-
-
-                                echo $projet_svn('commit', array(
+				echo $projet_svn('commit', array(
                                         'nom' => $row['prefixe'],
-                                        'id_projet' => $id_projet,
-
+                                        'id_projet' => $id_projet
                                         ));
+				echo '<hr />';
+
+
+
+			echo fin_cadre_trait_couleur(true);
 
 			}
 			else {

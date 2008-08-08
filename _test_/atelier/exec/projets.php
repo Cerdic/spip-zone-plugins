@@ -76,11 +76,6 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 			}
 		}
 
-		if (atelier_verifier_projet_svn($row['prefixe'])) {
-			cadre_atelier(_T('atelier:svn'),array(
-				'<a href="'.generer_url_ecrire('atelier_svn','id_projet='.$id_projet).'">'._T('atelier:page_svn').'</a>'
-			));
-		}
 		$lang = array();
 		$lang[] =  '<a href="'.generer_url_ecrire('atelier_lang','id_projet='.$id_projet).'">'._T('atelier:atelier_lang').'</a>';
 
@@ -129,11 +124,21 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 			.'<b>Participants</b><br /><br />'
 			.$participants
 			.'</div>'
-			.'<div>'
+
+
+			.'<div style="float:left;margin-right:10px;">'
 			.'<b>Explorateur</b><br />'
 			.'<a href="'.generer_url_ecrire('spixplorer').'"><img src="'.find_in_path("spixplorer.png").'" /></a>'		
-			.'</div>'
 			.'</div>';
+
+		if (atelier_verifier_projet_svn($row['prefixe'])) {
+			echo '<div>'
+				.'<b>'._T('atelier:svn').'</b><br />'
+				.'<a href="'.generer_url_ecrire('atelier_svn',"id_projet=$id_projet").'"><img src="'.find_in_path("images/svn.png").'" /></a>'	
+				.'</div>';
+		}
+	
+		echo '</div>';
 
 
 		if ($rapport != '') {
