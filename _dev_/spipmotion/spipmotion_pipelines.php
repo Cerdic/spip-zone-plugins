@@ -40,20 +40,19 @@ function spipmotion_post_edition($flux){
 				include_spip('inc/documents');
 				$mode= 'vignette';
 				$type= $document['objet'];
-				spip_log("type=$type");
 				$chemin = $document['fichier'];
 				$type = $document['objet'];
 				$id = $document['id_objet'];
-				spip_log("chemin=$chemin");
 				$movie = get_spip_doc($chemin);
-				spip_log("on travail sur $movie","spipmotion");	
 				$movie = @new ffmpeg_movie($movie, 0);
 			
+				$height = $movie->getFrameHeight();
+				$width = $movie->getFrameWidth();
+		
 				$string = "$id-$type-$id_document";
 				$query = md5($string);
 				$dossier = _DIR_VAR;
 				$fichier = "$dossier$query.jpg";
-				
 				
 				$frame = $movie->getFrame(100);
 				$img = $frame->toGDImage();
@@ -68,7 +67,9 @@ function spipmotion_post_edition($flux){
 					//list($extension,$arg) = fixer_extension_document($arg);
 					$x = $ajouter_documents($img_finale, $img_finale, 
 							    $type, $id, $mode, $id_document, $actifs);
-							    
+				
+				sql_updateq('spip_documents',array('hauteur'=> $height, 'largeur'=>$width),'id_document='.sql_quote($id_document));
+				
 				// un invalideur a la hussarde qui doit marcher au moins pour article, breve, rubrique
 				imagedestroy($img);
 				unlink($img_finale);

@@ -32,12 +32,9 @@ function action_spipmotion_infos_post($r){
 	spip_log("on travail sur $movie","spipmotion");	
 	
 	$movie = @new ffmpeg_movie($movie, 0);
-	$frame = $movie->getFrame(100);
 	$height = $movie->getFrameHeight();
 	$width = $movie->getFrameWidth();
 	$duree = $movie->getDuration();
-	
-	spip_log("height = $height, width= $width, duree=$duree","spipmotion");
 	
 	sql_updateq('spip_documents',array('hauteur'=> $height, 'largeur'=>$width),'id_document='.sql_quote($id_document));
 	if(_request("iframe") == 'iframe') {
