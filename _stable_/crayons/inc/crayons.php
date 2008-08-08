@@ -38,6 +38,23 @@ if (!function_exists('autoriser_message_modifier_dist')) {
 		return false;
 	}
 }
+//compat 192 documents
+if (!function_exists('get_spip_doc')){
+        function get_spip_doc($fichier) {
+                // fichier distant
+                if (preg_match(',^\w+://,', $fichier))
+                        return $fichier;
+
+                // gestion d'erreurs, fichier=''
+                if (!strlen($fichier))
+                        return false;
+
+                // fichier normal
+                return (strpos($fichier, _DIR_IMG) === false)
+                ? _DIR_IMG . $fichier
+                : $fichier;
+       }
+}
 
 // Autoriser l'usage des crayons ?
 function autoriser_crayonner_dist($faire, $type, $id, $qui, $opt) {
@@ -177,8 +194,13 @@ function document_fichier_revision($id, $data, $type, $ref) {
 
 		// $actifs contient l'id_document nouvellement cree
 		// on recopie les donnees interessantes dans l'ancien
+		$extension=", extension ";
+		//compat 192
+		if ($GLOBALS['spip_version_code'] < '1.93')
+			$extension="";
+
 		if ($id_new = array_pop($actifs)
-		AND $s = spip_query("SELECT fichier, taille, largeur, hauteur, extension, distant FROM spip_documents
+		AND $s = spip_query("SELECT fichier, taille, largeur, hauteur $extension, distant FROM spip_documents
 			WHERE id_document="._q($id_new))
 		AND $new = sql_fetch($s)) {
 			define('FILE_UPLOAD', true); // message pour json_export :(
