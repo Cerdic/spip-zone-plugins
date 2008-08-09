@@ -12,10 +12,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg' => 'CFG',
-	'choisir_module_a_configurer' => 'Escoyer el m&oacute;dulu a configurar.',
+	'choisir_module_a_configurer' => 'Escoyer el m&oacute;dulu pa afitar.',
 	'config_enregistree' => 'Efeutuose la grabaci&oacute;n de <b>@nom@</b>',
 	'config_supprimee' => 'Efeutuose\'l desaniciu de <b>@nom@</b>',
-	'configuration_modules' => 'Configuraci&oacute;n de los m&oacute;dulos',
+	'configuration_modules' => 'Afitamientu de los m&oacute;dulos',
 
 	// E
 	'erreur_copie_fichier' => 'Nun ye posible copiar el ficheru @fichier@ nel so asitiamientu definitivu',
@@ -32,8 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'id_manquant' => 'Falta l\'identificaor',
 	'installation_librairies' => 'Descarga de biblioteques',
 	'installation_liste_libs' => 'Llista de les biblioteques',
-	'installer_dossier_lib' => 'Tienes que crear una carpeta @dir@ na raiz del to sitiu SPIP que tenga permisu d\'escritura.',
-	'installer_lib_192' => 'Pa instalar una biblioteca, hai que descomprimir el ficheru zip a mano y copiar el so conten&iacute;u na carpeta @dir@.',
+	'installer_dossier_lib' => 'Ties que crear un direutoriu @dir@ na raiz del to sitiu SPIP, que tenga permisu d\'escritura.',
+	'installer_lib_192' => 'Pa asitiar una biblioteca, hai que descomprimir el ficheru zip a mano y copiar el so conten&iacute;u nel direutoriu @dir@.',
 
 	// N
 	'nom_table_manquant' => 'Falta\'l nome de la tabla SQL',
