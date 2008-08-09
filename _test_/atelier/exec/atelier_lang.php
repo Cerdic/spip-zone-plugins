@@ -35,6 +35,20 @@ function exec_atelier_lang_args($id_projet,$fichier='') {
 		echo minipres(_T('atelier:aucun_projet'));
 		exit;
 	}
+	if ((!$fichier) && ($row['type'] == 'plugin')) {
+
+		$dir = _DIR_PLUGINS.$row['prefixe'].'/lang';
+		if ($dh = opendir($dir)) {
+			$i=0;
+			$f = '';
+
+			while (($file = readdir($dh)) !== false) {
+				$t = explode('.',$file);
+				if ($t[1] && ($t[1] != 'php~') && ($t[1] != 'svn')) {$i++; $f = $file;}
+			}
+			if ($i == 1 ) $fichier = $f;
+		}
+	}
 
 	atelier_lang($id_projet,$row,$fichier);
 }
