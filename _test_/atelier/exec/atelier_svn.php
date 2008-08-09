@@ -64,7 +64,11 @@ function atelier_svn($id_projet,$row,$opendir='') {
 				$projet_svn = charger_fonction('atelier_svn','inc');
 
 				echo '<div style="width : 500px;float:left;margin-right:10px;">';
-					cadre_atelier(' svn status -u -v ' . $row['prefixe'],$output);
+					echo $projet_svn('del', array(
+							'nom' => $row['prefixe'],
+							'id_projet' => $id_projet,
+							'output' => $output
+						));
 				echo '</div>';
 
 				echo '<p>'._T('atelier:explication_status_svn').'</p>';

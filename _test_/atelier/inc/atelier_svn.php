@@ -44,6 +44,7 @@ function atelier_status_svn($arg) {
 	include_spip('action/atelier_svn');
 	return atelier_status_projet($arg['nom']);
 }
+
 function atelier_update_svn($arg) {
 	$form = "<input type='hidden' name='update_projet' value='oui' />\n"
 	. '<input type="hidden" name="nom" value="'.$arg['nom'].'" />'
@@ -51,6 +52,32 @@ function atelier_update_svn($arg) {
 	. _T('atelier:bouton_update_projet')
 	. "' /></div>");
 	return generer_action_auteur("atelier_svn", $arg['id_projet'], '', $form, " method='post' name='formulaire'");
+}
+
+function atelier_del_svn($arg) {
+	$form = debut_cadre_trait_couleur('',true,'',' svn status -u -v ');
+	$form .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
+	$form .= "<input type='hidden' name='del_projet' value='oui' />\n"
+	. '<input type="hidden" name="nom" value="'.$arg['nom'].'" />';
+	$output = $arg['output'];
+	foreach($output as $num => $ligne) {
+		if (!preg_match('#Status\ against\ revision(.*)#',$ligne)) {
+			if (preg_match('#(.*)'.$arg['nom'].'\/(.*)#',$ligne,$match)) {
+				$n = preg_replace('/\//','_',$arg['nom'].'/'.$match[2]);
+				$n = preg_replace('/\./','_',$n);
+				$form .= '<tr class="tr_liste"><td style="text-align:left;"><input type="checkbox" name="fichier_'.$n.'" value="yes">'.$ligne.'</input></td></tr>';
+			}
+		}
+	}
+	$form .= "</table>";
+	$form .= fin_cadre_trait_couleur(true);
+
+	$form .= ("<div align='center'><input class='fondo' type='submit' value='"
+	. _T('atelier:bouton_del_fichier_select')
+	. "' /></div>");
+
+	return generer_action_auteur("atelier_svn", $arg['id_projet'], '', $form, " method='post' name='formulaire'");
+
 }
 
 function atelier_recuperer_fichier_add($output) {

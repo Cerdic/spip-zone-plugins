@@ -71,9 +71,36 @@ function action_atelier_svn_dist() {
 		$redirect = parametre_url(urldecode(generer_url_ecrire('projets',"id_projet=$id_projet")),
 				'rapport', $rapport, '&');	
 	}
+	else if(_request('del_projet')) {
+		include_spip('inc/atelier_svn');
+                $id_projet = $arg;
+		$output = atelier_status_svn(array('nom' =>$nom));
+		foreach($output as $num => $ligne) {
+			if (!preg_match('#Status\ against\ revision(.*)#',$ligne)) {
+				if (preg_match('#(.*)'.$nom.'\/(.*)#',$ligne,$match)) {
+					$n = preg_replace('/\//','_',$nom.'/'.$match[2]);
+					$n = preg_replace('/\./','_',$n);
+					if (_request('fichier_'.$n) == "yes") atelier_del_fichier($nom,$nom.'/'.$match[2],&$rapport);
+				}
+			}
+		}
+		$redirect = parametre_url(urldecode(generer_url_ecrire('projets',"id_projet=$id_projet")),
+				'rapport', $rapport, '&');
+	}
 
 	include_spip('inc/headers');
 	redirige_par_entete($redirect);
+}
+
+function atelier_del_fichier($nom,$fichier,&$rapport) {
+	$rapport .= _T('atelier:commande') . 'svn del '.$fichier.'<br />';
+	exec('cd '.escapeshellarg(_DIR_PLUGINS).';svn del '.escapeshellarg($fichier).' 2>&1',&$output,&$return_var);
+	$rapport .= _T('atelier:code_retour').$return_var.'<hr />';
+	switch ($return_var) {
+		case 0 : foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />';	break;
+		case 1 : foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />'; $rapport .= _T('atelier:erreur_commande');break; // erreur commande
+		default : $rapport .= _T('atelier:erreur_svn_pas_installe'); break; // pas de svn !
+	}
 }
 
 function atelier_add_fichier($nom,$fichier,&$rapport) {
