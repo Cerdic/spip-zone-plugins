@@ -47,7 +47,7 @@ function action_atelier_objets_dist() {
 			$fichier = $chemin.'/'.$prefixe.'_base.php';
 			if (!file_exists($chemin)) {
 				$rapport .= 'cr&eacute;ation du r&eacute;pertoire base.<br />';
-				exec('cd '._DIR_PLUGINS . $prefixe.';mkdir base',&$output,&$return_var);
+				exec('cd '.escapeshellarg(_DIR_PLUGINS . $prefixe).';mkdir base',&$output,&$return_var);
 				$rapport .= _T('atelier:code_retour').$return_var.'<br />';
 				foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />';
 			}
@@ -63,7 +63,7 @@ function action_atelier_objets_dist() {
 				$fichier = _DIR_PLUGINS . $prefixe .'/'. $type .'/'.$prefixe.'_'.$nom.'.php';
 				if (!file_exists(_DIR_PLUGINS . $prefixe .'/'. $type)) { // si le repertoire $type n'existe pas, le créer
 					$rapport .= 'cr&eacute;ation du r&eacute;pertoire '. $type . '<br />';
-					exec('cd '._DIR_PLUGINS . $prefixe.';mkdir '.$type,&$output,&$return_var);
+					exec('cd '.escapeshellarg(_DIR_PLUGINS . $prefixe).';mkdir '.escapeshellarg($type),&$output,&$return_var);
 					$rapport .= _T('atelier:code_retour').$return_var.'<br />';
 					foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />';
 				}

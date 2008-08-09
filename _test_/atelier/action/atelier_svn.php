@@ -78,7 +78,7 @@ function action_atelier_svn_dist() {
 
 function atelier_add_fichier($nom,$fichier,&$rapport) {
 	$rapport .= _T('atelier:commande'). 'svn add '.$fichier.'<br />';
-	exec('cd '._DIR_PLUGINS.';svn add '.$fichier.' 2>&1',&$output,&$return_var);
+	exec('cd '.escapeshellarg(_DIR_PLUGINS).';svn add '.escapeshellarg($fichier).' 2>&1',&$output,&$return_var);
 	$rapport .= _T('atelier:code_retour').$return_var.'<hr />';
 	switch ($return_var) {
 		case 0 : foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />';	break;
@@ -91,7 +91,7 @@ function atelier_commit_projet($nom, $commentaire, $user, $pass, &$rapport) {
         $rapport .= _T('atelier:commande'). 'svn commit --encoding "UTF-8" -m "'.$commentaire.'"<br />';
 	if ($commentaire != '') {
 		include_spip('inc/filtres');
-		exec('cd '._DIR_PLUGINS.$nom.';svn commit --username "'.$user.'" --password "'.$pass.'" --encoding "UTF-8" -m "'.$commentaire.'" 2>&1',&$output,&$return_var);
+		exec('cd '.escapeshellarg(_DIR_PLUGINS.$nom).';svn commit --username '.escapeshellarg($user).' --password '.escapeshellarg($pass).' --encoding "UTF-8" -m '.escapeshellarg($commentaire).' 2>&1',&$output,&$return_var);
 
 		$rapport .= _T('atelier:code_retour').$return_var.'<hr />';
 
@@ -105,13 +105,13 @@ function atelier_commit_projet($nom, $commentaire, $user, $pass, &$rapport) {
 }
 
 function atelier_status_projet($nom) {
-	exec('cd '._DIR_PLUGINS.';svn status -u -v '.$nom.' 2>&1',&$output,&$return_var);
+	exec('cd '.escapeshellarg(_DIR_PLUGINS).';svn status -u -v '.escapeshellarg($nom).' 2>&1',&$output,&$return_var);
 	return $output;
 }
 
 function atelier_update_projet($nom,&$rapport) {
 	$rapport .= _T('atelier:commande'). 'svn update<br />';
-	exec('cd '._DIR_PLUGINS.$nom.';svn update',&$output,&$return_var);
+	exec('cd '.escapeshellarg(_DIR_PLUGINS.$nom).';svn update',&$output,&$return_var);
 	$rapport .= _T('atelier:code_retour').$return_var.'<hr />';
 	
 	switch ($return_var) {
@@ -137,7 +137,7 @@ function atelier_checkout_projet($nom,$type,$etat,$creer_projet,&$rapport) {
 	$url_svn = 'svn://zone.spip.org/spip-zone/_'.$type.'s_/_'.$etat.'_/'.$nom;
 	$return_var = 0;
 	$rapport .= _T('atelier:commande'). 'svn checkout '.$url_svn . '<br />';
-	exec('cd '._DIR_PLUGINS.';svn checkout '.$url_svn.' 2>&1',&$output,&$return_var);
+	exec('cd '.escapeshellarg(_DIR_PLUGINS).';svn checkout '.escapeshellarg($url_svn).' 2>&1',&$output,&$return_var);
 	$rapport .= _T('atelier:code_retour').$return_var.'<hr />';
 	foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />';
 
