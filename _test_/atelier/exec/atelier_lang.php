@@ -97,7 +97,9 @@ function atelier_lang($id_projet,$row,$fichier='') {
 		if ($fichier) {
 			echo gros_titre($fichier,'',false);
 			$module = $row['prefixe'];
-			$lang = '';
+
+			preg_match('#'.$prefixe.'_(.*).php#',$fichier,$m);
+			$lang = $m[1];
 
 			if ($atelier_lang('verifier_repertoire',array('prefixe' => $row['prefixe'],'type' => $row['type']))) {
 				echo '<br />';

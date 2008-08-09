@@ -29,7 +29,7 @@ function action_atelier_lang_dist() {
 	if (!$id_auteur) redirige_par_entete('./');
 
 	$id_projet = $arg;
-	$r = sql_fetsel('prefixe','spip_projets','id_projet='.$id_projet);
+	$r = sql_fetsel('prefixe, type','spip_projets','id_projet='.$id_projet);
 	$prefixe = $r['prefixe'];
 	$type = $r['type'];
 
@@ -159,6 +159,7 @@ function atelier_creer_fichier_lang($type,$prefixe,$lang) {
 
 	$squel = '';
 	lire_fichier(_DIR_PLUGINS .'atelier/gabarits/lang.txt',&$squel);
+	$squel = preg_replace('#\[definition\]#',"",$squel);
 
 	if ($type == 'plugin') $fichier = _DIR_PLUGINS.$prefixe.'/lang/'.$prefixe.'_'.$lang.'.php';
 	else {
