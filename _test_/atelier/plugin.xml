@@ -1,6 +1,6 @@
 <plugin>
 	<nom>L'atelier</nom>
-	<icon>[icon_projet]</icon>
+	<icon>images/atelier.png</icon>
 	<version>0.1</version>
 	<auteur>Polez K&#233;vin - edd@riseup.net
 	- &#169; 2008-2009 - Distribu&#233; sous licence GPL</auteur>
@@ -24,9 +24,11 @@ Il propose
 	<options>atelier_options.php</options>
 	<fonctions>atelier_fonctions.php</fonctions>
 	<prefix>atelier</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>atelier_pipelines.php</inclure>
+	</pipeline>
 	<install>./</install>
 	<chemin dir='' />
 	<necessite id='cfg' version='[1.3.7;]' />
-
-	
 </plugin>

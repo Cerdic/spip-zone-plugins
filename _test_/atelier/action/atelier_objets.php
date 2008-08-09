@@ -31,7 +31,7 @@ function action_atelier_objets_dist() {
 	global $repertoire_squelettes_alternatifs; // plugin switcher
 
 	$id_projet = $arg;
-	$r = sql_fetsel('prefixe','spip_projets',"id_projet=$id_projet");
+	$r = sql_fetsel('prefixe, type','spip_projets',"id_projet=$id_projet");
 	$prefixe = $r['prefixe'];
 	$type = _request('type');
 	$nom = _request('nom');
@@ -67,6 +67,7 @@ function action_atelier_objets_dist() {
 					$rapport .= _T('atelier:code_retour').$return_var.'<br />';
 					foreach ($output as $ligne) $rapport .= '   '.$ligne.'<br />';
 				}
+
 			}
 			else $fichier = './' . $repertoire_squelettes_alternatifs . '/'. $prefixe .'/'. $type .'/'.$prefixe.'_'.$nom.'.php';
 			break;

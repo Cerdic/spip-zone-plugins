@@ -45,7 +45,7 @@ function atelier_objets($id_projet,$row,$rapport='',$opendir='') {
 	$nom_page = atelier_debut_page(_T('atelier:titre_objets'),'atelier_objets');
 	if (!atelier_autoriser()) exit;
 
-	atelier_debut_gauche($nom_page);
+	atelier_debut_gauche();
 
 		atelier_cadre_raccourcis(array(
 			'<a href="'.generer_url_ecrire('projets','id_projet='.$row['id_projet']).'">'._T('atelier:revenir_projet').'</a>'
@@ -58,7 +58,8 @@ function atelier_objets($id_projet,$row,$rapport='',$opendir='') {
 
 		atelier_cadre_infos();
 
-	atelier_debut_droite($nom_page);
+	atelier_fin_gauche();
+	atelier_debut_droite();
 
 		echo debut_cadre_trait_couleur('',true);
 		echo '<p>'._T('atelier:explication_objets').'. Pour les objets de l\'espace privé,  votre objet aura pour nom : prefixe_nomobjet_[exec|inc|action]. Son fichier sera : [exec|inc|action]/prefixe_nomobjet.php</p>';
@@ -74,7 +75,7 @@ function atelier_objets($id_projet,$row,$rapport='',$opendir='') {
 
 		echo fin_cadre_formulaire(true);
 
-	atelier_fin_gauche();
+	atelier_fin_droite();
 	atelier_fin_page();
 }
 

@@ -45,16 +45,18 @@ function inc_atelier_plugin_xml_dist($id_projet=0,$arbre=array(),$dependances=ar
 }
 
 function editer_plugin_pipeline($pipelines) {
-	foreach ($pipelines as $pipe) {
-		$msg .='<tr><td style="vertical-align:top;">'._T('atelier:plugin_pipeline').'</td>'
-		.'<td><input name="pipeline_nom" type="text" size="60" value="'.$pipe['nom'][0].'"/><br />'
-		.'<input name="pipeline_inclure" type="text" size="60" value="'.$pipe['inclure'][0].'"/><br />'
-		.'<input type="checkbox" name="supprimer_pipeline_'.$pipe['nom'][0].'" value="yes">Supprimer ce pipeline ?</input><br />'
-		._T('atelier:plugin_expl_pipeline').'</td></tr>';
+	if (is_array($pipelines)) {
+		foreach ($pipelines as $pipe) {
+			$msg .='<tr><td style="vertical-align:top;">'._T('atelier:plugin_pipeline').'</td>'
+			.'<td><input name="pipeline_nom" type="text" size="60" value="'.$pipe['nom'][0].'"/><br />'
+			.'<input name="pipeline_inclure" type="text" size="60" value="'.$pipe['inclure'][0].'"/><br />'
+			.'<input type="checkbox" name="supprimer_pipeline_'.$pipe['nom'][0].'" value="yes">Supprimer ce pipeline ?</input><br />'
+			._T('atelier:plugin_expl_pipeline').'</td></tr>';
+		}
 	}
 	$msg .= '<tr><td style="vertical-align:top;">'._T('atelier:plugin_new_pipeline').'</td>'
-		.'<td><input name="new_pipeline_nom" type="text" size="60" /><br />'
-		.'<input name="new_pipeline_inclure" type="text" size="60" /><br />'
+		.'<td>Nom : <input name="new_pipeline_nom" type="text" size="60" /><br />'
+		.'Inclure : <input name="new_pipeline_inclure" type="text" size="60" /><br />'
 		._T('atelier:plugin_expl_new_pipeline').'</td></tr>';
 	return $msg;
 
@@ -69,8 +71,8 @@ function editer_plugin_dependances($dependances) {
 
 	}
 	$msg .= '<tr><td style="vertical-align:top;">'._T('atelier:plugin_new_necessite').'</td>'
-		.'<td><input name="new_necessite_id" type="text" size="60" /><br />'
-		.'<input name="new_necessite_version" type="text" size="60" /><br />'
+		.'<td>ID : <input name="new_necessite_id" type="text" size="60" /><br />'
+		.'Version : <input name="new_necessite_version" type="text" size="60" /><br />'
 		._T('atelier:plugin_expl_new_necessite').'</td></tr>';
 	return $msg;
 }

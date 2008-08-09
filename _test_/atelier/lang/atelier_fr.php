@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array (
 	'action' => 'Actions',
 	'administration' => 'Administration',
 	'ajouter_page_cfg' => 'Ajouter une page CFG',
-	'ajouter_tache' => 'Ajouter une tache',
+	'ajouter_tache' => 'Ajouter une t&acirc;che',
 	'atelier' => 'Atelier',
 	'atelier_lang' => 'Gestion des fichiers langue',
 	'aucun_projet' => 'Aucun projet selectionn&eacute;. Vous devez appeler cette page en lui donnant un num&eacute;ro de projet.',
@@ -94,22 +94,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array (
 	'lang' => 'Internationalisation',
 	'licence' => 'Distribu&eacute; sous licence GNU/GPL',
 	'liste_projets' => 'Liste des projets',
-	'liste_taches' => 'Liste des taches',
-	'liste_taches_fermees' => 'Liste des taches ferm&eacute;es',
-	'liste_taches_ouvertes' => 'Liste des taches ouvertes',
+	'liste_taches' => 'Liste des t&acirc;ches',
+	'liste_taches_fermees' => 'Liste des t&acirc;ches ferm&eacute;es',
+	'liste_taches_ouvertes' => 'Liste des t&acirc;ches ouvertes',
 
 	// M
 
 	'meta_cache' => 'meta_cache.txt',
 	'modifier_plugin_xml' => 'Le fichier plugin.xml contient toutes les informations relatives &agrave; votre plugin. Il permet &agrave; SPIP de comprendre la structure de votre plugin et ainsi de l\'ins&eacute;rer dans son fonctionnement.',
 	'modifier_projet' => 'Modifier le projet',
-	'modifier_tache' => 'Modifier la tache',
+	'modifier_tache' => 'Modifier la t&acirc;che',
 
 	// N
 
 	'nom_projet' => 'Nom du projet : ',
 	'nouveau_projet' => 'Nouveau projet',
-	'nouveau_tache' => 'Nouvelle tache',
+	'nouveau_tache' => 'Nouvelle t&acirc;che',
 
 	// O
 
@@ -130,11 +130,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array (
 	'plugin_expl_etat' => 'L\'&eacute;tat actuel de votre plugin. Il peut &ecirc;tre soit "dev", soit "test", soit "stable".',
 	'plugin_expl_fonctions' => 'Indiquez i&ccedil;i le nom de votre fichier fonction. G&eacute;n&eacute;ralement, il est de la forme prefixe_fonctions.php',
 	'plugin_expl_lien' => 'Liens vers la documentation et/ou votre site.',
+	'plugin_expl_new_necessite' => 'Si cela est necessaire, vous pouvez ajouter une d&eacute;pendance &agrave; votre plugin. Spip refusera d\'activer votre plugin tant que cette d&eacute;pendance n\'est pas satisfaite.',
+	'plugin_expl_new_pipeline' => 'Un pipeline permet &agrave; votre plugin d\'inter-agir avec SPIP ou avec d\'autres plugins.',
 	'plugin_expl_nom' => 'Le nom de votre plugin',
 	'plugin_expl_options' => 'indiquez i&ccedil;i le nom de votre fichier option. G&eacute;n&eacute;ralement, il est de la forme prefixe_options.php',
+	'plugin_expl_prefixe' => 'Le pr&eacute;fixe correspond &agrave; l\'identifiant de votre plugin. Les caract&egrave;res sp&eacute;ciaux sont interdits, de m&ecirc;me que les espaces.',
 	'plugin_expl_version' => 'La version actuelle de votre plugin',
 	'plugin_fonctions' => 'Fonctions',
 	'plugin_lien' => 'Lien',
+	'plugin_new_necessite' => 'Ajouter une d&eacute;pendance',
+	'plugin_new_pipeline' => 'Ajouter un pipeline',
 	'plugin_nom' => 'Nom',
 	'plugin_options' => 'Options',
 	'plugin_prefixe' => 'Pr&eacute;fixe',
@@ -163,11 +168,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array (
 	'squelette' => 'Squelette',
 	'stable' => 'Stable',
 	'supprimer_atelier' => 'Supprimer le plugin Atelier',
+	'supprimer_projet' => 'Supprimer le projet',
 	'svn' => 'Subversion',
 
 	// T
 
-	'tache' => 'Tache',
+	'tache' => 'T&acirc;che',
 	'test' => 'Test',
 	'texte_descriptif' => 'Descriptif',
 	'texte_etat' => 'Etat',
@@ -178,8 +184,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array (
 	'texte_titre' => 'Titre',
 	'texte_type' => 'Type',
 	'titre' => 'Atelier',
-	'titre_edit_choix_auteur' => 'Affectez un auteur &agrave; cette tache',
-	'titre_edit_choix_etat' => 'Choisissez l\'etat de votre tache',
+	'titre_edit_choix_auteur' => 'Affectez un auteur &agrave; cette t&acirc;che',
+	'titre_edit_choix_etat' => 'Choisissez l\'etat de votre t&acirc;che',
 	'titre_edit_choix_projet' => 'Choisissez votre projet',
 	'titre_edit_choix_type' => 'Choisissez le type de projet',
 	'titre_edit_choix_urgence' => 'Choix de l\'urgence',
@@ -194,8 +200,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array (
 	'titre_roadmap' => 'Feuille de route',
 	'titre_supprimer_atelier' => 'Suppression de l\'atelier',
 	'titre_supprimer_projet' => 'Suppresion du projet',
-	'titre_taches' => 'Lecture d\'une tache',
-	'titre_taches_edit' => 'Edition d\'une tache',
+	'titre_taches' => 'Lecture d\'une t&acirc;che',
+	'titre_taches_edit' => 'Edition d\'une t&acirc;che',
 	'titre_versions' => 'Gestion des versions',
 	'type_projet' => 'Type de projet : ',
 

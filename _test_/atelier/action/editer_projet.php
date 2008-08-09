@@ -49,7 +49,7 @@ function action_editer_projet_dist() {
 	// création de l'arborescence
 	if (_request('arbo')) {
 		switch (_request('type')) {
-			case 'plugin' : projets_creer_arbo_plug(); break;
+			case 'plugin' : projets_creer_arbo_plug(&$rapport); break;
 			case 'squelette' : projets_creer_arbo_ske(&$rapport); break;
 		}
 	}

@@ -58,6 +58,10 @@ function exec_atelier_plugin_xml_args($id_projet) {
 		$plugin_xml = preg_replace('#\[options_projet\]#','',$plugin_xml);
 		$plugin_xml = preg_replace('#\[fonctions_projet\]#','',$plugin_xml);
 		$plugin_xml = preg_replace('#\[prefixe_projet\]#',$row['prefixe'],$plugin_xml);
+		$plugin_xml = preg_replace('#\[necessite\]#','',$plugin_xml);
+		$plugin_xml = preg_replace('#\[pipelines\]#','',$plugin_xml);
+		$plugin_xml = preg_replace('#\[install_projet\]#','',$plugin_xml);
+		$plugin_xml = preg_replace('#\[icon_projet\]#','',$plugin_xml);
 
 		ecrire_fichier(_DIR_PLUGINS.$row['prefixe'].'/plugin.xml',$plugin_xml);
 	}
@@ -86,32 +90,36 @@ function atelier_plugin_xml($id_projet,$arbre) {
 	atelier_fin_gauche();
 	atelier_debut_droite();
 
+	
 		echo debut_cadre_trait_couleur('',true);
-		echo 'Nom : ' .$arbre['plugin'][0]['nom'][0] . '<br />';
-		echo 'Auteur : ' .$arbre['plugin'][0]['auteur'][0] . '<br />';
-		echo 'Version : ' .$arbre['plugin'][0]['version'][0] . '<br />';
-		echo 'Description : ' .$arbre['plugin'][0]['description'][0] . '<br />';
-		echo 'Etat : ' .$arbre['plugin'][0]['etat'][0] . '<br />';
-		echo 'Lien : ' .$arbre['plugin'][0]['lien'][0] . '<br />';
-		echo 'Options : ' .$arbre['plugin'][0]['options'][0] . '<br />';
-		echo 'Fonctions : ' .$arbre['plugin'][0]['fonctions'][0] . '<br />';
-		echo 'Prefixe : ' .$arbre['plugin'][0]['prefix'][0] . '<br />';
+		if (is_array($arbre['plugin'][0])) {
+			echo 'Nom : ' .$arbre['plugin'][0]['nom'][0] . '<br />';
+			echo 'Auteur : ' .$arbre['plugin'][0]['auteur'][0] . '<br />';
+			echo 'Version : ' .$arbre['plugin'][0]['version'][0] . '<br />';
+			echo 'Description : ' .$arbre['plugin'][0]['description'][0] . '<br />';
+			echo 'Etat : ' .$arbre['plugin'][0]['etat'][0] . '<br />';
+			echo 'Lien : ' .$arbre['plugin'][0]['lien'][0] . '<br />';
+			echo 'Options : ' .$arbre['plugin'][0]['options'][0] . '<br />';
+			echo 'Fonctions : ' .$arbre['plugin'][0]['fonctions'][0] . '<br />';
+			echo 'Prefixe : ' .$arbre['plugin'][0]['prefix'][0] . '<br />';
+		
 
-		$keys = $arbre['plugin'][0];
-		if ($keys) {
-			$dependances = array();
-			foreach ($keys as $key => $value) {
-				if (preg_match("#necessite\ id='(.*)'\ version='\[(.*);\]'#",$key,$match))
-					$dependances[] = array('id' => $match[1],'version' => $match[2]);
+			$keys = $arbre['plugin'][0];
+			if ($keys) {
+				$dependances = array();
+				foreach ($keys as $key => $value) {
+					if (preg_match("#necessite\ id='(.*)'\ version='\[(.*);\]'#",$key,$match))
+						$dependances[] = array('id' => $match[1],'version' => $match[2]);
+				}
+				foreach ($dependances as $necessite) {
+					echo 'Dependances : <i>' .$necessite['id']. '</i><b> version </b><i>'. $necessite['version'].'</i><br />';
+				}
 			}
-			foreach ($dependances as $necessite) {
-				echo 'Dependances : <i>' .$necessite['id']. '</i><b> version </b><i>'. $necessite['version'].'</i><br />';
-			}
-		}
 
-		if ($arbre['plugin'][0]['pipeline']){
-			foreach ($arbre['plugin'][0]['pipeline'] as $pipe) {
-				echo 'Pipeline : <i>'.$pipe['nom'][0].'</i><b> inclu dans </b><i>'. $pipe['inclure'][0].'</i><br />';
+			if ($arbre['plugin'][0]['pipeline']){
+				foreach ($arbre['plugin'][0]['pipeline'] as $pipe) {
+					echo 'Pipeline : <i>'.$pipe['nom'][0].'</i><b> inclu dans </b><i>'. $pipe['inclure'][0].'</i><br />';
+				}
 			}
 		}
 

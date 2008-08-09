@@ -48,7 +48,7 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 	include_spip('inc/atelier_svn');
 	include_spip('inc/plugin');
 
-	$nom_page = atelier_debut_page(_T('atelier:titre_projets'),'projets');
+	$nom_page = atelier_debut_page(_T('atelier:titre_projets').' ['.$row['titre'].']','projets');
 	if (!atelier_autoriser()) exit;
 
 	atelier_debut_gauche();
@@ -113,7 +113,7 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 		echo '<div style="height : 80px;
 				margin-bottom: 10px;
 				margin-top: -80px;
-				margin-left: 150px;
+				margin-left: 210px;
 				padding-left: 5px;
 				border:1px dotted #000;">'
 
