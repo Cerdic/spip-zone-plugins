@@ -81,6 +81,7 @@ Raadpleegt [documentatie over Spip-Contrib-> http://www.spip-contrib.net/SpipBB-
 	'admin_plugin_requis_erreur_cfg' => 'Plaatst plugin CFG en activeert! [Documentatie ici-> http://www.spip-contrib.net/?article1605], [Archief ZIP daar - > http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Volgende vereiste plugins hebben aan gebrek. Activeert ze !',
 	'admin_plugin_requis_ok' => 'Geplaatste(s) en actieve(n) Plugin(s) :',
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION-> http://www.spip-contrib.net/?article1224]: geleverd de informatie over de echt verklaard bezoekers.',
 	'admin_plugin_requis_ok_cfg' => '[Plugin CFG-> http://www.spip-contrib.net/?article1605]: geleverd van de functies en de bakens.',
 	'admin_sous_titre' => 'Het paneel van bestuur van de forums met SpipBB bereiken',
 	'admin_spip_config_forums' => 'Configuratie van SPIP&nbsp;:',
@@ -337,8 +338,8 @@ _ Wordt een postit onder de aankondigingen, voor de gewone berichten geplaatst. 
 
 	// P
 	'pagine_page_' => ' .. bladzijde ',
-	'pagine_post_' => '<MODIF>antwoord',
-	'pagine_post_s' => '<MODIF>antwoord',
+	'pagine_post_' => ' antwoord',
+	'pagine_post_s' => ' antwoorden',
 	'pagine_sujet_s' => 'onderwerpen',
 	'par_' => 'door',
 	'plugin_auteur' => 'SpipBB Team: [zie de lijst van contributoren op Spip-contrib-> http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
@@ -355,6 +356,7 @@ _ {{Plugin spipbb in ontwikkeling. U gebruikt het met uw risico\'s en gevaren}}
 _ [Toegang tot het administratie paneel ->.? exec=spipbb_configuration]',
 	'plugin_licence' => 'Verdeeld onder GPL vergunning',
 	'plugin_lien' => '[De documentatie van plugin raadplegen op Spip-contrib-> http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_mauvaise_version' => 'Deze plugin versie is niet verenigbaar met uw SPIP versie !',
 	'plugin_nom' => 'SpipBB: Beleid van de SPIP forums ',
 	'post_aucun_pt' => 'geen enkel&nbsp;!',
 	'post_efface_lui' => 'Dit onderwerp omvat @
