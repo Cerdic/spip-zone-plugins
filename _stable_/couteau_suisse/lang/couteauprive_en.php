@@ -204,6 +204,10 @@ _ • [the whole plugin->@reset@]
 </p>',
 
 	// I
+	'icone_visiter:description' => '<NEW>Remplace l\'image du bouton standard &laquo;&nbsp;Visiter&nbsp;&raquo; (en haut &agrave; droite sur cette page)  par le logo du site, s\'il existe.
+
+Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.',
+	'icone_visiter:nom' => '<NEW>Bouton &laquo;&nbsp;Visiter&nbsp;&raquo;',
 	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between &lt;head&gt; et &lt;/head&gt;. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
 	'insert_head:nom' => '#INSERT_HEAD tag',
 	'insertions:description' => 'N.B.: tool in development!! [[%insertions%]]',
@@ -260,15 +264,20 @@ _ • [the whole plugin->@reset@]
 	'label:radio_suivi_forums3' => '@_CS_CHOIX@',
 	'label:radio_target_blank3' => 'New window for external links:',
 	'label:radio_type_urls3' => 'URL format:',
+	'label:scrollTo' => '<NEW>Installer les plugin {jQuery} suivants :',
 	'label:set_couleurs' => 'Set to be used ',
 	'label:spam_mots' => 'Prohibited sequences:',
 	'label:spip_script' => 'Calling script',
 	'label:style_h' => 'Your style:',
 	'label:style_p' => 'Your style:',
 	'label:suite_introduction' => 'Follow-on dots',
+	'label:terminaison_urls_arbo' => '<NEW>Terminaison des URls (ex : .html) :',
 	'label:titre_travaux' => 'Message title:',
 	'label:tri_articles' => 'Your choice:',
+	'label:url_arbo_minuscules' => '<NEW>Conserver la casse des titres dans les URLs :',
+	'label:url_arbo_sep_id' => '<NEW>Caract&egrave;re de s&eacute;paration \'titre-id\' en cas de doublon :<br/>(ne pas utiliser \'/\')',
 	'label:url_glossaire_externe2' => 'Link to external glossary:',
+	'label:urls_arbo_sans_type' => '<NEW>Afficher le type d\'objet SPIP dans les URLs :',
 	'liens_en_clair:description' => 'Makes the filter: \'liens_en_clair\' available to you. Your text probably contains hyperlinks which are not visible when the page is printed. This filter adds the link code between square brackets for every clickabel link (external links and email addresses). N.B: in printing mode (when using the parameter \'cs=print\' or \'page=print\' in the URL), this treatment is automatically applied.',
 	'liens_en_clair:nom' => 'Visible hyperlinks',
 	'liens_orphelins:description' => 'This tool has two functions:
@@ -365,6 +374,10 @@ If you reset the plugin by clicking on a pack, the Swiss Knife will reconfigure 
 _ A tag is available for displaying a table of smileys in templates: #SMILEYS.
 _ Images : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smileys',
+	'soft_scroller:description' => '<NEW>Offre &agrave; votre site public un d&eacute;filement  adouci de la page lorsque le visiteur clique sur un lien pointant vers une ancre : tr&egrave;s utile pour &eacute;viter de se perdre dans une page complexe ou un texte tr&egrave;s long...
+
+Attention, cet outil a besoin pour fonctionner de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[->%LocalScroll%]]',
+	'soft_scroller:nom' => '<NEW>Ancres douces',
 	'sommaire:description' => 'Builds a summary of your articles in order to access the main headings quickly (HTML tags &lt;h3>A Subtitle&lt;/h3> or SPIP subtitle shortcuts in the form: <code>{{{My subtitle}}}</code>).
 
 @puce@ You can define the maximum number of characters of the subtitles used to make the summary:[[%lgr_sommaire% caract&egrave;res]]
@@ -443,6 +456,7 @@ _ The rendered abbreviations correspond to those of the Imprimerie nationale giv
 	'typo_exposants:nom' => 'Superscript',
 
 	// U
+	'url_arbo' => '<NEW>arborescentes@_CS_ASTER@',
 	'url_html' => 'html@_CS_ASTER@',
 	'url_page' => 'page',
 	'url_propres' => 'propres@_CS_ASTER@',
