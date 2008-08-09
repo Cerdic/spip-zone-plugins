@@ -26,11 +26,11 @@ function exec_atelier_metas_dist() {
 	$nom_page = atelier_debut_page(_T('atelier:titre_metas'),'atelier_metas');
 	if (!atelier_autoriser()) exit;
 
-	atelier_debut_gauche($nom_page);
+	atelier_debut_gauche();
 		atelier_cadre_raccourcis();
 		atelier_cadre_infos();
-
-	atelier_debut_droite($nom_page);
+	atelier_fin_gauche();
+	atelier_debut_droite();
 		echo debut_cadre_trait_couleur('',true);
 		
 		include_spip('inc/atelier_metas');
@@ -39,7 +39,7 @@ function exec_atelier_metas_dist() {
 
 		echo fin_cadre_trait_couleur(true);
 	
-	atelier_fin_gauche();
+	atelier_fin_droite();
 	atelier_fin_page();
 
 }

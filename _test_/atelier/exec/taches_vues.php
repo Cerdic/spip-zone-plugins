@@ -43,18 +43,19 @@ function taches_vues($id_projet,$row,$etat='toutes') {
 	$nom_page = atelier_debut_page(_T('atelier:titre_taches_vues'),'taches_vues');
 	if (!atelier_autoriser()) exit;
 
-	atelier_debut_gauche($nom_page);
+	atelier_debut_gauche();
 		atelier_cadre_raccourcis(array(
 			'<a href="'.generer_url_ecrire('projets','id_projet='.$row['id_projet']).'">'._T('atelier:revenir_projet').'</a>'
 		));
 		atelier_cadre_infos();
-	atelier_debut_droite($nom_page);
+	atelier_fin_gauche();
+	atelier_debut_droite();
 		echo debut_cadre_trait_couleur('',true);
 		if ($etat == "fermees") echo liste_taches_fermees($row['id_projet']);
 		if ($etat == "toutes") echo liste_taches($row['id_projet']);
 		echo fin_cadre_trait_couleur(true);
 
-	atelier_fin_gauche();
+	atelier_fin_droite();
 	atelier_fin_page();
 }
 

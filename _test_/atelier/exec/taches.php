@@ -46,7 +46,8 @@ function taches($id_tache,$row) {
 
 	atelier_debut_gauche();
 		atelier_cadre_raccourcis(array(
-			'<a href="'.generer_url_ecrire('projets','id_projet='.$row['id_projet']).'">'._T('atelier:revenir_projet').'</a>'
+			'<a href="'.generer_url_ecrire('projets','id_projet='.$row['id_projet']).'">'._T('atelier:revenir_projet').'</a>',
+			'<a href="'.generer_url_ecrire('atelier_roadmap','id_projet='.$row['id_projet']).'">'._T('atelier:voir_feuille_de_route').'</a>'
 		));
 
 		cadre_atelier(_T('atelier:action'),array(

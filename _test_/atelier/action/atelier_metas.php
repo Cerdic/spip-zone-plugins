@@ -32,8 +32,21 @@ function action_atelier_metas_dist() {
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	if (!$id_auteur) redirige_par_entete('./');
 
+
+	foreach($GLOBALS['meta'] as $key => $value) {
+		if (_request($key) != $value) {
+			ecrire_meta($key,_request($key));
+		}
+	}
+	ecrire_metas();
+
+	$redirect = urldecode(generer_url_ecrire('atelier')) . $err;
+
 	include_spip('inc/headers');
 	redirige_par_entete($redirect);
+
+
+
 }
 
 ?>
