@@ -180,9 +180,13 @@ function atelier_checkout_projet($nom,$type,$etat,$creer_projet,&$rapport) {
 
 function atelier_svn_creer_projet($nom,$type,&$rapport) {
 	include_spip('action/editer_projet');
+	include_spip('inc/plugin');
+	$info = plugin_get_infos($nom);
 	$id_projet = insert_projet();
 	$c = array(	'titre' => $nom,
-			'descriptif' => _T('atelier:projet_importer_svn'),
+			'descriptif' => $info['description'],
+			'version' => $info['version'],
+			'etat' => $info['etat'],
 			'type' => $type,
 			'prefixe' => $nom
 			);

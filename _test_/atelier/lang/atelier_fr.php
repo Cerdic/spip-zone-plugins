@@ -212,6 +212,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array (
 	// V
 
 	'version' => 'Version',
+	'voir_feuille_de_route' => 'Voir la feuille de route',
 	'voir_metas' => 'Visualiser les metas',
 
 

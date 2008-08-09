@@ -29,10 +29,12 @@ function exec_atelier_svn_dist() {
 function exec_atelier_svn_args($id_projet='',$opendir='') {
 	$projet_select = charger_fonction('projet_select','inc');
 	$row = $projet_select($id_projet);
-	if (!$row) {	
-		include_spip('inc/minipres');
-		echo minipres(_T('atelier:aucun_projet'));
-		exit;
+	if ($id_projet) {
+		if (!$row) {	
+			include_spip('inc/minipres');
+			echo minipres(_T('atelier:aucun_projet'));
+			exit;
+		}
 	}
 	atelier_svn($id_projet,$row,$opendir);
 }
