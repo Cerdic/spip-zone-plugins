@@ -1,24 +1,46 @@
 <?php
 
-function css_imbriques_enfants($compteur, $ajouter, $classe, $enfants) {
-//	echo "<div><b>$compteur : ".$classe[$compteur]."</b></div><ul>";
-	foreach($enfants[$compteur] AS $enfant) {
-//		echo "<li>$compteur -> $enfant</li>";
-		if (ereg("^\.\ ",$classe[$enfant])) {
-			$classe[$enfant] = trim($ajouter.ereg_replace("^\.\ ", "", $classe[$enfant]));			
-		} else {
-			$classe[$enfant] = trim($ajouter." ".$classe[$enfant]);
-		}
-		$classe = css_imbriques_enfants($enfant, $ajouter, $classe, $enfants);
-	}
+function css_inserer_tab($def) {
+	$def = ereg_replace("\n", "\n\t", $def);
 	
-	
-//	echo "</ul>";
-
-
-	return $classe;
+	return "\t".$def;
 }
 
+
+function css_contruire($css, $niveau, $chemin, $classe, $enfants, $definition) {
+
+	
+	$intitule = trim($classe[$niveau]);
+	if (substr($intitule, 0, 2) == ". ") {
+		$intitule = substr($intitule, 2, strlen($intitule));
+		$chemin = $chemin.$intitule;
+	}
+	else {
+		$chemin = trim($chemin ." ".$intitule);
+	}
+	
+	$def = $definition[$niveau];
+	
+	if (strlen($def) > 0) {
+//		echo "<li><b>$chemin</b>";
+//		echo "<br>$def";
+		
+		$def = css_inserer_tab($def);
+	
+		$ret = "\n".$chemin." {\n".$def."\n}";
+//		echo "<pre>$css</pre>";
+	}
+	
+
+	if ($enfants[$niveau]) {
+		foreach($enfants[$niveau] as $num) {
+			$ret .= css_contruire($css, $num, $chemin, $classe, $enfants, $definition);
+	
+		}
+	}
+	
+	return $ret;
+}
 
 function css_imbriques_decouper ($css) {
 	
@@ -27,38 +49,81 @@ function css_imbriques_decouper ($css) {
 
 	// Virer les commentaires (source d'erreurs, et on ne sait plus ou les placer puisqu'on reorganise la bazar)
 	$css = preg_replace('#(/\*[^*]*\*+([^/*][^*]*\*+)*/)#', '', $css);
+	$css = preg_replace('#\n(\ \t)*\{#', ' {', $css);
 
+
+	// placer l'ensemble dans une fausse classe globale pour pouvoir la traiter d'un coup a la fin
+	$css = "   {\n$css\n}";
 	
-	while (preg_match_all ("/([^\{\n]*)\{([^\{]*)\}/U", $css, $regs)) {
-		foreach ($regs[0] as $num=>$l) {
+	while (preg_match ("/([^\{\n]*)\{([^\{]*)\}/U", $css, $regs)) {
 		
-			$compteur ++;
-		
-			$classe[$compteur] = trim($regs[1][$num]);
-			$definition[$compteur] = trim($regs[2][$num]);
-			
-			preg_match_all("/\[\[([0-9]*)\]\]/", $definition[$compteur], $sous);
-			foreach($sous[1] as $enfant) {
-				$enfants[$compteur][] = $enfant;
-			}
-			$classe = css_imbriques_enfants($compteur, $classe[$compteur], $classe, $enfants);
+			$intitule = trim($regs[1]);
+			$def = trim($regs[2]);
 
-			$definition[$compteur] = ereg_replace("[\ \n]*\[\[[0-9]*\]\][\ \n]*", "", $definition[$compteur]);
-
-			$chaine = $regs[0][$num];
+			$chaine = $regs[0];
 			$pos = strpos($css, $chaine);
 			$debut = substr($css, 0, $pos);
 			$fin = substr($css, $pos + strlen($chaine), strlen($css));
+
+			if (ereg("\,", $intitule)) {
+				$entrees = explode(",", $intitule);
+				
+				$ret = "";
+				
+				foreach ($entrees as $intitule) {
+					$intitule = trim($intitule);
+					
+//					echo "<li>$intitule</li>";
+					
+					$ret .= "$intitule { $def }\n";
+					
+					
+				}
+								
+				$css = $debut.$ret.$fin;
+				
+//				echo "<pre>$css </pre><hr>";
+				
+			} else {
 			
+		
+		
+				$compteur ++;
 			
-			
-			$css = $debut."[[$compteur]]".$fin;
+				$classe[$compteur] = trim($regs[1]);
+				$definition[$compteur] = trim($regs[2]);
+				
+//				echo "<li>".$classe[$compteur];
+				
+				
+				preg_match_all("/\[\[([0-9]*)\]\]/", $definition[$compteur], $sous);
+				foreach($sous[1] as $enfant) {
+					$enfants[$compteur][] = $enfant;
+				}
+			// 	$classe = css_imbriques_enfants($compteur, $classe[$compteur], $classe, $enfants);
+	
+				$definition[$compteur] = ereg_replace("[\ \n]*\[\[[0-9]*\]\][\ \n]*", "", $definition[$compteur]);
+	
+				
+				
+				
+				
+				$css = $debut."[[$compteur]]".$fin;
+			}
 			
 //			$css = str_replace($regs[0][$num], "[[$compteur]]", $css);
 			
-		}
 		
 	}
+
+	
+	$css = "";
+	$css = css_contruire($css, $compteur, "", $classe, $enfants, $definition);
+
+
+
+	
+/*	
 
 	$css = "";
 	foreach($classe as $num=>$nom) {
@@ -70,7 +135,7 @@ function css_imbriques_decouper ($css) {
 			$css .= "\n}\n";
 		}
 	}
-
+	*/
 
 	return $css;
 //	echo "<hr>$css<hr>";
