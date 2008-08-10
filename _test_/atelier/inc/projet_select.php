@@ -26,9 +26,8 @@ function inc_projet_select_dist($id_projet) {
 	if (is_numeric($id_projet)) {
 		$row = sql_fetsel("*", "spip_projets", "id_projet=$id_projet");
 	}  
-  	else {  
-		$row['titre'] = _T('atelier:nouveau_projet');
-		$row['id_projet'] = 0;
+  	else { 
+		$row = sql_fetsel("*", "spip_projets", "prefixe=$id_projet");
 	}
 
 	return $row;

@@ -21,6 +21,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Cette fonction peut être externaliser dans un plugin externe
 function atelier_autoriser() {
 	if ($admin AND $connect_statut != "0minirezo") {
 		echo _T('avis_non_acces_page');

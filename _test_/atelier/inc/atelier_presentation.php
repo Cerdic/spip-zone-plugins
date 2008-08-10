@@ -21,12 +21,13 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function atelier_debut_page($titre,$nom_page) {
+// Cette fonction peut être externaliser dans un plugin externe
+function atelier_debut_page($titre,$nom_page,$plugin="atelier") {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page($titre, "atelier", $nom_page,'',false);
+	echo $commencer_page($titre, $plugin, $nom_page,'',false);
 
 	include_spip('inc/plugin');
-	$info = plugin_get_infos('atelier');
+	$info = plugin_get_infos($plugin);
 
 	echo "<br /><br />"
 		."<div style='display : block;
@@ -48,54 +49,60 @@ function atelier_debut_page($titre,$nom_page) {
 		 border-bottom: 1px solid #000;'>"
 		.'<table>'
 		.'<tr><td><img src="'.find_in_path($info['icon']).'" width="50" height="50"/></td>'
-		.'<td>&nbsp;&nbsp;'._T('atelier:atelier') . ' - ' .$titre.'</td></tr>'
+		.'<td>&nbsp;&nbsp;'.$info['nom'] . ' - ' .$titre.'</td></tr>'
 		.'</table></div>';
 
 	return $nom_page;
 }
 
+// Cette fonction peut être externaliser dans un plugin externe
 function atelier_fin_page() {
 	echo '</div>';
 	echo '<br style="clear: both" />';
 	echo fin_page();
 }
 
+// Cette fonction peut être externaliser dans un plugin externe
 function atelier_debut_gauche() {
 	echo '<br /><div style="width: 300px;position:absolute;">';
 	//echo debut_gauche($nom_page,true);
 }
 
+// Cette fonction peut être externaliser dans un plugin externe
 function atelier_debut_droite() {
 	echo '<div style="margin:0px 0px 0px 310px;text-align:left;">';
 //	echo debut_droite($nom_page,true);
 }
 
+// Cette fonction peut être externaliser dans un plugin externe
 function atelier_fin_gauche() {
 	echo '</div>';
 	//echo fin_gauche();
 }
 
+// Cette fonction peut être externaliser dans un plugin externe
 function atelier_fin_droite() {
 	echo '</div>';
 }
 
-
-
+// Cette fonction peut être externaliser dans un plugin externe
 function debut_liste() {
 	return "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 }
 
+// Cette fonction peut être externaliser dans un plugin externe
 function fin_liste() {
 	return "</table>";
 }
 
+// Cette fonction peut être externaliser dans un plugin externe
 function liste_ligne($ligne,$align='left',$style='true') {
 	if (!$ligne) return '<tr><td style="background-color:#000; text-align:'.$align.';">'.$ligne.'</td></tr>';
 	else if ($style) return '<tr class="tr_liste"><td style="text-align:'.$align.';">'.$ligne.'</td></tr>';
 	return '<tr><td style="text-align:'.$align.';">'.$ligne.'</td></tr>';
 }
 
-
+// Cette fonction peut être externaliser dans un plugin externe
 function debut_cadre_depliable($titre,$gros_titre,$id){
 	$jquery = 'jQuery(this).depliant("#'.$id.'");';
 
@@ -108,6 +115,7 @@ alt=''  /></div>"
 		.'<div style=";" class="arial1 tranches" id="a1">'.$titre.'</div>';
 }
 
+// Cette fonction peut être externaliser dans un plugin externe
 function fin_cadre_depliable() {
 	echo "<div class='nettoyeur'></div></div><div class='nettoyeur'></div></div></div>";
 }
@@ -158,12 +166,12 @@ function cadre_atelier($titre,$lignes) {
 	echo fin_cadre_trait_couleur(true);
 }
 
-function atelier_cadre_infos() {
+function atelier_cadre_infos($documentation) {
 	include_spip('inc/plugin');
 	$info = plugin_get_infos('atelier');
 
 	cadre_atelier(_T('atelier:titre_infos'),array(
-		'<a href="http://www.spip-contrib.net/Plugin-Atelier">'._T('atelier:documentation'). '</a>',
+		'<a href="'.$documentation.'">'._T('atelier:documentation'). '</a>',
 		'<a href="http://doc.spip.org/">'._T('atelier:documentation_code'). '</a>',
 		'Plugin Atelier '. $info['version'].'<br />'. _T('atelier:licence')
 	));
@@ -186,12 +194,8 @@ function atelier_cadre_fichiers_temp() {
 }
 
 function atelier_cadre_raccourcis($autres='') {
-	$liens = array(
-		'<a href="'.generer_url_ecrire("atelier").'">'._T('atelier:retour_atelier').'</a>'
-		);
-	if (is_array($autres))
-		foreach($autres as $autre) array_push(&$liens,$autre);
-
+	$liens = array();
+	if (is_array($autres)) foreach($autres as $autre) array_push(&$liens,$autre);
 	cadre_atelier(_T('atelier:raccourcis'), $liens);
 }
 

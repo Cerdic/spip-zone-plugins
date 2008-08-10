@@ -45,7 +45,7 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 	include_spip('inc/atelier_autoriser');
 	include_spip('inc/atelier_plugins');
 	include_spip('inc/atelier_fonctions');
-	include_spip('inc/atelier_svn');
+	include_spip('inc/spipversion');
 	include_spip('inc/plugin');
 
 	$nom_page = atelier_debut_page(_T('atelier:titre_projets').' ['.$row['titre'].']','projets');
@@ -136,10 +136,10 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 			.'<a href="'.generer_url_ecrire('spixplorer').'"><img src="'.find_in_path("spixplorer.png").'" /></a>'		
 			.'</div>';
 
-		if (atelier_verifier_projet_svn($row['prefixe'])) {
+		if (spipversion_verifier_projet_svn($row['prefixe'])) {
 			echo '<div>'
 				.'<b>'._T('atelier:svn').'</b><br />'
-				.'<a href="'.generer_url_ecrire('atelier_svn',"id_projet=$id_projet").'"><img src="'.find_in_path("images/svn.png").'" /></a>'	
+				.'<a href="'.generer_url_ecrire('spipversion','prefixe='.$row['prefixe']).'"><img src="'.find_in_path("images/svn.png").'" /></a>'	
 				.'</div>';
 		}
 	

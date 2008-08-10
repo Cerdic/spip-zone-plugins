@@ -53,7 +53,9 @@ function atelier($id_projet,$row,$defaut,$rapport='') {
 	// verifier si les bases existent
 	include_spip('inc/atelier_installer_base');
 	$verifier_base = atelier_verifier_base();
-	$verifier_subversion = atelier_verifier_subversion();
+
+	include_spip('inc/spipversion');
+	$verifier_subversion = spipversion_verifier_subversion();
 
 	atelier_debut_gauche();
 
@@ -61,7 +63,7 @@ function atelier($id_projet,$row,$defaut,$rapport='') {
 			$projets[] = '<a href="'.generer_url_ecrire('projets_edit','new=oui').'">'._T('atelier:nouveau_projet').'</a>';
 			$projets[] = '<a href="'.generer_url_ecrire('atelier_metas').'">'._T('atelier:voir_metas').'</a>';
 			if ($verifier_subversion) {
-				$projets[] = '<a href="'.generer_url_ecrire('atelier_svn').'">'._T('atelier:importer_projet_zone').'</a>';
+				$projets[] = '<a href="'.generer_url_ecrire('spipversion').'">'._T('atelier:importer_projet_zone').'</a>';
 			}
 			cadre_atelier(_T('atelier:projets'), $projets);
 		}
@@ -96,6 +98,8 @@ function atelier($id_projet,$row,$defaut,$rapport='') {
 		}
 
 		echo liste_projets();
+		echo '<br /><br />';
+		echo liste_auteurs();
 
 	atelier_fin_droite();
 	atelier_fin_page();  
@@ -111,5 +115,22 @@ function liste_projets() {
 			 'FROM' => "spip_projets as projets");
 	return $afficher_projets('projet',$titre,$requete);
 }
+
+function liste_auteurs() {
+	$q = sql_select('id_auteur,nom,extra','spip_auteurs');
+	$msg = '<table style="width: 100%;border:1px solid #000;">';
+	$msg .= '<caption>Liste des auteurs</caption>';
+	while($r = sql_fetch($q)) {
+		$msg .= '<tr style="background-color: #eee;">
+				<td style="width:100%;"><a href="'.generer_url_ecrire('atelier_auteurs','id_auteur='.$r['id_auteur']).'">'.$r['nom'].'</a></td>
+				<td><b>N°'.$r['id_auteur'].'</b></td>
+			</tr>';
+	}
+	$msg .= '</table>';
+	return $msg;
+
+
+}
+	
 
 ?>
