@@ -8,10 +8,10 @@
 ]
 <B_freeminddoc>
 <BOUCLE_freeminddoc(DOCUMENTS){id_document=#ENV**{doc}}{mode=document}{extension==mm}>
-	[(#SET{url,#URL_DOCUMENT})]
+	[(#SET{url_freemind,#URL_DOCUMENT})]
 </BOUCLE_freeminddoc>
 </B_freeminddoc>
-	[(#SET{url,#URL_SITE_SPIP/?page=plan_mm})]
+	[(#SET{url_freemind,#URL_SITE_SPIP/?page=plan_mm})]
 <//B_freeminddoc>
 	<script type="text/javascript" src="#EVAL{_DIR_PLUGIN_EVA_FREEMIND}scripts/flashobject.js"></script>
 	<div id="flashcontent">Flash ou Javascript ne sont pas activ&eacute;s. Activez-les et relancez la page !</div>
@@ -24,7 +24,7 @@
 	fo.addParam("quality", "high");
 	fo.addParam("bgcolor", "#ffffff");
 	fo.addVariable("openUrl", "_blank");
-	fo.addVariable("initLoadFile", "#GET{url}");
+	fo.addVariable("initLoadFile", "#GET{url_freemind}");
 	fo.addVariable("startCollapsedToLevel","5");
 	fo.write("flashcontent");
 	// ]]>
