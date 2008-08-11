@@ -111,7 +111,7 @@ function grenouille_xml2tab($xml){
  * @author Cedric Morin
  */
 function grenouille_charge_meteo($code_frxx){
-	$dir = sous_repertoire(_DIR_CACHE,"raynette");
+	$dir = sous_repertoire(_DIR_CACHE,"rainette");
 	$dir = sous_repertoire($dir,substr(md5($code_frxx),0,1));
 	$f = $dir . $code_frxx . ".txt";
 	if (!file_exists($f)
