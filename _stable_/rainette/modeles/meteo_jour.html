@@ -1,0 +1,10 @@
+[(#REM)
+
+Cette noisette affiche les infos meteos d'une journee
+Elle est appelee par la fonction croaaa
+
+]<li><h4><span class='jour'>[(#ENV{date}|nom_jour) ]</span><span class='date'>[(#ENV{date}|affdate_jourcourt)]</span></h4>
+<span class='temperature'><em>Temp&eacute;rature&nbsp;:</em> #ENV{minima}&deg;C[ - (#ENV{maxima})&deg;C]</span>
+<span class='icone'>[(#ENV{icone}|grenouille_icone_meteo)]</span>
+<span class='details'>[(#ENV{icone}|grenouille_icone_details)]</span>
+</li>

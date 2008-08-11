@@ -1,0 +1,12 @@
+<plugin>
+	<nom>Raynette</nom>
+	<auteur>Art&eacute;go, touti, Cedric Morin</auteur>
+	<version>1.0</version>
+	<etat>stable</etat>
+	<description>Pr&eacute;visions m&eacute;t&eacute;o extraites du xml comme xoap.weather.com/weather/local/FRXX0337?cc=*&amp;unit=s&amp;dayf=7
+	_ D&eacute;posez vos images numerotees.png dans le sous-dossier grenouille/ de votre dossier squelettes ! cf http://liquidweather.net/icons.php
+	_ {{Mod&egrave;le}} dans squelettes <code>[(#MODELE{meteo,code=frxxx,jours=3})]</code> ou en r&eacute;daction &#60;meteo|code=frxxx|jour=3&#62;
+	</description>
+	<fonctions>grenouille_fonctions.php</fonctions>
+	<prefix>grenouille</prefix>
+</plugin>
