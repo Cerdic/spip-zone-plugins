@@ -83,7 +83,7 @@ class cfg_depot_tablepack
 		}
 		
 		// verifier que la colonne existe
-		if (!$this->verifier_colonne()) {echo "<br />hein? ";print_r($this); 
+		if (!$this->verifier_colonne()) {
 			return false;
 		} else {
 			// recuperer la valeur du champ de la table sql

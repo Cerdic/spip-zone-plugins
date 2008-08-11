@@ -1,8 +1,12 @@
 Todo :
 - rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
 
+v1.10.1
+- un echo de debug trainait
+
 v1.10.0
 - corrections pour palette, changement de version pour marquer le changement de compat (necessite Palette pour les couleurs)
+
 v1.9.8 (01 08 2008)
 - usage du plugin Palette pour permettre la mutualisation de la librairie farbtastic entre plugins
 
