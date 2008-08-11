@@ -2,5 +2,5 @@
 global $CompteurGraphique;
 if ('[(#ENV{CG}|texte_script)]') {
 $CompteurGraphique = '[(#ENV{CG}|texte_script)]'; 
-$CompteurGraphique = '<img src="#URL_SITE_SPIP/'._DIR_IMG.'CompteurGraphique/'.$CompteurGraphique.'" alt="" />';}
+$CompteurGraphique = '<img src="#EVAL{_DIR_IMG}CompteurGraphique/'.$CompteurGraphique.'" alt="" />';}
  ?>
