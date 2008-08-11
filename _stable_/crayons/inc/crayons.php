@@ -39,21 +39,23 @@ if (!function_exists('autoriser_message_modifier_dist')) {
 	}
 }
 //compat 192 documents
-if (!function_exists('get_spip_doc')){
-        function get_spip_doc($fichier) {
-                // fichier distant
-                if (preg_match(',^\w+://,', $fichier))
-                        return $fichier;
+if ($GLOBALS['spip_version_code'] < '1.93'){
+	if (!function_exists('get_spip_doc')){
+			function get_spip_doc($fichier) {
+					// fichier distant
+					if (preg_match(',^\w+://,', $fichier))
+							return $fichier;
 
-                // gestion d'erreurs, fichier=''
-                if (!strlen($fichier))
-                        return false;
+					// gestion d'erreurs, fichier=''
+					if (!strlen($fichier))
+							return false;
 
-                // fichier normal
-                return (strpos($fichier, _DIR_IMG) === false)
-                ? _DIR_IMG . $fichier
-                : $fichier;
-       }
+					// fichier normal
+					return (strpos($fichier, _DIR_IMG) === false)
+					? _DIR_IMG . $fichier
+					: $fichier;
+		   }
+	}
 }
 
 // Autoriser l'usage des crayons ?
