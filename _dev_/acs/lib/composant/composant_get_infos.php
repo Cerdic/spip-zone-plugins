@@ -11,7 +11,7 @@
  * Non inclus comme méthode d'objet composant pour permettre usage sans création d'objet composant
  */
 
-function cGetPages($c, $chemin='') {
+function cGetPages($c, $nic, $chemin='') {
   $pages = array();
   $pages['composant'] = array();
   $pages['variables'] = array();
@@ -24,8 +24,8 @@ function cGetPages($c, $chemin='') {
     $dir = find_in_path($chemin);
 
   if (@is_dir($dir) AND @is_readable($dir) AND $d = @opendir($dir)) {
-    $vars= cGetVars($c);
-    $cp = "composants/$c";
+    $vars= cGetVars($c, $nic);
+    $cpreg = '/\{fond=composants\/'.$c.'[^\}]*\}.*\{nic='.$nic.'\}/';
     while (($f = readdir($d)) !== false && ($nbfiles<1000)) {
       if ($f[0] != '.' # ignorer . .. .svn etc
       AND $f != 'CVS'
@@ -34,7 +34,7 @@ function cGetPages($c, $chemin='') {
         if (is_file($p)) {
           if (preg_match(";.*[.]html$;iS", $f)) {
             $fic = @file_get_contents($p);
-            if (strpos($fic, $cp))
+            if (preg_match($cpreg, $fic, $matches))
               $pages['composant'][] = substr($f, 0, -5);
             foreach($vars as $var) {
               if (strpos($fic, $var))
@@ -90,7 +90,7 @@ function cGetFiles($c, $chemin='', $ext='html', $skip=0) {
  * Fonction cGetVars: retourne un tableau des variables du composant
  * sans création d'objet composant
  */
-function cGetVars($composant) {
+function cGetVars($composant, $nic) {
   $r = array();
   // Lit les paramètres de configuration du composant
   include_once('inc/xml.php');
@@ -99,7 +99,7 @@ function cGetVars($composant) {
   $c = $config['composant'][0];
   if (is_array($c['param'])) {
     foreach($c['param'] as $param) {
-      if ($param['nom'][0] == 'optionnel' && (($param['valeur'][0] == 'oui') || ($param['valeur'][0] == 'true')))
+      if (is_array($param['nom']) && $param['nom'][0] == 'optionnel' && (($param['valeur'][0] == 'oui') || ($param['valeur'][0] == 'true')))
         array_push($r, 'acs'.ucfirst($composant).'Use');
     }
   }
@@ -108,7 +108,7 @@ function cGetVars($composant) {
     foreach($c['variable'] as $k=>$var) {
       foreach($var as $varname=>$value) {
         if ($varname=='nom')
-          array_push($r, 'acs'.ucfirst($composant).$value[0]);
+          array_push($r, 'acs'.ucfirst($composant).$nic.$value[0]);
       }
     }
   }

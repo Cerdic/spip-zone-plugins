@@ -72,20 +72,18 @@ function exec_acs() {
 
       // Crée l'objet composant - Create current component object
       $cc = _request('composant') ? _request('composant') : 'fond';
-      $$c = new AdminComposant($cc, $debug = false);
+      $$c = new AdminComposant($cc, _request('nic'), $debug = false);
 
-      // Crée l'interface d'administration du composant        
+      // Crée l'interface d'administration du composant
       $col1 = composants_gauche($$c);
       $col2 = composants($$c);
-      
+
       include_spip('lib/composant/composants_liste');
       $choixComposants = array_keys(composants_liste());
       if (is_array($choixComposants))
         $l = liste_widgets($choixComposants, true);
       else
         $l = '&nbsp;';  
-      if (count($$c->widgets) > 0)       // Containers
-        $col3 =  acs_box(_T('composants'), liste_widgets($$c->widgets), $cIcon, 'acs_box_composants').'<br />';
       $col3 .= acs_box(count($choixComposants).' '.((count($choixComposants)==1) ? strtolower(_T('composant')) : strtolower(_T('composants'))), $l, _DIR_PLUGIN_ACS."/img_pack/composant-24.gif", 'acs_box_composants');
       break;
   }

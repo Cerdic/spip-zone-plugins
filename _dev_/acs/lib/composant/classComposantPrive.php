@@ -32,21 +32,20 @@ class AdminComposant {
   // Constructeur
   // Instancie (au besoin) un objet Composant à l'éxécution
   // pour en adopter les méthodes implémentées.
-  function __construct($type, $debug = false) {
+  function __construct($type, $nic=0, $debug = false) {
     global $_POST;
-
+    
     include_spip('inc/xml'); // spip_xml_load()
     include_spip('inc/traduire');
     
     $this->debug = $debug;
-    $this->type = $type;
+    $this->type = $type; // Classe de composant (nom)
+    $this->nic = $nic != 0 ? $nic : '';  // Numéro d'instance du composant
     $this->fullname = "acs".ucfirst($type);
     $this->errors = array();
     $this->vars = array();
     $this->cvars = array(); // Variables issues d'un autre composant
-    $this->widgets = array(); // Composants intégrables à une variable widget
-    // Dossier racine du composant
-    $this->rootDir = find_in_path('composants/'.$type);
+    $this->rootDir = find_in_path('composants/'.$type);// Dossier racine du composant
     $this->icon = $this->rootDir.'/img_pack/'.$type.'_icon.gif';
     if (!is_readable($this->icon))
       $this->icon = _DIR_PLUGIN_ACS."/img_pack/composant-24.gif";
@@ -66,19 +65,20 @@ class AdminComposant {
     $this->version_spip_max = $c['version_spip_max'][0];
 
     if (is_array($c['param'])) {
+      //print_r($c['param']);
       foreach($c['param'] as $param) {
-        if ($this->debug) echo  $type.'->'.$param['nom'][0], ' = ', htmlentities($param['valeur'][0]) , "<br />"; // dbg composant
-        if (isset($param['valeur']))
+        if (is_array($param) && is_array($param['nom']) && is_array($param['valeur']))
           $this->$param['nom'][0] = $param['valeur'][0];
         else
-          $this->$param['nom'][0] = true;
+          $this->$param = true;
       }
     }
     
     // Active le composant non optionnel
     if (($this->optionnel=='non') || ($this->optionnel =='no') || ($this->optionnel =='false')) {
-      ecrire_meta($this->fullname.'Use','oui');
+      ecrire_meta($this->fullname.$this->nic.'Use','oui');
       $this->enable = true;
+      $updated = true;
     }
     else { // Regarde si le composant optionnel doit être activé
       // Désactive le composant s'il dépend de plugins non activés
@@ -99,13 +99,14 @@ class AdminComposant {
                ($this->optionnel != 'true') && 
                ($GLOBALS['meta'][$this->optionnel] != 'oui') 
              ) {
-        ecrire_meta($this->fullname.'Use','non');
+        ecrire_meta($this->fullname.$this->nic.'Use','non');
         $this->enable = false;
+        $updated = true;
       }
     }
     
     $this->vars[0] = array('nom' => 'Use',
-                           'valeur' => $GLOBALS['meta'][$this->fullname.'Use']
+                           'valeur' => $GLOBALS['meta'][$this->fullname.$this->nic.'Use']
                           );
     if (is_array($c['variable'])) {
       foreach($c['variable'] as $k=>$var) {
@@ -114,7 +115,8 @@ class AdminComposant {
               $v = $value;
           else
             $v = $value[0];
-          if ($this->debug) echo $type.'->vars['.$k.']['.$varname.'] = '.htmlentities((is_array($v) ? 'Array('.implode($v, ', ').')' : $v)) , "<br />"; // dbg composant
+          if ($this->debug)
+            $this->errors['vars'] .= $type.'->vars['.$k.']['.$varname.'] = '.htmlentities((is_array($v) ? 'Array('.implode($v, ', ').')' : $v))."<br />\n"; // dbg composant
           $this->vars[$k+1][$varname] = $v;
           if ($varname == 'valeur') { // Default values
             if (substr($v,0,3) == 'acs') {
@@ -122,19 +124,20 @@ class AdminComposant {
               $v = $GLOBALS['meta'][$v];
             }
           }
-          // Lit la liste des composants intégrables aux variables de type widget
-          if ($varname == 'composant') {
-            foreach ($value as $widget) {
-              if (!in_array($widget, $this->widgets)) array_push($this->widgets, $widget);
-            }
-          }
         }
       }
     }
+    
     // Mise à jour
+    if ($this->debug && $_POST) {
+      include_spip('balise/acs_balises');
+      $this->errors[] = "\n<br />\$_POST=\n";
+      $this->errors[] = dbg($_POST);
+      $this->errors[] = "\n<br />\n";
+    }
     if (_request('maj_composant')=='oui') {
       foreach ($this->vars as $var) {
-        $v = $this->fullname.$var['nom'];
+        $v = $this->fullname.$this->nic.$var['nom'];
         if ($_POST[$v] != $GLOBALS['meta'][$v]) {
           if (($_POST[$v]=='') && (isset($var['valeur']))) {
             if (substr($var['valeur'], 0, 3) == 'acs')
@@ -192,6 +195,7 @@ class AdminComposant {
   
 /**
  * Méthode gauche: affiche la colonne gauche dans spip admin
+ * @return html code
  */
   function gauche() {
     global $spip_version_code;
@@ -206,7 +210,7 @@ class AdminComposant {
       $r .= '<div class="onlinehelp" onclick=\'$("#help_context").slideToggle("slow");\' style="cursor:pointer;"><img src="'._DIR_PLUGIN_ACS.'img_pack/aide.gif" onmouseover=\'$("#help_context").slideToggle("slow");\' /> '._T('icone_aide_ligne').'</div><div id="help_context" class="onlinehelp pliable" style="text-align: justify">'.$this->T('help').'</div><br />';
 
     $n = 999;
-    $r .= '<div class="onlinehelp">'.acs_plieur('plieur_pu'.$n, 'pu'.$n, '#', false, 'if (typeof done'.$n.' == \'undefined\') {AjaxSqueeze(\'?exec=composant_get_infos&c='.$this->type.'\',\'puAjax'.$n.'\'); done'.$n.' = true;}', _T('acs:dev_infos') ).'</div><div class="pu'.$n.' pliable">';
+    $r .= '<div class="onlinehelp">'.acs_plieur('plieur_pu'.$n, 'pu'.$n, '#', false, 'if (typeof done'.$n.' == \'undefined\') {AjaxSqueeze(\'?exec=composant_get_infos&c='.$this->type.($this->nic ? '&nic='.$this->nic: '').'\',\'puAjax'.$n.'\'); done'.$n.' = true;}', _T('acs:dev_infos') ).'</div><div class="pu'.$n.' pliable">';
     if (count($this->cvars))
       $r .= '<div class="onlinehelp">'._T('acs:references_autres_composants').'</div>'.
             '<div class="onlinehelplayer">'.$this->get_cvars_html().'</div><br />';
@@ -221,23 +225,19 @@ class AdminComposant {
   }
 
 /**
- * Méthode edit: affiche un éditeur pour les variables du composant
+ * Méthode edit: affiche un editeur pour les variables du composant
+ * @param preview : afficher la previsualisation - display preview
+ * @return html code
  */
-  function edit($crayon=false) {
-    static $n;
-    $n++; // Numérotation du composant (utile pour js)
-    
-    /*
-    if ($crayon instanceof Crayon) {
-    }*/
-    
+  function edit($preview=false) {
     $r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'lib/picker/picker.js"></script>';
     $r .= "<input type='hidden' name='maj_composant' value='oui' />".
-					'<input type="hidden" name="composant" value="'.$this->type.'" />';
-      
+					'<input type="hidden" name="composant" value="'.$this->type.'" />'.
+					'<input type="hidden" name="nic" value="'.$this->nic.'" />';
+
+    $varconf = $this->fullname.$this->nic.'Config';
     if (($this->optionnel!='non') && ($this->optionnel!='no') && ($this->optionnel!='false')) {
-      $varname = $this->fullname.'Use';
-      $varconf = $this->fullname.'Config';
+      $varname = $this->fullname.$this->nic.'Use';
       if (isset($GLOBALS['meta'][$varname]) && $GLOBALS['meta'][$varname])
         $var = $GLOBALS['meta'][$varname];
       else
@@ -247,15 +247,15 @@ class AdminComposant {
       else
         $this->display = "display: none;";
 
-      $r .= '<div align="'.$GLOBALS['spip_lang_right'].'" style ="font-weight: normal"><label>'._T('acs:use').' '.$this->T('nom').' : </label>';
+      $r .= '<div align="'.$GLOBALS['spip_lang_right'].'" style ="font-weight: normal"><label>'._T('acs:use').' '.$this->T('nom').' '.$this->nic.' : </label>';
       // acs_bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="", $enable=true)
       $r .= acs_bouton_radio($varname, "oui", _T('item_oui'), $var == "oui", "changeVisible(this.checked, '$varconf', 'block', 'none');",$this->enable);
       $r .= acs_bouton_radio($varname, "non", _T('item_non'), $var == "non", "changeVisible(this.checked, '$varconf', 'none', 'block');",$this->enable);
       $r .= '</div>';
     }
 
-    $r .= '<div id="acs'.ucfirst($this->type).'Config" '.(isset($this->display) ? 'style="'.$this->display.'"' : '').'>';
-    if (!($crayon instanceof Crayon) && isset($this->preview) && ($this->preview != 'non')  && ($this->preview != 'no') && ($this->preview != 'false')) {
+    $r .= '<div id="'.$varconf.'" '.(isset($this->display) ? 'style="'.$this->display.'"' : '').'>';
+    if (!$preview && isset($this->preview) && ($this->preview != 'non')  && ($this->preview != 'no') && ($this->preview != 'false')) {
       $url = '../?page=wrap&c=composants/'.$this->type.'/'.$this->type.'&v='.$GLOBALS['meta']['acsDerniereModif'].'&var_mode=recalcul';
       $r .= '<fieldset class="apercu"><legend><a href="javascript:void(0)" onclick=" findObj(\''.$this->fullname.'\').src=\''.$url.'\';" title="'._T('admin_recalculer').'">'._T('previsualisation').'</a></legend><iframe id="'.$this->fullname.'" width="100%" height="'.(is_numeric($this->preview) ? $this->preview : 80).'px" frameborder="0" style="border:0" src="'.$url.'"></iframe></fieldset>';
     }
@@ -265,19 +265,19 @@ class AdminComposant {
       if ($var['nom'] === 'Use')
         continue;
       $v = $var['nom'];
-      if (isset($GLOBALS['meta'][$this->fullname.$v]))
-        $$v = $GLOBALS['meta'][$this->fullname.$v];
+      if (isset($GLOBALS['meta'][$this->fullname.$this->nic.$v]))
+        $$v = $GLOBALS['meta'][$this->fullname.$this->nic.$v];
       elseif (isset($var['valeur'])) {
         $default = $var['valeur'];
         if ((substr($default,0,3) =='acs') && isset($GLOBALS['meta'][$default]))
           $$v = $GLOBALS['meta'][$default];
-        else
+        elseif (substr($default,0,3) !='acs')
           $$v = $default;
       }
       $draw = 'ctl'.ucfirst($var['type']);
       if (is_callable(array($this,$draw)))
         $controls[$var['nom']] = $this->$draw($v, $$v, $var);
-      else $controls[$var['nom']] = $draw."() undefined.<br />" ;      
+      else $controls[$var['nom']] = $draw."() undefined.<br />" ;
     }
 
     // Recherche une mise en page et y remplace les variables par des contrôles
@@ -315,13 +315,13 @@ class AdminComposant {
 
   // Choix de couleur
   function ctlColor($nom, $couleur, $param) {
-    $var = $this->fullname.$nom;
+    $var = $this->fullname.$this->nic.$nom;
     return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td><td><input type="text" class="palette" id="'.$var.'" name="'.$var.'" size="8" maxlength="8" value="'.$couleur.'"></td></tr></table></div>';
   }
 
   // Choix d'image
   function ctlImg($nom, $image, $param) {
-    $var = $this->fullname.$nom;
+    $var = $this->fullname.$this->nic.$nom;
     $c = $GLOBALS['ACS_CHEMIN'].'/'.$param['chemin'];
     acs_creer_chemin($c);
     $s = @getimagesize('../'.$c.'/'.$image);
@@ -335,7 +335,7 @@ class AdminComposant {
 
   // Choix d'une largeur de bordure
   function ctlLargeurBord($nom, $largeur='0', $param) {
-    $var = $this->fullname.$nom;
+    $var = $this->fullname.$this->nic.$nom;
     $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
     if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td>';
     $r .= '<td><select name="'.$var.'" title="'._T('acs:bordlargeur').'" class="forml" style="width: auto">'.
@@ -353,7 +353,7 @@ class AdminComposant {
 
   // Choix d'un style  de bordure
   function ctlStyleBord($nom, $style='solid', $param) {
-    $var = $this->fullname.$nom;
+    $var = $this->fullname.$this->nic.$nom;
     $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
     if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td>';
     $r .= '<td><select name="'.$var.'" title="'._T('acs:bordstyle').'" class="forml" style="width: auto">'.
@@ -373,26 +373,26 @@ class AdminComposant {
 
   // Choix de valeur, avec + / - (todo)
   function ctlNombre($nom, $nombre=0, $param) {
-    $var = $this->fullname.$nom;
+    $var = $this->fullname.$this->nic.$nom;
     return '<table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'"  class="label">'.$this->T($nom).'</label></td><td><input type="text" name="'.$var.'" size="8" maxlength="6" class="forml" value="'.$nombre.'" style="text-align:'.$GLOBALS['spip_lang_right'].'" /></td></tr></table>';
   }
 
   // Saisie d'un texte
   function ctlText($nom, $txt, $param = array('taille' => 30)) {
-    $var = $this->fullname.$nom;
+    $var = $this->fullname.$this->nic.$nom;
     return '<table width="100%"><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'"  class="label">'.$this->T($nom).'</label></td><td><input type="text" name="'.$var.'" size="'.$param['taille'].'" maxlength="'.$param['taille'].'" class="forml" value="'.$txt.'" /></td></tr></table>';
   }
 
   // Saisie d'un texte long
   function ctlTextarea($nom, $txt, $param) {
-    $var = $this->fullname.$nom;
+    $var = $this->fullname.$this->nic.$nom;
     return '<div align="'.$GLOBALS['spip_lang_left'].'"><label for "'.$var.'" title="'.$var.'">'.$this->T($nom).'</label><textarea name="'.$var.'" class="forml" rows="'.(isset($param['lines']) ? $param['lines']-1 : 2).'">'.$txt.'</textarea></div>';
   }
 
   // Choix oui / non
   function ctlChoix($nom, $value, $param) {
     if (!is_array($param['option'])) return 'Pas d\'options pour '.$nom;
-    $var = $this->fullname.$nom;
+    $var = $this->fullname.$this->nic.$nom;
     $r = '<table><tr valign="bottom"><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td><td>';
     foreach($param['option'] as $option) {
       switch($option) {
@@ -420,14 +420,13 @@ class AdminComposant {
   function ctlWidget($nom, $value, $param ) {
     require_once(_DIR_PLUGIN_ACS.'lib/composant/composants_variables.php');
     $vars = composants_variables();
-    $var = $this->fullname.$nom;
-    if (!is_array($param['composant'])) return _T('acs:err_aucun_composant').' '.$nom.'<br />';
+    $var = $this->fullname.$this->nic.$nom;
 
     $r = '<table><tr><td><label for "'.$var.'" title="'.$var.'"  class="label">'.$this->T($nom).'</label></td><td><div id="'.$var.'" class="ctlWidget">';
     $r .= '<select id="select_'.$var.'" name="'.$var.'" class="forml select_widget">';
     $r .= '<option value=""'.($value=='' ? ' selected' : '').'> </option>';
 
-    foreach($param['composant'] as $c) {
+    foreach(array_keys(composants_liste()) as $c) {
       $cuse = 'acs'.ucfirst($c).'Use';
       if (isset($GLOBALS['meta'][$cuse]) && (($GLOBALS['meta'][$cuse] == 'oui') || ($GLOBALS['meta'][$cuse] == 'yes')))
         $r .= '<option value="'.$c.'"'.($value==$c ? ' selected' : '').'>'.ucfirst($c).'</option>';
@@ -445,7 +444,7 @@ class AdminComposant {
   }
 
   function ctlHidden($nom, $value, $param) {
-    $var = $this->fullname.$nom;
+    $var = $this->fullname.$nom.$this->nic;
     return '<input type="hidden" name="'.$var.'" value="'.$value.'" />';
   }
 }

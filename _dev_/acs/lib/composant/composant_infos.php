@@ -7,11 +7,9 @@
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
- * Retourne les pages du squelette qui utilisent le composant $c
+ * Retourne les pages du squelette qui utilisent l'instance $nic du composant $c
  */
-function composant_infos() {
-  $c = _request('c');
-
+function composant_infos($c, $nic) {
   include (_DIR_PLUGIN_ACS.'lib/composant/composant_get_infos.php');
   $r ='';
 
@@ -40,10 +38,10 @@ function composant_infos() {
     }
     $r .= '<br /><br />';
   }
-  $r .= liste_pages_composant(cGetPages($c), _T('acs:page'), _T('acs:pages'));
-  $r .= liste_pages_composant(cGetPages($c, 'modeles'), _T('acs:modele'), _T('acs:modeles'));
-  $r .= liste_pages_composant(cGetPages($c, 'formulaires'), _T('acs:formulaire'), _T('acs:formulaires'));
-  $r .= liste_pages_composant(cGetPages($c, 'composants'), _T('acs:composant'), _T('acs:composants'));
+  $r .= liste_pages_composant(cGetPages($c, $nic), _T('acs:page'), _T('acs:pages'));
+  $r .= liste_pages_composant(cGetPages($c, $nic, 'modeles'), _T('acs:modele'), _T('acs:modeles'));
+  $r .= liste_pages_composant(cGetPages($c, $nic, 'formulaires'), _T('acs:formulaire'), _T('acs:formulaires'));
+  $r .= liste_pages_composant(cGetPages($c, $nic, 'composants'), _T('acs:composant'), _T('acs:composants'));
   $cp = 'composants/'.$c.'/';
   $traductions = cGetTraductions($c,$cp.'lang',';.*[.]php$;iS');
   $r .= '<table width="100%"><tr><td colspan="2" class="onlinehelp">'.ucfirst(_T('spip:afficher_trad')).'</td></tr>';

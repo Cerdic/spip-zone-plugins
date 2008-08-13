@@ -26,7 +26,7 @@ function composants($c) {
 	$nom = $c->T('nom');
 	if ($nom == $c->type.' nom') $nom = ucfirst($c->type);
 	$r .= acs_box(
-		'<table width="100%"><tr><td width="99%">'.$nom.'</td><td>'.$over.'</td></tr></table>',
+		'<table width="100%"><tr><td width="99%">'.$nom.' '.$c->nic.'</td><td>'.$over.'</td>'.composant_instances_select($c->type, $c->nic).'</tr></table>',
 			'<form id="acs" name="acs" action="?exec=acs&onglet=composants" method="post">'.
 				$c->edit().
 				'<table width="100%"><td valign="bottom"><div style="text-align:'.$GLOBALS['spip_lang_right'].';">'.
@@ -37,5 +37,23 @@ function composants($c) {
 				);
 	$r .='<br /><a name="cTrad"></a><div id="cTrad"></div>'; // Container for translations - Ajax
 	return $r;
+}
+
+function composant_instances_select($c, $nic) {
+  include_spip('lib/composant/composants_variables');
+  $instances = composant_instances($c);
+  if (is_array($instances) && count($instances)) {
+    sort($instances);
+    $r ='<select name="nic" onchange=submit()>';
+    foreach($instances as $id) {
+      $r .= '<option value="'.$id.'"'.($id==$nic ? ' selected': '').'>'.$id.'</option>';
+    }
+    $r .='</select>';
+    $r .= "<input type='hidden' name='exec' value='acs' />".
+		'<input type="hidden" name="composant" value="'.$c.'" />'.
+		'<input type="hidden" name="onglet" value="composants" />';
+    $r = '<td><form action="">'.$r.'<noscript></td><td><input type="submit" value="'._T('bouton_valider').'"></noscript></form></td>';
+  }
+  return $r;
 }
 ?>

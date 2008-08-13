@@ -15,7 +15,7 @@ Home page
 <INCLURE{fond=composants/entete/entete}{self=#SELF}{page=sommaire}{title=<:acs:entete_meta_page_sommaire:>}{mkeywords=<:acs:entete_meta_keywords:>,<:acs:entete_sommaire:>}{mdescription=#GET{mdescription}}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
   <div class="mg">[(#REM) Colonne 1 avec menu de navigation par rubriques ]
-    <INCLURE{fond=composants/col1/col1}{self=#SELF}{composants_optionnels=5}{debut_forums_liens}>
+    <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
 	</div>[(#REM) fin menu ]
 </div>[(#REM) fin colonne1 (navigation) ]
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
@@ -31,7 +31,7 @@ Home page
 </div>[(#REM) fin colonne2]
 <div id="colonne3"><div class="spacer"></div>
   <div class="encart">[(#REM) colonne 3 configurable ]
-    <INCLURE{fond=composants/col3/col3}{self=#SELF}{composants_optionnels=4}{debut_breves}{debut_doc}>
+    <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=25}>
   </div>[(#REM) fin encart ]
 </div>[(#REM) Fin colonne3]
 [(#REM) Pied de page ]

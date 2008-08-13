@@ -1,6 +1,6 @@
 Modèle cat
 
-Dernière mise à jour de ce fichier le 16/04/2008, par dF (version provisoire)
+Dernière mise à jour de ce fichier le 13/08/2008, par dF (version provisoire)
 
 Cat est un modèle ACS. Cat signifie "catalogue": cat est un squelette-type multilingue dont le cahier des charges exige qu'il fonctionne avec tous les composants ACS, qu'ils soient activés ou non.
 

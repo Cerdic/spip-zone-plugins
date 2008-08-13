@@ -4,13 +4,9 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Header',
-'description' => 'Container for other components.',
+'description' => 'Beginning of page, and container for other components.',
 'help' => 'By default, Header contains Banner and Bandeau.',
 
-'1' => 'Header 1',
-'2' => 'Header 2',
-'3' => 'Header 3',
-'4' => 'Header 4',
 'Favicon' => 'Bookmark icon'
 );
 ?>

@@ -1,0 +1,22 @@
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2008
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+]
+
+#SET{use1,#CONFIG{#EVAL{acs(#ENV{c1}|ucfirst)Use}}}
+[(#GET{use1}|=={oui}|?{' '}) [(#SET{c11,composants/[(#ENV{c1})]/[(#ENV{c1})]})] <INCLURE{fond=#GET{c11}}{env=#ENV}{self=#SELF}{id_rubrique}{debut_forums_liens}><div class="spacer"></div>]
+#SET{use2,#CONFIG{#EVAL{acs(#ENV{c2}|ucfirst)Use}}}
+[(#GET{use2}|=={oui}|?{' '}) [(#SET{c12,composants/[(#ENV{c2})]/[(#ENV{c2})]})] <INCLURE{fond=#GET{c12}}{env=#ENV}{self=#SELF}{id_rubrique}{debut_forums_liens}><div class="spacer"></div>]
+#SET{use3,#CONFIG{#EVAL{acs(#ENV{c3}|ucfirst)Use}}}
+[(#GET{use3}|=={oui}|?{' '}) [(#SET{c13,composants/[(#ENV{c3})]/[(#ENV{c3})]})] <INCLURE{fond=#GET{c13}}{env=#ENV}{self=#SELF}{id_rubrique}{debut_forums_liens}><div class="spacer"></div>]
+#SET{use4,#CONFIG{#EVAL{acs(#ENV{c4}|ucfirst)Use}}}
+[(#GET{use4}|=={oui}|?{' '}) [(#SET{c14,composants/[(#ENV{c4})]/[(#ENV{c4})]})] <INCLURE{fond=#GET{c14}}{env=#ENV}{self=#SELF}{id_rubrique}{debut_forums_liens}><div class="spacer"></div>]
+#SET{use5,#CONFIG{#EVAL{acs(#ENV{c5}|ucfirst)Use}}}
+[(#GET{use5}|=={oui}|?{' '}) [(#SET{c15,composants/[(#ENV{c5})]/[(#ENV{c5})]})] <INCLURE{fond=#GET{c15}}{env=#ENV}{self=#SELF}{id_rubrique}{debut_forums_liens}><div class="spacer"></div>]
+#SET{use6,#CONFIG{#EVAL{acs(#ENV{c6}|ucfirst)Use}}}
+[(#GET{use6}|=={oui}|?{' '}) [(#SET{c16,composants/[(#ENV{c6})]/[(#ENV{c6})]})] <INCLURE{fond=#GET{c16}}{env=#ENV}{self=#SELF}{id_rubrique}{debut_forums_liens}><div class="spacer"></div>]

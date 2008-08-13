@@ -11,11 +11,16 @@ composants_ajouter_balises();
 
 function balise_PINCEAU($p) {
   $composant = interprete_argument_balise(1,$p);
-  $composant = substr($composant, 1, strlen($composant)-2);
-  $p->code = '"crayon composant-'.$composant.'-1 type_pinceau"';
+  $instance = interprete_argument_balise(2,$p);
+  $instance = $instance ? $instance : "'0'";
+  $p->code = 'calculer_balise_pinceau('.$composant.', '.$instance.')';
   $p->statut = 'php';
   $p->interdire_scripts = false;
   return $p;
+}
+
+function calculer_balise_pinceau($composant, $instance) {
+    return  'crayon composant-'.$composant.'-'.$instance.' type_pinceau';
 }
 
 function balise_ACS_DERNIERE_MODIF($p) {

@@ -1,7 +1,8 @@
 ACS version 0.4
+- tous les composants deviennent instanciables
 - utilisation plus confortable et plus intuitive avec les plugins optionnels crayons et palette.
 - simplification des insertions css et javascripts des composants
-- simplification de la gestion des traductions. Contrôleur pour plugin crayons
+- simplification de la gestion des traductions.
 - valeurs par défaut pour l'initialisation (composants/def.php)
 - nouvelle option de config ACS : affichage des pages et des inclusions des composants
 - interface d'administration d'ACS refaite, acceuil sur l'explorateur Ajax
@@ -13,5 +14,6 @@ Modèle Cat pour ACS vesion 0.4:
 - fusion des composants Forum et Derniers_commentaires en un seul composant: Forums.
 - composant Liste_articles devient Articles.
 - composant Acces inclut au composant Articles (simplification).
-- création du composant Pied
-- intégration gestion des tags meta au composant entete
+- création du composant Pied, utilisant Module.
+- intégration gestion des tags meta au composant entete, Usage de Module.
+- creation du composant Module, adaptation des pages, et suppression des composants numérotés.

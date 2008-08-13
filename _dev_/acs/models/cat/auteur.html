@@ -3,7 +3,7 @@
 <INCLURE{fond=composants/entete/entete}{self=#SELF}{env=#ENV}{page=auteur}{title=#GET{title}}{mdescription=#BIO|couper{150}|textebrut}{mkeywords=#GET{mkeywords}}{mauthor=#NOM|textebrut}{mexpires=86400}{mabstract=#GET{mabstract}}{mpublisher=#NOM|textebrut}{mcontributor=#NOM|textebrut}{msubject=#NOM|textebrut}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation lateral (colonne 1)]
   <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
-	  <INCLURE{fond=composants/col1/col1}{self=#SELF}>
+    <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
     <INCLURE{fond=composants/auteurs/auteurs}{self=#SELF}{debut_auteurs}{id_auteur}>[(#REM) Autres auteurs ]
   </div>[(#REM) fin menu ]
 </div>[(#REM) fin colonne1 (navigation)]

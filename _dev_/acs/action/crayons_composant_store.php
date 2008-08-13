@@ -29,11 +29,11 @@ function action_crayons_composant_store_dist() {
 	// MàJ du composant - Update component
 	// l'instanciation d'un objet composant met à jour le composant
 	include_spip('lib/composant/classComposantPrive');
-	$cprovi = new AdminComposant($_POST['composant']);
+	$cprovi = new AdminComposant($_POST['composant'], $_POST['nic']);
 	
 	// Retourne la vue - Return vue 
 	$return['$erreur'] ='';
-  $return[$wid] = vues_dist('composant', $_POST['composant'], 1, array('var_mode'=>'recalcul', 'c'=>$c));
+  $return[$wid] = vues_dist('composant', $c, $_POST['nic'], array('var_mode'=>'recalcul'));
 	echo var2js($return);
 	exit;
 }
@@ -49,12 +49,10 @@ function vues_dist($type, $modele, $id, $content){
 		lang_select($a = $GLOBALS['meta']['langue_site']);
 	}
 
-  // chercher vues/article_toto.html
-  // sinon vues/toto.html
   if (find_in_path(($fond = 'vues/composant').'.html')) {
 		$contexte = array(
-		    'id_' . $type => $id,
-		    'champ' => $modele,
+		    'nic' => $id,
+		    'c' => $modele,
 		    'lang' => $GLOBALS['spip_lang']
 		);
 		$contexte = array_merge($contexte, $content);

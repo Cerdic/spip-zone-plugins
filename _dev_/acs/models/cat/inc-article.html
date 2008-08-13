@@ -14,7 +14,7 @@ Si le plugin notation est présent, il est intégré.
 <INCLURE{fond=composants/entete/entete}{env=#ENV}{page=article}{title=#TITRE|textebrut}{mdescription=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mauthor=#LESAUTEURS|supprimer_tags|textebrut}{mabstract=#GET{mdescription}}{mcopyright=#LESAUTEURS|supprimer_tags|textebrut}{mcontributor=#LESAUTEURS|supprimer_tags|textebrut}{mpublisher=#LESAUTEURS|supprimer_tags|textebrut}{msubject=#GET{mabstract}}>[(#REM) Entete de la page + titre du site ]
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
   <div class="mg">    
-    <INCLURE{fond=composants/col1/col1}{self=#SELF}{env=#ENV}>[(#REM) Colonne 1 - Menu de navigation par rubriques ]
+    <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}{id_article}>[(#REM) Colonne 1 - Menu de navigation par rubriques ]
     <B_auteurs>
     <ul>
         <BOUCLE_auteurs(AUTEURS) {id_article} {par nom} >
@@ -154,7 +154,7 @@ Si le plugin notation est présent, il est intégré.
 <div id="colonne3"><div class="spacer"></div>
   <div class="encart">
     [(#REM) colonne 3 configurable ]
-    <INCLURE{fond=composants/col3/col3}{self=#SELF}{env=#ENV}{debut_doc}>
+    <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=25}{id_article}>
   </div>[(#REM) fin encart ]
 </div>[(#REM) fin colonne3]
 <INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]

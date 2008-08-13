@@ -20,5 +20,4 @@ if (!is_writable($v__file))
 // Affichage d'une vue du code source
 $v__source = file_get_contents($v__file);
 echo entites_html($v__source);
-file_put_contents('tmp/test_source_depuis_vue.txt', $v__source);
 ?>

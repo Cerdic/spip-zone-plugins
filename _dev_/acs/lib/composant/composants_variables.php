@@ -26,6 +26,7 @@ function composants_variables() {
 
 // On profite de la lecture du fichier composant.xml pour récupérer en une seule fois toutes les informations utiles:
 // lien variable<->composant, type de variable, actif/inactif
+//TODO: ajouter aussi les composants instanciables !!!
 function lecture_composants_variables() {
   require_once _DIR_ACS.'lib/composant/composants_liste.php';
 
@@ -48,6 +49,17 @@ function lecture_composants_variables() {
         $r[$tag.$nom] = array('composant' => $composant, 'type' => $type);
       }
     }
+  }
+  return $r;
+}
+
+function composant_instances($c) {
+  $r =array();
+  $metas = $GLOBALS['meta'];
+  $reg = '/acs'.ucfirst($c).'(\d+)Use/';
+  foreach ($metas as $meta=>$val) {
+    if (preg_match($reg, $meta, $matches))
+      $r[] = $matches[1];
   }
   return $r;
 }

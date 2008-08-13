@@ -1,6 +1,6 @@
 #CACHE{0}
 <?php // Widget's style is not included yet in above css if just activated
 $fond='#ENV{c}.css';
-echo '<style>'.@recuperer_fond($fond).'</style>';
-?>
-<INCLURE {fond=#ENV{c}}>
+if ($fond=@recuperer_fond($fond))
+	echo '<style>'.$fond.'</style>';
+?><INCLURE {fond=#ENV{c}}{nic=#NIC}>

@@ -11,7 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '1' => 'Component 1',
 '2' => 'Component 2',
 '3' => 'Component 3',
-'4' => 'Component 4 (optionnal)',
-'5' => 'Component 5 (optionnal)'
+'4' => 'Component 4',
+'5' => 'Component 5',
+'6' => 'Component 6'
 );
 ?>

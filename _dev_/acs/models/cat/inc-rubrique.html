@@ -3,9 +3,9 @@
 <INCLURE{fond=composants/entete/entete}{env=#ENV}{page=rubrique}{title=#TITRE|textebrut}>
 
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
-    <div class="mg">[(#REM) Menu de navigation par rubriques ]
-      <INCLURE{fond=composants/col1/col1}{id_rubrique}{env=#ENV}>
-  </div>[(#REM) fin menu ]
+  <div class="mg">[(#REM) Menu de navigation par rubriques ]
+    <INCLURE{fond=composants/module/module}{nic=21}{self=#SELF}{env=#ENV}{id_rubrique}>
+   </div>[(#REM) fin menu ]
 </div>[(#REM) fin colonne1 (navigation) ]
 
 [(#REM) Colonne 2 ]
@@ -57,7 +57,7 @@
 
     <INCLURE{fond=composants/breves/breves}{env=#ENV}{id_secteur}{debut_breves}>[(#REM) Breves du secteur ]
     <INCLURE{fond=composants/syndic/syndic-rub}{env=#ENV}{id_rubrique}>[(#REM) Sites de la rubrique ]
-
+    <INCLURE{fond=composants/module/module}{nic=26}{self=#SELF}{env=#ENV}{id_rubrique}>
   </div>[(#REM) fin encart]
 </div>[(#REM) fin colonne 3]
 

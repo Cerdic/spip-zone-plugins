@@ -1,6 +1,6 @@
 <composant>
   <!-- Nom du composant -->
-  <nom>Entete</nom>
+  <nom>Module</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
   <version>0.4</version>
@@ -13,14 +13,29 @@
     <nom>optionnel</nom>
     <valeur>no</valeur>
   </param>
-  <param>
-    <nom>preview</nom>
-    <valeur>250</valeur>
-  </param>
 
-	<variable>
-    <nom>Favicon</nom>
-    <type>img</type>
-		<chemin>img/favicon</chemin>
+  <variable>
+    <nom>1</nom>
+    <type>widget</type>
+  </variable>
+  <variable>
+    <nom>2</nom>
+    <type>widget</type>
+  </variable>
+  <variable>
+    <nom>3</nom>
+    <type>widget</type>
+  </variable>
+  <variable>
+    <nom>4</nom>
+    <type>widget</type>
+  </variable>
+  <variable>
+    <nom>5</nom>
+    <type>widget</type>
+  </variable>
+  <variable>
+    <nom>6</nom>
+    <type>widget</type>
   </variable>
 </composant>
