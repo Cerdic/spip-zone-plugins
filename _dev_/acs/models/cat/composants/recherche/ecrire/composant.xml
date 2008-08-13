@@ -12,7 +12,7 @@
 
   <param>
     <nom>optionnel</nom>
-    <valeur>activer_moteur</valeur>
+    <valeur>oui</valeur>
   </param>
   <param>
     <nom>preview</nom>
