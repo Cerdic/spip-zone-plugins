@@ -1,12 +1,22 @@
 <plugin>
 	<nom>Rainette</nom>
-	<auteur>Art&eacute;go, touti, Cedric Morin</auteur>
+	<auteur>Cedric Morin d'apr&egrave;s une id&eacute;e originale de Art&eacute;go et touti (plugin Grenouille)</auteur>
 	<version>1.0</version>
 	<etat>stable</etat>
-	<description>Pr&eacute;visions m&eacute;t&eacute;o extraites du xml comme xoap.weather.com/weather/local/FRXX0337?cc=*&amp;unit=s&amp;dayf=7
-	_ D&eacute;posez vos images numerotees.png dans le sous-dossier grenouille/ de votre dossier squelettes ! cf http://liquidweather.net/icons.php
-	_ {{Mod&egrave;le}} dans squelettes <code>[(#MODELE{meteo,code=frxxx,jours=3})]</code> ou en r&eacute;daction &#60;meteo|code=frxxx|jour=3&#62;
+	<description>
+Ce plugin permet d'afficher les conditions et les pr&eacute;visions m&eacute;t&eacute;orologiques d'une ville donn&eacute;e &agrave; partir du flux xml fourni par le site weather.com.
+Il s'inspire dans son principe du plugin Grenouille mais ne stocke aucune information en base de donn&eacute;es ni ne g&egrave;re le choix des villes.
+
+L'affichage des donn&eacute;es m&eacute;t&eacute;orologiques se fait uniquement via l'utilisation de mod&egrave;les dans les squelettes utilisateur. Le plugin propose des 
+{{mod&egrave;les}} par d&eacute;faut comme {prevision_meteo} utilisable comme suit:
+_ dans un squelette <code>[(#MODELE{previsions_meteo,code=FRXX0076,jours=3})]</code>
+_ ou en r&eacute;daction <code><previsions_meteo|code=FRXX0076|jours=3>.</code>
+
+Il est possible de personnaliser les icones du temps en d&eacute;posant vos images {numero.png} dans le sous-dossier grenouille/ de votre dossier squelette ou plugin !
+_ Cf le site [->http://liquidweather.net/icons.php] pour des jeux d'icones vari&eacute;s...
 	</description>
+	<icon>rainette-64.png</icon>
 	<fonctions>grenouille_fonctions.php</fonctions>
+	<options>grenouille_options.php</options>
 	<prefix>grenouille</prefix>
 </plugin>
