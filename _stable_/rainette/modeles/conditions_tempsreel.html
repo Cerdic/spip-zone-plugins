@@ -1,0 +1,17 @@
+[(#REM)
+
+Cette noisette affiche les infos meteos temps reel
+Elle est appelee par la fonction croaaaaa_conditions
+
+]<li><h4><span class='jour'>[(#ENV{date}|nom_jour) ]</span><span class='date'>[(#ENV{date}|affdate_jourcourt)]</span></h4>
+<span class='temperature'><em>Temp&eacute;rature&nbsp;r&eacute;elle:</em> #ENV{t_reelle}&deg;C</span><br />
+<span class='temperature'><em>Temp&eacute;rature&nbsp;ressentie:</em> #ENV{t_ressentie}&deg;C</span><br />
+<span class='icone'>[(#ENV{icone}|grenouille_icone_meteo)]</span><br />
+<span class='details'>[(#ENV{icone}|grenouille_icone_details)]</span><br />
+<span class='details'>Pression: [(#ENV{pression})]</span><br />
+<span class='details'>Tendance de pression: [(#ENV{tendance_pression})]</span><br />
+<span class='details'>Vitesse du vent: [(#ENV{vitesse_vent})]</span><br />
+<span class='details'>Direction du vent: [(#ENV{direction_vent})]</span><br />
+<span class='details'>Humidit&eacute;: [(#ENV{humidite})]</span><br />
+<span class='details'>Point de ros&eacute;e: [(#ENV{point_rosee})]</span>
+</li>

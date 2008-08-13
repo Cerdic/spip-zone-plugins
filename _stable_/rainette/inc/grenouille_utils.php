@@ -75,7 +75,7 @@ function grenouille_traduire_temps($temps) {
  * @return array
  * @author Cedric Morin
  */
-function grenouille_xml2tab($xml){
+function grenouille_xml2tab_previsions($xml){
 	$tableau = array();
 	$n = spip_xml_match_nodes(",^dayf,",$xml,$previsions);
 	if ($n==1){
@@ -88,14 +88,38 @@ function grenouille_xml2tab($xml){
 				$jour = date('Y-m-d',$date+$regs[1]*24*3600);
 				$p = reset($p);
 				$tableau[$jour]['date'] = $jour;
-				$tableau[$jour]['maxima']=intval($p['hi'][0])?grenouille_fahrenheit2celsius(intval($p['hi'][0])):'';
-				$tableau[$jour]['minima']=intval($p['low'][0])?grenouille_fahrenheit2celsius(intval($p['low'][0])):'';
+				$tableau[$jour]['maxima']=intval($p['hi'][0])?intval($p['hi'][0]):'';
+				$tableau[$jour]['minima']=intval($p['low'][0])?intval($p['low'][0]):'';
 				$tableau[$jour]['icone']=intval($p['part p="d"'][0]['icon'][0]);
 				$tableau[$jour]['humidite']=intval($p['hmid'][0])?intval($p['hmid'][0]):'';
 			}
 		}
 		// trier par date
 		ksort($tableau);
+	}
+	return $tableau;
+}
+
+function grenouille_xml2tab_conditions($xml){
+	$tableau = array();
+	$n = spip_xml_match_nodes(",^cc,",$xml,$conditions);
+	if ($n==1){
+		$conditions = reset($conditions['cc']);
+		// recuperer la date de debut des conditions
+		$date = $conditions['lsup'][0];
+		$date = strtotime(preg_replace(',\slocal\s*time\s*,ims','',$date));
+		$jour = date('Y-m-d',$date);
+		$tableau['date'] = $jour;
+		$tableau['t_reelle']=intval($conditions['tmp'][0])?intval($conditions['tmp'][0]):'';
+		$tableau['t_ressentie']=intval($conditions['flik'][0])?intval($conditions['flik'][0]):'';
+		$tableau['icone']=intval($conditions['icon'][0]);
+		$tableau['pression']=intval($conditions['bar'][0]['r'][0]);
+		$tableau['tendance_pression']=$conditions['bar'][0]['d'][0];
+		$tableau['vitesse_vent']=intval($conditions['wind'][0]['s'][0]);
+		$tableau['direction_vent']=$conditions['wind'][0]['t'][0];
+		$tableau['humidite']=intval($conditions['hmid'][0])?intval($conditions['hmid'][0]):'';
+		$tableau['point_rosee']=intval($conditions['dewp'][0])?intval($conditions['dewp'][0]):'';
+		// trier par date
 	}
 	return $tableau;
 }
@@ -110,19 +134,21 @@ function grenouille_xml2tab($xml){
  * @return string
  * @author Cedric Morin
  */
-function grenouille_charge_meteo($code_frxx){
+function grenouille_charge_meteo($code_frxx, $mode='previsions'){
 	$dir = sous_repertoire(_DIR_CACHE,"rainette");
 	$dir = sous_repertoire($dir,substr(md5($code_frxx),0,1));
-	$f = $dir . $code_frxx . ".txt";
+	$f = $dir . $code_frxx . "_".$mode . ".txt";
+	$reload_time = ($mode == 'previsions') ? _RAINETTE_RELOAD_TIME_PREVISIONS : _RAINETTE_RELOAD_TIME_CONDITIONS;
 	if (!file_exists($f)
-	  OR !filemtime($f)
-	  OR (time()-filemtime($f)>_GRENOUILLE_RELOAD_TIME)) {
-		$flux = "http://xoap.weather.com/weather/local/".$code_frxx."?cc=*&unit=s&dayf="._GRENOUILLE_JOURS_PREVISION;
+	  || !filemtime($f)
+	  || (time()-filemtime($f)>$reload_time)) {
+		$flux = "http://xoap.weather.com/weather/local/".$code_frxx."?unit="._RAINETTE_SYSTEME_MESURE;
+		$flux .= ($mode == 'previsions') ? "&dayf="._RAINETTE_JOURS_PREVISION : "&cc=*";
 		include_spip('inc/xml');
 		$xml = spip_xml_load($flux);
-		$tableau = grenouille_xml2tab($xml);
+		$tableau = ($mode == 'previsions') ? grenouille_xml2tab_previsions($xml) : grenouille_xml2tab_conditions($xml);
 		ecrire_fichier($f,serialize($tableau));
-  }
+	}
   return $f;
 }
 
