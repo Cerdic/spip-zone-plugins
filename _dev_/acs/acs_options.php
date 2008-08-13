@@ -25,7 +25,7 @@ if(in_array('openPublishing', $GLOBALS['plugins'])) {
 //define('_DEBUG_CRAYONS', true);
 /*__________________________________________________________________
 
-  Ne PAS modifier ce qui suit - Do NOT modify antything after this
+  Ne PAS modifier ce qui suit - Do NOT modify anything after this
   __________________________________________________________________
 */
 require_once _DIR_PLUGIN_ACS.'inc/acs_onload.php';
