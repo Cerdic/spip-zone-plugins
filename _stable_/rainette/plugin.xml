@@ -10,7 +10,7 @@ Il s'inspire dans son principe du plugin Grenouille mais ne stocke aucune inform
 L'affichage des donn&eacute;es m&eacute;t&eacute;orologiques se fait uniquement via l'utilisation de mod&egrave;les dans les squelettes utilisateur. Le plugin propose des 
 {{mod&egrave;les}} par d&eacute;faut comme {prevision_meteo} utilisable comme suit:
 _ dans un squelette &lt;code&gt;[(#MODELE{previsions_meteo,code=FRXX0076,jours=3})]&lt;/code&gt;
-_ ou en r&eacute;daction &lt;code&gt;&lt;previsions_meteo|code=FRXX0076|jours=3>.&lt;/code&gt;
+_ ou en r&eacute;daction &lt;code&gt;&lt;previsions_meteo|code=FRXX0076|jours=3&gt;.&lt;/code&gt;
 
 Il est possible de personnaliser les icones du temps en d&eacute;posant vos images {numero.png} dans le sous-dossier grenouille/ de votre dossier squelette ou plugin !
 _ Cf le site [->http://liquidweather.net/icons.php] pour des jeux d'icones vari&eacute;s...
