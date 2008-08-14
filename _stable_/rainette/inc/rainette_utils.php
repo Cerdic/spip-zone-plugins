@@ -1,6 +1,6 @@
 <?php
 
-function grenouille_decode_icone($code){
+function rainette_decode_icone($code){
  	$tableau_meteo	= array(
 							"1"	=> "pluie",
 							"2"	=> "pluie",
@@ -61,7 +61,7 @@ function grenouille_decode_icone($code){
  * @return string traduction
  * @author Pierre Basson
  **/
-function grenouille_traduire_temps($temps) {
+function rainette_traduire_temps($temps) {
 	if (!$temps) return '';
 	return _T('grenouille:meteo_'.$temps);
 }
@@ -75,7 +75,7 @@ function grenouille_traduire_temps($temps) {
  * @return array
  * @author Cedric Morin
  */
-function grenouille_xml2tab_previsions($xml){
+function rainette_xml2tab_previsions($xml){
 	$tableau = array();
 	$n = spip_xml_match_nodes(",^dayf,",$xml,$previsions);
 	if ($n==1){
@@ -100,7 +100,7 @@ function grenouille_xml2tab_previsions($xml){
 	return $tableau;
 }
 
-function grenouille_xml2tab_conditions($xml){
+function rainette_xml2tab_conditions($xml){
 	$tableau = array();
 	$n = spip_xml_match_nodes(",^cc,",$xml,$conditions);
 	if ($n==1){
@@ -135,7 +135,7 @@ function grenouille_xml2tab_conditions($xml){
  * @return string
  * @author Cedric Morin
  */
-function grenouille_charge_meteo($code_frxx, $mode='previsions'){
+function rainette_charge_meteo($code_frxx, $mode='previsions'){
 	$dir = sous_repertoire(_DIR_CACHE,"rainette");
 	$dir = sous_repertoire($dir,substr(md5($code_frxx),0,1));
 	$f = $dir . $code_frxx . "_".$mode . ".txt";
@@ -147,20 +147,20 @@ function grenouille_charge_meteo($code_frxx, $mode='previsions'){
 		$flux .= ($mode == 'previsions') ? "&dayf="._RAINETTE_JOURS_PREVISION : "&cc=*";
 		include_spip('inc/xml');
 		$xml = spip_xml_load($flux);
-		$tableau = ($mode == 'previsions') ? grenouille_xml2tab_previsions($xml) : grenouille_xml2tab_conditions($xml);
+		$tableau = ($mode == 'previsions') ? rainette_xml2tab_previsions($xml) : rainette_xml2tab_conditions($xml);
 		ecrire_fichier($f,serialize($tableau));
 	}
 	return $f;
 }
 
 /**
- * grenouille_fahrenheit2celsius
+ * rainette_fahrenheit2celsius
  *
  * @param int temperature en fahrenheit
  * @return int temperature en celcius
  * @author Pierre Basson
  **/
-/* function grenouille_fahrenheit2celsius($t) {
+/* function rainette_fahrenheit2celsius($t) {
 	return round( ($t - 32) * 5 / 9 );
 }
  */

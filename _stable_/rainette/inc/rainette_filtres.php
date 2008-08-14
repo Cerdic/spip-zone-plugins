@@ -9,26 +9,26 @@
  * @author Pierre Basson
  **/
 # cf pour le choix des icones http://liquidweather.net/icons.php
-function grenouille_icone_meteo($icone, $chemin='', $extension="png"){
+function rainette_icone_meteo($icone, $chemin='', $extension="png"){
 	if (!$chemin) $chemin = _RAINETTE_ICONES_PATH;
-	include_spip('inc/grenouille_utils');
-	$temps = grenouille_decode_icone($icone);
+	include_spip('inc/rainette_utils');
+	$temps = rainette_decode_icone($icone);
 	if ($img = find_in_path($chemin.$icone.'.'.$extension)) {
 		list ($h,$l) = taille_image($img);
-		return '<img src="'.$img.'" alt="'.grenouille_traduire_temps($temps).'" title="'.grenouille_traduire_temps($temps).'" width="'.$l.'" height="'.$h.'" />';
+		return '<img src="'.$img.'" alt="'.rainette_traduire_temps($temps).'" title="'.rainette_traduire_temps($temps).'" width="'.$l.'" height="'.$h.'" />';
 	} elseif (
 	  ($chemin = 'img_meteo/')
 	  AND	($img = find_in_path($chemin.$temps.'.'.$extension))) {
 		#alors le dossier /grenouille n'a pas d'image, on reprend la fonction de depart (avec images de img_meteo)
 		list ($h,$l) = taille_image($img);
-		return '<img src="'.$img.'" alt="'.grenouille_traduire_temps($temps).'" title="'.grenouille_traduire_temps($temps).'" width="'.$l.'" height="'.$h.'" />';
+		return '<img src="'.$img.'" alt="'.rainette_traduire_temps($temps).'" title="'.rainette_traduire_temps($temps).'" width="'.$l.'" height="'.$h.'" />';
 	}
 	return "";
 }
-function grenouille_icone_details($icone){
-	include_spip('inc/grenouille_utils');
-	$temps = grenouille_decode_icone($icone);
-	return grenouille_traduire_temps($temps);
+function rainette_icone_details($icone){
+	include_spip('inc/rainette_utils');
+	$temps = rainette_decode_icone($icone);
+	return rainette_traduire_temps($temps);
 }
 
 /**
@@ -40,9 +40,9 @@ function grenouille_icone_details($icone){
  * @return string
  * @author Cedric Morin
  */
-function grenouille_croaaaaa_previsions($code_frxx, $nb_jours_affiche=99, $modele='previsions_jour'){
-	include_spip('inc/grenouille_utils');
-	$nom_fichier = grenouille_charge_meteo($code_frxx, 'previsions');
+function rainette_croaaaaa_previsions($code_frxx, $nb_jours_affiche=99, $modele='previsions_jour'){
+	include_spip('inc/rainette_utils');
+	$nom_fichier = rainette_charge_meteo($code_frxx, 'previsions');
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
 	$texte = "";
@@ -53,9 +53,9 @@ function grenouille_croaaaaa_previsions($code_frxx, $nb_jours_affiche=99, $model
 	return $texte;
 }
 
-function grenouille_croaaaaa_conditions($code_frxx, $modele='conditions_tempsreel'){
-	include_spip('inc/grenouille_utils');
-	$nom_fichier = grenouille_charge_meteo($code_frxx, 'conditions');
+function rainette_croaaaaa_conditions($code_frxx, $modele='conditions_tempsreel'){
+	include_spip('inc/rainette_utils');
+	$nom_fichier = rainette_charge_meteo($code_frxx, 'conditions');
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
 	$page = evaluer_fond("modeles/$modele", $tableau);			

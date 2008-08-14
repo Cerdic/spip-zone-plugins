@@ -1,3 +1,0 @@
-Mettez dans le dossier squelettes/grenouille vos icones de meteo preferees,
-suite d'icones 1.png 2.png etc... 
-telechargeable par exemple  ici http://liquidweather.net/icons.php

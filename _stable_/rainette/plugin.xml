@@ -8,15 +8,15 @@ Ce plugin permet d'afficher les conditions et les pr&eacute;visions m&eacute;t&e
 Il s'inspire dans son principe du plugin Grenouille mais ne stocke aucune information en base de donn&eacute;es ni ne g&egrave;re le choix des villes.
 
 L'affichage des donn&eacute;es m&eacute;t&eacute;orologiques se fait uniquement via l'utilisation de mod&egrave;les dans les squelettes utilisateur. Le plugin propose des 
-{{mod&egrave;les}} par d&eacute;faut comme {prevision_meteo} utilisable comme suit:
-_ dans un squelette <code>[(#MODELE{previsions_meteo,code=FRXX0076,jours=3})]</code>
-_ ou en r&eacute;daction <code>&lt;previsions_meteo|code=FRXX0076|jours=3&gt;.</code>
+{{mod&egrave;les}} par d&eacute;faut comme {rainette_previsions} utilisable comme suit:
+_ dans un squelette <code>[(#MODELE{rainette_previsions,code=FRXX0076,jours=3})]</code>
+_ ou en r&eacute;daction <code><rainette_previsions|code=FRXX0076|jours=3>.</code>
 
-Il est possible de personnaliser les icones du temps en d&eacute;posant vos images {numero.png} dans le sous-dossier grenouille/ de votre dossier squelette ou plugin !
+Il est possible de personnaliser les icones du temps en d&eacute;posant vos images {numero.png} dans le sous-dossier rainette/ de votre dossier squelette ou plugin !
 _ Cf le site [->http://liquidweather.net/icons.php] pour des jeux d'icones vari&eacute;s...
 	</description>
 	<icon>rainette-64.png</icon>
-	<fonctions>grenouille_fonctions.php</fonctions>
-	<options>grenouille_options.php</options>
-	<prefix>grenouille</prefix>
+	<fonctions>rainette_fonctions.php</fonctions>
+	<options>rainette_options.php</options>
+	<prefix>rainette</prefix>
 </plugin>
