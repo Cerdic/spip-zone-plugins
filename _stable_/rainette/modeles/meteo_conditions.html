@@ -1,6 +1,6 @@
 [(#REM)
 Afficher les donnees meteo temps reel pour le code #ENV{code} avec le sous-modele #ENV{modele}
 ]
-<ul class='meteo' id='meteo-#ENV{code}'>
-[(#ENV{code}|grenouille_croaaaaa_conditions{#ENV{modele,conditions_tempsreel}})]
-</ul>
+<div class='meteo' id='meteo-#ENV{code}'>
+[(#ENV{code}|grenouille_croaaaaa_conditions{#ENV{sous_modele,conditions_tempsreel}})]
+</div>

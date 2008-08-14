@@ -34,7 +34,7 @@
 		'meteo_NA' => "Inconnu",
 		'temperature_inconnue' => "Temp&eacute;rature inconnue",
 
-		'ajouter_une_meteo' => "Ajouter une m&eacute;t&eacute;o",
+/* 		'ajouter_une_meteo' => "Ajouter une m&eacute;t&eacute;o",
 		'numero_meteo' => "M&Eacute;T&Eacute;O NUM&Eacute;RO",
 		'liste_des_meteos' => "Liste des m&eacute;t&eacute;os",
 		'nouvelle_ville' => "Nouvelle ville",
@@ -60,7 +60,7 @@
 		
 
 		'Z' => 'ZZzZZzzz'
-
+ */
 	);
 
 ?>

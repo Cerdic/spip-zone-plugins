@@ -116,6 +116,7 @@ function grenouille_xml2tab_conditions($xml){
 		$tableau['pression']=intval($conditions['bar'][0]['r'][0]);
 		$tableau['tendance_pression']=$conditions['bar'][0]['d'][0];
 		$tableau['vitesse_vent']=intval($conditions['wind'][0]['s'][0]);
+		$tableau['degre_vent']=intval($conditions['wind'][0]['d'][0]);
 		$tableau['direction_vent']=$conditions['wind'][0]['t'][0];
 		$tableau['humidite']=intval($conditions['hmid'][0])?intval($conditions['hmid'][0]):'';
 		$tableau['point_rosee']=intval($conditions['dewp'][0])?intval($conditions['dewp'][0]):'';
@@ -149,7 +150,7 @@ function grenouille_charge_meteo($code_frxx, $mode='previsions'){
 		$tableau = ($mode == 'previsions') ? grenouille_xml2tab_previsions($xml) : grenouille_xml2tab_conditions($xml);
 		ecrire_fichier($f,serialize($tableau));
 	}
-  return $f;
+	return $f;
 }
 
 /**
@@ -159,9 +160,9 @@ function grenouille_charge_meteo($code_frxx, $mode='previsions'){
  * @return int temperature en celcius
  * @author Pierre Basson
  **/
-function grenouille_fahrenheit2celsius($t) {
+/* function grenouille_fahrenheit2celsius($t) {
 	return round( ($t - 32) * 5 / 9 );
 }
-
+ */
 
 ?>
