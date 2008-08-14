@@ -31,8 +31,8 @@ function controleurs_composant_dist($regs) {
   );
   spip_log("-- composants/$c $id", 'acs') ;
   $html = '<style>'.recuperer_fond('acs_style_prive.css').'</style>';
-  $html .= '<div style="width:'.$crayon->w.'px; height:'.$crayon->h.'px">'.
-    '<div style="position: absolute; border: 2px outset #fddf00; opacity: 0.99; width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size:'._request('em').'">'.
+  $html .= '<div  style="width:'.$crayon->w.'px; height:'.$crayon->h.'px">'.
+    '<div id="'."composant-$ctype-$id".'" style="position: absolute; border: 2px outset #fddf00; opacity: 0.99; width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size:'._request('em').'">'.
       recuperer_fond('vues/composant', $contexte).
     '</div>'.
     '<div style="position: relative; opacity: 1;">'.
@@ -55,10 +55,10 @@ function controleurs_composant_dist($regs) {
     '</div>'.
 	'</div>'.
 '<script language="javascript">
-  $(".edit_composant").each(
+  jQuery(".edit_composant").each(
   	function(i, composant) {
-    	$(this).Draggable({zIndex: 99999000, handle: ".acs_box_titre"});
-    	$(this).find(".acs_box_titre").css("cursor", "move");
+    	jQuery(this).Draggable({zIndex: 99999000, handle: ".acs_box_titre"});
+    	jQuery(this).find(".acs_box_titre").css("cursor", "move");
   	}
   );
   try {init_palette();}
