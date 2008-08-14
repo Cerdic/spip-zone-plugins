@@ -1,13 +1,17 @@
 [(#REM)
 
-  Charger la librairie ACS, ses dépendances, et les javascripts des composants
-
+  Charger la librairie audio
+  
 ]#CACHE{7*24*3600,cache-client}
 #HTTP_HEADER{'Content-Type: text/javascript'}
 var acsAudio_img_pack = "#EVAL{_DIR_ACS}models/#CONFIG{acsModel,cat}/composants/audio/img_pack/";
 
-[(#INCLURE{composants/audio/javascript/soundmanager2-nodebug-jsmin.js}|compacte_js)]
+[(#INCLURE{composants/audio/javascript/soundmanager2-nodebug-jsmin.js})]
 
-[(#INCLURE{composants/audio/javascript/audio.js}|compacte_js)]
+[(#INCLURE{composants/audio/javascript/audio.js})]
 
-soundManager.createMovie("[(#CHEMIN{composants/audio/swf/soundmanager2.swf}|url_absolue)]");
+jQuery(document).ready(
+  function() {
+    soundManager.createMovie("[(#CHEMIN{composants/audio/swf/soundmanager2.swf}|url_absolue)]");
+  }
+);

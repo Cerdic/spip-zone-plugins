@@ -9,7 +9,7 @@ fieldset.a_la_une {
   padding-left: 0.79em;
   padding-right: 0.79em;
   border: 0;
-  color: #CONFIG{acsBandeauTextColor,000000};
+  [color: (#CONFIG{acsBandeauTextColor,#CONFIG{acsFondText}});]
   [background: #(#CONFIG{acsBandeauFond});]
   [border-top: #CONFIG{acsBandeauBordLargeur,thin}[ (#CONFIG{acsBandeauBordStyle,groove}) ](#CONFIG{acsBandeauBordHaut});]
   [border-bottom: #CONFIG{acsBandeauBordLargeur,thin}[ (#CONFIG{acsBandeauBordStyle,groove}) ](#CONFIG{acsBandeauBordBas});]
@@ -23,12 +23,12 @@ fieldset.a_la_une legend {
   font-weight: normal;
   padding-left: 8px;
   padding-right: 8px;
-  padding-top: 0.4em;
+  /*padding-top: 0.4em;*/
   font-style: italic;
   font-size: 0.7em;
-  line-height: 0.4em;
+  line-height: 1.2em;
   -moz-border-radius: 0.8em;
-  margin-top: -0.8em;
+  /*margin-top: -1.2em;*/
 }
 
 div.a_la_une {

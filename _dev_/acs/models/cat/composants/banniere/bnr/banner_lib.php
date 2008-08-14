@@ -18,7 +18,7 @@ function getBanners($path = '.', $exclut = "")
  function expFp($folder = ".", $filetype = "", $exclut="")
     {
     $currdir=getcwd();
-    if ($folder)
+    if ($folder && is_dir("$currdir/$folder"))
         chdir("$currdir/$folder");
     $dh = opendir(".");
 		$a_files = array();

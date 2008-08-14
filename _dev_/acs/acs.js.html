@@ -36,21 +36,3 @@ function pageUrl() {
     page = "";
   return page;
 }
-/* ACS-Cat override for swap_couche() dist */
-function swap_couche(couche, rtl, dir, no_swap) {
-  var layer;
-  var triangle = document.getElementById('triangle' + couche);
-  if (!(layer = findObj('Layer' + couche))) return;
-  if (layer.style.display == "none"){
-    if (!no_swap && triangle) triangle.src = dir + acs_deplier_bas;
-    layer.style.display = 'block';
-  } else {
-    if (!no_swap && triangle) {
-      if (rtl)
-        triangle.src = dir + acs_deplier_haut_rtl;
-      else
-        triangle.src = dir + acs_deplier_haut;
-    }
-    layer.style.display = 'none';
-  }
-}

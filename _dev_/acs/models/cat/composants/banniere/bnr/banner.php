@@ -8,12 +8,11 @@ require_once('banner_lib.php');
 $bnrList = getBanners($url, $_GET['exclut']);
 
 $bnr = $bnrList[rand(0, count($bnrList) - 1)];
-if ($bnr)
-        {
-        header ("Location: ".$url."$bnr");
-        }
-else
-        {
-        header ("Location: ".$url.$_GET['exclut']);
-        }
+if ($bnr) {
+  header ("Location: ".$url."$bnr");
+}
+else {
+  header ("Location: ".$url.$_GET['exclut']);
+}
+die;
 ?>
