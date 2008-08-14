@@ -7,12 +7,6 @@
  * Copyright Daniel FAIVRE 2008
  */
 
-soundManager.defaultOptions.volume = 100;
-
-soundManager.onload = function() {
-  initSoundPlayers();
-}
-
 soundManager.onerror = function() {
   jQuery(".mp3player").each(function(p) {
     jQuery(this).find(".track_id3").html('<a href="http://www.macromedia.com/">Download player ?</a>');
@@ -21,12 +15,13 @@ soundManager.onerror = function() {
 
 function initSoundPlayers() {
   var codehtml = new RegExp('[^<]*'); // à améliorer ... ;-)
+  soundManager._writeDebug('audio.js : initSoundPlayers()');
 
   jQuery(".mp3player").each(function(p) {
     var sp = new SoundPlayer(p+1,this);
-    jQuery(this).find("..").find("a[@rel='enclosure'][@href$=mp3]").each(
+    jQuery(this).parent().find("a[@rel='enclosure'][@href$=mp3]").each(
       function(i) {
-        var html = $(this).html().match(codehtml);
+        var html = jQuery(this).html().match(codehtml);
         sp.createSound(this.href, html + " " + this.title);
         jQuery(this).click(
           function(e) {

@@ -7,7 +7,7 @@
    Code licensed under the BSD License:
    http://schillmania.com/projects/soundmanager2/license.txt
 
-   V2.75a.20080707
+   V2.76a.20080808
 */
 
 function SoundManager(smURL,smID) {
@@ -18,6 +18,7 @@ function SoundManager(smURL,smID) {
   this.consoleOnly = false;        // if console is being used, do not create/write to #soundmanager-debug
   this.waitForWindowLoad = false;  // force SM2 to wait for window.onload() before trying to call soundManager.onload()
   this.nullURL = 'data/null.mp3';  // path to "null" (empty) MP3 file, used to unload sounds (Flash 8 only)
+
   this.defaultOptions = {
     'autoLoad': false,             // enable automatic loading (otherwise .load() will be called on demand with .play(), the latter being nicer on bandwidth - if you want to .load yourself, you also can)
     'stream': true,                // allows playing before entire file has loaded (recommended)
@@ -37,17 +38,22 @@ function SoundManager(smURL,smID) {
     'onjustbeforefinish':null,     // callback for [n] msec before end of current sound
     'onjustbeforefinishtime':200,  // [n] - if not using, set to 0 (or null handler) and event will not fire.
     'multiShot': true,             // let sounds "restart" or layer on top of each other when played multiple times, rather than one-shot/one at a time
-    'usePeakData': false,          // [FLASH 9+ ONLY]: enable left/right channel peak (level) data
-    'useSpectrumData': false,      // [FLASH 9+ ONLY]: enable sound spectrum (frequency data) - WARNING: CPU-INTENSIVE: may set CPUs on fire.
     'position': null,              // offset (milliseconds) to seek to within loaded sound data.
     'pan': 0,                      // "pan" settings, left-to-right, -100 to 100
     'volume': 100                  // self-explanatory. 0-100, the latter being the max.
   };
+
+  this.flash9Options = {           // FLASH 9-ONLY options, merged into defaultOptions if applicable
+    usePeakData: false,            // enable left/right channel peak (level) data
+    useWaveformData: false,        // enable sound spectrum (raw waveform data) - WARNING: CPU-INTENSIVE: may set CPUs on fire.
+    useEQData: false               // enable sound EQ (frequency spectrum data) - WARNING: Also CPU-intensive.
+  };
+
   this.allowPolling = true;        // allow flash to poll for status update (required for "while playing", peak, sound spectrum functions to work.)
 
   var self = this; 
   this.version = null;
-  this.versionNumber = 'V2.75a.20080707';
+  this.versionNumber = 'V2.76a.20080808';
   this.movieURL = null;
   this.url = null;
   this.swfLoaded = false;
@@ -57,7 +63,7 @@ function SoundManager(smURL,smID) {
   this.oMC = null;
   this.sounds = [];
   this.soundIDs = [];
-  this.isIE = (navigator.userAgent.match(/MSIE/));
+  this.isIE = (navigator.userAgent.match(/MSIE/i));
   this.isSafari = (navigator.userAgent.match(/safari/i));
   this.debugID = 'soundmanager-debug';
   this._debugOpen = true;
@@ -68,10 +74,11 @@ function SoundManager(smURL,smID) {
   this._windowLoaded = false;
   this._hasConsole = (typeof console != 'undefined' && typeof console.log != 'undefined');
   this._debugLevels = ['log','info','warn','error'];
-  this._defaultFlashVersion = 9;
+  this._defaultFlashVersion = 8;
   this.features = {
     peakData: false,
-    spectrumData: false
+    waveformData: false,
+    eqData: false
   };
   this.sandbox = {
     'type': null,
@@ -92,8 +99,7 @@ function SoundManager(smURL,smID) {
     }
     self.version = self.versionNumber+(self.flashVersion==9?' (AS3/Flash 9)':' (AS2/Flash 8)');
     self.movieURL = (self.flashVersion==8?'soundmanager2.swf':'soundmanager2_flash9.swf');
-    self.features.peakData = (self.flashVersion>=9);
-    self.features.spectrumData = (self.flashVersion>=9);
+    self.features.peakData = self.features.waveformData = self.features.eqData = (self.flashVersion==9);
   }
   this._overHTTP = (document.location?document.location.protocol.match(/http/i):null);
   this._waitingforEI = false;
@@ -110,7 +116,7 @@ function SoundManager(smURL,smID) {
   };
 
   this.getMovie = function(smID) {
-    return self.isIE?window[smID]:(self.isSafari?document.getElementById(smID+'embed')||document[smID+'embed']:document.getElementById(smID+'embed'));
+    return self.isIE?window[smID]:(self.isSafari?document.getElementById(smID)||document[smID]:document.getElementById(smID));
   };
 
   this.loadFromXML = function(sXmlUrl) {
@@ -141,14 +147,20 @@ function SoundManager(smURL,smID) {
       if (self.flashVersion==8) {
         self.o._createSound(thisOptions.id,thisOptions.onjustbeforefinishtime);
       } else {
-        self.o._createSound(thisOptions.id,thisOptions.url,thisOptions.onjustbeforefinishtime,thisOptions.usePeakData,thisOptions.useSpectrumData);
+        self.o._createSound(thisOptions.id,thisOptions.url,thisOptions.onjustbeforefinishtime,thisOptions.usePeakData,thisOptions.useWaveformData,thisOptions.useEQData);
       }
     } catch(e) {
       self._failSafely();
       return true;
     };
     if (thisOptions.autoLoad || thisOptions.autoPlay) window.setTimeout(function(){self.sounds[thisOptions.id].load(thisOptions);},20);
-    if (thisOptions.autoPlay) self.sounds[thisOptions.id].playState = 1; // we can only assume this sound will be playing soon.
+    if (thisOptions.autoPlay) {
+	  if (self.flashVersion == 8) {
+	    self.sounds[thisOptions.id].playState = 1; // we can only assume this sound will be playing soon.
+	  } else {
+	    self.sounds[thisOptions.id].play();	
+	  }
+	}
     return self.sounds[thisOptions.id];
   };
 
@@ -157,11 +169,12 @@ function SoundManager(smURL,smID) {
     if (!self._idCheck(sID)) return false;
     for (var i=0; i<self.soundIDs.length; i++) {
       if (self.soundIDs[i] == sID) {
-	self.soundIDs.splice(i,1);
+	    self.soundIDs.splice(i,1);
         continue;
       };
     };
     self.sounds[sID].unload();
+    self.sounds[sID].destruct();
     delete self.sounds[sID];
   };
 
@@ -345,12 +358,14 @@ function SoundManager(smURL,smID) {
     self.url = self._normalizeMovieURL(smURL?smURL:self.url);
     smURL = self.url;
 
-    var html = ['<object id="'+smID+'" data="'+smURL+'" type="application/x-shockwave-flash" width="1" height="1"><param name="movie" value="'+smURL+'" /><param name="AllowScriptAccess" value="always" /></object>','<object id="'+smID+'embed" data="'+smURL+'" type="application/x-shockwave-flash" width="1" height="1"><param name="movie" value="'+smURL+'" /><param name="AllowScriptAccess" value="always" /></object>'];
+    var htmlEmbed = '<embed name="'+smID+'" id="'+smID+'" src="'+smURL+'" width="1" height="1" quality="high" allowScriptAccess="always" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>';
+    var htmlObject = '<object id="'+smID+'" data="'+smURL+'" type="application/x-shockwave-flash" width="1" height="1"><param name="movie" value="'+smURL+'" /><param name="AllowScriptAccess" value="always" /><!-- --></object>';
+    html = (!self.isIE?htmlEmbed:htmlObject);
 
     var toggleElement = '<div id="'+self.debugID+'-toggle" style="position:fixed;_position:absolute;right:0px;bottom:0px;_top:0px;width:1.2em;height:1.2em;line-height:1.2em;margin:2px;padding:0px;text-align:center;border:1px solid #999;cursor:pointer;background:#fff;color:#333;z-index:706" title="Toggle SM2 debug console" onclick="soundManager._toggleDebug()">-</div>';
     var debugHTML = '<div id="'+self.debugID+'" style="display:'+(self.debugMode && ((!self._hasConsole||!self.useConsole)||(self.useConsole && self._hasConsole && !self.consoleOnly))?'block':'none')+';opacity:0.85"></div>';
     var appXHTML = 'soundManager._createMovie(): appendChild/innerHTML set failed. May be app/xhtml+xml DOM-related.';
-    var sHTML = '<div style="position:absolute;left:-256px;top:-256px;width:1px;height:1px" class="movieContainer">'+html[self.isIE?0:1]+'</div>'+(self.debugMode && ((!self._hasConsole||!self.useConsole)||(self.useConsole && self._hasConsole && !self.consoleOnly)) && !document.getElementById(self.debugID)?'x'+debugHTML+toggleElement:'');
+    var sHTML = '<div style="position:absolute;left:-256px;top:-256px;width:1px;height:1px" class="movieContainer">'+html+'</div>'+(self.debugMode && ((!self._hasConsole||!self.useConsole)||(self.useConsole && self._hasConsole && !self.consoleOnly)) && !document.getElementById(self.debugID)?'x'+debugHTML+toggleElement:'');
 
     var oTarget = (document.body?document.body:(document.documentElement?document.documentElement:document.getElementsByTagName('div')[0]));
     if (oTarget) {
@@ -363,10 +378,9 @@ function SoundManager(smURL,smID) {
       self.oMC.style.height = '1px';
       try {
         oTarget.appendChild(self.oMC);
-        self.oMC.innerHTML = html[self.isIE?0:1];
+        self.oMC.innerHTML = html;
         self._appendSuccess = true;
       } catch(e) {
-        // may fail under app/xhtml+xml - has yet to be tested
         throw new Error(appXHTML);
       };
       if (!document.getElementById(self.debugID) && ((!self._hasConsole||!self.useConsole)||(self.useConsole && self._hasConsole && !self.consoleOnly))) {
@@ -726,7 +740,8 @@ function SoundManager(smURL,smID) {
       left: 0,
       right: 0
     };
-    self.spectrumData = [];
+    self.waveformData = [];
+    self.eqData = [];
   };
 
   self.resetProperties();
@@ -734,33 +749,43 @@ function SoundManager(smURL,smID) {
   // --- public methods ---
 
   this.load = function(oOptions) {
+    self.instanceOptions = sm._mergeObjects(oOptions);
+    if (typeof self.instanceOptions.url == 'undefined') self.instanceOptions.url = self.url;
+    sm._writeDebug('soundManager.load(): '+self.instanceOptions.url,1);
+    if (self.instanceOptions.url == self.url && self.readyState != 0 && self.readyState != 2) {
+      sm._writeDebug('soundManager.load(): current URL already assigned.',1);
+      return false;
+    }
     self.loaded = false;
     self.loadSuccess = null;
     self.readyState = 1;
     self.playState = (oOptions.autoPlay?1:0); // if autoPlay, assume "playing" is true (no way to detect when it actually starts in Flash unless onPlay is watched?)
-    self.instanceOptions = sm._mergeObjects(oOptions);
-    if (typeof self.instanceOptions.url == 'undefined') self.instanceOptions.url = self.url;
     try {
-      sm._writeDebug('soundManager.load(): '+self.instanceOptions.url,1);
 	  if (sm.flashVersion==8) {
 	    sm.o._load(self.sID,self.instanceOptions.url,self.instanceOptions.stream,self.instanceOptions.autoPlay,(self.instanceOptions.whileloading?1:0));
 	  } else {
         sm.o._load(self.sID,self.instanceOptions.url,self.instanceOptions.stream?true:false,self.instanceOptions.autoPlay?true:false); // ,(thisOptions.whileloading?true:false)
-	  }
+	  };
     } catch(e) {
-      sm._writeDebug('SMSound().load(): JS-Flash communication failed.',2);
+      sm._writeDebug('SMSound.load(): JS-Flash communication failed.',2);
     };
   };
 
   this.unload = function() {
     // Flash 8/AS2 can't "close" a stream - fake it by loading an empty MP3
     // Flash 9/AS3: Close stream, preventing further load
-    sm._writeDebug('SMSound().unload(): "'+self.sID+'"');
+    sm._writeDebug('SMSound.unload(): "'+self.sID+'"');
     self.setPosition(0); // reset current sound positioning
     sm.o._unload(self.sID,sm.nullURL);
     // reset load/status flags
     self.resetProperties();
   };
+
+  this.destruct = function() {
+    // kill sound within Flash
+    sm._writeDebug('SMSound.destruct(): '+self.sID);
+    sm.o._destroySound(self.sID);
+  }
 
   this.play = function(oOptions) {
     if (!oOptions) oOptions = {};
@@ -802,10 +827,7 @@ function SoundManager(smURL,smID) {
       if (self.instanceOptions.onplay) self.instanceOptions.onplay.apply(self);
       self.setVolume(self.instanceOptions.volume);
       self.setPan(self.instanceOptions.pan);
-      if (sm.flashVersion != 8 || (sm.flashVersion == 8 && !self.instanceOptions.autoPlay)) {
-       // sm._writeDebug('starting sound '+self.sID);
-       sm.o._start(self.sID,self.instanceOptions.loop||1,(sm.flashVersion==9?self.position:self.position/1000)); // TODO: verify !autoPlay doesn't cause issue
-      };
+      sm.o._start(self.sID,self.instanceOptions.loop||1,(sm.flashVersion==9?self.position:self.position/1000));
     };
   };
 
@@ -817,15 +839,14 @@ function SoundManager(smURL,smID) {
       self.paused = false;
       // if (sm.defaultOptions.onstop) sm.defaultOptions.onstop.apply(self);
       if (self.instanceOptions.onstop) self.instanceOptions.onstop.apply(self);
-      sm.o._stop(self.sID);
+      sm.o._stop(self.sID,bAll);
       self.instanceCount = 0;
       self.instanceOptions = {};
     };
   };
 
   this.setPosition = function(nMsecOffset) {
-    self.instanceOptions.position = nMsecOffset; // (sm.flashVersion==9?nMsecOffset:nMsecOffset); // update local options
-    // if (sm.flashVersion==8) self.options.position = self.instanceOptions.position;
+    self.instanceOptions.position = nMsecOffset;
     sm.o._setPosition(self.sID,(sm.flashVersion==9?self.instanceOptions.position:self.instanceOptions.position/1000),(self.paused||!self.playState)); // if paused or not playing, will not resume (by playing)
   };
 
@@ -892,7 +913,7 @@ function SoundManager(smURL,smID) {
   this._onid3 = function(oID3PropNames,oID3Data) {
     // oID3PropNames: string array (names)
     // ID3Data: string array (data)
-    sm._writeDebug('SMSound()._onid3(): "'+this.sID+'" ID3 data received.');
+    sm._writeDebug('SMSound._onid3(): "'+this.sID+'" ID3 data received.');
     var oData = [];
     for (var i=0,j=oID3PropNames.length; i<j; i++) {
       oData[oID3PropNames[i]] = oID3Data[i];
@@ -902,27 +923,27 @@ function SoundManager(smURL,smID) {
     if (self.instanceOptions.onid3) self.instanceOptions.onid3.apply(self);
   };
 
-  this._whileplaying = function(nPosition,oPeakData,oSpectrumData) {
+  this._whileplaying = function(nPosition,oPeakData,oWaveformData,oEQData) {
     if (isNaN(nPosition) || nPosition == null) return false; // Flash may return NaN at times
     self.position = nPosition;
 	if (self.instanceOptions.usePeakData && typeof oPeakData != 'undefined' && oPeakData) {
 	  self.peakData = {
 	   left: oPeakData.leftPeak,
 	   right: oPeakData.rightPeak
-	  }
-	  // sm._writeDebug('peakData '+oPeakData+': '+self.peakData.left+', '+self.peakData.right);
-	}
-	if (self.instanceOptions.useSpectrumData && typeof oSpectrumData != 'undefined' && oSpectrumData) {
-	  // sm._writeDebug('spectrumData: '+oSpectrumData);
-	  // sm._writeDebug('spectrumData length: '+oSpectrumData.length);
-	  self.spectrumData = oSpectrumData;
+	  };
+	};
+	if (self.instanceOptions.useWaveformData && typeof oWaveformData != 'undefined' && oWaveformData) {
+	  self.waveformData = oWaveformData;
 	  /*
 	  self.spectrumData = {
 	   left: oSpectrumData.left.split(','),
 	   right: oSpectrumData.right.split(',')
 	  }
 	  */
-	}
+	};
+	if (self.instanceOptions.useEQData && typeof oEQData != 'undefined' && oEQData) {
+	  self.eqData = oEQData;
+	};
     if (self.playState == 1) {
       if (self.instanceOptions.whileplaying) self.instanceOptions.whileplaying.apply(self); // flash may call after actual finish
       if (self.loaded && self.instanceOptions.onbeforefinish && self.instanceOptions.onbeforefinishtime && !self.didBeforeFinish && self.duration-self.position <= self.instanceOptions.onbeforefinishtime) {
@@ -963,7 +984,7 @@ function SoundManager(smURL,smID) {
     if (!self.didJustBeforeFinish) {
       self.didJustBeforeFinish = true;
       // soundManager._writeDebug('SMSound._onjustbeforefinish()');
-      if (self.instanceOptions.onjustbeforefinish) self.instanceOptions.onjustbeforefinish.apply(self);;
+      if (self.instanceOptions.onjustbeforefinish) self.instanceOptions.onjustbeforefinish.apply(self);
     };
   };
 
@@ -990,6 +1011,11 @@ function SoundManager(smURL,smID) {
 
   }; // SMSound()
 
+  // set up default options
+  if (this.flashVersion == 9) {
+    // this.defaultOptions = this._mergeObjects(this.defaultOptions,this.flash9Options);
+  }
+
   // register a few event handlers
   if (window.addEventListener) {
     window.addEventListener('focus',self.handleFocus,false);
@@ -1009,10 +1035,10 @@ function SoundManager(smURL,smID) {
   if (document.addEventListener) document.addEventListener('DOMContentLoaded',self.domContentLoaded,false);
 
   var SM2_COPYRIGHT = [
-    ' SoundManager 2: Javascript Sound for the Web ',
-    ' http://schillmania.com/projects/soundmanager2/ ',
-    ' Copyright (c) 2008, Scott Schiller. All rights reserved. ',
-    ' Code provided under the BSD License: http://schillmania.com/projects/soundmanager2/license.txt ',
+    'SoundManager 2: Javascript Sound for the Web',
+    'http://schillmania.com/projects/soundmanager2/',
+    'Copyright (c) 2008, Scott Schiller. All rights reserved.',
+    'Code provided under the BSD License: http://schillmania.com/projects/soundmanager2/license.txt',
   ];
 
 }; // SoundManager()

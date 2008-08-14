@@ -1,17 +1,18 @@
 [(#REM)
 
   Charger la librairie audio
-  
+
 ]#CACHE{7*24*3600,cache-client}
 #HTTP_HEADER{'Content-Type: text/javascript'}
 var acsAudio_img_pack = "#EVAL{_DIR_ACS}models/#CONFIG{acsModel,cat}/composants/audio/img_pack/";
 
+[(#REM) Debug with soundmanager2.js instead of soundmanager2-nodebug-jsmin.js ]
 [(#INCLURE{composants/audio/javascript/soundmanager2-nodebug-jsmin.js})]
 
-[(#INCLURE{composants/audio/javascript/audio.js})]
+soundManager.debugMode = false;
+soundManager.defaultOptions.volume = 100;
+soundManager.waitForWindowLoad = true;
+soundManager.url = "[(#CHEMIN{composants/audio/swf/})]";
+soundManager.onload = initSoundPlayers;
 
-jQuery(document).ready(
-  function() {
-    soundManager.createMovie("[(#CHEMIN{composants/audio/swf/soundmanager2.swf}|url_absolue)]");
-  }
-);
+[(#INCLURE{composants/audio/javascript/audio.js})]
