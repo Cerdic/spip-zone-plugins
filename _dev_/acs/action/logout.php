@@ -9,7 +9,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Override d'un bug de spip 1.9.2c (1.9207)
-if ($GLOBALS['spip_version_code'] == 1.9207) {
+
+if (is_readable(_DIR_RESTREINT_ABS.'action/logout.php')) {
+  include(_DIR_RESTREINT_ABS.'action/logout.php');
+  action_logout_dist();
+}
+else {
   include_spip('inc/cookie');
 
   // Issued from http://doc.spip.org/@action_logout_dist with version spip = 1.9208 - 1.9.2.d)
@@ -51,9 +56,5 @@ if ($GLOBALS['spip_version_code'] == 1.9207) {
 	  }
 	  redirige_par_entete($url ? $url : generer_url_public('login'));
   }
-}
-else {
-  include(_DIR_RESTREINT_ABS.'action/logout.php');
-  action_logout_dist();
 }
 ?>

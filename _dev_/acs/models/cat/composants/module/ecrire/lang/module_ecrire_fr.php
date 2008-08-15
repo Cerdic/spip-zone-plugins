@@ -5,8 +5,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Module',
 'description' => 'Conteneur pour d\'autres composants.',
-'help' => 'Dans ce modèle ACS, ce composant est utilisé par défaut en colonne 1 (colonne de gauche pour les langues s\'écrivant de gauche à droite).
- Le composant optionnel n° 4 n\'est affiché que sur les pages qui incluent le composant Col1 avec le paramètre {composants_optionnels=4}',
+'help' => 'Module est un conteneur à tout faire. Dans le mod&egrave;le Cat, il est utilis&eacute; pour l\'ent&ecirc;te, les colonnes gauche et droite, et le pied de page. Les pages du mod&egrave;le Cat utilisent diff&eacute;rentes instances du composant Module, configurables s&eacute;par&eacute;ment.',
 
 '1' => 'Composant 1',
 '2' => 'Composant 2',

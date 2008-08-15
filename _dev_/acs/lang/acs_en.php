@@ -82,9 +82,9 @@ To setup your website, click on "Components" pane and customize components, begi
   'err_fichier_absent' => 'File @file@ not found',
 
 
-  'onglet_adm_description' => 'ACS model choice and administration.',
-  'onglet_adm_info' => 'Model is a set of ACS components-based spip skeletons.',
-  'onglet_adm_help' => 'Skeleton(s) is optionnal. It override the model and/or its components. If more than one is needed, separator is ":"  between paths.<br /><br />ACS administrators only are authorized to configure the website. Configuration pages are no more accessible to other administrators.<br /><br />You can lock access to other spip "ecrire" area pages: creat a new group, look for the exec=dosomething parameter in the page-to-control url, add "something" in the "ACS administrated" list (separated by comma), validate, and add the page-to-control administrator(s).<br />',
+  'onglet_adm_description' => 'Configuration',
+  'onglet_adm_info' => 'ACS model choice and administration.',
+  'onglet_adm_help' => '<b>Model</b>:<br />Model is a set of ACS components-based spip skeletons (templates). Skeleton(s) is optionnal. It override the model and/or its components. If more than one is needed, separator is ":"  between paths.<br /><br /><b>ACS administrators</b>:<br />ACS administrators only are authorized to configure the website. Configuration pages are no more accessible to other administrators.<br /><br /><b>ACS access control</b>:<br />You can lock access to other spip "ecrire" area pages: creat a new group, look for the exec=dosomething parameter in the page-to-control url, add "something" in the "ACS administrated" list (separated by comma), validate, and add the page-to-control administrator(s).<br />',
 
   'admins' => 'Administrators',
   'groupes' => 'Groups',

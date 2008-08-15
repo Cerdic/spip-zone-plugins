@@ -1,8 +1,8 @@
 <?php
-// Ceci est un fichier langue de SPIP sp&eacute;cifique au plugin ACS
+// Ceci est un fichier langue de SPIP specifique au plugin ACS
   include_spip('lib/composant/composants_ajouter_langue');
 
-// traductions génériques utilisées dans la partie privée ET par les pinceaux (crayons des composants)
+// traductions generiques utilisees dans la partie privee ET par les pinceaux (crayons des composants)
 $traductions_acs = array(
   'use' => 'Utiliser',
 
@@ -45,18 +45,18 @@ else {
   'assistant_configuration_squelettes' => 'Assistant Configuration du Site',
   'acs' => 'ACS',
 
-  'model_actif' => 'Modèle ACS actif: <b>@model@</b>',
+  'model_actif' => 'Mod&egrave;le ACS actif: <b>@model@</b>',
   'overriden_by' => ', surcharg&eacute; par les squelettes de <u>@over@</u>',
   'model_actif2' => '.',
 
-  'onglet_pages_info' => 'Configure le graphisme et le comportement du site. ACS ajoute à spip des modèles de pages personnalisables par assemblage de composants eux-même personnalisables.',
-  'onglet_pages_help' => 'Dans la liste des pages, les pages soulign&eacute;es sont lues dans le dossier de squelettes en <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: underline">surcharge</span> d\'ACS, les pages du <span style="color: darkgreen; font-weight: bold; font-style: normal; text-decoration: none">modèle ACS</span> sont en gras, celles des <span style="color: darkgreen; font-weight: normal; font-style: italic; text-decoration: none">plugins</span> en italique, et celles de la <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: none">distribution spip</span> sans d&eacute;coration.
+  'onglet_pages_info' => 'Configure le graphisme et le comportement du site. ACS ajoute à spip des mod&egrave;les de pages personnalisables par assemblage de composants eux-même personnalisables.',
+  'onglet_pages_help' => 'Dans la liste des pages, les pages soulign&eacute;es sont lues dans le dossier de squelettes en <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: underline">surcharge</span> d\'ACS, les pages du <span style="color: darkgreen; font-weight: bold; font-style: normal; text-decoration: none">mod&egrave;le ACS</span> sont en gras, celles des <span style="color: darkgreen; font-weight: normal; font-style: italic; text-decoration: none">plugins</span> en italique, et celles de la <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: none">distribution spip</span> sans d&eacute;coration.
  <br /><br />
  Le sch&eacute;ma de la page pr&eacute;sente les boucles spip et les &eacute;l&eacute;ments inclus.
  <br /><br />
- Le petit triangle noir permet d\'afficher un sch&eacute;ma plus d&eacute;taill&eacute;, avec en particulier les paramètres des inclusions et des boucles et les commentaires spip de la page.
+ Le petit triangle noir permet d\'afficher un sch&eacute;ma plus d&eacute;taill&eacute;, avec en particulier les param&egrave;tres des inclusions et des boucles et les commentaires spip de la page.
 <br /><br />
-Pour configurer le site, cliquez sur l\'onglet "Composants" et personnalisez les composants, en commençant par "Fond", qui d&eacute;finit les valeurs par d&eacute;faut.<br /><br />La liste des variables affiche les paramètres de tous les composants du modèle ACS actif, utilis&eacute;s ou non.
+Pour configurer le site, cliquez sur l\'onglet "Composants" et personnalisez les composants, en commençant par "Fond", qui d&eacute;finit les valeurs par d&eacute;faut.<br /><br />La liste des variables affiche les param&egrave;tres de tous les composants du mod&egrave;le ACS actif, utilis&eacute;s ou non.
 ',
 
   'page' => 'Page',
@@ -87,9 +87,9 @@ Pour configurer le site, cliquez sur l\'onglet "Composants" et personnalisez les
   'err_fichier_absent' => 'Fichier @file@ introuvable',
 
 
-  'onglet_adm_description' => 'Choix du modèle et gestion des droits.',
-  'onglet_adm_info' => 'Le modèle est un jeu de squelettes Spip basés sur des composants ACS.',
-  'onglet_adm_help' => 'Squelette(s) est optionnel, et sert à surcharger le modèle et/ou ses composants. Pour avoir plusieurs niveaux d\'override, on sépare les chemins par deux points (<b>:</b>).<br /><br />Seuls les administrateurs ACS sont autoris&eacute;s à configurer le site. Les pages de configuration du site et de certains plugins ne sont plus accessibles aux autres administrateurs.<br /><br />ACS permet &eacute;galement de verrouiller séparément l\'accès à d\'autres pages de l\'espace "ecrire" de spip: Pour celà, créer un nouveau groupe, rep&eacute;rez dans l\'url de la page à contrôler le paramètre exec=truc, ajoutez "truc" aux pages protégées du groupe (s&eacute;par&eacute;es par des virgules), puis choisssez leurs administrateurs.<br />',
+  'onglet_adm_description' => 'Configuration d\'ACS',
+  'onglet_adm_info' => 'Choix du mod&egrave;le, gestion des droits, ..',
+  'onglet_adm_help' => '<b>Mod&egrave;le</b>:<br>Le mod&egrave;le est un jeu de squelettes Spip basés sur des composants ACS. Squelette(s) est optionnel, et sert à surcharger le mod&egrave;le et/ou ses composants. Pour avoir plusieurs niveaux d\'override, on sépare les chemins par deux points (<b>:</b>).<br /><br /><b>Administrateurs ACS</b>:<br />Seuls les administrateurs ACS sont autoris&eacute;s à configurer le site. Les pages de configuration du site et de certains plugins ne sont plus accessibles aux autres administrateurs.<br /><br /><b>Administration avec ACS</b>:<br />ACS permet &eacute;galement de verrouiller séparément l\'acc&egrave;s à d\'autres pages de l\'espace "ecrire" de spip: Pour celà, créer un nouveau groupe, rep&eacute;rez dans l\'url de la page à contrôler le param&egrave;tre exec=truc, ajoutez "truc" aux pages protégées du groupe (s&eacute;par&eacute;es par des virgules), puis choisssez leurs administrateurs.<br />',
 
   'admins' => 'Administrateurs',
   'groupes' => 'Groupes',
@@ -115,7 +115,7 @@ Pour configurer le site, cliquez sur l\'onglet "Composants" et personnalisez les
 
 /* Page publications */
   'publications' => 'Publications',
-  'pub_description' => 'Dernières actions des administrateurs du site.',
+  'pub_description' => 'Derni&egrave;res actions des administrateurs du site.',
   'pub_help' => 'En cas de difficulté avec l\'une de vos publications, envoyez un message à un administrateur.',
   'publie' => 'publie',
   'prop' => 'propose',

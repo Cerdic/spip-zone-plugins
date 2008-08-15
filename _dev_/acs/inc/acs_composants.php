@@ -45,6 +45,7 @@ function composant_instances_select($c, $nic) {
   if (is_array($instances) && count($instances)) {
     sort($instances);
     $r ='<select name="nic" onchange=submit()>';
+    $r .= '<option value=""'.($id=="" ? ' selected': '').'></option>';
     foreach($instances as $id) {
       $r .= '<option value="'.$id.'"'.($id==$nic ? ' selected': '').'>'.$id.'</option>';
     }

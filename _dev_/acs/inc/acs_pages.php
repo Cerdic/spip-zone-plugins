@@ -22,7 +22,7 @@ function acs_pages($page) {
 function acs_pages_gauche($page) {
   return acs_info_box(
     _T('acs:acs'),
-    _T('assistant_configuration_squelettes').'<br /><br />',
+    _T('acs:assistant_configuration_squelettes').'<br /><br />',
     _T('acs:onglet_pages_help'),
     _T('acs:onglet_pages_info').'<br /><br />',
     _DIR_PLUGIN_ACS."img_pack/acs_32x32.gif",

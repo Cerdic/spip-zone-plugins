@@ -5,8 +5,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Column 1',
 'description' => 'Container for other components.',
-'help' => 'In these ACS model, component Col1 is used by default as column 1 (left column for languages writed from left to right).
- Optionnal component n° 4 is displayed only on pages with parameter {composants_optionnels=4}',
+'help' => 'Module is an all-purposes container. In Cat ACS model, it is used for header, let and right columns, and footer. Pages of Cat model uses different instances of Module component, each with its own configuration.',
 
 '1' => 'Component 1',
 '2' => 'Component 2',
