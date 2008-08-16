@@ -73,6 +73,7 @@ function exec_interactions_edit(){
 			$x2 = $row['x2'];
 			$y1 = $row['y1'];
 			$y2 = $row['y2'];
+			$id_image_fond = $row['id_image_fond'];
 			$type = $row['type'];
 			$x_lieu_cible = $row['x_lieu_cible'];
 			$id_article_cible = $row['id_article_cible'];
@@ -85,6 +86,8 @@ function exec_interactions_edit(){
 			$id_objet = $row['id_objet'];
 			$id_personnage = $row['id_personnage'];
 			$id_objet_activation = $row['id_objet_activation'];
+			$id_jeu_activation = $row['id_jeu_activation'];
+			$id_lieu_activation = $row['id_lieu_activation'];
 			$id_personnage_survol = $row['id_personnage_survol'];
 			$texte_avant_activation = $row['texte_avant_activation'];
 			$texte_apres_activation = $row['texte_apres_activation'];
@@ -115,6 +118,7 @@ function exec_interactions_edit(){
 		$row['x2'] = $x1;
 		$row['y1'] = $y1;
 		$row['y2'] = $y2;
+		$row['id_image_fond'] = $id_image_fond;
 		$row['type'] = $type;
 		$row['x_lieu_cible'] = $x_lieu_cible;
 		$row['id_article_cible'] = $id_article_cible;
@@ -126,6 +130,8 @@ function exec_interactions_edit(){
 		$row['id_objet'] = $id_objet;
 		$row['id_personnage'] = $id_personnage;
 		$row['id_objet_activation'] = $id_objet_activation;
+		$row['id_lieu_activation'] = $id_lieu_activation;
+		$row['id_jeu_activation'] = $id_jeu_activation;
 		$row['id_jeu_cible'] = $id_jeu_cible;
 		$row['id_personnage_survol'] = $id_personnage_survol;
 		$row['texte_avant_activation'] = $texte_avant_activation;
@@ -204,6 +210,7 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$x2 = $row['x2'];	
 	$y1 = $row['y1'];	
 	$y2 = $row['y2'];
+	$id_image_fond = $row['id_image_fond'];
 	$type = $row['type'];
 	$x_lieu_cible = $row['x_lieu_cible'];
 	$id_article_cible = $row['id_article_cible'];
@@ -214,6 +221,8 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$id_objet = intval($row['id_objet']);
 	$id_personnage = intval($row['id_personnage']);
 	$id_objet_activation = intval($row['id_objet_activation']);
+	$id_lieu_activation = intval($row['id_lieu_activation']);
+	$id_jeu_activation = intval($row['id_jeu_activation']);
 	$id_rubrique_cible = intval($row['id_rubrique_cible']);
 	$id_jeu_cible = intval($row['id_jeu_cible']);
 	$id_personnage_survol = intval($row['id_personnage_survol']);
@@ -281,6 +290,10 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= "<strong><label for='y2_interaction'>"._T("panoramas:y2")."</label></strong> ";
 	$out .= "<input type='text' name='y2' id='y2_interaction' class='formo $focus' ".
 		"value=\"".$y2."\" size='5' /><br />\n";
+
+	$out .= "<strong><label for='id_image_fond_interaction'>"._T("panoramas:id_image_fond")."</label></strong> ";
+	$out .= "<input type='text' name='id_image_fond' id='id_image_fond_interaction' class='formo $focus' ".
+		"value=\"".$id_image_fond."\" size='5' /><br />\n";
 
 	$out .= "<strong><label for='type_interaction'>"._T("panoramas:type")."</label></strong> ";
 	$out .= "<select name='type' id='type_interaction' class='formo $focus' ".
@@ -385,6 +398,14 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= "<strong><label for='id_objet_activation_interaction' id='id_objet_activation_interaction_label'>"._T("panoramas:id_objet_activation")."</label></strong> ";
 	$out .= "<input type='text' name='id_objet_activation' id='id_objet_activation_interaction' class='formo $focus' ".
 		"value=\"".$id_objet_activation."\" size='5' />\n";
+
+	$out .= "<strong><label for='id_jeu_activation_interaction' id='id_jeu_activation_interaction_label'>"._T("panoramas:id_jeu_activation")."</label></strong> ";
+	$out .= "<input type='text' name='id_jeu_activation' id='id_jeu_activation_interaction' class='formo $focus' ".
+		"value=\"".$id_jeu_activation."\" size='5' />\n";
+
+	$out .= "<strong><label for='id_lieu_activation_interaction' id='id_lieu_activation_interaction_label'>"._T("panoramas:id_lieu_activation")."</label></strong> ";
+	$out .= "<input type='text' name='id_lieu_activation' id='id_lieu_activation_interaction' class='formo $focus' ".
+		"value=\"".$id_lieu_activation."\" size='5' />\n";
 
 	$out .= "<strong><label for='texte_avant_activation_form' id='texte_avant_activation_interaction_label'>"._T('texte_avant_activation')."</label></strong>";
 	$out .= "<textarea name='texte_avant_activation' id='texte_avant_activation_interaction' class='forml' rows='4' cols='40' wrap='soft'>";

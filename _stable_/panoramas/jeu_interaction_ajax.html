@@ -1,11 +1,14 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
 <p class="jeu-interaction">
 <BOUCLE_interactions(VISITES_VIRTUELLES_INTERACTIONS){id_interaction}>
 	<BOUCLE_jeux(JEUX){id_jeu=#ID_JEU_CIBLE}>
 		#CONTENU
+		[(#CONTENU|contient{Bravo}|?{' ',''})
+			[(#REM|memoriser_resultat_jeu{#ID_JEU})]
+		]
 	</BOUCLE_jeux>
 </BOUCLE_interactions>
 </p>
 
 
 
-<a href="#" onclick="javascript:tb_remove();"><:panoramas:fermer_fenetre:></a>

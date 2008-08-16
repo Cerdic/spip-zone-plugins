@@ -49,6 +49,7 @@ div.panorama-carte .lien-plan {
 	background-image: url(#CHEMIN{img_pack/bg_fleche_plan.png});
 	background-repeat: no-repeat;
 	background-position: left bottom;
+	filter: alpha(opacity=90);
 	opacity: .9;
 	padding: 0;
 	padding-bottom: 19px;
@@ -58,4 +59,11 @@ div.panorama-carte .lien-plan a {
 	background: #ff3f00;
 	color: white;
 	padding: 5px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	border-top: 1px solid white;
+	border-left: 1px solid white;
+}
+div.panorama-carte .lien-plan a:hover {
+	text-decoration: none;
 }

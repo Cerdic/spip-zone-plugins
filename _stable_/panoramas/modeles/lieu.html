@@ -1,6 +1,15 @@
 <B_lieux>
 
 <BOUCLE_lieux(VISITES_VIRTUELLES_LIEUX){id_lieu}>
+	
+	<?php
+		//mise à jour de la liste des lieux visités
+		$tab_lieux_visites = split(",", $_COOKIE['lieux_visites']);
+		if (!in_array("#ID_LIEU", $tab_lieux_visites)) {
+			setcookie("lieux_visites",implode(",", $tab_lieux_visites).",#ID_LIEU");
+		}
+	?>
+	<a id="[lieu(#ID_LIEU)]" name="[lieu(#ID_LIEU)]"></a>
 	<BOUCLE_photo(DOCUMENTS){id_document=#ID_PHOTO}>
 		<img src="#URL_DOCUMENT" class="panorama#ID_LIEU" width="#LARGEUR" height="#HAUTEUR" 
 	</BOUCLE_photo>
@@ -31,7 +40,8 @@
 	$(document).ready(function(){
 		$("img.panorama#ID_LIEU").panorama({
 	                auto_start: 0,
-                 	control_display: 'yes'[,
+                 	control_display: 'yes',
+			viewport_width: <BOUCLE_visiteparent(VISITES_VIRTUELLES){id_visite}>[(#LARGEUR|=={0}|?{'570',#LARGEUR})]</BOUCLE_visiteparent>[,
 			start_position: (#DECALAGE_X)][,
 			mode_360: (#BOUCLER|=={'oui'}|?{1,0})]
 
@@ -48,6 +58,11 @@
 <BOUCLE_carte(DOCUMENTS){id_document=#ID_CARTE}>
 $(document).ready(function(){
 	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}><span class='lien-plan' style='[left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE|moins{40})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]})]'>#TITRE</a></span></BOUCLE_position></div><div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:><ul><?php echo(str_replace('"', '\'', $_COOKIE['objets_ramasses'])); ?></ul></div><div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2><h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2></div></div>");
+	
+	$('.panorama-viewport .lien-plan').css('z-index', 50).bind('mouseover', function(){
+								$('.panorama-viewport .lien-plan').css('z-index', 50);
+								$(this).css('z-index', 60);
+							});
 	$('.panorama-onglets h2.panorama-carte a').flipv().bind('click', function() { 
 				$('div.panorama-carte').toggle();
 				if ($('div.panorama-carte').css('display') != 'none') 
@@ -70,9 +85,19 @@ $(document).ready(function(){
 	$(document).ready(function(){
 		
 	
-	<BOUCLE_interactionsobjet(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
+	<BOUCLE_interactionsobjetetpersonnage(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
 		
-		[ (#REM) interactions avec les objets : drag and drop dans le panier ]
+		[ (#REM) interactions qui ont précisé une image de fond : ajouter l'image dans le cadre ]
+		<BOUCLE_imagedefondcourante(DOCUMENTS){id_document=#ID_IMAGE_FOND}>
+			$('.interaction#_interactionsobjetetpersonnage:ID_INTERACTION').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />").css('opacity',1).css('border','none').css('background','none');
+			$('.interaction#_interactionsobjetetpersonnage:ID_INTERACTION').bind('click', function() {
+							return false;
+						});
+				
+				
+		</BOUCLE_imagedefondcourante>
+
+		[ (#REM) interactions avec les objets : ajouter l'image de l'objet et gérer le drag and drop dans le panier ]
 		<BOUCLE_objetcourant(DOCUMENTS){id_document=#ID_OBJET}>
 			[(#TYPE|=={'objet'}|?{' ',''})  
 				$('.type-objet#ID_DOCUMENT').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />");
@@ -102,13 +127,25 @@ $(document).ready(function(){
 				
 			]
 		</BOUCLE_objetcourant>
-	
+
+		[ (#REM) interactions de type personnage : ajouter l'image du personnage ]
+		<BOUCLE_personnagecourant(DOCUMENTS){id_document=#ID_PERSONNAGE}>
+			[(#TYPE|=={'personnage'}|?{' ',''})  
+				$('.type-personnage#ID_DOCUMENT').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />").css('opacity',1).css('border','none').css('background','none');
+				$('.type-personnage#ID_DOCUMENT').bind('click', function() {
+							return false;
+						});
+				
+				
+			]
+		</BOUCLE_personnagecourant>
+
 		[ (#REM) interactions qui requièrent un objet pour être actives (il faudra drag and dropper l'objet sur l'interaction depuis le panier ]
-		<BOUCLE_objetactivation(DOCUMENTS){id_document=#ID_OBJET_ACTIVATION}>
+		<BOUCLE_objetactivationobjet(DOCUMENTS){id_document=#ID_OBJET_ACTIVATION}>
 			$('.interaction#ID_INTERACTION')
 				.unbind('click')
 				.bind('click', function() {
-							alert("#TEXTE_AVANT_ACTIVATION");
+							[alert("(#TEXTE_AVANT_ACTIVATION)");]
 							return false;
 						})
 				.droppable({
@@ -116,7 +153,7 @@ $(document).ready(function(){
 					activeClass: 'droppable-active',
 					hoverClass: 'droppable-hover',
 					drop: function(ev, ui) {
-						alert("#TEXTE_APRES_ACTIVATION");
+						[alert("(#TEXTE_APRES_ACTIVATION)");]
 						$('div.panorama-panier').hide();
 						$('h2.panorama-carte').show();
 						$(this).unbind('click');
@@ -129,9 +166,46 @@ $(document).ready(function(){
 						
 					}
 			});
-		</BOUCLE_objetactivation>
+		</BOUCLE_objetactivationobjet>
+
+		[ (#REM) interactions qui requièrent d'avoir visité un lieu ]
+		<BOUCLE_objetactivationlieu(VISITES_VIRTUELLES_LIEUX){id_lieu=#ID_LIEU_ACTIVATION}>
+			$('.interaction#ID_INTERACTION')
+				.unbind('click')
+				.bind('click', function() {
+							if ($.cookie('lieux_visites')) {
+								var tableau_lieux_visites = $.cookie('lieux_visites').split(','); 
+								if (tableau_lieux_visites.indexOf('#ID_LIEU')>=0) {
+									[alert("(#TEXTE_APRES_ACTIVATION)");]
+								} else {
+									[alert("(#TEXTE_AVANT_ACTIVATION)");]
+							} else {
+								[alert("(#TEXTE_AVANT_ACTIVATION)");]
+							}
+							return false;
+						});
+		</BOUCLE_objetactivationlieu>
+
+		[ (#REM) interactions qui requièrent d'avoir réussi un questionnaire avant ]
+		<BOUCLE_objetactivationjeu(JEUX){id_jeu=#ID_JEU_ACTIVATION}>
+			$('.interaction#ID_INTERACTION')
+				.unbind('click')
+				.bind('click', function() {
+							if($.cookie('jeux_reussis')) {
+								var tableau_jeux_visites = $.cookie('jeux_reussis').split(','); 
+								if (tableau_jeux_visites.indexOf('#ID_JEU')>=0) {
+									[alert("(#TEXTE_APRES_ACTIVATION)");]
+								} else {
+									[alert("(#TEXTE_AVANT_ACTIVATION)");]
+								}
+							} else	{
+								[alert("(#TEXTE_AVANT_ACTIVATION)");]
+							}
+							return false;
+						});
+		</BOUCLE_objetactivationjeu>
 		
-	</BOUCLE_interactionsobjet>
+	</BOUCLE_interactionsobjetetpersonnage>
 
 	});
 
