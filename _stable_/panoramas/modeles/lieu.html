@@ -30,7 +30,8 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("img.panorama#ID_LIEU").panorama({
-	                auto_start: 0[,
+	                auto_start: 0,
+                 	control_display: 'yes'[,
 			start_position: (#DECALAGE_X)][,
 			mode_360: (#BOUCLER|=={'oui'}|?{1,0})]
 
@@ -46,7 +47,7 @@
 <BOUCLE_visites(VISITES_VIRTUELLES){id_visite=#ID_VISITE}>
 <BOUCLE_carte(DOCUMENTS){id_document=#ID_CARTE}>
 $(document).ready(function(){
-	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}><span class='lien-plan' style='[left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE|moins{40})px;]'><a href='#URL_PAGE{lieu,id_lieu=#ID_LIEU}'>#TITRE</a></span></BOUCLE_position></div><div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:><ul><?php echo(str_replace('"', '\'', $_COOKIE['objets_ramasses'])); ?></ul></div><div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2><h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2></div></div>");
+	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}><span class='lien-plan' style='[left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE|moins{40})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]})]'>#TITRE</a></span></BOUCLE_position></div><div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:><ul><?php echo(str_replace('"', '\'', $_COOKIE['objets_ramasses'])); ?></ul></div><div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2><h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2></div></div>");
 	$('.panorama-onglets h2.panorama-carte a').flipv().bind('click', function() { 
 				$('div.panorama-carte').toggle();
 				if ($('div.panorama-carte').css('display') != 'none') 
@@ -75,7 +76,9 @@ $(document).ready(function(){
 		<BOUCLE_objetcourant(DOCUMENTS){id_document=#ID_OBJET}>
 			[(#TYPE|=={'objet'}|?{' ',''})  
 				$('.type-objet#ID_DOCUMENT').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />");
-				$('.type-objet#ID_DOCUMENT').draggable({helper: 'clone', opacity: .4, revert: true});
+				$('.type-objet#ID_DOCUMENT').bind('click', function() {
+							return false;
+						}).draggable({helper: 'clone', opacity: .4, revert: true});
 				$('h2.panorama-panier').droppable({
 					accept: ".type-objet#ID_DOCUMENT",
 					activeClass: 'droppable-active',
