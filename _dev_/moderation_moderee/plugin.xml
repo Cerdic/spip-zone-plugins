@@ -1,23 +1,23 @@
 <plugin>
 	<nom>	<!-- Nom du plugin -->
-		Modération Modérée
+		Mod&eacute;ration Mod&eacute;r&eacute;e
 	</nom>
 	<icon>
 		img_pack/icone.png
 	</icon>
 	<auteur>	<!-- Auteur du plugin -->
-		Potter64(Yohann)
+		Yohann
 	</auteur>
 	<version>
-		0.99c
+		0.99e
 	</version>
 	<etat>
 		dev
 	</etat>
 	<description>
-		Ce plugin permet aux utilisateurs des forums publics étant configurés "à priori" de ne pas avoir à valider leur message depuis l'interface privée {{si ils sont logués sur le site public}}.
-		Ceci marche que pour les forums publics {{à priori}}.
-		On peut choisir quels types de visiteurs auront droit à la modération modérée.
+		Ce plugin permet aux utilisateurs des forums publics configur&eacute;s {apriori}, qui sont enregsitr&eacute;s et logu&eacute;s en tant que visiteur r&eacute;dacteur ou admin, de ne pas subir ce type de modération. Leur commentaire est automatiquement valid&eacute; sans qu'il y ait une action de la part d'un mod&eacute;rateur des forums depuis l'espace priv&eacute;e.<br />
+		Ceci ne fonctionne que pour les forums publics {{a priori}}.<br />
+		On peut choisir quels types de commentateur auront droit à la mod&eacute;ration mod&eacute;r&eacute;e (visiteur / r&eacute;dacteur / admin) mais ils doivent tous &ecirc;tre logu&eacute;s.
 	</description>
 	<lien>
 		[Site de l'éditeur->http://www.chambredesecrets.net]
@@ -25,6 +25,7 @@
 	<prefix>
 		moderation
 	</prefix>
+	
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
     <pipeline>
        	<nom>

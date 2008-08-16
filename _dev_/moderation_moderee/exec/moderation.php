@@ -58,10 +58,10 @@ function formulaire_config($texteform,$metaconfig,$radio_b,$name) {
 				$action = generer_url_ecrire('moderation');
 				$radio = $GLOBALS['meta']["$metaconfig"];
 				$formname = $name;
-				echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
+				echo "<table border='1px dashed #000' cellspacing='1' cellpadding='3' width=\"50%\" style=\"margin:auto;\">";
 				echo "<br />\n";
-				echo "\n<tr><td style='text-align: $spip_lang_left:' class='verdana2'>";
-				echo "$texteform";
+				echo "\n<tr><td style='text-align: $spip_lang_left; font-size:15px;' class='verdana2'>";
+				echo $texteform;
 				echo "<br />\n";
 				echo bouton_radio($formname, "oui",_T('moderation:oui'), $radio == "oui");
 				echo "<br />\n";
