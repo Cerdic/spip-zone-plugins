@@ -1,6 +1,4 @@
-[(#REM)
-Afficher les donnees meteo temps reel pour le code #ENV{code} avec le sous-modele #ENV{modele}
-]
-<div class='meteo' id='meteo-#ENV{code}'>
+[(#REM)<!-- 
+	Afficher les donnees meteo temps reel pour le code #ENV{code} avec le sous-modele #ENV{sou_modele}
+ -->]
 [(#ENV{code}|rainette_croaaaaa_conditions{#ENV{sous_modele,conditions_tempsreel}})]
-</div>

@@ -1,17 +1,38 @@
-[(#REM)
-
-Cette noisette affiche les infos meteos temps reel
-Elle est appelee par la fonction croaaaaa_conditions
-
-]<h4><span class='jour'>[(#ENV{date}|nom_jour) ]</span><span class='date'>[(#ENV{date}|affdate_jourcourt)]</span></h4>
-<span class='temperature'><em>Temp&eacute;rature&nbsp;r&eacute;elle:&nbsp;</em>[(#ENV{temperature_reelle}|rainette_afficher_unite{temperature})]</span><br />
-<span class='temperature'><em>Temp&eacute;rature&nbsp;ressentie:&nbsp;</em>[(#ENV{temperature_ressentie}|rainette_afficher_unite{temperature})]</span><br />
-<span class='icone'>[(#ENV{code_icone}|rainette_icone_meteo)]</span><br />
-<span class='details'>[(#ENV{code_icone}|rainette_resume_meteo)]</span><br />
-<span class='details'>Pression:&nbsp;[(#ENV{pression}|rainette_afficher_unite{pression})]</span><br />
-<span class='details'>Tendance de pression:&nbsp;[(#ENV{tendance_pression})]</span><br />
-<span class='details'>Vitesse du vent:&nbsp;[(#ENV{vitesse_vent}|rainette_afficher_unite{vitesse})]</span><br />
-<span class='details'>Direction du vent en degr&eacute;:&nbsp;[(#ENV{angle_vent}|rainette_afficher_unite{angle})] - [(#ENV{angle_vent}|angle2direction)]</span><br />
-<span class='details'>Direction du vent:&nbsp;[(#ENV{direction_vent}|rainette_texte_direction)]</span><br />
-<span class='details'>Humidit&eacute;:&nbsp;[(#ENV{humidite}|rainette_afficher_unite{humidite})]</span><br />
-<span class='details'>Point de ros&eacute;e:&nbsp;[(#ENV{point_rosee}|rainette_afficher_unite{temperature})]</span>
+[(#REM)<!-- 
+	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les conditions temps reel d'une ville
+	Il est appelee par le filtre rainette_croaaaaa_conditions
+ -->
+]
+<div id="today_current">
+	<h2 id="current_title"><:rainette:meteo_conditions|ucfirst:></h2>
+	<div id="current_left">
+		<div id="current_box">
+			<div id="current_box_icon">[(#ENV{code_icone}|rainette_icone_meteo{grand})]</div>
+			<div id="current_box_temp">[(#ENV{temperature_reelle}|rainette_afficher_unite{temperature})]</div>
+			<div id="current_box_cond"><:rainette:temperature_ressentie:>&nbsp;:[&nbsp;(#ENV{temperature_ressentie}|rainette_afficher_unite{temperature})]<br/></div>
+			<br clear="all"/>
+			<div style="text-align: center; padding-top: 5px;">
+				<b>[(#ENV{code_icone}|rainette_resume_meteo)]</b>
+			</div>
+		</div>
+		<div id="current_updated">
+			<:rainette:derniere_maj|ucfirst:>&nbsp;:[&nbsp;(#ENV{derniere_maj})]<br/>
+			<:rainette:station_observation|ucfirst:>&nbsp;:[&nbsp;(#ENV{station})]
+		</div>
+	</div>
+	
+	<div id="current_right">
+		<strong>Vent</strong><br/>
+		[(#ENV{vitesse_vent}|rainette_afficher_unite{vitesse})]
+		[ - (#ENV{direction_vent}|rainette_texte_direction)]<br/><br/>
+		<strong>Humidité</strong><br/>
+		[(#ENV{humidite}|rainette_afficher_unite{humidite})]<br/><br/>
+		<strong>Pression</strong><br/>
+		[(#ENV{pression}|rainette_afficher_unite{pression})]
+		[ - (#ENV{tendance_pression})]<br/><br/>
+		<strong>Point de rosée</strong><br/>
+		[(#ENV{point_rosee}|rainette_afficher_unite{temperature})]<br/><br/>
+		<strong>Visibilité</strong><br/>
+		[(#ENV{visibilite}|rainette_afficher_unite{distance})]
+	</div>
+</div>

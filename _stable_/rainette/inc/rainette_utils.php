@@ -30,7 +30,6 @@ function angle2direction($degre){
 	return $dir;
 }
 
-
 /**
  * lire le xml fournit par le service meteo et en extraire les infos interessantes
  * retournees en tableau jour par jour
@@ -71,21 +70,42 @@ function xml2tab_conditions($xml){
 	$n = spip_xml_match_nodes(",^cc,",$xml,$conditions);
 	if ($n==1){
 		$conditions = reset($conditions['cc']);
-		// recuperer la date de debut des conditions
+		// recuperer la date de derniere mise a jour des conditions
 		$date = $conditions['lsup'][0];
 		$date = strtotime(preg_replace(',\slocal\s*time\s*,ims','',$date));
-		$jour = date('Y-m-d',$date);
-		$tableau['date'] = $jour;
+		$tableau['derniere_maj'] = affdate_heure(date('Y-m-d H:i:s',$date));
+		// station d'observation (peut etre differente de la ville)
+		$tableau['station'] = $conditions['obst'][0];
+		// Liste des conditions meteo
 		$tableau['temperature_reelle'] = intval($conditions['tmp'][0]);
 		$tableau['temperature_ressentie'] = intval($conditions['flik'][0]);
 		$tableau['code_icone'] = intval($conditions['icon'][0]);
 		$tableau['pression'] = intval($conditions['bar'][0]['r'][0]);
-		$tableau['tendance_pression'] = $conditions['bar'][0]['d'][0];
+		$tableau['tendance_pression'] = _T('rainette:tendance_barometrique_'.$conditions['bar'][0]['d'][0]);
 		$tableau['vitesse_vent'] = intval($conditions['wind'][0]['s'][0]);
 		$tableau['angle_vent'] = intval($conditions['wind'][0]['d'][0]);
 		$tableau['direction_vent'] = $conditions['wind'][0]['t'][0];
 		$tableau['humidite'] = intval($conditions['hmid'][0]);
 		$tableau['point_rosee'] = intval($conditions['dewp'][0]);
+		$tableau['visibilite'] = intval($conditions['vis'][0]);
+	}
+	return $tableau;
+}
+
+function xml2tab_infos($xml, $code_meteo){
+	$tableau = array();
+	$regexp = 'loc id=\"'.$code_meteo.'\"';
+	$n = spip_xml_match_nodes(",^$regexp,",$xml,$infos);
+	if ($n==1){
+		$infos = reset($infos['loc id="'.$code_meteo.'"']);
+		// recuperer la date de debut des conditions
+		$tableau['code_meteo'] = $code_meteo;
+		$tableau['ville'] = $infos['dnam'][0];
+		$tableau['longitude'] = floatval($infos['lon'][0]);
+		$tableau['latitude'] = floatval($infos['lat'][0]);
+		$tableau['zone'] = intval($infos['zone'][0]);
+		$tableau['lever'] = $infos['sunr'][0]; // a developper
+		$tableau['coucher'] = $infos['suns'][0]; // a developper
 	}
 	return $tableau;
 }
@@ -95,103 +115,40 @@ function xml2tab_conditions($xml){
  * si le fichier analyse est trop vieux ou absent, on charge le xml et on l'analyse
  * puis on stocke les infos apres analyse
  *
- * @param string $code_frxx
+ * @param string $code_meteo
  * @return string
  * @author Cedric Morin
  */
-function charger_meteo($code_frxx, $mode='previsions'){
+function charger_meteo($code_meteo, $mode='previsions'){
 	$dir = sous_repertoire(_DIR_CACHE,"rainette");
-	$dir = sous_repertoire($dir,substr(md5($code_frxx),0,1));
-	$f = $dir . $code_frxx . "_".$mode . ".txt";
-	$reload_time = ($mode == 'previsions') ? _RAINETTE_RELOAD_TIME_PREVISIONS : _RAINETTE_RELOAD_TIME_CONDITIONS;
-	if (!file_exists($f)
-	  || !filemtime($f)
-	  || (time()-filemtime($f)>$reload_time)) {
-		$flux = "http://xoap.weather.com/weather/local/".$code_frxx."?unit="._RAINETTE_SYSTEME_MESURE;
-		$flux .= ($mode == 'previsions') ? "&dayf="._RAINETTE_JOURS_PREVISION : "&cc=*";
-		include_spip('inc/xml');
-		$xml = spip_xml_load($flux);
-		$tableau = ($mode == 'previsions') ? xml2tab_previsions($xml) : xml2tab_conditions($xml);
-		ecrire_fichier($f,serialize($tableau));
+	$dir = sous_repertoire($dir,substr(md5($code_meteo),0,1));
+	$f = $dir . $code_meteo . "_".$mode . ".txt";
+
+	if ($mode == 'infos') {
+		// Traitement du fichier d'infos
+		if (!file_exists($f)) {
+			$flux = "http://xoap.weather.com/weather/local/".$code_meteo."?unit="._RAINETTE_SYSTEME_MESURE;
+			include_spip('inc/xml');
+			$xml = spip_xml_load($flux);
+			$tableau = xml2tab_infos($xml, $code_meteo);
+			ecrire_fichier($f, serialize($tableau));
+		}
+	}
+	else {
+		// Traitement du fichier de donnees requis
+		$reload_time = ($mode == 'previsions') ? _RAINETTE_RELOAD_TIME_PREVISIONS : _RAINETTE_RELOAD_TIME_CONDITIONS;
+		if (!file_exists($f)
+		  || !filemtime($f)
+		  || (time()-filemtime($f)>$reload_time)) {
+			$flux = "http://xoap.weather.com/weather/local/".$code_meteo."?unit="._RAINETTE_SYSTEME_MESURE;
+			$flux .= ($mode == 'previsions') ? "&dayf="._RAINETTE_JOURS_PREVISION : "&cc=*";
+			include_spip('inc/xml');
+			$xml = spip_xml_load($flux);
+			$tableau = ($mode == 'previsions') ? xml2tab_previsions($xml) : xml2tab_conditions($xml);
+			ecrire_fichier($f, serialize($tableau));
+		}
 	}
 	return $f;
 }
-
-/**
- * filtre traduire_meteo
- *
- * @param string temps
- * @return string traduction
- * @author Pierre Basson
- **/
-// function rainette_traduire_temps($temps) {
-	// if (!$temps) return '';
-	// return _T('grenouille:meteo_'.$temps);
-// }
-
-/**
- * rainette_fahrenheit2celsius
- *
- * @param int temperature en fahrenheit
- * @return int temperature en celcius
- * @author Pierre Basson
- **/
-/* function rainette_fahrenheit2celsius($t) {
-	return round( ($t - 32) * 5 / 9 );
-}
- */
-// function traduire_iconcode($code){
- 	// $tableau_meteo	= array(
-							// "1"	=> "pluie",
-							// "2"	=> "pluie",
-							// "3"	=> "orage",
-							// "4"	=> "orage",
-							// "5"	=> "pluie",
-							// "6"	=> "neige",
-							// "7"	=> "verglas",
-							// "8"	=> "pluie",
-							// "9"	=> "pluie",
-							// "10"	=> "pluie",
-							// "11"	=> "pluie",
-							// "12"	=> "pluie",
-							// "13"	=> "neige",
-							// "14"	=> "neige",
-							// "15"	=> "neige",
-							// "16"	=> "neige",
-							// "17"	=> "orage",
-							// "18"	=> "neige",
-							// "19"	=> "brouillard",
-							// "20"	=> "brouillard",
-							// "21"	=> "brouillard",
-							// "22"	=> "brouillard",
-							// "23"	=> "vent",
-							// "24"	=> "vent",
-							// "25"	=> "vent",
-							// "26"	=> "nuages",
-							// "27"	=> "lune-nuages",
-							// "28"	=> "soleil-nuages",
-							// "29"	=> "lune-nuage",
-							// "30"	=> "soleil-nuage",
-							// "31"	=> "lune",
-							// "32"	=> "soleil",
-							// "33"	=> "lune-nuage",
-							// "34"	=> "soleil-nuage",
-							// "35"	=> "orage",
-							// "36"	=> "soleil",
-							// "37"	=> "orage",
-							// "38"	=> "orage",
-							// "39"	=> "pluie",
-							// "40"	=> "pluie",
-							// "41"	=> "neige",
-							// "42"	=> "neige",
-							// "43"	=> "neige",
-							// "44"	=> "soleil-nuage",
-							// "45"	=> "pluie",
-							// "46"	=> "neige",
-							// "47"	=> "orage",
-							// "48"	=> "inconnu",
-						// );
-	// return isset($tableau_meteo[$code])?$tableau_meteo[$code]:$tableau_meteo[48];
-// }
 
 ?>
