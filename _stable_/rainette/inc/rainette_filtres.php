@@ -35,13 +35,17 @@ function rainette_resume_meteo($code_icon){
 }
 
 function rainette_texte_direction($direction){
-	return _T('rainette:direction_'.$direction);
+	static $liste_direction = 'N:NNE:NE:ENE:E:ESE:SE:SSE:S:SSW:SW:WSW:W:WNW:NW:NNW';
+	if (!in_array($direction, explode(':', $liste_direction)))
+		return _T('rainette:valeur_indeterminee');
+	else
+		return _T('rainette:direction_'.$direction);
 }
 
 function rainette_afficher_unite($valeur, $type_valeur=''){
 	$suffixe = (_RAINETTE_SYSTEME_MESURE == 'm') ? 'metrique' : 'standard';
 	$espace = (($type_valeur == 'temperature') || 
-			   ($type_valeur == 'humidite') || ($type_valeur == 'angle')) ? '' : '&nbsp;';
+			   ($type_valeur == 'pourcentage') || ($type_valeur == 'angle')) ? '' : '&nbsp;';
 	$valeur_affichee = strval($valeur).$espace._T('rainette:unite_'.$type_valeur.'_'.$suffixe);
 	return $valeur_affichee;
 }

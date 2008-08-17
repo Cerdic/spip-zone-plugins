@@ -1,5 +1,5 @@
 #CACHE{1800}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
 	<title>Rainette - Demo</title>
@@ -14,18 +14,20 @@
 		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_infos</strong></p>
 		[(#MODELE{rainette_infos,code=FRXX0023,sous_modele=infos_ville})]
 		<br clear="all"/><br /><br />
+		<p style="font-size: 12px;width: 500px">&gt;&gt;&nbsp;Utilisation de la balise <strong>RAINETTE_INFOS</strong></p>
+		<ul>
+			<li>Ville observ&eacute;e:&nbsp;<strong>#RAINETTE_INFOS{frxx0076, VILLE}</strong></li>
+ 			<li>Longitude, appel sans filtre unit&eacute;:&nbsp;<strong>#RAINETTE_INFOS{frxx0023, longitude}</strong></li>
+			<li>Latitude, appel avec filtre unit&eacute;:&nbsp;<strong>[(#RAINETTE_INFOS{frxx0023, latitude}|rainette_afficher_unite{angle})]</strong></li>
+			<li>Appel sans type d'info pr&eacute;cis&eacute;e, on renvoie le tableau s&eacute;rialis&eacute;:&nbsp;<strong>[(#RAINETTE_INFOS{FRXX0023})]</strong></li>
+			<li>Appel sans argument, on renvoie une chaine vide:&nbsp;<strong>[(#RAINETTE_INFOS)]</strong></li>
+		</ul>
+		<br clear="all"/><br /><br />
 		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_conditions</strong></p>
 		[(#MODELE{rainette_conditions,code=FRXX0023,sous_modele=conditions_tempsreel})]
 		<br clear="all"/><br /><br />
 		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong></p>
 		[(#MODELE{rainette_previsions,code=FRXX0023,jours=5,sous_modele=previsions_jour})]
-		<br clear="all"/><br /><br />
-		<p style="font-size: 12px;width: 500px">&gt;&gt;&nbsp;Utilisation de la balise <strong>RAINETTE_INFOS</strong></p>
- 		Ville observ&eacute;e:&nbsp;<strong>#RAINETTE_INFOS{frxx0076, VILLE}</strong><br />
- 		Longitude, appel sans filtre unit&eacute;:&nbsp;<strong>#RAINETTE_INFOS{frxx0023, longitude}</strong><br />
-		Latitude, appel avec filtre unit&eacute;:&nbsp;<strong>[(#RAINETTE_INFOS{frxx0023, latitude}|rainette_afficher_unite{angle})]</strong><br />
-		Appel sans type d'info pr&eacute;cis&eacute;e, on renvoie le tableau s&eacute;rialis&eacute;:&nbsp;<strong>[(#RAINETTE_INFOS{FRXX0023})]</strong><br />
-		Appel sans argument, on renvoie une chaine vide:&nbsp;<strong>[(#RAINETTE_INFOS)]</strong>
 	</div>
 </body>
 </html>

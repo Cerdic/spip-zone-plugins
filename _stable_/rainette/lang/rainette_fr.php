@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'temperature_ressentie' => "ressentie",
 	'derniere_maj' => "mise &agrave; jour",
 	'station_observation' => "station",
+	'valeur_indeterminee' => 'N/D',
 
 	// Liste des resumes meteo
 	'meteo_1'	=> 'Pluie',
@@ -75,14 +76,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'unite_distance_metrique' => 'km',
 	'unite_pression_metrique' => 'mbar',
 	'unite_precipitation_metrique' => 'mm',
-	'unite_humidite_metrique' => '%',
+	'unite_pourcentage_metrique' => '%',
 	'unite_angle_metrique' => '&deg;',
 	'unite_temperature_standard' => '&deg;F',
 	'unite_vitesse_standard' => 'mph',
 	'unite_distance_standard' => 'miles',
 	'unite_pression_standard' => 'pouces',
 	'unite_precipitation_standard' => 'pouces',
-	'unite_humidite_standard' => '%',
+	'unite_pourcentage_standard' => '%',
 	'unite_angle_standard' => '&deg;',
 	
 	// Liste des directions du vent
@@ -102,7 +103,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'direction_WNW' => 'ouest nord-ouest',
 	'direction_NW' => 'nord-ouest',
 	'direction_NNW' => 'nord nord-ouest',
-	'direction_VAR' => 'non d&eacute;termin&eacute;e',
 	
 	// Liste des tendances barometriques
 	'tendance_barometrique_steady' => 'stable',
