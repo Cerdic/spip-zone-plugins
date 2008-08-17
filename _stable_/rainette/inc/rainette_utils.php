@@ -120,6 +120,7 @@ function xml2tab_infos($xml, $code_meteo){
  * @author Cedric Morin
  */
 function charger_meteo($code_meteo, $mode='previsions'){
+	$code_meteo = strtoupper($code_meteo);
 	$dir = sous_repertoire(_DIR_CACHE,"rainette");
 	$dir = sous_repertoire($dir,substr(md5($code_meteo),0,1));
 	$f = $dir . $code_meteo . "_".$mode . ".txt";
@@ -149,6 +150,18 @@ function charger_meteo($code_meteo, $mode='previsions'){
 		}
 	}
 	return $f;
+}
+
+function charger_infos($code_meteo='', $type_infos=''){
+	if (!$code_meteo) return '';
+	$nom_fichier = charger_meteo($code_meteo, 'infos');
+	lire_fichier($nom_fichier,$tableau);
+	if (!$type_infos)
+		return $tableau;
+	else {
+		$tableau = unserialize($tableau);
+		return $tableau[strtolower($type_infos)];
+	}
 }
 
 ?>

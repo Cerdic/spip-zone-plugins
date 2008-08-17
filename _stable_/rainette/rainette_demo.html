@@ -6,14 +6,26 @@
 		<link rel="stylesheet" href="#CHEMIN{styles/rainette.css}" type="text/css" />
 </head>
 <body>
-<h1>PLUGIN RAINETTE</h1>
-<div class="rainette" id="conditions_FRXX0023">
-	[(#MODELE{rainette_infos,code=FRXX0023,sous_modele=infos_ville})]
-	<br clear="all"/><br /><br />
-	[(#MODELE{rainette_conditions,code=FRXX0023,sous_modele=conditions_tempsreel})]
-	<br clear="all"/><br /><br />
-	[(#MODELE{rainette_previsions,code=FRXX0023,jours=5,sous_modele=previsions_jour})]
-</div>
-	
+	<span style="float: left; margin-right: 20px;">
+		<img height="32" width="32" title="Plugin Rainette" alt="Plugin Rainette" src="plugins/rainette/rainette-64.png"/>
+	</span>
+	<h1 style="margin-bottom: 20px; color: #798F74;">PLUGIN RAINETTE</h1>
+	<div class="rainette" id="FRXX0023">
+		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_infos</strong></p>
+		[(#MODELE{rainette_infos,code=FRXX0023,sous_modele=infos_ville})]
+		<br clear="all"/><br /><br />
+		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_conditions</strong></p>
+		[(#MODELE{rainette_conditions,code=FRXX0023,sous_modele=conditions_tempsreel})]
+		<br clear="all"/><br /><br />
+		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong></p>
+		[(#MODELE{rainette_previsions,code=FRXX0023,jours=5,sous_modele=previsions_jour})]
+		<br clear="all"/><br /><br />
+		<p style="font-size: 12px;width: 500px">&gt;&gt;&nbsp;Utilisation de la balise <strong>RAINETTE_INFOS</strong></p>
+ 		Ville observ&eacute;e:&nbsp;<strong>#RAINETTE_INFOS{frxx0076, VILLE}</strong><br />
+ 		Longitude, appel sans filtre unit&eacute;:&nbsp;<strong>#RAINETTE_INFOS{frxx0023, longitude}</strong><br />
+		Latitude, appel avec filtre unit&eacute;:&nbsp;<strong>[(#RAINETTE_INFOS{frxx0023, latitude}|rainette_afficher_unite{angle})]</strong><br />
+		Appel sans type d'info pr&eacute;cis&eacute;e, on renvoie le tableau s&eacute;rialis&eacute;:&nbsp;<strong>[(#RAINETTE_INFOS{FRXX0023})]</strong><br />
+		Appel sans argument, on renvoie une chaine vide:&nbsp;<strong>[(#RAINETTE_INFOS)]</strong>
+	</div>
 </body>
 </html>
