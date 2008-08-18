@@ -26,8 +26,11 @@
 		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_conditions</strong></p>
 		[(#MODELE{rainette_conditions,code=FRXX0023,sous_modele=conditions_tempsreel})]
 		<br clear="all"/><br /><br />
-		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong></p>
-		[(#MODELE{rainette_previsions,code=FRXX0023,jours=5,sous_modele=previsions_jour})]
+		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions, type=1_jour, sous-modele=previsions_2x12h</strong></p>
+		[(#MODELE{rainette_previsions,code=FRXX0023,type=1_jour,jour=0,sous_modele=previsions_2x12h})]
+		<br clear="all"/><br /><br />
+		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions x jours</strong></p>
+		[(#MODELE{rainette_previsions,code=FRXX0023,type=x_jours,jour=5,sous_modele=previsions_24h})]
 	</div>
 </body>
 </html>

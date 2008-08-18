@@ -21,12 +21,13 @@ body {
 	padding: 0px 0px 0px 10px;
 }
 
+/* Conditions actuelles */
 #today_current {
 	float: left;
 	width: 400px;
 	background: #C9EFC2;
 	border: 2px solid #798F74;
-	margin: 4px 0px 17px 0px;
+	margin: 0px 0px 20px 0px;
 	padding:0 0 5px 0;
 }
 
@@ -91,4 +92,69 @@ body {
 	text-align: center;
 	font-weight: bold;
 	padding: 12px 0px 0px 0px;
+}
+
+/* Previsions */
+.tomorrow_daynight {
+float: left;
+border: 2px solid #798F74;
+border-right: 1px solid #798F74;
+width: 596px;
+margin: 0px 0px 20px 0px;
+}
+.daynight_cells {
+float: left;
+background: #FFFFFF;
+}
+.daynight_cell {
+float: left;
+width: 297px;
+border-right: 1px solid #798F74;
+}
+.daynight_cell_header {
+float: left;
+height: 19px;
+width: 297px;
+font-weight: bold;
+background: #C9EFC2;
+border-bottom: 1px solid #798F74;
+border-right: 1px solid #798F74;
+padding: 5px 0px 0px 0px;
+text-align: center;
+}
+.daynight_cell_content {
+float: left;
+width: 277px;
+margin: 5px 10px 10px 10px;
+}
+.daynight_cell_icon {
+float: left;
+width: 110px;
+height:110px;
+padding: 0px 10px 0px 10px;
+}
+.daynight_cell_temp {
+width: 137px;
+float: left;
+font-weight: bold;
+color: #333333;
+margin: 10px 0px 0px 10px;
+}
+.daynight_cell_desc {
+float: left;
+clear: both;
+color: #6e6e6e;
+width: 234px;
+padding: 3px 0px 0px 16px;
+}
+
+.daynight_footer {
+border-top: 1px solid #798F74;
+border-right: 1px solid #798F74;
+color: #333333;
+float: left;
+font-size: 10px;
+padding: 4px 0;
+text-align: center;
+width: 595px;
 }

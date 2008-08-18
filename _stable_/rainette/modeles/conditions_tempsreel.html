@@ -3,8 +3,8 @@
 	Il est appelee par le filtre rainette_croaaaaa_conditions
  -->
 ]
+<h2 id="current_title"><:rainette:meteo_conditions|ucfirst:></h2>
 <div id="today_current">
-	<h2 id="current_title"><:rainette:meteo_conditions|ucfirst:></h2>
 	<div id="current_left">
 		<div id="current_box">
 			<div id="current_box_icon">[(#ENV{code_icone}|rainette_icone_meteo{grand})]</div>
@@ -22,17 +22,17 @@
 	</div>
 	
 	<div id="current_right">
-		<strong>Vent</strong><br/>
+		<strong><:rainette:vent|ucfirst:></strong><br/>
 		[(#ENV{vitesse_vent}|rainette_afficher_unite{vitesse})]
 		[ - (#ENV{direction_vent}|rainette_texte_direction)]<br/><br/>
-		<strong>Humidité</strong><br/>
+		<strong><:rainette:humidite|ucfirst:></strong><br/>
 		[(#ENV{humidite}|rainette_afficher_unite{pourcentage})]<br/><br/>
-		<strong>Pression</strong><br/>
+		<strong><:rainette:pression|ucfirst:></strong><br/>
 		[(#ENV{pression}|rainette_afficher_unite{pression})]
 		[ - (#ENV{tendance_pression})]<br/><br/>
-		<strong>Point de rosée</strong><br/>
+		<strong><:rainette:point_rosee|ucfirst:></strong><br/>
 		[(#ENV{point_rosee}|rainette_afficher_unite{temperature})]<br/><br/>
-		<strong>Visibilité</strong><br/>
+		<strong><:rainette:visibilite|ucfirst:></strong><br/>
 		[(#ENV{visibilite}|rainette_afficher_unite{distance})]
 	</div>
 </div>

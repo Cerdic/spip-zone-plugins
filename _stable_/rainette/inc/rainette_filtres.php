@@ -59,19 +59,41 @@ function rainette_afficher_unite($valeur, $type_valeur=''){
  * @return string
  * @author Cedric Morin
  */
-function rainette_croaaaaa_previsions($code_meteo, $nb_jours_affiche=0, $modele='previsions_jour'){
+function rainette_croaaaaa_previsions($code_meteo, $type='x_jours', $jour=0, $modele='previsions_x_jour'){
 	include_spip('inc/rainette_utils');
 
-	if ($nb_jours_affiche == 0) $nb_jours_affiche = _RAINETTE_JOURS_PREVISION;
-	$nb_jours_affiche = min($nb_jours_affiche, _RAINETTE_JOURS_PREVISION);
-	
-	$nom_fichier = charger_meteo($code_meteo, 'previsions');
-	lire_fichier($nom_fichier,$tableau);
-	$tableau = unserialize($tableau);
-	$texte = "";
-	while (count($tableau) && $nb_jours_affiche--){
-		$page = evaluer_fond("modeles/$modele", array_shift($tableau));			
-		$texte .= $page['texte'];
+	if ($type == '1_jour') {
+		$jour = min($jour, _RAINETTE_JOURS_PREVISION-1);
+		
+		$nom_fichier = charger_meteo($code_meteo, 'previsions');
+		lire_fichier($nom_fichier,$tableau);
+		$tableau = unserialize($tableau);
+		// Si jour=0 (aujourd'hui), on complete par le tableau du lendemain matin
+		if ($jour == 0) {
+			$tableau[$jour]['lever_soleil_demain'] = $tableau[$jour+1]['lever_soleil'];
+			$tableau[$jour]['temperature_demain'] = $tableau[$jour+1]['temperature_jour'];
+			$tableau[$jour]['code_icone_demain'] = $tableau[$jour+1]['code_icone_jour'];
+			$tableau[$jour]['vitesse_vent_demain'] = $tableau[$jour+1]['vitesse_vent_jour'];
+			$tableau[$jour]['angle_vent_demain'] = $tableau[$jour+1]['angle_vent_jour'];
+			$tableau[$jour]['direction_vent_demain'] = $tableau[$jour+1]['direction_vent_jour'];
+			$tableau[$jour]['risque_precipitation_demain'] = $tableau[$jour+1]['risque_precipitation_jour'];
+			$tableau[$jour]['humidite_demain'] = $tableau[$jour+1]['humidite_jour'];
+		}
+		$page = evaluer_fond("modeles/$modele", $tableau[$jour]);			
+		$texte = $page['texte'];
+	}
+	else if ($type == 'x_jours') {
+		if ($jour == 0) $jour = _RAINETTE_JOURS_PREVISION;
+		$jour = min($jour, _RAINETTE_JOURS_PREVISION);
+		
+		$nom_fichier = charger_meteo($code_meteo, 'previsions');
+		lire_fichier($nom_fichier,$tableau);
+		$tableau = unserialize($tableau);
+		$texte = "";
+		while (count($tableau) && $jour--){
+			$page = evaluer_fond("modeles/$modele", array_shift($tableau));			
+			$texte .= $page['texte'];
+		}
 	}
 	return $texte;
 }

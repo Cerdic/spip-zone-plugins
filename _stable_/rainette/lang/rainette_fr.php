@@ -11,14 +11,27 @@
  **/
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// Item propres aux modeles Rainette
-	'meteo' => "m&eacute;t&eacute;o",
-	'meteo_previsions' => "pr&eacute;visions",
-	'meteo_conditions' => "conditions actuelles",
-	'temperature_ressentie' => "ressentie",
-	'derniere_maj' => "mise &agrave; jour",
-	'station_observation' => "station",
+	// Libelles inclus dans les modeles
+	'meteo' => 'm&eacute;t&eacute;o',
+	'meteo_previsions' => 'pr&eacute;visions',
+	'meteo_conditions' => 'conditions actuelles',
 	'valeur_indeterminee' => 'N/D',
+	'temperature_ressentie' => 'ressentie',
+	'derniere_maj' => 'mise &agrave; jour',
+	'station_observation' => 'station',
+	'temperature_max' => 'max.',
+	'temperature_min' => 'min.',
+	'jour' => 'jour',
+	'nuit' => 'nuit',
+	'demain' => 'demain',
+	'vent' => 'vent',
+	'humidite' => 'humidit&eacute;',
+	'pression' => 'pression',
+	'point_rosee' => 'point de ros&eacute;e',
+	'visibilite' => 'visibilit&eacute;',
+	'risque_precipitation' => 'risque de precip.',
+	'lever_soleil' => 'lever du soleil',
+	'coucher_soleil' => 'coucher du soleil',
 
 	// Liste des resumes meteo
 	'meteo_1'	=> 'Pluie',

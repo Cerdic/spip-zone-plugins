@@ -1,0 +1,119 @@
+[(#REM)
+
+Cette noisette affiche les infos meteos d'une journee
+Elle est appelee par la fonction croaaa
+
+]
+<div id="tomorrow_daynight">
+	<div style="width: 289px;" class="daynight_cell_header">Jour</div>
+	<div style="border-right: medium none;" class="daynight_cell_header">Nuit</div>
+	<div id="daynight_cells">
+		<div class="daynight_cell">
+			<div class="daynight_cell_content">
+				<div class="daynight_cell_icon">
+					<img height="93" width="93" alt="" src="http://10.141.0.1/i.fr.imwx.comm/global/images/93x93/32.png" class="transparent"/>
+				</div>
+				<div class="daynight_cell_temp">
+					<span style="font-size: 12px;">Max. </span><br/>
+					<span style="font-size: 33px;"> 28°C</span><br/>
+					Ensoleillé
+				</div>
+				<div class="daynight_cell_desc">
+					<table cellspacing="0" cellpadding="0" class="tblTomorrow">
+						<tbody><tr>
+							<td width="50%"><strong>Vent </strong></td>
+							<td>De l'est à 16 km/h</td>
+						</tr>
+						<tr>
+							<td><strong>Taux maximum d’humidité </strong></td>
+							<td>65%</td>
+						</tr>
+						<tr>
+							<td><strong>Index UV</strong></td>
+							<td>8</td>
+						</tr>
+						<tr>
+							<td><strong>Risque de précip. </strong></td>
+							<td>10%</td>
+						</tr>
+						<tr>
+							<td><strong>Moyenne max.</strong></td>
+							<td>27°C</td>
+						</tr>
+						<tr>
+							<td><strong>Record Max.</strong></td>
+							<td>N/D</td>
+						</tr>
+						<tr>
+							<td><strong>Lever du soleil</strong></td>
+							<td>06:40</td>
+						</tr>
+					</tbody></table>
+				</div>
+			</div>
+		</div>
+		<div class="daynight_cell">
+			<div class="daynight_cell_content">
+				<div class="daynight_cell_icon">
+					<img height="93" width="93" alt="" src="http://10.141.0.4/i.fr.imwx.comm/global/images/93x93/31.png" class="transparent"/>
+				</div>
+				<div class="daynight_cell_temp">
+					<span style="font-size: 12px;">Min.</span><br/>
+					<span style="font-size: 33px;"> 18°C</span><br/>
+					Ciel dégagé
+				</div>
+				<div class="daynight_cell_desc">
+					<table cellspacing="0" cellpadding="0" class="tblTomorrow">
+						<tbody><tr>
+							<td width="50%"><strong>Vent </strong></td>
+							<td>De l'est à 10 km/h</td>
+						</tr>
+						<tr>
+							<td><strong>Taux maximum d’humidité </strong></td>
+							<td>80%</td>
+						</tr>
+						<tr>
+							<td><strong>Risque de précip. </strong></td>
+							<td>10%</td>
+						</tr>
+						<tr>
+							<td><strong>Moyenne min. </strong></td>
+							<td>19°C</td>
+						</tr>
+						<tr>
+							<td><strong>Record Min.</strong></td>
+							<td>N/D</td>
+						</tr>
+						<tr>
+							<td><strong>Coucher du soleil </strong></td>
+							<td>20:30</td>
+						</tr>
+					</tbody></table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="daynight_footer">
+		Dernière mise à jour 17 août 2008 23:00 heure locale (dimanche 21:00 GMT)
+	</div>
+</div>
+
+
+
+<li><h4><span class='jour'>[(#ENV{date}|nom_jour) ]</span><span class='date'>[(#ENV{date}|affdate_jourcourt)]</span></h4>
+<span class='temperature'><em>Temp&eacute;rature&nbsp;:</em> [(#ENV{temperature_nuit}|rainette_afficher_unite{temperature})][ - (#ENV{temperature_jour}|rainette_afficher_unite{temperature})]</span>
+<span class='icone'>[(#ENV{code_icone_jour}|rainette_icone_meteo)]</span>
+<span class='details'>[(#ENV{code_icone_jour}|rainette_resume_meteo)]</span><br />
+<span class='details'>Humidite jour: [(#ENV{humidite_jour}|rainette_afficher_unite{pourcentage})]</span><br />
+<span class='details'>Vitesse vent jour: [(#ENV{vitesse_vent_jour}|rainette_afficher_unite{vitesse})]</span><br />
+<span class='details'>Direction vent jour: [(#ENV{direction_vent_jour}|rainette_texte_direction)]</span><br />
+<span class='details'>Risque de precipitation jour: [(#ENV{risque_precipitation_jour}|rainette_afficher_unite{pourcentage})]</span><br />
+<br />
+<br />
+<span class='icone'>[(#ENV{code_icone_nuit}|rainette_icone_meteo)]</span>
+<span class='details'>[(#ENV{code_icone_nuit}|rainette_resume_meteo)]</span><br />
+<span class='details'>Humidite nuit: [(#ENV{humidite_nuit}|rainette_afficher_unite{pourcentage})]</span><br />
+<span class='details'>Vitesse vent nuit: [(#ENV{vitesse_vent_nuit}|rainette_afficher_unite{vitesse})]</span><br />
+<span class='details'>Direction vent nuit: [(#ENV{direction_vent_nuit}|rainette_texte_direction)]</span><br />
+<span class='details'>Risque de precipitation nuit: [(#ENV{risque_precipitation_nuit}|rainette_afficher_unite{pourcentage})]</span><br />
+</li>

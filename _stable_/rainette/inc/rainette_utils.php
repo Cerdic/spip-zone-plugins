@@ -47,30 +47,34 @@ function xml2tab_previsions($xml){
 		// recuperer la date de debut des previsions
 		$date = $previsions['lsup'][0];
 		$date = strtotime(preg_replace(',\slocal\s*time\s*,ims','',$date));
+		$index = 0;
 		foreach($previsions as $day=>$p){
 			if (preg_match(",day\s*d=['\"?]([0-9]+),Uims",$day,$regs)){
 				$jour = date('Y-m-d',$date+$regs[1]*24*3600);
 				$p = reset($p);
 				// Infos generales
-				$tableau[$jour]['date'] = $jour;
-				$tableau[$jour]['lever_soleil'] = $p['sunr'][0];
-				$tableau[$jour]['coucher_soleil'] = $p['suns'][0];
+				$tableau[$index]['index'] = $index;
+				$tableau[$index]['date'] = $jour;
+				$tableau[$index]['lever_soleil'] = $p['sunr'][0];
+				$tableau[$index]['coucher_soleil'] = $p['suns'][0];
 				// Prévisions du jour
-				$tableau[$jour]['temperature_jour'] = intval($p['hi'][0]) ? intval($p['hi'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
-				$tableau[$jour]['code_icone_jour'] = intval($p['part p="d"'][0]['icon'][0]) ? intval($p['part p="d"'][0]['icon'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
-				$tableau[$jour]['vitesse_vent_jour'] = intval($p['part p="d"'][0]['wind'][0]['s'][0]) ? intval($p['part p="d"'][0]['wind'][0]['s'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
-				$tableau[$jour]['angle_vent_jour'] = $p['part p="d"'][0]['wind'][0]['d'][0];
-				$tableau[$jour]['direction_vent_jour'] = $p['part p="d"'][0]['wind'][0]['t'][0];
-				$tableau[$jour]['risque_precipitation_jour'] = intval($p['part p="d"'][0]['ppcp'][0]);
-				$tableau[$jour]['humidite_jour'] = intval($p['part p="d"'][0]['hmid'][0]) ? intval($p['part p="d"'][0]['hmid'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
+				$tableau[$index]['temperature_jour'] = intval($p['hi'][0]) ? intval($p['hi'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
+				$tableau[$index]['code_icone_jour'] = intval($p['part p="d"'][0]['icon'][0]) ? intval($p['part p="d"'][0]['icon'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
+				$tableau[$index]['vitesse_vent_jour'] = intval($p['part p="d"'][0]['wind'][0]['s'][0]) ? intval($p['part p="d"'][0]['wind'][0]['s'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
+				$tableau[$index]['angle_vent_jour'] = $p['part p="d"'][0]['wind'][0]['d'][0];
+				$tableau[$index]['direction_vent_jour'] = $p['part p="d"'][0]['wind'][0]['t'][0];
+				$tableau[$index]['risque_precipitation_jour'] = intval($p['part p="d"'][0]['ppcp'][0]);
+				$tableau[$index]['humidite_jour'] = intval($p['part p="d"'][0]['hmid'][0]) ? intval($p['part p="d"'][0]['hmid'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
 				// Prévisions de la nuit
-				$tableau[$jour]['temperature_nuit'] = intval($p['low'][0]) ? intval($p['low'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
-				$tableau[$jour]['code_icone_nuit'] = intval($p['part p="n"'][0]['icon'][0]) ? intval($p['part p="n"'][0]['icon'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
-				$tableau[$jour]['vitesse_vent_nuit'] = intval($p['part p="n"'][0]['wind'][0]['s'][0]) ? intval($p['part p="n"'][0]['wind'][0]['s'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
-				$tableau[$jour]['angle_vent_nuit'] = $p['part p="n"'][0]['wind'][0]['d'][0];
-				$tableau[$jour]['direction_vent_nuit'] = $p['part p="n"'][0]['wind'][0]['t'][0];
-				$tableau[$jour]['risque_precipitation_nuit'] = intval($p['part p="n"'][0]['ppcp'][0]);
-				$tableau[$jour]['humidite_nuit'] = intval($p['part p="n"'][0]['hmid'][0]) ? intval($p['part p="n"'][0]['hmid'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
+				$tableau[$index]['temperature_nuit'] = intval($p['low'][0]) ? intval($p['low'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
+				$tableau[$index]['code_icone_nuit'] = intval($p['part p="n"'][0]['icon'][0]) ? intval($p['part p="n"'][0]['icon'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
+				$tableau[$index]['vitesse_vent_nuit'] = intval($p['part p="n"'][0]['wind'][0]['s'][0]) ? intval($p['part p="n"'][0]['wind'][0]['s'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
+				$tableau[$index]['angle_vent_nuit'] = $p['part p="n"'][0]['wind'][0]['d'][0];
+				$tableau[$index]['direction_vent_nuit'] = $p['part p="n"'][0]['wind'][0]['t'][0];
+				$tableau[$index]['risque_precipitation_nuit'] = intval($p['part p="n"'][0]['ppcp'][0]);
+				$tableau[$index]['humidite_nuit'] = intval($p['part p="n"'][0]['hmid'][0]) ? intval($p['part p="n"'][0]['hmid'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
+
+				$index += 1;
 			}
 		}
 		// trier par date

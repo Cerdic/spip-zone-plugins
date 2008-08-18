@@ -1,0 +1,161 @@
+[(#REM)
+
+Cette noisette affiche les infos meteos d'une journee
+Elle est appelee par la fonction croaaa
+
+]
+<h2 id="current_title"><:rainette:meteo_previsions|ucfirst:></h2>
+<div class="tomorrow_daynight">
+	<!-- Cellule de gauche: 
+		- si aujourd'hui alors donnees du matin si l'heure est < 14:00 ou du soir sinon
+		- si autre jour alors donnees du matin -->
+	[(#ENV{index}|=={0}|?{'',' '})
+		[(#SET{titre_gauche, <:rainette:jour:>})]
+		[(#SET{titre_droite, <:rainette:nuit:>})]
+		[(#SET{temp_gauche, <:rainette:temperature_max:>})]
+		[(#SET{temp_droite, <:rainette:temperature_min:>})]
+		[(#SET{soleil_gauche, <:rainette:lever_soleil:>})]
+		[(#SET{soleil_droite, <:rainette:coucher_soleil:>})]
+		[(#SET{code_icone, #ENV{code_icone_jour}})]
+		[(#SET{temperature, #ENV{temperature_jour}})]
+		[(#SET{vitesse_vent, #ENV{vitesse_vent_jour}})]
+		[(#SET{direction_vent, #ENV{direction_vent_jour}})]
+		[(#SET{humidite, #ENV{humidite_jour}})]
+		[(#SET{risque_precipitation, #ENV{risque_precipitation_jour}})]
+		[(#SET{soleil, #ENV{lever_soleil}})]
+	]
+	[(#ENV{index}|=={0}|?{' '})
+		[(#ENV{temperature_jour}|=={N/D}|?{'',' '})
+			[(#SET{titre_gauche, <:rainette:jour:>})]
+			[(#SET{titre_droite, <:rainette:nuit:>})]
+			[(#SET{temp_gauche, <:rainette:temperature_max:>})]
+			[(#SET{temp_droite, <:rainette:temperature_min:>})]
+			[(#SET{soleil_gauche, <:rainette:lever_soleil:>})]
+			[(#SET{soleil_droite, <:rainette:coucher_soleil:>})]
+			[(#SET{code_icone, #ENV{code_icone_jour}})]
+			[(#SET{temperature, #ENV{temperature_jour}})]
+			[(#SET{vitesse_vent, #ENV{vitesse_vent_jour}})]
+			[(#SET{direction_vent, #ENV{direction_vent_jour}})]
+			[(#SET{humidite, #ENV{humidite_jour}})]
+			[(#SET{risque_precipitation, #ENV{risque_precipitation_jour}})]
+			[(#SET{soleil, #ENV{lever_soleil}})]
+		]
+		[(#ENV{temperature_jour}|=={N/D}|?{' '})
+			[(#SET{titre_gauche, <:rainette:nuit:>})]
+			[(#SET{titre_droite, <:rainette:demain:>})]
+			[(#SET{temp_gauche, <:rainette:temperature_min:>})]
+			[(#SET{temp_droite, <:rainette:temperature_max:>})]
+			[(#SET{soleil_gauche, <:rainette:coucher_soleil:>})]
+			[(#SET{soleil_droite, <:rainette:lever_soleil:>})]
+			[(#SET{code_icone, #ENV{code_icone_nuit}})]
+			[(#SET{temperature, #ENV{temperature_nuit}})]
+			[(#SET{vitesse_vent, #ENV{vitesse_vent_nuit}})]
+			[(#SET{direction_vent, #ENV{direction_vent_nuit}})]
+			[(#SET{humidite, #ENV{humidite_nuit}})]
+			[(#SET{risque_precipitation, #ENV{risque_precipitation_nuit}})]
+			[(#SET{soleil, #ENV{coucher_soleil}})]
+		]
+	]
+	[<div class="daynight_cell_header">(#GET{titre_gauche}|ucfirst)</div>]
+	[<div class="daynight_cell_header">(#GET{titre_droite}|ucfirst)</div>]
+	<div class="daynight_cells">
+		<div class="daynight_cell">
+			<div class="daynight_cell_content">
+				<div class="daynight_cell_icon">[(#GET{code_icone}|rainette_icone_meteo{grand}|image_reduire{95})]</div>
+				<div class="daynight_cell_temp">
+					[<span style="font-size: 12px;">(#GET{temp_gauche}|ucfirst)</span><br/>]
+					<span style="font-size: 33px;">[(#GET{temperature}|rainette_afficher_unite{temperature})]</span><br/>
+					[(#GET{code_icone}|rainette_resume_meteo)]
+				</div>
+				<div class="daynight_cell_desc">
+					<table cellspacing="0" cellpadding="0" class="tblTomorrow">
+						<tbody><tr>
+							<td width="50%"><strong><:rainette:vent|ucfirst:></strong></td>
+							<td>
+								[(#GET{vitesse_vent}|rainette_afficher_unite{vitesse})]
+								[ - (#GET{direction_vent}|rainette_texte_direction)]
+							</td>
+						</tr>
+						<tr>
+							<td><strong><:rainette:humidite|ucfirst:></strong></td>
+							<td>[(#GET{humidite}|rainette_afficher_unite{pourcentage})]</td>
+						</tr>
+						<tr>
+							<td><strong><:rainette:risque_precipitation|ucfirst:></strong></td>
+							<td>[(#GET{risque_precipitation}|rainette_afficher_unite{pourcentage})]</td>
+						</tr>
+						<tr>
+							[<td><strong>(#GET{soleil_gauche}|ucfirst)</strong></td>]
+							<td>[(#GET{soleil})]</td>
+						</tr>
+					</tbody></table>
+				</div>
+			</div>
+		</div>
+	[(#ENV{index}|=={0}|?{'',' '})
+		[(#SET{code_icone, #ENV{code_icone_nuit}})]
+		[(#SET{temperature, #ENV{temperature_nuit}})]
+		[(#SET{vitesse_vent, #ENV{vitesse_vent_nuit}})]
+		[(#SET{direction_vent, #ENV{direction_vent_nuit}})]
+		[(#SET{humidite, #ENV{humidite_nuit}})]
+		[(#SET{risque_precipitation, #ENV{risque_precipitation_nuit}})]
+		[(#SET{soleil, #ENV{coucher_soleil}})]
+	]
+	[(#ENV{index}|=={0}|?{' '})
+		[(#ENV{temperature_jour}|=={N/D}|?{'',' '})
+			[(#SET{code_icone, #ENV{code_icone_nuit}})]
+			[(#SET{temperature, #ENV{temperature_nuit}})]
+			[(#SET{vitesse_vent, #ENV{vitesse_vent_nuit}})]
+			[(#SET{direction_vent, #ENV{direction_vent_nuit}})]
+			[(#SET{humidite, #ENV{humidite_nuit}})]
+			[(#SET{risque_precipitation, #ENV{risque_precipitation_nuit}})]
+			[(#SET{soleil, #ENV{coucher_soleil}})]
+		]
+		[(#ENV{temperature_jour}|=={N/D}|?{' '})
+			[(#SET{code_icone, #ENV{code_icone_demain}})]
+			[(#SET{temperature, #ENV{temperature_demain}})]
+			[(#SET{vitesse_vent, #ENV{vitesse_vent_demain}})]
+			[(#SET{direction_vent, #ENV{direction_vent_demain}})]
+			[(#SET{humidite, #ENV{humidite_demain}})]
+			[(#SET{risque_precipitation, #ENV{risque_precipitation_demain}})]
+			[(#SET{soleil, #ENV{lever_soleil_demain}})]
+		]
+	]
+		<div class="daynight_cell">
+			<div class="daynight_cell_content">
+				<div class="daynight_cell_icon">[(#GET{code_icone}|rainette_icone_meteo{grand}|image_reduire{95})]</div>
+				<div class="daynight_cell_temp">
+					[<span style="font-size: 12px;">(#GET{temp_droite}|ucfirst)</span><br/>]
+					<span style="font-size: 33px;">[(#GET{temperature}|rainette_afficher_unite{temperature})]</span><br/>
+					[(#GET{code_icone}|rainette_resume_meteo)]
+				</div>
+				<div class="daynight_cell_desc">
+					<table cellspacing="0" cellpadding="0" class="tblTomorrow">
+						<tbody><tr>
+							<td width="50%"><strong><:rainette:vent|ucfirst:></strong></td>
+							<td>
+								[(#GET{vitesse_vent}|rainette_afficher_unite{vitesse})]
+								[ - (#GET{direction_vent}|rainette_texte_direction)]
+							</td>
+						</tr>
+						<tr>
+							<td><strong><:rainette:humidite|ucfirst:></strong></td>
+							<td>[(#GET{humidite}|rainette_afficher_unite{pourcentage})]</td>
+						</tr>
+						<tr>
+							<td><strong><:rainette:risque_precipitation|ucfirst:></strong></td>
+							<td>[(#GET{risque_precipitation}|rainette_afficher_unite{pourcentage})]</td>
+						</tr>
+						<tr>
+							[<td><strong>(#GET{soleil_droite}|ucfirst)</strong></td>]
+							<td>[(#GET{soleil})]</td>
+						</tr>
+					</tbody></table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="daynight_footer">
+		Dernière mise à jour 17 août 2008 23:00 heure locale (dimanche 21:00 GMT)
+	</div>
+</div>
