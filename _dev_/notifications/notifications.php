@@ -66,8 +66,7 @@ function notifier_publication_auteurs_article($id_article) {
 
 			$titre = nettoyer_titre_email($row['titre']);
 
-			//$sujet = _T('info_publie_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
-			$debut_sujet = 'Yaquoi.com';
+			$sujet = _T('info_publie_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
 			$sujet = _T('info_publie_1', array('nom_site_spip' => $debut_sujet, 'titre' => $titre));
 			$courr = _T('info_publie_2')."\n\n";
 
