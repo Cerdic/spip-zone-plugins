@@ -81,6 +81,7 @@ Bkz [Spip-Contrib ile ilgili belgeler->http://www.spip-contrib.net/SpipBB-le-for
 	'admin_plugin_requis_erreur_cfg' => 'CFG eklentisini kurun ve aktive edin ![Belge i&ccedil;in bkz->http://www.spip-contrib.net/?article1605], [Zip ar&#351;ivi i&ccedil;in bkz->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => '&#350;u eklentiler eksik. Aktive edin !',
 	'admin_plugin_requis_ok' => 'Kurulu ve aktif eklentiler :',
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224] : g&uuml;venlik kontrol&uuml;nden ge&ccedil;mi&#351; ziyaret&ccedil;ilerin bilgilerini sunar.',
 	'admin_plugin_requis_ok_cfg' => '[CFG eklentisi->http://www.spip-contrib.net/?article1605] : fonksiyon ve komutlar&#305; i&ccedil;erir.',
 	'admin_sous_titre' => 'SpipBB ile forumlar&#305;n y&ouml;netim panosuna eri&#351;im',
 	'admin_spip_config_forums' => 'SPIP konfig&uuml;rasyonu&nbsp;:',
@@ -251,7 +252,7 @@ Bkz [Spip-Contrib ile ilgili belgeler->http://www.spip-contrib.net/SpipBB-le-for
 	'icone_ferme' => 'Kapat',
 	'import_base' => 'Veritaban&#305;n&#305;n ismi&nbsp;:',
 	'import_choix_test' => 'Bir test\'in i&ccedil;e transferini ger&ccedil;ekle&#351;tirmek (varsay&#305;lan se&ccedil;enek)&nbsp;:',
-	'import_choix_test_titre' => '<NEW>Import &agrave; blanc ou r&eacute;el',
+	'import_choix_test_titre' => 'Ger&ccedil;ek import veya deneme import\'u',
 	'import_erreur_db' => '@nom_base@ veritaban&#305;na ba&#287;lanmak olanaks&#305;z',
 	'import_erreur_db_config' => '@nom_base@ veritaban&#305;ndaki konfig&uuml;rasyonu okumak olanaks&#305;z',
 	'import_erreur_db_rappel_connexion' => '@nom_base@ veritaban&#305;na yeniden ba&#287;lanmak olanaks&#305;z',
@@ -296,6 +297,7 @@ Bkz [Spip-Contrib ile ilgili belgeler->http://www.spip-contrib.net/SpipBB-le-for
 	'maintenance' => 'Bak&#305;m',
 	'maintenance_fermer' => 'makaleyi/forumu kapatm&#305;&#351;t&#305;r :',
 	'maintenance_pour' => 'BAKIM amac&#305;yla.',
+	'membres_en_ligne' => '&ccedil;evrim i&ccedil;i &uuml;yeler',
 	'membres_inscrits' => 'kay&#305;tl&#305; kullan&#305;c&#305;',
 	'membres_les_plus_actifs' => 'En aktif &uuml;yeler',
 	'message' => 'Mesaj',
@@ -336,8 +338,8 @@ _ Duyurular&#305;n alt&#305;nda, basit mesajlardan &ouml;nce bir postit vard&#30
 
 	// P
 	'pagine_page_' => ' .. sayfa',
-	'pagine_post_' => '<MODIF> yan&#305;t',
-	'pagine_post_s' => '<MODIF> yan&#305;t',
+	'pagine_post_' => 'yan&#305;t',
+	'pagine_post_s' => 'yan&#305;t',
 	'pagine_sujet_s' => ' konu',
 	'par_' => '--> ',
 	'plugin_auteur' => 'SpipBB Tak&#305;m&#305; : [kat&#305;l&#305;mc&#305;lar&#305;n listesini g&ouml;rmek i&ccedil;in Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
@@ -354,6 +356,7 @@ _ {{Plugin spipbb en cours de developpement. Vous l\'utilisez &agrave; vos risqu
 _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'GPL lisans&#305; ile da&#287;&#305;t&#305;lan',
 	'plugin_lien' => 'Spip-contrib\'de eklenti hakk&#305;ndaki belgelere bkz->http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_mauvaise_version' => 'Eklentinin bu s&uuml;r&uuml;m&uuml; sizin SPIP s&uuml;r&uuml;m&uuml;n&uuml;zle uyumlu de&#287;il !',
 	'plugin_nom' => 'SpipBB : SPIP forumlar&#305;n&#305;n y&ouml;netimi',
 	'post_aucun_pt' => 'hi&ccedil;biri&nbsp;!',
 	'post_efface_lui' => 'Bu konu @

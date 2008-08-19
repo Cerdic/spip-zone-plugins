@@ -81,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_plugin_requis_erreur_cfg' => 'Install the CFG plugin and activate it![Documentation here->http://www.spip-contrib.net/?article1605], [Zip file here->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'The following required plugins are missing. Activate them!',
 	'admin_plugin_requis_ok' => 'Installed and activated plugin(s):',
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224] : gives information on visitors who are logged in.',
 	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605] : provides tags and functions.',
 	'admin_sous_titre' => 'Go to the SpipBB forums admin panel',
 	'admin_spip_config_forums' => 'SPIP configuration:',
@@ -337,8 +338,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pagine_page_' => ' .. page ',
-	'pagine_post_' => '<MODIF> reply',
-	'pagine_post_s' => '<MODIF> replies',
+	'pagine_post_' => ' reply',
+	'pagine_post_s' => ' replies',
 	'pagine_sujet_s' => ' topics',
 	'par_' => 'by ',
 	'plugin_auteur' => 'The SpipBB Team: [See the list of contributors on Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
@@ -354,6 +355,7 @@ _ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
 ',
 	'plugin_licence' => 'Distributed under the GPL licence',
 	'plugin_lien' => '[See the documentation of the plugin from Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_mauvaise_version' => 'This version of the plugin cannot be used with your version of SPIP!',
 	'plugin_nom' => 'SpipBB: Management of SPIP forums',
 	'post_aucun_pt' => 'aucun&nbsp;!',
 	'post_efface_lui' => 'Ce sujet comprend @$nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\\n',

@@ -81,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_plugin_requis_erreur_cfg' => '&iexcl;Instala el plugin CFG y act&iacute;valo! [Documentaci&oacute;n aqu&iacute;->http://www.spip-contrib.net/?article1605], [Archivo ZIP ac&aacute;->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Faltan los siguientes plugins requeridos. &iexcl;Act&iacute;valos!',
 	'admin_plugin_requis_ok' => 'Plugin(s) instalado(s) y activo(s):',
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/Baliza-SESSION]: ofrece informaci&oacute;n sobre los visitantes autentificados.',
 	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605]: provee funciones y balizas.',
 	'admin_sous_titre' => 'Acceder al panel de administraci&oacute;n de los foros con SpipBB',
 	'admin_spip_config_forums' => 'Configuraci&oacute;n de SPIP&nbsp;:',
@@ -337,8 +338,8 @@ _ Un postit est&aacute; situado bajo los anuncios, antes de los mensajes ordinar
 
 	// P
 	'pagine_page_' => ' .. p&aacute;gina ',
-	'pagine_post_' => '<MODIF> respuesta',
-	'pagine_post_s' => '<MODIF> mensajes',
+	'pagine_post_' => ' respuesta',
+	'pagine_post_s' => ' respuestas',
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por ',
 	'plugin_auteur' => 'El Equipo SpipBB: [ver la lista de colaboradores en Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
@@ -355,6 +356,7 @@ _ {{Plugin spipbb en fase de desarrollo. T&uacute; asumes el riesgo si lo utiliz
 _ [Acceso al panel de administraci&oacute;n-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribuido bajo licencia GPL',
 	'plugin_lien' => '[Consultar la documentaci&oacute;n del plugin en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_mauvaise_version' => '&iexcl;Esta versi&oacute;n del plugin no es compatible con la versi&oacute;n instalada de SPIP!',
 	'plugin_nom' => 'SpipBB : Gesti&oacute;n de los foros de SPIP',
 	'post_aucun_pt' => '&iexcl;ninguno!',
 	'post_efface_lui' => 'Este asunto abarca @
