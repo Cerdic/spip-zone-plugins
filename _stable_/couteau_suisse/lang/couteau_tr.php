@@ -29,17 +29,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Sayfa @page@ : @title@',
 	'page_precedente' => '&Ouml;nceki sayfa',
 	'page_suivante' => 'Sonraki sayfa',
-	'plugin_xml' => '<NEW>R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelles et utiles am&#233;liorant la gestion de votre site SPIP.
+	'plugin_xml' => 'SPIP sitenizin y&ouml;netilmesin&#351; geli&#351;tirecek bir &ccedil;ok k&uuml;&ccedil;&uuml;k ve yeni i&#351;levi tek bir eklentide toplar.
 
-Chacun de ces outils peut &#234;tre activ&#233; ou non par l\'utilisateur sur [la page d\'administration du plugin->./?exec=admin_couteau_suisse] et g&#233;rer un certain nombre de variables : cliquer sur {{Configuration}}, puis choisir l\'onglet {{Le Couteau Suisse}}.
+Bu aletlerden her biri kullan&#305;z&#305; taraf&#305;ndan aktive edilebilir ve pasif hale getirilebilir [eklentinin y&ouml;netim sayfas&#305;->./?exec=admin_couteau_suisse] ve bir &ccedil;ok de&#287;i&#351;ken kontrol edilebilir : cliquer sur {{Configuration}}\'a t&#305;klay&#305;n&#305;z ve {{&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;}} ba&#351;l&#305;&#287;&#305;na t&#305;klay&#305;n&#305;z.
 
-Les cat&#233;gories disponibles sont : Administration, Am&#233;liorations typographiques, Raccourcis typographiques, Affichage public, Balises, filtres, crit&#232;res.
+Mevcut kategoriler &#351;unlard&#305;r : Y&ouml;netim, Tipografik Geli&#351;tirme, Tipografik K&#305;sayollar, Kamusal g&ouml;sterim, Komutlar, filtreler, kriterler.
 
-D&#233;couvrez dans ce plugin vos outils favoris : {Exposants typographiques}, {Guillemets typographiques}, {Belles puces}, {Un sommaire pour vos articles}, {Smileys}, {Supprime le num&#233;ro}, {Belles URLs}, {SPIP et les liens... externes}, {Pas de forums anonymes}, {D&#233;coupe en pages et onglets}, etc., etc.
+D&eacute;couvrez dans ce plugin vos outils favoris : {Exposants typographiques}, {Guillemets typographiques}, {Belles puces}, {Un sommaire pour vos articles}, {Smileys}, {Supprime le num&eacute;ro}, {Belles URLs}, {SPIP et les liens... externes}, {Pas de forums anonymes}, {D&eacute;coupe en pages et onglets}, etc., etc.
 
-N\'h&#233;sitez pas &#224; consulter les articles de documentation du plugin publi&#233;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+N\'h&eacute;sitez pas &agrave; consulter les articles de documentation du plugin publi&eacute;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilit&#233; : SPIP toutes versions 1.9x',
+Compatibilit&eacute; : SPIP toutes versions 1.9x',
 
 	// S
 	'smileys_dispos' => 'Sunulan g&uuml;len suratlar (smileys) :',
