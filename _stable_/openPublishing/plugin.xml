@@ -11,12 +11,12 @@
 		{{Plugin Publication Ouverte pour site Spip.}} <br />
 		{anciennement plugin openPublishing}<br />
 		
-		<p>Le plugin "Publication Ouverte" a pour but de fournir une interface de publication d’article publique et anonyme permettant &#224; n'importe quel visiteur d’un site spip de publier un article sans aucune authentification. Cette m&#233;thode de gestion/cr&#233;ation de contenu est appel&#233; "Publication ouverte" (ou open-publishing en anglais). La publication ouverte est principalement pratiqu&#233; par le r&#233;seau indym&#233;dia, ainsi que de nombreux autres sites d’informations alternatives.</p>
+		<p>Le plugin "Publication Ouverte" a pour but de fournir une interface de publication d'article publique et anonyme permettant &#224; n'importe quel visiteur d'un site spip de publier un article sans aucune authentification. Cette m&#233;thode de gestion/cr&#233;ation de contenu est appel&#233; "Publication ouverte" (ou open-publishing en anglais). La publication ouverte est principalement pratiqu&#233; par le r&#233;seau indym&#233;dia, ainsi que de nombreux autres sites d'informations alternatives.</p>
 		
 		
 		{{Principe de fonctionnement}}
 		
-		<p>Le plugin "Publication Ouverte" fourni un formulaire accessible par les visiteurs d’un site SPIP, qu’ils soient ou non enregistr&#233; comme auteur. Ce formulaire permet d’&#233;crire un article sans devoir poss&#233;der un compte sur le site en question. Pour cela, tous les articles &#233;crits via ce formulaire serons attribu&#233; &#224; un auteur par d&#233;faut, commun&#233;ment appel&#233; auteur "anonyme". Il est aussi fortement conseill&#233; de d&#233;sactiver le stockage des IP de SPIP.</p>
+		<p>Le plugin "Publication Ouverte" fourni un formulaire accessible par les visiteurs d'un site SPIP, qu'ils soient ou non enregistr&#233; comme auteur. Ce formulaire permet d'&#233;crire un article sans devoir poss&#233;der un compte sur le site en question. Pour cela, tous les articles &#233;crits via ce formulaire serons attribu&#233; &#224; un auteur par d&#233;faut, commun&#233;ment appel&#233; auteur "anonyme". Il est aussi fortement conseill&#233; de d&#233;sactiver le stockage des IP de SPIP.</p>
 		
 		
 		{{Procedure de mise &#224; jour : }}
