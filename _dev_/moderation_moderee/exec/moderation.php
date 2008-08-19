@@ -5,6 +5,13 @@
 	include_spip("inc/meta");
 	//fonction principal de la page
 	function exec_moderation () {
+		if ($_POST['modif']){
+			modifier_config();	
+		
+		}
+	
+	
+		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('moderation:titre'), "", "");
 		echo gros_titre(_T('moderation:titre'),'',false);
@@ -50,6 +57,8 @@
 				echo "<br />";
 			}
 		}
+		
+		echo fin_page();
 	}
 function debut_form() {
 				echo "<form action='$action' method='post'>";
@@ -84,6 +93,8 @@ function finform() {
 				$commencer_page = charger_fonction('commencer_page', 'inc');
 				return ($commencer_page);
 			}
+
+
 function installer_plug() {
 				$action = generer_url_ecrire('moderation');
 				echo "\n<tr><td style='text-align: center' class='verdana2'>";
@@ -94,12 +105,19 @@ function installer_plug() {
 				echo "<input type='hidden' value='$action' name='redirect' />";
 				$retour = _request('install');
 				if($retour) {
-					ecrire_meta(moderation_plug_visit, oui, oui);
-					ecrire_meta(moderation_plug_redac, oui, oui);
-					ecrire_meta(moderation_plug_admin, oui, oui);
+					ecrire_meta('moderation_plug_visit', 'oui', 'oui');
+					ecrire_meta('moderation_plug_redac', 'oui', 'oui');
+					ecrire_meta('moderation_plug_admin', 'oui', 'oui');
+					ecrire_metas();
 				}
 				
 				echo "</td></tr>";
 				echo "</form>";
 			}
+function modifier_config(){
+		ecrire_meta('moderation_plug_visit', $_POST['visiteurs'], 'oui');
+		ecrire_meta('moderation_plug_redac', $_POST['redacteurs'], 'oui');
+		ecrire_meta('moderation_plug_admin', $_POST['administrateurs'], 'oui');
+		ecrire_metas();
+}
 ?>
