@@ -6,14 +6,13 @@
 	fil@rezo.net
 	</auteur>
 	<version>
-	0.3
+	0.4
 	</version>
 	<etat>
 	dev
 	</etat>
 	<description>
-		Active les notifications par email de certaines actions, notamment des forums et de la messagerie de l'espace priv&#233;.
-
+		Active les notifications par email de certaines actions, notamment des forums et de la messagerie de l'espace priv&#233;, permet &#233;galement l'envoi d'un mal aux auteurs lors de la publication de leurs articles.
 
 	[Configuration par CFG->./index.php?exec=cfg&amp;cfg=notifications]
 	</description>
