@@ -10,89 +10,73 @@
 
 // Dire rapidement si ca vaut le coup de chercher des droits
 function analyse_droits_rapide_dist() {
-    return isset($GLOBALS['auteur_session']['statut']);
+	return isset($GLOBALS['auteur_session']['statut']);
 }
 
 // Le pipeline header_prive (pour y tester les crayons)
 function Crayons_insert_head($head) {
-    include_spip('cfg_options');
+	include_spip('cfg_options');
 
-    //par défaut, pas de traitement sur les entetes
-    $res = $head;
-    
-    //vérifie la présence d'une meta crayons, si c'est vide on ne cherche meme pas à traiter l'espace privé
-    $config_espace_prive = @unserialize($GLOBALS['meta']['crayons']);
-    if (empty($config_espace_prive)) {
-        return $res;
-    }
-    
-    
-    //vérifie que l'édition de l'espace privé est autorisé
-    if ($config_espace_prive['espaceprive'] == 'on') {
-        //determine les pages (exec) crayonnables
-        if (in_array(_request('exec'), explode(',',$config_espace_prive['exec_autorise']))) {
-            //Calcul des droits
-            include_spip('inc/crayons');
-            $res = Crayons_preparer_page($head, '*', wdgcfg(), 'head');
-        } 
-    }
-    
-    //retourne l'entete modifiée
-    return $res;
-        
-    /*
-    // Est-on autorise ?
-    include_spip('inc/autoriser');
-    switch (_request('exec')) {
-        case 'articles':
-            $droits = autoriser('modifier', 'article', _request('id_article'));
-            break;
+	// par defaut, pas de traitement sur les entetes
+	$res = $head;
 
-        default:
-            $droits=false;
-    }
+	// verifie la presence d'une meta crayons, si c'est vide
+	// on ne cherche meme pas a traiter l'espace prive
+	$config_espace_prive = @unserialize($GLOBALS['meta']['crayons']);
+	if (empty($config_espace_prive)) {
+		return $res;
+	}
 
-    if (!$droits)
-        return $head;
-    */
+	// verifie que l'edition de l'espace prive est autorisee
+	if ($config_espace_prive['espaceprive'] == 'on') {
+		// determine les pages (exec) crayonnables
+		if (in_array(_request('exec'),
+		explode(',',$config_espace_prive['exec_autorise']))) {
+			// Calcul des droits
+			include_spip('inc/crayons');
+			$res = Crayons_preparer_page($head, '*', wdgcfg(), 'head');
+		}
+	}
 
+	// retourne l'entete modifiee
+	return $res;
 }
 
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
 function &Crayons_affichage_final(&$page) {
 
-    // ne pas se fatiguer si le visiteur n'a aucun droit
-    if (!(function_exists('analyse_droits_rapide')?analyse_droits_rapide():analyse_droits_rapide_dist()))
-        return $page;
+	// ne pas se fatiguer si le visiteur n'a aucun droit
+	if (!(function_exists('analyse_droits_rapide')?analyse_droits_rapide():analyse_droits_rapide_dist()))
+		return $page;
 
-    // sinon regarder rapidement si la page a des classes crayon
-    if (strpos($page, 'crayon')===FALSE)
-        return $page;
+	// sinon regarder rapidement si la page a des classes crayon
+	if (strpos($page, 'crayon')===FALSE)
+		return $page;
 
-    // voir un peu plus precisement lesquelles
-    include_spip('inc/crayons');
-    if (!preg_match_all(_PREG_CRAYON, $page, $regs, PREG_SET_ORDER))
-        return $page;
-    $wdgcfg = wdgcfg();
+	// voir un peu plus precisement lesquelles
+	include_spip('inc/crayons');
+	if (!preg_match_all(_PREG_CRAYON, $page, $regs, PREG_SET_ORDER))
+		return $page;
+	$wdgcfg = wdgcfg();
 
-    // calculer les droits sur ces crayons
-    include_spip('inc/autoriser');
-    $droits = array();
-    $droits_accordes = 0;
-    foreach ($regs as $reg) {
-        list(,$crayon,$type,$champ,$id) = $reg;
-        if (autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))) {
-            $droits['.' . $crayon]++;
-            $droits_accordes ++;
-        }
-    }
-    // et les signaler dans la page
-    if ($droits_accordes == count($regs)) // tous les droits
-        $page = Crayons_preparer_page($page, '*', $wdgcfg);
-    else if ($droits) // seulement certains droits, preciser lesquels
-        $page = Crayons_preparer_page($page, join(',',array_keys($droits)), $wdgcfg);
+	// calculer les droits sur ces crayons
+	include_spip('inc/autoriser');
+	$droits = array();
+	$droits_accordes = 0;
+	foreach ($regs as $reg) {
+		list(,$crayon,$type,$champ,$id) = $reg;
+		if (autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))) {
+			$droits['.' . $crayon]++;
+			$droits_accordes ++;
+		}
+	}
+	// et les signaler dans la page
+	if ($droits_accordes == count($regs)) // tous les droits
+		$page = Crayons_preparer_page($page, '*', $wdgcfg);
+	else if ($droits) // seulement certains droits, preciser lesquels
+		$page = Crayons_preparer_page($page, join(',',array_keys($droits)), $wdgcfg);
 
-    return $page;
+	return $page;
 }
 
 function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page') {
